@@ -30,8 +30,12 @@
 
         
 
+        
+
          class implements the <see
          cref="T:System.ComponentModel.Design.IMenuCommandService" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          class is automatically offered by the package class to offer global commands for an entire package, and it is also offered by the Microsoft.VisualStudio.Shell.WindowPane class to offer commands for the current window. This offering is always done through the service container, so anyone deriving from the package or window pane classes can remove or replace the default implementation of the <see
          cref="T:System.ComponentModel.Design.IMenuCommandService" />
+
+        
 
         
 
@@ -64,8 +72,12 @@
 
         
 
+        
+
          class utilizes several other services. All of these services are optional, so the behavior of the <see
          cref="T:System.ComponentModel.Design.MenuCommandService" />
+
+        
 
         
 
@@ -132,6 +144,8 @@
 
         
 
+        
+
          interface.</para
       >
     </summary>
@@ -160,8 +174,12 @@
 
             
 
+            
+
              parameter should be the service provider for the designer, as is the case with <see
              cref="T:System.ComponentModel.Design.DesignSurface" />
+
+            
 
             
 
@@ -180,11 +198,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="serviceProvider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -220,6 +242,8 @@
 
             
 
+            
+
              method adds a command handler to the menu command service. Command handlers do not define the text, shortcut, or placement of a menu item. Rather, they define the menu item’s behavior if the item is clicked. </para
           >
         </remarks>
@@ -234,8 +258,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.MenuCommand" />
+
+          
 
           
 
@@ -275,6 +303,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -285,8 +315,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.DesignerVerb" />
+
+          
 
           
 
@@ -317,8 +351,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.ComponentModel.Design.MenuCommandService" />
+
+            
 
             
 
@@ -331,8 +369,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.ComponentModel.Design.MenuCommandService" />
+
+            
 
             
 
@@ -345,6 +387,8 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.ComponentModel.Design.MenuCommandService" />
 
@@ -352,8 +396,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.ComponentModel.Design.MenuCommandService" />
+
+            
 
             
 
@@ -368,10 +416,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -388,6 +440,8 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.ComponentModel.Design.MenuCommandService" />
 
@@ -395,8 +449,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.ComponentModel.Design.MenuCommandService" />
+
+              
 
               
 
@@ -411,6 +469,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.ComponentModel.Design.MenuCommandService" />
+
+            
 
             
 
@@ -444,8 +504,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -458,8 +522,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -475,8 +543,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.ComponentModel.Design.MenuCommandService" />
+
+            
 
             
 
@@ -495,11 +567,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -525,6 +601,8 @@
           <para
             >The <see
              cref="M:System.ComponentModel.Design.MenuCommandService.EnsureVerbs" />
+
+            
 
             
 
@@ -566,6 +644,8 @@
 
             
 
+            
+
              associated with the given command ID.</para
           >
         </summary>
@@ -574,6 +654,8 @@
           <para
             >The <see
              cref="T:System.ComponentModel.Design.MenuCommand" />
+
+            
 
             
 
@@ -589,8 +671,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.CommandID" />
+
+          
 
           
 
@@ -628,6 +714,8 @@
 
             
 
+            
+
              associated with the given command.</para
           >
         </summary>
@@ -636,6 +724,8 @@
           <para
             >The <see
              cref="T:System.ComponentModel.Design.MenuCommand" />
+
+            
 
             
 
@@ -651,10 +741,14 @@
 
           
 
+          
+
           The GUID of the command.</param
         >
         <param name="id">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -695,11 +789,15 @@
 
             
 
+            
+
              of commands.</para
           >
         </returns>
         <param name="guid">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -737,6 +835,8 @@
 
             
 
+            
+
             ; otherwise, null if the service is not found.</para
           >
         </returns>
@@ -747,8 +847,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -788,6 +892,8 @@
         </returns>
         <param name="commandID">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -834,6 +940,8 @@
 
           
 
+          
+
           A parameter for the invocation.</param
         >
       </Docs>
@@ -858,6 +966,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -898,6 +1008,8 @@
 
             
 
+            
+
              method is called by a menu command when its status has changed.</para
           >
           <para
@@ -910,11 +1022,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.ComponentModel.Design.MenuCommandService.OnCommandsChanged(System.ComponentModel.Design.MenuCommandsChangedEventArgs)" />
+
+            
 
             
 
@@ -933,6 +1049,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -943,8 +1061,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.Design.MenuCommandsChangedEventArgs" />
+
+          
 
           
 
@@ -985,6 +1107,8 @@
 
           
 
+          
+
           The command to remove.</param
         >
       </Docs>
@@ -1012,6 +1136,8 @@
         </summary>
         <param name="verb">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1054,6 +1180,8 @@
 
           
 
+          
+
           The shortcut menu to display.</param
         >
         <param name="x">
@@ -1063,10 +1191,14 @@
 
           
 
+          
+
           The x-coordinate of the shortcut menu's location.</param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1100,6 +1232,8 @@
 
             
 
+            
+
              property provides a collection of verbs. These verbs come from two places:</para
           >
           <list type="bullet">
@@ -1112,8 +1246,12 @@
 
                 
 
+                
+
                  method of <see
                  cref="P:System.ComponentModel.Design.MenuCommandService.Verbs" />
+
+                
 
                 
 
@@ -1134,8 +1272,12 @@
 
             
 
+            
+
              method are called global verbs because they are global to this service, but generally there is one instance of this service for each tool or document window. Designer verbs are obtained by querying the service provider for <see
              cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+            
 
             
 
@@ -1148,8 +1290,12 @@
 
             
 
+            
+
             . If the selection service offers a primary selection, and a designer can be obtained for that selection from <see
              cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+            
 
             
 

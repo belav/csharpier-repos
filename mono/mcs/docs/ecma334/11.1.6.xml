@@ -8,8 +8,12 @@
 
     
 
+    
+
      type is a 128-bit data type suitable for financial and monetary calculations. The <keyword
     >decimal</keyword>
+
+    
 
     
 
@@ -22,8 +26,12 @@
 
     
 
+    
+
      10<super
     >-28</super>
+
+    
 
     
 
@@ -36,8 +44,12 @@
 
     
 
+    
+
      10<super
     >28</super>
+
+    
 
     
 
@@ -53,9 +65,13 @@
 
     
 
+    
+
      are of the form -1<super
     >s</super>
     <unicode>215</unicode>
+
+    
 
     
 
@@ -68,8 +84,12 @@
 
     
 
+    
+
      10<super
     >-e</super>
+
+    
 
     
 
@@ -82,8 +102,12 @@
 
     
 
+    
+
      c &lt; 2<super
     >96</super>
+
+    
 
     
 
@@ -96,6 +120,8 @@
 
     
 
+    
+
      e <unicode
     >8804</unicode>
 
@@ -103,8 +129,12 @@
 
     
 
+    
+
      28. The <keyword
     >decimal</keyword>
+
+    
 
     
 
@@ -120,9 +150,13 @@
 
     
 
+    
+
      is represented as a 96-bit integer scaled by a power of ten. For decimals with an absolute value less than 1.0m, the value is exact to the 28<super
     >th</super>
     <keyword>decimal</keyword>
+
+    
 
     
 
@@ -135,8 +169,12 @@
 
     
 
+    
+
      and <keyword
     >double</keyword>
+
+    
 
     
 
@@ -149,8 +187,12 @@
 
     
 
+    
+
      fractional numbers such as 0.1 can be represented exactly in the <keyword
     >decimal</keyword>
+
+    
 
     
 
@@ -163,8 +205,12 @@
 
     
 
+    
+
      and <keyword
     >double</keyword>
+
+    
 
     
 
@@ -180,6 +226,8 @@
 
     
 
+    
+
     , then the other operand must be of an integral type or of type <keyword
     >decimal</keyword>
 
@@ -187,8 +235,12 @@
 
     
 
+    
+
     . If an integral type operand is present, it is converted to <keyword
     >decimal</keyword>
+
+    
 
     
 
@@ -204,8 +256,12 @@
 
     
 
+    
+
      is that which would result from calculating an exact result (preserving scale, as defined for each operator) and then rounding to fit the representation. Results are rounded to the nearest representable value, and, when a result is equally close to two representable values, to the value that has an even number in the least significant digit position (this is known as "banker's rounding"). That is, results are exact to 28 or 29 digits, but to no more than 28 <keyword
     >decimal</keyword>
+
+    
 
     
 
@@ -221,8 +277,12 @@
 
     
 
+    
+
      arithmetic operation produces a value that is too small for the <keyword
     >decimal</keyword>
+
+    
 
     
 
@@ -235,8 +295,12 @@
 
     
 
+    
+
      arithmetic operation produces a result that is too large for the <keyword
     >decimal</keyword>
+
+    
 
     
 
@@ -252,8 +316,12 @@
 
     
 
+    
+
      type has greater precision but smaller range than the floating-point types. Thus, conversions from the floating-point types to <keyword
     >decimal</keyword>
+
+    
 
     
 
@@ -266,6 +334,8 @@
 
     
 
+    
+
      to the floating-point types might cause loss of precision. For these reasons, no implicit conversions exist between the floating-point types and <keyword
     >decimal</keyword>
 
@@ -273,8 +343,12 @@
 
     
 
+    
+
     , and without explicit casts, it is not possible to mix floating-point and <keyword
     >decimal</keyword>
+
+    
 
     
 

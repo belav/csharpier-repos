@@ -49,10 +49,14 @@
 
         
 
+        
+
          to return the assembly that resolves the type, assembly, or resource, or to return null if the assembly is not recognized. For more information, see <format
          type="text/html">
           <a href="5099e549-f4fd-49fb-a290-549edd456c6a">Resolving Assembly Loads</a>
         </format>
+
+        
 
         
 
@@ -65,6 +69,8 @@
 
         
 
+        
+
         , <see
          cref="E:System.AppDomain.AssemblyResolve" />
 
@@ -72,8 +78,12 @@
 
         
 
+        
+
         , and <see
          cref="E:System.AppDomain.ReflectionOnlyAssemblyResolve" />
+
+        
 
         
 
@@ -90,12 +100,16 @@
 
           
 
+          
+
            event is raised for all assemblies, including resource assemblies. In earlier versions, the event was not raised for resource assemblies. If the operating system is localized, the handler might be called multiple times: once for each culture in the fallback chain.</para
         >
       </block>
       <para
         >Every derived class of <see
          cref="T:System.Delegate" />
+
+        
 
         
 
@@ -108,8 +122,12 @@
 
         
 
+        
+
          has a constructor and an Invoke method. See the C++ code example in the description for the <see
          cref="T:System.Delegate" />
+
+        
 
         
 
@@ -128,8 +146,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.AppDomain.ResourceResolve" />
+
+        
 
         
 
@@ -142,8 +164,12 @@
 
         
 
+        
+
          event of an <see
          cref="T:System.AppDomain" />
+
+        
 
         
 

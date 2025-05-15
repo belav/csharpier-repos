@@ -35,6 +35,8 @@
 
         
 
+        
+
          method, which is called by server channels to create the server channel sink chains. When the message reaches the dispatch sink, the dispatch sink passes the message to the remoting infrastructure.</para
       >
       <list type="table">
@@ -81,6 +83,8 @@
 
               
 
+              
+
               .</para
             >
             <para>This property is supported only by the .NET Framework version 1.1 on the following platforms: Windows 98, Windows NT 4.0, Windows Millennium Edition, Windows 2000, Windows XP Home Edition, Windows XP Professional, and Windows Server 2003 family. </para>
@@ -96,6 +100,8 @@
 
           
 
+          
+
           .</para
         >
       </block>
@@ -105,6 +111,8 @@
       <para
         >Provides the implementation for a server formatter sink that uses the <see
          cref="T:System.Runtime.Serialization.Formatters.Soap.SoapFormatter" />
+
+        
 
         
 
@@ -176,10 +184,14 @@
 
           
 
+          
+
           A stack of sinks leading back to the server transport sink. </param
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -194,6 +206,8 @@
 
           
 
+          
+
           The response message. </param
         >
         <param name="headers">
@@ -203,10 +217,14 @@
 
           
 
+          
+
           The headers to add to the return message heading to the client. </param
         >
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -253,6 +271,8 @@
 
             
 
+            
+
              onto which the provided response message is to be serialized.</para
           >
         </summary>
@@ -261,6 +281,8 @@
           <para
             >The <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -276,10 +298,14 @@
 
           
 
+          
+
           A stack of sinks leading back to the server transport sink. </param
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -294,10 +320,14 @@
 
           
 
+          
+
           The response message that is to be serialized. </param
         >
         <param name="headers">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -328,6 +358,8 @@
           <para
             >Gets the next <see
              cref="T:System.Runtime.Remoting.Channels.IServerChannelSink" />
+
+            
 
             
 
@@ -419,6 +451,8 @@
 
             
 
+            
+
              of properties for the current channel sink.</para
           >
         </summary>
@@ -457,6 +491,8 @@
                 >Automatic Deserialization in .NET Remoting</a
               >
             </format>
+
+            
 
             
 

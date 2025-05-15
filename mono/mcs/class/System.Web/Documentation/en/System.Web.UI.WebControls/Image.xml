@@ -65,8 +65,12 @@
 
         
 
+        
+
          control lets you work with images from server code. Use the <see
          cref="T:System.Web.UI.WebControls.Image" />
+
+        
 
         
 
@@ -79,8 +83,12 @@
 
         
 
+        
+
          property. You can specify the text to display in place of image when the image is not available by setting the <see
          cref="P:System.Web.UI.WebControls.Image.AlternateText" />
+
+        
 
         
 
@@ -93,12 +101,16 @@
 
         
 
+        
+
          property.</para
       >
       <block subset="none" type="note">
         <para
           >This control only displays an image. If you need to capture mouse clicks on the image, use the <see
            cref="T:System.Web.UI.WebControls.ImageButton" />
+
+          
 
           
 
@@ -125,10 +137,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0">ASP.NET Controls and Accessibility</a>
         </format>
+
+        
 
         
 
@@ -155,6 +171,8 @@
 
         
 
+        
+
         |None|Dotted|Dashed|Solid|Double|Groove|Ridge|
         Inset|Outset"
     BorderWidth="size"
@@ -162,6 +180,8 @@
     DescriptionUrl="uri"
     Enabled="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -175,9 +195,13 @@
 
         
 
+        
+
         |False"
     EnableViewState="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -192,11 +216,15 @@
 
         
 
+        
+
         "
     Height="size"
     ID="string"
     ImageAlign="<codeFeaturedElement
         >NotSet</codeFeaturedElement>
+
+        
 
         
 
@@ -218,6 +246,8 @@
     ToolTip="string"
     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -250,6 +280,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -258,6 +290,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.Image" />
+
+            
 
             
 
@@ -296,6 +330,8 @@
 
             
 
+            
+
              to the output stream for rendering on the client.</para
           >
         </summary>
@@ -306,8 +342,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -340,11 +380,15 @@
 
             
 
+            
+
              property is not available. In browsers that support the ToolTips feature, this text also displays as a ToolTip.</para
           >
           <para
             >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
              cref="T:System.ComponentModel.LocalizableAttribute" />
+
+            
 
             
 
@@ -361,6 +405,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -369,6 +415,8 @@
           <para
             >Gets or sets the alternate text displayed in the <see
              cref="T:System.Web.UI.WebControls.Image" />
+
+            
 
             
 
@@ -427,8 +475,12 @@
 
             
 
+            
+
              property specifies an HTML file that provides additional details for the image. The <see
              cref="P:System.Web.UI.WebControls.Image.DescriptionUrl" />
+
+            
 
             
 
@@ -441,8 +493,12 @@
 
             
 
+            
+
              property is not set, or is set to an empty string (""), the <see
              cref="T:System.Web.UI.WebControls.Image" />
+
+            
 
             
 
@@ -458,8 +514,12 @@
 
             
 
+            
+
              property to supplement the <see
              cref="P:System.Web.UI.WebControls.Image.AlternateText" />
+
+            
 
             
 
@@ -472,8 +532,12 @@
 
             
 
+            
+
              control to display an image of the solar system, you can set the <see
              cref="P:System.Web.UI.WebControls.Image.AlternateText" />
+
+            
 
             
 
@@ -486,11 +550,15 @@
 
             
 
+            
+
              property to an HTML page that further describes the image of planets orbiting the sun in the solar system.</para
           >
           <para
             >The <see
              cref="P:System.Web.UI.WebControls.Image.DescriptionUrl" />
+
+            
 
             
 
@@ -528,8 +596,12 @@
 
               
 
+              
+
                class and is not applicable to the <see
                cref="T:System.Web.UI.WebControls.Image" />
+
+              
 
               
 
@@ -583,8 +655,12 @@
 
               
 
+              
+
                class and is not applicable to the <see
                cref="T:System.Web.UI.WebControls.Image" />
+
+              
 
               
 
@@ -644,8 +720,12 @@
 
             
 
+            
+
              property is not set, the <see
              cref="T:System.Web.UI.WebControls.Image" />
+
+            
 
             
 
@@ -658,8 +738,12 @@
 
             
 
+            
+
              property to true to always include the alternate text attribute in rendered output for the <see
              cref="T:System.Web.UI.WebControls.Image" />
+
+            
 
             
 
@@ -670,6 +754,8 @@
           <para
             >The XHTML document type definition requires the alt attribute on image controls. However, accessibility best practices recommend that image controls that do not convey information relevant to the context of the Web page should not specify an alt attribute. You can meet both XHTML and accessibility requirements by setting the <see
              cref="P:System.Web.UI.WebControls.Image.GenerateEmptyAlternateText" />
+
+            
 
             
 
@@ -701,6 +787,8 @@
           <para
             >Use the <see
              cref="P:System.Web.UI.WebControls.Image.ImageAlign" />
+
+            
 
             
 
@@ -811,6 +899,8 @@
 
             
 
+            
+
              control in relation to other elements on the Web page.</para
           >
         </summary>
@@ -844,8 +934,12 @@
 
             
 
+            
+
              property to specify the URL of an image to display in the <see
              cref="T:System.Web.UI.WebControls.Image" />
+
+            
 
             
 
@@ -859,6 +953,8 @@
           <para
             >Gets or sets the URL that provides the path to an image to display in the <see
              cref="T:System.Web.UI.WebControls.Image" />
+
+            
 
             
 
@@ -910,6 +1006,8 @@
 
             
 
+            
+
              method is primarily used by control developers. The <see
              cref="T:System.Web.UI.WebControls.Image" />
 
@@ -917,8 +1015,12 @@
 
             
 
+            
+
              control implements the <see
              cref="M:System.Web.UI.WebControls.Image.RenderContents(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -938,8 +1040,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 

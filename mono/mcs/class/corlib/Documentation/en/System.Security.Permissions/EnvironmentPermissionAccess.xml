@@ -44,12 +44,16 @@
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
         <para
           >Although <see
            cref="F:System.Security.Permissions.EnvironmentPermissionAccess.NoAccess" />
+
+          
 
           
 
@@ -62,8 +66,12 @@
 
           
 
+          
+
            appear in <see
            cref="T:System.Security.Permissions.EnvironmentPermissionAccess" />
+
+          
 
           
 
@@ -76,8 +84,12 @@
 
           
 
+          
+
            because they describe no environment variable access types or all environment variable access types, respectively, and <see
            cref="M:System.Security.Permissions.EnvironmentPermission.GetPathList(System.Security.Permissions.EnvironmentPermissionAccess)" />
+
+          
 
           
 
@@ -125,8 +137,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Security.Permissions.EnvironmentPermissionAccess.Write" />
+
+            
 
             
 
@@ -139,8 +155,12 @@
 
             
 
+            
+
              represents multiple <see
              cref="T:System.Security.Permissions.EnvironmentPermissionAccess" />
+
+            
 
             
 
@@ -153,6 +173,8 @@
 
             
 
+            
+
              when used as the <paramref
              name="flag" />
 
@@ -160,8 +182,12 @@
 
             
 
+            
+
              parameter for the <see
              cref="M:System.Security.Permissions.EnvironmentPermission.GetPathList(System.Security.Permissions.EnvironmentPermissionAccess)" />
+
+            
 
             
 
@@ -206,8 +232,12 @@
 
             
 
+            
+
              represents no valid <see
              cref="T:System.Security.Permissions.EnvironmentPermissionAccess" />
+
+            
 
             
 
@@ -220,8 +250,12 @@
 
             
 
+            
+
              when used as the parameter for <see
              cref="M:System.Security.Permissions.EnvironmentPermission.GetPathList(System.Security.Permissions.EnvironmentPermissionAccess)" />
+
+            
 
             
 

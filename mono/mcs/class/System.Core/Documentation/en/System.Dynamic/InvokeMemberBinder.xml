@@ -54,11 +54,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -73,10 +77,14 @@
 
           
 
+          
+
           true if the name should be matched ignoring case; false otherwise.</param
         >
         <param name="callInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -122,6 +130,8 @@
 
             
 
+            
+
              representing the result of the binding.</para
           >
         </returns>
@@ -132,10 +142,14 @@
 
           
 
+          
+
           The target of the dynamic invoke member operation.</param
         >
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -199,6 +213,8 @@
 
             
 
+            
+
              request the binding of the invoke operation only.</para
           >
         </remarks>
@@ -216,11 +232,15 @@
 
             
 
+            
+
              representing the result of the binding.</para
           >
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -235,10 +255,14 @@
 
           
 
+          
+
           The arguments of the dynamic invoke operation.</param
         >
         <param name="errorSuggestion">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -284,6 +308,8 @@
 
             
 
+            
+
              representing the result of the binding.</para
           >
         </returns>
@@ -294,10 +320,14 @@
 
           
 
+          
+
           The target of the dynamic invoke member operation.</param
         >
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -344,11 +374,15 @@
 
             
 
+            
+
              representing the result of the binding.</para
           >
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -363,10 +397,14 @@
 
           
 
+          
+
           The arguments of the dynamic invoke member operation.</param
         >
         <param name="errorSuggestion">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

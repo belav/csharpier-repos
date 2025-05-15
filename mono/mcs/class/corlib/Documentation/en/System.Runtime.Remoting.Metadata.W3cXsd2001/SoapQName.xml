@@ -41,6 +41,8 @@
 
         
 
+        
+
         . </para
       >
     </remarks>
@@ -71,6 +73,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapQName" />
+
+            
 
             
 
@@ -109,6 +113,8 @@
 
             
 
+            
+
              class with the local part of a qualified name.</para
           >
         </summary>
@@ -119,8 +125,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -159,6 +169,8 @@
 
             
 
+            
+
              class with the namespace alias and the local part of a qualified name.</para
           >
         </summary>
@@ -169,8 +181,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -185,8 +201,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -229,6 +249,8 @@
 
             
 
+            
+
              class with the namespace alias, the local part of a qualified name, and the namespace that is referenced by the alias.</para
           >
         </summary>
@@ -239,8 +261,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -255,8 +281,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -271,6 +301,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
 
@@ -278,8 +310,12 @@
 
           
 
+          
+
            that contains the namespace that is referenced by <paramref
            name="key" />
+
+          
 
           
 
@@ -316,6 +352,8 @@
           <para
             >A <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -393,6 +431,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -431,8 +471,12 @@
 
             
 
+            
+
              into a <see
              cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapQName" />
+
+            
 
             
 
@@ -451,8 +495,12 @@
 
             
 
+            
+
              object that is obtained from <paramref
              name="value" />
+
+            
 
             
 
@@ -468,8 +516,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -507,6 +559,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -520,8 +574,12 @@
 
             
 
+            
+
              in the format " <see
              cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapQName.Key" />
+
+            
 
             
 
@@ -534,6 +592,8 @@
 
             
 
+            
+
              ". If <see
              cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapQName.Key" />
 
@@ -541,8 +601,12 @@
 
             
 
+            
+
              is not specified, this method returns <see
              cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapQName.Name" />
+
+            
 
             
 

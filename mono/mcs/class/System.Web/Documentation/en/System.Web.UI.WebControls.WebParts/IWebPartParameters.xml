@@ -18,11 +18,15 @@
 
         
 
+        
+
          interface defines members to implement that facilitate the passing of a parameter from a consumer to a provider. </para
       >
       <para
         >The <see
          cref="T:System.Web.UI.WebControls.WebParts.RowToParametersTransformer" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          interface. Transformers are used to translate data between two Web Parts controls with incompatible connection points. A <see
          cref="T:System.Web.UI.WebControls.WebParts.RowToParametersTransformer" />
+
+        
 
         
 
@@ -49,11 +57,15 @@
 
         
 
+        
+
          interface when the provider needs a parameter from the consumer.</para
       >
       <para
         >The <see
          cref="M:System.Web.UI.WebControls.WebParts.IWebPartParameters.GetParametersData(System.Web.UI.WebControls.WebParts.ParametersCallback)" />
+
+        
 
         
 
@@ -92,8 +104,12 @@
 
             
 
+            
+
              method is used to retrieve the values from the provider based on a parameter. The method represented by the <paramref
              name="callback" />
+
+            
 
             
 
@@ -108,6 +124,8 @@
         </summary>
         <param name="callback">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -142,8 +160,12 @@
 
             
 
+            
+
              property provides property information for the data passed by the interface. Transformer and consumer controls can query this property to get information about the type, contents, and other details of the field contained in the <see
              cref="T:System.Web.UI.WebControls.WebParts.IWebPartParameters" />
+
+            
 
             
 
@@ -186,11 +208,15 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
         <param name="schema">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -203,8 +229,12 @@
 
           
 
+          
+
            returned by <see
            cref="P:System.Web.UI.WebControls.WebParts.IWebPartParameters.Schema" />
+
+          
 
           
 

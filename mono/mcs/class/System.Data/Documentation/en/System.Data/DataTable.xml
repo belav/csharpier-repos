@@ -61,8 +61,12 @@
 
         
 
+        
+
          is a central object in the ADO.NET library. Other objects that use the <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -75,8 +79,12 @@
 
         
 
+        
+
          and the <see
          cref="T:System.Data.DataView" />
+
+        
 
         
 
@@ -92,8 +100,12 @@
 
         
 
+        
+
          objects, note that they are conditionally case sensitive. For example, if one <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -106,8 +118,12 @@
 
         
 
+        
+
          can contain two <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -120,8 +136,12 @@
 
         
 
+        
+
          property value but different <see
          cref="P:System.Data.DataTable.Namespace" />
+
+        
 
         
 
@@ -134,10 +154,14 @@
 
         
 
+        
+
          objects, see <format
          type="text/html">
           <a href="eecf9d78-60e3-4fdc-8de0-e56c13a89414">Creating a DataTable</a>
         </format>
+
+        
 
         
 
@@ -153,8 +177,12 @@
 
         
 
+        
+
          programmatically, you must first define its schema by adding <see
          cref="T:System.Data.DataColumn" />
+
+        
 
         
 
@@ -167,8 +195,12 @@
 
         
 
+        
+
          (accessed through the <see
          cref="P:System.Data.DataTable.Columns" />
+
+        
 
         
 
@@ -181,10 +213,14 @@
 
         
 
+        
+
          objects, see <format
          type="text/html">
           <a href="e85c4a0e-4f3f-458c-b58b-0ddbc06bf974">Adding Columns to a Table</a>
         </format>
+
+        
 
         
 
@@ -200,8 +236,12 @@
 
         
 
+        
+
         , you must first use the <see
          cref="M:System.Data.DataTable.NewRow" />
+
+        
 
         
 
@@ -214,8 +254,12 @@
 
         
 
+        
+
          object. The <see
          cref="M:System.Data.DataTable.NewRow" />
+
+        
 
         
 
@@ -228,8 +272,12 @@
 
         
 
+        
+
         , as it is defined by the table's <see
          cref="T:System.Data.DataColumnCollection" />
+
+        
 
         
 
@@ -242,10 +290,14 @@
 
         
 
+        
+
          can store is 16,777,216. For more information, see <format
          type="text/html">
           <a href="d6aa8474-7bde-48f7-949d-20dc38a1625b">Adding Data to a Table</a>
         </format>
+
+        
 
         
 
@@ -261,8 +313,12 @@
 
         
 
+        
+
          also contains a collection of <see
          cref="T:System.Data.Constraint" />
+
+        
 
         
 
@@ -272,6 +328,8 @@
          type="text/html">
           <a href="27c9f2fd-f64d-4b4e-bbf6-1d24f47067cb">Adding Constraints to a Table</a>
         </format>
+
+        
 
         
 
@@ -287,8 +345,12 @@
 
         
 
+        
+
          events that can be used to determine when changes are made to a table. These include <see
          cref="E:System.Data.DataTable.RowChanged" />
+
+        
 
         
 
@@ -301,8 +363,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Data.DataTable.RowDeleting" />
+
+        
 
         
 
@@ -315,8 +381,12 @@
 
         
 
+        
+
         . For more information about the events that can be used with a <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -326,6 +396,8 @@
          type="text/html">
           <a href="62f404a5-13ea-4b93-a29f-55b74a16c9d3">Working with DataTable Events</a>
         </format>
+
+        
 
         
 
@@ -341,8 +413,12 @@
 
         
 
+        
+
          is created, some of the read/write properties are set to initial values. For a list of these values, see the <see
          cref="M:System.Data.DataTable.#ctor" />
+
+        
 
         
 
@@ -359,8 +435,12 @@
 
           
 
+          
+
            and <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -373,8 +453,12 @@
 
           
 
+          
+
           , and support the <see
            cref="T:System.Runtime.Serialization.ISerializable" />
+
+          
 
           
 
@@ -406,8 +490,12 @@
 
             
 
+            
+
              object. The following table shows the properties and their default values. When an instance of <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -439,6 +527,8 @@
 
                   
 
+                  
+
                   , if it belongs to one. Otherwise, false. </para
                 >
               </description>
@@ -464,8 +554,12 @@
 
                   
 
+                  
+
                    object's <see
                    cref="T:System.Globalization.CultureInfo" />
+
+                  
 
                   
 
@@ -478,8 +572,12 @@
 
                   
 
+                  
+
                    property); if no parent exists, the default is the current system <see
                    cref="T:System.Globalization.CultureInfo" />
+
+                  
 
                   
 
@@ -505,6 +603,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -538,11 +638,15 @@
 
             
 
+            
+
              class with the specified table name.</para
           >
         </summary>
         <param name="tableName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -555,8 +659,12 @@
 
           
 
+          
+
            is null or an empty string, a default name is given when added to the <see
            cref="T:System.Data.DataTableCollection" />
+
+          
 
           
 
@@ -592,8 +700,12 @@
 
             
 
+            
+
              constructor is required for <see
              cref="T:System.Runtime.Serialization.ISerializable" />
+
+            
 
             
 
@@ -612,6 +724,8 @@
 
             
 
+            
+
              class with the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
@@ -619,8 +733,12 @@
 
             
 
+            
+
              and the <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -636,10 +754,14 @@
 
           
 
+          
+
           The data needed to serialize or deserialize an object.</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -679,11 +801,15 @@
 
             
 
+            
+
              class using the specified table name and namespace.</para
           >
         </summary>
         <param name="tableName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -696,8 +822,12 @@
 
           
 
+          
+
            is null or an empty string, a default name is given when added to the <see
            cref="T:System.Data.DataTableCollection" />
+
+          
 
           
 
@@ -725,6 +855,8 @@
 
             
 
+            
+
              is called, any <see
              cref="T:System.Data.DataRow" />
 
@@ -732,8 +864,12 @@
 
             
 
+            
+
              object still in edit mode successfully ends its edits. The <see
              cref="T:System.Data.DataRowState" />
+
+            
 
             
 
@@ -749,8 +885,12 @@
 
             
 
+            
+
              method is generally called on a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -763,8 +903,12 @@
 
             
 
+            
+
              using the <see
              cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+            
 
             
 
@@ -778,6 +922,8 @@
           <para
             >Commits all the changes made to this table since the last time <see
              cref="M:System.Data.DataTable.AcceptChanges" />
+
+            
 
             
 
@@ -810,6 +956,8 @@
 
             
 
+            
+
              method ends the initialization. Using the <see
              cref="M:System.Data.DataTable.BeginInit" />
 
@@ -817,8 +965,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Data.DataTable.EndInit" />
+
+            
 
             
 
@@ -832,6 +984,8 @@
           <para
             >Begins the initialization of a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -864,6 +1018,8 @@
 
             
 
+            
+
              in conjunction with <see
              cref="M:System.Data.DataTable.LoadDataRow(System.Object[],System.Boolean)" />
 
@@ -871,8 +1027,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Data.DataTable.EndLoadData" />
+
+            
 
             
 
@@ -905,6 +1065,8 @@
           <para
             >The <see
              cref="P:System.Data.DataTable.CaseSensitive" />
+
+            
 
             
 
@@ -944,8 +1106,12 @@
 
             
 
+            
+
              defines the relationship between two tables. Typically, two tables are linked through a single field that contains the same data. For example, a table which contains address data may have a single field containing codes that represent countries/regions. A second table that contains country/region data will have a single field that contains the code that identifies the country/region, and it is this code which is inserted into the corresponding field in the first table. A <see
              cref="T:System.Data.DataRelation" />
+
+            
 
             
 
@@ -959,6 +1125,8 @@
           <para
             >Gets the collection of child relations for this <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1000,8 +1168,12 @@
 
             
 
+            
+
              is bound to an <see
              cref="T:System.Xml.XmlDataDocument" />
+
+            
 
             
 
@@ -1014,8 +1186,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Data.DataTable.Clear" />
+
+            
 
             
 
@@ -1028,6 +1204,8 @@
 
             
 
+            
+
             . To avoid this situation, traverse each table, removing each row one at a time. When you use <see
              cref="M:System.Data.DataTable.NewRow" />
 
@@ -1035,8 +1213,12 @@
 
             
 
+            
+
              to create new rows, the rows must be processed before you call <see
              cref="M:System.Data.DataTable.Clear" />
+
+            
 
             
 
@@ -1050,6 +1232,8 @@
           <para
             >Clears the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1083,8 +1267,12 @@
 
             
 
+            
+
              with the same structure as the original <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1097,6 +1285,8 @@
 
             
 
+            
+
              will not contain any DataRows). To copy both the structure and data into a new <see
              cref="T:System.Data.DataTable" />
 
@@ -1104,8 +1294,12 @@
 
             
 
+            
+
             , use <see
              cref="M:System.Data.DataTable.Copy" />
+
+            
 
             
 
@@ -1124,8 +1318,12 @@
 
             
 
+            
+
             , including all <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1144,8 +1342,12 @@
 
             
 
+            
+
              with the same schema as the current <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1183,6 +1385,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1196,8 +1400,12 @@
 
             
 
+            
+
              in a <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -1235,6 +1443,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1248,8 +1458,12 @@
 
             
 
+            
+
              in a <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -1280,6 +1494,8 @@
           <para
             >The <see
              cref="T:System.Data.DataColumnCollection" />
+
+            
 
             
 
@@ -1327,6 +1543,8 @@
 
             
 
+            
+
              parameter requires an aggregate function. For example, the following is a legal expression:</para
           >
           <para>Count(Quantity)</para>
@@ -1340,8 +1558,12 @@
 
             
 
+            
+
             , set its <see
              cref="P:System.Data.DataColumn.Expression" />
+
+            
 
             
 
@@ -1354,8 +1576,12 @@
 
             
 
+            
+
              with the name "total", and the <see
              cref="P:System.Data.DataColumn.Expression" />
+
+            
 
             
 
@@ -1372,6 +1598,8 @@
 
             
 
+            
+
              method would then be this:</para
           >
           <para>Sum(total)</para>
@@ -1383,12 +1611,16 @@
 
             
 
+            
+
             , determines which rows are used in the expression. For example, if the table contains a date column named "colDate", you could limit the rows with the following expression:</para
           >
           <para>colDate &gt; 1/1/99 AND colDate &lt; 17/1/99</para>
           <para
             >For rules on creating expressions for both parameters, see the <see
              cref="P:System.Data.DataColumn.Expression" />
+
+            
 
             
 
@@ -1411,8 +1643,12 @@
 
             
 
+            
+
             , set to the result of the computation. If the expression evaluates to null, the return value will be <see
              cref="F:System.DBNull.Value" />
+
+            
 
             
 
@@ -1428,10 +1664,14 @@
 
           
 
+          
+
           The expression to compute. </param
         >
         <param name="filter">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1466,6 +1706,8 @@
 
             
 
+            
+
              restricts the action performed when a value in a column (or columns) is either deleted or updated. Such a constraint is intended to be used with primary key columns. In a parent/child relationship between two tables, deleting a value from the parent table can affect the child rows in one of the following ways.</para
           >
           <list type="bullet">
@@ -1485,6 +1727,8 @@
           <para
             >A <see
              cref="T:System.Data.UniqueConstraint" />
+
+            
 
             
 
@@ -1527,6 +1771,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1540,8 +1786,12 @@
 
             
 
+            
+
              with the same structure (table schemas and constraints) and data as this <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1557,8 +1807,12 @@
 
             
 
+            
+
              creates a new <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1571,6 +1825,8 @@
 
             
 
+            
+
             . To copy the structure to a new <see
              cref="T:System.Data.DataTable" />
 
@@ -1578,8 +1834,12 @@
 
             
 
+            
+
             , but not the data, use <see
              cref="M:System.Data.DataTable.Clone" />
+
+            
 
             
 
@@ -1619,8 +1879,12 @@
 
             
 
+            
+
              corresponding to the data within this <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1639,8 +1903,12 @@
 
             
 
+            
+
              containing one result set, corresponding to the source <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1668,6 +1936,8 @@
           <para
             >Creates a new instance of <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1704,6 +1974,8 @@
 
             
 
+            
+
             , and the table belongs to a <see
              cref="T:System.Data.DataSet" />
 
@@ -1711,8 +1983,12 @@
 
             
 
+            
+
             , you can get to the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1726,6 +2002,8 @@
           <para
             >Gets the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1766,6 +2044,8 @@
 
             
 
+            
+
              property returns a <see
              cref="T:System.Data.DataView" />
 
@@ -1773,8 +2053,12 @@
 
             
 
+            
+
              you can use to sort, filter, and search a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1841,6 +2125,8 @@
 
             
 
+            
+
              method starts the initialization. Using the <see
              cref="M:System.Data.DataTable.BeginInit" />
 
@@ -1848,8 +2134,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Data.DataTable.EndInit" />
+
+            
 
             
 
@@ -1863,6 +2153,8 @@
           <para
             >Ends the initialization of a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1895,6 +2187,8 @@
 
             
 
+            
+
              in conjunction with <see
              cref="M:System.Data.DataTable.LoadDataRow(System.Object[],System.Boolean)" />
 
@@ -1902,8 +2196,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Data.DataTable.BeginLoadData" />
+
+            
 
             
 
@@ -1943,8 +2241,12 @@
 
             
 
+            
+
              to add custom information to a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1960,8 +2262,12 @@
 
             
 
+            
+
             . Properties that are not of type String are not persisted when the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -2021,8 +2327,12 @@
 
             
 
+            
+
              containing a copy of all rows in the original <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2035,8 +2345,12 @@
 
             
 
+            
+
              if the unchanged rows contain primary keys corresponding to foreign keys in the changed rows. The method returns null (Nothing in Visual Basic) if there are no rows in the original <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2055,8 +2369,12 @@
 
             
 
+            
+
              that contains all changes made to it since it was loaded or <see
              cref="M:System.Data.DataTable.AcceptChanges" />
+
+            
 
             
 
@@ -2070,6 +2388,8 @@
           <para
             >A copy of the changes from this <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -2107,6 +2427,8 @@
 
             
 
+            
+
              method is used to produce a second <see
              cref="T:System.Data.DataTable" />
 
@@ -2114,8 +2436,12 @@
 
             
 
+            
+
              object that contains only the changes introduced into the original. Use the <paramref
              name="rowStates" />
+
+            
 
             
 
@@ -2135,6 +2461,8 @@
 
             
 
+            
+
              containing all changes made to it since it was last loaded, or since <see
              cref="M:System.Data.DataTable.AcceptChanges" />
 
@@ -2142,8 +2470,12 @@
 
             
 
+            
+
              was called, filtered by <see
              cref="T:System.Data.DataRowState" />
+
+            
 
             
 
@@ -2162,8 +2494,12 @@
 
             
 
+            
+
              that can have actions performed on it, and later be merged back in the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -2176,8 +2512,12 @@
 
             
 
+            
+
             . If no rows of the desired <see
              cref="T:System.Data.DataRowState" />
+
+            
 
             
 
@@ -2193,8 +2533,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.DataRowState" />
+
+          
 
           
 
@@ -2235,8 +2579,12 @@
 
             
 
+            
+
              instance containing the Web Services Description Language (WSDL) that describes the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -2255,6 +2603,8 @@
 
             
 
+            
+
              instance.</para
           >
         </returns>
@@ -2265,8 +2615,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -2294,8 +2648,12 @@
 
             
 
+            
+
              objects that have <see
              cref="P:System.Data.DataRow.RowError" />
+
+            
 
             
 
@@ -2308,8 +2666,12 @@
 
             
 
+            
+
              with <see
              cref="P:System.Data.Common.DataAdapter.ContinueUpdateOnError" />
+
+            
 
             
 
@@ -2322,8 +2684,12 @@
 
             
 
+            
+
             . Do not invoke <see
              cref="M:System.Data.DataTable.AcceptChanges" />
+
+            
 
             
 
@@ -2336,8 +2702,12 @@
 
             
 
+            
+
              until you resolve all errors and resubmit the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2356,6 +2726,8 @@
 
             
 
+            
+
              objects that contain errors.</para
           >
         </summary>
@@ -2364,6 +2736,8 @@
           <para
             >An array of <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -2406,11 +2780,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="info">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2423,8 +2801,12 @@
 
           
 
+          
+
            object that holds the serialized data associated with the <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -2439,6 +2821,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
 
@@ -2446,8 +2830,12 @@
 
           
 
+          
+
            object that contains the source and destination of the serialized stream associated with the <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -2475,6 +2863,8 @@
           <para
             >Returns the type of the <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -2514,6 +2904,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2527,6 +2919,8 @@
 
             
 
+            
+
              that describes the XML representation of the object that is produced by the <see
              cref="M:System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)" />
 
@@ -2534,8 +2928,12 @@
 
             
 
+            
+
              method and consumed by the <see
              cref="M:System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)" />
+
+            
 
             
 
@@ -2564,8 +2962,12 @@
 
             
 
+            
+
             , you can mark each change with an error if the change causes some validation failure. You can mark an entire <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -2578,8 +2980,12 @@
 
             
 
+            
+
              property. You can also set errors on each column of the row with the <see
              cref="M:System.Data.DataRow.SetColumnError(System.Int32,System.String)" />
+
+            
 
             
 
@@ -2595,8 +3001,12 @@
 
             
 
+            
+
             , it's recommended that you first invoke the <see
              cref="M:System.Data.DataSet.GetChanges" />
+
+            
 
             
 
@@ -2609,8 +3019,12 @@
 
             
 
+            
+
             . The method results in a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2623,8 +3037,12 @@
 
             
 
+            
+
              to the data source for updating, check the <see
              cref="P:System.Data.DataTable.HasErrors" />
+
+            
 
             
 
@@ -2640,6 +3058,8 @@
 
             
 
+            
+
              method of the DataRow.</para
           >
         </remarks>
@@ -2648,6 +3068,8 @@
           <para
             >Gets a value indicating whether there are errors in any of the rows in any of the tables of the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2687,8 +3109,12 @@
 
             
 
+            
+
              adds a row to the table using the existing table schema, but with default values for the row, and sets the <see
              cref="T:System.Data.DataRowState" />
+
+            
 
             
 
@@ -2701,8 +3127,12 @@
 
             
 
+            
+
              preserves the existing <see
              cref="T:System.Data.DataRowState" />
+
+            
 
             
 
@@ -2720,8 +3150,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Data.DataTable.Rows" />
+
+            
 
             
 
@@ -2740,8 +3174,12 @@
 
             
 
+            
+
              into a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -2757,8 +3195,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataRow" />
+
+          
 
           
 
@@ -2792,6 +3234,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2800,6 +3244,8 @@
           <para
             >Occurs after the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -2836,6 +3282,8 @@
 
             
 
+            
+
              while it’s being constructed, for instance by Visual Studio. The <see
              cref="M:System.Data.DataTable.BeginInit" />
 
@@ -2843,8 +3291,12 @@
 
             
 
+            
+
              method sets it to false and <see
              cref="M:System.Data.DataTable.EndInit" />
+
+            
 
             
 
@@ -2858,6 +3310,8 @@
           <para
             >Gets a value that indicates whether the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -2891,6 +3345,8 @@
 
             
 
+            
+
              method consumes the first result set from the loaded <see
              cref="T:System.Data.IDataReader" />
 
@@ -2898,8 +3354,12 @@
 
             
 
+            
+
             , and after successful completion, sets the reader's position to the next result set, if any. When converting data, the Load method uses the same conversion rules as the <see
              cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataTable)" />
+
+            
 
             
 
@@ -2915,6 +3375,8 @@
 
             
 
+            
+
              method must take into account three specific issues when loading the data from an <see
              cref="T:System.Data.IDataReader" />
 
@@ -2922,8 +3384,12 @@
 
             
 
+            
+
              instance: schema, data, and event operations. When working with the schema, the <see
              cref="M:System.Data.DataTable.Load(System.Data.IDataReader)" />
+
+            
 
             
 
@@ -2952,6 +3418,8 @@
 
                   
 
+                  
+
                    has no schema.</para
                 >
               </term>
@@ -2964,8 +3432,12 @@
 
                   
 
+                  
+
                    method infers the schema based on the result set from the imported <see
                    cref="T:System.Data.IDataReader" />
+
+                  
 
                   
 
@@ -2985,6 +3457,8 @@
 
                   
 
+                  
+
                    has a schema, but it is incompatible with the loaded schema.</para
                 >
               </term>
@@ -2992,6 +3466,8 @@
                 <para
                   >The <see
                    cref="M:System.Data.DataTable.Load(System.Data.IDataReader)" />
+
+                  
 
                   
 
@@ -3011,6 +3487,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </term>
@@ -3023,6 +3501,8 @@
 
                   
 
+                  
+
                    method adds the extra columns to DataTable's schema. The method throws an exception if corresponding columns in the <see
                    cref="T:System.Data.DataTable" />
 
@@ -3030,8 +3510,12 @@
 
                   
 
+                  
+
                    and the loaded result set are not value compatible. The method also retrieves constraint information from the result set for all added columns. Except for the case of Primary Key constraint, this constraint information is used only if the current <see
                    cref="T:System.Data.DataTable" />
+
+                  
 
                   
 
@@ -3054,6 +3538,8 @@
 
                   
 
+                  
+
                    method allows the rows to be added, substituting the default or null value for the missing column. If no default value or null can be used, then the Load method throws an exception. If no specific default value has been supplied, the Load method uses the null value as the implied default value.</para
                 >
               </description>
@@ -3067,10 +3553,14 @@
 
             
 
+            
+
              maintains both the current value and the original value for each column. These values may be equivalent, or may be different if the data in the row has been changed since filling the DataTable.  For more information, see <format
              type="text/html">
               <a href="2e6642c9-bfc6-425c-b3a7-e4912ffa6c1f">Row States and Row Versions</a>
             </format>
+
+            
 
             
 
@@ -3086,11 +3576,15 @@
 
             
 
+            
+
             .) If the existing row and the incoming row contain corresponding primary key values, the row is processed using its current row state value, otherwise it's treated as a new row.</para
           >
           <para
             >In terms of event operations, the <see
              cref="E:System.Data.DataTable.RowChanging" />
+
+            
 
             
 
@@ -3103,8 +3597,12 @@
 
             
 
+            
+
              event occurs after each row has been changed. In each case, the <see
              cref="P:System.Data.DataRowChangeEventArgs.Action" />
+
+            
 
             
 
@@ -3117,11 +3615,15 @@
 
             
 
+            
+
              instance passed to the event handler contains information about the particular action associated with the event. This action value depends on the state of the row before the load operation. In each case, both events occur, and the action is the same for each. The action may be applied to either the current or original version of each row, or both, depending on the current row state.</para
           >
           <para
             >The following table displays behavior for the Load method. The final row (labeled "(Not present)") describes the behavior for incoming rows that don't match any existing row. Each cell in this table describes the current and original value for a field within a row, along with the <see
              cref="T:System.Data.DataRowState" />
+
+            
 
             
 
@@ -3204,8 +3706,12 @@
 
             
 
+            
+
              can be constrained through use of properties such as <see
              cref="P:System.Data.DataColumn.ReadOnly" />
+
+            
 
             
 
@@ -3218,8 +3724,12 @@
 
             
 
+            
+
             . The Load method handles such columns in a manner that is consistent with the behavior defined by the column's properties. The read only constraint on a <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -3239,6 +3749,8 @@
 
             
 
+            
+
              with values from a data source using the supplied <see
              cref="T:System.Data.IDataReader" />
 
@@ -3246,8 +3758,12 @@
 
             
 
+            
+
             . If the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -3263,8 +3779,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Data.IDataReader" />
+
+          
 
           
 
@@ -3301,8 +3821,12 @@
 
             
 
+            
+
             , and after successful completion, sets the reader's position to the next result set, if any. When converting data, the Load method uses the same conversion rules as the <see
              cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataTable)" />
+
+            
 
             
 
@@ -3313,6 +3837,8 @@
           <para
             >The Load method must take into account three specific issues when loading the data from an <see
              cref="T:System.Data.IDataReader" />
+
+            
 
             
 
@@ -3341,6 +3867,8 @@
 
                   
 
+                  
+
                    has no schema.</para
                 >
               </term>
@@ -3348,6 +3876,8 @@
                 <para
                   >The Load method infers the schema based on the result set from the imported <see
                    cref="T:System.Data.IDataReader" />
+
+                  
 
                   
 
@@ -3362,6 +3892,8 @@
                 <para
                   >The <see
                    cref="T:System.Data.DataTable" />
+
+                  
 
                   
 
@@ -3387,8 +3919,12 @@
 
                   
 
+                  
+
                    and the loaded result set are not value compatible. The method also retrieves constraint information from the result set for all added columns. Except for the case of Primary Key constraint, this constraint information is used only if the current <see
                    cref="T:System.Data.DataTable" />
+
+                  
 
                   
 
@@ -3415,10 +3951,14 @@
 
             
 
+            
+
              maintains both the current value and the original value for each column. These values may be equivalent, or may be different if the data in the row has been changed since filling the DataTable. See <format
              type="text/html">
               <a href="2e6642c9-bfc6-425c-b3a7-e4912ffa6c1f">Row States and Row Versions</a>
             </format>
+
+            
 
             
 
@@ -3434,8 +3974,12 @@
 
             
 
+            
+
              parameter influences the processing of the incoming data. How should the Load method handle loading rows that have the same primary key as existing rows? Should it modify current values, original values, or both? These issues, and more, are controlled by the <paramref
              name="loadOption" />
+
+            
 
             
 
@@ -3452,8 +3996,12 @@
 
             
 
+            
+
              event occurs before each row is changed, and the <see
              cref="E:System.Data.DataTable.RowChanged" />
+
+            
 
             
 
@@ -3466,8 +4014,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Data.DataRowChangeEventArgs" />
+
+            
 
             
 
@@ -3478,6 +4030,8 @@
           <para
             >The following table displays behavior for the Load method when called with each of the LoadOption values, and also shows how the values interact with the row state for the row being loaded. The final row (labeled "(Not present)") describes the behavior for incoming rows that don't match any existing row. Each cell in this table describes the current and original value for a field within a row, along with the <see
              cref="T:System.Data.DataRowState" />
+
+            
 
             
 
@@ -3636,8 +4190,12 @@
 
             
 
+            
+
              can be constrained through use of properties such as <see
              cref="P:System.Data.DataColumn.ReadOnly" />
+
+            
 
             
 
@@ -3650,8 +4208,12 @@
 
             
 
+            
+
             . The Load method handles such columns in a manner that is consistent with the behavior defined by the column's properties. The read only constraint on a <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -3662,6 +4224,8 @@
           <para
             >If you specify the OverwriteChanges or PreserveChanges options when calling the Load method, then the assumption is made that the incoming data is coming from the DataTable's primary data source, and the DataTable tracks changes and can propagate the changes back to the data source. If you select the Upsert option, it is assumed that the data is coming from one of a secondary data source, such as data provided by a middle-tier component, perhaps altered by a user. In this case, the assumption is that the intent is to aggregate data from one or more data sources in the DataTable, and then perhaps propagate the data back to the primary data source. The <see
              cref="T:System.Data.LoadOption" />
+
+            
 
             
 
@@ -3716,6 +4280,8 @@
 
             
 
+            
+
              with values from a data source using the supplied <see
              cref="T:System.Data.IDataReader" />
 
@@ -3723,8 +4289,12 @@
 
             
 
+            
+
             . If the DataTable already contains rows, the incoming data from the data source is merged with the existing rows according to the value of the <paramref
              name="loadOption" />
+
+            
 
             
 
@@ -3740,8 +4310,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Data.IDataReader" />
+
+          
 
           
 
@@ -3756,6 +4330,8 @@
 
           
 
+          
+
           A value from the <see
            cref="T:System.Data.LoadOption" />
 
@@ -3763,8 +4339,12 @@
 
           
 
+          
+
            enumeration that indicates how rows already in the <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -3802,8 +4382,12 @@
 
             
 
+            
+
             , and after successful completion, sets the reader's position to the next result set, if any. When converting data, the Load method uses the same conversion rules as the <see
              cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataTable)" />
+
+            
 
             
 
@@ -3814,6 +4398,8 @@
           <para
             >The Load method must take into account three specific issues when loading the data from an <see
              cref="T:System.Data.IDataReader" />
+
+            
 
             
 
@@ -3842,6 +4428,8 @@
 
                   
 
+                  
+
                    has no schema.</para
                 >
               </term>
@@ -3849,6 +4437,8 @@
                 <para
                   >The Load method infers the schema based on the result set from the imported <see
                    cref="T:System.Data.IDataReader" />
+
+                  
 
                   
 
@@ -3863,6 +4453,8 @@
                 <para
                   >The <see
                    cref="T:System.Data.DataTable" />
+
+                  
 
                   
 
@@ -3888,8 +4480,12 @@
 
                   
 
+                  
+
                    and the loaded result set are not value compatible. The method also retrieves constraint information from the result set for all added columns. Except for the case of Primary Key constraint, this constraint information is used only if the current <see
                    cref="T:System.Data.DataTable" />
+
+                  
 
                   
 
@@ -3916,10 +4512,14 @@
 
             
 
+            
+
              maintains both the current value and the original value for each column. These values may be equivalent, or may be different if the data in the row has been changed since filling the DataTable. See <format
              type="text/html">
               <a href="2e6642c9-bfc6-425c-b3a7-e4912ffa6c1f">Row States and Row Versions</a>
             </format>
+
+            
 
             
 
@@ -3935,8 +4535,12 @@
 
             
 
+            
+
              parameter influences the processing of the incoming data. How should the Load method handle loading rows that have the same primary key as existing rows? Should it modify current values, original values, or both? These issues, and more, are controlled by the <paramref
              name="loadOption" />
+
+            
 
             
 
@@ -3953,8 +4557,12 @@
 
             
 
+            
+
              event occurs before each row is changed, and the <see
              cref="E:System.Data.DataTable.RowChanged" />
+
+            
 
             
 
@@ -3967,8 +4575,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Data.DataRowChangeEventArgs" />
+
+            
 
             
 
@@ -3979,6 +4591,8 @@
           <para
             >The following table displays behavior for the Load method when called with each of the LoadOption values, and also shows how the values interact with the row state for the row being loaded. The final row (labeled "(Not present)") describes the behavior for incoming rows that don't match any existing row. Each cell in this table describes the current and original value for a field within a row, along with the <see
              cref="T:System.Data.DataRowState" />
+
+            
 
             
 
@@ -4137,8 +4751,12 @@
 
             
 
+            
+
              can be constrained through use of properties such as <see
              cref="P:System.Data.DataColumn.ReadOnly" />
+
+            
 
             
 
@@ -4151,8 +4769,12 @@
 
             
 
+            
+
             . The Load method handles such columns in a manner that is consistent with the behavior defined by the column's properties. The read only constraint on a <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -4163,6 +4785,8 @@
           <para
             >If you specify the OverwriteChanges or PreserveChanges options when calling the Load method, then the assumption is made that the incoming data is coming from the DataTable's primary data source, and the DataTable tracks changes and can propagate the changes back to the data source. If you select the Upsert option, it is assumed that the data is coming from one of a secondary data source, such as data provided by a middle-tier component, perhaps altered by a user. In this case, the assumption is that the intent is to aggregate data from one or more data sources in the DataTable, and then perhaps propagate the data back to the primary data source. The <see
              cref="T:System.Data.LoadOption" />
+
+            
 
             
 
@@ -4214,8 +4838,12 @@
 
             
 
+            
+
              parameter is a <see
              cref="T:System.Data.FillErrorEventHandler" />
+
+            
 
             
 
@@ -4228,8 +4856,12 @@
 
             
 
+            
+
              parameter passed to the procedure provides properties that allow you to retrieve information about the error that occurred, the current row of data, and the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -4242,8 +4874,12 @@
 
             
 
+            
+
              parameter supplies a <see
              cref="P:System.Data.FillErrorEventArgs.Continue" />
+
+            
 
             
 
@@ -4262,8 +4898,12 @@
 
             
 
+            
+
              with values from a data source using the supplied <see
              cref="T:System.Data.IDataReader" />
+
+            
 
             
 
@@ -4279,8 +4919,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.IDataReader" />
+
+          
 
           
 
@@ -4295,6 +4939,8 @@
 
           
 
+          
+
           A value from the <see
            cref="T:System.Data.LoadOption" />
 
@@ -4302,8 +4948,12 @@
 
           
 
+          
+
            enumeration that indicates how rows already in the <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -4318,8 +4968,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.FillErrorEventHandler" />
+
+          
 
           
 
@@ -4353,11 +5007,15 @@
 
             
 
+            
+
              method takes an array of values and finds the matching value(s) in the primary key column(s).</para
           >
           <para
             >If a column has a default value, pass a null value in the array to set the default value for that column. Similarly, if a column has its <see
              cref="P:System.Data.DataColumn.AutoIncrement" />
+
+            
 
             
 
@@ -4373,6 +5031,8 @@
 
             
 
+            
+
              parameter is true or not specified, the new data is added and then <see
              cref="M:System.Data.DataTable.AcceptChanges" />
 
@@ -4380,8 +5040,12 @@
 
             
 
+            
+
              is called to accept all changes in the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -4397,8 +5061,12 @@
 
             
 
+            
+
              or <see
              cref="E:System.Data.DataTable.RowChanging" />
+
+            
 
             
 
@@ -4414,6 +5082,8 @@
 
             
 
+            
+
              in conjunction with <see
              cref="M:System.Data.DataTable.BeginLoadData" />
 
@@ -4421,8 +5091,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Data.DataTable.EndLoadData" />
+
+            
 
             
 
@@ -4445,6 +5119,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -4455,10 +5131,14 @@
 
           
 
+          
+
           An array of values used to create the new row. </param
         >
         <param name="fAcceptChanges">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4499,11 +5179,15 @@
 
             
 
+            
+
              method takes an array of values and finds the matching value(s) in the primary key column(s).</para
           >
           <para
             >If a column has a default value, pass a null value in the array to set the default value for that column. Similarly, if a column has its <see
              cref="P:System.Data.DataColumn.AutoIncrement" />
+
+            
 
             
 
@@ -4519,8 +5203,12 @@
 
             
 
+            
+
              parameter is used to determine how the values in the array are applied to an existing row. For example, if <paramref
              name="loadOption" />
+
+            
 
             
 
@@ -4536,8 +5224,12 @@
 
             
 
+            
+
              or <see
              cref="E:System.Data.DataTable.RowChanging" />
+
+            
 
             
 
@@ -4553,6 +5245,8 @@
 
             
 
+            
+
              in conjunction with <see
              cref="M:System.Data.DataTable.BeginLoadData" />
 
@@ -4560,8 +5254,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Data.DataTable.EndLoadData" />
+
+            
 
             
 
@@ -4584,6 +5282,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -4594,10 +5294,14 @@
 
           
 
+          
+
           An array of values used to create the new row. </param
         >
         <param name="loadOption">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4629,11 +5333,15 @@
 
             
 
+            
+
              represents the software preferences of a particular culture or community.</para
           >
           <para
             >When used for string comparisons, the <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -4650,8 +5358,12 @@
 
               
 
+              
+
                is used. The <see
                cref="F:System.StringComparison.CurrentCulture" />
+
+              
 
               
 
@@ -4694,6 +5406,8 @@
 
             
 
+            
+
              objects that have largely similar schemas. A merge is typically used on a client application to incorporate the latest changes from a data source into an existing <see
              cref="T:System.Data.DataTable" />
 
@@ -4701,8 +5415,12 @@
 
             
 
+            
+
             . This allows the client application to have a refreshed <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -4719,11 +5437,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >When performing a merge, changes made to the existing data before the merge are preserved by default during the merge operation. Developers can modify this behavior by calling one of the other two overloads for this method, and specifying a false value for the <paramref
              name="preserveChanges" />
+
+            
 
             
 
@@ -4739,8 +5461,12 @@
 
             
 
+            
+
              method is first invoked. That method returns a second <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -4753,8 +5479,12 @@
 
             
 
+            
+
              object contains only the <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -4767,8 +5497,12 @@
 
             
 
+            
+
             . This subset is generally smaller and thus more efficiently passed back to a middle tier component. The middle tier component then updates the original data source with the changes through stored procedures. The middle tier can then send back either a new <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -4781,6 +5515,8 @@
 
             
 
+            
+
              can be merged back into the client application's original <see
              cref="T:System.Data.DataTable" />
 
@@ -4788,8 +5524,12 @@
 
             
 
+            
+
              with the <see
              cref="M:System.Data.DataTable.Merge" />
+
+            
 
             
 
@@ -4805,6 +5545,8 @@
 
             
 
+            
+
              into the target, any source rows with a <see
              cref="T:System.Data.DataRowState" />
 
@@ -4812,8 +5554,12 @@
 
             
 
+            
+
              value of Unchanged, Modified, or Deleted, is matched to target rows with the same primary key values. Source rows with a <see
              cref="T:System.Data.DataRowState" />
+
+            
 
             
 
@@ -4832,8 +5578,12 @@
 
             
 
+            
+
              with the current <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -4849,6 +5599,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataTable" />
 
@@ -4856,8 +5608,12 @@
 
           
 
+          
+
            to be merged with the current <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -4894,6 +5650,8 @@
 
             
 
+            
+
              objects that have largely similar schemas. A merge is typically used on a client application to incorporate the latest changes from a data source into an existing <see
              cref="T:System.Data.DataTable" />
 
@@ -4901,8 +5659,12 @@
 
             
 
+            
+
             . This allows the client application to have a refreshed <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -4919,11 +5681,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >When performing a merge, changes made to the existing data before the merge are preserved during the merge operation unless the developer specifies false for the <paramref
              name="preserveChanges" />
+
+            
 
             
 
@@ -4936,8 +5702,12 @@
 
             
 
+            
+
              parameter is set to true, incoming values do not overwrite existing values in the Current row version of the existing row. If the <paramref
              name="preserveChanges" />
+
+            
 
             
 
@@ -4947,6 +5717,8 @@
              type="text/html">
               <a href="2e6642c9-bfc6-425c-b3a7-e4912ffa6c1f">Row States and Row Versions</a>
             </format>
+
+            
 
             
 
@@ -4962,8 +5734,12 @@
 
             
 
+            
+
              method is first invoked. That method returns a second <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -4976,8 +5752,12 @@
 
             
 
+            
+
              object contains only the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -4990,8 +5770,12 @@
 
             
 
+            
+
              objects that were changed, resulting in a subset of the original <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -5004,8 +5788,12 @@
 
             
 
+            
+
              that includes original data and the latest data from the data source (by running the original query again), or it can send back the subset with any changes that have been made to it from the data source. (For example, if the data source automatically creates unique primary key values, these values can be propagated back to the client application.) In either case, the returned <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -5018,8 +5806,12 @@
 
             
 
+            
+
              with the <see
              cref="M:System.Data.DataTable.Merge" />
+
+            
 
             
 
@@ -5035,6 +5827,8 @@
 
             
 
+            
+
              into the target, any source rows with a <see
              cref="T:System.Data.DataRowState" />
 
@@ -5042,8 +5836,12 @@
 
             
 
+            
+
              value of Unchanged, Modified, or Deleted are matched to target rows with the same primary key values. Source rows with a <see
              cref="T:System.Data.DataRowState" />
+
+            
 
             
 
@@ -5062,6 +5860,8 @@
 
             
 
+            
+
              with the current DataTable, indicating whether to preserve changes in the current DataTable.</para
           >
         </summary>
@@ -5072,10 +5872,14 @@
 
           
 
+          
+
           The DataTable to be merged with the current DataTable.</param
         >
         <param name="preserveChanges">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5113,6 +5917,8 @@
 
             
 
+            
+
              objects that have largely similar schemas. A merge is typically used on a client application to incorporate the latest changes from a data source into an existing <see
              cref="T:System.Data.DataTable" />
 
@@ -5120,8 +5926,12 @@
 
             
 
+            
+
             . This allows the client application to have a refreshed <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -5138,11 +5948,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >When performing a merge, changes made to the existing data before the merge are preserved during the merge operation unless the developer specifies false for the <paramref
              name="preserveChanges" />
+
+            
 
             
 
@@ -5155,8 +5969,12 @@
 
             
 
+            
+
              parameter is set to true, incoming values do not overwrite existing values in the Current row version of the existing row. If the <paramref
              name="preserveChanges" />
+
+            
 
             
 
@@ -5166,6 +5984,8 @@
              type="text/html">
               <a href="2e6642c9-bfc6-425c-b3a7-e4912ffa6c1f">Row States and Row Versions</a>
             </format>
+
+            
 
             
 
@@ -5181,8 +6001,12 @@
 
             
 
+            
+
              method is first invoked. That method returns a second <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -5195,8 +6019,12 @@
 
             
 
+            
+
              object contains only the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -5209,8 +6037,12 @@
 
             
 
+            
+
              objects that were changed, resulting in a subset of the original <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -5223,8 +6055,12 @@
 
             
 
+            
+
              that includes original data and the latest data from the data source (by running the original query again), or it can send back the subset with any changes that have been made to it from the data source. (For example, if the data source automatically creates unique primary key values, these values can be propagated back to the client application.) In either case, the returned <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -5237,8 +6073,12 @@
 
             
 
+            
+
              with the <see
              cref="M:System.Data.DataTable.Merge" />
+
+            
 
             
 
@@ -5254,8 +6094,12 @@
 
             
 
+            
+
              method is called, the schemas of the two <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -5268,8 +6112,12 @@
 
             
 
+            
+
              contains schema elements (added <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -5282,8 +6130,12 @@
 
             
 
+            
+
              argument to MissingSchemaAction.Add. In that case, the merged <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -5300,6 +6152,8 @@
 
             
 
+            
+
              into the target, any source rows with a <see
              cref="T:System.Data.DataRowState" />
 
@@ -5307,8 +6161,12 @@
 
             
 
+            
+
              value of Unchanged, Modified, or Deleted are matched to target rows with the same primary key values. Source rows with a <see
              cref="T:System.Data.DataRowState" />
+
+            
 
             
 
@@ -5327,11 +6185,15 @@
 
             
 
+            
+
              with the current DataTable, indicating whether to preserve changes and how to handle missing schema in the current DataTable.</para
           >
         </summary>
         <param name="table">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5344,8 +6206,12 @@
 
           
 
+          
+
            to be merged with the current <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -5360,8 +6226,12 @@
 
           
 
+          
+
           true, to preserve changes in the current <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -5376,8 +6246,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.MissingSchemaAction" />
+
+          
 
           
 
@@ -5401,6 +6275,8 @@
           <para
             >The <see
              cref="P:System.Data.DataTable.MinimumCapacity" />
+
+            
 
             
 
@@ -5444,6 +6320,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -5471,8 +6349,12 @@
 
             
 
+            
+
              method to create new <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -5485,8 +6367,12 @@
 
             
 
+            
+
             . After creating a <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -5499,8 +6385,12 @@
 
             
 
+            
+
             , through the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -5513,6 +6403,8 @@
 
             
 
+            
+
              property. When you use <see
              cref="M:System.Data.DataTable.NewRow" />
 
@@ -5520,8 +6412,12 @@
 
             
 
+            
+
              to create new rows, the rows must be added to or deleted from the data table before you call <see
              cref="M:System.Data.DataTable.Clear" />
+
+            
 
             
 
@@ -5540,6 +6436,8 @@
 
             
 
+            
+
              with the same schema as the table.</para
           >
         </summary>
@@ -5553,8 +6451,12 @@
 
             
 
+            
+
              with the same schema as the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -5597,6 +6499,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -5611,8 +6515,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -5650,6 +6558,8 @@
 
             
 
+            
+
              derived class.</para
           >
         </returns>
@@ -5660,8 +6570,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.DataRowBuilder" />
+
+          
 
           
 
@@ -5700,6 +6614,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5708,6 +6624,8 @@
           <para
             >Raises the <see
              cref="E:System.Data.DataTable.ColumnChanged" />
+
+            
 
             
 
@@ -5723,8 +6641,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.DataColumnChangeEventArgs" />
+
+          
 
           
 
@@ -5763,6 +6685,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5771,6 +6695,8 @@
           <para
             >Raises the <see
              cref="E:System.Data.DataTable.ColumnChanging" />
+
+            
 
             
 
@@ -5786,8 +6712,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.DataColumnChangeEventArgs" />
+
+          
 
           
 
@@ -5830,6 +6760,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5838,6 +6770,8 @@
           <para
             >Raises the <see
              cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged" />
+
+            
 
             
 
@@ -5853,8 +6787,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.PropertyChangedEventArgs" />
+
+          
 
           
 
@@ -5893,6 +6831,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5906,8 +6846,12 @@
 
             
 
+            
+
              that a <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -5923,8 +6867,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -5959,6 +6907,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5967,6 +6917,8 @@
           <para
             >Raises the <see
              cref="E:System.Data.DataTable.RowChanged" />
+
+            
 
             
 
@@ -5982,8 +6934,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.DataRowChangeEventArgs" />
+
+          
 
           
 
@@ -6022,6 +6978,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -6030,6 +6988,8 @@
           <para
             >Raises the <see
              cref="E:System.Data.DataTable.RowChanging" />
+
+            
 
             
 
@@ -6045,8 +7005,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.DataRowChangeEventArgs" />
+
+          
 
           
 
@@ -6085,6 +7049,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -6093,6 +7059,8 @@
           <para
             >Raises the <see
              cref="E:System.Data.DataTable.RowDeleted" />
+
+            
 
             
 
@@ -6108,8 +7076,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.DataRowChangeEventArgs" />
+
+          
 
           
 
@@ -6148,6 +7120,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -6156,6 +7130,8 @@
           <para
             >Raises the <see
              cref="E:System.Data.DataTable.RowDeleting" />
+
+            
 
             
 
@@ -6171,8 +7147,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.DataRowChangeEventArgs" />
+
+          
 
           
 
@@ -6212,8 +7192,12 @@
 
             
 
+            
+
              event, which is fired immediately after all rows have been successfully cleared but before the <see
              cref="M:System.Data.DataTable.Clear" />
+
+            
 
             
 
@@ -6226,6 +7210,8 @@
              type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
+
+            
 
             
 
@@ -6244,6 +7230,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6254,8 +7242,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.DataTableClearEventArgs" />
+
+          
 
           
 
@@ -6291,8 +7283,12 @@
 
             
 
+            
+
              event, which is fired before processing of the <see
              cref="M:System.Data.DataTable.Clear" />
+
+            
 
             
 
@@ -6305,6 +7301,8 @@
              type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
+
+            
 
             
 
@@ -6323,6 +7321,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6333,8 +7333,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.DataTableClearEventArgs" />
+
+          
 
           
 
@@ -6370,8 +7374,12 @@
 
             
 
+            
+
              event, which fires after a new <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -6384,6 +7392,8 @@
 
             
 
+            
+
             . </para
           >
           <para
@@ -6391,6 +7401,8 @@
              type="text/html">
               <a href="f2adaf01-1ed1-42e1-8c31-8d467e7e0ee2">Raising an Event</a>
             </format>
+
+            
 
             
 
@@ -6409,6 +7421,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6419,8 +7433,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.DataTableNewRowEventArgs" />
+
+          
 
           
 
@@ -6447,6 +7465,8 @@
           <para
             >Gets the collection of parent relations for this <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -6489,6 +7509,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -6525,8 +7547,12 @@
 
             
 
+            
+
              property consists of an array of <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -6579,6 +7605,8 @@
 
             
 
+            
+
              and its descendents are loaded with the data from the supplied <see
              cref="T:System.IO.Stream" />
 
@@ -6586,8 +7614,12 @@
 
             
 
+            
+
             . The behavior of this method is identical to that of the <see
              cref="M:System.Data.DataSet.ReadXml(System.IO.Stream)" />
+
+            
 
             
 
@@ -6603,6 +7635,8 @@
 
             
 
+            
+
              method provides a way to read either data only, or both data and schema into a <see
              cref="T:System.Data.DataTable" />
 
@@ -6610,8 +7644,12 @@
 
             
 
+            
+
              from an XML document, whereas the <see
              cref="Overload:System.Data.DataTable.ReadXmlSchema" />
+
+            
 
             
 
@@ -6627,8 +7665,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.Data.DataTable.WriteXmlSchema" />
+
+            
 
             
 
@@ -6645,6 +7687,8 @@
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -6652,8 +7696,12 @@
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -6678,8 +7726,12 @@
 
             
 
+            
+
              using the specified <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -6698,11 +7750,15 @@
 
             
 
+            
+
              used to read the data.</para
           >
         </returns>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6739,6 +7795,8 @@
 
             
 
+            
+
              and its descendents are loaded with the data from the supplied <see
              cref="T:System.IO.TextReader" />
 
@@ -6746,8 +7804,12 @@
 
             
 
+            
+
             . The behavior of this method is identical to that of the <see
              cref="M:System.Data.DataSet.ReadXml(System.IO.TextReader)" />
+
+            
 
             
 
@@ -6763,6 +7825,8 @@
 
             
 
+            
+
              method provides a way to read either data only, or both data and schema into a <see
              cref="T:System.Data.DataTable" />
 
@@ -6770,8 +7834,12 @@
 
             
 
+            
+
              from an XML document, whereas the <see
              cref="Overload:System.Data.DataTable.ReadXmlSchema" />
+
+            
 
             
 
@@ -6787,8 +7855,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.Data.DataTable.WriteXmlSchema" />
+
+            
 
             
 
@@ -6805,6 +7877,8 @@
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -6812,8 +7886,12 @@
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -6838,8 +7916,12 @@
 
             
 
+            
+
              using the specified <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -6858,6 +7940,8 @@
 
             
 
+            
+
              used to read the data.</para
           >
         </returns>
@@ -6868,8 +7952,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextReader" />
+
+          
 
           
 
@@ -6905,6 +7993,8 @@
 
             
 
+            
+
              and its descendents are loaded with the data from the file named in the supplied <see
              cref="T:System.String" />
 
@@ -6912,8 +8002,12 @@
 
             
 
+            
+
             . The behavior of this method is identical to that of the <see
              cref="M:System.Data.DataSet.ReadXml(System.String)" />
+
+            
 
             
 
@@ -6929,6 +8023,8 @@
 
             
 
+            
+
              method provides a way to read either data only, or both data and schema into a <see
              cref="T:System.Data.DataTable" />
 
@@ -6936,8 +8032,12 @@
 
             
 
+            
+
              from an XML document, whereas the <see
              cref="Overload:System.Data.DataTable.ReadXmlSchema" />
+
+            
 
             
 
@@ -6953,8 +8053,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.Data.DataTable.WriteXmlSchema" />
+
+            
 
             
 
@@ -6971,6 +8075,8 @@
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -6978,8 +8084,12 @@
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -7019,6 +8129,8 @@ public class A {
 
             
 
+            
+
              from the specified file.</para
           >
         </summary>
@@ -7032,11 +8144,15 @@ public class A {
 
             
 
+            
+
              used to read the data.</para
           >
         </returns>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7072,6 +8188,8 @@ public class A {
 
             
 
+            
+
              and its descendents are loaded with the data from the file named in the supplied <see
              cref="T:System.Xml.XmlReader" />
 
@@ -7079,8 +8197,12 @@ public class A {
 
             
 
+            
+
             . The behavior of this method is identical to that of the <see
              cref="M:System.Data.DataTable.ReadXml(System.Xml.XmlReader)" />
+
+            
 
             
 
@@ -7096,6 +8218,8 @@ public class A {
 
             
 
+            
+
              method provides a way to read either data only, or both data and schema into a <see
              cref="T:System.Data.DataTable" />
 
@@ -7103,8 +8227,12 @@ public class A {
 
             
 
+            
+
              from an XML document, whereas the <see
              cref="Overload:System.Data.DataTable.ReadXmlSchema" />
+
+            
 
             
 
@@ -7120,8 +8248,12 @@ public class A {
 
             
 
+            
+
              and <see
              cref="Overload:System.Data.DataTable.WriteXmlSchema" />
+
+            
 
             
 
@@ -7138,6 +8270,8 @@ public class A {
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -7145,8 +8279,12 @@ public class A {
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -7171,8 +8309,12 @@ public class A {
 
             
 
+            
+
              using the specified <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -7191,6 +8333,8 @@ public class A {
 
             
 
+            
+
              used to read the data.</para
           >
         </returns>
@@ -7201,8 +8345,12 @@ public class A {
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -7259,8 +8407,12 @@ public class A {
 
             
 
+            
+
              method to create the schema for a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -7271,6 +8423,8 @@ public class A {
           <para
             >To write a schema to an XML document, use the <see
              cref="Overload:System.Data.DataTable.WriteXmlSchema" />
+
+            
 
             
 
@@ -7288,8 +8442,12 @@ public class A {
 
             
 
+            
+
              method which is used to fill the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -7309,11 +8467,15 @@ public class A {
 
             
 
+            
+
              using the specified stream.</para
           >
         </summary>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7349,8 +8511,12 @@ public class A {
 
             
 
+            
+
              method to create the schema for a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -7361,6 +8527,8 @@ public class A {
           <para
             >To write a schema to an XML document, use the <see
              cref="Overload:System.Data.DataTable.WriteXmlSchema" />
+
+            
 
             
 
@@ -7378,8 +8546,12 @@ public class A {
 
             
 
+            
+
              method which is used to fill the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -7399,8 +8571,12 @@ public class A {
 
             
 
+            
+
              using the specified <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -7416,8 +8592,12 @@ public class A {
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextReader" />
+
+          
 
           
 
@@ -7450,8 +8630,12 @@ public class A {
 
             
 
+            
+
              method to create the schema for a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -7467,6 +8651,8 @@ public class A {
 
             
 
+            
+
              method.</para
           >
           <para>The XML schema is interpreted according to the XSD standard.</para>
@@ -7474,6 +8660,8 @@ public class A {
           <para
             >The ReadXmlSchema method is generally invoked before invoking the <see
              cref="M:System.Data.DataTable.ReadXml(System.IO.Stream)" />
+
+            
 
             
 
@@ -7493,11 +8681,15 @@ public class A {
 
             
 
+            
+
              from the specified file.</para
           >
         </summary>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7533,8 +8725,12 @@ public class A {
 
             
 
+            
+
              method to create the schema for a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -7545,6 +8741,8 @@ public class A {
           <para
             >To write a schema to an XML document, use the <see
              cref="Overload:System.Data.DataTable.WriteXmlSchema" />
+
+            
 
             
 
@@ -7562,8 +8760,12 @@ public class A {
 
             
 
+            
+
              method which is used to fill the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -7585,8 +8787,12 @@ public class A {
 
             
 
+            
+
              using the specified <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -7602,8 +8808,12 @@ public class A {
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -7641,8 +8851,12 @@ public class A {
 
           
 
+          
+
           A <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -7670,6 +8884,8 @@ public class A {
 
             
 
+            
+
              is called, any <see
              cref="T:System.Data.DataRow" />
 
@@ -7677,8 +8893,12 @@ public class A {
 
             
 
+            
+
              objects that are still in edit-mode cancel their edits. New rows are removed. Rows with the <see
              cref="T:System.Data.DataRowState" />
+
+            
 
             
 
@@ -7692,6 +8912,8 @@ public class A {
           <para
             >Rolls back all changes that have been made to the table since it was loaded, or the last time <see
              cref="M:System.Data.DataTable.AcceptChanges" />
+
+            
 
             
 
@@ -7751,6 +8973,8 @@ public class A {
 
             
 
+            
+
              to its original state. Reset removes all data, indexes, relations, and columns of the table. If a DataSet includes a DataTable, the table will still be part of the DataSet after the table is reset.</para
           >
         </summary>
@@ -7783,6 +9007,8 @@ public class A {
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -7791,6 +9017,8 @@ public class A {
           <para
             >Occurs after a <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -7828,6 +9056,8 @@ public class A {
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -7836,6 +9066,8 @@ public class A {
           <para
             >Occurs when a <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -7868,6 +9100,8 @@ public class A {
              type="text/html">
               <a href="62f404a5-13ea-4b93-a29f-55b74a16c9d3">Working with DataTable Events</a>
             </format>
+
+            
 
             
 
@@ -7909,6 +9143,8 @@ public class A {
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -7940,8 +9176,12 @@ public class A {
 
             
 
+            
+
             , you must use the <see
              cref="M:System.Data.DataTable.NewRow" />
+
+            
 
             
 
@@ -7954,6 +9194,8 @@ public class A {
 
             
 
+            
+
              through its collection of <see
              cref="T:System.Data.DataColumn" />
 
@@ -7961,8 +9203,12 @@ public class A {
 
             
 
+            
+
              objects. After creating a new row and setting the values for each column in the row, add the row to the <see
              cref="T:System.Data.DataRowCollection" />
+
+            
 
             
 
@@ -7978,8 +9224,12 @@ public class A {
 
             
 
+            
+
              in the collection represents a row of data in the table. To commit a change to the value of a column in the row, you must invoke the <see
              cref="M:System.Data.DataTable.AcceptChanges" />
+
+            
 
             
 
@@ -8021,8 +9271,12 @@ public class A {
 
             
 
+            
+
              or <see
              cref="M:System.Data.DataTable.Select(System.String,System.String,System.Data.DataViewRowState)" />
+
+            
 
             
 
@@ -8041,6 +9295,8 @@ public class A {
 
             
 
+            
+
              objects.</para
           >
         </summary>
@@ -8049,6 +9305,8 @@ public class A {
           <para
             >An array of <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -8086,6 +9344,8 @@ public class A {
 
             
 
+            
+
              argument, use the same rules that apply to the <see
              cref="T:System.Data.DataColumn" />
 
@@ -8093,8 +9353,12 @@ public class A {
 
             
 
+            
+
              class's <see
              cref="P:System.Data.DataColumn.Expression" />
+
+            
 
             
 
@@ -8110,8 +9374,12 @@ public class A {
 
             
 
+            
+
              or <see
              cref="M:System.Data.DataTable.Select(System.String,System.String,System.Data.DataViewRowState)" />
+
+            
 
             
 
@@ -8131,6 +9399,8 @@ public class A {
 
             
 
+            
+
              objects that match the filter criteria.</para
           >
         </summary>
@@ -8139,6 +9409,8 @@ public class A {
           <para
             >An array of <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -8154,10 +9426,14 @@ public class A {
 
           
 
+          
+
           The criteria to use to filter the rows. For examples on how to filter rows, see <see
            cref="http://www.csharp-examples.net/dataview-rowfilter/"
             >DataView RowFilter Syntax [C#]</see
           >
+
+          
 
           
 
@@ -8195,8 +9471,12 @@ public class A {
 
             
 
+            
+
              argument, use the same rules for creating the <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -8209,6 +9489,8 @@ public class A {
 
             
 
+            
+
              property value. The <paramref
              name="Sort" />
 
@@ -8216,8 +9498,12 @@ public class A {
 
             
 
+            
+
              argument also uses the same rules for creating class's <see
              cref="P:System.Data.DataColumn.Expression" />
+
+            
 
             
 
@@ -8237,6 +9523,8 @@ public class A {
 
             
 
+            
+
              objects that match the filter criteria, in the specified sort order.</para
           >
         </summary>
@@ -8245,6 +9533,8 @@ public class A {
           <para
             >An array of <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -8260,6 +9550,8 @@ public class A {
 
           
 
+          
+
           The criteria to use to filter the rows. For examples on how to filter rows, see <see
            cref="http://www.csharp-examples.net/dataview-rowfilter/"
             >DataView RowFilter Syntax [C#]</see
@@ -8269,10 +9561,14 @@ public class A {
 
           
 
+          
+
           .</param
         >
         <param name="sort">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8311,8 +9607,12 @@ public class A {
 
             
 
+            
+
              argument, use the same rules for creating the <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -8325,6 +9625,8 @@ public class A {
 
             
 
+            
+
              property value. The <paramref
              name="Sort" />
 
@@ -8332,8 +9634,12 @@ public class A {
 
             
 
+            
+
              argument also uses the same rules for creating class's <see
              cref="P:System.Data.DataColumn.Expression" />
+
+            
 
             
 
@@ -8353,6 +9659,8 @@ public class A {
 
             
 
+            
+
              objects that match the filter in the order of the sort that match the specified state.</para
           >
         </summary>
@@ -8361,6 +9669,8 @@ public class A {
           <para
             >An array of <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -8376,10 +9686,14 @@ public class A {
 
           
 
+          
+
           The criteria to use to filter the rows. For examples on how to filter rows, see <see
            cref="http://www.csharp-examples.net/dataview-rowfilter/"
             >DataView RowFilter Syntax [C#]</see
           >
+
+          
 
           
 
@@ -8394,6 +9708,8 @@ public class A {
 
           
 
+          
+
           A string specifying the column and sort direction. </param
         >
         <param name="recordStates">
@@ -8403,8 +9719,12 @@ public class A {
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.DataViewRowState" />
+
+          
 
           
 
@@ -8440,8 +9760,12 @@ public class A {
 
             
 
+            
+
              to a <see
              cref="T:System.ComponentModel.Container" />
+
+            
 
             
 
@@ -8460,8 +9784,12 @@ public class A {
 
             
 
+            
+
              for the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -8509,8 +9837,12 @@ public class A {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IListSource" />
+
+            
 
             
 
@@ -8524,6 +9856,8 @@ public class A {
           <para
             >For a description of this member, see <see
              cref="P:System.ComponentModel.IListSource.ContainsListCollection" />
+
+            
 
             
 
@@ -8556,8 +9890,12 @@ public class A {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IListSource" />
+
+            
 
             
 
@@ -8576,6 +9914,8 @@ public class A {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -8584,6 +9924,8 @@ public class A {
           <para
             >An <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -8622,6 +9964,8 @@ public class A {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -8632,8 +9976,12 @@ public class A {
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -8648,8 +9996,12 @@ public class A {
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -8683,8 +10035,12 @@ public class A {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+            
 
             
 
@@ -8703,6 +10059,8 @@ public class A {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -8716,6 +10074,8 @@ public class A {
 
             
 
+            
+
              that describes the XML representation of the object that is produced by the <see
              cref="M:System.Xml.Serialization.IXmlSerializable.WriteXml(System.Xml.XmlWriter)" />
 
@@ -8723,8 +10083,12 @@ public class A {
 
             
 
+            
+
              method and consumed by the <see
              cref="M:System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)" />
+
+            
 
             
 
@@ -8761,8 +10125,12 @@ public class A {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+            
 
             
 
@@ -8781,11 +10149,15 @@ public class A {
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="reader">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8821,8 +10193,12 @@ public class A {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+            
 
             
 
@@ -8841,11 +10217,15 @@ public class A {
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="writer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8878,6 +10258,8 @@ public class A {
 
             
 
+            
+
              event is fired immediately after all rows have been successfully cleared but before the <see
              cref="M:System.Data.DataTable.Clear" />
 
@@ -8885,8 +10267,12 @@ public class A {
 
             
 
+            
+
              method returns control back to the caller. The <see
              cref="E:System.Data.DataTable.TableCleared" />
+
+            
 
             
 
@@ -8900,6 +10286,8 @@ public class A {
           <para
             >Occurs after a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -8933,6 +10321,8 @@ public class A {
 
             
 
+            
+
              event is fired before processing of the <see
              cref="M:System.Data.DataTable.Clear" />
 
@@ -8940,8 +10330,12 @@ public class A {
 
             
 
+            
+
              operation begins. This event is always fired when the <see
              cref="M:System.Data.DataTable.Clear" />
+
+            
 
             
 
@@ -8955,6 +10349,8 @@ public class A {
           <para
             >Occurs when a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -8984,8 +10380,12 @@ public class A {
 
             
 
+            
+
              is used to return this table from the parent <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -8998,8 +10398,12 @@ public class A {
 
             
 
+            
+
              (returned by the <see
              cref="P:System.Data.DataSet.Tables" />
+
+            
 
             
 
@@ -9013,6 +10417,8 @@ public class A {
           <para
             >Gets or sets the name of the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -9058,6 +10464,8 @@ public class A {
 
             
 
+            
+
              has been created using <see
              cref="M:System.Data.DataTable.NewRow" />
 
@@ -9065,8 +10473,12 @@ public class A {
 
             
 
+            
+
             . This event is fired before the invoked NewRow method returns. The new <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -9080,6 +10492,8 @@ public class A {
           <para
             >Occurs when a new <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -9108,6 +10522,8 @@ public class A {
 
             
 
+            
+
              and <see
              cref="P:System.Data.DataTable.DisplayExpression" />
 
@@ -9115,8 +10531,12 @@ public class A {
 
             
 
+            
+
              for the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -9135,8 +10555,12 @@ public class A {
 
             
 
+            
+
              and <see
              cref="P:System.Data.DataTable.DisplayExpression" />
+
+            
 
             
 
@@ -9155,8 +10579,12 @@ public class A {
 
             
 
+            
+
              and the <see
              cref="P:System.Data.DataTable.DisplayExpression" />
+
+            
 
             
 
@@ -9194,8 +10622,12 @@ public class A {
 
             
 
+            
+
              method provides a way to write either data only, or both data and schema from a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -9208,8 +10640,12 @@ public class A {
 
             
 
+            
+
              method writes only the schema. To write both data and schema, use one of the overloads that includes the <see
              cref="T:System.Data.XmlWriteMode" />
+
+            
 
             
 
@@ -9225,8 +10661,12 @@ public class A {
 
             
 
+            
+
              and <see
              cref="Overload:System.Data.DataTable.ReadXmlSchema" />
+
+            
 
             
 
@@ -9243,6 +10683,8 @@ public class A {
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -9250,8 +10692,12 @@ public class A {
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -9271,8 +10717,12 @@ public class A {
 
             
 
+            
+
              as XML using the specified <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -9283,6 +10733,8 @@ public class A {
         </summary>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9315,8 +10767,12 @@ public class A {
 
             
 
+            
+
              method provides a way to write either data only, or both data and schema from a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -9329,8 +10785,12 @@ public class A {
 
             
 
+            
+
              method writes only the schema. To write both data and schema, use one of the overloads that includes the <see
              cref="T:System.Data.XmlWriteMode" />
+
+            
 
             
 
@@ -9346,8 +10806,12 @@ public class A {
 
             
 
+            
+
              and <see
              cref="Overload:System.Data.DataTable.ReadXmlSchema" />
+
+            
 
             
 
@@ -9364,6 +10828,8 @@ public class A {
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -9371,8 +10837,12 @@ public class A {
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -9392,8 +10862,12 @@ public class A {
 
             
 
+            
+
              as XML using the specified <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -9409,8 +10883,12 @@ public class A {
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -9443,8 +10921,12 @@ public class A {
 
             
 
+            
+
              method provides a way to write either data only, or both data and schema from a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -9457,8 +10939,12 @@ public class A {
 
             
 
+            
+
              method writes only the schema. To write both data and schema, use one of the overloads that includes the <see
              cref="T:System.Data.XmlWriteMode" />
+
+            
 
             
 
@@ -9474,8 +10960,12 @@ public class A {
 
             
 
+            
+
              and <see
              cref="Overload:System.Data.DataTable.ReadXmlSchema" />
+
+            
 
             
 
@@ -9492,6 +10982,8 @@ public class A {
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -9499,8 +10991,12 @@ public class A {
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -9520,11 +11016,15 @@ public class A {
 
             
 
+            
+
              as XML using the specified file.</para
           >
         </summary>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9557,8 +11057,12 @@ public class A {
 
             
 
+            
+
              method provides a way to write either data only, or both data and schema from a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -9571,8 +11075,12 @@ public class A {
 
             
 
+            
+
              method writes only the schema. To write both data and schema, use one of the overloads that include the <see
              cref="T:System.Data.XmlWriteMode" />
+
+            
 
             
 
@@ -9588,8 +11096,12 @@ public class A {
 
             
 
+            
+
              and <see
              cref="Overload:System.Data.DataTable.ReadXmlSchema" />
+
+            
 
             
 
@@ -9606,6 +11118,8 @@ public class A {
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -9613,8 +11127,12 @@ public class A {
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -9634,8 +11152,12 @@ public class A {
 
             
 
+            
+
              as XML using the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -9651,8 +11173,12 @@ public class A {
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -9689,8 +11215,12 @@ public class A {
 
             
 
+            
+
              method to write the schema for a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -9707,11 +11237,15 @@ public class A {
 
             
 
+            
+
              method.</para
           >
           <para
             >Normally the WriteXml method writes the data only for the current table. To write the data for the current table and all of its descendant, related tables, call the method with the <paramref
              name="writeHierarchy" />
+
+            
 
             
 
@@ -9728,6 +11262,8 @@ public class A {
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -9735,8 +11271,12 @@ public class A {
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -9756,6 +11296,8 @@ public class A {
 
             
 
+            
+
              as XML using the specified <see
              cref="T:System.IO.Stream" />
 
@@ -9763,8 +11305,12 @@ public class A {
 
             
 
+            
+
             . To save the data for the table and all its descendants, set the <paramref
              name="writeHierarchy" />
+
+            
 
             
 
@@ -9780,10 +11326,14 @@ public class A {
 
           
 
+          
+
           The stream to which the data will be written. </param
         >
         <param name="writeHierarchy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9820,8 +11370,12 @@ public class A {
 
             
 
+            
+
              method provides a way to write either data only, or both data and schema from a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -9834,8 +11388,12 @@ public class A {
 
             
 
+            
+
              method writes only the schema. To write both data and schema, use one of the overloads that includes the <see
              cref="T:System.Data.XmlWriteMode" />
+
+            
 
             
 
@@ -9851,8 +11409,12 @@ public class A {
 
             
 
+            
+
              and <see
              cref="Overload:System.Data.DataTable.ReadXmlSchema" />
+
+            
 
             
 
@@ -9869,6 +11431,8 @@ public class A {
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -9876,8 +11440,12 @@ public class A {
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -9897,6 +11465,8 @@ public class A {
 
             
 
+            
+
              to the specified file using the specified <see
              cref="T:System.Data.XmlWriteMode" />
 
@@ -9904,8 +11474,12 @@ public class A {
 
             
 
+            
+
             . To write the schema, set the value for the <paramref
              name="mode" />
+
+            
 
             
 
@@ -9921,6 +11495,8 @@ public class A {
 
           
 
+          
+
           The stream to which the data will be written. </param
         >
         <param name="mode">
@@ -9930,8 +11506,12 @@ public class A {
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.XmlWriteMode" />
+
+          
 
           
 
@@ -9968,8 +11548,12 @@ public class A {
 
             
 
+            
+
              method provides a way to write either data only, or both data and schema from a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -9982,8 +11566,12 @@ public class A {
 
             
 
+            
+
              method writes only the schema. To write both data and schema, use one of the overloads that includes the <see
              cref="T:System.Data.XmlWriteMode" />
+
+            
 
             
 
@@ -9994,6 +11582,8 @@ public class A {
           <para
             >Normally the WriteXml method writes the data only for the current table. To write the data for the current table and all its descendant, related tables, call the method with the <paramref
              name="writeHierarchy" />
+
+            
 
             
 
@@ -10010,6 +11600,8 @@ public class A {
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -10017,8 +11609,12 @@ public class A {
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -10038,6 +11634,8 @@ public class A {
 
             
 
+            
+
              as XML using the specified <see
              cref="T:System.IO.TextWriter" />
 
@@ -10045,8 +11643,12 @@ public class A {
 
             
 
+            
+
             . To save the data for the table and all its descendants, set the <paramref
              name="writeHierarchy" />
+
+            
 
             
 
@@ -10062,8 +11664,12 @@ public class A {
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -10073,6 +11679,8 @@ public class A {
         >
         <param name="writeHierarchy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10109,8 +11717,12 @@ public class A {
 
             
 
+            
+
              method provides a way to write either data only, or both data and schema from a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -10123,8 +11735,12 @@ public class A {
 
             
 
+            
+
              method writes only the schema. To write both data and schema, use one of the overloads that includes the <see
              cref="T:System.Data.XmlWriteMode" />
+
+            
 
             
 
@@ -10140,8 +11756,12 @@ public class A {
 
             
 
+            
+
              and <see
              cref="Overload:System.Data.DataTable.ReadXmlSchema" />
+
+            
 
             
 
@@ -10158,6 +11778,8 @@ public class A {
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -10165,8 +11787,12 @@ public class A {
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -10186,8 +11812,12 @@ public class A {
 
             
 
+            
+
              using the specified <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -10200,8 +11830,12 @@ public class A {
 
             
 
+            
+
             . To write the schema, set the value for the <paramref
              name="mode" />
+
+            
 
             
 
@@ -10217,8 +11851,12 @@ public class A {
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -10233,8 +11871,12 @@ public class A {
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.XmlWriteMode" />
+
+          
 
           
 
@@ -10271,8 +11913,12 @@ public class A {
 
             
 
+            
+
              method provides a way to write either data only, or both data and schema from a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -10285,8 +11931,12 @@ public class A {
 
             
 
+            
+
              method writes only the schema. To write both data and schema, use one of the overloads that includes the <see
              cref="T:System.Data.XmlWriteMode" />
+
+            
 
             
 
@@ -10302,8 +11952,12 @@ public class A {
 
             
 
+            
+
              and <see
              cref="Overload:System.Data.DataTable.ReadXmlSchema" />
+
+            
 
             
 
@@ -10314,6 +11968,8 @@ public class A {
           <para
             >Normally the WriteXml method writes the data only for the current table. To write the data for the current table and all of its descendant, related tables, call the method with the <paramref
              name="writeHierarchy" />
+
+            
 
             
 
@@ -10330,6 +11986,8 @@ public class A {
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -10337,8 +11995,12 @@ public class A {
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -10358,8 +12020,12 @@ public class A {
 
             
 
+            
+
              as XML using the specified file. To save the data for the table and all its descendants, set the <paramref
              name="writeHierarchy" />
+
+            
 
             
 
@@ -10375,10 +12041,14 @@ public class A {
 
           
 
+          
+
           The file to which to write the XML data.</param
         >
         <param name="writeHierarchy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10415,8 +12085,12 @@ public class A {
 
             
 
+            
+
              method provides a way to write either data only, or both data and schema from a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -10429,8 +12103,12 @@ public class A {
 
             
 
+            
+
              method writes only the schema. To write both data and schema, use one of the overloads that include the <see
              cref="T:System.Data.XmlWriteMode" />
+
+            
 
             
 
@@ -10446,8 +12124,12 @@ public class A {
 
             
 
+            
+
              and <see
              cref="Overload:System.Data.DataTable.ReadXmlSchema" />
+
+            
 
             
 
@@ -10464,6 +12146,8 @@ public class A {
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -10471,8 +12155,12 @@ public class A {
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -10492,6 +12180,8 @@ public class A {
 
             
 
+            
+
              using the specified file and <see
              cref="T:System.Data.XmlWriteMode" />
 
@@ -10499,8 +12189,12 @@ public class A {
 
             
 
+            
+
             . To write the schema, set the value for the <paramref
              name="mode" />
+
+            
 
             
 
@@ -10516,6 +12210,8 @@ public class A {
 
           
 
+          
+
           The name of the file to which the data will be written. </param
         >
         <param name="mode">
@@ -10525,8 +12221,12 @@ public class A {
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.XmlWriteMode" />
+
+          
 
           
 
@@ -10563,8 +12263,12 @@ public class A {
 
             
 
+            
+
              method provides a way to write either data only, or both data and schema from a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -10577,8 +12281,12 @@ public class A {
 
             
 
+            
+
              method writes only the schema. To write both data and schema, use one of the overloads that include the <see
              cref="T:System.Data.XmlWriteMode" />
+
+            
 
             
 
@@ -10594,8 +12302,12 @@ public class A {
 
             
 
+            
+
              and <see
              cref="Overload:System.Data.DataTable.ReadXmlSchema" />
+
+            
 
             
 
@@ -10606,6 +12318,8 @@ public class A {
           <para
             >Normally the WriteXml method writes the data only for the current table. To write the data for the current table and its entire descendant, related tables, call the method with the <paramref
              name="writeHierarchy" />
+
+            
 
             
 
@@ -10622,6 +12336,8 @@ public class A {
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -10629,8 +12345,12 @@ public class A {
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -10650,8 +12370,12 @@ public class A {
 
             
 
+            
+
              as XML using the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -10667,8 +12391,12 @@ public class A {
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -10678,6 +12406,8 @@ public class A {
         >
         <param name="writeHierarchy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10714,8 +12444,12 @@ public class A {
 
             
 
+            
+
              method provides a way to write either data only, or both data and schema from a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -10728,8 +12462,12 @@ public class A {
 
             
 
+            
+
              method writes only the schema. To write both data and schema, use one of the overloads that include the <see
              cref="T:System.Data.XmlWriteMode" />
+
+            
 
             
 
@@ -10745,8 +12483,12 @@ public class A {
 
             
 
+            
+
              and <see
              cref="Overload:System.Data.DataTable.ReadXmlSchema" />
+
+            
 
             
 
@@ -10763,6 +12505,8 @@ public class A {
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -10770,8 +12514,12 @@ public class A {
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -10791,8 +12539,12 @@ public class A {
 
             
 
+            
+
              using the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -10805,8 +12557,12 @@ public class A {
 
             
 
+            
+
             . To write the schema, set the value for the <paramref
              name="mode" />
+
+            
 
             
 
@@ -10822,8 +12578,12 @@ public class A {
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -10838,8 +12598,12 @@ public class A {
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.XmlWriteMode" />
+
+          
 
           
 
@@ -10877,8 +12641,12 @@ public class A {
 
             
 
+            
+
              method provides a way to write either data only, or both data and schema from a DataTable into an XML document, whereas the <see
              cref="Overload:System.Data.DataTable.WriteXmlSchema" />
+
+            
 
             
 
@@ -10894,8 +12662,12 @@ public class A {
 
             
 
+            
+
              and <see
              cref="Overload:System.Data.DataTable.ReadXmlSchema" />
+
+            
 
             
 
@@ -10912,8 +12684,12 @@ public class A {
 
             
 
+            
+
              and <see
              cref="Overload:System.Data.DataTable.ReadXmlSchema" />
+
+            
 
             
 
@@ -10924,6 +12700,8 @@ public class A {
           <para
             >Normally the WriteXml method writes the data only for the current table. To write the data for the current table and all of its descendant, related tables, call the method with the <paramref
              name="writeHierarchy" />
+
+            
 
             
 
@@ -10940,6 +12718,8 @@ public class A {
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -10947,8 +12727,12 @@ public class A {
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -10968,8 +12752,12 @@ public class A {
 
             
 
+            
+
              to the specified file using the specified <see
              cref="T:System.Data.XmlWriteMode" />
+
+            
 
             
 
@@ -10982,8 +12770,12 @@ public class A {
 
             
 
+            
+
              parameter to WriteSchema. To save the data for the table and all its descendants, set the <paramref
              name="writeHierarchy" />
+
+            
 
             
 
@@ -10999,10 +12791,14 @@ public class A {
 
           
 
+          
+
           The stream to which the data will be written. </param
         >
         <param name="mode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11015,10 +12811,14 @@ public class A {
 
           
 
+          
+
            values. </param
         >
         <param name="writeHierarchy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11056,8 +12856,12 @@ public class A {
 
             
 
+            
+
              method provides a way to write either data only, or both data and schema from a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -11070,8 +12874,12 @@ public class A {
 
             
 
+            
+
              method writes only the schema. To write both data and schema, use one of the overloads that includes the <see
              cref="T:System.Data.XmlWriteMode" />
+
+            
 
             
 
@@ -11087,8 +12895,12 @@ public class A {
 
             
 
+            
+
              and <see
              cref="Overload:System.Data.DataTable.ReadXmlSchema" />
+
+            
 
             
 
@@ -11104,8 +12916,12 @@ public class A {
 
             
 
+            
+
              method provides a way to write either data only, or both data and schema from a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -11118,8 +12934,12 @@ public class A {
 
             
 
+            
+
              method writes only the schema. To write both data and schema, use one of the overloads that includes the <see
              cref="T:System.Data.XmlWriteMode" />
+
+            
 
             
 
@@ -11135,8 +12955,12 @@ public class A {
 
             
 
+            
+
              and <see
              cref="Overload:System.Data.DataTable.ReadXmlSchema" />
+
+            
 
             
 
@@ -11147,6 +12971,8 @@ public class A {
           <para
             >Normally the WriteXml method writes the data only for the current table. To write the data for the current table and all of its descendant, related tables, call the method with the <paramref
              name="writeHierarchy" />
+
+            
 
             
 
@@ -11163,6 +12989,8 @@ public class A {
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -11170,8 +12998,12 @@ public class A {
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -11191,8 +13023,12 @@ public class A {
 
             
 
+            
+
              using the specified <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -11205,6 +13041,8 @@ public class A {
 
             
 
+            
+
             . To write the schema, set the value for the <paramref
              name="mode" />
 
@@ -11212,8 +13050,12 @@ public class A {
 
             
 
+            
+
              parameter to WriteSchema. To save the data for the table and all its descendants, set the <paramref
              name="writeHierarchy" />
+
+            
 
             
 
@@ -11229,8 +13071,12 @@ public class A {
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -11245,8 +13091,12 @@ public class A {
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.XmlWriteMode" />
+
+          
 
           
 
@@ -11256,6 +13106,8 @@ public class A {
         >
         <param name="writeHierarchy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11293,8 +13145,12 @@ public class A {
 
             
 
+            
+
              method provides a way to write either data only, or both data and schema from a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -11307,8 +13163,12 @@ public class A {
 
             
 
+            
+
              method writes only the schema. To write both data and schema, use one of the overloads that include the <see
              cref="T:System.Data.XmlWriteMode" />
+
+            
 
             
 
@@ -11324,8 +13184,12 @@ public class A {
 
             
 
+            
+
              and <see
              cref="Overload:System.Data.DataTable.ReadXmlSchema" />
+
+            
 
             
 
@@ -11341,8 +13205,12 @@ public class A {
 
             
 
+            
+
              method provides a way to write either data only, or both data and schema from a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -11355,8 +13223,12 @@ public class A {
 
             
 
+            
+
              method writes only the schema. To write both data and schema, use one of the overloads that include the <see
              cref="T:System.Data.XmlWriteMode" />
+
+            
 
             
 
@@ -11372,8 +13244,12 @@ public class A {
 
             
 
+            
+
              and <see
              cref="Overload:System.Data.DataTable.ReadXmlSchema" />
+
+            
 
             
 
@@ -11384,6 +13260,8 @@ public class A {
           <para
             >Normally the WriteXml method writes the data only for the current table. To write the data for the current table and all descendant, related tables, call the method with the <paramref
              name="writeHierarchy" />
+
+            
 
             
 
@@ -11400,6 +13278,8 @@ public class A {
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -11407,8 +13287,12 @@ public class A {
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -11428,8 +13312,12 @@ public class A {
 
             
 
+            
+
              using the specified file and <see
              cref="T:System.Data.XmlWriteMode" />
+
+            
 
             
 
@@ -11442,8 +13330,12 @@ public class A {
 
             
 
+            
+
              parameter to WriteSchema. To save the data for the table and all its descendants, set the <paramref
              name="writeHierarchy" />
+
+            
 
             
 
@@ -11459,10 +13351,14 @@ public class A {
 
           
 
+          
+
           The name of the file to which the data will be written. </param
         >
         <param name="mode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11475,10 +13371,14 @@ public class A {
 
           
 
+          
+
            values. </param
         >
         <param name="writeHierarchy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11516,8 +13416,12 @@ public class A {
 
             
 
+            
+
              method provides a way to write either data only, or both data and schema from a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -11530,8 +13434,12 @@ public class A {
 
             
 
+            
+
              method writes only the schema. To write both data and schema, use one of the overloads that include the <see
              cref="T:System.Data.XmlWriteMode" />
+
+            
 
             
 
@@ -11547,8 +13455,12 @@ public class A {
 
             
 
+            
+
              and <see
              cref="Overload:System.Data.DataTable.ReadXmlSchema" />
+
+            
 
             
 
@@ -11559,6 +13471,8 @@ public class A {
           <para
             >Normally the WriteXml method writes the data only for the current table. To write the data for the current table and its entire descendant, related tables, call the method with the <paramref
              name="writeHierarchy" />
+
+            
 
             
 
@@ -11575,6 +13489,8 @@ public class A {
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -11582,8 +13498,12 @@ public class A {
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -11603,8 +13523,12 @@ public class A {
 
             
 
+            
+
              using the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -11617,6 +13541,8 @@ public class A {
 
             
 
+            
+
             . To write the schema, set the value for the <paramref
              name="mode" />
 
@@ -11624,8 +13550,12 @@ public class A {
 
             
 
+            
+
              parameter to WriteSchema. To save the data for the table and all its descendants, set the <paramref
              name="writeHierarchy" />
+
+            
 
             
 
@@ -11641,8 +13571,12 @@ public class A {
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -11657,8 +13591,12 @@ public class A {
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.XmlWriteMode" />
+
+          
 
           
 
@@ -11668,6 +13606,8 @@ public class A {
         >
         <param name="writeHierarchy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11703,8 +13643,12 @@ public class A {
 
             
 
+            
+
              method to write the schema for a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -11716,6 +13660,8 @@ public class A {
           <para
             >To write the data to an XML document, use the <see
              cref="Overload:System.Data.DataTable.WriteXml" />
+
+            
 
             
 
@@ -11734,11 +13680,15 @@ public class A {
 
             
 
+            
+
              as an XML schema to the specified stream.</para
           >
         </summary>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11774,8 +13724,12 @@ public class A {
 
             
 
+            
+
              method to write the schema for a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -11787,6 +13741,8 @@ public class A {
           <para
             >To write the data to an XML document, use the <see
              cref="Overload:System.Data.DataTable.WriteXml" />
+
+            
 
             
 
@@ -11805,8 +13761,12 @@ public class A {
 
             
 
+            
+
              as an XML schema using the specified <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -11822,8 +13782,12 @@ public class A {
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -11856,8 +13820,12 @@ public class A {
 
             
 
+            
+
              method to write the schema for a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -11869,6 +13837,8 @@ public class A {
           <para
             >To write the data to an XML document, use the <see
              cref="Overload:System.Data.DataTable.WriteXml" />
+
+            
 
             
 
@@ -11887,11 +13857,15 @@ public class A {
 
             
 
+            
+
              as an XML schema to the specified file.</para
           >
         </summary>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11927,8 +13901,12 @@ public class A {
 
             
 
+            
+
              method to write the schema for a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -11940,6 +13918,8 @@ public class A {
           <para
             >To write the data to an XML document, use the <see
              cref="Overload:System.Data.DataTable.WriteXml" />
+
+            
 
             
 
@@ -11958,8 +13938,12 @@ public class A {
 
             
 
+            
+
              as an XML schema using the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -11975,8 +13959,12 @@ public class A {
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -12013,8 +14001,12 @@ public class A {
 
             
 
+            
+
              method to write the schema for a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -12031,11 +14023,15 @@ public class A {
 
             
 
+            
+
              method.</para
           >
           <para
             >Normally the WriteXmlSchema method writes the schema only for the current table. To write the schema for the current table and its entire descendant, related tables, call the method with the <paramref
              name="writeHierarchy" />
+
+            
 
             
 
@@ -12054,8 +14050,12 @@ public class A {
 
             
 
+            
+
              as an XML schema to the specified stream. To save the schema for the table and all its descendants, set the <paramref
              name="writeHierarchy" />
+
+            
 
             
 
@@ -12071,10 +14071,14 @@ public class A {
 
           
 
+          
+
           The stream to which the XML schema will be written. </param
         >
         <param name="writeHierarchy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12111,8 +14115,12 @@ public class A {
 
             
 
+            
+
              method to write the schema for a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -12129,11 +14137,15 @@ public class A {
 
             
 
+            
+
              method.</para
           >
           <para
             >Normally the WriteXmlSchema method writes the schema only for the current table. To write the schema for the current table and its entire descendant, related tables, call the method with the <paramref
              name="writeHierarchy" />
+
+            
 
             
 
@@ -12152,6 +14164,8 @@ public class A {
 
             
 
+            
+
              as an XML schema using the specified <see
              cref="T:System.IO.TextWriter" />
 
@@ -12159,8 +14173,12 @@ public class A {
 
             
 
+            
+
             . To save the schema for the table and all its descendants, set the <paramref
              name="writeHierarchy" />
+
+            
 
             
 
@@ -12176,8 +14194,12 @@ public class A {
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -12187,6 +14209,8 @@ public class A {
         >
         <param name="writeHierarchy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12223,8 +14247,12 @@ public class A {
 
             
 
+            
+
              method to write the schema for a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -12241,11 +14269,15 @@ public class A {
 
             
 
+            
+
              method.</para
           >
           <para
             >Normally the WriteXmlSchema method writes the schema only for the current table. To write the schema for the current table and its entire descendant, related tables, call the method with the <paramref
              name="writeHierarchy" />
+
+            
 
             
 
@@ -12264,8 +14296,12 @@ public class A {
 
             
 
+            
+
              as an XML schema to the specified file. To save the schema for the table and all its descendants, set the <paramref
              name="writeHierarchy" />
+
+            
 
             
 
@@ -12281,10 +14317,14 @@ public class A {
 
           
 
+          
+
           The name of the file to use. </param
         >
         <param name="writeHierarchy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12321,8 +14361,12 @@ public class A {
 
             
 
+            
+
              method to write the schema for a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -12339,11 +14383,15 @@ public class A {
 
             
 
+            
+
              method.</para
           >
           <para
             >Normally the WriteXmlSchema method writes the schema only for the current table. To write the schema for the current table and its entire descendant, related tables, call the method with the <paramref
              name="writeHierarchy" />
+
+            
 
             
 
@@ -12362,6 +14410,8 @@ public class A {
 
             
 
+            
+
              as an XML schema using the specified <see
              cref="T:System.Xml.XmlWriter" />
 
@@ -12369,8 +14419,12 @@ public class A {
 
             
 
+            
+
             . To save the schema for the table and all its descendants, set the <paramref
              name="writeHierarchy" />
+
+            
 
             
 
@@ -12386,8 +14440,12 @@ public class A {
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -12397,6 +14455,8 @@ public class A {
         >
         <param name="writeHierarchy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

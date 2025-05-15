@@ -33,6 +33,8 @@
 
         
 
+        
+
          and <see
          cref="M:System.Array.BinarySearch(System.Array,System.Object)" />
 
@@ -40,8 +42,12 @@
 
         
 
+        
+
          methods. It provides a way to customize the sort order of a collection. See the <see
          cref="M:System.Collections.IComparer.Compare(System.Object,System.Object)" />
+
+        
 
         
 
@@ -57,8 +63,12 @@
 
         
 
+        
+
          class. For the generic version of this interface, see <see
          cref="T:System.Collections.Generic.IComparer`1" />
+
+        
 
         
 
@@ -107,11 +117,15 @@
 
             
 
+            
+
              method of one of the parameters.</para
           >
           <para
             >Comparing null with any type is allowed and does not generate an exception when using <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -134,8 +148,12 @@
 
             
 
+            
+
              and <paramref
              name="y" />
+
+            
 
             
 
@@ -166,8 +184,12 @@
 
                   
 
+                  
+
                    is less than <paramref
                    name="y" />
+
+                  
 
                   
 
@@ -189,8 +211,12 @@
 
                   
 
+                  
+
                    equals <paramref
                    name="y" />
+
+                  
 
                   
 
@@ -212,8 +238,12 @@
 
                   
 
+                  
+
                    is greater than <paramref
                    name="y" />
+
+                  
 
                   
 
@@ -232,10 +262,14 @@
 
           
 
+          
+
           The first object to compare. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

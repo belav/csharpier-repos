@@ -36,6 +36,8 @@
 
         
 
+        
+
         . For more information about Web Services Description Language (WSDL), see the specification at http://www.w3.org/TR/wsdl/.</para
       >
     </remarks>
@@ -49,8 +51,12 @@
 
         
 
+        
+
         , specifying the concrete MIME type for the <see
          cref="T:System.Web.Services.Description.MessagePart" />
+
+        
 
         
 
@@ -73,6 +79,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Description.MimePart" />
+
+            
 
             
 
@@ -108,6 +116,8 @@
 
             
 
+            
+
             . Members can be of the following types: </para
           >
           <list type="bullet">
@@ -135,6 +145,8 @@
 
             
 
+            
+
              with which the MimePart is associated. If this collection has no members, the XML Web service will fail to generate a Web Services Description Language (WSDL) file when it is requested. For more information about how MIME extends WSDL, see the specification at http://www.w3.org/TR/wsdl/.</para
           >
         </remarks>
@@ -148,8 +160,12 @@
 
             
 
+            
+
              of which the <see
              cref="T:System.Web.Services.Description.MimePart" />
+
+            
 
             
 

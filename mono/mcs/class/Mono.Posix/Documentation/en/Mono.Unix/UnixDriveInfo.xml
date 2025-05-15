@@ -26,6 +26,8 @@
 
         
 
+        
+
          class presents
         information about a Unix mount point or special file.  It allows basic
         querying about the filesystem
@@ -42,9 +44,13 @@
 
             
 
+            
+
              and
           <see
              cref="P:Mono.Unix.UnixDriveInfo.TotalFreeSpace" />
+
+            
 
             
 
@@ -64,9 +70,13 @@
 
             
 
+            
+
             , 
           visible through <c
             >/etc/fstab</c>
+
+            
 
             
 
@@ -91,6 +101,8 @@
 
         
 
+        
+
          valid at
         some point in time, <i
         >or</i>
@@ -99,9 +111,13 @@
 
         
 
+        
+
          an 
         <see
          cref="T:System.InvalidOperationException" />
+
+        
 
         
 
@@ -149,6 +165,8 @@
 
           
 
+          
+
            containing the Unix mount point to
           get information about.
         </param
@@ -156,6 +174,8 @@
         <summary>
           Creates a <see
            cref="T:Mono.Unix.UnixDriveInfo" />
+
+          
 
           
 
@@ -173,6 +193,8 @@
 
           
 
+          
+
            isn't a valid mount point.
         </exception
         >
@@ -183,8 +205,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -218,6 +244,8 @@
 
           
 
+          
+
            containing the total available
           free space on the drive.
         </value
@@ -228,8 +256,9 @@
             to write to (in the absense of file system quotas which may
             further limit how much disk space users can fill).  The drive may
             have some space reserved for the super-user (<c
+            >root</c>
+
             
->root</c>
 
             
 
@@ -241,6 +270,8 @@
           <para>
             Use <see
              cref="P:Mono.Unix.UnixDriveInfo.TotalFreeSpace" />
+
+            
 
             
 
@@ -280,12 +311,16 @@
 
           
 
+          
+
            volume.
         </summary
         >
         <value>
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -324,6 +359,8 @@
 
           
 
+          
+
            specifying which type of
           drive this mount point is.
         </value
@@ -332,6 +369,8 @@
           Currently, this always returns 
           <see
            cref="F:Mono.Unix.UnixDriveType.Unknown" />
+
+          
 
           
 
@@ -370,6 +409,8 @@
 
           
 
+          
+
           .</summary
         >
         <returns>
@@ -380,9 +421,13 @@
 
           
 
+          
+
            array containing all
           drives listed in <c
           >/etc/fstab</c>
+
+          
 
           
 
@@ -400,8 +445,12 @@
 
             
 
+            
+
              reads <c
             >/etc/fstab</c>
+
+            
 
             
 
@@ -416,9 +465,13 @@
 
             
 
+            
+
              APIs, which may or may 
             not actually read <c
             >/etc/fstab</c>
+
+            
 
             
 
@@ -436,10 +489,14 @@
 
             
 
+            
+
              entries which do not
             correspond to actual mount points.  
             <see
              cref="F:Mono.Unix.Native.Fstab.fs_file" />
+
+            
 
             
 
@@ -454,6 +511,8 @@
           There was an error calling 
           <see
            cref="M:Mono.Unix.Native.Syscall.setfsent" />
+
+          
 
           
 
@@ -497,9 +556,13 @@
 
           
 
+          
+
            containing the "special file"
           (block device, generally the first field in <c
           >/etc/fstab</c>
+
+          
 
           
 
@@ -516,6 +579,8 @@
 
           
 
+          
+
            instance
           containing information about the specified block device name.
         </summary
@@ -523,6 +588,8 @@
         <returns>
           A <see
            cref="T:Mono.Unix.UnixDriveInfo" />
+
+          
 
           
 
@@ -557,6 +624,8 @@
 
           
 
+          
+
            indicating whether the
           specified mount point is connected and queryable.
         </summary
@@ -564,6 +633,8 @@
         <value>
           A <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -585,10 +656,14 @@
 
             
 
+            
+
             , then the other
             properties should not generate
             <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -622,6 +697,8 @@
 
           
 
+          
+
            containing the maximum number of
           bytes that may make up a filename.  This value varies from
           filesystem to filesystem.
@@ -638,6 +715,8 @@
 
             
 
+            
+
              is a UTF-16 string encoding, each
             character may require more than one byte to store in the
             filesystem.  Consequently the maximum filename length can
@@ -648,9 +727,13 @@
 
             
 
+            
+
              be directly compared against
             <see
              cref="P:System.String.Length" />
+
+            
 
             
 
@@ -689,6 +772,8 @@
 
           
 
+          
+
            containinig the mount point of the
           Unix volume.
         </value
@@ -720,6 +805,8 @@
         <value>
           A <see
            cref="T:Mono.Unix.UnixDirectoryInfo" />
+
+          
 
           
 
@@ -777,6 +864,8 @@
 
           
 
+          
+
            containing the total free space on
           the Unix volume.
         </value
@@ -787,8 +876,9 @@
             volume, and may include space the normal users are not able to
             write to, either because of disk quotas or because space is
             reserved for the super-user (<c
+            >root</c>
+
             
->root</c>
 
             
 
@@ -800,6 +890,8 @@
           <para>
             Use <see
              cref="P:Mono.Unix.UnixDriveInfo.AvailableFreeSpace" />
+
+            
 
             
 
@@ -840,6 +932,8 @@
 
           
 
+          
+
            containing the total size of the
           volume.
         </value
@@ -869,6 +963,8 @@
         <value>
           A <see
            cref="T:System.String" />
+
+          
 
           
 

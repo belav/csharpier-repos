@@ -38,8 +38,12 @@
 
         
 
+        
+
          instances may be created in a variety of ways. The most common approach is by using the task's <see
          cref="P:System.Threading.Tasks.Task`1.Factory" />
+
+        
 
         
 
@@ -52,6 +56,8 @@
 
         
 
+        
+
          instance that can be used to create tasks for several purposes. For example, to create a <see
          cref="T:System.Threading.Tasks.Task`1" />
 
@@ -59,8 +65,12 @@
 
         
 
+        
+
          that runs a function, the factory's <see
          cref="M:System.Threading.Tasks.TaskFactory.StartNew(System.Action,System.Threading.CancellationToken)" />
+
+        
 
         
 
@@ -85,6 +95,8 @@ Dim t = Task(Of Integer).Factory.StartNew(Function() GenerateResult()) </code>
 
         
 
+        
+
         .</para
       >
       <para
@@ -95,8 +107,12 @@ Dim t = Task(Of Integer).Factory.StartNew(Function() GenerateResult()) </code>
 
         
 
+        
+
          class also provides constructors that initialize the task but that do not schedule it for execution. For performance reasons, the StartNew method should be the preferred mechanism for creating and scheduling computational tasks, but for scenarios where creation and scheduling must be separated, the constructors may be used, and the task's <see
          cref="M:System.Threading.Tasks.Task.Start" />
+
+        
 
         
 
@@ -339,6 +355,8 @@ Dim t = Task(Of Integer).Factory.StartNew(Function() GenerateResult()) </code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -348,6 +366,8 @@ Dim t = Task(Of Integer).Factory.StartNew(Function() GenerateResult()) </code>
         </returns>
         <param name="continueOnCapturedContext">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1097,8 +1117,12 @@ Dim t = Task(Of Integer).Factory.StartNew(Function() GenerateResult()) </code>
 
             
 
+            
+
              is a default instance of <see
              cref="T:System.Threading.Tasks.TaskFactory`1" />
+
+            
 
             
 
@@ -1112,6 +1136,8 @@ Dim t = Task(Of Integer).Factory.StartNew(Function() GenerateResult()) </code>
           <para
             >Provides access to factory methods for creating <see
              cref="T:System.Threading.Tasks.Task`1" />
+
+            
 
             
 
@@ -1154,6 +1180,8 @@ Dim t = Task(Of Integer).Factory.StartNew(Function() GenerateResult()) </code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1190,6 +1218,8 @@ Dim t = Task(Of Integer).Factory.StartNew(Function() GenerateResult()) </code>
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1198,6 +1228,8 @@ Dim t = Task(Of Integer).Factory.StartNew(Function() GenerateResult()) </code>
           <para
             >Gets the result value of this <see
              cref="T:System.Threading.Tasks.Task`1" />
+
+            
 
             
 

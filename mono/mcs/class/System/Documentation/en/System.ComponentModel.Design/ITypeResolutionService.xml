@@ -64,6 +64,8 @@
 
           
 
+          
+
           The name of the assembly to retrieve. </param
         >
       </Docs>
@@ -107,10 +109,14 @@
 
           
 
+          
+
           The name of the assembly to retrieve. </param
         >
         <param name="throwOnError">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -158,6 +164,8 @@
 
           
 
+          
+
           The name of the assembly. </param
         >
       </Docs>
@@ -196,11 +204,15 @@
 
             
 
+            
+
              that corresponds to the specified name, or null if no type can be found.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -243,6 +255,8 @@
 
             
 
+            
+
              parameter is true, this will throw an exception.</para
           >
         </remarks>
@@ -260,6 +274,8 @@
 
             
 
+            
+
              that corresponds to the specified name, or null if no type can be found.</para
           >
         </returns>
@@ -270,10 +286,14 @@
 
           
 
+          
+
           The name of the type. If the type name is not a fully qualified name that indicates an assembly, this service will search its internal set of referenced assemblies. </param
         >
         <param name="throwOnError">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -317,6 +337,8 @@
 
             
 
+            
+
              parameter is true, this will throw an exception.</para
           >
         </remarks>
@@ -334,11 +356,15 @@
 
             
 
+            
+
              that corresponds to the specified name, or null if no type can be found.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -353,10 +379,14 @@
 
           
 
+          
+
           true if this method should throw an exception if the assembly cannot be located; otherwise, false, and this method returns null if the assembly cannot be located. </param
         >
         <param name="ignoreCase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -403,8 +433,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Reflection.AssemblyName" />
+
+          
 
           
 

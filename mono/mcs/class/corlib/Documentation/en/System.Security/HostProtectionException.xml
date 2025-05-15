@@ -31,6 +31,8 @@
 
         
 
+        
+
          attribute is used to determine if a type or member can be loaded, based on the host’s protection preferences established when the common language runtime is started. If a type or member with an active <see
          cref="T:System.Security.Permissions.HostProtectionAttribute" />
 
@@ -38,8 +40,12 @@
 
         
 
+        
+
          is called, a link demand occurs for that protection attribute. If the caller does not meet the demand for host protection, a <see
          cref="T:System.Security.HostProtectionException" />
+
+        
 
         
 
@@ -56,8 +62,12 @@
 
           
 
+          
+
            is not a permission, even though it is the target of a link demand. Because a <see
            cref="T:System.Security.HostProtectionException" />
+
+          
 
           
 
@@ -92,6 +102,8 @@
           <para
             >The following table shows the initial property values for an instance of the <see
              cref="T:System.Security.HostProtectionException" />
+
+            
 
             
 
@@ -146,6 +158,8 @@
 
             
 
+            
+
              class with default values. </para
           >
         </summary>
@@ -177,6 +191,8 @@
 
             
 
+            
+
              parameter should be understandable to the user. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
           >
         </remarks>
@@ -190,11 +206,15 @@
 
             
 
+            
+
              class with a specified error message. </para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -238,6 +258,8 @@
 
             
 
+            
+
              class using the provided serialization information and streaming context.</para
           >
         </summary>
@@ -248,10 +270,14 @@
 
           
 
+          
+
           The object that holds the serialized object data.</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -291,6 +317,8 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
 
@@ -298,8 +326,12 @@
 
             
 
+            
+
              property returns the same value that is passed into the constructor, or null if the <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -318,11 +350,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception. </para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -337,8 +373,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 
@@ -385,8 +425,12 @@
 
             
 
+            
+
              parameter specifies the demanded host protection categories that caused the exception to be thrown. For example, suppose that a method has a <see
              cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+            
 
             
 
@@ -399,8 +443,12 @@
 
             
 
+            
+
              performs a link demand for shared state. If the host has set shared state as a prohibited category, then a <see
              cref="T:System.Security.HostProtectionException" />
+
+            
 
             
 
@@ -413,8 +461,12 @@
 
             
 
+            
+
              property value of <see
              cref="F:System.Security.Permissions.HostProtectionResource.SharedState" />
+
+            
 
             
 
@@ -433,11 +485,15 @@
 
             
 
+            
+
              class with a specified error message, the protected host resources, and the host resources that caused the exception to be thrown.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -452,10 +508,14 @@
 
           
 
+          
+
           A bitwise combination of the enumeration values that specify the host resources that are inaccessible to partially trusted code.</param
         >
         <param name="demandedResources">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -495,8 +555,12 @@
 
             
 
+            
+
              attribute that indicates that the method exposes shared state. When the method is called, the <see
              cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+            
 
             
 
@@ -509,6 +573,8 @@
 
             
 
+            
+
              is raised, and the value of the <see
              cref="P:System.Security.HostProtectionException.DemandedResources" />
 
@@ -516,8 +582,12 @@
 
             
 
+            
+
              property is <see
              cref="F:System.Security.Permissions.HostProtectionResource.SharedState" />
+
+            
 
             
 
@@ -565,6 +635,8 @@
 
             
 
+            
+
              method sets a <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
@@ -572,8 +644,12 @@
 
             
 
+            
+
              object with all the exception object data targeted for serialization. During deserialization, the exception is reconstructed from the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -592,6 +668,8 @@
 
             
 
+            
+
              object with information about the host protection exception.</para
           >
         </summary>
@@ -602,10 +680,14 @@
 
           
 
+          
+
           The serialized object data about the exception being thrown.</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -675,6 +757,8 @@
           <para
             >A string representation of the current <see
              cref="T:System.Security.HostProtectionException" />
+
+            
 
             
 

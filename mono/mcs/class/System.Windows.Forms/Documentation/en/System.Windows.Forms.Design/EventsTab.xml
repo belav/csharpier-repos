@@ -25,6 +25,8 @@
 
         
 
+        
+
          that can display events for selection and linking.</para
       >
     </summary>
@@ -48,6 +50,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -58,8 +62,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IServiceProvider" />
+
+          
 
           
 
@@ -94,6 +102,8 @@
         </returns>
         <param name="extendee">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -135,11 +145,15 @@
 
             
 
+            
+
              indicating the default property.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -185,8 +199,12 @@
 
             
 
+            
+
              that contains the properties. This will be an empty <see
              cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+
+            
 
             
 
@@ -202,6 +220,8 @@
 
           
 
+          
+
           The component to retrieve the properties of. </param
         >
         <param name="attributes">
@@ -211,8 +231,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -256,8 +280,12 @@
 
             
 
+            
+
              that contains the properties. This will be an empty <see
              cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+
+            
 
             
 
@@ -273,8 +301,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -289,6 +321,8 @@
 
           
 
+          
+
           The component to retrieve the properties of. </param
         >
         <param name="attributes">
@@ -298,8 +332,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Attribute" />
+
+          
 
           
 

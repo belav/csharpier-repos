@@ -34,6 +34,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -44,8 +46,12 @@
 
         
 
+        
+
          event occurs only when you call the <see
          cref="M:System.Xml.Serialization.XmlSerializer.Deserialize(System.IO.Stream)" />
+
+        
 
         
 
@@ -59,6 +65,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Xml.Serialization.XmlSerializer.UnknownAttribute" />
+
+        
 
         
 

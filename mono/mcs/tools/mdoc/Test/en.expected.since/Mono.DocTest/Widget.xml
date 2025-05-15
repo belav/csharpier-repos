@@ -95,8 +95,7 @@
           <AttributeName>add: Mono.DocTest.Doc("Del add accessor")</AttributeName>
         </Attribute>
         <Attribute>
-          <AttributeName
->remove: Mono.DocTest.Doc("Del remove accessor")</AttributeName>
+          <AttributeName>remove: Mono.DocTest.Doc("Del remove accessor")</AttributeName>
         </Attribute>
       </Attributes>
       <ReturnValue>

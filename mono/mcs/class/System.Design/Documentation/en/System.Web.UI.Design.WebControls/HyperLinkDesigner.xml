@@ -24,11 +24,15 @@
 
         
 
+        
+
          control creates a link for the client browser to navigate to another Web page.</para
       >
       <para
         >In a visual designer, when you switch from Source to Design view, the markup source code that describes a <see
          cref="T:System.Web.UI.WebControls.HyperLink" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          class provides design-time support for the <see
          cref="T:System.Web.UI.WebControls.HyperLink" />
+
+        
 
         
 
@@ -58,6 +66,8 @@
 
         
 
+        
+
          method returns the markup that is used to render the associated <see
          cref="T:System.Web.UI.WebControls.HyperLink" />
 
@@ -65,8 +75,12 @@
 
         
 
+        
+
          control at design time. The <see
          cref="M:System.Web.UI.Design.WebControls.HyperLinkDesigner.OnComponentChanged(System.Object,System.ComponentModel.Design.ComponentChangedEventArgs)" />
+
+        
 
         
 
@@ -80,6 +94,8 @@
       <para
         >Provides design-time support in a visual designer for the <see
          cref="T:System.Web.UI.WebControls.HyperLink" />
+
+        
 
         
 
@@ -105,6 +121,8 @@
 
             
 
+            
+
              class when it creates the associated <see
              cref="T:System.Web.UI.WebControls.HyperLink" />
 
@@ -112,8 +130,12 @@
 
             
 
+            
+
              control or a copy of the <see
              cref="T:System.Web.UI.WebControls.HyperLink" />
+
+            
 
             
 
@@ -127,6 +149,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.WebControls.HyperLinkDesigner" />
+
+            
 
             
 
@@ -159,8 +183,12 @@
 
             
 
+            
+
              method generates the design-time markup for the associated <see
              cref="T:System.Web.UI.WebControls.HyperLink" />
+
+            
 
             
 
@@ -173,8 +201,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.UI.WebControls.HyperLink.NavigateUrl" />
+
+            
 
             
 
@@ -187,8 +219,12 @@
 
             
 
+            
+
              properties, as well as the <see
              cref="P:System.Web.UI.Control.Controls" />
+
+            
 
             
 
@@ -201,8 +237,12 @@
 
             
 
+            
+
              method then calls the <see
              cref="M:System.Web.UI.Design.TextControlDesigner.GetDesignTimeHtml" />
+
+            
 
             
 

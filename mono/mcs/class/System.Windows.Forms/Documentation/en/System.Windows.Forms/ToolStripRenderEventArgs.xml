@@ -21,8 +21,12 @@
 
         
 
+        
+
          class also provides data for the <see
          cref="M:System.Windows.Forms.ToolStripRenderer.DrawImageMargin(System.Windows.Forms.ToolStripRenderEventArgs)" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Windows.Forms.ToolStripRenderer.DrawToolStripBackground(System.Windows.Forms.ToolStripRenderEventArgs)" />
+
+        
 
         
 
@@ -55,6 +63,8 @@
 
         
 
+        
+
         , <see
          cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderToolStripBorder(System.Windows.Forms.ToolStripRenderEventArgs)" />
 
@@ -62,8 +72,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderToolStripBackground(System.Windows.Forms.ToolStripRenderEventArgs)" />
+
+        
 
         
 
@@ -97,6 +111,8 @@
 
             
 
+            
+
              class for the specified <see
              cref="T:System.Windows.Forms.ToolStrip" />
 
@@ -104,8 +120,12 @@
 
             
 
+            
+
              and using the specified <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -121,8 +141,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -137,8 +161,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStrip" />
+
+          
 
           
 
@@ -176,8 +204,12 @@
 
             
 
+            
+
              class for the specified <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -190,8 +222,12 @@
 
             
 
+            
+
              to paint the specified bounds with the specified <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -207,8 +243,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -223,8 +263,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStrip" />
+
+          
 
           
 
@@ -239,8 +283,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -255,6 +303,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
 
@@ -262,8 +312,12 @@
 
           
 
+          
+
            that the background of the <see
            cref="T:System.Windows.Forms.ToolStrip" />
+
+          
 
           
 
@@ -299,6 +353,8 @@
 
             
 
+            
+
              representing the bounds of the area to be painted. </para
           >
         </summary>
@@ -327,8 +383,12 @@
 
             
 
+            
+
              that the background of the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -364,8 +424,12 @@
 
             
 
+            
+
              is not a <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -378,6 +442,8 @@
 
             
 
+            
+
              is null, the <see
              cref="P:System.Windows.Forms.ToolStripRenderEventArgs.ConnectedArea" />
 
@@ -385,8 +451,12 @@
 
             
 
+            
+
              property returns an empty <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -405,6 +475,8 @@
 
             
 
+            
+
              representing the overlap area between a <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
 
@@ -412,8 +484,12 @@
 
             
 
+            
+
              and its <see
              cref="P:System.Windows.Forms.ToolStripDropDown.OwnerItem" />
+
+            
 
             
 
@@ -447,6 +523,8 @@
 
             
 
+            
+
              used to paint.</para
           >
         </summary>
@@ -473,6 +551,8 @@
           <para
             >Gets the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 

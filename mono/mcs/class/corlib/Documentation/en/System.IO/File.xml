@@ -35,6 +35,8 @@
 
         
 
+        
+
          class for typical operations such as copying, moving, renaming, creating, opening, deleting, and appending to files. You can also use the <see
          cref="T:System.IO.File" />
 
@@ -42,8 +44,12 @@
 
         
 
+        
+
          class to get and set file attributes or <see
          cref="T:System.DateTime" />
+
+        
 
         
 
@@ -59,8 +65,12 @@
 
         
 
+        
+
          methods return other I/O types when you create or open files. You can use these other types to further manipulate a file. For more information, see specific <see
          cref="T:System.IO.File" />
+
+        
 
         
 
@@ -73,6 +83,8 @@
 
         
 
+        
+
         , <see
          cref="M:System.IO.File.CreateText(System.String)" />
 
@@ -80,8 +92,12 @@
 
         
 
+        
+
         , or <see
          cref="M:System.IO.File.Create(System.String)" />
+
+        
 
         
 
@@ -97,8 +113,12 @@
 
         
 
+        
+
          methods are static, it might be more efficient to use a <see
          cref="T:System.IO.File" />
+
+        
 
         
 
@@ -111,8 +131,12 @@
 
         
 
+        
+
          instance method if you want to perform only one action. All <see
          cref="T:System.IO.File" />
+
+        
 
         
 
@@ -128,8 +152,12 @@
 
         
 
+        
+
          class perform security checks on all methods. If you are going to reuse an object several times, consider using the corresponding instance method of <see
          cref="T:System.IO.FileInfo" />
+
+        
 
         
 
@@ -141,6 +169,8 @@
       <para
         >The following table describes the enumerations that are used to customize the behavior of various <see
          cref="T:System.IO.File" />
+
+        
 
         
 
@@ -218,6 +248,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -226,6 +258,8 @@
       <para
         >Provides static methods for the creation, copying, deletion, moving, and opening of files, and aids in the creation of <see
          cref="T:System.IO.FileStream" />
+
+        
 
         
 
@@ -270,6 +304,8 @@
 
             
 
+            
+
              parameter must contain existing directories.</para
           >
         </remarks>
@@ -284,10 +320,14 @@
 
           
 
+          
+
           The file to append the lines to. The file is created if it doesn't already exist.</param
         >
         <param name="contents">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -332,6 +372,8 @@
 
             
 
+            
+
              parameter must contain existing directories.</para
           >
           <para>You can use this method to create a file that contains the following:</para>
@@ -347,8 +389,12 @@
 
                 
 
+                
+
                  query on the lines of a file, as obtained by using the <see
                  cref="Overload:System.IO.File.ReadLines" />
+
+                
 
                 
 
@@ -361,6 +407,8 @@
               <para
                 >The contents of a collection that implements an <see
                  cref="T:System.Collections.Generic.IEnumerable`1" />
+
+                
 
                 
 
@@ -382,6 +430,8 @@
 
           
 
+          
+
           The file to append the lines to. The file is created if it doesn't already exist.</param
         >
         <param name="contents">
@@ -391,10 +441,14 @@
 
           
 
+          
+
           The lines to append to the file.</param
         >
         <param name="encoding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -438,6 +492,8 @@
 
             
 
+            
+
              parameter must contain existing directories.</para
           >
         </remarks>
@@ -452,10 +508,14 @@
 
           
 
+          
+
           The file to append the specified string to. </param
         >
         <param name="contents">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -500,6 +560,8 @@
 
             
 
+            
+
              parameter must contain existing directories.</para
           >
         </remarks>
@@ -514,6 +576,8 @@
 
           
 
+          
+
           The file to append the specified string to. </param
         >
         <param name="contents">
@@ -523,10 +587,14 @@
 
           
 
+          
+
           The string to append to the file. </param
         >
         <param name="encoding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -572,10 +640,14 @@
 
           
 
+          
+
           is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters.</exception
         >
         <exception cref="T:System.IO.FileNotFoundException">
           <paramref name="path" />
+
+          
 
           
 
@@ -590,8 +662,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -607,6 +683,8 @@
 
           
 
+          
+
            was not found.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
@@ -617,8 +695,12 @@
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -634,6 +716,8 @@
 
           
 
+          
+
           .</permission
         >
         <exception cref="T:System.IO.Exception"
@@ -641,6 +725,8 @@
         >
         <exception cref="T:System.IO.NotSupportedException">
           <paramref name="path " />
+
+          
 
           
 
@@ -661,6 +747,8 @@
 
             
 
+            
+
              constructor overload. If the file specified by <paramref
              name="path" />
 
@@ -668,8 +756,12 @@
 
             
 
+            
+
              does not exist, it is created. If the file does exist, write operations to the <see
              cref="T:System.IO.StreamWriter" />
+
+            
 
             
 
@@ -685,8 +777,12 @@
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -702,6 +798,8 @@
 
             
 
+            
+
              parameter is not case-sensitive.</para
           >
           <para
@@ -709,6 +807,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -727,6 +827,8 @@
 
             
 
+            
+
              that appends UTF-8 encoded text to an existing file, or to a new file if the specified file does not exist.</para
           >
         </summary>
@@ -736,6 +838,8 @@
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -781,6 +885,8 @@
 
             
 
+            
+
              exists.</para
           >
           <para>-or-</para>
@@ -793,6 +899,8 @@
 
           
 
+          
+
           or <paramref
            name="destFileName " />
 
@@ -800,8 +908,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -817,8 +929,12 @@
 
             
 
+            
+
             or <paramref
              name="destFileName " />
+
+            
 
             
 
@@ -834,8 +950,12 @@
 
             
 
+            
+
             or <paramref
              name="destFileName" />
+
+            
 
             
 
@@ -855,8 +975,12 @@
 
           
 
+          
+
            or <paramref
            name="destFileName" />
+
+          
 
           
 
@@ -866,6 +990,8 @@
         >
         <exception cref="T:System.IO.FileNotFoundException">
           <paramref name="sourceFileName " />
+
+          
 
           
 
@@ -881,8 +1007,12 @@
 
           
 
+          
+
            or <paramref
            name="destFileName" />
+
+          
 
           
 
@@ -898,8 +1028,12 @@
 
           
 
+          
+
            and <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+
+          
 
           
 
@@ -920,8 +1054,12 @@
 
             
 
+            
+
               method overload with the <paramref
              name="overwrite" />
+
+            
 
             
 
@@ -937,6 +1075,8 @@
 
             
 
+            
+
              and <paramref
              name="destFileName" />
 
@@ -944,8 +1084,12 @@
 
             
 
+            
+
              parameters can specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see the <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -966,10 +1110,14 @@
 
           
 
+          
+
           The file to copy. </param
         >
         <param name="destFileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1016,8 +1164,12 @@
 
             
 
+            
+
              is read-only (write-protected), or <paramref
              name="destFileName" />
+
+            
 
             
 
@@ -1030,8 +1182,12 @@
 
             
 
+            
+
              is <see
              langword="false" />
+
+            
 
             
 
@@ -1049,6 +1205,8 @@
 
           
 
+          
+
           or <paramref
            name="destFileName " />
 
@@ -1056,8 +1214,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -1073,8 +1235,12 @@
 
             
 
+            
+
              or <paramref
              name="destFileName" />
+
+            
 
             
 
@@ -1090,8 +1256,12 @@
 
             
 
+            
+
              or <paramref
              name="destFileName" />
+
+            
 
             
 
@@ -1111,8 +1281,12 @@
 
           
 
+          
+
            or <paramref
            name="sourceFileName" />
+
+          
 
           
 
@@ -1122,6 +1296,8 @@
         >
         <exception cref="T:System.IO.FileNotFoundException">
           <paramref name="sourceFileName " />
+
+          
 
           
 
@@ -1137,8 +1313,12 @@
 
           
 
+          
+
            or <paramref
            name="destFileName" />
+
+          
 
           
 
@@ -1154,8 +1334,12 @@
 
           
 
+          
+
            and <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+
+          
 
           
 
@@ -1176,8 +1360,12 @@
 
             
 
+            
+
              and <paramref
              name="destFileName" />
+
+            
 
             
 
@@ -1191,6 +1379,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -1210,6 +1400,8 @@
 
           
 
+          
+
           The file to copy. </param
         >
         <param name="destFileName">
@@ -1219,10 +1411,14 @@
 
           
 
+          
+
           The name of the destination file. This cannot be a directory. </param
         >
         <param name="overwrite">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1270,11 +1466,15 @@
 
             
 
+            
+
             is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters.</para
           >
         </exception>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="path" />
+
+          
 
           
 
@@ -1287,11 +1487,15 @@
 
           
 
+          
+
           .</exception
         >
         <exception cref="T:System.IO.DirectoryNotFoundException"
           >The directory information specified in <paramref
            name="path" />
+
+          
 
           
 
@@ -1313,8 +1517,12 @@
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -1325,6 +1533,8 @@
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to write the specified file. See <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+
+          
 
           
 
@@ -1342,6 +1552,8 @@
 
             
 
+            
+
              object created by this method has a default <see
              cref="T:System.IO.FileShare" />
 
@@ -1349,8 +1561,12 @@
 
             
 
+            
+
              value of <see
              cref="F:System.IO.FileShare.None" />
+
+            
 
             
 
@@ -1366,6 +1582,8 @@
 
             
 
+            
+
              method overload using the default buffer size.</para
           >
           <para
@@ -1376,8 +1594,12 @@
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -1392,6 +1614,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -1414,8 +1638,12 @@
 
             
 
+            
+
              that provides read/write access to the file specified in <paramref
              name="path" />
+
+            
 
             
 
@@ -1426,6 +1654,8 @@
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1474,11 +1704,15 @@
 
             
 
+            
+
             is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters.</para
           >
         </exception>
         <exception cref="T:System.ArgumentNullException">
           <paramref name="path" />
+
+          
 
           
 
@@ -1491,11 +1725,15 @@
 
           
 
+          
+
           .</exception
         >
         <exception cref="T:System.IO.DirectoryNotFoundException"
           >The directory information specified in <paramref
            name="path" />
+
+          
 
           
 
@@ -1517,8 +1755,12 @@
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -1529,6 +1771,8 @@
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to write the specified file. See <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+
+          
 
           
 
@@ -1546,6 +1790,8 @@
 
             
 
+            
+
              object created by this method has a default <see
              cref="T:System.IO.FileShare" />
 
@@ -1553,8 +1799,12 @@
 
             
 
+            
+
              value of <see
              cref="F:System.IO.FileShare.None" />
+
+            
 
             
 
@@ -1570,8 +1820,12 @@
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -1587,6 +1841,8 @@
 
             
 
+            
+
              constructor overload. If the specified file does not exist, it is created; if it does exist and it is not read-only, the contents are overwritten.</para
           >
           <para>By default, full read/write access to new files is granted to all users. The file is opened with read/write access and must be closed before it can be opened by another application.</para>
@@ -1595,6 +1851,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -1617,8 +1875,12 @@
 
             
 
+            
+
              with the specified buffer size that provides read/write access to the file specified in <paramref
              name="path" />
+
+            
 
             
 
@@ -1634,10 +1896,14 @@
 
           
 
+          
+
           The name of the file. </param
         >
         <param name="bufferSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1682,8 +1948,12 @@
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -1694,6 +1964,8 @@
           <para
             >This method is equivalent to the <see
              cref="M:System.IO.FileStream.#ctor(System.String,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare,System.Int32)" />
+
+            
 
             
 
@@ -1712,6 +1984,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1720,6 +1994,8 @@
           <para
             >Creates or overwrites the specified file, specifying a buffer size and a <see
              cref="T:System.IO.FileOptions" />
+
+            
 
             
 
@@ -1739,10 +2015,14 @@
 
           
 
+          
+
           The name of the file. </param
         >
         <param name="bufferSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1757,8 +2037,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.IO.FileOptions" />
+
+          
 
           
 
@@ -1803,8 +2087,12 @@
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -1820,6 +2108,8 @@
 
             
 
+            
+
              constructor overload. If the specified file does not exist, it is created; if it does exist and it is not read-only, the contents are overwritten.</para
           >
           <para>By default, full read/write access to new files is granted to all users. The file is opened with read/write access and must be closed before it can be opened by another application.</para>
@@ -1828,6 +2118,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -1851,10 +2143,14 @@
 
           
 
+          
+
           The name of the file. </param
         >
         <param name="bufferSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1869,8 +2165,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.IO.FileOptions" />
+
+          
 
           
 
@@ -1885,8 +2185,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.FileSecurity" />
+
+          
 
           
 
@@ -1932,6 +2236,8 @@
 
           
 
+          
+
           is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters.</exception
         >
         <exception cref="T:System.ArgumentNullException">
@@ -1941,8 +2247,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1958,6 +2268,8 @@
 
           
 
+          
+
            was not found.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
@@ -1968,8 +2280,12 @@
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -1985,6 +2301,8 @@
 
           
 
+          
+
           .</permission
         >
         <exception cref="T:System.IO.Exception"
@@ -1992,6 +2310,8 @@
         >
         <exception cref="T:System.IO.NotSupportedException">
           <paramref name="path" />
+
+          
 
           
 
@@ -2012,6 +2332,8 @@
 
             
 
+            
+
              constructor overload with the <paramref
              name="append" />
 
@@ -2019,8 +2341,12 @@
 
             
 
+            
+
              parameter set to false. If the file specified by <paramref
              name="path" />
+
+            
 
             
 
@@ -2036,8 +2362,12 @@
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -2050,6 +2380,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -2072,11 +2404,15 @@
 
             
 
+            
+
              that writes to the specified file using UTF-8 encoding.</para
           >
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2116,6 +2452,8 @@
 
             
 
+            
+
              method allows you to decrypt a file that was encrypted using the <see
              cref="M:System.IO.File.Encrypt(System.String)" />
 
@@ -2123,8 +2461,12 @@
 
             
 
+            
+
              method.  The <see
              cref="M:System.IO.File.Decrypt(System.String)" />
+
+            
 
             
 
@@ -2140,8 +2482,12 @@
 
             
 
+            
+
              method requires exclusive access to the file being decrypted, and will raise an exception if another process is using the file. If the file is not encrypted, <see
              cref="M:System.IO.File.Decrypt(System.String)" />
+
+            
 
             
 
@@ -2157,8 +2503,12 @@
 
             
 
+            
+
              method and the <see
              cref="M:System.IO.File.Decrypt(System.String)" />
+
+            
 
             
 
@@ -2178,11 +2528,15 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2222,10 +2576,14 @@
 
           
 
+          
+
           is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters.</exception
         >
         <exception cref="T:System.ArgumentNullException">
           <paramref name="path " />
+
+          
 
           
 
@@ -2238,11 +2596,15 @@
 
           
 
+          
+
           .</exception
         >
         <exception cref="T:System.IO.DirectoryNotFoundException"
           >The directory information specified in <paramref
            name="path" />
+
+          
 
           
 
@@ -2265,8 +2627,12 @@
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -2277,6 +2643,8 @@
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to write to the specified file. See <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+
+          
 
           
 
@@ -2294,8 +2662,12 @@
 
             
 
+            
+
              parameter. Wildcard characters cannot be included. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -2314,6 +2686,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2323,6 +2697,8 @@
         </summary>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2362,6 +2738,8 @@
 
             
 
+            
+
              method allows you to encrypt a file so that only the account used to call this method can decrypt it.  Use the <see
              cref="M:System.IO.File.Decrypt(System.String)" />
 
@@ -2369,8 +2747,12 @@
 
             
 
+            
+
              method to decrypt a file encrypted by the <see
              cref="M:System.IO.File.Encrypt(System.String)" />
+
+            
 
             
 
@@ -2386,6 +2768,8 @@
 
             
 
+            
+
              method requires exclusive access to the file being encrypted, and will fail if another process is using the file.</para
           >
           <para
@@ -2396,8 +2780,12 @@
 
             
 
+            
+
              method and the <see
              cref="M:System.IO.File.Decrypt(System.String)" />
+
+            
 
             
 
@@ -2413,6 +2801,8 @@
         </summary>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2453,6 +2843,8 @@
 
           
 
+          
+
           .</permission
         >
         <remarks>
@@ -2465,8 +2857,12 @@
 
             
 
+            
+
              method should not be used for path validation, this method merely checks if the file specified in <paramref
              name="path" />
+
+            
 
             
 
@@ -2479,6 +2875,8 @@
 
             
 
+            
+
              returns false. To check whether the path contains any invalid characters, you can call the <see
              cref="M:System.IO.Path.GetInvalidPathChars" />
 
@@ -2486,8 +2884,12 @@
 
             
 
+            
+
              method to retrieve the characters that are invalid for the file system. You can also create a regular expression to test the whether the path is valid for your environment. For examples of acceptable paths, see <see
              cref="T:System.IO.File" />
+
+            
 
             
 
@@ -2503,8 +2905,12 @@
 
             
 
+            
+
              method and perform another operation on the file, such as <see
              cref="M:System.IO.File.Delete(System.String)" />
+
+            
 
             
 
@@ -2520,8 +2926,12 @@
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -2537,8 +2947,12 @@
 
             
 
+            
+
              describes a directory, this method returns false. Trailing spaces are removed from the <paramref
              name="path" />
+
+            
 
             
 
@@ -2549,6 +2963,8 @@
           <para
             >The <see
              cref="M:System.IO.File.Exists(System.String)" />
+
+            
 
             
 
@@ -2571,8 +2987,12 @@
 
             
 
+            
+
              contains the name of an existing file; otherwise, false. This method also returns false if <paramref
              name="path" />
+
+            
 
             
 
@@ -2585,11 +3005,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2632,6 +3056,8 @@
 
             
 
+            
+
              method to retrieve the access control list (ACL) entries for a file.</para
           >
           <para
@@ -2639,6 +3065,8 @@
              type="text/html">
               <a href="06fbf66d-6f02-4378-b863-b2f12e349045">ACL Technology Overview</a>
             </format>
+
+            
 
             
 
@@ -2655,6 +3083,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -2665,8 +3095,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Security.AccessControl.FileSystemRights.ReadExtendedAttributes" />
+
+            
 
             
 
@@ -2679,8 +3113,12 @@
 
             
 
+            
+
              rights on the parent folder. To deny <see
              cref="F:System.Security.AccessControl.FileSystemRights.ReadAttributes" />
+
+            
 
             
 
@@ -2693,8 +3131,12 @@
 
             
 
+            
+
             , deny <see
              cref="F:System.Security.AccessControl.FileSystemRights.ListDirectory" />
+
+            
 
             
 
@@ -2713,6 +3155,8 @@
 
             
 
+            
+
              object that encapsulates the access control list (ACL) entries for a specified file.</para
           >
         </summary>
@@ -2726,8 +3170,12 @@
 
             
 
+            
+
              object that encapsulates the access control rules for the file described by the <paramref
              name="path" />
+
+            
 
             
 
@@ -2743,8 +3191,12 @@
 
           
 
+          
+
           The path to a file containing a <see
            cref="T:System.Security.AccessControl.FileSecurity" />
+
+          
 
           
 
@@ -2790,6 +3242,8 @@
 
             
 
+            
+
              method to retrieve the access control list (ACL) entries for a file.</para
           >
           <para
@@ -2797,6 +3251,8 @@
              type="text/html">
               <a href="06fbf66d-6f02-4378-b863-b2f12e349045">ACL Technology Overview</a>
             </format>
+
+            
 
             
 
@@ -2813,6 +3269,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -2823,8 +3281,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Security.AccessControl.FileSystemRights.ReadExtendedAttributes" />
+
+            
 
             
 
@@ -2837,8 +3299,12 @@
 
             
 
+            
+
              rights on the parent folder. To deny <see
              cref="F:System.Security.AccessControl.FileSystemRights.ReadAttributes" />
+
+            
 
             
 
@@ -2851,8 +3317,12 @@
 
             
 
+            
+
             , deny <see
              cref="F:System.Security.AccessControl.FileSystemRights.ListDirectory" />
+
+            
 
             
 
@@ -2871,6 +3341,8 @@
 
             
 
+            
+
              object that encapsulates the specified type of access control list (ACL) entries for a particular file.</para
           >
         </summary>
@@ -2884,8 +3356,12 @@
 
             
 
+            
+
              object that encapsulates the access control rules for the file described by the <paramref
              name="path" />
+
+            
 
             
 
@@ -2901,8 +3377,12 @@
 
           
 
+          
+
           The path to a file containing a <see
            cref="T:System.Security.AccessControl.FileSecurity" />
+
+          
 
           
 
@@ -2917,8 +3397,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AccessControlSections" />
+
+          
 
           
 
@@ -2960,8 +3444,12 @@
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -2974,6 +3462,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -2992,6 +3482,8 @@
 
             
 
+            
+
              of the file on the path.</para
           >
         </summary>
@@ -3005,11 +3497,15 @@
 
             
 
+            
+
              of the file on the path.</para
           >
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3052,10 +3548,14 @@
 
           
 
+          
+
           is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters.</exception
         >
         <exception cref="T:System.ArgumentNullException">
           <paramref name="path" />
+
+          
 
           
 
@@ -3068,10 +3568,14 @@
 
           
 
+          
+
           .</exception
         >
         <exception cref="T:System.IO.IOException">
           <paramref name="path" />
+
+          
 
           
 
@@ -3087,8 +3591,12 @@
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -3102,6 +3610,8 @@
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to read the specified file or directory. See <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" qualify="true" />
+
+          
 
           
 
@@ -3125,8 +3635,12 @@
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -3142,6 +3656,8 @@
 
             
 
+            
+
              parameter does not exist, this method returns 12:00 midnight, January 1, 1601 A.D. (C.E.) Coordinated Universal Time (UTC), adjusted to local time.</para
           >
           <para>NTFS-formatted drives may cache information about a file, such as file creation time, for a short period of time. As a result, it may be necessary to explicitly set the creation time of a file if you are overwriting or replacing an existing file.</para>
@@ -3150,6 +3666,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -3172,11 +3690,15 @@
 
             
 
+            
+
              structure set to the creation date and time for the specified file or directory. This value is expressed in local time.</para
           >
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3222,6 +3744,8 @@
 
             
 
+            
+
              parameter does not exist, this method returns 12:00 midnight, January 1, 1601 A.D. (C.E.) Coordinated Universal Time (UTC).</para
           >
           <para>NTFS-formatted drives may cache information about a file, such as file creation time, for a short period of time. As a result, it may be necessary to explicitly set the creation time of a file if you are overwriting or replacing an existing file.</para>
@@ -3230,6 +3754,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -3252,11 +3778,15 @@
 
             
 
+            
+
              structure set to the creation date and time for the specified file or directory. This value is expressed in UTC time.</para
           >
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3299,10 +3829,14 @@
 
           
 
+          
+
           is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters.</exception
         >
         <exception cref="T:System.ArgumentNullException">
           <paramref name="path" />
+
+          
 
           
 
@@ -3315,10 +3849,14 @@
 
           
 
+          
+
           .</exception
         >
         <exception cref="T:System.IO.IOException">
           <paramref name="path" />
+
+          
 
           
 
@@ -3334,8 +3872,12 @@
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -3349,6 +3891,8 @@
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to read the specified file or directory. See <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" qualify="true" />
+
+          
 
           
 
@@ -3372,11 +3916,15 @@
 
             
 
+            
+
              parameter does not exist, this method returns 12:00 midnight, January 1, 1601 A.D. (C.E.) Coordinated Universal Time (UTC), adjusted to local time.</para
           >
           <para
             >The <paramref
              name="path" />
+
+            
 
             
 
@@ -3389,6 +3937,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -3396,6 +3946,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -3418,11 +3970,15 @@
 
             
 
+            
+
              structure set to the date and time that the specified file or directory was last accessed. This value is expressed in local time.</para
           >
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3468,11 +4024,15 @@
 
             
 
+            
+
              parameter does not exist, this method returns 12:00 midnight, January 1, 1601 A.D. (C.E.) Coordinated Universal Time (UTC).</para
           >
           <para
             >The <paramref
              name="path" />
+
+            
 
             
 
@@ -3485,6 +4045,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -3492,6 +4054,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -3514,11 +4078,15 @@
 
             
 
+            
+
              structure set to the date and time that the specified file or directory was last accessed. This value is expressed in UTC time.</para
           >
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3561,10 +4129,14 @@
 
           
 
+          
+
           is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters.</exception
         >
         <exception cref="T:System.ArgumentNullException">
           <paramref name="path" />
+
+          
 
           
 
@@ -3577,10 +4149,14 @@
 
           
 
+          
+
           .</exception
         >
         <exception cref="T:System.IO.IOException">
           <paramref name="path" />
+
+          
 
           
 
@@ -3596,8 +4172,12 @@
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -3611,6 +4191,8 @@
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to read the specified file or directory. See <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" qualify="true" />
+
+          
 
           
 
@@ -3634,11 +4216,15 @@
 
             
 
+            
+
              parameter does not exist, this method returns 12:00 midnight, January 1, 1601 A.D. (C.E.) Coordinated Universal Time (UTC), adjusted to local time.</para
           >
           <para
             >The <paramref
              name="path" />
+
+            
 
             
 
@@ -3651,6 +4237,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -3658,6 +4246,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -3680,11 +4270,15 @@
 
             
 
+            
+
              structure set to the date and time that the specified file or directory was last written to. This value is expressed in local time.</para
           >
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3730,11 +4324,15 @@
 
             
 
+            
+
              parameter does not exist, this method returns 12:00 midnight, January 1, 1601 A.D. (C.E.) Coordinated Universal Time (UTC).</para
           >
           <para
             >The <paramref
              name="path" />
+
+            
 
             
 
@@ -3747,6 +4345,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -3754,6 +4354,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -3776,11 +4378,15 @@
 
             
 
+            
+
              structure set to the date and time that the specified file or directory was last written to. This value is expressed in UTC time.</para
           >
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3824,10 +4430,14 @@
 
           
 
+          
+
            already exists or is a directory.</exception
         >
         <exception cref="T:System.ArgumentNullException">
           <paramref name="sourceFileName " />
+
+          
 
           
 
@@ -3840,8 +4450,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -3857,8 +4471,12 @@
 
             
 
+            
+
             or <paramref
              name="destFileName " />
+
+            
 
             
 
@@ -3878,8 +4496,12 @@
 
           
 
+          
+
            or <paramref
            name="destFileName" />
+
+          
 
           
 
@@ -3889,6 +4511,8 @@
         >
         <exception cref="T:System.IO.FileNotFoundException">
           <paramref name="sourceFileName " />
+
+          
 
           
 
@@ -3904,8 +4528,12 @@
 
           
 
+          
+
            or <paramref
            name="destFileName" />
+
+          
 
           
 
@@ -3922,8 +4550,12 @@
 
           
 
+          
+
           and write to <paramref
            name="sourceFileName " />
+
+          
 
           
 
@@ -3936,6 +4568,8 @@
 
           
 
+          
+
           . See <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" qualify="true" />
 
@@ -3943,8 +4577,12 @@
 
           
 
+          
+
            and <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+
+          
 
           
 
@@ -3965,11 +4603,15 @@
 
             
 
+            
+
             . You cannot use the Move method to overwrite an existing file.</para
           >
           <para
             >The <paramref
              name="sourceFileName" />
+
+            
 
             
 
@@ -3982,8 +4624,12 @@
 
             
 
+            
+
              arguments are permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -3997,6 +4643,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -4016,10 +4664,14 @@
 
           
 
+          
+
           The name of the file to move. </param
         >
         <param name="destFileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4068,11 +4720,15 @@
 
             
 
+            
+
             is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters.</para
           >
         </exception>
         <exception cref="T:System.IO.FileNotFoundException">
           <paramref name="path" />
+
+          
 
           
 
@@ -4087,8 +4743,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -4103,11 +4763,15 @@
 
           
 
+          
+
            specified an invalid value.</exception
         >
         <exception cref="T:System.IO.DirectoryNotFoundException"
           >The directory information specified in <paramref
            name="path" />
+
+          
 
           
 
@@ -4129,8 +4793,12 @@
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -4146,8 +4814,12 @@
 
           
 
+          
+
            and <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+
+          
 
           
 
@@ -4162,8 +4834,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.FileMode" />
+
+          
 
           
 
@@ -4181,8 +4857,12 @@
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -4195,6 +4875,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -4213,6 +4895,8 @@
 
             
 
+            
+
              on the specified path with read/write access.</para
           >
         </summary>
@@ -4221,6 +4905,8 @@
           <para
             >A <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -4236,6 +4922,8 @@
 
           
 
+          
+
           The file to open. </param
         >
         <param name="mode">
@@ -4245,8 +4933,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.FileMode" />
+
+          
 
           
 
@@ -4296,11 +4988,15 @@
 
             
 
+            
+
             is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters.</para
           >
           <para>-or-</para>
           <para>
             <paramref name="access" />
+
+            
 
             
 
@@ -4313,8 +5009,12 @@
 
             
 
+            
+
              and <paramref
              name="mode" />
+
+            
 
             
 
@@ -4327,8 +5027,12 @@
 
             
 
+            
+
             , <see
              langword="CreateNew" />
+
+            
 
             
 
@@ -4341,8 +5045,12 @@
 
             
 
+            
+
              or <see
              langword="Append" />
+
+            
 
             
 
@@ -4358,6 +5066,8 @@
 
           
 
+          
+
            is <see
            cref="F:System.IO.FileMode.Truncate" />
 
@@ -4365,8 +5075,12 @@
 
           
 
+          
+
            or <see
            cref="F:System.IO.FileMode.Open" />
+
+          
 
           
 
@@ -4381,8 +5095,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -4397,8 +5115,12 @@
 
           
 
+          
+
            or <paramref
            name="access" />
+
+          
 
           
 
@@ -4414,11 +5136,15 @@
 
           
 
+          
+
            was not found.</exception
         >
         <exception cref="T:System.IO.IOException"
           >An I/O error occurred, such as specifying <see
            cref="F:System.IO.FileMode.CreateNew" />
+
+          
 
           
 
@@ -4433,8 +5159,12 @@
 
           
 
+          
+
            specified a read-only file and <paramref
            name="access" />
+
+          
 
           
 
@@ -4447,8 +5177,12 @@
 
           
 
+          
+
           , or <paramref
            name="path" />
+
+          
 
           
 
@@ -4464,8 +5198,12 @@
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -4481,8 +5219,12 @@
 
           
 
+          
+
            and <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+
+          
 
           
 
@@ -4497,8 +5239,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.FileMode" />
+
+          
 
           
 
@@ -4513,8 +5259,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.FileAccess" />
+
+          
 
           
 
@@ -4532,8 +5282,12 @@
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -4552,6 +5306,8 @@
 
             
 
+            
+
              on the specified path, with the specified mode and access.</para
           >
         </summary>
@@ -4560,6 +5316,8 @@
           <para
             >An unshared <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -4575,6 +5333,8 @@
 
           
 
+          
+
           The file to open. </param
         >
         <param name="mode">
@@ -4584,8 +5344,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.FileMode" />
+
+          
 
           
 
@@ -4600,8 +5364,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.FileAccess" />
+
+          
 
           
 
@@ -4652,11 +5420,15 @@
 
             
 
+            
+
             is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters.</para
           >
           <para>-or-</para>
           <para>
             <paramref name="access" />
+
+            
 
             
 
@@ -4669,8 +5441,12 @@
 
             
 
+            
+
              and <paramref
              name="mode" />
+
+            
 
             
 
@@ -4683,8 +5459,12 @@
 
             
 
+            
+
             , <see
              langword="CreateNew" />
+
+            
 
             
 
@@ -4697,8 +5477,12 @@
 
             
 
+            
+
              or <see
              langword="Append" />
+
+            
 
             
 
@@ -4714,6 +5498,8 @@
 
           
 
+          
+
            was not found.</exception
         >
         <exception cref="T:System.ArgumentNullException">
@@ -4723,8 +5509,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -4739,8 +5529,12 @@
 
           
 
+          
+
           , <paramref
            name="access" />
+
+          
 
           
 
@@ -4753,11 +5547,15 @@
 
           
 
+          
+
            specified an invalid value.</exception
         >
         <exception cref="T:System.IO.DirectoryNotFoundException"
           >The directory information specified in <paramref
            name="path" />
+
+          
 
           
 
@@ -4779,8 +5577,12 @@
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -4796,8 +5598,12 @@
 
           
 
+          
+
            and <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+
+          
 
           
 
@@ -4812,8 +5618,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.FileMode" />
+
+          
 
           
 
@@ -4828,8 +5638,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.FileAccess" />
+
+          
 
           
 
@@ -4844,8 +5658,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.FileShare" />
+
+          
 
           
 
@@ -4863,8 +5681,12 @@
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -4877,6 +5699,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -4895,6 +5719,8 @@
 
             
 
+            
+
              on the specified path, having the specified mode with read, write, or read/write access and the specified sharing option.</para
           >
         </summary>
@@ -4903,6 +5729,8 @@
           <para
             >A <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -4918,6 +5746,8 @@
 
           
 
+          
+
           The file to open. </param
         >
         <param name="mode">
@@ -4927,8 +5757,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.FileMode" />
+
+          
 
           
 
@@ -4943,8 +5777,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.FileAccess" />
+
+          
 
           
 
@@ -4959,8 +5797,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.FileShare" />
+
+          
 
           
 
@@ -5007,10 +5849,14 @@
 
           
 
+          
+
           is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters.</exception
         >
         <exception cref="T:System.IO.FileNotFoundException">
           <paramref name="path " />
+
+          
 
           
 
@@ -5025,8 +5871,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -5037,6 +5887,8 @@
         <exception cref="T:System.IO.DirectoryNotFoundException"
           >The directory information specified in <paramref
            name="path" />
+
+          
 
           
 
@@ -5055,8 +5907,12 @@
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -5067,6 +5923,8 @@
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to read the specified file. See <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" qualify="true" />
+
+          
 
           
 
@@ -5084,8 +5942,12 @@
 
             
 
+            
+
              constructor overload with a <see
              cref="T:System.IO.FileMode" />
+
+            
 
             
 
@@ -5098,8 +5960,12 @@
 
             
 
+            
+
             , a <see
              cref="T:System.IO.FileAccess" />
+
+            
 
             
 
@@ -5112,6 +5978,8 @@
 
             
 
+            
+
              and a <see
              cref="T:System.IO.FileShare" />
 
@@ -5119,8 +5987,12 @@
 
             
 
+            
+
              value of <see
              cref="F:System.IO.FileShare.Read" />
+
+            
 
             
 
@@ -5136,8 +6008,12 @@
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -5150,6 +6026,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -5172,11 +6050,15 @@
 
             
 
+            
+
              on the specified path.</para
           >
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5223,10 +6105,14 @@
 
           
 
+          
+
           is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters.</exception
         >
         <exception cref="T:System.IO.FileNotFoundException">
           <paramref name="path" />
+
+          
 
           
 
@@ -5241,8 +6127,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -5258,11 +6148,15 @@
 
           
 
+          
+
            was not found.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
           >The length of <paramref
            name="path" />
+
+          
 
           
 
@@ -5275,11 +6169,15 @@
 
           
 
+          
+
            exceeds the system-defined maximum length.</exception
         >
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to write to the specified file. See <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+
+          
 
           
 
@@ -5300,11 +6198,15 @@
 
             
 
+            
+
              constructor overload.</para
           >
           <para
             >The <paramref
              name="path" />
+
+            
 
             
 
@@ -5317,6 +6219,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -5324,6 +6228,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -5346,11 +6252,15 @@
 
             
 
+            
+
              on the specified path.</para
           >
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5397,10 +6307,14 @@
 
           
 
+          
+
           is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters.</exception
         >
         <exception cref="T:System.IO.FileNotFoundException">
           <paramref name="path" />
+
+          
 
           
 
@@ -5415,8 +6329,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -5427,6 +6345,8 @@
         <exception cref="T:System.IO.DirectoryNotFoundException"
           >The directory information specified in <paramref
            name="path" />
+
+          
 
           
 
@@ -5445,8 +6365,12 @@
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -5457,6 +6381,8 @@
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to write the specified file. See <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+
+          
 
           
 
@@ -5474,8 +6400,12 @@
 
             
 
+            
+
              constructor overload with file mode set to <see
              cref="F:System.IO.FileMode.OpenOrCreate" />
+
+            
 
             
 
@@ -5488,8 +6418,12 @@
 
             
 
+            
+
             , and the share mode set to <see
              cref="F:System.IO.FileShare.None" />
+
+            
 
             
 
@@ -5505,11 +6439,15 @@
 
             
 
+            
+
              method opens a file if one already exists for the file path, or creates a new file if one does not exist. For an existing file, it does not append the new text to the existing text. Instead, it overwrites the existing characters with the new characters. If you overwrite a longer string (such as “This is a test of the OpenWrite method”) with a shorter string (such as “Second run”), the file will contain a mix of the strings (“Second runtest of the OpenWrite method”).</para
           >
           <para
             >The <paramref
              name="path" />
+
+            
 
             
 
@@ -5522,6 +6460,8 @@
 
             
 
+            
+
              method.</para
           >
           <para
@@ -5529,6 +6469,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -5551,8 +6493,12 @@
 
             
 
+            
+
              object on the specified path with <see
              cref="F:System.IO.FileAccess.Write" />
+
+            
 
             
 
@@ -5563,6 +6509,8 @@
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5611,6 +6559,8 @@
 
           
 
+          
+
           The file to open for reading. </param
         >
       </Docs>
@@ -5649,6 +6599,8 @@
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5701,10 +6653,14 @@
 
           
 
+          
+
           The file to open for reading. </param
         >
         <param name="encoding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5745,6 +6701,8 @@
 
             
 
+            
+
              method overload when reading files that might contain imported text, because unrecognized characters may not be read correctly.  </para
           >
           <para>The file handle is guaranteed to be closed by this method, even if exceptions are raised.</para>
@@ -5759,6 +6717,8 @@
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5804,8 +6764,12 @@
 
             
 
+            
+
              property for the <paramref
              name="encoding" />
+
+            
 
             
 
@@ -5829,10 +6793,14 @@
 
           
 
+          
+
           The file to open for reading. </param
         >
         <param name="encoding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5872,8 +6840,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IO.File.ReadAllLines(System.String)" />
+
+            
 
             
 
@@ -5886,8 +6858,12 @@
 
             
 
+            
+
             , you can start enumerating the collection of strings before the whole collection is returned; when you use <see
              cref="M:System.IO.File.ReadAllLines(System.String)" />
+
+            
 
             
 
@@ -5900,11 +6876,15 @@
 
             
 
+            
+
              can be more efficient. </para
           >
           <para
             >You can use the <see
              cref="M:System.IO.File.ReadLines(System.String)" />
+
+            
 
             
 
@@ -5924,6 +6904,8 @@
 
                 
 
+                
+
                  queries on a file to obtain a filtered set of its lines.</para
               >
             </item>
@@ -5936,8 +6918,12 @@
 
                 
 
+                
+
                  method, or append them to an existing file with the <see
                  cref="M:System.IO.File.AppendAllLines(System.String,System.Collections.Generic.IEnumerable{System.String})" />
+
+                
 
                 
 
@@ -5955,8 +6941,12 @@
 
                 
 
+                
+
                  collection of strings for its constructor, such as a <see
                  cref="T:System.Collections.Generic.IList`1" />
+
+                
 
                 
 
@@ -5969,6 +6959,8 @@
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -5976,6 +6968,8 @@
           <para
             >This method uses <see
              cref="P:System.Text.Encoding.UTF8" />
+
+            
 
             
 
@@ -5994,6 +6988,8 @@
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6035,8 +7031,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IO.File.ReadAllLines(System.String,System.Text.Encoding)" />
+
+            
 
             
 
@@ -6049,8 +7049,12 @@
 
             
 
+            
+
             , you can start enumerating the collection of strings before the whole collection is returned. When you use <see
              cref="M:System.IO.File.ReadAllLines(System.String,System.Text.Encoding)" />
+
+            
 
             
 
@@ -6063,11 +7067,15 @@
 
             
 
+            
+
              can be more efficient. </para
           >
           <para
             >You can use the <see
              cref="M:System.IO.File.ReadLines(System.String,System.Text.Encoding)" />
+
+            
 
             
 
@@ -6087,6 +7095,8 @@
 
                 
 
+                
+
                  queries on a file to obtain a filtered set of its lines.</para
               >
             </item>
@@ -6099,8 +7109,12 @@
 
                 
 
+                
+
                  method, or append them to an existing file with the <see
                  cref="M:System.IO.File.AppendAllLines(System.String,System.Collections.Generic.IEnumerable{System.String},System.Text.Encoding)" />
+
+                
 
                 
 
@@ -6118,6 +7132,8 @@
 
                 
 
+                
+
                  collection of strings for its constructor, such as a <see
                  cref="T:System.Collections.Generic.IList`1" />
 
@@ -6125,8 +7141,12 @@
 
                 
 
+                
+
                  or a <see
                  cref="T:System.Collections.Generic.Queue`1" />
+
+                
 
                 
 
@@ -6153,10 +7173,14 @@
 
           
 
+          
+
           The file to read.</param
         >
         <param name="encoding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6200,11 +7224,15 @@
 
             
 
+            
+
              method replaces the contents of a specified file with the contents of another file.  It also creates a backup of the file that was replaced.</para
           >
           <para
             >If the <paramref
              name="sourceFileName" />
+
+            
 
             
 
@@ -6217,8 +7245,12 @@
 
             
 
+            
+
              are on different volumes, this method will raise an exception. If the <paramref
              name="destinationBackupFileName" />
+
+            
 
             
 
@@ -6229,6 +7261,8 @@
           <para
             >Pass null to the <paramref
              name="destinationBackupFileName" />
+
+            
 
             
 
@@ -6248,8 +7282,12 @@
 
           
 
+          
+
           The name of a file that replaces the file specified by <paramref
            name="destinationFileName" />
+
+          
 
           
 
@@ -6264,10 +7302,14 @@
 
           
 
+          
+
           The name of the file being replaced.</param
         >
         <param name="destinationBackupFileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6312,11 +7354,15 @@
 
             
 
+            
+
              method replaces the contents of a specified file with the contents of another file.  It also creates a backup of the file that was replaced. </para
           >
           <para
             >If the <paramref
              name="sourceFileName" />
+
+            
 
             
 
@@ -6329,8 +7375,12 @@
 
             
 
+            
+
              are on different volumes, this method will raise an exception. If the <paramref
              name="destinationBackupFileName" />
+
+            
 
             
 
@@ -6341,6 +7391,8 @@
           <para
             >Pass null to the <paramref
              name="destinationBackupFileName" />
+
+            
 
             
 
@@ -6360,8 +7412,12 @@
 
           
 
+          
+
           The name of a file that replaces the file specified by <paramref
            name="destinationFileName" />
+
+          
 
           
 
@@ -6376,6 +7432,8 @@
 
           
 
+          
+
           The name of the file being replaced.</param
         >
         <param name="destinationBackupFileName">
@@ -6385,10 +7443,14 @@
 
           
 
+          
+
           The name of the backup file.</param
         >
         <param name="ignoreMetadataErrors">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6431,12 +7493,16 @@
 
             
 
+            
+
              method applies access control list (ACL) entries to a file that represents the noninherited ACL list. </para
           >
           <block subset="none" type="note">
             <para
               >The ACL specified for the <paramref
                name="fileSecurity" />
+
+              
 
               
 
@@ -6449,8 +7515,12 @@
 
               
 
+              
+
                method to obtain the existing ACL, modify it, and then use <see
                cref="M:System.IO.File.SetAccessControl(System.String,System.Security.AccessControl.FileSecurity)" />
+
+              
 
               
 
@@ -6469,12 +7539,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="53758b39-bd9b-4640-bb04-cad5ed8d0abf"
                 >How to: Add or Remove an Access Control List Entry</a
               >
             </format>
+
+            
 
             
 
@@ -6490,8 +7564,12 @@
 
             
 
+            
+
              method persists only <see
              cref="T:System.Security.AccessControl.FileSecurity" />
+
+            
 
             
 
@@ -6504,8 +7582,12 @@
 
             
 
+            
+
              object has not been modified, it will not be persisted to a file.  Therefore, it is not possible to retrieve a <see
              cref="T:System.Security.AccessControl.FileSecurity" />
+
+            
 
             
 
@@ -6524,8 +7606,12 @@
 
                 
 
+                
+
                  method to retrieve the <see
                  cref="T:System.Security.AccessControl.FileSecurity" />
+
+                
 
                 
 
@@ -6543,6 +7629,8 @@
 
                 
 
+                
+
                  object for the destination file.</para
               >
             </item>
@@ -6555,6 +7643,8 @@
 
                 
 
+                
+
                  or <see
                  cref="M:System.Security.AccessControl.ObjectSecurity.GetSecurityDescriptorSddlForm(System.Security.AccessControl.AccessControlSections)" />
 
@@ -6562,8 +7652,12 @@
 
                 
 
+                
+
                  method of the source <see
                  cref="T:System.Security.AccessControl.FileSecurity" />
+
+                
 
                 
 
@@ -6581,6 +7675,8 @@
 
                 
 
+                
+
                  or <see
                  cref="M:System.Security.AccessControl.ObjectSecurity.SetSecurityDescriptorSddlForm(System.String)" />
 
@@ -6588,8 +7684,12 @@
 
                 
 
+                
+
                  method to copy the information retrieved in step 3 to the destination <see
                  cref="T:System.Security.AccessControl.FileSecurity" />
+
+                
 
                 
 
@@ -6607,8 +7707,12 @@
 
                 
 
+                
+
                  object to the destination file using the <see
                  cref="M:System.IO.File.SetAccessControl(System.String,System.Security.AccessControl.FileSecurity)" />
+
+                
 
                 
 
@@ -6626,8 +7730,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Security.AccessControl.FileSystemRights.ReadExtendedAttributes" />
+
+            
 
             
 
@@ -6640,8 +7748,12 @@
 
             
 
+            
+
              rights on the parent folder. To deny <see
              cref="F:System.Security.AccessControl.FileSystemRights.ReadAttributes" />
+
+            
 
             
 
@@ -6654,8 +7766,12 @@
 
             
 
+            
+
             , deny <see
              cref="F:System.Security.AccessControl.FileSystemRights.ListDirectory" />
+
+            
 
             
 
@@ -6674,11 +7790,15 @@
 
             
 
+            
+
              object to the specified file.</para
           >
         </summary>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6693,6 +7813,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.AccessControl.FileSecurity" />
 
@@ -6700,8 +7822,12 @@
 
           
 
+          
+
            object that describes an ACL entry to apply to the file described by the <paramref
            name="path" />
+
+          
 
           
 
@@ -6744,8 +7870,12 @@
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -6761,6 +7891,8 @@
 
             
 
+            
+
              and <see
              cref="F:System.IO.FileAttributes.ReadOnly" />
 
@@ -6768,8 +7900,12 @@
 
             
 
+            
+
             , can be combined. Other attributes, such as <see
              cref="F:System.IO.FileAttributes.Normal" />
+
+            
 
             
 
@@ -6785,8 +7921,12 @@
 
             
 
+            
+
              object using the <see
              cref="M:System.IO.File.SetAttributes(System.String,System.IO.FileAttributes)" />
+
+            
 
             
 
@@ -6799,6 +7939,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -6817,6 +7959,8 @@
 
             
 
+            
+
              of the file on the specified path.</para
           >
         </summary>
@@ -6827,10 +7971,14 @@
 
           
 
+          
+
           The path to the file. </param
         >
         <param name="fileAttributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6874,10 +8022,14 @@
 
           
 
+          
+
           is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters.</exception
         >
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="creationTime " />
+
+          
 
           
 
@@ -6892,8 +8044,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -6903,6 +8059,8 @@
         >
         <exception cref="T:System.IO.FileNotFoundException">
           <paramref name="path" />
+
+          
 
           
 
@@ -6921,8 +8079,12 @@
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -6933,6 +8095,8 @@
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to write to the specified file or directory. See <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+
+          
 
           
 
@@ -6953,8 +8117,12 @@
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -6968,6 +8136,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -6987,10 +8157,14 @@
 
           
 
+          
+
           The file for which to set the creation date and time information. </param
         >
         <param name="creationTime">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7003,8 +8177,12 @@
 
           
 
+          
+
            containing the value to set for the creation date and time of <paramref
            name="path" />
+
+          
 
           
 
@@ -7048,8 +8226,12 @@
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -7063,6 +8245,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -7082,10 +8266,14 @@
 
           
 
+          
+
           The file for which to set the creation date and time information. </param
         >
         <param name="creationTimeUtc">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7098,8 +8286,12 @@
 
           
 
+          
+
            containing the value to set for the creation date and time of <paramref
            name="path" />
+
+          
 
           
 
@@ -7143,6 +8335,8 @@
 
           
 
+          
+
           is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters.</exception
         >
         <exception cref="T:System.ArgumentNullException">
@@ -7152,8 +8346,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -7172,8 +8370,12 @@
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -7192,6 +8394,8 @@
 
           
 
+          
+
           .</permission
         >
         <exception cref="T:System.ArgumentOutOfRangeException">
@@ -7201,10 +8405,14 @@
 
           
 
+          
+
            specifies a value outside the range of date/times permitted for this operation.</exception
         >
         <exception cref="T:System.IO.FileNotFoundException">
           <paramref name="path" />
+
+          
 
           
 
@@ -7225,8 +8433,12 @@
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -7239,6 +8451,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -7258,10 +8472,14 @@
 
           
 
+          
+
           The file for which to set the access date and time information. </param
         >
         <param name="lastAccessTime">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7274,8 +8492,12 @@
 
           
 
+          
+
            containing the value to set for the last access date and time of <paramref
            name="path" />
+
+          
 
           
 
@@ -7319,8 +8541,12 @@
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -7333,6 +8559,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -7352,10 +8580,14 @@
 
           
 
+          
+
           The file for which to set the access date and time information. </param
         >
         <param name="lastAccessTimeUtc">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7368,8 +8600,12 @@
 
           
 
+          
+
            containing the value to set for the last access date and time of <paramref
            name="path" />
+
+          
 
           
 
@@ -7413,6 +8649,8 @@
 
           
 
+          
+
           is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters.</exception
         >
         <exception cref="T:System.ArgumentNullException">
@@ -7422,8 +8660,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -7442,8 +8684,12 @@
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -7462,6 +8708,8 @@
 
           
 
+          
+
           .</permission
         >
         <exception cref="T:System.ArgumentOutOfRangeException">
@@ -7471,10 +8719,14 @@
 
           
 
+          
+
            specifies a value outside the range of date/times permitted for this operation.</exception
         >
         <exception cref="T:System.IO.FileNotFoundException">
           <paramref name="path" />
+
+          
 
           
 
@@ -7495,8 +8747,12 @@
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -7509,6 +8765,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -7528,10 +8786,14 @@
 
           
 
+          
+
           The file for which to set the date and time information. </param
         >
         <param name="lastWriteTime">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7544,8 +8806,12 @@
 
           
 
+          
+
            containing the value to set for the last write date and time of <paramref
            name="path" />
+
+          
 
           
 
@@ -7589,8 +8855,12 @@
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -7603,6 +8873,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -7622,10 +8894,14 @@
 
           
 
+          
+
           The file for which to set the date and time information. </param
         >
         <param name="lastWriteTimeUtc">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7638,8 +8914,12 @@
 
           
 
+          
+
            containing the value to set for the last write date and time of <paramref
            name="path" />
+
+          
 
           
 
@@ -7687,10 +8967,14 @@
 
           
 
+          
+
           The file to write to. </param
         >
         <param name="bytes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7734,6 +9018,8 @@
 
             
 
+            
+
              method is to write out data by using UTF-8 encoding without a byte order mark (BOM). If it is necessary to include a UTF-8 identifier, such as a byte order mark, at the beginning of a file, use the <see
              cref="M:System.IO.File.WriteAllLines(System.String,System.Collections.Generic.IEnumerable{System.String},System.Text.Encoding)" />
 
@@ -7741,8 +9027,12 @@
 
             
 
+            
+
              method overload with <see
              cref="P:System.Text.Encoding.UTF8" />
+
+            
 
             
 
@@ -7759,8 +9049,12 @@
 
             
 
+            
+
              in its constructor, such as a <see
              cref="M:System.Collections.Generic.List`1.#ctor(System.Collections.Generic.IEnumerable{`0})" />
+
+            
 
             
 
@@ -7773,8 +9067,12 @@
 
             
 
+            
+
             , or a <see
              cref="M:System.Collections.Generic.SortedSet`1.#ctor" />
+
+            
 
             
 
@@ -7794,10 +9092,14 @@
 
           
 
+          
+
           The file to write to.</param
         >
         <param name="contents">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7841,6 +9143,8 @@
 
             
 
+            
+
              method is to write out data using UTF-8 encoding without a byte order mark (BOM). If it is necessary to include a UTF-8 identifier, such as a byte order mark, at the beginning of a file, use the <see
              cref="M:System.IO.File.WriteAllLines(System.String,System.String[],System.Text.Encoding)" />
 
@@ -7848,8 +9152,12 @@
 
             
 
+            
+
              method overload with <see
              cref="P:System.Text.Encoding.UTF8" />
+
+            
 
             
 
@@ -7870,10 +9178,14 @@
 
           
 
+          
+
           The file to write to. </param
         >
         <param name="contents">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7924,8 +9236,12 @@
 
                 
 
+                
+
                  query on the lines of a file, as obtained by using the <see
                  cref="Overload:System.IO.File.ReadLines" />
+
+                
 
                 
 
@@ -7938,6 +9254,8 @@
               <para
                 >The contents of a collection that implements an <see
                  cref="T:System.Collections.Generic.IEnumerable`1" />
+
+                
 
                 
 
@@ -7959,6 +9277,8 @@
 
           
 
+          
+
           The file to write to.</param
         >
         <param name="contents">
@@ -7968,10 +9288,14 @@
 
           
 
+          
+
           The lines to write to the file.</param
         >
         <param name="encoding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8021,10 +9345,14 @@
 
           
 
+          
+
           The file to write to. </param
         >
         <param name="contents">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8039,8 +9367,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Text.Encoding" />
+
+          
 
           
 
@@ -8083,6 +9415,8 @@
 
             
 
+            
+
              method will return an empty byte array. If it is necessary to include a UTF-8 identifier, such as a byte order mark, at the beginning of a file, use the <see
              cref="M:System.IO.File.WriteAllText(System.String,System.String,System.Text.Encoding)" />
 
@@ -8090,8 +9424,12 @@
 
             
 
+            
+
              method overload with <see
              cref="P:System.Text.Encoding.UTF8" />
+
+            
 
             
 
@@ -8112,10 +9450,14 @@
 
           
 
+          
+
           The file to write to. </param
         >
         <param name="contents">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8164,6 +9506,8 @@
 
           
 
+          
+
           The file to write to. </param
         >
         <param name="contents">
@@ -8173,10 +9517,14 @@
 
           
 
+          
+
           The string to write to the file. </param
         >
         <param name="encoding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

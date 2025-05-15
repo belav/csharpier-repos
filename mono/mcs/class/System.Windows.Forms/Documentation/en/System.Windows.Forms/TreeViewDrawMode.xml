@@ -20,6 +20,8 @@
 
         
 
+        
+
          property to indicate whether the nodes or node-labels of a <see
          cref="T:System.Windows.Forms.TreeView" />
 
@@ -27,8 +29,12 @@
 
         
 
+        
+
          are owner-drawn. For more information, see the <see
          cref="E:System.Windows.Forms.TreeView.DrawNode" />
+
+        
 
         
 
@@ -42,6 +48,8 @@
       <para
         >Defines constants that represent the ways a <see
          cref="T:System.Windows.Forms.TreeView" />
+
+        
 
         
 
@@ -65,6 +73,8 @@
           <para
             >The <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -96,6 +106,8 @@
 
             
 
+            
+
              node are drawn manually, including icons, checkboxes, plus and minus signs, and lines connecting the nodes.</para
           >
         </summary>
@@ -117,6 +129,8 @@
           <para
             >The label portion of the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 

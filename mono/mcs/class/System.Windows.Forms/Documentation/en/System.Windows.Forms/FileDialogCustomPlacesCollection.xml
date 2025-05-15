@@ -35,6 +35,8 @@
 
         
 
+        
+
          class.</para
       >
     </summary>
@@ -54,6 +56,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.FileDialogCustomPlacesCollection" />
+
+            
 
             
 
@@ -87,11 +91,15 @@
 
             
 
+            
+
              and is not a system or application wide change.</para
           >
           <para
             >The folders are positioned in the custom places in the order that they are added to the <see
              cref="T:System.Windows.Forms.FileDialog" />
+
+            
 
             
 
@@ -103,6 +111,8 @@
                 >Known Folder Guids for File Dialog Custom Places</a
               >
             </format>
+
+            
 
             
 
@@ -121,6 +131,8 @@
 
             
 
+            
+
              collection.</para
           >
         </summary>
@@ -131,8 +143,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Guid" />
+
+          
 
           
 
@@ -165,11 +181,15 @@
 
             
 
+            
+
              and is not a system or application wide change.</para
           >
           <para
             >The folders are positioned in the custom places in the order that they are added to the <see
              cref="T:System.Windows.Forms.FileDialog" />
+
+            
 
             
 
@@ -188,11 +208,15 @@
 
             
 
+            
+
              collection.</para
           >
         </summary>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

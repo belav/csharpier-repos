@@ -27,8 +27,12 @@
 
         
 
+        
+
          property to determine which row changed. Use the <see
          cref="P:System.Windows.Forms.DataGridViewRowStateChangedEventArgs.StateChanged" />
+
+        
 
         
 
@@ -41,6 +45,8 @@
          type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
         </format>
+
+        
 
         
 
@@ -59,8 +65,12 @@
 
         
 
+        
+
          event of a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -93,8 +103,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.DataGridViewRowStateChangedEventArgs.StateChanged" />
+
+            
 
             
 
@@ -113,6 +127,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -123,8 +139,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridViewRow" />
+
+          
 
           
 
@@ -139,8 +159,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -171,6 +195,8 @@
           <para
             >Gets the <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
+
+            
 
             
 

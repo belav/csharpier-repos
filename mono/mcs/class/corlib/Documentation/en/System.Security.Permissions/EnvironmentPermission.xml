@@ -55,8 +55,12 @@
 
           
 
+          
+
            method to prevent inadvertent access to system resources by trusted code. <see
            cref="M:System.Security.CodeAccessPermission.Deny" />
+
+          
 
           
 
@@ -68,6 +72,8 @@
               >How To: Run Partially Trusted Code in a Sandbox</a
             >
           </format>
+
+          
 
           
 
@@ -115,8 +121,12 @@
 
           
 
+          
+
            is not a valid <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -138,6 +148,8 @@
 
             
 
+            
+
              class with either restricted or unrestricted permission as specified.</para
           >
         </summary>
@@ -148,8 +160,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -193,8 +209,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -211,8 +231,12 @@
 
             
 
+            
+
              specifies a value not defined in <see
              cref="T:System.Security.Permissions.EnvironmentPermissionAccess" />
+
+            
 
             
 
@@ -231,8 +255,12 @@
 
             
 
+            
+
              values to be specified. This access applies to all listed environment variables. Use <see
              cref="M:System.Security.Permissions.EnvironmentPermission.AddPathList(System.Security.Permissions.EnvironmentPermissionAccess,System.String)" />
+
+            
 
             
 
@@ -251,11 +279,15 @@
 
             
 
+            
+
              class with the specified access to the specified environment variables.</para
           >
         </summary>
         <param name="flag">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -268,10 +300,14 @@
 
           
 
+          
+
            values. </param
         >
         <param name="pathList">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -320,8 +356,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.EnvironmentPermissionAccess" />
+
+          
 
           
 
@@ -331,6 +371,8 @@
         >
         <param name="pathList">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -412,12 +454,16 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
             <para
               >For the XML encoding for this class, see the <see
                cref="T:System.Security.Permissions.EnvironmentPermission" />
+
+              
 
               
 
@@ -434,6 +480,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -445,8 +493,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -462,8 +514,12 @@
 
             
 
+            
+
              does not contain the encoding for a <see
              cref="T:System.Security.Permissions.EnvironmentPermission" />
+
+            
 
             
 
@@ -479,6 +535,8 @@
 
             
 
+            
+
              is not valid.</para
           >
         </exception>
@@ -488,6 +546,8 @@
         </summary>
         <param name="esd">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -532,8 +592,12 @@
 
               
 
+              
+
                parameter is limited to the values of <see
                cref="T:System.Security.Permissions.EnvironmentPermissionAccess" />
+
+              
 
               
 
@@ -546,8 +610,12 @@
 
               
 
+              
+
                and <see
                cref="F:System.Security.Permissions.EnvironmentPermissionAccess.Write" />
+
+              
 
               
 
@@ -560,6 +628,8 @@
 
               
 
+              
+
                do not include <see
                cref="F:System.Security.Permissions.EnvironmentPermissionAccess.NoAccess" />
 
@@ -567,8 +637,12 @@
 
               
 
+              
+
                and <see
                cref="F:System.Security.Permissions.EnvironmentPermissionAccess.AllAccess" />
+
+              
 
               
 
@@ -588,6 +662,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -602,8 +678,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.EnvironmentPermissionAccess" />
+
+          
 
           
 
@@ -646,6 +726,8 @@
 
           
 
+          
+
            is not <see
            langword="null" />
 
@@ -653,8 +735,12 @@
 
           
 
+          
+
            and is not of type <see
            cref="T:System.Security.Permissions.EnvironmentPermission" />
+
+          
 
           
 
@@ -676,6 +762,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -719,6 +807,8 @@
 
           
 
+          
+
            is not <see
            langword="null" />
 
@@ -726,8 +816,12 @@
 
           
 
+          
+
            and is not of type <see
            cref="T:System.Security.Permissions.EnvironmentPermission" />
+
+          
 
           
 
@@ -749,6 +843,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -828,8 +924,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.EnvironmentPermissionAccess" />
+
+          
 
           
 
@@ -839,6 +939,8 @@
         >
         <param name="pathList">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -904,12 +1006,16 @@
 
               
 
+              
+
                class
  page.</para
             >
             <para
               >This method overrides <see
                cref="M:System.Security.CodeAccessPermission.ToXml" />
+
+              
 
               
 
@@ -963,8 +1069,12 @@
 
           
 
+          
+
            is not <see
            langword="null" />
+
+          
 
           
 
@@ -977,6 +1087,8 @@
 
           
 
+          
+
            .</exception
         >
         <remarks>
@@ -984,6 +1096,8 @@
           <para
             >The result of a call to <see
              cref="M:System.Security.Permissions.EnvironmentPermission.Union(System.Security.IPermission)" />
+
+            
 
             
 
@@ -1002,6 +1116,8 @@
         </returns>
         <param name="other">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

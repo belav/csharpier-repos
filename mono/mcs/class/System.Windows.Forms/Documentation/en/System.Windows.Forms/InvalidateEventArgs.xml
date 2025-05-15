@@ -21,8 +21,12 @@
 
         
 
+        
+
          event occurs when a control's display is updated. An <see
          cref="T:System.Windows.Forms.InvalidateEventArgs" />
+
+        
 
         
 
@@ -40,6 +44,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -48,6 +54,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.Control.Invalidated" />
+
+        
 
         
 
@@ -79,6 +87,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -89,8 +99,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -118,6 +132,8 @@
           <para
             >Gets the <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 

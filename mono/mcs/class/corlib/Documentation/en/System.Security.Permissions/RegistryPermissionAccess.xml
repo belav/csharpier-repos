@@ -37,12 +37,16 @@
 
         
 
+        
+
          values are independent; rights to one type of access do not imply rights to another. For instance, Write permission does not imply permission to Read or Create.</para
       >
       <block subset="none" type="note">
         <para
           >Although <see
            cref="F:System.Security.Permissions.RegistryPermissionAccess.NoAccess" />
+
+          
 
           
 
@@ -55,8 +59,12 @@
 
           
 
+          
+
            appear in <see
            cref="T:System.Security.Permissions.RegistryPermissionAccess" />
+
+          
 
           
 
@@ -69,8 +77,12 @@
 
           
 
+          
+
            because they describe no registry variable access types or all registry variable access types, respectively, and <see
            cref="M:System.Security.Permissions.RegistryPermission.GetPathList(System.Security.Permissions.RegistryPermissionAccess)" />
+
+          
 
           
 
@@ -113,8 +125,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Security.Permissions.RegistryPermissionAccess.Read" />
+
+            
 
             
 
@@ -127,8 +143,12 @@
 
             
 
+            
+
              access to registry variables. <see
              cref="F:System.Security.Permissions.RegistryPermissionAccess.AllAccess" />
+
+            
 
             
 
@@ -141,8 +161,12 @@
 
             
 
+            
+
              values and causes an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -155,8 +179,12 @@
 
             
 
+            
+
              parameter for the <see
              cref="M:System.Security.Permissions.RegistryPermission.GetPathList(System.Security.Permissions.RegistryPermissionAccess)" />
+
+            
 
             
 
@@ -219,8 +247,12 @@
 
             
 
+            
+
              represents no valid <see
              cref="T:System.Security.Permissions.RegistryPermissionAccess" />
+
+            
 
             
 
@@ -233,8 +265,12 @@
 
             
 
+            
+
              when used as the parameter for <see
              cref="M:System.Security.Permissions.RegistryPermission.GetPathList(System.Security.Permissions.RegistryPermissionAccess)" />
+
+            
 
             
 

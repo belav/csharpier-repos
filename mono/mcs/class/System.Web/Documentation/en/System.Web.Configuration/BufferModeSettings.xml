@@ -24,8 +24,12 @@
 
         
 
+        
+
          class is used to define roles for event providers, such as Critical, Notification, Analysis, and Logging. Each role would buffer events differently, as appropriate for that role. For example a Critical role would keep the <see
          cref="P:System.Web.Configuration.BufferModeSettings.MaxBufferSize" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
         , and <see
          cref="P:System.Web.Configuration.BufferModeSettings.UrgentFlushInterval" />
+
+        
 
         
 
@@ -83,6 +91,8 @@
 
             
 
+            
+
              class using specified settings.</para
           >
         </summary>
@@ -93,8 +103,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Web.Configuration.BufferModeSettings" />
+
+          
 
           
 
@@ -109,10 +123,14 @@
 
           
 
+          
+
           The maximum number of events buffered at one time. The value must be greater than zero.</param
         >
         <param name="maxFlushSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -127,8 +145,12 @@
 
           
 
+          
+
           The number of events buffered before a buffer flush is triggered. The value must be greater than zero and less than or equal to <paramref
            name="maxBufferSize" />
+
+          
 
           
 
@@ -143,8 +165,12 @@
 
           
 
+          
+
           The standard amount of time between buffer flushes. The value can be made infinite by setting it to <see
            cref="F:System.Int32.MaxValue" />
+
+          
 
           
 
@@ -159,8 +185,12 @@
 
           
 
+          
+
           The minimum length of time that can pass between buffer flushes. The value must be less than or equal to <paramref
            name="regularFlushInterval" />
+
+          
 
           
 
@@ -170,6 +200,8 @@
         >
         <param name="maxBufferThreads">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -232,6 +264,8 @@
 
             
 
+            
+
              objects in the <see
              cref="P:System.Web.Configuration.HealthMonitoringSection.BufferModes" />
 
@@ -239,8 +273,12 @@
 
             
 
+            
+
              collection are referred to by name by the providers in the <see
              cref="P:System.Web.Configuration.HealthMonitoringSection.Providers" />
+
+            
 
             
 
@@ -322,6 +360,8 @@
 
             
 
+            
+
              objects in the <see
              cref="P:System.Web.Configuration.HealthMonitoringSection.BufferModes" />
 
@@ -329,8 +369,12 @@
 
             
 
+            
+
              collection are referred to by name by the providers in the <see
              cref="P:System.Web.Configuration.HealthMonitoringSection.Providers" />
+
+            
 
             
 
@@ -379,6 +423,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -408,6 +454,8 @@
           <para
             >Gets a <see
              cref="T:System.Configuration.ConfigurationPropertyCollection" />
+
+            
 
             
 
@@ -451,11 +499,15 @@
 
             
 
+            
+
              ticks. Invalid values may cause an exception when the configuration section is saved.</para
           >
           <para
             >The default value varies based on the provider. The <see
              cref="T:System.Web.Configuration.BufferModeSettings" />
+
+            
 
             
 
@@ -468,8 +520,12 @@
 
             
 
+            
+
              collection are referred to by name by the providers in the <see
              cref="P:System.Web.Configuration.HealthMonitoringSection.Providers" />
+
+            
 
             
 
@@ -514,11 +570,15 @@
 
             
 
+            
+
              property. Invalid values may cause an exception to be thrown when the configuration section is saved.</para
           >
           <para
             >The default value varies based on the provider. The <see
              cref="T:System.Web.Configuration.BufferModeSettings" />
+
+            
 
             
 
@@ -531,8 +591,12 @@
 
             
 
+            
+
              collection are referred to by name by the providers in the <see
              cref="P:System.Web.Configuration.HealthMonitoringSection.Providers" />
+
+            
 
             
 
@@ -580,11 +644,15 @@
 
             
 
+            
+
              property. Invalid values may cause an exception when the configuration section is saved.</para
           >
           <para
             >The default value varies based on the provider. The <see
              cref="T:System.Web.Configuration.BufferModeSettings" />
+
+            
 
             
 
@@ -597,8 +665,12 @@
 
             
 
+            
+
              collection are referred to by name by the providers in the <see
              cref="P:System.Web.Configuration.HealthMonitoringSection.Providers" />
+
+            
 
             
 

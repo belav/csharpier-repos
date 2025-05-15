@@ -50,6 +50,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -80,11 +82,15 @@
 
             
 
+            
+
              class with specified name.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -143,6 +149,8 @@
         </summary>
         <param name="binding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -209,6 +217,8 @@
         </summary>
         <param name="binding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

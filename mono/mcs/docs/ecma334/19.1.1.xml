@@ -8,8 +8,12 @@
 
     
 
+    
+
     ) exists from any array type to System.Array, and an explicit reference conversion (<hyperlink
     >13.2.3</hyperlink>
+
+    
 
     
 
@@ -22,6 +26,8 @@
 
     
 
+    
+
     . Rather, it is a <non_terminal
      where="11.2">class-type</non_terminal>
 
@@ -29,8 +35,12 @@
 
     
 
+    
+
      from which all <non_terminal
      where="19.1">array-type</non_terminal>
+
+    
 
     
 

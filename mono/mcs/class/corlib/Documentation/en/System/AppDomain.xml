@@ -54,6 +54,8 @@
 
         
 
+        
+
          objects, help provide isolation, unloading, and security boundaries for executing managed code.</para
       >
       <list type="bullet">
@@ -66,8 +68,12 @@
 
             
 
+            
+
              that's executing a task becomes unstable, the <see
              cref="T:System.AppDomain" />
+
+            
 
             
 
@@ -89,8 +95,12 @@
 
         
 
+        
+
          method. <see
          cref="T:System.AppDomain" />
+
+        
 
         
 
@@ -103,8 +113,12 @@
 
         
 
+        
+
         ). When an <see
          cref="T:System.AppDomain" />
+
+        
 
         
 
@@ -115,6 +129,8 @@
       <para
         >The <see
          cref="T:System.AppDomain" />
+
+        
 
         
 
@@ -132,11 +148,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >This class implements the <see
          cref="T:System.MarshalByRefObject" />
+
+        
 
         
 
@@ -149,8 +169,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Security.IEvidenceFactory" />
+
+        
 
         
 
@@ -166,8 +190,12 @@
 
         
 
+        
+
          object. Doing so could publish a remote reference to that <see
          cref="T:System.AppDomain" />
+
+        
 
         
 
@@ -180,8 +208,12 @@
 
         
 
+        
+
          to remote access and effectively destroying code access security for that <see
          cref="T:System.AppDomain" />
+
+        
 
         
 
@@ -194,8 +226,12 @@
 
         
 
+        
+
          could obtain access to any resource the <see
          cref="T:System.AppDomain" />
+
+        
 
         
 
@@ -208,12 +244,16 @@
 
         
 
+        
+
          and that implements methods that could be used by malicious clients to bypass the security system.</para
       >
       <block subset="none" type="note">
         <para
           >The default value for the <see
            cref="P:System.AppDomainSetup.DisallowCodeDownload" />
+
+          
 
           
 
@@ -287,6 +327,8 @@
 
             
 
+            
+
              property instead.</para
           >
           <para>The private path, or relative search path, is the path relative to the base directory where the assembly resolver probes for private assemblies.</para>
@@ -297,6 +339,8 @@
         </summary>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -393,6 +437,8 @@
 
             
 
+            
+
              method takes an assembly display name and returns the post-policy display name. This is useful if you need to load an assembly using policy, because the reflection-only context does not apply policy.</para
           >
         </remarks>
@@ -411,8 +457,12 @@
 
           
 
+          
+
           The assembly display name, in the form provided by the <see
            cref="P:System.Reflection.Assembly.FullName" />
+
+          
 
           
 
@@ -450,11 +500,15 @@
 
             
 
+            
+
              delegate for this event indicates what assembly was loaded.</para
           >
           <para
             >To register an event handler for this event, you must have the required permissions, or a <see
              cref="T:System.Security.SecurityException" />
+
+            
 
             
 
@@ -467,6 +521,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Events Overview</a>
             </format>
+
+            
 
             
 
@@ -508,8 +564,12 @@
 
             
 
+            
+
              for this event to return the assembly that is specified by the <see
              cref="P:System.ResolveEventArgs.Name" />
+
+            
 
             
 
@@ -527,6 +587,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -537,8 +599,12 @@
 
             
 
+            
+
              property returns the assembly that requested the assembly load that could not be resolved. For example, the loader might be unable to load a dependency of the requesting assembly because the requesting assembly and its dependency are not in the probing path. Knowing the identity of the requesting assembly might be useful in locating the dependency or in identifying the correct version, if more than one version of the dependency is available. For more information, see <see
              cref="P:System.ResolveEventArgs.RequestingAssembly" />
+
+            
 
             
 
@@ -555,12 +621,16 @@
 
               
 
+              
+
                event is raised for all assemblies, including resource assemblies. In earlier versions, the event was not raised for resource assemblies. If the operating system is localized, the handler might be called multiple times: once for each culture in the fallback chain.</para
             >
           </block>
           <para
             >For this event, the <see
              cref="P:System.ResolveEventArgs.Name" />
+
+            
 
             
 
@@ -576,6 +646,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Events Overview</a>
             </format>
+
+            
 
             
 
@@ -614,8 +686,12 @@
 
             
 
+            
+
              property. It can also be retrieved using the <see
              cref="M:System.AppDomain.GetData(System.String)" />
+
+            
 
             
 
@@ -663,6 +739,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -705,10 +783,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="de8b8759-fca7-4260-896b-5a4973157672">Shadow Copying Assemblies</a>
             </format>
+
+            
 
             
 
@@ -758,8 +840,12 @@
 
             
 
+            
+
              attribute with a value of true must be applied either explicitly or by default to the COM type for this method to create an instance of that type; otherwise, <see
              cref="T:System.TypeLoadException" />
+
+            
 
             
 
@@ -782,6 +868,8 @@
 
             
 
+            
+
             . The return value needs to be unwrapped to access the real object.</para
           >
         </returns>
@@ -792,10 +880,14 @@
 
           
 
+          
+
           The name of a file containing an assembly that defines the requested type. </param
         >
         <param name="typeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -845,8 +937,12 @@
 
             
 
+            
+
              attribute with a value of true must be applied either explicitly or by default to the COM type for this method to create an instance of that type; otherwise, <see
              cref="T:System.TypeLoadException" />
+
+            
 
             
 
@@ -869,11 +965,15 @@
 
             
 
+            
+
             . The return value needs to be unwrapped to access the real object.</para
           >
         </returns>
         <param name="assemblyFile">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -888,6 +988,8 @@
 
           
 
+          
+
           The name of the requested type. </param
         >
         <param name="hashValue">
@@ -897,10 +999,14 @@
 
           
 
+          
+
           Represents the value of the computed hash code. </param
         >
         <param name="hashAlgorithm">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -943,8 +1049,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -962,11 +1072,15 @@
 
             
 
+            
+
              parameter is intended to identify the domain in a manner that is meaningful to humans. This string should be suitable for display in user interfaces.</para
           >
           <para
             >This method overload uses the <see
              cref="T:System.AppDomainSetup" />
+
+            
 
             
 
@@ -985,6 +1099,8 @@
         </returns>
         <param name="friendlyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1028,11 +1144,15 @@
 
             
 
+            
+
              information from the default application domain.</para
           >
           <para
             >If <paramref
              name="securityInfo" />
+
+            
 
             
 
@@ -1049,8 +1169,12 @@
 
               
 
+              
+
                no longer affects the grant set of the application domain. Use the <see
                cref="M:System.AppDomain.CreateDomain(System.String,System.Security.Policy.Evidence,System.AppDomainSetup,System.Security.PermissionSet,System.Security.Policy.StrongName[])" />
+
+              
 
               
 
@@ -1075,8 +1199,12 @@
 
           
 
+          
+
           The friendly name of the domain. This friendly name can be displayed in user interfaces to identify the domain. For more information, see <see
            cref="P:System.AppDomain.FriendlyName" />
+
+          
 
           
 
@@ -1086,6 +1214,8 @@
         >
         <param name="securityInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1129,8 +1259,12 @@
 
             
 
+            
+
              is not supplied, this method overload uses the <see
              cref="T:System.AppDomainSetup" />
+
+            
 
             
 
@@ -1141,6 +1275,8 @@
           <para
             >If <paramref
              name="securityInfo" />
+
+            
 
             
 
@@ -1157,8 +1293,12 @@
 
               
 
+              
+
                no longer affects the grant set of the application domain. Use the <see
                cref="M:System.AppDomain.CreateDomain(System.String,System.Security.Policy.Evidence,System.AppDomainSetup,System.Security.PermissionSet,System.Security.Policy.StrongName[])" />
+
+              
 
               
 
@@ -1183,8 +1323,12 @@
 
           
 
+          
+
           The friendly name of the domain. This friendly name can be displayed in user interfaces to identify the domain. For more information, see <see
            cref="P:System.AppDomain.FriendlyName" />
+
+          
 
           
 
@@ -1199,10 +1343,14 @@
 
           
 
+          
+
           Evidence that establishes the identity of the code that runs in the application domain. Pass null to use the evidence of the current application domain.</param
         >
         <param name="info">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1253,6 +1401,8 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.AppDomainSetup" />
 
@@ -1260,8 +1410,12 @@
 
             
 
+            
+
              object that you supply for <paramref
              name="info" />
+
+            
 
             
 
@@ -1277,11 +1431,15 @@
 
             
 
+            
+
              is not supplied, the evidence from the current application domain is used.</para
           >
           <para
             >The information provided for <paramref
              name="grantSet" />
+
+            
 
             
 
@@ -1294,8 +1452,12 @@
 
             
 
+            
+
              is used to create an <see
              cref="T:System.Security.Policy.ApplicationTrust" />
+
+            
 
             
 
@@ -1319,8 +1481,12 @@
 
           
 
+          
+
           The friendly name of the domain. This friendly name can be displayed in user interfaces to identify the domain. For more information, see the description of <see
            cref="P:System.AppDomain.FriendlyName" />
+
+          
 
           
 
@@ -1335,10 +1501,14 @@
 
           
 
+          
+
           Evidence that establishes the identity of the code that runs in the application domain. Pass null to use the evidence of the current application domain.</param
         >
         <param name="info">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1353,10 +1523,14 @@
 
           
 
+          
+
           A default permission set that is granted to all assemblies loaded into the new application domain that do not have specific grants. </param
         >
         <param name="fullTrustAssemblies">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1402,6 +1576,8 @@
 
             
 
+            
+
              is not supplied, the evidence from the current application domain is used.</para
           >
           <para
@@ -1412,10 +1588,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="de8b8759-fca7-4260-896b-5a4973157672">Shadow Copying Assemblies</a>
             </format>
+
+            
 
             
 
@@ -1432,8 +1612,12 @@
 
               
 
+              
+
                no longer affects the grant set of the application domain. Use the <see
                cref="M:System.AppDomain.CreateDomain(System.String,System.Security.Policy.Evidence,System.AppDomainSetup,System.Security.PermissionSet,System.Security.Policy.StrongName[])" />
+
+              
 
               
 
@@ -1458,8 +1642,12 @@
 
           
 
+          
+
           The friendly name of the domain. This friendly name can be displayed in user interfaces to identify the domain. For more information, see <see
            cref="P:System.AppDomain.FriendlyName" />
+
+          
 
           
 
@@ -1474,6 +1662,8 @@
 
           
 
+          
+
           Evidence that establishes the identity of the code that runs in the application domain. Pass null to use the evidence of the current application domain.</param
         >
         <param name="appBasePath">
@@ -1483,8 +1673,12 @@
 
           
 
+          
+
           The base directory that the assembly resolver uses to probe for assemblies. For more information, see <see
            cref="P:System.AppDomain.BaseDirectory" />
+
+          
 
           
 
@@ -1499,8 +1693,12 @@
 
           
 
+          
+
           The path relative to the base directory where the assembly resolver should probe for private assemblies. For more information, see <see
            cref="P:System.AppDomain.RelativeSearchPath" />
+
+          
 
           
 
@@ -1510,6 +1708,8 @@
         >
         <param name="shadowCopyFiles">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1557,11 +1757,15 @@
 
             
 
+            
+
              is executed in the context of the newly created application domain.</para
           >
           <para
             >If <paramref
              name="securityInfo" />
+
+            
 
             
 
@@ -1577,10 +1781,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="de8b8759-fca7-4260-896b-5a4973157672">Shadow Copying Assemblies</a>
             </format>
+
+            
 
             
 
@@ -1597,8 +1805,12 @@
 
               
 
+              
+
                no longer affects the grant set of the application domain. Use the <see
                cref="M:System.AppDomain.CreateDomain(System.String,System.Security.Policy.Evidence,System.AppDomainSetup,System.Security.PermissionSet,System.Security.Policy.StrongName[])" />
+
+              
 
               
 
@@ -1623,8 +1835,12 @@
 
           
 
+          
+
           The friendly name of the domain. This friendly name can be displayed in user interfaces to identify the domain. For more information, see <see
            cref="P:System.AppDomain.FriendlyName" />
+
+          
 
           
 
@@ -1639,6 +1855,8 @@
 
           
 
+          
+
           Evidence that establishes the identity of the code that runs in the application domain. Pass null to use the evidence of the current application domain.</param
         >
         <param name="appBasePath">
@@ -1648,8 +1866,12 @@
 
           
 
+          
+
           The base directory that the assembly resolver uses to probe for assemblies. For more information, see <see
            cref="P:System.AppDomain.BaseDirectory" />
+
+          
 
           
 
@@ -1664,8 +1886,12 @@
 
           
 
+          
+
           The path relative to the base directory where the assembly resolver should probe for private assemblies. For more information, see <see
            cref="P:System.AppDomain.RelativeSearchPath" />
+
+          
 
           
 
@@ -1680,10 +1906,14 @@
 
           
 
+          
+
           true to load a shadow copy of an assembly into the application domain. </param
         >
         <param name="adInit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1696,8 +1926,12 @@
 
           
 
+          
+
            delegate that represents a callback method to invoke when the new <see
            cref="T:System.AppDomain" />
+
+          
 
           
 
@@ -1712,6 +1946,8 @@
 
           
 
+          
+
           An array of string arguments to be passed to the callback represented by <paramref
            name="adInit" />
 
@@ -1719,8 +1955,12 @@
 
           
 
+          
+
           , when the new <see
            cref="T:System.AppDomain" />
+
+          
 
           
 
@@ -1763,6 +2003,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -1773,8 +2015,12 @@
 
             
 
+            
+
              for the format of <paramref
              name="assemblyName" />
+
+            
 
             
 
@@ -1790,8 +2036,12 @@
 
             
 
+            
+
              on a target application domain that is not the current application domain will result in a successful load of the assembly in the target application domain. Since an <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -1804,8 +2054,12 @@
 
             
 
+            
+
             , when this method attempts to return the <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -1828,6 +2082,8 @@
 
             
 
+            
+
             . The return value needs to be unwrapped to access the real object.</para
           >
         </returns>
@@ -1838,8 +2094,12 @@
 
           
 
+          
+
           The display name of the assembly. See <see
            cref="P:System.Reflection.Assembly.FullName" />
+
+          
 
           
 
@@ -1854,8 +2114,12 @@
 
           
 
+          
+
           The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see
            cref="P:System.Type.FullName" />
+
+          
 
           
 
@@ -1899,6 +2163,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -1909,8 +2175,12 @@
 
             
 
+            
+
              for the format of <paramref
              name="assemblyName" />
+
+            
 
             
 
@@ -1926,10 +2196,14 @@
 
             
 
+            
+
              parameter is related to client-activated objects; see <format
              type="text/html">
               <a href="4a791494-c18a-4711-a5c1-4ab0e49a8f1a">Client Activation</a>
             </format>
+
+            
 
             
 
@@ -1945,8 +2219,12 @@
 
             
 
+            
+
              on a target application domain that is not the current application domain will result in a successful load of the assembly in the target application domain. Since an <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -1959,8 +2237,12 @@
 
             
 
+            
+
             , when this method attempts to return the <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -1983,6 +2265,8 @@
 
             
 
+            
+
             . The return value needs to be unwrapped to access the real object.</para
           >
         </returns>
@@ -1993,8 +2277,12 @@
 
           
 
+          
+
           The display name of the assembly. See <see
            cref="P:System.Reflection.Assembly.FullName" />
+
+          
 
           
 
@@ -2009,8 +2297,12 @@
 
           
 
+          
+
           The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see
            cref="P:System.Type.FullName" />
+
+          
 
           
 
@@ -2025,6 +2317,8 @@
 
           
 
+          
+
           An array of one or more attributes that can participate in activation. Typically, an array that contains a single <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
@@ -2032,8 +2326,12 @@
 
           
 
+          
+
            object. The <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+          
 
           
 
@@ -2080,8 +2378,12 @@
 
             
 
+            
+
              for the format of <paramref
              name="assemblyName" />
+
+            
 
             
 
@@ -2097,10 +2399,14 @@
 
             
 
+            
+
              parameter is related to client-activated objects; see <format
              type="text/html">
               <a href="4a791494-c18a-4711-a5c1-4ab0e49a8f1a">Client Activation</a>
             </format>
+
+            
 
             
 
@@ -2116,8 +2422,12 @@
 
             
 
+            
+
              on a target application domain that is not the current application domain will result in a successful load of the assembly in the target application domain. Since an <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -2130,8 +2440,12 @@
 
             
 
+            
+
             , when this method attempts to return the <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -2154,6 +2468,8 @@
 
             
 
+            
+
             . The return value needs to be unwrapped to access the real object.</para
           >
         </returns>
@@ -2164,8 +2480,12 @@
 
           
 
+          
+
           The display name of the assembly. See <see
            cref="P:System.Reflection.Assembly.FullName" />
+
+          
 
           
 
@@ -2180,8 +2500,12 @@
 
           
 
+          
+
           The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see
            cref="P:System.Type.FullName" />
+
+          
 
           
 
@@ -2196,10 +2520,14 @@
 
           
 
+          
+
           A Boolean value specifying whether to perform a case-sensitive search or not. </param
         >
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2212,8 +2540,12 @@
 
           
 
+          
+
            constructor. If <paramref
            name="bindingAttr" />
+
+          
 
           
 
@@ -2228,6 +2560,8 @@
 
           
 
+          
+
           An object that enables the binding, coercion of argument types, invocation of members, and retrieval of <see
            cref="T:System.Reflection.MemberInfo" />
 
@@ -2235,8 +2569,12 @@
 
           
 
+          
+
            objects using reflection. If <paramref
            name="binder" />
+
+          
 
           
 
@@ -2251,8 +2589,12 @@
 
           
 
+          
+
           The arguments to pass to the constructor. This array of arguments must match in number, order, and type the parameters of the constructor to invoke. If the default constructor is preferred, <paramref
            name="args" />
+
+          
 
           
 
@@ -2267,8 +2609,12 @@
 
           
 
+          
+
           Culture-specific information that governs the coercion of <paramref
            name="args" />
+
+          
 
           
 
@@ -2281,6 +2627,8 @@
 
           
 
+          
+
            constructor. If <paramref
            name="culture" />
 
@@ -2288,8 +2636,12 @@
 
           
 
+          
+
            is null, the <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -2304,6 +2656,8 @@
 
           
 
+          
+
           An array of one or more attributes that can participate in activation. Typically, an array that contains a single <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
@@ -2311,8 +2665,12 @@
 
           
 
+          
+
            object. The <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+          
 
           
 
@@ -2367,8 +2725,12 @@
 
             
 
+            
+
              for the format of <paramref
              name="assemblyName" />
+
+            
 
             
 
@@ -2384,10 +2746,14 @@
 
             
 
+            
+
              parameter is related to client-activated objects; see <format
              type="text/html">
               <a href="4a791494-c18a-4711-a5c1-4ab0e49a8f1a">Client Activation</a>
             </format>
+
+            
 
             
 
@@ -2403,8 +2769,12 @@
 
             
 
+            
+
              on a target application domain that is not the current application domain will result in a successful load of the assembly in the target application domain. Since an <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -2417,8 +2787,12 @@
 
             
 
+            
+
             , when this method attempts to return the <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -2441,6 +2815,8 @@
 
             
 
+            
+
             . The return value needs to be unwrapped to access the real object.</para
           >
         </returns>
@@ -2451,8 +2827,12 @@
 
           
 
+          
+
           The display name of the assembly. See <see
            cref="P:System.Reflection.Assembly.FullName" />
+
+          
 
           
 
@@ -2467,8 +2847,12 @@
 
           
 
+          
+
           The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see
            cref="P:System.Type.FullName" />
+
+          
 
           
 
@@ -2483,10 +2867,14 @@
 
           
 
+          
+
           A Boolean value specifying whether to perform a case-sensitive search or not. </param
         >
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2499,8 +2887,12 @@
 
           
 
+          
+
            constructor. If <paramref
            name="bindingAttr" />
+
+          
 
           
 
@@ -2515,6 +2907,8 @@
 
           
 
+          
+
           An object that enables the binding, coercion of argument types, invocation of members, and retrieval of <see
            cref="T:System.Reflection.MemberInfo" />
 
@@ -2522,8 +2916,12 @@
 
           
 
+          
+
            objects using reflection. If <paramref
            name="binder" />
+
+          
 
           
 
@@ -2538,8 +2936,12 @@
 
           
 
+          
+
           The arguments to pass to the constructor. This array of arguments must match in number, order, and type the parameters of the constructor to invoke. If the default constructor is preferred, <paramref
            name="args" />
+
+          
 
           
 
@@ -2554,8 +2956,12 @@
 
           
 
+          
+
           Culture-specific information that governs the coercion of <paramref
            name="args" />
+
+          
 
           
 
@@ -2568,6 +2974,8 @@
 
           
 
+          
+
            constructor. If <paramref
            name="culture" />
 
@@ -2575,8 +2983,12 @@
 
           
 
+          
+
            is null, the <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -2591,6 +3003,8 @@
 
           
 
+          
+
           An array of one or more attributes that can participate in activation. Typically, an array that contains a single <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
@@ -2598,8 +3012,12 @@
 
           
 
+          
+
            object. The <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+          
 
           
 
@@ -2614,8 +3032,12 @@
 
           
 
+          
+
           Information used to authorize creation of <paramref
            name="typeName" />
+
+          
 
           
 
@@ -2658,6 +3080,8 @@
 
             
 
+            
+
              and <see
              cref="M:System.Runtime.Remoting.ObjectHandle.Unwrap" />
 
@@ -2665,8 +3089,12 @@
 
             
 
+            
+
             . This method calls the default constructor for <paramref
              name="typeName" />
+
+            
 
             
 
@@ -2682,8 +3110,12 @@
 
             
 
+            
+
              for the format of <paramref
              name="assemblyName" />
+
+            
 
             
 
@@ -2696,8 +3128,12 @@
 
             
 
+            
+
              property for the format of <paramref
              name="typeName" />
+
+            
 
             
 
@@ -2714,8 +3150,12 @@
 
               
 
+              
+
               , and that method makes an early-bound call to a method of an object of type T2 in an assembly C other than the current assembly or the assembly containing T1, assembly C is loaded into the current application domain. This loading occurs even if the early-bound call to T1.M() was made in the body of a <see
                cref="T:System.Reflection.Emit.DynamicMethod" />
+
+              
 
               
 
@@ -2739,6 +3179,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -2749,8 +3191,12 @@
 
           
 
+          
+
           The display name of the assembly. See <see
            cref="P:System.Reflection.Assembly.FullName" />
+
+          
 
           
 
@@ -2765,8 +3211,12 @@
 
           
 
+          
+
           The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see
            cref="P:System.Type.FullName" />
+
+          
 
           
 
@@ -2810,6 +3260,8 @@
 
             
 
+            
+
              and <see
              cref="M:System.Runtime.Remoting.ObjectHandle.Unwrap" />
 
@@ -2817,8 +3269,12 @@
 
             
 
+            
+
             . This method calls the default constructor for <paramref
              name="typeName" />
+
+            
 
             
 
@@ -2834,8 +3290,12 @@
 
             
 
+            
+
              for the format of <paramref
              name="assemblyName" />
+
+            
 
             
 
@@ -2848,8 +3308,12 @@
 
             
 
+            
+
              property for the format of <paramref
              name="typeName" />
+
+            
 
             
 
@@ -2865,10 +3329,14 @@
 
             
 
+            
+
              parameter is related to client-activated objects; see <format
              type="text/html">
               <a href="4a791494-c18a-4711-a5c1-4ab0e49a8f1a">Client Activation</a>
             </format>
+
+            
 
             
 
@@ -2885,8 +3353,12 @@
 
               
 
+              
+
               , and that method makes an early-bound call to a method of an object of type T2 in an assembly C other than the current assembly or the assembly containing T1, assembly C is loaded into the current application domain. This loading occurs even if the early-bound call to T1.M() was made in the body of a <see
                cref="T:System.Reflection.Emit.DynamicMethod" />
+
+              
 
               
 
@@ -2910,6 +3382,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -2920,8 +3394,12 @@
 
           
 
+          
+
           The display name of the assembly. See <see
            cref="P:System.Reflection.Assembly.FullName" />
+
+          
 
           
 
@@ -2936,8 +3414,12 @@
 
           
 
+          
+
           The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see
            cref="P:System.Type.FullName" />
+
+          
 
           
 
@@ -2952,6 +3434,8 @@
 
           
 
+          
+
           An array of one or more attributes that can participate in activation. Typically, an array that contains a single <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
@@ -2959,8 +3443,12 @@
 
           
 
+          
+
            object. The <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+          
 
           
 
@@ -3007,8 +3495,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Runtime.Remoting.ObjectHandle.Unwrap" />
+
+            
 
             
 
@@ -3024,8 +3516,12 @@
 
             
 
+            
+
              for the format of <paramref
              name="assemblyName" />
+
+            
 
             
 
@@ -3038,8 +3534,12 @@
 
             
 
+            
+
              property for the format of <paramref
              name="typeName" />
+
+            
 
             
 
@@ -3055,10 +3555,14 @@
 
             
 
+            
+
              parameter is related to client-activated objects; see <format
              type="text/html">
               <a href="4a791494-c18a-4711-a5c1-4ab0e49a8f1a">Client Activation</a>
             </format>
+
+            
 
             
 
@@ -3075,8 +3579,12 @@
 
               
 
+              
+
               , and that method makes an early-bound call to a method of an object of type T2 in an assembly C other than the current assembly or the assembly containing T1, assembly C is loaded into the current application domain. This loading occurs even if the early-bound call to T1.M() was made in the body of a <see
                cref="T:System.Reflection.Emit.DynamicMethod" />
+
+              
 
               
 
@@ -3100,6 +3608,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -3110,8 +3620,12 @@
 
           
 
+          
+
           The display name of the assembly. See <see
            cref="P:System.Reflection.Assembly.FullName" />
+
+          
 
           
 
@@ -3126,8 +3640,12 @@
 
           
 
+          
+
           The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see
            cref="P:System.Type.FullName" />
+
+          
 
           
 
@@ -3142,10 +3660,14 @@
 
           
 
+          
+
           A Boolean value specifying whether to perform a case-sensitive search or not. </param
         >
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3158,8 +3680,12 @@
 
           
 
+          
+
            constructor. If <paramref
            name="bindingAttr" />
+
+          
 
           
 
@@ -3174,6 +3700,8 @@
 
           
 
+          
+
           An object that enables the binding, coercion of argument types, invocation of members, and retrieval of <see
            cref="T:System.Reflection.MemberInfo" />
 
@@ -3181,8 +3709,12 @@
 
           
 
+          
+
            objects using reflection. If <paramref
            name="binder" />
+
+          
 
           
 
@@ -3197,8 +3729,12 @@
 
           
 
+          
+
           The arguments to pass to the constructor. This array of arguments must match in number, order, and type the parameters of the constructor to invoke. If the default constructor is preferred, <paramref
            name="args" />
+
+          
 
           
 
@@ -3213,8 +3749,12 @@
 
           
 
+          
+
           A culture-specific object used to govern the coercion of types. If <paramref
            name="culture" />
+
+          
 
           
 
@@ -3229,6 +3769,8 @@
 
           
 
+          
+
           An array of one or more attributes that can participate in activation. Typically, an array that contains a single <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
@@ -3236,8 +3778,12 @@
 
           
 
+          
+
            object. The <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+          
 
           
 
@@ -3292,8 +3838,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Runtime.Remoting.ObjectHandle.Unwrap" />
+
+            
 
             
 
@@ -3309,8 +3859,12 @@
 
             
 
+            
+
              for the format of <paramref
              name="assemblyName" />
+
+            
 
             
 
@@ -3323,8 +3877,12 @@
 
             
 
+            
+
              property for the format of <paramref
              name="typeName" />
+
+            
 
             
 
@@ -3340,10 +3898,14 @@
 
             
 
+            
+
              parameter is related to client-activated objects; see <format
              type="text/html">
               <a href="4a791494-c18a-4711-a5c1-4ab0e49a8f1a">Client Activation</a>
             </format>
+
+            
 
             
 
@@ -3360,8 +3922,12 @@
 
               
 
+              
+
               , and that method makes an early-bound call to a method of an object of type T2 in an assembly C other than the current assembly or the assembly containing T1, assembly C is loaded into the current application domain. This loading occurs even if the early-bound call to T1.M() was made in the body of a <see
                cref="T:System.Reflection.Emit.DynamicMethod" />
+
+              
 
               
 
@@ -3385,6 +3951,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -3395,8 +3963,12 @@
 
           
 
+          
+
           The display name of the assembly. See <see
            cref="P:System.Reflection.Assembly.FullName" />
+
+          
 
           
 
@@ -3411,8 +3983,12 @@
 
           
 
+          
+
           The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see
            cref="P:System.Type.FullName" />
+
+          
 
           
 
@@ -3427,10 +4003,14 @@
 
           
 
+          
+
           A Boolean value specifying whether to perform a case-sensitive search or not. </param
         >
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3443,8 +4023,12 @@
 
           
 
+          
+
            constructor. If <paramref
            name="bindingAttr" />
+
+          
 
           
 
@@ -3459,6 +4043,8 @@
 
           
 
+          
+
           An object that enables the binding, coercion of argument types, invocation of members, and retrieval of <see
            cref="T:System.Reflection.MemberInfo" />
 
@@ -3466,8 +4052,12 @@
 
           
 
+          
+
            objects using reflection. If <paramref
            name="binder" />
+
+          
 
           
 
@@ -3482,8 +4072,12 @@
 
           
 
+          
+
           The arguments to pass to the constructor. This array of arguments must match in number, order, and type the parameters of the constructor to invoke. If the default constructor is preferred, <paramref
            name="args" />
+
+          
 
           
 
@@ -3498,8 +4092,12 @@
 
           
 
+          
+
           A culture-specific object used to govern the coercion of types. If <paramref
            name="culture" />
+
+          
 
           
 
@@ -3514,6 +4112,8 @@
 
           
 
+          
+
           An array of one or more attributes that can participate in activation. Typically, an array that contains a single <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
@@ -3521,8 +4121,12 @@
 
           
 
+          
+
            object. The <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+          
 
           
 
@@ -3537,8 +4141,12 @@
 
           
 
+          
+
           Information used to authorize creation of <paramref
            name="typeName" />
+
+          
 
           
 
@@ -3581,6 +4189,8 @@
 
             
 
+            
+
              is invoked.</para
           >
           <para
@@ -3591,11 +4201,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >When the <see
              cref="M:System.AppDomain.CreateInstanceFrom(System.String,System.String)" />
+
+            
 
             
 
@@ -3613,6 +4227,8 @@
 
                 
 
+                
+
                  can occur. </para
               >
             </item>
@@ -3620,6 +4236,8 @@
               <para
                 >If the calling application domain makes early-bound calls to the instance type, <see
                  cref="T:System.InvalidCastException" />
+
+                
 
                 
 
@@ -3644,6 +4262,8 @@
 
             
 
+            
+
              is not found. The return value needs to be unwrapped to access the real object.</para
           >
         </returns>
@@ -3654,8 +4274,12 @@
 
           
 
+          
+
           The name, including the path, of a file that contains an assembly that defines the requested type. The assembly is loaded using the <see
            cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+
+          
 
           
 
@@ -3670,8 +4294,12 @@
 
           
 
+          
+
           The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see
            cref="P:System.Type.FullName" />
+
+          
 
           
 
@@ -3715,6 +4343,8 @@
 
             
 
+            
+
              is invoked.</para
           >
           <para
@@ -3725,10 +4355,14 @@
 
             
 
+            
+
              parameter is related to client-activated objects; see <format
              type="text/html">
               <a href="4a791494-c18a-4711-a5c1-4ab0e49a8f1a">Client Activation</a>
             </format>
+
+            
 
             
 
@@ -3744,11 +4378,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >When the <see
              cref="M:System.AppDomain.CreateInstanceFrom(System.String,System.String)" />
+
+            
 
             
 
@@ -3766,6 +4404,8 @@
 
                 
 
+                
+
                  can occur. </para
               >
             </item>
@@ -3773,6 +4413,8 @@
               <para
                 >If the calling application domain makes early-bound calls to the instance type, <see
                  cref="T:System.InvalidCastException" />
+
+                
 
                 
 
@@ -3797,6 +4439,8 @@
 
             
 
+            
+
              is not found. The return value needs to be unwrapped to access the real object.</para
           >
         </returns>
@@ -3807,8 +4451,12 @@
 
           
 
+          
+
           The name, including the path, of a file that contains an assembly that defines the requested type. The assembly is loaded using the <see
            cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+
+          
 
           
 
@@ -3823,8 +4471,12 @@
 
           
 
+          
+
           The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see
            cref="P:System.Type.FullName" />
+
+          
 
           
 
@@ -3839,6 +4491,8 @@
 
           
 
+          
+
           An array of one or more attributes that can participate in activation. Typically, an array that contains a single <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
@@ -3846,8 +4500,12 @@
 
           
 
+          
+
            object. The <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+          
 
           
 
@@ -3894,11 +4552,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >The <paramref
              name="activationAttributes" />
+
+            
 
             
 
@@ -3913,11 +4575,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >When the <see
              cref="M:System.AppDomain.CreateInstanceFrom(System.String,System.String)" />
+
+            
 
             
 
@@ -3935,6 +4601,8 @@
 
                 
 
+                
+
                  can occur. </para
               >
             </item>
@@ -3942,6 +4610,8 @@
               <para
                 >If the calling application domain makes early-bound calls to the instance type, <see
                  cref="T:System.InvalidCastException" />
+
+                
 
                 
 
@@ -3966,6 +4636,8 @@
 
             
 
+            
+
              is not found. The return value needs to be unwrapped to access the real object.</para
           >
         </returns>
@@ -3976,8 +4648,12 @@
 
           
 
+          
+
           The name, including the path, of a file that contains an assembly that defines the requested type. The assembly is loaded using the <see
            cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+
+          
 
           
 
@@ -3992,8 +4668,12 @@
 
           
 
+          
+
           The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see
            cref="P:System.Type.FullName" />
+
+          
 
           
 
@@ -4008,10 +4688,14 @@
 
           
 
+          
+
           A Boolean value specifying whether to perform a case-sensitive search or not. </param
         >
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4024,8 +4708,12 @@
 
           
 
+          
+
            constructor. If <paramref
            name="bindingAttr" />
+
+          
 
           
 
@@ -4040,6 +4728,8 @@
 
           
 
+          
+
           An object that enables the binding, coercion of argument types, invocation of members, and retrieval of <see
            cref="T:System.Reflection.MemberInfo" />
 
@@ -4047,8 +4737,12 @@
 
           
 
+          
+
            objects through reflection. If <paramref
            name="binder" />
+
+          
 
           
 
@@ -4063,8 +4757,12 @@
 
           
 
+          
+
           The arguments to pass to the constructor. This array of arguments must match in number, order, and type the parameters of the constructor to invoke. If the default constructor is preferred, <paramref
            name="args" />
+
+          
 
           
 
@@ -4079,8 +4777,12 @@
 
           
 
+          
+
           Culture-specific information that governs the coercion of <paramref
            name="args" />
+
+          
 
           
 
@@ -4093,6 +4795,8 @@
 
           
 
+          
+
            constructor. If <paramref
            name="culture" />
 
@@ -4100,8 +4804,12 @@
 
           
 
+          
+
            is null, the <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -4116,6 +4824,8 @@
 
           
 
+          
+
           An array of one or more attributes that can participate in activation. Typically, an array that contains a single <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
@@ -4123,8 +4833,12 @@
 
           
 
+          
+
            object. The <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+          
 
           
 
@@ -4179,11 +4893,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >The <paramref
              name="activationAttributes" />
+
+            
 
             
 
@@ -4198,11 +4916,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >When the <see
              cref="M:System.AppDomain.CreateInstanceFrom(System.String,System.String)" />
+
+            
 
             
 
@@ -4220,6 +4942,8 @@
 
                 
 
+                
+
                  can occur. </para
               >
             </item>
@@ -4227,6 +4951,8 @@
               <para
                 >If the calling application domain makes early-bound calls to the instance type, <see
                  cref="T:System.InvalidCastException" />
+
+                
 
                 
 
@@ -4251,6 +4977,8 @@
 
             
 
+            
+
              is not found. The return value needs to be unwrapped to access the real object.</para
           >
         </returns>
@@ -4261,8 +4989,12 @@
 
           
 
+          
+
           The name, including the path, of a file that contains an assembly that defines the requested type. The assembly is loaded using the <see
            cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+
+          
 
           
 
@@ -4277,8 +5009,12 @@
 
           
 
+          
+
           The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see
            cref="P:System.Type.FullName" />
+
+          
 
           
 
@@ -4293,10 +5029,14 @@
 
           
 
+          
+
           A Boolean value specifying whether to perform a case-sensitive search or not. </param
         >
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4309,8 +5049,12 @@
 
           
 
+          
+
            constructor. If <paramref
            name="bindingAttr" />
+
+          
 
           
 
@@ -4325,6 +5069,8 @@
 
           
 
+          
+
           An object that enables the binding, coercion of argument types, invocation of members, and retrieval of <see
            cref="T:System.Reflection.MemberInfo" />
 
@@ -4332,8 +5078,12 @@
 
           
 
+          
+
            objects through reflection. If <paramref
            name="binder" />
+
+          
 
           
 
@@ -4348,8 +5098,12 @@
 
           
 
+          
+
           The arguments to pass to the constructor. This array of arguments must match in number, order, and type the parameters of the constructor to invoke. If the default constructor is preferred, <paramref
            name="args" />
+
+          
 
           
 
@@ -4364,8 +5118,12 @@
 
           
 
+          
+
           Culture-specific information that governs the coercion of <paramref
            name="args" />
+
+          
 
           
 
@@ -4378,6 +5136,8 @@
 
           
 
+          
+
            constructor. If <paramref
            name="culture" />
 
@@ -4385,8 +5145,12 @@
 
           
 
+          
+
            is null, the <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -4401,6 +5165,8 @@
 
           
 
+          
+
           An array of one or more attributes that can participate in activation. Typically, an array that contains a single <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
@@ -4408,8 +5174,12 @@
 
           
 
+          
+
            object. The <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+          
 
           
 
@@ -4424,8 +5194,12 @@
 
           
 
+          
+
           Information used to authorize creation of <paramref
            name="typeName" />
+
+          
 
           
 
@@ -4468,8 +5242,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Runtime.Remoting.ObjectHandle.Unwrap" />
+
+            
 
             
 
@@ -4482,11 +5260,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >For more information, see the <see
              cref="M:System.Activator.CreateInstanceFrom(System.String,System.String)" />
+
+            
 
             
 
@@ -4509,11 +5291,15 @@
 
             
 
+            
+
              is not found.</para
           >
         </returns>
         <param name="assemblyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4528,8 +5314,12 @@
 
           
 
+          
+
           The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see
            cref="P:System.Type.FullName" />
+
+          
 
           
 
@@ -4573,6 +5363,8 @@
 
             
 
+            
+
              and <see
              cref="M:System.Runtime.Remoting.ObjectHandle.Unwrap" />
 
@@ -4580,8 +5372,12 @@
 
             
 
+            
+
             . This method calls the default constructor for <paramref
              name="typeName" />
+
+            
 
             
 
@@ -4597,10 +5393,14 @@
 
             
 
+            
+
              parameter is related to client-activated objects; see <format
              type="text/html">
               <a href="4a791494-c18a-4711-a5c1-4ab0e49a8f1a">Client Activation</a>
             </format>
+
+            
 
             
 
@@ -4611,6 +5411,8 @@
           <para
             >For more information about this method, see the <see
              cref="M:System.Activator.CreateInstanceFrom(System.String,System.String)" />
+
+            
 
             
 
@@ -4633,11 +5435,15 @@
 
             
 
+            
+
              is not found.</para
           >
         </returns>
         <param name="assemblyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4652,8 +5458,12 @@
 
           
 
+          
+
           The fully qualified name of the requested type, including the namespace but not the assembly (see the <see
            cref="P:System.Type.FullName" />
+
+          
 
           
 
@@ -4668,6 +5478,8 @@
 
           
 
+          
+
           An array of one or more attributes that can participate in activation. Typically, an array that contains a single <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
@@ -4675,8 +5487,12 @@
 
           
 
+          
+
            object. The <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+          
 
           
 
@@ -4723,8 +5539,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Runtime.Remoting.ObjectHandle.Unwrap" />
+
+            
 
             
 
@@ -4740,10 +5560,14 @@
 
             
 
+            
+
              parameter is related to client-activated objects; see <format
              type="text/html">
               <a href="4a791494-c18a-4711-a5c1-4ab0e49a8f1a">Client Activation</a>
             </format>
+
+            
 
             
 
@@ -4754,6 +5578,8 @@
           <para
             >For more information about this method, see the <see
              cref="M:System.Activator.CreateInstanceFrom(System.String,System.String)" />
+
+            
 
             
 
@@ -4776,11 +5602,15 @@
 
             
 
+            
+
              is not found.</para
           >
         </returns>
         <param name="assemblyFile">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4795,8 +5625,12 @@
 
           
 
+          
+
           The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see
            cref="P:System.Type.FullName" />
+
+          
 
           
 
@@ -4811,10 +5645,14 @@
 
           
 
+          
+
           A Boolean value specifying whether to perform a case-sensitive search or not. </param
         >
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4827,8 +5665,12 @@
 
           
 
+          
+
            constructor. If <paramref
            name="bindingAttr" />
+
+          
 
           
 
@@ -4843,6 +5685,8 @@
 
           
 
+          
+
           An object that enables the binding, coercion of argument types, invocation of members, and retrieval of <see
            cref="T:System.Reflection.MemberInfo" />
 
@@ -4850,8 +5694,12 @@
 
           
 
+          
+
            objects through reflection. If <paramref
            name="binder" />
+
+          
 
           
 
@@ -4866,8 +5714,12 @@
 
           
 
+          
+
           The arguments to pass to the constructor. This array of arguments must match in number, order, and type the parameters of the constructor to invoke. If the default constructor is preferred, <paramref
            name="args" />
+
+          
 
           
 
@@ -4882,8 +5734,12 @@
 
           
 
+          
+
           Culture-specific information that governs the coercion of <paramref
            name="args" />
+
+          
 
           
 
@@ -4896,6 +5752,8 @@
 
           
 
+          
+
            constructor. If <paramref
            name="culture" />
 
@@ -4903,8 +5761,12 @@
 
           
 
+          
+
            is null, the <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -4919,6 +5781,8 @@
 
           
 
+          
+
           An array of one or more attributes that can participate in activation. Typically, an array that contains a single <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
@@ -4926,8 +5790,12 @@
 
           
 
+          
+
            object. The <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+          
 
           
 
@@ -4982,8 +5850,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Runtime.Remoting.ObjectHandle.Unwrap" />
+
+            
 
             
 
@@ -4999,10 +5871,14 @@
 
             
 
+            
+
              parameter is related to client-activated objects; see <format
              type="text/html">
               <a href="4a791494-c18a-4711-a5c1-4ab0e49a8f1a">Client Activation</a>
             </format>
+
+            
 
             
 
@@ -5013,6 +5889,8 @@
           <para
             >For more information about this method, see the <see
              cref="M:System.Activator.CreateInstanceFrom(System.String,System.String)" />
+
+            
 
             
 
@@ -5035,11 +5913,15 @@
 
             
 
+            
+
              is not found.</para
           >
         </returns>
         <param name="assemblyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5054,8 +5936,12 @@
 
           
 
+          
+
           The fully qualified name of the requested type, including the namespace but not the assembly, as returned by the <see
            cref="P:System.Type.FullName" />
+
+          
 
           
 
@@ -5070,10 +5956,14 @@
 
           
 
+          
+
           A Boolean value specifying whether to perform a case-sensitive search or not. </param
         >
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5086,8 +5976,12 @@
 
           
 
+          
+
            constructor. If <paramref
            name="bindingAttr" />
+
+          
 
           
 
@@ -5102,6 +5996,8 @@
 
           
 
+          
+
           An object that enables the binding, coercion of argument types, invocation of members, and retrieval of <see
            cref="T:System.Reflection.MemberInfo" />
 
@@ -5109,8 +6005,12 @@
 
           
 
+          
+
            objects through reflection. If <paramref
            name="binder" />
+
+          
 
           
 
@@ -5125,8 +6025,12 @@
 
           
 
+          
+
           The arguments to pass to the constructor. This array of arguments must match in number, order, and type the parameters of the constructor to invoke. If the default constructor is preferred, <paramref
            name="args" />
+
+          
 
           
 
@@ -5141,8 +6045,12 @@
 
           
 
+          
+
           Culture-specific information that governs the coercion of <paramref
            name="args" />
+
+          
 
           
 
@@ -5155,6 +6063,8 @@
 
           
 
+          
+
            constructor. If <paramref
            name="culture" />
 
@@ -5162,8 +6072,12 @@
 
           
 
+          
+
            is null, the <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -5178,6 +6092,8 @@
 
           
 
+          
+
           An array of one or more attributes that can participate in activation. Typically, an array that contains a single <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
 
@@ -5185,8 +6101,12 @@
 
           
 
+          
+
            object. The <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+          
 
           
 
@@ -5201,8 +6121,12 @@
 
           
 
+          
+
           Information used to authorize creation of <paramref
            name="typeName" />
+
+          
 
           
 
@@ -5232,6 +6156,8 @@
           <para
             >Gets the current application domain for the current <see
              cref="T:System.Threading.Thread" />
+
+            
 
             
 
@@ -5275,12 +6201,16 @@
 
             
 
+            
+
              method overload. </para
           >
           <block subset="none" type="note">
             <para
               >During the development of code that emits dynamic assemblies, it is recommended that you use an overload of the <see
                cref="Overload:System.AppDomain.DefineDynamicAssembly" />
+
+              
 
               
 
@@ -5293,8 +6223,12 @@
 
               
 
+              
+
                in <paramref
                name="refusedPermissions" />
+
+              
 
               
 
@@ -5307,6 +6241,8 @@
 
               
 
+              
+
                in the <paramref
                name="refusedPermissions" />
 
@@ -5314,8 +6250,12 @@
 
               
 
+              
+
                parameter ensures that the MSIL is verified. A limitation of this technique is that it also causes <see
                cref="T:System.Security.SecurityException" />
+
+              
 
               
 
@@ -5340,10 +6280,14 @@
 
           
 
+          
+
           The unique identity of the dynamic assembly. </param
         >
         <param name="access">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5389,8 +6333,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Security.SecurityCriticalAttribute" />
+
+            
 
             
 
@@ -5401,6 +6349,8 @@
           <para
             >This method should be used only to define a dynamic assembly in the current application domain. For more information about this restriction, see the <see
              cref="M:System.AppDomain.Load(System.Reflection.AssemblyName)" />
+
+            
 
             
 
@@ -5425,6 +6375,8 @@
 
           
 
+          
+
           The unique identity of the dynamic assembly. </param
         >
         <param name="access">
@@ -5434,10 +6386,14 @@
 
           
 
+          
+
           The access mode for the dynamic assembly. </param
         >
         <param name="assemblyAttributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5486,8 +6442,12 @@
 
             
 
+            
+
              when defining a dynamic <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -5500,8 +6460,12 @@
 
             
 
+            
+
              through the security policy to determine the granted permissions. Partially trusted callers must supply a null <paramref
              name="evidence" />
+
+            
 
             
 
@@ -5514,6 +6478,8 @@
 
             
 
+            
+
              is null, the runtime copies the permission sets, that is, the current grant and deny sets, from the caller's <see
              cref="T:System.Reflection.Assembly" />
 
@@ -5521,8 +6487,12 @@
 
             
 
+            
+
              to the dynamic <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -5538,8 +6508,12 @@
 
             
 
+            
+
              is saved to disk, subsequent loads will get grants based on policies associated with the location where the <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -5550,6 +6524,8 @@
           <para
             >This method should only be used to define a dynamic assembly in the current application domain. For more information, see the <see
              cref="M:System.AppDomain.Load(System.Reflection.AssemblyName)" />
+
+            
 
             
 
@@ -5566,8 +6542,12 @@
 
               
 
+              
+
                method that specifies evidence and permissions, supply the evidence you want the dynamic assembly to have, and include <see
                cref="F:System.Security.Permissions.SecurityPermissionFlag.SkipVerification" />
+
+              
 
               
 
@@ -5580,8 +6560,12 @@
 
               
 
+              
+
               . Including <see
                cref="F:System.Security.Permissions.SecurityPermissionFlag.SkipVerification" />
+
+              
 
               
 
@@ -5594,8 +6578,12 @@
 
               
 
+              
+
                parameter ensures that the MSIL is verified. A limitation of this technique is that it also causes <see
                cref="T:System.Security.SecurityException" />
+
+              
 
               
 
@@ -5620,6 +6608,8 @@
 
           
 
+          
+
           The unique identity of the dynamic assembly. </param
         >
         <param name="access">
@@ -5629,10 +6619,14 @@
 
           
 
+          
+
           The mode in which the dynamic assembly will be accessed. </param
         >
         <param name="evidence">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5676,12 +6670,16 @@
 
             
 
+            
+
              method overload.</para
           >
           <block subset="none" type="note">
             <para
               >During the development of code that emits dynamic assemblies, it is recommended that you use an overload of the <see
                cref="Overload:System.AppDomain.DefineDynamicAssembly" />
+
+              
 
               
 
@@ -5694,8 +6692,12 @@
 
               
 
+              
+
                in <paramref
                name="refusedPermissions" />
+
+              
 
               
 
@@ -5708,6 +6710,8 @@
 
               
 
+              
+
                in the <paramref
                name="refusedPermissions" />
 
@@ -5715,8 +6719,12 @@
 
               
 
+              
+
                parameter ensures that the MSIL is verified. A limitation of this technique is that it also causes <see
                cref="T:System.Security.SecurityException" />
+
+              
 
               
 
@@ -5741,10 +6749,14 @@
 
           
 
+          
+
           The unique identity of the dynamic assembly. </param
         >
         <param name="access">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5759,8 +6771,12 @@
 
           
 
+          
+
           The name of the directory where the assembly will be saved. If <paramref
            name="dir" />
+
+          
 
           
 
@@ -5806,8 +6822,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Security.SecurityCriticalAttribute" />
+
+            
 
             
 
@@ -5818,6 +6838,8 @@
           <para
             >This method should be used only to define a dynamic assembly in the current application domain. For more information about this restriction, see the <see
              cref="M:System.AppDomain.Load(System.Reflection.AssemblyName)" />
+
+            
 
             
 
@@ -5841,10 +6863,14 @@
 
           
 
+          
+
           The unique identity of the dynamic assembly. </param
         >
         <param name="access">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5859,10 +6885,14 @@
 
           
 
+          
+
           An enumerable list of attributes to be applied to the assembly, or null if there are no attributes.</param
         >
         <param name="securityContextSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5912,8 +6942,12 @@
 
             
 
+            
+
              when defining a dynamic <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -5926,8 +6960,12 @@
 
             
 
+            
+
              through the security policy to determine the granted permissions. Partially trusted callers must supply a null <paramref
              name="evidence" />
+
+            
 
             
 
@@ -5940,6 +6978,8 @@
 
             
 
+            
+
              is null, the runtime copies the permission sets, that is, the current grant and deny sets, from the caller's <see
              cref="T:System.Reflection.Assembly" />
 
@@ -5947,8 +6987,12 @@
 
             
 
+            
+
              to the dynamic <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -5964,8 +7008,12 @@
 
             
 
+            
+
              is saved to disk, subsequent loads will get grants based on policies associated with the location where the <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -5976,6 +7024,8 @@
           <para
             >This method should only be used to define a dynamic assembly in the current application domain. For more information, see the <see
              cref="M:System.AppDomain.Load(System.Reflection.AssemblyName)" />
+
+            
 
             
 
@@ -5992,8 +7042,12 @@
 
               
 
+              
+
                method that specifies evidence and permissions, supply the evidence you want the dynamic assembly to have, and include <see
                cref="F:System.Security.Permissions.SecurityPermissionFlag.SkipVerification" />
+
+              
 
               
 
@@ -6006,8 +7060,12 @@
 
               
 
+              
+
               . Including <see
                cref="F:System.Security.Permissions.SecurityPermissionFlag.SkipVerification" />
+
+              
 
               
 
@@ -6020,8 +7078,12 @@
 
               
 
+              
+
                parameter ensures that the MSIL is verified. A limitation of this technique is that it also causes <see
                cref="T:System.Security.SecurityException" />
+
+              
 
               
 
@@ -6046,10 +7108,14 @@
 
           
 
+          
+
           The unique identity of the dynamic assembly. </param
         >
         <param name="access">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6064,8 +7130,12 @@
 
           
 
+          
+
           The name of the directory where the assembly will be saved. If <paramref
            name="dir" />
+
+          
 
           
 
@@ -6075,6 +7145,8 @@
         >
         <param name="evidence">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6125,8 +7197,12 @@
 
             
 
+            
+
             , <paramref
              name="optionalPermissions" />
+
+            
 
             
 
@@ -6139,6 +7215,8 @@
 
             
 
+            
+
              are not used unless the dynamic assembly has been saved and reloaded into memory. To specify permission requests for a transient assembly that is never saved to disk, use an overload of the <see
              cref="Overload:System.AppDomain.DefineDynamicAssembly" />
 
@@ -6146,8 +7224,12 @@
 
             
 
+            
+
              method that specifies evidence as well as requested permissions, and supply an <see
              cref="T:System.Security.Policy.Evidence" />
+
+            
 
             
 
@@ -6164,8 +7246,12 @@
 
               
 
+              
+
                method that specifies evidence and permissions, supply the evidence you want the dynamic assembly to have, and include <see
                cref="F:System.Security.Permissions.SecurityPermissionFlag.SkipVerification" />
+
+              
 
               
 
@@ -6178,8 +7264,12 @@
 
               
 
+              
+
               . Including <see
                cref="F:System.Security.Permissions.SecurityPermissionFlag.SkipVerification" />
+
+              
 
               
 
@@ -6192,8 +7282,12 @@
 
               
 
+              
+
                parameter ensures that the MSIL is verified. A limitation of this technique is that it also causes <see
                cref="T:System.Security.SecurityException" />
+
+              
 
               
 
@@ -6210,12 +7304,16 @@
 
             
 
+            
+
              method overload .</para
           >
           <block subset="none" type="note">
             <para
               >In the .NET Framework versions 1.0, 1.1, and 2.0, the declarative security attributes applied to a dynamic assembly by using the <paramref
                name="requiredPermissions" />
+
+              
 
               
 
@@ -6228,8 +7326,12 @@
 
               
 
+              
+
               , and <paramref
                name="refusedPermissions" />
+
+              
 
               
 
@@ -6241,6 +7343,8 @@
                   >Emitting Declarative Security Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -6265,10 +7369,14 @@
 
           
 
+          
+
           The unique identity of the dynamic assembly. </param
         >
         <param name="access">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6283,6 +7391,8 @@
 
           
 
+          
+
           The required permissions request. </param
         >
         <param name="optionalPermissions">
@@ -6292,10 +7402,14 @@
 
           
 
+          
+
           The optional permissions request. </param
         >
         <param name="refusedPermissions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6342,8 +7456,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Security.SecurityCriticalAttribute" />
+
+            
 
             
 
@@ -6359,8 +7477,12 @@
 
             
 
+            
+
              is true, the following methods of the resulting <see
              cref="T:System.Reflection.Emit.AssemblyBuilder" />
+
+            
 
             
 
@@ -6373,8 +7495,12 @@
 
             
 
+            
+
             , <see
              cref="Overload:System.Reflection.Emit.AssemblyBuilder.DefineResource" />
+
+            
 
             
 
@@ -6387,8 +7513,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Reflection.Emit.AssemblyBuilder.GetDynamicModule(System.String)" />
+
+            
 
             
 
@@ -6401,8 +7531,12 @@
 
             
 
+            
+
             , and <see
              cref="Overload:System.Reflection.Emit.AssemblyBuilder.Save" />
+
+            
 
             
 
@@ -6426,10 +7560,14 @@
 
           
 
+          
+
           The unique identity of the dynamic assembly. </param
         >
         <param name="access">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6444,8 +7582,12 @@
 
           
 
+          
+
           The name of the directory where the dynamic assembly will be saved. If <paramref
            name="dir" />
+
+          
 
           
 
@@ -6460,10 +7602,14 @@
 
           
 
+          
+
           true to synchronize the creation of modules, types, and members in the dynamic assembly; otherwise, false. </param
         >
         <param name="assemblyAttributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6515,8 +7661,12 @@
 
             
 
+            
+
             , <paramref
              name="optionalPermissions" />
+
+            
 
             
 
@@ -6529,8 +7679,12 @@
 
             
 
+            
+
              are used only if <paramref
              name="evidence" />
+
+            
 
             
 
@@ -6547,8 +7701,12 @@
 
               
 
+              
+
                in <paramref
                name="refusedPermissions" />
+
+              
 
               
 
@@ -6561,6 +7719,8 @@
 
               
 
+              
+
                in the <paramref
                name="refusedPermissions" />
 
@@ -6568,8 +7728,12 @@
 
               
 
+              
+
                parameter ensures that the MSIL is verified. A limitation of this technique is that it also causes <see
                cref="T:System.Security.SecurityException" />
+
+              
 
               
 
@@ -6586,8 +7750,12 @@
 
             
 
+            
+
              when defining a dynamic <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -6600,8 +7768,12 @@
 
             
 
+            
+
              through the security policy to determine the granted permissions. Partially trusted callers must supply a null <paramref
              name="evidence" />
+
+            
 
             
 
@@ -6614,6 +7786,8 @@
 
             
 
+            
+
              is null, the runtime copies the permission sets, that is, the current grant and deny sets, from the caller's <see
              cref="T:System.Reflection.Assembly" />
 
@@ -6621,8 +7795,12 @@
 
             
 
+            
+
              to the dynamic <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -6638,8 +7816,12 @@
 
             
 
+            
+
              is saved to disk, subsequent loads will get grants based on policies associated with the location where the <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -6650,6 +7832,8 @@
           <para
             >This method should only be used to define a dynamic assembly in the current application domain. For more information, see the <see
              cref="M:System.AppDomain.Load(System.Reflection.AssemblyName)" />
+
+            
 
             
 
@@ -6666,8 +7850,12 @@
 
               
 
+              
+
               , <paramref
                name="optionalPermissions" />
+
+              
 
               
 
@@ -6680,12 +7868,16 @@
 
               
 
+              
+
                parameters are stored in the old XML metadata format. See <format
                type="text/html">
                 <a href="9eeddee8-ca89-4440-b84b-fd613f590cd5"
                   >Emitting Declarative Security Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -6710,10 +7902,14 @@
 
           
 
+          
+
           The unique identity of the dynamic assembly. </param
         >
         <param name="access">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6728,10 +7924,14 @@
 
           
 
+          
+
           The evidence supplied for the dynamic assembly. The evidence is used unaltered as the final set of evidence used for policy resolution. </param
         >
         <param name="requiredPermissions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6746,10 +7946,14 @@
 
           
 
+          
+
           The optional permissions request. </param
         >
         <param name="refusedPermissions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6801,8 +8005,12 @@
 
             
 
+            
+
             , <paramref
              name="optionalPermissions" />
+
+            
 
             
 
@@ -6815,6 +8023,8 @@
 
             
 
+            
+
              are not used unless the dynamic assembly has been saved and reloaded into memory. To specify permission requests for a transient assembly that is never saved to disk, use an overload of the <see
              cref="Overload:System.AppDomain.DefineDynamicAssembly" />
 
@@ -6822,8 +8032,12 @@
 
             
 
+            
+
              method that specifies evidence as well as requested permissions, and supply an <see
              cref="T:System.Security.Policy.Evidence" />
+
+            
 
             
 
@@ -6840,8 +8054,12 @@
 
               
 
+              
+
                method that specifies evidence and permissions, supply the evidence you want the dynamic assembly to have, and include <see
                cref="F:System.Security.Permissions.SecurityPermissionFlag.SkipVerification" />
+
+              
 
               
 
@@ -6854,8 +8072,12 @@
 
               
 
+              
+
               . Including <see
                cref="F:System.Security.Permissions.SecurityPermissionFlag.SkipVerification" />
+
+              
 
               
 
@@ -6868,8 +8090,12 @@
 
               
 
+              
+
                parameter ensures that the MSIL is verified. A limitation of this technique is that it also causes <see
                cref="T:System.Security.SecurityException" />
+
+              
 
               
 
@@ -6886,12 +8112,16 @@
 
             
 
+            
+
              method overload.</para
           >
           <block subset="none" type="note">
             <para
               >In the .NET Framework versions 1.0, 1.1, and 2.0, the declarative security attributes applied to a dynamic assembly by using the <paramref
                name="requiredPermissions" />
+
+              
 
               
 
@@ -6904,8 +8134,12 @@
 
               
 
+              
+
               , and <paramref
                name="refusedPermissions" />
+
+              
 
               
 
@@ -6917,6 +8151,8 @@
                   >Emitting Declarative Security Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -6941,10 +8177,14 @@
 
           
 
+          
+
           The unique identity of the dynamic assembly. </param
         >
         <param name="access">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6959,8 +8199,12 @@
 
           
 
+          
+
           The name of the directory where the assembly will be saved. If <paramref
            name="dir" />
+
+          
 
           
 
@@ -6975,6 +8219,8 @@
 
           
 
+          
+
           The required permissions request. </param
         >
         <param name="optionalPermissions">
@@ -6984,10 +8230,14 @@
 
           
 
+          
+
           The optional permissions request. </param
         >
         <param name="refusedPermissions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7040,8 +8290,12 @@
 
             
 
+            
+
             , <paramref
              name="optionalPermissions" />
+
+            
 
             
 
@@ -7054,8 +8308,12 @@
 
             
 
+            
+
              are used only if <paramref
              name="evidence" />
+
+            
 
             
 
@@ -7072,8 +8330,12 @@
 
               
 
+              
+
                in <paramref
                name="refusedPermissions" />
+
+              
 
               
 
@@ -7086,6 +8348,8 @@
 
               
 
+              
+
                in the <paramref
                name="refusedPermissions" />
 
@@ -7093,8 +8357,12 @@
 
               
 
+              
+
                parameter ensures that the MSIL is verified. A limitation of this technique is that it also causes <see
                cref="T:System.Security.SecurityException" />
+
+              
 
               
 
@@ -7111,8 +8379,12 @@
 
             
 
+            
+
              when defining a dynamic <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -7125,8 +8397,12 @@
 
             
 
+            
+
              through the security policy to determine the granted permissions. Partially trusted callers must supply a null <paramref
              name="evidence" />
+
+            
 
             
 
@@ -7139,6 +8415,8 @@
 
             
 
+            
+
              is null, the runtime copies the permission sets, that is, the current grant and deny sets, from the caller's <see
              cref="T:System.Reflection.Assembly" />
 
@@ -7146,8 +8424,12 @@
 
             
 
+            
+
              to the dynamic <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -7163,8 +8445,12 @@
 
             
 
+            
+
              is saved to disk, subsequent loads will get grants based on policies associated with the location where the <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -7175,6 +8461,8 @@
           <para
             >This method should only be used to define a dynamic assembly in the current application domain. For more information, see the <see
              cref="M:System.AppDomain.Load(System.Reflection.AssemblyName)" />
+
+            
 
             
 
@@ -7191,8 +8479,12 @@
 
               
 
+              
+
               , <paramref
                name="optionalPermissions" />
+
+              
 
               
 
@@ -7205,12 +8497,16 @@
 
               
 
+              
+
                parameters are stored in the old XML metadata format. See <format
                type="text/html">
                 <a href="9eeddee8-ca89-4440-b84b-fd613f590cd5"
                   >Emitting Declarative Security Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -7235,10 +8531,14 @@
 
           
 
+          
+
           The unique identity of the dynamic assembly. </param
         >
         <param name="access">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7253,8 +8553,12 @@
 
           
 
+          
+
           The name of the directory where the assembly will be saved. If <paramref
            name="dir" />
+
+          
 
           
 
@@ -7269,10 +8573,14 @@
 
           
 
+          
+
           The evidence supplied for the dynamic assembly. The evidence is used unaltered as the final set of evidence used for policy resolution. </param
         >
         <param name="requiredPermissions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7287,10 +8595,14 @@
 
           
 
+          
+
           The optional permissions request. </param
         >
         <param name="refusedPermissions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7344,8 +8656,12 @@
 
             
 
+            
+
             , <paramref
              name="optionalPermissions" />
+
+            
 
             
 
@@ -7358,8 +8674,12 @@
 
             
 
+            
+
              are used only if <paramref
              name="evidence" />
+
+            
 
             
 
@@ -7376,8 +8696,12 @@
 
               
 
+              
+
                in <paramref
                name="refusedPermissions" />
+
+              
 
               
 
@@ -7390,6 +8714,8 @@
 
               
 
+              
+
                in the <paramref
                name="refusedPermissions" />
 
@@ -7397,8 +8723,12 @@
 
               
 
+              
+
                parameter ensures that the MSIL is verified. A limitation of this technique is that it also causes <see
                cref="T:System.Security.SecurityException" />
+
+              
 
               
 
@@ -7415,8 +8745,12 @@
 
             
 
+            
+
             . The runtime will map the <see
              cref="T:System.Security.Policy.Evidence" />
+
+            
 
             
 
@@ -7429,8 +8763,12 @@
 
             
 
+            
+
              parameter. If <paramref
              name="evidence" />
+
+            
 
             
 
@@ -7443,8 +8781,12 @@
 
             
 
+            
+
              to the dynamic <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -7460,8 +8802,12 @@
 
             
 
+            
+
              is saved to disk, subsequent loads will get grants based on policies associated with the location where the <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -7477,8 +8823,12 @@
 
             
 
+            
+
              is true, the following methods of the resulting <see
              cref="T:System.Reflection.Emit.AssemblyBuilder" />
+
+            
 
             
 
@@ -7491,8 +8841,12 @@
 
             
 
+            
+
             , <see
              cref="Overload:System.Reflection.Emit.AssemblyBuilder.DefineResource" />
+
+            
 
             
 
@@ -7505,8 +8859,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Reflection.Emit.AssemblyBuilder.GetDynamicModule(System.String)" />
+
+            
 
             
 
@@ -7519,8 +8877,12 @@
 
             
 
+            
+
             , and <see
              cref="Overload:System.Reflection.Emit.AssemblyBuilder.Save" />
+
+            
 
             
 
@@ -7537,8 +8899,12 @@
 
               
 
+              
+
               , <paramref
                name="optionalPermissions" />
+
+              
 
               
 
@@ -7551,12 +8917,16 @@
 
               
 
+              
+
                parameters are stored in the old XML metadata format. See <format
                type="text/html">
                 <a href="9eeddee8-ca89-4440-b84b-fd613f590cd5"
                   >Emitting Declarative Security Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -7581,10 +8951,14 @@
 
           
 
+          
+
           The unique identity of the dynamic assembly. </param
         >
         <param name="access">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7599,8 +8973,12 @@
 
           
 
+          
+
           The name of the directory where the dynamic assembly will be saved. If <paramref
            name="dir" />
+
+          
 
           
 
@@ -7615,10 +8993,14 @@
 
           
 
+          
+
           The evidence supplied for the dynamic assembly. The evidence is used unaltered as the final set of evidence used for policy resolution. </param
         >
         <param name="requiredPermissions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7633,6 +9015,8 @@
 
           
 
+          
+
           The optional permissions request. </param
         >
         <param name="refusedPermissions">
@@ -7642,10 +9026,14 @@
 
           
 
+          
+
           The refused permissions request. </param
         >
         <param name="isSynchronized">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7702,8 +9090,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Security.SecurityCriticalAttribute" />
+
+            
 
             
 
@@ -7719,8 +9111,12 @@
 
             
 
+            
+
             , <paramref
              name="optionalPermissions" />
+
+            
 
             
 
@@ -7733,8 +9129,12 @@
 
             
 
+            
+
              parameters are used only if the <paramref
              name="evidence" />
+
+            
 
             
 
@@ -7751,6 +9151,8 @@
 
               
 
+              
+
                flag in the <paramref
                name="refusedPermissions" />
 
@@ -7758,8 +9160,12 @@
 
               
 
+              
+
                parameter. The inclusion of this flag ensures that the Microsoft intermediate language (MSIL) will be verified. This technique will detect the unintentional generation of unverifiable code, which otherwise is very difficult to detect. A limitation of this technique is that it also causes <see
                cref="T:System.Security.SecurityException" />
+
+              
 
               
 
@@ -7776,8 +9182,12 @@
 
             
 
+            
+
             . The runtime maps the <see
              cref="T:System.Security.Policy.Evidence" />
+
+            
 
             
 
@@ -7790,8 +9200,12 @@
 
             
 
+            
+
              parameter. If <paramref
              name="evidence" />
+
+            
 
             
 
@@ -7808,8 +9222,12 @@
 
             
 
+            
+
              is true, the following methods of the resulting <see
              cref="T:System.Reflection.Emit.AssemblyBuilder" />
+
+            
 
             
 
@@ -7822,8 +9240,12 @@
 
             
 
+            
+
             , <see
              cref="Overload:System.Reflection.Emit.AssemblyBuilder.DefineResource" />
+
+            
 
             
 
@@ -7836,8 +9258,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Reflection.Emit.AssemblyBuilder.GetDynamicModule(System.String)" />
+
+            
 
             
 
@@ -7850,8 +9276,12 @@
 
             
 
+            
+
             , and <see
              cref="Overload:System.Reflection.Emit.AssemblyBuilder.Save" />
+
+            
 
             
 
@@ -7868,8 +9298,12 @@
 
               
 
+              
+
               , <paramref
                name="optionalPermissions" />
+
+              
 
               
 
@@ -7882,12 +9316,16 @@
 
               
 
+              
+
                parameters are stored in the old XML metadata format. For more information about these attributes, see <format
                type="text/html">
                 <a href="9eeddee8-ca89-4440-b84b-fd613f590cd5"
                   >Emitting Declarative Security Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -7913,10 +9351,14 @@
 
           
 
+          
+
           The unique identity of the dynamic assembly. </param
         >
         <param name="access">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7931,8 +9373,12 @@
 
           
 
+          
+
           The name of the directory where the dynamic assembly will be saved. If <paramref
            name="dir" />
+
+          
 
           
 
@@ -7947,10 +9393,14 @@
 
           
 
+          
+
           The evidence that is supplied for the dynamic assembly. The evidence is used unaltered as the final set of evidence used for policy resolution. </param
         >
         <param name="requiredPermissions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7965,10 +9415,14 @@
 
           
 
+          
+
           The optional permissions request. </param
         >
         <param name="refusedPermissions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7983,10 +9437,14 @@
 
           
 
+          
+
           true to synchronize the creation of modules, types, and members in the dynamic assembly; otherwise, false. </param
         >
         <param name="assemblyAttributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8027,6 +9485,8 @@
 
             
 
+            
+
              can specify a marshal-by-value, <see
              cref="T:System.MarshalByRefObject" />
 
@@ -8034,8 +9494,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.ContextBoundObject" />
+
+            
 
             
 
@@ -8050,6 +9514,8 @@
         </summary>
         <param name="callBackDelegate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8081,6 +9547,8 @@
           <para
             >An unmanaged host of the common language runtime (CLR) can provide a domain manager. The domain manager can participate in initializing the new application domain and supply other managers, such as a <see
              cref="T:System.Security.HostSecurityManager" />
+
+            
 
             
 
@@ -8120,11 +9588,15 @@
 
             
 
+            
+
              delegate for this event can perform any termination activities before the application domain is unloaded.</para
           >
           <para
             >Each application domain that needs to perform processing when it is unloaded should register an event handler for this event. A shared event handler should not be used, because the <see
              cref="T:System.EventHandler" />
+
+            
 
             
 
@@ -8143,11 +9615,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >To register an event handler for this event, you must have the required permissions, or a <see
              cref="T:System.Security.SecurityException" />
+
+            
 
             
 
@@ -8165,6 +9641,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -8173,6 +9651,8 @@
           <para
             >Occurs when an <see
              cref="T:System.AppDomain" />
+
+            
 
             
 
@@ -8208,8 +9688,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.AppDomainSetup" />
+
+            
 
             
 
@@ -8222,8 +9706,12 @@
 
             
 
+            
+
              property, so the format of the base directory is original path\hash code. The dynamic directory is a subdirectory of this base directory. Its simple name is the value of the <see
              cref="P:System.AppDomainSetup.ApplicationName" />
+
+            
 
             
 
@@ -8269,6 +9757,8 @@
 
             
 
+            
+
              associated with this application domain.</para
           >
         </summary>
@@ -8305,6 +9795,8 @@
 
             
 
+            
+
              method. You can also execute assemblies using the <see
              cref="Overload:System.AppDomain.ExecuteAssemblyByName" />
 
@@ -8312,8 +9804,12 @@
 
             
 
+            
+
              method, which loads assemblies using the <see
              cref="Overload:System.Reflection.Assembly.Load" />
+
+            
 
             
 
@@ -8329,8 +9825,12 @@
 
             
 
+            
+
              to load and execute, use the <see
              cref="M:System.AppDomain.CreateDomain(System.String,System.Security.Policy.Evidence)" />
+
+            
 
             
 
@@ -8349,6 +9849,8 @@
         </returns>
         <param name="assemblyFile">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8397,11 +9899,15 @@
 
             
 
+            
+
              method does not create a new process or application domain, and it does not execute the entry point method on a new thread.</para
           >
           <para
             >This method loads assemblies using the <see
              cref="Overload:System.Reflection.Assembly.LoadFile" />
+
+            
 
             
 
@@ -8414,8 +9920,12 @@
 
             
 
+            
+
              method, which loads assemblies using the <see
              cref="Overload:System.Reflection.Assembly.Load" />
+
+            
 
             
 
@@ -8439,10 +9949,14 @@
 
           
 
+          
+
           The name of the file that contains the assembly to execute. </param
         >
         <param name="assemblySecurity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8485,6 +9999,8 @@
 
             
 
+            
+
              method. You can also execute assemblies using the <see
              cref="Overload:System.AppDomain.ExecuteAssemblyByName" />
 
@@ -8492,8 +10008,12 @@
 
             
 
+            
+
              method, which loads assemblies using the <see
              cref="Overload:System.Reflection.Assembly.Load" />
+
+            
 
             
 
@@ -8517,10 +10037,14 @@
 
           
 
+          
+
           The name of the file that contains the assembly to execute.</param
         >
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8571,6 +10095,8 @@
 
             
 
+            
+
              method. You can also execute assemblies using the <see
              cref="Overload:System.AppDomain.ExecuteAssemblyByName" />
 
@@ -8578,8 +10104,12 @@
 
             
 
+            
+
              method, which loads assemblies using the <see
              cref="Overload:System.Reflection.Assembly.Load" />
+
+            
 
             
 
@@ -8603,6 +10133,8 @@
 
           
 
+          
+
           The name of the file that contains the assembly to execute. </param
         >
         <param name="assemblySecurity">
@@ -8612,10 +10144,14 @@
 
           
 
+          
+
           The supplied evidence for the assembly. </param
         >
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8663,6 +10199,8 @@
 
             
 
+            
+
              method. You can also execute assemblies using the <see
              cref="Overload:System.AppDomain.ExecuteAssemblyByName" />
 
@@ -8670,8 +10208,12 @@
 
             
 
+            
+
              method, which loads assemblies using the <see
              cref="Overload:System.Reflection.Assembly.Load" />
+
+            
 
             
 
@@ -8695,10 +10237,14 @@
 
           
 
+          
+
           The name of the file that contains the assembly to execute.</param
         >
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8713,10 +10259,14 @@
 
           
 
+          
+
           Represents the value of the computed hash code. </param
         >
         <param name="hashAlgorithm">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8772,6 +10322,8 @@
 
             
 
+            
+
              method. You can also execute assemblies using the <see
              cref="Overload:System.AppDomain.ExecuteAssemblyByName" />
 
@@ -8779,8 +10331,12 @@
 
             
 
+            
+
              method, which loads assemblies using the <see
              cref="Overload:System.Reflection.Assembly.Load" />
+
+            
 
             
 
@@ -8804,10 +10360,14 @@
 
           
 
+          
+
           The name of the file that contains the assembly to execute. </param
         >
         <param name="assemblySecurity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8822,6 +10382,8 @@
 
           
 
+          
+
           The arguments to the entry point of the assembly. </param
         >
         <param name="hashValue">
@@ -8831,10 +10393,14 @@
 
           
 
+          
+
           Represents the value of the computed hash code. </param
         >
         <param name="hashAlgorithm">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8876,8 +10442,12 @@
 
             
 
+            
+
              method provides similar functionality to the <see
              cref="Overload:System.AppDomain.ExecuteAssembly" />
+
+            
 
             
 
@@ -8890,8 +10460,12 @@
 
             
 
+            
+
              rather than by file location. Therefore, <see
              cref="Overload:System.AppDomain.ExecuteAssemblyByName" />
+
+            
 
             
 
@@ -8904,8 +10478,12 @@
 
             
 
+            
+
              method rather than with the <see
              cref="Overload:System.Reflection.Assembly.LoadFile" />
+
+            
 
             
 
@@ -8923,8 +10501,12 @@
 
             
 
+            
+
              to load and execute, use the <see
              cref="M:System.AppDomain.CreateDomain(System.String,System.Security.Policy.Evidence)" />
+
+            
 
             
 
@@ -8948,8 +10530,12 @@
 
           
 
+          
+
           The display name of the assembly. See <see
            cref="P:System.Reflection.Assembly.FullName" />
+
+          
 
           
 
@@ -8996,8 +10582,12 @@
 
             
 
+            
+
              method provides similar functionality to the <see
              cref="Overload:System.AppDomain.ExecuteAssembly" />
+
+            
 
             
 
@@ -9010,8 +10600,12 @@
 
             
 
+            
+
              rather than by file location. Therefore, <see
              cref="Overload:System.AppDomain.ExecuteAssemblyByName" />
+
+            
 
             
 
@@ -9024,8 +10618,12 @@
 
             
 
+            
+
              method rather than with the <see
              cref="Overload:System.Reflection.Assembly.LoadFile" />
+
+            
 
             
 
@@ -9046,6 +10644,8 @@
 
             
 
+            
+
             , using the specified arguments.</para
           >
         </summary>
@@ -9060,8 +10660,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Reflection.AssemblyName" />
+
+          
 
           
 
@@ -9071,6 +10675,8 @@
         >
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9118,8 +10724,12 @@
 
             
 
+            
+
              method provides similar functionality to the <see
              cref="Overload:System.AppDomain.ExecuteAssembly" />
+
+            
 
             
 
@@ -9132,8 +10742,12 @@
 
             
 
+            
+
              rather than by file location. Therefore, <see
              cref="Overload:System.AppDomain.ExecuteAssemblyByName" />
+
+            
 
             
 
@@ -9146,8 +10760,12 @@
 
             
 
+            
+
              method rather than with the <see
              cref="Overload:System.Reflection.Assembly.LoadFile" />
+
+            
 
             
 
@@ -9164,12 +10782,16 @@
 
             
 
+            
+
              method does not create a new process or application domain, and it does not execute the entry point method on a new thread.</para
           >
           <block subset="none" type="note">
             <para
               >When you use the <see
                cref="M:System.AppDomain.ExecuteAssemblyByName(System.String)" />
+
+              
 
               
 
@@ -9182,8 +10804,12 @@
 
               
 
+              
+
                parameter, pieces of evidence are merged. Pieces of evidence supplied as an argument to the <see
                cref="M:System.AppDomain.ExecuteAssemblyByName(System.String)" />
+
+              
 
               
 
@@ -9208,8 +10834,12 @@
 
           
 
+          
+
           The display name of the assembly. See <see
            cref="P:System.Reflection.Assembly.FullName" />
+
+          
 
           
 
@@ -9219,6 +10849,8 @@
         >
         <param name="assemblySecurity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9265,8 +10897,12 @@
 
             
 
+            
+
              method provides similar functionality to the <see
              cref="Overload:System.AppDomain.ExecuteAssembly" />
+
+            
 
             
 
@@ -9279,8 +10915,12 @@
 
             
 
+            
+
              rather than by file location. Therefore, <see
              cref="Overload:System.AppDomain.ExecuteAssemblyByName" />
+
+            
 
             
 
@@ -9293,8 +10933,12 @@
 
             
 
+            
+
              method rather than with the <see
              cref="Overload:System.Reflection.Assembly.LoadFile" />
+
+            
 
             
 
@@ -9320,8 +10964,12 @@
 
           
 
+          
+
           The display name of the assembly. See <see
            cref="P:System.Reflection.Assembly.FullName" />
+
+          
 
           
 
@@ -9331,6 +10979,8 @@
         >
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9385,8 +11035,12 @@
 
             
 
+            
+
              method provides similar functionality to the <see
              cref="Overload:System.AppDomain.ExecuteAssembly" />
+
+            
 
             
 
@@ -9399,8 +11053,12 @@
 
             
 
+            
+
              rather than by file location. Therefore, <see
              cref="Overload:System.AppDomain.ExecuteAssemblyByName" />
+
+            
 
             
 
@@ -9413,8 +11071,12 @@
 
             
 
+            
+
              method rather than with the <see
              cref="Overload:System.Reflection.Assembly.LoadFile" />
+
+            
 
             
 
@@ -9433,6 +11095,8 @@
 
               
 
+              
+
                method with an <see
                cref="T:System.Security.Policy.Evidence" />
 
@@ -9440,8 +11104,12 @@
 
               
 
+              
+
                parameter, pieces of evidence are merged. Pieces of evidence supplied as an argument to the <see
                cref="M:System.AppDomain.ExecuteAssemblyByName(System.String)" />
+
+              
 
               
 
@@ -9461,6 +11129,8 @@
 
             
 
+            
+
             , using the specified evidence and arguments.</para
           >
         </summary>
@@ -9475,8 +11145,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Reflection.AssemblyName" />
+
+          
 
           
 
@@ -9491,10 +11165,14 @@
 
           
 
+          
+
           Evidence for loading the assembly. </param
         >
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9549,8 +11227,12 @@
 
             
 
+            
+
              method provides similar functionality to the <see
              cref="Overload:System.AppDomain.ExecuteAssembly" />
+
+            
 
             
 
@@ -9563,8 +11245,12 @@
 
             
 
+            
+
              rather than by file location. Therefore, <see
              cref="Overload:System.AppDomain.ExecuteAssemblyByName" />
+
+            
 
             
 
@@ -9577,8 +11263,12 @@
 
             
 
+            
+
              method rather than with the <see
              cref="Overload:System.Reflection.Assembly.LoadFile" />
+
+            
 
             
 
@@ -9597,6 +11287,8 @@
 
               
 
+              
+
                method with an <see
                cref="T:System.Security.Policy.Evidence" />
 
@@ -9604,8 +11296,12 @@
 
               
 
+              
+
                parameter, pieces of evidence are merged. Pieces of evidence supplied as an argument to the <see
                cref="M:System.AppDomain.ExecuteAssemblyByName(System.String)" />
+
+              
 
               
 
@@ -9630,8 +11326,12 @@
 
           
 
+          
+
           The display name of the assembly. See <see
            cref="P:System.Reflection.Assembly.FullName" />
+
+          
 
           
 
@@ -9646,10 +11346,14 @@
 
           
 
+          
+
           Evidence for loading the assembly. </param
         >
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9681,6 +11385,8 @@
           <para
             > A <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -9763,6 +11469,8 @@
 
             
 
+            
+
              property, which is stable even when the .NET Framework is hosted by an environment that supports fibers (that is, lightweight threads).</para
           >
         </remarks>
@@ -9805,6 +11513,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -9815,8 +11525,12 @@
 
             
 
+            
+
              method, or the equivalent <see
              cref="T:System.AppDomainSetup" />
+
+            
 
             
 
@@ -9832,8 +11546,12 @@
 
             
 
+            
+
              method and inspect their values with the <see
              cref="M:System.AppDomain.GetData(System.String)" />
+
+            
 
             
 
@@ -9849,8 +11567,12 @@
 
             
 
+            
+
              of each predefined system entry and its corresponding <see
              cref="T:System.AppDomainSetup" />
+
+            
 
             
 
@@ -10014,11 +11736,15 @@
 
             
 
+            
+
              property, or null if the property does not exist.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10110,6 +11836,8 @@
 
             
 
+            
+
              an infinite lifetime by preventing a lease from being created.</para
           >
         </summary>
@@ -10170,6 +11898,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -10202,6 +11932,8 @@
 
                   
 
+                  
+
                    formatting behavior for the net_v35_short is enabled in this application domain.</para
                 >
               </description>
@@ -10222,11 +11954,15 @@
 
             
 
+            
+
              is set.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10271,6 +12007,8 @@
 
             
 
+            
+
              object represents the default application domain for the process; otherwise, false.</para
           >
         </returns>
@@ -10304,12 +12042,16 @@
 
             
 
+            
+
              method returns true only in the last case; it does not return true if finalization results from routine garbage collection or from CLR shutdown. </para
           >
           <block subset="none" type="note">
             <para
               >To determine whether finalization is due to CLR shutdown, use the <see
                cref="P:System.Environment.HasShutdownStarted" />
+
+              
 
               
 
@@ -10323,6 +12065,8 @@
             <para
               >An exception to this rule is the <see
                cref="T:System.Console" />
+
+              
 
               
 
@@ -10365,6 +12109,8 @@
 
             
 
+            
+
              method overload, unless the permissions that are granted to the application domain are equivalent to full trust.</para
           >
         </remarks>
@@ -10396,11 +12142,15 @@
 
             
 
+            
+
              method overload. Sandboxed application domains have a homogenous set of permissions; that is, the same set of permissions is granted to all partially trusted assemblies that are loaded into the application domain. A sandboxed application domain optionally has a list of strong-named assemblies that are exempt from this permission set, and instead run with full trust.</para
           >
           <para
             >Fully trusted code can use the <see
              cref="P:System.AppDomain.PermissionSet" />
+
+            
 
             
 
@@ -10449,8 +12199,12 @@
 
             
 
+            
+
              method. To load assemblies into other application domains, use a method such as <see
              cref="M:System.AppDomain.CreateInstanceAndUnwrap(System.String,System.String)" />
+
+            
 
             
 
@@ -10461,6 +12215,8 @@
           <para
             >For information that is common to all overloads of this method, see the <see
              cref="M:System.AppDomain.Load(System.Reflection.AssemblyName)" />
+
+            
 
             
 
@@ -10479,8 +12235,12 @@
 
             
 
+            
+
              with a common object file format (COFF) based image containing an emitted <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -10495,6 +12255,8 @@
         </returns>
         <param name="rawAssembly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10536,8 +12298,12 @@
 
             
 
+            
+
              method. To load assemblies into other application domains, use a method such as <see
              cref="M:System.AppDomain.CreateInstanceAndUnwrap(System.String,System.String)" />
+
+            
 
             
 
@@ -10554,8 +12320,12 @@
 
             
 
+            
+
              is not recommended. (A partial name omits one or more of culture, version, or public key token. For overloads that take a string instead of an <see
              cref="T:System.Reflection.AssemblyName" />
+
+            
 
             
 
@@ -10568,8 +12338,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.AppDomainSetup.ApplicationBase" />
+
+            
 
             
 
@@ -10585,8 +12359,12 @@
 
             
 
+            
+
              object represents application domain A, and the <see
              cref="Overload:System.AppDomain.Load" />
+
+            
 
             
 
@@ -10603,6 +12381,8 @@
 
             
 
+            
+
              does not derive from <see
              cref="T:System.MarshalByRefObject" />
 
@@ -10610,8 +12390,12 @@
 
             
 
+            
+
             , and therefore the return value of the <see
              cref="Overload:System.AppDomain.Load" />
+
+            
 
             
 
@@ -10628,8 +12412,12 @@
 
               
 
+              
+
                property and the <see
                cref="P:System.Reflection.AssemblyName.CodeBase" />
+
+              
 
               
 
@@ -10642,8 +12430,12 @@
 
               
 
+              
+
                property). If the file is not found, the <see
                cref="P:System.Reflection.AssemblyName.CodeBase" />
+
+              
 
               
 
@@ -10656,8 +12448,12 @@
 
               
 
+              
+
               , the display name is matched against the assembly. If the match fails, a <see
                cref="T:System.IO.FileLoadException" />
+
+              
 
               
 
@@ -10677,8 +12473,12 @@
 
             
 
+            
+
              given its <see
              cref="T:System.Reflection.AssemblyName" />
+
+            
 
             
 
@@ -10693,6 +12493,8 @@
         </returns>
         <param name="assemblyRef">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10734,8 +12536,12 @@
 
             
 
+            
+
              method. To load assemblies into other application domains, use a method such as <see
              cref="M:System.AppDomain.CreateInstanceAndUnwrap(System.String,System.String)" />
+
+            
 
             
 
@@ -10751,6 +12557,8 @@
 
             
 
+            
+
              method overload.</para
           >
         </remarks>
@@ -10759,6 +12567,8 @@
           <para
             >Loads an <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -10778,8 +12588,12 @@
 
           
 
+          
+
           The display name of the assembly. See <see
            cref="P:System.Reflection.Assembly.FullName" />
+
+          
 
           
 
@@ -10823,8 +12637,12 @@
 
             
 
+            
+
              method. To load assemblies into other application domains, use a method such as <see
              cref="M:System.AppDomain.CreateInstanceAndUnwrap(System.String,System.String)" />
+
+            
 
             
 
@@ -10835,6 +12653,8 @@
           <para
             >For information that is common to all overloads of this method, see the <see
              cref="M:System.AppDomain.Load(System.Reflection.AssemblyName)" />
+
+            
 
             
 
@@ -10853,6 +12673,8 @@
 
             
 
+            
+
              with a common object file format (COFF) based image containing an emitted <see
              cref="T:System.Reflection.Assembly" />
 
@@ -10860,8 +12682,12 @@
 
             
 
+            
+
             . The raw bytes representing the symbols for the <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -10881,10 +12707,14 @@
 
           
 
+          
+
           An array of type byte that is a COFF-based image containing an emitted assembly. </param
         >
         <param name="rawSymbolStore">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10932,8 +12762,12 @@
 
             
 
+            
+
              method. To load assemblies into other application domains, use a method such as <see
              cref="M:System.AppDomain.CreateInstanceAndUnwrap(System.String,System.String)" />
+
+            
 
             
 
@@ -10944,6 +12778,8 @@
           <para
             >For information that is common to all overloads of this method, see the <see
              cref="M:System.AppDomain.Load(System.Reflection.AssemblyName)" />
+
+            
 
             
 
@@ -10962,8 +12798,12 @@
 
             
 
+            
+
              given its <see
              cref="T:System.Reflection.AssemblyName" />
+
+            
 
             
 
@@ -10983,10 +12823,14 @@
 
           
 
+          
+
           An object that describes the assembly to load. </param
         >
         <param name="assemblySecurity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11034,8 +12878,12 @@
 
             
 
+            
+
              method. To load assemblies into other application domains, use a method such as <see
              cref="M:System.AppDomain.CreateInstanceAndUnwrap(System.String,System.String)" />
+
+            
 
             
 
@@ -11051,6 +12899,8 @@
 
             
 
+            
+
              method overload.</para
           >
         </remarks>
@@ -11059,6 +12909,8 @@
           <para
             >Loads an <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -11078,8 +12930,12 @@
 
           
 
+          
+
           The display name of the assembly. See <see
            cref="P:System.Reflection.Assembly.FullName" />
+
+          
 
           
 
@@ -11089,6 +12945,8 @@
         >
         <param name="assemblySecurity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11138,8 +12996,12 @@
 
             
 
+            
+
              method. To load assemblies into other application domains, use a method such as <see
              cref="M:System.AppDomain.CreateInstanceAndUnwrap(System.String,System.String)" />
+
+            
 
             
 
@@ -11150,6 +13012,8 @@
           <para
             >For information that is common to all overloads of this method, see the <see
              cref="M:System.AppDomain.Load(System.Reflection.AssemblyName)" />
+
+            
 
             
 
@@ -11168,6 +13032,8 @@
 
             
 
+            
+
              with a common object file format (COFF) based image containing an emitted <see
              cref="T:System.Reflection.Assembly" />
 
@@ -11175,8 +13041,12 @@
 
             
 
+            
+
             . The raw bytes representing the symbols for the <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -11196,6 +13066,8 @@
 
           
 
+          
+
           An array of type byte that is a COFF-based image containing an emitted assembly. </param
         >
         <param name="rawSymbolStore">
@@ -11205,10 +13077,14 @@
 
           
 
+          
+
           An array of type byte containing the raw bytes representing the symbols for the assembly. </param
         >
         <param name="securityEvidence">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11241,11 +13117,15 @@
 
             
 
+            
+
              exception is thrown, even if the current value of the property is false.</para
           >
           <para
             >Once monitoring is enabled, you can use the <see
              cref="P:System.AppDomain.MonitoringSurvivedMemorySize" />
+
+            
 
             
 
@@ -11258,6 +13138,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.AppDomain.MonitoringTotalAllocatedMemorySize" />
 
@@ -11265,8 +13147,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.AppDomain.MonitoringTotalProcessorTime" />
+
+            
 
             
 
@@ -11306,6 +13192,8 @@
 
             
 
+            
+
              method overload performs a full, blocking collection. (Concurrent collection occurs in the background and does not block the application.) </para
           >
         </remarks>
@@ -11338,6 +13226,8 @@
           <para
             >After a full, blocking collection, this number represents the number of bytes currently held live on managed heaps. It should be close to the number reported by the <see
              cref="M:System.GC.GetTotalMemory(System.Boolean)" />
+
+            
 
             
 
@@ -11435,6 +13325,8 @@
 
             
 
+            
+
              method overload have a homogenous set of permissions; that is, the same set of permissions is granted to all partially trusted assemblies that are loaded into the application domain. A sandboxed application domain optionally has a list of strong-named assemblies that are exempt from this permission set, and instead run with full trust.</para
           >
         </remarks>
@@ -11467,6 +13359,8 @@
 
             
 
+            
+
              for this event can perform termination activities, such as closing files, releasing storage and so on, before the process ends.</para
           >
           <para>Beginning with the .NET Framework version 2.0, this event is raised in each application domain that registers an event handler.</para>
@@ -11474,6 +13368,8 @@
             <para
               >The total execution time of all <see
                cref="E:System.AppDomain.ProcessExit" />
+
+              
 
               
 
@@ -11488,10 +13384,14 @@
 
               
 
+              
+
                method with the <format
                type="text/html">
                 <a href="5aef6808-5aac-4b2f-a2c7-fee1575c55ed">OPR_ProcessExit</a>
               </format>
+
+              
 
               
 
@@ -11509,6 +13409,8 @@
 
             
 
+            
+
              is thrown.</para
           >
           <para
@@ -11516,6 +13418,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Events Overview</a>
             </format>
+
+            
 
             
 
@@ -11559,8 +13463,12 @@
 
             
 
+            
+
              property. The <see
              cref="T:System.ResolveEventHandler" />
+
+            
 
             
 
@@ -11577,6 +13485,8 @@
 
               
 
+              
+
                method). It is not raised if the assembly that you are loading cannot be found.</para
             >
           </block>
@@ -11588,8 +13498,12 @@
 
             
 
+            
+
              property returns the assembly that requested the assembly load that could not be resolved. Knowing the identity of the requesting assembly might be useful in identifying the correct version of the dependency, if more than one version is available. For more information, see <see
              cref="P:System.ResolveEventArgs.RequestingAssembly" />
+
+            
 
             
 
@@ -11605,6 +13519,8 @@
 
             
 
+            
+
              property returns the assembly name before policy is applied.</para
           >
           <para
@@ -11612,6 +13528,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -11656,6 +13574,8 @@
 
             
 
+            
+
              method. </para
           >
         </remarks>
@@ -11668,6 +13588,8 @@
           <para
             >An array of <see
              cref="T:System.Reflection.Assembly" />
+
+            
 
             
 
@@ -11702,8 +13624,12 @@
 
             
 
+            
+
              property is not under <see
              cref="P:System.AppDomainSetup.ApplicationBase" />
+
+            
 
             
 
@@ -11714,6 +13640,8 @@
           <para
             >This property returns the value set using <see
              cref="P:System.AppDomainSetup.PrivateBinPath" />
+
+            
 
             
 
@@ -11754,6 +13682,8 @@
 
             
 
+            
+
              for this event can attempt to locate the assembly containing the resource and return it.</para
           >
           <block subset="none" type="note">
@@ -11767,8 +13697,12 @@
 
             
 
+            
+
              property contains the assembly that requested the resource. For more information, see <see
              cref="P:System.ResolveEventArgs.RequestingAssembly" />
+
+            
 
             
 
@@ -11784,6 +13718,8 @@
 
             
 
+            
+
               is thrown.</para
           >
           <para
@@ -11791,6 +13727,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Events Overview</a>
             </format>
+
+            
 
             
 
@@ -11842,6 +13780,8 @@
 
             
 
+            
+
              in order for the security policy to have effect.</para
           >
         </remarks>
@@ -11851,6 +13791,8 @@
         </summary>
         <param name="domainPolicy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11894,8 +13836,12 @@
 
             
 
+            
+
              property is not set. See the <see
              cref="P:System.AppDomainSetup.CachePath" />
+
+            
 
             
 
@@ -11913,6 +13859,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -11922,6 +13870,8 @@
         </summary>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11961,11 +13911,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The cache automatically contains predefined system entries that are inserted when the application domain is created. You cannot insert or modify system entries with this method. You can inspect their values with the <see
              cref="M:System.AppDomain.GetData(System.String)" />
+
+            
 
             
 
@@ -11978,8 +13932,12 @@
 
             
 
+            
+
              properties described in <see
              cref="M:System.AppDomain.GetData(System.String)" />
+
+            
 
             
 
@@ -11990,6 +13948,8 @@
           <para
             >You can insert or modify your own user defined name-data pairs with this method and inspect their values with the <see
              cref="M:System.AppDomain.GetData(System.String)" />
+
+            
 
             
 
@@ -12009,10 +13969,14 @@
 
           
 
+          
+
           The name of a user-defined application domain property to create or change. </param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12057,6 +14021,8 @@
 
             
 
+            
+
              method or the equivalent <see
              cref="T:System.AppDomainSetup" />
 
@@ -12064,8 +14030,12 @@
 
             
 
+            
+
              properties described in the Remarks section for the <see
              cref="M:System.AppDomain.GetData(System.String)" />
+
+            
 
             
 
@@ -12085,6 +14055,8 @@
 
           
 
+          
+
           The name of a user-defined application domain property to create or change. </param
         >
         <param name="data">
@@ -12094,10 +14066,14 @@
 
           
 
+          
+
           The value of the property. </param
         >
         <param name="permission">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12141,8 +14117,12 @@
 
             
 
+            
+
              property of the internal <see
              cref="T:System.AppDomainSetup" />
+
+            
 
             
 
@@ -12157,6 +14137,8 @@
         </summary>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12198,8 +14180,12 @@
 
             
 
+            
+
              property. For example, if you set <see
              cref="P:System.Threading.Thread.CurrentPrincipal" />
+
+            
 
             
 
@@ -12212,6 +14198,8 @@
 
             
 
+            
+
              method to set the <see
              cref="T:System.Security.Principal.PrincipalPolicy" />
 
@@ -12219,8 +14207,12 @@
 
             
 
+            
+
              to <see
              cref="F:System.Security.Principal.PrincipalPolicy.WindowsPrincipal" />
+
+            
 
             
 
@@ -12240,8 +14232,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Principal.PrincipalPolicy" />
+
+          
 
           
 
@@ -12280,6 +14276,8 @@
              type="text/html">
               <a href="de8b8759-fca7-4260-896b-5a4973157672">Shadow Copying Assemblies</a>
             </format>
+
+            
 
             
 
@@ -12328,8 +14326,12 @@
 
             
 
+            
+
              method restricts the shadow copy to the assemblies in the directories specified by <paramref
              name="path" />
+
+            
 
             
 
@@ -12345,6 +14347,8 @@
 
             
 
+            
+
              method does not specify additional directories to be searched for assemblies. Assemblies to be shadow-copied must already be located in the search path, for example under <see
              cref="P:System.AppDomain.BaseDirectory" />
 
@@ -12352,8 +14356,12 @@
 
             
 
+            
+
             . The <see
              cref="M:System.AppDomain.SetShadowCopyPath(System.String)" />
+
+            
 
             
 
@@ -12369,8 +14377,12 @@
 
             
 
+            
+
              property of the internal <see
              cref="T:System.AppDomainSetup" />
+
+            
 
             
 
@@ -12388,6 +14400,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -12397,6 +14411,8 @@
         </summary>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12435,6 +14451,8 @@
         </summary>
         <param name="principal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12492,10 +14510,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="de8b8759-fca7-4260-896b-5a4973157672">Shadow Copying Assemblies</a>
             </format>
+
+            
 
             
 
@@ -12579,6 +14601,8 @@
 
             
 
+            
+
             , see the MSDN Library.</para
           >
         </remarks>
@@ -12593,6 +14617,8 @@
 
           
 
+          
+
           The type information to return.</param
         >
         <param name="lcid">
@@ -12602,10 +14628,14 @@
 
           
 
+          
+
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12716,6 +14746,8 @@
               
 
               
+
+              
  .</block
             >
           </para>
@@ -12757,8 +14789,12 @@
 
             
 
+            
+
              event occurs when the common language runtime is unable to determine the assembly that can create the requested type. This can occur if the type is defined in a dynamic assembly, or the type is not defined in a dynamic assembly but the runtime does not know which assembly the type is defined in. The latter situation can occur when <see
              cref="M:System.Type.GetType" />
+
+            
 
             
 
@@ -12774,11 +14810,15 @@
 
             
 
+            
+
              for this event can attempt to locate and create the type.</para
           >
           <para
             >However, the <see
              cref="E:System.AppDomain.TypeResolve" />
+
+            
 
             
 
@@ -12794,8 +14834,12 @@
 
             
 
+            
+
              property contains the assembly that requested the type. For more information, see <see
              cref="P:System.ResolveEventArgs.RequestingAssembly" />
+
+            
 
             
 
@@ -12811,6 +14855,8 @@
 
             
 
+            
+
              is thrown.</para
           >
           <para
@@ -12818,6 +14864,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Events Overview</a>
             </format>
+
+            
 
             
 
@@ -12871,8 +14919,12 @@
 
             
 
+            
+
              event is handled in the default application domain, it is raised there for any unhandled exception in any thread, no matter what application domain the thread started in. If the thread started in an application domain that has an event handler for <see
              cref="E:System.AppDomain.UnhandledException" />
+
+            
 
             
 
@@ -12883,6 +14935,8 @@
           <para
             >For example, suppose a thread starts in application domain "AD1", calls a method in application domain "AD2", and from there calls a method in application domain "AD3", where it throws an exception. The first application domain in which the <see
              cref="E:System.AppDomain.UnhandledException" />
+
+            
 
             
 
@@ -12899,12 +14953,16 @@
 
               
 
+              
+
                event are executing.</para
             >
           </block>
           <para
             >If the event handler has a <see
              cref="T:System.Runtime.ConstrainedExecution.ReliabilityContractAttribute" />
+
+            
 
             
 
@@ -12920,6 +14978,8 @@
 
             
 
+            
+
              attribute.</para
           >
           <para
@@ -12930,10 +14990,14 @@
 
             
 
+            
+
              event to be raised without the application terminating. Starting with the .NET Framework version 2.0, this backstop for unhandled exceptions in child threads was removed, because the cumulative effect of such silent failures included performance degradation, corrupted data, and lockups, all of which were difficult to debug. For more information, including a list of cases in which the runtime does not terminate, see <format
              type="text/html">
               <a href="11294769-2e89-43cb-890e-ad4ad79cfbee">Exceptions in Managed Threads</a>
             </format>
+
+            
 
             
 
@@ -12949,6 +15013,8 @@
 
             
 
+            
+
              is thrown.</para
           >
           <para
@@ -12956,6 +15022,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Events Overview</a>
             </format>
+
+            
 
             
 
@@ -12974,11 +15042,15 @@
 
             
 
+            
+
              event can be preempted by other events if the unhandled exception occurs in the main application thread.</para
           >
           <para
             >In applications that use Windows Forms, unhandled exceptions in the main application thread cause the <see
              cref="E:System.Windows.Forms.Application.ThreadException" />
+
+            
 
             
 
@@ -12991,8 +15063,12 @@
 
             
 
+            
+
              event is not raised. This behavior can be changed by using the application configuration file, or by using the <see
              cref="M:System.Windows.Forms.Application.SetUnhandledExceptionMode(System.Windows.Forms.UnhandledExceptionMode)" />
+
+            
 
             
 
@@ -13005,6 +15081,8 @@
 
             
 
+            
+
              before the <see
              cref="E:System.Windows.Forms.Application.ThreadException" />
 
@@ -13012,8 +15090,12 @@
 
             
 
+            
+
              event handler is hooked up. This applies only to the main application thread. The <see
              cref="E:System.AppDomain.UnhandledException" />
+
+            
 
             
 
@@ -13029,8 +15111,12 @@
 
             
 
+            
+
              event. This event has an event arguments object with the same name as the event arguments object used by <see
              cref="E:System.AppDomain.UnhandledException" />
+
+            
 
             
 
@@ -13043,8 +15129,12 @@
 
             
 
+            
+
              property that allows the application to continue running, ignoring the unhandled exception (and leaving the application in an unknown state). In that case, the <see
              cref="E:System.AppDomain.UnhandledException" />
+
+            
 
             
 
@@ -13095,8 +15185,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -13106,6 +15200,8 @@
         >
         <exception cref="T:System.CannotUnloadAppDomainException">
           <paramref name="domain" />
+
+          
 
           
 
@@ -13123,8 +15219,12 @@
 
             
 
+            
+
             , the target domain is marked for unloading. The dedicated thread attempts to unload the domain, and all threads in the domain are aborted. If a thread does not abort, for example because it is executing unmanaged code, or because it is executing a finally block, then after a period of time a <see
              cref="T:System.CannotUnloadAppDomainException" />
+
+            
 
             
 
@@ -13137,8 +15237,12 @@
 
             
 
+            
+
             . If the thread that could not be aborted eventually ends, the target domain is not unloaded. Thus, in the .NET Framework version 2.0 <paramref
              name="domain" />
+
+            
 
             
 
@@ -13155,8 +15259,12 @@
 
               
 
+              
+
                causes an immediate <see
                cref="T:System.CannotUnloadAppDomainException" />
+
+              
 
               
 
@@ -13173,6 +15281,8 @@
 
             
 
+            
+
              are terminated using the <see
              cref="M:System.Threading.Thread.Abort(System.Object)" />
 
@@ -13180,8 +15290,12 @@
 
             
 
+            
+
              method, which throws a <see
              cref="T:System.Threading.ThreadAbortException" />
+
+            
 
             
 
@@ -13200,8 +15314,12 @@
 
             
 
+            
+
              is running in <paramref
              name="domain" />
+
+            
 
             
 
@@ -13214,8 +15332,12 @@
 
             
 
+            
+
              cannot be unloaded, a <see
              cref="T:System.CannotUnloadAppDomainException" />
+
+            
 
             
 
@@ -13228,6 +15350,8 @@
 
             
 
+            
+
             . However, if the thread that calls <see
              cref="M:System.AppDomain.Unload(System.AppDomain)" />
 
@@ -13235,8 +15359,12 @@
 
             
 
+            
+
              is running outside <paramref
              name="domain" />
+
+            
 
             
 
@@ -13251,6 +15379,8 @@
         </summary>
         <param name="domain">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

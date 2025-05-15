@@ -23,10 +23,14 @@
 
         
 
+        
+
          class, which contains methods that provide access to culture-specific resources at run time. For more information about creating and consuming resources, see <format
          type="text/html">
           <a href="8ad495d4-2941-40cf-bf64-e82e85825890">Resources in Applications</a>
         </format>
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
          and <see
          cref="Overload:System.Resources.ResourceManager.GetObject" />
+
+        
 
         
 
@@ -59,6 +67,8 @@
 
         
 
+        
+
          class (as well as the /str command-line option in the <format
          type="text/html">
           <a href="8ef159de-b660-4bec-9213-c3fbc4d1c6f4">Resource File Generator (Resgen.exe)</a>
@@ -68,8 +78,12 @@
 
         
 
+        
+
         ). The output of the <see
          cref="Overload:System.Resources.Tools.StronglyTypedResourceBuilder.Create" />
+
+        
 
         
 
@@ -243,8 +257,12 @@
 
             
 
+            
+
              parameter is a valid string of characters, that string is returned. If the <paramref
              name="key" />
+
+            
 
             
 
@@ -257,6 +275,8 @@
 
             
 
+            
+
              method attempts to generate a valid string based on the <paramref
              name="key" />
 
@@ -264,8 +284,12 @@
 
             
 
+            
+
              and <paramref
              name="provider" />
+
+            
 
             
 
@@ -281,8 +305,12 @@
 
             
 
+            
+
              parameter is an empty string (""), a string that consists of a single underscore character (_) is returned. If the <paramref
              name="key" />
+
+            
 
             
 
@@ -295,8 +323,12 @@
 
             
 
+            
+
              method compares each character in the string to a set of invalid tokens based on the language specified by the <paramref
              name="provider" />
+
+            
 
             
 
@@ -314,6 +346,8 @@
 
               
 
+              
+
                design pattern allows the use of language keywords by prefixing the keyword with the underscore character. The <see
                cref="M:System.Resources.Tools.StronglyTypedResourceBuilder.VerifyResourceName(System.String,System.CodeDom.Compiler.CodeDomProvider)" />
 
@@ -321,8 +355,12 @@
 
               
 
+              
+
                method calls the <see
                cref="M:System.CodeDom.Compiler.ICodeGenerator.CreateValidIdentifier(System.String)" />
+
+              
 
               
 
@@ -346,8 +384,12 @@
 
             
 
+            
+
              parameter. Any invalid tokens are replaced with the underscore (_) character, or null if the derived string still contains invalid characters according to the language specified by the <paramref
              name="provider" />
+
+            
 
             
 
@@ -363,6 +405,8 @@
 
           
 
+          
+
           The string to verify and, if necessary, convert to a valid resource name.</param
         >
         <param name="provider">
@@ -372,8 +416,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+          
 
           
 

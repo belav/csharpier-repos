@@ -28,6 +28,8 @@
 
         
 
+        
+
          interface in your custom handler to identify that your handler requires only read access to session-state values.</para
       >
     </remarks>

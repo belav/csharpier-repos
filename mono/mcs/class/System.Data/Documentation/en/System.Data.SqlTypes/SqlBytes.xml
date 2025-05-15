@@ -40,8 +40,12 @@
 
         
 
+        
+
          or a <see
          cref="P:System.Data.SqlTypes.SqlBytes.Stream" />
+
+        
 
         
 
@@ -66,6 +70,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.SqlTypes.SqlBytes" />
+
+            
 
             
 
@@ -98,11 +104,15 @@
 
             
 
+            
+
              class based on the specified byte array.</para
           >
         </summary>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -140,8 +150,12 @@
 
             
 
+            
+
              class based on the specified <see
              cref="T:System.Data.SqlTypes.SqlBinary" />
+
+            
 
             
 
@@ -157,8 +171,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBinary" />
+
+          
 
           
 
@@ -193,8 +211,12 @@
 
             
 
+            
+
              class based on the specified <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -210,8 +232,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -245,6 +271,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -255,8 +283,12 @@
 
             
 
+            
+
              for stream-wrapped instances of <see
              cref="T:System.Data.SqlTypes.SqlBytes" />
+
+            
 
             
 
@@ -298,6 +330,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -312,8 +346,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -341,6 +379,8 @@
           <para
             >Gets a Boolean value that indicates whether this <see
              cref="T:System.Data.SqlTypes.SqlBytes" />
+
+            
 
             
 
@@ -398,6 +438,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -428,6 +470,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -453,6 +497,8 @@
           <para
             >Returns a null instance of this <see
              cref="T:System.Data.SqlTypes.SqlBytes" />
+
+            
 
             
 
@@ -536,6 +582,8 @@
 
             
 
+            
+
             , an exception is thrown.</para
           >
           <para
@@ -546,8 +594,12 @@
 
             
 
+            
+
              specifies more bytes to be copied than are available from the <paramref
              name="offset" />
+
+            
 
             
 
@@ -568,6 +620,8 @@
 
             
 
+            
+
              instance to the passed-in buffer and returns the number of copied bytes.</para
           >
         </summary>
@@ -576,6 +630,8 @@
           <para
             >An <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -591,6 +647,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int64" />
 
@@ -598,8 +656,12 @@
 
           
 
+          
+
            long value offset into the value that is contained in the <see
            cref="T:System.Data.SqlTypes.SqlBytes" />
+
+          
 
           
 
@@ -614,6 +676,8 @@
 
           
 
+          
+
           The byte array buffer to copy into.</param
         >
         <param name="offsetInBuffer">
@@ -623,8 +687,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -639,8 +707,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -677,6 +749,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -687,8 +761,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Int64" />
+
+          
 
           
 
@@ -715,6 +793,8 @@
           <para
             >Sets this <see
              cref="T:System.Data.SqlTypes.SqlBytes" />
+
+            
 
             
 
@@ -750,6 +830,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -776,8 +858,12 @@
 
             
 
+            
+
              property loads all the data into memory. Using it with large value data can cause an <see
              cref="T:System.OutOfMemoryException" />
+
+            
 
             
 
@@ -791,6 +877,8 @@
           <para
             >Gets or sets the data of this <see
              cref="T:System.Data.SqlTypes.SqlBytes" />
+
+            
 
             
 
@@ -829,6 +917,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -839,10 +929,14 @@
 
           
 
+          
+
           The object to be populated with serialization information. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -905,6 +999,8 @@
 
           
 
+          
+
           XmlReader</param
         >
       </Docs>
@@ -932,6 +1028,8 @@
         </summary>
         <param name="writer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -966,8 +1064,12 @@
 
             
 
+            
+
              from this <see
              cref="T:System.Data.SqlTypes.SqlBytes" />
+
+            
 
             
 
@@ -981,6 +1083,8 @@
           <para
             >A <see
              cref="T:System.Data.SqlTypes.SqlBinary" />
+
+            
 
             
 
@@ -1012,6 +1116,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1020,6 +1126,8 @@
           <para
             >Returns a managed copy of the value held by this <see
              cref="T:System.Data.SqlTypes.SqlBytes" />
+
+            
 
             
 
@@ -1059,6 +1167,8 @@
 
             
 
+            
+
              but within <see
              cref="P:System.Data.SqlTypes.SqlBytes.MaxLength" />
 
@@ -1066,8 +1176,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Data.SqlTypes.SqlBytes.Length" />
+
+            
 
             
 
@@ -1083,8 +1197,12 @@
 
             
 
+            
+
              must be less than or equal to <see
              cref="P:System.Data.SqlTypes.SqlBytes.Length" />
+
+            
 
             
 
@@ -1095,6 +1213,8 @@
           <para
             >If an attempt is made to write beyond <see
              cref="P:System.Data.SqlTypes.SqlBytes.MaxLength" />
+
+            
 
             
 
@@ -1113,11 +1233,15 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1130,8 +1254,12 @@
 
           
 
+          
+
            long value offset into the value that is contained in the <see
            cref="T:System.Data.SqlTypes.SqlBytes" />
+
+          
 
           
 
@@ -1146,6 +1274,8 @@
 
           
 
+          
+
           The byte array buffer to copy into.</param
         >
         <param name="offsetInBuffer">
@@ -1155,8 +1285,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -1171,8 +1305,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
+
+          
 
           
 

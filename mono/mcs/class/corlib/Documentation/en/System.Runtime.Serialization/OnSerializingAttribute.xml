@@ -34,11 +34,15 @@
 
         
 
+        
+
          to manipulate the object before serialization occurs. </para
       >
       <para
         >To use the <see
          cref="T:System.Runtime.Serialization.OnSerializingAttribute" />
+
+        
 
         
 
@@ -51,8 +55,12 @@
 
         
 
+        
+
          parameter. The attribute marks the method to be called by the serialization infrastructure and the <see
          cref="T:System.Runtime.Serialization.StreamingContext" />
+
+        
 
         
 
@@ -65,6 +73,8 @@
         <para
           >In your code, you can use the word OnSerializing instead of the longer <see
            cref="T:System.Runtime.Serialization.OnSerializingAttribute" />
+
+          
 
           
 
@@ -100,6 +110,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Serialization.OnSerializingAttribute" />
+
+            
 
             
 

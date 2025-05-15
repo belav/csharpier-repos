@@ -24,6 +24,8 @@
 
         
 
+        
+
          class to programmatically specify the HTML &lt;title&gt; element of a Web Forms page. </para
       >
       <block subset="none" type="note">
@@ -37,6 +39,8 @@
 
           
 
+          
+
            directive, or by setting the <see
            cref="P:System.Web.UI.Page.Title" />
 
@@ -44,8 +48,12 @@
 
           
 
+          
+
            property of the <see
            cref="T:System.Web.UI.Page" />
+
+          
 
           
 
@@ -77,8 +85,12 @@
 
             
 
+            
+
              control using default values. It creates an HTML &lt;title&gt; element on the Web page. The following table shows the initial property value for an instance of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTitle" />
+
+            
 
             
 
@@ -119,6 +131,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -151,8 +165,12 @@
 
             
 
+            
+
              control is a <see
              cref="T:System.Web.UI.LiteralControl" />
+
+            
 
             
 
@@ -165,8 +183,12 @@
 
             
 
+            
+
              method sets the <see
              cref="P:System.Web.UI.HtmlControls.HtmlTitle.Text" />
+
+            
 
             
 
@@ -179,6 +201,8 @@
 
             
 
+            
+
              method is called. The <see
              cref="M:System.Web.UI.HtmlControls.HtmlTitle.AddParsedSubObject(System.Object)" />
 
@@ -186,8 +210,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTitle" />
+
+            
 
             
 
@@ -206,8 +234,12 @@
 
             
 
+            
+
              control that an XML or HTML element was parsed and adds that element to the <see
              cref="T:System.Web.UI.ControlCollection" />
+
+            
 
             
 
@@ -223,8 +255,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -260,8 +296,12 @@
 
             
 
+            
+
              collection for the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTitle" />
+
+            
 
             
 
@@ -275,6 +315,8 @@
           <para
             >A <see
              cref="T:System.Web.UI.ControlCollection" />
+
+            
 
             
 
@@ -314,8 +356,12 @@
 
             
 
+            
+
              method first calls the <see
              cref="M:System.Web.UI.HtmlTextWriter.RenderBeginTag(System.Web.UI.HtmlTextWriterTag)" />
+
+            
 
             
 
@@ -328,6 +374,8 @@
 
             
 
+            
+
              enumeration. Next, any child controls of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTitle" />
 
@@ -335,8 +383,12 @@
 
             
 
+            
+
              control are rendered. Finally, the <see
              cref="M:System.Web.UI.HtmlTextWriter.RenderEndTag" />
+
+            
 
             
 
@@ -355,8 +407,12 @@
 
             
 
+            
+
              control to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -372,8 +428,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -411,6 +471,8 @@
           <para
             >Use the <see
              cref="P:System.Web.UI.HtmlControls.HtmlTitle.Text" />
+
+            
 
             
 

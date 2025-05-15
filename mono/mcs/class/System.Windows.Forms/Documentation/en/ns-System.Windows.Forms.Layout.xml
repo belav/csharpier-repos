@@ -11,6 +11,8 @@
 
         
 
+        
+
          namespace contains classes for implementing layout behaviors in your form or control.</para
       >
     </summary>
@@ -27,6 +29,8 @@
 
             
 
+            
+
              abstract base class is used by the <see
              cref="T:System.Windows.Forms.TableLayoutPanel" />
 
@@ -34,8 +38,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Windows.Forms.FlowLayoutPanel" />
+
+            
 
             
 
@@ -53,8 +61,12 @@
 
             
 
+            
+
              class collects objects that participate in a layout managed by a <see
              cref="T:System.Windows.Forms.Layout.LayoutEngine" />
+
+            
 
             
 

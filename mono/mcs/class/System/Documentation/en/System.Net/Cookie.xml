@@ -29,6 +29,8 @@
 
         
 
+        
+
          class is used by a client application to retrieve information about cookies that are received with HTTP responses. The following cookie formats are supported during parsing of the HTTP response headers: the original Netscape specification, RFC 2109, and RFC 2965.</para
       >
       <para
@@ -39,8 +41,12 @@
 
         
 
+        
+
         , see the various <see
          cref="T:System.Net.Cookie" />
+
+        
 
         
 
@@ -80,8 +86,12 @@
 
             
 
+            
+
             , <paramref
              name="value" />
+
+            
 
             
 
@@ -94,8 +104,12 @@
 
             
 
+            
+
             , and <paramref
              name="domain" />
+
+            
 
             
 
@@ -108,8 +122,12 @@
 
             
 
+            
+
              property must be initialized before using an instance of the <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -123,6 +141,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -161,11 +181,15 @@
 
             
 
+            
+
              parameter uses the empty string ("").</para
           >
           <para
             >The <paramref
              name="value" />
+
+            
 
             
 
@@ -178,8 +202,12 @@
 
             
 
+            
+
              must not be a null reference (Nothing in Visual Basic). The following characters are reserved and cannot be passed in the <paramref
              name="value" />
+
+            
 
             
 
@@ -192,8 +220,12 @@
 
             
 
+            
+
              parameter is enclosed in double quotes: semicolon, comma. So the following example constructor would succeed but when you try to add this <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -206,6 +238,8 @@
 
             
 
+            
+
              instance with the <see
              cref="M:System.Net.CookieContainer.Add(System.Net.Cookie)" />
 
@@ -213,8 +247,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Net.CookieContainer.Add(System.Uri,System.Net.Cookie)" />
+
+            
 
             
 
@@ -231,8 +269,12 @@
 
             
 
+            
+
              that can be added to a <see
              cref="T:System.Net.CookieContainer" />
+
+            
 
             
 
@@ -253,6 +295,8 @@
 
             
 
+            
+
              class with a specified <see
              cref="P:System.Net.Cookie.Name" />
 
@@ -260,8 +304,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.Cookie.Value" />
+
+            
 
             
 
@@ -277,6 +325,8 @@
 
           
 
+          
+
           The name of a <see
            cref="T:System.Net.Cookie" />
 
@@ -284,8 +334,12 @@
 
           
 
+          
+
           . The following characters must not be used inside <paramref
            name="name" />
+
+          
 
           
 
@@ -300,6 +354,8 @@
 
           
 
+          
+
           The value of a <see
            cref="T:System.Net.Cookie" />
 
@@ -307,8 +363,12 @@
 
           
 
+          
+
           . The following characters must not be used inside <paramref
            name="value" />
+
+          
 
           
 
@@ -350,11 +410,15 @@
 
             
 
+            
+
              parameter uses the empty string ("").</para
           >
           <para
             >The <paramref
              name="value" />
+
+            
 
             
 
@@ -367,8 +431,12 @@
 
             
 
+            
+
              must not be a null reference (Nothing in Visual Basic). The following characters are reserved and can not cannot be passed in the <paramref
              name="value" />
+
+            
 
             
 
@@ -381,8 +449,12 @@
 
             
 
+            
+
              parameter is enclosed in double quotes: semicolon, comma. So the following example constructor would succeed but when you try to add this <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -395,6 +467,8 @@
 
             
 
+            
+
              instance with the <see
              cref="M:System.Net.CookieContainer.Add(System.Net.Cookie)" />
 
@@ -402,8 +476,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Net.CookieContainer.Add(System.Uri,System.Net.Cookie)" />
+
+            
 
             
 
@@ -420,8 +498,12 @@
 
             
 
+            
+
              that can be added to a <see
              cref="T:System.Net.CookieContainer" />
+
+            
 
             
 
@@ -442,8 +524,12 @@
 
             
 
+            
+
              class with a specified <see
              cref="P:System.Net.Cookie.Name" />
+
+            
 
             
 
@@ -456,8 +542,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Net.Cookie.Path" />
+
+            
 
             
 
@@ -473,6 +563,8 @@
 
           
 
+          
+
           The name of a <see
            cref="T:System.Net.Cookie" />
 
@@ -480,8 +572,12 @@
 
           
 
+          
+
           . The following characters must not be used inside <paramref
            name="name" />
+
+          
 
           
 
@@ -496,6 +592,8 @@
 
           
 
+          
+
           The value of a <see
            cref="T:System.Net.Cookie" />
 
@@ -503,8 +601,12 @@
 
           
 
+          
+
           . The following characters must not be used inside <paramref
            name="value" />
+
+          
 
           
 
@@ -519,8 +621,12 @@
 
           
 
+          
+
           The subset of URIs on the origin server to which this <see
            cref="T:System.Net.Cookie" />
+
+          
 
           
 
@@ -563,8 +669,12 @@
 
             
 
+            
+
              and <paramref
              name="path" />
+
+            
 
             
 
@@ -580,8 +690,12 @@
 
             
 
+            
+
              parameter for a <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -594,8 +708,12 @@
 
             
 
+            
+
              parameter unless the string passed in the <paramref
              name="value" />
+
+            
 
             
 
@@ -608,8 +726,12 @@
 
             
 
+            
+
              to a <see
              cref="T:System.Net.CookieContainer" />
+
+            
 
             
 
@@ -622,8 +744,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Net.CookieContainer.Add(System.Uri,System.Net.Cookie)" />
+
+            
 
             
 
@@ -640,8 +766,12 @@
 
             
 
+            
+
              that can be added to a <see
              cref="T:System.Net.CookieContainer" />
+
+            
 
             
 
@@ -662,8 +792,12 @@
 
             
 
+            
+
              class with a specified <see
              cref="P:System.Net.Cookie.Name" />
+
+            
 
             
 
@@ -676,6 +810,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Net.Cookie.Path" />
 
@@ -683,8 +819,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Net.Cookie.Domain" />
+
+            
 
             
 
@@ -700,6 +840,8 @@
 
           
 
+          
+
           The name of a <see
            cref="T:System.Net.Cookie" />
 
@@ -707,8 +849,12 @@
 
           
 
+          
+
           . The following characters must not be used inside <paramref
            name="name" />
+
+          
 
           
 
@@ -723,6 +869,8 @@
 
           
 
+          
+
           The value of a <see
            cref="T:System.Net.Cookie" />
 
@@ -730,8 +878,12 @@
 
           
 
+          
+
            object. The following characters must not be used inside <paramref
            name="value" />
+
+          
 
           
 
@@ -746,8 +898,12 @@
 
           
 
+          
+
           The subset of URIs on the origin server to which this <see
            cref="T:System.Net.Cookie" />
+
+          
 
           
 
@@ -762,6 +918,8 @@
 
           
 
+          
+
           The optional internet domain for which this <see
            cref="T:System.Net.Cookie" />
 
@@ -769,8 +927,12 @@
 
           
 
+          
+
            is valid. The default value is the host this <see
            cref="T:System.Net.Cookie" />
+
+          
 
           
 
@@ -809,6 +971,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -839,6 +1003,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -847,6 +1013,8 @@
           <para
             >Gets or sets a URI comment that the server can provide with a <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -877,6 +1045,8 @@
           <para
             >When true, this property instructs the client application not to save the <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -920,6 +1090,8 @@
 
             
 
+            
+
              is valid.</para
           >
         </summary>
@@ -955,6 +1127,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -968,8 +1142,12 @@
 
             
 
+            
+
              is equal to <paramref
              name="comparand" />
+
+            
 
             
 
@@ -982,8 +1160,12 @@
 
             
 
+            
+
              instances are equal if their <see
              cref="P:System.Net.Cookie.Name" />
+
+            
 
             
 
@@ -996,6 +1178,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Net.Cookie.Path" />
 
@@ -1003,8 +1187,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Net.Cookie.Domain" />
+
+            
 
             
 
@@ -1017,6 +1205,8 @@
 
             
 
+            
+
              properties are equal. <see
              cref="P:System.Net.Cookie.Name" />
 
@@ -1024,8 +1214,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.Cookie.Domain" />
+
+            
 
             
 
@@ -1041,8 +1235,12 @@
 
           
 
+          
+
           A reference to a <see
            cref="T:System.Net.Cookie" />
+
+          
 
           
 
@@ -1081,6 +1279,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1114,6 +1314,8 @@
 
             
 
+            
+
              property to <see
              cref="F:System.DateTime.MinValue" />
 
@@ -1121,8 +1323,12 @@
 
             
 
+            
+
              makes this a session <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -1138,8 +1344,12 @@
 
             
 
+            
+
              property of <see
              cref="P:System.Net.Cookie.Expires" />
+
+            
 
             
 
@@ -1152,8 +1362,12 @@
 
             
 
+            
+
              is set in <see
              cref="F:System.DateTimeKind.Local" />
+
+            
 
             
 
@@ -1166,8 +1380,12 @@
 
             
 
+            
+
             . If the <see
              cref="T:System.DateTimeKind" />
+
+            
 
             
 
@@ -1180,8 +1398,12 @@
 
             
 
+            
+
             , then <see
              cref="F:System.DateTimeKind.Utc" />
+
+            
 
             
 
@@ -1200,8 +1422,12 @@
 
             
 
+            
+
              as a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -1238,6 +1464,8 @@
           <para
             >Overrides the <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -1300,8 +1528,12 @@
 
             
 
+            
+
              property must be initialized before using an instance of the <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -1316,6 +1548,8 @@
           <para
             >Gets or sets the name for the <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -1351,6 +1585,8 @@
 
             
 
+            
+
              property specifies the subset of URIs on the origin server to which this <see
              cref="T:System.Net.Cookie" />
 
@@ -1358,8 +1594,12 @@
 
             
 
+            
+
              applies. If this propery is not specified, then this <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -1373,6 +1613,8 @@
           <para
             >Gets or sets the URIs to which the <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -1408,6 +1650,8 @@
 
             
 
+            
+
              may be sent. The default value means no restriction. Setting this to the empty string ("") will restrict the port to the one used in the HTTP response. Otherwise, the value must be a double-quoted string that contains port values delimited with commas.</para
           >
         </remarks>
@@ -1416,6 +1660,8 @@
           <para
             >Gets or sets a list of TCP ports that the <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -1450,6 +1696,8 @@
           <para
             >Gets or sets the security level of a <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -1491,6 +1739,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1527,6 +1777,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -1535,6 +1787,8 @@
           <para
             >Returns a string representation of this <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -1570,8 +1824,12 @@
 
             
 
+            
+
              of a <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -1590,8 +1848,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -1627,8 +1889,12 @@
 
             
 
+            
+
              property is 0, complying with the original Netscape specification. If the value is explicitly set to 1, then this <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -1641,11 +1907,15 @@
 
             
 
+            
+
              was created automatically by receiving a Set-Cookie2 HTTP response header, the conformance is set to RFC 2965.</para
           >
           <para
             >An attempt to set the <see
              cref="P:System.Net.Cookie.Version" />
+
+            
 
             
 

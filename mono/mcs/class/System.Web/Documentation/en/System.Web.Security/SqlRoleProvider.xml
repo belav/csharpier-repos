@@ -24,8 +24,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.Security.RolePrincipal" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          class, you must first create the SQL Server database used by the <see
          cref="T:System.Web.Security.SqlRoleProvider" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          class, run the aspnet_regsql.exe executable found in the C:\WINDOWS\Microsoft.NET\Framework\ <paramref
          name="versionNumber" />
+
+        
 
         
 
@@ -73,12 +85,14 @@
 
         
 
+        
+
          instance named AspNetSqlProvider that connects to the SQL Server on the local machine. You can use this instance of the provider, or specify your own in the Web.config file for your ASP.NET application. To use the AspNetSqlProvider instance, specify AspNetSqlProvider as the defaultProvider in your <format
          type="text/html">
-          <a href="4b0f6078-4824-4fc8-a5ee-4ae00ee3ceec"
->roleManager</a
-          >
+          <a href="4b0f6078-4824-4fc8-a5ee-4ae00ee3ceec">roleManager</a>
         </format>
+
+        
 
         
 
@@ -94,8 +108,12 @@
 
         
 
+        
+
          to use the same database and user information as the <see
          cref="T:System.Web.Security.SqlMembershipProvider" />
+
+        
 
         
 
@@ -108,6 +126,8 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.Security.SqlMembershipProvider" />
 
@@ -115,8 +135,12 @@
 
         
 
+        
+
          instances. Also ensure that both provider instances are configured with the same <see
          cref="P:System.Web.Security.SqlRoleProvider.ApplicationName" />
+
+        
 
         
 
@@ -147,8 +171,12 @@
 
             
 
+            
+
              constructor is called by ASP.NET to create an instance of the <see
              cref="T:System.Web.Security.SqlRoleProvider" />
+
+            
 
             
 
@@ -162,6 +190,8 @@
           <para
             >Creates an instance of the <see
              cref="T:System.Web.Security.SqlRoleProvider" />
+
+            
 
             
 
@@ -201,8 +231,12 @@
 
             
 
+            
+
              method is called by the <see
              cref="T:System.Web.Security.Roles" />
+
+            
 
             
 
@@ -215,8 +249,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Web.Security.Roles.AddUserToRoles(System.String,System.String[])" />
+
+            
 
             
 
@@ -229,6 +267,8 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Web.Security.Roles.AddUsersToRoles(System.String[],System.String[])" />
 
@@ -236,8 +276,12 @@
 
             
 
+            
+
              methods of the <see
              cref="T:System.Web.Security.Roles" />
+
+            
 
             
 
@@ -253,6 +297,8 @@
 
             
 
+            
+
              method are made within a transaction. If an error is encountered, such as a user name that is already in a specified role, the transaction is rolled back and no updates are performed.</para
           >
           <para
@@ -263,8 +309,12 @@
 
             
 
+            
+
              is being used with the <see
              cref="T:System.Web.Security.SqlMembershipProvider" />
+
+            
 
             
 
@@ -280,6 +330,8 @@
         </summary>
         <param name="usernames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -311,8 +363,12 @@
 
             
 
+            
+
              is used by the <see
              cref="T:System.Web.Security.SqlRoleProvider" />
+
+            
 
             
 
@@ -325,8 +381,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Web.Security.SqlRoleProvider.ApplicationName" />
+
+            
 
             
 
@@ -342,8 +402,12 @@
 
             
 
+            
+
              property value for the current <see
              cref="P:System.Web.HttpContext.Request" />
+
+            
 
             
 
@@ -360,8 +424,12 @@
 
               
 
+              
+
                object, you can have multiple requests executing concurrently and attempting to set the <see
                cref="P:System.Web.Security.SqlRoleProvider.ApplicationName" />
+
+              
 
               
 
@@ -374,8 +442,12 @@
 
               
 
+              
+
                property is not thread safe for multiple writes, and changing the <see
                cref="P:System.Web.Security.SqlRoleProvider.ApplicationName" />
+
+              
 
               
 
@@ -388,8 +460,12 @@
 
               
 
+              
+
                property unless you must. An example of an application where setting the <see
                cref="P:System.Web.Security.SqlRoleProvider.ApplicationName" />
+
+              
 
               
 
@@ -430,8 +506,12 @@
 
             
 
+            
+
              method is called by the <see
              cref="T:System.Web.Security.Roles" />
+
+            
 
             
 
@@ -476,8 +556,12 @@
 
             
 
+            
+
              method is called by the <see
              cref="T:System.Web.Security.Roles" />
+
+            
 
             
 
@@ -493,6 +577,8 @@
 
             
 
+            
+
              is true, then an exception will be thrown and the role will not be deleted if the role identified by the <paramref
              name="roleName" />
 
@@ -500,8 +586,12 @@
 
             
 
+            
+
              parameter has one or more members. If <paramref
              name="throwOnPopulatedRole" />
+
+            
 
             
 
@@ -525,8 +615,12 @@
 
           
 
+          
+
           If true, throws an exception if <paramref
            name="roleName" />
+
+          
 
           
 
@@ -564,8 +658,12 @@
 
             
 
+            
+
              method is called by the <see
              cref="T:System.Web.Security.Roles" />
+
+            
 
             
 
@@ -578,8 +676,12 @@
 
             
 
+            
+
              for the configured applicationName. The <see
              cref="T:System.Web.Security.SqlRoleProvider" />
+
+            
 
             
 
@@ -592,6 +694,8 @@
 
             
 
+            
+
              parameter value using the LIKE keyword and supports SQL Server wildcard characters. For example, if the <paramref
              name="usernameToMatch" />
 
@@ -599,8 +703,12 @@
 
             
 
+            
+
              parameter is set to "user1", then membership information for the user with the user name of "user1" is returned, if it exists. If the <paramref
              name="usernameToMatch" />
+
+            
 
             
 
@@ -623,6 +731,8 @@
 
             
 
+            
+
              and the user is a member of the specified role.</para
           >
         </returns>
@@ -633,10 +743,14 @@
 
           
 
+          
+
           The role to search in.</param
         >
         <param name="usernameToMatch">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -668,8 +782,12 @@
 
             
 
+            
+
              method is called by the <see
              cref="T:System.Web.Security.Roles" />
+
+            
 
             
 
@@ -715,8 +833,12 @@
 
             
 
+            
+
              method is called by the <see
              cref="T:System.Web.Security.Roles" />
+
+            
 
             
 
@@ -735,6 +857,8 @@
         </returns>
         <param name="username">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -772,8 +896,12 @@
 
             
 
+            
+
              method is called by the <see
              cref="T:System.Web.Security.Roles" />
+
+            
 
             
 
@@ -820,6 +948,8 @@
 
             
 
+            
+
              with the property values specified in the ASP.NET application configuration file (Web.config) and is not intended to be used directly from your code.</para
           >
         </remarks>
@@ -834,8 +964,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Web.Security.SqlRoleProvider" />
+
+          
 
           
 
@@ -850,8 +984,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.Specialized.NameValueCollection" />
+
+          
 
           
 
@@ -890,8 +1028,12 @@
 
             
 
+            
+
              method is called by the <see
              cref="T:System.Web.Security.Roles" />
+
+            
 
             
 
@@ -904,8 +1046,12 @@
 
             
 
+            
+
              method of the <see
              cref="P:System.Web.UI.Page.User" />
+
+            
 
             
 
@@ -924,6 +1070,8 @@
         </returns>
         <param name="username">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -962,8 +1110,12 @@
 
             
 
+            
+
              method is called by the <see
              cref="T:System.Web.Security.Roles" />
+
+            
 
             
 
@@ -976,8 +1128,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Web.Security.Roles.RemoveUserFromRoles(System.String,System.String[])" />
+
+            
 
             
 
@@ -990,6 +1146,8 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Web.Security.Roles.RemoveUsersFromRoles(System.String[],System.String[])" />
 
@@ -997,8 +1155,12 @@
 
             
 
+            
+
              methods of the <see
              cref="T:System.Web.Security.Roles" />
+
+            
 
             
 
@@ -1014,6 +1176,8 @@
 
             
 
+            
+
              are made within a transaction. If an error is encountered, such as a user name that does not exist or a user name that is already in a specified role, the transaction is rolled back and no updates are performed.</para
           >
           <para>User names and role names cannot contain commas.</para>
@@ -1024,6 +1188,8 @@
         </summary>
         <param name="usernames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1058,8 +1224,12 @@
 
             
 
+            
+
              method is called by the <see
              cref="T:System.Web.Security.Roles" />
+
+            
 
             
 

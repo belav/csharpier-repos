@@ -44,6 +44,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -52,6 +54,8 @@
           <para
             >A new strongly-typed instance of <see
              cref="T:System.Data.Common.DbCommand" />
+
+            
 
             
 
@@ -88,6 +92,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -96,6 +102,8 @@
           <para
             >A new strongly-typed instance of <see
              cref="T:System.Data.Common.DbCommandBuilder" />
+
+            
 
             
 
@@ -132,6 +140,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -140,6 +150,8 @@
           <para
             >A new strongly-typed instance of <see
              cref="T:System.Data.Common.DbConnection" />
+
+            
 
             
 
@@ -178,6 +190,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -186,6 +200,8 @@
           <para
             >A new strongly-typed instance of <see
              cref="T:System.Data.Common.DbConnectionStringBuilder" />
+
+            
 
             
 
@@ -219,6 +235,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -227,6 +245,8 @@
           <para
             >A new strongly-typed instance of <see
              cref="T:System.Data.Common.DbDataAdapter" />
+
+            
 
             
 
@@ -263,6 +283,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -271,6 +293,8 @@
           <para
             >A new strongly-typed instance of <see
              cref="T:System.Data.Common.DbParameter" />
+
+            
 
             
 
@@ -311,6 +335,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -319,6 +345,8 @@
           <para
             >A new strongly-typed instance of <see
              cref="T:System.Security.CodeAccessPermission" />
+
+            
 
             
 
@@ -334,8 +362,12 @@
 
           
 
+          
+
           A member of the <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -362,6 +394,8 @@
           <para
             >Gets an instance of the <see
              cref="T:System.Data.Odbc.OdbcFactory" />
+
+            
 
             
 

@@ -20,8 +20,12 @@
 
         
 
+        
+
          enumeration is used to represent the different sets of images that can be displayed in the <see
          cref="T:System.Web.UI.WebControls.TreeView" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
          property to the <see
          cref="F:System.Web.UI.WebControls.TreeViewImageSet.Custom" />
+
+        
 
         
 
@@ -101,6 +109,8 @@
       <para
         >Represents an image set to use in the <see
          cref="T:System.Web.UI.WebControls.TreeView" />
+
+        
 
         
 
@@ -226,6 +236,8 @@
           <para
             >A user-defined set of images. This is the default value of the <see
              cref="P:System.Web.UI.WebControls.TreeView.ImageSet" />
+
+            
 
             
 

@@ -24,8 +24,12 @@
 
         
 
+        
+
          class is a partial implementation of the abstract <see
          cref="T:System.Web.SiteMapProvider" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Web.StaticSiteMapProvider.RemoveNode(System.Web.SiteMapNode)" />
+
+        
 
         
 
@@ -52,8 +60,12 @@
 
         
 
+        
+
          and protected <see
          cref="M:System.Web.StaticSiteMapProvider.Clear" />
+
+        
 
         
 
@@ -69,8 +81,12 @@
 
         
 
+        
+
          class supports writing a site map provider (for example, an <see
          cref="T:System.Web.XmlSiteMapProvider" />
+
+        
 
         
 
@@ -83,8 +99,12 @@
 
         
 
+        
+
          class provides basic implementations for storing and retrieving <see
          cref="T:System.Web.SiteMapNode" />
+
+        
 
         
 
@@ -100,8 +120,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.StaticSiteMapProvider" />
+
+        
 
         
 
@@ -114,8 +138,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.SiteMapProvider.ParentProvider" />
+
+        
 
         
 
@@ -131,8 +159,12 @@
 
         
 
+        
+
          class stores its <see
          cref="T:System.Web.SiteMapNode" />
+
+        
 
         
 
@@ -145,6 +177,8 @@
 
         
 
+        
+
          property of the pages, represented by site map nodes, as keys. (If a site map node does not specify a URL, it is tracked using an automatically generated unique key.) As a result, you cannot have site map nodes wherein a site map node with the same URL is used more than once. For example, attempting to load the site map node illustrated in the following code example with the <see
          cref="T:System.Web.XmlSiteMapProvider" />
 
@@ -152,8 +186,12 @@
 
         
 
+        
+
          class, which is the default ASP.NET site map provider, or any site map provider that is derived from the  <see
          cref="T:System.Web.StaticSiteMapProvider" />
+
+        
 
         
 
@@ -176,8 +214,12 @@
 
         
 
+        
+
          class, the three most important methods are the <see
          cref="M:System.Web.SiteMapProvider.GetRootNodeCore" />
+
+        
 
         
 
@@ -190,8 +232,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Web.StaticSiteMapProvider.BuildSiteMap" />
+
+        
 
         
 
@@ -204,8 +250,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Web.StaticSiteMapProvider.FindSiteMapNode(System.String)" />
+
+        
 
         
 
@@ -221,6 +271,8 @@
 
         
 
+        
+
          method is called to initialize derived site map providers, including any resources that are required to load site map data, but it does attempt to build the site map node in memory. If your derived class is using files to store site map data, any file initialization can be performed here. If the site map node uses some other type of data store, such as a relational database, initializing a connection might be performed here. Additional attributes, such as file names or connection strings that are placed on the site map provider element in the configuration are processed by the ASP.NET configuration system and passed to the <see
          cref="M:System.Configuration.Provider.ProviderBase.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />
 
@@ -228,8 +280,12 @@
 
         
 
+        
+
          method with the <paramref
          name="attributes" />
+
+        
 
         
 
@@ -245,8 +301,12 @@
 
         
 
+        
+
          method must be overridden by all classes that are derived from the <see
          cref="T:System.Web.StaticSiteMapProvider" />
+
+        
 
         
 
@@ -259,8 +319,12 @@
 
         
 
+        
+
          method is called internally in many of the default member implementations of the <see
          cref="T:System.Web.StaticSiteMapProvider" />
+
+        
 
         
 
@@ -273,8 +337,12 @@
 
         
 
+        
+
          classes. If you implement your own site map provider, ensure that site map data processing occurs once and subsequent calls to the <see
          cref="M:System.Web.StaticSiteMapProvider.BuildSiteMap" />
+
+        
 
         
 
@@ -287,8 +355,12 @@
 
         
 
+        
+
          method, ensure it is thread safe, as multiple concurrent page requests can result indirectly in multiple calls to load site map information. The site map infrastructure supports displaying site map information based on the user's role. Depending on the <see
          cref="P:System.Web.SiteMapNode.Roles" />
+
+        
 
         
 
@@ -301,6 +373,8 @@
 
         
 
+        
+
          objects, a different navigation structure can exist for different users. The default implementations of the site map node retrieval members of the <see
          cref="T:System.Web.StaticSiteMapProvider" />
 
@@ -308,8 +382,12 @@
 
         
 
+        
+
          class perform security trimming automatically by calling the <see
          cref="M:System.Web.SiteMapProvider.IsAccessibleToUser(System.Web.HttpContext,System.Web.SiteMapNode)" />
+
+        
 
         
 
@@ -325,6 +403,8 @@
 
         
 
+        
+
         , <see
          cref="M:System.Web.StaticSiteMapProvider.Clear" />
 
@@ -332,8 +412,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Web.StaticSiteMapProvider.RemoveNode(System.Web.SiteMapNode)" />
+
+        
 
         
 
@@ -352,8 +436,12 @@
 
         
 
+        
+
          class and serves as a base class for the <see
          cref="T:System.Web.XmlSiteMapProvider" />
+
+        
 
         
 
@@ -380,6 +468,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -388,6 +478,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.StaticSiteMapProvider" />
+
+            
 
             
 
@@ -428,8 +520,12 @@
 
             
 
+            
+
              parameter is added to an internal collection and a parent-child relationship is created between it and the site map node that is identified by the <paramref
              name="parentNode" />
+
+            
 
             
 
@@ -445,11 +541,15 @@
 
             
 
+            
+
              class. Other URLs, such as physical paths, paths with protocols in them, and UNC paths, are not interpreted.</para
           >
           <para
             >The <see
              cref="T:System.Web.XmlSiteMapProvider" />
+
+            
 
             
 
@@ -462,8 +562,12 @@
 
             
 
+            
+
              class, and is the default site map provider for ASP.NET, uses the <see
              cref="P:System.Web.SiteMapNode.Url" />
+
+            
 
             
 
@@ -476,8 +580,12 @@
 
             
 
+            
+
              object as a lookup key in its internal collections, by default. If the <see
              cref="P:System.Web.SiteMapNode.Url" />
+
+            
 
             
 
@@ -490,8 +598,12 @@
 
             
 
+            
+
              is set, it must be unique within the scope of the site map provider. The <see
              cref="M:System.Web.StaticSiteMapProvider.FindSiteMapNode(System.String)" />
+
+            
 
             
 
@@ -504,8 +616,12 @@
 
             
 
+            
+
              property. Otherwise, you can use the <see
              cref="P:System.Web.SiteMapNode.Key" />
+
+            
 
             
 
@@ -518,8 +634,12 @@
 
             
 
+            
+
              method to retrieve site map nodes. If no <see
              cref="P:System.Web.SiteMapNode.Url" />
+
+            
 
             
 
@@ -532,8 +652,12 @@
 
             
 
+            
+
              is specified, the site map provider automatically generates a <see
              cref="P:System.Web.SiteMapNode.Key" />
+
+            
 
             
 
@@ -552,8 +676,12 @@
 
             
 
+            
+
              to the collections that are maintained by the site map provider and establishes a parent/child relationship between the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -569,8 +697,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SiteMapNode" />
+
+          
 
           
 
@@ -585,6 +717,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SiteMapNode" />
 
@@ -592,8 +726,12 @@
 
           
 
+          
+
            under which to add <paramref
            name="node" />
+
+          
 
           
 
@@ -625,8 +763,12 @@
 
             
 
+            
+
              method is the one abstract member of the <see
              cref="T:System.Web.StaticSiteMapProvider" />
+
+            
 
             
 
@@ -639,8 +781,12 @@
 
             
 
+            
+
              method is called to load and build the site map node from persistent storage. When you implement the <see
              cref="M:System.Web.StaticSiteMapProvider.BuildSiteMap" />
+
+            
 
             
 
@@ -658,6 +804,8 @@
           <para
             >The root <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -690,8 +838,12 @@
 
             
 
+            
+
              class can override the <see
              cref="M:System.Web.StaticSiteMapProvider.Clear" />
+
+            
 
             
 
@@ -707,6 +859,8 @@
 
             
 
+            
+
              method does not reset state that is initialized during the <see
              cref="M:System.Configuration.Provider.ProviderBase.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />
 
@@ -714,8 +868,12 @@
 
             
 
+            
+
              method—it resets only state that is initialized during the <see
              cref="M:System.Web.StaticSiteMapProvider.BuildSiteMap" />
+
+            
 
             
 
@@ -729,6 +887,8 @@
           <para
             >Removes all elements in the collections of child and parent site map nodes that the <see
              cref="T:System.Web.StaticSiteMapProvider" />
+
+            
 
             
 
@@ -766,8 +926,12 @@
 
             
 
+            
+
             ". The <see
              cref="T:System.Web.StaticSiteMapProvider" />
+
+            
 
             
 
@@ -783,8 +947,12 @@
 
             
 
+            
+
              object, which is derived from the <see
              cref="T:System.Web.StaticSiteMapProvider" />
+
+            
 
             
 
@@ -797,8 +965,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -811,8 +983,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -825,8 +1001,12 @@
 
             
 
+            
+
              method attempts to retrieve site map nodes based on their <see
              cref="P:System.Web.SiteMapNode.Url" />
+
+            
 
             
 
@@ -839,8 +1019,12 @@
 
             
 
+            
+
              property and the corresponding <see
              cref="M:System.Web.StaticSiteMapProvider.FindSiteMapNodeFromKey(System.String)" />
+
+            
 
             
 
@@ -853,6 +1037,8 @@
 
             
 
+            
+
              or <see
              cref="P:System.Web.SiteMapNode.Key" />
 
@@ -860,8 +1046,12 @@
 
             
 
+            
+
              is specified, the site map provider automatically generates a <see
              cref="P:System.Web.SiteMapNode.Key" />
+
+            
 
             
 
@@ -880,6 +1070,8 @@
 
             
 
+            
+
              object that represents the page at the specified URL.</para
           >
         </summary>
@@ -893,8 +1085,12 @@
 
             
 
+            
+
              that represents the page identified by <paramref
              name="rawURL" />
+
+            
 
             
 
@@ -910,8 +1106,12 @@
 
           
 
+          
+
           A URL that identifies the page for which to retrieve a <see
            cref="T:System.Web.SiteMapNode" />
+
+          
 
           
 
@@ -948,6 +1148,8 @@
 
             
 
+            
+
              method retrieves a site map node from an internal <see
              cref="T:System.Collections.Hashtable" />
 
@@ -955,8 +1157,12 @@
 
             
 
+            
+
              object based on <paramref
              name="key" />
+
+            
 
             
 
@@ -972,8 +1178,12 @@
 
             
 
+            
+
              object, which is derived from the <see
              cref="T:System.Web.StaticSiteMapProvider" />
+
+            
 
             
 
@@ -986,8 +1196,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1000,8 +1214,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1014,8 +1232,12 @@
 
             
 
+            
+
              method attempts to retrieve site map nodes based on their <see
              cref="P:System.Web.SiteMapNode.Url" />
+
+            
 
             
 
@@ -1028,8 +1250,12 @@
 
             
 
+            
+
              property and the corresponding <see
              cref="M:System.Web.StaticSiteMapProvider.FindSiteMapNodeFromKey(System.String)" />
+
+            
 
             
 
@@ -1045,8 +1271,12 @@
 
             
 
+            
+
              has a default implementation that looks up instances of the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1059,8 +1289,12 @@
 
             
 
+            
+
              parameter. If a site map provider implementer used the <see
              cref="Overload:System.Web.StaticSiteMapProvider.AddNode" />
+
+            
 
             
 
@@ -1073,8 +1307,12 @@
 
             
 
+            
+
              already will have stored a reference to each <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1087,8 +1325,12 @@
 
             
 
+            
+
              property. By default, the <see
              cref="T:System.Web.XmlSiteMapProvider" />
+
+            
 
             
 
@@ -1101,8 +1343,12 @@
 
             
 
+            
+
              class that do not have a value for the <see
              cref="P:System.Web.SiteMapNode.Url" />
+
+            
 
             
 
@@ -1115,6 +1361,8 @@
 
             
 
+            
+
              property in the event that an instance of the <see
              cref="T:System.Web.SiteMapNode" />
 
@@ -1122,8 +1370,12 @@
 
             
 
+            
+
              class does not have a value for the <see
              cref="P:System.Web.SiteMapNode.Url" />
+
+            
 
             
 
@@ -1139,6 +1391,8 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.XmlSiteMapProvider" />
 
@@ -1146,8 +1400,12 @@
 
             
 
+            
+
              classes, which are the default site map provider implementation for ASP.NET, use the URL of a <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1166,6 +1424,8 @@
 
             
 
+            
+
              object based on a specified key.</para
           >
         </summary>
@@ -1179,6 +1439,8 @@
 
             
 
+            
+
              that represents the page identified by <paramref
              name="key" />
 
@@ -1186,8 +1448,12 @@
 
             
 
+            
+
             ; otherwise, null, if security trimming is enabled and the site map node cannot be shown to the current user or the site map node is not found in the site map node collection by <paramref
              name="key" />
+
+            
 
             
 
@@ -1203,8 +1469,12 @@
 
           
 
+          
+
           A lookup key with which a <see
            cref="T:System.Web.SiteMapNode" />
+
+          
 
           
 
@@ -1241,6 +1511,8 @@
 
             
 
+            
+
              objects delegate to the site map provider to keep track of their child and parent site map nodes. As a result, classes that implement a site map provider for a hierarchical site map structure, such as <see
              cref="T:System.Web.StaticSiteMapProvider" />
 
@@ -1248,8 +1520,12 @@
 
             
 
+            
+
             , and use <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1265,6 +1541,8 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.StaticSiteMapProvider.BuildSiteMap" />
 
@@ -1272,8 +1550,12 @@
 
             
 
+            
+
              method internally to retrieve read-only <see
              cref="T:System.Web.SiteMapNodeCollection" />
+
+            
 
             
 
@@ -1292,6 +1574,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1305,8 +1589,12 @@
 
             
 
+            
+
              that contains the child site map nodes of <paramref
              name="node" />
+
+            
 
             
 
@@ -1322,8 +1610,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SiteMapNode" />
+
+          
 
           
 
@@ -1360,6 +1652,8 @@
 
             
 
+            
+
              objects delegate to the site map provider to keep track of their child and parent site map nodes. As a result, classes that implement a site map provider for a hierarchical site map structure, such as the <see
              cref="T:System.Web.StaticSiteMapProvider" />
 
@@ -1367,8 +1661,12 @@
 
             
 
+            
+
              class, and use <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1384,8 +1682,12 @@
 
             
 
+            
+
              property is not found, the <see
              cref="T:System.Web.StaticSiteMapProvider" />
+
+            
 
             
 
@@ -1398,8 +1700,12 @@
 
             
 
+            
+
              property. If so, the site map provider calls the <see
              cref="M:System.Web.StaticSiteMapProvider.GetParentNode(System.Web.SiteMapNode)" />
+
+            
 
             
 
@@ -1415,6 +1721,8 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.StaticSiteMapProvider.BuildSiteMap" />
 
@@ -1422,8 +1730,12 @@
 
             
 
+            
+
              method internally to retrieve the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1442,6 +1754,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1455,8 +1769,12 @@
 
             
 
+            
+
              that represents the parent of the specified <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1472,8 +1790,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SiteMapNode" />
+
+          
 
           
 
@@ -1511,11 +1833,15 @@
 
             
 
+            
+
              object from all site map node collections that are tracked by the site map provider.</para
           >
         </summary>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

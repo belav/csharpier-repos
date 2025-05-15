@@ -11,6 +11,8 @@
 
         
 
+        
+
          namespace contains classes that are used to work with ASP.NET user profiles in Web server applications.</para
       >
     </summary>
@@ -24,8 +26,12 @@
 
         
 
+        
+
          class, or in a custom data source by using an implementation of the <see
          cref="T:System.Web.Profile.ProfileProvider" />
+
+        
 
         
 
@@ -43,11 +49,15 @@
 
         
 
+        
+
          configuration section.</para
       >
       <para
         >When an application starts that has profiles enabled, ASP.NET creates a new class of type ProfileCommon, which inherits from the <see
          cref="T:System.Web.Profile.ProfileBase" />
+
+        
 
         
 
@@ -62,8 +72,12 @@
 
         
 
+        
+
          configuration section. An instance of the ProfileCommon class is set as the value of the <see
          cref="P:System.Web.HttpContext.Profile" />
+
+        
 
         
 
@@ -76,8 +90,12 @@
 
         
 
+        
+
          object. You can create a custom profile implementation that inherits from the <see
          cref="T:System.Web.Profile.ProfileBase" />
+
+        
 
         
 
@@ -87,6 +105,8 @@
          type="text/html">
           <a href="ccb9bf3a-a044-464d-b89b-5cb5a3d389dd">profile</a>
         </format>
+
+        
 
         
 

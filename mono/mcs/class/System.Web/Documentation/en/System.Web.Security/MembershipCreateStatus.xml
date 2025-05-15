@@ -20,6 +20,8 @@
 
         
 
+        
+
          enumeration indicates the success or failure of an attempt to create a new user. If the <see
          cref="M:System.Web.Security.Membership.CreateUser(System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Web.Security.MembershipCreateStatus@)" />
 
@@ -27,8 +29,12 @@
 
         
 
+        
+
          operation fails, the <see
          cref="T:System.Web.Security.MembershipCreateStatus" />
+
+        
 
         
 
@@ -47,10 +53,14 @@
 
           
 
+          
+
            before continuing. For a list of other topics related to membership, see <format
            type="text/html">
             <a href="824c3a24-f0af-427c-a652-0d2d1e9397cd">Managing Users By Using Membership</a>
           </format>
+
+          
 
           
 
@@ -67,8 +77,12 @@
 
         
 
+        
+
          method overload that does not specify an output parameter of type <see
          cref="T:System.Web.Security.MembershipCreateStatus" />
+
+        
 
         
 
@@ -81,6 +95,8 @@
 
         
 
+        
+
          with the <see
          cref="P:System.Web.Security.MembershipCreateUserException.StatusCode" />
 
@@ -88,8 +104,12 @@
 
         
 
+        
+
          property set to one of the <see
          cref="T:System.Web.Security.MembershipCreateStatus" />
+
+        
 
         
 
@@ -103,6 +123,8 @@
       <para
         >Describes the result of a <see
          cref="M:System.Web.Security.Membership.CreateUser(System.String,System.String)" />
+
+        
 
         
 
@@ -279,6 +301,8 @@
           <para
             >The provider returned an error that is not described by other <see
              cref="T:System.Web.Security.MembershipCreateStatus" />
+
+            
 
             
 

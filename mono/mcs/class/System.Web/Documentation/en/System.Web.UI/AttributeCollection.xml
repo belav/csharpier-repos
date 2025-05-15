@@ -23,6 +23,8 @@
 
         
 
+        
+
          object as their value. If there are no attribute items in the collection, the collection returns null.</para
       >
       <para
@@ -33,11 +35,15 @@
 
         
 
+        
+
          property, which is inherited by all HTML server controls. ASP.NET exposes attributes of HTML server controls as properties of those controls.</para
       >
       <para
         >You can add attributes to a Web server control through the <see
          cref="P:System.Web.UI.WebControls.WebControl.Attributes" />
+
+        
 
         
 
@@ -74,11 +80,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="bag">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -113,6 +123,8 @@
 
             
 
+            
+
              parameter contains an ampersand (&amp;), the character is automatically encoded. The resulting HTML representation is "&amp;amp;".</para
           >
         </remarks>
@@ -121,6 +133,8 @@
           <para
             >Adds an attribute to a server control's <see
              cref="T:System.Web.UI.AttributeCollection" />
+
+            
 
             
 
@@ -136,10 +150,14 @@
 
           
 
+          
+
           The attribute name. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -176,8 +194,12 @@
 
             
 
+            
+
              object so that they can be rendered by the next call to the <see
              cref="M:System.Web.UI.HtmlTextWriter.RenderBeginTag(System.String)" />
+
+            
 
             
 
@@ -193,8 +215,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -213,8 +239,12 @@
 
             
 
+            
+
              class to the <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -230,8 +260,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -264,6 +298,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -287,6 +323,8 @@
           <para
             >Gets the number of attributes in the <see
              cref="T:System.Web.UI.AttributeCollection" />
+
+            
 
             
 
@@ -322,6 +360,8 @@
 
             
 
+            
+
              object when the containing ASP.NET Web page is parsed. You can use this property to add, remove, and iterate through the styles declared for the server control.</para
           >
         </remarks>
@@ -330,6 +370,8 @@
           <para
             >Gets a collection of styles for the ASP.NET server control to which the current <see
              cref="T:System.Web.UI.AttributeCollection" />
+
+            
 
             
 
@@ -372,8 +414,12 @@
 
                 
 
+                
+
                  parameter must be an <see
                  cref="T:System.Web.UI.AttributeCollection" />
+
+                
 
                 
 
@@ -403,6 +449,8 @@
 
             
 
+            
+
              object is equal to the specified object.</para
           >
         </summary>
@@ -416,8 +464,12 @@
 
             
 
+            
+
              parameter is equal to the current instance of <see
              cref="T:System.Web.UI.AttributeCollection" />
+
+            
 
             
 
@@ -450,8 +502,12 @@
 
             
 
+            
+
              method to determine the hash code for this <see
              cref="T:System.Web.UI.AttributeCollection" />
+
+            
 
             
 
@@ -512,8 +568,12 @@
 
             
 
+            
+
              of an ASP.NET server control, whether you have added them programmatically with the <see
              cref="M:System.Web.UI.AttributeCollection.Add(System.String,System.String)" />
+
+            
 
             
 
@@ -527,6 +587,8 @@
           <para
             >Gets a collection of keys to all attributes in the server control's <see
              cref="T:System.Web.UI.AttributeCollection" />
+
+            
 
             
 
@@ -561,8 +623,12 @@
 
             
 
+            
+
              object does not contain an attribute that has the specified <paramref
              name="key" />
+
+            
 
             
 
@@ -581,11 +647,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -623,6 +693,8 @@
 
             
 
+            
+
              output stream for the control to which the collection belongs.</para
           >
         </summary>
@@ -633,8 +705,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 

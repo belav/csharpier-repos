@@ -27,8 +27,12 @@
 
         
 
+        
+
          , create a class derived from it, extend <see
          cref="T:System.ServiceModel.ServiceHost" />
+
+        
 
         
 
@@ -41,6 +45,8 @@
 
         
 
+        
+
         , adding instances of your class derived from <see
          cref="T:System.ServiceModel.Dispatcher.ChannelDispatcherBase" />
 
@@ -48,8 +54,12 @@
 
         
 
+        
+
          to <see
          cref="P:System.ServiceModel.ServiceHostBase.ChannelDispatchers" />
+
+        
 
         
 
@@ -65,8 +75,12 @@
 
         
 
+        
+
          and the <see
          cref="T:System.ServiceModel.ServiceHost" />
+
+        
 
         
 
@@ -79,6 +93,8 @@
 
         
 
+        
+
          object are available for inspection or modification through the <see
          cref="P:System.ServiceModel.Dispatcher.ChannelDispatcherBase.Listener" />
 
@@ -86,8 +102,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.ServiceModel.Dispatcher.ChannelDispatcherBase.Host" />
+
+        
 
         
 
@@ -102,8 +122,12 @@
 
         
 
+        
+
          calls the <see
          cref="M:System.ServiceModel.Dispatcher.ChannelDispatcherBase.Attach(System.ServiceModel.ServiceHostBase)" />
+
+        
 
         
 
@@ -116,6 +140,8 @@
 
         
 
+        
+
          methods when adding or removing a <see
          cref="T:System.ServiceModel.Dispatcher.ChannelDispatcherBase" />
 
@@ -123,8 +149,12 @@
 
         
 
+        
+
          item from its <see
          cref="P:System.ServiceModel.ServiceHostBase.ChannelDispatchers" />
+
+        
 
         
 
@@ -139,8 +169,12 @@
 
         
 
+        
+
          calls the <see
          cref="M:System.ServiceModel.Dispatcher.ChannelDispatcherBase.CloseInput" />
+
+        
 
         
 
@@ -173,6 +207,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Dispatcher.ChannelDispatcherBase" />
+
+            
 
             
 
@@ -213,8 +249,12 @@
 
             
 
+            
+
              is in the <see
              cref="F:System.ServiceModel.CommunicationState.Created" />
+
+            
 
             
 
@@ -230,8 +270,12 @@
 
             
 
+            
+
              calls this method when the <see
              cref="T:System.ServiceModel.Dispatcher.ChannelDispatcherBase" />
+
+            
 
             
 
@@ -244,8 +288,12 @@
 
             
 
+            
+
              collection.  This gives the <see
              cref="T:System.ServiceModel.Dispatcher.ChannelDispatcherBase" />
+
+            
 
             
 
@@ -258,8 +306,12 @@
 
             
 
+            
+
             , and provides the value that should be returned from the <see
              cref="P:System.ServiceModel.Dispatcher.ChannelDispatcherBase.Host" />
+
+            
 
             
 
@@ -279,8 +331,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.ServiceHostBase" />
+
+          
 
           
 
@@ -314,8 +370,12 @@
 
             
 
+            
+
              calls this method during shutdown to give the dispatcher a chance to drain messages. <see
              cref="T:System.ServiceModel.Dispatcher.ChannelDispatcher" />
+
+            
 
             
 
@@ -360,6 +420,8 @@
 
             
 
+            
+
              can only be detached when the instance of the <see
              cref="T:System.ServiceModel.Dispatcher.ChannelDispatcher" />
 
@@ -367,8 +429,12 @@
 
             
 
+            
+
              is in the <see
              cref="F:System.ServiceModel.CommunicationState.Created" />
+
+            
 
             
 
@@ -384,10 +450,14 @@
 
             
 
+            
+
              associated with the channel dispatcher to null.</para
           >
           <para>
             <see cref="T:System.ServiceModel.ServiceHost" />
+
+            
 
             
 
@@ -400,8 +470,12 @@
 
             
 
+            
+
              is removed from its <see
              cref="P:System.ServiceModel.ServiceHostBase.ChannelDispatchers" />
+
+            
 
             
 
@@ -414,8 +488,12 @@
 
             
 
+            
+
              a chance to unhook events and inspect the <see
              cref="T:System.ServiceModel.ServiceHost" />
+
+            
 
             
 
@@ -435,8 +513,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.ServiceHostBase" />
+
+          
 
           
 
@@ -474,8 +556,12 @@
 
             
 
+            
+
              object can have many <see
              cref="T:System.ServiceModel.Dispatcher.ChannelDispatcher" />
+
+            
 
             
 
@@ -488,6 +574,8 @@
 
             
 
+            
+
              for that service. The host keeps a list of these <see
              cref="T:System.ServiceModel.Dispatcher.ChannelDispatcherBase" />
 
@@ -495,8 +583,12 @@
 
             
 
+            
+
              objects in the <see
              cref="P:System.ServiceModel.ServiceHostBase.ChannelDispatchers" />
+
+            
 
             
 
@@ -539,6 +631,8 @@
 
             
 
+            
+
              associates an <see
              cref="T:System.ServiceModel.Channels.IChannelListener" />
 
@@ -546,8 +640,12 @@
 
             
 
+            
+
              whose channels and messages this <see
              cref="T:System.ServiceModel.Dispatcher.ChannelDispatcherBase" />
+
+            
 
             
 

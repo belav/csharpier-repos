@@ -58,6 +58,8 @@
 
         
 
+        
+
         .</para
       >
       <code lang="C#"
@@ -117,8 +119,12 @@ public static void PrintValues( IEnumerable myList ) {
 
         
 
+        
+
         , consider using <see
          cref="T:System.Collections.Generic.List`1" />
+
+        
 
         
 
@@ -131,8 +137,12 @@ public static void PrintValues( IEnumerable myList ) {
 
         
 
+        
+
          may not always offer the best performance for a given task. See the "Performance Considerations" section in the <see
          cref="T:System.Collections.Generic.List`1" />
+
+        
 
         
 
@@ -148,8 +158,12 @@ public static void PrintValues( IEnumerable myList ) {
 
         
 
+        
+
          is not guaranteed to be sorted.  You must sort the <see
          cref="T:System.Collections.ArrayList" />
+
+        
 
         
 
@@ -162,8 +176,12 @@ public static void PrintValues( IEnumerable myList ) {
 
         
 
+        
+
         ) that require the <see
          cref="T:System.Collections.ArrayList" />
+
+        
 
         
 
@@ -179,8 +197,12 @@ public static void PrintValues( IEnumerable myList ) {
 
         
 
+        
+
          is the number of elements the <see
          cref="T:System.Collections.ArrayList" />
+
+        
 
         
 
@@ -193,6 +215,8 @@ public static void PrintValues( IEnumerable myList ) {
 
         
 
+        
+
         , the capacity is automatically increased as required through reallocation. The capacity can be decreased by calling <see
          cref="M:System.Collections.ArrayList.TrimToSize" />
 
@@ -200,8 +224,12 @@ public static void PrintValues( IEnumerable myList ) {
 
         
 
+        
+
          or by setting the <see
          cref="P:System.Collections.ArrayList.Capacity" />
+
+        
 
         
 
@@ -217,10 +245,14 @@ public static void PrintValues( IEnumerable myList ) {
 
         
 
+        
+
          objects, you can increase the maximum capacity to 2 billion elements on a 64-bit system by setting the enabled attribute of the <format
          type="text/html">
           <a href="5c7ea24a-39ac-4e5f-83b7-b9f9a1b556ab">gcAllowVeryLargeObjects</a>
         </format>
+
+        
 
         
 
@@ -237,11 +269,15 @@ public static void PrintValues( IEnumerable myList ) {
 
         
 
+        
+
          collection accepts null as a valid value, allows duplicate elements. </para
       >
       <para
         >Using multidimensional arrays as elements in an <see
          cref="T:System.Collections.ArrayList" />
+
+        
 
         
 
@@ -255,6 +291,8 @@ public static void PrintValues( IEnumerable myList ) {
       <para
         >Implements the <see
          cref="T:System.Collections.IList" />
+
+        
 
         
 
@@ -294,6 +332,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is the number of elements that the <see
              cref="T:System.Collections.ArrayList" />
 
@@ -301,8 +341,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              can hold. As elements are added to an <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -318,6 +362,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             .</para
           >
           <para>This constructor is an O(1) operation.</para>
@@ -327,6 +373,8 @@ public static void PrintValues( IEnumerable myList ) {
           <para
             >Initializes a new instance of the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -366,8 +414,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -385,6 +437,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is the number of elements that the <see
              cref="T:System.Collections.ArrayList" />
 
@@ -392,8 +446,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              can hold. As elements are added to an <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -409,11 +467,15 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             .</para
           >
           <para
             >The elements are copied onto the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -426,8 +488,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              of the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -443,6 +509,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -450,8 +518,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is the number of elements in <paramref
              name="c" />
+
+            
 
             
 
@@ -470,6 +542,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              class that contains elements copied from the specified collection and that has the same initial capacity as the number of elements copied.</para
           >
         </summary>
@@ -480,8 +554,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The <see
            cref="T:System.Collections.ICollection" />
+
+          
 
           
 
@@ -520,6 +598,8 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            &lt; 0.</exception
         >
         <remarks>
@@ -532,6 +612,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is the number of elements that the <see
              cref="T:System.Collections.ArrayList" />
 
@@ -539,8 +621,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              can hold. As elements are added to an <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -556,11 +642,15 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             .</para
           >
           <para
             >This constructor is an O(<paramref
              name="n" />
+
+            
 
             
 
@@ -573,8 +663,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is <paramref
              name="capacity" />
+
+            
 
             
 
@@ -593,11 +687,15 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              class that is empty and has the specified initial capacity.</para
           >
         </summary>
         <param name="capacity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -641,8 +739,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -659,8 +761,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              does not copy the contents of <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -673,8 +779,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              wrapper around <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -687,8 +797,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              also affect the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -704,8 +818,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              class provides generic <see
              cref="M:System.Collections.ArrayList.Reverse" />
+
+            
 
             
 
@@ -718,8 +836,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              and <see
              cref="M:System.Collections.ArrayList.Sort" />
+
+            
 
             
 
@@ -732,8 +854,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             ; however, performing these generic operations through the wrapper might be less efficient than operations applied directly on the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -753,8 +879,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              method overload on the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -773,8 +903,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              wrapper for a specific <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -793,8 +927,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              wrapper around the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -810,8 +948,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -857,11 +999,15 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              accepts null as a valid value and allows duplicate elements.</para
           >
           <para
             >If <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -874,8 +1020,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             , the capacity of the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -891,8 +1041,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is less than <see
              cref="P:System.Collections.ArrayList.Capacity" />
+
+            
 
             
 
@@ -905,6 +1059,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -912,8 +1068,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -932,6 +1092,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -945,8 +1107,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              index at which the <paramref
              name="value" />
+
+            
 
             
 
@@ -962,6 +1128,8 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -969,8 +1137,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            to be added to the end of the <see
            cref="T:System.Collections.ArrayList" />
+
+          
 
           
 
@@ -1014,8 +1186,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1035,6 +1211,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              accepts null as a valid value and allows duplicate elements.</para
           >
           <para
@@ -1045,8 +1223,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is preserved in the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -1062,8 +1244,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              (the current <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -1076,8 +1262,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             , the capacity of the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -1093,8 +1283,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              can accommodate the new elements without increasing the <see
              cref="P:System.Collections.ArrayList.Capacity" />
+
+            
 
             
 
@@ -1107,8 +1301,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
+
+            
 
             
 
@@ -1121,8 +1319,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              + <paramref
              name="m" />
+
+            
 
             
 
@@ -1135,6 +1337,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is the number of elements to be added and <paramref
              name="m" />
 
@@ -1142,8 +1346,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -1162,8 +1370,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              to the end of the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -1179,6 +1391,8 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The <see
            cref="T:System.Collections.ICollection" />
 
@@ -1186,8 +1400,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            whose elements should be added to the end of the <see
            cref="T:System.Collections.ArrayList" />
+
+          
 
           
 
@@ -1229,6 +1447,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is not assignment-compatible with at least one element in the current instance.</para
           >
         </exception>
@@ -1241,8 +1461,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              and at least one element involved in the search of the current instance do not implement the <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -1261,8 +1485,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              parameter and each element of the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -1275,6 +1503,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              interface, which is used for comparisons. The elements of the <see
              cref="T:System.Collections.ArrayList" />
 
@@ -1282,8 +1512,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              must already be sorted in increasing value according to the sort order defined by the <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -1299,11 +1533,15 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             . When sorting, null is considered to be less than any other object.</para
           >
           <para
             >If the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -1319,8 +1557,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              does not contain the specified value, the method returns a negative integer. You can apply the bitwise complement operation (~) to this negative integer to get the index of the first element that is larger than the search value. When inserting the value into the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -1336,6 +1578,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -1343,8 +1587,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -1363,6 +1611,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              for an element using the default comparer and returns the zero-based index of the element.</para
           >
         </summary>
@@ -1376,8 +1626,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              in the sorted <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -1390,6 +1644,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is found; otherwise, a negative number, which is the bitwise complement of the index of the next element that is larger than <paramref
              name="value" />
 
@@ -1397,8 +1653,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              or, if there is no larger element, the bitwise complement of <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -1414,8 +1674,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1461,6 +1725,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is <see
              langword="null" />
 
@@ -1468,8 +1734,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             , and <paramref
              name="value" />
+
+            
 
             
 
@@ -1486,8 +1756,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -1500,8 +1774,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              and at least one element involved in the search in the current instance do not implement the <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -1520,11 +1798,15 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              instance as the comparer to perform case-insensitive string searches.</para
           >
           <para
             >If <paramref
              name="comparer" />
+
+            
 
             
 
@@ -1537,8 +1819,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              are compared to the specified value using the specified <see
              cref="T:System.Collections.IComparer" />
+
+            
 
             
 
@@ -1551,8 +1837,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              must already be sorted in increasing value according to the sort order defined by <paramref
              name="comparer" />
+
+            
 
             
 
@@ -1568,8 +1858,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is null, the comparison is done using the <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -1582,8 +1876,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              must already be sorted in increasing value according to the sort order defined by the <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -1599,11 +1897,15 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             . When sorting, null is considered to be less than any other object.</para
           >
           <para
             >If the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -1619,8 +1921,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              does not contain the specified value, the method returns a negative integer. You can apply the bitwise complement operation (~) to this negative integer to get the index of the first element that is larger than the search value. When inserting the value into the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -1636,6 +1942,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -1643,8 +1951,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -1663,6 +1975,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              for an element using the specified comparer and returns the zero-based index of the element.</para
           >
         </summary>
@@ -1676,8 +1990,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              in the sorted <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -1690,6 +2008,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is found; otherwise, a negative number, which is the bitwise complement of the index of the next element that is larger than <paramref
              name="value" />
 
@@ -1697,8 +2017,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              or, if there is no larger element, the bitwise complement of <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -1714,8 +2038,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1730,8 +2058,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IComparer" />
+
+          
 
           
 
@@ -1779,6 +2111,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              of the current instance - <paramref
              name="index" />
 
@@ -1786,8 +2120,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              &lt; <paramref
              name="count" />
+
+            
 
             
 
@@ -1803,6 +2141,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is <see
              langword="null" />
 
@@ -1810,8 +2150,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             , and <paramref
              name="value" />
+
+            
 
             
 
@@ -1828,10 +2172,14 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              &lt; 0.</para
           >
           <para>-or-</para>
           <paramref name="count" />
+
+          
 
           
 
@@ -1847,8 +2195,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -1861,8 +2213,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              and at least one element involved in the search of the current instance do not implement the <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -1881,11 +2237,15 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              instance as the comparer to perform case-insensitive string searches.</para
           >
           <para
             >If <paramref
              name="comparer" />
+
+            
 
             
 
@@ -1898,8 +2258,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              are compared to the specified value using the specified <see
              cref="T:System.Collections.IComparer" />
+
+            
 
             
 
@@ -1912,8 +2276,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              must already be sorted in increasing value according to the sort order defined by <paramref
              name="comparer" />
+
+            
 
             
 
@@ -1929,8 +2297,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is null, the comparison is done using the <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -1943,8 +2315,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              must already be sorted in increasing value according to the sort order defined by the <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -1960,11 +2336,15 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             . When sorting, null is considered to be less than any other object.</para
           >
           <para
             >If the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -1980,8 +2360,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              does not contain the specified value, the method returns a negative integer. You can apply the bitwise complement operation (~) to this negative integer to get the index of the first element that is larger than the search value. When inserting the value into the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -1997,6 +2381,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -2004,8 +2390,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is <paramref
              name="count" />
+
+            
 
             
 
@@ -2024,6 +2414,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              for an element using the specified comparer and returns the zero-based index of the element.</para
           >
         </summary>
@@ -2037,8 +2429,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              in the sorted <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -2051,6 +2447,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is found; otherwise, a negative number, which is the bitwise complement of the index of the next element that is larger than <paramref
              name="value" />
 
@@ -2058,8 +2456,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              or, if there is no larger element, the bitwise complement of <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -2075,10 +2477,14 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The zero-based starting index of the range to search. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2093,8 +2499,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -2109,8 +2519,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IComparer" />
+
+          
 
           
 
@@ -2148,6 +2562,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              that specifies the number of elements that the current instance
    is capable of storing.</para
           >
@@ -2159,8 +2575,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            is set to a value that is less than the <see
            cref="P:System.Collections.ArrayList.Count" />
+
+          
 
           
 
@@ -2177,8 +2597,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is the number of elements that the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -2191,8 +2615,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is the number of elements that are actually in the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -2207,8 +2635,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is always greater than or equal to <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -2221,8 +2653,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              exceeds <see
              cref="P:System.Collections.ArrayList.Capacity" />
+
+            
 
             
 
@@ -2238,6 +2674,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              or by setting the <see
              cref="P:System.Collections.ArrayList.Capacity" />
 
@@ -2245,8 +2683,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              property explicitly. When the value of <see
              cref="P:System.Collections.ArrayList.Capacity" />
+
+            
 
             
 
@@ -2262,8 +2704,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
+
+            
 
             
 
@@ -2277,6 +2723,8 @@ public static void PrintValues( IEnumerable myList ) {
           <para
             >Gets or sets the number of elements that the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -2318,10 +2766,14 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is set to zero, and references to other objects from elements of the collection are also released.</para
           >
           <para>
             <see cref="P:System.Collections.ArrayList.Capacity" />
+
+            
 
             
 
@@ -2334,8 +2786,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             , call <see
              cref="M:System.Collections.ArrayList.TrimToSize" />
+
+            
 
             
 
@@ -2348,6 +2804,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              property directly. Trimming an empty <see
              cref="T:System.Collections.ArrayList" />
 
@@ -2355,8 +2813,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              sets the capacity of the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -2372,6 +2834,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -2379,8 +2843,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -2394,6 +2862,8 @@ public static void PrintValues( IEnumerable myList ) {
           <para
             >Removes all elements from the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -2435,6 +2905,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -2442,8 +2914,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -2462,6 +2938,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2470,6 +2948,8 @@ public static void PrintValues( IEnumerable myList ) {
           <para
             >A shallow copy of the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -2514,6 +2994,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -2521,8 +3003,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -2538,6 +3024,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             .</para
           >
           <para
@@ -2548,8 +3036,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -2562,8 +3054,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -2576,8 +3072,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              methods of the <paramref
              name="item" />
+
+            
 
             
 
@@ -2596,6 +3096,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2609,8 +3111,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is found in the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -2626,6 +3132,8 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -2633,8 +3141,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Collections.ArrayList" />
+
+          
 
           
 
@@ -2675,8 +3187,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -2692,11 +3208,15 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              has more than one dimension.</para
           >
           <para>-or-</para>
           <para>
             <see cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -2709,12 +3229,16 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             .Length.</para
           >
         </exception>
         <exception cref="T:System.InvalidCastException"
           >At least one element in the current instance is not assignment-compatible with the type of <paramref
            name="array" />
+
+          
 
           
 
@@ -2733,6 +3257,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              to copy the elements.</para
           >
           <para
@@ -2743,8 +3269,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              in the same order in which the enumerator iterates through the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -2760,6 +3290,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -2767,8 +3299,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -2787,8 +3323,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              to a compatible one-dimensional <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -2804,8 +3344,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -2818,8 +3362,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -2864,8 +3412,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -2875,6 +3427,8 @@ public static void PrintValues( IEnumerable myList ) {
         >
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="arrayIndex" />
+
+          
 
           
 
@@ -2890,11 +3444,15 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              has more than one dimension.</para
           >
           <para>-or-</para>
           <para>
             <paramref name="arrayIndex" />
+
+            
 
             
 
@@ -2907,11 +3465,15 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             .Length.</para
           >
           <para>-or-</para>
           <para>
             <paramref name="arrayIndex" />
+
+            
 
             
 
@@ -2924,8 +3486,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              of the current instance &gt; <paramref
              name="array" />
+
+            
 
             
 
@@ -2937,6 +3503,8 @@ public static void PrintValues( IEnumerable myList ) {
         <exception cref="T:System.InvalidCastException"
           >At least one element in the current instance is not assignment-compatible with the type of <paramref
            name="array" />
+
+          
 
           
 
@@ -2955,6 +3523,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              to copy the elements.</para
           >
           <para
@@ -2965,8 +3535,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              in the same order in which the enumerator iterates through the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -2982,6 +3556,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -2989,8 +3565,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -3009,8 +3589,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              to a compatible one-dimensional <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -3026,8 +3610,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -3040,8 +3628,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -3056,8 +3648,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -3104,8 +3700,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -3121,6 +3721,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              &lt; 0. </para
           >
           <para>-or-</para>
@@ -3131,11 +3733,15 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              &lt; 0.</para
           >
           <para>-or-</para>
           <para>
             <paramref name="count" />
+
+            
 
             
 
@@ -3152,6 +3758,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              has more than one dimension.</para
           >
           <para>-or-</para>
@@ -3162,8 +3770,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              &gt;= <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -3179,6 +3791,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              &gt;= <see
              cref="P:System.Collections.ArrayList.Count" />
 
@@ -3186,8 +3800,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              of the current instance - <paramref
              name="index" />
+
+            
 
             
 
@@ -3203,8 +3821,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              &gt;= <paramref
              name="array" />
+
+            
 
             
 
@@ -3217,12 +3839,16 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             .</para
           >
         </exception>
         <exception cref="T:System.InvalidCastException"
           >At least one element of the current instance is not assignment-compatible with the type of <paramref
            name="array" />
+
+          
 
           
 
@@ -3241,6 +3867,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              to copy the elements.</para
           >
           <para
@@ -3251,8 +3879,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              in the same order in which the enumerator iterates through the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -3268,6 +3900,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -3275,8 +3909,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is <paramref
              name="count" />
+
+            
 
             
 
@@ -3295,8 +3933,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              to a compatible one-dimensional <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -3312,8 +3954,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The zero-based index in the source <see
            cref="T:System.Collections.ArrayList" />
+
+          
 
           
 
@@ -3328,8 +3974,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -3342,8 +3992,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -3358,8 +4012,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -3369,6 +4027,8 @@ public static void PrintValues( IEnumerable myList ) {
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3406,6 +4066,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              that specifies the number of elements contained in the current
    instance.</para
           >
@@ -3419,8 +4081,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is the number of elements that the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -3433,8 +4099,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is the number of elements that are actually in the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -3449,8 +4119,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is always greater than or equal to <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -3463,8 +4137,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              exceeds <see
              cref="P:System.Collections.ArrayList.Capacity" />
+
+            
 
             
 
@@ -3479,6 +4157,8 @@ public static void PrintValues( IEnumerable myList ) {
           <para
             >Gets the number of elements actually contained in the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -3523,8 +4203,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -3537,6 +4221,8 @@ public static void PrintValues( IEnumerable myList ) {
           <para
             >This wrapper can be used to prevent additions to and deletions from the original <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -3557,6 +4243,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              wrapper with a fixed size.</para
           >
         </summary>
@@ -3565,6 +4253,8 @@ public static void PrintValues( IEnumerable myList ) {
           <para
             >An <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -3580,8 +4270,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The <see
            cref="T:System.Collections.ArrayList" />
+
+          
 
           
 
@@ -3624,6 +4318,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             . The elements can still be modified or replaced.</para
           >
           <para>A collection with a fixed size is simply a collection with a wrapper that prevents adding and removing elements; therefore, if changes are made to the underlying collection, including the addition or removal of elements, the fixed-size collection reflects those changes.</para>
@@ -3634,6 +4330,8 @@ public static void PrintValues( IEnumerable myList ) {
           <para
             >Returns an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -3652,6 +4350,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              wrapper with a fixed size.</para
           >
         </returns>
@@ -3662,8 +4362,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -3709,8 +4413,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              also brings the enumerator back to this position.  At this position, <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -3723,8 +4431,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              to advance the enumerator to the first element of the collection before reading the value of <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -3739,8 +4451,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              returns the same object until either <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -3753,6 +4469,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is called. <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
 
@@ -3760,8 +4478,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              sets <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -3777,8 +4499,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -3791,8 +4517,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              also return false. If the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -3805,8 +4535,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is undefined. To set <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -3819,8 +4553,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              followed by <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -3842,6 +4580,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3855,8 +4595,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              for the entire <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -3903,11 +4647,15 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              &lt; 0.</para
           >
           <para> -or-</para>
           <para>
             <paramref name="count" />
+
+            
 
             
 
@@ -3923,6 +4671,8 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            + <paramref
            name="count" />
 
@@ -3930,8 +4680,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            &gt; <see
            cref="P:System.Collections.ArrayList.Count" />
+
+          
 
           
 
@@ -3951,8 +4705,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              also brings the enumerator back to this position.  At this position, <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -3965,8 +4723,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              to advance the enumerator to the first element of the collection before reading the value of <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -3981,8 +4743,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              returns the same object until either <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -3995,6 +4761,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is called. <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
 
@@ -4002,8 +4770,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              sets <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -4019,8 +4791,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -4033,8 +4809,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              also return false. If the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -4047,8 +4827,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is undefined. To set <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -4061,8 +4845,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              followed by <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -4084,8 +4872,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              wrapper returned by the <see
              cref="M:System.Collections.ArrayList.Adapter(System.Collections.IList)" />
+
+            
 
             
 
@@ -4104,6 +4896,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -4117,8 +4911,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              for the specified range of elements in the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -4134,8 +4932,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The zero-based starting index of the <see
            cref="T:System.Collections.ArrayList" />
+
+          
 
           
 
@@ -4150,8 +4952,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The number of elements in the <see
            cref="T:System.Collections.ArrayList" />
+
+          
 
           
 
@@ -4197,11 +5003,15 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              &lt; 0.</para
           >
           <para>-or-</para>
           <para>
             <paramref name="count" />
+
+            
 
             
 
@@ -4218,6 +5028,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              of the current instance - <paramref
              name="index" />
 
@@ -4225,8 +5037,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              &lt; <paramref
              name="count" />
+
+            
 
             
 
@@ -4245,8 +5061,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is only a view window into the source <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -4259,8 +5079,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              must be done through this view window <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -4273,6 +5097,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             , the view window <see
              cref="T:System.Collections.ArrayList" />
 
@@ -4280,8 +5106,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is invalidated and any operations on it will return an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -4301,8 +5131,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              which represents a subset of the elements in the source <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -4321,8 +5155,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              which represents a subset of the elements in the source <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -4338,8 +5176,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The zero-based <see
            cref="T:System.Collections.ArrayList" />
+
+          
 
           
 
@@ -4349,6 +5191,8 @@ public static void PrintValues( IEnumerable myList ) {
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4392,11 +5236,15 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is searched forward starting at the first element and ending at the last element.</para
           >
           <para
             >This method performs a linear search; therefore, this method is an O(<paramref
              name="n" />
+
+            
 
             
 
@@ -4409,8 +5257,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -4426,6 +5278,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             .</para
           >
           <para
@@ -4436,8 +5290,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -4450,8 +5308,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -4464,8 +5326,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              methods of the <paramref
              name="item" />
+
+            
 
             
 
@@ -4484,8 +5350,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              and returns the zero-based index of the first occurrence within the entire <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -4504,8 +5374,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              within the entire <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -4521,6 +5395,8 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -4528,8 +5404,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Collections.ArrayList" />
+
+          
 
           
 
@@ -4575,6 +5455,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              &lt; 0.</para
           >
           <para>-or-</para>
@@ -4585,8 +5467,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              &gt;= <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -4605,8 +5491,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is searched forward starting at <paramref
              name="startIndex" />
+
+            
 
             
 
@@ -4622,8 +5512,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
+
+            
 
             
 
@@ -4636,8 +5530,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              to the end of the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -4653,6 +5551,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             .</para
           >
           <para
@@ -4663,8 +5563,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -4677,8 +5581,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -4691,8 +5599,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              methods of the <paramref
              name="item" />
+
+            
 
             
 
@@ -4711,8 +5623,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              and returns the zero-based index of the first occurrence within the range of elements in the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -4731,6 +5647,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              within the range of elements in the <see
              cref="T:System.Collections.ArrayList" />
 
@@ -4738,8 +5656,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              that extends from <paramref
              name="startIndex" />
+
+            
 
             
 
@@ -4755,8 +5677,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -4769,10 +5695,14 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           . The value can be null. </param
         >
         <param name="startIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4819,8 +5749,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             &gt;= <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -4836,11 +5770,15 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              &lt; 0.</para
           >
           <para> -or-</para>
           <para>
             <paramref name="count" />
+
+            
 
             
 
@@ -4853,8 +5791,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              of the current instance - <paramref
              name="startIndex" />
+
+            
 
             
 
@@ -4873,8 +5815,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is searched forward starting at <paramref
              name="startIndex" />
+
+            
 
             
 
@@ -4887,6 +5833,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              plus <paramref
              name="count" />
 
@@ -4894,8 +5842,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              minus 1, if <paramref
              name="count" />
+
+            
 
             
 
@@ -4911,6 +5863,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -4918,8 +5872,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is <paramref
              name="count" />
+
+            
 
             
 
@@ -4935,6 +5893,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             .</para
           >
           <para
@@ -4945,8 +5905,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -4959,8 +5923,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -4973,8 +5941,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              methods of the <paramref
              name="item" />
+
+            
 
             
 
@@ -4993,8 +5965,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              and returns the zero-based index of the first occurrence within the range of elements in the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -5013,8 +5989,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              within the range of elements in the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -5027,8 +6007,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              and contains <paramref
              name="count" />
+
+            
 
             
 
@@ -5044,6 +6028,8 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -5051,8 +6037,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Collections.ArrayList" />
+
+          
 
           
 
@@ -5067,10 +6057,14 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The zero-based starting index of the search. 0 (zero) is valid in an empty list.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5116,6 +6110,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              &lt; 0.</para
           >
           <para>-or-</para>
@@ -5126,8 +6122,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              &gt; <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -5148,11 +6148,15 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              accepts null as a valid value and allows duplicate elements.</para
           >
           <para
             >If <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -5165,8 +6169,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             , the capacity of the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -5182,8 +6190,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is equal to <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -5196,8 +6208,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is added to the end of <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -5214,6 +6230,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -5221,8 +6239,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -5241,6 +6263,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              at the specified index.</para
           >
         </summary>
@@ -5251,8 +6275,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The zero-based index at which <paramref
            name="value" />
+
+          
 
           
 
@@ -5267,8 +6295,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -5313,8 +6345,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -5330,6 +6366,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              &lt; 0.</para
           >
           <para>
@@ -5339,8 +6377,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              &gt; <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -5361,11 +6403,15 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              accepts null as a valid value and allows duplicate elements.</para
           >
           <para
             >If the new <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -5378,6 +6424,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              plus the size of the collection) will be greater than <see
              cref="P:System.Collections.ArrayList.Capacity" />
 
@@ -5385,8 +6433,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             , the capacity of the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -5402,6 +6454,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is equal to <see
              cref="P:System.Collections.ArrayList.Count" />
 
@@ -5409,8 +6463,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             , the elements are added to the end of <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -5426,8 +6484,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is preserved in the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -5444,8 +6506,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              + <paramref
              name="m" />
+
+            
 
             
 
@@ -5458,6 +6524,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is the number of elements to be added and <paramref
              name="m" />
 
@@ -5465,8 +6533,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -5485,11 +6557,15 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              at the specified index.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5504,6 +6580,8 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The <see
            cref="T:System.Collections.ICollection" />
 
@@ -5511,8 +6589,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            whose elements should be inserted into the <see
            cref="T:System.Collections.ArrayList" />
+
+          
 
           
 
@@ -5549,6 +6631,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              if the
 <see
              cref="P:System.Collections.ArrayList.Capacity" />
@@ -5557,9 +6641,13 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              of the current instance cannot be changed;
    otherwise, <see
              langword="false" />
+
+            
 
             
 
@@ -5579,6 +6667,8 @@ public static void PrintValues( IEnumerable myList ) {
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -5616,10 +6706,14 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              if the
    current instance is read-only; otherwise,
 <see
              langword="false" />
+
+            
 
             
 
@@ -5639,6 +6733,8 @@ public static void PrintValues( IEnumerable myList ) {
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -5676,10 +6772,14 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              if access to
    the current instance is synchronized
    (thread-safe); otherwise, <see
              langword="false" />
+
+            
 
             
 
@@ -5698,8 +6798,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             , all operations must be done through the wrapper returned by the <see
              cref="M:System.Collections.ArrayList.Synchronized(System.Collections.IList)" />
+
+            
 
             
 
@@ -5714,6 +6818,8 @@ public static void PrintValues( IEnumerable myList ) {
           <para
             >Gets a value indicating whether access to the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -5753,8 +6859,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            that specifies the zero-based index of the element in the current instance to get or set. This value is greater than or equal to 0, and less than the <see
            cref="P:System.Collections.ArrayList.Count" />
+
+          
 
           
 
@@ -5779,11 +6889,15 @@ public static void PrintValues( IEnumerable myList ) {
 
               
 
+              
+
                .</para
             >
             <para
               >This property is implemented to support the <see
                cref="T:System.Collections.IList" />
+
+              
 
               
 
@@ -5805,6 +6919,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              &lt; 0.</para
           >
           <para>-or-</para>
@@ -5815,8 +6931,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              &gt;= <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -5861,11 +6981,15 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is searched backward starting at the last element and ending at the first element.</para
           >
           <para
             >This method performs a linear search; therefore, this method is an O(<paramref
              name="n" />
+
+            
 
             
 
@@ -5878,8 +7002,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -5895,8 +7023,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -5909,8 +7041,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -5923,8 +7059,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              methods of the <paramref
              name="item" />
+
+            
 
             
 
@@ -5943,8 +7083,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              and returns the zero-based index of the last occurrence within the entire <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -5963,8 +7107,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              within the entire the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -5980,6 +7128,8 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -5987,8 +7137,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Collections.ArrayList" />
+
+          
 
           
 
@@ -6034,6 +7188,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              &lt; 0.</para
           >
           <para>-or-</para>
@@ -6044,8 +7200,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              &gt;= <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -6064,8 +7224,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is searched backward starting at <paramref
              name="startIndex" />
+
+            
 
             
 
@@ -6081,8 +7245,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
+
+            
 
             
 
@@ -6095,8 +7263,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              to <paramref
              name="startIndex" />
+
+            
 
             
 
@@ -6112,6 +7284,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             .</para
           >
           <para
@@ -6122,8 +7296,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -6136,8 +7314,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -6150,8 +7332,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              methods of the <paramref
              name="item" />
+
+            
 
             
 
@@ -6170,8 +7356,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              and returns the zero-based index of the last occurrence within the range of elements in the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -6190,6 +7380,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              within the range of elements in the <see
              cref="T:System.Collections.ArrayList" />
 
@@ -6197,8 +7389,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              that extends from the first element to <paramref
              name="startIndex" />
+
+            
 
             
 
@@ -6214,8 +7410,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -6228,10 +7428,14 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           . The value can be null. </param
         >
         <param name="startIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6278,11 +7482,15 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              &lt; 0.</para
           >
           <para>-or-</para>
           <para>
             <paramref name="count" />
+
+            
 
             
 
@@ -6298,8 +7506,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              &gt;= <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -6315,8 +7527,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              &gt;= <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -6327,6 +7543,8 @@ public static void PrintValues( IEnumerable myList ) {
           <para>-or-</para>
           <para>
             <paramref name="count" />
+
+            
 
             
 
@@ -6334,6 +7552,8 @@ public static void PrintValues( IEnumerable myList ) {
 
              &gt; <paramref
              name="startIndex" />
+
+            
 
             
 
@@ -6352,8 +7572,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is searched backward starting at <paramref
              name="startIndex" />
+
+            
 
             
 
@@ -6366,6 +7590,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              minus <paramref
              name="count" />
 
@@ -6373,8 +7599,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              plus 1, if <paramref
              name="count" />
+
+            
 
             
 
@@ -6390,6 +7620,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -6397,8 +7629,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is <paramref
              name="count" />
+
+            
 
             
 
@@ -6414,6 +7650,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             .</para
           >
           <para
@@ -6424,8 +7662,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -6438,8 +7680,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              to determine whether item exists. In the earlier versions of the .NET Framework, this determination was made by using the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -6452,8 +7698,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              methods of the <paramref
              name="item" />
+
+            
 
             
 
@@ -6472,8 +7722,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              and returns the zero-based index of the last occurrence within the range of elements in the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -6492,8 +7746,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              within the range of elements in the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -6506,8 +7764,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              number of elements and ends at <paramref
              name="startIndex" />
+
+            
 
             
 
@@ -6523,6 +7785,8 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -6530,8 +7794,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Collections.ArrayList" />
+
+          
 
           
 
@@ -6546,10 +7814,14 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The zero-based starting index of the backward search. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6593,8 +7865,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -6612,8 +7888,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             , expose <paramref
              name="list" />
+
+            
 
             
 
@@ -6634,6 +7914,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              wrapper.</para
           >
         </summary>
@@ -6647,8 +7929,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              wrapper around <paramref
              name="list" />
+
+            
 
             
 
@@ -6664,8 +7950,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The <see
            cref="T:System.Collections.ArrayList" />
+
+          
 
           
 
@@ -6708,8 +7998,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             , expose <paramref
              name="list" />
+
+            
 
             
 
@@ -6730,6 +8024,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              wrapper.</para
           >
         </summary>
@@ -6743,8 +8039,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              wrapper around <paramref
              name="list" />
+
+            
 
             
 
@@ -6760,8 +8060,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -6807,8 +8111,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              does not contain the specified object, the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -6824,8 +8132,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
+
+            
 
             
 
@@ -6838,11 +8150,15 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             .</para
           >
           <para
             >This method determines equality by calling <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -6862,11 +8178,15 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6879,8 +8199,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            to remove from the <see
            cref="T:System.Collections.ArrayList" />
+
+          
 
           
 
@@ -6922,6 +8246,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              &lt; 0.</para
           >
           <para>-or-</para>
@@ -6932,8 +8258,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              &gt;= <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -6955,12 +8285,16 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              property is decreased by one.</para
           >
           <para>In collections of contiguous elements, such as lists, the elements that follow the removed element move up to occupy the vacated spot. If the collection is indexed, the indexes of the elements that are moved are also updated. This behavior does not apply to collections where elements are conceptually grouped into buckets, such as a hash table.</para>
           <para
             >This method is an O(<paramref
              name="n" />
+
+            
 
             
 
@@ -6973,8 +8307,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -6993,11 +8331,15 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7043,11 +8385,15 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              &lt; 0.</para
           >
           <para>-or-</para>
           <para>
             <paramref name="count" />
+
+            
 
             
 
@@ -7063,6 +8409,8 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            of the current instance - <paramref
            name="index" />
 
@@ -7070,8 +8418,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            &lt; <paramref
            name="count" />
+
+          
 
           
 
@@ -7093,6 +8445,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -7100,8 +8454,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -7120,6 +8478,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -7130,10 +8490,14 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The zero-based starting index of the range of elements to remove. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7178,12 +8542,16 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            &lt; 0.</exception
         >
         <remarks>
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -7199,6 +8567,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -7206,8 +8576,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is <paramref
              name="count" />
+
+            
 
             
 
@@ -7226,6 +8600,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              whose elements are copies of the specified value.</para
           >
         </summary>
@@ -7239,6 +8615,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              with <paramref
              name="count" />
 
@@ -7246,8 +8624,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              number of elements, all of which are copies of <paramref
              name="value" />
+
+            
 
             
 
@@ -7263,6 +8645,8 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -7270,8 +8654,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            to copy multiple times in the new <see
            cref="T:System.Collections.ArrayList" />
+
+          
 
           
 
@@ -7286,8 +8674,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The number of times <paramref
            name="value" />
+
+          
 
           
 
@@ -7329,8 +8721,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              to reverse the order of the elements, such that the element at <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -7343,6 +8739,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              [j], where j equals <paramref
              name="index" />
 
@@ -7350,6 +8748,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              + <paramref
              name="index" />
 
@@ -7357,8 +8757,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              + <paramref
              name="count" />
+
+            
 
             
 
@@ -7374,6 +8778,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -7381,8 +8787,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -7396,6 +8806,8 @@ public static void PrintValues( IEnumerable myList ) {
           <para
             >Reverses the order of the elements in the entire <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -7439,11 +8851,15 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              &lt; 0.</para
           >
           <para> -or-</para>
           <para>
             <paramref name="count" />
+
+            
 
             
 
@@ -7460,6 +8876,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              of the current instance - <paramref
              name="index" />
 
@@ -7467,8 +8885,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              &lt; <paramref
              name="count" />
+
+            
 
             
 
@@ -7490,8 +8912,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              to reverse the order of the elements, such that the element at <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -7504,6 +8930,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              [j], where j equals <paramref
              name="index" />
 
@@ -7511,6 +8939,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              + <paramref
              name="index" />
 
@@ -7518,8 +8948,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              + <paramref
              name="count" />
+
+            
 
             
 
@@ -7535,6 +8969,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -7542,8 +8978,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is <paramref
              name="count" />
+
+            
 
             
 
@@ -7563,10 +9003,14 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The zero-based starting index of the range to reverse. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7612,11 +9056,15 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              &lt; 0.</para
           >
           <para> -or-</para>
           <para>
             <see cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -7629,8 +9077,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              &lt; <paramref
              name="c" />
+
+            
 
             
 
@@ -7646,8 +9098,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -7667,6 +9123,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              accepts null as a valid value and allows duplicate elements.</para
           >
           <para
@@ -7677,8 +9135,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is preserved in the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -7694,6 +9156,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              + 1) operation, where <paramref
              name="n" />
 
@@ -7701,8 +9165,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -7721,11 +9189,15 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7738,8 +9210,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            index at which to start copying the elements of <paramref
            name="c" />
+
+          
 
           
 
@@ -7754,6 +9230,8 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The <see
            cref="T:System.Collections.ICollection" />
 
@@ -7761,8 +9239,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            whose elements to copy to the <see
            cref="T:System.Collections.ArrayList" />
+
+          
 
           
 
@@ -7799,6 +9281,8 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            interface.</exception
         >
         <exception cref="T:System.NotSupportedException"
@@ -7814,8 +9298,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             , which uses the QuickSort algorithm. The QuickSort algorithm is a comparison sort (also called an unstable sort), which means that a "less than or equal to" comparison operation determines which of two elements should occur first in the final sorted list. However, if two elements are equal, their original order might not be preserved. In contrast, a stable sort preserves the order of elements that are equal. To perform a stable sort, you must implement a custom <see
              cref="T:System.Collections.IComparer" />
+
+            
 
             
 
@@ -7831,8 +9319,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              log <paramref
              name="n" />
+
+            
 
             
 
@@ -7845,6 +9337,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ArrayList.Count" />
 
@@ -7852,8 +9346,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             ; in the worst case it is an O(<paramref
              name="n" />
+
+            
 
             
 
@@ -7867,6 +9365,8 @@ public static void PrintValues( IEnumerable myList ) {
           <para
             >Sorts the elements in the entire <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -7911,6 +9411,8 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            is <see
            langword="null" />
 
@@ -7918,8 +9420,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           , and one or more elements in the current instance do not implement the <see
            cref="T:System.IComparable" />
+
+          
 
           
 
@@ -7937,6 +9443,8 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            is <see
            langword="null" />
 
@@ -7944,8 +9452,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           , and one or more elements in the current instance do not implement the <see
            cref="T:System.IComparable" />
+
+          
 
           
 
@@ -7963,8 +9475,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              method to  sort a list of objects with a custom comparer that implements the <see
              cref="T:System.Collections.IComparer" />
+
+            
 
             
 
@@ -7977,6 +9493,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             , this method uses the <see
              cref="T:System.IComparable" />
 
@@ -7984,8 +9502,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              implementation of each element. In this case, you must make sure that the objects contained in the list implement the <see
              cref="T:System.Collections.IComparer" />
+
+            
 
             
 
@@ -8001,8 +9523,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              implementation means the list performs a comparison sort (also called an unstable sort); that is, if two elements are equal, their order might not be preserved. In contrast, a stable sort preserves the order of elements that are equal. To perform a stable sort, you must implement a custom <see
              cref="T:System.Collections.IComparer" />
+
+            
 
             
 
@@ -8018,8 +9544,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              log <paramref
              name="n" />
+
+            
 
             
 
@@ -8032,6 +9562,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ArrayList.Count" />
 
@@ -8039,8 +9571,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             ; in the worst case it is an O(<paramref
              name="n" />
+
+            
 
             
 
@@ -8059,6 +9595,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              using the specified comparer.</para
           >
         </summary>
@@ -8069,8 +9607,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IComparer" />
+
+          
 
           
 
@@ -8117,11 +9659,15 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              &lt; 0.</para
           >
           <para>-or-</para>
           <para>
             <paramref name="count" />
+
+            
 
             
 
@@ -8138,6 +9684,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              of the current instance - <paramref
              name="index" />
 
@@ -8145,8 +9693,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              &lt; <paramref
              name="count" />
+
+            
 
             
 
@@ -8162,6 +9714,8 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            is <see
            langword="null" />
 
@@ -8169,8 +9723,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           , and one or more elements in the current instance do not implement the <see
            cref="T:System.IComparable" />
+
+          
 
           
 
@@ -8188,6 +9746,8 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            is <see
            langword="null" />
 
@@ -8195,8 +9755,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           , and one or more elements in the current instance do not implement the <see
            cref="T:System.IComparable" />
+
+          
 
           
 
@@ -8214,8 +9778,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is set to null, this method performs a comparison sort (also called an unstable sort); that is, if two elements are equal, their order might not be preserved. In contrast, a stable sort preserves the order of elements that are equal. To perform a stable sort, you must implement a custom <see
              cref="T:System.Collections.IComparer" />
+
+            
 
             
 
@@ -8231,8 +9799,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              log <paramref
              name="n" />
+
+            
 
             
 
@@ -8245,8 +9817,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is <paramref
              name="count" />
+
+            
 
             
 
@@ -8265,11 +9841,15 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              using the specified comparer.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8284,6 +9864,8 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The length of the range to sort. </param
         >
         <param name="comparer">
@@ -8293,8 +9875,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IComparer" />
+
+          
 
           
 
@@ -8338,8 +9924,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -8352,6 +9942,8 @@ public static void PrintValues( IEnumerable myList ) {
           <para
             >To guarantee the thread safety of the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -8371,6 +9963,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              wrapper that is synchronized (thread safe).</para
           >
         </summary>
@@ -8379,6 +9973,8 @@ public static void PrintValues( IEnumerable myList ) {
           <para
             >An <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -8394,8 +9990,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The <see
            cref="T:System.Collections.ArrayList" />
+
+          
 
           
 
@@ -8438,6 +10038,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             , all operations must be done through this wrapper.</para
           >
           <para>Enumerating through a collection is intrinsically not a thread-safe procedure. Even when a collection is synchronized, other threads can still modify the collection, which causes the enumerator to throw an exception. To guarantee thread safety during enumeration, you can either lock the collection during the entire enumeration or catch the exceptions resulting from changes made by other threads.</para>
@@ -8447,6 +10049,8 @@ public static void PrintValues( IEnumerable myList ) {
           <para
             >Returns an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -8465,6 +10069,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              wrapper that is synchronized (thread safe).</para
           >
         </returns>
@@ -8475,8 +10081,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -8513,6 +10123,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              that can be used to synchronize access to the
    current instance.</para
           >
@@ -8527,8 +10139,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             , use the <see
              cref="M:System.Collections.ArrayList.Synchronized(System.Collections.IList)" />
+
+            
 
             
 
@@ -8541,8 +10157,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              using the <see
              cref="P:System.Collections.ArrayList.SyncRoot" />
+
+            
 
             
 
@@ -8555,8 +10175,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              of the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -8569,8 +10193,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             . This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -8585,6 +10213,8 @@ public static void PrintValues( IEnumerable myList ) {
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -8627,8 +10257,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             , which is an O(<paramref
              name="n" />
+
+            
 
             
 
@@ -8641,8 +10275,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -8661,8 +10299,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              to a new <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -8681,8 +10323,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              array containing copies of the elements of the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -8724,8 +10370,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -8737,6 +10387,8 @@ public static void PrintValues( IEnumerable myList ) {
           >At least one element of the current instance cannot be cast to the <see
            cref="T:System.Type" />
           <paramref name="type" />
+
+          
 
           
 
@@ -8754,6 +10406,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              object will be cast to the <see
              cref="T:System.Type" />
 
@@ -8761,8 +10415,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              specified in the <paramref
              name="type" />
+
+            
 
             
 
@@ -8778,8 +10436,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             , which is an O(<paramref
              name="n" />
+
+            
 
             
 
@@ -8792,8 +10454,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -8812,6 +10478,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              to a new array of the specified element type.</para
           >
         </summary>
@@ -8820,6 +10488,8 @@ public static void PrintValues( IEnumerable myList ) {
           <para
             >An array of the specified element type containing copies of the elements of the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -8835,8 +10505,12 @@ public static void PrintValues( IEnumerable myList ) {
 
           
 
+          
+
           The element <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -8882,8 +10556,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              to its initial state, call the <see
              cref="M:System.Collections.ArrayList.Clear" />
+
+            
 
             
 
@@ -8896,6 +10574,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             . Trimming an empty <see
              cref="T:System.Collections.ArrayList" />
 
@@ -8903,8 +10583,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              sets the capacity of the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -8920,6 +10604,8 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -8927,8 +10613,12 @@ public static void PrintValues( IEnumerable myList ) {
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ArrayList.Count" />
+
+            
 
             
 
@@ -8942,6 +10632,8 @@ public static void PrintValues( IEnumerable myList ) {
           <para
             >Sets the capacity to the actual number of elements in the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 

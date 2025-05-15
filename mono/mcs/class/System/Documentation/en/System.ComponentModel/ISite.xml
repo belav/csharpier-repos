@@ -39,8 +39,12 @@
 
         
 
+        
+
          to a <see
          cref="T:System.ComponentModel.Container" />
+
+        
 
         
 
@@ -53,6 +57,8 @@
          type="text/html">
           <a href="d4d4fcb4-e0b8-46b3-b679-7ee0026eb9e3">Programming with Components</a>
         </format>
+
+        
 
         
 
@@ -101,6 +107,8 @@
 
             
 
+            
+
              when implemented by a class.</para
           >
         </summary>
@@ -136,6 +144,8 @@
 
             
 
+            
+
              property indicates that the <see
              cref="T:System.ComponentModel.IComponent" />
 
@@ -143,8 +153,12 @@
 
             
 
+            
+
              instance does not have an <see
              cref="T:System.ComponentModel.ISite" />
+
+            
 
             
 
@@ -163,8 +177,12 @@
 
             
 
+            
+
              associated with the <see
              cref="T:System.ComponentModel.ISite" />
+
+            
 
             
 
@@ -199,6 +217,8 @@
 
             
 
+            
+
             ; therefore, if the <see
              cref="T:System.ComponentModel.Component" />
 
@@ -206,8 +226,12 @@
 
             
 
+            
+
              does not have an <see
              cref="T:System.ComponentModel.ISite" />
+
+            
 
             
 
@@ -246,6 +270,8 @@
           <para
             >Gets or sets the name of the component associated with the <see
              cref="T:System.ComponentModel.ISite" />
+
+            
 
             
 

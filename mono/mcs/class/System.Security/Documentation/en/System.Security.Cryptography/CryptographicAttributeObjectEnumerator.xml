@@ -37,6 +37,8 @@
 
         
 
+        
+
          collection. This class cannot be inherited. </para
       >
     </summary>
@@ -73,8 +75,12 @@
 
             
 
+            
+
              object from the <see
              cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
+
+            
 
             
 
@@ -113,8 +119,12 @@
 
             
 
+            
+
              object in the <see
              cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
+
+            
 
             
 
@@ -128,6 +138,8 @@
           <para
             >true if the enumeration successfully moved to the next <see
              cref="T:System.Security.Cryptography.CryptographicAttributeObject" />
+
+            
 
             
 
@@ -166,8 +178,12 @@
 
             
 
+            
+
              object in the <see
              cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
+
+            
 
             
 
@@ -208,8 +224,12 @@
 
             
 
+            
+
              object from the <see
              cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
+
+            
 
             
 

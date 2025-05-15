@@ -55,6 +55,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -91,11 +93,15 @@
 
             
 
+            
+
              class from a specified binding element.</para
           >
         </summary>
         <param name="elementToBeCloned">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -145,10 +151,14 @@
 
           
 
+          
+
            members that describe bindings, behaviors, contracts and other information required to create the channel factory.</param
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -229,6 +239,8 @@
 
             
 
+            
+
              requested if it is present, or Nothing if it is not present.</para
           >
         </returns>
@@ -239,10 +251,14 @@
 
           
 
+          
+
           The binding context for the binding element.</param
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

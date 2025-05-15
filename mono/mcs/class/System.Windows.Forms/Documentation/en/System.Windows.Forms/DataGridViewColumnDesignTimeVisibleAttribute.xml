@@ -27,8 +27,12 @@
 
         
 
+        
+
          appear in <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          of <see
          cref="F:System.ComponentModel.DesignTimeVisibleAttribute.No" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          type implements the <see
          cref="T:System.ComponentModel.IComponent" />
+
+        
 
         
 
@@ -72,8 +84,12 @@
 
         
 
+        
+
          type from appearing in the <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -91,6 +107,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -99,6 +117,8 @@
       <para
         >Specifies whether a column type is visible in the <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -129,8 +149,12 @@
 
             
 
+            
+
              class using the default <see
              cref="P:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute.Visible" />
+
+            
 
             
 
@@ -166,8 +190,12 @@
 
             
 
+            
+
              class using the specified value to initialize the <see
              cref="P:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute.Visible" />
+
+            
 
             
 
@@ -183,8 +211,12 @@
 
           
 
+          
+
           The value of the <see
            cref="P:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute.Visible" />
+
+          
 
           
 
@@ -218,6 +250,8 @@
 
             
 
+            
+
              property value of true.</para
           >
         </remarks>
@@ -231,6 +265,8 @@
 
             
 
+            
+
              value, which is <see
              cref="F:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute.Yes" />
 
@@ -238,8 +274,12 @@
 
             
 
+            
+
             , indicating that the column is visible in the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -279,8 +319,12 @@
 
             
 
+            
+
              instance with the same <see
              cref="P:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute.Visible" />
+
+            
 
             
 
@@ -296,6 +340,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -303,8 +349,12 @@
 
           
 
+          
+
            to compare with the current <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -354,6 +404,8 @@
 
             
 
+            
+
              attribute value.</para
           >
         </summary>
@@ -362,6 +414,8 @@
           <para
             >true to indicate that this instance is equal to the <see
              cref="F:System.Windows.Forms.DataGridViewColumnDesignTimeVisibleAttribute.Default" />
+
+            
 
             
 
@@ -396,6 +450,8 @@
 
             
 
+            
+
              property value of false.</para
           >
         </remarks>
@@ -409,8 +465,12 @@
 
             
 
+            
+
              value indicating that the column is not visible in the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -439,6 +499,8 @@
           <para
             >Gets a value indicating whether the column type is visible in the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -473,6 +535,8 @@
 
             
 
+            
+
              property value of true. </para
           >
         </remarks>
@@ -486,8 +550,12 @@
 
             
 
+            
+
              value indicating that the column is visible in the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 

@@ -27,8 +27,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Security.Principal.WindowsIdentity" />
+
+        
 
         
 
@@ -110,6 +114,8 @@
           <para>The user name is passed to the common language runtime by the operating system or other authentication provider (such as ASP.NET).</para>
           <para>
             <see cref="P:System.Security.Principal.IIdentity.Name" />
+
+            
 
             
 

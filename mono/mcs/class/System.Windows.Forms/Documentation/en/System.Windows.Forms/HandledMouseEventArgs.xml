@@ -24,8 +24,12 @@
 
         
 
+        
+
          primarily when developing a control that needs to handle mouse wheel events itself, and prevent them from being seen by the control's immediate parent container. <see
          cref="T:System.Windows.Forms.HandledMouseEventArgs" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          when it handles the <see
          cref="E:System.Windows.Forms.Control.MouseWheel" />
+
+        
 
         
 
@@ -52,8 +60,12 @@
 
         
 
+        
+
          uses a <see
          cref="T:System.Windows.Forms.MouseEventArgs" />
+
+        
 
         
 
@@ -66,8 +78,12 @@
 
         
 
+        
+
          in order to cancel an occurrence of <see
          cref="E:System.Windows.Forms.Control.MouseWheel" />
+
+        
 
         
 
@@ -81,6 +97,8 @@
       <para
         >Allows a custom control to prevent the <see
          cref="E:System.Windows.Forms.Control.MouseWheel" />
+
+        
 
         
 
@@ -117,6 +135,8 @@
 
             
 
+            
+
              class with the specified mouse button, number of mouse button clicks, horizontal and vertical screen coordinates, and the change of mouse pointer position.</para
           >
         </summary>
@@ -127,8 +147,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MouseButtons" />
+
+          
 
           
 
@@ -143,10 +167,14 @@
 
           
 
+          
+
           The number of times a mouse button was pressed. </param
         >
         <param name="x">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -161,10 +189,14 @@
 
           
 
+          
+
           The y-coordinate of a mouse click, in pixels. </param
         >
         <param name="delta">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -204,6 +236,8 @@
 
             
 
+            
+
              class with the specified mouse button, number of mouse button clicks, horizontal and vertical screen coordinates, the change of mouse pointer position, and the value indicating whether the event is handled.</para
           >
         </summary>
@@ -214,8 +248,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MouseButtons" />
+
+          
 
           
 
@@ -230,10 +268,14 @@
 
           
 
+          
+
           The number of times a mouse button was pressed. </param
         >
         <param name="x">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -248,6 +290,8 @@
 
           
 
+          
+
           The y-coordinate of a mouse click, in pixels. </param
         >
         <param name="delta">
@@ -257,10 +301,14 @@
 
           
 
+          
+
           A signed count of the number of detents the wheel has rotated. </param
         >
         <param name="defaultHandledValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

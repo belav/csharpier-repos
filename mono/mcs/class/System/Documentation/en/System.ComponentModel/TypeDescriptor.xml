@@ -29,8 +29,12 @@
 
         
 
+        
+
          namespace, and the <see
          cref="T:System.ComponentModel.TypeDescriptor" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          method of the root <see
          cref="T:System.Object" />
+
+        
 
         
 
@@ -54,6 +62,8 @@
          type="text/html">
           <a href="d1a58e7f-fb39-4d50-bf84-e3b8f9bf9775">Reflection</a>
         </format>
+
+        
 
         
 
@@ -69,8 +79,12 @@
 
         
 
+        
+
          is an extensible inspection mechanism for components: those classes that implement the <see
          cref="T:System.ComponentModel.IComponent" />
+
+        
 
         
 
@@ -83,8 +97,12 @@
 
         
 
+        
+
          can be dynamically extended by several services available through the target component's <see
          cref="P:System.ComponentModel.Component.Site" />
+
+        
 
         
 
@@ -113,6 +131,8 @@
             <para
               >Enables another class, such as <see
                cref="T:System.Windows.Forms.ToolTip" />
+
+              
 
               
 
@@ -147,6 +167,8 @@
 
               
 
+              
+
               .</para
             >
           </description>
@@ -160,8 +182,12 @@
 
         
 
+        
+
          allows the design-time representation of a component to differ from its actual run-time representation, which makes <see
          cref="T:System.ComponentModel.TypeDescriptor" />
+
+        
 
         
 
@@ -177,11 +203,15 @@
 
         
 
+        
+
          are static. You cannot create an instance of this class, and this class cannot be inherited.</para
       >
       <para
         >You can set property and event values two different ways: specify them in the component class or change them at design time. Because you can set these values two ways, the overloaded methods of <see
          cref="T:System.ComponentModel.TypeDescriptor" />
+
+        
 
         
 
@@ -197,6 +227,8 @@
 
         
 
+        
+
          information and you have an instance of the object, use the method that calls for a component. Use the method that calls for the class type only when you do not have an instance of the object.</para
       >
       <para
@@ -207,8 +239,12 @@
 
         
 
+        
+
          for speed. Typically, they are constant for the lifetime of an object. However, extender providers and designers can change the set of properties on an object. If this is the case, then the <see
          cref="Overload:System.ComponentModel.TypeDescriptor.Refresh" />
+
+        
 
         
 
@@ -266,8 +302,12 @@
 
             
 
+            
+
              method adds class-level attributes to the specified instance of a component. Because this is a common requirement of applications using the vsprvs Windows Forms Designer and Properties window, this method provides a shortcut by creating a type description provider that merges the provided attributes with the attributes that already exist on the class. The return value is the type description provider that was used to add the attributes. This provider can later be passed to the <see
              cref="M:System.ComponentModel.TypeDescriptor.RemoveProvider(System.ComponentModel.TypeDescriptionProvider,System.Object)" />
+
+            
 
             
 
@@ -290,11 +330,15 @@
 
             
 
+            
+
              that was used to add the specified attributes.</para
           >
         </returns>
         <param name="instance">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -309,8 +353,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -363,8 +411,12 @@
 
             
 
+            
+
              method adds class-level attributes to the specified type of a component. Because this is a common requirement of applications using the vsprvs Windows Forms Designer and Properties window, this method provides a shortcut by creating a type description provider that merges the provided attributes with the attributes that already exist on the class. The return value is the type description provider that was used to add the attributes. This provider can later be passed to the <see
              cref="M:System.ComponentModel.TypeDescriptor.RemoveProvider(System.ComponentModel.TypeDescriptionProvider,System.Type)" />
+
+            
 
             
 
@@ -387,6 +439,8 @@
 
             
 
+            
+
              that was used to add the specified attributes.</para
           >
         </returns>
@@ -397,8 +451,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -413,8 +471,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -462,8 +524,12 @@
 
             
 
+            
+
              method adds an editor table for the given editor base type. Typically, editors are specified as metadata on a component. However, if no metadata for a requested editor base type can be found on the component, the associated <see
              cref="T:System.ComponentModel.TypeDescriptor" />
+
+            
 
             
 
@@ -484,6 +550,8 @@
 
           
 
+          
+
           The editor base type to add the editor table for. If a table already exists for this type, this method will do nothing. </param
         >
         <param name="table">
@@ -493,8 +561,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.Hashtable" />
+
+          
 
           
 
@@ -541,8 +613,12 @@
 
             
 
+            
+
              method adds a type description provider that supplies type information for a single instance of a component. If a provider is added by this method, the provider's <see
              cref="M:System.ComponentModel.TypeDescriptor.CreateInstance(System.IServiceProvider,System.Type,System.Type[],System.Object[])" />
+
+            
 
             
 
@@ -559,8 +635,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.ComponentModel.TypeDescriptor.RemoveProvider" />
+
+            
 
             
 
@@ -576,8 +656,12 @@
 
             
 
+            
+
              method on the <paramref
              name="instance" />
+
+            
 
             
 
@@ -594,8 +678,12 @@
 
               
 
+              
+
                method that takes an <see
                cref="T:System.Object" />
+
+              
 
               
 
@@ -608,12 +696,16 @@
 
               
 
+              
+
                parameter, affects all instances of the component described by that type.</para
             >
           </block>
           <para
             >Use the <see
              cref="M:System.ComponentModel.TypeDescriptor.AddProviderTransparent(System.ComponentModel.TypeDescriptionProvider,System.Object)" />
+
+            
 
             
 
@@ -633,8 +725,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.TypeDescriptionProvider" />
+
+          
 
           
 
@@ -644,6 +740,8 @@
         >
         <param name="instance">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -690,12 +788,16 @@
 
             
 
+            
+
              method adds a type description provider that supplies type information for the specified class, derived classes, and all instances of these types.</para
           >
           <block subset="none" type="note">
             <para
               >The <paramref
                name="type" />
+
+              
 
               
 
@@ -713,8 +815,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.ComponentModel.TypeDescriptor.RemoveProvider" />
+
+            
 
             
 
@@ -730,8 +836,12 @@
 
             
 
+            
+
              method on the <paramref
              name="type" />
+
+            
 
             
 
@@ -748,8 +858,12 @@
 
               
 
+              
+
                method that takes an <see
                cref="T:System.Object" />
+
+              
 
               
 
@@ -762,12 +876,16 @@
 
               
 
+              
+
                parameter, affects all instances of the component described by that type.</para
             >
           </block>
           <para
             >Use the <see
              cref="M:System.ComponentModel.TypeDescriptor.AddProviderTransparent(System.ComponentModel.TypeDescriptionProvider,System.Type)" />
+
+            
 
             
 
@@ -787,8 +905,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.TypeDescriptionProvider" />
+
+          
 
           
 
@@ -803,8 +925,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -853,11 +979,15 @@
 
             
 
+            
+
              is defined, the caller can register a provider for the specified instance if its type is also partially trusted.</para
           >
           <para
             >Use the <see
              cref="M:System.ComponentModel.TypeDescriptor.AddProvider(System.ComponentModel.TypeDescriptionProvider,System.Object)" />
+
+            
 
             
 
@@ -877,8 +1007,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.TypeDescriptionProvider" />
+
+          
 
           
 
@@ -888,6 +1022,8 @@
         >
         <param name="instance">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -936,11 +1072,15 @@
 
             
 
+            
+
              is defined, the caller can register a provider for the specified type if it is also partially trusted. </para
           >
           <para
             >Use the <see
              cref="M:System.ComponentModel.TypeDescriptor.AddProvider(System.ComponentModel.TypeDescriptionProvider,System.Type)" />
+
+            
 
             
 
@@ -960,8 +1100,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.TypeDescriptionProvider" />
+
+          
 
           
 
@@ -976,8 +1120,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1023,6 +1171,8 @@
 
             
 
+            
+
              property and the <see
              cref="T:System.ComponentModel.IComNativeDescriptorHandler" />
 
@@ -1030,8 +1180,12 @@
 
             
 
+            
+
              interface are obsolete. For more information, see the <see
              cref="P:System.ComponentModel.TypeDescriptor.ComObjectType" />
+
+            
 
             
 
@@ -1077,8 +1231,12 @@
 
             
 
+            
+
              property returns a type that can be passed to the <see
              cref="M:System.ComponentModel.TypeDescriptor.AddProvider(System.ComponentModel.TypeDescriptionProvider,System.Type)" />
+
+            
 
             
 
@@ -1094,8 +1252,12 @@
 
             
 
+            
+
              property and other members in this class replace the functionality in the obsolete <see
              cref="T:System.ComponentModel.IComNativeDescriptorHandler" />
+
+            
 
             
 
@@ -1108,6 +1270,8 @@
 
             
 
+            
+
             , add a <see
              cref="T:System.ComponentModel.TypeDescriptionProvider" />
 
@@ -1115,8 +1279,12 @@
 
             
 
+            
+
              to handle type <see
              cref="P:System.ComponentModel.TypeDescriptor.ComObjectType" />
+
+            
 
             
 
@@ -1171,8 +1339,12 @@
 
             
 
+            
+
              method creates an association between a primary and a secondary object. Once an association is created, a designer or other filtering mechanism can add properties that route to either object into the primary object's property set. When a property invocation is made against the primary object, the <see
              cref="M:System.ComponentModel.TypeDescriptor.GetAssociation(System.Type,System.Object)" />
+
+            
 
             
 
@@ -1183,6 +1355,8 @@
           <para
             >A <see
              cref="T:System.WeakReference" />
+
+            
 
             
 
@@ -1202,8 +1376,12 @@
 
           
 
+          
+
           The primary <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1218,8 +1396,12 @@
 
           
 
+          
+
           The secondary <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1262,6 +1444,8 @@
 
             
 
+            
+
             , it searches up the class hierarchy for a designer. If it cannot find a designer in the class hierarchy, it returns null.</para
           >
         </remarks>
@@ -1279,6 +1463,8 @@
 
             
 
+            
+
              that is an instance of the designer for the component, or null if no designer can be found.</para
           >
         </returns>
@@ -1289,8 +1475,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -1305,8 +1495,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1357,6 +1551,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1365,6 +1561,8 @@
           <para
             >A new <see
              cref="T:System.ComponentModel.EventDescriptor" />
+
+            
 
             
 
@@ -1380,6 +1578,8 @@
 
           
 
+          
+
           The type of the component for which to create the new event. </param
         >
         <param name="oldEventDescriptor">
@@ -1389,10 +1589,14 @@
 
           
 
+          
+
           The existing event information. </param
         >
         <param name="attributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1448,11 +1652,15 @@
 
             
 
+            
+
              that is bound to a type.</para
           >
         </returns>
         <param name="componentType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1467,6 +1675,8 @@
 
           
 
+          
+
           The name of the event. </param
         >
         <param name="type">
@@ -1476,10 +1686,14 @@
 
           
 
+          
+
           The type of the delegate that handles the event. </param
         >
         <param name="attributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1528,8 +1742,12 @@
 
             
 
+            
+
              method will search for a <see
              cref="T:System.ComponentModel.TypeDescriptionProvider" />
+
+            
 
             
 
@@ -1542,6 +1760,8 @@
 
             
 
+            
+
              data type. This method first tries to obtain a type description provider from the <paramref
              name="provider" />
 
@@ -1549,8 +1769,12 @@
 
             
 
+            
+
              parameter. If this fails, it searches its own internal tables for a provider (these entries were created through previous calls to <see
              cref="Overload:System.ComponentModel.TypeDescriptor.AddProvider" />
+
+            
 
             
 
@@ -1573,6 +1797,8 @@
 
             
 
+            
+
              is found; otherwise, null.</para
           >
         </returns>
@@ -1583,8 +1809,12 @@
 
           
 
+          
+
           The service provider that provides a <see
            cref="T:System.ComponentModel.TypeDescriptionProvider" />
+
+          
 
           
 
@@ -1599,8 +1829,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1615,6 +1849,8 @@
 
           
 
+          
+
           An optional array of parameter types to be passed to the object's constructor. This parameter can be null or an array of zero length.</param
         >
         <param name="args">
@@ -1624,8 +1860,12 @@
 
           
 
+          
+
           An optional array of parameter values to pass to the object's constructor. If not null, the number of elements must be the same as <paramref
            name="argTypes" />
+
+          
 
           
 
@@ -1676,6 +1916,8 @@
 
             
 
+            
+
              and attribute array.</para
           >
         </summary>
@@ -1684,6 +1926,8 @@
           <para
             >A new <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -1699,8 +1943,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1715,10 +1963,14 @@
 
           
 
+          
+
           The existing property descriptor. </param
         >
         <param name="attributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1774,6 +2026,8 @@
 
             
 
+            
+
              that is bound to the specified type and that has the specified metadata attributes merged with the existing metadata attributes.</para
           >
         </returns>
@@ -1784,8 +2038,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1800,10 +2058,14 @@
 
           
 
+          
+
           The name of the property. </param
         >
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1816,10 +2078,14 @@
 
           
 
+          
+
            of the property. </param
         >
         <param name="attributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1869,8 +2135,12 @@
 
             
 
+            
+
              parameter using the <see
              cref="M:System.ComponentModel.TypeDescriptor.CreateAssociation(System.Object,System.Object)" />
+
+            
 
             
 
@@ -1883,8 +2153,12 @@
 
             
 
+            
+
              method returns the correct secondary object to invoke for the requested type. Otherwise, <see
              cref="M:System.ComponentModel.TypeDescriptor.GetAssociation(System.Type,System.Object)" />
+
+            
 
             
 
@@ -1897,11 +2171,15 @@
 
             
 
+            
+
              and returns the designer if one is found. This method never returns null.</para
           >
           <para
             >A <see
              cref="T:System.WeakReference" />
+
+            
 
             
 
@@ -1924,11 +2202,15 @@
 
             
 
+            
+
              if no specified association exists.</para
           >
         </returns>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1941,10 +2223,14 @@
 
           
 
+          
+
            of the target component.</param
         >
         <param name="primary">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1986,6 +2272,8 @@
 
             
 
+            
+
              method may be dynamically modified from the original component's source listing by extender providers (<see
              cref="T:System.ComponentModel.IExtenderProvider" />
 
@@ -1993,8 +2281,12 @@
 
             
 
+            
+
             ), filter services (<see
              cref="T:System.ComponentModel.Design.ITypeDescriptorFilterService" />
+
+            
 
             
 
@@ -2010,8 +2302,12 @@
 
             
 
+            
+
              set to true, you must override the <see
              cref="P:System.Attribute.TypeId" />
+
+            
 
             
 
@@ -2024,6 +2320,8 @@
 
             
 
+            
+
              to return the object identity of your attribute. If only some instances of your attribute are unique, return a value from <see
              cref="P:System.Attribute.TypeId" />
 
@@ -2031,8 +2329,12 @@
 
             
 
+            
+
              that would return equality in those cases. For example, some attributes have a constructor parameter that acts as a unique key. For these attributes, return the value of the constructor parameter from the <see
              cref="P:System.Attribute.TypeId" />
+
+            
 
             
 
@@ -2049,8 +2351,12 @@
 
               
 
+              
+
                returns the type identity regardless of the value of the <see
                cref="P:System.AttributeUsageAttribute.AllowMultiple" />
+
+              
 
               
 
@@ -2063,6 +2369,8 @@
 
               
 
+              
+
                attribute from the <see
                cref="T:System.ComponentModel.AttributeCollection" />
 
@@ -2070,8 +2378,12 @@
 
               
 
+              
+
               , your attribute must override the <see
                cref="P:System.Attribute.TypeId" />
+
+              
 
               
 
@@ -2095,8 +2407,12 @@
 
             
 
+            
+
              containing the attributes for the component. If <paramref
              name="component" />
+
+            
 
             
 
@@ -2107,6 +2423,8 @@
         </returns>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2149,8 +2467,12 @@
 
             
 
+            
+
              set to true, the attribute collection removes duplicate instances. These are instances in which the <see
              cref="P:System.Attribute.TypeId" />
+
+            
 
             
 
@@ -2166,8 +2488,12 @@
 
             
 
+            
+
              set to true, you must override the <see
              cref="P:System.Attribute.TypeId" />
+
+            
 
             
 
@@ -2180,6 +2506,8 @@
 
             
 
+            
+
              to return the object identity of your attribute. If only some instances of your attribute are unique, return a value from <see
              cref="P:System.Attribute.TypeId" />
 
@@ -2187,8 +2515,12 @@
 
             
 
+            
+
              that would return equality in those cases. For example, some attributes have a constructor parameter that acts as a unique key. For these attributes, return the value of the constructor parameter from the <see
              cref="P:System.Attribute.TypeId" />
+
+            
 
             
 
@@ -2205,8 +2537,12 @@
 
               
 
+              
+
                returns the type identity regardless of the value of the <see
                cref="P:System.AttributeUsageAttribute.AllowMultiple" />
+
+              
 
               
 
@@ -2219,6 +2555,8 @@
 
               
 
+              
+
                attribute from the <see
                cref="T:System.ComponentModel.AttributeCollection" />
 
@@ -2226,8 +2564,12 @@
 
               
 
+              
+
               , your attribute must override the <see
                cref="P:System.Attribute.TypeId" />
+
+              
 
               
 
@@ -2251,6 +2593,8 @@
 
             
 
+            
+
              with the attributes for the type of the component. If the component is null, this method returns an empty collection.</para
           >
         </returns>
@@ -2261,8 +2605,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -2310,6 +2658,8 @@
 
             
 
+            
+
              method may be dynamically modified from the original components source listing by extender providers (<see
              cref="T:System.ComponentModel.IExtenderProvider" />
 
@@ -2317,8 +2667,12 @@
 
             
 
+            
+
             ), filter services (<see
              cref="T:System.ComponentModel.Design.ITypeDescriptorFilterService" />
+
+            
 
             
 
@@ -2334,8 +2688,12 @@
 
             
 
+            
+
              set to true, you must override the <see
              cref="P:System.Attribute.TypeId" />
+
+            
 
             
 
@@ -2348,6 +2706,8 @@
 
             
 
+            
+
              to return the object identity of your attribute. If only some instances of your attribute are unique, return a value from <see
              cref="P:System.Attribute.TypeId" />
 
@@ -2355,8 +2715,12 @@
 
             
 
+            
+
              that would return equality in those cases. For example, some attributes have a constructor parameter that acts as a unique key. For these attributes, return the value of the constructor parameter from the <see
              cref="P:System.Attribute.TypeId" />
+
+            
 
             
 
@@ -2373,8 +2737,12 @@
 
               
 
+              
+
                returns the type identity regardless of the value of the <see
                cref="P:System.AttributeUsageAttribute.AllowMultiple" />
+
+              
 
               
 
@@ -2387,6 +2755,8 @@
 
               
 
+              
+
                attribute from the <see
                cref="T:System.ComponentModel.AttributeCollection" />
 
@@ -2394,8 +2764,12 @@
 
               
 
+              
+
               , your attribute must override the <see
                cref="P:System.Attribute.TypeId" />
+
+              
 
               
 
@@ -2419,11 +2793,15 @@
 
             
 
+            
+
              with the attributes for the component. If the component is null, this method returns an empty collection.</para
           >
         </returns>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2438,6 +2816,8 @@
 
           
 
+          
+
           true to use a baseline set of attributes from the custom type descriptor if <paramref
            name="component" />
 
@@ -2445,8 +2825,12 @@
 
           
 
+          
+
            is of type <see
            cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+          
 
           
 
@@ -2488,8 +2872,12 @@
 
             
 
+            
+
              name for the <paramref
              name="component" />
+
+            
 
             
 
@@ -2502,8 +2890,12 @@
 
             
 
+            
+
              implements <see
              cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+            
 
             
 
@@ -2514,6 +2906,8 @@
           <para
             >This method is equivalent to the overloaded <see
              cref="M:System.ComponentModel.TypeDescriptor.GetClassName(System.Object,System.Boolean)" />
+
+            
 
             
 
@@ -2536,6 +2930,8 @@
 
             
 
+            
+
              containing the name of the class for the specified component.</para
           >
         </returns>
@@ -2546,8 +2942,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -2601,6 +3001,8 @@
 
             
 
+            
+
              containing the name of the class for the specified component type.</para
           >
         </returns>
@@ -2611,8 +3013,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -2660,8 +3066,12 @@
 
             
 
+            
+
              name for the <paramref
              name="component" />
+
+            
 
             
 
@@ -2674,8 +3084,12 @@
 
             
 
+            
+
              parameter implements <see
              cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+            
 
             
 
@@ -2698,11 +3112,15 @@
 
             
 
+            
+
              containing the name of the class for the specified component.</para
           >
         </returns>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2715,10 +3133,14 @@
 
           
 
+          
+
            for which you want the class name. </param
         >
         <param name="noCustomTypeDesc">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2761,6 +3183,8 @@
 
             
 
+            
+
              method with a second parameter of false.</para
           >
           <para>This method is used at design time to retrieve the name of an instance of a component.</para>
@@ -2779,6 +3203,8 @@
 
             
 
+            
+
              containing the name of the specified component, or null if there is no component name.</para
           >
         </returns>
@@ -2789,8 +3215,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -2838,6 +3268,8 @@
 
             
 
+            
+
              interface, it can return an alternate name.</para
           >
         </remarks>
@@ -2856,8 +3288,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -2867,6 +3303,8 @@
         >
         <param name="noCustomTypeDesc">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2908,8 +3346,12 @@
 
             
 
+            
+
             . If it cannot find a <see
              cref="T:System.ComponentModel.TypeConverterAttribute" />
+
+            
 
             
 
@@ -2920,6 +3362,8 @@
           <para
             >This method is equivalent to the overloaded <see
              cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object,System.Boolean)" />
+
+            
 
             
 
@@ -2942,11 +3386,15 @@
 
             
 
+            
+
              for the specified component.</para
           >
         </returns>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2989,8 +3437,12 @@
 
             
 
+            
+
             . If it cannot find a <see
              cref="T:System.ComponentModel.TypeConverterAttribute" />
+
+            
 
             
 
@@ -3013,6 +3465,8 @@
 
             
 
+            
+
              for the specified type.</para
           >
         </returns>
@@ -3023,8 +3477,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -3072,8 +3530,12 @@
 
             
 
+            
+
             . If it cannot find a <see
              cref="T:System.ComponentModel.TypeConverterAttribute" />
+
+            
 
             
 
@@ -3096,6 +3558,8 @@
 
             
 
+            
+
              for the specified component.</para
           >
         </returns>
@@ -3106,10 +3570,14 @@
 
           
 
+          
+
           A component to get the converter for. </param
         >
         <param name="noCustomTypeDesc">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3151,6 +3619,8 @@
 
             
 
+            
+
              method with a second parameter of false.</para
           >
         </remarks>
@@ -3168,11 +3638,15 @@
 
             
 
+            
+
              with the default event, or null if there are no events.</para
           >
         </returns>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3222,6 +3696,8 @@
 
             
 
+            
+
              with the default event, or null if there are no events.</para
           >
         </returns>
@@ -3232,8 +3708,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -3286,6 +3766,8 @@
 
             
 
+            
+
              with the default event, or null if there are no events.</para
           >
         </returns>
@@ -3296,10 +3778,14 @@
 
           
 
+          
+
           The component to get the event for. </param
         >
         <param name="noCustomTypeDesc">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3341,6 +3827,8 @@
 
             
 
+            
+
              parameter is null, this method returns null.</para
           >
         </remarks>
@@ -3358,11 +3846,15 @@
 
             
 
+            
+
              with the default property, or null if there are no properties.</para
           >
         </returns>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3405,6 +3897,8 @@
 
             
 
+            
+
              parameter is null, this method returns null.</para
           >
         </remarks>
@@ -3422,6 +3916,8 @@
 
             
 
+            
+
              with the default property, or null if there are no properties.</para
           >
         </returns>
@@ -3432,8 +3928,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -3481,6 +3981,8 @@
 
             
 
+            
+
              parameter is null, this method returns null.</para
           >
         </remarks>
@@ -3498,6 +4000,8 @@
 
             
 
+            
+
              with the default property, or null if there are no properties.</para
           >
         </returns>
@@ -3508,10 +4012,14 @@
 
           
 
+          
+
           The component to get the default property for. </param
         >
         <param name="noCustomTypeDesc">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3554,8 +4062,12 @@
 
             
 
+            
+
              is usually <see
              cref="T:System.Drawing.Design.UITypeEditor" />
+
+            
 
             
 
@@ -3568,8 +4080,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.ComponentModel.InstanceCreationEditor" />
+
+            
 
             
 
@@ -3594,6 +4110,8 @@
 
           
 
+          
+
           The component to get the editor for. </param
         >
         <param name="editorBaseType">
@@ -3603,8 +4121,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -3648,8 +4170,12 @@
 
             
 
+            
+
              is usually <see
              cref="T:System.Drawing.Design.UITypeEditor" />
+
+            
 
             
 
@@ -3662,8 +4188,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.ComponentModel.InstanceCreationEditor" />
+
+            
 
             
 
@@ -3689,8 +4219,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -3739,8 +4273,12 @@
 
             
 
+            
+
              is usually <see
              cref="T:System.Drawing.Design.UITypeEditor" />
+
+            
 
             
 
@@ -3753,8 +4291,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.ComponentModel.InstanceCreationEditor" />
+
+            
 
             
 
@@ -3779,10 +4321,14 @@
 
           
 
+          
+
           The component to get the editor for. </param
         >
         <param name="editorBaseType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3795,10 +4341,14 @@
 
           
 
+          
+
            that represents the base type of the editor you want to find. </param
         >
         <param name="noCustomTypeDesc">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3840,8 +4390,12 @@
 
             
 
+            
+
              parameter instance provides. This collection can differ from the set of events the class provides. If the <paramref
              name="component" />
+
+            
 
             
 
@@ -3852,6 +4406,8 @@
           <para
             >If <paramref
              name="component" />
+
+            
 
             
 
@@ -3875,11 +4431,15 @@
 
             
 
+            
+
              with the events for this component.</para
           >
         </returns>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3922,6 +4482,8 @@
 
             
 
+            
+
              parameter is null, an empty collection is returned.</para
           >
           <para>The order of the returned collection is not guaranteed to be identical between calls, so always order it before use.</para>
@@ -3940,6 +4502,8 @@
 
             
 
+            
+
              with the events for this component.</para
           >
         </returns>
@@ -3950,8 +4514,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -3994,8 +4562,12 @@
 
             
 
+            
+
              parameter can differ from the events of a class, because the site can add or remove events if the <paramref
              name="component" />
+
+            
 
             
 
@@ -4011,6 +4583,8 @@
 
             
 
+            
+
              array can have a mix of <see
              cref="T:System.Type" />
 
@@ -4018,8 +4592,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Attribute" />
+
+            
 
             
 
@@ -4037,8 +4615,12 @@
 
                 
 
+                
+
                  is treated as a wildcard; it matches any event that has the <see
                  cref="T:System.Type" />
+
+                
 
                 
 
@@ -4056,6 +4638,8 @@
 
                 
 
+                
+
                  of the same class, the event is not included in the returned array.</para
               >
             </item>
@@ -4063,6 +4647,8 @@
               <para
                 >If the attribute is an instance of the <see
                  cref="T:System.Attribute" />
+
+                
 
                 
 
@@ -4080,8 +4666,12 @@
 
                 
 
+                
+
                  instance is specified and it is the default event, it is included in the returned array even if there is no instance of the <see
                  cref="T:System.Attribute" />
+
+                
 
                 
 
@@ -4094,6 +4684,8 @@
           <para
             >If <paramref
              name="component" />
+
+            
 
             
 
@@ -4117,11 +4709,15 @@
 
             
 
+            
+
              with the events that match the specified attributes for this component.</para
           >
         </returns>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4136,8 +4732,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -4185,8 +4785,12 @@
 
             
 
+            
+
              parameter instance provides. This can differ from the set of events the class provides. If the <paramref
              name="component" />
+
+            
 
             
 
@@ -4197,6 +4801,8 @@
           <para
             >If <paramref
              name="component" />
+
+            
 
             
 
@@ -4220,6 +4826,8 @@
 
             
 
+            
+
              with the events for this component.</para
           >
         </returns>
@@ -4230,10 +4838,14 @@
 
           
 
+          
+
           A component to get the events for. </param
         >
         <param name="noCustomTypeDesc">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4277,6 +4889,8 @@
 
             
 
+            
+
              parameter array can have a mix of <see
              cref="T:System.Type" />
 
@@ -4284,8 +4898,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Attribute" />
+
+            
 
             
 
@@ -4303,8 +4921,12 @@
 
                 
 
+                
+
                  is treated as a wildcard; it matches any event that has the <see
                  cref="T:System.Type" />
+
+                
 
                 
 
@@ -4322,6 +4944,8 @@
 
                 
 
+                
+
                  of the same class, the event is not included in the returned array.</para
               >
             </item>
@@ -4329,6 +4953,8 @@
               <para
                 >If the attribute is an instance of the <see
                  cref="T:System.Attribute" />
+
+                
 
                 
 
@@ -4346,8 +4972,12 @@
 
                 
 
+                
+
                  instance is specified and it is the default event, it is included in the returned array even if there is no instance of the <see
                  cref="T:System.Attribute" />
+
+                
 
                 
 
@@ -4360,6 +4990,8 @@
           <para
             >If the <paramref
              name="componentType" />
+
+            
 
             
 
@@ -4383,6 +5015,8 @@
 
             
 
+            
+
              with the events that match the specified attributes for this component.</para
           >
         </returns>
@@ -4393,8 +5027,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -4409,8 +5047,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -4459,8 +5101,12 @@
 
             
 
+            
+
              parameter can differ from the events of a class, because the site can add or remove events if the <paramref
              name="component" />
+
+            
 
             
 
@@ -4476,6 +5122,8 @@
 
             
 
+            
+
              parameter array can have a mix of <see
              cref="T:System.Type" />
 
@@ -4483,8 +5131,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Attribute" />
+
+            
 
             
 
@@ -4502,8 +5154,12 @@
 
                 
 
+                
+
                  is treated as a wildcard; it matches any event that has the <see
                  cref="T:System.Type" />
+
+                
 
                 
 
@@ -4521,6 +5177,8 @@
 
                 
 
+                
+
                  of the same class, the event is not included in the returned array.</para
               >
             </item>
@@ -4528,6 +5186,8 @@
               <para
                 >If the attribute is an instance of the <see
                  cref="T:System.Attribute" />
+
+                
 
                 
 
@@ -4545,8 +5205,12 @@
 
                 
 
+                
+
                  instance is specified and it is the default event, it is included in the returned array even if there is no instance of the <see
                  cref="T:System.Attribute" />
+
+                
 
                 
 
@@ -4559,6 +5223,8 @@
           <para
             >If <paramref
              name="component" />
+
+            
 
             
 
@@ -4582,11 +5248,15 @@
 
             
 
+            
+
              with the events that match the specified attributes for this component.</para
           >
         </returns>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4601,8 +5271,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -4612,6 +5286,8 @@
         >
         <param name="noCustomTypeDesc">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4657,8 +5333,12 @@
 
             
 
+            
+
              method will return the same value as the <see
              cref="Overload:System.ComponentModel.TypeDescriptor.GetComponentName" />
+
+            
 
             
 
@@ -4682,8 +5362,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Component" />
+
+          
 
           
 
@@ -4726,6 +5410,8 @@
 
             
 
+            
+
              parameter is null, an empty collection is returned.</para
           >
           <para>The order of the returned collection is not guaranteed to be identical between calls, so always order it before use.</para>
@@ -4744,11 +5430,15 @@
 
             
 
+            
+
              with the properties for the specified component.</para
           >
         </returns>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4791,6 +5481,8 @@
 
             
 
+            
+
              parameter is null, an empty collection is returned.</para
           >
           <para>The order of the returned collection is not guaranteed to be identical between calls, so always order it before use.</para>
@@ -4809,6 +5501,8 @@
 
             
 
+            
+
              with the properties for a specified type of component.</para
           >
         </returns>
@@ -4819,8 +5513,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -4863,8 +5561,12 @@
 
             
 
+            
+
              parameter can differ from the properties of a class, because the site can add or remove properties if the <paramref
              name="component" />
+
+            
 
             
 
@@ -4875,6 +5577,8 @@
           <para
             >The <paramref
              name="attributes" />
+
+            
 
             
 
@@ -4892,6 +5596,8 @@
 
                 
 
+                
+
                  of the same class, the property is not included in the returned array.</para
               >
             </item>
@@ -4899,6 +5605,8 @@
               <para
                 >If the attribute is an instance of the <see
                  cref="T:System.Attribute" />
+
+                
 
                 
 
@@ -4916,8 +5624,12 @@
 
                 
 
+                
+
                  instance is specified and it is the default property, it is included in the returned array even if there is no instance of the <see
                  cref="T:System.Attribute" />
+
+                
 
                 
 
@@ -4935,8 +5647,12 @@
 
                 
 
+                
+
                  has a default attribute, the <see
                  cref="M:System.ComponentModel.TypeDescriptor.GetProperties(System.Object,System.Attribute[])" />
+
+                
 
                 
 
@@ -4949,6 +5665,8 @@
           <para
             >If <paramref
              name="component" />
+
+            
 
             
 
@@ -4972,11 +5690,15 @@
 
             
 
+            
+
              with the properties that match the specified attributes for the specified component.</para
           >
         </returns>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4991,8 +5713,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -5040,8 +5766,12 @@
 
             
 
+            
+
              parameter can differ from the properties of a class, because the site can add or remove properties if the <paramref
              name="component" />
+
+            
 
             
 
@@ -5052,6 +5782,8 @@
           <para
             >If <paramref
              name="component" />
+
+            
 
             
 
@@ -5075,6 +5807,8 @@
 
             
 
+            
+
              with the properties for a specified component.</para
           >
         </returns>
@@ -5085,10 +5819,14 @@
 
           
 
+          
+
           A component to get the properties for. </param
         >
         <param name="noCustomTypeDesc">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5132,6 +5870,8 @@
 
             
 
+            
+
              parameter array is used to filter the array. Filtering is defined by the following rules: </para
           >
           <list type="bullet">
@@ -5139,6 +5879,8 @@
               <para
                 >If a property does not have an <see
                  cref="T:System.Attribute" />
+
+                
 
                 
 
@@ -5156,6 +5898,8 @@
 
                 
 
+                
+
                  class, the property must be an exact match or it is not included in the returned array.</para
               >
             </item>
@@ -5168,8 +5912,12 @@
 
                 
 
+                
+
                  instance is specified and it is the default property, it is included in the returned array even if there is no instance of the <see
                  cref="T:System.Attribute" />
+
+                
 
                 
 
@@ -5187,8 +5935,12 @@
 
                 
 
+                
+
                  has a default attribute, the <see
                  cref="M:System.ComponentModel.TypeDescriptor.GetProperties(System.Type,System.Attribute[])" />
+
+                
 
                 
 
@@ -5201,6 +5953,8 @@
           <para
             >If the <paramref
              name="componentType" />
+
+            
 
             
 
@@ -5224,6 +5978,8 @@
 
             
 
+            
+
              with the properties that match the specified attributes for this type of component.</para
           >
         </returns>
@@ -5234,8 +5990,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -5250,8 +6010,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -5295,8 +6059,12 @@
 
             
 
+            
+
              can differ from the properties of a class, because the site can add or remove properties if the <paramref
              name="component" />
+
+            
 
             
 
@@ -5307,6 +6075,8 @@
           <para
             >The <paramref
              name="attributes" />
+
+            
 
             
 
@@ -5324,6 +6094,8 @@
 
                 
 
+                
+
                  of the same class, the property is not included in the returned array.</para
               >
             </item>
@@ -5331,6 +6103,8 @@
               <para
                 >If the attribute is an instance of the <see
                  cref="T:System.Attribute" />
+
+                
 
                 
 
@@ -5348,8 +6122,12 @@
 
                 
 
+                
+
                  instance is specified and it is the default property, it is included in the returned array even if there is no instance of the <see
                  cref="T:System.Attribute" />
+
+                
 
                 
 
@@ -5367,8 +6145,12 @@
 
                 
 
+                
+
                  has a default attribute, the <see
                  cref="M:System.ComponentModel.TypeDescriptor.GetProperties(System.Object,System.Attribute[],System.Boolean)" />
+
+                
 
                 
 
@@ -5381,6 +6163,8 @@
           <para
             >If the <paramref
              name="component" />
+
+            
 
             
 
@@ -5404,11 +6188,15 @@
 
             
 
+            
+
              with the events that match the specified attributes for the specified component.</para
           >
         </returns>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5423,8 +6211,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -5434,6 +6226,8 @@
         >
         <param name="noCustomTypeDesc">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5479,6 +6273,8 @@
 
             
 
+            
+
              method will always return a type description provider. Even the default <see
              cref="T:System.ComponentModel.TypeDescriptor" />
 
@@ -5486,8 +6282,12 @@
 
             
 
+            
+
              implementation is built on a <see
              cref="T:System.ComponentModel.TypeDescriptionProvider" />
+
+            
 
             
 
@@ -5510,11 +6310,15 @@
 
             
 
+            
+
              associated with the specified component.</para
           >
         </returns>
         <param name="instance">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5560,6 +6364,8 @@
 
             
 
+            
+
              method will always return a type description provider. Even the default <see
              cref="T:System.ComponentModel.TypeDescriptor" />
 
@@ -5567,8 +6373,12 @@
 
             
 
+            
+
              implementation is built on a <see
              cref="T:System.ComponentModel.TypeDescriptionProvider" />
+
+            
 
             
 
@@ -5591,6 +6401,8 @@
 
             
 
+            
+
              associated with the specified type.</para
           >
         </returns>
@@ -5601,8 +6413,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -5648,6 +6464,8 @@
 
             
 
+            
+
              method is a low-level version of the <see
              cref="Overload:System.ComponentModel.TypeDescriptionProvider.GetTypeDescriptor" />
 
@@ -5655,8 +6473,12 @@
 
             
 
+            
+
              method. <see
              cref="Overload:System.ComponentModel.TypeDescriptor.GetReflectionType" />
+
+            
 
             
 
@@ -5675,6 +6497,8 @@
 
             
 
+            
+
              that can be used to perform reflection, given an object.</para
           >
         </summary>
@@ -5688,11 +6512,15 @@
 
             
 
+            
+
              for the specified object.</para
           >
         </returns>
         <param name="instance">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5735,6 +6563,8 @@
 
             
 
+            
+
              method is a low-level version of the <see
              cref="Overload:System.ComponentModel.TypeDescriptionProvider.GetTypeDescriptor" />
 
@@ -5742,8 +6572,12 @@
 
             
 
+            
+
              method. <see
              cref="Overload:System.ComponentModel.TypeDescriptor.GetReflectionType" />
+
+            
 
             
 
@@ -5762,6 +6596,8 @@
 
             
 
+            
+
              that can be used to perform reflection, given a class type.</para
           >
         </summary>
@@ -5770,6 +6606,8 @@
           <para
             >A <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -5785,8 +6623,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -5823,6 +6665,8 @@
 
             
 
+            
+
              property gets a <see
              cref="T:System.Type" />
 
@@ -5830,8 +6674,12 @@
 
             
 
+            
+
              object that you can pass to the <see
              cref="Overload:System.ComponentModel.TypeDescriptor.AddProvider" />
+
+            
 
             
 
@@ -5875,11 +6723,15 @@
 
             
 
+            
+
              for speed. Typically, they are constant for the lifetime of an object. However, extender providers and designers can change the set of properties on an object. If they do, they should call this method to clear the property and event descriptors of the object. This method is used only at design time. It is not used during run time.</para
           >
           <para
             >This method also raises a <see
              cref="E:System.ComponentModel.TypeDescriptor.Refreshed" />
+
+            
 
             
 
@@ -5892,8 +6744,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.ComponentModel.TypeDescriptor.GetEvents(System.Type)" />
+
+            
 
             
 
@@ -5908,6 +6764,8 @@
         </summary>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5949,11 +6807,15 @@
 
             
 
+            
+
              for speed. Typically, they are constant for the lifetime of an object. However, extender providers and designers can change the set of properties on an object. If they do, they can call this method to clear the property and event descriptors of the object. This method is used only at design time. It is not used during run time.</para
           >
           <para
             >Before you make a call to the <see
              cref="M:System.ComponentModel.TypeDescriptor.Refresh(System.Object)" />
+
+            
 
             
 
@@ -5966,11 +6828,15 @@
 
             
 
+            
+
              method for the specific assembly to cache the information first.</para
           >
           <para
             >This method also raises a <see
              cref="E:System.ComponentModel.TypeDescriptor.Refreshed" />
+
+            
 
             
 
@@ -5990,6 +6856,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.Assembly" />
 
@@ -5997,8 +6865,12 @@
 
           
 
+          
+
            that represents the assembly to refresh. Each <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -6040,11 +6912,15 @@
 
             
 
+            
+
              for speed. Typically, they are constant for the lifetime of an object. However, extender providers and designers can change the set of properties on an object. If they do, they can call this method to clear the property and event descriptors of the object. This method is used only at design time. It is not used during run time.</para
           >
           <para
             >Before you make a call to the <see
              cref="M:System.ComponentModel.TypeDescriptor.Refresh(System.Object)" />
+
+            
 
             
 
@@ -6057,11 +6933,15 @@
 
             
 
+            
+
              method for the specific module to cache the information first.</para
           >
           <para
             >This method also raises a <see
              cref="E:System.ComponentModel.TypeDescriptor.Refreshed" />
+
+            
 
             
 
@@ -6081,6 +6961,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.Module" />
 
@@ -6088,8 +6970,12 @@
 
           
 
+          
+
            that represents the module to refresh. Each <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -6129,11 +7015,15 @@
 
             
 
+            
+
              for speed. Typically, they are constant for the lifetime of an object. However, extender providers and designers can change the set of properties on an object. If they do, they can call this method to clear the property and event descriptors of the object. This method is used only at design time. It is not used during run time.</para
           >
           <para
             >This method also raises a <see
              cref="E:System.ComponentModel.TypeDescriptor.Refreshed" />
+
+            
 
             
 
@@ -6146,8 +7036,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.ComponentModel.TypeDescriptor.GetEvents(System.Type)" />
+
+            
 
             
 
@@ -6167,8 +7061,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -6205,6 +7103,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -6259,8 +7159,12 @@
 
             
 
+            
+
              method removes an association between two objects formed by the <see
              cref="M:System.ComponentModel.TypeDescriptor.CreateAssociation(System.Object,System.Object)" />
+
+            
 
             
 
@@ -6271,6 +7175,8 @@
           <para
             >A <see
              cref="T:System.WeakReference" />
+
+            
 
             
 
@@ -6290,8 +7196,12 @@
 
           
 
+          
+
           The primary <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -6306,8 +7216,12 @@
 
           
 
+          
+
           The secondary <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -6356,8 +7270,12 @@
 
             
 
+            
+
              method removes all associations between a primary object and all of its secondary objects, created by calls to the <see
              cref="M:System.ComponentModel.TypeDescriptor.CreateAssociation(System.Object,System.Object)" />
+
+            
 
             
 
@@ -6368,6 +7286,8 @@
           <para
             >A <see
              cref="T:System.WeakReference" />
+
+            
 
             
 
@@ -6387,8 +7307,12 @@
 
           
 
+          
+
           The primary <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -6435,8 +7359,12 @@
 
             
 
+            
+
              method. Removing a provider causes a <see
              cref="E:System.ComponentModel.TypeDescriptor.Refreshed" />
+
+            
 
             
 
@@ -6447,6 +7375,8 @@
           <para
             >Use the <see
              cref="M:System.ComponentModel.TypeDescriptor.RemoveProviderTransparent(System.ComponentModel.TypeDescriptionProvider,System.Object)" />
+
+            
 
             
 
@@ -6466,8 +7396,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.TypeDescriptionProvider" />
+
+          
 
           
 
@@ -6477,6 +7411,8 @@
         >
         <param name="instance">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6523,8 +7459,12 @@
 
             
 
+            
+
              method. Removing a provider causes a <see
              cref="E:System.ComponentModel.TypeDescriptor.Refreshed" />
+
+            
 
             
 
@@ -6535,6 +7475,8 @@
           <para
             >Use the <see
              cref="M:System.ComponentModel.TypeDescriptor.RemoveProviderTransparent(System.ComponentModel.TypeDescriptionProvider,System.Type)" />
+
+            
 
             
 
@@ -6554,8 +7496,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.TypeDescriptionProvider" />
+
+          
 
           
 
@@ -6570,8 +7516,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -6620,8 +7570,12 @@
 
             
 
+            
+
              method. Removing a provider causes a <see
              cref="E:System.ComponentModel.TypeDescriptor.Refreshed" />
+
+            
 
             
 
@@ -6637,11 +7591,15 @@
 
             
 
+            
+
              is defined, the caller can register a provider for the specified instance if its type is also partially trusted.</para
           >
           <para
             >Use the <see
              cref="M:System.ComponentModel.TypeDescriptor.RemoveProvider(System.ComponentModel.TypeDescriptionProvider,System.Object)" />
+
+            
 
             
 
@@ -6661,8 +7619,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.TypeDescriptionProvider" />
+
+          
 
           
 
@@ -6672,6 +7634,8 @@
         >
         <param name="instance">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6720,8 +7684,12 @@
 
             
 
+            
+
              method. Removing a provider causes a <see
              cref="E:System.ComponentModel.TypeDescriptor.Refreshed" />
+
+            
 
             
 
@@ -6737,11 +7705,15 @@
 
             
 
+            
+
              is defined, the caller can unregister a provider for the specified type if it is also partially trusted.</para
           >
           <para
             >Use the <see
              cref="M:System.ComponentModel.TypeDescriptor.RemoveProvider(System.ComponentModel.TypeDescriptionProvider,System.Type)" />
+
+            
 
             
 
@@ -6761,8 +7733,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.TypeDescriptionProvider" />
+
+          
 
           
 
@@ -6777,8 +7753,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -6822,8 +7802,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 

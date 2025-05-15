@@ -24,6 +24,8 @@ Expect:       !NotInline{parent:entry,element:content}
 
         
 
+        
+
          Some &lt;b&gt;bold&lt;/b&gt; text.</div
       >
     </content>

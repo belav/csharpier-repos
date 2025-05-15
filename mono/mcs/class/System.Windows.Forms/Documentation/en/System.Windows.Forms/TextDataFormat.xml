@@ -20,6 +20,8 @@
 
         
 
+        
+
          type.</para
       >
       <para>This enumeration is used with the following methods:</para>
@@ -66,8 +68,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.DataObject" />
+
+        
 
         
 

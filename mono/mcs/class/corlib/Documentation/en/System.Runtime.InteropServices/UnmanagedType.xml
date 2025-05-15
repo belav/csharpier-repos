@@ -41,8 +41,12 @@
 
         
 
+        
+
          enumeration with the <see
          cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
+
+        
 
         
 
@@ -55,6 +59,8 @@
          type="text/html">
           <a href="ccb68ce7-b0e9-4ffb-839d-03b1cd2c1258">Interoperating with Unmanaged Code</a>
         </format>
+
+        
 
         
 
@@ -92,6 +98,8 @@
           <para
             >An ANSI character string that is a length-prefixed single byte. You can use this member on the <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -184,6 +192,8 @@
 
             
 
+            
+
              data type.</para
           >
         </summary>
@@ -222,8 +232,12 @@
 
             
 
+            
+
              property is set to ByValArray, the <see
              cref="F:System.Runtime.InteropServices.MarshalAsAttribute.SizeConst" />
+
+            
 
             
 
@@ -236,6 +250,8 @@
 
             
 
+            
+
              field can optionally contain the <see
              cref="T:System.Runtime.InteropServices.UnmanagedType" />
 
@@ -243,8 +259,12 @@
 
             
 
+            
+
              of the array elements when it is necessary to differentiate among string types. You can use this <see
              cref="T:System.Runtime.InteropServices.UnmanagedType" />
+
+            
 
             
 
@@ -283,6 +303,8 @@
 
             
 
+            
+
              types behave like C-style, fixed-size strings inside a structure (for example, char s[5]). The behavior in managed code differs from the Microsoft Visual Basic 6.0 behavior, which is not null terminated (for example, MyString As String * 5).</para
           >
         </remarks>
@@ -296,8 +318,12 @@
 
             
 
+            
+
              is determined by the <see
              cref="T:System.Runtime.InteropServices.CharSet" />
+
+            
 
             
 
@@ -310,8 +336,12 @@
 
             
 
+            
+
              attribute applied to the containing structure. Always use the <see
              cref="F:System.Runtime.InteropServices.MarshalAsAttribute.SizeConst" />
+
+            
 
             
 
@@ -345,6 +375,8 @@
           <para
             >A currency type. Used on a <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -388,6 +420,8 @@
 
             
 
+            
+
              or <see
              cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalTypeRef" />
 
@@ -395,8 +429,12 @@
 
             
 
+            
+
              field. The <see
              cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalCookie" />
+
+            
 
             
 
@@ -436,8 +474,12 @@
 
             
 
+            
+
              or an <see
              cref="F:System.Runtime.InteropServices.UnmanagedType.U4" />
+
+            
 
             
 
@@ -481,8 +523,12 @@
 
             
 
+            
+
              data type or on a type that inherits from a <see
              cref="T:System.Delegate" />
+
+            
 
             
 
@@ -666,6 +712,8 @@
 
             
 
+            
+
              of the interface is obtained from the class metadata. Use this member to specify the exact interface type or the default interface type if you apply it to a class. This member produces the same behavior as <see
              cref="F:System.Runtime.InteropServices.UnmanagedType.IUnknown" />
 
@@ -673,8 +721,12 @@
 
             
 
+            
+
              when you apply it to the <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -708,6 +760,8 @@
           <para
             >A COM IUnknown pointer. You can use this member on the <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -751,8 +805,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Runtime.InteropServices.MarshalAsAttribute.SizeParamIndex" />
+
+            
 
             
 
@@ -797,8 +855,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Text.StringBuilder" />
+
+            
 
             
 
@@ -891,6 +953,8 @@
           <para
             >Note that you cannot use the <see
              cref="F:System.Runtime.InteropServices.UnmanagedType.LPWStr" />
+
+            
 
             
 
@@ -989,6 +1053,8 @@
           <para
             >A SafeArray, which is a self-describing array that carries the type, rank, and bounds of the associated array data. You can use this member with the <see
              cref="F:System.Runtime.InteropServices.MarshalAsAttribute.SafeArraySubType" />
+
+            
 
             
 

@@ -33,8 +33,12 @@
 
         
 
+        
+
         , which stores configuration data to the local file system. An application settings property or group of properties are associated to a specific settings provider through the use of the <see
          cref="T:System.Configuration.SettingsProviderAttribute" />
+
+        
 
         
 
@@ -50,10 +54,14 @@
 
         
 
+        
+
          delegate their work to the associated settings provider.</para
       >
       <para>
         <see cref="T:System.Configuration.LocalFileSettingsProvider" />
+
+        
 
         
 
@@ -66,6 +74,8 @@
 
         
 
+        
+
          or <see
          cref="T:System.Configuration.ClientSettingsSection" />
 
@@ -73,8 +83,12 @@
 
         
 
+        
+
         , respectively. Each section object is owned and administered by a configuration section handler, which is an object of type <see
          cref="T:System.Configuration.IConfigurationSectionHandler" />
+
+        
 
         
 
@@ -88,6 +102,8 @@
          type="text/html">
           <a href="64090a34-8556-4904-8ea0-20efe9f8c886">Application Settings for Windows Forms</a>
         </format>
+
+        
 
         
 
@@ -126,8 +142,12 @@
 
             
 
+            
+
              property to <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -141,6 +161,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Configuration.LocalFileSettingsProvider" />
+
+            
 
             
 
@@ -175,8 +197,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Configuration.Provider.ProviderBase.Name" />
+
+            
 
             
 
@@ -229,6 +255,8 @@
 
             
 
+            
+
              method is often used in conjunction with the <see
              cref="M:System.Configuration.LocalFileSettingsProvider.Upgrade(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />
 
@@ -236,8 +264,12 @@
 
             
 
+            
+
              method when migrating application settings during the installation of a new version of an application. For more information, see the <see
              cref="M:System.Configuration.LocalFileSettingsProvider.Upgrade(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />
+
+            
 
             
 
@@ -260,6 +292,8 @@
 
             
 
+            
+
              representing the application setting if found; otherwise, null.</para
           >
         </returns>
@@ -270,8 +304,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.SettingsContext" />
+
+          
 
           
 
@@ -286,8 +324,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Configuration.SettingsProperty" />
+
+          
 
           
 
@@ -335,8 +377,12 @@
 
             
 
+            
+
              method also manages the special application settings type <see
              cref="F:System.Configuration.SpecialSetting.ConnectionString" />
+
+            
 
             
 
@@ -352,12 +398,16 @@
 
               
 
+              
+
                does not use encryption to persist any settings. Therefore, do not store plain text passwords or other sensitive information using this provider without taking additional precautions, such as separately encrypting the information within the configuration file. For more information, see <format
                type="text/html">
                 <a href="51cdfe5b-9d82-458c-94ff-c551c4f38ed1"
                   >Encrypting Configuration Information using Protected Configuration</a
                 >
               </format>
+
+              
 
               
 
@@ -381,6 +431,8 @@
 
             
 
+            
+
              containing the values for the specified settings property group.</para
           >
         </returns>
@@ -391,8 +443,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.SettingsContext" />
+
+          
 
           
 
@@ -407,8 +463,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.SettingsPropertyCollection" />
+
+          
 
           
 
@@ -450,10 +510,14 @@
 
           
 
+          
+
           The name of the provider.</param
         >
         <param name="values">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -500,8 +564,12 @@
 
             
 
+            
+
              method restores the stored values of the specified application settings group. The action of <see
              cref="M:System.Configuration.LocalFileSettingsProvider.Reset(System.Configuration.SettingsContext)" />
+
+            
 
             
 
@@ -530,8 +598,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.SettingsContext" />
+
+          
 
           
 
@@ -579,8 +651,12 @@
 
             
 
+            
+
             , contains the <see
              cref="M:System.Configuration.ApplicationSettingsBase.Save" />
+
+            
 
             
 
@@ -593,8 +669,12 @@
 
             
 
+            
+
              method for each <see
              cref="T:System.Configuration.SettingsProvider" />
+
+            
 
             
 
@@ -609,11 +689,15 @@
 
             
 
+            
+
              individually serializes each user-scoped application settings property to its corresponding application setting in the appropriate user.config configuration file.</para
           >
           <para
             >By default, the <see
              cref="M:System.Configuration.LocalFileSettingsProvider.SetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyValueCollection)" />
+
+            
 
             
 
@@ -631,8 +715,12 @@
 
                 
 
+                
+
                  with a <see
                  cref="Overload:System.ComponentModel.TypeConverter.ConvertToString" />
+
+                
 
                 
 
@@ -653,8 +741,12 @@
 
             
 
+            
+
             . <see
              cref="T:System.Configuration.LocalFileSettingsProvider" />
+
+            
 
             
 
@@ -671,12 +763,16 @@
 
               
 
+              
+
                does not use encryption to persist any settings. Therefore, do not store plain text passwords or other sensitive information using this provider without taking additional precautions, such as separately encrypting the information within the configuration file. For more information, see <format
                type="text/html">
                 <a href="51cdfe5b-9d82-458c-94ff-c551c4f38ed1"
                   >Encrypting Configuration Information using Protected Configuration</a
                 >
               </format>
+
+              
 
               
 
@@ -697,8 +793,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.SettingsContext" />
+
+          
 
           
 
@@ -713,8 +813,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.SettingsPropertyValueCollection" />
+
+          
 
           
 
@@ -761,11 +865,15 @@
 
             
 
+            
+
              migrates the local and roaming settings in separate operations.</para
           >
           <para
             >The <see
              cref="M:System.Configuration.LocalFileSettingsProvider.Upgrade(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />
+
+            
 
             
 
@@ -778,8 +886,12 @@
 
             
 
+            
+
              applied to it, or to the entire settings wrapper class, derived from <see
              cref="T:System.Configuration.ApplicationSettingsBase" />
+
+            
 
             
 
@@ -798,12 +910,16 @@
 
                 
 
+                
+
                  to migrate all common application settings to the new version. For more information, see <format
                  type="text/html">
                   <a href="891caba6-faef-4a3c-8f71-60e6fadb60eb"
                     >ClickOnce and Application Settings</a
                   >
                 </format>
+
+                
 
                 
 
@@ -816,6 +932,8 @@
               <para
                 >Standard Windows Forms and console applications must manually call <see
                  cref="M:System.Configuration.LocalFileSettingsProvider.Upgrade(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />
+
+                
 
                 
 
@@ -838,8 +956,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.SettingsContext" />
+
+          
 
           
 
@@ -854,8 +976,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.SettingsPropertyCollection" />
+
+          
 
           
 

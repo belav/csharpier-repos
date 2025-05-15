@@ -25,6 +25,8 @@
 
         
 
+        
+
          interface for the initialization of indigo1 COM+ integration services. It should not be used directly.</para
       >
     </summary>
@@ -48,6 +50,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.ComIntegration.DllHostInitializer" />
+
+            
 
             
 

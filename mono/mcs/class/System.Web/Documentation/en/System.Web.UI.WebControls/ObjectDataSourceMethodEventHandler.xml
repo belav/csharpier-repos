@@ -35,8 +35,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Web.UI.WebControls.ObjectDataSource.Updating" />
+
+        
 
         
 
@@ -49,8 +53,12 @@
 
         
 
+        
+
         , or <see
          cref="E:System.Web.UI.WebControls.ObjectDataSource.Deleting" />
+
+        
 
         
 
@@ -63,6 +71,8 @@
 
         
 
+        
+
          control allows you to manipulate the parameters that are used to determine the method that is called by the <see
          cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
@@ -70,8 +80,12 @@
 
         
 
+        
+
          control. For more information, see <see
          cref="T:System.Web.UI.WebControls.ObjectDataSourceMethodEventArgs" />
+
+        
 
         
 
@@ -87,10 +101,14 @@
 
         
 
+        
+
          delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event handler delegates, see <format
          type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
         </format>
+
+        
 
         
 
@@ -109,8 +127,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Web.UI.WebControls.ObjectDataSource.Updating" />
+
+        
 
         
 
@@ -123,6 +145,8 @@
 
         
 
+        
+
         , or <see
          cref="E:System.Web.UI.WebControls.ObjectDataSource.Deleting" />
 
@@ -130,8 +154,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+        
 
         
 

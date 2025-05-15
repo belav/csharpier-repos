@@ -4,10 +4,10 @@
     >The return statement returns control to the caller of the function member in which the return statement appears. <grammar_production
     >
       <name>
-        <non_terminal where="15.9.4"
->return-statement</non_terminal
-        >
+        <non_terminal where="15.9.4">return-statement</non_terminal>
       </name>
+
+      
 
       
 
@@ -15,8 +15,7 @@
 
        : <rhs
       >
-        <keyword
->return</keyword>
+        <keyword>return</keyword>
         <non_terminal where="14.14">expression</non_terminal>
         <opt />
         <terminal>;</terminal>
@@ -26,6 +25,8 @@
   <paragraph
     >A return statement with no expression can be used only in a function member that does not compute a value; that is, a method with the return type <keyword
     >void</keyword>
+
+    
 
     
 
@@ -41,11 +42,15 @@
 
     
 
+    
+
     ) must exist from the type of the expression to the return type of the containing function member. </paragraph
   >
   <paragraph
     >It is a compile-time error for a return statement to appear in a finally block (<hyperlink
     >15.10</hyperlink>
+
+    
 
     
 

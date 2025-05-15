@@ -24,12 +24,16 @@
 
         
 
+        
+
          provides a way to programmatically access and modify the identity section of a configuration file.</para
       >
       <block subset="none" type="note">
         <para
           >The <see
            cref="T:System.Web.Configuration.IdentitySection" />
+
+          
 
           
 
@@ -42,8 +46,12 @@
 
           
 
+          
+
            whose value is <see
            cref="F:System.Configuration.ConfigurationAllowDefinition.Everywhere" />
+
+          
 
           
 
@@ -74,6 +82,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.IdentitySection" />
+
+            
 
             
 
@@ -128,8 +138,12 @@
 
             
 
+            
+
              property is set to true, each request is served by a Web application impersonating its client. That is, either the user currently logged on or the user specified by the <see
              cref="P:System.Web.Configuration.IdentitySection.UserName" />
+
+            
 
             
 
@@ -142,8 +156,12 @@
 
             
 
+            
+
              properties. When the <see
              cref="P:System.Web.Configuration.IdentitySection.Impersonate" />
+
+            
 
             
 
@@ -160,8 +178,12 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.Configuration.IdentitySection.Password" />
+
+              
 
               
 
@@ -206,8 +228,12 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.Configuration.IdentitySection.Password" />
+
+              
 
               
 
@@ -319,8 +345,12 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.Configuration.IdentitySection.Password" />
+
+              
 
               
 

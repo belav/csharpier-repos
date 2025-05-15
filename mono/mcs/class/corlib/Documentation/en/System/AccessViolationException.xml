@@ -31,11 +31,15 @@
 
         
 
+        
+
          clearly identifies these serious errors.</para
       >
       <para
         >In programs consisting entirely of verifiable managed code, all references are either valid or null, and access violations are impossible. An <see
          cref="T:System.AccessViolationException" />
+
+        
 
         
 
@@ -51,8 +55,12 @@
 
         
 
+        
+
          exceptions thrown by the common language runtime are not handled by the catch statement in a structured exception handler if the exception occurs outside of the memory reserved by the common language runtime. To handle such an <see
          cref="T:System.AccessViolationException" />
+
+        
 
         
 
@@ -65,8 +73,12 @@
 
         
 
+        
+
          attribute to the method in which the exception is thrown. This change does not affect <see
          cref="T:System.AccessViolationException" />
+
+        
 
         
 
@@ -83,6 +95,8 @@
 
         
 
+        
+
          element to your app's configuration file. Note that you can also receive notification of the exceptions if you have defined a handler for the <see
          cref="E:System.AppDomain.FirstChanceException" />
 
@@ -90,8 +104,12 @@
 
         
 
+        
+
          or <see
          cref="E:System.AppDomain.UnhandledException" />
+
+        
 
         
 
@@ -110,8 +128,12 @@
 
         
 
+        
+
          in managed code. A <see
          cref="T:System.NullReferenceException" />
+
+        
 
         
 
@@ -124,6 +146,8 @@
          type="text/html">
           <a href="1eb2fae3-de4b-45b6-852f-517c39b751bd">&lt;runtime&gt; Element</a>
         </format>
+
+        
 
         
 
@@ -163,11 +187,15 @@
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "Attempted to read or write protected memory. This is often an indication that other memory has been corrupted." This message takes into account the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.AccessViolationException" />
+
+            
 
             
 
@@ -218,6 +246,8 @@
 
             
 
+            
+
              class with a system-supplied message that describes the error.</para
           >
         </summary>
@@ -244,6 +274,8 @@
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.AccessViolationException" />
+
+            
 
             
 
@@ -287,6 +319,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -303,11 +337,15 @@
 
             
 
+            
+
              class with a specified message that describes the error.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -349,6 +387,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -357,6 +397,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.AccessViolationException" />
+
+            
 
             
 
@@ -372,8 +414,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -388,8 +434,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -429,8 +479,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -443,11 +497,15 @@
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.AccessViolationException" />
+
+            
 
             
 
@@ -491,6 +549,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -507,11 +567,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -526,8 +590,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 

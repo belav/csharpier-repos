@@ -28,6 +28,8 @@
 
         
 
+        
+
          element in an vstecmsbuild project. </para
       >
     </summary>
@@ -60,10 +62,14 @@
 
             
 
+            
+
              element to the <format
              type="text/html">
               <a href="350f6fc2-86b3-45f2-a31e-ece0e6bd4dca">Target</a>
             </format>
+
+            
 
             
 
@@ -82,6 +88,8 @@
 
             
 
+            
+
              object represents a child <unmanagedCodeEntityReference
             >Task</unmanagedCodeEntityReference>
 
@@ -89,8 +97,12 @@
 
             
 
+            
+
              element of the <unmanagedCodeEntityReference
             >Target</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -106,8 +118,12 @@
 
           
 
+          
+
           The <see
            cref="T:Microsoft.Build.BuildEngine.BuildTask" />
+
+          
 
           
 
@@ -140,10 +156,14 @@
 
             
 
+            
+
              attribute value of the <format
              type="text/html">
               <a href="350f6fc2-86b3-45f2-a31e-ece0e6bd4dca">Target</a>
             </format>
+
+            
 
             
 
@@ -177,10 +197,14 @@
 
             
 
+            
+
              attribute value of the <format
              type="text/html">
               <a href="350f6fc2-86b3-45f2-a31e-ece0e6bd4dca">Target</a>
             </format>
+
+            
 
             
 
@@ -216,8 +240,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:Microsoft.Build.BuildEngine.Target" />
+
+            
 
             
 
@@ -233,6 +261,8 @@
 
             
 
+            
+
              object represents a child <format
              type="text/html">
               <a href="d82e2485-e5f0-4936-a357-745bacccc299">Task</a>
@@ -242,8 +272,12 @@
 
             
 
+            
+
              element of the <unmanagedCodeEntityReference
             >Target</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -262,8 +296,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:Microsoft.Build.BuildEngine.Target" />
+
+            
 
             
 
@@ -282,6 +320,8 @@
 
             
 
+            
+
              for the <see
              cref="T:Microsoft.Build.BuildEngine.BuildTask" />
 
@@ -289,8 +329,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:Microsoft.Build.BuildEngine.Target" />
+
+            
 
             
 
@@ -326,6 +370,8 @@
 
             
 
+            
+
              element was imported into the project.</para
           >
         </summary>
@@ -354,10 +400,14 @@
 
             
 
+            
+
              attribute value of the <format
              type="text/html">
               <a href="350f6fc2-86b3-45f2-a31e-ece0e6bd4dca">Target</a>
             </format>
+
+            
 
             
 
@@ -396,6 +446,8 @@
 
             
 
+            
+
              object represents a child <unmanagedCodeEntityReference
             >Task</unmanagedCodeEntityReference>
 
@@ -403,8 +455,12 @@
 
             
 
+            
+
              element of the <unmanagedCodeEntityReference
             >Target</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -425,10 +481,14 @@
 
             
 
+            
+
              element from the <format
              type="text/html">
               <a href="350f6fc2-86b3-45f2-a31e-ece0e6bd4dca">Target</a>
             </format>
+
+            
 
             
 

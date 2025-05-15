@@ -25,8 +25,12 @@
 
         
 
+        
+
          enumeration is used to specify the serialization mechanism used by the application settings provider to persist the values of application settings properties. For example, the <see
          cref="T:System.Configuration.SettingsSerializeAsAttribute" />
+
+        
 
         
 

@@ -25,6 +25,8 @@
 
         
 
+        
+
          structure encompass a target device, the aspect or view of the data, and a storage medium indicator. Instead of a Clipboard format, OLE uses a FORMATETC data structure instead. This structure is used as a parameter in OLE functions and methods that require data format information.</para
       >
       <para>For more information about the FORMATETC structure, see the MSDN Library.</para>
@@ -33,6 +35,8 @@
          type="text/html">
           <a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a>
         </format>
+
+        
 
         
 
@@ -108,8 +112,12 @@
 
             
 
+            
+
              value can be used in <see
              cref="F:System.Runtime.InteropServices.ComTypes.FORMATETC.dwAspect" />
+
+            
 
             
 
@@ -122,8 +130,12 @@
 
             
 
+            
+
              cannot be the result of a BOOLEAN OR operation on several <see
              cref="T:System.Runtime.InteropServices.ComTypes.DVASPECT" />
+
+            
 
             
 
@@ -137,6 +149,8 @@
           <para
             >Specifies one of the <see
              cref="T:System.Runtime.InteropServices.ComTypes.DVASPECT" />
+
+            
 
             
 
@@ -169,6 +183,8 @@
 
             
 
+            
+
              and <see
              cref="F:System.Runtime.InteropServices.ComTypes.DVASPECT.DVASPECT_ICON" />
 
@@ -176,8 +192,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Runtime.InteropServices.ComTypes.FORMATETC.lindex" />
+
+            
 
             
 
@@ -214,8 +234,12 @@
 
             
 
+            
+
              command from the <ui
             >File</ui>
+
+            
 
             
 
@@ -258,6 +282,8 @@
 
             
 
+            
+
              enumeration.</para
           >
         </remarks>
@@ -266,6 +292,8 @@
           <para
             >Specifies one of the <see
              cref="T:System.Runtime.InteropServices.ComTypes.TYMED" />
+
+            
 
             
 

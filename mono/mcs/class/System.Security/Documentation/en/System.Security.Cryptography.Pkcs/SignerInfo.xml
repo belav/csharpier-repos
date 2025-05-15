@@ -26,8 +26,12 @@
 
         
 
+        
+
          class can be either over message content or a signature. The latter kind of signature is referred to as a <newTerm
         >countersignature</newTerm>
+
+        
 
         
 
@@ -39,6 +43,8 @@
       <para
         >This class does not have a public constructor; therefore, it cannot be publicly instantiated. It is a read-only class accessible from the <see
          cref="P:System.Security.Cryptography.Pkcs.SignedCms.SignerInfos" />
+
+        
 
         
 
@@ -57,8 +63,12 @@
 
         
 
+        
+
          class represents a signer associated with a <see
          cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
+
+        
 
         
 
@@ -99,6 +109,8 @@
 
             
 
+            
+
              property, then the certificate will not be returned.</para
           >
         </remarks>
@@ -107,6 +119,8 @@
           <para
             >The <see
              cref="P:System.Security.Cryptography.Pkcs.SignerInfo.Certificate" />
+
+            
 
             
 
@@ -148,8 +162,12 @@
 
             
 
+            
+
              method verifies the data integrity of the CMS/PKCS #7 message signer information. <see
              cref="M:System.Security.Cryptography.Pkcs.SignerInfo.CheckHash" />
+
+            
 
             
 
@@ -162,8 +180,12 @@
 
             
 
+            
+
              enumeration when setting up a <see
              cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
+
+            
 
             
 
@@ -176,6 +198,8 @@
 
             
 
+            
+
              does not authenticate the signer information because this method does not involve verifying a digital signature. For general-purpose checking of the integrity and authenticity of CMS/PKCS #7 message signer information and countersignatures, use the <see
              cref="M:System.Security.Cryptography.Pkcs.SignerInfo.CheckSignature(System.Boolean)" />
 
@@ -183,8 +207,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Security.Cryptography.Pkcs.SignerInfo.CheckSignature(System.Security.Cryptography.X509Certificates.X509Certificate2Collection,System.Boolean)" />
+
+            
 
             
 
@@ -228,6 +256,8 @@
 
             
 
+            
+
              object to perform custom validation.</para
           >
         </remarks>
@@ -236,6 +266,8 @@
           <para
             >The <see
              cref="M:System.Security.Cryptography.Pkcs.SignerInfo.CheckSignature(System.Boolean)" />
+
+            
 
             
 
@@ -251,6 +283,8 @@
 
           
 
+          
+
           A bool value that specifies whether only the digital signature is verified. If <paramref
            name="verifySignatureOnly" />
 
@@ -258,8 +292,12 @@
 
           
 
+          
+
            is true, only the signature is verified. If <paramref
            name="verifySignatureOnly" />
+
+          
 
           
 
@@ -306,6 +344,8 @@
 
             
 
+            
+
              object to perform custom validation.</para
           >
         </remarks>
@@ -314,6 +354,8 @@
           <para
             >The <see
              cref="M:System.Security.Cryptography.Pkcs.SignerInfo.CheckSignature(System.Security.Cryptography.X509Certificates.X509Certificate2Collection,System.Boolean)" />
+
+            
 
             
 
@@ -329,8 +371,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+
+          
 
           
 
@@ -343,8 +389,12 @@
 
           
 
+          
+
            instead of <see
            cref="M:System.Security.Cryptography.Pkcs.SignerInfo.CheckSignature(System.Security.Cryptography.X509Certificates.X509Certificate2Collection,System.Boolean)" />
+
+          
 
           
 
@@ -359,6 +409,8 @@
 
           
 
+          
+
           A bool value that specifies whether only the digital signature is verified. If <paramref
            name="verifySignatureOnly" />
 
@@ -366,8 +418,12 @@
 
           
 
+          
+
            is true, only the signature is verified. If <paramref
            name="verifySignatureOnly" />
+
+          
 
           
 
@@ -405,8 +461,12 @@
 
             
 
+            
+
             , meaning that the <see
              cref="P:System.Environment.UserInteractive" />
+
+            
 
             
 
@@ -457,6 +517,8 @@
           <para
             >The <see
              cref="M:System.Security.Cryptography.Pkcs.SignerInfo.ComputeCounterSignature" />
+
+            
 
             
 
@@ -519,6 +581,8 @@
 
             
 
+            
+
              method creates a countersignature by using the specified signer and adds the signature to the CMS/PKCS #7 message. Countersignatures are restricted to one level.</para
           >
         </summary>
@@ -529,8 +593,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
+
+          
 
           
 
@@ -574,6 +642,8 @@
 
             
 
+            
+
              property retrieves the set of counter signers associated with the signer information. </para
           >
         </summary>
@@ -610,8 +680,12 @@
 
             
 
+            
+
              property retrieves the <see
              cref="T:System.Security.Cryptography.Oid" />
+
+            
 
             
 
@@ -652,8 +726,12 @@
 
             
 
+            
+
              method removes the countersignature at the specified index of the <see
              cref="P:System.Security.Cryptography.Pkcs.SignerInfo.CounterSignerInfos" />
+
+            
 
             
 
@@ -664,6 +742,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -706,8 +786,12 @@
 
             
 
+            
+
              method removes the countersignature for the specified <see
              cref="T:System.Security.Cryptography.Pkcs.SignerInfo" />
+
+            
 
             
 
@@ -723,8 +807,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Cryptography.Pkcs.SignerInfo" />
+
+          
 
           
 
@@ -764,6 +852,8 @@
 
             
 
+            
+
              collection retrieved by the <see
              cref="P:System.Security.Cryptography.Pkcs.SignerInfo.SignedAttributes" />
 
@@ -771,8 +861,12 @@
 
             
 
+            
+
              property is the <see
              cref="T:System.Security.Cryptography.Pkcs.Pkcs9SigningTime" />
+
+            
 
             
 
@@ -788,11 +882,15 @@
 
             
 
+            
+
              message content. This means that a party that successfully verifies the signature can have confidence that the contents of these attributes are authentic and have not been altered.</para
           >
           <para
             >A <see
              cref="T:System.Security.Cryptography.Pkcs.Pkcs9ContentType" />
+
+            
 
             
 
@@ -805,6 +903,8 @@
 
             
 
+            
+
              object will be automatically generated and placed in the <see
              cref="P:System.Security.Cryptography.Pkcs.SignerInfo.SignedAttributes" />
 
@@ -812,8 +912,12 @@
 
             
 
+            
+
              property whenever the <see
              cref="P:System.Security.Cryptography.Pkcs.CmsSigner.SignedAttributes" />
+
+            
 
             
 
@@ -832,8 +936,12 @@
 
             
 
+            
+
              property retrieves the <see
              cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
+
+            
 
             
 
@@ -875,6 +983,8 @@
 
             
 
+            
+
              property retrieves the certificate identifier of the signer associated with the signer information.</para
           >
         </summary>
@@ -910,6 +1020,8 @@
 
             
 
+            
+
              message content. Even though a party successfully verifies the signature, the unsigned attributes may have been altered and should not be considered to have authenticity or integrity.</para
           >
           <para
@@ -920,8 +1032,12 @@
 
             
 
+            
+
              collection retrieved by the <see
              cref="P:System.Security.Cryptography.Pkcs.SignerInfo.UnsignedAttributes" />
+
+            
 
             
 
@@ -940,6 +1056,8 @@
 
             
 
+            
+
              property retrieves the <see
              cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
 
@@ -947,8 +1065,12 @@
 
             
 
+            
+
              collection of unsigned attributes that is associated with the <see
              cref="T:System.Security.Cryptography.Pkcs.SignerInfo" />
+
+            
 
             
 
@@ -982,6 +1104,8 @@
           <para
             >The <see
              cref="P:System.Security.Cryptography.Pkcs.SignerInfo.Version" />
+
+            
 
             
 

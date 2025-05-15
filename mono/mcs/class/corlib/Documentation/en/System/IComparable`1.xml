@@ -31,11 +31,15 @@
 
         
 
+        
+
          method to create a type-specific comparison method suitable for purposes such as sorting. </para
       >
       <para
         >The <see
          cref="T:System.IComparable`1" />
+
+        
 
         
 
@@ -48,6 +52,8 @@
 
         
 
+        
+
          method, which determines the sort order of instances of the implementing type. The <see
          cref="T:System.IEquatable`1" />
 
@@ -55,8 +61,12 @@
 
         
 
+        
+
          interface defines the <see
          cref="M:System.IEquatable`1.Equals(`0)" />
+
+        
 
         
 
@@ -72,8 +82,12 @@
 
         
 
+        
+
          method must return an <see
          cref="T:System.Int32" />
+
+        
 
         
 
@@ -100,6 +114,8 @@
             <para
               >This object is less than the object specified by the <see
                cref="M:System.IComparable`1.CompareTo(`0)" />
+
+              
 
               
 
@@ -134,6 +150,8 @@
 
         
 
+        
+
          interface provides a strongly typed comparison method for ordering members of a generic collection object. Because of this, it is usually not called directly from developer code. Instead, it is called automatically by methods such as <see
          cref="M:System.Collections.Generic.List`1.Sort" />
 
@@ -141,8 +159,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Collections.Generic.SortedList`2.Add(`0,`1)" />
+
+        
 
         
 
@@ -188,6 +210,8 @@
 
             
 
+            
+
             . The following table defines the conditions under which the returned value is a negative number, zero, or a positive number.</para
           >
           <list type="table">
@@ -200,6 +224,8 @@
               <description
                 > The current instance is &lt; <paramref
                  name="obj" />
+
+                
 
                 
 
@@ -219,6 +245,8 @@
 
                 
 
+                
+
                 . </description
               >
             </item>
@@ -227,6 +255,8 @@
               <description
                 > The current instance is &gt; than <paramref
                  name="obj" />
+
+                
 
                 
 
@@ -257,9 +287,13 @@
 
               
 
+              
+
                not equal 
       to zero, and B.CompareTo(C) returns a value <paramref
                name="y" />
+
+              
 
               
 
@@ -273,6 +307,8 @@
 
               
 
+              
+
               , then A.CompareTo(C) is required to a value of the same sign as 
    <paramref
                name="other" />
@@ -281,8 +317,12 @@
 
               
 
+              
+
                and <paramref
                name="y" />
+
+              
 
               
 
@@ -302,6 +342,8 @@
               >Use the <see
                cref="M:System.IComparable&lt;T&gt;.CompareTo" />
               <see langword="(T)" />
+
+              
 
               
 

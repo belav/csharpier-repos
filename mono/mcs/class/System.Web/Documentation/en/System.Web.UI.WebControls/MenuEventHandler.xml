@@ -32,6 +32,8 @@
 
         
 
+        
+
          class is used to represent the method that handles the events in the following table.</para
       >
       <list type="table">
@@ -60,6 +62,8 @@
 
               
 
+              
+
                control with another control on the page.</para
             >
           </description>
@@ -79,6 +83,8 @@
 
               
 
+              
+
                control.</para
             >
           </description>
@@ -92,10 +98,14 @@
 
         
 
+        
+
          delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event-handler delegates, see <format
          type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
         </format>
+
+        
 
         
 
@@ -114,6 +124,8 @@
 
         
 
+        
+
          event or <see
          cref="E:System.Web.UI.WebControls.Menu.MenuItemDataBound" />
 
@@ -121,8 +133,12 @@
 
         
 
+        
+
          event of a <see
          cref="T:System.Web.UI.WebControls.Menu" />
+
+        
 
         
 

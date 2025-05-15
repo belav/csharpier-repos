@@ -28,8 +28,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Xml.Linq.XAttribute" />
+
+        
 
         
 
@@ -72,11 +76,15 @@
 
             
 
+            
+
             . Also, if you import an XML Namespace into your VB project and call AddAnnotation with the SaveOptions.OmitDuplicateNamespaces enumeration value, then only one element will contain the XML Namespace attribute instead of every element. For more information, see <see
 
               cref="http://blogs.msdn.com/b/vbteam/archive/2010/06/09/removing-duplicate-namespaces-in-xml-literals-shyam-namboodiripad.aspx"
               >Removing duplicate namespaces in XML Literals</see
             >
+
+            
 
             
 
@@ -95,6 +103,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -105,8 +115,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -144,6 +158,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -152,6 +168,8 @@
           <para
             >The <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -167,8 +185,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -211,6 +233,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -220,6 +244,8 @@
         </returns>
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -260,6 +286,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -273,6 +301,8 @@
 
             
 
+            
+
              of <see
              cref="T:System.Object" />
 
@@ -280,8 +310,12 @@
 
             
 
+            
+
              that contains the annotations that match the specified type for this <see
              cref="T:System.Xml.Linq.XObject" />
+
+            
 
             
 
@@ -297,8 +331,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -344,6 +382,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -357,8 +397,12 @@
 
             
 
+            
+
              that contains the annotations for this <see
              cref="T:System.Xml.Linq.XObject" />
+
+            
 
             
 
@@ -369,6 +413,8 @@
         </returns>
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -400,6 +446,8 @@
 
             
 
+            
+
              or an <see
              cref="T:System.Xml.XmlReader" />
 
@@ -407,8 +455,12 @@
 
             
 
+            
+
             . In all of these cases, LINQ to XML uses one or another of the concrete subclasses of <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -424,8 +476,12 @@
 
             
 
+            
+
              has the base URI, and sometimes it does not. For instance, when loading from a file, the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -438,6 +494,8 @@
 
             
 
+            
+
              that was created because of calling the <see
              cref="Overload:System.Xml.Linq.XElement.Parse" />
 
@@ -445,8 +503,12 @@
 
             
 
+            
+
              method, there is no possibility of the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -462,6 +524,8 @@
 
             
 
+            
+
             , LINQ to XML will request the base URI for each node as the <see
              cref="T:System.Xml.XmlReader" />
 
@@ -469,8 +533,12 @@
 
             
 
+            
+
              returns the node. If the reader has the base URI, LINQ to XML will save the information with the LINQ to XML node. This property returns that information. If the underlying <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -486,6 +554,8 @@
 
             
 
+            
+
              when loading an XML tree will result in slower parsing.</para
           >
           <para>When setting the base URI for an XML tree, LINQ to XML puts an annotation on the root of the tree. This property is a computed property, and navigates up the tree to find the base URI. </para>
@@ -495,6 +565,8 @@
           <para
             >Gets the base URI for this <see
              cref="T:System.Xml.Linq.XObject" />
+
+            
 
             
 
@@ -532,8 +604,12 @@
 
             
 
+            
+
             . You cannot get a reference to an <see
              cref="T:System.Xml.Linq.XObject" />
+
+            
 
             
 
@@ -549,8 +625,12 @@
 
             
 
+            
+
              event, and while the event is being processed you remove the node from the tree, you might not receive the <see
              cref="E:System.Xml.Linq.XObject.Changed" />
+
+            
 
             
 
@@ -564,6 +644,8 @@
           <para
             >Raised when this <see
              cref="T:System.Xml.Linq.XObject" />
+
+            
 
             
 
@@ -601,8 +683,12 @@
 
             
 
+            
+
             . You can't get a reference to an <see
              cref="T:System.Xml.Linq.XObject" />
+
+            
 
             
 
@@ -618,8 +704,12 @@
 
             
 
+            
+
              event, and while the event is being processed you remove the node from the tree, you might not receive the <see
              cref="E:System.Xml.Linq.XObject.Changed" />
+
+            
 
             
 
@@ -633,6 +723,8 @@
           <para
             >Raised when this <see
              cref="T:System.Xml.Linq.XObject" />
+
+            
 
             
 
@@ -669,8 +761,12 @@
 
             
 
+            
+
              for this <see
              cref="T:System.Xml.Linq.XObject" />
+
+            
 
             
 
@@ -709,6 +805,8 @@
 
             
 
+            
+
              contain a <see
              cref="P:System.Xml.Linq.XObject.NodeType" />
 
@@ -716,8 +814,12 @@
 
             
 
+            
+
              property, you can write code that operates on collections of concrete subclass of <see
              cref="T:System.Xml.Linq.XObject" />
+
+            
 
             
 
@@ -731,6 +833,8 @@
           <para
             >Gets the node type for this <see
              cref="T:System.Xml.Linq.XObject" />
+
+            
 
             
 
@@ -766,12 +870,16 @@
 
             
 
+            
+
              has no parent element, this property returns null.</para
           >
           <block subset="none" type="note">
             <para
               >This property returns the parent element, and as children nodes of an <see
                cref="T:System.Xml.Linq.XDocument" />
+
+              
 
               
 
@@ -791,8 +899,12 @@
 
             
 
+            
+
              of this <see
              cref="T:System.Xml.Linq.XObject" />
+
+            
 
             
 
@@ -831,6 +943,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -841,8 +955,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -888,11 +1006,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -927,6 +1049,8 @@
 
             
 
+            
+
              contains valid line information.</para
           >
           <para
@@ -937,8 +1061,12 @@
 
             
 
+            
+
              interface, so in order to call this method, it is necessary to cast to <see
              cref="T:System.Xml.IXmlLineInfo" />
+
+            
 
             
 
@@ -957,6 +1085,8 @@
 
             
 
+            
+
              has line information.</para
           >
         </summary>
@@ -965,6 +1095,8 @@
           <para
             >true if the <see
              cref="T:System.Xml.Linq.XObject" />
+
+            
 
             
 
@@ -1000,8 +1132,12 @@
 
             
 
+            
+
              interface, so in order to call this method, it is necessary to cast to <see
              cref="T:System.Xml.IXmlLineInfo" />
+
+            
 
             
 
@@ -1020,8 +1156,12 @@
 
             
 
+            
+
              reported for this <see
              cref="T:System.Xml.Linq.XObject" />
+
+            
 
             
 
@@ -1057,8 +1197,12 @@
 
             
 
+            
+
              interface, so in order to call this method, it is necessary to cast to <see
              cref="T:System.Xml.IXmlLineInfo" />
+
+            
 
             
 
@@ -1077,8 +1221,12 @@
 
             
 
+            
+
              reported for this <see
              cref="T:System.Xml.Linq.XObject" />
+
+            
 
             
 

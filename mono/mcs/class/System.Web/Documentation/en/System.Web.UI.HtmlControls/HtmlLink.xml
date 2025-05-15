@@ -29,8 +29,12 @@
 
         
 
+        
+
          control allows programmatic access to the HTML link element on the server. The <see
          cref="T:System.Web.UI.HtmlControls.HtmlLink" />
+
+        
 
         
 
@@ -61,6 +65,8 @@
 
             
 
+            
+
              control.</para
           >
         </remarks>
@@ -69,6 +75,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlLink" />
+
+            
 
             
 
@@ -112,8 +120,12 @@
 
             
 
+            
+
              property specifies the URL target of the link specified in the <see
              cref="T:System.Web.UI.HtmlControls.HtmlLink" />
+
+            
 
             
 
@@ -127,6 +139,8 @@
           <para
             >Gets or sets the URL target of the link specified in the <see
              cref="T:System.Web.UI.HtmlControls.HtmlLink" />
+
+            
 
             
 
@@ -166,8 +180,12 @@
 
             
 
+            
+
              method renders a <see
              cref="F:System.Web.UI.HtmlTextWriter.SelfClosingTagEnd" />
+
+            
 
             
 
@@ -179,6 +197,8 @@
                 >How to: Configure ASP.NET Web Sites for Non-XHTML Rendering</a
               >
             </format>
+
+            
 
             
 
@@ -197,8 +217,12 @@
 
             
 
+            
+
              control to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -214,8 +238,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -249,6 +277,8 @@
 
             
 
+            
+
              method resolves the <see
              cref="P:System.Web.UI.HtmlControls.HtmlLink.Href" />
 
@@ -256,8 +286,12 @@
 
             
 
+            
+
              property before calling the base class's <see
              cref="M:System.Web.UI.HtmlControls.HtmlControl.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -276,8 +310,12 @@
 
             
 
+            
+
              control's attributes to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -293,8 +331,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 

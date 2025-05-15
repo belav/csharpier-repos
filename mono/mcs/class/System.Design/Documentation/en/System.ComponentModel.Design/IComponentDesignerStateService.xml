@@ -23,6 +23,8 @@
 
           
 
+          
+
           . Sensitive information includes password and authentication data, or any data you do not want to expose to an unwanted source. </para
         >
       </block>
@@ -65,8 +67,12 @@
 
             
 
+            
+
              specified by <paramref
              name="key" />
+
+            
 
             
 
@@ -82,10 +88,14 @@
 
           
 
+          
+
           The component for which to retrieve the designer state item.</param
         >
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -125,10 +135,14 @@
 
           
 
+          
+
           The component for which to set the designer state item.</param
         >
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -143,8 +157,12 @@
 
           
 
+          
+
           The designer state item for <paramref
            name="component" />
+
+          
 
           
 

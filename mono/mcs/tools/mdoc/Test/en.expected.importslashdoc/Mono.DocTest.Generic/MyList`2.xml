@@ -71,6 +71,8 @@
 
       
 
+      
+
       .</remarks
     >
   </Docs>
@@ -119,6 +121,8 @@
 
           
 
+          
+
           .</remarks
         >
       </Docs>
@@ -146,10 +150,14 @@
 
           
 
+          
+
           .</value
         >
         <remarks>
           <c>P:Mono.DocTest.MyList`2.Count</c>
+
+          
 
           
 
@@ -182,6 +190,8 @@
 
           
 
+          
+
           .</remarks
         >
       </Docs>
@@ -207,6 +217,8 @@
         <summary>To be added.</summary>
         <remarks>
           <c>M:Mono.DocTest.MyList`2.Dispose</c>
+
+          
 
           
 
@@ -266,10 +278,14 @@
 
           
 
+          
+
           .</returns
         >
         <remarks>
           <c>M:Mono.DocTest.MyList`2.GetEnumerator</c>
+
+          
 
           
 
@@ -315,6 +331,8 @@
 
           
 
+          
+
           .</remarks
         >
       </Docs>
@@ -348,6 +366,8 @@
 
           
 
+          
+
           .</remarks
         >
       </Docs>
@@ -373,6 +393,8 @@
         <summary>To be added.</summary>
         <remarks>
           <c>M:Mono.DocTest.MyList`2.Reset</c>
+
+          
 
           
 
@@ -411,6 +433,8 @@
 
           
 
+          
+
           .</remarks
         >
       </Docs>
@@ -436,6 +460,8 @@
         <summary>To be added.</summary>
         <remarks>
           <c>M:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}#Clear</c>
+
+          
 
           
 
@@ -475,8 +501,12 @@
 
           
 
+          
+
            instance (<see
            langword="false" />
+
+          
 
           
 
@@ -486,6 +516,8 @@
         >
         <remarks>
           <c>M:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}.Contains(`0)</c>
+
+          
 
           
 
@@ -524,10 +556,14 @@
 
           
 
+          
+
           .</value
         >
         <remarks>
           <c>P:Mono.DocTest.MyList`2.System#Collections#Generic#ICollection{A}#IsReadOnly</c>
+
+          
 
           
 
@@ -567,6 +603,8 @@
 
           
 
+          
+
           .</remarks
         >
       </Docs>
@@ -601,10 +639,14 @@
 
           
 
+          
+
           .</returns
         >
         <remarks>
           <c>M:Mono.DocTest.MyList`2.System#Collections#Generic#IEnumerable{A}#GetEnumerator</c>
+
+          
 
           
 
@@ -643,6 +685,8 @@
 
           
 
+          
+
           .</remarks
         >
       </Docs>
@@ -672,6 +716,8 @@
         <returns>To be added.</returns>
         <remarks>
           <c>M:Mono.DocTest.MyList`2.System#Collections#GetEnumerator</c>
+
+          
 
           
 

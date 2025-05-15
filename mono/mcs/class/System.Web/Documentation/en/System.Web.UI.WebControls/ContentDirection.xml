@@ -20,8 +20,12 @@
 
         
 
+        
+
          enumeration represents the direction in which to display controls that include text in a container control. Controls, such as the <see
          cref="T:System.Web.UI.WebControls.Panel" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
          controls, have properties that use the <see
          cref="T:System.Web.UI.WebControls.ContentDirection" />
+
+        
 
         
 
@@ -51,6 +59,8 @@
 
         
 
+        
+
          value, child controls that include text display text from left to right and justify the text on the left side of the container control. If you specify the <see
          cref="F:System.Web.UI.WebControls.ContentDirection.RightToLeft" />
 
@@ -58,8 +68,12 @@
 
         
 
+        
+
          value, child controls that include text display text from right to left and justify the text on the right side of the container control. Use the <see
          cref="F:System.Web.UI.WebControls.ContentDirection.RightToLeft" />
+
+        
 
         
 

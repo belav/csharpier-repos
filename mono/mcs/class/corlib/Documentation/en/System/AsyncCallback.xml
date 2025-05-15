@@ -45,6 +45,8 @@
 
       
 
+      
+
        object containing information about the asynchronous operation that has completed.</param
     >
     <remarks>
@@ -57,6 +59,8 @@
 
         
 
+        
+
          delegate to process the results of an asynchronous operation in a separate thread. The <see
          cref="T:System.AsyncCallback" />
 
@@ -64,8 +68,12 @@
 
         
 
+        
+
          delegate represents a callback method that is called when the asynchronous operation completes. The callback method takes an <see
          cref="T:System.IAsyncResult" />
+
+        
 
         
 
@@ -85,6 +93,8 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="e3e5475d-c5e9-43f0-928e-d18df8ca1f1d"
@@ -96,12 +106,16 @@
 
         
 
+        
+
          in <format
          type="text/html">
           <a href="c6baed9f-2a25-4728-9a9a-53b7b14840cf"
             >Asynchronous Programming Design Patterns</a
           >
         </format>
+
+        
 
         
 

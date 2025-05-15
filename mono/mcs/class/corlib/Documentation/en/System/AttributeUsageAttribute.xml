@@ -46,8 +46,12 @@
 
         
 
+        
+
          on your attribute class. The indicated attribute class must derive from <see
          cref="T:System.Attribute" />
+
+        
 
         
 
@@ -59,6 +63,8 @@
       <para
         >The three properties of <see
          cref="T:System.AttributeUsageAttribute" />
+
+        
 
         
 
@@ -81,8 +87,12 @@
 
         
 
+        
+
          enumeration. You can combine several <see
          cref="T:System.AttributeTargets" />
+
+        
 
         
 
@@ -114,12 +124,16 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="30386922-1E00-4602-9EBF-526B271A8B87"
             >[&lt;topic://cpconExtendingMetadataUsingAttributes&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -168,11 +182,15 @@
 
             
 
+            
+
              values using a bitwise OR operation to get the desired combination of valid program elements.</para
           >
           <para
             >For default property values, see the <see
              cref="P:System.AttributeUsageAttribute.ValidOn" />
+
+            
 
             
 
@@ -185,8 +203,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.AttributeUsageAttribute.Inherited" />
+
+            
 
             
 
@@ -205,8 +227,12 @@
 
             
 
+            
+
              class with the specified list of <see
              cref="T:System.AttributeTargets" />
+
+            
 
             
 
@@ -219,8 +245,12 @@
 
             
 
+            
+
              value, and the <see
              cref="P:System.AttributeUsageAttribute.Inherited" />
+
+            
 
             
 
@@ -231,6 +261,8 @@
         </summary>
         <param name="validOn">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -268,8 +300,12 @@
 
             
 
+            
+
              where <see
              langword="true" />
+
+            
 
             
 
@@ -283,9 +319,13 @@
 
             
 
+            
+
             . The
    default is <see
              langword="false" />
+
+            
 
             
 
@@ -306,6 +346,8 @@
 
             
 
+            
+
             . If
 <see
              langword="AllowMultiple" />
@@ -314,8 +356,12 @@
 
             
 
+            
+
              for an attribute is set to <see
              langword="true" />
+
+            
 
             
 
@@ -358,8 +404,12 @@ class JohnsClass {
             
 
             
+
+            
    was set to <see
              langword="false" />
+
+            
 
             
 
@@ -427,6 +477,8 @@ class JohnsClass {
 
             
 
+            
+
              indicates the attribute is inherited by subclasses;
    otherwise, <see
              langword="false" />
@@ -435,8 +487,12 @@ class JohnsClass {
 
             
 
+            
+
             . The default is <see
              langword="true" />
+
+            
 
             
 
@@ -453,6 +509,8 @@ class JohnsClass {
       required therefore to traverse up the inheritance chain of a class if that
       consumer is interested in <see
              cref="T:System.Attribute" />
+
+            
 
             
 
@@ -495,6 +553,8 @@ class JohnsClass {
           <para
             > One or more of the <see
              cref="T:System.AttributeTargets" />
+
+            
 
             
 

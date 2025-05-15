@@ -50,6 +50,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -150,11 +152,15 @@
 
             
 
+            
+
             ; otherwise, false. </para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -192,6 +198,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Channels.Binding" />
+
+            
 
             
 
@@ -240,10 +248,14 @@
 
           
 
+          
+
           The name of the binding to be added.</param
         >
         <param name="binding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -256,10 +268,14 @@
 
           
 
+          
+
            object that represents the binding to be added.</param
         >
         <param name="config">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -27,6 +27,8 @@
 
         
 
+        
+
          event to perform custom initialization of the editing control when a cell enters edit mode. To customize the display characteristics of the control, set the properties of the object returned by the <see
          cref="P:System.Windows.Forms.DataGridViewEditingControlShowingEventArgs.CellStyle" />
 
@@ -34,8 +36,12 @@
 
         
 
+        
+
          property rather than setting the properties of the control returned by the <see
          cref="P:System.Windows.Forms.DataGridViewEditingControlShowingEventArgs.Control" />
+
+        
 
         
 
@@ -53,6 +59,8 @@
 
         
 
+        
+
         . </para
       >
     </remarks>
@@ -61,6 +69,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.DataGridView.EditingControlShowing" />
+
+        
 
         
 
@@ -94,6 +104,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -104,8 +116,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -120,8 +136,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+          
 
           
 
@@ -156,8 +176,12 @@
 
             
 
+            
+
              property rather than setting the properties of the control returned by the <see
              cref="P:System.Windows.Forms.DataGridViewEditingControlShowingEventArgs.Control" />
+
+            
 
             
 
@@ -194,8 +218,12 @@
 
             
 
+            
+
              property rather than setting the properties of the control returned by the <see
              cref="P:System.Windows.Forms.DataGridViewEditingControlShowingEventArgs.Control" />
+
+            
 
             
 

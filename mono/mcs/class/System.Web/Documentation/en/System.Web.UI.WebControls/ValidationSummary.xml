@@ -27,6 +27,8 @@
 
         
 
+        
+
          class is used to summarize the error messages from all validators on a Web page in a single location. You can summarize the error messages from a group of validators on a Web page by assigning the <see
          cref="T:System.Web.UI.WebControls.ValidationSummary" />
 
@@ -34,8 +36,12 @@
 
         
 
+        
+
          control to a validation group by setting the <see
          cref="P:System.Web.UI.WebControls.ValidationSummary.ValidationGroup" />
+
+        
 
         
 
@@ -51,6 +57,8 @@
 
         
 
+        
+
          property.</para
       >
       <para
@@ -61,8 +69,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.WebControls.ValidationSummary.ShowMessageBox" />
+
+        
 
         
 
@@ -79,8 +91,12 @@
 
           
 
+          
+
            control inside an <see
            cref="T:System.Web.UI.UpdatePanel" />
+
+          
 
           
 
@@ -93,10 +109,14 @@
 
           
 
+          
+
            control for partial-page updates, see <format
            type="text/html">
             <a href="5c12736d-d9e9-464a-9388-3fe0f9f49e49">Partial-Page Rendering Overview</a>
           </format>
+
+          
 
           
 
@@ -113,8 +133,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.WebControls.ValidationSummary.#ctor" />
+
+        
 
         
 
@@ -137,10 +161,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0">ASP.NET Controls and Accessibility</a>
         </format>
+
+        
 
         
 
@@ -166,6 +194,8 @@
           <para
             >The following table shows the initial property value for an instance of <see
              cref="T:System.Web.UI.WebControls.ValidationSummary" />
+
+            
 
             
 
@@ -199,6 +229,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.ValidationSummary" />
+
+            
 
             
 
@@ -238,6 +270,8 @@
 
           
 
+          
+
           The output stream that renders HTML content to the client. </param
         >
       </Docs>
@@ -263,6 +297,8 @@
           <para
             >Use this property to specify the display format of a <see
              cref="T:System.Web.UI.WebControls.ValidationSummary" />
+
+            
 
             
 
@@ -305,8 +341,12 @@
 
             
 
+            
+
              control updates itself using client-side script. When this property is set to true, client-side script is rendered on the client to update the <see
              cref="T:System.Web.UI.WebControls.ValidationSummary" />
+
+            
 
             
 
@@ -319,8 +359,12 @@
 
             
 
+            
+
              control only updates itself on round trips to the server. In this situation, the <see
              cref="P:System.Web.UI.WebControls.ValidationSummary.ShowMessageBox" />
+
+            
 
             
 
@@ -336,10 +380,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -353,6 +401,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Web.UI.WebControls.ValidationSummary" />
+
+            
 
             
 
@@ -428,6 +478,8 @@
 
             
 
+            
+
              control.</para
           >
           <para
@@ -438,8 +490,12 @@
 
             
 
+            
+
              property is not HTML encoded. Therefore, HTML tags can be included in <see
              cref="P:System.Web.UI.WebControls.ValidationSummary.HeaderText" />
+
+            
 
             
 
@@ -455,12 +511,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -512,6 +572,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -522,8 +584,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -561,11 +627,15 @@
 
             
 
+            
+
              object, which writes the content to be rendered on the client.</para
           >
         </summary>
         <param name="writer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -594,6 +664,8 @@
 
             
 
+            
+
              property to control where the validation summary is displayed. If this property and <see
              cref="P:System.Web.UI.WebControls.ValidationSummary.EnableClientScript" />
 
@@ -601,8 +673,12 @@
 
             
 
+            
+
              are both set to true, the validation summary is displayed in a message box. If <see
              cref="P:System.Web.UI.WebControls.ValidationSummary.EnableClientScript" />
+
+            
 
             
 
@@ -619,8 +695,12 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.ValidationSummary.ShowSummary" />
+
+              
 
               
 
@@ -664,6 +744,8 @@
 
             
 
+            
+
              property to control where the validation summary is displayed. If this property is set to true, the validation summary is displayed on the Web page.</para
           >
           <block subset="none" type="note">
@@ -675,8 +757,12 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.ValidationSummary.ShowSummary" />
+
+              
 
               
 
@@ -730,8 +816,12 @@
 
             
 
+            
+
              property to specify the name of the validation group for which the <see
              cref="T:System.Web.UI.WebControls.ValidationSummary" />
+
+            
 
             
 
@@ -747,11 +837,15 @@
 
             
 
+            
+
              property, only error messages from the validation controls that are part of the specified group are summarized. If you do not set a value for this property, all error messages from validation controls on the page that are not assigned to a validation group are summarized.</para
           >
           <para
             >This property cannot be set by themes or style sheet themes. For more information, see <see
              cref="T:System.Web.UI.ThemeableAttribute" />
+
+            
 
             
 
@@ -766,6 +860,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -774,6 +870,8 @@
           <para
             >Gets or sets the group of controls for which the <see
              cref="T:System.Web.UI.WebControls.ValidationSummary" />
+
+            
 
             
 

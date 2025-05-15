@@ -33,6 +33,8 @@
 
         
 
+        
+
          event.</para
       >
     </summary>
@@ -67,6 +69,8 @@
 
             
 
+            
+
              class, specifying the namespace to resolve and the assembly whose dependency is being resolved. </para
           >
         </summary>
@@ -77,10 +81,14 @@
 
           
 
+          
+
           The namespace to resolve. </param
         >
         <param name="requestingAssembly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -162,6 +170,8 @@
 
             
 
+            
+
              property. </para
           >
         </remarks>
@@ -170,6 +180,8 @@
           <para
             >Gets a collection of assemblies; when the event handler for the <see
              cref="E:System.Runtime.InteropServices.WindowsRuntime.WindowsRuntimeMetadata.ReflectionOnlyNamespaceResolve" />
+
+            
 
             
 

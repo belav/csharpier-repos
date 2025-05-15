@@ -44,8 +44,12 @@
 
         
 
+        
+
          object returns the result of a construction request sent with the <see
          cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
+
+        
 
         
 
@@ -61,6 +65,8 @@
 
         
 
+        
+
          class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see
          cref="T:System.Runtime.Remoting.Messaging.ConstructionResponse" />
 
@@ -68,8 +74,12 @@
 
         
 
+        
+
          class directly; instead, use the <see
          cref="T:System.Runtime.Remoting.Activation.IConstructionReturnMessage" />
+
+        
 
         
 
@@ -83,6 +93,8 @@
       <para
         >Implements the <see
          cref="T:System.Runtime.Remoting.Activation.IConstructionReturnMessage" />
+
+        
 
         
 
@@ -124,6 +136,8 @@
 
             
 
+            
+
              class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see
              cref="T:System.Runtime.Remoting.Messaging.ConstructionResponse" />
 
@@ -131,8 +145,12 @@
 
             
 
+            
+
              class directly; instead, use the <see
              cref="T:System.Runtime.Remoting.Activation.IConstructionReturnMessage" />
+
+            
 
             
 
@@ -151,11 +169,15 @@
 
             
 
+            
+
              class from an array of remoting headers and a request message.</para
           >
         </summary>
         <param name="h">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -168,10 +190,14 @@
 
           
 
+          
+
            fields for those headers that belong to the namespace "http://schemas.microsoft.com/clr/soap/messageProperties".</param
         >
         <param name="mcm">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -211,8 +237,12 @@
 
             
 
+            
+
              property returns the value of the inherited <see
              cref="F:System.Runtime.Remoting.Messaging.MethodResponse.ExternalProperties" />
+
+            
 
             
 
@@ -226,6 +256,8 @@
           <para
             >Gets an <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 

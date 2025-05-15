@@ -32,8 +32,12 @@
 
         
 
+        
+
          class is one of a set of classes that the .NET Framework provides for managing Windows access control security on named system events. For an overview of these classes and their relationship to the underlying Windows access control structures, see <see
          cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+
+        
 
         
 
@@ -50,12 +54,16 @@
 
           
 
+          
+
            object represents a local event, access control is irrelevant.</para
         >
       </block>
       <para
         >To get a list of the audit rules currently applied to a named event, use the <see
          cref="M:System.Threading.EventWaitHandle.GetAccessControl" />
+
+        
 
         
 
@@ -68,8 +76,12 @@
 
         
 
+        
+
          object, and then use its <see
          cref="M:System.Security.AccessControl.CommonObjectSecurity.GetAuditRules(System.Boolean,System.Boolean,System.Type)" />
+
+        
 
         
 
@@ -82,10 +94,14 @@
 
         
 
+        
+
          objects.</para
       >
       <para>
         <see cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />
+
+        
 
         
 
@@ -104,8 +120,12 @@
 
         
 
+        
+
          objects to specify access rights to be audited for a user or group. To apply a rule to a named system event, use the <see
          cref="M:System.Threading.EventWaitHandle.GetAccessControl" />
+
+        
 
         
 
@@ -118,6 +138,8 @@
 
         
 
+        
+
          object. Modify the <see
          cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
 
@@ -125,8 +147,12 @@
 
         
 
+        
+
          object by using its methods to add the rule, and then use the <see
          cref="M:System.Threading.EventWaitHandle.SetAccessControl(System.Security.AccessControl.EventWaitHandleSecurity)" />
+
+        
 
         
 
@@ -143,8 +169,12 @@
 
           
 
+          
+
            object do not affect the access levels of the named event until you call the <see
            cref="M:System.Threading.EventWaitHandle.SetAccessControl(System.Security.AccessControl.EventWaitHandleSecurity)" />
+
+          
 
           
 
@@ -160,8 +190,12 @@
 
         
 
+        
+
          objects are immutable. Security for an event is modified using the methods of the <see
          cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+
+        
 
         
 
@@ -210,8 +244,12 @@
 
             
 
+            
+
              object from a string representing a user or group name, use the <see
              cref="M:System.Security.Principal.NTAccount.#ctor(System.String)" />
+
+            
 
             
 
@@ -230,11 +268,15 @@
 
             
 
+            
+
              class, specifying the user or group to audit, the rights to audit, and whether to audit success, failure, or both.</para
           >
         </summary>
         <param name="identity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -247,6 +289,8 @@
 
           
 
+          
+
            or a type such as <see
            cref="T:System.Security.Principal.NTAccount" />
 
@@ -254,8 +298,12 @@
 
           
 
+          
+
            that can be converted to type <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -270,8 +318,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Security.AccessControl.EventWaitHandleRights" />
+
+          
 
           
 
@@ -286,8 +338,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Security.AccessControl.AuditFlags" />
+
+          
 
           
 
@@ -326,8 +382,12 @@
 
             
 
+            
+
              objects are immutable. You can create a new audit rule representing a different user, different rights, or a different combination of <see
              cref="T:System.Security.AccessControl.AuditFlags" />
+
+            
 
             
 

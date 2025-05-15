@@ -29,8 +29,12 @@
 
         
 
+        
+
          and the <see
          cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" />
+
+        
 
         
 
@@ -47,6 +51,8 @@
 
         
 
+        
+
          does not have base URI or line information, setting the <see
          cref="F:System.Xml.Linq.LoadOptions.SetBaseUri" />
 
@@ -54,8 +60,12 @@
 
         
 
+        
+
          and the <see
          cref="F:System.Xml.Linq.LoadOptions.SetLineInfo" />
+
+        
 
         
 
@@ -75,12 +85,16 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
             >Preserving White Space While Serializing</a
           >
         </format>
+
+        
 
         
 
@@ -159,8 +173,12 @@
 
             
 
+            
+
             , and makes it available via the <see
              cref="P:System.Xml.Linq.XObject.BaseUri" />
+
+            
 
             
 
@@ -195,8 +213,12 @@
 
             
 
+            
+
              and makes it available via properties on <see
              cref="T:System.Xml.Linq.XObject" />
+
+            
 
             
 

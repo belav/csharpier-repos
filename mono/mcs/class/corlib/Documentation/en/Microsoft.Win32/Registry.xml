@@ -32,6 +32,8 @@
 
         
 
+        
+
          instances that are exposed by the Registry class delineate the basic storage mechanism for subkeys and values in the registry. All keys are read-only because the registry depends on their existence. The keys exposed by Registry are: </para
       >
       <list type="table">
@@ -100,6 +102,8 @@
 
         
 
+        
+
          class to add or remove subkeys, and manipulate the values for a given key.</para
       >
       <para>Hardware devices can place information in the registry automatically using the Plug and Play interface. Software for installing device drivers can place information in the registry by writing to standard APIs.</para>
@@ -114,8 +118,12 @@
 
         
 
+        
+
          class also contains static <see
          cref="M:Microsoft.Win32.Registry.GetValue(System.String,System.String,System.Object)" />
+
+        
 
         
 
@@ -128,8 +136,12 @@
 
         
 
+        
+
          methods for setting and retrieving values from registry keys. These methods open and close registry keys each time they are used, so they do not perform as well as analogous methods in the <see
          cref="T:Microsoft.Win32.RegistryKey" />
+
+        
 
         
 
@@ -145,6 +157,8 @@
 
         
 
+        
+
          class also provides methods that allow you to set Windows access control security for registry keys, to test the data type of a value before retrieving it, and to delete keys.</para
       >
     </remarks>
@@ -153,6 +167,8 @@
       <para
         >Provides <see
          cref="T:Microsoft.Win32.RegistryKey" />
+
+        
 
         
 
@@ -216,6 +232,8 @@
           <para
             >This member is mapped to a subkey within <see
              cref="F:Microsoft.Win32.Registry.LocalMachine" />
+
+            
 
             
 
@@ -331,12 +349,16 @@
 
             
 
+            
+
              is not case-sensitive.</para
           >
           <block subset="none" type="note">
             <para
               >A registry key can contain one value that is not associated with any name. When this unnamed value is displayed in the registry editor, the string "(Default)" appears instead of a name. To retrieve this unnamed value, specify either null or the empty string ("") for <paramref
                name="valuName" />
+
+              
 
               
 
@@ -354,8 +376,12 @@
 
             
 
+            
+
              method retrieves expandable string values (<see
              cref="F:Microsoft.Win32.RegistryValueKind.ExpandString" />
+
+            
 
             
 
@@ -368,8 +394,12 @@
 
             
 
+            
+
             ), rather than as an expandable string (<see
              cref="F:Microsoft.Win32.RegistryValueKind.ExpandString" />
+
+            
 
             
 
@@ -382,8 +412,12 @@
 
             
 
+            
+
              does not expand it. You can expand such a string after it has been retrieved by calling the <see
              cref="M:System.Environment.ExpandEnvironmentVariables(System.String)" />
+
+            
 
             
 
@@ -400,8 +434,12 @@
 
               
 
+              
+
                class rather than the <see
                cref="Overload:Microsoft.Win32.RegistryKey.GetValue" />
+
+              
 
               
 
@@ -418,8 +456,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:Microsoft.Win32.Registry.SetValue" />
+
+            
 
             
 
@@ -432,10 +474,14 @@
 
             
 
+            
+
              class if you access a large number of values.</para
           >
           <para>
             <see cref="T:Microsoft.Win32.RegistryKey" />
+
+            
 
             
 
@@ -458,8 +504,12 @@
 
             
 
+            
+
              does not exist; otherwise, the value associated with <paramref
              name="valueName" />
+
+            
 
             
 
@@ -472,8 +522,12 @@
 
             
 
+            
+
              if <paramref
              name="valueName" />
+
+            
 
             
 
@@ -489,10 +543,14 @@
 
           
 
+          
+
           The full registry path of the key, beginning with a valid registry root, such as "HKEY_CURRENT_USER".</param
         >
         <param name="valueName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -507,8 +565,12 @@
 
           
 
+          
+
           The value to return if <paramref
            name="valueName" />
+
+          
 
           
 
@@ -580,6 +642,8 @@
 
             
 
+            
+
              and under <see
              cref="F:Microsoft.Win32.Registry.LocalMachine" />
 
@@ -587,8 +651,12 @@
 
             
 
+            
+
             , the data in <see
              cref="F:Microsoft.Win32.Registry.CurrentUser" />
+
+            
 
             
 
@@ -632,6 +700,8 @@
 
             
 
+            
+
              functions.</para
           >
           <para>Although you use the registry to collect performance data, the data is not stored in the registry database. Instead, accessing the registry with this key causes the system to collect the data from the appropriate system object managers.</para>
@@ -643,8 +713,12 @@
 
             
 
+            
+
              method, with the Registry.PerformanceData key. The first call opens the key (you do not need to explicitly open the key first). However, be sure to use the <see
              cref="M:Microsoft.Win32.RegistryKey.Close" />
+
+            
 
             
 
@@ -660,8 +734,12 @@
 
             
 
+            
+
              method, with the computer name of the remote system and the Registry.PerformanceData key. This call retrieves a key representing the performance data for the remote system. To retrieve the data, call <see
              cref="M:Microsoft.Win32.RegistryKey.GetValue(System.String)" />
+
+            
 
             
 
@@ -712,8 +790,12 @@
 
             
 
+            
+
              parameter is no longer restricted to a maximum of 255 characters; however, the <paramref
              name="keyName" />
+
+            
 
             
 
@@ -724,6 +806,8 @@
           <para
             >Because many values can be stored in each key in the registry, you must use the <paramref
              name="valueName" />
+
+            
 
             
 
@@ -740,12 +824,16 @@
 
               
 
+              
+
               .</para
             >
           </block>
           <para
             >If <paramref
              name="valueName" />
+
+            
 
             
 
@@ -758,11 +846,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >If <paramref
              name="keyName" />
+
+            
 
             
 
@@ -780,6 +872,8 @@
 
               
 
+              
+
                method opens a registry key, sets the value, and closes the key each time it is called. If you need to modify a large number of values, the <see
                cref="Overload:Microsoft.Win32.RegistryKey.SetValue" />
 
@@ -787,8 +881,12 @@
 
               
 
+              
+
                method might provide better performance. The <see
                cref="T:Microsoft.Win32.RegistryKey" />
+
+              
 
               
 
@@ -805,8 +903,12 @@
 
             
 
+            
+
              stores 64-bit integers as strings (<see
              cref="F:Microsoft.Win32.RegistryValueKind.String" />
+
+            
 
             
 
@@ -819,8 +921,12 @@
 
             
 
+            
+
              values, use the <see
              cref="M:Microsoft.Win32.Registry.SetValue(System.String,System.String,System.Object,Microsoft.Win32.RegistryValueKind)" />
+
+            
 
             
 
@@ -836,8 +942,12 @@
 
             
 
+            
+
              stores all string values as <see
              cref="F:Microsoft.Win32.RegistryValueKind.String" />
+
+            
 
             
 
@@ -850,8 +960,12 @@
 
             
 
+            
+
             ), use the <see
              cref="M:Microsoft.Win32.Registry.SetValue(System.String,System.String,System.Object,Microsoft.Win32.RegistryValueKind)" />
+
+            
 
             
 
@@ -867,8 +981,12 @@
 
             
 
+            
+
              method overload with <see
              cref="F:Microsoft.Win32.RegistryValueKind.Unknown" />
+
+            
 
             
 
@@ -891,6 +1009,8 @@
 
           
 
+          
+
           The full registry path of the key, beginning with a valid registry root, such as "HKEY_CURRENT_USER".</param
         >
         <param name="valueName">
@@ -900,10 +1020,14 @@
 
           
 
+          
+
           The name of the name/value pair.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -947,8 +1071,12 @@
 
             
 
+            
+
              parameter is no longer restricted to a maximum of 255 characters; however, the <paramref
              name="keyName" />
+
+            
 
             
 
@@ -959,6 +1087,8 @@
           <para
             >Because many values can be stored in each key in the registry, you must use the <paramref
              name="valueName" />
+
+            
 
             
 
@@ -975,12 +1105,16 @@
 
               
 
+              
+
               .</para
             >
           </block>
           <para
             >If <paramref
              name="valueName" />
+
+            
 
             
 
@@ -993,11 +1127,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >If <paramref
              name="keyName" />
+
+            
 
             
 
@@ -1015,6 +1153,8 @@
 
               
 
+              
+
                method opens a registry key, sets the value, and closes the key each time it is called. If you need to modify a large number of values, the <see
                cref="Overload:Microsoft.Win32.RegistryKey.SetValue" />
 
@@ -1022,8 +1162,12 @@
 
               
 
+              
+
                method might provide better performance. The <see
                cref="T:Microsoft.Win32.RegistryKey" />
+
+              
 
               
 
@@ -1040,8 +1184,12 @@
 
             
 
+            
+
              does not match the specified <paramref
              name="valueKind" />
+
+            
 
             
 
@@ -1054,8 +1202,12 @@
 
             
 
+            
+
              is thrown. For example, you can store a <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -1068,6 +1220,8 @@
 
             
 
+            
+
             , but only if its value is less than the maximum value of a <see
              cref="T:System.Int32" />
 
@@ -1075,8 +1229,12 @@
 
             
 
+            
+
             . You cannot store a single string value as a <see
              cref="F:Microsoft.Win32.RegistryValueKind.MultiString" />
+
+            
 
             
 
@@ -1093,8 +1251,12 @@
 
               
 
+              
+
                or <see
                cref="F:Microsoft.Win32.RegistryValueKind.QWord" />
+
+              
 
               
 
@@ -1118,10 +1280,14 @@
 
           
 
+          
+
           The full registry path of the key, beginning with a valid registry root, such as "HKEY_CURRENT_USER".</param
         >
         <param name="valueName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1136,10 +1302,14 @@
 
           
 
+          
+
           The value to be stored.</param
         >
         <param name="valueKind">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

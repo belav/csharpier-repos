@@ -42,8 +42,12 @@
 
           
 
+          
+
            class or the <see
            cref="T:System.Security.Cryptography.SHA512" />
+
+          
 
           
 
@@ -56,8 +60,12 @@
 
           
 
+          
+
            class. Use <see
            cref="T:System.Security.Cryptography.MD5CryptoServiceProvider" />
+
+          
 
           
 
@@ -74,11 +82,15 @@
 
         
 
+        
+
          class is 128 bits.</para
       >
       <para
         >The <see
          cref="Overload:System.Security.Cryptography.HashAlgorithm.ComputeHash" />
+
+        
 
         
 
@@ -91,8 +103,12 @@
 
         
 
+        
+
          class return the hash as an array of 16 bytes.  Note that some MD5 implementations produce a 32-character, hexadecimal-formatted hash.  To interoperate with such implementations, format the return value of the <see
          cref="Overload:System.Security.Cryptography.HashAlgorithm.ComputeHash" />
+
+        
 
         
 
@@ -106,6 +122,8 @@
       <para
         >Computes the <see
          cref="T:System.Security.Cryptography.MD5" />
+
+        
 
         
 
@@ -137,6 +155,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.MD5CryptoServiceProvider" />
+
+            
 
             
 
@@ -176,8 +196,12 @@
 
             
 
+            
+
              parameter set to true. Finalize invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -193,8 +217,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Security.Cryptography.MD5CryptoServiceProvider" />
+
+            
 
             
 
@@ -213,11 +241,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -286,11 +318,15 @@
 
             
 
+            
+
              hash algorithm for computing the hash value.</para
           >
         </summary>
         <param name="rgb">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -305,10 +341,14 @@
 
           
 
+          
+
           The offset into the byte array from which to begin using data. </param
         >
         <param name="cbSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -346,6 +386,8 @@
 
             
 
+            
+
              hash value as an array of bytes after all data has been written to the object.</para
           >
         </summary>
@@ -378,6 +420,8 @@
           <para
             >Initializes an instance of <see
              cref="T:System.Security.Cryptography.MD5CryptoServiceProvider" />
+
+            
 
             
 

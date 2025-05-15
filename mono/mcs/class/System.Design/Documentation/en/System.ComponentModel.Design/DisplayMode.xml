@@ -20,6 +20,8 @@
 
         
 
+        
+
          identifiers are used to indicate the display mode used to display each byte sequence.</para
       >
     </remarks>
@@ -28,6 +30,8 @@
       <para
         >Defines identifiers that indicate the display modes used by <see
          cref="T:System.ComponentModel.Design.ByteViewer" />
+
+        
 
         
 
@@ -72,6 +76,8 @@
 
             
 
+            
+
              mode is selected. If the characters match a printable character set, a test is run to automatically select either the <see
              cref="F:System.ComponentModel.Design.DisplayMode.Ansi" />
 
@@ -79,8 +85,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.ComponentModel.Design.DisplayMode.Unicode" />
+
+            
 
             
 

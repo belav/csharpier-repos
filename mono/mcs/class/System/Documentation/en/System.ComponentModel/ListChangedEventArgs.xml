@@ -33,8 +33,12 @@
 
         
 
+        
+
          event is raised when the data in an <see
          cref="T:System.ComponentModel.IBindingList" />
+
+        
 
         
 
@@ -50,6 +54,8 @@
 
         
 
+        
+
          property indicates the index of the item that was added, changed, or deleted. If an item was moved, the <see
          cref="P:System.ComponentModel.ListChangedEventArgs.NewIndex" />
 
@@ -57,8 +63,12 @@
 
         
 
+        
+
          property indicates the new location of the item and the <see
          cref="P:System.ComponentModel.ListChangedEventArgs.OldIndex" />
+
+        
 
         
 
@@ -74,6 +84,8 @@
 
         
 
+        
+
          property value is -1.</para
       >
     </remarks>
@@ -82,6 +94,8 @@
       <para
         >Provides data for the <see
          cref="E:System.ComponentModel.IBindingList.ListChanged" />
+
+        
 
         
 
@@ -124,8 +138,12 @@
 
             
 
+            
+
              parameter should be <see
              cref="F:System.ComponentModel.ListChangedType.PropertyDescriptorAdded" />
+
+            
 
             
 
@@ -138,8 +156,12 @@
 
             
 
+            
+
             , or <see
              cref="F:System.ComponentModel.ListChangedType.PropertyDescriptorDeleted" />
+
+            
 
             
 
@@ -158,8 +180,12 @@
 
             
 
+            
+
              class given the type of change and the <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -175,8 +201,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ListChangedType" />
+
+          
 
           
 
@@ -191,8 +221,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -233,6 +267,8 @@
 
             
 
+            
+
              property is set to -1.</para
           >
         </remarks>
@@ -241,6 +277,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.ListChangedEventArgs" />
+
+            
 
             
 
@@ -256,8 +294,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ListChangedType" />
+
+          
 
           
 
@@ -267,6 +309,8 @@
         >
         <param name="newIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -307,8 +351,12 @@
 
             
 
+            
+
              class given the type of change, the index of the affected item, and a <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -324,8 +372,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ListChangedType" />
+
+          
 
           
 
@@ -340,6 +392,8 @@
 
           
 
+          
+
           The index of the item that was added or changed.</param
         >
         <param name="propDesc">
@@ -349,8 +403,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -393,6 +451,8 @@
 
             
 
+            
+
              class given the type of change and the old and new index of the item that was moved.</para
           >
         </summary>
@@ -403,8 +463,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ListChangedType" />
+
+          
 
           
 
@@ -419,10 +483,14 @@
 
           
 
+          
+
           The new index of the item that was moved.</param
         >
         <param name="oldIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -529,6 +597,8 @@
           <para
             >Gets the <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 

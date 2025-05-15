@@ -28,6 +28,8 @@
 
         
 
+        
+
          constant. The <see
          cref="P:System.Web.Services.Discovery.SoapBinding.Address" />
 
@@ -35,8 +37,12 @@
 
         
 
+        
+
          property specifies the URL of the XML Web service and the <see
          cref="P:System.Web.Services.Discovery.SoapBinding.Binding" />
+
+        
 
         
 
@@ -63,6 +69,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Discovery.SoapBinding" />
+
+            
 
             
 
@@ -146,6 +154,8 @@
           <para
             >SOAP bindings within a discovery document reside within a SOAP XML element, which is a member of the XML namespace specifed by the <see
              cref="F:System.Web.Services.Discovery.SoapBinding.Namespace" />
+
+            
 
             
 

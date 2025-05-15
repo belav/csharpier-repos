@@ -8,6 +8,8 @@
 
     
 
+    
+
      of D, access to M can take one of the following forms: <list
     >
       <list_item
@@ -18,8 +20,12 @@
 
         
 
+        
+
          or <non_terminal
          where="14.5">primary-expression</non_terminal>
+
+        
 
         
 
@@ -35,11 +41,15 @@
 
         
 
+        
+
          of the form E.M, provided the type of E is D or a class derived from D. </list_item
       >
       <list_item
         > A <non_terminal
          where="14.5">primary-expression</non_terminal>
+
+        
 
         
 
@@ -57,8 +67,12 @@
 
     
 
+    
+
      (<hyperlink
     >17.10.1</hyperlink>
+
+    
 
     
 
@@ -70,7 +84,7 @@
     <example
       >[Example: In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 public class A  
 {  
    protected int x;  
@@ -88,6 +102,8 @@ public class B: A
 }  
 ]]>
       </code_example>
+
+      
 
       
 

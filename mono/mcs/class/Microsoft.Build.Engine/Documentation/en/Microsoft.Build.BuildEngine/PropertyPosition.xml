@@ -37,8 +37,12 @@
 
             
 
+            
+
              element if it exists. Otherwise, create the <unmanagedCodeEntityReference
             >Property</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -48,6 +52,8 @@
              type="text/html">
               <a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a>
             </format>
+
+            
 
             
 
@@ -81,8 +87,12 @@
 
             
 
+            
+
              element if it exists. Otherwise, if possible, create a new <unmanagedCodeEntityReference
             >Property</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -97,6 +107,8 @@
 
             
 
+            
+
              element. If necessary, create a new compatible <unmanagedCodeEntityReference
             >PropertyGroup</unmanagedCodeEntityReference>
 
@@ -104,8 +116,12 @@
 
             
 
+            
+
              element immediately following the last <unmanagedCodeEntityReference
             >PropertyGroup</unmanagedCodeEntityReference>
+
+            
 
             
 

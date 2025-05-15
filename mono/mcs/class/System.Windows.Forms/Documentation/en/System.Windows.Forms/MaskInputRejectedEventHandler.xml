@@ -35,6 +35,8 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Windows.Forms.MaskedTextBox" />
 
@@ -42,8 +44,12 @@
 
         
 
+        
+
          class is raised whenever an input character does not match its corresponding element in the input mask. For more information, see the <see
          cref="E:System.Windows.Forms.MaskedTextBox.MaskInputRejected" />
+
+        
 
         
 
@@ -59,10 +65,14 @@
 
         
 
+        
+
          delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event-handler delegates, see <format
          type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
         </format>
+
+        
 
         
 
@@ -81,8 +91,12 @@
 
         
 
+        
+
          event of a <see
          cref="T:System.Windows.Forms.MaskedTextBox" />
+
+        
 
         
 

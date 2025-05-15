@@ -24,6 +24,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -41,8 +43,12 @@
 
         
 
+        
+
          subelements with specific implementations are <see
          cref="T:System.Security.Cryptography.Xml.KeyInfoName" />
+
+        
 
         
 
@@ -55,8 +61,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+
+        
 
         
 
@@ -71,6 +81,8 @@
       <para
         >Handles <see
          cref="T:System.Security.Cryptography.Xml.KeyInfo" />
+
+        
 
         
 
@@ -102,6 +114,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.Xml.KeyInfoNode" />
+
+            
 
             
 
@@ -140,8 +154,12 @@
 
             
 
+            
+
              class with content taken from the specified <see
              cref="T:System.Xml.XmlElement" />
+
+            
 
             
 
@@ -157,8 +175,12 @@
 
           
 
+          
+
           An XML element from which to take the content used to create the new instance of <see
            cref="T:System.Security.Cryptography.Xml.KeyInfoNode" />
+
+          
 
           
 
@@ -195,6 +217,8 @@
 
             
 
+            
+
              returned by this method is suitable for use as a subelement of an XMLDSIG or an XML encryption &lt;KeyInfo&gt; element.</para
           >
         </remarks>
@@ -208,6 +232,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -216,6 +242,8 @@
           <para
             >An XML representation of the <see
              cref="T:System.Security.Cryptography.Xml.KeyInfoNode" />
+
+            
 
             
 
@@ -259,8 +287,12 @@
 
             
 
+            
+
              and configures the internal state of the <see
              cref="T:System.Security.Cryptography.Xml.KeyInfoNode" />
+
+            
 
             
 
@@ -276,6 +308,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlElement" />
 
@@ -283,8 +317,12 @@
 
           
 
+          
+
            that specifies the state of the <see
            cref="T:System.Security.Cryptography.Xml.KeyInfoNode" />
+
+          
 
           
 
@@ -321,6 +359,8 @@
           <para
             >Gets or sets the XML content of the current <see
              cref="T:System.Security.Cryptography.Xml.KeyInfoNode" />
+
+            
 
             
 

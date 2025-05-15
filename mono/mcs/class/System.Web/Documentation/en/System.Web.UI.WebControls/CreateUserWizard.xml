@@ -87,8 +87,12 @@
 
         
 
+        
+
          control provides the user interface for the <see
          cref="T:System.Web.Security.MembershipProvider" />
+
+        
 
         
 
@@ -101,8 +105,12 @@
 
         
 
+        
+
          relies on the <see
          cref="T:System.Web.Security.MembershipProvider" />
+
+        
 
         
 
@@ -121,10 +129,14 @@
 
           
 
+          
+
            before continuing. For a list of other topics related to login controls and membership, see <format
            type="text/html">
             <a href="824c3a24-f0af-427c-a652-0d2d1e9397cd">Managing Users By Using Membership</a>
           </format>
+
+          
 
           
 
@@ -141,8 +153,12 @@
 
         
 
+        
+
          control will accept a user name and password from the Web site visitor. Based on the requirements of the site's <see
          cref="T:System.Web.Security.MembershipProvider" />
+
+        
 
         
 
@@ -155,8 +171,12 @@
 
         
 
+        
+
          control will optionally accept an e-mail address, represented by the <see
          cref="P:System.Web.UI.WebControls.CreateUserWizard.Email" />
+
+        
 
         
 
@@ -169,8 +189,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.WebControls.CreateUserWizard.Answer" />
+
+        
 
         
 
@@ -183,8 +207,12 @@
 
         
 
+        
+
         , see <see
          cref="P:System.Web.UI.WebControls.CreateUserWizard.CreateUserStep" />
+
+        
 
         
 
@@ -201,8 +229,12 @@
 
           
 
+          
+
            is set to true and the <see
            cref="P:System.Web.Security.Membership.PasswordStrengthRegularExpression" />
+
+          
 
           
 
@@ -225,8 +257,12 @@
 
         
 
+        
+
         , the control interacts with the current <see
          cref="P:System.Web.UI.WebControls.CreateUserWizard.MembershipProvider" />
+
+        
 
         
 
@@ -244,6 +280,8 @@
 
             
 
+            
+
              is set to true.</para
           >
         </item>
@@ -251,6 +289,8 @@
           <para
             >Create the user in the data store that the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.MembershipProvider" />
+
+            
 
             
 
@@ -268,6 +308,8 @@
 
             
 
+            
+
              property is set to true.</para
           >
         </item>
@@ -280,6 +322,8 @@
 
         
 
+        
+
          control to accept additional information by adding additional fields, or by adding additional steps before or after the provided templates in the <see
          cref="P:System.Web.UI.WebControls.CreateUserWizard.CreateUserStep" />
 
@@ -287,8 +331,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.WebControls.CreateUserWizard.CompleteStep" />
+
+        
 
         
 
@@ -305,8 +353,12 @@
 
           
 
+          
+
            step is the first step within the <see
            cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+          
 
           
 
@@ -319,8 +371,12 @@
 
           
 
+          
+
            property is set to false to keep the user from returning to the <see
            cref="T:System.Web.UI.WebControls.CreateUserWizardStep" />
+
+          
 
           
 
@@ -333,6 +389,8 @@
 
           
 
+          
+
            is set to false, the <see
            cref="P:System.Web.UI.WebControls.CreateUserWizardStep.AllowReturn" />
 
@@ -340,8 +398,12 @@
 
           
 
+          
+
            property is not maintained in view state and you must include logic in your application to maintain the <see
            cref="P:System.Web.UI.WebControls.CreateUserWizardStep.AllowReturn" />
+
+          
 
           
 
@@ -357,6 +419,8 @@
 
         
 
+        
+
          control properties represented by text boxes, such as <see
          cref="P:System.Web.UI.WebControls.CreateUserWizard.UserName" />
 
@@ -364,8 +428,12 @@
 
         
 
+        
+
         , are accessible during all phases of the page life cycle. The control will pick up any changes made by the end user by means of the <see
          cref="E:System.Web.UI.WebControls.TextBox.TextChanged" />
+
+        
 
         
 
@@ -381,8 +449,12 @@
 
         
 
+        
+
          control can optionally send e-mail messages to new users if you have configured an SMTP mail server to send e-mail. For more information, see the <see
          cref="P:System.Web.UI.WebControls.CreateUserWizard.MailDefinition" />
+
+        
 
         
 
@@ -394,6 +466,8 @@
         <para
           >The <see
            cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+          
 
           
 
@@ -416,8 +490,12 @@
 
         
 
+        
+
          control is not customized with templates, the <see
          cref="P:System.Web.UI.WebControls.WebControl.AccessKey" />
+
+        
 
         
 
@@ -430,8 +508,12 @@
 
         
 
+        
+
          control applies to the first text box in the control and the <see
          cref="P:System.Web.UI.WebControls.WebControl.TabIndex" />
+
+        
 
         
 
@@ -444,6 +526,8 @@
 
         
 
+        
+
          control is customized with templates, then the <see
          cref="P:System.Web.UI.WebControls.WebControl.AccessKey" />
 
@@ -451,8 +535,12 @@
 
         
 
+        
+
          property and the <see
          cref="P:System.Web.UI.WebControls.WebControl.TabIndex" />
+
+        
 
         
 
@@ -465,8 +553,12 @@
 
         
 
+        
+
          property and the <see
          cref="P:System.Web.UI.WebControls.WebControl.TabIndex" />
+
+        
 
         
 
@@ -481,8 +573,12 @@
 
         
 
+        
+
          control properties represented by text boxes, such as <see
          cref="P:System.Web.UI.WebControls.CreateUserWizard.UserName" />
+
+        
 
         
 
@@ -495,8 +591,12 @@
 
         
 
+        
+
         , are accessible during all phases of the page life cycle. The control will pick up any changes made by the end user by means of the <see
          cref="E:System.Web.UI.WebControls.TextBox.TextChanged" />
+
+        
 
         
 
@@ -513,8 +613,12 @@
 
           
 
+          
+
           , <see
            cref="P:System.Web.UI.WebControls.CreateUserWizard.MembershipProvider" />
+
+          
 
           
 
@@ -527,8 +631,12 @@
 
           
 
+          
+
            property recreates the child controls of the <see
            cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+          
 
           
 
@@ -541,12 +649,16 @@
 
           
 
+          
+
            control's child controls, or avoid putting controls inside of templates.</para
         >
       </block>
       <para
         >The following table lists the <see
          cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+        
 
         
 
@@ -579,6 +691,8 @@
 
               
 
+              
+
                button. </para
             >
           </description>
@@ -592,6 +706,8 @@
           <description>
             <para>
               <ui>Create User</ui>
+
+              
 
               
 
@@ -706,8 +822,12 @@
 
         
 
+        
+
          control uses a validation group so that other fields on the same page as the <see
          cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+        
 
         
 
@@ -720,8 +840,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+        
 
         
 
@@ -734,8 +858,12 @@
 
         
 
+        
+
          control with the ID "CreateUserWizard1" will use a validation group name of "CreateUserWizard1". If you want to set the validation group that the <see
          cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+        
 
         
 
@@ -751,8 +879,12 @@
 
         
 
+        
+
          class inherits from the <see
          cref="T:System.Web.UI.WebControls.Wizard" />
+
+        
 
         
 
@@ -765,8 +897,12 @@
 
         
 
+        
+
          does not attempt to optimize rendering for non-standard Internet Explorer mode. To get the best Internet Explorer rendering using the <see
          cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+        
 
         
 
@@ -788,6 +924,8 @@
 
         
 
+        
+
          control lets you specify the layout of the control without requiring you to use an HTML table element. Instead, you can use a LayoutTemplate element to specify the layout. In the layout template, you create placeholder controls to indicate where items should be dynamically inserted into the control. (This is similar to how the template model for the <see
          cref="T:System.Web.UI.WebControls.ListView" />
 
@@ -795,8 +933,12 @@
 
         
 
+        
+
          control works.) For more information, see the <see
          cref="P:System.Web.UI.WebControls.Wizard.LayoutTemplate" />
+
+        
 
         
 
@@ -822,10 +964,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0">ASP.NET Controls and Accessibility</a>
         </format>
+
+        
 
         
 
@@ -853,11 +999,15 @@
 
         
 
+        
+
         "
     BackColor="color name|#dddddd"
     BorderColor="color name|#dddddd"
     BorderStyle="<codeFeaturedElement
         >NotSet</codeFeaturedElement>
+
+        
 
         
 
@@ -870,6 +1020,8 @@
     CancelButtonText="string"
     CancelButtonType="<codeFeaturedElement
         >Button</codeFeaturedElement>
+
+        
 
         
 
@@ -892,12 +1044,16 @@
 
         
 
+        
+
         |Image|Link"
     ContinueDestinationPageUrl="uri"
     CreateUserButtonImageUrl="uri"
     CreateUserButtonText="string"
     CreateUserButtonType="<codeFeaturedElement
         >Button</codeFeaturedElement>
+
+        
 
         
 
@@ -912,6 +1068,8 @@
 
         
 
+        
+
         "
     DisplayCancelButton="True|<codeFeaturedElement
         >False</codeFeaturedElement>
@@ -920,9 +1078,13 @@
 
         
 
+        
+
         "
     DisplaySideBar="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -946,9 +1108,13 @@
 
         
 
+        
+
         |False"
     EnableTheming="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -962,11 +1128,15 @@
 
         
 
+        
+
         |False"
     FinishCompleteButtonImageUrl="uri"
     FinishCompleteButtonText="string"
     FinishCompleteButtonType="<codeFeaturedElement
         >Button</codeFeaturedElement>
+
+        
 
         
 
@@ -983,9 +1153,13 @@
 
         
 
+        
+
         |Image|Link"
     Font-Bold="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -999,10 +1173,14 @@
 
         
 
+        
+
         "
     Font-Names="string"
     Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1018,9 +1196,13 @@
 
         
 
+        
+
         "
     Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1046,6 +1228,8 @@
 
         
 
+        
+
         |False"
     MailDefinition-BodyFileName="uri"
     MailDefinition-CC="string"
@@ -1057,9 +1241,13 @@
 
         
 
+        
+
         "
     MailDefinition-Priority="<codeFeaturedElement
         >Normal</codeFeaturedElement>
+
+        
 
         
 
@@ -1101,6 +1289,8 @@
 
         
 
+        
+
         |False"
     runat="server"
     SkinID="string"
@@ -1109,6 +1299,8 @@
     StartNextButtonText="string"
     StartNextButtonType="<codeFeaturedElement
         >Button</codeFeaturedElement>
+
+        
 
         
 
@@ -1124,11 +1316,15 @@
 
         
 
+        
+
         |Image|Link"
     StepPreviousButtonImageUrl="uri"
     StepPreviousButtonText="string"
     StepPreviousButtonType="<codeFeaturedElement
         >Button</codeFeaturedElement>
+
+        
 
         
 
@@ -1144,6 +1340,8 @@
     UserNameRequiredErrorMessage="string"
     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -1180,9 +1378,13 @@
 
         
 
+        
+
         "
             Priority="<codeFeaturedElement
         >Normal</codeFeaturedElement>
+
+        
 
         
 
@@ -1228,6 +1430,8 @@
 
         
 
+        
+
         |False"
                     ContentTemplateContainer="string"
                     EnableTheming="<codeFeaturedElement
@@ -1237,9 +1441,13 @@
 
         
 
+        
+
         |False"
                     EnableViewState="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -1264,10 +1472,14 @@
 
         
 
+        
+
         |Complete|Finish|Start|Step"
                     Title="string"
                     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -1290,6 +1502,8 @@
 
         
 
+        
+
         |False"
                     EnableTheming="<codeFeaturedElement
         >True</codeFeaturedElement>
@@ -1298,9 +1512,13 @@
 
         
 
+        
+
         |False"
                     EnableViewState="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -1325,10 +1543,14 @@
 
         
 
+        
+
         |Complete|Finish|Start|Step"
                     Title="string"
                     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -1365,6 +1587,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -1392,6 +1616,8 @@
 
             
 
+            
+
              property provides the zero-based index of the step that is currently displayed in the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
 
@@ -1399,8 +1625,12 @@
 
             
 
+            
+
              control. You can programmatically set the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.ActiveStepIndex" />
+
+            
 
             
 
@@ -1445,11 +1675,15 @@
 
             
 
+            
+
              property will determine whether the question and answer text boxes are displayed at run time.</para
           >
           <para
             >If an answer is required by the membership provider specified in the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.MembershipProvider" />
+
+            
 
             
 
@@ -1462,6 +1696,8 @@
 
             
 
+            
+
              control. Each text box displayed on the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
 
@@ -1469,8 +1705,12 @@
 
             
 
+            
+
              control has a <see
              cref="T:System.Web.UI.WebControls.RequiredFieldValidator" />
+
+            
 
             
 
@@ -1486,10 +1726,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -1505,12 +1749,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -1552,12 +1800,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -1602,12 +1854,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -1652,12 +1908,16 @@
 
             
 
+            
+
              property makes it possible to create user accounts without entering a password for them. For example, this functionality is useful when an administrator creates a new user's account and then gives a password to the user.</para
           >
           <block subset="none" type="note">
             <para
               >You cannot create users using the <see
                cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+              
 
               
 
@@ -1670,8 +1930,12 @@
 
               
 
+              
+
                is set to true and the <see
                cref="P:System.Web.Security.Membership.PasswordStrengthRegularExpression" />
+
+              
 
               
 
@@ -1712,6 +1976,8 @@
 
             
 
+            
+
              property defines the final step for creating a user account. This property is read-only; however, you can set the properties of the <see
              cref="T:System.Web.UI.WebControls.CompleteWizardStep" />
 
@@ -1719,8 +1985,12 @@
 
             
 
+            
+
              object that <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.CompleteStep" />
+
+            
 
             
 
@@ -1765,11 +2035,15 @@
 
             
 
+            
+
              property to change the message that is displayed when a user account is successfully created.</para
           >
           <para
             >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
              cref="T:System.ComponentModel.LocalizableAttribute" />
+
+            
 
             
 
@@ -1781,6 +2055,8 @@
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -1820,8 +2096,12 @@
 
             
 
+            
+
              defines the appearance of the text displayed when a Web site user account is created successfully in the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -1834,8 +2114,12 @@
 
             
 
+            
+
              object that it returns. You can set these properties declaratively in the form Property-Subproperty, where Subproperty represents a property of the <see
              cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+            
 
             
 
@@ -1851,6 +2135,8 @@
 
             
 
+            
+
              property defines the appearance of the text displayed when a Web site user account is created successfully, after the user has clicked the <ui
             >Continue</ui>
 
@@ -1858,8 +2144,12 @@
 
             
 
+            
+
              button on the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.CreateUserStep" />
+
+            
 
             
 
@@ -1875,8 +2165,12 @@
 
             
 
+            
+
              property are merged with the style settings for the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -1889,8 +2183,12 @@
 
             
 
+            
+
              property override the corresponding settings in properties of the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -1906,8 +2204,12 @@
 
             
 
+            
+
              style properties are overridden by <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.CompleteSuccessTextStyle" />
+
+            
 
             
 
@@ -1965,8 +2267,12 @@
 
             
 
+            
+
              control, the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.CompleteSuccessTextStyle" />
+
+            
 
             
 
@@ -2003,8 +2309,12 @@
 
             
 
+            
+
              property contains the second password (the confirmation password) entered by the user. By default, a <see
              cref="T:System.Web.UI.WebControls.CompareValidator" />
+
+            
 
             
 
@@ -2017,8 +2327,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.ConfirmPassword" />
+
+            
 
             
 
@@ -2031,8 +2345,12 @@
 
             
 
+            
+
              control also has a <see
              cref="T:System.Web.UI.WebControls.RequiredFieldValidator" />
+
+            
 
             
 
@@ -2077,12 +2395,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -2127,12 +2449,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -2177,12 +2503,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -2218,8 +2548,12 @@
 
             
 
+            
+
              event is raised when the <ui
             >Continue</ui>
+
+            
 
             
 
@@ -2232,6 +2566,8 @@
 
             
 
+            
+
              control is clicked. Use the <see
              cref="E:System.Web.UI.WebControls.CreateUserWizard.ContinueButtonClick" />
 
@@ -2239,8 +2575,12 @@
 
             
 
+            
+
              event to provide additional processing when the <ui
             >Continue</ui>
+
+            
 
             
 
@@ -2258,6 +2598,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -2266,6 +2608,8 @@
           <para
             >Occurs when the user clicks the <ui
             >Continue</ui>
+
+            
 
             
 
@@ -2300,6 +2644,8 @@
 
             
 
+            
+
              field represents the <see
              cref="P:System.Web.UI.WebControls.Button.CommandName" />
 
@@ -2307,8 +2653,12 @@
 
             
 
+            
+
              value of the <ui
             >Continue</ui>
+
+            
 
             
 
@@ -2324,8 +2674,12 @@
 
             
 
+            
+
              control contained in the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -2338,8 +2692,12 @@
 
             
 
+            
+
              property of the button to the string that is contained in the <see
              cref="F:System.Web.UI.WebControls.CreateUserWizard.ContinueButtonCommandName" />
+
+            
 
             
 
@@ -2355,8 +2713,12 @@
 
             
 
+            
+
              button appears on the template for the final step for creating a user account, which is represented by the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.CompleteStep" />
+
+            
 
             
 
@@ -2369,8 +2731,12 @@
 
             
 
+            
+
              button redirects the user to the URL that is stored in the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.ContinueDestinationPageUrl" />
+
+            
 
             
 
@@ -2383,8 +2749,12 @@
 
             
 
+            
+
              button, create an event handler for the <see
              cref="E:System.Web.UI.WebControls.CreateUserWizard.ContinueButtonClick" />
+
+            
 
             
 
@@ -2403,6 +2773,8 @@
 
             
 
+            
+
              value of the <ui
             >Continue</ui>
 
@@ -2410,8 +2782,12 @@
 
             
 
+            
+
              button on the final step for creating a user account. The <see
              cref="F:System.Web.UI.WebControls.CreateUserWizard.ContinueButtonCommandName" />
+
+            
 
             
 
@@ -2447,8 +2823,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Web.UI.WebControls.ButtonType.Image" />
+
+            
 
             
 
@@ -2461,8 +2841,12 @@
 
             
 
+            
+
              property to specify the image to display for the <ui
             >Continue</ui>
+
+            
 
             
 
@@ -2476,6 +2860,8 @@
           <para
             >Gets or sets the URL of an image used for the <ui
             >Continue</ui>
+
+            
 
             
 
@@ -2511,8 +2897,12 @@
 
             
 
+            
+
              property determines the appearance of the <ui
             >Continue</ui>
+
+            
 
             
 
@@ -2525,8 +2915,12 @@
 
             
 
+            
+
              control, but you can override these settings using the  <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.ContinueButtonStyle" />
+
+            
 
             
 
@@ -2539,8 +2933,12 @@
 
             
 
+            
+
              object it returns. You can set these properties declaratively in the form Property-Subproperty, where Subproperty represents a property of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -2557,8 +2955,12 @@
 
             
 
+            
+
              property are merged with the style settings for the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -2571,8 +2973,12 @@
 
             
 
+            
+
              property override the corresponding settings in the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -2588,8 +2994,12 @@
 
             
 
+            
+
              style properties are overridden by <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.ContinueButtonStyle" />
+
+            
 
             
 
@@ -2647,8 +3057,12 @@
 
             
 
+            
+
              control, the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.ContinueButtonStyle" />
+
+            
 
             
 
@@ -2662,6 +3076,8 @@
           <para
             >Gets a reference to a collection of properties that define the appearance of the <ui
             >Continue</ui>
+
+            
 
             
 
@@ -2702,8 +3118,12 @@
 
             
 
+            
+
              property contains the text displayed for the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -2716,8 +3136,12 @@
 
             
 
+            
+
              button. Depending on the value of the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.ContinueButtonType" />
+
+            
 
             
 
@@ -2730,6 +3154,8 @@
 
             
 
+            
+
              property can appear as text on a button, as text displayed as an alternative to an image, or as the text of a link. The following table lists <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.ContinueButtonType" />
 
@@ -2737,8 +3163,12 @@
 
             
 
+            
+
              property values and their respective effects on the <ui
             >Continue</ui>
+
+            
 
             
 
@@ -2780,12 +3210,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -2799,6 +3233,8 @@
           <para
             >Gets or sets the text caption displayed on the <ui
             >Continue</ui>
+
+            
 
             
 
@@ -2830,6 +3266,8 @@
           <para
             >Gets or sets the type of button rendered as the <ui
             >Continue</ui>
+
+            
 
             
 
@@ -2870,8 +3308,12 @@
 
             
 
+            
+
              property contains the URL of the Web page that the user will see after successfully completing registration on your site. By setting the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.ContinueDestinationPageUrl" />
+
+            
 
             
 
@@ -2887,6 +3329,8 @@
 
             
 
+            
+
              property is <see
              cref="F:System.String.Empty" />
 
@@ -2894,8 +3338,12 @@
 
             
 
+            
+
              and the user clicks the <ui
             >Continue</ui>
+
+            
 
             
 
@@ -2911,10 +3359,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -2928,6 +3380,8 @@
           <para
             >Gets or sets the URL of the page that the user will see after clicking the <ui
             >Continue</ui>
+
+            
 
             
 
@@ -2993,8 +3447,12 @@
 
             
 
+            
+
              event is raised after the membership provider specified in the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.MembershipProvider" />
+
+            
 
             
 
@@ -3007,8 +3465,12 @@
 
             
 
+            
+
              property is true, the user is logged on to the Web site after the <see
              cref="E:System.Web.UI.WebControls.CreateUserWizard.CreatedUser" />
+
+            
 
             
 
@@ -3024,6 +3486,8 @@
 
             
 
+            
+
              event to set Web site values, such as personalization values, before the user is logged on to the site for the first time.</para
           >
           <para
@@ -3031,6 +3495,8 @@
              type="text/html">
               <a href="b6f65241-e0ad-4590-a99f-200ce741bb1f">Handling and Raising Events</a>
             </format>
+
+            
 
             
 
@@ -3070,8 +3536,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Web.UI.WebControls.ButtonType.Image" />
+
+            
 
             
 
@@ -3084,8 +3554,12 @@
 
             
 
+            
+
              property to specify the image to display for the <ui
             >Create User</ui>
+
+            
 
             
 
@@ -3099,6 +3573,8 @@
           <para
             >Gets or sets the URL of an image displayed for the <ui
             >Create User</ui>
+
+            
 
             
 
@@ -3134,8 +3610,12 @@
 
             
 
+            
+
              property defines the appearance of the <ui
             >Create User</ui>
+
+            
 
             
 
@@ -3148,6 +3628,8 @@
 
             
 
+            
+
              control. This property is read-only; however, you can set the properties of the <see
              cref="T:System.Web.UI.WebControls.Style" />
 
@@ -3155,8 +3637,12 @@
 
             
 
+            
+
              object it returns. You can set these properties declaratively in the form Property-Subproperty, where Subproperty represents a property of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -3173,8 +3659,12 @@
 
             
 
+            
+
              property are merged with the style settings for the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -3187,8 +3677,12 @@
 
             
 
+            
+
              property override the corresponding settings in the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -3204,8 +3698,12 @@
 
             
 
+            
+
              style properties are overridden by <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.CreateUserButtonStyle" />
+
+            
 
             
 
@@ -3263,8 +3761,12 @@
 
             
 
+            
+
              control, the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.CreateUserButtonStyle" />
+
+            
 
             
 
@@ -3278,6 +3780,8 @@
           <para
             >Gets a reference to a collection of properties that define the appearance of the <ui
             >Create User</ui>
+
+            
 
             
 
@@ -3318,8 +3822,12 @@
 
             
 
+            
+
              property contains the text displayed for the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -3332,8 +3840,12 @@
 
             
 
+            
+
              button. Depending on the value of the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.CreateUserButtonType" />
+
+            
 
             
 
@@ -3346,6 +3858,8 @@
 
             
 
+            
+
              property can appear as text on a button, as text displayed as an alternative to an image, or as the text of a link. The following table lists <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.CreateUserButtonType" />
 
@@ -3353,8 +3867,12 @@
 
             
 
+            
+
              property values and their respective effects on the <ui
             >Create User</ui>
+
+            
 
             
 
@@ -3396,12 +3914,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -3415,6 +3937,8 @@
           <para
             >Gets or sets the text caption displayed on the <ui
             >Create User</ui>
+
+            
 
             
 
@@ -3451,6 +3975,8 @@
 
             
 
+            
+
              button.</para
           >
         </summary>
@@ -3480,8 +4006,12 @@
 
             
 
+            
+
              event is raised on the server when the membership provider specified in the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.MembershipProvider" />
+
+            
 
             
 
@@ -3497,8 +4027,12 @@
 
             
 
+            
+
              object that contains the details of the failure from the membership provider. For a list of the possible error conditions, see <see
              cref="T:System.Web.Security.MembershipCreateStatus" />
+
+            
 
             
 
@@ -3511,6 +4045,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -3550,8 +4086,12 @@
 
             
 
+            
+
              property defines the account creation step of a <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -3564,8 +4104,12 @@
 
             
 
+            
+
              object that <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.CreateUserStep" />
+
+            
 
             
 
@@ -3576,6 +4120,8 @@
           <para
             >The following table lists the required and optional controls that are supported when using templated content for the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.CreateUserStep" />
+
+            
 
             
 
@@ -3610,8 +4156,12 @@
 
                   
 
+                  
+
                   , including <see
                    cref="T:System.Web.UI.WebControls.TextBox" />
+
+                  
 
                   
 
@@ -3637,8 +4187,12 @@
 
                   
 
+                  
+
                   , including <see
                    cref="T:System.Web.UI.WebControls.TextBox" />
+
+                  
 
                   
 
@@ -3651,6 +4205,8 @@
                 <para
                   >Required if <see
                    cref="P:System.Web.UI.WebControls.CreateUserWizard.AutoGeneratePassword" />
+
+                  
 
                   
 
@@ -3673,8 +4229,12 @@
 
                   
 
+                  
+
                   , including <see
                    cref="T:System.Web.UI.WebControls.TextBox" />
+
+                  
 
                   
 
@@ -3687,6 +4247,8 @@
                 <para
                   >Required if <see
                    cref="P:System.Web.UI.WebControls.CreateUserWizard.RequireEmail" />
+
+                  
 
                   
 
@@ -3709,8 +4271,12 @@
 
                   
 
+                  
+
                   , including <see
                    cref="T:System.Web.UI.WebControls.TextBox" />
+
+                  
 
                   
 
@@ -3736,8 +4302,12 @@
 
                   
 
+                  
+
                   , including <see
                    cref="T:System.Web.UI.WebControls.TextBox" />
+
+                  
 
                   
 
@@ -3763,8 +4333,12 @@
 
                   
 
+                  
+
                   , including <see
                    cref="T:System.Web.UI.WebControls.TextBox" />
+
+                  
 
                   
 
@@ -3785,6 +4359,8 @@
                 <para
                   >Any control that implements <see
                    cref="T:System.Web.UI.ITextControl" />
+
+                  
 
                   
 
@@ -3828,8 +4404,12 @@
 
             
 
+            
+
              property is set to true and you are using templated content, the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.Email" />
+
+            
 
             
 
@@ -3842,8 +4422,12 @@
 
             
 
+            
+
              control throws an exception if the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.Email" />
+
+            
 
             
 
@@ -3856,8 +4440,12 @@
 
             
 
+            
+
              is set to false, no exception is thrown if the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.Email" />
+
+            
 
             
 
@@ -3873,8 +4461,12 @@
 
             
 
+            
+
              property), the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.Question" />
+
+            
 
             
 
@@ -3887,8 +4479,12 @@
 
             
 
+            
+
              controls are required and the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -3927,6 +4523,8 @@
 
             
 
+            
+
              event is raised prior to calling the <see
              cref="M:System.Web.Security.MembershipProvider.CreateUser(System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Object,System.Web.Security.MembershipCreateStatus@)" />
 
@@ -3934,8 +4532,12 @@
 
             
 
+            
+
              method on the membership provider specified in the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.MembershipProvider" />
+
+            
 
             
 
@@ -3951,6 +4553,8 @@
 
             
 
+            
+
              event to establish defaults or modify the information entered by the user before passing the information to the membership provider.</para
           >
           <para
@@ -3958,6 +4562,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -3999,8 +4605,12 @@
 
             
 
+            
+
              property determines if the newly created user account will be marked as disabled in the membership data store. When user accounts are marked as disabled, the accounts are not allowed to log on to the Web site. For example, if your Web site allows new users to request an account, but requires administrative approval before allowing access, set the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.DisableCreatedUser" />
+
+            
 
             
 
@@ -4016,6 +4626,8 @@
 
             
 
+            
+
              is true, you should set the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.LoginCreatedUser" />
 
@@ -4023,8 +4635,12 @@
 
             
 
+            
+
              property to false so that the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -4040,10 +4656,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -4107,12 +4727,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -4157,12 +4781,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -4226,12 +4854,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -4287,8 +4919,12 @@
 
             
 
+            
+
              property, then the e-mail address text box appears on the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -4301,8 +4937,12 @@
 
             
 
+            
+
              control has a <see
              cref="T:System.Web.UI.WebControls.RequiredFieldValidator" />
+
+            
 
             
 
@@ -4344,12 +4984,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -4389,8 +5033,12 @@
 
             
 
+            
+
              property to specify a regular expression that validates the e-mail address entered by the user to confirm that it matches a specific pattern. A common use is to make sure that the user has entered a complete e-mail address, such as <userInputLocalizable
             >user@contoso.com</userInputLocalizable>
+
+            
 
             
 
@@ -4403,8 +5051,12 @@
 
             
 
+            
+
              property. If the membership provider rejects the e-mail address for any reason, the text contained in the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.InvalidEmailErrorMessage" />
+
+            
 
             
 
@@ -4420,11 +5072,15 @@
 
             
 
+            
+
              property is set to true.</para
           >
           <para
             >If the e-mail address does not pass the regular expression, the text contained in the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.EmailRegularExpressionErrorMessage" />
+
+            
 
             
 
@@ -4459,6 +5115,8 @@
           <para
             >Use the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.EmailRegularExpressionErrorMessage" />
+
+            
 
             
 
@@ -4503,12 +5161,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -4548,8 +5210,12 @@
 
             
 
+            
+
              property to change the appearance of error messages that are displayed when the membership provider fails to create a new user account. By default, the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.ErrorMessageStyle" />
+
+            
 
             
 
@@ -4602,6 +5268,8 @@
 
             
 
+            
+
              property is read-only; however, you can set the properties of the <see
              cref="T:System.Web.UI.WebControls.TableItemStyle" />
 
@@ -4609,8 +5277,12 @@
 
             
 
+            
+
              object it returns. You can set these properties declaratively in the form Property-Subproperty, where Subproperty represents a property of the <see
              cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+            
 
             
 
@@ -4626,8 +5298,12 @@
 
             
 
+            
+
              property are merged with the style settings for the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -4640,8 +5316,12 @@
 
             
 
+            
+
              property override the corresponding settings in the properties of the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -4657,8 +5337,12 @@
 
             
 
+            
+
              style properties are overridden by <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.ErrorMessageStyle" />
+
+            
 
             
 
@@ -4716,8 +5400,12 @@
 
             
 
+            
+
              control, the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.ErrorMessageStyle" />
+
+            
 
             
 
@@ -4804,12 +5492,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -4868,6 +5560,8 @@
 
             
 
+            
+
              property gets a reference to a <see
              cref="T:System.Web.UI.WebControls.TableItemStyle" />
 
@@ -4875,8 +5569,12 @@
 
             
 
+            
+
              object that you use to change the appearance of hyperlinks in the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -4892,6 +5590,8 @@
 
             
 
+            
+
              property is read-only; however, you can set the properties of the <see
              cref="T:System.Web.UI.WebControls.TableItemStyle" />
 
@@ -4899,8 +5599,12 @@
 
             
 
+            
+
              object it returns. You can set these properties declaratively in the form Property-Subproperty, where Subproperty represents a property of the <see
              cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+            
 
             
 
@@ -4916,8 +5620,12 @@
 
             
 
+            
+
              property are merged with the style settings for the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -4930,8 +5638,12 @@
 
             
 
+            
+
              property override the corresponding settings in the properties of the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -4947,8 +5659,12 @@
 
             
 
+            
+
              style properties are overridden by <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.HyperLinkStyle" />
+
+            
 
             
 
@@ -5006,8 +5722,12 @@
 
             
 
+            
+
              control, the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.HyperLinkStyle" />
+
+            
 
             
 
@@ -5049,8 +5769,12 @@
 
             
 
+            
+
              property contains instructions for users creating a new user account. This text is displayed in the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -5066,11 +5790,15 @@
 
             
 
+            
+
              property is set to an empty string (""), no instruction text is displayed to the user.</para
           >
           <para
             >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
              cref="T:System.ComponentModel.LocalizableAttribute" />
+
+            
 
             
 
@@ -5082,6 +5810,8 @@
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -5121,8 +5851,12 @@
 
             
 
+            
+
              property defines the appearance of instruction text in the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -5135,8 +5869,12 @@
 
             
 
+            
+
              object that it returns. You can set these properties declaratively in the form Property-Subproperty, where Subproperty represents a property of the <see
              cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+            
 
             
 
@@ -5152,8 +5890,12 @@
 
             
 
+            
+
              property defines the appearance of the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.InstructionText" />
+
+            
 
             
 
@@ -5169,8 +5911,12 @@
 
             
 
+            
+
              property are merged with the style settings for the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -5183,8 +5929,12 @@
 
             
 
+            
+
              property override the corresponding settings in properties of the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -5200,8 +5950,12 @@
 
             
 
+            
+
              style properties are overridden by <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.InstructionTextStyle" />
+
+            
 
             
 
@@ -5259,8 +6013,12 @@
 
             
 
+            
+
              control, the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.InstructionTextStyle" />
+
+            
 
             
 
@@ -5305,6 +6063,8 @@
 
             
 
+            
+
              class membership provider specified in the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.MembershipProvider" />
 
@@ -5312,8 +6072,12 @@
 
             
 
+            
+
              property can support a question and answer for retrieving or resetting the user's password. The <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.InvalidAnswerErrorMessage" />
+
+            
 
             
 
@@ -5329,12 +6093,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -5379,6 +6147,8 @@
 
             
 
+            
+
              class membership provider specified in the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.MembershipProvider" />
 
@@ -5386,8 +6156,12 @@
 
             
 
+            
+
              property can restrict the e-mail addresses that it will accept. The <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.InvalidEmailErrorMessage" />
+
+            
 
             
 
@@ -5403,12 +6177,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -5453,6 +6231,8 @@
 
             
 
+            
+
              class membership provider specified in the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.MembershipProvider" />
 
@@ -5460,8 +6240,12 @@
 
             
 
+            
+
              property can restrict the passwords that it will accept. The <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.InvalidPasswordErrorMessage" />
+
+            
 
             
 
@@ -5477,12 +6261,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -5527,6 +6315,8 @@
 
             
 
+            
+
              class membership provider specified in the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.MembershipProvider" />
 
@@ -5534,8 +6324,12 @@
 
             
 
+            
+
              property can restrict the password retrieval questions that it will accept. The <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.InvalidQuestionErrorMessage" />
+
+            
 
             
 
@@ -5551,12 +6345,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -5596,8 +6394,12 @@
 
             
 
+            
+
              property defines the appearance of labels in the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -5610,8 +6412,12 @@
 
             
 
+            
+
              object that it returns. You can set these properties declaratively in the form Property-Subproperty, where Subproperty represents a property of the <see
              cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+            
 
             
 
@@ -5622,6 +6428,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.LabelStyle" />
+
+            
 
             
 
@@ -5669,8 +6477,12 @@
 
             
 
+            
+
              property are merged with the style settings for the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -5683,8 +6495,12 @@
 
             
 
+            
+
              property override the corresponding settings in properties of the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -5700,8 +6516,12 @@
 
             
 
+            
+
              style properties are overridden by <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.LabelStyle" />
+
+            
 
             
 
@@ -5759,8 +6579,12 @@
 
             
 
+            
+
              control, the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.LabelStyle" />
+
+            
 
             
 
@@ -5827,12 +6651,16 @@
 
             
 
+            
+
              property can be set to false if you want to create a user account but not authenticate the account after it is created. This might be useful if you are an administrator creating user accounts, for example, or if there is a waiting period before users can access the Web site.</para
           >
           <block subset="none" type="note">
             <para
               >When the <see
                cref="P:System.Web.UI.WebControls.CreateUserWizard.LoginCreatedUser" />
+
+              
 
               
 
@@ -5845,6 +6673,8 @@
 
               
 
+              
+
                step. If you want the user to be logged in after all the steps have been completed, you can set the <see
                cref="P:System.Web.UI.WebControls.CreateUserWizard.DisableCreatedUser" />
 
@@ -5852,8 +6682,12 @@
 
               
 
+              
+
                property to false until all of the steps of the <see
                cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+              
 
               
 
@@ -5870,10 +6704,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -5920,8 +6758,12 @@
 
             
 
+            
+
              property returns a reference to a group of properties that you use to define the format and content of the e-mail message that is sent to new users. Common settings include the subject line and the sender's return address. For a complete list of properties, see the <see
              cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+            
 
             
 
@@ -5937,8 +6779,12 @@
 
             
 
+            
+
              property is read-only; however, you can set the properties of the <see
              cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+            
 
             
 
@@ -5951,6 +6797,8 @@
 
             
 
+            
+
              properties declaratively in the form Property-Subproperty, where <paramref
              name="Subproperty" />
 
@@ -5958,8 +6806,12 @@
 
             
 
+            
+
              represents a property of the <see
              cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+            
 
             
 
@@ -5975,8 +6827,12 @@
 
             
 
+            
+
              is not null and if <see
              cref="P:System.Web.Mail.MailMessage.Body" />
+
+            
 
             
 
@@ -5989,8 +6845,12 @@
 
             
 
+            
+
              event is raised and an attempt is made to send the e-mail message. The <see
              cref="P:System.Web.UI.WebControls.MailDefinition.From" />
+
+            
 
             
 
@@ -6003,11 +6863,15 @@
 
             
 
+            
+
              exception is thrown.</para
           >
           <para
             >When the e-mail message is created from the <see
              cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+            
 
             
 
@@ -6051,8 +6915,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+            
 
             
 
@@ -6068,6 +6936,8 @@
 
             
 
+            
+
              method to modify the <see
              cref="T:System.Web.Mail.MailMessage" />
 
@@ -6075,8 +6945,12 @@
 
             
 
+            
+
              created by the <see
              cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+            
 
             
 
@@ -6092,10 +6966,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -6140,8 +7018,12 @@
 
             
 
+            
+
              property contains the name of the defined <see
              cref="T:System.Web.Security.MembershipProvider" />
+
+            
 
             
 
@@ -6154,6 +7036,8 @@
 
             
 
+            
+
              property. When the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.MembershipProvider" />
 
@@ -6161,8 +7045,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -6179,10 +7067,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -6231,10 +7123,14 @@
 
           
 
+          
+
            None</param
         >
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6271,6 +7167,8 @@
 
             
 
+            
+
              event is raised when the user clicks the <ui
             >Continue</ui>
 
@@ -6278,8 +7176,12 @@
 
             
 
+            
+
              button on the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -6297,11 +7199,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.CreateUserWizard.OnContinueButtonClick(System.EventArgs)" />
+
+            
 
             
 
@@ -6320,8 +7226,12 @@
 
             
 
+            
+
              event when the user clicks the <ui
             >Continue</ui>
+
+            
 
             
 
@@ -6337,8 +7247,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -6372,8 +7286,12 @@
 
             
 
+            
+
              method is called after the Web site user account is created by the membership provider. If the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.LoginCreatedUser" />
+
+            
 
             
 
@@ -6386,11 +7304,15 @@
 
             
 
+            
+
              method is called.</para
           >
           <para
             >Use the <see
              cref="M:System.Web.UI.WebControls.CreateUserWizard.OnCreatedUser(System.EventArgs)" />
+
+            
 
             
 
@@ -6408,11 +7330,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.CreateUserWizard.OnCreatedUser(System.EventArgs)" />
+
+            
 
             
 
@@ -6431,6 +7357,8 @@
 
             
 
+            
+
              event after the membership provider creates the user account.</para
           >
         </summary>
@@ -6441,8 +7369,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -6479,8 +7411,12 @@
 
             
 
+            
+
              method is called when the membership provider specified in the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.MembershipProvider" />
+
+            
 
             
 
@@ -6493,8 +7429,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.CreateUserErrorEventArgs" />
+
+            
 
             
 
@@ -6507,8 +7447,12 @@
 
             
 
+            
+
              parameter contains a <see
              cref="T:System.Web.Security.MembershipCreateStatus" />
+
+            
 
             
 
@@ -6526,11 +7470,15 @@
 
             
 
+            
+
             . </para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.CreateUserWizard.OnCreateUserError(System.Web.UI.WebControls.CreateUserErrorEventArgs)" />
+
+            
 
             
 
@@ -6549,6 +7497,8 @@
 
             
 
+            
+
              event when there is a problem creating the specified user account.</para
           >
         </summary>
@@ -6559,8 +7509,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.CreateUserErrorEventArgs" />
+
+          
 
           
 
@@ -6597,6 +7551,8 @@
 
             
 
+            
+
              method to do any processing required before sending the new user information to the <see
              cref="M:System.Web.Security.MembershipProvider.CreateUser(System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Object,System.Web.Security.MembershipCreateStatus@)" />
 
@@ -6604,8 +7560,12 @@
 
             
 
+            
+
              method of the membership provider specified in the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.MembershipProvider" />
+
+            
 
             
 
@@ -6621,6 +7581,8 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.LoginCancelEventArgs" />
 
@@ -6628,8 +7590,12 @@
 
             
 
+            
+
              object passed as the <paramref
              name="e" />
+
+            
 
             
 
@@ -6647,11 +7613,15 @@
 
             
 
+            
+
             . </para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.CreateUserWizard.OnCreatingUser(System.Web.UI.WebControls.LoginCancelEventArgs)" />
+
+            
 
             
 
@@ -6670,6 +7640,8 @@
 
             
 
+            
+
              event prior to calling the membership provider to create the new user account.</para
           >
         </summary>
@@ -6680,8 +7652,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.LoginCancelEventArgs" />
+
+          
 
           
 
@@ -6720,8 +7696,12 @@
 
             
 
+            
+
              event when the user clicks the <ui
             >Next</ui>
+
+            
 
             
 
@@ -6777,8 +7757,12 @@
 
             
 
+            
+
              method to modify the e-mail message sent to new users. The <see
              cref="P:System.Web.UI.WebControls.MailMessageEventArgs.Message" />
+
+            
 
             
 
@@ -6791,8 +7775,12 @@
 
             
 
+            
+
              object passed as the <paramref
              name="e" />
+
+            
 
             
 
@@ -6805,8 +7793,12 @@
 
             
 
+            
+
              object that will be sent to the new user. Modify the properties of the <see
              cref="T:System.Web.Mail.MailMessage" />
+
+            
 
             
 
@@ -6822,6 +7814,8 @@
 
             
 
+            
+
              property of the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.MailDefinition" />
 
@@ -6829,8 +7823,12 @@
 
             
 
+            
+
              object specified by the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.MailDefinition" />
+
+            
 
             
 
@@ -6848,11 +7846,15 @@
 
             
 
+            
+
             . </para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.CreateUserWizard.OnSendingMail(System.Web.UI.WebControls.MailMessageEventArgs)" />
+
+            
 
             
 
@@ -6871,6 +7873,8 @@
 
             
 
+            
+
              event before an e-mail message is sent to a new user.</para
           >
         </summary>
@@ -6881,8 +7885,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.MailMessageEventArgs" />
+
+          
 
           
 
@@ -6919,11 +7927,15 @@
 
             
 
+            
+
              method is called when the SMTP mail system raises an exception while attempting to send e-mail to the new user. </para
           >
           <para
             >Examine the <see
              cref="P:System.Web.UI.WebControls.SendMailErrorEventArgs.Exception" />
+
+            
 
             
 
@@ -6936,8 +7948,12 @@
 
             
 
+            
+
              object passed as the <paramref
              name="e" />
+
+            
 
             
 
@@ -6953,8 +7969,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.SendMailErrorEventArgs" />
+
+            
 
             
 
@@ -6967,8 +7987,12 @@
 
             
 
+            
+
              parameter to signal that the exception that caused the <see
              cref="M:System.Web.UI.WebControls.CreateUserWizard.OnSendMailError(System.Web.UI.WebControls.SendMailErrorEventArgs)" />
+
+            
 
             
 
@@ -6986,11 +8010,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.CreateUserWizard.OnSendMailError(System.Web.UI.WebControls.SendMailErrorEventArgs)" />
+
+            
 
             
 
@@ -7009,6 +8037,8 @@
 
             
 
+            
+
              event when e-mail cannot be sent to the new user.</para
           >
         </summary>
@@ -7019,8 +8049,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.SendMailErrorEventArgs" />
+
+          
 
           
 
@@ -7052,8 +8086,12 @@
 
             
 
+            
+
              property contains the password entered by the user. By default, a <see
              cref="T:System.Web.UI.WebControls.CompareValidator" />
+
+            
 
             
 
@@ -7066,8 +8104,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.ConfirmPassword" />
+
+            
 
             
 
@@ -7080,8 +8122,12 @@
 
             
 
+            
+
              control also has a <see
              cref="T:System.Web.UI.MobileControls.RequiredFieldValidator" />
+
+            
 
             
 
@@ -7121,8 +8167,12 @@
 
             
 
+            
+
              property defines the appearance of the text that describes password requirements in the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -7135,8 +8185,12 @@
 
             
 
+            
+
              object that it returns. You can set these properties declaratively in the form Property-Subproperty, where Subproperty represents a property of the <see
              cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+            
 
             
 
@@ -7152,8 +8206,12 @@
 
             
 
+            
+
              property defines the appearance of the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.PasswordHintText" />
+
+            
 
             
 
@@ -7169,8 +8227,12 @@
 
             
 
+            
+
              property are merged with the style settings for the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -7183,8 +8245,12 @@
 
             
 
+            
+
              property override the corresponding settings in properties of the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -7200,8 +8266,12 @@
 
             
 
+            
+
              style properties are overridden by <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.PasswordHintStyle" />
+
+            
 
             
 
@@ -7259,8 +8329,12 @@
 
             
 
+            
+
              control, the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.PasswordHintStyle" />
+
+            
 
             
 
@@ -7302,6 +8376,8 @@
 
             
 
+            
+
              property to provide guidelines and requirements for the user on how to create a password. For example, you could set the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.PasswordHintText" />
 
@@ -7309,8 +8385,12 @@
 
             
 
+            
+
              property to "Your password must be at least six characters long." You can then use the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.PasswordRegularExpression" />
+
+            
 
             
 
@@ -7326,12 +8406,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -7376,12 +8460,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -7421,8 +8509,12 @@
 
             
 
+            
+
              property to define the requirements for passwords used to validate users on your Web site. A common use is to make sure that a user has included symbols other than letters in a password to make it harder for attackers to guess a password. The regular expression is used in addition to any restrictions placed on the password by the membership provider specified in the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.MembershipProvider" />
+
+            
 
             
 
@@ -7435,11 +8527,15 @@
 
             
 
+            
+
              property is displayed.</para
           >
           <para
             >If the password entered does not pass the regular expression, the error message contained in the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.PasswordRegularExpressionErrorMessage" />
+
+            
 
             
 
@@ -7474,6 +8570,8 @@
           <para
             >Use the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.PasswordRegularExpressionErrorMessage" />
+
+            
 
             
 
@@ -7518,12 +8616,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -7568,8 +8670,12 @@
 
             
 
+            
+
              property will determine whether the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.Question" />
+
+            
 
             
 
@@ -7582,6 +8688,8 @@
 
             
 
+            
+
              text boxes are displayed at run time. Each text box displayed on the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
 
@@ -7589,8 +8697,12 @@
 
             
 
+            
+
              control has a <see
              cref="T:System.Web.UI.WebControls.RequiredFieldValidator" />
+
+            
 
             
 
@@ -7606,10 +8718,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -7625,12 +8741,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -7669,8 +8789,12 @@
 
             
 
+            
+
              property returns a value from the membership provider set in the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.MembershipProvider" />
+
+            
 
             
 
@@ -7686,6 +8810,8 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.Answer" />
 
@@ -7693,8 +8819,12 @@
 
             
 
+            
+
              controls are required and the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -7736,12 +8866,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -7786,12 +8920,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -7833,6 +8971,8 @@
 
             
 
+            
+
              property is true, the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
 
@@ -7840,8 +8980,12 @@
 
             
 
+            
+
              will display a text box and an associated label for the user to enter an e-mail address. If the user does not enter an e-mail address, the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.EmailRequiredErrorMessage" />
+
+            
 
             
 
@@ -7857,8 +9001,12 @@
 
             
 
+            
+
              property is set to true and you are using templated content, the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.Email" />
+
+            
 
             
 
@@ -7871,8 +9019,12 @@
 
             
 
+            
+
              throws an exception if the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.Email" />
+
+            
 
             
 
@@ -7885,8 +9037,12 @@
 
             
 
+            
+
              is set to false, no exception is thrown if the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.Email" />
+
+            
 
             
 
@@ -7903,6 +9059,8 @@
 
               
 
+              
+
                property requires a unique e-mail address for new users, you must set the <see
                cref="P:System.Web.UI.WebControls.CreateUserWizard.RequireEmail" />
 
@@ -7910,8 +9068,12 @@
 
               
 
+              
+
                property to true so that the UI for entering an e-mail address is displayed. Otherwise, the user will see the <see
                cref="P:System.Web.UI.WebControls.CreateUserWizard.EmailRequiredErrorMessage" />
+
+              
 
               
 
@@ -7928,10 +9090,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -7990,8 +9156,12 @@
 
             
 
+            
+
              class will send an e-mail message confirming that a new Web site account has been created when the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.MailDefinition" />
+
+            
 
             
 
@@ -8007,6 +9177,8 @@
 
             
 
+            
+
              event to modify the e-mail message before it is sent to the new user.</para
           >
           <para
@@ -8014,6 +9186,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -8052,11 +9226,15 @@
 
             
 
+            
+
              event is raised when there is a problem using the SMTP mail provider to send e-mail to the e-mail address provided by the new user. The most common reason to raise this event is when the &lt;smtpMail&gt; section of the Web.config file is incorrect.</para
           >
           <para
             >The default <see
              cref="E:System.Web.UI.WebControls.CreateUserWizard.SendMailError" />
+
+            
 
             
 
@@ -8069,8 +9247,12 @@
 
             
 
+            
+
              event handler must set the <see
              cref="P:System.Web.UI.WebControls.SendMailErrorEventArgs.Handled" />
+
+            
 
             
 
@@ -8083,6 +9265,8 @@
 
             
 
+            
+
              object to true in order to stop the error from appearing to the Web site user.</para
           >
           <para
@@ -8090,6 +9274,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -8148,12 +9334,16 @@
 
             
 
+            
+
              property to specify the alternate text for a hidden-image read by screen readers that will provide the ability to skip the sidebar area's content. The text that you specify provides assistive technology devices with a description of the hidden image that can be used to make the control more accessible.</para
           >
           <block subset="none" type="note">
             <para
               >If the <see
                cref="P:System.Web.UI.WebControls.CreateUserWizard.DisplaySideBar" />
+
+              
 
               
 
@@ -8166,6 +9356,8 @@
 
               
 
+              
+
                property does not create a hidden image with alternate text. The <see
                cref="P:System.Web.UI.WebControls.CreateUserWizard.SkipLinkText" />
 
@@ -8173,8 +9365,12 @@
 
               
 
+              
+
                property works only when the <see
                cref="P:System.Web.UI.WebControls.CreateUserWizard.DisplaySideBar" />
+
+              
 
               
 
@@ -8215,8 +9411,12 @@
 
             
 
+            
+
              property defines the appearance of text box controls in the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -8229,8 +9429,12 @@
 
             
 
+            
+
              object that it returns. You can set these properties declaratively in the form Property-Subproperty, where Subproperty represents a property of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -8241,6 +9445,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.TextBoxStyle" />
+
+            
 
             
 
@@ -8257,12 +9463,16 @@
 
                 
 
+                
+
                  text box field</para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.Web.UI.WebControls.CreateUserWizard.Password" />
+
+                
 
                 
 
@@ -8279,6 +9489,8 @@
 
                 
 
+                
+
                  text box field</para
               >
             </item>
@@ -8290,12 +9502,16 @@
 
                 
 
+                
+
                  text box field</para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.Web.UI.WebControls.CreateUserWizard.Answer" />
+
+                
 
                 
 
@@ -8313,8 +9529,12 @@
 
             
 
+            
+
              property are merged with the style settings for the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -8327,8 +9547,12 @@
 
             
 
+            
+
              property override the corresponding settings in properties of the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -8344,8 +9568,12 @@
 
             
 
+            
+
              style properties are overridden by <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.TextBoxStyle" />
+
+            
 
             
 
@@ -8403,8 +9631,12 @@
 
             
 
+            
+
              control, the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.TextBoxStyle" />
+
+            
 
             
 
@@ -8444,8 +9676,12 @@
 
             
 
+            
+
              property defines the appearance of titles in the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -8458,8 +9694,12 @@
 
             
 
+            
+
              object that it returns. You can set these properties declaratively in the form Property-Subproperty, where Subproperty represents a property of the <see
              cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+            
 
             
 
@@ -8475,6 +9715,8 @@
 
             
 
+            
+
              property defines the appearance of the title on the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.CreateUserStep" />
 
@@ -8482,8 +9724,12 @@
 
             
 
+            
+
              step and the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.CompleteStep" />
+
+            
 
             
 
@@ -8499,8 +9745,12 @@
 
             
 
+            
+
              property are merged with the style settings for the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -8513,8 +9763,12 @@
 
             
 
+            
+
              property override the corresponding settings in properties of the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -8530,8 +9784,12 @@
 
             
 
+            
+
              style properties are overridden by <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.TitleTextStyle" />
+
+            
 
             
 
@@ -8589,8 +9847,12 @@
 
             
 
+            
+
              control, the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.TitleTextStyle" />
+
+            
 
             
 
@@ -8654,12 +9916,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -8696,8 +9962,12 @@
 
             
 
+            
+
              property, then the user name text box will appear on the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -8710,8 +9980,12 @@
 
             
 
+            
+
              control has a <see
              cref="T:System.Web.UI.WebControls.RequiredFieldValidator" />
+
+            
 
             
 
@@ -8756,12 +10030,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -8806,12 +10084,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -8851,8 +10133,12 @@
 
             
 
+            
+
              property to change the appearance of messages that are displayed for input validation errors. By default, the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.ValidatorTextStyle" />
+
+            
 
             
 
@@ -8910,6 +10196,8 @@
 
             
 
+            
+
              property is read-only; however, you can set the properties of the <see
              cref="T:System.Web.UI.WebControls.Style" />
 
@@ -8917,8 +10205,12 @@
 
             
 
+            
+
              object it returns. You can set these properties declaratively in the form Property-Subproperty, where Subproperty represents a property of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -8934,8 +10226,12 @@
 
             
 
+            
+
              property are merged with the style settings for the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -8948,8 +10244,12 @@
 
             
 
+            
+
              property override the corresponding settings in the properties of the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -8965,8 +10265,12 @@
 
             
 
+            
+
              style properties are overridden by <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.ValidatorTextStyle" />
+
+            
 
             
 
@@ -9024,8 +10328,12 @@
 
             
 
+            
+
              control, the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.ValidatorTextStyle" />
+
+            
 
             
 
@@ -9039,6 +10347,8 @@
           <para
             >Gets a reference to the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -9079,8 +10389,12 @@
 
             
 
+            
+
              property returns a collection of <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 
@@ -9093,8 +10407,12 @@
 
             
 
+            
+
              control. You can use the <see
              cref="P:System.Web.UI.WebControls.CreateUserWizard.WizardSteps" />
+
+            
 
             
 
@@ -9107,8 +10425,12 @@
 
             
 
+            
+
              objects contained in the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -9121,8 +10443,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Web.UI.WebControls.WizardStepCollection.Remove(System.Web.UI.WebControls.WizardStepBase)" />
+
+            
 
             
 
@@ -9135,6 +10461,8 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Web.UI.WebControls.WizardStepCollection.Insert(System.Int32,System.Web.UI.WebControls.WizardStepBase)" />
 
@@ -9142,8 +10470,12 @@
 
             
 
+            
+
              methods to programmatically manipulate the <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 
@@ -9157,6 +10489,8 @@
           <para
             >Gets a reference to a collection containing all the <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 

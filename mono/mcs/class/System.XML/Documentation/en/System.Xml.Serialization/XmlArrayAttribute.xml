@@ -37,8 +37,12 @@
 
         
 
+        
+
          belongs to a family of attributes that controls how the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -55,11 +59,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >You can apply the <see
          cref="T:System.Xml.Serialization.XmlArrayAttribute" />
+
+        
 
         
 
@@ -72,8 +80,12 @@
 
         
 
+        
+
          or any field that returns an object that implements the <see
          cref="T:System.Collections.IEnumerable" />
+
+        
 
         
 
@@ -89,8 +101,12 @@
 
         
 
+        
+
          to a class member, the <see
          cref="M:System.Xml.Serialization.XmlSerializer.Serialize(System.IO.TextWriter,System.Object)" />
+
+        
 
         
 
@@ -103,8 +119,12 @@
 
         
 
+        
+
          class generates a nested sequence of XML elements from that member. An XML schema document (an .xsd file), indicates such an array as a complexType. For example, if the class to be serialized represents a purchase order, you can generate an array of purchased items by applying the <see
          cref="T:System.Xml.Serialization.XmlArrayAttribute" />
+
+        
 
         
 
@@ -120,8 +140,12 @@
 
         
 
+        
+
          generates a nested sequence of XML elements by default. To more precisely control what XML elements are generated, apply an <see
          cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+
+        
 
         
 
@@ -134,8 +158,12 @@
 
         
 
+        
+
          to the field or property. For example, by default, the name of the generated XML element is derived from the member identifier You can change the name of the generated XML element by setting the <see
          cref="P:System.Xml.Serialization.XmlArrayAttribute.ElementName" />
+
+        
 
         
 
@@ -151,12 +179,16 @@
 
         
 
+        
+
          to declare each of the types.</para
       >
       <block subset="none" type="note">
         <para
           >You can use XmlArray in your code instead of the longer <see
            cref="T:System.Xml.Serialization.XmlArrayAttribute" />
+
+          
 
           
 
@@ -175,6 +207,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -183,6 +217,8 @@
       <para
         >Specifies that the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -220,6 +256,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -228,6 +266,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Serialization.XmlArrayAttribute" />
+
+            
 
             
 
@@ -267,6 +307,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -275,6 +317,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Serialization.XmlArrayAttribute" />
+
+            
 
             
 
@@ -290,8 +334,12 @@
 
           
 
+          
+
           The name of the XML element that the <see
            cref="T:System.Xml.Serialization.XmlSerializer" />
+
+          
 
           
 
@@ -326,6 +374,8 @@
 
             
 
+            
+
              when you want the generated XML element name to differ from the member's identifier.</para
           >
           <para
@@ -336,8 +386,12 @@
 
             
 
+            
+
              value to more than one member as long as the generated XML document uses XML namespaces to distinguish between the identically named members. For more details about using namespaces and creating prefixed names in the XML document, see <see
              cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+
+            
 
             
 
@@ -383,8 +437,12 @@
 
             
 
+            
+
              property determines whether an XML element name is qualified or unqualified. The <see
              cref="P:System.Xml.Serialization.XmlArrayAttribute.Form" />
+
+            
 
             
 
@@ -400,8 +458,12 @@
 
             
 
+            
+
              property is set to any value, attempting to set the <see
              cref="P:System.Xml.Serialization.XmlElementAttribute.Form" />
+
+            
 
             
 
@@ -417,8 +479,12 @@
 
             
 
+            
+
              to check the schema for the XML document to determine whether the namespace is qualified. If the schema does not specify a value for an individual element or attribute, the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -439,8 +505,12 @@
 
             
 
+            
+
              reads the schema, the <see
              cref="P:System.Xml.Serialization.XmlAttributeAttribute.Form" />
+
+            
 
             
 
@@ -454,6 +524,8 @@
           <para
             >Gets or sets a value that indicates whether the XML element name generated by the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -490,8 +562,12 @@
 
             
 
+            
+
              property is set to true, the xsi:nil attribute is generated for class members that have been set to null. For example, if you set a field named MyStringArray to null, the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -508,12 +584,16 @@
 
             
 
+            
+
              property is false, no XML element is generated.</para
           >
           <block subset="none" type="note">
             <para
               >You cannot apply the <see
                cref="P:System.Xml.Serialization.XmlArrayAttribute.IsNullable" />
+
+              
 
               
 
@@ -528,6 +608,8 @@
           <para
             >Gets or sets a value that indicates whether the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -563,8 +645,12 @@
 
             
 
+            
+
              property allows you to create qualified XML element names. The <see
              cref="P:System.Xml.Serialization.XmlArrayAttribute.Namespace" />
+
+            
 
             
 
@@ -580,6 +666,8 @@
 
             
 
+            
+
              class that contains the namespaces and prefixes used in the XML document. As you set the namespace for each <see
              cref="T:System.Xml.Serialization.XmlArrayAttribute" />
 
@@ -587,8 +675,12 @@
 
             
 
+            
+
             , it must match one of the namespaces in the <see
              cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+
+            
 
             
 
@@ -627,8 +719,12 @@
 
             
 
+            
+
              enumeration to instruct the <see
              cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+
+            
 
             
 
@@ -641,12 +737,16 @@
 
             
 
+            
+
              property. </para
           >
           <block subset="none" type="note">
             <para
               >Once the <see
                cref="P:System.Xml.Serialization.XmlElementAttribute.Order" />
+
+              
 
               
 

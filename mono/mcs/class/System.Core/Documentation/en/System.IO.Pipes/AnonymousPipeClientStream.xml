@@ -32,6 +32,8 @@
 
         
 
+        
+
          class enables a child process to connect to and exchange information with a parent process.</para
       >
       <para
@@ -42,8 +44,12 @@
 
         
 
+        
+
          value of <see
          cref="F:System.IO.Pipes.PipeDirection.InOut" />
+
+        
 
         
 
@@ -59,11 +65,15 @@
 
         
 
+        
+
          read modes.</para
       >
       <para
         >The client side of an anonymous pipe must be created from a pipe handle provided by the server side by calling the <see
          cref="M:System.IO.Pipes.AnonymousPipeServerStream.GetClientHandleAsString" />
+
+        
 
         
 
@@ -76,8 +86,12 @@
 
         
 
+        
+
          constructor as the <paramref
          name="pipeHandleAsString" />
+
+        
 
         
 
@@ -122,8 +136,12 @@
 
             
 
+            
+
              parameter, the default direction is <see
              cref="F:System.IO.Pipes.PipeDirection.In" />
+
+            
 
             
 
@@ -142,11 +160,15 @@
 
             
 
+            
+
              class with the specified string representation of the pipe handle.</para
           >
         </summary>
         <param name="pipeHandleAsString">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -184,8 +206,12 @@
 
             
 
+            
+
              value of <see
              cref="F:System.IO.Pipes.PipeDirection.InOut" />
+
+            
 
             
 
@@ -204,11 +230,15 @@
 
             
 
+            
+
              class from the specified handle.</para
           >
         </summary>
         <param name="direction">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -223,8 +253,12 @@
 
           
 
+          
+
           A safe handle for the pipe that this <see
            cref="T:System.IO.Pipes.AnonymousPipeClientStream" />
+
+          
 
           
 
@@ -262,8 +296,12 @@
 
             
 
+            
+
              value of <see
              cref="F:System.IO.Pipes.PipeDirection.InOut" />
+
+            
 
             
 
@@ -282,6 +320,8 @@
 
             
 
+            
+
              class with the specified pipe direction and a string representation of the pipe handle.</para
           >
         </summary>
@@ -292,10 +332,14 @@
 
           
 
+          
+
           One of the enumeration values that determines the direction of the pipe.</param
         >
         <param name="pipeHandleAsString">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -352,6 +396,8 @@
 
             
 
+            
+
              read mode.</para
           >
         </remarks>
@@ -360,6 +406,8 @@
           <para
             >Sets the reading mode for the <see
              cref="T:System.IO.Pipes.AnonymousPipeClientStream" />
+
+            
 
             
 
@@ -393,6 +441,8 @@
           <para
             >Anonymous pipes do not support <see
              cref="F:System.IO.Pipes.PipeTransmissionMode.Message" />
+
+            
 
             
 

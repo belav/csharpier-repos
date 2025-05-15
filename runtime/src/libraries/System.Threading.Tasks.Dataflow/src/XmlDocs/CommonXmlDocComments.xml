@@ -13,6 +13,8 @@
 
         
 
+        
+
          that represents the asynchronous operation and completion of the dataflow block.
       </summary
       >
@@ -25,9 +27,13 @@
 
         
 
+        
+
          will transition to a completed state when the
         associated block has completed. It will transition to the <see
          cref="T:System.Threading.Tasks.TaskStatus">RanToCompletion</see>
+
+        
 
         
 
@@ -42,9 +48,13 @@
 
         
 
+        
+
          state when the dataflow block has completed processing prematurely due to an unhandled exception,
         and it will transition to the <see
          cref="T:System.Threading.Tasks.TaskStatus">Canceled</see>
+
+        
 
         
 
@@ -54,6 +64,8 @@
         prematurely due to receiving a cancellation request.  If the task completes in the Faulted state, its Exception property will return
         an <see
          cref="T:System.AggregateException" />
+
+        
 
         
 
@@ -72,6 +84,8 @@
 
         
 
+        
+
          that it should not accept
         nor produce any more messages nor consume any more postponed messages.
       </summary
@@ -85,10 +99,14 @@
 
         
 
+        
+
          task will enter a final state) after it has processed all previously
         available data. Complete will not block waiting for completion to occur, but rather will initiate
         the request; to wait for completion to occur, the <see
          cref="M:Completion" />
+
+        
 
         
 
@@ -107,9 +125,13 @@
 
         
 
+        
+
          to complete in a 
         <see
          cref="F:System.Threading.Tasks.TaskStatus.Faulted" />
+
+        
 
         
 
@@ -126,11 +148,15 @@
 
         
 
+        
+
          that caused the faulting.</param
       >
       <exception cref="System.ArgumentNullException">
         The <paramref
          name="exception" />
+
+        
 
         
 
@@ -143,6 +169,8 @@
         After Fault has been called on a dataflow block, that block will complete
         (such that its <see
          cref="M:Completion" />
+
+        
 
         
 
@@ -163,6 +191,8 @@
 
         
 
+        
+
          instance.
       </summary
       >
@@ -174,8 +204,12 @@
 
         
 
+        
+
         . Uses the <see
          cref="P:System.Threading.Tasks.Dataflow.DataflowBlockOptions.NameFormat" />
+
+        
 
         
 
@@ -205,12 +239,16 @@
 
         
 
+        
+
         , giving the target the opportunity to consume or postpone the message.
       </summary
       >
       <param name="messageHeader">
         A <see
          cref="T:System.Threading.Tasks.Dataflow.DataflowMessageHeader" />
+
+        
 
         
 
@@ -231,6 +269,8 @@
 
         
 
+        
+
          offering the message. This may be null (Nothing in Visual Basic).
       </param
       >
@@ -238,6 +278,8 @@
         true if the target must call ConsumeMessage synchronously during the call to OfferMessage, prior to returning
         <see
          cref="F:System.Threading.Tasks.Dataflow.DataflowMessageStatus.Accepted" />
+
+        
 
         
 
@@ -255,9 +297,13 @@
 
         
 
+        
+
          is returned, and the source should
         no longer use the offered message, as it is now owned by the target. If the message was postponed by the target, <see
          cref="F:System.Threading.Tasks.Dataflow.DataflowMessageStatus.Postponed" />
+
+        
 
         
 
@@ -272,10 +318,14 @@
 
         
 
+        
+
          is instead returned. 
         If the target tried to accept the message but missed it due to the source delivering the message to another target or simply discarding it, 
         <see
          cref="F:System.Threading.Tasks.Dataflow.DataflowMessageStatus.NotAvailable" />
+
+        
 
         
 
@@ -289,9 +339,13 @@
 
         
 
+        
+
          is returned.  If the target
         chose not to accept the message and will never accept another message from this source, <see
          cref="F:System.Threading.Tasks.Dataflow.DataflowMessageStatus.DecliningPermanently" />
+
+        
 
         
 
@@ -308,6 +362,8 @@
 
         
 
+        
+
          is not valid.
       </exception
       >
@@ -318,8 +374,12 @@
 
         
 
+        
+
          may only be true if provided with a non-null <paramref
          name="source" />
+
+        
 
         
 
@@ -340,8 +400,12 @@
 
         
 
+        
+
          to the specified <see
          cref="T:System.Threading.Tasks.Dataflow.ITargetBlock`1" />
+
+        
 
         
 
@@ -358,12 +422,16 @@
 
         
 
+        
+
          to which to connect this source.
       </param
       >
       <param name="linkOptions">
         A <see
          cref="T:System.Threading.Tasks.Dataflow.DataflowLinkOptions" />
+
+        
 
         
 
@@ -380,8 +448,12 @@
 
         
 
+        
+
          is null (Nothing in Visual Basic) or <paramref
          name="linkOptions" />
+
+        
 
         
 
@@ -405,6 +477,8 @@
 
         
 
+        
+
         .
       </summary
       >
@@ -412,6 +486,8 @@
         The predicate a value must successfully pass in order for it to be received. 
         <paramref
          name="filter" />
+
+        
 
         
 
@@ -436,6 +512,8 @@
 
         
 
+        
+
         .
       </summary
       >
@@ -455,6 +533,8 @@
 
         
 
+        
+
          from this 
         <see
          cref="T:System.Threading.Tasks.Dataflow.ISourceBlock`1" />
@@ -463,8 +543,12 @@
 
         
 
+        
+
          instance to the <see
          cref="T:System.Threading.Tasks.Dataflow.ITargetBlock`1" />
+
+        
 
         
 
@@ -481,11 +565,15 @@
 
         
 
+        
+
          of the message that is to be consumed.</param
       >
       <param name="target">
         The <see
          cref="T:System.Threading.Tasks.Dataflow.ITargetBlock`1" />
+
+        
 
         
 
@@ -507,9 +595,13 @@
 
           
 
+          
+
            instance than was previously reserved and
           passed as the <paramref
            name="messageHeader" />
+
+          
 
           
 
@@ -522,8 +614,12 @@
 
           
 
+          
+
           . The consuming <see
            cref="T:System.Threading.Tasks.Dataflow.ITargetBlock`1" />
+
+          
 
           
 
@@ -532,6 +628,8 @@
            must 
           use the returned value instead of the value passed as messageValue through <see
            cref="M:OfferMessage" />
+
+          
 
           
 
@@ -552,12 +650,16 @@
 
         
 
+        
+
          is not valid.
       </exception
       >
       <exception cref="T:System.ArgumentNullException">
         The <paramref
          name="target" />
+
+        
 
         
 
@@ -575,9 +677,13 @@
 
           
 
+          
+
            for which the message is to be consumed need not be linked from this 
           <see
            cref="T:System.Threading.Tasks.Dataflow.ISourceBlock`1" />
+
+          
 
           
 
@@ -590,9 +696,13 @@
 
           
 
+          
+
            
           instance may have never offered the message directly to the <see
            cref="T:System.Threading.Tasks.Dataflow.ITargetBlock`1" />
+
+          
 
           
 
@@ -612,6 +722,8 @@
 
         
 
+        
+
          
         from this <see
          cref="T:System.Threading.Tasks.Dataflow.ISourceBlock`1" />
@@ -620,8 +732,12 @@
 
         
 
+        
+
          to the <see
          cref="T:System.Threading.Tasks.Dataflow.ITargetBlock`1" />
+
+        
 
         
 
@@ -638,12 +754,16 @@
 
         
 
+        
+
          of the message that is to be reserved.
       </param
       >
       <param name="target">
         The <see
          cref="T:System.Threading.Tasks.Dataflow.ITargetBlock`1" />
+
+        
 
         
 
@@ -661,12 +781,16 @@
 
         
 
+        
+
          is not valid.
       </exception
       >
       <exception cref="T:System.ArgumentNullException">
         The <paramref
          name="target" />
+
+        
 
         
 
@@ -684,9 +808,13 @@
 
           
 
+          
+
            for which the message is to be reserved need not be linked from this
           <see
            cref="T:System.Threading.Tasks.Dataflow.ISourceBlock`1" />
+
+          
 
           
 
@@ -700,8 +828,12 @@
           
 
           
+
+          
           instance may have never offered the message directly to the <see
            cref="T:System.Threading.Tasks.Dataflow.ITargetBlock`1" />
+
+          
 
           
 
@@ -718,8 +850,12 @@
 
           
 
+          
+
            or <see
            cref="M:ReleaseReservation" />
+
+          
 
           
 
@@ -733,8 +869,12 @@
 
           
 
+          
+
            and <see
            cref="T:System.Threading.Tasks.Dataflow.ITargetBlock`1" />
+
+          
 
           
 
@@ -746,6 +886,8 @@
         >
         <para>
           <see cref="M:ReserveMessage" />
+
+          
 
           
 
@@ -766,6 +908,8 @@
 
         
 
+        
+
          
         from this <see
          cref="T:System.Threading.Tasks.Dataflow.ISourceBlock`1" />
@@ -774,8 +918,12 @@
 
         
 
+        
+
          to the <see
          cref="T:System.Threading.Tasks.Dataflow.ITargetBlock`1" />
+
+        
 
         
 
@@ -792,12 +940,16 @@
 
         
 
+        
+
          of the reserved message.
       </param
       >
       <param name="target">
         The <see
          cref="T:System.Threading.Tasks.Dataflow.ITargetBlock`1" />
+
+        
 
         
 
@@ -814,6 +966,8 @@
 
         
 
+        
+
          is not valid.
       </exception
       >
@@ -825,12 +979,16 @@
 
         
 
+        
+
          is null (Nothing in Visual Basic).
       </exception
       >
       <exception cref="T:System.InvalidOperationException">
         The <paramref
          name="target" />
+
+        
 
         
 
@@ -848,9 +1006,13 @@
 
           
 
+          
+
            that holds the reservation need not be linked from this
           <see
            cref="T:System.Threading.Tasks.Dataflow.ISourceBlock`1" />
+
+          
 
           
 
@@ -864,8 +1026,12 @@
           
 
           
+
+          
           instance may have never offered the message directly to the <see
            cref="T:System.Threading.Tasks.Dataflow.ITargetBlock`1" />
+
+          
 
           
 
@@ -877,6 +1043,8 @@
         <para>
           It is required that this message has been previously reserved for the same <see
            cref="T:System.Threading.Tasks.Dataflow.ITargetBlock`1" />
+
+          
 
           
 

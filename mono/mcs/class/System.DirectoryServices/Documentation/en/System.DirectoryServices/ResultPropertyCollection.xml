@@ -125,6 +125,8 @@
 
           
 
+          
+
           The zero-based array index at which to begin copying the properties.</param
         >
       </Docs>
@@ -195,8 +197,12 @@
 
         
 
+        
+
          instances are similar to <see
          cref="T:System.DirectoryServices.DirectoryEntry" />
+
+        
 
         
 
@@ -209,8 +215,12 @@
 
         
 
+        
+
          retrieves its information from the Active Directory Domain Services hierarchy each time a new object is accessed, whereas the data for the <see
          cref="T:System.DirectoryServices.SearchResult" />
+
+        
 
         
 
@@ -223,6 +233,8 @@
 
         
 
+        
+
          that a <see
          cref="T:System.DirectoryServices.DirectorySearcher" />
 
@@ -230,8 +242,12 @@
 
         
 
+        
+
          query returns. If you try to get a <see
          cref="T:System.DirectoryServices.SearchResult" />
+
+        
 
         
 
@@ -245,6 +261,8 @@
       <para
         >Contains the properties of a <see
          cref="T:System.DirectoryServices.SearchResult" />
+
+        
 
         
 

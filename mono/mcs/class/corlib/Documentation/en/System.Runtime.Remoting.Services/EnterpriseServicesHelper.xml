@@ -43,6 +43,8 @@
 
           
 
+          
+
            for more information.</para
         >
       </block>
@@ -52,6 +54,8 @@
       <para
         >Provides APIs that are needed for communication and operation with unmanaged classes outside of the <see
          cref="T:System.AppDomain" />
+
+        
 
         
 
@@ -83,6 +87,8 @@
           <para
             >Creates an instance of <see
              cref="T:System.Runtime.Remoting.Services.EnterpriseServicesHelper" />
+
+            
 
             
 
@@ -135,8 +141,12 @@
 
             
 
+            
+
              from the specified <see
              cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
+
+            
 
             
 
@@ -155,8 +165,12 @@
 
             
 
+            
+
              returned from the construction call that is specified in the <paramref
              name="ctorMsg" />
+
+            
 
             
 
@@ -172,8 +186,12 @@
 
           
 
+          
+
           A construction call to the object from which the new <see
            cref="T:System.Runtime.Remoting.Messaging.ReturnMessage" />
+
+          
 
           
 
@@ -188,6 +206,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Remoting.ObjRef" />
 
@@ -195,8 +215,12 @@
 
           
 
+          
+
            that represents the object that is constructed with the construction call in <paramref
            name="ctorMsg" />
+
+          
 
           
 
@@ -249,6 +273,8 @@
 
             
 
+            
+
              (CCW) from one instance of a class to another instance of the same class.</para
           >
         </summary>
@@ -259,10 +285,14 @@
 
           
 
+          
+
           A proxy that represents the old instance of a class that is referenced by a CCW. </param
         >
         <param name="newcp">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -304,6 +334,8 @@
 
             
 
+            
+
              method is similar to the <see
              cref="M:System.Runtime.InteropServices.Marshal.GetObjectForIUnknown(System.IntPtr)" />
 
@@ -311,8 +343,12 @@
 
             
 
+            
+
              method, but does not attempt to maintain the identity of the unmanaged object. For example, two calls with the same IUnknown to the current method return two different RCWs, but two calls to the <see
              cref="M:System.Runtime.InteropServices.Marshal.GetObjectForIUnknown(System.IntPtr)" />
+
+            
 
             
 
@@ -335,6 +371,8 @@
 
             
 
+            
+
              (RCW).</para
           >
         </summary>
@@ -344,6 +382,8 @@
         </returns>
         <param name="punk">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

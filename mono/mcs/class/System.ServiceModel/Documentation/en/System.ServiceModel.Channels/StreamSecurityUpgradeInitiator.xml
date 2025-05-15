@@ -30,8 +30,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeProvider" />
+
+        
 
         
 
@@ -42,6 +46,8 @@
       <para
         >For a detailed description of the upgrade process, see <see
          cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
+
+        
 
         
 
@@ -74,6 +80,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.StreamSecurityUpgradeInitiator" />
+
+            
 
             
 
@@ -115,6 +123,8 @@
           <para
             >Returns the <see
              cref="T:System.ServiceModel.Security.SecurityMessageProperty" />
+
+            
 
             
 

@@ -29,8 +29,12 @@
 
         
 
+        
+
          class wraps the <see
          cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          class as a subelement of the <see
          cref="T:System.Security.Cryptography.Xml.KeyInfo" />
+
+        
 
         
 
@@ -57,8 +65,12 @@
 
         
 
+        
+
          class to an instance of the <see
          cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+
+        
 
         
 
@@ -77,8 +89,12 @@
 
         
 
+        
+
          class, it to be placed as a subelement of the <see
          cref="T:System.Security.Cryptography.Xml.KeyInfo" />
+
+        
 
         
 
@@ -113,8 +129,12 @@
 
             
 
+            
+
              class using an instance of the <see
              cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+
+            
 
             
 
@@ -127,8 +147,12 @@
 
             
 
+            
+
              property to specify an <see
              cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+
+            
 
             
 
@@ -142,6 +166,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.Xml.KeyInfoEncryptedKey" />
+
+            
 
             
 
@@ -183,8 +209,12 @@
 
             
 
+            
+
              class using an <see
              cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+
+            
 
             
 
@@ -225,8 +255,12 @@
 
             
 
+            
+
              class wraps the <see
              cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+
+            
 
             
 
@@ -239,8 +273,12 @@
 
             
 
+            
+
              class as a subelement of the <see
              cref="T:System.Security.Cryptography.Xml.KeyInfo" />
+
+            
 
             
 
@@ -253,6 +291,8 @@
 
             
 
+            
+
              property to access the <see
              cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
 
@@ -260,8 +300,12 @@
 
             
 
+            
+
              class contained within the <see
              cref="T:System.Security.Cryptography.Xml.KeyInfoEncryptedKey" />
+
+            
 
             
 
@@ -275,6 +319,8 @@
           <para
             >Gets or sets an <see
              cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+
+            
 
             
 
@@ -313,6 +359,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -321,6 +369,8 @@
           <para
             >An XML representation of a <see
              cref="T:System.Security.Cryptography.Xml.KeyInfoEncryptedKey" />
+
+            
 
             
 
@@ -364,8 +414,12 @@
 
             
 
+            
+
              object and configures the internal state of the <see
              cref="T:System.Security.Cryptography.Xml.KeyInfoEncryptedKey" />
+
+            
 
             
 
@@ -381,6 +435,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlElement" />
 
@@ -388,8 +444,12 @@
 
           
 
+          
+
            object that specifies the state of the <see
            cref="T:System.Security.Cryptography.Xml.KeyInfoEncryptedKey" />
+
+          
 
           
 

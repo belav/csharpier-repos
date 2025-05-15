@@ -11,6 +11,8 @@
 
         
 
+        
+
          namespace provides print-related services for Windows Forms applications.</para
       >
     </summary>
@@ -24,8 +26,12 @@
 
         
 
+        
+
          class, set properties, such as <see
          cref="P:System.Drawing.Printing.PrintDocument.DefaultPageSettings" />
+
+        
 
         
 
@@ -38,8 +44,12 @@
 
         
 
+        
+
         , that describe how to print, and call the <see
          cref="M:System.Drawing.Printing.PrintDocument.Print" />
+
+        
 
         
 
@@ -52,8 +62,12 @@
 
         
 
+        
+
          method raises the <see
          cref="E:System.Drawing.Printing.PrintDocument.PrintPage" />
+
+        
 
         
 
@@ -69,8 +83,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Drawing.Printing.PrintPageEventArgs" />
+
+        
 
         
 
@@ -83,8 +101,12 @@
 
         
 
+        
+
          event to specify the output to print. If you are printing a text file, use <see
          cref="T:System.IO.StreamReader" />
+
+        
 
         
 
@@ -97,8 +119,12 @@
 
         
 
+        
+
          method to draw the line in the graphics object. For more information about this process, see the <see
          cref="T:System.Drawing.Graphics" />
+
+        
 
         
 
@@ -111,8 +137,12 @@
 
         
 
+        
+
          classes. You can view an example of printing a text document in the <see
          cref="T:System.Drawing.Printing.PrintDocument" />
+
+        
 
         
 
@@ -129,8 +159,12 @@
 
           
 
+          
+
            methods of the <see
            cref="T:System.Windows.Forms.TextRenderer" />
+
+          
 
           
 
@@ -143,8 +177,12 @@
 
           
 
+          
+
            methods of the <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -161,8 +199,12 @@
 
         
 
+        
+
          controls how a <see
          cref="T:System.Drawing.Printing.PrintDocument" />
+
+        
 
         
 
@@ -175,8 +217,12 @@
 
         
 
+        
+
          method invokes the print controller's <see
          cref="M:System.Drawing.Printing.PrintController.OnStartPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+
+        
 
         
 
@@ -189,8 +235,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Drawing.Printing.PrintController.OnStartPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+
+        
 
         
 
@@ -203,6 +253,8 @@
 
         
 
+        
+
          methods, which in turn tell the printer how to print the document. For more information about printing dialog boxes, see <see
          cref="T:System.Windows.Forms.PrintDialog" />
 
@@ -210,8 +262,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.PageSetupDialog" />
+
+        
 
         
 
@@ -227,6 +283,8 @@
 
         
 
+        
+
         , <see
          cref="T:System.Windows.Forms.PrintPreviewDialog" />
 
@@ -234,8 +292,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Windows.Forms.PrintPreviewControl" />
+
+        
 
         
 
@@ -252,12 +314,16 @@
 
           
 
+          
+
            namespace are not supported for use within a Windows service or ASP.NET application or service. Attempting to use these classes from within one of these application types may produce unexpected problems, such as diminished service performance and run-time exceptions.</para
         >
       </block>
       <para
         >If you want to print from a Windows Presentation Foundation (WPF) application, see the <see
          cref="N:System.Printing" />
+
+        
 
         
 

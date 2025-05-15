@@ -37,8 +37,12 @@
 
         
 
+        
+
          enumeration defines the values that can be passed to the <see
          cref="M:System.Net.Sockets.Socket.Shutdown(System.Net.Sockets.SocketShutdown)" />
+
+        
 
         
 
@@ -52,6 +56,8 @@
       <para
         >Defines constants that are used by the <see
          cref="M:System.Net.Sockets.Socket.Shutdown(System.Net.Sockets.SocketShutdown)" />
+
+        
 
         
 
@@ -89,6 +95,8 @@
           <para
             >Disables a <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -132,6 +140,8 @@
 
             
 
+            
+
              for receiving. This field is constant.</para
           >
         </summary>
@@ -165,6 +175,8 @@
           <para
             >Disables a <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 

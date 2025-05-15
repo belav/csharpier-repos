@@ -43,6 +43,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -53,8 +55,12 @@
 
           
 
+          
+
           A string indicating the name of the property of the object to which the <paramref
            name="expression" />
+
+          
 
           
 
@@ -69,6 +75,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
 
@@ -76,8 +84,12 @@
 
           
 
+          
+
            indicating the type of the property of the object to which the <paramref
            name="expression" />
+
+          
 
           
 
@@ -92,10 +104,14 @@
 
           
 
+          
+
           A string representing the expression's prefix value.</param
         >
         <param name="expression">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -130,6 +146,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -138,6 +156,8 @@
           <para
             >true if the specified object is the same instance as the current <see
              cref="T:System.Web.UI.ExpressionBinding" />
+
+            
 
             
 
@@ -153,8 +173,12 @@
 
           
 
+          
+
           The object to compare with the current <see
            cref="T:System.Web.UI.ExpressionBinding" />
+
+          
 
           
 
@@ -244,6 +268,8 @@
 
             
 
+            
+
              object; suitable for hashing algorithms and data structures, such as a hash table.</para
           >
         </summary>
@@ -252,6 +278,8 @@
           <para
             >A hash code for the current <see
              cref="T:System.Web.UI.ExpressionBinding" />
+
+            
 
             
 
@@ -299,6 +327,8 @@
           <para
             >Gets a value indicating the <see
              cref="T:System.Type" />
+
+            
 
             
 

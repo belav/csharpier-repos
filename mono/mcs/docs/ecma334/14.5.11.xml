@@ -11,6 +11,8 @@
 
       
 
+      
+
        : <rhs
       >
         <keyword>typeof</keyword>
@@ -34,12 +36,16 @@
 
     
 
+    
+
      consists of a typeof keyword followed by a parenthesized type. The result of an expression of this form is the System.Type object for the indicated type. There is only one System.Type object for any given type. <note
     >[Note: This means that for type T, typeof(T) == typeof(T) is always true. end note]</note>
   </paragraph>
   <paragraph
     >The second form of <non_terminal
      where="14.5.11">typeof-expression</non_terminal>
+
+    
 
     
 
@@ -52,8 +58,12 @@
 
     
 
+    
+
      keyword. The result of an expression of this form is the System.Type object that represents the absence of a type. The type object returned by typeof(<keyword
     >void</keyword>
+
+    
 
     
 
@@ -70,6 +80,8 @@
 
       
 
+      
+
        methods, with an instance of System.Type. end note]</note
     >
   </paragraph>
@@ -77,7 +89,7 @@
     <example
       >[Example: The example <code_example
       >
-<![CDATA[
+        <![CDATA[
 using System;  
 class Test  
 {  
@@ -100,9 +112,11 @@ class Test
 
       
 
+      
+
       produces the following output: <code_example
       >
-<![CDATA[
+        <![CDATA[
 System.Int32  
 System.Int32  
 System.String  
@@ -116,6 +130,8 @@ System.Void
     <example
       >Note that <keyword
       >int</keyword>
+
+      
 
       
 

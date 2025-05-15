@@ -29,6 +29,8 @@
 
         
 
+        
+
          class is the base class for the <see
          cref="T:System.Security.AccessControl.FileSecurity" />
 
@@ -36,8 +38,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Security.AccessControl.DirectorySecurity" />
+
+        
 
         
 
@@ -53,6 +59,8 @@
 
         
 
+        
+
          class represents access and audit rights as a set of rules. Each access rule is represented by a <see
          cref="T:System.Security.AccessControl.FileSystemAccessRule" />
 
@@ -60,8 +68,12 @@
 
         
 
+        
+
          object, while each audit rule is represented by a <see
          cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+
+        
 
         
 
@@ -77,6 +89,8 @@
 
         
 
+        
+
          class is an abstraction of the underlying Microsoft Windows file security system. In this system, each file or directory has a discretionary access control list (DACL), which controls access to the file or directory, and a system access control list (SACL), which specifies the access control attempts that are audited.  The <see
          cref="T:System.Security.AccessControl.FileSystemAccessRule" />
 
@@ -84,8 +98,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+
+        
 
         
 
@@ -101,6 +119,8 @@
 
         
 
+        
+
          class hides many of details of DACLs and SACLs; you do not have to worry about ACE ordering or null DACLS.</para
       >
       <para
@@ -111,8 +131,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+
+        
 
         
 
@@ -125,8 +149,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+
+        
 
         
 
@@ -142,8 +170,12 @@
 
         
 
+        
+
          or <see
          cref="Overload:System.IO.FileInfo.GetAccessControl" />
+
+        
 
         
 
@@ -156,8 +188,12 @@
 
         
 
+        
+
          or <see
          cref="Overload:System.IO.DirectoryInfo.GetAccessControl" />
+
+        
 
         
 
@@ -199,8 +235,12 @@
 
             
 
+            
+
              class override the <see
              cref="P:System.Security.AccessControl.FileSystemSecurity.AccessRightType" />
+
+            
 
             
 
@@ -214,6 +254,8 @@
           <para
             >Gets the enumeration that the <see
              cref="T:System.Security.AccessControl.FileSystemSecurity" />
+
+            
 
             
 
@@ -261,6 +303,8 @@
 
             
 
+            
+
              class.</para
           >
           <para
@@ -271,8 +315,12 @@
 
             
 
+            
+
              method is the base class, <see
              cref="T:System.Security.AccessControl.AccessRule" />
+
+            
 
             
 
@@ -291,6 +339,8 @@
 
             
 
+            
+
              class that represents a new access control rule for the specified user, with the specified access rights, access control, and flags.</para
           >
         </summary>
@@ -299,6 +349,8 @@
           <para
             >A new <see
              cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+
+            
 
             
 
@@ -314,8 +366,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Principal.IdentityReference" />
+
+          
 
           
 
@@ -330,10 +386,14 @@
 
           
 
+          
+
           An integer that specifies an access type.</param
         >
         <param name="isInherited">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -348,8 +408,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.InheritanceFlags" />
+
+          
 
           
 
@@ -364,8 +428,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.PropagationFlags" />
+
+          
 
           
 
@@ -380,8 +448,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AccessControlType" />
+
+          
 
           
 
@@ -418,8 +490,12 @@
 
             
 
+            
+
              class override the <see
              cref="P:System.Security.AccessControl.FileSystemSecurity.AccessRuleType" />
+
+            
 
             
 
@@ -433,6 +509,8 @@
           <para
             >Gets the enumeration that the <see
              cref="T:System.Security.AccessControl.FileSystemSecurity" />
+
+            
 
             
 
@@ -475,8 +553,12 @@
 
             
 
+            
+
              method adds a new rule to the list of rules contained within a <see
              cref="T:System.Security.AccessControl.FileSystemSecurity" />
+
+            
 
             
 
@@ -492,8 +574,12 @@
 
             
 
+            
+
              method will still add the rule, with one exception: a <see
              cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+
+            
 
             
 
@@ -506,8 +592,12 @@
 
             
 
+            
+
              enumeration value supersedes an object created using the <see
              cref="F:System.Security.AccessControl.AccessControlType.Allow" />
+
+            
 
             
 
@@ -523,8 +613,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+
+            
 
             
 
@@ -537,8 +631,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+
+            
 
             
 
@@ -554,8 +652,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.IO.FileInfo.GetAccessControl" />
+
+            
 
             
 
@@ -568,8 +670,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.IO.DirectoryInfo.GetAccessControl" />
+
+            
 
             
 
@@ -585,6 +691,8 @@
 
             
 
+            
+
              flag, the <see
              cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
 
@@ -592,8 +700,12 @@
 
             
 
+            
+
              flag will be automatically added to your rule.  If you remove the rule later without specifying the <see
              cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
+
+            
 
             
 
@@ -613,8 +725,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+
+          
 
           
 
@@ -656,8 +772,12 @@
 
             
 
+            
+
              method adds a new audit rule to the list of rules contained within a <see
              cref="T:System.Security.AccessControl.FileSystemSecurity" />
+
+            
 
             
 
@@ -668,6 +788,8 @@
           <para
             >If an audit rule already exists for the specified rule, the <see
              cref="M:System.Security.AccessControl.FileSystemSecurity.AddAuditRule(System.Security.AccessControl.FileSystemAuditRule)" />
+
+            
 
             
 
@@ -687,8 +809,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+
+          
 
           
 
@@ -735,6 +861,8 @@
 
             
 
+            
+
              class.</para
           >
           <para
@@ -745,8 +873,12 @@
 
             
 
+            
+
              method is the base class, <see
              cref="T:System.Security.AccessControl.AuditRule" />
+
+            
 
             
 
@@ -765,6 +897,8 @@
 
             
 
+            
+
              class representing the specified audit rule for the specified user.</para
           >
         </summary>
@@ -773,6 +907,8 @@
           <para
             >A new <see
              cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+
+            
 
             
 
@@ -788,8 +924,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Principal.IdentityReference" />
+
+          
 
           
 
@@ -804,10 +944,14 @@
 
           
 
+          
+
           An integer that specifies an access type.</param
         >
         <param name="isInherited">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -822,8 +966,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.InheritanceFlags" />
+
+          
 
           
 
@@ -838,8 +986,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.PropagationFlags" />
+
+          
 
           
 
@@ -854,8 +1006,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AuditFlags" />
+
+          
 
           
 
@@ -892,8 +1048,12 @@
 
             
 
+            
+
              class override the <see
              cref="P:System.Security.AccessControl.FileSystemSecurity.AuditRuleType" />
+
+            
 
             
 
@@ -907,6 +1067,8 @@
           <para
             >Gets the type that the <see
              cref="T:System.Security.AccessControl.FileSystemSecurity" />
+
+            
 
             
 
@@ -949,8 +1111,12 @@
 
             
 
+            
+
              method removes either all matching <see
              cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+
+            
 
             
 
@@ -963,8 +1129,12 @@
 
             
 
+            
+
              access rules from the current <see
              cref="T:System.Security.AccessControl.FileSystemSecurity" />
+
+            
 
             
 
@@ -977,8 +1147,12 @@
 
             
 
+            
+
              access rules for a user by passing a <see
              cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+
+            
 
             
 
@@ -991,8 +1165,12 @@
 
             
 
+            
+
              value, the <see
              cref="F:System.Security.AccessControl.FileSystemRights.Read" />
+
+            
 
             
 
@@ -1005,6 +1183,8 @@
 
             
 
+            
+
              method removes any deny rules that specify the <see
              cref="F:System.Security.AccessControl.FileSystemRights.Read" />
 
@@ -1012,8 +1192,12 @@
 
             
 
+            
+
              value or the <see
              cref="F:System.Security.AccessControl.FileSystemRights.Write" />
+
+            
 
             
 
@@ -1029,8 +1213,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+
+            
 
             
 
@@ -1043,8 +1231,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+
+            
 
             
 
@@ -1060,8 +1252,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.IO.FileInfo.GetAccessControl" />
+
+            
 
             
 
@@ -1074,8 +1270,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.IO.DirectoryInfo.GetAccessControl" />
+
+            
 
             
 
@@ -1091,6 +1291,8 @@
 
             
 
+            
+
              flag, the <see
              cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
 
@@ -1098,8 +1300,12 @@
 
             
 
+            
+
              flag will be automatically added to your rule.  If you remove the rule later without specifying the <see
              cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
+
+            
 
             
 
@@ -1123,8 +1329,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+
+          
 
           
 
@@ -1166,8 +1376,12 @@
 
             
 
+            
+
              method removes all access control list (ACL) permissions for the specified user.  The method ignores all values in the <see
              cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+
+            
 
             
 
@@ -1183,8 +1397,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+
+            
 
             
 
@@ -1197,8 +1415,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+
+            
 
             
 
@@ -1214,8 +1436,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.IO.FileInfo.GetAccessControl" />
+
+            
 
             
 
@@ -1228,8 +1454,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.IO.DirectoryInfo.GetAccessControl" />
+
+            
 
             
 
@@ -1245,6 +1475,8 @@
 
             
 
+            
+
              flag, the <see
              cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
 
@@ -1252,8 +1484,12 @@
 
             
 
+            
+
              flag will be automatically added to your rule.  If you remove the rule later without specifying the <see
              cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
+
+            
 
             
 
@@ -1273,8 +1509,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+
+          
 
           
 
@@ -1316,8 +1556,12 @@
 
             
 
+            
+
              method removes the specified <see
              cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+
+            
 
             
 
@@ -1330,8 +1574,12 @@
 
             
 
+            
+
              access rule from the current <see
              cref="T:System.Security.AccessControl.FileSystemSecurity" />
+
+            
 
             
 
@@ -1344,8 +1592,12 @@
 
             
 
+            
+
              access rule for a user by passing a <see
              cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+
+            
 
             
 
@@ -1358,8 +1610,12 @@
 
             
 
+            
+
              value, the <see
              cref="F:System.Security.AccessControl.FileSystemRights.Read" />
+
+            
 
             
 
@@ -1372,6 +1628,8 @@
 
             
 
+            
+
              method removes only the deny rule that specifies the <see
              cref="F:System.Security.AccessControl.FileSystemRights.Read" />
 
@@ -1379,8 +1637,12 @@
 
             
 
+            
+
              value.  It does not remove any deny rules that specify the <see
              cref="F:System.Security.AccessControl.FileSystemRights.Write" />
+
+            
 
             
 
@@ -1396,8 +1658,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+
+            
 
             
 
@@ -1410,8 +1676,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+
+            
 
             
 
@@ -1427,8 +1697,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.IO.FileInfo.GetAccessControl" />
+
+            
 
             
 
@@ -1441,8 +1715,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.IO.DirectoryInfo.GetAccessControl" />
+
+            
 
             
 
@@ -1458,6 +1736,8 @@
 
             
 
+            
+
              flag, the <see
              cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
 
@@ -1465,8 +1745,12 @@
 
             
 
+            
+
              flag will be automatically added to your rule.  If you remove the rule later without specifying the <see
              cref="F:System.Security.AccessControl.FileSystemRights.Synchronize" />
+
+            
 
             
 
@@ -1486,8 +1770,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+
+          
 
           
 
@@ -1529,8 +1817,12 @@
 
             
 
+            
+
              method removes either all matching <see
              cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+
+            
 
             
 
@@ -1543,8 +1835,12 @@
 
             
 
+            
+
              audit rules from the current <see
              cref="T:System.Security.AccessControl.FileSystemSecurity" />
+
+            
 
             
 
@@ -1557,8 +1853,12 @@
 
             
 
+            
+
              audit rules for a user by passing a <see
              cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+
+            
 
             
 
@@ -1571,8 +1871,12 @@
 
             
 
+            
+
              value, the <see
              cref="F:System.Security.AccessControl.AuditFlags.Failure" />
+
+            
 
             
 
@@ -1585,6 +1889,8 @@
 
             
 
+            
+
              method removes any deny rules that specify the <see
              cref="F:System.Security.AccessControl.AuditFlags.Failure" />
 
@@ -1592,8 +1898,12 @@
 
             
 
+            
+
              value or the <see
              cref="F:System.Security.AccessControl.AuditFlags.Success" />
+
+            
 
             
 
@@ -1617,8 +1927,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+
+          
 
           
 
@@ -1660,8 +1974,12 @@
 
             
 
+            
+
              method removes all audit rules for the specified user.  It ignores all values in the <see
              cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+
+            
 
             
 
@@ -1681,8 +1999,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+
+          
 
           
 
@@ -1724,8 +2046,12 @@
 
             
 
+            
+
              method removes the specified matching <see
              cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+
+            
 
             
 
@@ -1738,8 +2064,12 @@
 
             
 
+            
+
              audit rule from the current <see
              cref="T:System.Security.AccessControl.FileSystemSecurity" />
+
+            
 
             
 
@@ -1752,8 +2082,12 @@
 
             
 
+            
+
              audit rule for a user by passing a <see
              cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+
+            
 
             
 
@@ -1766,8 +2100,12 @@
 
             
 
+            
+
              value, the <see
              cref="F:System.Security.AccessControl.AuditFlags.Failure" />
+
+            
 
             
 
@@ -1780,6 +2118,8 @@
 
             
 
+            
+
              method removes only a deny rule that specifies the <see
              cref="F:System.Security.AccessControl.AuditFlags.Failure" />
 
@@ -1787,8 +2127,12 @@
 
             
 
+            
+
              value.  It does not remove any deny rules that specify the <see
              cref="F:System.Security.AccessControl.AuditFlags.Success" />
+
+            
 
             
 
@@ -1808,8 +2152,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+
+          
 
           
 
@@ -1851,8 +2199,12 @@
 
             
 
+            
+
              method adds the specified access control list (ACL) rule or overwrites any identical ACL rules that match the <paramref
              name="rule" />
+
+            
 
             
 
@@ -1865,8 +2217,12 @@
 
             
 
+            
+
              parameter specifies a <see
              cref="F:System.Security.AccessControl.FileSystemRights.Read" />
+
+            
 
             
 
@@ -1879,8 +2235,12 @@
 
             
 
+            
+
              method finds an identical ACL rule that specifies the <see
              cref="F:System.Security.AccessControl.FileSystemRights.Read" />
+
+            
 
             
 
@@ -1893,8 +2253,12 @@
 
             
 
+            
+
              method finds an identical ACL rule that specifies the <see
              cref="F:System.Security.AccessControl.FileSystemRights.Write" />
+
+            
 
             
 
@@ -1910,8 +2274,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+
+            
 
             
 
@@ -1924,8 +2292,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+
+            
 
             
 
@@ -1941,8 +2313,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.IO.FileInfo.GetAccessControl" />
+
+            
 
             
 
@@ -1955,8 +2331,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.IO.DirectoryInfo.GetAccessControl" />
+
+            
 
             
 
@@ -1976,8 +2356,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+
+          
 
           
 
@@ -2019,8 +2403,12 @@
 
             
 
+            
+
              method adds the specified access control list (ACL) rule or overwrites any identical ACL rules that match the <see
              cref="T:System.Security.AccessControl.FileSystemRights" />
+
+            
 
             
 
@@ -2033,8 +2421,12 @@
 
             
 
+            
+
              parameter.  For example, if the <paramref
              name="rule" />
+
+            
 
             
 
@@ -2047,8 +2439,12 @@
 
             
 
+            
+
              value and the <see
              cref="M:System.Security.AccessControl.FileSystemSecurity.SetAccessRule(System.Security.AccessControl.FileSystemAccessRule)" />
+
+            
 
             
 
@@ -2061,6 +2457,8 @@
 
             
 
+            
+
              value, the identical rule will be overwritten.  If the <see
              cref="M:System.Security.AccessControl.FileSystemSecurity.SetAccessRule(System.Security.AccessControl.FileSystemAccessRule)" />
 
@@ -2068,8 +2466,12 @@
 
             
 
+            
+
              method finds an identical ACL rule that specifies the <see
              cref="F:System.Security.AccessControl.FileSystemRights.Write" />
+
+            
 
             
 
@@ -2085,8 +2487,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+
+            
 
             
 
@@ -2099,8 +2505,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+
+            
 
             
 
@@ -2116,8 +2526,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.IO.FileInfo.GetAccessControl" />
+
+            
 
             
 
@@ -2130,8 +2544,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.IO.DirectoryInfo.GetAccessControl" />
+
+            
 
             
 
@@ -2151,8 +2569,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+
+          
 
           
 
@@ -2194,8 +2616,12 @@
 
             
 
+            
+
              method adds the specified audit rule or overwrites any identical audit rules that match the <see
              cref="T:System.Security.AccessControl.FileSystemRights" />
+
+            
 
             
 
@@ -2208,8 +2634,12 @@
 
             
 
+            
+
              parameter.  For example, if the <paramref
              name="rule" />
+
+            
 
             
 
@@ -2222,8 +2652,12 @@
 
             
 
+            
+
              value and the <see
              cref="M:System.Security.AccessControl.FileSystemSecurity.SetAuditRule(System.Security.AccessControl.FileSystemAuditRule)" />
+
+            
 
             
 
@@ -2236,6 +2670,8 @@
 
             
 
+            
+
              value, the identical rule will be overwritten.  If the <see
              cref="M:System.Security.AccessControl.FileSystemSecurity.SetAuditRule(System.Security.AccessControl.FileSystemAuditRule)" />
 
@@ -2243,8 +2679,12 @@
 
             
 
+            
+
              method finds an identical audit rule that specifies the <see
              cref="F:System.Security.AccessControl.FileSystemRights.Write" />
+
+            
 
             
 
@@ -2264,8 +2704,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+
+          
 
           
 

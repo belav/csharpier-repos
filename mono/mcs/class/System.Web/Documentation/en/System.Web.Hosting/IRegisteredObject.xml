@@ -18,6 +18,8 @@
 
         
 
+        
+
          interface in order to register with the hosting environment and have their lifetime managed by the hosting environment.</para
       >
       <para
@@ -28,8 +30,12 @@
 
         
 
+        
+
          method on the application manager. The application manager returns the newly created object to the caller, which can then call a type-specific method on the object. During startup, the registered object should call the <see
          cref="M:System.Web.Hosting.HostingEnvironment.RegisterObject(System.Web.Hosting.IRegisteredObject)" />
+
+        
 
         
 
@@ -45,11 +51,15 @@
 
         
 
+        
+
          method. </para
       >
       <para
         >Applications can have only one instance of a registered type. To create multiple instances of a registered type, use the factory pattern to create an object manager that is registered with the application and then manages the multiple instances. For an example of an object implementing the factory pattern, see the example for the <see
          cref="T:System.Web.Hosting.ApplicationManager" />
+
+        
 
         
 
@@ -85,6 +95,8 @@
 
             
 
+            
+
              method to ask a registered object to unregister. During processing of the <see
              cref="M:System.Web.Hosting.IRegisteredObject.Stop(System.Boolean)" />
 
@@ -92,8 +104,12 @@
 
             
 
+            
+
              method, the registered object must call the <see
              cref="M:System.Web.Hosting.HostingEnvironment.UnregisterObject(System.Web.Hosting.IRegisteredObject)" />
+
+            
 
             
 
@@ -109,8 +125,12 @@
 
             
 
+            
+
              method is first called with the <paramref
              name="immediate" />
+
+            
 
             
 
@@ -123,8 +143,12 @@
 
             
 
+            
+
              method, and then return or it can return immediately and complete processing asynchronously before calling the <see
              cref="M:System.Web.Hosting.HostingEnvironment.UnregisterObject(System.Web.Hosting.IRegisteredObject)" />
+
+            
 
             
 
@@ -140,8 +164,12 @@
 
             
 
+            
+
              method is called again with the <paramref
              name="immediate" />
+
+            
 
             
 
@@ -154,8 +182,12 @@
 
             
 
+            
+
              parameter is true, the registered object must call the <see
              cref="M:System.Web.Hosting.HostingEnvironment.UnregisterObject(System.Web.Hosting.IRegisteredObject)" />
+
+            
 
             
 
@@ -170,6 +202,8 @@
         </summary>
         <param name="immediate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

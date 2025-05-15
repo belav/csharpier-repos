@@ -24,6 +24,8 @@
 
         
 
+        
+
          class represents the event data for the <see
          cref="E:System.Web.UI.WebControls.WebParts.WebPartZoneBase.CreateVerbs" />
 
@@ -31,8 +33,12 @@
 
         
 
+        
+
          event, which occurs when the Web Parts verbs are created for a zone that derives from the <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPartZoneBase" />
+
+        
 
         
 
@@ -48,11 +54,15 @@
 
         
 
+        
+
          property.</para
       >
       <para
         >A <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPartZone" />
+
+        
 
         
 
@@ -68,8 +78,12 @@
 
         
 
+        
+
          base class and overriding the <see
          cref="P:System.Web.UI.WebControls.WebParts.WebPart.Verbs" />
+
+        
 
         
 
@@ -82,6 +96,8 @@
 
         
 
+        
+
          base class, you can add a new verb by implementing the <see
          cref="T:System.Web.UI.WebControls.WebParts.IWebActionable" />
 
@@ -89,8 +105,12 @@
 
         
 
+        
+
          interface, and then overriding the <see
          cref="P:System.Web.UI.WebControls.WebParts.IWebActionable.Verbs" />
+
+        
 
         
 
@@ -106,8 +126,12 @@
 
         
 
+        
+
          method allows derived classes to override the event without attaching a delegate to it. A derived class must always call the <see
          cref="M:System.Web.UI.WebControls.WebParts.WebPartZoneBase.OnCreateVerbs(System.Web.UI.WebControls.WebParts.WebPartVerbsEventArgs)" />
+
+        
 
         
 
@@ -126,8 +150,12 @@
 
         
 
+        
+
          event that is used by the <see
          cref="M:System.Web.UI.WebControls.WebParts.WebPartZoneBase.OnCreateVerbs(System.Web.UI.WebControls.WebParts.WebPartVerbsEventArgs)" />
+
+        
 
         
 
@@ -153,6 +181,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPartVerbsEventArgs" />
+
+            
 
             
 
@@ -187,8 +217,12 @@
 
             
 
+            
+
              property is set to the Web Parts verb collection specified in the <paramref
              name="verbs" />
+
+            
 
             
 
@@ -207,11 +241,15 @@
 
             
 
+            
+
              class using the specified Web Parts verb collection.</para
           >
         </summary>
         <param name="verbs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -241,6 +279,8 @@
           <para
             >Initially, this property is set by specifying a Web Parts verb collection in the <see
              cref="M:System.Web.UI.WebControls.WebParts.WebPartVerbsEventArgs.#ctor(System.Web.UI.WebControls.WebParts.WebPartVerbCollection)" />
+
+            
 
             
 

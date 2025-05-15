@@ -27,6 +27,8 @@
 
         
 
+        
+
          properties are accessible through the <see
          cref="P:System.Web.HttpRequest.Browser" />
 
@@ -34,8 +36,12 @@
 
         
 
+        
+
          property of the ASP.NET intrinsic <see
          cref="P:System.Web.HttpContext.Request" />
+
+        
 
         
 
@@ -62,6 +68,8 @@
           <para
             >Creates a new instance of the <see
              cref="T:System.Web.HttpBrowserCapabilities" />
+
+            
 
             
 

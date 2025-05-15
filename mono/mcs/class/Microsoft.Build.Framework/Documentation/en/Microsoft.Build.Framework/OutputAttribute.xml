@@ -26,6 +26,8 @@
 
         
 
+        
+
          element of a project file. All other task properties are treated as inputs to a task.</para
       >
       <para
@@ -33,6 +35,8 @@
          type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
+
+        
 
         
 
@@ -59,6 +63,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:Microsoft.Build.Framework.OutputAttribute" />
+
+            
 
             
 

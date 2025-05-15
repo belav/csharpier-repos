@@ -29,8 +29,12 @@
 
         
 
+        
+
          class to bind the value of a form variable in the <see
          cref="P:System.Web.HttpRequest.Form" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          is specified but no corresponding form variable is passed. They might also display no data if the form variable is passed with no corresponding value. Set the <see
          cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" />
+
+        
 
         
 
@@ -60,6 +68,8 @@
 
         
 
+        
+
          class provides the <see
          cref="P:System.Web.UI.WebControls.FormParameter.FormField" />
 
@@ -67,8 +77,12 @@
 
         
 
+        
+
          property, which identifies the name of the form variable to bind to, in addition to those inherited from the <see
          cref="T:System.Web.UI.WebControls.Parameter" />
+
+        
 
         
 
@@ -85,8 +99,12 @@
 
           
 
+          
+
            does not validate the value passed by the form element in any way; it uses the raw value. In most cases you can validate the value of the <see
            cref="T:System.Web.UI.WebControls.FormParameter" />
+
+          
 
           
 
@@ -99,8 +117,12 @@
 
           
 
+          
+
            property of the associated <see
            cref="T:System.ComponentModel.CancelEventArgs" />
+
+          
 
           
 
@@ -115,6 +137,8 @@
       <para
         >Binds the value of an HTTP request <see
          cref="P:System.Web.HttpRequest.Form" />
+
+        
 
         
 
@@ -141,8 +165,12 @@
 
             
 
+            
+
              object created with the <see
              cref="M:System.Web.UI.WebControls.FormParameter.#ctor" />
+
+            
 
             
 
@@ -155,8 +183,12 @@
 
             
 
+            
+
              is initialized to <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -169,8 +201,12 @@
 
             
 
+            
+
              property is initialized to <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -183,8 +219,12 @@
 
             
 
+            
+
              property is initialized to <see
              cref="F:System.TypeCode.Object" />
+
+            
 
             
 
@@ -197,6 +237,8 @@
 
             
 
+            
+
              property is initialized to <see
              cref="F:System.Data.ParameterDirection.Input" />
 
@@ -204,8 +246,12 @@
 
             
 
+            
+
             , and the <see
              cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" />
+
+            
 
             
 
@@ -219,6 +265,8 @@
           <para
             >Initializes a new unnamed instance of the <see
              cref="T:System.Web.UI.WebControls.FormParameter" />
+
+            
 
             
 
@@ -253,8 +301,12 @@
 
             
 
+            
+
              constructor is a protected copy constructor used to clone a <see
              cref="T:System.Web.UI.WebControls.FormParameter" />
+
+            
 
             
 
@@ -267,8 +319,12 @@
 
             
 
+            
+
             , including <see
              cref="P:System.Web.UI.WebControls.FormParameter.FormField" />
+
+            
 
             
 
@@ -281,8 +337,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Web.UI.WebControls.Parameter.Type" />
+
+            
 
             
 
@@ -301,8 +361,12 @@
 
             
 
+            
+
              class with the values of the instance specified by the <paramref
              name="original" />
+
+            
 
             
 
@@ -318,8 +382,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.FormParameter" />
+
+          
 
           
 
@@ -354,8 +422,12 @@
 
             
 
+            
+
              object created with the <see
              cref="M:System.Web.UI.WebControls.FormParameter.#ctor(System.String,System.String)" />
+
+            
 
             
 
@@ -368,8 +440,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.Parameter.Direction" />
+
+            
 
             
 
@@ -388,11 +464,15 @@
 
             
 
+            
+
              class, using the specified string to identify which form variable field to bind to.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -407,8 +487,12 @@
 
           
 
+          
+
           The name of the form variable that the parameter object is bound to. The default is <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -444,8 +528,12 @@
 
             
 
+            
+
              object created with the <see
              cref="M:System.Web.UI.WebControls.FormParameter.#ctor(System.String,System.TypeCode,System.String)" />
+
+            
 
             
 
@@ -458,6 +546,8 @@
 
             
 
+            
+
             , and string that identifies the form variable that the parameter binds to. Only the <see
              cref="P:System.Web.UI.WebControls.Parameter.Direction" />
 
@@ -465,8 +555,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.Parameter.ConvertEmptyStringToNull" />
+
+            
 
             
 
@@ -485,11 +579,15 @@
 
             
 
+            
+
              class, using the specified string to identify which form variable to bind to.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -504,8 +602,12 @@
 
           
 
+          
+
           The type that the parameter represents. The default is <see
            cref="F:System.TypeCode.Object" />
+
+          
 
           
 
@@ -520,8 +622,12 @@
 
           
 
+          
+
           The name of the form variable that the parameter object is bound to. The default is <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -556,6 +662,8 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.UI.WebControls.FormParameter.#ctor(System.Web.UI.WebControls.FormParameter)" />
 
@@ -563,8 +671,12 @@
 
             
 
+            
+
              copy constructor to initialize a new instance of the <see
              cref="T:System.Web.UI.WebControls.FormParameter" />
+
+            
 
             
 
@@ -583,6 +695,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -591,6 +705,8 @@
           <para
             >A <see
              cref="T:System.Web.UI.WebControls.FormParameter" />
+
+            
 
             
 
@@ -630,8 +746,12 @@
 
             
 
+            
+
              attempts to bind to the form variable every time the <see
              cref="M:System.Web.UI.WebControls.FormParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+
+            
 
             
 
@@ -647,6 +767,8 @@
 
             
 
+            
+
              parameter is used by the <see
              cref="M:System.Web.UI.WebControls.FormParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
 
@@ -654,8 +776,12 @@
 
             
 
+            
+
              method to retrieve the value of the specified form field from the request. The <paramref
              name="control" />
+
+            
 
             
 
@@ -674,6 +800,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -682,6 +810,8 @@
           <para
             >An object that represents the updated and current value of the parameter. If the context or the request is null (Nothing in Visual Basic), the <see
              cref="M:System.Web.UI.WebControls.FormParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+
+            
 
             
 
@@ -697,6 +827,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.Control" />
 
@@ -704,8 +836,12 @@
 
           
 
+          
+
            that is associated with the page where the <see
            cref="T:System.Web.UI.WebControls.FormParameter" />
+
+          
 
           
 
@@ -742,8 +878,12 @@
 
             
 
+            
+
              identifies a name/value pair that is passed in the <see
              cref="P:System.Web.HttpRequest.Form" />
+
+            
 
             
 
@@ -756,8 +896,12 @@
 
             
 
+            
+
              property identifies the name of the pair, the <see
              cref="T:System.Web.UI.WebControls.FormParameter" />
+
+            
 
             
 
@@ -770,8 +914,12 @@
 
             
 
+            
+
              method binds the parameter to the value of the <see
              cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" />
+
+            
 
             
 
@@ -784,8 +932,12 @@
 
             
 
+            
+
              is not set, the <see
              cref="M:System.Web.UI.WebControls.FormParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+
+            
 
             
 

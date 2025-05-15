@@ -25,6 +25,8 @@
 
         
 
+        
+
          Web server control.</para
       >
     </summary>
@@ -41,6 +43,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.WebControls.XmlDesigner" />
+
+            
 
             
 
@@ -75,8 +79,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Web.UI.Design.WebControls.XmlDesigner" />
+
+            
 
             
 
@@ -89,8 +97,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Web.UI.Design.WebControls.XmlDesigner" />
+
+            
 
             
 
@@ -103,6 +115,8 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Web.UI.Design.WebControls.XmlDesigner" />
 
@@ -110,8 +124,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Web.UI.Design.WebControls.XmlDesigner" />
+
+            
 
             
 
@@ -126,10 +144,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -146,6 +168,8 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.Web.UI.Design.WebControls.XmlDesigner" />
 
@@ -153,8 +177,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Web.UI.Design.WebControls.XmlDesigner" />
+
+              
 
               
 
@@ -171,8 +199,12 @@
 
             
 
+            
+
              method is called by the public Dispose() method and the <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -185,6 +217,8 @@
 
             
 
+            
+
              set to true. The <see
              cref="M:System.Object.Finalize" />
 
@@ -192,8 +226,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -209,8 +247,12 @@
 
             
 
+            
+
              is true, the <see
              cref="M:System.Web.UI.Design.WebControls.XmlDesigner.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -223,8 +265,12 @@
 
             
 
+            
+
              references. The <see
              cref="M:System.Web.UI.Design.WebControls.XmlDesigner.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -243,11 +289,15 @@
 
             
 
+            
+
              control and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -324,6 +374,8 @@
         </summary>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

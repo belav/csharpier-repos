@@ -40,11 +40,15 @@
 
         
 
+        
+
          can be used to represent a code expression that creates an array. Expressions that create an array should specify either a number of elements, or a list of expressions to use to initialize the array.</para
       >
       <para
         >Most arrays can be initialized immediately following declaration. The <see
          cref="P:System.CodeDom.CodeArrayCreateExpression.Initializers" />
+
+        
 
         
 
@@ -60,8 +64,12 @@
 
         
 
+        
+
          only directly supports creating single-dimension arrays. If a language allows arrays of arrays, it is possible to create them by nesting a <see
          cref="T:System.CodeDom.CodeArrayCreateExpression" />
+
+        
 
         
 
@@ -74,8 +82,12 @@
 
         
 
+        
+
         . Not all languages support arrays of arrays. You can check whether an <see
          cref="T:System.CodeDom.Compiler.ICodeGenerator" />
+
+        
 
         
 
@@ -88,8 +100,12 @@
 
         
 
+        
+
          with the <see
          cref="F:System.CodeDom.Compiler.GeneratorSupport.ArraysOfArrays" />
+
+        
 
         
 
@@ -125,6 +141,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeArrayCreateExpression" />
+
+            
 
             
 
@@ -167,11 +185,15 @@
 
             
 
+            
+
              class using the specified array data type and code expression indicating the number of indexes for the array.</para
           >
         </summary>
         <param name="createType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -184,10 +206,14 @@
 
           
 
+          
+
            indicating the data type of the array to create. </param
         >
         <param name="size">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -235,11 +261,15 @@
 
             
 
+            
+
              class using the specified array data type and initialization expressions.</para
           >
         </summary>
         <param name="createType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -252,10 +282,14 @@
 
           
 
+          
+
            that indicates the data type of the array to create. </param
         >
         <param name="initializers">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -297,11 +331,15 @@
 
             
 
+            
+
              class using the specified array data type and number of indexes for the array.</para
           >
         </summary>
         <param name="createType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -314,10 +352,14 @@
 
           
 
+          
+
            indicating the data type of the array to create. </param
         >
         <param name="size">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -359,6 +401,8 @@
 
             
 
+            
+
              class using the specified array data type name and code expression indicating the number of indexes for the array.</para
           >
         </summary>
@@ -369,10 +413,14 @@
 
           
 
+          
+
           The name of the data type of the array to create. </param
         >
         <param name="size">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -420,6 +468,8 @@
 
             
 
+            
+
              class using the specified array data type name and initializers.</para
           >
         </summary>
@@ -430,10 +480,14 @@
 
           
 
+          
+
           The name of the data type of the array to create. </param
         >
         <param name="initializers">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -475,6 +529,8 @@
 
             
 
+            
+
              class using the specified array data type name and number of indexes for the array.</para
           >
         </summary>
@@ -485,10 +541,14 @@
 
           
 
+          
+
           The name of the data type of the array to create. </param
         >
         <param name="size">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -530,6 +590,8 @@
 
             
 
+            
+
              class using the specified array data type and code expression indicating the number of indexes for the array.</para
           >
         </summary>
@@ -540,10 +602,14 @@
 
           
 
+          
+
           The data type of the array to create. </param
         >
         <param name="size">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -591,6 +657,8 @@
 
             
 
+            
+
              class using the specified array data type and initializers.</para
           >
         </summary>
@@ -601,10 +669,14 @@
 
           
 
+          
+
           The data type of the array to create. </param
         >
         <param name="initializers">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -646,6 +718,8 @@
 
             
 
+            
+
              class using the specified array data type and number of indexes for the array.</para
           >
         </summary>
@@ -656,10 +730,14 @@
 
           
 
+          
+
           The data type of the array to create. </param
         >
         <param name="size">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -772,6 +850,8 @@
           <para
             >The size of the array can be represented with a <see
              cref="T:System.CodeDom.CodeExpression" />
+
+            
 
             
 

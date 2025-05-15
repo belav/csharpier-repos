@@ -27,11 +27,15 @@
 
         
 
+        
+
          can contain either document-oriented or procedure-oriented information. Procedure-oriented messages contain parameters and return values, while document-oriented messages contain documents.</para
       >
       <para
         >The <see
          cref="T:System.Web.Services.Description.Message" />
+
+        
 
         
 
@@ -58,6 +62,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Description.Message" />
+
+            
 
             
 
@@ -102,8 +108,12 @@
 
             
 
+            
+
              associated with this <see
              cref="T:System.Web.Services.Description.Message" />
+
+            
 
             
 
@@ -138,6 +148,8 @@
 
             
 
+            
+
              returned by the <see
              cref="P:System.Web.Services.Description.Message.Parts" />
 
@@ -145,8 +157,12 @@
 
             
 
+            
+
              property, and returns the named <see
              cref="T:System.Web.Services.Description.MessagePart" />
+
+            
 
             
 
@@ -165,6 +181,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -175,8 +193,12 @@
 
           
 
+          
+
           A string that names the <see
            cref="T:System.Web.Services.Description.MessagePart" />
+
+          
 
           
 
@@ -214,6 +236,8 @@
 
             
 
+            
+
              returned by the <see
              cref="P:System.Web.Services.Description.Message.Parts" />
 
@@ -221,8 +245,12 @@
 
             
 
+            
+
              property and returns an array of type <see
              cref="T:System.Web.Services.Description.MessagePart" />
+
+            
 
             
 
@@ -241,6 +269,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -251,8 +281,12 @@
 
           
 
+          
+
           An array of names of the <see
            cref="T:System.Web.Services.Description.MessagePart" />
+
+          
 
           
 
@@ -310,8 +344,12 @@
 
             
 
+            
+
              objects contained in the <see
              cref="T:System.Web.Services.Description.Message" />
+
+            
 
             
 
@@ -353,8 +391,12 @@
 
             
 
+            
+
              of which the current <see
              cref="T:System.Web.Services.Description.Message" />
+
+            
 
             
 

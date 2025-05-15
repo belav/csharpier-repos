@@ -23,8 +23,12 @@
 
         
 
+        
+
          class. Any server control that contains one or more data-binding expressions has a <see
          cref="T:System.Web.UI.DataBindingCollection" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          objects. This collection is accessible through the <see
          cref="T:System.Web.UI.Control" />
+
+        
 
         
 
@@ -51,6 +59,8 @@
 
         
 
+        
+
          interface. When you create a custom RAD designer, use that implementation to access the collection. Any <see
          cref="T:System.Web.UI.DataBinding" />
 
@@ -58,8 +68,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Web.UI.DataBindingCollection" />
+
+        
 
         
 
@@ -98,11 +112,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="propertyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -117,10 +135,14 @@
 
           
 
+          
+
           The .NET Framework type of the property to bind data to. </param
         >
         <param name="expression">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -155,6 +177,8 @@
 
             
 
+            
+
              class as the current object.</para
           >
         </summary>
@@ -169,8 +193,12 @@
 
           
 
+          
+
           The object to compare against the current <see
            cref="T:System.Web.UI.DataBinding" />
+
+          
 
           
 
@@ -221,6 +249,8 @@
 
             
 
+            
+
              objects are placed in a <see
              cref="T:System.Web.UI.DataBindingCollection" />
 
@@ -228,8 +258,12 @@
 
             
 
+            
+
              object, accessible only at design time. The collection is a hash table that represents the bindings on a control. There can only be one binding per property, so the hash code computation matches the <see
              cref="M:System.Web.UI.DataBinding.Equals(System.Object)" />
+
+            
 
             
 
@@ -243,6 +277,8 @@
           <para
             >Retrieves the hash code for an instance of the <see
              cref="T:System.Web.UI.DataBinding" />
+
+            
 
             
 

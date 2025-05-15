@@ -24,8 +24,12 @@
 
         
 
+        
+
          provides the methods and properties that your application needs to manage a collection of <see
          cref="T:System.Configuration.Install.Installer" />
+
+        
 
         
 
@@ -44,6 +48,8 @@
 
             
 
+            
+
              method adds a single installer to the collection.</para
           >
         </item>
@@ -51,6 +57,8 @@
           <para
             >The <see
              cref="M:System.Configuration.Install.InstallerCollection.AddRange(System.Configuration.Install.InstallerCollection)" />
+
+            
 
             
 
@@ -68,6 +76,8 @@
 
             
 
+            
+
              method and the <see
              cref="P:System.Configuration.Install.InstallerCollection.Item(System.Int32)" />
 
@@ -75,8 +85,12 @@
 
             
 
+            
+
              property, which is the <see
              cref="T:System.Configuration.Install.InstallerCollection" />
+
+            
 
             
 
@@ -94,6 +108,8 @@
 
         
 
+        
+
          method. Check whether an installer is in the collection by using the <see
          cref="M:System.Configuration.Install.InstallerCollection.Contains(System.Configuration.Install.Installer)" />
 
@@ -101,8 +117,12 @@
 
         
 
+        
+
          method. Find where an installer is located in the collection by using the <see
          cref="M:System.Configuration.Install.InstallerCollection.IndexOf(System.Configuration.Install.Installer)" />
+
+        
 
         
 
@@ -118,8 +138,12 @@
 
         
 
+        
+
          property, calls their <see
          cref="M:System.Configuration.Install.Installer.Install(System.Collections.IDictionary)" />
+
+        
 
         
 
@@ -132,6 +156,8 @@
 
         
 
+        
+
         , <see
          cref="M:System.Configuration.Install.Installer.Rollback(System.Collections.IDictionary)" />
 
@@ -139,8 +165,12 @@
 
         
 
+        
+
         , or <see
          cref="M:System.Configuration.Install.Installer.Uninstall(System.Collections.IDictionary)" />
+
+        
 
         
 
@@ -156,8 +186,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Configuration.Install.TransactedInstaller" />
+
+        
 
         
 
@@ -195,6 +229,8 @@
 
             
 
+            
+
              property of the added <see
              cref="T:System.Configuration.Install.Installer" />
 
@@ -202,8 +238,12 @@
 
             
 
+            
+
              is set to specify the <see
              cref="T:System.Configuration.Install.Installer" />
+
+            
 
             
 
@@ -227,8 +267,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Configuration.Install.Installer" />
+
+          
 
           
 
@@ -265,6 +309,8 @@
 
             
 
+            
+
              property of each added <see
              cref="T:System.Configuration.Install.Installer" />
 
@@ -272,8 +318,12 @@
 
             
 
+            
+
              is set to the <see
              cref="T:System.Configuration.Install.Installer" />
+
+            
 
             
 
@@ -293,8 +343,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Configuration.Install.Installer" />
+
+          
 
           
 
@@ -331,6 +385,8 @@
 
             
 
+            
+
              property of each added <see
              cref="T:System.Configuration.Install.Installer" />
 
@@ -338,8 +394,12 @@
 
             
 
+            
+
              is set to the <see
              cref="T:System.Configuration.Install.Installer" />
+
+            
 
             
 
@@ -359,8 +419,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Configuration.Install.InstallerCollection" />
+
+          
 
           
 
@@ -403,8 +467,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Configuration.Install.Installer" />
+
+          
 
           
 
@@ -444,10 +512,14 @@
 
           
 
+          
+
           The array to copy to. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -490,8 +562,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Configuration.Install.Installer" />
+
+          
 
           
 
@@ -531,6 +607,8 @@
 
           
 
+          
+
           The zero-based index at which to insert the installer. </param
         >
         <param name="value">
@@ -540,8 +618,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Configuration.Install.Installer" />
+
+          
 
           
 
@@ -604,8 +686,12 @@
 
           
 
+          
+
           The zero-based index at which to insert <paramref
            name="value" />
+
+          
 
           
 
@@ -620,8 +706,12 @@
 
           
 
+          
+
           The new value of the installer at <paramref
            name="index" />
+
+          
 
           
 
@@ -661,8 +751,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="value" />
+
+          
 
           
 
@@ -677,8 +771,12 @@
 
           
 
+          
+
           The installer to be removed from <paramref
            name="index" />
+
+          
 
           
 
@@ -719,8 +817,12 @@
 
           
 
+          
+
           The zero-based index at which to replace <paramref
            name="oldValue" />
+
+          
 
           
 
@@ -730,6 +832,8 @@
         >
         <param name="oldValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -745,8 +849,12 @@
 
           
 
+          
+
           The new value of the installer at <paramref
            name="index" />
+
+          
 
           
 
@@ -783,8 +891,12 @@
 
             
 
+            
+
              property of the removed <see
              cref="T:System.Configuration.Install.Installer" />
+
+            
 
             
 
@@ -803,6 +915,8 @@
 
             
 
+            
+
              from the collection.</para
           >
         </summary>
@@ -813,8 +927,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Configuration.Install.Installer" />
+
+          
 
           
 

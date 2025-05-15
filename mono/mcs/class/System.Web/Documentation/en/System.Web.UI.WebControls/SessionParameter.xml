@@ -29,6 +29,8 @@
 
         
 
+        
+
          variable in the Where clause of a database query. The <see
          cref="P:System.Web.UI.WebControls.SessionParameter.SessionField" />
 
@@ -36,8 +38,12 @@
 
         
 
+        
+
          property identifies the session variable from which the <see
          cref="T:System.Web.UI.WebControls.SessionParameter" />
+
+        
 
         
 
@@ -54,8 +60,12 @@
 
           
 
+          
+
            object might throw an exception if the specified session variable is not set. To avoid this error (where appropriate), set the <see
            cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" />
+
+          
 
           
 
@@ -87,8 +97,12 @@
 
             
 
+            
+
              object created with the <see
              cref="M:System.Web.UI.WebControls.SessionParameter.#ctor" />
+
+            
 
             
 
@@ -101,8 +115,12 @@
 
             
 
+            
+
              property is initialized to <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -115,8 +133,12 @@
 
             
 
+            
+
              property is initialized to <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -129,8 +151,12 @@
 
             
 
+            
+
              property is initialized to <see
              cref="F:System.TypeCode.Object" />
+
+            
 
             
 
@@ -143,6 +169,8 @@
 
             
 
+            
+
              property is initialized to <see
              cref="F:System.Data.ParameterDirection.Input" />
 
@@ -150,8 +178,12 @@
 
             
 
+            
+
             , and the <see
              cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" />
+
+            
 
             
 
@@ -165,6 +197,8 @@
           <para
             >Initializes a new unnamed instance of the <see
              cref="T:System.Web.UI.WebControls.SessionParameter" />
+
+            
 
             
 
@@ -199,8 +233,12 @@
 
             
 
+            
+
              constructor is a Protected copy constructor used to clone a <see
              cref="T:System.Web.UI.WebControls.SessionParameter" />
+
+            
 
             
 
@@ -213,8 +251,12 @@
 
             
 
+            
+
              object, including the <see
              cref="P:System.Web.UI.WebControls.SessionParameter.SessionField" />
+
+            
 
             
 
@@ -227,8 +269,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Web.UI.WebControls.Parameter.Type" />
+
+            
 
             
 
@@ -247,8 +293,12 @@
 
             
 
+            
+
              class with the values of the instance specified by the <paramref
              name="original" />
+
+            
 
             
 
@@ -264,8 +314,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.SessionParameter" />
+
+          
 
           
 
@@ -300,8 +354,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.Parameter.Direction" />
+
+            
 
             
 
@@ -320,11 +378,15 @@
 
             
 
+            
+
              class, using the specified string to identify which session state name/value pair to bind to.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -339,6 +401,8 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Web.SessionState.HttpSessionState" />
 
@@ -346,8 +410,12 @@
 
           
 
+          
+
            name/value pair that the parameter object is bound to. The default is <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -383,8 +451,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.Parameter.ConvertEmptyStringToNull" />
+
+            
 
             
 
@@ -403,11 +475,15 @@
 
             
 
+            
+
              class, using the specified string to identify which session state name/value pair to bind to.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -422,8 +498,12 @@
 
           
 
+          
+
           The type that the parameter represents. The default is <see
            cref="F:System.TypeCode.Object" />
+
+          
 
           
 
@@ -438,6 +518,8 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Web.SessionState.HttpSessionState" />
 
@@ -445,8 +527,12 @@
 
           
 
+          
+
            name/value pair that the parameter object is bound to. The default is <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -481,6 +567,8 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.UI.WebControls.SessionParameter.#ctor(System.Web.UI.WebControls.SessionParameter)" />
 
@@ -488,8 +576,12 @@
 
             
 
+            
+
              copy constructor to initialize a new instance of the <see
              cref="T:System.Web.UI.WebControls.SessionParameter" />
+
+            
 
             
 
@@ -508,6 +600,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -516,6 +610,8 @@
           <para
             >A <see
              cref="T:System.Web.UI.WebControls.SessionParameter" />
+
+            
 
             
 
@@ -555,8 +651,12 @@
 
             
 
+            
+
              object attempts to bind to the value of the session variable every time the <see
              cref="M:System.Web.UI.WebControls.SessionParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+
+            
 
             
 
@@ -572,8 +672,12 @@
 
             
 
+            
+
              parameter is used by the <see
              cref="M:System.Web.UI.WebControls.SessionParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+
+            
 
             
 
@@ -586,8 +690,12 @@
 
             
 
+            
+
              object binds to. The <paramref
              name="control" />
+
+            
 
             
 
@@ -606,6 +714,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -614,6 +724,8 @@
           <para
             >An object that represents the updated and current value of the parameter. If the context or the request is null, the <see
              cref="M:System.Web.UI.WebControls.SessionParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+
+            
 
             
 
@@ -629,6 +741,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.Control" />
 
@@ -636,8 +750,12 @@
 
           
 
+          
+
            that is associated with the Web Forms page where the <see
            cref="T:System.Web.UI.WebControls.SessionParameter" />
+
+          
 
           
 
@@ -674,8 +792,12 @@
 
             
 
+            
+
              property identifies a name/value pair that is stored in the current session object associated with the Web browser. While the <see
              cref="P:System.Web.UI.WebControls.SessionParameter.SessionField" />
+
+            
 
             
 
@@ -688,8 +810,12 @@
 
             
 
+            
+
              binds to its corresponding value at run time. If the expected session string name/value pair is not found in the session, the <see
              cref="M:System.Web.UI.WebControls.SessionParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+
+            
 
             
 
@@ -702,6 +828,8 @@
 
             
 
+            
+
              property, if it is set. If the <see
              cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" />
 
@@ -709,8 +837,12 @@
 
             
 
+            
+
              property is not set, the <see
              cref="M:System.Web.UI.WebControls.SessionParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+
+            
 
             
 

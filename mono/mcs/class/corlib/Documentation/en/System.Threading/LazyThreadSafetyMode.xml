@@ -23,6 +23,8 @@
 
         
 
+        
+
          parameter of <see
          cref="T:System.Lazy`1" />
 
@@ -30,8 +32,12 @@
 
         
 
+        
+
          constructors. The effects of all constructors on thread synchronization can be described in terms of this enumeration, whether or not they have <paramref
          name="mode" />
+
+        
 
         
 
@@ -47,8 +53,12 @@
 
         
 
+        
+
          instance is initialized either by a user-specified initialization method or by the default constructor for <paramref
          name="T" />
+
+        
 
         
 
@@ -61,8 +71,12 @@
 
         
 
+        
+
          parameter of a <see
          cref="T:System.Lazy`1" />
+
+        
 
         
 
@@ -75,8 +89,12 @@
 
         
 
+        
+
         , which is the type that is lazily instantiated by the instance of <see
          cref="T:System.Lazy`1" />
+
+        
 
         
 
@@ -89,8 +107,12 @@
 
         
 
+        
+
          parameter, the default constructor for <paramref
          name="T" />
+
+        
 
         
 
@@ -103,8 +125,12 @@
 
         
 
+        
+
          instance. In either case, initialization occurs the first time you call the <see
          cref="P:System.Lazy`1.Value" />
+
+        
 
         
 
@@ -120,8 +146,12 @@
 
         
 
+        
+
          instance, this enumeration affects exception caching. When exceptions are cached for a <see
          cref="T:System.Lazy`1" />
+
+        
 
         
 
@@ -134,8 +164,12 @@
 
         
 
+        
+
          property, that exception is cached and rethrown on all subsequent calls to the <see
          cref="P:System.Lazy`1.Value" />
+
+        
 
         
 
@@ -151,8 +185,12 @@
 
         
 
+        
+
          mode, exceptions are never cached. When you specify <see
          cref="F:System.Threading.LazyThreadSafetyMode.None" />
+
+        
 
         
 
@@ -165,8 +203,12 @@
 
         
 
+        
+
         , caching depends on whether you specify an initialization method or allow the default constructor for <paramref
          name="T" />
+
+        
 
         
 
@@ -179,8 +221,12 @@
 
         
 
+        
+
         : new Lazy&lt;Contents&gt;(() =&gt; new Contents(), mode) in C#, or New Lazy(Of Contents)(Function() New Contents()) in Visual Basic. If you use a constructor that does not specify an initialization method, exceptions that are thrown by the default constructor for <paramref
          name="T" />
+
+        
 
         
 
@@ -256,6 +302,8 @@
 
         
 
+        
+
          instance synchronizes access among multiple threads.</para
       >
     </summary>
@@ -285,8 +333,12 @@
 
             
 
+            
+
              instance in a thread-safe manner. If the initialization method (or the default constructor, if there is no initialization method) uses locks internally, deadlocks can occur. If you use a <see
              cref="T:System.Lazy`1" />
+
+            
 
             
 
@@ -299,8 +351,12 @@
 
             
 
+            
+
              parameter), and if that initialization method throws an exception (or fails to handle an exception) the first time you call the <see
              cref="P:System.Lazy`1.Value" />
+
+            
 
             
 
@@ -313,8 +369,12 @@
 
             
 
+            
+
              property. If you use a <see
              cref="T:System.Lazy`1" />
+
+            
 
             
 
@@ -327,8 +387,12 @@
 
             
 
+            
+
              are not cached. In that case, a subsequent call to the <see
              cref="P:System.Lazy`1.Value" />
+
+            
 
             
 
@@ -341,8 +405,12 @@
 
             
 
+            
+
              instance. If the initialization method recursively accesses the <see
              cref="P:System.Lazy`1.Value" />
+
+            
 
             
 
@@ -355,8 +423,12 @@
 
             
 
+            
+
              instance, an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -391,8 +463,12 @@
 
             
 
+            
+
              instance is not thread safe; if the instance is accessed from multiple threads, its behavior is undefined. Use this mode only when high performance is crucial and the <see
              cref="T:System.Lazy`1" />
+
+            
 
             
 
@@ -405,8 +481,12 @@
 
             
 
+            
+
              constructor that specifies an initialization method (<paramref
              name="valueFactory" />
+
+            
 
             
 
@@ -419,8 +499,12 @@
 
             
 
+            
+
              property, then the exception is cached and thrown again on subsequent calls to the <see
              cref="P:System.Lazy`1.Value" />
+
+            
 
             
 
@@ -433,8 +517,12 @@
 
             
 
+            
+
              constructor that does not specify an initialization method, exceptions that are thrown by the default constructor for <paramref
              name="T" />
+
+            
 
             
 
@@ -447,8 +535,12 @@
 
             
 
+            
+
              property might successfully initialize the <see
              cref="T:System.Lazy`1" />
+
+            
 
             
 
@@ -461,6 +553,8 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Lazy`1" />
 
@@ -468,8 +562,12 @@
 
             
 
+            
+
              instance, an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -504,8 +602,12 @@
 
             
 
+            
+
              instance simultaneously, all threads are allowed to run the initialization method (or the default constructor, if there is no initialization method). The first thread to complete initialization sets the value of the <see
              cref="T:System.Lazy`1" />
+
+            
 
             
 
@@ -518,8 +620,12 @@
 
             
 
+            
+
              that were created by the competing threads are discarded. If the initialization method throws an exception on any thread, the exception is propagated out of the <see
              cref="P:System.Lazy`1.Value" />
+
+            
 
             
 
@@ -532,8 +638,12 @@
 
             
 
+            
+
              property remains false, and subsequent calls to the <see
              cref="P:System.Lazy`1.Value" />
+
+            
 
             
 
@@ -546,8 +656,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Lazy`1" />
+
+            
 
             
 

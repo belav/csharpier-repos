@@ -45,6 +45,8 @@
 
           
 
+          
+
            or the <format
            type="text/html">
             <a href="c31e1663-c164-4e65-b66d-d3aa8750a154">Portable Class Library</a>
@@ -54,8 +56,12 @@
 
           
 
+          
+
           , but it is thrown by some members that are. To catch the exception in that case, write a catch statement for <see
            cref="T:System.Exception" />
+
+          
 
           
 
@@ -96,6 +102,8 @@
           <para
             >TargetException inherits from the <see
              cref="T:System.Exception" />
+
+            
 
             
 
@@ -146,6 +154,8 @@
 
             
 
+            
+
              class with an empty message and the root cause of the exception.</para
           >
         </summary>
@@ -178,6 +188,8 @@
           <para
             >TargetException inherits from the <see
              cref="T:System.Exception" />
+
+            
 
             
 
@@ -228,11 +240,15 @@
 
             
 
+            
+
              class with the given message and the root cause exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -274,6 +290,8 @@
 
             
 
+            
+
              class with the specified serialization and context information.</para
           >
         </summary>
@@ -284,10 +302,14 @@
 
           
 
+          
+
           The data for serializing or deserializing the object. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -332,8 +354,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -346,11 +372,15 @@
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Reflection.TargetException" />
+
+            
 
             
 
@@ -401,11 +431,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -420,8 +454,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="inner" />
+
+          
 
           
 

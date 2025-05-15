@@ -36,6 +36,8 @@
 
         
 
+        
+
         . AttributesGroupRef is the reference for an attributeGroup, name property contains the attribute group being referenced. </para
       >
     </summary>
@@ -62,6 +64,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Schema.XmlSchemaAttributeGroupRef" />
+
+            
 
             
 

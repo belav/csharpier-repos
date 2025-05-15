@@ -21,8 +21,12 @@
 
         
 
+        
+
          interface to control the creation and recycling of service objects when one is requested or disposed by an <see
          cref="T:System.ServiceModel.InstanceContext" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          interface is implemented, you must assign your custom instance provider object to the <see
          cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.InstanceProvider" />
+
+        
 
         
 
@@ -52,8 +60,12 @@
 
         
 
+        
+
          object) or a contract behavior (a <see
          cref="T:System.ServiceModel.Description.IContractBehavior" />
+
+        
 
         
 
@@ -69,10 +81,14 @@
 
         
 
+        
+
          object that can insert your custom behavior using a configuration file. If the insertion mechanism is a contract behavior, you can insert the behavior programmatically prior to the opening of the service host or you can implement a custom attribute. (For an example of the contract behavior approach, see the Example section.)</para
       >
       <para>
         <see cref="T:System.ServiceModel.Dispatcher.IInstanceProvider" />
+
+        
 
         
 
@@ -85,6 +101,8 @@
 
         
 
+        
+
          and <see
          cref="M:System.ServiceModel.Dispatcher.IInstanceProvider.ReleaseInstance(System.ServiceModel.InstanceContext,System.Object)" />
 
@@ -92,8 +110,12 @@
 
         
 
+        
+
         . These methods are typically implemented to create service objects using a non-default constructor or to initialize or dispose of some state related to the lifetime of the object. Service object pooling is one example of custom <see
          cref="T:System.ServiceModel.Dispatcher.IInstanceProvider" />
+
+        
 
         
 
@@ -109,8 +131,12 @@
 
         
 
+        
+
          invokes the <see
          cref="Overload:System.ServiceModel.Dispatcher.IInstanceProvider.GetInstance" />
+
+        
 
         
 
@@ -123,6 +149,8 @@
 
         
 
+        
+
          is first created and invokes the <see
          cref="M:System.ServiceModel.Dispatcher.IInstanceProvider.ReleaseInstance(System.ServiceModel.InstanceContext,System.Object)" />
 
@@ -130,8 +158,12 @@
 
         
 
+        
+
          method when the <see
          cref="T:System.ServiceModel.InstanceContext" />
+
+        
 
         
 
@@ -147,8 +179,12 @@
 
         
 
+        
+
          object to release a service object before the <see
          cref="T:System.ServiceModel.InstanceContext" />
+
+        
 
         
 
@@ -161,8 +197,12 @@
 
         
 
+        
+
          to <see
          cref="F:System.ServiceModel.ReleaseInstanceMode.AfterCall" />
+
+        
 
         
 
@@ -175,8 +215,12 @@
 
         
 
+        
+
         . The second method is to call the <see
          cref="M:System.ServiceModel.InstanceContext.ReleaseServiceInstance" />
+
+        
 
         
 
@@ -189,6 +233,8 @@
 
         
 
+        
+
          calls the <see
          cref="M:System.ServiceModel.Dispatcher.IInstanceProvider.ReleaseInstance(System.ServiceModel.InstanceContext,System.Object)" />
 
@@ -196,8 +242,12 @@
 
         
 
+        
+
          method on the dispatcher's instance provider. If a new message arrives after the instance has been released, indigo2 creates a new instance using the <see
          cref="Overload:System.ServiceModel.Dispatcher.IInstanceProvider.GetInstance" />
+
+        
 
         
 
@@ -214,8 +264,12 @@
 
           
 
+          
+
            of the service is <see
            cref="F:System.ServiceModel.InstanceContextMode.Single" />
+
+          
 
           
 
@@ -228,8 +282,12 @@
 
           
 
+          
+
            or <see
            cref="M:System.ServiceModel.Dispatcher.IInstanceProvider.ReleaseInstance(System.ServiceModel.InstanceContext,System.Object)" />
+
+          
 
           
 
@@ -242,8 +300,12 @@
 
           
 
+          
+
            and then calls <see
            cref="M:System.ServiceModel.InstanceContext.GetServiceInstance" />
+
+          
 
           
 
@@ -290,6 +352,8 @@
 
             
 
+            
+
              method to control the exact service object that a indigo2 service receives when it attempts to create a new one.</para
           >
         </remarks>
@@ -298,6 +362,8 @@
           <para
             >Returns a service object given the specified <see
              cref="T:System.ServiceModel.InstanceContext" />
+
+            
 
             
 
@@ -344,6 +410,8 @@
 
             
 
+            
+
              method to control the exact service object that a indigo2 service receives when it attempts to create a new one.</para
           >
         </remarks>
@@ -352,6 +420,8 @@
           <para
             >Returns a service object given the specified <see
              cref="T:System.ServiceModel.InstanceContext" />
+
+            
 
             
 
@@ -366,6 +436,8 @@
         </returns>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -407,6 +479,8 @@
 
             
 
+            
+
              method to perform some custom resource disposal or other recycling customization when a service recycles a service object.</para
           >
         </remarks>
@@ -420,11 +494,15 @@
 
             
 
+            
+
              object recycles a service object.</para
           >
         </summary>
         <param name="instance">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

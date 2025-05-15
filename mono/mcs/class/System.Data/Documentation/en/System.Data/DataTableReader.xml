@@ -24,8 +24,12 @@
 
         
 
+        
+
          works much like any other data reader, such as the <see
          cref="T:System.Data.SqlClient.SqlDataReader" />
+
+        
 
         
 
@@ -38,6 +42,8 @@
 
         
 
+        
+
          provides for iterating over rows in a <see
          cref="T:System.Data.DataTable" />
 
@@ -45,8 +51,12 @@
 
         
 
+        
+
         . In other words, it provides for iterating over rows in a cache. The cached data can be modified while the <see
          cref="T:System.Data.DataTableReader" />
+
+        
 
         
 
@@ -62,8 +72,12 @@
 
         
 
+        
+
          from a <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -76,8 +90,12 @@
 
         
 
+        
+
          object contains one result set with the same data as the <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -90,8 +108,12 @@
 
         
 
+        
+
         . The structure of the returned result is identical in schema and data to the original <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -104,8 +126,12 @@
 
         
 
+        
+
          that was created by calling the <see
          cref="M:System.Data.DataSet.GetDataReader" />
+
+        
 
         
 
@@ -118,8 +144,12 @@
 
         
 
+        
+
          object contains multiple result sets if the <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -132,6 +162,8 @@
 
         
 
+        
+
          objects in the <see
          cref="T:System.Data.DataTableCollection" />
 
@@ -139,8 +171,12 @@
 
         
 
+        
+
          of the <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -156,11 +192,15 @@
 
         
 
+        
+
         ; rows that are marked for deletion are skipped.</para
       >
       <para
         >The DataTableReader provides a stable iterator; that is, the contents of the DataTableReader are not invalidated if the size of the underlying collection is modified during iteration. For example, if one or more rows in the <see
          cref="P:System.Data.DataTable.Rows" />
+
+        
 
         
 
@@ -179,8 +219,12 @@
 
         
 
+        
+
          obtains the contents of one or more <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -211,8 +255,12 @@
 
             
 
+            
+
              class by using data from the supplied <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -247,8 +295,12 @@
 
             
 
+            
+
              based on all or a subset of the tables within a specific <see
              cref="T:System.Data.Dataset" />
+
+            
 
             
 
@@ -261,8 +313,12 @@
 
             
 
+            
+
              method. If you want to create a new <see
              cref="T:System.Data.DataTableReader" />
+
+            
 
             
 
@@ -281,8 +337,12 @@
 
             
 
+            
+
              class using the supplied array of <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -298,6 +358,8 @@
 
           
 
+          
+
           The array of <see
            cref="T:System.Data.DataTable" />
 
@@ -305,8 +367,12 @@
 
           
 
+          
+
            objects that supplies the results for the new <see
            cref="T:System.Data.DataTableReader" />
+
+          
 
           
 
@@ -342,6 +408,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -368,6 +436,8 @@
           <para
             >The depth of nesting for the current row of the <see
              cref="T:System.Data.DataTableReader" />
+
+            
 
             
 
@@ -423,6 +493,8 @@
 
             
 
+            
+
              to see if there are null values before calling this method.</para
           >
         </remarks>
@@ -431,6 +503,8 @@
           <para
             >Gets the value of the specified column as a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -466,6 +540,8 @@
           <para
             >Call <see
              cref="M:System.Data.DataTableReader.IsDBNull(System.Int32)" />
+
+            
 
             
 
@@ -516,6 +592,8 @@
 
             
 
+            
+
              is reading a large data structure into a buffer</para
           >
           <para>If you pass a buffer that is null (Nothing in Visual Basic), GetBytes returns the length of the entire field in bytes, not the remaining size based on the buffer offset parameter.</para>
@@ -536,10 +614,14 @@
 
           
 
+          
+
           The index within the field from which to start the read operation. </param
         >
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -554,10 +636,14 @@
 
           
 
+          
+
           The index within the buffer at which to start placing the data. </param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -588,6 +674,8 @@
           <para
             >Call <see
              cref="M:System.Data.DataTableReader.IsDBNull(System.Int32)" />
+
+            
 
             
 
@@ -649,10 +737,14 @@
 
           
 
+          
+
           The index within the field from which to start the read operation. </param
         >
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -667,10 +759,14 @@
 
           
 
+          
+
           The index within the buffer at which to start placing the data. </param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -705,8 +801,12 @@
 
             
 
+            
+
              method always returns the type of the underlying <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -750,11 +850,15 @@
 
             
 
+            
+
              or coercible to a DataTime.</para
           >
           <para
             >Call <see
              cref="M:System.Data.DataTableReader.IsDBNull(System.Int32)" />
+
+            
 
             
 
@@ -768,6 +872,8 @@
           <para
             >Gets the value of the specified column as a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -807,11 +913,15 @@
 
             
 
+            
+
              or coercible to a Decimal.</para
           >
           <para
             >Call <see
              cref="M:System.Data.DataTableReader.IsDBNull(System.Int32)" />
+
+            
 
             
 
@@ -825,6 +935,8 @@
           <para
             >Gets the value of the specified column as a <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -860,6 +972,8 @@
           <para
             >Call <see
              cref="M:System.Data.DataTableReader.IsDBNull(System.Int32)" />
+
+            
 
             
 
@@ -903,11 +1017,15 @@
 
             
 
+            
+
             . Enumerators cannot be used to modify the underlying collection.</para
           >
           <para
             >At first, the enumerator is positioned before the first element in the collection. At this position, calling <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -923,6 +1041,8 @@
 
             
 
+            
+
             , and returns the same object until either <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
 
@@ -930,8 +1050,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 
@@ -947,6 +1071,8 @@
 
             
 
+            
+
              provides forward-only access to its data, calling the <see
              cref="M:System.Collections.IEnumerator.Reset" />
 
@@ -954,8 +1080,12 @@
 
             
 
+            
+
              method of the IEnumerator throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -971,8 +1101,12 @@
 
             
 
+            
+
              provides a stable enumerator. This means that even if row deletions or additions occur within the underlying data, the enumerator returned by a call to <see
              cref="M:System.Data.DataTableReader.GetEnumerator" />
+
+            
 
             
 
@@ -990,6 +1124,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -1026,6 +1162,8 @@
 
             
 
+            
+
              that is the data type of the object.</para
           >
         </summary>
@@ -1034,6 +1172,8 @@
           <para
             >The <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -1065,6 +1205,8 @@
           <para
             >Call <see
              cref="M:System.Data.DataTableReader.IsDBNull(System.Int32)" />
+
+            
 
             
 
@@ -1108,11 +1250,15 @@
 
             
 
+            
+
              or coercible to a Guid.</para
           >
           <para
             >Call <see
              cref="M:System.Data.DataTableReader.IsDBNull(System.Int32)" />
+
+            
 
             
 
@@ -1156,11 +1302,15 @@
 
             
 
+            
+
              or coercible to an Int16.</para
           >
           <para
             >Call <see
              cref="M:System.Data.DataTableReader.IsDBNull(System.Int32)" />
+
+            
 
             
 
@@ -1204,11 +1354,15 @@
 
             
 
+            
+
              or coercible to an Int32.</para
           >
           <para
             >Call <see
              cref="M:System.Data.DataTableReader.IsDBNull(System.Int32)" />
+
+            
 
             
 
@@ -1252,11 +1406,15 @@
 
             
 
+            
+
              or coercible to an Int64.</para
           >
           <para
             >Call <see
              cref="M:System.Data.DataTableReader.IsDBNull(System.Int32)" />
+
+            
 
             
 
@@ -1300,6 +1458,8 @@
 
             
 
+            
+
              methods provide inverse functionality. That is, calling GetOrdinal on the return value of calling GetName should return the original parameter passed to GetName; the same applies to calling the procedures in the opposite order. </para
           >
         </remarks>
@@ -1308,6 +1468,8 @@
           <para
             >Gets the value of the specified column as a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -1346,6 +1508,8 @@
 
             
 
+            
+
              class must be provided with an ordinal column number, you can use the GetOrdinal method to retrieve the column number, given the name of the column. </para
           >
           <para>GetOrdinal performs a case-sensitive lookup first. If it fails, a second case-insensitive search is made. If the column number is not found an IndexOutOfRangeException is thrown.</para>
@@ -1362,6 +1526,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1399,8 +1565,12 @@
 
             
 
+            
+
              always returns the type stored within the underlying <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -1413,8 +1583,12 @@
 
             
 
+            
+
               method always returns the same type as the type stored within the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1427,6 +1601,8 @@
 
             
 
+            
+
              class, calling the <see
              cref="M:System.Data.DataTableReader.GetProviderSpecificFieldType(System.Int32)" />
 
@@ -1434,8 +1610,12 @@
 
             
 
+            
+
              method returns the same type as calling the <see
              cref="M:System.Type.GetType" />
+
+            
 
             
 
@@ -1453,6 +1633,8 @@
           <para
             >The <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -1491,8 +1673,12 @@
 
             
 
+            
+
              always returns the type stored within the underlying <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -1505,8 +1691,12 @@
 
             
 
+            
+
              method always returns data of the same type as the data stored within the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1519,6 +1709,8 @@
 
             
 
+            
+
              class, calling the <see
              cref="M:System.Data.DataTableReader.GetProviderSpecificValue(System.Int32)" />
 
@@ -1526,8 +1718,12 @@
 
             
 
+            
+
              method returns the same value and type as calling the <see
              cref="M:System.Data.DataTableReader.GetValue(System.Int32)" />
+
+            
 
             
 
@@ -1573,8 +1769,12 @@
 
             
 
+            
+
              always returns the data of the type stored within the underlying <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -1587,8 +1787,12 @@
 
             
 
+            
+
              method is always of the same types as the data stored within the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1601,6 +1805,8 @@
 
             
 
+            
+
              class, calling the <see
              cref="M:System.Data.DataTableReader.GetProviderSpecificValues(System.Object[])" />
 
@@ -1608,8 +1814,12 @@
 
             
 
+            
+
              method returns the same values and types as calling the <see
              cref="M:System.Data.DataTableReader.GetValues(System.Object[])" />
+
+            
 
             
 
@@ -1623,6 +1833,8 @@
           <para
             >Fills the supplied array with provider-specific type information for all the columns in the <see
              cref="T:System.Data.DataTableReader" />
+
+            
 
             
 
@@ -1642,8 +1854,12 @@
 
           
 
+          
+
           An array of objects to be filled in with type information for the columns in the <see
            cref="T:System.Data.DataTableReader" />
+
+          
 
           
 
@@ -1695,6 +1911,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -1720,6 +1938,8 @@
 
                   
 
+                  
+
                     (or <see
                    cref="P:System.Data.DataColumn.MaxLength" />
 
@@ -1727,8 +1947,12 @@
 
                   
 
+                  
+
                   ) property of the <see
                    cref="T:System.Data.DataColumn" />
+
+                  
 
                   
 
@@ -1775,6 +1999,8 @@
 
                   
 
+                  
+
                   . This column cannot contain a null value.</para
                 >
               </description>
@@ -1792,8 +2018,12 @@
 
                   
 
+                  
+
                    and its <see
                    cref="P:System.Data.DataColumn.MaxLength" />
+
+                  
 
                   
 
@@ -1840,6 +2070,8 @@
 
                   
 
+                  
+
                    can have the same value in this column. IsUnique is guaranteed to be true if the column represents a key by itself or if there is a constraint of type UNIQUE that applies only to this column. false: The column can contain duplicate values in the DataTable. The default of this column is false.</para
                 >
               </description>
@@ -1852,6 +2084,8 @@
                 <para
                   >true: The column is one of a set of columns that, taken together, uniquely identify the row in the <see
                    cref="T:System.Data.DataTable" />
+
+                  
 
                   
 
@@ -1898,6 +2132,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -1910,6 +2146,8 @@
                 <para
                   >The name of the column in the <see
                    cref="T:System.Data.DataTable" />
+
+                  
 
                   
 
@@ -1932,8 +2170,12 @@
 
                   
 
+                  
+
                   's <see
                    cref="P:System.Data.DataColumn.AutoIncrementSeed" />
+
+                  
 
                   
 
@@ -1956,8 +2198,12 @@
 
                   
 
+                  
+
                   's <see
                    cref="P:System.Data.DataColumn.AutoIncrementStep" />
+
+                  
 
                   
 
@@ -1980,8 +2226,12 @@
 
                   
 
+                  
+
                   's <see
                    cref="P:System.Data.DataColumn.DefaultValue" />
+
+                  
 
                   
 
@@ -2012,8 +2262,12 @@
 
                   
 
+                  
+
                    value associated with the <see
                    cref="T:System.Data.DataColumn" />
+
+                  
 
                   
 
@@ -2036,8 +2290,12 @@
 
                   
 
+                  
+
                   's <see
                    cref="P:System.Data.DataTable.Namespace" />
+
+                  
 
                   
 
@@ -2060,8 +2318,12 @@
 
                   
 
+                  
+
                   's <see
                    cref="P:System.Data.DataColumn.Namespace" />
+
+                  
 
                   
 
@@ -2083,8 +2345,12 @@
 
             
 
+            
+
              that describes the column metadata of the <see
              cref="T:System.Data.DataTableReader" />
+
+            
 
             
 
@@ -2098,6 +2364,8 @@
           <para
             >A <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -2128,6 +2396,8 @@
           <para
             >Call <see
              cref="M:System.Data.DataTableReader.IsDBNull(System.Int32)" />
+
+            
 
             
 
@@ -2171,6 +2441,8 @@
 
             
 
+            
+
              to see if there are null values before calling this method, you do not have to do this. </para
           >
         </remarks>
@@ -2208,11 +2480,15 @@
 
             
 
+            
+
             , the GetValues method provides the most efficient solution.</para
           >
           <para
             >You can pass an <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -2237,6 +2513,8 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Object" />
 
@@ -2244,8 +2522,12 @@
 
           
 
+          
+
            into which to copy the column values from the <see
            cref="T:System.Data.DataTableReader" />
+
+          
 
           
 
@@ -2277,8 +2559,12 @@
 
             
 
+            
+
              contains multiple result sets, you can examine the value of the HasRows property immediately after you call the <see
              cref="M:System.Data.DataTableReader.NextResult" />
+
+            
 
             
 
@@ -2294,8 +2580,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Data.DataTableReader" />
+
+            
 
             
 
@@ -2309,6 +2599,8 @@
           <para
             >Gets a value that indicates whether the <see
              cref="T:System.Data.DataTableReader" />
+
+            
 
             
 
@@ -2340,6 +2632,8 @@
 
             
 
+            
+
              is the only method and IsClosed and <see
              cref="P:System.Data.DataTableReader.RecordsAffected" />
 
@@ -2347,8 +2641,12 @@
 
             
 
+            
+
              are the only properties that can be accessed after the <see
              cref="T:System.Data.DataTableReader" />
+
+            
 
             
 
@@ -2362,6 +2660,8 @@
           <para
             >Gets a value that indicates whether the <see
              cref="T:System.Data.DataTableReader" />
+
+            
 
             
 
@@ -2397,8 +2697,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Data.DataTableReader.GetChar(System.Int32)" />
+
+            
 
             
 
@@ -2416,6 +2720,8 @@
           <para
             >true if the specified column value is equivalent to <see
              cref="T:System.DBNull" />
+
+            
 
             
 
@@ -2488,6 +2794,8 @@
 
             
 
+            
+
              over a <see
              cref="T:System.Data.DataSet" />
 
@@ -2495,8 +2803,12 @@
 
             
 
+            
+
              that contains two or more tables, or an array that contains two or more <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -2512,6 +2824,8 @@
 
             
 
+            
+
              is positioned on the first result.</para
           >
         </remarks>
@@ -2520,6 +2834,8 @@
           <para
             >Advances the <see
              cref="T:System.Data.DataTableReader" />
+
+            
 
             
 
@@ -2556,6 +2872,8 @@
 
             
 
+            
+
              is before the first record. Therefore, you must call Read to start accessing any data.</para
           >
         </remarks>
@@ -2564,6 +2882,8 @@
           <para
             >Advances the <see
              cref="T:System.Data.DataTableReader" />
+
+            
 
             
 

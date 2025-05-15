@@ -47,9 +47,13 @@
 
         
 
+        
+
          that is used. You can obtain the key string for this attribute by running the Strong Name tool (Sn.exe) with the token and public key options (<system
         >Sn</system>
         <system>-tp</system>
+
+        
 
         
 
@@ -59,6 +63,8 @@
          type="text/html">
           <a href="c1d2b532-1b8e-4c7a-8ac5-53b801135ec6">Sn.exe (Strong Name Tool)</a>
         </format>
+
+        
 
         
 
@@ -75,8 +81,12 @@
 
         
 
+        
+
          attribute can be used to define strong-name requirements for access to public members at the assembly level. In the .NET Framework version 2.0 and later, you can also use the <see
          cref="T:System.Runtime.CompilerServices.InternalsVisibleToAttribute" />
+
+        
 
         
 
@@ -93,10 +103,14 @@
 
         
 
+        
+
          or <format
          type="text/html">
           <a href="80e7a33a-ca91-450b-a00e-c5a7986e228c">Friend Assemblies (Visual Basic)</a>
         </format>
+
+        
 
         
 
@@ -110,6 +124,8 @@
       <para
         >Allows security actions for <see
          cref="T:System.Security.Permissions.StrongNameIdentityPermission" />
+
+        
 
         
 
@@ -151,8 +167,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Security.Permissions.SecurityAction" />
+
+            
 
             
 
@@ -168,8 +188,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 
@@ -214,6 +238,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -222,6 +248,8 @@
           <para
             >A <see
              cref="T:System.Security.Permissions.StrongNameIdentityPermission" />
+
+            
 
             
 
@@ -251,6 +279,8 @@
           <para
             >A strong-named assembly contains a public key, a name, and a version. The name portion of the strong name is the simple name of the assembly; that is, the name of the assembly without the file extension. For example, to reference mylibrary.dll, set the <see
              cref="P:System.Security.Permissions.StrongNameIdentityPermissionAttribute.Name" />
+
+            
 
             
 

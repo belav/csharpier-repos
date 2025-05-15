@@ -31,6 +31,8 @@
 
         
 
+        
+
          control.</para
       >
     </summary>
@@ -47,6 +49,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.WebControls.DataListComponentEditor" />
+
+            
 
             
 
@@ -75,6 +79,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.WebControls.DataListComponentEditor" />
+
+            
 
             
 
@@ -138,6 +144,8 @@
 
             
 
+            
+
              objects corresponding to the pages that can be edited using this editor.</para
           >
         </summary>
@@ -146,6 +154,8 @@
           <para
             >An array of <see
              cref="T:System.Type" />
+
+            
 
             
 

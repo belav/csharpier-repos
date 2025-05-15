@@ -32,8 +32,12 @@
 
         
 
+        
+
          instances (information for applications) and <see
          cref="T:System.Xml.Schema.XmlSchemaDocumentation" />
+
+        
 
         
 
@@ -70,6 +74,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Schema.XmlSchemaAnnotation" />
+
+            
 
             
 
@@ -145,8 +151,12 @@
 
             
 
+            
+
              (information used by applications) or <see
              cref="T:System.Xml.Schema.XmlSchemaDocumentation" />
+
+            
 
             
 

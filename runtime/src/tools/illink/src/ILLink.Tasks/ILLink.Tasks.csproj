@@ -96,9 +96,7 @@
     <PackageReference Update="@(PackageReference)">
       <PrivateAssets>All</PrivateAssets>
       <Publish Condition="'%(PackageReference.Publish)' == ''">true</Publish>
-      <ExcludeAssets Condition="'%(PackageReference.Publish)' == 'false'"
->runtime</ExcludeAssets
-      >
+      <ExcludeAssets Condition="'%(PackageReference.Publish)' == 'false'">runtime</ExcludeAssets>
     </PackageReference>
     <ProjectReference Update="@(ProjectReference)">
       <PrivateAssets>All</PrivateAssets>

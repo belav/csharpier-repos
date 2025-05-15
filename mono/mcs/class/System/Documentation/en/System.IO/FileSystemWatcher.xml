@@ -45,11 +45,15 @@
 
         
 
+        
+
          to watch for changes in a specified directory. You can watch for changes in files and subdirectories of the specified directory. You can create a component to watch files on a local computer, a network drive, or a remote computer.</para
       >
       <para
         >To watch for changes in all files, set the <see
          cref="P:System.IO.FileSystemWatcher.Filter" />
+
+        
 
         
 
@@ -62,6 +66,8 @@
 
         
 
+        
+
          property to the file name. For example, to watch for changes in the file MyDoc.txt, set the <see
          cref="P:System.IO.FileSystemWatcher.Filter" />
 
@@ -69,8 +75,12 @@
 
         
 
+        
+
          property to "MyDoc.txt". You can also watch for changes in a certain type of file. For example, to watch for changes in text files, set the <see
          cref="P:System.IO.FileSystemWatcher.Filter" />
+
+        
 
         
 
@@ -86,6 +96,8 @@
 
         
 
+        
+
          property to one of the <see
          cref="T:System.IO.NotifyFilters" />
 
@@ -93,8 +105,12 @@
 
         
 
+        
+
          values. For more information on the type of changes you can watch, see <see
          cref="T:System.IO.NotifyFilters" />
+
+        
 
         
 
@@ -110,6 +126,8 @@
 
         
 
+        
+
          property to "*.txt" and call the <see
          cref="M:System.IO.FileSystemWatcher.WaitForChanged(System.IO.WatcherChangeTypes)" />
 
@@ -117,8 +135,12 @@
 
         
 
+        
+
          method with a <see
          cref="F:System.IO.WatcherChangeTypes.Renamed" />
+
+        
 
         
 
@@ -134,8 +156,12 @@
 
         
 
+        
+
         . If there are many changes in a short time, the buffer can overflow. This causes the component to lose track of changes in the directory, and it will only provide blanket notification. Increasing the size of the buffer with the <see
          cref="P:System.IO.FileSystemWatcher.InternalBufferSize" />
+
+        
 
         
 
@@ -148,8 +174,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" />
+
+        
 
         
 
@@ -165,8 +195,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.IO.FileSystemWatcher.#ctor" />
+
+        
 
         
 
@@ -177,6 +211,8 @@
       <para
         >Please note the following when using the <see
          cref="T:System.IO.FileSystemWatcher" />
+
+        
 
         
 
@@ -197,6 +233,8 @@
 
             
 
+            
+
              reports changes to files using the short 8.3 file name format. For example, a change to  "LongFileName.LongExtension" could be reported as "LongFil~.Lon".</para
           >
         </item>
@@ -209,10 +247,14 @@
 
             
 
+            
+
              is thrown when either the immediate caller or the derived class does not have full-trust permission. For details about security demands, see <format
              type="text/html">
               <a href="a33fd5f9-2de9-4653-a4f0-d9df25082c4d">Link Demands</a>
             </format>
+
+            
 
             
 
@@ -230,6 +272,8 @@
 
             
 
+            
+
              property for monitoring a directory over the network is 64 KB.</para
           >
         </item>
@@ -238,6 +282,8 @@
         <para
           > Running <see
            cref="T:System.IO.FileSystemWatcher" />
+
+          
 
           
 
@@ -257,8 +303,12 @@
 
         
 
+        
+
          object interpret a cut-and-paste action or a move action as a rename action for a folder and its contents. If you cut and paste a folder with files into a folder being watched, the <see
          cref="T:System.IO.FileSystemWatcher" />
+
+        
 
         
 
@@ -274,8 +324,12 @@
 
         
 
+        
+
           and <see
          cref="M:System.IO.FileSystemWatcher.OnRenamed(System.IO.RenamedEventArgs)" />
+
+        
 
         
 
@@ -311,8 +365,12 @@
 
               
 
+              
+
               , <see
                cref="E:System.IO.FileSystemWatcher.Created" />
+
+              
 
               
 
@@ -356,8 +414,12 @@
 
             
 
+            
+
              and some <see
              cref="M:System.IO.FileSystemWatcher.OnCreated(System.IO.FileSystemEventArgs)" />
+
+            
 
             
 
@@ -370,8 +432,12 @@
 
             
 
+            
+
              events might be raised. Moving a file is a complex operation that consists of multiple simple operations, therefore raising multiple events. Likewise, some applications (for example, antivirus software) might cause additional file system events that are detected by <see
              cref="T:System.IO.FileSystemWatcher" />
+
+            
 
             
 
@@ -389,8 +455,12 @@
 
             
 
+            
+
              can watch disks as long as they are not switched or removed. The <see
              cref="T:System.IO.FileSystemWatcher" />
+
+            
 
             
 
@@ -408,8 +478,12 @@
 
             
 
+            
+
              objects are watching the same UNC path in Windows XP prior to Service Pack 1, or Windows 2000 SP2 or earlier, then only one of the objects will raise an event. On machines running Windows XP SP1 and newer, Windows 2000 SP3 or newer or Windows Server 2003, all <see
              cref="T:System.IO.FileSystemWatcher" />
+
+            
 
             
 
@@ -427,6 +501,8 @@
 
         
 
+        
+
          may miss an event when the buffer size is exceeded. To avoid missing events, follow these guidelines:</para
       >
       <list type="bullet">
@@ -434,6 +510,8 @@
           <para
             >Increase the buffer size by setting the <see
              cref="P:System.IO.FileSystemWatcher.InternalBufferSize" />
+
+            
 
             
 
@@ -477,6 +555,8 @@
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.IO.FileSystemWatcher" />
+
+            
 
             
 
@@ -565,8 +645,12 @@
 
               
 
+              
+
                is set, and <see
                cref="P:System.IO.FileSystemWatcher.EnableRaisingEvents" />
+
+              
 
               
 
@@ -581,6 +665,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.FileSystemWatcher" />
+
+            
 
             
 
@@ -619,8 +705,12 @@
 
               
 
+              
+
                is set, and <see
                cref="P:System.IO.FileSystemWatcher.EnableRaisingEvents" />
+
+              
 
               
 
@@ -633,6 +723,8 @@
           <para
             >You cannot watch a remote computer that does not have Windows NT or Windows 2000. You cannot watch a remote Windows NT 4.0 computer from a Windows NT 4.0 computer. The <see
              cref="P:System.IO.FileSystemWatcher.Filter" />
+
+            
 
             
 
@@ -651,11 +743,15 @@
 
             
 
+            
+
              class, given the specified directory to monitor.</para
           >
         </summary>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -697,8 +793,12 @@
 
               
 
+              
+
                is set, and <see
                cref="P:System.IO.FileSystemWatcher.EnableRaisingEvents" />
+
+              
 
               
 
@@ -720,6 +820,8 @@
 
             
 
+            
+
              class, given the specified directory and type of files to monitor.</para
           >
         </summary>
@@ -730,10 +832,14 @@
 
           
 
+          
+
           The directory to monitor, in standard or Universal Naming Convention (UNC) notation. </param
         >
         <param name="filter">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -770,6 +876,8 @@
 
             
 
+            
+
              method ends the initialization. Using the <see
              cref="M:System.IO.FileSystemWatcher.BeginInit" />
 
@@ -777,8 +885,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IO.FileSystemWatcher.EndInit" />
+
+            
 
             
 
@@ -792,6 +904,8 @@
           <para
             >Begins the initialization of a <see
              cref="T:System.IO.FileSystemWatcher" />
+
+            
 
             
 
@@ -837,12 +951,16 @@
 
             
 
+            
+
              event is raised when changes are made to the size, system attributes, last write time, last access time, or security permissions of a file or directory in the directory being monitored.</para
           >
           <block subset="none" type="note">
             <para
               >Common file system operations might raise more than one event. For example, when a file is moved from one directory to another, several <see
                cref="M:System.IO.FileSystemWatcher.OnChanged(System.IO.FileSystemEventArgs)" />
+
+              
 
               
 
@@ -855,6 +973,8 @@
 
               
 
+              
+
                and <see
                cref="M:System.IO.FileSystemWatcher.OnDeleted(System.IO.FileSystemEventArgs)" />
 
@@ -862,8 +982,12 @@
 
               
 
+              
+
                events might be raised. Moving a file is a complex operation that consists of multiple simple operations, therefore raising multiple events. Likewise, some applications (for example, antivirus software) might cause additional file system events that are detected by <see
                cref="T:System.IO.FileSystemWatcher" />
+
+              
 
               
 
@@ -880,6 +1004,8 @@
 
             
 
+            
+
              to restrict the number of notifications raised when this event is handled.</para
           >
           <block subset="none" type="note">
@@ -891,8 +1017,12 @@
 
               
 
+              
+
                event is raised unexpectedly when a file is renamed, but is not raised when a directory is renamed. To watch for renaming, use the <see
                cref="E:System.IO.FileSystemWatcher.Renamed" />
+
+              
 
               
 
@@ -910,6 +1040,8 @@
 
               
 
+              
+
                event is raised in relation to the other <see
                cref="T:System.IO.FileSystemWatcher" />
 
@@ -917,8 +1049,12 @@
 
               
 
+              
+
                events may change when the <see
                cref="P:System.IO.FileSystemWatcher.SynchronizingObject" />
+
+              
 
               
 
@@ -933,6 +1069,8 @@
           <para
             >Occurs when a file or directory in the specified <see
              cref="P:System.IO.FileSystemWatcher.Path" />
+
+            
 
             
 
@@ -978,8 +1116,12 @@
 
             
 
+            
+
              event in the directory to which the file was copied, if that directory is being watched. If the directory from which you copied was being watched by another instance of <see
              cref="T:System.IO.FileSystemWatcher" />
+
+            
 
             
 
@@ -992,8 +1134,12 @@
 
             
 
+            
+
             . FileSystemWatcher1 is set to watch "C:\My Documents", and FileSystemWatcher2 is set to watch "C:\Your Documents". If you copy a file from "My Documents" into "Your Documents", a <see
              cref="E:System.IO.FileSystemWatcher.Created" />
+
+            
 
             
 
@@ -1006,8 +1152,12 @@
 
             
 
+            
+
              event would be raised by FileSystemWatcher2 and a <see
              cref="E:System.IO.FileSystemWatcher.Deleted" />
+
+            
 
             
 
@@ -1024,8 +1174,12 @@
 
               
 
+              
+
                and some <see
                cref="M:System.IO.FileSystemWatcher.OnCreated(System.IO.FileSystemEventArgs)" />
+
+              
 
               
 
@@ -1038,8 +1192,12 @@
 
               
 
+              
+
                events might be raised. Moving a file is a complex operation that consists of multiple simple operations, therefore raising multiple events. Likewise, some applications (for example, antivirus software) might cause additional file system events that are detected by <see
                cref="T:System.IO.FileSystemWatcher" />
+
+              
 
               
 
@@ -1057,6 +1215,8 @@
 
               
 
+              
+
                event is raised in relation to the other <see
                cref="T:System.IO.FileSystemWatcher" />
 
@@ -1064,8 +1224,12 @@
 
               
 
+              
+
                events may change when the <see
                cref="P:System.IO.FileSystemWatcher.SynchronizingObject" />
+
+              
 
               
 
@@ -1082,6 +1246,8 @@
 
             
 
+            
+
              event is raised as soon as a file is created. If a file is being copied or transferred into a watched directory, the <see
              cref="M:System.IO.FileSystemWatcher.OnCreated(System.IO.FileSystemEventArgs)" />
 
@@ -1089,8 +1255,12 @@
 
             
 
+            
+
              event will be raised immediately, followed by one or more <see
              cref="M:System.IO.FileSystemWatcher.OnChanged(System.IO.FileSystemEventArgs)" />
+
+            
 
             
 
@@ -1104,6 +1274,8 @@
           <para
             >Occurs when a file or directory in the specified <see
              cref="P:System.IO.FileSystemWatcher.Path" />
+
+            
 
             
 
@@ -1149,8 +1321,12 @@
 
             
 
+            
+
              event in the directory to which the file was copied, if that directory is being watched. If the directory from which you copied was being watched by another instance of <see
              cref="T:System.IO.FileSystemWatcher" />
+
+            
 
             
 
@@ -1163,8 +1339,12 @@
 
             
 
+            
+
             . FileSystemWatcher1 is set to watch "C:\My Documents", and FileSystemWatcher2 is set to watch "C:\Your Documents". If you copy a file from "My Documents" into "Your Documents", a <see
              cref="E:System.IO.FileSystemWatcher.Created" />
+
+            
 
             
 
@@ -1177,8 +1357,12 @@
 
             
 
+            
+
              event would be raised by FileSystemWatcher2 and a <see
              cref="E:System.IO.FileSystemWatcher.Deleted" />
+
+            
 
             
 
@@ -1195,8 +1379,12 @@
 
               
 
+              
+
                and some <see
                cref="M:System.IO.FileSystemWatcher.OnCreated(System.IO.FileSystemEventArgs)" />
+
+              
 
               
 
@@ -1209,8 +1397,12 @@
 
               
 
+              
+
                events might be raised. Moving a file is a complex operation that consists of multiple simple operations, therefore raising multiple events. Likewise, some applications (for example, antivirus software) might cause additional file system events that are detected by <see
                cref="T:System.IO.FileSystemWatcher" />
+
+              
 
               
 
@@ -1228,6 +1420,8 @@
 
               
 
+              
+
                event is raised in relation to the other <see
                cref="T:System.IO.FileSystemWatcher" />
 
@@ -1235,8 +1429,12 @@
 
               
 
+              
+
                events may change when the <see
                cref="P:System.IO.FileSystemWatcher.SynchronizingObject" />
+
+              
 
               
 
@@ -1251,6 +1449,8 @@
           <para
             >Occurs when a file or directory in the specified <see
              cref="P:System.IO.FileSystemWatcher.Path" />
+
+            
 
             
 
@@ -1290,8 +1490,12 @@
 
             
 
+            
+
              method and the <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -1304,8 +1508,12 @@
 
             
 
+            
+
              invokes the protected <see
              cref="M:System.IO.FileSystemWatcher.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -1318,8 +1526,12 @@
 
             
 
+            
+
              parameter set to true. <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -1332,8 +1544,12 @@
 
             
 
+            
+
              with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -1349,6 +1565,8 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.IO.Compression.DeflateStream" />
 
@@ -1356,8 +1574,12 @@
 
             
 
+            
+
              references. This method invokes the <see
              cref="M:System.ComponentModel.Component.Dispose" />
+
+            
 
             
 
@@ -1376,11 +1598,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1423,12 +1649,16 @@
 
             
 
+            
+
              to true.</para
           >
           <block subset="none" type="note">
             <para
               >The component will not watch the specified directory until the <see
                cref="P:System.IO.FileSystemWatcher.Path" />
+
+              
 
               
 
@@ -1441,12 +1671,16 @@
 
               
 
+              
+
                is true.</para
             >
           </block>
           <para
             >The <see
              cref="M:System.IO.FileSystemWatcher.WaitForChanged(System.IO.WatcherChangeTypes,System.Int32)" />
+
+            
 
             
 
@@ -1488,6 +1722,8 @@
 
             
 
+            
+
              method starts the initialization. Using the <see
              cref="M:System.IO.FileSystemWatcher.BeginInit" />
 
@@ -1495,8 +1731,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IO.FileSystemWatcher.EndInit" />
+
+            
 
             
 
@@ -1510,6 +1750,8 @@
           <para
             >Ends the initialization of a <see
              cref="T:System.IO.FileSystemWatcher" />
+
+            
 
             
 
@@ -1549,8 +1791,12 @@
 
             
 
+            
+
              object from monitoring changes. For example, if the object is monitoring changes in a remote directory and the connection to that directory is lost, the <see
              cref="E:System.IO.FileSystemWatcher.Error" />
+
+            
 
             
 
@@ -1566,6 +1812,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.IO.FileSystemWatcher.Filter" />
 
@@ -1573,8 +1821,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" />
+
+            
 
             
 
@@ -1591,8 +1843,12 @@
 
               
 
+              
+
                and some <see
                cref="M:System.IO.FileSystemWatcher.OnCreated(System.IO.FileSystemEventArgs)" />
+
+              
 
               
 
@@ -1605,8 +1861,12 @@
 
               
 
+              
+
                events might be raised. Moving a file is a complex operation that consists of multiple simple operations, therefore raising multiple events. Likewise, some applications (for example, antivirus software) might cause additional file system events that are detected by <see
                cref="T:System.IO.FileSystemWatcher" />
+
+              
 
               
 
@@ -1621,6 +1881,8 @@
           <para
             >Occurs when the instance of <see
              cref="T:System.IO.FileSystemWatcher" />
+
+            
 
             
 
@@ -1670,8 +1932,12 @@
 
             
 
+            
+
              property to an empty string (""). To watch a specific file, set the <see
              cref="P:System.IO.FileSystemWatcher.Filter" />
+
+            
 
             
 
@@ -1684,8 +1950,12 @@
 
             
 
+            
+
              property to "MyDoc.txt". You can also watch for changes in a certain type of file. For example, to watch for changes in any text files, set the <see
              cref="P:System.IO.FileSystemWatcher.Filter" />
+
+            
 
             
 
@@ -1701,8 +1971,12 @@
 
             
 
+            
+
              property can be changed after the <see
              cref="T:System.IO.FileSystemWatcher" />
+
+            
 
             
 
@@ -1718,8 +1992,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" />
+
+            
 
             
 
@@ -1732,10 +2010,14 @@
 
             
 
+            
+
              properties.</para
           >
           <para>
             <see cref="P:System.IO.FileSystemWatcher.Filter" />
+
+            
 
             
 
@@ -1867,8 +2149,12 @@
 
             
 
+            
+
              to true when you want to watch for change notifications for files and directories contained within the directory specified through the <see
              cref="P:System.IO.FileSystemWatcher.Path" />
+
+            
 
             
 
@@ -1881,6 +2167,8 @@
 
             
 
+            
+
              property to false helps reduce the number of notifications sent to the internal buffer. For more information on filtering out unwanted notifications, see the <see
              cref="P:System.IO.FileSystemWatcher.NotifyFilter" />
 
@@ -1888,8 +2176,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.IO.FileSystemWatcher.InternalBufferSize" />
+
+            
 
             
 
@@ -1905,6 +2197,8 @@
 
             
 
+            
+
              is recursive through the entire sub tree, not just the immediate child directories. The relative path to a file or directory within the sub tree returns in the <see
              cref="P:System.IO.FileSystemEventArgs.Name" />
 
@@ -1912,8 +2206,12 @@
 
             
 
+            
+
              property of <see
              cref="T:System.IO.FileSystemEventArgs" />
+
+            
 
             
 
@@ -1926,8 +2224,12 @@
 
             
 
+            
+
              property of <see
              cref="T:System.IO.RenamedEventArgs" />
+
+            
 
             
 
@@ -1940,8 +2242,12 @@
 
             
 
+            
+
              property of <see
              cref="T:System.IO.FileSystemEventArgs" />
+
+            
 
             
 
@@ -1954,8 +2260,12 @@
 
             
 
+            
+
              property of <see
              cref="T:System.IO.RenamedEventArgs" />
+
+            
 
             
 
@@ -1966,6 +2276,8 @@
           <para
             >If a directory is created in the sub tree of the directory you are watching, and <see
              cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" />
+
+            
 
             
 
@@ -2013,8 +2325,12 @@
 
             
 
+            
+
              property to less than 4096 bytes, your value is discarded and the <see
              cref="P:System.IO.FileSystemWatcher.InternalBufferSize" />
+
+            
 
             
 
@@ -2030,8 +2346,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" />
+
+            
 
             
 
@@ -2085,11 +2405,15 @@
 
             
 
+            
+
              enumeration to watch for more than one type of change at a time. For example, you can watch for changes in size of a file, and for changes in the LastWrite time. This raises an event anytime there is a change in file or folder size, or a change in the LastWrite time of the file or folder.</para
           >
           <para
             >This is one way to filter out unwanted notifications. For more information on filtering out unwanted notifications, see the <see
              cref="P:System.IO.FileSystemWatcher.Filter" />
+
+            
 
             
 
@@ -2102,8 +2426,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.IO.FileSystemWatcher.InternalBufferSize" />
+
+            
 
             
 
@@ -2149,6 +2477,8 @@
 
             
 
+            
+
              is called when changes are made to the size, system attributes, last write time, last access time, or security permissions of a file or directory in the directory being monitored.</para
           >
           <para
@@ -2159,8 +2489,12 @@
 
             
 
+            
+
              property to restrict the number of events raised when the <see
              cref="E:System.IO.FileSystemWatcher.Changed" />
+
+            
 
             
 
@@ -2176,6 +2510,8 @@
 
             
 
+            
+
              event is raised as soon as a file is created. If a file is being copied or transferred into a watched directory, the <see
              cref="M:System.IO.FileSystemWatcher.OnCreated(System.IO.FileSystemEventArgs)" />
 
@@ -2183,8 +2519,12 @@
 
             
 
+            
+
              event will be raised immediately, followed by one or more <see
              cref="M:System.IO.FileSystemWatcher.OnChanged(System.IO.FileSystemEventArgs)" />
+
+            
 
             
 
@@ -2204,6 +2544,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2212,6 +2554,8 @@
           <para
             >Raises the <see
              cref="E:System.IO.FileSystemWatcher.Changed" />
+
+            
 
             
 
@@ -2227,8 +2571,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.FileSystemEventArgs" />
+
+          
 
           
 
@@ -2269,11 +2617,15 @@
 
             
 
+            
+
              is called when a file or directory is created in the directory being monitored.</para
           >
           <para
             >Some common occurrences, such as copying or moving a file or directory, do not correspond directly to an event, but these occurrences do cause events to be raised. When you copy a file or directory, the system raises a <see
              cref="E:System.IO.FileSystemWatcher.Created" />
+
+            
 
             
 
@@ -2286,8 +2638,12 @@
 
             
 
+            
+
             , no event would be raised. For example, you create two instances of <see
              cref="T:System.IO.FileSystemWatcher" />
+
+            
 
             
 
@@ -2300,6 +2656,8 @@
 
             
 
+            
+
              event will be raised in FileSystemWatcher2, but no event is raised for FileSystemWatcher1. Unlike copying, moving a file or directory raises two events. From the previous example, if you moved a file from "My Documents" to "Your Documents", a <see
              cref="E:System.IO.FileSystemWatcher.Created" />
 
@@ -2307,8 +2665,12 @@
 
             
 
+            
+
              event would be raised in FileSystemWatcher2 and a <see
              cref="E:System.IO.FileSystemWatcher.Deleted" />
+
+            
 
             
 
@@ -2324,6 +2686,8 @@
 
             
 
+            
+
              event is raised as soon as a file is created. If a file is being copied or transferred into a watched directory, the <see
              cref="M:System.IO.FileSystemWatcher.OnCreated(System.IO.FileSystemEventArgs)" />
 
@@ -2331,8 +2695,12 @@
 
             
 
+            
+
              event will be raised immediately, followed by one or more <see
              cref="M:System.IO.FileSystemWatcher.OnChanged(System.IO.FileSystemEventArgs)" />
+
+            
 
             
 
@@ -2352,6 +2720,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2360,6 +2730,8 @@
           <para
             >Raises the <see
              cref="E:System.IO.FileSystemWatcher.Created" />
+
+            
 
             
 
@@ -2375,8 +2747,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.FileSystemEventArgs" />
+
+          
 
           
 
@@ -2417,11 +2793,15 @@
 
             
 
+            
+
              is called when a file or directory, within the directory being monitored, is deleted.</para
           >
           <para
             >Some common occurrences, such as copying or moving a file or directory, do not correspond directly to an event, but these occurrences do cause events to be raised. When you copy a file or directory, the system raises a <see
              cref="E:System.IO.FileSystemWatcher.Created" />
+
+            
 
             
 
@@ -2434,8 +2814,12 @@
 
             
 
+            
+
             , no event would be raised. For example, you create two instances of <see
              cref="T:System.IO.FileSystemWatcher" />
+
+            
 
             
 
@@ -2448,6 +2832,8 @@
 
             
 
+            
+
              event will be raised by FileSystemWatcher2, but no event is raised for FileSystemWatcher1. Unlike copying, moving a file or directory raises two events. From the previous example, if you moved a file from "My Documents" to "Your Documents", a <see
              cref="E:System.IO.FileSystemWatcher.Created" />
 
@@ -2455,8 +2841,12 @@
 
             
 
+            
+
              event would be raised by FileSystemWatcher2 and a <see
              cref="E:System.IO.FileSystemWatcher.Deleted" />
+
+            
 
             
 
@@ -2476,6 +2866,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2484,6 +2876,8 @@
           <para
             >Raises the <see
              cref="E:System.IO.FileSystemWatcher.Deleted" />
+
+            
 
             
 
@@ -2499,8 +2893,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.FileSystemEventArgs" />
+
+          
 
           
 
@@ -2538,6 +2936,8 @@
 
             
 
+            
+
              is called when an error occurs.</para
           >
           <para
@@ -2547,6 +2947,8 @@
                 >[&lt;topic://cpconProvidingEventFunctionality&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -2565,6 +2967,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2575,8 +2979,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IO.ErrorEventArgs" />
+
+          
 
           
 
@@ -2617,6 +3025,8 @@
 
             
 
+            
+
              is called when a file or directory within the directory being monitored is renamed.</para
           >
           <para
@@ -2626,6 +3036,8 @@
                 >[&lt;topic://cpconProvidingEventFunctionality&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -2644,6 +3056,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2654,8 +3068,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.RenamedEventArgs" />
+
+          
 
           
 
@@ -2707,8 +3125,12 @@
 
             
 
+            
+
              property is true, this directory is the root at which the system watches for changes; otherwise it is the only directory watched. To watch a specific file, set the <see
              cref="P:System.IO.FileSystemWatcher.Path" />
+
+            
 
             
 
@@ -2721,11 +3143,15 @@
 
             
 
+            
+
              property to the file name.</para
           >
           <para
             >The <see
              cref="P:System.IO.FileSystemWatcher.Path" />
+
+            
 
             
 
@@ -2744,8 +3170,12 @@
 
             
 
+            
+
              automatically reattaches itself to the newly renamed item. For example, if you set the <see
              cref="P:System.IO.FileSystemWatcher.Path" />
+
+            
 
             
 
@@ -2758,8 +3188,12 @@
 
             
 
+            
+
              property, it contains the old path. This happens because the component determines what directory watches based on the handle, rather than the name of the directory. Renaming does not affect the handle. So, if you destroy the component, and then recreate it without updating the <see
              cref="P:System.IO.FileSystemWatcher.Path" />
+
+            
 
             
 
@@ -2810,6 +3244,8 @@
 
             
 
+            
+
              is renamed.</para
           >
         </summary>
@@ -2851,8 +3287,12 @@
 
             
 
+            
+
              to a <see
              cref="P:System.ComponentModel.Design.IDesignerHost.Container" />
+
+            
 
             
 
@@ -2871,8 +3311,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.IO.FileSystemWatcher" />
+
+            
 
             
 
@@ -2925,8 +3369,12 @@
 
             
 
+            
+
              is null, methods handling the <see
              cref="E:System.IO.FileSystemWatcher.Changed" />
+
+            
 
             
 
@@ -2939,8 +3387,12 @@
 
             
 
+            
+
             , <see
              cref="E:System.IO.FileSystemWatcher.Deleted" />
+
+            
 
             
 
@@ -2953,8 +3405,12 @@
 
             
 
+            
+
              events are called on a thread from the system thread pool. For more information on system thread pools, see <see
              cref="T:System.Threading.ThreadPool" />
+
+            
 
             
 
@@ -2970,8 +3426,12 @@
 
             
 
+            
+
             , <see
              cref="E:System.IO.FileSystemWatcher.Created" />
+
+            
 
             
 
@@ -2984,8 +3444,12 @@
 
             
 
+            
+
             , and <see
              cref="E:System.IO.FileSystemWatcher.Renamed" />
+
+            
 
             
 
@@ -2998,8 +3462,12 @@
 
             
 
+            
+
             , accessing the component through the system thread pool might not work, or may result in an exception. Avoid this by setting <see
              cref="P:System.IO.FileSystemWatcher.SynchronizingObject" />
+
+            
 
             
 
@@ -3012,8 +3480,12 @@
 
             
 
+            
+
             , <see
              cref="E:System.IO.FileSystemWatcher.Created" />
+
+            
 
             
 
@@ -3026,8 +3498,12 @@
 
             
 
+            
+
             , and <see
              cref="E:System.IO.FileSystemWatcher.Renamed" />
+
+            
 
             
 
@@ -3043,8 +3519,12 @@
 
             
 
+            
+
              is used inside vsprvslong in a Windows Forms designer, <see
              cref="P:System.IO.FileSystemWatcher.SynchronizingObject" />
+
+            
 
             
 
@@ -3057,8 +3537,12 @@
 
             
 
+            
+
             . For example, if you place a <see
              cref="T:System.IO.FileSystemWatcher" />
+
+            
 
             
 
@@ -3071,6 +3555,8 @@
 
             
 
+            
+
             ) the <see
              cref="P:System.IO.FileSystemWatcher.SynchronizingObject" />
 
@@ -3078,8 +3564,12 @@
 
             
 
+            
+
              property of <see
              cref="T:System.IO.FileSystemWatcher" />
+
+            
 
             
 
@@ -3126,8 +3616,12 @@
 
             
 
+            
+
              with the <paramref
              name="timeout" />
+
+            
 
             
 
@@ -3144,12 +3638,16 @@
 
               
 
+              
+
                property is set to false.</para
             >
           </block>
           <para
             >In some systems, <see
              cref="T:System.IO.FileSystemWatcher" />
+
+            
 
             
 
@@ -3172,6 +3670,8 @@
 
             
 
+            
+
              that contains specific information on the change that occurred.</para
           >
         </returns>
@@ -3182,8 +3682,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.WatcherChangeTypes" />
+
+          
 
           
 
@@ -3226,6 +3730,8 @@
 
             
 
+            
+
              parameter means wait indefinitely.</para
           >
           <block subset="none" type="note">
@@ -3237,12 +3743,16 @@
 
               
 
+              
+
                property is set to false.</para
             >
           </block>
           <para
             >In some systems, <see
              cref="T:System.IO.FileSystemWatcher" />
+
+            
 
             
 
@@ -3265,11 +3775,15 @@
 
             
 
+            
+
              that contains specific information on the change that occurred.</para
           >
         </returns>
         <param name="changeType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3282,10 +3796,14 @@
 
           
 
+          
+
            to watch for. </param
         >
         <param name="timeout">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

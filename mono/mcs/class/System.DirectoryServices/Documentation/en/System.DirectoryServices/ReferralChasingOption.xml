@@ -119,6 +119,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -173,8 +175,12 @@
 
         
 
+        
+
          to elements of the <see
          cref="T:System.DirectoryServices.ReferralChasingOption" />
+
+        
 
         
 
@@ -189,6 +195,8 @@
       <para
         >The <see
          cref="T:System.DirectoryServices.ReferralChasingOption" />
+
+        
 
         
 

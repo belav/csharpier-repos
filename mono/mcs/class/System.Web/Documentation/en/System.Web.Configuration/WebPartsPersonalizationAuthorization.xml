@@ -27,6 +27,8 @@
 
         
 
+        
+
          class provides configuration support for personalization authorizations for Web Parts. This class can be used to allow or deny access to Web Parts resources.</para
       >
     </remarks>
@@ -52,6 +54,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -60,6 +64,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.WebPartsPersonalizationAuthorization" />
+
+            
 
             
 
@@ -119,8 +125,12 @@
 
             
 
+            
+
              consists of <see
              cref="T:System.Web.Configuration.AuthorizationRule" />
+
+            
 
             
 
@@ -133,8 +143,12 @@
 
             
 
+            
+
              object contains an <see
              cref="P:System.Web.Configuration.AuthorizationRule.Action" />
+
+            
 
             
 
@@ -147,8 +161,12 @@
 
             
 
+            
+
              property, and a <see
              cref="P:System.Web.Configuration.AuthorizationRule.Verbs" />
+
+            
 
             
 

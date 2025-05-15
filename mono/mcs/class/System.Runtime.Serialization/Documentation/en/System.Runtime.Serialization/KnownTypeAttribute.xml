@@ -29,8 +29,12 @@
 
         
 
+        
+
          attribute to a type to indicate to the <see
          cref="T:System.Runtime.Serialization.DataContractSerializer" />
+
+        
 
         
 
@@ -49,8 +53,12 @@
 
         
 
+        
+
          instance with the <see
          cref="P:System.Runtime.Serialization.KnownTypeAttribute.MethodName" />
+
+        
 
         
 
@@ -63,8 +71,12 @@
 
         
 
+        
+
          instances with the <see
          cref="P:System.Runtime.Serialization.KnownTypeAttribute.Type" />
+
+        
 
         
 
@@ -78,6 +90,8 @@
       <para
         >Specifies types that should be recognized by the <see
          cref="T:System.Runtime.Serialization.DataContractSerializer" />
+
+        
 
         
 
@@ -112,8 +126,12 @@
 
             
 
+            
+
              of <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -132,8 +150,12 @@
 
             
 
+            
+
              class with the name of a method that returns an <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -149,8 +171,12 @@
 
           
 
+          
+
           The name of the method that returns an <see
            cref="T:System.Collections.IEnumerable" />
+
+          
 
           
 
@@ -185,6 +211,8 @@
 
             
 
+            
+
              class with the specified type. </para
           >
         </summary>
@@ -195,8 +223,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -228,8 +260,12 @@
 
             
 
+            
+
              is applied to, must be static, must accept no parameters, and must return an instance of any type that implements the generic <see
              cref="T:System.Collections.Generic.IEnumerable`1" />
+
+            
 
             
 
@@ -242,8 +278,12 @@
 
             
 
+            
+
              class, or an array of <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -277,6 +317,8 @@
           <para
             >Gets the type that should be recognized during serialization or deserialization by the <see
              cref="T:System.Runtime.Serialization.DataContractSerializer" />
+
+            
 
             
 

@@ -46,6 +46,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -77,8 +79,12 @@
 
             
 
+            
+
              property determines whether the <see
              cref="T:System.Windows.Forms.WindowsFormsSynchronizationContext" />
+
+            
 
             
 
@@ -92,6 +98,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Windows.Forms.WindowsFormsSynchronizationContext" />
+
+            
 
             
 
@@ -148,8 +156,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Windows.Forms.WindowsFormsSynchronizationContext" />
+
+            
 
             
 
@@ -162,8 +174,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Windows.Forms.WindowsFormsSynchronizationContext" />
+
+            
 
             
 
@@ -176,6 +192,8 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Windows.Forms.WindowsFormsSynchronizationContext" />
 
@@ -183,8 +201,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Windows.Forms.WindowsFormsSynchronizationContext" />
+
+            
 
             
 
@@ -199,10 +221,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -219,6 +245,8 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.Windows.Forms.WindowsFormsSynchronizationContext" />
 
@@ -226,8 +254,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Windows.Forms.WindowsFormsSynchronizationContext" />
+
+              
 
               
 
@@ -242,6 +274,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.Windows.Forms.WindowsFormsSynchronizationContext" />
+
+            
 
             
 
@@ -279,6 +313,8 @@
 
             
 
+            
+
              method starts an asynchronous request to post a message.</para
           >
         </remarks>
@@ -293,8 +329,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.SendOrPostCallback" />
+
+          
 
           
 
@@ -304,6 +344,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -340,6 +382,8 @@
 
             
 
+            
+
              property is false, the <see
              cref="M:System.Windows.Forms.WindowsFormsSynchronizationContext.Send(System.Threading.SendOrPostCallback,System.Object)" />
 
@@ -347,8 +391,12 @@
 
             
 
+            
+
              method raises an <see
              cref="T:System.ComponentModel.InvalidAsynchronousStateException" />
+
+            
 
             
 
@@ -368,8 +416,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.SendOrPostCallback" />
+
+          
 
           
 
@@ -379,6 +431,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -409,11 +463,15 @@
 
             
 
+            
+
              is null, the current context is set to null.</para
           >
           <para
             >If the currently installed synchronization context is not a <see
              cref="T:System.Windows.Forms.WindowsFormsSynchronizationContext" />
+
+            
 
             
 
@@ -427,6 +485,8 @@
           <para
             >Uninstalls the currently installed <see
              cref="T:System.Windows.Forms.WindowsFormsSynchronizationContext" />
+
+            
 
             
 

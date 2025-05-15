@@ -23,8 +23,12 @@
 
         
 
+        
+
          values correspond to the states of the <see
          cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+
+        
 
         
 
@@ -37,6 +41,8 @@
 
         
 
+        
+
          class. The <see
          cref="T:System.Windows.Forms.VisualStyles.ScrollBarSizeBoxState" />
 
@@ -44,8 +50,12 @@
 
         
 
+        
+
          values are also used as an argument in the <see
          cref="M:System.Windows.Forms.ScrollBarRenderer.DrawSizeBox(System.Drawing.Graphics,System.Drawing.Rectangle,System.Windows.Forms.VisualStyles.ScrollBarSizeBoxState)" />
+
+        
 
         
 

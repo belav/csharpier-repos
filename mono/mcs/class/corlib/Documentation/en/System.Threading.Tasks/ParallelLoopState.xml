@@ -30,6 +30,8 @@
 
         
 
+        
+
          loops to interact with other iterations. An instance of this class is provided by the Parallel class to each loop; you can not create instances in your user code.</para
       >
     </summary>
@@ -59,8 +61,12 @@
 
             
 
+            
+
              may be used to communicate to the loop that no other iterations after the current iteration need be run. For example, if <see
              cref="M:System.Threading.Tasks.ParallelLoopState.Break" />
+
+            
 
             
 
@@ -76,6 +82,8 @@
 
             
 
+            
+
              causes <see
              cref="P:System.Threading.Tasks.ParallelLoopState.LowestBreakIteration" />
 
@@ -83,8 +91,12 @@
 
             
 
+            
+
              to be set to the current iteration's index if the current index is less than the current value of <see
              cref="P:System.Threading.Tasks.ParallelLoopState.LowestBreakIteration" />
+
+            
 
             
 
@@ -99,6 +111,8 @@
 
             
 
+            
+
              is typically employed in search-based algorithms where an ordering is present in the data source.</para
           >
           <para></para>
@@ -108,6 +122,8 @@
           <para
             >Communicates that the <see
              cref="T:System.Threading.Tasks.Parallel" />
+
+            
 
             
 
@@ -160,6 +176,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -193,6 +211,8 @@
 
             
 
+            
+
             , this property will return null.</para
           >
         </remarks>
@@ -201,6 +221,8 @@
           <para
             >Gets the lowest iteration of the loop from which <see
              cref="M:System.Threading.Tasks.ParallelLoopState.Break" />
+
+            
 
             
 
@@ -236,8 +258,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Threading.Tasks.ParallelLoopState.Stop" />
+
+            
 
             
 
@@ -250,12 +276,16 @@
 
             
 
+            
+
              class will proactively attempt to prohibit additional iterations of the loop from starting execution.</para
           >
           <para> However, there may be cases where it is unable to prevent additional iterations from starting.</para>
           <para
             > It may also be the case that a long-running iteration has already begun execution. In such cases, iterations may explicitly check the <see
              cref="P:System.Threading.Tasks.ParallelLoopState.ShouldExitCurrentIteration" />
+
+            
 
             
 
@@ -294,11 +324,15 @@
 
             
 
+            
+
              may be used to communicate to the loop that no other iterations need be run.</para
           >
           <para
             > For long-running iterations that may already be executing, <see
              cref="M:System.Threading.Tasks.ParallelLoopState.Stop" />
+
+            
 
             
 
@@ -311,8 +345,12 @@
 
             
 
+            
+
              to return true for all other iterations of the loop, such that another iteration may check <see
              cref="P:System.Threading.Tasks.ParallelLoopState.IsStopped" />
+
+            
 
             
 
@@ -327,6 +365,8 @@
 
             
 
+            
+
              is typically employed in search-based algorithms, where once a result is found, no other iterations need be executed.</para
           >
           <para></para>
@@ -336,6 +376,8 @@
           <para
             >Communicates that the <see
              cref="T:System.Threading.Tasks.Parallel" />
+
+            
 
             
 

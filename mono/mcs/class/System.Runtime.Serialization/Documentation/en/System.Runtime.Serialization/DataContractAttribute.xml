@@ -29,8 +29,12 @@
 
         
 
+        
+
          attribute to types (classes, structures, or enumerations) that are used in serialization and deserialization operations by the <see
          cref="T:System.Runtime.Serialization.DataContractSerializer" />
+
+        
 
         
 
@@ -43,10 +47,14 @@
 
         
 
+        
+
          to any classes that hold and manipulate data sent in messages. crabout data contracts, see <format
          type="text/html">
           <a href="a3ae7b21-c15c-4c05-abd8-f483bcbf31af">Using Data Contracts</a>
         </format>
+
+        
 
         
 
@@ -62,8 +70,12 @@
 
         
 
+        
+
          to any field, property, or event that holds values you want to serialize. By applying the <see
          cref="T:System.Runtime.Serialization.DataContractAttribute" />
+
+        
 
         
 
@@ -76,12 +88,16 @@
 
         
 
+        
+
          to serialize and deserialize the data. </para
       >
       <block subset="none" type="note">
         <para
           >You can apply the <see
            cref="T:System.Runtime.Serialization.DataMemberAttribute" />
+
+          
 
           
 
@@ -100,6 +116,8 @@
 
         
 
+        
+
         .</para
       >
       <format type="text/html">
@@ -113,8 +131,12 @@
 
         
 
+        
+
          is an abstract description of a set of fields with a name and data type for each field. The data contract exists outside of any single implementation to allow services on different platforms to interoperate. As long as the data passed between the services conforms to the same contract, all the services can process the data. This processing is also known as a <newTerm
         >loosely coupled system</newTerm>
+
+        
 
         
 
@@ -127,8 +149,12 @@
 
         
 
+        
+
          to the class and apply the <see
          cref="T:System.Runtime.Serialization.DataMemberAttribute" />
+
+        
 
         
 
@@ -145,8 +171,12 @@
 
           
 
+          
+
            to a base class, the derived types do not inherit the attribute or the behavior. However, if a derived type has a data contract, the data members of the base class are serialized. However, you must apply the <see
            cref="T:System.Runtime.Serialization.DataMemberAttribute" />
+
+          
 
           
 
@@ -166,12 +196,16 @@
 
         
 
+        
+
         , an XML schema can be used to define data contracts. (Other forms of metadata/description could be used for the same purpose.) To create an XML schema from your application, use the <format
          type="text/html">
           <a href="1abf3d9f-b420-46f1-b628-df238751f308"
             >Service Model Metadata Utility Tool (Svcutil.exe)</a
           >
         </format>
+
+        
 
         
 
@@ -184,8 +218,12 @@
 
         
 
+        
+
          command line option. When the input to the tool is an assembly, by default, the tool generates a set of XML schemas that define all the data contract types found in that assembly. Conversely, you can also use the Svcutil.exe tool to create Visual Basic or C# class definitions that conform to the requirements of XML schemas that use constructs that can be expressed by data contracts. In this case, the <system
         >/dconly</system>
+
+        
 
         
 
@@ -201,11 +239,15 @@
 
         
 
+        
+
          has been applied. You can use those classes to create a new application to process data that must be exchanged with other services. </para
       >
       <para
         >You can also run the tool against an endpoint that returns a Web Services Description Language (WSDL) document to automatically generate the code and configuration to create an indigo1 client. The generated code includes types that are marked with the <see
          cref="T:System.Runtime.Serialization.DataContractAttribute" />
+
+        
 
         
 
@@ -224,8 +266,12 @@
 
         
 
+        
+
          to a class, it uses the class name as the local name and the class's namespace (prefixed with "http://schemas.datacontract.org/2004/07/") as the namespace URI. You can override the defaults by setting the <see
          cref="P:System.Runtime.Serialization.DataContractAttribute.Name" />
+
+        
 
         
 
@@ -238,8 +284,12 @@
 
         
 
+        
+
          properties. You can also change the namespace by applying the <see
          cref="T:System.Runtime.Serialization.ContractNamespaceAttribute" />
+
+        
 
         
 
@@ -251,6 +301,8 @@
         <para
           >In any code, you can use the word DataContract instead of the longer <see
            cref="T:System.Runtime.Serialization.DataContractAttribute" />
+
+          
 
           
 
@@ -270,6 +322,8 @@
 
         
 
+        
+
          interface. </para
       >
       <para
@@ -277,6 +331,8 @@
          type="text/html">
           <a href="4a0700cb-5f5f-4137-8705-3a3ecf06461f">Data Contract Versioning</a>
         </format>
+
+        
 
         
 
@@ -290,6 +346,8 @@
       <para
         >Specifies that the type defines or implements a data contract and is serializable by a serializer, such as the <see
          cref="T:System.Runtime.Serialization.DataContractSerializer" />
+
+        
 
         
 
@@ -323,6 +381,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -345,6 +405,8 @@
           <para
             >Use the IsReference property to instruct the <see
              cref="T:System.Runtime.Serialization.DataContractSerializer" />
+
+            
 
             
 
@@ -381,10 +443,14 @@
 
             
 
+            
+
              property is used to give a name to a data contract, which is the name of the type in XML schema. crdefault <format
              type="text/html">
               <a href="31f87e6c-247b-48f5-8e94-b9e1e33d8d09">Data Contract Names</a>
             </format>
+
+            
 
             
 
@@ -400,11 +466,15 @@
 
             
 
+            
+
              is applied to. However, there may be reasons to change this default name. One reason is to allow an existing type to process data that must conform to an existing data contract. For example, there exists a type named Person but the data contract, embodied in an XML schema, requires that the name be Customer. The contract can be satisfied by setting the property value to Customer.</para
           >
           <para
             >A second reason is to allow the generation of names that are invalid as type names. For example, if a data contract demands a name that is not allowable as a type name, set the property value to that disallowed name. For instance, the string "$value" is disallowed as a type name but is allowed as a <see
              cref="P:System.Runtime.Serialization.DataContractAttribute.Name" />
+
+            
 
             
 
@@ -438,6 +508,8 @@
             <para
               >For the data to be successfully transmitted, the name of the data in a data contract must be the same in both the client and the server. Visual Basic projects, by default, add a prefix to the namespace defined in each file (called the “root namespace,” named after the project). Adding this prefix causes the client and server namespaces to be different for the same type. The solution is to set the <see
                cref="P:System.Runtime.Serialization.DataContractAttribute.Namespace" />
+
+              
 
               
 

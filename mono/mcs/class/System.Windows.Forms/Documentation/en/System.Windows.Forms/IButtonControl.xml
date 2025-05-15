@@ -39,6 +39,8 @@
 
             
 
+            
+
              method and one of its buttons is clicked, the button's <see
              cref="P:System.Windows.Forms.IButtonControl.DialogResult" />
 
@@ -46,8 +48,12 @@
 
             
 
+            
+
              value is assigned to the form's <see
              cref="P:System.Windows.Forms.Form.DialogResult" />
+
+            
 
             
 
@@ -91,6 +97,8 @@
 
           
 
+          
+
           true if the control should behave as a default button; otherwise false. </param
         >
       </Docs>
@@ -116,6 +124,8 @@
           <para
             >Generates a <see
              cref="E:System.Windows.Forms.Control.Click" />
+
+            
 
             
 

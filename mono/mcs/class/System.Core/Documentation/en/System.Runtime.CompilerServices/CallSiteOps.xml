@@ -77,10 +77,14 @@
 
           
 
+          
+
           An instance of the dynamic call site.</param
         >
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -95,8 +99,12 @@
 
           
 
+          
+
           The type of the delegate of the <see
            cref="T:System.Runtime.CompilerServices.CallSite" />
+
+          
 
           
 
@@ -159,10 +167,14 @@
 
           
 
+          
+
           The call site binder.</param
         >
         <param name="site">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -177,6 +189,8 @@
 
           
 
+          
+
           Arguments to the call site.</param
         >
         <typeparam name="T">
@@ -186,8 +200,12 @@
 
           
 
+          
+
           The type of the delegate of the <see
            cref="T:System.Runtime.CompilerServices.CallSite" />
+
+          
 
           
 
@@ -232,6 +250,8 @@
         </summary>
         <param name="site">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -292,6 +312,8 @@
 
           
 
+          
+
           An instance of the dynamic call site.</param
         >
         <typeparam name="T">
@@ -301,8 +323,12 @@
 
           
 
+          
+
           The type of the delegate of the <see
            cref="T:System.Runtime.CompilerServices.CallSite" />
+
+          
 
           
 
@@ -363,6 +389,8 @@
 
           
 
+          
+
           The cache.</param
         >
         <typeparam name="T">
@@ -372,8 +400,12 @@
 
           
 
+          
+
           The type of the delegate of the <see
            cref="T:System.Runtime.CompilerServices.CallSite" />
+
+          
 
           
 
@@ -422,6 +454,8 @@
         </returns>
         <param name="site">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -482,6 +516,8 @@
 
           
 
+          
+
           An instance of the dynamic call site.</param
         >
         <typeparam name="T">
@@ -491,8 +527,12 @@
 
           
 
+          
+
           The type of the delegate of the <see
            cref="T:System.Runtime.CompilerServices.CallSite" />
+
+          
 
           
 
@@ -553,6 +593,8 @@
 
           
 
+          
+
           An instance of the dynamic call site.</param
         >
         <typeparam name="T">
@@ -562,8 +604,12 @@
 
           
 
+          
+
           The type of the delegate of the <see
            cref="T:System.Runtime.CompilerServices.CallSite" />
+
+          
 
           
 
@@ -622,10 +668,14 @@
 
           
 
+          
+
           The call site rule cache.</param
         >
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -640,6 +690,8 @@
 
           
 
+          
+
           An index of the call site rule.</param
         >
         <typeparam name="T">
@@ -649,8 +701,12 @@
 
           
 
+          
+
           The type of the delegate of the <see
            cref="T:System.Runtime.CompilerServices.CallSite" />
+
+          
 
           
 
@@ -699,6 +755,8 @@
         </returns>
         <param name="site">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -756,10 +814,14 @@
 
           
 
+          
+
           An instance of the dynamic call site.</param
         >
         <param name="matched">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -774,8 +836,12 @@
 
           
 
+          
+
           The type of the delegate of the <see
            cref="T:System.Runtime.CompilerServices.CallSite" />
+
+          
 
           
 

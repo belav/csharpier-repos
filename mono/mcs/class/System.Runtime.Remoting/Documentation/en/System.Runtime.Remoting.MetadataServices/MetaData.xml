@@ -24,12 +24,16 @@
 
         
 
+        
+
          class provides methods that allow you to generate Web Services Description Language (WSDL) from type information, convert an XML Schema into a code stream, and compile the code stream into an assembly. This functionality is also present in the <format
          type="text/html">
           <a href="40F6F8C8-B80C-4E9F-A920-31BCD0CF45C5"
             >[&lt;topic://cpgrfsoapsudsutilitysoapsudsexe&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -56,6 +60,8 @@
           <para
             >Creates an instance of <see
              cref="T:System.Runtime.Remoting.MetadataServices.MetaData" />
+
+            
 
             
 
@@ -97,6 +103,8 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -114,10 +122,14 @@
 
           
 
+          
+
           The path to the file that contains the source code. </param
         >
         <param name="assemblyPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -132,8 +144,12 @@
 
           
 
+          
+
           The strong name to compile into the new assembly. Can be <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -174,6 +190,8 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -191,8 +209,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.ArrayList" />
+
+          
 
           
 
@@ -207,6 +229,8 @@
 
           
 
+          
+
           The location where the new run-time assembly is generated. </param
         >
         <param name="strongNameFilename">
@@ -216,8 +240,12 @@
 
           
 
+          
+
           The strong name to compile into the new run-time assembly. Can be <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -264,10 +292,14 @@
 
           
 
+          
+
           Indicates the type of proxy to generate. If true, generates a simple proxy (also known as wrapped proxy) that automatically loads the channels, exposes all the methods of the remote object, and provides access to the channel properties. If false, generates a transparent proxy that exposes all the methods of the remote object. </param
         >
         <param name="outputDirectory">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -282,6 +314,8 @@
 
           
 
+          
+
           The input stream that contains the schema definition in Web Services Description Language (WSDL) format. </param
         >
         <param name="outCodeStreamList">
@@ -291,8 +325,12 @@
 
           
 
+          
+
           The list of file names for the code streams that are generated. Note that the <see
            cref="M:System.Runtime.Remoting.MetadataServices.MetaData.ConvertSchemaStreamToCodeSourceStream(System.Boolean,System.String,System.IO.Stream,System.Collections.ArrayList,System.String,System.String)" />
+
+          
 
           
 
@@ -340,10 +378,14 @@
 
           
 
+          
+
           Indicates the type of proxy to generate. If true, generates a simple proxy (also known as wrapped proxy) that automatically loads the channels, exposes all the methods of the remote object, and provides access to the channel properties. If false, generates a transparent proxy that exposes all the methods of the remote object. </param
         >
         <param name="outputDirectory">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -358,10 +400,14 @@
 
           
 
+          
+
           The input stream that contains the schema definition in Web Services Description Language (WSDL) format. </param
         >
         <param name="outCodeStreamList">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -374,10 +420,14 @@
 
           
 
+          
+
            method can create multiple source code streams. </param
         >
         <param name="proxyUrl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -426,10 +476,14 @@
 
           
 
+          
+
           Indicates the type of proxy to generate. If true, generates a simple proxy (also known as wrapped proxy) that automatically loads the channels, exposes all the methods of the remote object, and provides access to the channel properties. If false, generates a transparent proxy that exposes all the methods of the remote object. </param
         >
         <param name="outputDirectory">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -444,6 +498,8 @@
 
           
 
+          
+
           The input stream containing the schema definition in Web Services Description Language (WSDL) format. </param
         >
         <param name="outCodeStreamList">
@@ -453,8 +509,12 @@
 
           
 
+          
+
           The list of file names for the code streams that are generated. Note that the <see
            cref="M:System.Runtime.Remoting.MetadataServices.MetaData.ConvertSchemaStreamToCodeSourceStream(System.Boolean,System.String,System.IO.Stream,System.Collections.ArrayList,System.String,System.String)" />
+
+          
 
           
 
@@ -469,10 +529,14 @@
 
           
 
+          
+
           The URL where the target remote object that is represented by the new proxy will be located. </param
         >
         <param name="proxyNamespace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -516,8 +580,12 @@
 
             
 
+            
+
              instance allows you to associate a URL with an object <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -535,6 +603,8 @@
         </summary>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -581,10 +651,14 @@
 
           
 
+          
+
           The object types to convert to XML schema. </param
         >
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -630,8 +704,12 @@
 
             
 
+            
+
              instance allows you to associate a URL with an object <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -679,6 +757,8 @@
 
           
 
+          
+
           The object types to convert to XML schema. </param
         >
       </Docs>
@@ -718,10 +798,14 @@
 
           
 
+          
+
           The URL where the XML schema is located. </param
         >
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -761,6 +845,8 @@
 
           
 
+          
+
           The URL where the XML schema is located. </param
         >
         <param name="outputStream">
@@ -770,8 +856,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -816,10 +906,14 @@
 
           
 
+          
+
           The stream to write to the specified file. </param
         >
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

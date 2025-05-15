@@ -33,6 +33,8 @@
 
         
 
+        
+
          to manage this situation.</para
       >
     </remarks>
@@ -41,6 +43,8 @@
       <para
         >Manages the overflow behavior of a <see
          cref="T:System.Windows.Forms.ToolStrip" />
+
+        
 
         
 
@@ -75,8 +79,12 @@
 
             
 
+            
+
              class derived from a base <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -92,6 +100,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStripItem" />
 
@@ -99,8 +109,12 @@
 
           
 
+          
+
            from which to derive this <see
            cref="T:System.Windows.Forms.ToolStripOverflow" />
+
+          
 
           
 
@@ -134,8 +148,12 @@
 
             
 
+            
+
              method, it will be called when the <see
              cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+
+            
 
             
 
@@ -147,6 +165,8 @@
             <para
               >To get or set the <see
                cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+
+              
 
               
 
@@ -165,6 +185,8 @@
           <para
             >A new <see
              cref="T:System.Windows.Forms.AccessibleObject" />
+
+            
 
             
 
@@ -199,8 +221,12 @@
 
             
 
+            
+
              property to get everything the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -213,6 +239,8 @@
 
             
 
+            
+
             . Use the <see
              cref="P:System.Windows.Forms.ToolStripOverflow.Items" />
 
@@ -220,8 +248,12 @@
 
             
 
+            
+
              property to get all items on the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -235,6 +267,8 @@
           <para
             >Gets all of the items that are currently being displayed on the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -276,11 +310,15 @@
 
             
 
+            
+
              representing the width and height of a rectangle.</para
           >
         </returns>
         <param name="constrainingSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -314,8 +352,12 @@
 
             
 
+            
+
              property to get all items on the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -328,8 +370,12 @@
 
             
 
+            
+
              property to get only those items that are currently displayed on the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -343,6 +389,8 @@
           <para
             >Gets all of the items on the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -399,11 +447,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripOverflow.OnLayout(System.Windows.Forms.LayoutEventArgs)" />
+
+            
 
             
 
@@ -422,6 +474,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -432,8 +486,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.LayoutEventArgs" />
+
+          
 
           
 

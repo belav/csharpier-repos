@@ -37,8 +37,12 @@
 
         
 
+        
+
          belongs to a family of attributes that controls how the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -51,8 +55,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Xml.Serialization.XmlSerializer.Deserialize(System.IO.Stream)" />
+
+        
 
         
 
@@ -69,11 +77,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >Only one instance of the <see
          cref="T:System.Xml.Serialization.XmlTextAttribute" />
+
+        
 
         
 
@@ -89,11 +101,15 @@
 
         
 
+        
+
          to public fields and public read/write properties that return primitive and enumeration types.</para
       >
       <para
         >You can apply the <see
          cref="T:System.Xml.Serialization.XmlTextAttribute" />
+
+        
 
         
 
@@ -106,8 +122,12 @@
 
         
 
+        
+
          but you must set the <see
          cref="P:System.Xml.Serialization.XmlTextAttribute.Type" />
+
+        
 
         
 
@@ -123,6 +143,8 @@
 
         
 
+        
+
          can also be applied to a field that returns an <see
          cref="T:System.Xml.XmlNode" />
 
@@ -130,8 +152,12 @@
 
         
 
+        
+
          or an array of <see
          cref="T:System.Xml.XmlNode" />
+
+        
 
         
 
@@ -147,6 +173,8 @@
 
         
 
+        
+
          serializes a class member as an XML element. However, if you apply the <see
          cref="T:System.Xml.Serialization.XmlTextAttribute" />
 
@@ -154,8 +182,12 @@
 
         
 
+        
+
          to a member, the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -173,6 +205,8 @@
 
         
 
+        
+
          occasionally generates the <see
          cref="T:System.Xml.Serialization.XmlTextAttribute" />
 
@@ -180,8 +214,12 @@
 
         
 
+        
+
          when creating classes from an XML Schema definition (XSD) file. This occurs when the schema contains a complexType with mixed content; in that case, the corresponding class contains a member that returns a string array to which the <see
          cref="T:System.Xml.Serialization.XmlTextAttribute" />
+
+        
 
         
 
@@ -212,12 +250,16 @@
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
         <para
           >You can use the word XmlText in your code instead of the longer <see
            cref="T:System.Xml.Serialization.XmlTextAttribute" />
+
+          
 
           
 
@@ -232,6 +274,8 @@
       <para
         >Indicates to the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -267,8 +311,12 @@
 
             
 
+            
+
              serializes a public field or public read/write property by creating an <see
              cref="T:System.Xml.Serialization.XmlAttributes" />
+
+            
 
             
 
@@ -281,6 +329,8 @@
 
             
 
+            
+
              property to an <see
              cref="T:System.Xml.Serialization.XmlTextAttribute" />
 
@@ -288,8 +338,12 @@
 
             
 
+            
+
             . For more details, see the <see
              cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+
+            
 
             
 
@@ -303,6 +357,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Serialization.XmlTextAttribute" />
+
+            
 
             
 
@@ -340,8 +396,12 @@
 
             
 
+            
+
              serializes a public field or public read/write property by creating an <see
              cref="T:System.Xml.Serialization.XmlAttributes" />
+
+            
 
             
 
@@ -354,6 +414,8 @@
 
             
 
+            
+
              property to an <see
              cref="T:System.Xml.Serialization.XmlTextAttribute" />
 
@@ -361,8 +423,12 @@
 
             
 
+            
+
             . For more details, see the <see
              cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+
+            
 
             
 
@@ -381,6 +447,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -391,8 +459,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -427,11 +499,15 @@
 
             
 
+            
+
              property to an XML Schema simple data type affects the format of the generated XML. For example, setting the property to "date" causes the generated text to be formatted in the general date style, for example: 2001-08-31. By contrast, setting the property to "dateTime" results in a specific instant as defined by the International Organization for Standardization document 8601, "Representations of Dates and Times", for example: 2001-08-15T06:59:11.0508456-07:00.</para
           >
           <para
             >The effect of setting the <see
              cref="P:System.Xml.Serialization.XmlTextAttribute.DataType" />
+
+            
 
             
 
@@ -448,12 +524,16 @@
 
             
 
+            
+
              to generate the XML Schema for a compiled file. For more information on using the tool, see <format
              type="text/html">
               <a href="3c03f855-f931-47ff-bbc6-50c0367a16e4"
                 >The XML Schema Definition Tool and XML Serialization</a
               >
             </format>
+
+            
 
             
 
@@ -470,6 +550,8 @@
 
             
 
+            
+
              structures, and apply a <see
              cref="T:System.Xml.Serialization.XmlTextAttribute" />
 
@@ -477,8 +559,12 @@
 
             
 
+            
+
              with the <see
              cref="P:System.Xml.Serialization.XmlTextAttribute.DataType" />
+
+            
 
             
 
@@ -491,6 +577,8 @@
 
             
 
+            
+
              type and apply the <see
              cref="T:System.Xml.Serialization.XmlTextAttribute" />
 
@@ -498,8 +586,12 @@
 
             
 
+            
+
              with the <see
              cref="P:System.Xml.Serialization.XmlTextAttribute.DataType" />
+
+            
 
             
 
@@ -515,8 +607,12 @@
 
             
 
+            
+
              with its <see
              cref="P:System.Xml.Serialization.XmlTextAttribute.DataType" />
+
+            
 
             
 
@@ -560,6 +656,8 @@
                 <para
                   >Array of <see
                    cref="T:System.Byte" />
+
+                  
 
                   
 
@@ -717,6 +815,8 @@
                 <para
                   >Array of <see
                    cref="T:System.Byte" />
+
+                  
 
                   
 
@@ -1008,6 +1108,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1038,11 +1140,15 @@
 
             
 
+            
+
              property can only be set to primitive types and enumerations.</para
           >
           <para
             >The <see
              cref="T:System.Xml.Serialization.XmlTextAttribute" />
+
+            
 
             
 
@@ -1055,8 +1161,12 @@
 
             
 
+            
+
              or an array of <see
              cref="T:System.Xml.XmlNode" />
+
+            
 
             
 
@@ -1072,6 +1182,8 @@
 
             
 
+            
+
              to a field or property that returns an array of strings. You can also apply the attribute to an array of type <see
              cref="T:System.Object" />
 
@@ -1079,8 +1191,12 @@
 
             
 
+            
+
              but you must set the <see
              cref="P:System.Xml.Serialization.XmlTextAttribute.Type" />
+
+            
 
             
 

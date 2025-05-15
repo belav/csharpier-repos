@@ -11,6 +11,8 @@
 
         
 
+        
+
          namespace contains classes that can be used for serializing and deserializing objects. Serialization is the process of converting an object or a graph of objects into a linear sequence of bytes for either storage or transmission to another location. Deserialization is the process of taking in stored information and recreating objects from it.</para
       >
     </summary>
@@ -24,8 +26,12 @@
 
         
 
+        
+
          interface provides a way for classes to control their own serialization behavior. Classes in the <see
          cref="N:System.Runtime.Serialization.Formatters" />
+
+        
 
         
 
@@ -36,6 +42,8 @@
       <para
         >Formatters that serialize and deserialize objects to and from a particular format can be found in the <see
          cref="N:System.Runtime.Serialization.Formatters" />
+
+        
 
         
 

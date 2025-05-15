@@ -44,12 +44,16 @@
 
         
 
+        
+
          typically applies it for you when it imports a type library.</para
       >
       <para>When Tlbimp.exe imports a coclass, it produces a managed class and an interface to represent the coclass. The coclass interface has the same interface identifier (IID) as the default interface of the original coclass. The imported coclass interface also retains the name of the coclass. Tlbimp.exe appends the original coclass name with "class" to identify the imported class.</para>
       <para
         >You rarely apply this attribute. However, if plan to write source code that produces metadata that closely simulates metadata produced by Tlbimp.exe, you should create a coclass interface for each coclass. Use the name of the original coclass to name the coclass interface and derive it from the default interface. In addition to the <see
          cref="T:System.Runtime.InteropServices.CoClassAttribute" />
+
+        
 
         
 
@@ -62,8 +66,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Runtime.InteropServices.GuidAttribute" />
+
+        
 
         
 
@@ -75,6 +83,8 @@
             >[&lt;topic://cpcontlbimptypeconversion&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -117,6 +127,8 @@
 
             
 
+            
+
              with the class identifier of the original coclass.</para
           >
         </summary>
@@ -127,8 +139,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 

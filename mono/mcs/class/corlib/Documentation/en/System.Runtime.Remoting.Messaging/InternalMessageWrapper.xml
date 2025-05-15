@@ -36,6 +36,8 @@
 
         
 
+        
+
          class is the base class for the <see
          cref="T:System.Runtime.Remoting.Messaging.MethodCallMessageWrapper" />
 
@@ -43,8 +45,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Runtime.Remoting.Messaging.MethodReturnMessageWrapper" />
+
+        
 
         
 
@@ -59,8 +65,12 @@
 
         
 
+        
+
          is used by the infrastructure of the .NET Framework. You do not need to create instances of the <see
          cref="T:System.Runtime.Remoting.Messaging.InternalMessageWrapper" />
+
+        
 
         
 
@@ -73,8 +83,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Runtime.Remoting.Messaging.MethodReturnMessageWrapper" />
+
+        
 
         
 
@@ -119,8 +133,12 @@
 
             
 
+            
+
              class is used by the remoting infrastructure of the .NET Framework. You do not need to create an <see
              cref="T:System.Runtime.Remoting.Messaging.InternalMessageWrapper" />
+
+            
 
             
 
@@ -136,8 +154,12 @@
 
             
 
+            
+
              parameter also implements the derived interface, <see
              cref="T:System.Runtime.Remoting.Messaging.IMethodMessage" />
+
+            
 
             
 
@@ -150,6 +172,8 @@
 
             
 
+            
+
              and <see
              cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
 
@@ -157,8 +181,12 @@
 
             
 
+            
+
              interfaces, in turn, inherit from the <see
              cref="T:System.Runtime.Remoting.Messaging.IMethodMessage" />
+
+            
 
             
 
@@ -177,11 +205,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="msg">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -217,6 +249,8 @@
           <para
             >Represents the request or response <see
              cref="T:System.Runtime.Remoting.Messaging.IMethodMessage" />
+
+            
 
             
 

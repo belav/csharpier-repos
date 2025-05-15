@@ -27,8 +27,12 @@
 
         
 
+        
+
          is used by the <see
          cref="T:System.ServiceModel.Description.XmlSerializerMessageContractImporter" />
+
+        
 
         
 
@@ -45,6 +49,8 @@
 
         
 
+        
+
          with the <userInput
         >/useXmlSerializer</userInput>
 
@@ -52,8 +58,12 @@
 
         
 
+        
+
          (<userInput
         >/uxs)</userInput>
+
+        
 
         
 
@@ -72,8 +82,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+
+        
 
         
 
@@ -102,6 +116,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.XmlSerializerImportOptions" />
+
+            
 
             
 

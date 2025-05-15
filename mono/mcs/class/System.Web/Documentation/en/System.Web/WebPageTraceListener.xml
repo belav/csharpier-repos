@@ -24,8 +24,12 @@
 
           
 
+          
+
            attribute applied to this class has the following <see
            cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+
+          
 
           
 
@@ -38,6 +42,8 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Security.Permissions.HostProtectionAttribute" />
 
@@ -45,8 +51,12 @@
 
           
 
+          
+
            does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see
            cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+          
 
           
 
@@ -63,12 +73,16 @@
 
           
 
+          
+
           .</para
         >
       </block>
       <para
         >The <see
          cref="T:System.Web.WebPageTraceListener" />
+
+        
 
         
 
@@ -81,8 +95,12 @@
 
         
 
+        
+
          log to ASP.NET Web page output channels. You can enable trace forwarding by adding a <see
          cref="T:System.Web.WebPageTraceListener" />
+
+        
 
         
 
@@ -97,10 +115,14 @@
 
         
 
+        
+
          subsection of the <format
          type="text/html">
           <a href="3f348f42-fa72-4ff2-aa1c-bb9eecad4bb2">&lt;system.diagnostics&gt; Element</a>
         </format>
+
+        
 
         
 
@@ -113,8 +135,12 @@
 
         
 
+        
+
          to the listeners collection programmatically. Commonly, this is done by adding a <see
          cref="T:System.Web.WebPageTraceListener" />
+
+        
 
         
 
@@ -128,6 +154,8 @@
       <para
         >Provides a listener that directs <see
          cref="T:System.Diagnostics.Trace" />
+
+        
 
         
 
@@ -152,6 +180,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.WebPageTraceListener" />
+
+            
 
             
 
@@ -192,8 +222,12 @@
 
             
 
+            
+
              method writes the event message to the <see
              cref="T:System.Web.TraceContext" />
+
+            
 
             
 
@@ -206,8 +240,12 @@
 
             
 
+            
+
              as the category and <paramref
              name="message" />
+
+            
 
             
 
@@ -227,8 +265,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Diagnostics.TraceEventCache" />
+
+          
 
           
 
@@ -243,6 +285,8 @@
 
           
 
+          
+
           A category name used to organize the output. </param
         >
         <param name="severity">
@@ -252,8 +296,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Diagnostics.TraceEventType" />
+
+          
 
           
 
@@ -268,10 +316,14 @@
 
           
 
+          
+
           A numeric identifier for the event.</param
         >
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -318,8 +370,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])" />
+
+            
 
             
 
@@ -332,6 +388,8 @@
 
             
 
+            
+
              and <paramref
              name="args" />
 
@@ -339,8 +397,12 @@
 
             
 
+            
+
              and using the <see
              cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+            
 
             
 
@@ -360,8 +422,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Diagnostics.TraceEventCache" />
+
+          
 
           
 
@@ -376,6 +442,8 @@
 
           
 
+          
+
           A category name used to organize the output. </param
         >
         <param name="severity">
@@ -385,8 +453,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Diagnostics.TraceEventType" />
+
+          
 
           
 
@@ -401,10 +473,14 @@
 
           
 
+          
+
           A numeric identifier for the event.</param
         >
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -417,10 +493,14 @@
 
           
 
+          
+
           .</param
         >
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -453,8 +533,12 @@
 
             
 
+            
+
              method does not write to the <see
              cref="T:System.Diagnostics.Trace" />
+
+            
 
             
 
@@ -469,6 +553,8 @@
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -505,8 +591,12 @@
 
             
 
+            
+
              method does not write to the <see
              cref="T:System.Diagnostics.Trace" />
+
+            
 
             
 
@@ -526,10 +616,14 @@
 
           
 
+          
+
           The message to write.</param
         >
         <param name="category">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -562,8 +656,12 @@
 
             
 
+            
+
              method does not write to the <see
              cref="T:System.Diagnostics.Trace" />
+
+            
 
             
 
@@ -578,6 +676,8 @@
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -614,8 +714,12 @@
 
             
 
+            
+
              method does not write to the <see
              cref="T:System.Diagnostics.Trace" />
+
+            
 
             
 
@@ -635,10 +739,14 @@
 
           
 
+          
+
           The message to write.</param
         >
         <param name="category">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

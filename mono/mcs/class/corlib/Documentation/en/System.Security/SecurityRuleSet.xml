@@ -25,10 +25,14 @@
 
         
 
+        
+
         . For information about level 2 behavior, see <format
          type="text/html">
           <a href="4d05610a-0da6-4f08-acea-d54c9d6143c0">Security-Transparent Code, Level 2</a>
         </format>
+
+        
 
         
 
@@ -102,6 +106,8 @@
           <para
             >Unsupported. Using this value results in a <see
              cref="T:System.IO.FileLoadException" />
+
+            
 
             
 

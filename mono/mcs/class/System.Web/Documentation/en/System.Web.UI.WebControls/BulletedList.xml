@@ -72,8 +72,12 @@
 
         
 
+        
+
          control to create a list of items that are formatted with bullets. To specify the individual list items that you want to appear in a <see
          cref="T:System.Web.UI.WebControls.BulletedList" />
+
+        
 
         
 
@@ -86,8 +90,12 @@
 
         
 
+        
+
          object for each entry between the opening and closing tags of the <see
          cref="T:System.Web.UI.WebControls.BulletedList" />
+
+        
 
         
 
@@ -103,6 +111,8 @@
 
         
 
+        
+
          control, set the <see
          cref="P:System.Web.UI.WebControls.BulletedList.BulletStyle" />
 
@@ -110,8 +120,12 @@
 
         
 
+        
+
          property to one of the bullet types that are defined by the <see
          cref="T:System.Web.UI.WebControls.BulletStyle" />
+
+        
 
         
 
@@ -239,8 +253,12 @@
 
         
 
+        
+
          property to specify the value that starts the numbering of list items in an ordered <see
          cref="T:System.Web.UI.WebControls.BulletedList" />
+
+        
 
         
 
@@ -253,8 +271,12 @@
 
         
 
+        
+
          property is ignored, if the <see
          cref="P:System.Web.UI.WebControls.BulletedList.BulletStyle" />
+
+        
 
         
 
@@ -267,8 +289,12 @@
 
         
 
+        
+
         , <see
          cref="F:System.Web.UI.WebControls.BulletStyle.Square" />
+
+        
 
         
 
@@ -281,8 +307,12 @@
 
         
 
+        
+
         , or <see
          cref="F:System.Web.UI.WebControls.BulletStyle.CustomImage" />
+
+        
 
         
 
@@ -295,6 +325,8 @@
 
         
 
+        
+
          property to the value of <see
          cref="F:System.Web.UI.WebControls.BulletStyle.CustomImage" />
 
@@ -302,8 +334,12 @@
 
         
 
+        
+
          to specify a custom image for the bullet, you must set the <see
          cref="P:System.Web.UI.WebControls.BulletedList.BulletImageUrl" />
+
+        
 
         
 
@@ -319,8 +355,12 @@
 
         
 
+        
+
         , set the <see
          cref="P:System.Web.UI.WebControls.BulletedList.DisplayMode" />
+
+        
 
         
 
@@ -333,8 +373,12 @@
 
         
 
+        
+
          enumeration. The defined display behaviors are <see
          cref="F:System.Web.UI.WebControls.BulletedListDisplayMode.Text" />
+
+        
 
         
 
@@ -347,8 +391,12 @@
 
         
 
+        
+
         , and <see
          cref="F:System.Web.UI.WebControls.BulletedListDisplayMode.LinkButton" />
+
+        
 
         
 
@@ -364,8 +412,12 @@
 
         
 
+        
+
          property to specify the URL that a hyperlink navigates to. Use the <see
          cref="P:System.Web.UI.WebControls.BulletedList.Target" />
+
+        
 
         
 
@@ -381,8 +433,12 @@
 
         
 
+        
+
          property is set to <see
          cref="F:System.Web.UI.WebControls.BulletedListDisplayMode.LinkButton" />
+
+        
 
         
 
@@ -395,8 +451,12 @@
 
         
 
+        
+
          control displays list items as links that post back to the server when clicked. To programmatically control the actions that are performed when a link button is clicked, provide an event handler for the <see
          cref="E:System.Web.UI.WebControls.BulletedList.Click" />
+
+        
 
         
 
@@ -409,8 +469,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.WebControls.BulletedList.SelectedItem" />
+
+        
 
         
 
@@ -423,8 +487,12 @@
 
         
 
+        
+
          class and are not applicable to the <see
          cref="T:System.Web.UI.WebControls.BulletedList" />
+
+        
 
         
 
@@ -437,8 +505,12 @@
 
         
 
+        
+
          class to determine the index of the link button in a <see
          cref="T:System.Web.UI.WebControls.BulletedList" />
+
+        
 
         
 
@@ -454,8 +526,12 @@
 
         
 
+        
+
          control also supports data binding. To bind the <see
          cref="T:System.Web.UI.WebControls.BulletedList" />
+
+        
 
         
 
@@ -465,6 +541,8 @@
          type="text/html">
           <a href="ab7b2846-975b-4057-a948-45527497c742">Binding to Databases</a>
         </format>
+
+        
 
         
 
@@ -488,6 +566,8 @@
 
         
 
+        
+
         .</para
       >
       <format type="text/html">
@@ -506,9 +586,13 @@
 
         
 
+        
+
         "
     AutoPostBack="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -519,6 +603,8 @@
     BorderColor="color name|#dddddd"
     BorderStyle="<codeFeaturedElement
         >NotSet</codeFeaturedElement>
+
+        
 
         
 
@@ -535,10 +621,14 @@
 
         
 
+        
+
         |Numbered|LowerAlpha|UpperAlpha|LowerRoman|
         UpperRoman|Disc|Circle|Square|CustomImage"
     CausesValidation="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -559,9 +649,13 @@
 
         
 
+        
+
         |HyperLink|LinkButton"
     Enabled="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -575,9 +669,13 @@
 
         
 
+        
+
         |False"
     EnableViewState="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -592,9 +690,13 @@
 
         
 
+        
+
         "
     Font-Italic="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -604,6 +706,8 @@
     Font-Names="string"
     Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -619,9 +723,13 @@
 
         
 
+        
+
         "
     Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -652,11 +760,15 @@
 
         
 
+        
+
         "
     ToolTip="string"
     ValidationGroup="string"
     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -673,9 +785,13 @@
 
         
 
+        
+
         |False"
                 Selected="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -710,8 +826,12 @@
 
             
 
+            
+
              constructor to initialize a new instance of the <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -725,6 +845,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -762,6 +884,8 @@
 
             
 
+            
+
              method is used primarily by control developers to insert the appropriate attributes and styles into the <see
              cref="T:System.Web.UI.HtmlTextWriter" />
 
@@ -769,8 +893,12 @@
 
             
 
+            
+
              output stream for a <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -789,8 +917,12 @@
 
             
 
+            
+
              control to render to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -806,8 +938,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -847,8 +983,12 @@
 
             
 
+            
+
              property is inherited from the <see
              cref="T:System.Web.UI.WebControls.ListControl" />
+
+            
 
             
 
@@ -861,8 +1001,12 @@
 
             
 
+            
+
              control. Do not assign a value to the <see
              cref="P:System.Web.UI.WebControls.BulletedList.AutoPostBack" />
+
+            
 
             
 
@@ -875,8 +1019,12 @@
 
             
 
+            
+
             , a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -890,6 +1038,8 @@
           <para
             >Gets or sets the value of the <see
              cref="P:System.Web.UI.WebControls.ListControl.AutoPostBack" />
+
+            
 
             
 
@@ -933,8 +1083,12 @@
 
             
 
+            
+
              property to specify the path to an image to display as each bullet in a <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -947,8 +1101,12 @@
 
             
 
+            
+
              property to the value <see
              cref="F:System.Web.UI.WebControls.BulletStyle.CustomImage" />
+
+            
 
             
 
@@ -965,8 +1123,12 @@
 
               
 
+              
+
                control does not support the <see
                cref="P:System.Web.UI.WebControls.Image.AlternateText" />
+
+              
 
               
 
@@ -993,6 +1155,8 @@
           <para
             >Gets or sets the path to an image to display for each bullet in a <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -1033,8 +1197,12 @@
 
             
 
+            
+
              property to specify the bullet style to apply to the list items in a <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -1047,8 +1215,12 @@
 
             
 
+            
+
              property is set using one of the <see
              cref="T:System.Web.UI.WebControls.BulletStyle" />
+
+            
 
             
 
@@ -1176,6 +1348,8 @@
 
             
 
+            
+
              value allows you to supply your own image for the bullet. If you specify the <see
              cref="F:System.Web.UI.WebControls.BulletStyle.CustomImage" />
 
@@ -1183,8 +1357,12 @@
 
             
 
+            
+
              value, you must also set the <see
              cref="P:System.Web.UI.WebControls.BulletedList.BulletImageUrl" />
+
+            
 
             
 
@@ -1201,8 +1379,12 @@
 
               
 
+              
+
                control does not support the <see
                cref="P:System.Web.UI.WebControls.Image.AlternateText" />
+
+              
 
               
 
@@ -1218,6 +1400,8 @@
           <para
             >Gets or sets the bullet style for the <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -1252,8 +1436,12 @@
 
             
 
+            
+
              event is raised when a list item in a <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -1266,8 +1454,12 @@
 
             
 
+            
+
              control to raise the <see
              cref="E:System.Web.UI.WebControls.BulletedList.Click" />
+
+            
 
             
 
@@ -1280,8 +1472,12 @@
 
             
 
+            
+
              property first must be set to the value <see
              cref="F:System.Web.UI.WebControls.BulletedListDisplayMode.LinkButton" />
+
+            
 
             
 
@@ -1299,6 +1495,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1307,6 +1505,8 @@
           <para
             >Occurs when a link button in a <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -1342,8 +1542,12 @@
 
             
 
+            
+
              property is inherited from the <see
              cref="T:System.Web.UI.Control" />
+
+            
 
             
 
@@ -1356,6 +1560,8 @@
 
             
 
+            
+
              control. The <see
              cref="P:System.Web.UI.WebControls.BulletedList.Controls" />
 
@@ -1363,8 +1569,12 @@
 
             
 
+            
+
              collection is overridden from the base class to always return the <see
              cref="T:System.Web.UI.EmptyControlCollection" />
+
+            
 
             
 
@@ -1378,6 +1588,8 @@
           <para
             >Gets a <see
              cref="T:System.Web.UI.ControlCollection" />
+
+            
 
             
 
@@ -1418,8 +1630,12 @@
 
             
 
+            
+
              property to specify the display behavior to apply to the content of list items in a <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -1432,8 +1648,12 @@
 
             
 
+            
+
              property is set using one of the <see
              cref="T:System.Web.UI.WebControls.BulletedListDisplayMode" />
+
+            
 
             
 
@@ -1491,8 +1711,12 @@
 
             
 
+            
+
              value allows you to display list content as hyperlinks. When clicked, a hyperlink navigates to a URL. Use the <see
              cref="P:System.Web.UI.WebControls.ListItem.Value" />
+
+            
 
             
 
@@ -1508,8 +1732,12 @@
 
             
 
+            
+
              field allows you to display list content as links. Use the <see
              cref="E:System.Web.UI.WebControls.BulletedList.Click" />
+
+            
 
             
 
@@ -1524,6 +1752,8 @@
           <para
             >Gets or sets the display mode of the list content in a <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -1561,8 +1791,12 @@
 
             
 
+            
+
              property to specify the value that starts the numbering of list items in an ordered <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -1575,8 +1809,12 @@
 
             
 
+            
+
              property is ignored, if the <see
              cref="P:System.Web.UI.WebControls.BulletedList.BulletStyle" />
+
+            
 
             
 
@@ -1589,8 +1827,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Web.UI.WebControls.BulletStyle.Square" />
+
+            
 
             
 
@@ -1603,8 +1845,12 @@
 
             
 
+            
+
             , or <see
              cref="F:System.Web.UI.WebControls.BulletStyle.CustomImage" />
+
+            
 
             
 
@@ -1617,8 +1863,12 @@
 
             
 
+            
+
              property is an integer, it does not always cause a bullet to render as a number. For example, if you set the <see
              cref="P:System.Web.UI.WebControls.BulletedList.FirstBulletNumber" />
+
+            
 
             
 
@@ -1631,8 +1881,12 @@
 
             
 
+            
+
              property to the value <see
              cref="F:System.Web.UI.WebControls.BulletStyle.LowerAlpha" />
+
+            
 
             
 
@@ -1647,6 +1901,8 @@
           <para
             >Gets or sets the value that starts the numbering of list items in an ordered <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -1684,8 +1940,12 @@
 
             
 
+            
+
              event is raised when a list item in the <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -1698,8 +1958,12 @@
 
             
 
+            
+
              control to raise the <see
              cref="E:System.Web.UI.WebControls.BulletedList.Click" />
+
+            
 
             
 
@@ -1712,8 +1976,12 @@
 
             
 
+            
+
              property to the value <see
              cref="F:System.Web.UI.WebControls.BulletedListDisplayMode.LinkButton" />
+
+            
 
             
 
@@ -1731,11 +1999,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.BulletedList.OnClick(System.Web.UI.WebControls.BulletedListEventArgs)" />
+
+            
 
             
 
@@ -1754,8 +2026,12 @@
 
             
 
+            
+
              event for the <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -1771,8 +2047,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.BulletedListEventArgs" />
+
+          
 
           
 
@@ -1809,8 +2089,12 @@
 
             
 
+            
+
              method is used internally by the <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -1823,8 +2107,12 @@
 
             
 
+            
+
              parameter, which is used to initialize the <see
              cref="P:System.Web.UI.WebControls.BulletedListEventArgs.Index" />
+
+            
 
             
 
@@ -1837,8 +2125,12 @@
 
             
 
+            
+
              object. The <see
              cref="M:System.Web.UI.WebControls.BulletedList.RaisePostBackEvent(System.String)" />
+
+            
 
             
 
@@ -1851,6 +2143,8 @@
 
             
 
+            
+
              event by passing the initialized <see
              cref="T:System.Web.UI.WebControls.BulletedListEventArgs" />
 
@@ -1858,8 +2152,12 @@
 
             
 
+            
+
              object to the <see
              cref="M:System.Web.UI.WebControls.BulletedList.OnClick(System.Web.UI.WebControls.BulletedListEventArgs)" />
+
+            
 
             
 
@@ -1875,8 +2173,12 @@
 
             
 
+            
+
              method optionally can perform validation before raising the <see
              cref="E:System.Web.UI.WebControls.BulletedList.Click" />
+
+            
 
             
 
@@ -1889,6 +2191,8 @@
 
             
 
+            
+
              is clicked, set the <see
              cref="P:System.Web.UI.WebControls.ListControl.CausesValidation" />
 
@@ -1896,8 +2200,12 @@
 
             
 
+            
+
              property to true and specify the group of controls to be validated in the <see
              cref="P:System.Web.UI.WebControls.ListControl.ValidationGroup" />
+
+            
 
             
 
@@ -1916,11 +2224,15 @@
 
             
 
+            
+
              control when a form is posted back to the server.</para
           >
         </summary>
         <param name="eventArgument">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1959,11 +2271,15 @@
 
             
 
+            
+
              method is used primarily by control developers.</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.BulletedList.Render(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -1976,8 +2292,12 @@
 
             
 
+            
+
              items to the client using the supplied <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -1990,8 +2310,12 @@
 
             
 
+            
+
              item is represented by an element in the <see
              cref="P:System.Web.UI.WebControls.ListControl.Items" />
+
+            
 
             
 
@@ -2007,8 +2331,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -2021,8 +2349,12 @@
 
             
 
+            
+
             . If there is at least one list item in the <see
              cref="P:System.Web.UI.WebControls.ListControl.Items" />
+
+            
 
             
 
@@ -2035,8 +2367,12 @@
 
             
 
+            
+
              method writes the HTML content for the <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -2049,6 +2385,8 @@
 
             
 
+            
+
             , <see
              cref="M:System.Web.UI.WebControls.BulletedList.RenderContents(System.Web.UI.HtmlTextWriter)" />
 
@@ -2056,8 +2394,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Web.UI.WebControls.WebControl.RenderEndTag(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -2076,8 +2418,12 @@
 
             
 
+            
+
              control content to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -2093,8 +2439,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -2130,6 +2480,8 @@
 
             
 
+            
+
              method renders the bulleted text for each list item in a <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
 
@@ -2137,8 +2489,12 @@
 
             
 
+            
+
              control using the specified <see
              cref="P:System.Web.UI.WebControls.BulletedList.DisplayMode" />
+
+            
 
             
 
@@ -2157,11 +2513,15 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
         <param name="item">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2174,8 +2534,12 @@
 
           
 
+          
+
            objects in a <see
            cref="T:System.Web.UI.WebControls.BulletedList" />
+
+          
 
           
 
@@ -2190,8 +2554,12 @@
 
           
 
+          
+
           The zero-based index of the <see
            cref="T:System.Web.UI.WebControls.ListItem" />
+
+          
 
           
 
@@ -2201,6 +2569,8 @@
         >
         <param name="writer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2239,8 +2609,12 @@
 
             
 
+            
+
              control as bullets into the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -2259,8 +2633,12 @@
 
             
 
+            
+
              control as bullets into the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -2276,8 +2654,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -2314,8 +2696,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Web.UI.WebControls.ListControl.SelectedIndex" />
+
+            
 
             
 
@@ -2328,8 +2714,12 @@
 
             
 
+            
+
              property is not applicable to the <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -2345,6 +2735,8 @@
 
             
 
+            
+
              property, it always returns -1. An attempt to use the set accessor for the <see
              cref="P:System.Web.UI.WebControls.BulletedList.SelectedIndex" />
 
@@ -2352,8 +2744,12 @@
 
             
 
+            
+
              property raises a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -2369,8 +2765,12 @@
 
             
 
+            
+
              class to determine the index of the link button in a <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -2386,6 +2786,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2394,6 +2796,8 @@
           <para
             >Gets or sets the zero-based index of the currently selected item in a <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -2434,8 +2838,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Web.UI.WebControls.ListControl.SelectedItem" />
+
+            
 
             
 
@@ -2448,8 +2856,12 @@
 
             
 
+            
+
              object that represents the currently selected item in a <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -2462,8 +2874,12 @@
 
             
 
+            
+
              property is not applicable to the <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -2480,8 +2896,12 @@
 
               
 
+              
+
                property to return the selected item for a <see
                cref="T:System.Web.UI.WebControls.BulletedList" />
+
+              
 
               
 
@@ -2498,8 +2918,12 @@
 
             
 
+            
+
              class to determine the index of the link button in a <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -2513,6 +2937,8 @@
           <para
             >Gets the currently selected item in a <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -2553,6 +2979,8 @@
 
             
 
+            
+
              property is inherited from the <see
              cref="T:System.Web.UI.WebControls.ListControl" />
 
@@ -2560,8 +2988,12 @@
 
             
 
+            
+
              class and is not applicable to the <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -2578,8 +3010,12 @@
 
               
 
+              
+
                property is set internally based on the selected list item in the <see
                cref="T:System.Web.UI.WebControls.BulletedList" />
+
+              
 
               
 
@@ -2592,8 +3028,12 @@
 
               
 
+              
+
                property directly, a <see
                cref="T:System.NotSupportedException" />
+
+              
 
               
 
@@ -2605,6 +3045,8 @@
           <para
             >This property is not bindable in visual designers, but is bindable at runtime. For more information, see <see
              cref="T:System.ComponentModel.BindableAttribute" />
+
+            
 
             
 
@@ -2623,6 +3065,8 @@
 
             
 
+            
+
              property of the selected <see
              cref="T:System.Web.UI.WebControls.ListItem" />
 
@@ -2630,8 +3074,12 @@
 
             
 
+            
+
              object in the <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -2671,8 +3119,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IPostBackEventHandler" />
+
+            
 
             
 
@@ -2691,11 +3143,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="eventArgument">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2727,8 +3183,12 @@
 
             
 
+            
+
              property to determine the <see
              cref="T:System.Web.UI.HtmlTextWriterTag" />
+
+            
 
             
 
@@ -2741,8 +3201,12 @@
 
             
 
+            
+
              control. The <see
              cref="P:System.Web.UI.WebControls.BulletedList.TagKey" />
+
+            
 
             
 
@@ -2761,8 +3225,12 @@
 
             
 
+            
+
              value for the specified <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -2859,8 +3327,12 @@
 
             
 
+            
+
              property to specify the frame or window that displays the Web page that is linked to when a hyperlink in a <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -2873,8 +3345,12 @@
 
             
 
+            
+
              control, set the <see
              cref="T:System.Web.UI.WebControls.BulletedListDisplayMode" />
+
+            
 
             
 
@@ -2887,8 +3363,12 @@
 
             
 
+            
+
             . Then, set the <see
              cref="P:System.Web.UI.WebControls.ListItem.Value" />
+
+            
 
             
 
@@ -2899,6 +3379,8 @@
           <para
             >If the <see
              cref="P:System.Web.UI.WebControls.BulletedList.Target" />
+
+            
 
             
 
@@ -2915,8 +3397,12 @@
 
               
 
+              
+
                property renders as a target attribute. The target attribute on anchor elements is not allowed in the XHTML 1.1 document type definition. Do not set the <see
                cref="P:System.Web.UI.WebControls.BulletedList.Target" />
+
+              
 
               
 
@@ -2929,10 +3415,14 @@
 
               
 
+              
+
                must be XHTML 1.1 compliant. For more information, refer to the topic <format
                type="text/html">
                 <a href="1b78d416-66bb-43a5-ac77-c703aab55b97">ASP.NET and XHTML Compliance</a>
               </format>
+
+              
 
               
 
@@ -2948,10 +3438,14 @@
 
               
 
+              
+
                property to target another window. For more information, see <format
                type="text/html">
                 <a href="7e3ce9c4-6b7d-4fb1-94b5-72cf2a44fe13">ASP.NET Accessibility</a>
               </format>
+
+              
 
               
 
@@ -2967,6 +3461,8 @@
           <para
             >Gets or sets the target window or frame in which to display the Web page content that is linked to when a hyperlink in a <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -3004,6 +3500,8 @@
 
             
 
+            
+
              property is inherited from the <see
              cref="T:System.Web.UI.WebControls.ListControl" />
 
@@ -3011,8 +3509,12 @@
 
             
 
+            
+
              class and is not applicable to the <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -3029,8 +3531,12 @@
 
               
 
+              
+
                property is set internally based on the selected list item in the <see
                cref="T:System.Web.UI.WebControls.BulletedList" />
+
+              
 
               
 
@@ -3043,8 +3549,12 @@
 
               
 
+              
+
                property directly, a <see
                cref="T:System.NotSupportedException" />
+
+              
 
               
 
@@ -3061,8 +3571,12 @@
 
             
 
+            
+
              property of <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -3075,8 +3589,12 @@
 
             
 
+            
+
              class to determine the index of the link button in a <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 
@@ -3089,8 +3607,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
+
+            
 
             
 
@@ -3104,6 +3626,8 @@
           <para
             >Gets or sets the text for the <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 

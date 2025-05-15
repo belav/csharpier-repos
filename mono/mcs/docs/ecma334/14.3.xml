@@ -8,8 +8,12 @@
 
     
 
+    
+
      (<hyperlink
     >14.5.2</hyperlink>
+
+    
 
     
 
@@ -22,8 +26,12 @@
 
     
 
+    
+
      (<hyperlink
     >14.5.4</hyperlink>
+
+    
 
     
 
@@ -42,8 +50,12 @@
 
         
 
+        
+
         ) members named N declared in T and the base types (<hyperlink
         >14.3.1</hyperlink>
+
+        
 
         
 
@@ -67,6 +79,8 @@
   <paragraph
     >For member lookups in types other than interfaces, and member lookups in interfaces that are strictly  single-inheritance (each interface in the inheritance chain has exactly zero or one direct base interface), the effect of the lookup rules is simply that derived members hide base members with the same name or signature. Such single-inheritance lookups are never ambiguous. The ambiguities that can possibly arise from member lookups in multiple-inheritance interfaces are described in <hyperlink
     >20.2.5</hyperlink>
+
+    
 
     
 

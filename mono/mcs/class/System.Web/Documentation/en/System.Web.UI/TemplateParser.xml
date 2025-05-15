@@ -27,8 +27,12 @@
 
         
 
+        
+
          class provides the common functionality for parser classes. Because the <see
          cref="T:System.Web.UI.TemplateParser" />
+
+        
 
         
 

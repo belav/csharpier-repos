@@ -24,8 +24,12 @@
 
         
 
+        
+
          objects when they are created, implement the <see
          cref="T:System.ServiceModel.Dispatcher.IInstanceContextInitializer" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          to add it to the <see
          cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.InstanceContextInitializers" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          is added to attach an extension to the <see
          cref="T:System.ServiceModel.InstanceContext" />
+
+        
 
         
 
@@ -72,8 +84,12 @@
 
         
 
+        
+
          object that processes a message, see <see
          cref="T:System.ServiceModel.Dispatcher.IInstanceContextProvider" />
+
+        
 
         
 
@@ -87,6 +103,8 @@
       <para
         >Defines the methods necessary to inspect or modify the creation of <see
          cref="T:System.ServiceModel.InstanceContext" />
+
+        
 
         
 
@@ -129,8 +147,12 @@
 
             
 
+            
+
              method is called when an <see
              cref="T:System.ServiceModel.InstanceContext" />
+
+            
 
             
 
@@ -149,11 +171,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

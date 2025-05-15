@@ -32,11 +32,15 @@
 
         
 
+        
+
          attribute. Both attributes can be applied to either a method or a class.</para
       >
       <para
         >A method can have either of the two attributes applied, but not both. Any operation that has neither applied will use the attribute applied to the containing class. If the containing class does not have either attribute applied, the <see
          cref="T:System.Runtime.Serialization.DataContractSerializer" />
+
+        
 
         
 
@@ -52,6 +56,8 @@
 
         
 
+        
+
          to be created at run time. The behavior allows customization at run time of the serializer behavior.</para
       >
     </remarks>
@@ -60,6 +66,8 @@
       <para
         >Instructs the indigo1 infrastructure to use the <see
          cref="T:System.Runtime.Serialization.DataContractSerializer" />
+
+        
 
         
 
@@ -88,6 +96,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.DataContractFormatAttribute" />
+
+            
 
             
 

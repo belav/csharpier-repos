@@ -27,6 +27,8 @@
 
         
 
+        
+
          property.</para
       >
     </remarks>
@@ -54,6 +56,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.PeerResolvers.PeerCustomResolverSettings" />
+
+            
 
             
 
@@ -135,6 +139,8 @@
           <para
             >Gets whether the <see
              cref="P:System.ServiceModel.PeerResolvers.PeerCustomResolverSettings.Binding" />
+
+            
 
             
 

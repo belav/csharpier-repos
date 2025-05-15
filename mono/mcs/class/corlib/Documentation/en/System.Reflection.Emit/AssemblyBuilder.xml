@@ -47,6 +47,8 @@
 
         
 
+        
+
          method. To generate an executable, the <see
          cref="M:System.Reflection.Emit.AssemblyBuilder.SetEntryPoint(System.Reflection.MethodInfo)" />
 
@@ -54,8 +56,12 @@
 
         
 
+        
+
          method must be called to identify the method that is the entry point to the assembly. Assemblies are saved as DLL by default, unless <see
          cref="M:System.Reflection.Emit.AssemblyBuilder.SetEntryPoint(System.Reflection.MethodInfo)" />
+
+        
 
         
 
@@ -71,6 +77,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -81,8 +89,12 @@
 
         
 
+        
+
          such as GetModules and GetLoadedModules will not work correctly when called AssemblyBuilder objects. You can load the defined dynamic assembly and call the methods on the loaded assembly. For example, to ensure that resource modules are included in the returned module list, call GetModules on the loaded <see
          cref="T:System.Reflection.Assembly" />
+
+        
 
         
 
@@ -98,6 +110,8 @@
 
         
 
+        
+
          is not effective until the assembly is saved to disk. So, strong names will not work with transient dynamic assemblies.</para
       >
       <para
@@ -108,8 +122,12 @@
 
         
 
+        
+
          object, use the <see
          cref="Overload:System.AppDomain.DefineDynamicAssembly" />
+
+        
 
         
 
@@ -156,6 +174,8 @@
 
             
 
+            
+
              should not be the same as that of any other persistable module, standalone managed resource, or the standalone manifest file.</para
           >
           <para>The managed resources in the file are assumed to be public.</para>
@@ -169,8 +189,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -182,6 +206,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -202,10 +228,14 @@
 
           
 
+          
+
           The logical name of the resource. </param
         >
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -248,6 +278,8 @@
 
             
 
+            
+
              should not be the same as that of any other persistable module, standalone managed resource, or the standalone manifest file.</para
           >
           <para>Attributes can be specified for the managed resource.</para>
@@ -261,8 +293,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -274,6 +310,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -294,6 +332,8 @@
 
           
 
+          
+
           The logical name of the resource. </param
         >
         <param name="fileName">
@@ -303,10 +343,14 @@
 
           
 
+          
+
           The physical file name (.resources file) to which the logical name is mapped. This should not include a path; the file must be in the same directory as the assembly to which it is added. </param
         >
         <param name="attribute">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -340,6 +384,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -348,6 +394,8 @@
           <para
             >Gets the location of the assembly, as specified originally (such as in an <see
              cref="T:System.Reflection.AssemblyName" />
+
+            
 
             
 
@@ -391,12 +439,16 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
             <para
               >To suppress optimizations when debugging dynamic modules, apply the <see
                cref="T:System.Diagnostics.DebuggableAttribute" />
+
+              
 
               
 
@@ -409,8 +461,12 @@
 
               
 
+              
+
               . Create an instance of <see
                cref="T:System.Diagnostics.DebuggableAttribute" />
+
+              
 
               
 
@@ -423,8 +479,12 @@
 
               
 
+              
+
                flag and apply it using the <see
                cref="Overload:System.Reflection.Emit.AssemblyBuilder.SetCustomAttribute" />
+
+              
 
               
 
@@ -442,8 +502,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -455,6 +519,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -478,11 +544,15 @@
 
             
 
+            
+
              representing the defined dynamic module.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -526,12 +596,16 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
             <para
               >To suppress optimizations when debugging dynamic modules, apply the <see
                cref="T:System.Diagnostics.DebuggableAttribute" />
+
+              
 
               
 
@@ -544,8 +618,12 @@
 
               
 
+              
+
               . Create an instance of <see
                cref="T:System.Diagnostics.DebuggableAttribute" />
+
+              
 
               
 
@@ -558,8 +636,12 @@
 
               
 
+              
+
                flag and apply it using the <see
                cref="Overload:System.Reflection.Emit.AssemblyBuilder.SetCustomAttribute" />
+
+              
 
               
 
@@ -577,8 +659,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -590,6 +676,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -613,6 +701,8 @@
 
             
 
+            
+
              representing the defined dynamic module.</para
           >
         </returns>
@@ -623,10 +713,14 @@
 
           
 
+          
+
           The name of the dynamic module. Must be less than 260 characters in length. </param
         >
         <param name="emitSymbolInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -669,8 +763,12 @@
 
             
 
+            
+
              or the <see
              cref="F:System.Reflection.Emit.AssemblyBuilderAccess.RunAndSave" />
+
+            
 
             
 
@@ -686,8 +784,12 @@
 
             
 
+            
+
              should be the same as the name of the assembly (that is, the <see
              cref="P:System.Reflection.AssemblyName.Name" />
+
+            
 
             
 
@@ -700,8 +802,12 @@
 
             
 
+            
+
              used to create the dynamic assembly) and <paramref
              name="fileName" />
+
+            
 
             
 
@@ -719,8 +825,12 @@
 
               
 
+              
+
                attribute to the dynamic assembly before calling <see
                cref="Overload:System.Reflection.Emit.AssemblyBuilder.DefineDynamicModule" />
+
+              
 
               
 
@@ -733,6 +843,8 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Diagnostics.DebuggableAttribute.DebuggingModes.DisableOptimizations" />
 
@@ -740,8 +852,12 @@
 
               
 
+              
+
                flag and apply it using the <see
                cref="Overload:System.Reflection.Emit.AssemblyBuilder.SetCustomAttribute" />
+
+              
 
               
 
@@ -759,8 +875,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -772,6 +892,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -795,6 +917,8 @@
 
             
 
+            
+
              object representing the defined dynamic module.</para
           >
         </returns>
@@ -805,10 +929,14 @@
 
           
 
+          
+
           The name of the dynamic module. Must be less than 260 characters in length. </param
         >
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -852,8 +980,12 @@
 
             
 
+            
+
              or the <see
              cref="F:System.Reflection.Emit.AssemblyBuilderAccess.RunAndSave" />
+
+            
 
             
 
@@ -869,8 +1001,12 @@
 
             
 
+            
+
              should be the same as the name of the assembly (that is, the <see
              cref="P:System.Reflection.AssemblyName.Name" />
+
+            
 
             
 
@@ -883,8 +1019,12 @@
 
             
 
+            
+
              used to create the dynamic assembly) and <paramref
              name="fileName" />
+
+            
 
             
 
@@ -902,8 +1042,12 @@
 
               
 
+              
+
                attribute to the dynamic assembly before calling <see
                cref="Overload:System.Reflection.Emit.AssemblyBuilder.DefineDynamicModule" />
+
+              
 
               
 
@@ -916,6 +1060,8 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Diagnostics.DebuggableAttribute.DebuggingModes.DisableOptimizations" />
 
@@ -923,8 +1069,12 @@
 
               
 
+              
+
                flag and apply it using the <see
                cref="Overload:System.Reflection.Emit.AssemblyBuilder.SetCustomAttribute" />
+
+              
 
               
 
@@ -942,8 +1092,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -955,6 +1109,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -978,11 +1134,15 @@
 
             
 
+            
+
              object representing the defined dynamic module.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -997,10 +1157,14 @@
 
           
 
+          
+
           The name of the file to which the dynamic module should be saved. </param
         >
         <param name="emitSymbolInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1044,8 +1208,12 @@
 
             
 
+            
+
              by calling <see
              cref="M:System.Resources.ResourceWriter.AddResource(System.String,System.String)" />
+
+            
 
             
 
@@ -1060,11 +1228,15 @@
 
             
 
+            
+
              should not be the same as that of any other persistable module, stand-alone managed resource, or the stand-alone manifest file.</para
           >
           <para
             >The runtime calls the <see
              cref="M:System.Resources.ResourceWriter.Close" />
+
+            
 
             
 
@@ -1081,8 +1253,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -1094,6 +1270,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -1117,11 +1295,15 @@
 
             
 
+            
+
              object for the specified resource.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1136,10 +1318,14 @@
 
           
 
+          
+
           A textual description of the resource. </param
         >
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1184,8 +1370,12 @@
 
             
 
+            
+
              by calling <see
              cref="M:System.Resources.ResourceWriter.AddResource(System.String,System.String)" />
+
+            
 
             
 
@@ -1200,11 +1390,15 @@
 
             
 
+            
+
              should not be the same as that of any other persistable module, standalone managed resource, or the standalone manifest file.</para
           >
           <para
             >The runtime calls the <see
              cref="M:System.Resources.ResourceWriter.Close" />
+
+            
 
             
 
@@ -1221,8 +1415,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -1234,6 +1432,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -1257,11 +1457,15 @@
 
             
 
+            
+
              object for the specified resource.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1276,6 +1480,8 @@
 
           
 
+          
+
           A textual description of the resource. </param
         >
         <param name="fileName">
@@ -1285,10 +1491,14 @@
 
           
 
+          
+
           The physical file name (.resources file) to which the logical name is mapped. This should not include a path. </param
         >
         <param name="attribute">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1330,8 +1540,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Emit.AssemblyBuilder.DefineUnmanagedResource(System.Byte[])" />
+
+            
 
             
 
@@ -1346,6 +1560,8 @@
         </summary>
         <param name="resource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1387,8 +1603,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Emit.AssemblyBuilder.DefineUnmanagedResource(System.Byte[])" />
+
+            
 
             
 
@@ -1405,8 +1625,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -1423,6 +1647,8 @@
 
               
 
+              
+
               .) To use this functionality, your application should target the net_v35_long or later.</para
             >
           </block>
@@ -1433,6 +1659,8 @@
         </summary>
         <param name="resourceFileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1469,8 +1697,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Emit.AssemblyBuilder.DefineUnmanagedResource(System.Byte[])" />
+
+            
 
             
 
@@ -1489,8 +1721,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -1502,6 +1738,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -1553,8 +1791,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Emit.AssemblyBuilder.DefineUnmanagedResource(System.Byte[])" />
+
+            
 
             
 
@@ -1573,8 +1815,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -1586,6 +1832,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -1606,10 +1854,14 @@
 
           
 
+          
+
           The name of the product with which this assembly is distributed. </param
         >
         <param name="productVersion">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1624,6 +1876,8 @@
 
           
 
+          
+
           The name of the company that produced this assembly. </param
         >
         <param name="copyright">
@@ -1633,10 +1887,14 @@
 
           
 
+          
+
           Describes all copyright notices, trademarks, and registered trademarks that apply to this assembly. This should include the full text of all notices, legal symbols, copyright dates, trademark numbers, and so on. In English, this string should be in the format "Copyright Microsoft Corp. 1990-2001". </param
         >
         <param name="trademark">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1705,11 +1963,15 @@
 
             
 
+            
+
              equals the type and value of this instance; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1736,6 +1998,8 @@
           <para
             >See <see
              cref="T:System.Reflection.AssemblyName" />
+
+            
 
             
 
@@ -1781,6 +2045,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1790,6 +2056,8 @@
         </returns>
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1831,6 +2099,8 @@
 
             
 
+            
+
             , and that derive from a specified attribute type.</para
           >
         </summary>
@@ -1839,6 +2109,8 @@
           <para
             >An array that contains the custom attributes that are derived at any level from <paramref
              name="attributeType" />
+
+            
 
             
 
@@ -1854,10 +2126,14 @@
 
           
 
+          
+
           The base type from which attributes derive.</param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1905,6 +2181,8 @@
 
           
 
+          
+
           The name of the requested dynamic module. </param
         >
       </Docs>
@@ -1936,6 +2214,8 @@
           <para
             >An array of <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -1977,6 +2257,8 @@
 
             
 
+            
+
              should not include the path to the file.</para
           >
         </remarks>
@@ -1985,6 +2267,8 @@
           <para
             >Gets a <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -2003,11 +2287,15 @@
 
             
 
+            
+
              for the specified file, or null, if the file is not found.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2054,11 +2342,15 @@
 
             
 
+            
+
              objects.</para
           >
         </returns>
         <param name="getResourceModules">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2130,6 +2422,8 @@
 
           
 
+          
+
           true to include resource modules; otherwise, false.</param
         >
       </Docs>
@@ -2170,11 +2464,15 @@
 
             
 
+            
+
              populated with information about the resource's topology, or null if the resource is not found.</para
           >
         </returns>
         <param name="resourceName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2252,11 +2550,15 @@
 
             
 
+            
+
              representing this manifest resource.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2299,6 +2601,8 @@
 
             
 
+            
+
              has its file pointer set to the beginning of the resource.</para
           >
         </remarks>
@@ -2316,6 +2620,8 @@
 
             
 
+            
+
              representing this manifest resource.</para
           >
         </returns>
@@ -2326,10 +2632,14 @@
 
           
 
+          
+
           The type whose namespace is used to scope the manifest resource name. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2375,6 +2685,8 @@
 
           
 
+          
+
           The name of the requested module.</param
         >
       </Docs>
@@ -2415,6 +2727,8 @@
 
           
 
+          
+
           true to include resource modules; otherwise, false.</param
         >
       </Docs>
@@ -2450,6 +2764,8 @@
 
             
 
+            
+
              that was specified when the current dynamic assembly was created, and sets the code base as specified.</para
           >
         </summary>
@@ -2459,6 +2775,8 @@
         </returns>
         <param name="copiedName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2496,8 +2814,12 @@
 
             
 
+            
+
             , the assembly in which the attribute was defined is included in the list returned by this method. However, if you use a <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -2508,6 +2830,8 @@
           <para
             >To get a complete list of referenced assemblies, save the assembly, load it into another application domain, and call the <see
              cref="M:System.Reflection.Assembly.GetReferencedAssemblies" />
+
+            
 
             
 
@@ -2526,8 +2850,12 @@
 
             
 
+            
+
              objects for the assemblies that are referenced by this <see
              cref="T:System.Reflection.Emit.AssemblyBuilder" />
+
+            
 
             
 
@@ -2582,6 +2910,8 @@
 
           
 
+          
+
           The specified culture. </param
         >
       </Docs>
@@ -2618,6 +2948,8 @@
 
             
 
+            
+
              overload to use your current assembly version.</para
           >
         </remarks>
@@ -2636,10 +2968,14 @@
 
           
 
+          
+
           The specified culture. </param
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2681,6 +3017,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -2689,6 +3027,8 @@
           <para
             >Gets the specified type from the types that have been defined and created in the current <see
              cref="T:System.Reflection.Emit.AssemblyBuilder" />
+
+            
 
             
 
@@ -2708,6 +3048,8 @@
 
           
 
+          
+
           The name of the type to search for.</param
         >
         <param name="throwOnError">
@@ -2717,10 +3059,14 @@
 
           
 
+          
+
           true to throw an exception if the type is not found; otherwise, false.</param
         >
         <param name="ignoreCase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2746,6 +3092,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="T:System.Reflection.Emit.AssemblyBuilder" />
+
+            
 
             
 
@@ -2817,6 +3165,8 @@
 
             
 
+            
+
              is applied to this dynamic assembly; otherwise, false.</para
           >
         </returns>
@@ -2827,10 +3177,14 @@
 
           
 
+          
+
           The type of attribute to test for.</param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2857,6 +3211,8 @@
           <para
             >An <see
              cref="T:System.Reflection.Emit.AssemblyBuilder" />
+
+            
 
             
 
@@ -2921,6 +3277,8 @@
 
             
 
+            
+
              that contains the assembly manifest.</para
           >
         </summary>
@@ -2949,8 +3307,12 @@
 
             
 
+            
+
              when you create the <see
              cref="T:System.Reflection.Emit.AssemblyBuilder" />
+
+            
 
             
 
@@ -2962,6 +3324,8 @@
             <para
               >After you have saved a dynamic assembly to disk, you can use the <see
                cref="M:System.Reflection.Assembly.ReflectionOnlyLoad(System.String)" />
+
+              
 
               
 
@@ -3006,11 +3370,15 @@
 
             
 
+            
+
              can be different from the names of all of the modules contained within the assembly. If so, the assembly file contains only the assembly manifest.</para
           >
           <para
             >For each <see
              cref="T:System.Resources.ResourceWriter" />
+
+            
 
             
 
@@ -3023,8 +3391,12 @@
 
             
 
+            
+
             , this method writes the .resources file and calls <see
              cref="M:System.Resources.ResourceWriter.Close" />
+
+            
 
             
 
@@ -3040,8 +3412,12 @@
 
             
 
+            
+
              needs to be a simple file name without a drive or directory component. To create an assembly in a specific directory, use one of the <see
              cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess)" />
+
+            
 
             
 
@@ -3057,8 +3433,12 @@
 
             
 
+            
+
              method is equivalent to calling the <see
              cref="M:System.Reflection.Emit.AssemblyBuilder.Save(System.String,System.Reflection.PortableExecutableKinds,System.Reflection.ImageFileMachine)" />
+
+            
 
             
 
@@ -3071,8 +3451,12 @@
 
             
 
+            
+
              for the <paramref
              name="portableExecutableKind" />
+
+            
 
             
 
@@ -3085,8 +3469,12 @@
 
             
 
+            
+
              for the <paramref
              name="imageFileMachine" />
+
+            
 
             
 
@@ -3101,6 +3489,8 @@
         </summary>
         <param name="assemblyFileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3144,8 +3534,12 @@
 
             
 
+            
+
              and <paramref
              name="portableExecutableKind" />
+
+            
 
             
 
@@ -3158,8 +3552,12 @@
 
             
 
+            
+
              takes precedence over <paramref
              name="portableExecutableKind" />
+
+            
 
             
 
@@ -3172,6 +3570,8 @@
 
             
 
+            
+
              with <see
              cref="F:System.Reflection.PortableExecutableKinds.PE32Plus" />
 
@@ -3179,8 +3579,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Reflection.PortableExecutableKinds.PE32Plus" />
+
+            
 
             
 
@@ -3196,11 +3600,15 @@
 
             
 
+            
+
              can be different from the names of all of the modules contained within the assembly. If so, the assembly file contains only the assembly manifest.</para
           >
           <para
             >For each <see
              cref="T:System.Resources.ResourceWriter" />
+
+            
 
             
 
@@ -3213,8 +3621,12 @@
 
             
 
+            
+
             , this method writes the .resources file and calls <see
              cref="M:System.Resources.ResourceWriter.Close" />
+
+            
 
             
 
@@ -3230,8 +3642,12 @@
 
             
 
+            
+
              needs to be a simple file name without a drive or directory component. To create an assembly in a specific directory, use one of the <see
              cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess)" />
+
+            
 
             
 
@@ -3251,6 +3667,8 @@
 
           
 
+          
+
           The file name of the assembly.</param
         >
         <param name="portableExecutableKind">
@@ -3260,8 +3678,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Reflection.PortableExecutableKinds" />
+
+          
 
           
 
@@ -3276,8 +3698,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Reflection.ImageFileMachine" />
+
+          
 
           
 
@@ -3319,8 +3745,12 @@
 
               
 
+              
+
                cannot be used to set declarative security attributes. Use one of the overloads of <see
                cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess)" />
+
+              
 
               
 
@@ -3338,8 +3768,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -3356,6 +3790,8 @@
 
               
 
+              
+
               .) To use this functionality, your application should target the net_v35_long or later.</para
             >
           </block>
@@ -3366,6 +3802,8 @@
         </summary>
         <param name="customBuilder">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3413,6 +3851,8 @@
 
             
 
+            
+
             . The documentation is available online; see <see
              cref="http://go.microsoft.com/fwlink/?LinkID=99212"
               >ECMA C# and Common Language Infrastructure Standards</see
@@ -3422,10 +3862,14 @@
 
             
 
+            
+
              on MSDN and <see
              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
+
+            
 
             
 
@@ -3441,8 +3885,12 @@
 
             
 
+            
+
              class, and any <see
              cref="T:System.Reflection.ConstructorInfo" />
+
+            
 
             
 
@@ -3452,6 +3900,8 @@
              type="text/html">
               <a href="c1439fb5-cf76-475d-a9d2-fe64ba858858">Runtime Types in Reflection</a>
             </format>
+
+            
 
             
 
@@ -3467,8 +3917,12 @@
 
               
 
+              
+
                cannot be used to set declarative security attributes. Use one of the overloads of <see
                cref="M:System.AppDomain.DefineDynamicAssembly(System.Reflection.AssemblyName,System.Reflection.Emit.AssemblyBuilderAccess)" />
+
+              
 
               
 
@@ -3486,8 +3940,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -3499,6 +3957,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -3519,10 +3979,14 @@
 
           
 
+          
+
           The constructor for the custom attribute. </param
         >
         <param name="binaryAttribute">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3566,6 +4030,8 @@
 
           
 
+          
+
           A reference to the method that represents the entry point for this dynamic assembly. </param
         >
       </Docs>
@@ -3604,8 +4070,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -3617,6 +4087,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -3637,10 +4109,14 @@
 
           
 
+          
+
           A reference to the method that represents the entry point for this dynamic assembly. </param
         >
         <param name="fileKind">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3719,6 +4195,8 @@
 
             
 
+            
+
             , see the MSDN Library.</para
           >
         </remarks>
@@ -3733,6 +4211,8 @@
 
           
 
+          
+
           The type information to return.</param
         >
         <param name="lcid">
@@ -3742,10 +4222,14 @@
 
           
 
+          
+
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

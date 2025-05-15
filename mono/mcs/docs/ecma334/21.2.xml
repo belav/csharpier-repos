@@ -8,6 +8,8 @@
 
     
 
+    
+
      may optionally include a sequence of enum modifiers: <grammar_production
     >
       <name>
@@ -17,8 +19,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -37,6 +43,8 @@
       <name>
         <non_terminal where="21.2">enum-modifier</non_terminal>
       </name>
+
+      
 
       
 
@@ -64,11 +72,15 @@
 
     
 
+    
+
     It is a compile-time error for the same modifier to appear multiple times in an enum declaration. </paragraph
   >
   <paragraph
     >The modifiers of an enum declaration have the same meaning as those of a class declaration (<hyperlink
     >17.1.1</hyperlink>
+
+    
 
     
 

@@ -33,6 +33,8 @@
 
         
 
+        
+
          interface converts an object to its string representation based on a format string and a format provider. </para
       >
       <para>A format string typically defines the general appearance of an object. For example, the .NET Framework supports the following:</para>
@@ -43,6 +45,8 @@
              type="text/html">
               <a href="dd1ff672-1052-42cf-8666-4924fb6cd1a1">Enumeration Format Strings</a>
             </format>
+
+            
 
             
 
@@ -62,10 +66,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
             </format>
+
+            
 
             
 
@@ -87,10 +95,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom Date and Time Format Strings</a>
             </format>
+
+            
 
             
 
@@ -110,10 +122,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="a63ebf55-7269-416b-b4f5-286f6c03bf0e">Custom TimeSpan Format Strings</a>
             </format>
+
+            
 
             
 
@@ -135,6 +151,8 @@
 
             
 
+            
+
              class, which returns either a <see
              cref="T:System.Globalization.NumberFormatInfo" />
 
@@ -142,8 +160,12 @@
 
             
 
+            
+
              object for formatting numeric values, or a <see
              cref="T:System.Globalization.DateTimeFormatInfo" />
+
+            
 
             
 
@@ -161,6 +183,8 @@
 
             
 
+            
+
              class, which returns an instance of itself for formatting numeric values.</para
           >
         </item>
@@ -168,6 +192,8 @@
           <para
             >The <see
              cref="T:System.Globalization.DateTimeFormatInfo" />
+
+            
 
             
 
@@ -185,11 +211,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >The <see
          cref="T:System.IFormattable" />
+
+        
 
         
 
@@ -202,8 +232,12 @@
 
         
 
+        
+
         , that supplies formatting services for the implementing type. The <see
          cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
+
+        
 
         
 
@@ -216,8 +250,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Convert.ToString(System.Object,System.IFormatProvider)" />
+
+        
 
         
 
@@ -232,8 +270,12 @@
 
         
 
+        
+
          in the .NET Framework. Such methods include <see
          cref="M:System.Console.WriteLine(System.String,System.Object)" />
+
+        
 
         
 
@@ -246,8 +288,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Text.StringBuilder.AppendFormat(System.String,System.Object)" />
+
+        
 
         
 
@@ -260,11 +306,15 @@
 
         
 
+        
+
          method is called for each format item in the method's format string. </para
       >
       <para
         >The <see
          cref="T:System.IFormattable" />
+
+        
 
         
 
@@ -314,12 +364,16 @@
 
           
 
+          
+
            is invalid or cannot be used with the type of the current instance.</exception
         >
         <example>
           <para
             >The following example demonstrates using the <see
              cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
+
+            
 
             
 
@@ -335,8 +389,12 @@ U.S. English, which provides the default values for the <paramref
             
 
             
+
+            
 parameter of <see
              cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
+
+            
 
             
 
@@ -387,8 +445,12 @@ class FormattableExample {
 
             
 
+            
+
              method converts a value to a string representation that can be expressed in multiple ways. Its precise format depends on specific symbols or a specified order defined by specific cultures, professions, or industries. You can call the method directly. It is also called automatically by the <see
              cref="M:System.Convert.ToString(System.Object)" />
+
+            
 
             
 
@@ -401,8 +463,12 @@ class FormattableExample {
 
             
 
+            
+
              methods, and by methods that use the composite formatting feature in the .NET Framework, such as <see
              cref="M:System.String.Format(System.String,System.Object[])" />
+
+            
 
             
 
@@ -415,8 +481,12 @@ class FormattableExample {
 
             
 
+            
+
             , and <see
              cref="M:System.Text.StringBuilder.AppendFormat(System.String,System.Object[])" />
+
+            
 
             
 
@@ -431,11 +501,15 @@ class FormattableExample {
 
             
 
+            
+
             .)</para
           >
           <para
             >Composite formatting methods call the <see
              cref="M:System.IFormattable.ToString(System.String,System.IFormatProvider)" />
+
+            
 
             
 
@@ -453,6 +527,8 @@ class FormattableExample {
 
                 
 
+                
+
                  parameter.</para
               >
             </item>
@@ -460,6 +536,8 @@ class FormattableExample {
               <para
                 >If the format item includes a format string (for example, {0:G}), that format string is passed as the value of the <see
                  cref="T:System.String" />
+
+                
 
                 
 
@@ -477,6 +555,8 @@ class FormattableExample {
 
                 
 
+                
+
                  parameter, <see
                  cref="P:System.Globalization.CultureInfo.CurrentCulture" />
 
@@ -484,8 +564,12 @@ class FormattableExample {
 
                 
 
+                
+
                  is passed as the value of the <see
                  cref="T:System.IFormatProvider" />
+
+                
 
                 
 
@@ -503,8 +587,12 @@ class FormattableExample {
 
                 
 
+                
+
                  parameter, the provider that is supplied in the method call is passed as the value of the <see
                  cref="T:System.IFormatProvider" />
+
+                
 
                 
 
@@ -523,6 +611,8 @@ class FormattableExample {
 
               
 
+              
+
                implementation is called by composite formatting methods only if they are not passed an <see
                cref="T:System.ICustomFormatter" />
 
@@ -530,8 +620,12 @@ class FormattableExample {
 
               
 
+              
+
                format provider, or if the <see
                cref="M:System.ICustomFormatter.Format(System.String,System.Object,System.IFormatProvider)" />
+
+              
 
               
 
@@ -548,12 +642,16 @@ class FormattableExample {
 
             
 
+            
+
              interface:</para
           >
           <list type="bullet">
             <item>
               <para>
                 <see cref="T:System.Globalization.NumberFormatInfo" />
+
+                
 
                 
 
@@ -570,12 +668,16 @@ class FormattableExample {
 
                 
 
+                
+
                  supplies date-related and time-related formatting information, such as the position of the month, the day, and the year in a date pattern.</para
               >
             </item>
             <item>
               <para>
                 <see cref="T:System.Globalization.CultureInfo" />
+
+                
 
                 
 
@@ -602,10 +704,14 @@ class FormattableExample {
 
           
 
+          
+
           The format to use.</param
         >
         <param name="formatProvider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

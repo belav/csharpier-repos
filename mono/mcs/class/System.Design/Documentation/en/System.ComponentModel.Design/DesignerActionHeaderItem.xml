@@ -26,6 +26,8 @@
 
         
 
+        
+
          base class, <see
          cref="T:System.ComponentModel.Design.DesignerActionHeaderItem" />
 
@@ -33,8 +35,12 @@
 
         
 
+        
+
          represents individual static text items in a smart tag panel. However, <see
          cref="T:System.ComponentModel.Design.DesignerActionHeaderItem" />
+
+        
 
         
 
@@ -50,8 +56,12 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+        
 
         
 
@@ -89,8 +99,12 @@
 
             
 
+            
+
              and the <see
              cref="P:System.ComponentModel.Design.DesignerActionItem.Category" />
+
+            
 
             
 
@@ -103,8 +117,12 @@
 
             
 
+            
+
              parameter and sets the <see
              cref="P:System.ComponentModel.Design.DesignerActionItem.Description" />
+
+            
 
             
 
@@ -123,11 +141,15 @@
 
             
 
+            
+
              class using the provided name string.</para
           >
         </summary>
         <param name="displayName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -161,8 +183,12 @@
 
             
 
+            
+
              property to null. The <see
              cref="P:System.ComponentModel.Design.DesignerActionItem.Category" />
+
+            
 
             
 
@@ -181,11 +207,15 @@
 
             
 
+            
+
              class using the provided name and category strings.</para
           >
         </summary>
         <param name="displayName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -200,8 +230,12 @@
 
           
 
+          
+
           The case-sensitive <see
            cref="T:System.String" />
+
+          
 
           
 

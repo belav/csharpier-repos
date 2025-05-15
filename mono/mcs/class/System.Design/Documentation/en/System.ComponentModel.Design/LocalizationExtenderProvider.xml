@@ -47,8 +47,12 @@
 
         
 
+        
+
          can extend an <see
          cref="T:System.ComponentModel.Design.IRootDesigner" />
+
+        
 
         
 
@@ -58,6 +62,8 @@
          type="text/html">
           <a href="49d520d7-92d7-44ee-bb24-8b615db1d41b">Localization</a>
         </format>
+
+        
 
         
 
@@ -74,6 +80,8 @@
 
         
 
+        
+
          property named "Localizable" on the root designer component. If a serializer finds this property, it searches for a property of type <see
          cref="T:System.Globalization.CultureInfo" />
 
@@ -81,8 +89,12 @@
 
         
 
+        
+
          named "Language" to determine the current resource configuration. Default serializers use these properties to determine if it should localize any localizable resources of the component, and if so, what <see
          cref="T:System.Globalization.CultureInfo" />
+
+        
 
         
 
@@ -118,6 +130,8 @@
 
             
 
+            
+
              sets the current language to <see
              cref="P:System.Globalization.CultureInfo.InvariantCulture" />
 
@@ -125,8 +139,12 @@
 
             
 
+            
+
             , which is the generic and default language resource setting. This setting causes a designer to generate code that references the generic language resource. You can create other <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -145,6 +163,8 @@
 
             
 
+            
+
              class using the specified service provider and base component.</para
           >
         </summary>
@@ -155,10 +175,14 @@
 
           
 
+          
+
           A service provider for the specified component. </param
         >
         <param name="baseComponent">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -198,6 +222,8 @@
 
           
 
+          
+
           The object to receive the extender properties. </param
         >
       </Docs>
@@ -224,8 +250,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.ComponentModel.Design.LocalizationExtenderProvider" />
+
+            
 
             
 
@@ -238,8 +268,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.ComponentModel.Design.LocalizationExtenderProvider" />
+
+            
 
             
 
@@ -252,6 +286,8 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.ComponentModel.Design.LocalizationExtenderProvider" />
 
@@ -259,8 +295,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.ComponentModel.Design.LocalizationExtenderProvider" />
+
+            
 
             
 
@@ -275,10 +315,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -295,6 +339,8 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.ComponentModel.Design.LocalizationExtenderProvider" />
 
@@ -302,8 +348,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.ComponentModel.Design.LocalizationExtenderProvider" />
+
+              
 
               
 
@@ -318,6 +368,8 @@
           <para
             >Disposes of the resources (other than memory) used by the <see
              cref="T:System.ComponentModel.Design.LocalizationExtenderProvider" />
+
+            
 
             
 
@@ -355,8 +407,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -369,8 +425,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -386,8 +446,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.ComponentModel.Design.LocalizationExtenderProvider" />
+
+            
 
             
 
@@ -406,11 +470,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -451,11 +519,15 @@
 
             
 
+            
+
              indicating the resource variety.</para
           >
         </returns>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -505,11 +577,15 @@
 
             
 
+            
+
              indicating the resource culture to use to initialize the values of the specified object.</para
           >
         </returns>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -560,6 +636,8 @@
 
           
 
+          
+
           The object to check for localization support. </param
         >
       </Docs>
@@ -596,6 +674,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -605,6 +685,8 @@
         </summary>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -644,6 +726,8 @@
 
           
 
+          
+
           The base component to set the resource culture for. </param
         >
         <param name="language">
@@ -653,8 +737,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -694,10 +782,14 @@
 
           
 
+          
+
           The base component to set as localizable or not localizable. </param
         >
         <param name="localizable">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -732,6 +824,8 @@
         </returns>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

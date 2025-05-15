@@ -39,6 +39,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -52,8 +54,12 @@
 
         
 
+        
+
          and their respective mappings to columns in a <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -88,8 +94,12 @@
 
             
 
+            
+
              object to the <see
              cref="T:System.Data.SqlClient.SqlParameterCollection" />
+
+            
 
             
 
@@ -108,6 +118,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -118,8 +130,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.SqlClient.SqlParameter" />
+
+          
 
           
 
@@ -154,8 +170,12 @@
 
             
 
+            
+
              object to the <see
              cref="T:System.Data.SqlClient.SqlParameterCollection" />
+
+            
 
             
 
@@ -174,6 +194,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -184,8 +206,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -229,8 +255,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Data.SqlClient.SqlParameterCollection" />
+
+            
 
             
 
@@ -249,11 +279,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="parameterName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -268,8 +302,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.SqlDbType" />
+
+          
 
           
 
@@ -308,8 +346,12 @@
 
             
 
+            
+
              object to the <see
              cref="T:System.Data.SqlClient.SqlParameterCollection" />
+
+            
 
             
 
@@ -328,11 +370,15 @@
 
             
 
+            
+
              object.</para
           >
           <para
             >Use caution when you are using this overload of the SqlParameterCollection.Add method to specify integer parameter values. Because this overload takes a <paramref
              name="value" />
+
+            
 
             
 
@@ -345,8 +391,12 @@
 
             
 
+            
+
             , you must convert the integral value to an <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -364,8 +414,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Data.SqlClient.SqlParameter" />
+
+          
 
           
 
@@ -380,8 +434,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -432,6 +490,8 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
@@ -439,8 +499,12 @@
 
             
 
+            
+
             , given the specified parameter name, <see
              cref="T:System.Data.SqlDbType" />
+
+            
 
             
 
@@ -459,11 +523,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="parameterName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -478,6 +546,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.SqlDbType" />
 
@@ -485,8 +555,12 @@
 
           
 
+          
+
            of the <see
            cref="T:System.Data.SqlClient.SqlParameter" />
+
+          
 
           
 
@@ -501,8 +575,12 @@
 
           
 
+          
+
           The size as an <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -543,8 +621,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Data.SqlClient.SqlParameterCollection" />
+
+            
 
             
 
@@ -563,11 +645,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="parameterName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -582,8 +668,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.SqlDbType" />
+
+          
 
           
 
@@ -598,10 +688,14 @@
 
           
 
+          
+
           The column length.</param
         >
         <param name="sourceColumn">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -614,6 +708,8 @@
 
           
 
+          
+
           ) if this <see
            cref="T:System.Data.SqlClient.SqlParameter" />
 
@@ -621,8 +717,12 @@
 
           
 
+          
+
            is used in a call to <see
            cref="Overload:System.Data.Common.DbDataAdapter.Update" />
+
+          
 
           
 
@@ -660,6 +760,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -670,8 +772,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -708,8 +814,12 @@
 
             
 
+            
+
              values to the end of the <see
              cref="T:System.Data.SqlClient.SqlParameterCollection" />
+
+            
 
             
 
@@ -725,8 +835,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.SqlClient.SqlParameter" />
+
+          
 
           
 
@@ -762,8 +876,12 @@
 
             
 
+            
+
              replaces the SqlParameterCollection.Add method that takes a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -776,8 +894,12 @@
 
             
 
+            
+
             . The overload of Add that takes a string and an object was deprecated because of possible ambiguity with the SqlParameterCollection.Add overload that takes a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -790,6 +912,8 @@
 
             
 
+            
+
              enumeration value where passing an integer with the string could be interpreted as being either the parameter value or the corresponding <see
              cref="T:System.Data.SqlDbType" />
 
@@ -797,8 +921,12 @@
 
             
 
+            
+
              value. Use <see
              cref="M:System.Data.SqlClient.SqlParameterCollection.AddWithValue(System.String,System.Object)" />
+
+            
 
             
 
@@ -814,6 +942,8 @@
 
             
 
+            
+
              Xml enumeration values, you can use a string, an XML value, an <see
              cref="T:System.Xml.XmlReader" />
 
@@ -821,8 +951,12 @@
 
             
 
+            
+
              derived type instance, or a <see
              cref="T:System.Data.SqlTypes.SqlXml" />
+
+            
 
             
 
@@ -841,6 +975,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -849,6 +985,8 @@
           <para
             >A <see
              cref="T:System.Data.SqlClient.SqlParameter" />
+
+            
 
             
 
@@ -864,6 +1002,8 @@
 
           
 
+          
+
           The name of the parameter.</param
         >
         <param name="value">
@@ -873,8 +1013,12 @@
 
           
 
+          
+
           The value to be added. Use <see
            cref="F:System.DBNull.Value" />
+
+          
 
           
 
@@ -903,8 +1047,12 @@
 
             
 
+            
+
              objects from the <see
              cref="T:System.Data.SqlClient.SqlParameterCollection" />
+
+            
 
             
 
@@ -946,8 +1094,12 @@
 
             
 
+            
+
              is in this <see
              cref="T:System.Data.SqlClient.SqlParameterCollection" />
+
+            
 
             
 
@@ -966,6 +1118,8 @@
 
             
 
+            
+
              contains the value; otherwise false.</para
           >
         </returns>
@@ -976,8 +1130,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.SqlClient.SqlParameter" />
+
+          
 
           
 
@@ -1008,8 +1166,12 @@
 
             
 
+            
+
              is in this <see
              cref="T:System.Data.SqlClient.SqlParameterCollection" />
+
+            
 
             
 
@@ -1028,6 +1190,8 @@
 
             
 
+            
+
              contains the value; otherwise false.</para
           >
         </returns>
@@ -1038,8 +1202,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1074,6 +1242,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1082,6 +1252,8 @@
           <para
             >true if the <see
              cref="T:System.Data.SqlClient.SqlParameterCollection" />
+
+            
 
             
 
@@ -1097,8 +1269,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1137,6 +1313,8 @@
 
             
 
+            
+
              to the specified one-dimensional <see
              cref="T:System.Array" />
 
@@ -1144,8 +1322,12 @@
 
             
 
+            
+
              starting at the specified destination <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -1161,6 +1343,8 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
 
@@ -1168,8 +1352,12 @@
 
           
 
+          
+
            that is the destination of the elements copied from the current <see
            cref="T:System.Data.SqlClient.SqlParameterCollection" />
+
+          
 
           
 
@@ -1184,8 +1372,12 @@
 
           
 
+          
+
           A 32-bit integer that represents the index in the <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -1227,8 +1419,12 @@
 
             
 
+            
+
              to the specified <see
              cref="T:System.Data.SqlClient.SqlParameterCollection" />
+
+            
 
             
 
@@ -1244,6 +1440,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.SqlClient.SqlParameterCollection" />
 
@@ -1251,8 +1449,12 @@
 
           
 
+          
+
            that is the destination of the elements copied from the current <see
            cref="T:System.Data.SqlClient.SqlParameterCollection" />
+
+          
 
           
 
@@ -1267,8 +1469,12 @@
 
           
 
+          
+
           A 32-bit integer that represents the index in the <see
            cref="T:System.Data.SqlClient.SqlParameterCollection" />
+
+          
 
           
 
@@ -1292,6 +1498,8 @@
           <para
             >Returns an Integer that contains the number of elements in the <see
              cref="T:System.Data.SqlClient.SqlParameterCollection" />
+
+            
 
             
 
@@ -1328,6 +1536,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -1341,8 +1551,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Data.SqlClient.SqlParameterCollection" />
+
+            
 
             
 
@@ -1428,6 +1642,8 @@
 
             
 
+            
+
              within the collection.</para
           >
         </summary>
@@ -1441,6 +1657,8 @@
 
             
 
+            
+
              that is a <see
              cref="T:System.Data.SqlClient.SqlParameter" />
 
@@ -1448,8 +1666,12 @@
 
             
 
+            
+
              within the collection. Returns -1 when the object does not exist in the <see
              cref="T:System.Data.SqlClient.SqlParameterCollection" />
+
+            
 
             
 
@@ -1465,8 +1687,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.SqlClient.SqlParameter" />
+
+          
 
           
 
@@ -1497,6 +1723,8 @@
 
             
 
+            
+
              within the collection.</para
           >
         </summary>
@@ -1510,6 +1738,8 @@
 
             
 
+            
+
              that is a <see
              cref="T:System.Data.SqlClient.SqlParameter" />
 
@@ -1517,8 +1747,12 @@
 
             
 
+            
+
              within the collection. Returns -1 when the object does not exist in the <see
              cref="T:System.Data.SqlClient.SqlParameterCollection" />
+
+            
 
             
 
@@ -1534,8 +1768,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1570,6 +1808,8 @@
 
             
 
+            
+
              with the specified name.</para
           >
         </summary>
@@ -1583,8 +1823,12 @@
 
             
 
+            
+
              with the specified case-sensitive name. Returns -1 when the object does not exist in the <see
              cref="T:System.Data.SqlClient.SqlParameterCollection" />
+
+            
 
             
 
@@ -1600,8 +1844,12 @@
 
           
 
+          
+
           The case-sensitive name of the <see
            cref="T:System.Data.SqlClient.SqlParameter" />
+
+          
 
           
 
@@ -1643,8 +1891,12 @@
 
             
 
+            
+
              object into the <see
              cref="T:System.Data.SqlClient.SqlParameterCollection" />
+
+            
 
             
 
@@ -1660,10 +1912,14 @@
 
           
 
+          
+
           The zero-based index at which value should be inserted.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1676,8 +1932,12 @@
 
           
 
+          
+
            object to be inserted in the <see
            cref="T:System.Data.SqlClient.SqlParameterCollection" />
+
+          
 
           
 
@@ -1712,8 +1972,12 @@
 
             
 
+            
+
              into the <see
              cref="T:System.Data.SqlClient.SqlParameterCollection" />
+
+            
 
             
 
@@ -1729,10 +1993,14 @@
 
           
 
+          
+
           The zero-based index at which value should be inserted.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1745,8 +2013,12 @@
 
           
 
+          
+
            to be inserted in the <see
            cref="T:System.Data.SqlClient.SqlParameterCollection" />
+
+          
 
           
 
@@ -1782,6 +2054,8 @@
 
             
 
+            
+
              has a fixed size. </para
           >
         </summary>
@@ -1809,6 +2083,8 @@
 
             
 
+            
+
              is read-only. </para
           >
         </summary>
@@ -1831,6 +2107,8 @@
           <para
             >Gets a value that indicates whether the <see
              cref="T:System.Data.SqlClient.SqlParameterCollection" />
+
+            
 
             
 
@@ -1930,6 +2208,8 @@
 
             
 
+            
+
              from the collection.</para
           >
         </summary>
@@ -1940,8 +2220,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlClient.SqlParameter" />
+
+          
 
           
 
@@ -1972,11 +2256,15 @@
 
             
 
+            
+
              from the collection.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2011,8 +2299,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Data.SqlClient.SqlParameterCollection" />
+
+            
 
             
 
@@ -2028,8 +2320,12 @@
 
           
 
+          
+
           The zero-based index of the <see
            cref="T:System.Data.SqlClient.SqlParameter" />
+
+          
 
           
 
@@ -2067,8 +2363,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Data.SqlClient.SqlParameterCollection" />
+
+            
 
             
 
@@ -2084,8 +2384,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Data.SqlClient.SqlParameter" />
+
+          
 
           
 
@@ -2162,6 +2466,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Data.SqlClient.SqlParameterCollection" />
+
+            
 
             
 

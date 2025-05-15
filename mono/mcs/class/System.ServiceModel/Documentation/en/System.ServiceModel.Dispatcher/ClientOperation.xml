@@ -24,8 +24,12 @@
 
         
 
+        
+
          class is the location for client run-time modifications and insertion point for custom extensions that are scoped to only one service operation. (To modify client run-time behavior for all messages in a contract, use the <see
          cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
+
+        
 
         
 
@@ -41,6 +45,8 @@
 
         
 
+        
+
          modifications using a custom client behavior object, either of type <see
          cref="T:System.ServiceModel.Description.IContractBehavior" />
 
@@ -48,8 +54,12 @@
 
         
 
+        
+
          (to find a particular operation to modify) or of type <see
          cref="T:System.ServiceModel.Description.IOperationBehavior" />
+
+        
 
         
 
@@ -65,8 +75,12 @@
 
         
 
+        
+
          property to locate the <see
          cref="T:System.ServiceModel.Dispatcher.ClientOperation" />
+
+        
 
         
 
@@ -84,10 +98,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="02624403-0d77-41cb-9a86-ab55e98c7966">Client Architecture</a>
         </format>
+
+        
 
         
 
@@ -102,10 +120,14 @@
 
         
 
+        
+
         . For more information about using behaviors, see <format
          type="text/html">
           <a href="149b99b6-6eb6-4f45-be22-c967279677d9">Attaching Extensions Using Behaviors</a>
         </format>
+
+        
 
         
 
@@ -124,8 +146,12 @@
 
             
 
+            
+
              property to insert a custom <see
              cref="T:System.ServiceModel.Dispatcher.IClientMessageFormatter" />
+
+            
 
             
 
@@ -143,8 +169,12 @@
 
             
 
+            
+
              property to insert a custom <see
              cref="T:System.ServiceModel.Dispatcher.IParameterInspector" />
+
+            
 
             
 
@@ -162,6 +192,8 @@
 
             
 
+            
+
              property to control who serializes an outbound message.</para
           >
         </item>
@@ -169,6 +201,8 @@
           <para
             >Use the <see
              cref="P:System.ServiceModel.Dispatcher.ClientOperation.DeserializeReply" />
+
+            
 
             
 
@@ -186,8 +220,12 @@
 
             
 
+            
+
              property to access the WS-Addressing action of the request message and the <see
              cref="P:System.ServiceModel.Dispatcher.ClientOperation.ReplyAction" />
+
+            
 
             
 
@@ -205,8 +243,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ServiceModel.Dispatcher.ClientOperation.EndMethod" />
+
+            
 
             
 
@@ -224,6 +266,8 @@
 
             
 
+            
+
              property to get a collection of specified types that can appear in SOAP faults as the detail type.</para
           >
         </item>
@@ -236,8 +280,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ServiceModel.Dispatcher.ClientOperation.IsTerminating" />
+
+            
 
             
 
@@ -255,6 +303,8 @@
 
             
 
+            
+
              property to control whether the client waits for a response before completing the invocation.</para
           >
         </item>
@@ -267,8 +317,12 @@
 
             
 
+            
+
              property to obtain the containing <see
              cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
+
+            
 
             
 
@@ -286,6 +340,8 @@
 
             
 
+            
+
              property to get the name of the operation.</para
           >
         </item>
@@ -293,6 +349,8 @@
           <para
             >Use the <see
              cref="P:System.ServiceModel.Dispatcher.ClientOperation.SyncMethod" />
+
+            
 
             
 
@@ -339,8 +397,12 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
+
+            
 
             
 
@@ -356,8 +418,12 @@
 
           
 
+          
+
           The containing <see
            cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
+
+          
 
           
 
@@ -372,10 +438,14 @@
 
           
 
+          
+
           The name of the operation.</param
         >
         <param name="action">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -416,8 +486,12 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
+
+            
 
             
 
@@ -433,8 +507,12 @@
 
           
 
+          
+
           The containing <see
            cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
+
+          
 
           
 
@@ -449,6 +527,8 @@
 
           
 
+          
+
           The name of the operation.</param
         >
         <param name="action">
@@ -458,10 +538,14 @@
 
           
 
+          
+
           The action of the operation.</param
         >
         <param name="replyAction">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -488,6 +572,8 @@
           <para
             >By default this value corresponds to the value of <see
              cref="P:System.ServiceModel.OperationContractAttribute.Action" />
+
+            
 
             
 
@@ -577,6 +663,8 @@
 
             
 
+            
+
              property to control whether the formatter deserializes the return value from an inbound message or whether the inbound message is returned directly as the return value.</para
           >
           <list type="bullet">
@@ -589,6 +677,8 @@
 
                 
 
+                
+
                  and there can be no out parameters or an <see
                  cref="T:System.InvalidCastException" />
 
@@ -596,8 +686,12 @@
 
                 
 
+                
+
                  is thrown at run-time. If the message is null, a <see
                  cref="T:System.InvalidOperationException" />
+
+                
 
                 
 
@@ -613,6 +707,8 @@
           <para
             >Gets or sets a value that indicates whether the <see
              cref="P:System.ServiceModel.Dispatcher.ClientOperation.Formatter" />
+
+            
 
             
 
@@ -676,6 +772,8 @@
 
             
 
+            
+
              property to get a collection of all contractually specified SOAP faults.</para
           >
         </remarks>
@@ -684,6 +782,8 @@
           <para
             >Gets a collection of <see
              cref="T:System.ServiceModel.Dispatcher.FaultContractInfo" />
+
+            
 
             
 
@@ -722,8 +822,12 @@
 
             
 
+            
+
              property to insert a custom <see
              cref="T:System.ServiceModel.Dispatcher.IClientMessageFormatter" />
+
+            
 
             
 
@@ -736,8 +840,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ServiceModel.Dispatcher.ClientOperation.DeserializeReply" />
+
+            
 
             
 
@@ -753,6 +861,8 @@
 
             
 
+            
+
              interface defines the  <see
              cref="M:System.ServiceModel.Dispatcher.IClientMessageFormatter.SerializeRequest(System.ServiceModel.Channels.MessageVersion,System.Object[])" />
 
@@ -760,8 +870,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.ServiceModel.Dispatcher.IClientMessageFormatter.DeserializeReply(System.ServiceModel.Channels.Message,System.Object[])" />
+
+            
 
             
 
@@ -798,6 +912,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -829,10 +945,14 @@
 
             
 
+            
+
             . For issues related to one-way operations, see <format
              type="text/html">
               <a href="19053a36-4492-45a3-bfe6-0365ee0205a3">One-Way Services</a>
             </format>
+
+            
 
             
 
@@ -869,6 +989,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -895,6 +1017,8 @@
           <para
             >By default this value corresponds to the value of <see
              cref="P:System.ServiceModel.OperationContractAttribute.Name" />
+
+            
 
             
 
@@ -937,8 +1061,12 @@
 
             
 
+            
+
              property to insert a custom <see
              cref="T:System.ServiceModel.Dispatcher.IParameterInspector" />
+
+            
 
             
 
@@ -952,6 +1080,8 @@
           <para
             >Gets or sets a collection of <see
              cref="T:System.ServiceModel.Dispatcher.IParameterInspector" />
+
+            
 
             
 
@@ -991,6 +1121,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1013,6 +1145,8 @@
           <para
             >By default this value corresponds to the value of <see
              cref="P:System.ServiceModel.OperationContractAttribute.ReplyAction" />
+
+            
 
             
 
@@ -1049,12 +1183,16 @@
 
             
 
+            
+
              property to indicate whether the formatter serializes operation parameters into a reply message or to determine if the first parameter is sent as the outbound message. </para
           >
           <block subset="none" type="note">
             <para
               >If set to false, the operation must have exactly one parameter of type <see
                cref="T:System.ServiceModel.Channels.Message" />
+
+              
 
               
 
@@ -1069,6 +1207,8 @@
           <para
             >Gets or sets a value that specifies whether the <see
              cref="P:System.ServiceModel.Dispatcher.ClientOperation.Formatter" />
+
+            
 
             
 

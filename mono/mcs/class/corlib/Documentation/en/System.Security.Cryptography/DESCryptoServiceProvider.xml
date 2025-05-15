@@ -44,6 +44,8 @@
 
         
 
+        
+
         ) algorithm. This class cannot be inherited.</para
       >
     </summary>
@@ -73,6 +75,8 @@ In general you should not use this constructor directly - unless you require a s
 
             
 
+            
+
              base class. The prefered way to create a DES instance is to use <see
              cref="T:System.Security.Cryptography.DES" />
 
@@ -80,8 +84,12 @@ In general you should not use this constructor directly - unless you require a s
 
             
 
+            
+
             .<see
              cref="M:System.Security.Cryptography.DES.Create" />
+
+            
 
             
 
@@ -106,6 +114,8 @@ DESCryptoServiceProvider des = new DESCryptoServiceProvider ();
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.DESCryptoServiceProvider" />
+
+            
 
             
 
@@ -149,6 +159,8 @@ DESCryptoServiceProvider des = new DESCryptoServiceProvider ();
 
             
 
+            
+
              overload with the same parameters.</para
           >
         </remarks>
@@ -162,6 +174,8 @@ DESCryptoServiceProvider des = new DESCryptoServiceProvider ();
 
             
 
+            
+
             ) decryptor object with the specified key (<see
              cref="P:System.Security.Cryptography.SymmetricAlgorithm.Key" />
 
@@ -169,8 +183,12 @@ DESCryptoServiceProvider des = new DESCryptoServiceProvider ();
 
             
 
+            
+
             ) and initialization vector (<see
              cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />
+
+            
 
             
 
@@ -189,6 +207,8 @@ DESCryptoServiceProvider des = new DESCryptoServiceProvider ();
 
             
 
+            
+
              decryptor object.</para
           >
         </returns>
@@ -199,10 +219,14 @@ DESCryptoServiceProvider des = new DESCryptoServiceProvider ();
 
           
 
+          
+
           The secret key to use for the symmetric algorithm. </param
         >
         <param name="rgbIV">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -245,6 +269,8 @@ DESCryptoServiceProvider des = new DESCryptoServiceProvider ();
 
             
 
+            
+
              overload with the same parameters to decrypt the result of this method.</para
           >
         </remarks>
@@ -258,6 +284,8 @@ DESCryptoServiceProvider des = new DESCryptoServiceProvider ();
 
             
 
+            
+
             ) encryptor object with the specified key (<see
              cref="P:System.Security.Cryptography.SymmetricAlgorithm.Key" />
 
@@ -265,8 +293,12 @@ DESCryptoServiceProvider des = new DESCryptoServiceProvider ();
 
             
 
+            
+
             ) and initialization vector (<see
              cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />
+
+            
 
             
 
@@ -285,6 +317,8 @@ DESCryptoServiceProvider des = new DESCryptoServiceProvider ();
 
             
 
+            
+
              encryptor object.</para
           >
         </returns>
@@ -295,10 +329,14 @@ DESCryptoServiceProvider des = new DESCryptoServiceProvider ();
 
           
 
+          
+
           The secret key to use for the symmetric algorithm. </param
         >
         <param name="rgbIV">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -335,6 +373,8 @@ DESCryptoServiceProvider des = new DESCryptoServiceProvider ();
 
             
 
+            
+
              when none is specified.</para
           >
         </remarks>
@@ -343,6 +383,8 @@ DESCryptoServiceProvider des = new DESCryptoServiceProvider ();
           <para
             >Generates a random initialization vector (<see
              cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />
+
+            
 
             
 
@@ -380,8 +422,12 @@ DESCryptoServiceProvider des = new DESCryptoServiceProvider ();
 
             
 
+            
+
             ) or a semi-weak key (see <see
              cref="M:System.Security.Cryptography.DES.IsSemiWeakKey(System.Byte[])" />
+
+            
 
             
 
@@ -396,6 +442,8 @@ DESCryptoServiceProvider des = new DESCryptoServiceProvider ();
           <para
             >Generates a random key (<see
              cref="P:System.Security.Cryptography.SymmetricAlgorithm.Key" />
+
+            
 
             
 

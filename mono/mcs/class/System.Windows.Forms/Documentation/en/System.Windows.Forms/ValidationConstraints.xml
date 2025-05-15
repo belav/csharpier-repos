@@ -25,8 +25,12 @@
 
         
 
+        
+
          will validate all enabled controls in a container, such as a form. Use this enumeration to restrict the types of controls whose <see
          cref="E:System.Windows.Forms.Control.Validating" />
+
+        
 
         
 
@@ -42,6 +46,8 @@
 
         
 
+        
+
          event on controls that are both immediate children of the container AND are enabled. </para
       >
       <para
@@ -52,8 +58,12 @@
 
         
 
+        
+
          when you call <see
          cref="M:System.Windows.Forms.ContainerControl.ValidateChildren(System.Windows.Forms.ValidationConstraints)" />
+
+        
 
         
 
@@ -67,6 +77,8 @@
       <para
         >Defines constants that inform <see
          cref="M:System.Windows.Forms.ContainerControl.ValidateChildren(System.Windows.Forms.ValidationConstraints)" />
+
+        
 
         
 
@@ -90,6 +102,8 @@
           <para
             >Validates child controls whose <see
              cref="P:System.Windows.Forms.Control.Enabled" />
+
+            
 
             
 
@@ -121,8 +135,12 @@
 
             
 
+            
+
              that contains a custom <see
              cref="T:System.Windows.Forms.UserControl" />
+
+            
 
             
 
@@ -135,8 +153,12 @@
 
             
 
+            
+
              contains a <see
              cref="T:System.Windows.Forms.Button" />
+
+            
 
             
 
@@ -149,8 +171,12 @@
 
             
 
+            
+
              will cause the <see
              cref="E:System.Windows.Forms.Control.Validating" />
+
+            
 
             
 
@@ -163,6 +189,8 @@
 
             
 
+            
+
              to occur, but not the <see
              cref="E:System.Windows.Forms.Control.Validating" />
 
@@ -170,8 +198,12 @@
 
             
 
+            
+
              event of the <see
              cref="T:System.Windows.Forms.Button" />
+
+            
 
             
 
@@ -237,6 +269,8 @@
 
             
 
+            
+
              value set, which means that the user can navigate to the control using the TAB key. </para
           >
         </summary>
@@ -258,6 +292,8 @@
           <para
             >Validates child controls whose <see
              cref="P:System.Windows.Forms.Control.Visible" />
+
+            
 
             
 

@@ -50,6 +50,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -60,10 +62,14 @@
 
           
 
+          
+
           The type to convert to.</param
         >
         <param name="explicit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -109,6 +115,8 @@
 
             
 
+            
+
              representing the result of the binding.</para
           >
         </returns>
@@ -119,10 +127,14 @@
 
           
 
+          
+
           The target of the dynamic convert operation.</param
         >
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -186,11 +198,15 @@
 
             
 
+            
+
              representing the result of the binding.</para
           >
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -236,6 +252,8 @@
 
             
 
+            
+
              representing the result of the binding.</para
           >
         </returns>
@@ -246,10 +264,14 @@
 
           
 
+          
+
           The target of the dynamic convert operation.</param
         >
         <param name="errorSuggestion">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

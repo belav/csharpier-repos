@@ -31,8 +31,12 @@
 
         
 
+        
+
          class represents a collection of <see
          cref="T:System.Web.UI.WebControls.RepeaterItem" />
+
+        
 
         
 
@@ -45,6 +49,8 @@
 
         
 
+        
+
          control. To programmatically retrieve <see
          cref="T:System.Web.UI.WebControls.RepeaterItem" />
 
@@ -52,8 +58,12 @@
 
         
 
+        
+
          objects from a <see
          cref="T:System.Web.UI.WebControls.Repeater" />
+
+        
 
         
 
@@ -71,6 +81,8 @@
 
             
 
+            
+
              object from the collection using array notation.</para
           >
         </item>
@@ -83,8 +95,12 @@
 
             
 
+            
+
              method to copy the contents of the collection to a <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -102,8 +118,12 @@
 
             
 
+            
+
              method to create an <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -124,6 +144,8 @@
 
         
 
+        
+
          property specifies the total number of items in the collection and is commonly used to determine the upper bound of the collection.</para
       >
     </remarks>
@@ -137,8 +159,12 @@
 
         
 
+        
+
          objects in the <see
          cref="T:System.Web.UI.WebControls.Repeater" />
+
+        
 
         
 
@@ -170,6 +196,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -178,6 +206,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
+
+            
 
             
 
@@ -193,8 +223,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.ArrayList" />
+
+          
 
           
 
@@ -229,8 +263,12 @@
 
             
 
+            
+
              into the specified <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -247,8 +285,12 @@
 
               
 
+              
+
                parameter must be a zero-based <see
                cref="T:System.Array" />
+
+              
 
               
 
@@ -268,6 +310,8 @@
 
             
 
+            
+
              to the specified <see
              cref="T:System.Array" />
 
@@ -275,8 +319,12 @@
 
             
 
+            
+
              object, starting at the specified index in the <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -292,6 +340,8 @@
 
           
 
+          
+
           A zero-based <see
            cref="T:System.Array" />
 
@@ -299,8 +349,12 @@
 
           
 
+          
+
            that receives the copied items from the <see
            cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
+
+          
 
           
 
@@ -315,8 +369,12 @@
 
           
 
+          
+
           The first position in the specified <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -348,8 +406,12 @@
 
             
 
+            
+
              property to determine the number of <see
              cref="T:System.Web.UI.WebControls.RepeaterItem" />
+
+            
 
             
 
@@ -362,8 +424,12 @@
 
             
 
+            
+
              collection. The <see
              cref="P:System.Web.UI.WebControls.RepeaterItemCollection.Count" />
+
+            
 
             
 
@@ -377,6 +443,8 @@
           <para
             >Gets the number of <see
              cref="T:System.Web.UI.WebControls.RepeaterItem" />
+
+            
 
             
 
@@ -412,8 +480,12 @@
 
             
 
+            
+
              that can be used to iterate through each item in the <see
              cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
+
+            
 
             
 
@@ -429,6 +501,8 @@
 
             
 
+            
+
              property to get the item currently pointed to in the collection.</para
           >
           <para
@@ -439,11 +513,15 @@
 
             
 
+            
+
              method to move to the next item in the collection.</para
           >
           <para
             >Use the <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 
@@ -460,8 +538,12 @@
 
               
 
+              
+
                object or use the <see
                cref="M:System.Collections.IEnumerator.Reset" />
+
+              
 
               
 
@@ -474,8 +556,12 @@
 
               
 
+              
+
                method. Otherwise, the item represented by the <see
                cref="P:System.Collections.IEnumerator.Current" />
+
+              
 
               
 
@@ -495,6 +581,8 @@
 
             
 
+            
+
              interface that can iterate through all the <see
              cref="T:System.Web.UI.WebControls.RepeaterItem" />
 
@@ -502,8 +590,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
+
+            
 
             
 
@@ -522,6 +614,8 @@
 
             
 
+            
+
              interface that contains all <see
              cref="T:System.Web.UI.WebControls.RepeaterItem" />
 
@@ -529,8 +623,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
+
+            
 
             
 
@@ -563,6 +661,8 @@
 
             
 
+            
+
              can be written to in all cases.</para
           >
         </remarks>
@@ -576,8 +676,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
+
+            
 
             
 
@@ -610,11 +714,15 @@
 
             
 
+            
+
              class and is overridden to always return false.</para
           >
           <para
             >For more information on the <see
              cref="P:System.Web.UI.WebControls.DataGridColumnCollection.IsSynchronized" />
+
+            
 
             
 
@@ -627,8 +735,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -642,6 +754,8 @@
           <para
             >Gets a value indicating whether access to the <see
              cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
+
+            
 
             
 
@@ -697,11 +811,15 @@
 
             
 
+            
+
              object itself.</para
           >
           <para
             >For more information on the <see
              cref="P:System.Web.UI.WebControls.DataGridColumnCollection.SyncRoot" />
+
+            
 
             
 
@@ -714,8 +832,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -729,6 +851,8 @@
           <para
             >Gets the object that can be used to synchronize access to the <see
              cref="T:System.Web.UI.WebControls.RepeaterItemCollection" />
+
+            
 
             
 

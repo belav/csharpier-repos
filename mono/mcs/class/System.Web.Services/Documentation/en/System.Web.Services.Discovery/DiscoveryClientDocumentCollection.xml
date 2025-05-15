@@ -30,6 +30,8 @@
 
         
 
+        
+
          property of <see
          cref="T:System.Web.Services.Discovery.DiscoveryClientProtocol" />
 
@@ -37,8 +39,12 @@
 
         
 
+        
+
          is of type <see
          cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
+
+        
 
         
 
@@ -65,6 +71,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
+
+            
 
             
 
@@ -101,6 +109,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -111,8 +121,12 @@
 
           
 
+          
+
           The URL for the document to add to the <see
            cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
+
+          
 
           
 
@@ -127,8 +141,12 @@
 
           
 
+          
+
           A discovered document to add to the <see
            cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
+
+          
 
           
 
@@ -163,6 +181,8 @@
 
             
 
+            
+
              contains an object with the specified URL.</para
           >
         </summary>
@@ -171,6 +191,8 @@
           <para
             >true if the <see
              cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
+
+            
 
             
 
@@ -186,8 +208,12 @@
 
           
 
+          
+
           The URL for the document to locate within the <see
            cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
+
+          
 
           
 
@@ -244,8 +270,12 @@
 
             
 
+            
+
              object with all the keys in the <see
              cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
+
+            
 
             
 
@@ -281,6 +311,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -291,8 +323,12 @@
 
           
 
+          
+
           The URL for the discovered document to remove from the <see
            cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
+
+          
 
           
 
@@ -332,8 +368,12 @@
 
             
 
+            
+
              object with all the values in the <see
              cref="T:System.Web.Services.Discovery.DiscoveryClientDocumentCollection" />
+
+            
 
             
 

@@ -37,8 +37,12 @@
 
         
 
+        
+
          as the access rights type, and then use the instance normally. In contrast, <see
          cref="T:System.Security.AccessControl.AccessRule" />
+
+        
 
         
 

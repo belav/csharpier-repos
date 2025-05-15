@@ -24,8 +24,12 @@
 
         
 
+        
+
          property, which returns a <see
          cref="T:System.ServiceModel.NetMsmqSecurity" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          property that provides a reference to the <see
          cref="T:System.ServiceModel.MessageSecurityOverMsmq" />
+
+        
 
         
 
@@ -53,6 +61,8 @@
       <para
         >Enables setting message-level security properties on the <see
          cref="T:System.ServiceModel.NetMsmqBinding" />
+
+        
 
         
 
@@ -85,6 +95,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+
+            
 
             
 
@@ -136,6 +148,8 @@
 
                 
 
+                
+
                  class. </para
               >
             </item>
@@ -153,8 +167,12 @@
 
                 
 
+                
+
                  class or ClientCredentials behavior. The service credential in this case must be specified using <see
                  cref="T:System.ServiceModel.Description.ClientCredentials" />
+
+                
 
                 
 
@@ -176,6 +194,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.ServiceModel.MessageCredentialType" />
+
+            
 
             
 

@@ -37,6 +37,8 @@
 
         
 
+        
+
          objects.</para
       >
     </summary>
@@ -75,6 +77,8 @@
 
             
 
+            
+
              to this collection.</para
           >
         </summary>
@@ -83,6 +87,8 @@
           <para
             >The zero-based index of the added <see
              cref="T:System.Diagnostics.EventLogPermissionEntry" />
+
+            
 
             
 
@@ -98,8 +104,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Diagnostics.EventLogPermissionEntry" />
+
+          
 
           
 
@@ -143,8 +153,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Diagnostics.EventLogPermissionEntry" />
+
+          
 
           
 
@@ -188,8 +202,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Diagnostics.EventLogPermissionEntryCollection" />
+
+          
 
           
 
@@ -232,6 +250,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -240,6 +260,8 @@
           <para
             >true if the specified <see
              cref="T:System.Diagnostics.EventLogPermissionEntry" />
+
+            
 
             
 
@@ -255,8 +277,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Diagnostics.EventLogPermissionEntry" />
+
+          
 
           
 
@@ -301,8 +327,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Diagnostics.EventLogPermissionEntry" />
+
+          
 
           
 
@@ -312,6 +342,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -359,6 +391,8 @@
 
           
 
+          
+
           The permission entry to search for. </param
         >
       </Docs>
@@ -398,10 +432,14 @@
 
           
 
+          
+
           The zero-based index of the collection at which to insert the permission entry. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -498,8 +536,12 @@
 
           
 
+          
+
           The zero-based index at which to insert <paramref
            name="value" />
+
+          
 
           
 
@@ -514,8 +556,12 @@
 
           
 
+          
+
           The new value of the permission entry at <paramref
            name="index" />
+
+          
 
           
 
@@ -560,8 +606,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="value" />
+
+          
 
           
 
@@ -576,8 +626,12 @@
 
           
 
+          
+
           The permission entry to remove from <paramref
            name="index" />
+
+          
 
           
 
@@ -623,8 +677,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="oldValue" />
+
+          
 
           
 
@@ -639,8 +697,12 @@
 
           
 
+          
+
           The value to replace with <paramref
            name="newValue" />
+
+          
 
           
 
@@ -655,8 +717,12 @@
 
           
 
+          
+
           The new value of the permission entry at <paramref
            name="index" />
+
+          
 
           
 
@@ -695,6 +761,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

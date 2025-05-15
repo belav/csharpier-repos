@@ -71,6 +71,8 @@
 
         
 
+        
+
          control displays different Web site content templates (or "views") for different users, based on whether the user is authenticated and, if so, which Web site roles he or she belongs to.</para
       >
       <block subset="none" type="note">
@@ -84,10 +86,14 @@
 
           
 
+          
+
            before continuing. For a list of other topics related to login controls and membership, see <format
            type="text/html">
             <a href="824c3a24-f0af-427c-a652-0d2d1e9397cd">Managing Users By Using Membership</a>
           </format>
+
+          
 
           
 
@@ -104,6 +110,8 @@
 
         
 
+        
+
          property is displayed to any visitor to the Web site who has not logged in. Once a user is logged in, the site displays either a template associated with one of the user's roles in the <see
          cref="P:System.Web.UI.WebControls.LoginView.RoleGroups" />
 
@@ -111,8 +119,12 @@
 
         
 
+        
+
          property or the default template specified in the <see
          cref="P:System.Web.UI.WebControls.LoginView.LoggedInTemplate" />
+
+        
 
         
 
@@ -128,8 +140,12 @@
 
         
 
+        
+
          control manages switching among the various templates once you assign templates to any of the three template properties of the <see
          cref="T:System.Web.UI.WebControls.LoginView" />
+
+        
 
         
 
@@ -146,12 +162,16 @@
 
             
 
+            
+
              - Specifies the template to display to users who are not logged in to the Web site. Users who are logged in will never see this template.</para
           >
         </item>
         <item>
           <para>
             <see cref="P:System.Web.UI.WebControls.LoginView.LoggedInTemplate" />
+
+            
 
             
 
@@ -168,8 +188,12 @@
 
             
 
+            
+
              - Specifies the template to display to logged-in users who are members of roles with defined role-group templates. Content templates are associated with particular sets of roles in <see
              cref="T:System.Web.UI.WebControls.RoleGroup" />
+
+            
 
             
 
@@ -183,6 +207,8 @@
       <para
         >The following table describes the behavior of the <see
          cref="T:System.Web.UI.WebControls.LoginView" />
+
+        
 
         
 
@@ -268,6 +294,8 @@
 
               
 
+              
+
                collection that matches one of the user's roles. If no match is found, displays no content. </para
             >
           </description>
@@ -291,8 +319,12 @@
 
               
 
+              
+
                property. If the user in not logged in, displays the template specified in the <see
                cref="P:System.Web.UI.WebControls.LoginView.AnonymousTemplate" />
+
+              
 
               
 
@@ -321,6 +353,8 @@
 
               
 
+              
+
                collection that matches one of the user's roles. If no match is found, displays the template specified in the <see
                cref="P:System.Web.UI.WebControls.LoginView.LoggedInTemplate" />
 
@@ -328,8 +362,12 @@
 
               
 
+              
+
                property. If the user is not logged in, displays the template specified in the <see
                cref="P:System.Web.UI.WebControls.LoginView.AnonymousTemplate" />
+
+              
 
               
 
@@ -358,8 +396,12 @@
 
               
 
+              
+
                collection that matches one of the user's roles. If no match is found, displays the template specified in the <see
                cref="P:System.Web.UI.WebControls.LoginView.LoggedInTemplate" />
+
+              
 
               
 
@@ -388,8 +430,12 @@
 
               
 
+              
+
                collection that matches one of the user's roles. If no match is found, nothing is displayed. If the user is not logged in, displays the template specified in the <see
                cref="P:System.Web.UI.WebControls.LoginView.AnonymousTemplate" />
+
+              
 
               
 
@@ -408,8 +454,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.WebControls.LoginView.LoggedInTemplate" />
+
+        
 
         
 
@@ -422,8 +472,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.UI.Page" />
+
+        
 
         
 
@@ -436,8 +490,12 @@
 
         
 
+        
+
          property. You must configure role management to use the <see
          cref="P:System.Web.UI.WebControls.LoginView.RoleGroups" />
+
+        
 
         
 
@@ -447,6 +505,8 @@
          type="text/html">
           <a href="a0d2f19d-a2a7-496d-88b6-30133f8ea3d6">Understanding ASP.NET Role Management</a>
         </format>
+
+        
 
         
 
@@ -462,8 +522,12 @@
 
         
 
+        
+
          method does not set the initial focus of the Web page to the <see
          cref="T:System.Web.UI.WebControls.LoginView" />
+
+        
 
         
 
@@ -476,8 +540,12 @@
 
         
 
+        
+
          control are created after the <see
          cref="E:System.Web.UI.Control.PreRender" />
+
+        
 
         
 
@@ -490,8 +558,12 @@
 
         
 
+        
+
         , handle the On_PreRender and call its <see
          cref="M:System.Web.UI.Control.Focus" />
+
+        
 
         
 
@@ -504,6 +576,8 @@
 
         
 
+        
+
          and <see
          cref="E:System.Web.UI.WebControls.LoginView.ViewChanged" />
 
@@ -511,8 +585,12 @@
 
         
 
+        
+
          events to programmatically access the controls in the <see
          cref="T:System.Web.UI.WebControls.LoginView" />
+
+        
 
         
 
@@ -535,9 +613,13 @@
 
         
 
+        
+
         |False"
     EnableViewState="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -557,6 +639,8 @@
     SkinID="string"
     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -600,6 +684,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.LoginView" />
+
+            
 
             
 
@@ -649,8 +735,12 @@
 
             
 
+            
+
              property specifies the content template to display to Web site users when they are not logged in to the Web site. This template is displayed when the <see
              cref="P:System.Security.Principal.IIdentity.Name" />
+
+            
 
             
 
@@ -659,6 +749,8 @@
              property of the <see
              cref="T:System.Web.UI.Page" />
             <see cref="P:System.Web.UI.Page.User" />
+
+            
 
             
 
@@ -674,8 +766,12 @@
 
             
 
+            
+
              template is never displayed to authenticated users. If the <see
              cref="P:System.Web.UI.WebControls.LoginView.AnonymousTemplate" />
+
+            
 
             
 
@@ -716,8 +812,12 @@
 
             
 
+            
+
              object that contains the child controls for the <see
              cref="T:System.Web.UI.WebControls.LoginView" />
+
+            
 
             
 
@@ -752,6 +852,8 @@
 
             
 
+            
+
              method creates the individual controls that make up the <see
              cref="T:System.Web.UI.WebControls.LoginView" />
 
@@ -759,8 +861,12 @@
 
             
 
+            
+
              control. The set of controls created varies according to the content template displayed for the user. For example, when a user is not logged in to the Web site, only the controls contained in the template specified in the <see
              cref="P:System.Web.UI.WebControls.LoginView.AnonymousTemplate" />
+
+            
 
             
 
@@ -774,6 +880,8 @@
           <para
             >Creates the child controls that make up the <see
              cref="T:System.Web.UI.WebControls.LoginView" />
+
+            
 
             
 
@@ -803,6 +911,8 @@
 
             
 
+            
+
              method to bind data from a source to the <see
              cref="T:System.Web.UI.WebControls.LoginView" />
 
@@ -810,8 +920,12 @@
 
             
 
+            
+
              control and its children. This method resolves all data-binding expressions in the <see
              cref="T:System.Web.UI.WebControls.LoginView" />
+
+            
 
             
 
@@ -825,6 +939,8 @@
           <para
             >Binds a data source to <see
              cref="T:System.Web.UI.WebControls.LoginView" />
+
+            
 
             
 
@@ -862,8 +978,12 @@
 
             
 
+            
+
              property indicates whether themes are enabled for the <see
              cref="T:System.Web.UI.WebControls.LoginView" />
+
+            
 
             
 
@@ -876,8 +996,12 @@
 
             
 
+            
+
              property also affects whether themes are enabled for the controls contained in its <see
              cref="P:System.Web.UI.WebControls.LoginView.Controls" />
+
+            
 
             
 
@@ -890,6 +1014,8 @@
 
             
 
+            
+
              property is true, the application's theme directory is searched for control skins to apply. If no skin for the particular control exists in the theme directory, a skin is not applied. When the <see
              cref="P:System.Web.UI.WebControls.LoginView.EnableTheming" />
 
@@ -897,8 +1023,12 @@
 
             
 
+            
+
              property is false, the theme directory is not searched and the contents of the <see
              cref="P:System.Web.UI.WebControls.LoginView.SkinID" />
+
+            
 
             
 
@@ -914,6 +1044,8 @@
 
             
 
+            
+
              value set by its parent control, or the containing page. For example, if a parent control has <see
              cref="P:System.Web.UI.WebControls.LoginView.EnableTheming" />
 
@@ -921,8 +1053,12 @@
 
             
 
+            
+
              set to false, you can selectively apply themes to child controls contained within the parent by setting the <see
              cref="P:System.Web.UI.WebControls.LoginView.EnableTheming" />
+
+            
 
             
 
@@ -936,6 +1072,8 @@
           <para
             >Gets or sets a value indicating whether themes can be applied to the <see
              cref="T:System.Web.UI.WebControls.LoginView" />
+
+            
 
             
 
@@ -968,8 +1106,12 @@
 
             
 
+            
+
              method does not set the initial focus of the Web page to the <see
              cref="T:System.Web.UI.WebControls.LoginView" />
+
+            
 
             
 
@@ -982,8 +1124,12 @@
 
             
 
+            
+
              control are created after the <see
              cref="E:System.Web.UI.Control.PreRender" />
+
+            
 
             
 
@@ -996,8 +1142,12 @@
 
             
 
+            
+
             , handle the On_PreRender and call its <see
              cref="M:System.Web.UI.Control.Focus" />
+
+            
 
             
 
@@ -1047,6 +1197,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1057,8 +1209,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1104,6 +1260,8 @@
 
             
 
+            
+
              property is displayed to Web site users when both of the following conditions are met: </para
           >
           <list type="bullet">
@@ -1116,9 +1274,13 @@
 
                 
 
+                
+
                  property of the <see
                  cref="T:System.Web.UI.Page" />
                 <see cref="P:System.Web.UI.Page.User" />
+
+                
 
                 
 
@@ -1136,6 +1298,8 @@
 
                 
 
+                
+
                  property.</para
               >
             </item>
@@ -1148,8 +1312,12 @@
 
             
 
+            
+
              property specifies a default template for authenticated Web site users. If you have not configured role management, the <see
              cref="P:System.Web.UI.WebControls.LoginView.LoggedInTemplate" />
+
+            
 
             
 
@@ -1166,6 +1334,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1174,6 +1344,8 @@
           <para
             >Gets or sets the template to display to Web site users who are logged in to the Web site but are not members of one of the role groups specified in the <see
              cref="P:System.Web.UI.WebControls.LoginView.RoleGroups" />
+
+            
 
             
 
@@ -1210,8 +1382,12 @@
 
             
 
+            
+
              method performs initialization for the <see
              cref="T:System.Web.UI.WebControls.LoginView" />
+
+            
 
             
 
@@ -1229,11 +1405,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.LoginView.OnInit(System.EventArgs)" />
+
+            
 
             
 
@@ -1252,6 +1432,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -1262,8 +1444,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1296,6 +1482,8 @@
 
             
 
+            
+
              method is called during the <see
              cref="E:System.Web.UI.Control.PreRender" />
 
@@ -1303,8 +1491,12 @@
 
             
 
+            
+
              event to determine which content template to display to the user. If the <see
              cref="P:System.Security.Principal.IIdentity.Name" />
+
+            
 
             
 
@@ -1318,8 +1510,12 @@
 
             
 
+            
+
              property is null, the template specified in the <see
              cref="P:System.Web.UI.WebControls.LoginView.AnonymousTemplate" />
+
+            
 
             
 
@@ -1332,8 +1528,12 @@
 
             
 
+            
+
              control displays the template specified in the <see
              cref="P:System.Web.UI.WebControls.LoginView.LoggedInTemplate" />
+
+            
 
             
 
@@ -1343,6 +1543,8 @@
              type="text/html">
               <a href="71ddd651-5f91-471b-ad9f-61249b0bf0d5">Role Management Providers</a>
             </format>
+
+            
 
             
 
@@ -1360,11 +1562,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.LoginView.OnPreRender(System.EventArgs)" />
+
+            
 
             
 
@@ -1384,8 +1590,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1416,8 +1626,12 @@
 
             
 
+            
+
              control switches views, it removes the controls from the previous template and creates new child controls from the new template. The <see
              cref="M:System.Web.UI.WebControls.LoginView.OnViewChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1428,6 +1642,8 @@
           <para
             >Use the <see
              cref="M:System.Web.UI.WebControls.LoginView.OnViewChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1445,11 +1661,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.LoginView.OnViewChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1468,8 +1688,12 @@
 
             
 
+            
+
              event after the <see
              cref="T:System.Web.UI.WebControls.LoginView" />
+
+            
 
             
 
@@ -1485,8 +1709,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1520,8 +1748,12 @@
 
             
 
+            
+
              controls switches views, it removes the controls from the previous template and creates new child controls from the new template. The <see
              cref="M:System.Web.UI.WebControls.LoginView.OnViewChanging(System.EventArgs)" />
+
+            
 
             
 
@@ -1532,6 +1764,8 @@
           <para
             >Use the <see
              cref="M:System.Web.UI.WebControls.LoginView.OnViewChanging(System.EventArgs)" />
+
+            
 
             
 
@@ -1549,11 +1783,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.LoginView.OnViewChanging(System.EventArgs)" />
+
+            
 
             
 
@@ -1572,8 +1810,12 @@
 
             
 
+            
+
              event before the <see
              cref="T:System.Web.UI.WebControls.LoginView" />
+
+            
 
             
 
@@ -1589,8 +1831,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1629,8 +1875,12 @@
 
             
 
+            
+
              method is used to render the server control content to the client's browser using the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -1641,6 +1891,8 @@
           <para
             >Note   This method is used primarily by control developers to extend the <see
              cref="T:System.Web.UI.WebControls.LoginView" />
+
+            
 
             
 
@@ -1659,6 +1911,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1669,8 +1923,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -1716,8 +1974,12 @@
 
             
 
+            
+
              property contains the content templates associated with various roles on the Web site. The collection in the <see
              cref="P:System.Web.UI.WebControls.LoginView.RoleGroups" />
+
+            
 
             
 
@@ -1733,8 +1995,12 @@
 
             
 
+            
+
              property. Anonymous users are never shown any template contained in the <see
              cref="P:System.Web.UI.WebControls.LoginView.RoleGroups" />
+
+            
 
             
 
@@ -1745,6 +2011,8 @@
           <para
             >You must configure role management to use the <see
              cref="P:System.Web.UI.WebControls.LoginView.RoleGroups" />
+
+            
 
             
 
@@ -1761,6 +2029,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -1771,10 +2041,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -1815,6 +2089,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1843,6 +2119,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
 
@@ -1850,8 +2128,12 @@
 
           
 
+          
+
            object containing the state of the <see
            cref="T:System.Web.UI.WebControls.LoginView" />
+
+          
 
           
 
@@ -1888,11 +2170,15 @@
 
             
 
+            
+
              property specifies which of these skins to apply to the control. A skin is specific to a particular control; you cannot share skin settings between controls of different types.</para
           >
           <para
             >If you do not set the <see
              cref="P:System.Web.UI.WebControls.LoginView.SkinID" />
+
+            
 
             
 
@@ -1905,8 +2191,12 @@
 
             
 
+            
+
              control, then that skin applies to all <see
              cref="T:System.Web.UI.WebControls.Image" />
+
+            
 
             
 
@@ -1919,6 +2209,8 @@
 
             
 
+            
+
              control, then that skin applies only to <see
              cref="T:System.Web.UI.WebControls.Image" />
 
@@ -1926,8 +2218,12 @@
 
             
 
+            
+
              controls whose <see
              cref="P:System.Web.UI.WebControls.WebControl.SkinID" />
+
+            
 
             
 
@@ -1943,8 +2239,12 @@
 
             
 
+            
+
             , an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -1958,6 +2258,8 @@
           <para
             >Gets or sets the skin to apply to the <see
              cref="T:System.Web.UI.WebControls.LoginView" />
+
+            
 
             
 
@@ -1989,8 +2291,12 @@
 
             
 
+            
+
              control switches views, it removes the controls from the previous template and creates new child controls from the new template. The <see
              cref="E:System.Web.UI.WebControls.LoginView.ViewChanged" />
+
+            
 
             
 
@@ -2001,6 +2307,8 @@
           <para
             >Use the <see
              cref="E:System.Web.UI.WebControls.LoginView.ViewChanged" />
+
+            
 
             
 
@@ -2017,8 +2325,12 @@
 
               
 
+              
+
                event is only raised if the login status for a user changes during a postback to the page. The <see
                cref="E:System.Web.UI.WebControls.LoginView.ViewChanged" />
+
+              
 
               
 
@@ -2031,8 +2343,12 @@
 
               
 
+              
+
                control, or if the user logs out using the <see
                cref="T:System.Web.UI.WebControls.LoginStatus" />
+
+              
 
               
 
@@ -2045,8 +2361,12 @@
 
               
 
+              
+
                event will also not occur if a user is logged in or out followed by a redirect. An example of when the <see
                cref="E:System.Web.UI.WebControls.LoginView.ViewChanged" />
+
+              
 
               
 
@@ -2059,6 +2379,8 @@
 
               
 
+              
+
                method without being redirected to another page. During the next postback to the page, the <see
                cref="T:System.Web.UI.WebControls.LoginView" />
 
@@ -2066,8 +2388,12 @@
 
               
 
+              
+
                control will detect the change in the login status for the user, and then raise the <see
                cref="E:System.Web.UI.WebControls.LoginView.ViewChanged" />
+
+              
 
               
 
@@ -2081,6 +2407,8 @@
              type="text/html">
               <a href="b6f65241-e0ad-4590-a99f-200ce741bb1f">Handling and Raising Events</a>
             </format>
+
+            
 
             
 
@@ -2116,8 +2444,12 @@
 
             
 
+            
+
              control switches views, it removes the controls from the previous template and creates new child controls from the new template. The <see
              cref="E:System.Web.UI.WebControls.LoginView.ViewChanging" />
+
+            
 
             
 
@@ -2128,6 +2460,8 @@
           <para
             >Use the <see
              cref="E:System.Web.UI.WebControls.LoginView.ViewChanging" />
+
+            
 
             
 
@@ -2144,8 +2478,12 @@
 
               
 
+              
+
                event is only raised if the login status for a user changes during a postback to the page. The <see
                cref="E:System.Web.UI.WebControls.LoginView.ViewChanging" />
+
+              
 
               
 
@@ -2158,8 +2496,12 @@
 
               
 
+              
+
                control, or if the user logs out using the <see
                cref="T:System.Web.UI.WebControls.LoginStatus" />
+
+              
 
               
 
@@ -2172,8 +2514,12 @@
 
               
 
+              
+
                event will also not occur if a user is logged in or out followed by a redirect. An example of when the <see
                cref="E:System.Web.UI.WebControls.LoginView.ViewChanging" />
+
+              
 
               
 
@@ -2186,6 +2532,8 @@
 
               
 
+              
+
                method without being redirected to another page. During the next postback to the page, the <see
                cref="T:System.Web.UI.WebControls.LoginView" />
 
@@ -2193,8 +2541,12 @@
 
               
 
+              
+
                control will detect the change in the login status for the user, and then raise the <see
                cref="E:System.Web.UI.WebControls.LoginView.ViewChanging" />
+
+              
 
               
 
@@ -2208,6 +2560,8 @@
              type="text/html">
               <a href="b6f65241-e0ad-4590-a99f-200ce741bb1f">Handling and Raising Events</a>
             </format>
+
+            
 
             
 

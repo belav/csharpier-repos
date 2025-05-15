@@ -42,11 +42,15 @@
 
         
 
+        
+
          control corresponds to the &lt;textarea&gt; HTML element that allows you to create a multiline text box on a Web page. Use this control to programmatically manipulate a &lt;textarea&gt; HTML element.</para
       >
       <para
         >This class allows you to control the height and width of a multiline text box by setting the <see
          cref="P:System.Web.UI.HtmlControls.HtmlTextArea.Rows" />
+
+        
 
         
 
@@ -59,6 +63,8 @@
 
         
 
+        
+
          properties, respectively. You also can assign a name to the control by setting the <see
          cref="P:System.Web.UI.HtmlControls.HtmlTextArea.Name" />
 
@@ -66,8 +72,12 @@
 
         
 
+        
+
          property. To determine or specify the text in the text box, use the <see
          cref="P:System.Web.UI.HtmlControls.HtmlTextArea.Value" />
+
+        
 
         
 
@@ -83,8 +93,12 @@
 
         
 
+        
+
          class provides a <see
          cref="E:System.Web.UI.HtmlControls.HtmlTextArea.ServerChange" />
+
+        
 
         
 
@@ -101,6 +115,8 @@
 
           
 
+          
+
            control.</para
         >
       </block>
@@ -112,8 +128,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.HtmlControls.HtmlTextArea.#ctor" />
+
+        
 
         
 
@@ -129,6 +149,8 @@
               >[&lt;topic://cpconASPNETSyntaxForValidationControls&gt;]</a
             >
           </format>
+
+          
 
           
 
@@ -160,11 +182,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.Web.UI.HtmlControls.HtmlTextArea" />
+
+            
 
             
 
@@ -205,6 +231,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -237,8 +265,12 @@
 
             
 
+            
+
              method adds an object to the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTextArea" />
+
+            
 
             
 
@@ -251,8 +283,12 @@
 
             
 
+            
+
              if the object is of the type <see
              cref="T:System.Web.UI.LiteralControl" />
+
+            
 
             
 
@@ -265,8 +301,12 @@
 
             
 
+            
+
             ; otherwise, an <see
              cref="T:System.Web.HttpException" />
+
+            
 
             
 
@@ -282,8 +322,12 @@
 
             
 
+            
+
              method is primarily used by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTextArea" />
+
+            
 
             
 
@@ -302,6 +346,8 @@
 
             
 
+            
+
              control that an object was parsed and adds the object to the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTextArea" />
 
@@ -309,8 +355,12 @@
 
             
 
+            
+
              control's <see
              cref="T:System.Web.UI.ControlCollection" />
+
+            
 
             
 
@@ -326,8 +376,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -360,8 +414,12 @@
 
             
 
+            
+
              property to specify or determine the width (in characters) of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTextArea" />
+
+            
 
             
 
@@ -377,6 +435,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -385,6 +445,8 @@
           <para
             >Gets or sets the width (in characters) of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTextArea" />
+
+            
 
             
 
@@ -437,8 +499,12 @@
 
             
 
+            
+
              method checks whether the postback value of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTextArea" />
+
+            
 
             
 
@@ -454,8 +520,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTextArea" />
+
+            
 
             
 
@@ -474,6 +544,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -482,6 +554,8 @@
           <para
             >true if the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTextArea" />
+
+            
 
             
 
@@ -497,10 +571,14 @@
 
           
 
+          
+
           The key identifier for the control.</param
         >
         <param name="postCollection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -529,6 +607,8 @@
 
             
 
+            
+
              property to determine the unique identifier name for the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTextArea" />
 
@@ -536,8 +616,12 @@
 
             
 
+            
+
              control. In this implementation of the property, the get accessor returns the value of the <see
              cref="P:System.Web.UI.Control.UniqueID" />
+
+            
 
             
 
@@ -554,6 +638,8 @@
 
               
 
+              
+
                property must have the same value as the <see
                cref="P:System.Web.UI.Control.UniqueID" />
 
@@ -561,8 +647,12 @@
 
               
 
+              
+
                property for the <see
                cref="T:System.Web.UI.HtmlControls.HtmlTextArea" />
+
+              
 
               
 
@@ -579,6 +669,8 @@
 
             
 
+            
+
              class may override this implementation, if necessary.</para
           >
         </remarks>
@@ -587,6 +679,8 @@
           <para
             >Gets or sets the unique identifier name for the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTextArea" />
+
+            
 
             
 
@@ -629,8 +723,12 @@
 
             
 
+            
+
              method notifies the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTextArea" />
+
+            
 
             
 
@@ -646,8 +744,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTextArea" />
+
+            
 
             
 
@@ -666,6 +768,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -676,8 +780,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -711,8 +819,12 @@
 
             
 
+            
+
              event is raised when the content of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTextArea" />
+
+            
 
             
 
@@ -732,12 +844,16 @@
 
               
 
+              
+
                event to work correctly.</para
             >
           </block>
           <para
             >This event is commonly used to perform data validation on the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTextArea" />
+
+            
 
             
 
@@ -757,11 +873,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.HtmlControls.HtmlTextArea.OnServerChange(System.EventArgs)" />
+
+            
 
             
 
@@ -780,8 +900,12 @@
 
             
 
+            
+
              event of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTextArea" />
+
+            
 
             
 
@@ -797,8 +921,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -833,8 +961,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTextArea" />
+
+            
 
             
 
@@ -853,8 +985,12 @@
 
             
 
+            
+
              method to signal the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTextArea" />
+
+            
 
             
 
@@ -888,8 +1024,12 @@
 
             
 
+            
+
              method renders the <paramref
              name="name" />
+
+            
 
             
 
@@ -902,8 +1042,12 @@
 
             
 
+            
+
              control directly to ensure that it has the same value as the <see
              cref="P:System.Web.UI.Control.UniqueID" />
+
+            
 
             
 
@@ -916,8 +1060,12 @@
 
             
 
+            
+
              method calls the base class's <see
              cref="M:System.Web.UI.HtmlControls.HtmlContainerControl.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -933,8 +1081,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTextArea" />
+
+            
 
             
 
@@ -953,8 +1105,12 @@
 
             
 
+            
+
              control's attributes to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -970,8 +1126,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -1004,8 +1164,12 @@
 
             
 
+            
+
              property to specify or determine the height (in characters) of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTextArea" />
+
+            
 
             
 
@@ -1021,6 +1185,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -1029,6 +1195,8 @@
           <para
             >Gets or sets the height (in characters) of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTextArea" />
+
+            
 
             
 
@@ -1069,8 +1237,12 @@
 
             
 
+            
+
              event is raised when the content of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTextArea" />
+
+            
 
             
 
@@ -1090,6 +1262,8 @@
 
               
 
+              
+
                event to work correctly.</para
             >
           </block>
@@ -1103,6 +1277,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1111,6 +1287,8 @@
           <para
             >Occurs when the content of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTextArea" />
+
+            
 
             
 
@@ -1156,8 +1334,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IPostBackDataHandler" />
+
+            
 
             
 
@@ -1176,6 +1358,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -1184,6 +1368,8 @@
           <para
             >true if the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTextArea" />
+
+            
 
             
 
@@ -1199,10 +1385,14 @@
 
           
 
+          
+
           The key identifier for the control.</param
         >
         <param name="postCollection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1237,8 +1427,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IPostBackDataHandler" />
+
+            
 
             
 
@@ -1252,6 +1446,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.Web.UI.IPostBackDataHandler.RaisePostDataChangedEvent" />
+
+            
 
             
 
@@ -1281,6 +1477,8 @@
 
             
 
+            
+
              property to programmatically control the text entered in the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTextArea" />
 
@@ -1288,8 +1486,12 @@
 
             
 
+            
+
              control. This property is commonly used to retrieve the text entered in the text box, but you can also use it to specify the text to display in the control. This is useful if you want to provide a default value or display a message in the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTextArea" />
+
+            
 
             
 
@@ -1310,6 +1512,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -1319,6 +1523,8 @@
           <para
             >Gets or sets the text entered in the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTextArea" />
+
+            
 
             
 

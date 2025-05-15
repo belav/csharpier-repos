@@ -46,8 +46,12 @@
 
         
 
+        
+
          objects from files, streams, or embedded resources. For a list of constructors, see <see
          cref="M:System.Drawing.Icon.#ctor(System.Drawing.Icon,System.Drawing.Size)" />
+
+        
 
         
 
@@ -60,8 +64,12 @@
 
         
 
+        
+
          to a bitmap by using the <see
          cref="M:System.Drawing.Icon.ToBitmap" />
+
+        
 
         
 
@@ -122,6 +130,8 @@
 
             
 
+            
+
              class from the specified data stream.</para
           >
         </summary>
@@ -132,8 +142,12 @@
 
           
 
+          
+
           The data stream from which to load the <see
            cref="T:System.Drawing.Icon" />
+
+          
 
           
 
@@ -181,6 +195,8 @@
 
             
 
+            
+
              class from the specified file name.</para
           >
         </summary>
@@ -191,8 +207,12 @@
 
           
 
+          
+
           The file to load the <see
            cref="T:System.Drawing.Icon" />
+
+          
 
           
 
@@ -228,6 +248,8 @@
 
             
 
+            
+
              parameter is an <see
              cref="T:System.Drawing.Icon" />
 
@@ -235,8 +257,12 @@
 
             
 
+            
+
              that has a single size, this method only creates a duplicate icon. Use the stretching capabilities of the <see
              cref="Overload:System.Drawing.Graphics.DrawImage" />
+
+            
 
             
 
@@ -255,6 +281,8 @@
 
             
 
+            
+
              class and attempts to find a version of the icon that matches the requested size.</para
           >
         </summary>
@@ -265,8 +293,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Icon" />
+
+          
 
           
 
@@ -281,6 +313,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Size" />
 
@@ -288,8 +322,12 @@
 
           
 
+          
+
            structure that specifies the height and width of the new <see
            cref="T:System.Drawing.Icon" />
+
+          
 
           
 
@@ -328,6 +366,8 @@
 
             
 
+            
+
              class of the specified size from the specified stream.</para
           >
         </summary>
@@ -338,10 +378,14 @@
 
           
 
+          
+
           The stream that contains the icon data.</param
         >
         <param name="size">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -376,6 +420,8 @@
 
             
 
+            
+
              should include the complete path if it is not in the current application directory.</para
           >
         </remarks>
@@ -384,6 +430,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Drawing.Icon" />
+
+            
 
             
 
@@ -399,10 +447,14 @@
 
           
 
+          
+
           The name and path to the file that contains the icon data.</param
         >
         <param name="size">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -431,6 +483,8 @@
 
             
 
+            
+
              from a resource with the name specified by the <paramref
              name="resource" />
 
@@ -438,8 +492,12 @@
 
             
 
+            
+
              parameter in the assembly that contains the type specified by the <paramref
              name="type" />
+
+            
 
             
 
@@ -455,8 +513,12 @@
 
             
 
+            
+
              type and <paramref
              name="Error.ico" />
+
+            
 
             
 
@@ -475,11 +537,15 @@
 
             
 
+            
+
              class from a resource in the specified assembly.</para
           >
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -492,10 +558,14 @@
 
           
 
+          
+
            that specifies the assembly in which to look for the resource. </param
         >
         <param name="resource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -532,6 +602,8 @@
 
             
 
+            
+
              parameter is an <see
              cref="T:System.Drawing.Icon" />
 
@@ -539,8 +611,12 @@
 
             
 
+            
+
              that has a single size, this method only creates a duplicate icon. Use the stretching capabilities of the <see
              cref="Overload:System.Drawing.Graphics.DrawImage" />
+
+            
 
             
 
@@ -559,11 +635,15 @@
 
             
 
+            
+
              class and attempts to find a version of the icon that matches the requested size.</para
           >
         </summary>
         <param name="original">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -578,10 +658,14 @@
 
           
 
+          
+
           The width of the new icon. </param
         >
         <param name="height">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -619,11 +703,15 @@
 
             
 
+            
+
              class from the specified data stream and with the specified width and height.</para
           >
         </summary>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -638,10 +726,14 @@
 
           
 
+          
+
           The width, in pixels, of the icon. </param
         >
         <param name="height">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -681,6 +773,8 @@
 
             
 
+            
+
              should include the complete path if it is not in the current application directory.</para
           >
         </remarks>
@@ -689,6 +783,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Drawing.Icon" />
+
+            
 
             
 
@@ -704,8 +800,12 @@
 
           
 
+          
+
           The name and path to the file that contains the <see
            cref="T:System.Drawing.Icon" />
+
+          
 
           
 
@@ -720,8 +820,12 @@
 
           
 
+          
+
           The desired width of the <see
            cref="T:System.Drawing.Icon" />
+
+          
 
           
 
@@ -736,8 +840,12 @@
 
           
 
+          
+
           The desired height of the <see
            cref="T:System.Drawing.Icon" />
+
+          
 
           
 
@@ -766,6 +874,8 @@
 
             
 
+            
+
             , creating a duplicate image.</para
           >
         </summary>
@@ -774,6 +884,8 @@
           <para
             >An object that can be cast to an <see
              cref="T:System.Drawing.Icon" />
+
+            
 
             
 
@@ -806,6 +918,8 @@
 
             
 
+            
+
              to be reallocated for other purposes.</para
           >
         </remarks>
@@ -814,6 +928,8 @@
           <para
             >Releases all resources used by this <see
              cref="T:System.Drawing.Icon" />
+
+            
 
             
 
@@ -859,6 +975,8 @@
 
             
 
+            
+
              is used with bitmaps, a thumbnail image may be returned instead of an icon if the system that is running the application has a registry setting that causes bitmap files to be shown as thumbnail images.</para
           >
         </remarks>
@@ -876,11 +994,15 @@
 
             
 
+            
+
              representation of the image that is contained in the specified file.</para
           >
         </returns>
         <param name="filePath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -929,6 +1051,8 @@
 
             
 
+            
+
              method in the Win32 API to ensure that the resources are released.</para
           >
         </remarks>
@@ -937,6 +1061,8 @@
           <para
             >Creates a GDI+ <see
              cref="T:System.Drawing.Icon" />
+
+            
 
             
 
@@ -955,11 +1081,15 @@
 
             
 
+            
+
              this method creates.</para
           >
         </returns>
         <param name="handle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -987,6 +1117,8 @@
           <para
             >Gets the Windows handle for this <see
              cref="T:System.Drawing.Icon" />
+
+            
 
             
 
@@ -1020,6 +1152,8 @@
           <para
             >Gets the height of this <see
              cref="T:System.Drawing.Icon" />
+
+            
 
             
 
@@ -1060,8 +1194,12 @@
 
             
 
+            
+
              to the specified output <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -1077,8 +1215,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -1106,6 +1248,8 @@
           <para
             >Gets the size of this <see
              cref="T:System.Drawing.Icon" />
+
+            
 
             
 
@@ -1149,6 +1293,8 @@
 
             
 
+            
+
              with the data that is required to serialize the target object.</para
           >
         </summary>
@@ -1159,8 +1305,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -1175,8 +1325,12 @@
 
           
 
+          
+
           The destination (see <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -1208,8 +1362,12 @@
 
             
 
+            
+
              to a GDI+ <see
              cref="T:System.Drawing.Bitmap" />
+
+            
 
             
 
@@ -1228,8 +1386,12 @@
 
             
 
+            
+
              that represents the converted <see
              cref="T:System.Drawing.Icon" />
+
+            
 
             
 
@@ -1263,6 +1425,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1271,6 +1435,8 @@
           <para
             >A string that describes the <see
              cref="T:System.Drawing.Icon" />
+
+            
 
             
 
@@ -1299,6 +1465,8 @@
           <para
             >Gets the width of this <see
              cref="T:System.Drawing.Icon" />
+
+            
 
             
 

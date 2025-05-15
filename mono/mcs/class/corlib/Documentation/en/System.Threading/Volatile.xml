@@ -28,8 +28,12 @@
 
         
 
+        
+
          class provide the easiest and least error-prone way of synchronizing access to data, and the <see
          cref="T:System.Lazy`1" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Threading.Volatile.Write(System.Byte@,System.Byte)" />
+
+        
 
         
 
@@ -64,6 +72,8 @@
 
             
 
+            
+
              class provides that functionality in such languages.</para
           >
           <block subset="none" type="note">
@@ -75,8 +85,12 @@
 
               
 
+              
+
                and <see
                cref="M:System.Threading.Volatile.Write(System.Byte@,System.Byte)" />
+
+              
 
               
 
@@ -95,8 +109,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Threading.Volatile.Write(System.Byte@,System.Byte)" />
+
+            
 
             
 
@@ -109,8 +127,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Threading.Volatile.Write(System.Byte@,System.Byte)" />
+
+            
 
             
 

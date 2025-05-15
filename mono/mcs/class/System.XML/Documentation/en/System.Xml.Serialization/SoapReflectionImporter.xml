@@ -28,6 +28,8 @@
 
         
 
+        
+
          class provides type mappings to SOAP-encoded message parts, as defined in a Web Services Description Language (WSDL) document. It is used only when a Web service or client specifies SOAP encoding, as described in Section 5 of the SOAP 1.1 specification.</para
       >
     </remarks>
@@ -58,6 +60,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Serialization.SoapReflectionImporter" />
+
+            
 
             
 
@@ -99,11 +103,15 @@
 
             
 
+            
+
              class, specifying a default XML namespace for imported type mappings. </para
           >
         </summary>
         <param name="defaultNamespace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -147,11 +155,15 @@
 
             
 
+            
+
              class, specifying overrides for XML serialization. </para
           >
         </summary>
         <param name="attributeOverrides">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -164,8 +176,12 @@
 
           
 
+          
+
            object that overrides how the <see
            cref="T:System.Xml.Serialization.XmlSerializer" />
+
+          
 
           
 
@@ -210,11 +226,15 @@
 
             
 
+            
+
              class, specifying XML serialization overrides and a default XML namespace. </para
           >
         </summary>
         <param name="attributeOverrides">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -227,8 +247,12 @@
 
           
 
+          
+
            object that overrides how the <see
            cref="T:System.Xml.Serialization.XmlSerializer" />
+
+          
 
           
 
@@ -238,6 +262,8 @@
         >
         <param name="defaultNamespace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -281,11 +307,15 @@
 
             
 
+            
+
              method is called while initializing a Web service or client, or reflecting a Web service. You do not need to call it directly.</para
           >
           <para
             >The following list describes possible values for the <paramref
              name="members" />
+
+            
 
             
 
@@ -323,6 +353,8 @@
 
           
 
+          
+
           An XML element name produced from the Web service method.</param
         >
         <param name="ns">
@@ -332,10 +364,14 @@
 
           
 
+          
+
           An XML element namespace produced from the Web service method.</param
         >
         <param name="members">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -381,11 +417,15 @@
 
             
 
+            
+
              method is called while initializing a Web service or client, or reflecting a Web service. You do not need to call it directly.</para
           >
           <para
             >The following list describes possible values for the <paramref
              name="members" />
+
+            
 
             
 
@@ -423,10 +463,14 @@
 
           
 
+          
+
           An XML element name produced from the Web service method.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -441,6 +485,8 @@
 
           
 
+          
+
           An array of .NET Framework code entities that belong to a Web service method.</param
         >
         <param name="hasWrapperElement">
@@ -450,10 +496,14 @@
 
           
 
+          
+
           true to indicate that elements that correspond to WSDL message parts should be enclosed in an extra wrapper element in a SOAP message; otherwise, false.</param
         >
         <param name="writeAccessors">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -500,11 +550,15 @@
 
             
 
+            
+
              method is called while initializing a Web service or client, or reflecting a Web service. You do not need to call it directly.</para
           >
           <para
             >The following list describes possible values for the <paramref
              name="members" />
+
+            
 
             
 
@@ -542,10 +596,14 @@
 
           
 
+          
+
           An XML element name produced from the Web service method.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -560,10 +618,14 @@
 
           
 
+          
+
           An array of .NET Framework code entities that belong to a Web service method.</param
         >
         <param name="hasWrapperElement">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -578,6 +640,8 @@
 
           
 
+          
+
           true to indicate an RPC-style Web service binding; false to indicate a document-style Web service binding or a SOAP header.</param
         >
         <param name="validate">
@@ -587,8 +651,12 @@
 
           
 
+          
+
           true to indicate that a generated deserializer should check for the expected qualified name of the wrapper element; otherwise, false. This parameter's value is relevant only if the <paramref
            name="hasWrapperElement" />
+
+          
 
           
 
@@ -636,11 +704,15 @@
 
             
 
+            
+
              method is called while initializing a Web service or client, or reflecting a Web service. You do not need to call it directly.</para
           >
           <para
             >The following list describes possible values for the <paramref
              name="members" />
+
+            
 
             
 
@@ -678,10 +750,14 @@
 
           
 
+          
+
           An XML element name produced from the Web service method.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -696,10 +772,14 @@
 
           
 
+          
+
           An array of .NET Framework code entities that belong to a Web service method.</param
         >
         <param name="hasWrapperElement">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -714,6 +794,8 @@
 
           
 
+          
+
           true to indicate an RPC-style Web service binding; false to indicate a document-style Web service binding or a SOAP header.</param
         >
         <param name="validate">
@@ -723,8 +805,12 @@
 
           
 
+          
+
           true to indicate that a generated deserializer should check for the expected qualified name of the wrapper element; otherwise, false. This parameter's value is relevant only if the <paramref
            name="hasWrapperElement" />
+
+          
 
           
 
@@ -739,8 +825,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Xml.Serialization.XmlMappingAccess" />
+
+          
 
           
 
@@ -783,6 +873,8 @@
 
             
 
+            
+
              method directly.</para
           >
         </remarks>
@@ -796,6 +888,8 @@
         </returns>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -839,6 +933,8 @@
 
             
 
+            
+
              method directly.</para
           >
         </remarks>
@@ -857,10 +953,14 @@
 
           
 
+          
+
           The .NET Framework type for which to generate a type mapping. </param
         >
         <param name="defaultNamespace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -899,6 +999,8 @@
 
             
 
+            
+
              method directly.</para
           >
         </remarks>
@@ -912,11 +1014,15 @@
 
             
 
+            
+
              instance's context for later use when import methods are invoked. </para
           >
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -959,11 +1065,15 @@
 
             
 
+            
+
              instance's context for later use when import methods are invoked. </para
           >
         </summary>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -976,8 +1086,12 @@
 
           
 
+          
+
            reflection object that contains custom attributes that are derived from the <see
            cref="T:System.Xml.Serialization.SoapIncludeAttribute" />
+
+          
 
           
 

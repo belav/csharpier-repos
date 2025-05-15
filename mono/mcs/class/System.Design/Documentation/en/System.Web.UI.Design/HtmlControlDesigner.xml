@@ -37,6 +37,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -68,8 +70,12 @@
 
               
 
+              
+
                property is obsolete. Use the <see
                cref="M:System.Web.UI.Design.IControlDesignerTag.SetAttribute(System.String,System.String)" />
+
+              
 
               
 
@@ -82,8 +88,12 @@
 
               
 
+              
+
                methods on the <see
                cref="P:System.Web.UI.Design.ControlDesigner.Tag" />
+
+              
 
               
 
@@ -96,8 +106,12 @@
 
               
 
+              
+
                method on the <see
                cref="T:System.Web.UI.Design.ContainerControlDesigner" />
+
+              
 
               
 
@@ -162,8 +176,12 @@
 
             
 
+            
+
              property is used by the designer to retrieve the design-time object representing the control that is associated with the <see
              cref="T:System.Web.UI.Design.HtmlControlDesigner" />
+
+            
 
             
 
@@ -177,6 +195,8 @@
           <para
             >Gets the design-time object representing the control that is associated with the <see
              cref="T:System.Web.UI.Design.HtmlControlDesigner" />
+
+            
 
             
 
@@ -216,8 +236,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -230,8 +254,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -247,8 +275,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Web.UI.Design.HtmlControlDesigner" />
+
+            
 
             
 
@@ -267,11 +299,15 @@
 
             
 
+            
+
              object and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -309,6 +345,8 @@
 
             
 
+            
+
              class to get the <see
              cref="T:System.Web.UI.Design.ExpressionEditor" />
 
@@ -316,8 +354,12 @@
 
             
 
+            
+
              class to get the <see
              cref="T:System.Web.UI.Design.ExpressionEditorSheet" />
+
+            
 
             
 
@@ -333,8 +375,12 @@
 
             
 
+            
+
              collection contains an <see
              cref="T:System.Web.UI.ExpressionBinding" />
+
+            
 
             
 
@@ -347,8 +393,12 @@
 
             
 
+            
+
              property for each element indicates the associated expression builder implementation. The expression string is parsed and evaluated by its associated <see
              cref="T:System.Web.Compilation.ExpressionBuilder" />
+
+            
 
             
 
@@ -389,6 +439,8 @@
 
             
 
+            
+
              method should be called by the designer host to initialize the designer.</para
           >
         </remarks>
@@ -398,6 +450,8 @@
         </summary>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -426,8 +480,12 @@
 
               
 
+              
+
                method is obsolete. Use the <see
                cref="M:System.Web.UI.Design.IControlDesignerTag.SetAttribute(System.String,System.String)" />
+
+              
 
               
 
@@ -440,8 +498,12 @@
 
               
 
+              
+
                methods on the <see
                cref="P:System.Web.UI.Design.ControlDesigner.Tag" />
+
+              
 
               
 
@@ -454,6 +516,8 @@
 
               
 
+              
+
                method on the <see
                cref="T:System.Web.UI.Design.ContainerControlDesigner" />
 
@@ -461,8 +525,12 @@
 
               
 
+              
+
                class to set styles for the control at design time. Override the <see
                cref="M:System.Web.UI.Design.HtmlControlDesigner.Initialize(System.ComponentModel.IComponent)" />
+
+              
 
               
 
@@ -506,8 +574,12 @@
 
               
 
+              
+
                method is obsolete. Use the <see
                cref="M:System.Web.UI.Design.IControlDesignerTag.SetAttribute(System.String,System.String)" />
+
+              
 
               
 
@@ -520,8 +592,12 @@
 
               
 
+              
+
                methods on the <see
                cref="P:System.Web.UI.Design.ControlDesigner.Tag" />
+
+              
 
               
 
@@ -534,6 +610,8 @@
 
               
 
+              
+
                method on the <see
                cref="T:System.Web.UI.Design.ContainerControlDesigner" />
 
@@ -541,8 +619,12 @@
 
               
 
+              
+
                class to set styles for the control at design time. Override the <see
                cref="Overload:System.Web.UI.Design.HtmlControlDesigner.Dispose" />
+
+              
 
               
 
@@ -590,12 +672,16 @@
 
             
 
+            
+
              method should be called by a control designer after the control designer has made a change to the data bindings for the control.</para
           >
           <block subset="none" type="note">
             <para
               >The <see
                cref="M:System.Web.UI.Design.HtmlControlDesigner.OnBindingsCollectionChanged(System.String)" />
+
+              
 
               
 
@@ -608,8 +694,12 @@
 
               
 
+              
+
                event on the <see
                cref="P:System.Web.UI.Design.HtmlControlDesigner.DataBindings" />
+
+              
 
               
 
@@ -625,6 +715,8 @@
         </summary>
         <param name="propName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -685,8 +777,12 @@
 
             
 
+            
+
              method provides a way to add items to or remove items from the dictionary of events that a designer exposes through a <see
              cref="T:System.ComponentModel.TypeDescriptor" />
+
+            
 
             
 
@@ -697,6 +793,8 @@
           <para
             >The keys in the dictionary of events are the names of the events. The objects are of type <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -715,6 +813,8 @@
 
             
 
+            
+
              object for the component.</para
           >
         </summary>
@@ -725,8 +825,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -763,8 +867,12 @@
 
             
 
+            
+
              method provides a way to add items to or remove items from the dictionary of properties that a designer exposes through a <see
              cref="T:System.ComponentModel.TypeDescriptor" />
+
+            
 
             
 
@@ -775,6 +883,8 @@
           <para
             >The keys in the dictionary of properties are the names of the properties. The objects are of type <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -793,11 +903,15 @@
 
             
 
+            
+
              object at design time.</para
           >
         </summary>
         <param name="properties">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

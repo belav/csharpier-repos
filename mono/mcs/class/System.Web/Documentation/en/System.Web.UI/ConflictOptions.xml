@@ -22,6 +22,8 @@
 
         
 
+        
+
         , which means the data source control will overwrite any changes made to a data row between the time the data source control first read data from the row and the time that the row is updated. The primary key is used for locating the data row that will be updated or deleted, but no other comparison of the data is performed. If the data source control is configured to use the <see
          cref="F:System.Web.UI.ConflictOptions.CompareAllValues" />
 
@@ -29,8 +31,12 @@
 
         
 
+        
+
          option, however, the control passes the original data in the <paramref
          name="oldValues" />
+
+        
 
         
 
@@ -58,6 +64,8 @@
           <para
             >A data source control uses the <paramref
              name="oldValues" />
+
+            
 
             
 

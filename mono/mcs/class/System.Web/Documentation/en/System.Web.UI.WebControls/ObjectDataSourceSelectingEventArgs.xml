@@ -27,8 +27,12 @@
 
         
 
+        
+
          class is used in the <see
          cref="M:System.Web.UI.WebControls.ObjectDataSourceView.OnSelecting(System.Web.UI.WebControls.ObjectDataSourceSelectingEventArgs)" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          class, the <see
          cref="T:System.Web.UI.WebControls.ObjectDataSourceSelectingEventArgs" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          property. The <see
          cref="T:System.Web.UI.WebControls.ObjectDataSourceSelectingEventArgs" />
+
+        
 
         
 
@@ -69,6 +81,8 @@
 
         
 
+        
+
          property, which is used to check whether the currently executing data retrieval operation is retrieving a row count, in addition to the data. This is important because when data source paging is enabled, the <see
          cref="E:System.Web.UI.WebControls.ObjectDataSource.Selecting" />
 
@@ -76,8 +90,12 @@
 
         
 
+        
+
          event is raised twice. For more information, see <see
          cref="P:System.Web.UI.WebControls.ObjectDataSourceSelectingEventArgs.ExecutingSelectCount" />
+
+        
 
         
 
@@ -93,8 +111,12 @@
 
         
 
+        
+
          control exposes many events that you can handle to work with the underlying business object at various times in its life cycle. The following table lists the events and associated <see
          cref="T:System.EventArgs" />
+
+        
 
         
 
@@ -125,6 +147,8 @@
 
               
 
+              
+
               .</para
             >
             <para>Occurs immediately before the business object is instantiated.</para>
@@ -144,6 +168,8 @@
           <term>
             <para>
               <see cref="E:System.Web.UI.WebControls.ObjectDataSource.ObjectCreated" />
+
+              
 
               
 
@@ -173,6 +199,8 @@
 
               
 
+              
+
               .</para
             >
             <para>Occurs before the data is retrieved.</para>
@@ -197,6 +225,8 @@
 
               
 
+              
+
               , <see
                cref="E:System.Web.UI.WebControls.ObjectDataSource.Updating" />
 
@@ -204,8 +234,12 @@
 
               
 
+              
+
               , and <see
                cref="E:System.Web.UI.WebControls.ObjectDataSource.Deleting" />
+
+              
 
               
 
@@ -235,6 +269,8 @@
 
               
 
+              
+
               .</para
             >
             <para>Occurs after the data is retrieved.</para>
@@ -259,6 +295,8 @@
 
               
 
+              
+
               , <see
                cref="E:System.Web.UI.WebControls.ObjectDataSource.Updated" />
 
@@ -266,8 +304,12 @@
 
               
 
+              
+
               , and <see
                cref="E:System.Web.UI.WebControls.ObjectDataSource.Deleted" />
+
+              
 
               
 
@@ -292,6 +334,8 @@
           <term>
             <para>
               <see cref="E:System.Web.UI.WebControls.ObjectDataSource.ObjectDisposing" />
+
+              
 
               
 
@@ -324,8 +368,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+        
 
         
 
@@ -363,8 +411,12 @@
 
             
 
+            
+
              parameter is an <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -383,11 +435,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="inputParameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -400,8 +456,12 @@
 
           
 
+          
+
            of <see
            cref="T:System.Web.UI.WebControls.Parameter" />
+
+          
 
           
 
@@ -416,6 +476,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.DataSourceSelectArguments" />
 
@@ -423,8 +485,12 @@
 
           
 
+          
+
            that specifies which additional data-related operations the <see
            cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+          
 
           
 
@@ -459,8 +525,12 @@
 
             
 
+            
+
              class to request that the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 
@@ -473,6 +543,8 @@
 
             
 
+            
+
              enumeration. The <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceSelectingEventArgs.Arguments" />
 
@@ -480,8 +552,12 @@
 
             
 
+            
+
              property is read-only, so you can examine, but not change, the arguments that are passed by the data-bound control. For more information, see <see
              cref="T:System.Web.UI.DataSourceSelectArguments" />
+
+            
 
             
 
@@ -495,6 +571,8 @@
           <para
             >Provides a mechanism that the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 
@@ -527,6 +605,8 @@
 
             
 
+            
+
              object is performing data retrieval and data source paging is enabled, the data retrieval method is called twice: </para
           >
           <list type="bullet">
@@ -545,8 +625,12 @@
 
             
 
+            
+
              event twice. For code that handles the <see
              cref="E:System.Web.UI.WebControls.ObjectDataSource.Selecting" />
+
+            
 
             
 
@@ -560,6 +644,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 

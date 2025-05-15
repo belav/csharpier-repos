@@ -27,8 +27,12 @@
 
         
 
+        
+
          control can present its underlying data in both tabular and hierarchical format to Web server controls that bind to it. Controls such as <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          use the <see
          cref="T:System.Web.UI.WebControls.XmlDataSource" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          class, such as <see
          cref="T:System.Web.UI.WebControls.TreeView" />
+
+        
 
         
 
@@ -72,8 +84,12 @@
 
         
 
+        
+
          creates each view type internally through different code paths. If the <see
          cref="M:System.Web.UI.IDataSource.GetView(System.String)" />
+
+        
 
         
 
@@ -86,8 +102,12 @@
 
         
 
+        
+
          control, an <see
          cref="T:System.Web.UI.WebControls.XmlDataSourceView" />
+
+        
 
         
 
@@ -100,8 +120,12 @@
 
         
 
+        
+
          control. If the <see
          cref="M:System.Web.UI.WebControls.XmlDataSource.GetHierarchicalView(System.String)" />
+
+        
 
         
 
@@ -114,8 +138,12 @@
 
         
 
+        
+
          object is created. The <see
          cref="T:System.Web.UI.WebControls.XmlDataSourceView" />
+
+        
 
         
 
@@ -128,8 +156,12 @@
 
         
 
+        
+
          and bind to lists and tabular data, while the <see
          cref="T:System.Web.UI.WebControls.XmlHierarchicalDataSourceView" />
+
+        
 
         
 
@@ -142,8 +174,12 @@
 
         
 
+        
+
          and bind to hierarchical data. Internally, the <see
          cref="T:System.Web.UI.WebControls.DataBoundControl" />
+
+        
 
         
 
@@ -156,8 +192,12 @@
 
         
 
+        
+
          classes call the <see
          cref="Overload:System.Web.UI.WebControls.XmlDataSourceView.Select" />
+
+        
 
         
 
@@ -170,6 +210,8 @@
 
         
 
+        
+
          object view to retrieve data from a data source, while a class derived from <see
          cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" />
 
@@ -177,8 +219,12 @@
 
         
 
+        
+
          calls the <see
          cref="M:System.Web.UI.WebControls.XmlHierarchicalDataSourceView.Select" />
+
+        
 
         
 
@@ -194,8 +240,12 @@
 
         
 
+        
+
          helper objects, the <see
          cref="T:System.Web.UI.WebControls.XmlHierarchicalDataSourceView" />
+
+        
 
         
 
@@ -208,6 +258,8 @@
 
         
 
+        
+
          class only overrides the <see
          cref="M:System.Web.UI.WebControls.XmlHierarchicalDataSourceView.Select" />
 
@@ -215,8 +267,12 @@
 
         
 
+        
+
          method, the associated <see
          cref="T:System.Web.UI.WebControls.XmlDataSource" />
+
+        
 
         
 
@@ -230,6 +286,8 @@
       <para
         >Represents a data view on an XML node or collection of XML nodes for an <see
          cref="T:System.Web.UI.WebControls.XmlDataSource" />
+
+        
 
         
 
@@ -262,8 +320,12 @@
 
             
 
+            
+
              that is returned by <see
              cref="M:System.Web.UI.HierarchicalDataSourceView.Select" />
+
+            
 
             
 
@@ -276,8 +338,12 @@
 
             
 
+            
+
              and can be used like any <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -290,6 +356,8 @@
 
             
 
+            
+
              method to get an <see
              cref="T:System.Collections.IEnumerator" />
 
@@ -297,8 +365,12 @@
 
             
 
+            
+
              and iterate through the collection of <see
              cref="T:System.Xml.XmlNode" />
+
+            
 
             
 
@@ -316,6 +388,8 @@
           <para
             >An <see
              cref="T:System.Web.UI.IHierarchicalEnumerable" />
+
+            
 
             
 

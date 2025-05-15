@@ -33,8 +33,12 @@
 
         
 
+        
+
          is created and pushed on the call stack for every function call made during the execution of a thread. The stack frame always includes <see
          cref="T:System.Reflection.MethodBase" />
+
+        
 
         
 
@@ -49,8 +53,12 @@
 
         
 
+        
+
          information will be most informative with Debug build configurations. By default, Debug builds include debug symbols, while Release builds do not. The debug symbols contain most of the file, method name, line number, and column information used in constructing <see
          cref="T:System.Diagnostics.StackFrame" />
+
+        
 
         
 
@@ -64,6 +72,8 @@
       <para
         >Provides information about a <see
          cref="T:System.Diagnostics.StackFrame" />
+
+        
 
         
 
@@ -95,6 +105,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Diagnostics.StackFrame" />
+
+            
 
             
 
@@ -133,11 +145,15 @@
 
             
 
+            
+
              class, optionally capturing source information.</para
           >
         </summary>
         <param name="fNeedFileInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -175,11 +191,15 @@
 
             
 
+            
+
              class that corresponds to a frame above the current stack frame.</para
           >
         </summary>
         <param name="skipFrames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -221,6 +241,8 @@
 
             
 
+            
+
              class that corresponds to a frame above the current stack frame, optionally capturing source information.</para
           >
         </summary>
@@ -231,10 +253,14 @@
 
           
 
+          
+
           The number of frames up the stack to skip. </param
         >
         <param name="fNeedFileInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -276,6 +302,8 @@
 
             
 
+            
+
              class that contains only the given file name and line number.</para
           >
         </summary>
@@ -286,10 +314,14 @@
 
           
 
+          
+
           The file name. </param
         >
         <param name="lineNumber">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -335,11 +367,15 @@
 
             
 
+            
+
              class that contains only the given file name, line number, and column number.</para
           >
         </summary>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -354,10 +390,14 @@
 
           
 
+          
+
           The line number in the specified file. </param
         >
         <param name="colNumber">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -479,6 +519,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -518,6 +560,8 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Reflection.MethodBase" />
 
@@ -525,8 +569,12 @@
 
             
 
+            
+
              object that is returned by <see
              cref="M:System.Diagnostics.StackFrame.GetMethod" />
+
+            
 
             
 
@@ -573,6 +621,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -614,8 +664,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Diagnostics.StackFrame.GetILOffset" />
+
+            
 
             
 

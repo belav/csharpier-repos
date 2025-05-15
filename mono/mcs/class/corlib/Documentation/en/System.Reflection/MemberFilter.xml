@@ -46,8 +46,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.MulticastDelegate" />
+
+        
 
         
 
@@ -63,6 +67,8 @@
 
         
 
+        
+
          method uses this delegate to filter the list of members that it returns.</para
       >
     </remarks>
@@ -71,6 +77,8 @@
       <para
         >Represents a delegate that is used to filter a list of members represented in an array of <see
          cref="T:System.Reflection.MemberInfo" />
+
+        
 
         
 

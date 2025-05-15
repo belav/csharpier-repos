@@ -25,8 +25,12 @@
 
         
 
+        
+
          and those that derive from <see
          cref="T:System.Web.UI.WebControls.ListControl" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
          must define the <see
          cref="E:System.Web.UI.IEditableTextControl.TextChanged" />
+
+        
 
         
 
@@ -56,8 +64,12 @@
 
         
 
+        
+
          interface contains only the <see
          cref="E:System.Web.UI.IEditableTextControl.TextChanged" />
+
+        
 
         
 
@@ -70,8 +82,12 @@
 
         
 
+        
+
          interface, which defines a <see
          cref="P:System.Web.UI.ITextControl.Text" />
+
+        
 
         
 
@@ -84,8 +100,12 @@
 
         
 
+        
+
          interface, a control must define the <see
          cref="P:System.Web.UI.ITextControl.Text" />
+
+        
 
         
 
@@ -98,8 +118,12 @@
 
         
 
+        
+
          event that occurs when the <see
          cref="P:System.Web.UI.ITextControl.Text" />
+
+        
 
         
 
@@ -114,8 +138,12 @@
 
         
 
+        
+
          is implemented by <see
          cref="T:System.Web.UI.WebControls.TextBox" />
+
+        
 
         
 
@@ -128,8 +156,12 @@
 
         
 
+        
+
         . In those classes, the event is raised through the <see
          cref="M:System.Web.UI.WebControls.ListControl.OnTextChanged(System.EventArgs)" />
+
+        
 
         
 
@@ -142,8 +174,12 @@
 
         
 
+        
+
          methods. A class that implements the <see
          cref="T:System.Web.UI.IEditableTextControl" />
+
+        
 
         
 
@@ -176,8 +212,12 @@
 
             
 
+            
+
              event occurs when the <see
              cref="P:System.Web.UI.ITextControl.Text" />
+
+            
 
             
 
@@ -190,8 +230,12 @@
 
             
 
+            
+
              or the <see
              cref="T:System.Web.UI.WebControls.ListControl" />
+
+            
 
             
 

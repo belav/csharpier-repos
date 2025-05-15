@@ -37,8 +37,12 @@
 
         
 
+        
+
          to collect instances of the <see
          cref="T:System.Data.SqlClient.SqlError" />
+
+        
 
         
 
@@ -51,8 +55,12 @@
 
         
 
+        
+
          always contains at least one instance of the <see
          cref="T:System.Data.SqlClient.SqlError" />
+
+        
 
         
 
@@ -89,8 +97,12 @@
 
             
 
+            
+
              collection into an <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -106,8 +118,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -122,8 +138,12 @@
 
           
 
+          
+
           The index from which to start copying into the <paramref
            name="array" />
+
+          
 
           
 
@@ -165,8 +185,12 @@
 
             
 
+            
+
              collection into a <see
              cref="T:System.Data.SqlClient.SqlErrorCollection" />
+
+            
 
             
 
@@ -182,8 +206,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.SqlClient.SqlErrorCollection" />
+
+          
 
           
 
@@ -198,8 +226,12 @@
 
           
 
+          
+
           The index from which to start copying into the <paramref
            name="array" />
+
+          
 
           
 
@@ -253,6 +285,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -266,8 +300,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Data.SqlClient.SqlErrorCollection" />
+
+            
 
             
 
@@ -330,8 +368,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -345,6 +387,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Collections.ICollection.IsSynchronized" />
+
+            
 
             
 
@@ -380,8 +424,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -395,6 +443,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Collections.ICollection.SyncRoot" />
+
+            
 
             
 

@@ -26,8 +26,12 @@
 
         
 
+        
+
          class specifies the design-time expression editor for the expressions that are handled by an <see
          cref="T:System.Web.Compilation.ExpressionBuilder" />
+
+        
 
         
 
@@ -39,6 +43,8 @@
       <para
         >When developing an expression builder, you can mark the builder with the <see
          cref="T:System.Web.Compilation.ExpressionEditorAttribute" />
+
+        
 
         
 
@@ -71,8 +77,12 @@
 
             
 
+            
+
              constructor to initialize an instance of the <see
              cref="T:System.Web.Compilation.ExpressionEditorAttribute" />
+
+            
 
             
 
@@ -85,8 +95,12 @@
 
             
 
+            
+
              class using a type object, use the <see
              cref="M:System.Web.Compilation.ExpressionEditorAttribute.#ctor(System.Type)" />
+
+            
 
             
 
@@ -105,6 +119,8 @@
 
             
 
+            
+
              class using the specified type name.</para
           >
         </summary>
@@ -115,8 +131,12 @@
 
           
 
+          
+
           The name of the type to associate with the <see
            cref="T:System.Web.UI.Design.ExpressionEditor" />
+
+          
 
           
 
@@ -147,8 +167,12 @@
 
             
 
+            
+
              constructor to initialize an instance of the <see
              cref="T:System.Web.Compilation.ExpressionEditorAttribute" />
+
+            
 
             
 
@@ -161,8 +185,12 @@
 
             
 
+            
+
              class using a type name, use the <see
              cref="M:System.Web.Compilation.ExpressionEditorAttribute.#ctor(System.String)" />
+
+            
 
             
 
@@ -181,6 +209,8 @@
 
             
 
+            
+
              class using the specified type object.</para
           >
         </summary>
@@ -191,8 +221,12 @@
 
           
 
+          
+
           The type reference to associate with the <see
            cref="T:System.Web.UI.Design.ExpressionEditor" />
+
+          
 
           
 
@@ -224,8 +258,12 @@
 
             
 
+            
+
              property to retrieve the name of the type of editor that is associated with this instance of the <see
              cref="T:System.Web.Compilation.ExpressionEditorAttribute" />
+
+            
 
             
 
@@ -265,6 +303,8 @@
 
             
 
+            
+
              class and a specified object are equal.</para
           >
         </summary>
@@ -273,6 +313,8 @@
           <para
             >true if value is not null and <see
              cref="P:System.Web.Compilation.ExpressionEditorAttribute.EditorTypeName" />
+
+            
 
             
 
@@ -288,8 +330,12 @@
 
           
 
+          
+
           An instance of the <see
            cref="T:System.Web.Compilation.ExpressionEditorAttribute" />
+
+          
 
           
 
@@ -321,8 +367,12 @@
 
             
 
+            
+
              attribute is the value of its <see
              cref="P:System.Web.Compilation.ExpressionEditorAttribute.EditorTypeName" />
+
+            
 
             
 
@@ -341,6 +391,8 @@
 
             
 
+            
+
              attribute.</para
           >
         </summary>
@@ -349,6 +401,8 @@
           <para
             >The hash code of the value of this <see
              cref="T:System.Web.Compilation.ExpressionEditorAttribute" />
+
+            
 
             
 

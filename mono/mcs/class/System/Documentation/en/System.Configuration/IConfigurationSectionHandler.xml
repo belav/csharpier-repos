@@ -33,6 +33,8 @@
 
         
 
+        
+
          is deprecated in .NET Framework 2.0 and above. But, because it is used internally, it has been kept. You can find an example at <format
          type="text/html">
           <a href="07f68a3f-2920-4665-a824-47bda744e662"
@@ -44,11 +46,15 @@
 
         
 
+        
+
         . If you use the previous example, please build it with the .NET Framework version 1.0 or 1.1.</para
       >
       <para
         >In .NET Framework version 2.0 and above, you must instead derive from the <see
          cref="T:System.Configuration.ConfigurationSection" />
+
+        
 
         
 
@@ -65,6 +71,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -75,8 +83,12 @@
 
         
 
+        
+
          class must be thread safe and stateless. The <see
          cref="M:System.Configuration.IConfigurationSectionHandler.Create(System.Object,System.Object,System.Xml.XmlNode)" />
+
+        
 
         
 
@@ -92,6 +104,8 @@
 
         
 
+        
+
          method must be thread safe and immutable. Because the configuration objects are cached by the configuration system, it is important not to modify the parent argument to the <see
          cref="M:System.Configuration.IConfigurationSectionHandler.Create(System.Object,System.Object,System.Xml.XmlNode)" />
 
@@ -99,8 +113,12 @@
 
         
 
+        
+
          method. For example, if the return value of <see
          cref="M:System.Configuration.IConfigurationSectionHandler.Create(System.Object,System.Object,System.Xml.XmlNode)" />
+
+        
 
         
 
@@ -149,8 +167,12 @@
 
             
 
+            
+
              class must be thread safe and stateless. The <see
              cref="M:System.Configuration.IConfigurationSectionHandler.Create(System.Object,System.Object,System.Xml.XmlNode)" />
+
+            
 
             
 
@@ -166,6 +188,8 @@
 
             
 
+            
+
              method must be thread safe and immutable. Because the configuration objects are cached by the configuration system, it is important not to modify the parent argument to <see
              cref="M:System.Configuration.IConfigurationSectionHandler.Create(System.Object,System.Object,System.Xml.XmlNode)" />
 
@@ -173,8 +197,12 @@
 
             
 
+            
+
             . For example, if the return value of <see
              cref="M:System.Configuration.IConfigurationSectionHandler.Create(System.Object,System.Object,System.Xml.XmlNode)" />
+
+            
 
             
 
@@ -198,6 +226,8 @@
 
           
 
+          
+
           Parent object.</param
         >
         <param name="configContext">
@@ -207,10 +237,14 @@
 
           
 
+          
+
           Configuration context object.</param
         >
         <param name="section">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

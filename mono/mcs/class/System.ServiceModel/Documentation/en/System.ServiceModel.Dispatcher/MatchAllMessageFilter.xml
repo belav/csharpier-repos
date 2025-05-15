@@ -32,6 +32,8 @@
 
         
 
+        
+
          methods returns true for every message that is not null. </para
       >
     </remarks>
@@ -63,6 +65,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -71,6 +75,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Dispatcher.MatchAllMessageFilter" />
+
+            
 
             
 
@@ -111,6 +117,8 @@
 
             
 
+            
+
              method is that one takes the <see
              cref="T:System.ServiceModel.Channels.MessageBuffer" />
 
@@ -118,8 +126,12 @@
 
             
 
+            
+
              parameter and buffers the entire contents of a message (including its body) into memory, while the other takes the <see
              cref="T:System.ServiceModel.Channels.Message" />
+
+            
 
             
 
@@ -143,8 +155,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Message" />
+
+          
 
           
 
@@ -185,6 +201,8 @@
 
             
 
+            
+
              parameter, which buffers the entire contents of a message (including its body) into memory, and allows the body to be inspected.</para
           >
         </remarks>
@@ -193,6 +211,8 @@
           <para
             >The <see
              cref="M:System.ServiceModel.Dispatcher.MatchAllMessageFilter.Match(System.ServiceModel.MessageBuffer)" />
+
+            
 
             
 

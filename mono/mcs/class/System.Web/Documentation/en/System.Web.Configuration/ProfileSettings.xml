@@ -24,6 +24,8 @@
 
         
 
+        
+
          class provides a way to programmatically access and modify the profiles element of the healthMonitoring section of a configuration file.</para
       >
       <para>Event profiles determine how events are collected by ASP.NET and raised to providers. </para>
@@ -80,6 +82,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -108,6 +112,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -124,6 +130,8 @@
 
             
 
+            
+
              class. using the specified name for the new instance of the class.</para
           >
         </summary>
@@ -134,8 +142,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Web.Configuration.ProfileSettings" />
+
+          
 
           
 
@@ -198,6 +210,8 @@
 
             
 
+            
+
              class, using specified settings for the new instance of the class.</para
           >
         </summary>
@@ -208,8 +222,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Web.Configuration.ProfileSettings" />
+
+          
 
           
 
@@ -224,10 +242,14 @@
 
           
 
+          
+
           The minimum number of event occurrences before the event is raised to the provider. </param
         >
         <param name="maxLimit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -242,8 +264,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -282,6 +308,8 @@
 
             
 
+            
+
              class, using the specified settings for the new instance of the class.</para
           >
         </summary>
@@ -292,8 +320,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Web.Configuration.ProfileSettings" />
+
+          
 
           
 
@@ -308,10 +340,14 @@
 
           
 
+          
+
           The minimum number of event occurrences before the event is raised to the provider. </param
         >
         <param name="maxLimit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -326,8 +362,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -342,8 +382,12 @@
 
           
 
+          
+
           The fully qualified type of a custom class that implements <see
            cref="T:System.Web.Management.IWebEventCustomEvaluator" />
+
+          
 
           
 
@@ -384,6 +428,8 @@
 
             
 
+            
+
              interface.</para
           >
         </summary>
@@ -417,6 +463,8 @@
           <para
             >This property must have a value greater than zero. The value can be made infinite by setting it to <see
              cref="F:System.Int32.MaxValue" />
+
+            
 
             
 
@@ -462,11 +510,15 @@
 
             
 
+            
+
             . Invalid values may cause an exception to be thrown when the configuration section is saved. </para
           >
           <para
             >This property specifies the minimum number of times an event occurs before an event is raised to the provider. For example, a value of 5 means that ASP.NET will not raise an event to the provider until the fifth instance of the event occurs. If the value is infinite (<see
              cref="F:System.Int32.MaxValue" />
+
+            
 
             
 
@@ -511,11 +563,15 @@
 
             
 
+            
+
             . Invalid values may cause an exception when the configuration section is saved. </para
           >
           <para
             >If the value is <see
              cref="F:System.TimeSpan.Zero" />
+
+            
 
             
 
@@ -559,6 +615,8 @@
           <para
             >Gets or sets the name of the <see
              cref="T:System.Web.Configuration.ProfileSettings" />
+
+            
 
             
 

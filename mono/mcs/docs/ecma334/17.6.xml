@@ -12,6 +12,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="24.2">attributes</non_terminal>
@@ -33,8 +35,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -53,6 +59,8 @@
       <name>
         <non_terminal where="17.6">property-modifier</non_terminal>
       </name>
+
+      
 
       
 
@@ -102,6 +110,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="9.4.2">identifier</non_terminal>
@@ -121,8 +131,12 @@
 
     
 
+    
+
      may include a set of attributes (<hyperlink
     >24</hyperlink>
+
+    
 
     
 
@@ -135,8 +149,12 @@
 
     
 
+    
+
     ), the new (<hyperlink
     >17.2.2</hyperlink>
+
+    
 
     
 
@@ -149,6 +167,8 @@
 
     
 
+    
+
     ), virtual (<hyperlink
     >17.5.3</hyperlink>
 
@@ -156,8 +176,12 @@
 
     
 
+    
+
     , <hyperlink
     >17.6.3</hyperlink>
+
+    
 
     
 
@@ -170,8 +194,12 @@
 
     
 
+    
+
     , <hyperlink
     >17.6.3</hyperlink>
+
+    
 
     
 
@@ -184,6 +212,8 @@
 
     
 
+    
+
     ), abstract (<hyperlink
     >17.5.6</hyperlink>
 
@@ -191,8 +221,12 @@
 
     
 
+    
+
     , <hyperlink
     >17.6.3</hyperlink>
+
+    
 
     
 
@@ -208,11 +242,15 @@
 
     
 
+    
+
     ) with regard to valid combinations of modifiers. </paragraph
   >
   <paragraph
     >The type of a property declaration specifies the type of the property introduced by the declaration, and the <non_terminal
      where="17.6">member-name</non_terminal>
+
+    
 
     
 
@@ -225,8 +263,12 @@
 
     
 
+    
+
      is simply an identifier. For an explicit interface member implementation (<hyperlink
     >20.4.1</hyperlink>
+
+    
 
     
 
@@ -239,8 +281,12 @@
 
     
 
+    
+
      consists of an <non_terminal
      where="11.2">interface-type</non_terminal>
+
+    
 
     
 
@@ -256,11 +302,15 @@
 
     
 
+    
+
     ). </paragraph
   >
   <paragraph
     >The <non_terminal
      where="17.6.2">accessor-declarations</non_terminal>
+
+    
 
     
 
@@ -273,12 +323,16 @@
 
     
 
+    
+
     ) of the property. The accessors specify the executable statements associated with reading and writing the property. </paragraph
   >
   <paragraph>Even though the syntax for accessing a property is the same as that for a field, a property is not classified as a variable. Thus, it is not possible to pass a property as a ref or out argument. </paragraph>
   <paragraph
     >When a property declaration includes an extern modifier, the property is said to be an external property. Because an external property declaration provides no actual implementation, each of its  <non_terminal
      where="17.6.2">accessor-declarations</non_terminal>
+
+    
 
     
 

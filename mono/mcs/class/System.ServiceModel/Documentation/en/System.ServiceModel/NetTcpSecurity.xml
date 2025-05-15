@@ -25,8 +25,12 @@
 
         
 
+        
+
          provides the security specifications for <see
          cref="T:System.ServiceModel.NetTcpBinding" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
         , and can be accessed by a read-only property called <see
          cref="P:System.ServiceModel.NetTcpBinding.Security" />
+
+        
 
         
 
@@ -56,8 +64,12 @@
 
         
 
+        
+
          object, you can derive a class from <see
          cref="T:System.ServiceModel.NetTcpBinding" />
+
+        
 
         
 
@@ -71,6 +83,8 @@
       <para
         >Specifies the types of transport-level and message-level security used by an endpoint configured with a <see
          cref="T:System.ServiceModel.NetTcpBinding" />
+
+        
 
         
 
@@ -99,6 +113,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.NetTcpSecurity" />
+
+            
 
             
 
@@ -136,6 +152,8 @@
 
             
 
+            
+
              uses message-level security for the integrity and confidentiality of the SOAP message and for mutual authentication of the communication peers. If this security mode is selected on a binding, the channel stack is configured with message security binding elements and the SOAP messages are secured in compliance with WS-Security* standards.</para
           >
         </remarks>
@@ -144,6 +162,8 @@
           <para
             >Gets the type of message-level security requirements for a service configured with a <see
              cref="T:System.ServiceModel.NetTcpBinding" />
+
+            
 
             
 
@@ -186,6 +206,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -219,6 +241,8 @@
 
             
 
+            
+
              security for integrity and confidentiality of the SOAP message and for mutual authentication. If this security mode is selected on a binding, the channel stack is configured using a secure transport and the SOAP messages are secured using transport security such as HTTPS or SSL over TCP.</para
           >
         </remarks>
@@ -227,6 +251,8 @@
           <para
             >Gets the type of message-level security requirements for an endpoint configured with a <see
              cref="T:System.ServiceModel.NetTcpBinding" />
+
+            
 
             
 

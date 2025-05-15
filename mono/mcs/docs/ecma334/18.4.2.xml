@@ -3,7 +3,7 @@
   <paragraph
     >The DBBool struct below implements a three-valued logical type. The possible values of this type are DBBool.True, DBBool.False, and DBBool.Null, where the Null member indicates an unknown value. Such three-valued logical types are commonly used in databases. <code_example
     >
-<![CDATA[
+      <![CDATA[
 using System;  
 public struct DBBool  
 {  

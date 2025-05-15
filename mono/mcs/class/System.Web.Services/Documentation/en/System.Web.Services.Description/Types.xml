@@ -32,6 +32,8 @@
 
         
 
+        
+
          class, as its name might imply. Instead, it corresponds to the Web Services Description Language (WSDL) &lt;types&gt; element enclosed by the &lt;definitions&gt; root element. For more information about WSDL, see the specification at http://www.w3.org/TR/wsdl/.</para
       >
       <para
@@ -42,8 +44,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.Services.Description.Types.Extensions" />
+
+        
 
         
 
@@ -70,6 +76,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Description.Types" />
+
+            
 
             
 
@@ -105,6 +113,8 @@
 
             
 
+            
+
              class, this property returns an empty collection.</para
           >
         </remarks>
@@ -113,6 +123,8 @@
           <para
             >Gets the collection of <see
              cref="T:System.Web.Services.Description.ServiceDescriptionFormatExtension" />
+
+            
 
             
 
@@ -152,6 +164,8 @@
           <para
             >In the default implementation of the <see
              cref="T:System.Web.Services.Description.Types" />
+
+            
 
             
 

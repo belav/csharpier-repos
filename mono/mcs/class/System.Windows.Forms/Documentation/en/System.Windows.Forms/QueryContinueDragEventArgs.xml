@@ -26,8 +26,12 @@
 
         
 
+        
+
          event occurs during a drag-and-drop operation and allows the drag source to determine whether the drag-and-drop operation should be canceled. A <see
          cref="T:System.Windows.Forms.QueryContinueDragEventArgs" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          event sets <see
          cref="P:System.Windows.Forms.QueryContinueDragEventArgs.Action" />
+
+        
 
         
 
@@ -57,8 +65,12 @@
 
         
 
+        
+
          if the ESC key was pressed and sets Action to <see
          cref="F:System.Windows.Forms.DragAction.Drop" />
+
+        
 
         
 
@@ -76,6 +88,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -84,6 +98,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.Control.QueryContinueDrag" />
+
+        
 
         
 
@@ -117,11 +133,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="keyState">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -136,6 +156,8 @@
 
           
 
+          
+
           true if the ESC key was pressed; otherwise, false. </param
         >
         <param name="action">
@@ -145,8 +167,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DragAction" />
+
+          
 
           
 
@@ -181,8 +207,12 @@
 
             
 
+            
+
              event sets <see
              cref="P:System.Windows.Forms.QueryContinueDragEventArgs.Action" />
+
+            
 
             
 
@@ -195,8 +225,12 @@
 
             
 
+            
+
              if the ESC key was pressed and sets Action to <see
              cref="F:System.Windows.Forms.DragAction.Drop" />
+
+            
 
             
 
@@ -233,8 +267,12 @@
 
             
 
+            
+
              event sets <see
              cref="P:System.Windows.Forms.QueryContinueDragEventArgs.Action" />
+
+            
 
             
 
@@ -247,8 +285,12 @@
 
             
 
+            
+
              if <see
              cref="P:System.Windows.Forms.QueryContinueDragEventArgs.EscapePressed" />
+
+            
 
             
 
@@ -285,8 +327,12 @@
 
             
 
+            
+
              property identify the keys or mouse buttons that were pressed during the operation. For example, if the left mouse button is pressed, the first bit in the <see
              cref="P:System.Windows.Forms.QueryContinueDragEventArgs.KeyState" />
+
+            
 
             
 
@@ -363,8 +409,12 @@
 
             
 
+            
+
              event sets <see
              cref="P:System.Windows.Forms.QueryContinueDragEventArgs.Action" />
+
+            
 
             
 
@@ -377,8 +427,12 @@
 
             
 
+            
+
              if <see
              cref="P:System.Windows.Forms.QueryContinueDragEventArgs.KeyState" />
+
+            
 
             
 

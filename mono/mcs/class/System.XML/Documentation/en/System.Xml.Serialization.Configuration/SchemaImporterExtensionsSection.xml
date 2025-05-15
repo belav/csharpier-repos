@@ -27,6 +27,8 @@
 
         
 
+        
+
         , create an application configuration file and use the following XML elements to specify types used by the class when mapping XSD types to .Net Framework types:</para
       >
       <list type="bullet">
@@ -69,6 +71,8 @@
 
         
 
+        
+
          class. This class cannot be inherited.</para
       >
     </summary>
@@ -88,6 +92,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Serialization.Configuration.SchemaImporterExtensionsSection" />
+
+            
 
             
 

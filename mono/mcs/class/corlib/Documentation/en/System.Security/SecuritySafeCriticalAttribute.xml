@@ -33,8 +33,12 @@
 
         
 
+        
+
          attribute can be accessed by partially trusted types and members. These partially trusted types and members can be within any assembly that is marked with the <see
          cref="T:System.Security.SecurityTransparentAttribute" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          (APTCA) attribute, or they are partially trusted for other reasons, such as being loaded into partial trust. Code that is marked with the <see
          cref="T:System.Security.SecuritySafeCriticalAttribute" />
+
+        
 
         
 
@@ -82,6 +90,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.SecuritySafeCriticalAttribute" />
+
+            
 
             
 

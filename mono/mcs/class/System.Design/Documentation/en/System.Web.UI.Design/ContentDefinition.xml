@@ -43,11 +43,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="id">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -62,10 +66,14 @@
 
           
 
+          
+
           The default HTML markup content.</param
         >
         <param name="designTimeHtml">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -92,6 +100,8 @@
           <para
             >Gets the ID of the <see
              cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
+
+            
 
             
 

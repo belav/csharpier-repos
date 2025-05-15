@@ -54,11 +54,15 @@
 
         
 
+        
+
          instance can have either of two values: true, or false.</para
       >
       <para
         >The <see
          cref="T:System.Boolean" />
+
+        
 
         
 
@@ -82,6 +86,8 @@
 
             
 
+            
+
              and <see
              cref="M:System.Boolean.TryParse(System.String,System.Boolean@)" />
           </para>
@@ -90,6 +96,8 @@
           <para
             >Comparing values: <see
              cref="M:System.Boolean.CompareTo(System.Boolean)" />
+
+            
 
             
 
@@ -141,8 +149,12 @@
 
         
 
+        
+
          is either "True" for a true value or "False" for a false value. The string representation of a <see
          cref="T:System.Boolean" />
+
+        
 
         
 
@@ -155,8 +167,12 @@
 
         
 
+        
+
          and <see
          cref="F:System.Boolean.FalseString" />
+
+        
 
         
 
@@ -172,8 +188,12 @@
 
         
 
+        
+
          method to convert Boolean values to strings. The Boolean structure includes two <see
          cref="M:System.Boolean.ToString" />
+
+        
 
         
 
@@ -186,6 +206,8 @@
 
         
 
+        
+
          method and the <see
          cref="M:System.Boolean.ToString(System.IFormatProvider)" />
 
@@ -193,8 +215,12 @@
 
         
 
+        
+
          method, which includes a parameter that controls formatting. However, because this parameter is ignored, the two overloads produce identical strings. The <see
          cref="M:System.Boolean.ToString(System.IFormatProvider)" />
+
+        
 
         
 
@@ -210,6 +236,8 @@
 
         
 
+        
+
          method. Note that the example uses the <format
          type="text/html">
           <a href="87b7d528-73f6-43c6-b71a-f23043039a49">composite formatting</a>
@@ -219,8 +247,12 @@
 
         
 
+        
+
          feature, so the <see
          cref="M:System.Boolean.ToString" />
+
+        
 
         
 
@@ -237,10 +269,14 @@
 
         
 
+        
+
          structure can have only two values, it is easy to add custom formatting. For simple custom formatting in which other string literals are substituted for "True" and "False", you can use any conditional evaluation feature supported by your language, such as the <format
          type="text/html">
           <a href="e83a17f1-7500-48ba-8bee-2fbc4c847af4">conditional operator</a>
         </format>
+
+        
 
         
 
@@ -255,8 +291,12 @@
 
         
 
+        
+
           in Visual Basic. The following example uses this technique to format <see
          cref="T:System.Boolean" />
+
+        
 
         
 
@@ -273,8 +313,12 @@
 
         
 
+        
+
          method and provide an <see
          cref="T:System.ICustomFormatter" />
+
+        
 
         
 
@@ -287,8 +331,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.IFormatProvider" />
+
+        
 
         
 
@@ -300,10 +348,10 @@
       <para
         >Optionally, you can use <format
          type="text/html">
-          <a href="8ad495d4-2941-40cf-bf64-e82e85825890"
->resource files</a
-          >
+          <a href="8ad495d4-2941-40cf-bf64-e82e85825890">resource files</a>
         </format>
+
+        
 
         
 
@@ -325,8 +373,12 @@
 
         
 
+        
+
          structure implements the <see
          cref="T:System.IConvertible" />
+
+        
 
         
 
@@ -339,8 +391,12 @@
 
         
 
+        
+
          class to perform conversions between a <see
          cref="T:System.Boolean" />
+
+        
 
         
 
@@ -353,6 +409,8 @@
 
         
 
+        
+
          structure's explicit implementations. However, conversions between a <see
          cref="T:System.Boolean" />
 
@@ -360,8 +418,12 @@
 
         
 
+        
+
          and the following types are not supported, so the corresponding conversion methods throw an <see
          cref="T:System.InvalidCastException" />
+
+        
 
         
 
@@ -379,8 +441,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -393,8 +459,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Convert.ToChar(System.Boolean)" />
+
+            
 
             
 
@@ -412,8 +482,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -426,8 +500,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Convert.ToDateTime(System.Boolean)" />
+
+            
 
             
 
@@ -445,12 +523,16 @@
 
         
 
+        
+
          class. </para
       >
       <para>code reference: System.Boolean.Structure#6</para>
       <para
         >When converting from floating-point values to Boolean values, the conversion methods perform an exact comparison with zero. If the floating-point value has lost precision, the result can be unexpected. This is illustrated in the following example, in which a <see
          cref="T:System.Double" />
+
+        
 
         
 
@@ -466,6 +548,8 @@
 
         
 
+        
+
          class convert true to 1 and false to 0. However, Visual Basic conversion functions convert true to either 255 (for conversions to <see
          cref="T:System.Byte" />
 
@@ -473,8 +557,12 @@
 
         
 
+        
+
          values) or -1 (for all other numeric conversions). The following example converts true to numeric values by using a <see
          cref="T:System.Convert" />
+
+        
 
         
 
@@ -491,10 +579,14 @@
 
         
 
+        
+
          to string values, see the <format
          type="text/html">
           <a href="#Formatting">Formatting Boolean Values</a>
         </format>
+
+        
 
         
 
@@ -507,10 +599,14 @@
 
         
 
+        
+
          values, see the <format
          type="text/html">
           <a href="#Parsing">Parsing Boolean Values</a>
         </format>
+
+        
 
         
 
@@ -532,8 +628,12 @@
 
         
 
+        
+
          structure includes two static parsing methods, <see
          cref="M:System.Boolean.Parse(System.String)" />
+
+        
 
         
 
@@ -546,6 +646,8 @@
 
         
 
+        
+
         , that convert a string to a Boolean value. The string representation of a Boolean value is defined by the case-insensitive equivalents of the values of the <see
          cref="F:System.Boolean.TrueString" />
 
@@ -553,8 +655,12 @@
 
         
 
+        
+
          and <see
          cref="F:System.Boolean.FalseString" />
+
+        
 
         
 
@@ -570,8 +676,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Boolean.TryParse(System.String,System.Boolean@)" />
+
+        
 
         
 
@@ -596,8 +706,12 @@
 
         
 
+        
+
          method, which indicates whether an instance is greater than, less than, or equal to a specified value. Typically, to compare two Boolean variables, you call the <see
          cref="M:System.Boolean.Equals(System.Boolean)" />
+
+        
 
         
 
@@ -626,6 +740,8 @@
 
           
 
+          
+
            structure to work with sets of Boolean values. </para
         >
       </block>
@@ -637,8 +753,12 @@
 
         
 
+        
+
          method. The method returns a byte array with a single element. To restore a Boolean value from its binary representation, you can call the <see
          cref="M:System.BitConverter.ToBoolean(System.Byte[],System.Int32)" />
+
+        
 
         
 
@@ -654,8 +774,12 @@
 
         
 
+        
+
          method to convert a Boolean value to its binary representation and displays the individual bits of the value, and then calls the <see
          cref="M:System.BitConverter.ToBoolean(System.Byte[],System.Int32)" />
+
+        
 
         
 
@@ -682,8 +806,12 @@
 
         
 
+        
+
          method, the final parameter, <paramref
          name="ignoreCase" />
+
+        
 
         
 
@@ -696,8 +824,12 @@
 
         
 
+        
+
          is true) or case-sensitive (<paramref
          name="ignoreCase" />
+
+        
 
         
 
@@ -750,6 +882,8 @@
 
             
 
+            
+
              interface and performs slightly better than the <see
              cref="M:System.Boolean.CompareTo(System.Object)" />
 
@@ -757,8 +891,12 @@
 
             
 
+            
+
              method because it does not have to convert the <paramref
              name="value" />
+
+            
 
             
 
@@ -774,11 +912,15 @@
 
             
 
+            
+
              has fewer bits (is narrower) than the instance type, some programming languages perform an implicit widening conversion that transforms the value of the parameter into a value with more bits.</para
           >
           <para
             >For example, suppose the instance type is <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -791,8 +933,12 @@
 
             
 
+            
+
             . The Microsoft C# compiler generates instructions to represent the value of the parameter as an <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -805,8 +951,12 @@
 
             
 
+            
+
              method to compare the <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -826,6 +976,8 @@
 
             
 
+            
+
              object and returns an integer that indicates their relationship to one another.</para
           >
         </summary>
@@ -834,6 +986,8 @@
           <para
             >A signed integer that indicates the relative values of this instance and <paramref
              name="value" />
+
+            
 
             
 
@@ -865,6 +1019,8 @@
 
                   
 
+                  
+
                    is true. </para
                 >
               </description>
@@ -877,6 +1033,8 @@
                 <para
                   >This instance and <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -899,6 +1057,8 @@
 
                   
 
+                  
+
                    is false. </para
                 >
               </description>
@@ -912,8 +1072,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -953,8 +1117,12 @@
 
           
 
+          
+
            is not a <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -971,11 +1139,15 @@
 
             
 
+            
+
              must be null or an instance of Boolean; otherwise, an exception is thrown.</para
           >
           <para
             >This method implements the <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -993,6 +1165,8 @@
           <para
             >A signed integer that indicates the relative order of this instance and <paramref
              name="obj" />
+
+            
 
             
 
@@ -1024,6 +1198,8 @@
 
                   
 
+                  
+
                    is true. </para
                 >
               </description>
@@ -1036,6 +1212,8 @@
                 <para
                   >This instance and <paramref
                    name="obj" />
+
+                  
 
                   
 
@@ -1058,11 +1236,15 @@
 
                   
 
+                  
+
                    is false.</para
                 >
                 <para>-or- </para>
                 <para>
                   <paramref name="obj" />
+
+                  
 
                   
 
@@ -1076,6 +1258,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1115,6 +1299,8 @@
 
             
 
+            
+
              interface, and performs slightly better than <see
              cref="M:System.Boolean.Equals(System.Object)" />
 
@@ -1122,8 +1308,12 @@
 
             
 
+            
+
              because it does not have to convert the <paramref
              name="obj" />
+
+            
 
             
 
@@ -1142,6 +1332,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1150,6 +1342,8 @@
           <para
             >true if <paramref
              name="obj" />
+
+            
 
             
 
@@ -1165,8 +1359,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -1206,6 +1404,8 @@
 
           
 
+          
+
           An object to compare to this instance. </param
         >
         <remarks>
@@ -1213,6 +1413,8 @@
           <para
             >This method overrides <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -1235,8 +1437,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -1247,6 +1453,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1315,6 +1523,8 @@
 
             
 
+            
+
              class implements true as the integer, one, and false as the integer, zero. However, a particular programming language might represent true and false with other values.</para
           >
         </remarks>
@@ -1327,6 +1537,8 @@
           <para
             >A hash code for the current <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -1366,8 +1578,12 @@
 
             
 
+            
+
              for value type <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -1381,6 +1597,8 @@
           <para
             >The enumerated constant, <see
              cref="F:System.TypeCode.Boolean" />
+
+            
 
             
 
@@ -1421,10 +1639,14 @@
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="value" />
+
+          
 
           
 
@@ -1437,8 +1659,12 @@
 
           
 
+          
+
            or <see
            cref="F:System.Boolean.FalseString" />
+
+          
 
           
 
@@ -1450,6 +1676,8 @@
           <para
             >The following example demonstrates the <see
              cref="M:System.Boolean.Parse(System.String)" />
+
+            
 
             
 
@@ -1483,8 +1711,12 @@ public class BoolParse {
 
             
 
+            
+
              parameter, optionally preceded or trailed by white space, must contain a string that is equal to the value of either the <see
              cref="F:System.Boolean.TrueString" />
+
+            
 
             
 
@@ -1497,8 +1729,12 @@ public class BoolParse {
 
             
 
+            
+
              field; otherwise, a <see
              cref="T:System.FormatException" />
+
+            
 
             
 
@@ -1514,8 +1750,12 @@ public class BoolParse {
 
             
 
+            
+
              method to parse a string without having to handle the <see
              cref="T:System.FormatException" />
+
+            
 
             
 
@@ -1534,6 +1774,8 @@ public class BoolParse {
 
             
 
+            
+
              equivalent, or throws an exception if the string is not equal to the value of <see
              cref="F:System.Boolean.TrueString" />
 
@@ -1541,8 +1783,12 @@ public class BoolParse {
 
             
 
+            
+
              or <see
              cref="F:System.Boolean.FalseString" />
+
+            
 
             
 
@@ -1561,8 +1807,12 @@ public class BoolParse {
 
             
 
+            
+
              is equal to the value of the <see
              cref="F:System.Boolean.TrueString" />
+
+            
 
             
 
@@ -1575,8 +1825,12 @@ public class BoolParse {
 
             
 
+            
+
              is equal to the value of the <see
              cref="F:System.Boolean.FalseString" />
+
+            
 
             
 
@@ -1587,6 +1841,8 @@ public class BoolParse {
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1629,8 +1885,12 @@ public class BoolParse {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
+
+            
 
             
 
@@ -1649,6 +1909,8 @@ public class BoolParse {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -1658,6 +1920,8 @@ public class BoolParse {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1696,6 +1960,8 @@ public class BoolParse {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -1703,8 +1969,12 @@ public class BoolParse {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToByte(System.Boolean)" />
+
+            
 
             
 
@@ -1723,6 +1993,8 @@ public class BoolParse {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -1732,6 +2004,8 @@ public class BoolParse {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1771,6 +2045,8 @@ public class BoolParse {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1780,6 +2056,8 @@ public class BoolParse {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1822,6 +2100,8 @@ public class BoolParse {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1831,6 +2111,8 @@ public class BoolParse {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1872,6 +2154,8 @@ public class BoolParse {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -1879,8 +2163,12 @@ public class BoolParse {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToDecimal(System.Boolean)" />
+
+            
 
             
 
@@ -1899,6 +2187,8 @@ public class BoolParse {
 
             
 
+            
+
             ..</para
           >
         </summary>
@@ -1908,6 +2198,8 @@ public class BoolParse {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1949,6 +2241,8 @@ public class BoolParse {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -1956,8 +2250,12 @@ public class BoolParse {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToDouble(System.Boolean)" />
+
+            
 
             
 
@@ -1976,6 +2274,8 @@ public class BoolParse {
 
             
 
+            
+
             ..</para
           >
         </summary>
@@ -1985,6 +2285,8 @@ public class BoolParse {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2026,6 +2328,8 @@ public class BoolParse {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -2033,8 +2337,12 @@ public class BoolParse {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToInt16(System.Boolean)" />
+
+            
 
             
 
@@ -2053,6 +2361,8 @@ public class BoolParse {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -2062,6 +2372,8 @@ public class BoolParse {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2100,6 +2412,8 @@ public class BoolParse {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -2107,8 +2421,12 @@ public class BoolParse {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToInt32(System.Boolean)" />
+
+            
 
             
 
@@ -2127,6 +2445,8 @@ public class BoolParse {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -2136,6 +2456,8 @@ public class BoolParse {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2177,6 +2499,8 @@ public class BoolParse {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -2184,8 +2508,12 @@ public class BoolParse {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToInt64(System.Boolean)" />
+
+            
 
             
 
@@ -2204,6 +2532,8 @@ public class BoolParse {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -2213,6 +2543,8 @@ public class BoolParse {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2254,6 +2586,8 @@ public class BoolParse {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -2261,8 +2595,12 @@ public class BoolParse {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToSByte(System.Boolean)" />
+
+            
 
             
 
@@ -2281,6 +2619,8 @@ public class BoolParse {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -2290,6 +2630,8 @@ public class BoolParse {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2331,6 +2673,8 @@ public class BoolParse {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -2338,8 +2682,12 @@ public class BoolParse {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToSingle(System.Boolean)" />
+
+            
 
             
 
@@ -2358,6 +2706,8 @@ public class BoolParse {
 
             
 
+            
+
             ..</para
           >
         </summary>
@@ -2367,6 +2717,8 @@ public class BoolParse {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2410,6 +2762,8 @@ public class BoolParse {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -2417,8 +2771,12 @@ public class BoolParse {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ChangeType(System.Object,System.Type,System.IFormatProvider)" />
+
+            
 
             
 
@@ -2432,6 +2790,8 @@ public class BoolParse {
           <para
             >For a description of this member, see <see
              cref="M:System.IConvertible.ToType(System.Type,System.IFormatProvider)" />
+
+            
 
             
 
@@ -2451,8 +2811,12 @@ public class BoolParse {
 
           
 
+          
+
           An <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -2494,6 +2858,8 @@ public class BoolParse {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -2501,8 +2867,12 @@ public class BoolParse {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToUInt16(System.Boolean)" />
+
+            
 
             
 
@@ -2521,6 +2891,8 @@ public class BoolParse {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -2530,6 +2902,8 @@ public class BoolParse {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2571,6 +2945,8 @@ public class BoolParse {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -2578,8 +2954,12 @@ public class BoolParse {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToUInt32(System.Boolean)" />
+
+            
 
             
 
@@ -2598,6 +2978,8 @@ public class BoolParse {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -2607,6 +2989,8 @@ public class BoolParse {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2648,6 +3032,8 @@ public class BoolParse {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -2655,8 +3041,12 @@ public class BoolParse {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToUInt64(System.Boolean)" />
+
+            
 
             
 
@@ -2675,6 +3065,8 @@ public class BoolParse {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -2684,6 +3076,8 @@ public class BoolParse {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2724,6 +3118,8 @@ public class BoolParse {
 
             
 
+            
+
              object returned by the <see
              cref="M:System.Boolean.ToString" />
 
@@ -2731,8 +3127,12 @@ public class BoolParse {
 
             
 
+            
+
              method is to be written to an XML file, its <see
              cref="M:System.String.ToLower" />
+
+            
 
             
 
@@ -2754,8 +3154,12 @@ public class BoolParse {
 
             
 
+            
+
              if the value of this instance is true, or <see
              cref="F:System.Boolean.FalseString" />
+
+            
 
             
 
@@ -2800,6 +3204,8 @@ public class BoolParse {
 
             
 
+            
+
              parameter is reserved. It does not participate in the execution of this method. This means that the <see
              cref="M:System.Boolean.ToString(System.IFormatProvider)" />
 
@@ -2807,8 +3213,12 @@ public class BoolParse {
 
             
 
+            
+
              method, unlike most methods with a <paramref
              name="provider" />
+
+            
 
             
 
@@ -2824,6 +3234,8 @@ public class BoolParse {
 
             
 
+            
+
              object returned by the <see
              cref="M:System.Boolean.ToString(System.IFormatProvider)" />
 
@@ -2831,8 +3243,12 @@ public class BoolParse {
 
             
 
+            
+
              method is to be written to an XML file, its <see
              cref="M:System.String.ToLower" />
+
+            
 
             
 
@@ -2855,8 +3271,12 @@ public class BoolParse {
 
             
 
+            
+
              if the value of this instance is true, or <see
              cref="F:System.Boolean.FalseString" />
+
+            
 
             
 
@@ -2872,8 +3292,12 @@ public class BoolParse {
 
           
 
+          
+
           (Reserved) An <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 

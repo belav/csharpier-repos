@@ -35,6 +35,8 @@
 
         
 
+        
+
          is used to relate two <see
          cref="T:System.Data.DataTable" />
 
@@ -42,8 +44,12 @@
 
         
 
+        
+
          objects to each other through <see
          cref="T:System.Data.DataColumn" />
+
+        
 
         
 
@@ -60,11 +66,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >Relationships are created between matching columns in the parent and child tables. That is, the <see
          cref="P:System.Data.DataColumn.DataType" />
+
+        
 
         
 
@@ -80,8 +90,12 @@
 
         
 
+        
+
          to its child rows. To control how values are changed in child rows, add a <see
          cref="T:System.Data.ForeignKeyConstraint" />
+
+        
 
         
 
@@ -94,6 +108,8 @@
 
         
 
+        
+
          of the <see
          cref="T:System.Data.DataTable" />
 
@@ -101,8 +117,12 @@
 
         
 
+        
+
          object. The <see
          cref="T:System.Data.ConstraintCollection" />
+
+        
 
         
 
@@ -118,8 +138,12 @@
 
         
 
+        
+
          is created, it first verifies that the relationship can be established. After it is added to the <see
          cref="T:System.Data.DataRelationCollection" />
+
+        
 
         
 
@@ -132,8 +156,12 @@
 
         
 
+        
+
          is created and added to the <see
          cref="T:System.Data.DataRelationCollection" />
+
+        
 
         
 
@@ -151,8 +179,12 @@
 
         
 
+        
+
          objects are contained in a <see
          cref="T:System.Data.DataRelationCollection" />
+
+        
 
         
 
@@ -165,8 +197,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -179,6 +215,8 @@
 
         
 
+        
+
          and <see
          cref="P:System.Data.DataTable.ParentRelations" />
 
@@ -186,8 +224,12 @@
 
         
 
+        
+
          properties of the <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -201,6 +243,8 @@
       <para
         >Represents a parent/child relationship between two <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -235,6 +279,8 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.Data.DataRelation" />
 
@@ -242,8 +288,12 @@
 
             
 
+            
+
              name, and parent and child <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -259,6 +309,8 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Data.DataRelation" />
 
@@ -266,8 +318,12 @@
 
           
 
+          
+
           . If null or an empty string (""), a default name will be given when the created object is added to the <see
            cref="T:System.Data.DataRelationCollection" />
+
+          
 
           
 
@@ -282,8 +338,12 @@
 
           
 
+          
+
           The parent <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -298,8 +358,12 @@
 
           
 
+          
+
           The child <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -337,6 +401,8 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.Data.DataRelation" />
 
@@ -344,8 +410,12 @@
 
             
 
+            
+
              name and matched arrays of parent and child <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -361,8 +431,12 @@
 
           
 
+          
+
           The name of the relation. If null or an empty string (""), a default name will be given when the created object is added to the <see
            cref="T:System.Data.DataRelationCollection" />
+
+          
 
           
 
@@ -377,8 +451,12 @@
 
           
 
+          
+
           An array of parent <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -393,8 +471,12 @@
 
           
 
+          
+
           An array of child <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -433,8 +515,12 @@
 
             
 
+            
+
              class using the specified name, parent and child <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -450,8 +536,12 @@
 
           
 
+          
+
           The name of the relation. If null or an empty string (""), a default name will be given when the created object is added to the <see
            cref="T:System.Data.DataRelationCollection" />
+
+          
 
           
 
@@ -466,8 +556,12 @@
 
           
 
+          
+
           The parent <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -482,8 +576,12 @@
 
           
 
+          
+
           The child <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -493,6 +591,8 @@
         >
         <param name="createConstraints">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -531,8 +631,12 @@
 
             
 
+            
+
              class using the specified name, matched arrays of parent and child <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -548,8 +652,12 @@
 
           
 
+          
+
           The name of the relation. If null or an empty string (""), a default name will be given when the created object is added to the <see
            cref="T:System.Data.DataRelationCollection" />
+
+          
 
           
 
@@ -564,8 +672,12 @@
 
           
 
+          
+
           An array of parent <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -580,8 +692,12 @@
 
           
 
+          
+
           An array of child <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -591,6 +707,8 @@
         >
         <param name="createConstraints">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -630,8 +748,12 @@
 
             
 
+            
+
              object created by using this constructor must be added to the collection with the <see
              cref="M:System.Data.DataRelationCollection.AddRange(System.Data.DataRelation[])" />
+
+            
 
             
 
@@ -644,8 +766,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Data.DataTable.EndInit" />
+
+            
 
             
 
@@ -658,6 +784,8 @@
 
             
 
+            
+
              and <see
              cref="M:System.Data.DataTable.EndInit" />
 
@@ -665,8 +793,12 @@
 
             
 
+            
+
              a <see
              cref="T:System.NullReferenceException" />
+
+            
 
             
 
@@ -686,8 +818,12 @@
 
           
 
+          
+
           The name of the relation. If null or an empty string (""), a default name will be given when the created object is added to the <see
            cref="T:System.Data.DataRelationCollection" />
+
+          
 
           
 
@@ -702,8 +838,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -718,8 +858,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -734,6 +878,8 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Data.DataColumn" />
 
@@ -741,8 +887,12 @@
 
           
 
+          
+
            object names in the parent <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -757,8 +907,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -771,10 +925,14 @@
 
           
 
+          
+
            of the relation. </param
         >
         <param name="nested">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -830,8 +988,12 @@
 
             
 
+            
+
              object created by using this constructor must then be added to the collection with <see
              cref="M:System.Data.DataRelationCollection.AddRange(System.Data.DataRelation[])" />
+
+            
 
             
 
@@ -844,8 +1006,12 @@
 
             
 
+            
+
              has been called before calling this constructor, the tables and columns with the specified names must exist at the time that <see
              cref="M:System.Data.DataTable.EndInit" />
+
+            
 
             
 
@@ -865,6 +1031,8 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Data.DataRelation" />
 
@@ -872,8 +1040,12 @@
 
           
 
+          
+
           . If null or an empty string (""), a default name will be given when the created object is added to the <see
            cref="T:System.Data.DataRelationCollection" />
+
+          
 
           
 
@@ -888,8 +1060,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -904,8 +1080,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -920,6 +1100,8 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Data.DataColumn" />
 
@@ -927,8 +1109,12 @@
 
           
 
+          
+
            object names in the parent <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -943,8 +1129,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -957,10 +1147,14 @@
 
           
 
+          
+
            of the relation.</param
         >
         <param name="nested">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1011,6 +1205,8 @@
 
             
 
+            
+
              objects of this relation.</para
           >
         </summary>
@@ -1041,6 +1237,8 @@
 
             
 
+            
+
              exists for this relationship, it will be created automatically, and pointed to by the ChildKeyConstraint, when the relation is added to the collection of relations.</para
           >
         </remarks>
@@ -1049,6 +1247,8 @@
           <para
             >Gets the <see
              cref="T:System.Data.ForeignKeyConstraint" />
+
+            
 
             
 
@@ -1103,8 +1303,12 @@
 
             
 
+            
+
              associated with a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1117,8 +1321,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1137,8 +1345,12 @@
 
             
 
+            
+
              to which the <see
              cref="T:System.Data.DataRelation" />
+
+            
 
             
 
@@ -1182,8 +1394,12 @@
 
             
 
+            
+
              to add custom information to a <see
              cref="T:System.Data.DataRelation" />
+
+            
 
             
 
@@ -1199,8 +1415,12 @@
 
             
 
+            
+
             . Properties that are not of type String are not persisted when the <see
              cref="T:System.Data.DataRelation" />
+
+            
 
             
 
@@ -1243,10 +1463,14 @@
 
             
 
+            
+
              objects to define hierarchical relationships, such as those specified in XML. For more information, see <format
              type="text/html">
               <a href="9530f9c9-dd98-4b93-8cdb-40d7f1e8d0ab">Nested DataRelations</a>
             </format>
+
+            
 
             
 
@@ -1263,6 +1487,8 @@
 
               
 
+              
+
                of the child table in the relation matches the <see
                cref="P:System.Data.DataColumn.ColumnName" />
 
@@ -1270,8 +1496,12 @@
 
               
 
+              
+
                of a column in the parent table in the relation, the <see
                cref="P:System.Data.DataRelation.Nested" />
+
+              
 
               
 
@@ -1286,6 +1516,8 @@
           <para
             >Gets or sets a value that indicates whether <see
              cref="T:System.Data.DataRelation" />
+
+            
 
             
 
@@ -1334,6 +1566,8 @@
 
           
 
+          
+
           Parameter reference.</param
         >
       </Docs>
@@ -1360,8 +1594,12 @@
 
             
 
+            
+
              objects that are the parent columns of this <see
              cref="T:System.Data.DataRelation" />
+
+            
 
             
 
@@ -1398,8 +1636,12 @@
 
             
 
+            
+
              that guarantees that values in the parent column of a <see
              cref="T:System.Data.DataRelation" />
+
+            
 
             
 
@@ -1436,8 +1678,12 @@
 
             
 
+            
+
              of this <see
              cref="T:System.Data.DataRelation" />
+
+            
 
             
 
@@ -1478,6 +1724,8 @@
 
           
 
+          
+
           Parameter reference.</param
         >
       </Docs>
@@ -1501,6 +1749,8 @@
 
             
 
+            
+
              property to retrieve a <see
              cref="T:System.Data.DataRelation" />
 
@@ -1508,8 +1758,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Data.DataRelationCollection" />
+
+            
 
             
 
@@ -1528,8 +1782,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Data.DataRelationCollection" />
+
+            
 
             
 
@@ -1568,6 +1826,8 @@
 
             
 
+            
+
             , if one exists.</para
           >
         </summary>
@@ -1576,6 +1836,8 @@
           <para
             >The value of the <see
              cref="P:System.Data.DataRelation.RelationName" />
+
+            
 
             
 

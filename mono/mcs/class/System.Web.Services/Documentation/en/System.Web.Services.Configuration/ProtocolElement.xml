@@ -59,6 +59,8 @@
 
             
 
+            
+
              property.</para
           >
         </summary>
@@ -69,8 +71,12 @@
 
           
 
+          
+
           The value to initialize <see
            cref="P:System.Web.Services.Configuration.ProtocolElement.Name" />
+
+          
 
           
 

@@ -27,8 +27,12 @@
 
         
 
+        
+
          class instance acts as a session to send HTTP requests. An <see
          cref="T:System.Net.Http.HttpClient" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          instance uses its own connection pool, isolating its requests from requests executed by other <see
          cref="T:System.Net.Http.HttpClient" />
+
+        
 
         
 
@@ -58,11 +66,15 @@
 
         
 
+        
+
          also acts as a base class for more specific HTTP clients. An example would be a FacebookHttpClient providing additional methods specific to a Facebook web service (a GetFriends method, for instance).</para
       >
       <para
         >By default, <see
          cref="T:System.Net.HttpWebRequest" />
+
+        
 
         
 
@@ -75,6 +87,8 @@
 
         
 
+        
+
          instance as parameter. If features like authentication or caching are required, <see
          cref="T:System.Net.Http.WebRequestHandler" />
 
@@ -82,8 +96,12 @@
 
         
 
+        
+
          can be used to configure settings and the instance can be passed to the constructor. The returned handler can be passed to one of the constructor overloads taking a <see
          cref="T:System.Net.Http.HttpMessageHandler" />
+
+        
 
         
 
@@ -99,8 +117,12 @@
 
         
 
+        
+
          and related classes in the  <see
          cref="N:System.Net.Http" />
+
+        
 
         
 
@@ -186,6 +208,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -218,8 +242,12 @@
 
             
 
+            
+
               parameter, the <see
              cref="T:System.Net.Http.WebRequestHandler" />
+
+            
 
             
 
@@ -238,11 +266,15 @@
 
             
 
+            
+
              class with a specific handler.</para
           >
         </summary>
         <param name="handler">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -281,11 +313,15 @@
 
             
 
+            
+
              class with a specific handler.</para
           >
         </summary>
         <param name="handler">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -298,10 +334,14 @@
 
           
 
+          
+
            responsible for processing the HTTP response messages.</param
         >
         <param name="disposeHandler">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -333,8 +373,12 @@
 
             
 
+            
+
              with a relative Uri, the message Uri will be added to the <see
              cref="P:System.Net.Http.HttpClient.BaseAddress" />
+
+            
 
             
 
@@ -369,6 +413,8 @@
           <para
             >After calling this method, the <see
              cref="T:System.Net.Http.HttpClient" />
+
+            
 
             
 
@@ -441,6 +487,8 @@
 
             
 
+            
+
              object will complete after the whole response (including content) is read.</para
           >
         </remarks>
@@ -458,12 +506,16 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="requestUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -503,6 +555,8 @@
 
             
 
+            
+
              object will complete after the whole response (including content) is read.</para
           >
         </remarks>
@@ -520,12 +574,16 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="requestUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -566,6 +624,8 @@
 
             
 
+            
+
              object will complete after the whole response (including content) is read.</para
           >
         </remarks>
@@ -583,6 +643,8 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
@@ -594,10 +656,14 @@
 
           
 
+          
+
           The Uri the request is sent to.</param
         >
         <param name="cancellationToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -638,6 +704,8 @@
 
             
 
+            
+
              object will complete after the whole response (including content) is read.</para
           >
         </remarks>
@@ -655,6 +723,8 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
@@ -666,10 +736,14 @@
 
           
 
+          
+
           The Uri the request is sent to.</param
         >
         <param name="cancellationToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -706,8 +780,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -720,8 +798,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -737,8 +819,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Net.Http.HttpClient" />
+
+            
 
             
 
@@ -749,6 +835,8 @@
           <para
             >When this method is called, the <see
              cref="M:System.Net.Http.HttpClient.CancelPendingRequests" />
+
+            
 
             
 
@@ -767,11 +855,15 @@
 
             
 
+            
+
              and optionally disposes of the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -811,6 +903,8 @@
 
             
 
+            
+
              object will complete after the whole response (including content) is read.</para
           >
         </remarks>
@@ -828,12 +922,16 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="requestUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -873,6 +971,8 @@
 
             
 
+            
+
              object will complete after the whole response (including content) is read.</para
           >
         </remarks>
@@ -890,12 +990,16 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="requestUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -936,8 +1040,12 @@
 
             
 
+            
+
              object will complete based on the <paramref
              name="completionOption" />
+
+            
 
             
 
@@ -960,6 +1068,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -970,10 +1080,14 @@
 
           
 
+          
+
           The Uri the request is sent to.</param
         >
         <param name="completionOption">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1014,6 +1128,8 @@
 
             
 
+            
+
              object will complete after the whole response (including content) is read.</para
           >
         </remarks>
@@ -1031,6 +1147,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1041,10 +1159,14 @@
 
           
 
+          
+
           The Uri the request is sent to.</param
         >
         <param name="cancellationToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1085,8 +1207,12 @@
 
             
 
+            
+
              object will complete based on the <paramref
              name="completionOption" />
+
+            
 
             
 
@@ -1109,6 +1235,8 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
@@ -1120,10 +1248,14 @@
 
           
 
+          
+
           The Uri the request is sent to.</param
         >
         <param name="completionOption">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1164,6 +1296,8 @@
 
             
 
+            
+
              object will complete after the whole response (including content) is read.</para
           >
         </remarks>
@@ -1181,6 +1315,8 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
@@ -1192,10 +1328,14 @@
 
           
 
+          
+
           The Uri the request is sent to.</param
         >
         <param name="cancellationToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1237,8 +1377,12 @@
 
             
 
+            
+
              object will complete based on the <paramref
              name="completionOption" />
+
+            
 
             
 
@@ -1261,11 +1405,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="requestUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1280,10 +1428,14 @@
 
           
 
+          
+
           An HTTP  completion option value that indicates when the operation should be considered completed.</param
         >
         <param name="cancellationToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1325,8 +1477,12 @@
 
             
 
+            
+
              object will complete based on the <paramref
              name="completionOption" />
+
+            
 
             
 
@@ -1349,12 +1505,16 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="requestUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1369,10 +1529,14 @@
 
           
 
+          
+
           An HTTP  completion option value that indicates when the operation should be considered completed.</param
         >
         <param name="cancellationToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1420,6 +1584,8 @@
 
             
 
+            
+
              object will complete after the whole response body is read. </para
           >
         </remarks>
@@ -1437,12 +1603,16 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="requestUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1490,6 +1660,8 @@
 
             
 
+            
+
              object will complete after the whole response body is read.</para
           >
         </remarks>
@@ -1507,12 +1679,16 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="requestUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1560,6 +1736,8 @@
 
             
 
+            
+
              object will complete after the whole response body is read. This method does not buffer the stream.</para
           >
         </remarks>
@@ -1577,12 +1755,16 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="requestUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1630,6 +1812,8 @@
 
             
 
+            
+
              object will complete after the whole response body is read. This method does not buffer the stream.</para
           >
         </remarks>
@@ -1647,12 +1831,16 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="requestUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1700,6 +1888,8 @@
 
             
 
+            
+
              object will complete after the whole response body is read.</para
           >
         </remarks>
@@ -1717,12 +1907,16 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="requestUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1770,6 +1964,8 @@
 
             
 
+            
+
              object will complete after the whole response body is read.</para
           >
         </remarks>
@@ -1787,12 +1983,16 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="requestUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1830,8 +2030,12 @@
 
             
 
+            
+
              property to a lower value to limit the size of the response to buffer when reading the response. If the size of the response content is greater than the  <see
              cref="P:System.Net.Http.HttpClient.MaxResponseContentBufferSize" />
+
+            
 
             
 
@@ -1877,6 +2081,8 @@
 
             
 
+            
+
              object will complete after the whole response (including content) is read.</para
           >
         </remarks>
@@ -1894,6 +2100,8 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
@@ -1905,10 +2113,14 @@
 
           
 
+          
+
           The Uri the request is sent to.</param
         >
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1949,6 +2161,8 @@
 
             
 
+            
+
              object will complete after the whole response (including content) is read.</para
           >
         </remarks>
@@ -1966,6 +2180,8 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
@@ -1977,10 +2193,14 @@
 
           
 
+          
+
           The Uri the request is sent to.</param
         >
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2022,6 +2242,8 @@
 
             
 
+            
+
              object will complete after the whole response (including content) is read.</para
           >
         </remarks>
@@ -2039,12 +2261,16 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="requestUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2059,10 +2285,14 @@
 
           
 
+          
+
           The HTTP request content sent to the server.</param
         >
         <param name="cancellationToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2104,6 +2334,8 @@
 
             
 
+            
+
              object will complete after the whole response (including content) is read.</para
           >
         </remarks>
@@ -2121,12 +2353,16 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="requestUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2141,10 +2377,14 @@
 
           
 
+          
+
           The HTTP request content sent to the server.</param
         >
         <param name="cancellationToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2185,6 +2425,8 @@
 
             
 
+            
+
              object will complete after the whole response (including content) is read.</para
           >
         </remarks>
@@ -2202,6 +2444,8 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
@@ -2213,10 +2457,14 @@
 
           
 
+          
+
           The Uri the request is sent to.</param
         >
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2257,6 +2505,8 @@
 
             
 
+            
+
              object will complete after the whole response (including content) is read.</para
           >
         </remarks>
@@ -2274,6 +2524,8 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
@@ -2285,10 +2537,14 @@
 
           
 
+          
+
           The Uri the request is sent to.</param
         >
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2330,6 +2586,8 @@
 
             
 
+            
+
              object will complete after the whole response (including content) is read.</para
           >
         </remarks>
@@ -2347,12 +2605,16 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="requestUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2367,10 +2629,14 @@
 
           
 
+          
+
           The HTTP request content sent to the server.</param
         >
         <param name="cancellationToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2412,6 +2678,8 @@
 
             
 
+            
+
              object will complete after the whole response (including content) is read.</para
           >
         </remarks>
@@ -2429,12 +2697,16 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="requestUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2449,10 +2721,14 @@
 
           
 
+          
+
           The HTTP request content sent to the server.</param
         >
         <param name="cancellationToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2492,6 +2768,8 @@
 
             
 
+            
+
              object will complete once the entire response including content is read.</para
           >
         </remarks>
@@ -2509,12 +2787,16 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="request">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2555,8 +2837,12 @@
 
             
 
+            
+
              parameter, the returned <see
              cref="T:System.Threading.Tasks.Task`1" />
+
+            
 
             
 
@@ -2579,6 +2865,8 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
@@ -2590,10 +2878,14 @@
 
           
 
+          
+
           The HTTP request message to send.</param
         >
         <param name="completionOption">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2634,6 +2926,8 @@
 
             
 
+            
+
              object will complete once the entire response including content is read.</para
           >
         </remarks>
@@ -2651,6 +2945,8 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
@@ -2662,10 +2958,14 @@
 
           
 
+          
+
           The HTTP request message to send.</param
         >
         <param name="cancellationToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2707,8 +3007,12 @@
 
             
 
+            
+
              parameter, the returned <see
              cref="T:System.Threading.Tasks.Task`1" />
+
+            
 
             
 
@@ -2731,12 +3035,16 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="request">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2751,10 +3059,14 @@
 
           
 
+          
+
           When the operation should complete (as soon as a response is available or after reading the whole response content).</param
         >
         <param name="cancellationToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2790,8 +3102,12 @@
 
             
 
+            
+
              to a value less than 15 seconds, it may take 15 seconds or more before a <see
              cref="T:System.Net.WebException" />
+
+            
 
             
 
@@ -2807,8 +3123,12 @@
 
             
 
+            
+
              instance.  You may also set different timeouts for individual requests using a <see
              cref="T:System.Threading.CancellationTokenSource" />
+
+            
 
             
 

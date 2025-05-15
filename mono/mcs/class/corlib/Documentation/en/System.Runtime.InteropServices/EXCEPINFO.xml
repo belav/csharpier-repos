@@ -37,6 +37,8 @@
 
         
 
+        
+
          instead.</para
       >
     </summary>
@@ -146,6 +148,8 @@
           <para
             >Represents a pointer to a function that takes an <see
              cref="T:System.Runtime.InteropServices.EXCEPINFO" />
+
+            
 
             
 

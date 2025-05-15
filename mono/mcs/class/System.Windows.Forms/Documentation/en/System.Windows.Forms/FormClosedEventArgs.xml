@@ -21,8 +21,12 @@
 
         
 
+        
+
          event occurs after a form is closed, either by the user, through the user interface (UI), or programmatically, through calls to methods such as <see
          cref="M:System.Windows.Forms.Form.Close" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          class, or <see
          cref="M:System.Windows.Forms.Application.Exit" />
+
+        
 
         
 
@@ -49,8 +57,12 @@
 
         
 
+        
+
          class. If a form has any child or owned forms, a <see
          cref="E:System.Windows.Forms.Form.FormClosed" />
+
+        
 
         
 
@@ -66,6 +78,8 @@
 
         
 
+        
+
          class provides data for the <see
          cref="E:System.Windows.Forms.Form.FormClosed" />
 
@@ -73,8 +87,12 @@
 
         
 
+        
+
          event. The <see
          cref="P:System.Windows.Forms.FormClosedEventArgs.CloseReason" />
+
+        
 
         
 
@@ -88,6 +106,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.Form.FormClosed" />
+
+        
 
         
 
@@ -119,8 +139,12 @@
 
             
 
+            
+
              parameter is used to initialize the <see
              cref="P:System.Windows.Forms.FormClosedEventArgs.CloseReason" />
+
+            
 
             
 
@@ -139,6 +163,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -149,8 +175,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.CloseReason" />
+
+          
 
           
 
@@ -185,8 +215,12 @@
 
             
 
+            
+
              can be closed because of a variety of reasons, both user-initiated and programmatic. The <see
              cref="P:System.Windows.Forms.FormClosingEventArgs.CloseReason" />
+
+            
 
             
 

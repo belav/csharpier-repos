@@ -27,6 +27,8 @@
 
         
 
+        
+
          performs the binding of the dynamic operation using the runtime values as input. On the other hand, the <see
          cref="T:System.Dynamic.DynamicMetaObjectBinder" />
 
@@ -34,8 +36,12 @@
 
         
 
+        
+
          participates in the <see
          cref="T:System.Dynamic.DynamicMetaObject" />
+
+        
 
         
 
@@ -49,6 +55,8 @@
       <para
         >The dynamic call site binder that participates in the <see
          cref="T:System.Dynamic.DynamicMetaObject" />
+
+        
 
         
 
@@ -77,6 +85,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Dynamic.DynamicMetaObjectBinder" />
+
+            
 
             
 
@@ -123,6 +133,8 @@
 
             
 
+            
+
              representing the result of the binding.</para
           >
         </returns>
@@ -133,10 +145,14 @@
 
           
 
+          
+
           The target of the dynamic operation.</param
         >
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -186,11 +202,15 @@
 
             
 
+            
+
              for the new argument types.</para
           >
         </returns>
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -205,8 +225,12 @@
 
           
 
+          
+
           The array of <see
            cref="T:System.Linq.Expressions.ParameterExpression" />
+
+          
 
           
 
@@ -216,6 +240,8 @@
         >
         <param name="returnLabel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -266,11 +292,15 @@
 
             
 
+            
+
              representing the result of the binding.</para
           >
         </returns>
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -322,6 +352,8 @@
 
             
 
+            
+
              representing the result of the binding.</para
           >
         </returns>
@@ -332,10 +364,14 @@
 
           
 
+          
+
           The target of the dynamic operation.</param
         >
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -381,8 +417,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.Expression.Type" />
+
+          
 
           
 

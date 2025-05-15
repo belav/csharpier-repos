@@ -47,6 +47,8 @@
 
             
 
+            
+
              class using the provided template definition.</para
           >
         </summary>
@@ -57,8 +59,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.Design.TemplateDefinition" />
+
+          
 
           
 
@@ -130,6 +136,8 @@
           <para
             >Gets a <see
              cref="T:System.Web.UI.Design.TemplateDefinition" />
+
+            
 
             
 

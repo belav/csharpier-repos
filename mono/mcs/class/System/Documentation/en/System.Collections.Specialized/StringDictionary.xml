@@ -44,6 +44,8 @@
 
         
 
+        
+
          when comparing strings. For more information about how culture affects comparisons and sorting, see <format
          type="text/html">
           <a href="a097acf0-0bbe-46ac-8d54-b6f2bfd3fc6a"
@@ -55,12 +57,16 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="579ef891-1f83-4c63-9ebd-2f40406b5b91"
             >Performing Culture-Insensitive String Operations</a
           >
         </format>
+
+        
 
         
 
@@ -99,6 +105,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Collections.Specialized.StringDictionary" />
+
+            
 
             
 
@@ -144,6 +152,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -154,10 +164,14 @@
 
           
 
+          
+
           The key of the entry to add. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -194,6 +208,8 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -201,8 +217,12 @@
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Specialized.StringDictionary.Count" />
+
+            
 
             
 
@@ -216,6 +236,8 @@
           <para
             >Removes all entries from the <see
              cref="T:System.Collections.Specialized.StringDictionary" />
+
+            
 
             
 
@@ -257,8 +279,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -271,8 +297,12 @@
 
             
 
+            
+
              to determine whether <paramref
              name="item" />
+
+            
 
             
 
@@ -285,6 +315,8 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
 
@@ -292,8 +324,12 @@
 
             
 
+            
+
              methods of the <paramref
              name="item" />
+
+            
 
             
 
@@ -312,6 +348,8 @@
 
             
 
+            
+
              contains a specific key.</para
           >
         </summary>
@@ -320,6 +358,8 @@
           <para
             >true if the <see
              cref="T:System.Collections.Specialized.StringDictionary" />
+
+            
 
             
 
@@ -335,8 +375,12 @@
 
           
 
+          
+
           The key to locate in the <see
            cref="T:System.Collections.Specialized.StringDictionary" />
+
+          
 
           
 
@@ -375,11 +419,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >This method performs a linear search; therefore, the average execution time is proportional to <see
              cref="P:System.Collections.Specialized.StringDictionary.Count" />
+
+            
 
             
 
@@ -392,6 +440,8 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -399,8 +449,12 @@
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Specialized.StringDictionary.Count" />
+
+            
 
             
 
@@ -416,8 +470,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -430,8 +488,12 @@
 
             
 
+            
+
              to determine whether <paramref
              name="item" />
+
+            
 
             
 
@@ -444,6 +506,8 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
 
@@ -451,8 +515,12 @@
 
             
 
+            
+
              methods of the <paramref
              name="item" />
+
+            
 
             
 
@@ -471,6 +539,8 @@
 
             
 
+            
+
              contains a specific value.</para
           >
         </summary>
@@ -479,6 +549,8 @@
           <para
             >true if the <see
              cref="T:System.Collections.Specialized.StringDictionary" />
+
+            
 
             
 
@@ -494,8 +566,12 @@
 
           
 
+          
+
           The value to locate in the <see
            cref="T:System.Collections.Specialized.StringDictionary" />
+
+          
 
           
 
@@ -534,6 +610,8 @@
 
             
 
+            
+
              copies objects that can be typecast to <see
              cref="T:System.Collections.DictionaryEntry" />
 
@@ -541,8 +619,12 @@
 
             
 
+            
+
             . <see
              cref="T:System.Collections.DictionaryEntry" />
+
+            
 
             
 
@@ -558,8 +640,12 @@
 
             
 
+            
+
              are sorted in the same order that the enumerator iterates through the <see
              cref="T:System.Collections.Specialized.StringDictionary" />
+
+            
 
             
 
@@ -575,6 +661,8 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -582,8 +670,12 @@
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Specialized.StringDictionary.Count" />
+
+            
 
             
 
@@ -602,11 +694,15 @@
 
             
 
+            
+
              instance at the specified index.</para
           >
         </summary>
         <param name="array">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -619,8 +715,12 @@
 
           
 
+          
+
            that is the destination of the values copied from the <see
            cref="T:System.Collections.Specialized.StringDictionary" />
+
+          
 
           
 
@@ -630,6 +730,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -659,6 +761,8 @@
           <para
             >Gets the number of key/value pairs in the <see
              cref="T:System.Collections.Specialized.StringDictionary" />
+
+            
 
             
 
@@ -701,8 +805,12 @@
 
             
 
+            
+
              also brings the enumerator back to this position.  At this position, <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -715,8 +823,12 @@
 
             
 
+            
+
              to advance the enumerator to the first element of the collection before reading the value of <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -731,8 +843,12 @@
 
             
 
+            
+
              returns the same object until either <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -745,6 +861,8 @@
 
             
 
+            
+
              is called. <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
 
@@ -752,8 +870,12 @@
 
             
 
+            
+
              sets <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -769,8 +891,12 @@
 
             
 
+            
+
              passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -783,8 +909,12 @@
 
             
 
+            
+
              also return false. If the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -797,8 +927,12 @@
 
             
 
+            
+
              is undefined. To set <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -811,8 +945,12 @@
 
             
 
+            
+
              followed by <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -833,6 +971,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -867,6 +1007,8 @@
 
             
 
+            
+
              instance is not synchronized. Derived classes can provide a synchronized version of the <see
              cref="T:System.Collections.Specialized.StringDictionary" />
 
@@ -874,8 +1016,12 @@
 
             
 
+            
+
              using the <see
              cref="P:System.Collections.Specialized.StringDictionary.SyncRoot" />
+
+            
 
             
 
@@ -890,6 +1036,8 @@
           <para
             >Gets a value indicating whether access to the <see
              cref="T:System.Collections.Specialized.StringDictionary" />
+
+            
 
             
 
@@ -952,6 +1100,8 @@
 
             
 
+            
+
              is unspecified, but it is the same order as the associated values in the <see
              cref="T:System.Collections.ICollection" />
 
@@ -959,8 +1109,12 @@
 
             
 
+            
+
              returned by the <see
              cref="P:System.Collections.Specialized.StringDictionary.Values" />
+
+            
 
             
 
@@ -976,8 +1130,12 @@
 
             
 
+            
+
              is not a static copy; instead, the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -990,6 +1148,8 @@
 
             
 
+            
+
             . Therefore, changes to the <see
              cref="T:System.Collections.Specialized.StringDictionary" />
 
@@ -997,8 +1157,12 @@
 
             
 
+            
+
              continue to be reflected in the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1013,6 +1177,8 @@
           <para
             >Gets a collection of keys in the <see
              cref="T:System.Collections.Specialized.StringDictionary" />
+
+            
 
             
 
@@ -1052,8 +1218,12 @@
 
             
 
+            
+
              does not contain an element with the specified key, the <see
              cref="T:System.Collections.Specialized.StringDictionary" />
+
+            
 
             
 
@@ -1070,6 +1240,8 @@
         </summary>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1103,8 +1275,12 @@
 
             
 
+            
+
              using the <see
              cref="P:System.Collections.Specialized.StringDictionary.SyncRoot" />
+
+            
 
             
 
@@ -1117,8 +1293,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Collections.Specialized.StringDictionary" />
+
+            
 
             
 
@@ -1131,8 +1311,12 @@
 
             
 
+            
+
             . This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see
              cref="T:System.Collections.Specialized.StringDictionary" />
+
+            
 
             
 
@@ -1147,6 +1331,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Collections.Specialized.StringDictionary" />
+
+            
 
             
 
@@ -1187,6 +1373,8 @@
 
             
 
+            
+
              is unspecified, but it is the same order as the associated keys in the <see
              cref="T:System.Collections.ICollection" />
 
@@ -1194,8 +1382,12 @@
 
             
 
+            
+
              returned by the <see
              cref="P:System.Collections.Specialized.StringDictionary.Keys" />
+
+            
 
             
 
@@ -1211,8 +1403,12 @@
 
             
 
+            
+
              is not a static copy; instead, the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1225,6 +1421,8 @@
 
             
 
+            
+
             . Therefore, changes to the <see
              cref="T:System.Collections.Specialized.StringDictionary" />
 
@@ -1232,8 +1430,12 @@
 
             
 
+            
+
              continue to be reflected in the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1248,6 +1450,8 @@
           <para
             >Gets a collection of values in the <see
              cref="T:System.Collections.Specialized.StringDictionary" />
+
+            
 
             
 

@@ -24,6 +24,8 @@
 
         
 
+        
+
          interface on an attribute that is also an <see
          cref="T:System.ServiceModel.Description.IContractBehavior" />
 
@@ -31,8 +33,12 @@
 
         
 
+        
+
          object to enable the use of that contract behavior attribute on a service type but restrict its application to the contract specified in the <see
          cref="P:System.ServiceModel.Description.IContractBehaviorAttribute.TargetContract" />
+
+        
 
         
 
@@ -48,8 +54,12 @@
 
         
 
+        
+
          on custom contract behavior attributes, and if the attribute is applied either to a contract interface or to a duplex callback class the value of the <see
          cref="P:System.ServiceModel.Description.IContractBehaviorAttribute.TargetContract" />
+
+        
 
         
 
@@ -65,6 +75,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -73,6 +85,8 @@
       <para
         >Specifies the contract for which an attribute that implements the <see
          cref="T:System.ServiceModel.Description.IContractBehavior" />
+
+        
 
         
 
@@ -108,8 +122,12 @@
 
             
 
+            
+
              property to specify the contract to which the contract behavior is applied when the implementing <see
              cref="T:System.ServiceModel.Description.IContractBehavior" />
+
+            
 
             
 

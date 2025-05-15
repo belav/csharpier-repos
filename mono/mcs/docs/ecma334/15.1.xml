@@ -6,7 +6,7 @@
     <example
       >[Example: In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 void F() {  
    Console.WriteLine("reachable");  
    goto Label;  
@@ -16,6 +16,8 @@ void F() {
 }  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -34,6 +36,8 @@ void F() {
 
       
 
+      
+
       ) that control the behavior of statements, but the possible values of non-constant expressions are not considered. In other words, for purposes of control flow analysis, a  non-constant expression of a given type is considered to have any possible value of that type. </note
     >
   </paragraph>
@@ -41,7 +45,7 @@ void F() {
     <note
       >In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 void F() {  
    const int i = 1;  
    if (i == 2) Console.WriteLine("unreachable");  
@@ -53,15 +57,19 @@ void F() {
 
       
 
+      
+
       the boolean expression of the if statement is a constant expression because both operands of the == operator are constants. As the constant expression is evaluated at compile-time, producing the value false, the Console.WriteLine invocation is considered unreachable. However, if i is changed to be a local variable <code_example
       >
-<![CDATA[
+        <![CDATA[
 void F() {  
    int i = 1;  
    if (i == 2) Console.WriteLine("reachable");  
 }  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -75,13 +83,15 @@ void F() {
     <example
       >[Example: In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 void F(int x) {  
    Console.WriteLine("start");  
    if (x < 0) Console.WriteLine("negative");  
 }  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -97,6 +107,8 @@ void F(int x) {
 
           
 
+          
+
           ). </list_item
         >
         <list_item
@@ -107,8 +119,12 @@ void F(int x) {
 
           
 
+          
+
            and <hyperlink
           >15.2</hyperlink>
+
+          
 
           
 
@@ -124,8 +140,12 @@ void F(int x) {
 
           
 
+          
+
            and <hyperlink
           >15.2</hyperlink>
+
+          
 
           
 

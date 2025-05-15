@@ -24,6 +24,8 @@
 
         
 
+        
+
          control <see
          cref="P:System.Windows.Forms.DataGridView.ColumnHeadersHeightSizeMode" />
 
@@ -31,8 +33,12 @@
 
         
 
+        
+
          property and <see
          cref="Overload:System.Windows.Forms.DataGridView.AutoResizeColumnHeadersHeight" />
+
+        
 
         
 
@@ -47,6 +53,8 @@
             >Sizing Options in the Windows Forms DataGridView Control</a
           >
         </format>
+
+        
 
         
 

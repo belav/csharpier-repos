@@ -28,11 +28,15 @@
 
         
 
+        
+
          can be clicked by using the mouse, ENTER key, or SPACEBAR if the button has focus.</para
       >
       <para
         >Set the <see
          cref="P:System.Windows.Forms.Form.AcceptButton" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          property of a <see
          cref="T:System.Windows.Forms.Form" />
+
+        
 
         
 
@@ -62,6 +70,8 @@
 
         
 
+        
+
          method, you can use the <see
          cref="P:System.Windows.Forms.Button.DialogResult" />
 
@@ -69,8 +79,12 @@
 
         
 
+        
+
          property of a button to specify the return value of <see
          cref="M:System.Windows.Forms.Form.ShowDialog" />
+
+        
 
         
 
@@ -86,8 +100,12 @@
 
         
 
+        
+
          property to <see
          cref="F:System.Windows.Forms.FlatStyle.Flat" />
+
+        
 
         
 
@@ -100,8 +118,12 @@
 
         
 
+        
+
          property can also be set to <see
          cref="F:System.Windows.Forms.FlatStyle.Popup" />
+
+        
 
         
 
@@ -118,8 +140,12 @@
 
           
 
+          
+
            does not process it. For example, if a multiline <see
            cref="T:System.Windows.Forms.TextBox" />
+
+          
 
           
 
@@ -150,8 +176,12 @@
 
             
 
+            
+
              displays no caption. To specify the caption text, set the <see
              cref="P:System.Windows.Forms.Control.Text" />
+
+            
 
             
 
@@ -165,6 +195,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.Button" />
+
+            
 
             
 
@@ -215,6 +247,8 @@
 
             
 
+            
+
              automatically resizes itself.</para
           >
         </summary>
@@ -241,6 +275,8 @@
 
             
 
+            
+
              constructor on the base class to verify that the control continues to work correctly.</para
           >
         </remarks>
@@ -249,6 +285,8 @@
           <para
             >Gets a <see
              cref="T:System.Windows.Forms.CreateParams" />
+
+            
 
             
 
@@ -289,8 +327,12 @@
 
             
 
+            
+
              for this property is set to anything other than None, and if the parent form was displayed through the <see
              cref="M:System.Windows.Forms.Form.ShowDialog" />
+
+            
 
             
 
@@ -303,8 +345,12 @@
 
             
 
+            
+
              property is then set to the <see
              cref="T:System.Windows.Forms.DialogResult" />
+
+            
 
             
 
@@ -315,6 +361,8 @@
           <para
             >For example, to create a "Yes/No/Cancel" dialog box, simply add three buttons and set their <see
              cref="T:System.Windows.Forms.DialogResult" />
+
+            
 
             
 
@@ -358,8 +406,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Windows.Forms.ControlStyles.StandardDoubleClick" />
+
+            
 
             
 
@@ -372,8 +424,12 @@
 
             
 
+            
+
              control, and the <see
              cref="E:System.Windows.Forms.Button.DoubleClick" />
+
+            
 
             
 
@@ -391,6 +447,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -399,6 +457,8 @@
           <para
             >Occurs when the user double-clicks the <see
              cref="T:System.Windows.Forms.Button" />
+
+            
 
             
 
@@ -444,8 +504,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Windows.Forms.ControlStyles.StandardDoubleClick" />
+
+            
 
             
 
@@ -458,8 +522,12 @@
 
             
 
+            
+
              control, and the <see
              cref="E:System.Windows.Forms.Button.MouseDoubleClick" />
+
+            
 
             
 
@@ -477,6 +545,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -485,6 +555,8 @@
           <para
             >Occurs when the user double-clicks the <see
              cref="T:System.Windows.Forms.Button" />
+
+            
 
             
 
@@ -515,11 +587,15 @@
 
             
 
+            
+
              that it should be set as the default button and to allow it to adjust its appearance accordingly. Typically, a button that is the default button for a form has a thicker border than other buttons on the form.</para
           >
           <para
             >Calling the <see
              cref="M:System.Windows.Forms.Button.NotifyDefault(System.Boolean)" />
+
+            
 
             
 
@@ -532,8 +608,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.Form" />
+
+            
 
             
 
@@ -552,11 +632,15 @@
 
             
 
+            
+
              whether it is the default button so that it can adjust its appearance accordingly.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -614,11 +698,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Button.OnFontChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -637,6 +725,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -647,8 +737,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -678,6 +772,8 @@
 
           
 
+          
+
           Provides information for the event.</param
         >
       </Docs>
@@ -700,6 +796,8 @@
         <since version=".NET 2.0" />
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -737,11 +835,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Button.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
+
+            
 
             
 
@@ -760,6 +862,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -770,8 +874,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -808,11 +916,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Button.OnTextChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -831,6 +943,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -841,8 +955,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -873,6 +991,8 @@
 
             
 
+            
+
              event.</para
           >
         </remarks>
@@ -881,6 +1001,8 @@
           <para
             >Generates a <see
              cref="E:System.Windows.Forms.Control.Click" />
+
+            
 
             
 
@@ -918,8 +1040,12 @@
 
             
 
+            
+
              in a derived class, be sure to call the base class's <see
              cref="M:System.Windows.Forms.Button.ProcessMnemonic(System.Char)" />
+
+            
 
             
 
@@ -938,6 +1064,8 @@
         </returns>
         <param name="charCode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

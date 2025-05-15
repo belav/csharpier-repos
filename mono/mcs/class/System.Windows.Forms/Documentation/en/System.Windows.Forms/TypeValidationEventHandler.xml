@@ -32,6 +32,8 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Windows.Forms.MaskedTextBox" />
 
@@ -39,8 +41,12 @@
 
         
 
+        
+
          class is an optional event that is raised only if the <see
          cref="P:System.Windows.Forms.MaskedTextBox.ValidatingType" />
+
+        
 
         
 
@@ -56,6 +62,8 @@
 
         
 
+        
+
          event is implemented to perform mask-specific and type-specific validation processing. In contrast, general validation is typically performed in the standard <see
          cref="E:System.Windows.Forms.Control.Validating" />
 
@@ -63,8 +71,12 @@
 
         
 
+        
+
          event defined in the <see
          cref="T:System.Windows.Forms.Control" />
+
+        
 
         
 
@@ -83,8 +95,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Windows.Forms.MaskedTextBox" />
+
+        
 
         
 

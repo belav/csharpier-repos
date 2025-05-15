@@ -34,8 +34,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Reflection.ObfuscateAssemblyAttribute" />
+
+        
 
         
 
@@ -54,8 +58,12 @@
 
         
 
+        
+
          attribute has a string <see
          cref="P:System.Reflection.ObfuscationAttribute.Feature" />
+
+        
 
         
 
@@ -68,8 +76,12 @@
 
         
 
+        
+
          defines two feature strings, "default" and "all". The string "default" should map to the default obfuscation features of a tool, and "all" should map to the complete set of obfuscation features supported by a tool. The default value of the <see
          cref="P:System.Reflection.ObfuscationAttribute.Feature" />
+
+        
 
         
 
@@ -85,8 +97,12 @@
 
         
 
+        
+
          also applies to all types within the assembly. If the <see
          cref="P:System.Reflection.ObfuscationAttribute.ApplyToMembers" />
+
+        
 
         
 
@@ -99,8 +115,12 @@
 
         
 
+        
+
          does not specify whether an assembly is public or private. To specify whether an assembly is public or private, use the <see
          cref="T:System.Reflection.ObfuscateAssemblyAttribute" />
+
+        
 
         
 
@@ -116,8 +136,12 @@
 
         
 
+        
+
          also applies to all members of the type if the <see
          cref="P:System.Reflection.ObfuscationAttribute.ApplyToMembers" />
+
+        
 
         
 
@@ -156,8 +180,12 @@
 
             
 
+            
+
              does not specify whether an assembly is public or private. To specify whether an assembly is public or private, use <see
              cref="T:System.Reflection.ObfuscateAssemblyAttribute" />
+
+            
 
             
 
@@ -171,6 +199,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Reflection.ObfuscationAttribute" />
+
+            
 
             
 
@@ -212,6 +242,8 @@
 
             
 
+            
+
              value indicating whether the attribute of a type is to apply to the members of the type.</para
           >
         </summary>
@@ -242,6 +274,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -305,6 +339,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 

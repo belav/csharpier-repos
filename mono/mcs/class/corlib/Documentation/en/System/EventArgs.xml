@@ -38,6 +38,8 @@
 
         
 
+        
+
          class derives from <see
          cref="T:System.EventArgs" />
 
@@ -45,8 +47,12 @@
 
         
 
+        
+
          and is used to hold the data for assembly load events. To create a custom event data class, create a class that derives from the <see
          cref="T:System.EventArgs" />
+
+        
 
         
 
@@ -62,6 +68,8 @@
 
         
 
+        
+
          field.</para
       >
       <para
@@ -69,6 +77,8 @@
          type="text/html">
           <a href="b6f65241-e0ad-4590-a99f-200ce741bb1f">Handling and Raising Events</a>
         </format>
+
+        
 
         
 
@@ -112,6 +122,8 @@
 
             
 
+            
+
              field.</para
           >
         </remarks>
@@ -120,6 +132,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.EventArgs" />
+
+            
 
             
 

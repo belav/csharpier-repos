@@ -24,12 +24,16 @@
 
         
 
+        
+
          base class and "Implementing a Type Converter".</para
       >
       <block subset="none" type="note">
         <para
           >You should never create an instance of the <see
            cref="T:System.Windows.Forms.CursorConverter" />
+
+          
 
           
 
@@ -42,8 +46,12 @@
 
           
 
+          
+
            method. For more information, see the examples in the <see
            cref="T:System.ComponentModel.TypeConverter" />
+
+          
 
           
 
@@ -58,6 +66,8 @@
       <para
         >Provides a type converter to convert <see
          cref="T:System.Windows.Forms.Cursor" />
+
+        
 
         
 
@@ -79,6 +89,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.CursorConverter" />
+
+            
 
             
 
@@ -123,10 +135,14 @@
 
           
 
+          
+
           A formatter context. This object can be used to extract additional information about the environment this converter is being invoked from. This may be null, so you should always check. Also, properties on the context object may also return null. </param
         >
         <param name="sourceType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -164,6 +180,8 @@
 
             
 
+            
+
              parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
           >
         </remarks>
@@ -182,8 +200,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -198,8 +220,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -298,6 +324,8 @@
 
           
 
+          
+
           A formatter context. This object can be used to extract additional information about the environment this converter is being invoked from. This may be null, so you should always check. Also, properties on the context object may also return null. </param
         >
       </Docs>
@@ -330,6 +358,8 @@
         </returns>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

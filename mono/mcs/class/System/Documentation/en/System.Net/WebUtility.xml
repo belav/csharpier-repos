@@ -24,8 +24,12 @@
 
         
 
+        
+
          class contains encoding and decoding utility methods for use with HTML-encode strings. The <see
          cref="T:System.Uri" />
+
+        
 
         
 
@@ -68,8 +72,12 @@
 
             
 
+            
+
              parameter is null, then the returned decoded string is null. If the <paramref
              name="value" />
+
+            
 
             
 
@@ -88,6 +96,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -132,11 +142,15 @@
 
             
 
+            
+
              output stream.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -151,8 +165,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -190,8 +208,12 @@
 
             
 
+            
+
              parameter is null, then the returned encoded string is null. If the <paramref
              name="value" />
+
+            
 
             
 
@@ -210,6 +232,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -254,11 +278,15 @@
 
             
 
+            
+
              stream of output.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -273,8 +301,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -314,6 +346,8 @@
 
             
 
+            
+
              method creates a URL-encoded string.</para
           >
           <para>URL decoding replaces hexadecimal escape sequences with corresponding ASCII character equivalents. For example, when embedded in a block of URL-encoded text, the escape sequences %3c and %3e are decoded into the characters &lt; and &gt;.</para>
@@ -332,12 +366,16 @@
 
             
 
+            
+
             .</para
           >
           <para>A decoded string.</para>
         </returns>
         <param name="encodedValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -379,6 +417,8 @@
 
             
 
+            
+
              method creates a URL-encoded byte array.</para
           >
           <para>URL decoding replaces hexadecimal escape sequences with corresponding ASCII character equivalents. For example, when embedded in a block of URL-encoded text, the escape sequences %3c and %3e are decoded into the characters &lt; and &gt;.</para>
@@ -397,11 +437,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >A decoded <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -417,8 +461,12 @@
 
           
 
+          
+
           A URL-encoded <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -433,8 +481,12 @@
 
           
 
+          
+
           The offset, in bytes, from the start of the <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -449,8 +501,12 @@
 
           
 
+          
+
           The count, in bytes, to decode from the <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -513,6 +569,8 @@
 
             
 
+            
+
              method reverses the encoding.</para
           >
         </remarks>
@@ -530,12 +588,16 @@
 
             
 
+            
+
             .</para
           >
           <para>A URL-encoded string.</para>
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -603,6 +665,8 @@
 
             
 
+            
+
              method reverses the encoding.</para
           >
         </remarks>
@@ -620,11 +684,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >An encoded <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -640,8 +708,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -656,8 +728,12 @@
 
           
 
+          
+
           The offset, in bytes, from the start of the <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -672,8 +748,12 @@
 
           
 
+          
+
           The count, in bytes, to encode from the <see
            cref="T:System.Byte" />
+
+          
 
           
 

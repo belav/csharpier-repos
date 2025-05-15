@@ -42,11 +42,15 @@
 
         
 
+        
+
          class is read-only; it does not implement methods to add or remove attributes. You must inherit from this class to implement these methods.</para
       >
       <para
         >Use the <see
          cref="P:System.ComponentModel.AttributeCollection.Count" />
+
+        
 
         
 
@@ -62,8 +66,12 @@
 
         
 
+        
+
          method to verify that a specified attribute or attribute array exists in the collection. Call the <see
          cref="M:System.ComponentModel.AttributeCollection.Matches(System.Attribute)" />
+
+        
 
         
 
@@ -97,6 +105,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.AttributeCollection" />
+
+            
 
             
 
@@ -141,6 +151,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -151,8 +163,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -215,8 +231,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.ComponentModel.AttributeCollection.Contains(System.Attribute)" />
+
+            
 
             
 
@@ -229,8 +249,12 @@
 
             
 
+            
+
              calls the <see
              cref="M:System.Attribute.Match(System.Object)" />
+
+            
 
             
 
@@ -243,8 +267,12 @@
 
             
 
+            
+
              calls the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -260,8 +288,12 @@
 
             
 
+            
+
              is typically implemented so that it returns true if any of the flags are satisfied. For example, consider a data binding attribute with the Boolean flags "SupportsSql", "SupportsOleDb", and "SupportsXml". This attribute may be present on a property that supports all three data-binding approaches. It will often be the case that a programmer needs to know only if a particular approach is available, not all three. Therefore, a programmer could use <see
              cref="M:System.Attribute.Match(System.Object)" />
+
+            
 
             
 
@@ -318,8 +350,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -361,8 +397,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -372,6 +412,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -400,6 +442,8 @@
           <para
             >You can use the <see
              cref="P:System.ComponentModel.AttributeCollection.Count" />
+
+            
 
             
 
@@ -479,6 +523,8 @@
 
             
 
+            
+
              parameter is provided, its <see
              cref="T:System.Attribute" />
 
@@ -486,8 +532,12 @@
 
             
 
+            
+
              entries are merged with those of the <paramref
              name="existing" />
+
+            
 
             
 
@@ -506,8 +556,12 @@
 
             
 
+            
+
              from an existing <see
              cref="T:System.ComponentModel.AttributeCollection" />
+
+            
 
             
 
@@ -526,8 +580,12 @@
 
             
 
+            
+
              that is a copy of <paramref
              name="existing" />
+
+            
 
             
 
@@ -543,8 +601,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.AttributeCollection" />
+
+          
 
           
 
@@ -559,8 +621,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -603,8 +669,12 @@
 
             
 
+            
+
              of a given <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -623,8 +693,12 @@
 
             
 
+            
+
              of a given <paramref
              name="attributeType" />
+
+            
 
             
 
@@ -640,8 +714,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -681,6 +759,8 @@
           <para
             >An enumerator of type <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -772,8 +852,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.ComponentModel.AttributeCollection.Contains(System.Attribute)" />
+
+            
 
             
 
@@ -786,8 +870,12 @@
 
             
 
+            
+
              calls the <see
              cref="M:System.Attribute.Match(System.Object)" />
+
+            
 
             
 
@@ -800,8 +888,12 @@
 
             
 
+            
+
              calls the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -817,8 +909,12 @@
 
             
 
+            
+
              is typically implemented so that it returns true if any of the flags are satisfied. For example, consider a data binding attribute with the Boolean flags "SupportsSql", "SupportsOleDb", and "SupportsXml". This attribute may be present on a property that supports all three data binding approaches. It will often be the case that a programmer needs to know only if a particular approach is available, not all three. Therefore, a programmer could use <see
              cref="M:System.Attribute.Match(System.Object)" />
+
+            
 
             
 
@@ -875,8 +971,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.CodeDom.MemberAttributes" />
+
+          
 
           
 
@@ -995,8 +1095,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -1015,8 +1119,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 

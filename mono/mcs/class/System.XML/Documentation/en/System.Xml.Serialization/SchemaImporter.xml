@@ -26,8 +26,12 @@
 
         
 
+        
+
          class is the parent class of the <see
          cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+
+        
 
         
 
@@ -72,8 +76,12 @@
 
             
 
+            
+
              objects. By adding <see
              cref="T:System.Xml.Serialization.Advanced.SchemaImporterExtension" />
+
+            
 
             
 

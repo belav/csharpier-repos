@@ -37,8 +37,12 @@
 
         
 
+        
+
          belongs to a family of attributes that controls how the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -55,11 +59,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >You can apply the <see
          cref="T:System.Xml.Serialization.XmlRootAttribute" />
+
+        
 
         
 
@@ -75,6 +83,8 @@
 
         
 
+        
+
          allows you to control how the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
 
@@ -82,8 +92,12 @@
 
         
 
+        
+
          generates the root element by setting certain properties. For example, specify the name of the generated XML element by setting the <see
          cref="P:System.Xml.Serialization.XmlRootAttribute.ElementName" />
+
+        
 
         
 
@@ -101,12 +115,16 @@
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
         <para
           >You can use the word XmlRoot in your code instead of the longer <see
            cref="T:System.Xml.Serialization.XmlRootAttribute" />
+
+          
 
           
 
@@ -148,6 +166,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -181,11 +201,15 @@
 
             
 
+            
+
              class and specifies the name of the XML root element.</para
           >
         </summary>
         <param name="elementName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -221,6 +245,8 @@
 
             
 
+            
+
              structures, and apply a <see
              cref="T:System.Xml.Serialization.XmlRootAttribute" />
 
@@ -228,8 +254,12 @@
 
             
 
+            
+
              with the <see
              cref="P:System.Xml.Serialization.XmlRootAttribute.DataType" />
+
+            
 
             
 
@@ -242,6 +272,8 @@
 
             
 
+            
+
              type and apply the <see
              cref="T:System.Xml.Serialization.XmlRootAttribute" />
 
@@ -249,8 +281,12 @@
 
             
 
+            
+
              with the <see
              cref="P:System.Xml.Serialization.XmlRootAttribute.DataType" />
+
+            
 
             
 
@@ -266,8 +302,12 @@
 
             
 
+            
+
              with its <see
              cref="P:System.Xml.Serialization.XmlRootAttribute.DataType" />
+
+            
 
             
 
@@ -311,6 +351,8 @@
                 <para
                   >Array of <see
                    cref="T:System.Byte" />
+
+                  
 
                   
 
@@ -468,6 +510,8 @@
                 <para
                   >Array of <see
                    cref="T:System.Byte" />
+
+                  
 
                   
 
@@ -659,8 +703,7 @@
             </item>
             <item>
               <term>
-                <para
->recurringDate </para>
+                <para>recurringDate </para>
               </term>
               <description>
                 <para>
@@ -791,6 +834,8 @@
 
             
 
+            
+
              if you want the name of the generated XML element to differ from the class name.</para
           >
         </remarks>
@@ -804,6 +849,8 @@
 
             
 
+            
+
              class's <see
              cref="M:System.Xml.Serialization.XmlSerializer.Serialize(System.IO.TextWriter,System.Object)" />
 
@@ -811,8 +858,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Xml.Serialization.XmlSerializer.Deserialize(System.IO.Stream)" />
+
+            
 
             
 
@@ -848,11 +899,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >If the <see
              cref="P:System.Xml.Serialization.XmlRootAttribute.IsNullable" />
+
+            
 
             
 
@@ -871,6 +926,8 @@
 
             
 
+            
+
              property is false, an empty element is created as shown in the following code: </para
           >
           <code> &lt;?xml version="1.0" encoding="utf-8"?&gt;
@@ -882,6 +939,8 @@
           <para
             >Gets or sets a value that indicates whether the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -917,8 +976,12 @@
 
             
 
+            
+
              property conforms to the World Wide Web Consortium (www.w3.org) specification named <paramref
              name="Namespaces in XML" />
+
+            
 
             
 
@@ -934,8 +997,12 @@
 
             
 
+            
+
              object that contains all the prefix-namespace pairs. The namespace you set for each <see
              cref="T:System.Xml.Serialization.XmlArrayAttribute" />
+
+            
 
             
 
@@ -948,8 +1015,12 @@
 
             
 
+            
+
              object. When the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 

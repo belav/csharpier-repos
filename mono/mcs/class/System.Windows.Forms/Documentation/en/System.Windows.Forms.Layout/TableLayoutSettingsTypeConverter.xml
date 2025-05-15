@@ -42,6 +42,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -80,8 +82,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -96,8 +102,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -140,8 +150,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -156,8 +170,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -200,6 +218,8 @@
 
             
 
+            
+
              that represents the converted value.</para
           >
         </returns>
@@ -210,8 +230,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -226,8 +250,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -242,8 +270,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -287,6 +319,8 @@
 
             
 
+            
+
              that represents the converted value.</para
           >
         </returns>
@@ -297,8 +331,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -313,8 +351,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -329,8 +371,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -345,8 +391,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 

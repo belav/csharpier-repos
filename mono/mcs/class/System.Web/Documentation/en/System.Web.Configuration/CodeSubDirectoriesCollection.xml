@@ -32,6 +32,8 @@
 
         
 
+        
+
          defines an ordered collection of subdirectories containing files compiled at run time. You can have any number of subdirectories. This collection refers to the codeSubDirectories element of the compilation section of the configuration file. The collection will only provide the items defined in the root Web.config or higher. This collection is a construct that allows easy access to the compilation information it contains.</para
       >
     </remarks>
@@ -40,6 +42,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.Web.Configuration.CodeSubDirectory" />
+
+        
 
         
 
@@ -62,6 +66,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.CodeSubDirectoriesCollection" />
+
+            
 
             
 
@@ -99,6 +105,8 @@
 
             
 
+            
+
              object to the collection. If the assembly object is not initialized with assembly information, an exception is thrown. If the assembly object already exists in the collection, the statement is ignored.</para
           >
         </remarks>
@@ -112,8 +120,12 @@
 
             
 
+            
+
              object to the <see
              cref="T:System.Web.Configuration.CodeSubDirectoriesCollection" />
+
+            
 
             
 
@@ -129,8 +141,12 @@
 
           
 
+          
+
           A string value specifying the <see
            cref="T:System.Web.Configuration.CodeSubDirectory" />
+
+          
 
           
 
@@ -308,6 +324,8 @@
 
           
 
+          
+
           The name of the directory to remove.</param
         >
       </Docs>
@@ -333,6 +351,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

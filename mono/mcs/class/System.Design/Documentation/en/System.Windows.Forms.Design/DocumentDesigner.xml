@@ -32,10 +32,14 @@
 
         
 
+        
+
         . For an overview of customizing design time behavior, see <format
          type="text/html">
           <a href="d6ac8a6a-42fd-4bc8-bf33-b212811297e2">Extending Design-Time Support</a>
         </format>
+
+        
 
         
 
@@ -49,6 +53,8 @@
       <para
         >Base designer class for extending the design mode behavior of, and providing a root-level design mode view for, a <see
          cref="T:System.Windows.Forms.Control" />
+
+        
 
         
 
@@ -70,6 +76,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.Design.DocumentDesigner" />
+
+            
 
             
 
@@ -104,8 +112,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -118,8 +130,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -135,8 +151,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Windows.Forms.Design.DocumentDesigner" />
+
+            
 
             
 
@@ -155,11 +175,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -228,8 +252,12 @@
 
             
 
+            
+
              representing the <see
              cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+            
 
             
 
@@ -248,6 +276,8 @@
 
             
 
+            
+
              objects.</para
           >
         </returns>
@@ -258,8 +288,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Design.Behavior.GlyphSelectionType" />
+
+          
 
           
 
@@ -301,8 +335,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 
@@ -341,8 +379,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -406,10 +448,14 @@
 
           
 
+          
+
           The horizontal screen coordinate to display the context menu at. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -480,6 +526,8 @@
 
             
 
+            
+
              interface method override adds a set of properties to this designer's component at design time. This method adds the following browsable properties: "Location", and "BackColor".</para
           >
         </remarks>
@@ -488,6 +536,8 @@
           <para
             >Adjusts the set of properties the component exposes through a <see
              cref="T:System.ComponentModel.TypeDescriptor" />
+
+            
 
             
 
@@ -503,8 +553,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -539,6 +593,8 @@
 
             
 
+            
+
              that prevents the document from being resized.</para
           >
         </remarks>
@@ -547,6 +603,8 @@
           <para
             >Gets the <see
              cref="T:System.Windows.Forms.Design.SelectionRules" />
+
+            
 
             
 
@@ -588,8 +646,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.Design.IRootDesigner" />
+
+            
 
             
 
@@ -603,6 +665,8 @@
           <para
             >For a description of this member, see <see
              cref="T:System.ComponentModel.Design.ViewTechnology" />
+
+            
 
             
 
@@ -622,8 +686,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.Design.ViewTechnology" />
+
+          
 
           
 
@@ -658,8 +726,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.Design.IRootDesigner" />
+
+            
 
             
 
@@ -673,6 +745,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.ComponentModel.Design.IRootDesigner.SupportedTechnologies" />
+
+            
 
             
 
@@ -710,8 +784,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.Design.IRootDesigner" />
+
+            
 
             
 
@@ -725,6 +803,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.Drawing.Design.IToolboxUser.GetToolSupported(System.Drawing.Design.ToolboxItem)" />
+
+            
 
             
 
@@ -744,8 +824,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 
@@ -782,8 +866,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.Design.IRootDesigner" />
+
+            
 
             
 
@@ -802,6 +890,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -812,8 +902,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 
@@ -845,6 +939,8 @@
 
             
 
+            
+
              is called when the user double-clicks on a toolbox item. The document designer should create a component for the specified tool. Only tools that are enabled in the toolbox will be passed to this method.</para
           >
         </remarks>
@@ -859,8 +955,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 

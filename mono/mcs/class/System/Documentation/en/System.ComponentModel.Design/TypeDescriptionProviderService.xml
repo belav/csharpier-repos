@@ -47,6 +47,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -87,8 +89,12 @@
 
             
 
+            
+
              that corresponds with <paramref
              name="instance" />
+
+            
 
             
 
@@ -99,6 +105,8 @@
         </returns>
         <param name="instance">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -143,8 +151,12 @@
 
             
 
+            
+
              that corresponds with <paramref
              name="type" />
+
+            
 
             
 
@@ -155,6 +167,8 @@
         </returns>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

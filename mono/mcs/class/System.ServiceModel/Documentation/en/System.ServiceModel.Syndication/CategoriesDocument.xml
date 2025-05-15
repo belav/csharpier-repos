@@ -75,6 +75,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -114,6 +116,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -122,6 +126,8 @@
           <para>
 Returns <see
              cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
+
+            
 
             
 
@@ -138,6 +144,8 @@ Returns <see
 
           
 
+          
+
           A collection of <see
            cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
@@ -145,8 +153,12 @@ Returns <see
 
           
 
+          
+
            instances used to initialize the new <see
            cref="T:System.ServiceModel.Syndication.CategoriesDocument" />
+
+          
 
           
 
@@ -187,8 +199,12 @@ Returns <see
 
             
 
+            
+
              initializing it with the specified <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -207,12 +223,16 @@ Returns <see
 
             
 
+            
+
             .
 </para
           >
         </returns>
         <param name="linkToCategoriesDocument">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -257,8 +277,12 @@ Returns <see
 
             
 
+            
+
              parameter is set to true, the categories contained within the categories document are immutable. If the <paramref
              name="isFixed" />
+
+            
 
             
 
@@ -277,6 +301,8 @@ Returns <see
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -285,6 +311,8 @@ Returns <see
           <para>
 Returns <see
              cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
+
+            
 
             
 
@@ -301,6 +329,8 @@ Returns <see
 
           
 
+          
+
           A collection of categories.</param
         >
         <param name="isFixed">
@@ -310,10 +340,14 @@ Returns <see
 
           
 
+          
+
           A value that specifies whether a user can add a category to the categories document.</param
         >
         <param name="scheme">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -347,6 +381,8 @@ Returns <see
           <para
             >Gets the element extensions for the <see
              cref="T:System.ServiceModel.Syndication.CategoriesDocument" />
+
+            
 
             
 
@@ -386,8 +422,12 @@ Returns <see
 
             
 
+            
+
              instance initialized with the <see
              cref="T:System.ServiceModel.Syndication.CategoriesDocument" />
+
+            
 
             
 
@@ -401,6 +441,8 @@ Returns <see
           <para>
 Returns <see
              cref="T:System.ServiceModel.Syndication.CategoriesDocumentFormatter" />
+
+            
 
             
 
@@ -430,6 +472,8 @@ Returns <see
           <para
             >Gets and sets the language of the <see
              cref="T:System.ServiceModel.Syndication.CategoriesDocument" />
+
+            
 
             
 
@@ -471,8 +515,12 @@ Returns <see
 
             
 
+            
+
              instance from an <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -491,6 +539,8 @@ Returns <see
 
             
 
+            
+
             .
 </para
           >
@@ -502,8 +552,12 @@ Returns <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -541,8 +595,12 @@ Returns <see
 
             
 
+            
+
              to a <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -558,8 +616,12 @@ Returns <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -607,12 +669,16 @@ Returns <see
 
             
 
+            
+
             .
 </para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -627,6 +693,8 @@ Returns <see
 
           
 
+          
+
           The namespace of the element.</param
         >
         <param name="value">
@@ -636,10 +704,14 @@ Returns <see
 
           
 
+          
+
           The attribute to parse.</param
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -685,12 +757,16 @@ Returns <see
 
             
 
+            
+
             .
 </para
           >
         </returns>
         <param name="reader">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -703,10 +779,14 @@ Returns <see
 
           
 
+          
+
            to read from.</param
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -748,11 +828,15 @@ Returns <see
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="writer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -765,10 +849,14 @@ Returns <see
 
           
 
+          
+
            to write to.</param
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -810,11 +898,15 @@ Returns <see
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="writer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -827,10 +919,14 @@ Returns <see
 
           
 
+          
+
            to write to.</param
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

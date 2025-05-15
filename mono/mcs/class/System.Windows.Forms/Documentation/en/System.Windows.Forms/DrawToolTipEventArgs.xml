@@ -20,8 +20,12 @@
 
         
 
+        
+
          event is raised by the <see
          cref="T:System.Windows.Forms.ToolTip" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
          is drawn and the <see
          cref="P:System.Windows.Forms.ToolTip.OwnerDraw" />
+
+        
 
         
 
@@ -48,8 +56,12 @@
 
         
 
+        
+
         . The <see
          cref="T:System.Windows.Forms.DrawToolTipEventArgs" />
+
+        
 
         
 
@@ -62,8 +74,12 @@
 
         
 
+        
+
         , including the <see
          cref="T:System.Windows.Forms.ToolTip" />
+
+        
 
         
 
@@ -76,8 +92,12 @@
 
         
 
+        
+
         , and the <see
          cref="T:System.Drawing.Graphics" />
+
+        
 
         
 
@@ -90,8 +110,12 @@
 
         
 
+        
+
          to determine the bounds of the ToolTip, and the <see
          cref="T:System.Drawing.Graphics" />
+
+        
 
         
 
@@ -104,8 +128,12 @@
 
         
 
+        
+
          before it is shown by handling the <see
          cref="E:System.Windows.Forms.ToolTip.Popup" />
+
+        
 
         
 
@@ -120,8 +148,12 @@
 
         
 
+        
+
          also supports partial customization through the <see
          cref="M:System.Windows.Forms.DrawToolTipEventArgs.DrawBackground" />
+
+        
 
         
 
@@ -134,8 +166,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Windows.Forms.DrawToolTipEventArgs.DrawBorder" />
+
+        
 
         
 
@@ -149,6 +185,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.ToolTip.Draw" />
+
+        
 
         
 
@@ -189,8 +227,12 @@
 
             
 
+            
+
              constructor uses the <paramref
              name="graphics" />
+
+            
 
             
 
@@ -203,8 +245,12 @@
 
             
 
+            
+
             , <paramref
              name="associatedWindow" />
+
+            
 
             
 
@@ -217,8 +263,12 @@
 
             
 
+            
+
             , <paramref
              name="font" />
+
+            
 
             
 
@@ -231,8 +281,12 @@
 
             
 
+            
+
              parameters to initialize their corresponding, similarly named properties. The <paramref
              name="backColor" />
+
+            
 
             
 
@@ -245,6 +299,8 @@
 
             
 
+            
+
              parameters are used by the <see
              cref="M:System.Windows.Forms.DrawToolTipEventArgs.DrawBackground" />
 
@@ -252,8 +308,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.Windows.Forms.DrawToolTipEventArgs.DrawText" />
+
+            
 
             
 
@@ -272,6 +332,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -282,8 +344,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -298,8 +364,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.IWin32Window" />
+
+          
 
           
 
@@ -314,8 +384,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -330,8 +404,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -346,8 +424,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -362,8 +444,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -378,8 +464,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -394,8 +484,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -429,8 +523,12 @@
 
             
 
+            
+
              can be associated with multiple controls through the <see
              cref="M:System.Windows.Forms.ToolTip.SetToolTip(System.Windows.Forms.Control,System.String)" />
+
+            
 
             
 
@@ -443,8 +541,12 @@
 
             
 
+            
+
              property can be used to determine which control the <see
              cref="E:System.Windows.Forms.ToolTip.Draw" />
+
+            
 
             
 
@@ -458,6 +560,8 @@
           <para
             >Gets the control for which the <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -492,6 +596,8 @@
 
             
 
+            
+
              property. </para
           >
         </remarks>
@@ -500,6 +606,8 @@
           <para
             >Gets the window to which this <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -531,8 +639,12 @@
 
             
 
+            
+
              text. You can increase the bounds of the <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -546,8 +658,12 @@
 
             
 
+            
+
              event of the <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -561,6 +677,8 @@
           <para
             >Gets the size and location of the <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -592,6 +710,8 @@
 
             
 
+            
+
             , but want a standard ToolTip background drawn for you using the current value of <see
              cref="P:System.Drawing.SystemColors.Info" />
 
@@ -599,8 +719,12 @@
 
             
 
+            
+
             . The background is drawn to fill the area specified by the <see
              cref="P:System.Windows.Forms.DrawToolTipEventArgs.Bounds" />
+
+            
 
             
 
@@ -614,6 +738,8 @@
           <para
             >Draws the background of the <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -645,8 +771,12 @@
 
             
 
+            
+
             , but want a standard ToolTip border drawn for you using the current value of <see
              cref="P:System.Drawing.SystemColors.WindowFrame" />
+
+            
 
             
 
@@ -659,6 +789,8 @@
 
             
 
+            
+
              property. You can increase the bounds of the <see
              cref="T:System.Windows.Forms.ToolTip" />
 
@@ -666,8 +798,12 @@
 
             
 
+            
+
              before it is shown by handling the <see
              cref="E:System.Windows.Forms.ToolTip.Popup" />
+
+            
 
             
 
@@ -681,6 +817,8 @@
           <para
             >Draws the border of the <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -712,8 +850,12 @@
 
             
 
+            
+
              method represents the default method of displaying a <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -726,6 +868,8 @@
 
             
 
+            
+
              for the font color. The text is drawn as a single line centered horizontally and vertically within the rectangle specified by the <see
              cref="P:System.Windows.Forms.DrawToolTipEventArgs.Bounds" />
 
@@ -733,8 +877,12 @@
 
             
 
+            
+
              property; it is equivalent to the following call to the overloaded version of <see
              cref="M:System.Windows.Forms.DrawToolTipEventArgs.DrawText(System.Windows.Forms.TextFormatFlags)" />
+
+            
 
             
 
@@ -749,6 +897,8 @@
           <para
             >Draws the text of the <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -785,6 +935,8 @@
 
             
 
+            
+
              method is used to customize certain visual aspects of a <see
              cref="T:System.Windows.Forms.ToolTip" />
 
@@ -792,8 +944,12 @@
 
             
 
+            
+
             , including the layout of the ToolTip text. This method uses the system specified font and the current value of <see
              cref="P:System.Drawing.SystemColors.InfoText" />
+
+            
 
             
 
@@ -812,11 +968,15 @@
 
             
 
+            
+
              using the system text color and font, and the specified text layout.</para
           >
         </summary>
         <param name="flags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -829,8 +989,12 @@
 
           
 
+          
+
            containing a bitwise combination of values that specifies the display and layout for the <see
            cref="P:System.Windows.Forms.DrawToolTipEventArgs.ToolTipText" />
+
+          
 
           
 
@@ -861,8 +1025,12 @@
 
             
 
+            
+
              property when you are custom drawing a <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -876,6 +1044,8 @@
           <para
             >Gets the font used to draw the <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -907,6 +1077,8 @@
 
             
 
+            
+
              object to customize the drawing of certain visual aspects of a <see
              cref="T:System.Windows.Forms.ToolTip" />
 
@@ -914,8 +1086,12 @@
 
             
 
+            
+
             . For example, you can draw your own ToolTip background by using the <see
              cref="M:System.Drawing.Graphics.FillRectangle(System.Drawing.Brush,System.Drawing.RectangleF)" />
+
+            
 
             
 
@@ -931,8 +1107,12 @@
 
             
 
+            
+
              property will not show up. You can increase the bounds of the <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -948,8 +1128,12 @@
 
             
 
+            
+
              class also provides the <see
              cref="M:System.Windows.Forms.DrawToolTipEventArgs.DrawBackground" />
+
+            
 
             
 
@@ -962,8 +1146,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DrawToolTipEventArgs.DrawBorder" />
+
+            
 
             
 
@@ -976,8 +1164,12 @@
 
             
 
+            
+
              in the standard way used by the operating system. You can use these methods, together with the <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -991,6 +1183,8 @@
           <para
             >Gets the graphics surface used to draw the <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -1022,8 +1216,12 @@
 
             
 
+            
+
              property to determine what the ToolTip text is when you are custom drawing your ToolTip. You can use the <see
              cref="M:System.Drawing.Graphics.DrawString(System.String,System.Drawing.Font,System.Drawing.Brush,System.Single,System.Single)" />
+
+            
 
             
 
@@ -1036,6 +1234,8 @@
 
             
 
+            
+
              method. The text value comes from the value passed to the <see
              cref="M:System.Windows.Forms.ToolTip.SetToolTip(System.Windows.Forms.Control,System.String)" />
 
@@ -1043,8 +1243,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -1058,6 +1262,8 @@
           <para
             >Gets the text for the <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 

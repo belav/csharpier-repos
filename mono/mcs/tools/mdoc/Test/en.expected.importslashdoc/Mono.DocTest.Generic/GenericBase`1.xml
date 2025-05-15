@@ -24,11 +24,15 @@
 
       
 
+      
+
        here.</typeparam
     >
     <summary>To be added.</summary>
     <remarks>
       <c>T:Mono.DocTest.Generic.GenericBase`1</c>
+
+      
 
       
 
@@ -88,6 +92,8 @@
 
           
 
+          
+
            here.</typeparam
         >
         <param name="genericParameter">Something</param>
@@ -95,6 +101,8 @@
         <returns>The default value.</returns>
         <remarks>
           <c>M:Mono.DocTest.GenericBase`1.BaseMethod``1(``0)</c>
+
+          
 
           
 
@@ -188,6 +196,8 @@
         <returns
           >The default value for <typeparamref
            name="U" />
+
+          
 
           
 

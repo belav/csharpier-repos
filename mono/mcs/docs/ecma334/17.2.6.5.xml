@@ -5,7 +5,7 @@
 
       >[Example: The example <code_example
       >
-<![CDATA[
+        <![CDATA[
 using System;  
 class C   
 {  
@@ -32,6 +32,8 @@ class Test
 
       
 
+      
+
       shows a class C that contains a nested class Nested. Within Nested, themethod G calls the static method F defined in C, and F has private declared accessibility. end example]</example
     >
   </paragraph>
@@ -40,7 +42,7 @@ class Test
 
       >[Example: In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 using System;  
 class Base   
 {  
@@ -67,6 +69,8 @@ class Test
 }  
 ]]>
       </code_example>
+
+      
 
       
 

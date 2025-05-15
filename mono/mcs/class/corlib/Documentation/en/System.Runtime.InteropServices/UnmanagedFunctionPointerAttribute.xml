@@ -40,8 +40,12 @@
 
         
 
+        
+
          attribute control various aspects of the transition of a delegate to an unmanaged function pointer, and are the same as the fields with identical names in the <see
          cref="T:System.Runtime.InteropServices.DllImportAttribute" />
+
+        
 
         
 
@@ -54,6 +58,8 @@
 
         
 
+        
+
          is ignored.</para
       >
       <para
@@ -61,6 +67,8 @@
          type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
+
+        
 
         
 
@@ -107,6 +115,8 @@
 
             
 
+            
+
              attribute. You can set the <paramref
              name="callingConvention" />
 
@@ -114,8 +124,12 @@
 
             
 
+            
+
              parameter to one of the values in the <see
              cref="T:System.Runtime.InteropServices.CallingConvention" />
+
+            
 
             
 
@@ -134,11 +148,15 @@
 
             
 
+            
+
              class with the specified calling convention. </para
           >
         </summary>
         <param name="callingConvention">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -171,8 +189,12 @@
 
             
 
+            
+
              field is true by default, which means that best-fit mapping behavior is enabled. If the field is false, best-fit mapping is disabled. Settings for this field override any level settings for the <see
              cref="T:System.Runtime.InteropServices.BestFitMappingAttribute" />
+
+            
 
             
 
@@ -183,6 +205,8 @@
           <para
             >For more information, see <see
              cref="F:System.Runtime.InteropServices.DllImportAttribute.BestFitMapping" />
+
+            
 
             
 
@@ -253,11 +277,15 @@
 
             
 
+            
+
              enumeration to specify the marshaling behavior of string parameters and to specify which entry-point name to invoke (the exact name given or a name ending with "A" or "W").</para
           >
           <para
             >For more information, see <see
              cref="F:System.Runtime.InteropServices.DllImportAttribute.CharSet" />
+
+            
 
             
 
@@ -295,11 +323,15 @@
 
             
 
+            
+
              field is false by default, which means the caller calls SetLastError. Set this field to true to indicate that the callee calls SetLastError before returning from the attributed method.</para
           >
           <para
             >For more information, see <see
              cref="F:System.Runtime.InteropServices.DllImportAttribute.SetLastError" />
+
+            
 
             
 
@@ -337,11 +369,15 @@
 
             
 
+            
+
              field is false by default, which means that the field is disabled. Set this field to true to indicate that an exception is thrown each time the interop marshaler converts an unmappable character.</para
           >
           <para
             >For more information, see <see
              cref="F:System.Runtime.InteropServices.DllImportAttribute.ThrowOnUnmappableChar" />
+
+            
 
             
 

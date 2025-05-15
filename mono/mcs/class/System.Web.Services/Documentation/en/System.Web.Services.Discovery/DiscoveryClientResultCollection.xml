@@ -31,6 +31,8 @@
 
         
 
+        
+
          objects. This class cannot be inherited.</para
       >
     </summary>
@@ -48,6 +50,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Discovery.DiscoveryClientResultCollection" />
+
+            
 
             
 
@@ -86,8 +90,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Web.Services.Discovery.DiscoveryClientResultCollection" />
+
+            
 
             
 
@@ -106,11 +114,15 @@
 
             
 
+            
+
              was inserted.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -123,8 +135,12 @@
 
           
 
+          
+
            to add to the <see
            cref="T:System.Web.Services.Discovery.DiscoveryClientResultCollection" />
+
+          
 
           
 
@@ -162,8 +178,12 @@
 
             
 
+            
+
              contains a specific <see
              cref="T:System.Web.Services.Discovery.DiscoveryClientResult" />
+
+            
 
             
 
@@ -182,8 +202,12 @@
 
             
 
+            
+
              is found in the <see
              cref="T:System.Web.Services.Discovery.DiscoveryClientResultCollection" />
+
+            
 
             
 
@@ -199,6 +223,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Discovery.DiscoveryClientResult" />
 
@@ -206,8 +232,12 @@
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Web.Services.Discovery.DiscoveryClientResultCollection" />
+
+          
 
           
 
@@ -267,8 +297,12 @@
 
             
 
+            
+
              elements that follow the removed <see
              cref="T:System.Web.Services.Discovery.DiscoveryClientResult" />
+
+            
 
             
 
@@ -287,8 +321,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Web.Services.Discovery.DiscoveryClientResultCollection" />
+
+            
 
             
 
@@ -304,6 +342,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Discovery.DiscoveryClientResult" />
 
@@ -311,8 +351,12 @@
 
           
 
+          
+
            to remove from the <see
            cref="T:System.Web.Services.Discovery.DiscoveryClientResultCollection" />
+
+          
 
           
 

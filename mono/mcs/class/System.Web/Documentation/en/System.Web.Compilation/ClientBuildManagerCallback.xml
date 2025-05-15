@@ -27,8 +27,12 @@
 
         
 
+        
+
          object can be passed to the <see
          cref="T:System.Web.Compilation.ClientBuildManager" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          method. When an error is encountered during an application build, the error is passed as an argument to either the <see
          cref="M:System.Web.Compilation.ClientBuildManagerCallback.ReportCompilerError(System.CodeDom.Compiler.CompilerError)" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          method, depending on the type of error. When you create a class that derives from the <see
          cref="T:System.Web.Compilation.ClientBuildManagerCallback" />
+
+        
 
         
 
@@ -70,6 +82,8 @@
       <para
         >Receives status information about a build from the <see
          cref="T:System.Web.Compilation.ClientBuildManager" />
+
+        
 
         
 
@@ -92,6 +106,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Compilation.ClientBuildManagerCallback" />
+
+            
 
             
 
@@ -131,6 +147,8 @@
 
           
 
+          
+
           The error or warning encountered during compilation. </param
         >
       </Docs>
@@ -159,6 +177,8 @@
         </summary>
         <param name="error">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -194,8 +214,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 

@@ -74,6 +74,8 @@
 
           
 
+          
+
           The URL that identifies the document. </param
         >
         <param name="language">
@@ -83,8 +85,12 @@
 
           
 
+          
+
           The document language. You can specify this parameter as <see
            cref="F:System.Guid.Empty" />
+
+          
 
           
 
@@ -99,8 +105,12 @@
 
           
 
+          
+
           The identity of the vendor for the document language. You can specify this parameter as <see
            cref="F:System.Guid.Empty" />
+
+          
 
           
 
@@ -115,8 +125,12 @@
 
           
 
+          
+
           The type of the document. You can specify this parameter as <see
            cref="F:System.Guid.Empty" />
+
+          
 
           
 
@@ -226,6 +240,8 @@
 
           
 
+          
+
           The metadata token of the method. </param
         >
       </Docs>
@@ -269,10 +285,14 @@
 
           
 
+          
+
           The metadata token of the method. </param
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -322,6 +342,8 @@
 
           
 
+          
+
           The document in which the method is located. </param
         >
         <param name="line">
@@ -331,10 +353,14 @@
 
           
 
+          
+
           The position of the line within the document. The lines are numbered, beginning with 1. </param
         >
         <param name="column">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -417,10 +443,14 @@
 
           
 
+          
+
           The metadata token for the object for which the attribute is requested. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -463,6 +493,8 @@
         </returns>
         <param name="parent">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

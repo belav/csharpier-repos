@@ -11,6 +11,8 @@
 
         
 
+        
+
          namespace contains classes for creating custom user interface behavior for components at design time.</para
       >
     </summary>
@@ -22,6 +24,8 @@
           <para
             >A <see
              cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+            
 
             
 
@@ -39,8 +43,12 @@
 
             
 
+            
+
              class for managing a collection of <see
              cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+            
 
             
 
@@ -58,6 +66,8 @@
 
             
 
+            
+
              class for managing the custom user interface in a designer.</para
           >
         </item>
@@ -65,6 +75,8 @@
           <para
             >A <see
              cref="T:System.Windows.Forms.Design.Behavior.SnapLine" />
+
+            
 
             
 

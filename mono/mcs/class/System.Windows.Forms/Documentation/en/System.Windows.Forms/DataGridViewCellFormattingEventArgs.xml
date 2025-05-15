@@ -27,11 +27,15 @@
 
         
 
+        
+
          event to customize the conversion of a cell value into a format suitable for display or to customize the appearance of a cell depending on its state or value. </para
       >
       <para
         >The <see
          cref="E:System.Windows.Forms.DataGridView.CellFormatting" />
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
          is retrieved or its <see
          cref="M:System.Windows.Forms.DataGridViewCell.GetFormattedValue(System.Object,System.Int32,System.Windows.Forms.DataGridViewCellStyle@,System.ComponentModel.TypeConverter,System.ComponentModel.TypeConverter,System.Windows.Forms.DataGridViewDataErrorContexts)" />
+
+        
 
         
 
@@ -61,8 +69,12 @@
 
         
 
+        
+
          event, the <see
          cref="P:System.Windows.Forms.ConvertEventArgs.Value" />
+
+        
 
         
 
@@ -75,6 +87,8 @@
 
         
 
+        
+
          property to the converted value, ensuring that the new value is of the type specified by the cell <see
          cref="P:System.Windows.Forms.DataGridViewCell.FormattedValueType" />
 
@@ -82,8 +96,12 @@
 
         
 
+        
+
          property. To indicate that no further value formatting is necessary, set the <see
          cref="P:System.Windows.Forms.DataGridViewCellFormattingEventArgs.FormattingApplied" />
+
+        
 
         
 
@@ -99,8 +117,12 @@
 
         
 
+        
+
          is null or is not of the correct type, or the <see
          cref="P:System.Windows.Forms.DataGridViewCellFormattingEventArgs.FormattingApplied" />
+
+        
 
         
 
@@ -113,8 +135,12 @@
 
         
 
+        
+
          is formatted using the <see
          cref="P:System.Windows.Forms.DataGridViewCellStyle.Format" />
+
+        
 
         
 
@@ -127,8 +153,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Windows.Forms.DataGridViewCellStyle.DataSourceNullValue" />
+
+        
 
         
 
@@ -141,6 +171,8 @@
 
         
 
+        
+
          properties of the cell style returned by the <see
          cref="P:System.Windows.Forms.DataGridViewCellFormattingEventArgs.CellStyle" />
 
@@ -148,8 +180,12 @@
 
         
 
+        
+
          property, which is initialized using the cell <see
          cref="P:System.Windows.Forms.DataGridViewCell.InheritedStyle" />
+
+        
 
         
 
@@ -165,8 +201,12 @@
 
         
 
+        
+
          property, the display properties of the object returned by the <see
          cref="P:System.Windows.Forms.DataGridViewCellFormattingEventArgs.CellStyle" />
+
+        
 
         
 
@@ -177,6 +217,8 @@
       <para
         >For more information about custom formatting using the <see
          cref="E:System.Windows.Forms.DataGridView.CellFormatting" />
+
+        
 
         
 
@@ -193,12 +235,16 @@
 
         
 
+        
+
         .</para
       >
       <para>To avoid performance penalties when handling this event, access the cell through the parameters of the event handler rather than accessing the cell directly.</para>
       <para
         >To customize the conversion of a formatted, user-specified value into an actual cell value, handle the <see
          cref="E:System.Windows.Forms.DataGridView.CellParsing" />
+
+        
 
         
 
@@ -211,6 +257,8 @@
          type="text/html">
           <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
         </format>
+
+        
 
         
 
@@ -229,8 +277,12 @@
 
         
 
+        
+
          event of a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -266,8 +318,12 @@
 
             
 
+            
+
              parameter represents the type that the <paramref
              name="value" />
+
+            
 
             
 
@@ -280,8 +336,12 @@
 
             
 
+            
+
              is assigned the cell's <see
              cref="P:System.Windows.Forms.DataGridViewCell.FormattedValueType" />
+
+            
 
             
 
@@ -294,8 +354,12 @@
 
             
 
+            
+
              is the <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -308,6 +372,8 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Type" />
 
@@ -315,8 +381,12 @@
 
             
 
+            
+
              representing the <see
              cref="T:System.Drawing.Bitmap" />
+
+            
 
             
 
@@ -332,8 +402,12 @@
 
             
 
+            
+
              event handler does not set the <see
              cref="P:System.Windows.Forms.ConvertEventArgs.Value" />
+
+            
 
             
 
@@ -346,6 +420,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
 
@@ -353,8 +429,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.DataGridViewCellStyle.FormatProvider" />
+
+            
 
             
 
@@ -373,11 +453,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="columnIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -392,10 +476,14 @@
 
           
 
+          
+
           The row index of the cell that caused the event.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -410,8 +498,12 @@
 
           
 
+          
+
           The type to convert <paramref
            name="value" />
+
+          
 
           
 
@@ -421,6 +513,8 @@
         >
         <param name="cellStyle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -450,6 +544,8 @@
           <para
             >Setting the properties of the object returned by the <see
              cref="P:System.Windows.Forms.DataGridViewCellFormattingEventArgs.CellStyle" />
+
+            
 
             
 
@@ -494,6 +590,8 @@
 
             
 
+            
+
              property to obtain an index into the <see
              cref="P:System.Windows.Forms.DataGridView.Columns" />
 
@@ -501,8 +599,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -539,8 +641,12 @@
 
             
 
+            
+
              event, set the <see
              cref="P:System.Windows.Forms.DataGridViewCellFormattingEventArgs.FormattingApplied" />
+
+            
 
             
 
@@ -553,8 +659,12 @@
 
             
 
+            
+
              property if no further value formatting is required. If the <see
              cref="P:System.Windows.Forms.DataGridViewCellFormattingEventArgs.FormattingApplied" />
+
+            
 
             
 
@@ -567,8 +677,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.DataGridViewCellStyle.FormatProvider" />
+
+            
 
             
 
@@ -581,8 +695,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.DataGridViewCellStyle.DataSourceNullValue" />
+
+            
 
             
 
@@ -595,8 +713,12 @@
 
             
 
+            
+
              object returned by the <see
              cref="P:System.Windows.Forms.DataGridViewCellFormattingEventArgs.CellStyle" />
+
+            
 
             
 
@@ -633,6 +755,8 @@
 
             
 
+            
+
              property to obtain an index into the <see
              cref="P:System.Windows.Forms.DataGridView.Rows" />
 
@@ -640,8 +764,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 

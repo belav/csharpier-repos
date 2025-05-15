@@ -42,6 +42,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -78,6 +80,8 @@
         </returns>
         <param name="isolationLevel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -149,6 +153,8 @@
 
           
 
+          
+
           Specifies the isolation level for the transaction.</param
         >
       </Docs>
@@ -180,6 +186,8 @@
 
             
 
+            
+
              parameter must be a valid database name for the current instance. </para
           >
         </remarks>
@@ -189,6 +197,8 @@
         </summary>
         <param name="databaseName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -220,11 +230,15 @@
 
             
 
+            
+
              method rolls back any pending transactions. It then releases the connection to the connection pool, or closes the connection if connection pooling is disabled.</para
           >
           <para
             >An application can call <see
              cref="M:System.Data.Common.DbConnection.Close" />
+
+            
 
             
 
@@ -240,6 +254,8 @@
 
             
 
+            
+
              goes out of scope, it is not closed. Therefore, you must explicitly close the connection by calling Close or Dispose, which are functionally equivalent. If the connection pooling value Pooling is set to true or yes, this also releases the physical connection.</para
           >
           <block subset="none" type="note">
@@ -250,6 +266,8 @@
                   >Programming for Garbage Collection</a
                 >
               </format>
+
+              
 
               
 
@@ -346,6 +364,8 @@
 
             
 
+            
+
              object associated with the current connection.</para
           >
         </summary>
@@ -354,6 +374,8 @@
           <para
             >A <see
              cref="T:System.Data.Common.DbCommand" />
+
+            
 
             
 
@@ -389,6 +411,8 @@
 
             
 
+            
+
              object.</para
           >
         </remarks>
@@ -402,6 +426,8 @@
 
             
 
+            
+
              object associated with the current connection.</para
           >
         </summary>
@@ -410,6 +436,8 @@
           <para
             >A <see
              cref="T:System.Data.Common.DbCommand" />
+
+            
 
             
 
@@ -464,8 +492,12 @@
 
             
 
+            
+
              returns whatever is contained in the <see
              cref="P:System.Data.Common.DbConnection.ConnectionString" />
+
+            
 
             
 
@@ -478,8 +510,12 @@
 
             
 
+            
+
              data source keyword's value starts with "|datadirectory|", the property returns whatever is contained in the <see
              cref="P:System.Data.Common.DbConnection.ConnectionString" />
+
+            
 
             
 
@@ -521,8 +557,12 @@
 
             
 
+            
+
              instance, EnlistTransaction takes advantage of functionality available in the <see
              cref="N:System.Transactions" />
+
+            
 
             
 
@@ -542,8 +582,12 @@
 
           
 
+          
+
           A reference to an existing <see
            cref="T:System.Transactions.Transaction" />
+
+          
 
           
 
@@ -579,6 +623,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -587,6 +633,8 @@
           <para
             >A <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -628,6 +676,8 @@
 
             
 
+            
+
              using the specified string for the schema name.</para
           >
         </summary>
@@ -641,11 +691,15 @@
 
             
 
+            
+
              that contains schema information.</para
           >
         </returns>
         <param name="collectionName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -683,6 +737,8 @@
 
             
 
+            
+
              parameter can supply n depth of values, which are specified by the restrictions collection for a specific collection. In order to set values on a given restriction, and not set the values of other restrictions, you need to set the preceding restrictions to null and then put the appropriate value in for the restriction that you would like to specify a value for.</para
           >
           <para>An example of this is the "Tables" collection. If the "Tables" collection has three restrictions (database, owner, and table name) and you want to get back only the tables associated with the owner "Carl", you must pass in the following values at least: null, "Carl". If a restriction value is not passed in, the default values are used for that restriction. This is the same mapping as passing in null, which is different from passing in an empty string for the parameter value. In that case, the empty string ("") is considered to be the value for the specified parameter.</para>
@@ -693,6 +749,8 @@
           <para
             >Returns schema information for the data source of this <see
              cref="T:System.Data.Common.DbConnection" />
+
+            
 
             
 
@@ -711,6 +769,8 @@
 
             
 
+            
+
              that contains schema information.</para
           >
         </returns>
@@ -721,10 +781,14 @@
 
           
 
+          
+
           Specifies the name of the schema to return.</param
         >
         <param name="restrictionValues">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -766,6 +830,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -774,6 +840,8 @@
           <para
             >Raises the <see
              cref="E:System.Data.Common.DbConnection.StateChange" />
+
+            
 
             
 
@@ -806,6 +874,8 @@
 
             
 
+            
+
              will throw an exception if called again without first being closed.</para
           >
         </remarks>
@@ -814,6 +884,8 @@
           <para
             >Opens a database connection with the settings specified by the <see
              cref="P:System.Data.Common.DbConnection.ConnectionString" />
+
+            
 
             
 
@@ -899,6 +971,8 @@
 
             
 
+            
+
              event occurs when the state of the event changes from closed to opened, or opened to closed.</para
           >
         </remarks>
@@ -935,8 +1009,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Data.IDbConnection" />
+
+            
 
             
 
@@ -947,6 +1025,8 @@
           <para
             >For more information, see <see
              cref="M:System.Data.IDbConnection.BeginTransaction" />
+
+            
 
             
 
@@ -992,6 +1072,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1000,6 +1082,8 @@
           <para
             >Begins a database transaction with the specified <see
              cref="T:System.Data.IsolationLevel" />
+
+            
 
             
 
@@ -1040,8 +1124,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Data.IDbConnection.CreateCommand" />
+
+            
 
             
 
@@ -1060,6 +1148,8 @@
 
             
 
+            
+
              object that is associated with the current connection.</para
           >
         </summary>
@@ -1068,6 +1158,8 @@
           <para
             >A <see
              cref="T:System.Data.Common.DbCommand" />
+
+            
 
             
 

@@ -29,6 +29,8 @@
 
         
 
+        
+
          extends.</para
       >
     </remarks>
@@ -74,6 +76,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </summary>
@@ -82,6 +86,8 @@
           <para
             >A string containing either the encrypted or decrypted value of the <paramref
              name="xmlString" />
+
+            
 
             
 
@@ -185,10 +191,14 @@
 
           
 
+          
+
           The level of the configuration file.</param
         >
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -203,10 +213,14 @@
 
           
 
+          
+
           Path to the remote machine.</param
         >
         <param name="locationSubPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

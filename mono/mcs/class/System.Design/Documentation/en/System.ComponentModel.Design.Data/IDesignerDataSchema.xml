@@ -17,11 +17,15 @@
 
         
 
+        
+
          interface retrieve schema information from a data store and return it to the user interface, typically to populate UI elements that enable the user to specify the data-store object that they  want to work with.</para
       >
       <para
         >The <see
          cref="T:System.ComponentModel.Design.Data.IDesignerDataSchema" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
          method, which returns the requested schema objects, and the <see
          cref="M:System.ComponentModel.Design.Data.IDesignerDataSchema.SupportsSchemaClass(System.ComponentModel.Design.Data.DesignerDataSchemaClass)" />
+
+        
 
         
 
@@ -79,6 +87,8 @@
 
             
 
+            
+
              method returns a collection of all the specified schema objects in the data store. </para
           >
           <para
@@ -89,8 +99,12 @@
 
             
 
+            
+
              class for the list of schema objects supported by the .NET Framework. Additional schema objects can be added to the <see
              cref="T:System.ComponentModel.Design.Data.DesignerDataSchemaClass" />
+
+            
 
             
 
@@ -106,8 +120,12 @@
 
             
 
+            
+
              method should return null. You can use the <see
              cref="M:System.ComponentModel.Design.Data.IDesignerDataSchema.SupportsSchemaClass(System.ComponentModel.Design.Data.DesignerDataSchemaClass)" />
+
+            
 
             
 
@@ -120,11 +138,15 @@
 
             
 
+            
+
              method, to avoid returning null to your application.</para
           >
           <para
             >If the data store supports the requested object, but does not contain any instances, the <see
              cref="M:System.ComponentModel.Design.Data.IDesignerDataSchema.GetSchemaItems(System.ComponentModel.Design.Data.DesignerDataSchemaClass)" />
+
+            
 
             
 
@@ -143,6 +165,8 @@
         </returns>
         <param name="schemaClass">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -181,8 +205,12 @@
 
             
 
+            
+
              method indicates whether the data store supports a specified data-schema object. If the data store does not support the specified object, the <see
              cref="M:System.ComponentModel.Design.Data.IDesignerDataSchema.SupportsSchemaClass(System.ComponentModel.Design.Data.DesignerDataSchemaClass)" />
+
+            
 
             
 
@@ -193,6 +221,8 @@
           <para
             >You can add tests for additional data-schema objects by deriving from the <see
              cref="T:System.ComponentModel.Design.Data.DesignerDataSchemaClass" />
+
+            
 
             
 
@@ -211,6 +241,8 @@
         </returns>
         <param name="schemaClass">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

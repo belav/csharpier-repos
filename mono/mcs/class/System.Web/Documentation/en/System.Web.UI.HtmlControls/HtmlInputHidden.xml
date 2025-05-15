@@ -39,8 +39,12 @@
 
         
 
+        
+
          control to embed information that is hidden from the user within a &lt;form&gt; element. This information is sent when the Web page is posted back to the server. The <see
          cref="T:System.Web.UI.HtmlControls.HtmlInputHidden" />
+
+        
 
         
 
@@ -53,8 +57,12 @@
 
         
 
+        
+
          event that is raised when the <see
          cref="P:System.Web.UI.HtmlControls.HtmlInputControl.Value" />
+
+        
 
         
 
@@ -71,8 +79,12 @@
 
           
 
+          
+
            control does not provide a built-in way to post back to the server. You must provide another control on the Web page that supports posting to the server, such as an <see
            cref="T:System.Web.UI.HtmlControls.HtmlButton" />
+
+          
 
           
 
@@ -92,8 +104,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.HtmlControls.HtmlInputHidden.#ctor" />
+
+        
 
         
 
@@ -124,11 +140,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The following table shows the initial property value for an instance of <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputHidden" />
+
+            
 
             
 
@@ -164,6 +184,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputHidden" />
+
+            
 
             
 
@@ -208,8 +230,12 @@
 
             
 
+            
+
              method checks to see whether the postback value of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputHidden" />
+
+            
 
             
 
@@ -225,8 +251,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputHidden" />
+
+            
 
             
 
@@ -245,6 +275,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -253,6 +285,8 @@
           <para
             >true if the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputHidden" />
+
+            
 
             
 
@@ -268,10 +302,14 @@
 
           
 
+          
+
           The key identifier for the control.</param
         >
         <param name="postCollection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -301,8 +339,12 @@
 
             
 
+            
+
              method is called just prior to rendering the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputHidden" />
+
+            
 
             
 
@@ -315,8 +357,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputHidden" />
+
+            
 
             
 
@@ -335,6 +381,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -345,8 +393,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -380,8 +432,12 @@
 
             
 
+            
+
              event is raised when the <see
              cref="P:System.Web.UI.HtmlControls.HtmlInputControl.Value" />
+
+            
 
             
 
@@ -393,6 +449,8 @@
             <para
               >The control must have view state enabled for the <see
                cref="E:System.Web.UI.HtmlControls.HtmlInputHidden.ServerChange" />
+
+              
 
               
 
@@ -411,11 +469,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.HtmlControls.HtmlInputHidden.OnServerChange(System.EventArgs)" />
+
+            
 
             
 
@@ -434,6 +496,8 @@
 
             
 
+            
+
              event. This method allows you to handle the event directly.</para
           >
         </summary>
@@ -444,8 +508,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -480,8 +548,12 @@
 
             
 
+            
+
              method is used primarily by control developers to extend the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputHidden" />
+
+            
 
             
 
@@ -500,8 +572,12 @@
 
             
 
+            
+
              method to signal the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputHidden" />
+
+            
 
             
 
@@ -539,8 +615,12 @@
 
             
 
+            
+
              control's attributes to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -556,8 +636,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -585,8 +669,12 @@
 
             
 
+            
+
              event is raised when the <see
              cref="P:System.Web.UI.HtmlControls.HtmlInputControl.Value" />
+
+            
 
             
 
@@ -598,6 +686,8 @@
             <para
               >The control must have view state enabled for the <see
                cref="E:System.Web.UI.HtmlControls.HtmlInputHidden.ServerChange" />
+
+              
 
               
 
@@ -616,6 +706,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -624,6 +716,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Web.UI.HtmlControls.HtmlInputControl.Value" />
+
+            
 
             
 
@@ -670,8 +764,12 @@
 
             
 
+            
+
              interface method by calling the <see
              cref="M:System.Web.UI.HtmlControls.HtmlInputHidden.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+
+            
 
             
 
@@ -690,6 +788,8 @@
 
             
 
+            
+
              control's state has changed as a result of the postback; otherwise, false.</para
           >
         </returns>
@@ -700,10 +800,14 @@
 
           
 
+          
+
           The key identifier for the control.</param
         >
         <param name="postCollection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -739,8 +843,12 @@
 
             
 
+            
+
              interface method by calling the <see
              cref="M:System.Web.UI.HtmlControls.HtmlInputHidden.RaisePostDataChangedEvent" />
+
+            
 
             
 

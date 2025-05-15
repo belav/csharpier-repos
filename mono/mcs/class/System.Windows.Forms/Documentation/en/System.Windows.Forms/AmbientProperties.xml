@@ -21,8 +21,12 @@
 
         
 
+        
+
          property. If the control is not sited, the site does not support ambient properties, or the property is not set on the <see
          cref="T:System.Windows.Forms.AmbientProperties" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          uses its own default values. Some objects derived from the <see
          cref="T:System.Windows.Forms.Control" />
+
+        
 
         
 
@@ -49,6 +57,8 @@
 
         
 
+        
+
          class always sets the <see
          cref="P:System.Windows.Forms.Control.ForeColor" />
 
@@ -56,8 +66,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.Control.BackColor" />
+
+        
 
         
 
@@ -83,6 +97,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.AmbientProperties" />
+
+            
 
             
 
@@ -115,8 +131,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Drawing.Color.Empty" />
+
+            
 
             
 
@@ -156,6 +176,8 @@
 
             
 
+            
+
              property is null.</para
           >
         </remarks>
@@ -182,6 +204,8 @@
           <para
             >If there is no ambient font, the value of the <see
              cref="P:System.Windows.Forms.Control.Font" />
+
+            
 
             
 
@@ -218,8 +242,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Drawing.Color.Empty" />
+
+            
 
             
 

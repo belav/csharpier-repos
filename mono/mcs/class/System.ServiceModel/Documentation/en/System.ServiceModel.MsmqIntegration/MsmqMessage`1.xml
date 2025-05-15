@@ -36,6 +36,8 @@
 
         
 
+        
+
          class to access the properties of the Message Queuing message.</para
       >
     </remarks>
@@ -44,6 +46,8 @@
       <para
         >The <see
          cref="T:System.ServiceModel.MsmqIntegration.MsmqMessage`1" />
+
+        
 
         
 
@@ -101,6 +105,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -109,6 +115,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Messaging.AcknowledgeTypes" />
+
+            
 
             
 
@@ -151,6 +159,8 @@
 
             
 
+            
+
              that is associated with this message.</para
           >
         </summary>
@@ -180,6 +190,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -216,6 +228,8 @@
 
             
 
+            
+
              value that represents any additional application-specific information that is associated with this message.</para
           >
         </summary>
@@ -242,6 +256,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -326,6 +342,8 @@
 
             
 
+            
+
              value that indicates the type of the body of the message.</para
           >
         </summary>
@@ -353,6 +371,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -389,6 +409,8 @@
 
             
 
+            
+
              of the destination queue for this message.</para
           >
         </summary>
@@ -415,6 +437,8 @@
           <para
             >Gets or sets an array of <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -453,6 +477,8 @@
 
             
 
+            
+
              that contains the message identifier for this message.</para
           >
         </summary>
@@ -480,6 +506,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -520,12 +548,16 @@
 
                 
 
+                
+
                 : A message sent by an application.</para
               >
             </item>
             <item>
               <para>
                 <see cref="F:System.Messaging.MessageType.Acknowledgment" />
+
+                
 
                 
 
@@ -542,6 +574,8 @@
 
                 
 
+                
+
                 : Whenever an application sends a message, if the local Queue Manager has a report queue defined, Message Queuing generates a report message and sends it to the report queue. If tracing is enabled, Message Queuing sends a report message to the report queue each time the original message enters or leaves a Message Queuing server.</para
               >
             </item>
@@ -552,6 +586,8 @@
           <para
             >Gets the <see
              cref="T:System.Messaging.MessageType" />
+
+            
 
             
 
@@ -594,6 +630,8 @@
 
             
 
+            
+
              that is associated with this message.</para
           >
         </summary>
@@ -617,6 +655,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -648,6 +688,8 @@
           <para
             >Gets an array of <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -688,6 +730,8 @@
 
             
 
+            
+
              that indicates when the message was sent by the queue manager of the sending application's computer.</para
           >
         </summary>
@@ -721,6 +765,8 @@
 
             
 
+            
+
              property is true, the message is sent to the dead-letter queue. Otherwise, the message is dropped.</para
           >
           <para>The default for this property is null.</para>
@@ -730,6 +776,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 

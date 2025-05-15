@@ -23,6 +23,8 @@
 
         
 
+        
+
          database, or in the configuration file for an application. Once a user is authenticated, forms authentication maintains an authentication ticket in a cookie or in the URL so that an authenticated user does not need to supply credentials with each request.</para
       >
       <para
@@ -35,10 +37,14 @@
 
         
 
+        
+
          configuration element to Forms. You can require that all requests to an application contain a valid user authentication ticket by using the <format
          type="text/html">
           <a href="2d3d9bf6-f914-4c30-ad03-32eea98fa612">authorization</a>
         </format>
+
+        
 
         
 
@@ -62,11 +68,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >The <see
          cref="T:System.Web.Security.FormsAuthentication" />
+
+        
 
         
 
@@ -79,8 +89,12 @@
 
         
 
+        
+
          method redirects a browser to the configured <see
          cref="P:System.Web.Security.FormsAuthentication.LoginUrl" />
+
+        
 
         
 
@@ -93,8 +107,12 @@
 
         
 
+        
+
          method redirects an authenticated user back to the original protected URL that was requested or to the <see
          cref="P:System.Web.Security.FormsAuthentication.DefaultUrl" />
+
+        
 
         
 
@@ -124,6 +142,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Security.FormsAuthentication" />
+
+            
 
             
 
@@ -164,8 +184,12 @@
 
             
 
+            
+
              section of the application configuration file. Alternatively, you can use ASP.NET membership to store user credentials and call the <see
              cref="M:System.Web.Security.MembershipProvider.ValidateUser(System.String,System.String)" />
+
+            
 
             
 
@@ -182,11 +206,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >For improved security, you can encrypt passwords stored in the configuration file for an application by using the <see
              cref="M:System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(System.String,System.String)" />
+
+            
 
             
 
@@ -210,10 +238,14 @@
 
           
 
+          
+
           The user name.</param
         >
         <param name="password">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -248,10 +280,14 @@
 
             
 
+            
+
              property value is set in the configuration file for an ASP.NET application by using the domain attribute of the <format
              type="text/html">
               <a href="8163b8b5-ea6c-46c8-b5a9-c4c3de31c0b3">forms</a>
             </format>
+
+            
 
             
 
@@ -264,8 +300,12 @@
 
             
 
+            
+
              property value determines the <see
              cref="P:System.Web.HttpCookie.Domain" />
+
+            
 
             
 
@@ -304,10 +344,14 @@
 
             
 
+            
+
              property reflects the value for the cookieless attribute of the <format
              type="text/html">
               <a href="8163b8b5-ea6c-46c8-b5a9-c4c3de31c0b3">forms</a>
             </format>
+
+            
 
             
 
@@ -320,6 +364,8 @@
 
             
 
+            
+
              property determines whether the <see
              cref="T:System.Web.Security.FormsAuthenticationTicket" />
 
@@ -327,8 +373,12 @@
 
             
 
+            
+
              value will be stored in a session cookie in the browser or stored in the <see
              cref="P:System.Web.HttpRequest.QueryString" />
+
+            
 
             
 
@@ -345,8 +395,12 @@
 
               
 
+              
+
                value is stored in the URI, the length of the generated URI may be longer than the maximum length allowed. This is most likely to occur when the <see
                cref="P:System.Web.Security.FormsAuthentication.FormsCookiePath" />
+
+              
 
               
 
@@ -359,8 +413,12 @@
 
               
 
+              
+
                strings are stored in the <see
                cref="T:System.Web.Security.FormsAuthenticationTicket" />
+
+              
 
               
 
@@ -397,8 +455,12 @@
 
             
 
+            
+
              property returns a value based on the <see
              cref="P:System.Web.Security.FormsAuthentication.CookieMode" />
+
+            
 
             
 
@@ -416,6 +478,8 @@
 
                 
 
+                
+
                  property is set to <see
                  cref="F:System.Web.HttpCookieMode.UseCookies" />
 
@@ -423,8 +487,12 @@
 
                 
 
+                
+
                 , the <see
                  cref="P:System.Web.Security.FormsAuthentication.CookiesSupported" />
+
+                
 
                 
 
@@ -442,8 +510,12 @@
 
                 
 
+                
+
                  property is set to <see
                  cref="F:System.Web.HttpCookieMode.UseUri" />
+
+                
 
                 
 
@@ -456,6 +528,8 @@
 
                 
 
+                
+
                  property will return false.</para
               >
             </item>
@@ -463,6 +537,8 @@
               <para
                 >If the <see
                  cref="P:System.Web.Security.FormsAuthentication.CookieMode" />
+
+                
 
                 
 
@@ -475,6 +551,8 @@
 
                 
 
+                
+
                 , the <see
                  cref="P:System.Web.Security.FormsAuthentication.CookiesSupported" />
 
@@ -482,8 +560,12 @@
 
                 
 
+                
+
                  property will return true if the browser supports cookies and cookies are enabled; otherwise, the <see
                  cref="P:System.Web.Security.FormsAuthentication.CookiesSupported" />
+
+                
 
                 
 
@@ -501,8 +583,12 @@
 
                 
 
+                
+
                  property is set to <see
                  cref="F:System.Web.HttpCookieMode.UseDeviceProfile" />
+
+                
 
                 
 
@@ -515,8 +601,12 @@
 
                 
 
+                
+
                  property will return true if the <see
                  cref="P:System.Web.HttpRequest.Browser" />
+
+                
 
                 
 
@@ -529,8 +619,12 @@
 
                 
 
+                
+
                  supports both cookies and redirecting with cookies; otherwise, the <see
                  cref="P:System.Web.Security.FormsAuthentication.CookiesSupported" />
+
+                
 
                 
 
@@ -571,6 +665,8 @@
 
             
 
+            
+
              object based on the encrypted forms-authentication ticket passed to the method.</para
           >
         </summary>
@@ -584,8 +680,12 @@
 
             
 
+            
+
              object. If the <paramref
              name="encryptedTicket" />
+
+            
 
             
 
@@ -596,6 +696,8 @@
         </returns>
         <param name="encryptedTicket">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -630,10 +732,14 @@
 
             
 
+            
+
              property value is set in the configuration file for an ASP.NET application by using the defaultUrl attribute of the <format
              type="text/html">
               <a href="8163b8b5-ea6c-46c8-b5a9-c4c3de31c0b3">forms</a>
             </format>
+
+            
 
             
 
@@ -646,8 +752,12 @@
 
             
 
+            
+
              property is used by the <see
              cref="Overload:System.Web.Security.FormsAuthentication.RedirectFromLoginPage" />
+
+            
 
             
 
@@ -660,8 +770,12 @@
 
             
 
+            
+
              method will return the <see
              cref="P:System.Web.Security.FormsAuthentication.DefaultUrl" />
+
+            
 
             
 
@@ -675,6 +789,8 @@
           <para
             >Gets the URL that the <see
              cref="T:System.Web.Security.FormsAuthentication" />
+
+            
 
             
 
@@ -706,10 +822,14 @@
 
             
 
+            
+
              property value is set using the enableCrossAppRedirects attribute of the <format
              type="text/html">
               <a href="8163b8b5-ea6c-46c8-b5a9-c4c3de31c0b3">forms</a>
             </format>
+
+            
 
             
 
@@ -725,8 +845,12 @@
 
             
 
+            
+
              property is checked within the <see
              cref="Overload:System.Web.Security.FormsAuthentication.RedirectFromLoginPage" />
+
+            
 
             
 
@@ -739,6 +863,8 @@
 
             
 
+            
+
              is true, then the redirect is performed; if <see
              cref="P:System.Web.Security.FormsAuthentication.EnableCrossAppRedirects" />
 
@@ -746,8 +872,12 @@
 
             
 
+            
+
              is false, the browser is redirected to the page defined in the <see
              cref="P:System.Web.Security.FormsAuthentication.DefaultUrl" />
+
+            
 
             
 
@@ -766,12 +896,16 @@
 
               
 
+              
+
                configuration element are duplicated across the authenticated applications. For more information and an example, see <format
                type="text/html">
                 <a href="99e2f9e8-5b97-4a4d-a4ed-5f93276053b7"
                   >Forms Authentication Across Applications</a
                 >
               </format>
+
+              
 
               
 
@@ -789,6 +923,8 @@
 
               
 
+              
+
                method is a URL that you expect so that you can make sure that you allow redirects only to approved Web sites. You must also verify that the redirect URL uses the appropriate protocol (HTTP or HTTPS). To perform these verifications, you can add a postback event handler to your login page, or you can add a handler for the <see
                cref="E:System.Web.UI.WebControls.Login.LoggedIn" />
 
@@ -796,8 +932,12 @@
 
               
 
+              
+
                event of the <see
                cref="T:System.Web.UI.WebControls.Login" />
+
+              
 
               
 
@@ -871,8 +1011,12 @@ The possible values are:
 
           
 
+          
+
           The <see
            cref="T:System.Web.Security.FormsAuthenticationTicket" />
+
+          
 
           
 
@@ -904,10 +1048,14 @@ The possible values are:
 
             
 
+            
+
              property value is set in the configuration file for an ASP.NET application by using the name attribute of the <format
              type="text/html">
               <a href="8163b8b5-ea6c-46c8-b5a9-c4c3de31c0b3">forms</a>
             </format>
+
+            
 
             
 
@@ -920,8 +1068,12 @@ The possible values are:
 
             
 
+            
+
              is used to reference the cookie that stores the <see
              cref="T:System.Web.Security.FormsAuthenticationTicket" />
+
+            
 
             
 
@@ -958,10 +1110,14 @@ The possible values are:
 
             
 
+            
+
              property value is set in the configuration file for an ASP.NET application using the path attribute of the <format
              type="text/html">
               <a href="8163b8b5-ea6c-46c8-b5a9-c4c3de31c0b3">forms</a>
             </format>
+
+            
 
             
 
@@ -974,6 +1130,8 @@ The possible values are:
 
             
 
+            
+
              specifies the <see
              cref="P:System.Web.HttpCookie.Path" />
 
@@ -981,8 +1139,12 @@ The possible values are:
 
             
 
+            
+
              for the cookie that stores the <see
              cref="T:System.Web.Security.FormsAuthenticationTicket" />
+
+            
 
             
 
@@ -1025,6 +1187,8 @@ The possible values are:
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -1042,8 +1206,12 @@ The possible values are:
 
             
 
+            
+
              that contains encrypted forms-authentication ticket information. The default value for the <see
              cref="P:System.Web.Security.FormsAuthentication.FormsCookiePath" />
+
+            
 
             
 
@@ -1059,10 +1227,14 @@ The possible values are:
 
           
 
+          
+
           The name of the authenticated user. </param
         >
         <param name="createPersistentCookie">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1106,11 +1278,15 @@ The possible values are:
 
             
 
+            
+
              that contains encrypted forms-authentication ticket information.</para
           >
         </returns>
         <param name="userName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1125,6 +1301,8 @@ The possible values are:
 
           
 
+          
+
           true to create a durable cookie (one that is saved across browser sessions); otherwise, false. </param
         >
         <param name="strCookiePath">
@@ -1134,8 +1312,12 @@ The possible values are:
 
           
 
+          
+
           The <see
            cref="P:System.Web.HttpCookie.Path" />
+
+          
 
           
 
@@ -1173,11 +1355,15 @@ The possible values are:
 
             
 
+            
+
              method.</para
           >
           <para
             >The <see
              cref="M:System.Web.Security.FormsAuthentication.GetRedirectUrl(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1190,6 +1376,8 @@ The possible values are:
 
             
 
+            
+
              method returns the return URL caller.aspx. If the ReturnURL variable does not exist, the <see
              cref="M:System.Web.Security.FormsAuthentication.GetRedirectUrl(System.String,System.Boolean)" />
 
@@ -1197,8 +1385,12 @@ The possible values are:
 
             
 
+            
+
              method returns the URL in the <see
              cref="P:System.Web.Security.FormsAuthentication.DefaultUrl" />
+
+            
 
             
 
@@ -1215,8 +1407,12 @@ The possible values are:
 
             
 
+            
+
              methods returns the URL in the <see
              cref="P:System.Web.Security.FormsAuthentication.DefaultUrl" />
+
+            
 
             
 
@@ -1229,10 +1425,14 @@ The possible values are:
 
             
 
+            
+
              property to true using the enableCrossAppRedirects attribute of the <format
              type="text/html">
               <a href="8163b8b5-ea6c-46c8-b5a9-c4c3de31c0b3">forms</a>
             </format>
+
+            
 
             
 
@@ -1249,8 +1449,12 @@ The possible values are:
 
               
 
+              
+
                property to true to allow cross-application redirects is a potential security threat. For more information, see the <see
                cref="P:System.Web.Security.FormsAuthentication.EnableCrossAppRedirects" />
+
+              
 
               
 
@@ -1275,10 +1479,14 @@ The possible values are:
 
           
 
+          
+
           The name of the authenticated user. </param
         >
         <param name="createPersistentCookie">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1316,11 +1524,15 @@ The possible values are:
 
             
 
+            
+
              method creates a hashed password value that can be used when storing forms-authentication credentials in the configuration file for an application.</para
           >
           <para
             >Authentication credentials stored in the configuration file for an application are used by the <see
              cref="M:System.Web.Security.FormsAuthentication.Authenticate(System.String,System.String)" />
+
+            
 
             
 
@@ -1332,6 +1544,8 @@ The possible values are:
                 >Managing Users Using ASP.NET Membership</a
               >
             </format>
+
+            
 
             
 
@@ -1355,10 +1569,14 @@ The possible values are:
 
           
 
+          
+
           The password to hash. </param
         >
         <param name="passwordFormat">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1371,8 +1589,12 @@ The possible values are:
 
           
 
+          
+
            is a String that represents one of the <see
            cref="T:System.Web.Configuration.FormsAuthPasswordFormat" />
+
+          
 
           
 
@@ -1404,6 +1626,8 @@ The possible values are:
 
             
 
+            
+
              method is called when the <see
              cref="T:System.Web.Security.FormsAuthenticationModule" />
 
@@ -1411,8 +1635,12 @@ The possible values are:
 
             
 
+            
+
              creates an instance of the <see
              cref="T:System.Web.Security.FormsAuthentication" />
+
+            
 
             
 
@@ -1426,6 +1654,8 @@ The possible values are:
           <para
             >Initializes the <see
              cref="T:System.Web.Security.FormsAuthentication" />
+
+            
 
             
 
@@ -1461,10 +1691,14 @@ The possible values are:
 
             
 
+            
+
              property value is set in the configuration file for an ASP.NET application by using the loginUrl attribute of the <format
              type="text/html">
               <a href="8163b8b5-ea6c-46c8-b5a9-c4c3de31c0b3">forms</a>
             </format>
+
+            
 
             
 
@@ -1477,8 +1711,12 @@ The possible values are:
 
             
 
+            
+
              is used by the <see
              cref="Overload:System.Web.Security.FormsAuthentication.RedirectToLoginPage" />
+
+            
 
             
 
@@ -1492,6 +1730,8 @@ The possible values are:
           <para
             >Gets the URL for the login page that the <see
              cref="T:System.Web.Security.FormsAuthentication" />
+
+            
 
             
 
@@ -1526,8 +1766,12 @@ The possible values are:
 
             
 
+            
+
              method redirects to the URL specified in the query string using the ReturnURL variable name. For example, in the URL http://www.contoso.com/login.aspx?ReturnUrl=caller.aspx, the <see
              cref="M:System.Web.Security.FormsAuthentication.RedirectFromLoginPage(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1540,8 +1784,12 @@ The possible values are:
 
             
 
+            
+
              method redirects to the URL in the <see
              cref="P:System.Web.Security.FormsAuthentication.DefaultUrl" />
+
+            
 
             
 
@@ -1558,8 +1806,12 @@ The possible values are:
 
             
 
+            
+
              methods redirects to the URL in the <see
              cref="P:System.Web.Security.FormsAuthentication.DefaultUrl" />
+
+            
 
             
 
@@ -1572,10 +1824,14 @@ The possible values are:
 
             
 
+            
+
              property to true using the enableCrossAppRedirects attribute of the <format
              type="text/html">
               <a href="8163b8b5-ea6c-46c8-b5a9-c4c3de31c0b3">forms</a>
             </format>
+
+            
 
             
 
@@ -1592,8 +1848,12 @@ The possible values are:
 
               
 
+              
+
                property to true to allow cross-application redirects is a potential security threat. For more information, see the <see
                cref="P:System.Web.Security.FormsAuthentication.EnableCrossAppRedirects" />
+
+              
 
               
 
@@ -1610,8 +1870,12 @@ The possible values are:
 
             
 
+            
+
              property is true, and either the ReturnUrl variable is within the current application or the <see
              cref="P:System.Web.Security.FormsAuthentication.EnableCrossAppRedirects" />
+
+            
 
             
 
@@ -1624,8 +1888,12 @@ The possible values are:
 
             
 
+            
+
              method issues an authentication ticket and places it in the default cookie using the <see
              cref="Overload:System.Web.Security.FormsAuthentication.SetAuthCookie" />
+
+            
 
             
 
@@ -1641,8 +1909,12 @@ The possible values are:
 
             
 
+            
+
              is false and the redirect path is to a URL in the current application, the ticket is issued as part of the redirect URL. If <see
              cref="P:System.Web.Security.FormsAuthentication.CookiesSupported" />
+
+            
 
             
 
@@ -1655,6 +1927,8 @@ The possible values are:
 
             
 
+            
+
              is true, and the redirect URL does not refer to a page within the current application, the <see
              cref="M:System.Web.Security.FormsAuthentication.RedirectFromLoginPage(System.String,System.Boolean)" />
 
@@ -1662,8 +1936,12 @@ The possible values are:
 
             
 
+            
+
              method issues an authentication ticket and places it in the <see
              cref="P:System.Web.HttpRequest.QueryString" />
+
+            
 
             
 
@@ -1683,10 +1961,14 @@ The possible values are:
 
           
 
+          
+
           The authenticated user name. </param
         >
         <param name="createPersistentCookie">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1725,8 +2007,12 @@ The possible values are:
 
             
 
+            
+
              method redirects to the return URL specified in the query string using the ReturnURL variable name. For example, in the URL http://www.contoso.com/login.aspx?ReturnUrl=caller.aspx, the <see
              cref="M:System.Web.Security.FormsAuthentication.RedirectFromLoginPage(System.String,System.Boolean,System.String)" />
+
+            
 
             
 
@@ -1739,8 +2025,12 @@ The possible values are:
 
             
 
+            
+
              method redirects to the URL in the <see
              cref="P:System.Web.Security.FormsAuthentication.DefaultUrl" />
+
+            
 
             
 
@@ -1757,8 +2047,12 @@ The possible values are:
 
             
 
+            
+
              method redirects to the URL in the <see
              cref="P:System.Web.Security.FormsAuthentication.DefaultUrl" />
+
+            
 
             
 
@@ -1771,10 +2065,14 @@ The possible values are:
 
             
 
+            
+
              property to true using the enableCrossAppRedirects attribute of the <format
              type="text/html">
               <a href="8163b8b5-ea6c-46c8-b5a9-c4c3de31c0b3">forms</a>
             </format>
+
+            
 
             
 
@@ -1791,8 +2089,12 @@ The possible values are:
 
               
 
+              
+
                property to true to allow cross-application redirects is a potential security threat. For more information, see the <see
                cref="P:System.Web.Security.FormsAuthentication.EnableCrossAppRedirects" />
+
+              
 
               
 
@@ -1809,8 +2111,12 @@ The possible values are:
 
             
 
+            
+
              property is true, and either the ReturnUrl variable is within the current application or the <see
              cref="P:System.Web.Security.FormsAuthentication.EnableCrossAppRedirects" />
+
+            
 
             
 
@@ -1823,6 +2129,8 @@ The possible values are:
 
             
 
+            
+
              method issues an authentication ticket and places it in the cookie specified by the <paramref
              name="strCookiePath" />
 
@@ -1830,8 +2138,12 @@ The possible values are:
 
             
 
+            
+
              parameter using the <see
              cref="Overload:System.Web.Security.FormsAuthentication.SetAuthCookie" />
+
+            
 
             
 
@@ -1847,8 +2159,12 @@ The possible values are:
 
             
 
+            
+
              is false and the redirect path is to a URL in the current application, the ticket is issued as part of the redirect URL. If <see
              cref="P:System.Web.Security.FormsAuthentication.CookiesSupported" />
+
+            
 
             
 
@@ -1861,6 +2177,8 @@ The possible values are:
 
             
 
+            
+
              is true, and the redirect URL does not refer to a page within the current application, the <see
              cref="M:System.Web.Security.FormsAuthentication.RedirectFromLoginPage(System.String,System.Boolean,System.String)" />
 
@@ -1868,8 +2186,12 @@ The possible values are:
 
             
 
+            
+
              method issues an authentication ticket and places it in the <see
              cref="P:System.Web.HttpRequest.QueryString" />
+
+            
 
             
 
@@ -1889,6 +2211,8 @@ The possible values are:
 
           
 
+          
+
           The authenticated user name. </param
         >
         <param name="createPersistentCookie">
@@ -1898,10 +2222,14 @@ The possible values are:
 
           
 
+          
+
           true to create a durable cookie (one that is saved across browser sessions); otherwise, false. </param
         >
         <param name="strCookiePath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1936,8 +2264,12 @@ The possible values are:
 
             
 
+            
+
              method redirects the browser to the <see
              cref="P:System.Web.Security.FormsAuthentication.LoginUrl" />
+
+            
 
             
 
@@ -1953,6 +2285,8 @@ The possible values are:
 
             
 
+            
+
              method does not clear the forms-authentication cookie. You can use the <see
              cref="M:System.Web.Security.FormsAuthentication.RedirectToLoginPage" />
 
@@ -1960,8 +2294,12 @@ The possible values are:
 
             
 
+            
+
              method in conjunction with the <see
              cref="M:System.Web.Security.FormsAuthentication.SignOut" />
+
+            
 
             
 
@@ -2002,8 +2340,12 @@ The possible values are:
 
             
 
+            
+
              method redirects the browser to the <see
              cref="P:System.Web.Security.FormsAuthentication.LoginUrl" />
+
+            
 
             
 
@@ -2016,8 +2358,12 @@ The possible values are:
 
             
 
+            
+
              value as the <see
              cref="P:System.Management.ManagementQuery.QueryString" />
+
+            
 
             
 
@@ -2033,6 +2379,8 @@ The possible values are:
 
             
 
+            
+
              method does not clear the forms-authentication cookie. You can use the <see
              cref="M:System.Web.Security.FormsAuthentication.RedirectToLoginPage(System.String)" />
 
@@ -2040,8 +2388,12 @@ The possible values are:
 
             
 
+            
+
              method in conjunction with the <see
              cref="M:System.Web.Security.FormsAuthentication.SignOut" />
+
+            
 
             
 
@@ -2056,6 +2408,8 @@ The possible values are:
         </summary>
         <param name="extraQueryString">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2088,8 +2442,12 @@ The possible values are:
 
             
 
+            
+
              method updates the expiration date and time of the supplied <see
              cref="T:System.Web.Security.FormsAuthenticationTicket" />
+
+            
 
             
 
@@ -2102,8 +2460,12 @@ The possible values are:
 
             
 
+            
+
              value is greater than the <see
              cref="P:System.Web.Security.FormsAuthenticationTicket.Expiration" />
+
+            
 
             
 
@@ -2119,8 +2481,12 @@ The possible values are:
 
             
 
+            
+
              property set to the current date and time and the <see
              cref="P:System.Web.Security.FormsAuthenticationTicket.Expiration" />
+
+            
 
             
 
@@ -2133,8 +2499,12 @@ The possible values are:
 
             
 
+            
+
              value minus the original <see
              cref="P:System.Web.Security.FormsAuthenticationTicket.IssueDate" />
+
+            
 
             
 
@@ -2153,6 +2523,8 @@ The possible values are:
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2166,11 +2538,15 @@ The possible values are:
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="tOld">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2202,6 +2578,8 @@ The possible values are:
 
             
 
+            
+
              property value is set in the configuration file for an ASP.NET application by using the requireSSL attribute of the <format
              type="text/html">
               <a href="8163b8b5-ea6c-46c8-b5a9-c4c3de31c0b3">forms</a>
@@ -2211,8 +2589,12 @@ The possible values are:
 
             
 
+            
+
              configuration element. You can specify in the Web.config file for your ASP.NET application whether SSL (Secure Sockets Layer) is required to return the forms-authentication cookie to the server by setting the requireSSL attribute . For more information, see <see
              cref="P:System.Web.HttpCookie.Secure" />
+
+            
 
             
 
@@ -2256,6 +2638,8 @@ The possible values are:
 
             
 
+            
+
              method adds a forms-authentication ticket to either the cookies collection, or to the URL if <see
              cref="P:System.Web.Security.FormsAuthentication.CookiesSupported" />
 
@@ -2263,8 +2647,12 @@ The possible values are:
 
             
 
+            
+
              is false. The forms-authentication ticket supplies forms-authentication information to the next request made by the browser. With forms authentication, you can use the <see
              cref="M:System.Web.Security.FormsAuthentication.SetAuthCookie(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -2284,10 +2672,14 @@ The possible values are:
 
           
 
+          
+
           The name of an authenticated user. This does not have to map to a Windows account. </param
         >
         <param name="createPersistentCookie">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2326,6 +2718,8 @@ The possible values are:
 
             
 
+            
+
              method adds a forms-authentication ticket to either the cookies collection or the URL if <see
              cref="P:System.Web.Security.FormsAuthentication.CookiesSupported" />
 
@@ -2333,8 +2727,12 @@ The possible values are:
 
             
 
+            
+
              is false. The forms-authentication ticket supplies forms-authentication information to the next request made by the browser. With forms authentication, you can use the <see
              cref="M:System.Web.Security.FormsAuthentication.SetAuthCookie(System.String,System.Boolean,System.String)" />
+
+            
 
             
 
@@ -2354,6 +2752,8 @@ The possible values are:
 
           
 
+          
+
           The name of an authenticated user. </param
         >
         <param name="createPersistentCookie">
@@ -2363,10 +2763,14 @@ The possible values are:
 
           
 
+          
+
           true to create a durable cookie (one that is saved across browser sessions); otherwise, false. </param
         >
         <param name="strCookiePath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2398,8 +2802,12 @@ The possible values are:
 
             
 
+            
+
              method removes the forms-authentication ticket information from the cookie or the URL if <see
              cref="P:System.Web.Security.FormsAuthentication.CookiesSupported" />
+
+            
 
             
 
@@ -2412,8 +2820,12 @@ The possible values are:
 
             
 
+            
+
              method in conjunction with the <see
              cref="M:System.Web.Security.FormsAuthentication.RedirectToLoginPage" />
+
+            
 
             
 
@@ -2430,8 +2842,12 @@ The possible values are:
 
             
 
+            
+
              method is called, a redirect to the application's login page is made by calling the <see
              cref="M:System.Web.HttpResponse.Redirect(System.String)" />
+
+            
 
             
 
@@ -2444,11 +2860,15 @@ The possible values are:
 
             
 
+            
+
              parameter set to false. The redirect does not take place until the current page has finished executing, so additional code can be run. If the code does not contain an explicit redirect to another page, the user is redirected to the login page configured in the application's configuration file.</para
           >
           <para
             >Calling the <see
              cref="M:System.Web.Security.FormsAuthentication.SignOut" />
+
+            
 
             
 
@@ -2466,6 +2886,8 @@ The possible values are:
 
                 
 
+                
+
                  property to false. This limits the window in which a hijacked cookie can be replayed.</para
               >
             </item>
@@ -2478,8 +2900,12 @@ The possible values are:
 
                 
 
+                
+
                  property to true and by running the entire Web site under SSL. Setting the <see
                  cref="P:System.Web.Security.FormsAuthentication.RequireSSL" />
+
+                
 
                 
 
@@ -2492,6 +2918,8 @@ The possible values are:
               <para
                 >Use persistent storage on the server to record when a user logs out of the Web site, and then use an application event such as <see
                  cref="E:System.Web.HttpApplication.PostAuthenticateRequest" />
+
+                
 
                 
 
@@ -2530,10 +2958,14 @@ The possible values are:
 
             
 
+            
+
              property value is set using the slidingExpiration attribute of the <format
              type="text/html">
               <a href="8163b8b5-ea6c-46c8-b5a9-c4c3de31c0b3">forms</a>
             </format>
+
+            
 
             
 
@@ -2544,6 +2976,8 @@ The possible values are:
           <para
             >Sliding expiration resets the expiration time for a valid authentication cookie if a request is made and more than half of the timeout interval has elapsed. If the cookie expires, the user must re-authenticate. Setting the <see
              cref="P:System.Web.Security.FormsAuthentication.SlidingExpiration" />
+
+            
 
             
 

@@ -28,6 +28,8 @@
 
         
 
+        
+
          class is the base class for the <see
          cref="T:System.Xml.Serialization.XmlTypeMapping" />
 
@@ -35,8 +37,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Xml.Serialization.XmlMembersMapping" />
+
+        
 
         
 
@@ -51,6 +57,8 @@
 
         
 
+        
+
          exposes no public or protected members. Use the <see
          cref="T:System.Xml.Serialization.XmlMapping" />
 
@@ -58,8 +66,12 @@
 
         
 
+        
+
          class instead of deriving a class directly from <see
          cref="T:System.Xml.Serialization.XmlMapping" />
+
+        
 
         
 
@@ -147,8 +159,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 

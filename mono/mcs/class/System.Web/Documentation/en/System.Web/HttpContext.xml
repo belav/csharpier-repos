@@ -31,8 +31,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.IHttpHandler" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          object for the current HTTP request. The object provides access to the intrinsic <see
          cref="P:System.Web.HttpContext.Request" />
+
+        
 
         
 
@@ -59,8 +67,12 @@
 
         
 
+        
+
         , and <see
          cref="P:System.Web.HttpContext.Server" />
+
+        
 
         
 
@@ -97,6 +109,8 @@
 
             
 
+            
+
              class that uses the specified worker-request object.</para
           >
         </summary>
@@ -107,8 +121,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.HttpWorkerRequest" />
+
+          
 
           
 
@@ -145,6 +163,8 @@
 
             
 
+            
+
              class by using the specified request and response objects.</para
           >
         </summary>
@@ -155,8 +175,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.HttpRequest" />
+
+          
 
           
 
@@ -171,8 +195,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.HttpResponse" />
+
+          
 
           
 
@@ -208,8 +236,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Exception" />
+
+          
 
           
 
@@ -264,6 +296,8 @@
 
             
 
+            
+
              object for the current HTTP request.</para
           >
         </summary>
@@ -296,6 +330,8 @@
 
             
 
+            
+
              object for the current HTTP request.</para
           >
         </summary>
@@ -323,8 +359,12 @@
 
             
 
+            
+
              class per application domain. As a result, the <see
              cref="T:System.Web.Caching.Cache" />
+
+            
 
             
 
@@ -337,8 +377,12 @@
 
             
 
+            
+
              property is the <see
              cref="T:System.Web.Caching.Cache" />
+
+            
 
             
 
@@ -352,6 +396,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.Caching.Cache" />
+
+            
 
             
 
@@ -403,6 +449,8 @@
 
           
 
+          
+
            class around and require access to it.
 
 <para
@@ -420,6 +468,8 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              class. The property stores the <see
              cref="T:System.Web.HttpContext" />
 
@@ -427,8 +477,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              instance that applies to the current request. The properties of this instance are the non-static properties of the <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -444,8 +498,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              property to access the <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -459,6 +517,8 @@ The routine internally uses a technique similar to thread local storage to fetch
           <para
             >Gets or sets the <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -497,8 +557,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              property might be different than the handler that is referenced by the <see
              cref="P:System.Web.HttpContext.Handler" />
+
+            
 
             
 
@@ -511,8 +575,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              method or the <see
              cref="Overload:System.Web.HttpServerUtility.Transfer" />
+
+            
 
             
 
@@ -526,6 +594,8 @@ The routine internally uses a technique similar to thread local storage to fetch
           <para
             >Gets the <see
              cref="T:System.Web.IHttpHandler" />
+
+            
 
             
 
@@ -560,8 +630,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              property requires the integrated pipeline mode in iisver and at least the .NET Framework version 3.0. When available, the property returns a <see
              cref="T:System.Web.RequestNotification" />
+
+            
 
             
 
@@ -574,8 +648,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              property indicates which event in the <see
              cref="T:System.Web.HttpApplication" />
+
+            
 
             
 
@@ -591,8 +669,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              property is not intended to be set. Instead, it is set by iisver during the processing of the request in the ASP.NET pipeline. Setting the <see
              cref="P:System.Web.HttpContext.CurrentNotification" />
+
+            
 
             
 
@@ -607,10 +689,14 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              is introduced in the .NET Framework version 3.5.  For more information, see <format
              type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
+
+            
 
             
 
@@ -629,8 +715,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              value that indicates the current <see
              cref="T:System.Web.HttpApplication" />
+
+            
 
             
 
@@ -680,6 +770,8 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              method has been deprecated. Use the <see
              cref="M:System.Web.Configuration.WebConfigurationManager.GetWebApplicationSection(System.String)" />
 
@@ -687,8 +779,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              method of the <see
              cref="T:System.Web.Configuration.WebConfigurationManager" />
+
+            
 
             
 
@@ -707,6 +803,8 @@ The routine internally uses a technique similar to thread local storage to fetch
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -745,8 +843,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              method has been deprecated. Use the <see
              cref="M:System.Web.HttpContext.GetSection(System.String)" />
+
+            
 
             
 
@@ -769,11 +871,15 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
             , null if the section does not exist, or an internal object if the section is not accessible at run time. (Cast the returned object to the appropriate configuration type before use.) </para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -819,8 +925,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              method returns a global resource by using the culture that is specified in the <see
              cref="P:System.Globalization.CultureInfo.CurrentUICulture" />
+
+            
 
             
 
@@ -832,6 +942,8 @@ The routine internally uses a technique similar to thread local storage to fetch
             <para
               >In some editing environments, such as vwprvw, the editor might throw a design-time <see
                cref="T:System.Resources.MissingManifestResourceException" />
+
+              
 
               
 
@@ -851,8 +963,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              and <see
              cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
+
+            
 
             
 
@@ -871,6 +987,8 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              that represents the requested application-level resource object; otherwise, null if a resource object is not found or if a resource object is found but it does not have the requested property.</para
           >
         </returns>
@@ -881,8 +999,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
           
 
+          
+
           A string that represents the <see
            cref="P:System.Web.Compilation.ResourceExpressionFields.ClassKey" />
+
+          
 
           
 
@@ -897,8 +1019,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
           
 
+          
+
           A string that represents the <see
            cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
+
+          
 
           
 
@@ -936,10 +1062,14 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              object represents the culture for which the resource was localized. If the resource is not localized for this culture, the lookup will follow a fallback process to locate an appropriate resource. For more information, see <format
              type="text/html">
               <a href="b224d7c0-35f8-4e82-a705-dd76795e8d16">Packaging and Deploying Resources</a>
             </format>
+
+            
 
             
 
@@ -951,6 +1081,8 @@ The routine internally uses a technique similar to thread local storage to fetch
             <para
               >In some editing environments, such as Visual Web Developer, the editor might throw a design-time <see
                cref="T:System.Resources.MissingManifestResourceException" />
+
+              
 
               
 
@@ -970,6 +1102,8 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              and <see
              cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
 
@@ -977,8 +1111,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              properties, and on the <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -997,6 +1135,8 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              that represents the requested application-level resource object, which is localized for the specified culture; otherwise, null if a resource object is not found or if a resource object is found but it does not have the requested property.</para
           >
         </returns>
@@ -1007,8 +1147,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
           
 
+          
+
           A string that represents the <see
            cref="P:System.Web.Compilation.ResourceExpressionFields.ClassKey" />
+
+          
 
           
 
@@ -1023,8 +1167,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
           
 
+          
+
           A string that represents a <see
            cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
+
+          
 
           
 
@@ -1039,8 +1187,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
           
 
+          
+
           A string that represents the <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -1077,8 +1229,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              method returns a local resource by using the culture that is specified in the <see
              cref="P:System.Globalization.CultureInfo.CurrentUICulture" />
+
+            
 
             
 
@@ -1097,8 +1253,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              and <see
              cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
+
+            
 
             
 
@@ -1117,8 +1277,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              that represents the requested page-level resource object; otherwise, null if a matching resource object is found but not a <paramref
              name="resourceKey" />
+
+            
 
             
 
@@ -1134,8 +1298,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
           
 
+          
+
           The <see
            cref="P:System.Web.Compilation.ExpressionBuilderContext.VirtualPath" />
+
+          
 
           
 
@@ -1150,8 +1318,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
           
 
+          
+
           A string that represents a <see
            cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
+
+          
 
           
 
@@ -1191,6 +1363,8 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1204,6 +1378,8 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              and <see
              cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
 
@@ -1211,8 +1387,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              properties, and on the <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -1231,8 +1411,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              that represents the requested local resource object, which is localized for the specified culture; otherwise null if a matching resource object is found but not a <paramref
              name="resourceKey" />
+
+            
 
             
 
@@ -1248,8 +1432,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
           
 
+          
+
           The <see
            cref="P:System.Web.Compilation.ExpressionBuilderContext.VirtualPath" />
+
+          
 
           
 
@@ -1264,8 +1452,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
           
 
+          
+
           A string that represents a <see
            cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
+
+          
 
           
 
@@ -1280,8 +1472,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
           
 
+          
+
           A string that represents the <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -1320,6 +1516,8 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
             , null if the section does not exist, or an internal object if the section is not accessible at run time.</para
           >
         </returns>
@@ -1344,10 +1542,14 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              property contains a reference to the handler that processes the HTTP request. The handler can be specified by using the <format
              type="text/html">
               <a href="24ca01f3-7141-4fdc-acac-71c0733cf6c2">httpHandlers</a>
             </format>
+
+            
 
             
 
@@ -1364,11 +1566,15 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
             . </para
           >
           <para
             >The reference to the <see
              cref="P:System.Web.HttpContext.Handler" />
+
+            
 
             
 
@@ -1381,8 +1587,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              method or the <see
              cref="Overload:System.Web.HttpServerUtility.Transfer" />
+
+            
 
             
 
@@ -1396,6 +1606,8 @@ The routine internally uses a technique similar to thread local storage to fetch
           <para
             >Gets or sets the <see
              cref="T:System.Web.IHttpHandler" />
+
+            
 
             
 
@@ -1469,8 +1681,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              property is only supported with the integrated mode in iisver and at least the .NET Framework 3.0. When available, the property returns a Boolean value that indicates whether an event in the <see
              cref="T:System.Web.HttpApplication" />
+
+            
 
             
 
@@ -1486,8 +1702,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              property is not intended to be set. Instead, it is provided by iisver to the ASP.NET runtime for each notification. Setting the <see
              cref="P:System.Web.HttpContext.IsPostNotification" />
+
+            
 
             
 
@@ -1503,6 +1723,8 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              object are handled by one event handler, you can use the <see
              cref="P:System.Web.HttpContext.IsPostNotification" />
 
@@ -1510,8 +1732,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              property in combination with the <see
              cref="T:System.Web.RequestNotification" />
+
+            
 
             
 
@@ -1526,10 +1752,14 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              is introduced in the .NET Framework version 3.5.  For more information, see <format
              type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
+
+            
 
             
 
@@ -1543,6 +1773,8 @@ The routine internally uses a technique similar to thread local storage to fetch
           <para
             >Gets a value that is the current processing point in the ASP.NET pipeline just after an <see
              cref="T:System.Web.HttpApplication" />
+
+            
 
             
 
@@ -1576,8 +1808,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              interface and an <see
              cref="T:System.Web.IHttpHandler" />
+
+            
 
             
 
@@ -1616,6 +1852,8 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              property corresponds to the last handler before the current request was executed.</para
           >
         </remarks>
@@ -1624,6 +1862,8 @@ The routine internally uses a technique similar to thread local storage to fetch
           <para
             >Gets the <see
              cref="T:System.Web.IHttpHandler" />
+
+            
 
             
 
@@ -1658,8 +1898,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              property is used for persistent storage of structured data using a type-safe API. When a <see
              cref="P:System.Web.HttpContext.Profile" />
+
+            
 
             
 
@@ -1673,6 +1917,8 @@ The routine internally uses a technique similar to thread local storage to fetch
           <para
             >Gets the <see
              cref="T:System.Web.Profile.ProfileBase" />
+
+            
 
             
 
@@ -1701,8 +1947,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              property provides programmatic access to the properties and methods of the <see
              cref="T:System.Web.HttpRequest" />
+
+            
 
             
 
@@ -1715,8 +1965,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              namespace (which contains the <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -1729,8 +1983,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              on an .aspx page without using the fully qualified class reference to <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -1743,6 +2001,8 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              from an ASP.NET code-behind module, you must include a reference to the <see
              cref="N:System.Web" />
 
@@ -1750,8 +2010,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              namespace in the module and a fully qualified reference to both the currently active request/response context and the class in <see
              cref="N:System.Web" />
+
+            
 
             
 
@@ -1768,6 +2032,8 @@ The routine internally uses a technique similar to thread local storage to fetch
 
               
 
+              
+
                object is not available. For example, this would be true in the Application_Start method of the Global.asax file, or in a method that is called from the Application_Start method. At that time no HTTP request has been created yet.</para
             >
           </block>
@@ -1777,6 +2043,8 @@ The routine internally uses a technique similar to thread local storage to fetch
           <para
             >Gets the <see
              cref="T:System.Web.HttpRequest" />
+
+            
 
             
 
@@ -1806,6 +2074,8 @@ The routine internally uses a technique similar to thread local storage to fetch
 
           
 
+          
+
            object for the current request.</value
         >
         <remarks>
@@ -1818,8 +2088,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              property provides programmatic access to the properties and methods of the <see
              cref="T:System.Web.HttpResponse" />
+
+            
 
             
 
@@ -1832,8 +2106,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              namespace (which contains the <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -1846,8 +2124,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              on an .aspx page without using the fully qualified class reference to <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -1860,6 +2142,8 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              from an ASP.NET code-behind module, you must include a reference to the <see
              cref="N:System.Web" />
 
@@ -1867,8 +2151,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              namespace in the module and a fully qualified reference to the currently active request/response context and the class in <see
              cref="N:System.Web" />
+
+            
 
             
 
@@ -1882,6 +2170,8 @@ The routine internally uses a technique similar to thread local storage to fetch
           <para
             >Gets the <see
              cref="T:System.Web.HttpResponse" />
+
+            
 
             
 
@@ -1916,8 +2206,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              method redirects a request for a resource to a different path than the one that is indicated by the requested URL. If you have to reset the virtual path so that requests from the client for server resources resolve correctly, use the overload of this method that takes the <paramref
              name="rebaseClientPath" />
+
+            
 
             
 
@@ -1936,6 +2230,8 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1945,6 +2241,8 @@ The routine internally uses a technique similar to thread local storage to fetch
         </summary>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1985,8 +2283,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              method is called by the <see
              cref="M:System.Web.HttpContext.RewritePath(System.String)" />
+
+            
 
             
 
@@ -1999,6 +2301,8 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              parameter set to true. To ensure that the virtual path that is used to construct paths to resources is not modified, set the <paramref
              name="rebaseClientPath" />
 
@@ -2006,8 +2310,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              parameter to false. A common scenario in which you might want to set <paramref
              name="rebaseClientPath" />
+
+            
 
             
 
@@ -2021,6 +2329,8 @@ The routine internally uses a technique similar to thread local storage to fetch
              type="text/html">
               <a href="892441af-8f1d-483e-ab5f-b82c23576f5a">ASP.NET Routing</a>
             </format>
+
+            
 
             
 
@@ -2040,10 +2350,14 @@ The routine internally uses a technique similar to thread local storage to fetch
 
           
 
+          
+
           The internal rewrite path.</param
         >
         <param name="rebaseClientPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2078,11 +2392,15 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              method redirects a request for a resource to another resource without changing the URL. </para
           >
           <para
             >The <paramref
              name="filePath" />
+
+            
 
             
 
@@ -2095,6 +2413,8 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              parameter content. For the URL http://www.microsoft.com/virdir/page.html/tail, the <paramref
              name="filePath" />
 
@@ -2102,8 +2422,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              parameter is http://www.microsoft.com/virdir/page.html, and the <paramref
              name="pathInfo" />
+
+            
 
             
 
@@ -2117,6 +2441,8 @@ The routine internally uses a technique similar to thread local storage to fetch
              type="text/html">
               <a href="892441af-8f1d-483e-ab5f-b82c23576f5a">ASP.NET Routing</a>
             </format>
+
+            
 
             
 
@@ -2136,10 +2462,14 @@ The routine internally uses a technique similar to thread local storage to fetch
 
           
 
+          
+
           The internal rewrite path.</param
         >
         <param name="pathInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2152,10 +2482,14 @@ The routine internally uses a technique similar to thread local storage to fetch
 
           
 
+          
+
           .</param
         >
         <param name="queryString">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2198,8 +2532,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              parameter does not include the content of the <paramref
              name="pathInfo" />
+
+            
 
             
 
@@ -2212,8 +2550,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              parameter is http://www.microsoft.com/virdir/page.html, and the <paramref
              name="pathInfo" />
+
+            
 
             
 
@@ -2229,8 +2571,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              parameter to false. A common scenario in which you might want to set <paramref
              name="setClientFilePath" />
+
+            
 
             
 
@@ -2244,6 +2590,8 @@ The routine internally uses a technique similar to thread local storage to fetch
              type="text/html">
               <a href="892441af-8f1d-483e-ab5f-b82c23576f5a">ASP.NET Routing</a>
             </format>
+
+            
 
             
 
@@ -2263,6 +2611,8 @@ The routine internally uses a technique similar to thread local storage to fetch
 
           
 
+          
+
           The virtual path to the resource that services the request.</param
         >
         <param name="pathInfo">
@@ -2272,8 +2622,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
           
 
+          
+
           Additional path information to use for the URL redirect. For more information, see <see
            cref="P:System.Web.HttpRequest.PathInfo" />
+
+          
 
           
 
@@ -2288,6 +2642,8 @@ The routine internally uses a technique similar to thread local storage to fetch
 
           
 
+          
+
           The request query string to use for the URL redirect.</param
         >
         <param name="setClientFilePath">
@@ -2297,8 +2653,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
           
 
+          
+
           true to set the file path used for client resources to the value of the <paramref
            name="filePath" />
+
+          
 
           
 
@@ -2326,8 +2686,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              property provides programmatic access to the properties and methods of the <see
              cref="T:System.Web.HttpServerUtility" />
+
+            
 
             
 
@@ -2340,8 +2704,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              namespace (which contains the <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -2354,8 +2722,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              on an .aspx page without using the fully qualified class reference to <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -2368,6 +2740,8 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              from an ASP.NET code-behind module, you must include a reference to the <see
              cref="N:System.Web" />
 
@@ -2375,8 +2749,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              namespace in the module and a fully qualified reference to both the currently active request/response context and the class in <see
              cref="N:System.Web" />
+
+            
 
             
 
@@ -2390,6 +2768,8 @@ The routine internally uses a technique similar to thread local storage to fetch
           <para
             >Gets the <see
              cref="T:System.Web.HttpServerUtility" />
+
+            
 
             
 
@@ -2425,8 +2805,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              property provides programmatic access to the properties and methods of the <see
              cref="T:System.Web.SessionState.HttpSessionState" />
+
+            
 
             
 
@@ -2439,6 +2823,8 @@ The routine internally uses a technique similar to thread local storage to fetch
              type="text/html">
               <a href="6d60d381-6521-4e1d-9089-da6464f2a9bc">ASP.NET Session State Overview</a>
             </format>
+
+            
 
             
 
@@ -2458,12 +2844,16 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
             . For information about how to read values from session state, see <format
              type="text/html">
               <a href="2ef449bc-5c17-4785-b7cf-378c601af8f5"
                 >How to: Read Values from Session State</a
               >
             </format>
+
+            
 
             
 
@@ -2477,6 +2867,8 @@ The routine internally uses a technique similar to thread local storage to fetch
           <para
             >Gets the <see
              cref="T:System.Web.SessionState.HttpSessionState" />
+
+            
 
             
 
@@ -2510,8 +2902,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              property is intended for advanced use by authentication modules that need to redirect to a page that allows anonymous connections. The Forms authentication module and Passport authentication module both set <see
              cref="P:System.Web.HttpContext.SkipAuthorization" />
+
+            
 
             
 
@@ -2524,8 +2920,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              requires the ControlPrincipal flag to be set. For information about the ControlPrincipal flag, see <see
              cref="T:System.Security.Permissions.SecurityPermissionFlag" />
+
+            
 
             
 
@@ -2539,6 +2939,8 @@ The routine internally uses a technique similar to thread local storage to fetch
           <para
             >Gets or sets a value that specifies whether the <see
              cref="T:System.Web.Security.UrlAuthorizationModule" />
+
+            
 
             
 
@@ -2577,6 +2979,8 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              object.</para
           >
         </remarks>
@@ -2594,6 +2998,8 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
             ; otherwise, null if no service is found.</para
           >
         </returns>
@@ -2604,8 +3010,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
           
 
+          
+
           A type of <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -2633,8 +3043,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              property is the local time of the server and is set during the instantiation of the <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -2667,6 +3081,8 @@ The routine internally uses a technique similar to thread local storage to fetch
           <para
             >Gets the <see
              cref="T:System.Web.TraceContext" />
+
+            
 
             
 
@@ -2706,8 +3122,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              property provides programmatic access to the properties and methods of the <see
              cref="T:System.Security.Principal.IPrincipal" />
+
+            
 
             
 
@@ -2723,8 +3143,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              namespace (which contains the <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -2737,8 +3161,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              on an .aspx page without using the fully qualified class reference to <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -2751,6 +3179,8 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              from an ASP.NET code-behind module, you must include a reference to the <see
              cref="N:System.Web" />
 
@@ -2758,8 +3188,12 @@ The routine internally uses a technique similar to thread local storage to fetch
 
             
 
+            
+
              namespace in the module and a fully qualified reference to both the currently active request/response context and the class in <see
              cref="N:System.Web" />
+
+            
 
             
 

@@ -8,8 +8,12 @@
 
     
 
+    
+
      is an expression that yields a result of type <keyword
     >bool</keyword>
+
+    
 
     
 
@@ -20,6 +24,8 @@
       <name>
         <non_terminal where="15.7.1">boolean-expression</non_terminal>
       </name>
+
+      
 
       
 
@@ -39,8 +45,12 @@
 
     
 
+    
+
      (<hyperlink
     >15.7.1</hyperlink>
+
+    
 
     
 
@@ -53,8 +63,12 @@
 
     
 
+    
+
      (<hyperlink
     >15.8.1</hyperlink>
+
+    
 
     
 
@@ -67,8 +81,12 @@
 
     
 
+    
+
      (<hyperlink
     >15.8.2</hyperlink>
+
+    
 
     
 
@@ -81,8 +99,12 @@
 
     
 
+    
+
      (<hyperlink
     >15.8.3</hyperlink>
+
+    
 
     
 
@@ -95,8 +117,12 @@
 
     
 
+    
+
     . The controlling conditional expression of the ?: operator (<hyperlink
     >14.12</hyperlink>
+
+    
 
     
 
@@ -109,8 +135,12 @@
 
     
 
+    
+
     , but for reasons of operator precedence is classified as a <non_terminal
      where="14.11">conditional-or-expression</non_terminal>
+
+    
 
     
 
@@ -126,8 +156,12 @@
 
     
 
+    
+
      is required to be of a type that can be implicitly converted to <keyword
     >bool</keyword>
+
+    
 
     
 
@@ -142,8 +176,12 @@
 
       
 
+      
+
       , any type that implements operator true must also implement operator false. end note]</note
     >
+
+    
 
     
 
@@ -159,8 +197,12 @@
 
     
 
+    
+
      but does implement operator true, then following evaluation of the expression, the operator true implementation provided by that type is invoked to produce a <keyword
     >bool</keyword>
+
+    
 
     
 
@@ -172,6 +214,8 @@
     <note
       >[Note: The DBBool struct type in <hyperlink
       >18.4.2</hyperlink>
+
+      
 
       
 

@@ -11,6 +11,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="24.2">attributes</non_terminal>
@@ -36,8 +38,12 @@
 
     
 
+    
+
      of an interface indexer declaration have the same meaning as those of an indexer declaration in a class (<hyperlink
     >17.8</hyperlink>
+
+    
 
     
 
@@ -48,6 +54,8 @@
   <paragraph
     >The accessors of an interface indexer declaration correspond to the accessors of a class indexer declaration (<hyperlink
     >17.8</hyperlink>
+
+    
 
     
 

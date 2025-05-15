@@ -21,11 +21,15 @@
 
         
 
+        
+
          property to determine which event is occurring. This enables you to handle multiple event types with one event handler.</para
       >
       <para
         >Use the <see
          cref="P:System.Windows.Forms.TabControlEventArgs.TabPage" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          properties to determine which <see
          cref="T:System.Windows.Forms.TabPage" />
+
+        
 
         
 
@@ -52,6 +60,8 @@
          type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
         </format>
+
+        
 
         
 
@@ -70,6 +80,8 @@
 
         
 
+        
+
          and <see
          cref="E:System.Windows.Forms.TabControl.Deselected" />
 
@@ -77,8 +89,12 @@
 
         
 
+        
+
          events of a <see
          cref="T:System.Windows.Forms.TabControl" />
+
+        
 
         
 
@@ -116,6 +132,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -126,8 +144,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.TabPage" />
+
+          
 
           
 
@@ -142,6 +164,8 @@
 
           
 
+          
+
           The zero-based index of <paramref
            name="tabPage" />
 
@@ -149,8 +173,12 @@
 
           
 
+          
+
            in the <see
            cref="P:System.Windows.Forms.TabControl.TabPages" />
+
+          
 
           
 
@@ -165,8 +193,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.TabControlAction" />
+
+          
 
           
 
@@ -221,6 +253,8 @@
 
             
 
+            
+
              the event is occurring for.</para
           >
         </summary>
@@ -249,8 +283,12 @@
 
             
 
+            
+
              in the <see
              cref="P:System.Windows.Forms.TabControl.TabPages" />
+
+            
 
             
 

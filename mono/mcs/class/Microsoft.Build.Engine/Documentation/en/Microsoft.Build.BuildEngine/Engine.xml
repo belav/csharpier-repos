@@ -21,6 +21,8 @@
 
         
 
+        
+
          maintains the building projects, making it possible to avoid building the same target in the same project more than once in a given build.</para
       >
     </remarks>
@@ -42,6 +44,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:Microsoft.Build.BuildEngine.Engine" />
+
+            
 
             
 
@@ -74,8 +78,12 @@
 
             
 
+            
+
              class that has the specified <see
              cref="P:Microsoft.Build.BuildEngine.Engine.BinPath" />
+
+            
 
             
 
@@ -86,6 +94,8 @@
         </summary>
         <param name="binPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -185,6 +195,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -199,8 +211,12 @@
 
           
 
+          
+
           The <see
            cref="T:Microsoft.Build.BuildEngine.Project" />
+
+          
 
           
 
@@ -239,6 +255,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -253,8 +271,12 @@
 
           
 
+          
+
           The <see
            cref="T:Microsoft.Build.BuildEngine.Project" />
+
+          
 
           
 
@@ -264,6 +286,8 @@
         >
         <param name="targetName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -302,6 +326,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -316,8 +342,12 @@
 
           
 
+          
+
           The <see
            cref="T:Microsoft.Build.BuildEngine.Project" />
+
+          
 
           
 
@@ -327,6 +357,8 @@
         >
         <param name="targetNames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -366,6 +398,8 @@
 
             
 
+            
+
             , and returns the outputs of the targets.</para
           >
         </summary>
@@ -380,8 +414,12 @@
 
           
 
+          
+
           The <see
            cref="T:Microsoft.Build.BuildEngine.Project" />
+
+          
 
           
 
@@ -396,10 +434,14 @@
 
           
 
+          
+
           An array that contains the Name attributes of the Target elements to build.</param
         >
         <param name="targetOutputs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -440,8 +482,12 @@
 
             
 
+            
+
              with the specified <see
              cref="T:Microsoft.Build.BuildEngine.BuildSettings" />
+
+            
 
             
 
@@ -461,8 +507,12 @@
 
           
 
+          
+
           The <see
            cref="T:Microsoft.Build.BuildEngine.Project" />
+
+          
 
           
 
@@ -477,10 +527,14 @@
 
           
 
+          
+
           An array that contains the Name attributes of the Target elements to build.</param
         >
         <param name="targetOutputs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -495,8 +549,12 @@
 
           
 
+          
+
           The <see
            cref="T:Microsoft.Build.BuildEngine.BuildSettings" />
+
+          
 
           
 
@@ -531,6 +589,8 @@
         </returns>
         <param name="projectFile">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -574,10 +634,14 @@
 
           
 
+          
+
           The project file to load and build.</param
         >
         <param name="targetName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -621,10 +685,14 @@
 
           
 
+          
+
           The project file to load and build.</param
         >
         <param name="targetNames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -664,6 +732,8 @@
 
             
 
+            
+
             , and returns the outputs of the targets.</para
           >
         </summary>
@@ -678,10 +748,14 @@
 
           
 
+          
+
           The project file to load and build.</param
         >
         <param name="targetNames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -696,8 +770,12 @@
 
           
 
+          
+
           The <see
            cref="P:Microsoft.Build.BuildEngine.Engine.GlobalProperties" />
+
+          
 
           
 
@@ -738,6 +816,8 @@
 
             
 
+            
+
             , and returns the outputs of the targets.</para
           >
         </summary>
@@ -752,10 +832,14 @@
 
           
 
+          
+
           The project file to load and build.</param
         >
         <param name="targetNames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -770,8 +854,12 @@
 
           
 
+          
+
           The <see
            cref="P:Microsoft.Build.BuildEngine.Engine.GlobalProperties" />
+
+          
 
           
 
@@ -781,6 +869,8 @@
         >
         <param name="targetOutputs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -822,8 +912,12 @@
 
             
 
+            
+
              and <see
              cref="P:Microsoft.Build.BuildEngine.Engine.GlobalProperties" />
+
+            
 
             
 
@@ -843,10 +937,14 @@
 
           
 
+          
+
           The project file to load and build.</param
         >
         <param name="targetNames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -861,8 +959,12 @@
 
           
 
+          
+
           The <see
            cref="P:Microsoft.Build.BuildEngine.Engine.GlobalProperties" />
+
+          
 
           
 
@@ -877,6 +979,8 @@
 
           
 
+          
+
           The outputs of the built targets. This parameter can be a null reference (Nothing in vbprvb) if outputs are not required.</param
         >
         <param name="buildFlags">
@@ -886,8 +990,12 @@
 
           
 
+          
+
           The <see
            cref="T:Microsoft.Build.BuildEngine.BuildSettings" />
+
+          
 
           
 
@@ -923,8 +1031,12 @@
 
             
 
+            
+
              object that is associated with this <see
              cref="T:Microsoft.Build.BuildEngine.Engine" />
+
+            
 
             
 
@@ -938,6 +1050,8 @@
           <para
             >The created <see
              cref="T:Microsoft.Build.BuildEngine.Project" />
+
+            
 
             
 
@@ -976,6 +1090,8 @@
 
             
 
+            
+
              object that is associated with the specified project file.</para
           >
         </summary>
@@ -989,8 +1105,12 @@
 
             
 
+            
+
              object that associated with the specified project file. If no <see
              cref="T:Microsoft.Build.BuildEngine.Project" />
+
+            
 
             
 
@@ -1006,8 +1126,12 @@
 
           
 
+          
+
           The fully qualified file path to the project file of the <see
            cref="T:Microsoft.Build.BuildEngine.Project" />
+
+          
 
           
 
@@ -1043,8 +1167,12 @@
 
             
 
+            
+
              that is global (shared) for this <see
              cref="T:System.AppDomain" />
+
+            
 
             
 
@@ -1080,8 +1208,12 @@
 
             
 
+            
+
              switch on the command line, or properties that are set by the integrated development environment (IDE) before a project is built. These global properties are applied to all projects that are built by using this <see
              cref="T:Microsoft.Build.BuildEngine.Engine" />
+
+            
 
             
 
@@ -1142,11 +1274,15 @@
 
             
 
+            
+
             , it receives all build events.</para
           >
           <para
             >To unregister loggers, use the <see
              cref="M:Microsoft.Build.BuildEngine.Engine.UnregisterAllLoggers" />
+
+            
 
             
 
@@ -1165,6 +1301,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1175,8 +1313,12 @@
 
           
 
+          
+
           The logger to associate with the <see
            cref="T:Microsoft.Build.BuildEngine.Engine" />
+
+          
 
           
 
@@ -1209,8 +1351,12 @@
 
             
 
+            
+
              objects from the <see
              cref="T:Microsoft.Build.BuildEngine.Engine" />
+
+            
 
             
 
@@ -1249,8 +1395,12 @@
 
             
 
+            
+
              from the <see
              cref="T:Microsoft.Build.BuildEngine.Engine" />
+
+            
 
             
 
@@ -1266,6 +1416,8 @@
 
           
 
+          
+
           The <see
            cref="T:Microsoft.Build.BuildEngine.Project" />
 
@@ -1273,8 +1425,12 @@
 
           
 
+          
+
            to remove from the <see
            cref="T:Microsoft.Build.BuildEngine.Engine" />
+
+          
 
           
 
@@ -1306,6 +1462,8 @@
 
             
 
+            
+
              method calls the <see
              cref="M:Microsoft.Build.Framework.ILogger.Shutdown" />
 
@@ -1313,8 +1471,12 @@
 
             
 
+            
+
              method on every registered logger before unregistering each of them from the <see
              cref="T:Microsoft.Build.BuildEngine.Engine" />
+
+            
 
             
 
@@ -1328,6 +1490,8 @@
           <para
             >Unregisters all loggers from the <see
              cref="T:Microsoft.Build.BuildEngine.Engine" />
+
+            
 
             
 
@@ -1356,6 +1520,8 @@
           <para
             >Gets the version of the <see
              cref="T:Microsoft.Build.BuildEngine.Engine" />
+
+            
 
             
 

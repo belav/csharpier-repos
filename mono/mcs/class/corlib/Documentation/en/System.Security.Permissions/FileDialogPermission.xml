@@ -44,6 +44,8 @@
 
         
 
+        
+
          is not granted.</para
       >
     </remarks>
@@ -52,6 +54,8 @@
       <para
         >Controls the ability to access files or folders through a <ui
         >File</ui>
+
+        
 
         
 
@@ -93,6 +97,8 @@
 
             
 
+            
+
              class with the specified access.</para
           >
         </summary>
@@ -103,8 +109,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Security.Permissions.FileDialogPermissionAccess" />
+
+          
 
           
 
@@ -144,6 +154,8 @@
 
             
 
+            
+
              dialog boxes.</para
           >
         </remarks>
@@ -152,6 +164,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Permissions.FileDialogPermission" />
+
+            
 
             
 
@@ -167,8 +181,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -270,6 +288,8 @@
 
           
 
+          
+
           The XML encoding used to reconstruct the permission. </param
         >
       </Docs>
@@ -315,6 +335,8 @@
 
           
 
+          
+
           A permission to intersect with the current permission. It must be the same type as the current permission. </param
         >
       </Docs>
@@ -351,8 +373,12 @@
 
             
 
+            
+
              access is a subset of a permission for <see
              cref="F:System.Security.Permissions.FileDialogPermissionAccess.OpenSave" />
+
+            
 
             
 
@@ -371,6 +397,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -447,6 +475,8 @@
             <para
               >This override of the <see
                cref="M:System.Security.CodeAccessPermission.ToString" />
+
+              
 
               
 
@@ -534,6 +564,8 @@
 
             
 
+            
+
              is a permission that represents all operations represented by both the current permission and the specified permission. Any demand that passes either permission passes their union.</para
           >
         </remarks>
@@ -547,6 +579,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -60,6 +60,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -88,6 +90,8 @@
           <para
             >The external authorization policies participate in the policy evaluation process resulting in a user <see
              cref="T:System.ServiceModel.ServiceSecurityContext" />
+
+            
 
             
 
@@ -158,12 +162,16 @@
 
             
 
+            
+
              enumeration. Valid values are:</para
           >
           <list type="bullet">
             <item>
               <para>
                 <see cref="F:System.ServiceModel.Description.PrincipalPermissionMode.Custom" />
+
+                
 
                 
 
@@ -180,6 +188,8 @@
 
                 
 
+                
+
                 . The Thread.CurrentPrincipal property is not set.</para
               >
             </item>
@@ -191,12 +201,16 @@
 
                 
 
+                
+
                 . The Thread.CurrentPrincipal property is set to an IPrincipal based on ASP.NET role information.</para
               >
             </item>
             <item>
               <para>
                 <see cref="F:System.ServiceModel.Description.PrincipalPermissionMode.UseWindowsGroups" />
+
+                
 
                 
 
@@ -241,6 +255,8 @@
 
             
 
+            
+
              object is an implementation of a custom role provider.</para
           >
         </remarks>
@@ -278,6 +294,8 @@
 
             
 
+            
+
              class is responsible for evaluating all policies, chaining forward and backward, optionally connecting the resulting <see
              cref="T:System.IdentityModel.Policy.AuthorizationContext" />
 
@@ -285,8 +303,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.ServiceModel.ServiceSecurityContext" />
+
+            
 
             
 
@@ -340,8 +362,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ServiceModel.Description.IServiceBehavior" />
+
+            
 
             
 
@@ -361,10 +387,14 @@
 
           
 
+          
+
           The service description of the service.</param
         >
         <param name="serviceHostBase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -379,10 +409,14 @@
 
           
 
+          
+
           The service endpoints.</param
         >
         <param name="parameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -423,8 +457,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ServiceModel.Description.IServiceBehavior" />
+
+            
 
             
 
@@ -444,10 +482,14 @@
 
           
 
+          
+
           The service description.</param
         >
         <param name="serviceHostBase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -488,8 +530,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ServiceModel.Description.IServiceBehavior" />
+
+            
 
             
 
@@ -509,10 +555,14 @@
 
           
 
+          
+
           The service description.</param
         >
         <param name="serviceHostBase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

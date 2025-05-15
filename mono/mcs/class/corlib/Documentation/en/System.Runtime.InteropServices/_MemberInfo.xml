@@ -38,6 +38,8 @@
 
         
 
+        
+
          class members that can be accessed by unmanaged COM objects.</para
       >
     </remarks>
@@ -46,6 +48,8 @@
       <para
         >Exposes the public members of the <see
          cref="T:System.Reflection.MemberInfo" />
+
+        
 
         
 
@@ -84,6 +88,8 @@
 
             
 
+            
+
              property gets the class that declares this member.</para
           >
         </remarks>
@@ -92,6 +98,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Reflection.MemberInfo.DeclaringType" />
+
+            
 
             
 
@@ -133,6 +141,8 @@
 
             
 
+            
+
              method determines whether the specified <see
              cref="T:System.Object" />
 
@@ -140,8 +150,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -160,6 +174,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -173,8 +189,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -190,6 +210,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -197,8 +219,12 @@
 
           
 
+          
+
            to compare with the current <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -239,6 +265,8 @@
 
             
 
+            
+
              method returns an array containing all the custom attributes.</para
           >
         </remarks>
@@ -247,6 +275,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Boolean)" />
+
+            
 
             
 
@@ -261,6 +291,8 @@
         </returns>
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -305,8 +337,12 @@
 
             
 
+            
+
              method returns an array of custom attributes identified by <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -320,6 +356,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="M:System.Reflection.Assembly.GetCustomAttributes(System.Type,System.Boolean)" />
+
+            
 
             
 
@@ -339,10 +377,14 @@
 
           
 
+          
+
           The type of attribute to search for. Only attributes that are assignable to this type are returned. </param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -381,8 +423,12 @@
 
             
 
+            
+
              method serves as a hash function for a particular type. <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -396,6 +442,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -475,6 +523,8 @@
 
             
 
+            
+
              method gets the type of the current instance.</para
           >
         </remarks>
@@ -488,6 +538,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -496,6 +548,8 @@
           <para
             >A <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -541,6 +595,8 @@
 
             
 
+            
+
             , see the MSDN Library.</para
           >
         </remarks>
@@ -555,6 +611,8 @@
 
           
 
+          
+
           The type information to return.</param
         >
         <param name="lcid">
@@ -564,10 +622,14 @@
 
           
 
+          
+
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -679,8 +741,12 @@
 
             
 
+            
+
              method indicates whether one or more instances of the <paramref
              name="attributeType" />
+
+            
 
             
 
@@ -699,6 +765,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -707,6 +775,8 @@
           <para
             >true if one or more instance of the <paramref
              name="attributeType" />
+
+            
 
             
 
@@ -722,8 +792,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -733,6 +807,8 @@
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -774,8 +850,12 @@
 
             
 
+            
+
              property gets a <see
              cref="T:System.Reflection.MemberTypes" />
+
+            
 
             
 
@@ -789,6 +869,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Reflection.MemberInfo.MemberType" />
+
+            
 
             
 
@@ -825,6 +907,8 @@
 
             
 
+            
+
              property gets the name of the current member.</para
           >
         </remarks>
@@ -833,6 +917,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Reflection.MemberInfo.Name" />
+
+            
 
             
 
@@ -872,8 +958,12 @@
 
             
 
+            
+
              property gets the class object that was used to obtain this instance of <see
              cref="T:System.Reflection.MemberInfo" />
+
+            
 
             
 
@@ -887,6 +977,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Reflection.MemberInfo.ReflectedType" />
+
+            
 
             
 
@@ -929,6 +1021,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -937,6 +1031,8 @@
           <para
             >A string that represents the current <see
              cref="T:System.Object" />
+
+            
 
             
 

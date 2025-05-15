@@ -36,8 +36,12 @@
 
         
 
+        
+
         . When the <see
          cref="M:System.Xml.XmlReader.Read" />
+
+        
 
         
 
@@ -51,9 +55,13 @@
 
         
 
+        
+
         . If an error occurs during a read
       operation, the read state is changed to <see
          langword="Error" />
+
+        
 
         
 
@@ -67,6 +75,8 @@
 
         
 
+        
+
         . When the
    <see
          cref="M:System.Xml.XmlReader.Close" />
@@ -75,9 +85,13 @@
 
         
 
+        
+
          method
       is called, the read state is set to <see
          langword="Closed" />
+
+        
 
         
 
@@ -120,6 +134,8 @@
           <para
             >The <see
              cref="M:System.Xml.XmlReader.Close" />
+
+            
 
             
 

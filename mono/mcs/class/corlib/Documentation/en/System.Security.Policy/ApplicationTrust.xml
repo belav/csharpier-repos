@@ -38,8 +38,12 @@
 
         
 
+        
+
          object is returned by a trust manager's <see
          cref="M:System.Security.Policy.IApplicationTrustManager.DetermineApplicationTrust(System.ActivationContext,System.Security.Policy.TrustManagerContext)" />
+
+        
 
         
 
@@ -78,6 +82,8 @@
 
             
 
+            
+
              object.</para
           >
         </remarks>
@@ -86,6 +92,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Policy.ApplicationTrust" />
+
+            
 
             
 
@@ -129,8 +137,12 @@
 
             
 
+            
+
              class with an <see
              cref="T:System.ApplicationIdentity" />
+
+            
 
             
 
@@ -146,8 +158,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ApplicationIdentity" />
+
+          
 
           
 
@@ -187,8 +203,12 @@
 
             
 
+            
+
              identifies strong-named assemblies within the <see
              cref="T:System.AppDomain" />
+
+            
 
             
 
@@ -201,8 +221,12 @@
 
             
 
+            
+
              method to create an <see
              cref="T:System.AppDomain" />
+
+            
 
             
 
@@ -214,6 +238,8 @@
                 >How To: Run Partially Trusted Code in a Sandbox</a
               >
             </format>
+
+            
 
             
 
@@ -232,6 +258,8 @@
 
             
 
+            
+
              class using the provided grant set and collection of full-trust assemblies.</para
           >
         </summary>
@@ -242,10 +270,14 @@
 
           
 
+          
+
           A default permission set that is granted to all assemblies that do not have specific grants.</param
         >
         <param name="fullTrustAssemblies">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -280,6 +312,8 @@
           <para
             >The <see
              cref="P:System.Security.Policy.ApplicationTrust.ApplicationIdentity" />
+
+            
 
             
 
@@ -324,6 +358,8 @@
 
             
 
+            
+
              property represents the permissions that are granted to the application.</para
           >
           <para
@@ -334,8 +370,12 @@
 
             
 
+            
+
              representing the default grants is initialized using a <see
              cref="T:System.Security.PermissionSet" />
+
+            
 
             
 
@@ -403,6 +443,8 @@
 
             
 
+            
+
              and <see
              cref="M:System.Security.ISecurityPolicyEncodable.FromXml(System.Security.SecurityElement,System.Security.Policy.PolicyLevel)" />
 
@@ -410,8 +452,12 @@
 
             
 
+            
+
              methods are implemented to make <see
              cref="T:System.Security.Policy.ApplicationTrust" />
+
+            
 
             
 
@@ -430,6 +476,8 @@
 
             
 
+            
+
              object with a given state from an XML encoding.</para
           >
         </summary>
@@ -440,8 +488,12 @@
 
           
 
+          
+
           The XML encoding to use to reconstruct the <see
            cref="T:System.Security.Policy.ApplicationTrust" />
+
+          
 
           
 
@@ -479,8 +531,12 @@
 
             
 
+            
+
              that is associated with this <see
              cref="T:System.Security.Policy.ApplicationTrust" />
+
+            
 
             
 
@@ -519,6 +575,8 @@
 
             
 
+            
+
              property to true when an application has been approved to execute.</para
           >
         </remarks>
@@ -547,6 +605,8 @@
           <para
             >When the <see
              cref="P:System.Security.Policy.ApplicationTrust.Persist" />
+
+            
 
             
 
@@ -588,6 +648,8 @@
 
             
 
+            
+
              and <see
              cref="M:System.Security.ISecurityPolicyEncodable.FromXml(System.Security.SecurityElement,System.Security.Policy.PolicyLevel)" />
 
@@ -595,8 +657,12 @@
 
             
 
+            
+
              methods are implemented to make <see
              cref="T:System.Security.Policy.ApplicationTrust" />
+
+            
 
             
 
@@ -610,6 +676,8 @@
           <para
             >Creates an XML encoding of the <see
              cref="T:System.Security.Policy.ApplicationTrust" />
+
+            
 
             
 

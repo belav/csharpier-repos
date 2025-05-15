@@ -23,6 +23,8 @@
 
         
 
+        
+
          property to indicate whether users can copy the text values of selected cells to the Clipboard and whether row and column header text is included.</para
       >
     </remarks>
@@ -31,6 +33,8 @@
       <para
         >Defines constants that indicate whether content is copied from a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -93,6 +97,8 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Windows.Forms.DataGridViewSelectionMode.RowHeaderSelect" />
 
@@ -100,8 +106,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Windows.Forms.DataGridViewSelectionMode.ColumnHeaderSelect" />
+
+            
 
             
 

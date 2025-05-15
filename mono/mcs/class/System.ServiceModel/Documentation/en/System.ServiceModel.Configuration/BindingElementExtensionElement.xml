@@ -30,8 +30,12 @@
 
         
 
+        
+
          class to use a custom <see
          cref="T:System.ServiceModel.Channels.BindingElement" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          instance has been created, a custom binding element is returned. You can use this in an application configuration file by using the &lt;add&gt; element and setting the type attribute to the <see
          cref="T:System.ServiceModel.Configuration.BindingElementExtensionElement" />
+
+        
 
         
 
@@ -62,6 +70,8 @@
       <para
         >Enables the use of a custom <see
          cref="T:System.ServiceModel.Channels.BindingElement" />
+
+        
 
         
 
@@ -90,6 +100,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Configuration.BindingElementExtensionElement" />
+
+            
 
             
 
@@ -132,6 +144,8 @@
 
           
 
+          
+
           A binding element.</param
         >
       </Docs>
@@ -161,8 +175,12 @@
 
             
 
+            
+
              property to return the type of the custom binding element this <see
              cref="T:System.ServiceModel.Configuration.BindingElementExtensionElement" />
+
+            
 
             
 
@@ -176,6 +194,8 @@
           <para
             >When overridden in a derived class, gets the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -219,6 +239,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -251,6 +273,8 @@
         </summary>
         <param name="bindingElement">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

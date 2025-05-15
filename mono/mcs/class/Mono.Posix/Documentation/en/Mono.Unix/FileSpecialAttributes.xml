@@ -29,6 +29,8 @@
 
       
 
+      
+
       )
       and control filesystem- and operating system-specific behavior.
     </remarks
@@ -62,6 +64,8 @@
 
           
 
+          
+
           ), set the effective 
           group-id of the process 
           (<see
@@ -71,10 +75,14 @@
 
           
 
+          
+
           )
           to the owner group of the file
           (<see
            cref="P:Mono.Unix.UnixFileSystemInfo.OwnerGroupId" />
+
+          
 
           
 
@@ -110,6 +118,8 @@
 
           
 
+          
+
           ), set the effective 
           user-id of the process 
           (<see
@@ -119,10 +129,14 @@
 
           
 
+          
+
           )
           to the owner of the file
           (<see
            cref="P:Mono.Unix.UnixFileSystemInfo.OwnerUserId" />
+
+          
 
           
 
@@ -172,8 +186,9 @@
             <item>
               <term
                 >is the superuser (<c
+                >root</c>
+
                 
->root</c>
 
                 
 

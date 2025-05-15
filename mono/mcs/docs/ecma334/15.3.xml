@@ -8,11 +8,15 @@
 
     
 
+    
+
      does nothing. <grammar_production
     >
       <name>
         <non_terminal where="15.3">empty-statement</non_terminal>
       </name>
+
+      
 
       
 
@@ -30,7 +34,7 @@
     <example
       >[Example: An empty statement can be used when writing a while statement with a null body: <code_example
       >
-<![CDATA[
+        <![CDATA[
 bool ProcessMessage() {...}  
 void ProcessMessages() {  
    while (ProcessMessage())  
@@ -44,7 +48,7 @@ void ProcessMessages() {
     <example
       >Also, an empty statement can be used to declare a label just before the closing "}" of a block: <code_example
       >
-<![CDATA[
+        <![CDATA[
 void F() {  
    ...  
    if (done) goto exit;  
@@ -53,6 +57,8 @@ void F() {
 }  
 ]]>
       </code_example>
+
+      
 
       
 

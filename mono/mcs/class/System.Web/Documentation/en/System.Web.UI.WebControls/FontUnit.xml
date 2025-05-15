@@ -28,8 +28,12 @@
 
         
 
+        
+
         , see the <see
          cref="Overload:System.Web.UI.WebControls.FontUnit.#ctor" />
+
+        
 
         
 
@@ -64,6 +68,8 @@
 
             
 
+            
+
              constructor to create and initialize an instance of the <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
 
@@ -71,8 +77,12 @@
 
             
 
+            
+
              class using the specified font size. The following table shows initial property values for the <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -104,6 +114,8 @@
 
                   
 
+                  
+
                    value. </para
                 >
               </description>
@@ -121,8 +133,12 @@
 
                   
 
+                  
+
                    with the <see
                    cref="P:System.Web.UI.WebControls.Unit.Value" />
+
+                  
 
                   
 
@@ -135,6 +151,8 @@
 
                   
 
+                  
+
                    and the <see
                    cref="P:System.Web.UI.WebControls.Unit.Type" />
 
@@ -142,8 +160,12 @@
 
                   
 
+                  
+
                    property equal to the <see
                    cref="F:System.Web.UI.WebControls.UnitType.Point" />
+
+                  
 
                   
 
@@ -165,6 +187,8 @@
 
             
 
+            
+
              class with the specified font size in points.</para
           >
         </summary>
@@ -175,8 +199,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Double" />
+
+          
 
           
 
@@ -204,11 +232,15 @@
 
             
 
+            
+
              class using the specified font size.</para
           >
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -248,6 +280,8 @@
 
                   
 
+                  
+
                    with its <see
                    cref="P:System.Web.UI.WebControls.Unit.Value" />
 
@@ -255,8 +289,12 @@
 
                   
 
+                  
+
                    property set to the font size specified by the <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -278,11 +316,15 @@
 
             
 
+            
+
              class with the specified font size.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -314,8 +356,12 @@
 
             
 
+            
+
              constructor calls the <see
              cref="M:System.Web.UI.WebControls.FontUnit.#ctor(System.String,System.Globalization.CultureInfo)" />
+
+            
 
             
 
@@ -328,8 +374,12 @@
 
             
 
+            
+
              property for the <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -348,11 +398,15 @@
 
             
 
+            
+
              class with the specified string.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -387,8 +441,12 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.Web.UI.WebControls.FontSize" />
+
+            
 
             
 
@@ -404,8 +462,12 @@
 
             
 
+            
+
              parameter contains the value FontSize.AsUnit, the following table shows the initial property values for an instance of <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -445,8 +507,12 @@
 
                   
 
+                  
+
                    object with its <see
                    cref="P:System.Web.UI.WebControls.Unit.Value" />
+
+                  
 
                   
 
@@ -465,6 +531,8 @@
 
             
 
+            
+
              parameter contains any other <see
              cref="T:System.Web.UI.WebControls.FontSize" />
 
@@ -472,8 +540,12 @@
 
             
 
+            
+
              value, the following table shows the initial property values for an instance of <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -505,6 +577,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -531,8 +605,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Web.UI.WebControls.FontSize" />
+
+            
 
             
 
@@ -548,8 +626,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.FontSize" />
+
+          
 
           
 
@@ -584,8 +666,12 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.Web.UI.WebControls.Unit" />
+
+            
 
             
 
@@ -601,8 +687,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.Unit" />
+
+            
 
             
 
@@ -615,8 +705,12 @@
 
             
 
+            
+
              parameter is true, the following table shows initial property values for an instance of <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -662,8 +756,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.Unit" />
+
+            
 
             
 
@@ -676,8 +774,12 @@
 
             
 
+            
+
              parameter is false, the following table shows initial property values for an instance of <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -717,6 +819,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -733,8 +837,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Web.UI.WebControls.Unit" />
+
+            
 
             
 
@@ -750,8 +858,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.Unit" />
+
+          
 
           
 
@@ -789,8 +901,12 @@
 
             
 
+            
+
              constructor to create and initialize an instance of the <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -801,6 +917,8 @@
           <para
             >The following table shows the initial property values for a <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -832,6 +950,8 @@
 
                   
 
+                  
+
                    value. </para
                 >
               </description>
@@ -849,8 +969,12 @@
 
                   
 
+                  
+
                    with the <see
                    cref="P:System.Web.UI.WebControls.Unit.Value" />
+
+                  
 
                   
 
@@ -863,6 +987,8 @@
 
                   
 
+                  
+
                    and the <see
                    cref="P:System.Web.UI.WebControls.Unit.Type" />
 
@@ -870,8 +996,12 @@
 
                   
 
+                  
+
                    property equal to <paramref
                    name="type" />
+
+                  
 
                   
 
@@ -893,8 +1023,12 @@
 
             
 
+            
+
              class with the specified font size and <see
              cref="T:System.Web.UI.WebControls.UnitType" />
+
+            
 
             
 
@@ -910,8 +1044,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Double" />
+
+          
 
           
 
@@ -926,8 +1064,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.UnitType" />
+
+          
 
           
 
@@ -959,6 +1101,8 @@
 
             
 
+            
+
              constructor recognizes the strings for <paramref
              name="value" />
 
@@ -966,8 +1110,12 @@
 
             
 
+            
+
              that are shown in the following table to create a new instance of the <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -1087,8 +1235,12 @@
 
             
 
+            
+
              property has the value <see
              cref="F:System.Web.UI.WebControls.FontSize.NotSet" />
+
+            
 
             
 
@@ -1104,8 +1256,12 @@
 
             
 
+            
+
             , a new instance of the <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -1118,6 +1274,8 @@
 
             
 
+            
+
              as a font size and setting the <see
              cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
@@ -1125,8 +1283,12 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Web.UI.WebControls.UnitType.Point" />
+
+            
 
             
 
@@ -1145,8 +1307,12 @@
 
             
 
+            
+
              class with the specified string using the specified <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -1162,6 +1328,8 @@
 
           
 
+          
+
           A string to specify the font size.</param
         >
         <param name="culture">
@@ -1171,8 +1339,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -1207,8 +1379,12 @@
 
             
 
+            
+
              field to represent an empty <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -1222,6 +1398,8 @@
           <para
             >Represents an empty <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -1256,8 +1434,12 @@
 
             
 
+            
+
              method to determine whether the specified <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -1270,8 +1452,12 @@
 
             
 
+            
+
              class that this method is called from. For the specified <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -1284,8 +1470,12 @@
 
             
 
+            
+
              that contains the same values for the <see
              cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+
+            
 
             
 
@@ -1298,8 +1488,12 @@
 
             
 
+            
+
              properties as the instance of the <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -1318,8 +1512,12 @@
 
             
 
+            
+
              is equivalent to the instance of the <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -1338,8 +1536,12 @@
 
             
 
+            
+
              is equivalent to the instance of the <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -1355,8 +1557,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1411,6 +1617,8 @@
 
             
 
+            
+
              property to determine whether the font size has been set.</para
           >
         </remarks>
@@ -1445,8 +1653,12 @@
 
             
 
+            
+
              field to represent a <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -1459,11 +1671,15 @@
 
             
 
+            
+
              property set to FontSize.Large.</para
           >
           <para
             >In Internet Explorer 4.0 and later, the HTML rendered output from a control with the <see
              cref="P:System.Web.UI.WebControls.FontInfo.Size" />
+
+            
 
             
 
@@ -1482,8 +1698,12 @@
 
             
 
+            
+
              object with the <see
              cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+
+            
 
             
 
@@ -1519,6 +1739,8 @@
 
             
 
+            
+
              field to represent a <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
 
@@ -1526,8 +1748,12 @@
 
             
 
+            
+
              object with the <see
              cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+
+            
 
             
 
@@ -1543,12 +1769,16 @@
 
             
 
+            
+
              property set to this field is style= "font-size:Larger". In browsers earlier than Internet Explorer 4.0, no HTML rendered output is created.</para
           >
           <block subset="none" type="note">
             <para
               >Some browers do not recognize the <see
                cref="F:System.Web.UI.WebControls.FontSize.Larger" />
+
+              
 
               
 
@@ -1568,8 +1798,12 @@
 
             
 
+            
+
              object with the <see
              cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+
+            
 
             
 
@@ -1605,8 +1839,12 @@
 
             
 
+            
+
              field to represent a <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -1619,11 +1857,15 @@
 
             
 
+            
+
              property set to FontSize.Medium.</para
           >
           <para
             >In Internet Explorer 4.0 and later, the HTML rendered output from a control with the <see
              cref="P:System.Web.UI.WebControls.FontInfo.Size" />
+
+            
 
             
 
@@ -1642,8 +1884,12 @@
 
             
 
+            
+
              object with the <see
              cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+
+            
 
             
 
@@ -1682,6 +1928,8 @@
 
             
 
+            
+
              objects to be equivalent, each object must have the same values for the <see
              cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
@@ -1689,8 +1937,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.FontUnit.Unit" />
+
+            
 
             
 
@@ -1709,6 +1961,8 @@
 
             
 
+            
+
              objects for equality.</para
           >
         </summary>
@@ -1717,6 +1971,8 @@
           <para
             >true if both <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -1732,8 +1988,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.FontUnit" />
+
+          
 
           
 
@@ -1748,8 +2008,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.FontUnit" />
+
+          
 
           
 
@@ -1810,6 +2074,8 @@
 
             
 
+            
+
              objects to be not equal to each other, each object must either have different values for the <see
              cref="P:System.Web.UI.WebControls.FontUnit.Type" />
 
@@ -1817,8 +2083,12 @@
 
             
 
+            
+
              property or the <see
              cref="P:System.Web.UI.WebControls.FontUnit.Unit" />
+
+            
 
             
 
@@ -1837,6 +2107,8 @@
 
             
 
+            
+
              objects for inequality.</para
           >
         </summary>
@@ -1845,6 +2117,8 @@
           <para
             >true if both <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -1860,8 +2134,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.FontUnit" />
+
+          
 
           
 
@@ -1876,8 +2154,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.FontUnit" />
+
+          
 
           
 
@@ -1914,8 +2196,12 @@
 
             
 
+            
+
              method to convert the specified string to its <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -1931,8 +2217,12 @@
 
             
 
+            
+
              parameter is not null, not <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -1945,8 +2235,12 @@
 
             
 
+            
+
              value, the following table shows initial property values for the new instance of <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -1978,8 +2272,12 @@
 
                   
 
+                  
+
                    enumeration equivalent of the <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -2008,8 +2306,12 @@
 
             
 
+            
+
              parameter is not null, not <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -2022,8 +2324,12 @@
 
             
 
+            
+
              value, the following table shows initial property values for the new instance of <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -2063,6 +2369,8 @@
 
                   
 
+                  
+
                    object with its <see
                    cref="P:System.Web.UI.WebControls.Unit.Value" />
 
@@ -2070,8 +2378,12 @@
 
                   
 
+                  
+
                    property initialized with the <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -2090,6 +2402,8 @@
 
             
 
+            
+
              parameter is null or <see
              cref="F:System.String.Empty" />
 
@@ -2097,8 +2411,12 @@
 
             
 
+            
+
             , the following table shows initial property values for the new instance of <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -2147,6 +2465,8 @@
 
             
 
+            
+
              equivalent.</para
           >
         </summary>
@@ -2160,8 +2480,12 @@
 
             
 
+            
+
              that represents the font size specified by the <paramref
              name="s" />
+
+            
 
             
 
@@ -2177,8 +2501,12 @@
 
           
 
+          
+
           A string representation of one of the <see
            cref="T:System.Web.UI.WebControls.FontSize" />
+
+          
 
           
 
@@ -2216,8 +2544,12 @@
 
             
 
+            
+
              method to convert the specified string and culture to its <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -2233,8 +2565,12 @@
 
             
 
+            
+
              parameter is not null, not <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -2247,8 +2583,12 @@
 
             
 
+            
+
              value, the following table shows initial property values for the new instance of <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -2280,8 +2620,12 @@
 
                   
 
+                  
+
                    enumeration equivalent of the <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -2310,8 +2654,12 @@
 
             
 
+            
+
              parameter is not null, not <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -2324,8 +2672,12 @@
 
             
 
+            
+
              value, the following table shows initial property values for the new instance of <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -2365,6 +2717,8 @@
 
                   
 
+                  
+
                    object with its <see
                    cref="P:System.Web.UI.WebControls.Unit.Value" />
 
@@ -2372,8 +2726,12 @@
 
                   
 
+                  
+
                    property initialized with the <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -2392,6 +2750,8 @@
 
             
 
+            
+
              parameter is null or <see
              cref="F:System.String.Empty" />
 
@@ -2399,8 +2759,12 @@
 
             
 
+            
+
             , the following table shows initial property values for an instance of <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -2449,6 +2813,8 @@
 
             
 
+            
+
              equivalent in the specified culture.</para
           >
         </summary>
@@ -2462,6 +2828,8 @@
 
             
 
+            
+
              that represents the font size specified by the <paramref
              name="s" />
 
@@ -2469,8 +2837,12 @@
 
             
 
+            
+
              parameter in the culture specified by the <paramref
              name="culture" />
+
+            
 
             
 
@@ -2486,8 +2858,12 @@
 
           
 
+          
+
           A string representation of one of the <see
            cref="T:System.Web.UI.WebControls.FontSize" />
+
+          
 
           
 
@@ -2502,6 +2878,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
 
@@ -2509,8 +2887,12 @@
 
           
 
+          
+
            that represents the culture of the <see
            cref="T:System.Web.UI.WebControls.FontUnit" />
+
+          
 
           
 
@@ -2547,6 +2929,8 @@
 
             
 
+            
+
              method to create a <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
 
@@ -2554,8 +2938,12 @@
 
             
 
+            
+
              that represents the font size specified by the <paramref
              name="n" />
+
+            
 
             
 
@@ -2574,8 +2962,12 @@
 
             
 
+            
+
              of type <see
              cref="T:System.Drawing.Point" />
+
+            
 
             
 
@@ -2594,8 +2986,12 @@
 
             
 
+            
+
              that represents the font size specified by the <paramref
              name="n" />
+
+            
 
             
 
@@ -2611,6 +3007,8 @@
 
           
 
+          
+
           An integer representing the <see
            cref="T:System.Drawing.Point" />
 
@@ -2618,8 +3016,12 @@
 
           
 
+          
+
            value to convert to a <see
            cref="T:System.Web.UI.WebControls.FontUnit" />
+
+          
 
           
 
@@ -2654,8 +3056,12 @@
 
             
 
+            
+
              field to represent a <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -2668,11 +3074,15 @@
 
             
 
+            
+
              property set to FontSize.Small.</para
           >
           <para
             >In Internet Explorer 4.0 and later, the HTML rendered output from a control with the <see
              cref="P:System.Web.UI.WebControls.FontInfo.Size" />
+
+            
 
             
 
@@ -2691,8 +3101,12 @@
 
             
 
+            
+
              object with the <see
              cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+
+            
 
             
 
@@ -2728,6 +3142,8 @@
 
             
 
+            
+
              field to represent a <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
 
@@ -2735,8 +3151,12 @@
 
             
 
+            
+
              object with the <see
              cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+
+            
 
             
 
@@ -2752,12 +3172,16 @@
 
             
 
+            
+
              property set to this field is style= "font-size:Smaller". In browsers earlier than Internet Explorer 4.0, no HTML rendered output is created.</para
           >
           <block subset="none" type="note">
             <para
               >Some browers do not recognize the <see
                cref="F:System.Web.UI.WebControls.FontSize.Smaller" />
+
+              
 
               
 
@@ -2777,8 +3201,12 @@
 
             
 
+            
+
              object with the <see
              cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+
+            
 
             
 
@@ -2811,8 +3239,12 @@
 
             
 
+            
+
              method to retrieve the string representation of the <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -2825,8 +3257,12 @@
 
             
 
+            
+
              property is set to FontSize.AsUnit, the returned string is the string equivalent of the <see
              cref="T:System.Web.UI.WebControls.Unit" />
+
+            
 
             
 
@@ -2839,8 +3275,12 @@
 
             
 
+            
+
              property. If the <see
              cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+
+            
 
             
 
@@ -2853,8 +3293,12 @@
 
             
 
+            
+
              value, the returned string is the string equivalent of the <see
              cref="T:System.Web.UI.WebControls.FontSize" />
+
+            
 
             
 
@@ -2873,6 +3317,8 @@
 
             
 
+            
+
              object to the default string representation.</para
           >
         </summary>
@@ -2881,6 +3327,8 @@
           <para
             >The string representation of the <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -2918,8 +3366,12 @@
 
             
 
+            
+
              method to retrieve the string representation of the <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -2932,8 +3384,12 @@
 
             
 
+            
+
              property is set to FontSize.AsUnit, the returned string is the string equivalent of the <see
              cref="T:System.Web.UI.WebControls.Unit" />
+
+            
 
             
 
@@ -2946,8 +3402,12 @@
 
             
 
+            
+
              property. If the <see
              cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+
+            
 
             
 
@@ -2960,8 +3420,12 @@
 
             
 
+            
+
              value, the returned string is the string equivalent of the <see
              cref="T:System.Web.UI.WebControls.FontSize" />
+
+            
 
             
 
@@ -2980,8 +3444,12 @@
 
             
 
+            
+
              object to a string representation, using the specified <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -3000,11 +3468,15 @@
 
             
 
+            
+
              object in the specified culture.</para
           >
         </returns>
         <param name="culture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3017,8 +3489,12 @@
 
           
 
+          
+
            that contains the culture to represent the <see
            cref="T:System.Web.UI.WebControls.FontUnit" />
+
+          
 
           
 
@@ -3056,8 +3532,12 @@
 
             
 
+            
+
              method to retrieve the string representation of the <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -3073,8 +3553,12 @@
 
             
 
+            
+
              property is set to the <see
              cref="F:System.Web.UI.WebControls.FontSize.AsUnit" />
+
+            
 
             
 
@@ -3087,8 +3571,12 @@
 
             
 
+            
+
              property. The numeric portion of the <see
              cref="P:System.Web.UI.WebControls.FontUnit.Unit" />
+
+            
 
             
 
@@ -3101,8 +3589,12 @@
 
             
 
+            
+
             . In other words, when the <see
              cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+
+            
 
             
 
@@ -3115,6 +3607,8 @@
 
             
 
+            
+
              value, the returned string representation is generated using the <see
              cref="M:System.Web.UI.WebControls.Unit.ToString(System.IFormatProvider)" />
 
@@ -3122,8 +3616,12 @@
 
             
 
+            
+
              method on the unit object that is stored in the <see
              cref="P:System.Web.UI.WebControls.FontUnit.Unit" />
+
+            
 
             
 
@@ -3139,6 +3637,8 @@
 
             
 
+            
+
              property is set to any other <see
              cref="T:System.Web.UI.WebControls.FontSize" />
 
@@ -3146,8 +3646,12 @@
 
             
 
+            
+
              value, the returned string is the string equivalent of the <see
              cref="T:System.Web.UI.WebControls.FontSize" />
+
+            
 
             
 
@@ -3166,6 +3670,8 @@
 
             
 
+            
+
              object to a string equivalent using the specified format provider.</para
           >
         </summary>
@@ -3179,8 +3685,12 @@
 
             
 
+            
+
             , with any numeric unit value in the format specified by <paramref
              name="formatProvider" />
+
+            
 
             
 
@@ -3212,8 +3722,12 @@
 
             
 
+            
+
              property to retrieve a <see
              cref="T:System.Web.UI.WebControls.FontSize" />
+
+            
 
             
 
@@ -3227,6 +3741,8 @@
           <para
             >Gets a <see
              cref="T:System.Web.UI.WebControls.FontSize" />
+
+            
 
             
 
@@ -3259,8 +3775,12 @@
 
             
 
+            
+
              property to retrieve a <see
              cref="T:System.Web.UI.WebControls.Unit" />
+
+            
 
             
 
@@ -3274,6 +3794,8 @@
           <para
             >Gets a <see
              cref="T:System.Web.UI.WebControls.Unit" />
+
+            
 
             
 
@@ -3309,8 +3831,12 @@
 
             
 
+            
+
              field to represent a <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -3323,11 +3849,15 @@
 
             
 
+            
+
              property set to FontSize.XLarge.</para
           >
           <para
             >In Internet Explorer 4.0 and later, the HTML rendered output from a control with the <see
              cref="P:System.Web.UI.WebControls.FontInfo.Size" />
+
+            
 
             
 
@@ -3346,8 +3876,12 @@
 
             
 
+            
+
              object with the <see
              cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+
+            
 
             
 
@@ -3383,8 +3917,12 @@
 
             
 
+            
+
              field to represent a <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -3397,11 +3935,15 @@
 
             
 
+            
+
              property set to FontSize.XSmall.</para
           >
           <para
             >In Internet Explorer 4.0 and later, the HTML rendered output from a control with the <see
              cref="P:System.Web.UI.WebControls.FontInfo.Size" />
+
+            
 
             
 
@@ -3420,8 +3962,12 @@
 
             
 
+            
+
              object with the <see
              cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+
+            
 
             
 
@@ -3457,8 +4003,12 @@
 
             
 
+            
+
              field to represent a <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -3471,11 +4021,15 @@
 
             
 
+            
+
              property set to FontSize.XXLarge.</para
           >
           <para
             >In Internet Explorer 4.0 and later, the HTML rendered output from a control with the <see
              cref="P:System.Web.UI.WebControls.FontInfo.Size" />
+
+            
 
             
 
@@ -3494,8 +4048,12 @@
 
             
 
+            
+
              object with the <see
              cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+
+            
 
             
 
@@ -3531,8 +4089,12 @@
 
             
 
+            
+
              field to represent a <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -3545,11 +4107,15 @@
 
             
 
+            
+
              property set to FontSize.XXSmall.</para
           >
           <para
             >In Internet Explorer 4.0 and later, the HTML rendered output from a control with the <see
              cref="P:System.Web.UI.WebControls.FontInfo.Size" />
+
+            
 
             
 
@@ -3568,8 +4134,12 @@
 
             
 
+            
+
              object with the <see
              cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+
+            
 
             
 

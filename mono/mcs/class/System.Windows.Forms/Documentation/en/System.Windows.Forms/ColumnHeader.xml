@@ -42,8 +42,12 @@
 
         
 
+        
+
          control that contains heading text. <see
          cref="T:System.Windows.Forms.ColumnHeader" />
+
+        
 
         
 
@@ -56,6 +60,8 @@
 
         
 
+        
+
          using the <see
          cref="M:System.Windows.Forms.ListView.ColumnHeaderCollection.Add(System.String,System.Int32,System.Windows.Forms.HorizontalAlignment)" />
 
@@ -63,8 +69,12 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.Windows.Forms.ListView.ColumnHeaderCollection" />
+
+        
 
         
 
@@ -77,8 +87,12 @@
 
         
 
+        
+
         , you can use the <see
          cref="M:System.Windows.Forms.ListView.ColumnHeaderCollection.AddRange(System.Windows.Forms.ColumnHeader[])" />
+
+        
 
         
 
@@ -91,8 +105,12 @@
 
         
 
+        
+
          class. You can use the <see
          cref="P:System.Windows.Forms.ColumnHeader.Index" />
+
+        
 
         
 
@@ -105,6 +123,8 @@
 
         
 
+        
+
          class to determine where the <see
          cref="T:System.Windows.Forms.ColumnHeader" />
 
@@ -112,8 +132,12 @@
 
         
 
+        
+
          is located in the <see
          cref="T:System.Windows.Forms.ListView.ColumnHeaderCollection" />
+
+        
 
         
 
@@ -128,8 +152,12 @@
 
         
 
+        
+
          provides the <see
          cref="P:System.Windows.Forms.ColumnHeader.Text" />
+
+        
 
         
 
@@ -142,8 +170,12 @@
 
         
 
+        
+
          properties to set the text displayed in the control and the alignment of the text in the column header. To determine whether a <see
          cref="T:System.Windows.Forms.ColumnHeader" />
+
+        
 
         
 
@@ -156,8 +188,12 @@
 
         
 
+        
+
          control, you can reference the <see
          cref="P:System.Windows.Forms.ColumnHeader.ListView" />
+
+        
 
         
 
@@ -170,6 +206,8 @@
 
         
 
+        
+
          for use in another <see
          cref="T:System.Windows.Forms.ListView" />
 
@@ -177,8 +215,12 @@
 
         
 
+        
+
          control, you can use the <see
          cref="M:System.Windows.Forms.ColumnHeader.Clone" />
+
+        
 
         
 
@@ -192,6 +234,8 @@
       <para
         >Displays a single column header in a <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -213,6 +257,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ColumnHeader" />
+
+            
 
             
 
@@ -248,6 +294,8 @@
 
             
 
+            
+
              class with the image specified.</para
           >
         </summary>
@@ -258,8 +306,12 @@
 
           
 
+          
+
           The index of the image to display in the <see
            cref="T:System.Windows.Forms.ColumnHeader" />
+
+          
 
           
 
@@ -290,6 +342,8 @@
 
             
 
+            
+
              class with the image specified.</para
           >
         </summary>
@@ -300,8 +354,12 @@
 
           
 
+          
+
           The key of the image to display in the <see
            cref="T:System.Windows.Forms.ColumnHeader" />
+
+          
 
           
 
@@ -340,8 +398,12 @@
 
             
 
+            
+
              method is only effective once the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -354,6 +416,8 @@
 
             
 
+            
+
              have been constructed, and the column is populated with items. If new items are added to the <see
              cref="T:System.Windows.Forms.ListView" />
 
@@ -361,8 +425,12 @@
 
             
 
+            
+
             , the column will not resize unless <see
              cref="M:System.Windows.Forms.ColumnHeader.AutoResize(System.Windows.Forms.ColumnHeaderAutoResizeStyle)" />
+
+            
 
             
 
@@ -382,8 +450,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.ColumnHeaderAutoResizeStyle" />
+
+          
 
           
 
@@ -411,6 +483,8 @@
 
             
 
+            
+
              objects from an existing <see
              cref="T:System.Windows.Forms.ListView" />
 
@@ -418,8 +492,12 @@
 
             
 
+            
+
              control for use in other <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -438,6 +516,8 @@
 
             
 
+            
+
              that is not attached to any list view control.</para
           >
         </summary>
@@ -446,6 +526,8 @@
           <para
             >An object representing a copy of this <see
              cref="T:System.Windows.Forms.ColumnHeader" />
+
+            
 
             
 
@@ -507,8 +589,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Windows.Forms.ColumnHeader" />
+
+            
 
             
 
@@ -521,8 +607,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Windows.Forms.ColumnHeader" />
+
+            
 
             
 
@@ -535,8 +625,12 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Windows.Forms.ColumnHeader" />
+
+            
 
             
 
@@ -553,8 +647,12 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.Windows.Forms.ColumnHeader" />
+
+              
 
               
 
@@ -567,8 +665,12 @@
 
               
 
+              
+
                is using will not be freed until garbage collection calls the <see
                cref="T:System.Windows.Forms.ColumnHeader" />
+
+              
 
               
 
@@ -583,6 +685,8 @@
           <para
             >Disposes of the resources (other than memory) used by the <see
              cref="T:System.Windows.Forms.ColumnHeader" />
+
+            
 
             
 
@@ -635,8 +739,12 @@
 
             
 
+            
+
              property refers to the index of an image specified by the <see
              cref="P:System.Windows.Forms.ListView.SmallImageList" />
+
+            
 
             
 
@@ -649,8 +757,12 @@
 
             
 
+            
+
              that contains the <see
              cref="T:System.Windows.Forms.ColumnHeader" />
+
+            
 
             
 
@@ -663,6 +775,8 @@
 
             
 
+            
+
              property returns -1 if there is no <see
              cref="P:System.Windows.Forms.ListView.SmallImageList" />
 
@@ -670,8 +784,12 @@
 
             
 
+            
+
              set on the containing <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -686,8 +804,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ColumnHeader.ImageIndex" />
+
+            
 
             
 
@@ -703,6 +825,8 @@
 
             
 
+            
+
              is typically used to indicate the state information. If you set the <see
              cref="P:System.Windows.Forms.ColumnHeader.ImageIndex" />
 
@@ -710,8 +834,12 @@
 
             
 
+            
+
              to a value greater than the index of the last item in the associated image list, <see
              cref="P:System.Windows.Forms.ColumnHeader.ImageIndex" />
+
+            
 
             
 
@@ -725,6 +853,8 @@
           <para
             >Gets or sets the index of the image displayed in the <see
              cref="T:System.Windows.Forms.ColumnHeader" />
+
+            
 
             
 
@@ -773,8 +903,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ColumnHeader.ImageIndex" />
+
+            
 
             
 
@@ -790,11 +924,15 @@
 
             
 
+            
+
              is set to an invalid value, an image will not be displayed, and an exception will not be thrown. </para
           >
           <para
             >The image associated with a <see
              cref="T:System.Windows.Forms.ColumnHeader" />
+
+            
 
             
 
@@ -838,8 +976,12 @@
 
             
 
+            
+
              returns the value of the <see
              cref="P:System.Windows.Forms.ListView.SmallImageList" />
+
+            
 
             
 
@@ -852,8 +994,12 @@
 
             
 
+            
+
              that contains the <see
              cref="T:System.Windows.Forms.ColumnHeader" />
+
+            
 
             
 
@@ -867,6 +1013,8 @@
           <para
             >Gets the image list associated with the <see
              cref="T:System.Windows.Forms.ColumnHeader" />
+
+            
 
             
 
@@ -900,8 +1048,12 @@
 
             
 
+            
+
             . This can be due to the user reordering the column headers at run time (when the <see
              cref="P:System.Windows.Forms.ListView.AllowColumnReorder" />
+
+            
 
             
 
@@ -914,8 +1066,12 @@
 
             
 
+            
+
              is not contained within a <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -934,8 +1090,12 @@
 
             
 
+            
+
              control's <see
              cref="T:System.Windows.Forms.ListView.ColumnHeaderCollection" />
+
+            
 
             
 
@@ -976,8 +1136,12 @@
 
             
 
+            
+
              control a specific <see
              cref="T:System.Windows.Forms.ColumnHeader" />
+
+            
 
             
 
@@ -996,8 +1160,12 @@
 
             
 
+            
+
              control the <see
              cref="T:System.Windows.Forms.ColumnHeader" />
+
+            
 
             
 
@@ -1039,6 +1207,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -1075,6 +1245,8 @@
           <para
             >Gets or sets an object that contains data to associate with the <see
              cref="T:System.Windows.Forms.ColumnHeader" />
+
+            
 
             
 
@@ -1138,6 +1310,8 @@
 
             
 
+            
+
             . </para
           >
           <block subset="none" type="note">
@@ -1149,8 +1323,12 @@
 
               
 
+              
+
                control, which is always aligned to the left. To work around this limitation in dnprdnext, you can handle the <see
                cref="E:System.Windows.Forms.ListView.DrawColumnHeader" />
+
+              
 
               
 
@@ -1165,6 +1343,8 @@
           <para
             >Gets or sets the horizontal alignment of the text displayed in the <see
              cref="T:System.Windows.Forms.ColumnHeader" />
+
+            
 
             
 
@@ -1225,8 +1405,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Windows.Forms.ColumnHeader" />
+
+            
 
             
 
@@ -1239,6 +1423,8 @@
 
             
 
+            
+
              can be set to adjust at run time to the column contents or heading. To adjust the width of the longest item in the column, set the <see
              cref="P:System.Windows.Forms.ColumnHeader.Width" />
 
@@ -1246,8 +1432,12 @@
 
             
 
+            
+
              property to -1. To autosize to the width of the column heading, set the <see
              cref="P:System.Windows.Forms.ColumnHeader.Width" />
+
+            
 
             
 

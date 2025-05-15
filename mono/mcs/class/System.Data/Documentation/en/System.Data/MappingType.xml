@@ -23,8 +23,12 @@
 
         
 
+        
+
          enumeration is used when getting or setting the <see
          cref="P:System.Data.DataColumn.ColumnMapping" />
+
+        
 
         
 
@@ -37,6 +41,8 @@
 
         
 
+        
+
         . The property determines how a column's values will be written when the <see
          cref="M:System.Data.DataSet.WriteXml(System.IO.Stream)" />
 
@@ -44,8 +50,12 @@
 
         
 
+        
+
          method is called on a <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -59,6 +69,8 @@
       <para
         >Specifies how a <see
          cref="T:System.Data.DataColumn" />
+
+        
 
         
 
@@ -140,6 +152,8 @@
           <para
             >The column is mapped to an <see
              cref="T:System.Xml.XmlText" />
+
+            
 
             
 

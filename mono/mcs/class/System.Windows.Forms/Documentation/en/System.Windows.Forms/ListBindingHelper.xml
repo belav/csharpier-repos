@@ -20,6 +20,8 @@
 
         
 
+        
+
         .</para
       >
       <para>Note that for Smartphone applications, this class requires Windows Mobile Version 5.0 software for Smartphones.</para>
@@ -53,8 +55,12 @@
 
             
 
+            
+
              parameter implements the <see
              cref="T:System.ComponentModel.IListSource" />
+
+            
 
             
 
@@ -67,8 +73,12 @@
 
             
 
+            
+
              method will return an object of type <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -91,8 +101,12 @@
 
             
 
+            
+
              representing the underlying list if it exists; otherwise, the original data source specified by <paramref
              name="list" />
+
+            
 
             
 
@@ -103,6 +117,8 @@
         </returns>
         <param name="list">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -139,8 +155,12 @@
 
             
 
+            
+
              method returns <paramref
              name="dataSource" />
+
+            
 
             
 
@@ -156,8 +176,12 @@
 
             
 
+            
+
              is not a list, <see
              cref="M:System.Windows.Forms.ListBindingHelper.GetList(System.Object,System.String)" />
+
+            
 
             
 
@@ -170,8 +194,12 @@
 
             
 
+            
+
              property that matches the <paramref
              name="dataMember" />
+
+            
 
             
 
@@ -187,8 +215,12 @@
 
             
 
+            
+
              is a list, in that it implements either the <see
              cref="T:System.Windows.Forms.ICurrencyManagerProvider" />
+
+            
 
             
 
@@ -201,8 +233,12 @@
 
             
 
+            
+
              interfaces, then the underlying list is obtained by choosing an item from the list and querying that item for the value of the property named by <paramref
              name="dataMember" />
+
+            
 
             
 
@@ -225,8 +261,12 @@
 
             
 
+            
+
              representing the underlying list if it was found; otherwise, <paramref
              name="dataSource" />
+
+            
 
             
 
@@ -242,10 +282,14 @@
 
           
 
+          
+
           The data source from which to find the list.</param
         >
         <param name="dataMember">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -281,8 +325,12 @@
 
             
 
+            
+
              method is used to examine the collection of properties for a data source. The action of this method depends on the actual type of the <paramref
              name="list" />
+
+            
 
             
 
@@ -314,6 +362,8 @@
 
                   
 
+                  
+
                    describing the properties of the item type contained in the list.</para
                 >
               </description>
@@ -326,6 +376,8 @@
                 <para
                   >Returns a <see
                    cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+
+                  
 
                   
 
@@ -348,6 +400,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -359,6 +413,8 @@
           <para
             >Returns the <see
              cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+
+            
 
             
 
@@ -377,8 +433,12 @@
 
             
 
+            
+
              containing the properties of the items contained in <paramref
              name="list" />
+
+            
 
             
 
@@ -390,6 +450,8 @@
         </returns>
         <param name="list">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -426,6 +488,8 @@
 
             
 
+            
+
              method is useful when the data source has properties that are a collection of items and you need to know properties of the item type in the collection, not the properties of the collection type. </para
           >
         </remarks>
@@ -439,8 +503,12 @@
 
             
 
+            
+
              that describes the properties of an item type contained in a collection property of a data source. Uses the specified <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -459,11 +527,15 @@
 
             
 
+            
+
              describing the properties of the item type contained in a collection property of the data source.</para
           >
         </returns>
         <param name="list">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -478,8 +550,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -517,8 +593,12 @@
 
             
 
+            
+
              parameter can be null, in which case the <see
              cref="M:System.Windows.Forms.ListBindingHelper.GetListItemProperties(System.Object,System.String,System.ComponentModel.PropertyDescriptor[])" />
+
+            
 
             
 
@@ -531,10 +611,14 @@
 
             
 
+            
+
              array.</para
           >
           <para>
             <see cref="M:System.Windows.Forms.ListBindingHelper.GetListItemProperties(System.Object,System.ComponentModel.PropertyDescriptor[])" />
+
+            
 
             
 
@@ -553,8 +637,12 @@
 
             
 
+            
+
              that describes the properties of an item type contained in the specified data member of a data source. Uses the specified <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -573,11 +661,15 @@
 
             
 
+            
+
              describing the properties of an item type contained in a collection property of the specified data source.</para
           >
         </returns>
         <param name="dataSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -592,6 +684,8 @@
 
           
 
+          
+
           The optional data member to be examined for property information. This can be null.</param
         >
         <param name="listAccessors">
@@ -601,8 +695,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -635,8 +733,12 @@
 
             
 
+            
+
              parameter is not a list or array, the type returned will be that of the <paramref
              name="list" />
+
+            
 
             
 
@@ -659,11 +761,15 @@
 
             
 
+            
+
              of the items contained in the list.</para
           >
         </returns>
         <param name="list">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -700,11 +806,15 @@
 
             
 
+            
+
              method is used to determine the type of items used in complex or simple data-binding schemes. This static method may be useful in determining whether a proposed data-binding scheme is appropriate before attempting it.</para
           >
           <para
             >If <paramref
              name="dataSource" />
+
+            
 
             
 
@@ -717,8 +827,12 @@
 
             
 
+            
+
             , then this method returns the type of the <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -734,6 +848,8 @@
 
             
 
+            
+
              is null or empty, then this method returns the <see
              cref="T:System.Type" />
 
@@ -741,8 +857,12 @@
 
             
 
+            
+
              of the items in the data source, if it is a list; otherwise, this method returns the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -765,6 +885,8 @@
 
             
 
+            
+
              of the items represented by the <paramref
              name="dataMember" />
 
@@ -772,8 +894,12 @@
 
             
 
+            
+
              in the data source; otherwise, the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -789,10 +915,14 @@
 
           
 
+          
+
           The data source to examine for items. </param
         >
         <param name="dataMember">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -829,8 +959,12 @@
 
             
 
+            
+
              is null or empty, the <see
              cref="M:System.Windows.Forms.ListBindingHelper.GetListName(System.Object,System.ComponentModel.PropertyDescriptor[])" />
+
+            
 
             
 
@@ -849,6 +983,8 @@
 
             
 
+            
+
              array.</para
           >
         </summary>
@@ -862,8 +998,12 @@
 
             
 
+            
+
             , or<paramref
              name=" " />
+
+            
 
             
 
@@ -879,6 +1019,8 @@
 
           
 
+          
+
           The data source to examine for the list name.</param
         >
         <param name="listAccessors">
@@ -888,8 +1030,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 

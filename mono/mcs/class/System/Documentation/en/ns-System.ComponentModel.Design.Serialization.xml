@@ -11,6 +11,8 @@
 
         
 
+        
+
          namespace provides types that support customization and control of serialization at design time.</para
       >
     </summary>
@@ -27,8 +29,12 @@
 
             
 
+            
+
             , to indicate the serializer to use for a particular type; and <see
              cref="T:System.ComponentModel.Design.Serialization.RootDesignerSerializerAttribute" />
+
+            
 
             
 
@@ -46,8 +52,12 @@
 
             
 
+            
+
             , for loading a designer document from a serialized state; and <see
              cref="T:System.ComponentModel.Design.Serialization.IDesignerLoaderService" />
+
+            
 
             
 
@@ -65,8 +75,12 @@
 
             
 
+            
+
             , to register or retrieve custom serializers; <see
              cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationProvider" />
+
+            
 
             
 
@@ -79,8 +93,12 @@
 
             
 
+            
+
             ; and <see
              cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationService" />
+
+            
 
             
 
@@ -98,6 +116,8 @@
 
             
 
+            
+
             .</para
           >
         </item>
@@ -105,6 +125,8 @@
           <para
             >An interface that can be used to optimize the reloading of a designer: <see
              cref="T:System.ComponentModel.Design.Serialization.ICodeDomDesignerReload" />
+
+            
 
             
 
@@ -122,6 +144,8 @@
 
             
 
+            
+
             , an interface for generating unique names for objects; <see
              cref="T:System.ComponentModel.Design.Serialization.ContextStack" />
 
@@ -129,8 +153,12 @@
 
             
 
+            
+
             , a data structure useful for sharing serialization context information with serializers; and <see
              cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />
+
+            
 
             
 

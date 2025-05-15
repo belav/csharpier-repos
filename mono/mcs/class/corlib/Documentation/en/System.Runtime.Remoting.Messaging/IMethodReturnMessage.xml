@@ -38,6 +38,8 @@
 
         
 
+        
+
          is generated as a result of a method called on a remote object, and is used to return the results of the method call back to the caller.</para
       >
     </remarks>
@@ -106,6 +108,8 @@
 
           
 
+          
+
           The number of the requested argument. </param
         >
       </Docs>
@@ -140,6 +144,8 @@
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -194,6 +200,8 @@
 
             
 
+            
+
              property is redundant since the same functionality can be achieved through the <see
              cref="P:System.Runtime.Remoting.Messaging.IMethodReturnMessage.OutArgCount" />
 
@@ -201,8 +209,12 @@
 
             
 
+            
+
              field and <see
              cref="M:System.Runtime.Remoting.Messaging.IMethodReturnMessage.GetOutArg(System.Int32)" />
+
+            
 
             
 
@@ -219,6 +231,8 @@
 
               
 
+              
+
                is not null, a <see
                cref="T:System.IndexOutOfRange" />
 
@@ -226,8 +240,12 @@
 
               
 
+              
+
                exception is thrown when <see
                cref="P:System.Runtime.Remoting.Messaging.IMethodReturnMessage.OutArgs" />
+
+              
 
               
 

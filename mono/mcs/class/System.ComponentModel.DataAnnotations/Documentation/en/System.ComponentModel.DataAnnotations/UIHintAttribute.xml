@@ -29,11 +29,15 @@
 
         
 
+        
+
         . </para
       >
       <para
         >MVC uses the <see
          cref="T:System.ComponentModel.DataAnnotations.UIHintAttribute" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
          class to associate a user control with a data field. Dynamic Data uses the <see
          cref="P:System.ComponentModel.DataAnnotations.UIHintAttribute.UIHint" />
+
+        
 
         
 
@@ -60,6 +68,8 @@
          type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
+
+        
 
         
 
@@ -98,8 +108,12 @@
 
             
 
+            
+
              object that is created with this constructor is initialized using the specified <paramref
              name="uiHint" />
+
+            
 
             
 
@@ -110,6 +124,8 @@
           <para
             >ASP.NET Dynamic Data provides field templates, page templates, and data controls to render data fields in a data model. You can modify these templates and controls to customize them, or you can create a custom user control. If you create a custom user control, you use the <see
              cref="P:System.ComponentModel.DataAnnotations.UIHintAttribute.UIHint" />
+
+            
 
             
 
@@ -128,11 +144,15 @@
 
             
 
+            
+
              class by using a specified user control. </para
           >
         </summary>
         <param name="uiHint">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -171,6 +191,8 @@
 
             
 
+            
+
              class using the specified user control and specified presentation layer. </para
           >
         </summary>
@@ -181,10 +203,14 @@
 
           
 
+          
+
           The user control (field template) to use to display the data field.</param
         >
         <param name="presentationLayer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -230,11 +256,15 @@
 
             
 
+            
+
              class by using the specified user control, presentation layer, and control parameters.</para
           >
         </summary>
         <param name="uiHint">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -249,10 +279,14 @@
 
           
 
+          
+
           The presentation layer that uses the class. Can be set to "HTML", "Silverlight", "WPF", or "WinForms".</param
         >
         <param name="controlParameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -290,6 +324,8 @@
 
             
 
+            
+
              property lets you retrieve data from a data model, tracks updates to the data model, and notifies the model of any changes.</para
           >
         </remarks>
@@ -298,6 +334,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Web.DynamicData.DynamicControlParameter" />
+
+            
 
             
 
@@ -336,6 +374,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -393,6 +433,8 @@
 
             
 
+            
+
              class. This property can be set to "HTML", "Silverlight", "WPF", or "WinForms".</para
           >
         </remarks>
@@ -401,6 +443,8 @@
           <para
             >Gets or sets the presentation layer that uses the <see
              cref="T:System.ComponentModel.DataAnnotations.UIHintAttribute" />
+
+            
 
             
 
@@ -452,8 +496,12 @@
 
             
 
+            
+
              property on a property so that the property is rendered using the custom user control. The <see
              cref="P:System.ComponentModel.DataAnnotations.UIHintAttribute.UIHint" />
+
+            
 
             
 
@@ -466,8 +514,12 @@
 
             
 
+            
+
              property can point to one of the templates provided in Dynamic Data or to a custom template. For example, you can create a custom field template named RedText_Edit.ascx, and then use the <see
              cref="P:System.ComponentModel.DataAnnotations.UIHintAttribute.UIHint" />
+
+            
 
             
 

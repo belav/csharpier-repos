@@ -11,6 +11,8 @@
 
         
 
+        
+
          namespace contains classes, interfaces, and enumerations that are specific to the integration of the Microsoft .NET Framework common language runtime (CLR) into Microsoft SQL Server, and the SQL Server database engine process execution environment.</para
       >
     </summary>
@@ -19,6 +21,8 @@
       <para
         >Using the attribute classes in the <see
          cref="N:Microsoft.SqlServer.Server" />
+
+        
 
         
 
@@ -34,11 +38,15 @@
 
         
 
+        
+
          class to determine whether the currently executing code is running in the SQL Server database engine process. This also provides the caller's context when a user calls a managed stored procedure or function on the server, or when a user's action fires a managed code trigger.</para
       >
       <para
         >The <see
          cref="T:Microsoft.SqlServer.Server.SqlContext" />
+
+        
 
         
 
@@ -51,8 +59,12 @@
 
         
 
+        
+
          object, through which results are returned to the client from a stored procedure, a <see
          cref="T:Microsoft.SqlServer.Server.SqlTriggerContext" />
+
+        
 
         
 
@@ -65,11 +77,15 @@
 
         
 
+        
+
          object, which can be used to determine the identity of the calling client when the client used integrated security for authentication.</para
       >
       <para
         >For more information about SQL Server CLR integration and the APIs in the <see
          cref="N:Microsoft.SqlServer.Server" />
+
+        
 
         
 

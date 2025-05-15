@@ -13,6 +13,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Docs>
@@ -20,6 +22,8 @@
     <remarks
       >This class does not represent "element" pattern (see <see
        cref="T:Commons.Xml.Relaxng.RelaxngElement" />
+
+      
 
       
 
@@ -50,6 +54,8 @@
         <param name="writer"
           >an <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -89,6 +95,8 @@
 
           
 
+          
+
            that represents the line number.</value
         >
         <remarks>To be added.</remarks>
@@ -111,6 +119,8 @@
 
           
 
+          
+
            that represents the column number.</value
         >
         <remarks>To be added.</remarks>
@@ -128,6 +138,8 @@
         <value
           >a <see
            cref="T:System.String" />
+
+          
 
           
 

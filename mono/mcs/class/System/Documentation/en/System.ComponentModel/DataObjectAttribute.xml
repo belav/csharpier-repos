@@ -30,8 +30,12 @@
 
         
 
+        
+
          attribute to identify an object as suitable for use by an <see
          cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+        
 
         
 
@@ -44,6 +48,8 @@
 
         
 
+        
+
          class use the <see
          cref="T:System.ComponentModel.DataObjectAttribute" />
 
@@ -51,8 +57,12 @@
 
         
 
+        
+
          attribute to present suitable objects to bind to an <see
          cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+        
 
         
 
@@ -70,6 +80,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -78,6 +90,8 @@
       <para
         >Identifies a type as an object suitable for binding to an <see
          cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+        
 
         
 
@@ -111,8 +125,12 @@
 
             
 
+            
+
              property is set to true when you use the <see
              cref="M:System.ComponentModel.DataObjectAttribute.#ctor" />
+
+            
 
             
 
@@ -126,6 +144,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.DataObjectAttribute" />
+
+            
 
             
 
@@ -161,6 +181,8 @@
 
             
 
+            
+
              constructor to indicate to a design-time class such as the <see
              cref="T:System.Web.UI.Design.WebControls.ObjectDataSourceDesigner" />
 
@@ -168,8 +190,12 @@
 
             
 
+            
+
              class that an object should be excluded from the list of suitable objects for binding to an <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 
@@ -185,8 +211,12 @@
 
             
 
+            
+
              property is set to the value of the <paramref
              name="isDataObject" />
+
+            
 
             
 
@@ -205,8 +235,12 @@
 
             
 
+            
+
              class and indicates whether an object is suitable for binding to an <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 
@@ -222,8 +256,12 @@
 
           
 
+          
+
           true if the object is suitable for binding to an <see
            cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+          
 
           
 
@@ -261,6 +299,8 @@
 
             
 
+            
+
              field returns a new <see
              cref="T:System.ComponentModel.DataObjectAttribute" />
 
@@ -268,8 +308,12 @@
 
             
 
+            
+
              object with the <see
              cref="P:System.ComponentModel.DataObjectAttribute.IsDataObject" />
+
+            
 
             
 
@@ -283,6 +327,8 @@
           <para
             >Indicates that the class is suitable for binding to an <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 
@@ -321,8 +367,12 @@
 
             
 
+            
+
              field defines an instance of the <see
              cref="T:System.ComponentModel.DataObjectAttribute" />
+
+            
 
             
 
@@ -335,8 +385,12 @@
 
             
 
+            
+
              constructor, which sets the <see
              cref="P:System.ComponentModel.DataObjectAttribute.IsDataObject" />
+
+            
 
             
 
@@ -355,8 +409,12 @@
 
             
 
+            
+
              class, which indicates that the class is suitable for binding to an <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 
@@ -395,6 +453,8 @@
 
             
 
+            
+
              fits the pattern of another object.</para
           >
         </remarks>
@@ -403,6 +463,8 @@
           <para
             >Determines whether this instance of <see
              cref="T:System.ComponentModel.DataObjectAttribute" />
+
+            
 
             
 
@@ -421,6 +483,8 @@
 
             
 
+            
+
              parameter; otherwise, false.</para
           >
         </returns>
@@ -431,8 +495,12 @@
 
           
 
+          
+
           An object to compare with this instance of <see
            cref="T:System.ComponentModel.DataObjectAttribute" />
+
+          
 
           
 
@@ -488,6 +556,8 @@
           <para
             >Gets a value indicating whether an object should be considered suitable for binding to an <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 
@@ -553,6 +623,8 @@
 
             
 
+            
+
              field returns a new <see
              cref="T:System.ComponentModel.DataObjectAttribute" />
 
@@ -560,8 +632,12 @@
 
             
 
+            
+
              object with the <see
              cref="P:System.ComponentModel.DataObjectAttribute.IsDataObject" />
+
+            
 
             
 
@@ -575,6 +651,8 @@
           <para
             >Indicates that the class is not suitable for binding to an <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 

@@ -42,6 +42,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -77,6 +79,8 @@
 
             
 
+            
+
              method uses the serialization manager to create objects and resolve data types.</para
           >
         </remarks>
@@ -95,10 +99,14 @@
 
           
 
+          
+
           A serialization manager interface that is used during the deserialization process.</param
         >
         <param name="codeObject">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -144,10 +152,14 @@
 
           
 
+          
+
           The serialization manager to use during serialization.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

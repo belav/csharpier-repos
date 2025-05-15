@@ -45,6 +45,8 @@
 
         
 
+        
+
          component is a server-based timer, which allows you to specify a recurring interval at which the <see
          cref="E:System.Timers.Timer.Elapsed" />
 
@@ -52,8 +54,12 @@
 
         
 
+        
+
          event is raised in your application. You can then handle this event to provide regular processing. For example, suppose you have a critical server that must be kept running 24 hours a day, 7 days a week. You could create a service that uses a <see
          cref="T:System.Timers.Timer" />
+
+        
 
         
 
@@ -69,8 +75,12 @@
 
         
 
+        
+
          is designed for use with worker threads in a multithreaded environment. Server timers can move among threads to handle the raised <see
          cref="E:System.Timers.Timer.Elapsed" />
+
+        
 
         
 
@@ -86,8 +96,12 @@
 
         
 
+        
+
          component raises the <see
          cref="E:System.Timers.Timer.Elapsed" />
+
+        
 
         
 
@@ -100,8 +114,12 @@
 
         
 
+        
+
          property. You can handle this event to perform the processing you need. For example, suppose that you have an online sales application that continuously posts sales orders to a database. The service that compiles the instructions for shipping operates on a batch of orders rather than processing each order individually. You could use a <see
          cref="T:System.Timers.Timer" />
+
+        
 
         
 
@@ -118,8 +136,12 @@
 
           
 
+          
+
            is set to false, the <see
            cref="T:System.Timers.Timer" />
+
+          
 
           
 
@@ -132,8 +154,12 @@
 
           
 
+          
+
            event only once, after the first <see
            cref="P:System.Timers.Timer.Interval" />
+
+          
 
           
 
@@ -146,6 +172,8 @@
 
           
 
+          
+
            event on the <see
            cref="P:System.Timers.Timer.Interval" />
 
@@ -153,8 +181,12 @@
 
           
 
+          
+
           , set <see
            cref="P:System.Timers.Timer.AutoReset" />
+
+          
 
           
 
@@ -171,8 +203,12 @@
 
         
 
+        
+
          component catches and suppresses all exceptions thrown by event handlers for the <see
          cref="E:System.Timers.Timer.Elapsed" />
+
+        
 
         
 
@@ -188,8 +224,12 @@
 
         
 
+        
+
          property is null, the <see
          cref="E:System.Timers.Timer.Elapsed" />
+
+        
 
         
 
@@ -202,8 +242,12 @@
 
         
 
+        
+
          thread. If processing of the <see
          cref="E:System.Timers.Timer.Elapsed" />
+
+        
 
         
 
@@ -216,8 +260,12 @@
 
         
 
+        
+
         , the event might be raised again on another <see
          cref="T:System.Threading.ThreadPool" />
+
+        
 
         
 
@@ -234,8 +282,12 @@
 
           
 
+          
+
            method or sets the <see
            cref="P:System.Timers.Timer.Enabled" />
+
+          
 
           
 
@@ -248,8 +300,12 @@
 
           
 
+          
+
            event being raised after the timer is stopped. The example code for the <see
            cref="M:System.Timers.Timer.Stop" />
+
+          
 
           
 
@@ -266,8 +322,12 @@
 
         
 
+        
+
          is not null, <see
          cref="E:System.Timers.Timer.Elapsed" />
+
+        
 
         
 
@@ -280,8 +340,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.Timers.Timer.Stop" />
+
+        
 
         
 
@@ -294,6 +358,8 @@
 
         
 
+        
+
          property has been set to false, because the signal to raise the <see
          cref="E:System.Timers.Timer.Elapsed" />
 
@@ -301,8 +367,12 @@
 
         
 
+        
+
          event is always queued for execution on a thread pool thread. One way to resolve this race condition is to set a flag that tells the event handler for the <see
          cref="E:System.Timers.Timer.Elapsed" />
+
+        
 
         
 
@@ -318,6 +388,8 @@
 
         
 
+        
+
          with a user interface element, such as a form or control, without placing the timer on that user interface element, assign the form or control that contains the <see
          cref="T:System.Timers.Timer" />
 
@@ -325,8 +397,12 @@
 
         
 
+        
+
          to the <see
          cref="P:System.Timers.Timer.SynchronizingObject" />
+
+        
 
         
 
@@ -342,6 +418,8 @@
 
         
 
+        
+
          is not visible at run time.</para
       >
       <para
@@ -352,8 +430,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Timers.Timer.#ctor" />
+
+        
 
         
 
@@ -388,6 +470,8 @@
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.Timers.Timer" />
+
+            
 
             
 
@@ -458,6 +542,8 @@
 
             
 
+            
+
              class, and sets all the properties to their initial values.</para
           >
         </summary>
@@ -490,6 +576,8 @@
 
             
 
+            
+
              property of the new timer instance, but does not enable the timer.</para
           >
         </remarks>
@@ -503,8 +591,12 @@
 
             
 
+            
+
              class, and sets the <see
              cref="P:System.Timers.Timer.Interval" />
+
+            
 
             
 
@@ -520,8 +612,12 @@
 
           
 
+          
+
           The time, in milliseconds, between events. The value must be greater than zero and less than or equal to <see
            cref="F:System.Int32.MaxValue" />
+
+          
 
           
 
@@ -567,8 +663,12 @@
 
             
 
+            
+
              is already enabled when the <see
              cref="M:System.Timers.Timer.Start" />
+
+            
 
             
 
@@ -581,8 +681,12 @@
 
             
 
+            
+
              is false, the <see
              cref="M:System.Timers.Timer.Start" />
+
+            
 
             
 
@@ -598,8 +702,12 @@
 
             
 
+            
+
              event is raised. For example, if you set the interval to 5 seconds and then set the <see
              cref="P:System.Timers.Timer.Enabled" />
+
+            
 
             
 
@@ -612,6 +720,8 @@
 
             
 
+            
+
              is set. If you reset the interval to 10 seconds when the count is 3 seconds, the <see
              cref="E:System.Timers.Timer.Elapsed" />
 
@@ -619,8 +729,12 @@
 
             
 
+            
+
              event is raised for the first time 13 seconds after the <see
              cref="P:System.Timers.Timer.Enabled" />
+
+            
 
             
 
@@ -639,8 +753,12 @@
 
             
 
+            
+
              should raise the <see
              cref="E:System.Timers.Timer.Elapsed" />
+
+            
 
             
 
@@ -678,6 +796,8 @@
 
             
 
+            
+
              method ends the initialization. Using the <see
              cref="M:System.Timers.Timer.BeginInit" />
 
@@ -685,8 +805,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Timers.Timer.EndInit" />
+
+            
 
             
 
@@ -700,6 +824,8 @@
           <para
             >Begins the run-time initialization of a <see
              cref="T:System.Timers.Timer" />
+
+            
 
             
 
@@ -735,8 +861,12 @@
 
           
 
+          
+
           , or setting <see
            cref="P:System.Timers.Timer.Enabled" />
+
+          
 
           
 
@@ -749,6 +879,8 @@
           <para
             >Releases the resources used by the <see
              cref="T:System.Timers.Timer" />
+
+            
 
             
 
@@ -789,11 +921,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -841,8 +977,12 @@
 
             
 
+            
+
              is set to true and <see
              cref="P:System.Timers.Timer.AutoReset" />
+
+            
 
             
 
@@ -855,8 +995,12 @@
 
             
 
+            
+
              raises the <see
              cref="E:System.Timers.Timer.Elapsed" />
+
+            
 
             
 
@@ -872,8 +1016,12 @@
 
             
 
+            
+
              is set after the <see
              cref="T:System.Timers.Timer" />
+
+            
 
             
 
@@ -886,8 +1034,12 @@
 
             
 
+            
+
              to true, the count starts at the time <see
              cref="P:System.Timers.Timer.Enabled" />
+
+            
 
             
 
@@ -900,8 +1052,12 @@
 
             
 
+            
+
              event is raised for the first time 13 seconds after <see
              cref="P:System.Timers.Timer.Enabled" />
+
+            
 
             
 
@@ -917,8 +1073,12 @@
 
             
 
+            
+
              property is null, the <see
              cref="E:System.Timers.Timer.Elapsed" />
+
+            
 
             
 
@@ -931,8 +1091,12 @@
 
             
 
+            
+
              thread. If the processing of the <see
              cref="E:System.Timers.Timer.Elapsed" />
+
+            
 
             
 
@@ -945,8 +1109,12 @@
 
             
 
+            
+
             , the event might be raised again on another <see
              cref="T:System.Threading.ThreadPool" />
+
+            
 
             
 
@@ -963,8 +1131,12 @@
 
               
 
+              
+
                method or sets the <see
                cref="P:System.Timers.Timer.Enabled" />
+
+              
 
               
 
@@ -977,8 +1149,12 @@
 
               
 
+              
+
                event being raised after the timer is stopped. The example code for the <see
                cref="M:System.Timers.Timer.Stop" />
+
+              
 
               
 
@@ -995,8 +1171,12 @@
 
             
 
+            
+
              is not null, <see
              cref="E:System.Timers.Timer.Elapsed" />
+
+            
 
             
 
@@ -1009,8 +1189,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Timers.Timer.Stop" />
+
+            
 
             
 
@@ -1023,6 +1207,8 @@
 
             
 
+            
+
              property has been set to false, because the signal to raise the <see
              cref="E:System.Timers.Timer.Elapsed" />
 
@@ -1030,8 +1216,12 @@
 
             
 
+            
+
              event is always queued for execution on a thread pool thread. One way to resolve this race condition is to set a flag that tells the event handler for the <see
              cref="E:System.Timers.Timer.Elapsed" />
+
+            
 
             
 
@@ -1047,8 +1237,12 @@
 
             
 
+            
+
              component catches and suppresses all exceptions thrown by event handlers for the <see
              cref="E:System.Timers.Timer.Elapsed" />
+
+            
 
             
 
@@ -1099,8 +1293,12 @@
 
             
 
+            
+
              to true is the same as calling <see
              cref="M:System.Timers.Timer.Start" />
+
+            
 
             
 
@@ -1113,8 +1311,12 @@
 
             
 
+            
+
              to false is the same as calling <see
              cref="M:System.Timers.Timer.Stop" />
+
+            
 
             
 
@@ -1131,8 +1333,12 @@
 
               
 
+              
+
                event is always queued for execution on a <see
                cref="T:System.Threading.ThreadPool" />
+
+              
 
               
 
@@ -1145,6 +1351,8 @@
 
               
 
+              
+
                event being raised after the <see
                cref="P:System.Timers.Timer.Enabled" />
 
@@ -1152,8 +1360,12 @@
 
               
 
+              
+
                property is set to false. The code example for the <see
                cref="M:System.Timers.Timer.Stop" />
+
+              
 
               
 
@@ -1170,8 +1382,12 @@
 
             
 
+            
+
              is set to true and <see
              cref="P:System.Timers.Timer.AutoReset" />
+
+            
 
             
 
@@ -1184,8 +1400,12 @@
 
             
 
+            
+
              raises the <see
              cref="E:System.Timers.Timer.Elapsed" />
+
+            
 
             
 
@@ -1201,8 +1421,12 @@
 
             
 
+            
+
              has started, the count is reset. For example, if you set the interval to 5 seconds and then set the <see
              cref="P:System.Timers.Timer.Enabled" />
+
+            
 
             
 
@@ -1215,6 +1439,8 @@
 
             
 
+            
+
              is set. If you reset the interval to 10 seconds when count is 3 seconds, the <see
              cref="E:System.Timers.Timer.Elapsed" />
 
@@ -1222,8 +1448,12 @@
 
             
 
+            
+
              event is raised for the first time 13 seconds after <see
              cref="P:System.Timers.Timer.Enabled" />
+
+            
 
             
 
@@ -1240,8 +1470,12 @@
 
               
 
+              
+
                property to true when inserting a new <see
                cref="T:System.Timers.Timer" />
+
+              
 
               
 
@@ -1261,8 +1495,12 @@
 
             
 
+            
+
              should raise the <see
              cref="E:System.Timers.Timer.Elapsed" />
+
+            
 
             
 
@@ -1300,6 +1538,8 @@
 
             
 
+            
+
              method starts the initialization. Using the <see
              cref="M:System.Timers.Timer.BeginInit" />
 
@@ -1307,8 +1547,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Timers.Timer.EndInit" />
+
+            
 
             
 
@@ -1322,6 +1566,8 @@
           <para
             >Ends the run-time initialization of a <see
              cref="T:System.Timers.Timer" />
+
+            
 
             
 
@@ -1371,8 +1617,12 @@
 
             
 
+            
+
              has started, the count is reset. For example, if you set the interval to 5 seconds and then set the <see
              cref="P:System.Timers.Timer.Enabled" />
+
+            
 
             
 
@@ -1385,6 +1635,8 @@
 
             
 
+            
+
              is set. If you reset the interval to 10 seconds when count is 3 seconds, the <see
              cref="E:System.Timers.Timer.Elapsed" />
 
@@ -1392,8 +1644,12 @@
 
             
 
+            
+
              event is raised for the first time 13 seconds after <see
              cref="P:System.Timers.Timer.Enabled" />
+
+            
 
             
 
@@ -1409,8 +1665,12 @@
 
             
 
+            
+
              is set to true and <see
              cref="P:System.Timers.Timer.AutoReset" />
+
+            
 
             
 
@@ -1423,6 +1683,8 @@
 
             
 
+            
+
              raises the <see
              cref="E:System.Timers.Timer.Elapsed" />
 
@@ -1430,8 +1692,12 @@
 
             
 
+            
+
              event only once, the first time the interval elapses. <see
              cref="P:System.Timers.Timer.Enabled" />
+
+            
 
             
 
@@ -1448,8 +1714,12 @@
 
               
 
+              
+
                and <see
                cref="P:System.Timers.Timer.AutoReset" />
+
+              
 
               
 
@@ -1462,8 +1732,12 @@
 
               
 
+              
+
                property causes the <see
                cref="E:System.Timers.Timer.Elapsed" />
+
+              
 
               
 
@@ -1476,8 +1750,12 @@
 
               
 
+              
+
                property had been set to true. To set the interval without raising the event, you can temporarily set the <see
                cref="P:System.Timers.Timer.AutoReset" />
+
+              
 
               
 
@@ -1492,6 +1770,8 @@
           <para
             >Gets or sets the interval at which to raise the <see
              cref="E:System.Timers.Timer.Elapsed" />
+
+            
 
             
 
@@ -1533,8 +1813,12 @@
 
             
 
+            
+
              to a <see
              cref="T:System.ComponentModel.Container" />
+
+            
 
             
 
@@ -1548,6 +1832,8 @@
           <para
             >Gets or sets the site that binds the <see
              cref="T:System.Timers.Timer" />
+
+            
 
             
 
@@ -1585,8 +1871,12 @@
 
             
 
+            
+
              is set to true and <see
              cref="P:System.Timers.Timer.AutoReset" />
+
+            
 
             
 
@@ -1599,8 +1889,12 @@
 
             
 
+            
+
              raises the <see
              cref="E:System.Timers.Timer.Elapsed" />
+
+            
 
             
 
@@ -1613,8 +1907,12 @@
 
             
 
+            
+
              is true and <see
              cref="P:System.Timers.Timer.AutoReset" />
+
+            
 
             
 
@@ -1627,8 +1925,12 @@
 
             
 
+            
+
              continues to raise the <see
              cref="E:System.Timers.Timer.Elapsed" />
+
+            
 
             
 
@@ -1639,6 +1941,8 @@
           <para
             >You can also start timing by setting <see
              cref="P:System.Timers.Timer.Enabled" />
+
+            
 
             
 
@@ -1655,8 +1959,12 @@
 
               
 
+              
+
                is false, the <see
                cref="M:System.Timers.Timer.Start" />
+
+              
 
               
 
@@ -1676,8 +1984,12 @@
 
             
 
+            
+
              event by setting <see
              cref="P:System.Timers.Timer.Enabled" />
+
+            
 
             
 
@@ -1715,12 +2027,16 @@
 
             
 
+            
+
              to false.</para
           >
           <block subset="none" type="note">
             <para
               >The signal to raise the <see
                cref="E:System.Timers.Timer.Elapsed" />
+
+              
 
               
 
@@ -1733,8 +2049,12 @@
 
               
 
+              
+
                thread, so the event-handling method might run on one thread at the same time that a call to the <see
                cref="M:System.Timers.Timer.Stop" />
+
+              
 
               
 
@@ -1747,8 +2067,12 @@
 
               
 
+              
+
                event being raised after the <see
                cref="M:System.Timers.Timer.Stop" />
+
+              
 
               
 
@@ -1768,8 +2092,12 @@
 
             
 
+            
+
              event by setting <see
              cref="P:System.Timers.Timer.Enabled" />
+
+            
 
             
 
@@ -1822,6 +2150,8 @@
 
             
 
+            
+
              is null, the method that handles the <see
              cref="E:System.Timers.Timer.Elapsed" />
 
@@ -1829,8 +2159,12 @@
 
             
 
+            
+
              event is called on a thread from the system-thread pool. For more information on system-thread pools, see <see
              cref="T:System.Threading.ThreadPool" />
+
+            
 
             
 
@@ -1846,6 +2180,8 @@
 
             
 
+            
+
              event is handled by a visual Windows Forms component, such as a button, accessing the component through the system-thread pool might result in an exception or just might not work. Avoid this effect by setting <see
              cref="P:System.Timers.Timer.SynchronizingObject" />
 
@@ -1853,8 +2189,12 @@
 
             
 
+            
+
              to a Windows Forms component, which causes the method that handles the <see
              cref="E:System.Timers.Timer.Elapsed" />
+
+            
 
             
 
@@ -1871,8 +2211,12 @@
 
               
 
+              
+
                property is not null, <see
                cref="E:System.Timers.Timer.Elapsed" />
+
+              
 
               
 
@@ -1885,8 +2229,12 @@
 
               
 
+              
+
                or <see
                cref="M:System.Timers.Timer.Stop" />
+
+              
 
               
 
@@ -1899,6 +2247,8 @@
 
               
 
+              
+
                property has been set to false, because the signal to raise the <see
                cref="E:System.Timers.Timer.Elapsed" />
 
@@ -1906,8 +2256,12 @@
 
               
 
+              
+
                event is always queued for execution on a thread pool thread. One way to resolve this race condition is to set a flag that tells the event handler for the <see
                cref="E:System.Timers.Timer.Elapsed" />
+
+              
 
               
 
@@ -1924,8 +2278,12 @@
 
             
 
+            
+
              is used inside Visual Studio in a Windows Forms designer, <see
              cref="P:System.Timers.Timer.SynchronizingObject" />
+
+            
 
             
 
@@ -1938,8 +2296,12 @@
 
             
 
+            
+
             . For example, if you place a <see
              cref="T:System.Timers.Timer" />
+
+            
 
             
 
@@ -1952,6 +2314,8 @@
 
             
 
+            
+
             ), the <see
              cref="P:System.Timers.Timer.SynchronizingObject" />
 
@@ -1959,8 +2323,12 @@
 
             
 
+            
+
              property of <see
              cref="T:System.Timers.Timer" />
+
+            
 
             
 

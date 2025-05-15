@@ -26,11 +26,15 @@
 
         
 
+        
+
          to control the generation of component initialization code for a type of component at design time.</para
       >
       <para
         >To implement a custom <see
          cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializer" />
+
+        
 
         
 
@@ -43,6 +47,8 @@
           <para
             >Define a class that derives from <see
              cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializer" />
+
+            
 
             
 
@@ -63,8 +69,12 @@
 
             
 
+            
+
              implementation with a type of component using a <see
              cref="T:System.ComponentModel.Design.Serialization.DesignerSerializerAttribute" />
+
+            
 
             
 
@@ -85,6 +95,8 @@
 
             
 
+            
+
             , override an appropriate serialization or deserialization method of the base class.</para
           >
         </item>
@@ -97,8 +109,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationManager" />
+
+            
 
             
 
@@ -111,8 +127,12 @@
 
             
 
+            
+
              method the type of the component to serialize the configuration of, along with the base type of serializer you are requesting, which is <see
              cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializer" />
+
+            
 
             
 
@@ -125,8 +145,12 @@
 
             
 
+            
+
              and object passed to your method override. If you are implementing the <see
              cref="M:System.ComponentModel.Design.Serialization.CodeDomSerializer.Serialize(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object)" />
+
+            
 
             
 
@@ -139,8 +163,12 @@
 
             
 
+            
+
              method of the base serializer will return an object. The type of this object depends on the type of base serializer which depends on the type of component you are serializing the values of. If you are implementing the <see
              cref="M:System.ComponentModel.Design.Serialization.CodeDomSerializerBase.SerializeEvents(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.CodeDom.CodeStatementCollection,System.Object,System.Attribute[])" />
+
+            
 
             
 
@@ -153,6 +181,8 @@
 
             
 
+            
+
             , or <see
              cref="M:System.ComponentModel.Design.Serialization.CodeDomSerializerBase.SerializePropertiesToResources(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.CodeDom.CodeStatementCollection,System.Object,System.Attribute[])" />
 
@@ -160,8 +190,12 @@
 
             
 
+            
+
              method, you must create a new <see
              cref="T:System.CodeDom.CodeStatementCollection" />
+
+            
 
             
 
@@ -179,8 +213,12 @@
 
             
 
+            
+
              that contains the statements to generate to initialize the component. Otherwise you should create a <see
              cref="T:System.CodeDom.CodeStatementCollection" />
+
+            
 
             
 
@@ -193,6 +231,8 @@
 
             
 
+            
+
              objects representing statements to generate in the component configuration code to this collection.</para
           >
         </item>
@@ -200,6 +240,8 @@
           <para
             >Return the <see
              cref="T:System.CodeDom.CodeStatementCollection" />
+
+            
 
             
 
@@ -227,6 +269,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializer" />
+
+            
 
             
 
@@ -276,10 +320,14 @@
 
           
 
+          
+
           A serialization manager interface that is used during the deserialization process. </param
         >
         <param name="codeObject">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -322,8 +370,12 @@
 
             
 
+            
+
              is equivalent of calling <see
              cref="M:System.ComponentModel.Design.Serialization.CodeDomSerializerBase.DeserializeStatement(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.CodeDom.CodeStatement)" />
+
+            
 
             
 
@@ -346,6 +398,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -356,10 +410,14 @@
 
           
 
+          
+
           The serialization manager to use for serialization.</param
         >
         <param name="statement">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -402,6 +460,8 @@
 
             
 
+            
+
              should be grouped.</para
           >
         </returns>
@@ -412,8 +472,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeStatement" />
+
+          
 
           
 
@@ -428,6 +492,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeExpression" />
 
@@ -435,8 +501,12 @@
 
           
 
+          
+
            that <paramref
            name="statement" />
+
+          
 
           
 
@@ -451,6 +521,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
 
@@ -458,8 +530,12 @@
 
           
 
+          
+
            of <paramref
            name="statement" />
+
+          
 
           
 
@@ -502,10 +578,14 @@
 
           
 
+          
+
           The serialization manager to use during serialization. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -553,6 +633,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -563,10 +645,14 @@
 
           
 
+          
+
           The serialization manager to use for serialization.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -613,8 +699,12 @@
 
             
 
+            
+
              representing the serialized state of <paramref
              name="member" />
+
+            
 
             
 
@@ -630,10 +720,14 @@
 
           
 
+          
+
           The serialization manager to use for serialization.</param
         >
         <param name="member">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -680,6 +774,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -690,10 +786,14 @@
 
           
 
+          
+
           The serialization manager to use for serialization.</param
         >
         <param name="member">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -730,6 +830,8 @@
 
             
 
+            
+
             , except that it stops if it cannot obtain a simple reference expression for the value. Call this method when you expect the resulting expression to be used as a parameter or target of a statement.</para
           >
         </remarks>
@@ -748,10 +850,14 @@
 
           
 
+          
+
           The serialization manager to use during serialization. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

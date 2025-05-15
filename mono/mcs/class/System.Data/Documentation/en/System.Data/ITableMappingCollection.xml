@@ -29,12 +29,16 @@
 
         
 
+        
+
          interface allows an inheriting class to implement a TableMapping collection. For more information, see <format
          type="text/html">
           <a href="D023260A-A66A-4C39-B8F4-090CD130E730"
             >[&lt;topic://cpconsettingupdatatabledatacolumnmappings&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -50,8 +54,12 @@
 
         
 
+        
+
          interface directly, but creates an instance of a class that inherits <see
          cref="T:System.Data.ITableMappingCollection" />
+
+        
 
         
 
@@ -67,8 +75,12 @@
 
         
 
+        
+
          must implement the inherited members, and typically define additional members to add provider-specific functionality. For example, the <see
          cref="T:System.Data.ITableMappingCollection" />
+
+        
 
         
 
@@ -81,6 +93,8 @@
 
         
 
+        
+
          method. In turn, the <see
          cref="T:System.Data.Common.DataTableMappingCollection" />
 
@@ -88,8 +102,12 @@
 
         
 
+        
+
          class inherits this method, and defines two additional overloads of <see
          cref="M:System.Data.Common.DataTableMappingCollection.RemoveAt(System.Int32)" />
+
+        
 
         
 
@@ -103,6 +121,8 @@
       <para
         >Contains a collection of TableMapping objects, and is implemented by the <see
          cref="T:System.Data.Common.DataTableMappingCollection" />
+
+        
 
         
 
@@ -142,11 +162,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="sourceTableName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -161,8 +185,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -202,6 +230,8 @@
 
           
 
+          
+
           The case-sensitive name of the source table. </param
         >
       </Docs>
@@ -234,6 +264,8 @@
 
             
 
+            
+
              table name.</para
           >
         </summary>
@@ -243,6 +275,8 @@
         </returns>
         <param name="dataSetTableName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -277,6 +311,8 @@
 
             
 
+            
+
              object within the collection.</para
           >
         </summary>
@@ -290,11 +326,15 @@
 
             
 
+            
+
              object within the collection.</para
           >
         </returns>
         <param name="sourceTableName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -349,8 +389,12 @@
 
             
 
+            
+
              object with the specified <see
              cref="P:System.Data.ITableMapping.SourceTable" />
+
+            
 
             
 
@@ -361,6 +405,8 @@
         </summary>
         <param name="sourceTableName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

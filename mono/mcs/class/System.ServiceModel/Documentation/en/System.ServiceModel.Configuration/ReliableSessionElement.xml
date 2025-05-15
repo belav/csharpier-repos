@@ -53,6 +53,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -251,6 +253,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 

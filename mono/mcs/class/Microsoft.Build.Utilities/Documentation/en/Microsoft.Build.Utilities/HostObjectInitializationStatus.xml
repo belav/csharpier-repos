@@ -22,6 +22,8 @@
 
         
 
+        
+
          is the return type of the <see
          cref="M:Microsoft.Build.Utilities.ToolTask.InitializeHostObject" />
 
@@ -29,8 +31,12 @@
 
         
 
+        
+
          method of the <see
          cref="T:Microsoft.Build.Utilities.ToolTask" />
+
+        
 
         
 
@@ -44,6 +50,8 @@
       <para
         >Defines the next action for <see
          cref="T:Microsoft.Build.Utilities.ToolTask" />
+
+        
 
         
 
@@ -101,6 +109,8 @@
           <para
             >Indicates that either a host object is not available, or that the host object is not capable of supporting all of the features required for this build. Therefore, <see
              cref="T:Microsoft.Build.Utilities.ToolTask" />
+
+            
 
             
 

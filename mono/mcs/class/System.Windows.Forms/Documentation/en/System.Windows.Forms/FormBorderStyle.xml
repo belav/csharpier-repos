@@ -25,6 +25,8 @@
 
         
 
+        
+
          class. It represents the different styles of the form. The default style is Sizable.</para
       >
     </remarks>
@@ -102,8 +104,12 @@
 
             
 
+            
+
              typically are not shown in the taskbar, you must also ensure that the <see
              cref="P:System.Windows.Forms.Form.ShowInTaskbar" />
+
+            
 
             
 

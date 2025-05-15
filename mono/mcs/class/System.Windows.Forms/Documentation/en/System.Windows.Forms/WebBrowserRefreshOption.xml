@@ -20,8 +20,12 @@
 
         
 
+        
+
          method to specify how the <see
          cref="T:System.Windows.Forms.WebBrowser" />
+
+        
 
         
 
@@ -35,6 +39,8 @@
       <para
         >Specifies constants that define how the <see
          cref="T:System.Windows.Forms.WebBrowser" />
+
+        
 
         
 

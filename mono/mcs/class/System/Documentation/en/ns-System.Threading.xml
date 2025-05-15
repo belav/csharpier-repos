@@ -12,8 +12,12 @@
 
         
 
+        
+
          namespace provides classes and interfaces that enable multithreaded programming. In addition to classes for synchronizing thread activities and access to data (<see
          cref="T:System.Threading.Mutex" />
+
+        
 
         
 
@@ -26,8 +30,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Threading.Interlocked" />
+
+        
 
         
 
@@ -40,6 +48,8 @@
 
         
 
+        
+
         , and so on), this namespace includes a <see
          cref="T:System.Threading.ThreadPool" />
 
@@ -47,8 +57,12 @@
 
         
 
+        
+
          class that allows you to use a pool of system-supplied threads, and a <see
          cref="T:System.Threading.Timer" />
+
+        
 
         
 

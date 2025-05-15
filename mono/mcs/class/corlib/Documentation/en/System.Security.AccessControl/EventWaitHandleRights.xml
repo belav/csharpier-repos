@@ -30,8 +30,12 @@
 
         
 
+        
+
          enumeration to specify access control rights when you create <see
          cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
          objects to an <see
          cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+
+        
 
         
 
@@ -58,6 +66,8 @@
 
         
 
+        
+
          object to the named system event using the <see
          cref="M:System.Threading.EventWaitHandle.#ctor(System.Boolean,System.Threading.EventResetMode,System.String,System.Boolean@,System.Security.AccessControl.EventWaitHandleSecurity)" />
 
@@ -65,8 +75,12 @@
 
         
 
+        
+
          constructor or the <see
          cref="M:System.Threading.EventWaitHandle.SetAccessControl(System.Security.AccessControl.EventWaitHandleSecurity)" />
+
+        
 
         
 

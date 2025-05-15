@@ -24,8 +24,12 @@
 
         
 
+        
+
          contains one property, <see
          cref="P:System.Runtime.Remoting.Channels.ISecurableChannel.IsSecured" />
+
+        
 
         
 

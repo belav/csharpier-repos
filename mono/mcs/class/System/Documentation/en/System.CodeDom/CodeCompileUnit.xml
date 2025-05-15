@@ -40,6 +40,8 @@
 
         
 
+        
+
          provides a container for a CodeDOM program graph.</para
       >
       <para>
@@ -49,8 +51,12 @@
 
         
 
+        
+
          contains a collection that can store <see
          cref="T:System.CodeDom.CodeNamespace" />
+
+        
 
         
 
@@ -66,6 +72,8 @@
 
         
 
+        
+
          can be passed to the <see
          cref="M:System.CodeDom.Compiler.ICodeGenerator.GenerateCodeFromCompileUnit(System.CodeDom.CodeCompileUnit,System.IO.TextWriter,System.CodeDom.Compiler.CodeGeneratorOptions)" />
 
@@ -73,8 +81,12 @@
 
         
 
+        
+
          method of an <see
          cref="T:System.CodeDom.Compiler.ICodeGenerator" />
+
+        
 
         
 
@@ -118,6 +130,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -148,6 +162,8 @@
           <para
             >You can add and remove <see
              cref="T:System.CodeDom.CodeAttributeDeclaration" />
+
+            
 
             
 
@@ -192,6 +208,8 @@
 
             
 
+            
+
              object containing end directives.</para
           >
         </summary>
@@ -222,6 +240,8 @@
           <para
             >You can add and remove <see
              cref="T:System.CodeDom.CodeNamespace" />
+
+            
 
             
 
@@ -270,6 +290,8 @@ compileUnit.ReferencedAssemblies.Add("System.Data");
             
 
             
+
+            
 Adds a reference to the System.Data assembly for the compile unit.
 </example
           >
@@ -309,6 +331,8 @@ Adds a reference to the System.Data assembly for the compile unit.
           <para
             >Gets a <see
              cref="T:System.CodeDom.CodeDirectiveCollection" />
+
+            
 
             
 

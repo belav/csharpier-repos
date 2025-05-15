@@ -46,12 +46,16 @@
 
         
 
+        
+
         .</para
       >
       <para>TargetInvocationException uses the HRESULT COR_E_TARGETINVOCATION which has the value 0x80131604.</para>
       <para
         >When created, the TargetInvocationException is passed a reference to the exception thrown by the method invoked through reflection. The <see
          cref="P:System.Exception.InnerException" />
+
+        
 
         
 
@@ -97,8 +101,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -111,11 +119,15 @@
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Reflection.TargetInvocationException" />
+
+            
 
             
 
@@ -166,6 +178,8 @@
 
             
 
+            
+
              class with a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
@@ -176,8 +190,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="inner" />
+
+          
 
           
 
@@ -223,8 +241,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -237,11 +259,15 @@
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Reflection.TargetInvocationException" />
+
+            
 
             
 
@@ -292,11 +318,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -311,8 +341,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="inner" />
+
+          
 
           
 

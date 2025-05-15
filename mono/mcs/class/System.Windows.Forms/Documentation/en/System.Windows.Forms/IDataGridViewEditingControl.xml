@@ -21,8 +21,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.DataGridViewTextBoxEditingControl" />
+
+        
 
         
 
@@ -35,6 +39,8 @@
 
         
 
+        
+
          cells, such as <see
          cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
 
@@ -42,8 +48,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.DataGridViewTextBoxCell" />
+
+        
 
         
 
@@ -59,8 +69,12 @@
 
         
 
+        
+
          property to a <see
          cref="T:System.Type" />
+
+        
 
         
 
@@ -78,6 +92,8 @@
 
             
 
+            
+
              control creates an instance of the editing control type.</para
           >
         </item>
@@ -90,8 +106,12 @@
 
             
 
+            
+
              control calls the cell <see
              cref="M:System.Windows.Forms.DataGridViewCell.InitializeEditingControl(System.Int32,System.Object,System.Windows.Forms.DataGridViewCellStyle)" />
+
+            
 
             
 
@@ -109,8 +129,12 @@
 
             
 
+            
+
              control calls the editing control <see
              cref="M:System.Windows.Forms.IDataGridViewEditingControl.ApplyCellStyleToEditingControl(System.Windows.Forms.DataGridViewCellStyle)" />
+
+            
 
             
 
@@ -128,8 +152,12 @@
 
             
 
+            
+
              control calls the editing control <see
              cref="M:System.Windows.Forms.IDataGridViewEditingControl.PrepareEditingControlForEdit(System.Boolean)" />
+
+            
 
             
 
@@ -147,12 +175,16 @@
 
         
 
+        
+
         , see <format
          type="text/html">
           <a href="e79a9d4e-64ec-41f5-93ec-f5492633cbb2"
             >How to: Host Controls in Windows Forms DataGridView Cells</a
           >
         </format>
+
+        
 
         
 
@@ -168,8 +200,12 @@
 
         
 
+        
+
          that provide a user interface (UI) for specifying values without hosting an editing control implement the <see
          cref="T:System.Windows.Forms.IDataGridViewEditingCell" />
+
+        
 
         
 
@@ -185,8 +221,12 @@
 
         
 
+        
+
         , provide a UI but do not store user-specified values. In this case, the cell type does not implement <see
          cref="T:System.Windows.Forms.IDataGridViewEditingCell" />
+
+        
 
         
 
@@ -200,6 +240,8 @@
       <para
         >Defines common functionality for controls that are hosted within cells of a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -234,6 +276,8 @@
 
             
 
+            
+
             , which is the style used for the cell hosting the control. </para
           >
         </remarks>
@@ -248,8 +292,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+          
 
           
 
@@ -280,6 +328,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -337,8 +387,12 @@
 
             
 
+            
+
              interface does not define a corresponding ColumnIndex property. You can use the <see
              cref="P:System.Windows.Forms.IDataGridViewEditingControl.EditingControlDataGridView" />
+
+            
 
             
 
@@ -351,8 +405,12 @@
 
             
 
+            
+
              control and use the <see
              cref="P:System.Windows.Forms.DataGridView.CurrentCellAddress" />
+
+            
 
             
 
@@ -384,6 +442,8 @@
           <para
             >The <see
              cref="P:System.Windows.Forms.IDataGridViewEditingControl.EditingControlValueChanged" />
+
+            
 
             
 
@@ -426,11 +486,15 @@
 
             
 
+            
+
             . </para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.IDataGridViewEditingControl.EditingControlWantsInputKey(System.Windows.Forms.Keys,System.Boolean)" />
+
+            
 
             
 
@@ -443,8 +507,12 @@
 
             
 
+            
+
             . The <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -457,8 +525,12 @@
 
             
 
+            
+
              when it can process the <paramref
              name="keyData" />
+
+            
 
             
 
@@ -471,8 +543,12 @@
 
             
 
+            
+
              handle the <paramref
              name="keyData" />
+
+            
 
             
 
@@ -485,8 +561,12 @@
 
             
 
+            
+
              should return false when <paramref
              name="dataGridViewWantsInputKey" />
+
+            
 
             
 
@@ -499,6 +579,8 @@
 
             
 
+            
+
              may ignore a <paramref
              name="dataGridViewWantsInputKey" />
 
@@ -506,8 +588,12 @@
 
             
 
+            
+
              value of true and handle the <paramref
              name="keyData" />
+
+            
 
             
 
@@ -521,6 +607,8 @@
           <para
             >Determines whether the specified key is a regular input key that the editing control should process or a special key that the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -540,8 +628,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Keys" />
+
+          
 
           
 
@@ -556,8 +648,12 @@
 
           
 
+          
+
           true when the <see
            cref="T:System.Windows.Forms.DataGridView" />
+
+          
 
           
 
@@ -570,8 +666,12 @@
 
           
 
+          
+
            in <paramref
            name="keyData" />
+
+          
 
           
 
@@ -606,8 +706,12 @@
 
             
 
+            
+
              that hosts the editing control when the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -620,8 +724,12 @@
 
             
 
+            
+
              implementation should return the cursor to use when the mouse pointer is over the panel but not over the control. Typically, you will want to return the same cursor that the control uses. If you want to change the cursor that appears when the pointer is over the control, you must set the <see
              cref="P:System.Windows.Forms.Control.Cursor" />
+
+            
 
             
 
@@ -634,8 +742,12 @@
 
             
 
+            
+
              implementation, or you can set it in the <see
              cref="M:System.Windows.Forms.IDataGridViewEditingControl.PrepareEditingControlForEdit(System.Boolean)" />
+
+            
 
             
 
@@ -649,6 +761,8 @@
           <para
             >Gets the cursor used when the mouse pointer is over the <see
              cref="P:System.Windows.Forms.DataGridView.EditingPanel" />
+
+            
 
             
 
@@ -687,6 +801,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -704,6 +820,8 @@
 
             
 
+            
+
              that represents the formatted version of the cell contents.</para
           >
         </returns>
@@ -714,8 +832,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.DataGridViewDataErrorContexts" />
+
+          
 
           
 
@@ -752,6 +874,8 @@
         </summary>
         <param name="selectAll">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

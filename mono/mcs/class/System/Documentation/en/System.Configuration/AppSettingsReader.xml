@@ -52,6 +52,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -88,6 +90,8 @@
 
             
 
+            
+
              property and returns an object of the specified type containing the value from the configuration.</para
           >
         </summary>
@@ -102,10 +106,14 @@
 
           
 
+          
+
           The key for which to get the value.</param
         >
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

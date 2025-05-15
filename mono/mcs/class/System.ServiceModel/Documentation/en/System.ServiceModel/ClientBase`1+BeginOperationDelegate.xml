@@ -48,12 +48,16 @@
 
         
 
+        
+
          class to create a custom indigo2 client object that can be used to connect to a service. Typically, the indigo2 client base class is extended by a tool such as the <format
          type="text/html">
           <a href="1abf3d9f-b420-46f1-b628-df238751f308"
             >ServiceModel Metadata Utility Tool (Svcutil.exe)</a
           >
         </format>
+
+        
 
         
 
@@ -69,8 +73,12 @@
 
         
 
+        
+
          class can be used quickly and easily by developers who prefer objects to the use of the interfaces and the <see
          cref="T:System.ServiceModel.ChannelFactory`1" />
+
+        
 
         
 
@@ -83,8 +91,12 @@
 
         
 
+        
+
          class and the <see
          cref="T:System.ServiceModel.IClientChannel" />
+
+        
 
         
 
@@ -100,8 +112,12 @@
 
         
 
+        
+
          class, you can create the class and modify the endpoint, channel factory, or security information prior to making any calls or calling <see
          cref="M:System.ServiceModel.ClientBase`1.Open" />
+
+        
 
         
 
@@ -116,10 +132,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="d780af9f-73c5-42db-9e52-077a5e4de7fe">Accessing Services Using a WCF Client</a>
         </format>
+
+        
 
         
 
@@ -141,6 +161,8 @@
 
             
 
+            
+
             .</para
           >
         </item>
@@ -148,6 +170,8 @@
           <para
             >Avoid non-reference members: they can cause the compiler to auto-generate <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -165,8 +189,12 @@
 
             
 
+            
+
              and the finalizer itself from (On)(Begin)Close (and/or OnAbort) to emulate what would have been the auto-generated <see
              cref="T:System.IDisposable" />
+
+            
 
             
 

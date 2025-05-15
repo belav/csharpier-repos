@@ -45,6 +45,8 @@
 
         
 
+        
+
          control represents an individual data item within a data-bound list control, such as a <see
          cref="T:System.Web.UI.WebControls.ListBox" />
 
@@ -52,8 +54,12 @@
 
         
 
+        
+
          or a <see
          cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+        
 
         
 
@@ -69,8 +75,12 @@
 
         
 
+        
+
          control. You can also use the <see
          cref="P:System.Web.UI.WebControls.ListItem.Text" />
+
+        
 
         
 
@@ -86,8 +96,12 @@
 
         
 
+        
+
          property allows you to associate a value with the item in the list control, in addition to the text displayed in the control. For example, you can display text for an item in the list control, such as "Item 1", and use the <see
          cref="P:System.Web.UI.WebControls.ListItem.Value" />
+
+        
 
         
 
@@ -103,8 +117,12 @@
 
         
 
+        
+
         , or <see
          cref="P:System.Web.UI.WebControls.ListItem.Value" />
+
+        
 
         
 
@@ -117,12 +135,16 @@
 
         
 
+        
+
          control depends on the combination of these three properties that are set. For example, if all three properties are set as follows: </para
       >
       <code>&lt;asp:ListItem Value="Value 1" Text="Item 1"&gt;Inner 1&lt;/asp:ListItem&gt;</code>
       <para
         >The inner HTML content is used for rendered inner HTML content and the <see
          cref="P:System.Web.UI.WebControls.ListItem.Value" />
+
+        
 
         
 
@@ -298,8 +320,12 @@
 
           
 
+          
+
            and <see
            cref="P:System.Web.UI.WebControls.ListItem.Value" />
+
+          
 
           
 
@@ -316,8 +342,12 @@
 
         
 
+        
+
          control with its <see
          cref="P:System.Web.UI.WebControls.ListItem.Selected" />
+
+        
 
         
 
@@ -333,8 +363,12 @@
 
         
 
+        
+
          control provides the <see
          cref="P:System.Web.UI.WebControls.ListItem.Enabled" />
+
+        
 
         
 
@@ -347,8 +381,12 @@
 
         
 
+        
+
          control is enabled or disabled. A <see
          cref="T:System.Web.UI.WebControls.ListItem" />
+
+        
 
         
 
@@ -361,6 +399,8 @@
 
         
 
+        
+
          control in either a <see
          cref="T:System.Web.UI.WebControls.RadioButtonList" />
 
@@ -368,8 +408,12 @@
 
         
 
+        
+
          control or a <see
          cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+        
 
         
 
@@ -386,6 +430,8 @@
 
           
 
+          
+
            control in a <see
            cref="T:System.Web.UI.WebControls.DropDownList" />
 
@@ -393,8 +439,12 @@
 
           
 
+          
+
            control or <see
            cref="T:System.Web.UI.WebControls.ListBox" />
+
+          
 
           
 
@@ -411,8 +461,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.WebControls.ListItem.#ctor" />
+
+        
 
         
 
@@ -431,6 +485,8 @@
 
           
 
+          
+
           , <format
            type="text/html">
             <a href="6f67973f-dda0-45a1-ba9d-e88532d7dc5b"
@@ -442,12 +498,16 @@
 
           
 
+          
+
           , and <format
            type="text/html">
             <a href="4ad3dacb-89e0-4cee-89ac-40a3f2a85461"
               >Introduction to Validating User Input in ASP.NET Web Pages</a
             >
           </format>
+
+          
 
           
 
@@ -479,11 +539,15 @@
 
             
 
+            
+
              class using default values.</para
           >
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -533,6 +597,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -565,11 +631,15 @@
 
             
 
+            
+
              class using the specified text.</para
           >
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -596,6 +666,8 @@
                 <para
                   >The value of the <paramref
                    name="text" />
+
+                  
 
                   
 
@@ -633,6 +705,8 @@
 
             
 
+            
+
              class with the specified text data.</para
           >
         </summary>
@@ -643,8 +717,12 @@
 
           
 
+          
+
           The text to display in the list control for the item represented by the <see
            cref="T:System.Web.UI.WebControls.ListItem" />
+
+          
 
           
 
@@ -677,11 +755,15 @@
 
             
 
+            
+
              class using the specified text and value.</para
           >
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -713,6 +795,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -725,6 +809,8 @@
                 <para
                   >The value of the <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -754,6 +840,8 @@
 
             
 
+            
+
              class with the specified text and value data.</para
           >
         </summary>
@@ -764,8 +852,12 @@
 
           
 
+          
+
           The text to display in the list control for the item represented by the <see
            cref="T:System.Web.UI.WebControls.ListItem" />
+
+          
 
           
 
@@ -780,8 +872,12 @@
 
           
 
+          
+
           The value associated with the <see
            cref="T:System.Web.UI.WebControls.ListItem" />
+
+          
 
           
 
@@ -820,6 +916,8 @@
 
             
 
+            
+
             .</para
           >
           <list type="table">
@@ -846,6 +944,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -858,6 +958,8 @@
                 <para
                   >The value of the <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -880,6 +982,8 @@
 
                   
 
+                  
+
                    parameter.</para
                 >
               </description>
@@ -896,6 +1000,8 @@
 
             
 
+            
+
              class with the specified text, value, and enabled data.</para
           >
         </summary>
@@ -906,8 +1012,12 @@
 
           
 
+          
+
           The text to display in the list control for the item represented by the <see
            cref="T:System.Web.UI.WebControls.ListItem" />
+
+          
 
           
 
@@ -922,8 +1032,12 @@
 
           
 
+          
+
           The value associated with the <see
            cref="T:System.Web.UI.WebControls.ListItem" />
+
+          
 
           
 
@@ -938,8 +1052,12 @@
 
           
 
+          
+
           Indicates whether the <see
            cref="T:System.Web.UI.WebControls.ListItem" />
+
+          
 
           
 
@@ -974,8 +1092,12 @@
 
             
 
+            
+
              collection to manage the attribute name and value pairs declared in the opening and closing tags of the <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -989,6 +1111,8 @@
           <para
             >Gets a collection of attribute name and value pairs for the <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -1032,8 +1156,12 @@
 
             
 
+            
+
              property allows you to specify whether a <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -1046,8 +1174,12 @@
 
             
 
+            
+
              control that is disabled is dimmed to indicate that it cannot be selected. Use this property to disable a <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -1060,8 +1192,12 @@
 
             
 
+            
+
              control or a <see
              cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+            
 
             
 
@@ -1078,6 +1214,8 @@
 
               
 
+              
+
                control in a <see
                cref="T:System.Web.UI.WebControls.DropDownList" />
 
@@ -1085,8 +1223,12 @@
 
               
 
+              
+
                control or <see
                cref="T:System.Web.UI.WebControls.ListBox" />
+
+              
 
               
 
@@ -1128,6 +1270,8 @@
 
           
 
+          
+
           The object to compare with the current list item.</param
         >
       </Docs>
@@ -1163,8 +1307,12 @@
 
             
 
+            
+
              static method to create a <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -1177,6 +1325,8 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.ListItem" />
 
@@ -1184,8 +1334,12 @@
 
             
 
+            
+
              to the text specified by the <paramref
              name="s" />
+
+            
 
             
 
@@ -1204,6 +1358,8 @@
 
             
 
+            
+
              from the specified text.</para
           >
         </summary>
@@ -1217,8 +1373,12 @@
 
             
 
+            
+
              that represents the text specified by the <paramref
              name="s" />
+
+            
 
             
 
@@ -1275,6 +1435,8 @@
 
             
 
+            
+
              property to determine whether the <see
              cref="T:System.Web.UI.WebControls.ListItem" />
 
@@ -1282,8 +1444,12 @@
 
             
 
+            
+
              is currently selected in the list control that contains it. This property is commonly used, when iterating through a collection of <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -1332,8 +1498,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IAttributeAccessor" />
+
+            
 
             
 
@@ -1381,8 +1551,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IAttributeAccessor" />
+
+            
 
             
 
@@ -1397,6 +1571,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1433,8 +1609,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IParserAccessor" />
+
+            
 
             
 
@@ -1453,11 +1633,15 @@
 
             
 
+            
+
              property to be persisted as inner content.</para
           >
         </summary>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1493,6 +1677,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1522,8 +1708,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 
@@ -1542,6 +1732,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1552,8 +1744,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1585,8 +1781,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 
@@ -1605,6 +1805,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1613,6 +1815,8 @@
           <para
             >The <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -1645,8 +1849,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 
@@ -1660,6 +1868,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.Web.UI.IStateManager.TrackViewState" />
+
+            
 
             
 
@@ -1689,8 +1899,12 @@
 
             
 
+            
+
              property to specify or determine the text displayed in a list control for the item represented by the <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -1707,8 +1921,12 @@
 
               
 
+              
+
                property contains null, the get accessor returns the value of the <see
                cref="P:System.Web.UI.WebControls.ListItem.Value" />
+
+              
 
               
 
@@ -1721,8 +1939,12 @@
 
               
 
+              
+
                property, in turn, contains null, <see
                cref="F:System.String.Empty" />
+
+              
 
               
 
@@ -1739,12 +1961,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -1758,6 +1984,8 @@
           <para
             >Gets or sets the text displayed in a list control for the item represented by the <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -1819,8 +2047,12 @@
 
             
 
+            
+
              property to specify or determine the value associated with the <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 
@@ -1837,8 +2069,12 @@
 
               
 
+              
+
                property contains null, the get accessor returns the value of the <see
                cref="P:System.Web.UI.WebControls.ListItem.Text" />
+
+              
 
               
 
@@ -1851,8 +2087,12 @@
 
               
 
+              
+
                property, in turn, contains null, <see
                cref="F:System.String.Empty" />
+
+              
 
               
 
@@ -1869,12 +2109,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -1888,6 +2132,8 @@
           <para
             >Gets or sets the value associated with the <see
              cref="T:System.Web.UI.WebControls.ListItem" />
+
+            
 
             
 

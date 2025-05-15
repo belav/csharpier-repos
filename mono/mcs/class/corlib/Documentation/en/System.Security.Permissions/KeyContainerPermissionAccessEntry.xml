@@ -64,6 +64,8 @@
 
             
 
+            
+
              object.</para
           >
         </remarks>
@@ -72,6 +74,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+
+            
 
             
 
@@ -87,8 +91,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Cryptography.CspParameters" />
+
+          
 
           
 
@@ -103,8 +111,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Security.Permissions.KeyContainerPermissionFlags" />
+
+          
 
           
 
@@ -148,11 +160,15 @@
 
             
 
+            
+
              class, using the specified key container name and access permissions.</para
           >
         </summary>
         <param name="keyContainerName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -167,8 +183,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Security.Permissions.KeyContainerPermissionFlags" />
+
+          
 
           
 
@@ -212,8 +232,12 @@
 
             
 
+            
+
              or <paramref
              name="providerType" />
+
+            
 
             
 
@@ -226,8 +250,12 @@
 
             
 
+            
+
             , <paramref
              name="providerName" />
+
+            
 
             
 
@@ -240,6 +268,8 @@
 
             
 
+            
+
              of "*" represents all key stores, providers, or key containers. A <paramref
              name="providerName" />
 
@@ -247,8 +277,12 @@
 
             
 
+            
+
              or <paramref
              name="keyContainerName" />
+
+            
 
             
 
@@ -267,11 +301,15 @@
 
             
 
+            
+
              class with the specified property values.</para
           >
         </summary>
         <param name="keyStore">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -286,6 +324,8 @@
 
           
 
+          
+
           The name of the provider. </param
         >
         <param name="providerType">
@@ -295,8 +335,12 @@
 
           
 
+          
+
           The type code for the provider. See the <see
            cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntry.ProviderType" />
+
+          
 
           
 
@@ -311,6 +355,8 @@
 
           
 
+          
+
           The name of the key container. </param
         >
         <param name="keySpec">
@@ -320,8 +366,12 @@
 
           
 
+          
+
           The key specification. See the <see
            cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntry.KeySpec" />
+
+          
 
           
 
@@ -336,8 +386,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Security.Permissions.KeyContainerPermissionFlags" />
+
+          
 
           
 
@@ -376,8 +430,12 @@
 
             
 
+            
+
              method compares the properties of the two <see
              cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+
+            
 
             
 
@@ -396,6 +454,8 @@
 
             
 
+            
+
              object is equal to the current instance.</para
           >
         </summary>
@@ -409,8 +469,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+
+            
 
             
 
@@ -426,8 +490,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+
+          
 
           
 
@@ -470,8 +538,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Delete" />
+
+            
 
             
 
@@ -484,8 +556,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Export" />
+
+            
 
             
 
@@ -498,6 +574,8 @@
 
             
 
+            
+
             , <see
              cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Decrypt" />
 
@@ -505,8 +583,12 @@
 
             
 
+            
+
             , and <see
              cref="F:System.Security.Permissions.KeyContainerPermissionFlags.AllFlags" />
+
+            
 
             
 
@@ -548,6 +630,8 @@
 
             
 
+            
+
             , suitable for use in hashing algorithms and data structures such as a hash table.</para
           >
         </remarks>
@@ -560,6 +644,8 @@
           <para
             >A hash code for the current <see
              cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+
+            
 
             
 

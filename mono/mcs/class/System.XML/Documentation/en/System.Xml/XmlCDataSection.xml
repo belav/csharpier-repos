@@ -63,6 +63,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -74,11 +76,15 @@
 
           
 
+          
+
            that contains character data.</param
         >
         <param name="doc">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.Xml.XmlDocument" />
+
+          
 
           
 
@@ -120,11 +126,15 @@
 
             
 
+            
+
              method in the XmlNode class.</para
           >
           <para
             >The cloned node has no parent (<see
              cref="P:System.Xml.XmlNode.ParentNode" />
+
+            
 
             
 
@@ -143,6 +153,8 @@
         </returns>
         <param name="deep">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -283,11 +295,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="w">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -333,11 +349,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="w">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

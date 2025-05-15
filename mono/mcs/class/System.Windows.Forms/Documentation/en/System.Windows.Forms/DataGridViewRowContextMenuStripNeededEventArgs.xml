@@ -27,8 +27,12 @@
 
         
 
+        
+
          event occurs only when the <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -41,6 +45,8 @@
 
         
 
+        
+
          property is set or its <see
          cref="P:System.Windows.Forms.DataGridView.VirtualMode" />
 
@@ -48,8 +54,12 @@
 
         
 
+        
+
          property is true. Handling the <see
          cref="E:System.Windows.Forms.DataGridView.RowContextMenuStripNeeded" />
+
+        
 
         
 
@@ -65,8 +75,12 @@
 
         
 
+        
+
          event, the shortcut menu that you specify in the handler is shown whenever the user right-clicks a row unless the <see
          cref="E:System.Windows.Forms.DataGridView.CellContextMenuStripNeeded" />
+
+        
 
         
 
@@ -82,8 +96,12 @@
 
         
 
+        
+
          event also occurs whenever the value of the <see
          cref="P:System.Windows.Forms.DataGridViewRow.ContextMenuStrip" />
+
+        
 
         
 
@@ -99,6 +117,8 @@
 
         
 
+        
+
          property to determine the state of a row or the values it contains, and use this information to change or modify the <see
          cref="P:System.Windows.Forms.DataGridViewRowContextMenuStripNeededEventArgs.ContextMenuStrip" />
 
@@ -106,8 +126,12 @@
 
         
 
+        
+
          property. This property is initialized with the value of the row <see
          cref="P:System.Windows.Forms.DataGridViewRow.ContextMenuStrip" />
+
+        
 
         
 
@@ -123,8 +147,12 @@
 
         
 
+        
+
          event when working with large amounts of data to avoid the performance penalties of setting the row <see
          cref="P:System.Windows.Forms.DataGridViewRow.ContextMenuStrip" />
+
+        
 
         
 
@@ -136,6 +164,8 @@
             >Best Practices for Scaling the Windows Forms DataGridView Control</a
           >
         </format>
+
+        
 
         
 
@@ -153,6 +183,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -161,6 +193,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.DataGridView.RowContextMenuStripNeeded" />
+
+        
 
         
 
@@ -192,8 +226,12 @@
 
             
 
+            
+
              parameter value to initialize the <see
              cref="P:System.Windows.Forms.DataGridViewRowContextMenuStripNeededEventArgs.RowIndex" />
+
+            
 
             
 
@@ -212,11 +250,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -253,6 +295,8 @@
 
             
 
+            
+
              property if it has been set for a row. </para
           >
         </remarks>
@@ -261,6 +305,8 @@
           <para
             >Gets or sets the shortcut menu for the row that raised the <see
              cref="E:System.Windows.Forms.DataGridView.RowContextMenuStripNeeded" />
+
+            
 
             
 

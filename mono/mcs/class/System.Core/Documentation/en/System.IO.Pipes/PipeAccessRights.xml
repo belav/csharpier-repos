@@ -28,11 +28,15 @@
 
         
 
+        
+
          enumeration specifies which file system actions are allowed for a particular user account and which file system actions are audited for a particular user account.      </para
       >
       <para
         >Use the <see
          cref="T:System.IO.Pipes.PipeAccessRights" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          class or when you create an audit rule with the <see
          cref="T:System.IO.Pipes.PipeAuditRule" />
+
+        
 
         
 
@@ -62,6 +70,8 @@
 
         
 
+        
+
         , <see
          cref="F:System.IO.Pipes.PipeAccessRights.Read" />
 
@@ -69,8 +79,12 @@
 
         
 
+        
+
         , and <see
          cref="F:System.IO.Pipes.PipeAccessRights.Write" />
+
+        
 
         
 
@@ -149,6 +163,8 @@
 
             
 
+            
+
              right.</para
           >
         </summary>
@@ -218,8 +234,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.IO.Pipes.PipeAccessRights.ReadData" />
+
+            
 
             
 
@@ -232,8 +252,12 @@
 
             
 
+            
+
             , and <see
              cref="F:System.IO.Pipes.PipeAccessRights.ReadPermissions" />
+
+            
 
             
 
@@ -348,8 +372,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.IO.Pipes.PipeAccessRights.ReadData" />
+
+            
 
             
 
@@ -362,8 +390,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.IO.Pipes.PipeAccessRights.ReadPermissions" />
+
+            
 
             
 
@@ -376,6 +408,8 @@
 
             
 
+            
+
             , <see
              cref="F:System.IO.Pipes.PipeAccessRights.WriteData" />
 
@@ -383,8 +417,12 @@
 
             
 
+            
+
             , and <see
              cref="F:System.IO.Pipes.PipeAccessRights.WriteExtendedAttributes" />
+
+            
 
             
 
@@ -414,6 +452,8 @@
           <para
             >The <see
              cref="F:System.IO.Pipes.PipeAccessRights.Synchronize" />
+
+            
 
             
 
@@ -473,6 +513,8 @@
 
             
 
+            
+
             , <see
              cref="F:System.IO.Pipes.PipeAccessRights.WriteData" />
 
@@ -480,8 +522,12 @@
 
             
 
+            
+
             , and <see
              cref="F:System.IO.Pipes.PipeAccessRights.WriteExtendedAttributes" />
+
+            
 
             
 

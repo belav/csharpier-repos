@@ -28,6 +28,8 @@
 
         
 
+        
+
          represents a compiler error or a warning that has been returned by the compiler.</para
       >
       <block subset="none" type="note">
@@ -39,10 +41,14 @@
 
           
 
+          
+
            is thrown when the derived class does not have full-trust permission. For details about inheritance demands, see  <format
            type="text/html">
             <a href="28b9adbb-8f08-4f10-b856-dbf59eb932d9">Inheritance Demands</a>
           </format>
+
+          
 
           
 
@@ -79,6 +85,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.Compiler.CompilerError" />
+
+            
 
             
 
@@ -124,11 +132,15 @@
 
             
 
+            
+
              class using the specified file name, line, column, error number, and error text.</para
           >
         </summary>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -143,10 +155,14 @@
 
           
 
+          
+
           The line of the source of the error. </param
         >
         <param name="column">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -161,10 +177,14 @@
 
           
 
+          
+
           The error number of the error. </param
         >
         <param name="errorText">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -194,6 +214,8 @@
           <para
             >The <see
              cref="P:System.CodeDom.Compiler.CompilerError.Column" />
+
+            
 
             
 
@@ -233,6 +255,8 @@
 
             
 
+            
+
              property can contain a string of any length.</para
           >
         </remarks>
@@ -262,6 +286,8 @@
           <para
             >The <see
              cref="P:System.CodeDom.Compiler.CompilerError.ErrorText" />
+
+            
 
             
 
@@ -369,6 +395,8 @@
 
             
 
+            
+
              objects can be treated as objects for simplified debugging output.</para
           >
         </remarks>
@@ -377,6 +405,8 @@
           <para
             >Provides an implementation of Object's <see
              cref="M:System.Object.ToString" />
+
+            
 
             
 

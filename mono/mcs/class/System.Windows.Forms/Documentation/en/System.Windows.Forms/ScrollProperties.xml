@@ -20,8 +20,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.VScrollProperties" />
+
+        
 
         
 
@@ -34,6 +38,8 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.ScrollableControl.VerticalScroll" />
 
@@ -41,8 +47,12 @@
 
         
 
+        
+
          properties of <see
          cref="T:System.Windows.Forms.ScrollableControl" />
+
+        
 
         
 
@@ -80,8 +90,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Windows.Forms.VScrollProperties" />
+
+            
 
             
 
@@ -100,6 +114,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -110,8 +126,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ScrollableControl" />
+
+          
 
           
 
@@ -172,6 +192,8 @@
 
             
 
+            
+
              is used to determine how far the scroll bar is moved in response to a request to move a considerable distance, such as when the user presses the PAGE UP or PAGE DOWN button. </para
           >
         </remarks>
@@ -210,8 +232,12 @@
 
             
 
+            
+
              is less than <see
              cref="P:System.Windows.Forms.ScrollProperties.Minimum" />
+
+            
 
             
 
@@ -224,8 +250,12 @@
 
             
 
+            
+
              is set equal to <see
              cref="P:System.Windows.Forms.ScrollProperties.Maximum" />
+
+            
 
             
 
@@ -269,8 +299,12 @@
 
             
 
+            
+
              is greater than <see
              cref="P:System.Windows.Forms.ScrollProperties.Maximum" />
+
+            
 
             
 
@@ -283,8 +317,12 @@
 
             
 
+            
+
              is set equal to <see
              cref="P:System.Windows.Forms.ScrollProperties.Minimum" />
+
+            
 
             
 
@@ -340,6 +378,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="P:System.Windows.Forms.ScrollProperties.SmallChange" />
+
+            
 
             
 

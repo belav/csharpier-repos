@@ -31,6 +31,8 @@
 
         
 
+        
+
          interface indicates that an <see
          cref="T:System.ServiceModel.Channels.IOutputChannel" />
 
@@ -38,8 +40,12 @@
 
         
 
+        
+
          implements <see
          cref="T:System.ServiceModel.Channels.IOutputSession" />
+
+        
 
         
 
@@ -55,6 +61,8 @@
 
         
 
+        
+
          associated with an <see
          cref="T:System.ServiceModel.Channels.IOutputSessionChannel" />
 
@@ -62,8 +70,12 @@
 
         
 
+        
+
          can be retrieved through the <see
          cref="P:System.ServiceModel.Channels.ISessionChannel`1.Session" />
+
+        
 
         
 

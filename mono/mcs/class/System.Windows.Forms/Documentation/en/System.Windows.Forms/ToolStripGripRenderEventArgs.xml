@@ -28,6 +28,8 @@
 
         
 
+        
+
          event. </para
       >
     </summary>
@@ -56,6 +58,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -66,8 +70,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -82,8 +90,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStrip" />
+
+          
 
           
 

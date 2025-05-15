@@ -27,8 +27,12 @@
 
         
 
+        
+
          class allows you to easily import the information contained in a WSDL description into a <see
          cref="T:System.CodeDom.CodeCompileUnit" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          parameter, you can instruct a <see
          cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+
+        
 
         
 
@@ -53,6 +61,8 @@
       <para
         >The code in the resulting <see
          cref="T:System.CodeDom.CodeCompileUnit" />
+
+        
 
         
 
@@ -79,6 +89,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+
+            
 
             
 
@@ -121,8 +133,12 @@
 
             
 
+            
+
              instances to the collection that is to be imported when the <see
              cref="M:System.Web.Services.Description.ServiceDescriptionImporter.Import(System.CodeDom.CodeNamespace,System.CodeDom.CodeCompileUnit)" />
+
+            
 
             
 
@@ -138,8 +154,12 @@
 
             
 
+            
+
              and <paramref
              name="appSettingBaseUrl" />
+
+            
 
             
 
@@ -152,8 +172,12 @@
 
             
 
+            
+
              value. The <paramref
              name="appSettingUrlKey" />
+
+            
 
             
 
@@ -166,6 +190,8 @@
 
             
 
+            
+
              parameter is null or an empty string, the initial value is determined by the location attribute in the Web Services Description Language (WSDL) document. If the value of <see
              cref="P:System.Web.Services.Description.ServiceDescriptionImporter.Style" />
 
@@ -173,8 +199,12 @@
 
             
 
+            
+
              is Server, an error is raised if you attempt to set the value of the <paramref
              name="appSettingUrlKey" />
+
+            
 
             
 
@@ -190,6 +220,8 @@
 
             
 
+            
+
              parameter specifies that the initial value for the Url property should be constructed from a combination of this parameter value and the URL specified by the location attribute in the WSDL document. The <paramref
              name="appSettingUrlKey" />
 
@@ -197,8 +229,12 @@
 
             
 
+            
+
              parameter must also be specified. The Url property is constructed by combining a relative URL (constructed from the <paramref
              name="appSettingBaseUrl" />
+
+            
 
             
 
@@ -217,8 +253,12 @@
 
             
 
+            
+
              to the collection of <see
              cref="P:System.Web.Services.Description.ServiceDescriptionImporter.ServiceDescriptions" />
+
+            
 
             
 
@@ -234,8 +274,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.ServiceDescription" />
+
+          
 
           
 
@@ -250,8 +294,12 @@
 
           
 
+          
+
           Sets the initial value of the Url property of the proxy class to be generated from the instance represented by the <paramref
            name="serviceDescription" />
+
+          
 
           
 
@@ -266,8 +314,12 @@
 
           
 
+          
+
           Sets the initial value of the Url property of the proxy class to be generated from the instance represented by the <paramref
            name="serviceDescription" />
+
+          
 
           
 
@@ -310,6 +362,8 @@
 
             
 
+            
+
              property allows you to specify various options used when the <see
              cref="M:System.Web.Services.Description.ServiceDescriptionImporter.Import(System.CodeDom.CodeNamespace,System.CodeDom.CodeCompileUnit)" />
 
@@ -317,8 +371,12 @@
 
             
 
+            
+
              method is called to generate code. For example, you can specify whether simple types described in the WSDL are generated as value types or <see
              cref="N:System.Data.SqlTypes" />
+
+            
 
             
 
@@ -392,8 +450,12 @@
 
             
 
+            
+
              member of the <paramref
              name="webReferences" />
+
+            
 
             
 
@@ -406,8 +468,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Xml.Schema.XmlSchema" />
+
+            
 
             
 
@@ -420,11 +486,15 @@
 
             
 
+            
+
              objects.</para
           >
           <para
             >If any of the XML Web service methods in the <paramref
              name="webReferences" />
+
+            
 
             
 
@@ -447,6 +517,8 @@
 
             
 
+            
+
              of compiler warnings.</para
           >
         </returns>
@@ -457,8 +529,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Services.Description.WebReferenceCollection" />
+
+          
 
           
 
@@ -473,8 +549,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeCompileUnit" />
+
+          
 
           
 
@@ -489,8 +569,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Services.Description.WebReferenceOptions" />
+
+          
 
           
 
@@ -524,6 +608,8 @@
 
             
 
+            
+
              values to import and the <see
              cref="P:System.Web.Services.Description.ServiceDescriptionImporter.Style" />
 
@@ -531,8 +617,12 @@
 
             
 
+            
+
              property of the code to generate, call the <see
              cref="T:System.Web.Services.Description.Import" />
+
+            
 
             
 
@@ -551,8 +641,12 @@
 
             
 
+            
+
              values, that generates code as specified by the <see
              cref="P:System.Web.Services.Description.ServiceDescriptionImporter.Style" />
+
+            
 
             
 
@@ -571,6 +665,8 @@
 
             
 
+            
+
              value that describes any error that occurred; or 0 if no error occurred.</para
           >
         </returns>
@@ -581,8 +677,12 @@
 
           
 
+          
+
           The namespace into which the <see
            cref="P:System.Web.Services.Description.ServiceDescriptionImporter.ServiceDescriptions" />
+
+          
 
           
 
@@ -597,6 +697,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeCompileUnit" />
 
@@ -604,8 +706,12 @@
 
           
 
+          
+
            instance in which the code that represents the <see
            cref="P:System.Web.Services.Description.ServiceDescriptionImporter.ServiceDescriptions" />
+
+          
 
           
 
@@ -686,8 +792,12 @@
 
             
 
+            
+
              used by the <see
              cref="P:System.Web.Services.Description.ServiceDescriptionImporter.ServiceDescriptions" />
+
+            
 
             
 
@@ -723,6 +833,8 @@
 
             
 
+            
+
              method to add members to this collection.</para
           >
         </remarks>
@@ -731,6 +843,8 @@
           <para
             >Gets the collection of <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -767,6 +881,8 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Web.Services.Description.ServiceDescriptionImportStyle.Client" />
 
@@ -774,8 +890,12 @@
 
             
 
+            
+
             , the <see
              cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+
+            
 
             
 
@@ -791,6 +911,8 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Web.Services.Description.ServiceDescriptionImportStyle.Server" />
 
@@ -798,8 +920,12 @@
 
             
 
+            
+
             , the <see
              cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+
+            
 
             
 
@@ -813,6 +939,8 @@
           <para
             >Gets or sets a value that determines the style of code (client or server) that is generated when the <see
              cref="P:System.Web.Services.Description.ServiceDescriptionImporter.ServiceDescriptions" />
+
+            
 
             
 

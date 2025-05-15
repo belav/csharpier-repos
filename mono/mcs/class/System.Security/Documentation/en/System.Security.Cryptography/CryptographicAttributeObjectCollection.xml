@@ -37,6 +37,8 @@
 
         
 
+        
+
          objects.</para
       >
     </summary>
@@ -62,6 +64,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
+
+            
 
             
 
@@ -105,8 +109,12 @@
 
             
 
+            
+
              class, adding a specified <see
              cref="T:System.Security.Cryptography.CryptographicAttributeObject" />
+
+            
 
             
 
@@ -122,8 +130,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Cryptography.CryptographicAttributeObject" />
+
+          
 
           
 
@@ -166,6 +178,8 @@
 
             
 
+            
+
              object to the collection.</para
           >
         </summary>
@@ -180,8 +194,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.AsnEncodedData" />
+
+          
 
           
 
@@ -227,6 +245,8 @@
 
             
 
+            
+
              object to the collection.</para
           >
         </summary>
@@ -241,8 +261,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.CryptographicAttributeObject" />
+
+          
 
           
 
@@ -289,8 +313,12 @@
 
             
 
+            
+
              collection to an array of <see
              cref="T:System.Security.Cryptography.CryptographicAttributeObject" />
+
+            
 
             
 
@@ -306,8 +334,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Security.Cryptography.CryptographicAttributeObject" />
+
+          
 
           
 
@@ -322,8 +354,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -385,6 +421,8 @@
 
             
 
+            
+
              object for the collection.</para
           >
         </summary>
@@ -393,6 +431,8 @@
           <para
             >true if the method returns a <see
              cref="T:System.Security.Cryptography.CryptographicAttributeObjectEnumerator" />
+
+            
 
             
 
@@ -491,6 +531,8 @@
 
             
 
+            
+
              object from the collection.</para
           >
         </summary>
@@ -501,8 +543,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.CryptographicAttributeObject" />
+
+          
 
           
 
@@ -532,6 +578,8 @@
           <para
             >Gets an <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -572,8 +620,12 @@
 
             
 
+            
+
              collection to an <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -589,8 +641,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -603,8 +659,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -619,8 +679,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -660,6 +724,8 @@
 
             
 
+            
+
              collection.</para
           >
         </summary>
@@ -673,8 +739,12 @@
 
             
 
+            
+
              object that can be used to iterate through the <see
              cref="T:System.Security.Cryptography.CryptographicAttributeObjectCollection" />
+
+            
 
             
 

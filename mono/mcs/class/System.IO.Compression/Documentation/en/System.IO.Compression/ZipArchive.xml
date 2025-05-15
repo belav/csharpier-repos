@@ -28,6 +28,8 @@
 
         
 
+        
+
          class enables you to work with a package of compressed files. The package contains an entry for each compressed file. You can: </para
       >
       <list type="bullet">
@@ -35,6 +37,8 @@
           <para
             >Retrieve an entry by using the <see
              cref="M:System.IO.Compression.ZipArchive.GetEntry(System.String)" />
+
+            
 
             
 
@@ -52,6 +56,8 @@
 
             
 
+            
+
              property.</para
           >
         </item>
@@ -59,6 +65,8 @@
           <para
             >Create a new entry in the package by calling the overloaded <see
              cref="M:System.IO.Compression.ZipArchive.CreateEntry(System.String)" />
+
+            
 
             
 
@@ -76,11 +84,15 @@
 
         
 
+        
+
          class.</para
       >
       <para
         >When you create a new entry, the file is compressed and added to the zip package. The <see
          cref="M:System.IO.Compression.ZipArchive.CreateEntry(System.String)" />
+
+        
 
         
 
@@ -96,8 +108,12 @@
 
         
 
+        
+
          class) for the <see
          cref="T:System.IO.Compression.ZipArchive" />
+
+        
 
         
 
@@ -110,8 +126,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.IO.Compression.ZipFileExtensions.CreateEntryFromFile(System.IO.Compression.ZipArchive,System.String,System.String,System.IO.Compression.CompressionLevel)" />
+
+        
 
         
 
@@ -124,8 +144,12 @@
 
         
 
+        
+
         . These extension methods enable you to compress and decompress the contents of the entry to a file. The System.IO.Compression.FileSystem assembly is not available for win8_appname_long apps. In win8_appname_long apps, you can compress and decompress files by using the <see
          cref="T:System.IO.Compression.DeflateStream" />
+
+        
 
         
 
@@ -138,6 +162,8 @@
 
         
 
+        
+
          class, or you can use the wrt types <see
          cref="http://go.microsoft.com/fwlink/p/?LinkID=246357">Compressor</see>
 
@@ -145,8 +171,12 @@
 
         
 
+        
+
          and <see
          cref="http://go.microsoft.com/fwlink/p/?LinkID=246358">Decompressor</see>
+
+        
 
         
 
@@ -186,11 +216,15 @@
 
             
 
+            
+
              class from the specified stream.</para
           >
         </summary>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -228,8 +262,12 @@
 
             
 
+            
+
              parameter is set to <see
              cref="F:System.IO.Compression.ZipArchiveMode.Read" />
+
+            
 
             
 
@@ -242,8 +280,12 @@
 
             
 
+            
+
              parameter is set to <see
              cref="F:System.IO.Compression.ZipArchiveMode.Create" />
+
+            
 
             
 
@@ -256,8 +298,12 @@
 
             
 
+            
+
              parameter is set to <see
              cref="F:System.IO.Compression.ZipArchiveMode.Update" />
+
+            
 
             
 
@@ -276,6 +322,8 @@
 
             
 
+            
+
              class from the specified stream and with the specified mode.</para
           >
         </summary>
@@ -286,10 +334,14 @@
 
           
 
+          
+
           The input or output stream.</param
         >
         <param name="mode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -328,8 +380,12 @@
 
             
 
+            
+
              parameter is set to <see
              cref="F:System.IO.Compression.ZipArchiveMode.Read" />
+
+            
 
             
 
@@ -342,8 +398,12 @@
 
             
 
+            
+
              parameter is set to <see
              cref="F:System.IO.Compression.ZipArchiveMode.Create" />
+
+            
 
             
 
@@ -356,8 +416,12 @@
 
             
 
+            
+
              parameter is set to <see
              cref="F:System.IO.Compression.ZipArchiveMode.Update" />
+
+            
 
             
 
@@ -376,11 +440,15 @@
 
             
 
+            
+
              class on the specified stream for the specified mode, and optionally leaves the stream open.</para
           >
         </summary>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -395,6 +463,8 @@
 
           
 
+          
+
           One of the enumeration values that indicates whether the zip archive is used to read, create, or update entries.</param
         >
         <param name="leaveOpen">
@@ -404,8 +474,12 @@
 
           
 
+          
+
           true to leave the stream open after the <see
            cref="T:System.IO.Compression.ZipArchive" />
+
+          
 
           
 
@@ -445,8 +519,12 @@
 
             
 
+            
+
              parameter is set to <see
              cref="F:System.IO.Compression.ZipArchiveMode.Read" />
+
+            
 
             
 
@@ -459,8 +537,12 @@
 
             
 
+            
+
              parameter is set to <see
              cref="F:System.IO.Compression.ZipArchiveMode.Create" />
+
+            
 
             
 
@@ -473,8 +555,12 @@
 
             
 
+            
+
              parameter is set to <see
              cref="F:System.IO.Compression.ZipArchiveMode.Update" />
+
+            
 
             
 
@@ -485,6 +571,8 @@
           <para
             >When you open a zip archive file for reading and <paramref
              name="entryNameEncoding" />
+
+            
 
             
 
@@ -508,6 +596,8 @@
 
             
 
+            
+
              is set to a value other than null, entry names are decoded according to the following rules:</para
           >
           <list type="bullet">
@@ -515,6 +605,8 @@
               <para
                 >When the language encoding flag is not set, the specified <paramref
                  name="entryNameEncoding" />
+
+                
 
                 
 
@@ -530,6 +622,8 @@
           <para
             >When you write to archive files and <paramref
              name="entryNameEncoding" />
+
+            
 
             
 
@@ -553,8 +647,12 @@
 
             
 
+            
+
              is set to a value other than null, the specified <paramref
              name="entryNameEncoding" />
+
+            
 
             
 
@@ -573,11 +671,15 @@
 
             
 
+            
+
              class on the specified stream for the specified mode, uses the specified encoding for entry names, and optionally leaves the stream open.</para
           >
         </summary>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -592,10 +694,14 @@
 
           
 
+          
+
           One of the enumeration values that indicates whether the zip archive is used to read, create, or update entries.</param
         >
         <param name="leaveOpen">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -608,10 +714,14 @@
 
           
 
+          
+
            object is disposed; otherwise, false.</param
         >
         <param name="entryNameEncoding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -651,6 +761,8 @@
 
             
 
+            
+
              string should reflect the relative path of the entry you want to create within the zip archive. There is no restriction on the string you provide. However, if it is not formatted as a relative path, the entry is created, but you may get an exception when you extract the contents of the zip archive. If an entry with the specified path and name already exists in the archive, a second entry is created with the same path and name.</para
           >
           <para
@@ -661,8 +773,12 @@
 
             
 
+            
+
              property for the new entry is set to the current time. The entry is compressed using the default compression level of the underlying compression algorithm. If you want to specify a different compression level, use the <see
              cref="M:System.IO.Compression.ZipArchive.CreateEntry(System.String,System.IO.Compression.CompressionLevel)" />
+
+            
 
             
 
@@ -681,6 +797,8 @@
         </returns>
         <param name="entryName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -721,11 +839,15 @@
 
             
 
+            
+
              string should reflect the relative path of the entry you want to create within the zip archive. There is no restriction on the string you provide. However, if it is not formatted as a relative path, the entry is created, but you may get an exception when you extract the contents of the zip archive. If an entry with the specified name already exists in the archive, a second entry is created with the same name.</para
           >
           <para
             >The value of the <see
              cref="P:System.IO.Compression.ZipArchiveEntry.LastWriteTime" />
+
+            
 
             
 
@@ -738,8 +860,12 @@
 
             
 
+            
+
              parameter to <see
              cref="F:System.IO.Compression.CompressionLevel.Optimal" />
+
+            
 
             
 
@@ -752,8 +878,12 @@
 
             
 
+            
+
              parameter to <see
              cref="F:System.IO.Compression.CompressionLevel.Fastest" />
+
+            
 
             
 
@@ -777,10 +907,14 @@
 
           
 
+          
+
           A path, relative to the root of the archive, that specifies the name of the entry to be created.</param
         >
         <param name="compressionLevel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -815,6 +949,8 @@
 
             
 
+            
+
              object. Unless you construct the object by using the <see
              cref="M:System.IO.Compression.ZipArchive.#ctor(System.IO.Stream,System.IO.Compression.ZipArchiveMode,System.Boolean)" />
 
@@ -822,8 +958,12 @@
 
             
 
+            
+
              constructor overload and set its <paramref
              name="leaveOpen" />
+
+            
 
             
 
@@ -839,6 +979,8 @@
 
             
 
+            
+
             , call <see
              cref="M:System.IO.Compression.ZipArchive.Dispose" />
 
@@ -846,8 +988,12 @@
 
             
 
+            
+
              to release all resources used by this instance. You should eliminate further references to this <see
              cref="T:System.IO.Compression.ZipArchive" />
+
+            
 
             
 
@@ -862,8 +1008,12 @@
 
             
 
+            
+
              calls the <see
              cref="M:System.IO.Compression.ZipArchive.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -878,6 +1028,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -886,6 +1038,8 @@
           <para
             >Releases the resources used by the current instance of the <see
              cref="T:System.IO.Compression.ZipArchive" />
+
+            
 
             
 
@@ -923,6 +1077,8 @@
 
             
 
+            
+
              is set to true, all underlying streams are closed and no longer available for subsequent write operations, unless you construct the object by using the <see
              cref="M:System.IO.Compression.ZipArchive.#ctor(System.IO.Stream,System.IO.Compression.ZipArchiveMode,System.Boolean)" />
 
@@ -930,8 +1086,12 @@
 
             
 
+            
+
              constructor overload and set its <paramref
              name="leaveOpen" />
+
+            
 
             
 
@@ -947,8 +1107,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -959,6 +1123,8 @@
           <para
             >When you implement the dispose pattern, the Boolean parameter of the <see
              cref="M:System.IO.Compression.ZipArchive.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -976,8 +1142,12 @@
 
                 
 
+                
+
                  method of the current object should call <see
                  cref="M:System.IO.Compression.ZipArchive.Dispose(System.Boolean)" />
+
+                
 
                 
 
@@ -995,8 +1165,12 @@
 
                 
 
+                
+
                  method of the current object should call <see
                  cref="M:System.IO.Compression.ZipArchive.Dispose(System.Boolean)" />
+
+                
 
                 
 
@@ -1016,6 +1190,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1029,8 +1205,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -1043,11 +1223,15 @@
 
             
 
+            
+
              class, and optionally finishes writing the archive and releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1085,8 +1269,12 @@
 
             
 
+            
+
              property to retrieve the entire collection of entries. Use the <see
              cref="M:System.IO.Compression.ZipArchive.GetEntry(System.String)" />
+
+            
 
             
 
@@ -1131,6 +1319,8 @@
 
             
 
+            
+
              using ordinal comparison. </para
           >
         </remarks>
@@ -1144,6 +1334,8 @@
         </returns>
         <param name="entryName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1181,8 +1373,12 @@
 
             
 
+            
+
              property when you create an instance of the <see
              cref="T:System.IO.Compression.ZipArchive" />
+
+            
 
             
 
@@ -1195,6 +1391,8 @@
 
             
 
+            
+
              or <see
              cref="M:System.IO.Compression.ZipArchive.#ctor(System.IO.Stream,System.IO.Compression.ZipArchiveMode,System.Boolean)" />
 
@@ -1202,8 +1400,12 @@
 
             
 
+            
+
              constructor to provide a value for the <see
              cref="P:System.IO.Compression.ZipArchive.Mode" />
+
+            
 
             
 

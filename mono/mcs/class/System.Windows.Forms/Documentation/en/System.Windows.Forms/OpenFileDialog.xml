@@ -24,8 +24,12 @@
 
         
 
+        
+
          property determines whether a read-only check box appears in the dialog box. The <see
          cref="P:System.Windows.Forms.OpenFileDialog.ReadOnlyChecked" />
+
+        
 
         
 
@@ -41,11 +45,15 @@
 
         
 
+        
+
          class.</para
       >
       <para
         >If you want to give the user the ability to select a folder instead of a file, use <see
          cref="T:System.Windows.Forms.FolderBrowserDialog" />
+
+        
 
         
 
@@ -75,6 +83,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -83,6 +93,8 @@
           <para
             >Initializes an instance of the <see
              cref="T:System.Windows.Forms.OpenFileDialog" />
+
+            
 
             
 
@@ -144,6 +156,8 @@
 
             
 
+            
+
              property to access the full list of selected file names.</para
           >
         </remarks>
@@ -175,8 +189,12 @@
 
             
 
+            
+
              method is used to provide a facility to quickly open a file from the dialog box. The file is opened in read-only mode for security purposes. To open a file in read/write mode, you must use another method, such as <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -195,6 +213,8 @@
 
             
 
+            
+
              property. </para
           >
         </summary>
@@ -203,6 +223,8 @@
           <para
             >A <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -240,8 +262,12 @@
 
             
 
+            
+
              state does not affect the read/write mode that <see
              cref="M:System.Windows.Forms.OpenFileDialog.OpenFile" />
+
+            
 
             
 
@@ -254,11 +280,15 @@
 
             
 
+            
+
              will always open the file in read-only mode.</para
           >
           <para
             >The <see
              cref="P:System.Windows.Forms.OpenFileDialog.ShowReadOnly" />
+
+            
 
             
 

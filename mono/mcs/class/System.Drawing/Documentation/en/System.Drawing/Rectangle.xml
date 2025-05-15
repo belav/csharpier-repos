@@ -32,6 +32,8 @@
 
         
 
+        
+
         , <see
          cref="P:System.Drawing.Rectangle.Height" />
 
@@ -39,8 +41,12 @@
 
         
 
+        
+
         , and upper-left corner represented by the <see
          cref="P:System.Drawing.Rectangle.Location" />
+
+        
 
         
 
@@ -56,8 +62,12 @@
 
         
 
+        
+
          object and a <see
          cref="T:System.Drawing.Pen" />
+
+        
 
         
 
@@ -70,8 +80,12 @@
 
         
 
+        
+
          object provides the <see
          cref="M:System.Drawing.Graphics.DrawRectangle(System.Drawing.Pen,System.Drawing.Rectangle)" />
+
+        
 
         
 
@@ -84,6 +98,8 @@
 
         
 
+        
+
          object stores features of the line, such as color and width. The units the rectangle is drawn in is determined by the <see
          cref="P:System.Drawing.Graphics.PageUnit" />
 
@@ -91,8 +107,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Drawing.Graphics.PageScale" />
+
+        
 
         
 
@@ -108,8 +128,12 @@
 
         
 
+        
+
          filled with color, you need a <see
          cref="T:System.Drawing.Graphics" />
+
+        
 
         
 
@@ -122,8 +146,12 @@
 
         
 
+        
+
          such as <see
          cref="T:System.Drawing.SolidBrush" />
+
+        
 
         
 
@@ -136,8 +164,12 @@
 
         
 
+        
+
         . The <see
          cref="T:System.Drawing.Graphics" />
+
+        
 
         
 
@@ -150,8 +182,12 @@
 
         
 
+        
+
          method and the <see
          cref="T:System.Drawing.Brush" />
+
+        
 
         
 
@@ -162,6 +198,8 @@
       <para
         >For more advanced shapes, use a <see
          cref="T:System.Drawing.Region" />
+
+        
 
         
 
@@ -199,6 +237,8 @@
 
             
 
+            
+
              class with the specified location and size.</para
           >
         </summary>
@@ -209,8 +249,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -225,8 +269,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Size" />
+
+          
 
           
 
@@ -265,11 +313,15 @@
 
             
 
+            
+
              class with the specified location and size.</para
           >
         </summary>
         <param name="x">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -284,6 +336,8 @@
 
           
 
+          
+
           The y-coordinate of the upper-left corner of the rectangle. </param
         >
         <param name="width">
@@ -293,10 +347,14 @@
 
           
 
+          
+
           The width of the rectangle. </param
         >
         <param name="height">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -328,6 +386,8 @@
 
             
 
+            
+
              property represents the y-coordinate of the first point at the bottom edge of the <see
              cref="T:System.Drawing.Rectangle" />
 
@@ -335,8 +395,12 @@
 
             
 
+            
+
              that is not contained in the <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -355,6 +419,8 @@
 
             
 
+            
+
              and <see
              cref="P:System.Drawing.Rectangle.Height" />
 
@@ -362,8 +428,12 @@
 
             
 
+            
+
              property values of this <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -407,6 +477,8 @@
 
             
 
+            
+
              structure to a <see
              cref="T:System.Drawing.Rectangle" />
 
@@ -414,8 +486,12 @@
 
             
 
+            
+
              structure by rounding the <see
              cref="T:System.Drawing.RectangleF" />
+
+            
 
             
 
@@ -434,6 +510,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -444,8 +522,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.RectangleF" />
+
+          
 
           
 
@@ -483,6 +565,8 @@
 
             
 
+            
+
              structure.</para
           >
         </summary>
@@ -496,8 +580,12 @@
 
             
 
+            
+
              is contained within this <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -513,8 +601,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -555,8 +647,12 @@
 
             
 
+            
+
              is entirely contained within this <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -575,8 +671,12 @@
 
             
 
+            
+
              is entirely contained within this <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -592,8 +692,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -632,6 +736,8 @@
 
             
 
+            
+
              structure.</para
           >
         </summary>
@@ -645,6 +751,8 @@
 
             
 
+            
+
              and <paramref
              name="y" />
 
@@ -652,8 +760,12 @@
 
             
 
+            
+
              is contained within this <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -669,10 +781,14 @@
 
           
 
+          
+
           The x-coordinate of the point to test. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -711,6 +827,8 @@
 
             
 
+            
+
              structure with its properties left uninitialized.</para
           >
         </summary>
@@ -741,6 +859,8 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Drawing.Rectangle" />
 
@@ -748,8 +868,12 @@
 
             
 
+            
+
              structure with the same location and size of this <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -768,8 +892,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -782,8 +910,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Drawing.Rectangle.Y" />
+
+            
 
             
 
@@ -796,6 +928,8 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Drawing.Rectangle.Height" />
 
@@ -803,8 +937,12 @@
 
             
 
+            
+
              properties are equal to the corresponding properties of this <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -820,8 +958,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -861,6 +1003,8 @@
 
             
 
+            
+
              with the specified upper-left and lower-right corners.</para
           >
         </remarks>
@@ -869,6 +1013,8 @@
           <para
             >Creates a <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -887,6 +1033,8 @@
 
             
 
+            
+
              that this method creates.</para
           >
         </returns>
@@ -897,8 +1045,12 @@
 
           
 
+          
+
           The x-coordinate of the upper-left corner of this <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -913,8 +1065,12 @@
 
           
 
+          
+
           The y-coordinate of the upper-left corner of this <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -929,8 +1085,12 @@
 
           
 
+          
+
           The x-coordinate of the lower-right corner of this <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -945,8 +1105,12 @@
 
           
 
+          
+
           The y-coordinate of the lower-right corner of this <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -979,8 +1143,12 @@
 
             
 
+            
+
              structure. For information about the use of hash codes, see <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -1018,8 +1186,12 @@
 
             
 
+            
+
              property will also cause a change in the <see
              cref="P:System.Drawing.Rectangle.Bottom" />
+
+            
 
             
 
@@ -1032,6 +1204,8 @@
 
             
 
+            
+
             . The units the rectangle is drawn in is determined by the <see
              cref="P:System.Drawing.Graphics.PageUnit" />
 
@@ -1039,8 +1213,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Drawing.Graphics.PageScale" />
+
+            
 
             
 
@@ -1054,6 +1232,8 @@
           <para
             >Gets or sets the height of this <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -1092,11 +1272,15 @@
 
             
 
+            
+
              by the specified amount.</para
           >
         </summary>
         <param name="size">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1132,6 +1316,8 @@
 
             
 
+            
+
              or <paramref
              name="y" />
 
@@ -1139,8 +1325,12 @@
 
             
 
+            
+
              is negative, the <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -1159,6 +1349,8 @@
 
             
 
+            
+
              by the specified amount.</para
           >
         </summary>
@@ -1169,8 +1361,12 @@
 
           
 
+          
+
           The amount to inflate this <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1185,8 +1381,12 @@
 
           
 
+          
+
           The amount to inflate this <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1225,6 +1425,8 @@
 
             
 
+            
+
             , enlarges the copy, and then returns the enlarged copy. The rectangle is enlarged in both directions along an axis. For example, if a 50 by 50 rectangle is enlarged by 50 in the x-axis, the resultant rectangle will be 150 units long (the original 50, the 50 in the minus direction, and the 50 in the plus direction) maintaining the rectangle's geometric center.</para
           >
         </remarks>
@@ -1238,8 +1440,12 @@
 
             
 
+            
+
              structure. The copy is enlarged by the specified amount. The original <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -1258,6 +1464,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1268,8 +1476,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1284,8 +1496,12 @@
 
           
 
+          
+
           The amount to inflate this <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1300,8 +1516,12 @@
 
           
 
+          
+
           The amount to inflate this <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1339,8 +1559,12 @@
 
             
 
+            
+
              with the intersection of itself and the specified <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -1356,8 +1580,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1396,6 +1624,8 @@
 
             
 
+            
+
              structure that represents the intersection of two other <see
              cref="T:System.Drawing.Rectangle" />
 
@@ -1403,8 +1633,12 @@
 
             
 
+            
+
              structures. If there is no intersection, an empty <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -1423,6 +1657,8 @@
 
             
 
+            
+
              that represents the intersection of <paramref
              name="a" />
 
@@ -1430,8 +1666,12 @@
 
             
 
+            
+
              and <paramref
              name="b" />
+
+            
 
             
 
@@ -1447,10 +1687,14 @@
 
           
 
+          
+
           A rectangle to intersect. </param
         >
         <param name="b">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1488,6 +1732,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1497,6 +1743,8 @@
         </returns>
         <param name="rect">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1524,6 +1772,8 @@
           <para
             >Tests whether all numeric properties of this <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -1562,6 +1812,8 @@
 
             
 
+            
+
              structure.</para
           >
         </summary>
@@ -1591,6 +1843,8 @@
           <para
             >Gets or sets the coordinates of the upper-left corner of this <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -1635,6 +1889,8 @@
 
           
 
+          
+
           Amount to offset the location. </param
         >
       </Docs>
@@ -1666,10 +1922,14 @@
 
           
 
+          
+
           The horizontal offset. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1708,6 +1968,8 @@
 
             
 
+            
+
              structures have equal location and size.</para
           >
         </summary>
@@ -1721,8 +1983,12 @@
 
             
 
+            
+
              structures have equal <see
              cref="P:System.Drawing.Rectangle.X" />
+
+            
 
             
 
@@ -1735,6 +2001,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Drawing.Rectangle.Width" />
 
@@ -1742,8 +2010,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Drawing.Rectangle.Height" />
+
+            
 
             
 
@@ -1759,8 +2031,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1775,8 +2051,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1815,6 +2095,8 @@
 
             
 
+            
+
              structures differ in location or size.</para
           >
         </summary>
@@ -1828,8 +2110,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Drawing.Rectangle.Y" />
+
+            
 
             
 
@@ -1842,6 +2128,8 @@
 
             
 
+            
+
              or <see
              cref="P:System.Drawing.Rectangle.Height" />
 
@@ -1849,8 +2137,12 @@
 
             
 
+            
+
              properties of the two <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -1866,8 +2158,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1882,8 +2178,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1915,6 +2215,8 @@
 
             
 
+            
+
              property represents the x-coordinate of the first point at the right edge of the rectangle that is not contained in the rectangle.</para
           >
         </remarks>
@@ -1928,6 +2230,8 @@
 
             
 
+            
+
              and <see
              cref="P:System.Drawing.Rectangle.Width" />
 
@@ -1935,8 +2239,12 @@
 
             
 
+            
+
              property values of this <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -1980,6 +2288,8 @@
 
             
 
+            
+
              to a <see
              cref="T:System.Drawing.Rectangle" />
 
@@ -1987,8 +2297,12 @@
 
             
 
+            
+
              by rounding the <see
              cref="T:System.Drawing.RectangleF" />
+
+            
 
             
 
@@ -2007,6 +2321,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -2017,8 +2333,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.RectangleF" />
+
+          
 
           
 
@@ -2047,6 +2367,8 @@
           <para
             >Gets or sets the size of this <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -2085,6 +2407,8 @@
 
             
 
+            
+
              structure.</para
           >
         </summary>
@@ -2118,6 +2442,8 @@
 
             
 
+            
+
              to a human-readable string.</para
           >
         </summary>
@@ -2126,6 +2452,8 @@
           <para
             >A string that contains the position, width, and height of this <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -2164,6 +2492,8 @@
 
             
 
+            
+
              to a <see
              cref="T:System.Drawing.Rectangle" />
 
@@ -2171,8 +2501,12 @@
 
             
 
+            
+
              by truncating the <see
              cref="T:System.Drawing.RectangleF" />
+
+            
 
             
 
@@ -2191,6 +2525,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -2201,8 +2537,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.RectangleF" />
+
+          
 
           
 
@@ -2240,6 +2580,8 @@
 
             
 
+            
+
              method returns a rectangle with a starting point of (0, 0), and the height and width of the non-empty rectangle. For example, if you have two rectangles: A = (0, 0; 0, 0) and B = (1, 1; 2, 2), then the union of A and B is (0, 0; 2, 2).</para
           >
         </remarks>
@@ -2253,8 +2595,12 @@
 
             
 
+            
+
              structure that contains the union of two <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -2273,8 +2619,12 @@
 
             
 
+            
+
              structure that bounds the union of the two <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -2290,10 +2640,14 @@
 
           
 
+          
+
           A rectangle to union. </param
         >
         <param name="b">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2326,8 +2680,12 @@
 
             
 
+            
+
              property will also cause a change in the <see
              cref="P:System.Drawing.Rectangle.Right" />
+
+            
 
             
 
@@ -2340,6 +2698,8 @@
 
             
 
+            
+
             . The units the rectangle is drawn in is determined by the <see
              cref="P:System.Drawing.Graphics.PageUnit" />
 
@@ -2347,8 +2707,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Drawing.Graphics.PageScale" />
+
+            
 
             
 
@@ -2362,6 +2726,8 @@
           <para
             >Gets or sets the width of this <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -2395,6 +2761,8 @@
 
             
 
+            
+
              property will also cause a change in the <see
              cref="P:System.Drawing.Rectangle.Right" />
 
@@ -2402,8 +2770,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -2417,6 +2789,8 @@
           <para
             >Gets or sets the x-coordinate of the upper-left corner of this <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -2450,6 +2824,8 @@
 
             
 
+            
+
              property will also cause a change in the <see
              cref="P:System.Drawing.Rectangle.Bottom" />
 
@@ -2457,8 +2833,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -2472,6 +2852,8 @@
           <para
             >Gets or sets the y-coordinate of the upper-left corner of this <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 

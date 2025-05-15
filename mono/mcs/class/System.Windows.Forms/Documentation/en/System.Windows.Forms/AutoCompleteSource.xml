@@ -21,8 +21,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.TextBox" />
+
+        
 
         
 
@@ -51,6 +55,8 @@
 
             
 
+            
+
              and <see
              cref="F:System.Windows.Forms.AutoCompleteSource.AllUrl" />
 
@@ -58,8 +64,12 @@
 
             
 
+            
+
              as the source. This is the default value when <see
              cref="T:System.Windows.Forms.AutoCompleteMode" />
+
+            
 
             
 
@@ -91,8 +101,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Windows.Forms.AutoCompleteSource.RecentlyUsedList" />
+
+            
 
             
 
@@ -119,6 +133,8 @@
           <para
             >Specifies strings from a built-in <see
              cref="T:System.Windows.Forms.AutoCompleteStringCollection" />
+
+            
 
             
 
@@ -201,6 +217,8 @@
 
             
 
+            
+
              represent the source.</para
           >
         </summary>
@@ -227,8 +245,12 @@
 
             
 
+            
+
              is currently in use. This is the default value of <see
              cref="T:System.Windows.Forms.AutoCompleteSource" />
+
+            
 
             
 

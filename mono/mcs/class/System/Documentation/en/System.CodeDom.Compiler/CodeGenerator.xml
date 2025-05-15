@@ -39,10 +39,14 @@
 
           
 
+          
+
            is thrown when either the immediate caller or the derived class does not have full-trust permission. For details about security demands, see <format
            type="text/html">
             <a href="a33fd5f9-2de9-4653-a4f0-d9df25082c4d">Link Demands</a>
           </format>
+
+          
 
           
 
@@ -57,6 +61,8 @@
 
           
 
+          
+
           .</para
         >
       </block>
@@ -66,6 +72,8 @@
       <para
         >Provides an example implementation of the <see
          cref="T:System.CodeDom.Compiler.ICodeGenerator" />
+
+        
 
         
 
@@ -97,6 +105,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.Compiler.CodeGenerator" />
+
+            
 
             
 
@@ -141,6 +151,8 @@
 
           
 
+          
+
           The string to write on the new line. </param
         >
       </Docs>
@@ -176,6 +188,8 @@
 
             
 
+            
+
              tests whether the identifier conflicts with reserved or language keywords, and if so, returns an equivalent name with language-specific escape code formatting. The returned name is referred to an escaped identifier. The escaped identifier contains the same <paramref
              name="value" />
 
@@ -183,8 +197,12 @@
 
             
 
+            
+
              but includes escape code formatting to differentiate it from conflicting keywords. For example, <paramref
              name="value" />
+
+            
 
             
 
@@ -206,6 +224,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -246,8 +266,12 @@
 
             
 
+            
+
              tests whether the identifier conflicts with reserved or language keywords, and if so, returns a valid identifier name that does not conflict. The returned identifier contains the same <paramref
              name="value" />
+
+            
 
             
 
@@ -269,6 +293,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -407,8 +433,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeArgumentReferenceExpression" />
+
+          
 
           
 
@@ -452,8 +482,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeArrayCreateExpression" />
+
+          
 
           
 
@@ -497,8 +531,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeArrayIndexerExpression" />
+
+          
 
           
 
@@ -602,8 +640,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeAttributeDeclarationCollection" />
+
+          
 
           
 
@@ -647,8 +689,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeAttributeDeclarationCollection" />
+
+          
 
           
 
@@ -692,8 +738,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeBaseReferenceExpression" />
+
+          
 
           
 
@@ -737,8 +787,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeBinaryOperatorExpression" />
+
+          
 
           
 
@@ -782,8 +836,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeCastExpression" />
+
+          
 
           
 
@@ -836,6 +894,8 @@
 
           
 
+          
+
           The class member to generate code for.</param
         >
         <param name="writer">
@@ -845,10 +905,14 @@
 
           
 
+          
+
           The text writer to output code to.</param
         >
         <param name="options">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1141,6 +1205,8 @@
 
           
 
+          
+
           The decimal value to generate code for. </param
         >
       </Docs>
@@ -1178,6 +1244,8 @@
         </summary>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1221,6 +1289,8 @@
 
           
 
+          
+
           The expression to generate code for. </param
         >
       </Docs>
@@ -1254,6 +1324,8 @@
         </summary>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1297,6 +1369,8 @@
 
           
 
+          
+
           The expression to generate code for. </param
         >
       </Docs>
@@ -1329,6 +1403,8 @@
         </summary>
         <param name="directives">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1367,6 +1443,8 @@
         </summary>
         <param name="d">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1474,6 +1552,8 @@
 
           
 
+          
+
           The expression to generate code for. </param
         >
       </Docs>
@@ -1507,6 +1587,8 @@
         </summary>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1612,6 +1694,8 @@
 
           
 
+          
+
           The expression to generate code for. </param
         >
       </Docs>
@@ -1675,6 +1759,8 @@
         </summary>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1875,6 +1961,8 @@
 
           
 
+          
+
           The expression to generate code for. </param
         >
       </Docs>
@@ -1913,6 +2001,8 @@
 
           
 
+          
+
           The expression to generate code for. </param
         >
       </Docs>
@@ -1946,6 +2036,8 @@
         </summary>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2079,6 +2171,8 @@
 
           
 
+          
+
           The namespace import to generate code for. </param
         >
       </Docs>
@@ -2112,6 +2206,8 @@
         </summary>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2185,6 +2281,8 @@
 
           
 
+          
+
           The expression to generate code for. </param
         >
       </Docs>
@@ -2223,6 +2321,8 @@
 
           
 
+          
+
           The expression to generate code for. </param
         >
       </Docs>
@@ -2256,6 +2356,8 @@
         </summary>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2331,6 +2433,8 @@
 
           
 
+          
+
           The expression to generate code for. </param
         >
       </Docs>
@@ -2364,6 +2468,8 @@
         </summary>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2439,6 +2545,8 @@
 
           
 
+          
+
           The value to generate code for. </param
         >
       </Docs>
@@ -2477,6 +2585,8 @@
 
           
 
+          
+
           The literal code fragment compile unit to generate code for. </param
         >
       </Docs>
@@ -2510,6 +2620,8 @@
         </summary>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2668,6 +2780,8 @@
         </summary>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2837,6 +2951,8 @@
 
           
 
+          
+
           The expression to generate code for. </param
         >
       </Docs>
@@ -2875,6 +2991,8 @@
 
           
 
+          
+
           The expression to generate code for. </param
         >
       </Docs>
@@ -2908,6 +3026,8 @@
         </summary>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2983,6 +3103,8 @@
 
           
 
+          
+
           The statement to generate code for. </param
         >
       </Docs>
@@ -3016,6 +3138,8 @@
         </summary>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3226,6 +3350,8 @@
 
           
 
+          
+
           The value to test for conflicts with valid identifiers. </param
         >
       </Docs>
@@ -3262,6 +3388,8 @@
 
             
 
+            
+
              method calls this method to perform string validation. Calling the <see
              cref="M:System.CodeDom.Compiler.CodeGenerator.ValidateIdentifiers(System.CodeDom.CodeObject)" />
 
@@ -3269,8 +3397,12 @@
 
             
 
+            
+
              method and passing a <see
              cref="T:System.CodeDom.CodeCompileUnit" />
+
+            
 
             
 
@@ -3289,6 +3421,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3436,6 +3570,8 @@
 
           
 
+          
+
           The attributes to generate code for. </param
         >
       </Docs>
@@ -3469,6 +3605,8 @@
           <para
             >Generates code for the specified <see
              cref="T:System.CodeDom.FieldDirection" />
+
+            
 
             
 
@@ -3508,6 +3646,8 @@
         </summary>
         <param name="expressions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3553,6 +3693,8 @@
 
           
 
+          
+
           The expressions to generate code for. </param
         >
       </Docs>
@@ -3586,6 +3728,8 @@
         </summary>
         <param name="attributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3629,6 +3773,8 @@
 
           
 
+          
+
           The identifier to output. </param
         >
       </Docs>
@@ -3662,6 +3808,8 @@
         </summary>
         <param name="attributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3705,6 +3853,8 @@
 
           
 
+          
+
           One of the enumeration values that indicates the member scope modifier to generate code for. </param
         >
       </Docs>
@@ -3738,6 +3888,8 @@
         </summary>
         <param name="op">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3779,6 +3931,8 @@
         </summary>
         <param name="parameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3854,6 +4008,8 @@
 
           
 
+          
+
           One of the enumeration values that indicates the type attributes to generate code for. </param
         >
         <param name="isStruct">
@@ -3863,10 +4019,14 @@
 
           
 
+          
+
           true if the type is a struct; otherwise, false. </param
         >
         <param name="isEnum">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3912,6 +4072,8 @@
 
           
 
+          
+
           The name for the object. </param
         >
       </Docs>
@@ -3952,6 +4114,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4033,6 +4197,8 @@
 
           
 
+          
+
           The string to create an escaped identifier for.</param
         >
       </Docs>
@@ -4070,6 +4236,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4282,6 +4450,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -4291,6 +4461,8 @@
         </returns>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4337,11 +4509,15 @@
 
             
 
+            
+
              parameter is a valid identifier; otherwise, false.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4380,6 +4556,8 @@
           <para
             >Gets a value indicating whether the generator provides support for the language features represented by the specified <see
              cref="T:System.CodeDom.Compiler.GeneratorSupport" />
+
+            
 
             
 
@@ -4428,6 +4606,8 @@
 
           
 
+          
+
           The identifier to validate.</param
         >
       </Docs>
@@ -4461,6 +4641,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4507,6 +4689,8 @@
 
             
 
+            
+
              objects to contain field escape characters and hidden code which can allow security violations. This method checks the literal fields of each <see
              cref="T:System.CodeDom.CodeObject" />
 
@@ -4514,8 +4698,12 @@
 
             
 
+            
+
              in a <see
              cref="N:System.CodeDom" />
+
+            
 
             
 
@@ -4531,8 +4719,12 @@
 
             
 
+            
+
              method to validate each identifier in the specified <see
              cref="T:System.CodeDom.CodeObject" />
+
+            
 
             
 
@@ -4545,11 +4737,15 @@
 
             
 
+            
+
              tree, and throws an exception if an identifier is invalid or contains invalid characters.</para
           >
           <para
             >Call this method and pass it the <see
              cref="T:System.CodeDom.CodeCompileUnit" />
+
+            
 
             
 
@@ -4568,8 +4764,12 @@
 
             
 
+            
+
              or <see
              cref="N:System.CodeDom" />
+
+            
 
             
 
@@ -4580,6 +4780,8 @@
         </summary>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

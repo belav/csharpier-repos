@@ -54,8 +54,12 @@
 
                 
 
+                
+
                  is set to <see
                  cref="F:System.ServiceModel.Security.Tokens.SecurityTokenInclusionMode.AlwaysToRecipient" />
+
+                
 
                 
 
@@ -72,8 +76,12 @@
 
                 
 
+                
+
                  is set to <see
                  cref="F:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle.Internal" />
+
+                
 
                 
 
@@ -90,6 +98,8 @@
 
             
 
+            
+
              is set to true.</para
           >
         </remarks>
@@ -98,6 +108,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Security.Tokens.UserNameSecurityTokenParameters" />
+
+            
 
             
 
@@ -139,6 +151,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -147,6 +161,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Security.Tokens.UserNameSecurityTokenParameters" />
+
+            
 
             
 
@@ -185,8 +201,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.ServiceModel.Security.Tokens.SecurityTokenParameters.CloneCore" />
+
+            
 
             
 
@@ -201,8 +221,12 @@
 
             
 
+            
+
              is an abstract class that is overridden by <see
              cref="M:System.ServiceModel.Security.Tokens.UserNameSecurityTokenParameters.CloneCore" />
+
+            
 
             
 
@@ -218,8 +242,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.ServiceModel.Security.Tokens.UserNameSecurityTokenParameters.#ctor(System.ServiceModel.Security.Tokens.UserNameSecurityTokenParameters)" />
+
+            
 
             
 
@@ -237,6 +265,8 @@
           <para
             >An <see
              cref="T:System.ServiceModel.Security.Tokens.SecurityTokenParameters" />
+
+            
 
             
 
@@ -281,8 +311,12 @@
 
             
 
+            
+
              method, with <paramref
              name="referenceStyle" />
+
+            
 
             
 
@@ -306,6 +340,8 @@
 
           
 
+          
+
           The token.</param
         >
         <param name="referenceStyle">
@@ -315,8 +351,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Security.Tokens.SecurityTokenReferenceStyle" />
+
+          
 
           
 
@@ -381,12 +421,16 @@
 
             
 
+            
+
              are initialized:</para
           >
           <list type="bullet">
             <item>
               <para>
                 <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.TokenType" />
+
+                
 
                 
 
@@ -399,12 +443,16 @@
 
                 
 
+                
+
                 .</para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.IdentityModel.Selectors.SecurityTokenRequirement.RequireCryptographicToken" />
+
+                
 
                 
 
@@ -426,8 +474,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IdentityModel.Selectors.SecurityTokenRequirement" />
+
+          
 
           
 

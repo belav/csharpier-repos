@@ -21,6 +21,8 @@
 
         
 
+        
+
          move handle (grip).</para
       >
     </summary>
@@ -39,6 +41,8 @@
           <para
             >Specifies a horizontal orientation for the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -65,6 +69,8 @@
           <para
             >Specifies a vertical orientation for the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 

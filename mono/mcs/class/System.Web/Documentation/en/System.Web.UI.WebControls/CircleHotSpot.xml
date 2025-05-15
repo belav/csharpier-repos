@@ -24,8 +24,12 @@
 
         
 
+        
+
          control. To define the region of the <see
          cref="T:System.Web.UI.WebControls.CircleHotSpot" />
+
+        
 
         
 
@@ -38,6 +42,8 @@
 
         
 
+        
+
          property to the value that represents the x-coordinate of the center of the circular region. Set the <see
          cref="P:System.Web.UI.WebControls.CircleHotSpot.Y" />
 
@@ -45,8 +51,12 @@
 
         
 
+        
+
          property to the value that represents the y-coordinate of the center of the circular region. Set the <see
          cref="P:System.Web.UI.WebControls.CircleHotSpot.Radius" />
+
+        
 
         
 
@@ -62,8 +72,12 @@
 
         
 
+        
+
          control is clicked, the page either navigates to a URL, generates a post back to the server, or does nothing. The <see
          cref="P:System.Web.UI.WebControls.HotSpot.HotSpotMode" />
+
+        
 
         
 
@@ -76,8 +90,12 @@
 
         
 
+        
+
          property to HotSpotMode.Navigate, and use the <see
          cref="P:System.Web.UI.WebControls.HotSpot.NavigateUrl" />
+
+        
 
         
 
@@ -90,8 +108,12 @@
 
         
 
+        
+
          property to HotSpotMode.PostBack, and use the <see
          cref="P:System.Web.UI.WebControls.HotSpot.PostBackValue" />
+
+        
 
         
 
@@ -104,8 +126,12 @@
 
         
 
+        
+
          object. This name will be passed in the <see
          cref="T:System.Web.UI.WebControls.ImageMapEventArgs" />
+
+        
 
         
 
@@ -118,6 +144,8 @@
 
         
 
+        
+
          is clicked. If you want the <see
          cref="T:System.Web.UI.WebControls.CircleHotSpot" />
 
@@ -125,8 +153,12 @@
 
         
 
+        
+
          object to have no behavior, set the <see
          cref="P:System.Web.UI.WebControls.HotSpot.HotSpotMode" />
+
+        
 
         
 
@@ -140,6 +172,8 @@
       <para
         >Defines a circular hot spot region in an <see
          cref="T:System.Web.UI.WebControls.ImageMap" />
+
+        
 
         
 
@@ -166,6 +200,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -174,6 +210,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.CircleHotSpot" />
+
+            
 
             
 
@@ -206,6 +244,8 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.CircleHotSpot.Y" />
 
@@ -213,8 +253,12 @@
 
             
 
+            
+
              properties to return the center coordinates and the value assigned to the <see
              cref="P:System.Web.UI.WebControls.CircleHotSpot.Radius" />
+
+            
 
             
 
@@ -230,8 +274,12 @@
 
             
 
+            
+
              method is used internally by ASP.NET to get the text to use for the coordinates of a <see
              cref="T:System.Web.UI.WebControls.CircleHotSpot" />
+
+            
 
             
 
@@ -250,6 +298,8 @@
 
             
 
+            
+
              object's center and the length of its radius.</para
           >
         </summary>
@@ -258,6 +308,8 @@
           <para
             >A string that represents the x- and y-coordinates of a <see
              cref="T:System.Web.UI.WebControls.CircleHotSpot" />
+
+            
 
             
 
@@ -292,8 +344,12 @@
 
             
 
+            
+
              property is used internally by ASP.NET to get the string representation for the <see
              cref="T:System.Web.UI.WebControls.CircleHotSpot" />
+
+            
 
             
 
@@ -307,6 +363,8 @@
           <para
             >Gets the markup-language string representation for the shape of the <see
              cref="T:System.Web.UI.WebControls.CircleHotSpot" />
+
+            
 
             
 
@@ -341,8 +399,12 @@
 
             
 
+            
+
              property allows you to get or set a value that represents the distance in pixels from the center to the edge of the circular region defined by this <see
              cref="T:System.Web.UI.WebControls.CircleHotSpot" />
+
+            
 
             
 
@@ -355,8 +417,12 @@
 
             
 
+            
+
              object, you must specify a value for the <see
              cref="P:System.Web.UI.WebControls.CircleHotSpot.Radius" />
+
+            
 
             
 
@@ -369,8 +435,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.CircleHotSpot.Y" />
+
+            
 
             
 
@@ -384,6 +454,8 @@
           <para
             >Gets or sets the distance from the center to the edge of the circular region defined by this <see
              cref="T:System.Web.UI.WebControls.CircleHotSpot" />
+
+            
 
             
 
@@ -421,8 +493,12 @@
 
             
 
+            
+
              property allows you to get or set a value that represents the x-coordinate of the center of the circular region defined by this <see
              cref="T:System.Web.UI.WebControls.CircleHotSpot" />
+
+            
 
             
 
@@ -435,8 +511,12 @@
 
             
 
+            
+
              object, you must specify a value for the <see
              cref="P:System.Web.UI.WebControls.CircleHotSpot.X" />
+
+            
 
             
 
@@ -449,8 +529,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.CircleHotSpot.Radius" />
+
+            
 
             
 
@@ -464,6 +548,8 @@
           <para
             >Gets or sets the x-coordinate of the center of the circular region defined by this <see
              cref="T:System.Web.UI.WebControls.CircleHotSpot" />
+
+            
 
             
 
@@ -501,8 +587,12 @@
 
             
 
+            
+
              property allows you to get or set a value that represents the y-coordinate of the center of the circular region defined by this <see
              cref="T:System.Web.UI.WebControls.CircleHotSpot" />
+
+            
 
             
 
@@ -515,8 +605,12 @@
 
             
 
+            
+
              object, you must specify a value for the <see
              cref="P:System.Web.UI.WebControls.CircleHotSpot.Y" />
+
+            
 
             
 
@@ -529,8 +623,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.CircleHotSpot.Radius" />
+
+            
 
             
 
@@ -544,6 +642,8 @@
           <para
             >Gets or sets the y-coordinate of the center of the circular region defined by this <see
              cref="T:System.Web.UI.WebControls.CircleHotSpot" />
+
+            
 
             
 

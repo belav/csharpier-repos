@@ -28,8 +28,12 @@
 
         
 
+        
+
         , use the <see
          cref="M:System.Data.DataRow.Delete" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
          class. As soon as you have deleted a row, any attempts to modify it will generate the <see
          cref="T:System.Data.DeletedRowInaccessibleException" />
+
+        
 
         
 
@@ -59,8 +67,12 @@
 
         
 
+        
+
          is thrown when you use one of the following properties or methods that try to get or set the value of a deleted <see
          cref="T:System.Data.DataRow" />
+
+        
 
         
 
@@ -77,6 +89,8 @@
 
             
 
+            
+
              property </para
           >
         </item>
@@ -88,12 +102,16 @@
 
             
 
+            
+
              property </para
           >
         </item>
         <item>
           <para>
             <see cref="M:System.Data.DataRow.BeginEdit" />
+
+            
 
             
 
@@ -111,8 +129,12 @@
 
         
 
+        
+
          of a <see
          cref="T:System.Data.DataRow" />
+
+        
 
         
 
@@ -125,8 +147,12 @@
 
         
 
+        
+
          method to retrieve it because deleted rows have no values available for the <see
          cref="M:System.Data.DataRow.Current" />
+
+        
 
         
 
@@ -140,6 +166,8 @@
       <para
         >Represents the exception that is thrown when an action is tried on a <see
          cref="T:System.Data.DataRow" />
+
+        
 
         
 
@@ -166,8 +194,12 @@
 
             
 
+            
+
              of a <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -181,6 +213,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.DeletedRowInaccessibleException" />
+
+            
 
             
 
@@ -213,8 +247,12 @@
 
             
 
+            
+
              of a <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -233,11 +271,15 @@
 
             
 
+            
+
              class with the specified string.</para
           >
         </summary>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -274,6 +316,8 @@
 
             
 
+            
+
              class with serialization information.</para
           >
         </summary>
@@ -284,10 +328,14 @@
 
           
 
+          
+
           The data that is required to serialize or deserialize an object. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -326,8 +374,12 @@
 
             
 
+            
+
              of a <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -346,11 +398,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

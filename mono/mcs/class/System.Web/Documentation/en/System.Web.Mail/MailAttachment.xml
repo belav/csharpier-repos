@@ -24,6 +24,8 @@
 
         
 
+        
+
         .</para
       >
     </summary>
@@ -51,8 +53,12 @@
 
             
 
+            
+
              class with the specified file name for the attachment. Sets the <see
              cref="T:System.Text.Encoding" />
+
+            
 
             
 
@@ -65,8 +71,12 @@
 
             
 
+            
+
              by default. Recommended alternative: <see
              cref="N:System.Net.Mail" />
+
+            
 
             
 
@@ -77,6 +87,8 @@
         </summary>
         <param name="filename">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -113,8 +125,12 @@
 
             
 
+            
+
              class with the specified file name and encoding type for the attachment. Recommended alternative: <see
              cref="N:System.Net.Mail" />
+
+            
 
             
 
@@ -130,6 +146,8 @@
 
           
 
+          
+
           The name of the attachment file. </param
         >
         <param name="encoding">
@@ -139,8 +157,12 @@
 
           
 
+          
+
           The type of <see
            cref="T:System.Web.Mail.MailEncoding" />
+
+          
 
           
 
@@ -176,6 +198,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -199,6 +223,8 @@
           <para
             >Gets the name of the attachment file. Recommended alternative: <see
              cref="N:System.Net.Mail" />
+
+            
 
             
 

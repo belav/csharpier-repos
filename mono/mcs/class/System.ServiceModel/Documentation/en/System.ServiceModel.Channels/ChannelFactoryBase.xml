@@ -32,8 +32,12 @@
 
         
 
+        
+
          class derives from the <see
          cref="T:System.ServiceModel.Channels.ChannelManagerBase" />
+
+        
 
         
 
@@ -46,11 +50,15 @@
 
         
 
+        
+
          interface for creating channels. The methods handle parameter validation and then delegate to protected, virtual or abstract methods that derived classes can override. </para
       >
       <para
         >Each of the protected virtual methods is automatically synchronized with respect to the other methods on the <see
          cref="T:System.ServiceModel.Channels.IChannelFactory" />
+
+        
 
         
 
@@ -87,6 +95,8 @@
 
             
 
+            
+
              if you want to specify other values for these operation timeouts.</para
           >
         </remarks>
@@ -95,6 +105,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.ChannelFactoryBase" />
+
+            
 
             
 
@@ -132,6 +144,8 @@
 
             
 
+            
+
              instead of the default constructor if you want to specify custom values for the open, send, receive, and close operation timeouts instead of using the service model default values.</para
           >
         </remarks>
@@ -140,6 +154,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.ChannelFactoryBase" />
+
+            
 
             
 
@@ -155,8 +171,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.IDefaultCommunicationTimeouts" />
+
+          
 
           
 
@@ -194,8 +214,12 @@
 
             
 
+            
+
              object. The default <see
              cref="M:System.ServiceModel.Channels.ChannelFactoryBase.#ctor" />
+
+            
 
             
 
@@ -208,8 +232,12 @@
 
             
 
+            
+
              property to a value of 1 minute. Use <see
              cref="M:System.ServiceModel.Channels.ChannelFactoryBase.#ctor(System.ServiceModel.IDefaultCommunicationTimeouts)" />
+
+            
 
             
 
@@ -252,8 +280,12 @@
 
             
 
+            
+
              object. The default <see
              cref="M:System.ServiceModel.Channels.ChannelFactoryBase.#ctor" />
+
+            
 
             
 
@@ -266,8 +298,12 @@
 
             
 
+            
+
              property to a value of 1 minute. Use <see
              cref="M:System.ServiceModel.Channels.ChannelFactoryBase.#ctor(System.ServiceModel.IDefaultCommunicationTimeouts)" />
+
+            
 
             
 
@@ -310,8 +346,12 @@
 
             
 
+            
+
              object. The default <see
              cref="M:System.ServiceModel.Channels.ChannelFactoryBase.#ctor" />
+
+            
 
             
 
@@ -324,8 +364,12 @@
 
             
 
+            
+
              property to a value of 10 minutes. Use <see
              cref="M:System.ServiceModel.Channels.ChannelFactoryBase.#ctor(System.ServiceModel.IDefaultCommunicationTimeouts)" />
+
+            
 
             
 
@@ -368,8 +412,12 @@
 
             
 
+            
+
              object. The default <see
              cref="M:System.ServiceModel.Channels.ChannelFactoryBase.#ctor" />
+
+            
 
             
 
@@ -382,8 +430,12 @@
 
             
 
+            
+
              property to a value of 1 minute. Use <see
              cref="M:System.ServiceModel.Channels.ChannelFactoryBase.#ctor(System.ServiceModel.IDefaultCommunicationTimeouts)" />
+
+            
 
             
 
@@ -438,6 +490,8 @@
         </returns>
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -509,6 +563,8 @@
 
             
 
+            
+
              that references the asynchronous on close operation. </para
           >
         </returns>
@@ -519,8 +575,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -535,8 +595,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -546,6 +610,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -587,8 +653,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -630,6 +700,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.IAsyncResult" />
 
@@ -637,8 +709,12 @@
 
           
 
+          
+
            returned by a call to the <see
            cref="M:System.ServiceModel.Channels.ChannelFactoryBase.OnBeginClose(System.TimeSpan,System.AsyncCallback,System.Object)" />
+
+          
 
           
 

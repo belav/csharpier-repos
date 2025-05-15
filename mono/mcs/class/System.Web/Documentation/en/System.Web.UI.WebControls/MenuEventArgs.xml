@@ -24,6 +24,8 @@
 
         
 
+        
+
          class is used to store the event data passed to an event handler for the events in the following table.</para
       >
       <list type="table">
@@ -52,6 +54,8 @@
 
               
 
+              
+
                control with another control on the page.</para
             >
           </description>
@@ -71,6 +75,8 @@
 
               
 
+              
+
                control.</para
             >
           </description>
@@ -79,6 +85,8 @@
       <para
         >Depending on the event raised, you can access the menu item clicked by the user or the menu item being bound to data by using the <see
          cref="P:System.Web.UI.WebControls.MenuEventArgs.Item" />
+
+        
 
         
 
@@ -94,8 +102,12 @@
 
         
 
+        
+
          class, see the <see
          cref="M:System.Web.UI.WebControls.MenuEventArgs.#ctor(System.Web.UI.WebControls.MenuItem)" />
+
+        
 
         
 
@@ -114,6 +126,8 @@
 
         
 
+        
+
          and <see
          cref="E:System.Web.UI.WebControls.Menu.MenuItemDataBound" />
 
@@ -121,8 +135,12 @@
 
         
 
+        
+
          events of a <see
          cref="T:System.Web.UI.WebControls.Menu" />
+
+        
 
         
 
@@ -154,8 +172,12 @@
 
             
 
+            
+
              class from the specified menu item. The following table shows initial property values for an instance of the <see
              cref="T:System.Web.UI.WebControls.MenuEventArgs" />
+
+            
 
             
 
@@ -221,8 +243,12 @@
 
                   
 
+                  
+
                    object specified by the <paramref
                    name="item" />
+
+                  
 
                   
 
@@ -244,11 +270,15 @@
 
             
 
+            
+
              class using the specified menu item.</para
           >
         </summary>
         <param name="item">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -261,8 +291,12 @@
 
           
 
+          
+
            event, this parameter represents the menu item clicked by the user. For the <see
            cref="E:System.Web.UI.WebControls.Menu.MenuItemDataBound" />
+
+          
 
           
 
@@ -300,8 +334,12 @@
 
             
 
+            
+
              class from the specified menu item, command source, and event arguments. The following table shows initial property values for an instance of the <see
              cref="T:System.Web.UI.WebControls.MenuEventArgs" />
+
+            
 
             
 
@@ -335,6 +373,8 @@
 
                   
 
+                  
+
                    parameter.</para
                 >
               </description>
@@ -349,6 +389,8 @@
                 <para
                   >The value of the <paramref
                    name="originalArgs.CommandName" />
+
+                  
 
                   
 
@@ -373,8 +415,12 @@
 
                   
 
+                  
+
                    specified by the <paramref
                    name="commandSource" />
+
+                  
 
                   
 
@@ -399,8 +445,12 @@
 
                   
 
+                  
+
                    object specified by the <paramref
                    name="item" />
+
+                  
 
                   
 
@@ -422,11 +472,15 @@
 
             
 
+            
+
              class using the specified menu item, command source, and event arguments.</para
           >
         </summary>
         <param name="item">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -439,8 +493,12 @@
 
           
 
+          
+
            event, this parameter represents the menu item clicked by the user. For the <see
            cref="E:System.Web.UI.WebControls.Menu.MenuItemDataBound" />
+
+          
 
           
 
@@ -472,8 +530,12 @@
 
             
 
+            
+
              property to access the <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -487,6 +549,8 @@
           <para
             >Gets the <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -522,6 +586,8 @@
 
             
 
+            
+
              property to access or modify the properties of the menu item associated with the event raised. For the <see
              cref="E:System.Web.UI.WebControls.Menu.MenuItemClick" />
 
@@ -529,8 +595,12 @@
 
             
 
+            
+
              event, this item represents the menu item clicked by the user. For the <see
              cref="E:System.Web.UI.WebControls.Menu.MenuItemDataBound" />
+
+            
 
             
 

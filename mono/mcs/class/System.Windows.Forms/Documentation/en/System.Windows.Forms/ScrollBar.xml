@@ -38,6 +38,8 @@
 
         
 
+        
+
          class. To create your own scroll bar class, inherit from the <see
          cref="T:System.Windows.Forms.VScrollBar" />
 
@@ -45,8 +47,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Windows.Forms.HScrollBar" />
+
+        
 
         
 
@@ -65,8 +71,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.ScrollBar.Maximum" />
+
+        
 
         
 
@@ -79,6 +89,8 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.ScrollBar.LargeChange" />
 
@@ -86,8 +98,12 @@
 
         
 
+        
+
          properties. To adjust the starting point of the scroll box, set the <see
          cref="P:System.Windows.Forms.ScrollBar.Value" />
+
+        
 
         
 
@@ -103,8 +119,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.ScrollBar.LargeChange" />
+
+        
 
         
 
@@ -117,8 +137,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.ScrollBar.LargeChange" />
+
+        
 
         
 
@@ -148,8 +172,12 @@
 
             
 
+            
+
              property is set to false when a new instance of a <see
              cref="T:System.Windows.Forms.ScrollBar" />
+
+            
 
             
 
@@ -163,6 +191,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ScrollBar" />
+
+            
 
             
 
@@ -209,6 +239,8 @@
 
             
 
+            
+
              property has no effect on the appearance of the control.</para
           >
         </remarks>
@@ -217,6 +249,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Windows.Forms.ScrollBar" />
+
+            
 
             
 
@@ -257,6 +291,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -265,6 +301,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ScrollBar.AutoSize" />
+
+            
 
             
 
@@ -328,6 +366,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -385,6 +425,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ScrollBar.BackgroundImage" />
+
+            
 
             
 
@@ -457,6 +499,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -487,8 +531,12 @@
 
             
 
+            
+
              control sets the <see
              cref="F:System.Windows.Forms.ControlStyles.StandardClick" />
+
+            
 
             
 
@@ -501,8 +549,12 @@
 
             
 
+            
+
              will not raise the <see
              cref="E:System.Windows.Forms.ScrollBar.Click" />
+
+            
 
             
 
@@ -516,6 +568,8 @@
           <para
             >Occurs when the control is clicked if the <see
              cref="F:System.Windows.Forms.ControlStyles.StandardClick" />
+
+            
 
             
 
@@ -570,8 +624,12 @@
 
             
 
+            
+
              class, this property always returns the <see
              cref="F:System.Windows.Forms.ImeMode.Disable" />
+
+            
 
             
 
@@ -615,6 +673,8 @@
 
             
 
+            
+
              control edges and its contents.</para
           >
         </summary>
@@ -645,8 +705,12 @@
 
             
 
+            
+
              control sets the <see
              cref="F:System.Windows.Forms.ControlStyles.StandardClick" />
+
+            
 
             
 
@@ -659,8 +723,12 @@
 
             
 
+            
+
              will not raise the <see
              cref="E:System.Windows.Forms.ScrollBar.DoubleClick" />
+
+            
 
             
 
@@ -674,6 +742,8 @@
           <para
             >Occurs when the <see
              cref="T:System.Windows.Forms.ScrollBar" />
+
+            
 
             
 
@@ -736,6 +806,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ScrollBar.Font" />
+
+            
 
             
 
@@ -809,6 +881,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -846,8 +920,12 @@
 
             
 
+            
+
              method to return the bounds that the control should be scaled by. You may override this method if you wish to reuse <see
              cref="M:System.Windows.Forms.Control.ScaleControl(System.Drawing.SizeF,System.Windows.Forms.BoundsSpecified)" />
+
+            
 
             
 
@@ -866,6 +944,8 @@
 
             
 
+            
+
              is scaled by a specified amount.</para
           >
         </summary>
@@ -874,6 +954,8 @@
           <para
             >A <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -889,8 +971,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -905,8 +991,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.SizeF" />
+
+          
 
           
 
@@ -921,6 +1011,8 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.BoundsSpecified" />
 
@@ -928,8 +1020,12 @@
 
           
 
+          
+
            values that indicate the how to define the control's size and position returned by <see
            cref="M:System.Windows.Forms.ScrollBar.GetScaledBounds(System.Drawing.Rectangle,System.Drawing.SizeF,System.Windows.Forms.BoundsSpecified)" />
+
+          
 
           
 
@@ -995,6 +1091,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -1030,8 +1128,12 @@
 
             
 
+            
+
              property changes according to the value set in the <see
              cref="P:System.Windows.Forms.ScrollBar.LargeChange" />
+
+            
 
             
 
@@ -1050,8 +1152,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ScrollBar.LargeChange" />
+
+            
 
             
 
@@ -1064,8 +1170,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ScrollBar.LargeChange" />
+
+            
 
             
 
@@ -1079,6 +1189,8 @@
           <para
             >Gets or sets a value to be added to or subtracted from the <see
              cref="P:System.Windows.Forms.ScrollBar.Value" />
+
+            
 
             
 
@@ -1119,11 +1231,15 @@
 
             
 
+            
+
              property dynamically to match the size of the scroll bar's parent in proportion to pixel size or to the number of rows or lines displayed.</para
           >
           <para
             >The maximum value can only be reached programmatically. The value of a scroll bar cannot reach its maximum value through user interaction at run time. The maximum value that can be reached through user interaction is equal to 1 plus the <see
              cref="P:System.Windows.Forms.ScrollBar.Maximum" />
+
+            
 
             
 
@@ -1136,8 +1252,12 @@
 
             
 
+            
+
              property value. If necessary, you can set the <see
              cref="P:System.Windows.Forms.ScrollBar.Maximum" />
+
+            
 
             
 
@@ -1214,8 +1334,12 @@
 
             
 
+            
+
              control does not raise the <see
              cref="E:System.Windows.Forms.ScrollBar.MouseClick" />
+
+            
 
             
 
@@ -1229,6 +1353,8 @@
           <para
             >Occurs when the user clicks the <see
              cref="T:System.Windows.Forms.ScrollBar" />
+
+            
 
             
 
@@ -1270,8 +1396,12 @@
 
             
 
+            
+
              control does not raise the <see
              cref="E:System.Windows.Forms.ScrollBar.MouseDoubleClick" />
+
+            
 
             
 
@@ -1285,6 +1415,8 @@
           <para
             >Occurs when the user double-clicks the <see
              cref="T:System.Windows.Forms.ScrollBar" />
+
+            
 
             
 
@@ -1323,8 +1455,12 @@
 
             
 
+            
+
              control does not raise the <see
              cref="E:System.Windows.Forms.ScrollBar.MouseDown" />
+
+            
 
             
 
@@ -1400,8 +1536,12 @@
 
             
 
+            
+
              control does not raise the <see
              cref="E:System.Windows.Forms.ScrollBar.MouseUp" />
+
+            
 
             
 
@@ -1442,6 +1582,8 @@
 
           
 
+          
+
           The event data.</param
         >
       </Docs>
@@ -1467,6 +1609,8 @@
         <remarks>To be added.</remarks>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1504,8 +1648,12 @@
 
             
 
+            
+
              control will convert mouse wheel movements to scrolling when the <see
              cref="T:System.Windows.Forms.ScrollBar" />
+
+            
 
             
 
@@ -1523,11 +1671,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ScrollBar.OnMouseWheel(System.Windows.Forms.MouseEventArgs)" />
+
+            
 
             
 
@@ -1546,11 +1698,15 @@
 
             
 
+            
+
              event</para
           >
         </summary>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1589,11 +1745,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ScrollBar.OnScroll(System.Windows.Forms.ScrollEventArgs)" />
+
+            
 
             
 
@@ -1612,6 +1772,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1622,8 +1784,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ScrollEventArgs" />
+
+          
 
           
 
@@ -1659,11 +1825,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ScrollBar.OnValueChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1682,6 +1852,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1692,8 +1864,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1758,6 +1934,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1794,8 +1972,12 @@
 
             
 
+            
+
              property changes according to the value set in the <see
              cref="P:System.Windows.Forms.ScrollBar.SmallChange" />
+
+            
 
             
 
@@ -1811,8 +1993,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ScrollBar.LargeChange" />
+
+            
 
             
 
@@ -1825,8 +2011,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ScrollBar.LargeChange" />
+
+            
 
             
 
@@ -1840,6 +2030,8 @@
           <para
             >Gets or sets the value to be added to or subtracted from the <see
              cref="P:System.Windows.Forms.ScrollBar.Value" />
+
+            
 
             
 
@@ -1877,8 +2069,12 @@
 
             
 
+            
+
              property value of false are not included in the collection of controls in the tab order. You can manipulate the tab order by setting the control's <see
              cref="P:System.Windows.Forms.Control.TabIndex" />
+
+            
 
             
 
@@ -1892,6 +2088,8 @@
           <para
             >Gets or sets a value indicating whether the user can give the focus to the <see
              cref="T:System.Windows.Forms.ScrollBar" />
+
+            
 
             
 
@@ -1962,6 +2160,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -1989,6 +2189,8 @@
 
             
 
+            
+
              method returns a string that includes the type and the values for the <see
              cref="P:System.Windows.Forms.ScrollBar.Minimum" />
             <see cref="P:System.Windows.Forms.ScrollBar.Minimum" />
@@ -1997,8 +2199,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.ScrollBar.Value" />
+
+            
 
             
 
@@ -2017,6 +2223,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -2025,6 +2233,8 @@
           <para
             >A string that represents the current <see
              cref="T:System.Windows.Forms.ScrollBar" />
+
+            
 
             
 
@@ -2057,8 +2267,12 @@
 
             
 
+            
+
              method redraws the <see
              cref="T:System.Windows.Forms.ScrollBar" />
+
+            
 
             
 
@@ -2071,8 +2285,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.ScrollBar.Maximum" />
+
+            
 
             
 
@@ -2085,8 +2303,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.ScrollBar.Value" />
+
+            
 
             
 
@@ -2100,6 +2322,8 @@
           <para
             >Updates the <see
              cref="T:System.Windows.Forms.ScrollBar" />
+
+            
 
             
 
@@ -2160,6 +2384,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -2173,8 +2399,12 @@
 
             
 
+            
+
              property is changed, either by a <see
              cref="E:System.Windows.Forms.ScrollBar.Scroll" />
+
+            
 
             
 

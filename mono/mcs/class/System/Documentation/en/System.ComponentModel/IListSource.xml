@@ -31,6 +31,8 @@
 
         
 
+        
+
          itself.</para
       >
       <para>Binding to data can occur at either run time or in a designer, but there are rules for each. At run time, you can bind to data in any of the following: </para>
@@ -49,8 +51,12 @@
 
             
 
+            
+
             , provided the implementer has a strongly typed <see
              cref="P:System.Collections.IList.Item(System.Int32)" />
+
+            
 
             
 
@@ -63,8 +69,12 @@
 
             
 
+            
+
              is anything but <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -77,6 +87,8 @@
 
             
 
+            
+
              private. If you want to create an <see
              cref="T:System.Collections.IList" />
 
@@ -84,8 +96,12 @@
 
             
 
+            
+
              that follows the rules of a strongly typed collection, you should derive from <see
              cref="T:System.Collections.CollectionBase" />
+
+            
 
             
 
@@ -103,6 +119,8 @@
 
             
 
+            
+
             .</para
           >
         </item>
@@ -110,6 +128,8 @@
       <para
         >In a designer, you can initialize binding to <see
          cref="T:System.ComponentModel.Component" />
+
+        
 
         
 
@@ -126,6 +146,8 @@
 
           
 
+          
+
            can return an <see
            cref="T:System.Collections.IList" />
 
@@ -133,8 +155,12 @@
 
           
 
+          
+
            that contains a collection of <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -174,8 +200,12 @@
 
             
 
+            
+
              returns true because the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -188,8 +218,12 @@
 
             
 
+            
+
              returns false because the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -203,6 +237,8 @@
           <para
             >Gets a value indicating whether the collection is a collection of <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -241,8 +277,12 @@
 
             
 
+            
+
              that can be bound to a data source from an object that does not implement an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -256,6 +296,8 @@
           <para
             >An <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 

@@ -22,8 +22,12 @@
 
         
 
+        
+
          applies system colors and a flat visual style to <see
          cref="T:System.Windows.Forms.ToolStrip" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
          applies a palette of <see
          cref="T:System.Drawing.SystemColors" />
+
+        
 
         
 
@@ -54,6 +62,8 @@
       <para
         >Handles the painting functionality for <see
          cref="T:System.Windows.Forms.ToolStrip" />
+
+        
 
         
 
@@ -78,6 +88,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ToolStripSystemRenderer" />
+
+            
 
             
 

@@ -23,6 +23,8 @@
 
         
 
+        
+
          is a base class that provides implementations that support a Multipurpose Internet Mail Extensions (MIME) content type and message version, and defines the interface for the serialization and deserialization of messages according to that content type. Use it as a base class for writing your own custom encoder.</para
       >
       <para>Use this class if you want to implement a custom message encoder. To implement your own custom message encoder, you must provide custom implementations of the following abstract base classes:</para>
@@ -51,8 +53,12 @@
 
         
 
+        
+
          to return an instance of your custom <see
          cref="T:System.ServiceModel.Channels.MessageEncoder" />
+
+        
 
         
 
@@ -65,8 +71,12 @@
 
         
 
+        
+
          to the binding element stack used to configure the service or client by overriding the <see
          cref="M:System.ServiceModel.Channels.MessageEncodingBindingElement.CreateMessageEncoderFactory" />
+
+        
 
         
 
@@ -82,11 +92,15 @@
 
         
 
+        
+
          class, which most commonly serves as a factory for XML readers and XML writers that support specific types of XML encodings. </para
       >
       <para
         >The key methods on <see
          cref="T:System.ServiceModel.Channels.MessageEncoder" />
+
+        
 
         
 
@@ -99,8 +113,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.ServiceModel.Channels.MessageEncoder.ReadMessage" />
+
+        
 
         
 
@@ -113,8 +131,12 @@
 
         
 
+        
+
          takes a <see
          cref="T:System.ServiceModel.Channels.Message" />
+
+        
 
         
 
@@ -127,8 +149,12 @@
 
         
 
+        
+
          object. <see
          cref="M:System.ServiceModel.Channels.MessageEncoder.ReadMessage" />
+
+        
 
         
 
@@ -141,8 +167,12 @@
 
         
 
+        
+
          object and a maximum header size and returns a <see
          cref="T:System.ServiceModel.Channels.Message" />
+
+        
 
         
 
@@ -180,6 +210,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -208,8 +240,12 @@
 
             
 
+            
+
             , Section 5.1. <see
              cref="http://go.microsoft.com/fwlink/?LinkId=95944">RFC 2046</see>
+
+            
 
             
 
@@ -267,11 +303,15 @@
 
             
 
+            
+
             requested if it is present or null if it is not.</para
           >
         </returns>
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -311,6 +351,8 @@
 
             
 
+            
+
              class is used to describe the data that is contained in a message and is used to determine if there is a content-type match.</para
           >
           <para
@@ -321,8 +363,12 @@
 
             
 
+            
+
              Section 5.1. <see
              cref="http://go.microsoft.com/fwlink/?LinkId=95944">RFC 2046</see>
+
+            
 
             
 
@@ -341,6 +387,8 @@
         </returns>
         <param name="contentType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -400,6 +448,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -445,11 +495,15 @@
 
             
 
+            
+
              that is read from the buffer specified.</para
           >
         </returns>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -462,8 +516,12 @@
 
           
 
+          
+
            of type <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -478,8 +536,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BufferManager" />
+
+          
 
           
 
@@ -525,11 +587,15 @@
 
             
 
+            
+
              that is read from the stream specified.</para
           >
         </returns>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -542,10 +608,14 @@
 
           
 
+          
+
            object from which the message is read.</param
         >
         <param name="maxSizeOfHeaders">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -592,11 +662,15 @@
 
             
 
+            
+
              that is read from the stream specified.</para
           >
         </returns>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -609,8 +683,12 @@
 
           
 
+          
+
            of type <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -625,8 +703,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BufferManager" />
+
+          
 
           
 
@@ -636,6 +718,8 @@
         >
         <param name="contentType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -682,6 +766,8 @@
 
             
 
+            
+
              that is read from the stream specified.</para
           >
         </returns>
@@ -692,8 +778,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -708,10 +798,14 @@
 
           
 
+          
+
           The maximum size of the headers that can be read from the message.</param
         >
         <param name="contentType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -780,6 +874,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Message" />
 
@@ -787,8 +883,12 @@
 
           
 
+          
+
            to write to the <paramref
            name="stream" />
+
+          
 
           
 
@@ -803,6 +903,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.Stream" />
 
@@ -810,8 +912,12 @@
 
           
 
+          
+
            object to which the <paramref
            name="message" />
+
+          
 
           
 
@@ -853,8 +959,12 @@
 
             
 
+            
+
              with <paramref
              name="messageOffset" />
+
+            
 
             
 
@@ -877,6 +987,8 @@
 
             
 
+            
+
              of type byte that provides the buffer to which the message is serialized.</para
           >
         </returns>
@@ -887,8 +999,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Message" />
+
+          
 
           
 
@@ -903,6 +1019,8 @@
 
           
 
+          
+
           The maximum message size that can be written.</param
         >
         <param name="bufferManager">
@@ -912,8 +1030,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BufferManager" />
+
+          
 
           
 
@@ -956,6 +1078,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -973,6 +1097,8 @@
 
             
 
+            
+
              of type byte that provides the buffer to which the message is serialized.</para
           >
         </returns>
@@ -983,8 +1109,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Message" />
+
+          
 
           
 
@@ -999,10 +1129,14 @@
 
           
 
+          
+
           The maximum message size that can be written.</param
         >
         <param name="bufferManager">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1015,10 +1149,14 @@
 
           
 
+          
+
            that manages the buffer to which the message is written.</param
         >
         <param name="messageOffset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

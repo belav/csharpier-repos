@@ -40,8 +40,12 @@
 
         
 
+        
+
          can be used to represent a reference to an index of an array of one or more dimensions. Use <see
          cref="T:System.CodeDom.CodeIndexerExpression" />
+
+        
 
         
 
@@ -54,8 +58,12 @@
 
         
 
+        
+
          property indicates the indexer object. The <see
          cref="P:System.CodeDom.CodeArrayIndexerExpression.Indices" />
+
+        
 
         
 
@@ -91,6 +99,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeArrayIndexerExpression" />
+
+            
 
             
 
@@ -139,11 +149,15 @@
 
             
 
+            
+
              class using the specified target object and indexes.</para
           >
         </summary>
         <param name="targetObject">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -156,10 +170,14 @@
 
           
 
+          
+
            that indicates the array the indexer targets. </param
         >
         <param name="indices">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -199,6 +217,8 @@
 
             
 
+            
+
              can contain a <see
              cref="T:System.CodeDom.CodeExpression" />
 
@@ -206,8 +226,12 @@
 
             
 
+            
+
              that specifies a single index within the target array, or multiple <see
              cref="T:System.CodeDom.CodeExpression" />
+
+            
 
             
 
@@ -253,6 +277,8 @@
 
             
 
+            
+
             , a <see
              cref="T:System.CodeDom.CodePropertyReferenceExpression" />
 
@@ -260,8 +286,12 @@
 
             
 
+            
+
             , or a <see
              cref="T:System.CodeDom.CodeFieldReferenceExpression" />
+
+            
 
             
 

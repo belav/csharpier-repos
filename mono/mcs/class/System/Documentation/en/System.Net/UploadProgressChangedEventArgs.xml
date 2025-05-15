@@ -29,6 +29,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -42,8 +44,12 @@
 
         
 
+        
+
          event of a <see
          cref="T:System.Net.WebClient" />
+
+        
 
         
 
@@ -78,8 +84,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.UploadProgressChangedEventArgs.TotalBytesToReceive" />
+
+            
 
             
 
@@ -95,6 +105,8 @@
 
             
 
+            
+
              property. When the upload is complete, <see
              cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" />
 
@@ -102,8 +114,12 @@
 
             
 
+            
+
              will be 50%. When the download completes, <see
              cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" />
+
+            
 
             
 
@@ -142,8 +158,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.UploadProgressChangedEventArgs.TotalBytesToReceive" />
+
+            
 
             
 
@@ -159,6 +179,8 @@
 
             
 
+            
+
              property. When the upload is complete, <see
              cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" />
 
@@ -166,8 +188,12 @@
 
             
 
+            
+
              will be 50%. When the download completes, <see
              cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" />
+
+            
 
             
 
@@ -206,6 +232,8 @@
 
             
 
+            
+
              property.</para
           >
           <para
@@ -216,8 +244,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.UploadProgressChangedEventArgs.TotalBytesToReceive" />
+
+            
 
             
 
@@ -233,6 +265,8 @@
 
             
 
+            
+
              property. When the upload is complete, <see
              cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" />
 
@@ -240,8 +274,12 @@
 
             
 
+            
+
              will be 50%. When the download completes, <see
              cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" />
+
+            
 
             
 
@@ -255,6 +293,8 @@
           <para
             >Gets the total number of bytes in a <see
              cref="T:System.Net.WebClient" />
+
+            
 
             
 
@@ -289,6 +329,8 @@
 
             
 
+            
+
              property.</para
           >
           <para
@@ -299,8 +341,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.UploadProgressChangedEventArgs.TotalBytesToReceive" />
+
+            
 
             
 
@@ -316,6 +362,8 @@
 
             
 
+            
+
              property. When the upload is complete, <see
              cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" />
 
@@ -323,8 +371,12 @@
 
             
 
+            
+
              will be 50%. When the download completes, <see
              cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" />
+
+            
 
             
 

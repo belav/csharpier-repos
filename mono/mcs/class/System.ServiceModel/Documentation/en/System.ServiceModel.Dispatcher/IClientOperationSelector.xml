@@ -24,8 +24,12 @@
 
         
 
+        
+
          interface to create a custom operation selector that can be attached to the <see
          cref="P:System.ServiceModel.Dispatcher.ClientRuntime.OperationSelector" />
+
+        
 
         
 
@@ -63,6 +67,8 @@
           <para
             >The value returned is false unless the user has overloaded methods. If false is returned then the array of objects passed to <see
              cref="M:System.ServiceModel.Dispatcher.IClientOperationSelector.SelectOperation(System.Reflection.MethodBase,System.Object[])" />
+
+            
 
             
 
@@ -114,10 +120,14 @@
 
           
 
+          
+
           The method invoked.</param
         >
         <param name="parameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

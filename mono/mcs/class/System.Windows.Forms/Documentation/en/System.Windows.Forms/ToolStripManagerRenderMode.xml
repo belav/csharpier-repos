@@ -20,8 +20,12 @@
 
         
 
+        
+
          is used by the <see
          cref="T:System.Windows.Forms.ToolStripManager" />
+
+        
 
         
 
@@ -34,6 +38,8 @@
 
         
 
+        
+
          objects that have their <see
          cref="P:System.Windows.Forms.ToolStrip.RenderMode" />
 
@@ -41,8 +47,12 @@
 
         
 
+        
+
          property set to <see
          cref="F:System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode" />
+
+        
 
         
 
@@ -58,8 +68,12 @@
 
         
 
+        
+
          to <see
          cref="F:System.Windows.Forms.ToolStripManagerRenderMode.Custom" />
+
+        
 
         
 
@@ -72,8 +86,12 @@
 
         
 
+        
+
          is returned <see
          cref="F:System.Windows.Forms.ToolStripManagerRenderMode.Custom" />
+
+        
 
         
 
@@ -86,8 +104,12 @@
 
         
 
+        
+
          is set to an extension of the <see
          cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+        
 
         
 
@@ -100,8 +122,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Windows.Forms.ToolStripSystemRenderer" />
+
+        
 
         
 
@@ -115,6 +141,8 @@
       <para
         >Specifies the painting style applied to multiple <see
          cref="T:System.Windows.Forms.ToolStrip" />
+
+        
 
         
 
@@ -143,6 +171,8 @@
 
             
 
+            
+
              other than <see
              cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" />
 
@@ -150,8 +180,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Windows.Forms.ToolStripSystemRenderer" />
+
+            
 
             
 
@@ -188,6 +222,8 @@
 
             
 
+            
+
              to paint.</para
           >
         </summary>
@@ -209,6 +245,8 @@
           <para
             >Indicates the use of a <see
              cref="T:System.Windows.Forms.ToolStripSystemRenderer" />
+
+            
 
             
 

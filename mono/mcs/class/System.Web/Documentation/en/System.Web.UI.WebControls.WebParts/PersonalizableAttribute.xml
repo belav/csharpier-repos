@@ -46,8 +46,12 @@
 
         
 
+        
+
          being thrown. Parameterized properties also throw an <see
          cref="T:System.Web.HttpException" />
+
+        
 
         
 
@@ -63,6 +67,8 @@
 
         
 
+        
+
          interface is used.</para
       >
       <para
@@ -70,6 +76,8 @@
          type="text/html">
           <a href="7dc34f74-52aa-4082-b98d-2bcf9e07e320">Web Parts Personalization</a>
         </format>
+
+        
 
         
 
@@ -100,8 +108,12 @@
 
             
 
+            
+
              property to true, the <see
              cref="P:System.Web.UI.WebControls.WebParts.PersonalizableAttribute.Scope" />
+
+            
 
             
 
@@ -114,8 +126,12 @@
 
             
 
+            
+
             , and the <see
              cref="P:System.Web.UI.WebControls.WebParts.PersonalizableAttribute.IsSensitive" />
+
+            
 
             
 
@@ -129,6 +145,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.WebParts.PersonalizableAttribute" />
+
+            
 
             
 
@@ -163,8 +181,12 @@
 
             
 
+            
+
              property to the value of the Boolean parameter, the <see
              cref="P:System.Web.UI.WebControls.WebParts.PersonalizableAttribute.Scope" />
+
+            
 
             
 
@@ -177,8 +199,12 @@
 
             
 
+            
+
             , and the <see
              cref="P:System.Web.UI.WebControls.WebParts.PersonalizableAttribute.IsSensitive" />
+
+            
 
             
 
@@ -198,11 +224,15 @@
 
             
 
+            
+
              class using the provided parameter.</para
           >
         </summary>
         <param name="isPersonalizable">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -236,6 +266,8 @@
 
             
 
+            
+
              property to true, the <see
              cref="P:System.Web.UI.WebControls.WebParts.PersonalizableAttribute.Scope" />
 
@@ -243,8 +275,12 @@
 
             
 
+            
+
              property to the parameter specified, and the <see
              cref="P:System.Web.UI.WebControls.WebParts.PersonalizableAttribute.IsSensitive" />
+
+            
 
             
 
@@ -263,6 +299,8 @@
 
             
 
+            
+
              class using the provided parameter.</para
           >
         </summary>
@@ -273,8 +311,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.WebParts.PersonalizationScope" />
+
+          
 
           
 
@@ -309,6 +351,8 @@
 
             
 
+            
+
              property to true, the <see
              cref="P:System.Web.UI.WebControls.WebParts.PersonalizableAttribute.Scope" />
 
@@ -316,8 +360,12 @@
 
             
 
+            
+
              property to the first parameter specified, and the <see
              cref="P:System.Web.UI.WebControls.WebParts.PersonalizableAttribute.IsSensitive" />
+
+            
 
             
 
@@ -336,11 +384,15 @@
 
             
 
+            
+
              class using the provided parameters.</para
           >
         </summary>
         <param name="scope">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -353,10 +405,14 @@
 
           
 
+          
+
            indicating the scope of the personalization.</param
         >
         <param name="isSensitive">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -390,11 +446,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >This field and the <see
              cref="F:System.Web.UI.WebControls.WebParts.PersonalizableAttribute.NotPersonalizable" />
+
+            
 
             
 
@@ -433,8 +493,12 @@
 
             
 
+            
+
              instances are considered equal if their <see
              cref="P:System.Web.UI.WebControls.WebParts.PersonalizableAttribute.IsPersonalizable" />
+
+            
 
             
 
@@ -447,8 +511,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Web.UI.WebControls.WebParts.PersonalizableAttribute.IsSensitive" />
+
+            
 
             
 
@@ -467,8 +535,12 @@
 
             
 
+            
+
              and another <see
              cref="T:System.Web.UI.WebControls.WebParts.PersonalizableAttribute" />
+
+            
 
             
 
@@ -488,8 +560,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.WebParts.PersonalizableAttribute" />
+
+          
 
           
 
@@ -521,6 +597,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.UI.WebControls.WebParts.PersonalizableAttribute.Scope" />
 
@@ -528,8 +606,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Web.UI.WebControls.WebParts.PersonalizableAttribute.IsSensitive" />
+
+            
 
             
 
@@ -575,8 +657,12 @@
 
             
 
+            
+
              objects, with one object in the collection for each property of the type specified that is marked as being personalizable, where <see
              cref="P:System.Web.UI.WebControls.WebParts.PersonalizableAttribute.IsPersonalizable" />
+
+            
 
             
 
@@ -587,6 +673,8 @@
           <para
             >The <paramref
              name="type" />
+
+            
 
             
 
@@ -605,6 +693,8 @@
 
             
 
+            
+
              objects for the properties that match the parameter type and are marked as personalizable.</para
           >
         </summary>
@@ -618,11 +708,15 @@
 
             
 
+            
+
              of personalizable properties.</para
           >
         </returns>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -654,6 +748,8 @@
 
             
 
+            
+
              field indicates no support for personalization.</para
           >
         </remarks>
@@ -667,6 +763,8 @@
 
             
 
+            
+
              field.</para
           >
         </summary>
@@ -675,6 +773,8 @@
           <para
             >true if the attribute instance equals the static <see
              cref="F:System.Web.UI.WebControls.WebParts.PersonalizableAttribute.Default" />
+
+            
 
             
 
@@ -702,6 +802,8 @@
           <para
             >This value is set when an instance of the <see
              cref="T:System.Web.UI.WebControls.WebParts.PersonalizableAttribute" />
+
+            
 
             
 
@@ -738,6 +840,8 @@
 
             
 
+            
+
              class is created.</para
           >
           <para
@@ -748,8 +852,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Web.UI.WebControls.WebParts.WebPartExportMode.NonSensitiveData" />
+
+            
 
             
 
@@ -788,6 +896,8 @@
 
             
 
+            
+
              value.</para
           >
         </remarks>
@@ -801,6 +911,8 @@
 
             
 
+            
+
              and the specified <see
              cref="T:System.Web.UI.WebControls.WebParts.PersonalizableAttribute" />
 
@@ -808,8 +920,12 @@
 
             
 
+            
+
              have the same <see
              cref="P:System.Web.UI.WebControls.WebParts.PersonalizableAttribute.IsPersonalizable" />
+
+            
 
             
 
@@ -828,6 +944,8 @@
 
             
 
+            
+
              value; otherwise, false.</para
           >
         </returns>
@@ -838,8 +956,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.WebParts.PersonalizableAttribute" />
+
+          
 
           
 
@@ -868,6 +990,8 @@
           <para
             >This field and the <see
              cref="F:System.Web.UI.WebControls.WebParts.PersonalizableAttribute.Default" />
+
+            
 
             
 
@@ -906,6 +1030,8 @@
 
             
 
+            
+
              property set to <see
              cref="F:System.Web.UI.WebControls.WebParts.PersonalizationScope.User" />
 
@@ -913,8 +1039,12 @@
 
             
 
+            
+
              and its <see
              cref="P:System.Web.UI.WebControls.WebParts.PersonalizableAttribute.IsSensitive" />
+
+            
 
             
 
@@ -954,11 +1084,15 @@
 
             
 
+            
+
              class is created.</para
           >
           <para
             >This property controls when the property value is saved and loaded, depending on the <see
              cref="P:System.Web.UI.WebControls.WebParts.WebPartPersonalization.Scope" />
+
+            
 
             
 
@@ -972,6 +1106,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.UI.WebControls.WebParts.PersonalizationScope" />
+
+            
 
             
 
@@ -1006,6 +1142,8 @@
 
             
 
+            
+
              property set to <see
              cref="F:System.Web.UI.WebControls.WebParts.PersonalizationScope.Shared" />
 
@@ -1013,8 +1151,12 @@
 
             
 
+            
+
              and its <see
              cref="P:System.Web.UI.WebControls.WebParts.PersonalizableAttribute.IsSensitive" />
+
+            
 
             
 
@@ -1053,6 +1195,8 @@
 
             
 
+            
+
              property set to <see
              cref="F:System.Web.UI.WebControls.WebParts.PersonalizationScope.User" />
 
@@ -1060,8 +1204,12 @@
 
             
 
+            
+
              and its <see
              cref="P:System.Web.UI.WebControls.WebParts.PersonalizableAttribute.IsSensitive" />
+
+            
 
             
 
@@ -1075,6 +1223,8 @@
           <para
             >Returns an attribute instance that indicates support for personalization in <see
              cref="F:System.Web.UI.WebControls.WebParts.PersonalizationScope.User" />
+
+            
 
             
 

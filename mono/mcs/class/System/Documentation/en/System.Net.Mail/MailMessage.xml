@@ -30,8 +30,12 @@
 
         
 
+        
+
          class are used to construct e-mail messages that are transmitted to an SMTP server for delivery using the <see
          cref="T:System.Net.Mail.SmtpClient" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          is used to initialize a <see
          cref="T:System.Net.Mail.MailMessage" />
+
+        
 
         
 
@@ -61,11 +69,15 @@
 
         
 
+        
+
          object.</para
       >
       <para
         >The primary mail message headers and elements for the message may be set using the following properties of the <see
          cref="T:System.Net.Mail.MailMessage" />
+
+        
 
         
 
@@ -203,8 +215,12 @@
 
         
 
+        
+
          class also allows an application to access the headers collection for the message using the <see
          cref="P:System.Net.Mail.MailMessage.Headers" />
+
+        
 
         
 
@@ -217,8 +233,12 @@
 
         
 
+        
+
          instance is sent. Before a message is sent, only headers specifically added to this collection in the <see
          cref="P:System.Net.Mail.MailMessage.Headers" />
+
+        
 
         
 
@@ -231,8 +251,12 @@
 
         
 
+        
+
          instance is sent, the <see
          cref="P:System.Net.Mail.MailMessage.Headers" />
+
+        
 
         
 
@@ -245,6 +269,8 @@
 
         
 
+        
+
          class or parameters passed when a <see
          cref="Overload:System.Net.Mail.MailMessage.#ctor" />
 
@@ -252,8 +278,12 @@
 
         
 
+        
+
          is used to initialize a <see
          cref="T:System.Net.Mail.MailMessage" />
+
+        
 
         
 
@@ -269,8 +299,12 @@
 
         
 
+        
+
          class should only be set using the <see
          cref="T:System.Net.Mail.MailMessage" />
+
+        
 
         
 
@@ -283,8 +317,12 @@
 
         
 
+        
+
          initializes a <see
          cref="T:System.Net.Mail.MailMessage" />
+
+        
 
         
 
@@ -297,8 +335,12 @@
 
         
 
+        
+
          property and any values set for these headers using the <see
          cref="P:System.Net.Mail.MailMessage.Headers" />
+
+        
 
         
 
@@ -361,8 +403,12 @@
 
         
 
+        
+
          property, the <see
          cref="T:System.Net.Mail.MailMessage" />
+
+        
 
         
 
@@ -378,8 +424,12 @@
 
         
 
+        
+
          property to specify copies of an e-mail message in different formats. For example, if you send a message in HTML, you might also want to provide a plain text version in case some of the recipients use e-mail readers that cannot display HTML content. For an example that demonstrates creating a message with alternate views, see <see
          cref="P:System.Net.Mail.MailMessage.AlternateViews" />
+
+        
 
         
 
@@ -395,8 +445,12 @@
 
         
 
+        
+
          property to add attachments to an e-mail message. For an example that demonstrates creating a message with an attachment, see <see
          cref="P:System.Net.Mail.MailMessage.Attachments" />
+
+        
 
         
 
@@ -412,8 +466,12 @@
 
         
 
+        
+
          or <see
          cref="Overload:System.Net.Mail.SmtpClient.SendAsync" />
+
+        
 
         
 
@@ -427,6 +485,8 @@
       <para
         >Represents an e-mail message that can be sent using the <see
          cref="T:System.Net.Mail.SmtpClient" />
+
+        
 
         
 
@@ -463,6 +523,8 @@
 
             
 
+            
+
             , if it exists.</para
           >
         </remarks>
@@ -471,6 +533,8 @@
           <para
             >Initializes an empty instance of the <see
              cref="T:System.Net.Mail.MailMessage" />
+
+            
 
             
 
@@ -511,8 +575,12 @@
 
             
 
+            
+
              property is initialized using <paramref
              name="from" />
+
+            
 
             
 
@@ -525,8 +593,12 @@
 
             
 
+            
+
              property is initialized using <paramref
              name="to" />
+
+            
 
             
 
@@ -545,8 +617,12 @@
 
             
 
+            
+
              class by using the specified <see
              cref="T:System.Net.Mail.MailAddress" />
+
+            
 
             
 
@@ -562,8 +638,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.Mail.MailAddress" />
+
+          
 
           
 
@@ -578,8 +658,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.Mail.MailAddress" />
+
+          
 
           
 
@@ -616,8 +700,12 @@
 
             
 
+            
+
              property is initialized using <paramref
              name="from" />
+
+            
 
             
 
@@ -630,8 +718,12 @@
 
             
 
+            
+
              property is initialized using <paramref
              name="to" />
+
+            
 
             
 
@@ -650,8 +742,12 @@
 
             
 
+            
+
              class by using the specified <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -667,8 +763,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -683,8 +783,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -721,6 +825,8 @@
           <para
             >The properties for the new <see
              cref="T:System.Net.Mail.MailMessage" />
+
+            
 
             
 
@@ -820,8 +926,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.Mail.MailMessage.SubjectEncoding" />
+
+            
 
             
 
@@ -840,6 +950,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -850,8 +962,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -866,8 +982,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -882,8 +1002,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -898,8 +1022,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -939,11 +1067,15 @@
 
             
 
+            
+
              property to specify copies of an e-mail message in different formats. For example, if you send a message in HTML, you might also want to provide a plain text version in case some of the recipients use e-mail readers that cannot display HTML content.</para
           >
           <para
             >To add an alternate view to a <see
              cref="T:System.Net.Mail.MailMessage" />
+
+            
 
             
 
@@ -956,8 +1088,12 @@
 
             
 
+            
+
              for the view, and then add it to the collection returned by <see
              cref="P:System.Net.Mail.MailMessage.AlternateViews" />
+
+            
 
             
 
@@ -970,6 +1106,8 @@
 
             
 
+            
+
              property to specify the text version and use the <see
              cref="P:System.Net.Mail.MailMessage.AlternateViews" />
 
@@ -977,8 +1115,12 @@
 
             
 
+            
+
              collection to specify views with other MIME types. Use the <see
              cref="T:System.Net.Mime.MediaTypeNames" />
+
+            
 
             
 
@@ -1023,6 +1165,8 @@
 
             
 
+            
+
              property to add an attachment, such as a file or the contents of a <see
              cref="T:System.IO.Stream" />
 
@@ -1030,8 +1174,12 @@
 
             
 
+            
+
             , to this <see
              cref="T:System.Net.Mail.MailMessage" />
+
+            
 
             
 
@@ -1047,6 +1195,8 @@
 
             
 
+            
+
              that contains or references the data to be attached, and then add the <see
              cref="T:System.Net.Mail.Attachment" />
 
@@ -1054,8 +1204,12 @@
 
             
 
+            
+
              to the collection returned by <see
              cref="P:System.Net.Mail.MailMessage.Attachments" />
+
+            
 
             
 
@@ -1100,8 +1254,12 @@
 
             
 
+            
+
              for the recipient's address, and then add that object to the collection returned by the <see
              cref="P:System.Net.Mail.MailMessage.Bcc" />
+
+            
 
             
 
@@ -1112,6 +1270,8 @@
           <para
             >When recipients view an e-mail message, the <see
              cref="P:System.Net.Mail.MailMessage.Bcc" />
+
+            
 
             
 
@@ -1150,8 +1310,12 @@
 
             
 
+            
+
              of the <see
              cref="P:System.Net.Mail.MailMessage.Body" />
+
+            
 
             
 
@@ -1164,11 +1328,15 @@
 
             
 
+            
+
              property. </para
           >
           <para
             >If the body content is available in alternative formats that provide richer presentation options for the recipients, you can specify alternate views for the body content by using the <see
              cref="P:System.Net.Mail.MailMessage.AlternateViews" />
+
+            
 
             
 
@@ -1213,11 +1381,15 @@
 
             
 
+            
+
              property sets the character set field in the Content-Type header. The default character set is "us-ascii".</para
           >
           <para
             >If you set the <see
              cref="P:System.Net.Mail.MailMessage.BodyEncoding" />
+
+            
 
             
 
@@ -1230,8 +1402,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Text.Encoding.Unicode" />
+
+            
 
             
 
@@ -1244,8 +1420,12 @@
 
             
 
+            
+
             , the Framework selects a <see
              cref="T:System.Net.Mime.TransferEncoding" />
+
+            
 
             
 
@@ -1258,8 +1438,12 @@
 
             
 
+            
+
              for this <see
              cref="T:System.Net.Mail.MailMessage" />
+
+            
 
             
 
@@ -1304,8 +1488,12 @@
 
             
 
+            
+
              for the recipient's address and then add that object to the collection returned by the <see
              cref="P:System.Net.Mail.MailMessage.CC" />
+
+            
 
             
 
@@ -1374,8 +1562,12 @@
 
             
 
+            
+
              method when you are finished using the <see
              cref="T:System.Net.Mail.MailMessage" />
+
+            
 
             
 
@@ -1388,8 +1580,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Net.Mail.MailMessage" />
+
+            
 
             
 
@@ -1402,6 +1598,8 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Net.Mail.MailMessage" />
 
@@ -1409,8 +1607,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Net.Mail.MailMessage" />
+
+            
 
             
 
@@ -1425,10 +1627,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -1445,8 +1651,12 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.Net.Mail.MailMessage" />
+
+              
 
               
 
@@ -1461,6 +1671,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.Net.Mail.MailMessage" />
+
+            
 
             
 
@@ -1500,8 +1712,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -1514,8 +1730,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -1531,8 +1751,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Net.Mail.MailMessage" />
+
+            
 
             
 
@@ -1551,11 +1775,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1625,8 +1853,12 @@
 
             
 
+            
+
              property allows an application to access the headers collection for the message. While this collection is read-only (a new collection can not be set), custom headers can be added to or deleted from this collection. Any custom headers added will be included when the <see
              cref="T:System.Net.Mail.MailMessage" />
+
+            
 
             
 
@@ -1639,8 +1871,12 @@
 
             
 
+            
+
              property are included in the collection. After the <see
              cref="T:System.Net.Mail.MailMessage" />
+
+            
 
             
 
@@ -1653,8 +1889,12 @@
 
             
 
+            
+
              property will also include headers that are set using the associated properties of the <see
              cref="T:System.Net.Mail.MailMessage" />
+
+            
 
             
 
@@ -1667,8 +1907,12 @@
 
             
 
+            
+
              is used to initialize a <see
              cref="T:System.Net.Mail.MailMessage" />
+
+            
 
             
 
@@ -1684,8 +1928,12 @@
 
             
 
+            
+
              class should only be set using the <see
              cref="T:System.Net.Mail.MailMessage" />
+
+            
 
             
 
@@ -1698,8 +1946,12 @@
 
             
 
+            
+
              initializes a <see
              cref="T:System.Net.Mail.MailMessage" />
+
+            
 
             
 
@@ -1712,8 +1964,12 @@
 
             
 
+            
+
              property and any values set for these headers using the <see
              cref="P:System.Net.Mail.MailMessage.Headers" />
+
+            
 
             
 
@@ -1776,8 +2032,12 @@
 
             
 
+            
+
              property, the <see
              cref="T:System.Net.Mail.MailMessage" />
+
+            
 
             
 
@@ -1793,8 +2053,12 @@
 
             
 
+            
+
              is used to initialize a <see
              cref="T:System.Net.Mail.MailMessage" />
+
+            
 
             
 
@@ -1807,11 +2071,15 @@
 
             
 
+            
+
              object.</para
           >
           <para
             >The primary mail message headers and elements for the message may be set using the following properties of the <see
              cref="T:System.Net.Mail.MailMessage" />
+
+            
 
             
 
@@ -1976,8 +2244,12 @@
 
             
 
+            
+
              property defaults to <see
              cref="P:System.Text.Encoding.UTF8" />
+
+            
 
             
 
@@ -1993,8 +2265,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Net.Mime.TransferEncoding.QuotedPrintable" />
+
+            
 
             
 
@@ -2092,8 +2368,12 @@
 
             
 
+            
+
              property to indicate an address other than the <see
              cref="P:System.Net.Mail.MailMessage.From" />
+
+            
 
             
 
@@ -2136,8 +2416,12 @@
 
             
 
+            
+
              property to indicate the list of addresses other than the <see
              cref="P:System.Net.Mail.MailMessage.From" />
+
+            
 
             
 
@@ -2153,8 +2437,12 @@
 
             
 
+            
+
              property replaces the <see
              cref="P:System.Net.Mail.MailMessage.ReplyTo" />
+
+            
 
             
 
@@ -2223,6 +2511,8 @@
 
             
 
+            
+
              property. </para
           >
         </remarks>
@@ -2262,6 +2552,8 @@
 
             
 
+            
+
              of <see
              cref="P:System.Text.Encoding.Unicode" />
 
@@ -2269,8 +2561,12 @@
 
             
 
+            
+
             , use <see
              cref="P:System.Text.Encoding.UTF8" />
+
+            
 
             
 
@@ -2315,8 +2611,12 @@
 
             
 
+            
+
              property is used to designate the addresses on the To line of an e-mail message. To add a recipient to an e-mail message, create a <see
              cref="T:System.Net.Mail.MailAddress" />
+
+            
 
             
 

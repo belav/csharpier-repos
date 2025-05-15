@@ -53,6 +53,8 @@
 
         
 
+        
+
         . Windows Forms applications support TrueType fonts and have limited support for OpenType fonts. If you attempt to use a font that is not supported, or the font is not installed on the machine that is running the application, the Microsoft Sans Serif font will be substituted.</para
       >
     </remarks>
@@ -84,8 +86,12 @@
 
             
 
+            
+
              when that font has not been installed on the computer that is used to build your application will cause the Microsoft Sans Serif font to be used instead. If your application depends on this behavior and you must recompile your application for the .NET Framework 3.0, you should specify the Microsoft Sans Serif font for <paramref
              name="prototype" />
+
+            
 
             
 
@@ -104,6 +110,8 @@
 
             
 
+            
+
              that uses the specified existing <see
              cref="T:System.Drawing.Font" />
 
@@ -111,8 +119,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Drawing.FontStyle" />
+
+            
 
             
 
@@ -128,6 +140,8 @@
 
           
 
+          
+
           The existing <see
            cref="T:System.Drawing.Font" />
 
@@ -135,8 +149,12 @@
 
           
 
+          
+
            from which to create the new <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -151,8 +169,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.FontStyle" />
+
+          
 
           
 
@@ -165,8 +187,12 @@
 
           
 
+          
+
           . Multiple values of the <see
            cref="T:System.Drawing.FontStyle" />
+
+          
 
           
 
@@ -202,8 +228,12 @@
 
             
 
+            
+
              property set to <see
              cref="F:System.Drawing.FontStyle.Regular" />
+
+            
 
             
 
@@ -216,8 +246,12 @@
 
             
 
+            
+
              property set to <see
              cref="F:System.Drawing.GraphicsUnit.Point" />
+
+            
 
             
 
@@ -236,11 +270,15 @@
 
             
 
+            
+
              using a specified size. </para
           >
         </summary>
         <param name="family">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -253,8 +291,12 @@
 
           
 
+          
+
            of the new <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -264,6 +306,8 @@
         >
         <param name="emSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -296,8 +340,12 @@
 
             
 
+            
+
              property set to <see
              cref="F:System.Drawing.FontStyle.Regular" />
+
+            
 
             
 
@@ -310,6 +358,8 @@
 
             
 
+            
+
              property set to <see
              cref="F:System.Drawing.GraphicsUnit.Point" />
 
@@ -317,8 +367,12 @@
 
             
 
+            
+
             . Windows Forms applications support TrueType fonts and have limited support for OpenType fonts. If the <paramref
              name="familyName" />
+
+            
 
             
 
@@ -337,11 +391,15 @@
 
             
 
+            
+
              using a specified size. </para
           >
         </summary>
         <param name="familyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -354,8 +412,12 @@
 
           
 
+          
+
            for the new <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -365,6 +427,8 @@
         >
         <param name="emSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -401,8 +465,12 @@
 
             
 
+            
+
              property set to <see
              cref="F:System.Drawing.GraphicsUnit.Point" />
+
+            
 
             
 
@@ -421,11 +489,15 @@
 
             
 
+            
+
              using a specified size and style. </para
           >
         </summary>
         <param name="family">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -438,8 +510,12 @@
 
           
 
+          
+
            of the new <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -454,6 +530,8 @@
 
           
 
+          
+
           The em-size, in points, of the new font. </param
         >
         <param name="style">
@@ -463,8 +541,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.FontStyle" />
+
+          
 
           
 
@@ -501,8 +583,12 @@
 
             
 
+            
+
              property set to <see
              cref="F:System.Drawing.FontStyle.Regular" />
+
+            
 
             
 
@@ -521,8 +607,12 @@
 
             
 
+            
+
              using a specified size and unit. Sets the style to <see
              cref="F:System.Drawing.FontStyle.Regular" />
+
+            
 
             
 
@@ -538,6 +628,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.FontFamily" />
 
@@ -545,8 +637,12 @@
 
           
 
+          
+
            of the new <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -561,8 +657,12 @@
 
           
 
+          
+
           The em-size of the new font in the units specified by the <paramref
            name="unit" />
+
+          
 
           
 
@@ -577,8 +677,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.GraphicsUnit" />
+
+          
 
           
 
@@ -615,6 +719,8 @@
 
             
 
+            
+
              property set to <see
              cref="F:System.Drawing.GraphicsUnit.Point" />
 
@@ -622,8 +728,12 @@
 
             
 
+            
+
             . Windows Forms applications support TrueType fonts and have limited support for OpenType fonts. If the <paramref
              name="familyName" />
+
+            
 
             
 
@@ -642,11 +752,15 @@
 
             
 
+            
+
              using a specified size and style. </para
           >
         </summary>
         <param name="familyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -659,8 +773,12 @@
 
           
 
+          
+
            for the new <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -675,6 +793,8 @@
 
           
 
+          
+
           The em-size, in points, of the new font. </param
         >
         <param name="style">
@@ -684,8 +804,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.FontStyle" />
+
+          
 
           
 
@@ -722,8 +846,12 @@
 
             
 
+            
+
              property set to <see
              cref="F:System.Drawing.FontStyle.Regular" />
+
+            
 
             
 
@@ -742,8 +870,12 @@
 
             
 
+            
+
              using a specified size and unit. The style is set to <see
              cref="F:System.Drawing.FontStyle.Regular" />
+
+            
 
             
 
@@ -759,6 +891,8 @@
 
           
 
+          
+
           A string representation of the <see
            cref="T:System.Drawing.FontFamily" />
 
@@ -766,8 +900,12 @@
 
           
 
+          
+
            for the new <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -782,8 +920,12 @@
 
           
 
+          
+
           The em-size of the new font in the units specified by the <paramref
            name="unit" />
+
+          
 
           
 
@@ -798,8 +940,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.GraphicsUnit" />
+
+          
 
           
 
@@ -838,11 +984,15 @@
 
             
 
+            
+
              using a specified size, style, and unit.</para
           >
         </summary>
         <param name="family">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -855,8 +1005,12 @@
 
           
 
+          
+
            of the new <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -871,8 +1025,12 @@
 
           
 
+          
+
           The em-size of the new font in the units specified by the <paramref
            name="unit" />
+
+          
 
           
 
@@ -887,8 +1045,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.FontStyle" />
+
+          
 
           
 
@@ -903,8 +1065,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.GraphicsUnit" />
+
+          
 
           
 
@@ -942,6 +1108,8 @@
 
             
 
+            
+
              parameter specifies a font that is not installed on the machine running the application or is not supported, Microsoft Sans Serif will be substituted.</para
           >
         </remarks>
@@ -950,6 +1118,8 @@
           <para
             >Initializes a new <see
              cref="T:System.Drawing.Font" />
+
+            
 
             
 
@@ -965,6 +1135,8 @@
 
           
 
+          
+
           A string representation of the <see
            cref="T:System.Drawing.FontFamily" />
 
@@ -972,8 +1144,12 @@
 
           
 
+          
+
            for the new <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -988,8 +1164,12 @@
 
           
 
+          
+
           The em-size of the new font in the units specified by the <paramref
            name="unit" />
+
+          
 
           
 
@@ -1004,8 +1184,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.FontStyle" />
+
+          
 
           
 
@@ -1020,8 +1204,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.GraphicsUnit" />
+
+          
 
           
 
@@ -1060,6 +1248,8 @@
 
             
 
+            
+
              parameter takes a value from the list defined in the Windows SDK header file WinGDI.h.</para
           >
         </remarks>
@@ -1068,6 +1258,8 @@
           <para
             >Initializes a new <see
              cref="T:System.Drawing.Font" />
+
+            
 
             
 
@@ -1083,6 +1275,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.FontFamily" />
 
@@ -1090,8 +1284,12 @@
 
           
 
+          
+
            of the new <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -1106,8 +1304,12 @@
 
           
 
+          
+
           The em-size of the new font in the units specified by the <paramref
            name="unit" />
+
+          
 
           
 
@@ -1122,8 +1324,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.FontStyle" />
+
+          
 
           
 
@@ -1138,8 +1344,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.GraphicsUnit" />
+
+          
 
           
 
@@ -1154,8 +1364,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -1194,8 +1408,12 @@
 
             
 
+            
+
              parameter takes a value from the list defined in the Windows SDK header file WinGDI.h. Windows Forms applications support TrueType fonts and have limited support for OpenType fonts. If the <paramref
              name="familyName" />
+
+            
 
             
 
@@ -1214,11 +1432,15 @@
 
             
 
+            
+
              using a specified size, style, unit, and character set.</para
           >
         </summary>
         <param name="familyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1231,8 +1453,12 @@
 
           
 
+          
+
            for the new <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -1247,8 +1473,12 @@
 
           
 
+          
+
           The em-size of the new font in the units specified by the <paramref
            name="unit" />
+
+          
 
           
 
@@ -1263,8 +1493,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.FontStyle" />
+
+          
 
           
 
@@ -1279,8 +1513,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.GraphicsUnit" />
+
+          
 
           
 
@@ -1295,8 +1533,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -1336,6 +1578,8 @@
 
             
 
+            
+
              parameter takes a value from the list defined in the Windows SDK header file WinGDI.h.</para
           >
         </remarks>
@@ -1344,6 +1588,8 @@
           <para
             >Initializes a new <see
              cref="T:System.Drawing.Font" />
+
+            
 
             
 
@@ -1359,6 +1605,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.FontFamily" />
 
@@ -1366,8 +1614,12 @@
 
           
 
+          
+
            of the new <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -1382,8 +1634,12 @@
 
           
 
+          
+
           The em-size of the new font in the units specified by the <paramref
            name="unit" />
+
+          
 
           
 
@@ -1398,8 +1654,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.FontStyle" />
+
+          
 
           
 
@@ -1414,8 +1674,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.GraphicsUnit" />
+
+          
 
           
 
@@ -1430,8 +1694,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -1441,6 +1709,8 @@
         >
         <param name="gdiVerticalFont">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1480,8 +1750,12 @@
 
             
 
+            
+
              parameter takes a value from the list defined in the Windows SDK header file WinGDI.h. If the <paramref
              name="familyName" />
+
+            
 
             
 
@@ -1500,11 +1774,15 @@
 
             
 
+            
+
              using the specified size, style, unit, and character set.</para
           >
         </summary>
         <param name="familyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1517,8 +1795,12 @@
 
           
 
+          
+
            for the new <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -1533,8 +1815,12 @@
 
           
 
+          
+
           The em-size of the new font in the units specified by the <paramref
            name="unit" />
+
+          
 
           
 
@@ -1549,8 +1835,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.FontStyle" />
+
+          
 
           
 
@@ -1565,8 +1855,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.GraphicsUnit" />
+
+          
 
           
 
@@ -1581,8 +1875,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -1597,8 +1895,12 @@
 
           
 
+          
+
           A Boolean value indicating whether the new <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -1626,6 +1928,8 @@
           <para
             >Gets a value that indicates whether this <see
              cref="T:System.Drawing.Font" />
+
+            
 
             
 
@@ -1664,6 +1968,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1677,8 +1983,12 @@
 
             
 
+            
+
              this method creates, cast as an <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -1711,8 +2021,12 @@
 
             
 
+            
+
              allows the resources used by this <see
              cref="T:System.Drawing.Font" />
+
+            
 
             
 
@@ -1728,8 +2042,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Drawing.Font" />
+
+            
 
             
 
@@ -1742,8 +2060,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Drawing.Font" />
+
+            
 
             
 
@@ -1756,6 +2078,8 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Drawing.Font" />
 
@@ -1763,8 +2087,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Drawing.Font" />
+
+            
 
             
 
@@ -1779,10 +2107,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -1799,6 +2131,8 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.Drawing.Font" />
 
@@ -1806,8 +2140,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Drawing.Font" />
+
+              
 
               
 
@@ -1822,6 +2160,8 @@
           <para
             >Releases all resources used by this <see
              cref="T:System.Drawing.Font" />
+
+            
 
             
 
@@ -1861,8 +2201,12 @@
 
             
 
+            
+
              and has the same <see
              cref="P:System.Drawing.Font.FontFamily" />
+
+            
 
             
 
@@ -1875,8 +2219,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Drawing.Font.GdiCharSet" />
+
+            
 
             
 
@@ -1889,8 +2237,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Drawing.Font.Size" />
+
+            
 
             
 
@@ -1903,8 +2255,12 @@
 
             
 
+            
+
              property values as this <see
              cref="T:System.Drawing.Font" />
+
+            
 
             
 
@@ -1923,8 +2279,12 @@
 
             
 
+            
+
              parameter is a <see
              cref="T:System.Drawing.Font" />
+
+            
 
             
 
@@ -1937,8 +2297,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Drawing.Font.GdiVerticalFont" />
+
+            
 
             
 
@@ -1951,8 +2315,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Drawing.Font.Style" />
+
+            
 
             
 
@@ -1965,8 +2333,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Drawing.Font.Unit" />
+
+            
 
             
 
@@ -1979,11 +2351,15 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2031,6 +2407,8 @@
 
             
 
+            
+
              represents a group of fonts that have a similar font face, but may have different sizes and styles (for example, Arial, Times New Roman, and Verdana).</para
           >
         </remarks>
@@ -2044,8 +2422,12 @@
 
             
 
+            
+
              associated with this <see
              cref="T:System.Drawing.Font" />
+
+            
 
             
 
@@ -2088,8 +2470,12 @@
 
             
 
+            
+
              parameter must contain a handle to a device context in which a font is selected. This method will not work with an <paramref
              name="hdc" />
+
+            
 
             
 
@@ -2102,8 +2488,12 @@
 
             
 
+            
+
              object because the <paramref
              name="hdc" />
+
+            
 
             
 
@@ -2122,6 +2512,8 @@
 
             
 
+            
+
              from the specified Windows handle to a device context.</para
           >
         </summary>
@@ -2135,11 +2527,15 @@
 
             
 
+            
+
              this method creates.</para
           >
         </returns>
         <param name="hdc">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2177,6 +2573,8 @@
 
             
 
+            
+
              from the specified Windows handle.</para
           >
         </summary>
@@ -2190,11 +2588,15 @@
 
             
 
+            
+
              this method creates.</para
           >
         </returns>
         <param name="hfont">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2231,8 +2633,12 @@
 
             
 
+            
+
             , or logical font, is a structure that contains 14 properties that describe a particular font. For more information, see "The Logical Font" in the Windows Development documentation at <see
              cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>
+
+            
 
             
 
@@ -2251,8 +2657,12 @@
 
             
 
+            
+
              from the specified GDI logical font (<unmanagedCodeEntityReference
             >LOGFONT</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -2271,11 +2681,15 @@
 
             
 
+            
+
              that this method creates.</para
           >
         </returns>
         <param name="lf">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2288,8 +2702,12 @@
 
           
 
+          
+
            that represents the ndptecgdi LOGFONT structure from which to create the <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -2327,8 +2745,12 @@
 
             
 
+            
+
             , or logical font, is a structure that contains 14 properties that describe a particular font. For more information, see "The Logical Font" in the Windows Development documentation at <see
              cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>
+
+            
 
             
 
@@ -2347,8 +2769,12 @@
 
             
 
+            
+
              from the specified GDI logical font (<unmanagedCodeEntityReference
             >LOGFONT</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -2367,11 +2793,15 @@
 
             
 
+            
+
              that this method creates.</para
           >
         </returns>
         <param name="lf">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2384,8 +2814,12 @@
 
           
 
+          
+
            that represents the ndptecgdi LOGFONT structure from which to create the <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -2400,8 +2834,12 @@
 
           
 
+          
+
           A handle to a device context that contains additional information about the <paramref
            name="lf" />
+
+          
 
           
 
@@ -2428,6 +2866,8 @@
           <para
             >This property returns 1, unless a different character set is specified in the <see
              cref="M:System.Drawing.Font.#ctor(System.String,System.Single,System.Drawing.FontStyle,System.Drawing.GraphicsUnit,System.Byte)" />
+
+            
 
             
 
@@ -2618,6 +3058,8 @@
 
             
 
+            
+
              uses.</para
           >
         </summary>
@@ -2650,6 +3092,8 @@
 
             
 
+            
+
              only returns true if this font was created from a classic GDI</para
           >
           <para>font definition, like a LOGFONT or HFONT.</para>
@@ -2659,6 +3103,8 @@
           <para
             >Gets a Boolean value that indicates whether this <see
              cref="T:System.Drawing.Font" />
+
+            
 
             
 
@@ -2697,6 +3143,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2705,6 +3153,8 @@
           <para
             >The hash code for this <see
              cref="T:System.Drawing.Font" />
+
+            
 
             
 
@@ -2737,6 +3187,8 @@
 
             
 
+            
+
              is the vertical distance between the base lines of two consecutive lines of text. Thus, the line spacing includes the blank space between lines along with the height of the character itself.</para
           >
           <para
@@ -2747,8 +3199,12 @@
 
             
 
+            
+
              property of the font is set to anything other than <see
              cref="F:System.Drawing.GraphicsUnit.Pixel" />
+
+            
 
             
 
@@ -2795,11 +3251,15 @@
 
             
 
+            
+
              is the vertical distance between the base lines of two consecutive lines of text. Thus, the line spacing includes the blank space between lines along with the height of the character itself.</para
           >
           <para
             >If the <see
              cref="P:System.Drawing.Font.Unit" />
+
+            
 
             
 
@@ -2812,8 +3272,12 @@
 
             
 
+            
+
             , the height, in pixels, is calculated using the vertical resolution of the specified <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -2826,8 +3290,12 @@
 
             
 
+            
+
              object has a <see
              cref="P:System.Drawing.Font.Unit" />
+
+            
 
             
 
@@ -2840,8 +3308,12 @@
 
             
 
+            
+
              and a <see
              cref="P:System.Drawing.Graphics.DpiY" />
+
+            
 
             
 
@@ -2858,8 +3330,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -2872,8 +3348,12 @@
 
             
 
+            
+
              rather than <see
              cref="F:System.Drawing.GraphicsUnit.Pixel" />
+
+            
 
             
 
@@ -2893,6 +3373,8 @@
 
             
 
+            
+
             , of this font. </para
           >
         </summary>
@@ -2907,8 +3389,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -2942,8 +3428,12 @@
 
             
 
+            
+
              property of the font is set to anything other than <see
              cref="F:System.Drawing.GraphicsUnit.Pixel" />
+
+            
 
             
 
@@ -2963,6 +3453,8 @@
 
             
 
+            
+
              when drawn to a device with the specified vertical resolution.</para
           >
         </summary>
@@ -2976,11 +3468,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="dpi">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3013,8 +3509,12 @@
 
             
 
+            
+
              property of the font is set to anything other than <see
              cref="F:System.Drawing.GraphicsUnit.Pixel" />
+
+            
 
             
 
@@ -3031,8 +3531,12 @@
 
             
 
+            
+
              method would be 33.11719, and the value returned by the <see
              cref="P:System.Drawing.Font.Height" />
+
+            
 
             
 
@@ -3045,8 +3549,12 @@
 
             
 
+            
+
              property is the value returned by <see
              cref="M:System.Drawing.Font.GetHeight" />
+
+            
 
             
 
@@ -3096,6 +3604,8 @@
 
             
 
+            
+
              property could return true, even if the font is not actually a system font. To avoid this situation, if you are using system fonts in your application, you should track user preference changes by handling the <see
              cref="E:Microsoft.Win32.SystemEvents.UserPreferenceChanging" />
 
@@ -3103,8 +3613,12 @@
 
             
 
+            
+
              or <see
              cref="E:Microsoft.Win32.SystemEvents.UserPreferenceChanged" />
+
+            
 
             
 
@@ -3118,6 +3632,8 @@
           <para
             >Gets a value indicating whether the font is a member of <see
              cref="T:System.Drawing.SystemFonts" />
+
+            
 
             
 
@@ -3171,6 +3687,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3210,8 +3728,12 @@
 
             
 
+            
+
              measured in the units specified by the <see
              cref="P:System.Drawing.Font.Unit" />
+
+            
 
             
 
@@ -3240,6 +3762,8 @@
           <para
             >Gets the em-size, in points, of this <see
              cref="T:System.Drawing.Font" />
+
+            
 
             
 
@@ -3278,6 +3802,8 @@
 
             
 
+            
+
              specifies a horizontal line through the font.</para
           >
         </summary>
@@ -3306,6 +3832,8 @@
           <para
             >Gets style information for this <see
              cref="T:System.Drawing.Font" />
+
+            
 
             
 
@@ -3354,6 +3882,8 @@
 
             
 
+            
+
              with the data needed to serialize the target object.</para
           >
         </summary>
@@ -3364,8 +3894,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -3380,8 +3914,12 @@
 
           
 
+          
+
           The destination (see <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -3417,8 +3955,12 @@
 
             
 
+            
+
              property will be one of the members of the <see
              cref="T:System.Drawing.SystemFonts" />
+
+            
 
             
 
@@ -3432,6 +3974,8 @@
           <para
             >Gets the name of the system font if the <see
              cref="P:System.Drawing.Font.IsSystemFont" />
+
+            
 
             
 
@@ -3460,8 +4004,12 @@
 
             
 
+            
+
              using the ndptecgdi <unmanagedCodeEntityReference
             >DeleteObject</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -3480,6 +4028,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3488,6 +4038,8 @@
           <para
             >A Windows handle to this <see
              cref="T:System.Drawing.Font" />
+
+            
 
             
 
@@ -3522,6 +4074,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3535,8 +4089,12 @@
 
             
 
+            
+
             ) structure from this <see
              cref="T:System.Drawing.Font" />
+
+            
 
             
 
@@ -3552,8 +4110,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -3591,6 +4153,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3604,8 +4168,12 @@
 
             
 
+            
+
             ) structure from this <see
              cref="T:System.Drawing.Font" />
+
+            
 
             
 
@@ -3621,8 +4189,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -3637,8 +4209,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -3675,6 +4251,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3683,6 +4261,8 @@
           <para
             >A string that represents this <see
              cref="T:System.Drawing.Font" />
+
+            
 
             
 
@@ -3716,6 +4296,8 @@
 
             
 
+            
+
              is underlined.</para
           >
         </summary>
@@ -3744,6 +4326,8 @@
           <para
             >Gets the unit of measure for this <see
              cref="T:System.Drawing.Font" />
+
+            
 
             
 

@@ -64,11 +64,15 @@
 
             
 
+            
+
              is an instance of Opcode and is equal to this object; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -111,6 +115,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -119,6 +125,8 @@
           <para
             >true if the value of <paramref
              name="obj" />
+
+            
 
             
 
@@ -134,8 +142,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.Emit.OpCode" />
+
+          
 
           
 
@@ -255,6 +267,8 @@
 
             
 
+            
+
              structures are equal.</para
           >
         </summary>
@@ -268,8 +282,12 @@
 
             
 
+            
+
              is equal to <paramref
              name="b" />
+
+            
 
             
 
@@ -285,6 +303,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.Emit.OpCode" />
 
@@ -292,8 +312,12 @@
 
           
 
+          
+
            to compare to <paramref
            name="b" />
+
+          
 
           
 
@@ -308,6 +332,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.Emit.OpCode" />
 
@@ -315,8 +341,12 @@
 
           
 
+          
+
            to compare to <paramref
            name="a" />
+
+          
 
           
 
@@ -360,6 +390,8 @@
 
             
 
+            
+
              structures are not equal.</para
           >
         </summary>
@@ -373,8 +405,12 @@
 
             
 
+            
+
              is not equal to <paramref
              name="b" />
+
+            
 
             
 
@@ -390,6 +426,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.Emit.OpCode" />
 
@@ -397,8 +435,12 @@
 
           
 
+          
+
            to compare to <paramref
            name="b" />
+
+          
 
           
 
@@ -413,6 +455,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.Emit.OpCode" />
 
@@ -420,8 +464,12 @@
 
           
 
+          
+
            to compare to <paramref
            name="a" />
+
+          
 
           
 
@@ -588,6 +636,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -596,6 +646,8 @@
           <para
             >Returns a <see
              cref="T:System.String" />
+
+            
 
             
 

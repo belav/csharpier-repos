@@ -37,8 +37,12 @@
 
         
 
+        
+
          generic interface is a descendant of the <see
          cref="T:System.Collections.Generic.ICollection`1" />
+
+        
 
         
 
@@ -83,12 +87,16 @@
 
           
 
+          
+
            if found in the current instance; otherwise, -1.</returns
         >
         <remarks>
           <para
             >Implementations can vary in how they determine equality of objects; for example, <see
              cref="T:System.Collections.Generic.List&lt;T&gt;" />
+
+            
 
             
 
@@ -101,8 +109,12 @@
 
             
 
+            
+
              allows the user to specify the <see
              cref="T:System.Collections.Generic.IComparer&lt;T&gt;" />
+
+            
 
             
 
@@ -141,6 +153,8 @@
 
           
 
+          
+
            that specifies the zero-based index at which value is inserted.</param
         >
         <param name="item">To be added.</param>
@@ -159,8 +173,12 @@
 
                 
 
+                
+
                  equals the number of items in the <see
                  cref="System.Collections.Generic.IList&lt;T&gt;" />
+
+                
 
                 
 
@@ -175,6 +193,8 @@
         <exception cref="T:System.ArgumentOutOfRangeException">
           <para>
             <paramref name="index" />
+
+            
 
             
 
@@ -222,6 +242,8 @@
 
             
 
+            
+
              is not a valid index in the current instance.</para
           >
         </exception>
@@ -257,6 +279,8 @@
 
             
 
+            
+
              is not a valid index in the current instance.</para
           >
         </exception>
@@ -277,11 +301,15 @@
 
             
 
+            
+
              item at the specified index.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

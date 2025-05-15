@@ -40,6 +40,8 @@
 
         
 
+        
+
          enables you to use column names in a <see
          cref="T:System.Data.DataTable" />
 
@@ -47,8 +49,12 @@
 
         
 
+        
+
          that are different from those in the data source. The DataAdapter uses the mapping to match the columns when the tables in the <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -65,6 +71,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -73,6 +81,8 @@
       <para
         >Contains a generic column mapping for an object that inherits from <see
          cref="T:System.Data.Common.DataAdapter" />
+
+        
 
         
 
@@ -95,6 +105,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.Common.DataColumnMapping" />
+
+            
 
             
 
@@ -132,8 +144,12 @@
 
             
 
+            
+
              class with the specified source column name and <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -149,6 +165,8 @@
 
           
 
+          
+
           The case-sensitive column name from a data source. </param
         >
         <param name="dataSetColumn">
@@ -158,8 +176,12 @@
 
           
 
+          
+
           The column name, which is not case sensitive, from a <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -188,6 +210,8 @@
           <para
             >Gets or sets the name of the column within the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -233,8 +257,12 @@
 
             
 
+            
+
              from the given <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -247,8 +275,12 @@
 
             
 
+            
+
              and the <see
              cref="P:System.Data.Common.DataColumnMapping.DataSetColumn" />
+
+            
 
             
 
@@ -268,8 +300,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -284,8 +320,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -300,8 +340,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.MissingSchemaAction" />
+
+          
 
           
 
@@ -356,8 +400,12 @@
 
             
 
+            
+
              that can be called without instantiating a <see
              cref="T:System.Data.Common.DataColumnMapping" />
+
+            
 
             
 
@@ -376,11 +424,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="sourceColumn">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -395,8 +447,12 @@
 
           
 
+          
+
           The column name, which is not case sensitive, from a <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -411,8 +467,12 @@
 
           
 
+          
+
           An instance of <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -427,6 +487,8 @@
 
           
 
+          
+
           The data type for the column being mapped.</param
         >
         <param name="schemaAction">
@@ -436,8 +498,12 @@
 
           
 
+          
+
           Determines the action to take when existing <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -494,8 +560,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ICloneable" />
+
+            
 
             
 
@@ -506,6 +576,8 @@
           <para
             >For more information, see <see
              cref="M:System.ICloneable.Clone" />
+
+            
 
             
 
@@ -543,6 +615,8 @@
 
             
 
+            
+
              name to a string.</para
           >
         </summary>
@@ -551,6 +625,8 @@
           <para
             >The current <see
              cref="P:System.Data.Common.DataColumnMapping.SourceColumn" />
+
+            
 
             
 

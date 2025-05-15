@@ -37,8 +37,12 @@
 
         
 
+        
+
          to collect instances of the <see
          cref="T:System.Data.OleDb.OleDbError" />
+
+        
 
         
 
@@ -51,8 +55,12 @@
 
         
 
+        
+
          always contains at least one instance of the <see
          cref="T:System.Data.OleDb.OleDbError" />
+
+        
 
         
 
@@ -89,6 +97,8 @@
 
             
 
+            
+
              into an <see
              cref="T:System.Array" />
 
@@ -96,8 +106,12 @@
 
             
 
+            
+
             , starting at the specified index within the <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -113,8 +127,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -129,8 +147,12 @@
 
           
 
+          
+
           The starting index of the <paramref
            name="array" />
+
+          
 
           
 
@@ -172,8 +194,12 @@
 
             
 
+            
+
              to the specified <see
              cref="T:System.Data.OleDb.OleDbErrorCollection" />
+
+            
 
             
 
@@ -189,6 +215,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.OleDb.OleDbErrorCollection" />
 
@@ -196,8 +224,12 @@
 
           
 
+          
+
            that is the destination of the elements copied from the current <see
            cref="T:System.Data.OleDb.OleDbErrorCollection" />
+
+          
 
           
 
@@ -212,8 +244,12 @@
 
           
 
+          
+
           A 32-bit integer that represents the index in the <see
            cref="T:System.Data.OleDb.OleDbErrorCollection" />
+
+          
 
           
 
@@ -264,6 +300,8 @@
 
             
 
+            
+
              method, which supports a simple iteration over a collection by a .NET Framework data provider.</para
           >
         </summary>
@@ -272,6 +310,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -334,8 +374,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -349,6 +393,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.Collections.ICollection.IsSynchronized" />
+
+            
 
             
 
@@ -384,8 +430,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -399,6 +449,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.Collections.ICollection.SyncRoot" />
+
+            
 
             
 

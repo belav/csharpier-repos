@@ -34,6 +34,8 @@
 
       
 
+      
+
        nodes.</remarks
     >
     <summary>
@@ -303,6 +305,8 @@
 
             
 
+            
+
              object throws an exception.</para
           >
         </summary>
@@ -316,11 +320,15 @@
 
             
 
+            
+
              from which the method is called.</para
           >
         </returns>
         <param name="deep">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -620,11 +628,15 @@
 
             
 
+            
+
             . For XmlEntity nodes, this method has no effect.</para
           >
         </summary>
         <param name="w">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -670,11 +682,15 @@
 
             
 
+            
+
             . For XmlEntity nodes, this method has no effect.</para
           >
         </summary>
         <param name="w">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

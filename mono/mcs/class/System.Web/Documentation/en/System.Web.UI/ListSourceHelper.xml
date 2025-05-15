@@ -21,8 +21,12 @@
 
         
 
+        
+
          class is a utility class provided to simplify implementation of the <see
          cref="T:System.ComponentModel.IListSource" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          interface but do not extend the <see
          cref="T:System.Web.UI.DataSourceControl" />
+
+        
 
         
 
@@ -49,6 +57,8 @@
 
         
 
+        
+
          methods in their own implementations of the methods defined by the <see
          cref="T:System.ComponentModel.IListSource" />
 
@@ -56,8 +66,12 @@
 
         
 
+        
+
          interface. Data source controls that extend from the <see
          cref="T:System.Web.UI.DataSourceControl" />
+
+        
 
         
 
@@ -71,6 +85,8 @@
       <para
         >Used by data source controls when implementing the members defined by the <see
          cref="T:System.ComponentModel.IListSource" />
+
+        
 
         
 
@@ -105,6 +121,8 @@
 
             
 
+            
+
              property, passing a reference to a data source control. </para
           >
         </remarks>
@@ -123,8 +141,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.IDataSource" />
+
+          
 
           
 
@@ -161,11 +183,15 @@
 
             
 
+            
+
              method, passing a reference to a data source control.</para
           >
           <para
             >The <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -178,8 +204,12 @@
 
             
 
+            
+
              interface. You can use the <see
              cref="M:System.ComponentModel.ITypedList.GetItemProperties(System.ComponentModel.PropertyDescriptor[])" />
+
+            
 
             
 
@@ -192,8 +222,12 @@
 
             
 
+            
+
              descriptors that correspond to the <see
              cref="T:System.Web.UI.DataSourceView" />
+
+            
 
             
 
@@ -212,6 +246,8 @@
 
             
 
+            
+
              collection of data source objects.</para
           >
         </summary>
@@ -225,8 +261,12 @@
 
             
 
+            
+
              of one <see
              cref="T:System.Web.UI.IDataSource" />
+
+            
 
             
 
@@ -239,8 +279,12 @@
 
             
 
+            
+
              has one or more associated <see
              cref="T:System.Web.UI.DataSourceView" />
+
+            
 
             
 
@@ -256,8 +300,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.IDataSource" />
+
+          
 
           
 
@@ -270,8 +318,12 @@
 
           
 
+          
+
            objects, which are retrieved by a call to <see
            cref="M:System.Web.UI.DataSourceControl.GetViewNames" />
+
+          
 
           
 

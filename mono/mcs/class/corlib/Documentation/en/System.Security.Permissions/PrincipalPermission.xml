@@ -47,11 +47,15 @@
 
         
 
+        
+
          can be used to demand that the identity of the active principal matches this information.</para
       >
       <para
         >To match the active <see
          cref="T:System.Security.Principal.IPrincipal" />
+
+        
 
         
 
@@ -64,8 +68,12 @@
 
         
 
+        
+
         , both the specified identity and role must match. If null identity string is used, it is interpreted as a request to match any identity. Use of null role string will match any role. By implication, passing null parameter for <paramref
          name="name" />
+
+        
 
         
 
@@ -78,8 +86,12 @@
 
         
 
+        
+
          to <see
          cref="T:System.Security.Permissions.PrincipalPermission" />
+
+        
 
         
 
@@ -92,8 +104,12 @@
 
         
 
+        
+
         . It is also possible to construct a <see
          cref="T:System.Security.Permissions.PrincipalPermission" />
+
+        
 
         
 
@@ -106,6 +122,8 @@
 
         
 
+        
+
          represents an authenticated or unauthenticated entity. In this case, <paramref
          name="name" />
 
@@ -113,8 +131,12 @@
 
         
 
+        
+
          and <paramref
          name="role" />
+
+        
 
         
 
@@ -130,8 +152,12 @@
 
         
 
+        
+
          does not extend <see
          cref="T:System.Security.CodeAccessPermission" />
+
+        
 
         
 
@@ -144,8 +170,12 @@
 
         
 
+        
+
          interface. This is because <see
          cref="T:System.Security.Permissions.PrincipalPermission" />
+
+        
 
         
 
@@ -158,6 +188,8 @@
 
         
 
+        
+
         , <see
          cref="M:System.Security.Permissions.PrincipalPermission.Union(System.Security.IPermission)" />
 
@@ -165,8 +197,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Security.Permissions.PrincipalPermission.Intersect(System.Security.IPermission)" />
+
+        
 
         
 
@@ -183,6 +219,8 @@
 
           
 
+          
+
           . By default, the principal policy is set to <see
            cref="F:System.Security.Principal.PrincipalPolicy.UnauthenticatedPrincipal" />
 
@@ -190,8 +228,12 @@
 
           
 
+          
+
           . If you do not set the principal policy to <see
            cref="F:System.Security.Principal.PrincipalPolicy.WindowsPrincipal" />
+
+          
 
           
 
@@ -207,6 +249,8 @@
       <para
         >Allows checks against the active principal (see <see
          cref="T:System.Security.Principal.IPrincipal" />
+
+        
 
         
 
@@ -247,8 +291,12 @@
 
             
 
+            
+
              is the empty string (""), no <see
              cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Role" />
+
+            
 
             
 
@@ -261,6 +309,8 @@
 
             
 
+            
+
              is false). Unrestricted matches all principals (<see
              cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Name" />
 
@@ -268,8 +318,12 @@
 
             
 
+            
+
              is null, <see
              cref="P:System.Security.Permissions.PrincipalPermissionAttribute.Role" />
+
+            
 
             
 
@@ -291,8 +345,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Security.Permissions.PermissionState" />
+
+            
 
             
 
@@ -308,8 +366,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -350,8 +412,12 @@
 
             
 
+            
+
              parameter and the <paramref
              name="role" />
+
+            
 
             
 
@@ -364,6 +430,8 @@
 
             
 
+            
+
              and associated <see
              cref="T:System.Security.Principal.IIdentity" />
 
@@ -371,8 +439,12 @@
 
             
 
+            
+
             . Set <paramref
              name="name" />
+
+            
 
             
 
@@ -391,6 +463,8 @@
 
             
 
+            
+
              class for the specified <paramref
              name="name" />
 
@@ -398,8 +472,12 @@
 
             
 
+            
+
              and <paramref
              name="role" />
+
+            
 
             
 
@@ -415,8 +493,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Security.Principal.IPrincipal" />
+
+          
 
           
 
@@ -431,8 +513,12 @@
 
           
 
+          
+
           The role of the <see
            cref="T:System.Security.Principal.IPrincipal" />
+
+          
 
           
 
@@ -474,8 +560,12 @@
 
             
 
+            
+
              parameter and the <paramref
              name="role" />
+
+            
 
             
 
@@ -488,8 +578,12 @@
 
             
 
+            
+
              and associated <see
              cref="T:System.Security.Principal.IIdentity" />
+
+            
 
             
 
@@ -508,6 +602,8 @@
 
             
 
+            
+
              class for the specified <paramref
              name="name" />
 
@@ -515,8 +611,12 @@
 
             
 
+            
+
             , <paramref
              name="role" />
+
+            
 
             
 
@@ -532,8 +632,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Security.Principal.IPrincipal" />
+
+          
 
           
 
@@ -548,8 +652,12 @@
 
           
 
+          
+
           The role of the <see
            cref="T:System.Security.Principal.IPrincipal" />
+
+          
 
           
 
@@ -559,6 +667,8 @@
         >
         <param name="isAuthenticated">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -626,8 +736,12 @@
 
             
 
+            
+
              is raised, <see
              cref="M:System.Security.Permissions.PrincipalPermission.Demand" />
+
+            
 
             
 
@@ -645,8 +759,12 @@
 
               
 
+              
+
                method, it is necessary to set the current application domain's principal policy to the enumeration value <see
                cref="F:System.Security.Principal.PrincipalPolicy.WindowsPrincipal" />
+
+              
 
               
 
@@ -659,8 +777,12 @@
 
               
 
+              
+
               . If you do not set the principal policy to <see
                cref="F:System.Security.Principal.PrincipalPolicy.WindowsPrincipal" />
+
+              
 
               
 
@@ -711,6 +833,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -724,8 +848,12 @@
 
             
 
+            
+
              object is equal to the current <see
              cref="T:System.Security.Permissions.PrincipalPermission" />
+
+            
 
             
 
@@ -744,8 +872,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Security.Permissions.PrincipalPermission" />
+
+            
 
             
 
@@ -761,6 +893,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Permissions.PrincipalPermission" />
 
@@ -768,8 +902,12 @@
 
           
 
+          
+
            object to compare with the current <see
            cref="T:System.Security.Permissions.PrincipalPermission" />
+
+          
 
           
 
@@ -813,6 +951,8 @@
 
           
 
+          
+
           The XML encoding to use to reconstruct the permission. </param
         >
       </Docs>
@@ -849,6 +989,8 @@
 
             
 
+            
+
              objects.</para
           >
         </remarks>
@@ -862,6 +1004,8 @@
 
             
 
+            
+
              object that is suitable for use in hashing algorithms and data structures such as a hash table.</para
           >
         </summary>
@@ -870,6 +1014,8 @@
           <para
             >A hash code for the current <see
              cref="T:System.Security.Permissions.PrincipalPermission" />
+
+            
 
             
 
@@ -912,6 +1058,8 @@
 
             
 
+            
+
             . For example,</para
           >
           <para>code reference: System.Security.Permissions.PrincipalPermission#1</para>
@@ -929,6 +1077,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -979,6 +1129,8 @@
 
           
 
+          
+
           A permission that is to be tested for the subset relationship. This permission must be of the same type as the current permission. </param
         >
       </Docs>
@@ -1005,6 +1157,8 @@
           <para
             >An unrestricted <see
              cref="T:System.Security.Permissions.PrincipalPermission" />
+
+            
 
             
 
@@ -1132,8 +1286,12 @@
 
             
 
+            
+
              creates a permission representing the criteria of a given set of individual <see
              cref="T:System.Security.Permissions.PrincipalPermission" />
+
+            
 
             
 
@@ -1154,6 +1312,8 @@
         </returns>
         <param name="other">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

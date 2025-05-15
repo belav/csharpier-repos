@@ -25,8 +25,12 @@
 
         
 
+        
+
          attribute and the <see
          cref="T:System.Runtime.CompilerServices.DefaultDependencyAttribute" />
+
+        
 
         
 
@@ -37,6 +41,8 @@
       <para
         >Note that the Default value directs the native generation service to consult the dependent assembly for its preferred default binding, which is specified using the <see
          cref="T:System.Runtime.CompilerServices.DefaultDependencyAttribute" />
+
+        
 
         
 

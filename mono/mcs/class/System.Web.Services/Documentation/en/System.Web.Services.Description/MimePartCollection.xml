@@ -27,6 +27,8 @@
 
         
 
+        
+
          within the collection represents an extensibility element added to a <see
          cref="T:System.Web.Services.Description.MimeMultipartRelatedBinding" />
 
@@ -34,8 +36,12 @@
 
         
 
+        
+
         , and specifies the MIME type for a corresponding <see
          cref="T:System.Web.Services.Description.MessagePart" />
+
+        
 
         
 
@@ -55,6 +61,8 @@
 
         
 
+        
+
         . For more information about Web Services Description Language (WSDL), see the specification at http://www.w3.org/TR/wsdl/.</para
       >
     </remarks>
@@ -63,6 +71,8 @@
       <para
         >Represents a collection of instances of the <see
          cref="T:System.Web.Services.Description.MimePart" />
+
+        
 
         
 
@@ -85,6 +95,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Description.MimePartCollection" />
+
+            
 
             
 
@@ -123,8 +135,12 @@
 
             
 
+            
+
              to the end of the <see
              cref="T:System.Web.Services.Description.MimePartCollection" />
+
+            
 
             
 
@@ -143,6 +159,8 @@
 
             
 
+            
+
              parameter has been added.</para
           >
         </returns>
@@ -153,8 +171,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.MimePart" />
+
+          
 
           
 
@@ -192,8 +214,12 @@
 
             
 
+            
+
              is a member of the <see
              cref="T:System.Web.Services.Description.MimePartCollection" />
+
+            
 
             
 
@@ -212,6 +238,8 @@
 
             
 
+            
+
              parameter is a member of the MimePartCollection; otherwise, false.</para
           >
         </returns>
@@ -222,8 +250,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.MimePart" />
+
+          
 
           
 
@@ -262,8 +294,12 @@
 
             
 
+            
+
              to a compatible one-dimensional array of type <see
              cref="T:System.Web.Services.Description.MimePart" />
+
+            
 
             
 
@@ -279,8 +315,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Web.Services.Description.MimePart" />
+
+          
 
           
 
@@ -290,6 +330,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -327,6 +369,8 @@
 
             
 
+            
+
              and returns the zero-based index of the first occurrence within the collection.</para
           >
         </summary>
@@ -341,6 +385,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.MimePart" />
 
@@ -348,8 +394,12 @@
 
           
 
+          
+
            for which to search the <see
            cref="T:System.Web.Services.Description.MimePartCollection" />
+
+          
 
           
 
@@ -388,8 +438,12 @@
 
             
 
+            
+
              parameter is equal to <see
              cref="P:System.Collections.CollectionBase.Count" />
+
+            
 
             
 
@@ -402,8 +456,12 @@
 
             
 
+            
+
              parameter is added to the end of the <see
              cref="T:System.Web.Services.Description.MimePartCollection" />
+
+            
 
             
 
@@ -423,8 +481,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Web.Services.Description.MimePartCollection" />
+
+            
 
             
 
@@ -440,8 +502,12 @@
 
           
 
+          
+
           The zero-based index at which to insert the <paramref
            name="mimePart" />
+
+          
 
           
 
@@ -456,8 +522,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.MimePart" />
+
+          
 
           
 
@@ -517,6 +587,8 @@
 
             
 
+            
+
             .</para
           >
           <para>The elements that follow the removed MimePart move up to occupy the vacated spot.</para>
@@ -531,8 +603,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Web.Services.Description.MimePartCollection" />
+
+            
 
             
 
@@ -548,8 +624,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.MimePart" />
+
+          
 
           
 

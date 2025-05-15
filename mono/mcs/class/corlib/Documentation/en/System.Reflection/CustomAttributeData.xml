@@ -31,8 +31,12 @@
 
         
 
+        
+
         , <see
          cref="Overload:System.Reflection.MemberInfo.GetCustomAttributes" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
          class allows examination of custom attributes in the reflection-only context by providing an abstraction for attributes. The members of this class can be used to obtain the positional arguments and named arguments of the attribute. Use the <see
          cref="P:System.Reflection.CustomAttributeData.ConstructorArguments" />
+
+        
 
         
 
@@ -62,6 +70,8 @@
 
         
 
+        
+
          structures that represent the positional arguments, and use the <see
          cref="P:System.Reflection.CustomAttributeData.NamedArguments" />
 
@@ -69,8 +79,12 @@
 
         
 
+        
+
          property to get a list of <see
          cref="T:System.Reflection.CustomAttributeNamedArgument" />
+
+        
 
         
 
@@ -87,6 +101,8 @@
 
           
 
+          
+
            structure only provides information about the attribute property used to get and set the argument value. To obtain the type and value of the argument, use the <see
            cref="P:System.Reflection.CustomAttributeNamedArgument.TypedValue" />
 
@@ -94,8 +110,12 @@
 
           
 
+          
+
            property to obtain a <see
            cref="T:System.Reflection.CustomAttributeTypedArgument" />
+
+          
 
           
 
@@ -112,6 +132,8 @@
 
         
 
+        
+
          structure for an argument, whether named or positional, use the <see
          cref="P:System.Reflection.CustomAttributeTypedArgument.ArgumentType" />
 
@@ -119,8 +141,12 @@
 
         
 
+        
+
          property to get the type and the <see
          cref="P:System.Reflection.CustomAttributeTypedArgument.Value" />
+
+        
 
         
 
@@ -137,8 +163,12 @@
 
           
 
+          
+
            property returns a generic <see
            cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1" />
+
+          
 
           
 
@@ -151,8 +181,12 @@
 
           
 
+          
+
            objects. Each <see
            cref="T:System.Reflection.CustomAttributeTypedArgument" />
+
+          
 
           
 
@@ -168,6 +202,8 @@
 
         
 
+        
+
          can be used in the execution context as well as in the reflection-only context. For example, you might want to avoid loading the assembly that contains the code for a custom attribute. Using the <see
          cref="T:System.Reflection.CustomAttributeData" />
 
@@ -175,8 +211,12 @@
 
         
 
+        
+
          class is different from using methods like <see
          cref="Overload:System.Attribute.GetCustomAttributes" />
+
+        
 
         
 
@@ -194,6 +234,8 @@
 
             
 
+            
+
              only provide you with the values that were specified for the attribute instance, not the semantics of the constructor. For example, a string argument of an attribute might be converted internally to some other representation, and returned in a canonical form; or a property might have side effects when the actual attribute code is executed.</para
           >
         </item>
@@ -201,6 +243,8 @@
           <para
             >The properties and methods of <see
              cref="T:System.Reflection.CustomAttributeData" />
+
+            
 
             
 
@@ -218,8 +262,12 @@
 
         
 
+        
+
          class, use the static (Shared in Visual Basic) <see
          cref="Overload:System.Reflection.CustomAttributeData.GetCustomAttributes" />
+
+        
 
         
 
@@ -256,6 +304,8 @@
 
             
 
+            
+
              objects.</para
           >
         </remarks>
@@ -264,6 +314,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Reflection.CustomAttributeData" />
+
+            
 
             
 
@@ -331,6 +383,8 @@
 
             
 
+            
+
              object.</para
           >
         </remarks>
@@ -339,6 +393,8 @@
           <para
             >Gets a <see
              cref="T:System.Reflection.ConstructorInfo" />
+
+            
 
             
 
@@ -385,6 +441,8 @@
 
             
 
+            
+
              method to get the named arguments specified for the attribute instance.</para
           >
         </remarks>
@@ -393,6 +451,8 @@
           <para
             >Gets the list of positional arguments specified for the attribute instance represented by the <see
              cref="T:System.Reflection.CustomAttributeData" />
+
+            
 
             
 
@@ -436,11 +496,15 @@
 
             
 
+            
+
              is equal to the current instance; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -482,6 +546,8 @@
 
             
 
+            
+
              method that can always be used in the Reflection-only context.</para
           >
         </remarks>
@@ -490,6 +556,8 @@
           <para
             >Returns a list of <see
              cref="T:System.Reflection.CustomAttributeData" />
+
+            
 
             
 
@@ -504,6 +572,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -545,6 +615,8 @@
 
             
 
+            
+
              class and the classes in the <see
              cref="N:System.Reflection" />
 
@@ -552,8 +624,12 @@
 
             
 
+            
+
              namespace that represent type members all derive from <see
              cref="T:System.Reflection.MemberInfo" />
+
+            
 
             
 
@@ -572,6 +648,8 @@
 
             
 
+            
+
              objects representing data about the attributes that have been applied to the target member.</para
           >
         </summary>
@@ -581,6 +659,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -623,6 +703,8 @@
 
             
 
+            
+
              objects representing data about the attributes that have been applied to the target module.</para
           >
         </summary>
@@ -632,6 +714,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -673,6 +757,8 @@
 
             
 
+            
+
              method that can always be used in the Reflection-only context.</para
           >
         </remarks>
@@ -681,6 +767,8 @@
           <para
             >Returns a list of <see
              cref="T:System.Reflection.CustomAttributeData" />
+
+            
 
             
 
@@ -695,6 +783,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -757,6 +847,8 @@
 
             
 
+            
+
              method to get the positional arguments that were specified for the attribute instance. </para
           >
         </remarks>
@@ -765,6 +857,8 @@
           <para
             >Gets the list of named arguments specified for the attribute instance represented by the <see
              cref="T:System.Reflection.CustomAttributeData" />
+
+            
 
             
 

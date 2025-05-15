@@ -20,8 +20,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.TextBox" />
+
+        
 
         
 
@@ -35,6 +39,8 @@
       <para
         >Specifies the case of characters in a <see
          cref="T:System.Windows.Forms.TextBox" />
+
+        
 
         
 

@@ -59,6 +59,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -91,8 +93,12 @@
 
             
 
+            
+
              set to <paramref
              name="channel" />
+
+            
 
             
 
@@ -111,11 +117,15 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
         <param name="channel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -153,8 +163,12 @@
 
             
 
+            
+
              when <see
              cref="M:System.ServiceModel.Channels.ChannelParameterCollection.#ctor(System.ServiceModel.Channels.IChannel)" />
+
+            
 
             
 
@@ -224,10 +238,14 @@
 
           
 
+          
+
           The index of the item in the collection.</param
         >
         <param name="item">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -268,11 +286,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="innerChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -306,6 +328,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -348,10 +372,14 @@
 
           
 
+          
+
           Index of the item to replace.</param
         >
         <param name="item">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

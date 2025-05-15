@@ -29,6 +29,8 @@
 
         
 
+        
+
         . </para
       >
     </remarks>
@@ -42,8 +44,12 @@
 
         
 
+        
+
          event of a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -107,6 +113,8 @@
           <para
             >Gets the index of the row associated with this <see
              cref="T:System.Windows.Forms.DataGridViewRowHeightInfoNeededEventArgs" />
+
+            
 
             
 

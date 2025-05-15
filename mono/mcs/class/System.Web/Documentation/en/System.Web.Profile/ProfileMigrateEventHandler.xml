@@ -32,6 +32,8 @@
 
         
 
+        
+
          delegate is defined for the <see
          cref="E:System.Web.Profile.ProfileModule.MigrateAnonymous" />
 
@@ -39,8 +41,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.Profile.ProfileModule" />
+
+        
 
         
 
@@ -53,8 +59,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.Profile.ProfileModule" />
+
+        
 
         
 
@@ -70,11 +80,15 @@
 
         
 
+        
+
          event to copy profile property values from an anonymous profile to an authenticated profile when someone who has been anonymously using your application logs in.</para
       >
       <para
         >When an application that has the user profile enabled is started, ASP.NET creates a new class of type ProfileCommon, which inherits from the <see
          cref="T:System.Web.Profile.ProfileBase" />
+
+        
 
         
 
@@ -93,8 +107,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.Profile.ProfileModule" />
+
+        
 
         
 

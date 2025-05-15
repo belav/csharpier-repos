@@ -21,6 +21,8 @@
 
       
 
+      
+
        but also allow to temporarily disable state change.</summary
     >
     <remarks />
@@ -67,6 +69,8 @@
 
           
 
+          
+
            using the returned node object as an argument.</remarks
         >
       </Docs>
@@ -94,11 +98,15 @@
 
           
 
+          
+
            is called.</summary
         >
         <returns
           >True if the state of the CSnzi was zero or if it was already closed, <see
            langword="false" />
+
+          
 
           
 
@@ -136,11 +144,15 @@
 
           
 
+          
+
            otherwise.</returns
         >
         <remarks
           >Node argument must have been returned by a prior <see
            cref="M:Mono.Threading.CSnzi.Arrive()" />
+
+          
 
           
 
@@ -191,6 +203,8 @@
         <returns
           >A <see
            cref="T:System.Threading.QueryReturn" />
+
+          
 
           
 

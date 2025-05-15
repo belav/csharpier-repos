@@ -32,6 +32,8 @@
 
         
 
+        
+
          class is a convenience class combining the functionality of the <see
          cref="T:System.Runtime.Remoting.Channels.Ipc.IpcClientChannel" />
 
@@ -39,8 +41,12 @@
 
         
 
+        
+
          class and the <see
          cref="T:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel" />
+
+        
 
         
 
@@ -57,8 +63,12 @@
 
           
 
+          
+
            argument, several <see
            cref="T:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel" />
+
+          
 
           
 
@@ -91,6 +101,8 @@
 
             
 
+            
+
              class, activating only a client channel, and not a server channel.</para
           >
         </summary>
@@ -118,11 +130,15 @@
 
             
 
+            
+
              class with a server channel that listens on the specified IPC port.</para
           >
         </summary>
         <param name="portName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -168,6 +184,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -178,8 +196,12 @@
 
             
 
+            
+
              and <paramref
              name="serverSinkProvider" />
+
+            
 
             
 
@@ -196,8 +218,12 @@
 
               
 
+              
+
                argument, several <see
                cref="T:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel" />
+
+              
 
               
 
@@ -217,6 +243,8 @@
 
             
 
+            
+
              class with the specified configuration properties and sinks.</para
           >
         </summary>
@@ -227,8 +255,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -243,8 +275,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Remoting.Channels.IClientChannelSinkProvider" />
+
+          
 
           
 
@@ -259,8 +295,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" />
+
+          
 
           
 
@@ -292,6 +332,8 @@
 
             
 
+            
+
             , the value of this property can be cast to an instance of <see
              cref="T:System.Runtime.Remoting.Channels.ChannelDataStore" />
 
@@ -299,8 +341,12 @@
 
             
 
+            
+
              describing the channel to which the <see
              cref="T:System.Runtime.Remoting.Channels.Http.HttpServerChannel" />
+
+            
 
             
 
@@ -332,6 +378,8 @@
           <para
             >Every registered channel has a unique name. The name is used to retrieve a specific channel when calling <see
              cref="M:System.Runtime.Remoting.Channels.ChannelServices.GetChannel(System.String)" />
+
+            
 
             
 
@@ -420,6 +468,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -433,6 +483,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -441,6 +493,8 @@
           <para
             >An array of the URLs for an object with the specified URI, hosted on the current <see
              cref="T:System.Runtime.Remoting.Channels.Ipc.IpcChannel" />
+
+            
 
             
 
@@ -501,6 +555,8 @@
 
             
 
+            
+
              method has been called.</para
           >
           <para
@@ -511,8 +567,12 @@
 
             
 
+            
+
              parameter can be used to pass a specific initialization state to the channel. If you do not want to pass a specific state to the channel, set <paramref
              name="data" />
+
+            
 
             
 
@@ -527,6 +587,8 @@
         </summary>
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -560,6 +622,8 @@
 
             
 
+            
+
              method.</para
           >
           <para
@@ -570,8 +634,12 @@
 
             
 
+            
+
              parameter can be used to pass a specific initialization state to the channel. If you do not want to pass a specific state to the channel, set <paramref
              name="data" />
+
+            
 
             
 
@@ -586,6 +654,8 @@
         </summary>
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

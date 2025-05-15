@@ -40,8 +40,12 @@
 
         
 
+        
+
          provides a master mapping between the data returned from a query against a data source, and a <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -54,8 +58,12 @@
 
         
 
+        
+
          name can be passed in place of the <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -67,6 +75,8 @@
             >Setting Up DataTable and DataColumn Mappings</a
           >
         </format>
+
+        
 
         
 
@@ -85,6 +95,8 @@
 
         
 
+        
+
         . This class is used by a <see
          cref="T:System.Data.Common.DataAdapter" />
 
@@ -92,8 +104,12 @@
 
         
 
+        
+
          when populating a <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -116,6 +132,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.Common.DataTableMapping" />
+
+            
 
             
 
@@ -153,8 +171,12 @@
 
             
 
+            
+
              class with a source when given a source table name and a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -170,6 +192,8 @@
 
           
 
+          
+
           The case-sensitive source table name from a data source. </param
         >
         <param name="dataSetTable">
@@ -179,8 +203,12 @@
 
           
 
+          
+
           The table name from a <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -218,6 +246,8 @@
 
             
 
+            
+
              class when given a source table name, a <see
              cref="T:System.Data.DataTable" />
 
@@ -225,8 +255,12 @@
 
             
 
+            
+
              name, and an array of <see
              cref="T:System.Data.Common.DataColumnMapping" />
+
+            
 
             
 
@@ -242,6 +276,8 @@
 
           
 
+          
+
           The case-sensitive source table name from a data source. </param
         >
         <param name="dataSetTable">
@@ -251,8 +287,12 @@
 
           
 
+          
+
           The table name from a <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -267,8 +307,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Data.Common.DataColumnMapping" />
+
+          
 
           
 
@@ -304,8 +348,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -340,6 +388,8 @@
           <para
             >Gets or sets the table name from a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -383,6 +433,8 @@
 
             
 
+            
+
              exists, it is returned.</para
           >
           <para
@@ -393,8 +445,12 @@
 
             
 
+            
+
              does not exist, for a given <see
              cref="T:System.Data.MissingMappingAction" />
+
+            
 
             
 
@@ -426,6 +482,8 @@
 
                   
 
+                  
+
                    with the specified source column name as both the source column name and the <see
                    cref="T:System.Data.DataSet" />
 
@@ -433,8 +491,12 @@
 
                   
 
+                  
+
                    column name. This <see
                    cref="T:System.Data.Common.DataColumnMapping" />
+
+                  
 
                   
 
@@ -452,6 +514,8 @@
                 <para
                   >An <see
                    cref="T:System.InvalidOperationException" />
+
+                  
 
                   
 
@@ -481,8 +545,12 @@
 
             
 
+            
+
              from the specified <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -495,8 +563,12 @@
 
             
 
+            
+
              value and the name of the <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -516,8 +588,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -532,8 +608,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.MissingMappingAction" />
+
+          
 
           
 
@@ -588,6 +668,8 @@
 
             
 
+            
+
              object for a given column name.</para
           >
         </summary>
@@ -596,6 +678,8 @@
           <para
             >A <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -611,8 +695,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -627,8 +715,12 @@
 
           
 
+          
+
           The data type for <paramref
            name="sourceColumn" />
+
+          
 
           
 
@@ -643,8 +735,12 @@
 
           
 
+          
+
           The table name from a <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -659,8 +755,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.MissingMappingAction" />
+
+          
 
           
 
@@ -675,8 +775,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.MissingSchemaAction" />
+
+          
 
           
 
@@ -710,8 +814,12 @@
 
             
 
+            
+
              does not exist, the specified <see
              cref="T:System.Data.MissingSchemaAction" />
+
+            
 
             
 
@@ -730,6 +838,8 @@
 
             
 
+            
+
              for the specified <see
              cref="T:System.Data.DataSet" />
 
@@ -737,8 +847,12 @@
 
             
 
+            
+
              using the specified <see
              cref="T:System.Data.MissingSchemaAction" />
+
+            
 
             
 
@@ -758,6 +872,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataSet" />
 
@@ -765,8 +881,12 @@
 
           
 
+          
+
            from which to get the <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -781,8 +901,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.MissingSchemaAction" />
+
+          
 
           
 
@@ -851,8 +975,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Data.ITableMapping" />
+
+            
 
             
 
@@ -863,6 +991,8 @@
           <para
             >For more information, see <see
              cref="P:System.Data.ITableMapping.ColumnMappings" />
+
+            
 
             
 
@@ -881,8 +1011,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -915,8 +1049,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ICloneable" />
+
+            
 
             
 
@@ -927,6 +1065,8 @@
           <para
             >For more information, see <see
              cref="M:System.ICloneable.Clone" />
+
+            
 
             
 
@@ -964,6 +1104,8 @@
 
             
 
+            
+
              name to a string.</para
           >
         </summary>
@@ -972,6 +1114,8 @@
           <para
             >The current <see
              cref="P:System.Data.Common.DataTableMapping.SourceTable" />
+
+            
 
             
 

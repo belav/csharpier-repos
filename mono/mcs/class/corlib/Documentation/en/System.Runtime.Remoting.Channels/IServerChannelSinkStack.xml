@@ -76,6 +76,8 @@
 
           
 
+          
+
           The sink to remove and return from the sink stack. </param
         >
       </Docs>
@@ -113,6 +115,8 @@
 
             
 
+            
+
              parameter is returned in the <paramref
              name="state" />
 
@@ -120,8 +124,12 @@
 
             
 
+            
+
              parameter of the <see
              cref="M:System.Runtime.Remoting.Channels.IServerChannelSink.AsyncProcessResponse(System.Runtime.Remoting.Channels.IServerResponseChannelSinkStack,System.Object,System.Runtime.Remoting.Messaging.IMessage,System.Runtime.Remoting.Channels.ITransportHeaders,System.IO.Stream)" />
+
+            
 
             
 
@@ -141,10 +149,14 @@
 
           
 
+          
+
           The sink to push onto the sink stack. </param
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -184,6 +196,8 @@
 
             
 
+            
+
              method is intended for use only by the .NET Framework remoting infrastructure.</para
           >
         </remarks>
@@ -193,6 +207,8 @@
         </summary>
         <param name="ar">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -235,6 +251,8 @@
 
             
 
+            
+
              method is intended for use only by the .NET Framework remoting infrastructure.</para
           >
         </remarks>
@@ -249,6 +267,8 @@
 
           
 
+          
+
           A server channel sink.</param
         >
         <param name="state">
@@ -258,8 +278,12 @@
 
           
 
+          
+
           The state associated with <paramref
            name="sink" />
+
+          
 
           
 
@@ -302,6 +326,8 @@
 
             
 
+            
+
              method is intended for use only by the .NET Framework remoting infrastructure.</para
           >
           <para>Also, the method should only be called by a transport sink to complete an asynchronous dispatch.</para>
@@ -317,6 +343,8 @@
 
           
 
+          
+
           A server channel sink.</param
         >
         <param name="state">
@@ -326,8 +354,12 @@
 
           
 
+          
+
           The state associated with <paramref
            name="sink" />
+
+          
 
           
 

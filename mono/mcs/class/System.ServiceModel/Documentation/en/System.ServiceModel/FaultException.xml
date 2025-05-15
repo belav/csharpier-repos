@@ -27,11 +27,15 @@
 
         
 
+        
+
          class to create an untyped fault to return to the client for debugging purposes.</para
       >
       <para
         >In a client, catch <see
          cref="T:System.ServiceModel.FaultException" />
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
          property set to true. Because <see
          cref="T:System.ServiceModel.FaultException" />
+
+        
 
         
 
@@ -58,6 +66,8 @@
 
         
 
+        
+
         , remember to catch any <see
          cref="T:System.ServiceModel.FaultException" />
 
@@ -65,8 +75,12 @@
 
         
 
+        
+
          objects prior to catching <see
          cref="T:System.ServiceModel.CommunicationException" />
+
+        
 
         
 
@@ -83,6 +97,8 @@
 
           
 
+          
+
            objects returned from their interaction with a duplex client.</para
         >
       </block>
@@ -94,8 +110,12 @@
 
         
 
+        
+
          to design your services to return strongly-typed SOAP faults (and not managed exception objects) for all fault cases in which you decide the client requires fault information. However, use the <see
          cref="T:System.ServiceModel.FaultException" />
+
+        
 
         
 
@@ -119,8 +139,12 @@
 
         
 
+        
+
          objects when you want the string to be passed to the constructor and retrieved by the client by calling the <see
          cref="M:System.ServiceModel.FaultException`1.ToString" />
+
+        
 
         
 
@@ -133,8 +157,12 @@
 
         
 
+        
+
          where the type parameter is <see
          cref="T:System.String" />
+
+        
 
         
 
@@ -147,8 +175,12 @@
 
         
 
+        
+
          property and not by calling <see
          cref="M:System.ServiceModel.FaultException`1.ToString" />
+
+        
 
         
 
@@ -163,6 +195,8 @@
             >Handling Faults in Windows Communication Foundation Contracts</a
           >
         </format>
+
+        
 
         
 
@@ -195,6 +229,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.FaultException" />
+
+            
 
             
 
@@ -233,11 +269,15 @@
 
             
 
+            
+
              class using the specified message fault values.</para
           >
         </summary>
         <param name="fault">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -275,11 +315,15 @@
 
             
 
+            
+
              class using the specified reason.</para
           >
         </summary>
         <param name="reason">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -310,6 +354,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.FaultException" />
+
+            
 
             
 
@@ -349,8 +395,12 @@
 
             
 
+            
+
              class using the specified serialization information and context when deserializing a stream into a <see
              cref="T:System.ServiceModel.FaultException" />
+
+            
 
             
 
@@ -366,8 +416,12 @@
 
           
 
+          
+
           The serialization information necessary to reconstruct the <see
            cref="T:System.ServiceModel.FaultException" />
+
+          
 
           
 
@@ -382,8 +436,12 @@
 
           
 
+          
+
           The streaming context required to reconstruct the <see
            cref="T:System.ServiceModel.FaultException" />
+
+          
 
           
 
@@ -422,6 +480,8 @@
 
             
 
+            
+
              class using the specified message fault values and the provided action string.</para
           >
         </summary>
@@ -432,10 +492,14 @@
 
           
 
+          
+
           The message fault that contains the default SOAP fault values to use.</param
         >
         <param name="action">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -474,6 +538,8 @@
 
             
 
+            
+
              class using the specified reason and fault code.</para
           >
         </summary>
@@ -484,10 +550,14 @@
 
           
 
+          
+
           The reason for the SOAP fault.</param
         >
         <param name="code">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -527,11 +597,15 @@
 
             
 
+            
+
              class using the specified reason and SOAP fault code.</para
           >
         </summary>
         <param name="code">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -571,11 +645,15 @@
 
             
 
+            
+
              class using the specified reason, fault code, and action value.</para
           >
         </summary>
         <param name="reason">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -590,10 +668,14 @@
 
           
 
+          
+
           The fault code for the SOAP fault.</param
         >
         <param name="action">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -633,11 +715,15 @@
 
             
 
+            
+
              class using the specified reason, fault code, and action value.</para
           >
         </summary>
         <param name="reason">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -652,10 +738,14 @@
 
           
 
+          
+
           The fault code for the SOAP fault.</param
         >
         <param name="action">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -745,8 +835,12 @@
 
             
 
+            
+
              parameter contains candidate detail types. If any of the <paramref
              name="faultDetailTypes" />
+
+            
 
             
 
@@ -759,8 +853,12 @@
 
             
 
+            
+
              parameter, a <see
              cref="T:System.ServiceModel.FaultException`1" />
+
+            
 
             
 
@@ -779,6 +877,8 @@
 
             
 
+            
+
              object from the specified message fault and an array of detail types.</para
           >
         </summary>
@@ -787,6 +887,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.FaultException" />
+
+            
 
             
 
@@ -835,8 +937,12 @@
 
             
 
+            
+
              parameter contains candidate detail types. If any of the <paramref
              name="faultDetailTypes" />
+
+            
 
             
 
@@ -849,8 +955,12 @@
 
             
 
+            
+
              parameter, a <see
              cref="T:System.ServiceModel.FaultException`1" />
+
+            
 
             
 
@@ -869,6 +979,8 @@
 
             
 
+            
+
              object from the specified message fault, action and an array of detail types.</para
           >
         </summary>
@@ -877,6 +989,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.FaultException" />
+
+            
 
             
 
@@ -892,6 +1006,8 @@
 
           
 
+          
+
           The message fault that contains default SOAP fault information.</param
         >
         <param name="action">
@@ -901,10 +1017,14 @@
 
           
 
+          
+
           The fault action value.</param
         >
         <param name="faultDetailTypes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -943,6 +1063,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -956,6 +1078,8 @@
 
             
 
+            
+
              to create a message that contains a fault. For <see
              cref="T:System.ServiceModel.FaultException" />
 
@@ -963,8 +1087,12 @@
 
             
 
+            
+
              objects that result from fault messages, this <see
              cref="T:System.ServiceModel.Channels.MessageFault" />
+
+            
 
             
 
@@ -1007,6 +1135,8 @@
 
             
 
+            
+
              method that is called when the object is serialized into a stream.</para
           >
         </summary>
@@ -1017,10 +1147,14 @@
 
           
 
+          
+
           The serialization information to which the object data is added when serialized.</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1073,6 +1207,8 @@
           <para
             >Gets the <see
              cref="T:System.ServiceModel.FaultReason" />
+
+            
 
             
 

@@ -8,8 +8,12 @@
 
     
 
+    
+
      (<hyperlink
     >14.5.10.3</hyperlink>
+
+    
 
     
 
@@ -25,11 +29,15 @@
 
         
 
+        
+
         , or </list_item
       >
       <list_item
         > The target object (which cannot be null) and instance method referenced in the  <non_terminal
          where="14.5.10.3">delegate-creation-expression</non_terminal>
+
+        
 
         
 
@@ -42,7 +50,7 @@
 
           >[Example: For example: <code_example
           >
-<![CDATA[
+            <![CDATA[
 delegate void D(int x);  
 class Test  
 {  
@@ -60,6 +68,8 @@ class Demo
 }  
 ]]>
           </code_example>
+
+          
 
           
 

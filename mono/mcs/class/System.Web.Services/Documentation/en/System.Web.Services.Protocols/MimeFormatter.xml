@@ -23,11 +23,15 @@
 
         
 
+        
+
          class establishes a common interface and functionality for reader and writer classes, in both client and service-side .</para
       >
       <para
         >The <see
          cref="T:System.Web.Services.Protocols.MimeFormatter" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          or its descendant classes. Instead, when the Wsdl.exe tool generates client proxy code according to the HTTP-GET or HTTP-POST implementations, it applies the <see
          cref="T:System.Web.Services.Protocols.HttpMethodAttribute" />
+
+        
 
         
 
@@ -57,6 +65,8 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.Services.Protocols.HttpMethodAttribute.ReturnFormatter" />
 
@@ -64,8 +74,12 @@
 
         
 
+        
+
          properties to the appropriate type derived from the <see
          cref="T:System.Web.Services.Protocols.MimeFormatter" />
+
+        
 
         
 
@@ -92,6 +106,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Protocols.MimeFormatter" />
+
+            
 
             
 
@@ -130,6 +146,8 @@
 
             
 
+            
+
              method creates an instance of the derived class and invokes the derived class's implementation of the abstract <see
              cref="M:System.Web.Services.Protocols.MimeFormatter.Initialize(System.Object)" />
 
@@ -137,8 +155,12 @@
 
             
 
+            
+
              method. The <see
              cref="M:System.Web.Services.Protocols.MimeFormatter.CreateInstance(System.Type,System.Object)" />
+
+            
 
             
 
@@ -154,6 +176,8 @@
 
             
 
+            
+
              method. The initializer passed as a parameter to the <see
              cref="M:System.Web.Services.Protocols.MimeFormatter.CreateInstance(System.Type,System.Object)" />
 
@@ -161,8 +185,12 @@
 
             
 
+            
+
              method is obtained from another instance of the derived class, by invoking the <see
              cref="Overload:System.Web.Services.Protocols.MimeFormatter.GetInitializer" />
+
+            
 
             
 
@@ -181,6 +209,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -189,6 +219,8 @@
           <para
             >A <see
              cref="T:System.Web.Services.Protocols.MimeFormatter" />
+
+            
 
             
 
@@ -204,8 +236,12 @@
 
           
 
+          
+
           The Type, derived from <see
            cref="T:System.Web.Services.Protocols.MimeFormatter" />
+
+          
 
           
 
@@ -220,8 +256,12 @@
 
           
 
+          
+
           An object used to initialize the instance obtained earlier through the derived class's implementation of the <see
            cref="M:System.Web.Services.Protocols.MimeFormatter.GetInitializer(System.Web.Services.Protocols.LogicalMethodInfo)" />
+
+          
 
           
 
@@ -258,11 +298,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >A derived class's implementation of the <see
              cref="M:System.Web.Services.Protocols.MimeFormatter.GetInitializer(System.Web.Services.Protocols.LogicalMethodInfo)" />
+
+            
 
             
 
@@ -275,8 +319,12 @@
 
             
 
+            
+
              method, which creates an instance of another object of the derived class, and then to the <see
              cref="M:System.Web.Services.Protocols.MimeFormatter.Initialize(System.Object)" />
+
+            
 
             
 
@@ -299,6 +347,8 @@
 
             
 
+            
+
              that contains the initializer for the specified method.</para
           >
         </returns>
@@ -309,8 +359,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+
+          
 
           
 
@@ -348,11 +402,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >The static <see
              cref="M:System.Web.Services.Protocols.MimeFormatter.GetInitializer(System.Type,System.Web.Services.Protocols.LogicalMethodInfo)" />
+
+            
 
             
 
@@ -365,8 +423,12 @@
 
             
 
+            
+
              method, implicitly creating an instance of the derived class. At the time a request or response is processed, the initializer object is passed to the <see
              cref="M:System.Web.Services.Protocols.MimeFormatter.Initialize(System.Object)" />
+
+            
 
             
 
@@ -389,6 +451,8 @@
 
             
 
+            
+
              object that contains the initializer for the specified method.</para
           >
         </returns>
@@ -399,8 +463,12 @@
 
           
 
+          
+
           The Type, derived from <see
            cref="T:System.Web.Services.Protocols.MimeFormatter" />
+
+          
 
           
 
@@ -415,8 +483,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+
+          
 
           
 
@@ -453,11 +525,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >The <see
              cref="M:System.Web.Services.Protocols.MimeFormatter.GetInitializers(System.Web.Services.Protocols.LogicalMethodInfo[])" />
+
+            
 
             
 
@@ -470,6 +546,8 @@
 
             
 
+            
+
              instance method for each input Web method. This means an instance of a class derived from <see
              cref="T:System.Web.Services.Protocols.MimeFormatter" />
 
@@ -477,8 +555,12 @@
 
             
 
+            
+
              has already been created. At the time a request or response is processed, the initializer is passed to the <see
              cref="M:System.Web.Services.Protocols.MimeFormatter.Initialize(System.Object)" />
+
+            
 
             
 
@@ -497,6 +579,8 @@
         </returns>
         <param name="methodInfos">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -534,11 +618,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >The static <see
              cref="M:System.Web.Services.Protocols.MimeFormatter.GetInitializers(System.Type,System.Web.Services.Protocols.LogicalMethodInfo[])" />
+
+            
 
             
 
@@ -551,8 +639,12 @@
 
             
 
+            
+
              method belonging to the derived class specified by the <paramref
              name="type" />
+
+            
 
             
 
@@ -571,6 +663,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -579,6 +673,8 @@
           <para
             >An array of initializer objects corresponding to the input array of method definitions for a specified class derived from <see
              cref="T:System.Web.Services.Protocols.MimeFormatter" />
+
+            
 
             
 
@@ -594,8 +690,12 @@
 
           
 
+          
+
           The Type, derived from <see
            cref="T:System.Web.Services.Protocols.MimeFormatter" />
+
+          
 
           
 
@@ -610,8 +710,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+
+          
 
           
 
@@ -648,8 +752,12 @@
 
             
 
+            
+
              method is invoked at the time a request or response is processed; however, the initializer is obtained by calling the <see
              cref="M:System.Web.Services.Protocols.MimeFormatter.GetInitializer(System.Web.Services.Protocols.LogicalMethodInfo)" />
+
+            
 
             
 
@@ -664,6 +772,8 @@
         </summary>
         <param name="initializer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

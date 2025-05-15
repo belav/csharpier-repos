@@ -34,10 +34,14 @@
 
         
 
+        
+
          attribute to an assembly or module to prevent the assembly or module from being disassembled using the <format
          type="text/html">
           <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
         </format>
+
+        
 
         
 
@@ -54,10 +58,14 @@
 
         
 
+        
+
          attribute does not block the <format
          type="text/html">
           <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
         </format>
+
+        
 
         
 
@@ -73,6 +81,8 @@
          type="text/html">
           <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
         </format>
+
+        
 
         
 
@@ -107,10 +117,14 @@
 
             
 
+            
+
              attribute to an assembly or module to prevent the assembly or module from being disassembled using the <format
              type="text/html">
               <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">MSIL Disassembler (Ildasm.exe)</a>
             </format>
+
+            
 
             
 
@@ -124,6 +138,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.CompilerServices.SuppressIldasmAttribute" />
+
+            
 
             
 

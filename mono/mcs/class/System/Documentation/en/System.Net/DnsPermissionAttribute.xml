@@ -47,6 +47,8 @@
 
         
 
+        
+
          is stored in the metadata of the attribute target, which is the class to which the <see
          cref="T:System.Net.DnsPermissionAttribute" />
 
@@ -54,8 +56,12 @@
 
         
 
+        
+
          is applied. The system then accesses this information at run time. The <see
          cref="T:System.Security.Permissions.SecurityAction" />
+
+        
 
         
 
@@ -75,6 +81,8 @@
 
         
 
+        
+
         . For <format
          type="text/html">
           <a href="15AAB1E1-6B7D-41AD-B102-C1ED7BEDEA27"
@@ -86,8 +94,12 @@
 
         
 
+        
+
         , use the corresponding <see
          cref="T:System.Net.DnsPermission" />
+
+        
 
         
 
@@ -103,6 +115,8 @@
 
         
 
+        
+
          property to true to grant access, or false for no access. Set this property as a named parameter.</para
       >
       <para
@@ -112,6 +126,8 @@
             >[&lt;topic://cpconExtendingMetadataUsingAttributes&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -157,8 +173,12 @@
 
           
 
+          
+
            is not a valid <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 
@@ -176,8 +196,12 @@
 
             
 
+            
+
              value that is passed to this constructor specifies the allowable <see
              cref="T:System.Net.DnsPermissionAttribute" />
+
+            
 
             
 
@@ -196,8 +220,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Security.Permissions.SecurityAction" />
+
+            
 
             
 
@@ -213,8 +241,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 
@@ -260,8 +292,12 @@
 
             
 
+            
+
              is stored in the metadata of the attribute target, which is the class to which <see
              cref="T:System.Net.DnsPermissionAttribute" />
+
+            
 
             
 
@@ -274,8 +310,12 @@
 
             
 
+            
+
             . The system uses the returned <see
              cref="T:System.Security.IPermission" />
+
+            
 
             
 
@@ -294,6 +334,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -302,6 +344,8 @@
           <para
             >A <see
              cref="T:System.Net.DnsPermission" />
+
+            
 
             
 

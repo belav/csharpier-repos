@@ -34,6 +34,8 @@
 
         
 
+        
+
          is the combination of the namespace and local name. </para
       >
       <format type="text/html">
@@ -46,8 +48,12 @@
 
         
 
+        
+
          does not contain any public constructors. Instead, this class provides an implicit conversion from <see
          cref="T:System.String" />
+
+        
 
         
 
@@ -60,6 +66,8 @@
 
         
 
+        
+
         . The most common place you use this conversion is when constructing an element or attribute: The first argument to the <see
          cref="T:System.Xml.Linq.XElement" />
 
@@ -67,8 +75,12 @@
 
         
 
+        
+
          constructor is an <see
          cref="T:System.Xml.Linq.XName" />
+
+        
 
         
 
@@ -91,8 +103,12 @@ Console.WriteLine(root)</code>
 
         
 
+        
+
          uses the implicit conversion from <see
          cref="T:System.String" />
+
+        
 
         
 
@@ -108,6 +124,8 @@ Console.WriteLine(root)</code>
 
         
 
+        
+
          using XML literals. Even though XML literals are used, an <see
          cref="T:System.Xml.Linq.XName" />
 
@@ -115,8 +133,12 @@ Console.WriteLine(root)</code>
 
         
 
+        
+
          object is created for the <see
          cref="T:System.Xml.Linq.XElement" />
+
+        
 
         
 
@@ -132,8 +154,12 @@ Console.WriteLine(root)</code>
 
         
 
+        
+
          method for an <see
          cref="T:System.Xml.Linq.XName" />
+
+        
 
         
 
@@ -152,6 +178,8 @@ Console.WriteLine(root)</code>
 
         
 
+        
+
          can be in a namespace, or it can be in no namespace.</para
       >
       <para
@@ -162,8 +190,12 @@ Console.WriteLine(root)</code>
 
         
 
+        
+
          in a namespace is to declare the <see
          cref="T:System.Xml.Linq.XNamespace" />
+
+        
 
         
 
@@ -196,8 +228,12 @@ End Module</code>
 
         
 
+        
+
          property of an <see
          cref="T:System.Xml.Linq.XName" />
+
+        
 
         
 
@@ -210,6 +246,8 @@ End Module</code>
 
         
 
+        
+
          is in no namespace, then the <see
          cref="P:System.Xml.Linq.XName.Namespace" />
 
@@ -217,8 +255,12 @@ End Module</code>
 
         
 
+        
+
          property will be set to <see
          cref="P:System.Xml.Linq.XNamespace.None" />
+
+        
 
         
 
@@ -250,6 +292,8 @@ End If</code>
 
         
 
+        
+
          from a expanded XML name in the form {namespace}localname:</para
       >
       <code>XElement root = new XElement("{http://www.adventure-works.com}ElementName", "content");
@@ -266,8 +310,12 @@ Console.WriteLine(root)</code>
 
         
 
+        
+
          through an expanded name is less efficient than creating an <see
          cref="T:System.Xml.Linq.XNamespace" />
+
+        
 
         
 
@@ -278,6 +326,8 @@ Console.WriteLine(root)</code>
       <para
         >If you create an <see
          cref="T:System.Xml.Linq.XName" />
+
+        
 
         
 
@@ -295,8 +345,12 @@ Console.WriteLine(root)</code>
 
         
 
+        
+
          objects are guaranteed to be atomized; that is, if two <see
          cref="T:System.Xml.Linq.XName" />
+
+        
 
         
 
@@ -339,6 +393,8 @@ Console.WriteLine(root)</code>
 
             
 
+            
+
              objects to be equal, they must have the same expanded name.</para
           >
         </remarks>
@@ -352,8 +408,12 @@ Console.WriteLine(root)</code>
 
             
 
+            
+
              is equal to this <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -372,8 +432,12 @@ Console.WriteLine(root)</code>
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -389,6 +453,8 @@ Console.WriteLine(root)</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XName" />
 
@@ -396,8 +462,12 @@ Console.WriteLine(root)</code>
 
           
 
+          
+
            to compare to the current <see
            cref="T:System.Xml.Linq.XName" />
+
+          
 
           
 
@@ -437,11 +507,15 @@ Console.WriteLine(root)</code>
 
             
 
+            
+
             . You can create it from a expanded XML name in the form {namespace}localname, or from a namespace and a local name, specified separately.</para
           >
           <para
             >A much more common and easier way to create an <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -457,8 +531,12 @@ Console.WriteLine(root)</code>
 
             
 
+            
+
              are atomized, if there is an existing <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -471,8 +549,12 @@ Console.WriteLine(root)</code>
 
             
 
+            
+
             . If there is no existing <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -491,6 +573,8 @@ Console.WriteLine(root)</code>
 
             
 
+            
+
              object from an expanded name.</para
           >
         </summary>
@@ -499,6 +583,8 @@ Console.WriteLine(root)</code>
           <para
             >An <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -514,8 +600,12 @@ Console.WriteLine(root)</code>
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -556,11 +646,15 @@ Console.WriteLine(root)</code>
 
             
 
+            
+
             . You can create it from an expanded XML name in the form {namespace}localname, or from a namespace and a local name, specified separately.</para
           >
           <para
             >A much more common and easier way to create an <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -576,8 +670,12 @@ Console.WriteLine(root)</code>
 
             
 
+            
+
              are atomized, if there is an existing <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -590,8 +688,12 @@ Console.WriteLine(root)</code>
 
             
 
+            
+
             . If there is no existing <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -610,6 +712,8 @@ Console.WriteLine(root)</code>
 
             
 
+            
+
              object from a local name and a namespace.</para
           >
         </summary>
@@ -618,6 +722,8 @@ Console.WriteLine(root)</code>
           <para
             >An <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -633,10 +739,14 @@ Console.WriteLine(root)</code>
 
           
 
+          
+
           A local (unqualified) name.</param
         >
         <param name="namespaceName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -671,8 +781,12 @@ Console.WriteLine(root)</code>
 
             
 
+            
+
             . You can use <see
              cref="M:System.Xml.Linq.XName.GetHashCode" />
+
+            
 
             
 
@@ -691,6 +805,8 @@ Console.WriteLine(root)</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -704,8 +820,12 @@ Console.WriteLine(root)</code>
 
             
 
+            
+
              that contains the hash code for the <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -763,6 +883,8 @@ Console.WriteLine(root)</code>
 
             
 
+            
+
              property is guaranteed to not be null. If an <see
              cref="T:System.Xml.Linq.XName" />
 
@@ -770,8 +892,12 @@ Console.WriteLine(root)</code>
 
             
 
+            
+
              is in no namespace, this property returns <see
              cref="P:System.Xml.Linq.XNamespace.None" />
+
+            
 
             
 
@@ -808,6 +934,8 @@ Console.WriteLine(root)</code>
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -821,8 +949,12 @@ Console.WriteLine(root)</code>
 
             
 
+            
+
              for this <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -864,8 +996,12 @@ Console.WriteLine(root)</code>
 
             
 
+            
+
              and a string, such as element.Name == "SomeElementName". The predefined reference equality operators in C# require one operand to be convertible to the type of the other through reference conversions only. These operators do not consider the implicit conversion from string to <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -884,6 +1020,8 @@ Console.WriteLine(root)</code>
 
             
 
+            
+
              are equal.</para
           >
         </summary>
@@ -897,8 +1035,12 @@ Console.WriteLine(root)</code>
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -914,8 +1056,12 @@ Console.WriteLine(root)</code>
 
           
 
+          
+
           The first <see
            cref="T:System.Xml.Linq.XName" />
+
+          
 
           
 
@@ -930,8 +1076,12 @@ Console.WriteLine(root)</code>
 
           
 
+          
+
           The second <see
            cref="T:System.Xml.Linq.XName" />
+
+          
 
           
 
@@ -1003,8 +1153,12 @@ Console.WriteLine(root)</code>
 
             
 
+            
+
              and a string, such as element.Name == "SomeElementName". The predefined reference equality operators in C# require one operand to be convertible to the type of the other through reference conversions only. These operators do not consider the implicit conversion from string to <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -1023,6 +1177,8 @@ Console.WriteLine(root)</code>
 
             
 
+            
+
              are not equal.</para
           >
         </summary>
@@ -1036,8 +1192,12 @@ Console.WriteLine(root)</code>
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -1053,8 +1213,12 @@ Console.WriteLine(root)</code>
 
           
 
+          
+
           The first <see
            cref="T:System.Xml.Linq.XName" />
+
+          
 
           
 
@@ -1069,8 +1233,12 @@ Console.WriteLine(root)</code>
 
           
 
+          
+
           The second <see
            cref="T:System.Xml.Linq.XName" />
+
+          
 
           
 
@@ -1141,6 +1309,8 @@ Console.WriteLine(root)</code>
 
             
 
+            
+
              with the data required to serialize the target object.</para
           >
         </summary>
@@ -1151,8 +1321,12 @@ Console.WriteLine(root)</code>
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -1167,8 +1341,12 @@ Console.WriteLine(root)</code>
 
           
 
+          
+
           The destination (see <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -1203,6 +1381,8 @@ Console.WriteLine(root)</code>
           <para
             >A <see
              cref="T:System.String" />
+
+            
 
             
 

@@ -106,11 +106,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="elemCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -162,11 +166,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="elemCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -247,11 +255,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="elemType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -303,11 +315,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="elemType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -349,8 +365,12 @@
 
             
 
+            
+
              passed to this method must be a simple native type. None of the following values may be used: <see
              cref="F:System.Runtime.InteropServices.UnmanagedType.ByValTStr" />
+
+            
 
             
 
@@ -363,8 +383,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Runtime.InteropServices.UnmanagedType.ByValArray" />
+
+            
 
             
 
@@ -377,8 +401,12 @@
 
             
 
+            
+
             , or <see
              cref="F:System.Runtime.InteropServices.UnmanagedType.CustomMarshaler" />
+
+            
 
             
 
@@ -402,11 +430,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="unmanagedType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

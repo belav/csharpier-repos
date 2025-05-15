@@ -85,8 +85,12 @@
 
             
 
+            
+
              for the named pipe transport through <see
              cref="P:System.ServiceModel.NamedPipeTransportSecurity.ProtectionLevel" />
+
+            
 
             
 

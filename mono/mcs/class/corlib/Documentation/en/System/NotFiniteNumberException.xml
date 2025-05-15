@@ -45,10 +45,14 @@
 
         
 
+        
+
          is available for programming languages that do not support the concepts of infinity and Not-a-Number in floating-point operations.</para
       >
       <para>
         <see cref="T:System.NotFiniteNumberException" />
+
+        
 
         
 
@@ -64,8 +68,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.NotFiniteNumberException.#ctor" />
+
+        
 
         
 
@@ -109,11 +117,15 @@
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "The number encountered was not a finite quantity." This message takes into account the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.NotFiniteNumberException" />
+
+            
 
             
 
@@ -164,6 +176,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -204,8 +218,12 @@
 
             
 
+            
+
              parameter must be both a <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -216,6 +234,8 @@
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.NotFiniteNumberException" />
+
+            
 
             
 
@@ -266,11 +286,15 @@
 
             
 
+            
+
              class with the invalid number.</para
           >
         </summary>
         <param name="offendingNumber">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -312,11 +336,15 @@
 
             
 
+            
+
              string is understandable to the user and that it is localized for the current culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.NotFiniteNumberException" />
+
+            
 
             
 
@@ -367,11 +395,15 @@
 
             
 
+            
+
              class with a specified error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -416,6 +448,8 @@
 
             
 
+            
+
              class with serialized data.</para
           >
         </summary>
@@ -426,10 +460,14 @@
 
           
 
+          
+
           The object that holds the serialized object data. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -474,11 +512,15 @@
 
             
 
+            
+
              string is understandable to the user and that it is localized for the current culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.NotFiniteNumberException" />
+
+            
 
             
 
@@ -539,6 +581,8 @@
 
             
 
+            
+
              class with a specified error message and the invalid number.</para
           >
         </summary>
@@ -549,10 +593,14 @@
 
           
 
+          
+
           The message that describes the error. </param
         >
         <param name="offendingNumber">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -593,8 +641,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -607,11 +659,15 @@
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.NotFiniteNumberException" />
+
+            
 
             
 
@@ -662,11 +718,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is root cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -681,8 +741,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 
@@ -728,8 +792,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -742,11 +810,15 @@
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.NotFiniteNumberException" />
+
+            
 
             
 
@@ -807,11 +879,15 @@
 
             
 
+            
+
              class with a specified error message, the invalid number, and a reference to the inner exception that is root cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -826,6 +902,8 @@
 
           
 
+          
+
           The value of the argument that caused the exception. </param
         >
         <param name="innerException">
@@ -835,8 +913,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 
@@ -879,8 +961,12 @@
 
             
 
+            
+
              sets a <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -893,11 +979,15 @@
 
             
 
+            
+
              transmitted over the stream.</para
           >
           <para
             >For more information, see <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -916,6 +1006,8 @@
 
             
 
+            
+
              object with the invalid number and additional exception information.</para
           >
         </summary>
@@ -926,10 +1018,14 @@
 
           
 
+          
+
           The object that holds the serialized object data. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -966,6 +1062,8 @@
 
             
 
+            
+
              that contains the invalid value.</para
           >
         </value>
@@ -979,8 +1077,12 @@
 
             
 
+            
+
              property returns the same value as was passed into the constructor, or zero if no value was supplied. Override the <see
              cref="P:System.NotFiniteNumberException.OffendingNumber" />
+
+            
 
             
 

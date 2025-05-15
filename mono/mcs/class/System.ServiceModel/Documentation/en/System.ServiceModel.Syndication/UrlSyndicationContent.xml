@@ -52,8 +52,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" />
+
+            
 
             
 
@@ -69,8 +73,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" />
+
+          
 
           
 
@@ -108,6 +116,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -121,8 +131,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -138,8 +152,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -154,8 +172,12 @@
 
           
 
+          
+
           The media type of the resource referenced by the <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -194,6 +216,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -207,8 +231,12 @@
 
             
 
+            
+
              instance that contains the new copy of the <see
              cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" />
+
+            
 
             
 
@@ -241,6 +269,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -249,6 +279,8 @@
           <para
             >Gets the content type of the <see
              cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" />
+
+            
 
             
 
@@ -282,8 +314,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.ServiceModel.Syndication.UrlSyndicationContent" />
+
+            
 
             
 
@@ -325,8 +361,12 @@
 
             
 
+            
+
              instance to the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -342,8 +382,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 

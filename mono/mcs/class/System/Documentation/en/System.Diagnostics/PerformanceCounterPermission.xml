@@ -37,6 +37,8 @@
 
         
 
+        
+
         .</para
       >
     </summary>
@@ -63,6 +65,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Diagnostics.PerformanceCounterPermission" />
+
+            
 
             
 
@@ -107,11 +111,15 @@
 
             
 
+            
+
              class with the specified permission access level entries.</para
           >
         </summary>
         <param name="permissionAccessEntries">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -124,8 +132,12 @@
 
           
 
+          
+
            objects. The <see
            cref="P:System.Diagnostics.PerformanceCounterPermission.PermissionEntries" />
+
+          
 
           
 
@@ -166,6 +178,8 @@
 
             
 
+            
+
              class with the specified permission state.</para
           >
         </summary>
@@ -176,8 +190,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -223,6 +241,8 @@
 
             
 
+            
+
              class with the specified access levels, the name of the computer to use, and the category associated with the performance counter.</para
           >
         </summary>
@@ -233,8 +253,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Diagnostics.PerformanceCounterPermissionAccess" />
+
+          
 
           
 
@@ -249,10 +273,14 @@
 
           
 
+          
+
           The server on which the performance counter and its associate category reside. </param
         >
         <param name="categoryName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -38,6 +38,8 @@
 
         
 
+        
+
          is a concrete implementation of XmlResolver and is the default resolver for all classes in the System.Xml namespace. You can also create your own resolver.</para
       >
       <format type="text/html">
@@ -46,6 +48,8 @@
       <para
         >Consider the following items when working with the <see
          cref="T:System.Xml.XmlResolver" />
+
+        
 
         
 
@@ -62,6 +66,8 @@
 
             
 
+            
+
              objects can contain sensitive information such as user credentials. You should be careful when caching <see
              cref="T:System.Xml.XmlResolver" />
 
@@ -69,8 +75,12 @@
 
             
 
+            
+
              objects and should not pass the <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -88,6 +98,8 @@
 
             
 
+            
+
              class, the property should be defined as a write-only property. The property can be used to specify the <see
              cref="T:System.Xml.XmlResolver" />
 
@@ -95,8 +107,12 @@
 
             
 
+            
+
              to use, but it cannot be used to return an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -114,8 +130,12 @@
 
             
 
+            
+
              objects from untrusted code, you cannot assume that the URI passed into the <see
              cref="M:System.Xml.XmlResolver.GetEntity(System.Uri,System.String,System.Type)" />
+
+            
 
             
 
@@ -128,6 +148,8 @@
 
             
 
+            
+
              method. Classes derived from the <see
              cref="T:System.Xml.XmlResolver" />
 
@@ -135,8 +157,12 @@
 
             
 
+            
+
              class can override the <see
              cref="M:System.Xml.XmlResolver.GetEntity(System.Uri,System.String,System.Type)" />
+
+            
 
             
 
@@ -154,8 +180,12 @@
 
             
 
+            
+
              method by implementing a wrapping implemented IStream that limits the number of bytes read. This helps to guard against situations where malicious code attempts to pass an infinite stream of bytes to the <see
              cref="M:System.Xml.XmlResolver.GetEntity(System.Uri,System.String,System.Type)" />
+
+            
 
             
 
@@ -202,6 +232,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -241,6 +273,8 @@
 
             
 
+            
+
              instance
    containing the
    credentials.</para
@@ -255,6 +289,8 @@
 
             
 
+            
+
              for an example using this property.</para
           >
         </example>
@@ -264,6 +300,8 @@
           <para
             >The following C# code sets credentials on the <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -324,8 +362,12 @@ resolver.Credentials = myCache;</code>
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -340,6 +382,8 @@ resolver.Credentials = myCache;</code>
 
           
 
+          
+
            is not a supported type.</exception
         >
         <exception cref="T:System.NullReferenceException">
@@ -349,8 +393,12 @@ resolver.Credentials = myCache;</code>
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -369,6 +417,8 @@ resolver.Credentials = myCache;</code>
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -380,8 +430,12 @@ resolver.Credentials = myCache;</code>
 
               
 
+              
+
                method by implementing a wrapping implemented IStream that limits the number of bytes read. This helps to guard against situations where malicious code attempts to pass an infinite stream of bytes to the <see
                cref="M:System.Xml.XmlResolver.GetEntity(System.Uri,System.String,System.Type)" />
+
+              
 
               
 
@@ -405,6 +459,8 @@ resolver.Credentials = myCache;</code>
 
             
 
+            
+
              object or null if a type other than stream is specified.</para
           >
         </returns>
@@ -415,8 +471,12 @@ resolver.Credentials = myCache;</code>
 
           
 
+          
+
           The URI returned from <see
            cref="M:System.Xml.XmlResolver.ResolveUri(System.Uri,System.String)" />
+
+          
 
           
 
@@ -431,10 +491,14 @@ resolver.Credentials = myCache;</code>
 
           
 
+          
+
           The current version does not use this parameter when resolving URIs. This is provided for future extensibility purposes. For example, this can be mapped to the xlink: role and used as an implementation specific argument in other scenarios.</param
         >
         <param name="ofObjectToReturn">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -477,8 +541,12 @@ resolver.Credentials = myCache;</code>
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlReaderSettings.Async" />
+
+            
 
             
 
@@ -501,6 +569,8 @@ resolver.Credentials = myCache;</code>
 
             
 
+            
+
              object or null if a type other than stream is specified.</para
           >
         </returns>
@@ -511,8 +581,12 @@ resolver.Credentials = myCache;</code>
 
           
 
+          
+
           The URI returned from <see
            cref="M:System.Xml.XmlResolver.ResolveUri(System.Uri,System.String)" />
+
+          
 
           
 
@@ -527,6 +601,8 @@ resolver.Credentials = myCache;</code>
 
           
 
+          
+
           The current version does not use this parameter when resolving URIs. This is provided for future extensibility purposes. For example, this can be mapped to the xlink: role and used as an implementation specific argument in other scenarios.</param
         >
         <param name="ofObjectToReturn">
@@ -536,8 +612,12 @@ resolver.Credentials = myCache;</code>
 
           
 
+          
+
           The type of object to return. The current version only returns <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -581,6 +661,8 @@ resolver.Credentials = myCache;</code>
 
           
 
+          
+
            and <paramref
            name="relativeUri" />
 
@@ -588,8 +670,12 @@ resolver.Credentials = myCache;</code>
 
           
 
+          
+
            are <see
            langword="null" />
+
+          
 
           
 
@@ -604,6 +690,8 @@ resolver.Credentials = myCache;</code>
 
           
 
+          
+
            and <paramref
            name="relativeUri" />
 
@@ -611,8 +699,12 @@ resolver.Credentials = myCache;</code>
 
           
 
+          
+
            are <see
            langword="null" />
+
+          
 
           
 
@@ -638,11 +730,15 @@ resolver.Credentials = myCache;</code>
 
             
 
+            
+
              representing the absolute URI or null if the relative URI cannot be resolved.</para
           >
         </returns>
         <param name="baseUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -657,6 +753,8 @@ resolver.Credentials = myCache;</code>
 
           
 
+          
+
           The URI to resolve. The URI can be absolute or relative. If absolute, this value effectively replaces the <paramref
            name="baseUri" />
 
@@ -664,8 +762,12 @@ resolver.Credentials = myCache;</code>
 
           
 
+          
+
            value. If relative, it combines with the <paramref
            name="baseUri" />
+
+          
 
           
 
@@ -708,6 +810,8 @@ resolver.Credentials = myCache;</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -716,6 +820,8 @@ resolver.Credentials = myCache;</code>
           <para
             >true if the <paramref
              name="type" />
+
+            
 
             
 
@@ -731,10 +837,14 @@ resolver.Credentials = myCache;</code>
 
           
 
+          
+
           The URI.</param
         >
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

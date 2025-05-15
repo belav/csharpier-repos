@@ -8,8 +8,7 @@
     <DiagnosticId>CP0001</DiagnosticId>
     <Target>T:System.Lazy`2</Target>
     <Left>netstandard2.0/System.ComponentModel.Composition.dll</Left>
-    <Right
->right</Right>
+    <Right>right</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0002</DiagnosticId>
@@ -141,8 +140,7 @@
     <DiagnosticId>CP0004</DiagnosticId>
     <Target>System.ComponentModel.Composition, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Target>
     <Left>netstandard2.0/System.ComponentModel.Composition.dll</Left>
-    <Right
->right</Right>
+    <Right>right</Right>
   </Suppression>
   <Suppression>
     <DiagnosticId>CP0009</DiagnosticId>

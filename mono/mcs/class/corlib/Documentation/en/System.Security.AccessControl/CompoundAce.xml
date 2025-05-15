@@ -59,11 +59,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="flags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -78,6 +82,8 @@
 
           
 
+          
+
           The access mask for the ACE.</param
         >
         <param name="compoundAceType">
@@ -87,8 +93,12 @@
 
           
 
+          
+
           A value from the <see
            cref="T:System.Security.AccessControl.CompoundAceType" />
+
+          
 
           
 
@@ -103,8 +113,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -139,8 +153,12 @@
 
             
 
+            
+
              object. This length should be used before marshaling the ACL into a binary array with the <see
              cref="M:System.Security.AccessControl. CompoundAce.GetBinaryForm" />
+
+            
 
             
 
@@ -177,6 +195,8 @@
           <para
             >Gets or sets the type of this <see
              cref="T:System.Security.AccessControl. CompoundAce" />
+
+            
 
             
 
@@ -221,11 +241,15 @@
 
             
 
+            
+
              object into the specified byte array beginning at the specified offset.</para
           >
         </summary>
         <param name="binaryForm">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -238,10 +262,14 @@
 
           
 
+          
+
            is marshaled.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

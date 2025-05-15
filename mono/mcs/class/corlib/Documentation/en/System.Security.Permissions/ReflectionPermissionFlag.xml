@@ -44,8 +44,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Security.Permissions.ReflectionPermissionAttribute" />
+
+        
 
         
 
@@ -58,10 +62,14 @@
 
         
 
+        
+
          is granted, reflection is allowed on all types and members, but invocation operations are allowed only on visible types and members. For more information, see <format
          type="text/html">
           <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5">Security Considerations for Reflection</a>
         </format>
+
+        
 
         
 
@@ -78,6 +86,8 @@
 
           
 
+          
+
            can provide access to private class members, we recommend that you grant <see
            cref="T:System.Security.Permissions.ReflectionPermission" />
 
@@ -85,8 +95,12 @@
 
           
 
+          
+
            to Internet code only with the <see
            cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+          
 
           
 
@@ -103,11 +117,15 @@
 
         
 
+        
+
          flag is introduced in the net_v20sp1_short. To use this flag, your application should target the net_v35_long or later. </para
       >
       <block subset="none" type="note">
         <para>
           <see cref="F:System.Security.Permissions.ReflectionPermissionFlag.AllFlags" />
+
+          
 
           
 
@@ -120,6 +138,8 @@
 
           
 
+          
+
            flag. To get a mask that includes all flags in this enumeration, you must use the combination of <see
            cref="F:System.Security.Permissions.ReflectionPermissionFlag.AllFlags" />
 
@@ -127,8 +147,12 @@
 
           
 
+          
+
            with <see
            cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+          
 
           
 
@@ -145,11 +169,15 @@
 
         
 
+        
+
          flag is no longer required to emit code, unless debug symbols are emitted. To use this feature, your application should target the net_v35_short or later. </para
       >
       <para
         >Starting with the dnprdnlong, the <see
          cref="F:System.Security.Permissions.ReflectionPermissionFlag.TypeInformation" />
+
+        
 
         
 
@@ -168,8 +196,12 @@
 
         
 
+        
+
          and <see
          cref="N:System.Reflection.Emit" />
+
+        
 
         
 
@@ -213,8 +245,12 @@
 
             
 
+            
+
              does not include <see
              cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+            
 
             
 
@@ -373,6 +409,8 @@
           <para
             >This flag is obsolete. No flags are necessary to enumerate types and members and to examine their metadata. Use <see
              cref="F:System.Security.Permissions.ReflectionPermissionFlag.NoFlags" />
+
+            
 
             
 

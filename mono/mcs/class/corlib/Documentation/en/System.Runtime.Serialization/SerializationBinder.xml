@@ -41,10 +41,14 @@
 
         
 
+        
+
         ) hash of the assembly. By default, deserialization uses this information to create an instance of an identical object (with the exception of any assembly loading restricted by the security policy). Some users need to control which class to load, either because the class has moved between assemblies or a different version of the class is required on the server and client.</para
       >
       <para>
         <see cref="T:System.Runtime.Serialization.SerializationBinder" />
+
+        
 
         
 
@@ -56,6 +60,8 @@
         <para
           >Only use <see
            cref="T:System.Runtime.Serialization.SerializationBinder" />
+
+          
 
           
 
@@ -93,6 +99,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Serialization.SerializationBinder" />
+
+            
 
             
 
@@ -171,8 +179,12 @@
 
           
 
+          
+
           Specifies the <see
            cref="T:System.Reflection.Assembly" />
+
+          
 
           
 
@@ -187,8 +199,12 @@
 
           
 
+          
+
           Specifies the <see
            cref="T:System.Type" />
+
+          
 
           
 

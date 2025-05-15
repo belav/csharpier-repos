@@ -44,8 +44,12 @@
 
         
 
+        
+
          is a control that contains other controls. You can use a <see
          cref="T:System.Windows.Forms.Panel" />
+
+        
 
         
 
@@ -58,8 +62,12 @@
 
         
 
+        
+
          controls. As with other container controls such as the <see
          cref="T:System.Windows.Forms.GroupBox" />
+
+        
 
         
 
@@ -72,6 +80,8 @@
 
         
 
+        
+
          control's <see
          cref="P:System.Windows.Forms.Control.Enabled" />
 
@@ -79,8 +89,12 @@
 
         
 
+        
+
          property is set to false, the controls contained within the <see
          cref="T:System.Windows.Forms.Panel" />
+
+        
 
         
 
@@ -96,8 +110,12 @@
 
         
 
+        
+
          control is displayed by default without any borders. You can provide a standard or three-dimensional border using the <see
          cref="P:System.Windows.Forms.Panel.BorderStyle" />
+
+        
 
         
 
@@ -110,8 +128,12 @@
 
         
 
+        
+
          control derives from the <see
          cref="T:System.Windows.Forms.ScrollableControl" />
+
+        
 
         
 
@@ -124,8 +146,12 @@
 
         
 
+        
+
          property to enable scroll bars in the <see
          cref="T:System.Windows.Forms.Panel" />
+
+        
 
         
 
@@ -138,8 +164,12 @@
 
         
 
+        
+
          property is set to true, any controls located within the <see
          cref="T:System.Windows.Forms.Panel" />
+
+        
 
         
 
@@ -155,6 +185,8 @@
 
         
 
+        
+
          control does not display a caption. If you need a control similar to a <see
          cref="T:System.Windows.Forms.Panel" />
 
@@ -162,8 +194,12 @@
 
         
 
+        
+
          that can display a caption, see the <see
          cref="T:System.Windows.Forms.GroupBox" />
+
+        
 
         
 
@@ -189,6 +225,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.Panel" />
+
+            
 
             
 
@@ -262,6 +300,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -270,6 +310,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.Panel.AutoSize" />
+
+            
 
             
 
@@ -341,8 +383,12 @@
 
             
 
+            
+
              control is displayed without a border. You can use this property to distinguish the boundaries of the <see
              cref="T:System.Windows.Forms.Panel" />
+
+            
 
             
 
@@ -517,8 +563,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -555,8 +605,12 @@
 
             
 
+            
+
              property value of false are not included in the collection of controls in the tab order. The tab order can be manipulated by setting the control's <see
              cref="P:System.Windows.Forms.Control.TabIndex" />
+
+            
 
             
 
@@ -573,8 +627,12 @@
 
               
 
+              
+
                property has no effect on the <see
                cref="T:System.Windows.Forms.Panel" />
+
+              
 
               
 
@@ -668,6 +726,8 @@
           <para
             >A <see
              cref="T:System.String" />
+
+            
 
             
 

@@ -49,6 +49,8 @@
 
         
 
+        
+
          security action
       indicates that this is the minimum permission required for the target assembly
       to be able to execute.</para
@@ -75,6 +77,8 @@
 
         
 
+        
+
          that is used.</para
       >
       <para>The security information declared by a security attribute is stored in the metadata of the attribute target and is accessed by the system at run time. Security attributes are used only for declarative security. For imperative security, use the corresponding permission class.</para>
@@ -87,8 +91,12 @@
 
           
 
+          
+
            grants permission for all paths within a file system, including multiple pathnames that can be used to access a single given file. To <see
            cref="M:System.Security.CodeAccessPermission.Deny" />
+
+          
 
           
 
@@ -103,6 +111,8 @@
       <para
         >Allows security actions for <see
          cref="T:System.Security.Permissions.FileIOPermission" />
+
+        
 
         
 
@@ -145,8 +155,12 @@
 
           
 
+          
+
            is not a valid <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 
@@ -164,8 +178,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Security.Permissions.SecurityAction" />
+
+            
 
             
 
@@ -181,8 +199,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 
@@ -253,6 +275,8 @@
 
             
 
+            
+
              value can be determined by using a bitwise AND operation.</para
           >
         </remarks>
@@ -293,6 +317,8 @@
 
             
 
+            
+
              value can be determined by using a bitwise AND operation.</para
           >
         </remarks>
@@ -324,6 +350,8 @@
           <para
             > A <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -366,6 +394,8 @@
           <para
             >This property gets or sets access for a single file or directory. Use additional <see
              cref="T:System.Security.Permissions.FileIOPermissionAttribute" />
+
+            
 
             
 
@@ -422,6 +452,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -430,6 +462,8 @@
           <para
             >A <see
              cref="T:System.Security.Permissions.FileIOPermission" />
+
+            
 
             
 
@@ -468,6 +502,8 @@
 
             
 
+            
+
              containing
    the absolute path of the file or directory for which access to the
    contents of the path is secured.</para
@@ -488,8 +524,12 @@
 
               
 
+              
+
                should be granted only to directories, not to files. For example, <see
                cref="P:System.Security.Permissions.FileIOPermissionAttribute.PathDiscovery" />
+
+              
 
               
 
@@ -529,6 +569,8 @@
           <para
             > A <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -576,6 +618,8 @@
 
             
 
+            
+
              attributes to specify additional files and directories.</para
           >
           <block subset="none" type="note">
@@ -612,8 +656,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Security.Permissions.FileIOPermissionAttribute.PathDiscovery" />
+
+            
 
             
 
@@ -626,8 +674,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Security.Permissions.FileIOPermissionAttribute.Write" />
+
+            
 
             
 
@@ -640,6 +692,8 @@
 
             
 
+            
+
              attributes to specify additional files and directories. The access rights are for file data only; they do not include the access control properties <see
              cref="P:System.Security.Permissions.FileIOPermissionAttribute.ViewAccessControl" />
 
@@ -647,8 +701,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Security.Permissions.FileIOPermissionAttribute.ChangeAccessControl" />
+
+            
 
             
 
@@ -688,6 +746,8 @@
           <para
             > A <see
              cref="T:System.String" />
+
+            
 
             
 

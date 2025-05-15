@@ -29,8 +29,12 @@
 
         
 
+        
+
          class when an attempt is made to access a property by name, but either the property was never associated with the <see
          cref="T:System.Configuration.SettingsBase" />
+
+        
 
         
 
@@ -44,6 +48,8 @@
       <para
         >Provides an exception for <see
          cref="T:System.Configuration.SettingsProperty" />
+
+        
 
         
 
@@ -74,6 +80,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Configuration.SettingsPropertyNotFoundException" />
+
+            
 
             
 
@@ -114,11 +122,15 @@
 
             
 
+            
+
              class, based on a supplied parameter.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -159,6 +171,8 @@
 
             
 
+            
+
              class, based on supplied parameters.</para
           >
         </summary>
@@ -169,8 +183,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -185,8 +203,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -227,6 +249,8 @@
 
             
 
+            
+
              class, based on supplied parameters.</para
           >
         </summary>
@@ -237,10 +261,14 @@
 
           
 
+          
+
           A string containing an exception message.</param
         >
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

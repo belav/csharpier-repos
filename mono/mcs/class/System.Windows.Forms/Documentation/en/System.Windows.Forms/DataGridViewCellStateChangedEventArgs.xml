@@ -27,8 +27,12 @@
 
         
 
+        
+
          property to determine which cell changed. Use the <see
          cref="P:System.Windows.Forms.DataGridViewCellStateChangedEventArgs.StateChanged" />
+
+        
 
         
 
@@ -46,6 +50,8 @@
 
         
 
+        
+
         . </para
       >
     </remarks>
@@ -54,6 +60,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.DataGridView.CellStateChanged" />
+
+        
 
         
 
@@ -86,8 +94,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.DataGridViewCellStateChangedEventArgs.StateChanged" />
+
+            
 
             
 
@@ -106,6 +118,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -116,8 +130,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridViewCell" />
+
+          
 
           
 
@@ -132,8 +150,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -164,6 +186,8 @@
           <para
             >Gets the <see
              cref="T:System.Windows.Forms.DataGridViewCell" />
+
+            
 
             
 

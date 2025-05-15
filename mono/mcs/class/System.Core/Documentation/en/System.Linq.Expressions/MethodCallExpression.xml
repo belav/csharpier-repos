@@ -37,8 +37,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Linq.Expressions.Expression.ArrayIndex(System.Linq.Expressions.Expression,System.Collections.Generic.IEnumerable{System.Linq.Expressions.Expression})" />
+
+        
 
         
 
@@ -51,8 +55,12 @@
 
         
 
+        
+
          factory method to create a <see
          cref="T:System.Linq.Expressions.MethodCallExpression" />
+
+        
 
         
 
@@ -68,6 +76,8 @@
 
         
 
+        
+
          property of a <see
          cref="T:System.Linq.Expressions.MethodCallExpression" />
 
@@ -75,8 +85,12 @@
 
         
 
+        
+
          object is <see
          cref="F:System.Linq.Expressions.ExpressionType.Call" />
+
+        
 
         
 
@@ -121,8 +135,12 @@
 
             
 
+            
+
              nodes calls <see
              cref="M:System.Linq.Expressions.ExpressionVisitor.VisitExtension(System.Linq.Expressions.Expression)" />
+
+            
 
             
 
@@ -135,8 +153,12 @@
 
             
 
+            
+
              class. However, it should still support unknown visitors by calling <see
              cref="M:System.Linq.Expressions.ExpressionVisitor.VisitExtension(System.Linq.Expressions.Expression)" />
+
+            
 
             
 
@@ -155,8 +177,12 @@
 
             
 
+            
+
              calls the <see
              cref="M:System.Linq.Expressions.ExpressionVisitor.VisitMethodCall(System.Linq.Expressions.MethodCallExpression)" />
+
+            
 
             
 
@@ -171,6 +197,8 @@
         </returns>
         <param name="visitor">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -233,6 +261,8 @@
 
             
 
+            
+
              for the method to be called.</para
           >
         </summary>
@@ -262,6 +292,8 @@
           <para
             >Returns the node type of this <see
              cref="T:System.Linq.Expressions.Expression" />
+
+            
 
             
 
@@ -301,6 +333,8 @@
 
             
 
+            
+
              object's <see
              cref="P:System.Linq.Expressions.MethodCallExpression.Method" />
 
@@ -308,8 +342,12 @@
 
             
 
+            
+
              property represents a static (Shared in Visual Basic) method, the <see
              cref="P:System.Linq.Expressions.MethodCallExpression.Object" />
+
+            
 
             
 
@@ -323,6 +361,8 @@
           <para
             >Gets the <see
              cref="T:System.Linq.Expressions.Expression" />
+
+            
 
             
 
@@ -404,6 +444,8 @@
 
             
 
+            
+
              represents.</para
           >
         </summary>
@@ -449,8 +491,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.MethodCallExpression.Object" />
+
+          
 
           
 
@@ -465,8 +511,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.MethodCallExpression.Arguments" />
+
+          
 
           
 

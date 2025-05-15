@@ -63,6 +63,8 @@
 
             
 
+            
+
              class for a specified contract.</para
           >
         </summary>
@@ -73,8 +75,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.ContractDescription" />
+
+          
 
           
 
@@ -117,6 +123,8 @@
 
             
 
+            
+
              class with a specified contract, binding, and address.</para
           >
         </summary>
@@ -127,8 +135,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.ContractDescription" />
+
+          
 
           
 
@@ -143,8 +155,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Binding" />
+
+          
 
           
 
@@ -159,8 +175,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.EndpointAddress" />
+
+          
 
           
 
@@ -198,8 +218,12 @@
 
             
 
+            
+
              at which the service endpoint listens is provided by <see
              cref="P:System.ServiceModel.EndpointAddress.Uri" />
+
+            
 
             
 
@@ -212,8 +236,12 @@
 
             
 
+            
+
              returned by <see
              cref="P:System.ServiceModel.Description.ServiceEndpoint.Address" />
+
+            
 
             
 
@@ -256,8 +284,12 @@
 
             
 
+            
+
              the <see
              cref="T:System.ServiceModel.Description.IEndpointBehavior" />
+
+            
 
             
 
@@ -273,8 +305,12 @@
 
             
 
+            
+
              associated with an endpoint, you can obtain the contact for the endpoint using the <see
              cref="P:System.ServiceModel.Description.ServiceEndpoint.Contract" />
+
+            
 
             
 
@@ -287,6 +323,8 @@
 
             
 
+            
+
              property to obtain the <see
              cref="T:System.Collections.Generic.KeyedByTypeCollection`1" />
 
@@ -294,8 +332,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.ServiceModel.Description.IContractBehavior" />
+
+            
 
             
 
@@ -340,6 +382,8 @@
 
             
 
+            
+
              element.</para
           >
         </remarks>
@@ -377,6 +421,8 @@
 
             
 
+            
+
             , the <see
              cref="T:System.ServiceModel.Description.OperationDescriptionCollection" />
 
@@ -384,8 +430,12 @@
 
             
 
+            
+
              for the methods contained in the contract can be accessed using the <see
              cref="P:System.ServiceModel.Description.ContractDescription.Operations" />
+
+            
 
             
 
@@ -466,6 +516,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -503,8 +555,12 @@
 
             
 
+            
+
              is used to determine how the transport handles the <see
              cref="P:System.ServiceModel.Description.ServiceEndpoint.ListenUri" />
+
+            
 
             
 
@@ -541,8 +597,12 @@
 
             
 
+            
+
              is distinct from the name of the service. The service name is accessed using the <see
              cref="P:System.ServiceModel.Description.ServiceDescription.Name" />
+
+            
 
             
 

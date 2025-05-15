@@ -24,11 +24,15 @@
 
         
 
+        
+
          interface to create a custom client formatter that serializes objects into messages and deserializes messages into objects for a particular operation.</para
       >
       <para
         >Attach custom indigo1 client formatters to the <see
          cref="P:System.ServiceModel.Dispatcher.ClientOperation.Formatter" />
+
+        
 
         
 
@@ -84,6 +88,8 @@
 
           
 
+          
+
           The inbound message.</param
         >
       </Docs>
@@ -125,8 +131,12 @@
 
             
 
+            
+
              array into an outbound <see
              cref="T:System.ServiceModel.Channels.Message" />
+
+            
 
             
 

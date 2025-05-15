@@ -24,8 +24,12 @@
 
         
 
+        
+
          control implements the functionality of a <see
          cref="T:System.Web.UI.WebControls.HyperLink" />
+
+        
 
         
 
@@ -41,6 +45,8 @@
 
         
 
+        
+
          control is parsed and a design-time version of the control is created on the design surface. When you switch back to Source view, the design-time control is persisted to the markup source code and edited into the markup for the Web page. The <see
          cref="T:System.Web.UI.Design.WebControls.LinkButtonDesigner" />
 
@@ -48,8 +54,12 @@
 
         
 
+        
+
          class provides design-time support for the <see
          cref="T:System.Web.UI.WebControls.LinkButton" />
+
+        
 
         
 
@@ -63,6 +73,8 @@
       <para
         >Provides design-time support in a visual designer for the <see
          cref="T:System.Web.UI.WebControls.LinkButton" />
+
+        
 
         
 
@@ -88,6 +100,8 @@
 
             
 
+            
+
              class when it creates the associated <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
 
@@ -95,8 +109,12 @@
 
             
 
+            
+
              control or a copy of the <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
+
+            
 
             
 
@@ -110,6 +128,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.WebControls.LinkButtonDesigner" />
+
+            
 
             
 

@@ -32,8 +32,12 @@
 
         
 
+        
+
          uses the <see
          cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" />
+
+        
 
         
 
@@ -49,6 +53,8 @@
 
         
 
+        
+
         , the <see
          cref="T:System.Web.Configuration.FormsAuthenticationCredentials" />
 
@@ -56,8 +62,12 @@
 
         
 
+        
+
         , and the <see
          cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+
+        
 
         
 
@@ -72,6 +82,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+
+        
 
         
 
@@ -94,6 +106,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" />
+
+            
 
             
 
@@ -131,6 +145,8 @@
 
             
 
+            
+
              object with the same name.</para
           >
         </remarks>
@@ -139,6 +155,8 @@
           <para
             >Adds a <see
              cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+
+            
 
             
 
@@ -154,8 +172,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+
+          
 
           
 
@@ -182,6 +204,8 @@
           <para
             >You can use this method to access the <see
              cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+
+            
 
             
 
@@ -222,6 +246,8 @@
 
             
 
+            
+
              objects from the collection.</para
           >
         </summary>
@@ -248,6 +274,8 @@
           <para
             >Gets the type of the <see
              cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" />
+
+            
 
             
 
@@ -322,6 +350,8 @@
 
             
 
+            
+
              collection element at the specified index.</para
           >
         </summary>
@@ -335,11 +365,15 @@
 
             
 
+            
+
              that contains the user name and password.</para
           >
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -377,6 +411,8 @@
 
             
 
+            
+
              collection element with the specified name.</para
           >
         </summary>
@@ -390,11 +426,15 @@
 
             
 
+            
+
              object that contains the user name and password.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -452,6 +492,8 @@
 
             
 
+            
+
              collection index.</para
           >
         </summary>
@@ -465,11 +507,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -572,6 +618,8 @@
 
             
 
+            
+
              object from the collection.</para
           >
         </summary>
@@ -582,8 +630,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+
+          
 
           
 
@@ -621,6 +673,8 @@
 
             
 
+            
+
              object at the specified index from the collection.</para
           >
         </summary>
@@ -631,8 +685,12 @@
 
           
 
+          
+
           The index of the <see
            cref="T:System.Web.Configuration.FormsAuthenticationUser" />
+
+          
 
           
 
@@ -670,6 +728,8 @@
 
             
 
+            
+
              object contained in the collection.</para
           >
         </summary>
@@ -680,8 +740,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Configuration.FormsAuthenticationUserCollection" />
+
+          
 
           
 

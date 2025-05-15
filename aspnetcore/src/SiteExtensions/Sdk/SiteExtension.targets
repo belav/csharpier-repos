@@ -17,7 +17,7 @@
         $(ArtifactsNonShippingPackagesDir)
       </_RsRestoreSources>
       <ManifestFileContents>
-<![CDATA[
+        <![CDATA[
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>$(DefaultNetCoreTargetFramework)</TargetFramework>

@@ -46,6 +46,8 @@
 
         
 
+        
+
          class are used by methods such as <see
          cref="M:System.Type.InvokeMember(System.String,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object,System.Object[])" />
 
@@ -53,8 +55,12 @@
 
         
 
+        
+
         , which selects from a set of possible members to execute, based on a set of parameter types and argument values; <see
          cref="M:System.Type.GetMethod(System.String)" />
+
+        
 
         
 
@@ -70,8 +76,12 @@
 
         
 
+        
+
          class is provided by the <see
          cref="P:System.Type.DefaultBinder" />
+
+        
 
         
 
@@ -111,6 +121,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Reflection.Binder" />
+
+            
 
             
 
@@ -161,8 +173,12 @@
 
             
 
+            
+
              does not include <see
              cref="F:System.Reflection.BindingFlags.SetField" />
+
+            
 
             
 
@@ -175,8 +191,12 @@
 
             
 
+            
+
              simply returns the first element of <paramref
              name="match" />
+
+            
 
             
 
@@ -187,6 +207,8 @@
           <para
             >This method controls the binding provided by <see
              cref="M:System.Type.InvokeMember(System.String,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object,System.Object[],System.Reflection.ParameterModifier[],System.Globalization.CultureInfo,System.String[])" />
+
+            
 
             
 
@@ -210,8 +232,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -226,8 +252,12 @@
 
           
 
+          
+
           The set of fields that are candidates for matching. For example, when a <see
            cref="T:System.Reflection.Binder" />
+
+          
 
           
 
@@ -240,8 +270,12 @@
 
           
 
+          
+
           , this parameter specifies the set of fields that reflection has determined to be possible matches, typically because they have the correct member name. The default implementation provided by <see
            cref="P:System.Type.DefaultBinder" />
+
+          
 
           
 
@@ -256,10 +290,14 @@
 
           
 
+          
+
           The field value used to locate a matching field. </param
         >
         <param name="culture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -272,6 +310,8 @@
 
           
 
+          
+
            that is used to control the coercion of data types, in binder implementations that coerce types. If <paramref
            name="culture" />
 
@@ -279,8 +319,12 @@
 
           
 
+          
+
            is null, the <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -331,11 +375,15 @@
 
           
 
+          
+
            values that control the binding process. For requirements, see the Behaviors section.</param
         >
         <param name="match"
           >An array of <see
            cref="T:System.Reflection.MethodBase" />
+
+          
 
           
 
@@ -355,6 +403,8 @@
 
             
 
+            
+
              .</para
           >
         </param>
@@ -362,6 +412,8 @@
           <para
             >The only defined value for this parameter is <see
              langword="null" />
+
+            
 
             
 
@@ -378,12 +430,16 @@
 
           
 
+          
+
            array containing the names of methods to be searched.</param
         >
         <param name="state">
           <para
             >A binder-provided <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -396,6 +452,8 @@
 
             
 
+            
+
              object is totally defined by the implementer of the <see
              cref="T:System.Reflection.Binder" />
 
@@ -403,8 +461,12 @@
 
             
 
+            
+
              class. This object is <see
              langword="null" />
+
+            
 
             
 
@@ -427,6 +489,8 @@
             
 
             
+
+            
 instance that reflects the method that matches to the specified
 criteria. It is not required that this instance be contained in
 <paramref
@@ -436,9 +500,13 @@ criteria. It is not required that this instance be contained in
 
             
 
+            
+
              . If a suitable method is not found, 
 returns <see
              langword="null" />
+
+            
 
             
 
@@ -457,6 +525,8 @@ returns <see
 
             
 
+            
+
              is not <see
              langword="null" />
 
@@ -464,8 +534,12 @@ returns <see
 
             
 
+            
+
             , the system invokes <see
              cref="M:System.Reflection.Binder.ReorderArgumentArray(System.Object[]@,System.Object)" />
+
+            
 
             
 
@@ -480,8 +554,12 @@ returns <see
 
               
 
+              
+
                . This is useful if <see
                langword="ByRef" />
+
+              
 
               
 
@@ -504,9 +582,13 @@ returns <see
 
               
 
+              
+
                parameter, the caller is
    required to specify either <see
                cref="F:System.Reflection.BindingFlags.Public" />
+
+              
 
               
 
@@ -519,8 +601,12 @@ returns <see
 
               
 
+              
+
               , and either <see
                cref="F:System.Reflection.BindingFlags.Instance" />
+
+              
 
               
 
@@ -533,10 +619,14 @@ returns <see
 
               
 
+              
+
               . If at least
    one value from each pair is not specified, this method is required to return
 <see
                langword="null" />
+
+              
 
               
 
@@ -552,8 +642,12 @@ returns <see
 
               
 
+              
+
                method is permitted to change the order of the argument array of a method call only if the binder returns, via the <paramref
                name="state" />
+
+              
 
               
 
@@ -566,8 +660,12 @@ returns <see
 
               
 
+              
+
               , <paramref
                name="state" />
+
+              
 
               
 
@@ -580,8 +678,12 @@ returns <see
 
               
 
+              
+
               , the system calls <see
                cref="M:System.Reflection.Binder.ReorderArgumentArray(System.Object[]@,System.Object)" />
+
+              
 
               
 
@@ -628,6 +730,8 @@ returns <see
           <para
             >Reflection models the accessibility rules of the common type system. For example, if the caller is in the same assembly, the caller does not need special permissions for internal members. Otherwise, the caller needs <see
              cref="T:System.Security.Permissions.ReflectionPermission" />
+
+            
 
             
 
@@ -769,6 +873,8 @@ returns <see
 
           
 
+          
+
           The object to change into a new Type. </param
         >
         <param name="type">
@@ -778,8 +884,12 @@ returns <see
 
           
 
+          
+
           The new Type that <paramref
            name="value" />
+
+          
 
           
 
@@ -794,8 +904,12 @@ returns <see
 
           
 
+          
+
           An instance of <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -808,8 +922,12 @@ returns <see
 
           
 
+          
+
            is null, the <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -859,6 +977,8 @@ returns <see
 
             
 
+            
+
              parameter in the invocation of <see
              cref="M:System.Reflection.Binder.BindToMethod(System.Reflection.BindingFlags,System.Reflection.MethodBase[],System.Object[]@,System.Reflection.ParameterModifier[],System.Globalization.CultureInfo,System.String[],System.Object@)" />
 
@@ -866,8 +986,12 @@ returns <see
 
             
 
+            
+
              that caused <see
              cref="M:System.Reflection.Binder.ReorderArgumentArray(System.Object[]@,System.Object)" />
+
+            
 
             
 
@@ -888,6 +1012,8 @@ returns <see
             
 
             
+
+            
       .</para
           >
         </summary>
@@ -902,10 +1028,14 @@ returns <see
 
               
 
+              
+
                , the order, value, and type of the
       parameters in the original method call can be changed to match the signature of
       the bound method. The binder creates <paramref
                name="state" />
+
+              
 
               
 
@@ -919,8 +1049,12 @@ returns <see
 
               
 
+              
+
               , <paramref
                name="state" />
+
+              
 
               
 
@@ -934,8 +1068,12 @@ returns <see
 
               
 
+              
+
               , the system calls <see
                cref="M:System.Reflection.Binder.ReorderArgumentArray(System.Object[]@,System.Object)" />
+
+              
 
               
 
@@ -950,9 +1088,13 @@ returns <see
 
               
 
+              
+
                . This is useful if
    <see
                langword="ByRef" />
+
+              
 
               
 
@@ -973,8 +1115,12 @@ returns <see
 
               
 
+              
+
                is required to be a non-null <see
                cref="T:System.Object" />
+
+              
 
               
 
@@ -988,8 +1134,12 @@ returns <see
 
               
 
+              
+
                if <paramref
                name="args" />
+
+              
 
               
 
@@ -1004,9 +1154,13 @@ returns <see
               
 
               
+
+              
    . This method is required to
    restore the elements of <paramref
                name="args" />
+
+              
 
               
 
@@ -1027,8 +1181,12 @@ returns <see
               
 
               
+
+              
    are returned to their original order, <see
                cref="T:System.Type" />
+
+              
 
               
 
@@ -1048,9 +1206,13 @@ returns <see
 
               
 
+              
+
                are returned
    to their original order, <see
                cref="T:System.Type" />
+
+              
 
               
 
@@ -1112,8 +1274,12 @@ returns <see
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -1128,8 +1294,12 @@ returns <see
 
           
 
+          
+
           The set of methods that are candidates for matching. For example, when a <see
            cref="T:System.Reflection.Binder" />
+
+          
 
           
 
@@ -1142,8 +1312,12 @@ returns <see
 
           
 
+          
+
           , this parameter specifies the set of methods that reflection has determined to be possible matches, typically because they have the correct member name. The default implementation provided by <see
            cref="P:System.Type.DefaultBinder" />
+
+          
 
           
 
@@ -1158,10 +1332,14 @@ returns <see
 
           
 
+          
+
           The parameter types used to locate a matching method. </param
         >
         <param name="modifiers">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1221,8 +1399,12 @@ returns <see
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -1237,8 +1419,12 @@ returns <see
 
           
 
+          
+
           The set of properties that are candidates for matching. For example, when a <see
            cref="T:System.Reflection.Binder" />
+
+          
 
           
 
@@ -1251,8 +1437,12 @@ returns <see
 
           
 
+          
+
           , this parameter specifies the set of properties that reflection has determined to be possible matches, typically because they have the correct member name. The default implementation provided by <see
            cref="P:System.Type.DefaultBinder" />
+
+          
 
           
 
@@ -1267,6 +1457,8 @@ returns <see
 
           
 
+          
+
           The return value the matching property must have. </param
         >
         <param name="indexes">
@@ -1276,10 +1468,14 @@ returns <see
 
           
 
+          
+
           The index types of the property being searched for. Used for index properties such as the indexer for a class. </param
         >
         <param name="modifiers">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

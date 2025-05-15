@@ -63,6 +63,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -100,10 +102,14 @@
 
           
 
+          
+
           The object that owns the event. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -146,6 +152,8 @@
 
           
 
+          
+
           The list to add.</param
         >
       </Docs>
@@ -177,8 +185,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.ComponentModel.EventHandlerList" />
+
+            
 
             
 
@@ -191,8 +203,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.ComponentModel.EventHandlerList" />
+
+            
 
             
 
@@ -205,8 +221,12 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.ComponentModel.EventHandlerList" />
+
+            
 
             
 
@@ -223,8 +243,12 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.ComponentModel.EventHandlerList" />
+
+              
 
               
 
@@ -237,8 +261,12 @@
 
               
 
+              
+
                is using will not be freed until garbage collection calls the <see
                cref="T:System.ComponentModel.EventHandlerList" />
+
+              
 
               
 
@@ -314,10 +342,14 @@
 
           
 
+          
+
           The object that owns the event. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -54,11 +54,15 @@
 
             
 
+            
+
              structure using the supplied long integer.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -97,6 +101,8 @@
 
             
 
+            
+
              parameters.</para
           >
         </summary>
@@ -110,6 +116,8 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlInt64.Value" />
 
@@ -117,8 +125,12 @@
 
             
 
+            
+
              is equal to the sum of the two <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -134,8 +146,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -150,8 +166,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -190,6 +210,8 @@
 
             
 
+            
+
              operands.</para
           >
         </summary>
@@ -198,6 +220,8 @@
           <para
             >A <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -213,8 +237,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -229,8 +257,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -269,6 +301,8 @@
 
             
 
+            
+
              operands.</para
           >
         </summary>
@@ -277,6 +311,8 @@
           <para
             >A <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -292,8 +328,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -308,8 +348,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -350,8 +394,12 @@
 
             
 
+            
+
              instance to the supplied <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -409,8 +457,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -441,8 +493,12 @@
 
             
 
+            
+
              instance to the supplied <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -500,8 +556,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -540,6 +600,8 @@
 
             
 
+            
+
              parameter by the second.</para
           >
         </summary>
@@ -553,8 +615,12 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+
+            
 
             
 
@@ -570,8 +636,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -586,8 +656,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -622,8 +696,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -642,11 +720,15 @@
 
             
 
+            
+
              and the two are equal; otherwise false.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -685,6 +767,8 @@
 
             
 
+            
+
              parameters to determine whether they are equal.</para
           >
         </summary>
@@ -699,8 +783,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -715,8 +803,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -780,6 +872,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -788,6 +882,8 @@
           <para
             >A string that indicates the XSD of the specified <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -803,8 +899,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -839,6 +939,8 @@
 
             
 
+            
+
              parameters to determine whether the first is greater than the second.</para
           >
         </summary>
@@ -852,8 +954,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -866,8 +972,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -880,6 +990,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -887,8 +999,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -904,8 +1020,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -920,8 +1040,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -960,6 +1084,8 @@
 
             
 
+            
+
              parameters to determine whether the first is greater than or equal to the second.</para
           >
         </summary>
@@ -973,8 +1099,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -987,8 +1117,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -1001,6 +1135,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -1008,8 +1144,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1025,8 +1165,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -1041,8 +1185,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -1076,6 +1224,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1084,6 +1234,8 @@
           <para
             >Gets a Boolean value that indicates whether this <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -1123,6 +1275,8 @@
 
             
 
+            
+
              parameters to determine whether the first is less than the second.</para
           >
         </summary>
@@ -1136,8 +1290,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1150,8 +1308,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -1164,6 +1326,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -1171,8 +1335,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1188,8 +1356,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -1204,8 +1376,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -1244,6 +1420,8 @@
 
             
 
+            
+
              parameters to determine whether the first is less than or equal to the second.</para
           >
         </summary>
@@ -1257,8 +1435,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1271,8 +1453,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -1285,6 +1471,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -1292,8 +1480,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1309,8 +1501,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -1325,8 +1521,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -1361,6 +1561,8 @@
 
             
 
+            
+
              -1.</para
           >
         </remarks>
@@ -1369,6 +1571,8 @@
           <para
             >A constant representing the largest possible value for a <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -1404,6 +1608,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1412,6 +1618,8 @@
           <para
             >A constant representing the smallest possible value for a <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -1451,6 +1659,8 @@
 
             
 
+            
+
              parameter by the second.</para
           >
         </summary>
@@ -1464,8 +1674,12 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+
+            
 
             
 
@@ -1481,8 +1695,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -1497,8 +1715,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -1539,8 +1761,12 @@
 
             
 
+            
+
              or <paramref
              name="y" />
+
+            
 
             
 
@@ -1559,6 +1785,8 @@
 
             
 
+            
+
              values and returns the remainder.</para
           >
         </summary>
@@ -1572,8 +1800,12 @@
 
             
 
+            
+
              and <paramref
              name="y" />
+
+            
 
             
 
@@ -1589,8 +1821,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -1605,8 +1841,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -1641,6 +1881,8 @@
 
             
 
+            
+
              parameters.</para
           >
         </summary>
@@ -1654,6 +1896,8 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlInt64.Value" />
 
@@ -1661,8 +1905,12 @@
 
             
 
+            
+
              is equal to the product of the two <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -1678,8 +1926,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -1694,8 +1946,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -1738,8 +1994,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1752,8 +2012,12 @@
 
             
 
+            
+
              if the two instances are equal. If either instance of <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -1766,6 +2030,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -1773,8 +2039,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1790,8 +2060,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -1806,8 +2080,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -1841,8 +2119,12 @@
 
             
 
+            
+
              functions as a constant for the <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -1852,6 +2134,8 @@
              type="text/html">
               <a href="f18b288f-b265-4bbe-957f-c6833c0645ef">Handling Null Values (ADO.NET)</a>
             </format>
+
+            
 
             
 
@@ -1870,8 +2154,12 @@
 
             
 
+            
+
              that can be assigned to this instance of the <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -1910,6 +2198,8 @@
 
             
 
+            
+
              operand.</para
           >
         </summary>
@@ -1923,6 +2213,8 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlInt64.Value" />
 
@@ -1930,8 +2222,12 @@
 
             
 
+            
+
              is equal to the ones complement of the <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -1947,8 +2243,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -1991,6 +2291,8 @@
 
             
 
+            
+
              parameters.</para
           >
         </summary>
@@ -2004,6 +2306,8 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlInt64.Value" />
 
@@ -2011,8 +2315,12 @@
 
             
 
+            
+
              is equal to the sum of the two <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -2028,8 +2336,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -2044,8 +2356,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -2084,6 +2400,8 @@
 
             
 
+            
+
              operands.</para
           >
         </summary>
@@ -2092,6 +2410,8 @@
           <para
             >A <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -2107,8 +2427,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -2123,8 +2447,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -2163,6 +2491,8 @@
 
             
 
+            
+
              operands.</para
           >
         </summary>
@@ -2171,6 +2501,8 @@
           <para
             >A <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -2186,8 +2518,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -2202,8 +2538,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -2242,6 +2582,8 @@
 
             
 
+            
+
              parameter by the second.</para
           >
         </summary>
@@ -2255,8 +2597,12 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+
+            
 
             
 
@@ -2272,8 +2618,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -2288,8 +2638,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -2328,6 +2682,8 @@
 
             
 
+            
+
              parameters to determine whether they are equal.</para
           >
         </summary>
@@ -2341,8 +2697,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2355,8 +2715,12 @@
 
             
 
+            
+
              if the two instances are not equal. If either instance of <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -2369,6 +2733,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -2376,8 +2742,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2393,8 +2763,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -2409,8 +2783,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -2453,6 +2831,8 @@
 
             
 
+            
+
              structure that contains the results of the bitwise XOR operation.</para
           >
         </returns>
@@ -2463,8 +2843,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -2479,8 +2863,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -2680,6 +3068,8 @@
 
             
 
+            
+
              parameters to determine whether the first is greater than the second.</para
           >
         </summary>
@@ -2693,8 +3083,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2707,8 +3101,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -2721,6 +3119,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -2728,8 +3128,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2745,8 +3149,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -2761,8 +3169,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -2801,6 +3213,8 @@
 
             
 
+            
+
              parameters to determine whether the first is greater than or equal to the second.</para
           >
         </summary>
@@ -2814,8 +3228,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2828,8 +3246,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -2842,6 +3264,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -2849,8 +3273,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2866,8 +3294,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -2882,8 +3314,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -3018,8 +3454,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -3032,8 +3472,12 @@
 
             
 
+            
+
              if the two instances are equal. If either instance of <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -3046,6 +3490,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -3053,8 +3499,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -3070,8 +3520,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -3086,8 +3540,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -3126,6 +3584,8 @@
 
             
 
+            
+
              parameters to determine whether the first is less than the second.</para
           >
         </summary>
@@ -3139,8 +3599,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -3153,8 +3617,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -3167,6 +3635,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -3174,8 +3644,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -3191,8 +3665,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -3207,8 +3685,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -3247,6 +3729,8 @@
 
             
 
+            
+
              parameters to determine whether the first is less than or equal to the second.</para
           >
         </summary>
@@ -3260,8 +3744,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -3274,8 +3762,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -3288,6 +3780,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -3295,8 +3789,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -3312,8 +3810,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -3328,8 +3830,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -3368,6 +3874,8 @@
 
             
 
+            
+
              parameter by the second.</para
           >
         </summary>
@@ -3381,8 +3889,12 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+
+            
 
             
 
@@ -3398,8 +3910,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -3414,8 +3930,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -3454,6 +3974,8 @@
 
             
 
+            
+
              parameters.</para
           >
         </summary>
@@ -3467,6 +3989,8 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlInt64.Value" />
 
@@ -3474,8 +3998,12 @@
 
             
 
+            
+
              is equal to the product of the two <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -3491,8 +4019,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -3507,8 +4039,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -3546,6 +4082,8 @@
 
             
 
+            
+
              operand.</para
           >
         </summary>
@@ -3559,6 +4097,8 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlInt64.Value" />
 
@@ -3566,8 +4106,12 @@
 
             
 
+            
+
              is equal to the ones complement of the <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -3583,8 +4127,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -3623,6 +4171,8 @@
 
             
 
+            
+
              parameter from the first.</para
           >
         </summary>
@@ -3636,8 +4186,12 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+
+            
 
             
 
@@ -3653,8 +4207,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -3669,8 +4227,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -3708,8 +4270,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -3728,8 +4294,12 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+
+            
 
             
 
@@ -3742,8 +4312,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -3759,8 +4333,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -3794,6 +4372,8 @@
 
             
 
+            
+
              representation of a number to its 64-bit signed integer equivalent.</para
           >
         </summary>
@@ -3802,6 +4382,8 @@
           <para
             >A 64-bit signed integer equivalent to the value that is contained in the specified <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -3817,8 +4399,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -3857,6 +4443,8 @@
 
             
 
+            
+
              parameter from the first.</para
           >
         </summary>
@@ -3870,8 +4458,12 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+
+            
 
             
 
@@ -3887,8 +4479,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -3903,8 +4499,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -3971,6 +4571,8 @@
 
           
 
+          
+
           XmlReader</param
         >
       </Docs>
@@ -4003,6 +4605,8 @@
 
           
 
+          
+
           XmlWriter</param
         >
       </Docs>
@@ -4029,8 +4633,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -4044,6 +4652,8 @@
           <para
             >true if the <see
              cref="P:System.Data.SqlTypes.SqlInt64.Value" />
+
+            
 
             
 
@@ -4077,8 +4687,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -4097,8 +4711,12 @@
 
             
 
+            
+
              structure whose Value equals the Value of this <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -4135,8 +4753,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -4155,8 +4777,12 @@
 
             
 
+            
+
              equal to the value of this <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -4193,8 +4819,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -4213,8 +4843,12 @@
 
             
 
+            
+
              equal to the value of this <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -4248,8 +4882,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -4268,8 +4906,12 @@
 
             
 
+            
+
              equal to the value of this <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -4303,8 +4945,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlInt32" />
+
+            
 
             
 
@@ -4323,8 +4969,12 @@
 
             
 
+            
+
              equal to the value of this <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -4358,8 +5008,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlMoney" />
+
+            
 
             
 
@@ -4378,8 +5032,12 @@
 
             
 
+            
+
              equal to the value of this <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -4416,8 +5074,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -4436,8 +5098,12 @@
 
             
 
+            
+
              equal to the value of this <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -4474,8 +5140,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -4494,8 +5164,12 @@
 
             
 
+            
+
              representing the value of this <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -4529,8 +5203,12 @@
 
             
 
+            
+
              to <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -4549,8 +5227,12 @@
 
             
 
+            
+
              representing the value of this <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -4579,6 +5261,8 @@
           <para
             >Gets the value of this <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -4622,6 +5306,8 @@
 
             
 
+            
+
              structure that contains the results of the bitwise XOR operation.</para
           >
         </returns>
@@ -4632,8 +5318,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -4648,8 +5338,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlInt64" />
+
+          
 
           
 
@@ -4684,8 +5378,12 @@
 
             
 
+            
+
              field is a constant for the <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -4704,8 +5402,12 @@
 
             
 
+            
+
              property of an instance of the <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 

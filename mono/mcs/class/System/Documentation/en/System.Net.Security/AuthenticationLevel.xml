@@ -25,6 +25,8 @@
 
         
 
+        
+
          property.</para
       >
       <block subset="none" type="note">
@@ -36,8 +38,12 @@
 
           
 
+          
+
            and <see
            cref="F:System.Net.Security.AuthenticationLevel.MutualAuthRequested" />
+
+          
 
           
 
@@ -52,6 +58,8 @@
 
           
 
+          
+
           .</para
         >
       </block>
@@ -61,6 +69,8 @@
       <para
         >Specifies client requirements for authentication and impersonation when using the <see
          cref="T:System.Net.WebRequest" />
+
+        
 
         
 
@@ -97,6 +107,8 @@
 
             
 
+            
+
              property.</para
           >
         </summary>
@@ -128,8 +140,12 @@
 
             
 
+            
+
              with a <see
              cref="T:System.Net.ProtocolViolationException" />
+
+            
 
             
 

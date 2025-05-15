@@ -33,6 +33,8 @@
 
         
 
+        
+
         .</para
       >
       <para>
@@ -42,8 +44,12 @@
 
         
 
+        
+
          is used by the <see
          cref="T:System.Security.Policy.ApplicationSecurityInfo" />
+
+        
 
         
 
@@ -91,8 +97,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.ApplicationId.Name" />
+
+            
 
             
 
@@ -105,8 +115,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.ApplicationId.PublicKeyToken" />
+
+            
 
             
 
@@ -119,8 +133,12 @@
 
             
 
+            
+
              properties of the <see
              cref="T:System.ApplicationId" />
+
+            
 
             
 
@@ -139,11 +157,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="publicKeyToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -158,6 +180,8 @@
 
           
 
+          
+
           The name of the application. </param
         >
         <param name="version">
@@ -167,8 +191,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Version" />
+
+          
 
           
 
@@ -183,10 +211,14 @@
 
           
 
+          
+
           The processor architecture of the application. </param
         >
         <param name="culture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -223,6 +255,8 @@
 
             
 
+            
+
              method. The hash codes for the original and the copy are also equal.</para
           >
         </remarks>
@@ -235,6 +269,8 @@
           <para
             >An <see
              cref="T:System.ApplicationId" />
+
+            
 
             
 
@@ -269,11 +305,15 @@
 
             
 
+            
+
              value can include language information, for example, "en-US".</para
           >
           <para
             >For information about culture values, see <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -317,6 +357,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -330,8 +372,12 @@
 
             
 
+            
+
              object is equivalent to the current <see
              cref="T:System.ApplicationId" />
+
+            
 
             
 
@@ -350,8 +396,12 @@
 
             
 
+            
+
              object is equivalent to the current <see
              cref="T:System.ApplicationId" />
+
+            
 
             
 
@@ -367,6 +417,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.ApplicationId" />
 
@@ -374,8 +426,12 @@
 
           
 
+          
+
            object to compare to the current <see
            cref="T:System.ApplicationId" />
+
+          
 
           
 
@@ -412,8 +468,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ApplicationId.Version" />
+
+            
 
             
 
@@ -450,6 +510,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="P:System.ApplicationId.Name" />
+
+            
 
             
 
@@ -513,6 +575,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -544,6 +608,8 @@
           <para
             >This method overrides the <see
              cref="M:System.Object.ToString" />
+
+            
 
             
 
@@ -581,6 +647,8 @@
           <para
             >For more information, see <see
              cref="T:System.Version" />
+
+            
 
             
 

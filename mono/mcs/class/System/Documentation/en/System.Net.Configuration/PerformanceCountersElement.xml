@@ -36,6 +36,8 @@
 
         
 
+        
+
          configuration element. This class provides programmatic access to information that can be stored in configuration files.</para
       >
     </remarks>
@@ -65,6 +67,8 @@
           <para
             >Instantiates a <see
              cref="T:System.Net.Configuration.PerformanceCountersElement" />
+
+            
 
             
 

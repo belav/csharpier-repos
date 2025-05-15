@@ -36,8 +36,12 @@
 
         
 
+        
+
         , you set the <see
          cref="P:System.Windows.Forms.FolderBrowserDialog.RootFolder" />
+
+        
 
         
 
@@ -50,8 +54,12 @@
 
         
 
+        
+
          to an absolute path of a subfolder of <see
          cref="P:System.Windows.Forms.FolderBrowserDialog.RootFolder" />
+
+        
 
         
 
@@ -64,8 +72,12 @@
 
         
 
+        
+
          property to provide additional instructions to the user. Finally, call the <see
          cref="M:System.Windows.Forms.CommonDialog.ShowDialog" />
+
+        
 
         
 
@@ -78,6 +90,8 @@
 
         
 
+        
+
          is <see
          cref="F:System.Windows.Forms.DialogResult.OK" />
 
@@ -85,8 +99,12 @@
 
         
 
+        
+
         , the <see
          cref="P:System.Windows.Forms.FolderBrowserDialog.SelectedPath" />
+
+        
 
         
 
@@ -102,8 +120,12 @@
 
         
 
+        
+
          property to control if the user is able to create new folders with the <ui
         >New Folder</ui>
+
+        
 
         
 
@@ -113,6 +135,8 @@
       >
       <para>
         <see cref="T:System.Windows.Forms.FolderBrowserDialog" />
+
+        
 
         
 
@@ -143,8 +167,12 @@
 
             
 
+            
+
              is created, the <see
              cref="P:System.Windows.Forms.FolderBrowserDialog.RootFolder" />
+
+            
 
             
 
@@ -157,8 +185,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Windows.Forms.FolderBrowserDialog.Description" />
+
+            
 
             
 
@@ -171,8 +203,12 @@
 
             
 
+            
+
              property is set to an empty string, and the <see
              cref="P:System.Windows.Forms.FolderBrowserDialog.ShowNewFolderButton" />
+
+            
 
             
 
@@ -188,8 +224,12 @@
 
             
 
+            
+
             , you set the <see
              cref="P:System.Windows.Forms.FolderBrowserDialog.RootFolder" />
+
+            
 
             
 
@@ -202,8 +242,12 @@
 
             
 
+            
+
              to the path of a subfolder of <see
              cref="P:System.Windows.Forms.FolderBrowserDialog.RootFolder" />
+
+            
 
             
 
@@ -216,8 +260,12 @@
 
             
 
+            
+
              property to provide additional instructions to the user. Finally, call the <see
              cref="M:System.Windows.Forms.CommonDialog.ShowDialog" />
+
+            
 
             
 
@@ -230,6 +278,8 @@
 
             
 
+            
+
              is <see
              cref="F:System.Windows.Forms.DialogResult.OK" />
 
@@ -237,8 +287,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Windows.Forms.FolderBrowserDialog.SelectedPath" />
+
+            
 
             
 
@@ -253,6 +307,8 @@
 
             
 
+            
+
              is a modal dialog box; therefore, when shown, it blocks the rest of the application until the user has chosen a folder. When a dialog box is displayed modally, no input (keyboard or mouse click) can occur except to objects on the dialog box. The program must hide or close the dialog box (usually in response to some user action) before input to the calling program can occur.</para
           >
         </remarks>
@@ -261,6 +317,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.FolderBrowserDialog" />
+
+            
 
             
 
@@ -299,6 +357,8 @@
           <para
             >The <see
              cref="P:System.Windows.Forms.FolderBrowserDialog.Description" />
+
+            
 
             
 
@@ -343,6 +403,8 @@
 
             
 
+            
+
              button on the dialog box.</para
           >
         </summary>
@@ -370,8 +432,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.FolderBrowserDialog.ShowNewFolderButton" />
+
+            
 
             
 
@@ -384,6 +450,8 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.FolderBrowserDialog.RootFolder" />
 
@@ -391,8 +459,12 @@
 
             
 
+            
+
              properties to their default values. For a list of default values, see the <see
              cref="M:System.Windows.Forms.FolderBrowserDialog.#ctor" />
+
+            
 
             
 
@@ -446,8 +518,12 @@
 
             
 
+            
+
              property, along with <see
              cref="P:System.Windows.Forms.FolderBrowserDialog.RootFolder" />
+
+            
 
             
 
@@ -460,6 +536,8 @@
 
             
 
+            
+
              is an absolute path that is a subfolder of <see
              cref="P:System.Windows.Forms.FolderBrowserDialog.RootFolder" />
 
@@ -467,8 +545,12 @@
 
             
 
+            
+
              (or more accurately, points to a subfolder of the shell namespace represented by <see
              cref="P:System.Windows.Forms.FolderBrowserDialog.RootFolder" />
+
+            
 
             
 
@@ -511,6 +593,8 @@
 
             
 
+            
+
              method. </para
           >
         </remarks>
@@ -520,6 +604,8 @@
         </summary>
         <param name="hWndOwner">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -565,8 +651,12 @@
 
             
 
+            
+
              property is set before showing the dialog box, the folder with this path will be the selected folder, as long as <see
              cref="P:System.Windows.Forms.FolderBrowserDialog.SelectedPath" />
+
+            
 
             
 
@@ -579,8 +669,12 @@
 
             
 
+            
+
              (or more accurately, points to a subfolder of the shell namespace represented by <see
              cref="P:System.Windows.Forms.FolderBrowserDialog.RootFolder" />
+
+            
 
             
 
@@ -596,8 +690,12 @@
 
             
 
+            
+
              returns <see
              cref="F:System.Windows.Forms.DialogResult.OK" />
+
+            
 
             
 
@@ -610,8 +708,12 @@
 
             
 
+            
+
              button, the <see
              cref="P:System.Windows.Forms.FolderBrowserDialog.SelectedPath" />
+
+            
 
             
 
@@ -624,6 +726,8 @@
 
             
 
+            
+
              returns <see
              cref="F:System.Windows.Forms.DialogResult.Cancel" />
 
@@ -631,8 +735,12 @@
 
             
 
+            
+
             , meaning the user canceled out of the dialog box, this property will have the same value that it had prior to displaying the dialog box. If the user selects a folder that does not have a physical path (for example, My Computer), the <ui
             >OK</ui>
+
+            
 
             
 
@@ -680,8 +788,12 @@
 
             
 
+            
+
              is true, the <ui
             >New Folder</ui>
+
+            
 
             
 
@@ -694,8 +806,12 @@
 
             
 
+            
+
              button, a new folder is created and the user is prompted to specify the folder name. The selected node in the tree becomes the parent of the new folder. The actual caption of the <ui
             >New Folder</ui>
+
+            
 
             
 
@@ -712,6 +828,8 @@
 
               
 
+              
+
                to false does not work on Windows 2000.</para
             >
           </block>
@@ -721,6 +839,8 @@
           <para
             >Gets or sets a value indicating whether the <ui
             >New Folder</ui>
+
+            
 
             
 

@@ -38,11 +38,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >You can create images from files, streams, and other sources by using one of the <see
          cref="M:System.Drawing.Bitmap.#ctor(System.String,System.Boolean)" />
+
+        
 
         
 
@@ -55,6 +59,8 @@
 
         
 
+        
+
          method. Images are drawn to the screen or to memory by using the <see
          cref="M:System.Drawing.Graphics.DrawImage(System.Drawing.Image,System.Drawing.Point)" />
 
@@ -62,8 +68,12 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.Drawing.Graphics" />
+
+        
 
         
 
@@ -80,12 +90,16 @@
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
         <para
           >The <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -98,6 +112,8 @@
 
           
 
+          
+
            and create several brushes, pens, and bitmaps in that domain, then pass these objects back to the main application domain, you can successfully use the pens and brushes. However, if you call the <see
            cref="M:System.Drawing.Graphics.DrawImage(System.Drawing.Image,System.Drawing.Point)" />
 
@@ -105,8 +121,12 @@
 
           
 
+          
+
            method to draw the marshaled <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -122,6 +142,8 @@
       <para
         >Encapsulates a ndptecgdiplus bitmap, which consists of the pixel data for a graphics image and its attributes. A <see
          cref="T:System.Drawing.Bitmap" />
+
+        
 
         
 
@@ -151,11 +173,15 @@
 
             
 
+            
+
              class from the specified existing image.</para
           >
         </summary>
         <param name="original">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -168,8 +194,12 @@
 
           
 
+          
+
            from which to create the new <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -201,11 +231,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >Due to a limitation of the ndptecgdiplus decoder, an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -224,11 +258,15 @@
 
             
 
+            
+
              class from the specified data stream.</para
           >
         </summary>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -262,8 +300,12 @@
 
             
 
+            
+
             . The file remains locked until the <see
              cref="T:System.Drawing.Bitmap" />
+
+            
 
             
 
@@ -282,11 +324,15 @@
 
             
 
+            
+
              class from the specified file.</para
           >
         </summary>
         <param name="filename">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -323,11 +369,15 @@
 
             
 
+            
+
              class from the specified existing image, scaled to the specified size.</para
           >
         </summary>
         <param name="original">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -340,8 +390,12 @@
 
           
 
+          
+
            from which to create the new <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -356,6 +410,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Size" />
 
@@ -363,8 +419,12 @@
 
           
 
+          
+
            structure that represent the size of the new <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -397,6 +457,8 @@
 
             
 
+            
+
              with a <see
              cref="T:System.Drawing.Imaging.PixelFormat" />
 
@@ -404,8 +466,12 @@
 
             
 
+            
+
              enumeration value of <see
              cref="F:System.Drawing.Imaging.PixelFormat.Format32bppArgb" />
+
+            
 
             
 
@@ -424,6 +490,8 @@
 
             
 
+            
+
              class with the specified size.</para
           >
         </summary>
@@ -434,8 +502,12 @@
 
           
 
+          
+
           The width, in pixels, of the new <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -450,8 +522,12 @@
 
           
 
+          
+
           The height, in pixels, of the new <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -487,11 +563,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >Due to a limitation of the ndptecgdiplus decoder, an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -510,11 +590,15 @@
 
             
 
+            
+
              class from the specified data stream.</para
           >
         </summary>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -529,8 +613,12 @@
 
           
 
+          
+
           true to use color correction for this <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -565,8 +653,12 @@
 
             
 
+            
+
             . The file remains locked until the <see
              cref="T:System.Drawing.Bitmap" />
+
+            
 
             
 
@@ -585,11 +677,15 @@
 
             
 
+            
+
              class from the specified file.</para
           >
         </summary>
         <param name="filename">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -604,8 +700,12 @@
 
           
 
+          
+
           true to use color correction for this <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -638,8 +738,12 @@
 
             
 
+            
+
              type and <paramref
              name="Button.bmp" />
+
+            
 
             
 
@@ -658,6 +762,8 @@
 
             
 
+            
+
              class from a specified resource.</para
           >
         </summary>
@@ -668,10 +774,14 @@
 
           
 
+          
+
           The class used to extract the resource. </param
         >
         <param name="resource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -709,11 +819,15 @@
 
             
 
+            
+
              class from the specified existing image, scaled to the specified size.</para
           >
         </summary>
         <param name="original">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -726,8 +840,12 @@
 
           
 
+          
+
            from which to create the new <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -742,8 +860,12 @@
 
           
 
+          
+
           The width, in pixels, of the new <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -758,8 +880,12 @@
 
           
 
+          
+
           The height, in pixels, of the new <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -796,8 +922,12 @@
 
             
 
+            
+
              that this method creates takes its horizontal and vertical resolution from the <see
              cref="P:System.Drawing.Graphics.DpiX" />
+
+            
 
             
 
@@ -810,8 +940,12 @@
 
             
 
+            
+
              properties of <paramref
              name="g" />
+
+            
 
             
 
@@ -830,8 +964,12 @@
 
             
 
+            
+
              class with the specified size and with the resolution of the specified <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -847,8 +985,12 @@
 
           
 
+          
+
           The width, in pixels, of the new <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -863,8 +1005,12 @@
 
           
 
+          
+
           The height, in pixels, of the new <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -879,6 +1025,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
 
@@ -886,8 +1034,12 @@
 
           
 
+          
+
            object that specifies the resolution for the new <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -925,6 +1077,8 @@
 
             
 
+            
+
              class with the specified size and format.</para
           >
         </summary>
@@ -935,8 +1089,12 @@
 
           
 
+          
+
           The width, in pixels, of the new <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -951,8 +1109,12 @@
 
           
 
+          
+
           The height, in pixels, of the new <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -967,6 +1129,8 @@
 
           
 
+          
+
           The pixel format for the new <see
            cref="T:System.Drawing.Bitmap" />
 
@@ -974,8 +1138,12 @@
 
           
 
+          
+
           . This must specify a value that begins with <paramref
            name="Format" />
+
+          
 
           
 
@@ -1014,8 +1182,12 @@
 
             
 
+            
+
              parameter. However, the memory should not be released until the related <see
              cref="T:System.Drawing.Bitmap" />
+
+            
 
             
 
@@ -1034,6 +1206,8 @@
 
             
 
+            
+
              class with the specified size, pixel format, and pixel data.</para
           >
         </summary>
@@ -1044,8 +1218,12 @@
 
           
 
+          
+
           The width, in pixels, of the new <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -1060,8 +1238,12 @@
 
           
 
+          
+
           The height, in pixels, of the new <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -1076,10 +1258,14 @@
 
           
 
+          
+
           Integer that specifies the byte offset between the beginning of one scan line and the next. This is usually (but not necessarily) the number of bytes in the pixel format (for example, 2 for 16 bits per pixel) multiplied by the width of the bitmap. The value passed to this parameter must be a multiple of four.. </param
         >
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1092,8 +1278,12 @@
 
           
 
+          
+
           . This must specify a value that begins with <paramref
            name="Format" />
+
+          
 
           
 
@@ -1103,6 +1293,8 @@
         >
         <param name="scan0">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1141,6 +1333,8 @@
 
             
 
+            
+
              defined by <see
              cref="T:System.Drawing.Rectangle" />
 
@@ -1148,8 +1342,12 @@
 
             
 
+            
+
              structure and with a specified <see
              cref="T:System.Drawing.Imaging.PixelFormat" />
+
+            
 
             
 
@@ -1168,11 +1366,15 @@
 
             
 
+            
+
              that this method creates.</para
           >
         </returns>
         <param name="rect">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1185,8 +1387,12 @@
 
           
 
+          
+
            to copy. Coordinates are relative to this <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -1201,6 +1407,8 @@
 
           
 
+          
+
           The pixel format for the new <see
            cref="T:System.Drawing.Bitmap" />
 
@@ -1208,8 +1416,12 @@
 
           
 
+          
+
           . This must specify a value that begins with <paramref
            name="Format" />
+
+          
 
           
 
@@ -1248,8 +1460,12 @@
 
             
 
+            
+
              defined with a specified <see
              cref="T:System.Drawing.Imaging.PixelFormat" />
+
+            
 
             
 
@@ -1268,6 +1484,8 @@
 
             
 
+            
+
              that this method creates.</para
           >
         </returns>
@@ -1278,8 +1496,12 @@
 
           
 
+          
+
           Defines the portion of this <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -1294,6 +1516,8 @@
 
           
 
+          
+
           Specifies the <see
            cref="T:System.Drawing.Imaging.PixelFormat" />
 
@@ -1301,8 +1525,12 @@
 
           
 
+          
+
            enumeration for the destination <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -1340,6 +1568,8 @@
 
             
 
+            
+
              from a Windows handle to an icon.</para
           >
         </summary>
@@ -1353,11 +1583,15 @@
 
             
 
+            
+
              that this method creates.</para
           >
         </returns>
         <param name="hicon">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1394,6 +1628,8 @@
 
             
 
+            
+
              requires security permission to call unmanaged code. For a managed alternative for creating a bitmap from an embedded resource, see <see
              cref="M:System.Drawing.Bitmap.#ctor(System.Type,System.String)" />
 
@@ -1401,8 +1637,12 @@
 
             
 
+            
+
             . <see
              cref="M:System.Drawing.Bitmap.FromResource(System.IntPtr,System.String)" />
+
+            
 
             
 
@@ -1421,6 +1661,8 @@
 
             
 
+            
+
              from the specified Windows resource.</para
           >
         </summary>
@@ -1429,6 +1671,8 @@
           <para
             >The <see
              cref="T:System.Drawing.Bitmap" />
+
+            
 
             
 
@@ -1444,10 +1688,14 @@
 
           
 
+          
+
           A handle to an instance of the executable file that contains the resource. </param
         >
         <param name="bitmapName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1479,8 +1727,12 @@
 
             
 
+            
+
              method to free the memory used by the ndptecgdi bitmap object. For more information about GDI bitmaps, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=205685">Bitmaps</see>
+
+            
 
             
 
@@ -1494,6 +1746,8 @@
           <para
             >Creates a ndptecgdi bitmap object from this <see
              cref="T:System.Drawing.Bitmap" />
+
+            
 
             
 
@@ -1540,8 +1794,12 @@
 
             
 
+            
+
              method to free the memory used by the ndptecgdi bitmap object. For more information about GDI bitmaps, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=205685">Bitmaps</see>
+
+            
 
             
 
@@ -1555,6 +1813,8 @@
           <para
             >Creates a ndptecgdi bitmap object from this <see
              cref="T:System.Drawing.Bitmap" />
+
+            
 
             
 
@@ -1574,8 +1834,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -1620,6 +1884,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1656,6 +1922,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1664,6 +1932,8 @@
           <para
             >A <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -1679,10 +1949,14 @@
 
           
 
+          
+
           The x-coordinate of the pixel to retrieve. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1721,6 +1995,8 @@
 
             
 
+            
+
              method to lock an existing bitmap in system memory so that it can be changed programmatically. You can change the color of an image with the <see
              cref="M:System.Drawing.Bitmap.SetPixel(System.Int32,System.Int32,System.Drawing.Color)" />
 
@@ -1728,8 +2004,12 @@
 
             
 
+            
+
              method, although the <see
              cref="Overload:System.Drawing.Bitmap.LockBits" />
+
+            
 
             
 
@@ -1745,8 +2025,12 @@
 
             
 
+            
+
              specifies the attributes of the <see
              cref="T:System.Drawing.Bitmap" />
+
+            
 
             
 
@@ -1762,8 +2046,12 @@
 
             
 
+            
+
              enumeration that contains a specific bits-per-pixel (BPP) value. Using <see
              cref="T:System.Drawing.Imaging.PixelFormat" />
+
+            
 
             
 
@@ -1776,8 +2064,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Drawing.Imaging.PixelFormat.Gdi" />
+
+            
 
             
 
@@ -1790,8 +2082,12 @@
 
             
 
+            
+
             . Also, passing the incorrect pixel format for a bitmap will throw an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -1810,6 +2106,8 @@
 
             
 
+            
+
              into system memory.</para
           >
         </summary>
@@ -1818,6 +2116,8 @@
           <para
             >A <see
              cref="T:System.Drawing.Imaging.BitmapData" />
+
+            
 
             
 
@@ -1833,6 +2133,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
 
@@ -1840,8 +2142,12 @@
 
           
 
+          
+
            structure that specifies the portion of the <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -1856,6 +2162,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Drawing.Imaging.ImageLockMode" />
 
@@ -1863,8 +2171,12 @@
 
           
 
+          
+
            enumeration that specifies the access level (read/write) for the <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -1879,6 +2191,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Imaging.PixelFormat" />
 
@@ -1886,8 +2200,12 @@
 
           
 
+          
+
            enumeration that specifies the data format of this <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -1930,6 +2248,8 @@
 
             
 
+            
+
              method to lock an existing bitmap in system memory so that it can be changed programmatically. You can change the color of an image with the <see
              cref="M:System.Drawing.Bitmap.SetPixel(System.Int32,System.Int32,System.Drawing.Color)" />
 
@@ -1937,8 +2257,12 @@
 
             
 
+            
+
              method, although the <see
              cref="Overload:System.Drawing.Bitmap.LockBits" />
+
+            
 
             
 
@@ -1954,8 +2278,12 @@
 
             
 
+            
+
              enumeration that contains a specific bits-per-pixel (BPP) value. Using <see
              cref="T:System.Drawing.Imaging.PixelFormat" />
+
+            
 
             
 
@@ -1968,8 +2296,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Drawing.Imaging.PixelFormat.Gdi" />
+
+            
 
             
 
@@ -1982,8 +2314,12 @@
 
             
 
+            
+
             . Also, passing the incorrect pixel format for a bitmap will throw an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -1999,6 +2335,8 @@
 
             
 
+            
+
              method is intended to be used with a <paramref
              name="flags" />
 
@@ -2006,8 +2344,12 @@
 
             
 
+            
+
              value of <see
              cref="F:System.Drawing.Imaging.ImageLockMode.UserInputBuffer" />
+
+            
 
             
 
@@ -2026,6 +2368,8 @@
 
             
 
+            
+
              into system memory </para
           >
         </summary>
@@ -2034,6 +2378,8 @@
           <para
             >A <see
              cref="T:System.Drawing.Imaging.BitmapData" />
+
+            
 
             
 
@@ -2049,8 +2395,12 @@
 
           
 
+          
+
           A rectangle structure that specifies the portion of the <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -2065,6 +2415,8 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Drawing.Imaging.ImageLockMode" />
 
@@ -2072,8 +2424,12 @@
 
           
 
+          
+
            values that specifies the access level (read/write) for the <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -2088,6 +2444,8 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Drawing.Imaging.PixelFormat" />
 
@@ -2095,8 +2453,12 @@
 
           
 
+          
+
            values that specifies the data format of the <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -2111,8 +2473,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Imaging.BitmapData" />
+
+          
 
           
 
@@ -2140,8 +2506,12 @@
 
             
 
+            
+
             . If no transparent color is specified by the system, <see
              cref="P:System.Drawing.Color.LightGray" />
+
+            
 
             
 
@@ -2157,8 +2527,12 @@
 
             
 
+            
+
             , the bitmap will be converted to the <see
              cref="F:System.Drawing.Imaging.PixelFormat.Format32bppArgb" />
+
+            
 
             
 
@@ -2172,6 +2546,8 @@
           <para
             >Makes the default transparent color transparent for this <see
              cref="T:System.Drawing.Bitmap" />
+
+            
 
             
 
@@ -2213,8 +2589,12 @@
 
             
 
+            
+
             , the bitmap will be converted to the <see
              cref="F:System.Drawing.Imaging.PixelFormat.Format32bppArgb" />
+
+            
 
             
 
@@ -2233,6 +2613,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2243,8 +2625,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -2283,6 +2669,8 @@
 
             
 
+            
+
              method to set the color of an individual pixel in an image programmatically. You can also change an image programmatically by using the <see
              cref="Overload:System.Drawing.Bitmap.LockBits" />
 
@@ -2290,8 +2678,12 @@
 
             
 
+            
+
              method. Typically for large-scale changes, the <see
              cref="Overload:System.Drawing.Bitmap.LockBits" />
+
+            
 
             
 
@@ -2305,6 +2697,8 @@
           <para
             >Sets the color of the specified pixel in this <see
              cref="T:System.Drawing.Bitmap" />
+
+            
 
             
 
@@ -2324,10 +2718,14 @@
 
           
 
+          
+
           The x-coordinate of the pixel to set. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2342,8 +2740,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -2382,6 +2784,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2392,8 +2796,12 @@
 
           
 
+          
+
           The horizontal resolution, in dots per inch, of the <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -2408,8 +2816,12 @@
 
           
 
+          
+
           The vertical resolution, in dots per inch, of the <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -2446,8 +2858,12 @@
 
             
 
+            
+
              specifies the attributes of the <see
              cref="T:System.Drawing.Bitmap" />
+
+            
 
             
 
@@ -2466,6 +2882,8 @@
 
             
 
+            
+
              from system memory.</para
           >
         </summary>
@@ -2476,8 +2894,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Imaging.BitmapData" />
+
+          
 
           
 

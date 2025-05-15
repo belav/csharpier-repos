@@ -28,8 +28,12 @@
 
         
 
+        
+
          class is an alternative to the <see
          cref="T:System.Web.UI.HtmlTextWriter" />
+
+        
 
         
 
@@ -42,6 +46,8 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.HttpBrowserCapabilities" />
 
@@ -49,8 +55,12 @@
 
         
 
+        
+
          class. Unless you create a custom page or control adapter that targets devices that use HTML 3.2 markup, you do not need to create an instance of the <see
          cref="T:System.Web.UI.Html32TextWriter" />
+
+        
 
         
 
@@ -70,6 +80,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -78,6 +90,8 @@
       <para
         >Writes a series of HTML 3.2–specific characters and text to the output stream for an ASP.NET server control. The <see
          cref="T:System.Web.UI.Html32TextWriter" />
+
+        
 
         
 
@@ -109,8 +123,12 @@
 
             
 
+            
+
              constructor passes the <see
              cref="F:System.Web.UI.HtmlTextWriter.DefaultTabString" />
+
+            
 
             
 
@@ -127,8 +145,12 @@
 
                 
 
+                
+
                 , which takes an instance of the  <see
                  cref="T:System.IO.TextWriter" />
+
+                
 
                 
 
@@ -140,6 +162,8 @@
             <item>
               <para>
                 <paramref name="tabString" />
+
+                
 
                 
 
@@ -160,8 +184,12 @@
 
             
 
+            
+
              class that uses the line indentation that is specified in the <see
              cref="F:System.Web.UI.HtmlTextWriter.DefaultTabString" />
+
+            
 
             
 
@@ -177,8 +205,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -215,6 +247,8 @@
 
             
 
+            
+
              class that uses the specified line indentation.</para
           >
         </summary>
@@ -225,8 +259,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -241,8 +279,12 @@
 
           
 
+          
+
           A string that represents the number of spaces defined by the <see
            cref="P:System.Web.UI.HtmlTextWriter.Indent" />
+
+          
 
           
 
@@ -301,8 +343,12 @@
 
             
 
+            
+
              field is passed in <paramref
              name="tagKey" />
+
+            
 
             
 
@@ -315,8 +361,12 @@
 
             
 
+            
+
              property is true, the <see
              cref="M:System.Web.UI.Html32TextWriter.GetTagName(System.Web.UI.HtmlTextWriterTag)" />
+
+            
 
             
 
@@ -330,6 +380,8 @@
           <para
             >Returns the HTML element that is associated with the specified <see
              cref="T:System.Web.UI.HtmlTextWriterTag" />
+
+            
 
             
 
@@ -349,8 +401,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriterTag" />
+
+          
 
           
 
@@ -389,8 +445,12 @@
 
             
 
+            
+
              method supports a smaller number of HTML style attributes than the <see
              cref="M:System.Web.UI.Html32TextWriter.OnStyleAttributeRender(System.String,System.String,System.Web.UI.HtmlTextWriterStyle)" />
+
+            
 
             
 
@@ -414,10 +474,14 @@
 
           
 
+          
+
           The HTML style attribute to write to the output stream. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -432,8 +496,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriterStyle" />
+
+          
 
           
 
@@ -471,8 +539,12 @@
 
             
 
+            
+
              property is true, the <see
              cref="M:System.Web.UI.Html32TextWriter.OnTagRender(System.String,System.Web.UI.HtmlTextWriterTag)" />
+
+            
 
             
 
@@ -496,6 +568,8 @@
 
           
 
+          
+
           The HTML element to write to the output stream. </param
         >
         <param name="key">
@@ -505,8 +579,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriterTag" />
+
+          
 
           
 
@@ -635,8 +713,12 @@
 
             
 
+            
+
              property value is true, the <see
              cref="M:System.Web.UI.Html32TextWriter.RenderBeginTag(System.Web.UI.HtmlTextWriterTag)" />
+
+            
 
             
 
@@ -656,8 +738,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriterTag" />
+
+          
 
           
 
@@ -685,6 +771,8 @@
           <para
             >Writes the end tag of an HTML element to the <see
              cref="T:System.Web.UI.Html32TextWriter" />
+
+            
 
             
 
@@ -742,8 +830,12 @@
 
             
 
+            
+
              property to conditionally render bold text to the <see
              cref="T:System.Web.UI.Html32TextWriter" />
+
+            
 
             
 
@@ -776,8 +868,12 @@
 
             
 
+            
+
              property to conditionally render italicized text to the <see
              cref="T:System.Web.UI.Html32TextWriter" />
+
+            
 
             
 

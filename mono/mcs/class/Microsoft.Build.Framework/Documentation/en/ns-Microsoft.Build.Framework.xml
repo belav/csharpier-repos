@@ -12,10 +12,14 @@
 
         
 
+        
+
          namespace contains the types that define how tasks and loggers interact with the vstecmsbuild engine. For information, see <format
          type="text/html">
           <a href="e39f13f7-1e1d-4435-95ca-0c222bca071c">MSBuild</a>
         </format>
+
+        
 
         
 

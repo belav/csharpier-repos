@@ -34,12 +34,16 @@
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
         <para
           >The Web page designer in Visual Studio does not support the ResetPropertyName method that is optionally exposed by Windows Forms controls for property persistence. Server controls are serialized using methods provided by the <see
            cref="T:System.Web.UI.Design.ControlPersister" />
+
+          
 
           
 
@@ -52,6 +56,8 @@
 
           
 
+          
+
           , <see
            cref="T:System.Web.UI.PersistenceModeAttribute" />
 
@@ -59,8 +65,12 @@
 
           
 
+          
+
           , and <see
            cref="T:System.ComponentModel.DesignerSerializationVisibilityAttribute" />
+
+          
 
           
 
@@ -98,11 +108,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="mode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -115,8 +129,12 @@
 
           
 
+          
+
            value to assign to <see
            cref="P:System.Web.UI.PersistenceModeAttribute.Mode" />
+
+          
 
           
 
@@ -174,6 +192,8 @@
 
             
 
+            
+
              class. The default is PersistenceMode.Attribute. This field is read-only.</para
           >
         </summary>
@@ -225,6 +245,8 @@
 
             
 
+            
+
              method first compares the current object with the given object and returns true if they are equal.  Otherwise, if the given object is also a <see
              cref="T:System.Web.UI.PersistenceModeAttribute" />
 
@@ -232,8 +254,12 @@
 
             
 
+            
+
              object and is not null, the <see
              cref="P:System.Web.UI.PersistenceModeAttribute.Mode" />
+
+            
 
             
 
@@ -252,6 +278,8 @@
 
             
 
+            
+
              object against another object.</para
           >
         </summary>
@@ -261,6 +289,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -293,6 +323,8 @@
 
             
 
+            
+
              attribute.</para
           >
         </summary>
@@ -301,6 +333,8 @@
           <para
             >The hash value to be assigned to the <see
              cref="T:System.Web.UI.PersistenceModeAttribute" />
+
+            
 
             
 
@@ -377,8 +411,12 @@
 
             
 
+            
+
              method while passing in the object referenced by the <see
              cref="F:System.Web.UI.PersistenceModeAttribute.Default" />
+
+            
 
             
 
@@ -397,6 +435,8 @@
 
             
 
+            
+
              object is of the default type.</para
           >
         </summary>
@@ -405,6 +445,8 @@
           <para
             >true if the <see
              cref="T:System.Web.UI.PersistenceModeAttribute" />
+
+            
 
             
 
@@ -433,6 +475,8 @@
           <para
             >Gets the current value of the <see
              cref="T:System.Web.UI.PersistenceMode" />
+
+            
 
             
 

@@ -43,8 +43,12 @@
         
 
         
+
+        
 implementation of the <see
          cref="T:System.Text.Decoder" />
+
+        
 
         
 
@@ -54,6 +58,8 @@ implementation of the <see
 array, where one character's bytes span multiple byte arrays. This demonstrates
 how to use a <see
          cref="T:System.Text.Decoder" />
+
+        
 
         
 
@@ -112,6 +118,8 @@ public class DecoderExample
 
         
 
+        
+
          class, the application should use the <see
          cref="M:System.Text.Encoding.GetDecoder" />
 
@@ -119,8 +127,12 @@ public class DecoderExample
 
         
 
+        
+
          method of an <see
          cref="T:System.Text.Encoding" />
+
+        
 
         
 
@@ -136,8 +148,12 @@ public class DecoderExample
 
         
 
+        
+
          method determines how many characters result in decoding a sequence of bytes, and the <see
          cref="M:System.Text.Decoder.GetChars(System.Byte*,System.Int32,System.Char*,System.Int32,System.Boolean)" />
+
+        
 
         
 
@@ -150,8 +166,12 @@ public class DecoderExample
 
         
 
+        
+
          class. For more information, see <see
          cref="M:System.Text.Encoding.GetChars(System.Byte[])" />
+
+        
 
         
 
@@ -164,8 +184,12 @@ public class DecoderExample
 
         
 
+        
+
          object maintains state information between successive calls to GetChars or <see
          cref="M:System.Text.Decoder.Convert(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32,System.Int32,System.Boolean,System.Int32@,System.Int32@,System.Boolean@)" />
+
+        
 
         
 
@@ -178,6 +202,8 @@ public class DecoderExample
 
         
 
+        
+
          also preserves trailing bytes at the end of data blocks and uses the trailing bytes in the next decoding operation. Therefore, <see
          cref="M:System.Text.Encoding.GetDecoder" />
 
@@ -185,8 +211,12 @@ public class DecoderExample
 
         
 
+        
+
          and <see
          cref="M:System.Text.Encoding.GetEncoder" />
+
+        
 
         
 
@@ -203,8 +233,12 @@ public class DecoderExample
 
           
 
+          
+
            parameter to true in the appropriate method call. If an exception occurs or if the application switches streams, it should call <see
            cref="M:System.Text.Decoder.Reset" />
+
+          
 
           
 
@@ -224,8 +258,12 @@ public class DecoderExample
 
         
 
+        
+
          or <see
          cref="T:System.Text.Encoder" />
+
+        
 
         
 
@@ -269,8 +307,12 @@ public class DecoderExample
 
             
 
+            
+
              method of a <see
              cref="T:System.Text.Encoding" />
+
+            
 
             
 
@@ -284,6 +326,8 @@ public class DecoderExample
           <para
             >Initializes a new instance of the <see
              cref="T:System.Text.Decoder" />
+
+            
 
             
 
@@ -429,6 +473,8 @@ public class DecoderExample
 
             
 
+            
+
              object represents an error handler that is invoked when an encoded byte sequence cannot be converted to a character. </para
           >
         </remarks>
@@ -442,8 +488,12 @@ public class DecoderExample
 
             
 
+            
+
              object for the current <see
              cref="T:System.Text.Decoder" />
+
+            
 
             
 
@@ -489,6 +539,8 @@ public class DecoderExample
 
             
 
+            
+
              object represents data used by the <see
              cref="T:System.Text.DecoderFallback" />
 
@@ -496,8 +548,12 @@ public class DecoderExample
 
             
 
+            
+
              object. The <see
              cref="T:System.Text.DecoderFallback" />
+
+            
 
             
 
@@ -516,8 +572,12 @@ public class DecoderExample
 
             
 
+            
+
              object associated with the current <see
              cref="T:System.Text.Decoder" />
+
+            
 
             
 
@@ -571,8 +631,12 @@ public class DecoderExample
 
             
 
+            
+
              requires to store the resulting characters, the application should use <see
              cref="M:System.Text.Decoder.GetCharCount(System.Byte*,System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -583,6 +647,8 @@ public class DecoderExample
           <para
             >If GetChars is called with <paramref
              name="flush" />
+
+            
 
             
 
@@ -606,6 +672,8 @@ public class DecoderExample
 
           
 
+          
+
           A pointer to the first byte to decode. </param
         >
         <param name="count">
@@ -615,10 +683,14 @@ public class DecoderExample
 
           
 
+          
+
           The number of bytes to decode. </param
         >
         <param name="flush">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -663,8 +735,12 @@ public class DecoderExample
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -680,11 +756,15 @@ public class DecoderExample
 
             
 
+            
+
              &lt; 0. </para
           >
           <para> -or- </para>
           <para>
             <paramref name="count" />
+
+            
 
             
 
@@ -700,8 +780,12 @@ public class DecoderExample
 
             
 
+            
+
             and <paramref
              name="count " />
+
+            
 
             
 
@@ -714,8 +798,12 @@ public class DecoderExample
 
             
 
+            
+
              (i.e. (<paramref
              name="index" />
+
+            
 
             
 
@@ -728,8 +816,12 @@ public class DecoderExample
 
             
 
+            
+
             ) &gt; <paramref
              name="bytes" />
+
+            
 
             
 
@@ -749,8 +841,12 @@ public class DecoderExample
 
             
 
+            
+
              requires to store the resulting characters, the application should use <see
              cref="M:System.Text.Decoder.GetCharCount(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -761,6 +857,8 @@ public class DecoderExample
           <para
             >If GetChars is called with <paramref
              name="flush" />
+
+            
 
             
 
@@ -784,6 +882,8 @@ public class DecoderExample
 
           
 
+          
+
           The byte array containing the sequence of bytes to decode. </param
         >
         <param name="index">
@@ -793,10 +893,14 @@ public class DecoderExample
 
           
 
+          
+
           The index of the first byte to decode. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -848,8 +952,12 @@ public class DecoderExample
 
             
 
+            
+
              requires to store the resulting characters, the application should use <see
              cref="M:System.Text.Decoder.GetCharCount(System.Byte[],System.Int32,System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -860,6 +968,8 @@ public class DecoderExample
           <para
             >If GetChars is called with <paramref
              name="flush" />
+
+            
 
             
 
@@ -883,10 +993,14 @@ public class DecoderExample
 
           
 
+          
+
           The byte array containing the sequence of bytes to decode. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -901,10 +1015,14 @@ public class DecoderExample
 
           
 
+          
+
           The number of bytes to decode. </param
         >
         <param name="flush">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -958,6 +1076,8 @@ public class DecoderExample
 
             
 
+            
+
              object saves state between calls to <see
              cref="M:System.Text.Decoder.GetChars(System.Byte*,System.Int32,System.Char*,System.Int32,System.Boolean)" />
 
@@ -965,8 +1085,12 @@ public class DecoderExample
 
             
 
+            
+
             . When the application is done with a stream of data, it should set the <paramref
              name="flush" />
+
+            
 
             
 
@@ -982,11 +1106,15 @@ public class DecoderExample
 
             
 
+            
+
             . </para
           >
           <para
             >If GetChars is called with <paramref
              name="flush" />
+
+            
 
             
 
@@ -1002,8 +1130,12 @@ public class DecoderExample
 
             
 
+            
+
              method. <see
              cref="M:System.Text.Decoder.GetChars(System.Byte*,System.Int32,System.Char*,System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -1016,8 +1148,12 @@ public class DecoderExample
 
             
 
+            
+
              will fill as much space as possible and return the bytes read and chars written. Also see the <see
              cref="M:System.Text.Encoding.GetChars(System.Byte*,System.Int32,System.Char*,System.Int32)" />
+
+            
 
             
 
@@ -1040,11 +1176,15 @@ public class DecoderExample
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="bytes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1059,10 +1199,14 @@ public class DecoderExample
 
           
 
+          
+
           The number of bytes to decode. </param
         >
         <param name="chars">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1077,10 +1221,14 @@ public class DecoderExample
 
           
 
+          
+
           The maximum number of characters to write. </param
         >
         <param name="flush">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1128,6 +1276,8 @@ public class DecoderExample
 
             
 
+            
+
              does not contain sufficient space to store the decoded characters.</para
           >
         </exception>
@@ -1139,8 +1289,12 @@ public class DecoderExample
 
             
 
+            
+
             is <see
              langword="null" />
+
+            
 
             
 
@@ -1156,8 +1310,12 @@ public class DecoderExample
 
             
 
+            
+
             is <see
              langword="null" />
+
+            
 
             
 
@@ -1174,11 +1332,15 @@ public class DecoderExample
 
             
 
+            
+
              &lt; 0. </para
           >
           <para> -or- </para>
           <para>
             <paramref name="byteCount " />
+
+            
 
             
 
@@ -1194,11 +1356,15 @@ public class DecoderExample
 
             
 
+            
+
              &lt; 0. </para
           >
           <para> -or- </para>
           <para>
             <paramref name="byteIndex" />
+
+            
 
             
 
@@ -1211,8 +1377,12 @@ public class DecoderExample
 
             
 
+            
+
              do not specify a valid range in <paramref
              name="bytes" />
+
+            
 
             
 
@@ -1225,6 +1395,8 @@ public class DecoderExample
 
             
 
+            
+
             + <paramref
              name="byteCount " />
 
@@ -1232,8 +1404,12 @@ public class DecoderExample
 
             
 
+            
+
              ) &gt; <paramref
              name="bytes" />
+
+            
 
             
 
@@ -1249,8 +1425,12 @@ public class DecoderExample
 
             
 
+            
+
              &gt; <paramref
              name="chars" />
+
+            
 
             
 
@@ -1269,6 +1449,8 @@ public class DecoderExample
 
             
 
+            
+
              object saves state between calls to <see
              cref="M:System.Text.Decoder.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" />
 
@@ -1276,8 +1458,12 @@ public class DecoderExample
 
             
 
+            
+
             . When the application is done with a stream of data, it should set the <paramref
              name="flush" />
+
+            
 
             
 
@@ -1293,11 +1479,15 @@ public class DecoderExample
 
             
 
+            
+
             . </para
           >
           <para
             >If GetChars is called with <paramref
              name="flush" />
+
+            
 
             
 
@@ -1313,8 +1503,12 @@ public class DecoderExample
 
             
 
+            
+
              method. <see
              cref="M:System.Text.Decoder.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" />
+
+            
 
             
 
@@ -1327,8 +1521,12 @@ public class DecoderExample
 
             
 
+            
+
              will fill as much space as possible and return the bytes read and chars written. Also see the <see
              cref="M:System.Text.Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" />
+
+            
 
             
 
@@ -1351,11 +1549,15 @@ public class DecoderExample
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="bytes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1370,10 +1572,14 @@ public class DecoderExample
 
           
 
+          
+
           The index of the first byte to decode. </param
         >
         <param name="byteCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1388,10 +1594,14 @@ public class DecoderExample
 
           
 
+          
+
           The character array to contain the resulting set of characters. </param
         >
         <param name="charIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1439,6 +1649,8 @@ public class DecoderExample
 
             
 
+            
+
              object saves state between calls to <see
              cref="M:System.Text.Decoder.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32,System.Boolean)" />
 
@@ -1446,8 +1658,12 @@ public class DecoderExample
 
             
 
+            
+
             . When the application is done with a stream of data, it should set the <paramref
              name="flush" />
+
+            
 
             
 
@@ -1463,11 +1679,15 @@ public class DecoderExample
 
             
 
+            
+
             . </para
           >
           <para
             >If GetChars is called with <paramref
              name="flush" />
+
+            
 
             
 
@@ -1483,8 +1703,12 @@ public class DecoderExample
 
             
 
+            
+
              method. <see
              cref="M:System.Text.Decoder.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -1497,8 +1721,12 @@ public class DecoderExample
 
             
 
+            
+
              will fill as much space as possible and return the bytes read and chars written. Also see the <see
              cref="M:System.Text.Encoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)" />
+
+            
 
             
 
@@ -1521,11 +1749,15 @@ public class DecoderExample
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="bytes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1540,10 +1772,14 @@ public class DecoderExample
 
           
 
+          
+
           The index of the first byte to decode. </param
         >
         <param name="byteCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1558,6 +1794,8 @@ public class DecoderExample
 
           
 
+          
+
           The character array to contain the resulting set of characters. </param
         >
         <param name="charIndex">
@@ -1567,10 +1805,14 @@ public class DecoderExample
 
           
 
+          
+
           The index at which to start writing the resulting set of characters. </param
         >
         <param name="flush">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1612,6 +1854,8 @@ public class DecoderExample
 
             
 
+            
+
              object. The method clears any state information preserved from a previous call to <see
              cref="M:System.Text.Decoder.GetChars(System.Byte*,System.Int32,System.Char*,System.Int32,System.Boolean)" />
 
@@ -1619,8 +1863,12 @@ public class DecoderExample
 
             
 
+            
+
              or <see
              cref="M:System.Text.Decoder.Convert(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32,System.Int32,System.Boolean,System.Int32@,System.Int32@,System.Boolean@)" />
+
+            
 
             
 
@@ -1636,8 +1884,12 @@ public class DecoderExample
 
             
 
+            
+
              method if it wants to reuse the same decoder even after an exception is thrown by <see
              cref="M:System.Text.Decoder.GetChars(System.Byte*,System.Int32,System.Char*,System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -1650,8 +1902,12 @@ public class DecoderExample
 
             
 
+            
+
             , or <see
              cref="M:System.Text.Decoder.GetCharCount(System.Byte*,System.Int32,System.Boolean)" />
+
+            
 
             
 

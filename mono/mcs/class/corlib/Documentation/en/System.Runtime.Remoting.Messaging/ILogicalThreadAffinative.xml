@@ -37,8 +37,12 @@
 
         
 
+        
+
         , the current <see
          cref="T:System.Runtime.Remoting.Messaging.CallContext" />
+
+        
 
         
 
@@ -51,8 +55,12 @@
 
         
 
+        
+
          that travels along with the call to the remote location. Only objects that expose the <see
          cref="T:System.Runtime.Remoting.Messaging.ILogicalThreadAffinative" />
+
+        
 
         
 
@@ -65,6 +73,8 @@
 
         
 
+        
+
          are propagated outside the <see
          cref="T:System.AppDomain" />
 
@@ -72,8 +82,12 @@
 
         
 
+        
+
         . Objects that do not support this interface are not transmitted in <see
          cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
+
+        
 
         
 
@@ -92,8 +106,12 @@
 
         
 
+        
+
          in a <see
          cref="T:System.Runtime.Remoting.Messaging.LogicalCallContext" />
+
+        
 
         
 

@@ -8,8 +8,12 @@
 
     
 
+    
+
     ) of that class. The variable initializers are executed in the textual order in which they appear in the class declaration. The class instance creation and initialization process is described further in <hyperlink
     >17.10</hyperlink>
+
+    
 
     
 
@@ -25,11 +29,13 @@
 
     
 
+    
+
     . <example
 
       >[Example: In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 class A  
 {  
    int x = 1;  
@@ -37,6 +43,8 @@ class A
 }  
 ]]>
       </code_example>
+
+      
 
       
 

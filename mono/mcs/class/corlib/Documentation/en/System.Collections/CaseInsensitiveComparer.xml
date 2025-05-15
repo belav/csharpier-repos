@@ -40,8 +40,12 @@
 
         
 
+        
+
          implements the <see
          cref="T:System.Collections.IComparer" />
+
+        
 
         
 
@@ -54,8 +58,12 @@
 
         
 
+        
+
          implements the <see
          cref="T:System.Collections.IHashCodeProvider" />
+
+        
 
         
 
@@ -71,8 +79,12 @@
 
         
 
+        
+
          class is the default implementation of the <see
          cref="T:System.Collections.IComparer" />
+
+        
 
         
 
@@ -88,6 +100,8 @@
 
         
 
+        
+
          are required to override the <see
          cref="M:System.Object.GetHashCode" />
 
@@ -95,8 +109,12 @@
 
         
 
+        
+
          method (or the <see
          cref="T:System.Collections.IHashCodeProvider" />
+
+        
 
         
 
@@ -109,8 +127,12 @@
 
         
 
+        
+
          method (or the <see
          cref="T:System.Collections.IComparer" />
+
+        
 
         
 
@@ -123,8 +145,12 @@
 
         
 
+        
+
          might behave incorrectly. For example, when creating a <see
          cref="T:System.Collections.Hashtable" />
+
+        
 
         
 
@@ -137,8 +163,12 @@
 
         
 
+        
+
          class or any case-insensitive <see
          cref="T:System.Collections.IHashCodeProvider" />
+
+        
 
         
 
@@ -154,10 +184,14 @@
 
         
 
+        
+
          namespace and <format
          type="text/html">
           <a href="9a59696b-d89b-45bd-946d-c75da4732d02">Encoding and Localization</a>
         </format>
+
+        
 
         
 
@@ -197,8 +231,12 @@
 
             
 
+            
+
              instance is created using this constructor, the <see
              cref="P:System.Threading.Thread.CurrentCulture" />
+
+            
 
             
 
@@ -211,10 +249,14 @@
 
             
 
+            
+
              namespace and <format
              type="text/html">
               <a href="9a59696b-d89b-45bd-946d-c75da4732d02">Encoding and Localization</a>
             </format>
+
+            
 
             
 
@@ -233,8 +275,12 @@
 
             
 
+            
+
              class using the <see
              cref="P:System.Threading.Thread.CurrentCulture" />
+
+            
 
             
 
@@ -275,8 +321,12 @@
 
             
 
+            
+
              to determine the sort order and casing rules. String comparisons might have different results depending on the culture. For more information on culture-specific comparisons, see the <see
              cref="N:System.Globalization" />
+
+            
 
             
 
@@ -286,6 +336,8 @@
              type="text/html">
               <a href="9a59696b-d89b-45bd-946d-c75da4732d02">Encoding and Localization</a>
             </format>
+
+            
 
             
 
@@ -304,8 +356,12 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -321,6 +377,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Globalization.CultureInfo" />
 
@@ -328,8 +386,12 @@
 
           
 
+          
+
            to use for the new <see
            cref="T:System.Collections.CaseInsensitiveComparer" />
+
+          
 
           
 
@@ -369,8 +431,12 @@
 
             
 
+            
+
              and <paramref
              name="b" />
+
+            
 
             
 
@@ -383,8 +449,12 @@
 
             
 
+            
+
              to compare the strings with the casing ignored; otherwise, it uses the <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -397,8 +467,12 @@
 
             
 
+            
+
              implements <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -411,8 +485,12 @@
 
             
 
+            
+
             . CompareTo (<paramref
              name="b" />
+
+            
 
             
 
@@ -425,8 +503,12 @@
 
             
 
+            
+
              implements <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -439,8 +521,12 @@
 
             
 
+            
+
             . CompareTo (<paramref
              name="a" />
+
+            
 
             
 
@@ -456,6 +542,8 @@
 
             
 
+            
+
             . When sorting, null is considered to be less than any other object.</para
           >
           <para
@@ -466,10 +554,14 @@
 
             
 
+            
+
              namespace and <format
              type="text/html">
               <a href="9a59696b-d89b-45bd-946d-c75da4732d02">Encoding and Localization</a>
             </format>
+
+            
 
             
 
@@ -492,8 +584,12 @@
 
             
 
+            
+
              and <paramref
              name="b" />
+
+            
 
             
 
@@ -524,8 +620,12 @@
 
                   
 
+                  
+
                    is less than <paramref
                    name="b" />
+
+                  
 
                   
 
@@ -547,8 +647,12 @@
 
                   
 
+                  
+
                    equals <paramref
                    name="b" />
+
+                  
 
                   
 
@@ -570,8 +674,12 @@
 
                   
 
+                  
+
                    is greater than <paramref
                    name="b" />
+
+                  
 
                   
 
@@ -590,10 +698,14 @@
 
           
 
+          
+
           The first object to compare. </param
         >
         <param name="b">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -633,8 +745,12 @@
 
             
 
+            
+
              instance is created using the parameterless constructor, the <see
              cref="P:System.Threading.Thread.CurrentCulture" />
+
+            
 
             
 
@@ -647,10 +763,14 @@
 
             
 
+            
+
              namespace and <format
              type="text/html">
               <a href="9a59696b-d89b-45bd-946d-c75da4732d02">Encoding and Localization</a>
             </format>
+
+            
 
             
 
@@ -669,8 +789,12 @@
 
             
 
+            
+
              that is associated with the <see
              cref="P:System.Threading.Thread.CurrentCulture" />
+
+            
 
             
 
@@ -711,8 +835,12 @@
 
             
 
+            
+
              to determine the sort order and casing rules. String comparisons might have different results depending on the culture. For more information on culture-specific comparisons, see the <see
              cref="N:System.Globalization" />
+
+            
 
             
 
@@ -722,6 +850,8 @@
              type="text/html">
               <a href="9a59696b-d89b-45bd-946d-c75da4732d02">Encoding and Localization</a>
             </format>
+
+            
 
             
 
@@ -740,8 +870,12 @@
 
             
 
+            
+
              that is associated with <see
              cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+            
 
             
 

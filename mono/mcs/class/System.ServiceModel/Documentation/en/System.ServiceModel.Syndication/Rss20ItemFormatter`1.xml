@@ -44,8 +44,12 @@
 
         
 
+        
+
         -derived classes and to create instances of <see
          cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+        
 
         
 
@@ -58,8 +62,12 @@
 
         
 
+        
+
          instance use the <see
          cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter" />
+
+        
 
         
 
@@ -73,6 +81,8 @@
       <para
         >A class that serializes <see
          cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+        
 
         
 
@@ -101,6 +111,8 @@
           <para
             >Creates a new instance of the <see
              cref="T:System.ServiceModel.Syndication.Rss20ItemFormatter`1" />
+
+            
 
             
 
@@ -186,6 +198,8 @@
 
             
 
+            
+
              derived class. </para
           >
         </summary>
@@ -194,6 +208,8 @@
           <para
             >A new instance of the <see
              cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+            
 
             
 

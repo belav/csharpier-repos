@@ -40,6 +40,8 @@
 
         
 
+        
+
          instead.</para
       >
     </summary>
@@ -195,6 +197,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -205,8 +209,12 @@
 
           
 
+          
+
           The connection cookie previously returned from <see
            cref="M:System.Runtime.InteropServices.UCOMIConnectionPoint.Advise(System.Object,System.Int32@)" />
+
+          
 
           
 

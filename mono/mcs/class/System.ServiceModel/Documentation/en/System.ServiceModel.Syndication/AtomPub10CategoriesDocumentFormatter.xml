@@ -40,6 +40,8 @@
 
         
 
+        
+
          instance to and from Atom 1.0 format.
 </para
       >
@@ -64,6 +66,8 @@
           <para
             >Creates a new instance of the <see
              cref="T:System.ServiceModel.Syndication.AtomPub10CategoriesDocumentFormatter" />
+
+            
 
             
 
@@ -105,8 +109,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.ServiceModel.Syndication.CategoriesDocument" />
+
+            
 
             
 
@@ -122,8 +130,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.CategoriesDocument" />
+
+          
 
           
 
@@ -162,8 +174,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.ServiceModel.Syndication.CategoriesDocument" />
+
+            
 
             
 
@@ -179,8 +195,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
+
+          
 
           
 
@@ -195,8 +215,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ServiceModel.Syndication.ReferencedCategoriesDocument" />
+
+          
 
           
 
@@ -237,6 +261,8 @@
 
             
 
+            
+
              contains a valid Atom 1.0 categories document. </para
           >
         </summary>
@@ -245,6 +271,8 @@
           <para
             >A value that specifies whether the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -260,8 +288,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -300,6 +332,8 @@
 
             
 
+            
+
              that can be serialized into a &lt;atom:categories&gt; element within a service document and contains the set of categories within the element.</para
           >
         </summary>
@@ -308,6 +342,8 @@
           <para>
 Returns an <see
              cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
+
+            
 
             
 
@@ -348,6 +384,8 @@ Returns an <see
 
             
 
+            
+
              that can be serialized into a &lt;atom:categories&gt; element within a service document and contains a URI reference to the set of categories within the element. </para
           >
         </summary>
@@ -356,6 +394,8 @@ Returns an <see
           <para>
 Returns a <see
              cref="T:System.ServiceModel.Syndication.ReferencedCategoriesDocument" />
+
+            
 
             
 
@@ -398,6 +438,8 @@ Returns a <see
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -408,8 +450,12 @@ Returns a <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -446,6 +492,8 @@ Returns a <see
           <para
             >Implements the <see
              cref="M:System.Xml.Serialization.IXmlSerializable.GetSchema" />
+
+            
 
             
 
@@ -491,6 +539,8 @@ Returns a <see
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -501,8 +551,12 @@ Returns a <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -543,6 +597,8 @@ Returns a <see
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -553,8 +609,12 @@ Returns a <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -617,6 +677,8 @@ Returns a <see
 
             
 
+            
+
             associated with the <see
              cref="T:System.ServiceModel.Syndication.AtomPub10CategoriesDocumentFormatter" />
 
@@ -624,8 +686,12 @@ Returns a <see
 
             
 
+            
+
              to the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -641,8 +707,12 @@ Returns a <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 

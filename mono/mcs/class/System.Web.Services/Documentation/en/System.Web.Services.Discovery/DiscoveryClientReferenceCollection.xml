@@ -30,6 +30,8 @@
 
         
 
+        
+
          property of <see
          cref="T:System.Web.Services.Discovery.DiscoveryClientProtocol" />
 
@@ -37,8 +39,12 @@
 
         
 
+        
+
          is of type <see
          cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
+
+        
 
         
 
@@ -52,6 +58,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.Web.Services.Discovery.DiscoveryReference" />
+
+        
 
         
 
@@ -74,6 +82,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
+
+            
 
             
 
@@ -112,8 +122,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
+
+            
 
             
 
@@ -129,6 +143,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Discovery.DiscoveryReference" />
 
@@ -136,8 +152,12 @@
 
           
 
+          
+
            to add to the <see
            cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
+
+          
 
           
 
@@ -176,8 +196,12 @@
 
             
 
+            
+
              with the specified URL and value to the <see
              cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
+
+            
 
             
 
@@ -193,8 +217,12 @@
 
           
 
+          
+
           The URL for the reference to add to the <see
            cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
+
+          
 
           
 
@@ -209,6 +237,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Discovery.DiscoveryReference" />
 
@@ -216,8 +246,12 @@
 
           
 
+          
+
            to add to the <see
            cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
+
+          
 
           
 
@@ -252,8 +286,12 @@
 
             
 
+            
+
              contains a <see
              cref="T:System.Web.Services.Discovery.DiscoveryReference" />
+
+            
 
             
 
@@ -272,8 +310,12 @@
 
             
 
+            
+
              contains a <see
              cref="T:System.Web.Services.Discovery.DiscoveryReference" />
+
+            
 
             
 
@@ -289,6 +331,8 @@
 
           
 
+          
+
           The URL for the <see
            cref="T:System.Web.Services.Discovery.DiscoveryReference" />
 
@@ -296,8 +340,12 @@
 
           
 
+          
+
            to locate within the <see
            cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
+
+          
 
           
 
@@ -357,8 +405,12 @@
 
             
 
+            
+
              object with all the keys in the <see
              cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
+
+            
 
             
 
@@ -394,8 +446,12 @@
 
             
 
+            
+
              with the specified URL from the <see
              cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
+
+            
 
             
 
@@ -411,8 +467,12 @@
 
           
 
+          
+
           A string that represents the URL for the object to remove from the <see
            cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
+
+          
 
           
 
@@ -452,8 +512,12 @@
 
             
 
+            
+
              object with all the values in the <see
              cref="T:System.Web.Services.Discovery.DiscoveryClientReferenceCollection" />
+
+            
 
             
 

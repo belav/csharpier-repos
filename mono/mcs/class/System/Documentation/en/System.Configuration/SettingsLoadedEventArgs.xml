@@ -26,8 +26,12 @@
 
         
 
+        
+
          class provides data for the <see
          cref="E:System.Configuration.ApplicationSettingsBase.SettingsLoaded" />
+
+        
 
         
 
@@ -41,6 +45,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Configuration.ApplicationSettingsBase.SettingsLoaded" />
+
+        
 
         
 
@@ -81,6 +87,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -91,8 +99,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.SettingsProvider" />
+
+          
 
           
 

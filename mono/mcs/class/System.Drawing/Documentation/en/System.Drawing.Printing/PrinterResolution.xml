@@ -24,8 +24,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Drawing.Printing.PageSettings.PrinterResolution" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          property to determine whether the printer resolution type is the <see
          cref="T:System.Drawing.Printing.PrinterResolutionKind" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
         . If so, use the <see
          cref="P:System.Drawing.Printing.PrinterResolution.X" />
+
+        
 
         
 
@@ -69,11 +81,15 @@
 
         
 
+        
+
          properties to determine the printer resolution in the horizontal and vertical directions, respectively.</para
       >
       <para
         >For more information on printing, see the <see
          cref="N:System.Drawing.Printing" />
+
+        
 
         
 
@@ -101,6 +117,8 @@
           <para
             >The following table shows initial property values for an instance of the <see
              cref="T:System.Drawing.Printing.PrinterResolution" />
+
+            
 
             
 
@@ -138,6 +156,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Drawing.Printing.PrinterResolution" />
+
+            
 
             
 
@@ -189,6 +209,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -202,8 +224,12 @@
 
             
 
+            
+
              that contains information about the <see
              cref="T:System.Drawing.Printing.PrinterResolution" />
+
+            
 
             
 
@@ -236,8 +262,12 @@
 
             
 
+            
+
              property contains the value DMRES_HIGH if <see
              cref="P:System.Drawing.Printing.PrinterResolution.Kind" />
+
+            
 
             
 
@@ -250,8 +280,12 @@
 
             
 
+            
+
             , DMRES_MEDIUM if <see
              cref="P:System.Drawing.Printing.PrinterResolution.Kind" />
+
+            
 
             
 
@@ -264,8 +298,12 @@
 
             
 
+            
+
             , DMRES_LOW if <see
              cref="P:System.Drawing.Printing.PrinterResolution.Kind" />
+
+            
 
             
 
@@ -278,8 +316,12 @@
 
             
 
+            
+
             , and DMRES_DRAFT if <see
              cref="P:System.Drawing.Printing.PrinterResolution.Kind" />
+
+            
 
             
 
@@ -292,11 +334,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >For more information about the DEVMODE structure, see the MSDN Library at <see
              cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>
+
+            
 
             
 
@@ -333,6 +379,8 @@
 
             
 
+            
+
              property is not set to <see
              cref="F:System.Drawing.Printing.PrinterResolutionKind.Custom" />
 
@@ -340,8 +388,12 @@
 
             
 
+            
+
             , the default value of the <see
              cref="P:System.Drawing.Printing.PrinterResolution.Y" />
+
+            
 
             
 

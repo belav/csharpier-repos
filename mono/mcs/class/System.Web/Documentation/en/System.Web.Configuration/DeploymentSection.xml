@@ -37,8 +37,12 @@
 
             
 
+            
+
              class by using the <see
              cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+
+            
 
             
 
@@ -52,6 +56,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.DeploymentSection" />
+
+            
 
             
 
@@ -108,6 +114,8 @@
 
             
 
+            
+
              is true, ASP.NET disables trace output, disables debug capabilities, and disables detailed system-generated error messages for remote users. For applications that have a customErrors element in the application Web.config file, the mode attribute is forced to On. These settings override any settings that are made in application Web.config files.</para
           >
           <block subset="none" type="note">
@@ -117,6 +125,8 @@
                 cref="http://www.hanselman.com/blog/MostCommonASPNETSupportIssuesReportingFromDeepInsideMicrosoftDeveloperSupport.aspx"
                 >Most Common ASP.NET Support issues - Reporting from deep inside Microsoft Developer Support</see
               >
+
+              
 
               
 

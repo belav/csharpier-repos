@@ -20,6 +20,8 @@
 
         
 
+        
+
          enumeration identifies the function of rows in a data control. It is used by the <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
 
@@ -27,8 +29,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 
@@ -44,8 +50,12 @@
 
         
 
+        
+
          enumeration to identify the type of a <see
          cref="T:System.Web.UI.WebControls.GridViewRow" />
+
+        
 
         
 
@@ -58,8 +68,12 @@
 
         
 
+        
+
          object when you enumerate through a <see
          cref="T:System.Web.UI.WebControls.GridViewRowCollection" />
+
+        
 
         
 
@@ -72,8 +86,12 @@
 
         
 
+        
+
          collection. If you are writing a data control that creates rows, you can use the <see
          cref="T:System.Web.UI.WebControls.DataControlRowType" />
+
+        
 
         
 
@@ -92,8 +110,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 
@@ -117,6 +139,8 @@
           <para
             >A data row of a data control. Only <see
              cref="F:System.Web.UI.WebControls.DataControlRowType.DataRow" />
+
+            
 
             
 

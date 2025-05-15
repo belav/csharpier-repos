@@ -27,6 +27,8 @@
 
         
 
+        
+
          class to create a special column for the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
 
@@ -34,8 +36,12 @@
 
         
 
+        
+
          control that contains the Edit, Update, and Cancel buttons for each data row in the grid. These buttons allow you to edit the values of a row in the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -51,8 +57,12 @@
 
         
 
+        
+
          object for each data row in the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -65,8 +75,12 @@
 
         
 
+        
+
          event is raised and the Edit button is replaced with the Update and Cancel buttons. You need to provide code to handle the <see
          cref="E:System.Web.UI.WebControls.DataGrid.EditCommand" />
+
+        
 
         
 
@@ -79,8 +93,12 @@
 
         
 
+        
+
          property to the selected row, and then rebinds the data to the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -97,8 +115,12 @@
 
           
 
+          
+
           , <see
            cref="P:System.Web.UI.WebControls.EditCommandColumn.EditText" />
+
+          
 
           
 
@@ -111,8 +133,12 @@
 
           
 
+          
+
            properties. Otherwise, the associated buttons will not appear in the <see
            cref="T:System.Web.UI.WebControls.EditCommandColumn" />
+
+          
 
           
 
@@ -129,8 +155,12 @@
 
         
 
+        
+
          can be set to display as hyperlinks or push buttons by setting the <see
          cref="P:System.Web.UI.WebControls.EditCommandColumn.ButtonType" />
+
+        
 
         
 
@@ -146,8 +176,12 @@
 
         
 
+        
+
          or <see
          cref="E:System.Web.UI.WebControls.DataGrid.CancelCommand" />
+
+        
 
         
 
@@ -163,6 +197,8 @@
 
         
 
+        
+
          event updates the data, sets the <see
          cref="P:System.Web.UI.WebControls.DataGrid.EditItemIndex" />
 
@@ -170,8 +206,12 @@
 
         
 
+        
+
          property to -1 (to deselect the item), and then rebinds the data to the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -187,6 +227,8 @@
 
         
 
+        
+
          event sets the <see
          cref="P:System.Web.UI.WebControls.DataGrid.EditItemIndex" />
 
@@ -194,8 +236,12 @@
 
         
 
+        
+
          property to -1 (to deselect the item), and then rebinds the data to the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -212,8 +258,12 @@
 
           
 
+          
+
            object can be used to display user input, which might include malicious client script. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. You can use validation controls to verify user input before displaying the input text in a <see
            cref="T:System.Web.UI.WebControls.DataGrid" />
+
+          
 
           
 
@@ -223,6 +273,8 @@
            type="text/html">
             <a href="f3e7718f-63d0-44a3-bd5f-48cc2059c2a8">Securing Standard Controls</a>
           </format>
+
+          
 
           
 
@@ -239,12 +291,16 @@
 
           
 
+          
+
           , and <format
            type="text/html">
             <a href="4ad3dacb-89e0-4cee-89ac-40a3f2a85461"
               >Validating User Input in ASP.NET Web Pages</a
             >
           </format>
+
+          
 
           
 
@@ -261,8 +317,12 @@
 
         
 
+        
+
          control is clicked. Page validation determines whether the input controls that are associated with a validation control on the page all pass the validation rules that are specified by the validation control. To prevent page validation from occurring, set the <see
          cref="P:System.Web.UI.WebControls.EditCommandColumn.CausesValidation" />
+
+        
 
         
 
@@ -276,6 +336,8 @@
       <para
         >A special column type for the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -302,6 +364,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -310,6 +374,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.EditCommandColumn" />
+
+            
 
             
 
@@ -341,6 +407,8 @@
           <para
             >Use the <see
              cref="P:System.Web.UI.WebControls.EditCommandColumn.ButtonType" />
+
+            
 
             
 
@@ -379,8 +447,12 @@
 
             
 
+            
+
              property to specify the text to display for the Cancel command button in the <see
              cref="T:System.Web.UI.WebControls.EditCommandColumn" />
+
+            
 
             
 
@@ -397,8 +469,12 @@
 
               
 
+              
+
                property. Otherwise, the Cancel command button will not appear in the <see
                cref="T:System.Web.UI.WebControls.EditCommandColumn" />
+
+              
 
               
 
@@ -416,12 +492,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -435,6 +515,8 @@
           <para
             >Gets or sets the text to display for the Cancel command button in the <see
              cref="T:System.Web.UI.WebControls.EditCommandColumn" />
+
+            
 
             
 
@@ -483,11 +565,15 @@
 
             
 
+            
+
              control is clicked. Page validation determines whether the input controls that are associated with a validation control on the page all pass the validation rules that are specified by the validation control.</para
           >
           <para
             >You can specify or determine whether validation is performed on both the client and the server when an Update button in an <see
              cref="T:System.Web.UI.WebControls.EditCommandColumn" />
+
+            
 
             
 
@@ -500,8 +586,12 @@
 
             
 
+            
+
              property. To prevent validation from being performed, set the <see
              cref="P:System.Web.UI.WebControls.EditCommandColumn.CausesValidation" />
+
+            
 
             
 
@@ -517,6 +607,8 @@
 
             
 
+            
+
              property is set to true, you can also use the <see
              cref="P:System.Web.UI.WebControls.EditCommandColumn.ValidationGroup" />
 
@@ -524,8 +616,12 @@
 
             
 
+            
+
              property to specify the name of the validation group for which an Update button in the <see
              cref="T:System.Web.UI.WebControls.EditCommandColumn" />
+
+            
 
             
 
@@ -540,6 +636,8 @@
           <para
             >Gets or sets a value indicating whether validation is performed when an Update button in the <see
              cref="T:System.Web.UI.WebControls.EditCommandColumn" />
+
+            
 
             
 
@@ -569,8 +667,12 @@
 
             
 
+            
+
              property to specify the text to display for the Edit button in the <see
              cref="T:System.Web.UI.WebControls.EditCommandColumn" />
+
+            
 
             
 
@@ -587,8 +689,12 @@
 
               
 
+              
+
                property. Otherwise, the Edit button will not appear in the <see
                cref="T:System.Web.UI.WebControls.EditCommandColumn" />
+
+              
 
               
 
@@ -606,12 +712,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -625,6 +735,8 @@
           <para
             >Gets or sets the text to display for the Edit button in the <see
              cref="T:System.Web.UI.WebControls.EditCommandColumn" />
+
+            
 
             
 
@@ -674,8 +786,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.TableCell" />
+
+          
 
           
 
@@ -690,6 +806,8 @@
 
           
 
+          
+
           The column number where the cell is located. </param
         >
         <param name="itemType">
@@ -699,8 +817,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.ListItemType" />
+
+          
 
           
 
@@ -733,8 +855,12 @@
 
             
 
+            
+
              property to specify the text to display for the Update command button in the <see
              cref="T:System.Web.UI.WebControls.EditCommandColumn" />
+
+            
 
             
 
@@ -751,8 +877,12 @@
 
               
 
+              
+
                property. Otherwise, the Update command button will not appear in the <see
                cref="T:System.Web.UI.WebControls.EditCommandColumn" />
+
+              
 
               
 
@@ -770,12 +900,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -789,6 +923,8 @@
           <para
             >Gets or sets the text to display for the Update command button in the <see
              cref="T:System.Web.UI.WebControls.EditCommandColumn" />
+
+            
 
             
 
@@ -837,8 +973,12 @@
 
             
 
+            
+
              property to specify the name of the validation group for which the Update button in an <see
              cref="T:System.Web.UI.WebControls.EditCommandColumn" />
+
+            
 
             
 
@@ -854,8 +994,12 @@
 
             
 
+            
+
              property has an effect only when the value of the <see
              cref="P:System.Web.UI.WebControls.EditCommandColumn.CausesValidation" />
+
+            
 
             
 
@@ -868,8 +1012,12 @@
 
             
 
+            
+
              property, only the validation controls that are part of the specified group are validated when the Update button in an <see
              cref="T:System.Web.UI.WebControls.EditCommandColumn" />
+
+            
 
             
 
@@ -882,6 +1030,8 @@
 
             
 
+            
+
              property and the <see
              cref="P:System.Web.UI.WebControls.EditCommandColumn.CausesValidation" />
 
@@ -889,8 +1039,12 @@
 
             
 
+            
+
              property is set to true, all validation controls on the page that are not assigned to a validation group are validated when the Update button in an <see
              cref="T:System.Web.UI.WebControls.EditCommandColumn" />
+
+            
 
             
 
@@ -905,6 +1059,8 @@
           <para
             >Gets or sets the group of validation controls for which the <see
              cref="T:System.Web.UI.WebControls.EditCommandColumn" />
+
+            
 
             
 

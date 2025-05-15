@@ -79,8 +79,12 @@
 
             
 
+            
+
              when you want to look at the live entry instead of the entry that was returned through <see
              cref="T:System.DirectoryServices.DirectorySearcher" />
+
+            
 
             
 
@@ -97,6 +101,8 @@
 
               
 
+              
+
                on each <see
                cref="T:System.DirectoryServices.SearchResult" />
 
@@ -104,8 +110,12 @@
 
               
 
+              
+
                returned through <see
                cref="T:System.DirectoryServices.DirectorySearcher" />
+
+              
 
               
 
@@ -125,8 +135,12 @@
 
             
 
+            
+
              that corresponds to the <see
              cref="T:System.DirectoryServices.SearchResult" />
+
+            
 
             
 
@@ -145,8 +159,12 @@
 
             
 
+            
+
              that corresponds to the <see
              cref="T:System.DirectoryServices.SearchResult" />
+
+            
 
             
 
@@ -178,6 +196,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -186,6 +206,8 @@
           <para
             >Gets a <see
              cref="T:System.DirectoryServices.ResultPropertyCollection" />
+
+            
 
             
 
@@ -214,6 +236,8 @@
 
             
 
+            
+
              property uniquely identifies this entry in the Active Directory Domain Services hierarchy. The entry can always be retrieved using this path.</para
           >
         </remarks>
@@ -222,6 +246,8 @@
           <para
             >Gets the path for this <see
              cref="T:System.DirectoryServices.SearchResult" />
+
+            
 
             
 
@@ -244,8 +270,12 @@
 
         
 
+        
+
          class are very similar to instances of <see
          cref="T:System.DirectoryServices.DirectoryEntry" />
+
+        
 
         
 
@@ -258,8 +288,12 @@
 
         
 
+        
+
          class retrieves its information from the Active Directory Domain Services hierarchy each time a new object is accessed, whereas the data for <see
          cref="T:System.DirectoryServices.SearchResult" />
+
+        
 
         
 
@@ -272,8 +306,12 @@
 
         
 
+        
+
         , where it gets returned from a query that is performed with the <see
          cref="T:System.DirectoryServices.DirectorySearcher" />
+
+        
 
         
 
@@ -286,8 +324,12 @@
 
         
 
+        
+
          collection in your query will be available from <see
          cref="T:System.DirectoryServices.SearchResult" />
+
+        
 
         
 
@@ -306,8 +348,12 @@
 
         
 
+        
+
          class encapsulates a node in the Active Directory Domain Services hierarchy that is returned during a search through <see
          cref="T:System.DirectoryServices.DirectorySearcher" />
+
+        
 
         
 

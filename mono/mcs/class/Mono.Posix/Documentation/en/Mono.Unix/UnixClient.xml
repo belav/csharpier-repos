@@ -64,11 +64,15 @@
 
           
 
+          
+
            to connect to.</param
         >
         <summary
           >Creates a new UnixClient and establishes a connection to the passed in <see
            cref="T:Mono.Unix.UnixEndPoint" />
+
+          
 
           
 
@@ -81,8 +85,12 @@
 
           
 
+          
+
            constructor instead, unless you already have a <see
            cref="T:Mono.Unix.UnixEndPoint" />
+
+          
 
           
 
@@ -98,8 +106,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -136,8 +148,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -175,11 +191,15 @@
 
           
 
+          
+
            for this UnixClient.</summary
         >
         <value
           >The <see
            cref="T:System.Net.Sockets.Socket" />
+
+          
 
           
 
@@ -240,6 +260,8 @@
         <param name="remoteEndPoint"
           >The <see
            cref="T:Mono.Unix.UnixEndPoint" />
+
+          
 
           
 
@@ -377,11 +399,15 @@
 
           
 
+          
+
            for this UnixClient.</summary
         >
         <returns
           >The <see
            cref="T:System.Net.Sockets.NetworkStream" />
+
+          
 
           
 

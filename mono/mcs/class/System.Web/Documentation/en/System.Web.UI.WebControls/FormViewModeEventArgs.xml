@@ -24,6 +24,8 @@
 
         
 
+        
+
          event is raised when a <see
          cref="T:System.Web.UI.WebControls.FormView" />
 
@@ -31,8 +33,12 @@
 
         
 
+        
+
          control attempts to switch between edit, insert, and read-only mode, but before the mode actually changes. This allows you to provide an event-handling method that performs a custom routine, such as configuring the <see
          cref="T:System.Web.UI.WebControls.FormView" />
+
+        
 
         
 
@@ -48,8 +54,12 @@
 
         
 
+        
+
          object is passed to the event-handling method, which allows you to determine the mode to which the <see
          cref="T:System.Web.UI.WebControls.FormView" />
+
+        
 
         
 
@@ -62,8 +72,12 @@
 
         
 
+        
+
          event was raised as a result of the user canceling an edit or insert operation, or to indicate that the mode change should be canceled. To determine the new mode, use the <see
          cref="P:System.Web.UI.WebControls.FormViewModeEventArgs.NewMode" />
+
+        
 
         
 
@@ -76,8 +90,12 @@
 
         
 
+        
+
          property to programmatically specify an alternate mode to which to change by setting it to one of the <see
          cref="T:System.Web.UI.WebControls.FormViewMode" />
+
+        
 
         
 
@@ -90,8 +108,12 @@
 
         
 
+        
+
          property to determine whether this event was raised as the result of the user canceling an edit or insert operation. To cancel the mode change, set the <see
          cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+
+        
 
         
 
@@ -109,6 +131,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -119,8 +143,12 @@
 
         
 
+        
+
          class, see the <see
          cref="M:System.Web.UI.WebControls.FormViewModeEventArgs.#ctor(System.Web.UI.WebControls.FormViewMode,System.Boolean)" />
+
+        
 
         
 
@@ -134,6 +162,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Web.UI.WebControls.FormView.ModeChanging" />
+
+        
 
         
 
@@ -166,11 +196,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The following table shows initial property values for an instance of the <see
              cref="T:System.Web.UI.WebControls.FormViewModeEventArgs" />
+
+            
 
             
 
@@ -204,6 +238,8 @@
 
                   
 
+                  
+
                    parameter.</para
                 >
               </description>
@@ -218,6 +254,8 @@
                 <para
                   >The value of the <paramref
                    name="mode" />
+
+                  
 
                   
 
@@ -242,6 +280,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -252,8 +292,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.FormViewMode" />
+
+          
 
           
 
@@ -268,8 +312,12 @@
 
           
 
+          
+
           true to indicate the <see
            cref="E:System.Web.UI.WebControls.FormView.ModeChanging" />
+
+          
 
           
 
@@ -301,8 +349,12 @@
 
             
 
+            
+
              event is raised when a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -315,6 +367,8 @@
 
             
 
+            
+
              property to determine whether the <see
              cref="E:System.Web.UI.WebControls.FormView.ModeChanging" />
 
@@ -322,8 +376,12 @@
 
             
 
+            
+
              event was raised as a result of the user canceling an edit or insert operation. For example, you might want to reset the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -337,6 +395,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="E:System.Web.UI.WebControls.FormView.ModeChanging" />
+
+            
 
             
 
@@ -372,8 +432,12 @@
 
             
 
+            
+
              property to determine the mode to which the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -386,6 +450,8 @@
 
             
 
+            
+
              control based on the mode to which it changes. You can also use this property to specify the mode to which the <see
              cref="T:System.Web.UI.WebControls.FormView" />
 
@@ -393,8 +459,12 @@
 
             
 
+            
+
              control changes by setting it to one of the <see
              cref="T:System.Web.UI.WebControls.FormViewMode" />
+
+            
 
             
 
@@ -408,6 +478,8 @@
           <para
             >Gets or sets the mode to which the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 

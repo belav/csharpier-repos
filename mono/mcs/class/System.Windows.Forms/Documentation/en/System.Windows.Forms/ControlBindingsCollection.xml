@@ -35,8 +35,12 @@
 
         
 
+        
+
          objects to a <see
          cref="T:System.Windows.Forms.ControlBindingsCollection" />
+
+        
 
         
 
@@ -49,8 +53,12 @@
 
         
 
+        
+
          class can access the <see
          cref="T:System.Windows.Forms.ControlBindingsCollection" />
+
+        
 
         
 
@@ -63,8 +71,12 @@
 
         
 
+        
+
          property. For a list of Windows controls that support data binding, see the <see
          cref="T:System.Windows.Forms.Binding" />
+
+        
 
         
 
@@ -80,8 +92,12 @@
 
         
 
+        
+
          contains standard collection methods such as <see
          cref="M:System.Windows.Forms.ControlBindingsCollection.Add(System.Windows.Forms.Binding)" />
+
+        
 
         
 
@@ -94,8 +110,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Windows.Forms.ControlBindingsCollection.Remove(System.Windows.Forms.Binding)" />
+
+        
 
         
 
@@ -111,8 +131,12 @@
 
         
 
+        
+
          belongs to, use the <see
          cref="P:System.Windows.Forms.ControlBindingsCollection.Control" />
+
+        
 
         
 
@@ -151,6 +175,8 @@
 
             
 
+            
+
              class with the specified bindable control.</para
           >
         </summary>
@@ -161,8 +187,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.IBindableComponent" />
+
+          
 
           
 
@@ -195,8 +225,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.Binding" />
+
+            
 
             
 
@@ -209,8 +243,12 @@
 
             
 
+            
+
              method is set to the value of the <see
              cref="P:System.Windows.Forms.ControlBindingsCollection.DefaultDataSourceUpdateMode" />
+
+            
 
             
 
@@ -221,6 +259,8 @@
           <para
             >The <see
              cref="E:System.Windows.Forms.BindingsCollection.CollectionChanged" />
+
+            
 
             
 
@@ -239,6 +279,8 @@
 
             
 
+            
+
              to the collection.</para
           >
         </summary>
@@ -249,8 +291,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Binding" />
+
+          
 
           
 
@@ -289,8 +335,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.Binding" />
+
+            
 
             
 
@@ -303,8 +353,12 @@
 
             
 
+            
+
              method is set to the value of the <see
              cref="P:System.Windows.Forms.ControlBindingsCollection.DefaultDataSourceUpdateMode" />
+
+            
 
             
 
@@ -320,8 +374,12 @@
 
             
 
+            
+
              causes the <see
              cref="E:System.Windows.Forms.BindingsCollection.CollectionChanged" />
+
+            
 
             
 
@@ -340,6 +398,8 @@
 
             
 
+            
+
              using the specified control property name, data source, and data member, and adds it to the collection.</para
           >
         </summary>
@@ -348,6 +408,8 @@
           <para
             >The newly created <see
              cref="T:System.Windows.Forms.Binding" />
+
+            
 
             
 
@@ -363,10 +425,14 @@
 
           
 
+          
+
           The name of the control property to bind. </param
         >
         <param name="dataSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -379,10 +445,14 @@
 
           
 
+          
+
            that represents the data source. </param
         >
         <param name="dataMember">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -430,11 +500,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="propertyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -449,8 +523,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -465,10 +543,14 @@
 
           
 
+          
+
           The property or list to bind to.</param
         >
         <param name="formattingEnabled">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -508,8 +590,12 @@
 
             
 
+            
+
              method raises the <see
              cref="E:System.Windows.Forms.BindingsCollection.CollectionChanged" />
+
+            
 
             
 
@@ -532,11 +618,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="propertyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -551,8 +641,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -567,10 +661,14 @@
 
           
 
+          
+
           The property or list to bind to.</param
         >
         <param name="formattingEnabled">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -585,8 +683,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.DataSourceUpdateMode" />
+
+          
 
           
 
@@ -627,8 +729,12 @@
 
             
 
+            
+
              method raises the <see
              cref="E:System.Windows.Forms.BindingsCollection.CollectionChanged" />
+
+            
 
             
 
@@ -642,6 +748,8 @@
           <para
             >Creates a binding that binds the specified control property to the specified data member of the specified data source, optionally enabling formatting, propagating values to the data source based on the specified update setting, setting the property to the specified value when <see
              cref="T:System.DBNull" />
+
+            
 
             
 
@@ -664,6 +772,8 @@
 
           
 
+          
+
           The name of the control property to bind. </param
         >
         <param name="dataSource">
@@ -673,8 +783,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -689,10 +803,14 @@
 
           
 
+          
+
           The property or list to bind to.</param
         >
         <param name="formattingEnabled">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -707,8 +825,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.DataSourceUpdateMode" />
+
+          
 
           
 
@@ -723,6 +845,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -730,8 +854,12 @@
 
           
 
+          
+
            to be applied to the bound control property if the data source value is <see
            cref="T:System.DBNull" />
+
+          
 
           
 
@@ -773,8 +901,12 @@
 
             
 
+            
+
              method raises the <see
              cref="E:System.Windows.Forms.BindingsCollection.CollectionChanged" />
+
+            
 
             
 
@@ -788,6 +920,8 @@
           <para
             >Creates a binding that binds the specified control property to the specified data member of the specified data source, optionally enabling formatting with the specified format string, propagating values to the data source based on the specified update setting, setting the property to the specified value when <see
              cref="T:System.DBNull" />
+
+            
 
             
 
@@ -810,6 +944,8 @@
 
           
 
+          
+
           The name of the control property to bind. </param
         >
         <param name="dataSource">
@@ -819,8 +955,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -835,10 +975,14 @@
 
           
 
+          
+
           The property or list to bind to.</param
         >
         <param name="formattingEnabled">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -853,8 +997,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.DataSourceUpdateMode" />
+
+          
 
           
 
@@ -869,8 +1017,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -883,10 +1035,14 @@
 
           
 
+          
+
           .</param
         >
         <param name="formatString">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -929,8 +1085,12 @@
 
             
 
+            
+
              method raises the <see
              cref="E:System.Windows.Forms.BindingsCollection.CollectionChanged" />
+
+            
 
             
 
@@ -949,6 +1109,8 @@
 
             
 
+            
+
              is returned from the data source, setting the specified format provider, and adding the binding to the collection.</para
           >
         </summary>
@@ -957,6 +1119,8 @@
           <para
             >The newly created <see
              cref="T:System.Windows.Forms.Binding" />
+
+            
 
             
 
@@ -972,6 +1136,8 @@
 
           
 
+          
+
           The name of the control property to bind. </param
         >
         <param name="dataSource">
@@ -981,8 +1147,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -997,10 +1167,14 @@
 
           
 
+          
+
           The property or list to bind to.</param
         >
         <param name="formattingEnabled">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1015,8 +1189,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.DataSourceUpdateMode" />
+
+          
 
           
 
@@ -1031,6 +1209,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -1038,8 +1218,12 @@
 
           
 
+          
+
            to be applied to the bound control property if the data source value is <see
            cref="T:System.DBNull" />
+
+          
 
           
 
@@ -1054,6 +1238,8 @@
 
           
 
+          
+
           One or more format specifier characters that indicate how a value is to be displayed</param
         >
         <param name="formatInfo">
@@ -1063,8 +1249,12 @@
 
           
 
+          
+
           An implementation of <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -1099,8 +1289,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Binding" />
+
+          
 
           
 
@@ -1138,8 +1332,12 @@
 
             
 
+            
+
              property returns the same object as the <see
              cref="P:System.Windows.Forms.ControlBindingsCollection.Control" />
+
+            
 
             
 
@@ -1153,6 +1351,8 @@
           <para
             >Gets the <see
              cref="T:System.Windows.Forms.IBindableComponent" />
+
+            
 
             
 
@@ -1176,6 +1376,8 @@
           <para
             >The <see
              cref="E:System.Windows.Forms.BindingsCollection.CollectionChanged" />
+
+            
 
             
 
@@ -1256,6 +1458,8 @@
 
             
 
+            
+
              property is used in cases where a <see
              cref="T:System.Windows.Forms.Binding" />
 
@@ -1263,8 +1467,12 @@
 
             
 
+            
+
              without a <see
              cref="P:System.Windows.Forms.Binding.DataSourceUpdateMode" />
+
+            
 
             
 
@@ -1284,8 +1492,12 @@
 
             
 
+            
+
              for a <see
              cref="T:System.Windows.Forms.Binding" />
+
+            
 
             
 
@@ -1343,6 +1555,8 @@
 
             
 
+            
+
              from the collection.</para
           >
         </summary>
@@ -1353,8 +1567,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Binding" />
+
+          
 
           
 
@@ -1388,6 +1606,8 @@
 
             
 
+            
+
              event occurs if the removal succeeds.</para
           >
         </remarks>
@@ -1401,11 +1621,15 @@
 
             
 
+            
+
              at the specified index.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1444,8 +1668,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Binding" />
+
+          
 
           
 

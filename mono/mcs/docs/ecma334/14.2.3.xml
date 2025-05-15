@@ -11,11 +11,15 @@
 
         
 
+        
+
         . </list_item
       >
       <list_item
         > If the set of candidate user-defined operators is not empty, then this becomes the set of candidate operators for the operation. Otherwise, the predefined unary operator op implementations become the set of candidate operators for the operation. The predefined implementations of a given operator are specified in the description of the operator (<hyperlink
         >14.5</hyperlink>
+
+        
 
         
 
@@ -28,11 +32,15 @@
 
         
 
+        
+
         ). </list_item
       >
       <list_item
         > The overload resolution rules of <hyperlink
         >14.4.2</hyperlink>
+
+        
 
         
 

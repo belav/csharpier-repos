@@ -43,8 +43,12 @@
 
         
 
+        
+
          values can be used with any of the following date and time parsing methods that include a <paramref
          name="styles" />
+
+        
 
         
 
@@ -102,11 +106,15 @@
 
         
 
+        
+
          values. However, if none of the Allow* values is selected, the input string must have exactly the same white-space characters as the format string.</para
       >
       <para
         >If the input string does not contain any indication of the time zone, the date and time parsing methods interpret the value of the date and time string based on the time zone setting for the operating system. To convert the date and time to the Universal Time or Greenwich Mean Time (GMT), the application should use the <see
          cref="F:System.Globalization.DateTimeStyles.AdjustToUniversal" />
+
+        
 
         
 
@@ -119,6 +127,8 @@
 
         
 
+        
+
          or <see
          cref="M:System.DateTimeOffset.ToUniversalTime" />
 
@@ -126,8 +136,12 @@
 
         
 
+        
+
          method. However, using the <see
          cref="F:System.Globalization.DateTimeStyles.AdjustToUniversal" />
+
+        
 
         
 
@@ -174,6 +188,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -187,8 +203,12 @@
 
             
 
+            
+
             , the date and time are converted from the local time to UTC. If the input string denotes a UTC time, through a time zone specifier or <see
              cref="F:System.Globalization.DateTimeStyles.AssumeUniversal" />
+
+            
 
             
 
@@ -201,8 +221,12 @@
 
             
 
+            
+
              property is <see
              cref="F:System.DateTimeKind.Unspecified" />
+
+            
 
             
 
@@ -247,6 +271,8 @@
 
             
 
+            
+
              format patterns.</para
           >
         </summary>
@@ -281,6 +307,8 @@
           <para
             >Leading white-space characters must be ignored during parsing, except if they occur in the <see
              cref="T:System.Globalization.DateTimeFormatInfo" />
+
+            
 
             
 
@@ -325,6 +353,8 @@
 
             
 
+            
+
              format patterns.</para
           >
         </summary>
@@ -364,8 +394,12 @@
 
             
 
+            
+
              format patterns. This value is a combination of the <see
              cref="F:System.Globalization.DateTimeStyles.AllowLeadingWhite" />
+
+            
 
             
 
@@ -378,8 +412,12 @@
 
             
 
+            
+
             , and <see
              cref="F:System.Globalization.DateTimeStyles.AllowInnerWhite" />
+
+            
 
             
 
@@ -417,8 +455,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Globalization.DateTimeStyles.RoundtripKind" />
+
+            
 
             
 
@@ -459,8 +501,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Globalization.DateTimeStyles.RoundtripKind" />
+
+            
 
             
 
@@ -538,6 +584,8 @@
 
             
 
+            
+
             , <see
              cref="M:System.DateTime.ParseExact(System.String,System.String,System.IFormatProvider)" />
 
@@ -545,8 +593,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.DateTime.TryParse(System.String,System.DateTime@)" />
+
+            
 
             
 
@@ -584,6 +636,8 @@
 
             
 
+            
+
              field of a date is preserved when a <see
              cref="T:System.DateTime" />
 
@@ -591,8 +645,12 @@
 
             
 
+            
+
              object is converted to a string using the "o" or "r" standard format specifier, and the string is then converted back to a <see
              cref="T:System.DateTime" />
+
+            
 
             
 

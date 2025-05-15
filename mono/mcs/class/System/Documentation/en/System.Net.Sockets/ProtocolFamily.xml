@@ -28,8 +28,12 @@
 
         
 
+        
+
          enumeration specifies the protocol scheme that is used by the <see
          cref="T:System.Net.Sockets.Socket" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
          indicates that the IP version 4 protocol is expected when a <see
          cref="T:System.Net.Sockets.Socket" />
+
+        
 
         
 
@@ -57,6 +65,8 @@
       <para
         >Specifies the type of protocol that an instance of the <see
          cref="T:System.Net.Sockets.Socket" />
+
+        
 
         
 

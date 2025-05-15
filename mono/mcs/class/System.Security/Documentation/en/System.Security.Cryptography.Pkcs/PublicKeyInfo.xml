@@ -30,6 +30,8 @@
 
         
 
+        
+
          class represents information associated with a public key.</para
       >
     </summary>
@@ -66,6 +68,8 @@
 
             
 
+            
+
              property retrieves the algorithm identifier associated with the public key.</para
           >
         </summary>
@@ -91,6 +95,8 @@
           <para
             >The <see
              cref="P:System.Security.Cryptography.Pkcs.PublicKeyInfo.KeyValue" />
+
+            
 
             
 

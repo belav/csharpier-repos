@@ -20,6 +20,8 @@
 
         
 
+        
+
          class.</para
       >
     </remarks>
@@ -28,6 +30,8 @@
       <para
         >Specifies constants defining the default button on a <see
          cref="T:System.Windows.Forms.MessageBox" />
+
+        
 
         
 

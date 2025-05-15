@@ -31,8 +31,12 @@
 
         
 
+        
+
          event is raised when components are about to be added to the toolbox. <see
          cref="T:System.Drawing.Design.ToolboxComponentsCreatingEventArgs" />
+
+        
 
         
 
@@ -46,6 +50,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Drawing.Design.ToolboxItem.ComponentsCreating" />
+
+        
 
         
 
@@ -78,11 +84,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="host">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -116,6 +126,8 @@
           <para
             >Gets or sets an instance of the <see
              cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+            
 
             
 

@@ -154,6 +154,8 @@
 
         
 
+        
+
          enumeration defines access levels that are used by <see
          cref="N:System.DirectoryServices" />
 
@@ -161,8 +163,12 @@
 
         
 
+        
+
          permission classes. This enumeration has a <see
          cref="T:System.FlagsAttribute" />
+
+        
 
         
 

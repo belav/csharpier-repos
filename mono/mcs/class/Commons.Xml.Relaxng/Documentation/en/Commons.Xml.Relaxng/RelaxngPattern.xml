@@ -17,6 +17,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Docs>
@@ -75,11 +77,15 @@
 
           
 
+          
+
            for the detail).</summary
         >
         <param name="xmlReader"
           >a <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -103,6 +109,8 @@
 
           
 
+          
+
           .</remarks
         >
       </Docs>
@@ -119,6 +127,8 @@
         <remarks
           >This method is anyways called internally before being used in <see
            cref="T:Commons.Xml.Relaxng.RelaxngValidatingReader" />
+
+          
 
           
 
@@ -171,6 +181,8 @@
         <summary
           >Returns the data type provider for this pattern instance. See <see
            cref="T:Commons.Xml.Relaxng.RelaxngDatatypeProvider" />
+
+          
 
           
 

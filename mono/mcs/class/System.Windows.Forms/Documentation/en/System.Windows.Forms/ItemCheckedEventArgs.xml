@@ -22,8 +22,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -56,6 +60,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -66,8 +72,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ListViewItem" />
+
+          
 
           
 
@@ -98,6 +108,8 @@
           <para
             >Gets the <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 

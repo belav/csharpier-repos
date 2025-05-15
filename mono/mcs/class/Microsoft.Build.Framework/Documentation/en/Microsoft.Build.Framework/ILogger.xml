@@ -24,8 +24,12 @@
 
         
 
+        
+
         , which provides default implementations of some <see
          cref="T:Microsoft.Build.Framework.ILogger" />
+
+        
 
         
 
@@ -61,6 +65,8 @@
         </summary>
         <param name="eventSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

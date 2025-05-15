@@ -70,6 +70,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -107,8 +109,12 @@
 
             
 
+            
+
             , so <see
              cref="M:System.Security.Policy.AllMembershipCondition.Check(System.Security.Policy.Evidence)" />
+
+            
 
             
 
@@ -127,6 +133,8 @@
         </returns>
         <param name="evidence">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -197,6 +205,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -205,6 +215,8 @@
           <para
             >true if the specified membership condition is an <see
              cref="T:System.Security.Policy.AllMembershipCondition" />
+
+            
 
             
 
@@ -220,8 +232,12 @@
 
           
 
+          
+
           The object to compare to <see
            cref="T:System.Security.Policy.AllMembershipCondition" />
+
+          
 
           
 
@@ -260,6 +276,8 @@
         </summary>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -304,10 +322,14 @@
 
           
 
+          
+
           The XML encoding to use to reconstruct the security object. </param
         >
         <param name="level">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -434,6 +456,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -443,6 +467,8 @@
         </returns>
         <param name="level">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

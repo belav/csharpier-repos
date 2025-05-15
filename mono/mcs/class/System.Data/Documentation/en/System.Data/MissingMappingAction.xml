@@ -23,6 +23,8 @@
 
         
 
+        
+
          values are used as arguments in the <see
          cref="M:System.Data.Common.DataColumnMappingCollection.GetColumnMappingBySchemaAction(System.Data.Common.DataColumnMappingCollection,System.String,System.Data.MissingMappingAction)" />
 
@@ -30,8 +32,12 @@
 
         
 
+        
+
          method, and the <see
          cref="M:System.Data.Common.DataTableMappingCollection.GetTableMappingBySchemaAction(System.Data.Common.DataTableMappingCollection,System.String,System.String,System.Data.MissingMappingAction)" />
+
+        
 
         
 
@@ -60,6 +66,8 @@
           <para
             >An <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -107,6 +115,8 @@
           <para
             >The source column or source table is created and added to the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 

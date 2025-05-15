@@ -23,11 +23,15 @@
 
         
 
+        
+
          values are used by a .NET Framework data provider when performing a transaction.</para
       >
       <para
         >The <see
          cref="T:System.Data.IsolationLevel" />
+
+        
 
         
 
@@ -137,6 +141,8 @@
 
             
 
+            
+
             , preventing other users from updating or inserting rows into the dataset until the transaction is complete.</para
           >
         </summary>
@@ -180,6 +186,8 @@
 
             
 
+            
+
             , if you do not set <see
              cref="T:System.Data.IsolationLevel" />
 
@@ -187,8 +195,12 @@
 
             
 
+            
+
              or you set <see
              cref="T:System.Data.IsolationLevel" />
+
+            
 
             
 

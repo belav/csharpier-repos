@@ -30,6 +30,8 @@
 
         
 
+        
+
         , process, or computer. Two or more message sinks in the chain can interact with each other in regard to each specific action.</para
       >
     </remarks>
@@ -80,6 +82,8 @@
 
             
 
+            
+
              interface that provides a way to control asynchronous messages after they have been dispatched.</para
           >
         </returns>
@@ -90,10 +94,14 @@
 
           
 
+          
+
           The message to process. </param
         >
         <param name="replySink">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -162,6 +170,8 @@
 
             
 
+            
+
              method is invoked on the message sink by the remoting infrastructure or by a previous sink for synchronous messages.</para
           >
         </remarks>
@@ -175,6 +185,8 @@
         </returns>
         <param name="msg">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -33,6 +33,8 @@
 
         
 
+        
+
          configuration element.</para
       >
       <para
@@ -43,8 +45,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Net.WebClient" />
+
+        
 
         
 
@@ -84,6 +90,8 @@
 
             
 
+            
+
              object that represents the <see
              cref="P:System.Net.Configuration.HttpWebRequestElement.MaximumResponseHeadersLength" />
 
@@ -91,8 +99,12 @@
 
             
 
+            
+
              to the <see
              cref="P:System.Configuration.ConfigurationElement.Properties" />
+
+            
 
             
 
@@ -106,6 +118,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.Configuration.HttpWebRequestElement" />
+
+            
 
             
 
@@ -269,6 +283,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -325,8 +341,12 @@
 
             
 
+            
+
              exception is thrown with the status set to <see
              cref="F:System.Net.WebExceptionStatus.ServerProtocolViolation" />
+
+            
 
             
 

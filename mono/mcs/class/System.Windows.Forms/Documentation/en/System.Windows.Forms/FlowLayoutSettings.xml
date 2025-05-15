@@ -29,8 +29,12 @@
 
         
 
+        
+
          class collects and manages the characteristics associated with the flow layout scheme. This class is used internally by the <see
          cref="T:System.Windows.Forms.FlowLayoutPanel" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          classes, as well as the flow layout engine. The <see
          cref="T:System.Windows.Forms.FlowLayoutSettings" />
+
+        
 
         
 
@@ -55,6 +63,8 @@
       <para
         >The <see
          cref="T:System.Windows.Forms.FlowLayoutSettings" />
+
+        
 
         
 
@@ -72,6 +82,8 @@
       </list>
       <para>
         <see cref="T:System.Windows.Forms.FlowLayoutSettings" />
+
+        
 
         
 
@@ -112,8 +124,12 @@
 
             
 
+            
+
              is the default property for the <see
              cref="T:System.Windows.Forms.FlowLayoutSettings" />
+
+            
 
             
 
@@ -158,6 +174,8 @@
 
           
 
+          
+
           The child control.</param
         >
       </Docs>
@@ -187,6 +205,8 @@
 
             
 
+            
+
              property is typically used in two contexts:</para
           >
           <list type="bullet">
@@ -197,6 +217,8 @@
               <para
                 >A control contained within a flow layout container (for example, a button contained in a cell of a <see
                  cref="T:System.Windows.Forms.FlowLayoutPanel" />
+
+                
 
                 
 
@@ -240,10 +262,14 @@
 
           
 
+          
+
           The child control.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -275,6 +301,8 @@
           <para
             >If the area of the container is too small to display all the child controls, then at least one control will be clipped regardless of the <see
              cref="P:System.Windows.Forms.FlowLayoutSettings.WrapContents" />
+
+            
 
             
 

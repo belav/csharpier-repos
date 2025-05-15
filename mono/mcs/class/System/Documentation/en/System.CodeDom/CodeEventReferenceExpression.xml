@@ -40,6 +40,8 @@
 
         
 
+        
+
          can be used to represent a reference to an event.</para
       >
       <para
@@ -50,8 +52,12 @@
 
         
 
+        
+
          property specifies the object that contains the event. The <see
          cref="P:System.CodeDom.CodeEventReferenceExpression.EventName" />
+
+        
 
         
 
@@ -87,6 +93,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeEventReferenceExpression" />
+
+            
 
             
 
@@ -129,11 +137,15 @@
 
             
 
+            
+
              class using the specified target object and event name.</para
           >
         </summary>
         <param name="targetObject">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -146,10 +158,14 @@
 
           
 
+          
+
            that indicates the object that contains the event. </param
         >
         <param name="eventName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -31,8 +31,12 @@
 
         
 
+        
+
          class through the <see
          cref="P:System.Web.UI.Control.Controls" />
+
+        
 
         
 
@@ -45,6 +49,8 @@
 
         
 
+        
+
          class is the base class for all ASP.NET server controls, all server controls inherit this property.</para
       >
       <para
@@ -52,6 +58,8 @@
          type="text/html">
           <a href="60CC581F-1DB5-445B-BA04-A173396BF872">Collections and Data Structures</a>
         </format>
+
+        
 
         
 
@@ -88,11 +96,15 @@
 
             
 
+            
+
              class for the specified parent server control.</para
           >
         </summary>
         <param name="owner">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -130,6 +142,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -138,6 +152,8 @@
           <para
             >Adds the specified <see
              cref="T:System.Web.UI.Control" />
+
+            
 
             
 
@@ -153,8 +169,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Control" />
+
+          
 
           
 
@@ -196,11 +216,15 @@
 
             
 
+            
+
              object to the collection at the specified index location.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -215,8 +239,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Control" />
+
+          
 
           
 
@@ -248,6 +276,8 @@
 
             
 
+            
+
              when you override the <see
              cref="M:System.Web.UI.Control.CreateChildControls" />
 
@@ -255,8 +285,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.UI.Control.DataBind" />
+
+            
 
             
 
@@ -270,6 +304,8 @@
           <para
             >Removes all controls from the current server control's <see
              cref="T:System.Web.UI.ControlCollection" />
+
+            
 
             
 
@@ -308,6 +344,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -317,6 +355,8 @@
         </returns>
         <param name="c">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -352,6 +392,8 @@
 
             
 
+            
+
              object to an <see
              cref="T:System.Array" />
 
@@ -359,8 +401,12 @@
 
             
 
+            
+
              object, beginning at the specified index location in the <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -376,8 +422,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -392,8 +442,12 @@
 
           
 
+          
+
           The zero-based relative index in <paramref
            name="array" />
+
+          
 
           
 
@@ -426,6 +480,8 @@
 
             
 
+            
+
              object for the specified ASP.NET server control.</para
           >
         </summary>
@@ -452,6 +508,8 @@
           <para
             >Retrieves an enumerator that can iterate through the <see
              cref="T:System.Web.UI.ControlCollection" />
+
+            
 
             
 
@@ -497,6 +555,8 @@
 
             
 
+            
+
              object.</para
           >
         </remarks>
@@ -505,6 +565,8 @@
           <para
             >Retrieves the index of a specified <see
              cref="T:System.Web.UI.Control" />
+
+            
 
             
 
@@ -542,6 +604,8 @@
 
             
 
+            
+
              object is read-only.</para
           >
         </summary>
@@ -565,6 +629,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Web.UI.ControlCollection" />
+
+            
 
             
 
@@ -621,6 +687,8 @@
 
             
 
+            
+
              object belongs.</para
           >
         </summary>
@@ -653,6 +721,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -666,11 +736,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -704,6 +778,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -717,11 +793,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

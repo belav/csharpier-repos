@@ -20,8 +20,12 @@
 
         
 
+        
+
          enumeration specifies how rows or columns of UI elements, typically controls, should be sized relative to the size of their container. This enumeration is used by the <see
          cref="T:System.Windows.Forms.RowStyle" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
          classes to indicate their preferred sizing attributes. The <see
          cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+        
 
         
 
@@ -51,6 +59,8 @@
 
         
 
+        
+
          property values of <see
          cref="F:System.Windows.Forms.SizeType.AutoSize" />
 
@@ -58,8 +68,12 @@
 
         
 
+        
+
          or <see
          cref="F:System.Windows.Forms.SizeType.Percent" />
+
+        
 
         
 

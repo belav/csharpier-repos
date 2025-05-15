@@ -24,8 +24,12 @@
 
         
 
+        
+
          class is a specialized type of the <see
          cref="T:System.Windows.Forms.DataGridViewColumn" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          has an associated <see
          cref="T:System.Windows.Forms.DataGridViewButtonCell" />
+
+        
 
         
 
@@ -52,8 +60,12 @@
 
         
 
+        
+
          that intersects it. Each cell supplies a user interface (UI) that is similar to a <see
          cref="T:System.Windows.Forms.Button" />
+
+        
 
         
 
@@ -69,8 +81,12 @@
 
         
 
+        
+
          property to true and set the <see
          cref="P:System.Windows.Forms.DataGridViewButtonColumn.Text" />
+
+        
 
         
 
@@ -86,11 +102,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >To respond to user button clicks, handle the <see
          cref="E:System.Windows.Forms.DataGridView.CellClick" />
+
+        
 
         
 
@@ -103,6 +123,8 @@
 
         
 
+        
+
          event. In the event handler, you can use the <see
          cref="P:System.Windows.Forms.DataGridViewCellEventArgs.ColumnIndex" />
 
@@ -110,8 +132,12 @@
 
         
 
+        
+
          property to determine whether the click occurred in the button column. You can use the <see
          cref="P:System.Windows.Forms.DataGridViewCellEventArgs.RowIndex" />
+
+        
 
         
 
@@ -128,8 +154,12 @@
 
           
 
+          
+
           , and cell styles specified through properties such as <see
            cref="P:System.Windows.Forms.DataGridViewButtonColumn.DefaultCellStyle" />
+
+          
 
           
 
@@ -144,6 +174,8 @@
       <para
         >Hosts a collection of <see
          cref="T:System.Windows.Forms.DataGridViewButtonCell" />
+
+        
 
         
 
@@ -189,6 +221,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -203,6 +237,8 @@
 
                   
 
+                  
+
                    property of the <see
                    cref="T:System.Windows.Forms.DataGridViewCellStyle" />
 
@@ -210,8 +246,12 @@
 
                   
 
+                  
+
                    object returned by the <see
                    cref="P:System.Windows.Forms.DataGridViewButtonColumn.DefaultCellStyle" />
+
+                  
 
                   
 
@@ -233,6 +273,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.DataGridViewButtonColumn" />
+
+            
 
             
 
@@ -268,8 +310,12 @@
 
             
 
+            
+
              class initializes this property to a newly created <see
              cref="T:System.Windows.Forms.DataGridViewButtonCell" />
+
+            
 
             
 
@@ -281,6 +327,8 @@
             <para
               >Changing the properties of the cell template will not immediately affect the user interface (UI) of the column's existing cells. These changes are only apparent after the column is regenerated (for example, by sorting the column or through a call to the <see
                cref="M:System.Windows.Forms.DataGridView.InvalidateColumn(System.Int32)" />
+
+              
 
               
 
@@ -334,8 +382,12 @@
 
             
 
+            
+
              that represents the cloned <see
              cref="T:System.Windows.Forms.DataGridViewButtonColumn" />
+
+            
 
             
 
@@ -371,8 +423,12 @@
 
             
 
+            
+
              returned by this property has an initial <see
              cref="P:System.Windows.Forms.DataGridViewCellStyle.Alignment" />
+
+            
 
             
 
@@ -385,6 +441,8 @@
 
             
 
+            
+
             . This value overrides the value specified in the <see
              cref="P:System.Windows.Forms.DataGridView.DefaultCellStyle" />
 
@@ -392,8 +450,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -410,6 +472,8 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -421,8 +485,12 @@
 
               
 
+              
+
                and cell styles specified through properties such as <see
                cref="P:System.Windows.Forms.DataGridViewButtonColumn.DefaultCellStyle" />
+
+              
 
               
 
@@ -468,8 +536,12 @@
 
             
 
+            
+
              property specifies the appearance of the cells in the column. For more information, see the <see
              cref="T:System.Windows.Forms.FlatStyle" />
+
+            
 
             
 
@@ -485,6 +557,8 @@
 
             
 
+            
+
              property of the object returned by the <see
              cref="P:System.Windows.Forms.DataGridViewButtonColumn.CellTemplate" />
 
@@ -492,8 +566,12 @@
 
             
 
+            
+
              property. Setting this property also sets the <see
              cref="P:System.Windows.Forms.DataGridViewButtonCell.FlatStyle" />
+
+            
 
             
 
@@ -535,8 +613,12 @@
 
             
 
+            
+
              contained in the column that has as a <see
              cref="P:System.Windows.Forms.DataGridViewButtonCell.UseColumnTextForButtonValue" />
+
+            
 
             
 
@@ -549,11 +631,15 @@
 
             
 
+            
+
              property value on the cell's button.</para
           >
           <para
             >If there is an associated <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -615,6 +701,8 @@
 
             
 
+            
+
              of a button cell is displayed as the text on the button. The <see
              cref="P:System.Windows.Forms.DataGridViewButtonColumn.UseColumnTextForButtonValue" />
 
@@ -622,8 +710,12 @@
 
             
 
+            
+
              property allows you to either set the button text for each cell, or to use the <see
              cref="P:System.Windows.Forms.DataGridViewButtonColumn.Text" />
+
+            
 
             
 
@@ -639,6 +731,8 @@
 
             
 
+            
+
              property of the object returned by the <see
              cref="P:System.Windows.Forms.DataGridViewButtonColumn.CellTemplate" />
 
@@ -646,8 +740,12 @@
 
             
 
+            
+
              property. Setting this property also sets the <see
              cref="P:System.Windows.Forms.DataGridViewButtonCell.UseColumnTextForButtonValue" />
+
+            
 
             
 
@@ -661,6 +759,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="P:System.Windows.Forms.DataGridViewButtonColumn.Text" />
+
+            
 
             
 

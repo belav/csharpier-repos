@@ -24,8 +24,12 @@
 
         
 
+        
+
          class is the abstract base class for button fields and contains the methods and properties that are common to all button fields. Because this class is abstract, you cannot create an instance of it directly. Instead, you must create an instance of a non-abstract class that inherits from the <see
          cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Web.UI.WebControls.CommandField" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          is used by data-bound controls (such as the <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 
@@ -69,6 +81,8 @@
 
         
 
+        
+
          controls) to display one or more buttons for each record that is displayed. A button field is displayed differently depending on the data-bound control in which it is used. For example, the <see
          cref="T:System.Web.UI.WebControls.GridView" />
 
@@ -76,8 +90,12 @@
 
         
 
+        
+
          control displays a button field as a column, whereas the <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -95,8 +113,12 @@
 
           
 
+          
+
            control raises the <see
            cref="E:System.Web.UI.WebControls.GridView.RowCommand" />
+
+          
 
           
 
@@ -109,8 +131,12 @@
 
           
 
+          
+
            control raises the <see
            cref="E:System.Web.UI.WebControls.DetailsView.ItemCommand" />
+
+          
 
           
 
@@ -127,6 +153,8 @@
 
         
 
+        
+
          property. To show or hide the header section of a <see
          cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
 
@@ -134,8 +162,12 @@
 
         
 
+        
+
          object, set the <see
          cref="P:System.Web.UI.WebControls.ButtonFieldBase.ShowHeader" />
+
+        
 
         
 
@@ -152,8 +184,12 @@
 
           
 
+          
+
            control) can show or hide only the entire header section of the control. These data-bound controls do not support the <see
            cref="P:System.Web.UI.WebControls.ButtonFieldBase.ShowHeader" />
+
+          
 
           
 
@@ -173,6 +209,8 @@
 
         
 
+        
+
          or <see
          cref="T:System.Web.UI.WebControls.CommandField" />
 
@@ -180,8 +218,12 @@
 
         
 
+        
+
          class. The <see
          cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
+
+        
 
         
 
@@ -208,8 +250,12 @@
 
             
 
+            
+
              class is an abstract class, you cannot create a <see
              cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
+
+            
 
             
 
@@ -223,6 +269,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
+
+            
 
             
 
@@ -258,6 +306,8 @@
           <para
             >Use the <see
              cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+
+            
 
             
 
@@ -342,8 +392,12 @@
 
             
 
+            
+
              property to specify the name of the validation group for which the <see
              cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
+
+            
 
             
 
@@ -359,8 +413,12 @@
 
             
 
+            
+
              property has an effect only when the value of the <see
              cref="P:System.Web.UI.WebControls.ButtonFieldBase.CausesValidation" />
+
+            
 
             
 
@@ -373,8 +431,12 @@
 
             
 
+            
+
              property, only the validation controls that are part of the specified group are validated when the <see
              cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
+
+            
 
             
 
@@ -387,6 +449,8 @@
 
             
 
+            
+
              property and the <see
              cref="P:System.Web.UI.WebControls.ButtonFieldBase.CausesValidation" />
 
@@ -394,8 +458,12 @@
 
             
 
+            
+
              property is set to true, all validation controls on the page that are not assigned to a validation group are validated when the <see
              cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
+
+            
 
             
 
@@ -410,6 +478,8 @@
           <para
             >Gets or sets a value indicating whether validation is performed when a button in a <see
              cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
+
+            
 
             
 
@@ -447,8 +517,12 @@
 
             
 
+            
+
              method is a helper method that is used by the <see
              cref="M:System.Web.UI.WebControls.DataControlField.CloneField" />
+
+            
 
             
 
@@ -461,6 +535,8 @@
 
             
 
+            
+
              class to the <see
              cref="T:System.Web.UI.WebControls.DataControlField" />
 
@@ -468,8 +544,12 @@
 
             
 
+            
+
              object that is passed in the <paramref
              name="newField" />
+
+            
 
             
 
@@ -488,8 +568,12 @@
 
             
 
+            
+
              class to the specified <see
              cref="T:System.Web.UI.WebControls.DataControlField" />
+
+            
 
             
 
@@ -505,6 +589,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.DataControlField" />
 
@@ -512,8 +598,12 @@
 
           
 
+          
+
            to which to copy the properties of the current <see
            cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
+
+          
 
           
 
@@ -550,6 +640,8 @@
 
             
 
+            
+
              property to show or hide the header section of a <see
              cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
 
@@ -557,8 +649,12 @@
 
             
 
+            
+
              object. To show the header section, set the <see
              cref="P:System.Web.UI.WebControls.ButtonFieldBase.ShowHeader" />
+
+            
 
             
 
@@ -575,8 +671,12 @@
 
               
 
+              
+
                control) can show or hide only the entire header section of the control. These data-bound controls do not support the <see
                cref="P:System.Web.UI.WebControls.ButtonFieldBase.ShowHeader" />
+
+              
 
               
 
@@ -592,6 +692,8 @@
           <para
             >Gets or sets a value indicating whether the header section is displayed in a <see
              cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
+
+            
 
             
 
@@ -629,8 +731,12 @@
 
             
 
+            
+
              property to specify the validation group to validate when a button in a <see
              cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
+
+            
 
             
 
@@ -647,8 +753,12 @@
 
               
 
+              
+
                property must be set to true for the <see
                cref="P:System.Web.UI.WebControls.ButtonFieldBase.ValidationGroup" />
+
+              
 
               
 
@@ -665,6 +775,8 @@
 
             
 
+            
+
             .</para
           >
           <para>The value of this property is stored in view state.</para>
@@ -674,6 +786,8 @@
           <para
             >Gets or sets the name of the group of validation controls to validate when a button in a <see
              cref="T:System.Web.UI.WebControls.ButtonFieldBase" />
+
+            
 
             
 

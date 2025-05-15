@@ -67,6 +67,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -100,8 +102,12 @@
 
             
 
+            
+
              class with a specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -117,8 +123,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -160,6 +170,8 @@
 
             
 
+            
+
              that indicates the XSD of the current SOAP type.</para
           >
         </returns>
@@ -192,6 +204,8 @@
           <para
             >The <see
              cref="M:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapTime.Parse(System.String)" />
+
+            
 
             
 
@@ -277,8 +291,12 @@
 
             
 
+            
+
              object, and the <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -297,8 +315,12 @@
 
             
 
+            
+
              into a <see
              cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapTime" />
+
+            
 
             
 
@@ -317,8 +339,12 @@
 
             
 
+            
+
              object that is obtained from <paramref
              name="value" />
+
+            
 
             
 
@@ -334,8 +360,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -373,8 +403,12 @@
 
             
 
+            
+
              as a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -393,8 +427,12 @@
 
             
 
+            
+
              that is obtained from <see
              cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapTime.Value" />
+
+            
 
             
 

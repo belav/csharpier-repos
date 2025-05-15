@@ -31,8 +31,12 @@
 
         
 
+        
+
         , defines one or more properties that belong to the same application settings property group. By default, the group is assigned the name of the settings class. However, <see
          cref="T:System.Configuration.SettingsGroupNameAttribute" />
+
+        
 
         
 
@@ -43,6 +47,8 @@
       <para
         >The <see
          cref="T:System.Configuration.SettingsGroupNameAttribute" />
+
+        
 
         
 
@@ -86,8 +92,12 @@
 
             
 
+            
+
              parameter is constrained by the upper bounds of an <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -109,6 +119,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -119,8 +131,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -154,8 +170,12 @@
 
             
 
+            
+
              property value is set by the <see
              cref="M:System.Configuration.SettingsGroupNameAttribute.#ctor(System.String)" />
+
+            
 
             
 

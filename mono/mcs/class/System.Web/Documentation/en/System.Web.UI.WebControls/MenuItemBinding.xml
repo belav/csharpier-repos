@@ -39,8 +39,12 @@
 
         
 
+        
+
          control is bound to a data source where each data item contains multiple fields (such as an XML element with several attributes), if no menu item bindings are defined, a menu item displays the value returned by the ToString() method of the data item by default. In the case of an XML element, the menu item displays the element name, which shows the underlying structure of the menu, but is not very useful otherwise. You can bind the properties of a menu item to a specific field by specifying menu item bindings. A <see
          cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+        
 
         
 
@@ -57,8 +61,12 @@
 
           
 
+          
+
            control is bound to a <see
            cref="T:System.Web.UI.WebControls.SiteMapDataSource" />
+
+          
 
           
 
@@ -75,8 +83,12 @@
 
         
 
+        
+
          control stores its <see
          cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+        
 
         
 
@@ -89,8 +101,12 @@
 
         
 
+        
+
          property and applies the bindings to the data source to create a one-to-one relationship between the menu hierarchy and the data source hierarchy. For each data item in the data source, the <see
          cref="T:System.Web.UI.WebControls.Menu" />
+
+        
 
         
 
@@ -103,8 +119,12 @@
 
         
 
+        
+
          object to create the corresponding <see
          cref="T:System.Web.UI.WebControls.MenuItem" />
+
+        
 
         
 
@@ -120,6 +140,8 @@
 
         
 
+        
+
          object, you must specify the criteria for binding. The criteria indicate when a data item should be bound to a menu item. You can specify the <see
          cref="P:System.Web.UI.WebControls.MenuItemBinding.Depth" />
 
@@ -127,8 +149,12 @@
 
         
 
+        
+
         , the <see
          cref="P:System.Web.UI.WebControls.MenuItemBinding.DataMember" />
+
+        
 
         
 
@@ -144,6 +170,8 @@
 
         
 
+        
+
          declaration binds the Name and ID fields of the data source to the <see
          cref="P:System.Web.UI.WebControls.MenuItem.Text" />
 
@@ -151,8 +179,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.WebControls.MenuItem.Value" />
+
+        
 
         
 
@@ -169,8 +201,12 @@
 
         
 
+        
+
          object) exposes a <see
          cref="P:System.Web.UI.IHierarchyData.Type" />
+
+        
 
         
 
@@ -183,8 +219,12 @@
 
         
 
+        
+
          declaration binds the &lt;Book&gt; elements of an <see
          cref="T:System.Web.UI.WebControls.XmlDataSource" />
+
+        
 
         
 
@@ -196,6 +236,8 @@
       <para
         >Sometimes you might need to create a menu item binding that specifies both a depth and a data member. This is often used when the data source contains items at different levels that have the same data member value. For example, you can have &lt;Item&gt; elements that appear at different levels within an XML file. The following <see
          cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+        
 
         
 
@@ -214,6 +256,8 @@
 
         
 
+        
+
          object that can be bound to a value. You can bind to a field of a data item or to a static value. When bound to a static value, all <see
          cref="T:System.Web.UI.WebControls.MenuItem" />
 
@@ -221,8 +265,12 @@
 
         
 
+        
+
          objects to which the <see
          cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+        
 
         
 
@@ -239,6 +287,8 @@
 
           
 
+          
+
            object by setting the corresponding property directly.</para
         >
       </block>
@@ -250,8 +300,12 @@
 
         
 
+        
+
          class that allow you to bind a property of the <see
          cref="T:System.Web.UI.WebControls.MenuItem" />
+
+        
 
         
 
@@ -285,8 +339,12 @@
 
               
 
+              
+
                property of a <see
                cref="T:System.Web.UI.WebControls.MenuItem" />
+
+              
 
               
 
@@ -311,8 +369,12 @@
 
               
 
+              
+
                property of a <see
                cref="T:System.Web.UI.WebControls.MenuItem" />
+
+              
 
               
 
@@ -337,8 +399,12 @@
 
               
 
+              
+
                property of a <see
                cref="T:System.Web.UI.WebControls.MenuItem" />
+
+              
 
               
 
@@ -363,8 +429,12 @@
 
               
 
+              
+
                property of a <see
                cref="T:System.Web.UI.WebControls.MenuItem" />
+
+              
 
               
 
@@ -389,8 +459,12 @@
 
               
 
+              
+
                property of a <see
                cref="T:System.Web.UI.WebControls.MenuItem" />
+
+              
 
               
 
@@ -409,8 +483,12 @@
 
         
 
+        
+
          class that allow you to bind a property of the <see
          cref="T:System.Web.UI.WebControls.MenuItem" />
+
+        
 
         
 
@@ -444,8 +522,12 @@
 
               
 
+              
+
                property of a <see
                cref="T:System.Web.UI.WebControls.MenuItem" />
+
+              
 
               
 
@@ -470,8 +552,12 @@
 
               
 
+              
+
                property of a <see
                cref="T:System.Web.UI.WebControls.MenuItem" />
+
+              
 
               
 
@@ -496,8 +582,12 @@
 
               
 
+              
+
                property of a <see
                cref="T:System.Web.UI.WebControls.MenuItem" />
+
+              
 
               
 
@@ -522,8 +612,12 @@
 
               
 
+              
+
                property of a <see
                cref="T:System.Web.UI.WebControls.MenuItem" />
+
+              
 
               
 
@@ -548,8 +642,12 @@
 
               
 
+              
+
                property of a <see
                cref="T:System.Web.UI.WebControls.MenuItem" />
+
+              
 
               
 
@@ -574,8 +672,12 @@
 
               
 
+              
+
                property of a <see
                cref="T:System.Web.UI.WebControls.MenuItem" />
+
+              
 
               
 
@@ -594,8 +696,12 @@
 
         
 
+        
+
          objects are defined, the <see
          cref="T:System.Web.UI.WebControls.Menu" />
+
+        
 
         
 
@@ -613,6 +719,8 @@
 
             
 
+            
+
              object that defines and matches both a depth and a data member.</para
           >
         </item>
@@ -620,6 +728,8 @@
           <para
             >The <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -637,6 +747,8 @@
 
             
 
+            
+
              object that defines and matches the depth only.</para
           >
         </item>
@@ -644,6 +756,8 @@
           <para
             >The <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -661,8 +775,12 @@
 
             
 
+            
+
              object that does not have a match in the data source. In this case, the value returned by the ToString() method of the data item is then bound to the <see
              cref="P:System.Web.UI.WebControls.MenuItem.Text" />
+
+            
 
             
 
@@ -675,8 +793,12 @@
 
             
 
+            
+
              properties of the menu items to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -694,8 +816,12 @@
 
         
 
+        
+
          class also allows you to format the text displayed in a menu item by setting the <see
          cref="P:System.Web.UI.WebControls.MenuItemBinding.FormatString" />
+
+        
 
         
 
@@ -709,6 +835,8 @@
       <para
         >Defines the relationship between a data item and the menu item it is binding to in a <see
          cref="T:System.Web.UI.WebControls.Menu" />
+
+        
 
         
 
@@ -735,6 +863,8 @@
 
             
 
+            
+
              class. It is often used when dynamically populating the <see
              cref="P:System.Web.UI.WebControls.Menu.DataBindings" />
 
@@ -742,8 +872,12 @@
 
             
 
+            
+
              collection of a <see
              cref="T:System.Web.UI.WebControls.Menu" />
+
+            
 
             
 
@@ -757,6 +891,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -794,6 +930,8 @@
 
             
 
+            
+
              object, you must specify the criteria for binding. The criteria indicate when a data item should be bound to a menu item. You can specify the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.Depth" />
 
@@ -801,8 +939,12 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.DataMember" />
+
+            
 
             
 
@@ -818,8 +960,12 @@
 
             
 
+            
+
              property to specify the element or table to bind to a menu item. A data member specifies the type of the data item in the underlying data source, but can represent different information depending on the data source. Each data item in a hierarchical data source (represented by a <see
              cref="T:System.Web.UI.IHierarchyData" />
+
+            
 
             
 
@@ -832,8 +978,12 @@
 
             
 
+            
+
              property, which specifies the type of the data item. For example, the data member for an XML element specifies the name of the element. The following <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -846,12 +996,16 @@
 
             
 
+            
+
              control to all the menu items in the menu, regardless of the location in the hierarchy: </para
           >
           <code>&lt;asp:MenuItemBinding DataMember="Book" TextField="Title" ValueField= "ISBN"&gt;</code>
           <para
             >Sometimes you might need to create a menu item binding that specifies both a depth and a data member. This is often used when the data source contains items at different levels that have the same data member value. For example, you can have &lt;Item&gt; elements that appear at different levels within an XML file. The following <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -870,6 +1024,8 @@
 
             
 
+            
+
              object that can be bound to a value. You can bind to a field of a data item or to a static value. When bound to a static value, all <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
 
@@ -877,8 +1033,12 @@
 
             
 
+            
+
              objects to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -894,8 +1054,12 @@
 
             
 
+            
+
              objects are defined, the <see
              cref="T:System.Web.UI.WebControls.Menu" />
+
+            
 
             
 
@@ -913,6 +1077,8 @@
 
                 
 
+                
+
                  object that defines and matches both a depth and a data member.</para
               >
             </item>
@@ -920,6 +1086,8 @@
               <para
                 >The <see
                  cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+                
 
                 
 
@@ -937,6 +1105,8 @@
 
                 
 
+                
+
                  object that defines and matches the depth only.</para
               >
             </item>
@@ -944,6 +1114,8 @@
               <para
                 >The <see
                  cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+                
 
                 
 
@@ -961,8 +1133,12 @@
 
                 
 
+                
+
                  object that does not have a match in the data source. In this case, the value returned by the ToString() method of the data item is then bound to the <see
                  cref="P:System.Web.UI.WebControls.MenuItem.Text" />
+
+                
 
                 
 
@@ -975,8 +1151,12 @@
 
                 
 
+                
+
                  properties of the menu items to which the <see
                  cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+                
 
                 
 
@@ -1020,6 +1200,8 @@
 
             
 
+            
+
              object, you must specify the criteria for binding. The criteria indicate when a data item should be bound to a menu item. You can specify the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.Depth" />
 
@@ -1027,8 +1209,12 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.DataMember" />
+
+            
 
             
 
@@ -1044,8 +1230,12 @@
 
             
 
+            
+
              property to specify the menu depth at which to apply the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -1058,8 +1248,12 @@
 
             
 
+            
+
              declaration binds the Name and ID fields of the data source to the <see
              cref="P:System.Web.UI.WebControls.MenuItem.Text" />
+
+            
 
             
 
@@ -1072,12 +1266,16 @@
 
             
 
+            
+
              properties, respectively, of all menu items with a depth of 0:</para
           >
           <code>&lt;asp:MenuItemBinding Depth="0" TextField="Name" ValueField="ID"&gt;</code>
           <para
             >Sometimes you might need to create a menu item binding that specifies both a depth and a data member. This is often used when the data source contains items at different levels that have the same data member value. For example, you can have &lt;Item&gt; elements that appear at different levels within an XML file. The following <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -1096,6 +1294,8 @@
 
             
 
+            
+
              object that can be bound to a value. You can bind to a field of a data item or to a static value. When bound to a static value, all <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
 
@@ -1103,8 +1303,12 @@
 
             
 
+            
+
              objects to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -1120,8 +1324,12 @@
 
             
 
+            
+
              objects are defined, the <see
              cref="T:System.Web.UI.WebControls.Menu" />
+
+            
 
             
 
@@ -1139,6 +1347,8 @@
 
                 
 
+                
+
                  object that defines and matches both a depth and a data member.</para
               >
             </item>
@@ -1146,6 +1356,8 @@
               <para
                 >The <see
                  cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+                
 
                 
 
@@ -1163,6 +1375,8 @@
 
                 
 
+                
+
                  object that defines and matches the depth only.</para
               >
             </item>
@@ -1170,6 +1384,8 @@
               <para
                 >The <see
                  cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+                
 
                 
 
@@ -1187,8 +1403,12 @@
 
                 
 
+                
+
                  object that does not have a match in the data source. In this case, the value returned by the ToString() method of the data item is then bound to the <see
                  cref="P:System.Web.UI.WebControls.MenuItem.Text" />
+
+                
 
                 
 
@@ -1201,8 +1421,12 @@
 
                 
 
+                
+
                  properties of the menu items to which the <see
                  cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+                
 
                 
 
@@ -1218,6 +1442,8 @@
           <para
             >Gets or sets the menu depth to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -1255,8 +1481,12 @@
 
             
 
+            
+
              property to set the <see
              cref="P:System.Web.UI.WebControls.MenuItem.Enabled" />
+
+            
 
             
 
@@ -1269,8 +1499,12 @@
 
             
 
+            
+
              object. This setting is shared with all menu items to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -1284,6 +1518,8 @@
           <para
             >Gets or sets a value that indicates whether the menu item to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -1324,8 +1560,12 @@
 
             
 
+            
+
              control is bound to a data source, use the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.EnabledField" />
+
+            
 
             
 
@@ -1338,8 +1578,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -1356,6 +1600,8 @@
 
               
 
+              
+
                property directly.</para
             >
           </block>
@@ -1367,8 +1613,12 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.DataMember" />
+
+            
 
             
 
@@ -1385,6 +1635,8 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.EnabledField" />
 
@@ -1392,8 +1644,12 @@
 
               
 
+              
+
                properties are both set, the <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.EnabledField" />
+
+              
 
               
 
@@ -1413,6 +1669,8 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
 
@@ -1420,8 +1678,12 @@
 
             
 
+            
+
              object to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -1462,6 +1724,8 @@
 
             
 
+            
+
              property is used to provide a custom format for a menu item's text. The format string can consist of a literal string, a placeholder, or both. The literal string is displayed verbatim, while the placeholder is replaced with the value that is bound to the menu item's text.</para
           >
           <para
@@ -1472,8 +1736,12 @@
 
             
 
+            
+
             :<paramref
              name="Bxx" />
+
+            
 
             
 
@@ -1492,11 +1760,15 @@
 
             
 
+            
+
              in the general example) specifies the parameter index in a zero-based list of parameters. Because only one value can be displayed in each menu item, the parameter index can be set only to 0.</para
           >
           <para
             >The character after the colon (<paramref
              name="B" />
+
+            
 
             
 
@@ -1583,6 +1855,8 @@
 
             
 
+            
+
              in the general example) specifies the number of significant digits or decimal places to display.</para
           >
           <para
@@ -1595,11 +1869,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
              cref="T:System.ComponentModel.LocalizableAttribute" />
+
+            
 
             
 
@@ -1616,6 +1894,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1624,6 +1904,8 @@
           <para
             >Gets or sets the string that specifies the display format for the text of a menu item to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -1667,8 +1949,12 @@
 
             
 
+            
+
              control is bound to a data source, use the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.ImageUrl" />
+
+            
 
             
 
@@ -1681,8 +1967,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -1695,8 +1985,12 @@
 
             
 
+            
+
              objects to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -1713,12 +2007,16 @@
 
               
 
+              
+
                property directly.</para
             >
           </block>
           <para
             >Instead of using this property to display the same image in each menu item, you can also use the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.ImageUrlField" />
+
+            
 
             
 
@@ -1731,8 +2029,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -1745,8 +2047,12 @@
 
             
 
+            
+
              property of each menu item to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -1763,6 +2069,8 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.ImageUrlField" />
 
@@ -1770,8 +2078,12 @@
 
               
 
+              
+
                properties are both set, the <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.ImageUrlField" />
+
+              
 
               
 
@@ -1786,6 +2098,8 @@
           <para
             >Gets or sets the URL to an image that is displayed next to the text of a menu item to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -1826,8 +2140,12 @@
 
             
 
+            
+
              control is bound to a data source, use the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.ImageUrlField" />
+
+            
 
             
 
@@ -1840,8 +2158,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -1854,8 +2176,12 @@
 
             
 
+            
+
              property of each menu item to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -1872,6 +2198,8 @@
 
               
 
+              
+
                property directly.</para
             >
           </block>
@@ -1883,8 +2211,12 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.DataMember" />
+
+            
 
             
 
@@ -1900,8 +2232,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -1914,8 +2250,12 @@
 
             
 
+            
+
              property. This allows you to display the same image in each menu item to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -1932,6 +2272,8 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.ImageUrlField" />
 
@@ -1939,8 +2281,12 @@
 
               
 
+              
+
                properties are both set, the <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.ImageUrlField" />
+
+              
 
               
 
@@ -1960,6 +2306,8 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
 
@@ -1967,8 +2315,12 @@
 
             
 
+            
+
              object to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -2012,8 +2364,12 @@
 
             
 
+            
+
              control is bound to a data source, use the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.NavigateUrl" />
+
+            
 
             
 
@@ -2026,6 +2382,8 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
 
@@ -2033,8 +2391,12 @@
 
             
 
+            
+
              object. This URL is shared with all menu items to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -2051,12 +2413,16 @@
 
               
 
+              
+
                property directly.</para
             >
           </block>
           <para
             >Instead of using this property to navigate to the same URL in each menu item, you can also bind the <see
              cref="P:System.Web.UI.WebControls.MenuItem.NavigateUrl" />
+
+            
 
             
 
@@ -2069,8 +2435,12 @@
 
             
 
+            
+
              object to a field of a data source by setting the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.NavigateUrlField" />
+
+            
 
             
 
@@ -2083,8 +2453,12 @@
 
             
 
+            
+
              property of each menu item to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -2101,6 +2475,8 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.NavigateUrlField" />
 
@@ -2108,8 +2484,12 @@
 
               
 
+              
+
                properties are both set, the <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.NavigateUrlField" />
+
+              
 
               
 
@@ -2124,6 +2504,8 @@
           <para
             >Gets or sets the URL to link to when a menu item to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -2164,8 +2546,12 @@
 
             
 
+            
+
              control is bound to a data source, use the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.NavigateUrlField" />
+
+            
 
             
 
@@ -2178,8 +2564,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -2192,8 +2582,12 @@
 
             
 
+            
+
              property of each menu item to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -2210,6 +2604,8 @@
 
               
 
+              
+
                property directly.</para
             >
           </block>
@@ -2221,8 +2617,12 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.DataMember" />
+
+            
 
             
 
@@ -2238,8 +2638,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -2252,8 +2656,12 @@
 
             
 
+            
+
              property. This allows you to navigate to the same URL from each menu item to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -2270,6 +2678,8 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.NavigateUrlField" />
 
@@ -2277,8 +2687,12 @@
 
               
 
+              
+
                properties are both set, the <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.NavigateUrlField" />
+
+              
 
               
 
@@ -2298,6 +2712,8 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
 
@@ -2305,8 +2721,12 @@
 
             
 
+            
+
              object to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -2350,8 +2770,12 @@
 
             
 
+            
+
              control is bound to a data source, use the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.PopOutImageUrl" />
+
+            
 
             
 
@@ -2364,6 +2788,8 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
 
@@ -2371,8 +2797,12 @@
 
             
 
+            
+
              object. This URL is shared with all menu items to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -2389,12 +2819,16 @@
 
               
 
+              
+
                property directly.</para
             >
           </block>
           <para
             >You can bind the <see
              cref="P:System.Web.UI.WebControls.MenuItem.PopOutImageUrl" />
+
+            
 
             
 
@@ -2407,8 +2841,12 @@
 
             
 
+            
+
              object to a field of a data source by setting the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.PopOutImageUrlField" />
+
+            
 
             
 
@@ -2421,8 +2859,12 @@
 
             
 
+            
+
              property of each menu item to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -2439,6 +2881,8 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.PopOutImageUrlField" />
 
@@ -2446,8 +2890,12 @@
 
               
 
+              
+
                properties are both set, the <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.PopOutImageUrlField" />
+
+              
 
               
 
@@ -2462,6 +2910,8 @@
           <para
             >Gets or sets the URL to an image that indicates the presence of a dynamic submenu for a menu item to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -2502,8 +2952,12 @@
 
             
 
+            
+
              control is bound to a data source, use the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.PopOutImageUrlField" />
+
+            
 
             
 
@@ -2516,8 +2970,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -2530,8 +2988,12 @@
 
             
 
+            
+
              property of each menu item to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -2548,6 +3010,8 @@
 
               
 
+              
+
                property directly.</para
             >
           </block>
@@ -2559,8 +3023,12 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.DataMember" />
+
+            
 
             
 
@@ -2576,8 +3044,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -2590,8 +3062,12 @@
 
             
 
+            
+
              property. This allows you to navigate to the same URL from each menu item to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -2608,6 +3084,8 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.PopOutImageUrlField" />
 
@@ -2615,8 +3093,12 @@
 
               
 
+              
+
                properties are both set, the <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.PopOutImageUrlField" />
+
+              
 
               
 
@@ -2636,6 +3118,8 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
 
@@ -2643,8 +3127,12 @@
 
             
 
+            
+
              object to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -2682,8 +3170,12 @@
 
             
 
+            
+
              control is bound to a data source, use the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.Selectable" />
+
+            
 
             
 
@@ -2696,6 +3188,8 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
 
@@ -2703,8 +3197,12 @@
 
             
 
+            
+
              object. This setting is shared with all menu items to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -2718,6 +3216,8 @@
           <para
             >Gets or sets a value that indicates whether the menu item to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -2758,8 +3258,12 @@
 
             
 
+            
+
              control is bound to a data source, use the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.SelectableField" />
+
+            
 
             
 
@@ -2772,8 +3276,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -2790,6 +3298,8 @@
 
               
 
+              
+
                property directly.</para
             >
           </block>
@@ -2801,8 +3311,12 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.DataMember" />
+
+            
 
             
 
@@ -2819,6 +3333,8 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.SelectableField" />
 
@@ -2826,8 +3342,12 @@
 
               
 
+              
+
                properties are both set, the <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.SelectableField" />
+
+              
 
               
 
@@ -2847,6 +3367,8 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
 
@@ -2854,8 +3376,12 @@
 
             
 
+            
+
              object to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -2899,8 +3425,12 @@
 
             
 
+            
+
              control is bound to a data source, use the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.SeparatorImageUrl" />
+
+            
 
             
 
@@ -2913,6 +3443,8 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
 
@@ -2920,8 +3452,12 @@
 
             
 
+            
+
              object. This URL is shared with all menu items to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -2938,12 +3474,16 @@
 
               
 
+              
+
                property directly.</para
             >
           </block>
           <para
             >Instead of using this property to indicate the same URL in each menu item, you can also bind the <see
              cref="P:System.Web.UI.WebControls.MenuItem.SeparatorImageUrl" />
+
+            
 
             
 
@@ -2956,8 +3496,12 @@
 
             
 
+            
+
              object to a field of a data source by setting the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.SeparatorImageUrlField" />
+
+            
 
             
 
@@ -2970,8 +3514,12 @@
 
             
 
+            
+
              property of each menu item to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -2988,6 +3536,8 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.SeparatorImageUrlField" />
 
@@ -2995,8 +3545,12 @@
 
               
 
+              
+
                properties are both set, the <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.SeparatorImageUrlField" />
+
+              
 
               
 
@@ -3011,6 +3565,8 @@
           <para
             >Gets or sets the URL to an image displayed below the text of a menu item (to separate it from other menu items) for a menu item to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -3051,8 +3607,12 @@
 
             
 
+            
+
              control is bound to a data source, use the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.SeparatorImageUrlField" />
+
+            
 
             
 
@@ -3065,8 +3625,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -3079,8 +3643,12 @@
 
             
 
+            
+
              property of each menu item to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -3097,6 +3665,8 @@
 
               
 
+              
+
                property directly.</para
             >
           </block>
@@ -3108,8 +3678,12 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.DataMember" />
+
+            
 
             
 
@@ -3125,8 +3699,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -3139,8 +3717,12 @@
 
             
 
+            
+
              property. This allows you to navigate to the same URL from each menu item to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -3157,6 +3739,8 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.SeparatorImageUrlField" />
 
@@ -3164,8 +3748,12 @@
 
               
 
+              
+
                properties are both set, the <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.SeparatorImageUrlField" />
+
+              
 
               
 
@@ -3185,6 +3773,8 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
 
@@ -3192,8 +3782,12 @@
 
             
 
+            
+
              object to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -3228,8 +3822,12 @@
 
             
 
+            
+
              method is a helper function that creates a copy of the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -3251,6 +3849,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -3264,8 +3864,12 @@
 
             
 
+            
+
              that represents a copy of the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -3300,8 +3904,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IDataSourceViewSchemaAccessor" />
+
+            
 
             
 
@@ -3315,6 +3923,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Web.UI.IDataSourceViewSchemaAccessor.DataSourceViewSchema" />
+
+            
 
             
 
@@ -3345,6 +3955,8 @@
           <para
             >Gets a value that indicates whether the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -3401,6 +4013,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3409,6 +4023,8 @@
           <para
             >An <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -3440,6 +4056,8 @@
 
             
 
+            
+
              property returns true.</para
           >
         </remarks>
@@ -3448,6 +4066,8 @@
           <para
             >Instructs the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -3482,8 +4102,12 @@
 
             
 
+            
+
              control is bound to a data source, use the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.Target" />
+
+            
 
             
 
@@ -3500,8 +4124,12 @@
 
               
 
+              
+
                property of the <see
                cref="T:System.Web.UI.WebControls.Menu" />
+
+              
 
               
 
@@ -3514,8 +4142,12 @@
 
               
 
+              
+
                object is applied. You can selectively override this property by setting the <see
                cref="P:System.Web.UI.WebControls.MenuItem.Target" />
+
+              
 
               
 
@@ -3589,8 +4221,12 @@
 
               
 
+              
+
                property renders as a target attribute. The target attribute on anchor elements is not allowed in the XHTML 1.1 document type definition. Do not set the <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.Target" />
+
+              
 
               
 
@@ -3603,10 +4239,14 @@
 
               
 
+              
+
                object must be XHTML 1.1 compliant. For more information, refer to the topic <format
                type="text/html">
                 <a href="1b78d416-66bb-43a5-ac77-c703aab55b97">ASP.NET and XHTML Compliance</a>
               </format>
+
+              
 
               
 
@@ -3622,10 +4262,14 @@
 
               
 
+              
+
                property to target another window. For more information, see <format
                type="text/html">
                 <a href="9b5f3e05-e88d-4248-a5f4-9e64850fa0ae">ASP.NET Accessibility</a>
               </format>
+
+              
 
               
 
@@ -3640,6 +4284,8 @@
           <para
             >Gets or sets the target window or frame in which to display the Web page content associated with a menu item to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -3680,8 +4326,12 @@
 
             
 
+            
+
              control is bound to a data source, use the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.TargetField" />
+
+            
 
             
 
@@ -3694,8 +4344,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -3706,6 +4360,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.WebControls.MenuItem.Target" />
+
+            
 
             
 
@@ -3766,8 +4422,12 @@
 
               
 
+              
+
                property renders as a target attribute. The target attribute on anchor elements is not allowed in the XHTML 1.1 document type definition. Do not set the <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.Target" />
+
+              
 
               
 
@@ -3780,10 +4440,14 @@
 
               
 
+              
+
                must be XHTML 1.1 compliant. For more information, refer to the topic <format
                type="text/html">
                 <a href="1b78d416-66bb-43a5-ac77-c703aab55b97">ASP.NET and XHTML Compliance</a>
               </format>
+
+              
 
               
 
@@ -3799,10 +4463,14 @@
 
               
 
+              
+
                property to target another window. For more information, see <format
                type="text/html">
                 <a href="9b5f3e05-e88d-4248-a5f4-9e64850fa0ae">ASP.NET Accessibility</a>
               </format>
+
+              
 
               
 
@@ -3819,6 +4487,8 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.Menu" />
 
@@ -3826,8 +4496,12 @@
 
             
 
+            
+
              control for this menu item. Setting the <see
              cref="P:System.Web.UI.WebControls.Menu.Target" />
+
+            
 
             
 
@@ -3844,6 +4518,8 @@
 
               
 
+              
+
                property directly.</para
             >
           </block>
@@ -3855,8 +4531,12 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.DataMember" />
+
+            
 
             
 
@@ -3873,6 +4553,8 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.TargetField" />
 
@@ -3880,8 +4562,12 @@
 
               
 
+              
+
                properties are both set, the <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.TargetField" />
+
+              
 
               
 
@@ -3901,6 +4587,8 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
 
@@ -3908,8 +4596,12 @@
 
             
 
+            
+
              object to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -3950,8 +4642,12 @@
 
             
 
+            
+
              control is bound to a data source, use the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.Text" />
+
+            
 
             
 
@@ -3964,6 +4660,8 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
 
@@ -3971,8 +4669,12 @@
 
             
 
+            
+
              object. This text is displayed in a menu item and is shared with all menu items to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -3989,12 +4691,16 @@
 
               
 
+              
+
                property directly.</para
             >
           </block>
           <para
             >Instead of using this property to display the same text in each menu item, you can also bind the <see
              cref="P:System.Web.UI.WebControls.MenuItem.Text" />
+
+            
 
             
 
@@ -4007,8 +4713,12 @@
 
             
 
+            
+
              object to a field of a data source by setting the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.TextField" />
+
+            
 
             
 
@@ -4021,8 +4731,12 @@
 
             
 
+            
+
              property of each menu item to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -4039,6 +4753,8 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.TextField" />
 
@@ -4046,8 +4762,12 @@
 
               
 
+              
+
                properties are both set, the <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.TextField" />
+
+              
 
               
 
@@ -4064,8 +4784,12 @@
 
             
 
+            
+
              control by setting the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.Text" />
+
+            
 
             
 
@@ -4078,6 +4802,8 @@
 
             
 
+            
+
              properties to the empty string (""). Setting these properties to the empty string has the same effect as not setting the properties. In that case, the <see
              cref="T:System.Web.UI.WebControls.Menu" />
 
@@ -4085,8 +4811,12 @@
 
             
 
+            
+
              control creates a default binding using the <see
              cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" />
+
+            
 
             
 
@@ -4101,11 +4831,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
              cref="T:System.ComponentModel.LocalizableAttribute" />
+
+            
 
             
 
@@ -4122,6 +4856,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4130,6 +4866,8 @@
           <para
             >Gets or sets the text displayed for the menu item to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -4170,8 +4908,12 @@
 
             
 
+            
+
              control is bound to a data source, use the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.TextField" />
+
+            
 
             
 
@@ -4184,8 +4926,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -4198,8 +4944,12 @@
 
             
 
+            
+
              property of each menu item to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -4216,6 +4966,8 @@
 
               
 
+              
+
                property directly.</para
             >
           </block>
@@ -4227,8 +4979,12 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.DataMember" />
+
+            
 
             
 
@@ -4244,8 +5000,12 @@
 
             
 
+            
+
              control by setting the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.Text" />
+
+            
 
             
 
@@ -4258,8 +5018,12 @@
 
             
 
+            
+
              properties to the empty string (""). Setting these properties to the empty string has the same effect as not setting the properties. In that case, the <see
              cref="T:System.Web.UI.WebControls.Menu" />
+
+            
 
             
 
@@ -4272,10 +5036,14 @@
 
             
 
+            
+
              property. For more information, see <format
              type="text/html">
               <a href="f9219396-a0fa-481f-894d-e3d9c67d64f2">Accessing Data with ASP.NET</a>
             </format>
+
+            
 
             
 
@@ -4291,8 +5059,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -4305,8 +5077,12 @@
 
             
 
+            
+
              property. This allows you to display the same text in each menu item to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -4323,6 +5099,8 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.TextField" />
 
@@ -4330,8 +5108,12 @@
 
               
 
+              
+
                properties are both set, the <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.TextField" />
+
+              
 
               
 
@@ -4351,6 +5133,8 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
 
@@ -4358,8 +5142,12 @@
 
             
 
+            
+
              object to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -4400,8 +5188,12 @@
 
             
 
+            
+
              control is bound to a data source, use the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.ToolTip" />
+
+            
 
             
 
@@ -4414,6 +5206,8 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
 
@@ -4421,8 +5215,12 @@
 
             
 
+            
+
              object. This ToolTip is shared with all menu items to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -4439,12 +5237,16 @@
 
               
 
+              
+
                property directly.</para
             >
           </block>
           <para
             >Instead of using this property to specify the same ToolTip for each menu item, you can also bind the <see
              cref="P:System.Web.UI.WebControls.MenuItem.ToolTip" />
+
+            
 
             
 
@@ -4457,8 +5259,12 @@
 
             
 
+            
+
              object to a field of a data source by setting the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.ToolTipField" />
+
+            
 
             
 
@@ -4471,8 +5277,12 @@
 
             
 
+            
+
              property of each menu item to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -4489,6 +5299,8 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.ToolTipField" />
 
@@ -4496,8 +5308,12 @@
 
               
 
+              
+
                properties are both set, the <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.ToolTipField" />
+
+              
 
               
 
@@ -4514,12 +5330,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -4533,6 +5353,8 @@
           <para
             >Gets or sets the ToolTip text for a menu item to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -4573,8 +5395,12 @@
 
             
 
+            
+
              control is bound to a data source, use the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.ToolTipField" />
+
+            
 
             
 
@@ -4587,8 +5413,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -4601,8 +5431,12 @@
 
             
 
+            
+
              property of each menu item to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -4619,6 +5453,8 @@
 
               
 
+              
+
                property directly.</para
             >
           </block>
@@ -4630,8 +5466,12 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.DataMember" />
+
+            
 
             
 
@@ -4647,8 +5487,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -4661,8 +5505,12 @@
 
             
 
+            
+
              property. This allows you to display the same ToolTip for each menu item to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -4679,6 +5527,8 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.ToolTipField" />
 
@@ -4686,8 +5536,12 @@
 
               
 
+              
+
                properties are both set, the <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.ToolTipField" />
+
+              
 
               
 
@@ -4707,6 +5561,8 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
 
@@ -4714,8 +5570,12 @@
 
             
 
+            
+
              object to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -4756,8 +5616,12 @@
 
             
 
+            
+
              control is bound to a data source, use the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.Value" />
+
+            
 
             
 
@@ -4770,8 +5634,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -4784,8 +5652,12 @@
 
             
 
+            
+
              object is applied. The specified value is not displayed in a menu item and is used to store any additional data about a menu item to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -4802,12 +5674,16 @@
 
               
 
+              
+
                property directly.</para
             >
           </block>
           <para
             >Instead of using this property to specify the same value for each menu item, you can also bind the <see
              cref="P:System.Web.UI.WebControls.MenuItem.Value" />
+
+            
 
             
 
@@ -4820,8 +5696,12 @@
 
             
 
+            
+
              object to a field of a data source by setting the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.ValueField" />
+
+            
 
             
 
@@ -4834,8 +5714,12 @@
 
             
 
+            
+
              property of each menu item to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -4852,6 +5736,8 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.ValueField" />
 
@@ -4859,8 +5745,12 @@
 
               
 
+              
+
                properties are both set, the <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.ValueField" />
+
+              
 
               
 
@@ -4877,12 +5767,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -4896,6 +5790,8 @@
           <para
             >Gets or sets a nondisplayed value used to store any additional data about a menu item to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -4936,8 +5832,12 @@
 
             
 
+            
+
              control is bound to a data source, use the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.ValueField" />
+
+            
 
             
 
@@ -4950,8 +5850,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -4964,6 +5868,8 @@
 
             
 
+            
+
              property of each menu item to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
 
@@ -4971,8 +5877,12 @@
 
             
 
+            
+
              object is applied contains the corresponding value from the field. The specified value is not displayed in a menu item and is used to store any additional data about a menu item to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -4989,6 +5899,8 @@
 
               
 
+              
+
                property directly.</para
             >
           </block>
@@ -5000,8 +5912,12 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Web.UI.WebControls.MenuItemBinding.DataMember" />
+
+            
 
             
 
@@ -5017,8 +5933,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -5031,8 +5951,12 @@
 
             
 
+            
+
              property. This allows you to specify the same value for each menu item to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 
@@ -5049,6 +5973,8 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.ValueField" />
 
@@ -5056,8 +5982,12 @@
 
               
 
+              
+
                properties are both set, the <see
                cref="P:System.Web.UI.WebControls.MenuItemBinding.ValueField" />
+
+              
 
               
 
@@ -5077,6 +6007,8 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
 
@@ -5084,8 +6016,12 @@
 
             
 
+            
+
              object to which the <see
              cref="T:System.Web.UI.WebControls.MenuItemBinding" />
+
+            
 
             
 

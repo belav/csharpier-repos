@@ -24,8 +24,12 @@
 
         
 
+        
+
          event occurs just before a form is closed, either by the user, through the user interface (UI), or programmatically, through calls to methods such as <see
          cref="M:System.Windows.Forms.Form.Close" />
+
+        
 
         
 
@@ -38,6 +42,8 @@
 
         
 
+        
+
          class, or <see
          cref="M:System.Windows.Forms.Application.Exit" />
 
@@ -45,8 +51,12 @@
 
         
 
+        
+
          in the <see
          cref="T:System.Windows.Forms.Application" />
+
+        
 
         
 
@@ -62,8 +72,12 @@
 
         
 
+        
+
          event is also raised for each one. If any one of the forms cancels the event, none of the forms are closed. Therefore the corresponding <see
          cref="E:System.Windows.Forms.Form.FormClosed" />
+
+        
 
         
 
@@ -79,8 +93,12 @@
 
         
 
+        
+
          class provides data for this event. Two important members are the <see
          cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+
+        
 
         
 
@@ -93,6 +111,8 @@
 
         
 
+        
+
          properties. The event can be canceled by setting the <see
          cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
 
@@ -100,8 +120,12 @@
 
         
 
+        
+
          property to true. The <see
          cref="P:System.Windows.Forms.FormClosingEventArgs.CloseReason" />
+
+        
 
         
 
@@ -115,6 +139,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.Form.FormClosing" />
+
+        
 
         
 
@@ -147,8 +173,12 @@
 
             
 
+            
+
              and <paramref
              name="cancel" />
+
+            
 
             
 
@@ -161,8 +191,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+
+            
 
             
 
@@ -181,11 +215,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="closeReason">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -198,10 +236,14 @@
 
           
 
+          
+
            value that represents the reason why the form is being closed.</param
         >
         <param name="cancel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -236,8 +278,12 @@
 
             
 
+            
+
              can be closed because of a variety of reasons, both user-initiated and programmatic. The <see
              cref="P:System.Windows.Forms.FormClosingEventArgs.CloseReason" />
+
+            
 
             
 

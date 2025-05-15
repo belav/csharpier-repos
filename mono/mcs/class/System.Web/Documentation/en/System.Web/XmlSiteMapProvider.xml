@@ -28,6 +28,8 @@
 
         
 
+        
+
          class loads site map data from an XML file that follows a known schema. The site map data is bounded by &lt;siteMap&gt; tags and consists of nested &lt;siteMapNode&gt; tags. Two constraints are imposed by the <see
          cref="T:System.Web.SiteMapProvider" />
 
@@ -35,8 +37,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.XmlSiteMapProvider" />
+
+        
 
         
 
@@ -57,6 +63,8 @@
 
             
 
+            
+
              objects that specify URLs, the URLs must be unique within the scope of the provider. (For nodes that do not specify URLs, all keys must be unique.)</para
           >
         </item>
@@ -64,6 +72,8 @@
       <para
         >The following code example shows an example of an XML file that can be used with the <see
          cref="T:System.Web.XmlSiteMapProvider" />
+
+        
 
         
 
@@ -87,6 +97,8 @@
 
         
 
+        
+
          is the default provider for ASP.NET and it reads XML data from a file named Web.sitemap that is located within the directory structure of the ASP.NET application. By default, the Web.sitemap file is located at the application root; however, if you want to change the name or location of the file from which the <see
          cref="T:System.Web.XmlSiteMapProvider" />
 
@@ -94,8 +106,12 @@
 
         
 
+        
+
          loads data, you can override the default configuration in your Web.config file. By overriding the default configuration settings in your Web.config file, you can tailor the behavior of the <see
          cref="T:System.Web.XmlSiteMapProvider" />
+
+        
 
         
 
@@ -111,8 +127,12 @@
 
         
 
+        
+
          is still used, but a different site map file is used. Because all providers in a <see
          cref="T:System.Web.SiteMapProviderCollection" />
+
+        
 
         
 
@@ -125,12 +145,16 @@
 
         
 
+        
+
          that is specified in the default ASP.NET configuration.</para
       >
       <block subset="none" type="note">
         <para
           >  You can change the name of the site navigation data file, but you cannot change its extension. The <see
            cref="T:System.Web.XmlSiteMapProvider" />
+
+          
 
           
 
@@ -158,6 +182,8 @@
 
         
 
+        
+
          class is derived from the <see
          cref="T:System.Web.SiteMapProvider" />
 
@@ -165,8 +191,12 @@
 
         
 
+        
+
          class and is the default site map provider for ASP.NET. The <see
          cref="T:System.Web.XmlSiteMapProvider" />
+
+        
 
         
 
@@ -189,6 +219,8 @@
           <para
             >Creates a new, unnamed, instance of the <see
              cref="T:System.Web.XmlSiteMapProvider" />
+
+            
 
             
 
@@ -229,8 +261,12 @@
 
             
 
+            
+
              parameter is added to an internal collection, and a parent/child relationship is created between it and <paramref
              name="parentNode" />
+
+            
 
             
 
@@ -246,8 +282,12 @@
 
             
 
+            
+
              class, derived from the <see
              cref="T:System.Web.StaticSiteMapProvider" />
+
+            
 
             
 
@@ -260,8 +300,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -274,8 +318,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -288,8 +336,12 @@
 
             
 
+            
+
              method attempts to retrieve nodes based on their <see
              cref="P:System.Web.SiteMapNode.Url" />
+
+            
 
             
 
@@ -302,8 +354,12 @@
 
             
 
+            
+
              property, and the corresponding <see
              cref="M:System.Web.XmlSiteMapProvider.FindSiteMapNodeFromKey(System.String)" />
+
+            
 
             
 
@@ -322,6 +378,8 @@
 
             
 
+            
+
              object to the collections that are maintained by the current provider.</para
           >
         </summary>
@@ -332,8 +390,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SiteMapNode" />
+
+          
 
           
 
@@ -348,6 +410,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SiteMapNode" />
 
@@ -355,8 +419,12 @@
 
           
 
+          
+
            under which to add <paramref
            name="node" />
+
+          
 
           
 
@@ -391,8 +459,12 @@
 
             
 
+            
+
              method links <paramref
              name="providerName" />
+
+            
 
             
 
@@ -405,8 +477,12 @@
 
             
 
+            
+
              is added to the hierarchy for the current provider as a child node of <paramref
              name="parentNode" />
+
+            
 
             
 
@@ -419,6 +495,8 @@
 
             
 
+            
+
              method on <paramref
              name="providerName" />
 
@@ -426,8 +504,12 @@
 
             
 
+            
+
             , the exceptions that are described in the <see
              cref="M:System.Web.XmlSiteMapProvider.BuildSiteMap" />
+
+            
 
             
 
@@ -447,8 +529,12 @@
 
           
 
+          
+
           The name of one of the <see
            cref="T:System.Web.SiteMapProvider" />
+
+          
 
           
 
@@ -461,10 +547,14 @@
 
           
 
+          
+
           .</param
         >
         <param name="parentNode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -499,11 +589,15 @@
 
             
 
+            
+
              method is called to load and build the site map from persistent storage.</para
           >
           <para
             >For the default behavior when security trimming is enabled, see "Remarks" in <see
              cref="M:System.Web.SiteMapProvider.IsAccessibleToUser(System.Web.HttpContext,System.Web.SiteMapNode)" />
+
+            
 
             
 
@@ -519,8 +613,12 @@
 
             
 
+            
+
              object parses and loads site map data, all loaded <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -533,6 +631,8 @@
 
             
 
+            
+
              collections are made read-only. When the <see
              cref="T:System.Web.XmlSiteMapProvider" />
 
@@ -540,8 +640,12 @@
 
             
 
+            
+
              parses the <see
              cref="P:System.Web.SiteMapNode.Url" />
+
+            
 
             
 
@@ -557,8 +661,12 @@
 
             
 
+            
+
              subscribes to file change notifications for the .sitemap file. If any change is made to the .sitemap file, the <see
              cref="T:System.Web.XmlSiteMapProvider" />
+
+            
 
             
 
@@ -576,6 +684,8 @@
           <para
             >Returns the root <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -608,8 +718,12 @@
 
             
 
+            
+
              class overrides the inherited <see
              cref="M:System.Web.XmlSiteMapProvider.Clear" />
+
+            
 
             
 
@@ -622,8 +736,12 @@
 
             
 
+            
+
              implementation, including clearing its child provider tracking and the <see
              cref="P:System.Web.XmlSiteMapProvider.RootNode" />
+
+            
 
             
 
@@ -637,6 +755,8 @@
           <para
             >Removes all elements in the collections of child and parent site map nodes and site map providers that the <see
              cref="T:System.Web.XmlSiteMapProvider" />
+
+            
 
             
 
@@ -669,8 +789,12 @@
 
             
 
+            
+
              class implements the <see
              cref="M:System.IDisposable.Dispose" />
+
+            
 
             
 
@@ -683,6 +807,8 @@
 
             
 
+            
+
              interface to release its associated file monitor when the site map file is unloaded from memory. This overload of the <see
              cref="Overload:System.Web.XmlSiteMapProvider.Dispose" />
 
@@ -690,8 +816,12 @@
 
             
 
+            
+
              method calls the overload that takes a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -705,6 +835,8 @@
           <para
             >Notifies the file monitor of the Web.sitemap file that the <see
              cref="T:System.Web.XmlSiteMapProvider" />
+
+            
 
             
 
@@ -739,6 +871,8 @@
 
             
 
+            
+
              method returns true if the <see
              cref="M:System.Web.XmlSiteMapProvider.Dispose(System.Boolean)" />
 
@@ -746,8 +880,12 @@
 
             
 
+            
+
              method is called by user code. Otherwise it returns false, if the <see
              cref="M:System.Web.XmlSiteMapProvider.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -766,8 +904,12 @@
 
             
 
+            
+
              object no longer requires the file to be monitored. The <see
              cref="M:System.Web.XmlSiteMapProvider.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -778,6 +920,8 @@
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -814,8 +958,12 @@
 
             
 
+            
+
              object overrides the <see
              cref="M:System.Web.StaticSiteMapProvider.FindSiteMapNode(System.String)" />
+
+            
 
             
 
@@ -831,11 +979,15 @@
 
             
 
+            
+
              parameter should be either an absolute virtual path or an application-relative path, depending on how it is specified in the XML site map data file. </para
           >
           <para
             >The <see
              cref="T:System.Web.XmlSiteMapProvider" />
+
+            
 
             
 
@@ -848,6 +1000,8 @@
 
             
 
+            
+
              object as a key in the various collections that the class maintains. Therefore, these URLs must be unique within the scope of the site map. If the URL is not found within the immediate site map data that is managed by the <see
              cref="T:System.Web.XmlSiteMapProvider" />
 
@@ -855,8 +1009,12 @@
 
             
 
+            
+
             , it calls the <see
              cref="M:System.Web.XmlSiteMapProvider.FindSiteMapNode(System.String)" />
+
+            
 
             
 
@@ -872,8 +1030,12 @@
 
             
 
+            
+
              method indirectly calls the <see
              cref="M:System.Web.XmlSiteMapProvider.BuildSiteMap" />
+
+            
 
             
 
@@ -886,8 +1048,12 @@
 
             
 
+            
+
              method can also occur when calling the <see
              cref="M:System.Web.XmlSiteMapProvider.FindSiteMapNode(System.String)" />
+
+            
 
             
 
@@ -906,6 +1072,8 @@
 
             
 
+            
+
              object that represents the page at the specified URL.</para
           >
         </summary>
@@ -919,8 +1087,12 @@
 
             
 
+            
+
              that represents the page identified by <paramref
              name="rawURL" />
+
+            
 
             
 
@@ -936,8 +1108,12 @@
 
           
 
+          
+
           A URL that identifies the page for which to retrieve a <see
            cref="T:System.Web.SiteMapNode" />
+
+          
 
           
 
@@ -974,6 +1150,8 @@
 
             
 
+            
+
              class overrides the <see
              cref="M:System.Web.StaticSiteMapProvider.FindSiteMapNodeFromKey(System.String)" />
 
@@ -981,8 +1159,12 @@
 
             
 
+            
+
              method to ensure that any linked child providers are searched for the node, if the implementation for the base class does not return a node for <paramref
              name="key" />
+
+            
 
             
 
@@ -998,8 +1180,12 @@
 
             
 
+            
+
              object, derived from the <see
              cref="T:System.Web.StaticSiteMapProvider" />
+
+            
 
             
 
@@ -1012,8 +1198,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1026,8 +1216,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1040,6 +1234,8 @@
 
             
 
+            
+
              is specified, the <see
              cref="T:System.Web.XmlSiteMapProvider" />
 
@@ -1047,8 +1243,12 @@
 
             
 
+            
+
              automatically generates a <see
              cref="P:System.Web.SiteMapNode.Key" />
+
+            
 
             
 
@@ -1064,6 +1264,8 @@
 
             
 
+            
+
              method might call the <see
              cref="M:System.Web.XmlSiteMapProvider.BuildSiteMap" />
 
@@ -1071,8 +1273,12 @@
 
             
 
+            
+
              method on any child providers that are associated with the current provider. Therefore, the exceptions that are described in the <see
              cref="M:System.Web.XmlSiteMapProvider.BuildSiteMap" />
+
+            
 
             
 
@@ -1091,6 +1297,8 @@
 
             
 
+            
+
              object based on a specified key.</para
           >
         </summary>
@@ -1104,6 +1312,8 @@
 
             
 
+            
+
              that represents the page identified by <paramref
              name="key" />
 
@@ -1111,8 +1321,12 @@
 
             
 
+            
+
             ; otherwise, null, if security trimming is enabled and the node cannot be shown to the current user or the node is not found by <paramref
              name="key" />
+
+            
 
             
 
@@ -1128,8 +1342,12 @@
 
           
 
+          
+
           A lookup key with which to search for a <see
            cref="T:System.Web.SiteMapNode" />
+
+          
 
           
 
@@ -1166,8 +1384,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.XmlSiteMapProvider.BuildSiteMap" />
+
+            
 
             
 
@@ -1180,8 +1402,12 @@
 
             
 
+            
+
              method can also occur when calling the <see
              cref="M:System.Web.XmlSiteMapProvider.GetRootNodeCore" />
+
+            
 
             
 
@@ -1199,6 +1425,8 @@
           <para
             >A <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1234,6 +1462,8 @@
 
             
 
+            
+
              class overrides the inherited <see
              cref="M:System.Web.XmlSiteMapProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />
 
@@ -1241,8 +1471,12 @@
 
             
 
+            
+
              method to apply several attributes, such as the siteMapFile and description attributes, to the <paramref
              name="attributes" />
+
+            
 
             
 
@@ -1261,6 +1495,8 @@
 
             
 
+            
+
              object. The <see
              cref="M:System.Web.XmlSiteMapProvider.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />
 
@@ -1268,8 +1504,12 @@
 
             
 
+            
+
              method does not actually build a site map, it only prepares the state of the <see
              cref="T:System.Web.XmlSiteMapProvider" />
+
+            
 
             
 
@@ -1285,8 +1525,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.XmlSiteMapProvider" />
+
+          
 
           
 
@@ -1301,8 +1545,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.Specialized.NameValueCollection" />
+
+          
 
           
 
@@ -1315,8 +1563,12 @@
 
           
 
+          
+
           . These attributes are read from the <see
            cref="T:System.Web.XmlSiteMapProvider" />
+
+          
 
           
 
@@ -1354,11 +1606,15 @@
 
             
 
+            
+
              object from all node collections that are tracked by the provider.</para
           >
         </summary>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1395,6 +1651,8 @@
 
             
 
+            
+
              method removes <paramref
              name="providerName" />
 
@@ -1402,8 +1660,12 @@
 
             
 
+            
+
              from the hierarchy for the current provider, including any parent/child relationships that are established by the <see
              cref="M:System.Web.XmlSiteMapProvider.AddProvider(System.String,System.Web.SiteMapNode)" />
+
+            
 
             
 
@@ -1423,6 +1685,8 @@
 
           
 
+          
+
           The name of one of the <see
            cref="T:System.Web.SiteMapProvider" />
 
@@ -1430,8 +1694,12 @@
 
           
 
+          
+
            objects currently registered in the <see
            cref="P:System.Web.SiteMap.Providers" />
+
+          
 
           
 
@@ -1466,8 +1734,12 @@
 
             
 
+            
+
              property calls the <see
              cref="M:System.Web.XmlSiteMapProvider.BuildSiteMap" />
+
+            
 
             
 
@@ -1480,8 +1752,12 @@
 
             
 
+            
+
              method can also occur when accessing the <see
              cref="P:System.Web.XmlSiteMapProvider.RootNode" />
+
+            
 
             
 
@@ -1497,8 +1773,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.XmlSiteMapProvider" />
+
+            
 
             
 
@@ -1511,6 +1791,8 @@
 
             
 
+            
+
              object in a site map. The <see
              cref="T:System.Web.XmlSiteMapProvider" />
 
@@ -1518,8 +1800,12 @@
 
             
 
+            
+
              class overrides the abstract <see
              cref="P:System.Web.SiteMapProvider.RootNode" />
+
+            
 
             
 

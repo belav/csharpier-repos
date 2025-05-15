@@ -26,8 +26,12 @@
 
         
 
+        
+
          object. This class also has methods that allow an <see
          cref="T:System.Net.HttpListener" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          method returns instances of the <see
          cref="T:System.Net.HttpListenerContext" />
+
+        
 
         
 
@@ -57,8 +65,12 @@
 
         
 
+        
+
          property. To get the object that represents the response that will be sent to the client by the <see
          cref="T:System.Net.HttpListener" />
+
+        
 
         
 
@@ -71,6 +83,8 @@
 
         
 
+        
+
          property. To get user information about the client sending the request, such as its login name and whether it has been authenticated, you can query the properties in the <see
          cref="T:System.Security.Principal.IPrincipal" />
 
@@ -78,8 +92,12 @@
 
         
 
+        
+
          object returned by the <see
          cref="P:System.Net.HttpListenerContext.User" />
+
+        
 
         
 
@@ -95,8 +113,12 @@
 
         
 
+        
+
          object sends the response to the client and frees any resources used by the <see
          cref="T:System.Net.HttpListenerContext" />
+
+        
 
         
 
@@ -109,8 +131,12 @@
 
         
 
+        
+
          object discards the response to the client if it has not already been sent, and frees any resources used by the <see
          cref="T:System.Net.HttpListenerContext" />
+
+        
 
         
 
@@ -123,8 +149,12 @@
 
         
 
+        
+
          object, you cannot reference its methods or properties. If you do so, you will receive an <see
          cref="T:System.ObjectDisposedException" />
+
+        
 
         
 
@@ -138,6 +168,8 @@
       <para
         >Provides access to the request and response objects used by the <see
          cref="T:System.Net.HttpListener" />
+
+        
 
         
 
@@ -178,6 +210,8 @@
 
             
 
+            
+
             , it will send the response to the client, close the <see
              cref="T:System.Net.HttpListenerResponse" />
 
@@ -185,8 +219,12 @@
 
             
 
+            
+
              that contains the response, and close the <see
              cref="T:System.Net.HttpListenerRequest" />
+
+            
 
             
 
@@ -200,6 +238,8 @@
           <para
             >Gets the <see
              cref="T:System.Net.HttpListenerRequest" />
+
+            
 
             
 
@@ -240,8 +280,12 @@
 
             
 
+            
+
              object returned by this property. After configuring the response, you send it to the client by closing the response, or by closing this <see
              cref="T:System.Net.HttpListenerContext" />
+
+            
 
             
 
@@ -255,6 +299,8 @@
           <para
             >Gets the <see
              cref="T:System.Net.HttpListenerResponse" />
+
+            
 
             
 
@@ -295,8 +341,12 @@
 
             
 
+            
+
              indicates that it requires authentication using the <see
              cref="P:System.Net.HttpListener.AuthenticationSchemes" />
+
+            
 
             
 
@@ -309,8 +359,12 @@
 
             
 
+            
+
              delegate using the <see
              cref="P:System.Net.HttpListener.AuthenticationSchemeSelectorDelegate" />
+
+            
 
             
 
@@ -326,6 +380,8 @@
 
             
 
+            
+
              property in the object returned by this property. </para
           >
         </remarks>
@@ -334,6 +390,8 @@
           <para
             >Gets an object used to obtain identity, authentication information, and security roles for the client whose request is represented by this <see
              cref="T:System.Net.HttpListenerContext" />
+
+            
 
             
 

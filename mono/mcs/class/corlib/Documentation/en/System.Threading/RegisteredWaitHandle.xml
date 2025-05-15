@@ -38,6 +38,8 @@
 
         
 
+        
+
         . This class cannot be inherited.</para
       >
     </summary>
@@ -95,8 +97,12 @@
 
             
 
+            
+
              is specified, it is signaled only if the <see
              cref="T:System.Threading.RegisteredWaitHandle" />
+
+            
 
             
 
@@ -109,8 +115,12 @@
 
             
 
+            
+
              executes, <paramref
              name="waitObject" />
+
+            
 
             
 
@@ -123,8 +133,12 @@
 
             
 
+            
+
             , <paramref
              name="waitObject" />
+
+            
 
             
 
@@ -138,6 +152,8 @@
           <para
             >Cancels a registered wait operation issued by the <see
              cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.UInt32,System.Boolean)" />
+
+            
 
             
 
@@ -157,8 +173,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.WaitHandle" />
+
+          
 
           
 

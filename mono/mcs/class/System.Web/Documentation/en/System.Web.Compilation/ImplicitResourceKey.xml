@@ -21,6 +21,8 @@
 
         
 
+        
+
          class contains fields that identify an implicit resource key. </para
       >
       <para>An implicit resource is assigned to a control in the following form:</para>
@@ -58,6 +60,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -90,8 +94,12 @@
 
             
 
+            
+
              class with the specified values for the <see
              cref="P:System.Web.Compilation.ImplicitResourceKey.Filter" />
+
+            
 
             
 
@@ -104,8 +112,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.Compilation.ImplicitResourceKey.Property" />
+
+            
 
             
 
@@ -121,6 +133,8 @@
 
           
 
+          
+
           The filter value of an implicit resource key.</param
         >
         <param name="keyPrefix">
@@ -130,10 +144,14 @@
 
           
 
+          
+
           The prefix for identifying a group of properties.</param
         >
         <param name="property">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -165,6 +183,8 @@
 
             
 
+            
+
              property refers to the value before the colon (:) in an expression. For example, suppose you had an implicit resource in the following form:</para
           >
           <code>&lt;asp:label runat="server" id="label1" meta:resourcekey="Welcome"
@@ -174,6 +194,8 @@
           <para
             >This resource contains three keys that potentially have localized resource values to retrieve from the resource file or source code. One of these keys is Ie:Welcome.Text, in which "Ie" is the <see
              cref="P:System.Web.Compilation.ImplicitResourceKey.Filter" />
+
+            
 
             
 
@@ -210,8 +232,12 @@
 
             
 
+            
+
              property ties together a collection of properties that can be assigned to a control. The <see
              cref="P:System.Web.Compilation.ImplicitResourceKey.KeyPrefix" />
+
+            
 
             
 
@@ -226,6 +252,8 @@
           <para
             >This resource contains three keys, Welcome.Text, Ie:Welcome.Text, and Welcome.Forecolor, that potentially have localized resource values to retrieve from the resource file or source code. Each key has "Welcome" as the <see
              cref="P:System.Web.Compilation.ImplicitResourceKey.KeyPrefix" />
+
+            
 
             
 
@@ -262,8 +290,12 @@
 
             
 
+            
+
              property specifies the control property to be localized. The <see
              cref="P:System.Web.Compilation.ImplicitResourceKey.Property" />
+
+            
 
             
 
@@ -278,6 +310,8 @@
           <para
             >This resource contains three keys, Welcome.Text, Ie:Welcome.Text, and Welcome.Forecolor, that potentially have localized resource values to retrieve from the resource file or source code. Those keys have <see
              cref="P:System.Web.Compilation.ImplicitResourceKey.Property" />
+
+            
 
             
 

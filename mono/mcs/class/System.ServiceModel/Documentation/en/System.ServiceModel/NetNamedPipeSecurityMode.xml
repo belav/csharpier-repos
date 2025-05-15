@@ -23,8 +23,12 @@
 
         
 
+        
+
         . The default value is <see
          cref="F:System.ServiceModel.NetNamedPipeSecurityMode.Transport" />
+
+        
 
         
 

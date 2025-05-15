@@ -31,6 +31,8 @@
 
         
 
+        
+
          configuration element.</para
       >
       <para>This class is used to access information about SMTP settings for the local computer.</para>
@@ -41,6 +43,8 @@
       <para
         >Initializes a new instance of the <see
          cref="T:System.Net.Configuration.MailSettingsSectionGroup" />
+
+        
 
         
 
@@ -76,6 +80,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -106,6 +112,8 @@
           <para
             >Mail settings affect the behavior of the <see
              cref="T:System.Net.Mail.SmtpClient" />
+
+            
 
             
 

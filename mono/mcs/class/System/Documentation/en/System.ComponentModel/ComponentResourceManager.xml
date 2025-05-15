@@ -30,8 +30,12 @@
 
         
 
+        
+
          class is a <see
          cref="T:System.Resources.ResourceManager" />
+
+        
 
         
 
@@ -62,6 +66,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.ComponentResourceManager" />
+
+            
 
             
 
@@ -99,8 +105,12 @@
 
             
 
+            
+
              that looks up resources in satellite assemblies based on information from the specified <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -116,6 +126,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
 
@@ -123,8 +135,12 @@
 
           
 
+          
+
            from which the <see
            cref="T:System.ComponentModel.ComponentResourceManager" />
+
+          
 
           
 
@@ -167,6 +183,8 @@
 
             
 
+            
+
             .propertyName, where <paramref
              name="objectName" />
 
@@ -174,8 +192,12 @@
 
             
 
+            
+
              is passed in as a parameter and propertyName is the name of a property. It will then apply that resource's <paramref
              name="value" />
+
+            
 
             
 
@@ -195,8 +217,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -211,8 +237,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -256,11 +286,15 @@
 
             
 
+            
+
              is null, the current culture is assumed. </para
           >
           <para
             >The <see
              cref="M:System.ComponentModel.ComponentResourceManager.ApplyResources(System.Object,System.String,System.Globalization.CultureInfo)" />
+
+            
 
             
 
@@ -273,6 +307,8 @@
 
             
 
+            
+
             .propertyName, where <paramref
              name="objectName" />
 
@@ -280,8 +316,12 @@
 
             
 
+            
+
              is passed in as a parameter and propertyName is the name of a property. It will then apply that resource's <paramref
              name="value" />
+
+            
 
             
 
@@ -301,8 +341,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -317,8 +361,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -328,6 +376,8 @@
         >
         <param name="culture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -21,11 +21,15 @@
 
         
 
+        
+
          class allows you to implement custom double buffering for your graphics. Graphics that use double buffering can reduce or eliminate flicker that is caused by redrawing a display surface.</para
       >
       <para
         >This class has one static property, <see
          cref="P:System.Drawing.BufferedGraphicsManager.Current" />
+
+        
 
         
 
@@ -38,6 +42,8 @@
 
         
 
+        
+
          for the current application domain. The <see
          cref="T:System.Drawing.BufferedGraphicsContext" />
 
@@ -45,8 +51,12 @@
 
         
 
+        
+
          class creates <see
          cref="T:System.Drawing.BufferedGraphics" />
+
+        
 
         
 
@@ -62,8 +72,12 @@
 
         
 
+        
+
          class has no public constructor and must be created by the <see
          cref="T:System.Drawing.BufferedGraphicsContext" />
+
+        
 
         
 
@@ -76,6 +90,8 @@
 
         
 
+        
+
          method. You can retrieve the <see
          cref="T:System.Drawing.BufferedGraphicsContext" />
 
@@ -83,8 +99,12 @@
 
         
 
+        
+
          object for the current application domain from the static <see
          cref="P:System.Drawing.BufferedGraphicsManager.Current" />
+
+        
 
         
 
@@ -102,6 +122,8 @@
 
         
 
+        
+
         , <see
          cref="T:System.Drawing.BufferedGraphics" />
 
@@ -109,8 +131,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Drawing.BufferedGraphicsContext" />
+
+        
 
         
 
@@ -147,8 +173,12 @@
 
             
 
+            
+
              property always returns the same <see
              cref="T:System.Drawing.BufferedGraphicsContext" />
+
+            
 
             
 
@@ -162,6 +192,8 @@
           <para
             >Gets the <see
              cref="T:System.Drawing.BufferedGraphicsContext" />
+
+            
 
             
 

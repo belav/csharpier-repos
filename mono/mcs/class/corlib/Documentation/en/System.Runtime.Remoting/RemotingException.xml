@@ -36,6 +36,8 @@
 
         
 
+        
+
          uses the HRESULT COR_E_REMOTING, which has the value 0x8013150B.</para
       >
       <para>
@@ -45,8 +47,12 @@
 
         
 
+        
+
          uses the default <see
          cref="M:System.Object.Equals(System.Object)" />
+
+        
 
         
 
@@ -62,8 +68,12 @@
 
         
 
+        
+
         , see the <see
          cref="T:System.Runtime.Remoting.RemotingException" />
+
+        
 
         
 
@@ -102,6 +112,8 @@
 
             
 
+            
+
              inherits from the <see
              cref="T:System.SystemException" />
 
@@ -109,8 +121,12 @@
 
             
 
+            
+
              class. The following table shows initial property values for an instance of the <see
              cref="T:System.Runtime.Remoting.RemotingException" />
+
+            
 
             
 
@@ -161,6 +177,8 @@
 
             
 
+            
+
              class with default properties.</para
           >
         </summary>
@@ -192,6 +210,8 @@
 
             
 
+            
+
              inherits from the <see
              cref="T:System.SystemException" />
 
@@ -199,8 +219,12 @@
 
             
 
+            
+
              class. The following table shows initial property values for an instance of the <see
              cref="T:System.Runtime.Remoting.RemotingException" />
+
+            
 
             
 
@@ -244,6 +268,8 @@
 
                   
 
+                  
+
                    string</para
                 >
               </description>
@@ -260,11 +286,15 @@
 
             
 
+            
+
              class with a specified message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -309,6 +339,8 @@
 
             
 
+            
+
             .) </para
           >
         </remarks>
@@ -317,6 +349,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Remoting.RemotingException" />
+
+            
 
             
 
@@ -332,10 +366,14 @@
 
           
 
+          
+
           The object that holds the serialized object data. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -376,8 +414,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -390,11 +432,15 @@
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows initial property values for an instance of the <see
              cref="T:System.Runtime.Remoting.RemotingException" />
+
+            
 
             
 
@@ -445,11 +491,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -464,8 +514,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="InnerException" />
+
+          
 
           
 

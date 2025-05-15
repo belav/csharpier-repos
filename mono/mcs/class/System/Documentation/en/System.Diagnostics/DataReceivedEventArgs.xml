@@ -26,8 +26,12 @@
 
         
 
+        
+
          or <see
          cref="P:System.Diagnostics.Process.StandardError" />
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
         . The <see
          cref="P:System.Diagnostics.DataReceivedEventArgs.Data" />
+
+        
 
         
 
@@ -60,8 +68,12 @@
 
         
 
+        
+
          and <see
          cref="E:System.Diagnostics.Process.ErrorDataReceived" />
+
+        
 
         
 
@@ -96,8 +108,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Diagnostics.Process.StandardError" />
+
+            
 
             
 
@@ -110,8 +126,12 @@
 
             
 
+            
+
              to your event handler, an event is raised each time the process writes a line to the redirected stream. The <see
              cref="P:System.Diagnostics.DataReceivedEventArgs.Data" />
+
+            
 
             
 
@@ -124,8 +144,12 @@
 
             
 
+            
+
              wrote to the redirected output stream. Your event handler can use the <see
              cref="P:System.Diagnostics.DataReceivedEventArgs.Data" />
+
+            
 
             
 
@@ -141,11 +165,15 @@
 
             
 
+            
+
              property does not include the terminating carriage return or line feed.</para
           >
           <para
             >When the redirected stream is closed, a null line is sent to the event handler. Ensure your event handler checks the <see
              cref="P:System.Diagnostics.DataReceivedEventArgs.Data" />
+
+            
 
             
 
@@ -158,8 +186,12 @@
 
             
 
+            
+
              to validate the <see
              cref="P:System.Diagnostics.DataReceivedEventArgs.Data" />
+
+            
 
             
 
@@ -173,6 +205,8 @@
           <para
             >Gets the line of characters that was written to a redirected <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 

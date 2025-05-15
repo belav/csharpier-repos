@@ -27,11 +27,15 @@
 
         
 
+        
+
          uses this class.</para
       >
       <para
         >For more information on printing, see the <see
          cref="N:System.Drawing.Printing" />
+
+        
 
         
 
@@ -58,6 +62,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Drawing.Printing.StandardPrintController" />
+
+            
 
             
 
@@ -95,8 +101,12 @@
 
             
 
+            
+
              is called immediately after the <see
              cref="T:System.Drawing.Printing.PrintDocument" />
+
+            
 
             
 
@@ -109,8 +119,12 @@
 
             
 
+            
+
              event. If an exception is thrown inside a <see
              cref="E:System.Drawing.Printing.PrintDocument.PrintPage" />
+
+            
 
             
 
@@ -123,8 +137,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Drawing.Printing.StandardPrintController.OnEndPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+
+            
 
             
 
@@ -139,8 +157,12 @@
 
             
 
+            
+
              creates the <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -153,8 +175,12 @@
 
             
 
+            
+
              is called, the <see
              cref="M:System.Drawing.Printing.StandardPrintController.OnStartPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+
+            
 
             
 
@@ -167,8 +193,12 @@
 
             
 
+            
+
              object to a graphic of a single page. The <see
              cref="M:System.Drawing.Printing.StandardPrintController.OnEndPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+
+            
 
             
 
@@ -181,8 +211,12 @@
 
             
 
+            
+
              object, while the <see
              cref="M:System.Drawing.Printing.StandardPrintController.OnEndPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+
+            
 
             
 
@@ -198,8 +232,12 @@
 
             
 
+            
+
              is called from a printing context of a <see
              cref="T:System.Windows.Forms.PrintDialog" />
+
+            
 
             
 
@@ -212,8 +250,12 @@
 
             
 
+            
+
              of <see
              cref="F:System.Drawing.Printing.PrintingPermissionLevel.SafePrinting" />
+
+            
 
             
 
@@ -226,6 +268,8 @@
 
             
 
+            
+
              of <see
              cref="F:System.Drawing.Printing.PrintingPermissionLevel.DefaultPrinting" />
 
@@ -233,8 +277,12 @@
 
             
 
+            
+
             . All other calls this method requires a <see
              cref="T:System.Drawing.Printing.PrintingPermission" />
+
+            
 
             
 
@@ -255,8 +303,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Printing.PrintDocument" />
+
+          
 
           
 
@@ -271,8 +323,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Printing.PrintPageEventArgs" />
+
+          
 
           
 
@@ -309,8 +365,12 @@
 
             
 
+            
+
              is called immediately after <see
              cref="T:System.Drawing.Printing.PrintDocument" />
+
+            
 
             
 
@@ -323,8 +383,12 @@
 
             
 
+            
+
              event. Even if an uncaught exception was thrown during the printing process, <see
              cref="M:System.Drawing.Printing.StandardPrintController.OnEndPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+
+            
 
             
 
@@ -339,8 +403,12 @@
 
             
 
+            
+
              creates the <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -353,8 +421,12 @@
 
             
 
+            
+
              is called, the <see
              cref="M:System.Drawing.Printing.StandardPrintController.OnStartPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+
+            
 
             
 
@@ -367,8 +439,12 @@
 
             
 
+            
+
              object to a graphic of a single page. The <see
              cref="M:System.Drawing.Printing.StandardPrintController.OnEndPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+
+            
 
             
 
@@ -381,8 +457,12 @@
 
             
 
+            
+
              object, while the <see
              cref="M:System.Drawing.Printing.StandardPrintController.OnEndPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+
+            
 
             
 
@@ -402,8 +482,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Printing.PrintDocument" />
+
+          
 
           
 
@@ -418,8 +502,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Printing.PrintEventArgs" />
+
+          
 
           
 
@@ -456,6 +544,8 @@
 
             
 
+            
+
              is called immediately before <see
              cref="T:System.Drawing.Printing.PrintDocument" />
 
@@ -463,8 +553,12 @@
 
             
 
+            
+
              raises the <see
              cref="E:System.Drawing.Printing.PrintDocument.PrintPage" />
+
+            
 
             
 
@@ -479,8 +573,12 @@
 
             
 
+            
+
              creates the <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -493,8 +591,12 @@
 
             
 
+            
+
              is called, the <see
              cref="M:System.Drawing.Printing.StandardPrintController.OnStartPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+
+            
 
             
 
@@ -507,8 +609,12 @@
 
             
 
+            
+
              object to a graphic of a single page. The <see
              cref="M:System.Drawing.Printing.StandardPrintController.OnEndPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+
+            
 
             
 
@@ -521,8 +627,12 @@
 
             
 
+            
+
              object, while the <see
              cref="M:System.Drawing.Printing.StandardPrintController.OnEndPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+
+            
 
             
 
@@ -545,8 +655,12 @@
 
             
 
+            
+
              object that represents a page from a <see
              cref="T:System.Drawing.Printing.PrintDocument" />
+
+            
 
             
 
@@ -562,8 +676,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Printing.PrintDocument" />
+
+          
 
           
 
@@ -578,8 +696,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Printing.PrintPageEventArgs" />
+
+          
 
           
 
@@ -592,8 +714,12 @@
 
           
 
+          
+
            property of this parameter will be null. The value returned from the <see
            cref="M:System.Drawing.Printing.StandardPrintController.OnStartPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+
+          
 
           
 
@@ -630,6 +756,8 @@
 
             
 
+            
+
              is called immediately after <see
              cref="T:System.Drawing.Printing.PrintDocument" />
 
@@ -637,8 +765,12 @@
 
             
 
+            
+
              raises the <see
              cref="E:System.Drawing.Printing.PrintDocument.BeginPrint" />
+
+            
 
             
 
@@ -653,8 +785,12 @@
 
             
 
+            
+
              creates the <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -667,8 +803,12 @@
 
             
 
+            
+
              is called, the <see
              cref="M:System.Drawing.Printing.StandardPrintController.OnStartPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+
+            
 
             
 
@@ -681,8 +821,12 @@
 
             
 
+            
+
              object to a graphic of a single page. The <see
              cref="M:System.Drawing.Printing.StandardPrintController.OnEndPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+
+            
 
             
 
@@ -695,8 +839,12 @@
 
             
 
+            
+
              object, while the <see
              cref="M:System.Drawing.Printing.StandardPrintController.OnEndPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+
+            
 
             
 
@@ -706,6 +854,8 @@
           >
           <para>
             <see cref="M:System.Drawing.Printing.StandardPrintController.OnStartPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+
+            
 
             
 
@@ -725,8 +875,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Printing.PrintDocument" />
+
+          
 
           
 
@@ -741,8 +895,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Printing.PrintEventArgs" />
+
+          
 
           
 

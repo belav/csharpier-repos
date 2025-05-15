@@ -22,7 +22,7 @@
   </ItemGroup>
   <PropertyGroup>
     <CLRTestBashPreCommands>
-<![CDATA[
+      <![CDATA[
 $(CLRTestBashPreCommands)
     if [[ "$OSTYPE" == "linux"* ]]; then
         if ! grep -q '^flags.*avx512' /proc/cpuinfo 2>/dev/null; then

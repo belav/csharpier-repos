@@ -4,7 +4,7 @@
   <paragraph
     >Properties are defined with property declarations. The first part of a property declaration looks quite similar to a field declaration. The second part includes a get accessor and/or a set accessor. In the example below, the Button class defines a Caption property. <code_example
     >
-<![CDATA[
+      <![CDATA[
 public class Button   
 {  
    private string caption;  
@@ -25,7 +25,7 @@ public class Button
   <paragraph
     >The declaration of properties is relatively straightforward, but the real value of properties is seen when they are used. For example, the Caption property can be read and written in the same way that fields can be read and written: <code_example
     >
-<![CDATA[
+      <![CDATA[
 Button b = new Button();  
 b.Caption = "ABC";    // set; causes repaint  
 string s = b.Caption;  // get  

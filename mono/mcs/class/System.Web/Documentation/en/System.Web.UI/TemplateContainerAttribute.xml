@@ -32,8 +32,12 @@
 
         
 
+        
+
          object that is passed in as a parameter of the <see
          cref="T:System.Web.UI.TemplateContainerAttribute" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
          object that is used in data-binding expressions. The control whose property returns an <see
          cref="T:System.Web.UI.ITemplate" />
+
+        
 
         
 
@@ -60,8 +68,12 @@
 
         
 
+        
+
         , must implement the <see
          cref="T:System.Web.UI.INamingContainer" />
+
+        
 
         
 
@@ -74,6 +86,8 @@
          type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
+
+        
 
         
 
@@ -92,8 +106,12 @@
 
         
 
+        
+
          interface and is marked with the <see
          cref="T:System.Web.UI.TemplateContainerAttribute" />
+
+        
 
         
 
@@ -106,8 +124,12 @@
 
         
 
+        
+
          property must implement the <see
          cref="T:System.Web.UI.INamingContainer" />
+
+        
 
         
 
@@ -140,6 +162,8 @@
 
             
 
+            
+
              class using the specified container type.</para
           >
         </summary>
@@ -150,8 +174,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -191,8 +219,12 @@
 
             
 
+            
+
              class using the specified container type and the <see
              cref="P:System.Web.UI.TemplateContainerAttribute.BindingDirection" />
+
+            
 
             
 
@@ -208,8 +240,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -243,6 +279,8 @@
 
             
 
+            
+
              property can be either the <see
              cref="F:System.ComponentModel.BindingDirection.OneWay" />
 
@@ -250,8 +288,12 @@
 
             
 
+            
+
              field, where the template can accept only property values or the <see
              cref="F:System.ComponentModel.BindingDirection.TwoWay" />
+
+            
 
             
 
@@ -269,10 +311,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="14cdd57d-0f82-4667-b503-73e1a96f136a">Data-Binding Expression Syntax</a>
             </format>
+
+            
 
             
 

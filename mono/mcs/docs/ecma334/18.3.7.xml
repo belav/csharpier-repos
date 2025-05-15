@@ -8,11 +8,13 @@
 
     
 
+    
+
     , the default value of a struct consists of the value that results from setting all value type fields to their default value and all reference type fields to null. For this reason, a struct does not permit instance field declarations to include variable initializers. <example
 
       >[Example: As such, the following example results in one or more compile-time errors: <code_example
       >
-<![CDATA[
+        <![CDATA[
 struct Point  
 {  
    public int x = 1;  // Error, initializer not permitted  
@@ -20,6 +22,8 @@ struct Point
 }  
 ]]>
       </code_example>
+
+      
 
       
 

@@ -50,6 +50,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -76,6 +78,8 @@
           <para
             >Gets the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -119,6 +123,8 @@
 
             
 
+            
+
              whose properties are copied from the settings in this configuration element.</para
           >
         </returns>
@@ -155,6 +161,8 @@
           <para
             >If this property is not set, or is set to a null reference, the associated <see
              cref="T:System.ServiceModel.PeerNode" />
+
+            
 
             
 
@@ -256,6 +264,8 @@
 
             
 
+            
+
              is raised. The default value for this property is 0, which indicates that the listener port is randomly selected from all unreserved ports.</para
           >
         </remarks>
@@ -294,6 +304,8 @@
 
             
 
+            
+
              instance that contains a collection of <see
              cref="T:System.Configuration.ConfigurationProperty" />
 
@@ -301,8 +313,12 @@
 
             
 
+            
+
              objects that can be attributes or <see
              cref="T:System.Configuration ConfigurationElement" />
+
+            
 
             
 

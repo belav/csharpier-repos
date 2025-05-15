@@ -37,6 +37,8 @@
 
         
 
+        
+
          with small collections, and offers the flexibility of switching to a <see
          cref="T:System.Collections.Hashtable" />
 
@@ -44,8 +46,12 @@
 
         
 
+        
+
          which handles larger collections better than <see
          cref="T:System.Collections.Specialized.ListDictionary" />
+
+        
 
         
 
@@ -61,8 +67,12 @@
 
         
 
+        
+
         , the collection is stored in a <see
          cref="T:System.Collections.Hashtable" />
+
+        
 
         
 
@@ -75,8 +85,12 @@
 
         
 
+        
+
          to a <see
          cref="T:System.Collections.Hashtable" />
+
+        
 
         
 
@@ -92,6 +106,8 @@
 
         
 
+        
+
          and <see
          cref="M:System.Object.Equals(System.Object)" />
 
@@ -99,8 +115,12 @@
 
         
 
+        
+
         . If the collection is case-insensitive, it performs a simple ordinal case-insensitive comparison, which obeys the casing rules of the invariant culture only. By default, the collection is case-sensitive. For more information on the invariant culture, see <see
          cref="T:System.Globalization.CultureInfo" />
+
+        
 
         
 
@@ -117,8 +137,12 @@
 
         
 
+        
+
          is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see
          cref="T:System.Collections.DictionaryEntry" />
+
+        
 
         
 
@@ -139,8 +163,12 @@
 
         
 
+        
+
          while the collection is small, and then switching to a <see
          cref="T:System.Collections.Hashtable" />
+
+        
 
         
 
@@ -176,8 +204,12 @@
 
             
 
+            
+
              as the hash code provider and the key's implementation of <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -193,6 +225,8 @@
 
             
 
+            
+
              must be unique.</para
           >
           <para>This constructor is an O(1) operation.</para>
@@ -202,6 +236,8 @@
           <para
             >Creates an empty case-sensitive <see
              cref="T:System.Collections.Specialized.HybridDictionary" />
+
+            
 
             
 
@@ -239,8 +275,12 @@
 
             
 
+            
+
              is false, the collection uses the key's implementations of <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -253,6 +293,8 @@
 
             
 
+            
+
             . If <paramref
              name="caseInsensitive" />
 
@@ -260,8 +302,12 @@
 
             
 
+            
+
              is true, the collection performs a simple ordinal case-insensitive comparison, which obeys the casing rules of the invariant culture only. For more information on the invariant culture, see <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -281,6 +327,8 @@
 
             
 
+            
+
              with the specified case sensitivity.</para
           >
         </summary>
@@ -291,8 +339,12 @@
 
           
 
+          
+
           A Boolean that denotes whether the <see
            cref="T:System.Collections.Specialized.HybridDictionary" />
+
+          
 
           
 
@@ -329,8 +381,12 @@
 
             
 
+            
+
             , the collection is stored in a <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -343,8 +399,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -360,8 +420,12 @@
 
             
 
+            
+
              as the hash code provider and the key's implementation of <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -377,11 +441,15 @@
 
             
 
+            
+
              must be unique.</para
           >
           <para
             >This constructor is an O(<paramref
              name="n" />
+
+            
 
             
 
@@ -394,8 +462,12 @@
 
             
 
+            
+
              is <paramref
              name="initialSize" />
+
+            
 
             
 
@@ -414,6 +486,8 @@
 
             
 
+            
+
              with the specified initial size.</para
           >
         </summary>
@@ -424,8 +498,12 @@
 
           
 
+          
+
           The approximate number of entries that the <see
            cref="T:System.Collections.Specialized.HybridDictionary" />
+
+          
 
           
 
@@ -466,8 +544,12 @@
 
             
 
+            
+
             , the collection is stored in a <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -480,8 +562,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -497,8 +583,12 @@
 
             
 
+            
+
              is false, the collection uses the key's implementations of <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -511,6 +601,8 @@
 
             
 
+            
+
             . If <paramref
              name="caseInsensitive" />
 
@@ -518,8 +610,12 @@
 
             
 
+            
+
              is true, the collection performs a simple ordinal case-insensitive comparison, which obeys the casing rules of the invariant culture only. For more information on the invariant culture, see <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -535,6 +631,8 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -542,8 +640,12 @@
 
             
 
+            
+
              is <paramref
              name="initialSize" />
+
+            
 
             
 
@@ -562,6 +664,8 @@
 
             
 
+            
+
              with the specified initial size and case sensitivity.</para
           >
         </summary>
@@ -572,8 +676,12 @@
 
           
 
+          
+
           The approximate number of entries that the <see
            cref="T:System.Collections.Specialized.HybridDictionary" />
+
+          
 
           
 
@@ -588,8 +696,12 @@
 
           
 
+          
+
           A Boolean that denotes whether the <see
            cref="T:System.Collections.Specialized.HybridDictionary" />
+
+          
 
           
 
@@ -631,8 +743,12 @@
 
             
 
+            
+
              property to add new elements by setting the value of a key that does not exist in the <see
              cref="T:System.Collections.Specialized.HybridDictionary" />
+
+            
 
             
 
@@ -645,6 +761,8 @@
 
             
 
+            
+
             , setting the <see
              cref="P:System.Collections.Specialized.HybridDictionary.Item(System.Object)" />
 
@@ -652,8 +770,12 @@
 
             
 
+            
+
              property overwrites the old value. In contrast, the <see
              cref="M:System.Collections.Specialized.HybridDictionary.Add(System.Object,System.Object)" />
+
+            
 
             
 
@@ -669,8 +791,12 @@
 
             
 
+            
+
             , the elements are copied from the <see
              cref="T:System.Collections.Specialized.ListDictionary" />
+
+            
 
             
 
@@ -683,8 +809,12 @@
 
             
 
+            
+
             . However, this only happens once. If the collection is already stored in a <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -697,8 +827,12 @@
 
             
 
+            
+
             , the collection remains in the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -718,6 +852,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -728,10 +864,14 @@
 
           
 
+          
+
           The key of the entry to add. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -767,6 +907,8 @@
 
             
 
+            
+
              is set to zero, and references to other objects from elements of the collection are also released.</para
           >
           <para
@@ -777,8 +919,12 @@
 
             
 
+            
+
             , the collection remains in the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -794,6 +940,8 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -801,8 +949,12 @@
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Specialized.HybridDictionary.Count" />
+
+            
 
             
 
@@ -816,6 +968,8 @@
           <para
             >Removes all entries from the <see
              cref="T:System.Collections.Specialized.HybridDictionary" />
+
+            
 
             
 
@@ -856,8 +1010,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -870,8 +1028,12 @@
 
             
 
+            
+
              to determine whether <paramref
              name="item" />
+
+            
 
             
 
@@ -884,6 +1046,8 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
 
@@ -891,8 +1055,12 @@
 
             
 
+            
+
              methods of the <paramref
              name="item" />
+
+            
 
             
 
@@ -911,6 +1079,8 @@
 
             
 
+            
+
              contains a specific key.</para
           >
         </summary>
@@ -919,6 +1089,8 @@
           <para
             >true if the <see
              cref="T:System.Collections.Specialized.HybridDictionary" />
+
+            
 
             
 
@@ -934,8 +1106,12 @@
 
           
 
+          
+
           The key to locate in the <see
            cref="T:System.Collections.Specialized.HybridDictionary" />
+
+          
 
           
 
@@ -975,8 +1151,12 @@
 
             
 
+            
+
              in the same order in which the enumerator iterates through the <see
              cref="T:System.Collections.Specialized.HybridDictionary" />
+
+            
 
             
 
@@ -992,11 +1172,15 @@
 
             
 
+            
+
             , use HybridDictionary.Keys.CopyTo.</para
           >
           <para
             >To copy only the values in the <see
              cref="T:System.Collections.Specialized.HybridDictionary" />
+
+            
 
             
 
@@ -1012,6 +1196,8 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -1019,8 +1205,12 @@
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Specialized.HybridDictionary.Count" />
+
+            
 
             
 
@@ -1039,8 +1229,12 @@
 
             
 
+            
+
              entries to a one-dimensional <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -1056,8 +1250,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -1070,6 +1268,8 @@
 
           
 
+          
+
            objects copied from <see
            cref="T:System.Collections.Specialized.HybridDictionary" />
 
@@ -1077,8 +1277,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -1093,8 +1297,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -1124,6 +1332,8 @@
           <para
             >Gets the number of key/value pairs contained in the <see
              cref="T:System.Collections.Specialized.HybridDictionary" />
+
+            
 
             
 
@@ -1166,8 +1376,12 @@
 
             
 
+            
+
              also brings the enumerator back to this position.  At this position, <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1180,8 +1394,12 @@
 
             
 
+            
+
              to advance the enumerator to the first element of the collection before reading the value of <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1196,8 +1414,12 @@
 
             
 
+            
+
              returns the same object until either <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1210,6 +1432,8 @@
 
             
 
+            
+
              is called. <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
 
@@ -1217,8 +1441,12 @@
 
             
 
+            
+
              sets <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1234,8 +1462,12 @@
 
             
 
+            
+
              passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1248,8 +1480,12 @@
 
             
 
+            
+
              also return false. If the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1262,8 +1498,12 @@
 
             
 
+            
+
              is undefined. To set <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1276,8 +1516,12 @@
 
             
 
+            
+
              followed by <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1299,8 +1543,12 @@
 
             
 
+            
+
              that iterates through the <see
              cref="T:System.Collections.Specialized.HybridDictionary" />
+
+            
 
             
 
@@ -1319,8 +1567,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Collections.Specialized.HybridDictionary" />
+
+            
 
             
 
@@ -1354,6 +1606,8 @@
 
             
 
+            
+
              implements the <see
              cref="P:System.Collections.Specialized.HybridDictionary.IsFixedSize" />
 
@@ -1361,8 +1615,12 @@
 
             
 
+            
+
              property because it is required by the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -1379,6 +1637,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Collections.Specialized.HybridDictionary" />
+
+            
 
             
 
@@ -1412,6 +1672,8 @@
 
             
 
+            
+
              implements the <see
              cref="P:System.Collections.Specialized.HybridDictionary.IsReadOnly" />
 
@@ -1419,8 +1681,12 @@
 
             
 
+            
+
              property because it is required by the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -1437,6 +1703,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Collections.Specialized.HybridDictionary" />
+
+            
 
             
 
@@ -1470,6 +1738,8 @@
 
             
 
+            
+
              implements the <see
              cref="P:System.Collections.Specialized.HybridDictionary.IsSynchronized" />
 
@@ -1477,8 +1747,12 @@
 
             
 
+            
+
              property because it is required by the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1494,8 +1768,12 @@
 
             
 
+            
+
              using the <see
              cref="P:System.Collections.Specialized.HybridDictionary.SyncRoot" />
+
+            
 
             
 
@@ -1510,6 +1788,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Collections.Specialized.HybridDictionary" />
+
+            
 
             
 
@@ -1569,6 +1849,8 @@
 
             
 
+            
+
              is unspecified, but it is the same order as the associated values in the <see
              cref="T:System.Collections.ICollection" />
 
@@ -1576,8 +1858,12 @@
 
             
 
+            
+
              returned by the <see
              cref="P:System.Collections.Specialized.HybridDictionary.Values" />
+
+            
 
             
 
@@ -1593,8 +1879,12 @@
 
             
 
+            
+
              is not a static copy; instead, the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1607,6 +1897,8 @@
 
             
 
+            
+
             . Therefore, changes to the <see
              cref="T:System.Collections.Specialized.HybridDictionary" />
 
@@ -1614,8 +1906,12 @@
 
             
 
+            
+
              continue to be reflected in the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1635,8 +1931,12 @@
 
             
 
+            
+
              containing the keys in the <see
              cref="T:System.Collections.Specialized.HybridDictionary" />
+
+            
 
             
 
@@ -1676,8 +1976,12 @@
 
             
 
+            
+
              does not contain an element with the specified key, the <see
              cref="T:System.Collections.Specialized.HybridDictionary" />
+
+            
 
             
 
@@ -1693,8 +1997,12 @@
 
             
 
+            
+
              and the number of elements falls below the optimal size for a <see
              cref="T:System.Collections.Specialized.ListDictionary" />
+
+            
 
             
 
@@ -1707,6 +2015,8 @@
 
             
 
+            
+
              to avoid the overhead of copying elements from the <see
              cref="T:System.Collections.Hashtable" />
 
@@ -1714,8 +2024,12 @@
 
             
 
+            
+
              back to a <see
              cref="T:System.Collections.Specialized.ListDictionary" />
+
+            
 
             
 
@@ -1735,11 +2049,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1773,8 +2091,12 @@
 
             
 
+            
+
              using the <see
              cref="P:System.Collections.Specialized.HybridDictionary.SyncRoot" />
+
+            
 
             
 
@@ -1787,8 +2109,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Collections.Specialized.HybridDictionary" />
+
+            
 
             
 
@@ -1801,8 +2127,12 @@
 
             
 
+            
+
             . This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see
              cref="T:System.Collections.Specialized.HybridDictionary" />
+
+            
 
             
 
@@ -1817,6 +2147,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Collections.Specialized.HybridDictionary" />
+
+            
 
             
 
@@ -1859,8 +2191,12 @@
 
             
 
+            
+
              also brings the enumerator back to this position. At this position, calling <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1873,8 +2209,12 @@
 
             
 
+            
+
              to advance the enumerator to the first element of the collection before reading the value of <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1889,8 +2229,12 @@
 
             
 
+            
+
              returns the same object until either <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1903,6 +2247,8 @@
 
             
 
+            
+
              is called. <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
 
@@ -1910,8 +2256,12 @@
 
             
 
+            
+
              sets <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1927,8 +2277,12 @@
 
             
 
+            
+
              passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1941,8 +2295,12 @@
 
             
 
+            
+
              also return false. If the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1955,8 +2313,12 @@
 
             
 
+            
+
              throws an exception. To set <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1969,8 +2331,12 @@
 
             
 
+            
+
              followed by <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1986,8 +2352,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 
@@ -2000,8 +2370,12 @@
 
             
 
+            
+
             . If the collection is modified between <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -2014,8 +2388,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -2036,8 +2414,12 @@
 
             
 
+            
+
              that iterates through the <see
              cref="T:System.Collections.Specialized.HybridDictionary" />
+
+            
 
             
 
@@ -2056,8 +2438,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Collections.Specialized.HybridDictionary" />
+
+            
 
             
 
@@ -2098,6 +2484,8 @@
 
             
 
+            
+
              is unspecified, but it is the same order as the associated keys in the <see
              cref="T:System.Collections.ICollection" />
 
@@ -2105,8 +2493,12 @@
 
             
 
+            
+
              returned by the <see
              cref="P:System.Collections.Specialized.HybridDictionary.Keys" />
+
+            
 
             
 
@@ -2122,8 +2514,12 @@
 
             
 
+            
+
              is not a static copy; instead, the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -2136,6 +2532,8 @@
 
             
 
+            
+
             . Therefore, changes to the <see
              cref="T:System.Collections.Specialized.HybridDictionary" />
 
@@ -2143,8 +2541,12 @@
 
             
 
+            
+
              continue to be reflected in the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -2164,8 +2566,12 @@
 
             
 
+            
+
              containing the values in the <see
              cref="T:System.Collections.Specialized.HybridDictionary" />
+
+            
 
             
 

@@ -36,11 +36,15 @@
 
       
 
+      
+
        docs!</typeparam
     >
     <summary>To be added.</summary>
     <remarks>
       <c>T:Mono.DocTest.MyList`1.Helper`2</c>
+
+      
 
       
 
@@ -91,6 +95,8 @@
         <summary>To be added.</summary>
         <remarks>
           <c>M:Mono.DocTest.MyList`1.Helper`2.UseT(`0,`1,`2)</c>
+
+          
 
           
 

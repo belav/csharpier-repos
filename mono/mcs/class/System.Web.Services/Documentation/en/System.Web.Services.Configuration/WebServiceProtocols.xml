@@ -26,6 +26,8 @@
 
           
 
+          
+
            value of this enumeration does not prevent access to the test or web service from remote computers. This value checks only the host header of the request; no other validation, authentication, or authorization checks are performed. This check mitigates only browser-based redirection attacks. Authentication and authorization are still required to restrict access to a Web service.</para
         >
       </block>

@@ -24,8 +24,12 @@
 
         
 
+        
+
          objects by accessing the <see
          cref="P:System.ServiceModel.Dispatcher.ClientOperation.FaultContractInfos" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          properties. The <see
          cref="T:System.ServiceModel.Dispatcher.FaultContractInfo" />
+
+        
 
         
 
@@ -53,6 +61,8 @@
       <para
         >Represents information about a SOAP fault that is specified in a <see
          cref="T:System.ServiceModel.FaultContractAttribute" />
+
+        
 
         
 
@@ -91,8 +101,12 @@
 
             
 
+            
+
              and <paramref
              name="detail" />
+
+            
 
             
 
@@ -111,6 +125,8 @@
 
             
 
+            
+
              class that uses the specified action and detail type.</para
           >
         </summary>
@@ -121,10 +137,14 @@
 
           
 
+          
+
           The action of the SOAP fault.</param
         >
         <param name="detail">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

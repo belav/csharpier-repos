@@ -29,8 +29,12 @@
 
         
 
+        
+
          to a method to indicate that the method implements a service operation as part of a service contract (specified by a <see
          cref="T:System.ServiceModel.ServiceContractAttribute" />
+
+        
 
         
 
@@ -41,6 +45,8 @@
       <para
         >Use the <see
          cref="T:System.ServiceModel.OperationContractAttribute" />
+
+        
 
         
 
@@ -58,6 +64,8 @@
 
             
 
+            
+
              property specifies the action that uniquely identifies this operation. Indigo2 dispatches request messages to methods based on their action.</para
           >
         </item>
@@ -65,6 +73,8 @@
           <para
             >The <see
              cref="P:System.ServiceModel.OperationContractAttribute.AsyncPattern" />
+
+            
 
             
 
@@ -82,8 +92,12 @@
 
             
 
+            
+
              property indicates whether the <see
              cref="P:System.ServiceModel.OperationContractAttribute.ProtectionLevel" />
+
+            
 
             
 
@@ -101,6 +115,8 @@
 
             
 
+            
+
              property indicates that the operation only consists of a single input message. The operation has no associated output message.</para
           >
         </item>
@@ -108,6 +124,8 @@
           <para
             >The <see
              cref="P:System.ServiceModel.OperationContractAttribute.IsInitiating" />
+
+            
 
             
 
@@ -125,6 +143,8 @@
 
             
 
+            
+
              property specifies whether indigo2 attempts to terminate the current session after the operation completes.</para
           >
         </item>
@@ -132,6 +152,8 @@
           <para
             >The <see
              cref="P:System.ServiceModel.OperationContractAttribute.ProtectionLevel" />
+
+            
 
             
 
@@ -149,6 +171,8 @@
 
             
 
+            
+
              property specifies the action of the reply message for the operation.</para
           >
         </item>
@@ -161,6 +185,8 @@
 
         
 
+        
+
          attribute declares that a method is an operation in a service contract. Only methods attributed with the <see
          cref="T:System.ServiceModel.OperationContractAttribute" />
 
@@ -168,8 +194,12 @@
 
         
 
+        
+
          are exposed as service operations. A service contract without any methods marked with the <see
          cref="T:System.ServiceModel.OperationContractAttribute" />
+
+        
 
         
 
@@ -185,11 +215,15 @@
 
         
 
+        
+
          property indicates that a pair of Begin&lt;methodName&gt; and End&lt;methodName&gt; methods form a single operation implemented asynchronously (whether on the client or the service). The ability of a service to implement operations asynchronously is a service implementation detail and is not exposed in metadata (such as Web Services Description Language (WSDL)). </para
       >
       <para
         >Similarly, clients can choose to invoke operations asynchronously independent of how the service method is implemented. Calling service operations asynchronously in the client is recommended when a service method takes some time but must return information directly to the client. For details, see <see
          cref="P:System.ServiceModel.OperationContractAttribute.AsyncPattern" />
+
+        
 
         
 
@@ -205,12 +239,16 @@
 
         
 
+        
+
          property indicates that a method does not return any value at all, including an empty underlying response message. This type of method is useful for notifications or event-style communication. Methods of this kind cannot return a reply message so the method's declaration must return void. </para
       >
       <block subset="none" type="note">
         <para
           >When programmatically retrieving the information store in this attribute, use the <see
            cref="T:System.ServiceModel.Description.ContractDescription" />
+
+          
 
           
 
@@ -228,8 +266,12 @@
 
           
 
+          
+
            property is set to false, (the default), even methods that return void are two-way methods at the underlying message level. In this case, the infrastructure creates and sends an empty message to indicate to the caller that the method has returned. Using this approach enables the application and the infrastructure to send error information (such as a SOAP fault) back to the client. Setting <see
            cref="P:System.ServiceModel.OperationContractAttribute.IsOneWay" />
+
+          
 
           
 
@@ -239,6 +281,8 @@
            type="text/html">
             <a href="19053a36-4492-45a3-bfe6-0365ee0205a3">One-Way Services</a>
           </format>
+
+          
 
           
 
@@ -255,8 +299,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.ServiceModel.OperationContractAttribute.ReplyAction" />
+
+        
 
         
 
@@ -269,8 +317,12 @@
 
         
 
+        
+
          property to prevent clients from calling a particular service operation prior to other operations. Use the <see
          cref="P:System.ServiceModel.OperationContractAttribute.IsTerminating" />
+
+        
 
         
 
@@ -280,6 +332,8 @@
          type="text/html">
           <a href="864ba12f-3331-4359-a359-6d6d387f1035">Using Sessions</a>
         </format>
+
+        
 
         
 
@@ -295,8 +349,12 @@
 
         
 
+        
+
          property enables you to specify on the operation contract whether the operation messages are signed, encrypted, or signed and encrypted. If a binding cannot provide the security level required by the contract, an exception is thrown at run time. For more information, see <see
          cref="P:System.ServiceModel.OperationContractAttribute.ProtectionLevel" />
+
+        
 
         
 
@@ -306,6 +364,8 @@
          type="text/html">
           <a href="0c034608-a1ac-4007-8287-b1382eaa8bf2">Understanding Protection Level</a>
         </format>
+
+        
 
         
 
@@ -343,6 +403,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -370,8 +432,12 @@
 
             
 
+            
+
              property to control the action of the method's input message. Because indigo2 uses this action to dispatch an incoming message to the appropriate method, messages used within a contract operation must have unique actions. The default action value is a combination of the contract namespace (the default value is "http://tempuri.org/"), the contract name (interface name or the class name, if no explicit service interface is used), the operation name, and an additional string ("Response") if the message is a correlated response. You can override this default with the <see
              cref="P:System.ServiceModel.OperationContractAttribute.Action" />
+
+            
 
             
 
@@ -382,6 +448,8 @@
           <para
             >To indicate that a service operation handles all messages that the service receives but cannot be directed to a service operation, specify the value "*" (an asterisk). This type of operation, called an unmatched message handler, must have one of following method signatures, or a <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -399,8 +467,12 @@
 
                 
 
+                
+
                  object and return a <see
                  cref="T:System.ServiceModel.Channels.Message" />
+
+                
 
                 
 
@@ -413,6 +485,8 @@
               <para
                 >The service operation can take only a <see
                  cref="T:System.ServiceModel.Channels.Message" />
+
+                
 
                 
 
@@ -431,8 +505,12 @@
 
               
 
+              
+
                property set to "*". Any group of service contracts hosted at the same listenUri that a service class implements can have many service operations with the <see
                cref="P:System.ServiceModel.OperationContractAttribute.Action" />
+
+              
 
               
 
@@ -445,8 +523,12 @@
 
               
 
+              
+
                property is set to false. However, only one of those service operations can have the <see
                cref="P:System.ServiceModel.OperationContractAttribute.Action" />
+
+              
 
               
 
@@ -459,8 +541,12 @@
 
               
 
+              
+
                property set to true. For more details, see <see
                cref="P:System.ServiceModel.OperationContractAttribute.IsInitiating" />
+
+              
 
               
 
@@ -498,8 +584,12 @@
 
             
 
+            
+
              property to build service operations that can be called asynchronously on the server, the client, or both. The <see
              cref="P:System.ServiceModel.OperationContractAttribute.AsyncPattern" />
+
+            
 
             
 
@@ -516,12 +606,16 @@
 
             
 
+            
+
              property to indicate an asynchronous method pair that the client can use to invoke the operation asynchronously. Typically, client applications use the <format
              type="text/html">
               <a href="1abf3d9f-b420-46f1-b628-df238751f308"
                 >ServiceModel Metadata Utility Tool (Svcutil.exe)</a
               >
             </format>
+
+            
 
             
 
@@ -561,6 +655,8 @@
 
             
 
+            
+
              property to determine whether a specific protection level is required by the messages of this operation. </para
           >
         </remarks>
@@ -592,12 +688,16 @@
 
             
 
+            
+
              property controls whether an operation can be the first operation called when a session is created. </para
           >
           <block subset="none" type="note">
             <para
               >The value of <see
                cref="P:System.ServiceModel.ServiceContractAttribute.SessionMode" />
+
+              
 
               
 
@@ -610,6 +710,8 @@
 
               
 
+              
+
                or <see
                cref="F:System.ServiceModel.SessionMode.Required" />
 
@@ -617,8 +719,12 @@
 
               
 
+              
+
                and the binding used must require or allow sessions for the <see
                cref="P:System.ServiceModel.OperationContractAttribute.IsInitiating" />
+
+              
 
               
 
@@ -635,6 +741,8 @@
 
             
 
+            
+
              to false is ignored. </para
           >
           <para
@@ -645,8 +753,12 @@
 
             
 
+            
+
              to false to force clients to call another method on the service before they can invoke this one. For example, if your service has a series of operations that depend on an order ID number, you can set <see
              cref="P:System.ServiceModel.OperationContractAttribute.IsInitiating" />
+
+            
 
             
 
@@ -663,8 +775,12 @@
 
               
 
+              
+
                and the <see
                cref="P:System.ServiceModel.OperationContractAttribute.Action" />
+
+              
 
               
 
@@ -677,8 +793,12 @@
 
               
 
+              
+
                property set to "*". Any group of service contracts hosted at the same listen URI that a service class implements can have many service operations with the <see
                cref="P:System.ServiceModel.OperationContractAttribute.Action" />
+
+              
 
               
 
@@ -691,6 +811,8 @@
 
               
 
+              
+
                property is set to false. However, only one of those service methods can have the <see
                cref="P:System.ServiceModel.OperationContractAttribute.Action" />
 
@@ -698,8 +820,12 @@
 
               
 
+              
+
                property set to "*" and the <see
                cref="P:System.ServiceModel.OperationContractAttribute.IsInitiating" />
+
+              
 
               
 
@@ -716,8 +842,12 @@
 
             
 
+            
+
             . If a client calls a non-initiating operation first, the client runtime throws an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -730,6 +860,8 @@
              type="text/html">
               <a href="864ba12f-3331-4359-a359-6d6d387f1035">Using Sessions</a>
             </format>
+
+            
 
             
 
@@ -766,10 +898,14 @@
 
             
 
+            
+
              property to indicate that an operation does not return a reply message. This type of operation is useful for notifications or event-style communication, especially in two-way communication. Without waiting for an underlying response message, callers of one-way operations have no direct way to detect a failure in processing the request message. (Service applications that use reliable channels and one-way operations can detect a message delivery failure at the channel level. For details, see <format
              type="text/html">
               <a href="a7fc4146-ee2c-444c-82d4-ef6faffccc2d">Reliable Sessions Overview</a>
             </format>
+
+            
 
             
 
@@ -785,6 +921,8 @@
 
             
 
+            
+
              property on its methods to indicate that the service can make one-way calls to the client that the client can treat as events. No return call or message is generated because the service does not expect any response message.</para
           >
           <para
@@ -795,8 +933,12 @@
 
             
 
+            
+
              property is set to false (the default), even methods that return void result in a reply message. In this case, the infrastructure creates and sends an empty message to indicate to the caller that the method has returned. (Using this approach enables the infrastructure to send SOAP faults back to the client.) Setting <see
              cref="P:System.ServiceModel.OperationContractAttribute.IsOneWay" />
+
+            
 
             
 
@@ -812,11 +954,15 @@
 
             
 
+            
+
              exception is thrown. </para
           >
           <para
             >Specifying that an operation is a one-way operation means only that there is no response message. It is possible to block if a connection cannot be made, or the outbound message is very large, or if the service cannot read inbound information fast enough. If a client requires a non-blocking call, generate <see
              cref="P:System.ServiceModel.OperationContractAttribute.AsyncPattern" />
+
+            
 
             
 
@@ -831,10 +977,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="c8329832-bf66-4064-9034-bf39f153fc2d">Consuming Services Using a Client</a>
             </format>
+
+            
 
             
 
@@ -871,11 +1021,15 @@
 
             
 
+            
+
              property to indicate that calling a service operation terminates the communication session. </para
           >
           <para
             >In a client application, a value of <see
              cref="P:System.ServiceModel.OperationContractAttribute.IsTerminating" />
+
+            
 
             
 
@@ -894,12 +1048,16 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
             <para
               >If a caller is listening for the <see
                cref="E:System.ServiceModel.OperationContext.OperationCompleted" />
+
+              
 
               
 
@@ -912,8 +1070,12 @@
 
               
 
+              
+
                operation, it is possible to block when the response is received. The proper way to handle this is to schedule work on another thread when <see
                cref="E:System.ServiceModel.OperationContext.OperationCompleted" />
+
+              
 
               
 
@@ -946,6 +1108,8 @@
           <para
             >Use the <see
              cref="P:System.ServiceModel.OperationContractAttribute.Name" />
+
+            
 
             
 
@@ -988,12 +1152,16 @@
 
             
 
+            
+
              property to control whether the messages of an operation must be encrypted, signed, or both. The value set here is the default value for all messages specified for this operation unless a narrower scope overrides this value.</para
           >
           <para>It is important to remember that the protection behavior at runtime is the combination of the protection-level values set on the following properties. These properties have a hierarchical structure. Setting the outermost value establishes the default setting for all narrower scopes unless a different value for a narrower scope is explicitly set. In this case, the outer value remains the default for all narrower scopes with the exception of that specifically set. </para>
           <para
             >For example, if <see
              cref="P:System.ServiceModel.ServiceContractAttribute.ProtectionLevel" />
+
+            
 
             
 
@@ -1006,8 +1174,12 @@
 
             
 
+            
+
              and no other narrower scopes have protection level settings, all messages in an operation contract are encrypted and signed. If, however, one of those operations has the <see
              cref="P:System.ServiceModel.OperationContractAttribute.ProtectionLevel" />
+
+            
 
             
 
@@ -1020,6 +1192,8 @@
 
             
 
+            
+
             , then the messages for that operation are signed but all other messages in the contract are encrypted and signed.</para
           >
           <para
@@ -1027,6 +1201,8 @@
              type="text/html">
               <a href="0c034608-a1ac-4007-8287-b1382eaa8bf2">Understanding Protection Level</a>
             </format>
+
+            
 
             
 
@@ -1059,8 +1235,12 @@
 
             
 
+            
+
              property on <see
              cref="T:System.ServiceModel.MessageHeaderAttribute" />
+
+            
 
             
 
@@ -1076,8 +1256,12 @@
 
             
 
+            
+
              property on <see
              cref="T:System.ServiceModel.MessageBodyMemberAttribute" />
+
+            
 
             
 
@@ -1093,8 +1277,12 @@
 
             
 
+            
+
             . If the binding does not support security (such as <see
              cref="T:System.ServiceModel.BasicHttpBinding" />
+
+            
 
             
 
@@ -1107,6 +1295,8 @@
 
             
 
+            
+
              is <see
              cref="F:System.Net.Security.ProtectionLevel.None" />
 
@@ -1114,8 +1304,12 @@
 
             
 
+            
+
              for the whole contract. The result is that depending upon the endpoint binding, clients can require different message or transport level security protection even when the contract specifies <see
              cref="F:System.Net.Security.ProtectionLevel.None" />
+
+            
 
             
 

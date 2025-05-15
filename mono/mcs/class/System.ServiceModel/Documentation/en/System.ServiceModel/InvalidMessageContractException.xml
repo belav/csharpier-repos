@@ -30,8 +30,12 @@
 
         
 
+        
+
          is thrown when custom attribute usage results in the generation of an invalid service description. For example, if a <see
          cref="T:System.ServiceModel.MessageContractAttribute" />
+
+        
 
         
 
@@ -69,6 +73,8 @@
 
             
 
+            
+
              object.</para
           >
         </remarks>
@@ -77,6 +83,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.InvalidMessageContractException" />
+
+            
 
             
 
@@ -112,8 +120,12 @@
 
             
 
+            
+
              object using the <paramref
              name="message" />
+
+            
 
             
 
@@ -127,6 +139,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.InvalidMessageContractException" />
+
+            
 
             
 
@@ -165,6 +179,8 @@
 
             
 
+            
+
              object from the stream on deserialization.</para
           >
         </remarks>
@@ -173,6 +189,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.InvalidMessageContractException" />
+
+            
 
             
 
@@ -188,10 +206,14 @@
 
           
 
+          
+
           The serialization information.</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -231,6 +253,8 @@
 
             
 
+            
+
              object from the <paramref
              name="message" />
 
@@ -238,8 +262,12 @@
 
             
 
+            
+
              and <paramref
              name="innerException" />
+
+            
 
             
 
@@ -253,6 +281,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.InvalidMessageContractException" />
+
+            
 
             
 

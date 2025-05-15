@@ -40,6 +40,8 @@
 
         
 
+        
+
          event occurs during XSLT processing when an xsl:message is specified in the style sheet.</para
       >
       <para
@@ -47,6 +49,8 @@
          type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
         </format>
+
+        
 
         
 
@@ -60,6 +64,8 @@
       <para
         >Represents the method that will handle the <see
          cref="E:System.Xml.Xsl.XsltArgumentList.XsltMessageEncountered" />
+
+        
 
         
 

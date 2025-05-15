@@ -25,8 +25,12 @@
 
         
 
+        
+
          values are used as an argument in the <see
          cref="Overload:System.Windows.Forms.VisualStyles.VisualStyleRenderer.HitTestBackground" />
+
+        
 
         
 
@@ -195,8 +199,12 @@
 
             
 
+            
+
             ; <see
              cref="F:System.Windows.Forms.VisualStyles.HitTestOptions.SizingTemplate" />
+
+            
 
             
 
@@ -228,8 +236,12 @@
 
             
 
+            
+
             ; <see
              cref="F:System.Windows.Forms.VisualStyles.HitTestOptions.SizingTemplate" />
+
+            
 
             
 

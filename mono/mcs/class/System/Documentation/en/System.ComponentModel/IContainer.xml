@@ -71,6 +71,8 @@
 
             
 
+            
+
              is added at the end of the list.</para
           >
         </remarks>
@@ -84,8 +86,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.ComponentModel.IContainer" />
+
+            
 
             
 
@@ -101,8 +107,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -145,6 +155,8 @@
 
             
 
+            
+
              is added at the end of the list.</para
           >
         </remarks>
@@ -158,8 +170,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.ComponentModel.IContainer" />
+
+            
 
             
 
@@ -175,8 +191,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -186,6 +206,8 @@
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -221,6 +243,8 @@
           <para
             >Gets all the components in the <see
              cref="T:System.ComponentModel.IContainer" />
+
+            
 
             
 
@@ -264,6 +288,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -274,8 +300,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 

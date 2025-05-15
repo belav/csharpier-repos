@@ -21,8 +21,12 @@
 
         
 
+        
+
          is created by an installation executable, such as InstallUtil.exe, that installs assemblies. The installation program invokes the <see
          cref="T:System.Configuration.Install.InstallContext" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Configuration.Install.Installer.Commit(System.Collections.IDictionary)" />
+
+        
 
         
 
@@ -52,8 +60,12 @@
 
         
 
+        
+
         , or <see
          cref="M:System.Configuration.Install.Installer.Uninstall(System.Collections.IDictionary)" />
+
+        
 
         
 
@@ -66,8 +78,12 @@
 
         
 
+        
+
          property of an <see
          cref="T:System.Configuration.Install.Installer" />
+
+        
 
         
 
@@ -80,8 +96,12 @@
 
         
 
+        
+
         . Before calling these methods, an <see
          cref="T:System.Configuration.Install.Installer" />
+
+        
 
         
 
@@ -94,8 +114,12 @@
 
         
 
+        
+
          property sets the <see
          cref="P:System.Configuration.Install.Installer.Context" />
+
+        
 
         
 
@@ -111,8 +135,12 @@
 
         
 
+        
+
          property contains a parsed version of the command line that is entered to run the installation executable. The property contains information such as the path to a log file, whether to display log information on the console, and whether to show a user interface during the installation. Call the <see
          cref="M:System.Configuration.Install.InstallContext.IsParameterTrue(System.String)" />
+
+        
 
         
 
@@ -123,6 +151,8 @@
       <para
         >Use the <see
          cref="M:System.Configuration.Install.InstallContext.LogMessage(System.String)" />
+
+        
 
         
 
@@ -151,6 +181,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Configuration.Install.InstallContext" />
+
+            
 
             
 
@@ -190,6 +222,8 @@
 
             
 
+            
+
             , this constructor creates a log file at the specified path and parses the array of command-line parameters into the <see
              cref="P:System.Configuration.Install.InstallContext.Parameters" />
 
@@ -197,8 +231,12 @@
 
             
 
+            
+
              property. If a log-file path is specified in the command-line parameters, it is used to create the file. If the log file argument is not specified in the command line, the value of the <paramref
              name="logFilePath" />
+
+            
 
             
 
@@ -217,6 +255,8 @@
 
             
 
+            
+
              class, and creates a log file for the installation.</para
           >
         </summary>
@@ -227,10 +267,14 @@
 
           
 
+          
+
           The path to the log file for this installation, or null if no log file should be created. </param
         >
         <param name="commandLine">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -264,6 +308,8 @@
 
             
 
+            
+
              property, which contains a parsed version of the command-line parameters, to determine whether the specified parameter is true.</para
           >
         </remarks>
@@ -277,6 +323,8 @@
         </returns>
         <param name="paramName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -310,6 +358,8 @@
 
             
 
+            
+
              method. Text written to the log file will not be seen by the user unless InstallUtil.exe is used to run the installation and "/LogToConsole= true" is specified in the command line.</para
           >
         </remarks>
@@ -319,6 +369,8 @@
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -353,8 +405,12 @@
 
             
 
+            
+
              is created, the command-line parameters are parsed into the <see
              cref="P:System.Configuration.Install.InstallContext.Parameters" />
+
+            
 
             
 
@@ -401,11 +457,15 @@
 
             
 
+            
+
              containing the parsed command-line parameters.</para
           >
         </returns>
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

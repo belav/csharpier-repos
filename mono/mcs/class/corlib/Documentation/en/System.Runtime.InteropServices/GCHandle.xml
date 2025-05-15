@@ -43,8 +43,12 @@
 
         
 
+        
+
          structure is used with the <see
          cref="T:System.Runtime.InteropServices.GCHandleType" />
+
+        
 
         
 
@@ -60,11 +64,15 @@
 
         
 
+        
+
          to create a pinned object that returns a memory address to prevent the garbage collector from moving the object in memory.</para
       >
       <para
         >When the handle goes out of scope you must explicitly release it by calling the <see
          cref="M:System.Runtime.InteropServices.GCHandle.Free" />
+
+        
 
         
 
@@ -108,6 +116,8 @@
 
           
 
+          
+
            .</exception
         >
         <permission cref="T:System.Security.Permissions.SecurityPermission">
@@ -117,6 +127,8 @@
               cref="F:System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode"
               qualify="true"
             />
+
+            
 
             
 
@@ -139,6 +151,8 @@
 
             
 
+            
+
              handle.</para
           >
         </summary>
@@ -147,6 +161,8 @@
           <para
             >The address of the of the Pinned object as an <see
              cref="T:System.IntPtr" />
+
+            
 
             
 
@@ -196,6 +212,8 @@
 
             
 
+            
+
              .</para
           >
         </permission>
@@ -203,6 +221,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="F:System.Runtime.InteropServices.GCHandleType.Normal" />
+
+            
 
             
 
@@ -221,6 +241,8 @@
 
             
 
+            
+
              handle for the specified object.</para
           >
         </summary>
@@ -234,6 +256,8 @@
 
             
 
+            
+
              that protects the object from garbage collection. This <see
              cref="T:System.Runtime.InteropServices.GCHandle" />
 
@@ -241,8 +265,12 @@
 
             
 
+            
+
              must be released with <see
              cref="M:System.Runtime.InteropServices.GCHandle.Free" />
+
+            
 
             
 
@@ -258,8 +286,12 @@
 
           
 
+          
+
           The object that uses the <see
            cref="T:System.Runtime.InteropServices.GCHandle" />
+
+          
 
           
 
@@ -306,9 +338,13 @@
 
             
 
+            
+
              parameter is
 <see
              langword="null" />
+
+            
 
             
 
@@ -321,11 +357,15 @@
 
             
 
+            
+
             . <block
              subset="none" type="note"
               >The target of 
    the handle can be changed via the <see
                cref="P:System.Runtime.InteropServices.GCHandle.Target" />
+
+              
 
               
 
@@ -348,11 +388,15 @@
 
             
 
+            
+
              .</para
           >
         </permission>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -365,8 +409,12 @@
 
           
 
+          
+
            values, indicating the type of <see
            cref="T:System.Runtime.InteropServices.GCHandle" />
+
+          
 
           
 
@@ -388,6 +436,8 @@
 
             
 
+            
+
              of the specified type. This <see
              cref="T:System.Runtime.InteropServices.GCHandle" />
 
@@ -395,8 +445,12 @@
 
             
 
+            
+
              must be released with <see
              cref="M:System.Runtime.InteropServices.GCHandle.Free" />
+
+            
 
             
 
@@ -412,8 +466,12 @@
 
           
 
+          
+
           The object that uses the <see
            cref="T:System.Runtime.InteropServices.GCHandle" />
+
+          
 
           
 
@@ -428,6 +486,8 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Runtime.InteropServices.GCHandleType" />
 
@@ -435,8 +495,12 @@
 
           
 
+          
+
            values, indicating the type of <see
            cref="T:System.Runtime.InteropServices.GCHandle" />
+
+          
 
           
 
@@ -476,6 +540,8 @@
 
             
 
+            
+
              objects are equal if they point to the same memory handle.</para
           >
         </remarks>
@@ -489,8 +555,12 @@
 
             
 
+            
+
              object is equal to the current <see
              cref="T:System.Runtime.InteropServices.GCHandle" />
+
+            
 
             
 
@@ -509,8 +579,12 @@
 
             
 
+            
+
              object is equal to the current <see
              cref="T:System.Runtime.InteropServices.GCHandle" />
+
+            
 
             
 
@@ -526,6 +600,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.InteropServices.GCHandle" />
 
@@ -533,8 +609,12 @@
 
           
 
+          
+
            object to compare with the current <see
            cref="T:System.Runtime.InteropServices.GCHandle" />
+
+          
 
           
 
@@ -577,6 +657,8 @@
 
             
 
+            
+
              .</para
           >
         </permission>
@@ -590,6 +672,8 @@
 
             
 
+            
+
              is called only once.</para
           >
         </remarks>
@@ -598,6 +682,8 @@
           <para
             >Releases a <see
              cref="T:System.Runtime.InteropServices.GCHandle" />
+
+            
 
             
 
@@ -642,6 +728,8 @@
 
             
 
+            
+
              object created from a handle to a managed object.</para
           >
         </summary>
@@ -650,6 +738,8 @@
           <para
             >A new <see
              cref="T:System.Runtime.InteropServices.GCHandle" />
+
+            
 
             
 
@@ -665,6 +755,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.IntPtr" />
 
@@ -672,8 +764,12 @@
 
           
 
+          
+
            handle to a managed object to create a <see
            cref="T:System.Runtime.InteropServices.GCHandle" />
+
+          
 
           
 
@@ -710,8 +806,12 @@
 
             
 
+            
+
              method returns an integer representation of the internal memory handle encapsulated by the <see
              cref="T:System.Runtime.InteropServices.GCHandle" />
+
+            
 
             
 
@@ -730,6 +830,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -738,6 +840,8 @@
           <para
             >An identifier for the current <see
              cref="T:System.Runtime.InteropServices.GCHandle" />
+
+            
 
             
 
@@ -774,9 +878,13 @@
 
             
 
+            
+
              if the handle
  is allocated; otherwise, <see
              langword="false" />
+
+            
 
             
 
@@ -795,6 +903,8 @@
 
             
 
+            
+
              handles to determine if the <see
              cref="T:System.Runtime.InteropServices.GCHandle" />
 
@@ -802,8 +912,12 @@
 
             
 
+            
+
              is still available. When the garbage collector collects the object, the <see
              cref="F:System.Runtime.InteropServices.GCHandleType.Weak" />
+
+            
 
             
 
@@ -853,6 +967,8 @@
 
             
 
+            
+
              objects are equal.</para
           >
         </summary>
@@ -866,8 +982,12 @@
 
             
 
+            
+
              and <paramref
              name="b" />
+
+            
 
             
 
@@ -883,6 +1003,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.InteropServices.GCHandle" />
 
@@ -890,8 +1012,12 @@
 
           
 
+          
+
            object to compare with the <paramref
            name="b" />
+
+          
 
           
 
@@ -906,6 +1032,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.InteropServices.GCHandle" />
 
@@ -913,8 +1041,12 @@
 
           
 
+          
+
            object to compare with the <paramref
            name="a" />
+
+          
 
           
 
@@ -958,6 +1090,8 @@
 
           
 
+          
+
            to be converted.</param
         >
         <summary>
@@ -969,8 +1103,12 @@
 
             
 
+            
+
              to a <see
              cref="T:System.Runtime.InteropServices.GCHandle" />
+
+            
 
             
 
@@ -989,6 +1127,8 @@ instance.</para
 
             
 
+            
+
              .</para
           >
         </returns>
@@ -1001,9 +1141,13 @@ instance.</para
             
 
             
+
+            
 instances are stored using an internal integer
 representation. This method allows you to retrieve a <see
              cref="T:System.Runtime.InteropServices.GCHandle" />
+
+            
 
             
 
@@ -1050,6 +1194,8 @@ from its integer representation.</para
 
           
 
+          
+
            to be converted.</param
         >
         <summary>
@@ -1061,9 +1207,13 @@ from its integer representation.</para
 
             
 
+            
+
              instance to
    a <see
              cref="T:System.IntPtr" />
+
+            
 
             
 
@@ -1081,8 +1231,12 @@ from its integer representation.</para
 
             
 
+            
+
              representation of the specified <see
              cref="T:System.Runtime.InteropServices.GCHandle" />
+
+            
 
             
 
@@ -1094,6 +1248,8 @@ from its integer representation.</para
         <remarks>
           <para>
             <see cref="T:System.Runtime.InteropServices.GCHandle" />
+
+            
 
             
 
@@ -1141,6 +1297,8 @@ from its integer representation.</para
 
             
 
+            
+
              objects are not equal.</para
           >
         </summary>
@@ -1154,8 +1312,12 @@ from its integer representation.</para
 
             
 
+            
+
              and <paramref
              name="b" />
+
+            
 
             
 
@@ -1171,6 +1333,8 @@ from its integer representation.</para
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.InteropServices.GCHandle" />
 
@@ -1178,8 +1342,12 @@ from its integer representation.</para
 
           
 
+          
+
            object to compare with the <paramref
            name="b" />
+
+          
 
           
 
@@ -1194,6 +1362,8 @@ from its integer representation.</para
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.InteropServices.GCHandle" />
 
@@ -1201,8 +1371,12 @@ from its integer representation.</para
 
           
 
+          
+
            object to compare with the <paramref
            name="a" />
+
+          
 
           
 
@@ -1238,6 +1412,8 @@ from its integer representation.</para
           <para
             >The current <see
              cref="T:System.Runtime.InteropServices.GCHandle" />
+
+            
 
             
 
@@ -1286,6 +1462,8 @@ from its integer representation.</para
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1299,8 +1477,12 @@ from its integer representation.</para
 
             
 
+            
+
              object that represents a <see
              cref="T:System.Runtime.InteropServices.GCHandle" />
+
+            
 
             
 
@@ -1316,8 +1498,12 @@ from its integer representation.</para
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.InteropServices.GCHandle" />
+
+          
 
           
 

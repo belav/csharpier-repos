@@ -28,8 +28,12 @@
 
         
 
+        
+
          objects stored in a <see
          cref="T:System.Windows.Forms.PropertyGrid" />
+
+        
 
         
 
@@ -45,6 +49,8 @@
 
         
 
+        
+
          by using either an index into the collection or the label of a grid item in the collection that you access through the indexer.</para
       >
     </remarks>
@@ -53,6 +59,8 @@
       <para
         >Contains a collection of <see
          cref="T:System.Windows.Forms.GridItem" />
+
+        
 
         
 
@@ -103,6 +111,8 @@
 
             
 
+            
+
              has no entries. </para
           >
         </summary>
@@ -138,8 +148,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Windows.Forms.GridItemCollection" />
+
+            
 
             
 
@@ -225,8 +239,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -245,6 +263,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -255,10 +275,14 @@
 
           
 
+          
+
           The one-dimensional array that is the destination of the elements copied from the collection. The array must have zero-based indexing.</param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -293,8 +317,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -308,6 +336,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Collections.ICollection.IsSynchronized" />
+
+            
 
             
 
@@ -343,8 +373,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -358,6 +392,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Collections.ICollection.SyncRoot" />
+
+            
 
             
 

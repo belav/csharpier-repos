@@ -38,10 +38,14 @@
 
         
 
+        
+
          is introduced in the .NET Framework version 3.5.  For more information, see <format
          type="text/html">
           <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
         </format>
+
+        
 
         
 
@@ -57,10 +61,14 @@
 
         
 
+        
+
          delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event-handler delegates, see <format
          type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
         </format>
+
+        
 
         
 
@@ -79,8 +87,12 @@
 
         
 
+        
+
          event of an <see
          cref="T:System.ComponentModel.INotifyPropertyChanging" />
+
+        
 
         
 

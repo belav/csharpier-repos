@@ -39,6 +39,8 @@
 
             
 
+            
+
              class using the specified parameter information.</para
           >
         </summary>
@@ -49,8 +51,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Reflection.ParameterInfo" />
+
+          
 
           
 
@@ -86,11 +92,15 @@
 
             
 
+            
+
              class using the specified parameter information and whether to ignore by reference parameters.</para
           >
         </summary>
         <param name="info">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -103,10 +113,14 @@
 
           
 
+          
+
            indicating the parameter information to use. </param
         >
         <param name="ignoreByRefs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -142,6 +156,8 @@
 
             
 
+            
+
              class using the specified name and type name.</para
           >
         </summary>
@@ -152,10 +168,14 @@
 
           
 
+          
+
           The name of the parameter. </param
         >
         <param name="typeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -188,6 +208,8 @@
 
             
 
+            
+
              class using the specified name and type.</para
           >
         </summary>
@@ -198,10 +220,14 @@
 
           
 
+          
+
           The name of the parameter. </param
         >
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -239,6 +265,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -252,8 +280,12 @@
 
             
 
+            
+
              objects representing the specified array of <see
              cref="T:System.Reflection.ParameterInfo" />
+
+            
 
             
 
@@ -269,8 +301,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Reflection.ParameterInfo" />
+
+          
 
           
 
@@ -309,6 +345,8 @@
 
             
 
+            
+
              object, according to the specified value indicating whether to ignore by reference parameters.</para
           >
         </summary>
@@ -322,8 +360,12 @@
 
             
 
+            
+
              objects representing the specified array of <see
              cref="T:System.Reflection.ParameterInfo" />
+
+            
 
             
 
@@ -339,8 +381,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Reflection.ParameterInfo" />
+
+          
 
           
 
@@ -350,6 +396,8 @@
         >
         <param name="ignoreByRefs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

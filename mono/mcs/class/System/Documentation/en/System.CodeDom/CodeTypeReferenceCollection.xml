@@ -41,8 +41,12 @@
 
         
 
+        
+
          class provides a simple collection object that can be used to store a set of <see
          cref="T:System.CodeDom.CodeTypeReference" />
+
+        
 
         
 
@@ -56,6 +60,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.CodeDom.CodeTypeReference" />
+
+        
 
         
 
@@ -87,6 +93,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeTypeReferenceCollection" />
+
+            
 
             
 
@@ -128,8 +136,12 @@
 
             
 
+            
+
              class containing the specified array of <see
              cref="T:System.CodeDom.CodeTypeReference" />
+
+            
 
             
 
@@ -145,8 +157,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.CodeDom.CodeTypeReference" />
+
+          
 
           
 
@@ -187,6 +203,8 @@
 
             
 
+            
+
              class containing the elements of the specified source collection.</para
           >
         </summary>
@@ -197,8 +215,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeTypeReferenceCollection" />
+
+          
 
           
 
@@ -241,6 +263,8 @@
 
             
 
+            
+
              to the collection.</para
           >
         </summary>
@@ -255,8 +279,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeTypeReference" />
+
+          
 
           
 
@@ -296,6 +324,8 @@
 
             
 
+            
+
              to the collection using the specified data type name.</para
           >
         </summary>
@@ -306,8 +336,12 @@
 
           
 
+          
+
           The name of a data type for which to add a <see
            cref="T:System.CodeDom.CodeTypeReference" />
+
+          
 
           
 
@@ -347,6 +381,8 @@
 
             
 
+            
+
              to the collection using the specified data type.</para
           >
         </summary>
@@ -357,8 +393,12 @@
 
           
 
+          
+
           The data type for which to add a <see
            cref="T:System.CodeDom.CodeTypeReference" />
+
+          
 
           
 
@@ -401,6 +441,8 @@
 
             
 
+            
+
              array to the end of the collection.</para
           >
         </summary>
@@ -411,8 +453,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.CodeDom.CodeTypeReference" />
+
+          
 
           
 
@@ -455,6 +501,8 @@
 
             
 
+            
+
              to the end of the collection.</para
           >
         </summary>
@@ -465,8 +513,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeTypeReferenceCollection" />
+
+          
 
           
 
@@ -509,6 +561,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -517,6 +571,8 @@
           <para
             >true if the <see
              cref="T:System.CodeDom.CodeTypeReference" />
+
+            
 
             
 
@@ -532,8 +588,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeTypeReference" />
+
+          
 
           
 
@@ -577,11 +637,15 @@
 
             
 
+            
+
              at the specified index.</para
           >
         </summary>
         <param name="array">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -594,10 +658,14 @@
 
           
 
+          
+
            that is the destination of the values copied from the collection. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -640,6 +708,8 @@
 
             
 
+            
+
             , if it exists in the collection.</para
           >
         </summary>
@@ -648,6 +718,8 @@
           <para
             >The index of the specified <see
              cref="T:System.CodeDom.CodeTypeReference" />
+
+            
 
             
 
@@ -663,8 +735,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeTypeReference" />
+
+          
 
           
 
@@ -708,11 +784,15 @@
 
             
 
+            
+
              into the collection at the specified index.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -727,8 +807,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeTypeReference" />
+
+          
 
           
 
@@ -799,6 +883,8 @@
 
             
 
+            
+
              from the collection.</para
           >
         </summary>
@@ -809,8 +895,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeTypeReference" />
+
+          
 
           
 

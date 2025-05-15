@@ -27,8 +27,12 @@
 
         
 
+        
+
          in a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -78,6 +82,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -86,6 +92,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.DataGridView.ColumnStateChanged" />
+
+        
 
         
 
@@ -119,6 +127,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -129,8 +139,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridViewColumn" />
+
+          
 
           
 
@@ -145,8 +159,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 

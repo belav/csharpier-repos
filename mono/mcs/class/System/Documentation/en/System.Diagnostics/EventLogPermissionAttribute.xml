@@ -42,6 +42,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -82,6 +84,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -92,8 +96,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 
@@ -134,8 +142,12 @@
 
             
 
+            
+
              property and the requested access levels that are set through the <see
              cref="P:System.Diagnostics.EventLogPermissionAttribute.PermissionAccess" />
+
+            
 
             
 
@@ -149,6 +161,8 @@
           <para
             >An <see
              cref="T:System.Security.IPermission" />
+
+            
 
             
 

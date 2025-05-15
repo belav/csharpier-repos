@@ -32,8 +32,12 @@
 
         
 
+        
+
          class to programmatically control the &lt;td&gt; and &lt;th&gt; HTML elements in an <see
          cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
+
+        
 
         
 
@@ -49,8 +53,12 @@
 
         
 
+        
+
          class allows you to customize the appearance of a cell in a table by specifying the background color, the border color, the height, and the width. These attributes are set using the <see
          cref="P:System.Web.UI.HtmlControls.HtmlTableCell.BgColor" />
+
+        
 
         
 
@@ -63,6 +71,8 @@
 
         
 
+        
+
         , <see
          cref="P:System.Web.UI.HtmlControls.HtmlTableCell.Height" />
 
@@ -70,8 +80,12 @@
 
         
 
+        
+
         , and <see
          cref="P:System.Web.UI.HtmlControls.HtmlTableCell.Width" />
+
+        
 
         
 
@@ -87,6 +101,8 @@
 
         
 
+        
+
          property, while the <see
          cref="P:System.Web.UI.HtmlControls.HtmlTableCell.VAlign" />
 
@@ -94,8 +110,12 @@
 
         
 
+        
+
          property controls the vertical alignment. The <see
          cref="P:System.Web.UI.HtmlControls.HtmlTableCell.NoWrap" />
+
+        
 
         
 
@@ -111,6 +131,8 @@
 
         
 
+        
+
          or the <see
          cref="P:System.Web.UI.HtmlControls.HtmlTableCell.RowSpan" />
 
@@ -118,8 +140,12 @@
 
         
 
+        
+
          property, you can control the number of columns or rows that a cell occupies. For example, you can create a cell that occupies two columns in a table by setting the <see
          cref="P:System.Web.UI.HtmlControls.HtmlTableCell.ColSpan" />
+
+        
 
         
 
@@ -135,8 +161,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.HtmlControls.HtmlTableCell.#ctor" />
+
+        
 
         
 
@@ -155,6 +185,8 @@
 
           
 
+          
+
           .</para
         >
       </block>
@@ -164,6 +196,8 @@
       <para
         >Represents the &lt;td&gt; and &lt;th&gt; HTML elements in an <see
          cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
+
+        
 
         
 
@@ -190,8 +224,12 @@
 
             
 
+            
+
              class. This constructor is used to create an <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+
+            
 
             
 
@@ -202,6 +240,8 @@
           <para
             >The following table shows the initial property value for an instance of <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+
+            
 
             
 
@@ -242,6 +282,8 @@
 
             
 
+            
+
              class using default values.</para
           >
         </summary>
@@ -269,8 +311,12 @@
 
             
 
+            
+
              class. It allows you to create an <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+
+            
 
             
 
@@ -283,8 +329,12 @@
 
             
 
+            
+
              control. It is commonly used to create an <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+
+            
 
             
 
@@ -298,6 +348,8 @@
           <para
             >The following table shows the initial property value for an instance of <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+
+            
 
             
 
@@ -331,6 +383,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -347,11 +401,15 @@
 
             
 
+            
+
              class, using the specified tag name.</para
           >
         </summary>
         <param name="tagName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -384,8 +442,12 @@
 
             
 
+            
+
              property to specify the horizontal alignment of the content in a cell represented by an instance of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+
+            
 
             
 
@@ -402,6 +464,8 @@
 
               
 
+              
+
                class. To apply the same alignment to the cells of an entire row in the table, set the <see
                cref="P:System.Web.UI.HtmlControls.HtmlTableRow.Align" />
 
@@ -409,8 +473,12 @@
 
               
 
+              
+
                property of the row represented by an instance of the <see
                cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
+
+              
 
               
 
@@ -470,6 +538,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -506,8 +576,12 @@
 
             
 
+            
+
              property to specify the background color of the cell represented by an instance of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+
+            
 
             
 
@@ -523,10 +597,14 @@
 
             
 
+            
+
              property. For more information on HTML colors, see the <see
              cref="http://go.microsoft.com/fwlink/?linkid=37125"
               >World Wide Web Consortium (W3C) Web site</see
             >
+
+            
 
             
 
@@ -682,8 +760,12 @@
 
             
 
+            
+
              property can be determined from the <see
              cref="T:System.Drawing.KnownColor" />
+
+            
 
             
 
@@ -698,6 +780,8 @@
           <para
             >Gets or sets the background color of the cell represented by an instance of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+
+            
 
             
 
@@ -739,8 +823,12 @@
 
             
 
+            
+
              property to specify the border color of the cell represented by an instance of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+
+            
 
             
 
@@ -756,10 +844,14 @@
 
             
 
+            
+
              property. For more information on HTML colors, see the <see
              cref="http://go.microsoft.com/fwlink/?linkid=37125"
               >World Wide Web Consortium (W3C) Web</see
             >
+
+            
 
             
 
@@ -915,8 +1007,12 @@
 
             
 
+            
+
              property can be determined from the <see
              cref="T:System.Drawing.KnownColor" />
+
+            
 
             
 
@@ -931,6 +1027,8 @@
           <para
             >Gets or sets the border color of the cell represented by an instance of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+
+            
 
             
 
@@ -972,6 +1070,8 @@
 
             
 
+            
+
              class, use the <see
              cref="P:System.Web.UI.HtmlControls.HtmlTableCell.ColSpan" />
 
@@ -979,8 +1079,12 @@
 
             
 
+            
+
              property to specify the number of columns the cell occupies. This allows you to create a cell in the table that occupies more than one column. For example, suppose you have a table that contains two columns and two rows. You can create a table heading cell that spans both columns. Set the <see
              cref="P:System.Web.UI.HtmlControls.HtmlTableCell.ColSpan" />
+
+            
 
             
 
@@ -997,6 +1101,8 @@
           <para
             >Gets or sets the number of columns occupied by a cell represented by an instance of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+
+            
 
             
 
@@ -1038,8 +1144,12 @@
 
             
 
+            
+
              property to specify the height (in pixels) of the cell represented by an instance of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+
+            
 
             
 
@@ -1056,6 +1166,8 @@
           <para
             >Gets or sets the height (in pixels) of the cell represented by an instance of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+
+            
 
             
 
@@ -1097,8 +1209,12 @@
 
             
 
+            
+
              property to specify or determine whether the text in a cell represented by an instance of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+
+            
 
             
 
@@ -1112,6 +1228,8 @@
           <para
             >Gets or sets a value indicating whether the text in a cell represented by an instance of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+
+            
 
             
 
@@ -1164,6 +1282,8 @@
 
             
 
+            
+
              method provides additional formatting after calling the base class's <see
              cref="M:System.Web.UI.HtmlControls.HtmlContainerControl.RenderEndTag(System.Web.UI.HtmlTextWriter)" />
 
@@ -1171,8 +1291,12 @@
 
             
 
+            
+
              method. The additional formatting makes the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+
+            
 
             
 
@@ -1188,8 +1312,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+
+            
 
             
 
@@ -1203,6 +1331,8 @@
           <para
             >Renders the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+
+            
 
             
 
@@ -1236,6 +1366,8 @@
 
             
 
+            
+
              class, use the <see
              cref="P:System.Web.UI.HtmlControls.HtmlTableCell.RowSpan" />
 
@@ -1243,8 +1375,12 @@
 
             
 
+            
+
              property to specify the number of rows the cell occupies. This allows you to create a cell in the table that occupies more than one row. For example, suppose you have a table that contains two columns and two rows. You can create a column that overlaps both rows. Set the <see
              cref="P:System.Web.UI.HtmlControls.HtmlTableCell.RowSpan" />
+
+            
 
             
 
@@ -1261,6 +1397,8 @@
           <para
             >Gets or sets the number of rows occupied by a cell represented by an instance of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+
+            
 
             
 
@@ -1302,8 +1440,12 @@
 
             
 
+            
+
              property to specify the vertical alignment of the content in a cell represented by an instance of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+
+            
 
             
 
@@ -1320,6 +1462,8 @@
 
               
 
+              
+
                class. To apply the same vertical alignment to the cells of an entire row in the table, set the <see
                cref="P:System.Web.UI.HtmlControls.HtmlTableRow.VAlign" />
 
@@ -1327,8 +1471,12 @@
 
               
 
+              
+
                property of the row represented by an instance of the <see
                cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
+
+              
 
               
 
@@ -1388,6 +1536,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -1424,8 +1574,12 @@
 
             
 
+            
+
              property to specify the width (in pixels) of the cell represented by an instance of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+
+            
 
             
 
@@ -1442,6 +1596,8 @@
           <para
             >Gets or sets the width (in pixels) of the cell represented by an instance of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+
+            
 
             
 

@@ -37,8 +37,12 @@
 
         
 
+        
+
          has the same child matching semantics as <see
          cref="T:System.Security.Policy.UnionCodeGroup" />
+
+        
 
         
 
@@ -51,6 +55,8 @@
 
         
 
+        
+
          returns a permission set containing a dynamically-calculated <see
          cref="T:System.Security.Permissions.FileIOPermission" />
 
@@ -58,8 +64,12 @@
 
         
 
+        
+
          that grants file access to the directory from which the code is run; <see
          cref="T:System.Security.Policy.UnionCodeGroup" />
+
+        
 
         
 
@@ -106,10 +116,14 @@
 
             
 
+            
+
              method.</para
           >
           <para>
             <see cref="T:System.Security.Policy.FileCodeGroup" />
+
+            
 
             
 
@@ -122,8 +136,12 @@
 
             
 
+            
+
              that grants file access to the directory from which the code is run. The type of access granted is determined by the <paramref
              name="access" />
+
+            
 
             
 
@@ -142,11 +160,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="membershipCondition">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -161,6 +183,8 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.FileIOPermissionAccess" />
 
@@ -168,8 +192,12 @@
 
           
 
+          
+
            values. This value is used to construct the <see
            cref="T:System.Security.Permissions.FileIOPermission" />
+
+          
 
           
 
@@ -202,8 +230,12 @@
 
             
 
+            
+
              does not use <see
              cref="P:System.Security.Policy.FileCodeGroup.AttributeString" />
+
+            
 
             
 
@@ -311,6 +343,8 @@
         </returns>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -452,10 +486,14 @@
 
             
 
+            
+
              on the policy levels to determine which permissions to grant to loaded code from the resulting policy statements and the code request on the assembly.</para
           >
           <para>
             <see cref="T:System.Security.Policy.FileCodeGroup" />
+
+            
 
             
 
@@ -468,8 +506,12 @@
 
             
 
+            
+
              specified by <paramref
              name="evidence" />
+
+            
 
             
 
@@ -488,6 +530,8 @@
         </returns>
         <param name="evidence">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -529,6 +573,8 @@
 
             
 
+            
+
              uses union semantics and forms a permission set based on the <see
              cref="T:System.Security.Policy.Url" />
 
@@ -536,8 +582,12 @@
 
             
 
+            
+
              specified by <paramref
              name="evidence" />
+
+            
 
             
 
@@ -560,11 +610,15 @@
 
             
 
+            
+
              that is the root of the tree of matching code groups.</para
           >
         </returns>
         <param name="evidence">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -21,8 +21,12 @@
 
         
 
+        
+
          structure specifies the return values of the <see
          cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.GetTextMetrics(System.Drawing.IDeviceContext)" />
+
+        
 
         
 
@@ -261,8 +265,12 @@
 
             
 
+            
+
              plus the <see
              cref="P:System.Windows.Forms.VisualStyles.TextMetrics.Descent" />
+
+            
 
             
 
@@ -298,6 +306,8 @@
           <para
             >Gets or sets the amount of leading inside the bounds set by the <see
              cref="P:System.Windows.Forms.VisualStyles.TextMetrics.Height" />
+
+            
 
             
 

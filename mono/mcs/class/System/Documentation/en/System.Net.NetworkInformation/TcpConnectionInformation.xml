@@ -53,6 +53,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -61,6 +63,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.NetworkInformation.TcpConnectionInformation" />
+
+            
 
             
 
@@ -128,8 +132,12 @@
 
             
 
+            
+
              of this connection is <see
              cref="F:System.Net.NetworkInformation.TcpState.Listen" />
+
+            
 
             
 
@@ -169,6 +177,8 @@
           <para
             >The states for TCP connections are described in the <see
              cref="T:System.Net.NetworkInformation.TcpState" />
+
+            
 
             
 

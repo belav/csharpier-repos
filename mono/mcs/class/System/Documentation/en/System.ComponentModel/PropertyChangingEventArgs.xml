@@ -26,6 +26,8 @@
 
         
 
+        
+
          event. </para
       >
     </summary>
@@ -60,11 +62,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="propertyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

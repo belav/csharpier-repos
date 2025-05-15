@@ -21,8 +21,12 @@
 
         
 
+        
+
          class provides a set of static methods that can be used to render a button control. Rendering a control refers to drawing the user interface of a control. To draw a button, use one of the <see
          cref="Overload:System.Windows.Forms.ButtonRenderer.DrawButton" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          will draw the button with the current visual style. Otherwise, <see
          cref="Overload:System.Windows.Forms.ButtonRenderer.DrawButton" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          that is set to one of the elements exposed by the <see
          cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.Button.PushButton" />
+
+        
 
         
 
@@ -66,6 +78,8 @@
          type="text/html">
           <a href="a5b178ba-610e-46c4-a6c0-509c0886a744">Rendering Controls with Visual Styles</a>
         </format>
+
+        
 
         
 
@@ -111,8 +125,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -127,8 +145,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -143,8 +165,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.PushButtonState" />
+
+          
 
           
 
@@ -189,8 +215,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -205,8 +235,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -221,6 +255,8 @@
 
           
 
+          
+
           true to draw a focus rectangle on the button; otherwise, false.</param
         >
         <param name="state">
@@ -230,8 +266,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.PushButtonState" />
+
+          
 
           
 
@@ -278,8 +318,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -294,8 +338,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -310,8 +358,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -326,6 +378,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
 
@@ -333,8 +387,12 @@
 
           
 
+          
+
            that represents the dimensions of <paramref
            name="image" />
+
+          
 
           
 
@@ -349,6 +407,8 @@
 
           
 
+          
+
           true to draw a focus rectangle on the button; otherwise, false.</param
         >
         <param name="state">
@@ -358,8 +418,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.PushButtonState" />
+
+          
 
           
 
@@ -406,8 +470,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -422,8 +490,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -438,8 +510,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -454,6 +530,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
 
@@ -461,8 +539,12 @@
 
           
 
+          
+
            to apply to <paramref
            name="buttonText" />
+
+          
 
           
 
@@ -477,6 +559,8 @@
 
           
 
+          
+
           true to draw a focus rectangle on the button; otherwise, false.</param
         >
         <param name="state">
@@ -486,8 +570,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.PushButtonState" />
+
+          
 
           
 
@@ -535,8 +623,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -551,8 +643,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -567,8 +663,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -583,6 +683,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
 
@@ -590,8 +692,12 @@
 
           
 
+          
+
            to apply to <paramref
            name="buttonText" />
+
+          
 
           
 
@@ -606,6 +712,8 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.TextFormatFlags" />
 
@@ -613,8 +721,12 @@
 
           
 
+          
+
            values to apply to <paramref
            name="buttonText" />
+
+          
 
           
 
@@ -629,6 +741,8 @@
 
           
 
+          
+
           true to draw a focus rectangle on the button; otherwise, false.</param
         >
         <param name="state">
@@ -638,8 +752,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.PushButtonState" />
+
+          
 
           
 
@@ -688,8 +806,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -704,8 +826,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -720,8 +846,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -736,6 +866,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
 
@@ -743,8 +875,12 @@
 
           
 
+          
+
            to apply to <paramref
            name="buttonText" />
+
+          
 
           
 
@@ -759,8 +895,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -775,6 +915,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
 
@@ -782,8 +924,12 @@
 
           
 
+          
+
            that represents the dimensions of <paramref
            name="image" />
+
+          
 
           
 
@@ -798,6 +944,8 @@
 
           
 
+          
+
           true to draw a focus rectangle on the button; otherwise, false.</param
         >
         <param name="state">
@@ -807,8 +955,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.PushButtonState" />
+
+          
 
           
 
@@ -858,8 +1010,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -874,8 +1030,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -890,8 +1050,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -906,6 +1070,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
 
@@ -913,8 +1079,12 @@
 
           
 
+          
+
            to apply to <paramref
            name="buttonText" />
+
+          
 
           
 
@@ -929,6 +1099,8 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.TextFormatFlags" />
 
@@ -936,8 +1108,12 @@
 
           
 
+          
+
            values to apply to <paramref
            name="buttonText" />
+
+          
 
           
 
@@ -952,8 +1128,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -968,6 +1148,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
 
@@ -975,8 +1157,12 @@
 
           
 
+          
+
            that represents the dimensions of <paramref
            name="image" />
+
+          
 
           
 
@@ -991,6 +1177,8 @@
 
           
 
+          
+
           true to draw a focus rectangle on the button; otherwise, false.</param
         >
         <param name="state">
@@ -1000,8 +1188,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.PushButtonState" />
+
+          
 
           
 
@@ -1042,6 +1234,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
 
@@ -1049,8 +1243,12 @@
 
           
 
+          
+
            used to draw the background of the parent of <paramref
            name="childControl" />
+
+          
 
           
 
@@ -1065,8 +1263,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1076,6 +1278,8 @@
         >
         <param name="childControl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1118,8 +1322,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.PushButtonState" />
+
+          
 
           
 
@@ -1154,8 +1362,12 @@
 
             
 
+            
+
              property is true, the <see
              cref="T:System.Windows.Forms.ButtonRenderer" />
+
+            
 
             
 
@@ -1168,8 +1380,12 @@
 
             
 
+            
+
              property to determine the rendering style. If <see
              cref="P:System.Windows.Forms.ButtonRenderer.RenderMatchingApplicationState" />
+
+            
 
             
 

@@ -14,6 +14,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -326,11 +328,15 @@
 
           
 
+          
+
            representing when the next CRL will be available.</value
         >
         <remarks
           >The returned <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -417,11 +423,15 @@
 
           
 
+          
+
            indicating when this CRL was produced.</value
         >
         <remarks
           >The returned <see
            cref="T:System.DateTime" />
+
+          
 
           
 

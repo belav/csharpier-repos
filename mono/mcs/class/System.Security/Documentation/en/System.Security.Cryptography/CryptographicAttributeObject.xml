@@ -59,8 +59,12 @@
 
             
 
+            
+
              class using an attribute represented by the specified <see
              cref="T:System.Security.Cryptography.Oid" />
+
+            
 
             
 
@@ -76,8 +80,12 @@
 
           
 
+          
+
           The attribute to store in this <see
            cref="T:System.Security.Cryptography.CryptographicAttributeObject" />
+
+          
 
           
 
@@ -118,6 +126,8 @@
 
             
 
+            
+
              class using an attribute represented by the specified <see
              cref="T:System.Security.Cryptography.Oid" />
 
@@ -125,8 +135,12 @@
 
             
 
+            
+
              object and the set of values associated with that attribute represented by the specified <see
              cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
+
+            
 
             
 
@@ -142,8 +156,12 @@
 
           
 
+          
+
           The attribute to store in this <see
            cref="T:System.Security.Cryptography.CryptographicAttributeObject" />
+
+          
 
           
 
@@ -158,8 +176,12 @@
 
           
 
+          
+
           The set of values associated with the attribute represented by the <paramref
            name="oid" />
+
+          
 
           
 
@@ -197,6 +219,8 @@
 
             
 
+            
+
              object that specifies the object identifier for the attribute.</para
           >
         </summary>
@@ -228,6 +252,8 @@
           <para
             >Gets the <see
              cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
+
+            
 
             
 

@@ -37,8 +37,12 @@
 
         
 
+        
+
          belongs to a family of attributes that controls how the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -51,8 +55,12 @@
 
         
 
+        
+
          to any member of a class, the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -69,11 +77,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >You can override the behavior caused by the <see
          cref="T:System.Xml.Serialization.XmlIgnoreAttribute" />
+
+        
 
         
 
@@ -86,8 +98,12 @@
 
         
 
+        
+
          object, and setting its <see
          cref="P:System.Xml.Serialization.XmlAttributes.XmlIgnore" />
+
+        
 
         
 
@@ -100,8 +116,12 @@
 
         
 
+        
+
          the <see
          cref="T:System.Xml.Serialization.XmlAttributes" />
+
+        
 
         
 
@@ -114,8 +134,12 @@
 
         
 
+        
+
          class. Lastly, you must use the <see
          cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+
+        
 
         
 
@@ -128,6 +152,8 @@
 
         
 
+        
+
          class before you call the <see
          cref="M:System.Xml.Serialization.XmlSerializer.Serialize(System.IO.TextWriter,System.Object)" />
 
@@ -135,8 +161,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.Xml.Serialization.XmlSerializer.Deserialize(System.IO.Stream)" />
+
+        
 
         
 
@@ -154,8 +184,12 @@
 
         
 
+        
+
          occasionally generates the <see
          cref="T:System.Xml.Serialization.XmlIgnoreAttribute" />
+
+        
 
         
 
@@ -168,8 +202,12 @@
 
         
 
+        
+
         , where the <paramref
          name="fieldname" />
+
+        
 
         
 
@@ -182,8 +220,12 @@
 
         
 
+        
+
          sets and checks this special field to determine whether a value has been set for the field or property. Because the special field must not be serialized, the tool applies the <see
          cref="T:System.Xml.Serialization.XmlIgnoreAttribute" />
+
+        
 
         
 
@@ -201,12 +243,16 @@
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
         <para
           >You can use the word XmlIgnore in your code instead of the longer <see
            cref="T:System.Xml.Serialization.XmlIgnoreAttribute" />
+
+          
 
           
 
@@ -226,8 +272,12 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -259,6 +309,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Serialization.XmlIgnoreAttribute" />
+
+            
 
             
 

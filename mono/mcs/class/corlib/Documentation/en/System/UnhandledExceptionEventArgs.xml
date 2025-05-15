@@ -42,8 +42,12 @@
 
         
 
+        
+
          provides access to the exception object and a flag indicating whether the common language runtime is terminating. The <see
          cref="T:System.UnhandledExceptionEventArgs" />
+
+        
 
         
 
@@ -56,8 +60,12 @@
 
         
 
+        
+
          for the <see
          cref="E:System.AppDomain.UnhandledException" />
+
+        
 
         
 
@@ -70,6 +78,8 @@
          type="text/html">
           <a href="D98FD58B-FA4F-4598-8378-ADDF4355A115">[&lt;topic://cpconEventsDelegates&gt;]</a>
         </format>
+
+        
 
         
 
@@ -118,8 +128,12 @@
 
             
 
+            
+
              property using <paramref
              name="exception" />
+
+            
 
             
 
@@ -132,8 +146,12 @@
 
             
 
+            
+
              property using <paramref
              name="isTerminating" />
+
+            
 
             
 
@@ -152,6 +170,8 @@
 
             
 
+            
+
              class with the exception object and a common language runtime termination flag.</para
           >
         </summary>
@@ -162,10 +182,14 @@
 
           
 
+          
+
           The exception that is not handled. </param
         >
         <param name="isTerminating">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -208,8 +232,12 @@
 
             
 
+            
+
             , typically a <see
              cref="T:System.Exception" />
+
+            
 
             
 
@@ -259,11 +287,15 @@
 
             
 
+            
+
              if the
    system will end the current process as a result
    of the
    current unhandled exception; otherwise, <see
              langword="false" />
+
+            
 
             
 
@@ -279,6 +311,8 @@
              type="text/html">
               <a href="11294769-2e89-43cb-890e-ad4ad79cfbee">Exceptions in Managed Threads</a>
             </format>
+
+            
 
             
 

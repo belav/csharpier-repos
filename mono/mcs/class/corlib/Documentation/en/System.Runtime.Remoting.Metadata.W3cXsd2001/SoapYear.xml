@@ -67,6 +67,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -100,8 +102,12 @@
 
             
 
+            
+
              class with a specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -117,8 +123,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -157,6 +167,8 @@
 
             
 
+            
+
              class with a specified <see
              cref="T:System.DateTime" />
 
@@ -164,8 +176,12 @@
 
             
 
+            
+
              object and an integer that indicates whether <see
              cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapYear.Value" />
+
+            
 
             
 
@@ -181,8 +197,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -197,8 +217,12 @@
 
           
 
+          
+
           An integer that indicates whether <paramref
            name="value" />
+
+          
 
           
 
@@ -240,6 +264,8 @@
 
             
 
+            
+
              that indicates the XSD of the current SOAP type.</para
           >
         </returns>
@@ -272,6 +298,8 @@
           <para
             >The <see
              cref="M:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapYear.Parse(System.String)" />
+
+            
 
             
 
@@ -327,8 +355,12 @@
 
             
 
+            
+
              into a <see
              cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapYear" />
+
+            
 
             
 
@@ -347,8 +379,12 @@
 
             
 
+            
+
              object that is obtained from <paramref
              name="value" />
+
+            
 
             
 
@@ -364,8 +400,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -424,8 +464,12 @@
 
             
 
+            
+
              as a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -444,6 +488,8 @@
 
             
 
+            
+
              that is obtained from <see
              cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapYear.Value" />
 
@@ -451,8 +497,12 @@
 
             
 
+            
+
              in the format "yyyy" or "-yyyy" if <see
              cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapYear.Sign" />
+
+            
 
             
 

@@ -33,6 +33,8 @@
 
         
 
+        
+
          interface provides an interface that allows modification of the properties, events, and class-level attributes of a component at design time. This modification occurs through the set of descriptors that a component provides through a <see
          cref="T:System.ComponentModel.TypeDescriptor" />
 
@@ -40,8 +42,12 @@
 
         
 
+        
+
         . The type descriptor will query a component's site for the <see
          cref="T:System.ComponentModel.Design.ITypeDescriptorFilterService" />
+
+        
 
         
 
@@ -57,8 +63,12 @@
 
         
 
+        
+
          method. The filter service obtains a dictionary that contains property names and their property descriptors of type <see
          cref="T:System.ComponentModel.PropertyDescriptor" />
+
+        
 
         
 
@@ -110,6 +120,8 @@
 
         
 
+        
+
          determines if this set of properties is fixed. If this method returns true, the <see
          cref="T:System.ComponentModel.TypeDescriptor" />
 
@@ -117,8 +129,12 @@
 
         
 
+        
+
          for this component can cache the results. This cache is maintained until either the component is garbage collected or the <see
          cref="Overload:System.ComponentModel.TypeDescriptor.Refresh" />
+
+        
 
         
 
@@ -166,6 +182,8 @@
 
             
 
+            
+
              as the keys and the actual attribute as the value. Implementers of this service can add, remove, or alter existing attribute entries in the dictionary.</para
           >
         </remarks>
@@ -174,6 +192,8 @@
           <para
             >Filters the attributes that a component exposes through a <see
              cref="T:System.ComponentModel.TypeDescriptor" />
+
+            
 
             
 
@@ -193,10 +213,14 @@
 
           
 
+          
+
           The component to filter the attributes of. </param
         >
         <param name="attributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -239,6 +263,8 @@
 
             
 
+            
+
              objects as the values. Implementers of this service can add, remove, or alter event entries in the dictionary.</para
           >
         </remarks>
@@ -247,6 +273,8 @@
           <para
             >Filters the events that a component exposes through a <see
              cref="T:System.ComponentModel.TypeDescriptor" />
+
+            
 
             
 
@@ -266,10 +294,14 @@
 
           
 
+          
+
           The component to filter events for. </param
         >
         <param name="events">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -312,6 +344,8 @@
 
             
 
+            
+
              objects as the values. Implementers of this service can add, remove, or alter property entries in the dictionary.</para
           >
         </remarks>
@@ -320,6 +354,8 @@
           <para
             >Filters the properties that a component exposes through a <see
              cref="T:System.ComponentModel.TypeDescriptor" />
+
+            
 
             
 
@@ -339,10 +375,14 @@
 
           
 
+          
+
           The component to filter properties for. </param
         >
         <param name="properties">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -22,6 +22,8 @@
 
         
 
+        
+
          class to process XML Web service requests.</para
       >
     </summary>
@@ -39,6 +41,8 @@
           <para
             >The constructor for <see
              cref="T:System.Web.Services.Protocols.ServerProtocol" />
+
+            
 
             
 
@@ -79,11 +83,15 @@
 
             
 
+            
+
              in the cache using a key that is created from the specified protocol type and server type.</para
           >
         </summary>
         <param name="protocolType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -96,8 +104,12 @@
 
           
 
+          
+
            that is used to create the key to store <paramref
            name="value" />
+
+          
 
           
 
@@ -112,6 +124,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
 
@@ -119,8 +133,12 @@
 
           
 
+          
+
            that is used to create the key to store <paramref
            name="value" />
+
+          
 
           
 
@@ -135,8 +153,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -164,6 +186,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -203,6 +227,8 @@
 
             
 
+            
+
              that is stored in the cache using the key that was created from the specified protocol type and server type.</para
           >
         </summary>
@@ -216,6 +242,8 @@
 
             
 
+            
+
              that is stored in the cache using the key that was created from <paramref
              name="protocolType" />
 
@@ -223,8 +251,12 @@
 
             
 
+            
+
              and <paramref
              name="serverType" />
+
+            
 
             
 
@@ -240,6 +272,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
 
@@ -247,8 +281,12 @@
 
           
 
+          
+
            that is used to create the key to retrieve <paramref
            name="value" />
+
+          
 
           
 
@@ -263,6 +301,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
 
@@ -270,8 +310,12 @@
 
           
 
+          
+
            that is used to create the key to retrieve <paramref
            name="value" />
+
+          
 
           
 
@@ -304,6 +348,8 @@
 
             
 
+            
+
              object for the derived class.</para
           >
         </summary>
@@ -327,6 +373,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.HttpResponse" />
+
+            
 
             
 

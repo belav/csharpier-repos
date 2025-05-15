@@ -33,8 +33,12 @@
 
         
 
+        
+
          enumeration are used in the <paramref
          name="classContext" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          method. These values are the same as those defined in the COM CLSCTX enumeration, which is used as the <paramref
          name="dwClsContext" />
+
+        
 
         
 

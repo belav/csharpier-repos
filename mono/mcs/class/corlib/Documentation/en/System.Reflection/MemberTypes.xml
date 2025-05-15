@@ -35,6 +35,8 @@
 
         
 
+        
+
          and are useful in switch statements. MemberTypes matches CorTypeAttr as defined in the corhdr.h file.</para
       >
       <para>To obtain the MemberTypes value for a method: </para>
@@ -43,6 +45,8 @@
           <para
             >First get a <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -117,6 +121,8 @@
 
             
 
+            
+
              member. Hexadecimal value of 0x01.</para
           >
         </summary>
@@ -174,6 +180,8 @@
 
             
 
+            
+
              member. Hexadecimal value of 0x02.</para
           >
         </summary>
@@ -202,6 +210,8 @@
           <para
             >Specifies that the member is a field, representing a <see
              cref="T:System.Reflection.FieldInfo" />
+
+            
 
             
 
@@ -240,6 +250,8 @@
 
             
 
+            
+
              member. Hexadecimal value of 0x08.</para
           >
         </summary>
@@ -268,6 +280,8 @@
           <para
             >Specifies that the member is a nested type, extending <see
              cref="T:System.Reflection.MemberInfo" />
+
+            
 
             
 
@@ -306,6 +320,8 @@
 
             
 
+            
+
              member. Hexadecimal value of 0x10.</para
           >
         </summary>
@@ -334,6 +350,8 @@
           <para
             >Specifies that the member is a type, representing a <see
              cref="F:System.Reflection.MemberTypes.TypeInfo" />
+
+            
 
             
 

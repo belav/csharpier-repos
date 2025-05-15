@@ -52,8 +52,12 @@
 
         
 
+        
+
          stores data in a <see
          cref="T:System.Collections.Generic.List`1" />
+
+        
 
         
 
@@ -66,8 +70,12 @@
 
         
 
+        
+
          container can be recovered using the <see
          cref="P:System.Collections.Generic.SynchronizedCollection`1.Items" />
+
+        
 
         
 
@@ -80,8 +88,12 @@
 
         
 
+        
+
          property. It can only be set using one of the constructors that take the <paramref
          name="syncRoot" />
+
+        
 
         
 
@@ -119,6 +131,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -148,8 +162,12 @@
 
             
 
+            
+
              are created using the same <paramref
              name="syncRoot" />
+
+            
 
             
 
@@ -168,11 +186,15 @@
 
             
 
+            
+
              class with the object used to synchronize access to the thread-safe collection.</para
           >
         </summary>
         <param name="syncRoot">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -427,6 +449,8 @@
 
             
 
+            
+
              for objects of the type stored in the collection.</para
           >
         </returns>
@@ -606,6 +630,8 @@
 
           
 
+          
+
           The zero-based index of the element to be retrieved from the collection.</param
         >
       </Docs>
@@ -638,11 +664,15 @@
 
             
 
+            
+
              from the collection.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -747,8 +777,12 @@
 
           
 
+          
+
           The destination <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -761,10 +795,14 @@
 
           
 
+          
+
            copied from the collection.</param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -830,8 +868,12 @@
 
             
 
+            
+
              object can be set when creating the thread-safe collection using the <see
              cref="M:System.Collections.Generic.SynchronizedCollection`1.#ctor(System.Object)" />
+
+            
 
             
 
@@ -879,6 +921,8 @@
 
             
 
+            
+
              for objects of the type stored in the collection.</para
           >
         </returns>
@@ -920,6 +964,8 @@
 
           
 
+          
+
           The object to add to the collection.</param
         >
       </Docs>
@@ -956,11 +1002,15 @@
 
             
 
+            
+
              is found in the collection; otherwise false.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1002,11 +1052,15 @@
 
             
 
+            
+
              if found in the collection; otherwise, -1.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1044,8 +1098,12 @@
 
             
 
+            
+
              is equal to the number of elements in the collection, the item is appended to the list. If the <paramref
              name="index" />
+
+            
 
             
 
@@ -1065,8 +1123,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="value" />
+
+          
 
           
 
@@ -1076,6 +1138,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1188,6 +1252,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -25,6 +25,8 @@
 
         
 
+        
+
          are <see
          cref="T:System.Xml.Linq.XDocument" />
 
@@ -32,8 +34,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Xml.Linq.XElement" />
+
+        
 
         
 
@@ -75,6 +81,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -84,6 +92,8 @@
                 >Valid Content of XElement and XDocument Objects</a
               >
             </format>
+
+            
 
             
 
@@ -99,8 +109,12 @@
 
             
 
+            
+
              and the <see
              cref="E:System.Xml.Linq.XObject.Changing" />
+
+            
 
             
 
@@ -119,11 +133,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -166,6 +184,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -175,6 +195,8 @@
                 >Valid Content of XElement and XDocument Objects</a
               >
             </format>
+
+            
 
             
 
@@ -190,8 +212,12 @@
 
             
 
+            
+
              and the <see
              cref="E:System.Xml.Linq.XObject.Changing" />
+
+            
 
             
 
@@ -210,11 +236,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -251,6 +281,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -260,6 +292,8 @@
                 >Valid Content of XElement and XDocument Objects</a
               >
             </format>
+
+            
 
             
 
@@ -275,8 +309,12 @@
 
             
 
+            
+
              and the <see
              cref="E:System.Xml.Linq.XObject.Changing" />
+
+            
 
             
 
@@ -291,6 +329,8 @@
         </summary>
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -333,6 +373,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -342,6 +384,8 @@
                 >Valid Content of XElement and XDocument Objects</a
               >
             </format>
+
+            
 
             
 
@@ -357,8 +401,12 @@
 
             
 
+            
+
              and the <see
              cref="E:System.Xml.Linq.XObject.Changing" />
+
+            
 
             
 
@@ -373,6 +421,8 @@
         </summary>
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -410,6 +460,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -423,8 +475,12 @@
 
             
 
+            
+
              that can be used to add nodes to the <see
              cref="T:System.Xml.Linq.XContainer" />
+
+            
 
             
 
@@ -438,6 +494,8 @@
           <para
             >An <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -485,6 +543,8 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XNode" />
 
@@ -492,8 +552,12 @@
 
             
 
+            
+
              containing the descendant nodes of the <see
              cref="T:System.Xml.Linq.XContainer" />
+
+            
 
             
 
@@ -532,6 +596,8 @@
 
             
 
+            
+
             . See <see
              cref="M:System.Xml.Linq.XElement.DescendantsAndSelf" />
 
@@ -539,8 +605,12 @@
 
             
 
+            
+
              if you need to include the current <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -564,6 +634,8 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XElement" />
 
@@ -571,8 +643,12 @@
 
             
 
+            
+
              containing the descendant elements of the <see
              cref="T:System.Xml.Linq.XContainer" />
+
+            
 
             
 
@@ -617,6 +693,8 @@
 
             
 
+            
+
              are included in the collection.</para
           >
         </summary>
@@ -630,8 +708,12 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -644,8 +726,12 @@
 
             
 
+            
+
              that match the specified <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -661,8 +747,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XName" />
+
+          
 
           
 
@@ -704,8 +794,12 @@
 
             
 
+            
+
             , <see
              cref="Overload:System.Xml.Linq.XContainer.Add" />
+
+            
 
             
 
@@ -716,6 +810,8 @@
           <para
             >In contrast to <see
              cref="Overload:System.Xml.Linq.XContainer.Elements" />
+
+            
 
             
 
@@ -734,6 +830,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -747,8 +845,12 @@
 
             
 
+            
+
              that matches the specified <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -764,8 +866,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XName" />
+
+          
 
           
 
@@ -811,6 +917,8 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XElement" />
 
@@ -818,8 +926,12 @@
 
             
 
+            
+
              containing the child elements of this <see
              cref="T:System.Xml.Linq.XContainer" />
+
+            
 
             
 
@@ -864,6 +976,8 @@
 
             
 
+            
+
              are included in the collection.</para
           >
         </summary>
@@ -877,8 +991,12 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -891,8 +1009,12 @@
 
             
 
+            
+
              that have a matching <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -908,8 +1030,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XName" />
+
+          
 
           
 
@@ -1000,6 +1126,8 @@
 
             
 
+            
+
              of <see
              cref="T:System.Xml.Linq.XNode" />
 
@@ -1007,8 +1135,12 @@
 
             
 
+            
+
              containing the contents of this <see
              cref="T:System.Xml.Linq.XContainer" />
+
+            
 
             
 
@@ -1044,11 +1176,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="Overload:System.Xml.Linq.Extensions.Remove" />
+
+            
 
             
 
@@ -1064,8 +1200,12 @@
 
             
 
+            
+
              and the <see
              cref="E:System.Xml.Linq.XObject.Changing" />
+
+            
 
             
 
@@ -1111,6 +1251,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -1121,8 +1263,12 @@
 
             
 
+            
+
              and the <see
              cref="E:System.Xml.Linq.XObject.Changing" />
+
+            
 
             
 
@@ -1138,6 +1284,8 @@
         </summary>
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1184,6 +1332,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -1194,8 +1344,12 @@
 
             
 
+            
+
              and the <see
              cref="E:System.Xml.Linq.XObject.Changing" />
+
+            
 
             
 
@@ -1211,6 +1365,8 @@
         </summary>
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

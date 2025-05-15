@@ -25,8 +25,12 @@
 
         
 
+        
+
          property returns the <see
          cref="T:System.ConsoleSpecialKey" />
+
+        
 
         
 
@@ -42,6 +46,8 @@
 
         
 
+        
+
          plus BREAK (CTRL+BREAK) and <see
          cref="F:System.ConsoleModifiers.Control" />
 
@@ -49,8 +55,12 @@
 
         
 
+        
+
          plus <see
          cref="F:System.ConsoleKey.C" />
+
+        
 
         
 
@@ -91,6 +101,8 @@
 
             
 
+            
+
              modifier key plus the BREAK console key.</para
           >
         </summary>
@@ -122,8 +134,12 @@
 
             
 
+            
+
              modifier key plus the <see
              cref="F:System.ConsoleKey.C" />
+
+            
 
             
 

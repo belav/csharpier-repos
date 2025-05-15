@@ -38,6 +38,8 @@
 
         
 
+        
+
          algorithm is 160 bits.</para
       >
     </remarks>
@@ -46,6 +48,8 @@
       <para
         >Computes the <see
          cref="T:System.Security.Cryptography.SHA1" />
+
+        
 
         
 
@@ -80,6 +84,8 @@
           <para
             >Initializes a new instance of <see
              cref="T:System.Security.Cryptography.SHA1" />
+
+            
 
             
 
@@ -120,8 +126,12 @@
 
             
 
+            
+
              is <see
              cref="T:System.Security.Cryptography.SHA1CryptoServiceProvider" />
+
+            
 
             
 
@@ -140,6 +150,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -148,6 +160,8 @@
           <para
             >A new instance of <see
              cref="T:System.Security.Cryptography.SHA1" />
+
+            
 
             
 
@@ -191,6 +205,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -199,6 +215,8 @@
           <para
             >A new instance of <see
              cref="T:System.Security.Cryptography.SHA1" />
+
+            
 
             
 
@@ -214,8 +232,12 @@
 
           
 
+          
+
           The name of the specific implementation of <see
            cref="T:System.Security.Cryptography.SHA1" />
+
+          
 
           
 

@@ -40,6 +40,8 @@
 
         
 
+        
+
          can be used to declare a delegate type, or event handler. A delegate defines a method signature that can be used by calback methods or event handlers. Delegates can be declared at the namespace level or nested inside other types. Delegates cannot be nested inside other delegates.</para
       >
       <para
@@ -50,8 +52,12 @@
 
         
 
+        
+
          property specifies the data type of the event handler returned by the delegate. The <see
          cref="P:System.CodeDom.CodeTypeDelegate.Parameters" />
+
+        
 
         
 
@@ -66,8 +72,12 @@
 
         
 
+        
+
          should not be used for enumeration, interface, or type declaration. Instead, use <see
          cref="T:System.CodeDom.CodeTypeDeclaration" />
+
+        
 
         
 
@@ -84,8 +94,12 @@
 
           
 
+          
+
            method with the <see
            cref="F:System.CodeDom.Compiler.GeneratorSupport.DeclareDelegates" />
+
+          
 
           
 
@@ -127,6 +141,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -160,11 +176,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

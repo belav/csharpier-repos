@@ -39,8 +39,12 @@
 
         
 
+        
+
          class is a specialized type of <see
          cref="T:System.Windows.Forms.TextBox" />
+
+        
 
         
 
@@ -53,8 +57,12 @@
 
         
 
+        
+
          interface, allowing it to be hosted in a <see
          cref="T:System.Windows.Forms.DataGridViewTextBoxCell" />
+
+        
 
         
 
@@ -70,6 +78,8 @@
 
         
 
+        
+
          event to perform custom initialization of the editing control when a cell enters edit mode. To customize the display characteristics of the control, set the properties of the object returned by the <see
          cref="P:System.Windows.Forms.DataGridViewEditingControlShowingEventArgs.CellStyle" />
 
@@ -77,8 +87,12 @@
 
         
 
+        
+
          property rather than setting the properties of the control returned by the <see
          cref="P:System.Windows.Forms.DataGridViewEditingControlShowingEventArgs.Control" />
+
+        
 
         
 
@@ -92,6 +106,8 @@
       <para
         >Represents a text box control that can be hosted in a <see
          cref="T:System.Windows.Forms.DataGridViewTextBoxCell" />
+
+        
 
         
 
@@ -118,6 +134,8 @@
 
             
 
+            
+
              property to false. </para
           >
           <para
@@ -128,8 +146,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Windows.Forms.DataGridViewTextBoxColumn" />
+
+            
 
             
 
@@ -143,6 +165,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.DataGridViewTextBoxEditingControl" />
+
+            
 
             
 
@@ -182,8 +206,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+          
 
           
 
@@ -218,8 +246,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Windows.Forms.DataGridViewTextBoxCell" />
+
+            
 
             
 
@@ -232,8 +264,12 @@
 
             
 
+            
+
              or added to a <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -247,6 +283,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -282,8 +320,12 @@
 
             
 
+            
+
              property contains the actual data contained by the control. The data is the string shown in the text box of the control. In contrast, the <see
              cref="P:System.Windows.Forms.IDataGridViewEditingControl.EditingControlFormattedValue" />
+
+            
 
             
 
@@ -349,6 +391,8 @@
 
             
 
+            
+
              property is set to true to indicate that the owning cell's value has changed, and the cell may need to be updated to reflect this change in value. The owning cell or table will reset this property to false after it has updated itself.</para
           >
           <para>When the control is initialized, this property is set to false.</para>
@@ -388,6 +432,8 @@
 
             
 
+            
+
              should process.</para
           >
         </summary>
@@ -402,8 +448,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Keys" />
+
+          
 
           
 
@@ -418,6 +468,8 @@
 
           
 
+          
+
           true when the <see
            cref="T:System.Windows.Forms.DataGridView" />
 
@@ -425,8 +477,12 @@
 
           
 
+          
+
            wants to process the <paramref
            name="keyData" />
+
+          
 
           
 
@@ -457,6 +513,8 @@
           <para
             >Gets the cursor used when the mouse pointer is over the <see
              cref="P:System.Windows.Forms.DataGridView.EditingPanel" />
+
+            
 
             
 
@@ -499,6 +557,8 @@
 
             
 
+            
+
              that represents the formatted version of the cell contents.</para
           >
         </returns>
@@ -509,8 +569,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.DataGridViewDataErrorContexts" />
+
+          
 
           
 
@@ -567,8 +631,12 @@
 
             
 
+            
+
              event and notifies the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -579,6 +647,8 @@
         </summary>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -612,6 +682,8 @@
         </summary>
         <param name="selectAll">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

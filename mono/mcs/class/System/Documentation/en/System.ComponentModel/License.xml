@@ -37,6 +37,8 @@
 
         
 
+        
+
          for the licenses they grant when the component is disposed or finalized.</para
       >
     </remarks>
@@ -67,6 +69,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.License" />
+
+            
 
             
 
@@ -104,11 +108,15 @@
 
             
 
+            
+
              for the licenses that they grant when the component is disposed of or finalized.</para
           >
           <para
             >A <see
              cref="T:System.ComponentModel.LicenseProvider" />
+
+            
 
             
 
@@ -124,8 +132,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.ComponentModel.License" />
+
+            
 
             
 
@@ -138,8 +150,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.ComponentModel.License" />
+
+            
 
             
 
@@ -152,8 +168,12 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.ComponentModel.License" />
+
+            
 
             
 
@@ -170,8 +190,12 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.ComponentModel.License" />
+
+              
 
               
 
@@ -184,8 +208,12 @@
 
               
 
+              
+
                is using will not be freed until garbage collection calls the <see
                cref="T:System.ComponentModel.License" />
+
+              
 
               
 
@@ -225,8 +253,12 @@
 
             
 
+            
+
              can use any Unicode character string as a license key. The <see
              cref="P:System.ComponentModel.License.LicenseKey" />
+
+            
 
             
 

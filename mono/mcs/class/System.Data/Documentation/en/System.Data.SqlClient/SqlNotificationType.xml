@@ -20,6 +20,8 @@
 
         
 
+        
+
          enumeration is referenced by an instance of the <see
          cref="T:System.Data.SqlClient.SqlNotificationEventArgs" />
 
@@ -27,8 +29,12 @@
 
         
 
+        
+
          class. This information is provided when a notification event is fired with the <see
          cref="T:System.Data.SqlClient.SqlDependency" />
+
+        
 
         
 
@@ -47,8 +53,12 @@
 
         
 
+        
+
          event handler through the <see
          cref="T:System.Data.SqlClient.SqlNotificationEventArgs" />
+
+        
 
         
 
@@ -72,6 +82,8 @@
           <para
             >Data on the server being monitored changed. Use the <see
              cref="T:System.Data.SqlClient.SqlNotificationInfo" />
+
+            
 
             
 
@@ -103,8 +115,12 @@
 
             
 
+            
+
              object's <see
              cref="T:System.Data.SqlClient.SqlNotificationInfo" />
+
+            
 
             
 

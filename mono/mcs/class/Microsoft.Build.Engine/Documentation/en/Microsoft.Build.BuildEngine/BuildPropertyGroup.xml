@@ -28,10 +28,14 @@
 
         
 
+        
+
          object can represent a <format
          type="text/html">
           <a href="ff1e6c68-b9a1-4263-a1ce-dc3b829a64d4">PropertyGroup</a>
         </format>
+
+        
 
         
 
@@ -45,6 +49,8 @@
       <para
         >Represents a collection of <see
          cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+
+        
 
         
 
@@ -67,6 +73,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+
+            
 
             
 
@@ -106,8 +114,12 @@
 
             
 
+            
+
              with the specified <see
              cref="P:Microsoft.Build.BuildEngine.BuildProperty.Name" />
+
+            
 
             
 
@@ -120,8 +132,12 @@
 
             
 
+            
+
              to the <see
              cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+
+            
 
             
 
@@ -140,11 +156,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="propertyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -157,8 +177,12 @@
 
           
 
+          
+
            property value to assign the new <see
            cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+
+          
 
           
 
@@ -173,6 +197,8 @@
 
           
 
+          
+
           The <see
            cref="P:Microsoft.Build.BuildEngine.BuildProperty.Value" />
 
@@ -180,8 +206,12 @@
 
           
 
+          
+
            property value to assign the new <see
            cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+
+          
 
           
 
@@ -221,8 +251,12 @@
 
             
 
+            
+
              with the specified <see
              cref="P:Microsoft.Build.BuildEngine.BuildProperty.Name" />
+
+            
 
             
 
@@ -235,8 +269,12 @@
 
             
 
+            
+
              to the <see
              cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+
+            
 
             
 
@@ -255,11 +293,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="propertyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -272,8 +314,12 @@
 
           
 
+          
+
            property value to assign the new <see
            cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+
+          
 
           
 
@@ -288,6 +334,8 @@
 
           
 
+          
+
           The <see
            cref="P:Microsoft.Build.BuildEngine.BuildProperty.Value" />
 
@@ -295,8 +343,12 @@
 
           
 
+          
+
            property value to assign the new <see
            cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+
+          
 
           
 
@@ -311,8 +363,12 @@
 
           
 
+          
+
           true to treat the <paramref
            name="propertyValue" />
+
+          
 
           
 
@@ -345,6 +401,8 @@
 
             
 
+            
+
              property value and all <see
              cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
 
@@ -352,8 +410,12 @@
 
             
 
+            
+
              objects from the <see
              cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+
+            
 
             
 
@@ -391,6 +453,8 @@
 
             
 
+            
+
              references the same property group as the original. Modifications a shallow copy will be reflected in both copies.</para
           >
           <para
@@ -401,8 +465,12 @@
 
             
 
+            
+
              creates a new XML element to reference so that both copies of the <see
              cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+
+            
 
             
 
@@ -418,10 +486,14 @@
 
             
 
+            
+
              corresponds directly to a <format
              type="text/html">
               <a href="ff1e6c68-b9a1-4263-a1ce-dc3b829a64d4">PropertyGroup</a>
             </format>
+
+            
 
             
 
@@ -440,6 +512,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -448,6 +522,8 @@
           <para
             >A copy of the <see
              cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+
+            
 
             
 
@@ -463,8 +539,12 @@
 
           
 
+          
+
           true to create a deep copy of the <see
            cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+
+          
 
           
 
@@ -497,6 +577,8 @@
 
             
 
+            
+
              attribute value of the property group.</para
           >
         </summary>
@@ -524,10 +606,14 @@
 
             
 
+            
+
              object can represent a <format
              type="text/html">
               <a href="ff1e6c68-b9a1-4263-a1ce-dc3b829a64d4">PropertyGroup</a>
             </format>
+
+            
 
             
 
@@ -546,8 +632,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+
+            
 
             
 
@@ -583,8 +673,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+
+            
 
             
 
@@ -603,6 +697,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -616,8 +712,12 @@
 
             
 
+            
+
              for the entire <see
              cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+
+            
 
             
 
@@ -699,8 +799,12 @@
 
             
 
+            
+
              from the <see
              cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+
+            
 
             
 
@@ -736,6 +840,8 @@
 
             
 
+            
+
              with the specified <see
              cref="P:Microsoft.Build.BuildEngine.BuildProperty.Name" />
 
@@ -743,8 +849,12 @@
 
             
 
+            
+
              from the <see
              cref="T:Microsoft.Build.BuildEngine.BuildPropertyGroup" />
+
+            
 
             
 
@@ -760,6 +870,8 @@
 
           
 
+          
+
           The <see
            cref="P:Microsoft.Build.BuildEngine.BuildProperty.Name" />
 
@@ -767,8 +879,12 @@
 
           
 
+          
+
            value of the <see
            cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+
+          
 
           
 
@@ -807,6 +923,8 @@
 
             
 
+            
+
              of the <see
              cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
 
@@ -814,8 +932,12 @@
 
             
 
+            
+
              with the specified <see
              cref="P:Microsoft.Build.BuildEngine.BuildProperty.Name" />
+
+            
 
             
 
@@ -831,6 +953,8 @@
 
           
 
+          
+
           The <see
            cref="P:Microsoft.Build.BuildEngine.BuildProperty.Name" />
 
@@ -838,8 +962,12 @@
 
           
 
+          
+
            property value of the <see
            cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+
+          
 
           
 
@@ -854,6 +982,8 @@
 
           
 
+          
+
           The <see
            cref="P:Microsoft.Build.BuildEngine.BuildProperty.Value" />
 
@@ -861,8 +991,12 @@
 
           
 
+          
+
            property value to assign the <see
            cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+
+          
 
           
 
@@ -902,6 +1036,8 @@
 
             
 
+            
+
              of the <see
              cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
 
@@ -909,8 +1045,12 @@
 
             
 
+            
+
              with the specified <see
              cref="P:Microsoft.Build.BuildEngine.BuildProperty.Name" />
+
+            
 
             
 
@@ -926,6 +1066,8 @@
 
           
 
+          
+
           The <see
            cref="P:Microsoft.Build.BuildEngine.BuildProperty.Name" />
 
@@ -933,8 +1075,12 @@
 
           
 
+          
+
            property value of the <see
            cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+
+          
 
           
 
@@ -949,6 +1095,8 @@
 
           
 
+          
+
           The <see
            cref="P:Microsoft.Build.BuildEngine.BuildProperty.Value" />
 
@@ -956,8 +1104,12 @@
 
           
 
+          
+
            property value to assign the <see
            cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+
+          
 
           
 
@@ -972,8 +1124,12 @@
 
           
 
+          
+
           true to treat the <paramref
            name="propertyValue" />
+
+          
 
           
 

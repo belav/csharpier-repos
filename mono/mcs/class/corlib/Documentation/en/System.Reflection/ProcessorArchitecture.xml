@@ -30,8 +30,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Reflection.ImageFileMachine" />
+
+        
 
         
 
@@ -44,6 +48,8 @@
 
         
 
+        
+
          is the set of combinations of <see
          cref="T:System.Reflection.PortableExecutableKinds" />
 
@@ -51,8 +57,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Reflection.ImageFileMachine" />
+
+        
 
         
 

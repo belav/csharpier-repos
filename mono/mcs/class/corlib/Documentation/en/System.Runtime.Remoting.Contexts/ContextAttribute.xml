@@ -47,8 +47,12 @@
 
         
 
+        
+
          class is the root for all context attributes. Simple <see
          cref="T:System.Runtime.Remoting.Contexts.Context" />
+
+        
 
         
 
@@ -61,8 +65,12 @@
 
         
 
+        
+
          with the context attribute and the context property being in the class. For more specialized or more sophisticated needs, the context attribute can derive from <see
          cref="T:System.Runtime.Remoting.Contexts.ContextAttribute" />
+
+        
 
         
 
@@ -74,6 +82,8 @@
             >[&lt;topic://cpconExtendingMetadataUsingAttributes&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -92,8 +102,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Runtime.Remoting.Contexts.IContextProperty" />
+
+        
 
         
 
@@ -132,11 +146,15 @@
 
             
 
+            
+
              class with the specified name.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -201,11 +219,15 @@
 
             
 
+            
+
              is not null and if the object names are equivalent; otherwise, false.</para
           >
         </returns>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -252,6 +274,8 @@
 
           
 
+          
+
           The context to freeze. </param
         >
       </Docs>
@@ -284,6 +308,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -292,6 +318,8 @@
           <para
             >The hashcode for this instance of <see
              cref="T:System.Runtime.Remoting.Contexts.ContextAttribute" />
+
+            
 
             
 
@@ -337,8 +365,12 @@
 
             
 
+            
+
              class is an implementation of an <see
              cref="T:System.Runtime.Remoting.Contexts.IContextProperty" />
+
+            
 
             
 
@@ -351,8 +383,12 @@
 
             
 
+            
+
              method adds the property to the given <see
              cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
+
+            
 
             
 
@@ -372,8 +408,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
+
+          
 
           
 
@@ -425,6 +465,8 @@
 
           
 
+          
+
           The context in which to check. </param
         >
         <param name="ctorMsg">
@@ -434,8 +476,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
+
+          
 
           
 
@@ -477,12 +523,16 @@
 
             
 
+            
+
              property of the new context and determine whether it is compatible with these other context properties.</para
           >
           <block subset="none" type="note">
             <para
               >By default, the <see
                cref="M:System.Runtime.Remoting.Contexts.ContextAttribute.IsNewContextOK(System.Runtime.Remoting.Contexts.Context)" />
+
+              
 
               
 
@@ -502,6 +552,8 @@
         </returns>
         <param name="newCtx">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -530,6 +582,8 @@
           <para
             >Default implementation of this property provides <see
              cref="F:System.Runtime.Remoting.Contexts.ContextAttribute.AttributeName" />
+
+            
 
             
 

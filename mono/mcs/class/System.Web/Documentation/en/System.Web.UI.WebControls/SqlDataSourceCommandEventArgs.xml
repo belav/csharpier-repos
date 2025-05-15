@@ -27,6 +27,8 @@
 
         
 
+        
+
         , <see
          cref="E:System.Web.UI.WebControls.SqlDataSource.Inserting" />
 
@@ -34,8 +36,12 @@
 
         
 
+        
+
         , or <see
          cref="E:System.Web.UI.WebControls.SqlDataSource.Deleting" />
+
+        
 
         
 
@@ -51,8 +57,12 @@
 
         
 
+        
+
          class is derived from the <see
          cref="T:System.ComponentModel.CancelEventArgs" />
+
+        
 
         
 
@@ -65,8 +75,12 @@
 
         
 
+        
+
          database command by setting the <see
          cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+
+        
 
         
 
@@ -79,8 +93,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Data.Common.DbCommand.Parameters" />
+
+        
 
         
 
@@ -93,8 +111,12 @@
 
         
 
+        
+
          object exposed by the <see
          cref="P:System.Web.UI.WebControls.SqlDataSourceCommandEventArgs.Command" />
+
+        
 
         
 
@@ -110,8 +132,12 @@
 
         
 
+        
+
          class is used in the <see
          cref="M:System.Web.UI.WebControls.SqlDataSourceView.OnUpdating(System.Web.UI.WebControls.SqlDataSourceCommandEventArgs)" />
+
+        
 
         
 
@@ -124,8 +150,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Web.UI.WebControls.SqlDataSourceView.OnDeleting(System.Web.UI.WebControls.SqlDataSourceCommandEventArgs)" />
+
+        
 
         
 
@@ -138,8 +168,12 @@
 
         
 
+        
+
          database command before it is run. The <see
          cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+        
 
         
 
@@ -152,8 +186,12 @@
 
         
 
+        
+
          and event handler classes, to better guide you to the various events that correspond to the lifecycle of a data operation using the <see
          cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+        
 
         
 
@@ -184,6 +222,8 @@
 
               
 
+              
+
                occurs before the data is retrieved.</para
             >
           </term>
@@ -207,6 +247,8 @@
 
               
 
+              
+
               , <see
                cref="E:System.Web.UI.WebControls.SqlDataSource.Updating" />
 
@@ -214,8 +256,12 @@
 
               
 
+              
+
               , <see
                cref="E:System.Web.UI.WebControls.SqlDataSource.Deleting" />
+
+              
 
               
 
@@ -244,8 +290,12 @@
 
               
 
+              
+
               , <see
                cref="E:System.Web.UI.WebControls.SqlDataSource.Inserted" />
+
+              
 
               
 
@@ -258,8 +308,12 @@
 
               
 
+              
+
               , <see
                cref="E:System.Web.UI.WebControls.SqlDataSource.Deleted" />
+
+              
 
               
 
@@ -291,8 +345,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Web.UI.WebControls.SqlDataSource.Deleting" />
+
+        
 
         
 
@@ -305,8 +363,12 @@
 
         
 
+        
+
          events of the <see
          cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+        
 
         
 
@@ -339,11 +401,15 @@
 
             
 
+            
+
              class, using the specified database command object.</para
           >
         </summary>
         <param name="command">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -356,8 +422,12 @@
 
           
 
+          
+
            object that represents the cancelable <see
            cref="M:System.Web.UI.WebControls.SqlDataSource.Update" />
+
+          
 
           
 
@@ -370,8 +440,12 @@
 
           
 
+          
+
           , or <see
            cref="M:System.Web.UI.WebControls.SqlDataSource.Delete" />
+
+          
 
           
 
@@ -403,8 +477,12 @@
 
             
 
+            
+
             , <see
              cref="E:System.Web.UI.WebControls.SqlDataSource.Inserting" />
+
+            
 
             
 
@@ -417,8 +495,12 @@
 
             
 
+            
+
              event to examine and manipulate the properties of the <see
              cref="T:System.Data.Common.DbCommand" />
+
+            
 
             
 
@@ -431,8 +513,12 @@
 
             
 
+            
+
              control. The connection to the underlying data source is not yet open when the event handler delegate is called. Therefore, you cannot cancel the database operation by calling the <see
              cref="M:System.Data.Common.DbCommand.Cancel" />
+
+            
 
             
 
@@ -445,6 +531,8 @@
 
             
 
+            
+
              object directly. However, you can cancel the database operation by setting the <see
              cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
 
@@ -452,8 +540,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.SqlDataSourceCommandEventArgs" />
+
+            
 
             
 

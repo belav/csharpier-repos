@@ -32,6 +32,8 @@
 
         
 
+        
+
          class and its members are not intended for use as a stand-alone component, but as the class from which other collection classes derive standard functionality.</para
       >
     </remarks>
@@ -57,6 +59,8 @@
 
             
 
+            
+
              class and its members are not intended for use as a stand-alone component, but as the class from which other collection classes derive standard functionality.</para
           >
         </remarks>
@@ -65,6 +69,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.InternalDataCollectionBase" />
+
+            
 
             
 
@@ -101,6 +107,8 @@
 
             
 
+            
+
              class and its members are not intended for use as a stand-alone component, but as the class from which other collection classes derive standard functionality.</para
           >
         </remarks>
@@ -114,6 +122,8 @@
 
             
 
+            
+
              to a one-dimensional <see
              cref="T:System.Array" />
 
@@ -121,8 +131,12 @@
 
             
 
+            
+
             , starting at the specified <see
              cref="T:System.Data.InternalDataCollectionBase" />
+
+            
 
             
 
@@ -138,6 +152,8 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
 
@@ -145,8 +161,12 @@
 
           
 
+          
+
            to copy the current <see
            cref="T:System.Data.InternalDataCollectionBase" />
+
+          
 
           
 
@@ -161,8 +181,12 @@
 
           
 
+          
+
           The destination <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -189,6 +213,8 @@
           <para
             >The <see
              cref="T:System.Windows.Forms.BaseCollection" />
+
+            
 
             
 
@@ -233,6 +259,8 @@
 
             
 
+            
+
              class and its members are not intended for use as a stand-alone component, but as the class from which other collection classes derive standard functionality.</para
           >
         </remarks>
@@ -246,6 +274,8 @@
 
             
 
+            
+
              for the collection.</para
           >
         </summary>
@@ -254,6 +284,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -286,6 +318,8 @@
 
             
 
+            
+
              class and its members are not intended for use as a stand-alone component, but as the class from which other collection classes derive standard functionality.</para
           >
         </remarks>
@@ -294,6 +328,8 @@
           <para
             >Gets a value that indicates whether the <see
              cref="T:System.Data.InternalDataCollectionBase" />
+
+            
 
             
 
@@ -331,6 +367,8 @@
 
             
 
+            
+
              class and its members are not intended for use as a stand-alone component, but as the class from which other collection classes derive standard functionality.</para
           >
         </remarks>
@@ -339,6 +377,8 @@
           <para
             >Gets a value that indicates whether the <see
              cref="T:System.Data.InternalDataCollectionBase" />
+
+            
 
             
 
@@ -379,6 +419,8 @@
 
             
 
+            
+
              class and its members are not intended for use as a stand-alone component, but as the class from which other collection classes derive standard functionality.</para
           >
         </remarks>
@@ -405,6 +447,8 @@
           <para
             >The <see
              cref="T:System.Windows.Forms.BaseCollection" />
+
+            
 
             
 

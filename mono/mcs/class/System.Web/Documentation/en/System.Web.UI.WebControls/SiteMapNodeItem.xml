@@ -28,8 +28,12 @@
 
         
 
+        
+
          control is a <see
          cref="T:System.Web.UI.WebControls.CompositeControl" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
          control works directly with the <see
          cref="T:System.Web.SiteMap" />
+
+        
 
         
 
@@ -56,8 +64,12 @@
 
         
 
+        
+
          objects, the <see
          cref="T:System.Web.SiteMapNode" />
+
+        
 
         
 
@@ -70,8 +82,12 @@
 
         
 
+        
+
          class is a Web server control wrapper for the <see
          cref="T:System.Web.SiteMapNode" />
+
+        
 
         
 
@@ -84,8 +100,12 @@
 
         
 
+        
+
          control to display <see
          cref="T:System.Web.SiteMapNode" />
+
+        
 
         
 
@@ -101,8 +121,12 @@
 
         
 
+        
+
          control maintains the site map nodes in its <see
          cref="P:System.Web.UI.Control.Controls" />
+
+        
 
         
 
@@ -115,6 +139,8 @@
 
         
 
+        
+
          can render its child controls with different styles, templates, and orders, it must be able to distinguish between functionally different types of nodes, regardless of display order. For this reason, each <see
          cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
 
@@ -122,8 +148,12 @@
 
         
 
+        
+
          is created with a specific type. (Possible types are listed in the <see
          cref="T:System.Web.UI.WebControls.SiteMapNodeItemType" />
+
+        
 
         
 
@@ -139,8 +169,12 @@
 
         
 
+        
+
          class directly in your code only if you plan to extend the <see
          cref="T:System.Web.UI.WebControls.SiteMapPath" />
+
+        
 
         
 
@@ -159,6 +193,8 @@
 
         
 
+        
+
          class is used by the <see
          cref="T:System.Web.UI.WebControls.SiteMapPath" />
 
@@ -166,8 +202,12 @@
 
         
 
+        
+
          control to functionally represent a <see
          cref="T:System.Web.SiteMapNode" />
+
+        
 
         
 
@@ -200,8 +240,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.Web.UI.WebControls.PathDirection.RootToCurrent" />
+
+            
 
             
 
@@ -214,8 +258,12 @@
 
             
 
+            
+
              collection. However, if the <see
              cref="P:System.Web.UI.WebControls.SiteMapPath.PathDirection" />
+
+            
 
             
 
@@ -228,8 +276,12 @@
 
             
 
+            
+
             , each deeper-level node must be inserted at the beginning of the <see
              cref="P:System.Web.UI.Control.Controls" />
+
+            
 
             
 
@@ -248,8 +300,12 @@
 
             
 
+            
+
              class, using the specified index and <see
              cref="T:System.Web.UI.WebControls.SiteMapNodeItemType" />
+
+            
 
             
 
@@ -265,8 +321,12 @@
 
           
 
+          
+
           The index in the <see
            cref="P:System.Web.UI.Control.Controls" />
+
+          
 
           
 
@@ -279,8 +339,12 @@
 
           
 
+          
+
            control uses to track the <see
            cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+
+          
 
           
 
@@ -295,6 +359,8 @@
 
           
 
+          
+
           The functional type of <see
            cref="T:System.Web.SiteMapNode" />
 
@@ -302,8 +368,12 @@
 
           
 
+          
+
            that this <see
            cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+
+          
 
           
 
@@ -336,8 +406,12 @@
 
             
 
+            
+
              control uses to track and manage the <see
              cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+
+            
 
             
 
@@ -372,6 +446,8 @@
 
             
 
+            
+
              objects that have a <see
              cref="F:System.Web.UI.WebControls.SiteMapNodeItemType.PathSeparator" />
 
@@ -379,8 +455,12 @@
 
             
 
+            
+
              type are not bound to a corresponding <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -394,6 +474,8 @@
           <para
             >Retrieves the functional type of the <see
              cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+
+            
 
             
 
@@ -435,6 +517,8 @@
 
             
 
+            
+
              property.</para
           >
         </summary>
@@ -445,8 +529,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.SiteMapNodeItemType" />
+
+          
 
           
 
@@ -478,8 +566,12 @@
 
             
 
+            
+
              property gets or sets the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -492,8 +584,12 @@
 
             
 
+            
+
              is bound to. <see
              cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+
+            
 
             
 
@@ -506,8 +602,12 @@
 
             
 
+            
+
              type are not bound to a corresponding <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -526,8 +626,12 @@
 
             
 
+            
+
              object that the <see
              cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+
+            
 
             
 
@@ -565,8 +669,12 @@
 
             
 
+            
+
              property to access the data item represented by a <see
              cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+
+            
 
             
 
@@ -582,6 +690,8 @@
 
             
 
+            
+
              member is an explicit interface member implementation. It can be used only when the <see
              cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
 
@@ -589,8 +699,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IDataItemContainer" />
+
+            
 
             
 
@@ -629,8 +743,12 @@
 
             
 
+            
+
              property to determine the index for a <see
              cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+
+            
 
             
 
@@ -646,6 +764,8 @@
 
             
 
+            
+
              member is an explicit interface member implementation. It can be used only when the <see
              cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
 
@@ -653,8 +773,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IDataItemContainer" />
+
+            
 
             
 
@@ -693,8 +817,12 @@
 
             
 
+            
+
              property to determine the index for a <see
              cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
+
+            
 
             
 
@@ -710,6 +838,8 @@
 
             
 
+            
+
              member is an explicit interface member implementation. It can be used only when the <see
              cref="T:System.Web.UI.WebControls.SiteMapNodeItem" />
 
@@ -717,8 +847,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IDataItemContainer" />
+
+            
 
             
 

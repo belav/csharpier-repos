@@ -8,8 +8,12 @@
 
     
 
+    
+
      P, and a <non_terminal
      where="24.2">named-argument-list</non_terminal>
+
+    
 
     
 
@@ -25,11 +29,15 @@
 
         
 
+        
+
          of the form new T(P), using the instance constructor C as determined at compile-time. These steps either result in an exception, or produce an instance of T. Call this instance O. </list_item
       >
       <list_item
         > For each <non_terminal
          where="24.2">named-argument</non_terminal>
+
+        
 
         
 
@@ -46,11 +54,15 @@
 
           
 
+          
+
            Arg. If Name does not identify a non-static public read-write field or property on O, then an exception is thrown. </list_item
         >
         <list_item
           > Let Value be the result of evaluating the <non_terminal
            where="24.2">attribute-argument-expression</non_terminal>
+
+          
 
           
 
@@ -68,8 +80,12 @@
 
           
 
+          
+
            P and the <non_terminal
            where="24.2">named-argument-list</non_terminal>
+
+          
 
           
 

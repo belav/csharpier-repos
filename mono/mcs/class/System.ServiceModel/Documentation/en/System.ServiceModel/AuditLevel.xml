@@ -24,6 +24,8 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.ServiceModel.Description.ServiceSecurityAuditBehavior" />
 
@@ -31,8 +33,12 @@
 
         
 
+        
+
          class to one of the <see
          cref="T:System.ServiceModel.AuditLogLocation" />
+
+        
 
         
 
@@ -50,6 +56,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -57,6 +65,8 @@
          type="text/html">
           <a href="ba517369-a034-4f8e-a2c4-66517716062b">serviceSecurityAudit element</a>
         </format>
+
+        
 
         
 

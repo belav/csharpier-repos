@@ -33,8 +33,12 @@
 
         
 
+        
+
         , <see
          cref="F:System.Security.Cryptography.X509Certificates.X509ContentType.Pkcs12" />
+
+        
 
         
 
@@ -47,6 +51,8 @@
 
         
 
+        
+
          can be exported as byte arrays. Therefore, all three formats are serialized certificates. <see
          cref="F:System.Security.Cryptography.X509Certificates.X509ContentType.SerializedCert" />
 
@@ -54,8 +60,12 @@
 
         
 
+        
+
          differs from an exported <see
          cref="F:System.Security.Cryptography.X509Certificates.X509ContentType.Cert" />
+
+        
 
         
 
@@ -70,8 +80,12 @@
 
         
 
+        
+
         , which serializes both the encoded certificate and its encoded properties. If you export the same <see
          cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+        
 
         
 

@@ -25,8 +25,12 @@
 
         
 
+        
+
          is not intended to be used as a stand-alone object. A <see
          cref="T:System.Drawing.Imaging.PropertyItem" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
         . A <see
          cref="T:System.Drawing.Imaging.PropertyItem" />
+
+        
 
         
 
@@ -53,8 +61,12 @@
 
         
 
+        
+
          class does not have a defined Public constructor, and you cannot create an instance of a <see
          cref="T:System.Drawing.Imaging.PropertyItem" />
+
+        
 
         
 
@@ -70,6 +82,8 @@
 
         
 
+        
+
          object instead of creating a new instance of the <see
          cref="T:System.Drawing.Imaging.PropertyItem" />
 
@@ -77,8 +91,12 @@
 
         
 
+        
+
          class. For more information, see <see
          cref="M:System.Drawing.Image.GetPropertyItem(System.Int32)" />
+
+        
 
         
 
@@ -112,8 +130,12 @@
 
             
 
+            
+
             . For a description of each property tag, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=145383">Property Item Descriptions</see>
+
+            
 
             
 
@@ -1900,6 +1922,8 @@
 
             
 
+            
+
              property.</para
           >
         </summary>
@@ -1945,6 +1969,8 @@
 
                   
 
+                  
+
                    is an array of bytes.</para
                 >
               </description>
@@ -1962,8 +1988,12 @@
 
                   
 
+                  
+
                    is a null-terminated ASCII string. If you set the type data member to ASCII type, you should set the <see
                    cref="P:System.Drawing.Imaging.PropertyItem.Len" />
+
+                  
 
                   
 
@@ -1986,6 +2016,8 @@
 
                   
 
+                  
+
                    is an array of unsigned short (16-bit) integers.</para
                 >
               </description>
@@ -1998,6 +2030,8 @@
                 <para
                   >Specifies that <see
                    cref="P:System.Drawing.Imaging.PropertyItem.Value" />
+
+                  
 
                   
 
@@ -2020,6 +2054,8 @@
 
                   
 
+                  
+
                    data member is an array of pairs of unsigned long integers. Each pair represents a fraction; the first integer is the numerator and the second integer is the denominator.</para
                 >
               </description>
@@ -2032,6 +2068,8 @@
                 <para
                   >Specifies that <see
                    cref="P:System.Drawing.Imaging.PropertyItem.Value" />
+
+                  
 
                   
 
@@ -2054,6 +2092,8 @@
 
                   
 
+                  
+
                    is an array of signed long (32-bit) integers.</para
                 >
               </description>
@@ -2071,6 +2111,8 @@
 
                   
 
+                  
+
                    is an array of pairs of signed long integers. Each pair represents a fraction; the first integer is the numerator and the second integer is the denominator.</para
                 >
               </description>
@@ -2083,6 +2125,8 @@
           <para
             >Gets or sets an integer that defines the type of data contained in the <see
              cref="P:System.Drawing.Imaging.PropertyItem.Value" />
+
+            
 
             
 
@@ -2116,8 +2160,12 @@
 
             
 
+            
+
              property contains data in one of several different primitive types. To use the data, determine the data type using the <see
              cref="P:System.Drawing.Imaging.PropertyItem.Type" />
+
+            
 
             
 

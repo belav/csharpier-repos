@@ -52,6 +52,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -97,6 +99,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -107,8 +111,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.LicenseContext" />
+
+          
 
           
 
@@ -123,8 +131,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -139,6 +151,8 @@
 
           
 
+          
+
           An object that is requesting the license. </param
         >
         <param name="allowExceptions">
@@ -148,8 +162,12 @@
 
           
 
+          
+
           true if a <see
            cref="T:System.ComponentModel.LicenseException" />
+
+          
 
           
 

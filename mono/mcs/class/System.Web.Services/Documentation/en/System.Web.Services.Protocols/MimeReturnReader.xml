@@ -26,8 +26,12 @@
 
         
 
+        
+
          and other classes in the <see
          cref="N:System.Web.Services.Protocols" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          class establishes a common <see
          cref="M:System.Web.Services.Protocols.MimeReturnReader.Read(System.Net.WebResponse,System.IO.Stream)" />
+
+        
 
         
 
@@ -60,8 +68,12 @@
 
         
 
+        
+
          or its descendant classes directly. Instead, when the Wsdl.exe tool generates client proxy code according to the HTTP-GET or HTTP-POST implementations, it applies the <see
          cref="T:System.Web.Services.Protocols.HttpMethodAttribute" />
+
+        
 
         
 
@@ -74,6 +86,8 @@
 
         
 
+        
+
          property to the <see
          cref="T:System.Web.Services.Protocols.XmlReturnReader" />
 
@@ -81,8 +95,12 @@
 
         
 
+        
+
          class, which is derived from <see
          cref="T:System.Web.Services.Protocols.MimeReturnReader" />
+
+        
 
         
 
@@ -109,6 +127,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Protocols.MimeReturnReader" />
+
+            
 
             
 
@@ -153,8 +173,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.WebResponse" />
+
+          
 
           
 
@@ -169,6 +193,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Stream" />
 
@@ -176,8 +202,12 @@
 
           
 
+          
+
            whose content is the body of the HTTP response represented by the <see
            cref="T:System.Net.WebResponse" />
+
+          
 
           
 

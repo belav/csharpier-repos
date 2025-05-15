@@ -27,8 +27,12 @@
 
         
 
+        
+
          class directly. ASP.NET creates an instance of the <see
          cref="T:System.Web.UI.PartialCachingControl" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          page directive or the <see
          cref="T:System.Web.UI.PartialCachingAttribute" />
+
+        
 
         
 
@@ -55,6 +63,8 @@
       <para
         >You add a user control to a page programmatically by calling the <see
          cref="M:System.Web.UI.TemplateControl.LoadControl(System.String)" />
+
+        
 
         
 
@@ -75,6 +85,8 @@
 
         
 
+        
+
          page directive or the <see
          cref="T:System.Web.UI.PartialCachingAttribute" />
 
@@ -82,8 +94,12 @@
 
         
 
+        
+
          attribute, and the user control is inserted into a page's control hierarchy by dynamically loading the user control with the <see
          cref="M:System.Web.UI.TemplateControl.LoadControl(System.String)" />
+
+        
 
         
 

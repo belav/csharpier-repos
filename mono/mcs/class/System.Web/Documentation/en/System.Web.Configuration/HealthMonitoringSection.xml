@@ -70,6 +70,8 @@
 
             
 
+            
+
              class using default settings.</para
           >
         </summary>
@@ -105,11 +107,15 @@
 
             
 
+            
+
              objects that define the manner in which health-monitoring events can be buffered before they are raised.</para
           >
           <para
             >This property defaults to an empty <see
              cref="T:System.Web.Configuration.BufferModesCollection" />
+
+            
 
             
 
@@ -179,8 +185,12 @@
 
             
 
+            
+
              collection of <see
              cref="T:System.Web.Configuration.EventMappingSettings" />
+
+            
 
             
 
@@ -224,8 +234,12 @@
 
             
 
+            
+
              value is zero ticks, no <see
              cref="T:System.Web.Management.WebHeartbeatEvent" />
+
+            
 
             
 
@@ -239,6 +253,8 @@
           <para
             >Gets or sets the interval used by the application domain when it raises the <see
              cref="T:System.Web.Management.WebHeartbeatEvent" />
+
+            
 
             
 
@@ -280,8 +296,12 @@
 
             
 
+            
+
              collection of <see
              cref="T:System.Web.Configuration.ProfileSettings" />
+
+            
 
             
 
@@ -313,6 +333,8 @@
           <para
             >Gets the properties collection for the <see
              cref="T:System.Web.Configuration.HealthMonitoringSection" />
+
+            
 
             
 
@@ -353,8 +375,12 @@
 
             
 
+            
+
              property specifies which provider is used for which of the events defined in the <see
              cref="P:System.Web.Configuration.HealthMonitoringSection.EventMappings" />
+
+            
 
             
 
@@ -373,8 +399,12 @@
 
             
 
+            
+
              collection of <see
              cref="T:System.Configuration.ProviderSettings" />
+
+            
 
             
 
@@ -415,6 +445,8 @@
 
             
 
+            
+
              object defines a connection between an event defined in the <see
              cref="P:System.Web.Configuration.HealthMonitoringSection.EventMappings" />
 
@@ -422,8 +454,12 @@
 
             
 
+            
+
              property and an event provider defined in the <see
              cref="P:System.Web.Configuration.HealthMonitoringSection.Providers" />
+
+            
 
             
 
@@ -442,8 +478,12 @@
 
             
 
+            
+
              collection of <see
              cref="T:System.Web.Configuration.RuleSettings" />
+
+            
 
             
 

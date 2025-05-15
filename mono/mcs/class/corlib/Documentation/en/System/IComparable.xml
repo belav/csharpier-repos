@@ -33,8 +33,12 @@
 
         
 
+        
+
         , that indicates whether the position of the current instance in the sort order is before, after, or the same as a second object of the same type. The instance's <see
          cref="T:System.IComparable" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Collections.ArrayList.Sort" />
+
+        
 
         
 
@@ -64,8 +72,12 @@
 
         
 
+        
+
          method must return an <see
          cref="T:System.Int32" />
+
+        
 
         
 
@@ -97,6 +109,8 @@
 
               
 
+              
+
                method in the sort order.</para
             >
           </description>
@@ -109,6 +123,8 @@
             <para
               >This current instance occurs in the same position in the sort order as the object specified by the <see
                cref="M:System.IComparable.CompareTo(System.Object)" />
+
+              
 
               
 
@@ -131,6 +147,8 @@
 
               
 
+              
+
                method in the sort order. </para
             >
           </description>
@@ -144,8 +162,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Double" />
+
+        
 
         
 
@@ -158,8 +180,12 @@
 
         
 
+        
+
         , as do <see
          cref="T:System.String" />
+
+        
 
         
 
@@ -172,6 +198,8 @@
 
         
 
+        
+
         , and <see
          cref="T:System.DateTime" />
 
@@ -179,8 +207,12 @@
 
         
 
+        
+
         . Custom types should also provide their own implementation of <see
          cref="T:System.IComparable" />
+
+        
 
         
 
@@ -228,8 +260,12 @@
 
             
 
+            
+
              method is implemented by types whose values can be ordered or sorted. It is called automatically by methods of non-generic collection objects, such as <see
              cref="M:System.Array.Sort(System.Array)" />
+
+            
 
             
 
@@ -242,8 +278,12 @@
 
             
 
+            
+
             , its members cannot be ordered and the sort operation can throw an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -261,8 +301,12 @@
 
             
 
+            
+
             , must be the same type as the class or value type that implements this interface; otherwise, an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -302,6 +346,8 @@
 
                   
 
+                  
+
                    in the sort order. </para
                 >
               </description>
@@ -314,6 +360,8 @@
                 <para
                   >This instance occurs in the same position in the sort order as <paramref
                    name="obj" />
+
+                  
 
                   
 
@@ -336,6 +384,8 @@
 
                   
 
+                  
+
                    in the sort order. </para
                 >
               </description>
@@ -344,6 +394,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -27,6 +27,8 @@
 
         
 
+        
+
          method.</para
       >
     </remarks>
@@ -62,6 +64,8 @@
 
             
 
+            
+
              method.</para
           >
           <para
@@ -72,8 +76,12 @@
 
             
 
+            
+
              method to create a new instance of <see
              cref="T:System.Net.NetworkInformation.PhysicalAddress" />
+
+            
 
             
 
@@ -92,6 +100,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -102,8 +112,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -143,6 +157,8 @@
 
             
 
+            
+
              instances.</para
           >
         </summary>
@@ -157,8 +173,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.NetworkInformation.PhysicalAddress" />
+
+          
 
           
 
@@ -195,6 +215,8 @@
           <para
             >A <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -262,8 +284,12 @@
 
             
 
+            
+
              method returns <see
              cref="F:System.Net.NetworkInformation.PhysicalAddress.None" />
+
+            
 
             
 
@@ -277,6 +303,8 @@
           <para
             >Returns a new <see
              cref="T:System.Net.NetworkInformation.PhysicalAddress" />
+
+            
 
             
 
@@ -319,6 +347,8 @@
 
             
 
+            
+
              parameter must contain a string that can only consist of numbers and upper-case letters as hexadecimal digits. Some examples of string formats that are acceptable are as follows:</para
           >
           <para>001122334455</para>
@@ -333,8 +363,12 @@
 
             
 
+            
+
              method to retrieve the address from an existing <see
              cref="T:System.Net.NetworkInformation.PhysicalAddress" />
+
+            
 
             
 
@@ -353,8 +387,12 @@
 
             
 
+            
+
              and stores its contents as the address bytes of the <see
              cref="T:System.Net.NetworkInformation.PhysicalAddress" />
+
+            
 
             
 
@@ -373,11 +411,15 @@
 
             
 
+            
+
              instance with the specified address.</para
           >
         </returns>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -390,8 +432,12 @@
 
           
 
+          
+
            containing the address that will be used to initialize the <see
            cref="T:System.Net.NetworkInformation.PhysicalAddress" />
+
+          
 
           
 
@@ -429,6 +475,8 @@
 
             
 
+            
+
              representation of the address of this instance.</para
           >
         </summary>
@@ -437,6 +485,8 @@
           <para
             >A <see
              cref="T:System.String" />
+
+            
 
             
 

@@ -30,6 +30,8 @@
 
         
 
+        
+
         , <see
          cref="T:System.Security.Cryptography.Xml.KeyReference" />
 
@@ -37,8 +39,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Security.Cryptography.Xml.DataReference" />
+
+        
 
         
 
@@ -73,6 +79,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.Security.Cryptography.Xml.KeyReference" />
 
@@ -80,8 +88,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Security.Cryptography.Xml.DataReference" />
+
+            
 
             
 
@@ -96,6 +108,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.Xml.EncryptedReference" />
+
+            
 
             
 
@@ -132,11 +146,15 @@
 
             
 
+            
+
              parameter provides information about the location of the data to be encrypted.</para
           >
           <para
             >This constructor initializes a class that is an abstract base class used in XML encryption from which the <see
              cref="T:System.Security.Cryptography.Xml.CipherReference" />
+
+            
 
             
 
@@ -149,8 +167,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Security.Cryptography.Xml.DataReference" />
+
+            
 
             
 
@@ -170,11 +192,15 @@
 
             
 
+            
+
              class using the specified Uniform Resource Identifier (URI).</para
           >
         </summary>
         <param name="uri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -215,6 +241,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.Security.Cryptography.Xml.KeyReference" />
 
@@ -222,8 +250,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Security.Cryptography.Xml.DataReference" />
+
+            
 
             
 
@@ -243,11 +275,15 @@
 
             
 
+            
+
              class using the specified Uniform Resource Identifier (URI) and transform chain.</para
           >
         </summary>
         <param name="uri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -290,8 +326,12 @@
 
             
 
+            
+
              object to the current transform chain of an <see
              cref="T:System.Security.Cryptography.Xml.EncryptedReference" />
+
+            
 
             
 
@@ -307,8 +347,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Cryptography.Xml.Transform" />
+
+          
 
           
 
@@ -368,6 +412,8 @@
 
             
 
+            
+
              object.</para
           >
         </remarks>
@@ -381,6 +427,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -389,6 +437,8 @@
           <para
             >An <see
              cref="T:System.Xml.XmlElement" />
+
+            
 
             
 
@@ -432,6 +482,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -442,8 +494,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlElement" />
+
+          
 
           
 
@@ -477,8 +533,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Security.Cryptography.Xml.KeyReference" />
+
+            
 
             
 
@@ -491,6 +551,8 @@
 
             
 
+            
+
              derived classes. For example, a <see
              cref="T:System.Security.Cryptography.Xml.CipherReference" />
 
@@ -498,8 +560,12 @@
 
             
 
+            
+
              object sets this property value to <see
              cref="T:System.Security.Cryptography.Xml.CipherReference" />
+
+            
 
             
 
@@ -545,6 +611,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -573,6 +641,8 @@
           <para
             >Gets or sets the Uniform Resource Identifier (URI) of an <see
              cref="T:System.Security.Cryptography.Xml.EncryptedReference" />
+
+            
 
             
 

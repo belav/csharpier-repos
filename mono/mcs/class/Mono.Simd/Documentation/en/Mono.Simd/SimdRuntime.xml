@@ -19,7 +19,7 @@
     <example>
       <para> The following example shows how to detect the feature set and conditionally generate the right code.</para>
       <code lang="C#">
-<![CDATA[
+        <![CDATA[
 	using System;
 	using Mono.Simd;
 
@@ -113,6 +113,8 @@
 
         
 
+        
+
          could not be found on <paramref
          name="type" />
       </exception>
@@ -157,8 +159,12 @@
 
         
 
+        
+
          with <paramref
          name="signature" />
+
+        
 
         
 
@@ -201,8 +207,12 @@
 
         
 
+        
+
          was <see
          langword="null" />
+
+        
 
         
 
@@ -236,6 +246,8 @@
       </Parameters>
       <exception cref="T:System.ArgumentException">
         <paramref name="method" />
+
+        
 
         
 
@@ -284,8 +296,12 @@
 
         
 
+        
+
          with <paramref
          name="signature" />
+
+        
 
         
 

@@ -52,6 +52,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -116,6 +118,8 @@
 
             
 
+            
+
              values are: "AES", "AesCryptoServiceProvider", "System.Security.Cryptography.AesCryptoServiceProvider", "AesManaged", and "System.Security.Cryptography.AesManaged".</para
           >
         </remarks>
@@ -129,6 +133,8 @@
         </returns>
         <param name="algorithmName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

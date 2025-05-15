@@ -55,8 +55,12 @@
 
         
 
+        
+
          control is a container for a group of controls. A <see
          cref="T:System.Web.UI.WebControls.View" />
+
+        
 
         
 
@@ -69,6 +73,8 @@
 
         
 
+        
+
          control. Only one <see
          cref="T:System.Web.UI.WebControls.View" />
 
@@ -76,8 +82,12 @@
 
         
 
+        
+
          control at a time can be defined as the active view within a <see
          cref="T:System.Web.UI.WebControls.MultiView" />
+
+        
 
         
 
@@ -93,8 +103,12 @@
 
         
 
+        
+
          property specifies the active <see
          cref="T:System.Web.UI.WebControls.View" />
+
+        
 
         
 
@@ -107,8 +121,12 @@
 
         
 
+        
+
          collection of a <see
          cref="T:System.Web.UI.WebControls.MultiView" />
+
+        
 
         
 
@@ -121,6 +139,8 @@
 
         
 
+        
+
          control is visible. Use the <see
          cref="P:System.Web.UI.WebControls.View.Visible" />
 
@@ -128,8 +148,12 @@
 
         
 
+        
+
          property to determine whether a <see
          cref="T:System.Web.UI.WebControls.View" />
+
+        
 
         
 
@@ -145,8 +169,12 @@
 
         
 
+        
+
          control can contain controls of any type, including other <see
          cref="T:System.Web.UI.WebControls.MultiView" />
+
+        
 
         
 
@@ -159,8 +187,12 @@
 
         
 
+        
+
          control does not support any style properties. To apply styles to a <see
          cref="T:System.Web.UI.WebControls.View" />
+
+        
 
         
 
@@ -173,8 +205,12 @@
 
         
 
+        
+
          controls to the <see
          cref="T:System.Web.UI.WebControls.View" />
+
+        
 
         
 
@@ -190,8 +226,12 @@
 
         
 
+        
+
          class provides the <see
          cref="E:System.Web.UI.WebControls.View.Activate" />
+
+        
 
         
 
@@ -204,8 +244,12 @@
 
         
 
+        
+
          events. The <see
          cref="E:System.Web.UI.WebControls.View.Activate" />
+
+        
 
         
 
@@ -218,8 +262,12 @@
 
         
 
+        
+
          control becomes the active view. This occurs when the value of the <see
          cref="P:System.Web.UI.WebControls.MultiView.ActiveViewIndex" />
+
+        
 
         
 
@@ -232,8 +280,12 @@
 
         
 
+        
+
          method is called to specify a different <see
          cref="T:System.Web.UI.WebControls.View" />
+
+        
 
         
 
@@ -246,8 +298,12 @@
 
         
 
+        
+
          control, when the <see
          cref="P:System.Web.UI.WebControls.MultiView.ActiveViewIndex" />
+
+        
 
         
 
@@ -260,8 +316,12 @@
 
         
 
+        
+
          event is raised for View2 and the <see
          cref="E:System.Web.UI.WebControls.View.Deactivate" />
+
+        
 
         
 
@@ -277,8 +337,12 @@
 
         
 
+        
+
          controls within a <see
          cref="T:System.Web.UI.WebControls.MultiView" />
+
+        
 
         
 
@@ -291,8 +355,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Web.UI.WebControls.Button" />
+
+        
 
         
 
@@ -305,8 +373,12 @@
 
         
 
+        
+
          control. Set the <see
          cref="T:System.Web.UI.WebControls.LinkButton" />
+
+        
 
         
 
@@ -319,6 +391,8 @@
 
         
 
+        
+
          control's CommandName property to the ID of the <see
          cref="T:System.Web.UI.WebControls.View" />
 
@@ -326,8 +400,12 @@
 
         
 
+        
+
          control to navigate to. For a code example, see <see
          cref="E:System.Web.UI.WebControls.MultiView.ActiveViewChanged" />
+
+        
 
         
 
@@ -343,6 +421,8 @@
 
         
 
+        
+
          controls within a <see
          cref="T:System.Web.UI.WebControls.MultiView" />
 
@@ -350,8 +430,12 @@
 
         
 
+        
+
          control, see the <see
          cref="T:System.Web.UI.WebControls.MultiView" />
+
+        
 
         
 
@@ -374,9 +458,13 @@
 
         
 
+        
+
         |False"
     EnableViewState="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -401,6 +489,8 @@
 
         
 
+        
+
         |False"
 /&gt;</code
       >
@@ -410,6 +500,8 @@
       <para
         >Represents a control that acts as a container for a group of controls within a <see
          cref="T:System.Web.UI.WebControls.MultiView" />
+
+        
 
         
 
@@ -432,6 +524,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.View" />
+
+            
 
             
 
@@ -463,8 +557,12 @@
 
             
 
+            
+
              event is raised when the current <see
              cref="T:System.Web.UI.WebControls.View" />
+
+            
 
             
 
@@ -477,8 +575,12 @@
 
             
 
+            
+
              property changes or the <see
              cref="M:System.Web.UI.WebControls.MultiView.SetActiveView(System.Web.UI.WebControls.View)" />
+
+            
 
             
 
@@ -491,8 +593,12 @@
 
             
 
+            
+
              control. For example, if View1 is the active view within a <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -505,6 +611,8 @@
 
             
 
+            
+
              property changes to specify View2, the <see
              cref="E:System.Web.UI.WebControls.View.Activate" />
 
@@ -512,8 +620,12 @@
 
             
 
+            
+
              event is raised for View2 and the <see
              cref="E:System.Web.UI.WebControls.View.Deactivate" />
+
+            
 
             
 
@@ -527,6 +639,8 @@
           <para
             >Occurs when the current <see
              cref="T:System.Web.UI.WebControls.View" />
+
+            
 
             
 
@@ -558,8 +672,12 @@
 
             
 
+            
+
              event is raised when the current active <see
              cref="T:System.Web.UI.WebControls.View" />
+
+            
 
             
 
@@ -572,8 +690,12 @@
 
             
 
+            
+
              control becomes inactive when the value of the <see
              cref="P:System.Web.UI.WebControls.MultiView.ActiveViewIndex" />
+
+            
 
             
 
@@ -586,8 +708,12 @@
 
             
 
+            
+
              method is called to specify a different <see
              cref="T:System.Web.UI.WebControls.View" />
+
+            
 
             
 
@@ -600,8 +726,12 @@
 
             
 
+            
+
              control, when the <see
              cref="P:System.Web.UI.WebControls.MultiView.ActiveViewIndex" />
+
+            
 
             
 
@@ -614,8 +744,12 @@
 
             
 
+            
+
              event is raised for View1 and the <see
              cref="E:System.Web.UI.WebControls.View.Activate" />
+
+            
 
             
 
@@ -629,6 +763,8 @@
           <para
             >Occurs when the current active <see
              cref="T:System.Web.UI.WebControls.View" />
+
+            
 
             
 
@@ -663,8 +799,12 @@
 
             
 
+            
+
              event is raised when the current <see
              cref="T:System.Web.UI.WebControls.View" />
+
+            
 
             
 
@@ -683,8 +823,12 @@
 
             
 
+            
+
              event of the <see
              cref="T:System.Web.UI.WebControls.View" />
+
+            
 
             
 
@@ -700,8 +844,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -735,8 +883,12 @@
 
             
 
+            
+
              event is raised when the current active <see
              cref="T:System.Web.UI.WebControls.View" />
+
+            
 
             
 
@@ -755,8 +907,12 @@
 
             
 
+            
+
              event of the <see
              cref="T:System.Web.UI.WebControls.View" />
+
+            
 
             
 
@@ -772,8 +928,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -805,8 +965,12 @@
 
             
 
+            
+
              property to determine whether the current <see
              cref="T:System.Web.UI.WebControls.View" />
+
+            
 
             
 
@@ -819,8 +983,12 @@
 
             
 
+            
+
              control to be visible on the rendered page, it must be the active view in its containing <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -833,8 +1001,12 @@
 
             
 
+            
+
              control must be visible. If the containing <see
              cref="T:System.Web.UI.WebControls.MultiView" />
+
+            
 
             
 
@@ -847,8 +1019,12 @@
 
             
 
+            
+
              control is not the active view, then the <see
              cref="T:System.Web.UI.WebControls.View" />
+
+            
 
             
 
@@ -865,6 +1041,8 @@
 
               
 
+              
+
                property is set internally based on the visibility and active view for the containing parent control. If you set this property at run time, an <see
                cref="T:System.InvalidOperationException" />
 
@@ -872,8 +1050,12 @@
 
               
 
+              
+
                exception is thrown. If you set the <see
                cref="P:System.Web.UI.WebControls.View.Visible" />
+
+              
 
               
 
@@ -888,6 +1070,8 @@
           <para
             >Gets or sets a value that indicates whether the <see
              cref="T:System.Web.UI.WebControls.View" />
+
+            
 
             
 

@@ -30,8 +30,12 @@
 
         
 
+        
+
          with appropriate overloads of <see
          cref="Overload:System.Math.Round" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
          enumeration does not affect the result of the rounding operation. However, if the next digit is 5, which is the midpoint between two possible results, the nearest number is ambiguous. In this case, the <see
          cref="T:System.MidpointRounding" />
+
+        
 
         
 
@@ -65,8 +73,12 @@
 
         
 
+        
+
         . The precision used to round the numbers is zero, which means the number after the decimal point affects the rounding operation. For example, for the number -2.5, the digit after the decimal point is 5. Because that digit is the midpoint, you can use a <see
          cref="T:System.MidpointRounding" />
+
+        
 
         
 
@@ -79,8 +91,12 @@
 
         
 
+        
+
          is specified, -3 is returned because it is the nearest number away from zero with a precision of zero. If <see
          cref="F:System.MidpointRounding.ToEven" />
+
+        
 
         
 

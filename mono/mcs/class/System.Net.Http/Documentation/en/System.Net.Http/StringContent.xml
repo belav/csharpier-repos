@@ -48,6 +48,8 @@
 
             
 
+            
+
              created defaults to text/plain.</para
           >
         </remarks>
@@ -56,6 +58,8 @@
           <para
             >Creates a new instance of the <see
              cref="T:System.Net.Http.StringContent" />
+
+            
 
             
 
@@ -71,8 +75,12 @@
 
           
 
+          
+
           The content used to initialize the <see
            cref="T:System.Net.Http.StringContent" />
+
+          
 
           
 
@@ -110,6 +118,8 @@
 
             
 
+            
+
              created defaults to text/plain.</para
           >
         </remarks>
@@ -118,6 +128,8 @@
           <para
             >Creates a new instance of the <see
              cref="T:System.Net.Http.StringContent" />
+
+            
 
             
 
@@ -133,8 +145,12 @@
 
           
 
+          
+
           The content used to initialize the <see
            cref="T:System.Net.Http.StringContent" />
+
+          
 
           
 
@@ -144,6 +160,8 @@
         >
         <param name="encoding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -183,6 +201,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -193,8 +213,12 @@
 
           
 
+          
+
           The content used to initialize the <see
            cref="T:System.Net.Http.StringContent" />
+
+          
 
           
 
@@ -209,10 +233,14 @@
 
           
 
+          
+
           The encoding to use for the content.</param
         >
         <param name="mediaType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

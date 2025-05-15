@@ -35,11 +35,15 @@
 
         
 
+        
+
          class specifies the access rights for a memory-mapped file and how access attempts are audited.  This class represents access and audit rights as a set of rules. </para
       >
       <para
         >The <see
          cref="T:System.IO.MemoryMappedFiles.MemoryMappedFileSecurity" />
+
+        
 
         
 
@@ -55,6 +59,8 @@
 
         
 
+        
+
          class to retrieve, add, or change the access rules that represent the DACL and SACL of a pipe.</para
       >
       <para
@@ -65,8 +71,12 @@
 
         
 
+        
+
          method. To retrieve access or audit rules from an existing file, use the <see
          cref="M:System.IO.MemoryMappedFiles.MemoryMappedFile.GetAccessControl" />
+
+        
 
         
 
@@ -82,8 +92,12 @@
 
         
 
+        
+
          methods take a <see
          cref="T:System.IO.MemoryMappedFiles.MemoryMappedFileSecurity" />
+
+        
 
         
 
@@ -138,6 +152,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.MemoryMappedFiles.MemoryMappedFileSecurity" />
+
+            
 
             
 

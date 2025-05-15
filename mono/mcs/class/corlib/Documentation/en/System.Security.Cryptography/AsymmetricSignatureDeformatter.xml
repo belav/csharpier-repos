@@ -40,6 +40,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -75,6 +77,8 @@
 
             
 
+            
+
              and <see
              cref="M:System.Security.Cryptography.AsymmetricSignatureDeformatter.SetHashAlgorithm(System.String)" />
 
@@ -82,8 +86,12 @@
 
             
 
+            
+
              to set the key and hash algorithm before calling an implementation of <see
              cref="M:System.Security.Cryptography.AsymmetricSignatureDeformatter.VerifySignature(System.Security.Cryptography.HashAlgorithm,System.Byte[])" />
+
+            
 
             
 
@@ -97,6 +105,8 @@
           <para
             >Initializes a new instance of <see
              cref="T:System.Security.Cryptography.AsymmetricSignatureDeformatter" />
+
+            
 
             
 
@@ -139,6 +149,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -148,6 +160,8 @@
         </summary>
         <param name="strName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -189,6 +203,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -203,8 +219,12 @@
 
           
 
+          
+
           The instance of an implementation of <see
            cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
+
+          
 
           
 
@@ -255,8 +275,12 @@
 
             
 
+            
+
              matches the signature computed using the specified hash algorithm and key on <paramref
              name="rgbHash" />
+
+            
 
             
 
@@ -272,8 +296,12 @@
 
           
 
+          
+
           The data signed with <paramref
            name="rgbSignature" />
+
+          
 
           
 
@@ -288,8 +316,12 @@
 
           
 
+          
+
           The signature to be verified for <paramref
            name="rgbHash" />
+
+          
 
           
 
@@ -341,10 +373,14 @@
 
           
 
+          
+
           The hash algorithm to use to verify the signature. </param
         >
         <param name="rgbSignature">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

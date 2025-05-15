@@ -24,8 +24,12 @@
 
         
 
+        
+
          class is used by <see
          cref="T:System.Windows.Forms.InputLanguage" />
+
+        
 
         
 
@@ -40,6 +44,8 @@
       <para
         >Stores <see
          cref="T:System.Windows.Forms.InputLanguage" />
+
+        
 
         
 
@@ -74,8 +80,12 @@
 
             
 
+            
+
              contains the specified <see
              cref="T:System.Windows.Forms.InputLanguage" />
+
+            
 
             
 
@@ -94,6 +104,8 @@
 
             
 
+            
+
              is contained in the collection; otherwise, false.</para
           >
         </returns>
@@ -104,8 +116,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.InputLanguage" />
+
+          
 
           
 
@@ -144,8 +160,12 @@
 
             
 
+            
+
              values to a one-dimensional <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -161,8 +181,12 @@
 
           
 
+          
+
           The one-dimensional array that is the destination of the values copied from <see
            cref="T:System.Windows.Forms.InputLanguageCollection" />
+
+          
 
           
 
@@ -177,8 +201,12 @@
 
           
 
+          
+
           The index in <paramref
            name="array" />
+
+          
 
           
 
@@ -216,8 +244,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Windows.Forms.InputLanguageCollection" />
+
+            
 
             
 
@@ -236,8 +268,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Windows.Forms.InputLanguageCollection" />
+
+            
 
             
 
@@ -253,8 +289,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.InputLanguage" />
+
+          
 
           
 

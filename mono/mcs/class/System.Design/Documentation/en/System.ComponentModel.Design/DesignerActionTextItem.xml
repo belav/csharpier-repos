@@ -23,8 +23,12 @@
 
         
 
+        
+
          class represents individual static text items in a smart tag panel. Individual items are associated together to form a panel by returning the group from a call to the <see
          cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
+
+        
 
         
 
@@ -35,6 +39,8 @@
       <para
         >Most commonly, a static text item is used to create an informative label in a panel. Clicking on a static text item causes no action. The derived type <see
          cref="T:System.ComponentModel.Design.DesignerActionHeaderItem" />
+
+        
 
         
 
@@ -73,8 +79,12 @@
 
             
 
+            
+
              constructor sets the <see
              cref="P:System.ComponentModel.Design.DesignerActionItem.Description" />
+
+            
 
             
 
@@ -90,8 +100,12 @@
 
             
 
+            
+
              parameter is used to group items on a panel, see the <see
              cref="M:System.ComponentModel.Design.DesignerActionList.GetSortedActionItems" />
+
+            
 
             
 
@@ -110,6 +124,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -120,10 +136,14 @@
 
           
 
+          
+
           The panel text for this item.</param
         >
         <param name="category">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

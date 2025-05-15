@@ -36,8 +36,12 @@
 
         
 
+        
+
          is an attribute used declaratively to associate a specific transaction flow policy with a service operation. The <see
          cref="T:System.ServiceModel.TransactionFlowOption" />
+
+        
 
         
 
@@ -50,12 +54,16 @@
 
         
 
+        
+
          can also be used as an operation behavior to programmatically associate a transaction flow policy with a specific operation. In this case, it should be added to the Behaviors collection on the operation’s description.</para
       >
       <block subset="none" type="note">
         <para
           >The OperationContract for each method that uses the <see
            cref="T:System.ServiceModel.TransactionFlowAttribute" />
+
+          
 
           
 
@@ -99,6 +107,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -109,8 +119,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.TransactionFlowOption" />
+
+          
 
           
 
@@ -159,10 +173,14 @@
 
           
 
+          
+
           The operation description for which the attribute adds extra functionality.</param
         >
         <param name="parameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -203,6 +221,8 @@
 
             
 
+            
+
             , the implementation of this method is empty. This method is called internally by the infrastructure when a service proxy is created.</para
           >
         </remarks>
@@ -217,6 +237,8 @@
 
           
 
+          
+
           The operation to which the attribute attaches functionality.</param
         >
         <param name="proxy">
@@ -226,8 +248,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Dispatcher.ClientOperation" />
+
+          
 
           
 
@@ -268,6 +294,8 @@
 
             
 
+            
+
             , the implementation of this method is empty. This method is called internally by the infrastructure when a service is created.</para
           >
         </remarks>
@@ -276,6 +304,8 @@
           <para
             >Attaches the attribute functionality to the <see
              cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
+
+            
 
             
 
@@ -291,6 +321,8 @@
 
           
 
+          
+
           The description for this operation.</param
         >
         <param name="dispatch">
@@ -300,8 +332,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
+
+          
 
           
 
@@ -341,6 +377,8 @@
 
             
 
+            
+
             , the implementation of this method is empty. This method is called internally by the infrastructure when a service is created.</para
           >
         </remarks>
@@ -350,6 +388,8 @@
         </summary>
         <param name="description">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

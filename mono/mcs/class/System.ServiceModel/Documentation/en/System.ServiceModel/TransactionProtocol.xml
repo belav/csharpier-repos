@@ -24,6 +24,8 @@
 
         
 
+        
+
          class to specify the desired protocol for flowing transactions. </para
       >
     </remarks>
@@ -51,6 +53,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.TransactionProtocol" />
+
+            
 
             
 
@@ -86,6 +90,8 @@
              type="text/html">
               <a href="31a6bc6a-4ef4-45ba-a753-1efa1a19d917">Enabling Transaction Flow</a>
             </format>
+
+            
 
             
 

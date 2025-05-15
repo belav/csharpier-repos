@@ -32,8 +32,12 @@
 
         
 
+        
+
          method on classes that implement the <see
          cref="T:System.IConvertible" />
+
+        
 
         
 
@@ -49,6 +53,8 @@
 
         
 
+        
+
          method to obtain its <see
          cref="T:System.Type" />
 
@@ -56,8 +62,12 @@
 
         
 
+        
+
          object, then call the Type object's <see
          cref="M:System.Type.GetTypeCode(System.Type)" />
+
+        
 
         
 
@@ -148,6 +158,8 @@
 
             
 
+            
+
              type corresponds to the Unicode character set.</para
           >
         </summary>
@@ -229,8 +241,12 @@
 
             
 
+            
+
              to approximately 7.9 x 10 <superscript
             >28</superscript>
+
+            
 
             
 
@@ -269,8 +285,12 @@
 
             
 
+            
+
              to 1.7 x 10 <superscript
             >308</superscript>
+
+            
 
             
 
@@ -453,8 +473,12 @@
 
             
 
+            
+
              to 3.4 x 10 <superscript
             >38</superscript>
+
+            
 
             
 

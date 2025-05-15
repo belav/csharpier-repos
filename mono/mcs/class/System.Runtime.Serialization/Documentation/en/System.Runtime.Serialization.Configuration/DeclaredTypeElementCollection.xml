@@ -37,6 +37,8 @@
 
         
 
+        
+
         , specifically, to allow the addition of types to the collection of known types.</para
       >
     </remarks>
@@ -45,6 +47,8 @@
       <para
         >Handles the XML elements used to configure XML serialization using the <see
          cref="T:System.Runtime.Serialization.DataContractSerializer" />
+
+        
 
         
 
@@ -73,6 +77,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Serialization.Configuration.DeclaredTypeElementCollection" />
+
+            
 
             
 
@@ -118,8 +124,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.Configuration.DeclaredTypeElement" />
+
+          
 
           
 
@@ -179,6 +189,8 @@
         </returns>
         <param name="typeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -276,8 +288,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.Configuration.DeclaredTypeElement" />
+
+          
 
           
 
@@ -374,8 +390,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.Configuration.DeclaredTypeElement" />
+
+          
 
           
 
@@ -414,6 +434,8 @@
 
           
 
+          
+
           The type name (that functions as a key) of the configuration element to remove.</param
         >
       </Docs>
@@ -442,6 +464,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

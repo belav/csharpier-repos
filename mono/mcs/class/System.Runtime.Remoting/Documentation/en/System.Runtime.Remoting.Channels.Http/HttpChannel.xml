@@ -43,12 +43,16 @@
 
         
 
+        
+
          class transports messages using the HTTP protocol.</para
       >
       <para>Channels are used by the .NET Framework remoting infrastructure to transport remote calls. When a client makes a call to a remote object, the call is serialized into a message that is sent by a client channel and received by a server channel. It is then deserialized and processed. Any returned values are transmitted by the server channel and received by the client channel.</para>
       <para
         >A <see
          cref="T:System.Runtime.Remoting.Channels.Http.HttpChannel" />
+
+        
 
         
 
@@ -61,8 +65,12 @@
 
         
 
+        
+
          method) or programmatically (by passing a <see
          cref="T:System.Collections.IDictionary" />
+
+        
 
         
 
@@ -75,12 +83,16 @@
 
         
 
+        
+
          constructor). For a list of these configuration properties, see <format
          type="text/html">
           <a href="226ecf74-ebbd-4ea0-a701-dcf4441deefe"
             >Channel and Formatter Configuration Properties</a
           >
         </format>
+
+        
 
         
 
@@ -111,6 +123,8 @@
 
             
 
+            
+
              instance returned by this constructor are all set to their default values.</para
           >
         </remarks>
@@ -119,6 +133,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Remoting.Channels.Http.HttpChannel" />
+
+            
 
             
 
@@ -151,8 +167,12 @@
 
             
 
+            
+
              used is the <see
              cref="T:System.Runtime.Remoting.Channels.SoapClientFormatterSinkProvider" />
+
+            
 
             
 
@@ -171,11 +191,15 @@
 
             
 
+            
+
              class with a server channel that listens on the specified port.</para
           >
         </summary>
         <param name="port">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -222,6 +246,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -232,8 +258,12 @@
 
             
 
+            
+
              and <paramref
              name="serverSinkProvider" />
+
+            
 
             
 
@@ -252,6 +282,8 @@
 
             
 
+            
+
              class with the specified configuration properties and sinks.</para
           >
         </summary>
@@ -262,8 +294,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -278,8 +314,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Remoting.Channels.IClientChannelSinkProvider" />
+
+          
 
           
 
@@ -294,8 +334,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" />
+
+          
 
           
 
@@ -335,6 +379,8 @@
 
           
 
+          
+
           Should always be a null reference (Nothing in Visual Basic) for <see
            cref="T:System.Runtime.Remoting.Channels.Http.HttpChannel" />
         </param>
@@ -362,8 +408,12 @@
 
             
 
+            
+
              is called and a <see
              cref="T:System.Runtime.Remoting.ObjRef" />
+
+            
 
             
 
@@ -395,6 +445,8 @@
           <para
             >Every registered channel has a unique name. The name is used to retrieve a specific channel when calling <see
              cref="M:System.Runtime.Remoting.Channels.ChannelServices.GetChannel(System.String)" />
+
+            
 
             
 
@@ -529,6 +581,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -537,6 +591,8 @@
           <para
             >Returns an array of all the URLs for an object with the specified URI, hosted on the current <see
              cref="T:System.Runtime.Remoting.Channels.Http.HttpChannel" />
+
+            
 
             
 
@@ -555,11 +611,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="objectURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -621,6 +681,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -629,6 +691,8 @@
           <para
             >Gets a <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -689,8 +753,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Runtime.Remoting.Channels.Http.HttpClientChannel" />
+
+            
 
             
 
@@ -707,6 +775,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -715,6 +785,8 @@
           <para
             >Gets a <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -754,8 +826,12 @@
 
           
 
+          
+
           Should always be a null reference (Nothing in Visual Basic) for <see
            cref="T:System.Runtime.Remoting.Channels.Http.HttpChannel" />
+
+          
 
           
 
@@ -786,6 +862,8 @@
         </summary>
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

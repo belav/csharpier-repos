@@ -54,6 +54,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -222,6 +224,8 @@
 
             
 
+            
+
              class is bounded by the amount of memory allocated for each message. This bound on message size is intended to limit exposure to DoS-style attacks. </para
           >
           <para
@@ -232,8 +236,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ServiceModel.Configuration.WSDualHttpBindingElement.MaxReceivedMessageSize" />
+
+            
 
             
 
@@ -310,6 +318,8 @@
 
           
 
+          
+
           The binding to be applied.</param
         >
       </Docs>
@@ -343,6 +353,8 @@
 
             
 
+            
+
              instance that contains a collection of <see
              cref="T:System.Configuration.ConfigurationProperty" />
 
@@ -350,8 +362,12 @@
 
             
 
+            
+
              objects that can be attributes or <see
              cref="T:System.Configuration.ConfigurationElement" />
+
+            
 
             
 
@@ -384,6 +400,8 @@
           <para
             >If the <see
              cref="P:System.ServiceModel.WSDualHttpBinding.UseDefaultWebProxy" />
+
+            
 
             
 

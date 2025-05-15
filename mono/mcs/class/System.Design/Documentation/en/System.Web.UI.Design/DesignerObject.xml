@@ -46,6 +46,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -56,10 +58,14 @@
 
           
 
+          
+
           The parent designer.</param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -114,6 +120,8 @@
         </returns>
         <param name="serviceType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -189,6 +197,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -198,6 +208,8 @@
         </returns>
         <param name="serviceType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

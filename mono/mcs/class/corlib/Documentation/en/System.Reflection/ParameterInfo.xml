@@ -57,6 +57,8 @@
 
       
 
+      
+
       .</permission
     >
     <remarks>
@@ -64,6 +66,8 @@
       <para>Use an instance of ParameterInfo to obtain information about the parameter's data type, default value, and so on.</para>
       <para>
         <see cref="M:System.Reflection.MethodBase.GetParameters" />
+
+        
 
         
 
@@ -102,6 +106,8 @@
             > This constructor is called only by classes that derive from
    <see
              langword="ParameterInfo" />
+
+            
 
             
 
@@ -150,6 +156,8 @@
 
             
 
+            
+
              value representing the
    attributes for the
    parameter reflected by the current instance.</para
@@ -165,6 +173,8 @@
 
             
 
+            
+
              method.</para
           >
           <para
@@ -175,8 +185,12 @@
 
             
 
+            
+
              array, first get the method or the constructor and then call <see
              cref="M:System.Reflection.MethodBase.GetParameters" />
+
+            
 
             
 
@@ -222,6 +236,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -250,6 +266,8 @@
           <para
             >Typical access to parameter types is through <see
              cref="P:System.Reflection.ParameterInfo.ParameterType" />
+
+            
 
             
 
@@ -313,12 +331,16 @@
 
             
 
+            
+
              property instead.</para
           >
           <para>The default value is used when an actual value is not specified in the method call. A parameter can have a default value that is null. This is distinct from the case where a default value is not defined.</para>
           <para
             >This method utilizes the <see
              cref="F:System.Reflection.ParameterInfo.DefaultValueImpl" />
+
+            
 
             
 
@@ -334,8 +356,12 @@
 
             
 
+            
+
              array, first get the method or the constructor and then call <see
              cref="M:System.Reflection.MethodBase.GetParameters" />
+
+            
 
             
 
@@ -369,6 +395,8 @@
           <para
             >Typical access to the default value of the parameter is through <see
              cref="P:System.Reflection.ParameterInfo.DefaultValue" />
+
+            
 
             
 
@@ -415,8 +443,12 @@
 
             
 
+            
+
              parameter. To search the inheritance chain for attributes on parameters, use the appropriate overloads of the <see
              cref="M:System.Attribute.GetCustomAttributes(System.Reflection.Assembly)" />
+
+            
 
             
 
@@ -435,6 +467,8 @@
         </returns>
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -477,8 +511,12 @@
 
             
 
+            
+
              parameter. To search the inheritance chain for attributes on parameters, use the appropriate overloads of the <see
              cref="M:System.Attribute.GetCustomAttributes(System.Reflection.Assembly)" />
+
+            
 
             
 
@@ -502,10 +540,14 @@
 
           
 
+          
+
           The custom attributes identified by type. </param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -543,6 +585,8 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.Reflection.ParameterInfo.GetCustomAttributes" />
 
@@ -550,8 +594,12 @@
 
             
 
+            
+
              cannot be used in such cases, because they create instances of the attributes. Code in the reflection-only context cannot be executed. For more information and example code, see the <see
              cref="T:System.Reflection.CustomAttributeData" />
+
+            
 
             
 
@@ -570,6 +618,8 @@
 
             
 
+            
+
              objects for the current parameter, which can be used in the reflection-only context.</para
           >
         </summary>
@@ -578,6 +628,8 @@
           <para
             >A generic list of <see
              cref="T:System.Reflection.CustomAttributeData" />
+
+            
 
             
 
@@ -615,8 +667,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Reflection.ParameterInfo.GetRequiredCustomModifiers" />
+
+            
 
             
 
@@ -629,8 +685,12 @@
 
             
 
+            
+
              and related classes in the <see
              cref="N:System.Runtime.CompilerServices" />
+
+            
 
             
 
@@ -645,10 +705,14 @@
 
             
 
+            
+
              on MSDN and <see
              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
+
+            
 
             
 
@@ -671,6 +735,8 @@
 
             
 
+            
+
              objects that identify the optional custom modifiers of the current parameter, such as <see
              cref="T:System.Runtime.CompilerServices.IsConst" />
 
@@ -678,8 +744,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Runtime.CompilerServices.IsImplicitlyDereferenced" />
+
+            
 
             
 
@@ -717,8 +787,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Reflection.ParameterInfo.GetRequiredCustomModifiers" />
+
+            
 
             
 
@@ -731,8 +805,12 @@
 
             
 
+            
+
              and related classes in the <see
              cref="N:System.Runtime.CompilerServices" />
+
+            
 
             
 
@@ -747,10 +825,14 @@
 
             
 
+            
+
              on MSDN and <see
              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
+
+            
 
             
 
@@ -773,6 +855,8 @@
 
             
 
+            
+
              objects that identify the required custom modifiers of the current parameter, such as <see
              cref="T:System.Runtime.CompilerServices.IsConst" />
 
@@ -780,8 +864,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Runtime.CompilerServices.IsImplicitlyDereferenced" />
+
+            
 
             
 
@@ -844,8 +932,12 @@
 
             
 
+            
+
              parameter. To search the inheritance chain for attributes on parameters, use the appropriate overloads of the <see
              cref="M:System.Attribute.IsDefined(System.Reflection.MemberInfo,System.Type,System.Boolean)" />
+
+            
 
             
 
@@ -868,6 +960,8 @@
 
             
 
+            
+
              or its derived types are applied to this parameter; otherwise, false.</para
           >
         </returns>
@@ -878,10 +972,14 @@
 
           
 
+          
+
           The Type object to search for. </param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -917,8 +1015,12 @@
 
             
 
+            
+
              array, first get the method or the constructor and then call <see
              cref="M:System.Reflection.MethodBase.GetParameters" />
+
+            
 
             
 
@@ -959,8 +1061,12 @@
 
             
 
+            
+
              array, first get the method or the constructor and then call <see
              cref="M:System.Reflection.MethodBase.GetParameters" />
+
+            
 
             
 
@@ -1001,8 +1107,12 @@
 
             
 
+            
+
              array, first get the method and then call <see
              cref="M:System.Reflection.MethodBase.GetParameters" />
+
+            
 
             
 
@@ -1043,8 +1153,12 @@
 
             
 
+            
+
              array, first get the method or the constructor and then call <see
              cref="M:System.Reflection.MethodBase.GetParameters" />
+
+            
 
             
 
@@ -1085,8 +1199,12 @@
 
             
 
+            
+
              array, first get the method or the constructor and then call <see
              cref="M:System.Reflection.MethodBase.GetParameters" />
+
+            
 
             
 
@@ -1155,6 +1273,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1188,6 +1308,8 @@
 
             
 
+            
+
              property of the member that defines this parameter.</para
           >
           <para
@@ -1195,6 +1317,8 @@
              type="text/html">
               <a href="0c5bb9de-0cf6-438d-ba47-134e6c775fb8">The Unmanaged Reflection API</a>
             </format>
+
+            
 
             
 
@@ -1237,6 +1361,8 @@
             
 
             
+
+            
 that contains the name of
 the parameter reflected by the current
 instance.</para
@@ -1252,6 +1378,8 @@ instance.</para
 
             
 
+            
+
              field, and depends on an optional metadata flag that might not be available in all compilers.</para
           >
           <para
@@ -1262,8 +1390,12 @@ instance.</para
 
             
 
+            
+
              array, first get the method or the constructor and then call the <see
              cref="M:System.Reflection.MethodBase.GetParameters" />
+
+            
 
             
 
@@ -1280,8 +1412,12 @@ instance.</para
 
               
 
+              
+
                represents a return value (that is, if it was obtained by using the <see
                cref="P:System.Reflection.MethodInfo.ReturnParameter" />
+
+              
 
               
 
@@ -1317,6 +1453,8 @@ instance.</para
           <para
             >Typical access to the parameter name is through the <see
              cref="P:System.Reflection.ParameterInfo.Name" />
+
+            
 
             
 
@@ -1361,6 +1499,8 @@ instance.</para
 
             
 
+            
+
              of the parameter
    reflected
    by
@@ -1378,8 +1518,12 @@ instance.</para
 
             
 
+            
+
              array, first get the method or the constructor and then call <see
              cref="M:System.Reflection.MethodBase.GetParameters" />
+
+            
 
             
 
@@ -1420,6 +1564,8 @@ instance.</para
 
             
 
+            
+
              method.</para
           >
           <para
@@ -1430,8 +1576,12 @@ instance.</para
 
             
 
+            
+
              array, first get the method or the constructor and then call <see
              cref="M:System.Reflection.MethodBase.GetParameters" />
+
+            
 
             
 
@@ -1465,6 +1615,8 @@ instance.</para
           <para
             >Typical access to the name of the parameter is through <see
              cref="P:System.Reflection.ParameterInfo.Position" />
+
+            
 
             
 
@@ -1505,8 +1657,12 @@ instance.</para
 
             
 
+            
+
              array, first get the method or the constructor and then call the <see
              cref="M:System.Reflection.MethodBase.GetParameters" />
+
+            
 
             
 
@@ -1590,6 +1746,8 @@ instance.</para
 
             
 
+            
+
             , see the MSDN Library.</para
           >
         </remarks>
@@ -1604,6 +1762,8 @@ instance.</para
 
           
 
+          
+
           The type information to return.</param
         >
         <param name="lcid">
@@ -1613,10 +1773,14 @@ instance.</para
 
           
 
+          
+
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -27,11 +27,15 @@
 
         
 
+        
+
          property identifies which request header parameters ASP.NET uses to uniquely identify a variation of the response when there are multiple cached responses for a resource. This is useful when a response depends on a set of client inputs, such as headers or parameters.</para
       >
       <para
         >The <see
          cref="T:System.Web.HttpCacheVaryByHeaders" />
+
+        
 
         
 
@@ -46,6 +50,8 @@
 
         
 
+        
+
         . See section 14, "Header Field Definitions", for complete details.</para
       >
     </remarks>
@@ -54,6 +60,8 @@
       <para
         >Provides a type-safe way to set the <see
          cref="P:System.Web.HttpCachePolicy.VaryByHeaders" />
+
+        
 
         
 
@@ -81,6 +89,8 @@
              cref="http://go.microsoft.com/fwlink/?linkid=37125"
               >World Wide Web Consortium (W3C) Web site</see
             >
+
+            
 
             
 
@@ -141,6 +151,8 @@
 
             
 
+            
+
             . See section 14, "Header Field Definitions", for complete details.</para
           >
         </remarks>
@@ -171,6 +183,8 @@
              cref="http://go.microsoft.com/fwlink/?linkid=37125"
               >World Wide Web Consortium (W3C) Web site</see
             >
+
+            
 
             
 
@@ -211,6 +225,8 @@
 
             
 
+            
+
             . See section 14, "Header Field Definitions", for complete details.</para
           >
         </remarks>
@@ -240,6 +256,8 @@
              cref="http://go.microsoft.com/fwlink/?linkid=37125"
               >World Wide Web Consortium (W3C) Web site</see
             >
+
+            
 
             
 

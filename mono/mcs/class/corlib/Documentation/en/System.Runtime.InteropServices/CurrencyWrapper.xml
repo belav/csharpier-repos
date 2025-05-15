@@ -61,11 +61,15 @@
 
             
 
+            
+
              class with the Decimal to be wrapped and marshaled as type VT_CY.</para
           >
         </summary>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -103,11 +107,15 @@
 
             
 
+            
+
              class with the object containing the Decimal to be wrapped and marshaled as type VT_CY.</para
           >
         </summary>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

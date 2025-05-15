@@ -35,8 +35,12 @@
 
         
 
+        
+
          class links the two controls and allows the user to change the display in the text box by clicking the up or down buttons or by entering the appropriate type of value directly into the text box. Use the spin box in cases where you want to limit the list of values a user can select, similar to a list box or combo box. Depending upon the type of list you want to display, the advantage to using a spin box is that it allows you to quickly set a range of valid values, rather than adding items one at a time. Implementing a spin box requires less data validation than a text box, as you can limit the data type when you derive a class from <see
          cref="T:System.Windows.Forms.UpDownBase" />
+
+        
 
         
 
@@ -49,6 +53,8 @@
 
         
 
+        
+
          class, which limits the values to the numeric type and uses a <see
          cref="P:System.Windows.Forms.NumericUpDown.Minimum" />
 
@@ -56,8 +62,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.NumericUpDown.Maximum" />
+
+        
 
         
 
@@ -73,8 +83,12 @@
 
         
 
+        
+
          property to true. To restrict the user to values you specify, set the <see
          cref="P:System.Windows.Forms.UpDownBase.ReadOnly" />
+
+        
 
         
 
@@ -87,8 +101,12 @@
 
         
 
+        
+
          property. To set the alignment of the up and down buttons in relation to the text box portion of the control, set the <see
          cref="P:System.Windows.Forms.UpDownBase.UpDownAlign" />
+
+        
 
         
 
@@ -101,8 +119,12 @@
 
         
 
+        
+
          or <see
          cref="F:System.Windows.Forms.LeftRightAlignment.Right" />
+
+        
 
         
 
@@ -118,8 +140,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Windows.Forms.UpDownBase.DownButton" />
+
+        
 
         
 
@@ -132,6 +158,8 @@
 
         
 
+        
+
          and <see
          cref="M:System.Windows.Forms.UpDownBase.UpdateEditText" />
 
@@ -139,8 +167,12 @@
 
         
 
+        
+
          methods validate the value (either selected or entered) and update the text displayed in the spin box. If the value fails validation, use the <see
          cref="M:System.Windows.Forms.UpDownBase.Select(System.Int32,System.Int32)" />
+
+        
 
         
 
@@ -166,6 +198,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.UpDownBase" />
+
+            
 
             
 
@@ -209,8 +243,12 @@
 
             
 
+            
+
              control does not use the <see
              cref="P:System.Windows.Forms.UpDownBase.AutoScroll" />
+
+            
 
             
 
@@ -261,8 +299,12 @@
 
             
 
+            
+
              control does not use the <see
              cref="P:System.Windows.Forms.UpDownBase.AutoScrollMargin" />
+
+            
 
             
 
@@ -313,8 +355,12 @@
 
             
 
+            
+
              control does not use the <see
              cref="P:System.Windows.Forms.UpDownBase.AutoScrollMinSize" />
+
+            
 
             
 
@@ -392,6 +438,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -400,6 +448,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.UpDownBase.AutoSize" />
+
+            
 
             
 
@@ -464,8 +514,12 @@
 
             
 
+            
+
              property has no effect on the appearance of the <see
              cref="T:System.Windows.Forms.UpDownBase" />
+
+            
 
             
 
@@ -479,6 +533,8 @@
           <para
             >Gets or sets the background image for the <see
              cref="T:System.Windows.Forms.UpDownBase" />
+
+            
 
             
 
@@ -514,6 +570,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.UpDownBase.BackgroundImage" />
+
+            
 
             
 
@@ -563,8 +621,12 @@
 
             
 
+            
+
              property has no effect on the appearance of the <see
              cref="T:System.Windows.Forms.UpDownBase" />
+
+            
 
             
 
@@ -583,8 +645,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Windows.Forms.UpDownBase" />
+
+            
 
             
 
@@ -627,6 +693,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -656,6 +724,8 @@
           <para
             >You can use the <see
              cref="P:System.Windows.Forms.TextBoxBase.BorderStyle" />
+
+            
 
             
 
@@ -692,8 +762,12 @@
 
             
 
+            
+
              property acts as a flag for the <see
              cref="T:System.Windows.Forms.UpDownBase" />
+
+            
 
             
 
@@ -706,6 +780,8 @@
 
             
 
+            
+
              property internally. If this property is set to false, the control requires that the user is changing the <see
              cref="P:System.Windows.Forms.UpDownBase.Text" />
 
@@ -713,8 +789,12 @@
 
             
 
+            
+
              property and will set the <see
              cref="P:System.Windows.Forms.UpDownBase.UserEdit" />
+
+            
 
             
 
@@ -749,6 +829,8 @@
           <para
             >The preferred way to associate a shortcut menu with a tree node is with the <see
              cref="P:System.Windows.Forms.UpDownBase.ContextMenuStrip" />
+
+            
 
             
 
@@ -885,8 +967,12 @@
 
             
 
+            
+
              control does not use the <see
              cref="P:System.Windows.Forms.UpDownBase.DockPadding" />
+
+            
 
             
 
@@ -900,6 +986,8 @@
           <para
             >Gets the dock padding settings for all edges of the <see
              cref="T:System.Windows.Forms.UpDownBase" />
+
+            
 
             
 
@@ -981,6 +1069,8 @@
 
             
 
+            
+
              property will change the color of the text in the textbox portion of the spin box.</para
           >
         </remarks>
@@ -1012,6 +1102,8 @@
           <para
             >If the <see
              cref="P:System.Windows.Forms.UpDownBase.InterceptArrowKeys" />
+
+            
 
             
 
@@ -1049,6 +1141,8 @@
           <para
             >Regardless of the specified value, the <see
              cref="P:System.Drawing.Size.Height" />
+
+            
 
             
 
@@ -1110,6 +1204,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -1145,6 +1241,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -1175,6 +1273,8 @@
           <para
             >Occurs when the mouse pointer leaves the <see
              cref="T:System.Windows.Forms.UpDownBase" />
+
+            
 
             
 
@@ -1218,6 +1318,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -1253,6 +1355,8 @@
 
           
 
+          
+
           The source of the event.</param
         >
         <param name="e">
@@ -1262,8 +1366,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1299,11 +1407,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.UpDownBase.OnFontChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1322,6 +1434,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1332,8 +1446,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1372,11 +1490,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.UpDownBase.OnHandleCreated(System.EventArgs)" />
+
+            
 
             
 
@@ -1395,6 +1517,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1405,8 +1529,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1448,11 +1576,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.UpDownBase.OnHandleDestroyed(System.EventArgs)" />
+
+            
 
             
 
@@ -1471,6 +1603,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1481,8 +1615,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1517,11 +1655,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.UpDownBase.OnLayout(System.Windows.Forms.LayoutEventArgs)" />
+
+            
 
             
 
@@ -1540,6 +1682,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1550,8 +1694,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.LayoutEventArgs" />
+
+          
 
           
 
@@ -1593,11 +1741,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.UpDownBase.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
+
+            
 
             
 
@@ -1616,6 +1768,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -1626,8 +1780,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -1663,8 +1821,12 @@
 
             
 
+            
+
              method will raise the <see
              cref="E:System.Windows.Forms.Control.DoubleClick" />
+
+            
 
             
 
@@ -1682,11 +1844,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.UpDownBase.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
+
+            
 
             
 
@@ -1705,6 +1871,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -1715,8 +1883,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -1749,8 +1921,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.UpDownBase.DownButton" />
+
+            
 
             
 
@@ -1768,11 +1944,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.UpDownBase.OnMouseWheel(System.Windows.Forms.MouseEventArgs)" />
+
+            
 
             
 
@@ -1791,6 +1971,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1801,8 +1983,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -1844,11 +2030,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.UpDownBase.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+
+            
 
             
 
@@ -1867,6 +2057,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -1877,8 +2069,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.PaintEventArgs" />
+
+          
 
           
 
@@ -1912,6 +2108,8 @@
 
             
 
+            
+
              property is set to true and the user presses the UP ARROW key, the <see
              cref="M:System.Windows.Forms.UpDownBase.UpButton" />
 
@@ -1919,8 +2117,12 @@
 
             
 
+            
+
              method is called. Likewise, if the user presses the DOWN ARROW key, the <see
              cref="M:System.Windows.Forms.UpDownBase.DownButton" />
+
+            
 
             
 
@@ -1938,11 +2140,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.UpDownBase.OnTextBoxKeyDown(System.Object,System.Windows.Forms.KeyEventArgs)" />
+
+            
 
             
 
@@ -1961,11 +2167,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1980,8 +2190,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyEventArgs" />
+
+          
 
           
 
@@ -2021,11 +2235,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.UpDownBase.OnTextBoxKeyPress(System.Object,System.Windows.Forms.KeyPressEventArgs)" />
+
+            
 
             
 
@@ -2044,11 +2262,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2063,8 +2285,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyPressEventArgs" />
+
+          
 
           
 
@@ -2105,11 +2331,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.UpDownBase.OnTextBoxLostFocus(System.Object,System.EventArgs)" />
+
+            
 
             
 
@@ -2128,11 +2358,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2147,8 +2381,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2189,11 +2427,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.UpDownBase.OnTextBoxResize(System.Object,System.EventArgs)" />
+
+            
 
             
 
@@ -2212,11 +2454,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2231,8 +2477,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2272,11 +2522,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.UpDownBase.OnTextBoxTextChanged(System.Object,System.EventArgs)" />
+
+            
 
             
 
@@ -2295,11 +2549,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2314,8 +2572,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2358,8 +2620,12 @@
 
             
 
+            
+
              property value is based on the <see
              cref="P:System.Windows.Forms.TextBoxBase.PreferredHeight" />
+
+            
 
             
 
@@ -2401,6 +2667,8 @@
 
             
 
+            
+
              property to true, you will eliminate the need for much validation of the <see
              cref="P:System.Windows.Forms.UpDownBase.Text" />
 
@@ -2408,8 +2676,12 @@
 
             
 
+            
+
              property. The user will be restricted to the use of the up and down buttons to change the <see
              cref="P:System.Windows.Forms.UpDownBase.Text" />
+
+            
 
             
 
@@ -2426,8 +2698,12 @@
 
               
 
+              
+
               , the behavior described is slightly different. When <see
                cref="P:System.Windows.Forms.UpDownBase.ReadOnly" />
+
+              
 
               
 
@@ -2468,8 +2744,12 @@
 
             
 
+            
+
              method can be used when the spin box gets focus, or when the <see
              cref="P:System.Windows.Forms.UpDownBase.Text" />
+
+            
 
             
 
@@ -2482,8 +2762,12 @@
 
             
 
+            
+
              method in a derived class, call the <see
              cref="M:System.Windows.Forms.UpDownBase.Select(System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -2503,10 +2787,14 @@
 
           
 
+          
+
           The position of the first character to be selected. </param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2572,6 +2860,8 @@
 
             
 
+            
+
              method is called if the <see
              cref="P:System.Windows.Forms.UpDownBase.Text" />
 
@@ -2579,8 +2869,12 @@
 
             
 
+            
+
              property is set while the <see
              cref="P:System.Windows.Forms.UpDownBase.UserEdit" />
+
+            
 
             
 
@@ -2593,6 +2887,8 @@
 
             
 
+            
+
              method is called if the <see
              cref="P:System.Windows.Forms.UpDownBase.Text" />
 
@@ -2600,8 +2896,12 @@
 
             
 
+            
+
              property is set while the <see
              cref="P:System.Windows.Forms.UpDownBase.UserEdit" />
+
+            
 
             
 
@@ -2736,8 +3036,12 @@
 
             
 
+            
+
              property is set while the <see
              cref="P:System.Windows.Forms.UpDownBase.UserEdit" />
+
+            
 
             
 
@@ -2750,8 +3054,12 @@
 
             
 
+            
+
              method is called. If the <see
              cref="P:System.Windows.Forms.UpDownBase.Text" />
+
+            
 
             
 
@@ -2764,8 +3072,12 @@
 
             
 
+            
+
              property is set to false, the <see
              cref="M:System.Windows.Forms.UpDownBase.ValidateEditText" />
+
+            
 
             
 

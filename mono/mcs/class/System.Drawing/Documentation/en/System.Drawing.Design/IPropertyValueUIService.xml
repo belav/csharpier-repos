@@ -21,6 +21,8 @@
 
         
 
+        
+
          interface to provide <see
          cref="T:System.Drawing.Design.PropertyValueUIItem" />
 
@@ -28,8 +30,12 @@
 
         
 
+        
+
          objects for any properties of the component. A <see
          cref="T:System.Drawing.Design.PropertyValueUIItem" />
+
+        
 
         
 
@@ -45,8 +51,12 @@
 
         
 
+        
+
          interface provides methods to add, remove, and retrieve <see
          cref="T:System.Drawing.Design.PropertyValueUIHandler" />
+
+        
 
         
 
@@ -59,8 +69,12 @@
 
         
 
+        
+
          in the list is given an opportunity to provide a <see
          cref="T:System.Drawing.Design.PropertyValueUIItem" />
+
+        
 
         
 
@@ -76,8 +90,12 @@
 
         
 
+        
+
          method of this interface for each property of the component, passing a <see
          cref="T:System.ComponentModel.PropertyDescriptor" />
+
+        
 
         
 
@@ -90,8 +108,12 @@
 
         
 
+        
+
          method calls each <see
          cref="T:System.Drawing.Design.PropertyValueUIHandler" />
+
+        
 
         
 
@@ -104,8 +126,12 @@
 
         
 
+        
+
          can add a <see
          cref="T:System.Drawing.Design.PropertyValueUIItem" />
+
+        
 
         
 
@@ -118,8 +144,12 @@
 
         
 
+        
+
          parameter passed in the <paramref
          name="valueUIItemList" />
+
+        
 
         
 
@@ -132,8 +162,12 @@
 
         
 
+        
+
          passed in the <paramref
          name="propDesc" />
+
+        
 
         
 
@@ -144,6 +178,8 @@
       <para
         >A <see
          cref="T:System.Drawing.Design.PropertyValueUIItem" />
+
+        
 
         
 
@@ -181,6 +217,8 @@
 
             
 
+            
+
              is called, each handler added to this service is called and given the opportunity to add an icon for the property.</para
           >
         </remarks>
@@ -194,11 +232,15 @@
 
             
 
+            
+
              to this service.</para
           >
         </summary>
         <param name="newHandler">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -237,6 +279,8 @@
 
             
 
+            
+
              objects that match the specified context and property descriptor characteristics.</para
           >
         </summary>
@@ -245,6 +289,8 @@
           <para
             >An array of <see
              cref="T:System.Drawing.Design.PropertyValueUIItem" />
+
+            
 
             
 
@@ -260,8 +306,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -276,8 +326,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -310,8 +364,12 @@
 
             
 
+            
+
              implementation that the global list of <see
              cref="T:System.Drawing.Design.PropertyValueUIItem" />
+
+            
 
             
 
@@ -347,8 +405,12 @@
 
             
 
+            
+
              objects can call <see
              cref="M:System.Drawing.Design.IPropertyValueUIService.NotifyPropertyValueUIItemsChanged" />
+
+            
 
             
 
@@ -362,6 +424,8 @@
           <para
             >Occurs when the list of <see
              cref="T:System.Drawing.Design.PropertyValueUIItem" />
+
+            
 
             
 
@@ -400,11 +464,15 @@
 
             
 
+            
+
              from the property value UI service.</para
           >
         </summary>
         <param name="newHandler">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

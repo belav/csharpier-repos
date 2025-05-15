@@ -34,8 +34,12 @@
 
         
 
+        
+
          class is one of a set of classes that the .NET Framework provides for managing Windows access control security on named system semaphores. For an overview of these classes, and their relationship to the underlying Windows access control structures, see <see
          cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+
+        
 
         
 
@@ -52,12 +56,16 @@
 
           
 
+          
+
            object represents a local semaphore, access control is irrelevant.</para
         >
       </block>
       <para
         >To get a list of the rules currently applied to a named semaphore, use the <see
          cref="M:System.Threading.Semaphore.GetAccessControl" />
+
+        
 
         
 
@@ -70,8 +78,12 @@
 
         
 
+        
+
          object, then use its <see
          cref="M:System.Security.AccessControl.CommonObjectSecurity.GetAccessRules(System.Boolean,System.Boolean,System.Type)" />
+
+        
 
         
 
@@ -84,10 +96,14 @@
 
         
 
+        
+
          objects.</para
       >
       <para>
         <see cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
+
+        
 
         
 
@@ -106,8 +122,12 @@
 
         
 
+        
+
          objects to specify access rights to allow or deny to a user or group. A <see
          cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
+
+        
 
         
 
@@ -123,8 +143,12 @@
 
         
 
+        
+
          method to get the <see
          cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+
+        
 
         
 
@@ -137,8 +161,12 @@
 
         
 
+        
+
          object by using its methods to add the rule, and then use the <see
          cref="M:System.Threading.Semaphore.SetAccessControl(System.Security.AccessControl.SemaphoreSecurity)" />
+
+        
 
         
 
@@ -155,8 +183,12 @@
 
           
 
+          
+
            object do not affect the access levels of the named semaphore until you call the <see
            cref="M:System.Threading.Semaphore.SetAccessControl(System.Security.AccessControl.SemaphoreSecurity)" />
+
+          
 
           
 
@@ -172,8 +204,12 @@
 
         
 
+        
+
          objects are immutable. Security for a semaphore is modified using the methods of the <see
          cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+
+        
 
         
 
@@ -223,8 +259,12 @@
 
             
 
+            
+
             , for example by calling the <see
              cref="Overload:System.Threading.WaitHandle.WaitOne" />
+
+            
 
             
 
@@ -237,6 +277,8 @@
 
             
 
+            
+
              access. To exit the semaphore, by calling the <see
              cref="M:System.Threading.Semaphore.Release" />
 
@@ -244,8 +286,12 @@
 
             
 
+            
+
              method, the user must have <see
              cref="F:System.Security.AccessControl.SemaphoreRights.Modify" />
+
+            
 
             
 
@@ -264,11 +310,15 @@
 
             
 
+            
+
              class, specifying the user or group the rule applies to, the access rights, and whether the specified access rights are allowed or denied.</para
           >
         </summary>
         <param name="identity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -281,6 +331,8 @@
 
           
 
+          
+
            or a type such as <see
            cref="T:System.Security.Principal.NTAccount" />
 
@@ -288,8 +340,12 @@
 
           
 
+          
+
            that can be converted to type <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -304,8 +360,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AccessControlType" />
+
+          
 
           
 
@@ -347,8 +407,12 @@
 
             
 
+            
+
             , for example by calling the <see
              cref="Overload:System.Threading.WaitHandle.WaitOne" />
+
+            
 
             
 
@@ -361,6 +425,8 @@
 
             
 
+            
+
              access. To exit the semaphore, by calling the <see
              cref="M:System.Threading.Semaphore.Release" />
 
@@ -368,8 +434,12 @@
 
             
 
+            
+
              method, the user must have <see
              cref="F:System.Security.AccessControl.SemaphoreRights.Modify" />
+
+            
 
             
 
@@ -385,8 +455,12 @@
 
             
 
+            
+
              object, by passing <paramref
              name="identity" />
+
+            
 
             
 
@@ -399,6 +473,8 @@
 
             
 
+            
+
              constructor, and passing the newly created <see
              cref="T:System.Security.Principal.NTAccount" />
 
@@ -406,8 +482,12 @@
 
             
 
+            
+
              object to the <see
              cref="M:System.Security.AccessControl.SemaphoreAccessRule.#ctor(System.Security.Principal.IdentityReference,System.Security.AccessControl.SemaphoreRights,System.Security.AccessControl.AccessControlType)" />
+
+            
 
             
 
@@ -426,11 +506,15 @@
 
             
 
+            
+
              class, specifying the name of the user or group the rule applies to, the access rights, and whether the specified access rights are allowed or denied.</para
           >
         </summary>
         <param name="identity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -445,8 +529,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AccessControlType" />
+
+          
 
           
 
@@ -485,8 +573,12 @@
 
             
 
+            
+
              objects are immutable. You can create a new access rule representing a different user, different rights, or a different <see
              cref="T:System.Security.AccessControl.AccessControlType" />
+
+            
 
             
 

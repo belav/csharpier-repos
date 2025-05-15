@@ -47,6 +47,8 @@
 
         
 
+        
+
         , the IDispatch implementation is supplied by passing the type information for the object to COM's CreateStdDispatch API. When you set the attribute to <see
          cref="F:System.Runtime.InteropServices.IDispatchImplType.InternalImpl" />
 
@@ -54,8 +56,12 @@
 
         
 
+        
+
         , the IDispatch implementation is supplied by the common language runtime. Setting the attribute to <see
          cref="F:System.Runtime.InteropServices.IDispatchImplType.SystemDefinedImpl" />
+
+        
 
         
 
@@ -97,8 +103,12 @@
 
             
 
+            
+
              enumeration member. The Type Library Importer (TlbImp.exe) uses this constructor to avoid generating a typeref to the IDispatchImplType value that <paramref
              name="value" />
+
+            
 
             
 
@@ -117,6 +127,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -127,8 +139,12 @@
 
           
 
+          
+
           Indicates which <see
            cref="T:System.Runtime.InteropServices.IDispatchImplType" />
+
+          
 
           
 
@@ -172,6 +188,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -182,8 +200,12 @@
 
           
 
+          
+
           Indicates which <see
            cref="T:System.Runtime.InteropServices.IDispatchImplType" />
+
+          
 
           
 
@@ -219,6 +241,8 @@
           <para
             >Gets the <see
              cref="T:System.Runtime.InteropServices.IDispatchImplType" />
+
+            
 
             
 

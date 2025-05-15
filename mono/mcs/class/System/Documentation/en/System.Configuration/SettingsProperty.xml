@@ -25,8 +25,12 @@
 
         
 
+        
+
          is used to describe settings properties of a class derived from <see
          cref="T:System.Configuration.SettingsBase" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
          base class asks for a collection of <see
          cref="T:System.Configuration.SettingsProperty" />
+
+        
 
         
 
@@ -56,11 +64,15 @@
 
         
 
+        
+
         . It does this by calling its own Properties member. Inherited classes should return a collection of properties to persist.</para
       >
       <para
         >Each <see
          cref="T:System.Configuration.SettingsProperty" />
+
+        
 
         
 
@@ -125,6 +137,8 @@
 
             
 
+            
+
              class, based on the supplied parameter.</para
           >
         </summary>
@@ -135,8 +149,12 @@
 
           
 
+          
+
           Specifies a copy of an existing <see
            cref="T:System.Configuration.SettingsProperty" />
+
+          
 
           
 
@@ -173,6 +191,8 @@
 
             
 
+            
+
              class. based on the supplied parameter.</para
           >
         </summary>
@@ -183,8 +203,12 @@
 
           
 
+          
+
           Specifies the name of an existing <see
            cref="T:System.Configuration.SettingsProperty" />
+
+          
 
           
 
@@ -232,6 +256,8 @@
 
             
 
+            
+
              class based on the supplied parameters.</para
           >
         </summary>
@@ -242,8 +268,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Configuration.SettingsProperty" />
+
+          
 
           
 
@@ -258,8 +288,12 @@
 
           
 
+          
+
           The type of <see
            cref="T:System.Configuration.SettingsProperty" />
+
+          
 
           
 
@@ -274,8 +308,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.SettingsProvider" />
+
+          
 
           
 
@@ -290,6 +328,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Boolean" />
 
@@ -297,8 +337,12 @@
 
           
 
+          
+
            value specifying whether the <see
            cref="T:System.Configuration.SettingsProperty" />
+
+          
 
           
 
@@ -313,8 +357,12 @@
 
           
 
+          
+
           The default value of the <see
            cref="T:System.Configuration.SettingsProperty" />
+
+          
 
           
 
@@ -329,8 +377,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.SettingsSerializeAs" />
+
+          
 
           
 
@@ -345,8 +397,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.SettingsAttributeDictionary" />
+
+          
 
           
 
@@ -361,10 +417,14 @@
 
           
 
+          
+
           A Boolean value specifying whether an error will be thrown when the property is unsuccessfully deserialized.</param
         >
         <param name="throwOnErrorSerializing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -404,6 +464,8 @@
 
             
 
+            
+
              object.</para
           >
         </remarks>
@@ -417,8 +479,12 @@
 
             
 
+            
+
              object containing the attributes of the <see
              cref="T:System.Configuration.SettingsProperty" />
+
+            
 
             
 
@@ -449,6 +515,8 @@
           <para
             >Gets or sets the default value of the <see
              cref="T:System.Configuration.SettingsProperty" />
+
+            
 
             
 
@@ -487,6 +555,8 @@
 
             
 
+            
+
              object is read-only. </para
           >
         </summary>
@@ -516,8 +586,12 @@
 
             
 
+            
+
              cannot be an empty string or null. If the <see
              cref="T:System.Configuration.SettingsProperty" />
+
+            
 
             
 
@@ -531,6 +605,8 @@
           <para
             >Gets or sets the name of the <see
              cref="T:System.Configuration.SettingsProperty" />
+
+            
 
             
 
@@ -561,6 +637,8 @@
           <para
             >Gets or sets the type for the <see
              cref="T:System.Configuration.SettingsProperty" />
+
+            
 
             
 
@@ -602,6 +680,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -637,6 +717,8 @@
 
             
 
+            
+
              object is an enumeration used as the serialization scheme to store application settings.</para
           >
         </remarks>
@@ -650,8 +732,12 @@
 
             
 
+            
+
              object for the <see
              cref="T:System.Configuration.SettingsProperty" />
+
+            
 
             
 

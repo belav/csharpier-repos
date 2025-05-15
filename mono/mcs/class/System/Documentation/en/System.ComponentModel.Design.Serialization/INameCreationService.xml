@@ -29,6 +29,8 @@
 
         
 
+        
+
          can implement this service to provide a way for a designer to create new, unique names for objects. If this service is not available, the designer uses a default implementation.</para
       >
     </remarks>
@@ -80,10 +82,14 @@
 
           
 
+          
+
           The container where the new object is added. </param
         >
         <param name="dataType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -122,6 +128,8 @@
 
             
 
+            
+
              can have rules that define the parameters for valid names. This method can be implemented to validate a name and enforce those rules.</para
           >
         </remarks>
@@ -135,6 +143,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -173,11 +183,15 @@
 
             
 
+            
+
              can have rules that define the parameters for valid names. This method can be implemented to validate a name and enforce those rules.</para
           >
           <para
             >This method is similar to <see
              cref="M:System.ComponentModel.Design.Serialization.INameCreationService.IsValidName(System.String)" />
+
+            
 
             
 
@@ -192,6 +206,8 @@
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

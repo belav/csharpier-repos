@@ -32,6 +32,8 @@
 
         
 
+        
+
          only affects arrays of primitive types; this class does not apply to objects. Each primitive type is treated as a series of bytes without regard to any behavior or limitation associated with the primitive type.</para
       >
       <para>
@@ -41,8 +43,12 @@
 
         
 
+        
+
          provides methods to copy bytes from one array of primitive types to another array of primitive types, get a byte from an array, set a byte in an array, and obtain the length of an array. This class provides better performance for manipulating primitive types than similar methods in the <see
          cref="T:System.Array" />
+
+        
 
         
 
@@ -57,8 +63,12 @@
 
         
 
+        
+
          is applicable to the following primitive types: <see
          cref="T:System.Boolean" />
+
+        
 
         
 
@@ -71,8 +81,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.SByte" />
+
+        
 
         
 
@@ -85,8 +99,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Int16" />
+
+        
 
         
 
@@ -99,8 +117,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Int32" />
+
+        
 
         
 
@@ -113,8 +135,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Int64" />
+
+        
 
         
 
@@ -127,8 +153,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.IntPtr" />
+
+        
 
         
 
@@ -141,6 +171,8 @@
 
         
 
+        
+
         , <see
          cref="T:System.Single" />
 
@@ -148,8 +180,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Double" />
+
+        
 
         
 
@@ -200,6 +236,8 @@
 
             
 
+            
+
              bytes from <paramref
              name="src" />
 
@@ -207,8 +245,12 @@
 
             
 
+            
+
             , beginning at <paramref
              name="srcOffset" />
+
+            
 
             
 
@@ -221,8 +263,12 @@
 
             
 
+            
+
             , beginning at <paramref
              name="dstOffset" />
+
+            
 
             
 
@@ -235,8 +281,12 @@
 
             
 
+            
+
              and <paramref
              name="dstOffset" />
+
+            
 
             
 
@@ -252,8 +302,12 @@
 
             
 
+            
+
              method accesses the bytes in the <paramref
              name="src" />
+
+            
 
             
 
@@ -266,8 +320,12 @@
 
             
 
+            
+
              array with a zero-based lower bound of -50, and then pass the array and an offset of 5 to the <see
              cref="M:System.Buffer.BlockCopy(System.Array,System.Int32,System.Array,System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -283,8 +341,12 @@
 
             
 
+            
+
              method copies a block of bytes as a whole, rather than copying one byte at a time. Therefore, if <paramref
              name="src" />
+
+            
 
             
 
@@ -297,6 +359,8 @@
 
             
 
+            
+
              reference the same array, and the range from <paramref
              name="srcOffset" />
 
@@ -304,8 +368,12 @@
 
             
 
+            
+
              + <paramref
              name="count" />
+
+            
 
             
 
@@ -318,8 +386,12 @@
 
             
 
+            
+
              + <paramref
              name="count" />
+
+            
 
             
 
@@ -342,6 +414,8 @@
 
           
 
+          
+
           The source buffer. </param
         >
         <param name="srcOffset">
@@ -351,8 +425,12 @@
 
           
 
+          
+
           The zero-based byte offset into <paramref
            name="src" />
+
+          
 
           
 
@@ -367,10 +445,14 @@
 
           
 
+          
+
           The destination buffer. </param
         >
         <param name="dstOffset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -383,10 +465,14 @@
 
           
 
+          
+
           . </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -426,6 +512,8 @@
         </returns>
         <param name="array">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -473,6 +561,8 @@
 
             
 
+            
+
              byte in the array.</para
           >
         </returns>
@@ -483,10 +573,14 @@
 
           
 
+          
+
           An array. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -529,6 +623,8 @@
 
             
 
+            
+
              must be an array of primitives.</para
           >
         </remarks>
@@ -543,6 +639,8 @@
 
           
 
+          
+
           An array. </param
         >
         <param name="index">
@@ -552,10 +650,14 @@
 
           
 
+          
+
           A location in the array. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

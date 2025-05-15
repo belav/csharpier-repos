@@ -31,6 +31,8 @@
 
         
 
+        
+
          class. This class cannot be inherited.</para
       >
     </summary>
@@ -63,8 +65,12 @@
 
             
 
+            
+
              to the end of the <see
              cref="T:System.Web.Services.Description.FaultBindingCollection" />
+
+            
 
             
 
@@ -83,6 +89,8 @@
 
             
 
+            
+
              parameter has been added.</para
           >
         </returns>
@@ -93,8 +101,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.FaultBinding" />
+
+          
 
           
 
@@ -135,8 +147,12 @@
 
             
 
+            
+
              is a member of the <see
              cref="T:System.Web.Services.Description.FaultBindingCollection" />
+
+            
 
             
 
@@ -155,6 +171,8 @@
 
             
 
+            
+
              parameter is a member of the FaultBindingCollection; otherwise, false.</para
           >
         </returns>
@@ -165,8 +183,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.FaultBinding" />
+
+          
 
           
 
@@ -205,8 +227,12 @@
 
             
 
+            
+
              to a compatible one-dimensional array of type <see
              cref="T:System.Web.Services.Description.FaultBinding" />
+
+            
 
             
 
@@ -222,8 +248,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Web.Services.Description.FaultBinding" />
+
+          
 
           
 
@@ -233,6 +263,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -267,6 +299,8 @@
 
             
 
+            
+
              associated with the value passed by reference.</para
           >
         </summary>
@@ -275,6 +309,8 @@
           <para
             >The name of the <paramref
              name="value" />
+
+            
 
             
 
@@ -290,8 +326,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.FaultBinding" />
+
+          
 
           
 
@@ -332,6 +372,8 @@
 
             
 
+            
+
              and returns the zero-based index of the first occurrence within the collection.</para
           >
         </summary>
@@ -346,8 +388,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.FaultBinding" />
+
+          
 
           
 
@@ -389,8 +435,12 @@
 
             
 
+            
+
              parameter is equal to <see
              cref="P:System.Collections.CollectionBase.Count" />
+
+            
 
             
 
@@ -403,8 +453,12 @@
 
             
 
+            
+
              parameter is added to the end of the <see
              cref="T:System.Web.Services.Description.FaultBindingCollection" />
+
+            
 
             
 
@@ -424,6 +478,8 @@
 
             
 
+            
+
              to the FaultBindingCollection at the specified zero-based index.</para
           >
         </summary>
@@ -434,8 +490,12 @@
 
           
 
+          
+
           The zero-based index at which to insert the <paramref
            name="bindingOperationFault" />
+
+          
 
           
 
@@ -450,8 +510,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.FaultBinding" />
+
+          
 
           
 
@@ -537,11 +601,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The elements that follow the removed <see
              cref="T:System.Web.Services.Description.FaultBinding" />
+
+            
 
             
 
@@ -560,8 +628,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Web.Services.Description.FaultBindingCollection" />
+
+            
 
             
 
@@ -577,8 +649,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.FaultBinding" />
+
+          
 
           
 
@@ -617,8 +693,12 @@
 
             
 
+            
+
              of a member of the <see
              cref="T:System.Web.Services.Description.FaultBindingCollection" />
+
+            
 
             
 
@@ -634,8 +714,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Services.Description.FaultBinding" />
+
+          
 
           
 
@@ -650,8 +734,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.OperationBinding" />
+
+          
 
           
 

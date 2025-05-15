@@ -23,6 +23,8 @@
 
         
 
+        
+
          class performs pattern matching using regular expressions to find Web method return values in text encoded in the body of an HTTP response. The <see
          cref="T:System.Web.Services.Protocols.PatternMatcher" />
 
@@ -30,8 +32,12 @@
 
         
 
+        
+
          class is called by the client-side <see
          cref="T:System.Web.Services.Protocols.TextReturnReader" />
+
+        
 
         
 
@@ -48,8 +54,12 @@
 
         
 
+        
+
          attributes to the corresponding Web methods in the client proxy class that is generated. A <see
          cref="T:System.Web.Services.Protocols.MatchAttribute" />
+
+        
 
         
 
@@ -62,11 +72,15 @@
 
         
 
+        
+
          instance.</para
       >
       <para
         >A developer typically does not need to directly use <see
          cref="T:System.Web.Services.Protocols.PatternMatcher" />
+
+        
 
         
 
@@ -99,8 +113,12 @@
 
             
 
+            
+
              instance's properties, such as the regular expression to make the search target, are populated based on <see
              cref="T:System.Web.Services.Protocols.MatchAttribute" />
+
+            
 
             
 
@@ -119,6 +137,8 @@
 
             
 
+            
+
              instance based on the input type.</para
           >
         </summary>
@@ -129,8 +149,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -164,6 +188,8 @@
 
             
 
+            
+
              method's return value is the Web method return value deserialized from the input text.</para
           >
         </remarks>
@@ -177,6 +203,8 @@
         </returns>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

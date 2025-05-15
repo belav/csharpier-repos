@@ -44,8 +44,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
+
+        
 
         
 
@@ -58,8 +62,12 @@
 
         
 
+        
+
          interface to support remote procedure calls (RPCs), and the <see
          cref="T:System.Runtime.Serialization.IFormatter" />
+
+        
 
         
 
@@ -72,8 +80,12 @@
 
         
 
+        
+
         ) to support serialization of a graph of objects. The <see
          cref="T:System.Runtime.Serialization.Formatters.Soap.SoapFormatter" />
+
+        
 
         
 
@@ -86,8 +98,12 @@
 
         
 
+        
+
          objects, without using the <see
          cref="T:System.Runtime.Remoting.Messaging.IRemotingFormatter" />
+
+        
 
         
 
@@ -103,11 +119,15 @@
 
         
 
+        
+
          interface allows the specification of two separate object graphs: the graph of objects to serialize, and an additional graph that contains an array of header objects that convey information about the remote function call (for example, transaction ID or a method signature).</para
       >
       <para
         >RPCs that use the <see
          cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
+
+        
 
         
 
@@ -123,8 +143,12 @@
 
         
 
+        
+
          interface. To deserialize a method call, use the <see
          cref="M:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter.Deserialize(System.IO.Stream)" />
+
+        
 
         
 
@@ -137,8 +161,12 @@
 
         
 
+        
+
          parameter. The remoting infrastructure uses the <see
          cref="T:System.Runtime.Remoting.Messaging.HeaderHandler" />
+
+        
 
         
 
@@ -151,8 +179,12 @@
 
         
 
+        
+
          interface. When the <see
          cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
+
+        
 
         
 
@@ -165,8 +197,12 @@
 
         
 
+        
+
          delegate, it returns the URI of the remote object with the method that is being called. The first object in the graph returned supports the <see
          cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
+
+        
 
         
 
@@ -182,8 +218,12 @@
 
         
 
+        
+
          interface. To deserialize a method response, use the <see
          cref="M:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter.DeserializeMethodResponse(System.IO.Stream,System.Runtime.Remoting.Messaging.HeaderHandler,System.Runtime.Remoting.Messaging.IMethodCallMessage)" />
+
+        
 
         
 
@@ -196,8 +236,12 @@
 
         
 
+        
+
          method in the <see
          cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
+
+        
 
         
 
@@ -210,8 +254,12 @@
 
         
 
+        
+
          method supports the <see
          cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
+
+        
 
         
 
@@ -418,6 +466,8 @@
 
             
 
+            
+
              object as follows: </para
           >
           <list type="table">
@@ -456,8 +506,12 @@
 
                   
 
+                  
+
                    with a value that indicates that serialized data can be transmitted to or received from any of the other contexts. (<see
                    cref="F:System.Runtime.Serialization.StreamingContextStates.All" />
+
+                  
 
                   
 
@@ -474,6 +528,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
+
+            
 
             
 
@@ -515,11 +571,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The serialization or deserialization process uses the specified <see
              cref="T:System.Runtime.Serialization.ISurrogateSelector" />
+
+            
 
             
 
@@ -532,8 +592,12 @@
 
             
 
+            
+
              cannot handle the serialization of objects that derive from the <see
              cref="T:System.MarshalByRefObject" />
+
+            
 
             
 
@@ -546,8 +610,12 @@
 
             
 
+            
+
              replaces the object derived from <see
              cref="T:System.MarshalByRefObject" />
+
+            
 
             
 
@@ -560,8 +628,12 @@
 
             
 
+            
+
              object that is serialized by the specified surrogate selector. Therefore, if you want to use remote objects, set the <paramref
              name="selector" />
+
+            
 
             
 
@@ -574,8 +646,12 @@
 
             
 
+            
+
             . If you do not need surrogates, set the <paramref
              name="selector" />
+
+            
 
             
 
@@ -594,11 +670,15 @@
 
             
 
+            
+
              class with a given surrogate selector and streaming context.</para
           >
         </summary>
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -611,10 +691,14 @@
 
           
 
+          
+
            to use. Can be null. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -682,6 +766,8 @@
 
             
 
+            
+
              that controls the binding of a serialized object to a type.</para
           >
         </summary>
@@ -717,6 +803,8 @@
 
             
 
+            
+
              provides an enumeration that describes the source and the destination for a given serialized stream, as well as a way for serialization to retain that context and an additional caller-defined context.</para
           >
         </remarks>
@@ -725,6 +813,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -771,6 +861,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -785,6 +877,8 @@
         </returns>
         <param name="serializationStream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -832,6 +926,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -841,6 +937,8 @@
           <para
             >Deserializes the specified stream into an object graph. The provided <see
              cref="T:System.Runtime.Remoting.Messaging.HeaderHandler" />
+
+            
 
             
 
@@ -860,10 +958,14 @@
 
           
 
+          
+
           The stream from which to deserialize the object graph. </param
         >
         <param name="handler">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -876,8 +978,12 @@
 
           
 
+          
+
            that handles any headers in the <paramref
            name="serializationStream" />
+
+          
 
           
 
@@ -924,6 +1030,8 @@
 
             
 
+            
+
              parameter.</para
           >
           <para>In order for deserialization to succeed the current position in the stream must be at the beginning of the object graph.</para>
@@ -933,6 +1041,8 @@
           <para
             >Deserializes a response to a remote method call from the provided <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -952,10 +1062,14 @@
 
           
 
+          
+
           The stream from which to deserialize the object graph. </param
         >
         <param name="handler">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -968,8 +1082,12 @@
 
           
 
+          
+
            that handles any headers in the <paramref
            name="serializationStream" />
+
+          
 
           
 
@@ -984,8 +1102,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
+
+          
 
           
 
@@ -1025,8 +1147,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Runtime.Serialization.Formatters.TypeFilterLevel.Full" />
+
+            
 
             
 
@@ -1038,6 +1164,8 @@
                 >[&lt;topic://cpconAutomaticDeserializationInNETRemoting&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -1056,8 +1184,12 @@
 
             
 
+            
+
              of automatic deserialization the <see
              cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
+
+            
 
             
 
@@ -1103,10 +1235,14 @@
 
           
 
+          
+
           The stream to which the graph is to be serialized. </param
         >
         <param name="graph">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1150,6 +1286,8 @@
 
             
 
+            
+
              parameter at the front of the serialized stream.</para
           >
           <para>Headers are used only for specific remoting applications.</para>
@@ -1165,6 +1303,8 @@
 
           
 
+          
+
           The stream to which the object is to be serialized. </param
         >
         <param name="graph">
@@ -1174,10 +1314,14 @@
 
           
 
+          
+
           The object at the root of the graph to serialize. </param
         >
         <param name="headers">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1217,6 +1361,8 @@
 
             
 
+            
+
              to generate <see
              cref="T:System.Runtime.Remoting.ObjRef" />
 
@@ -1224,8 +1370,12 @@
 
             
 
+            
+
              instances for objects that derive from <see
              cref="T:System.MarshalByRefObject" />
+
+            
 
             
 
@@ -1239,6 +1389,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.Runtime.Serialization.ISurrogateSelector" />
+
+            
 
             
 
@@ -1315,8 +1467,12 @@
 
             
 
+            
+
              to prevent it from being called from untrusted code; only the immediate caller is required to have <see
              cref="P:System.Security.Permissions.SecurityPermissionAttribute.SerializationFormatter" />
+
+            
 
             
 
@@ -1329,6 +1485,8 @@
 
             
 
+            
+
              instead. In full trust scenarios, <see
              cref="M:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter.UnsafeDeserialize(System.IO.Stream,System.Runtime.Remoting.Messaging.HeaderHandler)" />
 
@@ -1336,8 +1494,12 @@
 
             
 
+            
+
              provides better performance than <see
              cref="M:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter.Deserialize(System.IO.Stream)" />
+
+            
 
             
 
@@ -1357,6 +1519,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -1366,6 +1530,8 @@
           <para
             >Deserializes the specified stream into an object graph. The provided <see
              cref="T:System.Runtime.Remoting.Messaging.HeaderHandler" />
+
+            
 
             
 
@@ -1385,10 +1551,14 @@
 
           
 
+          
+
           The stream from which to deserialize the object graph. </param
         >
         <param name="handler">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1401,8 +1571,12 @@
 
           
 
+          
+
            that handles any headers in the <paramref
            name="serializationStream" />
+
+          
 
           
 
@@ -1454,11 +1628,15 @@
 
             
 
+            
+
              parameter.</para
           >
           <para
             >This method uses <see
              cref="F:System.Security.Permissions.SecurityAction.LinkDemand" />
+
+            
 
             
 
@@ -1471,8 +1649,12 @@
 
             
 
+            
+
              permission. Do not use this method if your code can be called from partially trusted code. In partially trusted scenarios, use <see
              cref="M:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter.DeserializeMethodResponse(System.IO.Stream,System.Runtime.Remoting.Messaging.HeaderHandler,System.Runtime.Remoting.Messaging.IMethodCallMessage)" />
+
+            
 
             
 
@@ -1485,8 +1667,12 @@
 
             
 
+            
+
              provides better performance than <see
              cref="M:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter.DeserializeMethodResponse(System.IO.Stream,System.Runtime.Remoting.Messaging.HeaderHandler,System.Runtime.Remoting.Messaging.IMethodCallMessage)" />
+
+            
 
             
 
@@ -1506,6 +1692,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -1515,6 +1703,8 @@
           <para
             >Deserializes a response to a remote method call from the provided <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -1534,10 +1724,14 @@
 
           
 
+          
+
           The stream from which to deserialize the object graph. </param
         >
         <param name="handler">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1550,8 +1744,12 @@
 
           
 
+          
+
            that handles any headers in the <paramref
            name="serializationStream" />
+
+          
 
           
 
@@ -1566,8 +1764,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
+
+          
 
           
 

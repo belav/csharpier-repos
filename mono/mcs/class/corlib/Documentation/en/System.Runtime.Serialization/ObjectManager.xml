@@ -33,8 +33,12 @@
 
         
 
+        
+
          queries the <see
          cref="T:System.Runtime.Serialization.ObjectManager" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          can register a fixup with the <see
          cref="T:System.Runtime.Serialization.ObjectManager" />
+
+        
 
         
 
@@ -61,8 +69,12 @@
 
         
 
+        
+
          immediately completes the reference. Fixup refers to the process of finalizing object references not already completed during the object deserialization process. After the required object has been deserialized, the <see
          cref="T:System.Runtime.Serialization.ObjectManager" />
+
+        
 
         
 
@@ -78,8 +90,12 @@
 
         
 
+        
+
          follows a set of rules that dictate the fixup order. All objects that implement <see
          cref="T:System.Runtime.Serialization.ISerializable" />
+
+        
 
         
 
@@ -92,6 +108,8 @@
 
         
 
+        
+
          can expect to have all the objects that they transmitted through <see
          cref="T:System.Runtime.Serialization.SerializationInfo" />
 
@@ -99,8 +117,12 @@
 
         
 
+        
+
          available when the object tree is deserialized. However, a parent object cannot presume that all its child objects will be fully completed when it is fully deserialized. All child objects will be present but not all the grandchild objects will necessarily be present. If an object needs to take certain actions that depend on executing code on its child objects, it can delay these actions, implement the <see
          cref="T:System.Runtime.Serialization.IDeserializationCallback" />
+
+        
 
         
 
@@ -147,6 +169,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -157,8 +181,12 @@
 
           
 
+          
+
           The surrogate selector to use. The <see
            cref="T:System.Runtime.Serialization.ISurrogateSelector" />
+
+          
 
           
 
@@ -173,8 +201,12 @@
 
           
 
+          
+
           The streaming context. The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -187,8 +219,12 @@
 
           
 
+          
+
            or having a <see
            cref="T:System.Runtime.Serialization.ISerializationSurrogate" />
+
+          
 
           
 
@@ -220,6 +256,8 @@
           <para
             >The fixups are carried out by any appropriate surrogate, the object itself (if it implements <see
              cref="T:System.Runtime.Serialization.ISerializable" />
+
+            
 
             
 
@@ -263,6 +301,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -276,6 +316,8 @@
         </returns>
         <param name="objectID">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -308,6 +350,8 @@
           <para
             >Raises the deserialization event to any registered object that implements <see
              cref="T:System.Runtime.Serialization.IDeserializationCallback" />
+
+            
 
             
 
@@ -348,11 +392,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -396,6 +444,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </remarks>
@@ -410,10 +460,14 @@
 
           
 
+          
+
           The ID of the array used to record a fixup. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -426,10 +480,14 @@
 
           
 
+          
+
            that a fixup is requested for. </param
         >
         <param name="objectRequired">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -473,6 +531,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </remarks>
@@ -487,6 +547,8 @@
 
           
 
+          
+
           The ID of the array used to record a fixup. </param
         >
         <param name="indices">
@@ -496,10 +558,14 @@
 
           
 
+          
+
           The indexes within the multidimensional array that a fixup is requested for. </param
         >
         <param name="objectRequired">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -543,6 +609,8 @@
 
             
 
+            
+
              argument.</para
           >
         </remarks>
@@ -557,8 +625,12 @@
 
           
 
+          
+
           The ID of the object that needs the reference to <paramref
            name="objectRequired" />
+
+          
 
           
 
@@ -573,8 +645,12 @@
 
           
 
+          
+
           The member name of <paramref
            name="objectToBeFixed" />
+
+          
 
           
 
@@ -589,8 +665,12 @@
 
           
 
+          
+
           The ID of the object required by <paramref
            name="objectToBeFixed" />
+
+          
 
           
 
@@ -634,6 +714,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </remarks>
@@ -648,8 +730,12 @@
 
           
 
+          
+
           The ID of the object that needs the reference to the <paramref
            name="objectRequired" />
+
+          
 
           
 
@@ -664,8 +750,12 @@
 
           
 
+          
+
           The member of <paramref
            name="objectToBeFixed" />
+
+          
 
           
 
@@ -680,8 +770,12 @@
 
           
 
+          
+
           The ID of the object required by <paramref
            name="objectToBeFixed" />
+
+          
 
           
 
@@ -723,8 +817,12 @@
 
             
 
+            
+
              retains information about both the object and its ID. Later during deserialization, <see
              cref="M:System.Runtime.Serialization.ObjectManager.GetObject(System.Int64)" />
+
+            
 
             
 
@@ -743,6 +841,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -753,10 +853,14 @@
 
           
 
+          
+
           The object to register. </param
         >
         <param name="objectID">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -799,8 +903,12 @@
 
             
 
+            
+
              retains the information about both the object and its ID. Later during deserialization, you can use <see
              cref="M:System.Runtime.Serialization.ObjectManager.GetObject(System.Int64)" />
+
+            
 
             
 
@@ -819,8 +927,12 @@
 
             
 
+            
+
             , and recording the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -836,10 +948,14 @@
 
           
 
+          
+
           The object to register. </param
         >
         <param name="objectID">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -854,8 +970,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -868,8 +988,12 @@
 
           
 
+          
+
            implements <see
            cref="T:System.Runtime.Serialization.ISerializable" />
+
+          
 
           
 
@@ -882,8 +1006,12 @@
 
           
 
+          
+
           . <paramref
            name="info" />
+
+          
 
           
 
@@ -929,8 +1057,12 @@
 
             
 
+            
+
              and <paramref
              name="idOfContainingObj" />
+
+            
 
             
 
@@ -943,8 +1075,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.ValueType" />
+
+            
 
             
 
@@ -957,8 +1093,12 @@
 
             
 
+            
+
              objects. The space to store the information for a <see
              cref="T:System.ValueType" />
+
+            
 
             
 
@@ -971,8 +1111,12 @@
 
             
 
+            
+
              is boxed to be registered with the <see
              cref="T:System.Runtime.Serialization.ObjectManager" />
+
+            
 
             
 
@@ -985,8 +1129,12 @@
 
             
 
+            
+
              stored in the containing object and not in the boxed instance, the <see
              cref="T:System.Runtime.Serialization.ObjectManager" />
+
+            
 
             
 
@@ -1001,8 +1149,12 @@
 
             
 
+            
+
              retains information about both the object and its ID. Later during deserialization, <see
              cref="M:System.Runtime.Serialization.ObjectManager.GetObject(System.Int64)" />
+
+            
 
             
 
@@ -1021,8 +1173,12 @@
 
             
 
+            
+
             , and recording the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -1038,10 +1194,14 @@
 
           
 
+          
+
           The object to register. </param
         >
         <param name="objectID">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1056,8 +1216,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -1070,8 +1234,12 @@
 
           
 
+          
+
            implements <see
            cref="T:System.Runtime.Serialization.ISerializable" />
+
+          
 
           
 
@@ -1084,8 +1252,12 @@
 
           
 
+          
+
           . <paramref
            name="info" />
+
+          
 
           
 
@@ -1100,6 +1272,8 @@
 
           
 
+          
+
           The ID of the object that contains <paramref
            name="obj" />
 
@@ -1107,8 +1281,12 @@
 
           
 
+          
+
           . This parameter is required only if <paramref
            name="obj" />
+
+          
 
           
 
@@ -1123,6 +1301,8 @@
 
           
 
+          
+
           The field in the containing object where <paramref
            name="obj" />
 
@@ -1130,8 +1310,12 @@
 
           
 
+          
+
            exists. This parameter has meaning only if <paramref
            name="obj" />
+
+          
 
           
 
@@ -1178,8 +1362,12 @@
 
             
 
+            
+
              and <paramref
              name="idOfContainingObj" />
+
+            
 
             
 
@@ -1192,8 +1380,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.ValueType" />
+
+            
 
             
 
@@ -1206,8 +1398,12 @@
 
             
 
+            
+
              objects. The space to store the information for a <see
              cref="T:System.ValueType" />
+
+            
 
             
 
@@ -1220,8 +1416,12 @@
 
             
 
+            
+
              is boxed to be registered with the <see
              cref="T:System.Runtime.Serialization.ObjectManager" />
+
+            
 
             
 
@@ -1234,8 +1434,12 @@
 
             
 
+            
+
              stored in the containing object and not in the boxed instance, the <see
              cref="T:System.Runtime.Serialization.ObjectManager" />
+
+            
 
             
 
@@ -1250,8 +1454,12 @@
 
             
 
+            
+
              retains information about both the object and its ID. Later during deserialization, <see
              cref="M:System.Runtime.Serialization.ObjectManager.GetObject(System.Int64)" />
+
+            
 
             
 
@@ -1270,8 +1478,12 @@
 
             
 
+            
+
             , and recording the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -1287,10 +1499,14 @@
 
           
 
+          
+
           The object to register. </param
         >
         <param name="objectID">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1305,8 +1521,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -1319,8 +1539,12 @@
 
           
 
+          
+
            implements <see
            cref="T:System.Runtime.Serialization.ISerializable" />
+
+          
 
           
 
@@ -1333,8 +1557,12 @@
 
           
 
+          
+
           . <paramref
            name="info" />
+
+          
 
           
 
@@ -1349,6 +1577,8 @@
 
           
 
+          
+
           The ID of the object that contains <paramref
            name="obj" />
 
@@ -1356,8 +1586,12 @@
 
           
 
+          
+
           . This parameter is required only if <paramref
            name="obj" />
+
+          
 
           
 
@@ -1372,6 +1606,8 @@
 
           
 
+          
+
           The field in the containing object where <paramref
            name="obj" />
 
@@ -1379,8 +1615,12 @@
 
           
 
+          
+
            exists. This parameter has meaning only if <paramref
            name="obj" />
+
+          
 
           
 
@@ -1395,8 +1635,12 @@
 
           
 
+          
+
           If <paramref
            name="obj" />
+
+          
 
           
 
@@ -1409,8 +1653,12 @@
 
           
 
+          
+
            and a member of an array, <paramref
            name="arrayIndex" />
+
+          
 
           
 
@@ -1423,8 +1671,12 @@
 
           
 
+          
+
            exists. <paramref
            name="arrayIndex" />
+
+          
 
           
 
@@ -1437,8 +1689,12 @@
 
           
 
+          
+
            is not both a <see
            cref="T:System.ValueType" />
+
+          
 
           
 

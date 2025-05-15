@@ -36,8 +36,12 @@
 
         
 
+        
+
          interface it can also be used as the source document for the <see
          cref="T:System.Xml.Xsl.XslTransform" />
+
+        
 
         
 
@@ -53,8 +57,12 @@
 
         
 
+        
+
          class extends XmlDocument and allows structured data to be stored, retrieved, and manipulated through a relational <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -74,6 +82,8 @@
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
@@ -85,8 +95,12 @@
 
           
 
+          
+
            class, such as the <see
            cref="T:System.Xml.XmlException" />
+
+          
 
           
 
@@ -126,8 +140,12 @@
 
             
 
+            
+
              with a new <see
              cref="T:NameTable" />
+
+            
 
             
 
@@ -142,6 +160,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.XmlDocument" />
+
+            
 
             
 
@@ -182,11 +202,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="imp">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -222,8 +246,12 @@
 
             
 
+            
+
              as its <see
              cref="P:System.Xml.XmlDocument.NameTable" />
+
+            
 
             
 
@@ -246,11 +274,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="nt">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -285,11 +317,15 @@
 
             
 
+            
+
              method is redirected by server to a different URI, BaseURI returns the original URI passed to the Load method.</para
           >
           <para
             >This property is a Microsoft extension to the Document Object Model (DOM). For additional information on BaseURI and how it behaves with other node types, see <see
              cref="P:System.Xml.XmlNode.BaseURI" />
+
+            
 
             
 
@@ -336,6 +372,8 @@
 
             
 
+            
+
              returns null).</para
           >
           <para
@@ -346,8 +384,12 @@
 
             
 
+            
+
              is true, the cloned node includes all the child nodes, otherwise only the XmlDocument node is cloned. See the <see
              cref="M:System.Xml.XmlNode.CloneNode(System.Boolean)" />
+
+            
 
             
 
@@ -366,6 +408,8 @@
         </returns>
         <param name="deep">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -407,8 +451,12 @@
 
             
 
+            
+
              using the <see
              cref="M:System.Xml.XmlElement.SetAttributeNode(System.Xml.XmlAttribute)" />
+
+            
 
             
 
@@ -427,8 +475,12 @@
 
             
 
+            
+
              with the specified <see
              cref="P:System.Xml.XmlDocument.Name" />
+
+            
 
             
 
@@ -448,8 +500,12 @@
 
           
 
+          
+
           The qualified name of the attribute. If the name contains a colon, the <see
            cref="P:System.Xml.XmlNode.Prefix" />
+
+          
 
           
 
@@ -462,8 +518,12 @@
 
           
 
+          
+
            property reflects the part of the name following the first colon. The <see
            cref="P:System.Xml.XmlNode.NamespaceURI" />
+
+          
 
           
 
@@ -506,8 +566,12 @@
 
             
 
+            
+
              using the <see
              cref="M:System.Xml.XmlElement.SetAttributeNode(System.Xml.XmlAttribute)" />
+
+            
 
             
 
@@ -526,8 +590,12 @@
 
             
 
+            
+
              with the specified qualified name and <see
              cref="P:System.Xml.XmlNode.NamespaceURI" />
+
+            
 
             
 
@@ -547,8 +615,12 @@
 
           
 
+          
+
           The qualified name of the attribute. If the name contains a colon then the <see
            cref="P:System.Xml.XmlNode.Prefix" />
+
+          
 
           
 
@@ -561,10 +633,14 @@
 
           
 
+          
+
            property will reflect the part of the name after the colon. </param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -608,8 +684,12 @@
 
             
 
+            
+
              using the <see
              cref="M:System.Xml.XmlElement.SetAttributeNode(System.Xml.XmlAttribute)" />
+
+            
 
             
 
@@ -629,8 +709,12 @@
 
             
 
+            
+
              with the specified <see
              cref="P:System.Xml.XmlNode.Prefix" />
+
+            
 
             
 
@@ -643,8 +727,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Xml.XmlNode.NamespaceURI" />
+
+            
 
             
 
@@ -664,10 +752,14 @@
 
           
 
+          
+
           The prefix of the attribute (if any). String.Empty and null are equivalent. </param
         >
         <param name="localName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -682,8 +774,12 @@
 
           
 
+          
+
           The namespace URI of the attribute (if any). String.Empty and null are equivalent. If <paramref
            name="prefix" />
+
+          
 
           
 
@@ -730,6 +826,8 @@
 
             
 
+            
+
              containing the specified data.</para
           >
         </summary>
@@ -739,6 +837,8 @@
         </returns>
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -785,6 +885,8 @@
 
             
 
+            
+
              containing the specified data.</para
           >
         </summary>
@@ -794,6 +896,8 @@
         </returns>
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -845,11 +949,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -864,10 +972,14 @@
 
           
 
+          
+
           The local name of the attribute. </param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -906,6 +1018,8 @@
           <para
             >Creates an <see
              cref="T:System.Xml.XmlDocumentFragment" />
+
+            
 
             
 
@@ -955,8 +1069,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Xml.XmlDocumentType.Notations" />
+
+            
 
             
 
@@ -968,6 +1086,8 @@
           <para
             >According to the W3C Extensible Markup Language (XML) 1.0 recommendation (www.w3.org/TR/1998/REC-xml-19980210), DocumentType nodes are only allowed within Document nodes. Each <see
              cref="T:System.Xml.XmlDocument" />
+
+            
 
             
 
@@ -987,6 +1107,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1001,10 +1123,14 @@
 
           
 
+          
+
           Name of the document type. </param
         >
         <param name="publicId">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1019,10 +1145,14 @@
 
           
 
+          
+
           The system identifier of the document type or null. Specifies the URL of the file location for the external DTD subset.</param
         >
         <param name="internalSubset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1075,6 +1205,8 @@
 
           
 
+          
+
           The qualified name of the element. If the name contains a colon then the <see
            cref="P:System.Xml.XmlNode.Prefix" />
 
@@ -1082,8 +1214,12 @@
 
           
 
+          
+
            property reflects the part of the name preceding the colon and the <see
            cref="P:System.Xml.XmlDocument.LocalName" />
+
+          
 
           
 
@@ -1121,8 +1257,7 @@
           <para>The following C# code </para>
           <code> XmlElement elem;
  elem=doc.CreateElement("xy:item", "urn:abc");</code>
-          <para
->results in an element that is equivalent to the following XML text.</para>
+          <para>results in an element that is equivalent to the following XML text.</para>
           <code>&lt;xy:item
        xmlns:xy="urn:abc"/&gt;</code>
           <para>Although this method creates the new object in the context of the document, it does not automatically add the new object to the document tree. To add the new object, you must explicitly call one of the node insert methods.</para>
@@ -1138,8 +1273,12 @@
 
             
 
+            
+
              with the qualified name and <see
              cref="P:System.Xml.XmlNode.NamespaceURI" />
+
+            
 
             
 
@@ -1159,8 +1298,12 @@
 
           
 
+          
+
           The qualified name of the element. If the name contains a colon then the <see
            cref="P:System.Xml.XmlNode.Prefix" />
+
+          
 
           
 
@@ -1173,10 +1316,14 @@
 
           
 
+          
+
            property will reflect the part of the name after the colon. The qualified name cannot include a prefix of'xmlns'. </param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1231,6 +1378,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Xml.XmlDocument.LocalName" />
 
@@ -1238,8 +1387,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Xml.XmlNode.NamespaceURI" />
+
+            
 
             
 
@@ -1258,11 +1411,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1277,10 +1434,14 @@
 
           
 
+          
+
           The local name of the new element. </param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1322,6 +1483,8 @@
 
             
 
+            
+
              node.</para
           >
           <para>The namespaces used in the replacement text for the entity reference are bound at the time the parent of the entity reference node is first set (for example, when the entity reference node is inserted into the document). For example, given the following entity: </para>
@@ -1336,8 +1499,12 @@
 
             
 
+            
+
             , the parent of the newly created entity reference node is set and the children are expanded in this namespace context. The child element node b will have NamespaceURI equal to urn:1. The child nodes of the entity reference remain the same even if you move the entity reference to a place in the document that has a different default namespace context. This does not happen for existing entity reference nodes when you remove and insert them or for entity references that you clone with <see
              cref="M:System.Xml.XmlDocument.CloneNode(System.Boolean)" />
+
+            
 
             
 
@@ -1360,6 +1527,8 @@
 
             
 
+            
+
              with the specified name.</para
           >
         </summary>
@@ -1369,6 +1538,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1412,6 +1583,8 @@
 
             
 
+            
+
              object for navigating this document.</para
           >
         </summary>
@@ -1420,6 +1593,8 @@
           <para
             >An <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -1466,8 +1641,12 @@
 
             
 
+            
+
              object for navigating this document positioned on the <see
              cref="T:System.Xml.XmlNode" />
+
+            
 
             
 
@@ -1486,6 +1665,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -1496,8 +1677,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNode" />
+
+          
 
           
 
@@ -1536,6 +1721,8 @@
           <para
             >The <paramref
              name="nodeTypeString" />
+
+            
 
             
 
@@ -1993,6 +2180,8 @@
 
             
 
+            
+
              with the specified node type, <see
              cref="P:System.Xml.XmlDocument.Name" />
 
@@ -2000,8 +2189,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Xml.XmlNode.NamespaceURI" />
+
+            
 
             
 
@@ -2021,8 +2214,12 @@
 
           
 
+          
+
           String version of the <see
            cref="T:System.Xml.XmlNodeType" />
+
+          
 
           
 
@@ -2037,8 +2234,12 @@
 
           
 
+          
+
           The qualified name of the new node. If the name contains a colon, it is parsed into <see
            cref="P:System.Xml.XmlNode.Prefix" />
+
+          
 
           
 
@@ -2051,10 +2252,14 @@
 
           
 
+          
+
            components. </param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2432,8 +2637,12 @@
 
             
 
+            
+
              with the specified <see
              cref="T:System.Xml.XmlNodeType" />
+
+            
 
             
 
@@ -2446,8 +2655,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Xml.XmlNode.NamespaceURI" />
+
+            
 
             
 
@@ -2467,10 +2680,14 @@
 
           
 
+          
+
           The XmlNodeType of the new node. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2483,8 +2700,12 @@
 
           
 
+          
+
            and <see
            cref="P:System.Xml.XmlDocument.LocalName" />
+
+          
 
           
 
@@ -2494,6 +2715,8 @@
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2872,8 +3095,12 @@
 
             
 
+            
+
              with the specified <see
              cref="T:System.Xml.XmlNodeType" />
+
+            
 
             
 
@@ -2886,6 +3113,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Xml.XmlDocument.Name" />
 
@@ -2893,8 +3122,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Xml.XmlNode.NamespaceURI" />
+
+            
 
             
 
@@ -2914,10 +3147,14 @@
 
           
 
+          
+
           The XmlNodeType of the new node. </param
         >
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2932,10 +3169,14 @@
 
           
 
+          
+
           The local name of the new node. </param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2983,6 +3224,8 @@
 
             
 
+            
+
              with the specified name and data.</para
           >
         </summary>
@@ -2997,10 +3240,14 @@
 
           
 
+          
+
           The name of the processing instruction. </param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3047,6 +3294,8 @@
 
             
 
+            
+
              node.</para
           >
         </summary>
@@ -3056,6 +3305,8 @@
         </returns>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3102,6 +3353,8 @@
 
             
 
+            
+
              with the specified text.</para
           >
         </summary>
@@ -3111,6 +3364,8 @@
         </returns>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3157,6 +3412,8 @@
 
             
 
+            
+
              node.</para
           >
         </summary>
@@ -3166,6 +3423,8 @@
         </returns>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3209,6 +3468,8 @@
 
             
 
+            
+
              nodes.</para
           >
           <para>Although this method creates the new object in the context of the document, it does not automatically add the new object to the document tree. To add the new object, you must explicitly call one of the node insert methods.</para>
@@ -3220,6 +3481,8 @@
           <para
             >Creates an <see
              cref="T:System.Xml.XmlDeclaration" />
+
+            
 
             
 
@@ -3239,10 +3502,14 @@
 
           
 
+          
+
           The version must be "1.0". </param
         >
         <param name="encoding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3255,8 +3522,12 @@
 
           
 
+          
+
            to a file or a stream; therefore, it must be set to a string supported by the <see
            cref="T:System.Text.Encoding" />
+
+          
 
           
 
@@ -3269,10 +3540,14 @@
 
           
 
+          
+
            fails. If this is null or String.Empty, the Save method does not write an encoding attribute on the XML declaration and therefore the default encoding, UTF-8, is used.</param
         >
         <param name="standalone">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3309,6 +3584,8 @@
 
           
 
+          
+
            object that represents the document element, or null if it does not exist yet.</value
         >
         <remarks>
@@ -3324,6 +3601,8 @@
           <para
             >Gets the root <see
              cref="T:System.Xml.XmlElement" />
+
+            
 
             
 
@@ -3360,6 +3639,8 @@
 
           
 
+          
+
            object that represents the document type definition (DTD) of this document, or null if none as such.</value
         >
         <remarks>
@@ -3372,12 +3653,16 @@
 
             
 
+            
+
              equal to DocumentType.</para
           >
           <block subset="none" type="note">
             <para
               >This property is read-only. To change the DocumentType node, delete the existing node, create a new one using the <see
                cref="M:System.Xml.XmlDocument.CreateDocumentType(System.String,System.String,System.String,System.String)" />
+
+              
 
               
 
@@ -3432,6 +3717,8 @@
 
             
 
+            
+
              with the specified ID.</para
           >
         </summary>
@@ -3441,6 +3728,8 @@
         </returns>
         <param name="elementId">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3484,6 +3773,8 @@
 
               
 
+              
+
                or <see
                cref="Overload:System.Xml.XmlNode.SelectSingleNode" />
 
@@ -3491,8 +3782,12 @@
 
               
 
+              
+
                method instead of the <see
                cref="M:System.Xml.XmlDocument.GetElementsByTagName(System.String)" />
+
+              
 
               
 
@@ -3512,8 +3807,12 @@
 
             
 
+            
+
              containing a list of all descendant elements that match the specified <see
              cref="P:System.Xml.XmlDocument.Name" />
+
+            
 
             
 
@@ -3532,8 +3831,12 @@
 
             
 
+            
+
              containing a list of all matching nodes. If no nodes match <paramref
              name="name" />
+
+            
 
             
 
@@ -3544,6 +3847,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3588,6 +3893,8 @@
 
               
 
+              
+
                or <see
                cref="Overload:System.Xml.XmlNode.SelectSingleNode" />
 
@@ -3595,8 +3902,12 @@
 
               
 
+              
+
                method instead of the <see
                cref="M:System.Xml.XmlDocument.GetElementsByTagName(System.String,System.String)" />
+
+              
 
               
 
@@ -3616,6 +3927,8 @@
 
             
 
+            
+
              containing a list of all descendant elements that match the specified <see
              cref="P:System.Xml.XmlDocument.LocalName" />
 
@@ -3623,8 +3936,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Xml.XmlNode.NamespaceURI" />
+
+            
 
             
 
@@ -3643,6 +3960,8 @@
 
             
 
+            
+
              containing a list of all matching nodes. If no nodes match the specified <paramref
              name="localName" />
 
@@ -3650,8 +3969,12 @@
 
             
 
+            
+
              and <paramref
              name="namespaceURI" />
+
+            
 
             
 
@@ -3667,10 +3990,14 @@
 
           
 
+          
+
           The LocalName to match. The special value "*" matches all tags. </param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3706,6 +4033,8 @@
 
           
 
+          
+
            object which created this object, or null if there is no such relevant object.</value
         >
         <remarks>
@@ -3713,6 +4042,8 @@
           <para
             >XmlDocument objects created from the same XmlImplementation share the same <see
              cref="T:System.Xml.XmlNameTable" />
+
+            
 
             
 
@@ -3728,6 +4059,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -3736,6 +4069,8 @@
           <para
             >Gets the <see
              cref="T:System.Xml.XmlImplementation" />
+
+            
 
             
 
@@ -3780,8 +4115,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Xml.XmlNode.NodeType" />
+
+            
 
             
 
@@ -3794,6 +4133,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Xml.XmlNode.LocalName" />
 
@@ -3801,8 +4142,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Xml.XmlNode.NamespaceURI" />
+
+            
 
             
 
@@ -3818,11 +4163,15 @@
 
             
 
+            
+
              parameter, additional information is copied as appropriate. This method attempts to mirror the behavior expected if a fragment of XML or HTML source was copied from one document to another (recognizing that, in the XML case, the two documents could have different DTDs).</para
           >
           <para
             >The following table describes the specific behavior for each <see
              cref="T:System.Xml.XmlNodeType" />
+
+            
 
             
 
@@ -3857,8 +4206,12 @@
 
                   
 
+                  
+
                    property is set to true on the generated <see
                    cref="T:System.Xml.XmlAttribute" />
+
+                  
 
                   
 
@@ -3871,6 +4224,8 @@
                 <para
                   >The <paramref
                    name="deep" />
+
+                  
 
                   
 
@@ -3918,6 +4273,8 @@
 
                   
 
+                  
+
                    is generated. </para
                 >
               </description>
@@ -3950,6 +4307,8 @@
 
                   
 
+                  
+
                   .</para
                 >
                 <para>Note: Default attributes are not copied. If the document being imported into defines default attributes for this element name, those are assigned. </para>
@@ -3968,6 +4327,8 @@
 
                   
 
+                  
+
                    node. The replacement text is not included. If the destination document has the entity defined, its value is assigned. </para
                 >
               </description>
@@ -3975,6 +4336,8 @@
                 <para
                   >Because the source and destination documents could have the entities defined differently, this method only copies the <see
                    cref="T:System.Xml.XmlEntityReference" />
+
+                  
 
                   
 
@@ -4067,6 +4430,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -4077,10 +4442,14 @@
 
           
 
+          
+
           The node being imported. </param
         >
         <param name="deep">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4111,6 +4480,8 @@
           <para
             >Throws an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -4250,12 +4621,16 @@
 
               
 
+              
+
                property determines whether or not insignificant white space, that is white space in element content, is preserved. The default is false; white space in element content is not preserved.</para
             >
           </block>
           <para
             >If you want validation to occur, you can create a validating <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -4268,8 +4643,12 @@
 
             
 
+            
+
              class and the <see
              cref="Overload:System.Xml.XmlReader.Create" />
+
+            
 
             
 
@@ -4279,6 +4658,8 @@
              type="text/html">
               <a href="2958dbbd-60ca-4447-9b16-72f41d223486">Validating XML Data with XmlReader</a>
             </format>
+
+            
 
             
 
@@ -4294,6 +4675,8 @@
         </summary>
         <param name="inStream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4336,12 +4719,16 @@
 
               
 
+              
+
                property determines whether or not insignificant white space, that is white space in element content, is preserved. The default is false; white space in element content is not preserved.</para
             >
           </block>
           <para
             >If you want validation to occur, you can create a validating <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -4354,8 +4741,12 @@
 
             
 
+            
+
              class and the <see
              cref="Overload:System.Xml.XmlReader.Create" />
+
+            
 
             
 
@@ -4365,6 +4756,8 @@
              type="text/html">
               <a href="2958dbbd-60ca-4447-9b16-72f41d223486">Validating XML Data with XmlReader</a>
             </format>
+
+            
 
             
 
@@ -4384,11 +4777,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="txtReader">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4428,12 +4825,16 @@
 
               
 
+              
+
                property determines whether or not insignificant white space, that is white space in element content, is preserved. The default is false; white space in element content is not preserved.</para
             >
           </block>
           <para
             >If you want validation to occur, you can create a validating <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -4446,8 +4847,12 @@
 
             
 
+            
+
              class and the <see
              cref="Overload:System.Xml.XmlReader.Create" />
+
+            
 
             
 
@@ -4457,6 +4862,8 @@
              type="text/html">
               <a href="2958dbbd-60ca-4447-9b16-72f41d223486">Validating XML Data with XmlReader</a>
             </format>
+
+            
 
             
 
@@ -4472,6 +4879,8 @@
         </summary>
         <param name="filename">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4514,12 +4923,16 @@
 
               
 
+              
+
                property determines whether or not insignificant white space, that is white space in element content, is preserved. The default is false; white space in element content is not preserved.</para
             >
           </block>
           <para
             >If the reader is in the initial state (<see
              cref="P:System.Xml.XmlReader.ReadState" />
+
+            
 
             
 
@@ -4540,12 +4953,16 @@
 
             
 
+            
+
              will throw an exception.</para
           >
           <para>If the reader is positioned on a leaf node that is invalid for the root level of a document, for example a white space or attribute node, the reader continues to read until it is positioned on a node that can be used for the root. The document begins loading at this point.</para>
           <para
             >If you want validation to occur, you can create a validating <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -4558,8 +4975,12 @@
 
             
 
+            
+
              class and the <see
              cref="Overload:System.Xml.XmlReader.Create" />
+
+            
 
             
 
@@ -4569,6 +4990,8 @@
              type="text/html">
               <a href="2958dbbd-60ca-4447-9b16-72f41d223486">Validating XML Data with XmlReader</a>
             </format>
+
+            
 
             
 
@@ -4588,11 +5011,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="reader">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4632,8 +5059,12 @@
 
             
 
+            
+
              instance by using the <see
              cref="T:System.Xml.XmlReaderSettings" />
+
+            
 
             
 
@@ -4646,10 +5077,14 @@
 
             
 
+            
+
              method. For more information, see <format
              type="text/html">
               <a href="2958dbbd-60ca-4447-9b16-72f41d223486">Validating XML Data with XmlReader</a>
             </format>
+
+            
 
             
 
@@ -4665,8 +5100,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -4679,8 +5118,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -4696,6 +5139,8 @@
         </summary>
         <param name="xml">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4729,6 +5174,8 @@
 
             
 
+            
+
              of the node. To see a table describing the local name returned for each of the node types, see the <see
              cref="P:System.Xml.XmlNode.LocalName" />
 
@@ -4736,8 +5183,12 @@
 
             
 
+            
+
              property in the <see
              cref="T:System.Xml.XmlNode" />
+
+            
 
             
 
@@ -4776,6 +5227,8 @@
 
             
 
+            
+
              of the node. To see a table describing the name returned for each of the node types, see the <see
              cref="P:System.Xml.XmlNode.Name" />
 
@@ -4783,8 +5236,12 @@
 
             
 
+            
+
              property in the <see
              cref="T:System.Xml.XmlNode" />
+
+            
 
             
 
@@ -4823,6 +5280,8 @@
 
           
 
+          
+
            that stores all name strings.</value
         >
         <remarks>
@@ -4830,6 +5289,8 @@
           <para
             >Each XmlDocument object has a <see
              cref="T:System.Xml.NameTable" />
+
+            
 
             
 
@@ -4845,6 +5306,8 @@
 
             
 
+            
+
             .</para
           >
           <para>This method is a Microsoft extension to the Document Object Model (DOM).</para>
@@ -4854,6 +5317,8 @@
           <para
             >Gets the <see
              cref="T:System.Xml.XmlNameTable" />
+
+            
 
             
 
@@ -4899,6 +5364,8 @@
 
             
 
+            
+
              of a node belonging to this document has been changed.</para
           >
         </summary>
@@ -4934,6 +5401,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Xml.XmlNode.Value" />
+
+            
 
             
 
@@ -5124,6 +5593,8 @@
 
             
 
+            
+
              to which the current node belongs.</para
           >
         </summary>
@@ -5183,8 +5654,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Xml.XmlDocument.LoadXml(System.String)" />
+
+            
 
             
 
@@ -5195,6 +5670,8 @@
           <para
             >If PreserveWhitespace is true before <see
              cref="M:System.Xml.XmlDocument.Save(System.String)" />
+
+            
 
             
 
@@ -5242,6 +5719,8 @@
 
             
 
+            
+
              on which the reader is currently positioned. (If the reader is in the initial state, ReadNode advances the reader to the first node and then operates on that node.) </para
           >
           <para>If the reader is positioned on the start of an element, ReadNode reads all the attributes and any child nodes, up to and including the end tag of the current node. The XmlNode returned contains the sub-tree representing everything read. The reader is positioned immediately after the end tag.</para>
@@ -5260,6 +5739,8 @@
 
             
 
+            
+
              returns false.</para
           >
         </remarks>
@@ -5273,8 +5754,12 @@
 
             
 
+            
+
              object based on the information in the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -5289,6 +5774,8 @@
         </returns>
         <param name="reader">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5330,11 +5817,15 @@
 
             
 
+            
+
              is set to true.</para
           >
           <para
             >The XmlDeclaration of the current XmlDocument object determines the encoding attribute in the saved document. The value of the encoding attribute is taken from the <see
              cref="P:System.Xml.XmlDeclaration.Encoding" />
+
+            
 
             
 
@@ -5356,8 +5847,12 @@
 
             
 
+            
+
              method enforces a well-formed XML document. All other <unmanagedCodeEntityReference
             >Save</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -5372,6 +5867,8 @@
         </summary>
         <param name="outStream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5415,8 +5912,12 @@
 
             
 
+            
+
              method enforces a well-formed XML document. All other <unmanagedCodeEntityReference
             >Save</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -5435,11 +5936,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="writer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5478,11 +5983,15 @@
 
             
 
+            
+
              is set to true.</para
           >
           <para
             >The XmlDeclaration of the current XmlDocument object determines the encoding attribute in the saved document. The value of the encoding attribute is taken from the <see
              cref="P:System.Xml.XmlDeclaration.Encoding" />
+
+            
 
             
 
@@ -5504,8 +6013,12 @@
 
             
 
+            
+
              method enforces a well-formed XML document. All other <unmanagedCodeEntityReference
             >Save</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -5520,6 +6033,8 @@
         </summary>
         <param name="filename">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5558,6 +6073,8 @@
 
             
 
+            
+
              is set to true.</para
           >
           <para>The encoding on the XmlWriter determines the encoding that is written out (The encoding of the XmlDeclaration node is replaced by the encoding of the XmlWriter). If there was no encoding specified on the XmlWriter, the XmlDocument is saved without an encoding attribute.</para>
@@ -5577,8 +6094,12 @@
 
             
 
+            
+
              method enforces a well-formed XML document. All other <unmanagedCodeEntityReference
             >Save</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -5597,11 +6118,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="w">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5672,8 +6197,12 @@
 
             
 
+            
+
              object associated with an <see
              cref="T:System.Xml.XmlDocument" />
+
+            
 
             
 
@@ -5686,8 +6215,12 @@
 
             
 
+            
+
              method of an <see
              cref="T:System.Xml.XmlDocument" />
+
+            
 
             
 
@@ -5703,8 +6236,12 @@
 
             
 
+            
+
              object is initialized with XML data from an <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -5717,6 +6254,8 @@
 
             
 
+            
+
              object is loaded from the <see
              cref="P:System.Xml.XmlReaderSettings.Schemas" />
 
@@ -5724,8 +6263,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -5744,8 +6287,12 @@
 
             
 
+            
+
              object associated with this <see
              cref="T:System.Xml.XmlDocument" />
+
+            
 
             
 
@@ -5812,8 +6359,12 @@
 
             
 
+            
+
              method validates the XML data in the <see
              cref="T:System.Xml.XmlDocument" />
+
+            
 
             
 
@@ -5826,8 +6377,12 @@
 
             
 
+            
+
              property. The <see
              cref="M:System.Xml.XmlDocument.Validate(System.Xml.Schema.ValidationEventHandler)" />
+
+            
 
             
 
@@ -5840,11 +6395,15 @@
 
             
 
+            
+
              replaced with a typed sub-tree.</para
           >
           <para
             >The following are important notes to consider when using the <see
              cref="M:System.Xml.XmlDocument.Validate(System.Xml.Schema.ValidationEventHandler)" />
+
+            
 
             
 
@@ -5868,6 +6427,8 @@
 
                 
 
+                
+
                  becomes partially validated with some nodes with correct type information and some without.</para
               >
             </item>
@@ -5886,8 +6447,12 @@
 
             
 
+            
+
              against the XML Schema Definition Language (XSD) schemas contained in the <see
              cref="P:System.Xml.XmlDocument.Schemas" />
+
+            
 
             
 
@@ -5903,8 +6468,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Schema.ValidationEventHandler" />
+
+          
 
           
 
@@ -5947,8 +6516,12 @@
 
             
 
+            
+
              method validates the XML data in the <see
              cref="T:System.Xml.XmlNode" />
+
+            
 
             
 
@@ -5961,8 +6534,12 @@
 
             
 
+            
+
              property. The <see
              cref="M:System.Xml.XmlDocument.Validate(System.Xml.Schema.ValidationEventHandler,System.Xml.XmlNode)" />
+
+            
 
             
 
@@ -5975,11 +6552,15 @@
 
             
 
+            
+
              replaced with a typed sub-tree.</para
           >
           <para
             >The following are important notes to consider when using the <see
              cref="M:System.Xml.XmlDocument.Validate(System.Xml.Schema.ValidationEventHandler,System.Xml.XmlNode)" />
+
+            
 
             
 
@@ -6003,6 +6584,8 @@
 
                 
 
+                
+
                  becomes partially validated with some nodes with correct type information and some without.</para
               >
             </item>
@@ -6019,8 +6602,12 @@
 
             
 
+            
+
              object specified against the XML Schema Definition Language (XSD) schemas in the <see
              cref="P:System.Xml.XmlDocument.Schemas" />
+
+            
 
             
 
@@ -6036,8 +6623,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Schema.ValidationEventHandler" />
+
+          
 
           
 
@@ -6052,6 +6643,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNode" />
 
@@ -6059,8 +6652,12 @@
 
           
 
+          
+
            object created from an <see
            cref="T:System.Xml.XmlDocument" />
+
+          
 
           
 
@@ -6102,11 +6699,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >The <see
              cref="P:System.Xml.XmlDeclaration.Encoding" />
+
+            
 
             
 
@@ -6125,11 +6726,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="xw">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6171,11 +6776,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >The <see
              cref="P:System.Xml.XmlDeclaration.Encoding" />
+
+            
 
             
 
@@ -6194,11 +6803,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="w">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6236,6 +6849,8 @@
 
           
 
+          
+
            object to resolve external resources, or null to prohibit to resolve external resources.</value
         >
         <remarks>
@@ -6243,6 +6858,8 @@
           <para
             >The XmlResolver can be used to load DTDs or expand entity references. Using the <see
              cref="P:System.Xml.XmlResolver.Credentials" />
+
+            
 
             
 
@@ -6260,6 +6877,8 @@
 
                 
 
+                
+
                  (that is, if it was loaded using a stream, file, and so on) the XmlResolver on the XmlDocument is always used.</para
               >
             </item>
@@ -6267,6 +6886,8 @@
               <para
                 >If the document was loaded with an <see
                  cref="T:System.Xml.XmlTextReader" />
+
+                
 
                 
 
@@ -6284,6 +6905,8 @@
 
                 
 
+                
+
                 , the resolver on the XmlDocument is never used.</para
               >
             </item>
@@ -6291,6 +6914,8 @@
               <para
                 >If the document was loaded with a class that extends XmlReader and the XmlReader cannot resolve entities (<see
                  cref="P:System.Xml.XmlReader.CanResolveEntity" />
+
+                
 
                 
 
@@ -6309,8 +6934,12 @@
 
               
 
+              
+
                which had an XmlResolver set to it, the XmlResolver on the XmlReader is not cached by the XmlDocument after <see
                cref="M:System.Xml.XmlDocument.Load(System.String)" />
+
+              
 
               
 
@@ -6323,6 +6952,8 @@
           <para
             >Fully trusted code: The document uses a default <see
              cref="T:System.Xml.XmlUrlResolver" />
+
+            
 
             
 
@@ -6343,6 +6974,8 @@
 
             
 
+            
+
             .</para
           >
           <para>This property is a Microsoft extension to the Document Object Model (DOM).</para>
@@ -6352,6 +6985,8 @@
           <para
             >Sets the <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 

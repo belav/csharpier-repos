@@ -38,8 +38,12 @@
 
         
 
+        
+
          indicates the type of refresh mode to use when refreshing a <see
          cref="T:System.Windows.Forms.PropertyGrid" />
+
+        
 
         
 
@@ -84,6 +88,8 @@
 
             
 
+            
+
              class is used for refreshing the design-time view.</para
           >
         </remarks>
@@ -92,6 +98,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.RefreshPropertiesAttribute" />
+
+            
 
             
 
@@ -107,8 +115,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.RefreshProperties" />
+
+          
 
           
 
@@ -148,6 +160,8 @@
 
             
 
+            
+
              when the property value changes. The <see
              cref="T:System.Windows.Forms.PropertyGrid" />
 
@@ -155,8 +169,12 @@
 
             
 
+            
+
              caches data. The <see
              cref="F:System.ComponentModel.RefreshProperties.All" />
+
+            
 
             
 
@@ -227,6 +245,8 @@
           <para
             >Overrides the object's <see
              cref="Overload:System.Object.Equals" />
+
+            
 
             
 
@@ -349,6 +369,8 @@
           <para
             >Specify this attribute on a property to repaint all properties in the <see
              cref="T:System.Windows.Forms.PropertyGrid" />
+
+            
 
             
 

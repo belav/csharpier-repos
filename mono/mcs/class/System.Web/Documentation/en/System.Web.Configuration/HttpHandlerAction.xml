@@ -24,6 +24,8 @@
 
         
 
+        
+
          class provides a way to programmatically access and modify the add element of the httpHandlers configuration section. </para
       >
       <para
@@ -34,8 +36,12 @@
 
         
 
+        
+
          and the <see
          cref="T:System.Web.Configuration.HttpHandlersSection" />
+
+        
 
         
 
@@ -52,6 +58,8 @@
 
           
 
+          
+
            can read and write information from and to the related section of the configuration file according to the section property <see
            cref="P:System.Configuration.SectionInformation.AllowDefinition" />
 
@@ -59,8 +67,12 @@
 
           
 
+          
+
            whose value is <see
            cref="F:System.Configuration.ConfigurationAllowDefinition.Everywhere" />
+
+          
 
           
 
@@ -76,6 +88,8 @@
       <para
         >Configures an <see
          cref="T:System.Web.Configuration.HttpHandlersSection" />
+
+        
 
         
 
@@ -109,6 +123,8 @@
 
             
 
+            
+
              constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see
              cref="T:System.Web.Configuration.HttpHandlerAction" />
 
@@ -116,8 +132,12 @@
 
             
 
+            
+
              class by using the <see
              cref="P:System.Web.Configuration.HttpHandlersSection.Handlers" />
+
+            
 
             
 
@@ -136,6 +156,8 @@
 
             
 
+            
+
              class using the passed parameters. </para
           >
         </summary>
@@ -146,8 +168,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Configuration.HttpHandlerAction" />
+
+          
 
           
 
@@ -162,10 +188,14 @@
 
           
 
+          
+
           A comma-separated class/assembly combination consisting of version, culture, and public-key tokens.</param
         >
         <param name="verb">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -202,6 +232,8 @@
 
             
 
+            
+
              constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see
              cref="T:System.Web.Configuration.HttpHandlerAction" />
 
@@ -209,8 +241,12 @@
 
             
 
+            
+
              class by using the <see
              cref="P:System.Web.Configuration.HttpHandlersSection.Handlers" />
+
+            
 
             
 
@@ -229,6 +265,8 @@
 
             
 
+            
+
              class using the passed parameters.</para
           >
         </summary>
@@ -239,8 +277,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Configuration.HttpHandlerAction" />
+
+          
 
           
 
@@ -255,6 +297,8 @@
 
           
 
+          
+
           A comma-separated class/assembly combination consisting of version, culture, and public-key tokens.</param
         >
         <param name="verb">
@@ -264,10 +308,14 @@
 
           
 
+          
+
           A comma-separated list of HTTP verbs (for example, "GET, PUT, POST").</param
         >
         <param name="validate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -304,6 +352,8 @@
 
             
 
+            
+
              property can contain either a single URL or a wildcard string. </para
           >
         </remarks>
@@ -312,6 +362,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Web.Configuration.HttpHandlerAction" />
+
+            
 
             
 
@@ -368,6 +420,8 @@
 
             
 
+            
+
              property is a comma-separated class/assembly combination consisting of version, culture, and public-key tokens. </para
           >
           <block subset="none" type="note">
@@ -379,6 +433,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Web.Configuration.HttpHandlerAction" />
+
+            
 
             
 
@@ -416,6 +472,8 @@
 
             
 
+            
+
              property is false, ASP.NET will not attempt to load the class until the actual matching request comes, potentially delaying the error but improving the startup time.</para
           >
         </remarks>
@@ -424,6 +482,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Web.Configuration.HttpHandlerAction" />
+
+            
 
             
 
@@ -461,6 +521,8 @@
 
             
 
+            
+
              property can be a comma-separated list of HTTP verbs (for example, "GET, PUT, POST").</para
           >
         </remarks>
@@ -469,6 +531,8 @@
           <para
             >Gets or sets the verb allowed by the <see
              cref="T:System.Web.Configuration.HttpHandlerAction" />
+
+            
 
             
 

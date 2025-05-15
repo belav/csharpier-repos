@@ -21,8 +21,12 @@
 
         
 
+        
+
          collection. Add client channel initializers to the <see
          cref="P:System.ServiceModel.Dispatcher.ClientRuntime.ChannelInitializers" />
+
+        
 
         
 
@@ -68,8 +72,12 @@
 
             
 
+            
+
              class with a specified <see
              cref="T:System.ServiceModel.IClientChannel" />
+
+            
 
             
 
@@ -85,6 +93,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.IClientChannel" />
 
@@ -92,8 +102,12 @@
 
           
 
+          
+
            used to initialize the <see
            cref="T:System.ServiceModel.Dispatcher.IChannelInitializer" />
+
+          
 
           
 

@@ -24,11 +24,15 @@
 
         
 
+        
+
          class allows you to remap the types of tags at compile time. This remapping causes the mapped type to be used in place of the original tag type for all pages and controls in the ASP.NET application in the scope of the configuration file.</para
       >
       <para
         >The <see
          cref="T:System.Web.Configuration.TagMapCollection" />
+
+        
 
         
 
@@ -69,6 +73,8 @@
 
             
 
+            
+
              class based on the passed property values.</para
           >
         </summary>
@@ -79,10 +85,14 @@
 
           
 
+          
+
           The fully qualified name of the type for the tag that is being remapped.</param
         >
         <param name="mappedTagTypeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -171,8 +181,12 @@
 
             
 
+            
+
              property) to be used in place of the original tag type (specified by the <see
              cref="P:System.Web.Configuration.TagMapInfo.TagType" />
+
+            
 
             
 
@@ -211,6 +225,8 @@
           <para
             >Gets a collection of all the properties belonging to this <see
              cref="T:System.Web.Configuration.TagPrefixInfo" />
+
+            
 
             
 
@@ -276,8 +292,12 @@
 
             
 
+            
+
              property) to be used in place of the original tag type (specified by the <see
              cref="P:System.Web.Configuration.TagMapInfo.TagType" />
+
+            
 
             
 

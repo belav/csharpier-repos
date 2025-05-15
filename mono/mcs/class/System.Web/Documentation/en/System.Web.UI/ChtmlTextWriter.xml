@@ -48,8 +48,12 @@
 
         
 
+        
+
          class derives from the <see
          cref="T:System.Web.UI.Html32TextWriter" />
+
+        
 
         
 
@@ -62,8 +66,12 @@
 
         
 
+        
+
          and the base class for all markup text writers, which is the <see
          cref="T:System.Web.UI.HtmlTextWriter" />
+
+        
 
         
 
@@ -77,6 +85,8 @@
       <para
         >Writes a series of cHTML-specific characters and text to the output stream of an ASP.NET server control. The <see
          cref="T:System.Web.UI.ChtmlTextWriter" />
+
+        
 
         
 
@@ -108,8 +118,12 @@
 
             
 
+            
+
              class has two constructors, which is standard for all classes that derive directly or indirectly from the <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -125,8 +139,12 @@
 
             
 
+            
+
              constructor, which takes an instance of the <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -144,6 +162,8 @@
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -151,6 +171,8 @@
               <para
                 >The string value that is specified in the <see
                  cref="F:System.Web.UI.HtmlTextWriter.DefaultTabString" />
+
+                
 
                 
 
@@ -171,8 +193,12 @@
 
             
 
+            
+
              class that uses the <see
              cref="F:System.Web.UI.HtmlTextWriter.DefaultTabString" />
+
+            
 
             
 
@@ -188,8 +214,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -224,8 +254,12 @@
 
             
 
+            
+
              constructor, which takes both an instance of the <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -238,8 +272,12 @@
 
             
 
+            
+
              constructor that takes the same parameters when it creates an instance of the <see
              cref="T:System.Web.UI.ChtmlTextWriter" />
+
+            
 
             
 
@@ -258,6 +296,8 @@
 
             
 
+            
+
              class with the specified line indentation.</para
           >
         </summary>
@@ -268,8 +308,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -284,8 +328,12 @@
 
           
 
+          
+
           The number of spaces defined in the <see
            cref="P:System.Web.UI.HtmlTextWriter.Indent" />
+
+          
 
           
 
@@ -323,8 +371,12 @@
 
             
 
+            
+
              method adds an attribute to a cHTML element. The recognized attribute is stored in the recognized attributes <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -337,8 +389,12 @@
 
             
 
+            
+
              object that is referenced by the <see
              cref="P:System.Web.UI.ChtmlTextWriter.RecognizedAttributes" />
+
+            
 
             
 
@@ -357,11 +413,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="elementName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -376,8 +436,12 @@
 
           
 
+          
+
           The attribute to add to <paramref
            name="elementName" />
+
+          
 
           
 
@@ -407,6 +471,8 @@
           <para
             >The following list shows the globally suppressed attributes that are set when a new instance of the <see
              cref="T:System.Web.UI.ChtmlTextWriter" />
+
+            
 
             
 
@@ -467,6 +533,8 @@
 
             
 
+            
+
              object of globally suppressed attributes that cannot be rendered on cHTML elements. </para
           >
         </summary>
@@ -501,8 +569,12 @@
 
             
 
+            
+
              method prevents globally suppressed attributes that are listed in the <see
              cref="P:System.Web.UI.ChtmlTextWriter.GlobalSuppressedAttributes" />
+
+            
 
             
 
@@ -515,6 +587,8 @@
 
             
 
+            
+
              property from being written to the output stream. You can override the behavior of the <see
              cref="M:System.Web.UI.ChtmlTextWriter.OnAttributeRender(System.String,System.String,System.Web.UI.HtmlTextWriterAttribute)" />
 
@@ -522,8 +596,12 @@
 
             
 
+            
+
              method in classes that are derived from the <see
              cref="T:System.Web.UI.ChtmlTextWriter" />
+
+            
 
             
 
@@ -542,8 +620,12 @@
 
             
 
+            
+
              method in classes that derive from the <see
              cref="T:System.Web.UI.ChtmlTextWriter" />
+
+            
 
             
 
@@ -562,11 +644,15 @@
 
             
 
+            
+
              output stream; otherwise, false.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -581,8 +667,12 @@
 
           
 
+          
+
           The value assigned to <paramref
            name="name" />
+
+          
 
           
 
@@ -597,6 +687,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriterAttribute" />
 
@@ -604,8 +696,12 @@
 
           
 
+          
+
            associated with <paramref
            name="name" />
+
+          
 
           
 
@@ -645,6 +741,8 @@
 
             
 
+            
+
              method returns false when <paramref
              name="key" />
 
@@ -652,8 +750,12 @@
 
             
 
+            
+
              is equal to the <see
              cref="F:System.Web.UI.HtmlTextWriterStyle.TextDecoration" />
+
+            
 
             
 
@@ -677,8 +779,12 @@
 
           
 
+          
+
           A string containing the value that is assigned to <paramref
            name="name" />
+
+          
 
           
 
@@ -693,6 +799,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriterStyle" />
 
@@ -700,8 +808,12 @@
 
           
 
+          
+
            associated with <paramref
            name="name" />
+
+          
 
           
 
@@ -740,6 +852,8 @@
 
             
 
+            
+
              method returns false. For all other tags, it returns true.</para
           >
         </remarks>
@@ -753,6 +867,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -787,6 +903,8 @@
 
             
 
+            
+
              method to add recognized attributes to the recognized attributes collection.</para
           >
         </remarks>
@@ -795,6 +913,8 @@
           <para
             >Gets a <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -833,8 +953,12 @@
 
             
 
+            
+
              method removes an attribute from a cHTML element. The recognized attribute is removed from the recognized attributes <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -847,8 +971,12 @@
 
             
 
+            
+
              object that is referenced by the <see
              cref="P:System.Web.UI.ChtmlTextWriter.RecognizedAttributes" />
+
+            
 
             
 
@@ -867,11 +995,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="elementName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -886,8 +1018,12 @@
 
           
 
+          
+
           The attribute to remove from <paramref
            name="elementName" />
+
+          
 
           
 
@@ -922,11 +1058,15 @@
 
             
 
+            
+
              method to add attributes to the suppressed attributes collection.</para
           >
           <para
             >The following list shows the default suppressed attributes that are set for a div element when a new instance of the <see
              cref="T:System.Web.UI.ChtmlTextWriter" />
+
+            
 
             
 
@@ -948,8 +1088,7 @@
                 <para>cellspacing</para>
               </term>
               <description>
-                <para
->rules</para>
+                <para>rules</para>
               </description>
             </item>
             <item>
@@ -964,6 +1103,8 @@
           <para
             >The following list shows the default suppressed attributes that are set for a span element when a new instance of the <see
              cref="T:System.Web.UI.ChtmlTextWriter" />
+
+            
 
             
 
@@ -985,8 +1126,7 @@
                 <para>cellpadding</para>
               </term>
               <description>
-                <para
->rules</para>
+                <para>rules</para>
               </description>
             </item>
           </list>
@@ -996,6 +1136,8 @@
           <para
             >Gets a <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -1023,6 +1165,8 @@
           <para
             >Use the <see
              cref="M:System.Web.UI.ChtmlTextWriter.WriteBreak" />
+
+            
 
             
 
@@ -1061,11 +1205,15 @@
 
             
 
+            
+
              method is null or has a length of zero, then nothing is written.</para
           >
           <para
             >Use the <see
              cref="M:System.Web.UI.ChtmlTextWriter.WriteEncodedText(System.String)" />
+
+            
 
             
 
@@ -1081,8 +1229,12 @@
 
             
 
+            
+
              method uses the base class's <see
              cref="M:System.Web.UI.HtmlTextWriter.WriteEncodedText(System.String)" />
+
+            
 
             
 
@@ -1097,6 +1249,8 @@
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

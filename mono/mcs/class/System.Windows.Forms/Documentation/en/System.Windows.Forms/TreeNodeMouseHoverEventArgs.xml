@@ -25,6 +25,8 @@
 
         
 
+        
+
          event. </para
       >
     </summary>
@@ -52,6 +54,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -62,8 +66,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.TreeNode" />
+
+          
 
           
 

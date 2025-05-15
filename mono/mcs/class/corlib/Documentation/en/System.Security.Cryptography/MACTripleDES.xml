@@ -38,6 +38,8 @@
 
         
 
+        
+
          uses a key that is 16 or 24 bytes long, and produces a hash sequence that is 8 bytes long.</para
       >
     </remarks>
@@ -51,8 +53,12 @@
 
         
 
+        
+
          for the input data <see
          cref="T:System.Security.Cryptography.CryptoStream" />
+
+        
 
         
 
@@ -88,6 +94,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -96,6 +104,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.MACTripleDES" />
+
+            
 
             
 
@@ -133,8 +143,12 @@
 
             
 
+            
+
             . The <paramref
              name="rgbKey" />
+
+            
 
             
 
@@ -153,6 +167,8 @@
 
             
 
+            
+
              class with the specified key data.</para
           >
         </summary>
@@ -163,8 +179,12 @@
 
           
 
+          
+
           The secret key for <see
            cref="T:System.Security.Cryptography.MACTripleDES" />
+
+          
 
           
 
@@ -205,8 +225,12 @@
 
             
 
+            
+
              parameter is the friendly name of the <see
              cref="T:System.Security.Cryptography.TripleDES" />
+
+            
 
             
 
@@ -217,6 +241,8 @@
           <para
             >The <paramref
              name="rgbKey" />
+
+            
 
             
 
@@ -235,8 +261,12 @@
 
             
 
+            
+
              class with the specified key data and using the specified implementation of <see
              cref="T:System.Security.Cryptography.TripleDES" />
+
+            
 
             
 
@@ -252,8 +282,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Security.Cryptography.TripleDES" />
+
+          
 
           
 
@@ -268,8 +302,12 @@
 
           
 
+          
+
           The secret key for <see
            cref="T:System.Security.Cryptography.MACTripleDES" />
+
+          
 
           
 
@@ -309,8 +347,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Security.Cryptography.MACTripleDES" />
+
+            
 
             
 
@@ -329,11 +371,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -394,11 +440,15 @@
 
             
 
+            
+
              encryptor for computing the Message Authentication Code (MAC).</para
           >
         </summary>
         <param name="rgbData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -413,10 +463,14 @@
 
           
 
+          
+
           The offset into the byte array from which to begin using data. </param
         >
         <param name="cbSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -448,6 +502,8 @@
           <para
             >You can read this value only after all data is written, and you cannot write more data afterward. Create a new instance of <see
              cref="T:System.Security.Cryptography.MACTripleDES" />
+
+            
 
             
 
@@ -497,6 +553,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -537,11 +595,15 @@
 
             
 
+            
+
              for a description of specific modes.</para
           >
           <para
             >This field is accessed through the <see
              cref="P:System.Security.Cryptography.SymmetricAlgorithm.Padding" />
+
+            
 
             
 

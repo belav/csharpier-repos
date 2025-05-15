@@ -47,6 +47,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -73,6 +75,8 @@
           <para
             >Gets the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -116,6 +120,8 @@
 
             
 
+            
+
              object whose properties are based on the setting of this configuration element.</para
           >
         </returns>
@@ -150,6 +156,8 @@
 
             
 
+            
+
              instance that contains a collection of <see
              cref="T:System.Configuration.ConfigurationProperty" />
 
@@ -157,8 +165,12 @@
 
             
 
+            
+
              objects that can be attributes or <see
              cref="T:System.Configuration.ConfigurationElement" />
+
+            
 
             
 

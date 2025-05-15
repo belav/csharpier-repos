@@ -27,11 +27,15 @@
 
         
 
+        
+
         ) and any roles to which they belong.</para
       >
       <para
         >All principal objects are required to implement the <see
          cref="T:System.Security.Principal.IPrincipal" />
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
          implementations, see the <see
          cref="T:System.Security.Claims.ClaimsPrincipal" />
+
+        
 
         
 
@@ -117,6 +125,8 @@
         </returns>
         <param name="role">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

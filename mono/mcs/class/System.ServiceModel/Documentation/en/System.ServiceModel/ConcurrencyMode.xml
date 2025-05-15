@@ -22,8 +22,12 @@
 
         
 
+        
+
          is used in conjunction with the <see
          cref="P:System.ServiceModel.ServiceBehaviorAttribute.ConcurrencyMode" />
+
+        
 
         
 
@@ -34,6 +38,8 @@
       <para
         >The following table shows when indigo1 permits an operation to be invoked while another one is in progress, depending upon the <see
          cref="T:System.ServiceModel.ConcurrencyMode" />
+
+        
 
         
 
@@ -134,6 +140,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -163,8 +171,12 @@
 
             
 
+            
+
              property is <see
              cref="F:System.ServiceModel.InstanceContextMode.Single" />
+
+            
 
             
 

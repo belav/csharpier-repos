@@ -44,11 +44,15 @@
 
         
 
+        
+
          permission, the error message for this exception may contain only file or directory names instead of full paths.</para
       >
       <para
         >Full paths must not exceed 260 characters to maintain compatibility with Windows operating systems. For more information about this restriction, see the entry <see
          cref="http://go.microsoft.com/fwlink/?LinkID=163666">Long Paths in .NET</see>
+
+        
 
         
 
@@ -65,6 +69,8 @@
 
           
 
+          
+
            or the <format
            type="text/html">
             <a href="c31e1663-c164-4e65-b66d-d3aa8750a154">Portable Class Library</a>
@@ -74,8 +80,12 @@
 
           
 
+          
+
           , but it is thrown by some members that are. To catch the exception in that case, write a catch statement for <see
            cref="T:System.IO.IOException" />
+
+          
 
           
 
@@ -120,6 +130,8 @@
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "The supplied path is too long." This message takes into account the current system culture.</para
           >
         </remarks>
@@ -128,6 +140,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.PathTooLongException" />
+
+            
 
             
 
@@ -170,8 +184,12 @@
 
             
 
+            
+
              property of the new instance using <paramref
              name="message" />
+
+            
 
             
 
@@ -190,8 +208,12 @@
 
             
 
+            
+
              class with its message string set to <paramref
              name="message" />
+
+            
 
             
 
@@ -207,6 +229,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
 
@@ -214,8 +238,12 @@
 
           
 
+          
+
            that describes the error. The content of <paramref
            name="message" />
+
+          
 
           
 
@@ -257,6 +285,8 @@
 
             
 
+            
+
              class with the specified serialization and context information.</para
           >
         </summary>
@@ -267,8 +297,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -283,8 +317,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -326,8 +364,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 
@@ -345,11 +387,15 @@
 
             
 
+            
+
              property. The InnerException property returns the same value that is passed into the constructor, or null if the InnerException property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.IO.PathTooLongException" />
+
+            
 
             
 
@@ -397,6 +443,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -405,6 +453,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.PathTooLongException" />
+
+            
 
             
 
@@ -420,6 +470,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
 
@@ -427,8 +479,12 @@
 
           
 
+          
+
            that describes the error. The content of <paramref
            name="message" />
+
+          
 
           
 
@@ -443,8 +499,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 

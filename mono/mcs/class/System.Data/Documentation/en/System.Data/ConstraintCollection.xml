@@ -36,8 +36,12 @@
 
         
 
+        
+
          is accessed through the <see
          cref="P:System.Data.DataTable.Constraints" />
+
+        
 
         
 
@@ -53,8 +57,12 @@
 
         
 
+        
+
          can contain both <see
          cref="T:System.Data.UniqueConstraint" />
+
+        
 
         
 
@@ -67,8 +75,12 @@
 
         
 
+        
+
          objects for the <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -81,8 +93,12 @@
 
         
 
+        
+
          object makes sure that data in a specific column is always unique to preserve the data integrity. The <see
          cref="T:System.Data.ForeignKeyConstraint" />
+
+        
 
         
 
@@ -95,8 +111,12 @@
 
         
 
+        
+
          is either updated or deleted. For example, if a row is deleted, the <see
          cref="T:System.Data.ForeignKeyConstraint" />
+
+        
 
         
 
@@ -113,8 +133,12 @@
 
           
 
+          
+
            that creates a relationship between two tables to a <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -127,8 +151,12 @@
 
           
 
+          
+
            and a <see
            cref="T:System.Data.UniqueConstraint" />
+
+          
 
           
 
@@ -141,8 +169,12 @@
 
           
 
+          
+
            is applied to the primary key column in the parent <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -155,6 +187,8 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Data.ForeignKeyConstraint" />
 
@@ -162,8 +196,12 @@
 
           
 
+          
+
            is applied to the primary key column and the foreign key column, and the constraint is added to the child table's <see
            cref="T:System.Data.ConstraintCollection" />
+
+          
 
           
 
@@ -180,8 +218,12 @@
 
         
 
+        
+
          uses standard collection methods such as <see
          cref="M:System.Data.ConstraintCollection.Add(System.Data.Constraint)" />
+
+        
 
         
 
@@ -194,6 +236,8 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Data.ConstraintCollection.Remove(System.Data.Constraint)" />
 
@@ -201,8 +245,12 @@
 
         
 
+        
+
         . In addition, the <see
          cref="M:System.Data.ConstraintCollection.Contains(System.String)" />
+
+        
 
         
 
@@ -218,8 +266,12 @@
 
         
 
+        
+
          is created when a <see
          cref="T:System.Data.DataColumn" />
+
+        
 
         
 
@@ -232,6 +284,8 @@
 
         
 
+        
+
          property set to true is added to a <see
          cref="T:System.Data.DataTable" />
 
@@ -239,8 +293,12 @@
 
         
 
+        
+
          object's <see
          cref="T:System.Data.DataColumnCollection" />
+
+        
 
         
 
@@ -256,8 +314,12 @@
 
         
 
+        
+
          is created when a <see
          cref="T:System.Data.DataRelation" />
+
+        
 
         
 
@@ -270,8 +332,12 @@
 
         
 
+        
+
          object's <see
          cref="T:System.Data.DataRelationCollection" />
+
+        
 
         
 
@@ -285,6 +351,8 @@
       <para
         >Represents a collection of constraints for a <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -315,6 +383,8 @@
 
             
 
+            
+
              event occurs.</para
           >
         </remarks>
@@ -323,6 +393,8 @@
           <para
             >Adds the specified <see
              cref="T:System.Data.Constraint" />
+
+            
 
             
 
@@ -341,8 +413,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Data.ForeignKeyConstraint" />
+
+            
 
             
 
@@ -353,6 +429,8 @@
         </returns>
         <param name="constraint">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -391,6 +469,8 @@
 
             
 
+            
+
              event occurs if the constraint is added successfully.</para
           >
         </remarks>
@@ -404,8 +484,12 @@
 
             
 
+            
+
              with the specified name, <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -425,10 +509,14 @@
 
           
 
+          
+
           The name of the UniqueConstraint. </param
         >
         <param name="column">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -441,10 +529,14 @@
 
           
 
+          
+
            to which the constraint applies. </param
         >
         <param name="primaryKey">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -483,6 +575,8 @@
 
             
 
+            
+
              event occurs if the constraint is added successfully.</para
           >
         </remarks>
@@ -491,6 +585,8 @@
           <para
             >Constructs a new <see
              cref="T:System.Data.ForeignKeyConstraint" />
+
+            
 
             
 
@@ -510,8 +606,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Data.ForeignKeyConstraint" />
+
+          
 
           
 
@@ -526,8 +626,12 @@
 
           
 
+          
+
           The primary key, or parent, <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -542,8 +646,12 @@
 
           
 
+          
+
           The foreign key, or child, <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -582,6 +690,8 @@
 
             
 
+            
+
              event occurs if the constraint is added successfully.</para
           >
         </remarks>
@@ -595,8 +705,12 @@
 
             
 
+            
+
              with the specified name, array of <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -616,8 +730,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Data.UniqueConstraint" />
+
+          
 
           
 
@@ -632,8 +750,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -643,6 +765,8 @@
         >
         <param name="primaryKey">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -681,6 +805,8 @@
 
             
 
+            
+
              event occurs if the constraint is added successfully.</para
           >
         </remarks>
@@ -689,6 +815,8 @@
           <para
             >Constructs a new <see
              cref="T:System.Data.ForeignKeyConstraint" />
+
+            
 
             
 
@@ -708,8 +836,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Data.ForeignKeyConstraint" />
+
+          
 
           
 
@@ -724,8 +856,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -740,8 +876,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -778,8 +918,12 @@
 
             
 
+            
+
              has been called, AddRange does not add any objects to the collection until <see
              cref="M:System.Data.DataTable.EndInit" />
+
+            
 
             
 
@@ -798,6 +942,8 @@
 
             
 
+            
+
              array to the end of the collection.</para
           >
         </summary>
@@ -808,8 +954,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Data.ConstraintCollection" />
+
+          
 
           
 
@@ -846,8 +996,12 @@
 
             
 
+            
+
              is added to a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -860,8 +1014,12 @@
 
             
 
+            
+
              to the parent table and a <see
              cref="T:System.Data.UniqueConstraint" />
+
+            
 
             
 
@@ -874,8 +1032,12 @@
 
             
 
+            
+
              is applied to the primary key column of the parent table, and the <see
              cref="T:System.Data.ForeignKeyConstraint" />
+
+            
 
             
 
@@ -888,8 +1050,12 @@
 
             
 
+            
+
              before removing the <see
              cref="T:System.Data.ForeignKeyConstraint" />
+
+            
 
             
 
@@ -902,8 +1068,12 @@
 
             
 
+            
+
              method before calling Remove, to make sure that the <see
              cref="T:System.Data.UniqueConstraint" />
+
+            
 
             
 
@@ -922,6 +1092,8 @@
 
             
 
+            
+
              can be removed.</para
           >
         </summary>
@@ -930,6 +1102,8 @@
           <para
             >true if the <see
              cref="T:System.Data.Constraint" />
+
+            
 
             
 
@@ -945,8 +1119,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.Constraint" />
+
+          
 
           
 
@@ -978,6 +1156,8 @@
 
             
 
+            
+
              event occurs if this action is successful.</para
           >
         </remarks>
@@ -986,6 +1166,8 @@
           <para
             >Clears the collection of any <see
              cref="T:System.Data.Constraint" />
+
+            
 
             
 
@@ -1023,6 +1205,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1036,8 +1220,12 @@
 
             
 
+            
+
              is changed because of <see
              cref="T:System.Data.Constraint" />
+
+            
 
             
 
@@ -1072,8 +1260,12 @@
 
             
 
+            
+
              method to determine whether the specified <see
              cref="T:System.Data.Constraint" />
+
+            
 
             
 
@@ -1086,8 +1278,12 @@
 
             
 
+            
+
              method to determine whether a <see
              cref="T:System.Data.Constraint" />
+
+            
 
             
 
@@ -1101,6 +1297,8 @@
           <para
             >Indicates whether the <see
              cref="T:System.Data.Constraint" />
+
+            
 
             
 
@@ -1120,8 +1318,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Data.Constraint.ConstraintName" />
+
+          
 
           
 
@@ -1163,11 +1365,15 @@
 
             
 
+            
+
              instance starting at the specified index.</para
           >
         </summary>
         <param name="array">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1180,10 +1386,14 @@
 
           
 
+          
+
            that is the destination of the values copied from the collection.</param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1216,6 +1426,8 @@
 
             
 
+            
+
              method to return an index to be used with either the <see
              cref="M:System.Data.ConstraintCollection.Contains(System.String)" />
 
@@ -1223,8 +1435,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Data.ConstraintCollection.Remove(System.Data.Constraint)" />
+
+            
 
             
 
@@ -1243,6 +1459,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1251,6 +1469,8 @@
           <para
             >The zero-based index of the <see
              cref="T:System.Data.Constraint" />
+
+            
 
             
 
@@ -1266,8 +1486,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.Constraint" />
+
+          
 
           
 
@@ -1301,6 +1525,8 @@
 
             
 
+            
+
              method to return an index to be used with either the <see
              cref="M:System.Data.ConstraintCollection.Contains(System.String)" />
 
@@ -1308,8 +1534,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Data.ConstraintCollection.Remove(System.Data.Constraint)" />
+
+            
 
             
 
@@ -1328,6 +1558,8 @@
 
             
 
+            
+
              specified by name.</para
           >
         </summary>
@@ -1336,6 +1568,8 @@
           <para
             >The index of the <see
              cref="T:System.Data.Constraint" />
+
+            
 
             
 
@@ -1351,8 +1585,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Data.Constraint" />
+
+          
 
           
 
@@ -1458,6 +1696,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1468,8 +1708,12 @@
 
           
 
+          
+
           A <see
            cref="System.ComponentModel.CollectionChangeEventArgs" />
+
+          
 
           
 
@@ -1505,8 +1749,12 @@
 
             
 
+            
+
              method to determine whether the collection contains the target <see
              cref="T:System.Data.Constraint" />
+
+            
 
             
 
@@ -1519,8 +1767,12 @@
 
             
 
+            
+
              method to determine whether a <see
              cref="T:System.Data.Constraint" />
+
+            
 
             
 
@@ -1531,6 +1783,8 @@
           <para
             >The <see
              cref="E:System.Data.ConstraintCollection.CollectionChanged" />
+
+            
 
             
 
@@ -1549,6 +1803,8 @@
 
             
 
+            
+
              from the collection.</para
           >
         </summary>
@@ -1559,8 +1815,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.Constraint" />
+
+          
 
           
 
@@ -1594,8 +1854,12 @@
 
             
 
+            
+
              method to determine whether the collection contains the target <see
              cref="T:System.Data.Constraint" />
+
+            
 
             
 
@@ -1608,8 +1872,12 @@
 
             
 
+            
+
              method to determine whether a <see
              cref="T:System.Data.Constraint" />
+
+            
 
             
 
@@ -1620,6 +1888,8 @@
           <para
             >The <see
              cref="E:System.Data.ConstraintCollection.CollectionChanged" />
+
+            
 
             
 
@@ -1638,6 +1908,8 @@
 
             
 
+            
+
              object specified by name from the collection.</para
           >
         </summary>
@@ -1648,8 +1920,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Data.Constraint" />
+
+          
 
           
 
@@ -1683,8 +1959,12 @@
 
             
 
+            
+
              method returns the index of a specific <see
              cref="T:System.Data.Constraint" />
+
+            
 
             
 
@@ -1700,8 +1980,12 @@
 
             
 
+            
+
              method to determine whether the collection contains the target <see
              cref="T:System.Data.Constraint" />
+
+            
 
             
 
@@ -1714,8 +1998,12 @@
 
             
 
+            
+
              method to determine whether a <see
              cref="T:System.Data.Constraint" />
+
+            
 
             
 
@@ -1726,6 +2014,8 @@
           <para
             >The <see
              cref="E:System.Data.ConstraintCollection.CollectionChanged" />
+
+            
 
             
 
@@ -1744,6 +2034,8 @@
 
             
 
+            
+
              object at the specified index from the collection.</para
           >
         </summary>
@@ -1754,8 +2046,12 @@
 
           
 
+          
+
           The index of the <see
            cref="T:System.Data.Constraint" />
+
+          
 
           
 

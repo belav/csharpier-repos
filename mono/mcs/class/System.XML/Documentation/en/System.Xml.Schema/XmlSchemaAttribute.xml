@@ -38,6 +38,8 @@
 
         
 
+        
+
         . Attributes provide additional information for other document elements. The attribute tag is nested between the tags of a document's element for the schema. The XML document displays attributes as named items in the opening tag of an element.</para
       >
     </summary>
@@ -64,6 +66,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Schema.XmlSchemaAttribute" />
+
+            
 
             
 
@@ -113,6 +117,8 @@
 
             
 
+            
+
              object representing the type of the attribute based on the <see
              cref="P:System.Xml.Schema.XmlSchemaAttribute.SchemaType" />
 
@@ -120,8 +126,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Xml.Schema.XmlSchemaAttribute.SchemaTypeName" />
+
+            
 
             
 
@@ -164,8 +174,12 @@
 
             
 
+            
+
              if the attribute has a built-in XML Schema type or <see
              cref="T:System.Xml.Schema.XmlSchemaSimpleType" />
+
+            
 
             
 
@@ -182,8 +196,12 @@
 
               
 
+              
+
                property is obsolete in the 2.0 version of the .NET Framework and has been replaced by the <see
                cref="P:System.Xml.Schema.XmlSchemaAttribute.AttributeSchemaType" />
+
+              
 
               
 
@@ -203,8 +221,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Xml.Schema.XmlSchemaAttribute.SchemaTypeName" />
+
+            
 
             
 
@@ -490,6 +512,8 @@
           <para
             >SchemaTypeName and <see
              cref="P:System.Xml.Schema.XmlSchemaAttribute.SchemaType" />
+
+            
 
             
 

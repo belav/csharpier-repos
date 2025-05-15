@@ -27,6 +27,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -44,6 +46,8 @@
 
         
 
+        
+
          object when you need to sign the raw data associated with the encoded content of an element.</para
       >
       <para
@@ -54,8 +58,12 @@
 
         
 
+        
+
          object is defined by the <see
          cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigBase64TransformUrl" />
+
+        
 
         
 
@@ -97,6 +105,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -133,6 +143,8 @@
 
             
 
+            
+
              object that are suitable to be included as subelements of an XMLDSIG &lt;Transform&gt; element.</para
           >
         </summary>
@@ -141,6 +153,8 @@
           <para
             >A list of the XML nodes that represent the transform-specific content needed to describe the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigBase64Transform" />
+
+            
 
             
 
@@ -178,6 +192,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -191,6 +207,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -199,6 +217,8 @@
           <para
             >The output of the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigBase64Transform" />
+
+            
 
             
 
@@ -238,6 +258,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -251,8 +273,12 @@
 
             
 
+            
+
              object of type <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -271,8 +297,12 @@
 
             
 
+            
+
              object of type <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -288,8 +318,12 @@
 
           
 
+          
+
           The type of the output to return. <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -327,8 +361,12 @@
 
             
 
+            
+
              are <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -341,8 +379,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Xml.XmlNodeList" />
+
+            
 
             
 
@@ -361,8 +403,12 @@
 
             
 
+            
+
              method of the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigBase64Transform" />
+
+            
 
             
 
@@ -405,6 +451,8 @@
 
             
 
+            
+
              object has no inner XML elements.</para
           >
         </remarks>
@@ -418,8 +466,12 @@
 
             
 
+            
+
              object as transform-specific content of a &lt;Transform&gt; element; this method is not supported because the <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigBase64Transform" />
+
+            
 
             
 
@@ -435,6 +487,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlNodeList" />
 
@@ -442,8 +496,12 @@
 
           
 
+          
+
            object to load into the current <see
            cref="T:System.Security.Cryptography.Xml.XmlDsigBase64Transform" />
+
+          
 
           
 
@@ -482,6 +540,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -490,6 +550,8 @@
           <para
             >Loads the specified input into the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigBase64Transform" />
+
+            
 
             
 
@@ -505,8 +567,12 @@
 
           
 
+          
+
           The input to load into the current <see
            cref="T:System.Security.Cryptography.Xml.XmlDsigBase64Transform" />
+
+          
 
           
 
@@ -546,8 +612,12 @@
 
             
 
+            
+
              is the only valid output type for <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigBase64Transform" />
+
+            
 
             
 
@@ -566,8 +636,12 @@
 
             
 
+            
+
              methods of the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigBase64Transform" />
+
+            
 
             
 

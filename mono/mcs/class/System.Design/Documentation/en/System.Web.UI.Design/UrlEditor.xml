@@ -23,8 +23,12 @@
 
         
 
+        
+
          is a <see
          cref="T:System.Drawing.Design.UITypeEditor" />
+
+        
 
         
 
@@ -50,6 +54,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.UrlEditor" />
+
+            
 
             
 
@@ -109,6 +115,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -123,8 +131,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -139,10 +151,14 @@
 
           
 
+          
+
           A service provider object through which editing services may be obtained. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -169,6 +185,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.Design.UrlEditor.Filter" />
+
+            
 
             
 
@@ -216,6 +234,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -229,8 +249,12 @@
 
             
 
+            
+
              values indicating the provided editing style. If the method is not supported, this method will return <see
              cref="F:System.Drawing.Design.UITypeEditorEditStyle.None" />
+
+            
 
             
 
@@ -246,8 +270,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 

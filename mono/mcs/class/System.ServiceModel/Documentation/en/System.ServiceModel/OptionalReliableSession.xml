@@ -30,8 +30,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.ServiceModel.WsHttpBinding" />
+
+            
 
             
 
@@ -44,6 +48,8 @@
           <para
             >Required (and hence always on) with <see
              cref="T:System.ServiceModel.WsDualHttpBinding" />
+
+            
 
             
 
@@ -78,6 +84,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.OptionalReliableSession" />
+
+            
 
             
 
@@ -120,6 +128,8 @@
 
             
 
+            
+
              class from a reliable session binding element.</para
           >
         </summary>
@@ -150,8 +160,12 @@
 
                 
 
+                
+
                  and <see
                  cref="T:System.ServiceModel.WsHttpBinding" />
+
+                
 
                 
 
@@ -164,6 +178,8 @@
               <para
                 >Required (and hence always on) with <see
                  cref="T:System.ServiceModel.WsDualHttpBinding" />
+
+                
 
                 
 

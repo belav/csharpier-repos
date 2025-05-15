@@ -21,6 +21,8 @@
 
         
 
+        
+
          class provides the data needed for the <see
          cref="E:System.Web.UI.WebControls.Login.Authenticate" />
 
@@ -28,8 +30,12 @@
 
         
 
+        
+
          event. Custom authentication schemes for a Web site use the <see
          cref="P:System.Web.UI.WebControls.AuthenticateEventArgs.Authenticated" />
+
+        
 
         
 
@@ -43,6 +49,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Web.UI.WebControls.Login.Authenticate" />
+
+        
 
         
 
@@ -70,8 +78,12 @@
 
             
 
+            
+
              class with the <see
              cref="P:System.Web.UI.WebControls.AuthenticateEventArgs.Authenticated" />
+
+            
 
             
 
@@ -104,11 +116,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="authenticated">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -140,8 +156,12 @@
 
             
 
+            
+
              property in custom authentication schemes implemented in the <see
              cref="E:System.Web.UI.WebControls.Login.Authenticate" />
+
+            
 
             
 
@@ -157,6 +177,8 @@
 
             
 
+            
+
              property to false indicates that the Web site user has not presented valid credentials and the <see
              cref="T:System.Web.UI.WebControls.Login" />
 
@@ -164,8 +186,12 @@
 
             
 
+            
+
              control should raise the <see
              cref="E:System.Web.UI.WebControls.Login.LoginError" />
+
+            
 
             
 
@@ -178,8 +204,12 @@
 
             
 
+            
+
              event enables the page developer to have additional processes or action occur when user authentication is not successful. Setting <see
              cref="P:System.Web.UI.WebControls.AuthenticateEventArgs.Authenticated" />
+
+            
 
             
 
@@ -192,6 +222,8 @@
 
             
 
+            
+
              control should raise the <see
              cref="E:System.Web.UI.WebControls.Login.LoggedIn" />
 
@@ -199,8 +231,12 @@
 
             
 
+            
+
              event and redirect the user back to the current page or to the page indicated by <see
              cref="P:System.Web.UI.WebControls.Login.DestinationPageUrl" />
+
+            
 
             
 

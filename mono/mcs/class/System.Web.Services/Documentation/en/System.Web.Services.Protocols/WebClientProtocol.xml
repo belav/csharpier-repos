@@ -27,8 +27,12 @@
 
         
 
+        
+
          class are used to control the behavior of the transport used to transmit the XML Web service request and response. The properties on this class map to properties found on <see
          cref="T:System.Net.WebRequest" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
         , such as <see
          cref="T:System.Net.HttpWebRequest" />
+
+        
 
         
 
@@ -58,8 +66,12 @@
 
         
 
+        
+
          for the XML Web service you want to call. Instead of creating the proxy class manually, you can use the Wsdl.exe tool to create a proxy class for a given XML Web service's service description. Since <see
          cref="T:System.Web.Services.Protocols.WebClientProtocol" />
+
+        
 
         
 
@@ -72,6 +84,8 @@
 
         
 
+        
+
          property for calling authenticated XML Web services. Many of the <see
          cref="T:System.Web.Services.Protocols.WebClientProtocol" />
 
@@ -79,8 +93,12 @@
 
         
 
+        
+
          properties are used to initialize the <see
          cref="T:System.Net.WebRequest" />
+
+        
 
         
 
@@ -107,6 +125,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Protocols.WebClientProtocol" />
+
+            
 
             
 
@@ -166,8 +186,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -177,6 +201,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -209,8 +235,12 @@
 
             
 
+            
+
              property enables you to associate a request to a connection group. For more details, see <see
              cref="P:System.Net.HttpWebRequest.ConnectionGroupName" />
+
+            
 
             
 
@@ -259,6 +289,8 @@
 
             
 
+            
+
             , such as <see
              cref="T:System.Net.NetworkCredential" />
 
@@ -266,8 +298,12 @@
 
             
 
+            
+
             , and then set the client credentials specific to the authentication mechanism. The <see
              cref="T:System.Net.NetworkCredential" />
+
+            
 
             
 
@@ -283,8 +319,12 @@
 
             
 
+            
+
              property is set to <see
              cref="P:System.Net.CredentialCache.DefaultCredentials" />
+
+            
 
             
 
@@ -329,8 +369,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -367,6 +411,8 @@
 
             
 
+            
+
              object before the XML Web service request is made. For example you could add a custom header to the request.</para
           >
         </remarks>
@@ -380,6 +426,8 @@
 
             
 
+            
+
              instance for the specified <paramref
              name="uri" />
 
@@ -387,8 +435,12 @@
 
             
 
+            
+
             . This protected method is called by the XML Web service client infrastructure to get a new <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -407,11 +459,15 @@
 
             
 
+            
+
              instance.</para
           >
         </returns>
         <param name="uri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -424,8 +480,12 @@
 
           
 
+          
+
            to use when creating the <see
            cref="T:System.Net.WebRequest" />
+
+          
 
           
 
@@ -468,8 +528,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.WebRequest" />
+
+          
 
           
 
@@ -513,8 +577,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.WebRequest" />
+
+          
 
           
 
@@ -529,6 +597,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.IAsyncResult" />
 
@@ -536,8 +606,12 @@
 
           
 
+          
+
            to pass to <see
            cref="M:System.Net.HttpWebRequest.EndGetResponse(System.IAsyncResult)" />
+
+          
 
           
 
@@ -570,6 +644,8 @@
 
             
 
+            
+
              is true, the WWW-authenticate header is sent with all subsequent requests.</para
           >
           <para
@@ -580,8 +656,12 @@
 
             
 
+            
+
              is false, a request is made to the XML Web service method without initially attempting to authenticate the user. If the XML Web service allows anonymous access, then the XML Web service method is executed. If anonymous access is disallowed, a 401 HTTP return code is sent back to the client. In response, the <see
              cref="T:System.Web.Services.Protocols.WebClientProtocol" />
+
+            
 
             
 
@@ -630,8 +710,12 @@
 
             
 
+            
+
              determines the encoding for the request message. The <see
              cref="P:System.Net.WebRequest.ContentType" />
+
+            
 
             
 
@@ -647,6 +731,8 @@
 
             
 
+            
+
              support a particular protocol, such as <see
              cref="T:System.Web.Services.Protocols.SoapHttpClientProtocol" />
 
@@ -654,8 +740,12 @@
 
             
 
+            
+
              does for SOAP, set this property to conform to encoding requirements for the specific protocol. For example, the <see
              cref="T:System.Web.Services.Protocols.SoapHttpClientProtocol" />
+
+            
 
             
 
@@ -669,6 +759,8 @@
           <para
             >The <see
              cref="T:System.Text.Encoding" />
+
+            
 
             
 
@@ -710,6 +802,8 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Threading.Timeout.Infinite" />
 
@@ -717,8 +811,12 @@
 
             
 
+            
+
              indicates that the request does not time out. Even though an XML Web service client can set the <see
              cref="P:System.Web.Services.Protocols.WebClientProtocol.Timeout" />
+
+            
 
             
 
@@ -764,8 +862,12 @@
 
             
 
+            
+
              property for the client to use. The default <see
              cref="P:System.Web.Services.Protocols.WebClientProtocol.Url" />
+
+            
 
             
 
@@ -781,8 +883,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.Services.Protocols.HttpPostClientProtocol" />
+
+            
 
             
 
@@ -795,11 +901,15 @@
 
             
 
+            
+
              to make the XML Web service request.</para
           >
           <para
             >The <see
              cref="P:System.Web.Services.Protocols.WebClientProtocol.Url" />
+
+            
 
             
 
@@ -848,8 +958,12 @@
 
             
 
+            
+
              property to the value of the <see
              cref="P:System.Net.CredentialCache.DefaultCredentials" />
+
+            
 
             
 

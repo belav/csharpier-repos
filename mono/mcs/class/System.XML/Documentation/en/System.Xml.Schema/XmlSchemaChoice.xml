@@ -35,6 +35,8 @@
 
         
 
+        
+
         . The choice allows only one of its children to appear in an instance. </para
       >
     </summary>
@@ -61,6 +63,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Schema.XmlSchemaChoice" />
+
+            
 
             
 

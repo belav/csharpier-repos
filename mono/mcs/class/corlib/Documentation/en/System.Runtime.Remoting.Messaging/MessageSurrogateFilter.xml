@@ -49,11 +49,15 @@
 
         
 
+        
+
          delegate is intended for use only by the remoting infrastructure of the .NET Framework; you should not instantiate the delegate directly.</para
       >
       <para
         >The <see
          cref="P:System.Runtime.Remoting.Messaging.RemotingSurrogateSelector.Filter" />
+
+        
 
         
 
@@ -66,8 +70,12 @@
 
         
 
+        
+
          class gets and sets a <see
          cref="T:System.Runtime.Remoting.Messaging.MessageSurrogateFilter" />
+
+        
 
         
 
@@ -83,8 +91,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Runtime.Remoting.Messaging.IMessage" />
+
+        
 
         
 
@@ -103,8 +115,12 @@
 
         
 
+        
+
          class should ignore a particular <see
          cref="T:System.Runtime.Remoting.Messaging.IMessage" />
+
+        
 
         
 
@@ -117,8 +133,12 @@
 
         
 
+        
+
          for a <see
          cref="T:System.MarshalByRefObject" />
+
+        
 
         
 

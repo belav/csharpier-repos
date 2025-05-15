@@ -59,6 +59,8 @@
 
         
 
+        
+
          class is the abstract base class for classes used to obtain information about all members of a class (constructors, events, fields, methods, and properties).</para
       >
       <para>This class introduces the basic functionality that all members provide.</para>
@@ -97,6 +99,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Reflection.MemberInfo" />
+
+            
 
             
 
@@ -164,9 +168,13 @@
 
             
 
+            
+
             object of the class that declares the member
 reflected by the current instance; or, <see
              langword="null" />
+
+            
 
             
 
@@ -187,9 +195,13 @@ member reflected by the current instance is a global member.</para
 
             
 
+            
+
              and
    <see
              cref="P:System.Reflection.MemberInfo.ReflectedType" />
+
+            
 
             
 
@@ -233,8 +245,12 @@ public class DeclaringTypeExample {
 
             
 
+            
+
              property retrieves a reference to the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -247,8 +263,12 @@ public class DeclaringTypeExample {
 
             
 
+            
+
              property might not be the same as the Type object used to obtain the current <see
              cref="T:System.Reflection.MemberInfo" />
+
+            
 
             
 
@@ -266,6 +286,8 @@ public class DeclaringTypeExample {
 
                 
 
+                
+
                  property will represent one of its base types.</para
               >
             </item>
@@ -278,8 +300,12 @@ public class DeclaringTypeExample {
 
                 
 
+                
+
                  method, which returns global methods on a module), the returned <see
                  cref="P:System.Reflection.MemberInfo.DeclaringType" />
+
+                
 
                 
 
@@ -329,11 +355,15 @@ public class DeclaringTypeExample {
 
             
 
+            
+
              equals the type and value of this instance; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -375,8 +405,12 @@ public class DeclaringTypeExample {
 
             
 
+            
+
              parameter for properties and events. To search the inheritance chain for attributes on properties and events, use the appropriate overloads of the <see
              cref="M:System.Attribute.GetCustomAttributes(System.Reflection.Assembly)" />
+
+            
 
             
 
@@ -397,6 +431,8 @@ public class DeclaringTypeExample {
 
               
 
+              
+
               .</para
             >
           </block>
@@ -411,6 +447,8 @@ public class DeclaringTypeExample {
         </returns>
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -453,8 +491,12 @@ public class DeclaringTypeExample {
 
             
 
+            
+
              parameter for properties and events. To search the inheritance chain for attributes on properties and events, use the appropriate overloads of the <see
              cref="M:System.Attribute.GetCustomAttributes(System.Reflection.Assembly)" />
+
+            
 
             
 
@@ -475,6 +517,8 @@ public class DeclaringTypeExample {
 
               
 
+              
+
               .</para
             >
           </block>
@@ -484,6 +528,8 @@ public class DeclaringTypeExample {
           <para
             >When overridden in a derived class, returns an array of custom attributes applied to this member and identified by <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -502,6 +548,8 @@ public class DeclaringTypeExample {
 
             
 
+            
+
              have been applied.</para
           >
         </returns>
@@ -512,10 +560,14 @@ public class DeclaringTypeExample {
 
           
 
+          
+
           The type of attribute to search for. Only attributes that are assignable to this type are returned. </param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -553,6 +605,8 @@ public class DeclaringTypeExample {
 
             
 
+            
+
              and <see
              cref="Overload:System.Reflection.MemberInfo.GetCustomAttributes" />
 
@@ -560,8 +614,12 @@ public class DeclaringTypeExample {
 
             
 
+            
+
              cannot be used in such cases, because they create instances of the attributes. Code in the reflection-only context cannot be executed. For more information and for example code, see the <see
              cref="T:System.Reflection.CustomAttributeData" />
+
+            
 
             
 
@@ -577,6 +635,8 @@ public class DeclaringTypeExample {
 
             
 
+            
+
              class and the classes in the <see
              cref="N:System.Reflection" />
 
@@ -584,8 +644,12 @@ public class DeclaringTypeExample {
 
             
 
+            
+
              namespace that represent type members all derive from <see
              cref="T:System.Reflection.MemberInfo" />
+
+            
 
             
 
@@ -604,6 +668,8 @@ public class DeclaringTypeExample {
 
             
 
+            
+
              objects representing data about the attributes that have been applied to the target member.</para
           >
         </summary>
@@ -612,6 +678,8 @@ public class DeclaringTypeExample {
           <para
             >A generic list of <see
              cref="T:System.Reflection.CustomAttributeData" />
+
+            
 
             
 
@@ -668,6 +736,8 @@ public class DeclaringTypeExample {
 
             
 
+            
+
              object representing the type of the current instance. </para
           >
         </summary>
@@ -709,8 +779,12 @@ public class DeclaringTypeExample {
 
             
 
+            
+
              parameter for properties and events. To search the inheritance chain for attributes on properties and events, use the appropriate overloads of the <see
              cref="M:System.Attribute.IsDefined(System.Reflection.MemberInfo,System.Type,System.Boolean)" />
+
+            
 
             
 
@@ -726,6 +800,8 @@ public class DeclaringTypeExample {
                   >Emitting Declarative Security Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -749,6 +825,8 @@ public class DeclaringTypeExample {
 
             
 
+            
+
              or any of its derived types is applied to this member; otherwise, false.</para
           >
         </returns>
@@ -759,10 +837,14 @@ public class DeclaringTypeExample {
 
           
 
+          
+
           The type of custom attribute to search for. The search includes derived types. </param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -802,6 +884,8 @@ public class DeclaringTypeExample {
 
             
 
+            
+
              objects — for example, the array returned by <see
              cref="Overload:System.Type.GetMembers" />
 
@@ -809,8 +893,12 @@ public class DeclaringTypeExample {
 
             
 
+            
+
              — the <see
              cref="P:System.Reflection.MemberInfo.MemberType" />
+
+            
 
             
 
@@ -826,8 +914,12 @@ public class DeclaringTypeExample {
 
             
 
+            
+
             . From the Type, get the <see
              cref="T:System.Reflection.MethodInfo" />
+
+            
 
             
 
@@ -841,6 +933,8 @@ public class DeclaringTypeExample {
           <para
             >When overridden in a derived class, gets a <see
              cref="T:System.Reflection.MemberTypes" />
+
+            
 
             
 
@@ -877,6 +971,8 @@ public class DeclaringTypeExample {
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -890,10 +986,14 @@ public class DeclaringTypeExample {
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -939,6 +1039,8 @@ public class DeclaringTypeExample {
 
             
 
+            
+
              property to get the type in which the method is declared, and then calling the <see
              cref="P:System.Type.Module" />
 
@@ -946,8 +1048,12 @@ public class DeclaringTypeExample {
 
             
 
+            
+
              property of the resulting <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -961,6 +1067,8 @@ public class DeclaringTypeExample {
           <para
             >Gets the module in which the type that declares the member represented by the current <see
              cref="T:System.Reflection.MemberInfo" />
+
+            
 
             
 
@@ -998,6 +1106,8 @@ public class DeclaringTypeExample {
 
             
 
+            
+
              containing the
    name of the
    member reflected by the current instance.</para
@@ -1014,6 +1124,8 @@ public class DeclaringTypeExample {
 
             
 
+            
+
              property, get the class <see
              cref="T:System.Type" />
 
@@ -1021,8 +1133,12 @@ public class DeclaringTypeExample {
 
             
 
+            
+
             . From the Type, get the <see
              cref="T:System.Reflection.MemberInfo" />
+
+            
 
             
 
@@ -1070,6 +1186,8 @@ public class DeclaringTypeExample {
 
             
 
+            
+
              objects are equal.</para
           >
         </summary>
@@ -1083,8 +1201,12 @@ public class DeclaringTypeExample {
 
             
 
+            
+
              is equal to <paramref
              name="right" />
+
+            
 
             
 
@@ -1100,6 +1222,8 @@ public class DeclaringTypeExample {
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.MemberInfo" />
 
@@ -1107,8 +1231,12 @@ public class DeclaringTypeExample {
 
           
 
+          
+
            to compare to <paramref
            name="right" />
+
+          
 
           
 
@@ -1123,6 +1251,8 @@ public class DeclaringTypeExample {
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.MemberInfo" />
 
@@ -1130,8 +1260,12 @@ public class DeclaringTypeExample {
 
           
 
+          
+
            to compare to <paramref
            name="left" />
+
+          
 
           
 
@@ -1173,6 +1307,8 @@ public class DeclaringTypeExample {
 
             
 
+            
+
              objects are not equal.</para
           >
         </summary>
@@ -1186,8 +1322,12 @@ public class DeclaringTypeExample {
 
             
 
+            
+
              is not equal to <paramref
              name="right" />
+
+            
 
             
 
@@ -1203,6 +1343,8 @@ public class DeclaringTypeExample {
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.MemberInfo" />
 
@@ -1210,8 +1352,12 @@ public class DeclaringTypeExample {
 
           
 
+          
+
            to compare to <paramref
            name="right" />
+
+          
 
           
 
@@ -1226,6 +1372,8 @@ public class DeclaringTypeExample {
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.MemberInfo" />
 
@@ -1233,8 +1381,12 @@ public class DeclaringTypeExample {
 
           
 
+          
+
            to compare to <paramref
            name="left" />
+
+          
 
           
 
@@ -1275,6 +1427,8 @@ public class DeclaringTypeExample {
 
             
 
+            
+
             object for the class through which the current instance was
 obtained.</para
           >
@@ -1289,6 +1443,8 @@ obtained.</para
 
             
 
+            
+
              object that was used to obtain this instance of MemberInfo. This may differ from the value of the <see
              cref="P:System.Reflection.MemberInfo.DeclaringType" />
 
@@ -1296,8 +1452,12 @@ obtained.</para
 
             
 
+            
+
              property if this <see
              cref="T:System.Reflection.MemberInfo" />
+
+            
 
             
 
@@ -1313,8 +1473,12 @@ obtained.</para
 
             
 
+            
+
              method, which returns global methods on a module), the returned <see
              cref="P:System.Reflection.MemberInfo.DeclaringType" />
+
+            
 
             
 
@@ -1391,8 +1555,12 @@ obtained.</para
 
             
 
+            
+
              object representing the <see
              cref="T:System.Reflection.MemberInfo" />
+
+            
 
             
 
@@ -1411,8 +1579,12 @@ obtained.</para
 
             
 
+            
+
              object representing the <see
              cref="T:System.Reflection.MemberInfo" />
+
+            
 
             
 
@@ -1457,6 +1629,8 @@ obtained.</para
 
             
 
+            
+
             , see the MSDN Library.</para
           >
         </remarks>
@@ -1471,6 +1645,8 @@ obtained.</para
 
           
 
+          
+
           The type information to return.</param
         >
         <param name="lcid">
@@ -1480,10 +1656,14 @@ obtained.</para
 
           
 
+          
+
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

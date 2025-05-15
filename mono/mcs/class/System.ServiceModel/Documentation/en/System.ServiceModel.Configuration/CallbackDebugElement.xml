@@ -27,6 +27,8 @@
 
         
 
+        
+
          property to true programmatically, you can enable the flow of managed exception information in a client callback object back to the service for debugging purposes. </para
       >
       <block subset="none" type="note">
@@ -57,6 +59,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Configuration.CallbackDebugElement" />
+
+            
 
             
 

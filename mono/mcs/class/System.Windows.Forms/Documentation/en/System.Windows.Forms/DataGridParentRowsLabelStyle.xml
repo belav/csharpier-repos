@@ -23,11 +23,15 @@
 
         
 
+        
+
          property.</para
       >
       <para
         >Parent rows can be displayed only if the <see
          cref="T:System.Windows.Forms.DataGrid" />
+
+        
 
         
 
@@ -40,6 +44,8 @@
 
         
 
+        
+
          to a second <see
          cref="T:System.Data.DataTable" />
 
@@ -47,8 +53,12 @@
 
         
 
+        
+
         , and if the <see
          cref="P:System.Windows.Forms.DataGrid.AllowNavigation" />
+
+        
 
         
 
@@ -62,6 +72,8 @@
       <para
         >Specifies how the parent row labels of a <see
          cref="T:System.Windows.Forms.DataGrid" />
+
+        
 
         
 

@@ -35,8 +35,12 @@
 
         
 
+        
+
          interface provides an interface through which you can implement basic services for a designer. A designer can modify the behavior of a component at design time, and may provide its own services and behavior. A designer is only active at design-time, and must be associated with a type of component using a <see
          cref="T:System.ComponentModel.DesignerAttribute" />
+
+        
 
         
 
@@ -52,11 +56,15 @@
 
         
 
+        
+
          interface provides methods and properties that you can implement in order to provide custom behavior at design time.</para
       >
       <para
         >Implement the <see
          cref="M:System.ComponentModel.Design.IDesigner.Initialize(System.ComponentModel.IComponent)" />
+
+        
 
         
 
@@ -72,8 +80,12 @@
 
         
 
+        
+
          property to define a get accessor that returns a <see
          cref="T:System.ComponentModel.Design.DesignerVerbCollection" />
+
+        
 
         
 
@@ -86,11 +98,15 @@
 
         
 
+        
+
          objects for generating menu commands.</para
       >
       <para
         >A designer for a component that appears in the component tray can perform a default action when the component is double-clicked. Implement the <see
          cref="M:System.ComponentModel.Design.IDesigner.DoDefaultAction" />
+
+        
 
         
 
@@ -107,8 +123,12 @@
 
         
 
+        
+
          class. Controls whose associated designer does not derive from <see
          cref="T:System.Windows.Forms.Design.ControlDesigner" />
+
+        
 
         
 
@@ -121,8 +141,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.Design.ControlDesigner" />
+
+        
 
         
 
@@ -135,6 +159,8 @@
 
         
 
+        
+
          interface and provide additional design-time support that may be of use to authors of designers. For more information, see the reference documentation for these classes.</para
       >
       <para
@@ -142,6 +168,8 @@
          type="text/html">
           <a href="d6ac8a6a-42fd-4bc8-bf33-b212811297e2">Extending Design-Time Support</a>
         </format>
+
+        
 
         
 
@@ -244,6 +272,8 @@
 
           
 
+          
+
           The component to associate with this designer. </param
         >
       </Docs>
@@ -278,6 +308,8 @@
 
             
 
+            
+
              is invoked.</para
           >
           <block subset="none" type="note">
@@ -289,8 +321,12 @@
 
               
 
+              
+
                entry on a component's right-click menu. To avoid duplicate titles for menu entries, no verb with a title of "Properties..." should be included in a <see
                cref="T:System.ComponentModel.Design.DesignerVerbCollection" />
+
+              
 
               
 

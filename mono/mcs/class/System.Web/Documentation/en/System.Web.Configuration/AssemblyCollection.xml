@@ -29,6 +29,8 @@
 
         
 
+        
+
          class does not refer to any actual element in the underlying configuration file. It is a construct that allows access to the assembly information it contains. </para
       >
     </remarks>
@@ -37,6 +39,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.Web.Configuration.AssemblyInfo" />
+
+        
 
         
 
@@ -59,6 +63,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.AssemblyCollection" />
+
+            
 
             
 
@@ -97,6 +103,8 @@
 
             
 
+            
+
              object to the collection. If the assembly object is not initialized with assembly information, an exception is thrown. If the assembly object already exists in the collection, the statement is ignored.</para
           >
         </remarks>
@@ -110,8 +118,12 @@
 
             
 
+            
+
              object to the <see
              cref="T:System.Web.Configuration.AssemblyCollection" />
+
+            
 
             
 
@@ -145,8 +157,12 @@
 
             
 
+            
+
              objects from the <see
              cref="T:System.Web.Configuration.AssemblyCollection" />
+
+            
 
             
 
@@ -293,8 +309,12 @@
 
             
 
+            
+
              object from the <see
              cref="T:System.Web.Configuration.AssemblyCollection" />
+
+            
 
             
 
@@ -305,6 +325,8 @@
         </summary>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -342,8 +364,12 @@
 
             
 
+            
+
              object from the <see
              cref="T:System.Web.Configuration.AssemblyCollection" />
+
+            
 
             
 
@@ -359,6 +385,8 @@
 
           
 
+          
+
           An integer value specifying an <see
            cref="T:System.Web.Configuration.AssemblyInfo" />
 
@@ -366,8 +394,12 @@
 
           
 
+          
+
            object within the <see
            cref="T:System.Web.Configuration.AssemblyCollection" />
+
+          
 
           
 

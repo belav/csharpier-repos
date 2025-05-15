@@ -35,6 +35,8 @@
 
         
 
+        
+
          class provides access to values in the &lt;connectionStrings&gt; section of the Web.config file. The &lt;connectionStrings&gt; section of the Web.config file contains connection string values in name/value pairs.</para
       >
       <para>A connection string value is retrieved by assigning an expression of the form</para>
@@ -53,6 +55,8 @@
 
         
 
+        
+
          class to handle the expression. </para
       >
       <para
@@ -63,8 +67,12 @@
 
         
 
+        
+
          object generates code that retrieves the specified connection string from the Web.config file. If the expression is encountered in a page that will not be compiled, the <see
          cref="T:System.Web.Compilation.ConnectionStringsExpressionBuilder" />
+
+        
 
         
 
@@ -91,6 +99,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Compilation.ConnectionStringsExpressionBuilder" />
+
+            
 
             
 
@@ -131,8 +141,12 @@
 
             
 
+            
+
              method by calling the <see
              cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.GetConnectionString(System.String)" />
+
+            
 
             
 
@@ -145,6 +159,8 @@
 
             
 
+            
+
              parameter, or by calling the <see
              cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.GetConnectionStringProviderName(System.String)" />
 
@@ -152,8 +168,12 @@
 
             
 
+            
+
              method if a connection string is not included in the <paramref
              name="parsedData" />
+
+            
 
             
 
@@ -176,11 +196,15 @@
 
             
 
+            
+
              associated with a key in the &lt;connectionStrings&gt; section of the Web.config file.</para
           >
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -195,10 +219,14 @@
 
           
 
+          
+
           The property to which the expression is bound.</param
         >
         <param name="parsedData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -211,10 +239,14 @@
 
           
 
+          
+
           .</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -253,8 +285,12 @@
 
             
 
+            
+
              object returned is of the type <see
              cref="T:System.CodeDom.CodeMethodInvokeExpression" />
+
+            
 
             
 
@@ -277,11 +313,15 @@
 
             
 
+            
+
              that invokes a method.</para
           >
         </returns>
         <param name="entry">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -296,8 +336,12 @@
 
           
 
+          
+
           The object that represents parsed data as returned by <see
            cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.ParseExpression(System.String,System.Type,System.Web.Compilation.ExpressionBuilderContext)" />
+
+          
 
           
 
@@ -307,6 +351,8 @@
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -343,8 +389,12 @@
 
             
 
+            
+
              property returns a collection of connection string values. The <see
              cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.GetConnectionString(System.String)" />
+
+            
 
             
 
@@ -367,11 +417,15 @@
 
             
 
+            
+
              for this connection string name.</para
           >
         </returns>
         <param name="connectionStringName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -408,8 +462,12 @@
 
             
 
+            
+
              property returns a collection of connection string values. The <see
              cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.GetConnectionStringProviderName(System.String)" />
+
+            
 
             
 
@@ -432,11 +490,15 @@
 
             
 
+            
+
              for this connection string name.</para
           >
         </returns>
         <param name="connectionStringName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -475,8 +537,12 @@
 
             
 
+            
+
              is of the type <see
              cref="T:System.Web.UI.Pair" />
+
+            
 
             
 
@@ -489,8 +555,12 @@
 
             
 
+            
+
              object can be passed to both the <see
              cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.EvaluateExpression(System.Object,System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" />
+
+            
 
             
 
@@ -503,6 +573,8 @@
 
             
 
+            
+
              method as <paramref
              name="parsedData" />
 
@@ -510,8 +582,12 @@
 
             
 
+            
+
             . The <see
              cref="T:System.Web.UI.Pair" />
+
+            
 
             
 
@@ -534,11 +610,15 @@
 
             
 
+            
+
              containing the parsed representation of the expression.</para
           >
         </returns>
         <param name="expression">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -553,10 +633,14 @@
 
           
 
+          
+
           The targeted type for the expression.</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -588,8 +672,12 @@
 
             
 
+            
+
              property indicates whether the <see
              cref="M:System.Web.Compilation.ConnectionStringsExpressionBuilder.EvaluateExpression(System.Object,System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" />
+
+            
 
             
 
@@ -602,8 +690,12 @@
 
             
 
+            
+
              must be implemented within an expression builder for an expression to be evaluated in a page that is not compiled. <see
              cref="T:System.Web.Compilation.ConnectionStringsExpressionBuilder" />
+
+            
 
             
 

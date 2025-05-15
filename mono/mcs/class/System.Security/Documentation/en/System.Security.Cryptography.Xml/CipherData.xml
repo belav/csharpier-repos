@@ -26,11 +26,15 @@
 
         
 
+        
+
          class represents the &lt;CipherData&gt; element in XML encryption. It is a required element that provides the encrypted data. It must either contain the encrypted data as base64-encoded text of the &lt;CipherValue&gt; element, or provide a reference to an external location containing the encrypted data using the &lt;CipherReference&gt; element.</para
       >
       <para
         >In many cases, you do not need to directly create a new instance of the <see
          cref="T:System.Security.Cryptography.Xml.CipherData" />
+
+        
 
         
 
@@ -43,6 +47,8 @@
 
         
 
+        
+
         , <see
          cref="T:System.Security.Cryptography.Xml.EncryptedData" />
 
@@ -50,8 +56,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+
+        
 
         
 
@@ -68,8 +78,12 @@
 
           
 
+          
+
            object can have either a <see
            cref="T:System.Security.Cryptography.Xml.CipherReference" />
+
+          
 
           
 
@@ -82,6 +96,8 @@
 
           
 
+          
+
            property, but not both. A <see
            cref="T:System.Security.Cryptography.CryptographicException" />
 
@@ -89,8 +105,12 @@
 
           
 
+          
+
            is thrown if both are assigned to a <see
            cref="T:System.Security.Cryptography.Xml.CipherData" />
+
+          
 
           
 
@@ -130,6 +150,8 @@
 
             
 
+            
+
              object that represents the &lt;CipherData&gt; element in XML encryption. The &lt;CipherData&gt; element is a required element in XML encryption.</para
           >
         </remarks>
@@ -138,6 +160,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.Xml.CipherData" />
+
+            
 
             
 
@@ -174,6 +198,8 @@
 
             
 
+            
+
              object that represents the &lt;CipherData&gt; element in XML encryption. The constructor assigns the <paramref
              name="cipherValue" />
 
@@ -181,8 +207,12 @@
 
             
 
+            
+
              value to the <see
              cref="P:System.Security.Cryptography.Xml.CipherData.CipherValue" />
+
+            
 
             
 
@@ -199,8 +229,12 @@
 
               
 
+              
+
                or a <see
                cref="P:System.Security.Cryptography.Xml.CipherData.CipherValue" />
+
+              
 
               
 
@@ -213,8 +247,12 @@
 
               
 
+              
+
                is thrown if both are assigned to a <see
                cref="T:System.Security.Cryptography.Xml.CipherData" />
+
+              
 
               
 
@@ -234,8 +272,12 @@
 
             
 
+            
+
              class using a byte array as the <see
              cref="P:System.Security.Cryptography.Xml.CipherData.CipherValue" />
+
+            
 
             
 
@@ -246,6 +288,8 @@
         </summary>
         <param name="cipherValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -284,8 +328,12 @@
 
             
 
+            
+
              object that represents the &lt;CipherData&gt; element in XML encryption and assigns the <paramref
              name="cipherReference" />
+
+            
 
             
 
@@ -298,8 +346,12 @@
 
             
 
+            
+
              property. The <see
              cref="T:System.Security.Cryptography.Xml.CipherReference" />
+
+            
 
             
 
@@ -316,8 +368,12 @@
 
               
 
+              
+
                object can have either a <see
                cref="T:System.Security.Cryptography.Xml.CipherReference" />
+
+              
 
               
 
@@ -330,6 +386,8 @@
 
               
 
+              
+
                property, but not both. A <see
                cref="T:System.Security.Cryptography.CryptographicException" />
 
@@ -337,8 +395,12 @@
 
               
 
+              
+
                is thrown if both are assigned to a <see
                cref="T:System.Security.Cryptography.Xml.CipherData" />
+
+              
 
               
 
@@ -358,8 +420,12 @@
 
             
 
+            
+
              class using a <see
              cref="T:System.Security.Cryptography.Xml.CipherReference" />
+
+            
 
             
 
@@ -375,8 +441,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.Xml.CipherReference" />
+
+          
 
           
 
@@ -416,12 +486,16 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
             <para
               >A <see
                cref="T:System.Security.Cryptography.Xml.CipherData" />
+
+              
 
               
 
@@ -434,8 +508,12 @@
 
               
 
+              
+
                property or a <see
                cref="P:System.Security.Cryptography.Xml.CipherData.CipherValue" />
+
+              
 
               
 
@@ -448,8 +526,12 @@
 
               
 
+              
+
                is thrown if both are assigned to a <see
                cref="T:System.Security.Cryptography.Xml.CipherData" />
+
+              
 
               
 
@@ -491,8 +573,12 @@
 
               
 
+              
+
                or a <see
                cref="P:System.Security.Cryptography.Xml.CipherData.CipherValue" />
+
+              
 
               
 
@@ -505,8 +591,12 @@
 
               
 
+              
+
                is thrown if both are assigned to a <see
                cref="T:System.Security.Cryptography.Xml.CipherData" />
+
+              
 
               
 
@@ -549,6 +639,8 @@
 
             
 
+            
+
              object. </para
           >
         </remarks>
@@ -557,6 +649,8 @@
           <para
             >Gets the XML values for the <see
              cref="T:System.Security.Cryptography.Xml.CipherData" />
+
+            
 
             
 
@@ -575,8 +669,12 @@
 
             
 
+            
+
              object that represents the XML information for the <see
              cref="T:System.Security.Cryptography.Xml.CipherData" />
+
+            
 
             
 
@@ -616,8 +714,12 @@
 
             
 
+            
+
              method overwrites existing XML elements with the <paramref
              name="value" />
+
+            
 
             
 
@@ -636,8 +738,12 @@
 
             
 
+            
+
              into a <see
              cref="T:System.Security.Cryptography.Xml.CipherData" />
+
+            
 
             
 
@@ -653,8 +759,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlElement" />
+
+          
 
           
 

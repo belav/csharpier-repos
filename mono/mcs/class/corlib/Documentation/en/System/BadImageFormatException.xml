@@ -43,6 +43,8 @@
 
         
 
+        
+
          exception. <block
          subset="none" type="note">The name of the unmanaged executable
       is "calc".</block>
@@ -85,12 +87,16 @@ public class BadImageExample {
 
             
 
+            
+
              method to load Kernel32.dll.</para
           >
           <para>code reference: System.BadImageFormatException.Class#1</para>
           <para
             >To address this exception, access the methods defined in the DLL by using the features provided by your development language, such as the Declare statement in Visual Basic or the <see
              cref="T:System.Runtime.InteropServices.DllImportAttribute" />
+
+            
 
             
 
@@ -109,6 +115,8 @@ public class BadImageExample {
 
             
 
+            
+
              property to x86 (instead of x64 or AnyCPU) and recompile.</para
           >
         </item>
@@ -116,6 +124,8 @@ public class BadImageExample {
           <para
             >Components have been created using different versions of the .NET Framework. Typically, this exception occurs when an application or component that was developed using the net_v10_short or the net_v11_short attempts to load an assembly that was developed using the net_v20SP1_short or later, or when an application that was developed using the net_v20SP1_short or net_v35_short attempts to load an assembly that was developed using the net_v40_short. The <see
              cref="T:System.BadImageFormatException" />
+
+            
 
             
 
@@ -132,8 +142,12 @@ public class BadImageExample {
 
             
 
+            
+
              is thrown by the <see
              cref="M:System.Reflection.Assembly.LoadFrom(System.String)" />
+
+            
 
             
 
@@ -152,6 +166,8 @@ public class BadImageExample {
 
         
 
+        
+
          uses the HRESULT COR_E_BADIMAGEFORMAT, which has the value 0x8007000B.</para
       >
       <para
@@ -162,8 +178,12 @@ public class BadImageExample {
 
         
 
+        
+
         , see the <see
          cref="T:System.BadImageFormatException" />
+
+        
 
         
 
@@ -207,11 +227,15 @@ public class BadImageExample {
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "Format of the executable or library is invalid." This message takes into account the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.BadImageFormatException" />
+
+            
 
             
 
@@ -262,6 +286,8 @@ public class BadImageExample {
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -299,11 +325,15 @@ public class BadImageExample {
 
             
 
+            
+
              parameter is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.BadImageFormatException" />
+
+            
 
             
 
@@ -354,11 +384,15 @@ public class BadImageExample {
 
             
 
+            
+
              class with a specified error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -403,6 +437,8 @@ public class BadImageExample {
 
             
 
+            
+
              class with serialized data.</para
           >
         </summary>
@@ -413,8 +449,12 @@ public class BadImageExample {
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -429,8 +469,12 @@ public class BadImageExample {
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -475,8 +519,12 @@ public class BadImageExample {
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -489,11 +537,15 @@ public class BadImageExample {
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.BadImageFormatException" />
+
+            
 
             
 
@@ -544,11 +596,15 @@ public class BadImageExample {
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -563,8 +619,12 @@ public class BadImageExample {
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="inner" />
+
+          
 
           
 
@@ -605,6 +665,8 @@ public class BadImageExample {
           <para
             >The content of the <paramref
              name="message" />
+
+            
 
             
 
@@ -655,6 +717,8 @@ public class BadImageExample {
 
             
 
+            
+
              class with a specified error message and file name.</para
           >
         </summary>
@@ -665,10 +729,14 @@ public class BadImageExample {
 
           
 
+          
+
           A message that describes the error. </param
         >
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -712,6 +780,8 @@ public class BadImageExample {
 
           
 
+          
+
           The full name of the file with the invalid image. </param
         >
         <remarks>
@@ -724,8 +794,12 @@ public class BadImageExample {
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -738,11 +812,15 @@ public class BadImageExample {
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.BadImageFormatException" />
+
+            
 
             
 
@@ -803,11 +881,15 @@ public class BadImageExample {
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -822,6 +904,8 @@ public class BadImageExample {
 
           
 
+          
+
           The full name of the file with the invalid image. </param
         >
         <param name="inner">
@@ -831,8 +915,12 @@ public class BadImageExample {
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="inner" />
+
+          
 
           
 
@@ -870,9 +958,13 @@ public class BadImageExample {
 
             
 
+            
+
              containing the
    name of the file with the invalid image, or <see
              langword="null" />
+
+            
 
             
 
@@ -949,6 +1041,8 @@ public class BadImageExample {
 
             
 
+            
+
              object with the file name, assembly cache log, and additional exception information.</para
           >
         </summary>
@@ -959,8 +1053,12 @@ public class BadImageExample {
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -975,8 +1073,12 @@ public class BadImageExample {
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -1013,6 +1115,8 @@ public class BadImageExample {
 
             
 
+            
+
              containing the
    error description.</para
           >
@@ -1022,6 +1126,8 @@ public class BadImageExample {
           <para
             >If no message was supplied to the constructor for the current exception, this property returns a system-supplied error message. If the <see
              cref="P:System.BadImageFormatException.FileName" />
+
+            
 
             
 
@@ -1069,6 +1175,8 @@ public class BadImageExample {
 
             
 
+            
+
              property, the result of calling ToString on the inner exception, the value of the <see
              cref="P:System.BadImageFormatException.FileName" />
 
@@ -1076,8 +1184,12 @@ public class BadImageExample {
 
             
 
+            
+
              property, and the result of calling <see
              cref="P:System.Environment.StackTrace" />
+
+            
 
             
 

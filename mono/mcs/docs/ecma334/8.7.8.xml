@@ -4,7 +4,7 @@
   <paragraph
     >The example <code_example
     >
-<![CDATA[
+      <![CDATA[
 using System;  
 class Point  
 {  
@@ -42,8 +42,12 @@ class Test
 
     
 
+    
+
     shows a Point class that provides two public instance constructors, one of which takes no arguments, while the other takes two <keyword
     >double</keyword>
+
+    
 
     
 

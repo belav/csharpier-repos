@@ -62,8 +62,12 @@
 
             
 
+            
+
              method overload returns meaningful results only for performance counters of the following <see
              cref="T:System.Diagnostics.PerformanceCounterType" />
+
+            
 
             
 
@@ -115,8 +119,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Diagnostics.CounterSample" />
+
+          
 
           
 
@@ -170,8 +178,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Diagnostics.CounterSample" />
+
+          
 
           
 
@@ -186,8 +198,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Diagnostics.CounterSample" />
+
+          
 
           
 

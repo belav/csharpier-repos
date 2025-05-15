@@ -29,6 +29,8 @@
 
         
 
+        
+
          method that is called when the status of the network changes.</para
       >
     </remarks>
@@ -37,6 +39,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Net.NetworkInformation.NetworkChange.NetworkAvailabilityChanged" />
+
+        
 
         
 

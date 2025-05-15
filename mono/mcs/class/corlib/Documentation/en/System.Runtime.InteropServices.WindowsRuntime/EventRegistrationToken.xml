@@ -27,8 +27,12 @@
 
         
 
+        
+
          structure only if you use native wrt techniques to add and remove event handlers for wrt events. If you use the syntax that is provided by the C# or Visual Basic languages to add and remove event handlers, <see
          cref="T:System.Runtime.InteropServices.WindowsRuntime.EventRegistrationToken" />
+
+        
 
         
 
@@ -75,11 +79,15 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -153,6 +161,8 @@
 
             
 
+            
+
              instances are equal. </para
           >
         </summary>
@@ -167,10 +177,14 @@
 
           
 
+          
+
           The first instance to compare. </param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -218,6 +232,8 @@
 
             
 
+            
+
              instances are not equal.</para
           >
         </summary>
@@ -232,10 +248,14 @@
 
           
 
+          
+
           The first instance to compare. </param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

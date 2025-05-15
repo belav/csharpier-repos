@@ -24,6 +24,8 @@
 
         
 
+        
+
          event occurs when the user changes the <see
          cref="T:System.Windows.Forms.GridItem" />
 
@@ -31,8 +33,12 @@
 
         
 
+        
+
          that is selected in a <see
          cref="T:System.Windows.Forms.PropertyGrid" />
+
+        
 
         
 
@@ -51,8 +57,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Windows.Forms.PropertyGrid" />
+
+        
 
         
 
@@ -85,6 +95,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -95,10 +107,14 @@
 
           
 
+          
+
           The previously selected grid item. </param
         >
         <param name="newSel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -134,6 +150,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -160,6 +178,8 @@
           <para
             >Gets the previously selected <see
              cref="T:System.Windows.Forms.GridItem" />
+
+            
 
             
 

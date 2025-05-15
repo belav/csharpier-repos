@@ -12,6 +12,8 @@
 
       
 
+      
+
       . end note]</note
     >
     <list>
@@ -26,6 +28,8 @@
 
         
 
+        
+
         ) before the function member returns normally. </list_item
       >
     </list>
@@ -33,6 +37,8 @@
   <paragraph
     >Within an instance constructor of a struct type, the this keyword behaves exactly as an output parameter of the struct type (<hyperlink
     >14.5.7</hyperlink>
+
+    
 
     
 

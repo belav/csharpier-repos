@@ -41,12 +41,16 @@
 
         
 
+        
+
         . The common language runtime uses the Auto layout value by default. To reduce layout-related problems associated with the Auto value, C#, Visual Basic, and C++ compilers specify Sequential layout for value types.</para
       >
       <block subset="none" type="note">
         <para
           >The <see
            cref="F:System.Runtime.InteropServices.StructLayoutAttribute.Pack" />
+
+          
 
           
 
@@ -59,6 +63,8 @@
 
           
 
+          
+
            value you specify. By default, the value of <see
            cref="F:System.Runtime.InteropServices.StructLayoutAttribute.Pack" />
 
@@ -66,8 +72,12 @@
 
           
 
+          
+
            is 0, which indicates the default packing size for the current platform. For example, when you use the Explicit layout value and specify field alignments on byte boundaries, you must set <see
            cref="F:System.Runtime.InteropServices.StructLayoutAttribute.Pack" />
+
+          
 
           
 
@@ -146,8 +156,12 @@
 
             
 
+            
+
              field. Each member must use the <see
              cref="T:System.Runtime.InteropServices.FieldOffsetAttribute" />
+
+            
 
             
 
@@ -187,6 +201,8 @@
           <para
             >The members of the object are laid out sequentially, in the order in which they appear when exported to unmanaged memory. The members are laid out according to the packing specified in <see
              cref="F:System.Runtime.InteropServices.StructLayoutAttribute.Pack" />
+
+            
 
             
 

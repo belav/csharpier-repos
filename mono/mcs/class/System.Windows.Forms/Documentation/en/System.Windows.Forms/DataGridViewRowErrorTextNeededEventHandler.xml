@@ -35,8 +35,12 @@
 
         
 
+        
+
          event occurs only when the <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -49,6 +53,8 @@
 
         
 
+        
+
          property is set or its <see
          cref="P:System.Windows.Forms.DataGridView.VirtualMode" />
 
@@ -56,8 +62,12 @@
 
         
 
+        
+
          property is true. Handling the <see
          cref="E:System.Windows.Forms.DataGridView.RowErrorTextNeeded" />
+
+        
 
         
 
@@ -73,8 +83,12 @@
 
         
 
+        
+
          event and specify error text in the handler, an error glyph appears in the row header unless the <see
          cref="P:System.Windows.Forms.DataGridView.ShowRowErrors" />
+
+        
 
         
 
@@ -90,8 +104,12 @@
 
         
 
+        
+
          event also occurs whenever the value of the <see
          cref="P:System.Windows.Forms.DataGridViewRow.ErrorText" />
+
+        
 
         
 
@@ -107,6 +125,8 @@
 
         
 
+        
+
          property to determine the state or value of a row, and use this information to change or modify the <see
          cref="P:System.Windows.Forms.DataGridViewRowErrorTextNeededEventArgs.ErrorText" />
 
@@ -114,8 +134,12 @@
 
         
 
+        
+
          property. This property is initialized with the value of the row <see
          cref="P:System.Windows.Forms.DataGridViewRow.ErrorText" />
+
+        
 
         
 
@@ -131,8 +155,12 @@
 
         
 
+        
+
          event when working with large amounts of data to avoid the performance penalties of setting the row <see
          cref="P:System.Windows.Forms.DataGridViewRow.ErrorText" />
+
+        
 
         
 
@@ -144,6 +172,8 @@
             >Best Practices for Scaling the Windows Forms DataGridView Control</a
           >
         </format>
+
+        
 
         
 
@@ -161,6 +191,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -171,10 +203,14 @@
 
         
 
+        
+
          delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event-handler delegates, see <format
          type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
         </format>
+
+        
 
         
 
@@ -193,8 +229,12 @@
 
         
 
+        
+
          event of a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 

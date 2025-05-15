@@ -31,8 +31,12 @@
 
         
 
+        
+
          control allows you to fully customize its appearance, including the borders of the cells and headers. The <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Windows.Forms.DataGridView.ColumnHeadersBorderStyle" />
+
+        
 
         
 
@@ -59,8 +67,12 @@
 
         
 
+        
+
          properties that allow you to set the appearance of the cell border. However, if you need to further customize the borders, the <see
          cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
+
+        
 
         
 
@@ -73,8 +85,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Right" />
+
+        
 
         
 
@@ -87,8 +103,12 @@
 
         
 
+        
+
         , and <see
          cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Bottom" />
+
+        
 
         
 
@@ -101,8 +121,12 @@
 
         
 
+        
+
          represent the left, right, top, and bottom border of a cell, respectively. You can set these properties on the <see
          cref="P:System.Windows.Forms.DataGridView.AdvancedCellBorderStyle" />
+
+        
 
         
 
@@ -115,6 +139,8 @@
 
         
 
+        
+
         , <see
          cref="P:System.Windows.Forms.DataGridView.AdvancedRowHeadersBorderStyle" />
 
@@ -122,8 +148,12 @@
 
         
 
+        
+
          properties of the <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -137,6 +167,8 @@
       <para
         >Contains border styles for the cells in a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -159,6 +191,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
+
+            
 
             
 
@@ -194,8 +228,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Right" />
+
+            
 
             
 
@@ -208,8 +246,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Bottom" />
+
+            
 
             
 
@@ -222,6 +264,8 @@
 
             
 
+            
+
              value, the <see
              cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.All" />
 
@@ -229,8 +273,12 @@
 
             
 
+            
+
              property value is <see
              cref="F:System.Windows.Forms.DataGridViewAdvancedCellBorderStyle.NotSet" />
+
+            
 
             
 
@@ -292,6 +340,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -305,8 +355,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
+
+            
 
             
 
@@ -319,8 +373,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Bottom" />
+
+            
 
             
 
@@ -333,6 +391,8 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Right" />
 
@@ -340,8 +400,12 @@
 
             
 
+            
+
              properties are equal to their counterpart in the current <see
              cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
+
+            
 
             
 
@@ -357,8 +421,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -453,8 +521,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ICloneable" />
+
+            
 
             
 
@@ -514,8 +586,12 @@
 
             
 
+            
+
              method returns a string that includes the values for the <see
              cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.All" />
+
+            
 
             
 
@@ -528,8 +604,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Bottom" />
+
+            
 
             
 
@@ -542,8 +622,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.DataGridViewAdvancedBorderStyle.Right" />
+
+            
 
             
 
@@ -562,6 +646,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -570,6 +656,8 @@
           <para
             >A string that represents the <see
              cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
+
+            
 
             
 

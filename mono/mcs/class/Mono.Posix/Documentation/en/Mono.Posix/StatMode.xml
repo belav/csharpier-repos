@@ -19,6 +19,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -40,6 +42,8 @@
         >This type is obsolete.  Please use 
     <see
          cref="T:Mono.Unix.Native.FilePermissions" />
+
+        
 
         
 

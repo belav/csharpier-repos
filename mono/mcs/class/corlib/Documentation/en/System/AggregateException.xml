@@ -28,10 +28,14 @@
 
         
 
+        
+
          is used to consolidate multiple failures into a single, throwable exception object. It is used extensively in the <format
          type="text/html">
           <a href="b8f99f43-9104-45fd-9bff-385a20488a23">Task Parallel Library</a>
         </format>
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
         . For additional information, see the <see
          cref="http://go.microsoft.com/fwlink/p/?LinkId=259617">Aggregating Exceptions</see>
+
+        
 
         
 
@@ -64,12 +72,16 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="8d56ff9b-a571-4d31-b41f-80c0b51b70a5"
             >How to: Handle Exceptions in a PLINQ Query</a
           >
         </format>
+
+        
 
         
 
@@ -106,11 +118,15 @@
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "DefaultMessageDisplayedByParameterlessCtorWriterMustSupply" This message takes into account the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.InsufficientMemoryException" />
+
+            
 
             
 
@@ -161,6 +177,8 @@
 
             
 
+            
+
              class with a system-supplied message that describes the error.</para
           >
         </summary>
@@ -197,11 +215,15 @@
 
             
 
+            
+
              class with references to the inner exceptions that are the cause of this exception.</para
           >
         </summary>
         <param name="innerExceptions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -245,11 +267,15 @@
 
             
 
+            
+
              class with references to the inner exceptions that are the cause of this exception.</para
           >
         </summary>
         <param name="innerExceptions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -278,6 +304,8 @@
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.AggregateException" />
+
+            
 
             
 
@@ -321,6 +349,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -337,11 +367,15 @@
 
             
 
+            
+
              class with a specified message that describes the error.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -381,6 +415,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -389,6 +425,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.AggregateException" />
+
+            
 
             
 
@@ -404,10 +442,14 @@
 
           
 
+          
+
           The object that holds the serialized object data. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -449,6 +491,8 @@
 
             
 
+            
+
              class with a specified error message and references to the inner exceptions that are the cause of this exception.</para
           >
         </summary>
@@ -459,10 +503,14 @@
 
           
 
+          
+
           The error message that explains the reason for the exception.</param
         >
         <param name="innerExceptions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -500,8 +548,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -514,11 +566,15 @@
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.AggregateException" />
+
+            
 
             
 
@@ -562,6 +618,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -578,11 +636,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -597,8 +659,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 
@@ -643,6 +709,8 @@
 
             
 
+            
+
              class with a specified error message and references to the inner exceptions that are the cause of this exception.</para
           >
         </summary>
@@ -653,10 +721,14 @@
 
           
 
+          
+
           The error message that explains the reason for the exception.</param
         >
         <param name="innerExceptions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -691,6 +763,8 @@
 
             
 
+            
+
             , this method will recursively flatten all of them. The inner exceptions returned in the new <see
              cref="T:System.AggregateException" />
 
@@ -698,8 +772,12 @@
 
             
 
+            
+
              will be the union of all of the the inner exceptions from exception tree rooted at the provided <see
              cref="T:System.AggregateException" />
+
+            
 
             
 
@@ -718,6 +796,8 @@
 
             
 
+            
+
              instances into a single, new instance.</para
           >
         </summary>
@@ -726,6 +806,8 @@
           <para
             >A new, flattened <see
              cref="T:System.AggregateException" />
+
+            
 
             
 
@@ -762,6 +844,8 @@
 
             
 
+            
+
              that is the root cause of this exception.</para
           >
         </summary>
@@ -770,6 +854,8 @@
           <para
             >Returns the <see
              cref="T:System.AggregateException" />
+
+            
 
             
 
@@ -813,6 +899,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -821,6 +909,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.AggregateException" />
+
+            
 
             
 
@@ -836,10 +926,14 @@
 
           
 
+          
+
           The object that holds the serialized object data. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -879,8 +973,12 @@
 
             
 
+            
+
              returns true or false to indicate whether the <see
              cref="T:System.Exception" />
+
+            
 
             
 
@@ -893,6 +991,8 @@
 
             
 
+            
+
              which will be thrown. Otherwise, the <see
              cref="M:System.AggregateException.Handle(System.Func{System.Exception,System.Boolean})" />
 
@@ -900,8 +1000,12 @@
 
             
 
+            
+
              method simply returns. If any invocations of the <paramref
              name="predicate" />
+
+            
 
             
 
@@ -920,8 +1024,12 @@
 
             
 
+            
+
              contained by this <see
              cref="T:System.AggregateException" />
+
+            
 
             
 
@@ -937,8 +1045,12 @@
 
           
 
+          
+
           The predicate to execute for each exception. The predicate accepts as an argument the <see
            cref="T:System.Exception" />
+
+          
 
           
 
@@ -977,6 +1089,8 @@
 
             
 
+            
+
              instances that caused the current exception.</para
           >
         </summary>
@@ -1003,6 +1117,8 @@
           <para
             >Creates and returns a string representation of the current <see
              cref="T:System.AggregateException" />
+
+            
 
             
 

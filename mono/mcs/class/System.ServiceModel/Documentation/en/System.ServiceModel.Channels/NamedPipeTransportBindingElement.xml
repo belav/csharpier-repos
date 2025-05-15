@@ -31,6 +31,8 @@
 
         
 
+        
+
          class is the starting point for creating a custom binding that implements the named pipes transport protocol. This transport is used for on-machine indigo1-to-indigo2 communication.</para
       >
       <para
@@ -41,8 +43,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.ServiceModel.Channels.IChannelListener" />
+
+        
 
         
 
@@ -58,11 +64,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >You can also set properties on the base class, <see
          cref="T:System.ServiceModel.Channels.ConnectionOrientedTransportBindingElement" />
+
+        
 
         
 
@@ -75,8 +85,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.ServiceModel.Channels.ConnectionOrientedTransportBindingElement.TransferMode" />
+
+        
 
         
 
@@ -89,8 +103,12 @@
 
         
 
+        
+
         . For a complete list of properties, see <see
          cref="T:System.ServiceModel.Channels.ConnectionOrientedTransportBindingElement" />
+
+        
 
         
 
@@ -106,8 +124,12 @@
 
         
 
+        
+
         , which is <see
          cref="T:System.ServiceModel.Channels.TransportBindingElement" />
+
+        
 
         
 
@@ -120,8 +142,12 @@
 
         
 
+        
+
         . For a complete list of properties, see <see
          cref="T:System.ServiceModel.Channels.TransportBindingElement" />
+
+        
 
         
 
@@ -154,6 +180,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.NamedPipeTransportBindingElement" />
+
+            
 
             
 
@@ -195,6 +223,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -203,6 +233,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.NamedPipeTransportBindingElement" />
+
+            
 
             
 
@@ -255,10 +287,14 @@
 
           
 
+          
+
           Members that describe bindings, behaviors, contracts and other information required to create the channel factory.</param
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -315,10 +351,14 @@
 
           
 
+          
+
           Members that describe bindings, behaviors, contracts and other information required to create the channel factory.</param
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -419,6 +459,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -427,6 +469,8 @@
           <para
             >Gets a specified object from the <see
              cref="T:System.ServiceModel.Channels.BindingContext" />
+
+            
 
             
 
@@ -445,11 +489,15 @@
 
             
 
+            
+
             , or null if the object isn't found.</para
           >
         </returns>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -462,10 +510,14 @@
 
           
 
+          
+
           .</param
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

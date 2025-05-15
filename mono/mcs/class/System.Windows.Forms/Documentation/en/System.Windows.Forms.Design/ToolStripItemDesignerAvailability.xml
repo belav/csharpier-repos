@@ -60,6 +60,8 @@
 
             
 
+            
+
              is visible.</para
           >
         </summary>
@@ -81,6 +83,8 @@
           <para
             >Specifies that <see
              cref="T:System.Windows.Forms.MenuStrip" />
+
+            
 
             
 
@@ -129,6 +133,8 @@
 
             
 
+            
+
              is visible.</para
           >
         </summary>
@@ -150,6 +156,8 @@
           <para
             >Specifies that <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 

@@ -62,11 +62,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -81,8 +85,12 @@
 
           
 
+          
+
           A comma-separated list of the property names of the key values on the <paramref
            name="thisKey" />
+
+          
 
           
 
@@ -97,8 +105,12 @@
 
           
 
+          
+
           A comma-separated list of the property names of the key values on the <paramref
            name="otherKey" />
+
+          
 
           
 
@@ -197,6 +209,8 @@
 
             
 
+            
+
              property.</para
           >
         </summary>
@@ -245,6 +259,8 @@
           <para
             >Gets a collection of individual key members that are specified in the <see
              cref="P:System.ComponentModel.DataAnnotations.AssociationAttribute.ThisKey" />
+
+            
 
             
 

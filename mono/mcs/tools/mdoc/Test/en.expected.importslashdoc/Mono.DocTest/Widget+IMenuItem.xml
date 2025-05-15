@@ -18,6 +18,8 @@
 
       
 
+      
+
       .</remarks
     >
   </Docs>
@@ -45,6 +47,8 @@
 
           
 
+          
+
           .</remarks
         >
       </Docs>
@@ -64,6 +68,8 @@
         <value>To be added.</value>
         <remarks>
           <c>P:Mono.DocTest.Widget.IMenuItem.P</c>
+
+          
 
           
 

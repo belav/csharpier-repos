@@ -20,8 +20,12 @@
 
         
 
+        
+
          enumeration represents the bullet styles that you can apply to the list items in a <see
          cref="T:System.Web.UI.WebControls.BulletedList" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
          property uses these enumeration values to set the bullet styles in a <see
          cref="T:System.Web.UI.WebControls.BulletedList" />
+
+        
 
         
 
@@ -48,8 +56,12 @@
 
         
 
+        
+
          property to Disc, each list item in a <see
          cref="T:System.Web.UI.WebControls.BulletedList" />
+
+        
 
         
 
@@ -76,11 +88,15 @@
 
         
 
+        
+
          property to the URL of the custom image to use.</para
       >
       <para
         >If you specify NotSet, the browser in which the control is rendered will determine the bullet style to display with the list items in the <see
          cref="T:System.Web.UI.WebControls.BulletedList" />
+
+        
 
         
 
@@ -94,6 +110,8 @@
       <para
         >Specifies the bullet styles you can apply to list items in a <see
          cref="T:System.Web.UI.WebControls.BulletedList" />
+
+        
 
         
 
@@ -202,6 +220,8 @@
           <para
             >The bullet style is not set. The browser that renders the <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 

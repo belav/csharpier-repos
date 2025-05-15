@@ -24,8 +24,12 @@
 
         
 
+        
+
          through the <see
          cref="P:System.Web.Profile.ProfileManager.Providers" />
+
+        
 
         
 
@@ -38,6 +42,8 @@
 
         
 
+        
+
          class. You can access a specific profile provider in the collection by name and cast it as the specific provider type, such as <see
          cref="T:System.Web.Profile.SqlProfileProvider" />
 
@@ -45,8 +51,12 @@
 
         
 
+        
+
         . This enables you to manage user profile properties from multiple data stores in a single application. It also allows you to access members of a specific profile provider that are not members of the <see
          cref="T:System.Web.Profile.ProfileProvider" />
+
+        
 
         
 
@@ -60,6 +70,8 @@
       <para
         >A collection of objects that inherit the <see
          cref="T:System.Web.Profile.ProfileProvider" />
+
+        
 
         
 
@@ -86,6 +98,8 @@
 
             
 
+            
+
              through the <see
              cref="P:System.Web.Profile.ProfileManager.Providers" />
 
@@ -93,8 +107,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.Profile.ProfileManager" />
+
+            
 
             
 
@@ -139,10 +157,14 @@
 
             
 
+            
+
              section of the <format
              type="text/html">
               <a href="ccb9bf3a-a044-464d-b89b-5cb5a3d389dd">profile</a>
             </format>
+
+            
 
             
 
@@ -155,8 +177,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.Profile.ProfileManager" />
+
+            
 
             
 
@@ -171,6 +197,8 @@
         </summary>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

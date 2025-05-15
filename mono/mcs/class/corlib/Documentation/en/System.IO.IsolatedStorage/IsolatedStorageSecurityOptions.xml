@@ -26,6 +26,8 @@
 
         
 
+        
+
          property gets this enumeration to determine which operations can be performed in isolated storage.</para
       >
       <para
@@ -36,8 +38,12 @@
 
         
 
+        
+
          method to perform policy decisions based on a <see
          cref="T:System.IO.IsolatedStorage.IsolatedStorageSecurityState" />
+
+        
 
         
 

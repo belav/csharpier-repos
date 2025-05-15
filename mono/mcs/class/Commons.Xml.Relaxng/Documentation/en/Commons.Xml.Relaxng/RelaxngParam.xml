@@ -17,6 +17,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Docs>
@@ -76,11 +78,15 @@
 
           
 
+          
+
            that specifies the name.</param
         >
         <param name="value"
           >a <see
            cref="T:System.String" />
+
+          
 
           
 

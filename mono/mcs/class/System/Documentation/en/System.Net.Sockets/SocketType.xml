@@ -37,8 +37,12 @@
 
         
 
+        
+
          can send and receive data, it must first be created using an <see
          cref="T:System.Net.Sockets.AddressFamily" />
+
+        
 
         
 
@@ -51,8 +55,12 @@
 
         
 
+        
+
         , and a <see
          cref="T:System.Net.Sockets.ProtocolType" />
+
+        
 
         
 
@@ -65,8 +73,12 @@
 
         
 
+        
+
          enumeration provides several options for defining the type of <see
          cref="T:System.Net.Sockets.Socket" />
+
+        
 
         
 
@@ -82,8 +94,12 @@
 
           
 
+          
+
            will sometimes implicitly indicate which <see
            cref="T:System.Net.Sockets.ProtocolType" />
+
+          
 
           
 
@@ -96,8 +112,12 @@
 
           
 
+          
+
           . For example when the <see
            cref="T:System.Net.Sockets.SocketType" />
+
+          
 
           
 
@@ -110,8 +130,12 @@
 
           
 
+          
+
           , the <see
            cref="T:System.Net.Sockets.ProtocolType" />
+
+          
 
           
 
@@ -124,8 +148,12 @@
 
           
 
+          
+
           .When the <see
            cref="T:System.Net.Sockets.SocketType" />
+
+          
 
           
 
@@ -138,8 +166,12 @@
 
           
 
+          
+
           , the <see
            cref="T:System.Net.Sockets.ProtocolType" />
+
+          
 
           
 
@@ -152,8 +184,12 @@
 
           
 
+          
+
           . If you try to create a <see
            cref="T:System.Net.Sockets.Socket" />
+
+          
 
           
 
@@ -166,8 +202,12 @@
 
           
 
+          
+
            will throw a <see
            cref="T:System.Net.Sockets.SocketException" />
+
+          
 
           
 
@@ -182,6 +222,8 @@
       <para
         >Specifies the type of socket that an instance of the <see
          cref="T:System.Net.Sockets.Socket" />
+
+        
 
         
 
@@ -224,8 +266,12 @@
 
             
 
+            
+
              of type <see
              cref="F:System.Net.Sockets.SocketType.Dgram" />
+
+            
 
             
 
@@ -238,8 +284,12 @@
 
             
 
+            
+
              uses the Datagram Protocol (<see
              cref="F:System.Net.Sockets.ProtocolType.Udp" />
+
+            
 
             
 
@@ -248,6 +298,8 @@
             ) and the <see
              cref="F:System.Net.Sockets.AddressFamily.InterNetwork" />
             <see cref="T:System.Net.Sockets.AddressFamily" />
+
+            
 
             
 
@@ -292,6 +344,8 @@
 
             
 
+            
+
             , you can communicate using protocols like Internet Control Message Protocol (<see
              cref="F:System.Net.Sockets.ProtocolType.Icmp" />
 
@@ -299,8 +353,12 @@
 
             
 
+            
+
             ) and Internet Group Management Protocol (<see
              cref="F:System.Net.Sockets.ProtocolType.Igmp" />
+
+            
 
             
 
@@ -344,8 +402,12 @@
 
             
 
+            
+
             , you do not require a remote host connection before sending and receiving data. With <see
              cref="F:System.Net.Sockets.SocketType.Rdm" />
+
+            
 
             
 
@@ -389,8 +451,12 @@
 
             
 
+            
+
              does not duplicate data, and it preserves boundaries within the data stream. A Socket of type <see
              cref="F:System.Net.Sockets.SocketType.Seqpacket" />
+
+            
 
             
 
@@ -434,8 +500,12 @@
 
             
 
+            
+
              uses the Transmission Control Protocol (<see
              cref="F:System.Net.Sockets.ProtocolType.Tcp" />
+
+            
 
             
 
@@ -448,8 +518,12 @@
 
             
 
+            
+
              and the InterNetwork <see
              cref="T:System.Net.Sockets.AddressFamily" />
+
+            
 
             
 

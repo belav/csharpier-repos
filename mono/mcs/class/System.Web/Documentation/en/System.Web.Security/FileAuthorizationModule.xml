@@ -33,8 +33,12 @@
 
         
 
+        
+
          configuration element is set to Windows so that the <see
          cref="T:System.Web.Security.WindowsAuthenticationModule" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          module ensures that the requesting user is allowed read or write access to the resource, depending on the request verb, before executing the request. For more information, see the <see
          cref="M:System.Web.Security.FileAuthorizationModule.CheckFileAccessForUser(System.String,System.IntPtr,System.String)" />
+
+        
 
         
 
@@ -80,6 +88,8 @@
 
             
 
+            
+
              class. After calling the constructor, it calls the <see
              cref="M:System.Web.Security.FileAuthorizationModule.Init(System.Web.HttpApplication)" />
 
@@ -87,8 +97,12 @@
 
             
 
+            
+
              method to initialize the new <see
              cref="T:System.Web.Security.FileAuthorizationModule" />
+
+            
 
             
 
@@ -102,6 +116,8 @@
           <para
             >Creates an instance of the <see
              cref="T:System.Web.Security.FileAuthorizationModule" />
+
+            
 
             
 
@@ -144,6 +160,8 @@
 
             
 
+            
+
              method checks to see whether the current user, represented by a Windows access token, is granted access to the requested file in the file-system access-control lists (ACLs). The virtual path is mapped to the physical file-system path before the check is made.</para
           >
           <para
@@ -154,8 +172,12 @@
 
             
 
+            
+
              method checks for read access to the file. If any other verb is used, the <see
              cref="M:System.Web.Security.FileAuthorizationModule.CheckFileAccessForUser(System.String,System.IntPtr,System.String)" />
+
+            
 
             
 
@@ -171,8 +193,12 @@
 
             
 
+            
+
              module is not defined in the httpModules configuration section for the application, the <see
              cref="T:System.Web.Security.FileAuthorizationModule" />
+
+            
 
             
 
@@ -195,8 +221,12 @@
 
             
 
+            
+
              has access to the file using the specified HTTP verb or if the <see
              cref="T:System.Web.Security.FileAuthorizationModule" />
+
+            
 
             
 
@@ -212,6 +242,8 @@
 
           
 
+          
+
           The virtual path to the file.</param
         >
         <param name="token">
@@ -221,10 +253,14 @@
 
           
 
+          
+
           A Windows access token representing the user.</param
         >
         <param name="verb">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -251,6 +287,8 @@
           <para
             >Releases all resources, other than memory, used by the <see
              cref="T:System.Web.Security.FileAuthorizationModule" />
+
+            
 
             
 
@@ -286,6 +324,8 @@
 
             
 
+            
+
              method ensures that the <see
              cref="T:System.Web.Security.FileAuthorizationModule" />
 
@@ -293,8 +333,12 @@
 
             
 
+            
+
              is included in the processing of the <see
              cref="E:System.Web.HttpApplication.AuthorizeRequest" />
+
+            
 
             
 
@@ -313,6 +357,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -323,8 +369,12 @@
 
           
 
+          
+
           The current <see
            cref="T:System.Web.HttpApplication" />
+
+          
 
           
 

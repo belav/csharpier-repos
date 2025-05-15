@@ -39,8 +39,12 @@
 
         
 
+        
+
          control is a container for the content and controls of a content page. A <see
          cref="T:System.Web.UI.WebControls.Content" />
+
+        
 
         
 
@@ -53,8 +57,12 @@
 
         
 
+        
+
          control. A <see
          cref="T:System.Web.UI.WebControls.Content" />
+
+        
 
         
 
@@ -67,8 +75,12 @@
 
         
 
+        
+
          control are directly merged into the corresponding <see
          cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
+
+        
 
         
 
@@ -84,8 +96,12 @@
 
         
 
+        
+
          control is associated with a <see
          cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
+
+        
 
         
 
@@ -98,8 +114,12 @@
 
         
 
+        
+
          property. Set the <see
          cref="P:System.Web.UI.WebControls.Content.ContentPlaceHolderID" />
+
+        
 
         
 
@@ -112,8 +132,12 @@
 
         
 
+        
+
          property of a <see
          cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
+
+        
 
         
 
@@ -126,8 +150,12 @@
 
         
 
+        
+
          control are rendered to the <see
          cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
+
+        
 
         
 
@@ -140,6 +168,8 @@
          type="text/html">
           <a href="4e53eedf-8304-4e7a-aed1-691a2623b28b">ASP.NET Master Pages Overview</a>
         </format>
+
+        
 
         
 
@@ -163,11 +193,15 @@
 
         
 
+        
+
         |False"
     ID="string"
     runat="server"&gt;
     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -183,6 +217,8 @@
       <para
         >Holds text, markup, and server controls to render to a <see
          cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
+
+        
 
         
 
@@ -209,8 +245,12 @@
 
             
 
+            
+
              control typically is created declaratively, not programmatically. For an example, see <see
              cref="T:System.Web.UI.WebControls.Content" />
+
+            
 
             
 
@@ -224,6 +264,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" />
+
+            
 
             
 
@@ -267,6 +309,8 @@
 
             
 
+            
+
              control renders within the referenced <see
              cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
 
@@ -274,8 +318,12 @@
 
             
 
+            
+
              control in a master page. A <see
              cref="T:System.Web.UI.WebControls.Content" />
+
+            
 
             
 
@@ -291,10 +339,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -308,6 +360,8 @@
           <para
             >Gets or sets the ID of the <see
              cref="T:System.Web.UI.WebControls.ContentPlaceHolder" />
+
+            
 
             
 
@@ -342,6 +396,8 @@
           <para
             >The <see
              cref="E:System.Web.UI.WebControls.Content.DataBinding" />
+
+            
 
             
 
@@ -385,6 +441,8 @@
 
             
 
+            
+
              event is never invoked and does not appear in visual designers.</para
           >
         </remarks>
@@ -418,6 +476,8 @@
           <para
             >The <see
              cref="E:System.Web.UI.WebControls.Content.Init" />
+
+            
 
             
 
@@ -461,6 +521,8 @@
 
             
 
+            
+
              event is never invoked and does not appear in visual designers.</para
           >
         </remarks>
@@ -469,6 +531,8 @@
           <para
             >Occurs when the server control is loaded into the <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -508,6 +572,8 @@
 
             
 
+            
+
              event is never invoked and does not appear in visual designers.</para
           >
         </remarks>
@@ -516,6 +582,8 @@
           <para
             >Occurs when the server control is about to render to its containing <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -550,6 +618,8 @@
           <para
             >The <see
              cref="E:System.Web.UI.WebControls.Content.Unload" />
+
+            
 
             
 

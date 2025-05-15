@@ -27,8 +27,12 @@
 
         
 
+        
+
          class. Page developers do not use the <see
          cref="T:System.Web.UI.UserControlControlBuilder" />
+
+        
 
         
 
@@ -55,6 +59,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.UserControlControlBuilder" />
+
+            
 
             
 
@@ -91,6 +97,8 @@
 
             
 
+            
+
              property. </para
           >
         </summary>
@@ -99,6 +107,8 @@
           <para
             >An instance of a user control identified by <see
              cref="P:System.Web.UI.ControlBuilder.ControlType" />
+
+            
 
             
 
@@ -127,6 +137,8 @@
 
             
 
+            
+
              method returns true, the <see
              cref="M:System.Web.UI.UserControlControlBuilder.SetTagInnerText(System.String)" />
 
@@ -134,8 +146,12 @@
 
             
 
+            
+
              method is called. When the control is built in a designer environment, the <see
              cref="M:System.Web.UI.UserControlControlBuilder.NeedsTagInnerText" />
+
+            
 
             
 
@@ -179,11 +195,15 @@
 
             
 
+            
+
              object with the inner text of the control tag.</para
           >
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

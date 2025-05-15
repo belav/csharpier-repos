@@ -31,6 +31,8 @@
 
         
 
+        
+
          provided at <see
          cref="T:System.ServiceModel.ChannelFactory" />
 
@@ -38,8 +40,12 @@
 
         
 
+        
+
          construction time. This <see
          cref="T:System.ServiceModel.EndpointAddress" />
+
+        
 
         
 
@@ -58,6 +64,8 @@
 
         
 
+        
+
          element in a client application configuration file.</para
       >
     </remarks>
@@ -66,6 +74,8 @@
       <para
         >The <see
          cref="T:System.ServiceModel.Description.ClientViaBehavior" />
+
+        
 
         
 
@@ -101,11 +111,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="uri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -181,6 +195,8 @@
 
             
 
+            
+
              to the URI for which the transport channel is created.</para
           >
         </summary>
@@ -191,8 +207,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
+
+          
 
           
 
@@ -230,6 +250,8 @@
           <para
             >Throws an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -291,6 +313,8 @@
              type="text/html">
               <a href="c27ee94e-babd-459b-9574-2a6d67d11314">&lt;clientVia&gt;</a>
             </format>
+
+            
 
             
 

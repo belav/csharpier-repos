@@ -24,8 +24,12 @@
 
         
 
+        
+
          class is responsible for managing the collection of <see
          cref="T:System.ComponentModel.Design.DesignerActionItem" />
+
+        
 
         
 
@@ -44,11 +48,15 @@
 
           
 
+          
+
            is actually the driving service behind both the push and pull models; however, in the latter case it operates implicitly.</para
         >
       </block>
       <para>
         <see cref="T:System.ComponentModel.Design.DesignerActionService" />
+
+        
 
         
 
@@ -66,8 +74,12 @@
 
             
 
+            
+
              method determines whether the <see
              cref="T:System.ComponentModel.Design.DesignerActionService" />
+
+            
 
             
 
@@ -85,6 +97,8 @@
 
             
 
+            
+
              method supports the enumeration of the lists of items.</para
           >
         </item>
@@ -97,8 +111,12 @@
 
             
 
+            
+
              method allows adding a <see
              cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+            
 
             
 
@@ -111,8 +129,12 @@
 
             
 
+            
+
              to the set of existing items for a component instance. In contrast, the <see
              cref="Overload:System.ComponentModel.Design.DesignerActionService.Remove" />
+
+            
 
             
 
@@ -129,6 +151,8 @@
 
               
 
+              
+
                method represents the direct push model of associating panel items with a component. In contrast, the pull model relies on overriding the <see
                cref="P:System.ComponentModel.Design.ComponentDesigner.ActionLists" />
 
@@ -136,8 +160,12 @@
 
               
 
+              
+
                property of the designer class for that component. The design environment is responsible for adding these items into the current <see
                cref="T:System.ComponentModel.Design.DesignerActionService" />
+
+              
 
               
 
@@ -155,8 +183,12 @@
 
               
 
+              
+
               , <see
                cref="Overload:System.ComponentModel.Design.DesignerActionService.Remove" />
+
+              
 
               
 
@@ -169,8 +201,12 @@
 
               
 
+              
+
               , and <see
                cref="M:System.ComponentModel.Design.DesignerActionService.Clear" />
+
+              
 
               
 
@@ -189,6 +225,8 @@
 
             
 
+            
+
              event indicates when the collection of items changes for a component.</para
           >
         </item>
@@ -196,6 +234,8 @@
       <para
         >Because it is often desirable to use some of the same panel items in both the component's design-time shortcut menu and its panel, a large degree of interoperability exists between <see
          cref="T:System.ComponentModel.Design.DesignerActionItem" />
+
+        
 
         
 
@@ -211,6 +251,8 @@
 
         
 
+        
+
          (that is, it does not contain an overridden <see
          cref="P:System.ComponentModel.Design.ComponentDesigner.ActionLists" />
 
@@ -218,8 +260,12 @@
 
         
 
+        
+
          property), then a list will be created from existing designer verbs. These verbs are specified by the <see
          cref="P:System.ComponentModel.Design.ComponentDesigner.Verbs" />
+
+        
 
         
 
@@ -235,8 +281,12 @@
 
         
 
+        
+
          to be used both as a panel entry and a design-time shortcut menu entry, then you can set the <paramref
          name="includeAsDesignerVerb" />
+
+        
 
         
 
@@ -252,8 +302,12 @@
 
         
 
+        
+
          to control the display of your designer's <see
          cref="P:System.ComponentModel.Design.ComponentDesigner.ActionLists" />
+
+        
 
         
 
@@ -267,6 +321,8 @@
       <para
         >Establishes a design-time service that manages the collection of <see
          cref="T:System.ComponentModel.Design.DesignerActionItem" />
+
+        
 
         
 
@@ -300,8 +356,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.ComponentModel.Design.IComponentChangeService" />
+
+            
 
             
 
@@ -314,8 +374,12 @@
 
             
 
+            
+
              class uses an internal table to manage components and their associated <see
              cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+            
 
             
 
@@ -326,6 +390,8 @@
           <para
             >Typically, component developers will not need to create an instance of this class; instead, they can acquire an existing instance through a call to the <see
              cref="M:System.ComponentModel.Component.GetService(System.Type)" />
+
+            
 
             
 
@@ -344,11 +410,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="serviceProvider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -385,8 +455,12 @@
 
             
 
+            
+
              method represents the push model of adding smart tag items. The alternate pull model relies on overriding the <see
              cref="P:System.ComponentModel.Design.ComponentDesigner.ActionLists" />
+
+            
 
             
 
@@ -402,8 +476,12 @@
 
             
 
+            
+
              with the <see
              cref="P:System.ComponentModel.Design.DesignerActionMethodItem.IncludeAsDesignerVerb" />
+
+            
 
             
 
@@ -416,12 +494,16 @@
 
             
 
+            
+
              method.</para
           >
           <para>Smart tags are managed on a component instance basis. The managed collection may contain duplicate entries.</para>
           <para
             >This method raises the <see
              cref="E:System.ComponentModel.Design.DesignerActionService.DesignerActionListsChanged" />
+
+            
 
             
 
@@ -440,6 +522,8 @@
 
             
 
+            
+
              to the current collection of managed smart tags.</para
           >
         </summary>
@@ -450,8 +534,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -466,8 +554,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+          
 
           
 
@@ -507,8 +599,12 @@
 
             
 
+            
+
              method represents the push model of adding smart tag items. The alternate pull model relies on overriding the <see
              cref="P:System.ComponentModel.Design.ComponentDesigner.ActionLists" />
+
+            
 
             
 
@@ -524,8 +620,12 @@
 
             
 
+            
+
              with the <see
              cref="P:System.ComponentModel.Design.DesignerActionMethodItem.IncludeAsDesignerVerb" />
+
+            
 
             
 
@@ -538,12 +638,16 @@
 
             
 
+            
+
              method.</para
           >
           <para>Smart tags are managed on a component instance basis. The managed collection may contain duplicate entries.</para>
           <para
             >This method raises the <see
              cref="E:System.ComponentModel.Design.DesignerActionService.DesignerActionListsChanged" />
+
+            
 
             
 
@@ -562,6 +666,8 @@
 
             
 
+            
+
              to the current collection of managed smart tags.</para
           >
         </summary>
@@ -572,8 +678,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -588,8 +698,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
+
+          
 
           
 
@@ -620,6 +734,8 @@
 
             
 
+            
+
              method empties the internal table used to store information about components and their push-model smart tag lists.</para
           >
           <block subset="none" type="note">
@@ -631,12 +747,16 @@
 
               
 
+              
+
                methods instead to remove individual smart tag items or lists.</para
             >
           </block>
           <para
             >A <see
              cref="E:System.ComponentModel.Design.DesignerActionService.DesignerActionListsChanged" />
+
+            
 
             
 
@@ -677,8 +797,12 @@
 
             
 
+            
+
              method only recognizes push-model smart tags, which are associated to a component with the <see
              cref="Overload:System.ComponentModel.Design.DesignerActionService.Add" />
+
+            
 
             
 
@@ -689,6 +813,8 @@
           <para
             >Although there is no structural limitation on the number of concurrent <see
              cref="T:System.ComponentModel.Design.DesignerActionService" />
+
+            
 
             
 
@@ -712,8 +838,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -741,6 +871,8 @@
           <para
             >The following table shows the set of specialized classes associated with the <see
              cref="E:System.ComponentModel.Design.DesignerActionService.DesignerActionListsChanged" />
+
+            
 
             
 
@@ -774,6 +906,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -788,6 +922,8 @@
                 <para
                   >Connects the <see
                    cref="T:System.ComponentModel.Design.DesignerActionListsChangedEventArgs" />
+
+                  
 
                   
 
@@ -818,6 +954,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -826,6 +964,8 @@
           <para
             >Occurs when a <see
              cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+            
 
             
 
@@ -857,6 +997,8 @@
 
             
 
+            
+
              method is the implementation of the only method mandated by the <see
              cref="T:System.IDisposable" />
 
@@ -864,8 +1006,12 @@
 
             
 
+            
+
              interface. Call this method when you are finished using the <see
              cref="T:System.ComponentModel.Design.DesignerActionService" />
+
+            
 
             
 
@@ -883,6 +1029,8 @@
 
                 
 
+                
+
                  method.</para
               >
             </item>
@@ -890,6 +1038,8 @@
               <para
                 >Unsubscribes to component change events from the associated <see
                  cref="T:System.ComponentModel.Design.IComponentChangeService" />
+
+                
 
                 
 
@@ -907,8 +1057,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.ComponentModel.Design.DesignerActionService" />
+
+            
 
             
 
@@ -921,8 +1075,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.ComponentModel.Design.DesignerActionService" />
+
+            
 
             
 
@@ -935,6 +1093,8 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.ComponentModel.Design.DesignerActionService" />
 
@@ -942,8 +1102,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.ComponentModel.Design.DesignerActionService" />
+
+            
 
             
 
@@ -958,10 +1122,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -978,6 +1146,8 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.ComponentModel.Design.DesignerActionService" />
 
@@ -985,8 +1155,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.ComponentModel.Design.DesignerActionService" />
+
+              
 
               
 
@@ -1001,6 +1175,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.ComponentModel.Design.DesignerActionService" />
+
+            
 
             
 
@@ -1034,6 +1210,8 @@
 
             
 
+            
+
              method is the implementation of the only method mandated by the <see
              cref="T:System.IDisposable" />
 
@@ -1041,8 +1219,12 @@
 
             
 
+            
+
              interface. Call this method when you are finished using the <see
              cref="T:System.ComponentModel.Design.DesignerActionService" />
+
+            
 
             
 
@@ -1060,6 +1242,8 @@
 
                 
 
+                
+
                  method.</para
               >
             </item>
@@ -1067,6 +1251,8 @@
               <para
                 >Unsubscribes to component change events from the associated <see
                  cref="T:System.ComponentModel.Design.IComponentChangeService" />
+
+                
 
                 
 
@@ -1084,8 +1270,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -1098,8 +1288,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -1115,8 +1309,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.ComponentModel.Design.DesignerActionService" />
+
+            
 
             
 
@@ -1135,11 +1333,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1175,8 +1377,12 @@
 
             
 
+            
+
              method is equivalent to a call to the <see
              cref="M:System.ComponentModel.Design.DesignerActionService.GetComponentActions(System.ComponentModel.IComponent,System.ComponentModel.Design.ComponentActionsType)" />
+
+            
 
             
 
@@ -1189,8 +1395,12 @@
 
             
 
+            
+
              parameter of <see
              cref="F:System.ComponentModel.Design.ComponentActionsType.All" />
+
+            
 
             
 
@@ -1206,6 +1416,8 @@
 
             
 
+            
+
              is the union of item lists added through the <see
              cref="Overload:System.ComponentModel.Design.DesignerActionService.Add" />
 
@@ -1213,8 +1425,12 @@
 
             
 
+            
+
              methods and also the lists obtained from the <see
              cref="T:System.ComponentModel.Design.DesignerCommandSet" />
+
+            
 
             
 
@@ -1233,6 +1449,8 @@
         </returns>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1269,8 +1487,12 @@
 
             
 
+            
+
              method filters on the <paramref
              name="type" />
+
+            
 
             
 
@@ -1328,8 +1550,12 @@
 
             
 
+            
+
              method will instead use the designer's design-time shortcut menu items from the <see
              cref="P:System.ComponentModel.Design.ComponentDesigner.Verbs" />
+
+            
 
             
 
@@ -1353,6 +1579,8 @@
 
           
 
+          
+
           The component that the smart tags are associated with.</param
         >
         <param name="type">
@@ -1362,8 +1590,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.ComponentActionsType" />
+
+          
 
           
 
@@ -1403,8 +1635,12 @@
 
             
 
+            
+
              method is a helper method for the <see
              cref="Overload:System.ComponentModel.Design.DesignerActionService.GetComponentActions" />
+
+            
 
             
 
@@ -1417,6 +1653,8 @@
 
             
 
+            
+
              searches for pull-model smart tags of type <see
              cref="F:System.ComponentModel.Design.ComponentActionsType.Component" />
 
@@ -1424,8 +1662,12 @@
 
             
 
+            
+
             , and then adds these to the supplied <paramref
              name="actionLists" />
+
+            
 
             
 
@@ -1441,8 +1683,12 @@
 
             
 
+            
+
              property of its designer, this method will reuse the design-time shortcut menu entries, which are obtained through the <see
              cref="P:System.ComponentModel.Design.ComponentDesigner.Verbs" />
+
+            
 
             
 
@@ -1462,10 +1708,14 @@
 
           
 
+          
+
           The component that the smart tags are associated with.</param
         >
         <param name="actionLists">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1505,8 +1755,12 @@
 
             
 
+            
+
              method is a helper method for the <see
              cref="Overload:System.ComponentModel.Design.DesignerActionService.GetComponentActions" />
+
+            
 
             
 
@@ -1519,8 +1773,12 @@
 
             
 
+            
+
             , and then adds these to the supplied <paramref
              name="actionLists" />
+
+            
 
             
 
@@ -1540,10 +1798,14 @@
 
           
 
+          
+
           The component that the smart tags are associated with.</param
         >
         <param name="actionLists">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1579,11 +1841,15 @@
 
             
 
+            
+
              method is typically used by design tool developers, because component developers typically do not know what other components exist in the current design space.</para
           >
           <para
             >If successful, this method raises the <see
              cref="E:System.ComponentModel.Design.DesignerActionService.DesignerActionListsChanged" />
+
+            
 
             
 
@@ -1598,6 +1864,8 @@
         </summary>
         <param name="actionList">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1633,8 +1901,12 @@
 
             
 
+            
+
              method raises the <see
              cref="E:System.ComponentModel.Design.DesignerActionService.DesignerActionListsChanged" />
+
+            
 
             
 
@@ -1649,6 +1921,8 @@
         </summary>
         <param name="comp">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1685,8 +1959,12 @@
 
             
 
+            
+
              method raises the <see
              cref="E:System.ComponentModel.Design.DesignerActionService.DesignerActionListsChanged" />
+
+            
 
             
 
@@ -1706,10 +1984,14 @@
 
           
 
+          
+
           The component to disassociate the smart tags from.</param
         >
         <param name="actionList">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

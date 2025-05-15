@@ -41,8 +41,12 @@
 
         
 
+        
+
          and the <see
          cref="T:System.Windows.Forms.DataGridTextBoxColumn" />
+
+        
 
         
 
@@ -55,8 +59,12 @@
 
         
 
+        
+
          control column. The <see
          cref="T:System.Windows.Forms.DataGridTextBoxColumn" />
+
+        
 
         
 
@@ -69,6 +77,8 @@
 
         
 
+        
+
         , and is designed to host the <see
          cref="T:System.Windows.Forms.DataGridTextBox" />
 
@@ -76,8 +86,12 @@
 
         
 
+        
+
         , which derives from the <see
          cref="T:System.Windows.Forms.TextBox" />
+
+        
 
         
 
@@ -93,8 +107,12 @@
 
         
 
+        
+
          and <see
          cref="E:System.Windows.Forms.Control.KeyDown" />
+
+        
 
         
 
@@ -107,8 +125,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Windows.Forms.Control.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
+
+        
 
         
 
@@ -127,8 +149,12 @@
 
         
 
+        
+
          control that is hosted in a <see
          cref="T:System.Windows.Forms.DataGridTextBoxColumn" />
+
+        
 
         
 
@@ -150,6 +176,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.DataGridTextBox" />
+
+            
 
             
 
@@ -182,6 +210,8 @@
 
             
 
+            
+
              property is used within the <see
              cref="M:System.Windows.Forms.Control.ProcessKeyMessage(System.Windows.Forms.Message@)" />
 
@@ -189,8 +219,12 @@
 
             
 
+            
+
              to determine how to process key press events, to check the state of the <see
              cref="T:System.Windows.Forms.DataGridTextBox" />
+
+            
 
             
 
@@ -204,6 +238,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Windows.Forms.DataGridTextBox" />
+
+            
 
             
 
@@ -242,6 +278,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -252,8 +290,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyPressEventArgs" />
+
+          
 
           
 
@@ -291,6 +333,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -301,8 +345,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -363,8 +411,12 @@
 
             
 
+            
+
              to which this <see
              cref="T:System.Windows.Forms.TextBox" />
+
+            
 
             
 
@@ -380,8 +432,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGrid" />
+
+          
 
           
 

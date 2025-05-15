@@ -34,6 +34,8 @@
 
         
 
+        
+
          instructs indigo2 to issue a new thread to pump for each accepted channel. If there are a lot of channels there is the possibility of running out of threads.</para
       >
       <para
@@ -41,6 +43,8 @@
          type="text/html">
           <a href="cc070387-3d11-4b02-a952-bc08ad2df05a">&lt;synchronousReceive&gt; element</a>
         </format>
+
+        
 
         
 
@@ -73,6 +77,8 @@
           <para
             >Creates an instance of the <see
              cref="T:System.ServiceModel.Description.SynchronousReceiveBehavior" />
+
+            
 
             
 
@@ -118,6 +124,8 @@
 
             
 
+            
+
              for a description of the interface member that this class implements.</para
           >
         </remarks>
@@ -127,6 +135,8 @@
         </summary>
         <param name="parameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -167,6 +177,8 @@
 
             
 
+            
+
              for a description of the interface member this class implements.</para
           >
         </remarks>
@@ -181,10 +193,14 @@
 
           
 
+          
+
           The endpoint that is to be customized.</param
         >
         <param name="behavior">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -226,6 +242,8 @@
 
             
 
+            
+
              is null.</para
           >
         </remarks>
@@ -239,11 +257,15 @@
 
             
 
+            
+
              property to true.</para
           >
         </summary>
         <param name="serviceEndpoint">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -283,6 +305,8 @@
 
             
 
+            
+
              for a description of the interface member this class implements.</para
           >
         </remarks>
@@ -292,6 +316,8 @@
         </summary>
         <param name="serviceEndpoint">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

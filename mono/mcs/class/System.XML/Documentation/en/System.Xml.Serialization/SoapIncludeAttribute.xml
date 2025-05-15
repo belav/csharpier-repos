@@ -37,8 +37,12 @@
 
         
 
+        
+
          class belongs to a family of attributes that controls how the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -55,11 +59,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >To serialize an object as an encoded SOAP message, you must construct the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -72,6 +80,8 @@
 
         
 
+        
+
          created with the <see
          cref="M:System.Xml.Serialization.SoapReflectionImporter.ImportTypeMapping(System.Type)" />
 
@@ -79,8 +89,12 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.Xml.Serialization.SoapReflectionImporter" />
+
+        
 
         
 
@@ -96,6 +110,8 @@
 
         
 
+        
+
         , specify the <see
          cref="T:System.Type" />
 
@@ -103,8 +119,12 @@
 
         
 
+        
+
          of the derived class. When the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -120,6 +140,8 @@
 
         
 
+        
+
          to include derived classes in service description documents that are written in the Web Services Description Language (WSDL). For example, if a method returns an <see
          cref="T:System.Object" />
 
@@ -127,8 +149,12 @@
 
         
 
+        
+
         , apply the <see
          cref="T:System.Xml.Serialization.SoapIncludeAttribute" />
+
+        
 
         
 
@@ -149,6 +175,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -157,6 +185,8 @@
       <para
         >Allows the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -194,6 +224,8 @@
 
             
 
+            
+
              to a field or property that returns either an array of objects, an <see
              cref="T:System.Collections.ArrayList" />
 
@@ -201,8 +233,12 @@
 
             
 
+            
+
              that contains a collection of objects, or an object that can return multiple types. Set the <see
              cref="P:System.Xml.Serialization.SoapIncludeAttribute.Type" />
+
+            
 
             
 
@@ -221,11 +257,15 @@
 
             
 
+            
+
              class using the specified type.</para
           >
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -260,6 +300,8 @@
 
             
 
+            
+
              to a field or property that returns either an array of objects, an <see
              cref="T:System.Collections.ArrayList" />
 
@@ -267,8 +309,12 @@
 
             
 
+            
+
              that contains a collection of objects, or an object that can return multiple types. Set the <see
              cref="P:System.Xml.Serialization.SoapIncludeAttribute.Type" />
+
+            
 
             
 

@@ -23,6 +23,8 @@
 
         
 
+        
+
          converts object references to and from other representations.</para
       >
     </remarks>
@@ -31,6 +33,8 @@
       <para
         >Provides the type converter for the <see
          cref="P:System.Diagnostics.EventLog.Log" />
+
+        
 
         
 
@@ -52,6 +56,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Diagnostics.Design.LogConverter" />
+
+            
 
             
 
@@ -96,8 +102,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -107,6 +117,8 @@
         >
         <param name="sourceType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -150,11 +162,15 @@
 
             
 
+            
+
              that represents the converted value.</para
           >
         </returns>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -169,10 +185,14 @@
 
           
 
+          
+
           The T:System.Globalization.CultureInfo  to use as the current culture.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -209,6 +229,8 @@
 
             
 
+            
+
              parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
           >
         </remarks>
@@ -226,6 +248,8 @@
 
             
 
+            
+
              that holds a standard set of valid values, or null if the data type does not support a standard set of values.</para
           >
         </returns>
@@ -236,8 +260,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -274,6 +302,8 @@
 
             
 
+            
+
              parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
           >
         </remarks>
@@ -291,6 +321,8 @@
 
             
 
+            
+
              should be called to find a common set of values the object supports. This method never returns false.</para
           >
         </returns>
@@ -301,8 +333,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 

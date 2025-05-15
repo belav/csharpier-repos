@@ -25,6 +25,8 @@
 
         
 
+        
+
          allows controls to optimize multiple property assignments. As a result, you can initialize co-dependent properties or batch set multiple properties at design time.</para
       >
       <para
@@ -35,8 +37,12 @@
 
         
 
+        
+
          method to signal the object that initialization is starting. Call the <see
          cref="M:System.ComponentModel.ISupportInitialize.EndInit" />
+
+        
 
         
 

@@ -84,6 +84,8 @@
 
             
 
+            
+
              that is the body of the loop.</para
           >
         </summary>
@@ -113,6 +115,8 @@
           <para
             >Gets the <see
              cref="T:System.Linq.Expressions.LabelTarget" />
+
+            
 
             
 
@@ -152,6 +156,8 @@
 
             
 
+            
+
              that is used by the loop body as a continue statement target.</para
           >
         </summary>
@@ -186,6 +192,8 @@
 
             
 
+            
+
              when overriding this method.</para
           >
         </summary>
@@ -209,6 +217,8 @@
           <para
             >Gets the static type of the expression that this <see
              cref="T:System.Linq.Expressions.Expression" />
+
+            
 
             
 
@@ -257,8 +267,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.LoopExpression.BreakLabel" />
+
+          
 
           
 
@@ -273,8 +287,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.LoopExpression.ContinueLabel" />
+
+          
 
           
 
@@ -289,8 +307,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.LoopExpression.Body" />
+
+          
 
           
 

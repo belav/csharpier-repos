@@ -25,6 +25,8 @@
 
         
 
+        
+
          object.</para
       >
     </summary>
@@ -70,6 +72,8 @@
         </summary>
         <param name="subProtocol">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -231,10 +235,14 @@
 
           
 
+          
+
           The size, in bytes, of the client receive buffer.</param
         >
         <param name="sendBufferSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -278,6 +286,8 @@
 
           
 
+          
+
           The size, in bytes, of the client receive buffer.</param
         >
         <param name="sendBufferSize">
@@ -287,10 +297,14 @@
 
           
 
+          
+
           The size, in bytes, of the client send buffer.</param
         >
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -333,10 +347,14 @@
 
           
 
+          
+
           The name of the HTTP header.</param
         >
         <param name="headerValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -364,6 +382,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 

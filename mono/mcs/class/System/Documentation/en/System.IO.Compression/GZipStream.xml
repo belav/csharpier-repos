@@ -26,11 +26,15 @@
 
         
 
+        
+
          class, but can be extended to use other compression formats. The format can be readily implemented in a manner not covered by patents. </para
       >
       <para
         >Starting with the net_v45, the <see
          cref="T:System.IO.Compression.DeflateStream" />
+
+        
 
         
 
@@ -46,6 +50,8 @@
 
         
 
+        
+
          objects written to a file with an extension of .gz can be decompressed using many common compression tools; however, this class does not inherently provide functionality for adding files to or extracting files from zip archives. </para
       >
       <para
@@ -56,8 +62,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.IO.Compression.GZipStream" />
+
+        
 
         
 
@@ -70,8 +80,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.IO.Compression.GZipStream" />
+
+        
 
         
 
@@ -119,11 +133,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >This constructor overload uses the compression mode <see
              cref="F:System.IO.Compression.CompressionMode.Compress" />
+
+            
 
             
 
@@ -136,8 +154,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.IO.Compression.GZipStream.#ctor(System.IO.Stream,System.IO.Compression.CompressionMode,System.Boolean)" />
+
+            
 
             
 
@@ -156,6 +178,8 @@
 
             
 
+            
+
              class by using the specified stream and compression level.</para
           >
         </summary>
@@ -166,10 +190,14 @@
 
           
 
+          
+
           The stream to compress.</param
         >
         <param name="compressionLevel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -210,8 +238,12 @@
 
             
 
+            
+
              owns the underlying stream, so closing the <paramref
              name="stream" />
+
+            
 
             
 
@@ -227,8 +259,12 @@
 
             
 
+            
+
              class is created with the <paramref
              name="mode" />
+
+            
 
             
 
@@ -244,8 +280,12 @@
 
             
 
+            
+
              when the compression mode is <see
              cref="F:System.IO.Compression.CompressionMode.Compress" />
+
+            
 
             
 
@@ -264,11 +304,15 @@
 
             
 
+            
+
              class by using the specified stream and compression mode.</para
           >
         </summary>
         <param name="mode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -312,8 +356,12 @@
 
             
 
+            
+
              class, and whether to leave the stream object open after disposing the <see
              cref="T:System.IO.Compression.GZipStream" />
+
+            
 
             
 
@@ -329,6 +377,8 @@
 
             
 
+            
+
             . To set the compression mode to another value, use the <see
              cref="M:System.IO.Compression.GZipStream.#ctor(System.IO.Stream,System.IO.Compression.CompressionMode)" />
 
@@ -336,8 +386,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.IO.Compression.GZipStream.#ctor(System.IO.Stream,System.IO.Compression.CompressionMode,System.Boolean)" />
+
+            
 
             
 
@@ -356,11 +410,15 @@
 
             
 
+            
+
              class by using the specified stream and compression level, and optionally leaves the stream open.</para
           >
         </summary>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -375,6 +433,8 @@
 
           
 
+          
+
           One of the enumeration values that indicates whether to emphasize speed or compression efficiency when compressing the stream.</param
         >
         <param name="leaveOpen">
@@ -384,8 +444,12 @@
 
           
 
+          
+
           true to leave the stream object open after disposing the <see
            cref="T:System.IO.Compression.GZipStream" />
+
+          
 
           
 
@@ -427,8 +491,12 @@
 
             
 
+            
+
              owns the underlying stream, so closing the <paramref
              name="stream" />
+
+            
 
             
 
@@ -444,8 +512,12 @@
 
             
 
+            
+
              class is created with the <paramref
              name="mode" />
+
+            
 
             
 
@@ -461,8 +533,12 @@
 
             
 
+            
+
              when the compression mode is <see
              cref="F:System.IO.Compression.CompressionMode.Compress" />
+
+            
 
             
 
@@ -481,11 +557,15 @@
 
             
 
+            
+
              class by using the specified stream and compression mode, and optionally leaves the stream open.</para
           >
         </summary>
         <param name="mode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -500,8 +580,12 @@
 
           
 
+          
+
           true to leave the stream open after disposing the <see
            cref="T:System.IO.Compression.GZipStream" />
+
+          
 
           
 
@@ -574,8 +658,12 @@
 
             
 
+            
+
              method. The <see
              cref="M:System.IO.Compression.GZipStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -585,6 +673,8 @@
              type="text/html">
               <a href="dbdd55e7-d6b9-4f9e-8abb-ab0edd4457f7">Asynchronous File I/O</a>
             </format>
+
+            
 
             
 
@@ -600,8 +690,12 @@
 
             
 
+            
+
              return value to the <see
              cref="M:System.IO.Compression.GZipStream.EndRead(System.IAsyncResult)" />
+
+            
 
             
 
@@ -614,8 +708,12 @@
 
             
 
+            
+
              or in a callback passed to <see
              cref="M:System.IO.Compression.GZipStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -633,8 +731,12 @@
 
             
 
+            
+
              property to determine whether the current <see
              cref="T:System.IO.Compression.GZipStream" />
+
+            
 
             
 
@@ -650,8 +752,12 @@
 
             
 
+            
+
             . Errors that occur during an asynchronous read request, such as a disk failure during the I/O request, occur on the thread pool thread and throw exceptions when calling <see
              cref="M:System.IO.Compression.GZipStream.EndRead(System.IAsyncResult)" />
+
+            
 
             
 
@@ -665,6 +771,8 @@
           <para
             >Begins an asynchronous read operation. (Consider using the <see
              cref="M:System.IO.Stream.ReadAsync(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -684,8 +792,12 @@
 
           
 
+          
+
           The byte offset in <paramref
            name="array" />
+
+          
 
           
 
@@ -695,6 +807,8 @@
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -743,8 +857,12 @@
 
             
 
+            
+
              method. The <see
              cref="M:System.IO.Compression.GZipStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -754,6 +872,8 @@
              type="text/html">
               <a href="dbdd55e7-d6b9-4f9e-8abb-ab0edd4457f7">Asynchronous File I/O</a>
             </format>
+
+            
 
             
 
@@ -769,8 +889,12 @@
 
             
 
+            
+
              method starts an asynchronous write operation to a <see
              cref="T:System.IO.Compression.GZipStream" />
+
+            
 
             
 
@@ -786,8 +910,12 @@
 
             
 
+            
+
              delegate and pass its name to the <see
              cref="M:System.IO.Compression.GZipStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -801,6 +929,8 @@
           <para
             >Begins an asynchronous write operation. (Consider using the <see
              cref="M:System.IO.Stream.WriteAsync(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -820,8 +950,12 @@
 
           
 
+          
+
           The byte offset in <paramref
            name="array" />
+
+          
 
           
 
@@ -831,6 +965,8 @@
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -932,8 +1068,12 @@
 
             
 
+            
+
              method and the <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -946,8 +1086,12 @@
 
             
 
+            
+
              invokes the protected <see
              cref="M:System.IO.Compression.GZipStream.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -960,8 +1104,12 @@
 
             
 
+            
+
              parameter set to true. <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -974,8 +1122,12 @@
 
             
 
+            
+
              with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -991,6 +1143,8 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.IO.Compression.DeflateStream" />
 
@@ -998,8 +1152,12 @@
 
             
 
+            
+
              references. This method invokes the <see
              cref="M:System.ComponentModel.Component.Dispose" />
+
+            
 
             
 
@@ -1018,11 +1176,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1065,8 +1227,12 @@
 
             
 
+            
+
              method. The <see
              cref="M:System.IO.Compression.GZipStream.EndRead(System.IAsyncResult)" />
+
+            
 
             
 
@@ -1076,6 +1242,8 @@
              type="text/html">
               <a href="dbdd55e7-d6b9-4f9e-8abb-ab0edd4457f7">Asynchronous File I/O</a>
             </format>
+
+            
 
             
 
@@ -1091,8 +1259,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IO.Compression.GZipStream.EndRead(System.IAsyncResult)" />
+
+            
 
             
 
@@ -1112,6 +1284,8 @@
 
             
 
+            
+
              method instead; see the Remarks section.)</para
           >
         </summary>
@@ -1120,6 +1294,8 @@
           <para
             >The number of bytes read from the stream, between 0 (zero) and the number of bytes you requested. <see
              cref="T:System.IO.Compression.GZipStream" />
+
+            
 
             
 
@@ -1163,8 +1339,12 @@
 
             
 
+            
+
              method. The <see
              cref="M:System.IO.Compression.GZipStream.EndWrite(System.IAsyncResult)" />
+
+            
 
             
 
@@ -1174,6 +1354,8 @@
              type="text/html">
               <a href="dbdd55e7-d6b9-4f9e-8abb-ab0edd4457f7">Asynchronous File I/O</a>
             </format>
+
+            
 
             
 
@@ -1189,8 +1371,12 @@
 
             
 
+            
+
              method completes the asynchronous write operation started in the <see
              cref="M:System.IO.Compression.GZipStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -1204,6 +1390,8 @@
           <para
             >Handles the end of an asynchronous write operation. (Consider using the <see
              cref="M:System.IO.Stream.WriteAsync(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -1266,6 +1454,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1291,6 +1481,8 @@
           <para
             >This property is not supported and always throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -1337,6 +1529,8 @@
 
             
 
+            
+
              is thrown as one of the last operations. A cyclic redundancy check (CRC) is performed as one of the last operations of this method.</para
           >
         </remarks>
@@ -1350,6 +1544,8 @@
         </returns>
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1393,6 +1589,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1407,6 +1605,8 @@
 
           
 
+          
+
           The location in the stream.</param
         >
         <param name="origin">
@@ -1416,8 +1616,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.IO.SeekOrigin" />
+
+          
 
           
 
@@ -1457,11 +1661,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1507,8 +1715,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.IO.Stream.Close" />
+
+            
 
             
 
@@ -1523,6 +1735,8 @@
         </summary>
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

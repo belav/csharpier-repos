@@ -36,6 +36,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -71,6 +73,8 @@
 
             
 
+            
+
              controls.</para
           >
         </summary>
@@ -101,6 +105,8 @@
 
             
 
+            
+
              representing the dimensions of a grid unit. </para
           >
         </summary>
@@ -125,6 +131,8 @@
           <para
             >A component's smart tag panel is set to automatically open when the <see
              cref="P:System.ComponentModel.Design.DesignerActionList.AutoShow" />
+
+            
 
             
 
@@ -220,8 +228,12 @@
 
             
 
+            
+
              item of the <ui
             >Tools</ui>
+
+            
 
             
 

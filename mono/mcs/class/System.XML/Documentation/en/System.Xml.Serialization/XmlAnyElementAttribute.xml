@@ -38,8 +38,12 @@
 
           
 
+          
+
            or <see
            cref="T:System.Xml.Linq.XNode" />
+
+          
 
           
 
@@ -52,8 +56,12 @@
 
           
 
+          
+
            and <see
            cref="T:System.Xml.XmlNode" />
+
+          
 
           
 
@@ -70,11 +78,15 @@
 
         
 
+        
+
          to contain arbitrary data (as XML elements) that can be sent as part of an XML document, such as metadata sent as part of the document.</para
       >
       <para
         >Apply the <see
          cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+
+        
 
         
 
@@ -87,8 +99,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Xml.XmlNode" />
+
+        
 
         
 
@@ -101,6 +117,8 @@
 
         
 
+        
+
          property value when applying the attribute, all <see
          cref="T:System.Xml.XmlElement" />
 
@@ -108,8 +126,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Xml.XmlNode" />
+
+        
 
         
 
@@ -122,8 +144,12 @@
 
         
 
+        
+
          property value, you must set the <see
          cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
+
+        
 
         
 
@@ -136,8 +162,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Xml.XmlNode" />
+
+        
 
         
 
@@ -150,6 +180,8 @@
 
         
 
+        
+
          value is specified, the <see
          cref="T:System.Xml.XmlElement" />
 
@@ -157,8 +189,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Xml.XmlNode" />
+
+        
 
         
 
@@ -174,8 +210,12 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -188,8 +228,12 @@
 
         
 
+        
+
          items to process the data. If you specify a <see
          cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
+
+        
 
         
 
@@ -202,8 +246,12 @@
 
         
 
+        
+
          value, the array contains all elements that have no corresponding member in the class. If a class contains more than one field to which the attribute is applied, use the <see
          cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
+
+        
 
         
 
@@ -216,8 +264,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
+
+        
 
         
 
@@ -230,8 +282,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
+
+        
 
         
 
@@ -244,6 +300,8 @@
 
         
 
+        
+
         , or <see
          cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
 
@@ -251,8 +309,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
+
+        
 
         
 
@@ -268,6 +330,8 @@
 
         
 
+        
+
          to a field that returns a single <see
          cref="T:System.Xml.XmlElement" />
 
@@ -275,8 +339,12 @@
 
         
 
+        
+
          object. If you do so, you must use the properties and methods of the <see
          cref="T:System.Xml.XmlElement" />
+
+        
 
         
 
@@ -292,8 +360,12 @@
 
         
 
+        
+
          to a class member, but each instance must have a distinct <see
          cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
+
+        
 
         
 
@@ -306,8 +378,12 @@
 
         
 
+        
+
          property is set for each instance, a distinct <see
          cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
+
+        
 
         
 
@@ -323,8 +399,12 @@
 
         
 
+        
+
          and <see
          cref="E:System.Xml.Serialization.XmlSerializer.UnknownAttribute" />
+
+        
 
         
 
@@ -337,8 +417,12 @@
 
         
 
+        
+
          do not occur if you apply the <see
          cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+
+        
 
         
 
@@ -350,6 +434,8 @@
         <para
           >You can use the word XmlAnyElement in your code instead of the longer <see
            cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+
+          
 
           
 
@@ -368,6 +454,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -381,8 +469,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Xml.XmlNode" />
+
+        
 
         
 
@@ -418,8 +510,12 @@
 
             
 
+            
+
              constructor when you are overriding the serialization of a field. For more details about overriding serialization, see the <see
              cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+
+            
 
             
 
@@ -433,6 +529,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Serialization.XmlAnyElementAttribute" />
+
+            
 
             
 
@@ -470,8 +568,12 @@
 
             
 
+            
+
              constructor when you are overriding the serialization of a field. For more details about overriding serialization, see the <see
              cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+
+            
 
             
 
@@ -490,6 +592,8 @@
 
             
 
+            
+
              class and specifies the XML element name generated in the XML document.</para
           >
         </summary>
@@ -500,8 +604,12 @@
 
           
 
+          
+
           The name of the XML element that the <see
            cref="T:System.Xml.Serialization.XmlSerializer" />
+
+          
 
           
 
@@ -542,8 +650,12 @@
 
             
 
+            
+
              constructor when you are overriding the serialization of a field. For more details about overriding serialization, see the <see
              cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+
+            
 
             
 
@@ -562,11 +674,15 @@
 
             
 
+            
+
              class and specifies the XML element name generated in the XML document and its XML namespace.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -579,10 +695,14 @@
 
           
 
+          
+
            generates. </param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -617,6 +737,8 @@
 
             
 
+            
+
              property value when applying the attribute, all <see
              cref="T:System.Xml.XmlElement" />
 
@@ -624,8 +746,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Xml.XmlNode" />
+
+            
 
             
 
@@ -638,8 +764,12 @@
 
             
 
+            
+
              property value, you must set the <see
              cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
+
+            
 
             
 
@@ -652,8 +782,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Xml.XmlNode" />
+
+            
 
             
 
@@ -666,6 +800,8 @@
 
             
 
+            
+
              value is specified, the <see
              cref="T:System.Xml.XmlElement" />
 
@@ -673,8 +809,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Xml.XmlNode" />
+
+            
 
             
 
@@ -690,8 +830,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -704,8 +848,12 @@
 
             
 
+            
+
              value, the array contains only XML elements with that name. If you do not specify a <see
              cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
+
+            
 
             
 
@@ -718,8 +866,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
+
+            
 
             
 
@@ -732,8 +884,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
+
+            
 
             
 
@@ -746,8 +902,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
+
+            
 
             
 
@@ -763,8 +923,12 @@
 
             
 
+            
+
              to a class member, but each instance must have a distinct <see
              cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Name" />
+
+            
 
             
 
@@ -777,8 +941,12 @@
 
             
 
+            
+
              property is set for each instance, a distinct <see
              cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
+
+            
 
             
 
@@ -818,8 +986,12 @@
 
             
 
+            
+
              property allows you to set a unique name for the XML attribute. The <see
              cref="P:System.Xml.Serialization.XmlAnyElementAttribute.Namespace" />
+
+            
 
             
 
@@ -835,8 +1007,12 @@
 
             
 
+            
+
              property to a prefixed name, create an <see
              cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+
+            
 
             
 
@@ -849,8 +1025,12 @@
 
             
 
+            
+
              property to one of the namespaces in the <see
              cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+
+            
 
             
 
@@ -889,8 +1069,12 @@
 
             
 
+            
+
              enumeration to instruct the <see
              cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+
+            
 
             
 
@@ -903,12 +1087,16 @@
 
             
 
+            
+
              property. </para
           >
           <block subset="none" type="note">
             <para
               >Once the <see
                cref="P:System.Xml.Serialization.XmlElementAttribute.Order" />
+
+              
 
               
 

@@ -24,8 +24,12 @@
 
         
 
+        
+
          is an associative set of <see
          cref="T:System.UriTemplate" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          can be changed until the <see
          cref="M:System.UriTemplateTable.MakeReadOnly(System.Boolean)" />
+
+        
 
         
 
@@ -57,6 +65,8 @@
 
             
 
+            
+
              is called passing in false, the <see
              cref="T:System.UriTemplateTable" />
 
@@ -64,8 +74,12 @@
 
             
 
+            
+
              checks to make sure the table contains no multiple structurally-equivalent templates. If it finds such templates, it throws an exception. This type of validation is used in conjunction with <see
              cref="M:System.UriTemplateTable.MatchSingle(System.Uri)" />
+
+            
 
             
 
@@ -83,8 +97,12 @@
 
             
 
+            
+
              is called passing in true, multiple structurally-equivalent templates can be contained within a <see
              cref="T:System.UriTemplateTable" />
+
+            
 
             
 
@@ -94,6 +112,8 @@
              type="text/html">
               <a href="5cbbe03f-4a9e-4d44-9e02-c5773239cf52">UriTemplate and UriTemplateTable</a>
             </format>
+
+            
 
             
 
@@ -109,6 +129,8 @@
       <para
         >A class that represents an associative set of <see
          cref="T:System.UriTemplate" />
+
+        
 
         
 
@@ -137,6 +159,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.UriTemplateTable" />
+
+            
 
             
 
@@ -178,11 +202,15 @@
 
             
 
+            
+
              class with the specified collection of key/value pairs.</para
           >
         </summary>
         <param name="keyValuePairs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -217,6 +245,8 @@
 
             
 
+            
+
              class with the specified base address.</para
           >
         </summary>
@@ -227,8 +257,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -270,11 +304,15 @@
 
             
 
+            
+
              class with the specified base address and collection of key/value pairs.</para
           >
         </summary>
         <param name="baseAddress">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -287,10 +325,14 @@
 
           
 
+          
+
            instance that contains the base address.</param
         >
         <param name="keyValuePairs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -322,8 +364,12 @@
 
             
 
+            
+
              property can only be set prior to calling <see
              cref="M:System.UriTemplateTable.MakeReadOnly(System.Boolean)" />
+
+            
 
             
 
@@ -336,6 +382,8 @@
 
             
 
+            
+
              or <see
              cref="M:System.UriTemplateTable.MatchSingle(System.Uri)" />
 
@@ -343,8 +391,12 @@
 
             
 
+            
+
              otherwise an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -358,6 +410,8 @@
           <para
             >Gets and sets the base address for the <see
              cref="T:System.UriTemplateTable" />
+
+            
 
             
 
@@ -390,8 +444,12 @@
 
             
 
+            
+
              is read only after the <see
              cref="M:System.UriTemplateTable.MakeReadOnly(System.Boolean)" />
+
+            
 
             
 
@@ -405,6 +463,8 @@
           <para
             >Gets a value that specifies whether the <see
              cref="T:System.UriTemplateTable" />
+
+            
 
             
 
@@ -443,8 +503,12 @@
 
             
 
+            
+
              instance in the table has data associated with it. The <see
              cref="P:System.UriTemplateTable.KeyValuePairs" />
+
+            
 
             
 
@@ -457,8 +521,12 @@
 
             
 
+            
+
              instance and the value is the data associated with the <see
              cref="T:System.UriTemplate" />
+
+            
 
             
 
@@ -471,8 +539,12 @@
 
             
 
+            
+
              property prior to calling <see
              cref="M:System.UriTemplateTable.MakeReadOnly(System.Boolean)" />
+
+            
 
             
 
@@ -485,6 +557,8 @@
 
             
 
+            
+
              or <see
              cref="M:System.UriTemplateTable.MatchSingle(System.Uri)" />
 
@@ -492,8 +566,12 @@
 
             
 
+            
+
              otherwise a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -507,6 +585,8 @@
           <para
             >Gets a collection of key/value pairs that consist of <see
              cref="T:System.UriTemplate" />
+
+            
 
             
 
@@ -547,6 +627,8 @@
 
             
 
+            
+
              method is called, one of the following types of validation occurs: </para
           >
           <list type="bullet">
@@ -559,6 +641,8 @@
 
                 
 
+                
+
                  is called passing in false, the <see
                  cref="T:System.UriTemplateTable" />
 
@@ -566,8 +650,12 @@
 
                 
 
+                
+
                  checks to make sure the table contains no multiple structurally-equivalent templates. If it finds such templates, an exception is thrown. This type of validation is used in conjunction with <see
                  cref="M:System.UriTemplateTable.MatchSingle(System.Uri)" />
+
+                
 
                 
 
@@ -585,8 +673,12 @@
 
                 
 
+                
+
                  is called passing in true, multiple structurally-equivalent templates can be contained within a <see
                  cref="T:System.UriTemplateTable" />
+
+                
 
                 
 
@@ -599,6 +691,8 @@
 
                 
 
+                
+
                  when multiple template matches are allowed on the candidate URI.</para
               >
             </item>
@@ -606,6 +700,8 @@
           <para
             >Only the first call to <see
              cref="M:System.UriTemplateTable.MakeReadOnly(System.Boolean)" />
+
+            
 
             
 
@@ -624,11 +720,15 @@
 
             
 
+            
+
              read only.</para
           >
         </summary>
         <param name="allowDuplicateEquivalentUriTemplates">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -641,8 +741,12 @@
 
           
 
+          
+
            instances in the <see
            cref="T:System.UriTemplateTable" />
+
+          
 
           
 
@@ -686,8 +790,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.UriTemplateTable" />
+
+            
 
             
 
@@ -706,11 +814,15 @@
 
             
 
+            
+
              instances.</para
           >
         </returns>
         <param name="uri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -747,6 +859,8 @@
 
             
 
+            
+
              is thrown.</para
           >
         </remarks>
@@ -760,8 +874,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.UriTemplateTable" />
+
+            
 
             
 
@@ -780,11 +898,15 @@
 
             
 
+            
+
              instance.</para
           >
         </returns>
         <param name="uri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

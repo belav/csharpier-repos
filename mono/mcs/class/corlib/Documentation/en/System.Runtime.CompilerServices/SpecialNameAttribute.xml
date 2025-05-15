@@ -31,6 +31,8 @@
 
         
 
+        
+
          class is not currently used in the .NET Framework, but is reserved for future use. </para
       >
     </remarks>
@@ -64,6 +66,8 @@
 
             
 
+            
+
              class is not currently used in the .NET Framework, but is reserved for future use.</para
           >
         </remarks>
@@ -72,6 +76,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.CompilerServices.SpecialNameAttribute" />
+
+            
 
             
 

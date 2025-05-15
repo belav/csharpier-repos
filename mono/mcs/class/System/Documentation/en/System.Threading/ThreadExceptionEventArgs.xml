@@ -33,6 +33,8 @@
 
         
 
+        
+
          is created by a thread when an unhandled exception occurs. <see
          cref="T:System.Threading.ThreadExceptionEventArgs" />
 
@@ -40,8 +42,12 @@
 
         
 
+        
+
          contains the <see
          cref="T:System.Exception" />
+
+        
 
         
 
@@ -55,6 +61,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.Application.ThreadException" />
+
+        
 
         
 
@@ -93,6 +101,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -103,8 +113,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Exception" />
+
+          
 
           
 
@@ -137,6 +151,8 @@
           <para
             >Gets the <see
              cref="T:System.Exception" />
+
+            
 
             
 

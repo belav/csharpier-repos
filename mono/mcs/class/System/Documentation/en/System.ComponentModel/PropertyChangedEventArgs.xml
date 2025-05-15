@@ -33,8 +33,12 @@
 
         
 
+        
+
          event is raised when a property is changed on a component. A <see
          cref="T:System.ComponentModel.PropertyChangedEventArgs" />
+
+        
 
         
 
@@ -49,8 +53,12 @@
 
         
 
+        
+
          provides the <see
          cref="P:System.ComponentModel.PropertyChangedEventArgs.PropertyName" />
+
+        
 
         
 
@@ -64,6 +72,8 @@
       <para
         >Provides data for the <see
          cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged" />
+
+        
 
         
 
@@ -104,8 +114,12 @@
 
             
 
+            
+
              value or null for the <paramref
              name="propertyName" />
+
+            
 
             
 
@@ -124,11 +138,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="propertyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -162,8 +180,12 @@
 
             
 
+            
+
              value or null for the <paramref
              name="propertyName" />
+
+            
 
             
 

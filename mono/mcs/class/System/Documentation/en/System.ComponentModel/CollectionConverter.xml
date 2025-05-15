@@ -33,8 +33,12 @@
 
         
 
+        
+
          method for this type converter always returns null, and the <see
          cref="M:System.ComponentModel.TypeConverter.GetPropertiesSupported" />
+
+        
 
         
 
@@ -50,10 +54,14 @@
 
         
 
+        
+
          base class and <format
          type="text/html">
           <a href="90373a3f-d8c8-492d-841c-945d62393c56">How to: Implement a Type Converter</a>
         </format>
+
+        
 
         
 
@@ -70,8 +78,12 @@
 
           
 
+          
+
            class. Instead, call the <see
            cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+
+          
 
           
 
@@ -84,8 +96,12 @@
 
           
 
+          
+
            class. For more information, see the examples in the <see
            cref="T:System.ComponentModel.TypeConverter" />
+
+          
 
           
 
@@ -122,6 +138,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.CollectionConverter" />
+
+            
 
             
 
@@ -167,6 +185,8 @@
 
             
 
+            
+
              parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
           >
           <block subset="none" type="note">
@@ -187,6 +207,8 @@
 
             
 
+            
+
              that represents the converted value.</para
           >
         </returns>
@@ -197,8 +219,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -213,8 +239,12 @@
 
           
 
+          
+
           The culture to which <paramref
            name="value" />
+
+          
 
           
 
@@ -229,6 +259,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -236,8 +268,12 @@
 
           
 
+          
+
            to convert. This parameter must inherit from <see
            cref="T:System.Collections.ICollection" />
+
+          
 
           
 
@@ -252,8 +288,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -297,6 +337,8 @@
 
             
 
+            
+
              parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
           >
           <para
@@ -307,8 +349,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Attribute" />
+
+            
 
             
 
@@ -326,8 +372,12 @@
 
                 
 
+                
+
                  object will be treated as a wildcard; it will match any property that has the <see
                  cref="T:System.Type" />
+
+                
 
                 
 
@@ -345,6 +395,8 @@
 
                 
 
+                
+
                  of the same class, the property will not be included in the returned array.</para
               >
             </item>
@@ -352,6 +404,8 @@
               <para
                 >If the attribute is an instance of <see
                  cref="T:System.Attribute" />
+
+                
 
                 
 
@@ -369,8 +423,12 @@
 
                 
 
+                
+
                  instance is specified and it is the default property, it will be included in the returned array even if there is no instance of the <see
                  cref="T:System.Attribute" />
+
+                
 
                 
 
@@ -396,6 +454,8 @@
 
             
 
+            
+
              with the properties that are exposed for this data type, or null if there are no properties. This method always returns null.</para
           >
         </returns>
@@ -406,8 +466,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -422,8 +486,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -438,8 +506,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -481,6 +553,8 @@
 
             
 
+            
+
              parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
           >
           <para>Collections do not support properties; therefore, this method always returns false.</para>
@@ -499,6 +573,8 @@
 
             
 
+            
+
              should not be called to find the properties of this object. This method never returns true.</para
           >
         </returns>
@@ -509,8 +585,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 

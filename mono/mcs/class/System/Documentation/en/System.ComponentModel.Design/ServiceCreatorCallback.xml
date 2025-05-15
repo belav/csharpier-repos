@@ -46,8 +46,12 @@
 
         
 
+        
+
          provides a mechanism to publish services that you can request to have created when needed, rather than the service being created immediately when the designer loads. You can use a callback function if the service is not essential and may not be used. A service published by using a <see
          cref="T:System.ComponentModel.Design.ServiceCreatorCallback" />
+
+        
 
         
 
@@ -60,6 +64,8 @@
 
         
 
+        
+
          to the <see
          cref="M:System.ComponentModel.Design.IServiceContainer.AddService(System.Type,System.Object)" />
 
@@ -67,8 +73,12 @@
 
         
 
+        
+
          method of an <see
          cref="T:System.ComponentModel.Design.IServiceContainer" />
+
+        
 
         
 

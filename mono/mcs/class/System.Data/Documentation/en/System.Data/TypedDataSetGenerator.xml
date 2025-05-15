@@ -24,6 +24,8 @@
 
         
 
+        
+
          class is not intended for use as a stand-alone component, but as a class from which other classes derive standard functionality.</para
       >
     </remarks>
@@ -32,6 +34,8 @@
       <para
         >Used to create a strongly typed <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -58,6 +62,8 @@
 
             
 
+            
+
              class is not intended for use as a stand-alone component, but as a class from which other classes derive standard functionality. </para
           >
         </remarks>
@@ -66,6 +72,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.TypedDataSetGenerator" />
+
+            
 
             
 
@@ -105,6 +113,8 @@
 
             
 
+            
+
              class is not intended for use as a stand-alone component, but as a class from which other classes derive standard functionality.</para
           >
         </remarks>
@@ -113,6 +123,8 @@
           <para
             >Generates a strongly typed <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -128,6 +140,8 @@
 
           
 
+          
+
           The source <see
            cref="T:System.Data.DataSet" />
 
@@ -135,8 +149,12 @@
 
           
 
+          
+
            that specifies the metadata for the typed <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -151,8 +169,12 @@
 
           
 
+          
+
           The namespace that provides the target namespace for the typed <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -167,8 +189,12 @@
 
           
 
+          
+
           The generator used to create the typed <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -206,6 +232,8 @@
 
             
 
+            
+
              class is not intended for use as a stand-alone component, but as a class from which other classes derive standard functionality.</para
           >
         </remarks>
@@ -214,6 +242,8 @@
           <para
             >Transforms a string in a valid, typed <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -233,8 +263,12 @@
 
           
 
+          
+
           The source name to transform into a valid, typed <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -244,6 +278,8 @@
         >
         <param name="codeGen">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

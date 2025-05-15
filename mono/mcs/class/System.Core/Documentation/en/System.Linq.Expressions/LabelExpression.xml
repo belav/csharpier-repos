@@ -33,8 +33,12 @@
 
         
 
+        
+
          context. If it is jumped to, it will get the value provided by the corresponding <see
          cref="T:System.Linq.Expressions.GotoExpression" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
         . If the <see
          cref="T:System.Type" />
+
+        
 
         
 
@@ -114,6 +122,8 @@
 
             
 
+            
+
              when the label is reached through regular control flow (for example, is not jumped to).</para
           >
         </summary>
@@ -143,6 +153,8 @@
           <para
             >Returns the node type of this <see
              cref="T:System.Linq.Expressions.Expression" />
+
+            
 
             
 
@@ -182,6 +194,8 @@
 
             
 
+            
+
              which this label is associated with.</para
           >
         </summary>
@@ -205,6 +219,8 @@
           <para
             >Gets the static type of the expression that this <see
              cref="T:System.Linq.Expressions.Expression" />
+
+            
 
             
 
@@ -252,8 +268,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.LabelExpression.Target" />
+
+          
 
           
 
@@ -268,8 +288,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.LabelExpression.DefaultValue" />
+
+          
 
           
 

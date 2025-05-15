@@ -24,8 +24,12 @@
 
         
 
+        
+
          class are the subset of those contained in the <see
          cref="T:System.ServiceModel.Channels.ReliableSessionBindingElement" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.ServiceModel.ReliableSession.Ordered" />
+
+        
 
         
 
@@ -52,8 +60,12 @@
 
         
 
+        
+
          class references the same objects as does the <see
          cref="T:System.ServiceModel.Channels.ReliableSessionBindingElement" />
+
+        
 
         
 
@@ -86,6 +98,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.ReliableSession" />
+
+            
 
             
 
@@ -128,6 +142,8 @@
 
             
 
+            
+
              class from a reliable session binding element.</para
           >
         </summary>
@@ -158,11 +174,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >Activity on a channel is defined as receiving an application or infrastructure message. The inactivity timeout property controls the maximum amount of time to keep an inactive session alive. If more than the <see
              cref="P:System.ServiceModel.ReliableSession.InactivityTimeout" />
+
+            
 
             
 
@@ -183,6 +203,8 @@
 
                 
 
+                
+
                 . This inactivity timer fires if no messages, either application or infrastructure, are received within the timeout period. An infrastructure message is a message that is generated for the purpose of one of the protocols in the channel stack, such as a keep alive or an acknowledgment, rather than containing application data. </para
               >
             </item>
@@ -190,6 +212,8 @@
               <para
                 >The second inactivity timer is on the service and uses the <see
                  cref="P:System.ServiceModel.Channels.Binding.ReceiveTimeout" />
+
+                
 
                 
 
@@ -207,8 +231,12 @@
 
             
 
+            
+
              once it is greater than <see
              cref="P:System.ServiceModel.Channels.Binding.ReceiveTimeout" />
+
+            
 
             
 
@@ -240,6 +268,8 @@
           <para
             >The property gets and sets the value of the <see
              cref="P:System.ServiceModel.Channels.ReliableSessionBindingElement.Ordered" />
+
+            
 
             
 

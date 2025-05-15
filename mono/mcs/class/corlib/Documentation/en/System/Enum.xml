@@ -50,8 +50,12 @@
 
         
 
+        
+
          is used. <see
          cref="T:System.Enum" />
+
+        
 
         
 
@@ -61,6 +65,8 @@
       >
       <para>
         <see cref="T:System.Enum" />
+
+        
 
         
 
@@ -78,8 +84,12 @@
 
         
 
+        
+
          section and the <see
          cref="T:System.FlagsAttribute" />
+
+        
 
         
 
@@ -101,6 +111,8 @@
 
         
 
+        
+
         ; the inheritance relationship is handled implicitly by the compiler.</para
       >
       <para>code reference: System.Enum.Class#1</para>
@@ -108,6 +120,8 @@
         <para
           >You should never create an enumeration type whose underlying type is non-integral or <see
            cref="T:System.Char" />
+
+          
 
           
 
@@ -143,8 +157,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Enum.TryParse``1(System.String,``0@)" />
+
+            
 
             
 
@@ -154,6 +172,8 @@
              type="text/html">
               <a href="#parsing">Parsing Enumeration Values</a>
             </format>
+
+            
 
             
 
@@ -171,10 +191,14 @@
 
             
 
+            
+
              method to convert an integral value to an enumeration type. For more information, see the <format
              type="text/html">
               <a href="#conversions">Performing Conversions</a>
             </format>
+
+            
 
             
 
@@ -215,6 +239,8 @@
 
         
 
+        
+
          section.</para
       >
       <format type="text/html">
@@ -226,6 +252,8 @@
       <para
         >You cannot define new methods when you are creating an enumeration. However, an enumeration type inherits a complete set of static and instance methods from the <see
          cref="T:System.Enum" />
+
+        
 
         
 
@@ -249,8 +277,12 @@
 
         
 
+        
+
          class also includes a <see
          cref="M:System.Enum.ToObject(System.Type,System.Byte)" />
+
+        
 
         
 
@@ -263,8 +295,12 @@
 
         
 
+        
+
          method to convert an <see
          cref="T:System.Int32" />
+
+        
 
         
 
@@ -277,8 +313,12 @@
 
         
 
+        
+
          returns a value of type <see
          cref="T:System.Object" />
+
+        
 
         
 
@@ -295,12 +335,16 @@
 
         
 
+        
+
          method before performing the conversion. The following example uses this method to determine whether the elements in an array of integer values can be converted to ArrivalStatus values.</para
       >
       <para>code reference: System.Enum.Class#7</para>
       <para
         >Although the <see
          cref="T:System.Enum" />
+
+        
 
         
 
@@ -313,8 +357,12 @@
 
         
 
+        
+
          interface for converting from an enumeration value to an integral type, you should use the methods of the <see
          cref="T:System.Convert" />
+
+        
 
         
 
@@ -327,6 +375,8 @@
 
         
 
+        
+
         , to perform these conversions. The following example illustrates how you can use the <see
          cref="M:System.Enum.GetUnderlyingType(System.Type)" />
 
@@ -334,8 +384,12 @@
 
         
 
+        
+
          method along with the <see
          cref="M:System.Convert.ChangeType(System.Object,System.Type)" />
+
+        
 
         
 
@@ -358,8 +412,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Enum.TryParse``1(System.String,``0@)" />
+
+        
 
         
 
@@ -372,6 +430,8 @@
 
         
 
+        
+
          method can be called to ensure that the result of the parsing method is a valid enumeration value. The example illustrates this approach and demonstrates calls to both the <see
          cref="M:System.Enum.Parse(System.Type,System.String)" />
 
@@ -379,8 +439,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Enum.TryParse``1(System.String,``0@)" />
+
+        
 
         
 
@@ -403,8 +467,12 @@
 
         
 
+        
+
          method, as well as the overloads of the instance <see
          cref="M:System.Enum.ToString" />
+
+        
 
         
 
@@ -414,6 +482,8 @@
          type="text/html">
           <a href="dd1ff672-1052-42cf-8666-4924fb6cd1a1">Enumeration Format Strings</a>
         </format>
+
+        
 
         
 
@@ -436,6 +506,8 @@
 
         
 
+        
+
          type does not implement the <see
          cref="T:System.Collections.IEnumerable" />
 
@@ -443,8 +515,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Collections.Generic.IEnumerable`1" />
+
+        
 
         
 
@@ -462,8 +538,12 @@
 
             
 
+            
+
              method to retrieve a string array containing the names of the enumeration members. Next, for each element of the string array, you can call the <see
              cref="M:System.Enum.Parse(System.Type,System.String)" />
+
+            
 
             
 
@@ -482,8 +562,12 @@
 
             
 
+            
+
              method to retrieve an array that contains the underlying values in the enumeration. Next, for each element of the array, you can call the <see
              cref="M:System.Enum.ToObject(System.Type,System.Int32)" />
+
+            
 
             
 
@@ -509,6 +593,8 @@
 
         
 
+        
+
          attribute can be used to indicate that the enumeration consists of bit fields. For example, an enumeration named Pets might be used to indicate the kinds of pets in a household. It can be defined as follows. </para
       >
       <para>code reference: System.Enum.Class#13</para>
@@ -522,6 +608,8 @@
 
         
 
+        
+
          attribute.</para
       >
       <list type="bullet">
@@ -529,6 +617,8 @@
           <para
             >Use the <see
              cref="T:System.FlagsAttribute" />
+
+            
 
             
 
@@ -550,6 +640,8 @@
           <para
             >A convenient way to test whether a flag is set in a numeric value is to call the instance <see
              cref="M:System.Enum.HasFlag(System.Enum)" />
+
+            
 
             
 
@@ -601,6 +693,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -641,12 +735,16 @@
               
 
               
+
+              
       interface.</block
             >
           </para>
         </remarks>
         <exception cref="T:System.ArgumentException">
           <paramref name="target" />
+
+          
 
           
 
@@ -663,6 +761,8 @@
           <para
             >A signed number that indicates the relative values of this instance and <paramref
              name="target" />
+
+            
 
             
 
@@ -694,6 +794,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -706,6 +808,8 @@
                 <para
                   >The value of this instance is equal to the value of <paramref
                    name="target" />
+
+                  
 
                   
 
@@ -728,11 +832,15 @@
 
                   
 
+                  
+
                   .</para
                 >
                 <para>-or- </para>
                 <para>
                   <paramref name="target" />
+
+                  
 
                   
 
@@ -746,6 +854,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -786,6 +896,8 @@
 
           
 
+          
+
           An object to compare with this instance, or null. </param
         >
         <remarks>
@@ -798,8 +910,12 @@
 
             
 
+            
+
              method overrides <see
              cref="M:System.ValueType.Equals(System.Object)" />
+
+            
 
             
 
@@ -822,11 +938,15 @@
 
             
 
+            
+
              is an enumeration value of the same type and with the same underlying value as this instance; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -877,6 +997,8 @@
 
           
 
+          
+
           , <paramref
            name="value" />
 
@@ -884,8 +1006,12 @@
 
           
 
+          
+
            or <paramref
            name="format" />
+
+          
 
           
 
@@ -901,8 +1027,12 @@
 
             
 
+            
+
              is not a <see
              cref="T:System.Enum" />
+
+            
 
             
 
@@ -918,8 +1048,12 @@
 
             
 
+            
+
              is neither of type <paramref
              name="enumType" />
+
+            
 
             
 
@@ -932,11 +1066,15 @@
 
             
 
+            
+
             .</para
           >
         </exception>
         <exception cref="T:System.FormatException">
           <paramref name="format" />
+
+          
 
           
 
@@ -984,10 +1122,14 @@ public class EnumCompTo {
 
           
 
+          
+
           The value to convert. </param
         >
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1000,6 +1142,8 @@ public class EnumCompTo {
           <para
             >The following table shows the valid values for the <paramref
              name="format" />
+
+            
 
             
 
@@ -1031,8 +1175,12 @@ public class EnumCompTo {
 
                   
 
+                  
+
                    is equal to a named enumerated constant, the name of that constant is returned; otherwise, the decimal equivalent of <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -1048,8 +1196,12 @@ public class EnumCompTo {
 
                   
 
+                  
+
                    is specified as 1, this format returns "Red". However, if <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -1066,8 +1218,12 @@ public class EnumCompTo {
 
                   
 
+                  
+
                    custom attribute is applied to the enumeration, <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -1083,6 +1239,8 @@ public class EnumCompTo {
 
                   
 
+                  
+
                    is equal to a combination of named enumerated constants, a delimiter-separated list of the names of those constants is returned. <paramref
                    name="value" />
 
@@ -1090,8 +1248,12 @@ public class EnumCompTo {
 
                   
 
+                  
+
                    is searched for flags, going from the flag with the largest value to the smallest value. For each flag that corresponds to a bit field in <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -1107,8 +1269,12 @@ public class EnumCompTo {
 
                   
 
+                  
+
                    is not equal to a combination of named enumerated constants, the decimal equivalent of <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -1131,6 +1297,8 @@ public class EnumCompTo {
 
                   
 
+                  
+
                    in hexadecimal format without a leading "0x". </para
                 >
               </description>
@@ -1143,6 +1311,8 @@ public class EnumCompTo {
                 <para
                   >Represents <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -1165,8 +1335,12 @@ public class EnumCompTo {
 
                   
 
+                  
+
                    is not required to be present on the <see
                    cref="T:System.Enum" />
+
+                  
 
                   
 
@@ -1192,11 +1366,15 @@ public class EnumCompTo {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="enumType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1211,10 +1389,14 @@ public class EnumCompTo {
 
           
 
+          
+
           The value to convert. </param
         >
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1254,6 +1436,8 @@ public class EnumCompTo {
               > This method
       overrides <see
                cref="M:System.Object.GetHashCode" />
+
+              
 
               
 
@@ -1313,8 +1497,12 @@ public class EnumCompTo {
 
           
 
+          
+
            or <paramref
            name="value" />
+
+          
 
           
 
@@ -1330,6 +1518,8 @@ public class EnumCompTo {
 
             
 
+            
+
              is not a <see
              cref="T:System.Type" />
 
@@ -1337,8 +1527,12 @@ public class EnumCompTo {
 
             
 
+            
+
              that describes a <see
              cref="T:System.Enum" />
+
+            
 
             
 
@@ -1354,8 +1548,12 @@ public class EnumCompTo {
 
             
 
+            
+
              is neither of type <paramref
              name="enumType" />
+
+            
 
             
 
@@ -1368,6 +1566,8 @@ public class EnumCompTo {
 
             
 
+            
+
             .</para
           >
         </exception>
@@ -1375,6 +1575,8 @@ public class EnumCompTo {
           <para
             >The following example demonstrates the <see
              cref="M:System.Enum.GetName(System.Type,System.Object)" />
+
+            
 
             
 
@@ -1415,6 +1617,8 @@ public class EnumCompTo {
 
             
 
+            
+
              method guarantees that it will return the name of one of those enumeration members. However, it does not guarantee that it will always return the name of the same enumeration member. As a result, when multiple enumeration members have the same value, your application code should never depend on the method returning a particular member's name.</para
           >
         </remarks>
@@ -1432,8 +1636,12 @@ public class EnumCompTo {
 
             
 
+            
+
              whose value is <paramref
              name="value" />
+
+            
 
             
 
@@ -1449,10 +1657,14 @@ public class EnumCompTo {
 
           
 
+          
+
           An enumeration type. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1498,11 +1710,15 @@ public class EnumCompTo {
 
           
 
+          
+
            is a null reference. </exception
         >
         <exception cref="T:System.ArgumentException">
           <para>
             <paramref name=" enumType" />
+
+            
 
             
 
@@ -1515,8 +1731,12 @@ public class EnumCompTo {
 
             
 
+            
+
              that describes a <see
              cref="T:System.Enum" />
+
+            
 
             
 
@@ -1529,6 +1749,8 @@ public class EnumCompTo {
           <para
             >The following example demonstrates the <see
              cref="M:System.Enum.GetNames(System.Type)" />
+
+            
 
             
 
@@ -1575,6 +1797,8 @@ public class enumGetNames {
 
             
 
+            
+
              method for an enumeration that includes a negative, zero, and positive value. </para
           >
           <para>code reference: System.Enum.GetNames#1</para>
@@ -1594,11 +1818,15 @@ public class enumGetNames {
 
             
 
+            
+
             . </para
           >
         </returns>
         <param name="enumType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1632,6 +1860,8 @@ public class enumGetNames {
           <para
             >Returns the underlying <see
              cref="T:System.TypeCode" />
+
+            
 
             
 
@@ -1684,11 +1914,15 @@ public class enumGetNames {
 
           
 
+          
+
            is a null reference. </exception
         >
         <exception cref="T:System.ArgumentException">
           <para>
             <paramref name="enumType" />
+
+            
 
             
 
@@ -1701,6 +1935,8 @@ public class enumGetNames {
           <para
             >The following example demonstrates the <see
              cref="M:System.Enum.GetUnderlyingType(System.Type)" />
+
+            
 
             
 
@@ -1739,8 +1975,12 @@ public class EnumUnderlyingTypeTest {
 
             
 
+            
+
              structure enables values to be represented as named constants. The data type of the enumeration's values is known as its underlying type. For example, the underlying type of the <see
              cref="T:System.DayOfWeek" />
+
+            
 
             
 
@@ -1753,6 +1993,8 @@ public class EnumUnderlyingTypeTest {
 
             
 
+            
+
             , <see
              cref="F:System.DayOfWeek.Tuesday" />
 
@@ -1760,8 +2002,12 @@ public class EnumUnderlyingTypeTest {
 
             
 
+            
+
             , and so on), is <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -1784,11 +2030,15 @@ public class EnumUnderlyingTypeTest {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="enumType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1834,11 +2084,15 @@ public class EnumUnderlyingTypeTest {
 
           
 
+          
+
            is a null reference. </exception
         >
         <exception cref="T:System.ArgumentException">
           <para>
             <paramref name="enumType" />
+
+            
 
             
 
@@ -1851,6 +2105,8 @@ public class EnumUnderlyingTypeTest {
           <para
             >The following example demonstrates the <see
              cref="M:System.Enum.GetValues(System.Type)" />
+
+            
 
             
 
@@ -1893,12 +2149,16 @@ public class enumGetValues {
 
             
 
+            
+
              method for an enumeration that includes a negative value, zero, and a positive value.</para
           >
           <para>code reference: System.Enum.GetValues#1</para>
           <para
             >The <see
              cref="M:System.Enum.GetValues(System.Type)" />
+
+            
 
             
 
@@ -1911,6 +2171,8 @@ public class enumGetValues {
 
             
 
+            
+
              enumeration. If multiple members have the same value, the returned array includes duplicate values. In this case, calling the <see
              cref="M:System.Enum.GetName(System.Type,System.Object)" />
 
@@ -1918,8 +2180,12 @@ public class enumGetValues {
 
             
 
+            
+
              method with each value in the returned array does not restore the unique names assigned to members that have duplicate values. To retrieve all the names of enumeration members successfully, call the <see
              cref="M:System.Enum.GetNames(System.Type)" />
+
+            
 
             
 
@@ -1935,8 +2201,12 @@ public class enumGetValues {
 
             
 
+            
+
              method cannot be invoked by using reflection in a reflection-only context. Instead, you can retrieve the value of all enumeration members by using the <see
              cref="M:System.Type.GetFields" />
+
+            
 
             
 
@@ -1949,8 +2219,12 @@ public class enumGetValues {
 
             
 
+            
+
              objects that represent enumeration members and then call the <see
              cref="M:System.Reflection.FieldInfo.GetRawConstantValue" />
+
+            
 
             
 
@@ -1967,8 +2241,12 @@ public class enumGetValues {
 
             
 
+            
+
              object that represents the Pets enumeration is instantiated, an array of <see
              cref="T:System.Reflection.FieldInfo" />
+
+            
 
             
 
@@ -1992,11 +2270,15 @@ public class enumGetValues {
 
             
 
+            
+
             . </para
           >
         </returns>
         <param name="enumType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2034,12 +2316,16 @@ public class enumGetValues {
 
             
 
+            
+
              method returns the result of the following Boolean expression.</para
           >
           <code>thisInstance And flag = flag </code>
           <para
             >If the underlying value of <paramref
              name="flag" />
+
+            
 
             
 
@@ -2052,6 +2338,8 @@ public class enumGetValues {
 
             
 
+            
+
              method to test for equality with zero and call <see
              cref="M:System.Enum.HasFlag(System.Enum)" />
 
@@ -2059,8 +2347,12 @@ public class enumGetValues {
 
             
 
+            
+
              only if the underlying value of <paramref
              name="flag" />
+
+            
 
             
 
@@ -2077,8 +2369,12 @@ public class enumGetValues {
 
             
 
+            
+
              method is designed to be used with enumeration types that are marked with the <see
              cref="T:System.FlagsAttribute" />
+
+            
 
             
 
@@ -2091,6 +2387,8 @@ public class enumGetValues {
 
             
 
+            
+
              attribute, call either the <see
              cref="M:System.Enum.Equals(System.Object)" />
 
@@ -2098,8 +2396,12 @@ public class enumGetValues {
 
             
 
+            
+
              method or the <see
              cref="M:System.Enum.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -2122,11 +2424,15 @@ public class enumGetValues {
 
             
 
+            
+
              are also set in the current instance; otherwise, false.</para
           >
         </returns>
         <param name="flag">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2175,8 +2481,12 @@ public class enumGetValues {
 
           
 
+          
+
           or <paramref
            name="value" />
+
+          
 
           
 
@@ -2187,6 +2497,8 @@ public class enumGetValues {
         <exception cref="T:System.ArgumentException">
           <para>
             <paramref name="enumType" />
+
+            
 
             
 
@@ -2203,8 +2515,12 @@ public class enumGetValues {
 
             
 
+            
+
              is not an <paramref
              name="enumType" />
+
+            
 
             
 
@@ -2217,6 +2533,8 @@ public class enumGetValues {
 
             
 
+            
+
             .</para
           >
         </exception>
@@ -2224,6 +2542,8 @@ public class enumGetValues {
           <para
             >The following example demonstrates the <see
              cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
+
+            
 
             
 
@@ -2261,8 +2581,12 @@ public class enumIsDefined {
 
           
 
+          
+
           The value or name of a constant in <paramref
            name="enumType" />
+
+          
 
           
 
@@ -2280,6 +2604,8 @@ public class enumIsDefined {
 
             
 
+            
+
              parameter can be any of the following:</para
           >
           <list type="bullet">
@@ -2292,6 +2618,8 @@ public class enumIsDefined {
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -2299,6 +2627,8 @@ public class enumIsDefined {
               <para
                 >A variable whose value is an enumeration member of type <paramref
                  name="enumType" />
+
+                
 
                 
 
@@ -2319,6 +2649,8 @@ public class enumIsDefined {
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -2331,8 +2663,12 @@ public class enumIsDefined {
 
             
 
+            
+
              define a set of bit fields and <paramref
              name="value" />
+
+            
 
             
 
@@ -2345,6 +2681,8 @@ public class enumIsDefined {
 
             
 
+            
+
              method returns false. In other words, for enumerations that define a set of bit fields, the method determines only whether a single bit field belongs to the enumeration. To determine whether multiple bit fields are set in an enumeration type that is tagged with the <see
              cref="T:System.FlagsAttribute" />
 
@@ -2352,8 +2690,12 @@ public class enumIsDefined {
 
             
 
+            
+
              attribute, you can call the <see
              cref="M:System.Enum.HasFlag(System.Enum)" />
+
+            
 
             
 
@@ -2376,8 +2718,12 @@ public class enumIsDefined {
 
             
 
+            
+
              has a value equal to <paramref
              name="value" />
+
+            
 
             
 
@@ -2393,6 +2739,8 @@ public class enumIsDefined {
 
           
 
+          
+
           An enumeration type. </param
         >
         <param name="value">
@@ -2402,8 +2750,12 @@ public class enumIsDefined {
 
           
 
+          
+
           The value or name of a constant in <paramref
            name="enumType" />
+
+          
 
           
 
@@ -2453,8 +2805,12 @@ public class enumIsDefined {
 
           
 
+          
+
            or <paramref
            name="value" />
+
+          
 
           
 
@@ -2470,6 +2826,8 @@ public class enumIsDefined {
 
             
 
+            
+
              is not a <see
              cref="T:System.Type" />
 
@@ -2477,8 +2835,12 @@ public class enumIsDefined {
 
             
 
+            
+
              that describes a <see
              cref="T:System.Enum" />
+
+            
 
             
 
@@ -2494,8 +2856,12 @@ public class enumIsDefined {
 
             
 
+            
+
              is either equal to <see
              cref="F:System.String.Empty" qualify="true" />
+
+            
 
             
 
@@ -2511,8 +2877,12 @@ public class enumIsDefined {
 
             
 
+            
+
              represents one or more names, and at least one name represented by <paramref
              name="value " />
+
+            
 
             
 
@@ -2525,6 +2895,8 @@ public class enumIsDefined {
 
             
 
+            
+
             .</para
           >
         </exception>
@@ -2532,6 +2904,8 @@ public class enumIsDefined {
           <para
             >The following example demonstrates the <see
              cref="M:System.Enum.Parse(System.Type,System.String)" />
+
+            
 
             
 
@@ -2572,6 +2946,8 @@ public class enumTest {
 
           
 
+          
+
           A string containing the name or value to convert. </param
         >
         <remarks>
@@ -2584,6 +2960,8 @@ public class enumTest {
 
             
 
+            
+
              parameter contains the string representation of an enumeration member's underlying value or named constant, or a list of named constants delimited by commas (,). One or more blank spaces can precede or follow each value, name, or comma in <paramref
              name="value" />
 
@@ -2591,8 +2969,12 @@ public class enumTest {
 
             
 
+            
+
             . If <paramref
              name="value" />
+
+            
 
             
 
@@ -2608,8 +2990,12 @@ public class enumTest {
 
             
 
+            
+
              is a name that does not correspond to a named constant of <paramref
              name="enumType" />
+
+            
 
             
 
@@ -2622,8 +3008,12 @@ public class enumTest {
 
             
 
+            
+
             . If <paramref
              name="value" />
+
+            
 
             
 
@@ -2636,8 +3026,12 @@ public class enumTest {
 
             
 
+            
+
              enumeration, the method returns an enumeration member whose underlying value is <paramref
              name="value" />
+
+            
 
             
 
@@ -2650,8 +3044,12 @@ public class enumTest {
 
             
 
+            
+
              method to ensure that a particular string representation of an integer is actually a member of <paramref
              name="enumType" />
+
+            
 
             
 
@@ -2664,8 +3062,12 @@ public class enumTest {
 
             
 
+            
+
              method to convert strings to their corresponding enumeration values, and calls the <see
              cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
+
+            
 
             
 
@@ -2690,8 +3092,12 @@ public class enumTest {
 
             
 
+            
+
              whose value is represented by <paramref
              name="value" />
+
+            
 
             
 
@@ -2707,10 +3113,14 @@ public class enumTest {
 
           
 
+          
+
           An enumeration type. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2761,8 +3171,12 @@ public class enumTest {
 
           
 
+          
+
            or <paramref
            name="value" />
+
+          
 
           
 
@@ -2778,6 +3192,8 @@ public class enumTest {
 
             
 
+            
+
              is not a <see
              cref="T:System.Type" />
 
@@ -2785,8 +3201,12 @@ public class enumTest {
 
             
 
+            
+
              that describes a <see
              cref="T:System.Enum" />
+
+            
 
             
 
@@ -2802,8 +3222,12 @@ public class enumTest {
 
             
 
+            
+
              is either equal to <see
              cref="F:System.String.Empty" qualify="true" />
+
+            
 
             
 
@@ -2819,6 +3243,8 @@ public class enumTest {
 
             
 
+            
+
              represents one or more names, and at least one name represented by <paramref
              name="value " />
 
@@ -2826,8 +3252,12 @@ public class enumTest {
 
             
 
+            
+
              is not of type <paramref
              name="enumType" />
+
+            
 
             
 
@@ -2846,8 +3276,12 @@ public class enumTest {
 
             
 
+            
+
             (<see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -2860,11 +3294,15 @@ public class enumTest {
 
             
 
+            
+
             ).</para
           >
         </example>
         <param name="ignoreCase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2882,6 +3320,8 @@ public class enumTest {
 
             
 
+            
+
              parameter contains the string representation of an enumeration member's underlying value or named constant, or a list of named constants delimited by commas (,). One or more blank spaces can precede or follow each value, name, or comma in <paramref
              name="value" />
 
@@ -2889,8 +3329,12 @@ public class enumTest {
 
             
 
+            
+
             . If <paramref
              name="value" />
+
+            
 
             
 
@@ -2906,8 +3350,12 @@ public class enumTest {
 
             
 
+            
+
              is a name that does not correspond to a named constant of <paramref
              name="enumType" />
+
+            
 
             
 
@@ -2920,8 +3368,12 @@ public class enumTest {
 
             
 
+            
+
             . If <paramref
              name="value" />
+
+            
 
             
 
@@ -2934,8 +3386,12 @@ public class enumTest {
 
             
 
+            
+
              enumeration, the method returns an enumeration member whose underlying value is <paramref
              name="value" />
+
+            
 
             
 
@@ -2948,8 +3404,12 @@ public class enumTest {
 
             
 
+            
+
              method to ensure that a particular string representation of an integer is actually a member of <paramref
              name="enumType" />
+
+            
 
             
 
@@ -2962,8 +3422,12 @@ public class enumTest {
 
             
 
+            
+
              method to convert strings to their corresponding enumeration values, and calls the <see
              cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
+
+            
 
             
 
@@ -2975,6 +3439,8 @@ public class enumTest {
           <para
             >The <paramref
              name="ignoreCase" />
+
+            
 
             
 
@@ -2997,8 +3463,12 @@ public class enumTest {
 
             
 
+            
+
              whose value is represented by <paramref
              name="value" />
+
+            
 
             
 
@@ -3014,6 +3484,8 @@ public class enumTest {
 
           
 
+          
+
           An enumeration type. </param
         >
         <param name="value">
@@ -3023,10 +3495,14 @@ public class enumTest {
 
           
 
+          
+
           A string containing the name or value to convert. </param
         >
         <param name="ignoreCase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3078,6 +3554,8 @@ public class enumTest {
 
           
 
+          
+
           An object that supplies culture-specific formatting information.</param
         >
       </Docs>
@@ -3111,6 +3589,8 @@ public class enumTest {
 
             
 
+            
+
              to perform the conversion.</para
           >
         </remarks>
@@ -3124,6 +3604,8 @@ public class enumTest {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3171,6 +3653,8 @@ public class enumTest {
 
           
 
+          
+
           An object that supplies culture-specific formatting information.</param
         >
       </Docs>
@@ -3211,6 +3695,8 @@ public class enumTest {
 
             
 
+            
+
              based on the underlying type.</para
           >
         </summary>
@@ -3220,6 +3706,8 @@ public class enumTest {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3265,6 +3753,8 @@ public class enumTest {
 
             
 
+            
+
              based on the underlying type.</para
           >
         </summary>
@@ -3274,6 +3764,8 @@ public class enumTest {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3324,6 +3816,8 @@ public class enumTest {
 
           
 
+          
+
           An object that supplies culture-specific formatting information.</param
         >
       </Docs>
@@ -3360,6 +3854,8 @@ public class enumTest {
 
             
 
+            
+
              to perform the conversion.</para
           >
         </remarks>
@@ -3373,6 +3869,8 @@ public class enumTest {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3411,6 +3909,8 @@ public class enumTest {
 
             
 
+            
+
              to perform the conversion.</para
           >
         </remarks>
@@ -3424,6 +3924,8 @@ public class enumTest {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3465,6 +3967,8 @@ public class enumTest {
 
             
 
+            
+
              to perform the conversion.</para
           >
         </remarks>
@@ -3478,6 +3982,8 @@ public class enumTest {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3519,6 +4025,8 @@ public class enumTest {
 
             
 
+            
+
              to perform the conversion.</para
           >
         </remarks>
@@ -3532,6 +4040,8 @@ public class enumTest {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3582,6 +4092,8 @@ public class enumTest {
 
           
 
+          
+
           An object that supplies culture-specific formatting information.</param
         >
       </Docs>
@@ -3620,6 +4132,8 @@ public class enumTest {
 
             
 
+            
+
              to perform the conversion.</para
           >
         </remarks>
@@ -3633,6 +4147,8 @@ public class enumTest {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3674,6 +4190,8 @@ public class enumTest {
 
             
 
+            
+
              to perform the conversion.</para
           >
         </remarks>
@@ -3687,6 +4205,8 @@ public class enumTest {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3728,6 +4248,8 @@ public class enumTest {
 
             
 
+            
+
              to perform the conversion.</para
           >
         </remarks>
@@ -3741,6 +4263,8 @@ public class enumTest {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3782,6 +4306,8 @@ public class enumTest {
 
             
 
+            
+
              to perform the conversion.</para
           >
         </remarks>
@@ -3795,6 +4321,8 @@ public class enumTest {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3843,11 +4371,15 @@ public class enumTest {
 
           
 
+          
+
            is a null reference. </exception
         >
         <exception cref="T:System.ArgumentException">
           <para>
             <paramref name="enumType" />
+
+            
 
             
 
@@ -3860,8 +4392,12 @@ public class enumTest {
 
             
 
+            
+
              that describes a <see
              cref="T:System.Enum" />
+
+            
 
             
 
@@ -3872,6 +4408,8 @@ public class enumTest {
         </exception>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3889,8 +4427,12 @@ public class enumTest {
 
             
 
+            
+
              method converts <paramref
              name="value" />
+
+            
 
             
 
@@ -3903,8 +4445,12 @@ public class enumTest {
 
             
 
+            
+
             . Note that the conversion succeeds even if value is outside the bounds of <paramref
              name="enumType" />
+
+            
 
             
 
@@ -3917,6 +4463,8 @@ public class enumTest {
 
             
 
+            
+
              is a valid underlying value of the <paramref
              name="enumType" />
 
@@ -3924,8 +4472,12 @@ public class enumTest {
 
             
 
+            
+
              enumeration, pass it to the <see
              cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
+
+            
 
             
 
@@ -3941,8 +4493,12 @@ public class enumTest {
 
             
 
+            
+
             . You can then cast it or convert it to an object of type <paramref
              name="enumType" />
+
+            
 
             
 
@@ -3965,6 +4521,8 @@ public class enumTest {
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -3975,10 +4533,14 @@ public class enumTest {
 
           
 
+          
+
           The enumeration type to return. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4028,11 +4590,15 @@ public class enumTest {
 
           
 
+          
+
            is a null reference. </exception
         >
         <exception cref="T:System.ArgumentException">
           <para>
             <paramref name="enumType" />
+
+            
 
             
 
@@ -4045,8 +4611,12 @@ public class enumTest {
 
             
 
+            
+
              that describes a <see
              cref="T:System.Enum" />
+
+            
 
             
 
@@ -4057,6 +4627,8 @@ public class enumTest {
         </exception>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4074,8 +4646,12 @@ public class enumTest {
 
             
 
+            
+
              method converts <paramref
              name="value" />
+
+            
 
             
 
@@ -4088,8 +4664,12 @@ public class enumTest {
 
             
 
+            
+
             . Note that the conversion succeeds even if value is outside the bounds of <paramref
              name="enumType" />
+
+            
 
             
 
@@ -4102,6 +4682,8 @@ public class enumTest {
 
             
 
+            
+
              is a valid underlying value of the <paramref
              name="enumType" />
 
@@ -4109,8 +4691,12 @@ public class enumTest {
 
             
 
+            
+
              enumeration, pass it to the <see
              cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
+
+            
 
             
 
@@ -4126,8 +4712,12 @@ public class enumTest {
 
             
 
+            
+
             . You can then cast it or convert it to an object of type <paramref
              name="enumType" />
+
+            
 
             
 
@@ -4150,6 +4740,8 @@ public class enumTest {
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -4160,10 +4752,14 @@ public class enumTest {
 
           
 
+          
+
           The enumeration type to return. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4213,11 +4809,15 @@ public class enumTest {
 
           
 
+          
+
            is a null reference. </exception
         >
         <exception cref="T:System.ArgumentException">
           <para>
             <paramref name="enumType" />
+
+            
 
             
 
@@ -4230,8 +4830,12 @@ public class enumTest {
 
             
 
+            
+
              that describes a <see
              cref="T:System.Enum" />
+
+            
 
             
 
@@ -4242,6 +4846,8 @@ public class enumTest {
         </exception>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4259,8 +4865,12 @@ public class enumTest {
 
             
 
+            
+
              method converts <paramref
              name="value" />
+
+            
 
             
 
@@ -4273,8 +4883,12 @@ public class enumTest {
 
             
 
+            
+
             . Note that the conversion succeeds even if value is outside the bounds of <paramref
              name="enumType" />
+
+            
 
             
 
@@ -4287,6 +4901,8 @@ public class enumTest {
 
             
 
+            
+
              is a valid underlying value of the <paramref
              name="enumType" />
 
@@ -4294,8 +4910,12 @@ public class enumTest {
 
             
 
+            
+
              enumeration, pass it to the <see
              cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
+
+            
 
             
 
@@ -4311,8 +4931,12 @@ public class enumTest {
 
             
 
+            
+
             . You can then cast it or convert it to an object of type <paramref
              name="enumType" />
+
+            
 
             
 
@@ -4335,6 +4959,8 @@ public class enumTest {
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -4345,10 +4971,14 @@ public class enumTest {
 
           
 
+          
+
           The enumeration type to return. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4398,11 +5028,15 @@ public class enumTest {
 
           
 
+          
+
            is a null reference. </exception
         >
         <exception cref="T:System.ArgumentException">
           <para>
             <paramref name="enumType" />
+
+            
 
             
 
@@ -4415,8 +5049,12 @@ public class enumTest {
 
             
 
+            
+
              that describes a <see
              cref="T:System.Enum" />
+
+            
 
             
 
@@ -4427,6 +5065,8 @@ public class enumTest {
         </exception>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4444,8 +5084,12 @@ public class enumTest {
 
             
 
+            
+
              method converts <paramref
              name="value" />
+
+            
 
             
 
@@ -4458,8 +5102,12 @@ public class enumTest {
 
             
 
+            
+
             . Note that the conversion succeeds even if value is outside the bounds of <paramref
              name="enumType" />
+
+            
 
             
 
@@ -4472,6 +5120,8 @@ public class enumTest {
 
             
 
+            
+
              is a valid underlying value of the <paramref
              name="enumType" />
 
@@ -4479,8 +5129,12 @@ public class enumTest {
 
             
 
+            
+
              enumeration, pass it to the <see
              cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
+
+            
 
             
 
@@ -4496,8 +5150,12 @@ public class enumTest {
 
             
 
+            
+
             . You can then cast it or convert it to an object of type <paramref
              name="enumType" />
+
+            
 
             
 
@@ -4520,6 +5178,8 @@ public class enumTest {
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -4530,10 +5190,14 @@ public class enumTest {
 
           
 
+          
+
           The enumeration type to return. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4583,11 +5247,15 @@ public class enumTest {
 
           
 
+          
+
            is a null reference. </exception
         >
         <exception cref="T:System.ArgumentException">
           <para>
             <paramref name="enumType" />
+
+            
 
             
 
@@ -4600,8 +5268,12 @@ public class enumTest {
 
             
 
+            
+
              that describes a <see
              cref="T:System.Enum" />
+
+            
 
             
 
@@ -4612,6 +5284,8 @@ public class enumTest {
         </exception>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4629,8 +5303,12 @@ public class enumTest {
 
             
 
+            
+
              method converts the integral value <paramref
              name="value" />
+
+            
 
             
 
@@ -4643,8 +5321,12 @@ public class enumTest {
 
             
 
+            
+
             . Note that the conversion succeeds even if value is outside the bounds of <paramref
              name="enumType" />
+
+            
 
             
 
@@ -4657,6 +5339,8 @@ public class enumTest {
 
             
 
+            
+
              is a valid underlying value of the <paramref
              name="enumType" />
 
@@ -4664,8 +5348,12 @@ public class enumTest {
 
             
 
+            
+
              enumeration, pass it to the <see
              cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
+
+            
 
             
 
@@ -4681,8 +5369,12 @@ public class enumTest {
 
             
 
+            
+
             . You can then cast it or convert it to an object of type <paramref
              name="enumType" />
+
+            
 
             
 
@@ -4705,6 +5397,8 @@ public class enumTest {
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -4715,10 +5409,14 @@ public class enumTest {
 
           
 
+          
+
           The enumeration type to return. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4771,11 +5469,15 @@ public class enumTest {
 
           
 
+          
+
            is a null reference. </exception
         >
         <exception cref="T:System.ArgumentException">
           <para>
             <paramref name="enumType" />
+
+            
 
             
 
@@ -4788,8 +5490,12 @@ public class enumTest {
 
             
 
+            
+
              that describes a <see
              cref="T:System.Enum" />
+
+            
 
             
 
@@ -4800,6 +5506,8 @@ public class enumTest {
         </exception>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4817,8 +5525,12 @@ public class enumTest {
 
             
 
+            
+
              method converts <paramref
              name="value" />
+
+            
 
             
 
@@ -4831,8 +5543,12 @@ public class enumTest {
 
             
 
+            
+
             . Note that the conversion succeeds even if value is outside the bounds of <paramref
              name="enumType" />
+
+            
 
             
 
@@ -4845,6 +5561,8 @@ public class enumTest {
 
             
 
+            
+
              is a valid underlying value of the <paramref
              name="enumType" />
 
@@ -4852,8 +5570,12 @@ public class enumTest {
 
             
 
+            
+
              enumeration, pass it to the <see
              cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
+
+            
 
             
 
@@ -4869,8 +5591,12 @@ public class enumTest {
 
             
 
+            
+
             . You can then cast it or convert it to an object of type <paramref
              name="enumType" />
+
+            
 
             
 
@@ -4893,6 +5619,8 @@ public class enumTest {
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -4903,10 +5631,14 @@ public class enumTest {
 
           
 
+          
+
           The enumeration type to return. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4959,11 +5691,15 @@ public class enumTest {
 
           
 
+          
+
            is a null reference. </exception
         >
         <exception cref="T:System.ArgumentException">
           <para>
             <paramref name="enumType" />
+
+            
 
             
 
@@ -4976,8 +5712,12 @@ public class enumTest {
 
             
 
+            
+
              that describes a <see
              cref="T:System.Enum" />
+
+            
 
             
 
@@ -4988,6 +5728,8 @@ public class enumTest {
         </exception>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5005,8 +5747,12 @@ public class enumTest {
 
             
 
+            
+
              method converts <paramref
              name="value" />
+
+            
 
             
 
@@ -5019,8 +5765,12 @@ public class enumTest {
 
             
 
+            
+
             . Note that the conversion succeeds even if value is outside the bounds of <paramref
              name="enumType" />
+
+            
 
             
 
@@ -5033,6 +5783,8 @@ public class enumTest {
 
             
 
+            
+
              is a valid underlying value of the <paramref
              name="enumType" />
 
@@ -5040,8 +5792,12 @@ public class enumTest {
 
             
 
+            
+
              enumeration, pass it to the <see
              cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
+
+            
 
             
 
@@ -5057,8 +5813,12 @@ public class enumTest {
 
             
 
+            
+
             . You can then cast it or convert it to an object of type <paramref
              name="enumType" />
+
+            
 
             
 
@@ -5081,6 +5841,8 @@ public class enumTest {
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -5091,10 +5853,14 @@ public class enumTest {
 
           
 
+          
+
           The enumeration type to return. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5147,11 +5913,15 @@ public class enumTest {
 
           
 
+          
+
            is a null reference. </exception
         >
         <exception cref="T:System.ArgumentException">
           <para>
             <paramref name="enumType" />
+
+            
 
             
 
@@ -5164,8 +5934,12 @@ public class enumTest {
 
             
 
+            
+
              that describes a <see
              cref="T:System.Enum" />
+
+            
 
             
 
@@ -5176,6 +5950,8 @@ public class enumTest {
         </exception>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5193,8 +5969,12 @@ public class enumTest {
 
             
 
+            
+
              method converts <paramref
              name="value" />
+
+            
 
             
 
@@ -5207,8 +5987,12 @@ public class enumTest {
 
             
 
+            
+
             . Note that the conversion succeeds even if value is outside the bounds of <paramref
              name="enumType" />
+
+            
 
             
 
@@ -5221,6 +6005,8 @@ public class enumTest {
 
             
 
+            
+
              is a valid underlying value of the <paramref
              name="enumType" />
 
@@ -5228,8 +6014,12 @@ public class enumTest {
 
             
 
+            
+
              enumeration, pass it to the <see
              cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
+
+            
 
             
 
@@ -5245,8 +6035,12 @@ public class enumTest {
 
             
 
+            
+
             . You can then cast it or convert it to an object of type <paramref
              name="enumType" />
+
+            
 
             
 
@@ -5269,6 +6063,8 @@ public class enumTest {
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -5279,10 +6075,14 @@ public class enumTest {
 
           
 
+          
+
           The enumeration type to return. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5335,11 +6135,15 @@ public class enumTest {
 
           
 
+          
+
            is a null reference. </exception
         >
         <exception cref="T:System.ArgumentException">
           <para>
             <paramref name="enumType" />
+
+            
 
             
 
@@ -5352,8 +6156,12 @@ public class enumTest {
 
             
 
+            
+
              that describes a <see
              cref="T:System.Enum" />
+
+            
 
             
 
@@ -5364,6 +6172,8 @@ public class enumTest {
         </exception>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5381,8 +6191,12 @@ public class enumTest {
 
             
 
+            
+
              method converts <paramref
              name="value" />
+
+            
 
             
 
@@ -5395,8 +6209,12 @@ public class enumTest {
 
             
 
+            
+
             . Note that the conversion succeeds even if value is outside the bounds of <paramref
              name="enumType" />
+
+            
 
             
 
@@ -5409,6 +6227,8 @@ public class enumTest {
 
             
 
+            
+
              is a valid underlying value of the <paramref
              name="enumType" />
 
@@ -5416,8 +6236,12 @@ public class enumTest {
 
             
 
+            
+
              enumeration, pass it to the <see
              cref="M:System.Enum.IsDefined(System.Type,System.Object)" />
+
+            
 
             
 
@@ -5433,8 +6257,12 @@ public class enumTest {
 
             
 
+            
+
             . You can then cast it or convert it to an object of type <paramref
              name="enumType" />
+
+            
 
             
 
@@ -5457,6 +6285,8 @@ public class enumTest {
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -5467,10 +6297,14 @@ public class enumTest {
 
           
 
+          
+
           The enumeration type to return. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5512,8 +6346,12 @@ public class enumTest {
 
             
 
+            
+
              is not applied to this enumerated type and there is a named constant equal to the value of this instance, then the return value is a string containing the name of the constant. If the <see
              cref="T:System.FlagsAttribute" />
+
+            
 
             
 
@@ -5528,10 +6366,14 @@ public class enumTest {
 
             
 
+            
+
             . For more information about formatting in general, see <format
              type="text/html">
               <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
             </format>
+
+            
 
             
 
@@ -5589,6 +6431,8 @@ public class enumTest {
             
 
             
+
+            
 that takes no arguments.</para
           >
         </remarks>
@@ -5597,6 +6441,8 @@ that takes no arguments.</para
           <para
             >This method overload is obsolete; use <see
              cref="M:System.Enum.ToString" />
+
+            
 
             
 
@@ -5611,6 +6457,8 @@ that takes no arguments.</para
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5651,6 +6499,8 @@ that takes no arguments.</para
 
           
 
+          
+
            contains an invalid value. </exception
         >
         <remarks>
@@ -5663,8 +6513,12 @@ that takes no arguments.</para
 
             
 
+            
+
              parameter can contain the "G" or "g", "D" or "d", "X" or "x", and "F" or "f" format strings. If <paramref
              name="format" />
+
+            
 
             
 
@@ -5679,10 +6533,14 @@ that takes no arguments.</para
 
             
 
+            
+
             . For more information about formatting in general, see <format
              type="text/html">
               <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
             </format>
+
+            
 
             
 
@@ -5705,11 +6563,15 @@ that takes no arguments.</para
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5759,6 +6621,8 @@ that takes no arguments.</para
 
           
 
+          
+
            does not contain a valid format specifier.</exception
         >
         <param name="format">
@@ -5768,10 +6632,14 @@ that takes no arguments.</para
 
           
 
+          
+
           A format specification. </param
         >
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5789,8 +6657,12 @@ that takes no arguments.</para
 
             
 
+            
+
             ; the <paramref
              name="provider" />
+
+            
 
             
 
@@ -5809,6 +6681,8 @@ that takes no arguments.</para
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -5817,6 +6691,8 @@ that takes no arguments.</para
           <para
             >The string representation of the value of this instance as specified by <paramref
              name="format" />
+
+            
 
             
 
@@ -5832,10 +6708,14 @@ that takes no arguments.</para
 
           
 
+          
+
           A format specification. </param
         >
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

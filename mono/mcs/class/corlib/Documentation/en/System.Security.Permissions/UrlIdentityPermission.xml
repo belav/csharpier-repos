@@ -49,8 +49,12 @@
 
           
 
+          
+
            method to prevent inadvertent access to system resources by trusted code. <see
            cref="M:System.Security.CodeAccessPermission.Deny" />
+
+          
 
           
 
@@ -62,6 +66,8 @@
               >How To: Run Partially Trusted Code in a Sandbox</a
             >
           </format>
+
+          
 
           
 
@@ -80,8 +86,12 @@
 
           
 
+          
+
            permission state value. Starting with the .NET Framework version 2.0, identity permissions can have any permission state value. This means that in 2.0 and later versions, identity permissions have the same behavior as permissions that implement the <see
            cref="T:System.Security.Permissions.IUnrestrictedPermission" />
+
+          
 
           
 
@@ -129,8 +139,12 @@
 
               
 
+              
+
                permission state value. Starting with the .NET Framework version 2.0, identity permissions can have any permission state value. This means that in 2.0 and later versions, identity permissions have the same behavior as permissions that implement the <see
                cref="T:System.Security.Permissions.IUnrestrictedPermission" />
+
+              
 
               
 
@@ -151,8 +165,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Security.Permissions.PermissionState" />
+
+            
 
             
 
@@ -168,8 +186,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -209,6 +231,8 @@
 
               
 
+              
+
                to be called by the security infrastructure. The demand will fail because of the argument exception, resulting in a <see
                cref="T:System.Security.SecurityException" />
 
@@ -216,8 +240,12 @@
 
               
 
+              
+
                being thrown. In this case, the original <see
                cref="T:System.ArgumentException" />
+
+              
 
               
 
@@ -237,8 +265,12 @@
 
             
 
+            
+
              class to represent the URL identity described by <paramref
              name="site" />
+
+            
 
             
 
@@ -249,6 +281,8 @@
         </summary>
         <param name="site">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -323,6 +357,8 @@
 
           
 
+          
+
           The XML encoding to use to reconstruct the permission. </param
         >
       </Docs>
@@ -359,8 +395,12 @@
 
             
 
+            
+
              supports set operations (<see
              cref="M:System.Security.Permissions.UrlIdentityPermission.IsSubsetOf(System.Security.IPermission)" />
+
+            
 
             
 
@@ -373,8 +413,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Security.Permissions.UrlIdentityPermission.Union(System.Security.IPermission)" />
+
+            
 
             
 
@@ -393,6 +437,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -434,8 +480,12 @@
 
             
 
+            
+
              supports set operations (<see
              cref="M:System.Security.Permissions.UrlIdentityPermission.IsSubsetOf(System.Security.IPermission)" />
+
+            
 
             
 
@@ -448,8 +498,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Security.Permissions.UrlIdentityPermission.Union(System.Security.IPermission)" />
+
+            
 
             
 
@@ -468,6 +522,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -562,11 +618,15 @@
 
             
 
+            
+
              method is a permission that represents access to the URL as represented by the current permission, as well as access to the URL as represented by the specified permission.</para
           >
           <para
             >The <see
              cref="T:System.Security.Permissions.UrlIdentityPermission" />
+
+            
 
             
 
@@ -579,6 +639,8 @@
 
             
 
+            
+
             , <see
              cref="M:System.Security.Permissions.UrlIdentityPermission.Intersect(System.Security.IPermission)" />
 
@@ -586,8 +648,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Security.Permissions.UrlIdentityPermission.Union(System.Security.IPermission)" />
+
+            
 
             
 
@@ -606,6 +672,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

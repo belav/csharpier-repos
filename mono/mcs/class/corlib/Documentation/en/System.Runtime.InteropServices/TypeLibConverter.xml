@@ -70,6 +70,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -122,10 +124,14 @@
 
           
 
+          
+
           The assembly to convert. </param
         >
         <param name="strTypeLibName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -140,8 +146,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.InteropServices.TypeLibExporterFlags" />
+
+          
 
           
 
@@ -156,8 +166,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.InteropServices.ITypeLibExporterNotifySink" />
+
+          
 
           
 
@@ -208,8 +222,12 @@
 
             
 
+            
+
              and <paramref
              name="keyPair" />
+
+            
 
             
 
@@ -222,8 +240,12 @@
 
             
 
+            
+
              does not equal <see
              cref="F:System.Runtime.InteropServices.TypeLibImporterFlags.PrimaryInteropAssembly" />
+
+            
 
             
 
@@ -236,8 +258,12 @@
 
             
 
+            
+
              is null, the public key in <paramref
              name="keyPair" />
+
+            
 
             
 
@@ -250,8 +276,12 @@
 
             
 
+            
+
              is null, <paramref
              name="publicKey" />
+
+            
 
             
 
@@ -275,11 +305,15 @@
 
             
 
+            
+
              object containing the converted type library.</para
           >
         </returns>
         <param name="typeLib">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -294,6 +328,8 @@
 
           
 
+          
+
           The file name of the resulting assembly. </param
         >
         <param name="flags">
@@ -303,8 +339,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.InteropServices.TypeLibImporterFlags" />
+
+          
 
           
 
@@ -320,10 +360,14 @@
 
           
 
+          
+
            interface implemented by the caller. </param
         >
         <param name="publicKey">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -338,8 +382,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Reflection.StrongNameKeyPair" />
+
+          
 
           
 
@@ -354,8 +402,12 @@
 
           
 
+          
+
           If true, the interfaces require link time checks for <see
            cref="F:System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode" />
+
+          
 
           
 
@@ -407,8 +459,12 @@
 
             
 
+            
+
              and <paramref
              name="keyPair" />
+
+            
 
             
 
@@ -421,8 +477,12 @@
 
             
 
+            
+
              does not equal <see
              cref="F:System.Runtime.InteropServices.TypeLibImporterFlags.PrimaryInteropAssembly" />
+
+            
 
             
 
@@ -435,8 +495,12 @@
 
             
 
+            
+
              is null, the public key in <paramref
              name="keyPair" />
+
+            
 
             
 
@@ -449,8 +513,12 @@
 
             
 
+            
+
              is null, <paramref
              name="publicKey" />
+
+            
 
             
 
@@ -474,11 +542,15 @@
 
             
 
+            
+
              object containing the converted type library.</para
           >
         </returns>
         <param name="typeLib">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -493,6 +565,8 @@
 
           
 
+          
+
           The file name of the resulting assembly. </param
         >
         <param name="flags">
@@ -502,8 +576,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.InteropServices.TypeLibImporterFlags" />
+
+          
 
           
 
@@ -519,10 +597,14 @@
 
           
 
+          
+
            interface implemented by the caller. </param
         >
         <param name="publicKey">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -537,8 +619,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Reflection.StrongNameKeyPair" />
+
+          
 
           
 
@@ -553,10 +639,14 @@
 
           
 
+          
+
           The namespace for the resulting assembly. </param
         >
         <param name="asmVersion">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

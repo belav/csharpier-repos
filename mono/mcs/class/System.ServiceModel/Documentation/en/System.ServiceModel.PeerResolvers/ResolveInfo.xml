@@ -53,6 +53,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -88,12 +90,16 @@
 
             
 
+            
+
              class with the provided client ID and mesh ID, as well as the maximum number of endpoint addresses to return.</para
           >
         </summary>
         <param name="clientId">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.Guid" />
+
+          
 
           
 
@@ -109,11 +115,15 @@
 
           
 
+          
+
            that contains the ID of the mesh in which the client is participating.</param
         >
         <param name="maxAddresses">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.Int32" />
+
+          
 
           
 

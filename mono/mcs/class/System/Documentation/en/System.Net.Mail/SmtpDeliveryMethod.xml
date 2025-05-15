@@ -25,8 +25,12 @@
 
         
 
+        
+
          enumeration as a parameter to the <see
          cref="P:System.Net.Mail.SmtpClient.DeliveryMethod" />
+
+        
 
         
 
@@ -106,6 +110,8 @@
           <para
             >Email is copied to the directory specified by the <see
              cref="P:System.Net.Mail.SmtpClient.PickupDirectoryLocation" />
+
+            
 
             
 

@@ -34,8 +34,12 @@
 
         
 
+        
+
          object executes a compiled regular expression. A regular expression that is compiled to an assembly becomes a type in that assembly, and an object of that type is typically created using reflection. However, creating an object by reflection is an expensive operation. The <see
          cref="T:System.Text.RegularExpressions.RegexRunnerFactory" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
          method, which creates a <see
          cref="T:System.Text.RegularExpressions.RegexRunner" />
+
+        
 
         
 
@@ -63,6 +71,8 @@
       <para
         >Creates a <see
          cref="T:System.Text.RegularExpressions.RegexRunner" />
+
+        
 
         
 
@@ -94,6 +104,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Text.RegularExpressions.RegexRunnerFactory" />
+
+            
 
             
 
@@ -135,6 +147,8 @@
 
             
 
+            
+
              object for a specific compiled regular expression.</para
           >
         </summary>
@@ -143,6 +157,8 @@
           <para
             >A <see
              cref="T:System.Text.RegularExpressions.RegexRunner" />
+
+            
 
             
 

@@ -27,6 +27,8 @@
 
         
 
+        
+
          class defines the algorithm used for a cryptographic operation.</para
       >
     </summary>
@@ -51,6 +53,8 @@
           <para
             >The <see
              cref="T:System.Security.Cryptography.Pkcs.AlgorithmIdentifier" />
+
+            
 
             
 
@@ -98,6 +102,8 @@
 
             
 
+            
+
              object.  This guards against the possibility that the default algorithm could change because of security or other considerations. </para
           >
         </remarks>
@@ -111,8 +117,12 @@
 
             
 
+            
+
              constructor creates an instance of the <see
              cref="T:System.Security.Cryptography.Pkcs.AlgorithmIdentifier" />
+
+            
 
             
 
@@ -153,6 +163,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -166,8 +178,12 @@
 
             
 
+            
+
              constructor creates an instance of the <see
              cref="T:System.Security.Cryptography.Pkcs.AlgorithmIdentifier" />
+
+            
 
             
 
@@ -209,6 +225,8 @@
 
             
 
+            
+
              parameter is ignored for algorithms that use a fixed key length.</para
           >
         </remarks>
@@ -222,8 +240,12 @@
 
             
 
+            
+
              constructor creates an instance of the <see
              cref="T:System.Security.Cryptography.Pkcs.AlgorithmIdentifier" />
+
+            
 
             
 
@@ -234,6 +256,8 @@
         </summary>
         <param name="keyLength">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -266,6 +290,8 @@
           <para
             >The <see
              cref="P:System.Security.Cryptography.Pkcs.AlgorithmIdentifier.KeyLength" />
+
+            
 
             
 
@@ -307,8 +333,12 @@
 
             
 
+            
+
              property sets or retrieves the <see
              cref="T:System.Security.Cryptography.Oid" />
+
+            
 
             
 
@@ -339,6 +369,8 @@
           <para
             >The <see
              cref="P:System.Security.Cryptography.Pkcs.AlgorithmIdentifier.Parameters" />
+
+            
 
             
 

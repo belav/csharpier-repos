@@ -29,11 +29,15 @@
 
         
 
+        
+
          class provides a programmatic representation of an XML Schema definition language (XSD) document.</para
       >
       <para
         >You should not use the <see
          cref="T:System.Xml.Serialization.SoapSchemaExporter" />
+
+        
 
         
 
@@ -47,6 +51,8 @@
       <para
         >Populates <see
          cref="T:System.Xml.Schema.XmlSchema" />
+
+        
 
         
 
@@ -87,6 +93,8 @@
 
             
 
+            
+
              class directly.</para
           >
         </remarks>
@@ -100,8 +108,12 @@
 
             
 
+            
+
              class, which supplies the collection of <see
              cref="T:System.Xml.Schema.XmlSchema" />
+
+            
 
             
 
@@ -117,8 +129,12 @@
 
           
 
+          
+
           A collection of <see
            cref="T:System.Xml.Schema.XmlSchema" />
+
+          
 
           
 
@@ -160,6 +176,8 @@
 
             
 
+            
+
              class directly.</para
           >
         </remarks>
@@ -173,11 +191,15 @@
 
             
 
+            
+
              object a data type definition for each of the element parts of a SOAP-encoded message definition.</para
           >
         </summary>
         <param name="xmlMembersMapping">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -220,6 +242,8 @@
 
             
 
+            
+
              class directly.</para
           >
         </remarks>
@@ -228,6 +252,8 @@
           <para
             >Adds to the applicable <see
              cref="T:System.Xml.Schema.XmlSchema" />
+
+            
 
             
 
@@ -243,10 +269,14 @@
 
           
 
+          
+
           Internal .NET Framework type mappings for the element parts of a WSDL message definition.</param
         >
         <param name="exportEnclosingType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -288,6 +318,8 @@
 
             
 
+            
+
              class directly.</para
           >
         </remarks>
@@ -301,11 +333,15 @@
 
             
 
+            
+
              object a data type definition for a .NET Framework type.</para
           >
         </summary>
         <param name="xmlTypeMapping">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

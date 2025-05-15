@@ -8,8 +8,12 @@
 
     
 
+    
+
      can be invoked through a boxed instance of that <non_terminal
      where="11.1">value-type</non_terminal>
+
+    
 
     
 
@@ -26,6 +30,8 @@
 
         
 
+        
+
         . </list_item
       >
       <list_item> When the function member is invoked through a delegate. </list_item>
@@ -34,6 +40,8 @@
   <paragraph
     >In these situations, the boxed instance is considered to contain a variable of the <non_terminal
      where="11.1">value-type</non_terminal>
+
+    
 
     
 

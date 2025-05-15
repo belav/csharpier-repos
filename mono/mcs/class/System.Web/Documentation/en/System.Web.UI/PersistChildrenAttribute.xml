@@ -32,8 +32,12 @@
 
         
 
+        
+
          is used in combination with the <see
          cref="T:System.Web.UI.ParseChildrenAttribute" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
          is true and <see
          cref="T:System.Web.UI.ParseChildrenAttribute" />
+
+        
 
         
 
@@ -60,8 +68,12 @@
 
         
 
+        
+
          is false and <see
          cref="T:System.Web.UI.ParseChildrenAttribute" />
+
+        
 
         
 
@@ -71,6 +83,8 @@
          type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
+
+        
 
         
 
@@ -104,11 +118,15 @@
 
             
 
+            
+
              class using a Boolean value indicating whether to persist nested content as nested controls. </para
           >
         </summary>
         <param name="persist">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -147,6 +165,8 @@
 
             
 
+            
+
              class using two Boolean values. One indicating whether to persist nested content as nested controls and the other indicating whether to use a custom persistence method.</para
           >
         </summary>
@@ -157,10 +177,14 @@
 
           
 
+          
+
           true to persist nested content as nested controls; otherwise, false.</param
         >
         <param name="usesCustomPersistence">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -191,6 +215,8 @@
 
             
 
+            
+
              field is Yes, indicating that nested content is persisted at design time.</para
           >
         </remarks>
@@ -199,6 +225,8 @@
           <para
             >Indicates the default attribute state. The <see
              cref="F:System.Web.UI.PersistChildrenAttribute.Default" />
+
+            
 
             
 
@@ -238,11 +266,15 @@
 
             
 
+            
+
              is equal to the current object; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -275,6 +307,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -283,6 +317,8 @@
           <para
             >A hash code for the <see
              cref="T:System.Web.UI.PersistChildrenAttribute" />
+
+            
 
             
 
@@ -316,6 +352,8 @@
 
             
 
+            
+
              class is the default value of the derived clss.</para
           >
         </summary>
@@ -324,6 +362,8 @@
           <para
             >true if the value of the current instance of the <see
              cref="T:System.Web.UI.PersistChildrenAttribute" />
+
+            
 
             
 
@@ -354,6 +394,8 @@
           <para
             >If the <see
              cref="F:System.Web.UI.PersistChildrenAttribute.No" />
+
+            
 
             
 
@@ -412,8 +454,12 @@
 
             
 
+            
+
              overload that takes a <paramref
              name="usesCustomPersistence" />
+
+            
 
             
 
@@ -449,6 +495,8 @@
 
             
 
+            
+
              field is called, nested content is persisted as controls.</para
           >
         </remarks>
@@ -457,6 +505,8 @@
           <para
             >Indicates that nested content should persist as controls at design time. The <see
              cref="F:System.Web.UI.PersistChildrenAttribute.Yes" />
+
+            
 
             
 

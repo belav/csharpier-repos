@@ -31,6 +31,8 @@
 
         
 
+        
+
          acts as the extension point for all pluggable scheduling logic. This includes mechanisms such as how to schedule a task for execution, and how scheduled tasks should be exposed to debuggers. </para
       >
       <para
@@ -43,6 +45,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -50,6 +54,8 @@
          cref="http://go.microsoft.com/fwlink/?LinkID=165717"
           >Samples for Parallel Programming with the .NET Framework 4</see
         >
+
+        
 
         
 
@@ -82,6 +88,8 @@
           <para
             >Initializes the <see
              cref="T:System.Threading.Tasks.TaskScheduler" />
+
+            
 
             
 
@@ -120,8 +128,12 @@
 
             
 
+            
+
              will return the <see
              cref="P:System.Threading.Tasks.TaskScheduler.Default" />
+
+            
 
             
 
@@ -139,6 +151,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -147,6 +161,8 @@
           <para
             >Gets the <see
              cref="T:System.Threading.Tasks.TaskScheduler" />
+
+            
 
             
 
@@ -187,6 +203,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -195,6 +213,8 @@
           <para
             >Gets the default <see
              cref="T:System.Threading.Tasks.TaskScheduler" />
+
+            
 
             
 
@@ -233,8 +253,12 @@
 
             
 
+            
+
              instances queued to the returned scheduler will be executed through a call to the <see
              cref="M:System.Threading.SynchronizationContext.Post(System.Threading.SendOrPostCallback,System.Object)" />
+
+            
 
             
 
@@ -247,6 +271,8 @@
              type="text/html">
               <a href="638f8ea5-21db-47a2-a934-86e1e961bf65">Task Schedulers</a>
             </format>
+
+            
 
             
 
@@ -265,8 +291,12 @@
 
             
 
+            
+
              associated with the current <see
              cref="T:System.Threading.SynchronizationContext" />
+
+            
 
             
 
@@ -285,6 +315,8 @@
 
             
 
+            
+
              associated with the current <see
              cref="T:System.Threading.SynchronizationContext" />
 
@@ -292,8 +324,12 @@
 
             
 
+            
+
             , as determined by <see
              cref="P:System.Threading.SynchronizationContext.Current" />
+
+            
 
             
 
@@ -332,6 +368,8 @@
 
             
 
+            
+
              implements this method in order to support integration with debuggers. This method will only be invoked by the .NET Framework when the debugger requests access to the data. The enumerable returned will be traversed by debugging utilities to access the tasks currently queued to this scheduler, enabling the debugger to provide a representation of this information in the user interface.</para
           >
           <para>It is important to note that, when this method is called, all other threads in the process will be frozen. Therefore, it's important to avoid synchronization with other threads that may lead to blocking. If synchronization is necessary, and you are unable to acquire the lock in this method, then you should throw an exception so that the debugger does not hang. The following example shows one possible approach in C#:</para>
@@ -361,6 +399,8 @@
 
             
 
+            
+
              instances. You can then use GetScheduledTasksForDebugger on each scheduler instance to retrieve its list of scheduled tasks. </para
           >
         </remarks>
@@ -369,6 +409,8 @@
           <para
             >For debugger support only, generates an enumerable of <see
              cref="T:System.Threading.Tasks.Task" />
+
+            
 
             
 
@@ -407,6 +449,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -415,6 +459,8 @@
           <para
             >Gets the unique ID for this <see
              cref="T:System.Threading.Tasks.TaskScheduler" />
+
+            
 
             
 
@@ -449,6 +495,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -457,6 +505,8 @@
           <para
             >Indicates the maximum concurrency level this <see
              cref="T:System.Threading.Tasks.TaskScheduler" />
+
+            
 
             
 
@@ -497,6 +547,8 @@
 
             
 
+            
+
              implements this method to accept tasks being scheduled on the scheduler.</para
           >
           <para> A typical implementation would store the task in an internal data structure, which would be serviced by threads that would execute those tasks at some time in the future.</para>
@@ -513,6 +565,8 @@
 
             
 
+            
+
              to the scheduler. </para
           >
         </summary>
@@ -523,8 +577,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -566,11 +624,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This method may execute in a finally block; therefore it should return as quickly as possible so that any resources such as <see
              cref="T:System.Threading.CancellationTokenRegistration" />
+
+            
 
             
 
@@ -589,6 +651,8 @@
 
             
 
+            
+
              that was previously queued to this scheduler.</para
           >
         </summary>
@@ -597,6 +661,8 @@
           <para
             >A Boolean denoting whether the <paramref
              name="task" />
+
+            
 
             
 
@@ -612,8 +678,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -653,8 +723,12 @@
 
             
 
+            
+
              instances to be executed through either the <see
              cref="M:System.Threading.Tasks.TaskScheduler.QueueTask(System.Threading.Tasks.Task)" />
+
+            
 
             
 
@@ -667,8 +741,12 @@
 
             
 
+            
+
              method. When the scheduler deems it appropriate to run the provided task, <see
              cref="M:System.Threading.Tasks.TaskScheduler.TryExecuteTask(System.Threading.Tasks.Task)" />
+
+            
 
             
 
@@ -678,6 +756,8 @@
           >
           <para>
             <see cref="M:System.Threading.Tasks.TaskScheduler.TryExecuteTask(System.Threading.Tasks.Task)" />
+
+            
 
             
 
@@ -697,6 +777,8 @@
 
             
 
+            
+
              on this scheduler.</para
           >
         </summary>
@@ -705,6 +787,8 @@
           <para
             >A Boolean that is true if <paramref
              name="task" />
+
+            
 
             
 
@@ -720,8 +804,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -762,6 +850,8 @@
 
             
 
+            
+
              implements this function to support inline execution of a task on a thread that initiates a wait on that task object. Inline execution is optional, and the request may be rejected by returning false. However, the more tasks that can be inlined, the better the scheduler will scale. In fact, a scheduler that inlines too little may be prone to deadlocks. A proper implementation should ensure that a request executing under the policies guaranteed by the scheduler can successfully inline. For example, if a scheduler uses a dedicated thread to execute tasks, any inlining requests from that thread should succeed.</para
           >
           <para
@@ -772,8 +862,12 @@
 
             
 
+            
+
              method with the provided task object, propagating the return value. It may also be appropriate for the scheduler to remove an inlined task from its internal data structures if it decides to honor the inlining request. Note, however, that under some circumstances a scheduler may be asked to inline a task that was not previously provided to it with the <see
              cref="M:System.Threading.Tasks.TaskScheduler.QueueTask(System.Threading.Tasks.Task)" />
+
+            
 
             
 
@@ -792,6 +886,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -800,6 +896,8 @@
           <para
             >Determines whether the provided <see
              cref="T:System.Threading.Tasks.Task" />
+
+            
 
             
 
@@ -819,8 +917,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.Tasks.Task" />
+
+          
 
           
 
@@ -830,6 +932,8 @@
         >
         <param name="taskWasPreviouslyQueued">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -867,12 +971,16 @@
 
             
 
+            
+
              exception, the process does not terminate by default. Instead, the exception is handled by the runtime after the event is raised, regardless of whether an event handler observes the exception. This behavior can be configured. Starting with the net_v45, you can use the <format
              type="text/html">
               <a href="cea7e588-8b8d-48d2-9ad5-8feaf3642c18"
                 >&lt;ThrowUnobservedTaskExceptions&gt;</a
               >
             </format>
+
+            
 
             
 

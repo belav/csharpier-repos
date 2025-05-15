@@ -37,6 +37,8 @@
 
         
 
+        
+
          for an evidence object, you provide an implementation of <see
          cref="M:System.Security.Policy.IIdentityPermissionFactory.CreateIdentityPermission(System.Security.Policy.Evidence)" />
 
@@ -44,8 +46,12 @@
 
         
 
+        
+
          that the .NET Framework security system can call to get an identity permission that represents that piece of evidence. During policy resolution, the security system will call that method on all evidence objects that implement <see
          cref="T:System.Security.Policy.IIdentityPermissionFactory" />
+
+        
 
         
 
@@ -93,6 +99,8 @@
         </returns>
         <param name="evidence">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

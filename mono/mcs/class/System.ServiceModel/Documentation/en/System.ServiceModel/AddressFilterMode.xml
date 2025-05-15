@@ -23,8 +23,12 @@
 
         
 
+        
+
          enumeration is set on the <see
          cref="P:System.ServiceModel.ServiceBehaviorAttribute.AddressFilterMode" />
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
          requires that the destination address be matched by the largest number of leading address bits in the filter. The default value is <see
          cref="F:System.ServiceModel.AddressFilterMode.Exact" />
+
+        
 
         
 

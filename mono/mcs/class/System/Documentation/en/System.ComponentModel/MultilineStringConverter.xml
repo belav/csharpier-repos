@@ -49,6 +49,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -93,6 +95,8 @@
 
             
 
+            
+
              that represents the converted value.</para
           >
         </returns>
@@ -103,8 +107,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -119,8 +127,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -135,8 +147,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -151,8 +167,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -196,6 +216,8 @@
 
             
 
+            
+
              parameter, using the specified context and attributes.</para
           >
         </summary>
@@ -204,6 +226,8 @@
           <para
             >A <see
              cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+
+            
 
             
 
@@ -219,8 +243,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -235,8 +263,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -251,8 +283,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -301,6 +337,8 @@
 
             
 
+            
+
              should be called to find the properties of this object; otherwise, false.</para
           >
         </returns>
@@ -311,8 +349,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 

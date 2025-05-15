@@ -4,7 +4,7 @@
   <paragraph
     >For example, the use of a struct rather than a class for a Point can make a large difference in the number of memory allocations performed at run time. The program below creates and initializes an array of 100 points. With Point implemented as a class, 101 separate objects are instantiated-one for the array and one each for the 100 elements. <code_example
     >
-<![CDATA[
+      <![CDATA[
 class Point  
 {  
    public int x, y;  
@@ -27,7 +27,7 @@ class Test
   <paragraph
     >If Point is instead implemented as a struct, as in <code_example
     >
-<![CDATA[
+      <![CDATA[
 struct Point  
 {  
    public int x, y;  
@@ -38,6 +38,8 @@ struct Point
 }  
 ]]>
     </code_example>
+
+    
 
     
 

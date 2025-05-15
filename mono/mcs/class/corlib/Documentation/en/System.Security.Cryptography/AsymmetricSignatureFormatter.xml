@@ -40,6 +40,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -75,6 +77,8 @@
 
             
 
+            
+
              and <see
              cref="M:System.Security.Cryptography.AsymmetricSignatureFormatter.SetHashAlgorithm(System.String)" />
 
@@ -82,8 +86,12 @@
 
             
 
+            
+
              to set the key and hash algorithm before calling an implementation of <see
              cref="M:System.Security.Cryptography.AsymmetricSignatureFormatter.CreateSignature(System.Security.Cryptography.HashAlgorithm)" />
+
+            
 
             
 
@@ -97,6 +105,8 @@
           <para
             >Initializes a new instance of <see
              cref="T:System.Security.Cryptography.AsymmetricSignatureFormatter" />
+
+            
 
             
 
@@ -147,11 +157,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="rgbHash">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -202,6 +216,8 @@
 
           
 
+          
+
           The hash algorithm to use to create the signature. </param
         >
       </Docs>
@@ -238,6 +254,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -247,6 +265,8 @@
         </summary>
         <param name="strName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -288,6 +308,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -302,8 +324,12 @@
 
           
 
+          
+
           The instance of the implementation of <see
            cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
+
+          
 
           
 

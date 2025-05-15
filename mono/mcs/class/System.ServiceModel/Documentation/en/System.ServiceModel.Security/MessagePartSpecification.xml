@@ -50,6 +50,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -83,11 +85,15 @@
 
             
 
+            
+
              and specifies whether the message body is included.</para
           >
         </summary>
         <param name="isBodyIncluded">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -134,11 +140,15 @@
 
             
 
+            
+
              with an array of message headers.</para
           >
         </summary>
         <param name="headerTypes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -182,6 +192,8 @@
 
             
 
+            
+
              parameter specifies whether the message body is to be included or not.</para
           >
         </remarks>
@@ -190,6 +202,8 @@
           <para
             >Initializes a new <see
              cref="T:System.ServiceModel.Security.MessagePartSpecification" />
+
+            
 
             
 
@@ -205,10 +219,14 @@
 
           
 
+          
+
           Initializes whether the message body is included in the specification.</param
         >
         <param name="headerTypes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -306,8 +324,12 @@
 
             
 
+            
+
              to set this property to true. <see
              cref="M:System.ServiceModel.Security.MessagePartSpecification.Clear" />
+
+            
 
             
 
@@ -341,6 +363,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="M:System.ServiceModel.Security.MessagePartSpecification.Clear" />
+
+            
 
             
 
@@ -414,6 +438,8 @@
 
             
 
+            
+
              method is called, the <see
              cref="T:System.ServiceModel.Security.MessagePartSpecification" />
 
@@ -421,8 +447,12 @@
 
             
 
+            
+
              holds all header information from both specifications, and the <see
              cref="P:System.ServiceModel.Security.MessagePartSpecification.IsBodyIncluded" />
+
+            
 
             
 

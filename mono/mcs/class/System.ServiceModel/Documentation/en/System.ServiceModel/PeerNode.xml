@@ -31,11 +31,15 @@
 
         
 
+        
+
          supplied to the binding for each channel.</para
       >
       <para
         >If two or more peer channels defined for a peer node are created with separate bindings, then the <see
          cref="P:System.ServiceModel.NetPeerTcpBinding.Port" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
         , and <see
          cref="P:System.ServiceModel.NetPeerTcpBinding.Resolver" />
+
+        
 
         
 
@@ -65,8 +73,12 @@
 
         
 
+        
+
          property on this and subsequent bindings must be less than or equal to the value of <see
          cref="P:System.ServiceModel.NetPeerTcpBinding.MaxReceivedMessageSize" />
+
+        
 
         
 
@@ -238,6 +250,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="T:System.String" />
+
+            
 
             
 

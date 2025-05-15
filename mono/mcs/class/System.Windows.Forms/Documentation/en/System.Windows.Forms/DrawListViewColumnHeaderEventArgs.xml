@@ -23,8 +23,12 @@
 
         
 
+        
+
          event lets you customize (or owner-draw) the appearance of a <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
          event is raised by a <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -54,8 +62,12 @@
 
         
 
+        
+
          property is set to true and its <see
          cref="P:System.Windows.Forms.ListView.View" />
+
+        
 
         
 
@@ -68,6 +80,8 @@
 
         
 
+        
+
         . The <see
          cref="T:System.Windows.Forms.DrawListViewColumnHeaderEventArgs" />
 
@@ -75,8 +89,12 @@
 
         
 
+        
+
          passed to the event handler contains information about the <see
          cref="T:System.Windows.Forms.ColumnHeader" />
+
+        
 
         
 
@@ -92,8 +110,12 @@
 
         
 
+        
+
          property to retrieve information about the column header to draw. Use the <see
          cref="P:System.Windows.Forms.DrawListViewColumnHeaderEventArgs.Graphics" />
+
+        
 
         
 
@@ -106,8 +128,12 @@
 
         
 
+        
+
          property. To draw standard <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -120,8 +146,12 @@
 
         
 
+        
+
          and <see
          cref="Overload:System.Windows.Forms.DrawListViewColumnHeaderEventArgs.DrawText" />
+
+        
 
         
 
@@ -132,6 +162,8 @@
       <para
         >Use the <see
          cref="P:System.Windows.Forms.DrawListViewColumnHeaderEventArgs.DrawDefault" />
+
+        
 
         
 
@@ -148,6 +180,8 @@
 
           
 
+          
+
            control and set the <see
            cref="P:System.Windows.Forms.ListView.DoubleBuffered" />
 
@@ -155,8 +189,12 @@
 
           
 
+          
+
            property to true. This feature is available only on Windows XP and the Windows Server 2003 family when your application calls the <see
            cref="M:System.Windows.Forms.Application.EnableVisualStyles" />
+
+          
 
           
 
@@ -171,6 +209,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.ListView.DrawColumnHeader" />
+
+        
 
         
 
@@ -212,6 +252,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -222,8 +264,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -238,8 +284,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -254,8 +304,12 @@
 
           
 
+          
+
           The index of the header's column within the <see
            cref="P:System.Windows.Forms.ListView.Columns" />
+
+          
 
           
 
@@ -270,8 +324,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ColumnHeader" />
+
+          
 
           
 
@@ -286,8 +344,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.ListViewItemStates" />
+
+          
 
           
 
@@ -302,8 +364,12 @@
 
           
 
+          
+
           The foreground <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -318,8 +384,12 @@
 
           
 
+          
+
           The background <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -334,8 +404,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -384,6 +458,8 @@
 
             
 
+            
+
              control.</para
           >
         </remarks>
@@ -410,6 +486,8 @@
           <para
             >Gets the index of the <see
              cref="T:System.Windows.Forms.ColumnHeader" />
+
+            
 
             
 
@@ -457,6 +535,8 @@
           <para
             >Use this property when handling the <see
              cref="E:System.Windows.Forms.ListView.DrawColumnHeader" />
+
+            
 
             
 
@@ -518,8 +598,12 @@
 
             
 
+            
+
              values specified in the <paramref
              name="flags" />
+
+            
 
             
 
@@ -538,6 +622,8 @@
 
             
 
+            
+
              values.</para
           >
         </summary>
@@ -548,8 +634,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.TextFormatFlags" />
+
+          
 
           
 
@@ -616,6 +706,8 @@
 
             
 
+            
+
              class provides properties and methods useful for drawing on the display device.</para
           >
         </remarks>
@@ -624,6 +716,8 @@
           <para
             >Gets the <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -658,8 +752,12 @@
 
             
 
+            
+
              property does not provide adequate information to meet your needs. The <see
              cref="P:System.Windows.Forms.DrawListViewColumnHeaderEventArgs.State" />
+
+            
 
             
 
@@ -672,8 +770,12 @@
 
             
 
+            
+
              property, on the other hand, allows you to access all members of the <see
              cref="T:System.Windows.Forms.ColumnHeader" />
+
+            
 
             
 
@@ -687,6 +789,8 @@
           <para
             >Gets the <see
              cref="T:System.Windows.Forms.ColumnHeader" />
+
+            
 
             
 
@@ -721,6 +825,8 @@
 
             
 
+            
+
              values for these states are <see
              cref="F:System.Windows.Forms.ListViewItemStates.Hot" />
 
@@ -728,8 +834,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Windows.Forms.ListViewItemStates.Selected" />
+
+            
 
             
 

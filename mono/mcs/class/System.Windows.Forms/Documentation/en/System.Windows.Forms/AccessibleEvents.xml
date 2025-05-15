@@ -21,8 +21,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.Control" />
+
+        
 
         
 
@@ -50,6 +54,8 @@
           <para
             >An object's <see
              cref="P:System.Windows.Forms.AccessibleObject.KeyboardShortcut" />
+
+            
 
             
 
@@ -98,6 +104,8 @@
 
             
 
+            
+
              property changed. The system sends this event for dialog boxes. Server applications send this event for their accessible objects. Therefore, server applications do not need to send this event for the child objects. Hidden objects have a state of <see
              cref="F:System.Windows.Forms.AccessibleStates.Invisible" />
 
@@ -105,8 +113,12 @@
 
             
 
+            
+
             , and shown objects do not. Events of type AccessibleEvents.Hide indicate that a state of <see
              cref="F:System.Windows.Forms.AccessibleStates.Invisible" />
+
+            
 
             
 
@@ -133,6 +145,8 @@
           <para
             >An object's <see
              cref="P:System.Windows.Forms.AccessibleObject.Description" />
+
+            
 
             
 
@@ -198,6 +212,8 @@
 
             
 
+            
+
              property changed. Server applications send this event for their accessible objects.</para
           >
         </summary>
@@ -241,8 +257,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Windows.Forms.AccessibleStates.Floating" />
+
+            
 
             
 
@@ -269,6 +289,8 @@
           <para
             >An object's <see
              cref="P:System.Windows.Forms.AccessibleObject.Name" />
+
+            
 
             
 
@@ -822,6 +844,8 @@
           <para
             >An object's <see
              cref="P:System.Windows.Forms.AccessibleObject.Value" />
+
+            
 
             
 

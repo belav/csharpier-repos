@@ -72,6 +72,8 @@
 
             
 
+            
+
              class with the zone that determines membership.</para
           >
         </summary>
@@ -82,8 +84,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.SecurityZone" />
+
+          
 
           
 
@@ -125,6 +131,8 @@
 
             
 
+            
+
              evidence object.</para
           >
         </remarks>
@@ -138,6 +146,8 @@
         </returns>
         <param name="evidence">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -208,6 +218,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -216,6 +228,8 @@
           <para
             >true if the zone from the specified object is equivalent to the zone contained in the current <see
              cref="T:System.Security.Policy.ZoneMembershipCondition" />
+
+            
 
             
 
@@ -231,8 +245,12 @@
 
           
 
+          
+
           The object to compare to the current <see
            cref="T:System.Security.Policy.ZoneMembershipCondition" />
+
+          
 
           
 
@@ -271,6 +289,8 @@
         </summary>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -315,10 +335,14 @@
 
           
 
+          
+
           The XML encoding to use to reconstruct the security object. </param
         >
         <param name="level">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -381,6 +405,8 @@
           <para
             >Refer to the <see
              cref="T:System.Security.SecurityZone" />
+
+            
 
             
 
@@ -484,6 +510,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -493,6 +521,8 @@
         </returns>
         <param name="level">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

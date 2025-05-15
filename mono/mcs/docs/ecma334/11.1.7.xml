@@ -8,8 +8,12 @@
 
     
 
+    
+
      type represents boolean logical quantities. The possible values of type <keyword
     >bool</keyword>
+
+    
 
     
 
@@ -25,6 +29,8 @@
 
     
 
+    
+
      and other types. In particular, the <keyword
     >bool</keyword>
 
@@ -32,8 +38,12 @@
 
     
 
+    
+
      type is distinct and separate from the integral types, and a <keyword
     >bool</keyword>
+
+    
 
     
 

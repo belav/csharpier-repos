@@ -31,8 +31,12 @@
 
         
 
+        
+
         , the common language runtime queries the <see
          cref="T:System.AppDomainManager" />
+
+        
 
         
 
@@ -45,6 +49,8 @@
 
         
 
+        
+
         , which participates in making security decisions for the <see
          cref="T:System.AppDomain" />
 
@@ -52,8 +58,12 @@
 
         
 
+        
+
         .  Host providers should implement a host security manager that inherits from the <see
          cref="T:System.Security.HostSecurityManager" />
+
+        
 
         
 
@@ -88,6 +98,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.HostSecurityManager" />
+
+            
 
             
 
@@ -142,6 +154,8 @@
 
           
 
+          
+
           The evidence for the application to be activated.</param
         >
         <param name="activatorEvidence">
@@ -151,10 +165,14 @@
 
           
 
+          
+
           Optionally, the evidence for the activating application domain. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -195,8 +213,12 @@
 
             
 
+            
+
              creation time. It allows a host to supply a policy for the current <see
              cref="T:System.AppDomain" />
+
+            
 
             
 
@@ -219,6 +241,8 @@
             <para
               >See the Notes to Inheritors for the <see
                cref="T:System.Security.HostSecurityManager" />
+
+              
 
               
 
@@ -264,11 +288,15 @@
 
             
 
+            
+
             .  </para
           >
           <para
             >The derived host can change the value of this property when only a subset of the <see
              cref="T:System.Security.HostSecurityManagerOptions" />
+
+            
 
             
 
@@ -316,8 +344,12 @@
 
             
 
+            
+
              object is created. The <paramref
              name="inputEvidence" />
+
+            
 
             
 
@@ -330,12 +362,16 @@
 
             
 
+            
+
              parameter.  </para
           >
           <block subset="none" type="note">
             <para
               >See the Notes to Inheritors for the <see
                cref="T:System.Security.HostSecurityManager" />
+
+              
 
               
 
@@ -359,6 +395,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -369,8 +407,12 @@
 
           
 
+          
+
           Additional evidence to add to the <see
            cref="T:System.AppDomain" />
+
+          
 
           
 
@@ -414,12 +456,16 @@
 
             
 
+            
+
              parameter.  </para
           >
           <block subset="none" type="note">
             <para
               >See the Notes to Inheritors for the <see
                cref="T:System.Security.HostSecurityManager" />
+
+              
 
               
 
@@ -444,10 +490,14 @@
 
           
 
+          
+
           The loaded assembly. </param
         >
         <param name="inputEvidence">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -493,6 +543,8 @@
         </returns>
         <param name="evidence">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

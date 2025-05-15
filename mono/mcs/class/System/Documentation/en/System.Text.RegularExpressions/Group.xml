@@ -35,8 +35,12 @@
 
         
 
+        
+
         .) All the substrings matched by a single capturing group are available from the <see
          cref="P:System.Text.RegularExpressions.Group.Captures" />
+
+        
 
         
 
@@ -49,8 +53,12 @@
 
         
 
+        
+
          instance is equivalent to the last item of the collection returned by the <see
          cref="P:System.Text.RegularExpressions.Group.Captures" />
+
+        
 
         
 
@@ -66,6 +74,8 @@
 
         
 
+        
+
          object and the <see
          cref="T:System.Text.RegularExpressions.CaptureCollection" />
 
@@ -73,8 +83,12 @@
 
         
 
+        
+
          that is returned by the <see
          cref="P:System.Text.RegularExpressions.Group.Captures" />
+
+        
 
         
 
@@ -150,8 +164,12 @@
 
         
 
+        
+
          object represents only the last match that (\w+?) captures, whereas the <see
          cref="P:System.Text.RegularExpressions.Group.Captures" />
+
+        
 
         
 
@@ -164,6 +182,8 @@
 
         
 
+        
+
          that represents all captured text. As the output shows, the <see
          cref="T:System.Text.RegularExpressions.CaptureCollection" />
 
@@ -171,8 +191,12 @@
 
         
 
+        
+
          for the second capturing group contains four objects. The last of these corresponds to the <see
          cref="T:System.Text.RegularExpressions.Group" />
+
+        
 
         
 
@@ -218,8 +242,12 @@
 
             
 
+            
+
              property contains a single <see
              cref="T:System.Text.RegularExpressions.Capture" />
+
+            
 
             
 
@@ -232,6 +260,8 @@
 
             
 
+            
+
              object. This is illustrated in the following example. It defines a regular expression, \b(\w+)\b, that extracts a single word from a sentence. The <see
              cref="T:System.Text.RegularExpressions.Group" />
 
@@ -239,8 +269,12 @@
 
             
 
+            
+
              object captures the word "This", and the single object in the <see
              cref="T:System.Text.RegularExpressions.CaptureCollection" />
+
+            
 
             
 
@@ -257,8 +291,12 @@
 
             
 
+            
+
              property occurs when a quantifier is applied to a capturing group so that the group captures multiple substrings in a single regular expression. In this case, the <see
              cref="T:System.Text.RegularExpressions.Group" />
+
+            
 
             
 
@@ -271,6 +309,8 @@
 
             
 
+            
+
              property contains information about all the substrings captured by the group. In the following example, the regular expression \b(\w+\s*)+\. matches an entire sentence that ends in a period. The group (\w+\s*)+ captures the individual words in the collection. Because the <see
              cref="T:System.Text.RegularExpressions.Group" />
 
@@ -278,8 +318,12 @@
 
             
 
+            
+
              collection contains information only about the last captured substring, it captures the last word in the sentence, "sentence". However, each word captured by the group is available from the collection returned by the <see
              cref="P:System.Text.RegularExpressions.Group.Captures" />
+
+            
 
             
 
@@ -294,6 +338,8 @@
           <para
             >Gets a collection of all the captures matched by the capturing group, in innermost-leftmost-first order (or innermost-rightmost-first order if the regular expression is modified with the <see
              cref="F:System.Text.RegularExpressions.RegexOptions.RightToLeft" />
+
+            
 
             
 
@@ -371,8 +417,12 @@
 
           
 
+          
+
           The input <see
            cref="T:System.Text.RegularExpressions.Group" />
+
+          
 
           
 

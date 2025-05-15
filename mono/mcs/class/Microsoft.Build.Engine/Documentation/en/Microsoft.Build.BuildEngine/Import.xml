@@ -24,6 +24,8 @@
 
         
 
+        
+
          element in an vstecmsbuild project.</para
       >
     </summary>
@@ -49,10 +51,14 @@
 
             
 
+            
+
              attribute value of the <format
              type="text/html">
               <a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a>
             </format>
+
+            
 
             
 
@@ -86,10 +92,14 @@
 
             
 
+            
+
              attribute of the <format
              type="text/html">
               <a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a>
             </format>
+
+            
 
             
 
@@ -125,6 +135,8 @@
 
             
 
+            
+
              element was imported into the project.</para
           >
         </summary>
@@ -153,10 +165,14 @@
 
             
 
+            
+
              attribute value of the <format
              type="text/html">
               <a href="3bfecaf1-69fd-4008-b651-c9dafd4389d9">Import</a>
             </format>
+
+            
 
             
 

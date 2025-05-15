@@ -24,8 +24,12 @@
 
         
 
+        
+
          class provides a way to programmatically access and modify the customErrors section of a configuration file. This type is part of a group that includes the <see
          cref="T:System.Web.Configuration.CustomErrorCollection" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Web.Configuration.CustomError" />
+
+        
 
         
 
@@ -56,6 +64,8 @@
 
           
 
+          
+
            can read and write information from and to the related section of the configuration file according to the section property <see
            cref="P:System.Configuration.SectionInformation.AllowDefinition" />
 
@@ -63,8 +73,12 @@
 
           
 
+          
+
            whose value is <see
            cref="F:System.Configuration.ConfigurationAllowDefinition.Everywhere" />
+
+          
 
           
 
@@ -96,6 +110,8 @@
 
             
 
+            
+
              constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see
              cref="T:System.Web.Configuration.CustomErrorsSection" />
 
@@ -103,8 +119,12 @@
 
             
 
+            
+
              class by using the <see
              cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+
+            
 
             
 
@@ -118,6 +138,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.CustomErrorsSection" />
+
+            
 
             
 
@@ -155,8 +177,12 @@
 
             
 
+            
+
              is not specified, a standard error is displayed instead. The <see
              cref="P:System.Web.Configuration.CustomErrorsSection.DefaultRedirect" />
+
+            
 
             
 
@@ -168,6 +194,8 @@
             <para
               >The URL might be an absolute or a relative value. A relative URL is relative to the Web.config file that specified the <see
                cref="P:System.Web.Configuration.CustomErrorsSection.DefaultRedirect" />
+
+              
 
               
 
@@ -234,6 +262,8 @@
           <para
             >Gets the collection of the <see
              cref="T:System.Web.Configuration.CustomError" />
+
+            
 
             
 

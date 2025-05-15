@@ -52,6 +52,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -80,6 +82,8 @@
 
             
 
+            
+
              class, setting the <see
              cref="P:System.Web.Services.Discovery.DiscoveryDocumentReference.Ref" />
 
@@ -87,8 +91,12 @@
 
             
 
+            
+
              property to the value of <paramref
              name="href" />
+
+            
 
             
 
@@ -104,6 +112,8 @@
 
           
 
+          
+
           Reference to a discovery document. The <see
            cref="P:System.Web.Services.Discovery.DiscoveryDocumentReference.Ref" />
 
@@ -111,8 +121,12 @@
 
           
 
+          
+
            property is set to the value of <paramref
            name="href" />
+
+          
 
           
 
@@ -175,8 +189,12 @@
 
             
 
+            
+
              property of <see
              cref="P:System.Web.Services.Discovery.DiscoveryReference.ClientProtocol" />
+
+            
 
             
 
@@ -190,6 +208,8 @@
           <para
             >Gets the contents of the referenced discovery document as a <see
              cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
+
+            
 
             
 
@@ -233,6 +253,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -246,12 +268,16 @@
 
             
 
+            
+
              containing the contents of the referenced discovery document.</para
           >
         </returns>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -279,6 +305,8 @@
           <para
             >For most references, the <see
              cref="P:System.Web.Services.Discovery.DiscoveryDocumentReference.Ref" />
+
+            
 
             
 
@@ -330,8 +358,12 @@
 
             
 
+            
+
              is a discovery document, then the contents of <paramref
              name="stream" />
+
+            
 
             
 
@@ -344,6 +376,8 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.Documents" />
 
@@ -351,8 +385,12 @@
 
             
 
+            
+
              properties of <see
              cref="P:System.Web.Services.Discovery.DiscoveryReference.ClientProtocol" />
+
+            
 
             
 
@@ -368,6 +406,8 @@
 
             
 
+            
+
              method, the <see
              cref="P:System.Web.Services.Discovery.DiscoveryReference.ClientProtocol" />
 
@@ -375,8 +415,12 @@
 
             
 
+            
+
              property must be set to a valid instance of <see
              cref="T:System.Web.Services.Discovery.DiscoveryClientProtocol" />
+
+            
 
             
 
@@ -396,8 +440,12 @@
 
           
 
+          
+
           The MIME type of <paramref
            name="stream" />
+
+          
 
           
 
@@ -412,8 +460,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -441,8 +493,12 @@
 
             
 
+            
+
              object, you should invoke the <see
              cref="M:System.Web.Services.Discovery.DiscoveryClientProtocol.ResolveAll" />
+
+            
 
             
 
@@ -455,8 +511,12 @@
 
             
 
+            
+
              methods of <see
              cref="T:System.Web.Services.Discovery.DiscoveryClientProtocol" />
+
+            
 
             
 
@@ -472,8 +532,12 @@
 
             
 
+            
+
              property of <see
              cref="P:System.Web.Services.Discovery.DiscoveryReference.ClientProtocol" />
+
+            
 
             
 
@@ -509,6 +573,8 @@
           <para
             >Returns the value of the <see
              cref="P:System.Web.Services.Discovery.DiscoveryDocumentReference.Ref" />
+
+            
 
             
 
@@ -557,8 +623,12 @@
 
             
 
+            
+
              into the passed <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -574,6 +644,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Discovery.DiscoveryDocument" />
 
@@ -581,8 +653,12 @@
 
           
 
+          
+
            to write into <paramref
            name="stream" />
+
+          
 
           
 
@@ -597,8 +673,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 

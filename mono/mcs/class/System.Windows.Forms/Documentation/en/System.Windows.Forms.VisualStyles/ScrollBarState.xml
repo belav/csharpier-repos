@@ -20,8 +20,12 @@
 
         
 
+        
+
          values correspond to the states of the <see
          cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+
+        
 
         
 
@@ -69,8 +73,12 @@
 
         
 
+        
+
          values are also used as an argument in the <see
          cref="T:System.Windows.Forms.ScrollBarRenderer" />
+
+        
 
         
 

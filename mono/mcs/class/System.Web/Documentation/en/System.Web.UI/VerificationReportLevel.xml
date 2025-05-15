@@ -20,8 +20,12 @@
 
         
 
+        
+
         , you must define the level of reporting that the verification rule represents by specifying one of the <see
          cref="T:System.Web.UI.VerificationReportLevel" />
+
+        
 
         
 
@@ -35,6 +39,8 @@
       <para
         >Specifies reporting levels for an accessibility rule defined by an <see
          cref="T:System.Web.UI.VerificationAttribute" />
+
+        
 
         
 
@@ -58,6 +64,8 @@
           <para
             >The verification rule represented by the <see
              cref="T:System.Web.UI.VerificationAttribute" />
+
+            
 
             
 
@@ -89,6 +97,8 @@
 
             
 
+            
+
              instance is a guideline.</para
           >
         </summary>
@@ -110,6 +120,8 @@
           <para
             >The verification rule represented by the <see
              cref="T:System.Web.UI.VerificationAttribute" />
+
+            
 
             
 

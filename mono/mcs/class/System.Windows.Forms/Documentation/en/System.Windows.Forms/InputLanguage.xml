@@ -22,8 +22,12 @@
 
         
 
+        
+
          to get the current input language. Call <see
          cref="P:System.Windows.Forms.InputLanguage.DefaultInputLanguage" />
+
+        
 
         
 
@@ -36,8 +40,12 @@
 
         
 
+        
+
          to get all the installed languages in this system. After you have a list of all the installed languages, use <see
          cref="P:System.Windows.Forms.InputLanguage.CurrentInputLanguage" />
+
+        
 
         
 
@@ -144,6 +152,8 @@
 
           
 
+          
+
           The language to test for equality. </param
         >
       </Docs>
@@ -175,6 +185,8 @@
 
             
 
+            
+
              method selects from among installed keyboards. Specifically, this method performs the following operations:</para
           >
           <list type="ordered">
@@ -182,6 +194,8 @@
               <para
                 >Gets the LCID associated with <paramref
                  name="culture" />
+
+                
 
                 
 
@@ -197,6 +211,8 @@
               <para
                 >Finds the HKL that corresponds to the LCID from <paramref
                  name="culture" />
+
+                
 
                 
 
@@ -221,8 +237,12 @@
 
               
 
+              
+
                method never tries to load or install an additional keyboard if one has not already been installed for <paramref
                name="culture" />
+
+              
 
               
 
@@ -246,6 +266,8 @@
 
             
 
+            
+
              that represents the previously selected input language.</para
           >
         </returns>
@@ -256,8 +278,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 

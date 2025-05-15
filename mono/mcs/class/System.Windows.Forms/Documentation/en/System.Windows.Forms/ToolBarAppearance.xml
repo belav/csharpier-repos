@@ -20,11 +20,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >Set the <see
          cref="P:System.Windows.Forms.ToolBar.Appearance" />
+
+        
 
         
 

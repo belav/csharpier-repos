@@ -16,6 +16,8 @@
 
         
 
+        
+
          namespace consists of the classes that enable you to create XML Web services using ASP.NET and XML Web service clients. XML Web services are applications that provide the ability to exchange messages in a loosely coupled environment using standard protocols such as HTTP, XML, XSD, SOAP, and WSDL. XML Web services enable the building of modular applications within and across companies in heterogeneous environments making them interoperable with a broad variety of implementations, platforms and devices. The SOAP-based XML messages of these applications can have well-defined (structured and typed), or loosely defined parts (using arbitrary XML). The ability of the messages to evolve over time without breaking the protocol is fundamental to the flexibility and robustness of XML Web services as a building block for the future of the Web.</para
       >
     </summary>
@@ -29,8 +31,12 @@
 
         
 
+        
+
          class, which XML Web services can derive from to get access to the ASP.NET intrinsics and the <see
          cref="T:System.Web.Services.WebMethodAttribute" />
+
+        
 
         
 

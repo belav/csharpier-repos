@@ -93,8 +93,12 @@
 
             
 
+            
+
             , it is closed as soon as it is returned to the connection pool. The connection cache used by the TCP transport creates new connections as required for each endpoint up to the cache limit that is set by <see
              cref="P:System.ServiceModel.Channels.TcpConnectionPoolSettings.MaxOutboundConnectionsPerEndpoint" />
+
+            
 
             
 
@@ -138,8 +142,12 @@
 
             
 
+            
+
              on the <see
              cref="T:System.ServiceModel.Channels.TcpChannelListener" />
+
+            
 
             
 

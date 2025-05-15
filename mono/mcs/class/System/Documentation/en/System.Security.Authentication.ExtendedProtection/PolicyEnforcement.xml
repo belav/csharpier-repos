@@ -27,8 +27,12 @@
 
         
 
+        
+
          enumeration specifies when the <see
          cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
+
+        
 
         
 
@@ -63,6 +67,8 @@
 
             
 
+            
+
              is always enforced. Clients that don’t support extended protection will fail to authenticate.</para
           >
         </summary>
@@ -92,6 +98,8 @@
 
             
 
+            
+
              is never enforced and extended protection is disabled.</para
           >
         </summary>
@@ -116,6 +124,8 @@
           <para
             >The <see
              cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
+
+            
 
             
 

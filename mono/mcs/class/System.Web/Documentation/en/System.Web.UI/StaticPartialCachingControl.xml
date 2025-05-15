@@ -29,8 +29,12 @@
 
         
 
+        
+
          directive in the declarative .ascx file, or the <see
          cref="T:System.Web.UI.PartialCachingAttribute" />
+
+        
 
         
 
@@ -43,6 +47,8 @@
 
         
 
+        
+
          method in the <see
          cref="T:System.Web.UI.TemplateControl" />
 
@@ -50,8 +56,12 @@
 
         
 
+        
+
          control class), the <see
          cref="T:System.Web.UI.StaticPartialCachingControl" />
+
+        
 
         
 
@@ -65,6 +75,8 @@
       <para
         >Represents an instance of the <see
          cref="T:System.Web.UI.UserControl" />
+
+        
 
         
 
@@ -102,6 +114,8 @@
 
             
 
+            
+
              constructor is intended for use by the ASP.NET page framework and should not be called directly by developers.</para
           >
         </remarks>
@@ -110,6 +124,8 @@
           <para
             >Creates the <see
              cref="T:System.Web.UI.StaticPartialCachingControl" />
+
+            
 
             
 
@@ -128,11 +144,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="ctrlID">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -147,10 +167,14 @@
 
           
 
+          
+
           The globally unique identifier passed from the server control. </param
         >
         <param name="duration">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -165,10 +189,14 @@
 
           
 
+          
+
           A string of the query string or form POST parameters by which to vary the user control in the cache. </param
         >
         <param name="varyByControls">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -183,6 +211,8 @@
 
           
 
+          
+
           A user-defined string that contains custom output-cache parameter values.</param
         >
         <param name="buildMethod">
@@ -192,8 +222,12 @@
 
           
 
+          
+
           A delegate that calls the method to build the <see
            cref="T:System.Web.UI.StaticPartialCachingControl" />
+
+          
 
           
 
@@ -237,11 +271,15 @@
 
             
 
+            
+
              method builds a cached control with no relationship to a Microsoft SQL Server database table. </para
           >
           <para
             >The <see
              cref="M:System.Web.UI.StaticPartialCachingControl.BuildCachedControl(System.Web.UI.Control,System.String,System.String,System.Int32,System.String,System.String,System.String,System.Web.UI.BuildMethod)" />
+
+            
 
             
 
@@ -260,6 +298,8 @@
 
             
 
+            
+
              object with the parameters specified in the user control (.ascx file) and adds it as a parsed sub-object to the containing server control.</para
           >
         </summary>
@@ -270,8 +310,12 @@
 
           
 
+          
+
           The server control to contain the <see
            cref="T:System.Web.UI.StaticPartialCachingControl" />
+
+          
 
           
 
@@ -286,10 +330,14 @@
 
           
 
+          
+
           The identifier assigned to the control by ASP.NET. </param
         >
         <param name="guid">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -304,10 +352,14 @@
 
           
 
+          
+
           The length of time the control's output is cached. </param
         >
         <param name="varyByParams">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -322,6 +374,8 @@
 
           
 
+          
+
           A string that lists the server-control properties by which to vary the user control in the cache.</param
         >
         <param name="varyByCustom">
@@ -331,10 +385,14 @@
 
           
 
+          
+
           A user-defined string that contains custom output-cache parameter values.</param
         >
         <param name="buildMethod">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -382,8 +440,12 @@
 
             
 
+            
+
              method builds a cached control with a relationship to a SQL Server database table specified by the <paramref
              name="sqlDependency" />
+
+            
 
             
 
@@ -394,6 +456,8 @@
           <para
             >The <see
              cref="M:System.Web.UI.StaticPartialCachingControl.#ctor(System.String,System.String,System.Int32,System.String,System.String,System.String,System.String,System.Web.UI.BuildMethod)" />
+
+            
 
             
 
@@ -412,6 +476,8 @@
 
             
 
+            
+
              object with the parameters specified in the user control (.ascx file) and adds it as a parsed sub-object to the containing server control.</para
           >
         </summary>
@@ -422,8 +488,12 @@
 
           
 
+          
+
           The server control to contain the <see
            cref="T:System.Web.UI.StaticPartialCachingControl" />
+
+          
 
           
 
@@ -438,10 +508,14 @@
 
           
 
+          
+
           The identifier assigned to the control by ASP.NET. </param
         >
         <param name="guid">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -456,10 +530,14 @@
 
           
 
+          
+
           The length of time the control's output is cached. </param
         >
         <param name="varyByParams">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -474,10 +552,14 @@
 
           
 
+          
+
           A string that lists the server-control properties by which to vary the user control in the cache.</param
         >
         <param name="varyByCustom">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -492,10 +574,14 @@
 
           
 
+          
+
           A semicolon-delimited string that specifies which databases and tables to use for the Microsoft SQL Server cache dependency.</param
         >
         <param name="buildMethod">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

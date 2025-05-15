@@ -30,11 +30,15 @@
 
         
 
+        
+
          enables the user to set the properties of the queued communication channel. The queued communication channel uses Message Queuing for its transport.</para
       >
       <para
         >This binding element is the default binding element used by the Message Queuing standard binding (<see
          cref="T:System.ServiceModel.NetMsmqBinding" />
+
+        
 
         
 
@@ -67,6 +71,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.MsmqTransportBindingElement" />
+
+            
 
             
 
@@ -119,8 +125,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -135,6 +145,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.Channels.IOutputSessionChannel" />
 
@@ -142,8 +154,12 @@
 
           
 
+          
+
            or a <see
            cref="T:System.ServiceModel.Channels.IOutputChannel" />
+
+          
 
           
 
@@ -197,8 +213,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -213,6 +233,8 @@
 
           
 
+          
+
           The channel type to be used to build the channel listener. Permitted channel types are <see
            cref="T:System.ServiceModel.Channels.IInputSessionChannel" />
 
@@ -220,8 +242,12 @@
 
           
 
+          
+
            or a <see
            cref="T:System.ServiceModel.Channels.IInputChannel" />
+
+          
 
           
 
@@ -269,6 +295,8 @@
 
             
 
+            
+
              is <see
              cref="T:System.ServiceModel.Channels.IOutputChannel" />
 
@@ -276,8 +304,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.ServiceModel.Channels.IOutputSessionChannel" />
+
+            
 
             
 
@@ -293,8 +325,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -309,6 +345,8 @@
 
           
 
+          
+
           The channel type to be used to build the channel listener. Permitted channel types are <see
            cref="T:System.ServiceModel.Channels.IOutputSessionChannel" />
 
@@ -316,8 +354,12 @@
 
           
 
+          
+
            or a <see
            cref="T:System.ServiceModel.Channels.IOutputChannel" />
+
+          
 
           
 
@@ -371,6 +413,8 @@
 
             
 
+            
+
              is <see
              cref="T:System.ServiceModel.Channels.IInputChannel" />
 
@@ -378,8 +422,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.ServiceModel.Channels.IInputSessionChannel" />
+
+            
 
             
 
@@ -395,8 +443,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -411,6 +463,8 @@
 
           
 
+          
+
           The channel type to be used to build the channel listener. Permitted channel types are <see
            cref="T:System.ServiceModel.Channels.IInputSessionChannel" />
 
@@ -418,8 +472,12 @@
 
           
 
+          
+
            or a <see
            cref="T:System.ServiceModel.Channels.IInputChannel" />
+
+          
 
           
 
@@ -508,8 +566,12 @@
 
             
 
+            
+
              to <see
              cref="F:System.ServiceModel.QueueTransferProtocol.Srmp" />
+
+            
 
             
 
@@ -522,8 +584,12 @@
 
             
 
+            
+
              when <see
              cref="P:System.ServiceModel.Channels.MsmqTransportBindingElement.UseActiveDirectory" />
+
+            
 
             
 
@@ -560,6 +626,8 @@
 
             
 
+            
+
              property returns the string "net.msmq".</para
           >
           <para>The Message Queuing (MSMQ) queued transport supports several addressing schemes, including net.msmq.</para>
@@ -569,6 +637,8 @@
           <para
             >Returns a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -597,6 +667,8 @@
           <para
             >By default, the indigo1 queued transport converts the URI of a message queue to a direct format name. By setting the <see
              cref="P:System.ServiceModel.Channels.MsmqTransportBindingElement.UseActiveDirectory" />
+
+            
 
             
 

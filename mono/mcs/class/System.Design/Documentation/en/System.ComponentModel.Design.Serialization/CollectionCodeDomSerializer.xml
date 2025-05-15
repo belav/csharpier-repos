@@ -26,6 +26,8 @@
 
         
 
+        
+
          class can create either statements or expressions. If the object to serialize is an array, the <see
          cref="T:System.ComponentModel.Design.Serialization.CollectionCodeDomSerializer" />
 
@@ -33,8 +35,12 @@
 
         
 
+        
+
          will create an expression and assign it to the statement in the current context stack. If the object is a collection with an AddRange or similar method, the <see
          cref="T:System.ComponentModel.Design.Serialization.CollectionCodeDomSerializer" />
+
+        
 
         
 
@@ -63,6 +69,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.Design.Serialization.CollectionCodeDomSerializer" />
+
+            
 
             
 
@@ -99,6 +107,8 @@
 
             
 
+            
+
              attributes to see if they support serialization.</para
           >
         </remarks>
@@ -107,6 +117,8 @@
           <para
             >Verifies serialization support by the <paramref
              name="method" />
+
+            
 
             
 
@@ -125,6 +137,8 @@
 
             
 
+            
+
              supports serialization; otherwise, false.</para
           >
         </returns>
@@ -135,8 +149,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.MethodInfo" />
+
+          
 
           
 
@@ -190,6 +208,8 @@
 
                 
 
+                
+
                 , the <see
                  cref="M:System.ComponentModel.Design.Serialization.CollectionCodeDomSerializer.Serialize(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object)" />
 
@@ -197,8 +217,12 @@
 
                 
 
+                
+
                  method will cast the collection to an <see
                  cref="T:System.Collections.IList" />
+
+                
 
                 
 
@@ -216,8 +240,12 @@
 
                     
 
+                    
+
                     , <see
                      cref="M:System.ComponentModel.Design.Serialization.CollectionCodeDomSerializer.Serialize(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object)" />
+
+                    
 
                     
 
@@ -244,11 +272,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="manager">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -261,10 +293,14 @@
 
           
 
+          
+
            to use during serialization.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -307,6 +343,8 @@
 
             
 
+            
+
              that refers to the collection can be null.</para
           >
         </remarks>
@@ -325,8 +363,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationManager" />
+
+          
 
           
 
@@ -341,8 +383,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 
@@ -357,8 +403,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -373,10 +423,14 @@
 
           
 
+          
+
           The collection to serialize.</param
         >
         <param name="valuesToSerialize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

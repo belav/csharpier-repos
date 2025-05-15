@@ -23,8 +23,12 @@
 
         
 
+        
+
          property or the <see
          cref="P:System.Xml.XmlTextReader.DtdProcessing" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          enumeration is used by <see
          cref="T:System.Xml.XmlReaderSettings" />
+
+        
 
         
 
@@ -120,6 +128,8 @@
           <para
             >Specifies that when a DTD is encountered, an <see
              cref="T:System.Xml.XmlException" />
+
+            
 
             
 

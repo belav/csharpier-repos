@@ -29,11 +29,15 @@
 
         
 
+        
+
          enables fine control of the names of the enumerations as they are serialized. </para
       >
       <para
         >To use <see
          cref="T:System.Runtime.Serialization.EnumMemberAttribute" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
          attribute to the enumeration. Then apply the <see
          cref="T:System.Runtime.Serialization.EnumMemberAttribute" />
+
+        
 
         
 
@@ -80,6 +88,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Serialization.EnumMemberAttribute" />
+
+            
 
             
 

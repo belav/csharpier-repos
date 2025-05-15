@@ -39,8 +39,12 @@
 
         
 
+        
+
          serves as a bridge between a <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -53,8 +57,12 @@
 
         
 
+        
+
          provides this bridge by using <see
          cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
+
+        
 
         
 
@@ -67,6 +75,8 @@
 
         
 
+        
+
         , and using <see
          cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
@@ -74,8 +84,12 @@
 
         
 
+        
+
          to send changes made in the <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -91,8 +105,12 @@
 
         
 
+        
+
          fills a <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -105,8 +123,12 @@
 
         
 
+        
+
          property is set to <see
          cref="F:System.Data.MissingSchemaAction.AddWithKey" />
+
+        
 
         
 
@@ -119,6 +141,8 @@
 
         
 
+        
+
          create the schema of the <see
          cref="T:System.Data.DataSet" />
 
@@ -126,8 +150,12 @@
 
         
 
+        
+
         , including primary key information, before filling it with data using <see
          cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
+
+        
 
         
 
@@ -144,11 +172,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >Note that some OLE DB providers, including the MSDataShape provider, do not return base table or primary key information. Therefore, the <see
          cref="T:System.Data.OleDb.OleDbDataAdapter" />
+
+        
 
         
 
@@ -161,6 +193,8 @@
 
         
 
+        
+
          property on any created <see
          cref="T:System.Data.DataTable" />
 
@@ -168,8 +202,12 @@
 
         
 
+        
+
         . In these cases you should explicitly specify primary keys for tables in the <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -185,8 +223,12 @@
 
         
 
+        
+
          also includes the <see
          cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
+
+        
 
         
 
@@ -199,8 +241,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Data.OleDb.OleDbDataAdapter.DeleteCommand" />
+
+        
 
         
 
@@ -213,8 +259,12 @@
 
         
 
+        
+
         , and <see
          cref="P:System.Data.Common.DataAdapter.TableMappings" />
+
+        
 
         
 
@@ -230,8 +280,12 @@
 
         
 
+        
+
         , properties are set to their initial values. For a list of these values, see the <see
          cref="T:System.Data.OleDb.OleDbDataAdapter" />
+
+        
 
         
 
@@ -245,6 +299,8 @@
       <para
         >Represents a set of data commands and a database connection that are used to fill the <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -266,6 +322,8 @@
           <para
             >When you create an instance of <see
              cref="T:System.Data.OleDb.OleDbDataAdapter" />
+
+            
 
             
 
@@ -312,6 +370,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.OleDb.OleDbDataAdapter" />
+
+            
 
             
 
@@ -347,8 +407,12 @@
 
             
 
+            
+
              constructor sets the <see
              cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
+
+            
 
             
 
@@ -361,11 +425,15 @@
 
             
 
+            
+
              parameter.</para
           >
           <para
             >When you create an instance of <see
              cref="T:System.Data.OleDb.OleDbDataAdapter" />
+
+            
 
             
 
@@ -417,6 +485,8 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Data.OleDb.OleDbCommand" />
 
@@ -424,8 +494,12 @@
 
             
 
+            
+
              as the <see
              cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
+
+            
 
             
 
@@ -441,8 +515,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Data.OleDb.OleDbCommand" />
+
+          
 
           
 
@@ -455,8 +533,12 @@
 
           
 
+          
+
            property of the <see
            cref="T:System.Data.OleDb.OleDbDataAdapter" />
+
+          
 
           
 
@@ -492,8 +574,12 @@
 
             
 
+            
+
              opens and closes an <see
              cref="T:System.Data.OleDb.OleDbConnection" />
+
+            
 
             
 
@@ -506,8 +592,12 @@
 
             
 
+            
+
              method for two or more <see
              cref="T:System.Data.OleDb.OleDbDataAdapter" />
+
+            
 
             
 
@@ -520,8 +610,12 @@
 
             
 
+            
+
              is already open, you must explicitly call <see
              cref="M:System.Data.OleDb.OleDbConnection.Close" />
+
+            
 
             
 
@@ -532,6 +626,8 @@
           <para
             >When you create an instance of <see
              cref="T:System.Data.OleDb.OleDbDataAdapter" />
+
+            
 
             
 
@@ -583,8 +679,12 @@
 
             
 
+            
+
              class with a <see
              cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
+
+            
 
             
 
@@ -600,6 +700,8 @@
 
           
 
+          
+
           A string that is an SQL SELECT statement or stored procedure to be used by the <see
            cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
 
@@ -607,8 +709,12 @@
 
           
 
+          
+
            property of the <see
            cref="T:System.Data.OleDb.OleDbDataAdapter" />
+
+          
 
           
 
@@ -623,8 +729,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Data.OleDb.OleDbConnection" />
+
+          
 
           
 
@@ -660,8 +770,12 @@
 
             
 
+            
+
              constructor uses the <paramref
              name="selectConnectionString" />
+
+            
 
             
 
@@ -674,11 +788,15 @@
 
             
 
+            
+
              property. However, it does not open the connection. You still must explicitly open the connection.</para
           >
           <para
             >When you create an instance of <see
              cref="T:System.Data.OleDb.OleDbDataAdapter" />
+
+            
 
             
 
@@ -730,8 +848,12 @@
 
             
 
+            
+
              class with a <see
              cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
+
+            
 
             
 
@@ -747,8 +869,12 @@
 
           
 
+          
+
           A string that is an SQL SELECT statement or stored procedure to be used by the <see
            cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
+
+          
 
           
 
@@ -761,10 +887,14 @@
 
           
 
+          
+
           . </param
         >
         <param name="selectConnectionString">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -862,8 +992,12 @@
 
             
 
+            
+
             , if this property is not set and primary key information is present in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -876,8 +1010,12 @@
 
             
 
+            
+
              can be generated automatically if you set the <see
              cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
+
+            
 
             
 
@@ -890,8 +1028,12 @@
 
             
 
+            
+
             . Then, any additional commands that you do not set are generated by the <see
              cref="T:System.Data.OleDb.OleDbCommandBuilder" />
+
+            
 
             
 
@@ -904,10 +1046,14 @@
 
             
 
+            
+
             . For more information, see <format
              type="text/html">
               <a href="6e3fb8b5-373b-4f9e-ab03-a22693df8e91">Automatically Generated Commands</a>
             </format>
+
+            
 
             
 
@@ -923,8 +1069,12 @@
 
             
 
+            
+
              is assigned to a previously created <see
              cref="T:System.Data.OleDb.OleDbCommand" />
+
+            
 
             
 
@@ -937,6 +1087,8 @@
 
             
 
+            
+
              is not cloned. The <see
              cref="P:System.Data.OleDb.OleDbDataAdapter.DeleteCommand" />
 
@@ -944,8 +1096,12 @@
 
             
 
+            
+
              maintains a reference to the previously created <see
              cref="T:System.Data.OleDb.OleDbCommand" />
+
+            
 
             
 
@@ -1014,6 +1170,8 @@
 
             
 
+            
+
             , but any updates to the data must be handled by ADO.NET. </para
           >
           <para
@@ -1024,8 +1182,12 @@
 
             
 
+            
+
              method does not close the input Recordset on completion of the <see
              cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataTable,System.Object)" />
+
+            
 
             
 
@@ -1041,8 +1203,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
+
+            
 
             
 
@@ -1058,8 +1224,12 @@
 
             
 
+            
+
              operation adds the rows to the specified destination <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1072,8 +1242,12 @@
 
             
 
+            
+
             , creating the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1086,6 +1260,8 @@
 
             
 
+            
+
              object, the <see
              cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataTable,System.Object)" />
 
@@ -1093,8 +1269,12 @@
 
             
 
+            
+
              operation ordinarily creates only column name metadata. However, if the <see
              cref="P:System.Data.Common.DataAdapter.MissingSchemaAction" />
+
+            
 
             
 
@@ -1110,8 +1290,12 @@
 
             
 
+            
+
              method multiple times on the same <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1124,8 +1308,12 @@
 
             
 
+            
+
             . If primary key information is present, any duplicate rows are reconciled and only appear one time in the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1138,8 +1326,12 @@
 
             
 
+            
+
             . Primary key information may be set either through <see
              cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
+
+            
 
             
 
@@ -1152,6 +1344,8 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Data.DataTable" />
 
@@ -1159,8 +1353,12 @@
 
             
 
+            
+
             , or by setting the <see
              cref="P:System.Data.Common.DataAdapter.MissingSchemaAction" />
+
+            
 
             
 
@@ -1176,8 +1374,12 @@
 
             
 
+            
+
              returns the results of an OUTER JOIN, the DataAdapter does not set a <see
              cref="P:System.Data.DataTable.PrimaryKey" />
+
+            
 
             
 
@@ -1190,10 +1392,14 @@
 
             
 
+            
+
             . You must explicitly define the primary key to make sure that duplicate rows are resolved correctly. For more information, see <format
              type="text/html">
               <a href="2ea85959-e763-4669-8bd9-46a9dab894bd">Defining a Primary Key for a Table</a>
             </format>
+
+            
 
             
 
@@ -1209,11 +1415,15 @@
 
             
 
+            
+
             . This makes sure that incoming records that match existing records are updated instead of appended.</para
           >
           <para
             >If the <see
              cref="T:System.Data.OleDb.OleDbDataAdapter" />
+
+            
 
             
 
@@ -1226,8 +1436,12 @@
 
             
 
+            
+
             , it generates names for the subsequent columns, using the pattern "columnname1", "columnname2", "columnname3", and so on. Empty column names are added to the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1238,6 +1452,8 @@
           <para
             >Values in ADO Recordset or Record objects are converted to common language runtime types for storage in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1254,12 +1470,13 @@
 
               
 
+              
+
                method does not implicitly call Close on the ADO object when the fill operation is complete. Therefore, always call Close when you are finished using ADO Recordset or Record objects. This makes sure that the underlying connection to a data source is released in a timely manner, and also prevents possible access violations because of unmanaged ADO objects being reclaimed by garbage collection when existing references still exist.</para
             >
           </block>
           <para>When you call the TableMappings.Add method on a DataAdapter and you explicitly map the source table parameter to an empty string, the dataset is successfully filled using the source table, but the dataset will be populated with nothing. For example, in the following example, rDataSet will be populated with nothing. </para>
-          <code
->rAdapter.TableMappings.Add("source table", "");
+          <code>rAdapter.TableMappings.Add("source table", "");
 rAdapter.Fill(rDataSet, "source table");   </code>
           <para>This example shows how you can skip a result when dealing with multiple results.</para>
           <para
@@ -1270,8 +1487,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
              to fill a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1320,8 +1541,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
              to match those in an ADO Recordset or Record object using the specified <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1340,11 +1565,15 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
             . This does not include rows affected by statements that do not return rows.</para
           >
         </returns>
         <param name="dataTable">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1357,10 +1586,14 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
           
 
+          
+
            to fill with records and, if it is required, schema. </param
         >
         <param name="ADODBRecordSet">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1399,6 +1632,8 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
             , but any updates to the data must be handled by ADO.NET. </para
           >
           <para
@@ -1409,8 +1644,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
              method iterates through multiple results by calling the NextRecordset method on the Recordset, closing the input Recordset on completion of the <see
              cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataTable,System.Object)" />
+
+            
 
             
 
@@ -1426,8 +1665,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
              operation adds the rows to the specified destination <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1440,8 +1683,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
             , creating the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1454,6 +1701,8 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
              object, the <see
              cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataTable,System.Object)" />
 
@@ -1461,8 +1710,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
              operation ordinarily creates only column name metadata. However, if the <see
              cref="P:System.Data.Common.DataAdapter.MissingSchemaAction" />
+
+            
 
             
 
@@ -1478,8 +1731,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
              that corresponds to the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1492,8 +1749,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
             , by specifying the <see
              cref="P:System.Data.DataTable.PrimaryKey" />
+
+            
 
             
 
@@ -1506,8 +1767,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
             , or by setting the <see
              cref="P:System.Data.Common.DataAdapter.MissingSchemaAction" />
+
+            
 
             
 
@@ -1523,11 +1788,15 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
             . This ensures that incoming records that match existing records are updated instead of appended.</para
           >
           <para
             >If the <see
              cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
+
+            
 
             
 
@@ -1540,8 +1809,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
              value for the resulting <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1551,6 +1824,8 @@ rAdapter.Fill(rDataSet, "source table");   </code>
              type="text/html">
               <a href="2ea85959-e763-4669-8bd9-46a9dab894bd">Defining a Primary Key for a Table</a>
             </format>
+
+            
 
             
 
@@ -1566,8 +1841,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
              operation, no error results. This is required for handling of multiple results, because queries that do not return rows are indicated by a closed Recordset. The <see
              cref="T:System.Data.OleDb.OleDbDataAdapter" />
+
+            
 
             
 
@@ -1583,11 +1862,15 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
             . The rest of the operation is aborted.</para
           >
           <para
             >If the <see
              cref="T:System.Data.Common.DbDataAdapter" />
+
+            
 
             
 
@@ -1600,8 +1883,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
             , it generates names for the subsequent columns, using the pattern "columnname1", "columnname2", "columnname3", and so on. If the incoming data contains unnamed columns, they are placed in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1614,11 +1901,15 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
              each result set is placed in a separate table. Additional result sets are named by appending integral values to the specified table name (for example, "Table", "Table1", "Table2", and so on.). Applications that use column and table names should make sure that conflicts with these naming patterns does not occur.</para
           >
           <para
             >Values in ADO Recordset or Record objects are converted to common language runtime types for storage in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1635,6 +1926,8 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
               
 
+              
+
                method implicitly calls Close on the ADO object when the fill operation is complete.</para
             >
           </block>
@@ -1646,8 +1939,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
              to fill a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1686,8 +1983,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
              to match those in an ADO Recordset or Record object using the specified <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1706,6 +2007,8 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
             . This does not include rows affected by statements that do not return rows.</para
           >
         </returns>
@@ -1716,8 +2019,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
           
 
+          
+
           A <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -1732,10 +2039,14 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
           
 
+          
+
           An ADO Recordset or Record object. </param
         >
         <param name="srcTable">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1771,8 +2082,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
             , if this property is not set and primary key information is present in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1785,8 +2100,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
              can be generated automatically if you set the <see
              cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
+
+            
 
             
 
@@ -1799,8 +2118,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
             . Then, any additional commands that you do not set are generated by the <see
              cref="T:System.Data.OleDb.OleDbCommandBuilder" />
+
+            
 
             
 
@@ -1813,10 +2136,14 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
             . For more information, see <format
              type="text/html">
               <a href="6e3fb8b5-373b-4f9e-ab03-a22693df8e91">Automatically Generated Commands</a>
             </format>
+
+            
 
             
 
@@ -1832,8 +2159,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
              is assigned to a previously created <see
              cref="T:System.Data.OleDb.OleDbCommand" />
+
+            
 
             
 
@@ -1846,6 +2177,8 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
              is not cloned. The <see
              cref="P:System.Data.OleDb.OleDbDataAdapter.InsertCommand" />
 
@@ -1853,8 +2186,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
              maintains a reference to the previously created <see
              cref="T:System.Data.OleDb.OleDbCommand" />
+
+            
 
             
 
@@ -1871,6 +2208,8 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
               
 
+              
+
                depending on how you set the <see
                cref="P:System.Data.OleDb.OleDbCommand.UpdatedRowSource" />
 
@@ -1878,8 +2217,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
               
 
+              
+
                property of the <see
                cref="T:System.Data.OleDb.OleDbCommand" />
+
+              
 
               
 
@@ -1974,6 +2317,8 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
             , there are two events that occur per data row updated. The order of execution is as follows: </para
           >
           <list type="ordered">
@@ -1986,6 +2331,8 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
                 
 
+                
+
                  are moved to the parameter values.</para
               >
             </item>
@@ -1993,6 +2340,8 @@ rAdapter.Fill(rDataSet, "source table");   </code>
               <para
                 >The <see
                  cref="M:System.Data.Common.DbDataAdapter.OnRowUpdating(System.Data.Common.RowUpdatingEventArgs)" />
+
+                
 
                 
 
@@ -2013,6 +2362,8 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -2020,6 +2371,8 @@ rAdapter.Fill(rDataSet, "source table");   </code>
               <para
                 >If there are output parameters, they are placed in the <see
                  cref="T:System.Data.DataRow" />
+
+                
 
                 
 
@@ -2037,12 +2390,16 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
                 
 
+                
+
                  event is raised.</para
               >
             </item>
             <item>
               <para>
                 <see cref="M:System.Data.DataRow.AcceptChanges" />
+
+                
 
                 
 
@@ -2058,6 +2415,8 @@ rAdapter.Fill(rDataSet, "source table");   </code>
           <para
             >Occurs during <see
              cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+            
 
             
 
@@ -2093,6 +2452,8 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
             , there are two events that occur per data row updated. The order of execution is as follows: </para
           >
           <list type="ordered">
@@ -2105,6 +2466,8 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
                 
 
+                
+
                  are moved to the parameter values.</para
               >
             </item>
@@ -2112,6 +2475,8 @@ rAdapter.Fill(rDataSet, "source table");   </code>
               <para
                 >The <see
                  cref="M:System.Data.Common.DbDataAdapter.OnRowUpdating(System.Data.Common.RowUpdatingEventArgs)" />
+
+                
 
                 
 
@@ -2132,6 +2497,8 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -2139,6 +2506,8 @@ rAdapter.Fill(rDataSet, "source table");   </code>
               <para
                 >If there are output parameters, they are placed in the <see
                  cref="T:System.Data.DataRow" />
+
+                
 
                 
 
@@ -2156,12 +2525,16 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
                 
 
+                
+
                  event is raised.</para
               >
             </item>
             <item>
               <para>
                 <see cref="M:System.Data.DataRow.AcceptChanges" />
+
+                
 
                 
 
@@ -2177,6 +2550,8 @@ rAdapter.Fill(rDataSet, "source table");   </code>
           <para
             >Occurs during <see
              cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+            
 
             
 
@@ -2213,8 +2588,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
              is assigned to a previously created <see
              cref="T:System.Data.OleDb.OleDbCommand" />
+
+            
 
             
 
@@ -2227,6 +2606,8 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
              is not cloned. The <see
              cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
 
@@ -2234,8 +2615,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
              maintains a reference to the previously created <see
              cref="T:System.Data.OleDb.OleDbCommand" />
+
+            
 
             
 
@@ -2251,8 +2636,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
              returns no rows, no tables are added to the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2323,8 +2712,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Data.IDbDataAdapter" />
+
+            
 
             
 
@@ -2338,6 +2731,8 @@ rAdapter.Fill(rDataSet, "source table");   </code>
           <para
             >For a description of this member, see <see
              cref="M:System.Data.IDbDataAdapter.DeleteCommand" />
+
+            
 
             
 
@@ -2373,8 +2768,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Data.IDbDataAdapter" />
+
+            
 
             
 
@@ -2388,6 +2787,8 @@ rAdapter.Fill(rDataSet, "source table");   </code>
           <para
             >For a description of this member, see <see
              cref="M:System.Data.IDbDataAdapter.InsertCommand" />
+
+            
 
             
 
@@ -2423,8 +2824,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Data.IDbDataAdapter" />
+
+            
 
             
 
@@ -2438,6 +2843,8 @@ rAdapter.Fill(rDataSet, "source table");   </code>
           <para
             >For a description of this member, see <see
              cref="M:System.Data.IDbDataAdapter.SelectCommand" />
+
+            
 
             
 
@@ -2473,8 +2880,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Data.IDbDataAdapter" />
+
+            
 
             
 
@@ -2488,6 +2899,8 @@ rAdapter.Fill(rDataSet, "source table");   </code>
           <para
             >For a description of this member, see <see
              cref="M:System.Data.IDbDataAdapter.UpdateCommand" />
+
+            
 
             
 
@@ -2520,8 +2933,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ICloneable" />
+
+            
 
             
 
@@ -2540,6 +2957,8 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2548,6 +2967,8 @@ rAdapter.Fill(rDataSet, "source table");   </code>
           <para
             >A new <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -2580,8 +3001,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
             , if this property is not set and primary key information is present in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2594,8 +3019,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
              can be generated automatically if you set the <see
              cref="P:System.Data.OleDb.OleDbDataAdapter.SelectCommand" />
+
+            
 
             
 
@@ -2608,8 +3037,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
             . Then, any additional commands that you do not set are generated by the <see
              cref="T:System.Data.OleDb.OleDbCommandBuilder" />
+
+            
 
             
 
@@ -2622,10 +3055,14 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
             . For more information, see <format
              type="text/html">
               <a href="6e3fb8b5-373b-4f9e-ab03-a22693df8e91">Automatically Generated Commands</a>
             </format>
+
+            
 
             
 
@@ -2641,8 +3078,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
              is assigned to a previously created <see
              cref="T:System.Data.OleDb.OleDbCommand" />
+
+            
 
             
 
@@ -2655,6 +3096,8 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
              is not cloned. The <see
              cref="P:System.Data.OleDb.OleDbDataAdapter.UpdateCommand" />
 
@@ -2662,8 +3105,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
             
 
+            
+
              maintains a reference to the previously created <see
              cref="T:System.Data.OleDb.OleDbCommand" />
+
+            
 
             
 
@@ -2680,6 +3127,8 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
               
 
+              
+
                depending on how you set the <see
                cref="!:System.Data.OleDb.OleDbCommand.UpdatedRowSource" />
 
@@ -2687,8 +3136,12 @@ rAdapter.Fill(rDataSet, "source table");   </code>
 
               
 
+              
+
                property of the <see
                cref="T:System.Data.OleDb.OleDbCommand" />
+
+              
 
               
 

@@ -29,6 +29,8 @@
 
         
 
+        
+
          instance.</para
       >
     </remarks>
@@ -60,8 +62,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Name" />
+
+            
 
             
 
@@ -74,8 +80,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Prompt" />
+
+            
 
             
 
@@ -89,6 +99,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.DataAnnotations.DisplayAttribute" />
+
+            
 
             
 
@@ -121,8 +133,12 @@
 
             
 
+            
+
              property. Use the <see
              cref="M:System.ComponentModel.DataAnnotations.DisplayAttribute.GetAutoGenerateField" />
+
+            
 
             
 
@@ -159,8 +175,12 @@
 
             
 
+            
+
              property. Use the <see
              cref="M:System.ComponentModel.DataAnnotations.DisplayAttribute.GetAutoGenerateFilter" />
+
+            
 
             
 
@@ -198,8 +218,12 @@
 
             
 
+            
+
              property. Use the <see
              cref="M:System.ComponentModel.DataAnnotations.DisplayAttribute.GetDescription" />
+
+            
 
             
 
@@ -210,6 +234,8 @@
           <para
             >The <see
              cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Description" />
+
+            
 
             
 
@@ -250,6 +276,8 @@
 
             
 
+            
+
              property.</para
           >
         </summary>
@@ -258,6 +286,8 @@
           <para
             >The value of <see
              cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.AutoGenerateField" />
+
+            
 
             
 
@@ -301,6 +331,8 @@
 
             
 
+            
+
              if the property has been initialized; otherwise, null.</para
           >
         </returns>
@@ -331,6 +363,8 @@
 
             
 
+            
+
              property is typically used as a tooltip for the property that is annotated with this attribute.</para
           >
         </remarks>
@@ -339,6 +373,8 @@
           <para
             >Returns the value of the <see
              cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Description" />
+
+            
 
             
 
@@ -357,6 +393,8 @@
 
             
 
+            
+
              has been specified and the <see
              cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Description" />
 
@@ -364,8 +402,12 @@
 
             
 
+            
+
              property represents a resource key; otherwise, the non-localized value of the <see
              cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Description" />
+
+            
 
             
 
@@ -402,6 +444,8 @@
 
             
 
+            
+
              property.</para
           >
         </summary>
@@ -415,6 +459,8 @@
 
             
 
+            
+
              has been initialized; otherwise, null. If the <see
              cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ResourceType" />
 
@@ -422,8 +468,12 @@
 
             
 
+            
+
              property has been specified and the <see
              cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.GroupName" />
+
+            
 
             
 
@@ -459,6 +509,8 @@
 
             
 
+            
+
              property. A null value or empty string is valid.</para
           >
         </remarks>
@@ -476,8 +528,12 @@
 
             
 
+            
+
              property, if the <see
              cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ResourceType" />
+
+            
 
             
 
@@ -490,8 +546,12 @@
 
             
 
+            
+
              property represents a resource key; otherwise, the non-localized value of the <see
              cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Name" />
+
+            
 
             
 
@@ -527,6 +587,8 @@
 
             
 
+            
+
              property to 10000. This value lets explicitly-ordered fields be displayed before and after the fields that do not have a specified order.</para
           >
         </remarks>
@@ -540,6 +602,8 @@
 
             
 
+            
+
              property.</para
           >
         </summary>
@@ -548,6 +612,8 @@
           <para
             >The value of the <see
              cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Order" />
+
+            
 
             
 
@@ -583,8 +649,12 @@
 
             
 
+            
+
              property is typically used as a prompt or watermark for a UI element that is bound to the property that is annotated with the <see
              cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Prompt" />
+
+            
 
             
 
@@ -603,6 +673,8 @@
 
             
 
+            
+
              property.</para
           >
         </summary>
@@ -616,8 +688,12 @@
 
             
 
+            
+
              property if the <see
              cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ResourceType" />
+
+            
 
             
 
@@ -630,8 +706,12 @@
 
             
 
+            
+
              property represents a resource key; otherwise, the non-localized value of the <see
              cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Prompt" />
+
+            
 
             
 
@@ -667,6 +747,8 @@
 
             
 
+            
+
              is not null.</para
           >
         </remarks>
@@ -675,6 +757,8 @@
           <para
             >Returns the value of the <see
              cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ShortName" />
+
+            
 
             
 
@@ -693,8 +777,12 @@
 
             
 
+            
+
              property if the <see
              cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ResourceType" />
+
+            
 
             
 
@@ -707,8 +795,12 @@
 
             
 
+            
+
              property represents a resource key; otherwise, the non-localized value of the <see
              cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ShortName" />
+
+            
 
             
 
@@ -741,8 +833,12 @@
 
             
 
+            
+
              property. Use the <see
              cref="M:System.ComponentModel.DataAnnotations.DisplayAttribute.GetDescription" />
+
+            
 
             
 
@@ -779,8 +875,12 @@
 
             
 
+            
+
              property. Use the <see
              cref="M:System.ComponentModel.DataAnnotations.DisplayAttribute.GetName" />
+
+            
 
             
 
@@ -791,6 +891,8 @@
           <para
             >The name is typically used as the field label for a UI element that is bound to the property that is annotated with this attribute. The Dynamic Data List.aspx, ListDetails.aspx, and Details.aspx page templates use the <see
              cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Name" />
+
+            
 
             
 
@@ -849,6 +951,8 @@
 
             
 
+            
+
              method instead.</para
           >
         </remarks>
@@ -880,8 +984,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Name" />
+
+            
 
             
 
@@ -894,8 +1002,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Description" />
+
+            
 
             
 
@@ -914,8 +1026,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Name" />
+
+            
 
             
 
@@ -928,8 +1044,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.Description" />
+
+            
 
             
 
@@ -962,8 +1082,12 @@
 
             
 
+            
+
              for the field label. This property returns the localized string for <see
              cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ResourceType" />
+
+            
 
             
 
@@ -976,8 +1100,12 @@
 
             
 
+            
+
              property has been specified and if the <see
              cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ShortName" />
+
+            
 
             
 
@@ -990,8 +1118,12 @@
 
             
 
+            
+
              property has not been specified or if the <see
              cref="P:System.ComponentModel.DataAnnotations.DisplayAttribute.ShortName" />
+
+            
 
             
 

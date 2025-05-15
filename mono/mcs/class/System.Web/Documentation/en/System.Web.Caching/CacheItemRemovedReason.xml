@@ -22,8 +22,12 @@
 
         
 
+        
+
          delegate to notify your ASP.NET applications when and why an object was removed from the <see
          cref="T:System.Web.Caching.Cache" />
+
+        
 
         
 
@@ -37,6 +41,8 @@
       <para
         >Specifies the reason an item was removed from the <see
          cref="T:System.Web.Caching.Cache" />
+
+        
 
         
 
@@ -104,8 +110,12 @@
 
             
 
+            
+
              method call or by an <see
              cref="M:System.Web.Caching.Cache.Insert(System.String,System.Object)" />
+
+            
 
             
 

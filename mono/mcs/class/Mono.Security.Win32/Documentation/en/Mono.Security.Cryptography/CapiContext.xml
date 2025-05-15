@@ -14,6 +14,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -63,6 +65,8 @@
 
           
 
+          
+
            which includes the informations required to select a specific CSP (name) or the default provider for a category of CSP (type).</param
         >
         <summary>Return a context to the specified Cryptographic Service Provider (CSP). </summary>
@@ -101,6 +105,8 @@
         <value
           >a <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -148,6 +154,8 @@
 
           
 
+          
+
            representing the CryptoAPI HCRYPTPROV handle.</value
         >
         <remarks>This property is useful if you need to directly call some unmanaged CryptoAPI functions without managing yourself the context.</remarks>
@@ -169,6 +177,8 @@
         <value
           >a <see
            cref="T:System.Boolean" />
+
+          
 
           
 

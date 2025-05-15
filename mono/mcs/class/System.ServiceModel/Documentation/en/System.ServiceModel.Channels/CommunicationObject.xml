@@ -31,8 +31,12 @@
 
         
 
+        
+
          class implements the <see
          cref="T:System.ServiceModel.ICommunicationObject" />
+
+        
 
         
 
@@ -70,6 +74,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -96,6 +102,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.CommunicationObject" />
+
+            
 
             
 
@@ -131,8 +139,12 @@
 
             
 
+            
+
              method can be used to cancel any outstanding operations, including outstanding calls to <see
              cref="Overload:System.ServiceModel.Channels.CommunicationObject.Close" />
+
+            
 
             
 
@@ -148,8 +160,12 @@
 
             
 
+            
+
              from any state other than <see
              cref="F:System.ServiceModel.CommunicationState.Closed" />
+
+            
 
             
 
@@ -162,6 +178,8 @@
 
             
 
+            
+
              state, call <see
              cref="Overload:System.ServiceModel.Channels.CommunicationObject.Close" />
 
@@ -169,8 +187,12 @@
 
             
 
+            
+
              or one of its asynchronous versions, <see
              cref="Overload:System.ServiceModel.Channels.CommunicationObject.BeginClose" />
+
+            
 
             
 
@@ -218,8 +240,12 @@
 
             
 
+            
+
              to gracefully transition from any state, other than the <see
              cref="F:System.ServiceModel.CommunicationState.Closed" />
+
+            
 
             
 
@@ -232,8 +258,12 @@
 
             
 
+            
+
              state within a default interval of time. The <see
              cref="Overload:System.ServiceModel.Channels.CommunicationObject.BeginClose" />
+
+            
 
             
 
@@ -246,8 +276,12 @@
 
             
 
+            
+
              if the communication object was initially in the <see
              cref="F:System.ServiceModel.CommunicationState.Opened" />
+
+            
 
             
 
@@ -265,6 +299,8 @@
           <para
             >The <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -310,8 +346,12 @@
 
             
 
+            
+
              to gracefully transition from any state, other than the <see
              cref="F:System.ServiceModel.CommunicationState.Closed" />
+
+            
 
             
 
@@ -324,8 +364,12 @@
 
             
 
+            
+
              state with in a specified interval of time.  The <see
              cref="Overload:System.ServiceModel.Channels.CommunicationObject.BeginClose" />
+
+            
 
             
 
@@ -338,8 +382,12 @@
 
             
 
+            
+
              if the communication object was initially in the <see
              cref="F:System.ServiceModel.CommunicationState.Opened" />
+
+            
 
             
 
@@ -357,6 +405,8 @@
           <para
             >The <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -400,8 +450,12 @@
 
             
 
+            
+
              method calls <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.OnOpening" />
+
+            
 
             
 
@@ -414,8 +468,12 @@
 
             
 
+            
+
              if the communication object is initially in the <see
              cref="F:System.ServiceModel.CommunicationState.Created" />
+
+            
 
             
 
@@ -431,8 +489,12 @@
 
             
 
+            
+
              operation, use the <see
              cref="Overload:System.ServiceModel.Channels.CommunicationObject.Open" />
+
+            
 
             
 
@@ -450,6 +512,8 @@
           <para
             >The <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -495,8 +559,12 @@
 
             
 
+            
+
              method calls <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.OnOpening" />
+
+            
 
             
 
@@ -509,8 +577,12 @@
 
             
 
+            
+
              if the communication object is initially in the <see
              cref="F:System.ServiceModel.CommunicationState.Created" />
+
+            
 
             
 
@@ -526,8 +598,12 @@
 
             
 
+            
+
              operation, use the <see
              cref="Overload:System.ServiceModel.Channels.CommunicationObject.Open" />
+
+            
 
             
 
@@ -545,6 +621,8 @@
           <para
             >The <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -580,8 +658,12 @@
 
             
 
+            
+
              to gracefully transition from any state, other than the <see
              cref="F:System.ServiceModel.CommunicationState.Closed" />
+
+            
 
             
 
@@ -594,8 +676,12 @@
 
             
 
+            
+
              state. The <see
              cref="Overload:System.ServiceModel.Channels.CommunicationObject.Close" />
+
+            
 
             
 
@@ -611,8 +697,12 @@
 
             
 
+            
+
              enters the <see
              cref="F:System.ServiceModel.CommunicationState.Closing" />
+
+            
 
             
 
@@ -625,8 +715,12 @@
 
             
 
+            
+
              method is called until the transition to the <see
              cref="F:System.ServiceModel.CommunicationState.Closed" />
+
+            
 
             
 
@@ -639,8 +733,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.OnClose(System.TimeSpan)" />
+
+            
 
             
 
@@ -653,11 +751,15 @@
 
             
 
+            
+
             .  </para
           >
           <para
             >There is also an asynchronous version of the close method that is initiated by calling <see
              cref="Overload:System.ServiceModel.Channels.CommunicationObject.BeginClose" />
+
+            
 
             
 
@@ -700,8 +802,12 @@
 
             
 
+            
+
              to gracefully transition from any state, other than the <see
              cref="F:System.ServiceModel.CommunicationState.Closed" />
+
+            
 
             
 
@@ -714,8 +820,12 @@
 
             
 
+            
+
              state within a specified interval of time. The <see
              cref="Overload:System.ServiceModel.Channels.CommunicationObject.Close" />
+
+            
 
             
 
@@ -731,8 +841,12 @@
 
             
 
+            
+
              enters the <see
              cref="F:System.ServiceModel.CommunicationState.Closing" />
+
+            
 
             
 
@@ -745,8 +859,12 @@
 
             
 
+            
+
              method is called until the transition to the <see
              cref="F:System.ServiceModel.CommunicationState.Closed" />
+
+            
 
             
 
@@ -759,8 +877,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.OnClose(System.TimeSpan)" />
+
+            
 
             
 
@@ -773,11 +895,15 @@
 
             
 
+            
+
             . </para
           >
           <para
             >There is also an asynchronous version of the close method that is initiated by calling <see
              cref="Overload:System.ServiceModel.Channels.CommunicationObject.BeginClose" />
+
+            
 
             
 
@@ -813,8 +939,12 @@
 
             
 
+            
+
              event is raised by the <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.OnClosing" />
+
+            
 
             
 
@@ -827,8 +957,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.EndClose(System.IAsyncResult)" />
+
+            
 
             
 
@@ -864,8 +998,12 @@
 
             
 
+            
+
              event is raised by the <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.OnClosing" />
+
+            
 
             
 
@@ -878,8 +1016,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.ServiceModel.Channels.CommunicationObject.BeginClose" />
+
+            
 
             
 
@@ -972,6 +1114,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -1004,6 +1148,8 @@
           <para
             >A synchronous version of this method is provided by the <see
              cref="Overload:System.ServiceModel.Channels.CommunicationObject.Open" />
+
+            
 
             
 
@@ -1043,6 +1189,8 @@
 
             
 
+            
+
              event is raised by the <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.OnFaulted" />
 
@@ -1050,8 +1198,12 @@
 
             
 
+            
+
              method which is called by the <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.Fault" />
+
+            
 
             
 
@@ -1087,6 +1239,8 @@
 
             
 
+            
+
              event is raised by the <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.OnFaulted" />
 
@@ -1094,8 +1248,12 @@
 
             
 
+            
+
              method which is called by the <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.Fault" />
+
+            
 
             
 
@@ -1161,6 +1319,8 @@
 
             
 
+            
+
              event occurs.</para
           >
         </remarks>
@@ -1195,6 +1355,8 @@
 
             
 
+            
+
              method calls <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.OnAbort" />
 
@@ -1202,8 +1364,12 @@
 
             
 
+            
+
              if the communication object is not already in a <see
              cref="F:System.ServiceModel.CommunicationState.Closed" />
+
+            
 
             
 
@@ -1253,6 +1419,8 @@
 
             
 
+            
+
              method calls <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.OnBeginClose(System.TimeSpan,System.AsyncCallback,System.Object)" />
 
@@ -1260,8 +1428,12 @@
 
             
 
+            
+
              if the communication object is initially in the <see
              cref="F:System.ServiceModel.CommunicationState.Opened" />
+
+            
 
             
 
@@ -1277,8 +1449,12 @@
 
             
 
+            
+
              operation, use the <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.OnClose(System.TimeSpan)" />
+
+            
 
             
 
@@ -1296,6 +1472,8 @@
           <para
             >The <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -1341,8 +1519,12 @@
 
             
 
+            
+
              operation, use the <see
              cref="Overload:System.ServiceModel.Channels.CommunicationObject.Open" />
+
+            
 
             
 
@@ -1360,6 +1542,8 @@
           <para
             >The <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -1398,6 +1582,8 @@
 
             
 
+            
+
              method calls <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.OnClose(System.TimeSpan)" />
 
@@ -1405,8 +1591,12 @@
 
             
 
+            
+
              if the communication object is initially in the <see
              cref="F:System.ServiceModel.CommunicationState.Opened" />
+
+            
 
             
 
@@ -1422,8 +1612,12 @@
 
             
 
+            
+
              operation, use the <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.OnBeginClose(System.TimeSpan,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -1463,6 +1657,8 @@
 
             
 
+            
+
              method calls <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.OnClosed" />
 
@@ -1470,8 +1666,12 @@
 
             
 
+            
+
              if the communication object is initially in the <see
              cref="F:System.ServiceModel.CommunicationState.Opened" />
+
+            
 
             
 
@@ -1487,8 +1687,12 @@
 
             
 
+            
+
              method calls <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.OnClosed" />
+
+            
 
             
 
@@ -1501,8 +1705,12 @@
 
             
 
+            
+
              if the communication object is not already in a <see
              cref="F:System.ServiceModel.CommunicationState.Closed" />
+
+            
 
             
 
@@ -1542,6 +1750,8 @@
 
             
 
+            
+
              method calls <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.OnClosing" />
 
@@ -1549,8 +1759,12 @@
 
             
 
+            
+
              if the communication object is initially in the <see
              cref="F:System.ServiceModel.CommunicationState.Opened" />
+
+            
 
             
 
@@ -1596,6 +1810,8 @@
 
             
 
+            
+
              method calls <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.OnEndClose(System.IAsyncResult)" />
 
@@ -1603,8 +1819,12 @@
 
             
 
+            
+
              if the communication object is not already in a <see
              cref="F:System.ServiceModel.CommunicationState.Closed" />
+
+            
 
             
 
@@ -1650,6 +1870,8 @@
 
             
 
+            
+
              method calls <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.OnEndOpen(System.IAsyncResult)" />
 
@@ -1657,8 +1879,12 @@
 
             
 
+            
+
              (and <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.OnOpened" />
+
+            
 
             
 
@@ -1698,6 +1924,8 @@
 
             
 
+            
+
              event is raised by the <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.OnFaulted" />
 
@@ -1705,8 +1933,12 @@
 
             
 
+            
+
              method which is called by the <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.Fault" />
+
+            
 
             
 
@@ -1749,8 +1981,12 @@
 
             
 
+            
+
              method calls <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.OnOpen(System.TimeSpan)" />
+
+            
 
             
 
@@ -1763,6 +1999,8 @@
 
             
 
+            
+
              and before calling <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.OnOpened" />
 
@@ -1770,8 +2008,12 @@
 
             
 
+            
+
             ) if the communication object is initially in the <see
              cref="F:System.ServiceModel.CommunicationState.Created" />
+
+            
 
             
 
@@ -1787,8 +2029,12 @@
 
             
 
+            
+
              operation, use the <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.OnOpening" />
+
+            
 
             
 
@@ -1828,8 +2074,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.EndOpen(System.IAsyncResult)" />
+
+            
 
             
 
@@ -1869,8 +2119,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.ServiceModel.Channels.CommunicationObject.BeginOpen" />
+
+            
 
             
 
@@ -1910,8 +2164,12 @@
 
             
 
+            
+
              is instantiated, it begins in the <see
              cref="F:System.ServiceModel.CommunicationState.Created" />
+
+            
 
             
 
@@ -1924,8 +2182,12 @@
 
             
 
+            
+
              state, the object can be configured (for example, properties can be set, or events can be registered), but it is not yet usable to send or receive messages. When called, the <see
              cref="Overload:System.ServiceModel.Channels.CommunicationObject.Open" />
+
+            
 
             
 
@@ -1938,8 +2200,12 @@
 
             
 
+            
+
              to enter into the <see
              cref="F:System.ServiceModel.CommunicationState.Opening" />
+
+            
 
             
 
@@ -1952,8 +2218,12 @@
 
             
 
+            
+
             , <see
              cref="Overload:System.ServiceModel.Channels.CommunicationObject.Open" />
+
+            
 
             
 
@@ -1966,8 +2236,12 @@
 
             
 
+            
+
             . The <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.OnOpened" />
+
+            
 
             
 
@@ -1980,8 +2254,12 @@
 
             
 
+            
+
              method by setting the state of the object to the <see
              cref="F:System.ServiceModel.CommunicationState.Opened" />
+
+            
 
             
 
@@ -1997,8 +2275,12 @@
 
             
 
+            
+
              state, the <see
              cref="T:System.ServiceModel.Channels.CommunicationObject" />
+
+            
 
             
 
@@ -2014,8 +2296,12 @@
 
             
 
+            
+
              and completed by calling <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.EndOpen(System.IAsyncResult)" />
+
+            
 
             
 
@@ -2036,12 +2322,16 @@
 
               
 
+              
+
                is invoked. However, the actual credentials cannot be guaranteed. That is, the credentials of the caller may be switched to another identity. For more information, see <format
                type="text/html">
                 <a href="01e7d0b8-10f9-45c3-a4c5-53d44dc61eb8"
                   >Message Security with a Windows Client</a
                 >
               </format>
+
+              
 
               
 
@@ -2085,8 +2375,12 @@
 
             
 
+            
+
              is instantiated, it begins in the <see
              cref="F:System.ServiceModel.CommunicationState.Created" />
+
+            
 
             
 
@@ -2099,8 +2393,12 @@
 
             
 
+            
+
              state, the object can be configured (for example, properties can be set, or events can be registered), but it is not yet usable to send or receive messages. When called, the <see
              cref="Overload:System.ServiceModel.Channels.CommunicationObject.Open" />
+
+            
 
             
 
@@ -2113,8 +2411,12 @@
 
             
 
+            
+
              to enter into the <see
              cref="F:System.ServiceModel.CommunicationState.Opening" />
+
+            
 
             
 
@@ -2127,8 +2429,12 @@
 
             
 
+            
+
             , <see
              cref="Overload:System.ServiceModel.Channels.CommunicationObject.Open" />
+
+            
 
             
 
@@ -2141,8 +2447,12 @@
 
             
 
+            
+
             .  The <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.OnOpened" />
+
+            
 
             
 
@@ -2155,8 +2465,12 @@
 
             
 
+            
+
              method by setting the state of the object to the <see
              cref="F:System.ServiceModel.CommunicationState.Opened" />
+
+            
 
             
 
@@ -2172,8 +2486,12 @@
 
             
 
+            
+
              state, the <see
              cref="T:System.ServiceModel.Channels.CommunicationObject" />
+
+            
 
             
 
@@ -2189,8 +2507,12 @@
 
             
 
+            
+
              and completed by calling <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.EndOpen(System.IAsyncResult)" />
+
+            
 
             
 
@@ -2226,8 +2548,12 @@
 
             
 
+            
+
              event is raised by the <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.OnOpening" />
+
+            
 
             
 
@@ -2240,8 +2566,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.EndOpen(System.IAsyncResult)" />
+
+            
 
             
 
@@ -2277,8 +2607,12 @@
 
             
 
+            
+
              event is raised by the <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.OnOpening" />
+
+            
 
             
 
@@ -2291,8 +2625,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.OnBeginOpen(System.TimeSpan,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -2376,8 +2714,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.ServiceModel.CommunicationState.Opening" />
+
+            
 
             
 
@@ -2390,8 +2732,12 @@
 
             
 
+            
+
              state. A communication object is disposed once <see
              cref="Overload:System.ServiceModel.Channels.CommunicationObject.Close" />
+
+            
 
             
 
@@ -2431,8 +2777,12 @@
 
             
 
+            
+
              is called on it, the only state that is both mutable and not disposed is the <see
              cref="F:System.ServiceModel.CommunicationState.Created" />
+
+            
 
             
 
@@ -2451,8 +2801,12 @@
 
             
 
+            
+
              property is not set to the <see
              cref="F:System.ServiceModel.CommunicationState.Created" />
+
+            
 
             
 
@@ -2484,6 +2838,8 @@
           <para
             >Throws an exception if the communication object is not in the <see
              cref="F:System.ServiceModel.CommunicationState.Opened" />
+
+            
 
             
 

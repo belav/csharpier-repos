@@ -31,8 +31,12 @@
 
         
 
+        
+
          class to programmatically manage a collection of <see
          cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          control. This class is commonly used to add, remove, or modify the contents of a cell in a row of an <see
          cref="T:System.Web.UI.HtmlControls.HtmlTable" />
+
+        
 
         
 
@@ -63,8 +71,12 @@
 
           
 
+          
+
            control contains a <see
            cref="P:System.Web.UI.HtmlControls.HtmlTable.Rows" />
+
+          
 
           
 
@@ -77,8 +89,12 @@
 
           
 
+          
+
            objects. Each <see
            cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
+
+          
 
           
 
@@ -91,8 +107,12 @@
 
           
 
+          
+
            object contains a <see
            cref="P:System.Web.UI.HtmlControls.HtmlTableRow.Cells" />
+
+          
 
           
 
@@ -105,8 +125,12 @@
 
           
 
+          
+
            objects. These objects, in turn, represent the individual cells of a row. To retrieve an individual cell, first get the <see
            cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
+
+          
 
           
 
@@ -119,8 +143,12 @@
 
           
 
+          
+
            collection of the <see
            cref="T:System.Web.UI.HtmlControls.HtmlTable" />
+
+          
 
           
 
@@ -133,6 +161,8 @@
 
           
 
+          
+
            object that represents the cell in the row (from the <see
            cref="P:System.Web.UI.HtmlControls.HtmlTableRow.Cells" />
 
@@ -140,8 +170,12 @@
 
           
 
+          
+
            collection of the <see
            cref="T:System.Web.UI.HtmlControls.HtmlTableRow" />
+
+          
 
           
 
@@ -161,8 +195,12 @@
 
         
 
+        
+
          objects that represent the cells in a single row of an <see
          cref="T:System.Web.UI.HtmlControls.HtmlTable" />
+
+        
 
         
 
@@ -196,8 +234,12 @@
 
             
 
+            
+
              object to the end of an <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+
+            
 
             
 
@@ -210,8 +252,12 @@
 
             
 
+            
+
              object in a specified location in the collection, use the <see
              cref="M:System.Web.UI.HtmlControls.HtmlTableCellCollection.Insert(System.Int32,System.Web.UI.HtmlControls.HtmlTableCell)" />
+
+            
 
             
 
@@ -230,8 +276,12 @@
 
             
 
+            
+
              object to the end of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+
+            
 
             
 
@@ -247,8 +297,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+
+          
 
           
 
@@ -280,6 +334,8 @@
 
             
 
+            
+
              objects from the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
 
@@ -287,8 +343,12 @@
 
             
 
+            
+
              collection and reset the <see
              cref="P:System.Web.UI.HtmlControls.HtmlTableCellCollection.Count" />
+
+            
 
             
 
@@ -305,6 +365,8 @@
 
               
 
+              
+
                object that represents the row from the <see
                cref="P:System.Web.UI.HtmlControls.HtmlTable.Rows" />
 
@@ -312,8 +374,12 @@
 
               
 
+              
+
                collection of the <see
                cref="T:System.Web.UI.HtmlControls.HtmlTable" />
+
+              
 
               
 
@@ -333,8 +399,12 @@
 
             
 
+            
+
              objects from the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+
+            
 
             
 
@@ -370,8 +440,12 @@
 
             
 
+            
+
              collection into the specified <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -388,8 +462,12 @@
 
               
 
+              
+
                parameter must be a zero-based <see
                cref="T:System.Array" />
+
+              
 
               
 
@@ -409,6 +487,8 @@
 
             
 
+            
+
              collection to the specified <see
              cref="T:System.Array" />
 
@@ -416,8 +496,12 @@
 
             
 
+            
+
             , beginning with the specified index in the <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -433,6 +517,8 @@
 
           
 
+          
+
           A zero-based <see
            cref="T:System.Array" />
 
@@ -440,8 +526,12 @@
 
           
 
+          
+
            that receives the copied items from the <see
            cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+
+          
 
           
 
@@ -456,8 +546,12 @@
 
           
 
+          
+
           The first index in the specified <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -489,6 +583,8 @@
 
             
 
+            
+
              property to determine the number of cells contained in the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
 
@@ -496,8 +592,12 @@
 
             
 
+            
+
              collection. The <see
              cref="P:System.Web.UI.HtmlControls.HtmlTableCellCollection.Count" />
+
+            
 
             
 
@@ -516,8 +616,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+
+            
 
             
 
@@ -553,8 +657,12 @@
 
             
 
+            
+
             -implemented object that can be iterated through to retrieve the contents of each item in the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+
+            
 
             
 
@@ -570,6 +678,8 @@
 
             
 
+            
+
              property to get the item currently pointed to in the collection.</para
           >
           <para
@@ -580,11 +690,15 @@
 
             
 
+            
+
              method to move to the next item in the collection.</para
           >
           <para
             >Use the <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 
@@ -601,8 +715,12 @@
 
               
 
+              
+
                method must be called after creating the <see
                cref="T:System.Collections.IEnumerator" />
+
+              
 
               
 
@@ -615,8 +733,12 @@
 
               
 
+              
+
                method to move the enumerator to the first item in the collection. Otherwise, the item represented by the <see
                cref="P:System.Collections.IEnumerator.Current" />
+
+              
 
               
 
@@ -636,6 +758,8 @@
 
             
 
+            
+
             -implemented object that contains all <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
@@ -643,8 +767,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+
+            
 
             
 
@@ -663,6 +791,8 @@
 
             
 
+            
+
             -implemented object that contains all <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
@@ -670,8 +800,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+
+            
 
             
 
@@ -710,8 +844,12 @@
 
             
 
+            
+
              method to add the specified <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+
+            
 
             
 
@@ -724,6 +862,8 @@
 
             
 
+            
+
              collection at the specified index. If you want to simply append an <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
@@ -731,8 +871,12 @@
 
             
 
+            
+
              object to the end of the collection, use the <see
              cref="M:System.Web.UI.HtmlControls.HtmlTableCellCollection.Add(System.Web.UI.HtmlControls.HtmlTableCell)" />
+
+            
 
             
 
@@ -751,8 +895,12 @@
 
             
 
+            
+
              object at the specified index location of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+
+            
 
             
 
@@ -768,6 +916,8 @@
 
           
 
+          
+
           The location in the <see
            cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
 
@@ -775,8 +925,12 @@
 
           
 
+          
+
            at which to add the <see
            cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
+
+          
 
           
 
@@ -791,6 +945,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
@@ -798,8 +954,12 @@
 
           
 
+          
+
            to add to the <see
            cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+
+          
 
           
 
@@ -831,6 +991,8 @@
 
             
 
+            
+
              collection can be written to in all cases.</para
           >
         </remarks>
@@ -839,6 +1001,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+
+            
 
             
 
@@ -871,8 +1035,12 @@
 
             
 
+            
+
              and is overridden to always return false to indicate that access to the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+
+            
 
             
 
@@ -888,6 +1056,8 @@
 
             
 
+            
+
              property, see the <see
              cref="P:System.Collections.ICollection.IsSynchronized" />
 
@@ -895,8 +1065,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -910,6 +1084,8 @@
           <para
             >Gets a value indicating whether access to the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+
+            
 
             
 
@@ -970,8 +1146,12 @@
 
             
 
+            
+
              object from the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+
+            
 
             
 
@@ -988,8 +1168,12 @@
 
               
 
+              
+
                object that does not exist in the <see
                cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+
+              
 
               
 
@@ -1009,8 +1193,12 @@
 
             
 
+            
+
              object from the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+
+            
 
             
 
@@ -1026,6 +1214,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
@@ -1033,8 +1223,12 @@
 
           
 
+          
+
            to remove from the <see
            cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+
+          
 
           
 
@@ -1068,8 +1262,12 @@
 
             
 
+            
+
              object at the specified index from an <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+
+            
 
             
 
@@ -1091,8 +1289,12 @@
 
             
 
+            
+
              object at the specified index from the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+
+            
 
             
 
@@ -1108,6 +1310,8 @@
 
           
 
+          
+
           The index of the <see
            cref="T:System.Web.UI.HtmlControls.HtmlTableCell" />
 
@@ -1115,8 +1319,12 @@
 
           
 
+          
+
            to remove from the <see
            cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+
+          
 
           
 
@@ -1148,11 +1356,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >For more information on the <see
              cref="P:System.Web.UI.HtmlControls.HtmlTableCellCollection.SyncRoot" />
+
+            
 
             
 
@@ -1165,8 +1377,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1180,6 +1396,8 @@
           <para
             >Gets the object that can be used to synchronize access to the <see
              cref="T:System.Web.UI.HtmlControls.HtmlTableCellCollection" />
+
+            
 
             
 

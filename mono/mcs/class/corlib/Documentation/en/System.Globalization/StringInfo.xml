@@ -33,6 +33,8 @@
 
         
 
+        
+
          defines a surrogate pair as a coded character representation for a single abstract character that consists of a sequence of two code units, where the first unit of the pair is a high surrogate and the second is a low surrogate. The Unicode Standard defines a combining character sequence as a combination of a base character and one or more combining characters. A surrogate pair can represent a base character or a combining character. </para
       >
       <para
@@ -43,8 +45,12 @@
 
         
 
+        
+
          class enables you to work with a string as a series of textual elements rather than individual <see
          cref="T:System.Char" />
+
+        
 
         
 
@@ -62,6 +68,8 @@
 
             
 
+            
+
              method, and then repeatedly call the <see
              cref="M:System.Globalization.TextElementEnumerator.MoveNext" />
 
@@ -69,8 +77,12 @@
 
             
 
+            
+
              method on the returned <see
              cref="T:System.Globalization.TextElementEnumerator" />
+
+            
 
             
 
@@ -88,8 +100,12 @@
 
             
 
+            
+
              method to retrieve an array that contains the starting index of each text element. You can then retrieve individual text elements by passing these indexes to the <see
              cref="M:System.Globalization.StringInfo.SubstringByTextElements(System.Int32)" />
+
+            
 
             
 
@@ -110,6 +126,8 @@
 
             
 
+            
+
              objects. The first text element is the base character ARABIC LETTER ALEF (U+-627) followed by ARABIC HAMZA BELOW (U+-655) and ARABIC KASRA (U+0650). The second text element is ARABIC LETTER HEH (U+0647) followed by ARABIC FATHA (U+-64E). The third text element is ARABIC LETTTER BEH (U+0628) followed by ARABIC DAMMATAN (U+064C). </para
           >
         </item>
@@ -125,8 +143,12 @@
 
         
 
+        
+
          method and then by the <see
          cref="M:System.Globalization.StringInfo.GetTextElementEnumerator(System.String)" />
+
+        
 
         
 
@@ -167,6 +189,8 @@
 
             
 
+            
+
              object is initialized to the empty string ("").</para
           >
         </remarks>
@@ -175,6 +199,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Globalization.StringInfo" />
+
+            
 
             
 
@@ -211,6 +237,8 @@
 
             
 
+            
+
              class to a specified string.</para
           >
         </summary>
@@ -221,8 +249,12 @@
 
           
 
+          
+
           A string to initialize this <see
            cref="T:System.Globalization.StringInfo" />
+
+          
 
           
 
@@ -266,6 +298,8 @@
 
             
 
+            
+
              object is equal to a specified object.</para
           >
         </summary>
@@ -279,8 +313,12 @@
 
             
 
+            
+
              parameter is a <see
              cref="T:System.Globalization.StringInfo" />
+
+            
 
             
 
@@ -293,8 +331,12 @@
 
             
 
+            
+
              property equals the <see
              cref="P:System.Globalization.StringInfo.String" />
+
+            
 
             
 
@@ -307,11 +349,15 @@
 
             
 
+            
+
              object; otherwise, false.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -352,8 +398,12 @@
 
             
 
+            
+
              is dependent on its implementation, which might change from one version of the common language runtime to another. This might happen to improve the performance of <see
              cref="M:System.Globalization.StringInfo.GetHashCode" />
+
+            
 
             
 
@@ -366,8 +416,12 @@
 
             
 
+            
+
              constant, the application should override the runtime implementation of <see
              cref="M:System.Globalization.StringInfo.GetHashCode" />
+
+            
 
             
 
@@ -386,6 +440,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -394,6 +450,8 @@
           <para
             >A 32-bit signed integer hash code based on the string value of this <see
              cref="T:System.Globalization.StringInfo" />
+
+            
 
             
 
@@ -436,8 +494,12 @@
 
             
 
+            
+
              defines a surrogate pair as a coded character representation for a single abstract character that consists of a sequence of two code units, where the first unit of the pair is a high surrogate and the second is a low surrogate. The <see
              cref="http://go.microsoft.com/fwlink/?linkid=37123">Unicode Standard</see>
+
+            
 
             
 
@@ -453,8 +515,12 @@
 
             
 
+            
+
              object generated by the <see
              cref="M:System.Globalization.StringInfo.GetTextElementEnumerator(System.String)" />
+
+            
 
             
 
@@ -473,6 +539,8 @@
         </returns>
         <param name="str">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -515,6 +583,8 @@
 
             
 
+            
+
              defines a surrogate pair as a coded character representation for a single abstract character that consists of a sequence of two code units, where the first unit of the pair is a high surrogate and the second is a low surrogate. The Unicode Standard defines a combining character sequence as a combination of a base character and one or more combining characters. A surrogate pair can represent a base character or a combining character. </para
           >
           <para
@@ -525,8 +595,12 @@
 
             
 
+            
+
              generated by the <see
              cref="M:System.Globalization.StringInfo.GetTextElementEnumerator(System.String)" />
+
+            
 
             
 
@@ -550,10 +624,14 @@
 
           
 
+          
+
           The string from which to get the text element. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -595,12 +673,16 @@
 
             
 
+            
+
              defines a surrogate pair as a coded character representation for a single abstract character that consists of a sequence of two code units, where the first unit of the pair is a high surrogate and the second is a low surrogate. The Unicode Standard defines a combining character sequence as a combination of a base character and one or more combining characters. A surrogate pair can represent a base character or a combining character. </para
           >
           <para>The text element enumerator is used only to read data in the string; it cannot modify the underlying string. The enumerator does not have exclusive access to the string.</para>
           <para
             >The enumerator is in an invalid state if it is positioned before the first text element in the string or after the last text element in the string. When the enumerator is in an invalid state, calling <see
              cref="P:System.Globalization.TextElementEnumerator.Current" />
+
+            
 
             
 
@@ -616,8 +698,12 @@
 
             
 
+            
+
              also brings the enumerator back to this position. Therefore, after an enumerator is created or after <see
              cref="M:System.Globalization.TextElementEnumerator.Reset" />
+
+            
 
             
 
@@ -630,8 +716,12 @@
 
             
 
+            
+
              must be called to advance the enumerator to the first text element of the string before reading the value of <see
              cref="P:System.Globalization.TextElementEnumerator.Current" />
+
+            
 
             
 
@@ -646,6 +736,8 @@
 
             
 
+            
+
              returns the same object until either <see
              cref="M:System.Globalization.TextElementEnumerator.MoveNext" />
 
@@ -653,8 +745,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Globalization.TextElementEnumerator.Reset" />
+
+            
 
             
 
@@ -670,6 +766,8 @@
 
             
 
+            
+
              returns false. Calling <see
              cref="P:System.Globalization.TextElementEnumerator.Current" />
 
@@ -677,8 +775,12 @@
 
             
 
+            
+
              throws an exception if the last call to <see
              cref="M:System.Globalization.TextElementEnumerator.MoveNext" />
+
+            
 
             
 
@@ -701,11 +803,15 @@
 
             
 
+            
+
              for the entire string.</para
           >
         </returns>
         <param name="str">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -748,12 +854,16 @@
 
             
 
+            
+
              defines a surrogate pair as a coded character representation for a single abstract character that consists of a sequence of two code units, where the first unit of the pair is a high surrogate and the second is a low surrogate. The Unicode Standard defines a combining character sequence as a combination of a base character and one or more combining characters. A surrogate pair can represent a base character or a combining character. </para
           >
           <para>The text element enumerator is used only to read data in the string; it cannot modify the underlying string. The enumerator does not have exclusive access to the string.</para>
           <para
             >The enumerator is in an invalid state if it is positioned before the first text element in the string or after the last text element in the string. When the enumerator is in an invalid state, calling <see
              cref="P:System.Globalization.TextElementEnumerator.Current" />
+
+            
 
             
 
@@ -769,8 +879,12 @@
 
             
 
+            
+
              also brings the enumerator back to this position. Therefore, after an enumerator is created or after <see
              cref="M:System.Globalization.TextElementEnumerator.Reset" />
+
+            
 
             
 
@@ -783,8 +897,12 @@
 
             
 
+            
+
              must be called to advance the enumerator to the first text element of the string before reading the value of <see
              cref="P:System.Globalization.TextElementEnumerator.Current" />
+
+            
 
             
 
@@ -799,6 +917,8 @@
 
             
 
+            
+
              returns the same object until either <see
              cref="M:System.Globalization.TextElementEnumerator.MoveNext" />
 
@@ -806,8 +926,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Globalization.TextElementEnumerator.Reset" />
+
+            
 
             
 
@@ -823,6 +947,8 @@
 
             
 
+            
+
              returns false. Calling <see
              cref="P:System.Globalization.TextElementEnumerator.Current" />
 
@@ -830,8 +956,12 @@
 
             
 
+            
+
              throws an exception if the last call to <see
              cref="M:System.Globalization.TextElementEnumerator.MoveNext" />
+
+            
 
             
 
@@ -854,8 +984,12 @@
 
             
 
+            
+
              for the string starting at <paramref
              name="index" />
+
+            
 
             
 
@@ -871,10 +1005,14 @@
 
           
 
+          
+
           The string to iterate through. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -903,6 +1041,8 @@
           <para
             >Gets the number of text elements in the current <see
              cref="T:System.Globalization.StringInfo" />
+
+            
 
             
 
@@ -945,12 +1085,16 @@
 
             
 
+            
+
              defines a surrogate pair as a coded character representation for a single abstract character that consists of a sequence of two code units, where the first unit of the pair is a high surrogate and the second is a low surrogate. A high surrogate is a Unicode code point in the range U+D800 through U+DBFF and a low surrogate is a Unicode code point in the range U+DC00 through U+DFFF.</para
           >
           <para>A control character is a character for which the Unicode value is U+007F or in the range U+0000 through U+001F or U+0080 through U+009F.</para>
           <para
             >The .NET Framework defines a text element as a unit of text that is displayed as a single character, that is, a grapheme. A text element can be a base character, a surrogate pair, or a combining character sequence. The <see
              cref="http://go.microsoft.com/fwlink/?linkid=37123">Unicode Standard</see>
+
+            
 
             
 
@@ -972,6 +1116,8 @@
 
             
 
+            
+
              method and <see
              cref="P:System.Globalization.StringInfo.LengthInTextElements" />
 
@@ -979,8 +1125,12 @@
 
             
 
+            
+
              property provide an easy to use implementation of the functionality offered by the <see
              cref="M:System.Globalization.StringInfo.ParseCombiningCharacters(System.String)" />
+
+            
 
             
 
@@ -999,6 +1149,8 @@
         </returns>
         <param name="str">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1027,6 +1179,8 @@
           <para
             >Gets or sets the value of the current <see
              cref="T:System.Globalization.StringInfo" />
+
+            
 
             
 
@@ -1068,8 +1222,12 @@
 
             
 
+            
+
              parameter is 1, the  <see
              cref="M:System.Globalization.StringInfo.SubstringByTextElements(System.Int32)" />
+
+            
 
             
 
@@ -1088,6 +1246,8 @@
 
             
 
+            
+
              object starting from a specified text element and continuing through the last text element.</para
           >
         </summary>
@@ -1101,8 +1261,12 @@
 
             
 
+            
+
              object, starting from the text element index specified by the <paramref
              name="startingTextElement" />
+
+            
 
             
 
@@ -1118,8 +1282,12 @@
 
           
 
+          
+
           The zero-based index of a text element in this <see
            cref="T:System.Globalization.StringInfo" />
+
+          
 
           
 
@@ -1161,6 +1329,8 @@
 
             
 
+            
+
              parameter is 1 and the <paramref
              name="lengthInTextElements" />
 
@@ -1168,8 +1338,12 @@
 
             
 
+            
+
              parameter is 3, the <see
              cref="M:System.Globalization.StringInfo.SubstringByTextElements(System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -1188,6 +1362,8 @@
 
             
 
+            
+
              object starting from a specified text element and continuing through the specified number of text elements.</para
           >
         </summary>
@@ -1201,6 +1377,8 @@
 
             
 
+            
+
              object. The substring consists of the number of text elements specified by the <paramref
              name="lengthInTextElements" />
 
@@ -1208,8 +1386,12 @@
 
             
 
+            
+
              parameter and starts from the text element index specified by the <paramref
              name="startingTextElement" />
+
+            
 
             
 
@@ -1225,8 +1407,12 @@
 
           
 
+          
+
           The zero-based index of a text element in this <see
            cref="T:System.Globalization.StringInfo" />
+
+          
 
           
 
@@ -1236,6 +1422,8 @@
         >
         <param name="lengthInTextElements">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

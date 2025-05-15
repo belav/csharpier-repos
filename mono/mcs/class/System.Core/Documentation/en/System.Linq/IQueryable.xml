@@ -29,6 +29,8 @@
 
         
 
+        
+
          interface is intended for implementation by query providers. It is only supposed to be implemented by providers that also implement <see
          cref="T:System.Linq.IQueryable`1" />
 
@@ -36,8 +38,12 @@
 
         
 
+        
+
         . If the provider does not also implement <see
          cref="T:System.Linq.IQueryable`1" />
+
+        
 
         
 
@@ -53,8 +59,12 @@
 
         
 
+        
+
          interface inherits the <see
          cref="T:System.Collections.IEnumerable" />
+
+        
 
         
 
@@ -67,8 +77,12 @@
 
         
 
+        
+
          object to be executed. The definition of "executing an expression tree" is specific to a query provider. For example, it may involve translating the expression tree to an appropriate query language for the underlying data source. Queries that do not return enumerable results are executed when the <see
          cref="M:System.Linq.IQueryProvider.Execute(System.Linq.Expressions.Expression)" />
+
+        
 
         
 
@@ -81,6 +95,8 @@
          cref="http://go.microsoft.com/fwlink/?LinkID=112370"
           >LINQ: Building an IQueryable Provider</see
         >
+
+        
 
         
 
@@ -118,6 +134,8 @@
 
             
 
+            
+
              property represents the "T" in IQueryable&lt;T&gt; or IQueryable(Of T).</para
           >
         </remarks>
@@ -126,6 +144,8 @@
           <para
             >Gets the type of the element(s) that are returned when the expression tree associated with this instance of <see
              cref="T:System.Linq.IQueryable" />
+
+            
 
             
 
@@ -165,6 +185,8 @@
 
             
 
+            
+
              represents a vbteclinq query against a data source, the associated expression tree represents that query.</para
           >
         </remarks>
@@ -173,6 +195,8 @@
           <para
             >Gets the expression tree that is associated with the instance of <see
              cref="T:System.Linq.IQueryable" />
+
+            
 
             
 
@@ -209,8 +233,12 @@
 
             
 
+            
+
              represents a vbteclinq query against a data source, the associated query provider is the provider that created the <see
              cref="T:System.Linq.IQueryable" />
+
+            
 
             
 

@@ -20,6 +20,8 @@
 
         
 
+        
+
         . This area is called custom places. This class represents a custom place.</para
       >
       <para>On winxp or winxpsvr, this class does not have any effect.</para>
@@ -29,6 +31,8 @@
       <para
         >Represents an entry in a <see
          cref="T:System.Windows.Forms.FileDialog" />
+
+        
 
         
 
@@ -63,6 +67,8 @@
 
             
 
+            
+
              or the KnownFolders.h file in the winSDK.</para
           >
         </remarks>
@@ -71,6 +77,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.FileDialogCustomPlace" />
+
+            
 
             
 
@@ -86,8 +94,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Guid" />
+
+          
 
           
 
@@ -118,11 +130,15 @@
 
             
 
+            
+
              class. with a specified folder path to a custom place.</para
           >
         </summary>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -190,6 +206,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -198,6 +216,8 @@
           <para
             >A string that represents this <see
              cref="T:System.Windows.Forms.FileDialogCustomPlace" />
+
+            
 
             
 

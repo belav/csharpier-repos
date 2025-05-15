@@ -42,6 +42,8 @@
 
         
 
+        
+
         , and the value is the associated filter data. Filter data can be any data of the type specified in the generic parameter and can be used to specify what actions to take if a message is matched by a filter in the table. </para
       >
       <para
@@ -52,8 +54,12 @@
 
         
 
+        
+
          functionality that <see
          cref="T:System.ServiceModel.Dispatcher.IMessageFilterTable`1" />
+
+        
 
         
 
@@ -69,11 +75,15 @@
 
         
 
+        
+
          once. To add multiple instances of this filter to the same filter table, use a filter constructor to create additional instances.</para
       >
       <para
         >A filter matches a message when the message satisfies the query criteria of the filter. There are four overloaded matching methods. The data returned is either the filter data or the <see
          cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
+
+        
 
         
 
@@ -157,6 +167,8 @@
 
               
 
+              
+
                objects</para
             >
           </description>
@@ -170,8 +182,12 @@
 
         
 
+        
+
          parameter and is not permitted to examine the contents of the body; the other takes a <see
          cref="T:System.ServiceModel.Channels.MessageBuffer" />
+
+        
 
         
 
@@ -183,6 +199,8 @@
       <para
         >The following classes implement <see
          cref="T:System.ServiceModel.Dispatcher.IMessageFilterTable`1" />
+
+        
 
         
 
@@ -315,6 +333,8 @@
 
             
 
+            
+
             ; false if no filter is satisfied.</para
           >
         </returns>
@@ -325,8 +345,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Message" />
+
+          
 
           
 
@@ -341,6 +365,8 @@
 
           
 
+          
+
           Reference parameter that stores the <see
            cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
 
@@ -348,8 +374,12 @@
 
           
 
+          
+
            objects that match in <see
            cref="T:System.Collections.Generic.ICollection`1" />
+
+          
 
           
 
@@ -402,11 +432,15 @@
 
             
 
+            
+
             ; false if no filter is satisfied.</para
           >
         </returns>
         <param name="results">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -419,8 +453,12 @@
 
           
 
+          
+
            objects that match in <see
            cref="T:System.Collections.Generic.ICollection`1" />
+
+          
 
           
 

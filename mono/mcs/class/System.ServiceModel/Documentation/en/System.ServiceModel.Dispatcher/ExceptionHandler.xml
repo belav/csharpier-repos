@@ -24,8 +24,12 @@
 
         
 
+        
+
          class and override the <see
          cref="M:System.ServiceModel.Dispatcher.ExceptionHandler.HandleException(System.Exception)" />
+
+        
 
         
 
@@ -38,6 +42,8 @@
 
         
 
+        
+
          class and assign it to the static <see
          cref="P:System.ServiceModel.Dispatcher.ExceptionHandler.AsynchronousThreadExceptionHandler" />
 
@@ -45,8 +51,12 @@
 
         
 
+        
+
          or <see
          cref="P:System.ServiceModel.Dispatcher.ExceptionHandler.TransportExceptionHandler" />
+
+        
 
         
 
@@ -60,6 +70,8 @@
       <para
         >Extend the <see
          cref="T:System.ServiceModel.Dispatcher.ExceptionHandler" />
+
+        
 
         
 
@@ -88,6 +100,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Dispatcher.ExceptionHandler" />
+
+            
 
             
 
@@ -122,6 +136,8 @@
           <para
             >Gets an instance of <see
              cref="T:System.ServiceModel.Dispatcher.ExceptionHandler" />
+
+            
 
             
 
@@ -165,8 +181,12 @@
 
             
 
+            
+
              property is null, and unhandled exceptions on asynchronous indigo2 threads terminate the application.  Set this property to an <see
              cref="T:System.ServiceModel.Dispatcher.ExceptionHandler" />
+
+            
 
             
 
@@ -182,6 +202,8 @@
 
             
 
+            
+
              should not return true for these exceptions.</para
           >
         </remarks>
@@ -190,6 +212,8 @@
           <para
             >Gets or sets the current <see
              cref="T:System.ServiceModel.Dispatcher.ExceptionHandler" />
+
+            
 
             
 
@@ -223,6 +247,8 @@
           <para
             >The <see
              cref="M:System.ServiceModel.Dispatcher.ExceptionHandler.HandleException(System.Exception)" />
+
+            
 
             
 
@@ -269,6 +295,8 @@
 
             
 
+            
+
              property is set to the value of <see
              cref="P:System.ServiceModel.Dispatcher.ExceptionHandler.AlwaysHandle" />
 
@@ -276,8 +304,12 @@
 
             
 
+            
+
             , causing unhandled exceptions within indigo2 transports to be ignored.  Set this property to an instance of <see
              cref="T:System.ServiceModel.Dispatcher.ExceptionHandler" />
+
+            
 
             
 
@@ -293,6 +325,8 @@
 
             
 
+            
+
              can return false for these exceptions to cause the application to be terminated.</para
           >
         </remarks>
@@ -301,6 +335,8 @@
           <para
             >Gets or sets the current transport <see
              cref="T:System.ServiceModel.Dispatcher.ExceptionHandler" />
+
+            
 
             
 

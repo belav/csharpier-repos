@@ -29,6 +29,8 @@
 
         
 
+        
+
          class defines a network endpoint, including host name, network port number, and transport type used to make the connection.</para
       >
       <block subset="none" type="note">
@@ -40,6 +42,8 @@
       <para
         >Defines an endpoint that is authorized by a <see
          cref="T:System.Net.SocketPermission" />
+
+        
 
         
 
@@ -81,8 +85,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Net.SocketPermission" />
+
+            
 
             
 
@@ -93,6 +101,8 @@
         </summary>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -127,6 +137,8 @@
           <para
             >Serves as a hash function for a particular <see
              cref="T:System.Net.SocketPermission" />
+
+            
 
             
 
@@ -206,8 +218,12 @@
 
             
 
+            
+
              method returns a string that represents the contents for the <see
              cref="T:System.Net.EndpointPermission" />
+
+            
 
             
 
@@ -220,6 +236,8 @@
 
             
 
+            
+
              # <see
              cref="P:System.Net.EndpointPermission.Port" />
 
@@ -227,8 +245,12 @@
 
             
 
+            
+
              # <see
              cref="P:System.Net.EndpointPermission.Transport" />
+
+            
 
             
 
@@ -247,6 +269,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -255,6 +279,8 @@
           <para
             >A string that represents the current <see
              cref="T:System.Net.EndpointPermission" />
+
+            
 
             
 

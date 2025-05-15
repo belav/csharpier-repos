@@ -40,11 +40,15 @@
 
         
 
+        
+
          interface is intended for implementation by query providers.</para
       >
       <para
         >This interface inherits the <see
          cref="T:System.Collections.Generic.IEnumerable`1" />
+
+        
 
         
 
@@ -57,8 +61,12 @@
 
         
 
+        
+
          object to be executed. Queries that do not return enumerable results are executed when the <see
          cref="M:System.Linq.IQueryProvider.Execute``1(System.Linq.Expressions.Expression)" />
+
+        
 
         
 
@@ -75,8 +83,12 @@
 
         
 
+        
+
          interface enables queries to be polymorphic. That is, because a query against an <unmanagedCodeEntityReference
         >IQueryable</unmanagedCodeEntityReference>
+
+        
 
         
 
@@ -92,8 +104,12 @@
 
         
 
+        
+
          (except for <see
          cref="Overload:System.Linq.Queryable.AsQueryable" />
+
+        
 
         
 
@@ -106,8 +122,12 @@
 
         
 
+        
+
         , and <see
          cref="Overload:System.Linq.Queryable.ThenByDescending" />
+
+        
 
         
 
@@ -120,6 +140,8 @@
 
         
 
+        
+
          interface.</para
       >
       <para
@@ -127,6 +149,8 @@
          cref="http://go.microsoft.com/fwlink/?LinkID=112370"
           >LINQ: Building an IQueryable Provider</see
         >
+
+        
 
         
 

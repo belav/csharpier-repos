@@ -35,11 +35,15 @@
 
         
 
+        
+
          method, which parses a WSDL file and assigns its values to appropriate members of the class.</para
       >
       <para
         >WSDL is an XML-based language for describing XML Web services. The <see
          cref="T:System.Web.Services.Description.ServiceDescription" />
+
+        
 
         
 
@@ -66,6 +70,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -101,6 +107,8 @@
 
             
 
+            
+
              returned by this property corresponds to the list of binding elements enclosed by the Web Services Description Language (WSDL) definitions root element. For more information about WSDL, see the specification at http://www.w3.org/TR/wsdl/.</para
           >
         </remarks>
@@ -114,8 +122,12 @@
 
             
 
+            
+
              elements contained in the <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -159,6 +171,8 @@
 
             
 
+            
+
              represents a valid Web Services Description Language (WSDL) file that can be parsed.</para
           >
         </summary>
@@ -172,8 +186,12 @@
 
             
 
+            
+
              can recognize the node on which the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -184,6 +202,8 @@
         </returns>
         <param name="reader">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -215,6 +235,8 @@
           <para
             >Gets the collection of extensibility elements contained in the <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -255,6 +277,8 @@
 
             
 
+            
+
              returned by this property corresponds to the list of import elements enclosed by the Web Services Description Language (WSDL) definitions root element. For more information about WSDL, see the specification at http://www.w3.org/TR/wsdl/.</para
           >
         </remarks>
@@ -268,8 +292,12 @@
 
             
 
+            
+
              elements contained in the <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -310,6 +338,8 @@
 
             
 
+            
+
              returned by this property corresponds to the list of message elements enclosed by the Web Services Description Language (WSDL) definitions root element. For more information about WSDL, see the specification at http://www.w3.org/TR/wsdl/.</para
           >
         </remarks>
@@ -323,8 +353,12 @@
 
             
 
+            
+
              elements contained in the <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -385,6 +419,8 @@
 
             
 
+            
+
              class is defined ("http://schemas.xmlsoap.org/wsdl/"). This field is constant.</para
           >
         </summary>
@@ -415,6 +451,8 @@
 
             
 
+            
+
              returned by this property corresponds to the list of portType elements enclosed by the Web Services Description Language (WSDL) definitions root element. For more information about WSDL, see the specification at http://www.w3.org/TR/wsdl/.</para
           >
         </remarks>
@@ -428,8 +466,12 @@
 
             
 
+            
+
              elements contained in the <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -473,8 +515,12 @@
 
             
 
+            
+
              class by directly loading the XML from a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -493,6 +539,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -503,8 +551,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -542,8 +594,12 @@
 
             
 
+            
+
              class by directly loading the XML from a <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -562,6 +618,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -572,8 +630,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.TextReader" />
+
+          
 
           
 
@@ -611,6 +673,8 @@
 
             
 
+            
+
              object by directly loading the XML from the specified file.</para
           >
         </summary>
@@ -624,11 +688,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -666,8 +734,12 @@
 
             
 
+            
+
              class by directly loading the XML from an <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -686,6 +758,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -696,8 +770,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -739,8 +817,12 @@
 
             
 
+            
+
              class by directly loading the XML from a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -759,6 +841,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -769,8 +853,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -785,6 +873,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Boolean" />
 
@@ -792,8 +882,12 @@
 
           
 
+          
+
            that indicates whether the XML should be validated against the schema specified by <see
            cref="P:System.Web.Services.Description.ServiceDescription.Schema" />
+
+          
 
           
 
@@ -832,8 +926,12 @@
 
             
 
+            
+
              class by directly loading the XML from a <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -852,11 +950,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="validate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -869,8 +971,12 @@
 
           
 
+          
+
            that indicates whether the XML should be validated against the schema specified by <see
            cref="P:System.Web.Services.Description.ServiceDescription.Schema" />
+
+          
 
           
 
@@ -908,6 +1014,8 @@
 
             
 
+            
+
              object by directly loading the XML from the specified file.</para
           >
         </summary>
@@ -916,6 +1024,8 @@
           <para
             >An instance of the <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -931,10 +1041,14 @@
 
           
 
+          
+
           The path to the file to be read. </param
         >
         <param name="validate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -947,8 +1061,12 @@
 
           
 
+          
+
            that indicates whether the XML should be validated against the schema specified by <see
            cref="P:System.Web.Services.Description.ServiceDescription.Schema" />
+
+          
 
           
 
@@ -986,8 +1104,12 @@
 
             
 
+            
+
              class by directly loading the XML from an <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1006,6 +1128,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1016,8 +1140,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -1032,6 +1160,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Boolean" />
 
@@ -1039,8 +1169,12 @@
 
           
 
+          
+
            that indicates whether the XML should be validated against the schema specified by <see
            cref="P:System.Web.Services.Description.ServiceDescription.Schema" />
+
+          
 
           
 
@@ -1065,6 +1199,8 @@
           <para
             >Gets or sets the URL of the XML Web service to which the <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -1109,6 +1245,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1139,6 +1277,8 @@
 
             
 
+            
+
              class. These classes are specified in a configuration file using the serviceDescriptionFormatExtensionTypes element and its child add element. The configuration can be applied to an ASP.NET Web application that publishes a Web service.</para
           >
         </remarks>
@@ -1147,6 +1287,8 @@
           <para
             >Gets the XML serializer used to serialize and deserialize between a <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -1188,8 +1330,12 @@
 
             
 
+            
+
              instance of which the <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -1230,6 +1376,8 @@
 
             
 
+            
+
              returned by this property corresponds to the list of service elements enclosed by the Web Services Description Language (WSDL) definitions root element. For more information about WSDL, see the specification at http://www.w3.org/TR/wsdl/.</para
           >
         </remarks>
@@ -1243,8 +1391,12 @@
 
             
 
+            
+
              instances contained in the <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -1311,6 +1463,8 @@
 
             
 
+            
+
              instance returned by this property corresponds to the list of types elements enclosed by the Web Services Description Language (WSDL) definitions root element. For more information about WSDL, see the specification at http://www.w3.org/TR/wsdl/.</para
           >
         </remarks>
@@ -1324,8 +1478,12 @@
 
             
 
+            
+
              contained by the <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -1375,8 +1533,12 @@
 
             
 
+            
+
              that contains any validation warnings that were generated during a call to <see
              cref="M:System.Web.Services.Description.ServiceDescription.Read(System.IO.Stream,System.Boolean)" />
+
+            
 
             
 
@@ -1389,8 +1551,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Web.Services.Description.ServiceDescription.Read(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1403,8 +1569,12 @@
 
             
 
+            
+
              with the <paramref
              name="validate" />
+
+            
 
             
 
@@ -1436,8 +1606,12 @@
 
             
 
+            
+
              to the specified <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -1453,8 +1627,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -1489,8 +1667,12 @@
 
             
 
+            
+
              as a Web Services Description Language (WSDL) file to the <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -1506,8 +1688,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -1542,11 +1728,15 @@
 
             
 
+            
+
              as a Web Services Description Language (WSDL) file to the specified path.</para
           >
         </summary>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1581,8 +1771,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -1598,8 +1792,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 

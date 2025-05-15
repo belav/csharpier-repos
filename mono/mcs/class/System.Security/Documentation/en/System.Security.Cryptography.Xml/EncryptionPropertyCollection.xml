@@ -36,11 +36,15 @@
 
         
 
+        
+
          class encapsulates the &lt;EncryptionProperty&gt; element defined by the World Wide Web Consortium XML Encryption specification located at http://www.w3.org/TR/xmlenc-core/.</para
       >
       <para
         >Use the <see
          cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+
+        
 
         
 
@@ -53,8 +57,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+
+        
 
         
 
@@ -68,6 +76,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+
+        
 
         
 
@@ -98,6 +108,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+
+            
 
             
 
@@ -141,8 +153,12 @@
 
             
 
+            
+
              object to the <see
              cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+
+            
 
             
 
@@ -162,6 +178,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
@@ -169,8 +187,12 @@
 
           
 
+          
+
            object to add to the <see
            cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+
+          
 
           
 
@@ -203,6 +225,8 @@
           <para
             >Removes all items from the <see
              cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+
+            
 
             
 
@@ -246,8 +270,12 @@
 
             
 
+            
+
              object contains a specific <see
              cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+
+            
 
             
 
@@ -266,8 +294,12 @@
 
             
 
+            
+
              object is found in the <see
              cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+
+            
 
             
 
@@ -283,6 +315,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
@@ -290,8 +324,12 @@
 
           
 
+          
+
            object to locate in the <see
            cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+
+          
 
           
 
@@ -332,11 +370,15 @@
 
             
 
+            
+
              object to an array, starting at a particular array index.</para
           >
         </summary>
         <param name="array">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -349,8 +391,12 @@
 
           
 
+          
+
            object that is the destination of the elements copied from the <see
            cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+
+          
 
           
 
@@ -365,8 +411,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -410,8 +460,12 @@
 
             
 
+            
+
              object to an array of <see
              cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+
+            
 
             
 
@@ -427,6 +481,8 @@
 
           
 
+          
+
           The one-dimensional array of  <see
            cref=" T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
@@ -434,8 +490,12 @@
 
           
 
+          
+
            objects that is the destination of the elements copied from the <see
            cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+
+          
 
           
 
@@ -450,8 +510,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -481,6 +545,8 @@
           <para
             >Gets the number of elements contained in the <see
              cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+
+            
 
             
 
@@ -525,6 +591,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -538,8 +606,12 @@
 
             
 
+            
+
              object that can be used to iterate through an <see
              cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+
+            
 
             
 
@@ -583,6 +655,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -591,6 +665,8 @@
           <para
             >The index of <paramref
              name="value" />
+
+            
 
             
 
@@ -606,6 +682,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
@@ -613,8 +691,12 @@
 
           
 
+          
+
            object to locate in the <see
            cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+
+          
 
           
 
@@ -658,8 +740,12 @@
 
             
 
+            
+
              object into the <see
              cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+
+            
 
             
 
@@ -675,8 +761,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="value" />
+
+          
 
           
 
@@ -691,6 +781,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
@@ -698,8 +790,12 @@
 
           
 
+          
+
            object to insert into the <see
            cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+
+          
 
           
 
@@ -733,6 +829,8 @@
           <para
             >Gets a value that indicates whether the <see
              cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+
+            
 
             
 
@@ -772,6 +870,8 @@
 
             
 
+            
+
              object is read-only.</para
           >
         </summary>
@@ -797,6 +897,8 @@
           <para
             >Gets a value that indicates whether access to the <see
              cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+
+            
 
             
 
@@ -840,6 +942,8 @@
 
             
 
+            
+
              object at the specified index.</para
           >
         </summary>
@@ -848,6 +952,8 @@
           <para
             >The <see
              cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+
+            
 
             
 
@@ -863,8 +969,12 @@
 
           
 
+          
+
           The index of the <see
            cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+
+          
 
           
 
@@ -935,8 +1045,12 @@
 
             
 
+            
+
              object from the <see
              cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+
+            
 
             
 
@@ -952,6 +1066,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
 
@@ -959,8 +1075,12 @@
 
           
 
+          
+
            object to remove from the <see
            cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+
+          
 
           
 
@@ -1000,6 +1120,8 @@
 
             
 
+            
+
              object at the specified index.</para
           >
         </summary>
@@ -1010,8 +1132,12 @@
 
           
 
+          
+
           The zero-based index of the <see
            cref="T:System.Security.Cryptography.Xml.EncryptionProperty" />
+
+          
 
           
 
@@ -1041,6 +1167,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Security.Cryptography.Xml.EncryptionPropertyCollection" />
+
+            
 
             
 
@@ -1080,6 +1208,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1094,6 +1224,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -1101,8 +1233,12 @@
 
           
 
+          
+
            to add to the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -1141,6 +1277,8 @@
 
             
 
+            
+
              contains a specific value.</para
           >
         </summary>
@@ -1154,8 +1292,12 @@
 
             
 
+            
+
              is found in the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1171,6 +1313,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -1178,8 +1322,12 @@
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -1218,6 +1366,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1226,6 +1376,8 @@
           <para
             >The index of <paramref
              name="value" />
+
+            
 
             
 
@@ -1241,6 +1393,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -1248,8 +1402,12 @@
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -1289,6 +1447,8 @@
 
             
 
+            
+
              at the specified index.</para
           >
         </summary>
@@ -1299,8 +1459,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="value" />
+
+          
 
           
 
@@ -1315,6 +1479,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -1322,8 +1488,12 @@
 
           
 
+          
+
            to insert into the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -1389,11 +1559,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1406,8 +1580,12 @@
 
           
 
+          
+
            to remove from the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 

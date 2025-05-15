@@ -24,6 +24,8 @@
 
         
 
+        
+
          class is the base class for objects that represent directories in a virtual file system. Typically, you would implement a descendent of the <see
          cref="T:System.Web.Hosting.VirtualDirectory" />
 
@@ -31,8 +33,12 @@
 
         
 
+        
+
          class for each <see
          cref="T:System.Web.Hosting.VirtualPathProvider" />
+
+        
 
         
 
@@ -66,11 +72,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -105,8 +115,12 @@
 
             
 
+            
+
              property contains both <see
              cref="T:System.Web.Hosting.VirtualFile" />
+
+            
 
             
 
@@ -119,8 +133,12 @@
 
             
 
+            
+
              objects that represent the files and directories contained in this virtual directory. To return only the <see
              cref="T:System.Web.Hosting.VirtualFile" />
+
+            
 
             
 
@@ -133,6 +151,8 @@
 
             
 
+            
+
              property. To return only the <see
              cref="T:System.Web.Hosting.VirtualDirectory" />
 
@@ -140,8 +160,12 @@
 
             
 
+            
+
              objects, use the <see
              cref="P:System.Web.Hosting.VirtualDirectory.Directories" />
+
+            
 
             
 
@@ -181,8 +205,12 @@
 
             
 
+            
+
              property contains <see
              cref="T:System.Web.Hosting.VirtualDirectory" />
+
+            
 
             
 
@@ -195,8 +223,12 @@
 
             
 
+            
+
              objects, use the <see
              cref="P:System.Web.Hosting.VirtualDirectory.Files" />
+
+            
 
             
 
@@ -209,6 +241,8 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.Hosting.VirtualDirectory" />
 
@@ -216,8 +250,12 @@
 
             
 
+            
+
              objects, use the <see
              cref="P:System.Web.Hosting.VirtualDirectory.Children" />
+
+            
 
             
 
@@ -257,8 +295,12 @@
 
             
 
+            
+
              property contains <see
              cref="T:System.Web.Hosting.VirtualFile" />
+
+            
 
             
 
@@ -271,8 +313,12 @@
 
             
 
+            
+
              objects, use the <see
              cref="P:System.Web.Hosting.VirtualDirectory.Directories" />
+
+            
 
             
 
@@ -285,6 +331,8 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.Hosting.VirtualDirectory" />
 
@@ -292,8 +340,12 @@
 
             
 
+            
+
              objects, use the <see
              cref="P:System.Web.Hosting.VirtualDirectory.Children" />
+
+            
 
             
 

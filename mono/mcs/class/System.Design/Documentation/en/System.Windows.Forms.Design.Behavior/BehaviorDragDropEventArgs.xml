@@ -24,8 +24,12 @@
 
         
 
+        
+
          and <see
          cref="E:System.Windows.Forms.Design.Behavior.BehaviorService.EndDrag" />
+
+        
 
         
 
@@ -60,11 +64,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="dragComponents">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -77,8 +85,12 @@
 
           
 
+          
+
            of <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -108,6 +120,8 @@
           <para
             >Gets the list of <see
              cref="T:System.ComponentModel.IComponent" />
+
+            
 
             
 

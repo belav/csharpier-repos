@@ -8,12 +8,14 @@
 
     
 
+    
+
     ). User-defined operator implementations always take precedence over predefined operator implementations: Only when no applicable user-defined operator implementations exist will the predefined operator implementations be considered. </paragraph
   >
   <paragraph
     >The overloadable unary operators are: <code_example
     >
-<![CDATA[
+      <![CDATA[
 +   -   !   ~   ++   --   true   false  
 ]]>
     </code_example>
@@ -27,8 +29,12 @@
 
       
 
+      
+
       ) and expressions involving the conditional (<hyperlink
       >14.12</hyperlink>
+
+      
 
       
 
@@ -41,13 +47,15 @@
 
       
 
+      
+
       ). end note]</note
     >
   </paragraph>
   <paragraph
     >The overloadable binary operators are: <code_example
     >
-<![CDATA[
+      <![CDATA[
 +   -   *   /   %   &   |   ^   <<   >>   ==   !=   >   <   >=   <=  
 ]]>
     </code_example>
@@ -56,6 +64,8 @@
   <paragraph
     >When a binary operator is overloaded, the corresponding assignment operator, if any, is also implicitly overloaded. For example, an overload of operator * is also an overload of operator *=. This is described further in <hyperlink
     >14.13</hyperlink>
+
+    
 
     
 
@@ -71,11 +81,15 @@
 
     
 
+    
+
     ). </paragraph
   >
   <paragraph
     >Element access, such as a[x], is not considered an overloadable operator. Instead, user-defined indexing is supported through indexers (<hyperlink
     >17.8</hyperlink>
+
+    
 
     
 
@@ -88,6 +102,8 @@
 
       >[Note: For an example of overloading the ++ and  --operators see <hyperlink
       >17.9.1</hyperlink>
+
+      
 
       
 
@@ -114,6 +130,8 @@
 
       
 
+      
+
       , and is always left-associative. end example]</example
     >
   </paragraph>
@@ -124,6 +142,8 @@
     <note
       >For example, an implementation of operator == should compare the two operands for equality and return an appropriate <keyword
       >bool</keyword>
+
+      
 
       
 
@@ -140,8 +160,12 @@
 
     
 
+    
+
      through <hyperlink
     >14.13</hyperlink>
+
+    
 
     
 

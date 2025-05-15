@@ -43,6 +43,8 @@
 
         
 
+        
+
          is an <see
          cref="T:System.Collections.Generic.IEnumerable`1" />
 
@@ -50,8 +52,12 @@
 
         
 
+        
+
          that additionally has a key. The key represents the attribute that is common to each value in the <see
          cref="T:System.Linq.IGrouping`2" />
+
+        
 
         
 
@@ -67,8 +73,12 @@
 
         
 
+        
+
          are accessed much as the elements of an <see
          cref="T:System.Collections.Generic.IEnumerable`1" />
+
+        
 
         
 
@@ -81,8 +91,12 @@
 
         
 
+        
+
          object. The Example section contains a code example that shows you how to access both the key and the values of an <see
          cref="T:System.Linq.IGrouping`2" />
+
+        
 
         
 
@@ -98,6 +112,8 @@
 
         
 
+        
+
          type is used by the <see
          cref="Overload:System.Linq.Enumerable.GroupBy" />
 
@@ -105,8 +121,12 @@
 
         
 
+        
+
          standard query operator methods, which return a sequence of elements of type <see
          cref="T:System.Linq.IGrouping`2" />
+
+        
 
         
 
@@ -144,8 +164,12 @@
 
             
 
+            
+
              represents the attribute that is common to each value in the <see
              cref="T:System.Linq.IGrouping`2" />
+
+            
 
             
 
@@ -159,6 +183,8 @@
           <para
             >Gets the key of the <see
              cref="T:System.Linq.IGrouping`2" />
+
+            
 
             
 

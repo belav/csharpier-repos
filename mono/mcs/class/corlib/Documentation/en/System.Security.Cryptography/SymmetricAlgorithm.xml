@@ -41,8 +41,12 @@
 
         
 
+        
+
          class use a chaining mode called cipher block chaining (CBC), which requires a key (<see
          cref="P:System.Security.Cryptography.SymmetricAlgorithm.Key" />
+
+        
 
         
 
@@ -55,8 +59,12 @@
 
         
 
+        
+
         ) to perform cryptographic transformations on data.  To decrypt data that was encrypted using one of the <see
          cref="T:System.Security.Cryptography.SymmetricAlgorithm" />
+
+        
 
         
 
@@ -69,8 +77,12 @@
 
         
 
+        
+
          property and the <see
          cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />
+
+        
 
         
 
@@ -85,8 +97,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Security.Cryptography.DESCryptoServiceProvider" />
+
+        
 
         
 
@@ -99,8 +115,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Security.Cryptography.TripleDESCryptoServiceProvider" />
+
+        
 
         
 
@@ -116,11 +136,15 @@
 
         
 
+        
+
          method on the object to zero out any sensitive data within the object before it is released. Note that garbage collection does not zero out the contents of collected objects but simply marks the memory as available for reallocation. Thus the data contained within a garbage collected object may still be present in the memory heap in unallocated memory. In the case of cryptographic objects, this data could contain sensitive information such as key data or a block of plain text. </para
       >
       <para
         >All cryptographic classes in the .NET Framework that hold sensitive data implement a Clear method. When called, the Clear method overwrites all sensitive data within the object with zeros and then releases the object so that it can be safely garbage collected. When the object has been zeroed and released, you should then call the Dispose method with the <paramref
          name="disposing" />
+
+        
 
         
 
@@ -159,6 +183,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.SymmetricAlgorithm" />
+
+            
 
             
 
@@ -218,6 +244,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -254,11 +282,15 @@
 
             
 
+            
+
              method on the object to zero out any sensitive data within the object before it is released. Note that garbage collection does not zero out the contents of collected objects but simply marks the memory as available for reallocation. Thus the data contained within a garbage collected object may still be present in the memory heap in unallocated memory. In the case of cryptographic objects, this data could contain sensitive information such as key data or a block of plain text. </para
           >
           <para
             >All cryptographic classes in the .NET Framework that hold sensitive data implement a Clear method. When called, the Clear method overwrites all sensitive data within the object with zeros and then releases the object so that it can be safely garbage collected. When the object has been zeroed and released, you should then call the Dispose method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -272,6 +304,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.Security.Cryptography.SymmetricAlgorithm" />
+
+            
 
             
 
@@ -351,8 +385,12 @@
 
           
 
+          
+
           The name of the specific implementation of the <see
            cref="T:System.Security.Cryptography.SymmetricAlgorithm" />
+
+          
 
           
 
@@ -392,6 +430,8 @@
 
             
 
+            
+
              overload with the same signature.</para
           >
         </remarks>
@@ -405,8 +445,12 @@
 
             
 
+            
+
              property and initialization vector (<see
              cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />
+
+            
 
             
 
@@ -454,6 +498,8 @@
 
             
 
+            
+
              overload with the same parameters.</para
           >
         </remarks>
@@ -467,8 +513,12 @@
 
             
 
+            
+
              property and initialization vector (<see
              cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />
+
+            
 
             
 
@@ -488,10 +538,14 @@
 
           
 
+          
+
           The secret key to use for the symmetric algorithm. </param
         >
         <param name="rgbIV">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -531,8 +585,12 @@
 
             
 
+            
+
              property is null, the <see
              cref="M:System.Security.Cryptography.SymmetricAlgorithm.GenerateKey" />
+
+            
 
             
 
@@ -545,8 +603,12 @@
 
             
 
+            
+
             . If the current <see
              cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />
+
+            
 
             
 
@@ -559,8 +621,12 @@
 
             
 
+            
+
              method is called to create a new random <see
              cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />
+
+            
 
             
 
@@ -571,6 +637,8 @@
           <para
             >Use the <see
              cref="M:System.Security.Cryptography.SymmetricAlgorithm.CreateDecryptor" />
+
+            
 
             
 
@@ -589,8 +657,12 @@
 
             
 
+            
+
              property and initialization vector (<see
              cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />
+
+            
 
             
 
@@ -638,6 +710,8 @@
 
             
 
+            
+
              overload with the same parameters to decrypt the result of this method.</para
           >
         </remarks>
@@ -651,8 +725,12 @@
 
             
 
+            
+
              property and initialization vector (<see
              cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />
+
+            
 
             
 
@@ -672,10 +750,14 @@
 
           
 
+          
+
           The secret key to use for the symmetric algorithm. </param
         >
         <param name="rgbIV">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -710,8 +792,12 @@
 
             
 
+            
+
             . The Dispose method leaves the <see
              cref="T:System.Security.Cryptography.SymmetricAlgorithm" />
+
+            
 
             
 
@@ -724,8 +810,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Security.Cryptography.SymmetricAlgorithm" />
+
+            
 
             
 
@@ -743,10 +833,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -763,8 +857,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Security.Cryptography.SymmetricAlgorithm" />
+
+              
 
               
 
@@ -779,6 +877,8 @@
           <para
             >Releases all resources used by the current instance of the <see
              cref="T:System.Security.Cryptography.SymmetricAlgorithm" />
+
+            
 
             
 
@@ -818,8 +918,12 @@
 
             
 
+            
+
              parameter set to true. Finalize invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -835,8 +939,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Security.Cryptography.SymmetricAlgorithm" />
+
+            
 
             
 
@@ -855,11 +963,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -918,6 +1030,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -970,6 +1084,8 @@
 
             
 
+            
+
              method to reuse a symmetric algorithm instance with a different initialization vector.</para
           >
         </remarks>
@@ -978,6 +1094,8 @@
           <para
             >When overridden in a derived class, generates a random initialization vector (<see
              cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />
+
+            
 
             
 
@@ -1015,6 +1133,8 @@
 
             
 
+            
+
              method to reuse a symmetric algorithm instance with a different key.</para
           >
         </remarks>
@@ -1023,6 +1143,8 @@
           <para
             >When overridden in a derived class, generates a random key (<see
              cref="P:System.Security.Cryptography.SymmetricAlgorithm.Key" />
+
+            
 
             
 
@@ -1057,8 +1179,12 @@
 
             
 
+            
+
              property is automatically set to a new random value whenever you create a new instance of one of the <see
              cref="T:System.Security.Cryptography.SymmetricAlgorithm" />
+
+            
 
             
 
@@ -1071,6 +1197,8 @@
 
             
 
+            
+
              method.  The size of the <see
              cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />
 
@@ -1078,8 +1206,12 @@
 
             
 
+            
+
              property must be the same as the <see
              cref="P:System.Security.Cryptography.SymmetricAlgorithm.BlockSize" />
+
+            
 
             
 
@@ -1095,8 +1227,12 @@
 
             
 
+            
+
              class use a chaining mode called cipher block chaining (CBC), which requires a key and an initialization vector to perform cryptographic transformations on data.  To decrypt data that was encrypted using one of the <see
              cref="T:System.Security.Cryptography.SymmetricAlgorithm" />
+
+            
 
             
 
@@ -1109,8 +1245,12 @@
 
             
 
+            
+
              property and <see
              cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />
+
+            
 
             
 
@@ -1126,6 +1266,8 @@
 
             
 
+            
+
             , a simple block cipher that does not use an initialization vector will encrypt the same input block of plain text into the same output block of cipher text. If you have duplicate blocks within your plain text stream, you will have duplicate blocks within your cipher text stream. If unauthorized users know anything about the structure of a block of your plain text, they can use that information to decipher the known cipher text block and possibly recover your key. To combat this problem, information from the previous block is mixed into the process of encrypting the next block. Thus, the output of two identical plain text blocks is different. Because this technique uses the previous block to encrypt the next block, an initialization vector is needed to encrypt the first block of data. </para
           >
         </remarks>
@@ -1134,6 +1276,8 @@
           <para
             >Gets or sets the initialization vector (<see
              cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />
+
+            
 
             
 
@@ -1168,6 +1312,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -1176,6 +1322,8 @@
           <para
             >Represents the initialization vector (<see
              cref="P:System.Security.Cryptography.SymmetricAlgorithm.IV" />
+
+            
 
             
 
@@ -1210,11 +1358,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >If this property is null when it is used, the <see
              cref="M:System.Security.Cryptography.SymmetricAlgorithm.GenerateKey" />
+
+            
 
             
 
@@ -1253,6 +1405,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -1286,11 +1440,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >This field is accessed through the <see
              cref="P:System.Security.Cryptography.SymmetricAlgorithm.KeySize" />
+
+            
 
             
 
@@ -1329,11 +1487,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >This field is accessed through the <see
              cref="P:System.Security.Cryptography.SymmetricAlgorithm.Key" />
+
+            
 
             
 
@@ -1409,6 +1571,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -1479,6 +1643,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -1513,6 +1679,8 @@
           <para
             >See <see
              cref="T:System.Security.Cryptography.CipherMode" />
+
+            
 
             
 
@@ -1557,11 +1725,15 @@
 
             
 
+            
+
              enumeration for a description of specific modes.</para
           >
           <para
             >This field is accessed through the <see
              cref="P:System.Security.Cryptography.SymmetricAlgorithm.Mode" />
+
+            
 
             
 
@@ -1606,6 +1778,8 @@
 
             
 
+            
+
              enumeration for a description of specific modes.</para
           >
         </remarks>
@@ -1645,11 +1819,15 @@
 
             
 
+            
+
              enumeration for a description of specific modes.</para
           >
           <para
             >This field is accessed through the <see
              cref="P:System.Security.Cryptography.SymmetricAlgorithm.Padding" />
+
+            
 
             
 
@@ -1678,6 +1856,8 @@
           <para
             >Releases the unmanaged resources used by the <see
              cref="T:System.Security.Cryptography.SymmetricAlgorithm" />
+
+            
 
             
 
@@ -1722,6 +1902,8 @@
         </returns>
         <param name="bitLength">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

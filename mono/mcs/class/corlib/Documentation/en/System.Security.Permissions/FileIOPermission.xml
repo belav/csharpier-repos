@@ -53,6 +53,8 @@
 
         
 
+        
+
         : </para
       >
       <list type="bullet">
@@ -78,8 +80,12 @@
 
           
 
+          
+
            access to an assembly is similar to granting it full trust. If an application should not write to the file system, it should not have <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" />
+
+          
 
           
 
@@ -96,8 +102,12 @@
 
         
 
+        
+
          describes protected operations on files and folders. The <see
          cref="T:System.IO.File" />
+
+        
 
         
 
@@ -107,6 +117,8 @@
       >
       <para>
         <see cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+
+        
 
         
 
@@ -124,8 +136,12 @@
 
           
 
+          
+
            method to prevent inadvertent access to system resources by trusted code. <see
            cref="M:System.Security.CodeAccessPermission.Deny" />
+
+          
 
           
 
@@ -137,6 +153,8 @@
               >How To: Run Partially Trusted Code in a Sandbox</a
             >
           </format>
+
+          
 
           
 
@@ -183,8 +201,12 @@
 
           
 
+          
+
            is not a valid <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -206,6 +228,8 @@
 
             
 
+            
+
              class with fully restricted or unrestricted permission as specified.</para
           >
         </summary>
@@ -216,8 +240,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -261,8 +289,12 @@
 
             
 
+            
+
              specifies values not defined in <see
              cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+
+            
 
             
 
@@ -277,10 +309,14 @@
 
             
 
+            
+
              contains one or more characters that are invalid for use in files or directory names. </para
           >
           <para>
             <paramref name="path" />
+
+            
 
             
 
@@ -299,8 +335,12 @@
 
             
 
+            
+
              values to be specified for the specified file or directory. Use the <see
              cref="M:System.Security.Permissions.FileIOPermission.AddPathList(System.Security.Permissions.FileIOPermissionAccess,System.String)" />
+
+            
 
             
 
@@ -319,11 +359,15 @@
 
             
 
+            
+
              class with the specified access to the designated file or directory.</para
           >
         </summary>
         <param name="access">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -336,10 +380,14 @@
 
           
 
+          
+
            enumeration values. </param
         >
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -380,8 +428,12 @@
 
             
 
+            
+
              value to be specified for the specified files and directories. Use the <see
              cref="M:System.Security.Permissions.FileIOPermission.AddPathList(System.Security.Permissions.FileIOPermissionAccess,System.String)" />
+
+            
 
             
 
@@ -400,11 +452,15 @@
 
             
 
+            
+
              class with the specified access to the designated files and directories.</para
           >
         </summary>
         <param name="access">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -417,10 +473,14 @@
 
           
 
+          
+
            enumeration values. </param
         >
         <param name="pathList">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -461,8 +521,12 @@
 
             
 
+            
+
              value to be specified for the specified file or directories. Use the <see
              cref="M:System.Security.Permissions.FileIOPermission.AddPathList(System.Security.Permissions.FileIOPermissionAccess,System.String)" />
+
+            
 
             
 
@@ -478,8 +542,12 @@
 
             
 
+            
+
              parameter specifies whether the access control list (ACL) for the file or directory specified by <paramref
              name="path" />
+
+            
 
             
 
@@ -501,6 +569,8 @@
 
             
 
+            
+
              class with the specified access to the designated file or directory and the specified access rights to file control information.</para
           >
         </summary>
@@ -511,8 +581,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+
+          
 
           
 
@@ -527,8 +601,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Security.AccessControl.AccessControlActions" />
+
+          
 
           
 
@@ -538,6 +616,8 @@
         >
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -578,8 +658,12 @@
 
             
 
+            
+
              value to be specified for the specified files and directories. Use the <see
              cref="M:System.Security.Permissions.FileIOPermission.AddPathList(System.Security.Permissions.FileIOPermissionAccess,System.String)" />
+
+            
 
             
 
@@ -595,8 +679,12 @@
 
             
 
+            
+
              parameter specifies whether the access control list (ACL) for the file or directory specified by <paramref
              name="path" />
+
+            
 
             
 
@@ -618,6 +706,8 @@
 
             
 
+            
+
              class with the specified access to the designated files and directories and the specified access rights to file control information.</para
           >
         </summary>
@@ -628,8 +718,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+
+          
 
           
 
@@ -644,8 +738,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Security.AccessControl.AccessControlActions" />
+
+          
 
           
 
@@ -655,6 +753,8 @@
         >
         <param name="pathList">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -702,8 +802,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+
+          
 
           
 
@@ -713,6 +817,8 @@
         >
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -760,8 +866,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+
+          
 
           
 
@@ -771,6 +881,8 @@
         >
         <param name="pathList">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -811,6 +923,8 @@
 
             
 
+            
+
              value can be checked for using a bitwise AND operation.</para
           >
         </remarks>
@@ -846,6 +960,8 @@
           <para
             >An individual <see
              cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+
+            
 
             
 
@@ -930,6 +1046,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -943,8 +1061,12 @@
 
             
 
+            
+
              object is equal to the current <see
              cref="T:System.Security.Permissions.FileIOPermission" />
+
+            
 
             
 
@@ -963,8 +1085,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Security.Permissions.FileIOPermission" />
+
+            
 
             
 
@@ -980,6 +1106,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Permissions.FileIOPermission" />
 
@@ -987,8 +1115,12 @@
 
           
 
+          
+
            object to compare with the current <see
            cref="T:System.Security.Permissions.FileIOPermission" />
+
+          
 
           
 
@@ -1034,12 +1166,16 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
             <para
               > For the XML encoding for this class, see the <see
                cref="T:System.Security.Permissions.FileIOPermission" />
+
+              
 
               
 
@@ -1056,6 +1192,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -1067,8 +1205,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1084,8 +1226,12 @@
 
             
 
+            
+
              does not contain the encoding for a <see
              cref="T:System.Security.Permissions.FileIOPermission" />
+
+            
 
             
 
@@ -1101,6 +1247,8 @@
 
             
 
+            
+
              is not valid.</para
           >
         </exception>
@@ -1110,6 +1258,8 @@
         </summary>
         <param name="esd">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1152,6 +1302,8 @@
 
             
 
+            
+
              objects.</para
           >
         </remarks>
@@ -1165,6 +1317,8 @@
 
             
 
+            
+
              object that is suitable for use in hashing algorithms and data structures such as a hash table.</para
           >
         </summary>
@@ -1173,6 +1327,8 @@
           <para
             >A hash code for the current <see
              cref="T:System.Security.Permissions.FileIOPermission" />
+
+            
 
             
 
@@ -1217,8 +1373,12 @@
 
               
 
+              
+
                parameter is limited to the values of <see
                cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+
+              
 
               
 
@@ -1231,8 +1391,12 @@
 
               
 
+              
+
               , <see
                cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" />
+
+              
 
               
 
@@ -1245,8 +1409,12 @@
 
               
 
+              
+
               , and <see
                cref="F:System.Security.Permissions.FileIOPermissionAccess.PathDiscovery" />
+
+              
 
               
 
@@ -1259,6 +1427,8 @@
 
               
 
+              
+
                do not include <see
                cref="F:System.Security.Permissions.FileIOPermissionAccess.NoAccess" />
 
@@ -1266,8 +1436,12 @@
 
               
 
+              
+
                and <see
                cref="F:System.Security.Permissions.FileIOPermissionAccess.AllAccess" />
+
+              
 
               
 
@@ -1287,6 +1461,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1295,6 +1471,8 @@
           <para
             >An array containing the paths of the files and directories to which access specified by the <paramref
              name="access" />
+
+            
 
             
 
@@ -1310,8 +1488,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+
+          
 
           
 
@@ -1354,6 +1536,8 @@
 
           
 
+          
+
            is not <see
            langword="null" />
 
@@ -1361,8 +1545,12 @@
 
           
 
+          
+
            and is not of type <see
            cref="T:System.Security.Permissions.FileIOPermission" />
+
+          
 
           
 
@@ -1384,6 +1572,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1427,6 +1617,8 @@
 
           
 
+          
+
            is not <see
            langword="null" />
 
@@ -1434,8 +1626,12 @@
 
           
 
+          
+
            and is not of type <see
            cref="T:System.Security.Permissions.FileIOPermission" />
+
+          
 
           
 
@@ -1457,6 +1653,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1531,6 +1729,8 @@
 
             
 
+            
+
             .</para
           >
           <para>code reference: System.Security.Permissions.FileIOPermission#12</para>
@@ -1548,8 +1748,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+
+          
 
           
 
@@ -1559,6 +1763,8 @@
         >
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1601,6 +1807,8 @@
 
             
 
+            
+
             .</para
           >
           <para>This access will not be overwritten by the following code because the access types are not the same.</para>
@@ -1617,8 +1825,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Security.Permissions.FileIOPermissionAccess" />
+
+          
 
           
 
@@ -1628,6 +1840,8 @@
         >
         <param name="pathList">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1693,12 +1907,16 @@
 
               
 
+              
+
                class
  page.</para
             >
             <para
               >This method overrides <see
                cref="M:System.Security.CodeAccessPermission.ToXml" />
+
+              
 
               
 
@@ -1752,8 +1970,12 @@
 
           
 
+          
+
            is not <see
            langword="null" />
+
+          
 
           
 
@@ -1766,6 +1988,8 @@
 
           
 
+          
+
            .</exception
         >
         <remarks>
@@ -1773,6 +1997,8 @@
           <para
             >The result of a call to <see
              cref="M:System.Security.Permissions.FileIOPermission.Union(System.Security.IPermission)" />
+
+            
 
             
 
@@ -1791,6 +2017,8 @@
         </returns>
         <param name="other">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

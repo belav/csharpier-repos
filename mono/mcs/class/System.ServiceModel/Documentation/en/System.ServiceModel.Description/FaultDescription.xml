@@ -29,6 +29,8 @@
 
         
 
+        
+
          class represents a SOAP fault in a service contract and is used to create a runtime when a indigo1 service or client application is started.</para
       >
     </remarks>
@@ -63,8 +65,12 @@
 
             
 
+            
+
              object using the specified <paramref
              name="action" />
+
+            
 
             
 
@@ -78,6 +84,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Description.FaultDescription" />
+
+            
 
             
 
@@ -105,6 +113,8 @@
           <para
             >Use the <see
              cref="P:System.ServiceModel.Description.FaultDescription.Action" />
+
+            
 
             
 
@@ -141,6 +151,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -172,6 +184,8 @@
 
             
 
+            
+
              property indicates whether the <see
              cref="P:System.ServiceModel.Description.FaultDescription.ProtectionLevel" />
 
@@ -179,8 +193,12 @@
 
             
 
+            
+
              property has been set for the <see
              cref="T:System.ServiceModel.Description.FaultDescription" />
+
+            
 
             
 
@@ -256,6 +274,8 @@
           <para
             >Use the <see
              cref="P:System.ServiceModel.Description.FaultDescription.ProtectionLevel" />
+
+            
 
             
 

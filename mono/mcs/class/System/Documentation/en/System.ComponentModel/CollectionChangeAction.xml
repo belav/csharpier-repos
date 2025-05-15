@@ -28,6 +28,8 @@
 
         
 
+        
+
          class uses this enumeration.</para
       >
     </remarks>
@@ -84,6 +86,8 @@
           <para
             >Specifies that the entire collection has changed. This is caused by using methods that manipulate the entire collection, such as <see
              cref="M:System.Collections.CollectionBase.Clear" />
+
+            
 
             
 

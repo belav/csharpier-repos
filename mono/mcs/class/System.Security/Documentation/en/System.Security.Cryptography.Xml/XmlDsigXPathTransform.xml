@@ -27,6 +27,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -44,11 +46,15 @@
 
         
 
+        
+
          class allows you to address an XML document using the XPath language.  This class uses an XPath expression to select the XML nodes you want to sign or encrypt while removing all others from either cryptographic operation.</para
       >
       <para
         >Use the <see
          cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+
+        
 
         
 
@@ -61,8 +67,12 @@
 
         
 
+        
+
          class to the value of an XPath transform string, see the <see
          cref="M:System.Security.Cryptography.Xml.XmlDsigXPathTransform.LoadInnerXml(System.Xml.XmlNodeList)" />
+
+        
 
         
 
@@ -78,8 +88,12 @@
 
         
 
+        
+
          class is defined by the <see
          cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigXPathTransformUrl" />
+
+        
 
         
 
@@ -121,6 +135,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -157,6 +173,8 @@
 
             
 
+            
+
              object that are suitable to be included as subelements of an XMLDSIG &lt;Transform&gt; element.</para
           >
         </summary>
@@ -165,6 +183,8 @@
           <para
             >A list of the XML nodes that represent the transform-specific content needed to describe the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+
+            
 
             
 
@@ -202,6 +222,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -212,8 +234,12 @@
 
             
 
+            
+
              method to retrieve a <see
              cref="T:System.Xml.XmlNodeList" />
+
+            
 
             
 
@@ -232,6 +258,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -240,6 +268,8 @@
           <para
             >The output of the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+
+            
 
             
 
@@ -279,6 +309,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -289,8 +321,12 @@
 
             
 
+            
+
              method to retrieve a <see
              cref="T:System.Xml.XmlNodeList" />
+
+            
 
             
 
@@ -309,8 +345,12 @@
 
             
 
+            
+
              object of type <see
              cref="T:System.Xml.XmlNodeList" />
+
+            
 
             
 
@@ -329,8 +369,12 @@
 
             
 
+            
+
              object of type <see
              cref="T:System.Xml.XmlNodeList" />
+
+            
 
             
 
@@ -346,8 +390,12 @@
 
           
 
+          
+
           The type of the output to return. <see
            cref="T:System.Xml.XmlNodeList" />
+
+          
 
           
 
@@ -385,8 +433,12 @@
 
             
 
+            
+
              are <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -399,8 +451,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Xml.XmlNodeList" />
+
+            
 
             
 
@@ -419,8 +475,12 @@
 
             
 
+            
+
              method of the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+
+            
 
             
 
@@ -463,8 +523,12 @@
 
             
 
+            
+
              method to initialize the <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+
+            
 
             
 
@@ -475,6 +539,8 @@
           <para
             >To initialize the <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+
+            
 
             
 
@@ -492,8 +558,12 @@
 
                 
 
+                
+
                  class and set the <see
                  cref="P:System.Xml.XmlElement.InnerText" />
+
+                
 
                 
 
@@ -511,8 +581,12 @@
 
                 
 
+                
+
                  method to create an <see
                  cref="T:System.Xml.XmlNodeList" />
+
+                
 
                 
 
@@ -530,6 +604,8 @@
 
                 
 
+                
+
                  class and pass the previously created <see
                  cref="T:System.Xml.XmlNodeList" />
 
@@ -537,8 +613,12 @@
 
                 
 
+                
+
                  object to the <see
                  cref="M:System.Security.Cryptography.Xml.XmlDsigXPathTransform.LoadInnerXml(System.Xml.XmlNodeList)" />
+
+                
 
                 
 
@@ -559,8 +639,12 @@
 
             
 
+            
+
              object as transform-specific content of a &lt;Transform&gt; element and configures the internal state of the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+
+            
 
             
 
@@ -576,6 +660,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlNodeList" />
 
@@ -583,8 +669,12 @@
 
           
 
+          
+
            object to load into the current <see
            cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+
+          
 
           
 
@@ -623,8 +713,12 @@
 
             
 
+            
+
              method to initialize an <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+
+            
 
             
 
@@ -637,8 +731,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Xml.XmlDocument" />
+
+            
 
             
 
@@ -651,8 +749,12 @@
 
             
 
+            
+
              object.  For information about initializing an <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+
+            
 
             
 
@@ -665,11 +767,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >The type of the input object must be one of the types in the <see
              cref="P:System.Security.Cryptography.Xml.XmlDsigXPathTransform.InputTypes" />
+
+            
 
             
 
@@ -688,6 +794,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -698,8 +806,12 @@
 
           
 
+          
+
           The input to load into the current <see
            cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+
+          
 
           
 
@@ -739,8 +851,12 @@
 
             
 
+            
+
              is the only valid output type for <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+
+            
 
             
 
@@ -759,8 +875,12 @@
 
             
 
+            
+
              methods of the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigXPathTransform" />
+
+            
 
             
 

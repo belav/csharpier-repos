@@ -38,6 +38,8 @@
 
         
 
+        
+
          defines a surrogate pair as a coded character representation for a single abstract character that consists of a sequence of two code units, where the first unit of the pair is a high surrogate and the second is a low surrogate. The Unicode Standard defines a combining character sequence as a combination of a base character and one or more combining characters. A surrogate pair can represent a base character or a combining character. </para
       >
       <para>Text element enumerators are intended to be used only to read data in the string. Enumerators cannot be used to modify the underlying string.</para>
@@ -46,6 +48,8 @@
       <para
         >The enumerator is in an invalid state if it is positioned before the first text element in the string or after the last text element in the string. Whenever the enumerator is in an invalid state, calling <see
          cref="P:System.Globalization.TextElementEnumerator.Current" />
+
+        
 
         
 
@@ -61,8 +65,12 @@
 
         
 
+        
+
          also brings the enumerator back to this position. Therefore, after an enumerator is created or after a <see
          cref="M:System.Globalization.TextElementEnumerator.Reset" />
+
+        
 
         
 
@@ -75,8 +83,12 @@
 
         
 
+        
+
          must be called to advance the enumerator to the first text element of the string before reading the value of <see
          cref="P:System.Globalization.TextElementEnumerator.Current" />
+
+        
 
         
 
@@ -91,6 +103,8 @@
 
         
 
+        
+
          returns the same object until either <see
          cref="M:System.Globalization.TextElementEnumerator.MoveNext" />
 
@@ -98,8 +112,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.Globalization.TextElementEnumerator.Reset" />
+
+        
 
         
 
@@ -115,6 +133,8 @@
 
         
 
+        
+
          returns false. Calling <see
          cref="P:System.Globalization.TextElementEnumerator.Current" />
 
@@ -122,8 +142,12 @@
 
         
 
+        
+
          throws an exception if the last call to <see
          cref="M:System.Globalization.TextElementEnumerator.MoveNext" />
+
+        
 
         
 
@@ -162,11 +186,15 @@
 
             
 
+            
+
              defines a surrogate pair as a coded character representation for a single abstract character that consists of a sequence of two code units, where the first unit of the pair is a high surrogate and the second is a low surrogate. The Unicode Standard defines a combining character sequence as a combination of a base character and one or more combining characters. A surrogate pair can represent a base character or a combining character. </para
           >
           <para
             >After an enumerator is created or after a <see
              cref="M:System.Globalization.TextElementEnumerator.Reset" />
+
+            
 
             
 
@@ -179,6 +207,8 @@
 
             
 
+            
+
              must be called to advance the enumerator to the first text element of the string before reading the value of <see
              cref="P:System.Globalization.TextElementEnumerator.Current" />
 
@@ -186,8 +216,12 @@
 
             
 
+            
+
             . Otherwise, <see
              cref="P:System.Globalization.TextElementEnumerator.Current" />
+
+            
 
             
 
@@ -202,8 +236,12 @@
 
             
 
+            
+
              also throws an exception if the last call to <see
              cref="M:System.Globalization.TextElementEnumerator.MoveNext" />
+
+            
 
             
 
@@ -218,8 +256,12 @@
 
             
 
+            
+
              does not move the position of the enumerator, and consecutive calls to <see
              cref="P:System.Globalization.TextElementEnumerator.Current" />
+
+            
 
             
 
@@ -232,8 +274,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Globalization.TextElementEnumerator.Reset" />
+
+            
 
             
 
@@ -268,6 +314,8 @@
           <para
             >The .NET Framework defines a text element as a unit of text that is displayed as a single character, that is, a grapheme. A text element can be a base character, a surrogate pair, or a combining character sequence. The <see
              cref="http://go.microsoft.com/fwlink/?linkid=37123">Unicode Standard</see>
+
+            
 
             
 
@@ -310,11 +358,15 @@
 
             
 
+            
+
              defines a surrogate pair as a coded character representation for a single abstract character that consists of a sequence of two code units, where the first unit of the pair is a high surrogate and the second is a low surrogate. The Unicode Standard defines a combining character sequence as a combination of a base character and one or more combining characters. A surrogate pair can represent a base character or a combining character. </para
           >
           <para
             >This method returns the same text element as the <see
              cref="P:System.Globalization.TextElementEnumerator.Current" />
+
+            
 
             
 
@@ -361,6 +413,8 @@
 
             
 
+            
+
              defines a surrogate pair as a coded character representation for a single abstract character that consists of a sequence of two code units, where the first unit of the pair is a high surrogate and the second is a low surrogate. The Unicode Standard defines a combining character sequence as a combination of a base character and one or more combining characters. A surrogate pair can represent a base character or a combining character. </para
           >
           <para
@@ -371,8 +425,12 @@
 
             
 
+            
+
              is called, the enumerator is positioned before the first text element of the string, and the first call to <see
              cref="M:System.Globalization.TextElementEnumerator.MoveNext" />
+
+            
 
             
 
@@ -388,6 +446,8 @@
 
             
 
+            
+
              throws an exception.</para
           >
           <para
@@ -398,8 +458,12 @@
 
             
 
+            
+
              return false until <see
              cref="M:System.Globalization.TextElementEnumerator.Reset" />
+
+            
 
             
 
@@ -446,10 +510,14 @@
 
             
 
+            
+
              defines a surrogate pair as a coded character representation for a single abstract character that consists of a sequence of two code units, where the first unit of the pair is a high surrogate and the second is a low surrogate. The Unicode Standard defines a combining character sequence as a combination of a base character and one or more combining characters. A surrogate pair can represent a base character or a combining character. </para
           >
           <para>
             <see cref="M:System.Globalization.TextElementEnumerator.Reset" />
+
+            
 
             
 
@@ -462,6 +530,8 @@
 
             
 
+            
+
             , <see
              cref="M:System.Globalization.TextElementEnumerator.MoveNext" />
 
@@ -469,8 +539,12 @@
 
             
 
+            
+
              must be called to advance the enumerator to the first text element of the string before reading the value of <see
              cref="P:System.Globalization.TextElementEnumerator.Current" />
+
+            
 
             
 

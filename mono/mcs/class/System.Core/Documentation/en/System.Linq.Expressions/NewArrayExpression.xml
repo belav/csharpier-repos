@@ -33,8 +33,12 @@
 
         
 
+        
+
          depending on the <see
          cref="P:System.Linq.Expressions.Expression.NodeType" />
+
+        
 
         
 
@@ -117,8 +121,12 @@
 
             
 
+            
+
              nodes calls <see
              cref="M:System.Linq.Expressions.ExpressionVisitor.VisitExtension(System.Linq.Expressions.Expression)" />
+
+            
 
             
 
@@ -131,8 +139,12 @@
 
             
 
+            
+
              class. However, it should still support unknown visitors by calling <see
              cref="M:System.Linq.Expressions.ExpressionVisitor.VisitExtension(System.Linq.Expressions.Expression)" />
+
+            
 
             
 
@@ -151,8 +163,12 @@
 
             
 
+            
+
              calls the <see
              cref="M:System.Linq.Expressions.ExpressionVisitor.VisitMethodCall(System.Linq.Expressions.MethodCallExpression)" />
+
+            
 
             
 
@@ -167,6 +183,8 @@
         </returns>
         <param name="visitor">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -206,8 +224,12 @@
 
             
 
+            
+
              property is <see
              cref="F:System.Linq.Expressions.ExpressionType.NewArrayBounds" />
+
+            
 
             
 
@@ -220,8 +242,12 @@
 
             
 
+            
+
              property is <see
              cref="F:System.Linq.Expressions.ExpressionType.NewArrayInit" />
+
+            
 
             
 
@@ -250,6 +276,8 @@
           <para
             >Gets the static type of the expression that this <see
              cref="T:System.Linq.Expressions.Expression" />
+
+            
 
             
 
@@ -299,8 +327,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.NewArrayExpression.Expressions" />
+
+          
 
           
 

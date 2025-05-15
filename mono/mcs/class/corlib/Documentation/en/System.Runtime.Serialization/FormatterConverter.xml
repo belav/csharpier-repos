@@ -42,6 +42,8 @@
 
         
 
+        
+
          interface that uses the <see
          cref="T:System.Convert" />
 
@@ -49,8 +51,12 @@
 
         
 
+        
+
          class and the <see
          cref="T:System.IConvertible" />
+
+        
 
         
 
@@ -82,6 +88,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Serialization.FormatterConverter" />
+
+            
 
             
 
@@ -123,6 +131,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -136,8 +146,12 @@
 
             
 
+            
+
              or null if the <paramref
              name="type" />
+
+            
 
             
 
@@ -153,10 +167,14 @@
 
           
 
+          
+
           The object to convert. </param
         >
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -169,8 +187,12 @@
 
           
 
+          
+
            into which <paramref
            name="value" />
+
+          
 
           
 
@@ -214,6 +236,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -227,8 +251,12 @@
 
             
 
+            
+
             , or null if the <paramref
              name="type" />
+
+            
 
             
 
@@ -244,10 +272,14 @@
 
           
 
+          
+
           The object to convert. </param
         >
         <param name="typeCode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -260,8 +292,12 @@
 
           
 
+          
+
            into which <paramref
            name="value" />
+
+          
 
           
 
@@ -300,8 +336,12 @@
 
             
 
+            
+
             ). To use the current culture or to specify a culture, use the <see
              cref="M:System.Convert.ToBoolean(System.Object)" />
+
+            
 
             
 
@@ -314,6 +354,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.Convert" />
 
@@ -321,8 +363,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.ValueType" />
+
+            
 
             
 
@@ -341,6 +387,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -354,8 +402,12 @@
 
             
 
+            
+
              or null if the <paramref
              name="type" />
+
+            
 
             
 
@@ -366,6 +418,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -404,8 +458,12 @@
 
             
 
+            
+
             ). To use the current culture or to specify a culture, use the <see
              cref="M:System.Convert.ToByte(System.Object)" />
+
+            
 
             
 
@@ -418,6 +476,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.Convert" />
 
@@ -425,8 +485,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.ValueType" />
+
+            
 
             
 
@@ -449,8 +513,12 @@
 
             
 
+            
+
              or null if the <paramref
              name="type" />
+
+            
 
             
 
@@ -461,6 +529,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -499,8 +569,12 @@
 
             
 
+            
+
             ). To use the current culture or to specify a culture, use the <see
              cref="M:System.Convert.ToChar(System.Object)" />
+
+            
 
             
 
@@ -513,6 +587,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.Convert" />
 
@@ -520,8 +596,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.ValueType" />
+
+            
 
             
 
@@ -544,8 +624,12 @@
 
             
 
+            
+
              or null if the <paramref
              name="type" />
+
+            
 
             
 
@@ -556,6 +640,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -594,8 +680,12 @@
 
             
 
+            
+
             ). To use the current culture or to specify a culture, use the <see
              cref="M:System.Convert.ToDateTime(System.DateTime)" />
+
+            
 
             
 
@@ -608,6 +698,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.Convert" />
 
@@ -615,8 +707,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.ValueType" />
+
+            
 
             
 
@@ -635,6 +731,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -648,8 +746,12 @@
 
             
 
+            
+
              or null if the <paramref
              name="type" />
+
+            
 
             
 
@@ -660,6 +762,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -698,8 +802,12 @@
 
             
 
+            
+
             ). To use the current culture or to specify a culture, use the <see
              cref="M:System.Convert.ToDecimal(System.Object)" />
+
+            
 
             
 
@@ -712,6 +820,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.Convert" />
 
@@ -719,8 +829,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.ValueType" />
+
+            
 
             
 
@@ -739,6 +853,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -752,8 +868,12 @@
 
             
 
+            
+
              or null if the <paramref
              name="type" />
+
+            
 
             
 
@@ -764,6 +884,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -802,8 +924,12 @@
 
             
 
+            
+
             ). To use the current culture or to specify a culture, use the <see
              cref="M:System.Convert.ToDouble(System.Object)" />
+
+            
 
             
 
@@ -816,6 +942,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.Convert" />
 
@@ -823,8 +951,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.ValueType" />
+
+            
 
             
 
@@ -847,8 +979,12 @@
 
             
 
+            
+
              or null if the <paramref
              name="type" />
+
+            
 
             
 
@@ -859,6 +995,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -897,8 +1035,12 @@
 
             
 
+            
+
             ). To use the current culture or to specify a culture, use the <see
              cref="M:System.Convert.ToInt16(System.Object)" />
+
+            
 
             
 
@@ -911,6 +1053,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.Convert" />
 
@@ -918,8 +1062,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.ValueType" />
+
+            
 
             
 
@@ -942,8 +1090,12 @@
 
             
 
+            
+
              or null if the <paramref
              name="type" />
+
+            
 
             
 
@@ -954,6 +1106,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -992,8 +1146,12 @@
 
             
 
+            
+
             ). To use the current culture or to specify a culture, use the <see
              cref="M:System.Convert.ToInt32(System.Object)" />
+
+            
 
             
 
@@ -1006,6 +1164,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.Convert" />
 
@@ -1013,8 +1173,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.ValueType" />
+
+            
 
             
 
@@ -1037,8 +1201,12 @@
 
             
 
+            
+
              or null if the <paramref
              name="type" />
+
+            
 
             
 
@@ -1049,6 +1217,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1087,8 +1257,12 @@
 
             
 
+            
+
             ). To use the current culture or to specify a culture, use the <see
              cref="M:System.Convert.ToInt64(System.Object)" />
+
+            
 
             
 
@@ -1101,6 +1275,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.Convert" />
 
@@ -1108,8 +1284,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.ValueType" />
+
+            
 
             
 
@@ -1132,8 +1312,12 @@
 
             
 
+            
+
              or null if the <paramref
              name="type" />
+
+            
 
             
 
@@ -1144,6 +1328,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1187,8 +1373,12 @@
 
             
 
+            
+
             ). To use the current culture or to specify a culture, use the <see
              cref="M:System.Convert.ToSByte(System.Object)" />
+
+            
 
             
 
@@ -1201,6 +1391,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.Convert" />
 
@@ -1208,8 +1400,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.ValueType" />
+
+            
 
             
 
@@ -1228,6 +1424,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1241,8 +1439,12 @@
 
             
 
+            
+
              or null if the <paramref
              name="type" />
+
+            
 
             
 
@@ -1253,6 +1455,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1291,8 +1495,12 @@
 
             
 
+            
+
             ). To use the current culture or to specify a culture, use the <see
              cref="M:System.Convert.ToSingle(System.Object)" />
+
+            
 
             
 
@@ -1305,6 +1513,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.Convert" />
 
@@ -1312,8 +1522,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.ValueType" />
+
+            
 
             
 
@@ -1336,8 +1550,12 @@
 
             
 
+            
+
              or null if the <paramref
              name="type" />
+
+            
 
             
 
@@ -1348,6 +1566,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1386,8 +1606,12 @@
 
             
 
+            
+
             ). To use the current culture or to specify a culture, use the <see
              cref="M:System.Convert.ToString(System.Object)" />
+
+            
 
             
 
@@ -1400,6 +1624,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.Convert" />
 
@@ -1407,8 +1633,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.ValueType" />
+
+            
 
             
 
@@ -1427,6 +1657,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1440,8 +1672,12 @@
 
             
 
+            
+
              or null if the <paramref
              name="type" />
+
+            
 
             
 
@@ -1452,6 +1688,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1495,8 +1733,12 @@
 
             
 
+            
+
             ). To use the current culture or to specify a culture, use the <see
              cref="M:System.Convert.ToUInt16(System.Object)" />
+
+            
 
             
 
@@ -1509,6 +1751,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.Convert" />
 
@@ -1516,8 +1760,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.ValueType" />
+
+            
 
             
 
@@ -1540,8 +1788,12 @@
 
             
 
+            
+
              or null if the <paramref
              name="type" />
+
+            
 
             
 
@@ -1552,6 +1804,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1595,8 +1849,12 @@
 
             
 
+            
+
             ). To use the current culture or to specify a culture, use the <see
              cref="M:System.Convert.ToUInt32(System.Object)" />
+
+            
 
             
 
@@ -1609,6 +1867,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.Convert" />
 
@@ -1616,8 +1876,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.ValueType" />
+
+            
 
             
 
@@ -1640,8 +1904,12 @@
 
             
 
+            
+
              or null if the <paramref
              name="type" />
+
+            
 
             
 
@@ -1652,6 +1920,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1695,8 +1965,12 @@
 
             
 
+            
+
             ). To use the current culture or to specify a culture, use the <see
              cref="M:System.Convert.ToUInt64(System.Object)" />
+
+            
 
             
 
@@ -1709,6 +1983,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.Convert" />
 
@@ -1716,8 +1992,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.ValueType" />
+
+            
 
             
 
@@ -1740,8 +2020,12 @@
 
             
 
+            
+
              or null if the <paramref
              name="type" />
+
+            
 
             
 
@@ -1752,6 +2036,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

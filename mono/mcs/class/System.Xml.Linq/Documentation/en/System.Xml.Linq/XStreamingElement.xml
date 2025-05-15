@@ -24,6 +24,8 @@
 
         
 
+        
+
         . However, there is a fundamental difference. When you use a LINQ query to specify content when creating an XML tree using <see
          cref="T:System.Xml.Linq.XElement" />
 
@@ -31,8 +33,12 @@
 
         
 
+        
+
         , the query variable is iterated at the time of construction of the XML tree, and the results of the query are added to the XML tree. In contrast, when you create an XML tree using <see
          cref="T:System.Xml.Linq.XStreamingElement" />
+
+        
 
         
 
@@ -49,8 +55,12 @@
 
         
 
+        
+
         , then you will have two large XML trees in memory upon completion of the transformation. However, if you create the new XML tree using <see
          cref="T:System.Xml.Linq.XStreamingElement" />
+
+        
 
         
 
@@ -66,8 +76,12 @@
 
         
 
+        
+
         , displaying the value of an object causes its <see
          cref="Overload:System.Xml.Linq.XStreamingElement.ToString" />
+
+        
 
         
 
@@ -110,8 +124,12 @@
 
             
 
+            
+
             . Typical use of this constructor is to specify a string as the parameter instead of creating a new <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -130,8 +148,12 @@
 
             
 
+            
+
              class from the specified <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -147,8 +169,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Linq.XName" />
+
+          
 
           
 
@@ -187,8 +213,12 @@
 
             
 
+            
+
             . Typical use of this constructor is to specify a string as the parameter instead of creating a new <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -204,6 +234,8 @@
 
             
 
+            
+
              is serialized. This is in contrast to using queries for content for an <see
              cref="T:System.Xml.Linq.XElement" />
 
@@ -211,8 +243,12 @@
 
             
 
+            
+
             , where queries are iterated at the time of construction of the new <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -232,6 +268,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -240,6 +278,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Linq.XStreamingElement" />
+
+            
 
             
 
@@ -255,8 +295,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Linq.XName" />
+
+          
 
           
 
@@ -266,6 +310,8 @@
         >
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -310,8 +356,12 @@
 
             
 
+            
+
             . Typical use of this constructor is to specify a string as the parameter instead of creating a new <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -327,6 +377,8 @@
 
             
 
+            
+
              is serialized. This is in contrast to using queries for content for an <see
              cref="T:System.Xml.Linq.XElement" />
 
@@ -334,8 +386,12 @@
 
             
 
+            
+
             , where queries are iterated at the time of construction of the new <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -355,6 +411,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -363,6 +421,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Linq.XStreamingElement" />
+
+            
 
             
 
@@ -378,8 +438,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Linq.XName" />
+
+          
 
           
 
@@ -389,6 +453,8 @@
         >
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -425,8 +491,12 @@
 
             
 
+            
+
             . While it is often possible to construct the <see
              cref="T:System.Xml.Linq.XStreamingElement" />
+
+            
 
             
 
@@ -442,6 +512,8 @@
 
             
 
+            
+
              is serialized. This is in contrast to using queries for content for an <see
              cref="T:System.Xml.Linq.XElement" />
 
@@ -449,8 +521,12 @@
 
             
 
+            
+
             , where queries are iterated at the time of construction of the new <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -470,6 +546,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -483,11 +561,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -530,8 +612,12 @@
 
             
 
+            
+
             . While it is often possible to construct the <see
              cref="T:System.Xml.Linq.XStreamingElement" />
+
+            
 
             
 
@@ -547,6 +633,8 @@
 
             
 
+            
+
              is serialized. This is in contrast to using queries for content for an <see
              cref="T:System.Xml.Linq.XElement" />
 
@@ -554,8 +642,12 @@
 
             
 
+            
+
             , where queries are iterated at the time of construction of the new <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -575,6 +667,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -588,11 +682,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -652,8 +750,12 @@
 
             
 
+            
+
              that takes <see
              cref="T:System.Xml.Linq.SaveOptions" />
+
+            
 
             
 
@@ -666,11 +768,15 @@
 
             
 
+            
+
              option to save unindented XML. This will cause the writer to write all white spaces exactly as represented in the XML tree.</para
           >
           <para
             >Use <see
              cref="F:System.Xml.Linq.SaveOptions.OmitDuplicateNamespaces" />
+
+            
 
             
 
@@ -689,8 +795,12 @@
 
             
 
+            
+
              to the specified <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -706,8 +816,12 @@
 
           
 
+          
+
           The stream to output this <see
            cref="T:System.Xml.Linq.XDocument" />
+
+          
 
           
 
@@ -745,8 +859,12 @@
 
             
 
+            
+
              that take <see
              cref="T:System.Xml.Linq.SaveOptions" />
+
+            
 
             
 
@@ -763,12 +881,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
                 >Preserving White Space While Serializing</a
               >
             </format>
+
+            
 
             
 
@@ -787,11 +909,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="textWriter">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -804,8 +930,12 @@
 
           
 
+          
+
            that the <see
            cref="T:System.Xml.Linq.XStreamingElement" />
+
+          
 
           
 
@@ -843,8 +973,12 @@
 
             
 
+            
+
              that take <see
              cref="T:System.Xml.Linq.SaveOptions" />
+
+            
 
             
 
@@ -861,12 +995,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
                 >Preserving White Space While Serializing</a
               >
             </format>
+
+            
 
             
 
@@ -886,8 +1024,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -925,11 +1067,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="writer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -942,8 +1088,12 @@
 
           
 
+          
+
            that the <see
            cref="T:System.Xml.Linq.XElement" />
+
+          
 
           
 
@@ -984,8 +1134,12 @@
 
             
 
+            
+
              are set to <see
              cref="F:System.Xml.Linq.SaveOptions.None" />
+
+            
 
             
 
@@ -1001,8 +1155,12 @@
 
             
 
+            
+
              flag for <paramref
              name="options" />
+
+            
 
             
 
@@ -1013,6 +1171,8 @@
           <para
             >Use <see
              cref="F:System.Xml.Linq.SaveOptions.OmitDuplicateNamespaces" />
+
+            
 
             
 
@@ -1031,8 +1191,12 @@
 
             
 
+            
+
              to the specified <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -1048,8 +1212,12 @@
 
           
 
+          
+
           The stream to output this <see
            cref="T:System.Xml.Linq.XDocument" />
+
+          
 
           
 
@@ -1064,8 +1232,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Linq.SaveOptions" />
+
+          
 
           
 
@@ -1106,8 +1278,12 @@
 
             
 
+            
+
              flag for <paramref
              name="options" />
+
+            
 
             
 
@@ -1123,8 +1299,12 @@
 
             
 
+            
+
              flag for <paramref
              name="options" />
+
+            
 
             
 
@@ -1137,8 +1317,12 @@
 
             
 
+            
+
              methods that do not take <paramref
              name="options" />
+
+            
 
             
 
@@ -1158,12 +1342,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
                 >Preserving White Space While Serializing</a
               >
             </format>
+
+            
 
             
 
@@ -1182,6 +1370,8 @@
 
             
 
+            
+
             , optionally disabling formatting.</para
           >
         </summary>
@@ -1192,8 +1382,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -1208,8 +1402,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Linq.SaveOptions" />
+
+          
 
           
 
@@ -1250,8 +1448,12 @@
 
             
 
+            
+
              flag for <paramref
              name="options" />
+
+            
 
             
 
@@ -1267,8 +1469,12 @@
 
             
 
+            
+
              flag for <paramref
              name="options" />
+
+            
 
             
 
@@ -1281,8 +1487,12 @@
 
             
 
+            
+
              methods that do not take <paramref
              name="options" />
+
+            
 
             
 
@@ -1302,12 +1512,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="fb146217-0a49-4efc-ac84-7265b91d3939"
                 >Preserving White Space While Serializing</a
               >
             </format>
+
+            
 
             
 
@@ -1327,8 +1541,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1343,8 +1561,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Linq.SaveOptions" />
+
+          
 
           
 
@@ -1379,8 +1601,12 @@
 
             
 
+            
+
             , displaying the value of an object causes its <see
              cref="Overload:System.Xml.Linq.XStreamingElement.ToString" />
+
+            
 
             
 
@@ -1398,6 +1624,8 @@
           <para
             >A <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -1438,8 +1666,12 @@
 
             
 
+            
+
             , displaying the value of an object causes its <see
              cref="Overload:System.Xml.Linq.XStreamingElement.ToString" />
+
+            
 
             
 
@@ -1462,6 +1694,8 @@
 
             
 
+            
+
              containing the XML.</para
           >
         </returns>
@@ -1472,8 +1706,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Linq.SaveOptions" />
+
+          
 
           
 
@@ -1511,6 +1749,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1521,8 +1761,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 

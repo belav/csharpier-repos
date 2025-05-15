@@ -43,8 +43,12 @@
 
         
 
+        
+
          generic class provides a mapping from a set of keys to a set of values. Each addition to the dictionary consists of a value and its associated key. Retrieving a value by using its key is very fast, close to O(1), because the <see
          cref="T:System.Collections.Generic.Dictionary`2" />
+
+        
 
         
 
@@ -61,12 +65,16 @@
 
           
 
+          
+
           . </para
         >
       </block>
       <para
         >As long as an object is used as a key in the <see
          cref="T:System.Collections.Generic.Dictionary`2" />
+
+        
 
         
 
@@ -79,8 +87,12 @@
 
         
 
+        
+
          must be unique according to the dictionary's equality comparer. A key cannot be null, but a value can be, if the value type <paramref
          name="TValue" />
+
+        
 
         
 
@@ -95,8 +107,12 @@
 
         
 
+        
+
          requires an equality implementation to determine whether keys are equal. You can specify an implementation of the <see
          cref="T:System.Collections.Generic.IEqualityComparer`1" />
+
+        
 
         
 
@@ -109,8 +125,12 @@
 
         
 
+        
+
          parameter; if you do not specify an implementation, the default generic equality comparer <see
          cref="P:System.Collections.Generic.EqualityComparer`1.Default" />
+
+        
 
         
 
@@ -123,8 +143,12 @@
 
         
 
+        
+
          implements the <see
          cref="T:System.IEquatable`1" />
+
+        
 
         
 
@@ -141,12 +165,16 @@
 
           
 
+          
+
            class to create dictionaries with case-insensitive string keys.</para
         >
       </block>
       <para
         >The capacity of a <see
          cref="T:System.Collections.Generic.Dictionary`2" />
+
+        
 
         
 
@@ -159,8 +187,12 @@
 
         
 
+        
+
          can hold. As elements are added to a <see
          cref="T:System.Collections.Generic.Dictionary`2" />
+
+        
 
         
 
@@ -176,10 +208,14 @@
 
         
 
+        
+
          objects, you can increase the maximum capacity to 2 billion elements on a 64-bit system by setting the enabled attribute of the <format
          type="text/html">
           <a href="5c7ea24a-39ac-4e5f-83b7-b9f9a1b556ab">gcAllowVeryLargeObjects</a>
         </format>
+
+        
 
         
 
@@ -195,6 +231,8 @@
 
         
 
+        
+
          structure representing a value and its key. The order in which the items are returned is undefined.</para
       >
       <para
@@ -205,8 +243,12 @@
 
         
 
+        
+
          is a collection of keys and values, the element type is not the type of the key or the type of the value. Instead, the element type is a <see
          cref="T:System.Collections.Generic.KeyValuePair`2" />
+
+        
 
         
 
@@ -220,6 +262,8 @@
         <para
           >Because keys can be inherited and their behavior changed, their absolute uniqueness cannot be guaranteed by comparisons using the <see
            cref="M:System.Type.Equals(System.Object)" />
+
+          
 
           
 

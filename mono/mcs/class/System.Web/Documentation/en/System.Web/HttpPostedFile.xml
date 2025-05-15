@@ -23,8 +23,12 @@
 
         
 
+        
+
          class provides access to all the files that are uploaded from a client as a file collection. The <see
          cref="T:System.Web.HttpPostedFile" />
+
+        
 
         
 
@@ -35,6 +39,8 @@
       <para
         >The <see
          cref="T:System.Web.UI.HtmlControls.HtmlInputFile" />
+
+        
 
         
 
@@ -51,6 +57,8 @@
 
         
 
+        
+
          property or by setting the maxRequestLength attribute of the <format
          type="text/html">
           <a href="e9b81350-8aaf-47cc-9843-5f7d0c59f369"
@@ -62,11 +70,15 @@
 
         
 
+        
+
          element within the Machine.config or Web.config file. The default is 4 MB.</para
       >
       <para
         >The amount of data that is buffered in server memory for a request, which includes file uploads, can be specified by accessing the <see
          cref="P:System.Web.Configuration.HttpRuntimeSection.RequestLengthDiskThreshold" />
+
+        
 
         
 
@@ -83,11 +95,15 @@
 
         
 
+        
+
          element within the Machine.config or Web.config file.</para
       >
       <para
         >By adjusting the <see
          cref="P:System.Web.Configuration.HttpRuntimeSection.MaxRequestLength" />
+
+        
 
         
 
@@ -100,8 +116,12 @@
 
         
 
+        
+
          properties, you can fine tune the performance of your server. Additionally, you should consider setting the <see
          cref="P:System.Web.Configuration.HttpRuntimeSection.MaxRequestLength" />
+
+        
 
         
 
@@ -112,6 +132,8 @@
       <para
         >Server resources that are allocated to buffer the uploaded file will be destroyed when the request ends. To save a durable copy of the file, use the <see
          cref="M:System.Web.HttpPostedFile.SaveAs(System.String)" />
+
+        
 
         
 
@@ -206,6 +228,8 @@
 
             
 
+            
+
              object that points to an uploaded file to prepare for reading the contents of the file.</para
           >
         </summary>
@@ -239,12 +263,16 @@
 
             
 
+            
+
              element. The maximum request size for a specific page can be specified using the <format
              type="text/html">
               <a href="922ef7d5-da38-4661-b1c6-5b9e5ceda1d5"
                 >location Element (ASP.NET Settings Schema)</a
               >
             </format>
+
+            
 
             
 
@@ -259,6 +287,8 @@
         </summary>
         <param name="filename">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

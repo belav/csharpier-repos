@@ -27,8 +27,12 @@
 
         
 
+        
+
         . Derived attributes must override the <see
          cref="P:System.Web.Services.Protocols.SoapExtensionAttribute.ExtensionType" />
+
+        
 
         
 
@@ -55,6 +59,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Protocols.SoapExtensionAttribute" />
+
+            
 
             
 
@@ -87,6 +93,8 @@
 
             
 
+            
+
              property to return the type of the SOAP extension.</para
           >
         </remarks>
@@ -95,6 +103,8 @@
           <para
             >When overridden in a derived class, gets the <see
              cref="T:System.Type" />
+
+            
 
             
 

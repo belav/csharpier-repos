@@ -17,6 +17,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Docs>
@@ -45,6 +47,8 @@
         <summary
           >Validates the value string. See <see
            cref="M:Commons.Xml.Relaxng.RelaxngDatatype.IsValid" />
+
+          
 
           
 
@@ -88,6 +92,8 @@
 
           
 
+          
+
            for the details of this method.</summary
         >
         <param name="text"
@@ -118,6 +124,8 @@
         <summary
           >Compares two parameters. See <see
            cref="M:Commons.Xml.Relaxng.RelaxngDatatype.Compare" />
+
+          
 
           
 

@@ -28,8 +28,12 @@
 
         
 
+        
+
          allows you to get a list of fonts families that are installed on the computer running the application with its <see
          cref="P:System.Drawing.Text.FontCollection.Families" />
+
+        
 
         
 
@@ -39,6 +43,8 @@
          type="text/html">
           <a href="d43640f3-da94-4df2-a29d-a9d021a1c069">Using Fonts and Text</a>
         </format>
+
+        
 
         
 
@@ -54,8 +60,12 @@
 
         
 
+        
+
          class to install a font to Windows. Instead use the ndptecgdi AddFontResource function. An <see
          cref="T:System.Drawing.Text.InstalledFontCollection" />
+
+        
 
         
 
@@ -82,6 +92,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Drawing.Text.InstalledFontCollection" />
+
+            
 
             
 

@@ -69,6 +69,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -142,8 +144,12 @@
 
             
 
+            
+
              property is recommended rather than retrieving the number of items from the <see
              cref="P:System.Collections.Concurrent.ConcurrentQueue`1.Count" />
+
+            
 
             
 
@@ -157,6 +163,8 @@
           <para
             >Gets the number of elements contained in the <see
              cref="T:System.Collections.Concurrent.ConcurrentQueue`1" />
+
+            
 
             
 
@@ -217,6 +225,8 @@
 
             
 
+            
+
              was called. The enumerator is safe to use concurrently with reads from and writes to the queue.</para
           >
           <para>The enumerator returns the collection elements in the order in which they were added, which is FIFO order (first-in, first-out).</para>
@@ -231,6 +241,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -239,6 +251,8 @@
           <para
             >An enumerator for the contents of the <see
              cref="T:System.Collections.Concurrent.ConcurrentQueue`1" />
+
+            
 
             
 
@@ -271,8 +285,12 @@
 
             
 
+            
+
              property and comparing it to 0. However, as this collection is intended to be accessed concurrently, it may be the case that another thread will modify the collection after <see
              cref="P:System.Collections.Concurrent.ConcurrentQueue`1.IsEmpty" />
+
+            
 
             
 
@@ -286,6 +304,8 @@
           <para
             >Gets a value that indicates whether the <see
              cref="T:System.Collections.Concurrent.ConcurrentQueue`1" />
+
+            
 
             
 
@@ -377,6 +397,8 @@
 
             
 
+            
+
              to an <see
              cref="T:System.Array" />
 
@@ -384,8 +406,12 @@
 
             
 
+            
+
             , starting at a particular <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -401,8 +427,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -415,8 +445,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -431,8 +465,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -471,6 +509,8 @@
 
             
 
+            
+
              is synchronized with the SyncRoot.</para
           >
         </summary>
@@ -500,6 +540,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -543,6 +585,8 @@
 
             
 
+            
+
              that can be used to iterate through the collection.</para
           >
         </returns>
@@ -574,6 +618,8 @@
 
             
 
+            
+
              to a new array.</para
           >
         </summary>
@@ -582,6 +628,8 @@
           <para
             >A new array containing a snapshot of elements copied from the <see
              cref="T:System.Collections.Concurrent.ConcurrentQueue`1" />
+
+            
 
             
 

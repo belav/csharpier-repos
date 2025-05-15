@@ -36,6 +36,8 @@
 
         
 
+        
+
          objects.</para
       >
     </summary>
@@ -69,6 +71,8 @@
 
             
 
+            
+
              object to the collection.</para
           >
         </summary>
@@ -79,8 +83,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />
+
+          
 
           
 
@@ -119,8 +127,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -163,10 +175,14 @@
 
           
 
+          
+
           The object to add to the collection.</param
         >
         <param name="serializer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -209,10 +225,14 @@
 
           
 
+          
+
           The object to add to the collection.</param
         >
         <param name="serializer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -256,6 +276,8 @@
 
           
 
+          
+
           The outer name.</param
         >
         <param name="outerNamespace">
@@ -265,10 +287,14 @@
 
           
 
+          
+
           The outer namespace.</param
         >
         <param name="dataContractExtension">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -316,10 +342,14 @@
 
           
 
+          
+
           The outer name.</param
         >
         <param name="outerNamespace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -334,10 +364,14 @@
 
           
 
+          
+
           The object to add to the collection.</param
         >
         <param name="dataContractSerializer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -395,6 +429,8 @@
 
             
 
+            
+
              with the element extensions.</para
           >
         </summary>
@@ -403,6 +439,8 @@
           <para
             >An <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -480,6 +518,8 @@
 
           
 
+          
+
           The name of the element extension.</param
         >
         <param name="extensionNamespace">
@@ -489,10 +529,14 @@
 
           
 
+          
+
           The namespace of the element extension.</param
         >
         <typeparam name="TExtension">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -543,10 +587,14 @@
 
           
 
+          
+
           The name of the element extension.</param
         >
         <param name="extensionNamespace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -561,8 +609,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
+
+          
 
           
 
@@ -572,6 +624,8 @@
         >
         <typeparam name="TExtension">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -622,10 +676,14 @@
 
           
 
+          
+
           The name of the element extension.</param
         >
         <param name="extensionNamespace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -640,8 +698,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Serialization.XmlSerializer" />
+
+          
 
           
 
@@ -651,6 +713,8 @@
         >
         <typeparam name="TExtension">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

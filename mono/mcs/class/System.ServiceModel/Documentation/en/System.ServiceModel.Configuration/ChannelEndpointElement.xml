@@ -50,6 +50,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -218,8 +220,12 @@
 
             
 
+            
+
              property, which references to the additional configuration information of this standard endpoint. The same name must be defined in the <see
              cref="T:System.ServiceModel.Configuration.StandardEndpointsSection" />
+
+            
 
             
 

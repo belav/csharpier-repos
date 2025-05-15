@@ -53,11 +53,15 @@
 
         
 
+        
+
          is generated as a result of a method called on a remote object, and is used to return the results of the method call back to the caller. The message includes a return value and out arguments. </para
       >
       <para
         >The <see
          cref="T:System.Runtime.Remoting.Messaging.MethodResponse" />
+
+        
 
         
 
@@ -70,8 +74,12 @@
 
         
 
+        
+
          class directly; instead, use the <see
          cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
+
+        
 
         
 
@@ -86,8 +94,12 @@
 
         
 
+        
+
          contains remoting data at the end of the message sink. A remoting server returns a <see
          cref="T:System.Runtime.Remoting.Messaging.MethodResponse" />
+
+        
 
         
 
@@ -101,6 +113,8 @@
       <para
         >Implements the <see
          cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
+
+        
 
         
 
@@ -142,6 +156,8 @@
 
             
 
+            
+
              class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see
              cref="T:System.Runtime.Remoting.Messaging.MethodResponse" />
 
@@ -149,8 +165,12 @@
 
             
 
+            
+
              class directly; instead, use the <see
              cref="T:System.Runtime.Remoting.Messaging.IMethodReturnMessage" />
+
+            
 
             
 
@@ -169,11 +189,15 @@
 
             
 
+            
+
              class from an array of remoting headers and a request message. </para
           >
         </summary>
         <param name="h1">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -186,10 +210,14 @@
 
           
 
+          
+
            fields for headers that belong to the namespace "http://schemas.microsoft.com/clr/soap/messageProperties".</param
         >
         <param name="mcm">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -304,8 +332,12 @@
 
             
 
+            
+
              field is also accessible through the <see
              cref="P:System.Runtime.Remoting.Messaging.MethodResponse.Properties" />
+
+            
 
             
 
@@ -319,6 +351,8 @@
           <para
             >Specifies an <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -367,6 +401,8 @@
 
           
 
+          
+
           The index of the requested argument.</param
         >
       </Docs>
@@ -409,6 +445,8 @@
 
           
 
+          
+
           The index of the requested argument.</param
         >
       </Docs>
@@ -446,8 +484,12 @@
 
             
 
+            
+
              method throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -466,6 +508,8 @@
 
             
 
+            
+
              method is not implemented. </para
           >
         </summary>
@@ -476,10 +520,14 @@
 
           
 
+          
+
           Data for serializing or deserializing the remote object.</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -527,6 +575,8 @@
 
           
 
+          
+
           The index of the requested argument.</param
         >
       </Docs>
@@ -564,6 +614,8 @@
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -638,8 +690,12 @@
 
           
 
+          
+
           An array of remoting headers that contain key/value pairs. This array is used to initialize <see
            cref="T:System.Runtime.Remoting.Messaging.MethodResponse" />
+
+          
 
           
 
@@ -675,6 +731,8 @@
           <para
             >Specifies an <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -719,6 +777,8 @@
 
             
 
+            
+
              for the current method call. </para
           >
         </summary>
@@ -753,6 +813,8 @@
           <para
             >Gets the <see
              cref="T:System.Reflection.MethodBase" />
+
+            
 
             
 
@@ -889,8 +951,12 @@
 
             
 
+            
+
              property returns the value of the <see
              cref="F:System.Runtime.Remoting.Messaging.MethodResponse.ExternalProperties" />
+
+            
 
             
 
@@ -904,6 +970,8 @@
           <para
             >Gets an <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -976,10 +1044,14 @@
 
           
 
+          
+
           The data for serializing or deserializing the remote object.</param
         >
         <param name="ctx">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

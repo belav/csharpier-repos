@@ -20,8 +20,12 @@
 
         
 
+        
+
          style is valid only when visual styles are enabled. The <see
          cref="F:System.Windows.Forms.ProgressBarStyle.Continuous" />
+
+        
 
         
 
@@ -35,6 +39,8 @@
       <para
         >Specifies the style that a <see
          cref="T:System.Windows.Forms.ProgressBar" />
+
+        
 
         
 
@@ -58,6 +64,8 @@
           <para
             >Indicates progress by increasing the number of segmented blocks in a <see
              cref="T:System.Windows.Forms.ProgressBar" />
+
+            
 
             
 
@@ -89,6 +97,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -110,6 +120,8 @@
           <para
             >Indicates progress by continuously scrolling a block across a <see
              cref="T:System.Windows.Forms.ProgressBar" />
+
+            
 
             
 

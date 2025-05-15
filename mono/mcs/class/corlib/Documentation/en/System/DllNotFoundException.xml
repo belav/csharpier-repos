@@ -36,6 +36,8 @@
 
         
 
+        
+
          uses the HRESULT COR_E_DLLNOTFOUND, which has the value 0x80131524.</para
       >
       <para
@@ -46,8 +48,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.DllNotFoundException.#ctor" />
+
+        
 
         
 
@@ -63,8 +69,12 @@
 
         
 
+        
+
          is thrown when a dynamic link library defined by the <see
          cref="T:System.Runtime.InteropServices.DllImportAttribute" />
+
+        
 
         
 
@@ -80,10 +90,14 @@
 
         
 
+        
+
          can specify the path to the directory in which the DLL resides. If a path is not specified, Windows uses the search order described in <see
          cref="http://go.microsoft.com/fwlink/?LinkId=122531"
           >Dynamic-Link Library Search Order</see
         >
+
+        
 
         
 
@@ -118,6 +132,8 @@
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.DllNotFoundException" />
+
+            
 
             
 
@@ -168,6 +184,8 @@
 
             
 
+            
+
              class with default properties.</para
           >
         </summary>
@@ -195,6 +213,8 @@
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.DllNotFoundException" />
+
+            
 
             
 
@@ -245,11 +265,15 @@
 
             
 
+            
+
              class with a specified error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -291,6 +315,8 @@
 
             
 
+            
+
              class with serialized data.</para
           >
         </summary>
@@ -301,8 +327,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -317,8 +347,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -359,8 +393,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -373,11 +411,15 @@
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.DllNotFoundException" />
+
+            
 
             
 
@@ -428,11 +470,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -447,8 +493,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="inner" />
+
+          
 
           
 

@@ -31,6 +31,8 @@
 
         
 
+        
+
          into the service configuration element.</para
       >
     </summary>
@@ -54,6 +56,8 @@
           <para
             >Creates a new instance of the <see
              cref="T:System.ServiceModel.Configuration.ServiceMetadataEndpointElement" />
+
+            
 
             
 
@@ -117,6 +121,8 @@
           <para
             >Gets the type of the current <see
              cref="T:System.ServiceModel.Description.ServiceMetadataEndpoint" />
+
+            
 
             
 

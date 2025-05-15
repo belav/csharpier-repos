@@ -35,8 +35,12 @@
 
         
 
+        
+
          class is employed by the <see
          cref="T:System.Web.Services.Discovery.DiscoveryRequestHandler" />
+
+        
 
         
 
@@ -49,6 +53,8 @@
 
         
 
+        
+
          method, which handles an HTTP request for a discovery document. The request specifies another document, an XML dynamic discovery document containing a list of directories to exclude. The list corresponds to the <see
          cref="T:System.Web.Services.Discovery.DynamicDiscoveryDocument" />
 
@@ -56,8 +62,12 @@
 
         
 
+        
+
          class's <see
          cref="P:System.Web.Services.Discovery.DynamicDiscoveryDocument.ExcludePaths" />
+
+        
 
         
 
@@ -85,6 +95,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Discovery.DynamicDiscoveryDocument" />
+
+            
 
             
 
@@ -153,8 +165,12 @@
 
             
 
+            
+
             , and converts in to a <see
              cref="T:System.Web.Services.Discovery.DynamicDiscoveryDocument" />
+
+            
 
             
 
@@ -173,6 +189,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -181,6 +199,8 @@
           <para
             >The <see
              cref="T:System.Web.Services.Discovery.DynamicDiscoveryDocument" />
+
+            
 
             
 
@@ -196,8 +216,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -251,6 +275,8 @@
 
             
 
+            
+
              instance into an XML document specified as an output stream.</para
           >
         </summary>
@@ -261,8 +287,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 

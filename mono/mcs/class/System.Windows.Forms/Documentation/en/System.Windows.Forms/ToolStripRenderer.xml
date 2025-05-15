@@ -21,8 +21,12 @@
 
         
 
+        
+
          class to apply a particular style or theme to a <see
          cref="T:System.Windows.Forms.ToolStrip" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          and the <see
          cref="T:System.Windows.Forms.ToolStripItem" />
+
+        
 
         
 
@@ -49,8 +57,12 @@
 
         
 
+        
+
          property to an object that inherits from <see
          cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+        
 
         
 
@@ -63,8 +75,12 @@
 
         
 
+        
+
          is applied to the <see
          cref="T:System.Windows.Forms.ToolStrip" />
+
+        
 
         
 
@@ -80,8 +96,12 @@
 
         
 
+        
+
          controls in several ways. As with other Windows Forms controls, the <see
          cref="T:System.Windows.Forms.ToolStrip" />
+
+        
 
         
 
@@ -94,8 +114,12 @@
 
         
 
+        
+
          both have overridable OnPaint methods and Paint events. As with regular painting, the coordinate system is relative to the client area of the control; that is, the upper left-hand corner of the control is 0, 0. The Paint event and OnPaint method for a <see
          cref="T:System.Windows.Forms.ToolStripItem" />
+
+        
 
         
 
@@ -111,8 +135,12 @@
 
         
 
+        
+
          class has overridable methods for painting the background, item background, item image, item arrow, item text, and border of the <see
          cref="T:System.Windows.Forms.ToolStrip" />
+
+        
 
         
 
@@ -128,11 +156,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >If you are writing a new item and want to control all aspects of the painting, override the OnPaint method. From within OnPaint, you can use methods from the <see
          cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+        
 
         
 
@@ -148,8 +180,12 @@
 
         
 
+        
+
          is double buffered, taking advantage of the <see
          cref="F:System.Windows.Forms.ControlStyles.OptimizedDoubleBuffer" />
+
+        
 
         
 
@@ -163,6 +199,8 @@
       <para
         >Handles the painting functionality for <see
          cref="T:System.Windows.Forms.ToolStrip" />
+
+        
 
         
 
@@ -188,6 +226,8 @@
 
             
 
+            
+
              is an abstract class, so the constructor is only available to classes derived from it.</para
           >
         </remarks>
@@ -196,6 +236,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+            
 
             
 
@@ -238,11 +280,15 @@
 
             
 
+            
+
              that is a copy of the given image, but with a gray-scale color matrix.</para
           >
         </returns>
         <param name="normalImage">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -279,8 +325,12 @@
 
             
 
+            
+
              method provides an entry point to the arrow rendering code. Use this method to draw an arrow when overriding the <see
              cref="M:System.Windows.Forms.ToolStripItem.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+
+            
 
             
 
@@ -293,6 +343,8 @@
 
             
 
+            
+
             . To change the way an arrow is rendered, override the <see
              cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderArrow(System.Windows.Forms.ToolStripArrowRenderEventArgs)" />
 
@@ -300,8 +352,12 @@
 
             
 
+            
+
              method in a class derived from <see
              cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+            
 
             
 
@@ -320,6 +376,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -330,8 +388,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripArrowRenderEventArgs" />
+
+          
 
           
 
@@ -368,8 +430,12 @@
 
             
 
+            
+
              method provides an entry point to the rendering code for the background of a <see
              cref="T:System.Windows.Forms.ToolStripButton" />
+
+            
 
             
 
@@ -382,8 +448,12 @@
 
             
 
+            
+
              method, or to force the background of a button to be drawn in a custom <see
              cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+            
 
             
 
@@ -396,8 +466,12 @@
 
             
 
+            
+
              method in a class derived from <see
              cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+            
 
             
 
@@ -416,6 +490,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -426,8 +502,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+
+          
 
           
 
@@ -464,8 +544,12 @@
 
             
 
+            
+
              method provides the entry point to the rendering code for the background of a <see
              cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+
+            
 
             
 
@@ -478,8 +562,12 @@
 
             
 
+            
+
              method, or to force the background of a drop-down button to be drawn in a custom <see
              cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+            
 
             
 
@@ -492,8 +580,12 @@
 
             
 
+            
+
              method in a class derived from <see
              cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+            
 
             
 
@@ -512,6 +604,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -522,8 +616,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+
+          
 
           
 
@@ -560,8 +658,12 @@
 
             
 
+            
+
              method provides an entry point to the rendering code for a move handle located on a <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -574,8 +676,12 @@
 
             
 
+            
+
              method, or to force a move handle to be drawn in a custom <see
              cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+            
 
             
 
@@ -588,8 +694,12 @@
 
             
 
+            
+
              method in a class derived from <see
              cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+            
 
             
 
@@ -608,6 +718,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -618,8 +730,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripGripRenderEventArgs" />
+
+          
 
           
 
@@ -656,8 +772,12 @@
 
             
 
+            
+
              method provides the entry point to the rendering code for the image. Use this method to draw the image margin when overriding the <see
              cref="M:System.Windows.Forms.ToolStripItem.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+
+            
 
             
 
@@ -670,6 +790,8 @@
 
             
 
+            
+
             . To change the way the image margin is rendered, override the <see
              cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderImageMargin(System.Windows.Forms.ToolStripRenderEventArgs)" />
 
@@ -677,8 +799,12 @@
 
             
 
+            
+
              method in a class derived from <see
              cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+            
 
             
 
@@ -697,6 +823,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -707,8 +835,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripRenderEventArgs" />
+
+          
 
           
 
@@ -745,8 +877,12 @@
 
             
 
+            
+
              method provides the entry point to the rendering code for the background of an item. Use this method to draw the background of an item when overriding the <see
              cref="M:System.Windows.Forms.ToolStripItem.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+
+            
 
             
 
@@ -759,6 +895,8 @@
 
             
 
+            
+
             . To change the way the background of an item is rendered, override the <see
              cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderItemBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
 
@@ -766,8 +904,12 @@
 
             
 
+            
+
              method in a class derived from <see
              cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+            
 
             
 
@@ -786,6 +928,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -796,8 +940,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+
+          
 
           
 
@@ -834,8 +982,12 @@
 
             
 
+            
+
              method provides the entry point to the rendering code for an image in a selected state. Use this method to draw a selected image when overriding the <see
              cref="M:System.Windows.Forms.ToolStripItem.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+
+            
 
             
 
@@ -848,6 +1000,8 @@
 
             
 
+            
+
             . To change the way a selected image is rendered, override the <see
              cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderItemCheck(System.Windows.Forms.ToolStripItemImageRenderEventArgs)" />
 
@@ -855,8 +1009,12 @@
 
             
 
+            
+
              method in a class derived from <see
              cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+            
 
             
 
@@ -875,6 +1033,8 @@
 
             
 
+            
+
              that indicates the item is in a selected state.</para
           >
         </summary>
@@ -885,8 +1045,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripItemImageRenderEventArgs" />
+
+          
 
           
 
@@ -923,8 +1087,12 @@
 
             
 
+            
+
              method provides the entry point to the rendering code for an image. Use this method to draw an image when overriding the <see
              cref="M:System.Windows.Forms.ToolStripItem.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+
+            
 
             
 
@@ -937,8 +1105,12 @@
 
             
 
+            
+
             . To change the way the image is rendered, override the OnDrawItem method in a class derived from <see
              cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+            
 
             
 
@@ -957,6 +1129,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -967,8 +1141,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripItemImageRenderEventArgs" />
+
+          
 
           
 
@@ -1005,8 +1183,12 @@
 
             
 
+            
+
              method provides the entry point to the rendering code for the text of a <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -1019,8 +1201,12 @@
 
             
 
+            
+
              method, or to force the item text to be drawn in a custom <see
              cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+            
 
             
 
@@ -1033,8 +1219,12 @@
 
             
 
+            
+
              method in a class derived from <see
              cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+            
 
             
 
@@ -1053,6 +1243,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1063,8 +1255,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripItemTextRenderEventArgs" />
+
+          
 
           
 
@@ -1101,8 +1297,12 @@
 
             
 
+            
+
              method provides the entry point to the rendering code for the background of a <see
              cref="T:System.Windows.Forms.ToolStripLabel" />
+
+            
 
             
 
@@ -1115,8 +1315,12 @@
 
             
 
+            
+
              when overriding the <see
              cref="M:System.Windows.Forms.ToolStripLabel.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+
+            
 
             
 
@@ -1129,8 +1333,12 @@
 
             
 
+            
+
              to be drawn in a custom <see
              cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+            
 
             
 
@@ -1143,6 +1351,8 @@
 
             
 
+            
+
              is rendered, override the <see
              cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderLabelBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
 
@@ -1150,8 +1360,12 @@
 
             
 
+            
+
              method in a class derived from <see
              cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+            
 
             
 
@@ -1170,6 +1384,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1180,8 +1396,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+
+          
 
           
 
@@ -1218,8 +1438,12 @@
 
             
 
+            
+
              method provides the entry point to the rendering code for the background of a <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+            
 
             
 
@@ -1232,8 +1456,12 @@
 
             
 
+            
+
              when overriding the <see
              cref="M:System.Windows.Forms.ToolStripMenuItem.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+
+            
 
             
 
@@ -1246,8 +1474,12 @@
 
             
 
+            
+
              to be drawn in a custom <see
              cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+            
 
             
 
@@ -1260,6 +1492,8 @@
 
             
 
+            
+
              is rendered, override the <see
              cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderMenuItemBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
 
@@ -1267,8 +1501,12 @@
 
             
 
+            
+
              method in a class derived from <see
              cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+            
 
             
 
@@ -1287,6 +1525,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1297,8 +1537,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+
+          
 
           
 
@@ -1335,8 +1579,12 @@
 
             
 
+            
+
              method provides the entry point to the rendering code for the background of an overflow button. Use this method to draw the background of an overflow button when overriding the <see
              cref="M:System.Windows.Forms.ToolStripItem.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+
+            
 
             
 
@@ -1349,6 +1597,8 @@
 
             
 
+            
+
             . To change the way the background for an overflow button is rendered, override the <see
              cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderOverflowButtonBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
 
@@ -1356,8 +1606,12 @@
 
             
 
+            
+
              method in a class derived from <see
              cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+            
 
             
 
@@ -1377,8 +1631,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+
+          
 
           
 
@@ -1415,8 +1673,12 @@
 
             
 
+            
+
              method provides the entry point to the rendering code for a <see
              cref="T:System.Windows.Forms.ToolStripSeparator" />
+
+            
 
             
 
@@ -1429,8 +1691,12 @@
 
             
 
+            
+
              when overriding the <see
              cref="M:System.Windows.Forms.ToolStrip.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+
+            
 
             
 
@@ -1443,8 +1709,12 @@
 
             
 
+            
+
              to be drawn in a custom <see
              cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+            
 
             
 
@@ -1457,6 +1727,8 @@
 
             
 
+            
+
              is rendered, override the <see
              cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderSeparator(System.Windows.Forms.ToolStripSeparatorRenderEventArgs)" />
 
@@ -1464,8 +1736,12 @@
 
             
 
+            
+
              method in a class derived from <see
              cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+            
 
             
 
@@ -1484,11 +1760,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1501,8 +1781,12 @@
 
           
 
+          
+
            that contains the data to draw the <see
            cref="T:System.Windows.Forms.ToolStripSeparator" />
+
+          
 
           
 
@@ -1539,8 +1823,12 @@
 
             
 
+            
+
              method provides the entry point to the rendering code for a <see
              cref="T:System.Windows.Forms.ToolStripSplitButton" />
+
+            
 
             
 
@@ -1553,8 +1841,12 @@
 
             
 
+            
+
              when overriding the <see
              cref="M:System.Windows.Forms.ToolStripSplitButton.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+
+            
 
             
 
@@ -1567,8 +1859,12 @@
 
             
 
+            
+
              to be drawn in a custom <see
              cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+            
 
             
 
@@ -1581,6 +1877,8 @@
 
             
 
+            
+
              is rendered, override the <see
              cref="M:System.Windows.Forms.ToolStripSystemRenderer.OnRenderSplitButtonBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
 
@@ -1588,8 +1886,12 @@
 
             
 
+            
+
              method in a class derived from <see
              cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+            
 
             
 
@@ -1608,6 +1910,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1618,8 +1922,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+
+          
 
           
 
@@ -1658,8 +1966,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripRenderEventArgs" />
+
+          
 
           
 
@@ -1696,8 +2008,12 @@
 
             
 
+            
+
              method provides the entry point to the rendering code for the background of a <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -1710,8 +2026,12 @@
 
             
 
+            
+
              when overriding the <see
              cref="M:System.Windows.Forms.ToolStrip.OnPaintBackground(System.Windows.Forms.PaintEventArgs)" />
+
+            
 
             
 
@@ -1724,8 +2044,12 @@
 
             
 
+            
+
              to be drawn in a custom <see
              cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+            
 
             
 
@@ -1738,6 +2062,8 @@
 
             
 
+            
+
              is rendered, override the <see
              cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderToolStripBackground(System.Windows.Forms.ToolStripRenderEventArgs)" />
 
@@ -1745,8 +2071,12 @@
 
             
 
+            
+
              method in a class derived from <see
              cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+            
 
             
 
@@ -1765,11 +2095,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1782,8 +2116,12 @@
 
           
 
+          
+
            that contains the data to draw the background for the <see
            cref="T:System.Windows.Forms.ToolStrip" />
+
+          
 
           
 
@@ -1820,8 +2158,12 @@
 
             
 
+            
+
              method provides the entry point to the rendering code for the border of a <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -1834,8 +2176,12 @@
 
             
 
+            
+
              when overriding the <see
              cref="M:System.Windows.Forms.ToolStrip.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+
+            
 
             
 
@@ -1848,8 +2194,12 @@
 
             
 
+            
+
              to be drawn in a custom <see
              cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+            
 
             
 
@@ -1862,6 +2212,8 @@
 
             
 
+            
+
              is rendered, override the <see
              cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderToolStripBorder(System.Windows.Forms.ToolStripRenderEventArgs)" />
 
@@ -1869,8 +2221,12 @@
 
             
 
+            
+
              method in a class derived from <see
              cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+            
 
             
 
@@ -1889,11 +2245,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1906,8 +2266,12 @@
 
           
 
+          
+
            that contains the data to draw the border for the <see
            cref="T:System.Windows.Forms.ToolStrip" />
+
+          
 
           
 
@@ -1945,6 +2309,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1955,8 +2321,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripContentPanelRenderEventArgs" />
+
+          
 
           
 
@@ -1994,6 +2364,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2004,8 +2376,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripPanelRenderEventArgs" />
+
+          
 
           
 
@@ -2043,6 +2419,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2053,8 +2431,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+
+          
 
           
 
@@ -2093,8 +2475,12 @@
 
             
 
+            
+
              method to set properties, such as the <see
              cref="P:System.Windows.Forms.ToolStrip.BackColor" />
+
+            
 
             
 
@@ -2107,8 +2493,12 @@
 
             
 
+            
+
             , when a <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -2127,6 +2517,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -2137,8 +2529,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStrip" />
+
+          
 
           
 
@@ -2175,6 +2571,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2185,8 +2583,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStripContentPanel" />
+
+          
 
           
 
@@ -2222,8 +2624,12 @@
 
             
 
+            
+
              method to set properties, such as the <see
              cref="P:System.Windows.Forms.ToolStripItem.BackColor" />
+
+            
 
             
 
@@ -2236,8 +2642,12 @@
 
             
 
+            
+
             , when a <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -2256,6 +2666,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -2266,8 +2678,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -2304,6 +2720,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2314,8 +2732,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStripPanel" />
+
+          
 
           
 
@@ -2351,11 +2773,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderArrow(System.Windows.Forms.ToolStripArrowRenderEventArgs)" />
+
+            
 
             
 
@@ -2374,6 +2800,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -2384,8 +2812,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripArrowRenderEventArgs" />
+
+          
 
           
 
@@ -2424,11 +2856,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderButtonBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+
+            
 
             
 
@@ -2447,6 +2883,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2457,8 +2895,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripRenderEventArgs" />
+
+          
 
           
 
@@ -2497,11 +2939,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderDropDownButtonBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+
+            
 
             
 
@@ -2520,6 +2966,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2530,8 +2978,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+
+          
 
           
 
@@ -2570,11 +3022,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderGrip(System.Windows.Forms.ToolStripGripRenderEventArgs)" />
+
+            
 
             
 
@@ -2593,6 +3049,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -2603,8 +3061,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripGripRenderEventArgs" />
+
+          
 
           
 
@@ -2643,11 +3105,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderImageMargin(System.Windows.Forms.ToolStripRenderEventArgs)" />
+
+            
 
             
 
@@ -2667,8 +3133,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripRenderEventArgs" />
+
+          
 
           
 
@@ -2707,11 +3177,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderItemBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+
+            
 
             
 
@@ -2730,6 +3204,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -2740,8 +3216,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+
+          
 
           
 
@@ -2780,11 +3260,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderItemCheck(System.Windows.Forms.ToolStripItemImageRenderEventArgs)" />
+
+            
 
             
 
@@ -2803,6 +3287,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -2813,8 +3299,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripItemImageRenderEventArgs" />
+
+          
 
           
 
@@ -2853,11 +3343,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderItemImage(System.Windows.Forms.ToolStripItemImageRenderEventArgs)" />
+
+            
 
             
 
@@ -2876,6 +3370,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -2886,8 +3382,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripItemImageRenderEventArgs" />
+
+          
 
           
 
@@ -2926,11 +3426,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderItemText(System.Windows.Forms.ToolStripItemTextRenderEventArgs)" />
+
+            
 
             
 
@@ -2949,6 +3453,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -2959,8 +3465,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripItemTextRenderEventArgs" />
+
+          
 
           
 
@@ -2999,11 +3509,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderLabelBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+
+            
 
             
 
@@ -3022,6 +3536,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -3032,8 +3548,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+
+          
 
           
 
@@ -3072,11 +3592,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderMenuItemBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+
+            
 
             
 
@@ -3095,6 +3619,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -3105,8 +3631,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+
+          
 
           
 
@@ -3145,11 +3675,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderOverflowButtonBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+
+            
 
             
 
@@ -3168,6 +3702,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -3178,8 +3714,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+
+          
 
           
 
@@ -3218,11 +3758,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderSeparator(System.Windows.Forms.ToolStripSeparatorRenderEventArgs)" />
+
+            
 
             
 
@@ -3241,6 +3785,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -3251,8 +3797,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripSeparatorRenderEventArgs" />
+
+          
 
           
 
@@ -3291,11 +3841,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderSplitButtonBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+
+            
 
             
 
@@ -3314,6 +3868,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -3324,8 +3880,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+
+          
 
           
 
@@ -3364,11 +3924,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderStatusStripSizingGrip(System.Windows.Forms.ToolStripRenderEventArgs)" />
+
+            
 
             
 
@@ -3387,6 +3951,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -3397,8 +3963,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripRenderEventArgs" />
+
+          
 
           
 
@@ -3437,11 +4007,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderToolStripBackground(System.Windows.Forms.ToolStripRenderEventArgs)" />
+
+            
 
             
 
@@ -3460,6 +4034,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -3470,8 +4046,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripRenderEventArgs" />
+
+          
 
           
 
@@ -3510,11 +4090,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderToolStripBorder(System.Windows.Forms.ToolStripRenderEventArgs)" />
+
+            
 
             
 
@@ -3533,6 +4117,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -3543,8 +4129,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripRenderEventArgs" />
+
+          
 
           
 
@@ -3583,11 +4173,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderToolStripContentPanelBackground(System.Windows.Forms.ToolStripContentPanelRenderEventArgs)" />
+
+            
 
             
 
@@ -3606,6 +4200,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -3616,8 +4212,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripContentPanelRenderEventArgs" />
+
+          
 
           
 
@@ -3656,11 +4256,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderToolStripPanelBackground(System.Windows.Forms.ToolStripPanelRenderEventArgs)" />
+
+            
 
             
 
@@ -3679,6 +4283,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -3689,8 +4295,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripPanelRenderEventArgs" />
+
+          
 
           
 
@@ -3729,11 +4339,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripRenderer.OnRenderToolStripStatusLabelBackground(System.Windows.Forms.ToolStripItemRenderEventArgs)" />
+
+            
 
             
 
@@ -3752,6 +4366,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -3762,8 +4378,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripItemRenderEventArgs" />
+
+          
 
           
 
@@ -3799,6 +4419,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -3807,6 +4429,8 @@
           <para
             >Occurs when an arrow on a <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -3843,6 +4467,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -3851,6 +4477,8 @@
           <para
             >Occurs when the background for a <see
              cref="T:System.Windows.Forms.ToolStripButton" />
+
+            
 
             
 
@@ -3887,6 +4515,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -3895,6 +4525,8 @@
           <para
             >Occurs when the background for a <see
              cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+
+            
 
             
 
@@ -3931,6 +4563,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -3939,6 +4573,8 @@
           <para
             >Occurs when the move handle for a <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -3970,6 +4606,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -4010,6 +4648,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -4018,6 +4658,8 @@
           <para
             >Occurs when the background for a <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -4054,6 +4696,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -4062,6 +4706,8 @@
           <para
             >Occurs when the image for a selected <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -4098,6 +4744,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -4106,6 +4754,8 @@
           <para
             >Occurs when the image for a <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -4142,6 +4792,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -4150,6 +4802,8 @@
           <para
             >Occurs when the text for a <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -4186,6 +4840,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -4194,6 +4850,8 @@
           <para
             >Occurs when the background for a <see
              cref="T:System.Windows.Forms.ToolStripLabel" />
+
+            
 
             
 
@@ -4230,6 +4888,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -4238,6 +4898,8 @@
           <para
             >Occurs when the background for a <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+            
 
             
 
@@ -4269,6 +4931,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -4309,6 +4973,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -4317,6 +4983,8 @@
           <para
             >Occurs when a <see
              cref="T:System.Windows.Forms.ToolStripSeparator" />
+
+            
 
             
 
@@ -4353,6 +5021,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -4361,6 +5031,8 @@
           <para
             >Occurs when the background for a <see
              cref="T:System.Windows.Forms.ToolStripSplitButton" />
+
+            
 
             
 
@@ -4392,6 +5064,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -4432,6 +5106,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -4440,6 +5116,8 @@
           <para
             >Occurs when the background for a <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -4476,6 +5154,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -4484,6 +5164,8 @@
           <para
             >Occurs when the border for a <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -4520,6 +5202,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -4528,6 +5212,8 @@
           <para
             >Draws the background of a <see
              cref="T:System.Windows.Forms.ToolStripContentPanel" />
+
+            
 
             
 
@@ -4564,6 +5250,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -4572,6 +5260,8 @@
           <para
             >Draws the background of a <see
              cref="T:System.Windows.Forms.ToolStripPanel" />
+
+            
 
             
 
@@ -4608,6 +5298,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -4616,6 +5308,8 @@
           <para
             >Draws the background of a <see
              cref="T:System.Windows.Forms.ToolStripStatusLabel" />
+
+            
 
             
 

@@ -41,11 +41,15 @@
 
         
 
+        
+
          is read-only; it does not implement methods that add or remove events. You must inherit from this class to implement these methods.</para
       >
       <para
         >Using the properties available in the <see
          cref="T:System.ComponentModel.EventDescriptorCollection" />
+
+        
 
         
 
@@ -58,8 +62,12 @@
 
         
 
+        
+
          property to determine the number of elements in the collection. Use the <see
          cref="P:System.ComponentModel.EventDescriptorCollection.Item(System.Int32)" />
+
+        
 
         
 
@@ -75,6 +83,8 @@
 
         
 
+        
+
          method to get a description of the event with the specified name from the collection.</para
       >
     </remarks>
@@ -83,6 +93,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.ComponentModel.EventDescriptor" />
+
+        
 
         
 
@@ -123,8 +135,12 @@
 
             
 
+            
+
              parameter is empty, this constructor creates an empty <see
              cref="T:System.ComponentModel.EventDescriptorCollection" />
+
+            
 
             
 
@@ -140,8 +156,12 @@
 
             
 
+            
+
              attribute applied to this member has the following <see
              cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+
+            
 
             
 
@@ -154,8 +174,12 @@
 
             
 
+            
+
             . The <see
              cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+            
 
             
 
@@ -168,12 +192,16 @@
 
             
 
+            
+
              class or <format
              type="text/html">
               <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
                 >SQL Server Programming and Host Protection Attributes</a
               >
             </format>
+
+            
 
             
 
@@ -192,8 +220,12 @@
 
             
 
+            
+
              class with the given array of <see
              cref="T:System.ComponentModel.EventDescriptor" />
+
+            
 
             
 
@@ -209,8 +241,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.ComponentModel.EventDescriptor" />
+
+          
 
           
 
@@ -249,8 +285,12 @@
 
             
 
+            
+
              parameter is empty, this constructor creates an empty <see
              cref="T:System.ComponentModel.EventDescriptorCollection" />
+
+            
 
             
 
@@ -267,8 +307,12 @@
 
               
 
+              
+
                attribute applied to this class has the following <see
                cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+
+              
 
               
 
@@ -281,8 +325,12 @@
 
               
 
+              
+
               . The <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -295,12 +343,16 @@
 
               
 
+              
+
                class or <format
                type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
                   >SQL Server Programming and Host Protection Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -320,8 +372,12 @@
 
             
 
+            
+
              class with the given array of <see
              cref="T:System.ComponentModel.EventDescriptor" />
+
+            
 
             
 
@@ -337,8 +393,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.ComponentModel.EventDescriptor" />
+
+          
 
           
 
@@ -348,6 +408,8 @@
         >
         <param name="readOnly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -390,8 +452,12 @@
 
               
 
+              
+
                attribute applied to this class has the following <see
                cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+
+              
 
               
 
@@ -404,8 +470,12 @@
 
               
 
+              
+
               . The <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -418,12 +488,16 @@
 
               
 
+              
+
                class or <format
                type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
                   >SQL Server Programming and Host Protection Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -443,6 +517,8 @@
 
             
 
+            
+
              to the end of the collection.</para
           >
         </summary>
@@ -451,6 +527,8 @@
           <para
             >The position of the <see
              cref="T:System.ComponentModel.EventDescriptor" />
+
+            
 
             
 
@@ -466,8 +544,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.EventDescriptor" />
+
+          
 
           
 
@@ -505,8 +587,12 @@
 
               
 
+              
+
                attribute applied to this class has the following <see
                cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+
+              
 
               
 
@@ -519,8 +605,12 @@
 
               
 
+              
+
               . The <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -533,12 +623,16 @@
 
               
 
+              
+
                class or <format
                type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
                   >SQL Server Programming and Host Protection Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -587,8 +681,12 @@
 
               
 
+              
+
                attribute applied to this class has the following <see
                cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+
+              
 
               
 
@@ -601,8 +699,12 @@
 
               
 
+              
+
               . The <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -615,12 +717,16 @@
 
               
 
+              
+
                class or <format
                type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
                   >SQL Server Programming and Host Protection Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -640,6 +746,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -648,6 +756,8 @@
           <para
             >true if the collection contains the <paramref
              name="value" />
+
+            
 
             
 
@@ -663,8 +773,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.EventDescriptor" />
+
+          
 
           
 
@@ -698,12 +812,16 @@
 
             
 
+            
+
              property can be used to set the limits of a loop that iterates through a collection of objects. If the collection is zero-based, be sure to use Count - 1 as the upper boundary of the loop.</para
           >
           <block subset="none" type="note">
             <para
               >The <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -716,8 +834,12 @@
 
               
 
+              
+
                property value: <see
                cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />
+
+              
 
               
 
@@ -730,8 +852,12 @@
 
               
 
+              
+
                does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -743,6 +869,8 @@
                   >SQL Server Programming and Host Protection Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -819,8 +947,12 @@
 
               
 
+              
+
                attribute applied to this class has the following <see
                cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+
+              
 
               
 
@@ -833,8 +965,12 @@
 
               
 
+              
+
               . The <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -847,12 +983,16 @@
 
               
 
+              
+
                class or <format
                type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
                   >SQL Server Programming and Host Protection Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -876,6 +1016,8 @@
 
             
 
+            
+
              with the specified name, or null if the event does not exist.</para
           >
         </returns>
@@ -886,10 +1028,14 @@
 
           
 
+          
+
           The name of the event to get from the collection. </param
         >
         <param name="ignoreCase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -930,8 +1076,12 @@
 
               
 
+              
+
                attribute applied to this class has the following <see
                cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+
+              
 
               
 
@@ -944,8 +1094,12 @@
 
               
 
+              
+
               . The <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -958,12 +1112,16 @@
 
               
 
+              
+
                class or <format
                type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
                   >SQL Server Programming and Host Protection Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -983,6 +1141,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -991,6 +1151,8 @@
           <para
             >An enumerator that implements <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -1034,8 +1196,12 @@
 
               
 
+              
+
                attribute applied to this class has the following <see
                cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+
+              
 
               
 
@@ -1048,8 +1214,12 @@
 
               
 
+              
+
               . The <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -1062,12 +1232,16 @@
 
               
 
+              
+
                class or <format
                type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
                   >SQL Server Programming and Host Protection Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -1087,6 +1261,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1095,6 +1271,8 @@
           <para
             >The index of the given <see
              cref="T:System.ComponentModel.EventDescriptor" />
+
+            
 
             
 
@@ -1110,8 +1288,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.EventDescriptor" />
+
+          
 
           
 
@@ -1155,8 +1337,12 @@
 
               
 
+              
+
                attribute applied to this class has the following <see
                cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+
+              
 
               
 
@@ -1169,8 +1355,12 @@
 
               
 
+              
+
               . The <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -1183,12 +1373,16 @@
 
               
 
+              
+
                class or <format
                type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
                   >SQL Server Programming and Host Protection Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -1208,6 +1402,8 @@
 
             
 
+            
+
              to the collection at a specified index.</para
           >
         </summary>
@@ -1218,8 +1414,12 @@
 
           
 
+          
+
           The index within the collection in which to insert the <paramref
            name="value" />
+
+          
 
           
 
@@ -1234,8 +1434,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.EventDescriptor" />
+
+          
 
           
 
@@ -1278,12 +1482,16 @@
 
             
 
+            
+
              parameter is null, the default sort order is used.</para
           >
           <block subset="none" type="note">
             <para
               >The <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -1296,8 +1504,12 @@
 
               
 
+              
+
                property value: <see
                cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />
+
+              
 
               
 
@@ -1310,8 +1522,12 @@
 
               
 
+              
+
                does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -1323,6 +1539,8 @@
                   >SQL Server Programming and Host Protection Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -1342,8 +1560,12 @@
 
             
 
+            
+
             , using the specified <see
              cref="T:System.Collections.IComparer" />
+
+            
 
             
 
@@ -1385,8 +1607,12 @@
 
               
 
+              
+
                attribute applied to this class has the following <see
                cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+
+              
 
               
 
@@ -1399,6 +1625,8 @@
 
               
 
+              
+
               . The <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
 
@@ -1406,8 +1634,12 @@
 
               
 
+              
+
                does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -1424,6 +1656,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -1433,6 +1667,8 @@
           <para
             >Sorts the members of this <see
              cref="T:System.ComponentModel.EventDescriptorCollection" />
+
+            
 
             
 
@@ -1532,8 +1768,12 @@
 
               
 
+              
+
                attribute applied to this class has the following <see
                cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+
+              
 
               
 
@@ -1546,8 +1786,12 @@
 
               
 
+              
+
               . The <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -1560,12 +1804,16 @@
 
               
 
+              
+
                class or <format
                type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
                   >SQL Server Programming and Host Protection Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -1585,6 +1833,8 @@
 
             
 
+            
+
              from the collection.</para
           >
         </summary>
@@ -1595,8 +1845,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.EventDescriptor" />
+
+          
 
           
 
@@ -1636,8 +1890,12 @@
 
               
 
+              
+
                attribute applied to this class has the following <see
                cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+
+              
 
               
 
@@ -1650,8 +1908,12 @@
 
               
 
+              
+
               . The <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -1664,12 +1926,16 @@
 
               
 
+              
+
                class or <format
                type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
                   >SQL Server Programming and Host Protection Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -1689,6 +1955,8 @@
 
             
 
+            
+
              at the specified index from the collection.</para
           >
         </summary>
@@ -1699,8 +1967,12 @@
 
           
 
+          
+
           The index of the <see
            cref="T:System.ComponentModel.EventDescriptor" />
+
+          
 
           
 
@@ -1741,8 +2013,12 @@
 
               
 
+              
+
                attribute applied to this class has the following <see
                cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+
+              
 
               
 
@@ -1755,8 +2031,12 @@
 
               
 
+              
+
               . The <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -1769,12 +2049,16 @@
 
               
 
+              
+
                class or <format
                type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
                   >SQL Server Programming and Host Protection Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -1794,6 +2078,8 @@
 
             
 
+            
+
             , using the default sort for this collection, which is usually alphabetical.</para
           >
         </summary>
@@ -1802,6 +2088,8 @@
           <para
             >The new <see
              cref="T:System.ComponentModel.EventDescriptorCollection" />
+
+            
 
             
 
@@ -1844,12 +2132,16 @@
 
             
 
+            
+
              is applied first, followed by the default sort for this collection, which is usually alphabetical.</para
           >
           <block subset="none" type="note">
             <para
               >The <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -1862,8 +2154,12 @@
 
               
 
+              
+
                property value: <see
                cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />
+
+              
 
               
 
@@ -1876,8 +2172,12 @@
 
               
 
+              
+
                does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -1889,6 +2189,8 @@
                   >SQL Server Programming and Host Protection Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -1908,8 +2210,12 @@
 
             
 
+            
+
             , using the specified <see
              cref="T:System.Collections.IComparer" />
+
+            
 
             
 
@@ -1928,11 +2234,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="comparer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1945,8 +2255,12 @@
 
           
 
+          
+
            to use to sort the <see
            cref="T:System.ComponentModel.EventDescriptor" />
+
+          
 
           
 
@@ -1991,8 +2305,12 @@
 
               
 
+              
+
                attribute applied to this class has the following <see
                cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+
+              
 
               
 
@@ -2005,8 +2323,12 @@
 
               
 
+              
+
               . The <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -2019,12 +2341,16 @@
 
               
 
+              
+
                class or <format
                type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
                   >SQL Server Programming and Host Protection Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -2044,6 +2370,8 @@
 
             
 
+            
+
             , given a specified sort order.</para
           >
         </summary>
@@ -2052,6 +2380,8 @@
           <para
             >The new <see
              cref="T:System.ComponentModel.EventDescriptorCollection" />
+
+            
 
             
 
@@ -2096,12 +2426,16 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
             <para
               >The <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -2114,8 +2448,12 @@
 
               
 
+              
+
                property value: <see
                cref="F:System.Security.Permissions.HostProtectionResource.Synchronization" />
+
+              
 
               
 
@@ -2128,8 +2466,12 @@
 
               
 
+              
+
                does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -2141,6 +2483,8 @@
                   >SQL Server Programming and Host Protection Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -2160,8 +2504,12 @@
 
             
 
+            
+
             , given a specified sort order and an <see
              cref="T:System.Collections.IComparer" />
+
+            
 
             
 
@@ -2180,11 +2528,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="comparer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2197,8 +2549,12 @@
 
           
 
+          
+
            to use to sort the <see
            cref="T:System.ComponentModel.EventDescriptor" />
+
+          
 
           
 
@@ -2239,8 +2595,12 @@
 
               
 
+              
+
                attribute applied to this class has the following <see
                cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+
+              
 
               
 
@@ -2253,8 +2613,12 @@
 
               
 
+              
+
               . The <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -2267,12 +2631,16 @@
 
               
 
+              
+
                class or <format
                type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
                   >SQL Server Programming and Host Protection Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -2292,8 +2660,12 @@
 
             
 
+            
+
             , starting at a particular <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -2309,6 +2681,8 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
 
@@ -2316,8 +2690,12 @@
 
           
 
+          
+
            that is the destination of the elements copied from collection. The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -2332,8 +2710,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -2371,8 +2753,12 @@
 
               
 
+              
+
                attribute applied to this class has the following <see
                cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+
+              
 
               
 
@@ -2385,8 +2771,12 @@
 
               
 
+              
+
               . The <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -2399,12 +2789,16 @@
 
               
 
+              
+
                class or <format
                type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
                   >SQL Server Programming and Host Protection Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -2451,8 +2845,12 @@
 
               
 
+              
+
                attribute applied to this class has the following <see
                cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+
+              
 
               
 
@@ -2465,8 +2863,12 @@
 
               
 
+              
+
               . The <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -2479,12 +2881,16 @@
 
               
 
+              
+
                class or <format
                type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
                   >SQL Server Programming and Host Protection Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -2531,8 +2937,12 @@
 
               
 
+              
+
                attribute applied to this class has the following <see
                cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+
+              
 
               
 
@@ -2545,8 +2955,12 @@
 
               
 
+              
+
               . The <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -2559,12 +2973,16 @@
 
               
 
+              
+
                class or <format
                type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
                   >SQL Server Programming and Host Protection Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -2611,8 +3029,12 @@
 
               
 
+              
+
                attribute applied to this class has the following <see
                cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+
+              
 
               
 
@@ -2625,8 +3047,12 @@
 
               
 
+              
+
               . The <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -2639,12 +3065,16 @@
 
               
 
+              
+
                class or <format
                type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
                   >SQL Server Programming and Host Protection Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -2663,6 +3093,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -2703,8 +3135,12 @@
 
               
 
+              
+
                attribute applied to this class has the following <see
                cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+
+              
 
               
 
@@ -2717,8 +3153,12 @@
 
               
 
+              
+
               . The <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -2731,12 +3171,16 @@
 
               
 
+              
+
                class or <format
                type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
                   >SQL Server Programming and Host Protection Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -2761,8 +3205,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -2800,8 +3248,12 @@
 
               
 
+              
+
                attribute applied to this class has the following <see
                cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+
+              
 
               
 
@@ -2814,8 +3266,12 @@
 
               
 
+              
+
               . The <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -2828,12 +3284,16 @@
 
               
 
+              
+
                class or <format
                type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
                   >SQL Server Programming and Host Protection Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -2879,8 +3339,12 @@
 
               
 
+              
+
                attribute applied to this class has the following <see
                cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+
+              
 
               
 
@@ -2893,8 +3357,12 @@
 
               
 
+              
+
               . The <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -2907,12 +3375,16 @@
 
               
 
+              
+
                class or <format
                type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
                   >SQL Server Programming and Host Protection Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -2936,6 +3408,8 @@
 
             
 
+            
+
              is found in the collection; otherwise, false.</para
           >
         </returns>
@@ -2946,8 +3420,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -2987,8 +3465,12 @@
 
               
 
+              
+
                attribute applied to this class has the following <see
                cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+
+              
 
               
 
@@ -3001,8 +3483,12 @@
 
               
 
+              
+
               . The <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -3015,12 +3501,16 @@
 
               
 
+              
+
                class or <format
                type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
                   >SQL Server Programming and Host Protection Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -3044,6 +3534,8 @@
 
             
 
+            
+
              if found in the list; otherwise, -1.</para
           >
         </returns>
@@ -3054,8 +3546,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -3096,8 +3592,12 @@
 
               
 
+              
+
                attribute applied to this class has the following <see
                cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+
+              
 
               
 
@@ -3110,8 +3610,12 @@
 
               
 
+              
+
               . The <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -3124,12 +3628,16 @@
 
               
 
+              
+
                class or <format
                type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
                   >SQL Server Programming and Host Protection Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -3150,8 +3658,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="value" />
+
+          
 
           
 
@@ -3166,8 +3678,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -3205,8 +3721,12 @@
 
               
 
+              
+
                attribute applied to this class has the following <see
                cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+
+              
 
               
 
@@ -3219,8 +3739,12 @@
 
               
 
+              
+
               . The <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -3233,12 +3757,16 @@
 
               
 
+              
+
                class or <format
                type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
                   >SQL Server Programming and Host Protection Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -3282,8 +3810,12 @@
 
               
 
+              
+
                attribute applied to this class has the following <see
                cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+
+              
 
               
 
@@ -3296,8 +3828,12 @@
 
               
 
+              
+
               . The <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -3310,12 +3846,16 @@
 
               
 
+              
+
                class or <format
                type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
                   >SQL Server Programming and Host Protection Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -3389,8 +3929,12 @@
 
               
 
+              
+
                attribute applied to this class has the following <see
                cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+
+              
 
               
 
@@ -3403,8 +3947,12 @@
 
               
 
+              
+
               . The <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -3417,12 +3965,16 @@
 
               
 
+              
+
                class or <format
                type="text/html">
                 <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
                   >SQL Server Programming and Host Protection Attributes</a
                 >
               </format>
+
+              
 
               
 
@@ -3443,8 +3995,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -3484,8 +4040,12 @@
 
               
 
+              
+
                attribute applied to this class has the following <see
                cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+
+              
 
               
 
@@ -3498,6 +4058,8 @@
 
               
 
+              
+
               . The <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
 
@@ -3505,8 +4067,12 @@
 
               
 
+              
+
                does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see
                cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+              
 
               
 
@@ -3523,6 +4089,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -3533,6 +4101,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

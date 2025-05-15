@@ -30,6 +30,8 @@
 
         
 
+        
+
          structures.</para
       >
       <para>For more information about the IEnumFORMATETC interface, see the MSDN Library.</para>
@@ -38,6 +40,8 @@
          type="text/html">
           <a href="610b364b-2761-429d-9c4a-afbc3e66f1b9">How to: Map HRESULTs and Exceptions</a>
         </format>
+
+        
 
         
 
@@ -123,8 +127,12 @@
 
             
 
+            
+
              parameter equals the <paramref
              name="celt" />
+
+            
 
             
 
@@ -140,6 +148,8 @@
 
           
 
+          
+
           The number of <see
            cref="T:System.Runtime.InteropServices.ComTypes.FORMATETC" />
 
@@ -147,8 +157,12 @@
 
           
 
+          
+
            references to return in <paramref
            name="rgelt" />
+
+          
 
           
 
@@ -163,8 +177,12 @@
 
           
 
+          
+
           When this method returns, contains a reference to the enumerated <see
            cref="T:System.Runtime.InteropServices.ComTypes.FORMATETC" />
+
+          
 
           
 
@@ -179,8 +197,12 @@
 
           
 
+          
+
           When this method returns, contains a reference to the actual number of references enumerated in <paramref
            name="rgelt" />
+
+          
 
           
 
@@ -256,11 +278,15 @@
 
             
 
+            
+
              parameter; otherwise, S_FALSE.</para
           >
         </returns>
         <param name="celt">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

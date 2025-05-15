@@ -26,8 +26,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetIPv6GlobalStatistics" />
+
+        
 
         
 
@@ -68,6 +72,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -76,6 +82,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.NetworkInformation.IPGlobalStatistics" />
+
+            
 
             
 
@@ -138,6 +146,8 @@
 
             
 
+            
+
              value that specifies whether Internet Protocol (IP) packet forwarding is enabled.</para
           >
         </summary>
@@ -193,8 +203,12 @@
 
             
 
+            
+
             , this property returns the number of IPv4 addresses assigned to the local computer. Similarly, if this instance was obtained by calling <see
              cref="M:System.Net.NetworkInformation.IPGlobalProperties.GetIPv6GlobalStatistics" />
+
+            
 
             
 

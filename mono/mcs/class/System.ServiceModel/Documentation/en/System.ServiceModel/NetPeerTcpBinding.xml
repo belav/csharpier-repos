@@ -31,11 +31,15 @@
 
         
 
+        
+
          binding provides support for the creation of peer networking applications that use a TCP-level peer-to-peer mesh infrastructure. </para
       >
       <para
         >Each <see
          cref="T:System.ServiceModel.PeerNode" />
+
+        
 
         
 
@@ -48,6 +52,8 @@
 
         
 
+        
+
         ), output-only (implements <see
          cref="T:System.ServiceModel.Channels.IOutputChannel" />
 
@@ -55,8 +61,12 @@
 
         
 
+        
+
         ), and duplex (implements <see
          cref="T:System.ServiceModel.Channels.IDuplexChannel" />
+
+        
 
         
 
@@ -95,6 +105,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -124,6 +136,8 @@
 
             
 
+            
+
              with the supplied name. If a configuration for that name already exists, the settings in the configuration file that contains that name are used. If the name does not already exist, the default configuration settings are used.</para
           >
         </remarks>
@@ -137,11 +151,15 @@
 
             
 
+            
+
              class with a specified configuration name. </para
           >
         </summary>
         <param name="configurationName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -184,8 +202,12 @@
 
             
 
+            
+
              of type <see
              cref="T:System.ServiceModel.Channels.BindingElement" />
+
+            
 
             
 
@@ -268,8 +290,12 @@
 
             
 
+            
+
             , the associated <see
              cref="T:System.ServiceModel.PeerNode" />
+
+            
 
             
 
@@ -285,6 +311,8 @@
 
             
 
+            
+
              object listens on that address. IPv4 and IPv6 wildcard addresses are not considered valid.</para
           >
           <para
@@ -295,11 +323,15 @@
 
             
 
+            
+
             , then the IP address must be associated with a physical interface rather than a virtual one.</para
           >
           <para
             >ListenIPAddress must be set for ad-hoc networks in order to register with the default peer resolver (PNRP). If this property is specified in conjunction with <see
              cref="T:System.ServiceModel.Configuration.PnrpPeerResolverElement" />
+
+            
 
             
 
@@ -336,8 +368,12 @@
 
             
 
+            
+
              cannot be less than <see
              cref="P:System.ServiceModel.NetPeerTcpBinding.MaxReceivedMessageSize" />
+
+            
 
             
 
@@ -393,6 +429,8 @@
 
             
 
+            
+
              is raised. The default value for this property is 0, which indicates that the listener port is randomly selected from all unreserved ports.</para
           >
         </remarks>
@@ -431,6 +469,8 @@
 
             
 
+            
+
              that is associated with this binding.</para
           >
         </summary>
@@ -460,6 +500,8 @@
           <para
             >Gets the <see
              cref="T:System.ServiceModel.PeerResolver" />
+
+            
 
             
 

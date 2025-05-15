@@ -27,6 +27,8 @@
 
         
 
+        
+
          for detailed information about the permissions that are granted to each trust level.</para
       >
       <para
@@ -39,6 +41,8 @@
 
         
 
+        
+
          configuration element in a Web.config or Machine.config file.</para
       >
       <para
@@ -46,6 +50,8 @@
          type="text/html">
           <a href="922ef7d5-da38-4661-b1c6-5b9e5ceda1d5">location</a>
         </format>
+
+        
 
         
 
@@ -86,10 +92,14 @@
 
             
 
+            
+
              trust level in the <format
              type="text/html">
               <a href="eeed0fd3-5aaa-4196-94af-e6baea70dded">trust</a>
             </format>
+
+            
 
             
 
@@ -126,8 +136,12 @@
 
             
 
+            
+
              level will succeed. This level is intended to allow read-only access to limited resources in a constrained environment. This level is granted by specifying the <see
              cref="F:System.Web.AspNetHostingPermissionLevel.Low" />
+
+            
 
             
 
@@ -137,6 +151,8 @@
              type="text/html">
               <a href="eeed0fd3-5aaa-4196-94af-e6baea70dded">trust</a>
             </format>
+
+            
 
             
 
@@ -173,8 +189,12 @@
 
             
 
+            
+
              level will succeed. This level is granted by configuring at least the <see
              cref="F:System.Web.AspNetHostingPermissionLevel.Medium" />
+
+            
 
             
 
@@ -184,6 +204,8 @@
              type="text/html">
               <a href="eeed0fd3-5aaa-4196-94af-e6baea70dded">trust</a>
             </format>
+
+            
 
             
 
@@ -220,8 +242,12 @@
 
             
 
+            
+
              level will succeed. This level allows code to execute but not to interact with resources present on the system. This level is granted by configuring at least the <see
              cref="F:System.Web.AspNetHostingPermissionLevel.Minimal" />
+
+            
 
             
 
@@ -231,6 +257,8 @@
              type="text/html">
               <a href="eeed0fd3-5aaa-4196-94af-e6baea70dded">trust</a>
             </format>
+
+            
 
             
 
@@ -267,6 +295,8 @@
 
             
 
+            
+
              will fail.</para
           >
         </summary>
@@ -295,6 +325,8 @@
              type="text/html">
               <a href="eeed0fd3-5aaa-4196-94af-e6baea70dded">trust</a>
             </format>
+
+            
 
             
 

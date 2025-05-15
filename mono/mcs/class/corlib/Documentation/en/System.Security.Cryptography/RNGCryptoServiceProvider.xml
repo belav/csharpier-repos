@@ -70,6 +70,8 @@ On Windows operating systems the random numbers comes directly from CryptoAPI.
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -102,8 +104,12 @@ On Windows operating systems the random numbers comes directly from CryptoAPI.
 
             
 
+            
+
              class.  Calling this method is equivalent to calling the <see
              cref="M:System.Security.Cryptography.RNGCryptoServiceProvider.#ctor(System.Security.Cryptography.CspParameters)" />
+
+            
 
             
 
@@ -122,11 +128,15 @@ On Windows operating systems the random numbers comes directly from CryptoAPI.
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="rgb">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -167,11 +177,15 @@ On Windows operating systems the random numbers comes directly from CryptoAPI.
 
             
 
+            
+
              class with the specified parameters.</para
           >
         </summary>
         <param name="cspParams">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -208,8 +222,12 @@ On Windows operating systems the random numbers comes directly from CryptoAPI.
 
             
 
+            
+
              class.  Calling this method is equivalent to calling the <see
              cref="M:System.Security.Cryptography.RNGCryptoServiceProvider.#ctor(System.Security.Cryptography.CspParameters)" />
+
+            
 
             
 
@@ -228,11 +246,15 @@ On Windows operating systems the random numbers comes directly from CryptoAPI.
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="str">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -320,6 +342,8 @@ On Windows operating systems the random numbers comes directly from CryptoAPI.
 
           
 
+          
+
           The array to fill with a cryptographically strong sequence of random values. </param
         >
       </Docs>
@@ -353,6 +377,8 @@ On Windows operating systems the random numbers comes directly from CryptoAPI.
         </summary>
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

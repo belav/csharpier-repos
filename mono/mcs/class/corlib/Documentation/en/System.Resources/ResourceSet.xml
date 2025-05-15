@@ -44,8 +44,12 @@
 
         
 
+        
+
          class enumerates over an <see
          cref="T:System.Resources.IResourceReader" />
+
+        
 
         
 
@@ -58,8 +62,12 @@
 
         
 
+        
+
         . A custom <see
          cref="T:System.Resources.IResourceReader" />
+
+        
 
         
 
@@ -75,8 +83,12 @@
 
         
 
+        
+
          object that represents the resources of a specific culture by calling the <see
          cref="M:System.Resources.ResourceManager.GetResourceSet(System.Globalization.CultureInfo,System.Boolean,System.Boolean)" />
+
+        
 
         
 
@@ -117,6 +129,8 @@
 
             
 
+            
+
              class with default properties.</para
           >
         </summary>
@@ -150,8 +164,12 @@
 
             
 
+            
+
              class using the system default <see
              cref="T:System.Resources.ResourceReader" />
+
+            
 
             
 
@@ -167,8 +185,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -208,6 +230,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -221,11 +245,15 @@
 
             
 
+            
+
              class using the specified resource reader.</para
           >
         </summary>
         <param name="reader">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -263,8 +291,12 @@
 
             
 
+            
+
              class using the system default <see
              cref="T:System.Resources.ResourceReader" />
+
+            
 
             
 
@@ -275,6 +307,8 @@
         </summary>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -311,10 +345,14 @@
 
             
 
+            
+
              after a call to this method might fail.</para
           >
           <para>
             <see cref="M:System.Resources.ResourceSet.Close" />
+
+            
 
             
 
@@ -331,8 +369,12 @@
 
               
 
+              
+
                calls <see
                cref="M:System.Resources.ResourceSet.Dispose(System.Boolean)" />
+
+              
 
               
 
@@ -347,6 +389,8 @@
           <para
             >Closes and releases any resources used by this <see
              cref="T:System.Resources.ResourceSet" />
+
+            
 
             
 
@@ -384,8 +428,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Resources.ResourceSet" />
+
+            
 
             
 
@@ -398,8 +446,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Resources.ResourceSet" />
+
+            
 
             
 
@@ -412,8 +464,12 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Resources.ResourceSet" />
+
+            
 
             
 
@@ -430,8 +486,12 @@
 
               
 
+              
+
               . This implementation calls <see
                cref="M:System.Resources.ResourceSet.Dispose(System.Boolean)" />
+
+              
 
               
 
@@ -446,6 +506,8 @@
           <para
             >Disposes of the resources (other than memory) used by the current instance of <see
              cref="T:System.Resources.ResourceSet" />
+
+            
 
             
 
@@ -485,8 +547,12 @@
 
             
 
+            
+
              parameter is true, the current method frees all the resources associated with it as well as with all objects associated with it. If <paramref
              name="dispose" />
+
+            
 
             
 
@@ -501,6 +567,8 @@
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -538,6 +606,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -551,8 +621,12 @@
 
             
 
+            
+
              for the preferred resource reader for this kind of <see
              cref="T:System.Resources.ResourceSet" />
+
+            
 
             
 
@@ -591,6 +665,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -604,8 +680,12 @@
 
             
 
+            
+
              for the preferred resource writer for this kind of <see
              cref="T:System.Resources.ResourceSet" />
+
+            
 
             
 
@@ -652,8 +732,12 @@
 
             
 
+            
+
              also brings the enumerator back to this position. At this position, calling <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -666,8 +750,12 @@
 
             
 
+            
+
              to advance the enumerator to the first element of the collection before reading the value of <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -682,8 +770,12 @@
 
             
 
+            
+
              returns the same object until either <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -696,6 +788,8 @@
 
             
 
+            
+
              is called. <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
 
@@ -703,8 +797,12 @@
 
             
 
+            
+
              sets <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -720,8 +818,12 @@
 
             
 
+            
+
              returns false. If the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -734,8 +836,12 @@
 
             
 
+            
+
              throws an exception. To set <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -748,8 +854,12 @@
 
             
 
+            
+
              followed by <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -765,8 +875,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 
@@ -779,8 +893,12 @@
 
             
 
+            
+
             . If the collection is modified between <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -793,8 +911,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -810,6 +932,8 @@
 
             
 
+            
+
              property to access the value stored in the current element. Use the <see
              cref="P:System.Collections.IDictionaryEnumerator.Key" />
 
@@ -817,8 +941,12 @@
 
             
 
+            
+
              property to access the key of the current element. Use the <see
              cref="P:System.Collections.IDictionaryEnumerator.Value" />
+
+            
 
             
 
@@ -838,8 +966,12 @@
 
             
 
+            
+
              that can iterate through the <see
              cref="T:System.Resources.ResourceSet" />
+
+            
 
             
 
@@ -858,8 +990,12 @@
 
             
 
+            
+
              for this <see
              cref="T:System.Resources.ResourceSet" />
+
+            
 
             
 
@@ -899,6 +1035,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -912,6 +1050,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -954,8 +1094,12 @@
 
             
 
+            
+
              parameter is true, a resource with the name "Resource" is equivalent to the resource with the name "resource". Note, however, that this method always performs case-insensitive string comparisons using <see
              cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+            
 
             
 
@@ -966,6 +1110,8 @@
           <para
             >For example, the Turkish alphabet has two versions of the character I: one with a dot and one without a dot. In Turkish, the character I (Unicode 0049) is considered the uppercase version of a different character ı (Unicode 0131). The character i (Unicode 0069) is considered the lowercase version of yet another character İ (Unicode 0130). According to these casing rules, a case-insensitive string comparison of the characters i (Unicode 0069) and I (Unicode 0049) should fail for the culture "tr-TR" (Turkish in Turkey). Using the GetObject method with <paramref
              name="ignoreCase" />
+
+            
 
             
 
@@ -989,10 +1135,14 @@
 
           
 
+          
+
           Name of the resource to search for. </param
         >
         <param name="ignoreCase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1032,6 +1182,8 @@
 
             
 
+            
+
              resource with the specified name.</para
           >
         </summary>
@@ -1045,11 +1197,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1092,8 +1248,12 @@
 
             
 
+            
+
              parameter is true, a resource with the name "Resource" is equivalent to the resource with the name "resource". Note, however, that this method always performs case-insensitive string comparisons using <see
              cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+            
 
             
 
@@ -1104,6 +1264,8 @@
           <para
             >For example, the Turkish alphabet has two versions of the character I: one with a dot and one without a dot. In Turkish, the character I (Unicode 0049) is considered the uppercase version of a different character ı (Unicode 0131). The character i (Unicode 0069) is considered the lowercase version of yet another character İ (Unicode 0130). According to these casing rules, a case-insensitive string comparison of the characters i (Unicode 0069) and I (Unicode 0049) should fail for the culture "tr-TR" (Turkish in Turkey). Using the GetString method with <paramref
              name="ignoreCase" />
+
+            
 
             
 
@@ -1122,6 +1284,8 @@
 
             
 
+            
+
              resource with the specified name in a case-insensitive manner, if requested.</para
           >
         </summary>
@@ -1130,6 +1294,8 @@
           <para
             >The value of a resource, if the value is a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -1145,10 +1311,14 @@
 
           
 
+          
+
           Name of the resource to search for. </param
         >
         <param name="ignoreCase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1181,6 +1351,8 @@
           <para
             >Indicates the <see
              cref="T:System.Resources.IResourceReader" />
+
+            
 
             
 
@@ -1219,8 +1391,12 @@
 
             
 
+            
+
              indicated in the <see
              cref="F:System.Resources.ResourceSet.Table" />
+
+            
 
             
 
@@ -1262,6 +1438,8 @@
 
             
 
+            
+
              object to avoid a race condition with Dispose. This member is not intended to be used directly from your code.</para
           >
         </summary>
@@ -1270,6 +1448,8 @@
           <para
             >An enumerator for the current <see
              cref="T:System.Resources.ResourceSet" />
+
+            
 
             
 
@@ -1303,6 +1483,8 @@
           <para
             >The <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 

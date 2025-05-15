@@ -22,8 +22,12 @@
 
         
 
+        
+
          and.NET clients receive a SOAP fault by catching a <see
          cref="T:System.Web.Services.Protocols.SoapException" />
+
+        
 
         
 
@@ -36,6 +40,8 @@
 
         
 
+        
+
          has the <see
          cref="P:System.Web.Services.Protocols.SoapException.Code" />
 
@@ -43,8 +49,12 @@
 
         
 
+        
+
          property representing the Code element and the <see
          cref="P:System.Web.Services.Protocols.SoapException.Subcode" />
+
+        
 
         
 
@@ -81,11 +91,15 @@
 
             
 
+            
+
              class sets the application specific error code.</para
           >
         </summary>
         <param name="code">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -98,8 +112,12 @@
 
           
 
+          
+
            specifying the application specific error code. Sets the <see
            cref="P:System.Web.Services.Protocols.SoapFaultSubcode.Code" />
+
+          
 
           
 
@@ -136,11 +154,15 @@
 
             
 
+            
+
              class setting the application specific error code and additional error information.</para
           >
         </summary>
         <param name="code">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -153,8 +175,12 @@
 
           
 
+          
+
            specifying the application specific error code. Sets the <see
            cref="P:System.Web.Services.Protocols.SoapFaultSubcode.Code" />
+
+          
 
           
 
@@ -186,11 +212,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >The value of the <see
              cref="P:System.Web.Services.Protocols.SoapFaultSubcode.Code" />
+
+            
 
             
 
@@ -203,8 +233,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Web.Services.Protocols.Soap12FaultCodes.RpcBadArgumentsFaultCode" />
+
+            
 
             
 
@@ -217,8 +251,12 @@
 
             
 
+            
+
             , and <see
              cref="F:System.Web.Services.Protocols.Soap12FaultCodes.EncodingUntypedValueFaultCode" />
+
+            
 
             
 
@@ -258,11 +296,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >The <see
              cref="P:System.Web.Services.Protocols.SoapFaultSubcode.Subcode" />
+
+            
 
             
 

@@ -22,11 +22,15 @@
 
         
 
+        
+
          enumeration represents the different border style options for a control.</para
       >
       <para
         >The width of the border is controlled by using the <see
          cref="P:System.Web.UI.WebControls.WebControl.BorderWidth" />
+
+        
 
         
 
@@ -39,12 +43,16 @@
 
         
 
+        
+
          class.</para
       >
       <block subset="none" type="note">
         <para
           >When using the <see
            cref="F:System.Web.UI.WebControls.BorderStyle.Double" />
+
+          
 
           
 

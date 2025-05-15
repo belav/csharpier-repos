@@ -24,8 +24,12 @@
 
         
 
+        
+
          event occurs when a visual aspect of an owner-drawn <see
          cref="T:System.Windows.Forms.StatusBarPanel" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          specifies the <see
          cref="T:System.Drawing.Graphics" />
+
+        
 
         
 
@@ -52,6 +60,8 @@
 
         
 
+        
+
          object in which to draw the panel, the panel identification number, state information about the panel, and the panel to draw. You can use the data provided by this class in an event handler for the <see
          cref="E:System.Windows.Forms.StatusBar.DrawItem" />
 
@@ -59,8 +69,12 @@
 
         
 
+        
+
          event to create custom-drawn panels in your application's <see
          cref="T:System.Windows.Forms.StatusBar" />
+
+        
 
         
 
@@ -74,6 +88,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.StatusBar.DrawItem" />
+
+        
 
         
 
@@ -110,8 +126,12 @@
 
             
 
+            
+
              class without specifying a background and foreground color for the <see
              cref="T:System.Windows.Forms.StatusBarPanel" />
+
+            
 
             
 
@@ -127,6 +147,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
 
@@ -134,8 +156,12 @@
 
           
 
+          
+
            to use to draw the <see
            cref="T:System.Windows.Forms.StatusBarPanel" />
+
+          
 
           
 
@@ -150,8 +176,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -166,6 +196,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
 
@@ -173,8 +205,12 @@
 
           
 
+          
+
            that represents the client area of the <see
            cref="T:System.Windows.Forms.StatusBarPanel" />
+
+          
 
           
 
@@ -189,6 +225,8 @@
 
           
 
+          
+
           The zero-based index of the panel in the <see
            cref="T:System.Windows.Forms.StatusBar.StatusBarPanelCollection" />
 
@@ -196,8 +234,12 @@
 
           
 
+          
+
            of the <see
            cref="T:System.Windows.Forms.StatusBar" />
+
+          
 
           
 
@@ -212,6 +254,8 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.DrawItemState" />
 
@@ -219,8 +263,12 @@
 
           
 
+          
+
            values that represents state information about the <see
            cref="T:System.Windows.Forms.StatusBarPanel" />
+
+          
 
           
 
@@ -235,8 +283,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.StatusBarPanel" />
+
+          
 
           
 
@@ -278,8 +330,12 @@
 
             
 
+            
+
              class with a specified background and foreground color for the <see
              cref="T:System.Windows.Forms.StatusBarPanel" />
+
+            
 
             
 
@@ -295,6 +351,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
 
@@ -302,8 +360,12 @@
 
           
 
+          
+
            to use to draw the <see
            cref="T:System.Windows.Forms.StatusBarPanel" />
+
+          
 
           
 
@@ -318,8 +380,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -334,6 +400,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
 
@@ -341,8 +409,12 @@
 
           
 
+          
+
            that represents the client area of the <see
            cref="T:System.Windows.Forms.StatusBarPanel" />
+
+          
 
           
 
@@ -357,6 +429,8 @@
 
           
 
+          
+
           The zero-based index of the panel in the <see
            cref="T:System.Windows.Forms.StatusBar.StatusBarPanelCollection" />
 
@@ -364,8 +438,12 @@
 
           
 
+          
+
            of the <see
            cref="T:System.Windows.Forms.StatusBar" />
+
+          
 
           
 
@@ -380,6 +458,8 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.DrawItemState" />
 
@@ -387,8 +467,12 @@
 
           
 
+          
+
            values that represents state information about the <see
            cref="T:System.Windows.Forms.StatusBarPanel" />
+
+          
 
           
 
@@ -403,8 +487,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.StatusBarPanel" />
+
+          
 
           
 
@@ -419,8 +507,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -435,8 +527,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -471,8 +567,12 @@
 
             
 
+            
+
              property enables you to obtain the <see
              cref="T:System.Windows.Forms.StatusBarPanel" />
+
+            
 
             
 
@@ -485,6 +585,8 @@
 
             
 
+            
+
              event of a <see
              cref="T:System.Windows.Forms.StatusBar" />
 
@@ -492,8 +594,12 @@
 
             
 
+            
+
              control to perform drawing tasks on the <see
              cref="T:System.Windows.Forms.StatusBarPanel" />
+
+            
 
             
 
@@ -507,6 +613,8 @@
           <para
             >Gets the <see
              cref="T:System.Windows.Forms.StatusBarPanel" />
+
+            
 
             
 

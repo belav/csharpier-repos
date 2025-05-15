@@ -47,6 +47,8 @@
 
             
 
+            
+
              class using the specified array of toolbox items.</para
           >
         </summary>
@@ -57,8 +59,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 
@@ -94,6 +100,8 @@
 
             
 
+            
+
              class using the specified collection.</para
           >
         </summary>
@@ -104,8 +112,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Design.ToolboxItemCollection" />
+
+          
 
           
 
@@ -143,6 +155,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -157,8 +171,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 
@@ -198,10 +216,14 @@
 
           
 
+          
+
           The array to copy to. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -239,6 +261,8 @@
 
             
 
+            
+
             , if it exists in the collection.</para
           >
         </summary>
@@ -247,6 +271,8 @@
           <para
             >The index of the specified <see
              cref="T:System.Drawing.Design.ToolboxItem" />
+
+            
 
             
 
@@ -262,8 +288,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 

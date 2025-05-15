@@ -20,8 +20,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Windows.Forms.TabControl.Deselected" />
+
+        
 
         
 
@@ -34,6 +38,8 @@
 
         
 
+        
+
         , and <see
          cref="E:System.Windows.Forms.TabControl.Selected" />
 
@@ -41,8 +47,12 @@
 
         
 
+        
+
          events of a <see
          cref="T:System.Windows.Forms.TabControl" />
+
+        
 
         
 
@@ -56,6 +66,8 @@
       <para
         >Defines values representing <see
          cref="T:System.Windows.Forms.TabControl" />
+
+        
 
         
 
@@ -79,6 +91,8 @@
           <para
             >Represents the <see
              cref="E:System.Windows.Forms.TabControl.Deselected" />
+
+            
 
             
 
@@ -110,6 +124,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -136,6 +152,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -157,6 +175,8 @@
           <para
             >Represents the <see
              cref="E:System.Windows.Forms.TabControl.Selecting" />
+
+            
 
             
 

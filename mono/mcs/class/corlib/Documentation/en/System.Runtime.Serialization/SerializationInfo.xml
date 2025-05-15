@@ -33,8 +33,12 @@
 
         
 
+        
+
          method on either <see
          cref="T:System.Runtime.Serialization.ISerializable" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          populates the <see
          cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+        
 
         
 
@@ -64,8 +72,12 @@
 
         
 
+        
+
          store at serialization time using the <see
          cref="M:System.Runtime.Serialization.SerializationInfo.AddValue(System.String,System.Object,System.Type)" />
+
+        
 
         
 
@@ -78,8 +90,12 @@
 
         
 
+        
+
          store at deserialization using the <see
          cref="M:System.Runtime.Serialization.SerializationInfo.GetValue(System.String,System.Type)" />
+
+        
 
         
 
@@ -94,6 +110,8 @@
             >[&lt;topic://cpconCustomSerialization&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -144,6 +162,8 @@
 
             
 
+            
+
              passed as the <paramref
              name="converter" />
 
@@ -151,8 +171,12 @@
 
             
 
+            
+
              parameter converts data from its internal representation to the form the user requested. The internal representation of the data within the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -171,6 +195,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -181,8 +207,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -197,8 +227,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.IFormatterConverter" />
+
+          
 
           
 
@@ -238,6 +272,8 @@
 
             
 
+            
+
              to be thrown. For example:</para
           >
           <code>void ISerializable.GetObject(SerializationInfo info, StreamingContext context)
@@ -269,6 +305,8 @@ End Sub</code>
 
             
 
+            
+
              store.</para
           >
         </summary>
@@ -279,10 +317,14 @@ End Sub</code>
 
           
 
+          
+
           The name to associate with the value, so it can be deserialized later. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -322,6 +364,8 @@ End Sub</code>
 
             
 
+            
+
              to be thrown. </para
           >
         </remarks>
@@ -330,6 +374,8 @@ End Sub</code>
           <para
             >Adds an 8-bit unsigned integer value into the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -345,10 +391,14 @@ End Sub</code>
 
           
 
+          
+
           The name to associate with the value, so it can be deserialized later. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -388,6 +438,8 @@ End Sub</code>
 
             
 
+            
+
              to be thrown. </para
           >
         </remarks>
@@ -396,6 +448,8 @@ End Sub</code>
           <para
             >Adds a Unicode character value into the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -411,10 +465,14 @@ End Sub</code>
 
           
 
+          
+
           The name to associate with the value, so it can be deserialized later. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -454,6 +512,8 @@ End Sub</code>
 
             
 
+            
+
              to be thrown. </para
           >
         </remarks>
@@ -467,8 +527,12 @@ End Sub</code>
 
             
 
+            
+
              value into the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -484,6 +548,8 @@ End Sub</code>
 
           
 
+          
+
           The name to associate with the value, so it can be deserialized later. </param
         >
         <param name="value">
@@ -493,8 +559,12 @@ End Sub</code>
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -534,6 +604,8 @@ End Sub</code>
 
             
 
+            
+
              to be thrown. </para
           >
         </remarks>
@@ -542,6 +614,8 @@ End Sub</code>
           <para
             >Adds a decimal value into the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -557,10 +631,14 @@ End Sub</code>
 
           
 
+          
+
           The name to associate with the value, so it can be deserialized later. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -600,6 +678,8 @@ End Sub</code>
 
             
 
+            
+
              to be thrown. </para
           >
         </remarks>
@@ -608,6 +688,8 @@ End Sub</code>
           <para
             >Adds a double-precision floating-point value into the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -623,10 +705,14 @@ End Sub</code>
 
           
 
+          
+
           The name to associate with the value, so it can be deserialized later. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -666,6 +752,8 @@ End Sub</code>
 
             
 
+            
+
              to be thrown. </para
           >
         </remarks>
@@ -674,6 +762,8 @@ End Sub</code>
           <para
             >Adds a 16-bit signed integer value into the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -689,10 +779,14 @@ End Sub</code>
 
           
 
+          
+
           The name to associate with the value, so it can be deserialized later. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -732,6 +826,8 @@ End Sub</code>
 
             
 
+            
+
              to be thrown. </para
           >
         </remarks>
@@ -740,6 +836,8 @@ End Sub</code>
           <para
             >Adds a 32-bit signed integer value into the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -755,10 +853,14 @@ End Sub</code>
 
           
 
+          
+
           The name to associate with the value, so it can be deserialized later. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -798,6 +900,8 @@ End Sub</code>
 
             
 
+            
+
              to be thrown. </para
           >
         </remarks>
@@ -806,6 +910,8 @@ End Sub</code>
           <para
             >Adds a 64-bit signed integer value into the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -821,10 +927,14 @@ End Sub</code>
 
           
 
+          
+
           The name to associate with the value, so it can be deserialized later. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -864,8 +974,12 @@ End Sub</code>
 
             
 
+            
+
              parameter is serialized as the type returned by <paramref
              name="value" />
+
+            
 
             
 
@@ -876,6 +990,8 @@ End Sub</code>
           <para
             >If two values are added with names that differ only by case, no exception will be thrown, which is not a recommended practice. However, adding two values with the exact same name will cause the <see
              cref="T:System.Runtime.Serialization.SerializationException" />
+
+            
 
             
 
@@ -894,6 +1010,8 @@ End Sub</code>
 
             
 
+            
+
              store, where it is associated with a specified name.</para
           >
         </summary>
@@ -904,10 +1022,14 @@ End Sub</code>
 
           
 
+          
+
           The name to associate with the value, so it can be deserialized later. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -952,6 +1074,8 @@ End Sub</code>
 
             
 
+            
+
              to be thrown. </para
           >
         </remarks>
@@ -960,6 +1084,8 @@ End Sub</code>
           <para
             >Adds an 8-bit signed integer value into the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -975,10 +1101,14 @@ End Sub</code>
 
           
 
+          
+
           The name to associate with the value, so it can be deserialized later. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1018,6 +1148,8 @@ End Sub</code>
 
             
 
+            
+
              to be thrown.</para
           >
         </remarks>
@@ -1026,6 +1158,8 @@ End Sub</code>
           <para
             >Adds a single-precision floating-point value into the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -1041,10 +1175,14 @@ End Sub</code>
 
           
 
+          
+
           The name to associate with the value, so it can be deserialized later. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1089,6 +1227,8 @@ End Sub</code>
 
             
 
+            
+
              to be thrown.</para
           >
         </remarks>
@@ -1097,6 +1237,8 @@ End Sub</code>
           <para
             >Adds a 16-bit unsigned integer value into the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -1112,10 +1254,14 @@ End Sub</code>
 
           
 
+          
+
           The name to associate with the value, so it can be deserialized later. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1160,6 +1306,8 @@ End Sub</code>
 
             
 
+            
+
              to be thrown.</para
           >
         </remarks>
@@ -1168,6 +1316,8 @@ End Sub</code>
           <para
             >Adds a 32-bit unsigned integer value into the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -1183,10 +1333,14 @@ End Sub</code>
 
           
 
+          
+
           The name to associate with the value, so it can be deserialized later. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1231,6 +1385,8 @@ End Sub</code>
 
             
 
+            
+
              to be thrown.</para
           >
         </remarks>
@@ -1239,6 +1395,8 @@ End Sub</code>
           <para
             >Adds a 64-bit unsigned integer value into the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -1254,10 +1412,14 @@ End Sub</code>
 
           
 
+          
+
           The name to associate with the value, so it can be deserialized later. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1302,6 +1464,8 @@ End Sub</code>
 
             
 
+            
+
              to be thrown. </para
           >
         </remarks>
@@ -1315,8 +1479,12 @@ End Sub</code>
 
             
 
+            
+
              store, where <paramref
              name="value" />
+
+            
 
             
 
@@ -1329,9 +1497,13 @@ End Sub</code>
 
             
 
+            
+
              and is serialized as being of <see
              cref="T:System.Type" />
             <paramref name="type" />
+
+            
 
             
 
@@ -1347,10 +1519,14 @@ End Sub</code>
 
           
 
+          
+
           The name to associate with the value, so it can be deserialized later. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1365,8 +1541,12 @@ End Sub</code>
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1400,8 +1580,12 @@ End Sub</code>
 
             
 
+            
+
              is the same as the value returned by <see
              cref="P:System.Reflection.Assembly.FullName" />
+
+            
 
             
 
@@ -1445,6 +1629,8 @@ End Sub</code>
 
             
 
+            
+
              is the same as what would be returned by calling the <see
              cref="P:System.Type.FullName" />
 
@@ -1452,8 +1638,12 @@ End Sub</code>
 
             
 
+            
+
              on <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -1471,6 +1661,8 @@ End Sub</code>
           <para
             >Gets or sets the full name of the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -1510,6 +1702,8 @@ End Sub</code>
 
             
 
+            
+
              is thrown. All conversions are done by the <see
              cref="T:System.Runtime.Serialization.IFormatterConverter" />
 
@@ -1517,8 +1711,12 @@ End Sub</code>
 
             
 
+            
+
              associated with this <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -1537,6 +1735,8 @@ End Sub</code>
 
             
 
+            
+
              store.</para
           >
         </summary>
@@ -1550,11 +1750,15 @@ End Sub</code>
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1593,6 +1797,8 @@ End Sub</code>
 
             
 
+            
+
              is thrown. All conversions are done by the <see
              cref="T:System.Runtime.Serialization.IFormatterConverter" />
 
@@ -1600,8 +1806,12 @@ End Sub</code>
 
             
 
+            
+
              associated with this <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -1620,6 +1830,8 @@ End Sub</code>
 
             
 
+            
+
              store.</para
           >
         </summary>
@@ -1633,11 +1845,15 @@ End Sub</code>
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1676,6 +1892,8 @@ End Sub</code>
 
             
 
+            
+
              is thrown. All conversions are done by the <see
              cref="T:System.Runtime.Serialization.IFormatterConverter" />
 
@@ -1683,8 +1901,12 @@ End Sub</code>
 
             
 
+            
+
              associated with this <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -1703,6 +1925,8 @@ End Sub</code>
 
             
 
+            
+
              store.</para
           >
         </summary>
@@ -1716,11 +1940,15 @@ End Sub</code>
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1759,8 +1987,12 @@ End Sub</code>
 
             
 
+            
+
             , or can be converted to a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -1773,6 +2005,8 @@ End Sub</code>
 
             
 
+            
+
              is thrown. All conversions are done by the <see
              cref="T:System.Runtime.Serialization.IFormatterConverter" />
 
@@ -1780,8 +2014,12 @@ End Sub</code>
 
             
 
+            
+
              associated with this <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -1800,8 +2038,12 @@ End Sub</code>
 
             
 
+            
+
              value from the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -1820,8 +2062,12 @@ End Sub</code>
 
             
 
+            
+
              value associated with <paramref
              name="name" />
+
+            
 
             
 
@@ -1832,6 +2078,8 @@ End Sub</code>
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1870,6 +2118,8 @@ End Sub</code>
 
             
 
+            
+
              is thrown. All conversions are done by the <see
              cref="T:System.Runtime.Serialization.IFormatterConverter" />
 
@@ -1877,8 +2127,12 @@ End Sub</code>
 
             
 
+            
+
              associated with this <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -1897,6 +2151,8 @@ End Sub</code>
 
             
 
+            
+
              store.</para
           >
         </summary>
@@ -1910,11 +2166,15 @@ End Sub</code>
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1953,6 +2213,8 @@ End Sub</code>
 
             
 
+            
+
              is thrown. All conversions are done by the <see
              cref="T:System.Runtime.Serialization.IFormatterConverter" />
 
@@ -1960,8 +2222,12 @@ End Sub</code>
 
             
 
+            
+
              associated with this <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -1980,6 +2246,8 @@ End Sub</code>
 
             
 
+            
+
              store.</para
           >
         </summary>
@@ -1993,11 +2261,15 @@ End Sub</code>
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2041,8 +2313,12 @@ End Sub</code>
 
             
 
+            
+
              used to iterate through the name-value pairs in the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -2061,8 +2337,12 @@ End Sub</code>
 
             
 
+            
+
              for parsing the name-value pairs contained in the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -2102,6 +2382,8 @@ End Sub</code>
 
             
 
+            
+
              is thrown. All conversions are done by the <see
              cref="T:System.Runtime.Serialization.IFormatterConverter" />
 
@@ -2109,8 +2391,12 @@ End Sub</code>
 
             
 
+            
+
              associated with this <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -2129,6 +2415,8 @@ End Sub</code>
 
             
 
+            
+
              store.</para
           >
         </summary>
@@ -2142,11 +2430,15 @@ End Sub</code>
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2185,6 +2477,8 @@ End Sub</code>
 
             
 
+            
+
              is thrown. All conversions are done by the <see
              cref="T:System.Runtime.Serialization.IFormatterConverter" />
 
@@ -2192,8 +2486,12 @@ End Sub</code>
 
             
 
+            
+
              associated with this <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -2212,6 +2510,8 @@ End Sub</code>
 
             
 
+            
+
              store.</para
           >
         </summary>
@@ -2225,11 +2525,15 @@ End Sub</code>
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2268,6 +2572,8 @@ End Sub</code>
 
             
 
+            
+
              is thrown. All conversions are done by the <see
              cref="T:System.Runtime.Serialization.IFormatterConverter" />
 
@@ -2275,8 +2581,12 @@ End Sub</code>
 
             
 
+            
+
              associated with this <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -2295,6 +2605,8 @@ End Sub</code>
 
             
 
+            
+
              store.</para
           >
         </summary>
@@ -2308,11 +2620,15 @@ End Sub</code>
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2356,6 +2672,8 @@ End Sub</code>
 
             
 
+            
+
              is thrown. All conversions are done by the <see
              cref="T:System.Runtime.Serialization.IFormatterConverter" />
 
@@ -2363,8 +2681,12 @@ End Sub</code>
 
             
 
+            
+
              associated with this <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -2383,6 +2705,8 @@ End Sub</code>
 
             
 
+            
+
              store.</para
           >
         </summary>
@@ -2396,11 +2720,15 @@ End Sub</code>
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2439,6 +2767,8 @@ End Sub</code>
 
             
 
+            
+
              is thrown. All conversions are done by the <see
              cref="T:System.Runtime.Serialization.IFormatterConverter" />
 
@@ -2446,8 +2776,12 @@ End Sub</code>
 
             
 
+            
+
              associated with this <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -2466,6 +2800,8 @@ End Sub</code>
 
             
 
+            
+
              store.</para
           >
         </summary>
@@ -2479,11 +2815,15 @@ End Sub</code>
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2522,8 +2862,12 @@ End Sub</code>
 
             
 
+            
+
             , or can be converted to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -2536,6 +2880,8 @@ End Sub</code>
 
             
 
+            
+
              is thrown. All conversions are done by the <see
              cref="T:System.Runtime.Serialization.IFormatterConverter" />
 
@@ -2543,8 +2889,12 @@ End Sub</code>
 
             
 
+            
+
              associated with this <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -2563,8 +2913,12 @@ End Sub</code>
 
             
 
+            
+
              value from the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -2583,8 +2937,12 @@ End Sub</code>
 
             
 
+            
+
              associated with <paramref
              name="name" />
+
+            
 
             
 
@@ -2595,6 +2953,8 @@ End Sub</code>
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2638,6 +2998,8 @@ End Sub</code>
 
             
 
+            
+
              is thrown. All conversions are done by the <see
              cref="T:System.Runtime.Serialization.IFormatterConverter" />
 
@@ -2645,8 +3007,12 @@ End Sub</code>
 
             
 
+            
+
              associated with this <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -2665,6 +3031,8 @@ End Sub</code>
 
             
 
+            
+
              store.</para
           >
         </summary>
@@ -2678,11 +3046,15 @@ End Sub</code>
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2726,6 +3098,8 @@ End Sub</code>
 
             
 
+            
+
              is thrown. All conversions are done by the <see
              cref="T:System.Runtime.Serialization.IFormatterConverter" />
 
@@ -2733,8 +3107,12 @@ End Sub</code>
 
             
 
+            
+
              associated with this <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -2753,6 +3131,8 @@ End Sub</code>
 
             
 
+            
+
              store.</para
           >
         </summary>
@@ -2766,11 +3146,15 @@ End Sub</code>
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2814,6 +3198,8 @@ End Sub</code>
 
             
 
+            
+
              is thrown. All conversions are done by the <see
              cref="T:System.Runtime.Serialization.IFormatterConverter" />
 
@@ -2821,8 +3207,12 @@ End Sub</code>
 
             
 
+            
+
              associated with this <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -2841,6 +3231,8 @@ End Sub</code>
 
             
 
+            
+
              store.</para
           >
         </summary>
@@ -2854,11 +3246,15 @@ End Sub</code>
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2898,8 +3294,12 @@ End Sub</code>
 
             
 
+            
+
              is of the type requested (or one of its derived classes), that value is returned directly. Otherwise, <see
              cref="M:System.Runtime.Serialization.IFormatterConverter.Convert(System.Object,System.Type)" />
+
+            
 
             
 
@@ -2915,8 +3315,12 @@ End Sub</code>
 
             
 
+            
+
              method can always be safely cast to the type specified in the <paramref
              name="type" />
+
+            
 
             
 
@@ -2935,6 +3339,8 @@ End Sub</code>
 
             
 
+            
+
              store.</para
           >
         </summary>
@@ -2948,8 +3354,12 @@ End Sub</code>
 
             
 
+            
+
              associated with <paramref
              name="name" />
+
+            
 
             
 
@@ -2965,10 +3375,14 @@ End Sub</code>
 
           
 
+          
+
           The name associated with the value to retrieve.</param
         >
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2981,8 +3395,12 @@ End Sub</code>
 
           
 
+          
+
            of the value to retrieve. If the stored value cannot be converted to this type, the system will throw a <see
            cref="T:System.InvalidCastException" />
+
+          
 
           
 
@@ -3055,6 +3473,8 @@ End Sub</code>
 
             
 
+            
+
              store.</para
           >
         </summary>
@@ -3108,8 +3528,12 @@ End Sub</code>
 
             
 
+            
+
              is responsible for setting the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -3122,8 +3546,12 @@ End Sub</code>
 
             
 
+            
+
              instance before passing it to <see
              cref="M:System.Runtime.Serialization.ISerializable.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+
+            
 
             
 
@@ -3136,8 +3564,12 @@ End Sub</code>
 
             
 
+            
+
              instance. Using the <see
              cref="M:System.Runtime.Serialization.SerializationInfo.SetType(System.Type)" />
+
+            
 
             
 
@@ -3150,8 +3582,12 @@ End Sub</code>
 
             
 
+            
+
              and the <see
              cref="P:System.Runtime.Serialization.SerializationInfo.AssemblyName" />
+
+            
 
             
 
@@ -3170,6 +3606,8 @@ End Sub</code>
 
             
 
+            
+
              of the object to serialize.</para
           >
         </summary>
@@ -3180,8 +3618,12 @@ End Sub</code>
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 

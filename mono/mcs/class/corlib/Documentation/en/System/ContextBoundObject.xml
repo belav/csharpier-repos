@@ -38,6 +38,8 @@
 
         
 
+        
+
          that provides the usage rules. The context properties that can be added include policies regarding synchronization and transactions.</para
       >
     </remarks>
@@ -68,6 +70,8 @@
           <para
             >Instantiates an instance of the <see
              cref="T:System.ContextBoundObject" />
+
+            
 
             
 

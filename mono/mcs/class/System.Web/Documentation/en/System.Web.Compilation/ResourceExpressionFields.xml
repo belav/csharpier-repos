@@ -21,8 +21,12 @@
 
         
 
+        
+
          class. This <see
          cref="T:System.Web.Compilation.ResourceExpressionFields" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
+
+        
 
         
 
@@ -52,8 +60,12 @@
 
         
 
+        
+
          property identifies the class name of a resource that is mapped to a resource file. For example, to reference a resource file named Financial.resx, or a localized version such as Financial.en-GB.resx, the resource expression would appear as &lt;%$ Resources: Financial, ResourceKey %&gt;. After parsing, the <see
          cref="P:System.Web.Compilation.ResourceExpressionFields.ClassKey" />
+
+        
 
         
 
@@ -69,8 +81,12 @@
 
         
 
+        
+
          property identifies the particular key/value pair to be retrieved from the file. If the Financial.resx file contains a key called Currency, that value could be specified with the resource expression &lt;%$ Resources: Financial, Currency %&gt;. After parsing, the <see
          cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
+
+        
 
         
 
@@ -81,6 +97,8 @@
       <para
         >The resource expression is parsed through the <see
          cref="M:System.Web.Compilation.ResourceExpressionBuilder.ParseExpression(System.String)" />
+
+        
 
         
 
@@ -117,11 +135,15 @@
 
             
 
+            
+
              property. The class key cannot contain spaces or double-byte character sets (DBCS).</para
           >
           <para
             >To reference a resource file named Financial.resx or a localized version such as Financial.en-GB.resx, you would include the resource expression &lt;%$ Resources: Financial, ResourceKey %&gt;. After parsing, the <see
              cref="P:System.Web.Compilation.ResourceExpressionFields.ClassKey" />
+
+            
 
             
 
@@ -161,8 +183,12 @@
 
             
 
+            
+
              property identifies a particular key/value pair within the resource file mapped to the class key. For example, if a file named Financial.resx contains a key called Currency, that value could be specified with the resource expression &lt;%$ Resources: Financial, Currency %&gt;. After parsing, the <see
              cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
+
+            
 
             
 

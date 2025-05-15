@@ -37,8 +37,12 @@
 
         
 
+        
+
          does not perform efficiently when working with large numbers of columns. Typically, <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -51,8 +55,12 @@
 
         
 
+        
+
          to determine if the entire grid is selected, or you can use the <see
          cref="M:System.Windows.Forms.DataGridViewColumnCollection.GetColumnCount(System.Windows.Forms.DataGridViewElementStates)" />
+
+        
 
         
 
@@ -64,6 +72,8 @@
             >Best Practices for Scaling the Windows Forms DataGridView Control</a
           >
         </format>
+
+        
 
         
 
@@ -82,8 +92,12 @@
 
         
 
+        
+
          objects that are selected in a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -113,6 +127,8 @@
 
             
 
+            
+
              class directly. To clear the <see
              cref="T:System.Windows.Forms.DataGridViewSelectedColumnCollection" />
 
@@ -120,8 +136,12 @@
 
             
 
+            
+
             , use the <see
              cref="M:System.Windows.Forms.DataGridView.ClearSelection" />
+
+            
 
             
 
@@ -173,11 +193,15 @@
 
             
 
+            
+
              parameter is in the collection; otherwise, false.</para
           >
         </returns>
         <param name="dataGridViewColumn">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -190,8 +214,12 @@
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Windows.Forms.DataGridViewSelectedColumnCollection" />
+
+          
 
           
 
@@ -231,10 +259,14 @@
 
           
 
+          
+
           The one-dimensional array that is the destination of the elements copied from the collection. The array must have zero-based indexing.</param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -272,6 +304,8 @@
 
             
 
+            
+
              class directly. To insert a column into the <see
              cref="T:System.Windows.Forms.DataGridViewSelectedColumnCollection" />
 
@@ -279,8 +313,12 @@
 
             
 
+            
+
             , use the <see
              cref="P:System.Windows.Forms.DataGridViewBand.Selected" />
+
+            
 
             
 
@@ -300,10 +338,14 @@
 
           
 
+          
+
           The zero-based index at which the column should be inserted. </param
         >
         <param name="dataGridViewColumn">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -316,8 +358,12 @@
 
           
 
+          
+
            to insert into the <see
            cref="T:System.Windows.Forms.DataGridViewSelectedColumnCollection" />
+
+          
 
           
 
@@ -400,6 +446,8 @@
 
             
 
+            
+
              class directly. To add a column to the <see
              cref="T:System.Windows.Forms.DataGridViewSelectedColumnCollection" />
 
@@ -407,8 +455,12 @@
 
             
 
+            
+
             , use the <see
              cref="P:System.Windows.Forms.DataGridViewBand.Selected" />
+
+            
 
             
 
@@ -424,8 +476,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -444,8 +500,12 @@
 
             
 
+            
+
              method. Always throws <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -465,8 +525,12 @@
 
           
 
+          
+
           The item to be added to the <see
            cref="T:System.Windows.Forms.DataGridViewSelectedColumnCollection" />
+
+          
 
           
 
@@ -497,6 +561,8 @@
 
             
 
+            
+
              class directly. To clear the <see
              cref="T:System.Windows.Forms.DataGridViewSelectedColumnCollection" />
 
@@ -504,8 +570,12 @@
 
             
 
+            
+
             , use the <see
              cref="M:System.Windows.Forms.DataGridView.ClearSelection" />
+
+            
 
             
 
@@ -521,8 +591,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -541,8 +615,12 @@
 
             
 
+            
+
              method. Always throws <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -576,8 +654,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -600,6 +682,8 @@
 
             
 
+            
+
              parameter is in the collection; otherwise, false.</para
           >
         </returns>
@@ -610,8 +694,12 @@
 
           
 
+          
+
           An object to locate in the <see
            cref="T:System.Windows.Forms.DataGridViewSelectedColumnCollection" />
+
+          
 
           
 
@@ -644,8 +732,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -668,11 +760,15 @@
 
             
 
+            
+
              parameter if it is found in the collection; otherwise, -1.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -706,6 +802,8 @@
 
             
 
+            
+
              class directly. To add a column to the <see
              cref="T:System.Windows.Forms.DataGridViewSelectedColumnCollection" />
 
@@ -713,8 +811,12 @@
 
             
 
+            
+
             , use the <see
              cref="P:System.Windows.Forms.DataGridViewBand.Selected" />
+
+            
 
             
 
@@ -730,8 +832,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -750,8 +856,12 @@
 
             
 
+            
+
              method. Always throws <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -767,8 +877,12 @@
 
           
 
+          
+
           The index at which <paramref
            name="value" />
+
+          
 
           
 
@@ -783,8 +897,12 @@
 
           
 
+          
+
           The object to be added to the <see
            cref="T:System.Windows.Forms.DataGridViewSelectedColumnCollection" />
+
+          
 
           
 
@@ -815,8 +933,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -876,6 +998,8 @@
 
             
 
+            
+
              class directly. To remove a column from the <see
              cref="T:System.Windows.Forms.DataGridViewSelectedColumnCollection" />
 
@@ -883,8 +1007,12 @@
 
             
 
+            
+
             , use the <see
              cref="P:System.Windows.Forms.DataGridViewBand.Selected" />
+
+            
 
             
 
@@ -900,8 +1028,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -920,8 +1052,12 @@
 
             
 
+            
+
              method. Always throws <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -937,8 +1073,12 @@
 
           
 
+          
+
           The object to be removed from the <see
            cref="T:System.Windows.Forms.DataGridViewSelectedColumnCollection" />
+
+          
 
           
 
@@ -971,6 +1111,8 @@
 
             
 
+            
+
              class directly. To remove a column from the <see
              cref="T:System.Windows.Forms.DataGridViewSelectedColumnCollection" />
 
@@ -978,8 +1120,12 @@
 
             
 
+            
+
             , use the <see
              cref="P:System.Windows.Forms.DataGridViewBand.Selected" />
+
+            
 
             
 
@@ -995,8 +1141,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1015,8 +1165,12 @@
 
             
 
+            
+
              method. Always throws <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -1027,6 +1181,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

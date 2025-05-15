@@ -30,6 +30,8 @@
 
         
 
+        
+
          property of <see
          cref="T:System.Web.Services.Discovery.DiscoveryClientProtocol" />
 
@@ -37,8 +39,12 @@
 
         
 
+        
+
          is of type <see
          cref="T:System.Web.Services.Discovery.DiscoveryExceptionDictionary" />
+
+        
 
         
 
@@ -65,6 +71,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Discovery.DiscoveryExceptionDictionary" />
+
+            
 
             
 
@@ -101,6 +109,8 @@
 
             
 
+            
+
              with a key of <paramref
              name="url" />
 
@@ -108,8 +118,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Web.Services.Discovery.DiscoveryExceptionDictionary" />
+
+            
 
             
 
@@ -125,6 +139,8 @@
 
           
 
+          
+
           The URL that caused an exception during XML Web services discovery. </param
         >
         <param name="value">
@@ -134,8 +150,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Exception" />
+
+          
 
           
 
@@ -170,8 +190,12 @@
 
             
 
+            
+
              contains an <see
              cref="T:System.Exception" />
+
+            
 
             
 
@@ -190,8 +214,12 @@
 
             
 
+            
+
              contains an <see
              cref="T:System.Exception" />
+
+            
 
             
 
@@ -207,6 +235,8 @@
 
           
 
+          
+
           The URL of the <see
            cref="T:System.Exception" />
 
@@ -214,8 +244,12 @@
 
           
 
+          
+
            to locate within the <see
            cref="T:System.Web.Services.Discovery.DiscoveryExceptionDictionary" />
+
+          
 
           
 
@@ -272,8 +306,12 @@
 
             
 
+            
+
              object with all the keys in the <see
              cref="T:System.Web.Services.Discovery.DiscoveryExceptionDictionary" />
+
+            
 
             
 
@@ -309,8 +347,12 @@
 
             
 
+            
+
              with the specified URL from the <see
              cref="T:System.Web.Services.Discovery.DiscoveryExceptionDictionary" />
+
+            
 
             
 
@@ -326,6 +368,8 @@
 
           
 
+          
+
           The URL of the <see
            cref="T:System.Exception" />
 
@@ -333,8 +377,12 @@
 
           
 
+          
+
            to remove from the <see
            cref="T:System.Web.Services.Discovery.DiscoveryExceptionDictionary" />
+
+          
 
           
 
@@ -374,8 +422,12 @@
 
             
 
+            
+
              object containing all the values in the <see
              cref="T:System.Web.Services.Discovery.DiscoveryExceptionDictionary" />
+
+            
 
             
 

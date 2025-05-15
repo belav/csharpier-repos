@@ -28,8 +28,12 @@
 
         
 
+        
+
          is the <see
          cref="T:System.Windows.Forms.ProgressBar" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
         . A subset of the hosted control's properties and events are exposed at the <see
          cref="T:System.Windows.Forms.ToolStripProgressBar" />
+
+        
 
         
 
@@ -56,8 +64,12 @@
 
         
 
+        
+
          control is fully accessible through the <see
          cref="P:System.Windows.Forms.ToolStripProgressBar.ProgressBar" />
+
+        
 
         
 
@@ -73,8 +85,12 @@
 
         
 
+        
+
          control visually indicates the progress of a lengthy operation. The <see
          cref="T:System.Windows.Forms.ToolStripProgressBar" />
+
+        
 
         
 
@@ -91,6 +107,8 @@
 
           
 
+          
+
            control can only be oriented horizontally. </para
         >
       </block>
@@ -102,8 +120,12 @@
 
         
 
+        
+
          control is typically used when an application performs tasks such as copying files or printing documents. Users of an application might consider an application unresponsive if there is no visual cue. Use the <see
          cref="T:System.Windows.Forms.ToolStripProgressBar" />
+
+        
 
         
 
@@ -119,8 +141,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.ToolStripProgressBar.Minimum" />
+
+        
 
         
 
@@ -133,8 +159,12 @@
 
         
 
+        
+
          property is typically set to a value of zero, and the <see
          cref="P:System.Windows.Forms.ToolStripProgressBar.Maximum" />
+
+        
 
         
 
@@ -147,8 +177,12 @@
 
         
 
+        
+
          property could be set to the total number of files to be copied. The <see
          cref="P:System.Windows.Forms.ToolStripProgressBar.Value" />
+
+        
 
         
 
@@ -161,8 +195,12 @@
 
         
 
+        
+
          only approximates the <see
          cref="P:System.Windows.Forms.ToolStripProgressBar.Value" />
+
+        
 
         
 
@@ -175,8 +213,12 @@
 
         
 
+        
+
         , the <see
          cref="P:System.Windows.Forms.ToolStripProgressBar.Value" />
+
+        
 
         
 
@@ -192,8 +234,12 @@
 
         
 
+        
+
          other than changing the <see
          cref="P:System.Windows.Forms.ToolStripProgressBar.Value" />
+
+        
 
         
 
@@ -206,8 +252,12 @@
 
         
 
+        
+
          property to specify a specific value to increment the <see
          cref="P:System.Windows.Forms.ToolStripProgressBar.Value" />
+
+        
 
         
 
@@ -220,6 +270,8 @@
 
         
 
+        
+
          method to increment the value. To vary the increment value, you can use the <see
          cref="M:System.Windows.Forms.ToolStripProgressBar.Increment(System.Int32)" />
 
@@ -227,8 +279,12 @@
 
         
 
+        
+
          method and specify a value by which to increment the <see
          cref="P:System.Windows.Forms.ToolStripProgressBar.Value" />
+
+        
 
         
 
@@ -243,8 +299,12 @@
 
         
 
+        
+
          replaces the older <see
          cref="T:System.Windows.Forms.ProgressBar" />
+
+        
 
         
 
@@ -258,6 +318,8 @@
       <para
         >Represents a Windows progress bar control contained in a <see
          cref="T:System.Windows.Forms.StatusStrip" />
+
+        
 
         
 
@@ -284,6 +346,8 @@
 
             
 
+            
+
              property is set to 0, the <see
              cref="P:System.Windows.Forms.ToolStripProgressBar.Maximum" />
 
@@ -291,8 +355,12 @@
 
             
 
+            
+
              property is set to 100, and the <see
              cref="P:System.Windows.Forms.ToolStripProgressBar.Step" />
+
+            
 
             
 
@@ -306,6 +374,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ToolStripProgressBar" />
+
+            
 
             
 
@@ -338,6 +408,8 @@
 
             
 
+            
+
              class with specified name. </para
           >
         </summary>
@@ -348,8 +420,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Windows.Forms.ToolStripProgressBar" />
+
+          
 
           
 
@@ -457,6 +533,8 @@
 
             
 
+            
+
              and adjacent items.</para
           >
         </summary>
@@ -480,6 +558,8 @@
           <para
             >Gets the height and width of the <see
              cref="T:System.Windows.Forms.ToolStripProgressBar" />
+
+            
 
             
 
@@ -514,8 +594,12 @@
 
             
 
+            
+
              method enables you to increment the value of the progress bar by a specific amount. This method of incrementing the progress bar is similar to using the <see
              cref="P:System.Windows.Forms.ToolStripProgressBar.Step" />
+
+            
 
             
 
@@ -528,8 +612,12 @@
 
             
 
+            
+
              method. The <see
              cref="P:System.Windows.Forms.ToolStripProgressBar.Value" />
+
+            
 
             
 
@@ -542,8 +630,12 @@
 
             
 
+            
+
             . If, after calling the <see
              cref="M:System.Windows.Forms.ToolStripProgressBar.Increment(System.Int32)" />
+
+            
 
             
 
@@ -556,8 +648,12 @@
 
             
 
+            
+
              property is greater than the value of the <see
              cref="P:System.Windows.Forms.ToolStripProgressBar.Maximum" />
+
+            
 
             
 
@@ -570,8 +666,12 @@
 
             
 
+            
+
              property remains at the value of the <see
              cref="P:System.Windows.Forms.ToolStripProgressBar.Maximum" />
+
+            
 
             
 
@@ -584,8 +684,12 @@
 
             
 
+            
+
              method with a negative value specified in the <paramref
              name="value" />
+
+            
 
             
 
@@ -598,8 +702,12 @@
 
             
 
+            
+
              property is less than the value of the <see
              cref="P:System.Windows.Forms.ToolStripProgressBar.Minimum" />
+
+            
 
             
 
@@ -612,8 +720,12 @@
 
             
 
+            
+
              property remains at the value of the <see
              cref="P:System.Windows.Forms.ToolStripProgressBar.Minimum" />
+
+            
 
             
 
@@ -628,6 +740,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -791,8 +905,12 @@
 
             
 
+            
+
              property gets or sets the delay of display update. Therefore, as you decrease the value of the <see
              cref="P:System.Windows.Forms.ToolStripProgressBar.MarqueeAnimationSpeed" />
+
+            
 
             
 
@@ -806,6 +924,8 @@
           <para
             >Gets or sets a value representing the delay between each <see
              cref="F:System.Windows.Forms.ProgressBarStyle.Marquee" />
+
+            
 
             
 
@@ -843,8 +963,12 @@
 
             
 
+            
+
              property. When the value of the <see
              cref="P:System.Windows.Forms.ToolStripProgressBar.Maximum" />
+
+            
 
             
 
@@ -857,6 +981,8 @@
 
             
 
+            
+
              control is redrawn to reflect the new range of the control. When the value of the <see
              cref="P:System.Windows.Forms.ToolStripProgressBar.Value" />
 
@@ -864,8 +990,12 @@
 
             
 
+            
+
              property is equal to the value of the <see
              cref="P:System.Windows.Forms.ToolStripProgressBar.Maximum" />
+
+            
 
             
 
@@ -881,8 +1011,12 @@
 
             
 
+            
+
              property must be set to (by setting the <see
              cref="P:System.Windows.Forms.ToolStripProgressBar.Value" />
+
+            
 
             
 
@@ -895,8 +1029,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.ToolStripProgressBar.PerformStep" />
+
+            
 
             
 
@@ -909,8 +1047,12 @@
 
             
 
+            
+
              property to the total number of files in a file copy operation. Each time a file is copied, the <see
              cref="P:System.Windows.Forms.ToolStripProgressBar.Value" />
+
+            
 
             
 
@@ -924,6 +1066,8 @@
           <para
             >Gets or sets the upper bound of the range that is defined for this <see
              cref="T:System.Windows.Forms.ToolStripProgressBar" />
+
+            
 
             
 
@@ -964,8 +1108,12 @@
 
             
 
+            
+
              property. When the value of the <see
              cref="P:System.Windows.Forms.ToolStripProgressBar.Minimum" />
+
+            
 
             
 
@@ -978,8 +1126,12 @@
 
             
 
+            
+
              control is redrawn to reflect the new range of the control. When the value of the <see
              cref="P:System.Windows.Forms.ToolStripProgressBar.Value" />
+
+            
 
             
 
@@ -992,8 +1144,12 @@
 
             
 
+            
+
              property, the progress bar is empty. To change the value of the progress bar, use the <see
              cref="P:System.Windows.Forms.ToolStripProgressBar.Step" />
+
+            
 
             
 
@@ -1006,6 +1162,8 @@
 
             
 
+            
+
              method, use the <see
              cref="M:System.Windows.Forms.ToolStripProgressBar.Increment(System.Int32)" />
 
@@ -1013,8 +1171,12 @@
 
             
 
+            
+
              method, or set the value of the <see
              cref="P:System.Windows.Forms.ToolStripProgressBar.Value" />
+
+            
 
             
 
@@ -1028,6 +1190,8 @@
           <para
             >Gets or sets the lower bound of the range that is defined for this <see
              cref="T:System.Windows.Forms.ToolStripProgressBar" />
+
+            
 
             
 
@@ -1069,11 +1233,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripProgressBar.OnRightToLeftLayoutChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1092,6 +1260,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -1102,8 +1272,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1205,8 +1379,12 @@
 
             
 
+            
+
              method increments the value of the progress bar by the amount specified by the <see
              cref="P:System.Windows.Forms.ToolStripProgressBar.Step" />
+
+            
 
             
 
@@ -1219,8 +1397,12 @@
 
             
 
+            
+
              property to specify the amount that each completed task in an operation changes the value of the progress bar. For example, if you are copying a group of files, you might want to set the value of the <see
              cref="P:System.Windows.Forms.ToolStripProgressBar.Step" />
+
+            
 
             
 
@@ -1233,8 +1415,12 @@
 
             
 
+            
+
              property to the total number of files to copy. When each file is copied, you can call the <see
              cref="M:System.Windows.Forms.ToolStripProgressBar.PerformStep" />
+
+            
 
             
 
@@ -1247,6 +1433,8 @@
 
             
 
+            
+
              property. If you want to have more flexible control of the value of the progress bar, you can use the <see
              cref="M:System.Windows.Forms.ToolStripProgressBar.Increment(System.Int32)" />
 
@@ -1254,8 +1442,12 @@
 
             
 
+            
+
              method or set the value of the <see
              cref="P:System.Windows.Forms.ToolStripProgressBar.Value" />
+
+            
 
             
 
@@ -1271,8 +1463,12 @@
 
             
 
+            
+
              property specifies the current position of the <see
              cref="T:System.Windows.Forms.ToolStripProgressBar" />
+
+            
 
             
 
@@ -1285,8 +1481,12 @@
 
             
 
+            
+
              method, the <see
              cref="P:System.Windows.Forms.ToolStripProgressBar.Value" />
+
+            
 
             
 
@@ -1299,8 +1499,12 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Windows.Forms.ToolStripProgressBar.Value" />
+
+            
 
             
 
@@ -1313,8 +1517,12 @@
 
             
 
+            
+
              property. If, after calling the <see
              cref="M:System.Windows.Forms.ToolStripProgressBar.PerformStep" />
+
+            
 
             
 
@@ -1327,8 +1535,12 @@
 
             
 
+            
+
              parameter, the <see
              cref="P:System.Windows.Forms.ToolStripProgressBar.Value" />
+
+            
 
             
 
@@ -1341,6 +1553,8 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Windows.Forms.ToolStripProgressBar.Value" />
 
@@ -1348,8 +1562,12 @@
 
             
 
+            
+
              property remains at the value of the <see
              cref="P:System.Windows.Forms.ToolStripProgressBar.Minimum" />
+
+            
 
             
 
@@ -1363,6 +1581,8 @@
           <para
             >Advances the current position of the progress bar by the amount of the <see
              cref="P:System.Windows.Forms.ToolStripProgressBar.Step" />
+
+            
 
             
 
@@ -1406,6 +1626,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1414,6 +1636,8 @@
           <para
             >Gets the <see
              cref="T:System.Windows.Forms.ProgressBar" />
+
+            
 
             
 
@@ -1456,8 +1680,12 @@
 
             
 
+            
+
              property to control the layout of international applications in which the language is written from right to left. When the <see
              cref="P:System.Windows.Forms.ToolStripProgressBar.RightToLeftLayout" />
+
+            
 
             
 
@@ -1470,8 +1698,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Windows.Forms.RightToLeft.Yes" />
+
+            
 
             
 
@@ -1490,6 +1722,8 @@
 
             
 
+            
+
              layout is right-to-left or left-to-right when the <see
              cref="T:System.Windows.Forms.RightToLeft" />
 
@@ -1497,8 +1731,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Windows.Forms.RightToLeft.Yes" />
+
+            
 
             
 
@@ -1531,6 +1769,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1539,6 +1779,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ToolStripProgressBar.RightToLeftLayout" />
+
+            
 
             
 
@@ -1574,8 +1816,12 @@
 
             
 
+            
+
              when the <see
              cref="M:System.Windows.Forms.ToolStripProgressBar.PerformStep" />
+
+            
 
             
 
@@ -1612,6 +1858,8 @@
           <para
             >Gets or sets the style of the <see
              cref="T:System.Windows.Forms.ToolStripProgressBar" />
+
+            
 
             
 
@@ -1655,8 +1903,12 @@
 
             
 
+            
+
              has a <see
              cref="P:System.Windows.Forms.ToolStripProgressBar.Text" />
+
+            
 
             
 
@@ -1670,6 +1922,8 @@
           <para
             >Gets or sets the text displayed on the <see
              cref="T:System.Windows.Forms.ToolStripProgressBar" />
+
+            
 
             
 
@@ -1800,6 +2054,8 @@
 
             
 
+            
+
              property must be in the range specified by the <see
              cref="P:System.Windows.Forms.ToolStripProgressBar.Minimum" />
 
@@ -1807,8 +2063,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ToolStripProgressBar.Maximum" />
+
+            
 
             
 
@@ -1822,6 +2082,8 @@
           <para
             >Gets or sets the current value of the <see
              cref="T:System.Windows.Forms.ToolStripProgressBar" />
+
+            
 
             
 

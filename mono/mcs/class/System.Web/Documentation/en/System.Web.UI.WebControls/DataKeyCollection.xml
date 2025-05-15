@@ -31,8 +31,12 @@
 
         
 
+        
+
          class represents a collection of the key fields in the data source. The key field of each record in the data source is stored in this collection. This allows you to store the key field with a data listing control without displaying it in the control. This collection is automatically filled with the values from the field specified by the <see
          cref="P:System.Web.UI.WebControls.BaseDataList.DataKeyField" />
+
+        
 
         
 
@@ -49,8 +53,12 @@
 
         
 
+        
+
          property to determine the number of items in the collection. To programmatically retrieve a key field from a <see
          cref="T:System.Web.UI.WebControls.DataKeyCollection" />
+
+        
 
         
 
@@ -71,8 +79,12 @@
 
             
 
+            
+
              method to copy the contents of the collection to a <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -90,8 +102,12 @@
 
             
 
+            
+
              method to create a <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -129,6 +145,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -137,6 +155,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.DataKeyCollection" />
+
+            
 
             
 
@@ -152,8 +172,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.ArrayList" />
+
+          
 
           
 
@@ -188,8 +212,12 @@
 
             
 
+            
+
              into the specified <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -206,8 +234,12 @@
 
               
 
+              
+
                parameter must be a zero-based <see
                cref="T:System.Array" />
+
+              
 
               
 
@@ -227,6 +259,8 @@
 
             
 
+            
+
              to the specified <see
              cref="T:System.Array" />
 
@@ -234,8 +268,12 @@
 
             
 
+            
+
              object, starting at the specified index in the <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -251,6 +289,8 @@
 
           
 
+          
+
           A zero-based <see
            cref="T:System.Array" />
 
@@ -258,8 +298,12 @@
 
           
 
+          
+
            object that receives the copied items from the <see
            cref="T:System.Web.UI.WebControls.DataKeyCollection" />
+
+          
 
           
 
@@ -274,8 +318,12 @@
 
           
 
+          
+
           The first position in the specified <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -302,6 +350,8 @@
           <para
             >Use the <see
              cref="P:System.Web.UI.WebControls.DataKeyCollection.Count" />
+
+            
 
             
 
@@ -341,8 +391,12 @@
 
             
 
+            
+
              implemented object that can be iterated through to get each item in the <see
              cref="T:System.Web.UI.WebControls.DataKeyCollection" />
+
+            
 
             
 
@@ -358,6 +412,8 @@
 
             
 
+            
+
              property to get the item currently pointed to in the collection.</para
           >
           <para
@@ -368,11 +424,15 @@
 
             
 
+            
+
              method to move to the next item in the collection.</para
           >
           <para
             >Use the <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 
@@ -389,8 +449,12 @@
 
               
 
+              
+
                implemented object or use the <see
                cref="M:System.Collections.IEnumerator.Reset" />
+
+              
 
               
 
@@ -403,8 +467,12 @@
 
               
 
+              
+
                method. Otherwise, the item represented by the <see
                cref="P:System.Collections.IEnumerator.Current" />
+
+              
 
               
 
@@ -424,8 +492,12 @@
 
             
 
+            
+
              implemented object that contains all key fields in the <see
              cref="T:System.Web.UI.WebControls.DataKeyCollection" />
+
+            
 
             
 
@@ -444,8 +516,12 @@
 
             
 
+            
+
              implemented object that contains all key fields in the <see
              cref="T:System.Web.UI.WebControls.DataKeyCollection" />
+
+            
 
             
 
@@ -478,6 +554,8 @@
 
             
 
+            
+
              can be written to in all cases.</para
           >
         </remarks>
@@ -486,6 +564,8 @@
           <para
             >Gets a value indicating whether items in the <see
              cref="T:System.Web.UI.WebControls.DataKeyCollection" />
+
+            
 
             
 
@@ -518,8 +598,12 @@
 
             
 
+            
+
              interface and is overridden to always return false to indicate that the <see
              cref="T:System.Web.UI.WebControls.DataKeyCollection" />
+
+            
 
             
 
@@ -535,6 +619,8 @@
 
             
 
+            
+
              property, see the <see
              cref="P:System.Collections.ICollection.IsSynchronized" />
 
@@ -542,8 +628,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -557,6 +647,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Web.UI.WebControls.DataKeyCollection" />
+
+            
 
             
 
@@ -609,11 +701,15 @@
 
             
 
+            
+
              object itself.</para
           >
           <para
             >For more information on the <see
              cref="P:System.Web.UI.WebControls.DataKeyCollection.SyncRoot" />
+
+            
 
             
 
@@ -626,8 +722,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -641,6 +741,8 @@
           <para
             >Gets the object used to synchronize access to the <see
              cref="T:System.Web.UI.WebControls.DataKeyCollection" />
+
+            
 
             
 

@@ -28,6 +28,8 @@
 
         
 
+        
+
          control arranges its contents in a grid. Because the layout is performed both at design time and run time, it can change dynamically as the application environment changes. This gives the controls in the panel the ability to proportionally resize, so it can respond to changes such as the parent control resizing or text length changing due to localization.</para
       >
       <para
@@ -38,8 +40,12 @@
 
         
 
+        
+
          control, including other instances of <see
          cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+        
 
         
 
@@ -55,8 +61,12 @@
 
         
 
+        
+
          control can expand to accommodate new controls when they are added, depending on the value of the <see
          cref="P:System.Windows.Forms.TableLayoutPanel.RowCount" />
+
+        
 
         
 
@@ -69,8 +79,12 @@
 
         
 
+        
+
         , and <see
          cref="P:System.Windows.Forms.TableLayoutPanel.GrowStyle" />
+
+        
 
         
 
@@ -83,6 +97,8 @@
 
         
 
+        
+
          or <see
          cref="P:System.Windows.Forms.TableLayoutPanel.ColumnCount" />
 
@@ -90,8 +106,12 @@
 
         
 
+        
+
          property to a value of 0 specifies that the <see
          cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+        
 
         
 
@@ -107,8 +127,12 @@
 
         
 
+        
+
          control is full of child controls. By default, the <see
          cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+        
 
         
 
@@ -124,8 +148,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.TableLayoutPanel.ColumnStyles" />
+
+        
 
         
 
@@ -141,11 +169,15 @@
 
         
 
+        
+
          control adds the following properties to its child controls: Cell, Column, Row, ColumnSpan, and RowSpan.</para
       >
       <para
         >You can merge cells in the <see
          cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+        
 
         
 
@@ -162,8 +194,12 @@
 
           
 
+          
+
           , <see
            cref="M:System.Windows.Forms.TableLayoutPanel.SetColumn(System.Windows.Forms.Control,System.Int32)" />
+
+          
 
           
 
@@ -176,6 +212,8 @@
 
           
 
+          
+
           , <see
            cref="M:System.Windows.Forms.TableLayoutPanel.SetColumnSpan(System.Windows.Forms.Control,System.Int32)" />
 
@@ -183,8 +221,12 @@
 
           
 
+          
+
           , and <see
            cref="M:System.Windows.Forms.TableLayoutPanel.SetRowSpan(System.Windows.Forms.Control,System.Int32)" />
+
+          
 
           
 
@@ -200,8 +242,12 @@
 
           
 
+          
+
           , <see
            cref="M:System.Windows.Forms.TableLayoutPanel.GetColumn(System.Windows.Forms.Control)" />
+
+          
 
           
 
@@ -214,6 +260,8 @@
 
           
 
+          
+
           , <see
            cref="M:System.Windows.Forms.TableLayoutPanel.GetColumnSpan(System.Windows.Forms.Control)" />
 
@@ -221,8 +269,12 @@
 
           
 
+          
+
           , and <see
            cref="M:System.Windows.Forms.TableLayoutPanel.GetRowSpan(System.Windows.Forms.Control)" />
+
+          
 
           
 
@@ -240,8 +292,12 @@
 
         
 
+        
+
          differs from the behavior in other container controls. If the value of the child control's <see
          cref="P:System.Windows.Forms.Control.Anchor" />
+
+        
 
         
 
@@ -254,8 +310,12 @@
 
         
 
+        
+
          or <see
          cref="F:System.Windows.Forms.AnchorStyles.Right" />
+
+        
 
         
 
@@ -268,8 +328,12 @@
 
         
 
+        
+
          property and the panel's <see
          cref="P:System.Windows.Forms.Control.Padding" />
+
+        
 
         
 
@@ -282,8 +346,12 @@
 
         
 
+        
+
          and <see
          cref="F:System.Windows.Forms.AnchorStyles.Right" />
+
+        
 
         
 
@@ -296,8 +364,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.Control.Padding" />
+
+        
 
         
 
@@ -310,8 +382,12 @@
 
         
 
+        
+
          and <see
          cref="F:System.Windows.Forms.AnchorStyles.Bottom" />
+
+        
 
         
 
@@ -328,11 +404,15 @@
 
         
 
+        
+
         . </para
       >
       <para
         >If you need a child control to mimic the default anchoring behavior in other container controls, you can adjust the <see
          cref="P:System.Windows.Forms.Control.Margin" />
+
+        
 
         
 
@@ -345,11 +425,15 @@
 
         
 
+        
+
          properties to maintain a constant distance between the control's border and the cell's border.</para
       >
       <para
         >Setting the values of both the Column and Row properties of a child control to -1 will cause the control to be moved to the first empty cell in the <see
          cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+        
 
         
 
@@ -366,8 +450,12 @@
 
           
 
+          
+
            property set to true participate in the <see
            cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+          
 
           
 
@@ -404,8 +492,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.TableLayoutPanel.ColumnCount" />
+
+            
 
             
 
@@ -418,8 +510,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.TableLayoutPanel.GrowStyle" />
+
+            
 
             
 
@@ -433,6 +529,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+            
 
             
 
@@ -536,6 +634,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -564,8 +664,12 @@
 
             
 
+            
+
              and the <see
              cref="P:System.Windows.Forms.TableLayoutPanel.RowCount" />
+
+            
 
             
 
@@ -578,8 +682,12 @@
 
             
 
+            
+
              property allows for such growth. If the value of <see
              cref="P:System.Windows.Forms.TableLayoutPanel.RowCount" />
+
+            
 
             
 
@@ -592,8 +700,12 @@
 
             
 
+            
+
              is 0, the panel will grow by adding columns. Specifying panel growth with the <see
              cref="P:System.Windows.Forms.TableLayoutPanel.GrowStyle" />
+
+            
 
             
 
@@ -606,8 +718,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Windows.Forms.TableLayoutPanel.ColumnCount" />
+
+            
 
             
 
@@ -618,6 +734,8 @@
           <para
             >Controls can be added or deleted from the table using the <see
              cref="P:System.Windows.Forms.TableLayoutPanel.Controls" />
+
+            
 
             
 
@@ -681,8 +799,12 @@
 
             
 
+            
+
              property to access the style properties of specific columns. You can use members of the <see
              cref="T:System.Windows.Forms.ColumnStyle" />
+
+            
 
             
 
@@ -698,8 +820,12 @@
 
             
 
+            
+
              control arranges its columns, it assigns priorities to each <see
              cref="T:System.Windows.Forms.ColumnStyle" />
+
+            
 
             
 
@@ -717,8 +843,12 @@
 
                 
 
+                
+
                  set to <see
                  cref="F:System.Windows.Forms.SizeType.Absolute" />
+
+                
 
                 
 
@@ -736,8 +866,12 @@
 
                 
 
+                
+
                  set to <see
                  cref="F:System.Windows.Forms.SizeType.AutoSize" />
+
+                
 
                 
 
@@ -755,8 +889,12 @@
 
                 
 
+                
+
                  set to <see
                  cref="F:System.Windows.Forms.SizeType.Percent" />
+
+                
 
                 
 
@@ -772,6 +910,8 @@
           <para
             >Gets a collection of column styles for the <see
              cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+            
 
             
 
@@ -814,8 +954,12 @@
 
             
 
+            
+
              property contains all of the controls associated with the table, including controls that may not be currently displayed because of <see
              cref="P:System.Windows.Forms.TableLayoutPanel.GrowStyle" />
+
+            
 
             
 
@@ -828,8 +972,12 @@
 
             
 
+            
+
             , or <see
              cref="P:System.Windows.Forms.TableLayoutPanel.RowCount" />
+
+            
 
             
 
@@ -843,6 +991,8 @@
           <para
             >Gets the collection of controls contained within the <see
              cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+            
 
             
 
@@ -882,6 +1032,8 @@
           <para
             >A new instance of <see
              cref="T:System.Windows.Forms.Control.ControlCollection" />
+
+            
 
             
 
@@ -930,6 +1082,8 @@
 
             
 
+            
+
              that represents the row and the column of the cell.</para
           >
         </summary>
@@ -943,11 +1097,15 @@
 
             
 
+            
+
              that represents the cell position.</para
           >
         </returns>
         <param name="control">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -994,8 +1152,12 @@
 
             
 
+            
+
              spans two or more columns, the <see
              cref="M:System.Windows.Forms.TableLayoutPanel.GetColumn(System.Windows.Forms.Control)" />
+
+            
 
             
 
@@ -1006,6 +1168,8 @@
           <para
             >The column position value is zero based, so you can use it as an index for the array returned by <see
              cref="M:System.Windows.Forms.TableLayoutPanel.GetColumnWidths" />
+
+            
 
             
 
@@ -1022,6 +1186,8 @@
 
             
 
+            
+
             , even when its position is determined by <see
              cref="P:System.Windows.Forms.TableLayoutPanel.LayoutEngine" />
 
@@ -1029,8 +1195,12 @@
 
             
 
+            
+
             , call the <see
              cref="M:System.Windows.Forms.TableLayoutPanel.GetPositionFromControl(System.Windows.Forms.Control)" />
+
+            
 
             
 
@@ -1054,8 +1224,12 @@
 
             
 
+            
+
              is determined by <see
              cref="P:System.Windows.Forms.TableLayoutPanel.LayoutEngine" />
+
+            
 
             
 
@@ -1071,8 +1245,12 @@
 
           
 
+          
+
           A child control of the <see
            cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+          
 
           
 
@@ -1126,8 +1304,12 @@
 
           
 
+          
+
           A child control of the <see
            cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+          
 
           
 
@@ -1167,6 +1349,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1180,8 +1364,12 @@
 
             
 
+            
+
              that contains the widths, in pixels, of the columns in the <see
              cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+            
 
             
 
@@ -1227,6 +1415,8 @@
 
             
 
+            
+
              property set to false.</para
           >
         </returns>
@@ -1237,10 +1427,14 @@
 
           
 
+          
+
           The column position of the control to retrieve.</param
         >
         <param name="row">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1276,8 +1470,12 @@
 
             
 
+            
+
              method returns the actual current position of <paramref
              name="control" />
+
+            
 
             
 
@@ -1290,8 +1488,12 @@
 
             
 
+            
+
             . This method takes into account the entire <see
              cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+            
 
             
 
@@ -1304,6 +1506,8 @@
 
             
 
+            
+
              has placed a control with its Column and Row properties set to -1. This is equivalent to the situation in which <see
              cref="M:System.Windows.Forms.TableLayoutPanel.GetColumn(System.Windows.Forms.Control)" />
 
@@ -1311,8 +1515,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.TableLayoutPanel.GetRow(System.Windows.Forms.Control)" />
+
+            
 
             
 
@@ -1331,6 +1539,8 @@
 
             
 
+            
+
              that represents the row and the column of the cell that contains the control.</para
           >
         </summary>
@@ -1344,11 +1554,15 @@
 
             
 
+            
+
              that represents the cell position.</para
           >
         </returns>
         <param name="control">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1395,8 +1609,12 @@
 
             
 
+            
+
              spans two or more rows, the <see
              cref="M:System.Windows.Forms.TableLayoutPanel.GetRow(System.Windows.Forms.Control)" />
+
+            
 
             
 
@@ -1407,6 +1625,8 @@
           <para
             >The row position value is zero based, so you can use it as an index for the array returned by <see
              cref="M:System.Windows.Forms.TableLayoutPanel.GetRowHeights" />
+
+            
 
             
 
@@ -1423,6 +1643,8 @@
 
             
 
+            
+
             , even when its position is determined by <see
              cref="P:System.Windows.Forms.TableLayoutPanel.LayoutEngine" />
 
@@ -1430,8 +1652,12 @@
 
             
 
+            
+
             , call the <see
              cref="M:System.Windows.Forms.TableLayoutPanel.GetPositionFromControl(System.Windows.Forms.Control)" />
+
+            
 
             
 
@@ -1454,6 +1680,8 @@
 
             
 
+            
+
             , or -1 if the position of <paramref
              name="control" />
 
@@ -1461,8 +1689,12 @@
 
             
 
+            
+
              is determined by <see
              cref="P:System.Windows.Forms.TableLayoutPanel.LayoutEngine" />
+
+            
 
             
 
@@ -1478,8 +1710,12 @@
 
           
 
+          
+
           A child control of the <see
            cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+          
 
           
 
@@ -1519,6 +1755,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1532,8 +1770,12 @@
 
             
 
+            
+
              that contains the heights, in pixels, of the rows in the <see
              cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+            
 
             
 
@@ -1588,8 +1830,12 @@
 
           
 
+          
+
           A child control of the <see
            cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+          
 
           
 
@@ -1628,12 +1874,16 @@
 
             
 
+            
+
              control expands downward by adding rows. </para
           >
           <block subset="none" type="note">
             <para
               >If an attempt is made to add a control to a full <see
                cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+              
 
               
 
@@ -1646,6 +1896,8 @@
 
               
 
+              
+
                is <see
                cref="F:System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize" />
 
@@ -1653,8 +1905,12 @@
 
               
 
+              
+
               , then an <see
                cref="T:System.ArgumentException" />
+
+              
 
               
 
@@ -1669,6 +1925,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+            
 
             
 
@@ -1760,8 +2018,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.TableLayoutCellPaintEventArgs" />
+
+          
 
           
 
@@ -1804,6 +2066,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1812,6 +2076,8 @@
           <para
             >Raises the <see
              cref="E:System.Windows.Forms.Control.Layout" />
+
+            
 
             
 
@@ -1827,8 +2093,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.LayoutEventArgs" />
+
+          
 
           
 
@@ -1866,8 +2136,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.PaintEventArgs" />
+
+          
 
           
 
@@ -1896,8 +2170,12 @@
 
             
 
+            
+
              and the <see
              cref="P:System.Windows.Forms.TableLayoutPanel.RowCount" />
+
+            
 
             
 
@@ -1910,8 +2188,12 @@
 
             
 
+            
+
              property allows for such growth. If the value of <see
              cref="P:System.Windows.Forms.TableLayoutPanel.RowCount" />
+
+            
 
             
 
@@ -1924,8 +2206,12 @@
 
             
 
+            
+
              is 0, the panel will grow by adding columns. Specifying panel growth with the <see
              cref="P:System.Windows.Forms.TableLayoutPanel.GrowStyle" />
+
+            
 
             
 
@@ -1938,8 +2224,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Windows.Forms.TableLayoutPanel.ColumnCount" />
+
+            
 
             
 
@@ -1950,6 +2240,8 @@
           <para
             >Controls can be added or deleted from the table using the <see
              cref="P:System.Windows.Forms.TableLayoutPanel.Controls" />
+
+            
 
             
 
@@ -2013,8 +2305,12 @@
 
             
 
+            
+
              property to access the style properties of specific rows. You can use members of the <see
              cref="T:System.Windows.Forms.RowStyle" />
+
+            
 
             
 
@@ -2030,8 +2326,12 @@
 
             
 
+            
+
              control arranges its rows, it assigns priorities to each <see
              cref="T:System.Windows.Forms.RowStyle" />
+
+            
 
             
 
@@ -2049,8 +2349,12 @@
 
                 
 
+                
+
                  set to <see
                  cref="F:System.Windows.Forms.SizeType.Absolute" />
+
+                
 
                 
 
@@ -2068,8 +2372,12 @@
 
                 
 
+                
+
                  set to <see
                  cref="F:System.Windows.Forms.SizeType.AutoSize" />
+
+                
 
                 
 
@@ -2087,8 +2395,12 @@
 
                 
 
+                
+
                  set to <see
                  cref="F:System.Windows.Forms.SizeType.Percent" />
+
+                
 
                 
 
@@ -2104,6 +2416,8 @@
           <para
             >Gets a collection of row styles for the <see
              cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+            
 
             
 
@@ -2143,6 +2457,8 @@
 
           
 
+          
+
           The height and width of the control's bounds.</param
         >
         <param name="specified">
@@ -2152,8 +2468,12 @@
 
           
 
+          
+
           One of the values of <see
            cref="T:System.Windows.Forms.BoundsSpecified" />
+
+          
 
           
 
@@ -2195,6 +2515,8 @@
 
             
 
+            
+
              method uses the <paramref
              name="dx" />
 
@@ -2202,8 +2524,12 @@
 
             
 
+            
+
              and <paramref
              name="dy" />
+
+            
 
             
 
@@ -2223,10 +2549,14 @@
 
           
 
+          
+
           The ratio by which to scale the control horizontally.</param
         >
         <param name="dy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2264,11 +2594,15 @@
 
             
 
+            
+
              that represents the row and the column of the cell.</para
           >
         </summary>
         <param name="control">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2283,8 +2617,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.TableLayoutPanelCellPosition" />
+
+          
 
           
 
@@ -2321,8 +2659,12 @@
 
             
 
+            
+
              method moves the control to another column in the <see
              cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+            
 
             
 
@@ -2333,6 +2675,8 @@
           <para
             >This method reapplies the table layout to all controls in the <see
              cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+            
 
             
 
@@ -2353,6 +2697,8 @@
 
           
 
+          
+
           The control to move to another column.</param
         >
         <param name="column">
@@ -2362,8 +2708,12 @@
 
           
 
+          
+
           The column to which <paramref
            name="control" />
+
+          
 
           
 
@@ -2406,8 +2756,12 @@
 
           
 
+          
+
           A child control of the <see
            cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+          
 
           
 
@@ -2417,6 +2771,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2453,8 +2809,12 @@
 
             
 
+            
+
              method moves the control to another row in the <see
              cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+            
 
             
 
@@ -2465,6 +2825,8 @@
           <para
             >This method reapplies the table layout to all controls in the <see
              cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+            
 
             
 
@@ -2485,6 +2847,8 @@
 
           
 
+          
+
           The control to move to another row.</param
         >
         <param name="row">
@@ -2494,8 +2858,12 @@
 
           
 
+          
+
           The row to which <paramref
            name="control" />
+
+          
 
           
 
@@ -2538,8 +2906,12 @@
 
           
 
+          
+
           A child control of the <see
            cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+          
 
           
 
@@ -2549,6 +2921,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2581,8 +2955,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IExtenderProvider" />
+
+            
 
             
 
@@ -2596,6 +2974,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.ComponentModel.IExtenderProvider.CanExtend(System.Object)" />
+
+            
 
             
 
@@ -2615,8 +2995,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 

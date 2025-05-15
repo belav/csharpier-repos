@@ -26,11 +26,15 @@
 
         
 
+        
+
          event is raised when the user is trying to log off or shut the system down.</para
       >
       <para
         >This <see
          cref="E:Microsoft.Win32.SystemEvents.SessionEnding" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          property of a <see
          cref="T:Microsoft.Win32.SessionEndingEventArgs" />
+
+        
 
         
 
@@ -58,6 +66,8 @@
       <para
         >Provides data for the <see
          cref="E:Microsoft.Win32.SystemEvents.SessionEnding" />
+
+        
 
         
 
@@ -98,6 +108,8 @@
 
             
 
+            
+
              class using the specified value indicating the type of session close event that is occurring.</para
           >
         </summary>
@@ -108,8 +120,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:Microsoft.Win32.SessionEndReasons" />
+
+          
 
           
 

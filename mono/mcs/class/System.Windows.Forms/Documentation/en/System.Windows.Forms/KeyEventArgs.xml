@@ -26,6 +26,8 @@
 
         
 
+        
+
         , which specifies the key the user pressed and whether any modifier keys (CTRL, ALT, and SHIFT) were pressed at the same time, is passed with each <see
          cref="E:System.Windows.Forms.Control.KeyDown" />
 
@@ -33,8 +35,12 @@
 
         
 
+        
+
          or <see
          cref="E:System.Windows.Forms.Control.KeyUp" />
+
+        
 
         
 
@@ -50,8 +56,12 @@
 
         
 
+        
+
          event occurs when the user presses any key. The <see
          cref="E:System.Windows.Forms.Control.KeyUp" />
+
+        
 
         
 
@@ -64,8 +74,12 @@
 
         
 
+        
+
          events occur each time the key repeats, if the key is held down, but only one <see
          cref="E:System.Windows.Forms.Control.KeyUp" />
+
+        
 
         
 
@@ -81,8 +95,12 @@
 
         
 
+        
+
          event also occurs when a key is pressed. A <see
          cref="T:System.Windows.Forms.KeyPressEventArgs" />
+
+        
 
         
 
@@ -95,6 +113,8 @@
 
         
 
+        
+
          event, and specifies the character that was composed as a result of each key press.</para
       >
       <para
@@ -102,6 +122,8 @@
          type="text/html">
           <a href="D98FD58B-FA4F-4598-8378-ADDF4355A115">[&lt;topic://cpconEventsDelegates&gt;]</a>
         </format>
+
+        
 
         
 
@@ -120,8 +142,12 @@
 
         
 
+        
+
          or <see
          cref="E:System.Windows.Forms.Control.KeyUp" />
+
+        
 
         
 
@@ -153,11 +179,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="keyData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -170,8 +200,12 @@
 
           
 
+          
+
            representing the key that was pressed, combined with any modifier flags that indicate which CTRL, SHIFT, and ALT keys were pressed at the same time. Possible values are obtained be applying the bitwise OR (|) operator to constants from the <see
            cref="T:System.Windows.Forms.Keys" />
+
+          
 
           
 
@@ -240,8 +274,12 @@
 
             
 
+            
+
              is implemented differently by different controls within Windows Forms. For controls like <see
              cref="T:System.Windows.Forms.TextBox" />
+
+            
 
             
 
@@ -254,11 +292,15 @@
 
             
 
+            
+
             , that control will not pass the key press events to the underlying Win32 text box control, but it will still display the characters that the user typed.</para
           >
           <para
             >If you want to prevent the current control from receiving a key press, use the <see
              cref="P:System.Windows.Forms.KeyEventArgs.SuppressKeyPress" />
+
+            
 
             
 
@@ -296,8 +338,12 @@
 
             
 
+            
+
              or <see
              cref="E:System.Windows.Forms.Control.KeyUp" />
+
+            
 
             
 
@@ -330,8 +376,12 @@
 
             
 
+            
+
              to extract information from the <see
              cref="P:System.Windows.Forms.KeyEventArgs.KeyData" />
+
+            
 
             
 
@@ -344,8 +394,12 @@
 
             
 
+            
+
              with constants in <see
              cref="T:System.Windows.Forms.Keys" />
+
+            
 
             
 
@@ -358,6 +412,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.KeyEventArgs.Shift" />
 
@@ -365,8 +421,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.KeyEventArgs.Alt" />
+
+            
 
             
 
@@ -385,8 +445,12 @@
 
             
 
+            
+
              or <see
              cref="E:System.Windows.Forms.Control.KeyUp" />
+
+            
 
             
 
@@ -420,8 +484,12 @@
 
             
 
+            
+
              or <see
              cref="E:System.Windows.Forms.Control.KeyUp" />
+
+            
 
             
 
@@ -454,6 +522,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.KeyEventArgs.Shift" />
 
@@ -461,8 +531,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.KeyEventArgs.Alt" />
+
+            
 
             
 
@@ -481,8 +555,12 @@
 
             
 
+            
+
              or <see
              cref="E:System.Windows.Forms.Control.KeyUp" />
+
+            
 
             
 
@@ -537,6 +615,8 @@
 
             
 
+            
+
              in order to prevent user input.</para
           >
           <para
@@ -547,8 +627,12 @@
 
             
 
+            
+
              to true also sets <see
              cref="P:System.Windows.Forms.KeyEventArgs.Handled" />
+
+            
 
             
 

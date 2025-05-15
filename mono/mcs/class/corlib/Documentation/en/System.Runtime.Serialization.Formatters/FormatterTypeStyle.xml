@@ -60,6 +60,8 @@
 
             
 
+            
+
              object members.</para
           >
         </summary>
@@ -93,8 +95,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Runtime.Serialization.ISerializable" />
+
+            
 
             
 

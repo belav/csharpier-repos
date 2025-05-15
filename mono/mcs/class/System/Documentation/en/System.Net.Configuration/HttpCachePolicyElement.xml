@@ -33,6 +33,8 @@
 
         
 
+        
+
          configuration element.</para
       >
       <para
@@ -43,8 +45,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Net.WebClient" />
+
+        
 
         
 
@@ -84,8 +90,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Net.Configuration.HttpCachePolicyElement.MaximumStale" />
+
+            
 
             
 
@@ -98,8 +108,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Net.Configuration.HttpCachePolicyElement.PolicyLevel" />
+
+            
 
             
 
@@ -113,6 +127,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.Configuration.HttpCachePolicyElement" />
+
+            
 
             
 
@@ -288,8 +304,12 @@
 
             
 
+            
+
              as their cache policy level. The <see
              cref="P:System.Net.WebRequest.CachePolicy" />
+
+            
 
             
 
@@ -334,8 +354,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Net.Configuration.HttpCachePolicyElement.MaximumStale" />
+
+            
 
             
 
@@ -348,8 +372,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Net.Configuration.HttpCachePolicyElement.PolicyLevel" />
+
+            
 
             
 

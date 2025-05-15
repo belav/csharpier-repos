@@ -20,8 +20,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.StatusBarPanel" />
+
+        
 
         
 
@@ -34,6 +38,8 @@
 
         
 
+        
+
          property enables you to specify the style of border to display on a <see
          cref="T:System.Windows.Forms.StatusBarPanel" />
 
@@ -41,8 +47,12 @@
 
         
 
+        
+
          within a <see
          cref="T:System.Windows.Forms.StatusBar" />
+
+        
 
         
 
@@ -61,8 +71,12 @@
 
         
 
+        
+
          on a <see
          cref="T:System.Windows.Forms.StatusBar" />
+
+        
 
         
 
@@ -107,6 +121,8 @@
 
             
 
+            
+
              is displayed with a three-dimensional raised border.</para
           >
         </summary>
@@ -128,6 +144,8 @@
           <para
             >The <see
              cref="T:System.Windows.Forms.StatusBarPanel" />
+
+            
 
             
 

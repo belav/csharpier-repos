@@ -31,6 +31,8 @@
 
         
 
+        
+
          elements in a project. </para
       >
     </summary>
@@ -62,6 +64,8 @@
 
             
 
+            
+
              to a compatible one-dimensional <see
              cref="T:System.Array" />
 
@@ -69,8 +73,12 @@
 
             
 
+            
+
              of <see
              cref="T:Microsoft.Build.BuildEngine.UsingTask" />
+
+            
 
             
 
@@ -86,8 +94,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -100,6 +112,8 @@
 
           
 
+          
+
            objects that is the destination of the elements copied from <see
            cref="T:Microsoft.Build.BuildEngine.UsingTaskCollection" />
 
@@ -107,8 +121,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -123,8 +141,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -160,8 +182,12 @@
 
             
 
+            
+
              to a compatible one-dimensional <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -177,8 +203,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -191,8 +221,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -207,8 +241,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -240,10 +278,14 @@
 
             
 
+            
+
              object in the collection represents a <format
              type="text/html">
               <a href="20247902-9446-4a1f-8253-5c7a17e4fe43">UsingTask</a>
             </format>
+
+            
 
             
 
@@ -262,8 +304,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:Microsoft.Build.BuildEngine.UsingTaskCollection" />
+
+            
 
             
 
@@ -299,8 +345,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:Microsoft.Build.BuildEngine.UsingTaskCollection" />
+
+            
 
             
 
@@ -319,6 +369,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -332,8 +384,12 @@
 
             
 
+            
+
              for the entire <see
              cref="T:Microsoft.Build.BuildEngine.UsingTaskCollection" />
+
+            
 
             
 
@@ -367,6 +423,8 @@
 
             
 
+            
+
              is synchronized (thread safe).</para
           >
         </summary>
@@ -390,6 +448,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:Microsoft.Build.BuildEngine.UsingTaskCollection" />
+
+            
 
             
 

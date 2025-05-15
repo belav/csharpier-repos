@@ -8,8 +8,12 @@
 
     
 
+    
+
      consists of the reserved word base followed by either a "." token and an identifier or an <non_terminal
      where="14.5.6">expression-list</non_terminal>
+
+    
 
     
 
@@ -20,6 +24,8 @@
       <name>
         <non_terminal where="14.5.8">base-access</non_terminal>
       </name>
+
+      
 
       
 
@@ -47,8 +53,12 @@
 
     
 
+    
+
      is used to access base class members that are hidden by similarly named members in the current class or struct. A <non_terminal
      where="14.5.8">base-access</non_terminal>
+
+    
 
     
 
@@ -64,11 +74,15 @@
 
     
 
+    
+
      expressions of the form base.I and base[E] are evaluated exactly as if they were written ((B)this).I and ((B)this)[E], where B is the base class of the class or struct in which the construct occurs. Thus, base.I and base[E] correspond to this.I and this[E], except this is viewed as an instance of the base class. </paragraph
   >
   <paragraph
     >When a <non_terminal
      where="14.5.8">base-access</non_terminal>
+
+    
 
     
 
@@ -81,8 +95,12 @@
 
     
 
+    
+
     ) is changed. The function member that is invoked is determined by finding the most derived implementation (<hyperlink
     >17.5.3</hyperlink>
+
+    
 
     
 
@@ -95,8 +113,12 @@
 
     
 
+    
+
      can be used to invoke the inherited implementation of the function member. If the function member referenced by a <non_terminal
      where="14.5.8">base-access</non_terminal>
+
+    
 
     
 

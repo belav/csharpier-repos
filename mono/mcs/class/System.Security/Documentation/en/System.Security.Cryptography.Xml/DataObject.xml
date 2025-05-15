@@ -20,6 +20,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -37,8 +39,12 @@
 
         
 
+        
+
          class to store information or metadata directly in an XML signature.  For example, you can store the signature generation date or the signer's identity.  The <see
          cref="T:System.Security.Cryptography.Xml.DataObject" />
+
+        
 
         
 
@@ -49,6 +55,8 @@
       <para
         >The class corresponds to the &lt;Object&gt; element in the World Wide Web Consortium (W3C) specification for XML Signatures. For more information about the W3C specification, see <see
          cref="http://www.w3.org/TR/xmldsig-core/">http://www.w3.org/TR/xmldsig-core/</see>
+
+        
 
         
 
@@ -88,8 +96,12 @@
 
             
 
+            
+
              class is used with XML signatures. After you have initialized the <see
              cref="T:System.Security.Cryptography.Xml.DataObject" />
+
+            
 
             
 
@@ -102,8 +114,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Security.Cryptography.Xml.DataObject.Id" />
+
+            
 
             
 
@@ -117,6 +133,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.Xml.DataObject" />
+
+            
 
             
 
@@ -160,8 +178,12 @@
 
             
 
+            
+
              class is used with XML signatures. The <paramref
              name="id" />
+
+            
 
             
 
@@ -174,8 +196,12 @@
 
             
 
+            
+
              parameter refers to the XML node list that contains the <paramref
              name="id" />
+
+            
 
             
 
@@ -194,6 +220,8 @@
 
             
 
+            
+
              class with the specified identification, MIME type, encoding, and data.</para
           >
         </summary>
@@ -204,8 +232,12 @@
 
           
 
+          
+
           The identification to initialize the new instance of <see
            cref="T:System.Security.Cryptography.Xml.DataObject" />
+
+          
 
           
 
@@ -220,8 +252,12 @@
 
           
 
+          
+
           The MIME type of the data used to initialize the new instance of <see
            cref="T:System.Security.Cryptography.Xml.DataObject" />
+
+          
 
           
 
@@ -236,8 +272,12 @@
 
           
 
+          
+
           The encoding of the data used to initialize the new instance of <see
            cref="T:System.Security.Cryptography.Xml.DataObject" />
+
+          
 
           
 
@@ -252,8 +292,12 @@
 
           
 
+          
+
           The data to initialize the new instance of <see
            cref="T:System.Security.Cryptography.Xml.DataObject" />
+
+          
 
           
 
@@ -294,6 +338,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -302,6 +348,8 @@
           <para
             >Gets or sets the data value of the current <see
              cref="T:System.Security.Cryptography.Xml.DataObject" />
+
+            
 
             
 
@@ -344,6 +392,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -376,6 +426,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -389,6 +441,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -397,6 +451,8 @@
           <para
             >The XML representation of the <see
              cref="T:System.Security.Cryptography.Xml.DataObject" />
+
+            
 
             
 
@@ -435,8 +491,12 @@
 
             
 
+            
+
              from another location. The default value of this property is null, which implies that no identification is present. This property is commonly referenced by the <see
              cref="P:System.Security.Cryptography.Xml.Signature.SignedInfo" />
+
+            
 
             
 
@@ -450,6 +510,8 @@
           <para
             >Gets or sets the identification of the current <see
              cref="T:System.Security.Cryptography.Xml.DataObject" />
+
+            
 
             
 
@@ -489,6 +551,8 @@
 
             
 
+            
+
              object.</para
           >
         </remarks>
@@ -497,6 +561,8 @@
           <para
             >Loads a <see
              cref="T:System.Security.Cryptography.Xml.DataObject" />
+
+            
 
             
 
@@ -512,8 +578,12 @@
 
           
 
+          
+
           The XML element to load the <see
            cref="T:System.Security.Cryptography.Xml.DataObject" />
+
+          
 
           
 
@@ -551,6 +621,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -559,6 +631,8 @@
           <para
             >Gets or sets the MIME type of the current <see
              cref="T:System.Security.Cryptography.Xml.DataObject" />
+
+            
 
             
 

@@ -29,8 +29,12 @@
 
         
 
+        
+
          and other classes in the <see
          cref="N:System.Web.Services.Protocols" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
          class inherits from the abstract <see
          cref="T:System.Web.Services.Protocols.MimeParameterWriter" />
+
+        
 
         
 
@@ -63,6 +71,8 @@
 
         
 
+        
+
          or its descendant classes directly. Instead, when the Wsdl.exe tool generates client proxy code according to the HTTP-GET or HTTP-POST implementations, it applies the <see
          cref="T:System.Web.Services.Protocols.HttpMethodAttribute" />
 
@@ -70,8 +80,12 @@
 
         
 
+        
+
          to each Web method and sets the attribute's <see
          cref="P:System.Web.Services.Protocols.HttpMethodAttribute.ParameterFormatter" />
+
+        
 
         
 
@@ -101,6 +115,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Protocols.UrlEncodedParameterWriter" />
+
+            
 
             
 
@@ -139,8 +155,12 @@
 
             
 
+            
+
              method calls the other overload, <see
              cref="M:System.Web.Services.Protocols.UrlEncodedParameterWriter.Encode(System.IO.TextWriter,System.String,System.Object)" />
+
+            
 
             
 
@@ -160,8 +180,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -171,6 +195,8 @@
         >
         <param name="values">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -209,6 +235,8 @@
 
             
 
+            
+
              method, <see
              cref="M:System.Web.Services.Protocols.UrlEncodedParameterWriter.Encode(System.IO.TextWriter,System.Object[])" />
 
@@ -216,8 +244,12 @@
 
             
 
+            
+
             , which is called for each Web method, calls this signature of the <see
              cref="M:System.Web.Services.Protocols.UrlEncodedParameterWriter.Encode(System.IO.TextWriter,System.String,System.Object)" />
+
+            
 
             
 
@@ -237,8 +269,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -253,10 +289,14 @@
 
           
 
+          
+
           The name of the parameter that will be encoded.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -297,8 +337,12 @@
 
             
 
+            
+
              method. For the <see
              cref="T:System.Web.Services.Protocols.UrlEncodedParameterWriter" />
+
+            
 
             
 
@@ -311,8 +355,12 @@
 
             
 
+            
+
              property of the input <see
              cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+
+            
 
             
 
@@ -325,8 +373,12 @@
 
             
 
+            
+
              array.The <see
              cref="M:System.Web.Services.Protocols.UrlEncodedParameterWriter.GetInitializer(System.Web.Services.Protocols.LogicalMethodInfo)" />
+
+            
 
             
 
@@ -339,8 +391,12 @@
 
             
 
+            
+
              method of another <see
              cref="T:System.Web.Services.Protocols.UrlEncodedParameterWriter" />
+
+            
 
             
 
@@ -360,8 +416,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+
+          
 
           
 
@@ -398,6 +458,8 @@
 
             
 
+            
+
              method is invoked at the time a request is populated.</para
           >
           <para
@@ -408,8 +470,12 @@
 
             
 
+            
+
             , is obtained by calling the <see
              cref="M:System.Web.Services.Protocols.UrlEncodedParameterWriter.GetInitializer(System.Web.Services.Protocols.LogicalMethodInfo)" />
+
+            
 
             
 
@@ -429,8 +495,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Reflection.ParameterInfo" />
+
+          
 
           
 
@@ -443,8 +513,12 @@
 
           
 
+          
+
            property of the <see
            cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+
+          
 
           
 
@@ -478,6 +552,8 @@
           <para
             >An encoding, as represented by the <see
              cref="T:System.Text.Encoding" />
+
+            
 
             
 

@@ -33,8 +33,12 @@
 
         
 
+        
+
          class is a serialization provider that provides a localization feature. It supports serializing to resources through <see
          cref="T:System.ComponentModel.Design.IResourceService" />
+
+        
 
         
 
@@ -77,11 +81,15 @@
 
             
 
+            
+
              constructor creates a new adapter and attaches it to the serialization manager. This adds itself as a serializer for resources into the serialization manager, and, if not already added, adds itself as an extender provider to the root component. </para
           >
           <para
             >If the <paramref
              name="model" />
+
+            
 
             
 
@@ -94,8 +102,12 @@
 
             
 
+            
+
             , the <see
              cref="T:System.ComponentModel.Design.Serialization.CodeDomLocalizationProvider" />
+
+            
 
             
 
@@ -114,6 +126,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -124,8 +138,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IServiceProvider" />
+
+          
 
           
 
@@ -140,8 +158,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.Design.Serialization.CodeDomLocalizationModel" />
+
+          
 
           
 
@@ -179,11 +201,15 @@
 
             
 
+            
+
              constructor creates a new adapter and attaches it to the serialization manager. This adds itself as a serializer for resources into the serialization manager, and, if not already added, adds itself as an extender provider to the root component.</para
           >
           <para
             >If the <paramref
              name="model" />
+
+            
 
             
 
@@ -196,8 +222,12 @@
 
             
 
+            
+
             , the <see
              cref="T:System.ComponentModel.Design.Serialization.CodeDomLocalizationProvider" />
+
+            
 
             
 
@@ -208,6 +238,8 @@
           <para
             >If <paramref
              name="supportedCultures" />
+
+            
 
             
 
@@ -226,6 +258,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -236,8 +270,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IServiceProvider" />
+
+          
 
           
 
@@ -252,8 +290,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.Design.Serialization.CodeDomLocalizationModel" />
+
+          
 
           
 
@@ -263,6 +305,8 @@
         >
         <param name="supportedCultures">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -289,6 +333,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.ComponentModel.Design.Serialization.CodeDomLocalizationProvider" />
+
+            
 
             
 
@@ -331,8 +377,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationProvider" />
+
+            
 
             
 
@@ -346,6 +396,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.ComponentModel.Design.Serialization.IDesignerSerializationProvider.GetSerializer(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object,System.Type,System.Type)" />
+
+            
 
             
 
@@ -365,10 +417,14 @@
 
           
 
+          
+
           The serialization manager requesting the serializer. </param
         >
         <param name="currentSerializer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -383,10 +439,14 @@
 
           
 
+          
+
           The data type of the object to serialize. </param
         >
         <param name="serializerType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -34,6 +34,8 @@
 
         
 
+        
+
          attribute to native enumeration types to indicate that they do not need to be qualified by the enumeration type name when referenced in C++ programs.  This attribute distinguishes native enumeration types from managed enumeration types.</para
       >
     </remarks>
@@ -63,6 +65,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.CompilerServices.ScopelessEnumAttribute" />
+
+            
 
             
 

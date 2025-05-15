@@ -44,8 +44,12 @@
 
         
 
+        
+
          evidence produces a <see
          cref="T:System.Security.Permissions.ZoneIdentityPermission" />
+
+        
 
         
 
@@ -58,8 +62,12 @@
 
         
 
+        
+
          for <see
          cref="T:System.Security.Permissions.ZoneIdentityPermission" />
+
+        
 
         
 
@@ -72,8 +80,12 @@
 
         
 
+        
+
          that corresponds to the <see
          cref="T:System.Security.Policy.Zone" />
+
+        
 
         
 
@@ -84,6 +96,8 @@
       <para
         >Zones are defined by the <see
          cref="T:System.Security.SecurityZone" />
+
+        
 
         
 
@@ -126,11 +140,15 @@
 
             
 
+            
+
              class with the zone from which a code assembly originates.</para
           >
         </summary>
         <param name="zone">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -209,6 +227,8 @@
 
           
 
+          
+
           The URL from which to create the zone. </param
         >
       </Docs>
@@ -246,6 +266,8 @@
 
             
 
+            
+
              evidence class.</para
           >
         </summary>
@@ -259,8 +281,12 @@
 
             
 
+            
+
              for the specified <see
              cref="T:System.Security.Policy.Zone" />
+
+            
 
             
 
@@ -271,6 +297,8 @@
         </returns>
         <param name="evidence">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -308,8 +336,12 @@
 
             
 
+            
+
              objects are equal if they designate the same <see
              cref="T:System.Security.SecurityZone" />
+
+            
 
             
 
@@ -328,6 +360,8 @@
 
             
 
+            
+
              evidence object to the specified object for equivalence.</para
           >
         </summary>
@@ -336,6 +370,8 @@
           <para
             >true if the two <see
              cref="T:System.Security.Policy.Zone" />
+
+            
 
             
 
@@ -351,8 +387,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Policy.Zone" />
+
+          
 
           
 
@@ -532,6 +572,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -540,6 +582,8 @@
           <para
             >A representation of the current <see
              cref="T:System.Security.Policy.Zone" />
+
+            
 
             
 

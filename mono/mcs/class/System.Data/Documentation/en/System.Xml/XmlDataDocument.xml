@@ -28,6 +28,8 @@
 
         
 
+        
+
         . It enables you to load either relational data or XML data and manipulate that data using the World Wide Web Consortium (W3C) Document Object Model (DOM). The DOM presents data as a hierarchy of node objects. Because XmlDataDocument implements the <see
          cref="T:System.Xml.XPath.IXPathNavigable" />
 
@@ -35,8 +37,12 @@
 
         
 
+        
+
          interface, it can also be used as the source document for the <see
          cref="T:System.Xml.Xsl.XslTransform" />
+
+        
 
         
 
@@ -53,6 +59,8 @@
 
         
 
+        
+
          to build a relational mapping. The XML data can then be loaded using <see
          cref="M:System.Xml.XmlDataDocument.Load(System.String)" />
 
@@ -60,8 +68,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.Xml.XmlDocument.LoadXml(System.String)" />
+
+        
 
         
 
@@ -77,6 +89,8 @@
 
         
 
+        
+
          constructor.</para
       >
     </remarks>
@@ -85,6 +99,8 @@
       <para
         >Allows structured data to be stored, retrieved, and manipulated through a relational <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -111,6 +127,8 @@
 
             
 
+            
+
              is created and associated with the XmlDataDocument.</para
           >
         </remarks>
@@ -119,6 +137,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.XmlDataDocument" />
+
+            
 
             
 
@@ -158,8 +178,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -170,6 +194,8 @@
         </summary>
         <param name="dataset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -206,11 +232,15 @@
 
             
 
+            
+
              schema.</para
           >
           <para
             >If <paramref
              name="deep" />
+
+            
 
             
 
@@ -226,11 +256,15 @@
 
             
 
+            
+
              is set to true, the cloned DataSet is set with the schema and then populated with the data.</para
           >
           <para
             >See <see
              cref="M:System.Xml.XmlNode.CloneNode(System.Boolean)" />
+
+            
 
             
 
@@ -249,6 +283,8 @@
         </returns>
         <param name="deep">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -299,6 +335,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Xml.XmlDocument.LocalName" />
 
@@ -306,8 +344,12 @@
 
             
 
+            
+
              , and <see
              cref="P:System.Xml.XmlNode.NamespaceURI" />
+
+            
 
             
 
@@ -326,11 +368,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -345,10 +391,14 @@
 
           
 
+          
+
           The local name of the new element. </param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -384,8 +434,12 @@
 
             
 
+            
+
              nodes cannot be created for <see
              cref="T:System.Xml.XmlDataDocument" />
+
+            
 
             
 
@@ -404,6 +458,8 @@
 
             
 
+            
+
              with the specified name.</para
           >
         </summary>
@@ -417,11 +473,15 @@
 
             
 
+            
+
              with the specified name.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -458,6 +518,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -471,8 +533,12 @@
 
             
 
+            
+
              object for navigating this document. The XPathNavigator is positioned on the node specified in the <paramref
              name="node" />
+
+            
 
             
 
@@ -492,8 +558,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNode" />
+
+          
 
           
 
@@ -524,6 +594,8 @@
           <para
             >Gets a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -561,6 +633,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -574,8 +648,12 @@
 
             
 
+            
+
              with the specified ID. This method is not supported by the <see
              cref="T:System.Xml.XmlDataDocument" />
+
+            
 
             
 
@@ -594,11 +672,15 @@
 
             
 
+            
+
              with the specified ID.</para
           >
         </returns>
         <param name="elemId">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -636,8 +718,12 @@
 
             
 
+            
+
              associated with the specified <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -652,6 +738,8 @@
         </returns>
         <param name="r">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -689,8 +777,12 @@
 
             
 
+            
+
              associated with the specified <see
              cref="T:System.Xml.XmlElement" />
+
+            
 
             
 
@@ -705,6 +797,8 @@
         </returns>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -743,6 +837,8 @@
 
               
 
+              
+
                method or by creating the tables and columns within the DataSet manually. This step must be done before calling Load.</para
             >
           </block>
@@ -753,6 +849,8 @@
         </summary>
         <param name="inStream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -791,6 +889,8 @@
 
               
 
+              
+
                method or by creating the tables and columns within the DataSet manually. This step must be done before calling Load.</para
             >
           </block>
@@ -805,11 +905,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="txtReader">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -845,6 +949,8 @@
 
               
 
+              
+
                method or by creating the tables and columns within the DataSet manually. This step must be done before calling Load.</para
             >
           </block>
@@ -855,6 +961,8 @@
         </summary>
         <param name="filename">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -891,8 +999,12 @@
 
             
 
+            
+
              with the <see
              cref="P:System.Xml.XmlValidatingReader.EntityHandling" />
+
+            
 
             
 
@@ -903,6 +1015,8 @@
           <para
             >The Load method always preserves significant white space. The <see
              cref="P:System.Xml.XmlDocument.PreserveWhitespace" />
+
+            
 
             
 
@@ -925,6 +1039,8 @@
 
             
 
+            
+
              method throws an exception.</para
           >
           <para>If the reader is positioned on a leaf node that is invalid for the root level of a document (for example, a white space or attribute node), the reader continues to read until it is positioned on a node that can be used for the root. The document begins loading at this point.</para>
@@ -939,11 +1055,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="reader">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

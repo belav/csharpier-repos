@@ -32,8 +32,12 @@
 
         
 
+        
+
          attribute to opt-out of the default <see
          cref="T:System.Runtime.Serialization.DataContractSerializer" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Runtime.Serialization.DataMemberAttribute" />
+
+        
 
         
 
@@ -80,6 +88,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Serialization.IgnoreDataMemberAttribute" />
+
+            
 
             
 

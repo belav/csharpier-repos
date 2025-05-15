@@ -12,12 +12,16 @@
 
       
 
+      
+
       . end note]</note
     >
     <list>
       <list_item
         > A variable must be definitely assigned (<hyperlink
         >12.3</hyperlink>
+
+        
 
         
 
@@ -31,6 +35,8 @@
   <paragraph
     >Within an instance method or instance accessor of a struct type, the this keyword behaves exactly as a reference parameter of the struct type (<hyperlink
     >14.5.7</hyperlink>
+
+    
 
     
 

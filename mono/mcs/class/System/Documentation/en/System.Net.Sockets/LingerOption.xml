@@ -36,8 +36,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Net.Sockets.TcpClient" />
+
+        
 
         
 
@@ -50,8 +54,12 @@
 
         
 
+        
+
          will attempt to transmit unsent data after closing, create a <see
          cref="T:System.Net.Sockets.LingerOption" />
+
+        
 
         
 
@@ -64,8 +72,12 @@
 
         
 
+        
+
          parameter set to true, and the <paramref
          name="seconds" />
+
+        
 
         
 
@@ -78,8 +90,12 @@
 
         
 
+        
+
          parameter is used to indicate how long you would like the <see
          cref="T:System.Net.Sockets.Socket" />
+
+        
 
         
 
@@ -92,8 +108,12 @@
 
         
 
+        
+
          to stay connected for any length of time after closing, create a <see
          cref="T:System.Net.Sockets.LingerOption" />
+
+        
 
         
 
@@ -106,8 +126,12 @@
 
         
 
+        
+
          parameter set to true and the <paramref
          name="seconds" />
+
+        
 
         
 
@@ -120,8 +144,12 @@
 
         
 
+        
+
          will close immediately and any unsent data will be lost. Once created, pass the <see
          cref="T:System.Net.Sockets.LingerOption" />
+
+        
 
         
 
@@ -134,8 +162,12 @@
 
         
 
+        
+
          method. If you are sending and receiving data with a <see
          cref="T:System.Net.Sockets.TcpClient" />
+
+        
 
         
 
@@ -148,8 +180,12 @@
 
         
 
+        
+
          instance in the <see
          cref="P:System.Net.Sockets.TcpClient.LingerState" />
+
+        
 
         
 
@@ -165,8 +201,12 @@
 
         
 
+        
+
          when the <see
          cref="P:System.Net.Sockets.Socket.LingerState" />
+
+        
 
         
 
@@ -179,8 +219,12 @@
 
         
 
+        
+
          when the <see
          cref="P:System.Net.Sockets.TcpClient.LingerState" />
+
+        
 
         
 
@@ -199,6 +243,8 @@
 
         
 
+        
+
          will remain connected after a call to the <see
          cref="M:System.Net.Sockets.Socket.Close" />
 
@@ -206,8 +252,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.Net.Sockets.TcpClient.Close" />
+
+        
 
         
 
@@ -250,8 +300,12 @@
 
             
 
+            
+
             . Use the <paramref
              name="enable" />
+
+            
 
             
 
@@ -264,8 +318,12 @@
 
             
 
+            
+
              to continue transmitting unsent data after the close method is called. Use the <paramref
              name="seconds" />
+
+            
 
             
 
@@ -278,8 +336,12 @@
 
             
 
+            
+
              to attempt transferring unsent data before timing out. If you specify true for the <paramref
              name="enable" />
+
+            
 
             
 
@@ -292,8 +354,12 @@
 
             
 
+            
+
              parameter, the <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -306,8 +372,12 @@
 
             
 
+            
+
              parameter, the <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -323,8 +393,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Net.Sockets.TcpClient.Close" />
+
+            
 
             
 
@@ -337,8 +411,12 @@
 
             
 
+            
+
              and <paramref
              name="seconds" />
+
+            
 
             
 
@@ -351,8 +429,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Net.Sockets.TcpClient.LingerState" />
+
+            
 
             
 
@@ -420,6 +502,8 @@
 
             
 
+            
+
              property is not set.</para
           >
           <para
@@ -430,8 +514,12 @@
 
             
 
+            
+
              property stored in the <see
              cref="P:System.Net.Sockets.Socket.LingerState" />
+
+            
 
             
 
@@ -450,6 +538,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -460,8 +550,12 @@
 
           
 
+          
+
           true to remain connected after the <see
            cref="M:System.Net.Sockets.Socket.Close" />
+
+          
 
           
 
@@ -476,8 +570,12 @@
 
           
 
+          
+
           The number of seconds to remain connected after the <see
            cref="M:System.Net.Sockets.Socket.Close" />
+
+          
 
           
 
@@ -514,6 +612,8 @@
 
             
 
+            
+
             to enable lingering
    after the <see
              cref="M:System.Net.Sockets.Socket.Close" qualify="true" />
@@ -523,9 +623,13 @@
             
 
             
+
+            
    method is called; otherwise
 <see
              langword="false" />
+
+            
 
             
 
@@ -544,8 +648,12 @@
 
             
 
+            
+
              property to determine whether the <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -558,8 +666,12 @@
 
             
 
+            
+
              to the <see
              cref="M:System.Net.Sockets.Socket.SetSocketOption(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Int32)" />
+
+            
 
             
 
@@ -572,8 +684,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Net.Sockets.Socket.LingerState" />
+
+            
 
             
 
@@ -589,6 +705,8 @@
 
             
 
+            
+
              property and the <see
              cref="P:System.Net.Sockets.LingerOption.LingerTime" />
 
@@ -596,8 +714,12 @@
 
             
 
+            
+
              property stored in the <see
              cref="P:System.Net.Sockets.Socket.LingerState" />
+
+            
 
             
 
@@ -665,6 +787,8 @@
 
             
 
+            
+
              property is not set.</para
           >
           <para
@@ -675,8 +799,12 @@
 
             
 
+            
+
              property stored in the <see
              cref="P:System.Net.Sockets.Socket.LingerState" />
+
+            
 
             
 
@@ -690,6 +818,8 @@
           <para
             >Gets or sets a value that indicates whether to linger after the <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -728,9 +858,13 @@
 
             
 
+            
+
              that contains the amount of time, in seconds, to remain connected after
    calling the <see
              cref="M:System.Net.Sockets.Socket.Close" qualify="true" />
+
+            
 
             
 
@@ -750,11 +884,15 @@
 
             
 
+            
+
              will attempt to transfer unsent data before timing out. You can also set this value to the desired time-out period, in seconds. </para
           >
           <para
             >If the <see
              cref="P:System.Net.Sockets.LingerOption.Enabled" />
+
+            
 
             
 
@@ -767,8 +905,12 @@
 
             
 
+            
+
              to 0, the <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -781,8 +923,12 @@
 
             
 
+            
+
              instance to the <see
              cref="M:System.Net.Sockets.Socket.SetSocketOption(System.Net.Sockets.SocketOptionLevel,System.Net.Sockets.SocketOptionName,System.Int32)" />
+
+            
 
             
 
@@ -795,8 +941,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Net.Sockets.Socket.LingerState" />
+
+            
 
             
 
@@ -812,6 +962,8 @@
 
             
 
+            
+
              property and the <see
              cref="P:System.Net.Sockets.LingerOption.LingerTime" />
 
@@ -819,8 +971,12 @@
 
             
 
+            
+
              property stored in the <see
              cref="P:System.Net.Sockets.Socket.LingerState" />
+
+            
 
             
 
@@ -888,6 +1044,8 @@
 
             
 
+            
+
              property is not set.</para
           >
           <para
@@ -898,8 +1056,12 @@
 
             
 
+            
+
              property stored in the <see
              cref="P:System.Net.Sockets.Socket.LingerState" />
+
+            
 
             
 
@@ -913,6 +1075,8 @@
           <para
             >Gets or sets the amount of time to remain connected after calling the <see
              cref="M:System.Net.Sockets.Socket.Close" />
+
+            
 
             
 

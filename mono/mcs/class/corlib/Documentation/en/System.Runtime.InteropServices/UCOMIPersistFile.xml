@@ -40,6 +40,8 @@
 
         
 
+        
+
          instead.</para
       >
     </summary>
@@ -160,6 +162,8 @@
 
           
 
+          
+
           A zero-terminated string containing the absolute path of the file to open. </param
         >
         <param name="dwMode">
@@ -169,8 +173,12 @@
 
           
 
+          
+
           A combination of values from the STGM enumeration to indicate the access mode in which to open <paramref
            name="pszFileName" />
+
+          
 
           
 
@@ -218,6 +226,8 @@
 
           
 
+          
+
           A zero-terminated string containing the absolute path of the file to which the object is saved. </param
         >
         <param name="fRemember">
@@ -227,8 +237,12 @@
 
           
 
+          
+
           Indicates whether <paramref
            name="pszFileName" />
+
+          
 
           
 
@@ -267,6 +281,8 @@
         </summary>
         <param name="pszFileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

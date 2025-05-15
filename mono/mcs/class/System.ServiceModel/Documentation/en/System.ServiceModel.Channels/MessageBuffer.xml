@@ -34,8 +34,12 @@
 
         
 
+        
+
          instance can only be consumed or written once. If you wish to consume a <see
          cref="T:System.ServiceModel.Channels.Message" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
          class to completely store an entire <see
          cref="T:System.ServiceModel.Channels.Message" />
+
+        
 
         
 
@@ -65,8 +73,12 @@
 
         
 
+        
+
          instance is constructed by calling <see
          cref="M:System.ServiceModel.Channels.Message.CreateBufferedCopy(System.Int32)" />
+
+        
 
         
 
@@ -79,6 +91,8 @@
 
         
 
+        
+
          instance. A new <see
          cref="T:System.ServiceModel.Channels.MessageBuffer" />
 
@@ -86,8 +100,12 @@
 
         
 
+        
+
          is then created and returned, which assumes ownership of the <see
          cref="T:System.ServiceModel.Channels.Message" />
+
+        
 
         
 
@@ -103,8 +121,12 @@
 
         
 
+        
+
          from the <see
          cref="T:System.ServiceModel.Channels.MessageBuffer" />
+
+        
 
         
 
@@ -117,6 +139,8 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.ServiceModel.Channels.MessageBuffer" />
 
@@ -124,8 +148,12 @@
 
         
 
+        
+
         . This returns an identical copy of the original <see
          cref="T:System.ServiceModel.Channels.Message" />
+
+        
 
         
 
@@ -141,6 +169,8 @@
 
         
 
+        
+
          to the maximum number of bytes desired. This number does not necessarily cover any transient allocations related to building the buffer, or properties attached to the message.</para
       >
       <para
@@ -151,8 +181,12 @@
 
         
 
+        
+
          instance by calling <see
          cref="M:System.ServiceModel.Channels.MessageBuffer.Close" />
+
+        
 
         
 
@@ -186,8 +220,12 @@
 
             
 
+            
+
              and the finalizer itself from (On)(Begin)Close (and/or OnAbort) in order to emulate what would have been the auto-generated <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -227,6 +265,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -254,6 +294,8 @@
 
             
 
+            
+
              to the maximum number of bytes desired. This number does not necessarily cover any transient allocations related to building the buffer, or properties attached to the message. It is not related to the actual size of the message when serialized.</para
           >
         </remarks>
@@ -262,6 +304,8 @@
           <para
             >Gets the approximate number of bytes consumed by this <see
              cref="T:System.ServiceModel.Channels.MessageBuffer" />
+
+            
 
             
 
@@ -297,8 +341,12 @@
 
             
 
+            
+
              instance by calling <see
              cref="M:System.ServiceModel.Channels.MessageBuffer.Close" />
+
+            
 
             
 
@@ -314,6 +362,8 @@
 
             
 
+            
+
              to create a message buffer of a message, and inspected the message using <see
              cref="M:System.ServiceModel.Channels.MessageBuffer.CreateMessage" />
 
@@ -321,8 +371,12 @@
 
             
 
+            
+
             , you will get a <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -365,6 +419,8 @@
 
             
 
+            
+
              instance you previously provided to the <see
              cref="M:System.ServiceModel.Channels.Message.CreateBufferedCopy(System.Int32)" />
 
@@ -372,8 +428,12 @@
 
             
 
+            
+
              method of a <see
              cref="T:System.ServiceModel.Channels.Message" />
+
+            
 
             
 
@@ -396,6 +456,8 @@
 
             
 
+            
+
              instance you previously provided to the <see
              cref="M:System.ServiceModel.Channels.Message.CreateBufferedCopy(System.Int32)" />
 
@@ -403,8 +465,12 @@
 
             
 
+            
+
              method of a <see
              cref="T:System.ServiceModel.Channels.Message" />
+
+            
 
             
 
@@ -447,6 +513,8 @@
 
             
 
+            
+
              object for navigating this object. This method cannot be inherited.</para
           >
         </summary>
@@ -455,6 +523,8 @@
           <para
             >An <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -500,6 +570,8 @@
 
             
 
+            
+
              object for navigating this object, with the navigator positioned on the node specified.</para
           >
         </summary>
@@ -508,6 +580,8 @@
           <para
             >An <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -552,6 +626,8 @@
 
             
 
+            
+
              object for navigating this object, with the specified xml:space scope.</para
           >
         </summary>
@@ -560,6 +636,8 @@
           <para
             >An <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -575,8 +653,12 @@
 
           
 
+          
+
           A valid <see
            cref="T:System.Xml.XmlSpace" />
+
+          
 
           
 
@@ -622,6 +704,8 @@
 
             
 
+            
+
              object for navigating this object, with the navigator positioned on the specified node and xml:space scope.</para
           >
         </summary>
@@ -630,6 +714,8 @@
           <para
             >An <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -645,8 +731,12 @@
 
           
 
+          
+
           A valid <see
            cref="T:System.Xml.XmlSpace" />
+
+          
 
           
 
@@ -700,8 +790,12 @@
 
             
 
+            
+
             . This method leaves the <see
              cref="T:System.ServiceModel.Channels.MessageBuffer" />
+
+            
 
             
 
@@ -714,8 +808,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.ServiceModel.Channels.MessageBuffer" />
+
+            
 
             
 
@@ -732,8 +830,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using are not freed until the garbage collector calls the <see
                cref="T:System.ServiceModel.Channels.MessageBuffer" />
+
+              
 
               
 
@@ -748,6 +850,8 @@
           <para
             >Releases the unmanaged resources used by the <see
              cref="T:System.ServiceModel.Channels.MessageBuffer" />
+
+            
 
             
 
@@ -788,8 +892,12 @@
 
             
 
+            
+
              to a <see
              cref="T:System.ServiceModel.Channels.Message" />
+
+            
 
             
 
@@ -804,6 +912,8 @@
         </summary>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -37,6 +37,8 @@
 
         
 
+        
+
          event occurs just before a group of application settings are persisted, typically during the execution of the <see
          cref="M:System.Configuration.ApplicationSettingsBase.Save" />
 
@@ -44,8 +46,12 @@
 
         
 
+        
+
          method of a wrapper class derived from <see
          cref="T:System.Configuration.ApplicationSettingsBase" />
+
+        
 
         
 
@@ -59,6 +65,8 @@
       <para
         >Represents the method that will handle the <see
          cref="E:System.Configuration.ApplicationSettingsBase.SettingsSaving" />
+
+        
 
         
 

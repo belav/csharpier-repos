@@ -35,8 +35,12 @@
 
         
 
+        
+
          are sorted by the <see
          cref="P:System.Windows.Forms.NumericUpDownAcceleration.Seconds" />
+
+        
 
         
 
@@ -55,8 +59,12 @@
 
         
 
+        
+
          objects in the <see
          cref="T:System.Windows.Forms.NumericUpDown" />
+
+        
 
         
 
@@ -81,6 +89,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
+
+            
 
             
 
@@ -117,6 +127,8 @@
 
             
 
+            
+
              sorted.</para
           >
         </remarks>
@@ -130,8 +142,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
+
+            
 
             
 
@@ -147,6 +163,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
 
@@ -154,8 +172,12 @@
 
           
 
+          
+
            to add to the <see
            cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
+
+          
 
           
 
@@ -198,6 +220,8 @@
 
             
 
+            
+
             , keeping the collection sorted.</para
           >
         </summary>
@@ -208,8 +232,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
+
+          
 
           
 
@@ -236,6 +264,8 @@
           <para
             >Removes all elements from the <see
              cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
+
+            
 
             
 
@@ -273,8 +303,12 @@
 
             
 
+            
+
              contains a specific <see
              cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
+
+            
 
             
 
@@ -293,8 +327,12 @@
 
             
 
+            
+
              is found in the <see
              cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
+
+            
 
             
 
@@ -310,6 +348,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
 
@@ -317,8 +357,12 @@
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
+
+          
 
           
 
@@ -356,8 +400,12 @@
 
             
 
+            
+
              values to a one-dimensional <see
              cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
+
+            
 
             
 
@@ -373,6 +421,8 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
 
@@ -380,8 +430,12 @@
 
           
 
+          
+
            that is the destination of the values copied from <see
            cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
+
+          
 
           
 
@@ -396,8 +450,12 @@
 
           
 
+          
+
           The index in <paramref
            name="array" />
+
+          
 
           
 
@@ -429,6 +487,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -454,6 +514,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
+
+            
 
             
 
@@ -513,8 +575,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
+
+            
 
             
 
@@ -533,8 +599,12 @@
 
             
 
+            
+
              is removed from <see
              cref="T:System.Windows.Forms.NumericUpDownAccelerationCollection" />
+
+            
 
             
 
@@ -550,8 +620,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
+
+          
 
           
 
@@ -604,8 +678,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 

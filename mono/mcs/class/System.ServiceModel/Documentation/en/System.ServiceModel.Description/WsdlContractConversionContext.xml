@@ -27,11 +27,15 @@
 
         
 
+        
+
          object to examine and modify items that are to be converted to or from WSDL. </para
       >
       <para
         >When exporting metadata a <see
          cref="T:System.ServiceModel.Description.WsdlContractConversionContext" />
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.ServiceModel.Description.IWsdlExportExtension.ExportEndpoint(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" />
+
+        
 
         
 
@@ -61,6 +69,8 @@
 
         
 
+        
+
          object is passed to the <see
          cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportContract(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlContractConversionContext)" />
 
@@ -68,8 +78,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportEndpoint(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" />
+
+        
 
         
 
@@ -112,6 +126,8 @@
 
             
 
+            
+
              property to obtain the contract description on export or import.</para
           >
         </remarks>
@@ -120,6 +136,8 @@
           <para
             >Gets the <see
              cref="T:System.ServiceModel.Description.ContractDescription" />
+
+            
 
             
 
@@ -169,6 +187,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.OperationMessage" />
 
@@ -176,8 +196,12 @@
 
           
 
+          
+
            for the requested <see
            cref="T:System.ServiceModel.Description.MessageDescription" />
+
+          
 
           
 
@@ -223,6 +247,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.OperationDescription" />
 
@@ -230,8 +256,12 @@
 
           
 
+          
+
            for the requested <see
            cref="T:System.Web.Services.Description.Operation" />
+
+          
 
           
 
@@ -277,6 +307,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.Operation" />
 
@@ -284,8 +316,12 @@
 
           
 
+          
+
            for the requested <see
            cref="T:System.ServiceModel.Description.OperationDescription" />
+
+          
 
           
 
@@ -326,8 +362,12 @@
 
             
 
+            
+
              object for the specified <paramref
              name="message" />
+
+            
 
             
 
@@ -346,11 +386,15 @@
 
             
 
+            
+
              object that represents a message type passed by the action of an XML Web service.</para
           >
         </returns>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -363,8 +407,12 @@
 
           
 
+          
+
            for the requested <see
            cref="T:System.Web.Services.Description.OperationMessage" />
+
+          
 
           
 
@@ -398,6 +446,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.Services.Description.PortType" />
+
+            
 
             
 

@@ -49,6 +49,8 @@
 
         
 
+        
+
          objects. This class cannot be inherited.</para
       >
     </summary>
@@ -72,6 +74,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Configuration.StandardBindingElementCollection`1" />
+
+            
 
             
 

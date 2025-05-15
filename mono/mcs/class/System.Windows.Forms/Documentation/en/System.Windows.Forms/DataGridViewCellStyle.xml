@@ -25,6 +25,8 @@
 
         
 
+        
+
          class lets you share style information across multiple <see
          cref="T:System.Windows.Forms.DataGridView" />
 
@@ -32,8 +34,12 @@
 
         
 
+        
+
          cells, rows, columns, and row or column headers, avoiding the memory requirements of setting style properties on individual cells. For more information about classes that have a property of type <see
          cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+        
 
         
 
@@ -50,6 +56,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -58,6 +66,8 @@
       <para
         >Represents the formatting and style information applied to individual cells within a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -80,6 +90,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+            
 
             
 
@@ -115,8 +127,12 @@
 
             
 
+            
+
              class using the property values of the specified <see
              cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+            
 
             
 
@@ -132,8 +148,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+          
 
           
 
@@ -164,6 +184,8 @@
           <para
             >Gets or sets a value indicating the position of the cell content within a <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -206,8 +228,12 @@
 
             
 
+            
+
              method applies the values of the properties that are set in the <paramref
              name="dataGridViewCellStyle" />
+
+            
 
             
 
@@ -220,6 +246,8 @@
 
             
 
+            
+
             . If a property is not set in <paramref
              name="dataGridViewCellStyle" />
 
@@ -227,8 +255,12 @@
 
             
 
+            
+
             , the current <see
              cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+            
 
             
 
@@ -247,8 +279,12 @@
 
             
 
+            
+
              to the current <see
              cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+            
 
             
 
@@ -264,6 +300,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridViewCellStyle" />
 
@@ -271,8 +309,12 @@
 
           
 
+          
+
            to apply to the current <see
            cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+          
 
           
 
@@ -300,6 +342,8 @@
           <para
             >Gets or sets the background color of a <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -338,6 +382,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -346,6 +392,8 @@
           <para
             >A <see
              cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+            
 
             
 
@@ -375,8 +423,12 @@
 
             
 
+            
+
              property. When the user commits the change, the underlying cell value is set to the value of the <see
              cref="P:System.Windows.Forms.DataGridViewCellStyle.DataSourceNullValue" />
+
+            
 
             
 
@@ -389,8 +441,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.DBNull.Value" />
+
+            
 
             
 
@@ -403,8 +459,12 @@
 
             
 
+            
+
              is a reference type. This conversion does not occur when you set the <see
              cref="P:System.Windows.Forms.DataGridViewCell.Value" />
+
+            
 
             
 
@@ -421,8 +481,12 @@
 
               
 
+              
+
                property value for cell values equal to the <see
                cref="P:System.Windows.Forms.DataGridViewCellStyle.DataSourceNullValue" />
+
+              
 
               
 
@@ -435,8 +499,12 @@
 
               
 
+              
+
                is set to a value other than <see
                cref="F:System.DBNull.Value" />
+
+              
 
               
 
@@ -449,8 +517,12 @@
 
               
 
+              
+
                event to display the <see
                cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+
+              
 
               
 
@@ -506,8 +578,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+            
 
             
 
@@ -518,6 +594,8 @@
         </returns>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -549,8 +627,12 @@
 
             
 
+            
+
              is immutable (its properties are read-only), you can modify this property only by assigning a new or existing <see
              cref="T:System.Drawing.Font" />
+
+            
 
             
 
@@ -564,6 +646,8 @@
           <para
             >Gets or sets the font applied to the textual content of a <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -596,8 +680,12 @@
 
             
 
+            
+
              property typically should specify a color that contrasts with the <see
              cref="P:System.Windows.Forms.DataGridViewCellStyle.BackColor" />
+
+            
 
             
 
@@ -611,6 +699,8 @@
           <para
             >Gets or sets the foreground color of a <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -643,10 +733,14 @@
 
             
 
+            
+
              property specifies how cell values are formatted as strings. For more information, see <format
              type="text/html">
               <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
             </format>
+
+            
 
             
 
@@ -660,6 +754,8 @@
           <para
             >Gets or sets the format string applied to the textual content of a <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -699,6 +795,8 @@
           <para
             >Gets or sets the object used to provide culture-specific formatting of <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -756,8 +854,12 @@
 
             
 
+            
+
              property has been explicitly set without having to store its default value for comparison. This is useful because the <see
              cref="P:System.Windows.Forms.DataGridViewCellStyle.DataSourceNullValue" />
+
+            
 
             
 
@@ -770,6 +872,8 @@
 
             
 
+            
+
              properties, which have default values such as null, <see
              cref="F:System.Drawing.Color.Empty" />
 
@@ -777,8 +881,12 @@
 
             
 
+            
+
             , or <see
              cref="F:System.Windows.Forms.DataGridViewContentAlignment.NotSet" />
+
+            
 
             
 
@@ -792,6 +900,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="P:System.Windows.Forms.DataGridViewCellStyle.DataSourceNullValue" />
+
+            
 
             
 
@@ -832,8 +942,12 @@
 
             
 
+            
+
              property has been explicitly set without having to store its default value for comparison. This is useful because the <see
              cref="P:System.Windows.Forms.DataGridViewCellStyle.FormatProvider" />
+
+            
 
             
 
@@ -846,6 +960,8 @@
 
             
 
+            
+
              properties, which have default values such as null, <see
              cref="F:System.Drawing.Color.Empty" />
 
@@ -853,8 +969,12 @@
 
             
 
+            
+
             , or <see
              cref="F:System.Windows.Forms.DataGridViewContentAlignment.NotSet" />
+
+            
 
             
 
@@ -868,6 +988,8 @@
           <para
             >Gets a value that indicates whether the <see
              cref="P:System.Windows.Forms.DataGridViewCellStyle.FormatProvider" />
+
+            
 
             
 
@@ -908,8 +1030,12 @@
 
             
 
+            
+
              property has been explicitly set without having to store its default value for comparison. This is useful because the <see
              cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+
+            
 
             
 
@@ -922,6 +1048,8 @@
 
             
 
+            
+
              properties, which have default values such as null, <see
              cref="F:System.Drawing.Color.Empty" />
 
@@ -929,8 +1057,12 @@
 
             
 
+            
+
             , or <see
              cref="F:System.Windows.Forms.DataGridViewContentAlignment.NotSet" />
+
+            
 
             
 
@@ -944,6 +1076,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+
+            
 
             
 
@@ -984,8 +1118,12 @@
 
             
 
+            
+
              cell with this cell style has a value of <see
              cref="F:System.DBNull.Value" />
+
+            
 
             
 
@@ -998,8 +1136,12 @@
 
             
 
+            
+
              control displays the <see
              cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+
+            
 
             
 
@@ -1012,8 +1154,12 @@
 
             
 
+            
+
              property or to null if <see
              cref="P:System.Windows.Forms.DataGridViewCellStyle.DataSourceNullValue" />
+
+            
 
             
 
@@ -1026,6 +1172,8 @@
 
             
 
+            
+
              and the cell <see
              cref="P:System.Windows.Forms.DataGridViewCell.ValueType" />
 
@@ -1033,8 +1181,12 @@
 
             
 
+            
+
              is a reference type. This conversion does not occur when you set the <see
              cref="P:System.Windows.Forms.DataGridViewCell.Value" />
+
+            
 
             
 
@@ -1051,8 +1203,12 @@
 
               
 
+              
+
                property value for cell values equal to the <see
                cref="P:System.Windows.Forms.DataGridViewCellStyle.DataSourceNullValue" />
+
+              
 
               
 
@@ -1065,8 +1221,12 @@
 
               
 
+              
+
                is set to a value other than <see
                cref="F:System.DBNull.Value" />
+
+              
 
               
 
@@ -1079,8 +1239,12 @@
 
               
 
+              
+
                event to display the <see
                cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+
+              
 
               
 
@@ -1101,8 +1265,12 @@
 
             
 
+            
+
              cell display value corresponding to a cell value of <see
              cref="F:System.DBNull.Value" />
+
+            
 
             
 
@@ -1146,8 +1314,12 @@
 
             
 
+            
+
              property affects where the editing control of the <see
              cref="T:System.Windows.Forms.DataGridViewCell" />
+
+            
 
             
 
@@ -1160,8 +1332,12 @@
 
             
 
+            
+
              on a <see
              cref="T:System.Windows.Forms.DataGridViewTextBoxCell" />
+
+            
 
             
 
@@ -1174,8 +1350,12 @@
 
             
 
+            
+
              that has a value of 10 for its <see
              cref="P:System.Windows.Forms.Padding.Left" />
+
+            
 
             
 
@@ -1188,6 +1368,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.Padding.Right" />
 
@@ -1195,8 +1377,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.Padding.Bottom" />
+
+            
 
             
 
@@ -1210,6 +1396,8 @@
           <para
             >Gets or sets the space between the edge of a <see
              cref="T:System.Windows.Forms.DataGridViewCell" />
+
+            
 
             
 
@@ -1246,6 +1434,8 @@
 
             
 
+            
+
              cell when it is selected.</para
           >
         </summary>
@@ -1276,8 +1466,12 @@
 
             
 
+            
+
              property typically should specify a color that contrasts with the <see
              cref="P:System.Windows.Forms.DataGridViewCellStyle.SelectionBackColor" />
+
+            
 
             
 
@@ -1291,6 +1485,8 @@
           <para
             >Gets or sets the foreground color used by a <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -1325,8 +1521,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ICloneable" />
+
+            
 
             
 
@@ -1345,6 +1545,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1353,6 +1555,8 @@
           <para
             >A <see
              cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+            
 
             
 
@@ -1378,6 +1582,8 @@
           <para
             >Gets or sets an object that contains additional data related to the <see
              cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+            
 
             
 
@@ -1419,6 +1625,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1427,6 +1635,8 @@
           <para
             >A string indicating the current property settings of the <see
              cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+            
 
             
 
@@ -1462,8 +1672,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.Windows.Forms.DataGridViewTriState.False" />
+
+            
 
             
 
@@ -1476,8 +1690,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.Windows.Forms.DataGridViewTriState.True" />
+
+            
 
             
 
@@ -1491,6 +1709,8 @@
           <para
             >Gets or sets a value indicating whether textual content in a <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 

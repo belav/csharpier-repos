@@ -20,8 +20,12 @@
 
         
 
+        
+
          methods in the <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -34,6 +38,8 @@
 
         
 
+        
+
          classes, as well as by the <see
          cref="T:System.Windows.Forms.SearchForVirtualItemEventArgs" />
 
@@ -41,8 +47,12 @@
 
         
 
+        
+
          class. Identifying the nearest item in a <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -56,6 +66,8 @@
       <para
         >Provides a directional hint of where to search for a <see
          cref="T:System.Windows.Forms.ListViewItem" />
+
+        
 
         
 

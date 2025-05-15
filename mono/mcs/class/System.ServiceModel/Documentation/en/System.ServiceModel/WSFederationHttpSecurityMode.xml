@@ -26,6 +26,8 @@
 
         
 
+        
+
          supports.</para
       >
     </remarks>
@@ -34,6 +36,8 @@
       <para
         >Specifies the different security modes for <see
          cref="T:System.ServiceModel.WsFederationHttpBinding" />
+
+        
 
         
 

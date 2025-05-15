@@ -30,8 +30,12 @@
 
         
 
+        
+
           class inherits from the abstract <see
          cref="T:System.Web.Services.Discovery.DiscoverySearchPattern" />
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
          class's <see
          cref="M:System.Web.Services.Discovery.DiscoveryRequestHandler.ProcessRequest(System.Web.HttpContext)" />
+
+        
 
         
 
@@ -72,6 +80,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Discovery.DiscoveryDocumentSearchPattern" />
+
+            
 
             
 
@@ -109,8 +119,12 @@
 
             
 
+            
+
              class inherits from the abstract <see
              cref="T:System.Web.Services.Discovery.DiscoveryReference" />
+
+            
 
             
 
@@ -126,8 +140,12 @@
 
             
 
+            
+
              instance contains the location of the .vsdisco file, which is also the file system directory corresponding to the HTTP request passed to the <see
              cref="M:System.Web.Services.Discovery.DiscoveryRequestHandler.ProcessRequest(System.Web.HttpContext)" />
+
+            
 
             
 
@@ -146,6 +164,8 @@
 
             
 
+            
+
              object for a given discovery document.</para
           >
         </summary>
@@ -159,11 +179,15 @@
 
             
 
+            
+
              object that specifies the location of a .vsdisco file.</para
           >
         </returns>
         <param name="filename">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -194,6 +218,8 @@
           <para
             >The pattern "*.vsdisco" indicates a .vsdisco Web services discovery document extension. The <see
              cref="T:System.Web.Services.Discovery.DiscoveryDocumentLinksPattern" />
+
+            
 
             
 

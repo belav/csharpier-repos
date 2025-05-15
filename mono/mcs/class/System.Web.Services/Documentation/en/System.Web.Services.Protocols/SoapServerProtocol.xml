@@ -24,6 +24,8 @@
 
         
 
+        
+
          method to process XML Web service requests that are not explicitly declared and handled by users through a method in their XML Web service marked with WebMethodAttribute.</para
       >
     </remarks>
@@ -32,6 +34,8 @@
       <para
         >The .NET Framework creates an instance of the <see
          cref="T:System.Web.Services.Protocols.SoapServerProtocol" />
+
+        
 
         
 
@@ -54,6 +58,8 @@
           <para
             >Creates a new <see
              cref="T:System.Web.Services.Protocols.SoapServerProtocol" />
+
+            
 
             
 
@@ -93,8 +99,12 @@
 
             
 
+            
+
              initialized with the specified <see
              cref="T:System.Web.Services.Protocols.SoapServerMessage" />
+
+            
 
             
 
@@ -113,8 +123,12 @@
 
             
 
+            
+
              initialized with the <see
              cref="T:System.Web.Services.Protocols.SoapServerMessage" />
+
+            
 
             
 
@@ -127,8 +141,12 @@
 
             
 
+            
+
              and the buffer size specified by <paramref
              name="bufferSize" />
+
+            
 
             
 
@@ -144,6 +162,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Protocols.SoapServerMessage" />
 
@@ -151,8 +171,12 @@
 
           
 
+          
+
            with which to initialize the <see
            cref="T:System.Xml.XmlTextReader" />
+
+          
 
           
 
@@ -167,8 +191,12 @@
 
           
 
+          
+
           The buffer size with which to initialize the <see
            cref="T:System.Xml.XmlTextReader" />
+
+          
 
           
 
@@ -207,8 +235,12 @@
 
             
 
+            
+
              initialized with the specified <see
              cref="T:System.Web.Services.Protocols.SoapServerMessage" />
+
+            
 
             
 
@@ -227,8 +259,12 @@
 
             
 
+            
+
              initialized with the <see
              cref="T:System.Web.Services.Protocols.SoapServerMessage" />
+
+            
 
             
 
@@ -241,8 +277,12 @@
 
             
 
+            
+
              and the buffer size specified by <paramref
              name="bufferSize" />
+
+            
 
             
 
@@ -258,6 +298,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Protocols.SoapServerMessage" />
 
@@ -265,8 +307,12 @@
 
           
 
+          
+
            with which to initialize the <see
            cref="T:System.Xml.XmlTextWriter" />
+
+          
 
           
 
@@ -281,8 +327,12 @@
 
           
 
+          
+
           The buffer size with which to initialize the <see
            cref="T:System.Xml.XmlTextWriter" />
+
+          
 
           
 
@@ -321,6 +371,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -334,8 +386,12 @@
 
             
 
+            
+
              with the priority and group attributes specified by <paramref
              name="group" />
+
+            
 
             
 
@@ -351,6 +407,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Services.Configuration.PriorityGroup" />
 
@@ -358,8 +416,12 @@
 
           
 
+          
+
            that specifies the priority and group attributes to be applied to the SOAP extensions contained in <paramref
            name="extensions" />
+
+          
 
           
 
@@ -374,6 +436,8 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Web.Services.Protocols.SoapExtension" />
 
@@ -381,8 +445,12 @@
 
           
 
+          
+
            to which to apply the priority and group attributes specified by <paramref
            name="group" />
+
+          
 
           
 
@@ -419,6 +487,8 @@
 
             
 
+            
+
              method to process XML Web service requests that are not explicitly declared and handled by users through a method in their XML Web service marked with WebMethodAttribute.</para
           >
         </remarks>
@@ -432,8 +502,12 @@
 
             
 
+            
+
              to which the specified <see
              cref="T:System.Web.Services.Protocols.SoapServerMessage" />
+
+            
 
             
 
@@ -452,6 +526,8 @@
 
             
 
+            
+
              to which the <see
              cref="T:System.Web.Services.Protocols.SoapServerMessage" />
 
@@ -459,8 +535,12 @@
 
             
 
+            
+
              specified by <paramref
              name="message" />
+
+            
 
             
 
@@ -476,8 +556,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Protocols.SoapServerMessage" />
+
+          
 
           
 

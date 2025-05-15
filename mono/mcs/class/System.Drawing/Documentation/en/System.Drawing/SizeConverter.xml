@@ -29,8 +29,12 @@
 
         
 
+        
+
          class is used to convert from one data type to another. Access this class through the <see
          cref="T:System.ComponentModel.TypeDescriptor" />
+
+        
 
         
 
@@ -53,6 +57,8 @@
           <para
             >Initializes a new <see
              cref="T:System.Drawing.SizeConverter" />
+
+            
 
             
 
@@ -97,8 +103,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -108,6 +118,8 @@
         >
         <param name="sourceType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -145,6 +157,8 @@
 
             
 
+            
+
              parameter can be used to extract additional information about the environment this converter is being invoked from. </para
           >
         </remarks>
@@ -163,8 +177,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -179,8 +197,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -225,8 +247,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -241,8 +267,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -252,6 +282,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -291,8 +323,12 @@
 
             
 
+            
+
              method of the object if the object is valid and if the destination type is string. If this method cannot convert the specified object to the destination type, it passes a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -316,8 +352,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -332,8 +372,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -348,10 +392,14 @@
 
           
 
+          
+
           The object to convert. </param
         >
         <param name="destinationType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -395,8 +443,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.TypeDescriptor" />
+
+          
 
           
 
@@ -411,8 +463,12 @@
 
           
 
+          
+
           A dictionary of new property values. The dictionary contains a series of name-value pairs, one for each property returned from the <see
            cref="M:System.Drawing.SizeConverter.GetProperties(System.ComponentModel.ITypeDescriptorContext,System.Object,System.Attribute[])" />
+
+          
 
           
 
@@ -450,6 +506,8 @@
 
             
 
+            
+
              method to create a new value.</para
           >
         </summary>
@@ -458,6 +516,8 @@
           <para
             >true if the <see
              cref="M:System.Drawing.SizeConverter.CreateInstance(System.ComponentModel.ITypeDescriptorContext,System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -473,8 +533,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.TypeDescriptor" />
+
+          
 
           
 
@@ -513,6 +577,8 @@
 
             
 
+            
+
              method for the correct data type.</para
           >
         </remarks>
@@ -531,8 +597,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.TypeDescriptor" />
+
+          
 
           
 
@@ -547,6 +617,8 @@
 
           
 
+          
+
           The value of the object to get the properties for. </param
         >
         <param name="attributes">
@@ -556,8 +628,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -599,6 +675,8 @@
 
             
 
+            
+
              method should be called to find the properties of this object.</para
           >
         </returns>
@@ -609,8 +687,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.TypeDescriptor" />
+
+          
 
           
 

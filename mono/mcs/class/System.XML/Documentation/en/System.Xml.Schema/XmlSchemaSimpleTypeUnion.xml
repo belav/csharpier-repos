@@ -38,6 +38,8 @@
 
         
 
+        
+
         . A union datatype can be used to specify the content of a simpleType. The value of the simpleType element must be any one of a set of alternative datatypes specified in the union. Union types are always derived types and must comprise at least two alternative datatypes.</para
       >
     </summary>
@@ -64,6 +66,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Schema.XmlSchemaSimpleTypeUnion" />
+
+            
 
             
 
@@ -113,6 +117,8 @@
 
             
 
+            
+
              objects representing the type of the simpleType element based on the <see
              cref="P:System.Xml.Schema.XmlSchemaSimpleTypeUnion.BaseTypes" />
 
@@ -120,8 +126,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Xml.Schema.XmlSchemaSimpleTypeUnion.MemberTypes" />
+
+            
 
             
 

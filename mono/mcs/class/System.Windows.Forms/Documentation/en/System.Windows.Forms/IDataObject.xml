@@ -23,11 +23,15 @@
 
         
 
+        
+
          class and in drag-and-drop operations.</para
       >
       <para
         >When implemented in a class, the <see
          cref="T:System.Windows.Forms.IDataObject" />
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
         , call the <see
          cref="M:System.Windows.Forms.IDataObject.SetData(System.String,System.Boolean,System.Object)" />
+
+        
 
         
 
@@ -54,8 +62,12 @@
 
         
 
+        
+
          parameter. Set the <paramref
          name="autoConvert" />
+
+        
 
         
 
@@ -68,8 +80,12 @@
 
         
 
+        
+
          multiple times on one instance of <see
          cref="T:System.Windows.Forms.IDataObject" />
+
+        
 
         
 
@@ -85,8 +101,12 @@
 
         
 
+        
+
          by calling the <see
          cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
+
+        
 
         
 
@@ -99,8 +119,12 @@
 
         
 
+        
+
          parameter. Set the <paramref
          name="autoConvert" />
+
+        
 
         
 
@@ -113,8 +137,12 @@
 
         
 
+        
+
          to true, or do not use <paramref
          name="autoConvert" />
+
+        
 
         
 
@@ -130,8 +158,12 @@
 
         
 
+        
+
         , use the following <see
          cref="T:System.Windows.Forms.IDataObject" />
+
+        
 
         
 
@@ -149,6 +181,8 @@
 
             
 
+            
+
              method to retrieve an array of all the formats in which the data is available. Set the <paramref
              name="autoConvert" />
 
@@ -156,8 +190,12 @@
 
             
 
+            
+
              parameter to false to get only the formats in which the data is stored. To get all the formats in which the data is available, set <paramref
              name="autoConvert" />
+
+            
 
             
 
@@ -175,8 +213,12 @@
 
             
 
+            
+
              method to determine whether stored data is available in a certain format. If you do not want stored data to be converted to the specified format, set the <paramref
              name="autoConvert" />
+
+            
 
             
 
@@ -194,6 +236,8 @@
 
         
 
+        
+
          class for an implementation of this interface. See the <see
          cref="T:System.Windows.Forms.DataFormats" />
 
@@ -201,8 +245,12 @@
 
         
 
+        
+
          class for the predefined <see
          cref="T:System.Windows.Forms.Clipboard" />
+
+        
 
         
 
@@ -238,6 +286,8 @@
 
             
 
+            
+
              before calling <see
              cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
 
@@ -245,8 +295,12 @@
 
             
 
+            
+
             . Call <see
              cref="M:System.Windows.Forms.IDataObject.GetFormats(System.Boolean)" />
+
+            
 
             
 
@@ -260,6 +314,8 @@
           <para
             >For an implementation of this method, see <see
              cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -283,8 +339,12 @@
 
           
 
+          
+
           The format of the data to retrieve. See <see
            cref="T:System.Windows.Forms.DataFormats" />
+
+          
 
           
 
@@ -319,6 +379,8 @@
 
             
 
+            
+
              before calling <see
              cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
 
@@ -326,8 +388,12 @@
 
             
 
+            
+
             . Call <see
              cref="M:System.Windows.Forms.IDataObject.GetFormats(System.Boolean)" />
+
+            
 
             
 
@@ -341,6 +407,8 @@
           <para
             >For an implementation of this method, see <see
              cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -364,6 +432,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
 
@@ -371,8 +441,12 @@
 
           
 
+          
+
            representing the format of the data to retrieve. See <see
            cref="T:System.Windows.Forms.DataFormats" />
+
+          
 
           
 
@@ -410,8 +484,12 @@
 
             
 
+            
+
              parameter is true and this method cannot find data in the specified format, it attempts to convert the data to the format. If the data cannot be converted to the specified format, or if the data was stored with the <paramref
              name="autoConvert" />
+
+            
 
             
 
@@ -427,11 +505,15 @@
 
             
 
+            
+
              parameter is false, this method returns data in the specified format, or null if no data in this format can be found.</para
           >
           <para
             >To determine whether data is associated with, or can be converted to, a format, call <see
              cref="M:System.Windows.Forms.IDataObject.GetDataPresent(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -444,8 +526,12 @@
 
             
 
+            
+
             . Call <see
              cref="M:System.Windows.Forms.IDataObject.GetFormats(System.Boolean)" />
+
+            
 
             
 
@@ -459,6 +545,8 @@
           <para
             >For an implementation of this method, see <see
              cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -482,8 +570,12 @@
 
           
 
+          
+
           The format of the data to retrieve. See <see
            cref="T:System.Windows.Forms.DataFormats" />
+
+          
 
           
 
@@ -493,6 +585,8 @@
         >
         <param name="autoConvert">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -526,6 +620,8 @@
 
             
 
+            
+
              before calling <see
              cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
 
@@ -533,8 +629,12 @@
 
             
 
+            
+
             . Call <see
              cref="M:System.Windows.Forms.IDataObject.GetFormats(System.Boolean)" />
+
+            
 
             
 
@@ -548,6 +648,8 @@
           <para
             >For an implementation of this method, see <see
              cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+
+            
 
             
 
@@ -571,8 +673,12 @@
 
           
 
+          
+
           The format for which to check. See <see
            cref="T:System.Windows.Forms.DataFormats" />
+
+          
 
           
 
@@ -606,6 +712,8 @@
 
             
 
+            
+
              before calling <see
              cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
 
@@ -613,8 +721,12 @@
 
             
 
+            
+
             . Call <see
              cref="M:System.Windows.Forms.IDataObject.GetFormats(System.Boolean)" />
+
+            
 
             
 
@@ -628,6 +740,8 @@
           <para
             >For an implementation of this method, see <see
              cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+
+            
 
             
 
@@ -651,6 +765,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
 
@@ -658,8 +774,12 @@
 
           
 
+          
+
            representing the format for which to check. See <see
            cref="T:System.Windows.Forms.DataFormats" />
+
+          
 
           
 
@@ -697,6 +817,8 @@
 
             
 
+            
+
              before calling <see
              cref="M:System.Windows.Forms.IDataObject.GetData(System.String,System.Boolean)" />
 
@@ -704,8 +826,12 @@
 
             
 
+            
+
             . Call <see
              cref="M:System.Windows.Forms.IDataObject.GetFormats(System.Boolean)" />
+
+            
 
             
 
@@ -724,6 +850,8 @@
 
                 
 
+                
+
                  parameter is true and the data is in a format that can be converted to the appropriate format.</para
               >
             </item>
@@ -731,6 +859,8 @@
               <para
                 >The <paramref
                  name="autoConvert" />
+
+                
 
                 
 
@@ -751,8 +881,12 @@
 
                 
 
+                
+
                  parameter is true and this method cannot find data in the specified format, and it cannot convert data to the specified format, or the data was stored with <paramref
                  name="autoConvert" />
+
+                
 
                 
 
@@ -770,6 +904,8 @@
 
                 
 
+                
+
                  parameter is false, and data does not exist in this instance in the specified format.</para
               >
             </item>
@@ -780,6 +916,8 @@
           <para
             >For an implementation of this method, see <see
              cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+
+            
 
             
 
@@ -803,8 +941,12 @@
 
           
 
+          
+
           The format for which to check. See <see
            cref="T:System.Windows.Forms.DataFormats" />
+
+          
 
           
 
@@ -814,6 +956,8 @@
         >
         <param name="autoConvert">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -845,8 +989,12 @@
 
             
 
+            
+
              method. See the <see
              cref="T:System.Windows.Forms.DataFormats" />
+
+            
 
             
 
@@ -860,6 +1008,8 @@
           <para
             >For an implementation of this method, see <see
              cref="M:System.Windows.Forms.DataObject.GetFormats(System.Boolean)" />
+
+            
 
             
 
@@ -902,8 +1052,12 @@
 
             
 
+            
+
              method. See the <see
              cref="T:System.Windows.Forms.DataFormats" />
+
+            
 
             
 
@@ -922,6 +1076,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -935,6 +1091,8 @@
         </returns>
         <param name="autoConvert">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -970,6 +1128,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -979,6 +1139,8 @@
         </summary>
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1015,6 +1177,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1029,8 +1193,12 @@
 
           
 
+          
+
           The format associated with the data. See <see
            cref="T:System.Windows.Forms.DataFormats" />
+
+          
 
           
 
@@ -1040,6 +1208,8 @@
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1076,6 +1246,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1090,8 +1262,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1104,10 +1280,14 @@
 
           
 
+          
+
            for predefined formats. </param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1147,6 +1327,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1161,8 +1343,12 @@
 
           
 
+          
+
           The format associated with the data. See <see
            cref="T:System.Windows.Forms.DataFormats" />
+
+          
 
           
 
@@ -1177,10 +1363,14 @@
 
           
 
+          
+
           true to allow the data to be converted to another format; otherwise, false. </param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

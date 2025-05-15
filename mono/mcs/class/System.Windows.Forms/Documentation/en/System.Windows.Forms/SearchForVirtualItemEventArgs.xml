@@ -24,8 +24,12 @@
 
         
 
+        
+
          is constructed and passed to the <see
          cref="E:System.Windows.Forms.ListView.SearchForVirtualItem" />
+
+        
 
         
 
@@ -38,6 +42,8 @@
 
         
 
+        
+
          or <see
          cref="Overload:System.Windows.Forms.ListView.FindNearestItem" />
 
@@ -45,8 +51,12 @@
 
         
 
+        
+
          methods on a <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -60,6 +70,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.ListView.SearchForVirtualItem" />
+
+        
 
         
 
@@ -98,11 +110,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="isTextSearch">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -117,10 +133,14 @@
 
           
 
+          
+
           A value indicating whether the search is a prefix search.</param
         >
         <param name="includeSubItemsInSearch">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -135,6 +155,8 @@
 
           
 
+          
+
           The text of the item to search for.</param
         >
         <param name="startingPoint">
@@ -144,8 +166,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -160,8 +186,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.SearchDirectionHint" />
+
+          
 
           
 
@@ -176,8 +206,12 @@
 
           
 
+          
+
           The index of the <see
            cref="T:System.Windows.Forms.ListViewItem" />
+
+          
 
           
 
@@ -207,6 +241,8 @@
           <para
             >Identifying the nearest item in a <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -243,8 +279,12 @@
 
             
 
+            
+
              is in <see
              cref="F:System.Windows.Forms.View.Details" />
+
+            
 
             
 
@@ -281,8 +321,12 @@
 
             
 
+            
+
              property to the index of the item matching the search criteria when handling the <see
              cref="E:System.Windows.Forms.ListView.SearchForVirtualItem" />
+
+            
 
             
 
@@ -301,8 +345,12 @@
 
             
 
+            
+
              found in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -335,8 +383,12 @@
 
             
 
+            
+
              property can specify a substring of the desired text. The <see
              cref="P:System.Windows.Forms.SearchForVirtualItemEventArgs.IsPrefixSearch" />
+
+            
 
             
 
@@ -373,6 +425,8 @@
 
             
 
+            
+
              control by location by using the <see
              cref="Overload:System.Windows.Forms.ListView.FindNearestItem" />
 
@@ -380,8 +434,12 @@
 
             
 
+            
+
              method, or you can perform a text search by using the <see
              cref="Overload:System.Windows.Forms.ListView.FindItemWithText" />
+
+            
 
             
 
@@ -422,6 +480,8 @@
 
             
 
+            
+
              where the search starts.</para
           >
         </summary>
@@ -449,6 +509,8 @@
 
             
 
+            
+
              control by location by using the <see
              cref="Overload:System.Windows.Forms.ListView.FindNearestItem" />
 
@@ -456,8 +518,12 @@
 
             
 
+            
+
              method, or you can perform a text search by using the <see
              cref="Overload:System.Windows.Forms.ListView.FindItemWithText" />
+
+            
 
             
 
@@ -494,6 +560,8 @@
 
             
 
+            
+
              control by location by using the <see
              cref="Overload:System.Windows.Forms.ListView.FindNearestItem" />
 
@@ -501,8 +569,12 @@
 
             
 
+            
+
              method, or you can perform a text search by using the <see
              cref="Overload:System.Windows.Forms.ListView.FindItemWithText" />
+
+            
 
             
 
@@ -516,6 +588,8 @@
           <para
             >Gets the text used to find an item in the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 

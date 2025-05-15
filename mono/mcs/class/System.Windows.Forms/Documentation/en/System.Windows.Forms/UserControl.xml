@@ -44,8 +44,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Windows.Forms.UserControl" />
+
+        
 
         
 
@@ -61,8 +65,12 @@
 
         
 
+        
+
          gives you the ability to create controls that can be used in multiple places within an application or organization. You can include all the code needed for validation of common data you ask the user to input; some examples of this are e-mail addresses (see Example section), telephone numbers, and postal codes. Another efficient use of the user control is to simply preload a <see
          cref="T:System.Windows.Forms.ComboBox" />
+
+        
 
         
 
@@ -75,12 +83,16 @@
 
         
 
+        
+
          with static items you commonly use in almost every application; some examples of this are countries/regions, cities, states, and office locations. For more information about authoring custom controls, see <format
          type="text/html">
           <a href="236cebc0-bd71-4f18-9fd6-5d0e592375df"
             >Developing Windows Forms Controls with the .NET Framework</a
           >
         </format>
+
+        
 
         
 
@@ -98,6 +110,8 @@
 
           
 
+          
+
            derived classes inside of a form, on another <see
            cref="T:System.Windows.Forms.UserControl" />
 
@@ -105,8 +119,12 @@
 
           
 
+          
+
           , inside of Internet Explorer on a Web page, or inside a <see
            cref="T:System.Windows.Forms.WebBrowser" />
+
+          
 
           
 
@@ -124,8 +142,12 @@
 
           
 
+          
+
            inside of the <see
            cref="T:System.Windows.Forms.WebBrowser" />
+
+          
 
           
 
@@ -135,6 +157,8 @@
            type="text/html">
             <a href="a5b178ba-610e-46c4-a6c0-509c0886a744">Rendering Controls with Visual Styles</a>
           </format>
+
+          
 
           
 
@@ -166,8 +190,12 @@
 
             
 
+            
+
             . To create your own user control class, inherit from the <see
              cref="T:System.Windows.Forms.UserControl" />
+
+            
 
             
 
@@ -181,6 +209,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.UserControl" />
+
+            
 
             
 
@@ -250,6 +280,8 @@
 
             
 
+            
+
              property changes. </para
           >
         </summary>
@@ -290,8 +322,12 @@
 
             
 
+            
+
              property will function as though <see
              cref="P:System.Windows.Forms.UserControl.AutoSizeMode" />
+
+            
 
             
 
@@ -304,6 +340,8 @@
 
             
 
+            
+
             . All controls that recognize the <see
              cref="P:System.Windows.Forms.UserControl.AutoSizeMode" />
 
@@ -311,8 +349,12 @@
 
             
 
+            
+
              property will, by default, grow to fit available space, but will not shrink below the value specified by the <see
              cref="P:System.Windows.Forms.Control.Size" />
+
+            
 
             
 
@@ -384,6 +426,8 @@
 
             
 
+            
+
              property so that you can change your control's validation behavior accordingly. </para
           >
         </remarks>
@@ -392,6 +436,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.UserControl.AutoValidate" />
+
+            
 
             
 
@@ -437,8 +483,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Windows.Forms.BorderStyle.Fixed3D" />
+
+            
 
             
 
@@ -451,8 +501,12 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Windows.Forms.BorderStyle.FixedSingle" />
+
+            
 
             
 
@@ -524,8 +578,12 @@
 
               
 
+              
+
                is part of an MDI child form, the <see
                cref="E:System.Windows.Forms.UserControl.Load" />
+
+              
 
               
 
@@ -538,8 +596,12 @@
 
               
 
+              
+
                instead of a <see
                cref="E:System.Windows.Forms.UserControl.Load" />
+
+              
 
               
 
@@ -557,8 +619,12 @@
 
               
 
+              
+
                event occurs when the handle for the <see
                cref="T:System.Windows.Forms.UserControl" />
+
+              
 
               
 
@@ -571,8 +637,12 @@
 
               
 
+              
+
                event to occur more than one time. For example, the <see
                cref="E:System.Windows.Forms.UserControl.Load" />
+
+              
 
               
 
@@ -585,8 +655,12 @@
 
               
 
+              
+
                is loaded, and again if the handle is recreated. (One way that a handle is recreated is by calling the <see
                cref="M:System.Windows.Forms.Control.RecreateHandle" />
+
+              
 
               
 
@@ -599,8 +673,12 @@
 
               
 
+              
+
                event occurring more than one time, you should put any one time initialization code in the <see
                cref="M:System.Windows.Forms.UserControl.#ctor" />
+
+              
 
               
 
@@ -613,6 +691,8 @@
 
               
 
+              
+
                event handler. In addition, you should not add data bindings to the <see
                cref="T:System.Windows.Forms.UserControl" />
 
@@ -620,8 +700,12 @@
 
               
 
+              
+
                in a <see
                cref="E:System.Windows.Forms.UserControl.Load" />
+
+              
 
               
 
@@ -637,6 +721,8 @@
                 >[&lt;topic://cpconEventsOverview&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -677,11 +763,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.UserControl.OnCreateControl" />
+
+            
 
             
 
@@ -725,6 +815,8 @@
 
             
 
+            
+
              event occurs after the control is created, but before the control becomes visible for the first time.</para
           >
           <para
@@ -739,11 +831,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.UserControl.OnLoad(System.EventArgs)" />
+
+            
 
             
 
@@ -762,6 +858,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -772,8 +870,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -889,6 +991,8 @@
           <para
             >Raises the <see
              cref="E:System.Windows.Forms.Control.TextChanged" />
+
+            
 
             
 

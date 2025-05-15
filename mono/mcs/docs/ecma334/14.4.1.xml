@@ -11,6 +11,8 @@
 
         
 
+        
+
         , as described below. </list_item
       >
       <list_item> For properties, the argument list is empty when invoking the get accessor, and consists of the expression specified as the right operand of the assignment operator when invoking the set accessor. </list_item>
@@ -27,8 +29,12 @@
 
     
 
+    
+
     ), events (<hyperlink
     >17.7</hyperlink>
+
+    
 
     
 
@@ -41,6 +47,8 @@
 
     
 
+    
+
     ), and user-defined operators (<hyperlink
     >17.9</hyperlink>
 
@@ -48,8 +56,12 @@
 
     
 
+    
+
     ) are always passed as value parameters (<hyperlink
     >17.5.1.1</hyperlink>
+
+    
 
     
 
@@ -63,6 +75,8 @@
       <name>
         <non_terminal where="14.4.1">argument-list</non_terminal>
       </name>
+
+      
 
       
 
@@ -85,13 +99,14 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="14.14">expression</non_terminal>
       </rhs>
       <rhs>
-        <keyword
->ref</keyword>
+        <keyword>ref</keyword>
         <non_terminal where="12.4">variable-reference</non_terminal>
       </rhs>
       <rhs>
@@ -108,11 +123,15 @@
 
     
 
+    
+
      consists of one or more arguments, separated by commas. Each argument can take one of the following forms: <list
     >
       <list_item
         > An expression, indicating that the argument is passed as a value parameter (<hyperlink
         >17.5.1.1</hyperlink>
+
+        
 
         
 
@@ -128,8 +147,12 @@
 
         
 
+        
+
          (<hyperlink
         >12.3.3</hyperlink>
+
+        
 
         
 
@@ -142,6 +165,8 @@
 
         
 
+        
+
         ). A variable must be definitely assigned (<hyperlink
         >12.3</hyperlink>
 
@@ -149,8 +174,12 @@
 
         
 
+        
+
         ) before it can be passed as a reference parameter. A volatile field (<hyperlink
         >17.4.3</hyperlink>
+
+        
 
         
 
@@ -166,8 +195,12 @@
 
         
 
+        
+
          (<hyperlink
         >12.3.3</hyperlink>
+
+        
 
         
 
@@ -180,6 +213,8 @@
 
         
 
+        
+
         ). A variable is considered definitely assigned (<hyperlink
         >12.3</hyperlink>
 
@@ -187,8 +222,12 @@
 
         
 
+        
+
         ) following a function member invocation in which the variable is passed as an output parameter. A volatile field (<hyperlink
         >17.4.3</hyperlink>
+
+        
 
         
 
@@ -206,6 +245,8 @@
 
     
 
+    
+
     ), the expressions or variable references of an argument list are evaluated in order, from left to right, as follows: <list
     >
       <list_item
@@ -216,13 +257,15 @@
 
         
 
+        
+
         ) to the corresponding parameter type is performed. The resulting value becomes the initial value of the value parameter in the function member invocation. </list_item
       >
       <list_item
         > For a reference or output parameter, the variable reference is evaluated and the resulting storage location becomes the storage location represented by the parameter in the function member invocation. If the variable reference given as a reference or output parameter is an array element of a <non_terminal
-         where="11.2"
->reference-type</non_terminal
-        >
+         where="11.2">reference-type</non_terminal>
+
+        
 
         
 
@@ -240,8 +283,12 @@
 
     
 
+    
+
     ). Such function members are invoked either in their normal form or in their expanded form depending on which is applicable (<hyperlink
     >14.4.2.1</hyperlink>
+
+    
 
     
 
@@ -257,11 +304,15 @@
 
         
 
+        
+
         ) to the parameter array type. In this case, the parameter array acts precisely like a value parameter. </list_item
       >
       <list_item
         > When a function member with a parameter array is invoked in its expanded form, the invocation must specify zero or more arguments for the parameter array, where each argument is an expression of a type that is implicitly convertible (<hyperlink
         >13.1</hyperlink>
+
+        
 
         
 
@@ -276,7 +327,7 @@
 
       >[Example: Thus, the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 class Test  
 {  
    static void F(int x, int y, int z) {  
@@ -294,12 +345,16 @@ class Test
 
       
 
+      
+
       produces the output <code_example
       >
-<![CDATA[
+        <![CDATA[
 x = 0, y = 1, z = 2  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -316,10 +371,12 @@ x = 0, y = 1, z = 2
 
     
 
+    
+
     ) permit a value of an array type A[] to be a reference to an instance of an array type B[], provided an implicit reference conversion exists from B to A. Because of these rules, when an array element of a <non_terminal
-     where="11.2"
->reference-type</non_terminal
-    >
+     where="11.2">reference-type</non_terminal>
+
+    
 
     
 
@@ -329,7 +386,7 @@ x = 0, y = 1, z = 2
 
       >[Example: In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 class Test  
 {  
    static void F(ref object x) {...}  
@@ -347,6 +404,8 @@ class Test
 
       
 
+      
+
       the second invocation of F causes a System.ArrayTypeMismatchException to be thrown because the actual element type of b is string and not object. end example]</example
     >
   </paragraph>
@@ -358,11 +417,13 @@ class Test
 
     
 
+    
+
     ) was inserted around the expanded parameters. <example
 
       >[Example: For example, given the declaration <code_example
       >
-<![CDATA[
+        <![CDATA[
 void F(int x, int y, params object[] args);  
 ]]>
       </code_example>
@@ -371,9 +432,11 @@ void F(int x, int y, params object[] args);
 
       
 
+      
+
       the following invocations of the expanded form of the method <code_example
       >
-<![CDATA[
+        <![CDATA[
 F(10, 20);  
 F(10, 20, 30, 40);  
 F(10, 20, 1, "hello", 3.0);  
@@ -384,9 +447,11 @@ F(10, 20, 1, "hello", 3.0);
 
       
 
+      
+
       correspond exactly to <code_example
       >
-<![CDATA[
+        <![CDATA[
 F(10, 20, new object[] {});  
 F(10, 20, new object[] {30, 40});  
 F(10, 20, new object[] {1, "hello", 3.0});  
@@ -397,8 +462,12 @@ F(10, 20, new object[] {1, "hello", 3.0});
 
       
 
+      
+
       end example]</example
     >
+
+    
 
     
 

@@ -29,6 +29,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -84,6 +86,8 @@
 
             
 
+            
+
              or <see
              cref="M:System.Runtime.InteropServices.ComTypes.IConnectionPoint.Advise(System.Object,System.Int32@)" />
 
@@ -91,8 +95,12 @@
 
             
 
+            
+
             ), this flag requests the data object not to send data when it calls <see
              cref="M:System.Runtime.InteropServices.ComTypes.IAdviseSink.OnDataChange(System.Runtime.InteropServices.ComTypes.FORMATETC@,System.Runtime.InteropServices.ComTypes.STGMEDIUM@)" />
+
+            
 
             
 
@@ -149,6 +157,8 @@
 
             
 
+            
+
              (for data or view advisory connections) or updating the cache (for cache connections).</para
           >
         </summary>
@@ -195,6 +205,8 @@
           <para
             >Synonym for <see
              cref="F:System.Runtime.InteropServices.ComTypes.ADVF.ADVFCACHE_FORCEBUILTIN" />
+
+            
 
             
 

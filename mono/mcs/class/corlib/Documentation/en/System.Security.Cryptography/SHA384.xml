@@ -38,6 +38,8 @@
 
         
 
+        
+
          algorithm is 384 bits.</para
       >
     </remarks>
@@ -46,6 +48,8 @@
       <para
         >Computes the <see
          cref="T:System.Security.Cryptography.SHA384" />
+
+        
 
         
 
@@ -80,6 +84,8 @@
           <para
             >Initializes a new instance of <see
              cref="T:System.Security.Cryptography.SHA384" />
+
+            
 
             
 
@@ -121,6 +127,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -129,6 +137,8 @@
           <para
             >A new instance of <see
              cref="T:System.Security.Cryptography.SHA384" />
+
+            
 
             
 
@@ -172,6 +182,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -180,6 +192,8 @@
           <para
             >A new instance of <see
              cref="T:System.Security.Cryptography.SHA384" />
+
+            
 
             
 
@@ -195,8 +209,12 @@
 
           
 
+          
+
           The name of the specific implementation of <see
            cref="T:System.Security.Cryptography.SHA384" />
+
+          
 
           
 

@@ -26,6 +26,8 @@
 
         
 
+        
+
          class is used at design time with expressions that are not defined in the configuration file. Use the <see
          cref="P:System.Web.Compilation.ExpressionPrefixAttribute.ExpressionPrefix" />
 
@@ -33,8 +35,12 @@
 
         
 
+        
+
          property to get the name of the prefix that is associated with the <see
          cref="T:System.Web.Compilation.ExpressionPrefixAttribute" />
+
+        
 
         
 
@@ -51,8 +57,12 @@
 
         
 
+        
+
          parameter refers to a configured expression builder, which is defined in the configuration file or through an <see
          cref="T:System.Web.Compilation.ExpressionPrefixAttribute" />
+
+        
 
         
 
@@ -88,8 +98,12 @@
 
             
 
+            
+
              constructor to initialize an instance of the <see
              cref="T:System.Web.Compilation.ExpressionPrefixAttribute" />
+
+            
 
             
 
@@ -102,8 +116,12 @@
 
             
 
+            
+
              is the default constructor for the <see
              cref="T:System.Web.Compilation.ExpressionPrefixAttribute" />
+
+            
 
             
 
@@ -122,6 +140,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -132,8 +152,12 @@
 
           
 
+          
+
           The prefix of the current <see
            cref="T:System.Web.Compilation.ExpressionBuilder" />
+
+          
 
           
 
@@ -165,6 +189,8 @@
 
             
 
+            
+
              property to retrieve the name of the prefix that is associated with a given attribute. </para
           >
         </remarks>
@@ -173,6 +199,8 @@
           <para
             >Gets the prefix value for the current <see
              cref="T:System.Web.Compilation.ExpressionBuilder" />
+
+            
 
             
 

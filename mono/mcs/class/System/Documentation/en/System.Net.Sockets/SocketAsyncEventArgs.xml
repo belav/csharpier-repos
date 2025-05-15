@@ -29,8 +29,12 @@
 
         
 
+        
+
          class is part of a set of enhancements to the <see
          cref="T:System.Net.Sockets.Socket" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
          class requires a <see
          cref="T:System.IAsyncResult" />
+
+        
 
         
 
@@ -63,8 +71,12 @@
 
         
 
+        
+
          class enhancements, asynchronous socket operations are described by reusable <see
          cref="T:System.Net.Sockets.SocketAsyncEventArgs" />
+
+        
 
         
 
@@ -77,8 +89,12 @@
 
         
 
+        
+
          objects that it needs. For example, if a server application needs to have 15 socket accept operations outstanding at all times to support incoming client connection rates, it can allocate 15 reusable <see
          cref="T:System.Net.Sockets.SocketAsyncEventArgs" />
+
+        
 
         
 
@@ -92,6 +108,8 @@
           <para
             >Allocate a new <see
              cref="T:System.Net.Sockets.SocketAsyncEventArgs" />
+
+            
 
             
 
@@ -156,8 +174,12 @@
 
                 
 
+                
+
                  property will be equal to <see
                  cref="F:System.Net.Sockets.SocketAsyncOperation.None" />
+
+                
 
                 
 
@@ -175,8 +197,12 @@
 
                 
 
+                
+
                  property will be equal to <see
                  cref="F:System.Net.Sockets.TransmitFileOptions.UseDefaultWorkerThread" />
+
+                
 
                 
 
@@ -194,8 +220,12 @@
 
                 
 
+                
+
                  property will be equal to <see
                  cref="F:System.Net.Sockets.SocketAsyncOperation.None" />
+
+                
 
                 
 
@@ -212,6 +242,8 @@
           <para
             >Creates an empty <see
              cref="T:System.Net.Sockets.SocketAsyncEventArgs" />
+
+            
 
             
 
@@ -251,8 +283,12 @@
 
             
 
+            
+
              that will be used for an asynchronous socket accept operation. Upon completion of the accept operation, it is the socket representing the accepted connection. If not supplied (set to null) before calling the <see
              cref="M:System.Net.Sockets.Socket.AcceptAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+
+            
 
             
 
@@ -290,8 +326,12 @@
 
             
 
+            
+
              instance. To set the buffer, the <see
              cref="Overload:System.Net.Sockets.SocketAsyncEventArgs.SetBuffer" />
+
+            
 
             
 
@@ -307,8 +347,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Net.Sockets.Socket.ConnectAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+
+            
 
             
 
@@ -321,8 +365,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Net.Sockets.Socket.ReceiveFromAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+
+            
 
             
 
@@ -335,6 +383,8 @@
 
             
 
+            
+
             , <see
              cref="M:System.Net.Sockets.Socket.SendAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
 
@@ -342,8 +392,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Net.Sockets.Socket.SendToAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+
+            
 
             
 
@@ -387,8 +441,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Net.Sockets.Socket.SendAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+
+            
 
             
 
@@ -404,6 +462,8 @@
 
             
 
+            
+
              property are supported by the <see
              cref="M:System.Net.Sockets.Socket.ReceiveAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
 
@@ -411,8 +471,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Net.Sockets.Socket.SendAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+
+            
 
             
 
@@ -428,8 +492,12 @@
 
             
 
+            
+
              property is set to a non-null value, the <see
              cref="P:System.Net.Sockets.SocketAsyncEventArgs.Buffer" />
+
+            
 
             
 
@@ -442,8 +510,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Net.Sockets.Socket.SendAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+
+            
 
             
 
@@ -459,8 +531,12 @@
 
             
 
+            
+
              was set to a non-null value and an attempt is made to set the <see
              cref="P:System.Net.Sockets.SocketAsyncEventArgs.BufferList" />
+
+            
 
             
 
@@ -476,8 +552,12 @@
 
             
 
+            
+
              property is set to a non-null value, the <see
              cref="M:System.Net.Sockets.Socket.ConnectAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+
+            
 
             
 
@@ -490,8 +570,12 @@
 
             
 
+            
+
              methods will throw an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -507,6 +591,8 @@
 
             
 
+            
+
              parameter is ignored by the <see
              cref="M:System.Net.Sockets.Socket.DisconnectAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
 
@@ -514,8 +600,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Net.Sockets.Socket.SendPacketsAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+
+            
 
             
 
@@ -549,6 +639,8 @@
           <para
             >This property is set by all asynchronous socket operations except the <see
              cref="M:System.Net.Sockets.Socket.DisconnectAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+
+            
 
             
 
@@ -591,8 +683,12 @@
 
             
 
+            
+
              event provides a way for client applications to complete an asynchronous socket operation. An event handler should be attached to the event within a <see
              cref="T:System.Net.Sockets.SocketAsyncEventArgs" />
+
+            
 
             
 
@@ -608,11 +704,15 @@
 
             
 
+            
+
              event contains program logic to finish processing the asynchronous socket operation for the client.</para
           >
           <para
             >When the event is signaled, the application uses the <see
              cref="T:System.Net.Sockets.SocketAsyncEventArgs" />
+
+            
 
             
 
@@ -652,6 +752,8 @@
 
             
 
+            
+
              was specified for the <see
              cref="P:System.Net.Sockets.SocketAsyncEventArgs.RemoteEndPoint" />
 
@@ -659,8 +761,12 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Net.Sockets.SocketAsyncEventArgs.ConnectByNameError" />
+
+            
 
             
 
@@ -676,6 +782,8 @@
 
             
 
+            
+
              was specified for the <see
              cref="P:System.Net.Sockets.SocketAsyncEventArgs.RemoteEndPoint" />
 
@@ -683,8 +791,12 @@
 
             
 
+            
+
              property and a connection failure occurs, the <see
              cref="P:System.Net.Sockets.SocketAsyncEventArgs.ConnectByNameError" />
+
+            
 
             
 
@@ -700,8 +812,12 @@
 
             
 
+            
+
              property is always set in the case of a connection failure. The <see
              cref="P:System.Net.Sockets.SocketAsyncEventArgs.ConnectByNameError" />
+
+            
 
             
 
@@ -714,8 +830,12 @@
 
             
 
+            
+
             . If an application is only interested in whether the connect operation succeeded or failed, then the application only needs to check the <see
              cref="P:System.Net.Sockets.SocketAsyncEventArgs.SocketError" />
+
+            
 
             
 
@@ -729,6 +849,8 @@
           <para
             >Gets the exception in the case of a connection failure when a <see
              cref="T:System.Net.DnsEndPoint" />
+
+            
 
             
 
@@ -762,11 +884,15 @@
 
             
 
+            
+
              method. </para
           >
           <para
             >This property is used with the <see
              cref="M:System.Net.Sockets.Socket.AcceptAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+
+            
 
             
 
@@ -779,8 +905,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Net.Sockets.Socket.ReceiveAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+
+            
 
             
 
@@ -793,8 +923,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Net.Sockets.Socket.ReceiveMessageFromAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+
+            
 
             
 
@@ -807,8 +941,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Net.Sockets.Socket.SendToAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+
+            
 
             
 
@@ -846,8 +984,12 @@
 
             
 
+            
+
              method. If true, a socket disconnected by the <see
              cref="M:System.Net.Sockets.Socket.DisconnectAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+
+            
 
             
 
@@ -887,8 +1029,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -901,8 +1047,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -918,8 +1068,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Net.Sockets.SocketAsyncEventArgs" />
+
+            
 
             
 
@@ -940,6 +1094,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -949,6 +1105,8 @@
           <para
             >Releases the unmanaged resources used by the <see
              cref="T:System.Net.Sockets.SocketAsyncEventArgs" />
+
+            
 
             
 
@@ -985,6 +1143,8 @@
 
             
 
+            
+
              class finalizer closes the <see
              cref="T:System.Net.Sockets.SocketAsyncEventArgs" />
 
@@ -992,8 +1152,12 @@
 
             
 
+            
+
              and free resources associated with the <see
              cref="T:System.Net.Sockets.SocketAsyncEventArgs" />
+
+            
 
             
 
@@ -1007,6 +1171,8 @@
           <para
             >Frees resources used by the <see
              cref="T:System.Net.Sockets.SocketAsyncEventArgs" />
+
+            
 
             
 
@@ -1046,8 +1212,12 @@
 
             
 
+            
+
              object. The value of this property will be <see
              cref="F:System.Net.Sockets.SocketAsyncOperation.None" />
+
+            
 
             
 
@@ -1060,8 +1230,12 @@
 
             
 
+            
+
              instance is used to begin an asynchronous socket operation. The property will then be set to the type of operation being performed in the methods that take the <see
              cref="T:System.Net.Sockets.SocketAsyncEventArgs" />
+
+            
 
             
 
@@ -1077,8 +1251,12 @@
 
             
 
+            
+
              instance until the <see
              cref="T:System.Net.Sockets.SocketAsyncEventArgs" />
+
+            
 
             
 
@@ -1090,6 +1268,8 @@
           <para
             >Calling an asynchronous socket method (xxxAsync) on the <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -1127,8 +1307,12 @@
 
             
 
+            
+
              property. This value is set by calling the <see
              cref="Overload:System.Net.Sockets.SocketAsyncEventArgs.SetBuffer" />
+
+            
 
             
 
@@ -1144,11 +1328,15 @@
 
             
 
+            
+
              property. </para
           >
           <para
             >This property is used with the <see
              cref="M:System.Net.Sockets.Socket.AcceptAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+
+            
 
             
 
@@ -1161,8 +1349,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Net.Sockets.Socket.ReceiveAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+
+            
 
             
 
@@ -1175,8 +1367,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Net.Sockets.Socket.ReceiveMessageFromAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+
+            
 
             
 
@@ -1189,8 +1385,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Net.Sockets.Socket.SendToAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+
+            
 
             
 
@@ -1204,6 +1404,8 @@
           <para
             >Gets the offset, in bytes, into the data buffer referenced by the <see
              cref="P:System.Net.Sockets.SocketAsyncEventArgs.Buffer" />
+
+            
 
             
 
@@ -1245,6 +1447,8 @@
 
             
 
+            
+
              object when the current operation is complete. This method is used with all asynchronous socket (xxxAsync) methods.</para
           >
           <para
@@ -1255,8 +1459,12 @@
 
             
 
+            
+
              can override this method to hook into this completion notification and clean up any resources that it allocated for the operation. The default implementation just raises the <see
              cref="E:System.Net.Sockets.SocketAsyncEventArgs.Completed" />
+
+            
 
             
 
@@ -1272,6 +1480,8 @@
 
             
 
+            
+
              class.</para
           >
           <para
@@ -1282,8 +1492,12 @@
 
             
 
+            
+
              method provides a way for client applications to complete an asynchronous socket operation. A callback delegate must be implemented when an asynchronous socket operation is initiated. The completion callback delegate(s) inherited from the <see
              cref="M:System.Net.Sockets.SocketAsyncEventArgs.OnCompleted(System.Net.Sockets.SocketAsyncEventArgs)" />
+
+            
 
             
 
@@ -1299,6 +1513,8 @@
 
             
 
+            
+
              object parameter to obtain status of the completed asynchronous socket operation. </para
           >
         </remarks>
@@ -1308,6 +1524,8 @@
         </summary>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1346,11 +1564,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >This property is used with the <see
              cref="M:System.Net.Sockets.Socket.ReceiveMessageFromAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+
+            
 
             
 
@@ -1394,8 +1616,12 @@
 
             
 
+            
+
              method. This property can specify the remote endpoint to which to send data using <see
              cref="M:System.Net.Sockets.Socket.SendToAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+
+            
 
             
 
@@ -1408,8 +1634,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Net.Sockets.Socket.ReceiveMessageFromAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+
+            
 
             
 
@@ -1426,8 +1656,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Net.Sockets.Socket.ReceiveFromAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+
+            
 
             
 
@@ -1440,8 +1674,12 @@
 
             
 
+            
+
             , or <see
              cref="M:System.Net.Sockets.Socket.SendToAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+
+            
 
             
 
@@ -1485,6 +1723,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -1493,6 +1733,8 @@
           <para
             >Gets or sets an array of buffers to be sent for an asynchronous operation used by the <see
              cref="M:System.Net.Sockets.Socket.SendPacketsAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+
+            
 
             
 
@@ -1532,8 +1774,12 @@
 
             
 
+            
+
              that are used by the <see
              cref="M:System.Net.Sockets.Socket.SendPacketsAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+
+            
 
             
 
@@ -1552,8 +1798,12 @@
 
             
 
+            
+
              values for an asynchronous operation used by the <see
              cref="M:System.Net.Sockets.Socket.SendPacketsAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+
+            
 
             
 
@@ -1587,6 +1837,8 @@
           <para
             >Set this property to zero to let the sockets layer select a default send size. Setting this property to 0xFFFFFFFF enables the caller to control the size and content of each send request, achieved by using the <see
              cref="P:System.Net.Sockets.SendPacketsElement.EndOfPacket" />
+
+            
 
             
 
@@ -1630,8 +1882,12 @@
 
             
 
+            
+
              and <paramref
              name="count" />
+
+            
 
             
 
@@ -1644,6 +1900,8 @@
 
             
 
+            
+
              and <paramref
              name="count" />
 
@@ -1651,8 +1909,12 @@
 
             
 
+            
+
              parameters must be in bounds of the buffer array in the <see
              cref="P:System.Net.Sockets.SocketAsyncEventArgs.Buffer" />
+
+            
 
             
 
@@ -1668,8 +1930,12 @@
 
             
 
+            
+
              property to the <paramref
              name="count" />
+
+            
 
             
 
@@ -1682,8 +1948,12 @@
 
             
 
+            
+
              property to the <paramref
              name="offset" />
+
+            
 
             
 
@@ -1696,8 +1966,12 @@
 
             
 
+            
+
              property is null, this method ignores the <paramref
              name="offset" />
+
+            
 
             
 
@@ -1710,8 +1984,12 @@
 
             
 
+            
+
              parameters and sets the <see
              cref="P:System.Net.Sockets.SocketAsyncEventArgs.Offset" />
+
+            
 
             
 
@@ -1724,11 +2002,15 @@
 
             
 
+            
+
              properties to 0.</para
           >
           <para
             >This method does not change the <see
              cref="P:System.Net.Sockets.SocketAsyncEventArgs.Buffer" />
+
+            
 
             
 
@@ -1748,10 +2030,14 @@
 
           
 
+          
+
           The offset, in bytes, in the data buffer where the operation starts.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1794,8 +2080,12 @@
 
             
 
+            
+
              and <paramref
              name="count" />
+
+            
 
             
 
@@ -1808,6 +2098,8 @@
 
             
 
+            
+
              and <paramref
              name="count" />
 
@@ -1815,8 +2107,12 @@
 
             
 
+            
+
              parameters must be in bounds of the data array in the <paramref
              name="buffer" />
+
+            
 
             
 
@@ -1832,8 +2128,12 @@
 
             
 
+            
+
              property to the <paramref
              name="buffer" />
+
+            
 
             
 
@@ -1846,8 +2146,12 @@
 
             
 
+            
+
              property to the <paramref
              name="count" />
+
+            
 
             
 
@@ -1860,8 +2164,12 @@
 
             
 
+            
+
              property to the <paramref
              name="offset" />
+
+            
 
             
 
@@ -1881,6 +2189,8 @@
 
           
 
+          
+
           The data buffer to use with an asynchronous socket method.</param
         >
         <param name="offset">
@@ -1890,10 +2200,14 @@
 
           
 
+          
+
           The offset, in bytes, in the data buffer where the operation starts.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1927,6 +2241,8 @@
           <para
             >This property provides the completion status of an asynchronous socket operation. A value of <see
              cref="F:System.Net.Sockets.SocketError.Success" />
+
+            
 
             
 
@@ -1971,11 +2287,15 @@
 
             
 
+            
+
              to be used for an asynchronous socket operation.</para
           >
           <para
             >This property is used with the <see
              cref="M:System.Net.Sockets.Socket.ReceiveAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+
+            
 
             
 
@@ -1988,6 +2308,8 @@
 
             
 
+            
+
             , <see
              cref="M:System.Net.Sockets.Socket.SendAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
 
@@ -1995,8 +2317,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Net.Sockets.Socket.SendToAsync(System.Net.Sockets.SocketAsyncEventArgs)" />
+
+            
 
             
 
@@ -2044,6 +2370,8 @@
           <para
             >This property can be used by an application to associate an application state object with the <see
              cref="T:System.Net.Sockets.SocketAsyncEventArgs" />
+
+            
 
             
 

@@ -29,8 +29,12 @@
 
         
 
+        
+
          class is the type parameter used as the fault detail object when a <see
          cref="T:System.ServiceModel.FaultException" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          or the <see
          cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" />
+
+        
 
         
 
@@ -60,12 +68,16 @@
 
         
 
+        
+
          object the type must be serializable. For more information on serialization options, see <format
          type="text/html">
           <a href="7c5a26c8-89c9-4bcb-a4bc-7131e6d01f0c"
             >Specifying Data Transfer in Service Contracts</a
           >
         </format>
+
+        
 
         
 
@@ -104,6 +116,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -112,6 +126,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.ExceptionDetail" />
+
+            
 
             
 
@@ -127,8 +143,12 @@
 
           
 
+          
+
           The exception to be serialized as an <see
            cref="T:System.ServiceModel.ExceptionDetail" />
+
+          
 
           
 
@@ -198,6 +218,8 @@
 
             
 
+            
+
              property to obtain the set of exceptions that led to the current exception.</para
           >
         </remarks>
@@ -206,6 +228,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.ServiceModel.ExceptionDetail" />
+
+            
 
             
 
@@ -238,6 +262,8 @@
           <para
             >The text of <see
              cref="P:System.ServiceModel.ExceptionDetail.Message" />
+
+            
 
             
 

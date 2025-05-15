@@ -42,6 +42,8 @@
 
             
 
+            
+
              methods.</para
           >
         </summary>
@@ -65,6 +67,8 @@
           <para
             >See <see
              cref="M:System.Drawing.Graphics.BeginContainer" />
+
+            
 
             
 
@@ -98,6 +102,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -121,6 +127,8 @@
           <para
             >See <see
              cref="M:System.Drawing.Graphics.AddMetafileComment(System.Byte[])" />
+
+            
 
             
 
@@ -154,6 +162,8 @@
 
             
 
+            
+
              methods.</para
           >
         </summary>
@@ -177,6 +187,8 @@
           <para
             >See <see
              cref="Overload:System.Drawing.Graphics.DrawBeziers" />
+
+            
 
             
 
@@ -210,6 +222,8 @@
 
             
 
+            
+
              methods.</para
           >
         </summary>
@@ -233,6 +247,8 @@
           <para
             >See <see
              cref="Overload:System.Drawing.Graphics.DrawCurve" />
+
+            
 
             
 
@@ -285,6 +301,8 @@
 
             
 
+            
+
              methods.</para
           >
         </summary>
@@ -308,6 +326,8 @@
           <para
             >See <see
              cref="Overload:System.Drawing.Graphics.DrawImage" />
+
+            
 
             
 
@@ -341,6 +361,8 @@
 
             
 
+            
+
              methods.</para
           >
         </summary>
@@ -364,6 +386,8 @@
           <para
             >See <see
              cref="Overload:System.Drawing.Graphics.DrawLines" />
+
+            
 
             
 
@@ -397,6 +421,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -420,6 +446,8 @@
           <para
             >See <see
              cref="Overload:System.Drawing.Graphics.DrawPie" />
+
+            
 
             
 
@@ -453,6 +481,8 @@
 
             
 
+            
+
              methods.</para
           >
         </summary>
@@ -476,6 +506,8 @@
           <para
             >See <see
              cref="Overload:System.Drawing.Graphics.DrawString" />
+
+            
 
             
 
@@ -2884,6 +2916,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2931,6 +2965,8 @@
 
             
 
+            
+
              methods.</para
           >
         </summary>
@@ -2954,6 +2990,8 @@
           <para
             >See <see
              cref="Overload:System.Drawing.Graphics.FillEllipse" />
+
+            
 
             
 
@@ -2987,6 +3025,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3010,6 +3050,8 @@
           <para
             >See <see
              cref="Overload:System.Drawing.Graphics.FillPie" />
+
+            
 
             
 
@@ -3043,6 +3085,8 @@
 
             
 
+            
+
              methods.</para
           >
         </summary>
@@ -3066,6 +3110,8 @@
           <para
             >See <see
              cref="Overload:System.Drawing.Graphics.FillRectangles" />
+
+            
 
             
 
@@ -3099,6 +3145,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3122,6 +3170,8 @@
           <para
             >See <see
              cref="M:System.Drawing.Graphics.GetHdc" />
+
+            
 
             
 
@@ -3288,6 +3338,8 @@
 
             
 
+            
+
              methods.</para
           >
         </summary>
@@ -3335,6 +3387,8 @@
 
             
 
+            
+
              methods.</para
           >
         </summary>
@@ -3358,6 +3412,8 @@
           <para
             >See <see
              cref="M:System.Drawing.Graphics.ResetClip" />
+
+            
 
             
 
@@ -3391,6 +3447,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3414,6 +3472,8 @@
           <para
             >See <see
              cref="M:System.Drawing.Graphics.Restore(System.Drawing.Drawing2D.GraphicsState)" />
+
+            
 
             
 
@@ -3447,6 +3507,8 @@
 
             
 
+            
+
              methods.</para
           >
         </summary>
@@ -3470,6 +3532,8 @@
           <para
             >See <see
              cref="M:System.Drawing.Graphics.Save" />
+
+            
 
             
 
@@ -3503,6 +3567,8 @@
 
             
 
+            
+
              methods.</para
           >
         </summary>
@@ -3526,6 +3592,8 @@
           <para
             >See <see
              cref="P:System.Drawing.Graphics.SmoothingMode" />
+
+            
 
             
 
@@ -3559,6 +3627,8 @@
 
             
 
+            
+
              methods.</para
           >
         </summary>
@@ -3582,6 +3652,8 @@
           <para
             >See <see
              cref="Overload:System.Drawing.Graphics.SetClip" />
+
+            
 
             
 
@@ -3615,6 +3687,8 @@
 
             
 
+            
+
              methods.</para
           >
         </summary>
@@ -3638,6 +3712,8 @@
           <para
             >See <see
              cref="P:System.Drawing.Graphics.CompositingMode" />
+
+            
 
             
 
@@ -3671,6 +3747,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3694,6 +3772,8 @@
           <para
             >See <see
              cref="P:System.Drawing.Graphics.InterpolationMode" />
+
+            
 
             
 
@@ -3727,6 +3807,8 @@
 
             
 
+            
+
              methods.</para
           >
         </summary>
@@ -3750,6 +3832,8 @@
           <para
             >See <see
              cref="P:System.Drawing.Graphics.PixelOffsetMode" />
+
+            
 
             
 
@@ -3783,6 +3867,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3806,6 +3892,8 @@
           <para
             >See <see
              cref="P:System.Drawing.Graphics.TextContrast" />
+
+            
 
             
 
@@ -3839,6 +3927,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3862,6 +3952,8 @@
           <para
             >See <see
              cref="Overload:System.Drawing.Graphics.TransformPoints" />
+
+            
 
             
 
@@ -3909,6 +4001,8 @@
           <para
             >See <see
              cref="Overload:System.Drawing.Graphics.TransformPoints" />
+
+            
 
             
 

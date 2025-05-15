@@ -33,8 +33,12 @@
 
         
 
+        
+
          becomes out-of-date, and a <see
          cref="E:System.ComponentModel.TypeDescriptor.Refreshed" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          event is also raised when a <see
          cref="T:System.Type" />
+
+        
 
         
 
@@ -64,8 +72,12 @@
 
         
 
+        
+
          object specifies the data associated with the <see
          cref="E:System.ComponentModel.TypeDescriptor.Refreshed" />
+
+        
 
         
 
@@ -81,6 +93,8 @@
 
         
 
+        
+
          class provides <see
          cref="P:System.ComponentModel.RefreshEventArgs.ComponentChanged" />
 
@@ -88,8 +102,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.ComponentModel.RefreshEventArgs.TypeChanged" />
+
+        
 
         
 
@@ -103,6 +121,8 @@
       <para
         >Provides data for the <see
          cref="E:System.ComponentModel.TypeDescriptor.Refreshed" />
+
+        
 
         
 
@@ -141,11 +161,15 @@
 
             
 
+            
+
              class with the component that has changed.</para
           >
         </summary>
         <param name="componentChanged">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -183,6 +207,8 @@
 
             
 
+            
+
              class with the type of component that has changed.</para
           >
         </summary>
@@ -193,8 +219,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -245,6 +275,8 @@
           <para
             >Gets the <see
              cref="T:System.Type" />
+
+            
 
             
 

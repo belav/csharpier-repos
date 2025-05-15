@@ -53,6 +53,8 @@
 
             
 
+            
+
              class with a specified error message.</para
           >
         </summary>
@@ -87,6 +89,8 @@
 
             
 
+            
+
              class with serialized and contextual information specified.</para
           >
         </summary>
@@ -97,8 +101,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -113,8 +121,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -150,6 +162,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Dispatcher.InvalidBodyAccessException" />
+
+            
 
             
 

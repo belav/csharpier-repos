@@ -29,8 +29,12 @@
 
         
 
+        
+
          method, which throws <see
          cref="T:System.Text.DecoderFallbackException" />
+
+        
 
         
 
@@ -46,6 +50,8 @@
 
         
 
+        
+
          class, which represents a data buffer used in a decoding operation, is the base class for the <see
          cref="T:System.Text.DecoderExceptionFallbackBuffer" />
 
@@ -53,8 +59,12 @@
 
         
 
+        
+
          class. However, instead of a data buffer, the <see
          cref="T:System.Text.DecoderExceptionFallbackBuffer" />
+
+        
 
         
 
@@ -68,6 +78,8 @@
       <para
         >Throws <see
          cref="T:System.Text.DecoderFallbackException" />
+
+        
 
         
 
@@ -98,6 +110,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Text.DecoderExceptionFallbackBuffer" />
+
+            
 
             
 
@@ -141,8 +155,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.Text.Decoder.Convert" />
+
+            
 
             
 
@@ -155,8 +173,12 @@
 
             
 
+            
+
              if they encounter an unknown byte in their input. In response, the <see
              cref="M:System.Text.DecoderExceptionFallbackBuffer.Fallback(System.Byte[],System.Int32)" />
+
+            
 
             
 
@@ -169,8 +191,12 @@
 
             
 
+            
+
              and displays the input data. The <see
              cref="M:System.Text.DecoderExceptionFallbackBuffer.Fallback(System.Byte[],System.Int32)" />
+
+            
 
             
 
@@ -189,6 +215,8 @@
 
             
 
+            
+
              when the input byte sequence cannot be decoded. The nominal return value is not used. </para
           >
         </summary>
@@ -197,6 +225,8 @@
           <para
             >None. No value is returned because the <see
              cref="M:System.Text.DecoderExceptionFallbackBuffer.Fallback(System.Byte[],System.Int32)" />
+
+            
 
             
 
@@ -213,10 +243,14 @@
 
           
 
+          
+
           An input array of bytes.</param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -253,8 +287,12 @@
 
             
 
+            
+
              has no actual exception data buffer, the <see
              cref="M:System.Text.DecoderExceptionFallbackBuffer.GetNextChar" />
+
+            
 
             
 
@@ -301,8 +339,12 @@
 
             
 
+            
+
              has no actual exception data buffer, the <see
              cref="M:System.Text.DecoderExceptionFallbackBuffer.MovePrevious" />
+
+            
 
             
 
@@ -316,6 +358,8 @@
           <para
             >Causes the next call to <see
              cref="M:System.Text.DecoderExceptionFallbackBuffer.GetNextChar" />
+
+            
 
             
 
@@ -355,8 +399,12 @@
 
             
 
+            
+
              has no actual exception data buffer, the <see
              cref="P:System.Text.DecoderExceptionFallbackBuffer.Remaining" />
+
+            
 
             
 
@@ -370,6 +418,8 @@
           <para
             >Gets the number of characters in the current <see
              cref="T:System.Text.DecoderExceptionFallbackBuffer" />
+
+            
 
             
 

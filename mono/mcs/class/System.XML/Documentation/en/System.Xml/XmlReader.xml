@@ -38,8 +38,12 @@
 
         
 
+        
+
          provides forward-only, read-only access to a stream of XML data. The <see
          cref="T:System.Xml.XmlReader" />
+
+        
 
         
 
@@ -57,8 +61,12 @@
 
           
 
+          
+
            class, such as the <see
            cref="T:System.Xml.XmlTextReader" />
+
+          
 
           
 
@@ -71,8 +79,12 @@
 
           
 
+          
+
           , and the <see
            cref="T:System.Xml.XmlValidatingReader" />
+
+          
 
           
 
@@ -85,8 +97,12 @@
 
           
 
+          
+
            instances using the <see
            cref="Overload:System.Xml.XmlReader.Create" />
+
+          
 
           
 
@@ -96,6 +112,8 @@
            type="text/html">
             <a href="441e5aac-dfa9-41ed-9336-cd541b11c2d1">Creating XML Readers</a>
           </format>
+
+          
 
           
 
@@ -111,6 +129,8 @@
 
         
 
+        
+
          throws an <see
          cref="T:System.Xml.XmlException" />
 
@@ -118,8 +138,12 @@
 
         
 
+        
+
          on XML parse errors. After an exception is thrown, the state of the reader is not predictable. For example, the reported node type may be different from the actual node type of the current node. Use the <see
          cref="P:System.Xml.XmlReader.ReadState" />
+
+        
 
         
 
@@ -135,10 +159,14 @@
 
         
 
+        
+
          class, see <format
          type="text/html">
           <a href="3029834c-a27e-4331-b7aa-711924062182">Reading XML with the XmlReader</a>
         </format>
+
+        
 
         
 
@@ -199,6 +227,8 @@
 
             
 
+            
+
              and <see
              cref="M:System.Xml.XmlReader.ReadElementContentAsObjectAsync" />
           </para>
@@ -211,6 +241,8 @@
 
             
 
+            
+
              and <see
              cref="M:System.Xml.XmlReader.ReadElementContentAsStringAsync" />
           </para>
@@ -218,6 +250,8 @@
         <item>
           <para>
             <see cref="M:System.Xml.XmlReader.ReadContentAsAsync(System.Type,System.Xml.IXmlNamespaceResolver)" />
+
+            
 
             
 
@@ -378,6 +412,8 @@ return false;
 
         
 
+        
+
          class.</para
       >
       <list type="bullet">
@@ -385,6 +421,8 @@ return false;
           <para
             >Exceptions thrown from the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -402,8 +440,12 @@ return false;
 
             
 
+            
+
              objects created by the <see
              cref="Overload:System.Xml.XmlReader.Create" />
+
+            
 
             
 
@@ -419,8 +461,12 @@ return false;
 
             
 
+            
+
              to restrict the resources that the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -438,6 +484,8 @@ return false;
 
             
 
+            
+
              object with no user credentials. You can secure this further by doing one of the following:</para
           >
           <list type="bullet">
@@ -450,6 +498,8 @@ return false;
 
                 
 
+                
+
                  can access by setting the <see
                  cref="P:System.Xml.XmlReaderSettings.XmlResolver" />
 
@@ -457,8 +507,12 @@ return false;
 
                 
 
+                
+
                  property to an <see
                  cref="T:System.Xml.XmlSecureResolver" />
+
+                
 
                 
 
@@ -476,8 +530,12 @@ return false;
 
                 
 
+                
+
                  to open any external resources by setting the <see
                  cref="P:System.Xml.XmlReaderSettings.XmlResolver" />
+
+                
 
                 
 
@@ -497,8 +555,12 @@ return false;
 
             
 
+            
+
              and <see
              cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessSchemaLocation" />
+
+            
 
             
 
@@ -511,8 +573,12 @@ return false;
 
             
 
+            
+
              object are not set by default. This helps to protect the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -525,8 +591,12 @@ return false;
 
             
 
+            
+
              of the <see
              cref="T:System.Xml.XmlReaderSettings" />
+
+            
 
             
 
@@ -539,8 +609,12 @@ return false;
 
             
 
+            
+
             . If the <see
              cref="P:System.Xml.XmlReaderSettings.XmlResolver" />
+
+            
 
             
 
@@ -553,8 +627,12 @@ return false;
 
             
 
+            
+
              and <see
              cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessSchemaLocation" />
+
+            
 
             
 
@@ -566,6 +644,8 @@ return false;
           <para
             >We recommend disabling the <see
              cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessIdentityConstraints" />
+
+            
 
             
 
@@ -583,6 +663,8 @@ return false;
 
             
 
+            
+
             , you can: </para
           >
           <list type="bullet">
@@ -590,6 +672,8 @@ return false;
               <para
                 >Limit the size of the document by setting the <see
                  cref="P:System.Xml.XmlReaderSettings.MaxCharactersInDocument" />
+
+                
 
                 
 
@@ -607,6 +691,8 @@ return false;
 
                 
 
+                
+
                  property.</para
               >
             </item>
@@ -614,6 +700,8 @@ return false;
               <para
                 >Create a custom IStream implementation and supply it the <see
                  cref="T:System.Xml.XmlReader" />
+
+                
 
                 
 
@@ -633,6 +721,8 @@ return false;
 
             
 
+            
+
              method can be used to handle large streams of data. This method reads a small number of characters at a time instead of allocating a single string for the whole value.</para
           >
         </item>
@@ -645,8 +735,12 @@ return false;
 
             
 
+            
+
             , and you call either the <see
              cref="P:System.Xml.XmlReader.LocalName" />
+
+            
 
             
 
@@ -659,8 +753,12 @@ return false;
 
             
 
+            
+
             , or <see
              cref="P:System.Xml.XmlReader.NamespaceURI" />
+
+            
 
             
 
@@ -673,8 +771,12 @@ return false;
 
             
 
+            
+
             . The collection held by the <see
              cref="T:System.Xml.NameTable" />
+
+            
 
             
 
@@ -687,8 +789,12 @@ return false;
 
             
 
+            
+
              class and enforce a maximum size quota. (There is no way to prevent the use of a <see
              cref="T:System.Xml.NameTable" />
+
+            
 
             
 
@@ -701,8 +807,12 @@ return false;
 
             
 
+            
+
              when it is full). Another mitigation is to avoid using the properties mentioned and instead use the <see
              cref="Overload:System.Xml.XmlReader.MoveToAttribute" />
+
+            
 
             
 
@@ -715,8 +825,12 @@ return false;
 
             
 
+            
+
              method where possible; those methods do not return strings and thus avoid the problem of overfilling the <see
              cref="T:System.Xml.NameTable" />
+
+            
 
             
 
@@ -733,8 +847,12 @@ return false;
 
             
 
+            
+
              objects can contain sensitive information such as user credentials. An untrusted component could use the <see
              cref="T:System.Xml.XmlReaderSettings" />
+
+            
 
             
 
@@ -747,6 +865,8 @@ return false;
 
             
 
+            
+
              objects to read data. You should be careful when caching <see
              cref="T:System.Xml.XmlReaderSettings" />
 
@@ -754,8 +874,12 @@ return false;
 
             
 
+            
+
              objects, or when passing the <see
              cref="T:System.Xml.XmlReaderSettings" />
+
+            
 
             
 
@@ -773,6 +897,8 @@ return false;
 
             
 
+            
+
             , <see
              cref="T:System.Xml.XmlNamespaceManager" />
 
@@ -780,8 +906,12 @@ return false;
 
             
 
+            
+
             , and <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -847,6 +977,8 @@ return false;
           <para
             > A <see
              cref="T:System.Int32" qualify="true" />
+
+            
 
             
 
@@ -923,8 +1055,12 @@ return false;
 
             
 
+            
+
             , <see
              cref="M:System.Xml.XmlReader.ReadContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -937,6 +1073,8 @@ return false;
 
             
 
+            
+
             , and <see
              cref="M:System.Xml.XmlReader.ReadElementContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
 
@@ -944,8 +1082,12 @@ return false;
 
             
 
+            
+
              methods. If this property returns false a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -961,6 +1103,8 @@ return false;
 
             
 
+            
+
              class return true for this property.</para
           >
         </remarks>
@@ -969,6 +1113,8 @@ return false;
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1003,8 +1149,12 @@ return false;
 
             
 
+            
+
              objects that were created from the static <see
              cref="Overload:System.Xml.XmlReader.Create" />
+
+            
 
             
 
@@ -1017,8 +1167,12 @@ return false;
 
             
 
+            
+
              class, including the <see
              cref="T:System.Xml.XmlTextReader" />
+
+            
 
             
 
@@ -1034,8 +1188,12 @@ return false;
 
             
 
+            
+
              is returned when the <see
              cref="M:System.Xml.XmlReader.ReadValueChunk(System.Char[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -1054,8 +1212,12 @@ return false;
 
             
 
+            
+
              implements the <see
              cref="M:System.Xml.XmlReader.ReadValueChunk(System.Char[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -1094,8 +1256,12 @@ return false;
             
 
             
+
+            
 equal to <see
              langword="false" />
+
+            
 
             
 
@@ -1114,8 +1280,12 @@ equal to <see
 
             
 
+            
+
              that do not support DTD information. In this case, calling <see
              cref="M:System.Xml.XmlReader.ResolveEntity" />
+
+            
 
             
 
@@ -1162,6 +1332,8 @@ equal to <see
 
             
 
+            
+
              has already been called, no action is performed.</para
           >
         </remarks>
@@ -1170,6 +1342,8 @@ equal to <see
           <para
             >When overridden in a derived class, changes the <see
              cref="P:System.Xml.XmlReader.ReadState" />
+
+            
 
             
 
@@ -1213,6 +1387,8 @@ equal to <see
 
             
 
+            
+
              object with default settings is used to create the reader. If you wish to specify the features to support on the created reader, use the overload that takes an <see
              cref="T:System.Xml.XmlReaderSettings" />
 
@@ -1220,8 +1396,12 @@ equal to <see
 
             
 
+            
+
              object as one of its arguments, and pass in an <see
              cref="T:System.Xml.XmlReaderSettings" />
+
+            
 
             
 
@@ -1237,8 +1417,12 @@ equal to <see
 
             
 
+            
+
              with no credentials is used to access any external resources such as a document type definition (DTD), entities, schemas, and so on. If the external resource is located on a network resource that requires authentication, specify an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -1251,11 +1435,15 @@ equal to <see
 
             
 
+            
+
              property.</para
           >
           <para
             >The created <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1274,6 +1462,8 @@ equal to <see
 
             
 
+            
+
              instance using the specified stream.</para
           >
         </summary>
@@ -1287,11 +1477,15 @@ equal to <see
 
             
 
+            
+
              object used to read the data contained in the stream.</para
           >
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1333,6 +1527,8 @@ equal to <see
 
             
 
+            
+
              object with default settings is used to create the reader. If you wish to specify the features to support on the created reader, use the overload that takes an <see
              cref="T:System.Xml.XmlReaderSettings" />
 
@@ -1340,8 +1536,12 @@ equal to <see
 
             
 
+            
+
              object as one of its arguments, and pass in an <see
              cref="T:System.Xml.XmlReaderSettings" />
+
+            
 
             
 
@@ -1357,8 +1557,12 @@ equal to <see
 
             
 
+            
+
              with no credentials is used to access any external resources such as a document type definition (DTD), entities, schemas, and so on. If the external resource is located on a network resource that requires authentication, specify an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -1371,11 +1575,15 @@ equal to <see
 
             
 
+            
+
              property.</para
           >
           <para
             >The created <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1394,8 +1602,12 @@ equal to <see
 
             
 
+            
+
              instance with the specified <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -1414,11 +1626,15 @@ equal to <see
 
             
 
+            
+
              object to read the XML data.</para
           >
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1431,6 +1647,8 @@ equal to <see
 
           
 
+          
+
            from which to read the XML data. Because a <see
            cref="T:System.IO.TextReader" />
 
@@ -1438,8 +1656,12 @@ equal to <see
 
           
 
+          
+
            returns a stream of Unicode characters, the encoding specified in the XML declaration is not used by the <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -1481,6 +1703,8 @@ equal to <see
 
             
 
+            
+
              object with default settings is used to create the reader. If you wish to specify the features to support on the created reader, use the overload that takes an <see
              cref="T:System.Xml.XmlReaderSettings" />
 
@@ -1488,8 +1712,12 @@ equal to <see
 
             
 
+            
+
              object as one of its arguments, and pass in an <see
              cref="T:System.Xml.XmlReaderSettings" />
+
+            
 
             
 
@@ -1505,8 +1733,12 @@ equal to <see
 
             
 
+            
+
              with no credentials is used to access any external resources such as a document type definition (DTD), entities, schemas, and so on. If the external resource is located on a network resource that requires authentication, specify an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -1519,11 +1751,15 @@ equal to <see
 
             
 
+            
+
              property.</para
           >
           <para
             >The created <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1542,6 +1778,8 @@ equal to <see
 
             
 
+            
+
              instance with specified URI.</para
           >
         </summary>
@@ -1550,6 +1788,8 @@ equal to <see
           <para
             >An <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1565,8 +1805,12 @@ equal to <see
 
           
 
+          
+
           The URI for the file containing the XML data. The <see
            cref="T:System.Xml.XmlUrlResolver" />
+
+          
 
           
 
@@ -1609,6 +1853,8 @@ equal to <see
 
             
 
+            
+
              with no credentials is used to access any external resources such as a document type definition (DTD), entities, schemas, and so on. If the external resource is located on a network resource that requires authentication, use the <see
              cref="P:System.Xml.XmlReaderSettings.XmlResolver" />
 
@@ -1616,8 +1862,12 @@ equal to <see
 
             
 
+            
+
              property to specify an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -1634,11 +1884,15 @@ equal to <see
 
               
 
+              
+
                can access:</para
             >
             <para
               >Restrict the resources that the <see
                cref="T:System.Xml.XmlReader" />
+
+              
 
               
 
@@ -1651,8 +1905,12 @@ equal to <see
 
               
 
+              
+
                property to an <see
                cref="T:System.Xml.XmlSecureResolver" />
+
+              
 
               
 
@@ -1669,8 +1927,12 @@ equal to <see
 
               
 
+              
+
                to open any external resources by setting the <see
                cref="P:System.Xml.XmlReaderSettings.XmlResolver" />
+
+              
 
               
 
@@ -1682,6 +1944,8 @@ equal to <see
           <para
             >The created <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1700,8 +1964,12 @@ equal to <see
 
             
 
+            
+
              instance with the specified stream and <see
              cref="T:System.Xml.XmlReaderSettings" />
+
+            
 
             
 
@@ -1720,11 +1988,15 @@ equal to <see
 
             
 
+            
+
              object to read the XML data.</para
           >
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1739,6 +2011,8 @@ equal to <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReaderSettings" />
 
@@ -1746,8 +2020,12 @@ equal to <see
 
           
 
+          
+
            object used to configure the new <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -1790,6 +2068,8 @@ equal to <see
 
             
 
+            
+
              with no credentials is used to access any external resources such as a document type definition (DTD), entities, schemas, and so on. If the external resource is located on a network resource that requires authentication, use the <see
              cref="P:System.Xml.XmlReaderSettings.XmlResolver" />
 
@@ -1797,8 +2077,12 @@ equal to <see
 
             
 
+            
+
              property to specify an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -1815,11 +2099,15 @@ equal to <see
 
               
 
+              
+
                can access:</para
             >
             <para
               >Restrict the resources that the <see
                cref="T:System.Xml.XmlReader" />
+
+              
 
               
 
@@ -1832,8 +2120,12 @@ equal to <see
 
               
 
+              
+
                property to an <see
                cref="T:System.Xml.XmlSecureResolver" />
+
+              
 
               
 
@@ -1850,8 +2142,12 @@ equal to <see
 
               
 
+              
+
                to open any external resources by setting the <see
                cref="P:System.Xml.XmlReaderSettings.XmlResolver" />
+
+              
 
               
 
@@ -1863,6 +2159,8 @@ equal to <see
           <para
             >The created <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1881,6 +2179,8 @@ equal to <see
 
             
 
+            
+
              instance using the specified <see
              cref="T:System.IO.TextReader" />
 
@@ -1888,8 +2188,12 @@ equal to <see
 
             
 
+            
+
              and <see
              cref="T:System.Xml.XmlReaderSettings" />
+
+            
 
             
 
@@ -1908,11 +2212,15 @@ equal to <see
 
             
 
+            
+
              object to read XML data.</para
           >
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1925,6 +2233,8 @@ equal to <see
 
           
 
+          
+
            from which to read the XML data. Because a <see
            cref="T:System.IO.TextReader" />
 
@@ -1932,8 +2242,12 @@ equal to <see
 
           
 
+          
+
            returns a stream of Unicode characters, the encoding specified in the XML declaration is not used by the <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -1948,6 +2262,8 @@ equal to <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReaderSettings" />
 
@@ -1955,8 +2271,12 @@ equal to <see
 
           
 
+          
+
            object used to configure the new <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -1999,8 +2319,12 @@ equal to <see
 
             
 
+            
+
              with no credentials is used to access any external resources such as a document type definition (DTD), entities, schemas, and so on. This means that the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2013,8 +2337,12 @@ equal to <see
 
             
 
+            
+
              property to specify an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -2031,8 +2359,12 @@ equal to <see
 
               
 
+              
+
                can access by setting the <see
                cref="P:System.Xml.XmlReaderSettings.XmlResolver" />
+
+              
 
               
 
@@ -2045,12 +2377,16 @@ equal to <see
 
               
 
+              
+
                object</para
             >
           </block>
           <para
             >The created <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2069,6 +2405,8 @@ equal to <see
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2077,6 +2415,8 @@ equal to <see
           <para
             >An <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2092,8 +2432,12 @@ equal to <see
 
           
 
+          
+
           The URI for the file containing the XML data. The <see
            cref="T:System.Xml.XmlResolver" />
+
+          
 
           
 
@@ -2106,6 +2450,8 @@ equal to <see
 
           
 
+          
+
            object is used to convert the path to a canonical data representation. If <see
            cref="P:System.Xml.XmlReaderSettings.XmlResolver" />
 
@@ -2113,8 +2459,12 @@ equal to <see
 
           
 
+          
+
            is null, a new <see
            cref="T:System.Xml.XmlUrlResolver" />
+
+          
 
           
 
@@ -2129,6 +2479,8 @@ equal to <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReaderSettings" />
 
@@ -2136,8 +2488,12 @@ equal to <see
 
           
 
+          
+
            object used to configure the new <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -2180,8 +2536,12 @@ equal to <see
 
             
 
+            
+
              object. The underlying <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2194,8 +2554,12 @@ equal to <see
 
             
 
+            
+
              object created by the <see
              cref="Overload:System.Xml.XmlReader.Create" />
+
+            
 
             
 
@@ -2208,8 +2572,12 @@ equal to <see
 
             
 
+            
+
              object created using one of the concrete <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2225,6 +2593,8 @@ equal to <see
 
             
 
+            
+
              with no credentials is used to access any external resources such as a schema. If the external resource is located on a network resource that requires authentication, specify an <see
              cref="T:System.Xml.XmlResolver" />
 
@@ -2232,8 +2602,12 @@ equal to <see
 
             
 
+            
+
              with the necessary credentials using the <see
              cref="P:System.Xml.XmlReaderSettings.XmlResolver" />
+
+            
 
             
 
@@ -2250,11 +2624,15 @@ equal to <see
 
               
 
+              
+
                can access:</para
             >
             <para
               >Restrict the resources that the <see
                cref="T:System.Xml.XmlReader" />
+
+              
 
               
 
@@ -2267,8 +2645,12 @@ equal to <see
 
               
 
+              
+
                property to an <see
                cref="T:System.Xml.XmlSecureResolver" />
+
+              
 
               
 
@@ -2285,8 +2667,12 @@ equal to <see
 
               
 
+              
+
                to open any external resources by setting the <see
                cref="P:System.Xml.XmlReaderSettings.XmlResolver" />
+
+              
 
               
 
@@ -2308,6 +2694,8 @@ equal to <see
 
             
 
+            
+
              object expands entity references and performs XML normalization of new line characters.</para
           >
         </remarks>
@@ -2321,6 +2709,8 @@ equal to <see
 
             
 
+            
+
              instance with the specified <see
              cref="T:System.Xml.XmlReader" />
 
@@ -2328,8 +2718,12 @@ equal to <see
 
             
 
+            
+
              and <see
              cref="T:System.Xml.XmlReaderSettings" />
+
+            
 
             
 
@@ -2348,8 +2742,12 @@ equal to <see
 
             
 
+            
+
              object that is wrapped around the specified <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2365,8 +2763,12 @@ equal to <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -2381,6 +2783,8 @@ equal to <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReaderSettings" />
 
@@ -2388,8 +2792,12 @@ equal to <see
 
           
 
+          
+
            object used to configure the new <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -2433,6 +2841,8 @@ equal to <see
 
             
 
+            
+
              with no credentials is used to access any external resources such as a document type definition (DTD), entities, schemas, and so on. If the external resource is located on a network resource that requires authentication, use the <see
              cref="P:System.Xml.XmlReaderSettings.XmlResolver" />
 
@@ -2440,8 +2850,12 @@ equal to <see
 
             
 
+            
+
              property to specify an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -2458,11 +2872,15 @@ equal to <see
 
               
 
+              
+
                can access:</para
             >
             <para
               >Restrict the resources that the <see
                cref="T:System.Xml.XmlReader" />
+
+              
 
               
 
@@ -2475,8 +2893,12 @@ equal to <see
 
               
 
+              
+
                property to an <see
                cref="T:System.Xml.XmlSecureResolver" />
+
+              
 
               
 
@@ -2493,8 +2915,12 @@ equal to <see
 
               
 
+              
+
                to open any external resources by setting the <see
                cref="P:System.Xml.XmlReaderSettings.XmlResolver" />
+
+              
 
               
 
@@ -2506,6 +2932,8 @@ equal to <see
           <para
             >The created <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2524,8 +2952,12 @@ equal to <see
 
             
 
+            
+
              instance using the specified stream, base URI, and <see
              cref="T:System.Xml.XmlReaderSettings" />
+
+            
 
             
 
@@ -2544,11 +2976,15 @@ equal to <see
 
             
 
+            
+
              object to read XML data.</para
           >
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2563,8 +2999,12 @@ equal to <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReaderSettings" />
+
+          
 
           
 
@@ -2577,10 +3017,14 @@ equal to <see
 
           
 
+          
+
            instance. This value can be null.</param
         >
         <param name="baseUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2624,6 +3068,8 @@ equal to <see
 
             
 
+            
+
              with no credentials is used to access any external resources such as a document type definition (DTD), entities, schemas, and so on. If the external resource is located on a network resource that requires authentication, use the <see
              cref="P:System.Xml.XmlReaderSettings.XmlResolver" />
 
@@ -2631,8 +3077,12 @@ equal to <see
 
             
 
+            
+
              property to specify an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -2649,11 +3099,15 @@ equal to <see
 
               
 
+              
+
                can access:</para
             >
             <para
               >Restrict the resources that the <see
                cref="T:System.Xml.XmlReader" />
+
+              
 
               
 
@@ -2666,8 +3120,12 @@ equal to <see
 
               
 
+              
+
                property to an <see
                cref="T:System.Xml.XmlSecureResolver" />
+
+              
 
               
 
@@ -2684,8 +3142,12 @@ equal to <see
 
               
 
+              
+
                to open any external resources by setting the <see
                cref="P:System.Xml.XmlReaderSettings.XmlResolver" />
+
+              
 
               
 
@@ -2697,6 +3159,8 @@ equal to <see
           <para
             >The created <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2715,6 +3179,8 @@ equal to <see
 
             
 
+            
+
              instance using the specified stream, <see
              cref="T:System.Xml.XmlReaderSettings" />
 
@@ -2722,8 +3188,12 @@ equal to <see
 
             
 
+            
+
             , and <see
              cref="T:System.Xml.XmlParserContext" />
+
+            
 
             
 
@@ -2742,11 +3212,15 @@ equal to <see
 
             
 
+            
+
              object to read XML data.</para
           >
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2761,6 +3235,8 @@ equal to <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReaderSettings" />
 
@@ -2768,8 +3244,12 @@ equal to <see
 
           
 
+          
+
            object used to configure the new <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -2784,6 +3264,8 @@ equal to <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlParserContext" />
 
@@ -2791,8 +3273,12 @@ equal to <see
 
           
 
+          
+
            object that provides the context information required to parse the XML fragment. The context information can include the <see
            cref="T:System.Xml.XmlNameTable" />
+
+          
 
           
 
@@ -2836,6 +3322,8 @@ equal to <see
 
             
 
+            
+
              with no credentials is used to access any external resources such as a document type definition (DTD), entities, schemas, and so on. If the external resource is located on a network resource that requires authentication, use the <see
              cref="P:System.Xml.XmlReaderSettings.XmlResolver" />
 
@@ -2843,8 +3331,12 @@ equal to <see
 
             
 
+            
+
              property to specify an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -2861,11 +3353,15 @@ equal to <see
 
               
 
+              
+
                can access:</para
             >
             <para
               >Restrict the resources that the <see
                cref="T:System.Xml.XmlReader" />
+
+              
 
               
 
@@ -2878,8 +3374,12 @@ equal to <see
 
               
 
+              
+
                property to an <see
                cref="T:System.Xml.XmlSecureResolver" />
+
+              
 
               
 
@@ -2896,8 +3396,12 @@ equal to <see
 
               
 
+              
+
                to open any external resources by setting the <see
                cref="P:System.Xml.XmlReaderSettings.XmlResolver" />
+
+              
 
               
 
@@ -2909,6 +3413,8 @@ equal to <see
           <para
             >The created <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2927,6 +3433,8 @@ equal to <see
 
             
 
+            
+
              instance using the specified <see
              cref="T:System.IO.TextReader" />
 
@@ -2934,8 +3442,12 @@ equal to <see
 
             
 
+            
+
             , <see
              cref="T:System.Xml.XmlReaderSettings" />
+
+            
 
             
 
@@ -2954,11 +3466,15 @@ equal to <see
 
             
 
+            
+
              object to read XML data.</para
           >
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2971,6 +3487,8 @@ equal to <see
 
           
 
+          
+
            from which to read the XML data. Because a <see
            cref="T:System.IO.TextReader" />
 
@@ -2978,8 +3496,12 @@ equal to <see
 
           
 
+          
+
            returns a stream of Unicode characters, the encoding specified in the XML declaration is not used by the <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -2994,8 +3516,12 @@ equal to <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReaderSettings" />
+
+          
 
           
 
@@ -3008,10 +3534,14 @@ equal to <see
 
           
 
+          
+
            instance. This value can be null.</param
         >
         <param name="baseUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3055,6 +3585,8 @@ equal to <see
 
             
 
+            
+
              with no credentials is used to access any external resources such as a document type definition (DTD), entities, schemas, and so on. If the external resource is located on a network resource that requires authentication, use the <see
              cref="P:System.Xml.XmlReaderSettings.XmlResolver" />
 
@@ -3062,8 +3594,12 @@ equal to <see
 
             
 
+            
+
              property to specify an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -3080,11 +3616,15 @@ equal to <see
 
               
 
+              
+
                can access:</para
             >
             <para
               >Restrict the resources that the <see
                cref="T:System.Xml.XmlReader" />
+
+              
 
               
 
@@ -3097,8 +3637,12 @@ equal to <see
 
               
 
+              
+
                property to an <see
                cref="T:System.Xml.XmlSecureResolver" />
+
+              
 
               
 
@@ -3115,8 +3659,12 @@ equal to <see
 
               
 
+              
+
                to open any external resources by setting the <see
                cref="P:System.Xml.XmlReaderSettings.XmlResolver" />
+
+              
 
               
 
@@ -3128,6 +3676,8 @@ equal to <see
           <para
             >The created <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -3146,8 +3696,12 @@ equal to <see
 
             
 
+            
+
              instance using the specified <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -3160,8 +3714,12 @@ equal to <see
 
             
 
+            
+
             , and <see
              cref="T:System.Xml.XmlParserContext" />
+
+            
 
             
 
@@ -3180,11 +3738,15 @@ equal to <see
 
             
 
+            
+
              object to read XML data.</para
           >
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3197,6 +3759,8 @@ equal to <see
 
           
 
+          
+
            from which to read the XML data. Because a <see
            cref="T:System.IO.TextReader" />
 
@@ -3204,8 +3768,12 @@ equal to <see
 
           
 
+          
+
            returns a stream of Unicode characters, the encoding specified in the XML declaration is not used by the <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -3220,6 +3788,8 @@ equal to <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReaderSettings" />
 
@@ -3227,8 +3797,12 @@ equal to <see
 
           
 
+          
+
            object used to configure the new <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -3243,6 +3817,8 @@ equal to <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlParserContext" />
 
@@ -3250,8 +3826,12 @@ equal to <see
 
           
 
+          
+
            object that provides the context information required to parse the XML fragment. The context information can include the <see
            cref="T:System.Xml.XmlNameTable" />
+
+          
 
           
 
@@ -3295,8 +3875,12 @@ equal to <see
 
             
 
+            
+
              with no credentials is used to access any external resources such as a document type definition (DTD), entities, schemas, and so on. This means that the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -3309,8 +3893,12 @@ equal to <see
 
             
 
+            
+
              property to specify an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -3327,8 +3915,12 @@ equal to <see
 
               
 
+              
+
                can access by setting the <see
                cref="P:System.Xml.XmlReaderSettings.XmlResolver" />
+
+              
 
               
 
@@ -3341,12 +3933,16 @@ equal to <see
 
               
 
+              
+
                object.</para
             >
           </block>
           <para
             >The created <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -3365,6 +3961,8 @@ equal to <see
 
             
 
+            
+
              instance using the specified URI, <see
              cref="T:System.Xml.XmlReaderSettings" />
 
@@ -3372,8 +3970,12 @@ equal to <see
 
             
 
+            
+
             , and <see
              cref="T:System.Xml.XmlParserContext" />
+
+            
 
             
 
@@ -3392,11 +3994,15 @@ equal to <see
 
             
 
+            
+
              object to read XML data.</para
           >
         </returns>
         <param name="inputUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3409,8 +4015,12 @@ equal to <see
 
           
 
+          
+
            object on the <see
            cref="T:System.Xml.XmlReaderSettings" />
+
+          
 
           
 
@@ -3423,8 +4033,12 @@ equal to <see
 
           
 
+          
+
            is null, a new <see
            cref="T:System.Xml.XmlUrlResolver" />
+
+          
 
           
 
@@ -3439,6 +4053,8 @@ equal to <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReaderSettings" />
 
@@ -3446,8 +4062,12 @@ equal to <see
 
           
 
+          
+
            object used to configure the new <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -3462,6 +4082,8 @@ equal to <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlParserContext" />
 
@@ -3469,8 +4091,12 @@ equal to <see
 
           
 
+          
+
            object that provides the context information required to parse the XML fragment. The context information can include the <see
            cref="T:System.Xml.XmlNameTable" />
+
+          
 
           
 
@@ -3502,6 +4128,8 @@ equal to <see
           <para
             >A <see
              cref="T:System.Int32" qualify="true" />
+
+            
 
             
 
@@ -3559,6 +4187,8 @@ containing the depth of the current node in the XML document. </para
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -3594,11 +4224,15 @@ containing the depth of the current node in the XML document. </para
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3635,8 +4269,12 @@ containing the depth of the current node in the XML document. </para
 
             
 
+            
+
              where <see
              langword="true" />
+
+            
 
             
 
@@ -3645,6 +4283,8 @@ containing the depth of the current node in the XML document. </para
              indicates the reader is positioned at the end
    of the stream; otherwise, <see
              langword="false" />
+
+            
 
             
 
@@ -3720,8 +4360,12 @@ containing the depth of the current node in the XML document. </para
 
           
 
+          
+
            is less than 0, or greater than or equal to the <see
            cref="P:System.Xml.XmlReader.AttributeCount" />
+
+          
 
           
 
@@ -3738,6 +4382,8 @@ containing the depth of the current node in the XML document. </para
 
             
 
+            
+
             (<see
              cref="T:System.String" />
 
@@ -3745,8 +4391,12 @@ containing the depth of the current node in the XML document. </para
 
             
 
+            
+
             , <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -3765,6 +4415,8 @@ containing the depth of the current node in the XML document. </para
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3807,6 +4459,8 @@ containing the depth of the current node in the XML document. </para
 
             
 
+            
+
             (<see
              cref="T:System.String" />
 
@@ -3814,8 +4468,12 @@ containing the depth of the current node in the XML document. </para
 
             
 
+            
+
             , <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -3839,6 +4497,8 @@ containing the depth of the current node in the XML document. </para
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3848,6 +4508,8 @@ containing the depth of the current node in the XML document. </para
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3894,6 +4556,8 @@ containing the depth of the current node in the XML document. </para
 
             
 
+            
+
             (<see
              cref="T:System.String" />
 
@@ -3901,8 +4565,12 @@ containing the depth of the current node in the XML document. </para
 
             
 
+            
+
             , <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -3929,6 +4597,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -3942,8 +4612,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
             
 
+            
+
              and <see
              cref="P:System.Xml.XmlReader.NamespaceURI" />
+
+            
 
             
 
@@ -3963,10 +4637,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
           
 
+          
+
           The local name of the attribute.</param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4000,6 +4678,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para
             >To use this method, you must set the <see
              cref="P:System.Xml.XmlReaderSettings.Async" />
+
+            
 
             
 
@@ -4045,8 +4725,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
             
 
+            
+
              where <see
              langword="true" />
+
+            
 
             
 
@@ -4055,6 +4739,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
              indicates the current node has attributes; otherwise,
 <see
              langword="false" />
+
+            
 
             
 
@@ -4080,8 +4766,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                if the <see
                cref="P:System.Xml.XmlReader.AttributeCount" />
+
+              
 
               
 
@@ -4096,6 +4786,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
       property to customize the behavior of this property in types derived from
       the <see
                cref="T:System.Xml.XmlReader" />
+
+              
 
               
 
@@ -4148,8 +4840,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             
 
             
+
+            
 where <see
              langword="true" />
+
+            
 
             
 
@@ -4159,6 +4855,8 @@ where <see
 positioned can have an associated text value; otherwise,
 <see
              langword="false" />
+
+            
 
             
 
@@ -4265,6 +4963,8 @@ positioned can have an associated text value; otherwise,
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -4299,8 +4999,12 @@ positioned can have an associated text value; otherwise,
             
 
             
+
+            
 where <see
              langword="true" />
+
+            
 
             
 
@@ -4310,6 +5014,8 @@ where <see
 current node is an attribute whose value was generated from the default value
 defined in the DTD or schema; <see
              langword="false" />
+
+            
 
             
 
@@ -4357,8 +5063,12 @@ explicitly set. </para
 
             
 
+            
+
              where <see
              langword="true" />
+
+            
 
             
 
@@ -4373,8 +5083,12 @@ explicitly set. </para
             
 
             
+
+            
    equals <see
              cref="F:System.Xml.XmlNodeType.Element" />
+
+            
 
             
 
@@ -4387,8 +5101,12 @@ explicitly set. </para
 
             
 
+            
+
             ", otherwise,<see
              langword=" false" />
+
+            
 
             
 
@@ -4445,6 +5163,8 @@ explicitly set. </para
 
             
 
+            
+
              to determine whether the name is valid.</para
           >
         </remarks>
@@ -4458,6 +5178,8 @@ explicitly set. </para
         </returns>
         <param name="str">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4501,6 +5223,8 @@ explicitly set. </para
 
             
 
+            
+
              to determine whether the name token is valid.</para
           >
         </remarks>
@@ -4514,6 +5238,8 @@ explicitly set. </para
         </returns>
         <param name="str">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4562,6 +5288,8 @@ explicitly set. </para
 
             
 
+            
+
              and tests if the current content node is a start tag or empty element tag.</para
           >
         </summary>
@@ -4570,6 +5298,8 @@ explicitly set. </para
           <para
             >true if <see
              cref="M:System.Xml.XmlReader.MoveToContent" />
+
+            
 
             
 
@@ -4621,8 +5351,12 @@ explicitly set. </para
 
             
 
+            
+
              and tests if the current content node is a start tag or empty element tag and if the <see
              cref="P:System.Xml.XmlReader.Name" />
+
+            
 
             
 
@@ -4637,6 +5371,8 @@ explicitly set. </para
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4691,6 +5427,8 @@ explicitly set. </para
 
             
 
+            
+
              and tests if the current content node is a start tag or empty element tag and if the <see
              cref="P:System.Xml.XmlReader.LocalName" />
 
@@ -4698,8 +5436,12 @@ explicitly set. </para
 
             
 
+            
+
              and <see
              cref="P:System.Xml.XmlReader.NamespaceURI" />
+
+            
 
             
 
@@ -4719,10 +5461,14 @@ explicitly set. </para
 
           
 
+          
+
           The string to match against the LocalName property of the element found.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4761,6 +5507,8 @@ explicitly set. </para
 
           
 
+          
+
            specifying the zero-based index of the attribute relative to the containing element.</param
         >
         <summary>
@@ -4770,6 +5518,8 @@ explicitly set. </para
           <para
             >A <see
              cref="T:System.String" qualify="true" />
+
+            
 
             
 
@@ -4797,8 +5547,12 @@ explicitly set. </para
 
           
 
+          
+
            is less than 0 or greater than or equal to the <see
            cref="P:System.Xml.XmlReader.AttributeCount" />
+
+          
 
           
 
@@ -4837,6 +5591,8 @@ explicitly set. </para
 
           
 
+          
+
            specifying the qualified name of the attribute.</param
         >
         <summary>
@@ -4851,9 +5607,13 @@ explicitly set. </para
 
             
 
+            
+
              containing the value of the specified attribute, or
 <see
              langword="null" />
+
+            
 
             
 
@@ -4870,6 +5630,8 @@ if the attribute is not found.</para
               >If the reader
          is positioned on a <see
                langword="DocumentType" />
+
+              
 
               
 
@@ -4931,8 +5693,12 @@ if the attribute is not found.</para
             
 
             
+
+            
 containing the value of the specified attribute, or <see
              langword="null" />
+
+            
 
             
 
@@ -4985,9 +5751,13 @@ attribute is not found.</para
             
 
             
+
+            
 containing the local name of the current node or, for node types that do not
 have a name (like <see
              langword="Text" />
+
+            
 
             
 
@@ -5000,9 +5770,13 @@ have a name (like <see
 
             
 
+            
+
              , and so on),
 <see
              cref="F:System.String.Empty" qualify="true" />
+
+            
 
             
 
@@ -5081,6 +5855,8 @@ have a name (like <see
 
           
 
+          
+
           The prefix whose namespace URI you want to resolve. To match the default namespace, pass an empty string. </param
         >
       </Docs>
@@ -5120,6 +5896,8 @@ have a name (like <see
 
               
 
+              
+
               ,
       <see
                cref="P:System.Xml.XmlReader.NamespaceURI" />
@@ -5128,8 +5906,12 @@ have a name (like <see
 
               
 
+              
+
               , and <see
                cref="P:System.Xml.XmlReader.Prefix" />
+
+              
 
               
 
@@ -5153,8 +5935,12 @@ have a name (like <see
 
           
 
+          
+
            is less than 0 or greater than or equal to the <see
            cref="P:System.Xml.XmlReader.AttributeCount" />
+
+          
 
           
 
@@ -5168,6 +5954,8 @@ have a name (like <see
         </summary>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5211,6 +5999,8 @@ have a name (like <see
 
             
 
+            
+
             , <see
              cref="P:System.Xml.XmlReader.NamespaceURI" />
 
@@ -5218,8 +6008,12 @@ have a name (like <see
 
             
 
+            
+
             , and <see
              cref="P:System.Xml.XmlReader.Prefix" />
+
+            
 
             
 
@@ -5238,6 +6032,8 @@ have a name (like <see
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -5247,6 +6043,8 @@ have a name (like <see
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5294,6 +6092,8 @@ have a name (like <see
 
             
 
+            
+
             , <see
              cref="P:System.Xml.XmlReader.NamespaceURI" />
 
@@ -5301,8 +6101,12 @@ have a name (like <see
 
             
 
+            
+
             , and <see
              cref="P:System.Xml.XmlReader.Prefix" />
+
+            
 
             
 
@@ -5321,8 +6125,12 @@ have a name (like <see
 
             
 
+            
+
              and <see
              cref="P:System.Xml.XmlReader.NamespaceURI" />
+
+            
 
             
 
@@ -5342,10 +6150,14 @@ have a name (like <see
 
           
 
+          
+
           The local name of the attribute.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5394,6 +6206,8 @@ have a name (like <see
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5406,6 +6220,8 @@ have a name (like <see
           <para
             >The <see
              cref="P:System.Xml.XmlReader.NodeType" />
+
+            
 
             
 
@@ -5445,8 +6261,12 @@ have a name (like <see
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlReaderSettings.Async" />
+
+            
 
             
 
@@ -5464,6 +6284,8 @@ have a name (like <see
           <para
             >The <see
              cref="P:System.Xml.XmlReader.NodeType" />
+
+            
 
             
 
@@ -5541,6 +6363,8 @@ have a name (like <see
 
               
 
+              
+
                is non-zero,
    the position of
    the reader
@@ -5597,6 +6421,8 @@ have a name (like <see
 
             
 
+            
+
             . If MoveToNextAttribute returns true, the reader moves to the next attribute; otherwise, the position of the reader does not change.</para
           >
         </remarks>
@@ -5639,9 +6465,13 @@ have a name (like <see
             
 
             
+
+            
 containing the qualified name of the current node or, for node types that do not
 have a name (like <see
              langword="Text" />
+
+            
 
             
 
@@ -5654,9 +6484,13 @@ have a name (like <see
 
             
 
+            
+
              , and so on),
 <see
              cref="F:System.String.Empty" qualify="true" />
+
+            
 
             
 
@@ -5677,9 +6511,13 @@ have a name (like <see
               
 
               
+
+              
          
          prefixed with <see
                cref="P:System.Xml.XmlReader.Prefix" />
+
+              
 
               
 
@@ -5693,9 +6531,13 @@ have a name (like <see
 
               
 
+              
+
                is
          "bk:book" for the element <c
               >&lt;bk:book&gt;</c>
+
+              
 
               
 
@@ -5707,6 +6549,8 @@ have a name (like <see
             <para
               > The name returned is dependent on the <see
                cref="P:System.Xml.XmlReader.NodeType" />
+
+              
 
               
 
@@ -5802,9 +6646,13 @@ have a name (like <see
 
             
 
+            
+
              containing the namespace URI of the current node or, if
    no namespace URI is associated with the current node, <see
              cref="F:System.String.Empty" qualify="true" />
+
+            
 
             
 
@@ -5858,6 +6706,8 @@ have a name (like <see
 
             
 
+            
+
              used by the current
    instance.</para
           >
@@ -5872,6 +6722,8 @@ have a name (like <see
 
             
 
+            
+
              are atomized using the NameTable. When the same name is returned multiple times (for example, Customer), then the same String object will be returned for that name. This makes it possible for you to write efficient code that does object comparisons on these strings instead of expensive string comparisons.</para
           >
         </remarks>
@@ -5880,6 +6732,8 @@ have a name (like <see
           <para
             >When overridden in a derived class, gets the <see
              cref="T:System.Xml.XmlNameTable" />
+
+            
 
             
 
@@ -5924,6 +6778,8 @@ have a name (like <see
 
             
 
+            
+
              enumeration representing the type of the current
    node. </para
           >
@@ -5938,6 +6794,8 @@ have a name (like <see
 
               
 
+              
+
                members:
       <see
                langword="Document" />
@@ -5946,8 +6804,12 @@ have a name (like <see
 
               
 
+              
+
               , <see
                langword="DocumentFragment" />
+
+              
 
               
 
@@ -5961,8 +6823,12 @@ have a name (like <see
 
               
 
+              
+
               , <see
                langword="EndEntity" />
+
+              
 
               
 
@@ -5971,6 +6837,8 @@ have a name (like <see
               , and
       <see
                langword="Notation" />
+
+              
 
               
 
@@ -6024,6 +6892,8 @@ have a name (like <see
             
 
             
+
+            
 containing the namespace prefix associated with the current node. </para
           >
         </value>
@@ -6034,6 +6904,8 @@ containing the namespace prefix associated with the current node. </para
       is used as a reference for a namespace URI and is defined in an element
       declaration. For example, <c
               >&lt;someElement xmlns:bk="someURL"&gt;</c>
+
+              
 
               
 
@@ -6092,6 +6964,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              specifying the quotation mark character (" or ') used to enclose the value of
    an attribute.
    </para
@@ -6144,6 +7018,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -6186,8 +7062,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlReaderSettings.Async" />
+
+            
 
             
 
@@ -6237,8 +7117,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              to read through the text or entity reference nodes that make up the attribute value. The <see
              cref="P:System.Xml.XmlReader.Depth" />
+
+            
 
             
 
@@ -6296,6 +7180,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              topic has a list of the default mappings.</para
           >
           <para>For example, if you had the following XML text:</para>
@@ -6303,6 +7189,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >If the data is typed and a string array is supplied to the <see
              cref="M:System.Xml.XmlReader.ReadContentAs(System.Type,System.Xml.IXmlNamespaceResolver)" />
+
+            
 
             
 
@@ -6318,11 +7206,15 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              method call, then the content is parsed into separate strings. An array containing two strings is returned with the values "123" and "456". The spaces are not preserved from the content.</para
           >
           <para
             >In general when reading untyped data the content is parsed according to the supplied type. For example, if an integer array is supplied to the <see
              cref="M:System.Xml.XmlReader.ReadContentAs(System.Type,System.Xml.IXmlNamespaceResolver)" />
+
+            
 
             
 
@@ -6335,6 +7227,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >If the content is untyped and a string array is supplied to the <see
              cref="M:System.Xml.XmlReader.ReadContentAs(System.Type,System.Xml.IXmlNamespaceResolver)" />
+
+            
 
             
 
@@ -6427,6 +7321,8 @@ containing the namespace prefix associated with the current node. </para
 
                   
 
+                  
+
                    is thrown.</para
                 >
               </description>
@@ -6445,10 +7341,14 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              and the <see
              cref="http://go.microsoft.com/fwlink/?LinkId=4871"
               >W3C XML Schema Part 2: Datatypes</see
             >
+
+            
 
             
 
@@ -6459,6 +7359,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >For the asynchronous version of this method, see <see
              cref="M:System.Xml.XmlReader.ReadContentAsAsync(System.Type,System.Xml.IXmlNamespaceResolver)" />
+
+            
 
             
 
@@ -6482,10 +7384,14 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           The type of the value to be returned.</param
         >
         <param name="namespaceResolver">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6498,8 +7404,12 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
            object that is used to resolve any namespace prefixes related to type conversion. For example, this can be used when converting an <see
            cref="T:System.Xml.XmlQualifiedName" />
+
+          
 
           
 
@@ -6540,8 +7450,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlReaderSettings.Async" />
+
+            
 
             
 
@@ -6565,6 +7479,8 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           The type of the value to be returned.</param
         >
         <param name="namespaceResolver">
@@ -6574,8 +7490,12 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           An <see
            cref="T:System.Xml.IXmlNamespaceResolver" />
+
+          
 
           
 
@@ -6619,12 +7539,16 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
             <para
               >You should not access any of the reader properties between calls to the <see
                cref="M:System.Xml.XmlReader.ReadContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
+
+              
 
               
 
@@ -6638,6 +7562,8 @@ containing the namespace prefix associated with the current node. </para
             <item>
               <para>
                 <see cref="M:System.Xml.XmlReader.ReadContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
+
+                
 
                 
 
@@ -6657,6 +7583,8 @@ containing the namespace prefix associated with the current node. </para
 
                 
 
+                
+
                  is not supported on the following XML node types: Element, XmlDeclaration, None, Document, DocumentType, Notation, Entity, DocumentFragment.</para
               >
             </item>
@@ -6664,6 +7592,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >For the asynchronous version of this method, see <see
              cref="M:System.Xml.XmlReader.ReadContentAsBase64Async(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -6687,6 +7617,8 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           The buffer into which to copy the resulting text. This value cannot be null.</param
         >
         <param name="index">
@@ -6696,10 +7628,14 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           The offset into the buffer where to start copying the result.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6741,8 +7677,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlReaderSettings.Async" />
+
+            
 
             
 
@@ -6766,6 +7706,8 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           The buffer into which to copy the resulting text. This value cannot be null.</param
         >
         <param name="index">
@@ -6775,10 +7717,14 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           The offset into the buffer where to start copying the result.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6824,6 +7770,8 @@ containing the namespace prefix associated with the current node. </para
 
               
 
+              
+
                method until the method returns the value 0.</para
             >
           </block>
@@ -6832,6 +7780,8 @@ containing the namespace prefix associated with the current node. </para
             <item>
               <para>
                 <see cref="M:System.Xml.XmlReader.ReadContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
+
+                
 
                 
 
@@ -6851,6 +7801,8 @@ containing the namespace prefix associated with the current node. </para
 
                 
 
+                
+
                  is not supported on the following XML node types: Element, XmlDeclaration, None, Document, DocumentType, Notation, Entity, DocumentFragment.</para
               >
             </item>
@@ -6858,6 +7810,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >For the asynchronous version of this method, see <see
              cref="M:System.Xml.XmlReader.ReadContentAsBinHexAsync(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -6881,6 +7835,8 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           The buffer into which to copy the resulting text. This value cannot be null.</param
         >
         <param name="index">
@@ -6890,10 +7846,14 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           The offset into the buffer where to start copying the result.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6935,8 +7895,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlReaderSettings.Async" />
+
+            
 
             
 
@@ -6960,6 +7924,8 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           The buffer into which to copy the resulting text. This value cannot be null.</param
         >
         <param name="index">
@@ -6969,10 +7935,14 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           The offset into the buffer where to start copying the result.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7010,8 +7980,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              object. If the content is not typed xsd:boolean, the reader attempts to convert it to a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -7021,6 +7995,8 @@ containing the namespace prefix associated with the current node. </para
              cref="http://go.microsoft.com/fwlink/?LinkId=4871"
               >W3C XML Schema Part 2: Datatypes</see
             >
+
+            
 
             
 
@@ -7113,6 +8089,8 @@ containing the namespace prefix associated with the current node. </para
 
                   
 
+                  
+
                    is thrown.</para
                 >
               </description>
@@ -7131,10 +8109,14 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              and the <see
              cref="http://go.microsoft.com/fwlink/?LinkId=4871"
               >W3C XML Schema Part 2: Datatypes</see
             >
+
+            
 
             
 
@@ -7152,6 +8134,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >The text content as a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -7190,8 +8174,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              object. If the content is not typed xsd:dateTime, the reader attempts to convert it to a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -7201,6 +8189,8 @@ containing the namespace prefix associated with the current node. </para
              cref="http://go.microsoft.com/fwlink/?LinkId=4871"
               >W3C XML Schema Part 2: Datatypes</see
             >
+
+            
 
             
 
@@ -7217,6 +8207,8 @@ containing the namespace prefix associated with the current node. </para
 
               
 
+              
+
                value when the content is typed as xsd:gMonthDay. <see
                cref="T:System.Xml.XmlReader" />
 
@@ -7224,8 +8216,12 @@ containing the namespace prefix associated with the current node. </para
 
               
 
+              
+
                always sets the <see
                cref="P:System.DateTime.Year" />
+
+              
 
               
 
@@ -7319,6 +8315,8 @@ containing the namespace prefix associated with the current node. </para
 
                   
 
+                  
+
                    is thrown.</para
                 >
               </description>
@@ -7337,10 +8335,14 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              and the <see
              cref="http://go.microsoft.com/fwlink/?LinkId=4871"
               >W3C XML Schema Part 2: Datatypes</see
             >
+
+            
 
             
 
@@ -7359,6 +8361,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -7367,6 +8371,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >The text content as a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -7406,6 +8412,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -7414,6 +8422,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >The text content as a <see
              cref="T:System.DateTimeOffset" />
+
+            
 
             
 
@@ -7452,8 +8462,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              object. If the content is not typed xsd:decimal, the reader attempts to convert it to a <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -7463,6 +8477,8 @@ containing the namespace prefix associated with the current node. </para
              cref="http://go.microsoft.com/fwlink/?LinkId=4871"
               >W3C XML Schema Part 2: Datatypes</see
             >
+
+            
 
             
 
@@ -7555,6 +8571,8 @@ containing the namespace prefix associated with the current node. </para
 
                   
 
+                  
+
                    is thrown.</para
                 >
               </description>
@@ -7573,10 +8591,14 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              and the <see
              cref="http://go.microsoft.com/fwlink/?LinkId=4871"
               >W3C XML Schema Part 2: Datatypes</see
             >
+
+            
 
             
 
@@ -7595,6 +8617,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -7603,6 +8627,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >The text content at the current position as a <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -7643,6 +8669,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              recommendation.</para
           >
           <para>The following table describes how this method treats each node type. </para>
@@ -7730,6 +8758,8 @@ containing the namespace prefix associated with the current node. </para
 
                   
 
+                  
+
                    is thrown.</para
                 >
               </description>
@@ -7748,10 +8778,14 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              and the <see
              cref="http://go.microsoft.com/fwlink/?LinkId=4871"
               >W3C XML Schema Part 2: Datatypes</see
             >
+
+            
 
             
 
@@ -7800,6 +8834,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              recommendation.</para
           >
           <para>The following table describes how this method treats each node type. </para>
@@ -7887,6 +8923,8 @@ containing the namespace prefix associated with the current node. </para
 
                   
 
+                  
+
                    is thrown.</para
                 >
               </description>
@@ -7905,10 +8943,14 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              and the <see
              cref="http://go.microsoft.com/fwlink/?LinkId=4871"
               >W3C XML Schema Part 2: Datatypes</see
             >
+
+            
 
             
 
@@ -7957,6 +8999,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              recommendation.</para
           >
           <para>The following table describes how this method treats each node type. </para>
@@ -8044,6 +9088,8 @@ containing the namespace prefix associated with the current node. </para
 
                   
 
+                  
+
                    is thrown.</para
                 >
               </description>
@@ -8062,10 +9108,14 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              and the <see
              cref="http://go.microsoft.com/fwlink/?LinkId=4871"
               >W3C XML Schema Part 2: Datatypes</see
             >
+
+            
 
             
 
@@ -8109,6 +9159,8 @@ containing the namespace prefix associated with the current node. </para
              cref="http://go.microsoft.com/fwlink/?LinkId=4871"
               >W3C XML Schema Part 2: Datatypes</see
             >
+
+            
 
             
 
@@ -8201,6 +9253,8 @@ containing the namespace prefix associated with the current node. </para
 
                   
 
+                  
+
                    is thrown.</para
                 >
               </description>
@@ -8214,6 +9268,8 @@ containing the namespace prefix associated with the current node. </para
              type="text/html">
               <a href="81d7e46e-72b1-469f-b65c-4c1614d172df">Reading Typed Data</a>
             </format>
+
+            
 
             
 
@@ -8260,6 +9316,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              property. If the content is a list type, the reader returns an array of boxed objects of the appropriate type.</para
           >
           <block subset="none" type="note">
@@ -8271,8 +9329,12 @@ containing the namespace prefix associated with the current node. </para
 
               
 
+              
+
                object created by the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -8349,8 +9411,12 @@ containing the namespace prefix associated with the current node. </para
 
                   
 
+                  
+
                    is set to <see
                    cref="F:System.Xml.ValidationType.Schema" />
+
+                  
 
                   
 
@@ -8383,6 +9449,8 @@ containing the namespace prefix associated with the current node. </para
 
                   
 
+                  
+
                    is thrown.</para
                 >
               </description>
@@ -8401,10 +9469,14 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              and the <see
              cref="http://go.microsoft.com/fwlink/?LinkId=4871"
               >W3C XML Schema Part 2: Datatypes</see
             >
+
+            
 
             
 
@@ -8420,6 +9492,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -8428,6 +9502,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >Reads the text content at the current position as an <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -8470,8 +9546,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlReaderSettings.Async" />
+
+            
 
             
 
@@ -8485,6 +9565,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >Asynchronously reads the text content at the current position as an <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -8605,6 +9687,8 @@ containing the namespace prefix associated with the current node. </para
 
                   
 
+                  
+
                    is thrown.</para
                 >
               </description>
@@ -8623,10 +9707,14 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              and the <see
              cref="http://go.microsoft.com/fwlink/?LinkId=4871"
               >W3C XML Schema Part 2: Datatypes</see
             >
+
+            
 
             
 
@@ -8637,6 +9725,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >For the asynchronous version of this method, see <see
              cref="M:System.Xml.XmlReader.ReadContentAsStringAsync" />
+
+            
 
             
 
@@ -8655,6 +9745,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -8663,6 +9755,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >The text content as a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -8701,8 +9795,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlReaderSettings.Async" />
+
+            
 
             
 
@@ -8721,6 +9819,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -8729,6 +9829,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >The text content as a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -8775,10 +9877,14 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              and the <see
              cref="http://go.microsoft.com/fwlink/?LinkId=4871"
               >W3C XML Schema Part 2: Datatypes</see
             >
+
+            
 
             
 
@@ -8789,6 +9895,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >For the asynchronous version of this method, see <see
              cref="M:System.Xml.XmlReader.ReadElementContentAsAsync(System.Type,System.Xml.IXmlNamespaceResolver)" />
+
+            
 
             
 
@@ -8812,6 +9920,8 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           The type of the value to be returned.</param
         >
         <param name="namespaceResolver">
@@ -8821,8 +9931,12 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           An <see
            cref="T:System.Xml.IXmlNamespaceResolver" />
+
+          
 
           
 
@@ -8870,10 +9984,14 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              and the <see
              cref="http://go.microsoft.com/fwlink/?LinkId=4871"
               >W3C XML Schema Part 2: Datatypes</see
             >
+
+            
 
             
 
@@ -8897,6 +10015,8 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           The type of the value to be returned.</param
         >
         <param name="namespaceResolver">
@@ -8906,8 +10026,12 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           An <see
            cref="T:System.Xml.IXmlNamespaceResolver" />
+
+          
 
           
 
@@ -8922,10 +10046,14 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8966,8 +10094,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlReaderSettings.Async" />
+
+            
 
             
 
@@ -8991,6 +10123,8 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           The type of the value to be returned.</param
         >
         <param name="namespaceResolver">
@@ -9000,8 +10134,12 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           An <see
            cref="T:System.Xml.IXmlNamespaceResolver" />
+
+          
 
           
 
@@ -9045,10 +10183,14 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
             .</para
           >
           <para>
             <see cref="M:System.Xml.XmlReader.ReadElementContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -9064,11 +10206,15 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              method except that it can only be called on element node types.</para
           >
           <para
             >If the <paramref
              name="count" />
+
+            
 
             
 
@@ -9081,8 +10227,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              reads all the remaining bytes in the document and returns the number of bytes read. The next <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -9098,8 +10248,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              before all of the element content is consumed, the reader may behave as if the first content was consumed and then the <see
              cref="M:System.Xml.XmlReader.Read" />
+
+            
 
             
 
@@ -9110,6 +10264,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >For the asynchronous version of this method, see <see
              cref="M:System.Xml.XmlReader.ReadElementContentAsBase64Async(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -9133,6 +10289,8 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           The buffer into which to copy the resulting text. This value cannot be null.</param
         >
         <param name="index">
@@ -9142,10 +10300,14 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           The offset into the buffer where to start copying the result.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9187,8 +10349,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlReaderSettings.Async" />
+
+            
 
             
 
@@ -9212,6 +10378,8 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           The buffer into which to copy the resulting text. This value cannot be null.</param
         >
         <param name="index">
@@ -9221,10 +10389,14 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           The offset into the buffer where to start copying the result.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9270,11 +10442,15 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              method except that it can only be called on element node types.</para
           >
           <para
             >If the <paramref
              name="count" />
+
+            
 
             
 
@@ -9287,8 +10463,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              reads all the remaining bytes in the document and returns the number of bytes read. The next <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -9304,8 +10484,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              before all of the element content is consumed, the reader may behave as if the first content was consumed and then the <see
              cref="M:System.Xml.XmlReader.Read" />
+
+            
 
             
 
@@ -9316,6 +10500,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >For the asynchronous version of this method, see <see
              cref="M:System.Xml.XmlReader.ReadElementContentAsBinHexAsync(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -9339,6 +10525,8 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           The buffer into which to copy the resulting text. This value cannot be null.</param
         >
         <param name="index">
@@ -9348,10 +10536,14 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           The offset into the buffer where to start copying the result.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9393,8 +10585,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlReaderSettings.Async" />
+
+            
 
             
 
@@ -9418,6 +10614,8 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           The buffer into which to copy the resulting text. This value cannot be null.</param
         >
         <param name="index">
@@ -9427,10 +10625,14 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           The offset into the buffer where to start copying the result.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9468,8 +10670,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              object. If the content is not typed xsd:boolean, the reader attempts to convert it to a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -9484,6 +10690,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              recommendation.</para
           >
           <para
@@ -9491,6 +10699,8 @@ containing the namespace prefix associated with the current node. </para
              type="text/html">
               <a href="81d7e46e-72b1-469f-b65c-4c1614d172df">Reading Typed Data</a>
             </format>
+
+            
 
             
 
@@ -9509,6 +10719,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -9517,6 +10729,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >The element content as a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -9561,8 +10775,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              object. If the content is not typed xsd:boolean, the reader attempts to convert it to a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -9577,6 +10795,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              recommendation.</para
           >
           <para
@@ -9584,6 +10804,8 @@ containing the namespace prefix associated with the current node. </para
              type="text/html">
               <a href="81d7e46e-72b1-469f-b65c-4c1614d172df">Reading Typed Data</a>
             </format>
+
+            
 
             
 
@@ -9602,6 +10824,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -9610,6 +10834,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >The element content as a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -9625,10 +10851,14 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9669,8 +10899,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              object. If the content is not typed xsd:dateTime, the reader attempts to convert it to a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -9680,6 +10914,8 @@ containing the namespace prefix associated with the current node. </para
              cref="http://go.microsoft.com/fwlink/?LinkId=4871"
               >W3C XML Schema Part 2: Datatypes</see
             >
+
+            
 
             
 
@@ -9696,6 +10932,8 @@ containing the namespace prefix associated with the current node. </para
 
               
 
+              
+
                value when the content is typed as xsd:gMonthDay. <see
                cref="T:System.Xml.XmlReader" />
 
@@ -9703,8 +10941,12 @@ containing the namespace prefix associated with the current node. </para
 
               
 
+              
+
                always sets the <see
                cref="P:System.DateTime.Year" />
+
+              
 
               
 
@@ -9723,6 +10965,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -9736,6 +10980,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -9744,6 +10990,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >The element content as a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -9788,8 +11036,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              object. If the content is not typed xsd:dateTime, the reader attempts to convert it to a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -9799,6 +11051,8 @@ containing the namespace prefix associated with the current node. </para
              cref="http://go.microsoft.com/fwlink/?LinkId=4871"
               >W3C XML Schema Part 2: Datatypes</see
             >
+
+            
 
             
 
@@ -9815,6 +11069,8 @@ containing the namespace prefix associated with the current node. </para
 
               
 
+              
+
                value when the content is typed as xsd:gMonthDay. <see
                cref="T:System.Xml.XmlReader" />
 
@@ -9822,8 +11078,12 @@ containing the namespace prefix associated with the current node. </para
 
               
 
+              
+
                always sets the <see
                cref="P:System.DateTime.Year" />
+
+              
 
               
 
@@ -9842,6 +11102,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -9850,6 +11112,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >Checks that the specified local name and namespace URI matches that of the current element, then reads the current element and returns the contents as a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -9868,6 +11132,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -9878,10 +11144,14 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9922,10 +11192,14 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              object according to the rules defined by the <see
              cref="http://go.microsoft.com/fwlink/?LinkId=4871"
               >W3C XML Schema Part 2: Datatypes</see
             >
+
+            
 
             
 
@@ -9938,6 +11212,8 @@ containing the namespace prefix associated with the current node. </para
              type="text/html">
               <a href="81d7e46e-72b1-469f-b65c-4c1614d172df">Reading Typed Data</a>
             </format>
+
+            
 
             
 
@@ -9956,6 +11232,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -9964,6 +11242,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >The element content as a <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -10008,10 +11288,14 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              object according to the rules defined by the <see
              cref="http://go.microsoft.com/fwlink/?LinkId=4871"
               >W3C XML Schema Part 2: Datatypes</see
             >
+
+            
 
             
 
@@ -10024,6 +11308,8 @@ containing the namespace prefix associated with the current node. </para
              type="text/html">
               <a href="81d7e46e-72b1-469f-b65c-4c1614d172df">Reading Typed Data</a>
             </format>
+
+            
 
             
 
@@ -10042,6 +11328,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -10050,6 +11338,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >The element content as a <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -10065,10 +11355,14 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10108,6 +11402,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              recommendation.</para
           >
           <para
@@ -10115,6 +11411,8 @@ containing the namespace prefix associated with the current node. </para
              type="text/html">
               <a href="81d7e46e-72b1-469f-b65c-4c1614d172df">Reading Typed Data</a>
             </format>
+
+            
 
             
 
@@ -10169,6 +11467,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              recommendation.</para
           >
           <para
@@ -10176,6 +11476,8 @@ containing the namespace prefix associated with the current node. </para
              type="text/html">
               <a href="81d7e46e-72b1-469f-b65c-4c1614d172df">Reading Typed Data</a>
             </format>
+
+            
 
             
 
@@ -10199,10 +11501,14 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10242,6 +11548,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              recommendation.</para
           >
           <para
@@ -10249,6 +11557,8 @@ containing the namespace prefix associated with the current node. </para
              type="text/html">
               <a href="81d7e46e-72b1-469f-b65c-4c1614d172df">Reading Typed Data</a>
             </format>
+
+            
 
             
 
@@ -10303,6 +11613,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              recommendation.</para
           >
           <para
@@ -10310,6 +11622,8 @@ containing the namespace prefix associated with the current node. </para
              type="text/html">
               <a href="81d7e46e-72b1-469f-b65c-4c1614d172df">Reading Typed Data</a>
             </format>
+
+            
 
             
 
@@ -10333,10 +11647,14 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10376,6 +11694,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              recommendation.</para
           >
           <para
@@ -10383,6 +11703,8 @@ containing the namespace prefix associated with the current node. </para
              type="text/html">
               <a href="81d7e46e-72b1-469f-b65c-4c1614d172df">Reading Typed Data</a>
             </format>
+
+            
 
             
 
@@ -10437,6 +11759,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              recommendation.</para
           >
           <para
@@ -10444,6 +11768,8 @@ containing the namespace prefix associated with the current node. </para
              type="text/html">
               <a href="81d7e46e-72b1-469f-b65c-4c1614d172df">Reading Typed Data</a>
             </format>
+
+            
 
             
 
@@ -10467,10 +11793,14 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10510,6 +11840,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              recommendation.</para
           >
           <para
@@ -10517,6 +11849,8 @@ containing the namespace prefix associated with the current node. </para
              type="text/html">
               <a href="81d7e46e-72b1-469f-b65c-4c1614d172df">Reading Typed Data</a>
             </format>
+
+            
 
             
 
@@ -10571,6 +11905,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              recommendation.</para
           >
           <para
@@ -10578,6 +11914,8 @@ containing the namespace prefix associated with the current node. </para
              type="text/html">
               <a href="81d7e46e-72b1-469f-b65c-4c1614d172df">Reading Typed Data</a>
             </format>
+
+            
 
             
 
@@ -10601,10 +11939,14 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10644,10 +11986,14 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              and the <see
              cref="http://go.microsoft.com/fwlink/?LinkId=4871"
               >W3C XML Schema Part 2: Datatypes</see
             >
+
+            
 
             
 
@@ -10658,6 +12004,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >For the asynchronous version of this method, see <see
              cref="M:System.Xml.XmlReader.ReadElementContentAsObjectAsync" />
+
+            
 
             
 
@@ -10676,6 +12024,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -10684,6 +12034,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >A boxed common language runtime (CLR) object of the most appropriate type. The <see
              cref="P:System.Xml.XmlReader.ValueType" />
+
+            
 
             
 
@@ -10730,10 +12082,14 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              and the <see
              cref="http://go.microsoft.com/fwlink/?LinkId=4871"
               >W3C XML Schema Part 2: Datatypes</see
             >
+
+            
 
             
 
@@ -10752,6 +12108,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -10760,6 +12118,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >A boxed common language runtime (CLR) object of the most appropriate type. The <see
              cref="P:System.Xml.XmlReader.ValueType" />
+
+            
 
             
 
@@ -10775,10 +12135,14 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10816,8 +12180,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlReaderSettings.Async" />
+
+            
 
             
 
@@ -10836,6 +12204,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -10844,6 +12214,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >A boxed common language runtime (CLR) object of the most appropriate type. The <see
              cref="P:System.Xml.XmlReader.ValueType" />
+
+            
 
             
 
@@ -10884,10 +12256,14 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              and the <see
              cref="http://go.microsoft.com/fwlink/?LinkId=4871"
               >W3C XML Schema Part 2: Datatypes</see
             >
+
+            
 
             
 
@@ -10898,6 +12274,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >For the asynchronous version of this method, see <see
              cref="M:System.Xml.XmlReader.ReadElementContentAsStringAsync" />
+
+            
 
             
 
@@ -10916,6 +12294,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -10924,6 +12304,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >The element content as a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -10970,10 +12352,14 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              and the <see
              cref="http://go.microsoft.com/fwlink/?LinkId=4871"
               >W3C XML Schema Part 2: Datatypes</see
             >
+
+            
 
             
 
@@ -10992,6 +12378,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -11000,6 +12388,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >The element content as a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -11015,10 +12405,14 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11056,8 +12450,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlReaderSettings.Async" />
+
+            
 
             
 
@@ -11076,6 +12474,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -11084,6 +12484,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >The element content as a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -11123,6 +12525,8 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
            node, the element does not contain a simple text value, or an error occurred while parsing the XML.</exception
         >
         <remarks>
@@ -11130,6 +12534,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >This is a helper method for reading simple text-only elements. It calls <see
              cref="M:System.Xml.XmlReader.MoveToContent" />
+
+            
 
             
 
@@ -11186,8 +12592,12 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
            node, the <see
            cref="P:System.Xml.XmlReader.Name" />
+
+          
 
           
 
@@ -11200,8 +12610,12 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
            node does not equal <paramref
            name="name" />
+
+          
 
           
 
@@ -11214,6 +12628,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >This is a helper method for reading simple text-only elements. It calls <see
              cref="M:System.Xml.XmlReader.MoveToContent" />
+
+            
 
             
 
@@ -11235,6 +12651,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              property of the element found matches the given string before reading a text-only element.</para
           >
         </summary>
@@ -11244,6 +12662,8 @@ containing the namespace prefix associated with the current node. </para
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11289,6 +12709,8 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
            node, the <see
            cref="P:System.Xml.XmlReader.LocalName" />
 
@@ -11296,8 +12718,12 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
            property of the <see
            langword="Element" />
+
+          
 
           
 
@@ -11310,8 +12736,12 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           , or the <see
            cref="P:System.Xml.XmlReader.NamespaceURI" />
+
+          
 
           
 
@@ -11324,8 +12754,12 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
            node does not equal <paramref
            name="ns" />
+
+          
 
           
 
@@ -11338,6 +12772,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >This is a helper method for reading simple text-only elements. It calls <see
              cref="M:System.Xml.XmlReader.MoveToContent" />
+
+            
 
             
 
@@ -11359,8 +12795,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              and <see
              cref="P:System.Xml.XmlReader.NamespaceURI" />
+
+            
 
             
 
@@ -11380,10 +12820,14 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           The local name to check.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11429,11 +12873,15 @@ containing the namespace prefix associated with the current node. </para
 
               
 
+              
+
                method, which determines whether the
       current node can contain content and, if not, moves the reader to the next
       content node or the end of the input stream. The node the reader ends up
       positioned on is checked to determine if it is an <see
                langword="EndElement" />
+
+              
 
               
 
@@ -11455,6 +12903,8 @@ containing the namespace prefix associated with the current node. </para
               
 
               
+
+              
       class.
 
       </block
@@ -11470,6 +12920,8 @@ containing the namespace prefix associated with the current node. </para
 
               
 
+              
+
                node and advance the reader to the next node.
       </block
             >
@@ -11478,6 +12930,8 @@ containing the namespace prefix associated with the current node. </para
         <exception cref="T:System.Xml.XmlException"
           >The node is not an <see
            langword="EndElement" />
+
+          
 
           
 
@@ -11587,11 +13041,15 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
             . The method returns String.Empty (except for attribute nodes, in which case the value of the attribute is returned).</para
           >
           <para
             >This method checks for well-formed XML. If ReadInnerXml is called from an <see
              cref="T:System.Xml.XmlValidatingReader" />
+
+            
 
             
 
@@ -11607,8 +13065,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
             , <see
              cref="T:System.Xml.XmlTextReader" />
+
+            
 
             
 
@@ -11619,6 +13081,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >For the asynchronous version of this method, see <see
              cref="M:System.Xml.XmlReader.ReadInnerXmlAsync" />
+
+            
 
             
 
@@ -11667,8 +13131,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlReaderSettings.Async" />
+
+            
 
             
 
@@ -11716,6 +13184,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >This method is similar to <see
              cref="M:System.Xml.XmlReader.ReadInnerXml" />
+
+            
 
             
 
@@ -11787,11 +13257,15 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
             . The method returns String.Empty (except for attribute nodes, in which case the attribute markup is returned).</para
           >
           <para
             >This method checks for well-formed XML. If ReadOuterXml is called from an <see
              cref="T:System.Xml.XmlValidatingReader" />
+
+            
 
             
 
@@ -11807,8 +13281,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
             , <see
              cref="T:System.Xml.XmlTextReader" />
+
+            
 
             
 
@@ -11819,6 +13297,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >For the asynchronous version of this method, see <see
              cref="M:System.Xml.XmlReader.ReadOuterXmlAsync" />
+
+            
 
             
 
@@ -11866,8 +13346,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlReaderSettings.Async" />
+
+            
 
             
 
@@ -11915,6 +13399,8 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
            node or an error occurred while parsing the XML.</exception
         >
         <remarks>
@@ -11927,8 +13413,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              followed by <see
              cref="M:System.Xml.XmlReader.Read" />
+
+            
 
             
 
@@ -11975,8 +13465,12 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
            node, the <see
            cref="P:System.Xml.XmlReader.Name" />
+
+          
 
           
 
@@ -11989,8 +13483,12 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
            node does not equal <paramref
            name="name" />
+
+          
 
           
 
@@ -12008,8 +13506,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              followed by a call to <see
              cref="M:System.Xml.XmlReader.Read" />
+
+            
 
             
 
@@ -12028,11 +13530,15 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              and advances the reader to the next node.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12078,6 +13584,8 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
            node, the <see
            cref="P:System.Xml.XmlReader.LocalName" />
 
@@ -12085,8 +13593,12 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
            property of the <see
            langword="Element" />
+
+          
 
           
 
@@ -12099,8 +13611,12 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           , the <see
            cref="P:System.Xml.XmlReader.NamespaceURI" />
+
+          
 
           
 
@@ -12113,8 +13629,12 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
            node does not equal <paramref
            name="ns" />
+
+          
 
           
 
@@ -12132,8 +13652,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              followed by a call to <see
              cref="M:System.Xml.XmlReader.Read" />
+
+            
 
             
 
@@ -12152,8 +13676,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              and <see
              cref="P:System.Xml.XmlReader.NamespaceURI" />
+
+            
 
             
 
@@ -12169,10 +13697,14 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12211,6 +13743,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             > One of the members of the <see
              cref="T:System.Xml.ReadState" />
+
+            
 
             
 
@@ -12311,8 +13845,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              can be called only on element nodes. When the entire sub-tree has been read, calls to the Read method returns false. When the new XmlReader has been closed, the original XmlReader will be positioned on the EndElement node of the sub-tree. Thus, if you called the <see
              cref="M:System.Xml.XmlReader.ReadSubtree" />
+
+            
 
             
 
@@ -12330,8 +13868,12 @@ containing the namespace prefix associated with the current node. </para
 
               
 
+              
+
                method is not intended to create a copy of the XML data that you can work with independently. Rather, it can be used create a boundary around an XML element. This is useful if you need to pass data to another component for processing and you wish to limit how much of your data the component can access. When you pass an XmlReader returned by the <see
                cref="M:System.Xml.XmlReader.ReadSubtree" />
+
+              
 
               
 
@@ -12350,6 +13892,8 @@ containing the namespace prefix associated with the current node. </para
           <para
             >A new XmlReader instance set to ReadState.Initial. A call to the <see
              cref="M:System.Xml.XmlReader.Read" />
+
+            
 
             
 
@@ -12390,6 +13934,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              to the next descendant element with the specified qualified name.</para
           >
         </summary>
@@ -12403,8 +13949,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              is positioned on the end tag (<see
              cref="P:System.Xml.XmlReader.NodeType" />
+
+            
 
             
 
@@ -12420,8 +13970,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              is not positioned on an element when <see
              cref="M:System.Xml.XmlReader.ReadToDescendant(System.String)" />
+
+            
 
             
 
@@ -12434,11 +13988,15 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              is not changed.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12482,6 +14040,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              to the next descendant element with the specified local name and namespace URI.</para
           >
         </summary>
@@ -12495,8 +14055,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              is positioned on the end tag (<see
              cref="P:System.Xml.XmlReader.NodeType" />
+
+            
 
             
 
@@ -12512,6 +14076,8 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              is not positioned on an element when <see
              cref="M:System.Xml.XmlReader.ReadToDescendant(System.String,System.String)" />
 
@@ -12519,8 +14085,12 @@ containing the namespace prefix associated with the current node. </para
 
             
 
+            
+
              was called, this method returns false and the position of the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -12536,10 +14106,14 @@ containing the namespace prefix associated with the current node. </para
 
           
 
+          
+
           The local name of the element you wish to move to.</param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12598,11 +14172,15 @@ reader.ReadToFollowing("item");
 
             
 
+            
+
              is in an end of file state.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12665,6 +14243,8 @@ reader.ReadToFollowing("item", "urn:1");
 
             
 
+            
+
              is in an end of file state.</para
           >
         </returns>
@@ -12675,10 +14255,14 @@ reader.ReadToFollowing("item", "urn:1");
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12718,8 +14302,12 @@ reader.ReadToFollowing("item", "urn:1");
 
               
 
+              
+
                when the XmlReader is an initial state (<see
                cref="P:System.Xml.XmlReader.ReadState" />
+
+              
 
               
 
@@ -12732,6 +14320,8 @@ reader.ReadToFollowing("item", "urn:1");
 
               
 
+              
+
               ). You can call <see
                cref="M:System.Xml.XmlReader.Read" />
 
@@ -12739,8 +14329,12 @@ reader.ReadToFollowing("item", "urn:1");
 
               
 
+              
+
                to advance the XmlReader and then call the <see
                cref="M:System.Xml.XmlReader.ReadToNextSibling(System.String)" />
+
+              
 
               
 
@@ -12764,11 +14358,15 @@ reader.ReadToFollowing("item", "urn:1");
 
             
 
+            
+
              is XmlNodeType.EndElement) of the parent element.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12812,8 +14410,12 @@ reader.ReadToFollowing("item", "urn:1");
 
               
 
+              
+
                when the XmlReader is an initial state (<see
                cref="P:System.Xml.XmlReader.ReadState" />
+
+              
 
               
 
@@ -12826,6 +14428,8 @@ reader.ReadToFollowing("item", "urn:1");
 
               
 
+              
+
               ). You can call <see
                cref="M:System.Xml.XmlReader.Read" />
 
@@ -12833,8 +14437,12 @@ reader.ReadToFollowing("item", "urn:1");
 
               
 
+              
+
                to advance the XmlReader and then call the <see
                cref="M:System.Xml.XmlReader.ReadToNextSibling(System.String,System.String)" />
+
+              
 
               
 
@@ -12858,6 +14466,8 @@ reader.ReadToFollowing("item", "urn:1");
 
             
 
+            
+
              is XmlNodeType.EndElement) of the parent element.</para
           >
         </returns>
@@ -12868,10 +14478,14 @@ reader.ReadToFollowing("item", "urn:1");
 
           
 
+          
+
           The local name of the sibling element you wish to move to.</param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12915,6 +14529,8 @@ reader.ReadToFollowing("item", "urn:1");
 
             
 
+            
+
              is true), however actual streaming of the node value only occurs when called on a text, white space and significant white space nodes. Other node type values are cached, including attributes and CDATA nodes.</para
           >
           <para
@@ -12925,8 +14541,12 @@ reader.ReadToFollowing("item", "urn:1");
 
             
 
+            
+
              property and does not move the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -12942,6 +14562,8 @@ reader.ReadToFollowing("item", "urn:1");
 
             
 
+            
+
             ) of the node value into a character buffer (<paramref
              name="buffer" />
 
@@ -12949,8 +14571,12 @@ reader.ReadToFollowing("item", "urn:1");
 
             
 
+            
+
             ) at a specified offset (<paramref
              name="index" />
+
+            
 
             
 
@@ -12966,8 +14592,12 @@ reader.ReadToFollowing("item", "urn:1");
 
             
 
+            
+
              the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -12980,8 +14610,12 @@ reader.ReadToFollowing("item", "urn:1");
 
             
 
+            
+
              property. When the <see
              cref="P:System.Xml.XmlReader.Value" />
+
+            
 
             
 
@@ -12994,8 +14628,12 @@ reader.ReadToFollowing("item", "urn:1");
 
             
 
+            
+
             ) or a full value depending on the implementation. All the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -13008,8 +14646,12 @@ reader.ReadToFollowing("item", "urn:1");
 
             
 
+            
+
              namespace return a partial value for the <see
              cref="P:System.Xml.XmlReader.Value" />
+
+            
 
             
 
@@ -13025,6 +14667,8 @@ reader.ReadToFollowing("item", "urn:1");
 
             
 
+            
+
             . If this occurs, the <see
              cref="T:System.Xml.XmlReader" />
 
@@ -13032,8 +14676,12 @@ reader.ReadToFollowing("item", "urn:1");
 
             
 
+            
+
              moves to the next <see
              cref="T:System.Xml.XmlNodeType" />
+
+            
 
             
 
@@ -13049,8 +14697,12 @@ reader.ReadToFollowing("item", "urn:1");
 
             
 
+            
+
              returns less than the requested number of characters. For example, if you had a 200-character long value with a surrogate pair at positions 127 and 128 and you called <see
              cref="M:System.Xml.XmlReader.ReadValueChunk(System.Char[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -13063,8 +14715,12 @@ reader.ReadToFollowing("item", "urn:1");
 
             
 
+            
+
              call. In this case, <see
              cref="M:System.Xml.XmlReader.ReadValueChunk(System.Char[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -13075,6 +14731,8 @@ reader.ReadToFollowing("item", "urn:1");
           <para
             >For the asynchronous version of this method, see <see
              cref="M:System.Xml.XmlReader.ReadValueChunkAsync(System.Char[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -13098,10 +14756,14 @@ reader.ReadToFollowing("item", "urn:1");
 
           
 
+          
+
           The array of characters that serves as the buffer to which the text contents are written. This value cannot be null.</param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -13114,10 +14776,14 @@ reader.ReadToFollowing("item", "urn:1");
 
           
 
+          
+
            can start to copy the results.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -13159,8 +14825,12 @@ reader.ReadToFollowing("item", "urn:1");
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlReaderSettings.Async" />
+
+            
 
             
 
@@ -13184,10 +14854,14 @@ reader.ReadToFollowing("item", "urn:1");
 
           
 
+          
+
           The array of characters that serves as the buffer to which the text contents are written. This value cannot be null.</param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -13200,10 +14874,14 @@ reader.ReadToFollowing("item", "urn:1");
 
           
 
+          
+
            can start to copy the results.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -13242,6 +14920,8 @@ reader.ReadToFollowing("item", "urn:1");
 
           
 
+          
+
            node.</exception
         >
         <remarks>
@@ -13254,12 +14934,16 @@ reader.ReadToFollowing("item", "urn:1");
 
             
 
+            
+
              is called after calling this method, the entity replacement text is parsed. When the entity replacement text is finished, an EndEntity node is returned to close the entity reference scope.</para
           >
           <block subset="none" type="note">
             <para
               >After calling this method, if the entity is part of an attribute value, you must call <see
                cref="M:System.Xml.XmlReader.ReadAttributeValue" />
+
+              
 
               
 
@@ -13306,6 +14990,8 @@ reader.ReadToFollowing("item", "urn:1");
 
             
 
+            
+
              interface exposes a subset of the Post Schema Validation Infoset (PSVI) associated with an XML node.</para
           >
         </remarks>
@@ -13346,12 +15032,16 @@ reader.ReadToFollowing("item", "urn:1");
 
               
 
+              
+
                object can contain sensitive information such as user credentials. Applications must be careful when caching this object or passing it to another component.</para
             >
           </block>
           <para
             >The <see
              cref="T:System.Xml.XmlReaderSettings" />
+
+            
 
             
 
@@ -13364,6 +15054,8 @@ reader.ReadToFollowing("item", "urn:1");
 
             
 
+            
+
              object returned by this property cannot be modified. Any attempt to change individual settings results in an exception being thrown.</para
           >
           <para
@@ -13371,6 +15063,8 @@ reader.ReadToFollowing("item", "urn:1");
              type="text/html">
               <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Create XML Readers</a>
             </format>
+
+            
 
             
 
@@ -13389,8 +15083,12 @@ reader.ReadToFollowing("item", "urn:1");
 
             
 
+            
+
              object used to create this <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -13433,6 +15131,8 @@ reader.ReadToFollowing("item", "urn:1");
 
             
 
+            
+
             .</para
           >
           <code> &lt;a name="bob" age="123"&gt;
@@ -13445,6 +15145,8 @@ reader.ReadToFollowing("item", "urn:1");
           <para
             >If the reader is an <see
              cref="T:System.Xml.XmlValidatingReader" />
+
+            
 
             
 
@@ -13483,8 +15185,12 @@ reader.ReadToFollowing("item", "urn:1");
 
                   
 
+                  
+
                    instance created by the <see
                    cref="Overload:System.Xml.XmlReader.Create" />
+
+                  
 
                   
 
@@ -13506,8 +15212,12 @@ reader.ReadToFollowing("item", "urn:1");
 
                   
 
+                  
+
                    instance created by the <see
                    cref="Overload:System.Xml.XmlReader.Create" />
+
+                  
 
                   
 
@@ -13530,8 +15240,12 @@ reader.ReadToFollowing("item", "urn:1");
 
                   
 
+                  
+
                    instance created by the <see
                    cref="Overload:System.Xml.XmlReader.Create" />
+
+                  
 
                   
 
@@ -13563,8 +15277,12 @@ reader.ReadToFollowing("item", "urn:1");
 
                   
 
+                  
+
                    instance returned by a <see
                    cref="T:System.Xml.XPath.XPathNavigator" />
+
+                  
 
                   
 
@@ -13596,8 +15314,12 @@ reader.ReadToFollowing("item", "urn:1");
 
                   
 
+                  
+
                    instance wrapped around another <see
                    cref="T:System.Xml.XmlReader" />
+
+                  
 
                   
 
@@ -13615,8 +15337,12 @@ reader.ReadToFollowing("item", "urn:1");
 
                   
 
+                  
+
                   . (The Skip method on the underlying <see
                    cref="T:System.Xml.XmlReader" />
+
+                  
 
                   
 
@@ -13630,6 +15356,8 @@ reader.ReadToFollowing("item", "urn:1");
           <para
             >For the asynchronous version of this method, see <see
              cref="M:System.Xml.XmlReader.SkipAsync" />
+
+            
 
             
 
@@ -13673,8 +15401,12 @@ reader.ReadToFollowing("item", "urn:1");
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlReaderSettings.Async" />
+
+            
 
             
 
@@ -13712,8 +15444,12 @@ reader.ReadToFollowing("item", "urn:1");
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -13727,6 +15463,8 @@ reader.ReadToFollowing("item", "urn:1");
           <para
             >For a description of this member, see <see
              cref="M:System.IDisposable.Dispose" />
+
+            
 
             
 
@@ -13767,6 +15505,8 @@ reader.ReadToFollowing("item", "urn:1");
 
             
 
+            
+
              containing the text value of the current node.</para
           >
         </value>
@@ -13775,6 +15515,8 @@ reader.ReadToFollowing("item", "urn:1");
           <para
             >For the asynchronous version of this property, see the <see
              cref="M:System.Xml.XmlReader.GetValueAsync" />
+
+            
 
             
 
@@ -13811,6 +15553,8 @@ reader.ReadToFollowing("item", "urn:1");
              type="text/html">
               <a href="cabdfcad-f359-479b-b71c-8b2fad42ca49">Mapping XML Data Types to CLR Types</a>
             </format>
+
+            
 
             
 
@@ -13854,9 +15598,13 @@ reader.ReadToFollowing("item", "urn:1");
 
             
 
+            
+
              containing the
    current <c
             >xml:lang</c>
+
+            
 
             
 
@@ -13911,8 +15659,12 @@ reader.ReadToFollowing("item", "urn:1");
             
 
             
+
+            
 enumeration. If no <c
             >xml:space</c>
+
+            
 
             
 
@@ -13921,6 +15673,8 @@ enumeration. If no <c
              scope exists, this property defaults to
 <see
              cref="F:System.Xml.XmlSpace.None" />
+
+            
 
             
 

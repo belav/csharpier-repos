@@ -23,8 +23,12 @@
 
         
 
+        
+
          class and its concrete derived classes create <see
          cref="T:System.Web.Services.Description.ServiceDescription" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          attribute. Each concrete <see
          cref="T:System.Web.Services.Description.ProtocolReflector" />
+
+        
 
         
 
@@ -51,8 +59,12 @@
 
         
 
+        
+
          objects according to a specified communication protocol; <see
          cref="T:System.Web.Services.Description.ProtocolReflector" />
+
+        
 
         
 
@@ -68,8 +80,12 @@
 
         
 
+        
+
          instance can be used to generate a Web Services Description Language (WSDL) document with the <see
          cref="M:System.Web.Services.Description.ServiceDescription.Write(System.IO.Stream)" />
+
+        
 
         
 
@@ -82,8 +98,12 @@
 
         
 
+        
+
          instance can also be used by the <see
          cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+
+        
 
         
 
@@ -99,8 +119,12 @@
 
         
 
+        
+
          class uses the <see
          cref="T:System.Web.Services.WebServiceBindingAttribute" />
+
+        
 
         
 
@@ -113,8 +137,12 @@
 
         
 
+        
+
          for each binding it identifies in the Web service class. If that attribute is not present, the <see
          cref="T:System.Web.Services.Description.ProtocolReflector" />
+
+        
 
         
 
@@ -127,6 +155,8 @@
 
         
 
+        
+
         ) belonging to a binding, a class derived from <see
          cref="T:System.Web.Services.Description.ProtocolReflector" />
 
@@ -134,8 +164,12 @@
 
         
 
+        
+
          generates an operation and associated messages that are added to the <see
          cref="T:System.Web.Services.Description.ServiceDescription" />
+
+        
 
         
 
@@ -151,8 +185,12 @@
 
         
 
+        
+
          class, instead of directly invoking classes derived from <see
          cref="T:System.Web.Services.Description.ProtocolReflector" />
+
+        
 
         
 
@@ -166,6 +204,8 @@
       <para
         >Provides common functionality across communication protocols for creating <see
          cref="T:System.Web.Services.Description.ServiceDescription" />
+
+        
 
         
 
@@ -188,6 +228,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Description.ProtocolReflector" />
+
+            
 
             
 
@@ -221,8 +263,12 @@
 
             
 
+            
+
              calls the <see
              cref="M:System.Web.Services.Description.ProtocolReflector.ReflectMethod" />
+
+            
 
             
 
@@ -259,6 +305,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -287,8 +335,12 @@
 
             
 
+            
+
              object's <see
              cref="F:System.Web.Services.Description.ServiceDescription.Namespace" />
+
+            
 
             
 
@@ -322,8 +374,12 @@
 
             
 
+            
+
              has called the <see
              cref="M:System.Web.Services.Description.ProtocolReflector.ReflectMethod" />
+
+            
 
             
 
@@ -361,6 +417,8 @@
 
             
 
+            
+
              instance obtained subsequently gets populated with objects that correspond to WSDL entities that are reflected from the input Web service class.</para
           >
         </remarks>
@@ -369,6 +427,8 @@
           <para
             >Gets a <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -387,6 +447,8 @@
 
             
 
+            
+
              object for a given XML namespace and the applicable communication protocol.</para
           >
         </returns>
@@ -397,8 +459,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.ServiceDescription" />
+
+          
 
           
 
@@ -429,6 +495,8 @@
           <para
             >Gets SOAP header message definitions to be added to the associated <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -491,6 +559,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -526,8 +596,12 @@
 
             
 
+            
+
              for the method that the protocol reflector is currently processing to generate a Web Services Description Language (WSDL) operation to be placed in the generated <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -567,6 +641,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -580,8 +656,12 @@
 
             
 
+            
+
              object's <see
              cref="P:System.Web.Services.Description.ProtocolReflector.Methods" />
+
+            
 
             
 
@@ -617,6 +697,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -646,6 +728,8 @@
           <para
             >Web service methods are identified by the <see
              cref="T:System.Web.Services.WebMethodAttribute" />
+
+            
 
             
 
@@ -771,6 +855,8 @@
 
             
 
+            
+
              object that corresponds to a binding.</para
           >
         </summary>
@@ -802,8 +888,12 @@
 
             
 
+            
+
              instance being used by the associated <see
              cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
+
+            
 
             
 
@@ -836,6 +926,8 @@
 
             
 
+            
+
              method should generate information such as operation binding, abstract operation, and messages.</para
           >
         </remarks>
@@ -849,6 +941,8 @@
 
             
 
+            
+
              object corresponding to a binding.</para
           >
         </summary>
@@ -857,6 +951,8 @@
           <para
             >Method-specific information that gets placed in a <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -920,8 +1016,12 @@
 
             
 
+            
+
              instance being used by the associated <see
              cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
+
+            
 
             
 
@@ -957,6 +1057,8 @@
           <para
             >Gets the XML schemas being generated by the associated <see
              cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
+
+            
 
             
 
@@ -1015,6 +1117,8 @@
 
             
 
+            
+
              object currently being created to contain the binding being generated.</para
           >
         </summary>
@@ -1045,8 +1149,12 @@
 
             
 
+            
+
              class creates a <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -1065,8 +1173,12 @@
 
             
 
+            
+
              objects that have so far been created and added to the corresponding to the <see
              cref="T:System.Web.Services.Description.ServiceDescriptionCollection" />
+
+            
 
             
 
@@ -1079,8 +1191,12 @@
 
             
 
+            
+
              property of the associated <see
              cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
+
+            
 
             
 
@@ -1113,6 +1229,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1121,6 +1239,8 @@
           <para
             >Gets the type of the Web service class being reflected to produce <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -1149,6 +1269,8 @@
           <para
             >Gets the endpoint of the associated Web service as a Uniform Resource Locator (URL), obtained from the associated <see
              cref="T:System.Web.Services.Description.ServiceDescriptionReflector" />
+
+            
 
             
 

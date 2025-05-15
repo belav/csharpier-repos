@@ -25,6 +25,8 @@
 
         
 
+        
+
          applied to the method.</para
       >
     </summary>
@@ -71,6 +73,8 @@
           <para
             >Indicates that a method is used for a data operation that fills a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 

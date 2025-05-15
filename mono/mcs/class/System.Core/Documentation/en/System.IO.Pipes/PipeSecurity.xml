@@ -27,6 +27,8 @@
 
         
 
+        
+
          class specifies the access rights for a pipe and how access attempts are audited.  This class represents access and audit rights as a set of rules. Each access rule is represented by a <see
          cref="T:System.IO.Pipes.PipeAccessRule" />
 
@@ -34,8 +36,12 @@
 
         
 
+        
+
          object, while each audit rule is represented by a <see
          cref="T:System.IO.Pipes.PipeAuditRule" />
+
+        
 
         
 
@@ -51,6 +57,8 @@
 
         
 
+        
+
          class is an abstraction of the underlying Microsoft Windows file security system. In this system, each pipe has a discretionary access control list (DACL), which controls access to the pipe, and a system access control list (SACL), which specifies the access control attempts that are audited.  The <see
          cref="T:System.IO.Pipes.PipeAccessRule" />
 
@@ -58,8 +66,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.IO.Pipes.PipeAuditRule" />
+
+        
 
         
 
@@ -75,11 +87,15 @@
 
         
 
+        
+
          class hides many of the details of DACLs and SACLs; you do not have to worry about ACE ordering or null DACLS.</para
       >
       <para
         >Use the <see
          cref="T:System.IO.Pipes.PipeSecurity" />
+
+        
 
         
 
@@ -95,8 +111,12 @@
 
         
 
+        
+
          method. To retrieve access or audit rules from an existing file, use the <see
          cref="M:System.IO.Pipes.PipeStream.GetAccessControl" />
+
+        
 
         
 
@@ -133,11 +153,15 @@
 
             
 
+            
+
              object that is not based on an existing pipe. You can then populate the object with access control information and apply it to a pipe.</para
           >
           <para
             >You can add access or audit rules to the <see
              cref="T:System.IO.Pipes.PipeSecurity" />
+
+            
 
             
 
@@ -150,8 +174,12 @@
 
             
 
+            
+
              method. You can remove access or audit rules using the <see
              cref="M:System.IO.Pipes.PipeSecurity.RemoveAccessRule(System.IO.Pipes.PipeAccessRule)" />
+
+            
 
             
 
@@ -167,8 +195,12 @@
 
             
 
+            
+
              method. To retrieve access or audit rules from an existing file, use the <see
              cref="M:System.IO.Pipes.PipeStream.GetAccessControl" />
+
+            
 
             
 
@@ -182,6 +214,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.Pipes.PipeSecurity" />
+
+            
 
             
 
@@ -217,8 +251,12 @@
 
             
 
+            
+
              class override the <see
              cref="P:System.Security.AccessControl.ObjectSecurity.AccessRightType" />
+
+            
 
             
 
@@ -237,8 +275,12 @@
 
             
 
+            
+
              of the securable object that is associated with the current <see
              cref="T:System.IO.Pipes.PipeSecurity" />
+
+            
 
             
 
@@ -284,6 +326,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -292,6 +336,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.AccessControl.AccessRule" />
+
+            
 
             
 
@@ -310,6 +356,8 @@
 
             
 
+            
+
              object that this method creates.</para
           >
         </returns>
@@ -320,8 +368,12 @@
 
           
 
+          
+
           The identity that the access rule applies to. It must be an object that can be cast as a <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -336,10 +388,14 @@
 
           
 
+          
+
           The access mask of this rule. The access mask is a 32-bit collection of anonymous bits, the meaning of which is defined by the individual integrators</param
         >
         <param name="isInherited">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -354,8 +410,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.InheritanceFlags" />
+
+          
 
           
 
@@ -370,8 +430,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.PropagationFlags" />
+
+          
 
           
 
@@ -384,8 +448,12 @@
 
           
 
+          
+
            is set to <see
            cref="F:System.Security.AccessControl.InheritanceFlags.None" />
+
+          
 
           
 
@@ -395,6 +463,8 @@
         >
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -429,8 +499,12 @@
 
             
 
+            
+
              class override the <see
              cref="P:System.Security.AccessControl.ObjectSecurity.AccessRuleType" />
+
+            
 
             
 
@@ -449,8 +523,12 @@
 
             
 
+            
+
              of the object that is associated with the access rules of the current <see
              cref="T:System.IO.Pipes.PipeSecurity" />
+
+            
 
             
 
@@ -491,8 +569,12 @@
 
             
 
+            
+
              method adds a new rule to the list of rules that a <see
              cref="T:System.IO.Pipes.PipeSecurity" />
+
+            
 
             
 
@@ -505,8 +587,12 @@
 
             
 
+            
+
              method will still add the rule, with one exception: a <see
              cref="T:System.IO.Pipes.PipeAccessRule" />
+
+            
 
             
 
@@ -519,8 +605,12 @@
 
             
 
+            
+
              value supersedes an object that is created using the <see
              cref="F:System.Security.AccessControl.AccessControlType.Allow" />
+
+            
 
             
 
@@ -539,11 +629,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -583,8 +677,12 @@
 
             
 
+            
+
              method adds a new audit rule to the list of rules that a <see
              cref="T:System.IO.Pipes.PipeSecurity" />
+
+            
 
             
 
@@ -595,6 +693,8 @@
           <para
             >If an audit rule already exists for the specified rule, the <see
              cref="M:System.IO.Pipes.PipeSecurity.AddAuditRule(System.IO.Pipes.PipeAuditRule)" />
+
+            
 
             
 
@@ -613,11 +713,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -662,6 +766,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -670,6 +776,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.AccessControl.AuditRule" />
+
+            
 
             
 
@@ -688,6 +796,8 @@
 
             
 
+            
+
              object that this method creates.</para
           >
         </returns>
@@ -698,8 +808,12 @@
 
           
 
+          
+
           The identity that the access rule applies to. It must be an object that can be cast as a <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -714,10 +828,14 @@
 
           
 
+          
+
           The access mask of this rule. The access mask is a 32-bit collection of anonymous bits, the meaning of which is defined by the individual integrators</param
         >
         <param name="isInherited">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -732,8 +850,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.InheritanceFlags" />
+
+          
 
           
 
@@ -748,8 +870,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.PropagationFlags" />
+
+          
 
           
 
@@ -762,8 +888,12 @@
 
           
 
+          
+
            is set to <see
            cref="F:System.Security.AccessControl.InheritanceFlags.None" />
+
+          
 
           
 
@@ -778,8 +908,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AuditFlags" />
+
+          
 
           
 
@@ -814,8 +948,12 @@
 
             
 
+            
+
              class override the <see
              cref="P:System.Security.AccessControl.ObjectSecurity.AuditRuleType" />
+
+            
 
             
 
@@ -834,8 +972,12 @@
 
             
 
+            
+
              object associated with the audit rules of the current <see
              cref="T:System.IO.Pipes.PipeSecurity" />
+
+            
 
             
 
@@ -877,6 +1019,8 @@
 
             
 
+            
+
              object to permanent storage.</para
           >
         </summary>
@@ -887,8 +1031,12 @@
 
           
 
+          
+
           The handle of the securable object that the current <see
            cref="T:System.IO.Pipes.PipeSecurity" />
+
+          
 
           
 
@@ -926,6 +1074,8 @@
 
             
 
+            
+
              object to permanent storage.</para
           >
         </summary>
@@ -936,8 +1086,12 @@
 
           
 
+          
+
           The name of the securable object that the current <see
            cref="T:System.IO.Pipes.PipeSecurity" />
+
+          
 
           
 
@@ -977,8 +1131,12 @@
 
             
 
+            
+
              method removes either all matching <see
              cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+
+            
 
             
 
@@ -991,8 +1149,12 @@
 
             
 
+            
+
              access rules from the current <see
              cref="T:System.IO.Pipes.PipeSecurity" />
+
+            
 
             
 
@@ -1005,8 +1167,12 @@
 
             
 
+            
+
              access rules for a user by passing a <see
              cref="T:System.IO.Pipes.PipeAccessRule" />
+
+            
 
             
 
@@ -1019,8 +1185,12 @@
 
             
 
+            
+
              value, the <see
              cref="F:System.IO.Pipes.PipeAccessRights.Read" />
+
+            
 
             
 
@@ -1033,6 +1203,8 @@
 
             
 
+            
+
              method removes any deny rules that specify the <see
              cref="F:System.IO.Pipes.PipeAccessRights.Read" />
 
@@ -1040,8 +1212,12 @@
 
             
 
+            
+
              value or the <see
              cref="F:System.IO.Pipes.PipeAccessRights.Write" />
+
+            
 
             
 
@@ -1060,6 +1236,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1069,6 +1247,8 @@
         </returns>
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1108,8 +1288,12 @@
 
             
 
+            
+
              method removes either all matching <see
              cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+
+            
 
             
 
@@ -1122,8 +1306,12 @@
 
             
 
+            
+
              access rules from the current <see
              cref="T:System.IO.Pipes.PipeSecurity" />
+
+            
 
             
 
@@ -1136,8 +1324,12 @@
 
             
 
+            
+
              access rules for a user by passing a <see
              cref="T:System.IO.Pipes.PipeAccessRule" />
+
+            
 
             
 
@@ -1150,8 +1342,12 @@
 
             
 
+            
+
              value, the <see
              cref="F:System.IO.Pipes.PipeAccessRights.Read" />
+
+            
 
             
 
@@ -1164,6 +1360,8 @@
 
             
 
+            
+
              method removes any deny rules that specify the <see
              cref="F:System.IO.Pipes.PipeAccessRights.Read" />
 
@@ -1171,8 +1369,12 @@
 
             
 
+            
+
              value or the <see
              cref="F:System.IO.Pipes.PipeAccessRights.Write" />
+
+            
 
             
 
@@ -1191,11 +1393,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1235,8 +1441,12 @@
 
             
 
+            
+
              method removes either all matching <see
              cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+
+            
 
             
 
@@ -1249,8 +1459,12 @@
 
             
 
+            
+
              audit rules from the current <see
              cref="T:System.IO.Pipes.PipeSecurity" />
+
+            
 
             
 
@@ -1263,8 +1477,12 @@
 
             
 
+            
+
              audit rules for a user by passing a <see
              cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+
+            
 
             
 
@@ -1277,8 +1495,12 @@
 
             
 
+            
+
              value, the <see
              cref="F:System.Security.AccessControl.AuditFlags.Failure" />
+
+            
 
             
 
@@ -1291,6 +1513,8 @@
 
             
 
+            
+
              method removes any deny rules that specify the <see
              cref="F:System.Security.AccessControl.AuditFlags.Failure" />
 
@@ -1298,8 +1522,12 @@
 
             
 
+            
+
              value or the <see
              cref="F:System.Security.AccessControl.AuditFlags.Success" />
+
+            
 
             
 
@@ -1318,6 +1546,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1327,6 +1557,8 @@
         </returns>
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1366,8 +1598,12 @@
 
             
 
+            
+
              method removes all audit rules for the specified user.  It ignores all values in the <see
              cref="T:System.IO.Pipes.PipeAuditRule" />
+
+            
 
             
 
@@ -1386,11 +1622,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1430,8 +1670,12 @@
 
             
 
+            
+
              method removes the specified matching <see
              cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+
+            
 
             
 
@@ -1444,8 +1688,12 @@
 
             
 
+            
+
              audit rule from the current <see
              cref="T:System.IO.Pipes.PipeSecurity" />
+
+            
 
             
 
@@ -1458,8 +1706,12 @@
 
             
 
+            
+
              audit rule for a user by passing a <see
              cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+
+            
 
             
 
@@ -1472,8 +1724,12 @@
 
             
 
+            
+
              value, the <see
              cref="F:System.Security.AccessControl.AuditFlags.Failure" />
+
+            
 
             
 
@@ -1486,6 +1742,8 @@
 
             
 
+            
+
              method removes only a deny rule that specifies the <see
              cref="F:System.Security.AccessControl.AuditFlags.Failure" />
 
@@ -1493,8 +1751,12 @@
 
             
 
+            
+
              value.  It does not remove any deny rules that specify the <see
              cref="F:System.Security.AccessControl.AuditFlags.Success" />
+
+            
 
             
 
@@ -1513,11 +1775,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1557,8 +1823,12 @@
 
             
 
+            
+
              method adds the specified access control list (ACL) rule or overwrites any identical ACL rules that match the <paramref
              name="rule" />
+
+            
 
             
 
@@ -1571,8 +1841,12 @@
 
             
 
+            
+
              parameter specifies a <see
              cref="F:System.IO.Pipes.PipeAccessRights.Read" />
+
+            
 
             
 
@@ -1585,8 +1859,12 @@
 
             
 
+            
+
              method finds an identical ACL rule that specifies the <see
              cref="F:System.IO.Pipes.PipeAccessRights.Read" />
+
+            
 
             
 
@@ -1599,8 +1877,12 @@
 
             
 
+            
+
              method finds an identical ACL rule that specifies the <see
              cref="F:System.IO.Pipes.PipeAccessRights.Write" />
+
+            
 
             
 
@@ -1619,11 +1901,15 @@
 
             
 
+            
+
              object and then adds the specified access rule.</para
           >
         </summary>
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1663,8 +1949,12 @@
 
             
 
+            
+
              method adds the specified access control list (ACL) rule or overwrites any identical ACL rules that match the <see
              cref="T:System.IO.Pipes.PipeAccessRights" />
+
+            
 
             
 
@@ -1677,8 +1967,12 @@
 
             
 
+            
+
              parameter.  For example, if the <paramref
              name="rule" />
+
+            
 
             
 
@@ -1691,8 +1985,12 @@
 
             
 
+            
+
              value and the <see
              cref="M:System.IO.Pipes.PipeSecurity.SetAccessRule(System.IO.Pipes.PipeAccessRule)" />
+
+            
 
             
 
@@ -1705,6 +2003,8 @@
 
             
 
+            
+
              value, the identical rule will be overwritten.  If the <see
              cref="M:System.IO.Pipes.PipeSecurity.SetAccessRule(System.IO.Pipes.PipeAccessRule)" />
 
@@ -1712,8 +2012,12 @@
 
             
 
+            
+
              method finds an identical ACL rule that specifies the <see
              cref="F:System.IO.Pipes.PipeAccessRights.Write" />
+
+            
 
             
 
@@ -1732,11 +2036,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1776,8 +2084,12 @@
 
             
 
+            
+
              method adds the specified audit rule or overwrites any identical audit rules that match the <see
              cref="T:System.IO.Pipes.PipeAccessRights" />
+
+            
 
             
 
@@ -1790,8 +2102,12 @@
 
             
 
+            
+
              parameter.  For example, if the <paramref
              name="rule" />
+
+            
 
             
 
@@ -1804,8 +2120,12 @@
 
             
 
+            
+
              value and the <see
              cref="M:System.IO.Pipes.PipeSecurity.SetAuditRule(System.IO.Pipes.PipeAuditRule)" />
+
+            
 
             
 
@@ -1818,6 +2138,8 @@
 
             
 
+            
+
              value, the identical rule will be overwritten.  If the <see
              cref="M:System.IO.Pipes.PipeSecurity.SetAuditRule(System.IO.Pipes.PipeAuditRule)" />
 
@@ -1825,8 +2147,12 @@
 
             
 
+            
+
              method finds an identical audit rule that specifies the <see
              cref="F:System.IO.Pipes.PipeAccessRights.Write" />
+
+            
 
             
 
@@ -1845,11 +2171,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

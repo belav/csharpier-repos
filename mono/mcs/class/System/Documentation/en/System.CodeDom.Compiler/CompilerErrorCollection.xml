@@ -33,8 +33,12 @@
 
         
 
+        
+
          class provides a simple collection object that can be used to store a set of <see
          cref="T:System.CodeDom.Compiler.CompilerError" />
+
+        
 
         
 
@@ -51,10 +55,14 @@
 
           
 
+          
+
            is thrown when the derived class does not have full-trust permission. For details about inheritance demands, see  <format
            type="text/html">
             <a href="28b9adbb-8f08-4f10-b856-dbf59eb932d9">Inheritance Demands</a>
           </format>
+
+          
 
           
 
@@ -69,6 +77,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.CodeDom.Compiler.CompilerError" />
+
+        
 
         
 
@@ -100,6 +110,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.Compiler.CompilerErrorCollection" />
+
+            
 
             
 
@@ -141,8 +153,12 @@
 
             
 
+            
+
              that contains the specified array of <see
              cref="T:System.CodeDom.Compiler.CompilerError" />
+
+            
 
             
 
@@ -158,8 +174,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.CodeDom.Compiler.CompilerError" />
+
+          
 
           
 
@@ -200,8 +220,12 @@
 
             
 
+            
+
              class that contains the contents of the specified <see
              cref="T:System.CodeDom.Compiler.CompilerErrorCollection" />
+
+            
 
             
 
@@ -217,8 +241,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.CompilerErrorCollection" />
+
+          
 
           
 
@@ -261,6 +289,8 @@
 
             
 
+            
+
              object to the error collection.</para
           >
         </summary>
@@ -275,8 +305,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.Compiler.CompilerError" />
+
+          
 
           
 
@@ -320,8 +354,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.CodeDom.Compiler.CompilerError" />
+
+          
 
           
 
@@ -365,8 +403,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.CompilerErrorCollection" />
+
+          
 
           
 
@@ -409,6 +451,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -417,6 +461,8 @@
           <para
             >true if the <see
              cref="T:System.CodeDom.Compiler.CompilerError" />
+
+            
 
             
 
@@ -432,8 +478,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.Compiler.CompilerError" />
+
+          
 
           
 
@@ -477,11 +527,15 @@
 
             
 
+            
+
              instance at the specified index.</para
           >
         </summary>
         <param name="array">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -494,8 +548,12 @@
 
           
 
+          
+
            that is the destination of the values copied from <see
            cref="T:System.CodeDom.Compiler.CompilerErrorCollection" />
+
+          
 
           
 
@@ -505,6 +563,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -589,6 +649,8 @@
 
             
 
+            
+
              object in the collection, if it exists in the collection.</para
           >
         </summary>
@@ -602,8 +664,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.CodeDom.Compiler.CompilerErrorCollection" />
+
+            
 
             
 
@@ -619,8 +685,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.Compiler.CompilerError" />
+
+          
 
           
 
@@ -664,11 +734,15 @@
 
             
 
+            
+
              into the collection at the specified index.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -683,8 +757,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.Compiler.CompilerError" />
+
+          
 
           
 
@@ -755,11 +833,15 @@
 
             
 
+            
+
              from the collection.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -772,8 +854,12 @@
 
           
 
+          
+
            to remove from the <see
            cref="T:System.CodeDom.Compiler.CompilerErrorCollection" />
+
+          
 
           
 

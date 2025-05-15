@@ -28,8 +28,12 @@
 
         
 
+        
+
          modifies the markup or behavior of a <see
          cref="T:System.Web.UI.WebControls.Menu" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          objects in the <see
          cref="T:System.Web.UI.WebControls.Menu" />
+
+        
 
         
 
@@ -59,8 +67,12 @@
 
         
 
+        
+
          class maintains state by implementing the <see
          cref="T:System.Web.UI.IPostBackEventHandler" />
+
+        
 
         
 
@@ -73,8 +85,12 @@
 
         
 
+        
+
          class to further customize rendering or behavior of the <see
          cref="T:System.Web.UI.WebControls.Menu" />
+
+        
 
         
 
@@ -85,6 +101,8 @@
       <para
         >The initial request for an adapter causes the .NET Framework to search for a mapped adapter for the control, given the characteristics of the requesting browser. The <see
          cref="T:System.Web.HttpBrowserCapabilities" />
+
+        
 
         
 
@@ -104,6 +122,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -112,6 +132,8 @@
       <para
         >Provides the means to modify the behavior of the <see
          cref="T:System.Web.UI.WebControls.Menu" />
+
+        
 
         
 
@@ -138,6 +160,8 @@
 
             
 
+            
+
              property. </para
           >
         </remarks>
@@ -146,6 +170,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.Adapters.MenuAdapter" />
+
+            
 
             
 
@@ -181,6 +207,8 @@
 
             
 
+            
+
              property provides a way to reference the adapter's corresponding control. When an adapter is associated with a particular control, the .NET Framework will call the life-cycle methods of the adapter in place of or in addition to the life-cycle methods of the control.</para
           >
         </remarks>
@@ -194,8 +222,12 @@
 
             
 
+            
+
              control associated with this <see
              cref="T:System.Web.UI.WebControls.Adapters.MenuAdapter" />
+
+            
 
             
 
@@ -235,8 +267,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.SaveAdapterControlState" />
+
+            
 
             
 
@@ -249,8 +285,12 @@
 
             
 
+            
+
              class, where the displayed menu hierarchy is dependent on the previously selected <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -263,8 +303,12 @@
 
             
 
+            
+
              provides a dictionary of name/value pairs containing the path of the selected item in the menu's hierarchy. The <paramref
              name="state" />
+
+            
 
             
 
@@ -277,8 +321,12 @@
 
             
 
+            
+
              object saved by the <see
              cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.SaveAdapterControlState" />
+
+            
 
             
 
@@ -298,6 +346,8 @@
 
             
 
+            
+
              method during a previous request to the page.</para
           >
         </summary>
@@ -308,8 +358,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -342,8 +396,12 @@
 
             
 
+            
+
              method registers the associated control as one that requires control state. By default, the .NET Framework calls the Web server control's own <see
              cref="M:System.Web.UI.Control.OnInit(System.EventArgs)" />
+
+            
 
             
 
@@ -356,8 +414,12 @@
 
             
 
+            
+
              property of the server control is set, the .NET Framework will call the adapter's implementation of the <see
              cref="M:System.Web.UI.Control.OnInit(System.EventArgs)" />
+
+            
 
             
 
@@ -373,12 +435,16 @@
 
             
 
+            
+
              method to initialize settings in the control. During a postback, this is an important phase for managing interaction with existing view-state data. For more information, see <format
              type="text/html">
               <a href="4ff05ae9-4109-4352-929e-ad893895dbff"
                 >Architectural Overview of Adaptive Control Behavior</a
               >
             </format>
+
+            
 
             
 
@@ -397,6 +463,8 @@
 
             
 
+            
+
              control as one that requires control state.</para
           >
         </summary>
@@ -407,8 +475,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -441,8 +513,12 @@
 
             
 
+            
+
              method calls an internal OnPreRender method in the <see
              cref="T:System.Web.UI.WebControls.Menu" />
+
+            
 
             
 
@@ -458,8 +534,12 @@
 
             
 
+            
+
              control's <see
              cref="M:System.Web.UI.WebControls.Menu.OnPreRender(System.EventArgs)" />
+
+            
 
             
 
@@ -472,8 +552,12 @@
 
             
 
+            
+
              property of that control is set, the .NET Framework will call the adapter's implementation of the <see
              cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.OnPreRender(System.EventArgs)" />
+
+            
 
             
 
@@ -489,8 +573,12 @@
 
             
 
+            
+
              method to finalize any settings in the control. Changes made to control properties in this phase will be saved to view state, but changes made in the <see
              cref="M:System.Web.UI.WebControls.Adapters.WebControlAdapter.Render(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -502,6 +590,8 @@
                 >Architectural Overview of Adaptive Control Behavior</a
               >
             </format>
+
+            
 
             
 
@@ -520,8 +610,12 @@
 
             
 
+            
+
              method for the associated <see
              cref="T:System.Web.UI.WebControls.Menu" />
+
+            
 
             
 
@@ -537,8 +631,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -572,6 +670,8 @@
 
             
 
+            
+
              method is called when the <see
              cref="M:System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System.String)" />
 
@@ -579,8 +679,12 @@
 
             
 
+            
+
              event is raised, and is used to maintain the navigation path of the menu. The <paramref
              name="eventArgument" />
+
+            
 
             
 
@@ -596,8 +700,12 @@
 
             
 
+            
+
              to the associated control's <see
              cref="M:System.Web.UI.WebControls.Menu.RaisePostBackEvent(System.String)" />
+
+            
 
             
 
@@ -610,6 +718,8 @@
 
             
 
+            
+
              control also renders the markup element that causes the postback to occur. If the control renders client-side script for postback, the argument from the script is passed in the <paramref
              name="eventArgument" />
 
@@ -617,8 +727,12 @@
 
             
 
+            
+
              parameter. If the postback is caused by a simple submit, <paramref
              name="eventArgument" />
+
+            
 
             
 
@@ -638,8 +752,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -676,8 +794,12 @@
 
             
 
+            
+
              method adds tag attributes and writes the markup for the opening tag of the control to the output stream emitted to the response stream for the client browser. The <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -690,8 +812,12 @@
 
             
 
+            
+
              method and the control will be closed with a call to the subsequent <see
              cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderEndTag(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -707,6 +833,8 @@
 
             
 
+            
+
              when you want to implement custom behavior. For example, override the method to write multiple tags to the response stream before any control content, such as &lt;table&gt;&lt;tr&gt;&lt;td&gt;. Use the <see
              cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderBeginTag(System.Web.UI.HtmlTextWriter)" />
 
@@ -714,8 +842,12 @@
 
             
 
+            
+
              method in conjunction with the <see
              cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderEndTag(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -735,8 +867,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -773,8 +909,12 @@
 
             
 
+            
+
              method writes the <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -787,8 +927,12 @@
 
             
 
+            
+
              control to the output stream as hyperlinks. The <see
              cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderContents(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -801,11 +945,15 @@
 
             
 
+            
+
              method and is used to perform modifications to the markup code that is rendered to a device browser.</para
           >
           <para
             >Control properties should be set prior to this phase of the life cycle, and only the actual markup creation for the control done here. Changes made to the control in this stage of the life cycle are not saved to view state. For saving changes made to the control, override the <see
              cref="M:System.Web.UI.Control.OnPreRender(System.EventArgs)" />
+
+            
 
             
 
@@ -824,6 +972,8 @@
 
             
 
+            
+
              control to the output stream as a series of hyperlinks.</para
           >
         </summary>
@@ -834,8 +984,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -872,8 +1026,12 @@
 
             
 
+            
+
              method writes the markup for the closing tag of the control to the output stream emitted to the response stream for the client browser. The attributes, style attributes, and opening tag are rendered in the <see
              cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderBeginTag(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -886,8 +1044,12 @@
 
             
 
+            
+
              objects are rendered individually in the <see
              cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderContents(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -903,6 +1065,8 @@
 
             
 
+            
+
              when you want to implement custom behavior. For example, override the method to write multiple closing tags to the response stream after any control content, such as &lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;. Use the <see
              cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderEndTag(System.Web.UI.HtmlTextWriter)" />
 
@@ -910,8 +1074,12 @@
 
             
 
+            
+
              method in conjunction with the <see
              cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderBeginTag(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -931,8 +1099,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -973,8 +1145,12 @@
 
             
 
+            
+
              method is called from the <see
              cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderContents(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -987,8 +1163,12 @@
 
             
 
+            
+
              object and apply them to a newly created hyperlink element. The menu hierarchy is traversed in the <see
              cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.RenderContents(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -1001,8 +1181,12 @@
 
             
 
+            
+
              method to render each item. Each item is rendered as a hyperlink and inherits the properties and styles of the specified <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -1023,8 +1207,12 @@
 
                 
 
+                
+
                  property of the <see
                  cref="T:System.Web.UI.WebControls.MenuItem" />
+
+                
 
                 
 
@@ -1046,8 +1234,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -1062,8 +1254,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.MenuItem" />
+
+          
 
           
 
@@ -1078,8 +1274,12 @@
 
           
 
+          
+
           The position of the specified <see
            cref="T:System.Web.UI.WebControls.MenuItem" />
+
+          
 
           
 
@@ -1113,8 +1313,12 @@
 
             
 
+            
+
              method uses the <see
              cref="T:System.Web.UI.WebControls.Menu" />
+
+            
 
             
 
@@ -1127,6 +1331,8 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.SaveAdapterControlState" />
 
@@ -1134,8 +1340,12 @@
 
             
 
+            
+
              methods. An adapter might maintain private control state when there are complex features that need to maintain state across requests, separate from the associated control's state. The adapter needs to register for control state during the <see
              cref="M:System.Web.UI.WebControls.Adapters.MenuAdapter.OnInit(System.EventArgs)" />
+
+            
 
             
 
@@ -1158,8 +1368,12 @@
 
             
 
+            
+
              that contains the adapter's control state information as a <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 
@@ -1196,8 +1410,12 @@
 
             
 
+            
+
              method enables the <see
              cref="T:System.Web.UI.WebControls.Adapters.MenuAdapter" />
+
+            
 
             
 
@@ -1210,8 +1428,12 @@
 
             
 
+            
+
              to the <see
              cref="M:System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System.String)" />
+
+            
 
             
 
@@ -1230,6 +1452,8 @@
 
             
 
+            
+
              class to process an event raised when a page is posted back to the server.</para
           >
         </summary>
@@ -1240,8 +1464,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 

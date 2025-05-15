@@ -88,8 +88,12 @@
 
         
 
+        
+
          class displays a text box control and a browse button that enable users to select a file on the client and upload it to the Web server. The user specifies the file to upload by entering the full path of the file on the local computer (for example, <userInputLocalizable
         >C:\MyFiles\TestFile.txt</userInputLocalizable>
+
+        
 
         
 
@@ -102,8 +106,12 @@
 
         
 
+        
+
          button, and then locating it in the <ui
         >Choose File</ui>
+
+        
 
         
 
@@ -119,8 +127,12 @@
 
         
 
+        
+
          property to get the name of a file on a client to upload by using the <see
          cref="T:System.Web.UI.WebControls.FileUpload" />
+
+        
 
         
 
@@ -136,8 +148,12 @@
 
         
 
+        
+
          property gets a <see
          cref="T:System.IO.Stream" />
+
+        
 
         
 
@@ -150,6 +166,8 @@
 
         
 
+        
+
          object that is returned by the <see
          cref="P:System.Web.UI.WebControls.FileUpload.FileContent" />
 
@@ -157,8 +175,12 @@
 
         
 
+        
+
          property to read the contents of the file as bytes and store them in a byte array. Alternatively, you can use the <see
          cref="P:System.Web.UI.WebControls.FileUpload.FileBytes" />
+
+        
 
         
 
@@ -174,8 +196,12 @@
 
         
 
+        
+
          property gets the underlying <see
          cref="T:System.Web.HttpPostedFile" />
+
+        
 
         
 
@@ -188,8 +214,12 @@
 
         
 
+        
+
          property gets the length of the file. The <see
          cref="P:System.Web.HttpPostedFile.ContentType" />
+
+        
 
         
 
@@ -202,8 +232,12 @@
 
         
 
+        
+
          property to access the <see
          cref="P:System.Web.HttpPostedFile.FileName" />
+
+        
 
         
 
@@ -216,8 +250,12 @@
 
         
 
+        
+
          property, and the <see
          cref="M:System.Web.HttpPostedFile.SaveAs(System.String)" />
+
+        
 
         
 
@@ -230,6 +268,8 @@
 
         
 
+        
+
          property, the <see
          cref="P:System.Web.UI.WebControls.FileUpload.FileContent" />
 
@@ -237,8 +277,12 @@
 
         
 
+        
+
          property, and the <see
          cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
+
+        
 
         
 
@@ -260,6 +304,8 @@
 
         
 
+        
+
          control does not automatically save a file to the server after the user selects the file to upload. You must explicitly provide a control or mechanism to allow the user to submit the specified file. For example, you can provide a button that the user clicks to upload the file. The code that you write to save the specified file should call the <see
          cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
 
@@ -267,8 +313,12 @@
 
         
 
+        
+
          method, which saves the contents of a file to a specified path on the server. Typically, the <see
          cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
+
+        
 
         
 
@@ -284,8 +334,12 @@
 
         
 
+        
+
          method to save the file to the server, use the <see
          cref="P:System.Web.UI.WebControls.FileUpload.HasFile" />
+
+        
 
         
 
@@ -298,8 +352,12 @@
 
         
 
+        
+
          control contains a file. If the <see
          cref="P:System.Web.UI.WebControls.FileUpload.HasFile" />
+
+        
 
         
 
@@ -312,8 +370,12 @@
 
         
 
+        
+
          method. If it returns false, display a message to the user indicating that the control does not contain a file. Do not check the <see
          cref="P:System.Web.UI.WebControls.FileUpload.PostedFile" />
+
+        
 
         
 
@@ -326,8 +388,12 @@
 
         
 
+        
+
          control is blank, the <see
          cref="P:System.Web.UI.WebControls.FileUpload.PostedFile" />
+
+        
 
         
 
@@ -349,11 +415,15 @@
 
         
 
+        
+
          method, you must specify the full path of the directory in which to save the uploaded file. If you do not explicitly specify a path in your application code, an exception is thrown when a user attempts to upload a file. This behavior helps keep the files on the server secure by preventing users from being able to write to arbitrary locations in your application's directory structure, as well as preventing access to sensitive root directories.</para
       >
       <para
         >The <see
          cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
+
+        
 
         
 
@@ -366,8 +436,12 @@
 
         
 
+        
+
          object with the trust level set to the <see
          cref="F:System.Web.AspNetHostingPermissionLevel.Medium" />
+
+        
 
         
 
@@ -384,10 +458,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="F897C794-10D3-414C-86B7-59B66564BBF1">ASP.NET Trust Levels and Policy Files</a>
         </format>
+
+        
 
         
 
@@ -409,10 +487,14 @@
 
         
 
+        
+
          control. You should set a size limit that is appropriate for the types of files that you expect to be uploaded. The default size limit is 4096 kilobytes (KB), or 4 megabytes (MB). You can allow larger files to be uploaded by setting the maxRequestLength attribute of the <format
          type="text/html">
           <a href="E9B81350-8AAF-47CC-9843-5F7D0C59F369">httpRuntime</a>
         </format>
+
+        
 
         
 
@@ -424,6 +506,8 @@
             >location Element (ASP.NET Settings Schema)</a
           >
         </format>
+
+        
 
         
 
@@ -443,6 +527,8 @@
 
         
 
+        
+
          of element the Web.config file for the application. The memoryLimit attribute specifies the maximum amount of memory that a worker process can use. If the worker process exceeds the memoryLimit amount, a new process is created to replace it, and all current requests are reassigned to the new process.</para
       >
       <para
@@ -450,6 +536,8 @@
          type="text/html">
           <a href="E9B81350-8AAF-47CC-9843-5F7D0C59F369">httpRuntime</a>
         </format>
+
+        
 
         
 
@@ -471,8 +559,12 @@
 
         
 
+        
+
          control is designed to be used only in postback scenarios and not in asynchronous postback scenarios during partial-page rendering. When you use a <see
          cref="T:System.Web.UI.WebControls.FileUpload" />
+
+        
 
         
 
@@ -485,6 +577,8 @@
 
         
 
+        
+
          control, the file must be uploaded by using a control that is a <see
          cref="T:System.Web.UI.PostBackTrigger" />
 
@@ -492,8 +586,12 @@
 
         
 
+        
+
          object for the panel. <see
          cref="T:System.Web.UI.UpdatePanel" />
+
+        
 
         
 
@@ -508,10 +606,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="5c12736d-d9e9-464a-9388-3fe0f9f49e49">Partial-Page Rendering Overview</a>
         </format>
+
+        
 
         
 
@@ -537,12 +639,16 @@
 
         
 
+        
+
         |None|Dotted|Dashed|Solid|Double|Groove|Ridge|
         Inset|Outset"
     BorderWidth="size"
     CssClass="string"
     Enabled="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -556,9 +662,13 @@
 
         
 
+        
+
         |False"
     EnableViewState="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -572,9 +682,13 @@
 
         
 
+        
+
         "
     Font-Italic="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -584,6 +698,8 @@
     Font-Names="string"
     Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -599,9 +715,13 @@
 
         
 
+        
+
         "
     Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -624,6 +744,8 @@
     ToolTip="string"
     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -656,6 +778,8 @@
 
             
 
+            
+
              constructor to initialize a new instance of the <see
              cref="T:System.Web.UI.WebControls.FileUpload" />
 
@@ -663,8 +787,12 @@
 
             
 
+            
+
              class. The <see
              cref="T:System.Web.UI.WebControls.FileUpload" />
+
+            
 
             
 
@@ -678,6 +806,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.FileUpload" />
+
+            
 
             
 
@@ -715,8 +845,12 @@
 
             
 
+            
+
              method is primarily used by control developers to insert the appropriate attributes and styles to the <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -729,6 +863,8 @@
 
             
 
+            
+
              control. The <see
              cref="M:System.Web.UI.WebControls.FileUpload.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
 
@@ -736,8 +872,12 @@
 
             
 
+            
+
              method overrides the <see
              cref="M:System.Web.UI.WebControls.WebControl.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -756,8 +896,12 @@
 
             
 
+            
+
              control to render to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -773,8 +917,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -817,8 +965,12 @@
 
             
 
+            
+
              control does not automatically read the file from the client. You must explicitly provide a control or mechanism to allow the user to submit the specified file. For example, you can provide a button that the user can click to upload the file. The code that you write to save the specified file could call the <see
              cref="P:System.Web.UI.WebControls.FileUpload.FileBytes" />
+
+            
 
             
 
@@ -834,8 +986,12 @@
 
             
 
+            
+
              property, you should use the <see
              cref="P:System.Web.UI.WebControls.FileUpload.HasFile" />
+
+            
 
             
 
@@ -848,8 +1004,12 @@
 
             
 
+            
+
              control contains a file to upload. If the <see
              cref="P:System.Web.UI.WebControls.FileUpload.HasFile" />
+
+            
 
             
 
@@ -862,8 +1022,12 @@
 
             
 
+            
+
              property. If it returns false, display a message to the user indicating that the control does not contain a file. If you do not provide error-handling code to verify that a file exists, an attempt to save a nonexistent file throws an <see
              cref="T:System.Web.HttpException" />
+
+            
 
             
 
@@ -877,6 +1041,8 @@
           <para
             >Gets an array of the bytes in a file that is specified by using a <see
              cref="T:System.Web.UI.WebControls.FileUpload" />
+
+            
 
             
 
@@ -917,8 +1083,12 @@
 
             
 
+            
+
              property gets a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -931,6 +1101,8 @@
 
             
 
+            
+
              control. Use the <see
              cref="P:System.Web.UI.WebControls.FileUpload.FileContent" />
 
@@ -938,8 +1110,12 @@
 
             
 
+            
+
              property to access the contents of the file. For example, you can use the <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -958,8 +1134,12 @@
 
             
 
+            
+
              object that points to a file to upload using the <see
              cref="T:System.Web.UI.WebControls.FileUpload" />
+
+            
 
             
 
@@ -1000,8 +1180,12 @@
 
             
 
+            
+
              control. The file name that the <see
              cref="P:System.Web.UI.WebControls.FileUpload.FileName" />
+
+            
 
             
 
@@ -1015,6 +1199,8 @@
           <para
             >Gets the name of a file on a client to upload using the <see
              cref="T:System.Web.UI.WebControls.FileUpload" />
+
+            
 
             
 
@@ -1055,8 +1241,12 @@
 
             
 
+            
+
              property gets a value indicating whether the <see
              cref="T:System.Web.UI.WebControls.FileUpload" />
+
+            
 
             
 
@@ -1069,8 +1259,12 @@
 
             
 
+            
+
              method to save the file to disk, use the <see
              cref="P:System.Web.UI.WebControls.FileUpload.HasFile" />
+
+            
 
             
 
@@ -1083,8 +1277,12 @@
 
             
 
+            
+
              returns true, call the <see
              cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
+
+            
 
             
 
@@ -1098,6 +1296,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Web.UI.WebControls.FileUpload" />
+
+            
 
             
 
@@ -1134,8 +1334,12 @@
 
             
 
+            
+
              method notifies the <see
              cref="T:System.Web.UI.WebControls.FileUpload" />
+
+            
 
             
 
@@ -1154,8 +1358,12 @@
 
             
 
+            
+
              event for the <see
              cref="T:System.Web.UI.WebControls.FileUpload" />
+
+            
 
             
 
@@ -1171,8 +1379,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1209,6 +1421,8 @@
 
             
 
+            
+
              property gets the underlying <see
              cref="T:System.Web.HttpPostedFile" />
 
@@ -1216,8 +1430,12 @@
 
             
 
+            
+
              object for a file that is uploaded by using the <see
              cref="T:System.Web.UI.WebControls.FileUpload" />
+
+            
 
             
 
@@ -1233,8 +1451,12 @@
 
             
 
+            
+
              property to get the length of the file. You can use the <see
              cref="P:System.Web.HttpPostedFile.ContentType" />
+
+            
 
             
 
@@ -1247,8 +1469,12 @@
 
             
 
+            
+
              property to access the <see
              cref="P:System.Web.HttpPostedFile.FileName" />
+
+            
 
             
 
@@ -1261,8 +1487,12 @@
 
             
 
+            
+
              property, and the <see
              cref="M:System.Web.HttpPostedFile.SaveAs(System.String)" />
+
+            
 
             
 
@@ -1275,6 +1505,8 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Web.UI.WebControls.FileUpload.FileContent" />
 
@@ -1282,8 +1514,12 @@
 
             
 
+            
+
              property, and the <see
              cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
+
+            
 
             
 
@@ -1302,8 +1538,12 @@
 
             
 
+            
+
              object for a file that is uploaded by using the <see
              cref="T:System.Web.UI.WebControls.FileUpload" />
+
+            
 
             
 
@@ -1343,6 +1583,8 @@
 
             
 
+            
+
              method sends the <see
              cref="T:System.Web.UI.WebControls.FileUpload" />
 
@@ -1350,8 +1592,12 @@
 
             
 
+            
+
              control content to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -1370,8 +1616,12 @@
 
             
 
+            
+
              control content to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -1387,6 +1637,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
 
@@ -1394,8 +1646,12 @@
 
           
 
+          
+
            object that receives the <see
            cref="T:System.Web.UI.WebControls.FileUpload" />
+
+          
 
           
 
@@ -1426,11 +1682,15 @@
 
             
 
+            
+
              method saves the contents of an uploaded file to a specified path on the Web server.</para
           >
           <para
             >The <see
              cref="T:System.Web.UI.WebControls.FileUpload" />
+
+            
 
             
 
@@ -1443,8 +1703,12 @@
 
             
 
+            
+
              method, which saves the contents of a file to a specified path on the server. Typically, the <see
              cref="M:System.Web.UI.WebControls.FileUpload.SaveAs(System.String)" />
+
+            
 
             
 
@@ -1460,8 +1724,12 @@
 
             
 
+            
+
              method, you must specify the full path of the directory on the server in which to save the uploaded file. If you do not explicitly specify a path in your application code, an <see
              cref="T:System.Web.HttpException" />
+
+            
 
             
 
@@ -1477,8 +1745,12 @@
 
             
 
+            
+
              method, you should use the <see
              cref="P:System.Web.UI.WebControls.FileUpload.HasFile" />
+
+            
 
             
 
@@ -1491,8 +1763,12 @@
 
             
 
+            
+
              control contains a file to upload. If the <see
              cref="P:System.Web.UI.WebControls.FileUpload.HasFile" />
+
+            
 
             
 
@@ -1505,8 +1781,12 @@
 
             
 
+            
+
              method. If it returns false, display a message to the user indicating that the control does not contain a file. If you do not provide error-handling code to verify that a file exists, an attempt to save a nonexistent file throws an <see
              cref="T:System.Web.HttpException" />
+
+            
 
             
 
@@ -1522,6 +1802,8 @@
 
             
 
+            
+
              to work, the ASP.NET application must have write access to the directory on the server. There are two ways that the application can get write access. You can explicitly grant write access to the account under which the application is running, in the directory in which the uploaded files will be saved. Alternatively, you can increase the level of trust that is granted to the ASP.NET application. To get write access to the executing directory for the application, the application must be granted the <see
              cref="T:System.Web.AspNetHostingPermission" />
 
@@ -1529,8 +1811,12 @@
 
             
 
+            
+
              object with the trust level set to the <see
              cref="F:System.Web.AspNetHostingPermissionLevel.Medium" />
+
+            
 
             
 
@@ -1547,12 +1833,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="F897C794-10D3-414C-86B7-59B66564BBF1"
                 >ASP.NET Trust Levels and Policy Files</a
               >
             </format>
+
+            
 
             
 
@@ -1567,6 +1857,8 @@
         </summary>
         <param name="filename">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

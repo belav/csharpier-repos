@@ -34,6 +34,8 @@
 
         
 
+        
+
          interface to specify whether the designer loader can continue loading when errors occur during deserialization. </para
       >
     </remarks>
@@ -42,6 +44,8 @@
       <para
         >Provides an interface that extends <see
          cref="T:System.ComponentModel.Design.Serialization.IDesignerLoaderHost" />
+
+        
 
         
 
@@ -96,8 +100,12 @@
 
             
 
+            
+
              property can only be set to true if <see
              cref="P:System.ComponentModel.Design.Serialization.IDesignerLoaderHost2.CanReloadWithErrors" />
+
+            
 
             
 
@@ -110,8 +118,12 @@
 
             
 
+            
+
              is false, the value of <see
              cref="P:System.ComponentModel.Design.Serialization.IDesignerLoaderHost2.IgnoreErrorsDuringReload" />
+
+            
 
             
 
@@ -125,6 +137,8 @@
           <para
             >Gets or sets a value indicating whether errors should be ignored when <see
              cref="M:System.ComponentModel.Design.Serialization.IDesignerLoaderHost.Reload" />
+
+            
 
             
 

@@ -30,6 +30,8 @@
 
         
 
+        
+
          class defines the name of a CMS/PKCS #7 message.</para
       >
     </summary>
@@ -60,8 +62,12 @@
 
             
 
+            
+
              constructor creates an instance of the <see
              cref="T:System.Security.Cryptography.Pkcs.Pkcs9DocumentName" />
+
+            
 
             
 
@@ -102,8 +108,12 @@
 
             
 
+            
+
              constructor creates an instance of the <see
              cref="T:System.Security.Cryptography.Pkcs.Pkcs9DocumentName" />
+
+            
 
             
 
@@ -114,6 +124,8 @@
         </summary>
         <param name="encodedDocumentName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -150,8 +162,12 @@
 
             
 
+            
+
              constructor creates an instance of the  <see
              cref="T:System.Security.Cryptography.Pkcs.Pkcs9DocumentName" />
+
+            
 
             
 
@@ -167,8 +183,12 @@
 
           
 
+          
+
           A  <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -210,8 +230,12 @@
 
             
 
+            
+
              object with the specified <see
              cref="T:System.Security.Cryptography.AsnEncodedData" />
+
+            
 
             
 
@@ -230,6 +254,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -240,8 +266,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.AsnEncodedData" />
+
+          
 
           
 
@@ -271,6 +301,8 @@
           <para
             >The <see
              cref="P:System.Security.Cryptography.Pkcs.Pkcs9DocumentName.DocumentName" />
+
+            
 
             
 

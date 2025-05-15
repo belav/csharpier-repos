@@ -42,6 +42,8 @@
 
         
 
+        
+
          object. A key cannot be null, but a value can be. </para
       >
       <para
@@ -52,8 +54,12 @@
 
         
 
+        
+
          are not sorted by the key, unlike the elements of a <see
          cref="T:System.Collections.Generic.SortedDictionary`2" />
+
+        
 
         
 
@@ -69,8 +75,12 @@
 
         
 
+        
+
          collection is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see
          cref="T:System.Collections.DictionaryEntry" />
+
+        
 
         
 
@@ -111,8 +121,12 @@
 
             
 
+            
+
              collection must be unique. The default comparer is the key's implementation of <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -126,6 +140,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -165,8 +181,12 @@
 
             
 
+            
+
              collection must be unique. The default comparer is the key's implementation of <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -186,6 +206,8 @@
 
             
 
+            
+
              class using the specified comparer.</para
           >
         </summary>
@@ -196,8 +218,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IComparer" />
+
+          
 
           
 
@@ -233,8 +259,12 @@
 
             
 
+            
+
              collection must be unique. The default comparer is the key's implementation of <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -253,6 +283,8 @@
 
             
 
+            
+
              class using the specified initial capacity.</para
           >
         </summary>
@@ -263,8 +295,12 @@
 
           
 
+          
+
           The initial number of elements that the <see
            cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+          
 
           
 
@@ -304,8 +340,12 @@
 
             
 
+            
+
              collection must be unique. The default comparer is the key's implementation of <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -325,6 +365,8 @@
 
             
 
+            
+
              class using the specified initial capacity and comparer.</para
           >
         </summary>
@@ -335,8 +377,12 @@
 
           
 
+          
+
           The initial number of elements that the <see
            cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+          
 
           
 
@@ -351,8 +397,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IComparer" />
+
+          
 
           
 
@@ -392,8 +442,12 @@
 
             
 
+            
+
              collection must be unique. The default comparer is the key's implementation of <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -412,6 +466,8 @@
 
             
 
+            
+
              class that is serializable using the specified <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
@@ -419,8 +475,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -436,6 +496,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
@@ -443,8 +505,12 @@
 
           
 
+          
+
            object containing the information required to serialize the <see
            cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+          
 
           
 
@@ -459,6 +525,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
 
@@ -466,8 +534,12 @@
 
           
 
+          
+
            object containing the source and destination of the serialized stream associated with the <see
            cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+          
 
           
 
@@ -508,8 +580,12 @@
 
             
 
+            
+
              property to add new elements by setting the value of a key that does not exist in the <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -522,6 +598,8 @@
 
             
 
+            
+
             , setting the <see
              cref="P:System.Collections.Specialized.OrderedDictionary.Item(System.Object)" />
 
@@ -529,8 +607,12 @@
 
             
 
+            
+
              property overwrites the old value. In contrast, the <see
              cref="M:System.Collections.Specialized.OrderedDictionary.Add(System.Object,System.Object)" />
+
+            
 
             
 
@@ -549,6 +631,8 @@
 
             
 
+            
+
              collection with the lowest available index.</para
           >
         </summary>
@@ -559,10 +643,14 @@
 
           
 
+          
+
           The key of the entry to add.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -602,6 +690,8 @@
 
             
 
+            
+
              method creates a read-only wrapper around the current <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
 
@@ -609,8 +699,12 @@
 
             
 
+            
+
              collection. Changes made to the <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -629,6 +723,8 @@
 
             
 
+            
+
              collection.</para
           >
         </summary>
@@ -637,6 +733,8 @@
           <para
             >A read-only copy of the current <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -674,8 +772,12 @@
 
             
 
+            
+
              method, the <see
              cref="P:System.Collections.Specialized.OrderedDictionary.Count" />
+
+            
 
             
 
@@ -689,6 +791,8 @@
           <para
             >Removes all elements from the <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -728,6 +832,8 @@
 
             
 
+            
+
              property can return a null value if the key does not exist or if the key is null. Use the <see
              cref="M:System.Collections.Specialized.OrderedDictionary.Contains(System.Object)" />
 
@@ -735,8 +841,12 @@
 
             
 
+            
+
              method to determine if a specific key exists in the <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -752,8 +862,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -766,8 +880,12 @@
 
             
 
+            
+
              to determine whether <paramref
              name="item" />
+
+            
 
             
 
@@ -780,6 +898,8 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
 
@@ -787,8 +907,12 @@
 
             
 
+            
+
              methods of the <paramref
              name="item" />
+
+            
 
             
 
@@ -807,6 +931,8 @@
 
             
 
+            
+
              collection contains a specific key.</para
           >
         </summary>
@@ -815,6 +941,8 @@
           <para
             >true if the <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -830,8 +958,12 @@
 
           
 
+          
+
           The key to locate in the <see
            cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+          
 
           
 
@@ -871,8 +1003,12 @@
 
             
 
+            
+
              method is not guaranteed to preserve the order of the elements in the <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -891,8 +1027,12 @@
 
             
 
+            
+
              elements to a one-dimensional <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -908,8 +1048,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -922,6 +1066,8 @@
 
           
 
+          
+
            objects copied from <see
            cref="T:System.Collections.Specialized.OrderedDictionary" />
 
@@ -929,8 +1075,12 @@
 
           
 
+          
+
            collection. The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -945,8 +1095,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -976,6 +1130,8 @@
           <para
             >Gets the number of key/values pairs contained in the <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -1026,8 +1182,12 @@
 
             
 
+            
+
              object that iterates through the <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -1046,8 +1206,12 @@
 
             
 
+            
+
              object for the <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -1092,8 +1256,12 @@
 
             
 
+            
+
              interface and returns the data needed to serialize the <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -1109,6 +1277,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
@@ -1116,8 +1286,12 @@
 
           
 
+          
+
            object containing the information required to serialize the <see
            cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+          
 
           
 
@@ -1132,6 +1306,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
 
@@ -1139,8 +1315,12 @@
 
           
 
+          
+
            object containing the source and destination of the serialized stream associated with the <see
            cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+          
 
           
 
@@ -1184,8 +1364,12 @@
 
             
 
+            
+
              parameter is equal to the number of entries in the <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -1198,8 +1382,12 @@
 
             
 
+            
+
              and <paramref
              name="value" />
+
+            
 
             
 
@@ -1219,11 +1407,15 @@
 
             
 
+            
+
              collection with the specified key and value at the specified index.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1238,10 +1430,14 @@
 
           
 
+          
+
           The key of the entry to add.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1275,6 +1471,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -1356,8 +1554,12 @@
 
             
 
+            
+
              object is not a static copy; instead, the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1370,6 +1572,8 @@
 
             
 
+            
+
              collection. Therefore, changes to the <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
 
@@ -1377,8 +1581,12 @@
 
             
 
+            
+
              continue to be reflected in the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1397,8 +1605,12 @@
 
             
 
+            
+
              object containing the keys in the <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -1445,11 +1657,15 @@
 
             
 
+            
+
              interface and is called back by the deserialization event when deserialization is complete.</para
           >
         </summary>
         <param name="sender">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1489,8 +1705,12 @@
 
             
 
+            
+
              collection does not contain an entry with the specified key, the <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -1509,11 +1729,15 @@
 
             
 
+            
+
              collection.</para
           >
         </summary>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1556,11 +1780,15 @@
 
             
 
+            
+
              collection.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1595,6 +1823,8 @@
           <para
             >Gets a value indicating whether access to the <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -1635,6 +1865,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1665,6 +1897,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -1705,8 +1939,12 @@
 
             
 
+            
+
              object that iterates through the <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -1725,8 +1963,12 @@
 
             
 
+            
+
              object for the <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -1769,11 +2011,15 @@
 
             
 
+            
+
              interface and is called back by the deserialization event when deserialization is complete.</para
           >
         </summary>
         <param name="sender">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1813,8 +2059,12 @@
 
             
 
+            
+
              object is not a static copy; instead, the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1827,6 +2077,8 @@
 
             
 
+            
+
              collection. Therefore, changes to the <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
 
@@ -1834,8 +2086,12 @@
 
             
 
+            
+
              continue to be reflected in the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1854,8 +2110,12 @@
 
             
 
+            
+
              object containing the values in the <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 

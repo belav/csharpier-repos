@@ -34,10 +34,14 @@
 
         
 
+        
+
          base class and <format
          type="text/html">
           <a href="90373a3f-d8c8-492d-841c-945d62393c56">How to: Implement a Type Converter</a>
         </format>
+
+        
 
         
 
@@ -54,8 +58,12 @@
 
           
 
+          
+
           . Instead, call the <see
            cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+
+          
 
           
 
@@ -68,8 +76,12 @@
 
           
 
+          
+
           . For more information, see the examples in the <see
            cref="T:System.ComponentModel.TypeConverter" />
+
+          
 
           
 
@@ -106,6 +118,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.StringConverter" />
+
+            
 
             
 
@@ -149,6 +163,8 @@
 
             
 
+            
+
              parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
           >
         </remarks>
@@ -167,8 +183,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -183,8 +203,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -228,6 +252,8 @@
 
             
 
+            
+
              parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so you always need to check its value. In addition, properties on the context object can return null.</para
           >
         </remarks>
@@ -236,6 +262,8 @@
           <para
             >Converts the specified value object to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -254,6 +282,8 @@
 
             
 
+            
+
              that represents the converted value.</para
           >
         </returns>
@@ -264,8 +294,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -280,8 +314,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -296,8 +334,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 

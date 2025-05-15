@@ -40,8 +40,12 @@
 
         
 
+        
+
          class handles the complexity of asking the sinks in a channel sink chain for their properties. After the channel constructs its sink chain (if applicable), it must set the <see
          cref="F:System.Runtime.Remoting.Channels.BaseChannelWithProperties.SinksWithProperties" />
+
+        
 
         
 
@@ -57,6 +61,8 @@
 
         
 
+        
+
          is thrown when either the immediate caller or the derived class does not have infrastructure permission. For details about security demands, see <format
          type="text/html">
           <a href="A33FD5F9-2DE9-4653-A4F0-D9DF25082C4D">Link Demands</a>
@@ -66,10 +72,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="28B9ADBB-8F08-4F10-B856-DBF59EB932D9">Inheritance Demands</a>
         </format>
+
+        
 
         
 
@@ -110,6 +120,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -144,6 +156,8 @@
           <para
             >Gets a <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 

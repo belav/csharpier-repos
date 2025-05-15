@@ -28,6 +28,8 @@
 
         
 
+        
+
          interface includes synchronous and asynchronous variants of a <see
          cref="M:System.ServiceModel.Channels.IReplyChannel.ReceiveRequest" />
 
@@ -35,8 +37,12 @@
 
         
 
+        
+
          method return an <see
          cref="T:System.ServiceModel.Channels.RequestContext" />
+
+        
 
         
 
@@ -53,6 +59,8 @@
 
         
 
+        
+
          is not necessarily bound to a single sender. Other channels and channel interfaces provide correlation between the sender and the reply channel, but the base contract makes no such restriction. </para
       >
       <para
@@ -63,8 +71,12 @@
 
         
 
+        
+
          to receive messages. This model consists of calling <see
          cref="M:System.ServiceModel.Channels.IReplyChannel.ReceiveRequest" />
+
+        
 
         
 
@@ -110,6 +122,8 @@
 
             
 
+            
+
              method implements the standard pattern for invoking <see
              cref="M:System.ServiceModel.Channels.IReplyChannel.ReceiveRequest" />
 
@@ -117,8 +131,12 @@
 
             
 
+            
+
              asynchronously. The default timeout is 1 minute. If a receive timeout is set on the binding used to configure the connection, then that value is used. Use <see
              cref="M:System.ServiceModel.Channels.IReplyChannel.BeginReceiveRequest(System.TimeSpan,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -134,8 +152,12 @@
 
             
 
+            
+
              is thrown. The maximum message size is set by the <see
              cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" />
+
+            
 
             
 
@@ -158,11 +180,15 @@
 
             
 
+            
+
              that references the asynchronous reception of the request. </para
           >
         </returns>
         <param name="callback">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -175,10 +201,14 @@
 
           
 
+          
+
            delegate that receives the notification of the asynchronous receive that a request operation completes.</param
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -220,8 +250,12 @@
 
             
 
+            
+
              method implements the standard pattern for invoking <see
              cref="M:System.ServiceModel.Channels.IReplyChannel.ReceiveRequest(System.TimeSpan)" />
+
+            
 
             
 
@@ -237,8 +271,12 @@
 
             
 
+            
+
              is thrown. The maximum message size is set by the <see
              cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" />
+
+            
 
             
 
@@ -261,6 +299,8 @@
 
             
 
+            
+
              that references the asynchronous reception of the request. </para
           >
         </returns>
@@ -271,8 +311,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -287,8 +331,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -298,6 +346,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -339,8 +389,12 @@
 
             
 
+            
+
              method when you need the application processing to continue without waiting. Use one of the synchronous <see
              cref="M:System.ServiceModel.Channels.IReplyChannel.TryReceiveRequest(System.TimeSpan,System.ServiceModel.Channels.RequestContext@)" />
+
+            
 
             
 
@@ -364,6 +418,8 @@
 
             
 
+            
+
              that references the asynchronous receive request operation.</para
           >
         </returns>
@@ -374,8 +430,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -390,8 +450,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -401,6 +465,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -442,8 +508,12 @@
 
             
 
+            
+
              method when it is acceptable for the current thread to be blocked while it waits for a request message to arrive in the queue. The thread is blocked up to the specified <paramref
              name="timeout" />
+
+            
 
             
 
@@ -467,6 +537,8 @@
 
             
 
+            
+
              that references the asynchronous operation to wait for a request message to arrive.</para
           >
         </returns>
@@ -477,8 +549,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -493,8 +569,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -504,6 +584,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -543,8 +625,12 @@
 
             
 
+            
+
              is thrown. The maximum message size is set by the <see
              cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" />
+
+            
 
             
 
@@ -567,11 +653,15 @@
 
             
 
+            
+
              used to construct a reply to the request. </para
           >
         </returns>
         <param name="result">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -584,8 +674,12 @@
 
           
 
+          
+
            returned by a call to the <see
            cref="M:System.ServiceModel.Channels.IInputChannel.BeginReceive" />
+
+          
 
           
 
@@ -660,6 +754,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.IAsyncResult" />
 
@@ -667,8 +763,12 @@
 
           
 
+          
+
            that identifies the <see
            cref="M:System.ServiceModel.Channels.IReplyChannel.BeginWaitForRequest(System.TimeSpan,System.AsyncCallback,System.Object)" />
+
+          
 
           
 
@@ -730,6 +830,8 @@
 
             
 
+            
+
              encapsulates the request message and a mechanism for replying to that message. </para
           >
           <para>
@@ -739,8 +841,12 @@
 
             
 
+            
+
              can be called multiple times or concurrently. Only one <see
              cref="M:System.ServiceModel.Channels.IReplyChannel.ReceiveRequest" />
+
+            
 
             
 
@@ -756,8 +862,12 @@
 
             
 
+            
+
              is thrown. The maximum message size is set by the <see
              cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" />
+
+            
 
             
 
@@ -775,6 +885,8 @@
           <para
             >The <see
              cref="T:System.ServiceModel.Channels.RequestContext" />
+
+            
 
             
 
@@ -814,6 +926,8 @@
 
             
 
+            
+
              encapsulates the request message and a mechanism for replying to that message. </para
           >
           <para>
@@ -823,8 +937,12 @@
 
             
 
+            
+
              can be called multiple times or concurrently. Only one <see
              cref="M:System.ServiceModel.Channels.IReplyChannel.ReceiveRequest" />
+
+            
 
             
 
@@ -840,8 +958,12 @@
 
             
 
+            
+
              is thrown. The maximum message size is set by the <see
              cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" />
+
+            
 
             
 
@@ -864,6 +986,8 @@
 
             
 
+            
+
              used to construct replies. </para
           >
         </returns>
@@ -874,8 +998,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -944,11 +1072,15 @@
 
             
 
+            
+
              does not result in a request message being received or processed in any way.</para
           >
           <para
             >The <see
              cref="M:System.ServiceModel.Channels.IReplyChannel.BeginWaitForRequest(System.TimeSpan,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -961,8 +1093,12 @@
 
             
 
+            
+
              normally for this, the user must create the transaction, and then call <see
              cref="M:System.ServiceModel.Channels.IReplyChannel.ReceiveRequest" />
+
+            
 
             
 
@@ -978,8 +1114,12 @@
 
             
 
+            
+
              and specify the time out (even infinite), then when a message arrives they can open the transaction, call <see
              cref="M:System.ServiceModel.Channels.IReplyChannel.ReceiveRequest" />
+
+            
 
             
 
@@ -995,6 +1135,8 @@
 
             
 
+            
+
              when it is acceptable for the current thread to be blocked while it waits for a message to arrive in the queue. The thread is blocked up to the specified <paramref
              name="timeout" />
 
@@ -1002,8 +1144,12 @@
 
             
 
+            
+
             . If you need the application processing to continue without waiting, use the asynchronous <see
              cref="M:System.ServiceModel.Channels.IReplyChannel.BeginWaitForRequest(System.TimeSpan,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -1027,8 +1173,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 

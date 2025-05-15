@@ -23,8 +23,12 @@
 
         
 
+        
+
          enumeration represents the different border style options for a cell in a <see
          cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+        
 
         
 
@@ -37,6 +41,8 @@
 
         
 
+        
+
          class. The space for the border is taken from the <see
          cref="T:System.Windows.Forms.TableLayoutPanel" />
 
@@ -44,8 +50,12 @@
 
         
 
+        
+
          control's <see
          cref="P:System.Windows.Forms.Control.DisplayRectangle" />
+
+        
 
         
 

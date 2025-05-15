@@ -43,6 +43,8 @@
 
         
 
+        
+
          is the base class for <see
          cref="T:System.Runtime.Remoting.Channels.BaseChannelWithProperties" />
 
@@ -50,8 +52,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Runtime.Remoting.Channels.BaseChannelSinkWithProperties" />
+
+        
 
         
 
@@ -66,8 +72,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Runtime.Remoting.Channels.BaseChannelSinkWithProperties" />
+
+        
 
         
 
@@ -77,6 +87,8 @@
       >
       <para>
         <see cref="T:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties" />
+
+        
 
         
 
@@ -92,6 +104,8 @@
 
         
 
+        
+
          is thrown when either the immediate caller or the derived class does not have infrastructure permission. For details about security demands, see <format
          type="text/html">
           <a href="A33FD5F9-2DE9-4653-A4F0-D9DF25082C4D">Link Demands</a>
@@ -101,10 +115,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="28B9ADBB-8F08-4F10-B856-DBF59EB932D9">Inheritance Demands</a>
         </format>
+
+        
 
         
 
@@ -145,6 +163,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -180,8 +200,12 @@
 
             
 
+            
+
              is being used in this case, and because <see
              cref="P:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties.IsFixedSize" />
+
+            
 
             
 
@@ -200,11 +224,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -217,10 +245,14 @@
 
           
 
+          
+
            parameter. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -257,8 +289,12 @@
 
             
 
+            
+
              is being used in this case, and because <see
              cref="P:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties.IsFixedSize" />
+
+            
 
             
 
@@ -272,6 +308,8 @@
           <para
             >Throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -317,6 +355,8 @@
 
           
 
+          
+
           The key of the property to look for. </param
         >
       </Docs>
@@ -352,6 +392,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -362,10 +404,14 @@
 
           
 
+          
+
           The array to copy the properties to. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -427,6 +473,8 @@
 
             
 
+            
+
              that enumerates over all the properties associated with the channel object.</para
           >
         </summary>
@@ -435,6 +483,8 @@
           <para
             >A <see
              cref="T:System.Collections.IDictionaryEnumerator" />
+
+            
 
             
 
@@ -464,6 +514,8 @@
           <para
             >The current implementation of <see
              cref="P:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties.IsFixedSize" />
+
+            
 
             
 
@@ -502,6 +554,8 @@
 
             
 
+            
+
              always returns false.</para
           >
         </remarks>
@@ -530,6 +584,8 @@
           <para
             >The current implementation of <see
              cref="P:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties.IsSynchronized" />
+
+            
 
             
 
@@ -597,6 +653,8 @@
 
             
 
+            
+
              of keys that the channel object properties are associated with.</para
           >
         </summary>
@@ -636,6 +694,8 @@
 
             
 
+            
+
              of the channel properties associated with the channel object.</para
           >
         </summary>
@@ -670,8 +730,12 @@
 
             
 
+            
+
              is being used in this case, and because <see
              cref="P:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties.IsFixedSize" />
+
+            
 
             
 
@@ -690,11 +754,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -728,8 +796,12 @@
 
             
 
+            
+
              returns a reference to the current instance of <see
              cref="T:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties" />
+
+            
 
             
 
@@ -743,6 +815,8 @@
           <para
             >Gets an object that is used to synchronize access to the <see
              cref="T:System.Runtime.Remoting.Channels.BaseChannelObjectWithProperties" />
+
+            
 
             
 
@@ -784,6 +858,8 @@
 
             
 
+            
+
              that enumerates over all the properties that are associated with the channel object.</para
           >
         </summary>
@@ -792,6 +868,8 @@
           <para
             >A <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -828,6 +906,8 @@
           <para
             >Gets a <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 

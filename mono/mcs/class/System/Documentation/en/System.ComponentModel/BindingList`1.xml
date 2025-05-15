@@ -45,8 +45,12 @@
 
         
 
+        
+
          class can be used as a base class to create a two-way data-binding mechanism. <see
          cref="T:System.ComponentModel.BindingList`1" />
+
+        
 
         
 
@@ -59,8 +63,12 @@
 
         
 
+        
+
          interface. This is an alternative to implementing the complete <see
          cref="T:System.ComponentModel.IBindingList" />
+
+        
 
         
 
@@ -73,8 +81,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.ComponentModel.IEditableObject" />
+
+        
 
         
 
@@ -87,6 +99,8 @@
 
         
 
+        
+
         . However, the typical solutions programmer will use a class that provides data binding functionality, such as <see
          cref="T:System.Windows.Forms.BindingSource" />
 
@@ -94,8 +108,12 @@
 
         
 
+        
+
         , instead of directly using <see
          cref="T:System.ComponentModel.BindingList`1" />
+
+        
 
         
 
@@ -110,8 +128,12 @@
 
         
 
+        
+
          supports factory-created instances through the extensible <see
          cref="M:System.ComponentModel.BindingList`1.AddNew" />
+
+        
 
         
 
@@ -124,8 +146,12 @@
 
         
 
+        
+
         ) In addition, since this class implements the <see
          cref="T:System.ComponentModel.ICancelAddNew" />
+
+        
 
         
 
@@ -138,8 +164,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.ComponentModel.BindingList`1.CancelNew(System.Int32)" />
+
+        
 
         
 
@@ -172,6 +202,8 @@
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.ComponentModel.BindingList`1" />
+
+            
 
             
 
@@ -242,6 +274,8 @@
 
             
 
+            
+
              class using default values.</para
           >
         </summary>
@@ -298,8 +332,12 @@
 
             
 
+            
+
              event occurs before a new object is added to the collection represented by the <see
              cref="P:System.Collections.ObjectModel.Collection`1.Items" />
+
+            
 
             
 
@@ -312,8 +350,12 @@
 
             
 
+            
+
              method is called, but before the new item is created and added to the internal list. By handling this event, the programmer can provide custom item creation and insertion behavior without being forced to derive from the <see
              cref="T:System.ComponentModel.BindingList`1" />
+
+            
 
             
 
@@ -329,10 +371,14 @@
 
             
 
+            
+
              method. For more information about handling events, see <format
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -373,8 +419,12 @@
 
             
 
+            
+
              method adds a new item to the collection represented by the <see
              cref="P:System.Collections.ObjectModel.Collection`1.Items" />
+
+            
 
             
 
@@ -392,6 +442,8 @@
 
                 
 
+                
+
                  event is automatically raised.</para
               >
               <para
@@ -402,8 +454,12 @@
 
                 
 
+                
+
                  property of the <see
                  cref="T:System.ComponentModel.AddingNewEventArgs" />
+
+                
 
                 
 
@@ -420,6 +476,8 @@
                   <para
                     >The item is explicitly committed by a call to <see
                      cref="M:System.ComponentModel.BindingList`1.EndNew(System.Int32)" />
+
+                    
 
                     
 
@@ -442,11 +500,15 @@
 
             
 
+            
+
              method before the item is committed will cause the new item to be discarded.</para
           >
           <para
             >This method raises the <see
              cref="E:System.ComponentModel.BindingList`1.ListChanged" />
+
+            
 
             
 
@@ -491,8 +553,12 @@
 
             
 
+            
+
              method adds a new item to the collection represented by the <see
              cref="P:System.Collections.ObjectModel.Collection`1.Items" />
+
+            
 
             
 
@@ -505,8 +571,12 @@
 
             
 
+            
+
              raises the <see
              cref="E:System.ComponentModel.BindingList`1.AddingNew" />
+
+            
 
             
 
@@ -519,8 +589,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.ComponentModel.AddingNewEventArgs" />
+
+            
 
             
 
@@ -562,8 +636,12 @@
 
             
 
+            
+
              property is typically used by other components to determine if editing of items in the list is allowed. When <see
              cref="P:System.ComponentModel.BindingList`1.AllowEdit" />
+
+            
 
             
 
@@ -576,8 +654,12 @@
 
             
 
+            
+
              event of type <see
              cref="F:System.ComponentModel.ListChangedType.Reset" />
+
+            
 
             
 
@@ -615,8 +697,12 @@
 
             
 
+            
+
              property is typically used by other components to determine if the creation of new items is allowed. <see
              cref="P:System.ComponentModel.BindingList`1.AllowNew" />
+
+            
 
             
 
@@ -629,6 +715,8 @@
 
             
 
+            
+
              event is handled. If the <see
              cref="E:System.ComponentModel.BindingList`1.AddingNew" />
 
@@ -636,8 +724,12 @@
 
             
 
+            
+
              event is not handled or the list type does not have a default constructor, then <see
              cref="P:System.ComponentModel.BindingList`1.AllowNew" />
+
+            
 
             
 
@@ -653,8 +745,12 @@
 
             
 
+            
+
              is explicitly set, the set value will always be used by bound objects to determine if new items can be added to the list. Whether <see
              cref="P:System.ComponentModel.BindingList`1.AllowNew" />
+
+            
 
             
 
@@ -667,8 +763,12 @@
 
             
 
+            
+
              if the list type has a default constructor or the <see
              cref="E:System.ComponentModel.BindingList`1.AddingNew" />
+
+            
 
             
 
@@ -681,6 +781,8 @@
 
             
 
+            
+
              causes a <see
              cref="E:System.ComponentModel.BindingList`1.ListChanged" />
 
@@ -688,8 +790,12 @@
 
             
 
+            
+
              event of type <see
              cref="F:System.ComponentModel.ListChangedType.Reset" />
+
+            
 
             
 
@@ -703,6 +809,8 @@
           <para
             >Gets or sets a value indicating whether you can add items to the list using the <see
              cref="M:System.ComponentModel.BindingList`1.AddNew" />
+
+            
 
             
 
@@ -736,11 +844,15 @@
 
             
 
+            
+
              property is typically used by other components to determine if the removal of items is allowed.</para
           >
           <para
             >When <see
              cref="P:System.ComponentModel.BindingList`1.AllowRemove" />
+
+            
 
             
 
@@ -753,8 +865,12 @@
 
             
 
+            
+
              event of type <see
              cref="F:System.ComponentModel.ListChangedType.Reset" />
+
+            
 
             
 
@@ -801,8 +917,12 @@
 
             
 
+            
+
              class does not provide a base implementation of sorting, so <see
              cref="M:System.ComponentModel.BindingList`1.ApplySortCore(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
+
+            
 
             
 
@@ -815,8 +935,12 @@
 
             
 
+            
+
              by default. To enable sorting, derive from <see
              cref="T:System.ComponentModel.BindingList`1" />
+
+            
 
             
 
@@ -834,8 +958,12 @@
 
                 
 
+                
+
                  and implement sorting, raising the <see
                  cref="E:System.ComponentModel.BindingList`1.ListChanged" />
+
+                
 
                 
 
@@ -853,6 +981,8 @@
 
                 
 
+                
+
                  and implement sort removal.</para
               >
             </item>
@@ -865,8 +995,12 @@
 
                 
 
+                
+
                  and set <see
                  cref="P:System.ComponentModel.BindingList`1.SupportsSortingCore" />
+
+                
 
                 
 
@@ -884,8 +1018,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ComponentModel.BindingList`1.SortPropertyCore" />
+
+            
 
             
 
@@ -904,6 +1042,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -914,8 +1054,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -930,8 +1074,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.ComponentModel.ListSortDirection" />
+
+          
 
           
 
@@ -969,8 +1117,12 @@
 
             
 
+            
+
              method rolls back a pending new item that was added through the <see
              cref="M:System.ComponentModel.BindingList`1.AddNew" />
+
+            
 
             
 
@@ -986,6 +1138,8 @@
 
             
 
+            
+
              method </para
           >
         </remarks>
@@ -995,6 +1149,8 @@
         </summary>
         <param name="itemIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1030,8 +1186,12 @@
 
             
 
+            
+
              method removes all the items from the collection represented by the <see
              cref="P:System.Collections.ObjectModel.Collection`1.Items" />
+
+            
 
             
 
@@ -1046,6 +1206,8 @@
 
             
 
+            
+
              calls the <see
              cref="M:System.ComponentModel.BindingList`1.EndNew(System.Int32)" />
 
@@ -1053,8 +1215,12 @@
 
             
 
+            
+
              method before clearing out the collection and raises the <see
              cref="E:System.ComponentModel.BindingList`1.ListChanged" />
+
+            
 
             
 
@@ -1097,8 +1263,12 @@
 
             
 
+            
+
              method commits a pending new item that was added through the <see
              cref="M:System.ComponentModel.BindingList`1.AddNew" />
+
+            
 
             
 
@@ -1114,6 +1284,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -1123,6 +1295,8 @@
         </summary>
         <param name="itemIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1164,8 +1338,12 @@
 
             
 
+            
+
              class does not provide a base implementation of searching, and so <see
              cref="M:System.ComponentModel.BindingList`1.FindCore(System.ComponentModel.PropertyDescriptor,System.Object)" />
+
+            
 
             
 
@@ -1178,8 +1356,12 @@
 
             
 
+            
+
              by default. To enable searching, derive from <see
              cref="T:System.ComponentModel.BindingList`1" />
+
+            
 
             
 
@@ -1197,8 +1379,12 @@
 
                 
 
+                
+
                  to set the <see
                  cref="P:System.ComponentModel.BindingList`1.SupportsSearchingCore" />
+
+                
 
                 
 
@@ -1211,6 +1397,8 @@
               <para
                 >Override <see
                  cref="M:System.ComponentModel.BindingList`1.FindCore(System.ComponentModel.PropertyDescriptor,System.Object)" />
+
+                
 
                 
 
@@ -1231,6 +1419,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1245,8 +1435,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -1261,8 +1455,12 @@
 
           
 
+          
+
           The value of <paramref
            name="property" />
+
+          
 
           
 
@@ -1323,8 +1521,12 @@
 
             
 
+            
+
              class does not provide a base implementation of sorting, so <see
              cref="P:System.ComponentModel.BindingList`1.IsSortedCore" />
+
+            
 
             
 
@@ -1340,8 +1542,12 @@
 
             
 
+            
+
              class does not provide a base implementation of sorting. To enable sorting, derive a class from <see
              cref="T:System.ComponentModel.BindingList`1" />
+
+            
 
             
 
@@ -1359,8 +1565,12 @@
 
                 
 
+                
+
                  and implement sorting raising the <see
                  cref="E:System.ComponentModel.BindingList`1.ListChanged" />
+
+                
 
                 
 
@@ -1378,6 +1588,8 @@
 
                 
 
+                
+
                  and implement sort removal.</para
               >
             </item>
@@ -1390,8 +1602,12 @@
 
                 
 
+                
+
                  and set <see
                  cref="P:System.ComponentModel.BindingList`1.SupportsSortingCore" />
+
+                
 
                 
 
@@ -1409,8 +1625,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ComponentModel.BindingList`1.SortPropertyCore" />
+
+            
 
             
 
@@ -1452,8 +1672,12 @@
 
             
 
+            
+
              notifications for item value changes are only raised if the list item type implements the <see
              cref="T:System.ComponentModel.INotifyPropertyChanged" />
+
+            
 
             
 
@@ -1466,6 +1690,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1511,8 +1737,12 @@
 
             
 
+            
+
              event and the <see
              cref="M:System.ComponentModel.BindingList`1.AddNew" />
+
+            
 
             
 
@@ -1530,11 +1760,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.ComponentModel.BindingList`1.OnAddingNew(System.ComponentModel.AddingNewEventArgs)" />
+
+            
 
             
 
@@ -1553,6 +1787,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1563,8 +1799,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.AddingNewEventArgs" />
+
+          
 
           
 
@@ -1605,6 +1845,8 @@
 
             
 
+            
+
              method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
           >
         </remarks>
@@ -1613,6 +1855,8 @@
           <para
             >Raises the <see
              cref="E:System.ComponentModel.BindingList`1.ListChanged" />
+
+            
 
             
 
@@ -1628,8 +1872,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ListChangedEventArgs" />
+
+          
 
           
 
@@ -1662,8 +1910,12 @@
 
             
 
+            
+
              property to false if you wish to suppress <see
              cref="E:System.ComponentModel.BindingList`1.ListChanged" />
+
+            
 
             
 
@@ -1677,6 +1929,8 @@
           <para
             >Gets or sets a value indicating whether adding or removing items within the list raises <see
              cref="E:System.ComponentModel.BindingList`1.ListChanged" />
+
+            
 
             
 
@@ -1715,8 +1969,12 @@
 
             
 
+            
+
              event of type <see
              cref="F:System.ComponentModel.ListChangedType.ItemDeleted" />
+
+            
 
             
 
@@ -1731,6 +1989,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1766,8 +2026,12 @@
 
             
 
+            
+
              class does not provide a base implementation of sorting, so <see
              cref="M:System.ComponentModel.BindingList`1.RemoveSortCore" />
+
+            
 
             
 
@@ -1780,8 +2044,12 @@
 
             
 
+            
+
              by default. For more information about sorting, see the <see
              cref="M:System.ComponentModel.BindingList`1.ApplySortCore(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
+
+            
 
             
 
@@ -1800,8 +2068,12 @@
 
             
 
+            
+
              if sorting is implemented in a derived class; otherwise, raises <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -1838,8 +2110,12 @@
 
             
 
+            
+
              is bound to Windows Forms controls, the <see
              cref="M:System.ComponentModel.BindingList`1.ResetBindings" />
+
+            
 
             
 
@@ -1858,8 +2134,12 @@
 
             
 
+            
+
              event of type <see
              cref="F:System.ComponentModel.ListChangedType.Reset" />
+
+            
 
             
 
@@ -1898,8 +2178,12 @@
 
             
 
+            
+
              is bound to Windows Forms controls, the <see
              cref="M:System.ComponentModel.BindingList`1.ResetItem(System.Int32)" />
+
+            
 
             
 
@@ -1918,8 +2202,12 @@
 
             
 
+            
+
              event of type <see
              cref="F:System.ComponentModel.ListChangedType.ItemChanged" />
+
+            
 
             
 
@@ -1930,6 +2218,8 @@
         </summary>
         <param name="position">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1993,8 +2283,12 @@
 
             
 
+            
+
              class does not provide a base implementation of sorting, so <see
              cref="P:System.ComponentModel.BindingList`1.SortDirectionCore" />
+
+            
 
             
 
@@ -2007,8 +2301,12 @@
 
             
 
+            
+
              by default. For more information about sorting, see the <see
              cref="M:System.ComponentModel.IBindingList.ApplySort(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
+
+            
 
             
 
@@ -2051,6 +2349,8 @@
 
             
 
+            
+
              returns null by default because the <see
              cref="T:System.ComponentModel.BindingList`1" />
 
@@ -2058,8 +2358,12 @@
 
             
 
+            
+
              class does not provide a base implementation of sorting. To enable sorting, derive a class from <see
              cref="T:System.ComponentModel.BindingList`1" />
+
+            
 
             
 
@@ -2077,6 +2381,8 @@
 
                 
 
+                
+
                  and implement sorting.</para
               >
             </item>
@@ -2084,6 +2390,8 @@
               <para
                 >Override <see
                  cref="M:System.ComponentModel.BindingList`1.RemoveSortCore" />
+
+                
 
                 
 
@@ -2101,8 +2409,12 @@
 
                 
 
+                
+
                  and set <see
                  cref="P:System.ComponentModel.BindingList`1.SupportsSortingCore" />
+
+                
 
                 
 
@@ -2120,8 +2432,12 @@
 
                 
 
+                
+
                  to return the <see
                  cref="T:System.ComponentModel.PropertyDescriptor" />
+
+                
 
                 
 
@@ -2166,6 +2482,8 @@
 
             
 
+            
+
              provides the implementation for <see
              cref="P:System.ComponentModel.IBindingList.SupportsChangeNotification" />
 
@@ -2173,8 +2491,12 @@
 
             
 
+            
+
             . You can derive a class from <see
              cref="T:System.ComponentModel.BindingList`1" />
+
+            
 
             
 
@@ -2188,6 +2510,8 @@
           <para
             >Gets a value indicating whether <see
              cref="E:System.ComponentModel.BindingList`1.ListChanged" />
+
+            
 
             
 
@@ -2224,6 +2548,8 @@
 
             
 
+            
+
              class does not provide a base implementation of searching, so <see
              cref="P:System.ComponentModel.BindingList`1.SupportsSearchingCore" />
 
@@ -2231,8 +2557,12 @@
 
             
 
+            
+
              always returns false by default. For more information about implementing searching, see the <see
              cref="M:System.ComponentModel.BindingList`1.System#ComponentModel#IBindingList#Find(System.ComponentModel.PropertyDescriptor,System.Object)" />
+
+            
 
             
 
@@ -2270,6 +2600,8 @@
 
             
 
+            
+
              property indicates whether the <see
              cref="T:System.ComponentModel.BindingList`1" />
 
@@ -2277,8 +2609,12 @@
 
             
 
+            
+
              supports sorting with the <see
              cref="M:System.ComponentModel.BindingList`1.ApplySortCore(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
+
+            
 
             
 
@@ -2294,6 +2630,8 @@
 
             
 
+            
+
              class does not provide a base implementation of sorting, so <see
              cref="P:System.ComponentModel.BindingList`1.SupportsSortingCore" />
 
@@ -2301,8 +2639,12 @@
 
             
 
+            
+
              always returns false by default. For more information about implementing sorting, see the <see
              cref="M:System.ComponentModel.BindingList`1.ApplySortCore(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
+
+            
 
             
 
@@ -2350,8 +2692,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -2365,6 +2711,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.ComponentModel.IBindingList.AddIndex(System.ComponentModel.PropertyDescriptor)" />
+
+            
 
             
 
@@ -2401,8 +2749,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -2418,6 +2770,8 @@
 
             
 
+            
+
              to add a new item to the list.</para
           >
         </remarks>
@@ -2426,6 +2780,8 @@
           <para
             >Adds a new item to the list. For more information, see <see
              cref="M:System.ComponentModel.IBindingList.AddNew" />
+
+            
 
             
 
@@ -2469,6 +2825,8 @@
 
             
 
+            
+
              property is typically used by other components to determine if editing of items in the list is allowed.</para
           >
         </remarks>
@@ -2503,6 +2861,8 @@
           <para
             >Gets a value indicating whether new items can be added to the list using the <see
              cref="M:System.ComponentModel.BindingList`1.AddNew" />
+
+            
 
             
 
@@ -2572,8 +2932,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -2592,6 +2956,8 @@
 
             
 
+            
+
              and a <see
              cref="T:System.ComponentModel.ListSortDirection" />
 
@@ -2599,8 +2965,12 @@
 
             
 
+            
+
             . For a complete description of this member, see <see
              cref="M:System.ComponentModel.IBindingList.ApplySort(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
+
+            
 
             
 
@@ -2616,8 +2986,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.ComponentModel.ListSortDirection" />
+
+          
 
           
 
@@ -2660,8 +3034,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -2680,6 +3058,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2688,6 +3068,8 @@
           <para
             >The index of the row that has the given <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -2703,8 +3085,12 @@
 
           
 
+          
+
           The value of the <paramref
            name="property" />
+
+          
 
           
 
@@ -2743,8 +3129,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -2758,6 +3148,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.ComponentModel.IBindingList.IsSorted" />
+
+            
 
             
 
@@ -2801,8 +3193,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -2816,6 +3212,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.ComponentModel.IBindingList.RemoveIndex(System.ComponentModel.PropertyDescriptor)" />
+
+            
 
             
 
@@ -2852,8 +3250,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -2900,8 +3302,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -2915,6 +3321,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.ComponentModel.IBindingList.SortDirection" />
+
+            
 
             
 
@@ -2954,8 +3362,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -2969,6 +3381,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.ComponentModel.IBindingList.SortProperty" />
+
+            
 
             
 
@@ -3008,8 +3422,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -3023,6 +3441,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.ComponentModel.IBindingList.SupportsChangeNotification" />
+
+            
 
             
 
@@ -3062,8 +3482,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -3077,6 +3501,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.ComponentModel.IBindingList.SupportsSearching" />
+
+            
 
             
 
@@ -3116,8 +3542,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -3131,6 +3561,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.ComponentModel.IBindingList.SupportsSorting" />
+
+            
 
             
 
@@ -3169,8 +3601,12 @@
 
             
 
+            
+
              checks the list type to see if it implements the <see
              cref="T:System.ComponentModel.INotifyPropertyChanged" />
+
+            
 
             
 
@@ -3183,8 +3619,12 @@
 
             
 
+            
+
              events of <see
              cref="F:System.ComponentModel.ListChangedType.ItemChanged" />
+
+            
 
             
 
@@ -3203,8 +3643,12 @@
 
             
 
+            
+
              events of type <see
              cref="F:System.ComponentModel.ListChangedType.ItemChanged" />
+
+            
 
             
 

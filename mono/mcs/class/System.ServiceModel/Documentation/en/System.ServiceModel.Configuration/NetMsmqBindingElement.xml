@@ -30,10 +30,14 @@
 
         
 
+        
+
          binding provides support for queuing by leveraging Microsoft Message Queuing (MSMQ) as a transport and enables support for loosely coupled applications, failure isolation, load leveling and disconnected operations. For a discussion of these features, see <format
          type="text/html">
           <a href="b8757992-ffce-40ad-9e9b-3243f6d0fce1">Queues</a>
         </format>
+
+        
 
         
 
@@ -72,6 +76,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -98,6 +104,8 @@
           <para
             >Gets the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -138,6 +146,8 @@
 
             
 
+            
+
              minimizes the cost of using buffers by using a buffer pool. Buffers are required to process messages by the service when they come out of the channel. If there is not sufficient memory in the buffer pool to process the message load, the <see
              cref="T:System.ServiceModel.Channels.BufferManager" />
 
@@ -145,8 +155,12 @@
 
             
 
+            
+
              must allocate additional memory from the CLR heap, which increases the garbage collection overhead. Extensive allocation from the CLR garbage heap is an indication that the buffer pool size is too small and that performance can be improved with a larger allocation by increasing the <see
              cref="P:System.ServiceModel.BasicHttpBinding.MaxBufferPoolSize" />
+
+            
 
             
 
@@ -193,8 +207,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.Channels.Binding" />
+
+          
 
           
 
@@ -228,6 +246,8 @@
           <para
             >Gets the <see
              cref="T:System.Configuration.ConfigurationPropertyCollection" />
+
+            
 
             
 
@@ -271,6 +291,8 @@
 
             
 
+            
+
              or <see
              cref="F:System.ServiceModel.QueueTransferProtocol.SrmpSecure" />
 
@@ -278,8 +300,12 @@
 
             
 
+            
+
              when <see
              cref="P:System.ServiceModel.Configuration.NetMsmqBindingElement.UseActiveDirectory" />
+
+            
 
             
 
@@ -327,8 +353,12 @@
 
             
 
+            
+
              object defines a number of constraints on the complexity of SOAP messages that can be processed by endpoints configured with a binding. These constraints include maxArrayLength, maxBytesPerRead, maxDepth, maxNameTableCharCount, and maxStringContentLength. These values aid in the prevention of denial of service attacks. For more information, see <see
              cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+
+            
 
             
 
@@ -342,6 +372,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+
+            
 
             
 
@@ -384,6 +416,8 @@
 
             
 
+            
+
              is an encapsulation of both MSMQ transport and SOAP security. It specifies whether transport or SOAP security is enabled and, if so, what authentication mode and protection levels are in use.</para
           >
         </remarks>
@@ -392,6 +426,8 @@
           <para
             >Gets the <see
              cref="T:System.ServiceModel.NetMsmqSecurity" />
+
+            
 
             
 
@@ -425,6 +461,8 @@
           <para
             >By default, the indigo1 queued transport converts the URI of a message queue to a direct format name. By setting the <see
              cref="P:System.ServiceModel.NetMsmqBinding.UseActiveDirectory" />
+
+            
 
             
 

@@ -35,6 +35,8 @@
 
         
 
+        
+
          property returns an instance of this type.</para
       >
       <para
@@ -45,8 +47,12 @@
 
         
 
+        
+
          is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see
          cref="T:System.Collections.Generic.KeyValuePair`2" />
+
+        
 
         
 
@@ -137,8 +143,12 @@
 
             
 
+            
+
              method for a <see
              cref="T:System.Collections.Generic.KeyValuePair`2" />
+
+            
 
             
 
@@ -151,8 +161,12 @@
 
             
 
+            
+
              "Test" and the integer <see
              cref="P:System.Collections.Generic.KeyValuePair`2.Value" />
+
+            
 
             
 
@@ -174,6 +188,8 @@
 
             
 
+            
+
             , using the string representations of the key and value.</para
           >
         </summary>
@@ -182,6 +198,8 @@
           <para
             >A string representation of the <see
              cref="T:System.Collections.Generic.KeyValuePair`2" />
+
+            
 
             
 

@@ -34,6 +34,8 @@
 
         
 
+        
+
          in a message for which the <see
          cref="P:System.ServiceModel.Channels.MessageHeader.MustUnderstand" />
 
@@ -41,8 +43,12 @@
 
         
 
+        
+
          property is true but the header is not in the <see
          cref="P:System.ServiceModel.Channels.MessageHeaders.UnderstoodHeaders" />
+
+        
 
         
 
@@ -58,8 +64,12 @@
 
         
 
+        
+
          and set the <see
          cref="P:System.ServiceModel.Description.MustUnderstandBehavior.ValidateMustUnderstand" />
+
+        
 
         
 
@@ -73,6 +83,8 @@
       <para
         >Instructs indigo1 to disable the mandatory processing of headers not in the <see
          cref="P:System.ServiceModel.Channels.MessageHeaders.UnderstoodHeaders" />
+
+        
 
         
 
@@ -107,8 +119,12 @@
 
             
 
+            
+
              parameter to this constructor to prevent an exception from being thrown when the runtime encounters a <see
              cref="T:System.ServiceModel.Channels.MessageHeader" />
+
+            
 
             
 
@@ -121,8 +137,12 @@
 
             
 
+            
+
              property is true but the header is not in the <see
              cref="P:System.ServiceModel.Channels.MessageHeaders.UnderstoodHeaders" />
+
+            
 
             
 
@@ -141,11 +161,15 @@
 
             
 
+            
+
              class using the specified value. </para
           >
         </summary>
         <param name="validate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -186,6 +210,8 @@
           <para
             >Implements <see
              cref="M:System.ServiceModel.Description.IEndpointBehavior.AddBindingParameters(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Channels.BindingParameterCollection)" />
+
+            
 
             
 
@@ -233,6 +259,8 @@
 
             
 
+            
+
              method to support behavior functionality.</para
           >
         </remarks>
@@ -246,8 +274,12 @@
 
             
 
+            
+
              to the <see
              cref="P:System.ServiceModel.Dispatcher.ClientRuntime.ValidateMustUnderstand" />
+
+            
 
             
 
@@ -291,6 +323,8 @@
 
             
 
+            
+
              to support behavior functionality.</para
           >
         </remarks>
@@ -304,8 +338,12 @@
 
             
 
+            
+
              to the <see
              cref="P:System.ServiceModel.Dispatcher.DispatchRuntime.ValidateMustUnderstand" />
+
+            
 
             
 
@@ -347,6 +385,8 @@
 
             
 
+            
+
              method to support behavior functionality.</para
           >
         </remarks>
@@ -378,8 +418,12 @@
 
             
 
+            
+
              property to false to prevent an exception from being thrown when the runtime encounters a <see
              cref="T:System.ServiceModel.Channels.MessageHeader" />
+
+            
 
             
 
@@ -392,8 +436,12 @@
 
             
 
+            
+
              property is true but the header is not in the <see
              cref="P:System.ServiceModel.Channels.MessageHeaders.UnderstoodHeaders" />
+
+            
 
             
 

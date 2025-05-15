@@ -33,8 +33,12 @@
 
         
 
+        
+
          class. The purpose of the attribute is to identify the type that specifies the switch criteria of the switch. Each switch determines whether a trace is to be written, based on whether an event type matches or exceeds the value of the <see
          cref="P:System.Diagnostics.SwitchLevelAttribute.SwitchLevelType" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          property varies for different switches. For example, the switch level type for the <see
          cref="T:System.Diagnostics.BooleanSwitch" />
+
+        
 
         
 
@@ -61,6 +69,8 @@
 
         
 
+        
+
         , and the switch level type for the <see
          cref="T:System.Diagnostics.TraceSwitch" />
 
@@ -68,8 +78,12 @@
 
         
 
+        
+
          class is <see
          cref="T:System.Diagnostics.TraceLevel" />
+
+        
 
         
 
@@ -109,8 +123,12 @@
 
             
 
+            
+
              parameter identifies the type that is used by the switch to determine if a trace should be written; for example, the type of the <see
              cref="P:System.Diagnostics.TraceSwitch.Level" />
+
+            
 
             
 
@@ -123,8 +141,12 @@
 
             
 
+            
+
              class is <see
              cref="T:System.Diagnostics.TraceLevel" />
+
+            
 
             
 
@@ -143,6 +165,8 @@
 
             
 
+            
+
              class, specifying the type that determines whether a trace should be written.</para
           >
         </summary>
@@ -153,8 +177,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -190,8 +218,12 @@
 
             
 
+            
+
              class is <see
              cref="P:System.Diagnostics.BooleanSwitch.Enabled" />
+
+            
 
             
 

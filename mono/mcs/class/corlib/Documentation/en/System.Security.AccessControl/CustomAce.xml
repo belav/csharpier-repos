@@ -29,6 +29,8 @@
 
         
 
+        
+
          object contains an ACE header and an opaque blob of data.</para
       >
     </remarks>
@@ -37,6 +39,8 @@
       <para
         >Represents an Access Control Entry (ACE) that is not defined by one of the members of the <see
          cref="T:System.Security.AccessControl.AceType" />
+
+        
 
         
 
@@ -78,6 +82,8 @@
 
             
 
+            
+
              data is not cloned. The data should be cloned before calling this constructor if the caller does not trust the source of the data to not modify the data. </para
           >
         </remarks>
@@ -86,6 +92,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.AccessControl.CustomAce" />
+
+            
 
             
 
@@ -101,8 +109,12 @@
 
           
 
+          
+
           Type of the new Access Control Entry (ACE). This value must be greater than <see
            cref="F:System.Security.AccessControl.AceType.MaxDefinedAceType" />
+
+          
 
           
 
@@ -117,6 +129,8 @@
 
           
 
+          
+
           Flags that specify information about the inheritance, inheritance propagation, and auditing conditions for the new ACE.</param
         >
         <param name="opaque">
@@ -126,8 +140,12 @@
 
           
 
+          
+
           An array of byte values that contains the data for the new ACE. This value can be null. The length of this array must not be greater than the value of the <see
            cref="F:System.Security.AccessControl.CustomAce.MaxOpaqueLength" />
+
+          
 
           
 
@@ -162,8 +180,12 @@
 
             
 
+            
+
              object. This length should be used before marshaling the ACL into a binary array with the <see
              cref="M:System.Security.AccessControl.CustomAce.GetBinaryForm" />
+
+            
 
             
 
@@ -208,11 +230,15 @@
 
             
 
+            
+
              object into the specified byte array beginning at the specified offset.</para
           >
         </summary>
         <param name="binaryForm">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -225,10 +251,14 @@
 
           
 
+          
+
            is marshaled.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -266,6 +296,8 @@
 
             
 
+            
+
              object. </para
           >
         </summary>
@@ -274,6 +306,8 @@
           <para
             >An array of byte values that represents the opaque data associated with this <see
              cref="T:System.Security.AccessControl.CustomAce" />
+
+            
 
             
 
@@ -312,6 +346,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -337,6 +373,8 @@
           <para
             >Gets the length of the opaque data associated with this <see
              cref="T:System.Security.AccessControl.CustomAce" />
+
+            
 
             
 
@@ -377,6 +415,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -387,8 +427,12 @@
 
           
 
+          
+
           An array of byte values that represents the opaque callback data for this <see
            cref="T:System.Security.AccessControl.CustomAce" />
+
+          
 
           
 

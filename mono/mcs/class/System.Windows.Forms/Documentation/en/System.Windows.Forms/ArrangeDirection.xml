@@ -28,8 +28,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.SystemInformation" />
+
+        
 
         
 
@@ -61,9 +65,13 @@
 
             
 
+            
+
              and <see
              cref="F:System.Windows.Forms.ArrangeStartingPosition.TopRight" />
             <see cref="T:System.Windows.Forms.ArrangeStartingPosition" />
+
+            
 
             
 
@@ -95,9 +103,13 @@
 
             
 
+            
+
              and <see
              cref="F:System.Windows.Forms.ArrangeStartingPosition.TopRight" />
             <see cref="T:System.Windows.Forms.ArrangeStartingPosition" />
+
+            
 
             
 
@@ -129,9 +141,13 @@
 
             
 
+            
+
              and <see
              cref="F:System.Windows.Forms.ArrangeStartingPosition.TopLeft" />
             <see cref="T:System.Windows.Forms.ArrangeStartingPosition" />
+
+            
 
             
 
@@ -163,9 +179,13 @@
 
             
 
+            
+
              and <see
              cref="F:System.Windows.Forms.ArrangeStartingPosition.BottomRight" />
             <see cref="T:System.Windows.Forms.ArrangeStartingPosition" />
+
+            
 
             
 

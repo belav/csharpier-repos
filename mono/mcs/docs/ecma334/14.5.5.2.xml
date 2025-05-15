@@ -8,8 +8,12 @@
 
     
 
+    
+
      of the <non_terminal
      where="14.5.5">invocation-expression</non_terminal>
+
+    
 
     
 
@@ -22,8 +26,12 @@
 
     
 
+    
+
     . Furthermore, considering the <non_terminal
      where="11.2">delegate-type</non_terminal>
+
+    
 
     
 
@@ -36,8 +44,12 @@
 
     
 
+    
+
     , the <non_terminal
      where="11.2">delegate-type</non_terminal>
+
+    
 
     
 
@@ -50,6 +62,8 @@
 
     
 
+    
+
     ) with respect to the <non_terminal
      where="14.4.1">argument-list</non_terminal>
 
@@ -57,8 +71,12 @@
 
     
 
+    
+
      of the <non_terminal
      where="14.5.5">invocation-expression</non_terminal>
+
+    
 
     
 
@@ -74,8 +92,12 @@
 
     
 
+    
+
      of a <non_terminal
      where="11.2">delegate-type</non_terminal>
+
+    
 
     
 
@@ -88,6 +110,8 @@
 
     
 
+    
+
     , consists of the following steps: <list
     >
       <list_item> D is evaluated. If this evaluation causes an exception, no further steps are executed. </list_item>
@@ -95,6 +119,8 @@
       <list_item
         > Otherwise, D is a reference to a delegate instance. A function member invocation (<hyperlink
         >14.4.3</hyperlink>
+
+        
 
         
 

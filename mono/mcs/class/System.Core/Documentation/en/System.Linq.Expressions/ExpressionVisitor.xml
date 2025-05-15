@@ -47,6 +47,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -91,6 +93,8 @@
 
           
 
+          
+
           The expressions to visit.</param
         >
       </Docs>
@@ -126,6 +130,8 @@
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -175,6 +181,8 @@
 
           
 
+          
+
           The nodes to visit.</param
         >
         <param name="elementVisitor">
@@ -184,10 +192,14 @@
 
           
 
+          
+
           A delegate that visits a single element, optionally replacing it with a new element.</param
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -241,6 +253,8 @@
 
           
 
+          
+
           The expression to visit.</param
         >
         <param name="callerName">
@@ -250,10 +264,14 @@
 
           
 
+          
+
           The name of the calling method; used to report to report a better error message.</param
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -330,6 +348,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -339,6 +359,8 @@
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -379,6 +401,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -388,6 +412,8 @@
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -428,6 +454,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -437,6 +465,8 @@
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -477,6 +507,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -486,6 +518,8 @@
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -526,6 +560,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -535,6 +571,8 @@
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -575,6 +613,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -584,6 +624,8 @@
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -624,6 +666,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -633,6 +677,8 @@
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -673,6 +719,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -682,6 +730,8 @@
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -722,6 +772,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -731,6 +783,8 @@
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -771,8 +825,12 @@
 
             
 
+            
+
             , which gives the node a chance to walk its children. By default, <see
              cref="M:System.Linq.Expressions.Expression.VisitChildren(System.Linq.Expressions.ExpressionVisitor)" />
+
+            
 
             
 
@@ -791,6 +849,8 @@
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -831,6 +891,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -840,6 +902,8 @@
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -880,6 +944,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -889,6 +955,8 @@
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -929,6 +997,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -938,6 +1008,8 @@
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -978,6 +1050,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -987,6 +1061,8 @@
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1027,6 +1103,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1036,6 +1114,8 @@
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1079,6 +1159,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1093,10 +1175,14 @@
 
           
 
+          
+
           The expression to visit.</param
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1137,6 +1223,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1146,6 +1234,8 @@
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1186,6 +1276,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1195,6 +1287,8 @@
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1235,6 +1329,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1244,6 +1340,8 @@
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1284,6 +1382,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1293,6 +1393,8 @@
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1333,6 +1435,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1342,6 +1446,8 @@
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1382,6 +1488,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1391,6 +1499,8 @@
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1431,6 +1541,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1440,6 +1552,8 @@
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1480,6 +1594,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1489,6 +1605,8 @@
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1529,6 +1647,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1538,6 +1658,8 @@
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1578,6 +1700,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1587,6 +1711,8 @@
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1627,6 +1753,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1636,6 +1764,8 @@
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1676,6 +1806,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1685,6 +1817,8 @@
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1725,6 +1859,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1734,6 +1870,8 @@
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1774,6 +1912,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1783,6 +1923,8 @@
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1823,6 +1965,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1832,6 +1976,8 @@
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1872,6 +2018,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1881,6 +2029,8 @@
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1921,6 +2071,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1930,6 +2082,8 @@
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1970,6 +2124,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1979,6 +2135,8 @@
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

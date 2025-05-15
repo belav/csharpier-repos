@@ -35,8 +35,12 @@
 
           
 
+          
+
            class is not supported by Visual Basic. Using C#, you can add expansions for custom data using the <see
            cref="T:System.Diagnostics.DebuggerTypeProxyAttribute" />
+
+          
 
           
 
@@ -49,8 +53,12 @@
 
           
 
+          
+
           , and <see
            cref="T:System.Diagnostics.DebuggerBrowsableAttribute" />
+
+          
 
           
 
@@ -63,8 +71,12 @@
 
           
 
+          
+
            attribute but not the <see
            cref="T:System.Diagnostics.DebuggerBrowsableAttribute" />
+
+          
 
           
 
@@ -82,6 +94,8 @@
 
         
 
+        
+
          enumeration values, which specifies one of the following states:</para
       >
       <list type="bullet">
@@ -93,8 +107,12 @@
 
             
 
+            
+
              indicates that the member is not displayed in the data window.  For example, using this value for the <see
              cref="T:System.Diagnostics.DebuggerBrowsableAttribute" />
+
+            
 
             
 
@@ -111,12 +129,16 @@
 
             
 
+            
+
              indicates that the member is displayed but not expanded by default.  This is the default behavior.</para
           >
         </item>
         <item>
           <para>
             <see cref="F:System.Diagnostics.DebuggerBrowsableState.RootHidden" />
+
+            
 
             
 
@@ -134,6 +156,8 @@
 
         
 
+        
+
          and <see
          cref="T:System.Diagnostics.DebuggerTypeProxyAttribute" />
 
@@ -141,8 +165,12 @@
 
         
 
+        
+
          attributes, see the example provided for the <see
          cref="T:System.Diagnostics.DebuggerDisplayAttribute" />
+
+        
 
         
 
@@ -190,6 +218,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -200,8 +230,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Diagnostics.DebuggerBrowsableState" />
+
+          
 
           
 
@@ -241,8 +275,12 @@
 
             
 
+            
+
              constructor uses the value of the <paramref
              name="state" />
+
+            
 
             
 

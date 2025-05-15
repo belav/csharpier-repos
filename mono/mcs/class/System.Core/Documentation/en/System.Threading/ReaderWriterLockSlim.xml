@@ -28,8 +28,12 @@
 
         
 
+        
+
          to protect a resource that is read by multiple threads and written to by one thread at a time. <see
          cref="T:System.Threading.ReaderWriterLockSlim" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
           
 
+          
+
            is similar to <see
            cref="T:System.Threading.ReaderWriterLock" />
+
+          
 
           
 
@@ -59,8 +67,12 @@
 
           
 
+          
+
            avoids many cases of potential deadlock. In addition, the performance of <see
            cref="T:System.Threading.ReaderWriterLockSlim" />
+
+          
 
           
 
@@ -73,8 +85,12 @@
 
           
 
+          
+
           . <see
            cref="T:System.Threading.ReaderWriterLockSlim" />
+
+          
 
           
 
@@ -91,8 +107,12 @@
 
         
 
+        
+
          are created with the <see
          cref="F:System.Threading.LockRecursionPolicy.NoRecursion" />
+
+        
 
         
 
@@ -105,8 +125,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Threading.ReaderWriterLock" />
+
+        
 
         
 
@@ -119,8 +143,12 @@
 
         
 
+        
+
          flag to create instances of <see
          cref="T:System.Threading.ReaderWriterLockSlim" />
+
+        
 
         
 
@@ -136,8 +164,12 @@
 
         
 
+        
+
          mode" is used in preference to the longer phrase "enter the lock in <paramref
          name="x" />
+
+        
 
         
 
@@ -153,8 +185,12 @@
 
         
 
+        
+
          has managed thread affinity; that is, each <see
          cref="T:System.Threading.Thread" />
+
+        
 
         
 
@@ -165,6 +201,8 @@
       <para
         >If a <see
          cref="T:System.Threading.ReaderWriterLockSlim" />
+
+        
 
         
 
@@ -197,6 +235,8 @@
 
         
 
+        
+
          in upgradeable mode has read access to the protected resource, and can upgrade to write mode by calling the <see
          cref="M:System.Threading.ReaderWriterLockSlim.EnterWriteLock" />
 
@@ -204,8 +244,12 @@
 
         
 
+        
+
          or <see
          cref="Overload:System.Threading.ReaderWriterLockSlim.TryEnterWriteLock" />
+
+        
 
         
 
@@ -229,6 +273,8 @@
 
         
 
+        
+
          method and then calling the <see
          cref="M:System.Threading.ReaderWriterLockSlim.ExitUpgradeableReadLock" />
 
@@ -236,8 +282,12 @@
 
         
 
+        
+
          method. This downgrade pattern is allowed for all lock recursion policies, even <see
          cref="F:System.Threading.LockRecursionPolicy.NoRecursion" />
+
+        
 
         
 
@@ -257,6 +307,8 @@
 
         
 
+        
+
          that supports recursive lock entry by using the <see
          cref="M:System.Threading.ReaderWriterLockSlim.#ctor(System.Threading.LockRecursionPolicy)" />
 
@@ -264,8 +316,12 @@
 
         
 
+        
+
          constructor that specifies lock policy, and specifying <see
          cref="F:System.Threading.LockRecursionPolicy.SupportsRecursion" />
+
+        
 
         
 
@@ -284,6 +340,8 @@
 
         
 
+        
+
          that allows recursion, the following can be said about the modes a thread can enter:</para
       >
       <list type="bullet">
@@ -291,6 +349,8 @@
           <para
             >A thread in read mode can enter read mode recursively, but cannot enter write mode or upgradeable mode. If it tries to do this, a <see
              cref="T:System.Threading.LockRecursionException" />
+
+            
 
             
 
@@ -317,6 +377,8 @@
 
         
 
+        
+
          is thrown.</para
       >
       <format type="text/html">
@@ -325,6 +387,8 @@
       <para
         >You may find it useful to think of the lock in terms of its states. A <see
          cref="T:System.Threading.ReaderWriterLockSlim" />
+
+        
 
         
 
@@ -347,8 +411,12 @@
 
               
 
+              
+
                or <see
                cref="Overload:System.Threading.ReaderWriterLockSlim.TryEnterReadLock" />
+
+              
 
               
 
@@ -373,6 +441,8 @@
 
         
 
+        
+
          takes the action described in the leftmost column. At the time it takes the action, <paramref
          name="t" />
 
@@ -380,8 +450,12 @@
 
         
 
+        
+
          has no mode. (The special case where <paramref
          name="t" />
+
+        
 
         
 
@@ -418,12 +492,16 @@
 
               
 
+              
+
                enters read mode</para
             >
           </term>
           <description>
             <para>
               <paramref name="t" />
+
+              
 
               
 
@@ -440,8 +518,12 @@
 
               
 
+              
+
                blocks if threads are waiting for write mode; otherwise, <paramref
                name="t" />
+
+              
 
               
 
@@ -458,8 +540,12 @@
 
               
 
+              
+
                blocks if threads are waiting for write mode; otherwise, <paramref
                name="t" />
+
+              
 
               
 
@@ -477,6 +563,8 @@
 
               
 
+              
+
                blocks.</para
             >
           </description>
@@ -485,6 +573,8 @@
           <term>
             <para>
               <paramref name="t" />
+
+              
 
               
 
@@ -501,12 +591,16 @@
 
               
 
+              
+
                enters (U).</para
             >
           </description>
           <description>
             <para>
               <paramref name="t" />
+
+              
 
               
 
@@ -519,6 +613,8 @@
 
               
 
+              
+
                enters (U).</para
             >
           </description>
@@ -530,12 +626,16 @@
 
               
 
+              
+
                blocks.</para
             >
           </description>
           <description>
             <para>
               <paramref name="t" />
+
+              
 
               
 
@@ -554,12 +654,16 @@
 
               
 
+              
+
                enters write mode</para
             >
           </term>
           <description>
             <para>
               <paramref name="t" />
+
+              
 
               
 
@@ -576,12 +680,16 @@
 
               
 
+              
+
                blocks.</para
             >
           </description>
           <description>
             <para>
               <paramref name="t" />
+
+              
 
               
 
@@ -599,6 +707,8 @@
 
               
 
+              
+
                blocks. </para
             >
           </description>
@@ -611,8 +721,12 @@
 
         
 
+        
+
          If <paramref
          name="t" />
+
+        
 
         
 
@@ -627,6 +741,8 @@
 
         
 
+        
+
          If <paramref
          name="t" />
 
@@ -634,8 +750,12 @@
 
         
 
+        
+
          starts out in upgradeable mode, it blocks if there are threads in read mode. Otherwise it upgrades to write mode. The lock state changes to Write (W). If <paramref
          name="t" />
+
+        
 
         
 
@@ -688,6 +808,8 @@
 
             
 
+            
+
              that is initialized with this constructor does not allow recursion. That is, the <see
              cref="P:System.Threading.ReaderWriterLockSlim.RecursionPolicy" />
 
@@ -695,8 +817,12 @@
 
             
 
+            
+
              property returns <see
              cref="F:System.Threading.LockRecursionPolicy.NoRecursion" />
+
+            
 
             
 
@@ -712,8 +838,12 @@
 
             
 
+            
+
              enumeration and the <see
              cref="T:System.Threading.ReaderWriterLockSlim" />
+
+            
 
             
 
@@ -727,6 +857,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Threading.ReaderWriterLockSlim" />
+
+            
 
             
 
@@ -764,6 +896,8 @@
 
             
 
+            
+
              and a thread has entered the lock in read mode, <see
              cref="T:System.Threading.LockRecursionException" />
 
@@ -771,8 +905,12 @@
 
             
 
+            
+
              is thrown if the thread tries to reenter the lock in read mode. Similarly, if a thread has entered the lock in write mode, <see
              cref="T:System.Threading.LockRecursionException" />
+
+            
 
             
 
@@ -792,8 +930,12 @@
 
             
 
+            
+
              enumeration and the <see
              cref="T:System.Threading.ReaderWriterLockSlim" />
+
+            
 
             
 
@@ -812,11 +954,15 @@
 
             
 
+            
+
              class, specifying the lock recursion policy.</para
           >
         </summary>
         <param name="recursionPolicy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -874,8 +1020,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Threading.ReaderWriterLockSlim" />
+
+            
 
             
 
@@ -888,8 +1038,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Threading.ReaderWriterLockSlim" />
+
+            
 
             
 
@@ -902,6 +1056,8 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Threading.ReaderWriterLockSlim" />
 
@@ -909,8 +1065,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Threading.ReaderWriterLockSlim" />
+
+            
 
             
 
@@ -925,10 +1085,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -945,6 +1109,8 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.Threading.ReaderWriterLockSlim" />
 
@@ -952,8 +1118,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Threading.ReaderWriterLockSlim" />
+
+              
 
               
 
@@ -968,6 +1138,8 @@
           <para
             >Releases all resources used by the current instance of the <see
              cref="T:System.Threading.ReaderWriterLockSlim" />
+
+            
 
             
 
@@ -1003,12 +1175,16 @@
 
             
 
+            
+
              method to block for a specified interval, and then return if the calling thread has not entered read mode during that interval. </para
           >
           <para>Multiple threads can enter read mode at the same time.</para>
           <para
             >If one or more threads are waiting to enter write mode, a thread that calls the <see
              cref="M:System.Threading.ReaderWriterLockSlim.EnterReadLock" />
+
+            
 
             
 
@@ -1022,6 +1198,8 @@
           <para
             >At most one thread can be in upgradeable mode while other threads are in read mode. If additional threads are waiting to enter upgradeable mode, and there are no threads waiting to enter write mode, threads that call the <see
              cref="M:System.Threading.ReaderWriterLockSlim.EnterReadLock" />
+
+            
 
             
 
@@ -1061,11 +1239,15 @@
 
             
 
+            
+
              method to block for a specified interval, and then return if the calling thread has not entered upgradeable mode during that interval.</para
           >
           <para
             >Use upgradeable mode when a thread usually accesses the resource that is protected by the <see
              cref="T:System.Threading.ReaderWriterLockSlim" />
+
+            
 
             
 
@@ -1077,6 +1259,8 @@
           <para
             >If one or more threads are waiting to enter write mode, a thread that calls the <see
              cref="M:System.Threading.ReaderWriterLockSlim.EnterUpgradeableReadLock" />
+
+            
 
             
 
@@ -1119,11 +1303,15 @@
 
             
 
+            
+
              method to block for a specified interval, and then return if the calling thread has not entered write mode during that interval.</para
           >
           <para
             >If other threads have entered the lock in read mode, a thread that calls the <see
              cref="M:System.Threading.ReaderWriterLockSlim.EnterWriteLock" />
+
+            
 
             
 
@@ -1313,8 +1501,12 @@
 
             
 
+            
+
              and a thread has entered the lock in read mode, <see
              cref="T:System.Threading.LockRecursionException" />
+
+            
 
             
 
@@ -1334,8 +1526,12 @@
 
             
 
+            
+
              enumeration and the <see
              cref="T:System.Threading.ReaderWriterLockSlim" />
+
+            
 
             
 
@@ -1349,6 +1545,8 @@
           <para
             >Gets a value that indicates the recursion policy for the current <see
              cref="T:System.Threading.ReaderWriterLockSlim" />
+
+            
 
             
 
@@ -1455,12 +1653,16 @@
 
             
 
+            
+
              is 0 (zero), this method checks the lock state and returns false immediately if the desired state is unavailable.</para
           >
           <para>Multiple threads can enter read mode at the same time.</para>
           <para
             >If one or more threads are waiting to enter write mode, a thread that calls the <see
              cref="M:System.Threading.ReaderWriterLockSlim.TryEnterReadLock(System.Int32)" />
+
+            
 
             
 
@@ -1474,6 +1676,8 @@
           <para
             >One thread can be in upgradeable mode while other threads are in read mode. If additional threads are waiting to enter upgradeable mode, and there are no threads waiting to enter write mode, threads that call the <see
              cref="M:System.Threading.ReaderWriterLockSlim.TryEnterReadLock(System.Int32)" />
+
+            
 
             
 
@@ -1497,8 +1701,12 @@
 
           
 
+          
+
           The number of milliseconds to wait, or -1 (<see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -1535,12 +1743,16 @@
 
             
 
+            
+
              is 0 (zero), this method checks the lock state and returns false immediately if the desired state is unavailable.</para
           >
           <para>Multiple threads can enter the lock in read mode at the same time.</para>
           <para
             >If one or more threads are queued to enter write mode, a thread that calls the <see
              cref="M:System.Threading.ReaderWriterLockSlim.TryEnterReadLock(System.TimeSpan)" />
+
+            
 
             
 
@@ -1559,6 +1771,8 @@
 
             
 
+            
+
              method enter read mode immediately and do not block.</para
           >
         </remarks>
@@ -1572,6 +1786,8 @@
         </returns>
         <param name="timeout">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1611,11 +1827,15 @@
 
             
 
+            
+
              is 0 (zero), this method checks the lock state and returns false immediately if the desired state is unavailable.</para
           >
           <para
             >Use upgradeable mode when a thread usually accesses the resource that is protected by the <see
              cref="T:System.Threading.ReaderWriterLockSlim" />
+
+            
 
             
 
@@ -1627,6 +1847,8 @@
           <para
             >If one or more threads are waiting to enter write mode, a thread that calls the <see
              cref="M:System.Threading.ReaderWriterLockSlim.TryEnterUpgradeableReadLock(System.Int32)" />
+
+            
 
             
 
@@ -1653,8 +1875,12 @@
 
           
 
+          
+
           The number of milliseconds to wait, or -1 (<see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -1694,11 +1920,15 @@
 
             
 
+            
+
              is 0 (zero), this method checks the lock state and returns false immediately if the desired state is unavailable.</para
           >
           <para
             >Use upgradeable mode when a thread usually accesses the resource protected by the <see
              cref="T:System.Threading.ReaderWriterLockSlim" />
+
+            
 
             
 
@@ -1710,6 +1940,8 @@
           <para
             >If one or more threads are waiting to enter write mode, a thread that calls the <see
              cref="M:System.Threading.ReaderWriterLockSlim.TryEnterUpgradeableReadLock(System.Int32)" />
+
+            
 
             
 
@@ -1731,6 +1963,8 @@
         </returns>
         <param name="timeout">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1770,11 +2004,15 @@
 
             
 
+            
+
              is 0 (zero), this method checks the lock state and returns false immediately if the desired state is unavailable.</para
           >
           <para
             >If other threads have entered the lock in read mode, a thread that calls the <see
              cref="M:System.Threading.ReaderWriterLockSlim.TryEnterWriteLock(System.Int32)" />
+
+            
 
             
 
@@ -1801,8 +2039,12 @@
 
           
 
+          
+
           The number of milliseconds to wait, or -1 (<see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -1839,11 +2081,15 @@
 
             
 
+            
+
              is 0 (zero), this method checks the lock state and returns false immediately if the desired state is unavailable.</para
           >
           <para
             >If other threads have entered the lock in read mode, a thread that calls the <see
              cref="M:System.Threading.ReaderWriterLockSlim.TryEnterWriteLock(System.Int32)" />
+
+            
 
             
 
@@ -1865,6 +2111,8 @@
         </returns>
         <param name="timeout">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

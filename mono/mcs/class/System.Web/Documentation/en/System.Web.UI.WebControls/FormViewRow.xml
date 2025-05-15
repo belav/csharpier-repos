@@ -24,6 +24,8 @@
 
         
 
+        
+
          class is used to represent an individual row in a <see
          cref="T:System.Web.UI.WebControls.FormView" />
 
@@ -31,8 +33,12 @@
 
         
 
+        
+
          control. Each row in the <see
          cref="T:System.Web.UI.WebControls.FormView" />
+
+        
 
         
 
@@ -64,6 +70,8 @@
 
               
 
+              
+
                control.</para
             >
           </description>
@@ -81,8 +89,12 @@
 
               
 
+              
+
                control. The empty data row is displayed in a <see
                cref="T:System.Web.UI.WebControls.FormView" />
+
+              
 
               
 
@@ -105,6 +117,8 @@
 
               
 
+              
+
                control.</para
             >
           </description>
@@ -117,6 +131,8 @@
             <para
               >The header row in the <see
                cref="T:System.Web.UI.WebControls.FormView" />
+
+              
 
               
 
@@ -139,6 +155,8 @@
 
               
 
+              
+
                control.</para
             >
           </description>
@@ -152,6 +170,8 @@
 
         
 
+        
+
          object, use the <see
          cref="P:System.Web.UI.WebControls.FormViewRow.RowType" />
 
@@ -159,8 +179,12 @@
 
         
 
+        
+
          property. A <see
          cref="T:System.Web.UI.WebControls.FormViewRow" />
+
+        
 
         
 
@@ -192,6 +216,8 @@
 
               
 
+              
+
                object is in edit mode.</para
             >
           </description>
@@ -204,6 +230,8 @@
             <para
               >The <see
                cref="T:System.Web.UI.WebControls.FormViewRow" />
+
+              
 
               
 
@@ -226,6 +254,8 @@
 
               
 
+              
+
                object is in its normal (default) state.</para
             >
           </description>
@@ -238,6 +268,8 @@
             <para
               >The <see
                cref="T:System.Web.UI.WebControls.FormViewRow" />
+
+              
 
               
 
@@ -256,8 +288,12 @@
 
         
 
+        
+
          object, use the <see
          cref="P:System.Web.UI.WebControls.FormViewRow.RowState" />
+
+        
 
         
 
@@ -273,8 +309,12 @@
 
         
 
+        
+
          control displays the contents of its <see
          cref="P:System.Web.UI.WebControls.FormView.ItemTemplate" />
+
+        
 
         
 
@@ -287,8 +327,12 @@
 
         
 
+        
+
          property. To determine the index of the current data item in the data source, use the <see
          cref="P:System.Web.UI.WebControls.FormViewRow.ItemIndex" />
+
+        
 
         
 
@@ -304,8 +348,12 @@
 
         
 
+        
+
          object by using the <see
          cref="P:System.Web.UI.WebControls.TableRow.Cells" />
+
+        
 
         
 
@@ -323,6 +371,8 @@
 
             
 
+            
+
              collection of the cell to retrieve the control at a specific index.</para
           >
         </item>
@@ -335,8 +385,12 @@
 
             
 
+            
+
              method of the cell to retrieve the control, if the control has its <see
              cref="P:System.Web.UI.Control.ID" />
+
+            
 
             
 
@@ -354,8 +408,12 @@
 
         
 
+        
+
          class, see the <see
          cref="M:System.Web.UI.WebControls.FormViewRow.#ctor(System.Int32,System.Web.UI.WebControls.DataControlRowType,System.Web.UI.WebControls.DataControlRowState)" />
+
+        
 
         
 
@@ -369,6 +427,8 @@
       <para
         >Represents a row within a <see
          cref="T:System.Web.UI.WebControls.FormView" />
+
+        
 
         
 
@@ -403,11 +463,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The following table shows initial property values for an instance of the <see
              cref="T:System.Web.UI.WebControls.FormViewRow" />
+
+            
 
             
 
@@ -441,6 +505,8 @@
 
                   
 
+                  
+
                    parameter.</para
                 >
               </description>
@@ -455,6 +521,8 @@
                 <para
                   >The value specified by the <paramref
                    name="rowType" />
+
+                  
 
                   
 
@@ -479,6 +547,8 @@
 
                   
 
+                  
+
                    parameter.</para
                 >
               </description>
@@ -495,6 +565,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -505,8 +577,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.DataControlRowType" />
+
+          
 
           
 
@@ -521,8 +597,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.DataControlRowState" />
+
+          
 
           
 
@@ -549,6 +629,8 @@
           <para
             >Use the <see
              cref="P:System.Web.UI.WebControls.FormViewRow.ItemIndex" />
+
+            
 
             
 
@@ -597,10 +679,14 @@
 
           
 
+          
+
           The source of the event.</param
         >
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -635,6 +721,8 @@
 
             
 
+            
+
              property to determine the state of the row. The state can be a bitwise combination of the values in the following table.</para
           >
           <list type="table">
@@ -661,6 +749,8 @@
 
                   
 
+                  
+
                    object is in edit mode.</para
                 >
               </description>
@@ -673,6 +763,8 @@
                 <para
                   >The <see
                    cref="T:System.Web.UI.WebControls.FormViewRow" />
+
+                  
 
                   
 
@@ -695,6 +787,8 @@
 
                   
 
+                  
+
                    object is in its normal, read-only state.</para
                 >
               </description>
@@ -712,6 +806,8 @@
 
                   
 
+                  
+
                    object is selected.</para
                 >
               </description>
@@ -724,6 +820,8 @@
           <para
             >Gets the state of the <see
              cref="T:System.Web.UI.WebControls.FormViewRow" />
+
+            
 
             
 
@@ -759,8 +857,12 @@
 
             
 
+            
+
              property to determine the type of row that the <see
              cref="T:System.Web.UI.WebControls.FormViewRow" />
+
+            
 
             
 
@@ -792,6 +894,8 @@
 
                   
 
+                  
+
                    control.</para
                 >
               </description>
@@ -809,8 +913,12 @@
 
                   
 
+                  
+
                    control. The empty data row is displayed in a <see
                    cref="T:System.Web.UI.WebControls.FormView" />
+
+                  
 
                   
 
@@ -833,6 +941,8 @@
 
                   
 
+                  
+
                    control.</para
                 >
               </description>
@@ -845,6 +955,8 @@
                 <para
                   >The header row in the <see
                    cref="T:System.Web.UI.WebControls.FormView" />
+
+                  
 
                   
 
@@ -867,6 +979,8 @@
 
                   
 
+                  
+
                    control.</para
                 >
               </description>
@@ -884,6 +998,8 @@
 
                   
 
+                  
+
                    control.</para
                 >
               </description>
@@ -896,6 +1012,8 @@
           <para
             >Gets the row type of the <see
              cref="T:System.Web.UI.WebControls.FormViewRow" />
+
+            
 
             
 

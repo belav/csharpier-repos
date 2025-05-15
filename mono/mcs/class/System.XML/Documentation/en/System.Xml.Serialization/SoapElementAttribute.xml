@@ -37,8 +37,12 @@
 
         
 
+        
+
          class belongs to a family of attributes that controls how the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -55,11 +59,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >To serialize an object as an encoded SOAP message, you must construct the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -72,6 +80,8 @@
 
         
 
+        
+
          created with the <see
          cref="M:System.Xml.Serialization.SoapReflectionImporter.ImportTypeMapping(System.Type)" />
 
@@ -79,8 +89,12 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.Xml.Serialization.SoapReflectionImporter" />
+
+        
 
         
 
@@ -96,8 +110,12 @@
 
         
 
+        
+
          to a public field to direct the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -117,6 +135,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -125,6 +145,8 @@
       <para
         >Specifies that the public member value be serialized by the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -156,6 +178,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Serialization.SoapElementAttribute" />
+
+            
 
             
 
@@ -194,11 +218,15 @@
 
             
 
+            
+
              class and specifies the name of the XML element.</para
           >
         </summary>
         <param name="elementName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -234,8 +262,12 @@
 
             
 
+            
+
              structures, and apply a <see
              cref="T:System.Xml.Serialization.SoapElementAttribute" />
+
+            
 
             
 
@@ -248,8 +280,12 @@
 
             
 
+            
+
              set to "base64Binary" or "hexBinary", as appropriate. For the XML Schema time and date data types, use the <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -262,8 +298,12 @@
 
             
 
+            
+
              with the <see
              cref="P:System.Xml.Serialization.SoapElementAttribute.DataType" />
+
+            
 
             
 
@@ -279,8 +319,12 @@
 
             
 
+            
+
              with its <see
              cref="P:System.Xml.Serialization.SoapElementAttribute.DataType" />
+
+            
 
             
 
@@ -324,6 +368,8 @@
                 <para
                   >Array of <see
                    cref="T:System.Byte" />
+
+                  
 
                   
 
@@ -481,6 +527,8 @@
                 <para
                   >Array of <see
                    cref="T:System.Byte" />
+
+                  
 
                   
 
@@ -816,8 +864,12 @@
 
             
 
+            
+
              property is set to true, the xsi:null attribute is generated for class members that have been set to null. For example, if you set a field named MyStringArray to null, the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -834,12 +886,16 @@
 
             
 
+            
+
              property is false, no XML element is generated.</para
           >
           <block subset="none" type="note">
             <para
               >You cannot apply the <see
                cref="P:System.Xml.Serialization.XmlElementAttribute.IsNullable" />
+
+              
 
               
 
@@ -854,6 +910,8 @@
           <para
             >Gets or sets a value that indicates whether the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 

@@ -27,8 +27,12 @@
 
         
 
+        
+
          class is used to pass data to the <see
          cref="E:System.Web.UI.WebControls.ObjectDataSource.Filtering" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          control. The <see
          cref="P:System.Web.UI.WebControls.ObjectDataSourceFilteringEventArgs.ParameterValues" />
+
+        
 
         
 
@@ -55,6 +63,8 @@
 
         
 
+        
+
          method by setting the <see
          cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
 
@@ -62,8 +72,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.UI.WebControls.ObjectDataSourceFilteringEventArgs" />
+
+        
 
         
 
@@ -82,8 +96,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+        
 
         
 
@@ -118,6 +136,8 @@
 
             
 
+            
+
              collection are associated with any parameters that are specified in the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSource.FilterExpression" />
 
@@ -125,8 +145,12 @@
 
             
 
+            
+
              property when the <see
              cref="M:System.Web.UI.WebControls.ObjectDataSource.Select" />
+
+            
 
             
 
@@ -145,11 +169,15 @@
 
             
 
+            
+
              class by using the specified object.</para
           >
         </summary>
         <param name="parameterValues">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -162,8 +190,12 @@
 
           
 
+          
+
            of <see
            cref="T:System.Web.UI.WebControls.Parameter" />
+
+          
 
           
 
@@ -198,8 +230,12 @@
 
             
 
+            
+
              class is used to pass data to the <see
              cref="E:System.Web.UI.WebControls.ObjectDataSource.Filtering" />
+
+            
 
             
 
@@ -212,8 +248,12 @@
 
             
 
+            
+
              object. The <see
              cref="P:System.Web.UI.WebControls.ObjectDataSourceFilteringEventArgs.ParameterValues" />
+
+            
 
             
 
@@ -230,6 +270,8 @@
 
               
 
+              
+
                object that is returned by the <see
                cref="M:System.Web.UI.WebControls.ObjectDataSource.Select" />
 
@@ -237,8 +279,12 @@
 
               
 
+              
+
                method. If you are using the <see
                cref="P:System.Web.UI.WebControls.ObjectDataSource.FilterExpression" />
+
+              
 
               
 
@@ -258,6 +304,8 @@
 
             
 
+            
+
               interface that provides access to the <see
              cref="T:System.Web.UI.WebControls.Parameter" />
 
@@ -265,8 +313,12 @@
 
             
 
+            
+
              objects of the <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 

@@ -90,6 +90,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -165,6 +167,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -204,6 +208,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -217,11 +223,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >An enumerator for the <see
              cref="T:System.Net.Http.Headers.HttpHeaderValueCollection`1" />
+
+            
 
             
 
@@ -250,6 +260,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Net.Http.Headers.HttpHeaderValueCollection`1" />
+
+            
 
             
 
@@ -288,11 +300,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -354,6 +370,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -367,11 +385,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >An enumerator for the <see
              cref="T:System.Net.Http.Headers.HttpHeaderValueCollection`1" />
+
+            
 
             
 
@@ -408,6 +430,8 @@
 
             
 
+            
+
              object. object.</para
           >
         </summary>
@@ -416,6 +440,8 @@
           <para
             >Returns <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -455,6 +481,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -463,6 +491,8 @@
           <para
             >Returns <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -478,8 +508,12 @@
 
             
 
+            
+
              could be parsed and added to the <see
              cref="T:System.Net.Http.Headers.HttpHeaderValueCollection`1" />
+
+            
 
             
 
@@ -490,6 +524,8 @@
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

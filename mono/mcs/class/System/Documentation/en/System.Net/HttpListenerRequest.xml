@@ -26,8 +26,12 @@
 
         
 
+        
+
          object, the <see
          cref="T:System.Net.HttpListener" />
+
+        
 
         
 
@@ -40,6 +44,8 @@
 
         
 
+        
+
          object that contains information about the sender, the request, and the response that is sent to the client. The <see
          cref="P:System.Net.HttpListenerContext.Request" />
 
@@ -47,8 +53,12 @@
 
         
 
+        
+
          property returns the <see
          cref="T:System.Net.HttpListenerRequest" />
+
+        
 
         
 
@@ -64,8 +74,12 @@
 
         
 
+        
+
          object contains information about the request, such as the request <see
          cref="P:System.Net.HttpListenerRequest.HttpMethod" />
+
+        
 
         
 
@@ -78,8 +92,12 @@
 
         
 
+        
+
          string, and request body data (see the <see
          cref="P:System.Net.HttpListenerRequest.InputStream" />
+
+        
 
         
 
@@ -95,6 +113,8 @@
 
         
 
+        
+
          property.</para
       >
     </remarks>
@@ -103,6 +123,8 @@
       <para
         >Describes an incoming HTTP request to an <see
          cref="T:System.Net.HttpListener" />
+
+        
 
         
 
@@ -137,11 +159,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >For a complete list of request headers, see the <see
              cref="T:System.Net.HttpRequestHeader" />
+
+            
 
             
 
@@ -194,11 +220,15 @@
 
             
 
+            
+
              that indicates the status of the operation.</para
           >
         </returns>
         <param name="requestCallback">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -211,10 +241,14 @@
 
           
 
+          
+
            delegate that references the method to invoke when the operation is complete.</param
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -248,6 +282,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -256,6 +292,8 @@
           <para
             >Gets an error code that identifies a problem with the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+            
 
             
 
@@ -293,8 +331,12 @@
 
             
 
+            
+
              object can be used to convert byte sequences into character sets (code pages) and characters into byte sequences. This property uses the charset value from the Content-Type header to determine the encoding. If that information is not available, this property returns <see
              cref="P:System.Text.Encoding.Default" />
+
+            
 
             
 
@@ -334,6 +376,8 @@
 
             
 
+            
+
              enumeration.</para
           >
         </remarks>
@@ -368,8 +412,12 @@
 
             
 
+            
+
              enumeration and RFC 2616, available at <see
              cref="http://www.rfc-editor.org/">http://www.rfc-editor.org</see>
+
+            
 
             
 
@@ -380,6 +428,8 @@
           <para
             >The <see
              cref="P:System.Net.HttpListenerRequest.ContentType" />
+
+            
 
             
 
@@ -458,11 +508,15 @@
 
             
 
+            
+
              object that is returned when the operation started.</para
           >
         </returns>
         <param name="asyncResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -510,6 +564,8 @@
 
             
 
+            
+
              object that contains the client's X.509 v.3 certificate.</para
           >
         </returns>
@@ -543,6 +599,8 @@
 
             
 
+            
+
              object will complete when the certificate has been retrieved.</para
           >
           <para>If a call to this method to retrieve the client's X.509 v.3 certificate is in progress, then another call to this method cannot be made.</para>
@@ -561,6 +619,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -571,8 +631,12 @@
 
             
 
+            
+
              property on the task object returns a <see
              cref="N:System.Security.Cryptography.X509Certificates" />
+
+            
 
             
 
@@ -611,6 +675,8 @@
 
             
 
+            
+
              value that indicates whether the request has associated body data.</para
           >
         </summary>
@@ -642,6 +708,8 @@
           <para
             >For a complete list of request headers, see the <see
              cref="T:System.Net.HttpRequestHeader" />
+
+            
 
             
 
@@ -709,6 +777,8 @@
 
               
 
+              
+
                method.</para
             >
           </block>
@@ -748,8 +818,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Net.HttpListener.AuthenticationSchemeSelectorDelegate" />
+
+            
 
             
 
@@ -765,6 +839,8 @@
 
             
 
+            
+
              for requests from clients that are not successfully authenticated.</para
           >
         </remarks>
@@ -773,6 +849,8 @@
           <para
             >Gets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -811,6 +889,8 @@
 
             
 
+            
+
              value that indicates whether the request is sent from the local computer.</para
           >
         </summary>
@@ -840,6 +920,8 @@
 
             
 
+            
+
              instead of <see
              cref="F:System.Uri.UriSchemeHttp" />
 
@@ -847,8 +929,12 @@
 
             
 
+            
+
             . If the connection cannot be established using SSL, the client receives a <see
              cref="T:System.Net.WebException" />
+
+            
 
             
 
@@ -862,6 +948,8 @@
           <para
             >Gets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -900,6 +988,8 @@
 
             
 
+            
+
              value that indicates whether the TCP connection was  a WebSocket request.</para
           >
         </summary>
@@ -928,6 +1018,8 @@
           <para
             >Gets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -992,6 +1084,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1031,6 +1125,8 @@
 
             
 
+            
+
              property value from the <see
              cref="T:System.Uri" />
 
@@ -1038,8 +1134,12 @@
 
             
 
+            
+
              object returned by <see
              cref="P:System.Net.HttpListenerRequest.Url" />
+
+            
 
             
 
@@ -1058,8 +1158,12 @@
 
               
 
+              
+
                ) are added to the null key in the <see
                cref="T:System.Collections.Specialized.NameValueCollection" />
+
+              
 
               
 
@@ -1095,6 +1199,8 @@
           <para
             >To obtain the host and port information, use the <see
              cref="P:System.Net.HttpListenerRequest.RemoteEndPoint" />
+
+            
 
             
 
@@ -1189,6 +1295,8 @@
 
             
 
+            
+
              property to perform custom Service Provide Name (SPN) validation.</para
           >
         </remarks>
@@ -1226,8 +1334,12 @@
 
             
 
+            
+
              property can be used to retrieve the channel binding token (CBT) for an <see
              cref="T:System.Net.HttpListenerRequest" />
+
+            
 
             
 
@@ -1243,8 +1355,12 @@
 
             
 
+            
+
              property to perform custom authentication using calls to the native Win32 <see
              cref="http://go.microsoft.com/fwlink/?LinkId=147021">AcceptSecurityContext</see>
+
+            
 
             
 
@@ -1260,8 +1376,12 @@
 
             
 
+            
+
              property using the <see
              cref="M:System.Net.TransportContext.GetChannelBinding(System.Security.Authentication.ExtendedProtection.ChannelBindingKind)" />
+
+            
 
             
 
@@ -1274,8 +1394,12 @@
 
             
 
+            
+
              is not <see
              cref="F:System.Security.Authentication.ExtendedProtection.ChannelBindingKind.Endpoint" />
+
+            
 
             
 
@@ -1288,8 +1412,12 @@
 
             
 
+            
+
              will throw <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -1302,8 +1430,12 @@
 
             
 
+            
+
              overrides the <see
              cref="M:System.Net.TransportContext.GetChannelBinding(System.Security.Authentication.ExtendedProtection.ChannelBindingKind)" />
+
+            
 
             
 
@@ -1317,6 +1449,8 @@
           <para
             >Gets the <see
              cref="T:System.Net.TransportContext" />
+
+            
 
             
 
@@ -1351,6 +1485,8 @@
 
             
 
+            
+
              property allows you to obtain all the information available from a <see
              cref="T:System.Uri" />
 
@@ -1358,8 +1494,12 @@
 
             
 
+            
+
              object. If you need to know only the raw text of the URI request, consider using the <see
              cref="P:System.Net.HttpListenerRequest.RawUrl" />
+
+            
 
             
 
@@ -1375,8 +1515,12 @@
 
             
 
+            
+
              property is null if the <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -1392,8 +1536,12 @@
 
             
 
+            
+
              property indicates if <see
              cref="T:System.Net.HttpListener" />
+
+            
 
             
 
@@ -1409,8 +1557,12 @@
 
             
 
+            
+
              instance receives a request through the http.sys service, it creates an instance of the URI string provided by http.sys, and exposes it as the <see
              cref="P:System.Net.HttpListenerRequest.Url" />
+
+            
 
             
 
@@ -1435,6 +1587,8 @@
 
             
 
+            
+
              provided in the request line of a HTTP request:</para
           >
           <para>GET /path/</para>
@@ -1450,8 +1604,12 @@
 
             
 
+            
+
              property value and the string in the request line to create a converted URI. In addition, http.sys and the <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -1519,8 +1677,12 @@
 
             
 
+            
+
              receives a request, it uses the converted URI from http.sys as input to the <see
              cref="P:System.Net.HttpListenerRequest.Url" />
+
+            
 
             
 
@@ -1545,6 +1707,8 @@
 
             
 
+            
+
              property is set to false, then when the <see
              cref="T:System.Net.HttpListener" />
 
@@ -1552,8 +1716,12 @@
 
             
 
+            
+
              receives a request, it uses the raw URI instead of the converted URI from http.sys as input to the <see
              cref="P:System.Net.HttpListenerRequest.Url" />
+
+            
 
             
 
@@ -1567,6 +1735,8 @@
           <para
             >Gets the <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -1602,8 +1772,12 @@
 
             
 
+            
+
              header. Therefore, while the <see
              cref="P:System.Net.HttpListenerRequest.UrlReferrer" />
+
+            
 
             
 
@@ -1619,6 +1793,8 @@
 
             
 
+            
+
              enumeration.</para
           >
           <para
@@ -1629,8 +1805,12 @@
 
             
 
+            
+
              is null when there is no Referrer header in the request or when the Referrer header is present in the request but does not parse to a valid <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -1670,11 +1850,15 @@
 
             
 
+            
+
              enumeration.</para
           >
           <para
             >The <see
              cref="P:System.Net.HttpListenerRequest.UserAgent" />
+
+            
 
             
 
@@ -1708,6 +1892,8 @@
           <para
             >The information returned by this property is also available in the <see
              cref="P:System.Net.HttpListenerRequest.LocalEndPoint" />
+
+            
 
             
 
@@ -1748,6 +1934,8 @@
 
             
 
+            
+
              enumeration.</para
           >
         </remarks>
@@ -1781,11 +1969,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >For a complete list of request headers, see the <see
              cref="T:System.Net.HttpRequestHeader" />
+
+            
 
             
 

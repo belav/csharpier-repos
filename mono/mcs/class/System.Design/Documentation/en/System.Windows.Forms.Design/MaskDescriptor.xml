@@ -20,6 +20,8 @@
 
         
 
+        
+
          abstract class defines the common set of properties that all mask descriptors must implement. You can use mask descriptors to create predefined mask options for use in the UI type editor for the <see
          cref="T:System.Windows.Forms.MaskedTextBox" />
 
@@ -27,8 +29,12 @@
 
         
 
+        
+
         . For example, vsprvs provides predefined masks for data such as the Postal Code, time, different date formats, and telephone number. All predefined masks will be associated with the <see
          cref="T:System.ComponentModel.MaskedTextProvider" />
+
+        
 
         
 
@@ -44,8 +50,12 @@
 
         
 
+        
+
          types at design time by querying the <see
          cref="T:System.ComponentModel.Design.ITypeDiscoveryService" />
+
+        
 
         
 
@@ -77,8 +87,12 @@
 
             
 
+            
+
              is a compiler-supplied default constructor. A default constructor is required by the <see
              cref="T:System.ComponentModel.Design.ITypeDiscoveryService" />
+
+            
 
             
 
@@ -92,6 +106,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.Design.MaskDescriptor" />
+
+            
 
             
 
@@ -127,6 +143,8 @@
 
             
 
+            
+
              representing the locale the mask is authored for.</para
           >
         </summary>
@@ -155,8 +173,12 @@
 
             
 
+            
+
              method determines whether <paramref
              name="maskDescriptor" />
+
+            
 
             
 
@@ -168,6 +190,8 @@
           <para
             >1. The <see
              cref="P:System.Windows.Forms.Design.MaskDescriptor.Mask" />
+
+            
 
             
 
@@ -185,6 +209,8 @@
 
               
 
+              
+
                property is not considered, because the <see
                cref="T:System.ComponentModel.MaskedTextProvider" />
 
@@ -192,8 +218,12 @@
 
               
 
+              
+
                and <see
                cref="T:System.Windows.Forms.MaskedTextBox" />
+
+              
 
               
 
@@ -213,8 +243,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Windows.Forms.Design.MaskDescriptor" />
+
+            
 
             
 
@@ -233,8 +267,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Windows.Forms.Design.MaskDescriptor" />
+
+            
 
             
 
@@ -250,6 +288,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Design.MaskDescriptor" />
 
@@ -257,8 +297,12 @@
 
           
 
+          
+
            to compare with the current <see
            cref="T:System.Windows.Forms.Design.MaskDescriptor" />
+
+          
 
           
 
@@ -310,8 +354,12 @@
 
             
 
+            
+
              method determines whether <paramref
              name="maskDescriptor" />
+
+            
 
             
 
@@ -322,6 +370,8 @@
           <para
             >A valid <see
              cref="T:System.Windows.Forms.Design.MaskDescriptor" />
+
+            
 
             
 
@@ -354,6 +404,8 @@
 
                 
 
+                
+
                  object, if any. </para
               >
             </item>
@@ -373,11 +425,15 @@
 
             
 
+            
+
              is valid; otherwise, false. </para
           >
         </returns>
         <param name="maskDescriptor">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -432,6 +488,8 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.ComponentModel.MaskedTextProvider" />
 
@@ -439,8 +497,12 @@
 
             
 
+            
+
              class. When a predefined mask is selected in vsprvs, its <see
              cref="P:System.Windows.Forms.Design.MaskDescriptor.Mask" />
+
+            
 
             
 
@@ -476,6 +538,8 @@
 
             
 
+            
+
              property is displayed in the <ui
             >Mask Description</ui>
 
@@ -483,8 +547,12 @@
 
             
 
+            
+
              column in the visual editor for the <see
              cref="T:System.Windows.Forms.MaskedTextBox" />
+
+            
 
             
 
@@ -520,6 +588,8 @@
 
             
 
+            
+
              property is displayed in the <ui
             >Data Format</ui>
 
@@ -527,8 +597,12 @@
 
             
 
+            
+
              column in the visual editor for the <see
              cref="T:System.Windows.Forms.MaskedTextBox" />
+
+            
 
             
 
@@ -580,6 +654,8 @@
 
             
 
+            
+
              property is used to validate the input string after the mask has been applied to it. It directly corresponds to the <see
              cref="P:System.Windows.Forms.MaskedTextBox.ValidatingType" />
 
@@ -587,8 +663,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.MaskedTextBox" />
+
+            
 
             
 

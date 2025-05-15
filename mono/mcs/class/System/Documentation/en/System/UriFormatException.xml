@@ -39,11 +39,15 @@
 
         
 
+        
+
          is thrown by the Uri class constructor if the supplied URI could not be correctly parsed. The format for a valid URI is defined in RFC 2396.</para
       >
       <para
         >The text of the <see
          cref="P:System.Exception.Message" />
+
+        
 
         
 
@@ -60,6 +64,8 @@
 
           
 
+          
+
            or the <format
            type="text/html">
             <a href="c31e1663-c164-4e65-b66d-d3aa8750a154">Portable Class Library</a>
@@ -69,8 +75,12 @@
 
           
 
+          
+
           , but it is thrown by some members that are. To catch the exception in that case, write a catch statement for <see
            cref="T:System.FormatException" />
+
+          
 
           
 
@@ -115,6 +125,8 @@
 
             
 
+            
+
              class with all fields set to null.</para
           >
         </remarks>
@@ -123,6 +135,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.UriFormatException" />
+
+            
 
             
 
@@ -165,6 +179,8 @@
 
             
 
+            
+
              instance with the <see
              cref="P:System.Exception.Message" />
 
@@ -172,8 +188,12 @@
 
             
 
+            
+
              property set to the value of <paramref
              name="textString" />
+
+            
 
             
 
@@ -192,11 +212,15 @@
 
             
 
+            
+
              class with the specified message.</para
           >
         </summary>
         <param name="textString">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -237,8 +261,12 @@
 
             
 
+            
+
              interface for the <see
              cref="T:System.UriFormatException" />
+
+            
 
             
 
@@ -257,6 +285,8 @@
 
             
 
+            
+
              class from the specified <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
@@ -264,8 +294,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -281,6 +315,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
@@ -288,8 +324,12 @@
 
           
 
+          
+
            that contains the information that is required to serialize the new <see
            cref="T:System.UriFormatException" />
+
+          
 
           
 
@@ -304,6 +344,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
 
@@ -311,8 +353,12 @@
 
           
 
+          
+
            that contains the source of the serialized stream that is associated with the new <see
            cref="T:System.UriFormatException" />
+
+          
 
           
 
@@ -350,8 +396,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -364,11 +414,15 @@
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.UriFormatException" />
+
+            
 
             
 
@@ -412,6 +466,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -428,11 +484,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="textString">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -447,8 +507,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 
@@ -494,8 +558,12 @@
 
             
 
+            
+
              instance with the data that is needed to serialize the <see
              cref="T:System.UriFormatException" />
+
+            
 
             
 

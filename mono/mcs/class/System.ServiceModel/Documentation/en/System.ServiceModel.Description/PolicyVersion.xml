@@ -103,6 +103,8 @@
 
             
 
+            
+
              instance that represents WS-Policy 1.2.</para
           >
         </summary>
@@ -137,6 +139,8 @@
 
             
 
+            
+
              instance that represents WS-Policy 1.5.</para
           >
         </summary>
@@ -163,6 +167,8 @@
           <para
             >Converts the <see
              cref="T:System.ServiceModel.Description.PolicyVersion" />
+
+            
 
             
 

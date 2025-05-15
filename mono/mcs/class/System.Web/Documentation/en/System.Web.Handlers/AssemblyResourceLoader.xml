@@ -28,11 +28,15 @@
 
         
 
+        
+
          class is an HTTP handler that enables an ASP.NET page or control to load embedded resources, such as client script, images, and data files, from a compiled .NET assembly. For more information on how to embed resources in a .NET assembly, see the documentation for the compiler that you use. </para
       >
       <para
         >The <see
          cref="T:System.Web.Handlers.AssemblyResourceLoader" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          method. Before responding to the request, the <see
          cref="T:System.Web.Handlers.AssemblyResourceLoader" />
+
+        
 
         
 
@@ -82,6 +90,8 @@
 
             
 
+            
+
              class. This constructor supports the ASP.NET infrastructure and is not intended to be used directly from your code.</para
           >
         </summary>
@@ -111,8 +121,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.IHttpHandler" />
+
+            
 
             
 
@@ -126,6 +140,8 @@
           <para
             >Gets a value that indicates whether another request can reuse the <see
              cref="T:System.Web.IHttpHandler" />
+
+            
 
             
 
@@ -162,8 +178,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.IHttpHandler" />
+
+            
 
             
 
@@ -182,11 +202,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

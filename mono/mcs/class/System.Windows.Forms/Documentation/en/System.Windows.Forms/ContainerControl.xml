@@ -28,10 +28,14 @@
 
         
 
+        
+
          represents a control that can function as a container for other controls and provides focus management. Controls that inherit from this class can track the active control they contain, even when the focus moves somewhere within a different container.</para
       >
       <para>
         <see cref="T:System.Windows.Forms.ContainerControl" />
+
+        
 
         
 
@@ -50,8 +54,12 @@
 
         
 
+        
+
          class. <see
          cref="T:System.Windows.Forms.Form" />
+
+        
 
         
 
@@ -64,6 +72,8 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Windows.Forms.UpDownBase" />
 
@@ -71,8 +81,12 @@
 
         
 
+        
+
          classes inherit from <see
          cref="T:System.Windows.Forms.ContainerControl" />
+
+        
 
         
 
@@ -98,6 +112,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ContainerControl" />
+
+            
 
             
 
@@ -141,11 +157,15 @@
 
             
 
+            
+
              property activates or retrieves the active control on the container control.</para
           >
           <para
             >In order to receive a valid value from this property, the object that calls it must either contain or be contained in the control it is calling. If one form tries to call another form's <see
              cref="P:System.Windows.Forms.ContainerControl.ActiveControl" />
+
+            
 
             
 
@@ -213,8 +233,12 @@
 
             
 
+            
+
              property represents the DPI or font setting of the screen that the control was scaled to or designed for. Specifically, at design time this property will be set by the Windows Forms designer to the value your monitor is currently using. Then, when the form loads at run time, if the <see
              cref="P:System.Windows.Forms.ContainerControl.CurrentAutoScaleDimensions" />
+
+            
 
             
 
@@ -227,8 +251,12 @@
 
             
 
+            
+
             , the <see
              cref="M:System.Windows.Forms.ContainerControl.PerformAutoScale" />
+
+            
 
             
 
@@ -241,6 +269,8 @@
 
             
 
+            
+
              will be updated to reflect the new scaling size.</para
           >
           <para
@@ -248,6 +278,8 @@
              type="text/html">
               <a href="68fad25b-afbc-44bd-8e1b-966fc43507a4">Automatic Scaling in Windows Forms</a>
             </format>
+
+            
 
             
 
@@ -301,8 +333,12 @@
 
             
 
+            
+
              property represents the scaling factor between the <see
              cref="P:System.Windows.Forms.ContainerControl.CurrentAutoScaleDimensions" />
+
+            
 
             
 
@@ -315,8 +351,12 @@
 
             
 
+            
+
              properties. This value is calculated when it is required. For example, if <see
              cref="P:System.Windows.Forms.ContainerControl.CurrentAutoScaleDimensions" />
+
+            
 
             
 
@@ -329,8 +369,12 @@
 
             
 
+            
+
              is (96, 96) then the <see
              cref="P:System.Windows.Forms.ContainerControl.AutoScaleFactor" />
+
+            
 
             
 
@@ -343,6 +387,8 @@
              type="text/html">
               <a href="68fad25b-afbc-44bd-8e1b-966fc43507a4">Automatic Scaling in Windows Forms</a>
             </format>
+
+            
 
             
 
@@ -393,8 +439,12 @@
 
             
 
+            
+
              property specifies the current automatic scaling mode of this control. Scaling by <see
              cref="F:System.Windows.Forms.AutoScaleMode.Font" />
+
+            
 
             
 
@@ -407,6 +457,8 @@
 
             
 
+            
+
              is useful when you want to size a control or form relative to the screen. For example, you may want to use dots per inch (DPI) scaling on a control displaying a chart or other graphic so that it always occupies a certain percentage of the screen. </para
           >
           <para
@@ -414,6 +466,8 @@
              type="text/html">
               <a href="68fad25b-afbc-44bd-8e1b-966fc43507a4">Automatic Scaling in Windows Forms</a>
             </format>
+
+            
 
             
 
@@ -466,6 +520,8 @@
 
             
 
+            
+
              will differ for each control. For more details on implicit validation, see <format
              type="text/html">
               <a href="4ec07681-1dee-4bf9-be5e-718f635a33a1"
@@ -477,11 +533,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >Setting this property to a new value will raise the <see
              cref="E:System.Windows.Forms.ContainerControl.AutoValidateChanged" />
+
+            
 
             
 
@@ -526,6 +586,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -534,6 +596,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.ContainerControl.AutoValidate" />
+
+            
 
             
 
@@ -590,6 +654,8 @@
 
             
 
+            
+
              class can enable native IME support by overriding this property to return true. However, the application is then responsible for making sure that there are no conflicts between the native IME and the Windows Forms IME. This scenario is not supported.</para
           >
         </remarks>
@@ -598,6 +664,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="P:System.Windows.Forms.Control.ImeMode" />
+
+            
 
             
 
@@ -660,8 +728,12 @@
 
             
 
+            
+
              property represents the reference dimensions on the current screen. In contrast, the <see
              cref="P:System.Windows.Forms.ContainerControl.AutoScaleDimensions" />
+
+            
 
             
 
@@ -674,11 +746,15 @@
 
             
 
+            
+
              property is the ratio of the two.</para
           >
           <para
             >The interpretation of the dimension value depends on the <see
              cref="P:System.Windows.Forms.ContainerControl.AutoScaleMode" />
+
+            
 
             
 
@@ -696,6 +772,8 @@
 
                 
 
+                
+
                 , this property represents the resolution of the screen, in dots per inch.</para
               >
             </item>
@@ -703,6 +781,8 @@
               <para
                 >If the mode is <see
                  cref="F:System.Windows.Forms.AutoScaleMode.Font" />
+
+                
 
                 
 
@@ -720,8 +800,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Windows.Forms.AutoScaleMode.None" />
+
+            
 
             
 
@@ -734,8 +818,12 @@
 
             
 
+            
+
              is set equal to <see
              cref="P:System.Windows.Forms.ContainerControl.AutoScaleDimensions" />
+
+            
 
             
 
@@ -748,6 +836,8 @@
              type="text/html">
               <a href="68fad25b-afbc-44bd-8e1b-966fc43507a4">Automatic Scaling in Windows Forms</a>
             </format>
+
+            
 
             
 
@@ -812,11 +902,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ContainerControl.OnAutoValidateChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -835,6 +929,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -845,8 +941,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -893,6 +993,8 @@
 
             
 
+            
+
              will cause the layout to be recalculated and reapplied to the contained controls if the <see
              cref="P:System.Windows.Forms.ContainerControl.AutoScaleMode" />
 
@@ -900,8 +1002,12 @@
 
             
 
+            
+
              property has a value of <see
              cref="F:System.Windows.Forms.AutoScaleMode.Font" />
+
+            
 
             
 
@@ -919,11 +1025,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ContainerControl.OnFontChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -942,6 +1052,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -952,8 +1064,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -998,6 +1114,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1008,8 +1126,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.LayoutEventArgs" />
+
+          
 
           
 
@@ -1089,6 +1211,8 @@
 
             
 
+            
+
              method is typically only required after programmatic changes to the layout during run time. <see
              cref="M:System.Windows.Forms.ContainerControl.PerformAutoScale" />
 
@@ -1096,8 +1220,12 @@
 
             
 
+            
+
              is implicitly called from the <see
              cref="M:System.Windows.Forms.ContainerControl.OnLayout(System.Windows.Forms.LayoutEventArgs)" />
+
+            
 
             
 
@@ -1112,6 +1240,8 @@
 
             
 
+            
+
              is recursive; each child control, if it is a container, will have its version of this method called when the container's version executes. </para
           >
           <para
@@ -1119,6 +1249,8 @@
              type="text/html">
               <a href="68fad25b-afbc-44bd-8e1b-966fc43507a4">Automatic Scaling in Windows Forms</a>
             </format>
+
+            
 
             
 
@@ -1251,6 +1383,8 @@
 
             
 
+            
+
              property set to false cannot be selected, so the next available control will be selected.</para
           >
         </remarks>
@@ -1269,8 +1403,12 @@
 
           
 
+          
+
           true to cycle forward through the controls in the <see
            cref="T:System.Windows.Forms.ContainerControl" />
+
+          
 
           
 
@@ -1335,6 +1473,8 @@
 
             
 
+            
+
              parameter must be a child of the container control.</para
           >
         </remarks>
@@ -1353,8 +1493,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -1382,6 +1526,8 @@
 
             
 
+            
+
              class does not provide an implementation for the <see
              cref="M:System.Windows.Forms.ContainerControl.UpdateDefaultButton" />
 
@@ -1389,8 +1535,12 @@
 
             
 
+            
+
              method. Classes that inherit this method must implement <see
              cref="M:System.Windows.Forms.ContainerControl.UpdateDefaultButton" />
+
+            
 
             
 
@@ -1427,8 +1577,12 @@
 
             
 
+            
+
              method validates the last child control that is not validated and its ancestors up through, but not including, the current container control. This overloaded version always performs validation, regardless of the value of the <see
              cref="P:System.Windows.Forms.ContainerControl.AutoValidate" />
+
+            
 
             
 
@@ -1447,8 +1601,12 @@
 
             
 
+            
+
              and <see
              cref="E:System.Windows.Forms.Control.Validated" />
+
+            
 
             
 
@@ -1467,8 +1625,12 @@
 
             
 
+            
+
              or <see
              cref="E:System.Windows.Forms.Control.Validated" />
+
+            
 
             
 
@@ -1506,6 +1668,8 @@
 
             
 
+            
+
              method validates the last child control that is not validated and its ancestors up through, but not including, the current container control. This overloaded version performs validation based on the following conditions:</para
           >
           <list type="bullet">
@@ -1513,6 +1677,8 @@
               <para
                 >If the <paramref
                  name="checkAutoValidate" />
+
+                
 
                 
 
@@ -1530,8 +1696,12 @@
 
                 
 
+                
+
                  parameter is false, validation occurs only if the <see
                  cref="P:System.Windows.Forms.ContainerControl.AutoValidate" />
+
+                
 
                 
 
@@ -1556,8 +1726,12 @@
 
             
 
+            
+
              or <see
              cref="E:System.Windows.Forms.Control.Validated" />
+
+            
 
             
 
@@ -1573,8 +1747,12 @@
 
           
 
+          
+
           If true, the value of the <see
            cref="P:System.Windows.Forms.ContainerControl.AutoValidate" />
+
+          
 
           
 
@@ -1612,8 +1790,12 @@
 
             
 
+            
+
              will descend a control's hierarchy and examine each control to see if it supports validation. If the control can be selected by the user and its <see
              cref="P:System.Windows.Forms.Control.CausesValidation" />
+
+            
 
             
 
@@ -1626,6 +1808,8 @@
 
             
 
+            
+
              will cause the <see
              cref="E:System.Windows.Forms.Control.Validating" />
 
@@ -1633,8 +1817,12 @@
 
             
 
+            
+
              event to occur. If any of the controls cancel the <see
              cref="E:System.Windows.Forms.Control.Validating" />
+
+            
 
             
 
@@ -1650,11 +1838,15 @@
 
             
 
+            
+
              event occurs, it will cause the control to push its current data back to the data source. </para
           >
           <para
             >Calling <see
              cref="M:System.Windows.Forms.ContainerControl.ValidateChildren" />
+
+            
 
             
 
@@ -1667,6 +1859,8 @@
 
             
 
+            
+
              with a <see
              cref="T:System.Windows.Forms.ValidationConstraints" />
 
@@ -1674,8 +1868,12 @@
 
             
 
+            
+
              of <see
              cref="F:System.Windows.Forms.ValidationConstraints.None" />
+
+            
 
             
 
@@ -1698,8 +1896,12 @@
 
             
 
+            
+
              or <see
              cref="E:System.Windows.Forms.Control.Validated" />
+
+            
 
             
 
@@ -1743,6 +1945,8 @@
 
             
 
+            
+
              will examine all the children of the current control, causing the <see
              cref="E:System.Windows.Forms.Control.Validating" />
 
@@ -1750,8 +1954,12 @@
 
             
 
+            
+
              event to occur on a control if it meets the criteria spelled out by <see
              cref="T:System.Windows.Forms.ValidationConstraints" />
+
+            
 
             
 
@@ -1767,8 +1975,12 @@
 
             
 
+            
+
              parameters at once by combining them with a bitwise OR operator. Combining parameters with a bitwise OR operator will result in a logical AND operation. For example, calling ValidateChildren(ValidationConstraints.ImmediateChildren | ValidationConstraints.Enabled) will only raise the <see
              cref="E:System.Windows.Forms.Control.Validating" />
+
+            
 
             
 
@@ -1784,8 +1996,12 @@
 
             
 
+            
+
              property set to true in order for its <see
              cref="E:System.Windows.Forms.Control.Validating" />
+
+            
 
             
 
@@ -1798,8 +2014,12 @@
 
             
 
+            
+
              property of the control or of the control's container to false if you want validation to happen only when you call <see
              cref="M:System.Windows.Forms.ContainerControl.ValidateChildren(System.Windows.Forms.ValidationConstraints)" />
+
+            
 
             
 
@@ -1815,11 +2035,15 @@
 
             
 
+            
+
              event occurs, it will cause the control to push its current data back to the data source. </para
           >
           <para
             >You cannot achieve the opposite effect of a <see
              cref="T:System.Windows.Forms.ValidationConstraints" />
+
+            
 
             
 
@@ -1832,6 +2056,8 @@
 
             
 
+            
+
              field to <see
              cref="M:System.Windows.Forms.ContainerControl.ValidateChildren(System.Windows.Forms.ValidationConstraints)" />
 
@@ -1839,8 +2065,12 @@
 
             
 
+            
+
             , it will not validate all children that are not visible on the container. Supplying any negative parameter to <see
              cref="M:System.Windows.Forms.ContainerControl.ValidateChildren(System.Windows.Forms.ValidationConstraints)" />
+
+            
 
             
 
@@ -1863,8 +2093,12 @@
 
             
 
+            
+
              or <see
              cref="E:System.Windows.Forms.Control.Validated" />
+
+            
 
             
 
@@ -1880,8 +2114,12 @@
 
           
 
+          
+
           Places restrictions on which controls have their <see
            cref="E:System.Windows.Forms.Control.Validating" />
+
+          
 
           
 

@@ -20,8 +20,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.LinkLabel" />
+
+        
 
         
 
@@ -35,6 +39,8 @@
       <para
         >Specifies the behaviors of a link in a <see
          cref="T:System.Windows.Forms.LinkLabel" />
+
+        
 
         
 
@@ -96,8 +102,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.LinkLabel" />
+
+            
 
             
 

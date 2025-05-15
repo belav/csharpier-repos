@@ -62,8 +62,12 @@
 
             
 
+            
+
              constructor to specify that the contracts in the type apply to the IArray interface. This code example is part of a larger example provided for the <see
              cref="T:System.Diagnostics.Contracts.ContractClassAttribute" />
+
+            
 
             
 
@@ -83,11 +87,15 @@
 
             
 
+            
+
              class, specifying the type the current class is a contract for. </para
           >
         </summary>
         <param name="typeContractsAreFor">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

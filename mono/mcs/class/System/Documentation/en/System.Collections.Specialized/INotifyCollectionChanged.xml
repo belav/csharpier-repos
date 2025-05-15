@@ -29,6 +29,8 @@
 
         
 
+        
+
          interface. However, to set up dynamic bindings so that insertions or deletions in the collection update the TLA2#tla_ui automatically, the collection must implement the <see
          cref="T:System.Collections.Specialized.INotifyCollectionChanged" />
 
@@ -36,8 +38,12 @@
 
         
 
+        
+
          interface. This interface exposes the <see
          cref="E:System.Collections.Specialized.INotifyCollectionChanged.CollectionChanged" />
+
+        
 
         
 
@@ -53,8 +59,12 @@
 
         
 
+        
+
          class, which is a built-in implementation of a data collection that exposes the <see
          cref="T:System.Collections.Specialized.INotifyCollectionChanged" />
+
+        
 
         
 
@@ -64,6 +74,8 @@
          type="text/html">
           <a href="6cf7e275-df76-41c6-a611-53b889b8fd5a">Implement an Observable Collection</a>
         </format>
+
+        
 
         
 
@@ -81,11 +93,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >Before implementing your own collection, consider using <see
          cref="T:System.Collections.ObjectModel.ObservableCollection`1" />
+
+        
 
         
 
@@ -98,8 +114,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Collections.ObjectModel.Collection`1" />
+
+        
 
         
 
@@ -112,11 +132,15 @@
 
         
 
+        
+
         , among many others.</para
       >
       <para
         >If you have an advanced scenario and want to implement your own collection, consider using <see
          cref="T:System.Collections.IList" />
+
+        
 
         
 
@@ -153,6 +177,8 @@
           <para
             >The event handler receives an argument of type <see
              cref="T:System.Collections.Specialized.NotifyCollectionChangedEventArgs" />
+
+            
 
             
 

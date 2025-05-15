@@ -11,6 +11,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="14.7">additive-expression</non_terminal>
@@ -35,11 +37,15 @@
 
     
 
+    
+
     ) is applied to select a specific operator implementation. The operands are converted to the parameter types of the selected operator, and the type of the result is the return type of the operator. </paragraph
   >
   <paragraph
     >When declaring an overloaded shift operator, the type of the first operand must always be the class or struct containing the operator declaration, and the type of the second operand must always be <keyword
     >int</keyword>
+
+    
 
     
 
@@ -53,7 +59,7 @@
       <list_item
         > Shift left: <code_example
         >
-<![CDATA[
+          <![CDATA[
 int operator <<(int x, int count);  
 uint operator <<(uint x, int count);  
 long operator <<(long x, int count);  
@@ -65,18 +71,22 @@ ulong operator <<(ulong x, int count);
 
         
 
+        
+
         The &lt;&lt; operator shifts x left by a number of bits computed as described below. The high-order bits outside the range of the result type of x are discarded, the remaining bits are shifted left, and the low-order empty bit positions are set to zero. </list_item
       >
       <list_item
         > Shift right: <code_example
         >
-<![CDATA[
+          <![CDATA[
 int operator >>(int x, int count);  
 uint operator >>(uint x, int count);  
 long operator >>(long x, int count);  
 ulong operator >>(ulong x, int count);  
 ]]>
         </code_example>
+
+        
 
         
 
@@ -89,8 +99,12 @@ ulong operator >>(ulong x, int count);
 
         
 
+        
+
          or <keyword
         >long</keyword>
+
+        
 
         
 
@@ -103,8 +117,12 @@ ulong operator >>(ulong x, int count);
 
         
 
+        
+
          or <keyword
         >ulong</keyword>
+
+        
 
         
 
@@ -125,8 +143,12 @@ ulong operator >>(ulong x, int count);
 
         
 
+        
+
          or <keyword
         >uint</keyword>
+
+        
 
         
 
@@ -142,8 +164,12 @@ ulong operator >>(ulong x, int count);
 
         
 
+        
+
          or <keyword
         >ulong</keyword>
+
+        
 
         
 
@@ -163,6 +189,8 @@ ulong operator >>(ulong x, int count);
 
     
 
+    
+
     , the operation unchecked((<keyword
     >int</keyword>
 
@@ -170,8 +198,12 @@ ulong operator >>(ulong x, int count);
 
     
 
+    
+
     )((<keyword
     >uint</keyword>
+
+    
 
     
 

@@ -36,8 +36,12 @@
 
         
 
+        
+
          class represents the collection returned from the <see
          cref="M:System.Diagnostics.PerformanceCounterCategory.ReadCategory" />
+
+        
 
         
 
@@ -50,8 +54,12 @@
 
         
 
+        
+
          object for each counter. Each <see
          cref="T:System.Diagnostics.InstanceDataCollection" />
+
+        
 
         
 
@@ -65,6 +73,8 @@
       <para
         >Provides a strongly typed collection of <see
          cref="T:System.Diagnostics.InstanceDataCollection" />
+
+        
 
         
 
@@ -106,6 +116,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -140,11 +152,15 @@
 
             
 
+            
+
              parameter is case-insensitive.</para
           >
           <para
             >Each <see
              cref="T:System.Diagnostics.InstanceDataCollection" />
+
+            
 
             
 
@@ -157,6 +173,8 @@
 
             
 
+            
+
              returns true if there is an <see
              cref="T:System.Diagnostics.InstanceDataCollection" />
 
@@ -164,8 +182,12 @@
 
             
 
+            
+
              object whose associated counter has the name specified by the <paramref
              name="counterName" />
+
+            
 
             
 
@@ -184,6 +206,8 @@
 
             
 
+            
+
              objects) exists in the collection.</para
           >
         </summary>
@@ -193,6 +217,8 @@
         </returns>
         <param name="counterName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -236,11 +262,15 @@
 
             
 
+            
+
              instances to the collection, at the specified index.</para
           >
         </summary>
         <param name="counters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -253,10 +283,14 @@
 
           
 
+          
+
            instances (identified by the counters they contain) to add to the collection. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

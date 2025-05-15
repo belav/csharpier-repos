@@ -11,8 +11,12 @@
 
         
 
+        
+
          namespace provides access to GDI+ basic graphics functionality. More advanced functionality is provided in the <see
          cref="N:System.Drawing.Drawing2D" />
+
+        
 
         
 
@@ -25,8 +29,12 @@
 
         
 
+        
+
         , and <see
          cref="N:System.Drawing.Text" />
+
+        
 
         
 
@@ -45,8 +53,12 @@
 
         
 
+        
+
          class provides methods for drawing to the display device. Classes such as <see
          cref="T:System.Drawing.Rectangle" />
+
+        
 
         
 
@@ -59,8 +71,12 @@
 
         
 
+        
+
          encapsulate GDI+ primitives. The <see
          cref="T:System.Drawing.Pen" />
+
+        
 
         
 
@@ -73,12 +89,16 @@
 
         
 
+        
+
          are used to fill the interiors of shapes.</para
       >
       <block subset="none" type="note">
         <para
           >Classes within the <see
            cref="N:System.Drawing" />
+
+          
 
           
 

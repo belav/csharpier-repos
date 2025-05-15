@@ -8,8 +8,12 @@
 
     
 
+    
+
      (<hyperlink
     >15</hyperlink>
+
+    
 
     
 
@@ -20,6 +24,8 @@
       <name>
         <non_terminal where="15">embedded-statement</non_terminal>
       </name>
+
+      
 
       
 
@@ -37,6 +43,8 @@
       <name>
         <non_terminal where="25.6">fixed-statement</non_terminal>
       </name>
+
+      
 
       
 
@@ -60,8 +68,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -86,6 +98,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="9.4.2">identifier</non_terminal>
@@ -97,6 +111,8 @@
       <name>
         <non_terminal where="25.6">fixed-pointer-initializer</non_terminal>
       </name>
+
+      
 
       
 
@@ -120,8 +136,12 @@
 
     
 
+    
+
      declares a local variable of the given <non_terminal
      where="25.2">pointer-type</non_terminal>
+
+    
 
     
 
@@ -134,6 +154,8 @@
 
     
 
+    
+
     . A local variable declared in a fixed statement is accessible in any <non_terminal
      where="25.6">fixed-pointer-initializer</non_terminal>
 
@@ -141,8 +163,12 @@
 
     
 
+    
+
     s occurring to the right of that variable's declaration, and in the <non_terminal
      where="15">embedded-statement</non_terminal>
+
+    
 
     
 
@@ -158,11 +184,15 @@
 
     
 
+    
+
      can be one of the following: <list
     >
       <list_item
         > The token "&amp;" followed by a <non_terminal
          where="12.4">variable-reference</non_terminal>
+
+        
 
         
 
@@ -175,8 +205,12 @@
 
         
 
+        
+
         ) to a moveable variable (<hyperlink
         >25.3</hyperlink>
+
+        
 
         
 
@@ -187,6 +221,8 @@
       <list_item
         > An expression of an <non_terminal
          where="19.1">array-type</non_terminal>
+
+        
 
         
 
@@ -205,8 +241,12 @@
 
     
 
+    
+
      the fixed statement ensures that the variable referenced by the address is not subject to relocation or disposal by the garbage collector for the duration of the fixed statement. For example, if the address computed by a <non_terminal
      where="25.6">fixed-pointer-initializer</non_terminal>
+
+    
 
     
 
@@ -220,7 +260,7 @@
 
       >[Example: The example <code_example
       >
-<![CDATA[
+        <![CDATA[
 class Test  
 {  
    static int x;  
@@ -246,6 +286,8 @@ class Test
 
       
 
+      
+
       demonstrates several uses of the fixed statement. The first statement fixes and obtains the address of a static field, the second statement fixes and obtains the address of an instance field, and the third statement fixes and obtains the address of an array element. In each case it would have been an error to use the regular &amp; operator since the variables are all classified as moveable variables. </example
     >
   </paragraph>
@@ -256,7 +298,7 @@ class Test
     <example
       >Here's another example of the fixed statement, this time using string: <code_example
       >
-<![CDATA[
+        <![CDATA[
 class Test  
 {  
    static string name = "xx";  
@@ -280,6 +322,8 @@ class Test
 
       
 
+      
+
       end example]</example
     >
   </paragraph>
@@ -289,7 +333,7 @@ class Test
 
       >[Example: For example. <code_example
       >
-<![CDATA[
+        <![CDATA[
 using System;  
 class Test  
 {  
@@ -318,9 +362,11 @@ class Test
 
       
 
+      
+
       which produces the output: <code_example
       >
-<![CDATA[
+        <![CDATA[
 [0,0,0] =  0 [0,0,1] =  1 [0,0,2] =  2 [0,0,3] =  3  
 [0,1,0] =  4 [0,1,1] =  5 [0,1,2] =  6 [0,1,3] =  7  
 [0,2,0] =  8 [0,2,1] =  9 [0,2,2] = 10 [0,2,3] = 11  
@@ -334,6 +380,8 @@ class Test
 
       
 
+      
+
       end example]</example
     >
   </paragraph>
@@ -341,7 +389,7 @@ class Test
     <example
       >[Example: In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 class Test  
 {  
    unsafe static void Fill(int* p, int count, int value) {  
@@ -356,6 +404,8 @@ class Test
 }  
 ]]>
       </code_example>
+
+      
 
       
 

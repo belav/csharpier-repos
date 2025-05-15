@@ -21,8 +21,12 @@
 
         
 
+        
+
          interface enables an inheriting class to implement a Column Mapping class, which associates a data source column with a <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -39,6 +43,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -49,8 +55,12 @@
 
         
 
+        
+
          interface directly, but creates an instance of a class that inherits <see
          cref="T:System.Data.IColumnMapping" />
+
+        
 
         
 
@@ -66,8 +76,12 @@
 
         
 
+        
+
          must implement all inherited members, and typically define additional members to add provider-specific functionality. For example, the <see
          cref="T:System.Data.IColumnMapping" />
+
+        
 
         
 
@@ -80,6 +94,8 @@
 
         
 
+        
+
          property. In turn, the <see
          cref="T:System.Data.Common.DataColumnMapping" />
 
@@ -87,8 +103,12 @@
 
         
 
+        
+
          class inherits this property, and also defines the <see
          cref="M:System.Data.Common.DataColumnMapping.GetDataColumnBySchemaAction(System.Data.DataTable,System.Type,System.Data.MissingSchemaAction)" />
+
+        
 
         
 
@@ -107,8 +127,12 @@
 
         
 
+        
+
          column, and is implemented by the <see
          cref="T:System.Data.Common.DataColumnMapping" />
+
+        
 
         
 
@@ -134,6 +158,8 @@
           <para
             >Gets or sets the name of the column within the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 

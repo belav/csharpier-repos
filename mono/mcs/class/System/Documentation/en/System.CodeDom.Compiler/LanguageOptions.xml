@@ -33,6 +33,8 @@
 
         
 
+        
+
          has a <see
          cref="P:System.CodeDom.Compiler.CodeDomProvider.LanguageOptions" />
 
@@ -40,8 +42,12 @@
 
         
 
+        
+
          property that is used to indicate certain characteristics of the programming language supported by the provider. The meaning of a <see
          cref="T:System.CodeDom.Compiler.LanguageOptions" />
+
+        
 
         
 

@@ -33,6 +33,8 @@
 
         
 
+        
+
          object.</para
       >
     </summary>
@@ -58,6 +60,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Configuration.SettingsPropertyWrongTypeException" />
+
+            
 
             
 
@@ -98,11 +102,15 @@
 
             
 
+            
+
              class based on the supplied parameter.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -143,6 +151,8 @@
 
             
 
+            
+
              class based on the supplied parameters.</para
           >
         </summary>
@@ -153,8 +163,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -169,8 +183,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -211,6 +229,8 @@
 
             
 
+            
+
              class based on the supplied parameters.</para
           >
         </summary>
@@ -221,10 +241,14 @@
 
           
 
+          
+
           A string containing an exception message.</param
         >
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

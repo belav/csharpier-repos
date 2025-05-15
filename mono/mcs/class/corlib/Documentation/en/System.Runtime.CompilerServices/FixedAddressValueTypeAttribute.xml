@@ -37,6 +37,8 @@
 
         
 
+        
+
          attribute to mark static value types as pinned upon creation.</para
       >
       <para>This attribute is used by the Microsoft Visual C++ compiler.</para>
@@ -68,6 +70,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.CompilerServices.FixedAddressValueTypeAttribute" />
+
+            
 
             
 

@@ -34,8 +34,12 @@
 
         
 
+        
+
         , the class provides a MethodNameCompleted event. MethodName is a placeholder for the first part of the method's name. <see
          cref="M:System.ComponentModel.BackgroundWorker.OnRunWorkerCompleted(System.ComponentModel.RunWorkerCompletedEventArgs)" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
          delegate to the event, you will receive information about the outcome of asynchronous operations in the <see
          cref="T:System.ComponentModel.RunWorkerCompletedEventArgs" />
+
+        
 
         
 
@@ -66,8 +74,12 @@
 
           
 
+          
+
            attribute applied to this class has the following <see
            cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+
+          
 
           
 
@@ -80,8 +92,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+          
 
           
 
@@ -94,12 +110,16 @@
 
           
 
+          
+
            class or <format
            type="text/html">
             <a href="7dfa36b4-e773-4c75-a3ff-ff1af3ce4c4f"
               >SQL Server Programming and Host Protection Attributes</a
             >
           </format>
+
+          
 
           
 
@@ -147,11 +167,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="result">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -166,10 +190,14 @@
 
           
 
+          
+
           Any error that occurred during the asynchronous operation.</param
         >
         <param name="cancelled">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -203,8 +231,12 @@
 
             
 
+            
+
              event handler should always check the <see
              cref="P:System.ComponentModel.AsyncCompletedEventArgs.Error" />
+
+            
 
             
 
@@ -217,6 +249,8 @@
 
             
 
+            
+
              properties before accessing the <see
              cref="P:System.ComponentModel.RunWorkerCompletedEventArgs.Result" />
 
@@ -224,8 +258,12 @@
 
             
 
+            
+
              property. If an exception was raised or if the operation was canceled, accessing the <see
              cref="P:System.ComponentModel.RunWorkerCompletedEventArgs.Result" />
+
+            
 
             
 

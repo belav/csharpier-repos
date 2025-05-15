@@ -24,6 +24,8 @@
 
         
 
+        
+
          class contains static read-only properties that return a <see
          cref="T:System.Drawing.Brush" />
 
@@ -31,8 +33,12 @@
 
         
 
+        
+
          object of the color indicated by the property name. You typically do not have to explicitly dispose of the brush returned by a property in this class, unless it is used to construct a new brush. For more information about the colors represented by the brushes in this class, see <see
          cref="http://go.microsoft.com/fwlink/?LinkId=92332">Colors by Name</see>
+
+        
 
         
 
@@ -68,6 +74,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -76,6 +84,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -111,6 +121,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -119,6 +131,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -151,6 +165,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -159,6 +175,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -194,6 +212,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -202,6 +222,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -234,6 +256,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -242,6 +266,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -274,6 +300,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -282,6 +310,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -314,6 +344,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -322,6 +354,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -354,6 +388,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -362,6 +398,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -397,6 +435,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -405,6 +445,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -437,6 +479,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -445,6 +489,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -480,6 +526,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -488,6 +536,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -520,6 +570,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -528,6 +580,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -563,6 +617,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -571,6 +627,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -606,6 +664,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -614,6 +674,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -649,6 +711,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -657,6 +721,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -692,6 +758,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -700,6 +768,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -732,6 +802,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -740,6 +812,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -775,6 +849,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -783,6 +859,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -815,6 +893,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -823,6 +903,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -855,6 +937,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -863,6 +947,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -895,6 +981,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -903,6 +991,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -935,6 +1025,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -943,6 +1035,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -975,6 +1069,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -983,6 +1079,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -1018,6 +1116,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1026,6 +1126,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -1058,6 +1160,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1066,6 +1170,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -1101,6 +1207,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1109,6 +1217,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -1144,6 +1254,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1152,6 +1264,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -1187,6 +1301,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1195,6 +1311,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -1230,6 +1348,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1238,6 +1358,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -1273,6 +1395,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1281,6 +1405,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -1316,6 +1442,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1324,6 +1452,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -1356,6 +1486,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1364,6 +1496,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -1399,6 +1533,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1407,6 +1543,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -1442,6 +1580,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1450,6 +1590,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -1485,6 +1627,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1493,6 +1637,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -1528,6 +1674,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1536,6 +1684,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -1571,6 +1721,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1579,6 +1731,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -1614,6 +1768,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1622,6 +1778,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -1654,6 +1812,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1662,6 +1822,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -1697,6 +1859,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1705,6 +1869,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -1737,6 +1903,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1745,6 +1913,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -1780,6 +1950,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1788,6 +1960,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -1823,6 +1997,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1831,6 +2007,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -1866,6 +2044,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1874,6 +2054,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -1909,6 +2091,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1917,6 +2101,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -1949,6 +2135,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1957,6 +2145,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -1992,6 +2182,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2000,6 +2192,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -2035,6 +2229,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2043,6 +2239,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -2075,6 +2273,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2083,6 +2283,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -2118,6 +2320,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2126,6 +2330,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -2158,6 +2364,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2166,6 +2374,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -2198,6 +2408,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2206,6 +2418,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -2241,6 +2455,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2249,6 +2465,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -2281,6 +2499,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2289,6 +2509,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -2321,6 +2543,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2329,6 +2553,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -2364,6 +2590,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2372,6 +2600,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -2404,6 +2634,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2412,6 +2644,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -2444,6 +2678,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2452,6 +2688,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -2484,6 +2722,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2492,6 +2732,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -2524,6 +2766,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2532,6 +2776,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -2567,6 +2813,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2575,6 +2823,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -2610,6 +2860,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2618,6 +2870,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -2653,6 +2907,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2661,6 +2917,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -2696,6 +2954,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2704,6 +2964,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -2739,6 +3001,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2747,6 +3011,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -2782,6 +3048,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2790,6 +3058,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -2825,6 +3095,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2833,6 +3105,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -2868,6 +3142,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2876,6 +3152,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -2911,6 +3189,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2919,6 +3199,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -2954,6 +3236,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2962,6 +3246,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -2997,6 +3283,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3005,6 +3293,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -3040,6 +3330,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3048,6 +3340,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -3083,6 +3377,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3091,6 +3387,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -3126,6 +3424,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3134,6 +3434,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -3169,6 +3471,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3177,6 +3481,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -3212,6 +3518,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3220,6 +3528,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -3252,6 +3562,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3260,6 +3572,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -3295,6 +3609,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3303,6 +3619,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -3335,6 +3653,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3343,6 +3663,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -3375,6 +3697,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3383,6 +3707,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -3415,6 +3741,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3423,6 +3751,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -3458,6 +3788,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3466,6 +3798,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -3501,6 +3835,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3509,6 +3845,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -3544,6 +3882,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3552,6 +3892,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -3587,6 +3929,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3595,6 +3939,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -3630,6 +3976,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3638,6 +3986,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -3673,6 +4023,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3681,6 +4033,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -3716,6 +4070,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3724,6 +4080,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -3759,6 +4117,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3767,6 +4127,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -3802,6 +4164,8 @@
 
             
 
+            
+
             .</para
           >
           <para>.</para>
@@ -3811,6 +4175,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -3846,6 +4212,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3854,6 +4222,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -3889,6 +4259,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3897,6 +4269,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -3932,6 +4306,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3940,6 +4316,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -3972,6 +4350,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3980,6 +4360,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -4015,6 +4397,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4023,6 +4407,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -4055,6 +4441,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4063,6 +4451,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -4095,6 +4485,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4103,6 +4495,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -4135,6 +4529,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4143,6 +4539,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -4178,6 +4576,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4186,6 +4586,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -4218,6 +4620,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4226,6 +4630,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -4261,6 +4667,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4269,6 +4677,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -4301,6 +4711,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4309,6 +4721,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -4344,6 +4758,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4352,6 +4768,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -4387,6 +4805,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4395,6 +4815,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -4430,6 +4852,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4438,6 +4862,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -4473,6 +4899,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4481,6 +4909,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -4516,6 +4946,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4524,6 +4956,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -4559,6 +4993,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4567,6 +5003,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -4599,6 +5037,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4607,6 +5047,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -4639,6 +5081,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4647,6 +5091,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -4679,6 +5125,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4687,6 +5135,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -4722,6 +5172,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4730,6 +5182,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -4762,6 +5216,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4770,6 +5226,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -4802,6 +5260,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4810,6 +5270,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -4845,6 +5307,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4853,6 +5317,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -4888,6 +5354,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4896,6 +5364,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -4931,6 +5401,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4939,6 +5411,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -4971,6 +5445,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4979,6 +5455,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -5014,6 +5492,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5022,6 +5502,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -5054,6 +5536,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5062,6 +5546,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -5094,6 +5580,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5102,6 +5590,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -5134,6 +5624,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5142,6 +5634,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -5174,6 +5668,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5182,6 +5678,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -5214,6 +5712,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5222,6 +5722,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -5257,6 +5759,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5265,6 +5769,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -5300,6 +5806,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5308,6 +5816,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -5340,6 +5850,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5348,6 +5860,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -5383,6 +5897,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5391,6 +5907,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -5426,6 +5944,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5434,6 +5954,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -5466,6 +5988,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5474,6 +5998,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -5506,6 +6032,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5514,6 +6042,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -5546,6 +6076,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5554,6 +6086,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -5586,6 +6120,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5594,6 +6130,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -5629,6 +6167,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5637,6 +6177,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -5672,6 +6214,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5680,6 +6224,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -5712,6 +6258,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5720,6 +6268,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -5752,6 +6302,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5760,6 +6312,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -5792,6 +6346,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5800,6 +6356,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -5835,6 +6393,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5843,6 +6403,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -5875,6 +6437,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5883,6 +6447,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -5918,6 +6484,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5926,6 +6494,8 @@
           <para
             >Gets a system-defined <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 

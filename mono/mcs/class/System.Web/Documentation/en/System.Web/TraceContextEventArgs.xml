@@ -21,6 +21,8 @@
 
         
 
+        
+
          class is used by the <see
          cref="T:System.Web.TraceContext" />
 
@@ -28,8 +30,12 @@
 
         
 
+        
+
          class to provide access to trace records after all the tracing information is gathered during HTTP request processing. By adding an event handler delegate to handle the <see
          cref="E:System.Web.TraceContext.TraceFinished" />
+
+        
 
         
 
@@ -43,6 +49,8 @@
       <para
         >Provides a collection of trace records to any method that handles the <see
          cref="E:System.Web.TraceContext.TraceFinished" />
+
+        
 
         
 
@@ -75,6 +83,8 @@
 
             
 
+            
+
              class, using the provided collection of trace records.</para
           >
         </summary>
@@ -85,8 +95,12 @@
 
           
 
+          
+
           A collection of <see
            cref="T:System.Web.TraceContextRecord" />
+
+          
 
           
 
@@ -121,8 +135,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.Web.TraceContext.Warn" />
+
+            
 
             
 
@@ -135,8 +153,12 @@
 
             
 
+            
+
              object that is added to the <see
              cref="P:System.Web.TraceContextEventArgs.TraceRecords" />
+
+            
 
             
 
@@ -149,8 +171,12 @@
 
             
 
+            
+
              method call sets the <see
              cref="P:System.Web.TraceContextRecord.IsWarning" />
+
+            
 
             
 
@@ -166,6 +192,8 @@
 
             
 
+            
+
              messages and examine records with specific categories or messages, and whether they are warnings. </para
           >
         </remarks>
@@ -174,6 +202,8 @@
           <para
             >Gets a collection of <see
              cref="T:System.Web.TraceContextRecord" />
+
+            
 
             
 

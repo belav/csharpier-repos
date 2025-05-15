@@ -28,6 +28,8 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.HtmlControls.HtmlContainerControl.InnerHtml" />
 
@@ -35,8 +37,12 @@
 
         
 
+        
+
          properties allow you to manipulate the content between the opening and closing tags of <see
          cref="T:System.Web.UI.HtmlControls.HtmlContainerControl" />
+
+        
 
         
 
@@ -52,8 +58,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.HtmlControls.HtmlContainerControl.#ctor" />
+
+        
 
         
 
@@ -71,6 +81,8 @@
 
           
 
+          
+
            property to specify the text between the opening and closing tags of an HTML server control, the text is not HTML encoded. This makes it possible to embed script within HTML tags in the text. When using the <see
            cref="P:System.Web.UI.HtmlControls.HtmlContainerControl.InnerHtml" />
 
@@ -78,8 +90,12 @@
 
           
 
+          
+
            property, be sure to validate the value to reduce security vulnerabilities. Otherwise, consider using the <see
            cref="P:System.Web.UI.HtmlControls.HtmlContainerControl.InnerText" />
+
+          
 
           
 
@@ -111,6 +127,8 @@
 
             
 
+            
+
              class using default values.</para
           >
           <block subset="none" type="note">
@@ -119,6 +137,8 @@
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.Web.UI.HtmlControls.HtmlContainerControl" />
+
+            
 
             
 
@@ -159,6 +179,8 @@
 
             
 
+            
+
              class using default values.</para
           >
         </summary>
@@ -186,6 +208,8 @@
 
             
 
+            
+
              class using the specified tag.</para
           >
           <block subset="none" type="note">
@@ -194,6 +218,8 @@
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.Web.UI.HtmlControls.HtmlContainerControl" />
+
+            
 
             
 
@@ -227,6 +253,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -243,11 +271,15 @@
 
             
 
+            
+
              class using the specified tag name.</para
           >
         </summary>
         <param name="tag">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -303,6 +335,8 @@
 
             
 
+            
+
              property to programmatically modify the contents between the opening and closing tags of an HTML server control.</para
           >
           <para
@@ -313,11 +347,15 @@
 
             
 
+            
+
              property does not automatically encode special characters to and from HTML entities. HTML entities allow you to display special characters, such as the &lt; character, that a browser would ordinarily interpret as having special meaning. The &lt; character would be interpreted as the start of a tag and is not displayed on the page. To display the &lt; character, you would need to use the entity &amp;lt;.</para
           >
           <para
             >For example, if the <see
              cref="P:System.Web.UI.HtmlControls.HtmlContainerControl.InnerHtml" />
+
+            
 
             
 
@@ -336,12 +374,16 @@
 
               
 
+              
+
               .</para
             >
           </block>
           <para
             >To provide automatic HTML encoding and decoding, use the <see
              cref="P:System.Web.UI.HtmlControls.HtmlContainerControl.InnerText" />
+
+            
 
             
 
@@ -358,8 +400,12 @@
 
               
 
+              
+
                property contains the value <see
                cref="F:System.String.Empty" />
+
+              
 
               
 
@@ -406,6 +452,8 @@
 
             
 
+            
+
              property to programmatically modify the text between the opening and closing tags of an HTML server control.</para
           >
           <para
@@ -416,8 +464,12 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Web.UI.HtmlControls.HtmlContainerControl.InnerText" />
+
+            
 
             
 
@@ -433,11 +485,15 @@
 
             
 
+            
+
              property is set to "&lt;b&gt; Hello &lt;/b&gt;", the &lt; and &gt; symbols are converted to &amp;lt; and &amp;gt;, respectively. The rendered output would be: &amp;lt; b &amp;gt; Hello &amp;lt; /b &amp;gt;. The &amp;lt; and &amp;gt; entities would indicate to the browser that these characters are to be displayed on the page. The browser will not detect the &lt;b&gt; tags and display the text in a bold font. The text displayed on the page is: &lt;b&gt; Hello &lt;/b&gt;.</para
           >
           <para
             >To prevent automatic HTML encoding and decoding, use the <see
              cref="P:System.Web.UI.HtmlControls.HtmlContainerControl.InnerHtml" />
+
+            
 
             
 
@@ -454,8 +510,12 @@
 
               
 
+              
+
                property contains the value <see
                cref="F:System.String.Empty" />
+
+              
 
               
 
@@ -508,11 +568,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.HtmlControls.HtmlContainerControl.LoadViewState(System.Object)" />
+
+            
 
             
 
@@ -525,6 +589,8 @@
 
             
 
+            
+
              method. In addition, the <see
              cref="M:System.Web.UI.HtmlControls.HtmlContainerControl.LoadViewState(System.Object)" />
 
@@ -532,8 +598,12 @@
 
             
 
+            
+
              method sets the <see
              cref="P:System.Web.UI.HtmlControls.HtmlContainerControl.InnerHtml" />
+
+            
 
             
 
@@ -552,8 +622,12 @@
 
             
 
+            
+
              control's view state from a previous page request that was saved by the <see
              cref="M:System.Web.UI.Control.SaveViewState" />
+
+            
 
             
 
@@ -569,8 +643,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -607,6 +685,8 @@
 
             
 
+            
+
              method overrides the <see
              cref="M:System.Web.UI.HtmlControls.HtmlControl.Render(System.Web.UI.HtmlTextWriter)" />
 
@@ -614,8 +694,12 @@
 
             
 
+            
+
              method to render the opening tag, child controls, and closing tag of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlContainerControl" />
+
+            
 
             
 
@@ -631,8 +715,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlContainerControl" />
+
+            
 
             
 
@@ -651,8 +739,12 @@
 
             
 
+            
+
              control to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -668,6 +760,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
 
@@ -675,8 +769,12 @@
 
           
 
+          
+
            that receives the <see
            cref="T:System.Web.UI.HtmlControls.HtmlContainerControl" />
+
+          
 
           
 
@@ -714,8 +812,12 @@
 
             
 
+            
+
              control's attributes to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -731,8 +833,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -769,6 +875,8 @@
 
             
 
+            
+
              method is called by the <see
              cref="M:System.Web.UI.HtmlControls.HtmlContainerControl.Render(System.Web.UI.HtmlTextWriter)" />
 
@@ -776,8 +884,12 @@
 
             
 
+            
+
              method to render the closing tag of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlContainerControl" />
+
+            
 
             
 
@@ -793,8 +905,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlContainerControl" />
+
+            
 
             
 
@@ -813,8 +929,12 @@
 
             
 
+            
+
              control to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -830,8 +950,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 

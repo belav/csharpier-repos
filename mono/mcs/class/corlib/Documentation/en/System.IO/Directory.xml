@@ -40,6 +40,8 @@
 
         
 
+        
+
          class for typical operations such as copying, moving, renaming, creating, and deleting directories. </para
       >
       <list type="bullet">
@@ -47,6 +49,8 @@
           <para
             >To create a directory, use one of the <see
              cref="M:System.IO.Directory.CreateDirectory(System.String)" />
+
+            
 
             
 
@@ -64,6 +68,8 @@
 
             
 
+            
+
              methods.</para
           >
         </item>
@@ -76,8 +82,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.IO.Directory.SetCurrentDirectory(System.String)" />
+
+            
 
             
 
@@ -95,6 +105,8 @@
 
             
 
+            
+
              information related to the creation, access, and writing of a directory, use methods such as <see
              cref="M:System.IO.Directory.SetLastAccessTime(System.String,System.DateTime)" />
 
@@ -102,8 +114,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IO.Directory.SetCreationTime(System.String,System.DateTime)" />
+
+            
 
             
 
@@ -121,8 +137,12 @@
 
         
 
+        
+
          class perform security checks on all methods. If you are going to reuse an object several times, consider using the corresponding instance method of <see
          cref="T:System.IO.DirectoryInfo" />
+
+        
 
         
 
@@ -138,6 +158,8 @@
 
         
 
+        
+
          method rather than a corresponding <see
          cref="T:System.IO.DirectoryInfo" />
 
@@ -145,8 +167,12 @@
 
         
 
+        
+
          instance method. Most <see
          cref="T:System.IO.Directory" />
+
+        
 
         
 
@@ -163,8 +189,12 @@
 
           
 
+          
+
            parameter, that path must be well-formed or an exception is raised. For example, if a path is fully qualified but begins with a space (" c:\temp"), the path string isn't trimmed, so the path is considered malformed and an exception is raised. In addition, a path or a combination of paths cannot be fully qualified twice. For example, "c:\temp c:\windows" also raises an exception. Ensure that your paths are well-formed when using methods that accept a path string. For more information see <see
            cref="T:System.IO.Path" />
+
+          
 
           
 
@@ -195,6 +225,8 @@
 
         
 
+        
+
          parameter, the search string can be any combination of literal characters and two wildcard characters; * and ?. This parameter does not recognize regular expressions. For more information, see the <see
          cref="M:System.IO.Directory.EnumerateDirectories(System.String,System.String)" />
 
@@ -202,8 +234,12 @@
 
         
 
+        
+
          method or any other method that uses the <paramref
          name="searchPattern" />
+
+        
 
         
 
@@ -221,10 +257,14 @@
 
         
 
+        
+
         .</para
       >
       <para>
         <see cref="T:System.IO.Directory" />
+
+        
 
         
 
@@ -237,10 +277,14 @@
 
         
 
+        
+
          are not supported for use in win8_appstore_long apps. For information about how to access files and folders in win8_appstore_long apps, see <see
          cref="http://msdn.microsoft.com/library/windows/apps/hh758319.aspx"
           >Accessing data and files (Windows Store apps)</see
         >
+
+        
 
         
 
@@ -287,6 +331,8 @@
 
             
 
+            
+
              are created, unless they already exist or unless some part of <paramref
              name="path" />
 
@@ -294,8 +340,12 @@
 
             
 
+            
+
              is invalid. If the directory already exists, this method does not create a new directory, but it returns a <see
              cref="T:System.IO.DirectoryInfo" />
+
+            
 
             
 
@@ -311,6 +361,8 @@
 
             
 
+            
+
              parameter specifies a directory path, not a file path.</para
           >
           <para
@@ -321,11 +373,15 @@
 
             
 
+            
+
              parameter before creating the directory.</para
           >
           <para
             >You can create a directory on a remote computer, on a share that you have write access to. UNC paths are supported; for example, you can specify the following for <paramref
              name="path" />
+
+            
 
             
 
@@ -345,6 +401,8 @@
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -391,8 +449,12 @@
 
             
 
+            
+
              parameter are created, unless they already exist or unless some part of <paramref
              name="path" />
+
+            
 
             
 
@@ -405,8 +467,12 @@
 
             
 
+            
+
              parameter specifies a directory path, not a file path. If the directory already exists, this method does not create a new directory, but it returns a <see
              cref="T:System.IO.DirectoryInfo" />
+
+            
 
             
 
@@ -422,11 +488,15 @@
 
             
 
+            
+
              parameter before creating the directory.</para
           >
           <para
             >You can create a directory on a remote computer, on a share that you have write access to. UNC paths are supported; for example, you can specify the following for <paramref
              name="path" />
+
+            
 
             
 
@@ -451,10 +521,14 @@
 
           
 
+          
+
           The directory to create.</param
         >
         <param name="directorySecurity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -494,6 +568,8 @@
 
           
 
+          
+
           is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters.</exception
         >
         <exception cref="T:System.ArgumentNullException">
@@ -503,8 +579,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -520,11 +600,15 @@
 
           
 
+          
+
            was not found.</exception
         >
         <exception cref="T:System.IO.IOException"
           >The directory specified by <paramref
            name="path" />
+
+          
 
           
 
@@ -543,8 +627,12 @@
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -555,6 +643,8 @@
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to write to the specified directory. See <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+
+          
 
           
 
@@ -575,6 +665,8 @@
 
             
 
+            
+
              with false specified for the second parameter.</para
           >
           <para
@@ -585,8 +677,12 @@
 
             
 
+            
+
              parameter may specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -602,6 +698,8 @@
 
             
 
+            
+
              parameter before deleting the directory.</para
           >
           <para
@@ -612,8 +710,12 @@
 
             
 
+            
+
              if the directory specified in the <paramref
              name="path" />
+
+            
 
             
 
@@ -629,11 +731,15 @@
 
             
 
+            
+
              parameter is not case-sensitive.</para
           >
           <para
             >In some cases, if you have the specified directory open in File Explorer, the <see
              cref="M:System.IO.Directory.Delete(System.String)" />
+
+            
 
             
 
@@ -648,6 +754,8 @@
         </summary>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -692,6 +800,8 @@
 
           
 
+          
+
           is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters.</exception
         >
         <exception cref="T:System.ArgumentNullException">
@@ -701,8 +811,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -718,11 +832,15 @@
 
           
 
+          
+
            was not found.</exception
         >
         <exception cref="T:System.IO.IOException"
           >The directory specified by <paramref
            name="path" />
+
+          
 
           
 
@@ -735,6 +853,8 @@
 
           
 
+          
+
            is <see
            langword="false" />
 
@@ -742,8 +862,12 @@
 
           
 
+          
+
            and <paramref
            name="path" />
+
+          
 
           
 
@@ -762,8 +886,12 @@
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -774,6 +902,8 @@
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to write to the specified directory. See <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+
+          
 
           
 
@@ -794,8 +924,12 @@
 
             
 
+            
+
              parameter may specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -811,11 +945,15 @@
 
             
 
+            
+
              parameter before deleting the directory.</para
           >
           <para
             >The <paramref
              name="path" />
+
+            
 
             
 
@@ -831,12 +969,16 @@
 
             
 
+            
+
              parameter is true, the user must have write permission for the current directory as well as for all subdirectories.</para
           >
           <para>The behavior of this method differs slightly when deleting a directory that contains a reparse point, such as a symbolic link or a mount point. If the reparse point is a directory, such as a mount point, it is unmounted and the mount point is deleted. This method does not recurse through the reparse point. If the reparse point is a symbolic link to a file, the reparse point is deleted and not the target of the symbolic link.</para>
           <para
             >In some cases, if you have the specified directory open in File Explorer, the <see
              cref="M:System.IO.Directory.Delete(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -856,6 +998,8 @@
 
           
 
+          
+
           The name of the directory to remove. </param
         >
         <param name="recursive">
@@ -865,8 +1009,12 @@
 
           
 
+          
+
           true to remove directories, subdirectories, and files in <paramref
            name="path" />
+
+          
 
           
 
@@ -907,8 +1055,12 @@
 
             
 
+            
+
              parameter. Relative path information is interpreted as relative to the current working directory, which you can determine by using the <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -921,8 +1073,12 @@
 
             
 
+            
+
              parameter. For example, if you provide a relative path in the <paramref
              name="path" />
+
+            
 
             
 
@@ -938,8 +1094,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.IO.Directory.GetDirectories" />
+
+            
 
             
 
@@ -952,8 +1112,12 @@
 
             
 
+            
+
             , you can start enumerating the collection of names before the whole collection is returned; when you use <see
              cref="Overload:System.IO.Directory.GetDirectories" />
+
+            
 
             
 
@@ -966,11 +1130,15 @@
 
             
 
+            
+
              can be more efficient. </para
           >
           <para
             >The returned collection is not cached; each call to the <see
              cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
+
+            
 
             
 
@@ -993,11 +1161,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1037,8 +1209,12 @@
 
             
 
+            
+
              can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref
              name="searchPattern" />
+
+            
 
             
 
@@ -1082,8 +1258,12 @@
 
             
 
+            
+
              string "*t" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -1096,8 +1276,12 @@
 
             
 
+            
+
              string "s*" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -1112,8 +1296,12 @@
 
             
 
+            
+
              cannot end in two periods ("..") or contain two periods ("..") followed by <see
              cref="F:System.IO.Path.DirectorySeparatorChar" />
+
+            
 
             
 
@@ -1126,8 +1314,12 @@
 
             
 
+            
+
             , nor can it contain any invalid characters. You can query for invalid characters by using the <see
              cref="M:System.IO.Path.GetInvalidPathChars" />
+
+            
 
             
 
@@ -1143,8 +1335,12 @@
 
             
 
+            
+
              parameter. Relative path information is interpreted as relative to the current working directory, which you can determine by using the <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -1157,8 +1353,12 @@
 
             
 
+            
+
              parameter. For example, if you provide a relative path in the <paramref
              name="path" />
+
+            
 
             
 
@@ -1174,8 +1374,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.IO.Directory.GetDirectories" />
+
+            
 
             
 
@@ -1188,8 +1392,12 @@
 
             
 
+            
+
             , you can start enumerating the collection of names before the whole collection is returned; when you use <see
              cref="Overload:System.IO.Directory.GetDirectories" />
+
+            
 
             
 
@@ -1202,11 +1410,15 @@
 
             
 
+            
+
              can be more efficient.</para
           >
           <para
             >The returned collection is not cached; each call to the <see
              cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
+
+            
 
             
 
@@ -1229,11 +1441,15 @@
 
             
 
+            
+
              and that match the specified search pattern.</para
           >
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1248,8 +1464,12 @@
 
           
 
+          
+
           The search string to match against the names of directories in <paramref
            name="path" />
+
+          
 
           
 
@@ -1290,8 +1510,12 @@
 
             
 
+            
+
              can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref
              name="searchPattern" />
+
+            
 
             
 
@@ -1335,8 +1559,12 @@
 
             
 
+            
+
              string "*t" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -1349,8 +1577,12 @@
 
             
 
+            
+
              string "s*" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -1365,8 +1597,12 @@
 
             
 
+            
+
              cannot end in two periods ("..") or contain two periods ("..") followed by <see
              cref="F:System.IO.Path.DirectorySeparatorChar" />
+
+            
 
             
 
@@ -1379,8 +1615,12 @@
 
             
 
+            
+
             , nor can it contain any invalid characters. You can query for invalid characters by using the <see
              cref="M:System.IO.Path.GetInvalidPathChars" />
+
+            
 
             
 
@@ -1396,8 +1636,12 @@
 
             
 
+            
+
              parameter. Relative path information is interpreted as relative to the current working directory, which you can determine by using the <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -1410,8 +1654,12 @@
 
             
 
+            
+
              parameter. For example, if you provide a relative path in the <paramref
              name="path" />
+
+            
 
             
 
@@ -1427,8 +1675,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.IO.Directory.GetDirectories" />
+
+            
 
             
 
@@ -1441,8 +1693,12 @@
 
             
 
+            
+
             , you can start enumerating the collection of names before the whole collection is returned; when you use <see
              cref="Overload:System.IO.Directory.GetDirectories" />
+
+            
 
             
 
@@ -1455,11 +1711,15 @@
 
             
 
+            
+
              can be more efficient.</para
           >
           <para
             >The returned collection is not cached; each call to the <see
              cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
+
+            
 
             
 
@@ -1482,11 +1742,15 @@
 
             
 
+            
+
              and that match the specified search pattern and option.</para
           >
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1501,8 +1765,12 @@
 
           
 
+          
+
           The search string to match against the names of directories in <paramref
            name="path" />
+
+          
 
           
 
@@ -1512,6 +1780,8 @@
         >
         <param name="searchOption">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1551,8 +1821,12 @@
 
             
 
+            
+
              parameter. Relative path information is interpreted as relative to the current working directory, which you can determine by using the <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -1568,8 +1842,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.IO.Directory.GetFiles" />
+
+            
 
             
 
@@ -1582,8 +1860,12 @@
 
             
 
+            
+
             , you can start enumerating the collection of names before the whole collection is returned; when you use <see
              cref="Overload:System.IO.Directory.GetFiles" />
+
+            
 
             
 
@@ -1596,11 +1878,15 @@
 
             
 
+            
+
              can be more efficient.</para
           >
           <para
             >The returned collection is not cached; each call to the <see
              cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
+
+            
 
             
 
@@ -1623,11 +1909,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1667,8 +1957,12 @@
 
             
 
+            
+
              can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref
              name="searchPattern" />
+
+            
 
             
 
@@ -1712,8 +2006,12 @@
 
             
 
+            
+
              string "*t" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -1726,8 +2024,12 @@
 
             
 
+            
+
              string "s*" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -1742,8 +2044,12 @@
 
             
 
+            
+
              cannot end in two periods ("..") or contain two periods ("..") followed by <see
              cref="F:System.IO.Path.DirectorySeparatorChar" />
+
+            
 
             
 
@@ -1756,8 +2062,12 @@
 
             
 
+            
+
             , nor can it contain any invalid characters. You can query for invalid characters by using the <see
              cref="M:System.IO.Path.GetInvalidPathChars" />
+
+            
 
             
 
@@ -1773,8 +2083,12 @@
 
             
 
+            
+
              parameter. Relative path information is interpreted as relative to the current working directory, which you can determine by using the <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -1790,8 +2104,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.IO.Directory.GetFiles" />
+
+            
 
             
 
@@ -1804,8 +2122,12 @@
 
             
 
+            
+
             , you can start enumerating the collection of names before the whole collection is returned; when you use <see
              cref="Overload:System.IO.Directory.GetFiles" />
+
+            
 
             
 
@@ -1818,11 +2140,15 @@
 
             
 
+            
+
              can be more efficient.</para
           >
           <para
             >The returned collection is not cached; each call to the <see
              cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
+
+            
 
             
 
@@ -1845,11 +2171,15 @@
 
             
 
+            
+
              and that match the specified search pattern.</para
           >
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1864,8 +2194,12 @@
 
           
 
+          
+
           The search string to match against the names of files in <paramref
            name="path" />
+
+          
 
           
 
@@ -1906,8 +2240,12 @@
 
             
 
+            
+
              can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref
              name="searchPattern" />
+
+            
 
             
 
@@ -1951,8 +2289,12 @@
 
             
 
+            
+
              string "*t" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -1965,8 +2307,12 @@
 
             
 
+            
+
              string "s*" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -1981,8 +2327,12 @@
 
             
 
+            
+
              cannot end in two periods ("..") or contain two periods ("..") followed by <see
              cref="F:System.IO.Path.DirectorySeparatorChar" />
+
+            
 
             
 
@@ -1995,8 +2345,12 @@
 
             
 
+            
+
             , nor can it contain any invalid characters. You can query for invalid characters by using the <see
              cref="M:System.IO.Path.GetInvalidPathChars" />
+
+            
 
             
 
@@ -2012,8 +2366,12 @@
 
             
 
+            
+
              parameter. Relative path information is interpreted as relative to the current working directory, which you can determine by using the <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -2029,8 +2387,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.IO.Directory.GetFiles" />
+
+            
 
             
 
@@ -2043,8 +2405,12 @@
 
             
 
+            
+
             , you can start enumerating the collection of names before the whole collection is returned; when you use <see
              cref="Overload:System.IO.Directory.GetFiles" />
+
+            
 
             
 
@@ -2057,11 +2423,15 @@
 
             
 
+            
+
              can be more efficient.</para
           >
           <para
             >The returned collection is not cached; each call to the <see
              cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
+
+            
 
             
 
@@ -2084,11 +2454,15 @@
 
             
 
+            
+
              and that match the specified search pattern and option.</para
           >
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2103,8 +2477,12 @@
 
           
 
+          
+
           The search string to match against the names of files in <paramref
            name="path" />
+
+          
 
           
 
@@ -2114,6 +2492,8 @@
         >
         <param name="searchOption">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2153,8 +2533,12 @@
 
             
 
+            
+
              parameter. Relative path information is interpreted as relative to the current working directory, which you can determine by using the <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -2170,8 +2554,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.IO.Directory.GetFileSystemEntries" />
+
+            
 
             
 
@@ -2184,8 +2572,12 @@
 
             
 
+            
+
             , you can start enumerating the collection of entries before the whole collection is returned; when you use <see
              cref="Overload:System.IO.Directory.GetFileSystemEntries" />
+
+            
 
             
 
@@ -2198,11 +2590,15 @@
 
             
 
+            
+
              can be more efficient.</para
           >
           <para
             >The returned collection is not cached; each call to the <see
              cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
+
+            
 
             
 
@@ -2225,11 +2621,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2269,8 +2669,12 @@
 
             
 
+            
+
              can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref
              name="searchPattern" />
+
+            
 
             
 
@@ -2314,8 +2718,12 @@
 
             
 
+            
+
              string "*t" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -2328,8 +2736,12 @@
 
             
 
+            
+
              string "s*" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -2344,8 +2756,12 @@
 
             
 
+            
+
              cannot end in two periods ("..") or contain two periods ("..") followed by <see
              cref="F:System.IO.Path.DirectorySeparatorChar" />
+
+            
 
             
 
@@ -2358,8 +2774,12 @@
 
             
 
+            
+
             , nor can it contain any invalid characters. You can query for invalid characters by using the <see
              cref="M:System.IO.Path.GetInvalidPathChars" />
+
+            
 
             
 
@@ -2375,8 +2795,12 @@
 
             
 
+            
+
              parameter. Relative path information is interpreted as relative to the current working directory, which you can determine by using the <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -2392,8 +2816,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.IO.Directory.GetFileSystemEntries" />
+
+            
 
             
 
@@ -2406,8 +2834,12 @@
 
             
 
+            
+
             , you can start enumerating the collection of entries before the whole collection is returned; when you use <see
              cref="Overload:System.IO.Directory.GetFileSystemEntries" />
+
+            
 
             
 
@@ -2420,11 +2852,15 @@
 
             
 
+            
+
              can be more efficient.</para
           >
           <para
             >The returned collection is not cached; each call to the <see
              cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
+
+            
 
             
 
@@ -2447,11 +2883,15 @@
 
             
 
+            
+
              and that match the specified search pattern.</para
           >
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2466,8 +2906,12 @@
 
           
 
+          
+
           The search string to match against the names of file-system entries in <paramref
            name="path" />
+
+          
 
           
 
@@ -2508,8 +2952,12 @@
 
             
 
+            
+
              can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref
              name="searchPattern" />
+
+            
 
             
 
@@ -2553,8 +3001,12 @@
 
             
 
+            
+
              string "*t" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -2567,8 +3019,12 @@
 
             
 
+            
+
              string "s*" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -2583,8 +3039,12 @@
 
             
 
+            
+
              cannot end in two periods ("..") or contain two periods ("..") followed by <see
              cref="F:System.IO.Path.DirectorySeparatorChar" />
+
+            
 
             
 
@@ -2597,8 +3057,12 @@
 
             
 
+            
+
             , nor can it contain any invalid characters. You can query for invalid characters by using the <see
              cref="M:System.IO.Path.GetInvalidPathChars" />
+
+            
 
             
 
@@ -2614,8 +3078,12 @@
 
             
 
+            
+
              parameter. Relative path information is interpreted as relative to the current working directory, which you can determine by using the <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -2631,8 +3099,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.IO.Directory.GetFileSystemEntries" />
+
+            
 
             
 
@@ -2645,8 +3117,12 @@
 
             
 
+            
+
             , you can start enumerating the collection of entries before the whole collection is returned; when you use <see
              cref="Overload:System.IO.Directory.GetFileSystemEntries" />
+
+            
 
             
 
@@ -2659,11 +3135,15 @@
 
             
 
+            
+
              can be more efficient.</para
           >
           <para
             >The returned collection is not cached; each call to the <see
              cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
+
+            
 
             
 
@@ -2686,11 +3166,15 @@
 
             
 
+            
+
              and that match the specified search pattern and option.</para
           >
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2705,8 +3189,12 @@
 
           
 
+          
+
           The search string to match against file-system entries in <paramref
            name="path" />
+
+          
 
           
 
@@ -2716,6 +3204,8 @@
         >
         <param name="searchOption">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2755,6 +3245,8 @@
 
           
 
+          
+
           is a zero-length string, contains only white space, or contains one or more implementation-defined invalid characters.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
@@ -2765,8 +3257,12 @@
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -2781,11 +3277,15 @@
 
           
 
+          
+
            was not found.</exception
         >
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to read the specified directory. See <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" qualify="true" />
+
+          
 
           
 
@@ -2803,11 +3303,15 @@
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory.</para
           >
           <para
             >Trailing spaces are removed from the end of the <paramref
              name="path" />
+
+            
 
             
 
@@ -2823,6 +3327,8 @@
 
             
 
+            
+
              parameter is not case-sensitive.</para
           >
           <para
@@ -2833,11 +3339,15 @@
 
             
 
+            
+
              method will return false.  </para
           >
           <para
             >The <see
              cref="M:System.IO.Directory.Exists(System.String)" />
+
+            
 
             
 
@@ -2860,6 +3370,8 @@
 
             
 
+            
+
              refers to an existing directory; false if the directory does not exist or an error occurs when trying to determine if the specified file exists.</para
           >
           <para
@@ -2870,11 +3382,15 @@
 
             
 
+            
+
              refers to an existing directory; otherwise, false.</para
           >
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2917,6 +3433,8 @@
 
             
 
+            
+
              method to retrieve the access control list (ACL) entries for a directory.</para
           >
           <para
@@ -2924,6 +3442,8 @@
              type="text/html">
               <a href="06fbf66d-6f02-4378-b863-b2f12e349045">ACL Technology Overview</a>
             </format>
+
+            
 
             
 
@@ -2940,6 +3460,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -2950,8 +3472,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Security.AccessControl.FileSystemRights.ReadExtendedAttributes" />
+
+            
 
             
 
@@ -2964,8 +3490,12 @@
 
             
 
+            
+
              rights on the parent folder. To deny <see
              cref="F:System.Security.AccessControl.FileSystemRights.ReadAttributes" />
+
+            
 
             
 
@@ -2978,8 +3508,12 @@
 
             
 
+            
+
             , deny <see
              cref="F:System.Security.AccessControl.FileSystemRights.ListDirectory" />
+
+            
 
             
 
@@ -2998,6 +3532,8 @@
 
             
 
+            
+
              object that encapsulates the access control list (ACL) entries for a specified directory.</para
           >
         </summary>
@@ -3006,6 +3542,8 @@
           <para
             >An object that encapsulates the access control rules for the file described by the <paramref
              name="path" />
+
+            
 
             
 
@@ -3021,8 +3559,12 @@
 
           
 
+          
+
           The path to a directory containing a <see
            cref="T:System.Security.AccessControl.DirectorySecurity" />
+
+          
 
           
 
@@ -3068,6 +3610,8 @@
 
             
 
+            
+
              method to retrieve the access control list (ACL) entries for a directory.</para
           >
           <para
@@ -3075,6 +3619,8 @@
              type="text/html">
               <a href="06fbf66d-6f02-4378-b863-b2f12e349045">ACL Technology Overview</a>
             </format>
+
+            
 
             
 
@@ -3091,6 +3637,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -3101,8 +3649,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Security.AccessControl.FileSystemRights.ReadExtendedAttributes" />
+
+            
 
             
 
@@ -3115,8 +3667,12 @@
 
             
 
+            
+
              rights on the parent folder. To deny <see
              cref="F:System.Security.AccessControl.FileSystemRights.ReadAttributes" />
+
+            
 
             
 
@@ -3129,8 +3685,12 @@
 
             
 
+            
+
             , deny <see
              cref="F:System.Security.AccessControl.FileSystemRights.ListDirectory" />
+
+            
 
             
 
@@ -3149,6 +3709,8 @@
 
             
 
+            
+
              object that encapsulates the specified type of access control list (ACL) entries for a specified directory.</para
           >
         </summary>
@@ -3157,6 +3719,8 @@
           <para
             >An object that encapsulates the access control rules for the file described by the <paramref
              name="path" />
+
+            
 
             
 
@@ -3172,8 +3736,12 @@
 
           
 
+          
+
           The path to a directory containing a <see
            cref="T:System.Security.AccessControl.DirectorySecurity" />
+
+          
 
           
 
@@ -3188,8 +3756,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AccessControlSections" />
+
+          
 
           
 
@@ -3232,6 +3804,8 @@
 
           
 
+          
+
           is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters.</exception
         >
         <exception cref="T:System.ArgumentNullException">
@@ -3241,8 +3815,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -3258,6 +3836,8 @@
 
           
 
+          
+
            was not found.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
@@ -3268,8 +3848,12 @@
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -3283,6 +3867,8 @@
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to read the specified file or directory. See <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" qualify="true" />
+
+          
 
           
 
@@ -3306,11 +3892,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >If the directory described in the <paramref
              name="path" />
+
+            
 
             
 
@@ -3326,8 +3916,12 @@
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -3343,6 +3937,8 @@
 
             
 
+            
+
              parameter is not case-sensitive.</para
           >
           <para
@@ -3350,6 +3946,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -3368,6 +3966,8 @@
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3413,6 +4013,8 @@
 
             
 
+            
+
              parameter does not exist, this method returns 12:00 midnight, January 1, 1601 A.D. (C.E.) Coordinated Universal Time (UTC).</para
           >
           <para>Use this method to get the creation time for a directory based on Coordinated Universal Time (UTC).</para>
@@ -3427,6 +4029,8 @@
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3483,6 +4087,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3527,8 +4133,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -3546,10 +4156,14 @@
 
           
 
+          
+
           is a zero-length string, contains only white space, or contains implementation-specific invalid characters.</exception
         >
         <exception cref="T:System.IO.DirectoryNotFoundException">
           <paramref name="path" />
+
+          
 
           
 
@@ -3565,8 +4179,12 @@
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -3581,6 +4199,8 @@
 
           
 
+          
+
            is a file name.</exception
         >
         <permission cref="T:System.Security.Permissions.FileIOPermission"
@@ -3589,6 +4209,8 @@
             cref="F:System.Security.Permissions.FileIOPermissionAccess.PathDiscovery"
             qualify="true"
           />
+
+          
 
           
 
@@ -3609,6 +4231,8 @@
 
             
 
+            
+
               with the asterisk (*) specified as the search pattern, so it returns all subdirectories.If you need to search subdirectories, use the <see
              cref="M:System.IO.Directory.GetDirectories(System.String,System.String,System.IO.SearchOption)" />
 
@@ -3616,8 +4240,12 @@
 
             
 
+            
+
              method, which enables you to specify a search of subdirectories with the <paramref
              name="searchOption" />
+
+            
 
             
 
@@ -3633,8 +4261,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.IO.Directory.GetDirectories" />
+
+            
 
             
 
@@ -3647,6 +4279,8 @@
 
             
 
+            
+
             , you can start enumerating the collection of names before the whole collection is returned; when you use <see
              cref="Overload:System.IO.Directory.GetDirectories" />
 
@@ -3654,8 +4288,12 @@
 
             
 
+            
+
             , you must wait for the whole array of names to be returned before you can access the array. Therefore, when you are working with many files and directories, <see
              cref="Overload:System.IO.Directory.EnumerateDirectories" />
+
+            
 
             
 
@@ -3671,8 +4309,12 @@
 
             
 
+            
+
              parameter can specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -3688,11 +4330,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <paramref
              name="path" />
+
+            
 
             
 
@@ -3705,6 +4351,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -3723,6 +4371,8 @@
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3767,6 +4417,8 @@
 
           
 
+          
+
           or<paramref
            name=" searchPattern " />
 
@@ -3774,8 +4426,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -3794,10 +4450,14 @@
 
             
 
+            
+
             is a zero-length string, contains only white space, or contains implementation-specific invalid characters.</para
           >
           <para>
             <paramref name="searchPattern" />
+
+            
 
             
 
@@ -3813,6 +4473,8 @@
 
           
 
+          
+
            was not found.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
@@ -3823,8 +4485,12 @@
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -3839,6 +4505,8 @@
 
           
 
+          
+
            is a file name.</exception
         >
         <permission cref="T:System.Security.Permissions.FileIOPermission"
@@ -3847,6 +4515,8 @@
             cref="F:System.Security.Permissions.FileIOPermissionAccess.PathDiscovery"
             qualify="true"
           />
+
+          
 
           
 
@@ -3867,8 +4537,12 @@
 
             
 
+            
+
              parameter, this method returns an empty array. Only the top directory is searched. If you want to search the subdirectories as well, use the <see
              cref="M:System.IO.Directory.GetDirectories(System.String,System.String,System.IO.SearchOption)" />
+
+            
 
             
 
@@ -3881,8 +4555,12 @@
 
             
 
+            
+
              in the <paramref
              name="searchOption" />
+
+            
 
             
 
@@ -3897,8 +4575,12 @@
 
             
 
+            
+
              can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref
              name="searchPattern" />
+
+            
 
             
 
@@ -3942,8 +4624,12 @@
 
             
 
+            
+
              string "*t" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -3956,8 +4642,12 @@
 
             
 
+            
+
              string "s*" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -3972,8 +4662,12 @@
 
             
 
+            
+
              cannot end in two periods ("..") or contain two periods ("..") followed by <see
              cref="F:System.IO.Path.DirectorySeparatorChar" />
+
+            
 
             
 
@@ -3986,8 +4680,12 @@
 
             
 
+            
+
             , nor can it contain any invalid characters. You can query for invalid characters by using the <see
              cref="M:System.IO.Path.GetInvalidPathChars" />
+
+            
 
             
 
@@ -4003,8 +4701,12 @@
 
             
 
+            
+
              parameter can specify relative or absolute path information, and is not case-sensitive.  Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -4020,8 +4722,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.IO.Directory.GetDirectories" />
+
+            
 
             
 
@@ -4034,8 +4740,12 @@
 
             
 
+            
+
             , you can start enumerating the collection of names before the whole collection is returned; when you use <see
              cref="Overload:System.IO.Directory.GetDirectories" />
+
+            
 
             
 
@@ -4048,6 +4758,8 @@
 
             
 
+            
+
              can be more efficient. </para
           >
           <para
@@ -4055,6 +4767,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -4078,6 +4792,8 @@
 
           
 
+          
+
           The relative or absolute path to the directory to search. This string is not case-sensitive.</param
         >
         <param name="searchPattern">
@@ -4087,8 +4803,12 @@
 
           
 
+          
+
           The search string to match against the names of subdirectories in <paramref
            name="path" />
+
+          
 
           
 
@@ -4133,8 +4853,12 @@
 
             
 
+            
+
              parameter can specify relative or absolute path information, and is not case-sensitive. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -4149,8 +4873,12 @@
 
             
 
+            
+
              can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref
              name="searchPattern" />
+
+            
 
             
 
@@ -4194,8 +4922,12 @@
 
             
 
+            
+
              string "*t" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -4208,8 +4940,12 @@
 
             
 
+            
+
              string "s*" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -4224,8 +4960,12 @@
 
             
 
+            
+
              cannot end in two periods ("..") or contain two periods ("..") followed by <see
              cref="F:System.IO.Path.DirectorySeparatorChar" />
+
+            
 
             
 
@@ -4238,8 +4978,12 @@
 
             
 
+            
+
             , nor can it contain any invalid characters. You can query for invalid characters by using the <see
              cref="M:System.IO.Path.GetInvalidPathChars" />
+
+            
 
             
 
@@ -4255,8 +4999,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.IO.Directory.GetDirectories" />
+
+            
 
             
 
@@ -4269,8 +5017,12 @@
 
             
 
+            
+
             , you can start enumerating the collection of names before the whole collection is returned; when you use <see
              cref="Overload:System.IO.Directory.GetDirectories" />
+
+            
 
             
 
@@ -4283,6 +5035,8 @@
 
             
 
+            
+
              can be more efficient. </para
           >
           <para
@@ -4290,6 +5044,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -4313,10 +5069,14 @@
 
           
 
+          
+
           The relative or absolute path to the directory to search. This string is not case-sensitive.</param
         >
         <param name="searchPattern">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4329,10 +5089,14 @@
 
           
 
+          
+
           . This parameter can contain a combination of valid literal and wildcard characters (see Remarks), but doesn't support regular expressions.</param
         >
         <param name="searchOption">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4373,6 +5137,8 @@
 
             
 
+            
+
              is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters. </para
           >
         </exception>
@@ -4383,8 +5149,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -4403,8 +5173,12 @@
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -4423,6 +5197,8 @@
           <para
             >The following example demonstrates the <see
              cref="M:System.IO.Directory.GetDirectoryRoot(System.String)" />
+
+            
 
             
 
@@ -4474,8 +5250,12 @@ class GetDirectoryTest {
 
             
 
+            
+
             , as returned by <see
              cref="M:System.IO.Path.GetFullPath(System.String)" />
+
+            
 
             
 
@@ -4491,8 +5271,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -4508,6 +5292,8 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter is not case-sensitive.</para
           >
           <para
@@ -4515,6 +5301,8 @@ class GetDirectoryTest {
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -4533,6 +5321,8 @@ class GetDirectoryTest {
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4574,6 +5364,8 @@ class GetDirectoryTest {
 
             
 
+            
+
             is null.</para
           >
         </exception>
@@ -4587,10 +5379,14 @@ class GetDirectoryTest {
 
           
 
+          
+
            was not found.</exception
         >
         <exception cref="T:System.IO.IOException">
           <paramref name="path" />
+
+          
 
           
 
@@ -4606,8 +5402,12 @@ class GetDirectoryTest {
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -4629,6 +5429,8 @@ class GetDirectoryTest {
 
           
 
+          
+
           .</permission
         >
         <exception cref="T:System.UnauthorizedAccessException"
@@ -4644,8 +5446,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              and <see
              cref="Overload:System.IO.Directory.GetFiles" />
+
+            
 
             
 
@@ -4658,6 +5464,8 @@ class GetDirectoryTest {
 
             
 
+            
+
             , you can start enumerating the collection of names before the whole collection is returned; when you use <see
              cref="Overload:System.IO.Directory.GetFiles" />
 
@@ -4665,8 +5473,12 @@ class GetDirectoryTest {
 
             
 
+            
+
             , you must wait for the whole array of names to be returned before you can access the array. Therefore, when you are working with many files and directories, <see
              cref="Overload:System.IO.Directory.EnumerateFiles" />
+
+            
 
             
 
@@ -4682,11 +5494,15 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter.</para
           >
           <para
             >This method is identical to <see
              cref="M:System.IO.Directory.GetFiles(System.String,System.String)" />
+
+            
 
             
 
@@ -4702,8 +5518,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter can specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -4719,11 +5539,15 @@ class GetDirectoryTest {
 
             
 
+            
+
              method if a specific sort order is required. </para
           >
           <para
             >The <paramref
              name="path" />
+
+            
 
             
 
@@ -4736,6 +5560,8 @@ class GetDirectoryTest {
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -4754,6 +5580,8 @@ class GetDirectoryTest {
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4798,6 +5626,8 @@ class GetDirectoryTest {
 
           
 
+          
+
           or <paramref
            name="path" />
 
@@ -4805,8 +5635,12 @@ class GetDirectoryTest {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -4822,6 +5656,8 @@ class GetDirectoryTest {
 
             
 
+            
+
              is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters.</para
           >
           <para>-or-</para>
@@ -4832,11 +5668,15 @@ class GetDirectoryTest {
 
             
 
+            
+
              does not contain a valid pattern.</para
           >
         </exception>
         <exception cref="T:System.IO.IOException">
           <paramref name="path" />
+
+          
 
           
 
@@ -4854,6 +5694,8 @@ class GetDirectoryTest {
 
           
 
+          
+
            was not found.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
@@ -4864,8 +5706,12 @@ class GetDirectoryTest {
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -4893,8 +5739,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter and the order of the returned file names is not guaranteed; use the <see
              cref="Overload:System.Array.Sort" />
+
+            
 
             
 
@@ -4909,8 +5759,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref
              name="searchPattern" />
+
+            
 
             
 
@@ -4954,8 +5808,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              string "*t" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -4968,8 +5826,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              string "s*" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -4984,8 +5846,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              cannot end in two periods ("..") or contain two periods ("..") followed by <see
              cref="F:System.IO.Path.DirectorySeparatorChar" />
+
+            
 
             
 
@@ -4998,8 +5864,12 @@ class GetDirectoryTest {
 
             
 
+            
+
             , nor can it contain any invalid characters. You can query for invalid characters by using the <see
              cref="M:System.IO.Path.GetInvalidPathChars" />
+
+            
 
             
 
@@ -5011,6 +5881,8 @@ class GetDirectoryTest {
             <para
               >When you use the asterisk wildcard character in a <paramref
                name="searchPattern" />
+
+              
 
               
 
@@ -5039,8 +5911,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              and <see
              cref="Overload:System.IO.Directory.GetFiles" />
+
+            
 
             
 
@@ -5053,6 +5929,8 @@ class GetDirectoryTest {
 
             
 
+            
+
             , you can start enumerating the collection of names before the whole collection is returned; when you use <see
              cref="Overload:System.IO.Directory.GetFiles" />
 
@@ -5060,8 +5938,12 @@ class GetDirectoryTest {
 
             
 
+            
+
             , you must wait for the whole array of names to be returned before you can access the array. Therefore, when you are working with many files and directories, <see
              cref="Overload:System.IO.Directory.EnumerateFiles" />
+
+            
 
             
 
@@ -5077,8 +5959,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter can specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -5094,6 +5980,8 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter is not case-sensitive.</para
           >
           <para
@@ -5101,6 +5989,8 @@ class GetDirectoryTest {
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -5124,6 +6014,8 @@ class GetDirectoryTest {
 
           
 
+          
+
           The relative or absolute path to the directory to search. This string is not case-sensitive.</param
         >
         <param name="searchPattern">
@@ -5133,8 +6025,12 @@ class GetDirectoryTest {
 
           
 
+          
+
           The search string to match against the names of files in <paramref
            name="path" />
+
+          
 
           
 
@@ -5179,8 +6075,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              and the order of the returned file names is not guaranteed; use the <see
              cref="Overload:System.Array.Sort" />
+
+            
 
             
 
@@ -5195,8 +6095,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref
              name="searchPattern" />
+
+            
 
             
 
@@ -5240,8 +6144,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              string "*t" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -5254,8 +6162,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              string "s*" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -5270,8 +6182,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              cannot end in two periods ("..") or contain two periods ("..") followed by <see
              cref="F:System.IO.Path.DirectorySeparatorChar" />
+
+            
 
             
 
@@ -5284,8 +6200,12 @@ class GetDirectoryTest {
 
             
 
+            
+
             , nor can it contain any invalid characters. You can query for invalid characters by using the <see
              cref="M:System.IO.Path.GetInvalidPathChars" />
+
+            
 
             
 
@@ -5297,6 +6217,8 @@ class GetDirectoryTest {
             <para
               >When you use the asterisk wildcard character in a <paramref
                name="searchPattern" />
+
+              
 
               
 
@@ -5325,8 +6247,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              and <see
              cref="Overload:System.IO.Directory.GetFiles" />
+
+            
 
             
 
@@ -5339,6 +6265,8 @@ class GetDirectoryTest {
 
             
 
+            
+
             , you can start enumerating the collection of names before the whole collection is returned; when you use <see
              cref="Overload:System.IO.Directory.GetFiles" />
 
@@ -5346,8 +6274,12 @@ class GetDirectoryTest {
 
             
 
+            
+
             , you must wait for the whole array of names to be returned before you can access the array. Therefore, when you are working with many files and directories, <see
              cref="Overload:System.IO.Directory.EnumerateFiles" />
+
+            
 
             
 
@@ -5364,8 +6296,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter can specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -5381,6 +6317,8 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter is not case-sensitive.</para
           >
           <para
@@ -5388,6 +6326,8 @@ class GetDirectoryTest {
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -5411,10 +6351,14 @@ class GetDirectoryTest {
 
           
 
+          
+
           The relative or absolute path to the directory to search. This string is not case-sensitive.</param
         >
         <param name="searchPattern">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5427,10 +6371,14 @@ class GetDirectoryTest {
 
           
 
+          
+
           .  This parameter can contain a combination of valid literal path and wildcard (* and ?) characters (see Remarks), but doesn't support regular expressions.</param
         >
         <param name="searchOption">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5473,8 +6421,12 @@ class GetDirectoryTest {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -5484,6 +6436,8 @@ class GetDirectoryTest {
         >
         <exception cref="T:System.ArgumentException">
           <paramref name="path" />
+
+          
 
           
 
@@ -5501,11 +6455,15 @@ class GetDirectoryTest {
 
           
 
+          
+
            was not found.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
           >The length of <paramref
            name="path" />
+
+          
 
           
 
@@ -5518,10 +6476,14 @@ class GetDirectoryTest {
 
           
 
+          
+
            exceeds the system-defined maximum length.</exception
         >
         <exception cref="T:System.IO.IOException">
           <paramref name="path" />
+
+          
 
           
 
@@ -5549,11 +6511,15 @@ class GetDirectoryTest {
 
             
 
+            
+
              method if a specific sort order is required.</para
           >
           <para
             >The <see
              cref="Overload:System.IO.Directory.EnumerateFileSystemEntries" />
+
+            
 
             
 
@@ -5566,8 +6532,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              methods differ as follows: When you use <see
              cref="Overload:System.IO.Directory.EnumerateFileSystemEntries" />
+
+            
 
             
 
@@ -5580,8 +6550,12 @@ class GetDirectoryTest {
 
             
 
+            
+
             , you must wait for the whole array of entries to be returned before you can access the array. Therefore, when you are working with many files and directories, <see
              cref="Overload:System.IO.Directory.EnumerateFiles" />
+
+            
 
             
 
@@ -5597,6 +6571,8 @@ class GetDirectoryTest {
 
             
 
+            
+
               with the asterisk (*) specified as the search pattern.</para
           >
           <para
@@ -5607,8 +6583,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -5624,6 +6604,8 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter is not case-sensitive.</para
           >
           <para
@@ -5631,6 +6613,8 @@ class GetDirectoryTest {
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -5649,6 +6633,8 @@ class GetDirectoryTest {
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5693,6 +6679,8 @@ class GetDirectoryTest {
 
           
 
+          
+
           or <paramref
            name="path" />
 
@@ -5700,8 +6688,12 @@ class GetDirectoryTest {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -5717,11 +6709,15 @@ class GetDirectoryTest {
 
             
 
+            
+
              is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters.</para
           >
           <para>-or-</para>
           <para>
             <paramref name="searchPattern" />
+
+            
 
             
 
@@ -5740,11 +6736,15 @@ class GetDirectoryTest {
 
           
 
+          
+
            was not found.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
           >The length of <paramref
            name="path" />
+
+          
 
           
 
@@ -5757,10 +6757,14 @@ class GetDirectoryTest {
 
           
 
+          
+
            exceeds the system-defined maximum length.</exception
         >
         <exception cref="T:System.IO.IOException">
           <paramref name="path" />
+
+          
 
           
 
@@ -5788,6 +6792,8 @@ class GetDirectoryTest {
 
             
 
+            
+
              method if a specific sort order is required.</para
           >
           <para>
@@ -5797,8 +6803,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref
              name="searchPattern" />
+
+            
 
             
 
@@ -5842,8 +6852,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              string "*t" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -5856,8 +6870,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              string "s*" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -5872,8 +6890,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              cannot end in two periods ("..") or contain two periods ("..") followed by <see
              cref="F:System.IO.Path.DirectorySeparatorChar" />
+
+            
 
             
 
@@ -5886,8 +6908,12 @@ class GetDirectoryTest {
 
             
 
+            
+
             , nor can it contain any invalid characters. You can query for invalid characters by using the <see
              cref="M:System.IO.Path.GetInvalidPathChars" />
+
+            
 
             
 
@@ -5899,6 +6925,8 @@ class GetDirectoryTest {
             <para
               >When you use the asterisk wildcard character in a <paramref
                name="searchPattern" />
+
+              
 
               
 
@@ -5924,8 +6952,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -5941,6 +6973,8 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter is not case-sensitive.</para
           >
           <para
@@ -5948,6 +6982,8 @@ class GetDirectoryTest {
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -5971,6 +7007,8 @@ class GetDirectoryTest {
 
           
 
+          
+
           The relative or absolute path to the directory to search. This string is not case-sensitive.</param
         >
         <param name="searchPattern">
@@ -5980,8 +7018,12 @@ class GetDirectoryTest {
 
           
 
+          
+
           The search string to match against the names of file and directories in <paramref
            name="path" />
+
+          
 
           
 
@@ -6024,6 +7066,8 @@ class GetDirectoryTest {
 
             
 
+            
+
              method if a specific sort order is required.</para
           >
           <para>
@@ -6033,8 +7077,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref
              name="searchPattern" />
+
+            
 
             
 
@@ -6078,8 +7126,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              string "*t" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -6092,8 +7144,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              string "s*" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -6108,8 +7164,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              cannot end in two periods ("..") or contain two periods ("..") followed by <see
              cref="F:System.IO.Path.DirectorySeparatorChar" />
+
+            
 
             
 
@@ -6122,8 +7182,12 @@ class GetDirectoryTest {
 
             
 
+            
+
             , nor can it contain any invalid characters. You can query for invalid characters by using the <see
              cref="M:System.IO.Path.GetInvalidPathChars" />
+
+            
 
             
 
@@ -6135,6 +7199,8 @@ class GetDirectoryTest {
             <para
               >When you use the asterisk wildcard character in a <paramref
                name="searchPattern" />
+
+              
 
               
 
@@ -6160,8 +7226,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              and <see
              cref="Overload:System.IO.Directory.GetFileSystemEntries" />
+
+            
 
             
 
@@ -6174,6 +7244,8 @@ class GetDirectoryTest {
 
             
 
+            
+
             , you can start enumerating the collection of entries before the whole collection is returned; when you use <see
              cref="Overload:System.IO.Directory.GetFileSystemEntries" />
 
@@ -6181,8 +7253,12 @@ class GetDirectoryTest {
 
             
 
+            
+
             , you must wait for the whole array of entries to be returned before you can access the array. Therefore, when you are working with many files and directories, <see
              cref="Overload:System.IO.Directory.EnumerateFiles" />
+
+            
 
             
 
@@ -6198,8 +7274,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter. Relative path information is interpreted as relative to the current working directory, which you can determine by using the <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -6223,10 +7303,14 @@ class GetDirectoryTest {
 
           
 
+          
+
           The relative or absolute path to the directory to search. This string is not case-sensitive.</param
         >
         <param name="searchPattern">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6239,10 +7323,14 @@ class GetDirectoryTest {
 
           
 
+          
+
           .  This parameter can contain a combination of valid literal path and wildcard (* and ?) characters (see Remarks), but doesn't support regular expressions.</param
         >
         <param name="searchOption">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6285,6 +7373,8 @@ class GetDirectoryTest {
 
           
 
+          
+
           is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters.</exception
         >
         <exception cref="T:System.ArgumentNullException">
@@ -6294,8 +7384,12 @@ class GetDirectoryTest {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -6312,8 +7406,12 @@ class GetDirectoryTest {
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -6327,6 +7425,8 @@ class GetDirectoryTest {
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to read the specified file or directory. See <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" qualify="true" />
+
+          
 
           
 
@@ -6350,11 +7450,15 @@ class GetDirectoryTest {
 
             
 
+            
+
             .</para
           >
           <para
             >If the directory described in the <paramref
              name="path" />
+
+            
 
             
 
@@ -6370,8 +7474,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -6387,6 +7495,8 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter is not case-sensitive.</para
           >
           <para
@@ -6394,6 +7504,8 @@ class GetDirectoryTest {
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -6412,6 +7524,8 @@ class GetDirectoryTest {
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6457,6 +7571,8 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter does not exist, this method returns 12:00 midnight, January 1, 1601 A.D. (C.E.) Coordinated Universal Time (UTC).</para
           >
           <para
@@ -6464,6 +7580,8 @@ class GetDirectoryTest {
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -6482,6 +7600,8 @@ class GetDirectoryTest {
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6524,6 +7644,8 @@ class GetDirectoryTest {
 
           
 
+          
+
           is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters.</exception
         >
         <exception cref="T:System.ArgumentNullException">
@@ -6533,8 +7655,12 @@ class GetDirectoryTest {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -6551,8 +7677,12 @@ class GetDirectoryTest {
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -6566,6 +7696,8 @@ class GetDirectoryTest {
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to read the specified file or directory. See <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" qualify="true" />
+
+          
 
           
 
@@ -6589,6 +7721,8 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter does not exist, this method returns 12:00 midnight, January 1, 1601 A.D. (C.E.) Coordinated Universal Time (UTC), adjusted to local time.</para
           >
           <para
@@ -6599,8 +7733,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -6616,6 +7754,8 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter is not case-sensitive.</para
           >
           <para
@@ -6623,6 +7763,8 @@ class GetDirectoryTest {
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -6641,6 +7783,8 @@ class GetDirectoryTest {
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6686,6 +7830,8 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter does not exist, this method returns 12:00 midnight, January 1, 1601 A.D. (C.E.) Coordinated Universal Time (UTC).</para
           >
           <para
@@ -6693,6 +7839,8 @@ class GetDirectoryTest {
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -6711,6 +7859,8 @@ class GetDirectoryTest {
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6745,6 +7895,8 @@ class GetDirectoryTest {
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -6795,8 +7947,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -6812,11 +7968,15 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter before getting the directory.</para
           >
           <para
             >The string returned by this method consists of all characters in the path up to, but not including, the last <see
              cref="F:System.IO.Path.DirectorySeparatorChar" />
+
+            
 
             
 
@@ -6829,8 +7989,12 @@ class GetDirectoryTest {
 
             
 
+            
+
             . For example, passing the path "C:\Directory\SubDirectory\test.txt" to <see
              cref="M:System.IO.Directory.GetParent(System.String)" />
+
+            
 
             
 
@@ -6846,6 +8010,8 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter is not case-sensitive.</para
           >
           <para
@@ -6853,6 +8019,8 @@ class GetDirectoryTest {
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -6875,11 +8043,15 @@ class GetDirectoryTest {
 
             
 
+            
+
              is the root directory, including the root of a UNC server or share name.</para
           >
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6923,8 +8095,12 @@ class GetDirectoryTest {
 
           
 
+          
+
           or <paramref
            name="destDirName " />
+
+          
 
           
 
@@ -6939,6 +8115,8 @@ class GetDirectoryTest {
 
           
 
+          
+
           or <paramref
            name="destDirName " />
 
@@ -6946,8 +8124,12 @@ class GetDirectoryTest {
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -6968,6 +8150,8 @@ class GetDirectoryTest {
 
             
 
+            
+
              already exists.</para
           >
           <para>-or-</para>
@@ -6978,8 +8162,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              and <paramref
              name="destDirName" />
+
+            
 
             
 
@@ -6995,6 +8183,8 @@ class GetDirectoryTest {
 
           
 
+          
+
            was not found.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
@@ -7005,8 +8195,12 @@ class GetDirectoryTest {
 
           
 
+          
+
            or <paramref
            name="destDirName" />
+
+          
 
           
 
@@ -7023,8 +8217,12 @@ class GetDirectoryTest {
 
           
 
+          
+
           and write to <paramref
            name="sourceDirName " />
+
+          
 
           
 
@@ -7037,6 +8235,8 @@ class GetDirectoryTest {
 
           
 
+          
+
           . See <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Read" qualify="true" />
 
@@ -7044,8 +8244,12 @@ class GetDirectoryTest {
 
           
 
+          
+
           , <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+
+          
 
           
 
@@ -7066,8 +8270,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              and moves the contents of <paramref
              name="sourceDirName" />
+
+            
 
             
 
@@ -7080,8 +8288,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              will occur. For example, an exception will occur if you try to move c:\mydir to c:\public, and c:\public already exists. Alternatively, you could specify "c:\\public\\mydir" as the <paramref
              name="destDirName" />
+
+            
 
             
 
@@ -7097,6 +8309,8 @@ class GetDirectoryTest {
 
             
 
+            
+
              and <paramref
              name="destDirName" />
 
@@ -7104,8 +8318,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              arguments are permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -7119,6 +8337,8 @@ class GetDirectoryTest {
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -7138,10 +8358,14 @@ class GetDirectoryTest {
 
           
 
+          
+
           The path of the file or directory to move. </param
         >
         <param name="destDirName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7154,6 +8378,8 @@ class GetDirectoryTest {
 
           
 
+          
+
           . If <paramref
            name="sourceDirName" />
 
@@ -7161,8 +8387,12 @@ class GetDirectoryTest {
 
           
 
+          
+
            is a file, then <paramref
            name="destDirName" />
+
+          
 
           
 
@@ -7209,6 +8439,8 @@ class GetDirectoryTest {
 
             
 
+            
+
              method applies access control list (ACL) entries to a file that represents the noninherited ACL list.</para
           >
           <block subset="none" type="note">
@@ -7220,8 +8452,12 @@ class GetDirectoryTest {
 
               
 
+              
+
                parameter replaces the existing ACL for the directory. To add permissions for a new user, use the <see
                cref="Overload:System.IO.Directory.GetAccessControl" />
+
+              
 
               
 
@@ -7240,12 +8476,16 @@ class GetDirectoryTest {
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="53758b39-bd9b-4640-bb04-cad5ed8d0abf"
                 >How to: Add or Remove an Access Control List Entry</a
               >
             </format>
+
+            
 
             
 
@@ -7261,8 +8501,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              method persists only <see
              cref="T:System.Security.AccessControl.DirectorySecurity" />
+
+            
 
             
 
@@ -7275,8 +8519,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              object has not been modified, it will not be persisted to a file.  Therefore, it is not possible to retrieve a <see
              cref="T:System.Security.AccessControl.DirectorySecurity" />
+
+            
 
             
 
@@ -7295,8 +8543,12 @@ class GetDirectoryTest {
 
                 
 
+                
+
                  method to retrieve the <see
                  cref="T:System.Security.AccessControl.DirectorySecurity" />
+
+                
 
                 
 
@@ -7314,6 +8566,8 @@ class GetDirectoryTest {
 
                 
 
+                
+
                  object for the destination file.</para
               >
             </item>
@@ -7326,6 +8580,8 @@ class GetDirectoryTest {
 
                 
 
+                
+
                  or <see
                  cref="M:System.Security.AccessControl.ObjectSecurity.GetSecurityDescriptorSddlForm(System.Security.AccessControl.AccessControlSections)" />
 
@@ -7333,8 +8589,12 @@ class GetDirectoryTest {
 
                 
 
+                
+
                  method of the source <see
                  cref="T:System.Security.AccessControl.DirectorySecurity" />
+
+                
 
                 
 
@@ -7352,6 +8612,8 @@ class GetDirectoryTest {
 
                 
 
+                
+
                  or <see
                  cref="M:System.Security.AccessControl.ObjectSecurity.SetSecurityDescriptorSddlForm(System.String)" />
 
@@ -7359,8 +8621,12 @@ class GetDirectoryTest {
 
                 
 
+                
+
                  method to copy the information retrieved in step 3 to the destination <see
                  cref="T:System.Security.AccessControl.DirectorySecurity" />
+
+                
 
                 
 
@@ -7378,8 +8644,12 @@ class GetDirectoryTest {
 
                 
 
+                
+
                  object to the destination file using the <see
                  cref="M:System.IO.Directory.SetAccessControl(System.String,System.Security.AccessControl.DirectorySecurity)" />
+
+                
 
                 
 
@@ -7397,8 +8667,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              and <see
              cref="F:System.Security.AccessControl.FileSystemRights.ReadExtendedAttributes" />
+
+            
 
             
 
@@ -7411,8 +8685,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              rights on the parent folder. To deny <see
              cref="F:System.Security.AccessControl.FileSystemRights.ReadAttributes" />
+
+            
 
             
 
@@ -7425,8 +8703,12 @@ class GetDirectoryTest {
 
             
 
+            
+
             , deny <see
              cref="F:System.Security.AccessControl.FileSystemRights.ListDirectory" />
+
+            
 
             
 
@@ -7445,11 +8727,15 @@ class GetDirectoryTest {
 
             
 
+            
+
              object to the specified directory.</para
           >
         </summary>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7464,6 +8750,8 @@ class GetDirectoryTest {
 
           
 
+          
+
           A <see
            cref="T:System.Security.AccessControl.DirectorySecurity" />
 
@@ -7471,8 +8759,12 @@ class GetDirectoryTest {
 
           
 
+          
+
            object that describes an ACL entry to apply to the directory described by the <paramref
            name="path" />
+
+          
 
           
 
@@ -7516,10 +8808,14 @@ class GetDirectoryTest {
 
           
 
+          
+
           is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters.</exception
         >
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="creationTime " />
+
+          
 
           
 
@@ -7534,8 +8830,12 @@ class GetDirectoryTest {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -7545,6 +8845,8 @@ class GetDirectoryTest {
         >
         <exception cref="T:System.IO.FileNotFoundException">
           <paramref name="path" />
+
+          
 
           
 
@@ -7563,8 +8865,12 @@ class GetDirectoryTest {
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -7575,6 +8881,8 @@ class GetDirectoryTest {
         <permission cref="T:System.Security.Permissions.FileIOPermission"
           >Requires permission to write to the specified file or directory. See <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
+
+          
 
           
 
@@ -7595,8 +8903,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -7607,6 +8919,8 @@ class GetDirectoryTest {
           <para
             >The <paramref
              name="path" />
+
+            
 
             
 
@@ -7626,10 +8940,14 @@ class GetDirectoryTest {
 
           
 
+          
+
           The file or directory for which to set the creation date and time information. </param
         >
         <param name="creationTime">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7673,8 +8991,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -7690,6 +9012,8 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter is not case-sensitive.</para
           >
           <para
@@ -7697,6 +9021,8 @@ class GetDirectoryTest {
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -7716,10 +9042,14 @@ class GetDirectoryTest {
 
           
 
+          
+
           The file or directory for which to set the creation date and time information. </param
         >
         <param name="creationTimeUtc">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7762,10 +9092,14 @@ class GetDirectoryTest {
 
           
 
+          
+
           is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters.</exception
         >
         <exception cref="T:System.ArgumentNullException">
           <paramref name="path" />
+
+          
 
           
 
@@ -7778,10 +9112,14 @@ class GetDirectoryTest {
 
           
 
+          
+
           .</exception
         >
         <exception cref="T:System.IO.FileNotFoundException">
           <paramref name="path" />
+
+          
 
           
 
@@ -7800,8 +9138,12 @@ class GetDirectoryTest {
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -7823,8 +9165,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -7840,11 +9186,15 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter before setting the directory.</para
           >
           <para
             >The <paramref
              name="path" />
+
+            
 
             
 
@@ -7860,6 +9210,8 @@ class GetDirectoryTest {
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -7869,6 +9221,8 @@ class GetDirectoryTest {
         </summary>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7913,6 +9267,8 @@ class GetDirectoryTest {
 
           
 
+          
+
           is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters.</exception
         >
         <exception cref="T:System.ArgumentNullException">
@@ -7922,8 +9278,12 @@ class GetDirectoryTest {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -7942,8 +9302,12 @@ class GetDirectoryTest {
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -7962,6 +9326,8 @@ class GetDirectoryTest {
 
           
 
+          
+
           .</permission
         >
         <exception cref="T:System.ArgumentOutOfRangeException">
@@ -7971,10 +9337,14 @@ class GetDirectoryTest {
 
           
 
+          
+
            specifies a value outside the range of date/times permitted for this operation.</exception
         >
         <exception cref="T:System.IO.FileNotFoundException">
           <paramref name="path" />
+
+          
 
           
 
@@ -7995,8 +9365,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -8012,6 +9386,8 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter is not case-sensitive.</para
           >
           <para
@@ -8019,6 +9395,8 @@ class GetDirectoryTest {
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -8038,6 +9416,8 @@ class GetDirectoryTest {
 
           
 
+          
+
           The file or directory for which to set the access date and time information. </param
         >
         <param name="lastAccessTime">
@@ -8047,8 +9427,12 @@ class GetDirectoryTest {
 
           
 
+          
+
           An object that contains the value to set for the access date and time of <paramref
            name="path" />
+
+          
 
           
 
@@ -8092,8 +9476,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -8109,6 +9497,8 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter is not case-sensitive.</para
           >
           <para
@@ -8116,6 +9506,8 @@ class GetDirectoryTest {
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -8135,6 +9527,8 @@ class GetDirectoryTest {
 
           
 
+          
+
           The file or directory for which to set the access date and time information. </param
         >
         <param name="lastAccessTimeUtc">
@@ -8144,8 +9538,12 @@ class GetDirectoryTest {
 
           
 
+          
+
           An object that  contains the value to set for the access date and time of <paramref
            name="path" />
+
+          
 
           
 
@@ -8189,6 +9587,8 @@ class GetDirectoryTest {
 
           
 
+          
+
           is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters.</exception
         >
         <exception cref="T:System.ArgumentNullException">
@@ -8198,8 +9598,12 @@ class GetDirectoryTest {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -8218,8 +9622,12 @@ class GetDirectoryTest {
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -8238,6 +9646,8 @@ class GetDirectoryTest {
 
           
 
+          
+
           .</permission
         >
         <exception cref="T:System.ArgumentOutOfRangeException">
@@ -8247,10 +9657,14 @@ class GetDirectoryTest {
 
           
 
+          
+
            specifies a value outside the range of date/times permitted for this operation.</exception
         >
         <exception cref="T:System.IO.FileNotFoundException">
           <paramref name="path" />
+
+          
 
           
 
@@ -8271,8 +9685,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -8288,6 +9706,8 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter is not case-sensitive.</para
           >
           <para
@@ -8295,6 +9715,8 @@ class GetDirectoryTest {
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -8314,10 +9736,14 @@ class GetDirectoryTest {
 
           
 
+          
+
           The path of the directory. </param
         >
         <param name="lastWriteTime">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8361,8 +9787,12 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter is permitted to specify relative or absolute path information. Relative path information is interpreted as relative to the current working directory. To obtain the current working directory, see <see
              cref="M:System.IO.Directory.GetCurrentDirectory" />
+
+            
 
             
 
@@ -8378,6 +9808,8 @@ class GetDirectoryTest {
 
             
 
+            
+
              parameter is not case-sensitive.</para
           >
           <para
@@ -8385,6 +9817,8 @@ class GetDirectoryTest {
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -8404,10 +9838,14 @@ class GetDirectoryTest {
 
           
 
+          
+
           The path of the directory. </param
         >
         <param name="lastWriteTimeUtc">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

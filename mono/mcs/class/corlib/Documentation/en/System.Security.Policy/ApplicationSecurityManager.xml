@@ -34,8 +34,12 @@
 
         
 
+        
+
          class provides essential information for the execution of a manifest-based application. The <see
          cref="P:System.Security.Policy.ApplicationSecurityManager.ApplicationTrustManager" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
          method calls the application trust manager to determine whether an application is trusted. The <see
          cref="P:System.Security.Policy.ApplicationSecurityManager.UserApplicationTrusts" />
+
+        
 
         
 
@@ -89,6 +97,8 @@
           <para
             >In the current release there is only one trust manager, which can be a custom implementation of the <see
              cref="T:System.Security.Policy.IApplicationTrustManager" />
+
+            
 
             
 
@@ -135,8 +145,12 @@
 
             
 
+            
+
              uses the configured <see
              cref="P:System.Security.Policy.ApplicationSecurityManager.ApplicationTrustManager" />
+
+            
 
             
 
@@ -149,8 +163,12 @@
 
             
 
+            
+
              parameter. The default behavior of the trust manager is to establish a user interface (UI) dialog box to determine the user's approval. However, a trust manager can also determine an application's trust status based on other criteria, such as decisions provided by a corporate database. The trust decision can be persisted, depending upon the <paramref
              name="context" />
+
+            
 
             
 
@@ -163,8 +181,12 @@
 
             
 
+            
+
              will not present the UI dialog box for every request for that application. <see
              cref="M:System.Security.Policy.ApplicationSecurityManager.DetermineApplicationTrust(System.ActivationContext,System.Security.Policy.TrustManagerContext)" />
+
+            
 
             
 
@@ -188,8 +210,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ActivationContext" />
+
+          
 
           
 
@@ -204,8 +230,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Policy.TrustManagerContext" />
+
+          
 
           
 
@@ -245,8 +275,12 @@
 
             
 
+            
+
              method or the <see
              cref="Overload:System.Security.Policy.ApplicationTrustCollection.Remove" />
+
+            
 
             
 

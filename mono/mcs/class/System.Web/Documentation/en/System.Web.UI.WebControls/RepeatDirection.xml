@@ -22,6 +22,8 @@
 
         
 
+        
+
          enumeration represents the different directions in which the items of a list control can be displayed.</para
       >
       <block subset="none" type="note">
@@ -29,6 +31,8 @@
       </block>
       <para>
         <see cref="F:System.Web.UI.WebControls.RepeatDirection.Horizontal" />
+
+        
 
         
 
@@ -71,6 +75,8 @@
       </list>
       <para>
         <see cref="F:System.Web.UI.WebControls.RepeatDirection.Vertical" />
+
+        
 
         
 

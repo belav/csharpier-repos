@@ -36,8 +36,12 @@
 
         
 
+        
+
          enumeration is used with the <see
          cref="M:System.Resources.NeutralResourcesLanguageAttribute.#ctor(System.String,System.Resources.UltimateResourceFallbackLocation)" />
+
+        
 
         
 
@@ -50,10 +54,14 @@
 
         
 
+        
+
          object retrieves the resources of the app's default culture from the main app assembly (the default), or from a satellite assembly. In a localized application, the resources of the default culture are used if no culture-specific resources are found after using the resource fallback process. For more information, see the "Resource Fallback Process" section in <format
          type="text/html">
           <a href="b224d7c0-35f8-4e82-a705-dd76795e8d16">Packaging and Deploying Resources</a>
         </format>
+
+        
 
         
 
@@ -69,8 +77,12 @@
 
         
 
+        
+
          or no value to the <see
          cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
+
+        
 
         
 
@@ -83,8 +95,12 @@
 
         
 
+        
+
          exception. If you specify a value of <see
          cref="F:System.Resources.UltimateResourceFallbackLocation.Satellite" />
+
+        
 
         
 
@@ -97,8 +113,12 @@
 
         
 
+        
+
          and resource manager cannot load a resource set that belongs to the default culture, it throws a <see
          cref="T:System.Resources.MissingSatelliteAssemblyException" />
+
+        
 
         
 
@@ -112,6 +132,8 @@
       <para
         >Specifies whether a <see
          cref="T:System.Resources.ResourceManager" />
+
+        
 
         
 

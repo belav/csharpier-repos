@@ -52,9 +52,13 @@
 
       
 
+      
+
        values to use as values to
       <see
        cref="M:Mono.Options.Option.OnParseComplete(Mono.Options.OptionContext)" />
+
+      
 
       
 
@@ -72,9 +76,13 @@
 
         
 
+        
+
          instance is
         tied to a controlling <see
          cref="T:Mono.Options.OptionContext" />
+
+        
 
         
 
@@ -89,9 +97,13 @@
 
         
 
+        
+
          that the 
         <see
          cref="P:Mono.Options.OptionContext.Option" />
+
+        
 
         
 
@@ -108,9 +120,13 @@
 
         
 
+        
+
          refers to an
         <see
          cref="T:Mono.Options.Option" />
+
+        
 
         
 
@@ -124,9 +140,13 @@
 
         
 
+        
+
          of
         <see
          cref="F:Mono.Options.OptionValueType.Optional" />
+
+        
 
         
 
@@ -141,8 +161,12 @@
         
 
         
+
+        
         indexer will return <see
          langword="null" />
+
+        
 
         
 
@@ -156,9 +180,13 @@
 
         
 
+        
+
          is less than 
         <see
          cref="P:Mono.Options.Option.MaxValueCount" />
+
+        
 
         
 
@@ -172,9 +200,13 @@
 
         
 
+        
+
          is otherwise invalid (i.e. there hasn't been
         a string <c
         >Add</c>
+
+        
 
         
 
@@ -187,6 +219,8 @@
 
         
 
+        
+
         .
       </para
       >
@@ -194,6 +228,8 @@
         Otherwise, this instance behaves like
         <see
          cref="T:System.Collections.Generic.List{System.String}" />
+
+        
 
         
 

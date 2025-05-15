@@ -27,6 +27,8 @@
 
         
 
+        
+
          class corresponds to the Web Services Description Language (WSDL) &lt; service &gt; element enclosed by the &lt; definitions &gt; root element. For more information about WSDL, see the specification at http://www.w3.org/TR/wsdl/.</para
       >
     </remarks>
@@ -35,6 +37,8 @@
       <para
         >Represents a collection of instances of the <see
          cref="T:System.Web.Services.Description.Service" />
+
+        
 
         
 
@@ -69,8 +73,12 @@
 
             
 
+            
+
              to the end of the <see
              cref="T:System.Web.Services.Description.ServiceCollection" />
+
+            
 
             
 
@@ -89,6 +97,8 @@
 
             
 
+            
+
              parameter has been added.</para
           >
         </returns>
@@ -99,8 +109,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.Service" />
+
+          
 
           
 
@@ -138,8 +152,12 @@
 
             
 
+            
+
              instance is a member of the <see
              cref="T:System.Web.Services.Description.ServiceCollection" />
+
+            
 
             
 
@@ -158,8 +176,12 @@
 
             
 
+            
+
              parameter is a member of the <see
              cref="T:System.Web.Services.Description.ServiceCollection" />
+
+            
 
             
 
@@ -175,8 +197,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.Service" />
+
+          
 
           
 
@@ -215,8 +241,12 @@
 
             
 
+            
+
              to a one-dimensional array of type <see
              cref="T:System.Web.Services.Description.Service" />
+
+            
 
             
 
@@ -232,8 +262,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Web.Services.Description.Service" />
+
+          
 
           
 
@@ -243,6 +277,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -306,6 +342,8 @@
 
             
 
+            
+
              and returns the zero-based index of the first occurrence within the ServiceCollection.</para
           >
         </summary>
@@ -320,8 +358,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.Service" />
+
+          
 
           
 
@@ -360,6 +402,8 @@
 
             
 
+            
+
              parameter is equal to <see
              cref="P:System.Collections.CollectionBase.Count" />
 
@@ -367,8 +411,12 @@
 
             
 
+            
+
             , the <paramref
              name="service" />
+
+            
 
             
 
@@ -388,8 +436,12 @@
 
             
 
+            
+
              instance to the <see
              cref="T:System.Web.Services.Description.ServiceCollection" />
+
+            
 
             
 
@@ -405,8 +457,12 @@
 
           
 
+          
+
           The zero-based index at which to insert the <paramref
            name="service" />
+
+          
 
           
 
@@ -421,8 +477,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.Service" />
+
+          
 
           
 
@@ -505,11 +565,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The elements that follow the removed <see
              cref="T:System.Web.Services.Description.Service" />
+
+            
 
             
 
@@ -528,8 +592,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Web.Services.Description.ServiceCollection" />
+
+            
 
             
 
@@ -545,8 +613,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.Service" />
+
+          
 
           
 

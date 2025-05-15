@@ -24,8 +24,12 @@
 
         
 
+        
+
          interface on a <see
          cref="T:System.ServiceModel.Channels.BindingElement" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          that returns the policy exporter <see
          cref="T:System.ServiceModel.Channels.BindingElement" />
+
+        
 
         
 
@@ -56,8 +64,12 @@
 
         
 
+        
+
          method takes the <see
          cref="T:System.ServiceModel.Description.MetadataExporter" />
+
+        
 
         
 
@@ -70,8 +82,12 @@
 
         
 
+        
+
          objects. Use the <see
          cref="M:System.ServiceModel.Description.PolicyConversionContext.GetBindingAssertions" />
+
+        
 
         
 
@@ -84,8 +100,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.ServiceModel.Description.PolicyConversionContext.GetOperationBindingAssertions(System.ServiceModel.Description.OperationDescription)" />
+
+        
 
         
 
@@ -101,8 +121,12 @@
 
         
 
+        
+
          property exposes the <see
          cref="T:System.ServiceModel.Description.ContractDescription" />
+
+        
 
         
 
@@ -115,8 +139,12 @@
 
         
 
+        
+
          extension to correctly scope their exported policy assertions. For example, security attributes in code may add behaviors to the <see
          cref="T:System.ServiceModel.Description.ContractDescription" />
+
+        
 
         
 
@@ -132,8 +160,12 @@
 
         
 
+        
+
          mechanism only supports exporting policy assertions in WSDL. To export custom WSDL elements you must use the <see
          cref="T:System.ServiceModel.Description.IWsdlExportExtension" />
+
+        
 
         
 
@@ -149,6 +181,8 @@
 
         
 
+        
+
          object.</para
       >
     </remarks>
@@ -157,6 +191,8 @@
       <para
         >Implement <see
          cref="T:System.ServiceModel.Description.IPolicyExportExtension" />
+
+        
 
         
 
@@ -198,8 +234,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.ServiceModel.Description.PolicyConversionContext.GetMessageBindingAssertions(System.ServiceModel.Description.MessageDescription)" />
+
+            
 
             
 
@@ -212,8 +252,12 @@
 
             
 
+            
+
              methods to obtain collections of policy assertions that have already been exported at various scopes. Then add your <see
              cref="T:System.ServiceModel.Description.IPolicyExportExtension" />
+
+            
 
             
 
@@ -233,8 +277,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.MetadataExporter" />
+
+          
 
           
 
@@ -249,8 +297,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+
+          
 
           
 

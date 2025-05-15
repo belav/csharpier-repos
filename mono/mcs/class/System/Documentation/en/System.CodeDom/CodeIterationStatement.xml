@@ -41,11 +41,15 @@
 
         
 
+        
+
          can represent a for loop or while loop.</para
       >
       <para
         >The <see
          cref="P:System.CodeDom.CodeIterationStatement.InitStatement" />
+
+        
 
         
 
@@ -58,6 +62,8 @@
 
         
 
+        
+
          property specifies the loop continuation expression, which must evaluate to true at the end of each loop iteration for another iteration to begin. The <see
          cref="P:System.CodeDom.CodeIterationStatement.IncrementStatement" />
 
@@ -65,8 +71,12 @@
 
         
 
+        
+
          property specifies the statement to execute at the end of each loop iteration. The <see
          cref="P:System.CodeDom.CodeIterationStatement.Statements" />
+
+        
 
         
 
@@ -102,6 +112,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeIterationStatement" />
+
+            
 
             
 
@@ -152,6 +164,8 @@
 
             
 
+            
+
              class using the specified parameters.</para
           >
         </summary>
@@ -162,8 +176,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeStatement" />
+
+          
 
           
 
@@ -178,8 +196,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 
@@ -194,8 +216,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeStatement" />
+
+          
 
           
 
@@ -210,8 +236,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.CodeDom.CodeStatement" />
+
+          
 
           
 
@@ -283,8 +313,12 @@
 
             
 
+            
+
              that contains a <see
              cref="T:System.CodeDom.CodeSnippetExpression" />
+
+            
 
             
 

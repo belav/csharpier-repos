@@ -27,8 +27,12 @@
 
         
 
+        
+
          method for all destination types except <see
          cref="T:System.String" />
+
+        
 
         
 
@@ -42,6 +46,8 @@
       <para
         >Provides a type converter for <see
          cref="T:System.Web.UI.DataBindingCollection" />
+
+        
 
         
 
@@ -63,6 +69,8 @@
           <para
             >Initializes an instance of the <see
              cref="T:System.Web.UI.Design.DataBindingCollectionConverter" />
+
+            
 
             
 
@@ -103,8 +111,12 @@
 
             
 
+            
+
              parameter is of type <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -117,8 +129,12 @@
 
             
 
+            
+
              method of the base <see
              cref="T:System.ComponentModel.TypeConverter" />
+
+            
 
             
 
@@ -141,8 +157,12 @@
 
             
 
+            
+
              parameter is of type <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -158,8 +178,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -174,8 +198,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -190,10 +218,14 @@
 
           
 
+          
+
           The object to convert. </param
         >
         <param name="destinationType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

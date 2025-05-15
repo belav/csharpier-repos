@@ -11,6 +11,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="24.2">attributes</non_terminal>
@@ -29,8 +31,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -49,6 +55,8 @@
       <name>
         <non_terminal where="17.10">constructor-modifier</non_terminal>
       </name>
+
+      
 
       
 
@@ -80,6 +88,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="9.4.2">identifier</non_terminal>
@@ -95,6 +105,8 @@
       <name>
         <non_terminal where="17.10">constructor-initializer</non_terminal>
       </name>
+
+      
 
       
 
@@ -127,6 +139,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="15.2">block</non_terminal>
@@ -144,8 +158,12 @@
 
     
 
+    
+
      may include a set of attributes (<hyperlink
     >24</hyperlink>
+
+    
 
     
 
@@ -158,8 +176,12 @@
 
     
 
+    
+
     ), and an extern (<hyperlink
     >17.5.7</hyperlink>
+
+    
 
     
 
@@ -175,11 +197,15 @@
 
     
 
+    
+
      must name the class in which the instance constructor is declared. If any other name is specified, a compile-time error occurs. </paragraph
   >
   <paragraph
     >The optional <non_terminal
      where="17.5.1">formal-parameter-list</non_terminal>
+
+    
 
     
 
@@ -192,8 +218,12 @@
 
     
 
+    
+
      of a method (<hyperlink
     >17.5</hyperlink>
+
+    
 
     
 
@@ -206,8 +236,12 @@
 
     
 
+    
+
     ) of an instance constructor and governs the process whereby overload resolution (<hyperlink
     >14.4.2</hyperlink>
+
+    
 
     
 
@@ -223,8 +257,12 @@
 
     
 
+    
+
      of an instance constructor must be at least as accessible as the constructor itself (<hyperlink
     >10.5.4</hyperlink>
+
+    
 
     
 
@@ -240,6 +278,8 @@
 
     
 
+    
+
      specifies another instance constructor to invoke before executing the statements given in the <non_terminal
      where="17.10">constructor-body</non_terminal>
 
@@ -247,8 +287,12 @@
 
     
 
+    
+
      of this instance constructor. This is described further in <hyperlink
     >17.10.1</hyperlink>
+
+    
 
     
 
@@ -265,8 +309,12 @@
 
     
 
+    
+
      consists of a semicolon. For all other constructors, the <non_terminal
      where="17.10">constructor-body</non_terminal>
+
+    
 
     
 
@@ -279,8 +327,12 @@
 
     
 
+    
+
      return type (<hyperlink
     >17.5.8</hyperlink>
+
+    
 
     
 
@@ -296,11 +348,15 @@
 
     
 
+    
+
     ). </paragraph
   >
   <paragraph
     >Instance constructors are invoked by <non_terminal
      where="14.5.10.1">object-creation-expression</non_terminal>
+
+    
 
     
 
@@ -313,8 +369,12 @@
 
     
 
+    
+
     ) and through  <non_terminal
      where="17.10">constructor-initializer</non_terminal>
+
+    
 
     
 

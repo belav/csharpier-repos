@@ -53,6 +53,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -86,11 +88,15 @@
 
             
 
+            
+
              class with the specified policy type.</para
           >
         </summary>
         <param name="policyType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

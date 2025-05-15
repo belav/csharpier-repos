@@ -23,6 +23,8 @@
 
         
 
+        
+
          class for your application, you might include the trace message "Starting To Render" in a rendering procedure, and "Raising OnChange Event" in an event handler procedure.</para
       >
       <para
@@ -33,10 +35,14 @@
 
         
 
+        
+
          class to obtain a set of trace records at the end of request execution for custom processing. For more information, see <format
          type="text/html">
           <a href="1552561d-887c-4002-8770-f92662cdf416">ASP.NET Tracing Overview</a>
         </format>
+
+        
 
         
 
@@ -54,6 +60,8 @@
 
         
 
+        
+
          directive or the <see
          cref="P:System.Web.TraceContext.IsEnabled" />
 
@@ -61,8 +69,12 @@
 
         
 
+        
+
          property to true. When tracing is enabled, in addition to showing user-provided trace content, the <see
          cref="T:System.Web.UI.Page" />
+
+        
 
         
 
@@ -103,6 +115,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -132,10 +146,14 @@
 
             
 
+            
+
              property depends on the settings in the <format
              type="text/html">
               <a href="7931c942-63c1-47c3-a045-9d9de3cacdbf">trace</a>
             </format>
+
+            
 
             
 
@@ -150,8 +168,12 @@
 
             
 
+            
+
              directive. The tracing option set in the page directive takes precedence over the option set in the configuration file. Setting the <see
              cref="P:System.Web.TraceContext.IsEnabled" />
+
+            
 
             
 
@@ -163,6 +185,8 @@
             <para
               >If you set the <see
                cref="P:System.Web.TraceContext.IsEnabled" />
+
+              
 
               
 
@@ -205,8 +229,12 @@
 
             
 
+            
+
              event is raised during the EndRequest stage of HTTP request processing. It is raised by a <see
              cref="T:System.Web.TraceContext" />
+
+            
 
             
 
@@ -219,8 +247,12 @@
 
             
 
+            
+
              messages to registered <see
              cref="T:System.Web.TraceContextEventHandler" />
+
+            
 
             
 
@@ -234,6 +266,8 @@
           <para
             >Raised by the <see
              cref="T:System.Web.TraceContext" />
+
+            
 
             
 
@@ -291,8 +325,12 @@
 
             
 
+            
+
              method is called, a <see
              cref="T:System.Web.TraceContext" />
+
+            
 
             
 
@@ -305,8 +343,12 @@
 
             
 
+            
+
              messages collection, which is accessible when you handle the <see
              cref="E:System.Web.TraceContext.TraceFinished" />
+
+            
 
             
 
@@ -319,8 +361,12 @@
 
             
 
+            
+
              property set to true and its <see
              cref="P:System.Web.TraceContextRecord.ErrorInfo" />
+
+            
 
             
 
@@ -364,8 +410,12 @@
 
             
 
+            
+
              method is called, a <see
              cref="T:System.Web.TraceContext" />
+
+            
 
             
 
@@ -378,8 +428,12 @@
 
             
 
+            
+
              messages collection, which is accessible when you handle the <see
              cref="E:System.Web.TraceContext.TraceFinished" />
+
+            
 
             
 
@@ -392,8 +446,12 @@
 
             
 
+            
+
              property set to true and its <see
              cref="P:System.Web.TraceContextRecord.ErrorInfo" />
+
+            
 
             
 
@@ -408,6 +466,8 @@
         </summary>
         <param name="category">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -454,8 +514,12 @@
 
             
 
+            
+
              method is called, a <see
              cref="T:System.Web.TraceContext" />
+
+            
 
             
 
@@ -468,8 +532,12 @@
 
             
 
+            
+
              messages collection, which is accessible when you handle the <see
              cref="E:System.Web.TraceContext.TraceFinished" />
+
+            
 
             
 
@@ -482,6 +550,8 @@
 
             
 
+            
+
              property set to true, and the <see
              cref="P:System.Web.TraceContextRecord.ErrorInfo" />
 
@@ -489,8 +559,12 @@
 
             
 
+            
+
              property is set to the object passed by the <paramref
              name="errorInfo" />
+
+            
 
             
 
@@ -505,6 +579,8 @@
         </summary>
         <param name="category">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -542,8 +618,12 @@
 
             
 
+            
+
              method is called, a <see
              cref="T:System.Web.TraceContext" />
+
+            
 
             
 
@@ -556,8 +636,12 @@
 
             
 
+            
+
              messages collection, which is accessible when you handle the <see
              cref="E:System.Web.TraceContext.TraceFinished" />
+
+            
 
             
 
@@ -570,8 +654,12 @@
 
             
 
+            
+
              property set to false and its <see
              cref="P:System.Web.TraceContextRecord.ErrorInfo" />
+
+            
 
             
 
@@ -615,8 +703,12 @@
 
             
 
+            
+
              method is called, a <see
              cref="T:System.Web.TraceContext" />
+
+            
 
             
 
@@ -629,8 +721,12 @@
 
             
 
+            
+
              messages collection, which is accessible when you handle the <see
              cref="E:System.Web.TraceContext.TraceFinished" />
+
+            
 
             
 
@@ -643,8 +739,12 @@
 
             
 
+            
+
              property set to false and its <see
              cref="P:System.Web.TraceContextRecord.ErrorInfo" />
+
+            
 
             
 
@@ -659,6 +759,8 @@
         </summary>
         <param name="category">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -705,8 +807,12 @@
 
             
 
+            
+
              method is called, a <see
              cref="T:System.Web.TraceContext" />
+
+            
 
             
 
@@ -719,8 +825,12 @@
 
             
 
+            
+
              messages collection, which is accessible when you handle the <see
              cref="E:System.Web.TraceContext.TraceFinished" />
+
+            
 
             
 
@@ -733,6 +843,8 @@
 
             
 
+            
+
              property set to false, and the <see
              cref="P:System.Web.TraceContextRecord.ErrorInfo" />
 
@@ -740,8 +852,12 @@
 
             
 
+            
+
              property is set to the object passed by the <paramref
              name="errorInfo" />
+
+            
 
             
 
@@ -756,6 +872,8 @@
         </summary>
         <param name="category">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

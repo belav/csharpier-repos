@@ -25,8 +25,12 @@
 
         
 
+        
+
          enumeration in conjunction with the <see
          cref="T:System.Web.UI.DataSourceSelectArguments" />
+
+        
 
         
 
@@ -37,6 +41,8 @@
       <para
         >This enumeration supports the <see
          cref="T:System.FlagsAttribute" />
+
+        
 
         
 
@@ -86,6 +92,8 @@
 
             
 
+            
+
              operation.</para
           >
         </summary>
@@ -112,6 +120,8 @@
 
             
 
+            
+
              value. </para
           >
         </summary>
@@ -133,6 +143,8 @@
           <para
             >Represents the capability to sort through the rows returned by an <see
              cref="M:System.Web.UI.DataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
+
+            
 
             
 

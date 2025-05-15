@@ -48,8 +48,12 @@
 
         
 
+        
+
          argument contains any certificate errors returned by SSPI while authenticating the client or server. The <see
          cref="T:System.Boolean" />
+
+        
 
         
 
@@ -60,6 +64,8 @@
       <para
         >This delegate is used with the <see
          cref="T:System.Net.Security.SslStream" />
+
+        
 
         
 

@@ -28,8 +28,12 @@
 
         
 
+        
+
          is more efficient than <see
          cref="T:System.Collections.BitArray" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
          can grow indefinitely as needed, but it has the memory and performance overhead that a class instance requires. In contrast, a <see
          cref="T:System.Collections.Specialized.BitVector32" />
+
+        
 
         
 
@@ -59,8 +67,12 @@
 
         
 
+        
+
          structure can be set up to contain either sections for small integers or bit flags for Booleans, but not both. A <see
          cref="T:System.Collections.Specialized.BitVector32.Section" />
+
+        
 
         
 
@@ -73,8 +85,12 @@
 
         
 
+        
+
          and is composed of the smallest number of consecutive bits that can contain the maximum value specified in <see
          cref="M:System.Collections.Specialized.BitVector32.CreateSection(System.Int16)" />
+
+        
 
         
 
@@ -87,8 +103,12 @@
 
         
 
+        
+
          with a maximum value of 1 to serve as a Boolean, thereby allowing you to store integers and Booleans in the same <see
          cref="T:System.Collections.Specialized.BitVector32" />
+
+        
 
         
 
@@ -104,6 +124,8 @@
 
         
 
+        
+
          that is set up as sections, while other members can be used for one that is set up as bit flags. For example, the <see
          cref="P:System.Collections.Specialized.BitVector32.Item(System.Collections.Specialized.BitVector32.Section)" />
 
@@ -111,8 +133,12 @@
 
         
 
+        
+
          property is the indexer for a <see
          cref="T:System.Collections.Specialized.BitVector32" />
+
+        
 
         
 
@@ -125,8 +151,12 @@
 
         
 
+        
+
          property is the indexer for a <see
          cref="T:System.Collections.Specialized.BitVector32" />
+
+        
 
         
 
@@ -139,8 +169,12 @@
 
         
 
+        
+
          creates a series of masks that can be used to access individual bits in a <see
          cref="T:System.Collections.Specialized.BitVector32" />
+
+        
 
         
 
@@ -151,6 +185,8 @@
       <para
         >Using a mask on a <see
          cref="T:System.Collections.Specialized.BitVector32" />
+
+        
 
         
 
@@ -199,8 +235,12 @@
 
             
 
+            
+
              structure containing the data represented in an existing <see
              cref="T:System.Collections.Specialized.BitVector32" />
+
+            
 
             
 
@@ -216,8 +256,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.Specialized.BitVector32" />
+
+          
 
           
 
@@ -258,6 +302,8 @@
 
             
 
+            
+
              structure containing the data represented in an integer.</para
           >
         </summary>
@@ -268,8 +314,12 @@
 
           
 
+          
+
           An integer representing the data of the new <see
            cref="T:System.Collections.Specialized.BitVector32" />
+
+          
 
           
 
@@ -308,8 +358,12 @@
 
             
 
+            
+
             . You can combine masks using the bitwise OR operation to create a mask that isolates multiple bit flags in the <see
              cref="T:System.Collections.Specialized.BitVector32" />
+
+            
 
             
 
@@ -320,6 +374,8 @@
           <para
             >Using a mask on a <see
              cref="T:System.Collections.Specialized.BitVector32" />
+
+            
 
             
 
@@ -339,6 +395,8 @@
 
             
 
+            
+
              that is set up as bit flags.</para
           >
         </summary>
@@ -347,6 +405,8 @@
           <para
             >A mask that isolates the first bit flag in the <see
              cref="T:System.Collections.Specialized.BitVector32" />
+
+            
 
             
 
@@ -388,8 +448,12 @@
 
             
 
+            
+
             . You can combine masks using the bitwise OR operation to create a mask that isolates multiple bit flags in the <see
              cref="T:System.Collections.Specialized.BitVector32" />
+
+            
 
             
 
@@ -400,6 +464,8 @@
           <para
             >Using a mask on a <see
              cref="T:System.Collections.Specialized.BitVector32" />
+
+            
 
             
 
@@ -419,6 +485,8 @@
 
             
 
+            
+
              that is set up as bit flags.</para
           >
         </summary>
@@ -432,8 +500,12 @@
 
             
 
+            
+
              points to in <see
              cref="T:System.Collections.Specialized.BitVector32" />
+
+            
 
             
 
@@ -444,6 +516,8 @@
         </returns>
         <param name="previous">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -485,8 +559,12 @@
 
             
 
+            
+
              is a window into the <see
              cref="T:System.Collections.Specialized.BitVector32" />
+
+            
 
             
 
@@ -499,8 +577,12 @@
 
             
 
+            
+
             . For example, a section with a maximum value of 1 is composed of only one bit, whereas a section with a maximum value of 5 is composed of three bits. You can create a <see
              cref="T:System.Collections.Specialized.BitVector32.Section" />
+
+            
 
             
 
@@ -513,11 +595,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >If sections already exist in the <see
              cref="T:System.Collections.Specialized.BitVector32" />
+
+            
 
             
 
@@ -537,6 +623,8 @@
 
             
 
+            
+
              in a series of sections that contain small integers.</para
           >
         </summary>
@@ -550,8 +638,12 @@
 
             
 
+            
+
              that can hold a number from zero to <paramref
              name="maxValue" />
+
+            
 
             
 
@@ -567,8 +659,12 @@
 
           
 
+          
+
           A 16-bit signed integer that specifies the maximum value for the new <see
            cref="T:System.Collections.Specialized.BitVector32.Section" />
+
+          
 
           
 
@@ -632,6 +728,8 @@
 
             
 
+            
+
              property.</para
           >
           <para>Retrieving the value of this property is an O(1) operation.</para>
@@ -641,6 +739,8 @@
           <para
             >Gets the value of the <see
              cref="T:System.Collections.Specialized.BitVector32" />
+
+            
 
             
 
@@ -680,8 +780,12 @@
 
             
 
+            
+
              is considered equal to the <see
              cref="T:System.Collections.Specialized.BitVector32" />
+
+            
 
             
 
@@ -694,8 +798,12 @@
 
             
 
+            
+
              is compatible with the <see
              cref="T:System.Collections.Specialized.BitVector32" />
+
+            
 
             
 
@@ -708,8 +816,12 @@
 
             
 
+            
+
              is equal to the value of <see
              cref="P:System.Collections.Specialized.BitVector32.Data" />
+
+            
 
             
 
@@ -729,6 +841,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -737,6 +851,8 @@
           <para
             >true if the specified object is equal to the <see
              cref="T:System.Collections.Specialized.BitVector32" />
+
+            
 
             
 
@@ -752,8 +868,12 @@
 
           
 
+          
+
           The object to compare with the current <see
            cref="T:System.Collections.Specialized.BitVector32" />
+
+          
 
           
 
@@ -790,8 +910,12 @@
 
             
 
+            
+
              is based on the value of <see
              cref="P:System.Collections.Specialized.BitVector32.Data" />
+
+            
 
             
 
@@ -804,8 +928,12 @@
 
             
 
+            
+
              with the same value for <see
              cref="P:System.Collections.Specialized.BitVector32.Data" />
+
+            
 
             
 
@@ -825,6 +953,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -833,6 +963,8 @@
           <para
             >A hash code for the <see
              cref="T:System.Collections.Specialized.BitVector32" />
+
+            
 
             
 
@@ -920,6 +1052,8 @@
 
             
 
+            
+
             .</para
           >
           <para>This method is an O(1) operation.</para>
@@ -934,6 +1068,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -942,6 +1078,8 @@
           <para
             >A string that represents the current <see
              cref="T:System.Collections.Specialized.BitVector32" />
+
+            
 
             
 
@@ -988,6 +1126,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -996,6 +1136,8 @@
           <para
             >A string that represents the specified <see
              cref="T:System.Collections.Specialized.BitVector32" />
+
+            
 
             
 
@@ -1011,8 +1153,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.Specialized.BitVector32" />
+
+          
 
           
 

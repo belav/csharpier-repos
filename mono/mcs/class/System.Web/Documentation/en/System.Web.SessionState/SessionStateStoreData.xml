@@ -21,8 +21,12 @@
 
         
 
+        
+
          class is used by ASP.NET and implementers of a custom session-state store to pass session-state information to and from the <see
          cref="T:System.Web.SessionState.SessionStateModule" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          class is used to represent session-state data for a session store to the <see
          cref="T:System.Web.SessionState.SessionStateModule" />
+
+        
 
         
 
@@ -52,8 +60,12 @@
 
         
 
+        
+
          object contains the session-state variable names and values, static object references, and <see
          cref="P:System.Web.SessionState.SessionStateStoreData.Timeout" />
+
+        
 
         
 
@@ -95,8 +107,12 @@
 
             
 
+            
+
              class is used to represent session-state data for a session store to the <see
              cref="T:System.Web.SessionState.SessionStateModule" />
+
+            
 
             
 
@@ -109,8 +125,12 @@
 
             
 
+            
+
              object contains the session-state variable names and values, static object references, and <see
              cref="P:System.Web.SessionState.SessionStateStoreData.Timeout" />
+
+            
 
             
 
@@ -126,8 +146,12 @@
 
             
 
+            
+
              class is used by ASP.NET and implementers of a custom session-state store to pass session-state information to and from the <see
              cref="T:System.Web.SessionState.SessionStateModule" />
+
+            
 
             
 
@@ -143,8 +167,12 @@
 
             
 
+            
+
              object in implementations of the <see
              cref="M:System.Web.SessionState.SessionStateStoreProviderBase.GetItem(System.Web.HttpContext,System.String,System.Boolean@,System.TimeSpan@,System.Object@,System.Web.SessionState.SessionStateActions@)" />
+
+            
 
             
 
@@ -157,8 +185,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Web.SessionState.SessionStateStoreProviderBase.CreateNewStoreData(System.Web.HttpContext,System.Int32)" />
+
+            
 
             
 
@@ -177,6 +209,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -187,8 +221,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Web.SessionState.SessionStateStoreData.Timeout" />
+
+          
 
           
 
@@ -220,8 +258,12 @@
 
             
 
+            
+
              property references the session-state variables that are exposed to ASP.NET application code using the <see
              cref="T:System.Web.SessionState.HttpSessionState" />
+
+            
 
             
 
@@ -234,6 +276,8 @@
 
             
 
+            
+
              property of the current <see
              cref="T:System.Web.HttpContext" />
 
@@ -241,8 +285,12 @@
 
             
 
+            
+
              or the <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -258,8 +306,12 @@
 
             
 
+            
+
              object. Custom session-store implementers can supply their own implementation of the <see
              cref="T:System.Web.SessionState.ISessionStateItemCollection" />
+
+            
 
             
 
@@ -299,11 +351,15 @@
 
             
 
+            
+
              property is provided for compatibility with earlier versions of ASP.</para
           >
           <para
             >Custom session-store implementers can obtain a reference to the <see
              cref="T:System.Web.HttpStaticObjectsCollection" />
+
+            
 
             
 
@@ -316,8 +372,12 @@
 
             
 
+            
+
              instance using the <see
              cref="M:System.Web.SessionState.SessionStateUtility.GetSessionStaticObjects(System.Web.HttpContext)" />
+
+            
 
             
 
@@ -334,10 +394,14 @@
 
               
 
+              
+
                collection must support binary serialization. For more information, see <format
                type="text/html">
                 <a href="2b1ea3be-1152-4032-b2b3-07794054c405">Binary Serialization</a>
               </format>
+
+              
 
               
 

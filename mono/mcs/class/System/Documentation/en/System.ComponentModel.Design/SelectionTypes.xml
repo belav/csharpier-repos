@@ -36,6 +36,8 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.ComponentModel.Design.ISelectionService" />
 
@@ -43,8 +45,12 @@
 
         
 
+        
+
         . Some types of actions can operate on a selected component or group of selected components. The <see
          cref="T:System.ComponentModel.Design.ISelectionService" />
+
+        
 
         
 
@@ -60,8 +66,12 @@
 
         
 
+        
+
          enumeration to specify the type of a selection when setting a new selection using the <see
          cref="M:System.ComponentModel.Design.ISelectionService.SetSelectedComponents(System.Collections.ICollection)" />
+
+        
 
         
 
@@ -325,8 +335,12 @@
 
             
 
+            
+
              with a selection type of <see
              cref="F:System.ComponentModel.Design.SelectionTypes.Toggle" />
+
+            
 
             
 
@@ -370,8 +384,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.ComponentModel.Design.SelectionTypes.Replace" />
+
+            
 
             
 
@@ -384,6 +402,8 @@
 
             
 
+            
+
             , <see
              cref="F:System.ComponentModel.Design.SelectionTypes.MouseUp" />
 
@@ -391,8 +411,12 @@
 
             
 
+            
+
             , or <see
              cref="F:System.ComponentModel.Design.SelectionTypes.Click" />
+
+            
 
             
 

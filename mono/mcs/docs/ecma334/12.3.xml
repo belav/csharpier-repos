@@ -11,11 +11,15 @@
 
         
 
+        
+
         ) is always considered definitely assigned. </list_item
       >
       <list_item
         > An initially unassigned variable (<hyperlink
         >12.3.2</hyperlink>
+
+        
 
         
 
@@ -32,11 +36,15 @@
 
           
 
+          
+
           ) in which the variable is the left operand. </list_item
         >
         <list_item
           > An invocation expression (<hyperlink
           >14.5.5</hyperlink>
+
+          
 
           
 
@@ -49,11 +57,15 @@
 
           
 
+          
+
           ) that passes the variable as an output parameter. </list_item
         >
         <list_item
           > For a local variable, a local variable declaration (<hyperlink
           >15.5</hyperlink>
+
+          
 
           
 
@@ -72,8 +84,12 @@
 
     
 
+    
+
      variable are tracked individually as well as collectively. In additional to the rules above, the following rules apply to <non_terminal
      where="11.1">struct-type</non_terminal>
+
+    
 
     
 
@@ -89,11 +105,15 @@
 
         
 
+        
+
          variable is considered definitely assigned. </list_item
       >
       <list_item
         > A <non_terminal
          where="11.1">struct-type</non_terminal>
+
+        
 
         
 
@@ -114,6 +134,8 @@
 
         
 
+        
+
          The occurrence of a variable in an expression is considered to obtain the value of the variable, except when </list_item
       >
       <list>
@@ -122,6 +144,8 @@
         <list_item
           > the variable is a <non_terminal
            where="11.1">struct-type</non_terminal>
+
+          
 
           
 
@@ -143,6 +167,8 @@
       <list_item
         > The this variable of a <non_terminal
          where="11.1">struct-type</non_terminal>
+
+        
 
         
 

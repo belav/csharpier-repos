@@ -27,6 +27,8 @@
 
         
 
+        
+
         : </para
       >
       <list type="bullet">
@@ -34,6 +36,8 @@
           <para
             >Inherit the <see
              cref="T:System.Configuration.Install.Installer" />
+
+            
 
             
 
@@ -51,8 +55,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Configuration.Install.Installer.Commit(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -65,8 +73,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Configuration.Install.Installer.Uninstall(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -79,6 +91,8 @@
           <para
             >Add the <see
              cref="T:System.ComponentModel.RunInstallerAttribute" />
+
+            
 
             
 
@@ -102,8 +116,12 @@
 
         
 
+        
+
          property contains a collection of installers. If this instance of <see
          cref="T:System.Configuration.Install.Installer" />
+
+        
 
         
 
@@ -116,8 +134,12 @@
 
         
 
+        
+
          property is set to the <see
          cref="T:System.Configuration.Install.Installer" />
+
+        
 
         
 
@@ -130,8 +152,12 @@
 
         
 
+        
+
          collection, see the <see
          cref="T:System.Configuration.Install.AssemblyInstaller" />
+
+        
 
         
 
@@ -147,8 +173,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Configuration.Install.Installer.Commit(System.Collections.IDictionary)" />
+
+        
 
         
 
@@ -161,8 +191,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Configuration.Install.Installer.Uninstall(System.Collections.IDictionary)" />
+
+        
 
         
 
@@ -175,8 +209,12 @@
 
         
 
+        
+
          class go through the collection of installers stored in the <see
          cref="P:System.Configuration.Install.Installer.Installers" />
+
+        
 
         
 
@@ -192,8 +230,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Configuration.Install.Installer.Commit(System.Collections.IDictionary)" />
+
+        
 
         
 
@@ -206,8 +248,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Configuration.Install.Installer.Uninstall(System.Collections.IDictionary)" />
+
+        
 
         
 
@@ -220,8 +266,12 @@
 
         
 
+        
+
          instance. For example, one <see
          cref="T:System.Configuration.Install.Installer" />
+
+        
 
         
 
@@ -234,8 +284,12 @@
 
         
 
+        
+
          instance, meaning that the <see
          cref="M:System.Configuration.Install.Installer.Uninstall(System.Collections.IDictionary)" />
+
+        
 
         
 
@@ -248,8 +302,12 @@
 
         
 
+        
+
         . For this reason, in your derived class, do not save the state of a computer in an installer. Instead, use an <see
          cref="T:System.Collections.IDictionary" />
+
+        
 
         
 
@@ -262,8 +320,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Configuration.Install.Installer.Commit(System.Collections.IDictionary)" />
+
+        
 
         
 
@@ -276,8 +338,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Configuration.Install.Installer.Uninstall(System.Collections.IDictionary)" />
+
+        
 
         
 
@@ -293,6 +359,8 @@
 
         
 
+        
+
         . First, suppose that your installer sets a registry key. It should save the key's original value in the <see
          cref="T:System.Collections.IDictionary" />
 
@@ -300,8 +368,12 @@
 
         
 
+        
+
         . If the installation is rolled back, the original value can be restored. Second, suppose the installer replaces an existing file. Save the existing file in a temporary directory and the location of the new location of the file in the <see
          cref="T:System.Collections.IDictionary" />
+
+        
 
         
 
@@ -317,8 +389,12 @@
 
         
 
+        
+
          property contains information about the installation. For example, information about the location of the log file for the installation, the location of the file to save information required by the <see
          cref="M:System.Configuration.Install.Installer.Uninstall(System.Collections.IDictionary)" />
+
+        
 
         
 
@@ -344,6 +420,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Configuration.Install.Installer" />
+
+            
 
             
 
@@ -379,8 +457,12 @@
 
             
 
+            
+
              methods of all the installers in the <see
              cref="P:System.Configuration.Install.Installer.Installers" />
+
+            
 
             
 
@@ -416,6 +498,8 @@
 
             
 
+            
+
              property are rolled back.</para
           >
         </summary>
@@ -441,6 +525,8 @@
           <para
             >Occurs after all the installers in the <see
              cref="P:System.Configuration.Install.Installer.Installers" />
+
+            
 
             
 
@@ -476,6 +562,8 @@
 
             
 
+            
+
              method of each installer in the installer collection has run.</para
           >
         </summary>
@@ -506,6 +594,8 @@
 
             
 
+            
+
              property are rolled back.</para
           >
         </summary>
@@ -531,6 +621,8 @@
           <para
             >Occurs before the installers in the <see
              cref="P:System.Configuration.Install.Installer.Installers" />
+
+            
 
             
 
@@ -570,8 +662,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -606,6 +702,8 @@
 
             
 
+            
+
              property have committed their installations.</para
           >
         </summary>
@@ -631,6 +729,8 @@
           <para
             >Occurs before the installers in the <see
              cref="P:System.Configuration.Install.Installer.Installers" />
+
+            
 
             
 
@@ -674,8 +774,12 @@
 
             
 
+            
+
              property contains installation information. For example, information about the location of the log file for the installation, the location of the file to save information required by the <see
              cref="M:System.Configuration.Install.Installer.Uninstall(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -691,8 +795,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Configuration.Install.Installer.Commit(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -705,6 +813,8 @@
 
             
 
+            
+
             , or <see
              cref="M:System.Configuration.Install.Installer.Uninstall(System.Collections.IDictionary)" />
 
@@ -712,8 +822,12 @@
 
             
 
+            
+
              methods sets the <see
              cref="P:System.Configuration.Install.Installer.Context" />
+
+            
 
             
 
@@ -729,8 +843,12 @@
 
             
 
+            
+
              property before calling any of these methods. The parent installer can be accessed through the <see
              cref="P:System.Configuration.Install.Installer.Parent" />
+
+            
 
             
 
@@ -793,8 +911,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -829,8 +951,12 @@
 
             
 
+            
+
              property contains a collection of installers that install objects needed by this <see
              cref="T:System.Configuration.Install.Installer" />
+
+            
 
             
 
@@ -843,8 +969,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Configuration.Install.Installer.Commit(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -857,6 +987,8 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Configuration.Install.Installer.Uninstall(System.Collections.IDictionary)" />
 
@@ -864,8 +996,12 @@
 
             
 
+            
+
              methods of the <see
              cref="T:System.Configuration.Install.Installer" />
+
+            
 
             
 
@@ -881,8 +1017,12 @@
 
             
 
+            
+
              is contained in an installer collection, the <see
              cref="P:System.Configuration.Install.Installer.Parent" />
+
+            
 
             
 
@@ -895,6 +1035,8 @@
 
             
 
+            
+
              instance that contains the collection. For an example of the use of the <see
              cref="P:System.Configuration.Install.Installer.Installers" />
 
@@ -902,8 +1044,12 @@
 
             
 
+            
+
              collection, see the <see
              cref="T:System.Configuration.Install.AssemblyInstaller" />
+
+            
 
             
 
@@ -945,8 +1091,12 @@
 
             
 
+            
+
              methods of all the installers in this instance's <see
              cref="T:System.Configuration.Install.InstallerCollection" />
+
+            
 
             
 
@@ -966,11 +1116,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Configuration.Install.Installer.OnAfterInstall(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -989,11 +1143,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="savedState">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1006,8 +1164,12 @@
 
           
 
+          
+
            that contains the state of the computer after all the installers contained in the <see
            cref="P:System.Configuration.Install.Installer.Installers" />
+
+          
 
           
 
@@ -1044,8 +1206,12 @@
 
             
 
+            
+
              methods of all the installers in this instance's <see
              cref="T:System.Configuration.Install.InstallerCollection" />
+
+            
 
             
 
@@ -1065,11 +1231,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Configuration.Install.Installer.OnAfterRollback(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -1088,11 +1258,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="savedState">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1105,8 +1279,12 @@
 
           
 
+          
+
            that contains the state of the computer after the installers contained in the <see
            cref="P:System.Configuration.Install.Installer.Installers" />
+
+          
 
           
 
@@ -1143,8 +1321,12 @@
 
             
 
+            
+
              methods of all the installers in this instance's <see
              cref="T:System.Configuration.Install.InstallerCollection" />
+
+            
 
             
 
@@ -1164,11 +1346,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Configuration.Install.Installer.OnAfterUninstall(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -1187,11 +1373,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="savedState">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1204,8 +1394,12 @@
 
           
 
+          
+
            that contains the state of the computer after all the installers contained in the <see
            cref="P:System.Configuration.Install.Installer.Installers" />
+
+          
 
           
 
@@ -1242,8 +1436,12 @@
 
             
 
+            
+
              methods of the installers in this instance's <see
              cref="T:System.Configuration.Install.InstallerCollection" />
+
+            
 
             
 
@@ -1263,11 +1461,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Configuration.Install.Installer.OnBeforeInstall(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -1286,11 +1488,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="savedState">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1303,6 +1509,8 @@
 
           
 
+          
+
            that contains the state of the computer before the installers in the <see
            cref="P:System.Configuration.Install.Installer.Installers" />
 
@@ -1310,8 +1518,12 @@
 
           
 
+          
+
            property are installed. This <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -1348,8 +1560,12 @@
 
             
 
+            
+
              methods of the installers in this instance's <see
              cref="T:System.Configuration.Install.InstallerCollection" />
+
+            
 
             
 
@@ -1369,11 +1585,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Configuration.Install.Installer.OnBeforeRollback(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -1392,11 +1612,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="savedState">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1409,8 +1633,12 @@
 
           
 
+          
+
            that contains the state of the computer before the installers in the <see
            cref="P:System.Configuration.Install.Installer.Installers" />
+
+          
 
           
 
@@ -1447,8 +1675,12 @@
 
             
 
+            
+
              methods of the installers in this instance's <see
              cref="T:System.Configuration.Install.InstallerCollection" />
+
+            
 
             
 
@@ -1468,11 +1700,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Configuration.Install.Installer.OnBeforeUninstall(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -1491,11 +1727,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="savedState">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1508,8 +1748,12 @@
 
           
 
+          
+
            that contains the state of the computer before the installers in the <see
            cref="P:System.Configuration.Install.Installer.Installers" />
+
+          
 
           
 
@@ -1546,6 +1790,8 @@
 
             
 
+            
+
              methods of all the installers contained in this instance's installer collection run.</para
           >
           <para
@@ -1560,11 +1806,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Configuration.Install.Installer.OnCommitted(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -1583,11 +1833,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="savedState">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1600,8 +1854,12 @@
 
           
 
+          
+
            that contains the state of the computer after all the installers in the <see
            cref="P:System.Configuration.Install.Installer.Installers" />
+
+          
 
           
 
@@ -1638,8 +1896,12 @@
 
             
 
+            
+
              methods of the installers in this instance's <see
              cref="T:System.Configuration.Install.InstallerCollection" />
+
+            
 
             
 
@@ -1659,11 +1921,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Configuration.Install.Installer.OnCommitting(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -1682,11 +1948,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="savedState">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1699,8 +1969,12 @@
 
           
 
+          
+
            that contains the state of the computer before the installers in the <see
            cref="P:System.Configuration.Install.Installer.Installers" />
+
+          
 
           
 
@@ -1735,8 +2009,12 @@
 
             
 
+            
+
              is part of an installer collection, the <see
              cref="P:System.Configuration.Install.Installer.Parent" />
+
+            
 
             
 
@@ -1749,6 +2027,8 @@
 
             
 
+            
+
              instance that contains the collection. For an example of the use of the <see
              cref="P:System.Configuration.Install.Installer.Installers" />
 
@@ -1756,8 +2036,12 @@
 
             
 
+            
+
              collection, see the <see
              cref="T:System.Configuration.Install.AssemblyInstaller" />
+
+            
 
             
 
@@ -1773,8 +2057,12 @@
 
             
 
+            
+
              property contains a collection of installers. The <see
              cref="M:System.Configuration.Install.Installer.Install(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -1787,8 +2075,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Configuration.Install.Installer.Rollback(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -1801,8 +2093,12 @@
 
             
 
+            
+
              methods of the <see
              cref="T:System.Configuration.Install.Installer" />
+
+            
 
             
 
@@ -1846,8 +2142,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -1886,8 +2186,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 

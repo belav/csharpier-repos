@@ -41,8 +41,12 @@
 
         
 
+        
+
          instance is always read-only. See <see
          cref="T:System.Collections.CollectionBase" />
+
+        
 
         
 
@@ -86,6 +90,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -111,6 +117,8 @@
           <para
             >Gets the number of elements contained in the <see
              cref="T:System.Collections.ReadOnlyCollectionBase" />
+
+            
 
             
 
@@ -153,8 +161,12 @@
 
             
 
+            
+
              also brings the enumerator back to this position.  At this position, <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -167,8 +179,12 @@
 
             
 
+            
+
              to advance the enumerator to the first element of the collection before reading the value of <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -183,8 +199,12 @@
 
             
 
+            
+
              returns the same object until either <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -197,6 +217,8 @@
 
             
 
+            
+
              is called. <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
 
@@ -204,8 +226,12 @@
 
             
 
+            
+
              sets <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -221,8 +247,12 @@
 
             
 
+            
+
              passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -235,8 +265,12 @@
 
             
 
+            
+
              also return false. If the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -249,8 +283,12 @@
 
             
 
+            
+
              is undefined. To set <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -263,8 +301,12 @@
 
             
 
+            
+
              followed by <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -286,6 +328,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -299,8 +343,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Collections.ReadOnlyCollectionBase" />
+
+            
 
             
 
@@ -345,6 +393,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -381,11 +431,15 @@
 
             
 
+            
+
              to copy the elements.</para
           >
           <para
             >This method is an O(<paramref
              name="n" />
+
+            
 
             
 
@@ -398,8 +452,12 @@
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ReadOnlyCollectionBase.Count" />
+
+            
 
             
 
@@ -418,8 +476,12 @@
 
             
 
+            
+
              to a compatible one-dimensional <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -435,8 +497,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -449,8 +515,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -465,8 +535,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -506,6 +580,8 @@
 
             
 
+            
+
              object is not synchronized. Derived classes can provide a synchronized version of the <see
              cref="T:System.Collections.ReadOnlyCollectionBase" />
 
@@ -513,8 +589,12 @@
 
             
 
+            
+
              class using the <see
              cref="P:System.Collections.ICollection.SyncRoot" />
+
+            
 
             
 
@@ -529,6 +609,8 @@
           <para
             >Gets a value indicating whether access to a <see
              cref="T:System.Collections.ReadOnlyCollectionBase" />
+
+            
 
             
 
@@ -569,8 +651,12 @@
 
             
 
+            
+
              class using the <see
              cref="P:System.Collections.ICollection.SyncRoot" />
+
+            
 
             
 
@@ -583,8 +669,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Collections.ReadOnlyCollectionBase" />
+
+            
 
             
 
@@ -597,8 +687,12 @@
 
             
 
+            
+
              object. This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see
              cref="T:System.Collections.ReadOnlyCollectionBase" />
+
+            
 
             
 
@@ -613,6 +707,8 @@
           <para
             >Gets an object that can be used to synchronize access to a <see
              cref="T:System.Collections.ReadOnlyCollectionBase" />
+
+            
 
             
 

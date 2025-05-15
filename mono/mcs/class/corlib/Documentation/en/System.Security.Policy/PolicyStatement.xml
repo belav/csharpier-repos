@@ -44,6 +44,8 @@
 
         
 
+        
+
          consists of a set of granted permissions, and possible special attributes for the code group.</para
       >
       <para
@@ -54,8 +56,12 @@
 
         
 
+        
+
          operation on a <see
          cref="T:System.Security.Policy.PolicyLevel" />
+
+        
 
         
 
@@ -69,6 +75,8 @@
       <para
         >Represents the statement of a <see
          cref="T:System.Security.Policy.CodeGroup" />
+
+        
 
         
 
@@ -110,8 +118,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Security.PermissionSet" />
+
+            
 
             
 
@@ -127,8 +139,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.PermissionSet" />
+
+          
 
           
 
@@ -170,8 +186,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Security.PermissionSet" />
+
+            
 
             
 
@@ -187,8 +207,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.PermissionSet" />
+
+          
 
           
 
@@ -203,8 +227,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Security.Policy.PolicyStatementAttribute" />
+
+          
 
           
 
@@ -265,6 +293,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -309,8 +339,12 @@
 
             
 
+            
+
              with <see
              cref="P:System.Security.Policy.PolicyStatement.PermissionSet" />
+
+            
 
             
 
@@ -323,8 +357,12 @@
 
             
 
+            
+
              identical to those of the current <see
              cref="T:System.Security.Policy.PolicyStatement" />
+
+            
 
             
 
@@ -369,6 +407,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -382,8 +422,12 @@
 
             
 
+            
+
              object is equal to the current <see
              cref="T:System.Security.Policy.PolicyStatement" />
+
+            
 
             
 
@@ -402,8 +446,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Security.Policy.PolicyStatement" />
+
+            
 
             
 
@@ -419,6 +467,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Policy.PolicyStatement" />
 
@@ -426,8 +476,12 @@
 
           
 
+          
+
            object to compare with the current <see
            cref="T:System.Security.Policy.PolicyStatement" />
+
+          
 
           
 
@@ -466,6 +520,8 @@
         </summary>
         <param name="et">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -510,10 +566,14 @@
 
           
 
+          
+
           The XML encoding to use to reconstruct the security object. </param
         >
         <param name="level">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -526,8 +586,12 @@
 
           
 
+          
+
            context for lookup of <see
            cref="T:System.Security.NamedPermissionSet" />
+
+          
 
           
 
@@ -569,6 +633,8 @@
 
             
 
+            
+
              objects.</para
           >
         </remarks>
@@ -582,6 +648,8 @@
 
             
 
+            
+
              object that is suitable for use in hashing algorithms and data structures such as a hash table.</para
           >
         </summary>
@@ -590,6 +658,8 @@
           <para
             >A hash code for the current <see
              cref="T:System.Security.Policy.PolicyStatement" />
+
+            
 
             
 
@@ -626,6 +696,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Security.PermissionSet" />
+
+            
 
             
 
@@ -702,6 +774,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Policy.PolicyLevel" />
 
@@ -709,8 +783,12 @@
 
           
 
+          
+
            context for lookup of <see
            cref="T:System.Security.NamedPermissionSet" />
+
+          
 
           
 

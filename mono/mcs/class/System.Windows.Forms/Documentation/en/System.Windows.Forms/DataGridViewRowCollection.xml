@@ -36,8 +36,12 @@
 
         
 
+        
+
          contains the <see
          cref="T:System.Windows.Forms.DataGridViewRow" />
+
+        
 
         
 
@@ -50,8 +54,12 @@
 
         
 
+        
+
          control. You can retrieve an instance of this class through the control <see
          cref="P:System.Windows.Forms.DataGridView.Rows" />
+
+        
 
         
 
@@ -64,11 +72,15 @@
 
         
 
+        
+
          property.</para
       >
       <para
         >To improve performance, a <see
          cref="T:System.Windows.Forms.DataGridViewRowCollection" />
+
+        
 
         
 
@@ -88,6 +100,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -96,6 +110,8 @@
       <para
         >A collection of <see
          cref="T:System.Windows.Forms.DataGridViewRow" />
+
+        
 
         
 
@@ -128,11 +144,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="dataGridView">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -145,8 +165,12 @@
 
           
 
+          
+
            that owns the <see
            cref="T:System.Windows.Forms.DataGridViewRowCollection" />
+
+          
 
           
 
@@ -178,8 +202,12 @@
 
             
 
+            
+
              overload adds rows that are based on the <see
              cref="P:System.Windows.Forms.DataGridView.RowTemplate" />
+
+            
 
             
 
@@ -192,8 +220,12 @@
 
             
 
+            
+
             . The new row is shared, if possible. Be sure that the row specified in the <see
              cref="P:System.Windows.Forms.DataGridView.RowTemplate" />
+
+            
 
             
 
@@ -210,11 +242,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >Rows in the control are not automatically sorted when new rows are added. To sort new rows into their correct position, call the <see
              cref="Overload:System.Windows.Forms.DataGridView.Sort" />
+
+            
 
             
 
@@ -227,6 +263,8 @@
 
             
 
+            
+
              event handler. You might also want to call the <see
              cref="Overload:System.Windows.Forms.DataGridView.Sort" />
 
@@ -234,8 +272,12 @@
 
             
 
+            
+
              method in a <see
              cref="E:System.Windows.Forms.DataGridView.CellValueChanged" />
+
+            
 
             
 
@@ -283,8 +325,12 @@
 
             
 
+            
+
              method adds shared rows to the <see
              cref="T:System.Windows.Forms.DataGridViewRowCollection" />
+
+            
 
             
 
@@ -297,6 +343,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Windows.Forms.DataGridView" />
 
@@ -304,8 +352,12 @@
 
             
 
+            
+
             . Be sure that the row specified in the <see
              cref="P:System.Windows.Forms.DataGridView.RowTemplate" />
+
+            
 
             
 
@@ -322,11 +374,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >Rows in the control are not automatically sorted when new rows are added. To sort new rows into their correct position, call the <see
              cref="Overload:System.Windows.Forms.DataGridView.Sort" />
+
+            
 
             
 
@@ -339,6 +395,8 @@
 
             
 
+            
+
              event handler. You might also want to call the <see
              cref="Overload:System.Windows.Forms.DataGridView.Sort" />
 
@@ -346,8 +404,12 @@
 
             
 
+            
+
              method in a <see
              cref="E:System.Windows.Forms.DataGridView.CellValueChanged" />
+
+            
 
             
 
@@ -371,8 +433,12 @@
 
           
 
+          
+
           The number of rows to add to the <see
            cref="T:System.Windows.Forms.DataGridViewRowCollection" />
+
+          
 
           
 
@@ -417,8 +483,12 @@
 
             
 
+            
+
              method adds an unshared row to the <see
              cref="T:System.Windows.Forms.DataGridViewRowCollection" />
+
+            
 
             
 
@@ -435,11 +505,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >Rows in the control are not automatically sorted when new rows are added. To sort new rows into their correct position, call the <see
              cref="Overload:System.Windows.Forms.DataGridView.Sort" />
+
+            
 
             
 
@@ -452,6 +526,8 @@
 
             
 
+            
+
              event handler. You might also want to call the <see
              cref="Overload:System.Windows.Forms.DataGridView.Sort" />
 
@@ -459,8 +535,12 @@
 
             
 
+            
+
              method in a <see
              cref="E:System.Windows.Forms.DataGridView.CellValueChanged" />
+
+            
 
             
 
@@ -484,8 +564,12 @@
 
           
 
+          
+
           A variable number of objects that populate the cells of the new <see
            cref="T:System.Windows.Forms.DataGridViewRow" />
+
+          
 
           
 
@@ -527,8 +611,12 @@
 
             
 
+            
+
              method adds a shared row to the <see
              cref="T:System.Windows.Forms.DataGridViewRowCollection" />
+
+            
 
             
 
@@ -545,11 +633,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >Rows in the control are not automatically sorted when new rows are added. To sort new rows into their correct position, call the <see
              cref="Overload:System.Windows.Forms.DataGridView.Sort" />
+
+            
 
             
 
@@ -562,6 +654,8 @@
 
             
 
+            
+
              event handler. You might also want to call the <see
              cref="Overload:System.Windows.Forms.DataGridView.Sort" />
 
@@ -569,8 +663,12 @@
 
             
 
+            
+
              method in a <see
              cref="E:System.Windows.Forms.DataGridView.CellValueChanged" />
+
+            
 
             
 
@@ -589,6 +687,8 @@
 
             
 
+            
+
              to the collection.</para
           >
         </summary>
@@ -597,6 +697,8 @@
           <para
             >The index of the new <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
+
+            
 
             
 
@@ -612,6 +714,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridViewRow" />
 
@@ -619,8 +723,12 @@
 
           
 
+          
+
            to add to the <see
            cref="T:System.Windows.Forms.DataGridViewRowCollection" />
+
+          
 
           
 
@@ -658,8 +766,12 @@
 
             
 
+            
+
              property of the new <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
+
+            
 
             
 
@@ -672,8 +784,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
+
+            
 
             
 
@@ -686,6 +802,8 @@
 
             
 
+            
+
             . The <see
              cref="M:System.Windows.Forms.DataGridViewRowCollection.AddCopies(System.Int32,System.Int32)" />
 
@@ -693,8 +811,12 @@
 
             
 
+            
+
              method adds shared rows to the <see
              cref="T:System.Windows.Forms.DataGridViewRowCollection" />
+
+            
 
             
 
@@ -711,11 +833,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >Rows in the control are not automatically sorted when new rows are added. To sort new rows into their correct position, call the <see
              cref="Overload:System.Windows.Forms.DataGridView.Sort" />
+
+            
 
             
 
@@ -728,6 +854,8 @@
 
             
 
+            
+
              event handler. You might also want to call the <see
              cref="Overload:System.Windows.Forms.DataGridView.Sort" />
 
@@ -735,8 +863,12 @@
 
             
 
+            
+
              method in a <see
              cref="E:System.Windows.Forms.DataGridView.CellValueChanged" />
+
+            
 
             
 
@@ -760,6 +892,8 @@
 
           
 
+          
+
           The index of the row on which to base the new rows.</param
         >
         <param name="count">
@@ -769,8 +903,12 @@
 
           
 
+          
+
           The number of rows to add to the <see
            cref="T:System.Windows.Forms.DataGridViewRowCollection" />
+
+          
 
           
 
@@ -804,8 +942,12 @@
 
             
 
+            
+
              property of the new row has the same values as the <see
              cref="P:System.Windows.Forms.DataGridViewRow.InheritedStyle" />
+
+            
 
             
 
@@ -818,6 +960,8 @@
 
             
 
+            
+
             . The <see
              cref="M:System.Windows.Forms.DataGridViewRowCollection.AddCopy(System.Int32)" />
 
@@ -825,8 +969,12 @@
 
             
 
+            
+
              method adds a shared row to the <see
              cref="T:System.Windows.Forms.DataGridViewRowCollection" />
+
+            
 
             
 
@@ -843,11 +991,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >Rows in the control are not automatically sorted when new rows are added. To sort new rows into their correct position, call the <see
              cref="Overload:System.Windows.Forms.DataGridView.Sort" />
+
+            
 
             
 
@@ -860,6 +1012,8 @@
 
             
 
+            
+
              event handler. You might also want to call the <see
              cref="Overload:System.Windows.Forms.DataGridView.Sort" />
 
@@ -867,8 +1021,12 @@
 
             
 
+            
+
              method in a <see
              cref="E:System.Windows.Forms.DataGridView.CellValueChanged" />
+
+            
 
             
 
@@ -887,6 +1045,8 @@
         </returns>
         <param name="indexSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -929,8 +1089,12 @@
 
             
 
+            
+
              method adds shared rows to the <see
              cref="T:System.Windows.Forms.DataGridViewRowCollection" />
+
+            
 
             
 
@@ -947,11 +1111,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >Rows in the control are not automatically sorted when new rows are added. To sort new rows into their correct position, call the <see
              cref="Overload:System.Windows.Forms.DataGridView.Sort" />
+
+            
 
             
 
@@ -964,6 +1132,8 @@
 
             
 
+            
+
              event handler. You might also want to call the <see
              cref="Overload:System.Windows.Forms.DataGridView.Sort" />
 
@@ -971,8 +1141,12 @@
 
             
 
+            
+
              method in a <see
              cref="E:System.Windows.Forms.DataGridView.CellValueChanged" />
+
+            
 
             
 
@@ -989,8 +1163,12 @@
 
               
 
+              
+
                method will make your application stop responding if the <see
                cref="P:System.Windows.Forms.DataGridView.AllowUserToAddRows" />
+
+              
 
               
 
@@ -1010,11 +1188,15 @@
 
             
 
+            
+
              objects to the collection.</para
           >
         </summary>
         <param name="dataGridViewRows">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1027,8 +1209,12 @@
 
           
 
+          
+
            objects to be added to the <see
            cref="T:System.Windows.Forms.DataGridViewRowCollection" />
+
+          
 
           
 
@@ -1090,6 +1276,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1124,6 +1312,8 @@
 
             
 
+            
+
              is in the collection.</para
           >
         </summary>
@@ -1137,8 +1327,12 @@
 
             
 
+            
+
              is in the <see
              cref="T:System.Windows.Forms.DataGridViewRowCollection" />
+
+            
 
             
 
@@ -1154,6 +1348,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridViewRow" />
 
@@ -1161,8 +1357,12 @@
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Windows.Forms.DataGridViewRowCollection" />
+
+          
 
           
 
@@ -1201,11 +1401,15 @@
 
             
 
+            
+
              array, starting at the specified index.</para
           >
         </summary>
         <param name="array">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1218,8 +1422,12 @@
 
           
 
+          
+
            array that is the destination of the items copied from the <see
            cref="T:System.Windows.Forms.DataGridViewRowCollection" />
+
+          
 
           
 
@@ -1234,8 +1442,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -1290,6 +1502,8 @@
 
             
 
+            
+
              that owns the collection.</para
           >
         </summary>
@@ -1323,6 +1537,8 @@
 
             
 
+            
+
              that meets the specified criteria.</para
           >
         </summary>
@@ -1336,8 +1552,12 @@
 
             
 
+            
+
              that has the attributes specified by <paramref
              name="includeFilter" />
+
+            
 
             
 
@@ -1353,8 +1573,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -1393,6 +1617,8 @@
 
             
 
+            
+
              that meets the specified inclusion and exclusion criteria.</para
           >
         </summary>
@@ -1406,6 +1632,8 @@
 
             
 
+            
+
              that has the attributes specified by <paramref
              name="includeFilter" />
 
@@ -1413,8 +1641,12 @@
 
             
 
+            
+
             , and does not have the attributes specified by <paramref
              name="excludeFilter" />
+
+            
 
             
 
@@ -1430,8 +1662,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -1446,8 +1682,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -1485,6 +1725,8 @@
 
             
 
+            
+
              that meets the specified criteria.</para
           >
         </summary>
@@ -1498,8 +1740,12 @@
 
             
 
+            
+
              that has the attributes specified by <paramref
              name="includeFilter" />
+
+            
 
             
 
@@ -1515,8 +1761,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -1554,8 +1804,12 @@
 
             
 
+            
+
              method begins looking for the row that matches the criteria starting with the row positioned after <paramref
              name="indexStart" />
+
+            
 
             
 
@@ -1574,6 +1828,8 @@
 
             
 
+            
+
              that meets the specified criteria.</para
           >
         </summary>
@@ -1587,6 +1843,8 @@
 
             
 
+            
+
              after <paramref
              name="indexStart" />
 
@@ -1594,8 +1852,12 @@
 
             
 
+            
+
              that has the attributes specified by <paramref
              name="includeFilter" />
+
+            
 
             
 
@@ -1611,8 +1873,12 @@
 
           
 
+          
+
           The index of the row where the method should begin to look for the next <see
            cref="T:System.Windows.Forms.DataGridViewRow" />
+
+          
 
           
 
@@ -1627,8 +1893,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -1667,8 +1937,12 @@
 
             
 
+            
+
              method begins looking for the row that matches the criteria starting with the row positioned after <paramref
              name="indexStart" />
+
+            
 
             
 
@@ -1687,6 +1961,8 @@
 
             
 
+            
+
              that meets the specified inclusion and exclusion criteria.</para
           >
         </summary>
@@ -1700,6 +1976,8 @@
 
             
 
+            
+
              that has the attributes specified by <paramref
              name="includeFilter" />
 
@@ -1707,8 +1985,12 @@
 
             
 
+            
+
             , and does not have the attributes specified by <paramref
              name="excludeFilter" />
+
+            
 
             
 
@@ -1724,8 +2006,12 @@
 
           
 
+          
+
           The index of the row where the method should begin to look for the next <see
            cref="T:System.Windows.Forms.DataGridViewRow" />
+
+          
 
           
 
@@ -1740,8 +2026,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -1756,8 +2046,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -1795,8 +2089,12 @@
 
             
 
+            
+
              method begins looking for the row that matches the criteria starting with the row positioned before <paramref
              name="indexStart" />
+
+            
 
             
 
@@ -1815,6 +2113,8 @@
 
             
 
+            
+
              that meets the specified criteria.</para
           >
         </summary>
@@ -1828,8 +2128,12 @@
 
             
 
+            
+
              that has the attributes specified by <paramref
              name="includeFilter" />
+
+            
 
             
 
@@ -1845,8 +2149,12 @@
 
           
 
+          
+
           The index of the row where the method should begin to look for the previous <see
            cref="T:System.Windows.Forms.DataGridViewRow" />
+
+          
 
           
 
@@ -1861,8 +2169,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -1901,8 +2213,12 @@
 
             
 
+            
+
              method begins looking for the row that matches the criteria starting with the row positioned before <paramref
              name="indexStart" />
+
+            
 
             
 
@@ -1921,6 +2237,8 @@
 
             
 
+            
+
              that meets the specified inclusion and exclusion criteria.</para
           >
         </summary>
@@ -1934,6 +2252,8 @@
 
             
 
+            
+
              that has the attributes specified by <paramref
              name="includeFilter" />
 
@@ -1941,8 +2261,12 @@
 
             
 
+            
+
             , and does not have the attributes specified by <paramref
              name="excludeFilter" />
+
+            
 
             
 
@@ -1958,8 +2282,12 @@
 
           
 
+          
+
           The index of the row where the method should begin to look for the previous <see
            cref="T:System.Windows.Forms.DataGridViewRow" />
+
+          
 
           
 
@@ -1974,8 +2302,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -1990,8 +2322,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -2029,6 +2365,8 @@
 
             
 
+            
+
              objects in the collection that meet the specified criteria.</para
           >
         </summary>
@@ -2042,6 +2380,8 @@
 
             
 
+            
+
              objects in the <see
              cref="T:System.Windows.Forms.DataGridViewRowCollection" />
 
@@ -2049,8 +2389,12 @@
 
             
 
+            
+
              that have the attributes specified by <paramref
              name="includeFilter" />
+
+            
 
             
 
@@ -2066,8 +2410,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -2105,6 +2453,8 @@
 
             
 
+            
+
              objects that meet the specified criteria.</para
           >
         </summary>
@@ -2118,6 +2468,8 @@
 
             
 
+            
+
              objects in the <see
              cref="T:System.Windows.Forms.DataGridViewRowCollection" />
 
@@ -2125,8 +2477,12 @@
 
             
 
+            
+
              that have the attributes specified by <paramref
              name="includeFilter" />
+
+            
 
             
 
@@ -2142,8 +2498,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -2185,11 +2545,15 @@
 
             
 
+            
+
              values indicating the state of the specified row.</para
           >
         </returns>
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2231,6 +2595,8 @@
 
             
 
+            
+
              if it is a <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
 
@@ -2238,8 +2604,12 @@
 
             
 
+            
+
              found in the <see
              cref="T:System.Windows.Forms.DataGridViewRowCollection" />
+
+            
 
             
 
@@ -2255,6 +2625,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridViewRow" />
 
@@ -2262,8 +2634,12 @@
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Windows.Forms.DataGridViewRowCollection" />
+
+          
 
           
 
@@ -2301,8 +2677,12 @@
 
             
 
+            
+
              method adds rows that are based on the <see
              cref="P:System.Windows.Forms.DataGridView.RowTemplate" />
+
+            
 
             
 
@@ -2315,8 +2695,12 @@
 
             
 
+            
+
             . The new row is shared, if possible. Be sure that the row specified in the <see
              cref="P:System.Windows.Forms.DataGridView.RowTemplate" />
+
+            
 
             
 
@@ -2333,11 +2717,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >Rows in the control are not automatically sorted when new rows are added. To sort new rows into their correct position, call the <see
              cref="Overload:System.Windows.Forms.DataGridView.Sort" />
+
+            
 
             
 
@@ -2350,6 +2738,8 @@
 
             
 
+            
+
              event handler. You might also want to call the <see
              cref="Overload:System.Windows.Forms.DataGridView.Sort" />
 
@@ -2357,8 +2747,12 @@
 
             
 
+            
+
              method in a <see
              cref="E:System.Windows.Forms.DataGridView.CellValueChanged" />
+
+            
 
             
 
@@ -2378,6 +2772,8 @@
 
           
 
+          
+
           The position at which to insert the rows.</param
         >
         <param name="count">
@@ -2387,8 +2783,12 @@
 
           
 
+          
+
           The number of rows to insert into the <see
            cref="T:System.Windows.Forms.DataGridViewRowCollection" />
+
+          
 
           
 
@@ -2432,8 +2832,12 @@
 
             
 
+            
+
              method adds an unshared row to the <see
              cref="T:System.Windows.Forms.DataGridViewRowCollection" />
+
+            
 
             
 
@@ -2449,8 +2853,12 @@
 
             
 
+            
+
              method in a <see
              cref="E:System.Windows.Forms.DataGridView.RowsAdded" />
+
+            
 
             
 
@@ -2463,8 +2871,12 @@
 
             
 
+            
+
              method in a <see
              cref="E:System.Windows.Forms.DataGridView.CellValueChanged" />
+
+            
 
             
 
@@ -2484,10 +2896,14 @@
 
           
 
+          
+
           The position at which to insert the row.</param
         >
         <param name="values">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2525,8 +2941,12 @@
 
             
 
+            
+
              method adds a shared row to the <see
              cref="T:System.Windows.Forms.DataGridViewRowCollection" />
+
+            
 
             
 
@@ -2543,11 +2963,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >Rows in the control are not automatically sorted when new rows are added. To sort new rows into their correct position, call the <see
              cref="Overload:System.Windows.Forms.DataGridView.Sort" />
+
+            
 
             
 
@@ -2560,6 +2984,8 @@
 
             
 
+            
+
              event handler. You might also want to call the <see
              cref="Overload:System.Windows.Forms.DataGridView.Sort" />
 
@@ -2567,8 +2993,12 @@
 
             
 
+            
+
              method in a <see
              cref="E:System.Windows.Forms.DataGridView.CellValueChanged" />
+
+            
 
             
 
@@ -2587,11 +3017,15 @@
 
             
 
+            
+
              into the collection.</para
           >
         </summary>
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2606,6 +3040,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridViewRow" />
 
@@ -2613,8 +3049,12 @@
 
           
 
+          
+
            to insert into the <see
            cref="T:System.Windows.Forms.DataGridViewRowCollection" />
+
+          
 
           
 
@@ -2653,8 +3093,12 @@
 
             
 
+            
+
              property of the new <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
+
+            
 
             
 
@@ -2667,8 +3111,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
+
+            
 
             
 
@@ -2681,6 +3129,8 @@
 
             
 
+            
+
             . The <see
              cref="M:System.Windows.Forms.DataGridViewRowCollection.InsertCopies(System.Int32,System.Int32,System.Int32)" />
 
@@ -2688,8 +3138,12 @@
 
             
 
+            
+
              method adds shared rows to the <see
              cref="T:System.Windows.Forms.DataGridViewRowCollection" />
+
+            
 
             
 
@@ -2706,11 +3160,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >Rows in the control are not automatically sorted when new rows are added. To sort new rows into their correct position, call the <see
              cref="Overload:System.Windows.Forms.DataGridView.Sort" />
+
+            
 
             
 
@@ -2723,6 +3181,8 @@
 
             
 
+            
+
              event handler. You might also want to call the <see
              cref="Overload:System.Windows.Forms.DataGridView.Sort" />
 
@@ -2730,8 +3190,12 @@
 
             
 
+            
+
              method in a <see
              cref="E:System.Windows.Forms.DataGridView.CellValueChanged" />
+
+            
 
             
 
@@ -2751,8 +3215,12 @@
 
           
 
+          
+
           The index of the <see
            cref="T:System.Windows.Forms.DataGridViewRow" />
+
+          
 
           
 
@@ -2767,10 +3235,14 @@
 
           
 
+          
+
           The position at which to insert the rows.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2783,8 +3255,12 @@
 
           
 
+          
+
            objects to add to the <see
            cref="T:System.Windows.Forms.DataGridViewRowCollection" />
+
+          
 
           
 
@@ -2822,8 +3298,12 @@
 
             
 
+            
+
              parameter and increments the indexes for all subsequent rows. The <see
              cref="P:System.Windows.Forms.DataGridViewRow.InheritedStyle" />
+
+            
 
             
 
@@ -2836,8 +3316,12 @@
 
             
 
+            
+
              has the same values as the <see
              cref="P:System.Windows.Forms.DataGridViewRow.InheritedStyle" />
+
+            
 
             
 
@@ -2850,8 +3334,12 @@
 
             
 
+            
+
              positioned at <paramref
              name="indexSource" />
+
+            
 
             
 
@@ -2864,8 +3352,12 @@
 
             
 
+            
+
              method adds a shared row to the <see
              cref="T:System.Windows.Forms.DataGridViewRowCollection" />
+
+            
 
             
 
@@ -2882,11 +3374,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >Rows in the control are not automatically sorted when new rows are added. To sort new rows into their correct position, call the <see
              cref="Overload:System.Windows.Forms.DataGridView.Sort" />
+
+            
 
             
 
@@ -2899,6 +3395,8 @@
 
             
 
+            
+
              event handler. You might also want to call the <see
              cref="Overload:System.Windows.Forms.DataGridView.Sort" />
 
@@ -2906,8 +3404,12 @@
 
             
 
+            
+
              method in a <see
              cref="E:System.Windows.Forms.DataGridView.CellValueChanged" />
+
+            
 
             
 
@@ -2927,10 +3429,14 @@
 
           
 
+          
+
           The index of the row on which to base the new row.</param
         >
         <param name="indexDestination">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2974,8 +3480,12 @@
 
             
 
+            
+
              method adds shared rows to the <see
              cref="T:System.Windows.Forms.DataGridViewRowCollection" />
+
+            
 
             
 
@@ -2992,11 +3502,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >Rows in the control are not automatically sorted when new rows are added. To sort new rows into their correct position, call the <see
              cref="Overload:System.Windows.Forms.DataGridView.Sort" />
+
+            
 
             
 
@@ -3009,6 +3523,8 @@
 
             
 
+            
+
              event handler. You might also want to call the <see
              cref="Overload:System.Windows.Forms.DataGridView.Sort" />
 
@@ -3016,8 +3532,12 @@
 
             
 
+            
+
              method in a <see
              cref="E:System.Windows.Forms.DataGridView.CellValueChanged" />
+
+            
 
             
 
@@ -3034,8 +3554,12 @@
 
               
 
+              
+
                method will make your application stop responding if any rows with an index greater than <paramref
                name="rowIndex" />
+
+              
 
               
 
@@ -3055,11 +3579,15 @@
 
             
 
+            
+
              objects into the collection at the specified position.</para
           >
         </summary>
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3074,6 +3602,8 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Windows.Forms.DataGridViewRow" />
 
@@ -3081,8 +3611,12 @@
 
           
 
+          
+
            objects to add to the <see
            cref="T:System.Windows.Forms.DataGridViewRowCollection" />
+
+          
 
           
 
@@ -3137,8 +3671,12 @@
 
             
 
+            
+
              unshares all the rows in the <see
              cref="T:System.Windows.Forms.DataGridViewRowCollection" />
+
+            
 
             
 
@@ -3152,6 +3690,8 @@
           <para
             >Gets an array of <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
+
+            
 
             
 
@@ -3193,11 +3733,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.DataGridViewRowCollection.OnCollectionChanged(System.ComponentModel.CollectionChangeEventArgs)" />
+
+            
 
             
 
@@ -3216,6 +3760,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -3226,8 +3772,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.CollectionChangeEventArgs" />
+
+          
 
           
 
@@ -3263,8 +3813,12 @@
 
           
 
+          
+
           The row to remove from the <see
            cref="T:System.Windows.Forms.DataGridViewRowCollection" />
+
+          
 
           
 
@@ -3295,6 +3849,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3331,8 +3887,12 @@
 
             
 
+            
+
              method returns a <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
+
+            
 
             
 
@@ -3351,6 +3911,8 @@
 
             
 
+            
+
              at the specified index.</para
           >
         </summary>
@@ -3359,6 +3921,8 @@
           <para
             >The <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
+
+            
 
             
 
@@ -3374,8 +3938,12 @@
 
           
 
+          
+
           The index of the <see
            cref="T:System.Windows.Forms.DataGridViewRow" />
+
+          
 
           
 
@@ -3412,8 +3980,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -3432,11 +4004,15 @@
 
             
 
+            
+
             , starting at the specified index.</para
           >
         </summary>
         <param name="array">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3449,6 +4025,8 @@
 
           
 
+          
+
            that is the destination of the elements copied from the <see
            cref="T:System.Windows.Forms.DataGridViewRowCollection" />
 
@@ -3456,8 +4034,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -3472,8 +4054,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -3504,8 +4090,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -3544,8 +4134,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -3584,8 +4178,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -3624,8 +4222,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -3643,6 +4245,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -3676,8 +4280,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -3693,6 +4301,8 @@
 
             
 
+            
+
              overload, passing in <paramref
              name="value" />
 
@@ -3700,8 +4310,12 @@
 
             
 
+            
+
              after casting it to a <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
+
+            
 
             
 
@@ -3717,8 +4331,12 @@
 
             
 
+            
+
              method in a <see
              cref="E:System.Windows.Forms.DataGridView.RowsAdded" />
+
+            
 
             
 
@@ -3731,8 +4349,12 @@
 
             
 
+            
+
              method in a <see
              cref="E:System.Windows.Forms.DataGridView.CellValueChanged" />
+
+            
 
             
 
@@ -3751,6 +4373,8 @@
 
             
 
+            
+
              to the collection.</para
           >
         </summary>
@@ -3759,6 +4383,8 @@
           <para
             >The index of the new <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
+
+            
 
             
 
@@ -3774,6 +4400,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -3781,8 +4409,12 @@
 
           
 
+          
+
            to add to the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -3815,8 +4447,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -3839,6 +4475,8 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
 
@@ -3846,8 +4484,12 @@
 
             
 
+            
+
              found in the <see
              cref="T:System.Windows.Forms.DataGridViewRowCollection" />
+
+            
 
             
 
@@ -3863,8 +4505,12 @@
 
           
 
+          
+
           The item to locate in the <see
            cref="T:System.Windows.Forms.DataGridViewRowCollection" />
+
+          
 
           
 
@@ -3897,8 +4543,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -3921,8 +4571,12 @@
 
             
 
+            
+
              if it is a <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
+
+            
 
             
 
@@ -3938,8 +4592,12 @@
 
           
 
+          
+
           The object to locate in the <see
            cref="T:System.Windows.Forms.DataGridViewRowCollection" />
+
+          
 
           
 
@@ -3973,8 +4631,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -3990,8 +4652,12 @@
 
             
 
+            
+
              overload, passing in value after casting it to a <see
              cref="T:System.Windows.Forms.DataGridViewRow" />
+
+            
 
             
 
@@ -4007,8 +4673,12 @@
 
             
 
+            
+
              method in a <see
              cref="E:System.Windows.Forms.DataGridView.RowsAdded" />
+
+            
 
             
 
@@ -4021,8 +4691,12 @@
 
             
 
+            
+
              method in a <see
              cref="E:System.Windows.Forms.DataGridView.CellValueChanged" />
+
+            
 
             
 
@@ -4041,6 +4715,8 @@
 
             
 
+            
+
              into the collection at the specified index.</para
           >
         </summary>
@@ -4051,8 +4727,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="value" />
+
+          
 
           
 
@@ -4067,6 +4747,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridViewRow" />
 
@@ -4074,8 +4756,12 @@
 
           
 
+          
+
            to insert into the <see
            cref="T:System.Windows.Forms.DataGridViewRowCollection" />
+
+          
 
           
 
@@ -4106,8 +4792,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -4143,8 +4833,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -4204,8 +4898,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -4224,11 +4922,15 @@
 
             
 
+            
+
              from the collection.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4241,8 +4943,12 @@
 
           
 
+          
+
            to remove from the <see
            cref="T:System.Windows.Forms.DataGridViewRowCollection" />
+
+          
 
           
 

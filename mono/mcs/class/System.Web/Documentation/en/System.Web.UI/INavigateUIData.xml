@@ -18,6 +18,8 @@
 
         
 
+        
+
          interface allows navigation controls, such as the <see
          cref="T:System.Web.UI.WebControls.TreeView" />
 
@@ -25,8 +27,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.WebControls.Menu" />
+
+        
 
         
 
@@ -39,8 +45,12 @@
 
         
 
+        
+
          interface is implemented by the <see
          cref="T:System.Web.SiteMapNode" />
+
+        
 
         
 
@@ -53,8 +63,12 @@
 
         
 
+        
+
          control so that navigation controls can render data automatically without a page developer explicitly defining the data binding associations to the properties of <see
          cref="T:System.Web.SiteMapNode" />
+
+        
 
         
 
@@ -67,8 +81,12 @@
 
         
 
+        
+
          control enables declarative data binding so that a page developer does not have to populate the <see
          cref="P:System.Web.UI.WebControls.TreeView.DataBindings" />
+
+        
 
         
 
@@ -81,6 +99,8 @@
 
         
 
+        
+
          properties explicitly for the <see
          cref="T:System.Web.UI.WebControls.TreeView" />
 
@@ -88,8 +108,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.WebControls.Menu" />
+
+        
 
         
 
@@ -105,8 +129,12 @@
 
         
 
+        
+
          interface can also be implemented on objects that are returned by an <see
          cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+        
 
         
 
@@ -140,6 +168,8 @@
 
             
 
+            
+
              property is rendered as the ToolTip text of the <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
 
@@ -147,8 +177,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -185,8 +219,12 @@
 
             
 
+            
+
              property is rendered as the <see
              cref="P:System.Web.UI.WebControls.TreeNode.Text" />
+
+            
 
             
 
@@ -199,6 +237,8 @@
 
             
 
+            
+
              control and the <see
              cref="P:System.Web.UI.WebControls.MenuItem.Text" />
 
@@ -206,8 +246,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -244,6 +288,8 @@
 
             
 
+            
+
              property represents the URL to navigate to when a navigation node, such as <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
 
@@ -251,8 +297,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 
@@ -289,6 +339,8 @@
 
             
 
+            
+
              property represents any additional data that is used by a navigation node, such as a <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
 
@@ -296,8 +348,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Web.UI.WebControls.MenuItem" />
+
+            
 
             
 

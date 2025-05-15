@@ -31,8 +31,12 @@
 
         
 
+        
+
          instance is written to a &lt;feed&gt; element. The following table shows how each property defined in the <see
          cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+        
 
         
 
@@ -72,6 +76,8 @@
 
               
 
+              
+
                in the collection.</para
             >
           </description>
@@ -89,6 +95,8 @@
 
               
 
+              
+
                in the collection.</para
             >
           </description>
@@ -101,6 +109,8 @@
             <para
               >A &lt;contributor&gt; element for each <see
                cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+
+              
 
               
 
@@ -171,6 +181,8 @@
 
               
 
+              
+
                in the collection.</para
             >
           </description>
@@ -204,6 +216,8 @@
 
               
 
+              
+
                in the collection.</para
             >
           </description>
@@ -225,8 +239,12 @@
 
         
 
+        
+
          instance is written to an &lt;rss&gt; element. The following table shows how each property defined in the <see
          cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+        
 
         
 
@@ -266,8 +284,12 @@
 
               
 
+              
+
                is in the collection; otherwise, an &lt;a10:author&gt; element for each <see
                cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+
+              
 
               
 
@@ -290,6 +312,8 @@
 
               
 
+              
+
                in the collection.</para
             >
           </description>
@@ -302,6 +326,8 @@
             <para
               >An &lt;a10:contributor&gt; element for each <see
                cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+
+              
 
               
 
@@ -372,6 +398,8 @@
 
               
 
+              
+
                in the collection.</para
             >
           </description>
@@ -400,6 +428,8 @@
             <para
               >An &lt;a10:link&gt; element for each <see
                cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+              
 
               
 
@@ -448,6 +478,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -483,6 +515,8 @@
 
             
 
+            
+
              objects passed into this constructor is buffered.</para
           >
         </remarks>
@@ -496,8 +530,12 @@
 
             
 
+            
+
              class with the specified collection of <see
              cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+            
 
             
 
@@ -513,8 +551,12 @@
 
           
 
+          
+
           A collection of <see
            cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+          
 
           
 
@@ -552,8 +594,12 @@
 
             
 
+            
+
              parameter is true, all <see
              cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+            
 
             
 
@@ -566,6 +612,8 @@
 
             
 
+            
+
              instance are cloned and added to the <see
              cref="P:System.ServiceModel.Syndication.SyndicationFeed.Items" />
 
@@ -573,8 +621,12 @@
 
             
 
+            
+
              collection of the new <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+            
 
             
 
@@ -587,8 +639,12 @@
 
             
 
+            
+
              parameter is false, the <see
              cref="P:System.ServiceModel.Syndication.SyndicationFeed.Items" />
+
+            
 
             
 
@@ -601,8 +657,12 @@
 
             
 
+            
+
              instance contains references to the existing <see
              cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+            
 
             
 
@@ -621,11 +681,15 @@
 
             
 
+            
+
              class with the specified feed.</para
           >
         </summary>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -638,10 +702,14 @@
 
           
 
+          
+
            used to initialize the new instance.</param
         >
         <param name="cloneItems">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -681,11 +749,15 @@
 
             
 
+            
+
              class with the specified title, description, and Uniform Resource Identifier (URI).</para
           >
         </summary>
         <param name="title">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -700,10 +772,14 @@
 
           
 
+          
+
           The description of the feed.</param
         >
         <param name="feedAlternateLink">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -747,8 +823,12 @@
 
             
 
+            
+
              class with the specified title, description, URI, and collection of <see
              cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+            
 
             
 
@@ -764,10 +844,14 @@
 
           
 
+          
+
           The title of the feed.</param
         >
         <param name="description">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -782,6 +866,8 @@
 
           
 
+          
+
           The URI for the feed.</param
         >
         <param name="items">
@@ -791,8 +877,12 @@
 
           
 
+          
+
           A collection of <see
            cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+          
 
           
 
@@ -834,11 +924,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="title">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -853,10 +947,14 @@
 
           
 
+          
+
           The syndication feed description.</param
         >
         <param name="feedAlternateLink">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -871,6 +969,8 @@
 
           
 
+          
+
           The ID of the syndication feed.</param
         >
         <param name="lastUpdatedTime">
@@ -880,8 +980,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTimeOffset" />
+
+          
 
           
 
@@ -927,11 +1031,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="title">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -946,10 +1054,14 @@
 
           
 
+          
+
           The syndication feed description.</param
         >
         <param name="feedAlternateLink">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -964,6 +1076,8 @@
 
           
 
+          
+
           The ID of the syndication feed.</param
         >
         <param name="lastUpdatedTime">
@@ -973,8 +1087,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTimeOffset" />
+
+          
 
           
 
@@ -989,8 +1107,12 @@
 
           
 
+          
+
           A collection of <see
            cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+          
 
           
 
@@ -1025,6 +1147,8 @@
              type="text/html">
               <a href="56ce265b-8163-4b85-98e7-7692a12c4357">Loosely-Typed Extensions Sample</a>
             </format>
+
+            
 
             
 
@@ -1067,6 +1191,8 @@
 
             
 
+            
+
              in the collection is written to an &lt;author&gt; element. When serialized to RSS 2.0, if only a single <see
              cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
 
@@ -1074,8 +1200,12 @@
 
             
 
+            
+
              exists in the collection, it is written to a &lt;managingEditor&gt; element. Otherwise, each <see
              cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+
+            
 
             
 
@@ -1108,6 +1238,8 @@
           <para
             >Gets and sets the base URI for the <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+            
 
             
 
@@ -1146,11 +1278,15 @@
 
             
 
+            
+
              in the collection is written to a &lt;category&gt; element.</para
           >
           <para
             >When serialized to RSS 2.0, each <see
              cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+
+            
 
             
 
@@ -1195,8 +1331,12 @@
 
             
 
+            
+
              parameter is true, all items within the <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+            
 
             
 
@@ -1209,8 +1349,12 @@
 
             
 
+            
+
              instance's items collection contain references to the original <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+            
 
             
 
@@ -1229,6 +1373,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -1237,6 +1383,8 @@
           <para
             >A duplicate <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+            
 
             
 
@@ -1252,8 +1400,12 @@
 
           
 
+          
+
           A value that specifies whether the <see
            cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+          
 
           
 
@@ -1291,11 +1443,15 @@
 
             
 
+            
+
              in the collection is written to a &lt;contributor&gt; element.</para
           >
           <para
             >When serialized to RSS 2.0, each <see
              cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+
+            
 
             
 
@@ -1338,11 +1494,15 @@
 
             
 
+            
+
              is written to a &lt;rights&gt; element.</para
           >
           <para
             >When serialized to RSS 2.0, the <see
              cref="P:System.ServiceModel.Syndication.SyndicationFeed.Copyright" />
+
+            
 
             
 
@@ -1385,8 +1545,12 @@
 
             
 
+            
+
              object to the <see
              cref="P:System.ServiceModel.Syndication.SyndicationFeed.Categories" />
+
+            
 
             
 
@@ -1405,6 +1569,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -1413,6 +1579,8 @@
           <para
             >A new <see
              cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+
+            
 
             
 
@@ -1451,8 +1619,12 @@
 
             
 
+            
+
              object to the <see
              cref="P:System.ServiceModel.Syndication.SyndicationFeed.Items" />
+
+            
 
             
 
@@ -1471,6 +1643,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -1479,6 +1653,8 @@
           <para
             >A new <see
              cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+            
 
             
 
@@ -1517,8 +1693,12 @@
 
             
 
+            
+
              instance is not added to the <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+            
 
             
 
@@ -1537,6 +1717,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -1545,6 +1727,8 @@
           <para
             >A new <see
              cref="T:System.ServiceModel.Syndication.SyndicationLink" />
+
+            
 
             
 
@@ -1583,6 +1767,8 @@
 
             
 
+            
+
              object to the <see
              cref="P:System.ServiceModel.Syndication.SyndicationFeed.Authors" />
 
@@ -1590,8 +1776,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.ServiceModel.Syndication.SyndicationFeed.Contributors" />
+
+            
 
             
 
@@ -1610,6 +1800,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -1618,6 +1810,8 @@
           <para
             >A new <see
              cref="T:System.ServiceModel.Syndication.SyndicationPerson" />
+
+            
 
             
 
@@ -1656,11 +1850,15 @@
 
             
 
+            
+
              is written to a &lt;subtitle&gt; element.</para
           >
           <para
             >When serialized to RSS 2.0, <see
              cref="P:System.ServiceModel.Syndication.SyndicationFeed.Description" />
+
+            
 
             
 
@@ -1707,6 +1905,8 @@
 
             
 
+            
+
              sample.</para
           >
         </remarks>
@@ -1733,6 +1933,8 @@
           <para
             >When serialized to Atom 1.0 and RSS 2.0, the <see
              cref="P:System.ServiceModel.Syndication.SyndicationFeed.Generator" />
+
+            
 
             
 
@@ -1776,6 +1978,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -1784,6 +1988,8 @@
           <para
             >An <see
              cref="T:System.ServiceModel.Syndication.Atom10FeedFormatter" />
+
+            
 
             
 
@@ -1823,6 +2029,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -1831,6 +2039,8 @@
           <para
             >An <see
              cref="T:System.ServiceModel.Syndication.Rss20FeedFormatter" />
+
+            
 
             
 
@@ -1871,6 +2081,8 @@
 
             
 
+            
+
              parameter is true, the formatter automatically adds the a10 namespace qualifier to all extensions; otherwise, the extensions are not serialized.</para
           >
         </remarks>
@@ -1879,6 +2091,8 @@
           <para
             >Gets a new <see
              cref="T:System.ServiceModel.Syndication.Rss20FeedFormatter" />
+
+            
 
             
 
@@ -1897,11 +2111,15 @@
 
             
 
+            
+
              instance.</para
           >
         </returns>
         <param name="serializeExtensionsAsAtom">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1933,11 +2151,15 @@
 
             
 
+            
+
              is written to an &lt;id&gt; element.</para
           >
           <para
             >When serialized to RSS 2.0, the <see
              cref="P:System.ServiceModel.Syndication.SyndicationFeed.Id" />
+
+            
 
             
 
@@ -1974,11 +2196,15 @@
 
             
 
+            
+
              property is written to a &lt;logo&gt; element.</para
           >
           <para
             >When serialized to RSS 2.0, the <see
              cref="P:System.ServiceModel.Syndication.SyndicationFeed.ImageUrl" />
+
+            
 
             
 
@@ -2021,11 +2247,15 @@
 
             
 
+            
+
              collection is written to &lt;entry&gt; elements.</para
           >
           <para
             >When serialized to Atom 1.0, the <see
              cref="P:System.ServiceModel.Syndication.SyndicationFeed.Items" />
+
+            
 
             
 
@@ -2062,11 +2292,15 @@
 
             
 
+            
+
              property is written to the lang attribute in the &lt;feed&gt; element.</para
           >
           <para
             >When serialized to RSS 2.0, the <see
              cref="P:System.ServiceModel.Syndication.SyndicationFeed.Language" />
+
+            
 
             
 
@@ -2106,11 +2340,15 @@
 
             
 
+            
+
              property is written to an &lt;updated&gt; element.</para
           >
           <para
             >When serialized to RSS 2.0, the <see
              cref="P:System.ServiceModel.Syndication.SyndicationFeed.LastUpdatedTime" />
+
+            
 
             
 
@@ -2153,11 +2391,15 @@
 
             
 
+            
+
              collection is written to a number of &lt;link&gt; elements.</para
           >
           <para
             >When serialized to RSS 2.0, the <see
              cref="P:System.ServiceModel.Syndication.SyndicationFeed.Links" />
+
+            
 
             
 
@@ -2207,6 +2449,8 @@
 
             
 
+            
+
              that contains the loaded contents.</para
           >
         </returns>
@@ -2217,8 +2461,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -2266,6 +2514,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2279,8 +2529,12 @@
 
             
 
+            
+
             -derived instance from the specified <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2299,11 +2553,15 @@
 
             
 
+            
+
             -derived instance that contains the feed.</para
           >
         </returns>
         <param name="reader">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2316,10 +2574,14 @@
 
           
 
+          
+
            to read from.</param
         >
         <typeparam name="TSyndicationFeed">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2360,6 +2622,8 @@
 
             
 
+            
+
              in Atom 1.0 format.</para
           >
         </summary>
@@ -2370,8 +2634,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -2412,6 +2680,8 @@
 
             
 
+            
+
              in RSS 2.0 format.</para
           >
         </summary>
@@ -2422,8 +2692,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -2456,6 +2730,8 @@
           <para
             >When serialized to Atom 1.0 and RSS 2.0, the <see
              cref="P:System.ServiceModel.Syndication.SyndicationFeed.Title" />
+
+            
 
             
 
@@ -2503,6 +2779,8 @@
 
             
 
+            
+
              and override this method. This method is called for all unrecognized attribute extensions.</para
           >
         </remarks>
@@ -2521,10 +2799,14 @@
 
           
 
+          
+
           The name of the element.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2539,10 +2821,14 @@
 
           
 
+          
+
           The attribute to parse.</param
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2583,6 +2869,8 @@
 
             
 
+            
+
              and override this method. This method is called for all unrecognized element extensions.</para
           >
         </remarks>
@@ -2601,8 +2889,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -2612,6 +2904,8 @@
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2652,6 +2946,8 @@
 
             
 
+            
+
              and override this method. This method is called for all unrecognized attribute extensions.</para
           >
         </remarks>
@@ -2660,6 +2956,8 @@
           <para
             >Writes the attribute extensions to the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -2675,8 +2973,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -2686,6 +2988,8 @@
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2726,6 +3030,8 @@
 
             
 
+            
+
              and override this method. This method is called for all unrecognized element extensions.</para
           >
         </remarks>
@@ -2734,6 +3040,8 @@
           <para
             >Writes the element extensions to the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -2749,8 +3057,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -2760,6 +3072,8 @@
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -24,8 +24,12 @@
 
         
 
+        
+
          class is used to store and manage a collection of <see
          cref="T:System.Web.UI.WebControls.TreeNodeStyle" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          property, of type <see
          cref="T:System.Web.UI.WebControls.TreeNodeStyleCollection" />
+
+        
 
         
 
@@ -55,6 +63,8 @@
 
         
 
+        
+
          property is an alternative to the individual style properties, such as the <see
          cref="P:System.Web.UI.WebControls.TreeView.NodeStyle" />
 
@@ -62,8 +72,12 @@
 
         
 
+        
+
          property, that control node styles at different levels of the tree. The first style in the collection corresponds to the node style in the first level of the tree. The second style in the collection corresponds to the node style in the second level of the tree, and so on. The <see
          cref="P:System.Web.UI.WebControls.TreeView.LevelStyles" />
+
+        
 
         
 
@@ -79,6 +93,8 @@
 
         
 
+        
+
          class inherits most of its members from the <see
          cref="T:System.Web.UI.StateManagedCollection" />
 
@@ -86,8 +102,12 @@
 
         
 
+        
+
          class. For more information about the inherited members, see <see
          cref="T:System.Web.UI.StateManagedCollection" />
+
+        
 
         
 
@@ -106,8 +126,12 @@
 
         
 
+        
+
          objects that is in a <see
          cref="T:System.Web.UI.WebControls.TreeView" />
+
+        
 
         
 
@@ -142,6 +166,8 @@
 
             
 
+            
+
              method to append the specified <see
              cref="T:System.Web.UI.WebControls.TreeNodeStyle" />
 
@@ -149,8 +175,12 @@
 
             
 
+            
+
              object to the end of the <see
              cref="T:System.Web.UI.WebControls.TreeNodeStyleCollection" />
+
+            
 
             
 
@@ -167,8 +197,12 @@
 
               
 
+              
+
                allows you to add null, as well as duplicate <see
                cref="T:System.Web.UI.WebControls.TreeNodeStyle" />
+
+              
 
               
 
@@ -188,8 +222,12 @@
 
             
 
+            
+
              object to the end of the <see
              cref="T:System.Web.UI.WebControls.TreeNodeStyleCollection" />
+
+            
 
             
 
@@ -208,6 +246,8 @@
 
             
 
+            
+
              was inserted.</para
           >
         </returns>
@@ -218,8 +258,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.TreeNodeStyle" />
+
+          
 
           
 
@@ -256,8 +300,12 @@
 
             
 
+            
+
              method to determine whether a <see
              cref="T:System.Web.UI.WebControls.TreeNodeStyle" />
+
+            
 
             
 
@@ -270,6 +318,8 @@
 
             
 
+            
+
              object. The <see
              cref="M:System.Web.UI.WebControls.TreeNodeStyleCollection.Contains(System.Web.UI.WebControls.TreeNodeStyle)" />
 
@@ -277,8 +327,12 @@
 
             
 
+            
+
              method is commonly used to test for the existence of a <see
              cref="T:System.Web.UI.WebControls.TreeNodeStyle" />
+
+            
 
             
 
@@ -297,6 +351,8 @@
 
             
 
+            
+
              object is in the collection.</para
           >
         </summary>
@@ -305,6 +361,8 @@
           <para
             >true, if the specified <see
              cref="T:System.Web.UI.WebControls.TreeNodeStyle" />
+
+            
 
             
 
@@ -320,8 +378,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.TreeNodeStyle" />
+
+          
 
           
 
@@ -360,6 +422,8 @@
 
             
 
+            
+
              method to copy the contents of the <see
              cref="T:System.Web.UI.WebControls.TreeNodeStyleCollection" />
 
@@ -367,8 +431,12 @@
 
             
 
+            
+
              object into the specified zero-based array of <see
              cref="T:System.Web.UI.WebControls.TreeNodeStyle" />
+
+            
 
             
 
@@ -387,8 +455,12 @@
 
             
 
+            
+
              object to a compatible one-dimensional array of <see
              cref="T:System.Web.UI.WebControls.TreeNodeStyle" />
+
+            
 
             
 
@@ -399,6 +471,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -475,8 +549,12 @@
 
             
 
+            
+
              method to determine the zero-based index of the specified <see
              cref="T:System.Web.UI.WebControls.TreeNodeStyle" />
+
+            
 
             
 
@@ -489,12 +567,16 @@
 
             
 
+            
+
              object. If the node is not in the collection, the method returns -1.</para
           >
           <block subset="none" type="note">
             <para
               >If the specified <see
                cref="T:System.Web.UI.WebControls.TreeNodeStyle" />
+
+              
 
               
 
@@ -514,6 +596,8 @@
 
             
 
+            
+
              object in the collection.</para
           >
         </summary>
@@ -527,8 +611,12 @@
 
             
 
+            
+
              within the <see
              cref="T:System.Web.UI.WebControls.TreeNodeStyleCollection" />
+
+            
 
             
 
@@ -544,8 +632,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.TreeNodeStyle" />
+
+          
 
           
 
@@ -583,6 +675,8 @@
 
             
 
+            
+
              method to insert the specified <see
              cref="T:System.Web.UI.WebControls.TreeNodeStyle" />
 
@@ -590,8 +684,12 @@
 
             
 
+            
+
              object into the <see
              cref="T:System.Web.UI.WebControls.TreeNodeStyleCollection" />
+
+            
 
             
 
@@ -607,6 +705,8 @@
 
             
 
+            
+
              object to the end of the <see
              cref="T:System.Web.UI.WebControls.TreeNodeStyleCollection" />
 
@@ -614,8 +714,12 @@
 
             
 
+            
+
              by using the <see
              cref="M:System.Web.UI.WebControls.TreeNodeStyleCollection.Add(System.Web.UI.WebControls.TreeNodeStyle)" />
+
+            
 
             
 
@@ -634,8 +738,12 @@
 
             
 
+            
+
              object into the <see
              cref="T:System.Web.UI.WebControls.TreeNodeStyleCollection" />
+
+            
 
             
 
@@ -651,8 +759,12 @@
 
           
 
+          
+
           The zero-based index location at which to insert the <see
            cref="T:System.Web.UI.WebControls.TreeNodeStyle" />
+
+          
 
           
 
@@ -667,8 +779,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.TreeNodeStyle" />
+
+          
 
           
 
@@ -728,8 +844,12 @@
 
             
 
+            
+
              method to remove the specified <see
              cref="T:System.Web.UI.WebControls.TreeNodeStyle" />
+
+            
 
             
 
@@ -745,8 +865,12 @@
 
             
 
+            
+
              method. You can also remove every node in the collection by using the <see
              cref="M:System.Web.UI.StateManagedCollection.Clear" />
+
+            
 
             
 
@@ -765,8 +889,12 @@
 
             
 
+            
+
              object from the <see
              cref="T:System.Web.UI.WebControls.TreeNodeStyleCollection" />
+
+            
 
             
 
@@ -782,8 +910,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.TreeNodeStyle" />
+
+          
 
           
 
@@ -817,6 +949,8 @@
 
             
 
+            
+
              method to remove the <see
              cref="T:System.Web.UI.WebControls.TreeNodeStyle" />
 
@@ -824,8 +958,12 @@
 
             
 
+            
+
              object at the specified zero-based index location from a <see
              cref="T:System.Web.UI.WebControls.TreeNodeStyleCollection" />
+
+            
 
             
 
@@ -841,6 +979,8 @@
 
             
 
+            
+
              object by using the <see
              cref="M:System.Web.UI.WebControls.TreeNodeStyleCollection.Remove(System.Web.UI.WebControls.TreeNodeStyle)" />
 
@@ -848,8 +988,12 @@
 
             
 
+            
+
              method. You can also remove every node in the collection by using the <see
              cref="M:System.Web.UI.WebControls.TreeNodeCollection.Clear" />
+
+            
 
             
 
@@ -868,8 +1012,12 @@
 
             
 
+            
+
              object at the specified index location from the <see
              cref="T:System.Web.UI.WebControls.TreeNodeStyleCollection" />
+
+            
 
             
 
@@ -885,8 +1033,12 @@
 
           
 
+          
+
           The zero-based index location of the <see
            cref="T:System.Web.UI.WebControls.TreeNodeStyle" />
+
+          
 
           
 

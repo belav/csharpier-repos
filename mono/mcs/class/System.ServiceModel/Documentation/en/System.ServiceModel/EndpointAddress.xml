@@ -26,11 +26,15 @@
 
         
 
+        
+
          contains a URI and address properties that include an identity, WSDL elements, and a collection of optional headers. The optional headers are used to provide additional, more detailed addressing information to identify or interact with the endpoint. For example, they can be used to indicate which instance of a service is to be used to process an incoming message from a particular user when multiple instances are available.</para
       >
       <para>The endpoint address for a service can be specified either imperatively using code or declaratively through configuration. Defining endpoints in code is usually not practical because the bindings and addresses for a deployed service are typically different from those used while the service is being developed. It is more practical to define service endpoints using configuration . </para>
       <para>
         <see cref="T:System.ServiceModel.EndpointAddress" />
+
+        
 
         
 
@@ -43,6 +47,8 @@
 
         
 
+        
+
          interface and so is not serializable. For an endpoint to be exposed as part of a service contract it must be serializable and it must also be compliant with the Web Service Addressing (WS-Addressing) protocol. Serializable endpoints that are compliant with version 1.0 and the August 2004 version of WS-Addressing are provided, respectively, by the <see
          cref="T:System.ServiceModel.EndpointAddress10" />
 
@@ -50,8 +56,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.ServiceModel.EndpointAddressAugust2004" />
+
+        
 
         
 
@@ -91,11 +101,15 @@
 
             
 
+            
+
              class with a specified URI string.</para
           >
         </summary>
         <param name="uri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -141,6 +155,8 @@
 
             
 
+            
+
              class with a specified URI and headers.</para
           >
         </summary>
@@ -151,8 +167,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -199,6 +219,8 @@
 
             
 
+            
+
              class with a specified URI, identity, and headers.</para
           >
         </summary>
@@ -209,8 +231,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -225,8 +251,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.EndpointIdentity" />
+
+          
 
           
 
@@ -266,6 +296,8 @@
 
             
 
+            
+
              class with a specified URI, identity, and header collection.</para
           >
         </summary>
@@ -276,8 +308,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -292,8 +328,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.EndpointIdentity" />
+
+          
 
           
 
@@ -308,8 +348,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.AddressHeaderCollection" />
+
+          
 
           
 
@@ -350,6 +394,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -358,6 +404,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.EndpointAddress" />
+
+            
 
             
 
@@ -373,8 +421,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -389,8 +441,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.EndpointIdentity" />
+
+          
 
           
 
@@ -405,8 +461,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.AddressHeaderCollection" />
+
+          
 
           
 
@@ -421,8 +481,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryReader" />
+
+          
 
           
 
@@ -437,8 +501,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryReader" />
+
+          
 
           
 
@@ -470,8 +538,12 @@
 
             
 
+            
+
             , then <see
              cref="P:System.ServiceModel.EndpointAddress.IsAnonymous" />
+
+            
 
             
 
@@ -486,8 +558,12 @@
 
             
 
+            
+
              is a version-neutral class and the <see
              cref="P:System.ServiceModel.EndpointAddress.AnonymousUri" />
+
+            
 
             
 
@@ -503,8 +579,12 @@
 
             
 
+            
+
              endpoints to initiate message exchange patterns and receive replies, the Web Services Addressing specification defines a <see
              cref="http://go.microsoft.com/fwlink/?LinkId=96169">URI</see>
+
+            
 
             
 
@@ -550,6 +630,8 @@
 
             
 
+            
+
              method sets the "To" of the message with the <see
              cref="P:System.ServiceModel.EndpointAddress.Uri" />
 
@@ -557,8 +639,12 @@
 
             
 
+            
+
              of the current <see
              cref="T:System.ServiceModel.EndpointAddress" />
+
+            
 
             
 
@@ -578,8 +664,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Message" />
+
+          
 
           
 
@@ -622,8 +712,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -652,6 +746,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="M:System.ServiceModel.EndpointAddress.GetHashCode" />
+
+            
 
             
 
@@ -706,6 +802,8 @@
 
             
 
+            
+
              that provides access to the extensions.</para
           >
         </returns>
@@ -739,6 +837,8 @@
           <para
             >The <see
              cref="T:System.Xml.XmlDictionaryReader" />
+
+            
 
             
 
@@ -824,8 +924,12 @@
 
             
 
+            
+
              when manually copying the URI from an <see
              cref="T:System.ServiceModel.EndpointAddress" />
+
+            
 
             
 
@@ -838,8 +942,12 @@
 
             
 
+            
+
              or a <see
              cref="T:System.ServiceModel.EndpointAddressAugust2004" />
+
+            
 
             
 
@@ -852,8 +960,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.ServiceModel.EndpointAddressAugust2004" />
+
+            
 
             
 
@@ -869,8 +981,12 @@
 
             
 
+            
+
              endpoints to initiate message exchange patterns and receive replies, the Web Services Addressing specification defines a <see
              cref="http://go.microsoft.com/fwlink/?LinkId=96169">URI</see>
+
+            
 
             
 
@@ -885,6 +1001,8 @@
           <para
             >Gets a value that indicates whether the endpoint is <newTerm
             >anonymous</newTerm>
+
+            
 
             
 
@@ -917,8 +1035,12 @@
 
             
 
+            
+
              when manually copying the URI from an <see
              cref="T:System.ServiceModel.EndpointAddress" />
+
+            
 
             
 
@@ -931,8 +1053,12 @@
 
             
 
+            
+
              or a <see
              cref="T:System.ServiceModel.EndpointAddressAugust2004" />
+
+            
 
             
 
@@ -945,8 +1071,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.ServiceModel.EndpointAddressAugust2004" />
+
+            
 
             
 
@@ -960,6 +1090,8 @@
           <para
             >Gets a value that indicates whether the URI for the endpoint is the <see
              cref="P:System.ServiceModel.EndpointAddress.NoneUri" />
+
+            
 
             
 
@@ -992,8 +1124,12 @@
 
             
 
+            
+
             , then <see
              cref="P:System.ServiceModel.EndpointAddress.IsNone" />
+
+            
 
             
 
@@ -1045,8 +1181,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.ServiceModel.EndpointAddress" />
+
+          
 
           
 
@@ -1061,8 +1201,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.ServiceModel.EndpointAddress" />
+
+          
 
           
 
@@ -1109,8 +1253,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.ServiceModel.EndpointAddress" />
+
+          
 
           
 
@@ -1125,8 +1273,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.ServiceModel.EndpointAddress" />
+
+          
 
           
 
@@ -1171,6 +1323,8 @@
 
             
 
+            
+
              read from the XML dictionary reader.</para
           >
         </returns>
@@ -1181,8 +1335,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryReader" />
+
+          
 
           
 
@@ -1228,6 +1386,8 @@
 
             
 
+            
+
              read from the XML dictionary reader.</para
           >
         </returns>
@@ -1238,8 +1398,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.AddressingVersion" />
+
+          
 
           
 
@@ -1254,8 +1418,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryReader" />
+
+          
 
           
 
@@ -1301,6 +1469,8 @@
 
             
 
+            
+
              read from the XML reader.</para
           >
         </returns>
@@ -1311,8 +1481,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.AddressingVersion" />
+
+          
 
           
 
@@ -1327,8 +1501,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -1375,6 +1553,8 @@
 
             
 
+            
+
              with the qualified name read from the XML dictionary reader.</para
           >
         </returns>
@@ -1385,8 +1565,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryReader" />
+
+          
 
           
 
@@ -1401,8 +1585,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlDictionaryString" />
+
+          
 
           
 
@@ -1417,8 +1605,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlDictionaryString" />
+
+          
 
           
 
@@ -1466,6 +1658,8 @@
 
             
 
+            
+
              with the qualified name read from the XML reader.</para
           >
         </returns>
@@ -1476,8 +1670,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.AddressingVersion" />
+
+          
 
           
 
@@ -1492,8 +1690,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryReader" />
+
+          
 
           
 
@@ -1508,10 +1710,14 @@
 
           
 
+          
+
           Contains the local name for the XML node to contain the endpoint address.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1559,6 +1765,8 @@
 
             
 
+            
+
              with the qualified name read from the XML reader.</para
           >
         </returns>
@@ -1569,8 +1777,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.AddressingVersion" />
+
+          
 
           
 
@@ -1585,8 +1797,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -1601,10 +1817,14 @@
 
           
 
+          
+
           Contains the local name for the XML node to contain the endpoint address.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1662,6 +1882,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1704,8 +1926,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.AddressingVersion" />
+
+          
 
           
 
@@ -1720,8 +1946,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryWriter" />
+
+          
 
           
 
@@ -1764,8 +1994,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.AddressingVersion" />
+
+          
 
           
 
@@ -1780,8 +2014,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -1824,8 +2062,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.AddressingVersion" />
+
+          
 
           
 
@@ -1840,8 +2082,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryWriter" />
+
+          
 
           
 
@@ -1884,8 +2130,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.AddressingVersion" />
+
+          
 
           
 
@@ -1900,8 +2150,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -1947,8 +2201,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.AddressingVersion" />
+
+          
 
           
 
@@ -1963,8 +2221,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryWriter" />
+
+          
 
           
 
@@ -1979,8 +2241,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryString" />
+
+          
 
           
 
@@ -2026,8 +2292,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.AddressingVersion" />
+
+          
 
           
 
@@ -2042,8 +2312,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -2058,8 +2332,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryString" />
+
+          
 
           
 

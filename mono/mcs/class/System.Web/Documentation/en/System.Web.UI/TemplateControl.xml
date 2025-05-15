@@ -34,8 +34,12 @@
 
         
 
+        
+
          class is an abstract class that provides common properties and methods for the <see
          cref="T:System.Web.UI.Page" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
          class. A new instance of the <see
          cref="T:System.Web.UI.TemplateControl" />
+
+        
 
         
 
@@ -60,6 +68,8 @@
       <para
         >The <see
          cref="T:System.Web.UI.TemplateControl" />
+
+        
 
         
 
@@ -77,6 +87,8 @@
 
             
 
+            
+
              method for data-binding expression involving data sources, such as simple properties or expressions. </para
           >
         </item>
@@ -84,6 +96,8 @@
           <para
             >Use the <see
              cref="Overload:System.Web.UI.TemplateControl.XPath" />
+
+            
 
             
 
@@ -101,8 +115,12 @@
 
             
 
+            
+
              method for data-binding against an expression containing an XPath select statement. The result is a node collection that implements the <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -122,10 +140,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="ab7b2846-975b-4057-a948-45527497c742">ASP.NET Data Binding</a>
         </format>
+
+        
 
         
 
@@ -144,8 +166,12 @@
 
         
 
+        
+
          class and the <see
          cref="T:System.Web.UI.UserControl" />
+
+        
 
         
 
@@ -172,6 +198,8 @@
 
             
 
+            
+
              constructor is not called directly.</para
           >
         </remarks>
@@ -180,6 +208,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.TemplateControl" />
+
+            
 
             
 
@@ -234,6 +264,8 @@
 
             
 
+            
+
              control resides in a directory other than that of the page processing the request, use the <see
              cref="P:System.Web.UI.TemplateControl.AppRelativeVirtualPath" />
 
@@ -241,8 +273,12 @@
 
             
 
+            
+
              property to return the application-relative, virtual path to the <see
              cref="T:System.Web.UI.TemplateControl" />
+
+            
 
             
 
@@ -258,8 +294,12 @@
 
             
 
+            
+
              property is set based on the virtual path that is set in the <see
              cref="P:System.Web.UI.TemplateControl.AppRelativeVirtualPath" />
+
+            
 
             
 
@@ -288,6 +328,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.TemplateControl.AutoHandlers" />
+
+            
 
             
 
@@ -347,6 +389,8 @@
 
             
 
+            
+
              method allows design-time code execution of the <see
              cref="T:System.Web.UI.Page" />
 
@@ -354,8 +398,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.UI.UserControl" />
+
+            
 
             
 
@@ -399,6 +447,8 @@
 
             
 
+            
+
              method is used to access literal strings that are stored in a resource and is not intended for use from within your code.</para
           >
         </remarks>
@@ -407,6 +457,8 @@
           <para
             >Accesses literal strings stored in a resource. The <see
              cref="M:System.Web.UI.TemplateControl.CreateResourceBasedLiteralControl(System.Int32,System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -425,11 +477,15 @@
 
             
 
+            
+
              representing a literal string in a resource.</para
           >
         </returns>
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -444,10 +500,14 @@
 
           
 
+          
+
           The size of the string in bytes. </param
         >
         <param name="fAsciiOnly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -503,11 +563,15 @@
 
             
 
+            
+
              must evaluate to a public property. </para
           >
           <para
             >The <see
              cref="M:System.Web.UI.TemplateControl.Eval(System.String)" />
+
+            
 
             
 
@@ -520,8 +584,12 @@
 
             
 
+            
+
              method using the <see
              cref="M:System.Web.UI.Page.GetDataItem" />
+
+            
 
             
 
@@ -540,6 +608,8 @@
         </returns>
         <param name="expression">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -576,11 +646,15 @@
 
             
 
+            
+
              must evaluate to a public property. </para
           >
           <para
             >The <see
              cref="M:System.Web.UI.TemplateControl.Eval(System.String)" />
+
+            
 
             
 
@@ -593,8 +667,12 @@
 
             
 
+            
+
              method using the <see
              cref="M:System.Web.UI.Page.GetDataItem" />
+
+            
 
             
 
@@ -618,10 +696,14 @@
 
           
 
+          
+
           The navigation path from the container to the public property value to place in the bound control property.</param
         >
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -649,6 +731,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -657,6 +741,8 @@
           <para
             >Initializes the control that is derived from the <see
              cref="T:System.Web.UI.TemplateControl" />
+
+            
 
             
 
@@ -705,6 +791,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -718,8 +806,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
+
+            
 
             
 
@@ -739,8 +831,12 @@
 
           
 
+          
+
           A string representing a <see
            cref="P:System.Web.Compilation.ResourceExpressionFields.ClassKey" />
+
+          
 
           
 
@@ -755,8 +851,12 @@
 
           
 
+          
+
           A string representing a <see
            cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
+
+          
 
           
 
@@ -797,6 +897,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -810,8 +912,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
+
+            
 
             
 
@@ -831,8 +937,12 @@
 
           
 
+          
+
           A string representing a <see
            cref="P:System.Web.Compilation.ResourceExpressionFields.ClassKey" />
+
+          
 
           
 
@@ -847,8 +957,12 @@
 
           
 
+          
+
           A string representing a <see
            cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
+
+          
 
           
 
@@ -863,10 +977,14 @@
 
           
 
+          
+
           The type of object in the resource to get. </param
         >
         <param name="propName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -911,6 +1029,8 @@
 
             
 
+            
+
              property.</para
           >
         </summary>
@@ -925,8 +1045,12 @@
 
           
 
+          
+
           A string representing a <see
            cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
+
+          
 
           
 
@@ -973,6 +1097,8 @@
 
             
 
+            
+
              property, object type, and property name.</para
           >
         </summary>
@@ -987,8 +1113,12 @@
 
           
 
+          
+
           A string representing a <see
            cref="P:System.Web.Compilation.ResourceExpressionFields.ResourceKey" />
+
+          
 
           
 
@@ -1003,10 +1133,14 @@
 
           
 
+          
+
           The type of the resource object to get.</param
         >
         <param name="propName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1039,8 +1173,12 @@
 
             
 
+            
+
              method is not actually a <see
              cref="T:System.Web.UI.Control" />
+
+            
 
             
 
@@ -1053,6 +1191,8 @@
 
             
 
+            
+
              object. If the <paramref
              name="virtualPath" />
 
@@ -1060,8 +1200,12 @@
 
             
 
+            
+
              parameter is relative, the path of the loaded control is relative to the path of the <see
              cref="T:System.Web.UI.TemplateControl" />
+
+            
 
             
 
@@ -1077,8 +1221,12 @@
 
             
 
+            
+
              event rather than in the <see
              cref="E:System.Web.UI.Control.Load" />
+
+            
 
             
 
@@ -1097,6 +1245,8 @@
 
             
 
+            
+
              object from a file based on a specified virtual path.</para
           >
         </summary>
@@ -1110,11 +1260,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1157,6 +1311,8 @@
 
             
 
+            
+
              method is not actually a <see
              cref="T:System.Web.UI.UserControl" />
 
@@ -1164,8 +1320,12 @@
 
             
 
+            
+
              object; rather, it is a <see
              cref="T:System.Web.UI.PartialCachingControl" />
+
+            
 
             
 
@@ -1181,8 +1341,12 @@
 
             
 
+            
+
              event rather than in the <see
              cref="E:System.Web.UI.Control.Load" />
+
+            
 
             
 
@@ -1201,6 +1365,8 @@
 
             
 
+            
+
              object based on a specified type and constructor parameters.</para
           >
         </summary>
@@ -1209,6 +1375,8 @@
           <para
             >Returns the specified <see
              cref="T:System.Web.UI.UserControl" />
+
+            
 
             
 
@@ -1224,8 +1392,12 @@
 
           
 
+          
+
           An array of arguments that match in number, order, and type the parameters of the constructor to invoke. If <paramref
            name="parameters" />
+
+          
 
           
 
@@ -1259,6 +1431,8 @@
 
             
 
+            
+
              interface from an external file.</para
           >
         </summary>
@@ -1268,6 +1442,8 @@
         </returns>
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1305,6 +1481,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1315,8 +1493,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1353,6 +1535,8 @@
 
             
 
+            
+
              method for any transaction processing logic in which your page or user control participates.</para
           >
         </remarks>
@@ -1361,6 +1545,8 @@
           <para
             >Raises the <see
              cref="E:System.Web.UI.TemplateControl.CommitTransaction" />
+
+            
 
             
 
@@ -1376,8 +1562,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1412,6 +1602,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1422,8 +1614,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1460,8 +1656,12 @@
 
             
 
+            
+
              parameter contains a user control, such as you would find in an .ascx file. This string cannot contain any code, because the <see
              cref="M:System.Web.UI.TemplateControl.ParseControl(System.String)" />
+
+            
 
             
 
@@ -1480,6 +1680,8 @@
 
             
 
+            
+
              object on the Web Forms page or user control.</para
           >
         </summary>
@@ -1493,11 +1695,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1538,8 +1744,12 @@
 
             
 
+            
+
              parameter contains a user control (the contents of an .ascx file). This string cannot contain any code, because the <see
              cref="M:System.Web.UI.TemplateControl.ParseControl(System.String)" />
+
+            
 
             
 
@@ -1555,6 +1765,8 @@
 
             
 
+            
+
              parameter allows the <see
              cref="T:System.Web.UI.PageParserFilter" />
 
@@ -1562,8 +1774,12 @@
 
             
 
+            
+
              class to be ignored. The <see
              cref="T:System.Web.UI.PageParserFilter" />
+
+            
 
             
 
@@ -1577,6 +1793,8 @@
           <para
             >Parses an input string into a <see
              cref="T:System.Web.UI.Control" />
+
+            
 
             
 
@@ -1596,10 +1814,14 @@
 
           
 
+          
+
           A string that contains a user control.</param
         >
         <param name="ignoreParserFilter">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1636,6 +1858,8 @@
 
             
 
+            
+
              method is not intended for use from within your code.</para
           >
         </remarks>
@@ -1644,6 +1868,8 @@
           <para
             >Reads a string resource. The <see
              cref="M:System.Web.UI.TemplateControl.ReadStringResource" />
+
+            
 
             
 
@@ -1678,6 +1904,8 @@
 
             
 
+            
+
              method is not intended for use from within your code.</para
           >
         </remarks>
@@ -1686,6 +1914,8 @@
           <para
             >Reads a string resource. The <see
              cref="M:System.Web.UI.TemplateControl.ReadStringResource(System.Type)" />
+
+            
 
             
 
@@ -1705,8 +1935,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1750,6 +1984,8 @@
 
             
 
+            
+
              method is used by generated classes and is not intended for use from within your code.</para
           >
         </summary>
@@ -1760,10 +1996,14 @@
 
           
 
+          
+
           An object representing the pointer to the string resource.</param
         >
         <param name="maxResourceOffset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1800,8 +2040,12 @@
 
             
 
+            
+
              property indicates whether automatic events are supported. The <see
              cref="P:System.Web.UI.TemplateControl.SupportAutoEvents" />
+
+            
 
             
 
@@ -1815,6 +2059,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Web.UI.TemplateControl" />
+
+            
 
             
 
@@ -1861,6 +2107,8 @@
 
             
 
+            
+
              method is part of the <see
              cref="T:System.Web.UI.IFilterResolutionService" />
 
@@ -1868,8 +2116,12 @@
 
             
 
+            
+
              interface, which is specific to how a control uses device filters in a designer environment. When controls are parsed or persisted in the designer environment outside the context of a browser request, the <see
              cref="T:System.Web.UI.IFilterResolutionService" />
+
+            
 
             
 
@@ -1892,8 +2144,12 @@
 
             
 
+            
+
              is a parent of <paramref
              name="filter2" />
+
+            
 
             
 
@@ -1906,8 +2162,12 @@
 
             
 
+            
+
              is a parent of <paramref
              name="filter1" />
+
+            
 
             
 
@@ -1920,8 +2180,12 @@
 
             
 
+            
+
              and <paramref
              name="filter2" />
+
+            
 
             
 
@@ -1937,10 +2201,14 @@
 
           
 
+          
+
           A device filter name. </param
         >
         <param name="filter2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1976,6 +2244,8 @@
 
             
 
+            
+
              method is part of the <see
              cref="T:System.Web.UI.IFilterResolutionService" />
 
@@ -1983,8 +2253,12 @@
 
             
 
+            
+
              interface, which is specific to how a control uses device filters in a designer environment. When controls are parsed or persisted in the designer environment outside the context of a browser request, the <see
              cref="T:System.Web.UI.IFilterResolutionService" />
+
+            
 
             
 
@@ -2003,6 +2277,8 @@
         </returns>
         <param name="filterName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2039,8 +2315,12 @@
 
             
 
+            
+
              control. The <see
              cref="M:System.Web.UI.TemplateControl.WriteUTF8ResourceString(System.Web.UI.HtmlTextWriter,System.Int32,System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -2056,6 +2336,8 @@
 
           
 
+          
+
           The control to write to.</param
         >
         <param name="offset">
@@ -2065,8 +2347,12 @@
 
           
 
+          
+
           The starting position within <paramref
            name="value" />
+
+          
 
           
 
@@ -2081,8 +2367,12 @@
 
           
 
+          
+
           The number of characters within <paramref
            name="value" />
+
+          
 
           
 
@@ -2092,6 +2382,8 @@
         >
         <param name="fAsciiOnly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2134,8 +2426,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.UI.XPathBinder.Eval(System.Object,System.String)" />
+
+            
 
             
 
@@ -2148,8 +2444,12 @@
 
             
 
+            
+
              method to resolve the <see
              cref="T:System.Xml.XPath.IXPathNavigable" />
+
+            
 
             
 
@@ -2196,8 +2496,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.UI.XPathBinder.Eval(System.Object,System.String,System.String)" />
+
+            
 
             
 
@@ -2210,8 +2514,12 @@
 
             
 
+            
+
              method to resolve the <see
              cref="T:System.Xml.XPath.IXPathNavigable" />
+
+            
 
             
 
@@ -2230,6 +2538,8 @@
         </returns>
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2267,8 +2577,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.UI.XPathBinder.Eval(System.Object,System.String,System.Xml.IXmlNamespaceResolver)" />
+
+            
 
             
 
@@ -2281,8 +2595,12 @@
 
             
 
+            
+
              method to resolve the <see
              cref="T:System.Xml.XPath.IXPathNavigable" />
+
+            
 
             
 
@@ -2301,6 +2619,8 @@
         </returns>
         <param name="resolver">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2339,8 +2659,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.UI.XPathBinder.Eval(System.Object,System.String,System.String,System.Xml.IXmlNamespaceResolver)" />
+
+            
 
             
 
@@ -2353,8 +2677,12 @@
 
             
 
+            
+
              method to resolve the <see
              cref="T:System.Xml.XPath.IXPathNavigable" />
+
+            
 
             
 
@@ -2378,10 +2706,14 @@
 
           
 
+          
+
           A .NET Framework format string to apply to the result. </param
         >
         <param name="resolver">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2418,8 +2750,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.UI.XPathBinder.Select(System.Object,System.String)" />
+
+            
 
             
 
@@ -2432,8 +2768,12 @@
 
             
 
+            
+
              method to resolve the <see
              cref="T:System.Xml.XPath.IXPathNavigable" />
+
+            
 
             
 
@@ -2452,6 +2792,8 @@
 
             
 
+            
+
              interface.</para
           >
         </summary>
@@ -2460,6 +2802,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -2498,8 +2842,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.UI.XPathBinder.Select(System.Object,System.String,System.Xml.IXmlNamespaceResolver)" />
+
+            
 
             
 
@@ -2512,8 +2860,12 @@
 
             
 
+            
+
              method to resolve the <see
              cref="T:System.Xml.XPath.IXPathNavigable" />
+
+            
 
             
 
@@ -2532,6 +2884,8 @@
 
             
 
+            
+
              interface.</para
           >
         </summary>
@@ -2545,11 +2899,15 @@
 
             
 
+            
+
              node list. </para
           >
         </returns>
         <param name="resolver">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

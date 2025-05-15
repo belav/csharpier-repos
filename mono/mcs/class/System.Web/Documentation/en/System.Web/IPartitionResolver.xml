@@ -25,6 +25,8 @@
 
         
 
+        
+
          interface and the <see
          cref="M:System.Web.IPartitionResolver.Initialize" />
 
@@ -32,8 +34,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Web.IPartitionResolver.ResolvePartition(System.Object)" />
+
+        
 
         
 
@@ -53,11 +59,15 @@
 
         
 
+        
+
          of the configuration file with the partitionResolverType attribute. If a value is specified for the partitionResolverType attribute, the sqlConnectionString and stateConnectionString attributes are ignored.</para
       >
       <para
         >The partition resolution configuration can also be set programmatically using the <see
          cref="P:System.Web.Configuration.SessionStateSection.PartitionResolverType" />
+
+        
 
         
 
@@ -70,6 +80,8 @@
 
         
 
+        
+
          property is specified, the <see
          cref="P:System.Web.Configuration.SessionStateSection.SqlConnectionString" />
 
@@ -77,8 +89,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.Configuration.SessionStateSection.StateConnectionString" />
+
+        
 
         
 
@@ -114,8 +130,12 @@
 
             
 
+            
+
              method to provide any initialization code that is needed for your custom partition resolution. The <see
              cref="T:System.Web.SessionState.SessionStateModule" />
+
+            
 
             
 
@@ -128,8 +148,12 @@
 
             
 
+            
+
              interface, calls the <see
              cref="M:System.Web.IPartitionResolver.Initialize" />
+
+            
 
             
 
@@ -167,8 +191,12 @@
 
             
 
+            
+
              parameter of the <see
              cref="M:System.Web.IPartitionResolver.ResolvePartition(System.Object)" />
+
+            
 
             
 
@@ -181,8 +209,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Web.SessionState.HttpSessionState.SessionID" />
+
+            
 
             
 
@@ -201,6 +233,8 @@
         </returns>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

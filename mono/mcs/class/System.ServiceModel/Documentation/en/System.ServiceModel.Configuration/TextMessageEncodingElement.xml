@@ -33,11 +33,15 @@
 
         
 
+        
+
          class represents the configuration element that specifies the character encoding and message versioning used for binary-based XML messages. This is most efficient but least interoperable of the encoding options. </para
       >
       <para
         >The <see
          cref="T:System.ServiceModel.Configuration.MtomMessageEncodingElement" />
+
+        
 
         
 
@@ -70,6 +74,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Configuration.TextMessageEncodingElement" />
+
+            
 
             
 
@@ -129,6 +135,8 @@
           <para
             >Gets the <see
              cref="T:System.Type" />
+
+            
 
             
 

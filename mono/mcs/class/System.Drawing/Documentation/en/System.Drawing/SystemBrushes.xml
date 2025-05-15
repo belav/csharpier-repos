@@ -25,8 +25,12 @@
 
         
 
+        
+
          class is a <see
          cref="T:System.Drawing.SolidBrush" />
+
+        
 
         
 
@@ -54,6 +58,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.SolidBrush" />
+
+            
 
             
 
@@ -90,6 +96,8 @@
 
             
 
+            
+
              that is the color of the background of the active window's title bar.</para
           >
         </summary>
@@ -116,6 +124,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.SolidBrush" />
+
+            
 
             
 
@@ -155,6 +165,8 @@
 
             
 
+            
+
              that is the color of the application workspace. </para
           >
         </summary>
@@ -184,6 +196,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.SolidBrush" />
+
+            
 
             
 
@@ -222,6 +236,8 @@
 
             
 
+            
+
              that is the highlight color of a 3-D element. </para
           >
         </summary>
@@ -255,6 +271,8 @@
 
             
 
+            
+
              that is the shadow color of a 3-D element. </para
           >
         </summary>
@@ -274,6 +292,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.SolidBrush" />
+
+            
 
             
 
@@ -313,6 +333,8 @@
 
             
 
+            
+
              that is the shadow color of a 3-D element. </para
           >
         </summary>
@@ -342,6 +364,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.SolidBrush" />
+
+            
 
             
 
@@ -381,6 +405,8 @@
 
             
 
+            
+
              that is the light color of a 3-D element. </para
           >
         </summary>
@@ -410,6 +436,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.SolidBrush" />
+
+            
 
             
 
@@ -446,6 +474,8 @@
 
             
 
+            
+
              that is the color of text in a 3-D element.</para
           >
         </summary>
@@ -469,6 +499,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.SolidBrush" />
+
+            
 
             
 
@@ -507,8 +539,12 @@
 
             
 
+            
+
              from the specified <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -527,11 +563,15 @@
 
             
 
+            
+
              this method creates.</para
           >
         </returns>
         <param name="c">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -544,8 +584,12 @@
 
           
 
+          
+
            structure from which to create the <see
            cref="T:System.Drawing.Brush" />
+
+          
 
           
 
@@ -584,6 +628,8 @@
 
             
 
+            
+
              that is the lightest color in the color gradient of an active window's title bar.</para
           >
         </summary>
@@ -609,6 +655,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.SolidBrush" />
+
+            
 
             
 
@@ -644,6 +692,8 @@
 
             
 
+            
+
              that is the color of dimmed text.</para
           >
         </summary>
@@ -669,6 +719,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.SolidBrush" />
+
+            
 
             
 
@@ -708,6 +760,8 @@
 
             
 
+            
+
              that is the color of the text of selected items. </para
           >
         </summary>
@@ -734,6 +788,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.SolidBrush" />
+
+            
 
             
 
@@ -770,6 +826,8 @@
 
             
 
+            
+
              that is the color of an inactive window's border.</para
           >
         </summary>
@@ -796,6 +854,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.SolidBrush" />
+
+            
 
             
 
@@ -835,6 +895,8 @@
 
             
 
+            
+
              that is the color of the text in an inactive window's title bar.</para
           >
         </summary>
@@ -854,6 +916,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.SolidBrush" />
+
+            
 
             
 
@@ -890,6 +954,8 @@
 
             
 
+            
+
              that is the color of the text of a ToolTip.</para
           >
         </summary>
@@ -909,6 +975,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.SolidBrush" />
+
+            
 
             
 
@@ -945,6 +1013,8 @@
 
             
 
+            
+
              that is the color of the background of a menu bar.</para
           >
         </summary>
@@ -970,6 +1040,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.SolidBrush" />
+
+            
 
             
 
@@ -1002,6 +1074,8 @@
 
             
 
+            
+
              that is the color of a menu's text.</para
           >
         </summary>
@@ -1024,6 +1098,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.SolidBrush" />
+
+            
 
             
 
@@ -1052,6 +1128,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.SolidBrush" />
+
+            
 
             
 
@@ -1091,6 +1169,8 @@
 
             
 
+            
+
              that is the color of a window frame.</para
           >
         </summary>
@@ -1113,6 +1193,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.SolidBrush" />
+
+            
 
             
 

@@ -23,8 +23,12 @@
 
         
 
+        
+
          object in the <see
          cref="T:System.Web.UI.Design.ClientScriptItemCollection" />
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
          class to set or examine client script elements that are contained in a Web Forms document on the design surface. Retrieve the collection of client script elements that are contained within the Web document by using the <see
          cref="M:System.Web.UI.Design.WebFormsRootDesigner.GetClientScriptsInDocument" />
+
+        
 
         
 
@@ -54,11 +62,15 @@
 
         
 
+        
+
          method.</para
       >
       <para
         >To add client script elements at run time, use the <see
          cref="T:System.Web.UI.ClientScriptManager" />
+
+        
 
         
 
@@ -75,8 +87,12 @@
 
           
 
+          
+
            class represents script elements at design time that execute on the client. Because the script elements that are generated for <see
            cref="T:System.Web.UI.Design.ClientScriptItemCollection" />
+
+          
 
           
 
@@ -115,8 +131,12 @@
 
             
 
+            
+
              is null (Nothing in Visual Basic) or does not contain any elements, the constructor initializes an empty <see
              cref="T:System.Web.UI.Design.ClientScriptItemCollection" />
+
+            
 
             
 
@@ -129,8 +149,12 @@
 
             
 
+            
+
              array are used to set the items for the <see
              cref="T:System.Web.UI.Design.ClientScriptItemCollection" />
+
+            
 
             
 
@@ -146,8 +170,12 @@
 
             
 
+            
+
              constructor is typically used in classes that are derived from the <see
              cref="T:System.Web.UI.Design.WebFormsRootDesigner" />
+
+            
 
             
 
@@ -160,8 +188,12 @@
 
             
 
+            
+
              method to return a <see
              cref="T:System.Web.UI.Design.ClientScriptItemCollection" />
+
+            
 
             
 
@@ -180,6 +212,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -190,8 +224,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Web.UI.Design.ClientScriptItem" />
+
+          
 
           
 

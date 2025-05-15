@@ -22,6 +22,8 @@
 
         
 
+        
+
          enumeration is used in the <see
          cref="T:System.ComponentModel.Design.DesignerActionUIStateChangeEventArgs" />
 
@@ -29,8 +31,12 @@
 
         
 
+        
+
          class and is associated with the <see
          cref="E:System.ComponentModel.Design.DesignerActionUIService.DesignerActionUIStateChange" />
+
+        
 
         
 

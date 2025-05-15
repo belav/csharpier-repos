@@ -28,15 +28,15 @@
 
         
 
+        
+
         .
              </para
       >
       <format type="text/html">
         <table width="100%">
           <tr>
-            <td style="color:red"
->red</td
-            >
+            <td style="color:red">red</td>
             <td style="color:blue">blue</td>
             <td style="color:green">green</td>
           </tr>

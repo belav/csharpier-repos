@@ -26,6 +26,8 @@
 
         
 
+        
+
          object is used to allow or deny access. These values are not flags, and they cannot be combined.</para
       >
     </summary>
@@ -57,6 +59,8 @@
 
             
 
+            
+
              object is used to allow access to a secured object.</para
           >
         </summary>
@@ -83,6 +87,8 @@
           <para
             >The <see
              cref="T:System.Security.AccessControl.AccessRule" />
+
+            
 
             
 

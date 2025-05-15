@@ -77,11 +77,15 @@
 
             
 
+            
+
              class with the URL that determines membership.</para
           >
         </summary>
         <param name="url">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -123,6 +127,8 @@
 
             
 
+            
+
              evidence object.</para
           >
         </remarks>
@@ -136,6 +142,8 @@
         </returns>
         <param name="evidence">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -206,6 +214,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -214,6 +224,8 @@
           <para
             >true if the URL from the specified object is equivalent to the URL contained in the current <see
              cref="T:System.Security.Policy.UrlMembershipCondition" />
+
+            
 
             
 
@@ -229,8 +241,12 @@
 
           
 
+          
+
           The object to compare to the current <see
            cref="T:System.Security.Policy.UrlMembershipCondition" />
+
+          
 
           
 
@@ -269,6 +285,8 @@
         </summary>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -313,10 +331,14 @@
 
           
 
+          
+
           The XML encoding to use to reconstruct the security object. </param
         >
         <param name="level">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -443,6 +465,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -452,6 +476,8 @@
         </returns>
         <param name="level">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

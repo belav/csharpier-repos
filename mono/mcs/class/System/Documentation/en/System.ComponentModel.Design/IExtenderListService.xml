@@ -26,6 +26,8 @@
 
         
 
+        
+
          for the extenders each provides. By implementing this interface on a component site, a container can override the list of providers.</para
       >
     </remarks>
@@ -65,6 +67,8 @@
           <para
             >An array of type <see
              cref="T:System.ComponentModel.IExtenderProvider" />
+
+            
 
             
 

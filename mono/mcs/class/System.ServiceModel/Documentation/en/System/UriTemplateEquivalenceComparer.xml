@@ -30,8 +30,12 @@
 
         
 
+        
+
          instances are compared using reference equality by default. The <see
          cref="T:System.UriTemplateEquivalenceComparer" />
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
          instead of the default reference equality check. This class is useful when you wish to compare two <see
          cref="T:System.UriTemplate" />
+
+        
 
         
 
@@ -59,6 +67,8 @@
       <para
         >A class used to compare <see
          cref="T:System.UriTemplate" />
+
+        
 
         
 
@@ -87,6 +97,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.UriTemplateEquivalenceComparer" />
+
+            
 
             
 
@@ -125,6 +137,8 @@
 
             
 
+            
+
              instances.</para
           >
         </remarks>
@@ -133,6 +147,8 @@
           <para
             >Compares two <see
              cref="T:System.UriTemplate" />
+
+            
 
             
 
@@ -151,6 +167,8 @@
 
             
 
+            
+
              instances are equivalent.</para
           >
         </returns>
@@ -161,8 +179,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.UriTemplate" />
+
+          
 
           
 
@@ -177,8 +199,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.UriTemplate" />
+
+          
 
           
 
@@ -215,6 +241,8 @@
 
             
 
+            
+
              instance.</para
           >
         </remarks>
@@ -223,6 +251,8 @@
           <para
             >Gets a hash code for the specified <see
              cref="T:System.UriTemplate" />
+
+            
 
             
 
@@ -242,8 +272,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.UriTemplate" />
+
+          
 
           
 

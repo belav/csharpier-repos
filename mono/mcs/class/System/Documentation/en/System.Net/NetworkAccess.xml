@@ -42,6 +42,8 @@
 
         
 
+        
+
          enumeration is used with the <see
          cref="T:System.Net.WebPermission" />
 
@@ -49,8 +51,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Net.SocketPermission" />
+
+        
 
         
 

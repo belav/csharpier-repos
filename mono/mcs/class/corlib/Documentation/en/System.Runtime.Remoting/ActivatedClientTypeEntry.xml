@@ -37,6 +37,8 @@
 
         
 
+        
+
          and it must be registered on the client by using the <see
          cref="M:System.Runtime.Remoting.RemotingConfiguration.RegisterActivatedClientType(System.Type,System.String)" />
 
@@ -44,8 +46,12 @@
 
         
 
+        
+
          method. To obtain a proxy for a new instance of the client-activated object the client must first register a channel with <see
          cref="T:System.Runtime.Remoting.Channels.ChannelServices" />
+
+        
 
         
 
@@ -61,8 +67,12 @@
 
         
 
+        
+
          method. By calling <see
          cref="M:System.Runtime.Remoting.RemotingConfiguration.RegisterActivatedClientType(System.Type,System.String)" />
+
+        
 
         
 
@@ -75,8 +85,12 @@
 
         
 
+        
+
          method to create a new instance of the client-activated object, you must supply the remote application's URL as a parameter, so no prior registration on the client end is necessary. To supply the <see
          cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
+
+        
 
         
 
@@ -89,6 +103,8 @@
 
         
 
+        
+
          class.</para
       >
       <para
@@ -96,6 +112,8 @@
          type="text/html">
           <a href="E90D0C64-00DA-4080-AE78-A6C558825C25">[&lt;topic://cpconActivation&gt;]</a>
         </format>
+
+        
 
         
 
@@ -141,6 +159,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </remarks>
@@ -154,8 +174,12 @@
 
             
 
+            
+
              class with the given <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -171,8 +195,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -182,6 +210,8 @@
         >
         <param name="appUrl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -224,11 +254,15 @@
 
             
 
+            
+
              class with the given type name, assembly name, and application URL.</para
           >
         </summary>
         <param name="typeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -243,10 +277,14 @@
 
           
 
+          
+
           The assembly name of the client activated type. </param
         >
         <param name="appUrl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -308,8 +346,12 @@
 
             
 
+            
+
              attributes provide context properties that, when added to a <see
              cref="T:System.Runtime.Remoting.Contexts.Context" />
+
+            
 
             
 
@@ -349,6 +391,8 @@
 
             
 
+            
+
              of the client-activated type.</para
           >
         </summary>
@@ -382,6 +426,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -390,6 +436,8 @@
           <para
             >The type name, assembly name, and application URL of the client-activated type as a <see
              cref="T:System.String" />
+
+            
 
             
 

@@ -43,6 +43,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -56,8 +58,12 @@
 
         
 
+        
+
          and optionally its mapping to <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -69,6 +75,8 @@
             >Configuring Parameters and Parameter Data Types (ADO.NET)</a
           >
         </format>
+
+        
 
         
 
@@ -91,6 +99,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.SqlClient.SqlParameter" />
+
+            
 
             
 
@@ -127,8 +137,12 @@
 
             
 
+            
+
              are inferred from the value of the <paramref
              name="dbType" />
+
+            
 
             
 
@@ -147,11 +161,15 @@
 
             
 
+            
+
              class that uses the parameter name and the data type.</para
           >
         </summary>
         <param name="parameterName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -166,8 +184,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.SqlDbType" />
+
+          
 
           
 
@@ -203,8 +225,12 @@
 
             
 
+            
+
              in the <paramref
              name="value" />
+
+            
 
             
 
@@ -217,8 +243,12 @@
 
             
 
+            
+
              is inferred from the Microsoft .NET Framework type of the <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -234,8 +264,12 @@
 
             
 
+            
+
              constructor to specify integer parameter values. Because this overload takes a <paramref
              name="value" />
+
+            
 
             
 
@@ -248,8 +282,12 @@
 
             
 
+            
+
             , you must convert the integral value to an <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -266,8 +304,12 @@
 
             
 
+            
+
             , <paramref
              name="SqlDbType" />
+
+            
 
             
 
@@ -286,8 +328,12 @@
 
             
 
+            
+
              class that uses the parameter name and a value of the new <see
              cref="T:System.Data.SqlClient.SqlParameter" />
+
+            
 
             
 
@@ -303,10 +349,14 @@
 
           
 
+          
+
           The name of the parameter to map. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -319,8 +369,12 @@
 
           
 
+          
+
            that is the value of the <see
            cref="T:System.Data.SqlClient.SqlParameter" />
+
+          
 
           
 
@@ -357,8 +411,12 @@
 
             
 
+            
+
              parameter if it is not explicitly set in the <paramref
              name="size" />
+
+            
 
             
 
@@ -377,8 +435,12 @@
 
             
 
+            
+
              class that uses the parameter name, the <see
              cref="T:System.Data.SqlDbType" />
+
+            
 
             
 
@@ -394,10 +456,14 @@
 
           
 
+          
+
           The name of the parameter to map. </param
         >
         <param name="dbType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -410,10 +476,14 @@
 
           
 
+          
+
            values. </param
         >
         <param name="size">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -451,8 +521,12 @@
 
             
 
+            
+
              parameter if it is not explicitly set in the <paramref
              name="size" />
+
+            
 
             
 
@@ -471,8 +545,12 @@
 
             
 
+            
+
              class that uses the parameter name, the <see
              cref="T:System.Data.SqlDbType" />
+
+            
 
             
 
@@ -488,6 +566,8 @@
 
           
 
+          
+
           The name of the parameter to map. </param
         >
         <param name="dbType">
@@ -497,8 +577,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.SqlDbType" />
+
+          
 
           
 
@@ -513,10 +597,14 @@
 
           
 
+          
+
           The length of the parameter. </param
         >
         <param name="sourceColumn">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -529,6 +617,8 @@
 
           
 
+          
+
           ) if this <see
            cref="T:System.Data.SqlClient.SqlParameter" />
 
@@ -536,8 +626,12 @@
 
           
 
+          
+
            is used in a call to <see
            cref="Overload:System.Data.Common.DbDataAdapter.Update" />
+
+          
 
           
 
@@ -581,8 +675,12 @@
 
             
 
+            
+
              are inferred from the value of the <paramref
              name="dbType" />
+
+            
 
             
 
@@ -595,8 +693,12 @@
 
             
 
+            
+
              and <paramref
              name="precision" />
+
+            
 
             
 
@@ -615,6 +717,8 @@
 
             
 
+            
+
              class that uses the parameter name, the type of the parameter, the size of the parameter, a <see
              cref="T:System.Data.ParameterDirection" />
 
@@ -622,8 +726,12 @@
 
             
 
+            
+
             , the precision of the parameter, the scale of the parameter, the source column, a <see
              cref="T:System.Data.DataRowVersion" />
+
+            
 
             
 
@@ -639,6 +747,8 @@
 
           
 
+          
+
           The name of the parameter to map. </param
         >
         <param name="dbType">
@@ -648,8 +758,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.SqlDbType" />
+
+          
 
           
 
@@ -664,6 +778,8 @@
 
           
 
+          
+
           The length of the parameter. </param
         >
         <param name="direction">
@@ -673,8 +789,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.ParameterDirection" />
+
+          
 
           
 
@@ -689,6 +809,8 @@
 
           
 
+          
+
           true if the value of the field can be null; otherwise false. </param
         >
         <param name="precision">
@@ -698,8 +820,12 @@
 
           
 
+          
+
           The total number of digits to the left and right of the decimal point to which <see
            cref="P:System.Data.SqlClient.SqlParameter.Value" />
+
+          
 
           
 
@@ -714,8 +840,12 @@
 
           
 
+          
+
           The total number of decimal places to which <see
            cref="P:System.Data.SqlClient.SqlParameter.Value" />
+
+          
 
           
 
@@ -730,8 +860,12 @@
 
           
 
+          
+
           The name of the source column (<see
            cref="P:System.Data.SqlClient.SqlParameter.SourceColumn" />
+
+          
 
           
 
@@ -744,8 +878,12 @@
 
           
 
+          
+
            is used in a call to <see
            cref="Overload:System.Data.Common.DbDataAdapter.Update" />
+
+          
 
           
 
@@ -760,8 +898,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.DataRowVersion" />
+
+          
 
           
 
@@ -776,6 +918,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
 
@@ -783,8 +927,12 @@
 
           
 
+          
+
            that is the value of the <see
            cref="T:System.Data.SqlClient.SqlParameter" />
+
+          
 
           
 
@@ -838,8 +986,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Data.SqlClient.SqlParameter.Precision" />
+
+            
 
             
 
@@ -852,6 +1004,8 @@
 
             
 
+            
+
              parameter if they are not explicitly set in the <paramref
              name="size" />
 
@@ -859,8 +1013,12 @@
 
             
 
+            
+
              and <paramref
              name="precision" />
+
+            
 
             
 
@@ -879,8 +1037,12 @@
 
             
 
+            
+
              class that uses the parameter name, the type of the parameter, the length of the parameter the direction, the precision, the scale, the name of the source column, one of the <see
              cref="T:System.Data.DataRowVersion" />
+
+            
 
             
 
@@ -896,6 +1058,8 @@
 
           
 
+          
+
           The name of the parameter to map.</param
         >
         <param name="dbType">
@@ -905,8 +1069,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.SqlDbType" />
+
+          
 
           
 
@@ -921,6 +1089,8 @@
 
           
 
+          
+
           The length of the parameter.</param
         >
         <param name="direction">
@@ -930,8 +1100,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.ParameterDirection" />
+
+          
 
           
 
@@ -946,8 +1120,12 @@
 
           
 
+          
+
           The total number of digits to the left and right of the decimal point to which <see
            cref="P:System.Data.SqlClient.SqlParameter.Value" />
+
+          
 
           
 
@@ -962,8 +1140,12 @@
 
           
 
+          
+
           The total number of decimal places to which <see
            cref="P:System.Data.SqlClient.SqlParameter.Value" />
+
+          
 
           
 
@@ -978,8 +1160,12 @@
 
           
 
+          
+
           The name of the source column (<see
            cref="P:System.Data.SqlClient.SqlParameter.SourceColumn" />
+
+          
 
           
 
@@ -992,8 +1178,12 @@
 
           
 
+          
+
            is used in a call to <see
            cref="Overload:System.Data.Common.DbDataAdapter.Update" />
+
+          
 
           
 
@@ -1008,8 +1198,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.DataRowVersion" />
+
+          
 
           
 
@@ -1024,10 +1218,14 @@
 
           
 
+          
+
           true if the source column is nullable; false if it is not.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1040,8 +1238,12 @@
 
           
 
+          
+
            that is the value of the <see
            cref="T:System.Data.SqlClient.SqlParameter" />
+
+          
 
           
 
@@ -1056,6 +1258,8 @@
 
           
 
+          
+
           The name of the database where the schema collection for this XML instance is located.</param
         >
         <param name="xmlSchemaCollectionOwningSchema">
@@ -1065,10 +1269,14 @@
 
           
 
+          
+
           The owning relational schema where the schema collection for this XML instance is located.</param
         >
         <param name="xmlSchemaCollectionName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1108,6 +1316,8 @@
 
             
 
+            
+
              object that defines how string comparisons should be performed for this parameter.</para
           >
         </summary>
@@ -1135,8 +1345,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Data.SqlClient.SqlParameter.DbType" />
+
+            
 
             
 
@@ -1149,6 +1363,8 @@
 
             
 
+            
+
              changes the <see
              cref="P:System.Data.SqlClient.SqlParameter.SqlDbType" />
 
@@ -1156,8 +1372,12 @@
 
             
 
+            
+
              to a supporting <see
              cref="T:System.Data.SqlDbType" />
+
+            
 
             
 
@@ -1173,10 +1393,14 @@
 
             
 
+            
+
              member. For more information, see <format
              type="text/html">
               <a href="f21e6aba-b76d-46ad-a83e-2ad8e0af1e12">Using Parameters with a DataAdapter</a>
             </format>
+
+            
 
             
 
@@ -1190,6 +1414,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Data.SqlDbType" />
+
+            
 
             
 
@@ -1226,6 +1452,8 @@
 
             
 
+            
+
              is output, and execution of the associated <see
              cref="T:System.Data.SqlClient.SqlCommand" />
 
@@ -1233,8 +1461,12 @@
 
             
 
+            
+
              does not return a value, the <see
              cref="T:System.Data.SqlClient.SqlParameter" />
+
+            
 
             
 
@@ -1250,8 +1482,12 @@
 
             
 
+            
+
              cannot be accessed until you close the <see
              cref="T:System.Data.SqlClient.SqlDataReader" />
+
+            
 
             
 
@@ -1294,6 +1530,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -1302,6 +1540,8 @@
           <para
             >Gets or sets a value that indicates whether the parameter accepts null values. <see
              cref="P:System.Data.SqlClient.SqlParameter.IsNullable" />
+
+            
 
             
 
@@ -1337,6 +1577,8 @@
           <para
             >The locale identifies conventions and language for a particular geographical region. The codepage used to encode a specific string (the character set) is based on the locale used by that string or the environment that produced it. This property sets (for input parameters) or gets (for output parameters) the locale to be attached to a string when exchanging data with the server. This property is typically used together with the <see
              cref="P:System.Data.SqlClient.SqlParameter.CompareInfo" />
+
+            
 
             
 
@@ -1379,6 +1621,8 @@
 
             
 
+            
+
              property.</para
           >
         </summary>
@@ -1415,6 +1659,8 @@
 
             
 
+            
+
              is specified in the form @paramname. You must set <see
              cref="P:System.Data.SqlClient.SqlParameter.ParameterName" />
 
@@ -1422,8 +1668,12 @@
 
             
 
+            
+
              before executing a <see
              cref="T:System.Data.SqlClient.SqlCommand" />
+
+            
 
             
 
@@ -1437,6 +1687,8 @@
           <para
             >Gets or sets the name of the <see
              cref="T:System.Data.SqlClient.SqlParameter" />
+
+            
 
             
 
@@ -1470,8 +1722,12 @@
 
             
 
+            
+
              property is used by parameters that have a <see
              cref="T:System.Data.SqlDbType" />
+
+            
 
             
 
@@ -1487,8 +1743,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Data.SqlClient.SqlParameter.Scale" />
+
+            
 
             
 
@@ -1500,6 +1760,8 @@
             <para
               >Use of this property to coerce data passed to the database is not supported. To round, truncate, or otherwise coerce data before passing it to the database, use the <see
                cref="T:System.Math" />
+
+              
 
               
 
@@ -1517,6 +1779,8 @@
 
               
 
+              
+
                or <see
                cref="P:System.Data.SqlClient.SqlParameter.Scale" />
 
@@ -1524,8 +1788,12 @@
 
               
 
+              
+
                of <see
                cref="T:System.Decimal" />
+
+              
 
               
 
@@ -1538,8 +1806,12 @@
 
               
 
+              
+
                and <see
                cref="P:System.Data.SqlClient.SqlParameter.Scale" />
+
+              
 
               
 
@@ -1552,8 +1824,12 @@
 
               
 
+              
+
                values before setting the parameter value. When you use .NET Framework version 1.1 or a later version, an exception is thrown if a <see
                cref="T:System.Decimal" />
+
+              
 
               
 
@@ -1566,6 +1842,8 @@
 
               
 
+              
+
               . <see
                cref="P:System.Data.SqlClient.SqlParameter.Scale" />
 
@@ -1573,8 +1851,12 @@
 
               
 
+              
+
                values that exceed the <see
                cref="T:System.Decimal" />
+
+              
 
               
 
@@ -1589,6 +1871,8 @@
           <para
             >Gets or sets the maximum number of digits used to represent the <see
              cref="P:System.Data.SqlClient.SqlParameter.Value" />
+
+            
 
             
 
@@ -1629,6 +1913,8 @@
 
             
 
+            
+
              and <see
              cref="P:System.Data.SqlClient.SqlParameter.SqlDbType" />
 
@@ -1636,8 +1922,12 @@
 
             
 
+            
+
              properties of the <see
              cref="T:System.Data.SqlClient.SqlParameter" />
+
+            
 
             
 
@@ -1651,6 +1941,8 @@
           <para
             >Resets the type associated with this <see
              cref="T:System.Data.SqlClient.SqlParameter" />
+
+            
 
             
 
@@ -1682,6 +1974,8 @@
 
             
 
+            
+
              and <see
              cref="P:System.Data.SqlClient.SqlParameter.SqlDbType" />
 
@@ -1689,8 +1983,12 @@
 
             
 
+            
+
              properties of the <see
              cref="T:System.Data.SqlClient.SqlParameter" />
+
+            
 
             
 
@@ -1704,6 +2002,8 @@
           <para
             >Resets the type associated with this <see
              cref="T:System.Data.SqlClient.SqlParameter" />
+
+            
 
             
 
@@ -1733,8 +2033,12 @@
 
             
 
+            
+
              property is used by parameters that have a <see
              cref="T:System.Data.SqlDbType" />
+
+            
 
             
 
@@ -1751,12 +2055,16 @@
 
               
 
+              
+
                property is not explicitly specified and the data on the server does not fit in scale 0 (the default). </para
             >
           </block>
           <para
             >You do not need to specify values for the <see
              cref="P:System.Data.SqlClient.SqlParameter.Precision" />
+
+            
 
             
 
@@ -1769,12 +2077,16 @@
 
             
 
+            
+
              properties for input parameters, as they can be inferred from the parameter value. Precision and Scale are required for output parameters and for scenarios where you need to specify complete metadata for a parameter without indicating a value, such as specifying a null value with a specific precision and scale.</para
           >
           <block subset="none" type="note">
             <para
               >Use of this property to coerce data passed to the database is not supported. To round, truncate, or otherwise coerce data before passing it to the database, use the <see
                cref="T:System.Math" />
+
+              
 
               
 
@@ -1792,6 +2104,8 @@
 
               
 
+              
+
                or <see
                cref="P:System.Data.SqlClient.SqlParameter.Scale" />
 
@@ -1799,8 +2113,12 @@
 
               
 
+              
+
                of <see
                cref="T:System.Decimal" />
+
+              
 
               
 
@@ -1813,8 +2131,12 @@
 
               
 
+              
+
                and <see
                cref="T:System.Data.SqlClient.SqlParameter" />
+
+              
 
               
 
@@ -1827,6 +2149,8 @@
 
               
 
+              
+
                values before setting the parameter value. <see
                cref="P:System.Data.SqlClient.SqlParameter.Scale" />
 
@@ -1834,8 +2158,12 @@
 
               
 
+              
+
                values that exceed the <see
                cref="T:System.Decimal" />
+
+              
 
               
 
@@ -1850,6 +2178,8 @@
           <para
             >Gets or sets the number of decimal places to which <see
              cref="P:System.Data.SqlClient.SqlParameter.Value" />
+
+            
 
             
 
@@ -1889,8 +2219,12 @@
 
             
 
+            
+
             . For character types, the size specified with <see
              cref="P:System.Data.SqlClient.SqlParameter.Size" />
+
+            
 
             
 
@@ -1906,6 +2240,8 @@
 
             
 
+            
+
              property is used for binary and string types. For parameters of type SqlType.String, Size means length in Unicode characters. For parameters of type SqlType.Xml, Size is ignored.</para
           >
           <para
@@ -1916,8 +2252,12 @@
 
             
 
+            
+
              property refers to the number of bytes. For Unicode string data, <see
              cref="P:System.Data.SqlClient.SqlParameter.Size" />
+
+            
 
             
 
@@ -1933,8 +2273,12 @@
 
             
 
+            
+
              describes the maximum amount of data to transmit to the server. For example, for a Unicode string value, <see
              cref="P:System.Data.SqlClient.SqlParameter.Size" />
+
+            
 
             
 
@@ -1952,6 +2296,8 @@
 
             
 
+            
+
              is ignored. It can be retrieved for informational purposes, and returns the maximum amount of bytes the provider uses when transmitting the value of the parameter to the server.</para
           >
           <para
@@ -1959,6 +2305,8 @@
              type="text/html">
               <a href="c449365b-470b-4edb-9d61-8353149f5531">SqlClient Streaming Support</a>
             </format>
+
+            
 
             
 
@@ -1996,8 +2344,12 @@
 
             
 
+            
+
              is set to anything other than an empty string, the value of the parameter is retrieved from the column with the <see
              cref="P:System.Data.SqlClient.SqlParameter.SourceColumn" />
+
+            
 
             
 
@@ -2010,8 +2362,12 @@
 
             
 
+            
+
              is set to Input, the value is taken from the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2024,8 +2380,12 @@
 
             
 
+            
+
              is set to Output, the value is taken from the data source. A <see
              cref="P:System.Data.SqlClient.SqlParameter.Direction" />
+
+            
 
             
 
@@ -2041,10 +2401,14 @@
 
             
 
+            
+
              property, see <format
              type="text/html">
               <a href="f21e6aba-b76d-46ad-a83e-2ad8e0af1e12">Using Parameters with a DataAdapter</a>
             </format>
+
+            
 
             
 
@@ -2061,6 +2425,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2069,6 +2435,8 @@
           <para
             >Gets or sets the name of the source column mapped to the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2107,8 +2475,12 @@
 
             
 
+            
+
              is used by the <see
              cref="T:System.Data.SqlClient.SqlCommandBuilder" />
+
+            
 
             
 
@@ -2121,8 +2493,12 @@
 
             
 
+            
+
              is limited to developers inheriting from <see
              cref="T:System.Data.SqlClient.SqlCommandBuilder" />
+
+            
 
             
 
@@ -2137,8 +2513,12 @@
 
             
 
+            
+
              uses this property to determine whether the source column is nullable, and sets this property to true if it is nullable, and false if it is not. When <see
              cref="T:System.Data.SqlClient.SqlCommandBuilder" />
+
+            
 
             
 
@@ -2151,8 +2531,12 @@
 
             
 
+            
+
              for each parameter. If the property is true, <see
              cref="T:System.Data.SqlClient.SqlCommandBuilder" />
+
+            
 
             
 
@@ -2170,8 +2554,12 @@
 
             
 
+            
+
              for the field is false, <see
              cref="T:System.Data.SqlClient.SqlCommandBuilder" />
+
+            
 
             
 
@@ -2187,6 +2575,8 @@
           <para
             >Sets or gets a value which indicates whether the source column is nullable. This allows <see
              cref="T:System.Data.SqlClient.SqlCommandBuilder" />
+
+            
 
             
 
@@ -2219,8 +2609,12 @@
 
             
 
+            
+
              used by the DataRow.Item property, or one of the DataRow.GetChildRows methods of the <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -2234,6 +2628,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Data.DataRowVersion" />
+
+            
 
             
 
@@ -2268,8 +2664,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Data.SqlClient.SqlParameter.DbType" />
+
+            
 
             
 
@@ -2282,6 +2682,8 @@
 
             
 
+            
+
              changes the <see
              cref="P:System.Data.SqlClient.SqlParameter.SqlDbType" />
 
@@ -2289,8 +2691,12 @@
 
             
 
+            
+
              to a supporting <see
              cref="T:System.Data.SqlDbType" />
+
+            
 
             
 
@@ -2306,10 +2712,14 @@
 
             
 
+            
+
              member. For more information, see <format
              type="text/html">
               <a href="f21e6aba-b76d-46ad-a83e-2ad8e0af1e12">Using Parameters with a DataAdapter</a>
             </format>
+
+            
 
             
 
@@ -2327,6 +2737,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2335,6 +2747,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Data.SqlDbType" />
+
+            
 
             
 
@@ -2386,6 +2800,8 @@
 
             
 
+            
+
              that is sent to the server. For output and return value parameters, the value is set on completion of the <see
              cref="T:System.Data.SqlClient.SqlCommand" />
 
@@ -2393,8 +2809,12 @@
 
             
 
+            
+
              and after the <see
              cref="T:System.Data.SqlClient.SqlDataReader" />
+
+            
 
             
 
@@ -2410,6 +2830,8 @@
 
             
 
+            
+
             . Use <see
              cref="F:System.DBNull.Value" />
 
@@ -2417,8 +2839,12 @@
 
             
 
+            
+
              to send a NULL value as the value of the parameter. Use null or do not set <see
              cref="P:System.Data.SqlClient.SqlParameter.SqlValue" />
+
+            
 
             
 
@@ -2434,11 +2860,15 @@
 
             
 
+            
+
              interface. Conversion errors may result if the specified type is not compatible with the value.</para
           >
           <para
             >Both the <see
              cref="P:System.Data.SqlClient.SqlParameter.DbType" />
+
+            
 
             
 
@@ -2451,8 +2881,12 @@
 
             
 
+            
+
              properties can be inferred by setting the <see
              cref="P:System.Data.SqlClient.SqlParameter.Value" />
+
+            
 
             
 
@@ -2468,11 +2902,15 @@
 
             
 
+            
+
              property is overwritten by SqlDataAdapter.UpdateCommand.</para
           >
           <para
             >Use the <see
              cref="P:System.Data.SqlClient.SqlParameter.Value" />
+
+            
 
             
 
@@ -2485,6 +2923,8 @@
              type="text/html">
               <a href="c449365b-470b-4edb-9d61-8353149f5531">SqlClient Streaming Support</a>
             </format>
+
+            
 
             
 
@@ -2521,8 +2961,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ICloneable" />
+
+            
 
             
 
@@ -2541,6 +2985,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2549,6 +2995,8 @@
           <para
             >A new <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -2578,6 +3026,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2586,6 +3036,8 @@
           <para
             >A string that contains the <see
              cref="P:System.Data.SqlClient.SqlParameter.ParameterName" />
+
+            
 
             
 
@@ -2619,6 +3071,8 @@
 
             
 
+            
+
              that is sent to the server. For output and return value parameters, the value is set on completion of the <see
              cref="T:System.Data.SqlClient.SqlCommand" />
 
@@ -2626,8 +3080,12 @@
 
             
 
+            
+
              and after the <see
              cref="T:System.Data.SqlClient.SqlDataReader" />
+
+            
 
             
 
@@ -2643,6 +3101,8 @@
 
             
 
+            
+
             . Use <see
              cref="F:System.DBNull.Value" />
 
@@ -2650,8 +3110,12 @@
 
             
 
+            
+
              to send a NULL value as the value of the parameter. Use null or do not set <see
              cref="P:System.Data.SqlClient.SqlParameter.Value" />
+
+            
 
             
 
@@ -2668,6 +3132,8 @@
 
             
 
+            
+
              interface. Conversion errors may result if the specified type is not compatible with the value. </para
           >
           <para
@@ -2678,8 +3144,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Data.SqlClient.SqlParameter.SqlDbType" />
+
+            
 
             
 
@@ -2695,6 +3165,8 @@
 
             
 
+            
+
              property is overwritten by SqlDataAdapter.UpdateCommand.</para
           >
           <para
@@ -2702,6 +3174,8 @@
              type="text/html">
               <a href="c449365b-470b-4edb-9d61-8353149f5531">SqlClient Streaming Support</a>
             </format>
+
+            
 
             
 
@@ -2752,8 +3226,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Data.SqlClient.SqlParameter.XmlSchemaCollectionOwningSchema" />
+
+            
 
             
 
@@ -2789,8 +3267,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Data.SqlClient.SqlParameter.XmlSchemaCollectionOwningSchema" />
+
+            
 
             
 
@@ -2829,8 +3311,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Data.SqlClient.SqlParameter.XmlSchemaCollectionName" />
+
+            
 
             
 

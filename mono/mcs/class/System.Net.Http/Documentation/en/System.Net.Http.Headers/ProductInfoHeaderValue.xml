@@ -28,8 +28,12 @@
 
         
 
+        
+
          class provides support for the product and comment tokens values used in  a User-Agent header as defined in <see
          cref="http://go.microsoft.com/fwlink/?LinkID=241642">RFC 2616</see>
+
+        
 
         
 
@@ -73,6 +77,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -83,8 +89,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.Http.Headers.ProductInfoHeaderValue" />
+
+          
 
           
 
@@ -119,11 +129,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="comment">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -162,6 +176,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -172,10 +188,14 @@
 
           
 
+          
+
           The product name value.</param
         >
         <param name="productVersion">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -203,6 +223,8 @@
           <para
             >Gets the comment from the <see
              cref="T:System.Net.Http.Headers.ProductInfoHeaderValue" />
+
+            
 
             
 
@@ -241,8 +263,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Net.Http.Headers.ProductInfoHeaderValue" />
+
+            
 
             
 
@@ -261,6 +287,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -271,11 +299,15 @@
 
             
 
+            
+
              is equal to the current object; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -311,6 +343,8 @@
 
             
 
+            
+
               method is suitable for use in hashing algorithms and data structures such as a hash table.</para
           >
         </remarks>
@@ -324,6 +358,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -332,6 +368,8 @@
           <para
             >Returns <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -374,6 +412,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -382,6 +422,8 @@
           <para
             >Returns <see
              cref="T:System.Net.Http.Headers.ProductInfoHeaderValue" />
+
+            
 
             
 
@@ -397,11 +439,15 @@
 
             
 
+            
+
              instance.</para
           >
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -440,6 +486,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -471,6 +519,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -479,6 +529,8 @@
           <para
             >Returns <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -516,6 +568,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -524,6 +578,8 @@
           <para
             >Returns <see
              cref="T:System.String" />
+
+            
 
             
 

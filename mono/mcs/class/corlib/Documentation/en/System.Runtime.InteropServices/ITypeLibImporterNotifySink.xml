@@ -77,6 +77,8 @@
 
             
 
+            
+
              will contain the HRESULT of the error. For any other event it will be 0.</para
           >
         </remarks>
@@ -91,8 +93,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Runtime.InteropServices.ImporterEventKind" />
+
+          
 
           
 
@@ -107,10 +113,14 @@
 
           
 
+          
+
           Indicates extra information about the event. </param
         >
         <param name="eventMsg">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -160,11 +170,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="typeLib">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

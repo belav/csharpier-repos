@@ -8,8 +8,12 @@
 
     
 
+    
+
     , <hyperlink
     >9.4</hyperlink>
+
+    
 
     
 
@@ -22,8 +26,12 @@
 
     
 
+    
+
     . The terminal symbols of the lexical grammar are the characters of the Unicode character set, and the lexical grammar specifies how characters are combined to form tokens (<hyperlink
     >9.4</hyperlink>
+
+    
 
     
 
@@ -36,8 +44,12 @@
 
     
 
+    
+
     ), comments (<hyperlink
     >9.3.2</hyperlink>
+
+    
 
     
 
@@ -50,11 +62,15 @@
 
     
 
+    
+
     ). </paragraph
   >
   <paragraph
     >Every source file in a C# program must conform to the input production of the lexical grammar (<hyperlink
     >9.3</hyperlink>
+
+    
 
     
 

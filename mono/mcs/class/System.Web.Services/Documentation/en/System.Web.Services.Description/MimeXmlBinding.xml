@@ -36,6 +36,8 @@
 
         
 
+        
+
         . For more information about Web Services Description Language (WSDL), see the specification at http://www.w3.org/TR/wsdl/.</para
       >
     </remarks>
@@ -49,6 +51,8 @@
 
         
 
+        
+
         , an <see
          cref="T:System.Web.Services.Description.InputBinding" />
 
@@ -56,8 +60,12 @@
 
         
 
+        
+
          or an <see
          cref="T:System.Web.Services.Description.OutputBinding" />
+
+        
 
         
 
@@ -80,6 +88,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Description.MimeXmlBinding" />
+
+            
 
             
 
@@ -114,8 +124,12 @@
 
             
 
+            
+
              to which the <see
              cref="T:System.Web.Services.Description.MimeXmlBinding" />
+
+            
 
             
 

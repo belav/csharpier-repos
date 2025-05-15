@@ -28,6 +28,8 @@
 
         
 
+        
+
          structures to and from various other representations.</para
       >
     </summary>
@@ -51,6 +53,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.DateTimeOffsetConverter" />
+
+            
 
             
 
@@ -93,6 +97,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -101,6 +107,8 @@
           <para
             >true if the specified type can be converted to a <see
              cref="T:System.DateTimeOffset" />
+
+            
 
             
 
@@ -116,10 +124,14 @@
 
           
 
+          
+
           The date format context.</param
         >
         <param name="sourceType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -161,6 +173,8 @@
 
             
 
+            
+
              can be converted to an object of the specified type.</para
           >
         </summary>
@@ -169,6 +183,8 @@
           <para
             >true if a <see
              cref="T:System.DateTimeOffset" />
+
+            
 
             
 
@@ -184,10 +200,14 @@
 
           
 
+          
+
           The date format context.</param
         >
         <param name="destinationType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -230,6 +250,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -238,6 +260,8 @@
           <para
             >A <see
              cref="T:System.DateTimeOffset" />
+
+            
 
             
 
@@ -253,6 +277,8 @@
 
           
 
+          
+
           The date format context.</param
         >
         <param name="culture">
@@ -262,10 +288,14 @@
 
           
 
+          
+
           The date culture.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -309,6 +339,8 @@
 
             
 
+            
+
              to an object of the specified type.</para
           >
         </summary>
@@ -317,6 +349,8 @@
           <para
             >An object of the specified type that represents the <see
              cref="T:System.DateTimeOffset" />
+
+            
 
             
 
@@ -332,10 +366,14 @@
 
           
 
+          
+
           The date format context.</param
         >
         <param name="culture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -350,8 +388,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTimeOffset" />
+
+          
 
           
 
@@ -361,6 +403,8 @@
         >
         <param name="destinationType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

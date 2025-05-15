@@ -29,8 +29,12 @@
 
         
 
+        
+
          class is a <see
          cref="T:System.Drawing.Brush" />
+
+        
 
         
 
@@ -60,11 +64,15 @@
 
             
 
+            
+
              object that uses the specified image.</para
           >
         </summary>
         <param name="bitmap">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -77,8 +85,12 @@
 
           
 
+          
+
            object with which this <see
            cref="T:System.Drawing.TextureBrush" />
+
+          
 
           
 
@@ -115,11 +127,15 @@
 
             
 
+            
+
              object that uses the specified image and wrap mode.</para
           >
         </summary>
         <param name="image">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -132,8 +148,12 @@
 
           
 
+          
+
            object with which this <see
            cref="T:System.Drawing.TextureBrush" />
+
+          
 
           
 
@@ -148,6 +168,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.WrapMode" />
 
@@ -155,8 +177,12 @@
 
           
 
+          
+
            enumeration that specifies how this <see
            cref="T:System.Drawing.TextureBrush" />
+
+          
 
           
 
@@ -193,11 +219,15 @@
 
             
 
+            
+
              object that uses the specified image and bounding rectangle.</para
           >
         </summary>
         <param name="image">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -210,8 +240,12 @@
 
           
 
+          
+
            object with which this <see
            cref="T:System.Drawing.TextureBrush" />
+
+          
 
           
 
@@ -226,6 +260,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
 
@@ -233,8 +269,12 @@
 
           
 
+          
+
            structure that represents the bounding rectangle for this <see
            cref="T:System.Drawing.TextureBrush" />
+
+          
 
           
 
@@ -271,11 +311,15 @@
 
             
 
+            
+
              object that uses the specified image and bounding rectangle.</para
           >
         </summary>
         <param name="image">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -288,8 +332,12 @@
 
           
 
+          
+
            object with which this <see
            cref="T:System.Drawing.TextureBrush" />
+
+          
 
           
 
@@ -304,6 +352,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.RectangleF" />
 
@@ -311,8 +361,12 @@
 
           
 
+          
+
            structure that represents the bounding rectangle for this <see
            cref="T:System.Drawing.TextureBrush" />
+
+          
 
           
 
@@ -350,11 +404,15 @@
 
             
 
+            
+
              object that uses the specified image, wrap mode, and bounding rectangle.</para
           >
         </summary>
         <param name="image">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -367,8 +425,12 @@
 
           
 
+          
+
            object with which this <see
            cref="T:System.Drawing.TextureBrush" />
+
+          
 
           
 
@@ -383,6 +445,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.WrapMode" />
 
@@ -390,8 +454,12 @@
 
           
 
+          
+
            enumeration that specifies how this <see
            cref="T:System.Drawing.TextureBrush" />
+
+          
 
           
 
@@ -406,6 +474,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
 
@@ -413,8 +483,12 @@
 
           
 
+          
+
            structure that represents the bounding rectangle for this <see
            cref="T:System.Drawing.TextureBrush" />
+
+          
 
           
 
@@ -452,11 +526,15 @@
 
             
 
+            
+
              object that uses the specified image, wrap mode, and bounding rectangle.</para
           >
         </summary>
         <param name="image">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -469,8 +547,12 @@
 
           
 
+          
+
            object with which this <see
            cref="T:System.Drawing.TextureBrush" />
+
+          
 
           
 
@@ -485,6 +567,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.WrapMode" />
 
@@ -492,8 +576,12 @@
 
           
 
+          
+
            enumeration that specifies how this <see
            cref="T:System.Drawing.TextureBrush" />
+
+          
 
           
 
@@ -508,6 +596,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.RectangleF" />
 
@@ -515,8 +605,12 @@
 
           
 
+          
+
            structure that represents the bounding rectangle for this <see
            cref="T:System.Drawing.TextureBrush" />
+
+          
 
           
 
@@ -554,11 +648,15 @@
 
             
 
+            
+
              object that uses the specified image, bounding rectangle, and image attributes.</para
           >
         </summary>
         <param name="image">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -571,8 +669,12 @@
 
           
 
+          
+
            object with which this <see
            cref="T:System.Drawing.TextureBrush" />
+
+          
 
           
 
@@ -587,6 +689,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
 
@@ -594,8 +698,12 @@
 
           
 
+          
+
            structure that represents the bounding rectangle for this <see
            cref="T:System.Drawing.TextureBrush" />
+
+          
 
           
 
@@ -610,6 +718,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Drawing.Imaging.ImageAttributes" />
 
@@ -617,8 +727,12 @@
 
           
 
+          
+
            object that contains additional information about the image used by this <see
            cref="T:System.Drawing.TextureBrush" />
+
+          
 
           
 
@@ -656,11 +770,15 @@
 
             
 
+            
+
              object that uses the specified image, bounding rectangle, and image attributes.</para
           >
         </summary>
         <param name="image">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -673,8 +791,12 @@
 
           
 
+          
+
            object with which this <see
            cref="T:System.Drawing.TextureBrush" />
+
+          
 
           
 
@@ -689,6 +811,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.RectangleF" />
 
@@ -696,8 +820,12 @@
 
           
 
+          
+
            structure that represents the bounding rectangle for this <see
            cref="T:System.Drawing.TextureBrush" />
+
+          
 
           
 
@@ -712,6 +840,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Drawing.Imaging.ImageAttributes" />
 
@@ -719,8 +849,12 @@
 
           
 
+          
+
            object that contains additional information about the image used by this <see
            cref="T:System.Drawing.TextureBrush" />
+
+          
 
           
 
@@ -753,6 +887,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -766,8 +902,12 @@
 
             
 
+            
+
              object this method creates, cast as an <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -801,8 +941,12 @@
 
             
 
+            
+
              object associated with this <see
              cref="T:System.Drawing.TextureBrush" />
+
+            
 
             
 
@@ -840,6 +984,8 @@
 
             
 
+            
+
              object specifies how the image that defines the texture is transformed. For example, if the transformation matrix specifies a rotation of 90 degrees clockwise, the texture image is rotated by 90 degrees clockwise.</para
           >
         </remarks>
@@ -853,8 +999,12 @@
 
             
 
+            
+
              object that represents the local geometric transformation of this <see
              cref="T:System.Drawing.TextureBrush" />
+
+            
 
             
 
@@ -867,8 +1017,12 @@
 
             
 
+            
+
              object by prepending the specified <see
              cref="T:System.Drawing.Drawing2D.Matrix" />
+
+            
 
             
 
@@ -888,8 +1042,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -927,6 +1085,8 @@
 
             
 
+            
+
              object specifies how the image that defines the texture is transformed. For example, if the transformation matrix specifies a rotation of 90 degrees clockwise, the texture image is rotated by 90 degrees clockwise.</para
           >
         </remarks>
@@ -940,6 +1100,8 @@
 
             
 
+            
+
              object that represents the local geometric transformation of this <see
              cref="T:System.Drawing.TextureBrush" />
 
@@ -947,8 +1109,12 @@
 
             
 
+            
+
              object by the specified <see
              cref="T:System.Drawing.Drawing2D.Matrix" />
+
+            
 
             
 
@@ -968,8 +1134,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -984,8 +1154,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.MatrixOrder" />
+
+          
 
           
 
@@ -1013,6 +1187,8 @@
           <para
             >Resets the Transform property of this <see
              cref="T:System.Drawing.TextureBrush" />
+
+            
 
             
 
@@ -1052,6 +1228,8 @@
 
             
 
+            
+
              object by the specified amount. This method prepends the rotation to the transformation.</para
           >
         </summary>
@@ -1061,6 +1239,8 @@
         </returns>
         <param name="angle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1099,6 +1279,8 @@
 
             
 
+            
+
              object by the specified amount in the specified order.</para
           >
         </summary>
@@ -1113,6 +1295,8 @@
 
           
 
+          
+
           The angle of rotation. </param
         >
         <param name="order">
@@ -1122,8 +1306,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.MatrixOrder" />
+
+          
 
           
 
@@ -1159,6 +1347,8 @@
 
             
 
+            
+
              object by the specified amounts. This method prepends the scaling matrix to the transformation.</para
           >
         </summary>
@@ -1173,10 +1363,14 @@
 
           
 
+          
+
           The amount by which to scale the transformation in the x direction. </param
         >
         <param name="sy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1216,6 +1410,8 @@
 
             
 
+            
+
              object by the specified amounts in the specified order.</para
           >
         </summary>
@@ -1230,10 +1426,14 @@
 
           
 
+          
+
           The amount by which to scale the transformation in the x direction. </param
         >
         <param name="sy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1248,8 +1448,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.MatrixOrder" />
+
+          
 
           
 
@@ -1285,6 +1489,8 @@
 
             
 
+            
+
              property is a copy of the brush's geometric transform, you should dispose of the matrix when you no longer need it.</para
           >
         </remarks>
@@ -1298,8 +1504,12 @@
 
             
 
+            
+
              object that defines a local geometric transformation for the image associated with this <see
              cref="T:System.Drawing.TextureBrush" />
+
+            
 
             
 
@@ -1336,6 +1546,8 @@
 
             
 
+            
+
              object by the specified dimensions. This method prepends the translation to the transformation.</para
           >
         </summary>
@@ -1350,10 +1562,14 @@
 
           
 
+          
+
           The dimension by which to translate the transformation in the x direction. </param
         >
         <param name="dy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1393,6 +1609,8 @@
 
             
 
+            
+
              object by the specified dimensions in the specified order.</para
           >
         </summary>
@@ -1407,6 +1625,8 @@
 
           
 
+          
+
           The dimension by which to translate the transformation in the x direction. </param
         >
         <param name="dy">
@@ -1416,10 +1636,14 @@
 
           
 
+          
+
           The dimension by which to translate the transformation in the y direction. </param
         >
         <param name="order">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1456,8 +1680,12 @@
 
             
 
+            
+
              enumeration that indicates the wrap mode for this <see
              cref="T:System.Drawing.TextureBrush" />
+
+            
 
             
 

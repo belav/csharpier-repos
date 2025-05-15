@@ -38,11 +38,15 @@
 
         
 
+        
+
          algorithm is 128 bits.</para
       >
       <para
         >The <see
          cref="Overload:System.Security.Cryptography.HashAlgorithm.ComputeHash" />
+
+        
 
         
 
@@ -55,8 +59,12 @@
 
         
 
+        
+
          class return the hash as an array of 16 bytes.  Note that some MD5 implementations produce a 32-character, hexadecimal-formatted hash.  To interoperate with such implementations, format the return value of the <see
          cref="Overload:System.Security.Cryptography.HashAlgorithm.ComputeHash" />
+
+        
 
         
 
@@ -73,8 +81,12 @@
 
           
 
+          
+
            class or the <see
            cref="T:System.Security.Cryptography.SHA512" />
+
+          
 
           
 
@@ -87,8 +99,12 @@
 
           
 
+          
+
            class. Use <see
            cref="T:System.Security.Cryptography.MD5" />
+
+          
 
           
 
@@ -103,6 +119,8 @@
       <para
         >Represents the abstract class from which all implementations of the <see
          cref="T:System.Security.Cryptography.MD5" />
+
+        
 
         
 
@@ -138,8 +156,12 @@
 
             
 
+            
+
              class, use the <see
              cref="Overload:System.Security.Cryptography.MD5.Create" />
+
+            
 
             
 
@@ -153,6 +175,8 @@
           <para
             >Initializes a new instance of <see
              cref="T:System.Security.Cryptography.MD5" />
+
+            
 
             
 
@@ -194,6 +218,8 @@
 
             
 
+            
+
              hash algorithm.</para
           >
         </summary>
@@ -202,6 +228,8 @@
           <para
             >A new instance of the <see
              cref="T:System.Security.Cryptography.MD5" />
+
+            
 
             
 
@@ -244,6 +272,8 @@
 
             
 
+            
+
              are: System.Security.Cryptography.MD5, MD5, System.Security.Cryptography.MD5CryptoServiceProvider, and System.Security.Cryptography.MD5Managed.</para
           >
         </remarks>
@@ -252,6 +282,8 @@
           <para
             >Creates an instance of the specified implementation of the <see
              cref="T:System.Security.Cryptography.MD5" />
+
+            
 
             
 
@@ -270,6 +302,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -280,8 +314,12 @@
 
           
 
+          
+
           The name of the specific implementation of <see
            cref="T:System.Security.Cryptography.MD5" />
+
+          
 
           
 

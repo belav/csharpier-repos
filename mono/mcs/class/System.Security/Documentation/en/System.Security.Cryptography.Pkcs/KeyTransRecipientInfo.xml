@@ -32,6 +32,8 @@
 
         
 
+        
+
          property. </para
       >
     </remarks>
@@ -45,6 +47,8 @@
 
         
 
+        
+
          class defines key transport recipient information.        <newTerm
         >Key transport</newTerm>
 
@@ -52,8 +56,12 @@
 
         
 
+        
+
          algorithms typically use the RSA algorithm, in which  an originator establishes a shared cryptographic key with a recipient by generating that key and  then transporting it to the recipient. This is in contrast to <newTerm
         >key agreement</newTerm>
+
+        
 
         
 
@@ -84,6 +92,8 @@
           <para
             >The <see
              cref="P:System.Security.Cryptography.Pkcs.KeyTransRecipientInfo.EncryptedKey" />
+
+            
 
             
 
@@ -125,6 +135,8 @@
 
             
 
+            
+
              property retrieves the key encryption algorithm used to encrypt the content encryption key.</para
           >
         </summary>
@@ -161,6 +173,8 @@
 
             
 
+            
+
              property retrieves the subject identifier associated with the encrypted content.</para
           >
         </summary>
@@ -190,6 +204,8 @@
 
             
 
+            
+
              is contained is a PKCS #7  message or a Cryptographic Message Syntax (CMS) message. CMS is a newer superset of PKCS #7.</para
           >
         </remarks>
@@ -198,6 +214,8 @@
           <para
             >The <see
              cref="P:System.Security.Cryptography.Pkcs.KeyTransRecipientInfo.Version" />
+
+            
 
             
 

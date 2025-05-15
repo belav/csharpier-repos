@@ -34,8 +34,12 @@
 
         
 
+        
+
          interface and their associated channels are generally used by the initiators of a communication pattern. Listener factories that implement the <see
          cref="T:System.ServiceModel.Channels.IChannelListener" />
+
+        
 
         
 
@@ -51,8 +55,12 @@
 
         
 
+        
+
          method provides the means to create an <see
          cref="T:System.ServiceModel.Channels.IChannelFactory" />
+
+        
 
         
 
@@ -77,6 +85,8 @@
 
             
 
+            
+
             .</para
           >
         </item>
@@ -84,6 +94,8 @@
           <para
             >Avoid non-reference members; they can cause the compiler to auto-generate <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -101,8 +113,12 @@
 
             
 
+            
+
              and the finalizer itself from (On)(Begin)Close (and/or OnAbort) to emulate what would have been the auto-generated <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -115,6 +131,8 @@
       <para
         >When adding behaviors programmatically, the behavior is added to the appropriate Behaviors property on the <see
          cref="T:System.ServiceModel.ChannelFactory" />
+
+        
 
         
 
@@ -147,6 +165,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.ChannelFactory" />
+
+            
 
             
 
@@ -188,8 +208,12 @@
 
             
 
+            
+
              is null, only the behaviors specified in the service endpoint are loaded. If the wildcard, "*", is used, any endpoint configuration in the client configuration file is used, but only if there is precisely one. Otherwise an exception is thrown. Any other value for the <paramref
              name="configurationName" />
+
+            
 
             
 
@@ -199,6 +223,8 @@
              type="text/html">
               <a href="5da5bd3b-65d9-43b7-91b9-cc9e989b1350">WCF Client Configuration</a>
             </format>
+
+            
 
             
 
@@ -246,6 +272,8 @@
 
             
 
+            
+
              associated with the channel factory.</para
           >
         </returns>
@@ -284,6 +312,8 @@
 
             
 
+            
+
              for the endpoint of the current factory.</para
           >
         </returns>
@@ -317,8 +347,12 @@
 
             
 
+            
+
              object is stored as a type of endpoint behavior and can be accessed through the <see
              cref="P:System.ServiceModel.Description.ServiceEndpoint.Behaviors" />
+
+            
 
             
 
@@ -334,8 +368,12 @@
 
             
 
+            
+
              method initializes a read-only copy of the <see
              cref="T:System.ServiceModel.Description.ClientCredentials" />
+
+            
 
             
 
@@ -351,8 +389,12 @@
 
             
 
+            
+
              object is used by the <see
              cref="T:System.ServiceModel.ClientBase`1" />
+
+            
 
             
 
@@ -365,8 +407,12 @@
 
             
 
+            
+
              object is also accessible through the <see
              cref="P:System.ServiceModel.ClientBase`1.ClientCredentials" />
+
+            
 
             
 
@@ -412,8 +458,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ServiceModel.Description.ServiceEndpoint.Binding" />
+
+            
 
             
 
@@ -426,8 +476,12 @@
 
             
 
+            
+
              value associated with the <see
              cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+
+            
 
             
 
@@ -470,8 +524,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ServiceModel.Description.ServiceEndpoint.Binding" />
+
+            
 
             
 
@@ -484,8 +542,12 @@
 
             
 
+            
+
              value associated with the <see
              cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+
+            
 
             
 
@@ -550,6 +612,8 @@
 
             
 
+            
+
             , <see
              cref="F:System.ServiceModel.CommunicationState.Closing" />
 
@@ -557,8 +621,12 @@
 
             
 
+            
+
             , or <see
              cref="F:System.ServiceModel.CommunicationState.Opened" />
+
+            
 
             
 
@@ -605,6 +673,8 @@
 
             
 
+            
+
              is typically some channel interface that the channel factory can support. If, for example, GetProperty&lt;IChannelListener&gt; is called on a duplex channel factory, it returns the underlying listener.</para
           >
         </remarks>
@@ -622,11 +692,15 @@
 
             
 
+            
+
              requested if it is present or null if it is not.</para
           >
         </returns>
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -666,8 +740,12 @@
 
             
 
+            
+
              if you have just the binding. Use <see
              cref="M:System.ServiceModel.ChannelFactory.InitializeEndpoint(System.String,System.ServiceModel.EndpointAddress)" />
+
+            
 
             
 
@@ -687,8 +765,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+
+          
 
           
 
@@ -730,6 +812,8 @@
 
             
 
+            
+
              if you have the configuration.</para
           >
         </remarks>
@@ -744,8 +828,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Binding" />
+
+          
 
           
 
@@ -788,6 +876,8 @@
 
             
 
+            
+
              if you have just the binding.</para
           >
         </remarks>
@@ -822,8 +912,12 @@
 
             
 
+            
+
              method is called on a factory after it transitions to the closing state if the <see
              cref="M:System.ServiceModel.Channels.CommunicationObject.Abort" />
+
+            
 
             
 
@@ -878,6 +972,8 @@
 
             
 
+            
+
              that references the asynchronous operation.</para
           >
         </returns>
@@ -888,8 +984,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -904,8 +1004,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -915,6 +1019,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -964,6 +1070,8 @@
 
             
 
+            
+
              that references the asynchronous operation.</para
           >
         </returns>
@@ -974,8 +1082,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -990,8 +1102,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -1001,6 +1117,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1039,8 +1157,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -1082,6 +1204,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.IAsyncResult" />
 
@@ -1089,8 +1213,12 @@
 
           
 
+          
+
            returned by a call to the <see
            cref="M:System.ServiceModel.ChannelFactory.OnBeginClose(System.TimeSpan,System.AsyncCallback,System.Object)" />
+
+          
 
           
 
@@ -1132,6 +1260,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.IAsyncResult" />
 
@@ -1139,8 +1269,12 @@
 
           
 
+          
+
            returned by a call to the <see
            cref="M:System.ServiceModel.ChannelFactory.OnBeginOpen(System.TimeSpan,System.AsyncCallback,System.Object)" />
+
+          
 
           
 
@@ -1179,8 +1313,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -1215,6 +1353,8 @@
 
             
 
+            
+
              method, which is called during the transition of an object into the opened state. The <see
              cref="T:System.ServiceModel.Description.ClientCredentials" />
 
@@ -1222,8 +1362,12 @@
 
             
 
+            
+
              object is stored as a type of endpoint behavior and can be accessed through the <see
              cref="P:System.ServiceModel.Description.ServiceEndpoint.Behaviors" />
+
+            
 
             
 
@@ -1237,6 +1381,8 @@
           <para
             >Initializes a read-only copy of the <see
              cref="T:System.ServiceModel.Description.ClientCredentials" />
+
+            
 
             
 

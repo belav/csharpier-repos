@@ -39,8 +39,12 @@
 
         
 
+        
+
         , serves as a bridge between a <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -53,8 +57,12 @@
 
         
 
+        
+
          provides this bridge by mapping <see
          cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
+
+        
 
         
 
@@ -67,8 +75,12 @@
 
         
 
+        
+
          to match the data in the data source, and <see
          cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+        
 
         
 
@@ -81,8 +93,12 @@
 
         
 
+        
+
         , using the appropriate Transact-SQL statements against the data source. The update is performed on a by-row basis. For every inserted, modified, and deleted row, the <see
          cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+        
 
         
 
@@ -95,8 +111,12 @@
 
         
 
+        
+
          fills a <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -109,8 +129,12 @@
 
         
 
+        
+
          property is set to <see
          cref="F:System.Data.MissingSchemaAction.AddWithKey" />
+
+        
 
         
 
@@ -123,8 +147,12 @@
 
         
 
+        
+
          create the schema of the <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -141,10 +169,14 @@
 
         
 
+        
+
         .</para
       >
       <para>
         <see cref="T:System.Data.SqlClient.SqlDataAdapter" />
+
+        
 
         
 
@@ -157,8 +189,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Data.SqlClient.SqlCommand" />
+
+        
 
         
 
@@ -175,12 +211,16 @@
 
           
 
+          
+
            will be thrown.</para
         >
       </block>
       <para
         >The <see
          cref="T:System.Data.SqlClient.SqlDataAdapter" />
+
+        
 
         
 
@@ -193,8 +233,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Data.SqlClient.SqlDataAdapter.InsertCommand" />
+
+        
 
         
 
@@ -207,6 +251,8 @@
 
         
 
+        
+
         , <see
          cref="P:System.Data.SqlClient.SqlDataAdapter.UpdateCommand" />
 
@@ -214,8 +260,12 @@
 
         
 
+        
+
         , and <see
          cref="P:System.Data.Common.DataAdapter.TableMappings" />
+
+        
 
         
 
@@ -231,8 +281,12 @@
 
         
 
+        
+
          is created, the read/write properties are set to initial values. For a list of these values, see the <see
          cref="T:System.Data.SqlClient.SqlDataAdapter" />
+
+        
 
         
 
@@ -248,6 +302,8 @@
 
         
 
+        
+
         , <see
          cref="P:System.Data.SqlClient.SqlDataAdapter.DeleteCommand" />
 
@@ -255,8 +311,12 @@
 
         
 
+        
+
         , and <see
          cref="P:System.Data.SqlClient.SqlDataAdapter.UpdateCommand" />
+
+        
 
         
 
@@ -272,6 +332,8 @@
 
         
 
+        
+
         , a parameter should be added to the InsertCommand, UpdateCommand, or DeleteCommand. The <see
          cref="P:System.Data.Common.DbParameter.SourceColumn" />
 
@@ -279,8 +341,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Data.Common.DbParameter" />
+
+        
 
         
 
@@ -297,8 +363,12 @@
 
           
 
+          
+
            will occur if the <see
            cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
+
+          
 
           
 
@@ -313,6 +383,8 @@
 
           
 
+          
+
            in SQL Server Books Online.</para
         >
       </block>
@@ -322,6 +394,8 @@
       <para
         >Represents a set of data commands and a database connection that are used to fill the <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -343,6 +417,8 @@
           <para
             >When an instance of <see
              cref="T:System.Data.SqlClient.SqlDataAdapter" />
+
+            
 
             
 
@@ -394,6 +470,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -424,8 +502,12 @@
 
             
 
+            
+
              constructor sets the <see
              cref="P:System.Data.SqlClient.SqlDataAdapter.SelectCommand" />
+
+            
 
             
 
@@ -438,11 +520,15 @@
 
             
 
+            
+
              parameter.</para
           >
           <para
             >When an instance of <see
              cref="T:System.Data.SqlClient.SqlDataAdapter" />
+
+            
 
             
 
@@ -491,8 +577,12 @@
 
             
 
+            
+
              (or any of the other command properties) is assigned to a previously created <see
              cref="T:System.Data.SqlClient.SqlCommand" />
+
+            
 
             
 
@@ -505,6 +595,8 @@
 
             
 
+            
+
              is not cloned. The <see
              cref="P:System.Data.SqlClient.SqlDataAdapter.SelectCommand" />
 
@@ -512,8 +604,12 @@
 
             
 
+            
+
              maintains a reference to the previously created <see
              cref="T:System.Data.SqlClient.SqlCommand" />
+
+            
 
             
 
@@ -532,6 +628,8 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Data.SqlClient.SqlCommand" />
 
@@ -539,8 +637,12 @@
 
             
 
+            
+
              as the <see
              cref="P:System.Data.SqlClient.SqlDataAdapter.SelectCommand" />
+
+            
 
             
 
@@ -556,8 +658,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlClient.SqlCommand" />
+
+          
 
           
 
@@ -570,8 +676,12 @@
 
           
 
+          
+
            property of the <see
            cref="T:System.Data.SqlClient.SqlDataAdapter" />
+
+          
 
           
 
@@ -607,8 +717,12 @@
 
             
 
+            
+
              opens and closes a <see
              cref="T:System.Data.SqlClient.SqlConnection" />
+
+            
 
             
 
@@ -621,8 +735,12 @@
 
             
 
+            
+
              method for two or more <see
              cref="T:System.Data.SqlClient.SqlDataAdapter" />
+
+            
 
             
 
@@ -635,11 +753,15 @@
 
             
 
+            
+
              is already open, you must explicitly call Close or Dispose to close it.</para
           >
           <para
             >When an instance of <see
              cref="T:System.Data.SqlClient.SqlDataAdapter" />
+
+            
 
             
 
@@ -691,6 +813,8 @@
 
             
 
+            
+
              class with a <see
              cref="P:System.Data.SqlClient.SqlDataAdapter.SelectCommand" />
 
@@ -698,8 +822,12 @@
 
             
 
+            
+
              and a <see
              cref="T:System.Data.SqlClient.SqlConnection" />
+
+            
 
             
 
@@ -715,8 +843,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -729,8 +861,12 @@
 
           
 
+          
+
            property of the <see
            cref="T:System.Data.SqlClient.SqlDataAdapter" />
+
+          
 
           
 
@@ -745,6 +881,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlClient.SqlConnection" />
 
@@ -752,8 +890,12 @@
 
           
 
+          
+
            that represents the connection. If your connection string does not use Integrated Security = true, you can use <see
            cref="T:System.Data.SqlClient.SqlCredential" />
+
+          
 
           
 
@@ -789,8 +931,12 @@
 
             
 
+            
+
              constructor uses the <paramref
              name="selectCommandText" />
+
+            
 
             
 
@@ -803,8 +949,12 @@
 
             
 
+            
+
              property. The <see
              cref="T:System.Data.SqlClient.SqlDataAdapter" />
+
+            
 
             
 
@@ -817,11 +967,15 @@
 
             
 
+            
+
              parameter.</para
           >
           <para
             >When an instance of <see
              cref="T:System.Data.SqlClient.SqlDataAdapter" />
+
+            
 
             
 
@@ -873,8 +1027,12 @@
 
             
 
+            
+
              class with a <see
              cref="P:System.Data.SqlClient.SqlDataAdapter.SelectCommand" />
+
+            
 
             
 
@@ -890,8 +1048,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -904,8 +1066,12 @@
 
           
 
+          
+
            property of the <see
            cref="T:System.Data.SqlClient.SqlDataAdapter" />
+
+          
 
           
 
@@ -920,6 +1086,8 @@
 
           
 
+          
+
           The connection string. If your connection string does not use Integrated Security = true, you can use <see
            cref="M:System.Data.SqlClient.SqlDataAdapter.#ctor(System.String,System.Data.SqlClient.SqlConnection)" />
 
@@ -927,8 +1095,12 @@
 
           
 
+          
+
            and <see
            cref="T:System.Data.SqlClient.SqlCredential" />
+
+          
 
           
 
@@ -1063,8 +1235,12 @@
 
             
 
+            
+
             , if this property is not set and primary key information is present in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1077,8 +1253,12 @@
 
             
 
+            
+
              can be generated automatically if you set the <see
              cref="P:System.Data.SqlClient.SqlDataAdapter.SelectCommand" />
+
+            
 
             
 
@@ -1091,8 +1271,12 @@
 
             
 
+            
+
             . Then, any additional commands that you do not set are generated by the <see
              cref="T:System.Data.SqlClient.SqlCommandBuilder" />
+
+            
 
             
 
@@ -1105,10 +1289,14 @@
 
             
 
+            
+
             . For more information, see <format
              type="text/html">
               <a href="6e3fb8b5-373b-4f9e-ab03-a22693df8e91">Automatically Generated Commands</a>
             </format>
+
+            
 
             
 
@@ -1124,8 +1312,12 @@
 
             
 
+            
+
              is assigned to a previously created <see
              cref="T:System.Data.SqlClient.SqlCommand" />
+
+            
 
             
 
@@ -1138,8 +1330,12 @@
 
             
 
+            
+
              is not cloned. The <see
              cref="P:System.Data.SqlClient.SqlDataAdapter.DeleteCommand" />
+
+            
 
             
 
@@ -1152,11 +1348,15 @@
 
             
 
+            
+
              object.</para
           >
           <para
             >For every column that you propagate to the data source on <see
              cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+            
 
             
 
@@ -1278,8 +1478,12 @@
 
             
 
+            
+
             , if this property is not set and primary key information is present in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1292,8 +1496,12 @@
 
             
 
+            
+
              can be generated automatically if you set the <see
              cref="P:System.Data.SqlClient.SqlDataAdapter.SelectCommand" />
+
+            
 
             
 
@@ -1306,8 +1514,12 @@
 
             
 
+            
+
             . Then, any additional commands that you do not set are generated by the <see
              cref="T:System.Data.SqlClient.SqlCommandBuilder" />
+
+            
 
             
 
@@ -1320,10 +1532,14 @@
 
             
 
+            
+
             . For more information, see <format
              type="text/html">
               <a href="6e3fb8b5-373b-4f9e-ab03-a22693df8e91">Automatically Generated Commands</a>
             </format>
+
+            
 
             
 
@@ -1339,8 +1555,12 @@
 
             
 
+            
+
              is assigned to a previously created <see
              cref="T:System.Data.SqlClient.SqlCommand" />
+
+            
 
             
 
@@ -1353,6 +1573,8 @@
 
             
 
+            
+
              is not cloned. The <see
              cref="P:System.Data.SqlClient.SqlDataAdapter.InsertCommand" />
 
@@ -1360,8 +1582,12 @@
 
             
 
+            
+
              maintains a reference to the previously created <see
              cref="T:System.Data.SqlClient.SqlCommand" />
+
+            
 
             
 
@@ -1377,8 +1603,12 @@
 
             
 
+            
+
              depending on how you set the UpdatedRowSource property of the <see
              cref="T:System.Data.SqlClient.SqlCommand" />
+
+            
 
             
 
@@ -1389,6 +1619,8 @@
           <para
             >For every column that you propagate to the data source on <see
              cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+            
 
             
 
@@ -1482,6 +1714,8 @@
 
             
 
+            
+
             , there are two events that occur per data row updated. The order of execution is as follows: </para
           >
           <list type="ordered">
@@ -1494,6 +1728,8 @@
 
                 
 
+                
+
                  are moved to the parameter values.</para
               >
             </item>
@@ -1501,6 +1737,8 @@
               <para
                 >The <see
                  cref="M:System.Data.Common.DbDataAdapter.OnRowUpdating(System.Data.Common.RowUpdatingEventArgs)" />
+
+                
 
                 
 
@@ -1521,6 +1759,8 @@
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -1528,6 +1768,8 @@
               <para
                 >If there are output parameters, they are placed in the <see
                  cref="T:System.Data.DataRow" />
+
+                
 
                 
 
@@ -1545,12 +1787,16 @@
 
                 
 
+                
+
                  event is raised.</para
               >
             </item>
             <item>
               <para>
                 <see cref="M:System.Data.DataRow.AcceptChanges" />
+
+                
 
                 
 
@@ -1566,6 +1812,8 @@
           <para
             >Occurs during <see
              cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+            
 
             
 
@@ -1601,6 +1849,8 @@
 
             
 
+            
+
             , there are two events that occur per data row updated. The order of execution is as follows: </para
           >
           <list type="ordered">
@@ -1613,6 +1863,8 @@
 
                 
 
+                
+
                  are moved to the parameter values.</para
               >
             </item>
@@ -1620,6 +1872,8 @@
               <para
                 >The <see
                  cref="M:System.Data.Common.DbDataAdapter.OnRowUpdating(System.Data.Common.RowUpdatingEventArgs)" />
+
+                
 
                 
 
@@ -1640,6 +1894,8 @@
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -1647,6 +1903,8 @@
               <para
                 >If there are output parameters, they are placed in the <see
                  cref="T:System.Data.DataRow" />
+
+                
 
                 
 
@@ -1664,12 +1922,16 @@
 
                 
 
+                
+
                  event is raised.</para
               >
             </item>
             <item>
               <para>
                 <see cref="M:System.Data.DataRow.AcceptChanges" />
+
+                
 
                 
 
@@ -1685,6 +1947,8 @@
           <para
             >Occurs during <see
              cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+            
 
             
 
@@ -1721,8 +1985,12 @@
 
             
 
+            
+
              is assigned to a previously created <see
              cref="T:System.Data.SqlClient.SqlCommand" />
+
+            
 
             
 
@@ -1735,6 +2003,8 @@
 
             
 
+            
+
              is not cloned. The <see
              cref="P:System.Data.SqlClient.SqlDataAdapter.SelectCommand" />
 
@@ -1742,8 +2012,12 @@
 
             
 
+            
+
              maintains a reference to the previously created <see
              cref="T:System.Data.SqlClient.SqlCommand" />
+
+            
 
             
 
@@ -1759,8 +2033,12 @@
 
             
 
+            
+
              does not return any rows, no tables are added to the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1831,8 +2109,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Data.IDbDataAdapter" />
+
+            
 
             
 
@@ -1846,6 +2128,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Data.IDbDataAdapter.DeleteCommand" />
+
+            
 
             
 
@@ -1881,8 +2165,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Data.IDbDataAdapter" />
+
+            
 
             
 
@@ -1896,6 +2184,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Data.IDbDataAdapter.InsertCommand" />
+
+            
 
             
 
@@ -1931,8 +2221,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Data.IDbDataAdapter" />
+
+            
 
             
 
@@ -1946,6 +2240,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Data.IDbDataAdapter.SelectCommand" />
+
+            
 
             
 
@@ -1981,8 +2277,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Data.IDbDataAdapter" />
+
+            
 
             
 
@@ -1996,6 +2296,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Data.IDbDataAdapter.UpdateCommand" />
+
+            
 
             
 
@@ -2028,8 +2330,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ICloneable" />
+
+            
 
             
 
@@ -2043,6 +2349,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.ICloneable.Clone" />
+
+            
 
             
 
@@ -2094,8 +2402,12 @@
 
             
 
+            
+
              property to update a data source with changes from a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2107,6 +2419,8 @@
           <para
             >An <see
              cref="T:System.ArgumentOutOfRangeException" />
+
+            
 
             
 
@@ -2143,8 +2457,12 @@
 
             
 
+            
+
             , if this property is not set and primary key information is present in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2157,8 +2475,12 @@
 
             
 
+            
+
              can be generated automatically if you set the <see
              cref="P:System.Data.SqlClient.SqlDataAdapter.SelectCommand" />
+
+            
 
             
 
@@ -2171,8 +2493,12 @@
 
             
 
+            
+
             . Then, any additional commands that you do not set are generated by the <see
              cref="T:System.Data.SqlClient.SqlCommandBuilder" />
+
+            
 
             
 
@@ -2185,10 +2511,14 @@
 
             
 
+            
+
             . For more information, see <format
              type="text/html">
               <a href="6e3fb8b5-373b-4f9e-ab03-a22693df8e91">Automatically Generated Commands</a>
             </format>
+
+            
 
             
 
@@ -2204,8 +2534,12 @@
 
             
 
+            
+
              is assigned to a previously created <see
              cref="T:System.Data.SqlClient.SqlCommand" />
+
+            
 
             
 
@@ -2218,6 +2552,8 @@
 
             
 
+            
+
              is not cloned. The <see
              cref="P:System.Data.SqlClient.SqlDataAdapter.UpdateCommand" />
 
@@ -2225,8 +2561,12 @@
 
             
 
+            
+
              maintains a reference to the previously created <see
              cref="T:System.Data.SqlClient.SqlCommand" />
+
+            
 
             
 
@@ -2243,8 +2583,12 @@
 
               
 
+              
+
                depending on how you set the UpdatedRowSource property of the <see
                cref="T:System.Data.SqlClient.SqlCommand" />
+
+              
 
               
 
@@ -2256,6 +2600,8 @@
           <para
             >For every column that you propagate to the data source on <see
              cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+            
 
             
 

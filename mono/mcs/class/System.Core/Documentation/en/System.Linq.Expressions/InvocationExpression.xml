@@ -37,8 +37,12 @@
 
         
 
+        
+
          factory methods to create an <see
          cref="T:System.Linq.Expressions.InvocationExpression" />
+
+        
 
         
 
@@ -54,6 +58,8 @@
 
         
 
+        
+
          of an <see
          cref="T:System.Linq.Expressions.InvocationExpression" />
 
@@ -61,8 +67,12 @@
 
         
 
+        
+
          is <see
          cref="F:System.Linq.Expressions.ExpressionType.Invoke" />
+
+        
 
         
 
@@ -184,6 +194,8 @@
 
             
 
+            
+
              when overriding this method.</para
           >
         </summary>
@@ -260,6 +272,8 @@
 
             
 
+            
+
              represents.</para
           >
         </summary>
@@ -305,8 +319,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.InvocationExpression.Expression" />
+
+          
 
           
 
@@ -321,8 +339,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.InvocationExpression.Arguments" />
+
+          
 
           
 

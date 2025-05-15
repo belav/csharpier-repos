@@ -41,8 +41,12 @@
 
         
 
+        
+
          to a property if its parent property should receive notification of changes to the property's values. For example, in the Properties window, the <see
          cref="P:System.Windows.Forms.DataGridView.RowTemplate" />
+
+        
 
         
 
@@ -55,8 +59,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.DataGridViewRow.DefaultCellStyle" />
+
+        
 
         
 
@@ -69,6 +77,8 @@
          type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
+
+        
 
         
 
@@ -114,11 +124,15 @@
 
             
 
+            
+
              class, using the specified value to determine whether the parent property is notified of changes to the value of the property.</para
           >
         </summary>
         <param name="notifyParent">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -185,6 +199,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

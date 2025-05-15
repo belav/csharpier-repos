@@ -37,8 +37,12 @@
 
         
 
+        
+
          class when reading the entries associated with an <see
          cref="T:System.Diagnostics.EventLog" />
+
+        
 
         
 
@@ -51,8 +55,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Diagnostics.EventLog" />
+
+        
 
         
 
@@ -68,6 +76,8 @@
 
         
 
+        
+
         . However, after you view the entire list, it is not updated with new entries.</para
       >
     </remarks>
@@ -76,6 +86,8 @@
       <para
         >Defines size and enumerators for a collection of <see
          cref="T:System.Diagnostics.EventLogEntry" />
+
+        
 
         
 
@@ -120,6 +132,8 @@
 
             
 
+            
+
             . An array of <see
              cref="T:System.Diagnostics.EventLogEntry" />
 
@@ -127,8 +141,12 @@
 
             
 
+            
+
              instances is fixed at the time it is instantiated. Therefore, you cannot read new entries by using the array that is returned by the <see
              cref="M:System.Diagnostics.EventLogEntryCollection.CopyTo(System.Diagnostics.EventLogEntry[],System.Int32)" />
+
+            
 
             
 
@@ -147,8 +165,12 @@
 
             
 
+            
+
              to an array of <see
              cref="T:System.Diagnostics.EventLogEntry" />
+
+            
 
             
 
@@ -159,6 +181,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -192,8 +216,12 @@
 
             
 
+            
+
              represents a dynamic list of all the entries in a log. Therefore, the <see
              cref="P:System.Diagnostics.EventLogEntryCollection.Count" />
+
+            
 
             
 
@@ -206,8 +234,12 @@
 
             
 
+            
+
              instance that you create. It is usually best to work with the <see
              cref="P:System.Diagnostics.EventLogEntryCollection.Count" />
+
+            
 
             
 
@@ -221,6 +253,8 @@
           <para
             >Gets the number of entries in the event log (that is, the number of elements in the <see
              cref="T:System.Diagnostics.EventLogEntry" />
+
+            
 
             
 
@@ -261,6 +295,8 @@
 
             
 
+            
+
              method is a wrapper for the <see
              cref="T:System.Diagnostics.EventLogEntryCollection" />
 
@@ -268,8 +304,12 @@
 
             
 
+            
+
              class that implements the <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -286,6 +326,8 @@
 
               
 
+              
+
                property for an alternative technique for iterating through a collection.</para
             >
           </block>
@@ -295,6 +337,8 @@
           <para
             >Supports a simple iteration over the <see
              cref="T:System.Diagnostics.EventLogEntryCollection" />
+
+            
 
             
 
@@ -367,6 +411,8 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Diagnostics.EventLogEntryCollection" />
 
@@ -374,8 +420,12 @@
 
             
 
+            
+
              class to copy all or part of the collection to an <see
              cref="T:System.Diagnostics.EventLogEntry" />
+
+            
 
             
 
@@ -394,8 +444,12 @@
 
             
 
+            
+
             , starting at a particular <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -411,6 +465,8 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
 
@@ -418,8 +474,12 @@
 
           
 
+          
+
            that is the destination of the elements that are copied from the collection. The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -434,8 +494,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -475,8 +539,12 @@
 
             
 
+            
+
              class, the <see
              cref="P:System.Diagnostics.EventLogEntryCollection.System#Collections#ICollection#IsSynchronized" />
+
+            
 
             
 
@@ -490,6 +558,8 @@
           <para
             >Gets a value that indicates whether access to the <see
              cref="T:System.Diagnostics.EventLogEntryCollection" />
+
+            
 
             
 
@@ -530,6 +600,8 @@
 
             
 
+            
+
              class, the <see
              cref="P:System.Diagnostics.EventLogEntryCollection.System#Collections#ICollection#SyncRoot" />
 
@@ -537,8 +609,12 @@
 
             
 
+            
+
              property always returns the current <see
              cref="T:System.Diagnostics.EventLogEntryCollection" />
+
+            
 
             
 
@@ -552,6 +628,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Diagnostics.EventLogEntryCollection" />
+
+            
 
             
 

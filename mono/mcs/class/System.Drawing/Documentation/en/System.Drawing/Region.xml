@@ -34,6 +34,8 @@
 
         
 
+        
+
         . </para
       >
       <para
@@ -41,6 +43,8 @@
          type="text/html">
           <a href="3a4c07cb-a40a-4d14-ad35-008f531910a8">How To: Use Hit Testing with a Region</a>
         </format>
+
+        
 
         
 
@@ -56,8 +60,12 @@
 
         
 
+        
+
          method and a  <see
          cref="T:System.Drawing.Brush" />
+
+        
 
         
 
@@ -88,6 +96,8 @@
 
             
 
+            
+
              with an infinite interior.</para
           >
         </remarks>
@@ -96,6 +106,8 @@
           <para
             >Initializes a new <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -131,8 +143,12 @@
 
             
 
+            
+
              with a <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -145,8 +161,12 @@
 
             
 
+            
+
              specified by the <paramref
              name="path" />
+
+            
 
             
 
@@ -165,8 +185,12 @@
 
             
 
+            
+
              with the specified <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -182,6 +206,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
@@ -189,8 +215,12 @@
 
           
 
+          
+
            that defines the new <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -225,8 +255,12 @@
 
             
 
+            
+
              with an interior defined by an existing <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -239,8 +273,12 @@
 
             
 
+            
+
              parameter is an array that contains the definition of an existing <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -259,11 +297,15 @@
 
             
 
+            
+
              from the specified data.</para
           >
         </summary>
         <param name="rgnData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -276,8 +318,12 @@
 
           
 
+          
+
            that defines the interior of the new <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -309,8 +355,12 @@
 
             
 
+            
+
              with a rectangular interior. The interior is defined by the <paramref
              name="rect" />
+
+            
 
             
 
@@ -329,8 +379,12 @@
 
             
 
+            
+
              from the specified <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -346,6 +400,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
 
@@ -353,8 +409,12 @@
 
           
 
+          
+
            structure that defines the interior of the new <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -386,8 +446,12 @@
 
             
 
+            
+
              with a rectangular interior. The interior is defined by the <paramref
              name="rect" />
+
+            
 
             
 
@@ -406,8 +470,12 @@
 
             
 
+            
+
              from the specified <see
              cref="T:System.Drawing.RectangleF" />
+
+            
 
             
 
@@ -423,6 +491,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.RectangleF" />
 
@@ -430,8 +500,12 @@
 
           
 
+          
+
            structure that defines the interior of the new <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -464,6 +538,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -472,6 +548,8 @@
           <para
             >The <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -510,6 +588,8 @@
 
             
 
+            
+
              to contain the portion of the specified <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
@@ -517,8 +597,12 @@
 
             
 
+            
+
              that does not intersect with this <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -534,6 +618,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
@@ -541,8 +627,12 @@
 
           
 
+          
+
            to complement this <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -580,6 +670,8 @@
 
             
 
+            
+
              to contain the portion of the specified <see
              cref="T:System.Drawing.Rectangle" />
 
@@ -587,8 +679,12 @@
 
             
 
+            
+
              structure that does not intersect with this <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -604,6 +700,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
 
@@ -611,8 +709,12 @@
 
           
 
+          
+
            structure to complement this <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -650,6 +752,8 @@
 
             
 
+            
+
              to contain the portion of the specified <see
              cref="T:System.Drawing.RectangleF" />
 
@@ -657,8 +761,12 @@
 
             
 
+            
+
              structure that does not intersect with this <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -674,6 +782,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.RectangleF" />
 
@@ -681,8 +791,12 @@
 
           
 
+          
+
            structure to complement this <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -720,6 +834,8 @@
 
             
 
+            
+
              to contain the portion of the specified <see
              cref="T:System.Drawing.Region" />
 
@@ -727,8 +843,12 @@
 
             
 
+            
+
              that does not intersect with this <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -744,6 +864,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Region" />
 
@@ -751,8 +873,12 @@
 
           
 
+          
+
            object to complement this <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -784,8 +910,12 @@
 
             
 
+            
+
              allows the resources used by this <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -801,8 +931,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -815,8 +949,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -829,6 +967,8 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Drawing.Region" />
 
@@ -836,8 +976,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -852,10 +996,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -872,6 +1020,8 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.Drawing.Region" />
 
@@ -879,8 +1029,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Drawing.Region" />
+
+              
 
               
 
@@ -895,6 +1049,8 @@
           <para
             >Releases all resources used by this <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -937,6 +1093,8 @@
 
             
 
+            
+
              is used to compute the region interiors on the drawing surface.</para
           >
         </remarks>
@@ -950,8 +1108,12 @@
 
             
 
+            
+
              is identical to this <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -970,6 +1132,8 @@
 
             
 
+            
+
              parameter is applied; otherwise, false.</para
           >
         </returns>
@@ -980,8 +1144,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -996,8 +1164,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -1035,8 +1207,12 @@
 
             
 
+            
+
              to contain only the portion of its interior that does not intersect with the specified <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -1052,6 +1228,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
@@ -1059,8 +1237,12 @@
 
           
 
+          
+
            to exclude from this <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -1095,8 +1277,12 @@
 
             
 
+            
+
              to contain only the portion of its interior that does not intersect with the specified <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -1112,6 +1298,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
 
@@ -1119,8 +1307,12 @@
 
           
 
+          
+
            structure to exclude from this <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -1158,8 +1350,12 @@
 
             
 
+            
+
              to contain only the portion of its interior that does not intersect with the specified <see
              cref="T:System.Drawing.RectangleF" />
+
+            
 
             
 
@@ -1175,6 +1371,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.RectangleF" />
 
@@ -1182,8 +1380,12 @@
 
           
 
+          
+
            structure to exclude from this <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -1218,8 +1420,12 @@
 
             
 
+            
+
              to contain only the portion of its interior that does not intersect with the specified <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -1235,6 +1441,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Region" />
 
@@ -1242,8 +1450,12 @@
 
           
 
+          
+
            to exclude from this <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -1296,6 +1508,8 @@
 
             
 
+            
+
              with an interior defined by the existing <see
              cref="T:System.Drawing.Region" />
 
@@ -1303,8 +1517,12 @@
 
             
 
+            
+
              referred to by the handle in the <paramref
              name="hrgn" />
+
+            
 
             
 
@@ -1323,6 +1541,8 @@
 
             
 
+            
+
              from a handle to the specified existing ndptecgdi region.</para
           >
         </summary>
@@ -1331,6 +1551,8 @@
           <para
             >The new <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -1346,8 +1568,12 @@
 
           
 
+          
+
           A handle to an existing <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -1388,6 +1614,8 @@
 
             
 
+            
+
              structure that represents a rectangle that bounds this <see
              cref="T:System.Drawing.Region" />
 
@@ -1395,8 +1623,12 @@
 
             
 
+            
+
              on the drawing surface of a <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -1415,8 +1647,12 @@
 
             
 
+            
+
              structure that represents the bounding rectangle for this <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -1432,6 +1668,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
 
@@ -1439,8 +1677,12 @@
 
           
 
+          
+
            on which this <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -1475,6 +1717,8 @@
 
             
 
+            
+
              in the specified graphics context.</para
           >
         </summary>
@@ -1483,6 +1727,8 @@
           <para
             >A Windows handle to this <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -1498,6 +1744,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
 
@@ -1505,8 +1753,12 @@
 
           
 
+          
+
            on which this <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -1541,6 +1793,8 @@
 
             
 
+            
+
              class allows you to define a custom shape. The shape can be made up of lines, polygons, and curves. <see
              cref="M:System.Drawing.Region.GetRegionData" />
 
@@ -1548,8 +1802,12 @@
 
             
 
+            
+
              describes the  shape contained in this <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -1568,8 +1826,12 @@
 
             
 
+            
+
              that represents the information that describes this <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -1588,8 +1850,12 @@
 
             
 
+            
+
              that represents the information that describes this <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -1628,8 +1894,12 @@
 
             
 
+            
+
              structures that approximate this <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -1648,8 +1918,12 @@
 
             
 
+            
+
              structures that approximate this <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -1665,8 +1939,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -1704,8 +1982,12 @@
 
             
 
+            
+
              to the intersection of itself with the specified <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -1721,6 +2003,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
@@ -1728,8 +2012,12 @@
 
           
 
+          
+
            to intersect with this <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -1767,8 +2055,12 @@
 
             
 
+            
+
              to the intersection of itself with the specified <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -1788,6 +2080,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
 
@@ -1795,8 +2089,12 @@
 
           
 
+          
+
            structure to intersect with this <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -1834,8 +2132,12 @@
 
             
 
+            
+
              to the intersection of itself with the specified <see
              cref="T:System.Drawing.RectangleF" />
+
+            
 
             
 
@@ -1851,6 +2153,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.RectangleF" />
 
@@ -1858,8 +2162,12 @@
 
           
 
+          
+
            structure to intersect with this <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -1897,8 +2205,12 @@
 
             
 
+            
+
              to the intersection of itself with the specified <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -1918,6 +2230,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Region" />
 
@@ -1925,8 +2239,12 @@
 
           
 
+          
+
            to intersect with this <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -1960,6 +2278,8 @@
 
             
 
+            
+
              is used to compute the region interior on the drawing surface.</para
           >
         </remarks>
@@ -1968,6 +2288,8 @@
           <para
             >Tests whether this <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -1986,8 +2308,12 @@
 
             
 
+            
+
              is empty when the transformation associated with <paramref
              name="g" />
+
+            
 
             
 
@@ -2003,8 +2329,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -2038,6 +2368,8 @@
 
             
 
+            
+
              is used to compute the region interior on the drawing surface.</para
           >
         </remarks>
@@ -2046,6 +2378,8 @@
           <para
             >Tests whether this <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -2064,8 +2398,12 @@
 
             
 
+            
+
              is infinite when the transformation associated with <paramref
              name="g" />
+
+            
 
             
 
@@ -2081,8 +2419,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -2117,8 +2459,12 @@
 
             
 
+            
+
              structure is contained within this <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -2137,8 +2483,12 @@
 
             
 
+            
+
              is contained within this <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -2154,8 +2504,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -2190,8 +2544,12 @@
 
             
 
+            
+
              structure is contained within this <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -2210,8 +2568,12 @@
 
             
 
+            
+
              is contained within this <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -2227,8 +2589,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -2266,8 +2632,12 @@
 
             
 
+            
+
              structure is contained within this <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -2286,8 +2656,12 @@
 
             
 
+            
+
              is contained within this <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -2303,8 +2677,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -2342,8 +2720,12 @@
 
             
 
+            
+
              structure is contained within this <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -2362,8 +2744,12 @@
 
             
 
+            
+
              is contained within this <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -2379,8 +2765,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.RectangleF" />
+
+          
 
           
 
@@ -2422,6 +2812,8 @@
 
             
 
+            
+
              structure is contained within this <see
              cref="T:System.Drawing.Region" />
 
@@ -2429,8 +2821,12 @@
 
             
 
+            
+
              when drawn using the specified <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -2449,8 +2845,12 @@
 
             
 
+            
+
              is contained within this <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -2466,8 +2866,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -2482,8 +2886,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -2525,6 +2933,8 @@
 
             
 
+            
+
              structure is contained within this <see
              cref="T:System.Drawing.Region" />
 
@@ -2532,8 +2942,12 @@
 
             
 
+            
+
              when drawn using the specified <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -2552,8 +2966,12 @@
 
             
 
+            
+
              is contained within this <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -2569,8 +2987,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -2585,8 +3007,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -2628,6 +3054,8 @@
 
             
 
+            
+
              structure is contained within this <see
              cref="T:System.Drawing.Region" />
 
@@ -2635,8 +3063,12 @@
 
             
 
+            
+
              when drawn using the specified <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -2655,8 +3087,12 @@
 
             
 
+            
+
              is contained within this <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -2672,8 +3108,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -2688,8 +3128,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -2731,6 +3175,8 @@
 
             
 
+            
+
              structure is contained within this <see
              cref="T:System.Drawing.Region" />
 
@@ -2738,8 +3184,12 @@
 
             
 
+            
+
              when drawn using the specified <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -2758,8 +3208,12 @@
 
             
 
+            
+
              is contained within this <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -2775,8 +3229,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.RectangleF" />
+
+          
 
           
 
@@ -2791,8 +3249,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -2828,6 +3290,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2836,6 +3300,8 @@
           <para
             >true when the specified point is contained within this <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -2851,10 +3317,14 @@
 
           
 
+          
+
           The x-coordinate of the point to test. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2897,8 +3367,12 @@
 
             
 
+            
+
              object when drawn using the specified <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -2917,11 +3391,15 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
         <param name="x">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2936,6 +3414,8 @@
 
           
 
+          
+
           The y-coordinate of the point to test. </param
         >
         <param name="g">
@@ -2945,8 +3425,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -2989,8 +3473,12 @@
 
             
 
+            
+
              when drawn using the specified <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -3009,11 +3497,15 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
         <param name="x">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3028,6 +3520,8 @@
 
           
 
+          
+
           The y-coordinate of the point to test. </param
         >
         <param name="g">
@@ -3037,8 +3531,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -3079,6 +3577,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3087,6 +3587,8 @@
           <para
             >true when any portion of the specified rectangle is contained within this <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -3102,10 +3604,14 @@
 
           
 
+          
+
           The x-coordinate of the upper-left corner of the rectangle to test. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3120,10 +3626,14 @@
 
           
 
+          
+
           The width of the rectangle to test. </param
         >
         <param name="height">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3164,6 +3674,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3172,6 +3684,8 @@
           <para
             >true when any portion of the specified rectangle is contained within this <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -3187,10 +3701,14 @@
 
           
 
+          
+
           The x-coordinate of the upper-left corner of the rectangle to test. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3205,10 +3723,14 @@
 
           
 
+          
+
           The width of the rectangle to test. </param
         >
         <param name="height">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3253,8 +3775,12 @@
 
             
 
+            
+
              when drawn using the specified <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -3273,11 +3799,15 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
         <param name="x">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3292,10 +3822,14 @@
 
           
 
+          
+
           The y-coordinate of the upper-left corner of the rectangle to test. </param
         >
         <param name="width">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3310,6 +3844,8 @@
 
           
 
+          
+
           The height of the rectangle to test. </param
         >
         <param name="g">
@@ -3319,8 +3855,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -3365,8 +3905,12 @@
 
             
 
+            
+
              when drawn using the specified <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -3385,11 +3929,15 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
         <param name="x">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3404,10 +3952,14 @@
 
           
 
+          
+
           The y-coordinate of the upper-left corner of the rectangle to test. </param
         >
         <param name="width">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3422,6 +3974,8 @@
 
           
 
+          
+
           The height of the rectangle to test. </param
         >
         <param name="g">
@@ -3431,8 +3985,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -3465,6 +4023,8 @@
 
             
 
+            
+
              to an empty interior.</para
           >
         </summary>
@@ -3488,6 +4048,8 @@
           <para
             >Initializes this <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -3526,6 +4088,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3536,8 +4100,12 @@
 
           
 
+          
+
           The handle to the <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -3571,8 +4139,12 @@
 
             
 
+            
+
              by the specified <see
              cref="T:System.Drawing.Drawing2D.Matrix" />
+
+            
 
             
 
@@ -3588,6 +4160,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
 
@@ -3595,8 +4169,12 @@
 
           
 
+          
+
            by which to transform this <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -3632,6 +4210,8 @@
 
             
 
+            
+
              by the specified amount.</para
           >
         </summary>
@@ -3642,8 +4222,12 @@
 
           
 
+          
+
           The amount to offset this <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -3658,8 +4242,12 @@
 
           
 
+          
+
           The amount to offset this <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -3695,6 +4283,8 @@
 
             
 
+            
+
              by the specified amount.</para
           >
         </summary>
@@ -3705,8 +4295,12 @@
 
           
 
+          
+
           The amount to offset this <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -3721,8 +4315,12 @@
 
           
 
+          
+
           The amount to offset this <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -3760,8 +4358,12 @@
 
             
 
+            
+
              to the union of itself and the specified <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -3777,6 +4379,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
@@ -3784,8 +4388,12 @@
 
           
 
+          
+
            to unite with this <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -3820,8 +4428,12 @@
 
             
 
+            
+
              to the union of itself and the specified <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -3837,6 +4449,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
 
@@ -3844,8 +4458,12 @@
 
           
 
+          
+
            structure to unite with this <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -3880,8 +4498,12 @@
 
             
 
+            
+
              to the union of itself and the specified <see
              cref="T:System.Drawing.RectangleF" />
+
+            
 
             
 
@@ -3897,6 +4519,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.RectangleF" />
 
@@ -3904,8 +4528,12 @@
 
           
 
+          
+
            structure to unite with this <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -3940,8 +4568,12 @@
 
             
 
+            
+
              to the union of itself and the specified <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -3957,6 +4589,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Region" />
 
@@ -3964,8 +4598,12 @@
 
           
 
+          
+
            to unite with this <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -4003,8 +4641,12 @@
 
             
 
+            
+
              to the union minus the intersection of itself with the specified <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -4020,8 +4662,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+          
 
           
 
@@ -4034,8 +4680,12 @@
 
           
 
+          
+
            with this <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -4070,8 +4720,12 @@
 
             
 
+            
+
              to the union minus the intersection of itself with the specified <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -4087,8 +4741,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -4101,8 +4759,12 @@
 
           
 
+          
+
            with this <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -4137,8 +4799,12 @@
 
             
 
+            
+
              to the union minus the intersection of itself with the specified <see
              cref="T:System.Drawing.RectangleF" />
+
+            
 
             
 
@@ -4154,8 +4820,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.RectangleF" />
+
+          
 
           
 
@@ -4168,8 +4838,12 @@
 
           
 
+          
+
            with this <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -4204,8 +4878,12 @@
 
             
 
+            
+
              to the union minus the intersection of itself with the specified <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 
@@ -4221,8 +4899,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -4235,8 +4917,12 @@
 
           
 
+          
+
            with this <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 

@@ -30,8 +30,12 @@
 
         
 
+        
+
          to identify data operation methods on a type marked with the <see
          cref="T:System.ComponentModel.DataObjectAttribute" />
+
+        
 
         
 
@@ -44,6 +48,8 @@
 
         
 
+        
+
          attribute is applied to a method, it describes the type of operation the method performs and indicates whether the method is the default data operation method of a type. Components such as the <see
          cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
@@ -51,8 +57,12 @@
 
         
 
+        
+
          control and the <see
          cref="T:System.Web.UI.Design.WebControls.ObjectDataSourceDesigner" />
+
+        
 
         
 
@@ -95,6 +105,8 @@
 
             
 
+            
+
              property is set to false when you create a <see
              cref="T:System.ComponentModel.DataObjectMethodAttribute" />
 
@@ -102,8 +114,12 @@
 
             
 
+            
+
              object using this <see
              cref="M:System.ComponentModel.DataObjectMethodAttribute.#ctor(System.ComponentModel.DataObjectMethodType)" />
+
+            
 
             
 
@@ -122,6 +138,8 @@
 
             
 
+            
+
              class and identifies the type of data operation the method performs.</para
           >
         </summary>
@@ -132,8 +150,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.ComponentModel.DataObjectMethodType" />
+
+          
 
           
 
@@ -173,6 +195,8 @@
 
             
 
+            
+
              class, identifies the type of data operation the method performs, and identifies whether the method is the default data method that the data object exposes.</para
           >
         </summary>
@@ -183,8 +207,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.ComponentModel.DataObjectMethodType" />
+
+          
 
           
 
@@ -199,8 +227,12 @@
 
           
 
+          
+
           true to indicate the method that the attribute is applied to is the default method of the data object for the specified <paramref
            name="methodType" />
+
+          
 
           
 
@@ -238,6 +270,8 @@
 
             
 
+            
+
              fits the pattern of another object.</para
           >
           <para />
@@ -256,6 +290,8 @@
 
             
 
+            
+
              parameter; otherwise, false.</para
           >
         </returns>
@@ -266,8 +302,12 @@
 
           
 
+          
+
           An object to compare with this instance of <see
            cref="T:System.ComponentModel.DataObjectMethodAttribute" />
+
+          
 
           
 
@@ -328,6 +368,8 @@
 
             
 
+            
+
              control uses the <see
              cref="P:System.ComponentModel.DataObjectMethodAttribute.IsDefault" />
 
@@ -335,8 +377,12 @@
 
             
 
+            
+
              property to distinguish between multiple methods that match the signature requirements for a specific method type. If two methods match the signature requirements, the method with the <see
              cref="P:System.ComponentModel.DataObjectMethodAttribute.IsDefault" />
+
+            
 
             
 
@@ -352,8 +398,12 @@
 
             
 
+            
+
              property is used to automatically set the <see
              cref="P:System.Web.UI.WebControls.ObjectDataSource.SelectMethod" />
+
+            
 
             
 
@@ -366,8 +416,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.UI.WebControls.ObjectDataSource.DeleteMethod" />
+
+            
 
             
 
@@ -380,8 +434,12 @@
 
             
 
+            
+
              properties on an <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 
@@ -397,8 +455,12 @@
 
             
 
+            
+
              is created using the <see
              cref="M:System.ComponentModel.DataObjectMethodAttribute.#ctor(System.ComponentModel.DataObjectMethodType)" />
+
+            
 
             
 
@@ -411,8 +473,12 @@
 
             
 
+            
+
              parameter, the <see
              cref="P:System.ComponentModel.DataObjectMethodAttribute.IsDefault" />
+
+            
 
             
 
@@ -426,6 +492,8 @@
           <para
             >Gets a value indicating whether the method that the <see
              cref="T:System.ComponentModel.DataObjectMethodAttribute" />
+
+            
 
             
 
@@ -464,8 +532,12 @@
 
             
 
+            
+
              fits the pattern of another. Its implementation is not the same as that of <see
              cref="M:System.ComponentModel.DataObjectMethodAttribute.Equals(System.Object)" />
+
+            
 
             
 
@@ -488,6 +560,8 @@
 
             
 
+            
+
              parameter; otherwise, false.</para
           >
         </returns>
@@ -498,8 +572,12 @@
 
           
 
+          
+
           An object to compare with this instance of <see
            cref="T:System.ComponentModel.DataObjectMethodAttribute" />
+
+          
 
           
 
@@ -534,6 +612,8 @@
           <para
             >Gets a <see
              cref="T:System.ComponentModel.DataObjectMethodType" />
+
+            
 
             
 

@@ -8,6 +8,8 @@
 
     
 
+    
+
     ) is applied to select a specific operator implementation. The operands are converted to the parameter types of the selected operator, and the type of the result is the return type of the operator. </paragraph
   >
   <paragraph
@@ -16,7 +18,7 @@
       <list_item
         > Integer remainder: <code_example
         >
-<![CDATA[
+          <![CDATA[
 int operator %(int x, int y);  
 uint operator %(uint x, uint y);  
 long operator %(long x, long y);  
@@ -28,16 +30,20 @@ ulong operator %(ulong x, ulong y);
 
         
 
+        
+
         The result of x % y is the value produced by x  -(x / y) * y. If y is zero, a System.DivideByZeroException is thrown. The remainder operator never causes an overflow. </list_item
       >
       <list_item
         > Floating-point remainder: <code_example
         >
-<![CDATA[
+          <![CDATA[
 float operator %(float x, float y);  
 double operator %(double x, double y);  
 ]]>
         </code_example>
+
+        
 
         
 
@@ -52,8 +58,12 @@ double operator %(double x, double y);
 
           
 
+          
+
           y +0 <unicode
           >150</unicode>
+
+          
 
           
 
@@ -63,6 +73,8 @@ double operator %(double x, double y);
            />
           <unicode>150</unicode>
           <infinity />
+
+          
 
           
 
@@ -78,8 +90,12 @@ double operator %(double x, double y);
 
           
 
+          
+
           x <unicode
           >150</unicode>
+
+          
 
           
 
@@ -92,6 +108,8 @@ double operator %(double x, double y);
 
           
 
+          
+
           z NaN NaN <unicode
           >150</unicode>
 
@@ -99,8 +117,12 @@ double operator %(double x, double y);
 
           
 
+          
+
           x <unicode
           >150</unicode>
+
+          
 
           
 
@@ -116,6 +138,8 @@ double operator %(double x, double y);
 
           
 
+          
+
           0 <unicode
           >150</unicode>
 
@@ -123,8 +147,12 @@ double operator %(double x, double y);
 
           
 
+          
+
           0 <unicode
           >150</unicode>
+
+          
 
           
 
@@ -137,8 +165,12 @@ double operator %(double x, double y);
 
           
 
+          
+
           0 <unicode
           >150</unicode>
+
+          
 
           
 
@@ -154,11 +186,15 @@ double operator %(double x, double y);
 
           
 
+          
+
            NaN NaN NaN NaN NaN NaN NaN </table_line
         >
         <table_line>
           <unicode>150</unicode>
           <infinity />
+
+          
 
           
 
@@ -171,10 +207,12 @@ double operator %(double x, double y);
       <list_item
         > Decimal remainder: <code_example
         >
-<![CDATA[
+          <![CDATA[
 decimal operator %(decimal x, decimal y);  
 ]]>
         </code_example>
+
+        
 
         
 
@@ -187,8 +225,12 @@ decimal operator %(decimal x, decimal y);
 
         
 
+        
+
          format, a System.OverflowException is thrown. If the result value is too small to represent in the <keyword
         >decimal</keyword>
+
+        
 
         
 

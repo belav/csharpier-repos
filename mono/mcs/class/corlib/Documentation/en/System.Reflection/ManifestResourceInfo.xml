@@ -60,11 +60,15 @@
 
             
 
+            
+
              class for a resource that is contained by the specified assembly and file, and that has the specified location.</para
           >
         </summary>
         <param name="containingAssembly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -79,10 +83,14 @@
 
           
 
+          
+
           The name of the file that contains the manifest resource, if the file is not the same as the manifest file.</param
         >
         <param name="resourceLocation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

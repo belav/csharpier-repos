@@ -33,8 +33,12 @@
 
         
 
+        
+
          class can be used by controls to create a <see
          cref="T:System.Net.Mail.MailMessage" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          class to simplify creating predefined e-mail messages to be sent by a control. If you want to send e-mail not using a control, see the <see
          cref="N:System.Net.Mail" />
+
+        
 
         
 
@@ -64,8 +72,12 @@
 
         
 
+        
+
          method an <see
          cref="T:System.Collections.IDictionary" />
+
+        
 
         
 
@@ -81,8 +93,12 @@
 
         
 
+        
+
          object created by the <see
          cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+        
 
         
 
@@ -95,8 +111,12 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.Net.Mail.SmtpClient" />
+
+        
 
         
 
@@ -106,6 +126,8 @@
          type="text/html">
           <a href="220b0329-e384-4e0c-86b4-0945ad17efd9">&lt;SMTP&gt; element</a>
         </format>
+
+        
 
         
 
@@ -122,8 +144,12 @@
 
           
 
+          
+
            class does not support data binding. Properties of the <see
            cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+          
 
           
 
@@ -151,6 +177,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+            
 
             
 
@@ -191,11 +219,15 @@
 
             
 
+            
+
              property specifies the location of the text file to use for the body of the e-mail message.</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.MailDefinition.CreateMailMessage(System.String,System.Collections.IDictionary,System.Web.UI.Control)" />
+
+            
 
             
 
@@ -208,8 +240,12 @@
 
             
 
+            
+
              parameter to map the <see
              cref="P:System.Web.UI.WebControls.MailDefinition.BodyFileName" />
+
+            
 
             
 
@@ -222,6 +258,8 @@
 
             
 
+            
+
              parameter points to a control on an .aspx page or to the page itself, the <see
              cref="P:System.Web.UI.WebControls.MailDefinition.BodyFileName" />
 
@@ -229,8 +267,12 @@
 
             
 
+            
+
              property points to a text file in the same directory as the .aspx page. For example, if the .aspx page is located at C:\inetpub\wwwroot\default.aspx, the <see
              cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+            
 
             
 
@@ -246,6 +288,8 @@
 
             
 
+            
+
              class is used in a user control contained in an .ascx file, the <see
              cref="P:System.Web.UI.WebControls.MailDefinition.BodyFileName" />
 
@@ -253,8 +297,12 @@
 
             
 
+            
+
              property points to a text file located in the same directory as the user control. For example, if the .aspx page is located at C:\inetpub\wwwroot\default.aspx and the user control is at C:\inetpub\wwwroot\controls\control.aspx, the <see
              cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+            
 
             
 
@@ -299,11 +347,15 @@
 
             
 
+            
+
              property contains a list of additional recipients of the e-mail message.</para
           >
           <para
             >If the <see
              cref="P:System.Web.UI.WebControls.MailDefinition.CC" />
+
+            
 
             
 
@@ -316,8 +368,12 @@
 
             
 
+            
+
              method throws an <see
              cref="T:System.Web.HttpException" />
+
+            
 
             
 
@@ -361,6 +417,8 @@
 
             
 
+            
+
              method creates a new <see
              cref="T:System.Net.Mail.MailMessage" />
 
@@ -368,8 +426,12 @@
 
             
 
+            
+
              object that can be sent using the <see
              cref="M:System.Net.Mail.SmtpClient.Send(System.String,System.String,System.String,System.String)" />
+
+            
 
             
 
@@ -385,6 +447,8 @@
 
             
 
+            
+
              property must be set to indicate whether the mail message should be formatted as plain text (<see
              cref="F:System.Web.Mail.MailFormat.Text" />
 
@@ -392,8 +456,12 @@
 
             
 
+            
+
             ) or HTML (<see
              cref="F:System.Web.Mail.MailFormat.Html" />
+
+            
 
             
 
@@ -409,8 +477,12 @@
 
             
 
+            
+
              parameter contains a comma-separated list of recipients of the e-mail message. If the <paramref
              name="recipients" />
+
+            
 
             
 
@@ -423,8 +495,12 @@
 
             
 
+            
+
              method throws an <see
              cref="T:System.Web.HttpException" />
+
+            
 
             
 
@@ -440,6 +516,8 @@
 
             
 
+            
+
              parameter is an <see
              cref="T:System.Collections.IDictionary" />
 
@@ -447,8 +525,12 @@
 
             
 
+            
+
              instance that contains a list of strings to substitute. Strings are replaced in the order in which they were added to the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -464,6 +546,8 @@
 
             
 
+            
+
              parameter indicates which control is the parent of the <see
              cref="T:System.Web.UI.WebControls.MailDefinition" />
 
@@ -471,8 +555,12 @@
 
             
 
+            
+
              control. It determines which directory to search for the text file specified in the <see
              cref="P:System.Web.UI.WebControls.MailDefinition.BodyFileName" />
+
+            
 
             
 
@@ -496,6 +584,8 @@
 
           
 
+          
+
           A comma-separated list of message recipients.</param
         >
         <param name="replacements">
@@ -505,8 +595,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -521,6 +615,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Control" />
 
@@ -528,8 +624,12 @@
 
           
 
+          
+
            that owns this <see
            cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+          
 
           
 
@@ -569,6 +669,8 @@
 
             
 
+            
+
              method creates a new <see
              cref="T:System.Net.Mail.MailMessage" />
 
@@ -576,8 +678,12 @@
 
             
 
+            
+
              object that can be sent with the <see
              cref="M:System.Net.Mail.SmtpClient.Send(System.String,System.String,System.String,System.String)" />
+
+            
 
             
 
@@ -593,8 +699,12 @@
 
             
 
+            
+
              parameter contains a comma-separated list of recipients of the e-mail message. If the <paramref
              name="recipients" />
+
+            
 
             
 
@@ -607,8 +717,12 @@
 
             
 
+            
+
              method throws an <see
              cref="T:System.Web.HttpException" />
+
+            
 
             
 
@@ -624,6 +738,8 @@
 
             
 
+            
+
              parameter is an <see
              cref="T:System.Collections.IDictionary" />
 
@@ -631,8 +747,12 @@
 
             
 
+            
+
              instance that contains a list of strings to substitute. Strings are replaced in the order in which they were added to the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -648,11 +768,15 @@
 
             
 
+            
+
              parameter contains the text of the e-mail message. </para
           >
           <para
             >The <paramref
              name="owner" />
+
+            
 
             
 
@@ -665,8 +789,12 @@
 
             
 
+            
+
              control. It determines which directory to search for the text file specified in the <see
              cref="P:System.Web.UI.WebControls.MailDefinition.BodyFileName" />
+
+            
 
             
 
@@ -690,6 +818,8 @@
 
           
 
+          
+
           The comma-separated list of recipients.</param
         >
         <param name="replacements">
@@ -699,8 +829,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -715,10 +849,14 @@
 
           
 
+          
+
           The text of the e-mail message.</param
         >
         <param name="owner">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -731,8 +869,12 @@
 
           
 
+          
+
            that owns this <see
            cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+          
 
           
 
@@ -778,6 +920,8 @@
 
             
 
+            
+
              items in the <see
              cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
 
@@ -785,8 +929,12 @@
 
             
 
+            
+
              collection returned by the <see
              cref="P:System.Web.UI.WebControls.MailDefinition.EmbeddedObjects" />
+
+            
 
             
 
@@ -805,8 +953,12 @@
 
             
 
+            
+
              instances, typically used to embed images in a <see
              cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+            
 
             
 
@@ -847,8 +999,12 @@
 
             
 
+            
+
              property contains the e-mail address of the sender of the e-mail message. If the <see
              cref="P:System.Web.UI.WebControls.MailDefinition.From" />
+
+            
 
             
 
@@ -861,8 +1017,12 @@
 
             
 
+            
+
              method throws an <see
              cref="T:System.Web.HttpException" />
+
+            
 
             
 
@@ -907,6 +1067,8 @@
 
             
 
+            
+
              property to specify whether the body of the e-mail message contains plain text or HTML markup.</para
           >
         </remarks>
@@ -941,6 +1103,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.WebControls.MailDefinition.Priority" />
+
+            
 
             
 
@@ -985,6 +1149,8 @@
 
             
 
+            
+
              property is used as the subject line of the e-mail message. It can be left empty.</para
           >
         </remarks>
@@ -1021,8 +1187,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 
@@ -1039,6 +1209,8 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.EmbeddedMailObject.Path" />
 
@@ -1046,8 +1218,12 @@
 
               
 
+              
+
                properties are not saved in the <see
                cref="P:System.Web.UI.Control.ViewState" />
+
+              
 
               
 
@@ -1087,8 +1263,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 
@@ -1102,6 +1282,8 @@
           <para
             >Restores view-state information from a previous page request that was saved by the <see
              cref="M:System.Web.UI.IStateManager.SaveViewState" />
+
+            
 
             
 
@@ -1133,8 +1315,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 
@@ -1174,8 +1360,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 
@@ -1189,6 +1379,8 @@
           <para
             >Causes tracking of view-state changes to the server control so they can be stored in the server control's <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 

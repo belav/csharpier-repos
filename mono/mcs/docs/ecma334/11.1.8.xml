@@ -8,8 +8,12 @@
 
     
 
+    
+
     , <keyword
     >sbyte</keyword>
+
+    
 
     
 
@@ -22,8 +26,12 @@
 
     
 
+    
+
     , <keyword
     >ushort</keyword>
+
+    
 
     
 
@@ -36,8 +44,12 @@
 
     
 
+    
+
     , <keyword
     >uint</keyword>
+
+    
 
     
 
@@ -50,6 +62,8 @@
 
     
 
+    
+
      or <keyword
     >ulong</keyword>
 
@@ -57,8 +71,12 @@
 
     
 
+    
+
     . Enumeration types are defined through enumeration declarations (<hyperlink
     >21.1</hyperlink>
+
+    
 
     
 

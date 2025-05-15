@@ -36,6 +36,8 @@
 
         
 
+        
+
          is specified at the class level. It can be inherited and does not allow multiple attributes on the same class. </para
       >
       <para
@@ -43,6 +45,8 @@
          type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
+
+        
 
         
 
@@ -80,6 +84,8 @@
 
             
 
+            
+
              property to null.</para
           >
         </remarks>
@@ -88,6 +94,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" />
+
+            
 
             
 
@@ -126,8 +134,12 @@
 
             
 
+            
+
              property to the value of the <paramref
              name="name" />
+
+            
 
             
 
@@ -146,11 +158,15 @@
 
             
 
+            
+
              class using the specified property name.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -188,8 +204,12 @@
 
             
 
+            
+
              member is a static, read-only field that defines an instance of the <see
              cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" />
+
+            
 
             
 
@@ -203,6 +223,8 @@
           <para
             >Represents the default value for the <see
              cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" />
+
+            
 
             
 
@@ -241,8 +263,12 @@
 
             
 
+            
+
              method returns true if the value of the <paramref
              name="obj" />
+
+            
 
             
 
@@ -255,8 +281,12 @@
 
             
 
+            
+
              and the <see
              cref="P:System.ComponentModel.DefaultBindingPropertyAttribute.Name" />
+
+            
 
             
 
@@ -275,8 +305,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" />
+
+            
 
             
 
@@ -296,6 +330,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -303,8 +339,12 @@
 
           
 
+          
+
            to compare with the current <see
            cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" />
+
+          
 
           
 
@@ -358,6 +398,8 @@
 
             
 
+            
+
              property is set in the constructor.</para
           >
         </remarks>
@@ -366,6 +408,8 @@
           <para
             >Gets the name of the default binding property for the component to which the <see
              cref="T:System.ComponentModel.DefaultBindingPropertyAttribute" />
+
+            
 
             
 

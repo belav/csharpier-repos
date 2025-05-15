@@ -10,11 +10,15 @@
 
     
 
+    
+
     ) in the accessors of that property. </paragraph
   >
   <paragraph
     >When a property is referenced in a <non_terminal
      where="14.5.4">member-access</non_terminal>
+
+    
 
     
 
@@ -27,11 +31,15 @@
 
     
 
+    
+
     ) of the form E.M, if M is a static property, E must denote a type that has a property M, and if M is an instance property, E must denote an instance having a property M. </paragraph
   >
   <paragraph
     >The differences between static and instance members are discussed further in <hyperlink
     >17.2.5</hyperlink>
+
+    
 
     
 

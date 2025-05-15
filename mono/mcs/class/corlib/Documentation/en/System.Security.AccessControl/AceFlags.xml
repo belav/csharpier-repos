@@ -119,8 +119,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Security.AccessControl.AceFlags.ContainerInherit" />
+
+            
 
             
 
@@ -133,8 +137,12 @@
 
             
 
+            
+
             , and <see
              cref="F:System.Security.AccessControl.AceFlags.InheritOnly" />
+
+            
 
             
 

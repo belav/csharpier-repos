@@ -20,8 +20,12 @@
 
         
 
+        
+
          enumeration values indicate whether a page or control should be compiled at run time. When no compilation mode is specified, the default value is <see
          cref="F:System.Web.UI.CompilationMode.Always" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
          attribute will increase performance by disqualifying the specified page in the compilation process. To define a page-specific <see
          cref="T:System.Web.UI.CompilationMode" />
+
+        
 
         
 
@@ -52,10 +60,14 @@
 
         
 
+        
+
          configuration section object identifies page-specific configuration settings. The <format
          type="text/html">
           <a href="4123bb66-3fe4-4d62-b70e-33758656b458">pages</a>
         </format>
+
+        
 
         
 
@@ -71,8 +83,12 @@
 
         
 
+        
+
          is set to <see
          cref="F:System.Web.UI.CompilationMode.Never" />
+
+        
 
         
 

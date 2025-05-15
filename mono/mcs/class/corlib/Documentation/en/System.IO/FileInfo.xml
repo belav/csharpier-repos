@@ -37,6 +37,8 @@
 
         
 
+        
+
          class for typical operations such as copying, moving, renaming, creating, opening, deleting, and appending to files.</para
       >
       <para
@@ -47,8 +49,12 @@
 
         
 
+        
+
          instance methods instead of the corresponding static methods of the <see
          cref="T:System.IO.File" />
+
+        
 
         
 
@@ -64,8 +70,12 @@
 
         
 
+        
+
          methods return other I/O types when you create or open files. You can use these other types to further manipulate a file. For more information, see specific <see
          cref="T:System.IO.FileInfo" />
+
+        
 
         
 
@@ -78,8 +88,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.IO.FileInfo.OpenRead" />
+
+        
 
         
 
@@ -92,8 +106,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.IO.FileInfo.CreateText" />
+
+        
 
         
 
@@ -106,12 +124,16 @@
 
         
 
+        
+
         .</para
       >
       <para>By default, full read/write access to new files is granted to all users.</para>
       <para
         >The following table describes the enumerations that are used to customize the behavior of various <see
          cref="T:System.IO.FileInfo" />
+
+        
 
         
 
@@ -187,6 +209,8 @@
 
         
 
+        
+
          class provides the following properties that enable you to retrieve information about a file. For an example of how to use each property, see the property pages. </para
       >
       <list type="bullet">
@@ -194,6 +218,8 @@
           <para
             >The <see
              cref="P:System.IO.FileInfo.Directory" />
+
+            
 
             
 
@@ -211,6 +237,8 @@
 
             
 
+            
+
              property retrieves the full path of the parent directory of a file.</para
           >
         </item>
@@ -218,6 +246,8 @@
           <para
             >The <see
              cref="P:System.IO.FileInfo.Exists" />
+
+            
 
             
 
@@ -235,6 +265,8 @@
 
             
 
+            
+
              property retrieves or sets a value that specifies whether a file can be modified.</para
           >
         </item>
@@ -242,6 +274,8 @@
           <para
             >The <see
              cref="P:System.IO.FileInfo.Length" />
+
+            
 
             
 
@@ -259,6 +293,8 @@
 
             
 
+            
+
              retrieves the name of a file.</para
           >
         </item>
@@ -269,6 +305,8 @@
       <para
         >Provides properties and instance methods for the creation, copying, deletion, moving, and opening of files, and aids in the creation of <see
          cref="T:System.IO.FileStream" />
+
+        
 
         
 
@@ -310,11 +348,15 @@
 
             
 
+            
+
              class, which acts as a wrapper for a file path.</para
           >
         </summary>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -352,8 +394,12 @@
 
             
 
+            
+
              that appends text to the file represented by this instance of the <see
              cref="T:System.IO.FileInfo" />
+
+            
 
             
 
@@ -400,6 +446,8 @@
 
             
 
+            
+
              method to allow overwriting of an existing file.</para
           >
           <block subset="none" type="note">
@@ -416,6 +464,8 @@
         </returns>
         <param name="destFileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -458,6 +508,8 @@
 
             
 
+            
+
               method to prevent overwriting of an existing file by default.</para
           >
           <block subset="none" type="note">
@@ -478,6 +530,8 @@
 
             
 
+            
+
              is true. If the file exists and <paramref
              name="overwrite" />
 
@@ -485,8 +539,12 @@
 
             
 
+            
+
              is false, an <see
              cref="T:System.IO.IOException" />
+
+            
 
             
 
@@ -502,10 +560,14 @@
 
           
 
+          
+
           The name of the new file to copy to. </param
         >
         <param name="overwrite">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -538,6 +600,8 @@
           <para
             >This method is a wrapper for the functionality provided by <see
              cref="M:System.IO.File.Create(System.String)" />
+
+            
 
             
 
@@ -587,6 +651,8 @@
 
             
 
+            
+
              that writes a new text file.</para
           >
         </summary>
@@ -628,6 +694,8 @@
 
             
 
+            
+
              method allows you to decrypt a file that was encrypted using the <see
              cref="M:System.IO.FileInfo.Encrypt" />
 
@@ -635,8 +703,12 @@
 
             
 
+            
+
              method.  The <see
              cref="M:System.IO.FileInfo.Decrypt" />
+
+            
 
             
 
@@ -652,8 +724,12 @@
 
             
 
+            
+
              method and the <see
              cref="M:System.IO.FileInfo.Decrypt" />
+
+            
 
             
 
@@ -668,6 +744,8 @@
           <para
             >Decrypts a file that was encrypted by the current account using the <see
              cref="M:System.IO.FileInfo.Encrypt" />
+
+            
 
             
 
@@ -732,6 +810,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -765,8 +845,12 @@
 
             
 
+            
+
              object, use the <see
              cref="P:System.IO.FileInfo.Directory" />
+
+            
 
             
 
@@ -782,6 +866,8 @@
 
             
 
+            
+
              calls <see
              cref="M:System.IO.FileSystemInfo.Refresh" />
 
@@ -789,8 +875,12 @@
 
             
 
+            
+
              and caches information about the file. On subsequent calls, you must call <see
              cref="M:System.IO.FileSystemInfo.Refresh" />
+
+            
 
             
 
@@ -837,6 +927,8 @@
 
             
 
+            
+
              method allows you to encrypt a file so that only the account used to call this method can decrypt it.  Use the <see
              cref="M:System.IO.FileInfo.Decrypt" />
 
@@ -844,8 +936,12 @@
 
             
 
+            
+
              method to decrypt a file encrypted by the <see
              cref="M:System.IO.FileInfo.Encrypt" />
+
+            
 
             
 
@@ -861,8 +957,12 @@
 
             
 
+            
+
              method and the <see
              cref="M:System.IO.FileInfo.Decrypt" />
+
+            
 
             
 
@@ -902,8 +1002,12 @@
 
             
 
+            
+
              calls <see
              cref="M:System.IO.FileSystemInfo.Refresh" />
+
+            
 
             
 
@@ -916,11 +1020,15 @@
 
             
 
+            
+
              to get the latest copy of the information.</para
           >
           <para
             >The <see
              cref="P:System.IO.FileInfo.Exists" />
+
+            
 
             
 
@@ -965,6 +1073,8 @@
 
             
 
+            
+
              method to retrieve the access control list (ACL) entries for the current file.</para
           >
           <para
@@ -977,12 +1087,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="53758b39-bd9b-4640-bb04-cad5ed8d0abf"
                 >How to: Add or Remove an Access Control List Entry</a
               >
             </format>
+
+            
 
             
 
@@ -1001,8 +1115,12 @@
 
             
 
+            
+
              object that encapsulates the access control list (ACL) entries for the file described by the current <see
              cref="T:System.IO.FileInfo" />
+
+            
 
             
 
@@ -1016,6 +1134,8 @@
           <para
             >A <see
              cref="T:System.Security.AccessControl.FileSecurity" />
+
+            
 
             
 
@@ -1061,6 +1181,8 @@
 
             
 
+            
+
              method to retrieve the access control list (ACL) entries for the current file.</para
           >
           <para
@@ -1073,12 +1195,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="53758b39-bd9b-4640-bb04-cad5ed8d0abf"
                 >How to: Add or Remove an Access Control List Entry</a
               >
             </format>
+
+            
 
             
 
@@ -1097,8 +1223,12 @@
 
             
 
+            
+
              object that encapsulates the specified type of access control list (ACL) entries for the file described by the current <see
              cref="T:System.IO.FileInfo" />
+
+            
 
             
 
@@ -1117,6 +1247,8 @@
 
             
 
+            
+
              object that encapsulates the access control rules for the current file.     </para
           >
         </returns>
@@ -1127,8 +1259,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AccessControlSections" />
+
+          
 
           
 
@@ -1162,11 +1298,15 @@
 
             
 
+            
+
              property to quickly determine or change whether the current file is read only.</para
           >
           <para
             >When first called, <see
              cref="T:System.IO.FileInfo" />
+
+            
 
             
 
@@ -1179,8 +1319,12 @@
 
             
 
+            
+
              and caches information about the file. On subsequent calls, you must call <see
              cref="M:System.IO.FileSystemInfo.Refresh" />
+
+            
 
             
 
@@ -1219,6 +1363,8 @@
 
             
 
+            
+
              property is pre-cached if the current instance of the <see
              cref="T:System.IO.FileInfo" />
 
@@ -1226,8 +1372,12 @@
 
             
 
+            
+
              object was returned from any of the following <see
              cref="T:System.IO.DirectoryInfo" />
+
+            
 
             
 
@@ -1270,6 +1420,8 @@
           <para
             >To get the latest value, call the <see
              cref="M:System.IO.FileSystemInfo.Refresh" />
+
+            
 
             
 
@@ -1318,6 +1470,8 @@
 
           
 
+          
+
           The path to move the file to, which can specify a different file name. </param
         >
       </Docs>
@@ -1346,6 +1500,8 @@
 
             
 
+            
+
              calls <see
              cref="M:System.IO.FileSystemInfo.Refresh" />
 
@@ -1353,8 +1509,12 @@
 
             
 
+            
+
              and caches information about the file. On subsequent calls, you must call <see
              cref="M:System.IO.FileSystemInfo.Refresh" />
+
+            
 
             
 
@@ -1408,8 +1568,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.FileMode" />
+
+          
 
           
 
@@ -1457,6 +1621,8 @@
 
             
 
+            
+
              object opened in the specified mode and access, and unshared.</para
           >
         </returns>
@@ -1467,8 +1633,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.FileMode" />
+
+          
 
           
 
@@ -1483,8 +1653,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.FileAccess" />
+
+          
 
           
 
@@ -1533,6 +1707,8 @@
 
             
 
+            
+
              object opened with the specified mode, access, and sharing options.</para
           >
         </returns>
@@ -1543,8 +1719,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.FileMode" />
+
+          
 
           
 
@@ -1559,8 +1739,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.FileAccess" />
+
+          
 
           
 
@@ -1575,8 +1759,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.FileShare" />
+
+          
 
           
 
@@ -1613,6 +1801,8 @@
 
             
 
+            
+
              object with the <see
              cref="T:System.IO.FileShare" />
 
@@ -1620,8 +1810,12 @@
 
             
 
+            
+
              mode set to <see
              cref="F:System.IO.FileShare.Read" />
+
+            
 
             
 
@@ -1640,6 +1834,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1648,6 +1844,8 @@
           <para
             >A new read-only <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -1681,6 +1879,8 @@
           <para
             >Creates a <see
              cref="T:System.IO.StreamReader" />
+
+            
 
             
 
@@ -1722,6 +1922,8 @@
 
             
 
+            
+
              method opens a file if one already exists for the file path, or creates a new file if one does not exist. For an existing file, it does not append the new text to the existing text. Instead, it overwrites the existing characters with the new characters. If you overwrite a longer string (such as "This is a test of the OpenWrite method") with a shorter string (like "Second run"), the file will contain a mix of the strings ("Second runtest of the OpenWrite method").</para
           >
         </remarks>
@@ -1735,6 +1937,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1743,6 +1947,8 @@
           <para
             >A write-only unshared <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -1791,6 +1997,8 @@
 
             
 
+            
+
              method replaces the contents of a specified file with the contents of the file described by the current <see
              cref="T:System.IO.FileInfo" />
 
@@ -1798,8 +2006,12 @@
 
             
 
+            
+
              object.  It also creates a backup of the file that was replaced.  Finally, it returns a new <see
              cref="T:System.IO.FileInfo" />
+
+            
 
             
 
@@ -1816,8 +2028,12 @@
 
               
 
+              
+
                is read-only and will not raise an exception. Use the <see
                cref="P:System.IO.FileInfo.IsReadOnly" />
+
+              
 
               
 
@@ -1829,6 +2045,8 @@
           <para
             >Pass null to the <paramref
              name="destBackupFileName" />
+
+            
 
             
 
@@ -1847,6 +2065,8 @@
 
             
 
+            
+
              object, deleting the original file, and creating a backup of the replaced file.</para
           >
         </summary>
@@ -1860,8 +2080,12 @@
 
             
 
+            
+
              object that encapsulates information about the file described by the <paramref
              name="destFileName" />
+
+            
 
             
 
@@ -1877,6 +2101,8 @@
 
           
 
+          
+
           The name of a file to replace with the current file.</param
         >
         <param name="destinationBackupFileName">
@@ -1886,8 +2112,12 @@
 
           
 
+          
+
           The name of a file with which to create a backup of the file described by the <paramref
            name="destFileName" />
+
+          
 
           
 
@@ -1936,6 +2166,8 @@
 
             
 
+            
+
              method replaces the contents of a specified file with the contents of the file described by the current <see
              cref="T:System.IO.FileInfo" />
 
@@ -1943,8 +2175,12 @@
 
             
 
+            
+
              object.  It also creates a backup of the file that was replaced.  Finally, it returns a new <see
              cref="T:System.IO.FileInfo" />
+
+            
 
             
 
@@ -1961,8 +2197,12 @@
 
               
 
+              
+
                is read-only and will not raise an exception. Use the <see
                cref="P:System.IO.FileInfo.IsReadOnly" />
+
+              
 
               
 
@@ -1974,6 +2214,8 @@
           <para
             >Pass null to the <paramref
              name="destBackupFileName" />
+
+            
 
             
 
@@ -1992,6 +2234,8 @@
 
             
 
+            
+
              object, deleting the original file, and creating a backup of the replaced file.  Also specifies whether to ignore merge errors. </para
           >
         </summary>
@@ -2005,8 +2249,12 @@
 
             
 
+            
+
              object that encapsulates information about the file described by the <paramref
              name="destFileName" />
+
+            
 
             
 
@@ -2022,10 +2270,14 @@
 
           
 
+          
+
           The name of a file to replace with the current file.</param
         >
         <param name="destinationBackupFileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2038,10 +2290,14 @@
 
           
 
+          
+
            parameter.</param
         >
         <param name="ignoreMetadataErrors">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2083,11 +2339,15 @@
 
             
 
+            
+
              method applies access control list (ACL) entries to the current file that represents the noninherited ACL list. </para
           >
           <para
             >Use the <see
              cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+
+            
 
             
 
@@ -2104,6 +2364,8 @@
 
               
 
+              
+
                parameter replaces the existing ACL for the file. To add permissions for a new user, use the <see
                cref="Overload:System.IO.Directory.GetAccessControl" />
 
@@ -2111,8 +2373,12 @@
 
               
 
+              
+
                method to obtain the existing ACL, modify it, and then use <see
                cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+
+              
 
               
 
@@ -2131,12 +2397,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="53758b39-bd9b-4640-bb04-cad5ed8d0abf"
                 >How to: Add or Remove an Access Control List Entry</a
               >
             </format>
+
+            
 
             
 
@@ -2152,8 +2422,12 @@
 
             
 
+            
+
              method persists only <see
              cref="T:System.Security.AccessControl.FileSecurity" />
+
+            
 
             
 
@@ -2166,8 +2440,12 @@
 
             
 
+            
+
              object has not been modified, it will not be persisted to a file.  Therefore, it is not possible to retrieve a <see
              cref="T:System.Security.AccessControl.FileSecurity" />
+
+            
 
             
 
@@ -2186,8 +2464,12 @@
 
                 
 
+                
+
                  method to retrieve the <see
                  cref="T:System.Security.AccessControl.FileSecurity" />
+
+                
 
                 
 
@@ -2205,6 +2487,8 @@
 
                 
 
+                
+
                  object for the destination file.</para
               >
             </item>
@@ -2217,6 +2501,8 @@
 
                 
 
+                
+
                  or <see
                  cref="M:System.Security.AccessControl.ObjectSecurity.GetSecurityDescriptorSddlForm(System.Security.AccessControl.AccessControlSections)" />
 
@@ -2224,8 +2510,12 @@
 
                 
 
+                
+
                  method of the source <see
                  cref="T:System.Security.AccessControl.FileSecurity" />
+
+                
 
                 
 
@@ -2243,6 +2533,8 @@
 
                 
 
+                
+
                  or <see
                  cref="M:System.Security.AccessControl.ObjectSecurity.SetSecurityDescriptorSddlForm(System.String)" />
 
@@ -2250,8 +2542,12 @@
 
                 
 
+                
+
                  method to copy the information retrieved in step 3 to the destination <see
                  cref="T:System.Security.AccessControl.FileSecurity" />
+
+                
 
                 
 
@@ -2269,8 +2565,12 @@
 
                 
 
+                
+
                  object to the destination file using the <see
                  cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+
+                
 
                 
 
@@ -2291,8 +2591,12 @@
 
             
 
+            
+
              object to the file described by the current <see
              cref="T:System.IO.FileInfo" />
+
+            
 
             
 
@@ -2308,8 +2612,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.AccessControl.FileSecurity" />
+
+          
 
           
 
@@ -2346,8 +2654,12 @@
 
             
 
+            
+
              method represents path that was passed to the constructor.  When you create a <see
              cref="T:System.IO.FileInfo" />
+
+            
 
             
 
@@ -2360,8 +2672,12 @@
 
             
 
+            
+
              method returns the fully qualified path.  However, there are cases where the string returned by the <see
              cref="M:System.IO.FileInfo.ToString" />
+
+            
 
             
 
@@ -2374,6 +2690,8 @@
 
             
 
+            
+
              object using the <see
              cref="Overload:System.IO.DirectoryInfo.GetFiles" />
 
@@ -2381,8 +2699,12 @@
 
             
 
+            
+
              method, the <see
              cref="M:System.IO.FileInfo.ToString" />
+
+            
 
             
 

@@ -25,11 +25,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >This enumeration is used to specify which user interface cues will be displayed or changed. For example, when the user presses the ALT key, the keyboard shortcuts on the menu are displayed by underlining the appropriate character. The bitwise combination of <see
          cref="T:System.Windows.Forms.UICues" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
          and <see
          cref="F:System.Windows.Forms.UICues.ChangeKeyboard" />
+
+        
 
         
 

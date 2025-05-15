@@ -37,6 +37,8 @@
 
         
 
+        
+
          value that is used.</para
       >
       <para
@@ -47,8 +49,12 @@
 
         
 
+        
+
          is used only for declarative security. For imperative security, use the <see
          cref="T:System.Security.Permissions.DataProtectionPermission" />
+
+        
 
         
 
@@ -62,6 +68,8 @@
       <para
         >Allows security actions for <see
          cref="T:System.Security.Permissions.DataProtectionPermission" />
+
+        
 
         
 
@@ -102,8 +110,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Security.Permissions.SecurityAction" />
+
+            
 
             
 
@@ -119,8 +131,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 
@@ -165,6 +181,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -173,6 +191,8 @@
           <para
             >A <see
              cref="T:System.Security.Permissions.DataProtectionPermission" />
+
+            
 
             
 
@@ -234,8 +254,12 @@
 
             
 
+            
+
              occurs when the <see
              cref="M:System.Security.Cryptography.ProtectedData.Protect(System.Byte[],System.Byte[],System.Security.Cryptography.DataProtectionScope)" />
+
+            
 
             
 
@@ -249,6 +273,8 @@
           <para
             >Gets or sets a value indicating whether data can be encrypted using the <see
              cref="T:System.Security.Cryptography.ProtectedData" />
+
+            
 
             
 
@@ -283,8 +309,12 @@
 
             
 
+            
+
              occurs when the <see
              cref="M:System.Security.Cryptography.ProtectedMemory.Protect(System.Byte[],System.Security.Cryptography.MemoryProtectionScope)" />
+
+            
 
             
 
@@ -298,6 +328,8 @@
           <para
             >Gets or sets a value indicating whether memory can be encrypted using the <see
              cref="T:System.Security.Cryptography.ProtectedMemory" />
+
+            
 
             
 
@@ -332,8 +364,12 @@
 
             
 
+            
+
              occurs when the <see
              cref="M:System.Security.Cryptography.ProtectedData.Unprotect(System.Byte[],System.Byte[],System.Security.Cryptography.DataProtectionScope)" />
+
+            
 
             
 
@@ -347,6 +383,8 @@
           <para
             >Gets or sets a value indicating whether data can be unencrypted using the <see
              cref="T:System.Security.Cryptography.ProtectedData" />
+
+            
 
             
 
@@ -381,8 +419,12 @@
 
             
 
+            
+
              occurs when the <see
              cref="M:System.Security.Cryptography.ProtectedMemory.Unprotect(System.Byte[],System.Security.Cryptography.MemoryProtectionScope)" />
+
+            
 
             
 
@@ -396,6 +438,8 @@
           <para
             >Gets or sets a value indicating whether memory can be unencrypted using the <see
              cref="T:System.Security.Cryptography.ProtectedMemory" />
+
+            
 
             
 

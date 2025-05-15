@@ -13,6 +13,8 @@
 
         
 
+        
+
         . </list_item
       >
     </list>
@@ -26,13 +28,15 @@
 
     
 
+    
+
     . </paragraph
   >
   <paragraph>
     <example
       >[Example: The following example shows an implementation and subsequent usage of operator++ for an integer vector class: <code_example
       >
-<![CDATA[
+        <![CDATA[
 public class IntVector  
 {  
    public int Length { ... }    // read-only property  
@@ -67,8 +71,12 @@ class Test
 
       
 
+      
+
       ), and the prefix increment and decrement operators (<hyperlink
       >14.6.5</hyperlink>
+
+      
 
       
 

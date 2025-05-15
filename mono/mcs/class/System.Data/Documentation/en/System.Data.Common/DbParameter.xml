@@ -29,8 +29,12 @@
 
         
 
+        
+
          and optionally, its mapping to a <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -42,6 +46,8 @@
             >Configuring Parameters and Parameter Data Types (ADO.NET)</a
           >
         </format>
+
+        
 
         
 
@@ -64,6 +70,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.Common.DbParameter" />
+
+            
 
             
 
@@ -111,6 +119,8 @@
 
             
 
+            
+
              of the parameter.</para
           >
         </summary>
@@ -149,6 +159,8 @@
 
             
 
+            
+
              is output, and execution of the associated <see
              cref="T:System.Data.Common.DbCommand" />
 
@@ -156,8 +168,12 @@
 
             
 
+            
+
              does not return a value, the <see
              cref="T:System.Data.Common.DbParameter" />
+
+            
 
             
 
@@ -173,8 +189,12 @@
 
             
 
+            
+
              cannot be accessed until you call <see
              cref="M:System.Data.Common.DbDataReader.Close" />
+
+            
 
             
 
@@ -187,8 +207,12 @@
 
             
 
+            
+
              on the <see
              cref="T:System.Data.Common.DbDataReader" />
+
+            
 
             
 
@@ -236,6 +260,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -268,6 +294,8 @@
           <para
             >Gets or sets the name of the <see
              cref="T:System.Data.Common.DbParameter" />
+
+            
 
             
 
@@ -324,6 +352,8 @@
 
             
 
+            
+
              property is used for binary and string types.</para
           >
           <para
@@ -334,8 +364,12 @@
 
             
 
+            
+
              property refers to the number of bytes. For Unicode string data, <see
              cref="P:System.Data.Common.DbParameter.Size" />
+
+            
 
             
 
@@ -351,8 +385,12 @@
 
             
 
+            
+
              describes the maximum amount of data to transmit to the server. For example, for a Unicode string value, <see
              cref="P:System.Data.Common.DbParameter.Size" />
+
+            
 
             
 
@@ -368,11 +406,15 @@
 
             
 
+            
+
             . This is not required for input parameters, and if not explicitly set, the value is inferred from the actual size of the specified parameter when a parameterized statement is executed.</para
           >
           <para
             >The <see
              cref="P:System.Data.Common.DbParameter.DbType" />
+
+            
 
             
 
@@ -385,8 +427,12 @@
 
             
 
+            
+
              properties of a parameter can be inferred by setting <see
              cref="P:System.Data.Common.DbParameter.Value" />
+
+            
 
             
 
@@ -399,8 +445,12 @@
 
             
 
+            
+
              property settings. For example, if the size of the parameter has been inferred, <see
              cref="P:System.Data.Common.DbParameter.Size" />
+
+            
 
             
 
@@ -416,11 +466,15 @@
 
             
 
+            
+
              is ignored. It can be retrieved for informational purposes, and returns the maximum amount of bytes the provider uses when transmitting the value of the parameter to the server.</para
           >
           <para
             >If the size of the value supplied for a <see
              cref="T:System.Data.Common.DbParameter" />
+
+            
 
             
 
@@ -433,8 +487,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Data.Common.DbParameter.Value" />
+
+            
 
             
 
@@ -447,8 +505,12 @@
 
             
 
+            
+
              will contain the specified value, truncated to the Size of the <see
              cref="T:System.Data.Common.DbParameter" />
+
+            
 
             
 
@@ -464,8 +526,12 @@
 
             
 
+            
+
              is length in Unicode characters. For parameters of type DbType.Xml, <see
              cref="P:System.Data.Common.DbParameter.Size" />
+
+            
 
             
 
@@ -507,8 +573,12 @@
 
             
 
+            
+
              is set to anything other than an empty string, the value of the parameter is retrieved from the column with the <see
              cref="P:System.Data.Common.DbParameter.SourceColumn" />
+
+            
 
             
 
@@ -521,8 +591,12 @@
 
             
 
+            
+
              is set to Input, the value is taken from the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -535,8 +609,12 @@
 
             
 
+            
+
              is set to Output, the value is taken from the data source. A <see
              cref="P:System.Data.Common.DbParameter.Direction" />
+
+            
 
             
 
@@ -552,10 +630,14 @@
 
             
 
+            
+
              property, see <format
              type="text/html">
               <a href="f21e6aba-b76d-46ad-a83e-2ad8e0af1e12">Using Parameters with a DataAdapter</a>
             </format>
+
+            
 
             
 
@@ -567,6 +649,8 @@
                 >Updating the Database with a DataAdapter and the DataSet</a
               >
             </format>
+
+            
 
             
 
@@ -585,8 +669,12 @@
 
             
 
+            
+
              and used for loading or returning the <see
              cref="P:System.Data.Common.DbParameter.Value" />
+
+            
 
             
 
@@ -632,8 +720,12 @@
 
             
 
+            
+
              is used by the <see
              cref="T:System.Data.Common.DbCommandBuilder" />
+
+            
 
             
 
@@ -646,8 +738,12 @@
 
             
 
+            
+
              is limited to developers inheriting from <see
              cref="T:System.Data.Common.DbCommandBuilder" />
+
+            
 
             
 
@@ -662,8 +758,12 @@
 
             
 
+            
+
              uses this property to determine whether the source column is nullable, and sets this property to true if it is nullable, and false if it is not. When <see
              cref="T:System.Data.Common.DbCommandBuilder" />
+
+            
 
             
 
@@ -676,8 +776,12 @@
 
             
 
+            
+
              for each parameter. If the property is true, <see
              cref="T:System.Data.Common.DbCommandBuilder" />
+
+            
 
             
 
@@ -695,8 +799,12 @@
 
             
 
+            
+
              for the field is false, <see
              cref="T:System.Data.Common.DbCommandBuilder" />
+
+            
 
             
 
@@ -712,6 +820,8 @@
           <para
             >Sets or gets a value which indicates whether the source column is nullable. This allows <see
              cref="T:System.Data.Common.DbCommandBuilder" />
+
+            
 
             
 
@@ -752,8 +862,12 @@
 
             
 
+            
+
              during an <see
              cref="Overload:System.Data.Common.DbDataAdapter.Update" />
+
+            
 
             
 
@@ -766,6 +880,8 @@
 
             
 
+            
+
              used by the DataRow.Item property, or the <see
              cref="M:System.Data.DataRow.GetChildRows(System.String,System.Data.DataRowVersion)" />
 
@@ -773,8 +889,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -793,8 +913,12 @@
 
             
 
+            
+
              to use when you load <see
              cref="P:System.Data.Common.DbParameter.Value" />
+
+            
 
             
 
@@ -832,8 +956,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Data.IDbDataParameter" />
+
+            
 
             
 
@@ -844,6 +972,8 @@
           <para
             >For more information, see <see
              cref="P:System.Data.IDbDataParameter.Precision" />
+
+            
 
             
 
@@ -882,8 +1012,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Data.IDbDataParameter" />
+
+            
 
             
 
@@ -899,6 +1033,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -907,6 +1043,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Data.IDbDataParameter.Scale" />
+
+            
 
             
 
@@ -944,6 +1082,8 @@
 
             
 
+            
+
              that is sent to the server. For output and return value parameters, the value is set on completion of the <see
              cref="T:System.Data.Common.DbCommand" />
 
@@ -951,8 +1091,12 @@
 
             
 
+            
+
              and after the <see
              cref="T:System.Data.Common.DbDataReader" />
+
+            
 
             
 
@@ -968,8 +1112,12 @@
 
             
 
+            
+
             , not null. The null value in the system is an empty object that has no value. <see
              cref="T:System.DBNull" />
+
+            
 
             
 
@@ -985,6 +1133,8 @@
 
             
 
+            
+
              interface. Conversion errors may result if the specified type is not compatible with the value.</para
           >
           <para
@@ -995,11 +1145,15 @@
 
             
 
+            
+
              property can be inferred by setting the Value.</para
           >
           <para
             >The <see
              cref="P:System.Data.Common.DbParameter.Value" />
+
+            
 
             
 

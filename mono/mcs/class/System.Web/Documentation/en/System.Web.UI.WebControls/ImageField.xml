@@ -24,8 +24,12 @@
 
         
 
+        
+
          class is used by data-bound controls (such as <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
         ) to display an image for each record displayed. The <see
          cref="T:System.Web.UI.WebControls.ImageField" />
+
+        
 
         
 
@@ -52,6 +60,8 @@
 
         
 
+        
+
          control displays an <see
          cref="T:System.Web.UI.WebControls.ImageField" />
 
@@ -59,8 +69,12 @@
 
         
 
+        
+
          object as a column, while the <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -76,6 +90,8 @@
 
         
 
+        
+
          object to a field from a data source that contains the URL of an image. This is accomplished by setting the <see
          cref="P:System.Web.UI.WebControls.ImageField.DataImageUrlField" />
 
@@ -83,8 +99,12 @@
 
         
 
+        
+
          property. The URL value can be formatted by using the <see
          cref="P:System.Web.UI.WebControls.ImageField.DataImageUrlFormatString" />
+
+        
 
         
 
@@ -102,6 +122,8 @@
 
             
 
+            
+
              property to specify alternate text that applies to all images.</para
           >
         </item>
@@ -114,6 +136,8 @@
 
             
 
+            
+
              property to bind a field from a data source to the <see
              cref="P:System.Web.UI.WebControls.Image.AlternateText" />
 
@@ -121,8 +145,12 @@
 
             
 
+            
+
              property of each image. This allows you to have different alternate text for each image displayed. When binding data, you can optionally format the alternate text by using the <see
              cref="P:System.Web.UI.WebControls.ImageField.DataAlternateTextFormatString" />
+
+            
 
             
 
@@ -140,8 +168,12 @@
 
         
 
+        
+
          property. Instead of an alternate image, you can display alternate text by setting the <see
          cref="P:System.Web.UI.WebControls.ImageField.NullDisplayText" />
+
+        
 
         
 
@@ -157,8 +189,12 @@
 
         
 
+        
+
          object in a data-bound control by setting the <see
          cref="P:System.Web.UI.WebControls.DataControlField.Visible" />
+
+        
 
         
 
@@ -174,8 +210,12 @@
 
         
 
+        
+
          object. To display a caption in the header or footer section, set the <see
          cref="P:System.Web.UI.WebControls.DataControlField.HeaderText" />
+
+        
 
         
 
@@ -188,8 +228,12 @@
 
         
 
+        
+
          properties, respectively. To display an image in the header section instead of text, set the <see
          cref="P:System.Web.UI.WebControls.DataControlField.HeaderImageUrl" />
+
+        
 
         
 
@@ -202,8 +246,12 @@
 
         
 
+        
+
          object by setting the <see
          cref="P:System.Web.UI.WebControls.DataControlField.ShowHeader" />
+
+        
 
         
 
@@ -220,8 +268,12 @@
 
           
 
+          
+
            control) can show or hide only the entire header section of the control. These data-bound controls do not support the <see
            cref="P:System.Web.UI.WebControls.DataControlField.ShowHeader" />
+
+          
 
           
 
@@ -233,6 +285,8 @@
       <para
         >You also can customize the appearance of the <see
          cref="T:System.Web.UI.WebControls.ImageField" />
+
+        
 
         
 
@@ -266,6 +320,8 @@
 
               
 
+              
+
                object. </para
             >
           </description>
@@ -280,6 +336,8 @@
             <para
               >The style settings for the footer section of the <see
                cref="T:System.Web.UI.WebControls.ImageField" />
+
+              
 
               
 
@@ -304,6 +362,8 @@
 
               
 
+              
+
                object. </para
             >
           </description>
@@ -318,6 +378,8 @@
             <para
               >The style settings for the data items in the <see
                cref="T:System.Web.UI.WebControls.ImageField" />
+
+              
 
               
 
@@ -351,11 +413,15 @@
 
             
 
+            
+
              class. This constructor is commonly used when adding fields to a dynamically created data-bound control.</para
           >
           <para
             >To dynamically add an <see
              cref="T:System.Web.UI.WebControls.ImageField" />
+
+            
 
             
 
@@ -368,8 +434,12 @@
 
             
 
+            
+
              object, set its properties, and then add it to the data-bound control's field collection. For example, if you are using the <see
              cref="T:System.Web.UI.WebControls.GridView" />
+
+            
 
             
 
@@ -382,8 +452,12 @@
 
             
 
+            
+
              object to the <see
              cref="P:System.Web.UI.WebControls.GridView.Columns" />
+
+            
 
             
 
@@ -400,6 +474,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.ImageField" />
+
+            
 
             
 
@@ -440,8 +516,12 @@
 
             
 
+            
+
              property to specify the alternate text for the images displayed in an <see
              cref="T:System.Web.UI.WebControls.ImageField" />
+
+            
 
             
 
@@ -458,8 +538,12 @@
 
               
 
+              
+
                object share the same alternate text. As an alternative, you can bind the alternate text to a field in a data source by setting the <see
                cref="P:System.Web.UI.WebControls.ImageField.DataAlternateTextField" />
+
+              
 
               
 
@@ -472,6 +556,8 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.ImageField.DataAlternateTextField" />
 
@@ -479,8 +565,12 @@
 
               
 
+              
+
                properties are set, the <see
                cref="P:System.Web.UI.WebControls.ImageField.DataAlternateTextField" />
+
+              
 
               
 
@@ -497,12 +587,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -516,6 +610,8 @@
           <para
             >Gets or sets the alternate text displayed for an image in the <see
              cref="T:System.Web.UI.WebControls.ImageField" />
+
+            
 
             
 
@@ -556,6 +652,8 @@
 
             
 
+            
+
              property to specify whether an empty string value is automatically converted to null when the data field is updated in the data source</para
           >
           <block subset="none" type="note">
@@ -567,8 +665,12 @@
 
               
 
+              
+
                class displays null as empty strings by default. To display a different value, set the <see
                cref="P:System.Web.UI.WebControls.ImageField.NullDisplayText" />
+
+              
 
               
 
@@ -611,6 +713,8 @@
 
             
 
+            
+
              method is called by the <see
              cref="M:System.Web.UI.WebControls.DataControlField.CloneField" />
 
@@ -618,8 +722,12 @@
 
             
 
+            
+
              method to copy the properties of the current <see
              cref="T:System.Web.UI.WebControls.ImageField" />
+
+            
 
             
 
@@ -638,6 +746,8 @@
 
             
 
+            
+
              object to the specified object.</para
           >
         </summary>
@@ -648,8 +758,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.DataControlField" />
+
+          
 
           
 
@@ -684,6 +798,8 @@
 
             
 
+            
+
              method is called by the <see
              cref="M:System.Web.UI.WebControls.DataControlField.CloneField" />
 
@@ -691,8 +807,12 @@
 
             
 
+            
+
              method to create a new instance of the <see
              cref="T:System.Web.UI.WebControls.ImageField" />
+
+            
 
             
 
@@ -711,6 +831,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -719,6 +841,8 @@
           <para
             >A new instance of the <see
              cref="T:System.Web.UI.WebControls.ImageField" />
+
+            
 
             
 
@@ -762,6 +886,8 @@
 
             
 
+            
+
              property to specify the name of the filed from the data source that contains the values to bind to the <see
              cref="P:System.Web.UI.WebControls.Image.AlternateText" />
 
@@ -769,8 +895,12 @@
 
             
 
+            
+
              property of each image in an <see
              cref="T:System.Web.UI.WebControls.ImageField" />
+
+            
 
             
 
@@ -787,8 +917,12 @@
 
               
 
+              
+
                property instead of this property. If both the <see
                cref="P:System.Web.UI.WebControls.ImageField.AlternateText" />
+
+              
 
               
 
@@ -801,8 +935,12 @@
 
               
 
+              
+
                properties are set, the <see
                cref="P:System.Web.UI.WebControls.ImageField.DataAlternateTextField" />
+
+              
 
               
 
@@ -822,8 +960,12 @@
 
             
 
+            
+
              property of each image in an <see
              cref="T:System.Web.UI.WebControls.ImageField" />
+
+            
 
             
 
@@ -864,8 +1006,12 @@
 
             
 
+            
+
              property to specify a custom format for the alternate text values of the images displayed in an <see
              cref="T:System.Web.UI.WebControls.ImageField" />
+
+            
 
             
 
@@ -882,8 +1028,12 @@
 
               
 
+              
+
                property is set. It is not applied when the <see
                cref="P:System.Web.UI.WebControls.ImageField.AlternateText" />
+
+              
 
               
 
@@ -900,11 +1050,15 @@
 
             
 
+            
+
              property is not set, the alternate text values do not get any special formatting.</para
           >
           <para
             >The format string can be any literal string and usually contains a placeholder for the field's value. For example, in the format string "Item Value: {0}", the "{0}" placeholder is replaced with the value of the fields specified by the <see
              cref="P:System.Web.UI.WebControls.ImageField.DataAlternateTextField" />
+
+            
 
             
 
@@ -1002,6 +1156,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1010,6 +1166,8 @@
           <para
             >Gets or sets the string that specifies the format in which the alternate text for each image in an <see
              cref="T:System.Web.UI.WebControls.ImageField" />
+
+            
 
             
 
@@ -1053,8 +1211,12 @@
 
             
 
+            
+
              property to specify the name of the field to bind to the <see
              cref="P:System.Web.UI.MobileControls.Image.ImageUrl" />
+
+            
 
             
 
@@ -1067,6 +1229,8 @@
 
             
 
+            
+
              object. The specified field must contain the URLs for the images to display in the <see
              cref="T:System.Web.UI.WebControls.ImageField" />
 
@@ -1074,8 +1238,12 @@
 
             
 
+            
+
              object. You can optionally format the URL values by setting the <see
              cref="P:System.Web.UI.WebControls.ImageField.DataImageUrlFormatString" />
+
+            
 
             
 
@@ -1092,8 +1260,12 @@
 
               
 
+              
+
                property. Instead of an alternate image, you can display alternate text by setting the <see
                cref="P:System.Web.UI.WebControls.ImageField.NullDisplayText" />
+
+              
 
               
 
@@ -1113,8 +1285,12 @@
 
             
 
+            
+
              property of each image in an <see
              cref="T:System.Web.UI.WebControls.ImageField" />
+
+            
 
             
 
@@ -1155,8 +1331,12 @@
 
             
 
+            
+
              property to specify a custom format for the URLs of the images displayed in an <see
              cref="T:System.Web.UI.WebControls.ImageField" />
+
+            
 
             
 
@@ -1169,8 +1349,12 @@
 
             
 
+            
+
              object simply contains the file name. If the <see
              cref="P:System.Web.UI.WebControls.ImageField.DataImageUrlFormatString" />
+
+            
 
             
 
@@ -1181,6 +1365,8 @@
           <para
             >The format string can be any literal string and usually contains a placeholder for the field's value. For example, in the format string "Item Value: {0}", the "{0}" placeholder is replaced with the value of the fields specified by the <see
              cref="P:System.Web.UI.WebControls.ImageField.DataImageUrlField" />
+
+            
 
             
 
@@ -1278,6 +1464,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1286,6 +1474,8 @@
           <para
             >Gets or sets the string that specifies the format in which the URL for each image in an <see
              cref="T:System.Web.UI.WebControls.ImageField" />
+
+            
 
             
 
@@ -1326,6 +1516,8 @@
 
             
 
+            
+
              method is a helper method used to retrieve the values of the fields from the specified <see
              cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
 
@@ -1333,8 +1525,12 @@
 
             
 
+            
+
              object in an <see
              cref="T:System.Web.UI.WebControls.ImageField" />
+
+            
 
             
 
@@ -1353,6 +1549,8 @@
 
             
 
+            
+
              object passed in for the <paramref
              name="dictionary" />
 
@@ -1360,8 +1558,12 @@
 
             
 
+            
+
              parameter. After the method has been called, iterate through the <see
              cref="T:System.Collections.Specialized.IOrderedDictionary" />
+
+            
 
             
 
@@ -1378,8 +1580,12 @@
 
               
 
+              
+
                object, pass in true for the <paramref
                name="includeReadOnly" />
+
+              
 
               
 
@@ -1399,8 +1605,12 @@
 
             
 
+            
+
              object with the values from the specified <see
              cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
+
+            
 
             
 
@@ -1416,8 +1626,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Specialized.IOrderedDictionary" />
+
+          
 
           
 
@@ -1432,8 +1646,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
+
+          
 
           
 
@@ -1448,8 +1666,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.DataControlRowState" />
+
+          
 
           
 
@@ -1459,6 +1681,8 @@
         >
         <param name="includeReadOnly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1496,6 +1720,8 @@
 
             
 
+            
+
              method is a helper method used by the <see
              cref="T:System.Web.UI.WebControls.ImageField" />
 
@@ -1503,8 +1729,12 @@
 
             
 
+            
+
              class to apply the format specified by the <see
              cref="P:System.Web.UI.WebControls.ImageField.DataImageUrlFormatString" />
+
+            
 
             
 
@@ -1518,6 +1748,8 @@
           <para
             >Applies the format specified by the <see
              cref="P:System.Web.UI.WebControls.ImageField.DataImageUrlFormatString" />
+
+            
 
             
 
@@ -1554,6 +1786,8 @@
 
             
 
+            
+
              method is a helper method used by the <see
              cref="T:System.Web.UI.WebControls.ImageField" />
 
@@ -1561,8 +1795,12 @@
 
             
 
+            
+
              class to determine what value to display for a field when rendering an <see
              cref="T:System.Web.UI.WebControls.ImageField" />
+
+            
 
             
 
@@ -1576,6 +1814,8 @@
           <para
             >Retrieves the value used for a field's value when rendering the <see
              cref="T:System.Web.UI.WebControls.ImageField" />
+
+            
 
             
 
@@ -1617,8 +1857,12 @@
 
             
 
+            
+
              method is a helper method used by the <see
              cref="T:System.Web.UI.WebControls.ImageField" />
+
+            
 
             
 
@@ -1631,6 +1875,8 @@
 
             
 
+            
+
              property to the alternate text value. The alternate text value is contained in the <see
              cref="T:System.Web.UI.Control" />
 
@@ -1638,8 +1884,12 @@
 
             
 
+            
+
              object specified by the <paramref
              name="controlContainer" />
+
+            
 
             
 
@@ -1658,8 +1908,12 @@
 
             
 
+            
+
              property to the alternate text value contained in the specified <see
              cref="T:System.Web.UI.Control" />
+
+            
 
             
 
@@ -1679,8 +1933,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Control" />
+
+          
 
           
 
@@ -1750,8 +2008,12 @@
 
             
 
+            
+
              method is called by the data control with which the <see
              cref="T:System.Web.UI.WebControls.ImageField" />
+
+            
 
             
 
@@ -1764,6 +2026,8 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.UI.WebControls.GridView" />
 
@@ -1771,8 +2035,12 @@
 
             
 
+            
+
              call the <see
              cref="M:System.Web.UI.WebControls.ImageField.Initialize(System.Boolean,System.Web.UI.Control)" />
+
+            
 
             
 
@@ -1788,8 +2056,12 @@
 
             
 
+            
+
              objects to perform basic initialization for an <see
              cref="T:System.Web.UI.WebControls.ImageField" />
+
+            
 
             
 
@@ -1802,6 +2074,8 @@
 
             
 
+            
+
             -derived type requires any object initialization before it populates <see
              cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
 
@@ -1809,8 +2083,12 @@
 
             
 
+            
+
              objects with data or controls in the <see
              cref="M:System.Web.UI.WebControls.ImageField.InitializeCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlCellType,System.Web.UI.WebControls.DataControlRowState,System.Int32)" />
+
+            
 
             
 
@@ -1824,6 +2102,8 @@
           <para
             >Initializes the <see
              cref="T:System.Web.UI.WebControls.ImageField" />
+
+            
 
             
 
@@ -1843,8 +2123,12 @@
 
           
 
+          
+
           The data control that contains the <see
            cref="T:System.Web.UI.WebControls.ImageField" />
+
+          
 
           
 
@@ -1884,8 +2168,12 @@
 
             
 
+            
+
              method is implemented by <see
              cref="T:System.Web.UI.WebControls.ImageField" />
+
+            
 
             
 
@@ -1898,8 +2186,12 @@
 
             
 
+            
+
              object of a data control that uses tables to display a user interface (UI). These data controls create the complete table structure row-by-row when the control's CreateChildControls method is called. The <see
              cref="M:System.Web.UI.WebControls.ImageField.InitializeCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlCellType,System.Web.UI.WebControls.DataControlRowState,System.Int32)" />
+
+            
 
             
 
@@ -1912,8 +2204,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.UI.WebControls.GridView" />
+
+            
 
             
 
@@ -1929,8 +2225,12 @@
 
             
 
+            
+
              objects to initialize the cells of the table structure with data or controls. Implement this method when you are writing an <see
              cref="T:System.Web.UI.WebControls.ImageField" />
+
+            
 
             
 
@@ -1949,6 +2249,8 @@
 
             
 
+            
+
              object with the specified cell type, row state, and row index.</para
           >
         </summary>
@@ -1959,8 +2261,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
+
+          
 
           
 
@@ -1975,8 +2281,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.DataControlCellType" />
+
+          
 
           
 
@@ -1991,8 +2301,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.DataControlRowState" />
+
+          
 
           
 
@@ -2002,6 +2316,8 @@
         >
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2039,6 +2355,8 @@
 
             
 
+            
+
              method is a helper method used by the <see
              cref="T:System.Web.UI.WebControls.ImageField" />
 
@@ -2046,8 +2364,12 @@
 
             
 
+            
+
              class to initialize a cell in an <see
              cref="T:System.Web.UI.WebControls.ImageField" />
+
+            
 
             
 
@@ -2066,6 +2388,8 @@
 
             
 
+            
+
              object with the specified row state.</para
           >
         </summary>
@@ -2076,8 +2400,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
+
+          
 
           
 
@@ -2092,8 +2420,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.DataControlRowState" />
+
+          
 
           
 
@@ -2133,6 +2465,8 @@
 
             
 
+            
+
              property is null, an image cannot be displayed in an <see
              cref="T:System.Web.UI.WebControls.ImageField" />
 
@@ -2140,8 +2474,12 @@
 
             
 
+            
+
              object. Use the <see
              cref="P:System.Web.UI.WebControls.ImageField.NullDisplayText" />
+
+            
 
             
 
@@ -2158,8 +2496,12 @@
 
               
 
+              
+
                property instead of this property. If the <see
                cref="P:System.Web.UI.WebControls.ImageField.NullImageUrl" />
+
+              
 
               
 
@@ -2172,8 +2514,12 @@
 
               
 
+              
+
                properties are both set, the <see
                cref="P:System.Web.UI.WebControls.ImageField.NullImageUrl" />
+
+              
 
               
 
@@ -2190,12 +2536,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -2214,8 +2564,12 @@
 
             
 
+            
+
              object when the value of the field specified by the <see
              cref="P:System.Web.UI.WebControls.ImageField.DataImageUrlField" />
+
+            
 
             
 
@@ -2259,6 +2613,8 @@
 
             
 
+            
+
              property is null, an image cannot be displayed in an <see
              cref="T:System.Web.UI.WebControls.ImageField" />
 
@@ -2266,8 +2622,12 @@
 
             
 
+            
+
              object. Use the <see
              cref="P:System.Web.UI.WebControls.ImageField.NullImageUrl" />
+
+            
 
             
 
@@ -2284,8 +2644,12 @@
 
               
 
+              
+
                property instead of this property. If the <see
                cref="P:System.Web.UI.WebControls.ImageField.NullImageUrl" />
+
+              
 
               
 
@@ -2298,8 +2662,12 @@
 
               
 
+              
+
                properties are both set, the <see
                cref="P:System.Web.UI.WebControls.ImageField.NullImageUrl" />
+
+              
 
               
 
@@ -2319,8 +2687,12 @@
 
             
 
+            
+
              object when the value of the field specified by the <see
              cref="P:System.Web.UI.WebControls.ImageField.DataImageUrlField" />
+
+            
 
             
 
@@ -2359,6 +2731,8 @@
 
             
 
+            
+
              method is a helper method used by the <see
              cref="T:System.Web.UI.WebControls.ImageField" />
 
@@ -2366,8 +2740,12 @@
 
             
 
+            
+
              class to bind the value of a field in the data source to a corresponding cell in an <see
              cref="T:System.Web.UI.WebControls.ImageField" />
+
+            
 
             
 
@@ -2386,11 +2764,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="sender">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2405,8 +2787,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2443,6 +2829,8 @@
 
             
 
+            
+
              property can be modified by the user when a data-bound control is in edit mode. To prevent the user from changing the values of the field, set this property to true.</para
           >
           <block subset="none" type="note">
@@ -2454,8 +2842,12 @@
 
               
 
+              
+
                object, the <see
                cref="P:System.Web.UI.WebControls.ImageField.DataImageUrlField" />
+
+              
 
               
 
@@ -2470,6 +2862,8 @@
           <para
             >Gets or sets a value indicating whether the values of the field specified by the <see
              cref="P:System.Web.UI.WebControls.ImageField.DataImageUrlField" />
+
+            
 
             
 
@@ -2501,6 +2895,8 @@
 
             
 
+            
+
              field is use to indicate that the <see
              cref="T:System.Web.UI.WebControls.ImageField" />
 
@@ -2508,8 +2904,12 @@
 
             
 
+            
+
              object should bind to the data source itself rather than a filed of the data source. In this case, the value returned by the object's <see
              cref="M:System.Object.ToString" />
+
+            
 
             
 
@@ -2546,8 +2946,12 @@
 
             
 
+            
+
              method is a helper method used to determine whether the controls contained in an <see
              cref="T:System.Web.UI.WebControls.ImageField" />
+
+            
 
             
 
@@ -2564,6 +2968,8 @@
           <para
             >Determines whether the controls contained in an <see
              cref="T:System.Web.UI.WebControls.ImageField" />
+
+            
 
             
 

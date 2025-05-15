@@ -17,6 +17,8 @@
 
         
 
+        
+
          namespace contains the IExpando interface which allows modification of an object by adding or removing its members.</para
       >
     </summary>

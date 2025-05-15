@@ -30,8 +30,12 @@
 
         
 
+        
+
          class allows developers to write their own MSIL generators instead of using <see
          cref="T:System.Reflection.Emit.ILGenerator" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          class provides several overloads of the <see
          cref="Overload:System.Reflection.Emit.DynamicILInfo.GetTokenFor" />
+
+        
 
         
 
@@ -61,8 +69,12 @@
 
         
 
+        
+
         . For example, if you need to call an overload of the <see
          cref="Overload:System.Console.WriteLine" />
+
+        
 
         
 
@@ -75,8 +87,12 @@
 
         
 
+        
+
          for that overload and pass it to the <see
          cref="Overload:System.Reflection.Emit.DynamicILInfo.GetTokenFor" />
+
+        
 
         
 
@@ -92,8 +108,12 @@
 
         
 
+        
+
          arrays for your local variable signature, exceptions, and code body, you can use the <see
          cref="Overload:System.Reflection.Emit.DynamicILInfo.SetCode" />
+
+        
 
         
 
@@ -106,8 +126,12 @@
 
         
 
+        
+
         , and <see
          cref="Overload:System.Reflection.Emit.DynamicILInfo.SetLocalSignature" />
+
+        
 
         
 
@@ -120,8 +144,12 @@
 
         
 
+        
+
          associated with your <see
          cref="T:System.Reflection.Emit.DynamicILInfo" />
+
+        
 
         
 
@@ -139,10 +167,14 @@
 
         
 
+        
+
          on MSDN and <see
          cref="http://go.microsoft.com/fwlink/?LinkID=65552"
           >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
         >
+
+        
 
         
 
@@ -159,8 +191,12 @@
 
           
 
+          
+
            to generate code that creates a delegate to another dynamic method by calling the delegate constructor directly. Instead, use the <see
            cref="M:System.Reflection.Emit.DynamicMethod.CreateDelegate(System.Type)" />
+
+          
 
           
 
@@ -205,6 +241,8 @@
 
             
 
+            
+
              object is always associated with a dynamic method. The purpose of the <see
              cref="T:System.Reflection.Emit.DynamicILInfo" />
 
@@ -212,8 +250,12 @@
 
             
 
+            
+
              class is to provide another way of inserting the MSIL stream, exception handling, and local variable signature into a dynamic method, for developers who want to generate MSIL without using the <see
              cref="T:System.Reflection.Emit.ILGenerator" />
+
+            
 
             
 
@@ -258,10 +300,14 @@
 
             
 
+            
+
              on MSDN and <see
              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
+
+            
 
             
 
@@ -280,6 +326,8 @@
 
             
 
+            
+
             , representing the signature for the associated dynamic method.</para
           >
         </summary>
@@ -289,6 +337,8 @@
         </returns>
         <param name="signature">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -329,8 +379,12 @@
 
             
 
+            
+
              object. To call the associated dynamic method recursively, pass the value of the <see
              cref="P:System.Reflection.Emit.DynamicILInfo.DynamicMethod" />
+
+            
 
             
 
@@ -349,6 +403,8 @@
 
             
 
+            
+
             , representing a dynamic method to be called from the associated method.</para
           >
         </summary>
@@ -358,6 +414,8 @@
         </returns>
         <param name="method">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -395,8 +453,12 @@
 
             
 
+            
+
              object. Use the <see
              cref="M:System.Type.GetField(System.String)" />
+
+            
 
             
 
@@ -409,6 +471,8 @@
 
             
 
+            
+
              for the field you want to access, then use the <see
              cref="P:System.Reflection.FieldInfo.FieldHandle" />
 
@@ -416,8 +480,12 @@
 
             
 
+            
+
              property to get the <see
              cref="T:System.RuntimeFieldHandle" />
+
+            
 
             
 
@@ -436,6 +504,8 @@
 
             
 
+            
+
             , representing a field to be accessed from the associated dynamic method.</para
           >
         </summary>
@@ -449,11 +519,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="field">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -491,8 +565,12 @@
 
             
 
+            
+
              object. Use the <see
              cref="Overload:System.Type.GetMethod" />
+
+            
 
             
 
@@ -505,6 +583,8 @@
 
             
 
+            
+
              for the method you want to access, and then use the <see
              cref="P:System.Reflection.MethodBase.MethodHandle" />
 
@@ -512,8 +592,12 @@
 
             
 
+            
+
              property to get the <see
              cref="T:System.RuntimeMethodHandle" />
+
+            
 
             
 
@@ -530,8 +614,12 @@
 
               
 
+              
+
                method overload and specify a <see
                cref="T:System.RuntimeTypeHandle" />
+
+              
 
               
 
@@ -551,6 +639,8 @@
 
             
 
+            
+
             , representing a method to be accessed from the associated dynamic method.</para
           >
         </summary>
@@ -564,8 +654,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Reflection.Emit.OpCodes.Ldtoken" />
+
+            
 
             
 
@@ -578,11 +672,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="method">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -620,6 +718,8 @@
 
             
 
+            
+
              object.</para
           >
           <para
@@ -630,8 +730,12 @@
 
             
 
+            
+
              representing a type, use the <see
              cref="P:System.Type.TypeHandle" />
+
+            
 
             
 
@@ -650,6 +754,8 @@
 
             
 
+            
+
             , representing a type to be used in the associated dynamic method.</para
           >
         </summary>
@@ -663,11 +769,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -706,6 +816,8 @@
 
             
 
+            
+
             , representing a string literal to be used in the associated dynamic method.</para
           >
         </summary>
@@ -719,11 +831,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="literal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -764,8 +880,12 @@
 
             
 
+            
+
              object. Use the <see
              cref="M:System.Type.GetField(System.String)" />
+
+            
 
             
 
@@ -778,6 +898,8 @@
 
             
 
+            
+
              for the field you want to access, and then use the <see
              cref="P:System.Reflection.FieldInfo.FieldHandle" />
 
@@ -785,8 +907,12 @@
 
             
 
+            
+
              property to get the <see
              cref="T:System.RuntimeFieldHandle" />
+
+            
 
             
 
@@ -805,6 +931,8 @@
 
             
 
+            
+
             , representing a field to be accessed from the associated dynamic method; the field is on the specified generic type.</para
           >
         </summary>
@@ -813,6 +941,8 @@
           <para
             >A token that can be used as the operand of an MSIL instruction that accesses fields in the scope of the current <see
              cref="T:System.Reflection.Emit.DynamicILInfo" />
+
+            
 
             
 
@@ -828,10 +958,14 @@
 
           
 
+          
+
           The field to be accessed.</param
         >
         <param name="contextType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -873,8 +1007,12 @@
 
             
 
+            
+
              object. Use the <see
              cref="M:System.Type.GetMethod(System.String)" />
+
+            
 
             
 
@@ -887,6 +1025,8 @@
 
             
 
+            
+
              for the method you want to call, and then use the <see
              cref="P:System.Reflection.MethodBase.MethodHandle" />
 
@@ -894,8 +1034,12 @@
 
             
 
+            
+
              property to get the <see
              cref="T:System.RuntimeMethodHandle" />
+
+            
 
             
 
@@ -914,6 +1058,8 @@
 
             
 
+            
+
             , representing a method on a generic type.</para
           >
         </summary>
@@ -927,6 +1073,8 @@
 
             
 
+            
+
              or <see
              cref="F:System.Reflection.Emit.OpCodes.Ldtoken" />
 
@@ -934,8 +1082,12 @@
 
             
 
+            
+
             , in the scope of the current <see
              cref="T:System.Reflection.Emit.DynamicILInfo" />
+
+            
 
             
 
@@ -951,10 +1103,14 @@
 
           
 
+          
+
           The method.</param
         >
         <param name="contextType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -997,10 +1153,14 @@
 
             
 
+            
+
              on MSDN and <see
              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
+
+            
 
             
 
@@ -1020,10 +1180,14 @@
 
           
 
+          
+
           An array that contains the MSIL stream.</param
         >
         <param name="maxStackSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1075,10 +1239,14 @@
 
             
 
+            
+
              on MSDN and <see
              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
+
+            
 
             
 
@@ -1098,6 +1266,8 @@
 
           
 
+          
+
           A pointer to a byte array containing the MSIL stream.</param
         >
         <param name="codeSize">
@@ -1107,10 +1277,14 @@
 
           
 
+          
+
           The number of bytes in the MSIL stream.</param
         >
         <param name="maxStackSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1150,10 +1324,14 @@
 
             
 
+            
+
              on MSDN and <see
              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
+
+            
 
             
 
@@ -1168,6 +1346,8 @@
         </summary>
         <param name="exceptions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1216,10 +1396,14 @@
 
             
 
+            
+
              on MSDN and <see
              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
+
+            
 
             
 
@@ -1239,10 +1423,14 @@
 
           
 
+          
+
           A pointer to a byte array containing the exception metadata.</param
         >
         <param name="exceptionsSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1283,8 +1471,12 @@
 
             
 
+            
+
              method to get a <see
              cref="T:System.Reflection.Emit.SignatureHelper" />
+
+            
 
             
 
@@ -1302,10 +1494,14 @@
 
             
 
+            
+
              on MSDN and <see
              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
+
+            
 
             
 
@@ -1325,8 +1521,12 @@
 
           
 
+          
+
           An array that contains the layout of local variables for the associated <see
            cref="T:System.Reflection.Emit.DynamicMethod" />
+
+          
 
           
 
@@ -1373,8 +1573,12 @@
 
             
 
+            
+
              method to get a <see
              cref="T:System.Reflection.Emit.SignatureHelper" />
+
+            
 
             
 
@@ -1392,10 +1596,14 @@
 
             
 
+            
+
              on MSDN and <see
              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
+
+            
 
             
 
@@ -1415,8 +1623,12 @@
 
           
 
+          
+
           An array that contains the layout of local variables for the associated <see
            cref="T:System.Reflection.Emit.DynamicMethod" />
+
+          
 
           
 
@@ -1426,6 +1638,8 @@
         >
         <param name="signatureSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

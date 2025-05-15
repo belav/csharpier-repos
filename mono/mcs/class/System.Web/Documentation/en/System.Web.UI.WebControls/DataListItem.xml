@@ -36,8 +36,12 @@
 
         
 
+        
+
          object represents an item in a <see
          cref="T:System.Web.UI.WebControls.DataList" />
+
+        
 
         
 
@@ -53,8 +57,12 @@
 
         
 
+        
+
          control are stored in a <see
          cref="T:System.Web.UI.WebControls.DataListItemCollection" />
+
+        
 
         
 
@@ -67,8 +75,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.UI.WebControls.DataList" />
+
+        
 
         
 
@@ -84,8 +96,12 @@
 
         
 
+        
+
          to programmatically access the properties of an item in a <see
          cref="T:System.Web.UI.WebControls.DataList" />
+
+        
 
         
 
@@ -99,6 +115,8 @@
       <para
         >Represents an item in a <see
          cref="T:System.Web.UI.WebControls.DataList" />
+
+        
 
         
 
@@ -131,6 +149,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -139,6 +159,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.DataListItem" />
+
+            
 
             
 
@@ -154,6 +176,8 @@
 
           
 
+          
+
           The index of the item in the <see
            cref="T:System.Web.UI.WebControls.DataList" />
 
@@ -161,8 +185,12 @@
 
           
 
+          
+
            control from the <see
            cref="P:System.Web.UI.WebControls.DataList.Items" />
+
+          
 
           
 
@@ -177,8 +205,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.ListItemType" />
+
+          
 
           
 
@@ -213,6 +245,8 @@
 
             
 
+            
+
              control. </para
           >
         </remarks>
@@ -226,8 +260,12 @@
 
             
 
+            
+
              object for the <see
              cref="T:System.Web.UI.WebControls.DataListItem" />
+
+            
 
             
 
@@ -241,6 +279,8 @@
           <para
             >A <see
              cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+            
 
             
 
@@ -274,6 +314,8 @@
 
             
 
+            
+
              property to specify or determine the properties of a data item associated with the <see
              cref="T:System.Web.UI.WebControls.DataListItem" />
 
@@ -281,8 +323,12 @@
 
             
 
+            
+
              object in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -299,8 +345,12 @@
 
               
 
+              
+
                control. The <see
                cref="P:System.Web.UI.WebControls.DataListItem.ItemType" />
+
+              
 
               
 
@@ -313,8 +363,12 @@
 
               
 
+              
+
                object must be set to one of the <see
                cref="T:System.Web.UI.WebControls.ListItemType" />
+
+              
 
               
 
@@ -334,8 +388,12 @@
 
             
 
+            
+
              object in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -368,6 +426,8 @@
 
             
 
+            
+
              property to determine the index number of the <see
              cref="T:System.Web.UI.WebControls.DataListItem" />
 
@@ -375,8 +435,12 @@
 
             
 
+            
+
              object from the <see
              cref="P:System.Web.UI.WebControls.DataList.Items" />
+
+            
 
             
 
@@ -393,6 +457,8 @@
 
               
 
+              
+
                control. The <see
                cref="P:System.Web.UI.WebControls.DataListItem.ItemType" />
 
@@ -400,8 +466,12 @@
 
               
 
+              
+
                property of the <see
                cref="T:System.Web.UI.WebControls.DataListItem" />
+
+              
 
               
 
@@ -421,8 +491,12 @@
 
             
 
+            
+
              object from the <see
              cref="P:System.Web.UI.WebControls.DataList.Items" />
+
+            
 
             
 
@@ -458,8 +532,12 @@
 
             
 
+            
+
              property to determine the type of the item represented by the <see
              cref="T:System.Web.UI.WebControls.DataListItem" />
+
+            
 
             
 
@@ -491,6 +569,8 @@
 
                   
 
+                  
+
                    control. </para
                 >
               </description>
@@ -503,6 +583,8 @@
                 <para
                   >The footer section of the <see
                    cref="T:System.Web.UI.WebControls.DataList" />
+
+                  
 
                   
 
@@ -525,6 +607,8 @@
 
                   
 
+                  
+
                    control. </para
                 >
               </description>
@@ -537,6 +621,8 @@
                 <para
                   >An alternating item in the <see
                    cref="T:System.Web.UI.WebControls.DataList" />
+
+                  
 
                   
 
@@ -559,6 +645,8 @@
 
                   
 
+                  
+
                    control. </para
                 >
               </description>
@@ -571,6 +659,8 @@
                 <para
                   >The item selected for editing in the <see
                    cref="T:System.Web.UI.WebControls.DataList" />
+
+                  
 
                   
 
@@ -593,6 +683,8 @@
 
                   
 
+                  
+
                    control. </para
                 >
               </description>
@@ -605,6 +697,8 @@
                 <para
                   >The page selection section of the <see
                    cref="T:System.Web.UI.WebControls.DataList" />
+
+                  
 
                   
 
@@ -626,8 +720,12 @@
 
             
 
+            
+
              object in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -666,6 +764,8 @@
 
             
 
+            
+
              control.</para
           >
         </remarks>
@@ -684,6 +784,8 @@
 
           
 
+          
+
           The source of the event.</param
         >
         <param name="e">
@@ -693,8 +795,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -733,8 +839,12 @@
 
             
 
+            
+
              method to display the <see
              cref="T:System.Web.UI.WebControls.DataListItem" />
+
+            
 
             
 
@@ -753,6 +863,8 @@
 
             
 
+            
+
              object on the client.</para
           >
         </summary>
@@ -763,8 +875,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -779,10 +895,14 @@
 
           
 
+          
+
           true to extract rows; otherwise false. </param
         >
         <param name="tableLayout">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -823,6 +943,8 @@
 
             
 
+            
+
              control.</para
           >
         </remarks>
@@ -836,8 +958,12 @@
 
             
 
+            
+
              property for the <see
              cref="T:System.Web.UI.WebControls.DataListItem" />
+
+            
 
             
 
@@ -853,8 +979,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.ListItemType" />
+
+          
 
           
 
@@ -888,8 +1018,12 @@
 
             
 
+            
+
              property to retrieve the data object for a <see
              cref="T:System.Web.UI.WebControls.DataListItem" />
+
+            
 
             
 
@@ -905,6 +1039,8 @@
 
             
 
+            
+
              member is an explicit interface member implementation. It can be used only when the <see
              cref="T:System.Web.UI.WebControls.DataListItem" />
 
@@ -912,8 +1048,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IDataItemContainer" />
+
+            
 
             
 
@@ -927,6 +1067,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Web.UI.IDataItemContainer.DataItem" />
+
+            
 
             
 
@@ -961,8 +1103,12 @@
 
             
 
+            
+
              property to retrieve the data-item index for a <see
              cref="T:System.Web.UI.WebControls.DataListItem" />
+
+            
 
             
 
@@ -978,6 +1124,8 @@
 
             
 
+            
+
              member is an explicit interface member implementation. It can be used only when the <see
              cref="T:System.Web.UI.WebControls.DataListItem" />
 
@@ -985,8 +1133,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IDataItemContainer" />
+
+            
 
             
 
@@ -1000,6 +1152,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Web.UI.IDataItemContainer.DataItemIndex" />
+
+            
 
             
 
@@ -1034,8 +1188,12 @@
 
             
 
+            
+
              property to retrieve the data-item index for a <see
              cref="T:System.Web.UI.WebControls.DataListItem" />
+
+            
 
             
 
@@ -1051,6 +1209,8 @@
 
             
 
+            
+
              member is an explicit interface member implementation. It can be used only when the <see
              cref="T:System.Web.UI.WebControls.DataListItem" />
 
@@ -1058,8 +1218,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IDataItemContainer" />
+
+            
 
             
 
@@ -1073,6 +1237,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Web.UI.IDataItemContainer.DisplayIndex" />
+
+            
 
             
 

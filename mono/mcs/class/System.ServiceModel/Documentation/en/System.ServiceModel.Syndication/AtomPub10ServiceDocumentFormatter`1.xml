@@ -44,6 +44,8 @@
 
         
 
+        
+
          instance instead of an object derived from this an instance of <see
          cref="T:System.ServiceModel.Syndication.ServiceDocument" />
 
@@ -51,8 +53,12 @@
 
         
 
+        
+
         , use the <see
          cref="T:System.ServiceModel.Syndication.AtomPub10ServiceDocumentFormatter" />
+
+        
 
         
 
@@ -66,6 +72,8 @@
       <para
         >A formatter that serializes classes derived from a <see
          cref="T:System.ServiceModel.Syndication.ServiceDocument" />
+
+        
 
         
 
@@ -94,6 +102,8 @@
           <para
             >Creates a new instance of the <see
              cref="T:System.ServiceModel.Syndication.ServiceDocumentFormatter`1" />
+
+            
 
             
 
@@ -155,6 +165,8 @@
 
             
 
+            
+
              instance associated with the Atom 1.0 formatter.</para
           >
         </summary>
@@ -163,6 +175,8 @@
           <para>
 Returns an instance of <see
              cref="T:System.ServiceModel.Syndication.ServiceDocument" />
+
+            
 
             
 

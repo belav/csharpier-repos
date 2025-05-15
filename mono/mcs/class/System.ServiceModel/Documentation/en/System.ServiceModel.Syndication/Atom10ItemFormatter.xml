@@ -36,8 +36,12 @@
 
         
 
+        
+
          and to create an instance of <see
          cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+        
 
         
 
@@ -50,8 +54,12 @@
 
         
 
+        
+
          and want to serialize it, use the <see
          cref="T:System.ServiceModel.Syndication.Atom10ItemFormatter`1" />
+
+        
 
         
 
@@ -68,6 +76,8 @@
       <para
         >A class that serializes a <see
          cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+        
 
         
 
@@ -96,6 +106,8 @@
           <para
             >Creates a new instance of the <see
              cref="T:System.ServiceModel.Syndication.Atom10ItemFormatter" />
+
+            
 
             
 
@@ -135,8 +147,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+            
 
             
 
@@ -171,6 +187,8 @@
 
             
 
+            
+
              to instantiate when a syndication item is read in.</para
           >
         </remarks>
@@ -179,6 +197,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Syndication.Atom10ItemFormatter" />
+
+            
 
             
 
@@ -194,8 +214,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+          
 
           
 
@@ -237,6 +261,8 @@
 
             
 
+            
+
              contains a valid Atom 1.0 syndication item.</para
           >
         </summary>
@@ -245,6 +271,8 @@
           <para
             >A value that specifies whether the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -260,8 +288,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -299,8 +331,12 @@
 
             
 
+            
+
              instance is not automatically associated with the <see
              cref="T:System.ServiceModel.Syndication.Atom10ItemFormatter" />
+
+            
 
             
 
@@ -319,6 +355,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -327,6 +365,8 @@
           <para
             >A new <see
              cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+            
 
             
 
@@ -355,6 +395,8 @@
           <para
             >Gets the type of the syndication item associated with the <see
              cref="T:System.ServiceModel.Syndication.Atom10ItemFormatter" />
+
+            
 
             
 
@@ -393,6 +435,8 @@
 
             
 
+            
+
              instance when deserializing an Atom1.0 entry.</para
           >
         </remarks>
@@ -419,6 +463,8 @@
           <para
             >The default value of this property is true. Element extensions are XML elements that are not defined in the Atom 1.0 specification. This property determines whether to write these elements during serialization. Similarly, this property determines whether to preserve unknown elements inside the ElementExtensions properties in the <see
              cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+            
 
             
 
@@ -464,6 +510,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -474,8 +522,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -512,6 +564,8 @@
           <para
             >Implements the <see
              cref="M:System.Xml.Serialization.IXmlSerializable.GetSchema" />
+
+            
 
             
 
@@ -557,6 +611,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -567,8 +623,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -609,6 +669,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -619,8 +681,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -683,6 +749,8 @@
 
             
 
+            
+
              associated with the <see
              cref="T:System.ServiceModel.Syndication.Atom10ItemFormatter" />
 
@@ -690,8 +758,12 @@
 
             
 
+            
+
              to the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -707,8 +779,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 

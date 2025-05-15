@@ -28,8 +28,12 @@
 
         
 
+        
+
          enumeration is used by the <see
          cref="T:System.Windows.Forms.TreeViewHitTestInfo" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Windows.Forms.TreeNode" />
+
+        
 
         
 
@@ -73,6 +81,8 @@
           <para
             >A position above the client portion of a <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -104,6 +114,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -130,8 +142,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -163,6 +179,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -184,6 +202,8 @@
           <para
             >A position on the text portion of a <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -215,6 +235,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -236,6 +258,8 @@
           <para
             >A position in the client area of the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -267,6 +291,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -288,6 +314,8 @@
           <para
             >A position to the right of the client area of the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -319,6 +347,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -340,6 +370,8 @@
           <para
             >A position within the bounds of a state image for a <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 

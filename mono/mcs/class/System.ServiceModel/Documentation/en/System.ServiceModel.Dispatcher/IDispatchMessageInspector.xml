@@ -24,11 +24,15 @@
 
         
 
+        
+
          to inspect or modify inbound or outbound application messages either prior to dispatching a request message to an operation or before returning a reply message to a caller. There are a large number of scenarios that require intercepting messages prior to invoking the operation for which it is destined. For example, you can log incoming application messages or perform some feature based on a message header.</para
       >
       <para
         >Typically, message inspectors are inserted by a service behavior (<see
          cref="T:System.ServiceModel.Description.IServiceBehavior" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
         ), or a contract behavior (<see
          cref="T:System.ServiceModel.Description.IContractBehavior" />
+
+        
 
         
 
@@ -55,12 +63,16 @@
 
         
 
+        
+
          collection. For more information about extending the runtime using behaviors, see <format
          type="text/html">
           <a href="954c138a-1cd0-45a0-8abe-e4d2b8ff5400"
             >Extending ServiceHost and the Dispatcher</a
           >
         </format>
+
+        
 
         
 
@@ -78,6 +90,8 @@
 
             
 
+            
+
              method enables custom behavior after receiving the message but before dispatching it to the intended operation.</para
           >
         </item>
@@ -90,6 +104,8 @@
 
             
 
+            
+
              method enables custom behavior after the operation returns but before the reply is sent.</para
           >
         </item>
@@ -97,6 +113,8 @@
       <block subset="none" type="note">
         <para>
           <see cref="T:System.ServiceModel.Dispatcher.IDispatchMessageInspector" />
+
+          
 
           
 

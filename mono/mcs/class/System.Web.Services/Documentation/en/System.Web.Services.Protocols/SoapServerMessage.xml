@@ -28,6 +28,8 @@
 
         
 
+        
+
         . This class cannot be inherited.</para
       >
     </summary>
@@ -55,8 +57,12 @@
 
             
 
+            
+
              property can be accessed during any <see
              cref="T:System.Web.Services.Protocols.SoapMessageStage" />
+
+            
 
             
 
@@ -93,8 +99,12 @@
 
             
 
+            
+
              stage. If the <see
              cref="M:System.Web.Services.Protocols.SoapServerMessage.EnsureInStage" />
+
+            
 
             
 
@@ -107,8 +117,12 @@
 
             
 
+            
+
             , the <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -122,6 +136,8 @@
           <para
             >Asserts that the current <see
              cref="T:System.Web.Services.Protocols.SoapMessageStage" />
+
+            
 
             
 
@@ -154,8 +170,12 @@
 
             
 
+            
+
              stage. If the <see
              cref="M:System.Web.Services.Protocols.SoapServerMessage.EnsureOutStage" />
+
+            
 
             
 
@@ -168,8 +188,12 @@
 
             
 
+            
+
             , the <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -183,6 +207,8 @@
           <para
             >Asserts that the current <see
              cref="T:System.Web.Services.Protocols.SoapMessageStage" />
+
+            
 
             
 
@@ -222,6 +248,8 @@
 
             
 
+            
+
              property can be accessed during any stage, the method information is only available during <see
              cref="F:System.Web.Services.Protocols.SoapMessageStage.AfterDeserialize" />
 
@@ -229,8 +257,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Web.Services.Protocols.SoapMessageStage.BeforeSerialize" />
+
+            
 
             
 
@@ -271,6 +303,8 @@
 
             
 
+            
+
              or <see
              cref="T:System.Web.Services.Protocols.SoapRpcMethodAttribute" />
 
@@ -278,8 +312,12 @@
 
             
 
+            
+
              applied to an XML Web service method or XML Web service client can specify whether the XML Web service method is one way or not by setting the <see
              cref="P:System.Web.Services.Protocols.SoapDocumentMethodAttribute.OneWay" />
+
+            
 
             
 
@@ -295,8 +333,12 @@
 
             
 
+            
+
              property can be accessed during any <see
              cref="T:System.Web.Services.Protocols.SoapMessageStage" />
+
+            
 
             
 
@@ -333,8 +375,12 @@
 
             
 
+            
+
              property is an instance of the class implementing the XML Web service. If a SOAP extension knew ahead of time the type of the class, it could cast <see
              cref="P:System.Web.Services.Protocols.SoapServerMessage.Server" />
+
+            
 
             
 
@@ -347,6 +393,8 @@
 
             
 
+            
+
              property can be accessed during <see
              cref="F:System.Web.Services.Protocols.SoapMessageStage.AfterDeserialize" />
 
@@ -354,8 +402,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Web.Services.Protocols.SoapMessageStage.BeforeSerialize" />
+
+            
 
             
 
@@ -403,6 +455,8 @@
 
             
 
+            
+
              property is guaranteed to be valid after the <see
              cref="F:System.Web.Services.Protocols.SoapMessageStage.BeforeDeserialize" />
 
@@ -410,8 +464,12 @@
 
             
 
+            
+
              stage. In the <see
              cref="F:System.Web.Services.Protocols.SoapMessageStage.BeforeDeserialize" />
+
+            
 
             
 
@@ -448,8 +506,12 @@
 
             
 
+            
+
              property can be accessed during any <see
              cref="T:System.Web.Services.Protocols.SoapMessageStage" />
+
+            
 
             
 

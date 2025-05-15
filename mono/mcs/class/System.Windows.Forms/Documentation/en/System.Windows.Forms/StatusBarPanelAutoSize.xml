@@ -20,8 +20,12 @@
 
         
 
+        
+
          property. The <see
          cref="P:System.Windows.Forms.StatusBarPanel.AutoSize" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
          is autosized on a <see
          cref="T:System.Windows.Forms.StatusBar" />
+
+        
 
         
 
@@ -54,8 +62,12 @@
 
         
 
+        
+
          on a <see
          cref="T:System.Windows.Forms.StatusBar" />
+
+        
 
         
 
@@ -78,6 +90,8 @@
           <para
             >The width of the <see
              cref="T:System.Windows.Forms.StatusBarPanel" />
+
+            
 
             
 
@@ -109,8 +123,12 @@
 
             
 
+            
+
              does not change size when the <see
              cref="T:System.Windows.Forms.StatusBar" />
+
+            
 
             
 
@@ -142,8 +160,12 @@
 
             
 
+            
+
              shares the available space on the <see
              cref="T:System.Windows.Forms.StatusBar" />
+
+            
 
             
 
@@ -156,8 +178,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Windows.Forms.StatusBarPanelAutoSize.None" />
+
+            
 
             
 
@@ -170,6 +196,8 @@
 
             
 
+            
+
             ) with other panels that have their <see
              cref="P:System.Windows.Forms.StatusBarPanel.AutoSize" />
 
@@ -177,8 +205,12 @@
 
             
 
+            
+
              property set to <see
              cref="F:System.Windows.Forms.StatusBarPanelAutoSize.Spring" />
+
+            
 
             
 

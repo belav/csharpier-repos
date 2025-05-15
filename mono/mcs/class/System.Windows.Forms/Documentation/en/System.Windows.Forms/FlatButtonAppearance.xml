@@ -22,6 +22,8 @@
 
         
 
+        
+
          controls whose <see
          cref="T:System.Windows.Forms.FlatStyle" />
 
@@ -29,8 +31,12 @@
 
         
 
+        
+
          is <see
          cref="F:System.Windows.Forms.FlatStyle.Flat" />
+
+        
 
         
 

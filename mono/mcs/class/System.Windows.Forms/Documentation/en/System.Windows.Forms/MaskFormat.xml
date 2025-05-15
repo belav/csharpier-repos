@@ -20,6 +20,8 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.MaskedTextBox.TextMaskFormat" />
 
@@ -27,8 +29,12 @@
 
         
 
+        
+
          to control how text is returned—in the first case, by performing a cut and copy operation, and in the second place, by using the <see
          cref="P:System.Windows.Forms.MaskedTextBox.Text" />
+
+        
 
         
 
@@ -42,6 +48,8 @@
       <para
         >Defines how to format the text inside of a <see
          cref="T:System.Windows.Forms.MaskedTextBox" />
+
+        
 
         
 

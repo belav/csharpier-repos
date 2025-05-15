@@ -54,6 +54,8 @@
 
         
 
+        
+
          structure to represent a Unicode character. The Unicode Standard identifies each Unicode character with a unique 21-bit scalar number called a code point, and defines the UTF-16 encoding form that specifies how a code point is encoded into a sequence of one or more 16-bit values. Each 16-bit value ranges from hexadecimal 0x0000 through 0xFFFF and is stored in a <see
          cref="T:System.Char" />
 
@@ -61,8 +63,12 @@
 
         
 
+        
+
          structure.  The value of a <see
          cref="T:System.Char" />
+
+        
 
         
 
@@ -81,8 +87,12 @@
 
         
 
+        
+
          object is a sequential collection of <see
          cref="T:System.Char" />
+
+        
 
         
 
@@ -95,8 +105,12 @@
 
         
 
+        
+
          object, but a character that is encoded as a base character, surrogate pair, and/or combining character sequence is represented by multiple <see
          cref="T:System.Char" />
+
+        
 
         
 
@@ -109,8 +123,12 @@
 
         
 
+        
+
          structure in a <see
          cref="T:System.String" />
+
+        
 
         
 
@@ -129,8 +147,12 @@
 
             
 
+            
+
              object whose code unit is U+0061 followed by a <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -143,8 +165,12 @@
 
             
 
+            
+
              object that has a code unit of U+00E4.) The following example illustrates that the character ä consists of two <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -170,8 +196,12 @@
 
         
 
+        
+
          objects, it is not always meaningful to work with individual <see
          cref="T:System.Char" />
+
+        
 
         
 
@@ -184,12 +214,16 @@
 
         
 
+        
+
          objects with characters, it inaccurately reports that the resulting string has 20 characters. </para
       >
       <para>code reference: System.Char.Class#3</para>
       <para
         >You can do the following to avoid the assumption that a <see
          cref="T:System.Char" />
+
+        
 
         
 
@@ -207,6 +241,8 @@
 
             
 
+            
+
              object in its entirety instead of working with its individual characters to represent and analyze linguistic content.</para
           >
         </item>
@@ -219,6 +255,8 @@
 
             
 
+            
+
              class to work with text elements instead of individual <see
              cref="T:System.Char" />
 
@@ -226,8 +264,12 @@
 
             
 
+            
+
              objects. The following example uses the <see
              cref="T:System.Globalization.StringInfo" />
+
+            
 
             
 
@@ -246,8 +288,12 @@
 
             
 
+            
+
              method to convert the substring to a single UTF-16 encoded code unit. The following example calls the <see
              cref="M:System.String.Normalize" />
+
+            
 
             
 
@@ -269,8 +315,12 @@
 
         
 
+        
+
          structure provides methods to compare <see
          cref="T:System.Char" />
+
+        
 
         
 
@@ -283,8 +333,12 @@
 
         
 
+        
+
          object to an object of another type, and determine the Unicode category of a <see
          cref="T:System.Char" />
+
+        
 
         
 
@@ -313,12 +367,16 @@
 
               
 
+              
+
                objects</para
             >
           </term>
           <description>
             <para>
               <see cref="Overload:System.Char.CompareTo" />
+
+              
 
               
 
@@ -349,8 +407,12 @@
 
               
 
+              
+
                object or a surrogate pair of <see
                cref="T:System.Char" />
+
+              
 
               
 
@@ -387,8 +449,12 @@
 
               
 
+              
+
               , <see
                cref="Overload:System.Char.IsDigit" />
+
+              
 
               
 
@@ -401,8 +467,12 @@
 
               
 
+              
+
               , <see
                cref="Overload:System.Char.IsLetter" />
+
+              
 
               
 
@@ -415,8 +485,12 @@
 
               
 
+              
+
               , <see
                cref="Overload:System.Char.IsLower" />
+
+              
 
               
 
@@ -429,8 +503,12 @@
 
               
 
+              
+
               , <see
                cref="Overload:System.Char.IsNumber" />
+
+              
 
               
 
@@ -443,8 +521,12 @@
 
               
 
+              
+
               , <see
                cref="Overload:System.Char.IsSeparator" />
+
+              
 
               
 
@@ -457,8 +539,12 @@
 
               
 
+              
+
               , <see
                cref="Overload:System.Char.IsSurrogatePair" />
+
+              
 
               
 
@@ -471,8 +557,12 @@
 
               
 
+              
+
               , <see
                cref="Overload:System.Char.IsUpper" />
+
+              
 
               
 
@@ -488,6 +578,8 @@
             <para
               >Convert a <see
                cref="T:System.Char" />
+
+              
 
               
 
@@ -512,12 +604,16 @@
 
               
 
+              
+
                object</para
             >
           </term>
           <description>
             <para>
               <see cref="M:System.Char.Parse(System.String)" />
+
+              
 
               
 
@@ -538,8 +634,12 @@
 
               
 
+              
+
                object to a <see
                cref="T:System.String" />
+
+              
 
               
 
@@ -564,12 +664,16 @@
 
               
 
+              
+
                object</para
             >
           </term>
           <description>
             <para>
               <see cref="Overload:System.Char.ToLower" />
+
+              
 
               
 
@@ -582,8 +686,12 @@
 
               
 
+              
+
               , <see
                cref="Overload:System.Char.ToUpper" />
+
+              
 
               
 
@@ -631,6 +739,8 @@
 
             
 
+            
+
              interface and performs slightly better than the <see
              cref="M:System.Char.CompareTo(System.Object)" />
 
@@ -638,8 +748,12 @@
 
             
 
+            
+
              method because it does not have to convert the <paramref
              name="value" />
+
+            
 
             
 
@@ -655,11 +769,15 @@
 
             
 
+            
+
             , not their lexicographical characteristics.</para
           >
           <para
             >If the <see
              cref="M:System.Char.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -675,8 +793,12 @@
 
             
 
+            
+
              and the parameter type is <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -689,8 +811,12 @@
 
             
 
+            
+
              object, then generates a <see
              cref="M:System.Int32.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -703,8 +829,12 @@
 
             
 
+            
+
              instance and the <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -720,8 +850,12 @@
 
             
 
+            
+
              overload that takes an <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -740,8 +874,12 @@
 
             
 
+            
+
              object and indicates whether this instance precedes, follows, or appears in the same position in the sort order as the specified <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -755,6 +893,8 @@
           <para
             >A signed number indicating the position of this instance in the sort order in relation to the <paramref
              name="value" />
+
+            
 
             
 
@@ -786,6 +926,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -798,6 +940,8 @@
                 <para
                   >This instance has the same position in the sort order as <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -820,6 +964,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -833,8 +979,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Char" />
+
+          
 
           
 
@@ -874,8 +1024,12 @@
 
           
 
+          
+
            is not a <see
            cref="T:System.Char" />
+
+          
 
           
 
@@ -893,8 +1047,12 @@
 
             
 
+            
+
              method implements the <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -910,8 +1068,12 @@
 
             
 
+            
+
              parameter must be null or an instance of <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -927,8 +1089,12 @@
 
             
 
+            
+
             , not necessarily their lexicographical characteristics. Any instance of <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -947,6 +1113,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -955,6 +1123,8 @@
           <para
             >A signed number indicating the position of this instance in the sort order in relation to the <paramref
              name="value" />
+
+            
 
             
 
@@ -986,6 +1156,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -998,6 +1170,8 @@
                 <para
                   >This instance has the same position in the sort order as <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -1020,11 +1194,15 @@
 
                   
 
+                  
+
                   .</para
                 >
                 <para>-or- </para>
                 <para>
                   <paramref name="value" />
+
+                  
 
                   
 
@@ -1038,6 +1216,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1077,8 +1257,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Char.IsHighSurrogate(System.Char)" />
+
+            
 
             
 
@@ -1089,6 +1273,8 @@
           <para
             >A valid code point outside the Basic Multilingual Plane (BMP) always yields a valid surrogate pair. However, a valid code point within the BMP might not yield a valid result according to the Unicode standard because no linguistic processing is used in the conversion. For that reason, use the <see
              cref="T:System.Text.UTF32Encoding" />
+
+            
 
             
 
@@ -1111,8 +1297,12 @@
 
             
 
+            
+
              object or a surrogate pair of <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -1125,11 +1315,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="utf32">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1172,11 +1366,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >Ordinarily, UTF-16 encoding represents a single Unicode character as a 16-bit code unit. However, it also supports surrogate pairs, which allow a single abstract character to be represented as two 16-bit code units. These two <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -1199,8 +1397,12 @@
 
             
 
+            
+
              and <paramref
              name="lowSurrogate" />
+
+            
 
             
 
@@ -1216,10 +1418,14 @@
 
           
 
+          
+
           A high surrogate code unit (that is, a code unit ranging from U+D800 through U+DBFF). </param
         >
         <param name="lowSurrogate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1262,6 +1468,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -1279,8 +1487,12 @@
 
             
 
+            
+
              parameter specified by the <paramref
              name="index" />
+
+            
 
             
 
@@ -1296,6 +1508,8 @@
 
           
 
+          
+
           A string that contains a character or surrogate pair. </param
         >
         <param name="index">
@@ -1305,8 +1519,12 @@
 
           
 
+          
+
           The index position of the character or surrogate pair in <paramref
            name="s" />
+
+          
 
           
 
@@ -1345,6 +1563,8 @@
 
             
 
+            
+
              interface, and performs slightly better than <see
              cref="M:System.Char.Equals(System.Object)" />
 
@@ -1352,8 +1572,12 @@
 
             
 
+            
+
              because it does not need to unbox the <paramref
              name="obj" />
+
+            
 
             
 
@@ -1372,6 +1596,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1385,11 +1611,15 @@
 
             
 
+            
+
              parameter equals the value of this instance; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1432,6 +1662,8 @@
 
             
 
+            
+
             , not necessarily their lexicographical characteristics.</para
           >
         </remarks>
@@ -1449,8 +1681,12 @@
 
             
 
+            
+
              is an instance of <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -1461,6 +1697,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1500,6 +1738,8 @@
               > This method
       overrides <see
                cref="M:System.Object.GetHashCode" />
+
+              
 
               
 
@@ -1552,6 +1792,8 @@
 
             
 
+            
+
              
 method.</para
           >
@@ -1584,6 +1826,8 @@ public static void Main() {
 
               
 
+              
+
                is 0.25</para
             >
           </c>
@@ -1598,8 +1842,12 @@ public static void Main() {
 
             
 
+            
+
              parameter must be the <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -1612,8 +1860,12 @@ public static void Main() {
 
             
 
+            
+
              is "5", the return value is 5. However, if <paramref
              name="c" />
+
+            
 
             
 
@@ -1629,11 +1881,15 @@ public static void Main() {
 
             
 
+            
+
              categories: DecimalDigitNumber, LetterNumber, or OtherNumber.</para
           >
           <para
             >The <see
              cref="M:System.Char.GetNumericValue(System.Char)" />
+
+            
 
             
 
@@ -1646,8 +1902,12 @@ public static void Main() {
 
             
 
+            
+
              corresponds to a single linguistic character and checks whether that character can be converted to a decimal digit. However, some numbers in the Unicode standard are represented by two <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -1660,8 +1920,12 @@ public static void Main() {
 
             
 
+            
+
              method to instantiate a string that represents AEGEAN NUMBER ONE. As the output from the example shows, the <see
              cref="M:System.Char.GetNumericValue(System.Char)" />
+
+            
 
             
 
@@ -1685,11 +1949,15 @@ public static void Main() {
 
             
 
+            
+
              if that character represents a number; otherwise, -1.0.</para
           >
         </returns>
         <param name="c">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1735,6 +2003,8 @@ public static void Main() {
 
           
 
+          
+
           is a null reference.</exception
         >
         <exception cref="T:System.ArgumentOutOfRangeException"
@@ -1745,8 +2015,12 @@ public static void Main() {
 
           
 
+          
+
            is less than zero, or greater than or equal to the length of <paramref
            name="s" />
+
+          
 
           
 
@@ -1761,8 +2035,12 @@ public static void Main() {
 
           
 
+          
+
           The character position in <paramref
            name="s" />
+
+          
 
           
 
@@ -1780,6 +2058,8 @@ public static void Main() {
 
             
 
+            
+
              parameter must be the string representation of a numeric value. For example, if the character at position <paramref
              name="index" />
 
@@ -1787,8 +2067,12 @@ public static void Main() {
 
             
 
+            
+
              in <paramref
              name="s" />
+
+            
 
             
 
@@ -1801,8 +2085,12 @@ public static void Main() {
 
             
 
+            
+
              in <paramref
              name="s" />
+
+            
 
             
 
@@ -1819,11 +2107,15 @@ public static void Main() {
 
             
 
+            
+
              categories: DecimalDigitNumber, LetterNumber, or OtherNumber.</para
           >
           <para
             >If the <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -1836,8 +2128,12 @@ public static void Main() {
 
             
 
+            
+
              is the first character of a valid surrogate pair, the <see
              cref="M:System.Char.GetNumericValue(System.String,System.Int32)" />
+
+            
 
             
 
@@ -1850,8 +2146,12 @@ public static void Main() {
 
             
 
+            
+
              method to instantiate a string that represents each Aegean number. As the output from the example shows, the <see
              cref="M:System.Char.GetNumericValue(System.String,System.Int32)" />
+
+            
 
             
 
@@ -1875,8 +2175,12 @@ public static void Main() {
 
             
 
+            
+
              in <paramref
              name="s" />
+
+            
 
             
 
@@ -1892,8 +2196,12 @@ public static void Main() {
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1908,8 +2216,12 @@ public static void Main() {
 
           
 
+          
+
           The character position in <paramref
            name="s" />
+
+          
 
           
 
@@ -1949,8 +2261,12 @@ public static void Main() {
 
             
 
+            
+
              for value type <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -1964,6 +2280,8 @@ public static void Main() {
           <para
             >The enumerated constant, <see
              cref="F:System.TypeCode.Char" />
+
+            
 
             
 
@@ -2010,8 +2328,12 @@ public static void Main() {
 
             
 
+            
+
              method does not always return the same <see
              cref="T:System.Globalization.UnicodeCategory" />
+
+            
 
             
 
@@ -2024,8 +2346,12 @@ public static void Main() {
 
             
 
+            
+
              method when it is passed a particular character as a parameter. The <see
              cref="M:System.Globalization.CharUnicodeInfo.GetUnicodeCategory(System.Char)" />
+
+            
 
             
 
@@ -2038,6 +2364,8 @@ public static void Main() {
 
             
 
+            
+
              method usually reflects the current version of the Unicode standard, it may return a character's category based on a previous version of the standard or it may return a category that differs from the current standard in order to preserve backward compatibility. As a result, we recommend that you use the <see
              cref="M:System.Globalization.CharUnicodeInfo.GetUnicodeCategory(System.Char)" />
 
@@ -2045,8 +2373,12 @@ public static void Main() {
 
             
 
+            
+
              method instead of <see
              cref="M:System.Char.GetUnicodeCategory(System.Char)" />
+
+            
 
             
 
@@ -2065,6 +2397,8 @@ public static void Main() {
 
             
 
+            
+
              values.</para
           >
         </summary>
@@ -2078,8 +2412,12 @@ public static void Main() {
 
             
 
+            
+
              value that identifies the group that contains <paramref
              name="c" />
+
+            
 
             
 
@@ -2090,6 +2428,8 @@ public static void Main() {
         </returns>
         <param name="c">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2134,6 +2474,8 @@ public static void Main() {
 
           
 
+          
+
           is a null reference.</exception
         >
         <exception cref="T:System.ArgumentOutOfRangeException"
@@ -2144,8 +2486,12 @@ public static void Main() {
 
           
 
+          
+
            is less than zero, or greater than or equal to the length of <paramref
            name="s" />
+
+          
 
           
 
@@ -2164,8 +2510,12 @@ public static void Main() {
 
             
 
+            
+
              method does not always return the same <see
              cref="T:System.Globalization.UnicodeCategory" />
+
+            
 
             
 
@@ -2178,8 +2528,12 @@ public static void Main() {
 
             
 
+            
+
              method when it is passed a particular character as a parameter. The <see
              cref="M:System.Globalization.CharUnicodeInfo.GetUnicodeCategory(System.String,System.Int32)" />
+
+            
 
             
 
@@ -2192,6 +2546,8 @@ public static void Main() {
 
             
 
+            
+
              method usually reflects the current version of the Unicode standard, it may return a character's category based on a previous version of the standard or it may return a category that differs from the current standard in order to preserve backward compatibility. As a result, we recommend that you use the <see
              cref="M:System.Globalization.CharUnicodeInfo.GetUnicodeCategory(System.Char)" />
 
@@ -2199,8 +2555,12 @@ public static void Main() {
 
             
 
+            
+
              method instead of <see
              cref="M:System.Char.GetUnicodeCategory(System.String,System.Int32)" />
+
+            
 
             
 
@@ -2219,6 +2579,8 @@ public static void Main() {
 
             
 
+            
+
              values.</para
           >
         </summary>
@@ -2232,6 +2594,8 @@ public static void Main() {
 
             
 
+            
+
              enumerated constant that identifies the group that contains the character at position <paramref
              name="index" />
 
@@ -2239,8 +2603,12 @@ public static void Main() {
 
             
 
+            
+
              in <paramref
              name="s" />
+
+            
 
             
 
@@ -2256,8 +2624,12 @@ public static void Main() {
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -2272,8 +2644,12 @@ public static void Main() {
 
           
 
+          
+
           The character position in <paramref
            name="s" />
+
+          
 
           
 
@@ -2317,6 +2693,8 @@ public static void Main() {
 
             
 
+            
+
              category. </para
           >
         </remarks>
@@ -2334,11 +2712,15 @@ public static void Main() {
 
             
 
+            
+
              is a control character; otherwise, false.</para
           >
         </returns>
         <param name="c">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2380,6 +2762,8 @@ public static void Main() {
 
           
 
+          
+
           is a null reference.</exception
         >
         <exception cref="T:System.ArgumentOutOfRangeException"
@@ -2390,8 +2774,12 @@ public static void Main() {
 
           
 
+          
+
            is less than zero, or greater than or equal to the length of <paramref
            name="s" />
+
+          
 
           
 
@@ -2406,8 +2794,12 @@ public static void Main() {
 
           
 
+          
+
           The position of the character to evaluate in <paramref
            name="s" />
+
+          
 
           
 
@@ -2421,6 +2813,8 @@ public static void Main() {
           <para
             >Control characters are formatting and other non-printing characters, such as ACK, BEL, CR, FF, LF, and VT. The Unicode standard assigns code points from \U0000 to \U001F, \U007F, and from \U0080 to \U009F to control characters. According to the Unicode standard, these values are to be interpreted as control characters unless their use is otherwise defined by an application. Valid control characters are members of the <see
              cref="F:System.Globalization.UnicodeCategory.Control" />
+
+            
 
             
 
@@ -2443,8 +2837,12 @@ public static void Main() {
 
             
 
+            
+
              in <paramref
              name="s" />
+
+            
 
             
 
@@ -2460,6 +2858,8 @@ public static void Main() {
 
           
 
+          
+
           A string. </param
         >
         <param name="index">
@@ -2469,8 +2869,12 @@ public static void Main() {
 
           
 
+          
+
           The position of the character to evaluate in <paramref
            name="s" />
+
+          
 
           
 
@@ -2514,8 +2918,12 @@ public static void Main() {
 
             
 
+            
+
              is a radix-10 digit. This contrasts with <see
              cref="M:System.Char.IsNumber(System.Char)" />
+
+            
 
             
 
@@ -2526,6 +2934,8 @@ public static void Main() {
           <para
             >Valid digits are members of the <see
              cref="F:System.Globalization.UnicodeCategory.DecimalDigitNumber" />
+
+            
 
             
 
@@ -2548,11 +2958,15 @@ public static void Main() {
 
             
 
+            
+
              is a decimal digit; otherwise, false.</para
           >
         </returns>
         <param name="c">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2594,6 +3008,8 @@ public static void Main() {
 
           
 
+          
+
           is a null reference.</exception
         >
         <exception cref="T:System.ArgumentOutOfRangeException"
@@ -2604,8 +3020,12 @@ public static void Main() {
 
           
 
+          
+
            is less than zero, or greater than or equal to the length of <paramref
            name="s" />
+
+          
 
           
 
@@ -2620,8 +3040,12 @@ public static void Main() {
 
           
 
+          
+
           The position of the character to evaluate in <paramref
            name="s" />
+
+          
 
           
 
@@ -2639,8 +3063,12 @@ public static void Main() {
 
             
 
+            
+
              is a radix-10 digit. This contrasts with <see
              cref="M:System.Char.IsNumber(System.Char)" />
+
+            
 
             
 
@@ -2653,12 +3081,16 @@ public static void Main() {
 
             
 
+            
+
              is of any numeric Unicode category. Numbers include characters such as fractions, subscripts, superscripts, Roman numerals, currency numerators, encircled numbers, and script-specific digits.</para
           >
           <para>Character positions in a string are indexed starting from zero.</para>
           <para
             >Valid digits are members of the <see
              cref="F:System.Globalization.UnicodeCategory.DecimalDigitNumber" />
+
+            
 
             
 
@@ -2681,8 +3113,12 @@ public static void Main() {
 
             
 
+            
+
              in <paramref
              name="s" />
+
+            
 
             
 
@@ -2698,6 +3134,8 @@ public static void Main() {
 
           
 
+          
+
           A string. </param
         >
         <param name="index">
@@ -2707,8 +3145,12 @@ public static void Main() {
 
           
 
+          
+
           The position of the character to evaluate in <paramref
            name="s" />
+
+          
 
           
 
@@ -2752,6 +3194,8 @@ public static void Main() {
 
             
 
+            
+
              object is a high surrogate.</para
           >
         </summary>
@@ -2765,11 +3209,15 @@ public static void Main() {
 
             
 
+            
+
              parameter ranges from U+D800 through U+DBFF; otherwise, false.</para
           >
         </returns>
         <param name="c">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2812,6 +3260,8 @@ public static void Main() {
 
             
 
+            
+
              parameter is zero-based.</para
           >
           <para>In addition to representing single characters using a 16-bit code point, UTF-16 encoding allows abstract characters to be represented using two 16-bit code points, which is known as a surrogate pair. The first element in this pair is the high surrogate. Its code point can range from U+D800 to U+DBFF. An individual surrogate has no interpretation of its own; it is meaningful only when used as part of a surrogate pair. </para>
@@ -2821,6 +3271,8 @@ public static void Main() {
           <para
             >Indicates whether the <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -2839,11 +3291,15 @@ public static void Main() {
 
             
 
+            
+
              parameter ranges from U+D800 through U+DBFF; otherwise, false.</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2858,8 +3314,12 @@ public static void Main() {
 
           
 
+          
+
           The position of the character to evaluate in <paramref
            name="s" />
+
+          
 
           
 
@@ -2902,6 +3362,8 @@ public static void Main() {
 
             
 
+            
+
              is a member of any category of Unicode letter. Unicode letters include the following:</para
           >
           <list type="bullet">
@@ -2909,6 +3371,8 @@ public static void Main() {
               <para
                 >Uppercase letters, such as U+0041 (LATIN CAPITAL LETTER A) through U+005A (LATIN CAPITAL LETTER Z), or U+0400 (CYRILLIC CAPITAL LETTER IE WITH GRAVE) through U+042F (CYRILLIC CAPITAL LETTER YA). These characters are members of the <see
                  cref="F:System.Globalization.UnicodeCategory.UppercaseLetter" />
+
+                
 
                 
 
@@ -2926,6 +3390,8 @@ public static void Main() {
 
                 
 
+                
+
                  category.</para
               >
             </item>
@@ -2933,6 +3399,8 @@ public static void Main() {
               <para
                 >Title case letters, such as U+01C5 (LATIN CAPITAL LETTER D WITH SMALL LETTER Z WITH CARON) or U+1FFC (GREEK CAPITAL LETTER OMEGA WITH PROSGEGRAMMENI). These characters are members of the <see
                  cref="F:System.Globalization.UnicodeCategory.TitlecaseLetter" />
+
+                
 
                 
 
@@ -2950,6 +3418,8 @@ public static void Main() {
 
                 
 
+                
+
                  category.</para
               >
             </item>
@@ -2957,6 +3427,8 @@ public static void Main() {
               <para
                 >Other letters, such as U+05D0 (HEBREW LETTER ALEF) through U+05EA (HEBREW LETTER TAV), U+0621 (ARABIC LETTER HAMZA) through U+063A (ARABIC LETTER GHAIN), or U+4E00 (&lt;CJK Ideograph, First&gt;) through U+9FC3 (&lt;CJK Ideograph, Last&gt;). These characters are members of the <see
                  cref="F:System.Globalization.UnicodeCategory.OtherLetter" />
+
+                
 
                 
 
@@ -2981,11 +3453,15 @@ public static void Main() {
 
             
 
+            
+
              is a letter; otherwise, false.</para
           >
         </returns>
         <param name="c">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3027,6 +3503,8 @@ public static void Main() {
 
           
 
+          
+
           is a null reference.</exception
         >
         <exception cref="T:System.ArgumentOutOfRangeException"
@@ -3037,8 +3515,12 @@ public static void Main() {
 
           
 
+          
+
            is less than zero, or greater than or equal to the length of <paramref
            name="s" />
+
+          
 
           
 
@@ -3053,8 +3535,12 @@ public static void Main() {
 
           
 
+          
+
           The position of the character to evaluate in <paramref
            name="s" />
+
+          
 
           
 
@@ -3076,6 +3562,8 @@ public static void Main() {
 
                 
 
+                
+
                  category.</para
               >
             </item>
@@ -3083,6 +3571,8 @@ public static void Main() {
               <para
                 >Lowercase letters, such as U+0061 (LATIN SMALL LETTER A) through U+007A (LATIN SMALL LETTER Z), or U+03AC (GREEK SMALL LETTER ALPHA WITH TONOS) through U+03CE (GREEK SMALL LETTER OMEGA WITH TONOS). These characters are members of the <see
                  cref="F:System.Globalization.UnicodeCategory.LowercaseLetter" />
+
+                
 
                 
 
@@ -3100,6 +3590,8 @@ public static void Main() {
 
                 
 
+                
+
                  category.</para
               >
             </item>
@@ -3112,6 +3604,8 @@ public static void Main() {
 
                 
 
+                
+
                  category.</para
               >
             </item>
@@ -3119,6 +3613,8 @@ public static void Main() {
               <para
                 >Other letters, such as U+05D0 (HEBREW LETTER ALEF) through U+05EA (HEBREW LETTER TAV), U+0621 (ARABIC LETTER HAMZA) through U+063A (ARABIC LETTER GHAIN), or U+4E00 (&lt;CJK Ideograph, First&gt;) through U+9FC3 (&lt;CJK Ideograph, Last&gt;). These characters are members of the <see
                  cref="F:System.Globalization.UnicodeCategory.OtherLetter" />
+
+                
 
                 
 
@@ -3143,8 +3639,12 @@ public static void Main() {
 
             
 
+            
+
              in <paramref
              name="s" />
+
+            
 
             
 
@@ -3160,6 +3660,8 @@ public static void Main() {
 
           
 
+          
+
           A string. </param
         >
         <param name="index">
@@ -3169,8 +3671,12 @@ public static void Main() {
 
           
 
+          
+
           The position of the character to evaluate in <paramref
            name="s" />
+
+          
 
           
 
@@ -3214,6 +3720,8 @@ public static void Main() {
 
             
 
+            
+
             : UppercaseLetter, LowercaseLetter, TitlecaseLetter, ModifierLetter, OtherLetter, or DecimalDigitNumber.</para
           >
         </remarks>
@@ -3231,11 +3739,15 @@ public static void Main() {
 
             
 
+            
+
              is a letter or a decimal digit; otherwise, false.</para
           >
         </returns>
         <param name="c">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3280,6 +3792,8 @@ public static void Main() {
 
           
 
+          
+
           is a null reference.</exception
         >
         <exception cref="T:System.ArgumentOutOfRangeException"
@@ -3290,8 +3804,12 @@ public static void Main() {
 
           
 
+          
+
            is less than zero, or greater than or equal to the length of <paramref
            name="s" />
+
+          
 
           
 
@@ -3306,8 +3824,12 @@ public static void Main() {
 
           
 
+          
+
           The position of the character to evaluate in <paramref
            name="s" />
+
+          
 
           
 
@@ -3321,6 +3843,8 @@ public static void Main() {
           <para
             >Valid letters and decimal digits are members of the following categories in <see
              cref="T:System.Globalization.UnicodeCategory" />
+
+            
 
             
 
@@ -3343,8 +3867,12 @@ public static void Main() {
 
             
 
+            
+
              in <paramref
              name="s" />
+
+            
 
             
 
@@ -3360,6 +3888,8 @@ public static void Main() {
 
           
 
+          
+
           A string. </param
         >
         <param name="index">
@@ -3369,8 +3899,12 @@ public static void Main() {
 
           
 
+          
+
           The position of the character to evaluate in <paramref
            name="s" />
+
+          
 
           
 
@@ -3414,6 +3948,8 @@ public static void Main() {
 
             
 
+            
+
             : LowercaseLetter.</para
           >
         </remarks>
@@ -3431,11 +3967,15 @@ public static void Main() {
 
             
 
+            
+
              is a lowercase letter; otherwise, false.</para
           >
         </returns>
         <param name="c">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3477,6 +4017,8 @@ public static void Main() {
 
           
 
+          
+
           is a null reference.</exception
         >
         <exception cref="T:System.ArgumentOutOfRangeException"
@@ -3487,8 +4029,12 @@ public static void Main() {
 
           
 
+          
+
            is less than zero, or greater than or equal to the length of <paramref
            name="s" />
+
+          
 
           
 
@@ -3503,8 +4049,12 @@ public static void Main() {
 
           
 
+          
+
           The position of the character to evaluate in <paramref
            name="s" />
+
+          
 
           
 
@@ -3518,6 +4068,8 @@ public static void Main() {
           <para
             >Valid lowercase letters are members of the following category in <see
              cref="T:System.Globalization.UnicodeCategory" />
+
+            
 
             
 
@@ -3540,8 +4092,12 @@ public static void Main() {
 
             
 
+            
+
              in <paramref
              name="s" />
+
+            
 
             
 
@@ -3557,6 +4113,8 @@ public static void Main() {
 
           
 
+          
+
           A string. </param
         >
         <param name="index">
@@ -3566,8 +4124,12 @@ public static void Main() {
 
           
 
+          
+
           The position of the character to evaluate in <paramref
            name="s" />
+
+          
 
           
 
@@ -3611,6 +4173,8 @@ public static void Main() {
 
             
 
+            
+
              object is a low surrogate.</para
           >
         </summary>
@@ -3624,11 +4188,15 @@ public static void Main() {
 
             
 
+            
+
              parameter ranges from U+DC00 through U+DFFF; otherwise, false.</para
           >
         </returns>
         <param name="c">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3671,6 +4239,8 @@ public static void Main() {
 
             
 
+            
+
              parameter is zero-based.</para
           >
           <para>In addition to representing single characters using a 16-bit code point, UTF-16 encoding allows abstract characters to be represented using two 16-bit code points, which is known as a surrogate pair. The second element in this pair is the low surrogate. Its code point can range from U+DC00 to U+DFFF. An individual surrogate has no interpretation of its own; it is meaningful only when used as part of a surrogate pair.</para>
@@ -3680,6 +4250,8 @@ public static void Main() {
           <para
             >Indicates whether the <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -3698,11 +4270,15 @@ public static void Main() {
 
             
 
+            
+
              parameter ranges from U+DC00 through U+DFFF; otherwise, false.</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3717,8 +4293,12 @@ public static void Main() {
 
           
 
+          
+
           The position of the character to evaluate in <paramref
            name="s" />
+
+          
 
           
 
@@ -3761,6 +4341,8 @@ public static void Main() {
 
             
 
+            
+
              is of any numeric Unicode category. In addition to including digits, numbers include characters, fractions, subscripts, superscripts, Roman numerals, currency numerators, and encircled numbers. This method contrasts with the <see
              cref="M:System.Char.IsDigit(System.Char)" />
 
@@ -3768,8 +4350,12 @@ public static void Main() {
 
             
 
+            
+
              method, which determines whether a <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -3785,6 +4371,8 @@ public static void Main() {
 
             
 
+            
+
             , <see
              cref="F:System.Globalization.UnicodeCategory.LetterNumber" />
 
@@ -3792,8 +4380,12 @@ public static void Main() {
 
             
 
+            
+
             , or <see
              cref="F:System.Globalization.UnicodeCategory.OtherNumber" />
+
+            
 
             
 
@@ -3809,8 +4401,12 @@ public static void Main() {
 
             
 
+            
+
              method assumes that <paramref
              name="c" />
+
+            
 
             
 
@@ -3823,6 +4419,8 @@ public static void Main() {
 
             
 
+            
+
              objects that form a surrogate pair. For example, the Aegean numbering system consists of code points U+10107 through U+10133. The following example uses the <see
              cref="M:System.Char.ConvertFromUtf32(System.Int32)" />
 
@@ -3830,8 +4428,12 @@ public static void Main() {
 
             
 
+            
+
              method to instantiate a string that represents AEGEAN NUMBER ONE. As the output from the example shows, the <see
              cref="M:System.Char.IsNumber(System.Char)" />
+
+            
 
             
 
@@ -3855,11 +4457,15 @@ public static void Main() {
 
             
 
+            
+
              is a number; otherwise, false.</para
           >
         </returns>
         <param name="c">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3901,6 +4507,8 @@ public static void Main() {
 
           
 
+          
+
           is a null reference.</exception
         >
         <exception cref="T:System.ArgumentOutOfRangeException"
@@ -3911,8 +4519,12 @@ public static void Main() {
 
           
 
+          
+
            is less than zero, or greater than or equal to the length of <paramref
            name="s" />
+
+          
 
           
 
@@ -3927,8 +4539,12 @@ public static void Main() {
 
           
 
+          
+
           The position of the character to evaluate in <paramref
            name="s" />
+
+          
 
           
 
@@ -3946,6 +4562,8 @@ public static void Main() {
 
             
 
+            
+
              is of any numeric Unicode category. In addition to including digits, numbers include characters, fractions, subscripts, superscripts, Roman numerals, currency numerators, and encircled numbers. This method contrasts with the <see
              cref="M:System.Char.IsDigit(System.Char)" />
 
@@ -3953,8 +4571,12 @@ public static void Main() {
 
             
 
+            
+
              method, which determines whether a <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -3971,6 +4593,8 @@ public static void Main() {
 
             
 
+            
+
             , <see
              cref="F:System.Globalization.UnicodeCategory.LetterNumber" />
 
@@ -3978,8 +4602,12 @@ public static void Main() {
 
             
 
+            
+
             , or <see
              cref="F:System.Globalization.UnicodeCategory.OtherNumber" />
+
+            
 
             
 
@@ -3995,8 +4623,12 @@ public static void Main() {
 
             
 
+            
+
              object at position <paramref
              name="index" />
+
+            
 
             
 
@@ -4009,6 +4641,8 @@ public static void Main() {
 
             
 
+            
+
              method determines whether the surrogate pair forms a numeric digit. For example, the Aegean numbering system consists of code points U+10107 through U+10133. The following example uses the <see
              cref="M:System.Char.ConvertFromUtf32(System.Int32)" />
 
@@ -4016,8 +4650,12 @@ public static void Main() {
 
             
 
+            
+
              method to instantiate a string that represents AEGEAN NUMBER ONE. As the output from the example shows, the <see
              cref="M:System.Char.IsNumber(System.String,System.Int32)" />
+
+            
 
             
 
@@ -4041,8 +4679,12 @@ public static void Main() {
 
             
 
+            
+
              in <paramref
              name="s" />
+
+            
 
             
 
@@ -4058,6 +4700,8 @@ public static void Main() {
 
           
 
+          
+
           A string. </param
         >
         <param name="index">
@@ -4067,8 +4711,12 @@ public static void Main() {
 
           
 
+          
+
           The position of the character to evaluate in <paramref
            name="s" />
+
+          
 
           
 
@@ -4107,6 +4755,8 @@ public static void Main() {
           <para
             >Valid punctuation marks are members of the following categories in <see
              cref="T:System.Globalization.UnicodeCategory" />
+
+            
 
             
 
@@ -4467,11 +5117,15 @@ public static void Main() {
 
             
 
+            
+
              is a punctuation mark; otherwise, false.</para
           >
         </returns>
         <param name="c">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4516,6 +5170,8 @@ public static void Main() {
 
           
 
+          
+
           is a null reference.</exception
         >
         <exception cref="T:System.ArgumentOutOfRangeException"
@@ -4526,8 +5182,12 @@ public static void Main() {
 
           
 
+          
+
            is less than zero, or greater than or equal to the length of <paramref
            name="s" />
+
+          
 
           
 
@@ -4542,8 +5202,12 @@ public static void Main() {
 
           
 
+          
+
           The position of the character to evaluate in <paramref
            name="s" />
+
+          
 
           
 
@@ -4557,6 +5221,8 @@ public static void Main() {
           <para
             >Valid punctuation marks are members of the following categories in <see
              cref="T:System.Globalization.UnicodeCategory" />
+
+            
 
             
 
@@ -4917,8 +5583,12 @@ public static void Main() {
 
             
 
+            
+
              in <paramref
              name="s" />
+
+            
 
             
 
@@ -4934,6 +5604,8 @@ public static void Main() {
 
           
 
+          
+
           A string. </param
         >
         <param name="index">
@@ -4943,8 +5615,12 @@ public static void Main() {
 
           
 
+          
+
           The position of the character to evaluate in <paramref
            name="s" />
+
+          
 
           
 
@@ -4991,6 +5667,8 @@ public static void Main() {
 
                 
 
+                
+
                  category), which includes characters such as \u0020.</para
               >
             </item>
@@ -4998,6 +5676,8 @@ public static void Main() {
               <para
                 >Line separators (the <see
                  cref="F:System.Globalization.UnicodeCategory.LineSeparator" />
+
+                
 
                 
 
@@ -5015,6 +5695,8 @@ public static void Main() {
 
                 
 
+                
+
                  category), which includes \u2029. </para
               >
             </item>
@@ -5023,6 +5705,8 @@ public static void Main() {
             <para
               >The Unicode standard classifies the characters \u000A (LF), \u000C (FF), and \u000A (CR) as control characters (members of the <see
                cref="F:System.Globalization.UnicodeCategory.Control" />
+
+              
 
               
 
@@ -5046,11 +5730,15 @@ public static void Main() {
 
             
 
+            
+
              is a separator character; otherwise, false.</para
           >
         </returns>
         <param name="c">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5095,6 +5783,8 @@ public static void Main() {
 
           
 
+          
+
           is a null reference.</exception
         >
         <exception cref="T:System.ArgumentOutOfRangeException"
@@ -5105,8 +5795,12 @@ public static void Main() {
 
           
 
+          
+
            is less than zero, or greater than or equal to the length of <paramref
            name="s" />
+
+          
 
           
 
@@ -5121,8 +5815,12 @@ public static void Main() {
 
           
 
+          
+
           The position of the character to evaluate in <paramref
            name="s" />
+
+          
 
           
 
@@ -5144,6 +5842,8 @@ public static void Main() {
 
                 
 
+                
+
                  category), which includes characters such as \u0020.</para
               >
             </item>
@@ -5151,6 +5851,8 @@ public static void Main() {
               <para
                 >Line separators (the <see
                  cref="F:System.Globalization.UnicodeCategory.LineSeparator" />
+
+                
 
                 
 
@@ -5168,6 +5870,8 @@ public static void Main() {
 
                 
 
+                
+
                  category), which includes \u2029.</para
               >
             </item>
@@ -5176,6 +5880,8 @@ public static void Main() {
             <para
               >The Unicode standard classifies the characters \u000A (LF), \u000C (FF), and \u000A (CR) as control characters (members of the <see
                cref="F:System.Globalization.UnicodeCategory.Control" />
+
+              
 
               
 
@@ -5199,8 +5905,12 @@ public static void Main() {
 
             
 
+            
+
              in <paramref
              name="s" />
+
+            
 
             
 
@@ -5216,6 +5926,8 @@ public static void Main() {
 
           
 
+          
+
           A string. </param
         >
         <param name="index">
@@ -5225,8 +5937,12 @@ public static void Main() {
 
           
 
+          
+
           The position of the character to evaluate in <paramref
            name="s" />
+
+          
 
           
 
@@ -5270,6 +5986,8 @@ public static void Main() {
 
             
 
+            
+
              object with a UTF-16 code unit in the range from U+D800 to U+DFFF. Each character with a code unit in this range belongs to the <see
              cref="F:System.Globalization.UnicodeCategory.Surrogate" />
 
@@ -5277,8 +5995,12 @@ public static void Main() {
 
             
 
+            
+
              category. The individual surrogate code unit has no interpretation of its own, but has meaning only when used as part of a surrogate pair. For more information about surrogate pairs, see the Unicode Standard at the <see
              cref="http://go.microsoft.com/fwlink/?linkid=37123">Unicode home page</see>
+
+            
 
             
 
@@ -5301,11 +6023,15 @@ public static void Main() {
 
             
 
+            
+
              is either a high surrogate or a low surrogate; otherwise, false.</para
           >
         </returns>
         <param name="c">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5350,6 +6076,8 @@ public static void Main() {
 
           
 
+          
+
           is a null reference.</exception
         >
         <exception cref="T:System.ArgumentOutOfRangeException"
@@ -5360,8 +6088,12 @@ public static void Main() {
 
           
 
+          
+
            is less than zero, or greater than or equal to the length of <paramref
            name="s" />
+
+          
 
           
 
@@ -5376,8 +6108,12 @@ public static void Main() {
 
           
 
+          
+
           The position of the character to evaluate in <paramref
            name="s" />
+
+          
 
           
 
@@ -5396,6 +6132,8 @@ public static void Main() {
 
             
 
+            
+
              object with a UTF-16 code unit in the range from U+D800 to U+DFFF. Each character with a code unit in this range belongs to the <see
              cref="F:System.Globalization.UnicodeCategory.Surrogate" />
 
@@ -5403,8 +6141,12 @@ public static void Main() {
 
             
 
+            
+
              category. The individual surrogate code unit has no interpretation of its own, but has meaning only when used as part of a surrogate pair. For more information about surrogate pairs, see the Unicode Standard at the <see
              cref="http://go.microsoft.com/fwlink/?linkid=37123">Unicode home page</see>
+
+            
 
             
 
@@ -5427,8 +6169,12 @@ public static void Main() {
 
             
 
+            
+
              in <paramref
              name="s" />
+
+            
 
             
 
@@ -5444,6 +6190,8 @@ public static void Main() {
 
           
 
+          
+
           A string. </param
         >
         <param name="index">
@@ -5453,8 +6201,12 @@ public static void Main() {
 
           
 
+          
+
           The position of the character to evaluate in <paramref
            name="s" />
+
+          
 
           
 
@@ -5498,6 +6250,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5506,6 +6260,8 @@ public static void Main() {
           <para
             >Indicates whether the two specified <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -5524,8 +6280,12 @@ public static void Main() {
 
             
 
+            
+
              parameter ranges from U+D800 through U+DBFF, and the numeric value of the <paramref
              name="lowSurrogate" />
+
+            
 
             
 
@@ -5541,10 +6301,14 @@ public static void Main() {
 
           
 
+          
+
           The character to evaluate as the high surrogate of a surrogate pair. </param
         >
         <param name="lowSurrogate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5587,6 +6351,8 @@ public static void Main() {
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -5595,6 +6361,8 @@ public static void Main() {
           <para
             >Indicates whether two adjacent <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -5613,8 +6381,12 @@ public static void Main() {
 
             
 
+            
+
              parameter includes adjacent characters at positions <paramref
              name="index" />
+
+            
 
             
 
@@ -5627,6 +6399,8 @@ public static void Main() {
 
             
 
+            
+
              + 1, and the numeric value of the character at position <paramref
              name="index" />
 
@@ -5634,8 +6408,12 @@ public static void Main() {
 
             
 
+            
+
              ranges from U+D800 through U+DBFF, and the numeric value of the character at position <paramref
              name="index" />
+
+            
 
             
 
@@ -5651,6 +6429,8 @@ public static void Main() {
 
           
 
+          
+
           A string. </param
         >
         <param name="index">
@@ -5660,8 +6440,12 @@ public static void Main() {
 
           
 
+          
+
           The starting position of the pair of characters to evaluate within <paramref
            name="s" />
+
+          
 
           
 
@@ -5699,6 +6483,8 @@ public static void Main() {
           <para
             >Valid symbols are members of the following categories in <see
              cref="T:System.Globalization.UnicodeCategory" />
+
+            
 
             
 
@@ -5748,11 +6534,15 @@ public static void Main() {
 
             
 
+            
+
              is a symbol character; otherwise, false.</para
           >
         </returns>
         <param name="c">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5794,6 +6584,8 @@ public static void Main() {
 
           
 
+          
+
           is a null reference.</exception
         >
         <exception cref="T:System.ArgumentOutOfRangeException"
@@ -5804,8 +6596,12 @@ public static void Main() {
 
           
 
+          
+
            is less than zero, or greater than or equal to the length of <paramref
            name="s" />
+
+          
 
           
 
@@ -5820,8 +6616,12 @@ public static void Main() {
 
           
 
+          
+
           The position of the character to evaluate in <paramref
            name="s" />
+
+          
 
           
 
@@ -5835,6 +6635,8 @@ public static void Main() {
           <para
             >Valid symbols are members of the following categories in <see
              cref="T:System.Globalization.UnicodeCategory" />
+
+            
 
             
 
@@ -5884,8 +6686,12 @@ public static void Main() {
 
             
 
+            
+
              in <paramref
              name="s" />
+
+            
 
             
 
@@ -5901,6 +6707,8 @@ public static void Main() {
 
           
 
+          
+
           A string. </param
         >
         <param name="index">
@@ -5910,8 +6718,12 @@ public static void Main() {
 
           
 
+          
+
           The position of the character to evaluate in <paramref
            name="s" />
+
+          
 
           
 
@@ -5955,6 +6767,8 @@ public static void Main() {
 
             
 
+            
+
             : UppercaseLetter.</para
           >
         </remarks>
@@ -5972,11 +6786,15 @@ public static void Main() {
 
             
 
+            
+
              is an uppercase letter; otherwise, false.</para
           >
         </returns>
         <param name="c">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6018,6 +6836,8 @@ public static void Main() {
 
           
 
+          
+
           is a null reference.</exception
         >
         <exception cref="T:System.ArgumentOutOfRangeException"
@@ -6028,8 +6848,12 @@ public static void Main() {
 
           
 
+          
+
            is less than zero, or greater than or equal to the length of <paramref
            name="s" />
+
+          
 
           
 
@@ -6044,8 +6868,12 @@ public static void Main() {
 
           
 
+          
+
           The position of the character to evaluate in <paramref
            name="s" />
+
+          
 
           
 
@@ -6059,6 +6887,8 @@ public static void Main() {
           <para
             >Valid uppercase letters are members of the following category in <see
              cref="T:System.Globalization.UnicodeCategory" />
+
+            
 
             
 
@@ -6081,8 +6911,12 @@ public static void Main() {
 
             
 
+            
+
              in <paramref
              name="s" />
+
+            
 
             
 
@@ -6098,6 +6932,8 @@ public static void Main() {
 
           
 
+          
+
           A string. </param
         >
         <param name="index">
@@ -6107,8 +6943,12 @@ public static void Main() {
 
           
 
+          
+
           The position of the character to evaluate in <paramref
            name="s" />
+
+          
 
           
 
@@ -6155,6 +6995,8 @@ public static void Main() {
 
                 
 
+                
+
                  category, which includes the characters SPACE (U+0020), OGHAM SPACE MARK (U+1680), MONGOLIAN VOWEL SEPARATOR (U+180E), EN QUAD (U+2000), EM QUAD (U+2001), EN SPACE (U+2002), EM SPACE (U+2003), THREE-PER-EM SPACE (U+2004), FOUR-PER-EM SPACE (U+2005), SIX-PER-EM SPACE (U+2006), FIGURE SPACE (U+2007), PUNCTUATION SPACE (U+2008), THIN SPACE (U+2009), HAIR SPACE (U+200A), NARROW NO-BREAK SPACE (U+202F), MEDIUM MATHEMATICAL SPACE (U+205F), and IDEOGRAPHIC SPACE (U+3000).</para
               >
             </item>
@@ -6167,6 +7009,8 @@ public static void Main() {
 
                 
 
+                
+
                  category, which consists solely of the LINE SEPARATOR character (U+2028).</para
               >
             </item>
@@ -6174,6 +7018,8 @@ public static void Main() {
               <para
                 >Members of the <see
                  cref="F:System.Globalization.UnicodeCategory.ParagraphSeparator" />
+
+                
 
                 
 
@@ -6201,11 +7047,15 @@ public static void Main() {
 
             
 
+            
+
              is white space; otherwise, false.</para
           >
         </returns>
         <param name="c">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6251,6 +7101,8 @@ public static void Main() {
 
             
 
+            
+
             is a null reference.</para
           >
         </exception>
@@ -6262,8 +7114,12 @@ public static void Main() {
 
           
 
+          
+
            is less than zero, or greater than or equal to the length of <paramref
            name="s" />
+
+          
 
           
 
@@ -6278,8 +7134,12 @@ public static void Main() {
 
           
 
+          
+
           The position of the character to evaluate in <paramref
            name="s" />
+
+          
 
           
 
@@ -6301,6 +7161,8 @@ public static void Main() {
 
                 
 
+                
+
                  category, which includes the characters SPACE (U+0020), OGHAM SPACE MARK (U+1680), MONGOLIAN VOWEL SEPARATOR (U+180E), EN QUAD (U+2000), EM QUAD (U+2001), EN SPACE (U+2002), EM SPACE (U+2003), THREE-PER-EM SPACE (U+2004), FOUR-PER-EM SPACE (U+2005), SIX-PER-EM SPACE (U+2006), FIGURE SPACE (U+2007), PUNCTUATION SPACE (U+2008), THIN SPACE (U+2009), HAIR SPACE (U+200A), NARROW NO-BREAK SPACE (U+202F), MEDIUM MATHEMATICAL SPACE (U+205F), and IDEOGRAPHIC SPACE (U+3000).</para
               >
             </item>
@@ -6313,6 +7175,8 @@ public static void Main() {
 
                 
 
+                
+
                  category, which consists solely of the LINE SEPARATOR character (U+2028).</para
               >
             </item>
@@ -6320,6 +7184,8 @@ public static void Main() {
               <para
                 >Members of the <see
                  cref="F:System.Globalization.UnicodeCategory.ParagraphSeparator" />
+
+                
 
                 
 
@@ -6347,8 +7213,12 @@ public static void Main() {
 
             
 
+            
+
              in <paramref
              name="s" />
+
+            
 
             
 
@@ -6364,6 +7234,8 @@ public static void Main() {
 
           
 
+          
+
           A string. </param
         >
         <param name="index">
@@ -6373,8 +7245,12 @@ public static void Main() {
 
           
 
+          
+
           The position of the character to evaluate in <paramref
            name="s" />
+
+          
 
           
 
@@ -6413,6 +7289,8 @@ public static void Main() {
           <para
             >Represents the largest possible value of a <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -6457,6 +7335,8 @@ public static void Main() {
 
             
 
+            
+
             . This field is constant.</para
           >
         </summary>
@@ -6494,10 +7374,14 @@ public static void Main() {
 
           
 
+          
+
           is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -6519,11 +7403,15 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6567,6 +7455,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -6576,6 +7466,8 @@ public static void Main() {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6614,6 +7506,8 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -6621,8 +7515,12 @@ public static void Main() {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToByte(System.Char)" />
+
+            
 
             
 
@@ -6641,6 +7539,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -6654,11 +7554,15 @@ public static void Main() {
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6697,8 +7601,12 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
+
+            
 
             
 
@@ -6717,6 +7625,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -6730,11 +7640,15 @@ public static void Main() {
 
             
 
+            
+
              object unchanged.</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6777,6 +7691,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -6786,6 +7702,8 @@ public static void Main() {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6828,6 +7746,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -6837,6 +7757,8 @@ public static void Main() {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6879,6 +7801,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -6888,6 +7812,8 @@ public static void Main() {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6929,6 +7855,8 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -6936,8 +7864,12 @@ public static void Main() {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToInt16(System.Char)" />
+
+            
 
             
 
@@ -6956,6 +7888,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -6969,11 +7903,15 @@ public static void Main() {
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7012,6 +7950,8 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -7019,8 +7959,12 @@ public static void Main() {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToInt32(System.Char)" />
+
+            
 
             
 
@@ -7039,6 +7983,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -7052,11 +7998,15 @@ public static void Main() {
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7098,6 +8048,8 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -7105,8 +8057,12 @@ public static void Main() {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToInt64(System.Char)" />
+
+            
 
             
 
@@ -7125,6 +8081,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -7138,11 +8096,15 @@ public static void Main() {
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7184,6 +8146,8 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -7191,8 +8155,12 @@ public static void Main() {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToSByte(System.Char)" />
+
+            
 
             
 
@@ -7211,6 +8179,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -7224,11 +8194,15 @@ public static void Main() {
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7271,6 +8245,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -7280,6 +8256,8 @@ public static void Main() {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7323,6 +8301,8 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -7330,8 +8310,12 @@ public static void Main() {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ChangeType(System.Object,System.Type,System.IFormatProvider)" />
+
+            
 
             
 
@@ -7345,6 +8329,8 @@ public static void Main() {
           <para
             >For a description of this member, see <see
              cref="M:System.IConvertible.ToType(System.Type,System.IFormatProvider)" />
+
+            
 
             
 
@@ -7364,8 +8350,12 @@ public static void Main() {
 
           
 
+          
+
           An <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -7407,6 +8397,8 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -7414,8 +8406,12 @@ public static void Main() {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToUInt16(System.Char)" />
+
+            
 
             
 
@@ -7434,6 +8430,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -7442,6 +8440,8 @@ public static void Main() {
           <para
             >The converted value of the current <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -7457,6 +8457,8 @@ public static void Main() {
 
           
 
+          
+
           An <see
            cref="T:System.IFormatProvider" />
 
@@ -7464,8 +8466,12 @@ public static void Main() {
 
           
 
+          
+
            object. (Specify null because the <paramref
            name="provider" />
+
+          
 
           
 
@@ -7507,6 +8513,8 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -7514,8 +8522,12 @@ public static void Main() {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToUInt32(System.Char)" />
+
+            
 
             
 
@@ -7534,6 +8546,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -7542,6 +8556,8 @@ public static void Main() {
           <para
             >The converted value of the current <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -7557,6 +8573,8 @@ public static void Main() {
 
           
 
+          
+
           An <see
            cref="T:System.IFormatProvider" />
 
@@ -7564,8 +8582,12 @@ public static void Main() {
 
           
 
+          
+
            object. (Specify null because the <paramref
            name="provider" />
+
+          
 
           
 
@@ -7607,6 +8629,8 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -7614,8 +8638,12 @@ public static void Main() {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToUInt64(System.Char)" />
+
+            
 
             
 
@@ -7634,6 +8662,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -7642,6 +8672,8 @@ public static void Main() {
           <para
             >The converted value of the current <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -7657,6 +8689,8 @@ public static void Main() {
 
           
 
+          
+
           An <see
            cref="T:System.IFormatProvider" />
 
@@ -7664,8 +8698,12 @@ public static void Main() {
 
           
 
+          
+
            object. (Specify null because the <paramref
            name="provider" />
+
+          
 
           
 
@@ -7707,6 +8745,8 @@ public static void Main() {
 
             
 
+            
+
              method.</para
           >
           <code lang="C#"
@@ -7740,6 +8780,8 @@ public class CharToLower {
 
             
 
+            
+
              to convert a string to lowercase.</para
           >
         </remarks>
@@ -7757,8 +8799,12 @@ public class CharToLower {
 
             
 
+            
+
             , or the unchanged value of <paramref
              name="c" />
+
+            
 
             
 
@@ -7771,11 +8817,15 @@ public class CharToLower {
 
             
 
+            
+
              is already lowercase or not alphabetic.</para
           >
         </returns>
         <param name="c">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7819,6 +8869,8 @@ public class CharToLower {
 
             
 
+            
+
              to convert a string to lowercase.</para
           >
         </remarks>
@@ -7836,8 +8888,12 @@ public class CharToLower {
 
             
 
+            
+
             , modified according to <paramref
              name="culture" />
+
+            
 
             
 
@@ -7850,8 +8906,12 @@ public class CharToLower {
 
             
 
+            
+
             , if <paramref
              name="c" />
+
+            
 
             
 
@@ -7867,10 +8927,14 @@ public class CharToLower {
 
           
 
+          
+
           The Unicode character to convert. </param
         >
         <param name="culture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7909,8 +8973,12 @@ public class CharToLower {
 
             
 
+            
+
              method. The <see
              cref="M:System.Char.ToLowerInvariant(System.Char)" />
+
+            
 
             
 
@@ -7921,6 +8989,8 @@ public class CharToLower {
           <para
             >Use <see
              cref="M:System.String.ToLowerInvariant" />
+
+            
 
             
 
@@ -7943,8 +9013,12 @@ public class CharToLower {
 
             
 
+            
+
              parameter, or the unchanged value of <paramref
              name="c" />
+
+            
 
             
 
@@ -7957,11 +9031,15 @@ public class CharToLower {
 
             
 
+            
+
              is already lowercase or not alphabetic.</para
           >
         </returns>
         <param name="c">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7998,6 +9076,8 @@ public class CharToLower {
               > This method
       overrides <see
                cref="M:System.Object.ToString" />
+
+              
 
               
 
@@ -8052,11 +9132,15 @@ public class CharToLower {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="c">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8099,6 +9183,8 @@ public class CharToLower {
 
             
 
+            
+
              parameter is ignored; it does not participate in this operation.</para
           >
         </remarks>
@@ -8116,11 +9202,15 @@ public class CharToLower {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8163,6 +9253,8 @@ public class CharToLower {
 
             
 
+            
+
              method.</para
           >
           <code lang="C#"
@@ -8197,6 +9289,8 @@ public class CharToUpper {
 
             
 
+            
+
              to convert a string to uppercase.</para
           >
         </remarks>
@@ -8214,8 +9308,12 @@ public class CharToUpper {
 
             
 
+            
+
             , or the unchanged value of <paramref
              name="c" />
+
+            
 
             
 
@@ -8228,11 +9326,15 @@ public class CharToUpper {
 
             
 
+            
+
              is already uppercase, has no uppercase equivalent, or is not alphabetic.</para
           >
         </returns>
         <param name="c">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8276,6 +9378,8 @@ public class CharToUpper {
 
             
 
+            
+
              to convert a string to uppercase.</para
           >
         </remarks>
@@ -8293,8 +9397,12 @@ public class CharToUpper {
 
             
 
+            
+
             , modified according to <paramref
              name="culture" />
+
+            
 
             
 
@@ -8307,8 +9415,12 @@ public class CharToUpper {
 
             
 
+            
+
              if <paramref
              name="c" />
+
+            
 
             
 
@@ -8324,10 +9436,14 @@ public class CharToUpper {
 
           
 
+          
+
           The Unicode character to convert. </param
         >
         <param name="culture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8366,8 +9482,12 @@ public class CharToUpper {
 
             
 
+            
+
              method.  The <see
              cref="M:System.Char.ToUpperInvariant(System.Char)" />
+
+            
 
             
 
@@ -8378,6 +9498,8 @@ public class CharToUpper {
           <para
             >Use <see
              cref="M:System.String.ToUpperInvariant" />
+
+            
 
             
 
@@ -8400,8 +9522,12 @@ public class CharToUpper {
 
             
 
+            
+
              parameter, or the unchanged value of <paramref
              name="c" />
+
+            
 
             
 
@@ -8414,11 +9540,15 @@ public class CharToUpper {
 
             
 
+            
+
              is already uppercase or not alphabetic.</para
           >
         </returns>
         <param name="c">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

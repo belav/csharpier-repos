@@ -20,6 +20,8 @@
 
         
 
+        
+
          class.</para
       >
       <para>Query notifications are supported only for SELECT statements that meet a list of specific requirements. The following table provides links to the Service Broker and Query Notifications documentation in SQL Server Books Online. </para>

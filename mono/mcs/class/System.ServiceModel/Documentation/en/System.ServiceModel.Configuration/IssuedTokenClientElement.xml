@@ -50,6 +50,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -108,6 +110,8 @@
           <para
             >Gets or sets the default value of <see
              cref="T:System.ServiceModel.Security.SecurityKeyEntropyMode" />
+
+            
 
             
 

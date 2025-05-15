@@ -27,8 +27,12 @@
 
         
 
+        
+
          to download metadata. Typically, a <see
          cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
+
+        
 
         
 
@@ -41,6 +45,8 @@
 
         
 
+        
+
          or <see
          cref="M:System.ServiceModel.Description.MetadataResolver.Resolve(System.Collections.Generic.IEnumerable{System.ServiceModel.Description.ContractDescription},System.Uri,System.ServiceModel.Description.MetadataExchangeClientMode,System.ServiceModel.Description.MetadataExchangeClient)" />
 
@@ -48,8 +54,12 @@
 
         
 
+        
+
          method for the <see
          cref="T:System.ServiceModel.Description.MetadataResolver" />
+
+        
 
         
 
@@ -65,6 +75,8 @@
 
         
 
+        
+
          directly to retrieve metadata as a <see
          cref="T:System.ServiceModel.Description.MetadataSet" />
 
@@ -72,8 +84,12 @@
 
         
 
+        
+
          that contains <see
          cref="T:System.ServiceModel.Description.MetadataSection" />
+
+        
 
         
 
@@ -89,8 +105,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
+
+        
 
         
 
@@ -111,6 +131,8 @@
 
             
 
+            
+
              property to specify the credentials used to make an HTTP/GET request.</para
           >
         </item>
@@ -118,6 +140,8 @@
           <para
             >Use the <see
              cref="P:System.ServiceModel.Description.MetadataExchangeClient.SoapCredentials" />
+
+            
 
             
 
@@ -135,8 +159,12 @@
 
             
 
+            
+
              property to limit the number of metadata references the <see
              cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
+
+            
 
             
 
@@ -154,6 +182,8 @@
 
             
 
+            
+
              property to limit the time spent retrieving metadata.</para
           >
         </item>
@@ -166,6 +196,8 @@
 
             
 
+            
+
              property to specify whether to locate and retrieve other metadata documents referred to by the metadata downloaded from the original metadata endpoint.</para
           >
         </item>
@@ -173,6 +205,8 @@
           <para
             >Use the <see
              cref="Overload:System.ServiceModel.Description.MetadataExchangeClient.GetMetadata" />
+
+            
 
             
 
@@ -193,6 +227,8 @@
 
             
 
+            
+
              method to modify the channel that makes a metadata request using WS-Transfer.</para
           >
         </item>
@@ -205,8 +241,12 @@
 
             
 
+            
+
              method to modify the <see
              cref="T:System.Net.HttpWebRequest" />
+
+            
 
             
 
@@ -241,6 +281,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
+
+            
 
             
 
@@ -282,11 +324,15 @@
 
             
 
+            
+
              class using the specified binding.</para
           >
         </summary>
         <param name="mexBinding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -327,11 +373,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -372,11 +422,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="endpointConfigurationName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -414,6 +468,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -422,6 +478,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
+
+            
 
             
 
@@ -437,10 +495,14 @@
 
           
 
+          
+
           The address of the metadata.</param
         >
         <param name="mode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -481,6 +543,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -489,6 +553,8 @@
           <para
             >Begins an asynchronous method call that returns a <see
              cref="T:System.ServiceModel.Description.MetadataSet" />
+
+            
 
             
 
@@ -508,10 +574,14 @@
 
           
 
+          
+
           The asynchronous callback delegate invoked when the call is complete.</param
         >
         <param name="asyncState">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -553,6 +623,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -561,6 +633,8 @@
           <para
             >Begins an asynchronous method call that returns a <see
              cref="T:System.ServiceModel.Description.MetadataSet" />
+
+            
 
             
 
@@ -579,11 +653,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -598,10 +676,14 @@
 
           
 
+          
+
           The asynchronous callback delegate invoked when the call is complete.</param
         >
         <param name="asyncState">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -644,6 +726,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -652,6 +736,8 @@
           <para
             >Begins an asynchronous method call that returns a <see
              cref="T:System.ServiceModel.Description.MetadataSet" />
+
+            
 
             
 
@@ -670,11 +756,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -689,8 +779,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.MetadataExchangeClientMode" />
+
+          
 
           
 
@@ -705,10 +799,14 @@
 
           
 
+          
+
           The asynchronous callback delegate invoked when the call is complete.</param
         >
         <param name="asyncState">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -748,6 +846,8 @@
 
             
 
+            
+
              methods to return the downloaded metadata. </para
           >
         </remarks>
@@ -756,6 +856,8 @@
           <para
             >Ends an asynchronous method call that returns a <see
              cref="T:System.ServiceModel.Description.MetadataSet" />
+
+            
 
             
 
@@ -774,11 +876,15 @@
 
             
 
+            
+
              that contains the downloaded metadata.</para
           >
         </returns>
         <param name="result">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -791,8 +897,12 @@
 
           
 
+          
+
            object that is received from a call to the <see
            cref="Overload:System.ServiceModel.Description.MetadataExchangeClient.BeginGetMetadata" />
+
+          
 
           
 
@@ -834,6 +944,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -851,8 +963,12 @@
 
             
 
+            
+
              of type <see
              cref="T:System.ServiceModel.Channels.IRequestChannel" />
+
+            
 
             
 
@@ -868,6 +984,8 @@
 
           
 
+          
+
           The metadata address.</param
         >
         <param name="dialect">
@@ -877,10 +995,14 @@
 
           
 
+          
+
           The dialect of the metadata.</param
         >
         <param name="identifier">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -919,6 +1041,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -927,6 +1051,8 @@
           <para
             >The <see
              cref="T:System.ServiceModel.Description.MetadataSet" />
+
+            
 
             
 
@@ -968,6 +1094,8 @@
 
             
 
+            
+
              from the specified address.</para
           >
         </summary>
@@ -981,11 +1109,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1030,6 +1162,8 @@
 
             
 
+            
+
              from the specified address using the specified download mode.</para
           >
         </summary>
@@ -1044,10 +1178,14 @@
 
           
 
+          
+
           The address from which to download the metadata.</param
         >
         <param name="mode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1089,6 +1227,8 @@
 
             
 
+            
+
              method is called:</para
           >
           <list type="bullet">
@@ -1101,6 +1241,8 @@
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -1108,6 +1250,8 @@
               <para
                 >When <see
                  cref="F:System.ServiceModel.Description.MetadataExchangeClientMode.HttpGet" />
+
+                
 
                 
 
@@ -1128,6 +1272,8 @@
 
             
 
+            
+
              used to make HTTP/GET metadata requests.</para
           >
         </summary>
@@ -1136,6 +1282,8 @@
           <para
             >The internal <see
              cref="T:System.Net.HttpWebRequest" />
+
+            
 
             
 
@@ -1151,6 +1299,8 @@
 
           
 
+          
+
           The location of the metadata.</param
         >
         <param name="dialect">
@@ -1160,10 +1310,14 @@
 
           
 
+          
+
           The dialect of the metadata.</param
         >
         <param name="identifier">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1201,8 +1355,12 @@
 
             
 
+            
+
              property to customize the security credentials that the <see
              cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
+
+            
 
             
 
@@ -1242,6 +1400,8 @@
 
             
 
+            
+
              property to limit the resources accessed by metadata that contains a large number of references. This limit applies to any reference in the metadata that results in a subsequent request, including metadata references, metadata locations, WSDL imports, and XML Schema imports and includes.</para
           >
         </remarks>
@@ -1250,6 +1410,8 @@
           <para
             >Gets or sets the maximum number of references to metadata that the <see
              cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
+
+            
 
             
 
@@ -1285,8 +1447,12 @@
 
             
 
+            
+
              property to limit the amount of time the <see
              cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
+
+            
 
             
 
@@ -1323,8 +1489,12 @@
 
             
 
+            
+
              property to false to prevent the resolution of references to metadata. In this case, references are returned as <see
              cref="T:System.ServiceModel.Description.MetadataReference" />
+
+            
 
             
 
@@ -1337,8 +1507,12 @@
 
             
 
+            
+
              objects inside the <see
              cref="T:System.ServiceModel.Description.MetadataSet" />
+
+            
 
             
 
@@ -1381,8 +1555,12 @@
 
             
 
+            
+
              property to specify the security credentials the <see
              cref="T:System.ServiceModel.Description.MetadataExchangeClient" />
+
+            
 
             
 

@@ -28,6 +28,8 @@
 
         
 
+        
+
          event. </para
       >
     </summary>
@@ -56,6 +58,8 @@
 
             
 
+            
+
              from the data source item.</para
           >
         </remarks>
@@ -64,6 +68,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ListControlConvertEventArgs" />
+
+            
 
             
 
@@ -79,8 +85,12 @@
 
           
 
+          
+
           The value displayed in the <see
            cref="T:System.Windows.Forms.ListControl" />
+
+          
 
           
 
@@ -95,8 +105,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -111,8 +125,12 @@
 
           
 
+          
+
           The data source item to be displayed in the <see
            cref="T:System.Windows.Forms.ListControl" />
+
+          
 
           
 

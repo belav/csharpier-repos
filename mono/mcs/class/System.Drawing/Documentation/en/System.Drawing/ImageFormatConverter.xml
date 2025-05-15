@@ -28,6 +28,8 @@
 
         
 
+        
+
          class through the <see
          cref="T:System.ComponentModel.TypeDescriptor" />
 
@@ -35,8 +37,12 @@
 
         
 
+        
+
          class by calling the <see
          cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+
+        
 
         
 
@@ -52,8 +58,12 @@
 
         
 
+        
+
          converts to and from known image formats, as specified in the <see
          cref="T:System.Drawing.Imaging.ImageFormat" />
+
+        
 
         
 
@@ -70,8 +80,12 @@
 
           
 
+          
+
            methods that takes an <see
            cref="T:System.Drawing.Imaging.ImageFormat" />
+
+          
 
           
 
@@ -90,6 +104,8 @@
 
         
 
+        
+
          is a class that can be used to convert <see
          cref="T:System.Drawing.Imaging.ImageFormat" />
 
@@ -97,8 +113,12 @@
 
         
 
+        
+
          objects from one data type to another. Access this class through the <see
          cref="T:System.ComponentModel.TypeDescriptor" />
+
+        
 
         
 
@@ -125,8 +145,12 @@
 
             
 
+            
+
              object directly. Access the <see
              cref="T:System.Drawing.ImageFormatConverter" />
+
+            
 
             
 
@@ -139,8 +163,12 @@
 
             
 
+            
+
              class by calling the <see
              cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+
+            
 
             
 
@@ -154,6 +182,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Drawing.ImageFormatConverter" />
+
+            
 
             
 
@@ -192,8 +222,12 @@
 
             
 
+            
+
              converts to and from known image formats, as specified in the <see
              cref="T:System.Drawing.Imaging.ImageFormat" />
+
+            
 
             
 
@@ -217,10 +251,14 @@
 
           
 
+          
+
           A formatter context. This object can be used to get more information about the environment this converter is being called from. This may be null, so you should always check. Also, properties on the context object may also return null. </param
         >
         <param name="sourceType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -258,8 +296,12 @@
 
             
 
+            
+
              converts to and from known image formats, as specified in the <see
              cref="T:System.Drawing.Imaging.ImageFormat" />
+
+            
 
             
 
@@ -283,8 +325,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -299,6 +345,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
 
@@ -306,8 +354,12 @@
 
           
 
+          
+
            that represents the type to which you want to convert this <see
            cref="T:System.Drawing.Imaging.ImageFormat" />
+
+          
 
           
 
@@ -346,8 +398,12 @@
 
             
 
+            
+
              converts to and from known image formats, as specified in the <see
              cref="T:System.Drawing.Imaging.ImageFormat" />
+
+            
 
             
 
@@ -361,6 +417,8 @@
           <para
             >Converts the specified object to an <see
              cref="T:System.Drawing.Imaging.ImageFormat" />
+
+            
 
             
 
@@ -380,10 +438,14 @@
 
           
 
+          
+
           A formatter context. This object can be used to get more information about the environment this converter is being called from. This may be null, so you should always check. Also, properties on the context object may also return null. </param
         >
         <param name="culture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -396,10 +458,14 @@
 
           
 
+          
+
            object that specifies formatting conventions for a particular culture. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -439,8 +505,12 @@
 
             
 
+            
+
              converts to and from known image formats, as specified in the <see
              cref="T:System.Drawing.Imaging.ImageFormat" />
+
+            
 
             
 
@@ -456,8 +526,12 @@
 
             
 
+            
+
              method of the object if the object is valid and if the destination type is string. If this method cannot convert the specified object to the specified destination type, it throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -481,6 +555,8 @@
 
           
 
+          
+
           A formatter context. This object can be used to get more information about the environment this converter is being called from. This may be null, so you should always check. Also, properties on the context object may also return null. </param
         >
         <param name="culture">
@@ -490,8 +566,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -506,10 +586,14 @@
 
           
 
+          
+
           The object to convert. </param
         >
         <param name="destinationType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -552,6 +636,8 @@
 
           
 
+          
+
           A formatter context. This object can be used to get more information about the environment this converter is being called from. This may be null, so you should always check. Also, properties on the context object may also return null. </param
         >
       </Docs>
@@ -588,11 +674,15 @@
 
             
 
+            
+
              method should be called to find a common set of values the object supports.</para
           >
         </returns>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

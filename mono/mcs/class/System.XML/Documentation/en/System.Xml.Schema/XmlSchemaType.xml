@@ -55,6 +55,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -94,8 +96,12 @@
 
               
 
+              
+
                property is obsolete and has been replaced by the <see
                cref="P:System.Xml.Schema.XmlSchemaType.BaseXmlSchemaType" />
+
+              
 
               
 
@@ -141,6 +147,8 @@
           <para
             >The <see
              cref="P:System.Xml.Schema.XmlSchemaType.BaseXmlSchemaType" />
+
+            
 
             
 
@@ -221,6 +229,8 @@
                 <term>
                   <para>
                     <see cref="T:System.Xml.Schema.XmlSchemaDerivationMethod" />
+
+                    
 
                     
 
@@ -345,6 +355,8 @@
 
                     
 
+                    
+
                      value</para
                   >
                 </term>
@@ -421,6 +433,8 @@
                 <term>
                   <para>
                     <see cref="T:System.Xml.Schema.XmlSchemaDerivationMethod" />
+
+                    
 
                     
 
@@ -541,6 +555,8 @@
 
             
 
+            
+
              property.</para
           >
         </summary>
@@ -579,6 +595,8 @@
 
             
 
+            
+
              that represents the built-in complex type of the complex type specified.</para
           >
         </summary>
@@ -587,6 +605,8 @@
           <para
             >The <see
              cref="T:System.Xml.Schema.XmlSchemaComplexType" />
+
+            
 
             
 
@@ -602,8 +622,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Xml.Schema.XmlTypeCode" />
+
+          
 
           
 
@@ -646,6 +670,8 @@
 
             
 
+            
+
              that represents the built-in complex type of the complex type specified by qualified name.</para
           >
         </summary>
@@ -654,6 +680,8 @@
           <para
             >The <see
              cref="T:System.Xml.Schema.XmlSchemaComplexType" />
+
+            
 
             
 
@@ -669,8 +697,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlQualifiedName" />
+
+          
 
           
 
@@ -716,6 +748,8 @@
 
             
 
+            
+
              that represents the built-in simple type of the specified simple type.</para
           >
         </summary>
@@ -724,6 +758,8 @@
           <para
             >The <see
              cref="T:System.Xml.Schema.XmlSchemaSimpleType" />
+
+            
 
             
 
@@ -739,8 +775,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Xml.Schema.XmlTypeCode" />
+
+          
 
           
 
@@ -786,6 +826,8 @@
 
             
 
+            
+
              that represents the built-in simple type of the simple type that is specified by the qualified name.</para
           >
         </summary>
@@ -794,6 +836,8 @@
           <para
             >The <see
              cref="T:System.Xml.Schema.XmlSchemaSimpleType" />
+
+            
 
             
 
@@ -809,8 +853,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlQualifiedName" />
+
+          
 
           
 
@@ -860,8 +908,12 @@
 
           
 
+          
+
           The derived <see
            cref="T:System.Xml.Schema.XmlSchemaType" />
+
+          
 
           
 
@@ -876,6 +928,8 @@
 
           
 
+          
+
           The base <see
            cref="T:System.Xml.Schema.XmlSchemaType" />
 
@@ -883,8 +937,12 @@
 
           
 
+          
+
            to test the derived <see
            cref="T:System.Xml.Schema.XmlSchemaType" />
+
+          
 
           
 
@@ -899,8 +957,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Xml.Schema.XmlSchemaDerivationMethod" />
+
+          
 
           
 
@@ -1033,6 +1095,8 @@
           <para
             >Gets the <see
              cref="T:System.Xml.Schema.XmlTypeCode" />
+
+            
 
             
 

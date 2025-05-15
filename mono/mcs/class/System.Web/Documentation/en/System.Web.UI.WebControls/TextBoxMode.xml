@@ -22,8 +22,12 @@
 
         
 
+        
+
          enumeration represents the different display options for <see
          cref="T:System.Web.UI.WebControls.TextBox" />
+
+        
 
         
 
@@ -38,6 +42,8 @@
 
         
 
+        
+
          mode displays the <see
          cref="T:System.Web.UI.WebControls.TextBox" />
 
@@ -45,8 +51,12 @@
 
         
 
+        
+
          control as a single row. If the user enters text that exceeds the physical size of the <see
          cref="T:System.Web.UI.WebControls.TextBox" />
+
+        
 
         
 
@@ -61,8 +71,12 @@
 
         
 
+        
+
          mode displays the height of the <see
          cref="T:System.Web.UI.WebControls.TextBox" />
+
+        
 
         
 
@@ -75,6 +89,8 @@
 
         
 
+        
+
          property, and allows data entry on multiple lines. The text will automatically wrap if the <see
          cref="P:System.Web.UI.WebControls.TextBox.Wrap" />
 
@@ -82,8 +98,12 @@
 
         
 
+        
+
          property is set to true. If the user enters text that exceeds the physical size of the <see
          cref="T:System.Web.UI.WebControls.TextBox" />
+
+        
 
         
 
@@ -99,6 +119,8 @@
 
         
 
+        
+
          mode is similar to <see
          cref="F:System.Web.UI.WebControls.TextBoxMode.SingleLine" />
 
@@ -106,8 +128,12 @@
 
         
 
+        
+
          mode except that all characters entered in the <see
          cref="T:System.Web.UI.WebControls.TextBox" />
+
+        
 
         
 

@@ -29,11 +29,15 @@
 
         
 
+        
+
          property. </para
       >
       <para
         >The following example shows the use of the traceOutputOptions attribute to specify the trace output options for a <see
          cref="T:System.Diagnostics.ConsoleTraceListener" />
+
+        
 
         
 
@@ -56,6 +60,8 @@
         
 
         
+
+        
       &lt;/listeners&gt;
     &lt;/trace&gt;
   &lt;/system.diagnostics&gt;
@@ -71,11 +77,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >The <see
          cref="T:System.Diagnostics.TraceOptions" />
+
+        
 
         
 
@@ -93,6 +103,8 @@
 
             
 
+            
+
              class, because it can cause a large volume of data to be written to the log. </para
           >
         </item>
@@ -105,6 +117,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.Diagnostics.DefaultTraceListener" />
 
@@ -112,8 +126,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Diagnostics.TextWriterTraceListener" />
+
+            
 
             
 
@@ -131,6 +149,8 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.Diagnostics.TraceListener.WriteLine" />
 
@@ -138,8 +158,12 @@
 
             
 
+            
+
              methods of the <see
              cref="T:System.Diagnostics.TraceListener" />
+
+            
 
             
 
@@ -176,6 +200,8 @@
           <para
             >Write the call stack, which is represented by the return value of the <see
              cref="P:System.Environment.StackTrace" />
+
+            
 
             
 
@@ -232,6 +258,8 @@
 
             
 
+            
+
              property.</para
           >
         </summary>
@@ -283,6 +311,8 @@
 
             
 
+            
+
              property.</para
           >
         </summary>
@@ -313,6 +343,8 @@
 
             
 
+            
+
              property for the current thread.</para
           >
         </summary>
@@ -338,6 +370,8 @@
           <para
             >Write the timestamp, which is represented by the return value of the <see
              cref="M:System.Diagnostics.Stopwatch.GetTimestamp" />
+
+            
 
             
 

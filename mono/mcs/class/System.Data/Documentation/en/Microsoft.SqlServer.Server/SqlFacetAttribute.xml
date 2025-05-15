@@ -25,6 +25,8 @@
 
         
 
+        
+
          may only be specified on non-void return values.</para
       >
       <para>
@@ -34,8 +36,12 @@
 
         
 
+        
+
          is used only to derive information about the return type, and is not intended to be a constraint specification on what can be stored in the type. Thus, if a field has a <see
          cref="T:Microsoft.SqlServer.Server.SqlFacetAttribute" />
+
+        
 
         
 
@@ -52,8 +58,12 @@
 
         
 
+        
+
          must be compatible with the field type. If the property is not valid, type registration will report an error if the user specifies a non-default value for the property. The maximum values for <see
          cref="P:Microsoft.SqlServer.Server.SqlFacetAttribute.Precision" />
+
+        
 
         
 
@@ -66,8 +76,12 @@
 
         
 
+        
+
          properties are 38. For the <see
          cref="P:Microsoft.SqlServer.Server.SqlFacetAttribute.MaxSize" />
+
+        
 
         
 
@@ -623,6 +637,8 @@
 
             
 
+            
+
              property is set to 1.</para
           >
           <para>The default value is false.</para>
@@ -701,8 +717,12 @@
 
             
 
+            
+
              property is valid only for numeric types. The <see
              cref="P:Microsoft.SqlServer.Server.SqlFacetAttribute.Scale" />
+
+            
 
             
 
@@ -715,11 +735,15 @@
 
             
 
+            
+
              property. </para
           >
           <para
             >The maximum value of the <see
              cref="P:Microsoft.SqlServer.Server.SqlFacetAttribute.Precision" />
+
+            
 
             
 
@@ -756,8 +780,12 @@
 
             
 
+            
+
              property is valid only for decimal types. The <see
              cref="P:Microsoft.SqlServer.Server.SqlFacetAttribute.Precision" />
+
+            
 
             
 
@@ -770,11 +798,15 @@
 
             
 
+            
+
              property. </para
           >
           <para
             >The maximum value of the <see
              cref="P:Microsoft.SqlServer.Server.SqlFacetAttribute.Scale" />
+
+            
 
             
 

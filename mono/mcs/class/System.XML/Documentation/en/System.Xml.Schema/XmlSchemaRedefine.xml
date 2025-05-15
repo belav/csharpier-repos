@@ -42,6 +42,8 @@
 
         
 
+        
+
         . This class can be used to allow simple and complex types, groups and attribute groups from external schema files to be redefined in the current schema. This class can also be used to provide versioning for the schema elements.</para
       >
     </summary>
@@ -68,6 +70,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Schema.XmlSchemaRedefine" />
+
+            
 
             
 
@@ -114,6 +118,8 @@
 
             
 
+            
+
              , for all attributes in the schema, which holds the post-compilation value of the AttributeGroups property.</para
           >
         </summary>
@@ -150,6 +156,8 @@
           <para
             >Gets the <see
              cref="T:System.Xml.Schema.XmlSchemaObjectTable" />
+
+            
 
             
 
@@ -208,8 +216,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Xml.Schema.XmlSchemaAttributeGroup" />
+
+            
 
             
 
@@ -222,6 +234,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.Xml.Schema.XmlSchemaSimpleType" />
 
@@ -229,8 +243,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Xml.Schema.XmlSchemaGroup" />
+
+            
 
             
 
@@ -272,6 +290,8 @@
           <para
             >Gets the <see
              cref="T:System.Xml.Schema.XmlSchemaObjectTable" />
+
+            
 
             
 

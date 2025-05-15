@@ -29,11 +29,15 @@
 
         
 
+        
+
          class represents an abstraction of an underlying access control entry (ACE) that specifies a user account, the type of access to provide (read, write, and so on), and whether to allow or deny that right.  This class can also specify how access rules are propagated to child objects.</para
       >
       <para
         >Use the <see
          cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Security.AccessControl.DirectorySecurity" />
+
+        
 
         
 
@@ -93,8 +101,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Security.AccessControl.DirectorySecurity" />
+
+            
 
             
 
@@ -113,6 +125,8 @@
 
             
 
+            
+
              class using a reference to a user account, a value that specifies the type of operation associated with the access rule, and a value that specifies whether to allow or deny the operation. </para
           >
         </summary>
@@ -123,8 +137,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Principal.IdentityReference" />
+
+          
 
           
 
@@ -139,8 +157,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.FileSystemRights" />
+
+          
 
           
 
@@ -155,8 +177,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AccessControlType" />
+
+          
 
           
 
@@ -197,8 +223,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Security.AccessControl.DirectorySecurity" />
+
+            
 
             
 
@@ -214,8 +244,12 @@
 
             
 
+            
+
              parameter must identify a valid account on the current computer or domain.  The string takes the following form, where <paramref
              name="DOMAIN" />
+
+            
 
             
 
@@ -228,8 +262,12 @@
 
             
 
+            
+
              is the name of a valid user account on a domain or computer: <paramref
              name="DOMAIN\account" />
+
+            
 
             
 
@@ -248,11 +286,15 @@
 
             
 
+            
+
              class using the name of a user account, a value that specifies the type of operation associated with the access rule, and a value that describes whether to allow or deny the operation. </para
           >
         </summary>
         <param name="identity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -267,8 +309,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.FileSystemRights" />
+
+          
 
           
 
@@ -283,8 +329,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AccessControlType" />
+
+          
 
           
 
@@ -327,8 +377,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Security.AccessControl.DirectorySecurity" />
+
+            
 
             
 
@@ -347,6 +401,8 @@
 
             
 
+            
+
              class using a reference to a user account, a value that specifies the type of operation associated with the access rule, a value that determines how rights are inherited, a value that determines how rights are propagated, and a value that specifies whether to allow or deny the operation.</para
           >
         </summary>
@@ -357,8 +413,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Principal.IdentityReference" />
+
+          
 
           
 
@@ -373,8 +433,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.FileSystemRights" />
+
+          
 
           
 
@@ -389,8 +453,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.InheritanceFlags" />
+
+          
 
           
 
@@ -405,8 +473,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.PropagationFlags" />
+
+          
 
           
 
@@ -421,8 +493,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AccessControlType" />
+
+          
 
           
 
@@ -465,8 +541,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Security.AccessControl.DirectorySecurity" />
+
+            
 
             
 
@@ -482,8 +562,12 @@
 
             
 
+            
+
              parameter must identify a valid account on the current computer or domain.  The string takes the following form, where <paramref
              name="DOMAIN" />
+
+            
 
             
 
@@ -496,8 +580,12 @@
 
             
 
+            
+
              is the name of a valid user account on a domain or computer: <paramref
              name="DOMAIN\account" />
+
+            
 
             
 
@@ -516,11 +604,15 @@
 
             
 
+            
+
              class using the name of a user account, a value that specifies the type of operation associated with the access rule, a value that determines how rights are inherited, a value that determines how rights are propagated, and a value that specifies whether to allow or deny the operation.</para
           >
         </summary>
         <param name="identity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -535,8 +627,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.FileSystemRights" />
+
+          
 
           
 
@@ -551,8 +647,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.InheritanceFlags" />
+
+          
 
           
 
@@ -567,8 +667,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.PropagationFlags" />
+
+          
 
           
 
@@ -583,8 +687,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AccessControlType" />
+
+          
 
           
 
@@ -625,8 +733,12 @@
 
             
 
+            
+
              flags associated with the current <see
              cref="T:System.Security.AccessControl.FileSystemAccessRule" />
+
+            
 
             
 

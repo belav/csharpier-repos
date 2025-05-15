@@ -13,6 +13,8 @@
 
       
 
+      
+
        Main() <symbol
       >{</symbol>
     </table_line>
@@ -39,6 +41,8 @@
 
       
 
+      
+
        Main(string[] args) <symbol
       >{</symbol>
     </table_line>
@@ -59,6 +63,8 @@
 
       
 
+      
+
        Main() <symbol
       >{</symbol>
     </table_line>
@@ -70,11 +76,15 @@
 
       
 
+      
+
        pi = 3.14f; </table_line
     >
     <table_line
       >const <keyword
       >int</keyword>
+
+      
 
       
 
@@ -94,6 +104,8 @@
 
       
 
+      
+
        Main() <symbol
       >{</symbol>
     </table_line>
@@ -104,10 +116,14 @@
 
       
 
+      
+
        a; </table_line
     >
     <table_line>
       <keyword>int</keyword>
+
+      
 
       
 
@@ -128,8 +144,12 @@
 
       
 
+      
+
        F(<keyword
       >int</keyword>
+
+      
 
       
 
@@ -142,17 +162,20 @@
 
       
 
+      
+
        b) <symbol
       >{</symbol>
     </table_line>
-    <table_line
->return a + b; </table_line>
+    <table_line>return a + b; </table_line>
     <table_line>
       <symbol>}</symbol>
     </table_line>
     <table_line
       >static <keyword
       >void</keyword>
+
+      
 
       
 
@@ -173,6 +196,8 @@
 
       
 
+      
+
        Main(string[] args) <symbol
       >{</symbol>
     </table_line>
@@ -186,6 +211,8 @@
     <table_line
       >switch statements static <keyword
       >void</keyword>
+
+      
 
       
 
@@ -212,6 +239,8 @@
 
       
 
+      
+
        n = args.Length; </table_line
     >
     <table_line>Console.WriteLine("{0} args", n); </table_line>
@@ -230,11 +259,15 @@
 
       
 
+      
+
        Main(string[] args) <symbol
       >{</symbol>
     </table_line>
     <table_line>
       <keyword>int</keyword>
+
+      
 
       
 
@@ -262,6 +295,8 @@
 
       
 
+      
+
        Main() <symbol
       >{</symbol>
     </table_line>
@@ -269,6 +304,8 @@
     <table_line
       >do <symbol
       >{</symbol>
+
+      
 
       
 
@@ -289,12 +326,16 @@
 
       
 
+      
+
        Main(string[] args) <symbol
       >{</symbol>
     </table_line>
     <table_line
       >for (<keyword
       >int</keyword>
+
+      
 
       
 
@@ -309,6 +350,8 @@
     <table_line
       >foreach statements static <keyword
       >void</keyword>
+
+      
 
       
 
@@ -330,11 +373,15 @@
 
       
 
+      
+
        Main(string[] args) <symbol
       >{</symbol>
     </table_line>
     <table_line>
       <keyword>int</keyword>
+
+      
 
       
 
@@ -363,11 +410,15 @@
 
       
 
+      
+
        Main(string[] args) <symbol
       >{</symbol>
     </table_line>
     <table_line>
       <keyword>int</keyword>
+
+      
 
       
 
@@ -390,8 +441,10 @@
       <symbol>}</symbol>
     </table_line>
     <table_line
->return statements static <keyword
+      >return statements static <keyword
       >int</keyword>
+
+      
 
       
 
@@ -404,8 +457,12 @@
 
       
 
+      
+
        a, <keyword
       >int</keyword>
+
+      
 
       
 
@@ -414,8 +471,7 @@
        b) <symbol
       >{</symbol>
     </table_line>
-    <table_line
->return a + b; </table_line>
+    <table_line>return a + b; </table_line>
     <table_line>
       <symbol>}</symbol>
     </table_line>
@@ -427,12 +483,13 @@
 
       
 
+      
+
        Main() <symbol
       >{</symbol>
     </table_line>
     <table_line>Console.WriteLine(F(1, 2)); </table_line>
-    <table_line
->return; </table_line>
+    <table_line>return; </table_line>
     <table_line>
       <symbol>}</symbol>
     </table_line>
@@ -446,8 +503,12 @@
 
       
 
+      
+
        F(<keyword
       >int</keyword>
+
+      
 
       
 
@@ -460,19 +521,22 @@
 
       
 
+      
+
        b) <symbol
       >{</symbol>
     </table_line>
     <table_line>if (b == 0) </table_line>
     <table_line>throw new Exception("Divide by zero"); </table_line>
-    <table_line
->return a / b; </table_line>
+    <table_line>return a / b; </table_line>
     <table_line>
       <symbol>}</symbol>
     </table_line>
     <table_line
       >static <keyword
       >void</keyword>
+
+      
 
       
 
@@ -510,11 +574,15 @@
 
       
 
+      
+
        Main() <symbol
       >{</symbol>
     </table_line>
     <table_line>
       <keyword>int</keyword>
+
+      
 
       
 
@@ -551,6 +619,8 @@
 
       
 
+      
+
        Main() <symbol
       >{</symbol>
     </table_line>
@@ -574,6 +644,8 @@
 
       
 
+      
+
        Main() <symbol
       >{</symbol>
     </table_line>
@@ -581,8 +653,7 @@
       >using (Resource r = new Resource()) <symbol
       >{</symbol>
     </table_line>
-    <table_line
->r.F(); </table_line>
+    <table_line>r.F(); </table_line>
     <table_line>
       <symbol>}</symbol>
     </table_line>

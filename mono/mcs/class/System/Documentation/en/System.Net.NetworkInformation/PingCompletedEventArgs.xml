@@ -29,8 +29,12 @@
 
         
 
+        
+
          method that is called when a <see
          cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          methods send an Internet Control Message Protocol (ICMP) echo request asynchronously and wait for a corresponding ICMP echo reply message. The <see
          cref="P:System.Net.NetworkInformation.PingCompletedEventArgs.Reply" />
+
+        
 
         
 
@@ -58,6 +66,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Net.NetworkInformation.Ping.PingCompleted" />
+
+        
 
         
 
@@ -98,8 +108,12 @@
 
             
 
+            
+
              is not <see
              cref="F:System.Net.NetworkInformation.IPStatus.Success" />
+
+            
 
             
 
@@ -112,8 +126,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Net.NetworkInformation.PingReply.Options" />
+
+            
 
             
 
@@ -126,8 +144,12 @@
 
             
 
+            
+
              properties. The <see
              cref="P:System.Net.NetworkInformation.PingReply.RoundTripTime" />
+
+            
 
             
 
@@ -140,8 +162,12 @@
 
             
 
+            
+
              properties will return zero, and the <see
              cref="P:System.Net.NetworkInformation.PingReply.Options" />
+
+            
 
             
 

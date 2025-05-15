@@ -27,8 +27,12 @@
 
         
 
+        
+
          class represents a collection of <see
          cref="T:System.Web.UI.WebControls.DataControlField" />
+
+        
 
         
 
@@ -41,6 +45,8 @@
 
         
 
+        
+
          class derives from <see
          cref="T:System.Web.UI.StateManagedCollection" />
 
@@ -48,8 +54,12 @@
 
         
 
+        
+
         , an abstract base collection class used specifically to store <see
          cref="T:System.Web.UI.IStateManager" />
+
+        
 
         
 
@@ -65,6 +75,8 @@
 
         
 
+        
+
          object influences the behavior of a <see
          cref="T:System.Web.UI.WebControls.DataControlFieldCollection" />
 
@@ -72,8 +84,12 @@
 
         
 
+        
+
          object. <see
          cref="T:System.Web.UI.WebControls.DataControlField" />
+
+        
 
         
 
@@ -89,8 +105,12 @@
 
         
 
+        
+
          class implements the <see
          cref="T:System.Web.UI.IStateManager" />
+
+        
 
         
 
@@ -106,8 +126,12 @@
 
         
 
+        
+
          class to programmatically manage a set of <see
          cref="T:System.Web.UI.WebControls.DataControlField" />
+
+        
 
         
 
@@ -123,6 +147,8 @@
 
         
 
+        
+
          objects using the appropriate methods of the <see
          cref="T:System.Web.UI.WebControls.DataControlFieldCollection" />
 
@@ -130,8 +156,12 @@
 
         
 
+        
+
          class. To programmatically retrieve <see
          cref="T:System.Web.UI.WebControls.DataControlField" />
+
+        
 
         
 
@@ -149,6 +179,8 @@
 
             
 
+            
+
              object from the collection using array notation.</para
           >
         </item>
@@ -161,8 +193,12 @@
 
             
 
+            
+
              method to create a <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -180,8 +216,12 @@
 
         
 
+        
+
          property specifies the total number of items in the collection, and is commonly used to determine the upper bound of the collection. You can add items to and remove items from the collection using the <see
          cref="M:System.Web.UI.WebControls.DataControlFieldCollection.Add(System.Web.UI.WebControls.DataControlField)" />
+
+        
 
         
 
@@ -194,6 +234,8 @@
 
         
 
+        
+
         , <see
          cref="M:System.Web.UI.WebControls.DataControlFieldCollection.Remove(System.Web.UI.WebControls.DataControlField)" />
 
@@ -201,8 +243,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Web.UI.WebControls.DataControlFieldCollection.RemoveAt(System.Int32)" />
+
+        
 
         
 
@@ -218,8 +264,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -232,6 +282,8 @@
 
         
 
+        
+
          objects that are automatically created (for example, when the <see
          cref="P:System.Web.UI.WebControls.GridView.AutoGenerateColumns" />
 
@@ -239,8 +291,12 @@
 
         
 
+        
+
          property is true) are not stored in the publicly accessible fields collection. You can only access and manipulate <see
          cref="T:System.Web.UI.WebControls.DataControlField" />
+
+        
 
         
 
@@ -295,8 +351,12 @@
 
               
 
+              
+
                and <see
                cref="T:System.Web.UI.WebControls.CheckBoxField" />
+
+              
 
               
 
@@ -331,6 +391,8 @@
 
               
 
+              
+
                control.</para
             >
           </description>
@@ -360,6 +422,8 @@
 
               
 
+              
+
                control.</para
             >
           </description>
@@ -374,6 +438,8 @@
             <para
               >A data-bound control field that displays an <see
                cref="T:System.Web.UI.WebControls.Image" />
+
+              
 
               
 
@@ -405,6 +471,8 @@
 
         
 
+        
+
          objects that are used by data-bound controls such as <see
          cref="T:System.Web.UI.WebControls.GridView" />
 
@@ -412,8 +480,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -440,6 +512,8 @@
 
             
 
+            
+
              class.</para
           >
           <block subset="none" type="note">
@@ -451,6 +525,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.DataControlFieldCollection" />
+
+            
 
             
 
@@ -488,8 +564,12 @@
 
             
 
+            
+
              method to append a <see
              cref="T:System.Web.UI.WebControls.DataControlField" />
+
+            
 
             
 
@@ -502,8 +582,12 @@
 
             
 
+            
+
              object specified by the <paramref
              name="field" />
+
+            
 
             
 
@@ -522,6 +606,8 @@
 
             
 
+            
+
              object to the end of the collection.</para
           >
         </summary>
@@ -532,8 +618,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.DataControlField" />
+
+          
 
           
 
@@ -568,6 +658,8 @@
 
             
 
+            
+
              method to create a copy of the current collection. This method is used primarily by design-time dialog boxes to implement rollback behavior when an operation is canceled.</para
           >
         </remarks>
@@ -580,6 +672,8 @@
           <para
             >A <see
              cref="T:System.Web.UI.WebControls.DataControlFieldCollection" />
+
+            
 
             
 
@@ -617,6 +711,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -630,8 +726,12 @@
 
             
 
+            
+
              collection contains a specific <see
              cref="T:System.Web.UI.WebControls.DataControlField" />
+
+            
 
             
 
@@ -650,11 +750,15 @@
 
             
 
+            
+
              contains the specified field; otherwise, false.</para
           >
         </returns>
         <param name="field">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -667,8 +771,12 @@
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Web.UI.WebControls.DataControlFieldCollection" />
+
+          
 
           
 
@@ -707,8 +815,12 @@
 
             
 
+            
+
              collection to a compatible one-dimensional <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -724,8 +836,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -738,8 +854,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -754,8 +874,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -809,8 +933,12 @@
 
             
 
+            
+
              event is raised when the <see
              cref="M:System.Web.UI.StateManagedCollection.Clear" />
+
+            
 
             
 
@@ -823,8 +951,12 @@
 
             
 
+            
+
             , or <see
              cref="M:System.Web.UI.WebControls.DataControlFieldCollection.Remove(System.Web.UI.WebControls.DataControlField)" />
+
+            
 
             
 
@@ -837,6 +969,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -855,8 +989,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Web.UI.WebControls.DataControlFieldCollection.Insert(System.Int32,System.Web.UI.WebControls.DataControlField)" />
+
+            
 
             
 
@@ -869,6 +1007,8 @@
 
             
 
+            
+
              or <see
              cref="M:System.Web.UI.WebControls.DataControlFieldCollection.Add(System.Web.UI.WebControls.DataControlField)" />
 
@@ -876,8 +1016,12 @@
 
             
 
+            
+
              method call. This event is also raised anytime a <see
              cref="T:System.Web.UI.WebControls.DataControlField" />
+
+            
 
             
 
@@ -933,6 +1077,8 @@
 
             
 
+            
+
              object in the collection.</para
           >
         </summary>
@@ -941,6 +1087,8 @@
           <para
             >The index of the <paramref
              name="field" />
+
+            
 
             
 
@@ -956,8 +1104,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.DataControlField" />
+
+          
 
           
 
@@ -996,8 +1148,12 @@
 
             
 
+            
+
              object into the <see
              cref="T:System.Web.UI.WebControls.DataControlFieldCollection" />
+
+            
 
             
 
@@ -1013,8 +1169,12 @@
 
           
 
+          
+
           The zero-based index at which the <see
            cref="T:System.Web.UI.WebControls.DataControlField" />
+
+          
 
           
 
@@ -1029,8 +1189,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.DataControlField" />
+
+          
 
           
 
@@ -1160,8 +1324,12 @@
 
             
 
+            
+
              object from the <see
              cref="T:System.Web.UI.WebControls.DataControlFieldCollection" />
+
+            
 
             
 
@@ -1177,6 +1345,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.DataControlField" />
 
@@ -1184,8 +1354,12 @@
 
           
 
+          
+
            to remove from the <see
            cref="T:System.Web.UI.WebControls.DataControlFieldCollection" />
+
+          
 
           
 
@@ -1220,8 +1394,12 @@
 
             
 
+            
+
              object at the specified index from the <see
              cref="T:System.Web.UI.WebControls.DataControlFieldCollection" />
+
+            
 
             
 
@@ -1237,8 +1415,12 @@
 
           
 
+          
+
           The index of the <see
            cref="T:System.Web.UI.WebControls.DataControlField" />
+
+          
 
           
 

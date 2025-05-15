@@ -43,10 +43,14 @@
 
         
 
+        
+
          on MSDN and <see
          cref="http://go.microsoft.com/fwlink/?LinkID=65552"
           >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
         >
+
+        
 
         
 
@@ -92,11 +96,15 @@
 
             
 
+            
+
              class with the culture supported by the assembly being attributed.</para
           >
         </summary>
         <param name="culture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

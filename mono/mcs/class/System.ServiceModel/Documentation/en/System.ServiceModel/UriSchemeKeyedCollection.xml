@@ -63,6 +63,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -101,8 +103,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -145,6 +151,8 @@
 
           
 
+          
+
           The zero-based index that specifies the insertion location for the item in the collection.</param
         >
         <param name="item">
@@ -154,8 +162,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -198,6 +210,8 @@
 
           
 
+          
+
           The zero-based index that specifies the insertion location for the URI in the collection.</param
         >
         <param name="item">
@@ -207,8 +221,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Uri" />
+
+          
 
           
 

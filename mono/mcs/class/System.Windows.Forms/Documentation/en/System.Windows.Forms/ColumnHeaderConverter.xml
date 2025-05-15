@@ -24,6 +24,8 @@
 
         
 
+        
+
          objects from one type to another.</para
       >
     </summary>
@@ -43,6 +45,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ColumnHeaderConverter" />
+
+            
 
             
 
@@ -84,8 +88,12 @@
 
             
 
+            
+
              can convert a <see
              cref="T:System.Windows.Forms.ColumnHeader" />
+
+            
 
             
 
@@ -105,8 +113,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -116,6 +128,8 @@
         >
         <param name="destinationType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -159,6 +173,8 @@
 
             
 
+            
+
              that is the result of the conversion.</para
           >
         </returns>
@@ -169,8 +185,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -185,8 +205,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -201,8 +225,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -217,8 +245,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 

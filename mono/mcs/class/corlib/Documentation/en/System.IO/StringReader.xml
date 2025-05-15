@@ -189,6 +189,8 @@
 
         
 
+        
+
          that reads from a string.</para
       >
     </summary>
@@ -222,8 +224,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -387,6 +393,8 @@
 
             
 
+            
+
              class that reads from the specified string.</para
           >
         </summary>
@@ -397,8 +405,12 @@
 
           
 
+          
+
           The string to which the <see
            cref="T:System.IO.StringReader" />
+
+          
 
           
 
@@ -441,12 +453,16 @@
 
             
 
+            
+
             . For an example of reading text from a file, see <format
              type="text/html">
               <a href="ED180BAA-DFC6-4C69-A725-46E87EDAFB27"
                 >[&lt;topic://cpconreadingtextfromfile&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -463,11 +479,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This method overrides the <see
              cref="M:System.IO.Stream.Close" />
+
+            
 
             
 
@@ -483,11 +503,15 @@
 
             
 
+            
+
              method passing a true value.</para
           >
           <para
             >Flushing the stream will not flush its underlying encoder unless you explicitly call Close. Setting <see
              cref="P:System.IO.StreamWriter.AutoFlush" />
+
+            
 
             
 
@@ -502,6 +526,8 @@
           <para
             >Closes the <see
              cref="T:System.IO.StringReader" />
+
+            
 
             
 
@@ -546,8 +572,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.IO.StringReader" />
+
+            
 
             
 
@@ -566,11 +596,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -610,8 +644,12 @@
 
             
 
+            
+
              method returns an integer value in order to determine whether the end of the file, or another error has occurred. This allows a user to first check if the returned value is -1 before casting it to a <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -622,6 +660,8 @@
           <para
             >This method overrides the <see
              cref="M:System.IO.TextReader.Peek" />
+
+            
 
             
 
@@ -731,6 +771,8 @@
           <para
             >This method overrides the <see
              cref="M:System.IO.TextReader.Read" />
+
+            
 
             
 
@@ -928,8 +970,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -945,8 +991,12 @@
 
           
 
+          
+
            + <paramref
            name="count" />
+
+          
 
           
 
@@ -955,6 +1005,8 @@
            ) &gt; <paramref
            name="buffer" />
           <see langword="." />
+
+          
 
           
 
@@ -970,6 +1022,8 @@
 
             
 
+            
+
             &lt; 0<paramref
              name=" " />
           </para>
@@ -980,10 +1034,14 @@
 
             
 
+            
+
              or-</para
           >
           <para>
             <paramref name="count " />
+
+            
 
             
 
@@ -1003,11 +1061,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The method will read up to <paramref
              name="count" />
+
+            
 
             
 
@@ -1020,6 +1082,8 @@
 
             
 
+            
+
              into the <paramref
              name="buffer" />
 
@@ -1027,8 +1091,12 @@
 
             
 
+            
+
              character array starting at position <paramref
              name="index" />
+
+            
 
             
 
@@ -1190,6 +1258,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1204,8 +1274,12 @@
 
           
 
+          
+
           When this method returns, contains the specified character array with the values between <paramref
            name="index" />
+
+          
 
           
 
@@ -1218,8 +1292,12 @@
 
           
 
+          
+
            + <paramref
            name="count" />
+
+          
 
           
 
@@ -1234,10 +1312,14 @@
 
           
 
+          
+
           The starting index in the buffer. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1280,6 +1362,8 @@
 
             
 
+            
+
              parameter are read or the end of the string is reached. </para
           >
         </remarks>
@@ -1297,11 +1381,15 @@
 
             
 
+            
+
              parameter contains the total number of bytes read into the buffer. The result value can be less than the number of bytes requested if the number of bytes currently available is less than the requested number, or it can be 0 (zero) if the end of the string has been reached.</para
           >
         </returns>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1314,6 +1402,8 @@
 
           
 
+          
+
            and (<paramref
            name="index" />
 
@@ -1321,8 +1411,12 @@
 
           
 
+          
+
            + <paramref
            name="count" />
+
+          
 
           
 
@@ -1337,8 +1431,12 @@
 
           
 
+          
+
           The position in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -1348,6 +1446,8 @@
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1389,6 +1489,8 @@
 
             
 
+            
+
              parameter are read, or the end of the string has been reached.</para
           >
         </remarks>
@@ -1406,11 +1508,15 @@
 
             
 
+            
+
              parameter contains the total number of bytes read into the buffer. The result value can be less than the number of bytes requested if the number of bytes currently available is less than the requested number, or it can be 0 (zero) if the end of the string has been reached.</para
           >
         </returns>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1423,6 +1529,8 @@
 
           
 
+          
+
            and (<paramref
            name="index" />
 
@@ -1430,8 +1538,12 @@
 
           
 
+          
+
            + <paramref
            name="count" />
+
+          
 
           
 
@@ -1446,8 +1558,12 @@
 
           
 
+          
+
           The position in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -1457,6 +1573,8 @@
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1501,12 +1619,16 @@
 
             
 
+            
+
              method.</para
           >
           <para>A line is defined as a sequence of characters followed by a line feed ("\n"), a carriage return ("\r"), or a carriage return immediately followed by a line feed ("\r\n"). The string that is returned does not contain the terminating carriage return or line feed. The returned value is null if the end of the string has been reached.</para>
           <para
             >If the current method throws an <see
              cref="T:System.OutOfMemoryException" />
+
+            
 
             
 
@@ -1519,6 +1641,8 @@
 
             
 
+            
+
              buffer are discarded. Because the position of the reader in the string cannot be changed, the characters already read are unrecoverable, and can be accessed only by reinitializing the <see
              cref="T:System.IO.StringReader" />
 
@@ -1526,8 +1650,12 @@
 
             
 
+            
+
             . To avoid such a situation, use the <see
              cref="M:System.IO.StringReader.Read" />
+
+            
 
             
 
@@ -1723,6 +1851,8 @@
 
             
 
+            
+
              parameter contains the next line from the string reader, or is null if all the characters have been read.</para
           >
         </returns>
@@ -1763,11 +1893,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >If the current method throws an <see
              cref="T:System.OutOfMemoryException" />
+
+            
 
             
 
@@ -1780,6 +1914,8 @@
 
             
 
+            
+
              buffer are discarded. Because the position of the reader in the string cannot be changed, the characters already read are unrecoverable, and can be accessed only by reinitializing the <see
              cref="T:System.IO.StringReader" />
 
@@ -1787,8 +1923,12 @@
 
             
 
+            
+
             . To avoid such a situation, use the <see
              cref="M:System.IO.StringReader.Read" />
+
+            
 
             
 
@@ -1979,6 +2119,8 @@
           <para
             >A task that represents the asynchronous read operation. The value of the <paramref
              name="TResult" />
+
+            
 
             
 

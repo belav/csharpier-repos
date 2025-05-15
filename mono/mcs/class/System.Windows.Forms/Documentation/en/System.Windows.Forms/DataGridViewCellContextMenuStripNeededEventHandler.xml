@@ -38,8 +38,12 @@
 
         
 
+        
+
          event occurs only when the <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -52,8 +56,12 @@
 
         
 
+        
+
          property is set or its <see
          cref="P:System.Windows.Forms.DataGridView.VirtualMode" />
+
+        
 
         
 
@@ -69,6 +77,8 @@
 
         
 
+        
+
          event, the shortcut menu that you specify in the handler is shown whenever the user right-clicks a cell. This is useful when you want to display shortcut menus determined by the current state or value of a cell. </para
       >
       <para
@@ -79,8 +89,12 @@
 
         
 
+        
+
          event also occurs whenever the value of the <see
          cref="P:System.Windows.Forms.DataGridViewCell.ContextMenuStrip" />
+
+        
 
         
 
@@ -96,8 +110,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.DataGridViewCellEventArgs.RowIndex" />
+
+        
 
         
 
@@ -110,8 +128,12 @@
 
         
 
+        
+
          property. This property is initialized with the value of the cell <see
          cref="P:System.Windows.Forms.DataGridViewCell.ContextMenuStrip" />
+
+        
 
         
 
@@ -127,8 +149,12 @@
 
         
 
+        
+
          event when working with large amounts of data to avoid the performance penalties of setting the cell <see
          cref="P:System.Windows.Forms.DataGridViewCell.ContextMenuStrip" />
+
+        
 
         
 
@@ -145,11 +171,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >You can also specify shortcut menus for individual rows rather than individual cells by setting the row <see
          cref="P:System.Windows.Forms.DataGridViewRow.ContextMenuStrip" />
+
+        
 
         
 
@@ -162,8 +192,12 @@
 
         
 
+        
+
          control's <see
          cref="E:System.Windows.Forms.DataGridView.RowContextMenuStripNeeded" />
+
+        
 
         
 
@@ -176,8 +210,12 @@
 
         
 
+        
+
          property setting overrides the row <see
          cref="P:System.Windows.Forms.DataGridViewRow.ContextMenuStrip" />
+
+        
 
         
 
@@ -190,6 +228,8 @@
 
         
 
+        
+
          event overrides both the <see
          cref="E:System.Windows.Forms.DataGridView.RowContextMenuStripNeeded" />
 
@@ -197,8 +237,12 @@
 
         
 
+        
+
          event and the row <see
          cref="P:System.Windows.Forms.DataGridViewRow.ContextMenuStrip" />
+
+        
 
         
 
@@ -216,6 +260,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -226,10 +272,14 @@
 
         
 
+        
+
          delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event-handler delegates, see <format
          type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
         </format>
+
+        
 
         
 
@@ -248,8 +298,12 @@
 
         
 
+        
+
          event of a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 

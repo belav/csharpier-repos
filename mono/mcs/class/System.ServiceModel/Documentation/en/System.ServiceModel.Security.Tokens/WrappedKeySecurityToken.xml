@@ -65,11 +65,15 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
         <param name="id">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -84,10 +88,14 @@
 
           
 
+          
+
           The key to be wrapped.</param
         >
         <param name="wrappingAlgorithm">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -102,8 +110,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IdentityModel.Tokens.SecurityToken" />
+
+          
 
           
 
@@ -118,8 +130,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IdentityModel.Tokens.SecurityKeyIdentifier" />
+
+          
 
           
 
@@ -170,8 +186,12 @@
 
           
 
+          
+
           The type of the <see
            cref="T:System.IdentityModel.Tokens.SecurityKeyIdentifierClause" />
+
+          
 
           
 
@@ -221,6 +241,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -231,8 +253,12 @@
 
           
 
+          
+
           The type of the <see
            cref="T:System.IdentityModel.Tokens.SecurityKeyIdentifierClause" />
+
+          
 
           
 
@@ -321,6 +347,8 @@
         </returns>
         <param name="keyIdentifierClause">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

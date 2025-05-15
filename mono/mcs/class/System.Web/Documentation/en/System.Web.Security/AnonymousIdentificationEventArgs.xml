@@ -27,8 +27,12 @@
 
         
 
+        
+
          class is used to supply event values to the <see
          cref="E:System.Web.Security.AnonymousIdentificationModule.Creating" />
+
+        
 
         
 
@@ -41,6 +45,8 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.Security.AnonymousIdentificationModule" />
 
@@ -48,8 +54,12 @@
 
         
 
+        
+
          class by specifying a subroutine named <system
         >AnonymousIdentification_Creating</system>
+
+        
 
         
 
@@ -65,8 +75,12 @@
 
         
 
+        
+
          constructs a <see
          cref="T:System.Web.Security.AnonymousIdentificationEventArgs" />
+
+        
 
         
 
@@ -79,8 +93,12 @@
 
         
 
+        
+
          and passes it to the <system
         >AnonymousIdentification_Creating</system>
+
+        
 
         
 
@@ -96,8 +114,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.Security.AnonymousIdentificationEventArgs" />
+
+        
 
         
 
@@ -110,8 +132,12 @@
 
         
 
+        
+
          event to set the anonymous identifier to a custom value. If you do not specify a value for the <see
          cref="P:System.Web.Security.AnonymousIdentificationEventArgs.AnonymousID" />
+
+        
 
         
 
@@ -124,8 +150,12 @@
 
         
 
+        
+
          event, a <see
          cref="T:System.Guid" />
+
+        
 
         
 
@@ -141,8 +171,12 @@
 
         
 
+        
+
          event is only raised when the anonymous identification is <see
          cref="P:System.Web.Security.AnonymousIdentificationModule.Enabled" />
+
+        
 
         
 
@@ -156,6 +190,8 @@
       <para
         >Provides data for the <system
         >AnonymousIdentification_Creating</system>
+
+        
 
         
 
@@ -187,8 +223,12 @@
 
             
 
+            
+
              constructs a <see
              cref="T:System.Web.Security.AnonymousIdentificationEventArgs" />
+
+            
 
             
 
@@ -201,6 +241,8 @@
 
             
 
+            
+
             . It then passes the <see
              cref="T:System.Web.Security.AnonymousIdentificationEventArgs" />
 
@@ -208,8 +250,12 @@
 
             
 
+            
+
              object to the <system
             >AnonymousIdentification_Creating</system>
+
+            
 
             
 
@@ -228,11 +274,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -264,8 +314,12 @@
 
             
 
+            
+
              property to set the anonymous identifier to a custom value during the <system
             >AnonymousIdentification_Creating</system>
+
+            
 
             
 
@@ -278,6 +332,8 @@
 
             
 
+            
+
              property during the <system
             >AnonymousIdentification_Creating</system>
 
@@ -285,8 +341,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.Guid" />
+
+            
 
             
 
@@ -302,8 +362,12 @@
 
             
 
+            
+
              event is only raised when the anonymous identification is <see
              cref="P:System.Web.Security.AnonymousIdentificationModule.Enabled" />
+
+            
 
             
 
@@ -340,8 +404,12 @@
 
             
 
+            
+
              provides access to <see
              cref="P:System.Web.HttpContext.Request" />
+
+            
 
             
 
@@ -354,8 +422,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Web.HttpContext.User" />
+
+            
 
             
 
@@ -369,6 +441,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 

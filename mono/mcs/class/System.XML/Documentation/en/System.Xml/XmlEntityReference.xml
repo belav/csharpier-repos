@@ -63,8 +63,12 @@
 
             
 
+            
+
              directly; instead, use methods such as <see
              cref="M:System.Xml.XmlDocument.CreateEntityReference" />
+
+            
 
             
 
@@ -83,11 +87,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -100,10 +108,14 @@
 
           
 
+          
+
            property.</param
         >
         <param name="doc">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -137,12 +149,16 @@
 
             
 
+            
+
              is returned.</para
           >
           <para>BaseURI walks the node tree looking for entity reference boundaries, so if entities are expanded, this information is not preserved and this property returns the location of the XmlDocument in all cases.</para>
           <para
             >For additional information on BaseURI and how it behaves with other node types, see <see
              cref="P:System.Xml.XmlNode.BaseURI" />
+
+            
 
             
 
@@ -190,6 +206,8 @@
 
             
 
+            
+
              returns null).</para
           >
         </remarks>
@@ -203,6 +221,8 @@
         </returns>
         <param name="deep">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -387,11 +407,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="w">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -437,11 +461,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="w">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

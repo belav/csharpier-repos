@@ -44,10 +44,14 @@
 
         
 
+        
+
         , which enables you to share instances of the ExpandoObject class between languages that support the DLR interoperability model. For example, you can create an instance of the ExpandoObject class in C# and then pass it to an IronPython function. For more information, see <format
          type="text/html">
           <a href="f769a271-8aff-4bea-bfab-6160217ce23d">Dynamic Language Runtime Overview</a>
         </format>
+
+        
 
         
 
@@ -60,8 +64,12 @@
 
         
 
+        
+
          Web site, and <see
          cref="http://go.microsoft.com/fwlink/?LinkID=169157">Introducing the ExpandoObject</see>
+
+        
 
         
 
@@ -77,8 +85,12 @@
 
         
 
+        
+
          class. If you want to define how dynamic objects participate in the interoperability protocol and manage DLR fast dynamic dispatch caching, create your own implementation of the <see
          cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
+
+        
 
         
 
@@ -101,6 +113,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -108,6 +122,8 @@
          type="text/html">
           <a href="d6ff7f1e-b94f-4205-ab8d-5cfa91758724">Early and Late Binding</a>
         </format>
+
+        
 
         
 
@@ -195,6 +211,8 @@ End Module</code>
 
         
 
+        
+
          interface and enumerate the instance's members.</para
       >
       <para>code reference: System.Dynamic.ExpandoObject#5</para>
@@ -211,8 +229,12 @@ End Module</code>
 
         
 
+        
+
          interface and can raise a <see
          cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged" />
+
+        
 
         
 
@@ -663,6 +685,8 @@ End Module</code>
 
             
 
+            
+
              that can be used to iterate through the collection.</para
           >
         </returns>
@@ -703,11 +727,15 @@ End Module</code>
 
             
 
+            
+
              type.</para
           >
         </returns>
         <param name="parameter">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

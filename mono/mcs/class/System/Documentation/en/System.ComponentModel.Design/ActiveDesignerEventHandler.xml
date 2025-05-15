@@ -44,11 +44,15 @@
 
         
 
+        
+
          event is raised when the currently active document has been modified.</para
       >
       <para
         >When you create an <see
          cref="T:System.ComponentModel.Design.ActiveDesignerEventHandler" />
+
+        
 
         
 
@@ -63,6 +67,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -71,6 +77,8 @@
       <para
         >Represents the method that will handle the <see
          cref="E:System.ComponentModel.Design.IDesignerEventService.ActiveDesignerChanged" />
+
+        
 
         
 

@@ -34,6 +34,8 @@
 
         
 
+        
+
          class is the starting point for creating a custom binding that implements the HTTPS transport protocol. HTTPS is the primary transport used for secure interoperability purposes. HTTPS is supported by the indigo1 to ensure interoperability with other Web services stacks.</para
       >
       <para
@@ -44,8 +46,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.ServiceModel.Channels.IChannelListener" />
+
+        
 
         
 
@@ -61,11 +67,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >You can also set properties on the base class, <see
          cref="T:System.ServiceModel.Channels.HttpTransportBindingElement" />
+
+        
 
         
 
@@ -78,6 +88,8 @@
 
         
 
+        
+
         , <see
          cref="P:System.ServiceModel.Channels.HttpTransportBindingElement.HostnameComparisonMode" />
 
@@ -85,8 +97,12 @@
 
         
 
+        
+
         , and <see
          cref="P:System.ServiceModel.Channels.HttpTransportBindingElement.MaxBufferSize" />
+
+        
 
         
 
@@ -102,8 +118,12 @@
 
         
 
+        
+
         , such as: <see
          cref="P:System.ServiceModel.Channels.TransportBindingElement.ManualAddressing" />
+
+        
 
         
 
@@ -116,8 +136,12 @@
 
         
 
+        
+
         . For a complete list of properties, see <see
          cref="T:System.ServiceModel.Channels.TransportBindingElement" />
+
+        
 
         
 
@@ -155,6 +179,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -187,6 +213,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.HttpsTransportBindingElement" />
+
+            
 
             
 
@@ -240,10 +268,14 @@
 
           
 
+          
+
            members that describe bindings, behaviors, contracts and other information required to create the channel factory.</param
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -301,10 +333,14 @@
 
           
 
+          
+
            members that describe bindings, behaviors, contracts and other information required to create the channel factory.</param
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -380,6 +416,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -388,6 +426,8 @@
           <para
             >Gets a specified object from the <see
              cref="T:System.ServiceModel.Channels.BindingContext" />
+
+            
 
             
 
@@ -406,11 +446,15 @@
 
             
 
+            
+
             , or null if the object isn't found.</para
           >
         </returns>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -423,10 +467,14 @@
 
           
 
+          
+
           .</param
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -468,6 +516,8 @@
 
             
 
+            
+
              that represents the transport token used in the security binding.</para
           >
         </summary>
@@ -476,6 +526,8 @@
           <para
             >An <see
              cref="T:System.Xml.XmlElement" />
+
+            
 
             
 

@@ -46,6 +46,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -106,6 +108,8 @@
 
           
 
+          
+
           The virtual path of the requested file. </param
         >
         <param name="inputFile">
@@ -115,10 +119,14 @@
 
           
 
+          
+
           The physical path of the page. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

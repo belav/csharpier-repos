@@ -20,8 +20,12 @@
 
         
 
+        
+
          property to indicate the current state of the <see
          cref="T:System.Windows.Forms.WebBrowser" />
+
+        
 
         
 
@@ -35,6 +39,8 @@
       <para
         >Specifies constants that define the state of the <see
          cref="T:System.Windows.Forms.WebBrowser" />
+
+        
 
         
 

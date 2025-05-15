@@ -35,6 +35,8 @@
 
         
 
+        
+
         . The sequence requires the elements in the group to appear in the specified sequence within the containing element.</para
       >
     </summary>
@@ -61,6 +63,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Schema.XmlSchemaSequence" />
+
+            
 
             
 
@@ -119,8 +123,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Xml.Schema.XmlSchemaGroupRef" />
+
+            
 
             
 
@@ -133,6 +141,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.Xml.Schema.XmlSchemaSequence" />
 
@@ -140,8 +150,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Xml.Schema.XmlSchemaAny" />
+
+            
 
             
 

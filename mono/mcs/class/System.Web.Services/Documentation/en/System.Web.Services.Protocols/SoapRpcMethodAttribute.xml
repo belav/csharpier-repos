@@ -38,11 +38,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >This attribute can be applied to an XML Web service method on the server and a proxy class on the client. XML Web service methods that have the <see
          cref="P:System.Web.Services.Protocols.SoapRpcMethodAttribute.OneWay" />
+
+        
 
         
 
@@ -55,8 +59,12 @@
 
         
 
+        
+
         . As such, accessing any of the properties of the <see
          cref="T:System.Web.Services.WebService" />
+
+        
 
         
 
@@ -83,6 +91,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Protocols.SoapRpcMethodAttribute" />
+
+            
 
             
 
@@ -116,6 +126,8 @@
 
             
 
+            
+
              class, setting the <see
              cref="P:System.Web.Services.Protocols.SoapRpcMethodAttribute.Action" />
 
@@ -123,8 +135,12 @@
 
             
 
+            
+
              property to the value of the <paramref
              name="action" />
+
+            
 
             
 
@@ -140,8 +156,12 @@
 
           
 
+          
+
           The intent of the SOAP request. Sets the <see
            cref="P:System.Web.Services.Protocols.SoapRpcMethodAttribute.Action" />
+
+          
 
           
 
@@ -174,8 +194,12 @@
 
             
 
+            
+
              property is a URI indicating the intent of the SOAP request. However, the SOAP specification places no restrictions on the format and whether the URI refers to an existing document. The presence and content of the <see
              cref="P:System.Web.Services.Protocols.SoapRpcMethodAttribute.Action" />
+
+            
 
             
 
@@ -186,6 +210,8 @@
           <para
             >By default, the .NET Framework version 1.1 publishes the <see
              cref="P:System.Web.Services.Protocols.SoapRpcMethodAttribute.Action" />
+
+            
 
             
 
@@ -224,8 +250,12 @@
 
             
 
+            
+
              applied to an XML Web service. An XML Web service can implement multiple bindings, if multiple <see
              cref="T:System.Web.Services.WebServiceBindingAttribute" />
+
+            
 
             
 
@@ -241,6 +271,8 @@
 
             
 
+            
+
              attributes are applied to an XML Web service, a <see
              cref="T:System.Web.Services.Protocols.SoapDocumentMethodAttribute" />
 
@@ -248,8 +280,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Web.Services.Protocols.SoapRpcMethodAttribute" />
+
+            
 
             
 
@@ -262,6 +298,8 @@
 
             
 
+            
+
              property of <see
              cref="T:System.Web.Services.Protocols.SoapDocumentMethodAttribute" />
 
@@ -269,8 +307,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Web.Services.Protocols.SoapRpcMethodAttribute" />
+
+            
 
             
 
@@ -283,8 +325,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Web.Services.Protocols.SoapRpcMethodAttribute" />
+
+            
 
             
 
@@ -322,8 +368,12 @@
 
             
 
+            
+
              property set to true, the XML Web service client does not have to wait for the Web server to finish processing the XML Web service method. As soon as the Web server has deserialized the <see
              cref="T:System.Web.Services.Protocols.SoapServerMessage" />
+
+            
 
             
 
@@ -339,11 +389,15 @@
 
             
 
+            
+
              parameters.</para
           >
           <para
             >If you are using the .NET Framework version 1.0 XML Web service methods that have either the <see
              cref="T:System.Web.Services.Protocols.SoapRpcMethodAttribute" />
+
+            
 
             
 
@@ -356,8 +410,12 @@
 
             
 
+            
+
              attribute applied to them with the <see
              cref="P:System.Web.Services.Protocols.SoapDocumentMethodAttribute.OneWay" />
+
+            
 
             
 
@@ -370,8 +428,12 @@
 
             
 
+            
+
              using the static <see
              cref="P:System.Web.HttpContext.Current" />
+
+            
 
             
 
@@ -384,6 +446,8 @@
 
             
 
+            
+
             , derive the class implementing the XML Web service method from <see
              cref="T:System.Web.Services.WebService" />
 
@@ -391,8 +455,12 @@
 
             
 
+            
+
              and access the <see
              cref="P:System.Web.Services.WebService.Context" />
+
+            
 
             
 
@@ -473,6 +541,8 @@
 
             
 
+            
+
              property defines the XML element used to encapsulate the parameters within the Body element of the SOAP response.</para
           >
         </remarks>
@@ -500,6 +570,8 @@
           <para
             >The <see
              cref="P:System.Web.Services.Protocols.SoapRpcMethodAttribute.ResponseNamespace" />
+
+            
 
             
 
@@ -542,6 +614,8 @@
           <para
             >The default value of this property is <see
              cref="F:System.Web.Services.Description.SoapBindingUse.Default" />
+
+            
 
             
 

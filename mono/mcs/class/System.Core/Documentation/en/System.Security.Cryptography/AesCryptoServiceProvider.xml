@@ -50,6 +50,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -180,8 +182,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Security.Cryptography.SymmetricAlgorithm.LegalBlockSizes" />
+
+            
 
             
 
@@ -194,8 +200,12 @@
 
             
 
+            
+
              and <paramref
              name="iv" />
+
+            
 
             
 

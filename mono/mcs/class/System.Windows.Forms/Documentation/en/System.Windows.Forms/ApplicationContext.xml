@@ -25,8 +25,12 @@
 
         
 
+        
+
          class to redefine the circumstances that cause a message loop to exit. By default, the <see
          cref="T:System.Windows.Forms.ApplicationContext" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
          event on the application's main <see
          cref="T:System.Windows.Forms.Form" />
+
+        
 
         
 
@@ -66,6 +74,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ApplicationContext" />
+
+            
 
             
 
@@ -100,8 +110,12 @@
 
             
 
+            
+
              is not overridden, the message loop of the thread terminates when <see
              cref="P:System.Windows.Forms.ApplicationContext.MainForm" />
+
+            
 
             
 
@@ -120,8 +134,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Windows.Forms.Form" />
+
+            
 
             
 
@@ -137,8 +155,12 @@
 
           
 
+          
+
           The main <see
            cref="T:System.Windows.Forms.Form" />
+
+          
 
           
 
@@ -170,8 +192,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Windows.Forms.ApplicationContext" />
+
+            
 
             
 
@@ -184,8 +210,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Windows.Forms.ApplicationContext" />
+
+            
 
             
 
@@ -198,6 +228,8 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Windows.Forms.ApplicationContext" />
 
@@ -205,8 +237,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Windows.Forms.ApplicationContext" />
+
+            
 
             
 
@@ -221,10 +257,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -241,6 +281,8 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.Windows.Forms.ApplicationContext" />
 
@@ -248,8 +290,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Windows.Forms.ApplicationContext" />
+
+              
 
               
 
@@ -264,6 +310,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.Windows.Forms.ApplicationContext" />
+
+            
 
             
 
@@ -298,8 +346,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected <see
              cref="M:System.Windows.Forms.ApplicationContext.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -312,6 +364,8 @@
 
             
 
+            
+
              parameter set to true. <see
              cref="M:System.Object.Finalize" />
 
@@ -319,8 +373,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -336,8 +394,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Windows.Forms.ApplicationContext" />
+
+            
 
             
 
@@ -356,11 +418,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -392,11 +458,15 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
             <para>
               <see cref="M:System.Windows.Forms.ApplicationContext.ExitThread" />
+
+              
 
               
 
@@ -409,8 +479,12 @@
 
               
 
+              
+
                do not actually cause the thread to terminate. These methods raise the <see
                cref="E:System.Windows.Forms.Application.ThreadExit" />
+
+              
 
               
 
@@ -423,8 +497,12 @@
 
               
 
+              
+
                object listens. The <see
                cref="T:System.Windows.Forms.Application" />
+
+              
 
               
 
@@ -462,11 +540,15 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
             <para>
               <see cref="M:System.Windows.Forms.ApplicationContext.ExitThread" />
+
+              
 
               
 
@@ -479,8 +561,12 @@
 
               
 
+              
+
                do not actually cause the thread to terminate. These methods raise the <see
                cref="E:System.Windows.Forms.Application.ThreadExit" />
+
+              
 
               
 
@@ -493,8 +579,12 @@
 
               
 
+              
+
                object listens. The <see
                cref="T:System.Windows.Forms.Application" />
+
+              
 
               
 
@@ -532,11 +622,15 @@
 
             
 
+            
+
              and cleans up resources by calling Dispose(false). Override Dispose(Boolean) to customize the cleanup.</para
           >
           <para
             >Application code should not call this method; an object's Finalize method is automatically invoked during garbage collection, unless finalization by the garbage collector has been disabled by a call to the <see
              cref="M:System.GC.SuppressFinalize(System.Object)" />
+
+            
 
             
 
@@ -556,6 +650,8 @@
 
             
 
+            
+
             , <format
              type="text/html">
               <a href="A17B0066-71C2-4BA4-9822-8E19332FC213"
@@ -567,12 +663,16 @@
 
             
 
+            
+
             , and <format
              type="text/html">
               <a href="8026CB68-FE93-43FC-96C1-C09AD7D64CD3"
                 >[&lt;topic://cpconOverridingFinalizeMethod&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -612,6 +712,8 @@
 
             
 
+            
+
              for this context. This property can change at any time. If <see
              cref="M:System.Windows.Forms.ApplicationContext.OnMainFormClosed(System.Object,System.EventArgs)" />
 
@@ -619,8 +721,12 @@
 
             
 
+            
+
              is not overridden, the message loop of the thread terminates when the <paramref
              name="mainForm" />
+
+            
 
             
 
@@ -634,6 +740,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Windows.Forms.Form" />
+
+            
 
             
 
@@ -672,6 +780,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -685,8 +795,12 @@
 
             
 
+            
+
             , which raises the <see
              cref="E:System.Windows.Forms.ApplicationContext.ThreadExit" />
+
+            
 
             
 
@@ -702,6 +816,8 @@
 
           
 
+          
+
           The object that raised the event. </param
         >
         <param name="e">
@@ -711,8 +827,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -761,8 +881,12 @@
 
             
 
+            
+
              class can be assigned to this property. If the <see
              cref="P:System.Windows.Forms.ApplicationContext.Tag" />
+
+            
 
             
 
@@ -778,6 +902,8 @@
 
             
 
+            
+
              property is to store data that is closely associated with the control. For example, if you have a control that displays information about a customer, you might store a <see
              cref="T:System.Data.DataSet" />
 
@@ -785,8 +911,12 @@
 
             
 
+            
+
              that contains the customer's order history in that control's <see
              cref="P:System.Windows.Forms.ApplicationContext.Tag" />
+
+            
 
             
 
@@ -814,6 +944,8 @@
           <para
             >Occurs when the message loop of the thread should be terminated, by calling <see
              cref="M:System.Windows.Forms.ApplicationContext.ExitThread" />
+
+            
 
             
 

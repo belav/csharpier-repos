@@ -37,6 +37,8 @@
 
         
 
+        
+
          method, which closes the current figure by connecting a line from the ending point to the starting point. A figure that consists of a geometric shape primitive is a closed figure.</para
       >
       <para
@@ -47,11 +49,15 @@
 
         
 
+        
+
         ), all open figures are closed by adding a line from the figure's first point to its last point.</para
       >
       <para
         >A new figure is implicitly started when a path is created or when a figure is closed. A new figure is explicitly created when the <see
          cref="M:System.Drawing.Drawing2D.GraphicsPath.StartFigure" />
+
+        
 
         
 
@@ -85,6 +91,8 @@
 
             
 
+            
+
              class with a <see
              cref="P:System.Drawing.Drawing2D.GraphicsPath.FillMode" />
 
@@ -92,8 +100,12 @@
 
             
 
+            
+
              value of <see
              cref="F:System.Drawing.Drawing2D.FillMode.Alternate" />
+
+            
 
             
 
@@ -130,8 +142,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Drawing.Drawing2D.FillMode" />
+
+            
 
             
 
@@ -147,6 +163,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Drawing2D.FillMode" />
 
@@ -154,8 +172,12 @@
 
           
 
+          
+
            enumeration that determines how the interior of this <see
            cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+          
 
           
 
@@ -192,6 +214,8 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Drawing.Drawing2D.PathPointType" />
 
@@ -199,8 +223,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Drawing.Point" />
+
+            
 
             
 
@@ -216,6 +244,8 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Drawing.Point" />
 
@@ -223,8 +253,12 @@
 
           
 
+          
+
            structures that defines the coordinates of the points that make up this <see
            cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+          
 
           
 
@@ -239,6 +273,8 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Drawing.Drawing2D.PathPointType" />
 
@@ -246,8 +282,12 @@
 
           
 
+          
+
            enumeration elements that specifies the type of each corresponding point in the <paramref
            name="pts" />
+
+          
 
           
 
@@ -284,6 +324,8 @@
 
             
 
+            
+
              array with the specified <see
              cref="T:System.Drawing.Drawing2D.PathPointType" />
 
@@ -291,8 +333,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Drawing.PointF" />
+
+            
 
             
 
@@ -308,6 +354,8 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Drawing.PointF" />
 
@@ -315,8 +363,12 @@
 
           
 
+          
+
            structures that defines the coordinates of the points that make up this <see
            cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+          
 
           
 
@@ -331,6 +383,8 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Drawing.Drawing2D.PathPointType" />
 
@@ -338,8 +392,12 @@
 
           
 
+          
+
            enumeration elements that specifies the type of each corresponding point in the <paramref
            name="pts" />
+
+          
 
           
 
@@ -377,8 +435,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Drawing.Drawing2D.PathPointType" />
+
+            
 
             
 
@@ -391,8 +453,12 @@
 
             
 
+            
+
              arrays and with the specified <see
              cref="T:System.Drawing.Drawing2D.FillMode" />
+
+            
 
             
 
@@ -408,6 +474,8 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Drawing.Point" />
 
@@ -415,8 +483,12 @@
 
           
 
+          
+
            structures that defines the coordinates of the points that make up this <see
            cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+          
 
           
 
@@ -431,6 +503,8 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Drawing.Drawing2D.PathPointType" />
 
@@ -438,8 +512,12 @@
 
           
 
+          
+
            enumeration elements that specifies the type of each corresponding point in the <paramref
            name="pts" />
+
+          
 
           
 
@@ -454,6 +532,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.FillMode" />
 
@@ -461,8 +541,12 @@
 
           
 
+          
+
            enumeration that specifies how the interiors of shapes in this <see
            cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+          
 
           
 
@@ -500,8 +584,12 @@
 
             
 
+            
+
              array with the specified <see
              cref="T:System.Drawing.Drawing2D.PathPointType" />
+
+            
 
             
 
@@ -514,8 +602,12 @@
 
             
 
+            
+
              arrays and with the specified <see
              cref="T:System.Drawing.Drawing2D.FillMode" />
+
+            
 
             
 
@@ -531,6 +623,8 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Drawing.PointF" />
 
@@ -538,8 +632,12 @@
 
           
 
+          
+
            structures that defines the coordinates of the points that make up this <see
            cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+          
 
           
 
@@ -554,6 +652,8 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Drawing.Drawing2D.PathPointType" />
 
@@ -561,8 +661,12 @@
 
           
 
+          
+
            enumeration elements that specifies the type of each corresponding point in the <paramref
            name="pts" />
+
+          
 
           
 
@@ -577,6 +681,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.FillMode" />
 
@@ -584,8 +690,12 @@
 
           
 
+          
+
            enumeration that specifies how the interiors of shapes in this <see
            cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+          
 
           
 
@@ -632,8 +742,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -680,8 +794,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.RectangleF" />
+
+          
 
           
 
@@ -731,10 +849,14 @@
 
           
 
+          
+
           The x-coordinate of the upper-left corner of the rectangular region that defines the ellipse from which the arc is drawn. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -749,10 +871,14 @@
 
           
 
+          
+
           The width of the rectangular region that defines the ellipse from which the arc is drawn. </param
         >
         <param name="height">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -802,10 +928,14 @@
 
           
 
+          
+
           The x-coordinate of the upper-left corner of the rectangular region that defines the ellipse from which the arc is drawn. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -820,10 +950,14 @@
 
           
 
+          
+
           The width of the rectangular region that defines the ellipse from which the arc is drawn. </param
         >
         <param name="height">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -869,8 +1003,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -885,8 +1023,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -901,8 +1043,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -917,8 +1063,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -964,8 +1114,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -980,8 +1134,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -996,8 +1154,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -1012,8 +1174,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -1063,10 +1229,14 @@
 
           
 
+          
+
           The x-coordinate of the starting point of the curve. </param
         >
         <param name="y1">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1081,10 +1251,14 @@
 
           
 
+          
+
           The x-coordinate of the first control point for the curve. </param
         >
         <param name="y2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1099,10 +1273,14 @@
 
           
 
+          
+
           The x-coordinate of the second control point for the curve. </param
         >
         <param name="y3">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1117,10 +1295,14 @@
 
           
 
+          
+
           The x-coordinate of the endpoint of the curve. </param
         >
         <param name="y4">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1170,10 +1352,14 @@
 
           
 
+          
+
           The x-coordinate of the starting point of the curve. </param
         >
         <param name="y1">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1188,10 +1374,14 @@
 
           
 
+          
+
           The x-coordinate of the first control point for the curve. </param
         >
         <param name="y2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1206,10 +1396,14 @@
 
           
 
+          
+
           The x-coordinate of the second control point for the curve. </param
         >
         <param name="y3">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1224,10 +1418,14 @@
 
           
 
+          
+
           The x-coordinate of the endpoint of the curve. </param
         >
         <param name="y4">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1268,8 +1466,12 @@
 
             
 
+            
+
              parameter specifies an array of endpoints and control points of the connected curves. The first curve is constructed from the first point to the fourth point in the <paramref
              name="points" />
+
+            
 
             
 
@@ -1313,8 +1515,12 @@
 
             
 
+            
+
              parameter specifies an array of endpoints and control points of the connected curves. The first curve is constructed from the first point to the fourth point in the <paramref
              name="points" />
+
+            
 
             
 
@@ -1357,6 +1563,8 @@
 
             
 
+            
+
              array are not the same point, the curve is closed by connecting these two points. The tension value cannot be set for this method, and defaults to a value equivalent to 0.5.</para
           >
         </remarks>
@@ -1371,8 +1579,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -1409,6 +1621,8 @@
 
             
 
+            
+
              array are not the same point, the curve is closed by connecting these two points. The tension value cannot be set for this method, and defaults to a value equivalent to 0.5.</para
           >
         </remarks>
@@ -1423,8 +1637,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -1462,6 +1680,8 @@
 
             
 
+            
+
              array are not the same point, the curve is closed by connecting these two points.</para
           >
         </remarks>
@@ -1476,8 +1696,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -1487,6 +1711,8 @@
         >
         <param name="tension">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1524,6 +1750,8 @@
 
             
 
+            
+
              array are not the same point, the curve is closed by connecting these two points.</para
           >
         </remarks>
@@ -1538,8 +1766,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -1549,6 +1781,8 @@
         >
         <param name="tension">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1590,8 +1824,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -1633,8 +1871,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -1677,8 +1919,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -1688,6 +1934,8 @@
         >
         <param name="tension">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1730,8 +1978,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -1741,6 +1993,8 @@
         >
         <param name="tension">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1781,8 +2035,12 @@
 
             
 
+            
+
              parameter and includes the number of points (segments) specified by <paramref
              name="numberOfSegments" />
+
+            
 
             
 
@@ -1802,8 +2060,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -1818,8 +2080,12 @@
 
           
 
+          
+
           The index of the element in the <paramref
            name="points" />
+
+          
 
           
 
@@ -1834,10 +2100,14 @@
 
           
 
+          
+
           A value that specifies the amount that the curve bends between control points. Values greater than 1 produce unpredictable results. </param
         >
         <param name="tension">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1878,8 +2148,12 @@
 
             
 
+            
+
             , and includes the number of points (segments) specified by <paramref
              name="numberOfSegments" />
+
+            
 
             
 
@@ -1899,8 +2173,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -1915,8 +2193,12 @@
 
           
 
+          
+
           The index of the element in the <paramref
            name="points" />
+
+          
 
           
 
@@ -1931,10 +2213,14 @@
 
           
 
+          
+
           The number of segments used to draw the curve. A segment can be thought of as a line connecting two points. </param
         >
         <param name="tension">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2023,10 +2309,14 @@
 
           
 
+          
+
           The x-coordinate of the upper-left corner of the bounding rectangle that defines the ellipse. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2041,10 +2331,14 @@
 
           
 
+          
+
           The width of the bounding rectangle that defines the ellipse. </param
         >
         <param name="height">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2086,10 +2380,14 @@
 
           
 
+          
+
           The x-coordinate of the upper-left corner of the bounding rectangle that defines the ellipse. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2104,10 +2402,14 @@
 
           
 
+          
+
           The width of the bounding rectangle that defines the ellipse. </param
         >
         <param name="height">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2147,8 +2449,12 @@
 
             
 
+            
+
             . If there are previous lines or curves in the <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -2162,6 +2468,8 @@
           <para
             >Appends a line segment to this <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -2202,8 +2510,12 @@
 
             
 
+            
+
             . If there are previous lines or curves in the <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -2217,6 +2529,8 @@
           <para
             >Appends a line segment to this <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -2257,6 +2571,8 @@
 
             
 
+            
+
             , a line segment is drawn to connect the last point in the path to the first point in the new line segment.</para
           >
         </remarks>
@@ -2271,10 +2587,14 @@
 
           
 
+          
+
           The x-coordinate of the starting point of the line. </param
         >
         <param name="y1">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2289,10 +2609,14 @@
 
           
 
+          
+
           The x-coordinate of the endpoint of the line. </param
         >
         <param name="y2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2332,8 +2656,12 @@
 
             
 
+            
+
             . If there are previous lines or curves in the <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -2352,11 +2680,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="x1">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2371,6 +2703,8 @@
 
           
 
+          
+
           The y-coordinate of the starting point of the line. </param
         >
         <param name="x2">
@@ -2380,10 +2714,14 @@
 
           
 
+          
+
           The x-coordinate of the endpoint of the line. </param
         >
         <param name="y2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2420,6 +2758,8 @@
 
             
 
+            
+
              parameter specifies an array of endpoints. The first two specify the first line. Each additional point specifies the endpoint of a line segment whose starting point is the endpoint of the previous line.</para
           >
         </remarks>
@@ -2428,6 +2768,8 @@
           <para
             >Appends a series of connected line segments to the end of this <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -2443,8 +2785,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -2481,6 +2827,8 @@
 
             
 
+            
+
              parameter specifies an array of endpoints. The first two specify the first line. Each additional point specifies the endpoint of a line segment whose starting point is the endpoint of the previous line.</para
           >
         </remarks>
@@ -2489,6 +2837,8 @@
           <para
             >Appends a series of connected line segments to the end of this <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -2504,8 +2854,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -2544,11 +2898,15 @@
 
             
 
+            
+
              to this path.</para
           >
         </summary>
         <param name="addingPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2561,10 +2919,14 @@
 
           
 
+          
+
            to add. </param
         >
         <param name="connect">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2603,6 +2965,8 @@
 
             
 
+            
+
              (measured clockwise from the x-axis) and ends at <paramref
              name="startAngle" />
 
@@ -2610,8 +2974,12 @@
 
             
 
+            
+
              + <paramref
              name="sweepAngle" />
+
+            
 
             
 
@@ -2631,8 +2999,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -2647,10 +3019,14 @@
 
           
 
+          
+
           The starting angle for the pie section, measured in degrees clockwise from the x-axis. </param
         >
         <param name="sweepAngle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2663,8 +3039,12 @@
 
           
 
+          
+
            and the end of the pie section, measured in degrees clockwise from <paramref
            name="startAngle" />
+
+          
 
           
 
@@ -2706,6 +3086,8 @@
 
             
 
+            
+
              (measured clockwise from the x-axis) and ends at <paramref
              name="startAngle" />
 
@@ -2713,8 +3095,12 @@
 
             
 
+            
+
              + <paramref
              name="sweepAngle" />
+
+            
 
             
 
@@ -2734,10 +3120,14 @@
 
           
 
+          
+
           The x-coordinate of the upper-left corner of the bounding rectangle that defines the ellipse from which the pie is drawn. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2752,10 +3142,14 @@
 
           
 
+          
+
           The width of the bounding rectangle that defines the ellipse from which the pie is drawn. </param
         >
         <param name="height">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2770,10 +3164,14 @@
 
           
 
+          
+
           The starting angle for the pie section, measured in degrees clockwise from the x-axis. </param
         >
         <param name="sweepAngle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2786,8 +3184,12 @@
 
           
 
+          
+
            and the end of the pie section, measured in degrees clockwise from <paramref
            name="startAngle" />
+
+          
 
           
 
@@ -2829,6 +3231,8 @@
 
             
 
+            
+
              (measured clockwise from the x-axis) and ends at <paramref
              name="startAngle" />
 
@@ -2836,8 +3240,12 @@
 
             
 
+            
+
              + <paramref
              name="sweepAngle" />
+
+            
 
             
 
@@ -2857,10 +3265,14 @@
 
           
 
+          
+
           The x-coordinate of the upper-left corner of the bounding rectangle that defines the ellipse from which the pie is drawn. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2875,10 +3287,14 @@
 
           
 
+          
+
           The width of the bounding rectangle that defines the ellipse from which the pie is drawn. </param
         >
         <param name="height">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2893,10 +3309,14 @@
 
           
 
+          
+
           The starting angle for the pie section, measured in degrees clockwise from the x-axis. </param
         >
         <param name="sweepAngle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2909,8 +3329,12 @@
 
           
 
+          
+
            and the end of the pie section, measured in degrees clockwise from <paramref
            name="startAngle" />
+
+          
 
           
 
@@ -2947,6 +3371,8 @@
 
             
 
+            
+
              array specify the vertices of a polygon. If the first point in the array is not the same as the last point, those two points are connected to close the polygon.</para
           >
         </remarks>
@@ -2961,8 +3387,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -2999,6 +3429,8 @@
 
             
 
+            
+
              array specify the vertices of a polygon. If the first point in the array is not the same as the last point, those two points are connected to close the polygon.</para
           >
         </remarks>
@@ -3013,8 +3445,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -3053,8 +3489,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -3093,8 +3533,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.RectangleF" />
+
+          
 
           
 
@@ -3133,8 +3577,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -3173,8 +3621,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Drawing.RectangleF" />
+
+          
 
           
 
@@ -3218,8 +3670,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -3234,8 +3690,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.FontFamily" />
+
+          
 
           
 
@@ -3250,8 +3710,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.FontStyle" />
+
+          
 
           
 
@@ -3266,6 +3730,8 @@
 
           
 
+          
+
           The height of the em square box that bounds the character. </param
         >
         <param name="origin">
@@ -3275,8 +3741,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -3291,8 +3761,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.StringFormat" />
+
+          
 
           
 
@@ -3336,8 +3810,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -3352,8 +3830,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.FontFamily" />
+
+          
 
           
 
@@ -3368,8 +3850,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.FontStyle" />
+
+          
 
           
 
@@ -3384,6 +3870,8 @@
 
           
 
+          
+
           The height of the em square box that bounds the character. </param
         >
         <param name="origin">
@@ -3393,8 +3881,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -3409,8 +3901,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.StringFormat" />
+
+          
 
           
 
@@ -3454,8 +3950,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -3470,8 +3970,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.FontFamily" />
+
+          
 
           
 
@@ -3486,8 +3990,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.FontStyle" />
+
+          
 
           
 
@@ -3502,6 +4010,8 @@
 
           
 
+          
+
           The height of the em square box that bounds the character. </param
         >
         <param name="layoutRect">
@@ -3511,8 +4021,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -3527,8 +4041,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.StringFormat" />
+
+          
 
           
 
@@ -3572,8 +4090,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -3588,8 +4110,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.FontFamily" />
+
+          
 
           
 
@@ -3604,8 +4130,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.FontStyle" />
+
+          
 
           
 
@@ -3620,6 +4150,8 @@
 
           
 
+          
+
           The height of the em square box that bounds the character. </param
         >
         <param name="layoutRect">
@@ -3629,8 +4161,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.RectangleF" />
+
+          
 
           
 
@@ -3645,8 +4181,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.StringFormat" />
+
+          
 
           
 
@@ -3678,6 +4218,8 @@
 
             
 
+            
+
              method to create a marker at the current location in a <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
 
@@ -3685,8 +4227,12 @@
 
             
 
+            
+
             . Use the <see
              cref="M:System.Drawing.Drawing2D.GraphicsPathIterator.NextMarker(System.Drawing.Drawing2D.GraphicsPath)" />
+
+            
 
             
 
@@ -3724,6 +4270,8 @@
           <para
             >The <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -3794,8 +4342,12 @@
 
             
 
+            
+
              allows the resources used by this <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -3809,6 +4361,8 @@
           <para
             >Releases all resources used by this <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -3850,8 +4404,12 @@
 
             
 
+            
+
              enumeration that determines how the interiors of shapes in this <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -3925,11 +4483,15 @@
 
             
 
+            
+
              into a sequence of connected line segments.</para
           >
         </summary>
         <param name="matrix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3942,8 +4504,12 @@
 
           
 
+          
+
            by which to transform this <see
            cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+          
 
           
 
@@ -3982,11 +4548,15 @@
 
             
 
+            
+
              into a sequence of connected line segments.</para
           >
         </summary>
         <param name="matrix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3999,8 +4569,12 @@
 
           
 
+          
+
            by which to transform this <see
            cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+          
 
           
 
@@ -4010,6 +4584,8 @@
         >
         <param name="flatness">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4045,6 +4621,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -4058,8 +4636,12 @@
 
             
 
+            
+
              that represents a rectangle that bounds this <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -4101,8 +4683,12 @@
 
             
 
+            
+
              when this path is transformed by the specified <see
              cref="T:System.Drawing.Drawing2D.Matrix" />
+
+            
 
             
 
@@ -4121,8 +4707,12 @@
 
             
 
+            
+
              that represents a rectangle that bounds this <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -4138,8 +4728,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -4181,6 +4775,8 @@
 
             
 
+            
+
              when the current path is transformed by the specified <see
              cref="T:System.Drawing.Drawing2D.Matrix" />
 
@@ -4188,8 +4784,12 @@
 
             
 
+            
+
              and drawn with the specified <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4208,8 +4808,12 @@
 
             
 
+            
+
              that represents a rectangle that bounds this <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -4225,8 +4829,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -4241,6 +4849,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Pen" />
 
@@ -4248,8 +4858,12 @@
 
           
 
+          
+
            with which to draw the <see
            cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+          
 
           
 
@@ -4282,8 +4896,12 @@
 
             
 
+            
+
              array of this <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -4302,8 +4920,12 @@
 
             
 
+            
+
              that represents the last point in this <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -4346,8 +4968,12 @@
 
             
 
+            
+
              when drawn with the specified <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4366,8 +4992,12 @@
 
             
 
+            
+
              when drawn with the specified <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4383,8 +5013,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -4399,8 +5033,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Pen" />
+
+          
 
           
 
@@ -4442,8 +5080,12 @@
 
             
 
+            
+
              when drawn with the specified <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4462,8 +5104,12 @@
 
             
 
+            
+
              when drawn with the specified <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4479,8 +5125,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -4495,8 +5145,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Pen" />
+
+          
 
           
 
@@ -4535,6 +5189,8 @@
 
             
 
+            
+
              is temporarily applied before testing for visibility.</para
           >
         </remarks>
@@ -4548,6 +5204,8 @@
 
             
 
+            
+
              when drawn with the specified <see
              cref="T:System.Drawing.Pen" />
 
@@ -4555,8 +5213,12 @@
 
             
 
+            
+
              and using the specified <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -4575,8 +5237,12 @@
 
             
 
+            
+
              as drawn with the specified <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4592,8 +5258,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -4608,8 +5278,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Pen" />
+
+          
 
           
 
@@ -4624,8 +5298,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -4664,6 +5342,8 @@
 
             
 
+            
+
              is temporarily applied before testing for visibility.</para
           >
         </remarks>
@@ -4677,6 +5357,8 @@
 
             
 
+            
+
              when drawn with the specified <see
              cref="T:System.Drawing.Pen" />
 
@@ -4684,8 +5366,12 @@
 
             
 
+            
+
              and using the specified <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -4704,8 +5390,12 @@
 
             
 
+            
+
              as drawn with the specified <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4721,8 +5411,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -4737,8 +5431,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Pen" />
+
+          
 
           
 
@@ -4753,8 +5451,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -4797,8 +5499,12 @@
 
             
 
+            
+
              when drawn with the specified <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4817,8 +5523,12 @@
 
             
 
+            
+
              when drawn with the specified <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4834,10 +5544,14 @@
 
           
 
+          
+
           The x-coordinate of the point to test. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4852,8 +5566,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Pen" />
+
+          
 
           
 
@@ -4896,8 +5614,12 @@
 
             
 
+            
+
              when drawn with the specified <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4916,8 +5638,12 @@
 
             
 
+            
+
              when drawn with the specified <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -4933,10 +5659,14 @@
 
           
 
+          
+
           The x-coordinate of the point to test. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4951,8 +5681,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Pen" />
+
+          
 
           
 
@@ -4992,6 +5726,8 @@
 
             
 
+            
+
              is temporarily applied before testing for visibility.</para
           >
         </remarks>
@@ -5005,6 +5741,8 @@
 
             
 
+            
+
              when drawn with the specified <see
              cref="T:System.Drawing.Pen" />
 
@@ -5012,8 +5750,12 @@
 
             
 
+            
+
              and using the specified <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -5032,8 +5774,12 @@
 
             
 
+            
+
              as drawn with the specified <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -5049,10 +5795,14 @@
 
           
 
+          
+
           The x-coordinate of the point to test. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5067,8 +5817,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Pen" />
+
+          
 
           
 
@@ -5083,8 +5837,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -5124,6 +5882,8 @@
 
             
 
+            
+
              parameter is temporarily applied before testing for visibility.</para
           >
         </remarks>
@@ -5137,6 +5897,8 @@
 
             
 
+            
+
              when drawn with the specified <see
              cref="T:System.Drawing.Pen" />
 
@@ -5144,8 +5906,12 @@
 
             
 
+            
+
              and using the specified <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -5164,8 +5930,12 @@
 
             
 
+            
+
              as drawn with the specified <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -5181,10 +5951,14 @@
 
           
 
+          
+
           The x-coordinate of the point to test. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5199,8 +5973,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Pen" />
+
+          
 
           
 
@@ -5215,8 +5993,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -5251,6 +6033,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -5259,6 +6043,8 @@
           <para
             >This method returns true if the specified point is contained within this <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -5274,8 +6060,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -5310,6 +6100,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -5318,6 +6110,8 @@
           <para
             >This method returns true if the specified point is contained within this <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -5333,8 +6127,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -5372,6 +6170,8 @@
 
             
 
+            
+
              parameter is temporarily applied before testing for visibility.</para
           >
         </remarks>
@@ -5380,6 +6180,8 @@
           <para
             >Indicates whether the specified point is contained within this <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -5398,6 +6200,8 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
@@ -5408,8 +6212,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -5424,8 +6232,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -5463,6 +6275,8 @@
 
             
 
+            
+
              parameter is temporarily applied before testing for visibility.</para
           >
         </remarks>
@@ -5471,6 +6285,8 @@
           <para
             >Indicates whether the specified point is contained within this <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -5490,8 +6306,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -5506,8 +6326,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -5543,6 +6367,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -5551,6 +6377,8 @@
           <para
             >This method returns true if the specified point is contained within this <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -5566,10 +6394,14 @@
 
           
 
+          
+
           The x-coordinate of the point to test. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5605,6 +6437,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -5613,6 +6447,8 @@
           <para
             >This method returns true if the specified point is contained within this <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -5628,10 +6464,14 @@
 
           
 
+          
+
           The x-coordinate of the point to test. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5670,6 +6510,8 @@
 
             
 
+            
+
              is temporarily applied before testing for visibility.</para
           >
         </remarks>
@@ -5683,8 +6525,12 @@
 
             
 
+            
+
             , using the specified <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -5703,11 +6549,15 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
         <param name="x">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5722,6 +6572,8 @@
 
           
 
+          
+
           The y-coordinate of the point to test. </param
         >
         <param name="graphics">
@@ -5731,8 +6583,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -5771,6 +6627,8 @@
 
             
 
+            
+
              parameter is temporarily applied before testing for visibility.</para
           >
         </remarks>
@@ -5784,8 +6642,12 @@
 
             
 
+            
+
              in the visible clip region of the specified <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -5804,11 +6666,15 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
         <param name="x">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5823,6 +6689,8 @@
 
           
 
+          
+
           The y-coordinate of the point to test. </param
         >
         <param name="graphics">
@@ -5832,8 +6700,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -5869,8 +6741,12 @@
 
             
 
+            
+
              that encapsulates arrays of points (<paramref
              name="points" />
+
+            
 
             
 
@@ -5883,8 +6759,12 @@
 
             
 
+            
+
             ) for this <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -5931,6 +6811,8 @@
           <para
             >The array of bytes returned by the <see
              cref="P:System.Drawing.Drawing2D.GraphicsPath.PathTypes" />
+
+            
 
             
 
@@ -6009,6 +6891,8 @@
 
             
 
+            
+
              array.</para
           >
         </summary>
@@ -6037,8 +6921,12 @@
 
             
 
+            
+
              or the <see
              cref="P:System.Drawing.Drawing2D.GraphicsPath.PathTypes" />
+
+            
 
             
 
@@ -6072,8 +6960,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Drawing.Drawing2D.GraphicsPath.PathTypes" />
+
+            
 
             
 
@@ -6086,8 +6978,12 @@
 
             
 
+            
+
              to <see
              cref="F:System.Drawing.Drawing2D.FillMode.Alternate" />
+
+            
 
             
 
@@ -6121,8 +7017,12 @@
 
             
 
+            
+
              array of this <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -6155,6 +7055,8 @@
 
             
 
+            
+
              methods to iterate through the markers in the path.</para
           >
           <para>Markers are used to separate groups of subpaths. One or more subpaths can be contained between two markers in the path.</para>
@@ -6164,6 +7066,8 @@
           <para
             >Sets a marker on this <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -6192,6 +7096,8 @@
           <para
             >This method starts a new subpath in the path. Subpaths allow you to separate a path into sections and use the <see
              cref="T:System.Drawing.Drawing2D.GraphicsPathIterator" />
+
+            
 
             
 
@@ -6233,6 +7139,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -6241,6 +7149,8 @@
           <para
             >Applies a transform matrix to this <see
              cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+            
 
             
 
@@ -6256,8 +7166,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -6296,11 +7210,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="destPoints">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6313,8 +7231,12 @@
 
           
 
+          
+
            structures that define a parallelogram to which the rectangle defined by <paramref
            name="srcRect" />
+
+          
 
           
 
@@ -6329,6 +7251,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.RectangleF" />
 
@@ -6336,8 +7260,12 @@
 
           
 
+          
+
            that represents the rectangle that is transformed to the parallelogram defined by <paramref
            name="destPoints" />
+
+          
 
           
 
@@ -6377,11 +7305,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="destPoints">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6394,8 +7326,12 @@
 
           
 
+          
+
            structures that define a parallelogram to which the rectangle defined by <paramref
            name="srcRect" />
+
+          
 
           
 
@@ -6410,6 +7346,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.RectangleF" />
 
@@ -6417,8 +7355,12 @@
 
           
 
+          
+
            that represents the rectangle that is transformed to the parallelogram defined by <paramref
            name="destPoints" />
+
+          
 
           
 
@@ -6433,8 +7375,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -6475,11 +7421,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="destPoints">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6492,8 +7442,12 @@
 
           
 
+          
+
            structures that defines a parallelogram to which the rectangle defined by <paramref
            name="srcRect" />
+
+          
 
           
 
@@ -6508,6 +7462,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.RectangleF" />
 
@@ -6515,8 +7471,12 @@
 
           
 
+          
+
            that represents the rectangle that is transformed to the parallelogram defined by <paramref
            name="destPoints" />
+
+          
 
           
 
@@ -6531,8 +7491,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -6547,8 +7511,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.WarpMode" />
+
+          
 
           
 
@@ -6590,11 +7558,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="destPoints">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6607,8 +7579,12 @@
 
           
 
+          
+
            structures that define a parallelogram to which the rectangle defined by <paramref
            name="srcRect" />
+
+          
 
           
 
@@ -6623,6 +7599,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.RectangleF" />
 
@@ -6630,8 +7608,12 @@
 
           
 
+          
+
            that represents the rectangle that is transformed to the parallelogram defined by <paramref
            name="destPoints" />
+
+          
 
           
 
@@ -6646,8 +7628,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -6662,8 +7648,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.WarpMode" />
+
+          
 
           
 
@@ -6678,8 +7668,12 @@
 
           
 
+          
+
           A value from 0 through 1 that specifies how flat the resulting path is. For more information, see the <see
            cref="M:System.Drawing.Drawing2D.GraphicsPath.Flatten" />
+
+          
 
           
 
@@ -6713,8 +7707,12 @@
 
             
 
+            
+
             , with a distance between the existing lines and the new outline equal to that of the width of the <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -6727,6 +7725,8 @@
 
             
 
+            
+
             . If you want to fill the space between the lines you must use the <see
              cref="M:System.Drawing.Graphics.FillPath(System.Drawing.Brush,System.Drawing.Drawing2D.GraphicsPath)" />
 
@@ -6734,8 +7734,12 @@
 
             
 
+            
+
              rather then the <see
              cref="M:System.Drawing.Graphics.DrawPath(System.Drawing.Pen,System.Drawing.Drawing2D.GraphicsPath)" />
+
+            
 
             
 
@@ -6755,8 +7759,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Pen" />
+
+          
 
           
 
@@ -6794,8 +7802,12 @@
 
             
 
+            
+
             , with a distance between the existing lines and the new outline equal to that of the width of the <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -6808,6 +7820,8 @@
 
             
 
+            
+
             . If you want to fill the space between the lines you must use the <see
              cref="M:System.Drawing.Graphics.FillPath(System.Drawing.Brush,System.Drawing.Drawing2D.GraphicsPath)" />
 
@@ -6815,8 +7829,12 @@
 
             
 
+            
+
              rather then the <see
              cref="M:System.Drawing.Graphics.DrawPath(System.Drawing.Pen,System.Drawing.Drawing2D.GraphicsPath)" />
+
+            
 
             
 
@@ -6835,6 +7853,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -6845,8 +7865,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Pen" />
+
+          
 
           
 
@@ -6861,8 +7885,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -6901,8 +7929,12 @@
 
             
 
+            
+
             , with a distance between the existing lines and the new outline equal to that of the width of the <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -6915,6 +7947,8 @@
 
             
 
+            
+
             . If you want to fill the space between the lines you must use the <see
              cref="M:System.Drawing.Graphics.FillPath(System.Drawing.Brush,System.Drawing.Drawing2D.GraphicsPath)" />
 
@@ -6922,8 +7956,12 @@
 
             
 
+            
+
              rather then the <see
              cref="M:System.Drawing.Graphics.DrawPath(System.Drawing.Pen,System.Drawing.Drawing2D.GraphicsPath)" />
+
+            
 
             
 
@@ -6942,6 +7980,8 @@
 
             
 
+            
+
              with curves that enclose the area that is filled when this path is drawn by the specified pen.</para
           >
         </summary>
@@ -6952,8 +7992,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Pen" />
+
+          
 
           
 
@@ -6968,8 +8012,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -6979,6 +8027,8 @@
         >
         <param name="flatness">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

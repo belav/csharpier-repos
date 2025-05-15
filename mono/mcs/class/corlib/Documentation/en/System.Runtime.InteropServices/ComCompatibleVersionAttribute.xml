@@ -45,11 +45,15 @@
 
         
 
+        
+
          uses an assembly's version number to calculate class identifiers (CLSIDs). All public, COM-visible classes receive new CLSIDs each time you export a new assembly version.</para
       >
       <para
         >You can apply the ComCompatibleVersionAttribute attribute to force all CLSIDs for classes in the current version of an assembly to be the same as CLSIDs for classes in an earlier version of the assembly. As long as the CLSIDs remain the same, a legacy COM application can use the later version of a compatible assembly after you uninstall the original assembly. If you apply the <see
          cref="T:System.Runtime.InteropServices.GuidAttribute" />
+
+        
 
         
 
@@ -98,11 +102,15 @@
 
             
 
+            
+
              class with the major version, minor version, build, and revision numbers of the assembly.</para
           >
         </summary>
         <param name="major">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -117,6 +125,8 @@
 
           
 
+          
+
           The minor version number of the assembly. </param
         >
         <param name="build">
@@ -126,10 +136,14 @@
 
           
 
+          
+
           The build number of the assembly. </param
         >
         <param name="revision">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

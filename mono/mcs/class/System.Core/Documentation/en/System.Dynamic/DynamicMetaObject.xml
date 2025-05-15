@@ -24,8 +24,12 @@
 
         
 
+        
+
          Web site and the MSDN article <see
          cref="http://go.microsoft.com/fwlink/?LinkID=198161">Implementing Dynamic Interfaces</see>
+
+        
 
         
 
@@ -69,11 +73,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="expression">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -86,10 +94,14 @@
 
           
 
+          
+
            during the dynamic binding process.</param
         >
         <param name="restrictions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -129,6 +141,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -139,8 +153,12 @@
 
           
 
+          
+
           The expression representing this <see
            cref="T:System.Dynamic.DynamicMetaObject" />
+
+          
 
           
 
@@ -155,6 +173,8 @@
 
           
 
+          
+
           The set of binding restrictions under which the binding is valid.</param
         >
         <param name="value">
@@ -164,8 +184,12 @@
 
           
 
+          
+
           The runtime value represented by the <see
            cref="T:System.Dynamic.DynamicMetaObject" />
+
+          
 
           
 
@@ -211,6 +235,8 @@
 
             
 
+            
+
              representing the result of the binding.</para
           >
         </returns>
@@ -221,8 +247,12 @@
 
           
 
+          
+
           An instance of the <see
            cref="T:System.Dynamic.BinaryOperationBinder" />
+
+          
 
           
 
@@ -237,8 +267,12 @@
 
           
 
+          
+
           An instance of the <see
            cref="T:System.Dynamic.DynamicMetaObject" />
+
+          
 
           
 
@@ -278,8 +312,12 @@
 
             
 
+            
+
              or <see
              cref="M:Microsoft.VisualBasic.Conversion.CTypeDynamic(System.Object,System.Type)" />
+
+            
 
             
 
@@ -302,6 +340,8 @@
 
             
 
+            
+
              representing the result of the binding.</para
           >
         </returns>
@@ -312,8 +352,12 @@
 
           
 
+          
+
           An instance of the <see
            cref="T:System.Dynamic.ConvertBinder" />
+
+          
 
           
 
@@ -359,6 +403,8 @@
 
             
 
+            
+
              representing the result of the binding.</para
           >
         </returns>
@@ -369,8 +415,12 @@
 
           
 
+          
+
           An instance of the <see
            cref="T:System.Dynamic.CreateInstanceBinder" />
+
+          
 
           
 
@@ -385,8 +435,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Dynamic.DynamicMetaObject" />
+
+          
 
           
 
@@ -432,6 +486,8 @@
 
             
 
+            
+
              representing the result of the binding.</para
           >
         </returns>
@@ -442,8 +498,12 @@
 
           
 
+          
+
           An instance of the <see
            cref="T:System.Dynamic.DeleteIndexBinder" />
+
+          
 
           
 
@@ -458,8 +518,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Dynamic.DynamicMetaObject" />
+
+          
 
           
 
@@ -504,6 +568,8 @@
 
             
 
+            
+
              representing the result of the binding.</para
           >
         </returns>
@@ -514,8 +580,12 @@
 
           
 
+          
+
           An instance of the <see
            cref="T:System.Dynamic.DeleteMemberBinder" />
+
+          
 
           
 
@@ -561,6 +631,8 @@
 
             
 
+            
+
              representing the result of the binding.</para
           >
         </returns>
@@ -571,8 +643,12 @@
 
           
 
+          
+
           An instance of the <see
            cref="T:System.Dynamic.GetIndexBinder" />
+
+          
 
           
 
@@ -587,8 +663,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Dynamic.DynamicMetaObject" />
+
+          
 
           
 
@@ -633,6 +713,8 @@
 
             
 
+            
+
              representing the result of the binding.</para
           >
         </returns>
@@ -643,8 +725,12 @@
 
           
 
+          
+
           An instance of the <see
            cref="T:System.Dynamic.GetMemberBinder" />
+
+          
 
           
 
@@ -690,6 +776,8 @@
 
             
 
+            
+
              representing the result of the binding.</para
           >
         </returns>
@@ -700,8 +788,12 @@
 
           
 
+          
+
           An instance of the <see
            cref="T:System.Dynamic.InvokeBinder" />
+
+          
 
           
 
@@ -716,8 +808,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Dynamic.DynamicMetaObject" />
+
+          
 
           
 
@@ -763,6 +859,8 @@
 
             
 
+            
+
              representing the result of the binding.</para
           >
         </returns>
@@ -773,8 +871,12 @@
 
           
 
+          
+
           An instance of the <see
            cref="T:System.Dynamic.InvokeMemberBinder" />
+
+          
 
           
 
@@ -789,8 +891,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Dynamic.DynamicMetaObject" />
+
+          
 
           
 
@@ -837,6 +943,8 @@
 
             
 
+            
+
              representing the result of the binding.</para
           >
         </returns>
@@ -847,8 +955,12 @@
 
           
 
+          
+
           An instance of the <see
            cref="T:System.Dynamic.SetIndexBinder" />
+
+          
 
           
 
@@ -863,8 +975,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Dynamic.DynamicMetaObject" />
+
+          
 
           
 
@@ -879,8 +995,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Dynamic.DynamicMetaObject" />
+
+          
 
           
 
@@ -926,6 +1046,8 @@
 
             
 
+            
+
              representing the result of the binding.</para
           >
         </returns>
@@ -936,8 +1058,12 @@
 
           
 
+          
+
           An instance of the <see
            cref="T:System.Dynamic.SetMemberBinder" />
+
+          
 
           
 
@@ -952,8 +1078,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Dynamic.DynamicMetaObject" />
+
+          
 
           
 
@@ -998,6 +1128,8 @@
 
             
 
+            
+
              representing the result of the binding.</para
           >
         </returns>
@@ -1008,8 +1140,12 @@
 
           
 
+          
+
           An instance of the <see
            cref="T:System.Dynamic.UnaryOperationBinder" />
+
+          
 
           
 
@@ -1055,8 +1191,12 @@
 
             
 
+            
+
              and is not a remote object from outside the current AppDomain, returns the object's specific meta-object returned by <see
              cref="M:System.Dynamic.IDynamicMetaObjectProvider.GetMetaObject(System.Linq.Expressions.Expression)" />
+
+            
 
             
 
@@ -1072,6 +1212,8 @@
 
           
 
+          
+
           The object to get a meta-object for.</param
         >
         <param name="expression">
@@ -1081,8 +1223,12 @@
 
           
 
+          
+
           The expression representing this <see
            cref="T:System.Dynamic.DynamicMetaObject" />
+
+          
 
           
 
@@ -1120,6 +1266,8 @@
 
             
 
+            
+
             . This field is read only.</para
           >
         </summary>
@@ -1149,6 +1297,8 @@
           <para
             >The expression representing the <see
              cref="T:System.Dynamic.DynamicMetaObject" />
+
+            
 
             
 
@@ -1211,6 +1361,8 @@
 
             
 
+            
+
              has the runtime value.</para
           >
         </summary>
@@ -1238,6 +1390,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1246,6 +1400,8 @@
           <para
             >Gets the limit type of the <see
              cref="T:System.Dynamic.DynamicMetaObject" />
+
+            
 
             
 
@@ -1304,8 +1460,12 @@
 
             
 
+            
+
              of the runtime value or null if the <see
              cref="T:System.Dynamic.DynamicMetaObject" />
+
+            
 
             
 
@@ -1334,6 +1494,8 @@
           <para
             >The runtime value represented by this <see
              cref="T:System.Dynamic.DynamicMetaObject" />
+
+            
 
             
 

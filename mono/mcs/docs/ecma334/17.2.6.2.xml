@@ -11,7 +11,7 @@
     <example
       >[Example: The example <code_example
       >
-<![CDATA[
+        <![CDATA[
 public class List  
 {  
    // Private data structure  
@@ -35,6 +35,8 @@ public class List
 }  
 ]]>
       </code_example>
+
+      
 
       
 

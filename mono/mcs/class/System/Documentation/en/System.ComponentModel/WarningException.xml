@@ -33,6 +33,8 @@
 
         
 
+        
+
          constructor, you can specify the Help file and Help topic to display if the user requests more information.</para
       >
     </remarks>
@@ -61,6 +63,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.WarningException" />
+
+            
 
             
 
@@ -99,11 +103,15 @@
 
             
 
+            
+
              class with the specified message and no Help file.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -143,11 +151,15 @@
 
             
 
+            
+
              class using the specified serialization data and context.</para
           >
         </summary>
         <param name="info">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -160,10 +172,14 @@
 
           
 
+          
+
            to be used for deserialization.</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -203,6 +219,8 @@
 
             
 
+            
+
              class with the specified detailed description and the specified exception. </para
           >
         </summary>
@@ -213,10 +231,14 @@
 
           
 
+          
+
           A detailed description of the error.</param
         >
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -258,6 +280,8 @@
 
             
 
+            
+
              class with the specified message, and with access to the specified Help file.</para
           >
         </summary>
@@ -268,10 +292,14 @@
 
           
 
+          
+
           The message to display to the end user. </param
         >
         <param name="helpUrl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -314,11 +342,15 @@
 
             
 
+            
+
              class with the specified message, and with access to the specified Help file and topic.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -333,10 +365,14 @@
 
           
 
+          
+
           The Help file to display if the user requests help. </param
         >
         <param name="helpTopic">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -379,11 +415,15 @@
 
             
 
+            
+
              with the parameter name and additional exception information.</para
           >
         </summary>
         <param name="info">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -396,10 +436,14 @@
 
           
 
+          
+
            was serializing or deserializing. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

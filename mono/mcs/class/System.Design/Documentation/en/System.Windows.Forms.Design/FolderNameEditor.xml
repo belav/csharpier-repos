@@ -24,6 +24,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -44,6 +46,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.Design.FolderNameEditor" />
+
+            
 
             
 
@@ -84,6 +88,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -98,8 +104,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -114,10 +124,14 @@
 
           
 
+          
+
           A service object provider. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -154,8 +168,12 @@
 
             
 
+            
+
              method is not supported, this will return <see
              cref="F:System.Drawing.Design.UITypeEditorEditStyle.None" />
+
+            
 
             
 
@@ -174,6 +192,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -182,6 +202,8 @@
           <para
             >A <see
              cref="T:System.Drawing.Design.UITypeEditorEditStyle" />
+
+            
 
             
 
@@ -197,8 +219,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 

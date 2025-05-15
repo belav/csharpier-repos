@@ -50,6 +50,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -113,6 +115,8 @@
 
             
 
+            
+
              that specifies the duration of inactivity the channel waits before it times out. </para
           >
         </summary>
@@ -150,6 +154,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -220,6 +226,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -228,6 +236,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -330,6 +340,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -458,6 +470,8 @@
 
             
 
+            
+
              property to prevent replay attacks. An attacker can replay a message after its replay window has expired. This message, however, fails the maxClockSkew test that rejects messages with send-time timestamps up to a specified time later or earlier than the time the message was received. </para
           >
         </remarks>
@@ -466,6 +480,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -508,6 +524,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -558,6 +576,8 @@
 
             
 
+            
+
              that specifies the time interval a previous session key is valid on incoming messages during a key renewal. The default is "00:05:00".</para
           >
         </summary>
@@ -595,6 +615,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 

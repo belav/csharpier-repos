@@ -37,6 +37,8 @@
 
         
 
+        
+
          can be used to represent a reference to a default value.</para
       >
       <para
@@ -47,8 +49,12 @@
 
         
 
+        
+
          property specifies the reference to the value type. The <see
          cref="T:System.CodeDom.CodeDefaultValueExpression" />
+
+        
 
         
 
@@ -63,8 +69,12 @@
 
         
 
+        
+
         . The following code steps are provided in this section to further describe the use of the <see
          cref="T:System.CodeDom.CodeDefaultValueExpression" />
+
+        
 
         
 
@@ -75,6 +85,8 @@
       <para
         >The code in part 1 is part of a larger example provided for the <see
          cref="T:System.CodeDom.CodeTypeParameter" />
+
+        
 
         
 
@@ -144,6 +156,8 @@ dict.Print&lt;System.Decimal, int&gt;();</code>
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -179,6 +193,8 @@ dict.Print&lt;System.Decimal, int&gt;();</code>
 
             
 
+            
+
              class using the specified code type reference.</para
           >
         </summary>
@@ -189,8 +205,12 @@ dict.Print&lt;System.Decimal, int&gt;();</code>
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeTypeReference" />
+
+          
 
           
 

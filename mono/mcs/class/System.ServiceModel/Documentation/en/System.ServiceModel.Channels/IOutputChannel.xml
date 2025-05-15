@@ -28,6 +28,8 @@
 
         
 
+        
+
          interface defines synchronous and asynchronous variants of the <see
          cref="M:System.ServiceModel.Channels.IOutputChannel.Send(System.ServiceModel.Message)" />
 
@@ -35,8 +37,12 @@
 
         
 
+        
+
          operation. It provides a <see
          cref="P:System.ServiceModel.Channels.IOutputChannel.RemoteAddress" />
+
+        
 
         
 
@@ -84,8 +90,12 @@
 
             
 
+            
+
              method does not guarantee the delivery of message to the remote endpoint. If delivery guarantees are required, use the <see
              cref="T:System.ServiceModel.Channels.IOutputSessionChannel" />
+
+            
 
             
 
@@ -101,8 +111,12 @@
 
             
 
+            
+
              is thrown. The maximum message size is set by the <see
              cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" />
+
+            
 
             
 
@@ -125,6 +139,8 @@
 
             
 
+            
+
              that references the asynchronous message transmission. </para
           >
         </returns>
@@ -135,8 +151,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Message" />
+
+          
 
           
 
@@ -151,8 +171,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -162,6 +186,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -205,8 +231,12 @@
 
             
 
+            
+
              method does not guarantee the delivery of message to the remote endpoint. If delivery guarantees are required, use <see
              cref="T:System.ServiceModel.Channels.IOutputSessionChannel" />
+
+            
 
             
 
@@ -222,8 +252,12 @@
 
             
 
+            
+
              is thrown. The maximum message size is set by the <see
              cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" />
+
+            
 
             
 
@@ -246,6 +280,8 @@
 
             
 
+            
+
              that references the asynchronous send operation.</para
           >
         </returns>
@@ -256,8 +292,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Message" />
+
+          
 
           
 
@@ -272,8 +312,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -288,8 +332,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -299,6 +347,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -335,8 +385,12 @@
 
             
 
+            
+
              is thrown. The maximum message size is set by the <see
              cref="P:System.ServiceModel.Channels.TransportBindingElement.MaxReceivedMessageSize" />
+
+            
 
             
 
@@ -356,6 +410,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.IAsyncResult" />
 
@@ -363,8 +419,12 @@
 
           
 
+          
+
            returned by a call to the <see
            cref="Overload:System.ServiceModel.Channels.IOutputChannel.BeginSend" />
+
+          
 
           
 
@@ -402,6 +462,8 @@
 
             
 
+            
+
              serves as both the ultimate destination and the physical address if a <see
              cref="P:System.ServiceModel.Channels.IOutputChannel.Via" />
 
@@ -409,8 +471,12 @@
 
             
 
+            
+
              is not specified. If the <see
              cref="P:System.ServiceModel.Channels.IOutputChannel.Via" />
+
+            
 
             
 
@@ -456,6 +522,8 @@
 
             
 
+            
+
              method does not guarantee the delivery of message to the remote endpoint. An implementation of <see
              cref="T:System.ServiceModel.Channels.IOutputChannel" />
 
@@ -463,8 +531,12 @@
 
             
 
+            
+
              can silently drop messages for a variety of reasons. There may be no more buffer room, for example. If delivery guarantees are required, use <see
              cref="T:System.ServiceModel.Channels.IOutputSessionChannel" />
+
+            
 
             
 
@@ -480,8 +552,12 @@
 
             
 
+            
+
             , you can no longer inspect the message or call <see
              cref="M:System.ServiceModel.Channels.Message.Close" />
+
+            
 
             
 
@@ -501,8 +577,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Message" />
+
+          
 
           
 
@@ -544,6 +624,8 @@
 
             
 
+            
+
              method does not guarantee the delivery of message to the remote endpoint. An implementation of <see
              cref="T:System.ServiceModel.Channels.IOutputChannel" />
 
@@ -551,8 +633,12 @@
 
             
 
+            
+
              can silently drop messages for a variety of reasons. There may be no more buffer room, for example. If delivery guarantees are required, use <see
              cref="T:System.ServiceModel.Channels.IOutputSessionChannel" />
+
+            
 
             
 
@@ -568,8 +654,12 @@
 
             
 
+            
+
             , you can no longer inspect the message or call <see
              cref="M:System.ServiceModel.Channels.Message.Close" />
+
+            
 
             
 
@@ -589,8 +679,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Message" />
+
+          
 
           
 
@@ -605,8 +699,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -638,6 +736,8 @@
 
             
 
+            
+
              serves as both the ultimate destination and the physical address if a <see
              cref="P:System.ServiceModel.Channels.IOutputChannel.Via" />
 
@@ -645,8 +745,12 @@
 
             
 
+            
+
              is not specified. If the <see
              cref="P:System.ServiceModel.Channels.IOutputChannel.Via" />
+
+            
 
             
 

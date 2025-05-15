@@ -30,8 +30,12 @@
 
         
 
+        
+
          class is a base class for deriving your own data source designer for a custom data source control derived from the <see
          cref="T:System.Web.UI.HierarchicalDataSourceControl" />
+
+        
 
         
 
@@ -44,6 +48,8 @@
 
         
 
+        
+
          are <see
          cref="T:System.Web.UI.Design.WebControls.XmlDataSourceDesigner" />
 
@@ -51,8 +57,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.Design.WebControls.SiteMapDataSourceDesigner" />
+
+        
 
         
 
@@ -66,6 +76,8 @@
       <para
         >Provides design-time support in a visual designer for the <see
          cref="T:System.Web.UI.HierarchicalDataSourceControl" />
+
+        
 
         
 
@@ -90,6 +102,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.HierarchicalDataSourceDesigner" />
+
+            
 
             
 
@@ -142,6 +156,8 @@
 
             
 
+            
+
              command in the Smart-Tag menu in design view.</para
           >
         </remarks>
@@ -150,6 +166,8 @@
           <para
             >Gets a value that indicates whether the <see
              cref="M:System.Web.UI.Design.IHierarchicalDataSourceDesigner.Configure" />
+
+            
 
             
 
@@ -181,6 +199,8 @@
 
             
 
+            
+
              command in the Smart-Tag menu in design view.</para
           >
         </remarks>
@@ -189,6 +209,8 @@
           <para
             >Gets a value that indicates whether the <see
              cref="M:System.Web.UI.Design.IHierarchicalDataSourceDesigner.RefreshSchema(System.Boolean)" />
+
+            
 
             
 
@@ -220,8 +242,12 @@
 
             
 
+            
+
              method is not supported in the <see
              cref="T:System.Web.UI.Design.HierarchicalDataSourceDesigner" />
+
+            
 
             
 
@@ -303,11 +329,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="viewPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -343,6 +373,8 @@
 
             
 
+            
+
              method notifies the designer of each control bound to the associated data source to refresh its control in the design host. This method can be suppressed with the <see
              cref="M:System.Web.UI.Design.HierarchicalDataSourceDesigner.SuppressDataSourceEvents" />
 
@@ -350,8 +382,12 @@
 
             
 
+            
+
              method, or by calling the <see
              cref="M:System.Web.UI.Design.HierarchicalDataSourceDesigner.RefreshSchema(System.Boolean)" />
+
+            
 
             
 
@@ -370,8 +406,12 @@
 
             
 
+            
+
              event when the properties of the data source have changed and the <see
              cref="P:System.Web.UI.Design.HierarchicalDataSourceDesigner.SuppressingDataSourceEvents" />
+
+            
 
             
 
@@ -387,8 +427,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -424,8 +468,12 @@
 
             
 
+            
+
              method, or by calling the <see
              cref="M:System.Web.UI.Design.HierarchicalDataSourceDesigner.RefreshSchema(System.Boolean)" />
+
+            
 
             
 
@@ -444,8 +492,12 @@
 
             
 
+            
+
              event when the schema of the data source has changed and the <see
              cref="P:System.Web.UI.Design.HierarchicalDataSourceDesigner.SuppressingDataSourceEvents" />
+
+            
 
             
 
@@ -461,8 +513,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -498,6 +554,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -507,6 +565,8 @@
         </summary>
         <param name="preferSilent">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -537,8 +597,12 @@
 
             
 
+            
+
              property to false, or by calling the <see
              cref="M:System.Web.UI.Design.HierarchicalDataSourceDesigner.RefreshSchema(System.Boolean)" />
+
+            
 
             
 
@@ -587,6 +651,8 @@
           <para
             >Postpones all data source events until after the <see
              cref="M:System.Web.UI.Design.HierarchicalDataSourceDesigner.ResumeDataSourceEvents" />
+
+            
 
             
 

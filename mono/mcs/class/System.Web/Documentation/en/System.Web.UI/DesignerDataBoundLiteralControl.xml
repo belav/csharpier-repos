@@ -38,6 +38,8 @@
 
         
 
+        
+
          class allows the handling of &lt;%# … %&gt; data-binding expressions during design time.</para
       >
     </remarks>
@@ -46,6 +48,8 @@
       <para
         >Represents the design-time version of the <see
          cref="T:System.Web.UI.DataBoundLiteralControl" />
+
+        
 
         
 
@@ -68,6 +72,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.DesignerDataBoundLiteralControl" />
+
+            
 
             
 
@@ -194,6 +200,8 @@
 
             
 
+            
+
              property is used by the designer to specify or determine the text that appears in the &lt;%# … %&gt; data-binding expression.</para
           >
         </remarks>
@@ -202,6 +210,8 @@
           <para
             >Gets or sets the text content of the <see
              cref="T:System.Web.UI.DataBoundLiteralControl" />
+
+            
 
             
 

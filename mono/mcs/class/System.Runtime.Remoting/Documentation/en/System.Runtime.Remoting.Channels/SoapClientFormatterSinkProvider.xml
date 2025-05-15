@@ -35,8 +35,12 @@
 
         
 
+        
+
          creates client formatter sinks that use the <see
          cref="T:System.Runtime.Serialization.Formatters.Soap.SoapFormatter" />
+
+        
 
         
 
@@ -52,8 +56,12 @@
 
         
 
+        
+
          is forwarded to all sinks in the channel sink chain through the <see
          cref="M:System.Runtime.Remoting.Channels.IClientChannelSink.ProcessMessage(System.Runtime.Remoting.Messaging.IMessage,System.Runtime.Remoting.Channels.ITransportHeaders,System.IO.Stream,System.Runtime.Remoting.Channels.ITransportHeaders@,System.IO.Stream@)" />
+
+        
 
         
 
@@ -66,6 +74,8 @@
 
         
 
+        
+
          calls. At this stage the message has already been serialized and is provided as information only. Sinks that need to create or modify the message must be placed in the sink chain before the formatter. This can be achieved by implementing both the <see
          cref="T:System.Runtime.Remoting.Messaging.IMessageSink" />
 
@@ -73,8 +83,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Runtime.Remoting.Channels.IClientChannelSink" />
+
+        
 
         
 
@@ -90,8 +104,12 @@
 
         
 
+        
+
         . In a configuration file all values are represented by strings, but when building a property <see
          cref="T:System.Collections.IDictionary" />
+
+        
 
         
 
@@ -129,6 +147,8 @@
 
           
 
+          
+
           .</para
         >
       </block>
@@ -151,6 +171,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Remoting.Channels.SoapClientFormatterSinkProvider" />
+
+            
 
             
 
@@ -188,11 +210,15 @@
 
             
 
+            
+
              class with the given properties and provider data.</para
           >
         </summary>
         <param name="properties">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -205,8 +231,12 @@
 
           
 
+          
+
            of configuration properties to use with the new instance of <see
            cref="T:System.Runtime.Remoting.Channels.SoapClientFormatterSinkProvider" />
+
+          
 
           
 
@@ -221,6 +251,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.ICollection" />
 
@@ -228,8 +260,12 @@
 
           
 
+          
+
            of provider data to use with the new instance of <see
            cref="T:System.Runtime.Remoting.Channels.SoapClientFormatterSinkProvider" />
+
+          
 
           
 
@@ -268,8 +304,12 @@
 
             
 
+            
+
              method is called, it creates its own channel sink, forwards the <see
              cref="M:System.Runtime.Remoting.Channels.IClientChannelSinkProvider.CreateSink(System.Runtime.Remoting.Channels.IChannelSender,System.String,System.Object)" />
+
+            
 
             
 
@@ -293,6 +333,8 @@
 
           
 
+          
+
           Channel for which this sink chain is being constructed. </param
         >
         <param name="url">
@@ -302,10 +344,14 @@
 
           
 
+          
+
           URL of object to connect to or the channel URI for the target object. </param
         >
         <param name="remoteChannelData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -337,6 +383,8 @@
           <para
             >Gets or sets the next <see
              cref="T:System.Runtime.Remoting.Channels.IClientChannelSinkProvider" />
+
+            
 
             
 

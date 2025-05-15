@@ -44,6 +44,8 @@
 
         
 
+        
+
          class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see
          cref="T:System.Runtime.Remoting.Messaging.MethodCallMessageWrapper" />
 
@@ -51,8 +53,12 @@
 
         
 
+        
+
          class directly; instead, use the <see
          cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
+
+        
 
         
 
@@ -67,8 +73,12 @@
 
         
 
+        
+
          wraps remoting data for passing between message sinks. A remoting client sends a <see
          cref="T:System.Runtime.Remoting.Messaging.MethodCallMessageWrapper" />
+
+        
 
         
 
@@ -82,6 +92,8 @@
       <para
         >Implements the <see
          cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
+
+        
 
         
 
@@ -122,6 +134,8 @@
 
             
 
+            
+
              class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see
              cref="T:System.Runtime.Remoting.Messaging.MethodCallMessageWrapper" />
 
@@ -129,8 +143,12 @@
 
             
 
+            
+
              class directly; instead, use the <see
              cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
+
+            
 
             
 
@@ -149,8 +167,12 @@
 
             
 
+            
+
              class by wrapping an <see
              cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
+
+            
 
             
 
@@ -161,6 +183,8 @@
         </summary>
         <param name="msg">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -256,6 +280,8 @@
 
           
 
+          
+
           The index of the requested argument.</param
         >
       </Docs>
@@ -293,6 +319,8 @@
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -340,6 +368,8 @@
 
           
 
+          
+
           The index of the requested argument.</param
         >
       </Docs>
@@ -377,6 +407,8 @@
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -492,6 +524,8 @@
 
             
 
+            
+
              for the current method call. </para
           >
         </summary>
@@ -526,6 +560,8 @@
           <para
             >Gets the <see
              cref="T:System.Reflection.MethodBase" />
+
+            
 
             
 
@@ -613,6 +649,8 @@
           <para
             >An <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 

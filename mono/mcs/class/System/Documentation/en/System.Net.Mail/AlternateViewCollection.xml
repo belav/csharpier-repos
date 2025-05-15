@@ -36,6 +36,8 @@
 
         
 
+        
+
          class to specify copies of an e-mail message in different formats. For example, if you send a message in HTML, you might also want provide a plain text version in case some of the recipients use e-mail readers that cannot display HTML content.</para
       >
     </remarks>
@@ -44,6 +46,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.Net.Mail.AlternateView" />
+
+        
 
         
 
@@ -101,8 +105,12 @@
 
             
 
+            
+
              on all views in this collection. This method is called by the <see
              cref="M:System.Net.Mail.MailMessage.Dispose" />
+
+            
 
             
 
@@ -116,6 +124,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.Net.Mail.AlternateViewCollection" />
+
+            
 
             
 
@@ -159,6 +169,8 @@
 
             
 
+            
+
              object into this collection, at the specified index location.</para
           >
         </summary>
@@ -169,8 +181,12 @@
 
           
 
+          
+
           The specified location at which to insert the <see
            cref="T:System.Net.Mail.AlternateView" />
+
+          
 
           
 
@@ -185,8 +201,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.Mail.AlternateView" />
+
+          
 
           
 
@@ -252,8 +272,12 @@
 
             
 
+            
+
              element at the specified location in the collection with the new <see
              cref="T:System.Net.Mail.AlternateView" />
+
+            
 
             
 
@@ -269,6 +293,8 @@
 
           
 
+          
+
           The index of the element in this collection to be replaced.</param
         >
         <param name="item">
@@ -278,8 +304,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.Mail.AlternateView" />
+
+          
 
           
 

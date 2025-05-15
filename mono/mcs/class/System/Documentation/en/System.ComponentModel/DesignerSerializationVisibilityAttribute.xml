@@ -42,8 +42,12 @@
 
         
 
+        
+
         , you can indicate whether the value for a property is <see
          cref="F:System.ComponentModel.DesignerSerializationVisibilityAttribute.Visible" />
+
+        
 
         
 
@@ -56,8 +60,12 @@
 
         
 
+        
+
         , and should not be persisted in initialization code, or consists of <see
          cref="F:System.ComponentModel.DesignerSerializationVisibilityAttribute.Content" />
+
+        
 
         
 
@@ -73,8 +81,12 @@
 
         
 
+        
+
          will be treated as though they have a <see
          cref="T:System.ComponentModel.DesignerSerializationVisibilityAttribute" />
+
+        
 
         
 
@@ -87,8 +99,12 @@
 
         
 
+        
+
         . The values of a property marked as <see
          cref="F:System.ComponentModel.DesignerSerializationVisibility.Visible" />
+
+        
 
         
 
@@ -101,6 +117,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -108,6 +126,8 @@
          type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
+
+        
 
         
 
@@ -154,8 +174,12 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.ComponentModel.DesignerSerializationVisibility" />
+
+            
 
             
 
@@ -196,8 +220,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.ComponentModel.DesignerSerializationVisibilityAttribute.Content" />
+
+            
 
             
 
@@ -242,8 +270,12 @@
 
             
 
+            
+
             . Therefore, when you want to check whether the attribute is set to this value in your code, you must specify the attribute as <see
              cref="F:System.ComponentModel.DesignerSerializationVisibilityAttribute.Visible" />
+
+            
 
             
 
@@ -257,6 +289,8 @@
           <para
             >Specifies the default value, which is <see
              cref="F:System.ComponentModel.DesignerSerializationVisibilityAttribute.Visible" />
+
+            
 
             
 
@@ -301,11 +335,15 @@
 
             
 
+            
+
              is equal to this instance; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -373,8 +411,12 @@
 
             
 
+            
+
              property is set to the constant member <see
              cref="F:System.ComponentModel.DesignerSerializationVisibilityAttribute.Hidden" />
+
+            
 
             
 
@@ -470,6 +512,8 @@
           <para
             >When you mark a property with DesignerSerializationVisibilityAttribute.Visible, the value of its Visibility property is set to the constant member <see
              cref="F:System.ComponentModel.DesignerSerializationVisibilityAttribute.Visible" />
+
+            
 
             
 

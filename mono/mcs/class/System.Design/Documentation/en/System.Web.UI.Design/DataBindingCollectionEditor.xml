@@ -27,6 +27,8 @@
 
         
 
+        
+
          class is obsolete. At design time, editing of data bindings is accomplished from a <see
          cref="T:System.ComponentModel.Design.DesignerActionList" />
 
@@ -34,8 +36,12 @@
 
         
 
+        
+
          instead of the property grid. For more information, see <see
          cref="P:System.Web.UI.Design.ControlDesigner.ActionLists" />
+
+        
 
         
 
@@ -61,6 +67,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.DataBindingCollectionEditor" />
+
+            
 
             
 
@@ -106,8 +114,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -122,8 +134,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IServiceProvider" />
+
+          
 
           
 
@@ -133,6 +149,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -173,6 +191,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -181,6 +201,8 @@
           <para
             >A <see
              cref="T:System.Drawing.Design.UITypeEditorEditStyle" />
+
+            
 
             
 
@@ -196,8 +218,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 

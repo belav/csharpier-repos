@@ -26,8 +26,12 @@
 
         
 
+        
+
          class. The <see
          cref="M:System.Text.Encoding.GetEncodings" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          method to get an instance of the <see
          cref="T:System.Text.Encoding" />
+
+        
 
         
 
@@ -83,6 +91,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -116,6 +126,8 @@
 
             
 
+            
+
              property. Your applications should use <see
              cref="P:System.Text.EncodingInfo.Name" />
 
@@ -123,8 +135,12 @@
 
             
 
+            
+
              for a name to pass to <see
              cref="M:System.Text.Encoding.GetEncoding(System.String)" />
+
+            
 
             
 
@@ -168,8 +184,12 @@
 
             
 
+            
+
              objects are equal if their <see
              cref="P:System.Text.EncodingInfo.CodePage" />
+
+            
 
             
 
@@ -188,6 +208,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -201,6 +223,8 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Text.EncodingInfo" />
 
@@ -208,8 +232,12 @@
 
             
 
+            
+
              object and is equal to the current <see
              cref="T:System.Text.EncodingInfo" />
+
+            
 
             
 
@@ -225,8 +253,12 @@
 
           
 
+          
+
           An object to compare to the current <see
            cref="T:System.Text.EncodingInfo" />
+
+          
 
           
 
@@ -264,8 +296,12 @@
 
             
 
+            
+
              object that corresponds to the current <see
              cref="T:System.Text.EncodingInfo" />
+
+            
 
             
 
@@ -284,8 +320,12 @@
 
             
 
+            
+
              object that corresponds to the current <see
              cref="T:System.Text.EncodingInfo" />
+
+            
 
             
 
@@ -323,6 +363,8 @@
 
             
 
+            
+
              method is not suitable for distinguishing one <see
              cref="T:System.Text.EncodingInfo" />
 
@@ -330,8 +372,12 @@
 
             
 
+            
+
              object from another. If your application needs a unique hash code, it should override the <see
              cref="M:System.Text.EncodingInfo.GetHashCode" />
+
+            
 
             
 
@@ -345,6 +391,8 @@
           <para
             >Returns the hash code for the current <see
              cref="T:System.Text.EncodingInfo" />
+
+            
 
             
 
@@ -383,6 +431,8 @@
 
             
 
+            
+
             . This name is the same as the name represented by the <see
              cref="P:System.Text.Encoding.WebName" />
 
@@ -390,8 +440,12 @@
 
             
 
+            
+
              property. When its value is the name of a standard, the actual implementation of the encoding may not conform in full to that standard. Your applications should use <see
              cref="P:System.Text.EncodingInfo.DisplayName" />
+
+            
 
             
 
@@ -407,6 +461,8 @@
 
             
 
+            
+
              method gets a complete list of supported encodings, uniquely distinguished by code page. If your application retrieves encodings using the <see
              cref="P:System.Text.EncodingInfo.Name" />
 
@@ -414,8 +470,12 @@
 
             
 
+            
+
              property, note that some duplicate encodings are retrieved. For more about handling these duplicates, see the description of <see
              cref="M:System.Text.Encoding.GetEncodings" />
+
+            
 
             
 

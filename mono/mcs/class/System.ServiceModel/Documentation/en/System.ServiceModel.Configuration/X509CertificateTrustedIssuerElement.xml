@@ -50,6 +50,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -80,6 +82,8 @@
           <para
             >The type contained in this property must satisfy the requirements of the specified <see
              cref="P:System.ServiceModel.Configuration.X509CertificateTrustedIssuerElement.X509FindType" />
+
+            
 
             
 
@@ -204,6 +208,8 @@
           <para
             >The type contained in <see
              cref="P:System.ServiceModel.Configuration.X509CertificateTrustedIssuerElement.FindValue" />
+
+            
 
             
 

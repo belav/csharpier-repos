@@ -36,8 +36,12 @@
 
         
 
+        
+
          defines the schema of a <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -50,8 +54,12 @@
 
         
 
+        
+
          can contain. You can access the <see
          cref="T:System.Data.DataColumnCollection" />
+
+        
 
         
 
@@ -64,8 +72,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -81,8 +93,12 @@
 
         
 
+        
+
          uses the <see
          cref="M:System.Data.DataColumnCollection.Add(System.Data.DataColumn)" />
+
+        
 
         
 
@@ -95,8 +111,12 @@
 
         
 
+        
+
          methods to insert and delete <see
          cref="T:System.Data.DataColumn" />
+
+        
 
         
 
@@ -109,6 +129,8 @@
 
         
 
+        
+
          property to determine how many <see
          cref="T:System.Data.DataColumn" />
 
@@ -116,8 +138,12 @@
 
         
 
+        
+
          objects are in the collection. Use the <see
          cref="M:System.Data.DataColumnCollection.Contains(System.String)" />
+
+        
 
         
 
@@ -136,8 +162,12 @@
 
         
 
+        
+
          objects for a <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -167,6 +197,8 @@
 
             
 
+            
+
              event occurs.</para
           >
         </remarks>
@@ -180,8 +212,12 @@
 
             
 
+            
+
              object to the <see
              cref="T:System.Data.DataColumnCollection" />
+
+            
 
             
 
@@ -195,6 +231,8 @@
           <para
             >The newly created <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -229,6 +267,8 @@
 
             
 
+            
+
              event occurs.</para
           >
         </remarks>
@@ -242,8 +282,12 @@
 
             
 
+            
+
              object to the <see
              cref="T:System.Data.DataColumnCollection" />
+
+            
 
             
 
@@ -259,8 +303,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -297,6 +345,8 @@
 
             
 
+            
+
              for the new column is string.</para
           >
           <para>If null or an empty string ("") is passed in for the name, a default name ("Column1", "Column2", and so on) is given to the column.</para>
@@ -308,11 +358,15 @@
 
             
 
+            
+
              method to determine whether a column with the proposed name already exists in the collection.</para
           >
           <para
             >If the collection is successfully changed by adding or removing columns, the <see
              cref="E:System.Data.DataColumnCollection.CollectionChanged" />
+
+            
 
             
 
@@ -331,8 +385,12 @@
 
             
 
+            
+
              object that has the specified name to the <see
              cref="T:System.Data.DataColumnCollection" />
+
+            
 
             
 
@@ -351,11 +409,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="columnName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -394,11 +456,15 @@
 
             
 
+            
+
              method to determine whether a column with the proposed name already exists in the collection.</para
           >
           <para
             >If the collection is successfully changed by adding or removing columns, the <see
              cref="E:System.Data.DataColumnCollection.CollectionChanged" />
+
+            
 
             
 
@@ -417,8 +483,12 @@
 
             
 
+            
+
              object that has the specified name and type to the <see
              cref="T:System.Data.DataColumnCollection" />
+
+            
 
             
 
@@ -437,6 +507,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -447,8 +519,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Data.DataColumn.ColumnName" />
+
+          
 
           
 
@@ -463,8 +539,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Data.DataColumn.DataType" />
+
+          
 
           
 
@@ -504,11 +584,15 @@
 
             
 
+            
+
              method to determine whether a column with the proposed name already exists in the collection.</para
           >
           <para
             >If the collection is successfully changed by adding or removing columns, the <see
              cref="E:System.Data.DataColumnCollection.CollectionChanged" />
+
+            
 
             
 
@@ -527,8 +611,12 @@
 
             
 
+            
+
              object that has the specified name, type, and expression to the <see
              cref="T:System.Data.DataColumnCollection" />
+
+            
 
             
 
@@ -547,11 +635,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="columnName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -566,8 +658,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Data.DataColumn.DataType" />
+
+          
 
           
 
@@ -582,8 +678,12 @@
 
           
 
+          
+
           The expression to assign to the <see
            cref="P:System.Data.DataColumn.Expression" />
+
+          
 
           
 
@@ -621,6 +721,8 @@
 
             
 
+            
+
              array to the end of the collection.</para
           >
         </summary>
@@ -631,8 +733,12 @@
 
           
 
+          
+
           The array of <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -669,6 +775,8 @@
 
             
 
+            
+
              method performs several checks before returning a true or false result. This includes the following: whether the column exists, belongs to the table, or is involved in a constraint or relation.</para
           >
           <para
@@ -679,8 +787,12 @@
 
             
 
+            
+
              method before you try to remove any column from a collection. You can also use the <see
              cref="M:System.Data.DataColumnCollection.Contains(System.String)" />
+
+            
 
             
 
@@ -701,6 +813,8 @@
               <para
                 >The <paramref
                  name="column" />
+
+                
 
                 
 
@@ -727,8 +841,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -755,6 +873,8 @@
           <para
             >If the collection is successfully changed by adding or removing columns, the <see
              cref="E:System.Data.DataColumnCollection.CollectionChanged" />
+
+            
 
             
 
@@ -794,8 +914,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Data.DataColumnCollection.CanRemove(System.Data.DataColumn)" />
+
+            
 
             
 
@@ -834,6 +958,8 @@
 
             
 
+            
+
              method to confirm the existence of a column before you perform additional operations on the column. The method returns false when two or more columns have the same name but different namespaces. The call does not succeed if there is any ambiguity when matching a column name to exactly one column.</para
           >
         </remarks>
@@ -852,8 +978,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Data.DataColumn.ColumnName" />
+
+          
 
           
 
@@ -896,8 +1026,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -907,6 +1041,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -936,6 +1072,8 @@
 
             
 
+            
+
              method is not case-sensitive.</para
           >
         </remarks>
@@ -953,11 +1091,15 @@
 
             
 
+            
+
              if it is found; otherwise, -1.</para
           >
         </returns>
         <param name="column">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -992,6 +1134,8 @@
         </returns>
         <param name="columnName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1097,6 +1241,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1107,8 +1253,12 @@
 
           
 
+          
+
           A <see
            cref="System.ComponentModel.CollectionChangeEventArgs" />
+
+          
 
           
 
@@ -1148,6 +1298,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1158,8 +1310,12 @@
 
           
 
+          
+
           A <see
            cref="System.ComponentModel.CollectionChangeEventArgs" />
+
+          
 
           
 
@@ -1189,6 +1345,8 @@
 
             
 
+            
+
              event occurs.</para
           >
         </remarks>
@@ -1197,6 +1355,8 @@
           <para
             >Removes the specified <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -1212,8 +1372,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -1247,6 +1411,8 @@
 
             
 
+            
+
              event occurs.</para
           >
         </remarks>
@@ -1260,11 +1426,15 @@
 
             
 
+            
+
              object that has the specified name from the collection.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1298,6 +1468,8 @@
 
             
 
+            
+
              event occurs.</para
           >
         </remarks>
@@ -1307,6 +1479,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

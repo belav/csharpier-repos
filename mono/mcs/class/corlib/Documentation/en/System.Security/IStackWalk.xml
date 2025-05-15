@@ -55,8 +55,12 @@
 
             
 
+            
+
              stops the permission check on callers higher in the call stack. Therefore, even if these callers do not have the requisite permissions, they can still access resources. An assertion is effective only if the code that calls <see
              cref="M:System.Security.IStackWalk.Assert" />
+
+            
 
             
 
@@ -72,8 +76,12 @@
 
             
 
+            
+
              is effective until the calling code returns to its caller or until a subsequent call to <see
              cref="M:System.Security.IStackWalk.Assert" />
+
+            
 
             
 
@@ -86,6 +94,8 @@
 
             
 
+            
+
              or <see
              cref="M:System.Security.CodeAccessPermission.RevertAll" />
 
@@ -93,8 +103,12 @@
 
             
 
+            
+
              removes a pending <see
              cref="M:System.Security.IStackWalk.Assert" />
+
+            
 
             
 
@@ -109,8 +123,12 @@
 
             
 
+            
+
              is ignored for a permission not granted because a demand for that permission will not succeed. However, if code lower on the call stack calls <see
              cref="M:System.Security.IStackWalk.Demand" />
+
+            
 
             
 
@@ -123,8 +141,12 @@
 
             
 
+            
+
              is thrown when the stack walk reaches the code that tried to call <see
              cref="M:System.Security.IStackWalk.Assert" />
+
+            
 
             
 
@@ -137,8 +159,12 @@
 
             
 
+            
+
              has not been granted the permission, even though it tried to <see
              cref="M:System.Security.IStackWalk.Assert" />
+
+            
 
             
 
@@ -150,6 +176,8 @@
             <para
               >Because calling <see
                cref="M:System.Security.IStackWalk.Assert" />
+
+              
 
               
 
@@ -192,8 +220,12 @@
 
             
 
+            
+
              for the necessary <see
              cref="T:System.Security.Permissions.FileIOPermission" />
+
+            
 
             
 
@@ -209,8 +241,12 @@
 
             
 
+            
+
              succeeds only if no <see
              cref="T:System.Security.SecurityException" />
+
+            
 
             
 
@@ -252,8 +288,12 @@
 
             
 
+            
+
              can limit the liability of the programmer or help prevent accidental security vulnerabilities because it helps prevent the method that calls <see
              cref="M:System.Security.IStackWalk.Deny" />
+
+            
 
             
 
@@ -266,6 +306,8 @@
 
             
 
+            
+
              on a permission, and if a <see
              cref="M:System.Security.IStackWalk.Demand" />
 
@@ -273,8 +315,12 @@
 
             
 
+            
+
              for that permission is invoked by a caller lower in the call stack, that security check will fail when it reaches the <see
              cref="M:System.Security.IStackWalk.Deny" />
+
+            
 
             
 
@@ -289,6 +335,8 @@
 
             
 
+            
+
              is ignored for a permission not granted because a demand for that permission will not succeed.</para
           >
         </remarks>
@@ -297,6 +345,8 @@
           <para
             >Causes every <see
              cref="M:System.Security.IStackWalk.Demand" />
+
+            
 
             
 
@@ -333,8 +383,12 @@
 
             
 
+            
+
              is similar to <see
              cref="M:System.Security.IStackWalk.Deny" />
+
+            
 
             
 
@@ -347,8 +401,12 @@
 
             
 
+            
+
              specifies permissions that will cause the stack walk to fail, but <see
              cref="M:System.Security.IStackWalk.PermitOnly" />
+
+            
 
             
 
@@ -363,8 +421,12 @@
 
             
 
+            
+
              is ignored for a permission not granted because a demand for that permission will not succeed. However, if code lower on the call stack later calls <see
              cref="M:System.Security.IStackWalk.Demand" />
+
+            
 
             
 
@@ -377,8 +439,12 @@
 
             
 
+            
+
              is thrown when the stack walk reaches the code that tried to call <see
              cref="M:System.Security.IStackWalk.PermitOnly" />
+
+            
 
             
 
@@ -391,8 +457,12 @@
 
             
 
+            
+
              has not been granted the permission, even though it called <see
              cref="M:System.Security.IStackWalk.PermitOnly" />
+
+            
 
             
 
@@ -406,6 +476,8 @@
           <para
             >Causes every <see
              cref="M:System.Security.IStackWalk.Demand" />
+
+            
 
             
 

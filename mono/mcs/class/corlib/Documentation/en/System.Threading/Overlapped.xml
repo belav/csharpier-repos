@@ -33,8 +33,12 @@
 
         
 
+        
+
          and <see
          cref="Overload:System.Threading.Overlapped.UnsafePack" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          object to a <see
          cref="T:System.Threading.NativeOverlapped" />
+
+        
 
         
 
@@ -61,6 +69,8 @@
 
         
 
+        
+
          method transfers information from a <see
          cref="T:System.Threading.NativeOverlapped" />
 
@@ -68,8 +78,12 @@
 
         
 
+        
+
          structure to an instance of the <see
          cref="T:System.Threading.Overlapped" />
+
+        
 
         
 
@@ -85,8 +99,12 @@
 
         
 
+        
+
          object affect its associated <see
          cref="T:System.Threading.NativeOverlapped" />
+
+        
 
         
 
@@ -105,6 +123,8 @@
 
         
 
+        
+
          structure, including methods to transfer information from an <see
          cref="T:System.Threading.Overlapped" />
 
@@ -112,8 +132,12 @@
 
         
 
+        
+
          instance to a <see
          cref="T:System.Threading.NativeOverlapped" />
+
+        
 
         
 
@@ -145,6 +169,8 @@
           <para
             >Initializes a new, empty instance of the <see
              cref="T:System.Threading.Overlapped" />
+
+            
 
             
 
@@ -193,8 +219,12 @@
 
             
 
+            
+
              property to get the handle of any managed synchronization event that derives from the <see
              cref="T:System.Threading.WaitHandle" />
+
+            
 
             
 
@@ -210,8 +240,12 @@
 
             
 
+            
+
              provides status information on the I/O operation. Pass it to the constructor in the <paramref
              name="ar" />
+
+            
 
             
 
@@ -224,8 +258,12 @@
 
             
 
+            
+
              property. If a callback method is specified for the <see
              cref="Overload:System.Threading.Overlapped.Pack" />
+
+            
 
             
 
@@ -238,6 +276,8 @@
 
             
 
+            
+
              method, the callback can retrieve your <see
              cref="T:System.IAsyncResult" />
 
@@ -245,8 +285,12 @@
 
             
 
+            
+
              by unpacking the <see
              cref="T:System.Threading.NativeOverlapped" />
+
+            
 
             
 
@@ -265,11 +309,15 @@
 
             
 
+            
+
              class with the specified file position, the 32-bit integer handle to an event that is signaled when the I/O operation is complete, and an interface through which to return the results of the operation.</para
           >
         </summary>
         <param name="offsetLo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -284,10 +332,14 @@
 
           
 
+          
+
           The high word of the file position at which to start the transfer. </param
         >
         <param name="hEvent">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -302,8 +354,12 @@
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.IAsyncResult" />
+
+          
 
           
 
@@ -345,8 +401,12 @@
 
             
 
+            
+
              class, use the <see
              cref="P:System.Threading.WaitHandle.SafeWaitHandle" />
+
+            
 
             
 
@@ -359,8 +419,12 @@
 
             
 
+            
+
              object, and then call the <see
              cref="M:System.Runtime.InteropServices.SafeHandle.DangerousGetHandle" />
+
+            
 
             
 
@@ -376,8 +440,12 @@
 
             
 
+            
+
              provides status information on the I/O operation. Pass it to the constructor in the <paramref
              name="ar" />
+
+            
 
             
 
@@ -390,8 +458,12 @@
 
             
 
+            
+
              property. If a callback method is specified for the <see
              cref="Overload:System.Threading.Overlapped.Pack" />
+
+            
 
             
 
@@ -404,6 +476,8 @@
 
             
 
+            
+
              method, the callback can retrieve your <see
              cref="T:System.IAsyncResult" />
 
@@ -411,8 +485,12 @@
 
             
 
+            
+
              by unpacking the <see
              cref="T:System.Threading.NativeOverlapped" />
+
+            
 
             
 
@@ -431,11 +509,15 @@
 
             
 
+            
+
              class with the specified file position, the handle to an event that is signaled when the I/O operation is complete, and an interface through which to return the results of the operation.</para
           >
         </summary>
         <param name="offsetLo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -450,10 +532,14 @@
 
           
 
+          
+
           The high word of the file position at which to start the transfer. </param
         >
         <param name="hEvent">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -468,8 +554,12 @@
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.IAsyncResult" />
+
+          
 
           
 
@@ -532,6 +622,8 @@
 
             
 
+            
+
              property instead.</para
           >
           <para
@@ -542,8 +634,12 @@
 
             
 
+            
+
              property to get the handle of any managed synchronization event that derives from the <see
              cref="T:System.Threading.WaitHandle" />
+
+            
 
             
 
@@ -587,8 +683,12 @@
 
             
 
+            
+
              class, use the <see
              cref="P:System.Threading.WaitHandle.SafeWaitHandle" />
+
+            
 
             
 
@@ -601,8 +701,12 @@
 
             
 
+            
+
              object, and then call the <see
              cref="M:System.Runtime.InteropServices.SafeHandle.DangerousGetHandle" />
+
+            
 
             
 
@@ -654,8 +758,12 @@
 
             
 
+            
+
              method exactly once on every <see
              cref="T:System.Threading.NativeOverlapped" />
+
+            
 
             
 
@@ -668,6 +776,8 @@
 
             
 
+            
+
              method. If you don't call the <see
              cref="M:System.Threading.Overlapped.Free(System.Threading.NativeOverlapped*)" />
 
@@ -675,8 +785,12 @@
 
             
 
+            
+
              method, you will leak memory. If you call the <see
              cref="M:System.Threading.Overlapped.Free(System.Threading.NativeOverlapped*)" />
+
+            
 
             
 
@@ -695,6 +809,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -705,8 +821,12 @@
 
           
 
+          
+
           A pointer to the <see
            cref="T:System.Threading.NativeOverlapped" />
+
+          
 
           
 
@@ -798,8 +918,12 @@
 
             
 
+            
+
              structure is fixed in physical memory until <see
              cref="M:System.Threading.Overlapped.Unpack(System.Threading.NativeOverlapped*)" />
+
+            
 
             
 
@@ -811,6 +935,8 @@
             <para
               >The caller is responsible for pinning the buffer. If the application domain is unloaded, however, the handle to the pinned buffer is destroyed and the buffer is released, leaving the I/O operation to write to the freed address. For this reason, it is better to use the <see
                cref="M:System.Threading.Overlapped.Pack(System.Threading.IOCompletionCallback,System.Object)" />
+
+              
 
               
 
@@ -830,6 +956,8 @@
 
             
 
+            
+
              structure, specifying the delegate to be invoked when the asynchronous I/O operation is complete.</para
           >
         </summary>
@@ -838,6 +966,8 @@
           <para
             >An unmanaged pointer to a <see
              cref="T:System.Threading.NativeOverlapped" />
+
+            
 
             
 
@@ -853,8 +983,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Threading.IOCompletionCallback" />
+
+          
 
           
 
@@ -905,8 +1039,12 @@
 
             
 
+            
+
              structure is fixed in physical memory until <see
              cref="M:System.Threading.Overlapped.Unpack(System.Threading.NativeOverlapped*)" />
+
+            
 
             
 
@@ -922,12 +1060,16 @@
 
             
 
+            
+
              must be the same as those passed to the unmanaged operating system function that performs the asynchronous I/O. </para
           >
           <block subset="none" type="note">
             <para
               >The runtime pins the buffer or buffers specified in <paramref
                name="userData" />
+
+              
 
               
 
@@ -947,6 +1089,8 @@
 
             
 
+            
+
              structure, specifying a delegate that is invoked when the asynchronous I/O operation is complete and a managed object that serves as a buffer.</para
           >
         </summary>
@@ -955,6 +1099,8 @@
           <para
             >An unmanaged pointer to a <see
              cref="T:System.Threading.NativeOverlapped" />
+
+            
 
             
 
@@ -970,8 +1116,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Threading.IOCompletionCallback" />
+
+          
 
           
 
@@ -981,6 +1131,8 @@
         >
         <param name="userData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1027,8 +1179,12 @@
 
             
 
+            
+
              structure is not freed from physical memory until you call the <see
              cref="M:System.Threading.Overlapped.Free(System.Threading.NativeOverlapped*)" />
+
+            
 
             
 
@@ -1047,8 +1203,12 @@
 
             
 
+            
+
              structure into a managed <see
              cref="T:System.Threading.Overlapped" />
+
+            
 
             
 
@@ -1067,6 +1227,8 @@
 
             
 
+            
+
              object containing the information unpacked from the native structure.</para
           >
         </returns>
@@ -1077,8 +1239,12 @@
 
           
 
+          
+
           An unmanaged pointer to a <see
            cref="T:System.Threading.NativeOverlapped" />
+
+          
 
           
 
@@ -1128,8 +1294,12 @@
 
             
 
+            
+
              structure is fixed in physical memory until <see
              cref="M:System.Threading.Overlapped.Unpack(System.Threading.NativeOverlapped*)" />
+
+            
 
             
 
@@ -1140,6 +1310,8 @@
           <para
             >The caller is responsible for pinning the buffer. If the application domain is unloaded, however, the handle to the pinned buffer is destroyed and the buffer is released, leaving the I/O operation to write to the freed address. For this reason, it is better to use the <see
              cref="M:System.Threading.Overlapped.UnsafePack(System.Threading.IOCompletionCallback,System.Object)" />
+
+            
 
             
 
@@ -1156,8 +1328,12 @@
 
               
 
+              
+
                method could inadvertently open up a security hole. Code access security bases its permission checks on the permissions of all the callers on the stack. The <see
                cref="M:System.Threading.Overlapped.UnsafePack(System.Threading.IOCompletionCallback,System.Object)" />
+
+              
 
               
 
@@ -1177,6 +1353,8 @@
 
             
 
+            
+
              structure specifying the delegate to invoke when the asynchronous I/O operation is complete. Does not propagate the calling stack.</para
           >
         </summary>
@@ -1185,6 +1363,8 @@
           <para
             >An unmanaged pointer to a <see
              cref="T:System.Threading.NativeOverlapped" />
+
+            
 
             
 
@@ -1200,8 +1380,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Threading.IOCompletionCallback" />
+
+          
 
           
 
@@ -1252,8 +1436,12 @@
 
             
 
+            
+
              structure is fixed in physical memory until <see
              cref="M:System.Threading.Overlapped.Unpack(System.Threading.NativeOverlapped*)" />
+
+            
 
             
 
@@ -1269,11 +1457,15 @@
 
             
 
+            
+
              must be the same as those passed to the unmanaged operating system function that performs the asynchronous I/O. </para
           >
           <para
             >The runtime pins the buffer or buffers specified in <paramref
              name="userData" />
+
+            
 
             
 
@@ -1290,8 +1482,12 @@
 
               
 
+              
+
                method could inadvertently open up a security hole. Code access security bases its permission checks on the permissions of all the callers on the stack. The <see
                cref="M:System.Threading.Overlapped.UnsafePack(System.Threading.IOCompletionCallback,System.Object)" />
+
+              
 
               
 
@@ -1311,6 +1507,8 @@
 
             
 
+            
+
              structure, specifying the delegate to invoke when the asynchronous I/O operation is complete and the managed object that serves as a buffer. Does not propagate the calling stack.</para
           >
         </summary>
@@ -1319,6 +1517,8 @@
           <para
             >An unmanaged pointer to a <see
              cref="T:System.Threading.NativeOverlapped" />
+
+            
 
             
 
@@ -1334,8 +1534,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Threading.IOCompletionCallback" />
+
+          
 
           
 
@@ -1345,6 +1549,8 @@
         >
         <param name="userData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

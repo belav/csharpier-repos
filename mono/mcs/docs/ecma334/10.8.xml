@@ -8,8 +8,12 @@
 
     
 
+    
+
      or a <non_terminal
      where="10.8">type-name</non_terminal>
+
+    
 
     
 
@@ -20,6 +24,8 @@
       <name>
         <non_terminal where="10.8">namespace-name</non_terminal>
       </name>
+
+      
 
       
 
@@ -39,6 +45,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="10.8">namespace-or-type-name</non_terminal>
@@ -48,6 +56,8 @@
       <name>
         <non_terminal where="10.8">namespace-or-type-name</non_terminal>
       </name>
+
+      
 
       
 
@@ -72,8 +82,12 @@
 
     
 
+    
+
      is a <non_terminal
      where="10.8">namespace-or-type-name</non_terminal>
+
+    
 
     
 
@@ -86,8 +100,12 @@
 
     
 
+    
+
      of a <non_terminal
      where="10.8">type-name</non_terminal>
+
+    
 
     
 
@@ -103,8 +121,12 @@
 
     
 
+    
+
      is a <non_terminal
      where="10.8">namespace-or-type-name</non_terminal>
+
+    
 
     
 
@@ -117,8 +139,12 @@
 
     
 
+    
+
      of a <non_terminal
      where="10.8">namespace-name</non_terminal>
+
+    
 
     
 
@@ -134,11 +160,15 @@
 
     
 
+    
+
      is determined as follows: <list
     >
       <list_item
         > If the <non_terminal
          where="10.8">namespace-or-type-name</non_terminal>
+
+        
 
         
 
@@ -155,8 +185,12 @@
 
           
 
+          
+
            appears within the body of a class or struct declaration, then starting with that class or struct declaration and continuing with each enclosing class or struct declaration (if any), if a member with the given name exists, is accessible, and denotes a type, then the  <non_terminal
            where="10.8">namespace-or-type-name</non_terminal>
+
+          
 
           
 
@@ -169,11 +203,15 @@
 
           
 
+          
+
           . </list_item
         >
         <list_item
           > Otherwise, starting with the namespace in which the <non_terminal
            where="10.8">namespace-or-type-name</non_terminal>
+
+          
 
           
 
@@ -190,11 +228,15 @@
 
             
 
+            
+
              refers to that member and, depending on the member, is classified as a namespace or a type. </list_item
           >
           <list_item
             > Otherwise, if the namespace has a corresponding namespace declaration enclosing the location where the <non_terminal
              where="10.8">namespace-or-type-name</non_terminal>
+
+            
 
             
 
@@ -211,8 +253,12 @@
 
               
 
+              
+
                that associates the given name with an imported namespace or type, then the <non_terminal
                where="10.8">namespace-or-type-name</non_terminal>
+
+              
 
               
 
@@ -228,8 +274,12 @@
 
               
 
+              
+
               s of the namespace declaration contain exactly one type with the given name, then the <non_terminal
                where="10.8">namespace-or-type-name</non_terminal>
+
+              
 
               
 
@@ -245,8 +295,12 @@
 
               
 
+              
+
               s of the namespace declaration contain more than one type with the given name, then the  <non_terminal
                where="10.8">namespace-or-type-name</non_terminal>
+
+              
 
               
 
@@ -264,12 +318,16 @@
 
           
 
+          
+
            is undefined and a compile-time error occurs. </list_item
         >
       </list>
       <list_item
         > Otherwise, the <non_terminal
          where="10.8">namespace-or-type-name</non_terminal>
+
+        
 
         
 
@@ -282,8 +340,12 @@
 
         
 
+        
+
          consisting of all identifiers but the rightmost one, and I is the rightmost identifier. N is first resolved as a <non_terminal
          where="10.8">namespace-or-type-name</non_terminal>
+
+        
 
         
 
@@ -297,6 +359,8 @@
         <list_item
           > Otherwise, N.I is an invalid <non_terminal
            where="10.8">namespace-or-type-name</non_terminal>
+
+          
 
           
 

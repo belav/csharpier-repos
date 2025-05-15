@@ -45,11 +45,15 @@
 
         
 
+        
+
          class.</para
       >
       <para
         >The classes in <see
          cref="N:System.Runtime.CompilerServices" />
+
+        
 
         
 
@@ -68,8 +72,12 @@
 
         
 
+        
+
         , where the <see
          cref="P:System.Runtime.InteropServices.DispatchWrapper.WrappedObject" />
+
+        
 
         
 
@@ -101,6 +109,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.CompilerServices.IDispatchConstantAttribute" />
+
+            
 
             
 

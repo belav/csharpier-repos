@@ -54,8 +54,12 @@
 
         
 
+        
+
          object represents a time interval (duration of time or elapsed time) that is measured as a positive or negative number of days, hours, minutes, seconds, and fractions of a second. The <see
          cref="T:System.TimeSpan" />
+
+        
 
         
 
@@ -68,6 +72,8 @@
 
         
 
+        
+
          or <see
          cref="T:System.DateTimeOffset" />
 
@@ -75,8 +81,12 @@
 
         
 
+        
+
          structure should be used instead. (For more information about using the <see
          cref="T:System.TimeSpan" />
+
+        
 
         
 
@@ -93,11 +103,15 @@
 
         
 
+        
+
         .) </para
       >
       <para
         >The largest unit of time that the <see
          cref="T:System.TimeSpan" />
+
+        
 
         
 
@@ -113,8 +127,12 @@
 
         
 
+        
+
          object is the number of ticks that equal the represented time interval. A tick is equal to 100 nanoseconds, or one ten-millionth of a second. The value of a <see
          cref="T:System.TimeSpan" />
+
+        
 
         
 
@@ -127,8 +145,12 @@
 
         
 
+        
+
          to <see
          cref="F:System.TimeSpan.MaxValue" />
+
+        
 
         
 
@@ -147,6 +169,8 @@
 
         
 
+        
+
          value in a number of ways:</para
       >
       <list type="bullet">
@@ -154,6 +178,8 @@
           <para
             >By calling its implicit default constructor. This creates an object whose value is <see
              cref="F:System.TimeSpan.Zero" />
+
+            
 
             
 
@@ -172,6 +198,8 @@
 
             
 
+            
+
              value to a specified number of hours, minutes, and seconds.</para
           >
           <para>code reference: System.TimeSpan.Class#3</para>
@@ -185,8 +213,12 @@
 
             
 
+            
+
              value. For example, you can instantiate a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -203,11 +235,15 @@
 
             
 
+            
+
              object to a zero time value in this way, as the following example shows.</para
           >
           <para>code reference: System.TimeSpan.Class#6</para>
           <para>
             <see cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -220,6 +256,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.DateTimeOffset" />
 
@@ -227,8 +265,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -246,8 +288,12 @@
 
             
 
+            
+
              value. You can use the <see
              cref="M:System.TimeSpan.Parse(System.String)" />
+
+            
 
             
 
@@ -260,8 +306,12 @@
 
             
 
+            
+
              methods to convert strings that contain time intervals to <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -274,8 +324,12 @@
 
             
 
+            
+
              method to convert an array of strings to <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -292,6 +346,8 @@
 
             
 
+            
+
              value by calling the <see
              cref="Overload:System.TimeSpan.ParseExact" />
 
@@ -299,8 +355,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.TimeSpan.TryParseExact" />
+
+            
 
             
 
@@ -321,8 +381,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.TimeSpan.op_Subtraction(System.TimeSpan,System.TimeSpan)" />
+
+        
 
         
 
@@ -335,8 +399,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.TimeSpan.Subtract(System.TimeSpan)" />
+
+        
 
         
 
@@ -349,8 +417,12 @@
 
         
 
+        
+
         , <see
          cref="Overload:System.TimeSpan.CompareTo" />
+
+        
 
         
 
@@ -363,8 +435,12 @@
 
         
 
+        
+
          methods. The <see
          cref="T:System.TimeSpan" />
+
+        
 
         
 
@@ -377,8 +453,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.TimeSpan.Negate" />
+
+        
 
         
 
@@ -394,6 +474,8 @@
 
         
 
+        
+
          values is <see
          cref="F:System.TimeSpan.MinValue" />
 
@@ -401,8 +483,12 @@
 
         
 
+        
+
          to <see
          cref="F:System.TimeSpan.MaxValue" />
+
+        
 
         
 
@@ -421,11 +507,15 @@
 
         
 
+        
+
          value can be represented as [-]d.hh:mm:ss.ff, where the optional minus sign indicates a negative time interval, the d component is days, hh is hours as measured on a 24-hour clock, mm is minutes, ss is seconds, and ff is fractions of a second. That is, a time interval consists of a positive or negative number of days without a time of day, or a number of days with a time of day, or only a time of day. </para
       >
       <para
         >Beginning with the net_v40_long, the <see
          cref="T:System.TimeSpan" />
+
+        
 
         
 
@@ -438,8 +528,12 @@
 
         
 
+        
+
          method, which converts a <see
          cref="T:System.TimeSpan" />
+
+        
 
         
 
@@ -452,8 +546,12 @@
 
         
 
+        
+
          method returns a time interval by using an invariant format that is identical to its return value in previous versions of the .NET Framework. The <see
          cref="M:System.TimeSpan.ToString(System.String)" />
+
+        
 
         
 
@@ -466,8 +564,12 @@
 
         
 
+        
+
          overload lets you specify a format string and the culture whose formatting conventions are used to create the string representation of the time interval. <see
          cref="T:System.TimeSpan" />
+
+        
 
         
 
@@ -482,10 +584,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="a63ebf55-7269-416b-b4f5-286f6c03bf0e">Custom TimeSpan Format Strings</a>
         </format>
+
+        
 
         
 
@@ -504,10 +610,14 @@
 
         
 
+        
+
          values in net_v35_short and earlier versions fails in net_v40_short. This is most common in code that calls a <format
          type="text/html">
           <a href="87b7d528-73f6-43c6-b71a-f23043039a49">composite formatting</a>
         </format>
+
+        
 
         
 
@@ -520,8 +630,12 @@
 
         
 
+        
+
          value with a format string. The following example successfully formats a <see
          cref="T:System.TimeSpan" />
+
+        
 
         
 
@@ -534,12 +648,16 @@
 
         
 
+        
+
          value by using an unsupported format specifier, which is ignored in net_v35_short and earlier versions.</para
       >
       <para>code reference: System.TimeSpan.Class.Legacy#1</para>
       <para
         >If you cannot modify the code, you can restore the legacy formatting of <see
          cref="T:System.TimeSpan" />
+
+        
 
         
 
@@ -561,8 +679,12 @@
 
             
 
+            
+
             . Setting this element's enabled attribute to true restores legacy <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -580,8 +702,12 @@
 
             
 
+            
+
              formatting on a per-application-domain basis. The following example creates an application domain that uses legacy <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -593,6 +719,8 @@
           <para
             >When the following code executes in the new application domain, it reverts to legacy <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -645,11 +773,15 @@
 
             
 
+            
+
              structure to the specified number of ticks.</para
           >
         </summary>
         <param name="ticks">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -694,6 +826,8 @@
 
           
 
+          
+
            value less than <see
            cref="F:System.TimeSpan.MinValue" />
 
@@ -701,8 +835,12 @@
 
           
 
+          
+
            or greater than <see
            cref="F:System.TimeSpan.MaxValue" />
+
+          
 
           
 
@@ -720,6 +858,8 @@
 
             
 
+            
+
             , <paramref
              name="minutes" />
 
@@ -727,8 +867,12 @@
 
             
 
+            
+
             , and <paramref
              name="seconds" />
+
+            
 
             
 
@@ -747,11 +891,15 @@
 
             
 
+            
+
              structure to a specified number of hours, minutes, and seconds.</para
           >
         </summary>
         <param name="hours">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -766,10 +914,14 @@
 
           
 
+          
+
           Number of minutes. </param
         >
         <param name="seconds">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -815,6 +967,8 @@
 
           
 
+          
+
            value less than <see
            cref="F:System.TimeSpan.MinValue" />
 
@@ -822,8 +976,12 @@
 
           
 
+          
+
            or greater than <see
            cref="F:System.TimeSpan.MaxValue" />
+
+          
 
           
 
@@ -841,8 +999,12 @@
 
             
 
+            
+
             , <paramref
              name="hours" />
+
+            
 
             
 
@@ -855,8 +1017,12 @@
 
             
 
+            
+
             , and <paramref
              name="seconds" />
+
+            
 
             
 
@@ -875,11 +1041,15 @@
 
             
 
+            
+
              structure to a specified number of days, hours, minutes, and seconds.</para
           >
         </summary>
         <param name="days">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -894,6 +1064,8 @@
 
           
 
+          
+
           Number of hours. </param
         >
         <param name="minutes">
@@ -903,10 +1075,14 @@
 
           
 
+          
+
           Number of minutes. </param
         >
         <param name="seconds">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -953,6 +1129,8 @@
 
           
 
+          
+
            value less than <see
            cref="F:System.TimeSpan.MinValue" />
 
@@ -960,8 +1138,12 @@
 
           
 
+          
+
            or greater than <see
            cref="F:System.TimeSpan.MaxValue" />
+
+          
 
           
 
@@ -979,8 +1161,12 @@
 
             
 
+            
+
             , <paramref
              name="hours" />
+
+            
 
             
 
@@ -993,6 +1179,8 @@
 
             
 
+            
+
             , <paramref
              name="seconds" />
 
@@ -1000,8 +1188,12 @@
 
             
 
+            
+
             , and <paramref
              name="milliseconds" />
+
+            
 
             
 
@@ -1020,11 +1212,15 @@
 
             
 
+            
+
              structure to a specified number of days, hours, minutes, seconds, and milliseconds.</para
           >
         </summary>
         <param name="days">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1039,10 +1235,14 @@
 
           
 
+          
+
           Number of hours. </param
         >
         <param name="minutes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1057,10 +1257,14 @@
 
           
 
+          
+
           Number of seconds. </param
         >
         <param name="milliseconds">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1102,8 +1306,12 @@
 
           
 
+          
+
            is less than <see
            cref="F:System.TimeSpan.MinValue" />
+
+          
 
           
 
@@ -1116,12 +1324,16 @@
 
           
 
+          
+
           .</exception
         >
         <example>
           <para
             >This example demonstrates the <see
              cref="M:System.TimeSpan.Add(System.TimeSpan)" />
+
+            
 
             
 
@@ -1156,8 +1368,12 @@ public class TimeSpanAddExample {
 
             
 
+            
+
              and <see
              cref="F:System.TimeSpan.MaxValue" />
+
+            
 
             
 
@@ -1173,8 +1389,12 @@ public class TimeSpanAddExample {
 
             
 
+            
+
             ; the original <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -1193,8 +1413,12 @@ public class TimeSpanAddExample {
 
             
 
+            
+
              object whose value is the sum of the specified <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -1213,11 +1437,15 @@ public class TimeSpanAddExample {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="ts">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1266,6 +1494,8 @@ public class TimeSpanAddExample {
 
             
 
+            
+
              values and returns an integer that indicates whether the first value is shorter than, equal to, or longer than the second value.</para
           >
         </summary>
@@ -1295,8 +1525,12 @@ public class TimeSpanAddExample {
 
                   
 
+                  
+
                    is shorter than <paramref
                    name="t2" />
+
+                  
 
                   
 
@@ -1318,8 +1552,12 @@ public class TimeSpanAddExample {
 
                   
 
+                  
+
                    is equal to <paramref
                    name="t2" />
+
+                  
 
                   
 
@@ -1341,8 +1579,12 @@ public class TimeSpanAddExample {
 
                   
 
+                  
+
                    is longer than <paramref
                    name="t2" />
+
+                  
 
                   
 
@@ -1361,10 +1603,14 @@ public class TimeSpanAddExample {
 
           
 
+          
+
           The first time interval to compare. </param
         >
         <param name="t2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1406,8 +1652,12 @@ public class TimeSpanAddExample {
 
             
 
+            
+
              is not a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -1426,6 +1676,8 @@ public class TimeSpanAddExample {
 
             
 
+            
+
             , regardless of its value, is considered greater than null.</para
           >
           <para
@@ -1436,8 +1688,12 @@ public class TimeSpanAddExample {
 
             
 
+            
+
              parameter must be an instance of <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -1477,6 +1733,8 @@ public class TimeSpanAddExample {
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -1489,6 +1747,8 @@ public class TimeSpanAddExample {
                 <para
                   >This instance is equal to <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -1511,11 +1771,15 @@ public class TimeSpanAddExample {
 
                   
 
+                  
+
                   .</para
                 >
                 <para>-or- </para>
                 <para>
                   <paramref name="value" />
+
+                  
 
                   
 
@@ -1529,6 +1793,8 @@ public class TimeSpanAddExample {
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1568,6 +1834,8 @@ public class TimeSpanAddExample {
 
             
 
+            
+
              interface and performs slightly better than the <see
              cref="M:System.TimeSpan.CompareTo(System.Object)" />
 
@@ -1575,8 +1843,12 @@ public class TimeSpanAddExample {
 
             
 
+            
+
              method because it does not have to convert the <paramref
              name="value" />
+
+            
 
             
 
@@ -1595,8 +1867,12 @@ public class TimeSpanAddExample {
 
             
 
+            
+
              object and returns an integer that indicates whether this instance is shorter than, equal to, or longer than the <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -1610,6 +1886,8 @@ public class TimeSpanAddExample {
           <para
             >A signed number indicating the relative values of this instance and <paramref
              name="value" />
+
+            
 
             
 
@@ -1641,6 +1919,8 @@ public class TimeSpanAddExample {
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -1653,6 +1933,8 @@ public class TimeSpanAddExample {
                 <para
                   >This instance is equal to <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -1675,6 +1957,8 @@ public class TimeSpanAddExample {
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -1683,6 +1967,8 @@ public class TimeSpanAddExample {
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1719,10 +2005,14 @@ public class TimeSpanAddExample {
 
             
 
+            
+
              represents the days component of the current instance. <block
              subset="none" type="note"
               >See <see
                cref="M:System.TimeSpan.ToString" />
+
+              
 
               
 
@@ -1737,6 +2027,8 @@ public class TimeSpanAddExample {
           <para
             >This example demonstrates using the <see
              cref="P:System.TimeSpan.Days" />
+
+            
 
             
 
@@ -1771,8 +2063,12 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              value can be represented as [-]d.hh:mm:ss.ff, where the optional minus sign indicates a negative time interval, the d component is days, hh is hours as measured on a 24-hour clock, mm is minutes, ss is seconds, and ff is fractions of a second. The value of the <see
              cref="P:System.TimeSpan.Days" />
+
+            
 
             
 
@@ -1788,8 +2084,12 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              property represents whole days, whereas the <see
              cref="P:System.TimeSpan.TotalDays" />
+
+            
 
             
 
@@ -1803,6 +2103,8 @@ public class TimeSpanPropertiesExampleOne {
           <para
             >Gets the days component of the time interval represented by the current <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -1844,12 +2146,16 @@ public class TimeSpanPropertiesExampleOne {
 
           
 
+          
+
           .</exception
         >
         <example>
           <para
             >The following example demonstrates the <see
              cref="M:System.TimeSpan.Duration" />
+
+            
 
             
 
@@ -1884,8 +2190,12 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              object whose value is the absolute value of the current <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -1899,6 +2209,8 @@ public class TimeSpanDurationExample {
           <para
             >A new object whose value is the absolute value of the current <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -1944,6 +2256,8 @@ public class TimeSpanDurationExample {
 
               
 
+              
+
               .</block
             >
           </para>
@@ -1962,8 +2276,12 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              is a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -1976,11 +2294,15 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              structure; otherwise, false.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2020,6 +2342,8 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              interface, and performs slightly better than <see
              cref="M:System.TimeSpan.Equals(System.Object)" />
 
@@ -2027,8 +2351,12 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              because it does not have to convert the the <paramref
              name="obj" />
+
+            
 
             
 
@@ -2047,6 +2375,8 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -2060,11 +2390,15 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              represents the same time interval as this instance; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2112,6 +2446,8 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              are equal.</para
           >
         </summary>
@@ -2125,8 +2461,12 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              and <paramref
              name="t2" />
+
+            
 
             
 
@@ -2142,10 +2482,14 @@ public class TimeSpanDurationExample {
 
           
 
+          
+
           The first time interval to compare. </param
         >
         <param name="t2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2187,8 +2531,12 @@ public class TimeSpanDurationExample {
 
           
 
+          
+
            represented by <paramref
            name="value" />
+
+          
 
           
 
@@ -2201,8 +2549,12 @@ public class TimeSpanDurationExample {
 
           
 
+          
+
            or less than <see
            cref="F:System.TimeSpan.MinValue" />
+
+          
 
           
 
@@ -2217,8 +2569,12 @@ public class TimeSpanDurationExample {
 
           
 
+          
+
            is equal to <see
            cref="F:System.Double.NaN" />
+
+          
 
           
 
@@ -2236,8 +2592,12 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              parameter is converted to milliseconds, which is converted to ticks, and that number of ticks is used to initialize the new <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -2250,8 +2610,12 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              will only be considered accurate to the nearest millisecond. Note that, because of the loss of precision of the <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -2264,8 +2628,12 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              for values that are near to but still in the range of either <see
              cref="F:System.TimeSpan.MinValue" />
+
+            
 
             
 
@@ -2278,6 +2646,8 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
             . For example, this causes an <see
              cref="T:System.OverflowException" />
 
@@ -2285,8 +2655,12 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              in the following attempt to instantiate a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -2306,6 +2680,8 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              that represents a specified number of days, where the specification is accurate to the nearest millisecond.</para
           >
         </summary>
@@ -2319,11 +2695,15 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2366,8 +2746,12 @@ public class TimeSpanDurationExample {
 
           
 
+          
+
            represented by <paramref
            name="value" />
+
+          
 
           
 
@@ -2380,8 +2764,12 @@ public class TimeSpanDurationExample {
 
           
 
+          
+
            or less than <see
            cref="F:System.TimeSpan.MinValue" />
+
+          
 
           
 
@@ -2396,8 +2784,12 @@ public class TimeSpanDurationExample {
 
           
 
+          
+
            is equal to <see
            cref="F:System.Double.NaN" />
+
+          
 
           
 
@@ -2415,8 +2807,12 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              parameter is converted to milliseconds, which is converted to ticks, and that number of ticks is used to initialize the new <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -2429,8 +2825,12 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              will only be considered accurate to the nearest millisecond. Note that, because of the loss of precision of the <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -2443,8 +2843,12 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              for values that are near to but still in the range of either <see
              cref="F:System.TimeSpan.MinValue" />
+
+            
 
             
 
@@ -2457,6 +2861,8 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
             . For example, this causes an <see
              cref="T:System.OverflowException" />
 
@@ -2464,8 +2870,12 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              in the following attempt to instantiate a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -2486,6 +2896,8 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              that represents a specified number of hours, where the specification is accurate to the nearest millisecond.</para
           >
         </summary>
@@ -2499,11 +2911,15 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2549,8 +2965,12 @@ public class TimeSpanDurationExample {
 
           
 
+          
+
            represented by <paramref
            name="value" />
+
+          
 
           
 
@@ -2563,8 +2983,12 @@ public class TimeSpanDurationExample {
 
           
 
+          
+
            or less than <see
            cref="F:System.TimeSpan.MinValue" />
+
+          
 
           
 
@@ -2579,8 +3003,12 @@ public class TimeSpanDurationExample {
 
           
 
+          
+
            is equal to <see
            cref="F:System.Double.NaN" />
+
+          
 
           
 
@@ -2598,8 +3026,12 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              parameter is converted to ticks, and that number of ticks is used to initialize the new <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -2612,8 +3044,12 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              will only be considered accurate to the nearest millisecond. Note that, because of the loss of precision of the <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -2626,8 +3062,12 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              for values that are near to but still in the range of either <see
              cref="F:System.TimeSpan.MinValue" />
+
+            
 
             
 
@@ -2640,6 +3080,8 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
             . For example, this causes an <see
              cref="T:System.OverflowException" />
 
@@ -2647,8 +3089,12 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              in the following attempt to instantiate a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -2669,6 +3115,8 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              that represents a specified number of milliseconds.</para
           >
         </summary>
@@ -2682,11 +3130,15 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2729,8 +3181,12 @@ public class TimeSpanDurationExample {
 
           
 
+          
+
            represented by <paramref
            name="value" />
+
+          
 
           
 
@@ -2743,8 +3199,12 @@ public class TimeSpanDurationExample {
 
           
 
+          
+
            or less than <see
            cref="F:System.TimeSpan.MinValue" />
+
+          
 
           
 
@@ -2759,8 +3219,12 @@ public class TimeSpanDurationExample {
 
           
 
+          
+
            is equal to <see
            cref="F:System.Double.NaN" />
+
+          
 
           
 
@@ -2778,8 +3242,12 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              parameter is converted to milliseconds, which is converted to ticks, and that number of ticks is used to initialize the new <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -2792,8 +3260,12 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              will only be considered accurate to the nearest millisecond. Note that, because of the loss of precision of the <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -2806,8 +3278,12 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              for values that are near to but still in the range of either <see
              cref="F:System.TimeSpan.MinValue" />
+
+            
 
             
 
@@ -2820,6 +3296,8 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
             . For example, this causes an <see
              cref="T:System.OverflowException" />
 
@@ -2827,8 +3305,12 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              in the following attempt to instantiate a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -2849,6 +3331,8 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              that represents a specified number of minutes, where the specification is accurate to the nearest millisecond.</para
           >
         </summary>
@@ -2862,11 +3346,15 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2909,8 +3397,12 @@ public class TimeSpanDurationExample {
 
           
 
+          
+
            represented by <paramref
            name="value" />
+
+          
 
           
 
@@ -2923,8 +3415,12 @@ public class TimeSpanDurationExample {
 
           
 
+          
+
            or less than <see
            cref="F:System.TimeSpan.MinValue" />
+
+          
 
           
 
@@ -2939,8 +3435,12 @@ public class TimeSpanDurationExample {
 
           
 
+          
+
            is equal to <see
            cref="F:System.Double.NaN" />
+
+          
 
           
 
@@ -2958,8 +3458,12 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              parameter is converted to milliseconds, which is converted to ticks, and that number of ticks is used to intialize the new <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -2972,8 +3476,12 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              will only be considered accurate to the nearest millisecond. Note that, because of the loss of precision of the <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -2986,8 +3494,12 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              for values that are near but still in the range of either  <see
              cref="F:System.TimeSpan.MinValue" />
+
+            
 
             
 
@@ -3000,6 +3512,8 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
             , This is the cause of an <see
              cref="T:System.OverflowException" />
 
@@ -3007,8 +3521,12 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
             , for example, in the following attempt to instantiate a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -3029,6 +3547,8 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              that represents a specified number of seconds, where the specification is accurate to the nearest millisecond.</para
           >
         </summary>
@@ -3042,11 +3562,15 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3091,6 +3615,8 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              constructor. A single tick represents one hundred nanoseconds or one ten-millionth of a second. There are 10,000 ticks in a millisecond. </para
           >
         </remarks>
@@ -3099,6 +3625,8 @@ public class TimeSpanDurationExample {
           <para
             >Returns a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -3117,11 +3645,15 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3158,6 +3690,8 @@ public class TimeSpanDurationExample {
           <para
             >Two <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -3204,11 +3738,15 @@ public class TimeSpanDurationExample {
 
             
 
+            
+
              between 0 and 23 inclusive, that represents
    the hours component of the current instance. <block
              subset="none" type="note"
               >See <see
                cref="M:System.TimeSpan.ToString" />
+
+              
 
               
 
@@ -3223,6 +3761,8 @@ public class TimeSpanDurationExample {
           <para
             >This example demonstrates using the <see
              cref="P:System.TimeSpan.Hours" />
+
+            
 
             
 
@@ -3257,8 +3797,12 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              value can be represented as [-]d.hh:mm:ss.ff, where the optional minus sign indicates a negative time interval, the d component is days, hh is hours as measured on a 24-hour clock, mm is minutes, ss is seconds, and ff is fractions of a second. The value of the <see
              cref="P:System.TimeSpan.Hours" />
+
+            
 
             
 
@@ -3274,8 +3818,12 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              property represents whole hours, whereas the <see
              cref="P:System.TimeSpan.TotalHours" />
+
+            
 
             
 
@@ -3289,6 +3837,8 @@ public class TimeSpanPropertiesExampleOne {
           <para
             >Gets the hours component of the time interval represented by the current <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -3331,6 +3881,8 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              ticks. The string representation of this value is positive 10675199.02:48:05.4775807, or slightly more than 10,675,199 days.</para
           >
         </remarks>
@@ -3339,6 +3891,8 @@ public class TimeSpanPropertiesExampleOne {
           <para
             >Represents the maximum <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -3377,12 +3931,16 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              between 0 and 999 inclusive, that represents
    the fractional seconds component of the current instance converted to
    milliseconds. <block
              subset="none" type="note"
               >See <see
                cref="M:System.TimeSpan.ToString" />
+
+              
 
               
 
@@ -3397,6 +3955,8 @@ public class TimeSpanPropertiesExampleOne {
           <para
             >This example demonstrates using the <see
              cref="P:System.TimeSpan.Milliseconds" />
+
+            
 
             
 
@@ -3431,8 +3991,12 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              value can be represented as [-]d.hh:mm:ss.ff, where the optional minus sign indicates a negative time interval, the d component is days, hh is hours as measured on a 24-hour clock, mm is minutes, ss is seconds, and ff is fractions of a second. The value of the <see
              cref="P:System.TimeSpan.Milliseconds" />
+
+            
 
             
 
@@ -3448,8 +4012,12 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              property represents whole milliseconds, whereas the <see
              cref="P:System.TimeSpan.TotalMilliseconds" />
+
+            
 
             
 
@@ -3463,6 +4031,8 @@ public class TimeSpanPropertiesExampleOne {
           <para
             >Gets the milliseconds component of the time interval represented by the current <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -3501,11 +4071,15 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              between 0 and 59 inclusive, that represents
    the minutes component of the current instance. <block
              subset="none" type="note"
               >See <see
                cref="M:System.TimeSpan.ToString" />
+
+              
 
               
 
@@ -3520,6 +4094,8 @@ public class TimeSpanPropertiesExampleOne {
           <para
             >This example demonstrates using the <see
              cref="P:System.TimeSpan.Minutes" />
+
+            
 
             
 
@@ -3554,8 +4130,12 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              value can be represented as [-]d.hh:mm:ss.ff, where the optional minus sign indicates a negative time interval, the d component is days, hh is hours as measured on a 24-hour clock, mm is minutes, ss is seconds, and ff is fractions of a second. The value of the <see
              cref="P:System.TimeSpan.Minutes" />
+
+            
 
             
 
@@ -3571,8 +4151,12 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              property represents whole minutes, whereas the <see
              cref="P:System.TimeSpan.TotalMinutes" />
+
+            
 
             
 
@@ -3586,6 +4170,8 @@ public class TimeSpanPropertiesExampleOne {
           <para
             >Gets the minutes component of the time interval represented by the current <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -3628,6 +4214,8 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              ticks. The string representation of this value is negative 10675199.02:48:05.4775808, or slightly more than negative 10,675,199 days.</para
           >
         </remarks>
@@ -3636,6 +4224,8 @@ public class TimeSpanPropertiesExampleOne {
           <para
             >Represents the minimum <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -3677,6 +4267,8 @@ public class TimeSpanPropertiesExampleOne {
 
           
 
+          
+
           .</exception
         >
         <summary>
@@ -3684,6 +4276,8 @@ public class TimeSpanPropertiesExampleOne {
           <para
             >Returns a new <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -3734,8 +4328,12 @@ public class TimeSpanPropertiesExampleOne {
 
           
 
+          
+
            and <paramref
            name="t2" />
+
+          
 
           
 
@@ -3748,8 +4346,12 @@ public class TimeSpanPropertiesExampleOne {
 
           
 
+          
+
            or greater than <see
            cref="F:System.TimeSpan.MaxValue" />
+
+          
 
           
 
@@ -3767,8 +4369,12 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              method defines the addition operator for <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -3780,6 +4386,8 @@ public class TimeSpanPropertiesExampleOne {
           <para
             >Languages that do not support custom operators can call the <see
              cref="M:System.TimeSpan.Add(System.TimeSpan)" />
+
+            
 
             
 
@@ -3798,6 +4406,8 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              instances.</para
           >
         </summary>
@@ -3811,8 +4421,12 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              and <paramref
              name="t2" />
+
+            
 
             
 
@@ -3828,10 +4442,14 @@ public class TimeSpanPropertiesExampleOne {
 
           
 
+          
+
           The first time interval to add. </param
         >
         <param name="t2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3877,10 +4495,14 @@ public class TimeSpanPropertiesExampleOne {
 
           
 
+          
+
           The first time interval to compare. </param
         >
         <param name="t2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3893,6 +4515,8 @@ public class TimeSpanPropertiesExampleOne {
           <para
             >Indicates whether two <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -3911,8 +4535,12 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              and <paramref
              name="t2" />
+
+            
 
             
 
@@ -3928,10 +4556,14 @@ public class TimeSpanPropertiesExampleOne {
 
           
 
+          
+
           The first time interval to compare. </param
         >
         <param name="t2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3980,8 +4612,12 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              is greater than another specified <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -4000,8 +4636,12 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              is greater than the value of <paramref
              name="t2" />
+
+            
 
             
 
@@ -4017,10 +4657,14 @@ public class TimeSpanPropertiesExampleOne {
 
           
 
+          
+
           The first time interval to compare. </param
         >
         <param name="t2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4069,8 +4713,12 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              is greater than or equal to another specified <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -4089,8 +4737,12 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              is greater than or equal to the value of <paramref
              name="t2" />
+
+            
 
             
 
@@ -4106,10 +4758,14 @@ public class TimeSpanPropertiesExampleOne {
 
           
 
+          
+
           The first time interval to compare.</param
         >
         <param name="t2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4158,6 +4814,8 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              instances are not equal.</para
           >
         </summary>
@@ -4171,8 +4829,12 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              and <paramref
              name="t2" />
+
+            
 
             
 
@@ -4188,10 +4850,14 @@ public class TimeSpanPropertiesExampleOne {
 
           
 
+          
+
           The first time interval to compare.</param
         >
         <param name="t2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4240,8 +4906,12 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              is less than another specified <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -4260,8 +4930,12 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              is less than the value of <paramref
              name="t2" />
+
+            
 
             
 
@@ -4277,10 +4951,14 @@ public class TimeSpanPropertiesExampleOne {
 
           
 
+          
+
           The first time interval to compare.</param
         >
         <param name="t2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4329,8 +5007,12 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              is less than or equal to another specified <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -4349,8 +5031,12 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              is less than or equal to the value of <paramref
              name="t2" />
+
+            
 
             
 
@@ -4366,10 +5052,14 @@ public class TimeSpanPropertiesExampleOne {
 
           
 
+          
+
           The first time interval to compare. </param
         >
         <param name="t2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4416,8 +5106,12 @@ public class TimeSpanPropertiesExampleOne {
 
           
 
+          
+
            subtracted from <paramref
            name="t1" />
+
+          
 
           
 
@@ -4430,8 +5124,12 @@ public class TimeSpanPropertiesExampleOne {
 
           
 
+          
+
            or greater than <see
            cref="F:System.TimeSpan.MaxValue" />
+
+          
 
           
 
@@ -4449,8 +5147,12 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              from another specified <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -4469,8 +5171,12 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              minus the value of <paramref
              name="t2" />
+
+            
 
             
 
@@ -4486,10 +5192,14 @@ public class TimeSpanPropertiesExampleOne {
 
           
 
+          
+
           The minuend. </param
         >
         <param name="t2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4534,8 +5244,12 @@ public class TimeSpanPropertiesExampleOne {
 
           
 
+          
+
            equals <see
            cref="F:System.TimeSpan.MinValue" />
+
+          
 
           
 
@@ -4553,6 +5267,8 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              whose value is the negated value of the specified instance.</para
           >
         </summary>
@@ -4562,6 +5278,8 @@ public class TimeSpanPropertiesExampleOne {
         </returns>
         <param name="t">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4605,6 +5323,8 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4613,6 +5333,8 @@ public class TimeSpanPropertiesExampleOne {
           <para
             >Returns the specified instance of <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -4631,11 +5353,15 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="t">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4676,10 +5402,14 @@ public class TimeSpanPropertiesExampleOne {
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -4695,6 +5425,8 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              represents a number greater than <see
              cref="F:System.TimeSpan.MaxValue" />
 
@@ -4702,8 +5434,12 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              or less than <see
              cref="F:System.TimeSpan.MinValue" />
+
+            
 
             
 
@@ -4719,6 +5455,8 @@ public class TimeSpanPropertiesExampleOne {
             >This example demonstrates parsing a string to obtain a 
    <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -4749,6 +5487,8 @@ parses to TimeSpan -5.12:34:56.7890000
           <para
             >The <paramref
              name="s" />
+
+            
 
             
 
@@ -4785,6 +5525,8 @@ parses to TimeSpan -5.12:34:56.7890000
                 <para
                   >An optional minus sign, which indicates a negative <see
                    cref="T:System.TimeSpan" />
+
+                  
 
                   
 
@@ -4867,6 +5609,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              must collectively specify a time interval that is greater than or equal to <see
              cref="F:System.TimeSpan.MinValue" />
 
@@ -4874,8 +5618,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              and less than or equal to <see
              cref="F:System.TimeSpan.MaxValue" />
+
+            
 
             
 
@@ -4891,8 +5639,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              method tries to parse <paramref
              name="s" />
+
+            
 
             
 
@@ -4911,6 +5663,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              equivalent. </para
           >
         </summary>
@@ -4924,11 +5678,15 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4970,6 +5728,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              parameter contains a time interval specification in the form: </para
           >
           <para>[ws][-]{ d | [d.]hh:mm[:ss[.ff]] }[ws]</para>
@@ -5001,6 +5761,8 @@ parses to TimeSpan -5.12:34:56.7890000
                 <para
                   >An optional minus sign, which indicates a negative <see
                    cref="T:System.TimeSpan" />
+
+                  
 
                   
 
@@ -5083,6 +5845,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              must collectively specify a time interval that is greater than or equal to <see
              cref="F:System.TimeSpan.MinValue" />
 
@@ -5090,8 +5854,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              and less than or equal to <see
              cref="F:System.TimeSpan.MaxValue" />
+
+            
 
             
 
@@ -5107,6 +5875,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              method tries to parse <paramref
              name="input" />
 
@@ -5114,8 +5884,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              by using each of the culture-specific formats for the culture specified by <paramref
              name="formatProvider" />
+
+            
 
             
 
@@ -5131,6 +5905,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              parameter is an <see
              cref="T:System.IFormatProvider" />
 
@@ -5138,8 +5914,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              implementation that provides culture-specific information about the format of the returned string. The <paramref
              name="formatProvider" />
+
+            
 
             
 
@@ -5157,6 +5937,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
                 
 
+                
+
                  object that represents the culture whose formatting conventions are to be reflected in the returned string. The <see
                  cref="T:System.Globalization.DateTimeFormatInfo" />
 
@@ -5164,8 +5946,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
                 
 
+                
+
                  object returned by the <see
                  cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
+
+                
 
                 
 
@@ -5183,6 +5969,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
                 
 
+                
+
                  object that defines the formatting of the returned string.</para
               >
             </item>
@@ -5195,6 +5983,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
                 
 
+                
+
                  interface. Its <see
                  cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
@@ -5202,8 +5992,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
                 
 
+                
+
                  method returns a <see
                  cref="T:System.Globalization.DateTimeFormatInfo" />
+
+                
 
                 
 
@@ -5221,8 +6015,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              is null, the <see
              cref="T:System.Globalization.DateTimeFormatInfo" />
+
+            
 
             
 
@@ -5241,6 +6039,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              equivalent by using the specified culture-specific format information.</para
           >
         </summary>
@@ -5254,8 +6054,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
             , as specified by <paramref
              name="formatProvider" />
+
+            
 
             
 
@@ -5271,10 +6075,14 @@ parses to TimeSpan -5.12:34:56.7890000
 
           
 
+          
+
           A string that specifies the time interval to convert.</param
         >
         <param name="formatProvider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5316,8 +6124,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              method parses the string representation of a time interval, which must be in the format defined by the <paramref
              name="format" />
+
+            
 
             
 
@@ -5330,6 +6142,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              must conform to the format of <paramref
              name="format" />
 
@@ -5337,8 +6151,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              exactly, you should always use exception handling when converting a string input by the user to a time interval. If you prefer not to use exception handling, you can call the <see
              cref="M:System.TimeSpan.TryParseExact(System.String,System.String,System.IFormatProvider,System.TimeSpan@)" />
+
+            
 
             
 
@@ -5354,8 +6172,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              parameter is a string that contains either a single standard format specifier, or one or more custom format specifiers that define the required format of <paramref
              name="input" />
+
+            
 
             
 
@@ -5370,10 +6192,14 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="a63ebf55-7269-416b-b4f5-286f6c03bf0e">Custom TimeSpan Format Strings</a>
             </format>
+
+            
 
             
 
@@ -5390,8 +6216,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
               
 
+              
+
                method uses the conventions of the culture specified by the <paramref
                name="formatProvider" />
+
+              
 
               
 
@@ -5404,8 +6234,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
               
 
+              
+
                is a standard <see
                cref="T:System.TimeSpan" />
+
+              
 
               
 
@@ -5422,8 +6256,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              parameter is an <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -5436,8 +6274,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              is a standard format string. The <paramref
              name="formatProvider" />
+
+            
 
             
 
@@ -5455,6 +6297,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
                 
 
+                
+
                  object that represents the culture whose formatting conventions are to be reflected in the returned string. The <see
                  cref="T:System.Globalization.DateTimeFormatInfo" />
 
@@ -5462,8 +6306,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
                 
 
+                
+
                  object returned by the <see
                  cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
+
+                
 
                 
 
@@ -5481,6 +6329,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
                 
 
+                
+
                  object that defines the formatting of the returned string.</para
               >
             </item>
@@ -5493,6 +6343,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
                 
 
+                
+
                  interface. Its <see
                  cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
@@ -5500,8 +6352,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
                 
 
+                
+
                  method returns a <see
                  cref="T:System.Globalization.DateTimeFormatInfo" />
+
+                
 
                 
 
@@ -5519,8 +6375,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              is null, the <see
              cref="T:System.Globalization.DateTimeFormatInfo" />
+
+            
 
             
 
@@ -5539,6 +6399,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              equivalent by using the specified format and culture-specific format information. The format of the string representation must match the specified format exactly.</para
           >
         </summary>
@@ -5552,6 +6414,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
             , as specified by <paramref
              name="format" />
 
@@ -5559,8 +6423,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              and <paramref
              name="formatProvider" />
+
+            
 
             
 
@@ -5576,10 +6444,14 @@ parses to TimeSpan -5.12:34:56.7890000
 
           
 
+          
+
           A string that specifies the time interval to convert.</param
         >
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5592,10 +6464,14 @@ parses to TimeSpan -5.12:34:56.7890000
 
           
 
+          
+
           .</param
         >
         <param name="formatProvider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5637,8 +6513,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              method parses the string representation of a time interval, which must be in one of the formats defined by the <paramref
              name="formats" />
+
+            
 
             
 
@@ -5651,6 +6531,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              must exactly conform to one of the formats specified in <paramref
              name="formats" />
 
@@ -5658,8 +6540,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
             , you should always use exception handling when converting a string input by the user to a time interval. If you prefer not to use exception handling, you can call the <see
              cref="M:System.TimeSpan.TryParseExact(System.String,System.String[],System.IFormatProvider,System.TimeSpan@)" />
+
+            
 
             
 
@@ -5675,8 +6561,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              parameter is a string array whose elements consist of either a single standard format specifier, or one or more custom format specifiers that define the required format of <paramref
              name="input" />
+
+            
 
             
 
@@ -5691,10 +6581,14 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="a63ebf55-7269-416b-b4f5-286f6c03bf0e">Custom TimeSpan Format Strings</a>
             </format>
+
+            
 
             
 
@@ -5707,8 +6601,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              must correspond exactly to a member of <paramref
              name="formats" />
+
+            
 
             
 
@@ -5721,8 +6619,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              to each element in <paramref
              name="formats" />
+
+            
 
             
 
@@ -5739,8 +6641,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
               
 
+              
+
                method uses the conventions of the culture specified by the <paramref
                name="formatProvider" />
+
+              
 
               
 
@@ -5753,8 +6659,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
               
 
+              
+
                is a standard <see
                cref="T:System.TimeSpan" />
+
+              
 
               
 
@@ -5771,8 +6681,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              parameter is an <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -5785,8 +6699,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              is a standard format string. The <paramref
              name="formatProvider" />
+
+            
 
             
 
@@ -5804,6 +6722,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
                 
 
+                
+
                  object that represents the culture whose formatting conventions are to be reflected in the returned string. The <see
                  cref="T:System.Globalization.DateTimeFormatInfo" />
 
@@ -5811,8 +6731,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
                 
 
+                
+
                  object returned by the <see
                  cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
+
+                
 
                 
 
@@ -5830,6 +6754,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
                 
 
+                
+
                  object that defines the formatting of the returned string.</para
               >
             </item>
@@ -5842,6 +6768,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
                 
 
+                
+
                  interface. Its <see
                  cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
@@ -5849,8 +6777,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
                 
 
+                
+
                  method returns a <see
                  cref="T:System.Globalization.DateTimeFormatInfo" />
+
+                
 
                 
 
@@ -5868,8 +6800,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              is null, the <see
              cref="T:System.Globalization.DateTimeFormatInfo" />
+
+            
 
             
 
@@ -5888,6 +6824,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              equivalent by using the specified array of format strings and culture-specific format information. The format of the string representation must match one of the specified formats exactly.</para
           >
         </summary>
@@ -5901,6 +6839,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
             , as specified by <paramref
              name="formats" />
 
@@ -5908,8 +6848,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              and <paramref
              name="formatProvider" />
+
+            
 
             
 
@@ -5925,10 +6869,14 @@ parses to TimeSpan -5.12:34:56.7890000
 
           
 
+          
+
           A string that specifies the time interval to convert.</param
         >
         <param name="formats">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5941,10 +6889,14 @@ parses to TimeSpan -5.12:34:56.7890000
 
           
 
+          
+
           .</param
         >
         <param name="formatProvider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5987,8 +6939,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              method parses the string representation of a time interval, which must be in the format defined by the <paramref
              name="format" />
+
+            
 
             
 
@@ -6001,6 +6957,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              must conform to the format of <paramref
              name="format" />
 
@@ -6008,8 +6966,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              exactly, you should always use exception handling when converting a string input by the user to a time interval. If you prefer not to use exception handling, you can call the <see
              cref="M:System.TimeSpan.TryParseExact(System.String,System.String,System.IFormatProvider,System.Globalization.TimeSpanStyles,System.TimeSpan@)" />
+
+            
 
             
 
@@ -6025,8 +6987,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              parameter is a string that contains either a single standard format specifier, or one or more custom format specifiers that define the required format of <paramref
              name="input" />
+
+            
 
             
 
@@ -6041,10 +7007,14 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="a63ebf55-7269-416b-b4f5-286f6c03bf0e">Custom TimeSpan Format Strings</a>
             </format>
+
+            
 
             
 
@@ -6061,8 +7031,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
               
 
+              
+
                method uses the conventions of the culture specified by the <paramref
                name="formatProvider" />
+
+              
 
               
 
@@ -6075,8 +7049,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
               
 
+              
+
                is a standard <see
                cref="T:System.TimeSpan" />
+
+              
 
               
 
@@ -6093,8 +7071,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              parameter is an <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -6107,8 +7089,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              is a standard format string. The <paramref
              name="formatProvider" />
+
+            
 
             
 
@@ -6126,6 +7112,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
                 
 
+                
+
                  object that represents the culture whose formatting conventions are to be reflected in the returned string. The <see
                  cref="T:System.Globalization.DateTimeFormatInfo" />
 
@@ -6133,8 +7121,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
                 
 
+                
+
                  object returned by the <see
                  cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
+
+                
 
                 
 
@@ -6152,6 +7144,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
                 
 
+                
+
                  object that defines the formatting of the returned string.</para
               >
             </item>
@@ -6164,6 +7158,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
                 
 
+                
+
                  interface. Its <see
                  cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
@@ -6171,8 +7167,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
                 
 
+                
+
                  method returns a <see
                  cref="T:System.Globalization.DateTimeFormatInfo" />
+
+                
 
                 
 
@@ -6190,8 +7190,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              is null, the <see
              cref="T:System.Globalization.DateTimeFormatInfo" />
+
+            
 
             
 
@@ -6207,8 +7211,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              parameter affects the interpretation of strings that are parsed using custom format strings. It determines whether <paramref
              name="input" />
+
+            
 
             
 
@@ -6221,8 +7229,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
             ), or whether it is always interpreted as a negative time interval (<see
              cref="F:System.Globalization.TimeSpanStyles.AssumeNegative" />
+
+            
 
             
 
@@ -6235,8 +7247,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              is not used, <paramref
              name="format" />
+
+            
 
             
 
@@ -6255,6 +7271,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              equivalent by using the specified format, culture-specific format information, and styles. The format of the string representation must match the specified format exactly.</para
           >
         </summary>
@@ -6268,8 +7286,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
             , as specified by <paramref
              name="format" />
+
+            
 
             
 
@@ -6282,8 +7304,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
             , and <paramref
              name="styles" />
+
+            
 
             
 
@@ -6299,6 +7325,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
           
 
+          
+
           A string that specifies the time interval to convert.</param
         >
         <param name="format">
@@ -6308,8 +7336,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
           
 
+          
+
           A standard or custom format string that defines the required format of <paramref
            name="input" />
+
+          
 
           
 
@@ -6324,6 +7356,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
           
 
+          
+
           An object that provides culture-specific formatting information.</param
         >
         <param name="styles">
@@ -6333,8 +7367,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
           
 
+          
+
           A bitwise combination of enumeration values that defines the style elements that may be present in <paramref
            name="input" />
+
+          
 
           
 
@@ -6377,8 +7415,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              method parses the string representation of a time interval, which must be in one of the formats defined by the <paramref
              name="formats" />
+
+            
 
             
 
@@ -6391,6 +7433,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              must exactly conform to one of the formats specified in <paramref
              name="formats" />
 
@@ -6398,8 +7442,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
             , you should always use exception handling when converting a string input by the user to a time interval. If you prefer not to use exception handling, you can call the <see
              cref="M:System.TimeSpan.TryParseExact(System.String,System.String[],System.IFormatProvider,System.Globalization.TimeSpanStyles,System.TimeSpan@)" />
+
+            
 
             
 
@@ -6415,8 +7463,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              parameter is a string array whose elements consist of either a single standard format specifier, or one or more custom format specifiers that define the required format of <paramref
              name="input" />
+
+            
 
             
 
@@ -6431,10 +7483,14 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="a63ebf55-7269-416b-b4f5-286f6c03bf0e">Custom TimeSpan Format Strings</a>
             </format>
+
+            
 
             
 
@@ -6447,8 +7503,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              must correspond exactly to a member of <paramref
              name="formats" />
+
+            
 
             
 
@@ -6461,8 +7521,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              to each element in <paramref
              name="formats" />
+
+            
 
             
 
@@ -6479,8 +7543,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
               
 
+              
+
                method uses the conventions of the culture specified by the <paramref
                name="formatProvider" />
+
+              
 
               
 
@@ -6493,8 +7561,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
               
 
+              
+
                is a standard <see
                cref="T:System.TimeSpan" />
+
+              
 
               
 
@@ -6511,8 +7583,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              parameter is an <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -6525,8 +7601,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              is a standard format string. The <paramref
              name="formatProvider" />
+
+            
 
             
 
@@ -6544,6 +7624,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
                 
 
+                
+
                  object that represents the culture whose formatting conventions are to be reflected in the returned string. The <see
                  cref="T:System.Globalization.DateTimeFormatInfo" />
 
@@ -6551,8 +7633,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
                 
 
+                
+
                  object returned by the <see
                  cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
+
+                
 
                 
 
@@ -6570,6 +7656,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
                 
 
+                
+
                  object that defines the formatting of the returned string.</para
               >
             </item>
@@ -6582,6 +7670,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
                 
 
+                
+
                  interface. Its <see
                  cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
@@ -6589,8 +7679,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
                 
 
+                
+
                  method returns a <see
                  cref="T:System.Globalization.DateTimeFormatInfo" />
+
+                
 
                 
 
@@ -6608,8 +7702,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              is null, the <see
              cref="T:System.Globalization.DateTimeFormatInfo" />
+
+            
 
             
 
@@ -6625,8 +7723,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              parameter affects the interpretation of strings that are parsed using custom format strings. It determines whether <paramref
              name="input" />
+
+            
 
             
 
@@ -6639,8 +7741,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
             ), or whether it is always interpreted as a negative time interval (<see
              cref="F:System.Globalization.TimeSpanStyles.AssumeNegative" />
+
+            
 
             
 
@@ -6653,8 +7759,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              is not used, <paramref
              name="format" />
+
+            
 
             
 
@@ -6673,6 +7783,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              equivalent by using the specified formats, culture-specific format information, and styles. The format of the string representation must match one of the specified formats exactly. </para
           >
         </summary>
@@ -6686,8 +7798,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
             , as specified by <paramref
              name="formats" />
+
+            
 
             
 
@@ -6700,8 +7816,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
             , and <paramref
              name="styles" />
+
+            
 
             
 
@@ -6717,6 +7837,8 @@ parses to TimeSpan -5.12:34:56.7890000
 
           
 
+          
+
           A string that specifies the time interval to convert.</param
         >
         <param name="formats">
@@ -6726,8 +7848,12 @@ parses to TimeSpan -5.12:34:56.7890000
 
           
 
+          
+
           A array of standard or custom format strings that define the required format of <paramref
            name="input" />
+
+          
 
           
 
@@ -6742,10 +7868,14 @@ parses to TimeSpan -5.12:34:56.7890000
 
           
 
+          
+
           An object that provides culture-specific formatting information.</param
         >
         <param name="styles">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6782,11 +7912,15 @@ parses to TimeSpan -5.12:34:56.7890000
 
             
 
+            
+
              between 0 and 59 inclusive, that represents
    the seconds component of the current instance. <block
              subset="none" type="note"
               >See <see
                cref="M:System.TimeSpan.ToString" />
+
+              
 
               
 
@@ -6801,6 +7935,8 @@ parses to TimeSpan -5.12:34:56.7890000
           <para
             >This example demonstrates using the <see
              cref="P:System.TimeSpan.Seconds" />
+
+            
 
             
 
@@ -6835,8 +7971,12 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              value can be represented as [-]d.hh:mm:ss.ff, where the optional minus sign indicates a negative time interval, the d component is days, hh is hours as measured on a 24-hour clock, mm is minutes, ss is seconds, and ff is fractions of a second. The value of the <see
              cref="P:System.TimeSpan.Seconds" />
+
+            
 
             
 
@@ -6852,8 +7992,12 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              property represents whole seconds, whereas the <see
              cref="P:System.TimeSpan.TotalSeconds" />
+
+            
 
             
 
@@ -6867,6 +8011,8 @@ public class TimeSpanPropertiesExampleOne {
           <para
             >Gets the seconds component of the time interval represented by the current <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -6909,6 +8055,8 @@ public class TimeSpanPropertiesExampleOne {
 
           
 
+          
+
            is less than <see
            cref="F:System.TimeSpan.MinValue" />
 
@@ -6916,8 +8064,12 @@ public class TimeSpanPropertiesExampleOne {
 
           
 
+          
+
            or greater than <see
            cref="F:System.TimeSpan.MaxValue" />
+
+          
 
           
 
@@ -6935,8 +8087,12 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              and <see
              cref="F:System.TimeSpan.MaxValue" />
+
+            
 
             
 
@@ -6952,8 +8108,12 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
             ; the original <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -6972,8 +8132,12 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              object whose value is the difference between the specified <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -6992,11 +8156,15 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="ts">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7034,6 +8202,8 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              specifying the 
    number of ticks represented by the current instance.</para
           >
@@ -7048,6 +8218,8 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              property can be negative or positive to represent a negative or positive time interval.</para
           >
         </remarks>
@@ -7056,6 +8228,8 @@ public class TimeSpanPropertiesExampleOne {
           <para
             >Gets the number of ticks that represent the value of the current <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -7262,6 +8436,8 @@ public class TimeSpanPropertiesExampleOne {
 
             
 
+            
+
              method.</para
           >
           <code lang="C#"
@@ -7291,6 +8467,8 @@ public class TimeSpanToStringExample {
           <para
             >Elements in square brackets ([ and ]) may not be included in the returned string. Colons and periods (: and.) are literal characters. The non-literal elements are listed in the following table. Note that the string returned by the <see
              cref="M:System.TimeSpan.ToString" />
+
+            
 
             
 
@@ -7367,10 +8545,14 @@ public class TimeSpanToStringExample {
 
               
 
+              
+
                and Oracle data types, see Knowledge Base article <see
                cref="http://go.microsoft.com/fwlink/?LinkId=161146"
                 >324577: System.TimeSpan Does Not Match Oracle 9i INTERVAL DAY TO SECOND Data Type</see
               >
+
+              
 
               
 
@@ -7390,6 +8572,8 @@ public class TimeSpanToStringExample {
 
             
 
+            
+
              object to its equivalent string representation.</para
           >
         </summary>
@@ -7398,6 +8582,8 @@ public class TimeSpanToStringExample {
           <para
             >The string representation of the current <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -7436,8 +8622,12 @@ public class TimeSpanToStringExample {
 
             
 
+            
+
              parameter can be any valid standard or custom format specifier for <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -7450,8 +8640,12 @@ public class TimeSpanToStringExample {
 
             
 
+            
+
              is equal to <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -7464,8 +8658,12 @@ public class TimeSpanToStringExample {
 
             
 
+            
+
              object is formatted with the common format specifier ("c"). If <paramref
              name="format" />
+
+            
 
             
 
@@ -7478,11 +8676,15 @@ public class TimeSpanToStringExample {
 
             
 
+            
+
             . </para
           >
           <para
             >If <paramref
              name="format" />
+
+            
 
             
 
@@ -7499,10 +8701,14 @@ public class TimeSpanToStringExample {
 
               
 
+              
+
                values do not include a date or time separator. If you want to include these elements in your format string, you must treat them as character literals. See the example for an illustration, and see the <format
                type="text/html">
                 <a href="a63ebf55-7269-416b-b4f5-286f6c03bf0e">Custom TimeSpan Format Strings</a>
               </format>
+
+              
 
               
 
@@ -7522,12 +8728,16 @@ public class TimeSpanToStringExample {
 
                 
 
+                
+
                  values, see <format
                  type="text/html">
                   <a href="9f6c95eb-63ae-4dcc-9c32-f81985c75794"
                     >Standard TimeSpan Format Strings</a
                   >
                 </format>
+
+                
 
                 
 
@@ -7542,6 +8752,8 @@ public class TimeSpanToStringExample {
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -7551,6 +8763,8 @@ public class TimeSpanToStringExample {
                  type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
                 </format>
+
+                
 
                 
 
@@ -7571,6 +8785,8 @@ public class TimeSpanToStringExample {
 
             
 
+            
+
              object to its equivalent string representation by using the specified format.</para
           >
         </summary>
@@ -7584,8 +8800,12 @@ public class TimeSpanToStringExample {
 
             
 
+            
+
              value in the format specified by the <paramref
              name="format" />
+
+            
 
             
 
@@ -7601,8 +8821,12 @@ public class TimeSpanToStringExample {
 
           
 
+          
+
           A standard or custom <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -7643,8 +8867,12 @@ public class TimeSpanToStringExample {
 
             
 
+            
+
              parameter can be any valid standard or custom format specifier for <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -7657,8 +8885,12 @@ public class TimeSpanToStringExample {
 
             
 
+            
+
              is equal to <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -7671,8 +8903,12 @@ public class TimeSpanToStringExample {
 
             
 
+            
+
              object is formatted with the common format specifier ("c"). If format is any other value, the method throws a <see
              cref="T:System.FormatException" />
+
+            
 
             
 
@@ -7689,10 +8925,14 @@ public class TimeSpanToStringExample {
 
               
 
+              
+
                values do not include a date or time separator. If you want to include these elements in your format string, you must treat them as character literals. See the example for an illustration, and see the <format
                type="text/html">
                 <a href="a63ebf55-7269-416b-b4f5-286f6c03bf0e">Custom TimeSpan Format Strings</a>
               </format>
+
+              
 
               
 
@@ -7712,6 +8952,8 @@ public class TimeSpanToStringExample {
 
                 
 
+                
+
                  values, see <format
                  type="text/html">
                   <a href="9f6c95eb-63ae-4dcc-9c32-f81985c75794"
@@ -7723,10 +8965,14 @@ public class TimeSpanToStringExample {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="a63ebf55-7269-416b-b4f5-286f6c03bf0e">Custom TimeSpan Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -7746,6 +8992,8 @@ public class TimeSpanToStringExample {
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -7758,6 +9006,8 @@ public class TimeSpanToStringExample {
 
             
 
+            
+
              parameter is an <see
              cref="T:System.IFormatProvider" />
 
@@ -7765,8 +9015,12 @@ public class TimeSpanToStringExample {
 
             
 
+            
+
              implementation that provides culture-specific information about the format of the returned string. The <paramref
              name="formatProvider" />
+
+            
 
             
 
@@ -7784,6 +9038,8 @@ public class TimeSpanToStringExample {
 
                 
 
+                
+
                  object that represents the culture whose formatting conventions are to be reflected in the returned string. The <see
                  cref="T:System.Globalization.DateTimeFormatInfo" />
 
@@ -7791,8 +9047,12 @@ public class TimeSpanToStringExample {
 
                 
 
+                
+
                  object retuned by the <see
                  cref="P:System.Globalization.CultureInfo.DateTimeFormat" />
+
+                
 
                 
 
@@ -7810,6 +9070,8 @@ public class TimeSpanToStringExample {
 
                 
 
+                
+
                  object that defines the formatting of the returned string.</para
               >
             </item>
@@ -7822,6 +9084,8 @@ public class TimeSpanToStringExample {
 
                 
 
+                
+
                  interface. Its <see
                  cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
@@ -7829,8 +9093,12 @@ public class TimeSpanToStringExample {
 
                 
 
+                
+
                  method returns a <see
                  cref="T:System.Globalization.DateTimeFormatInfo" />
+
+                
 
                 
 
@@ -7848,8 +9116,12 @@ public class TimeSpanToStringExample {
 
             
 
+            
+
              is null, the <see
              cref="T:System.Globalization.DateTimeFormatInfo" />
+
+            
 
             
 
@@ -7862,8 +9134,12 @@ public class TimeSpanToStringExample {
 
             
 
+            
+
              is a custom format string, the <paramref
              name="formatProvider" />
+
+            
 
             
 
@@ -7882,6 +9158,8 @@ public class TimeSpanToStringExample {
 
             
 
+            
+
              object to its equivalent string representation by using the specified format and culture-specific formatting information.</para
           >
         </summary>
@@ -7895,6 +9173,8 @@ public class TimeSpanToStringExample {
 
             
 
+            
+
              value, as specified by <paramref
              name="format" />
 
@@ -7902,8 +9182,12 @@ public class TimeSpanToStringExample {
 
             
 
+            
+
              and <paramref
              name="formatProvider" />
+
+            
 
             
 
@@ -7919,8 +9203,12 @@ public class TimeSpanToStringExample {
 
           
 
+          
+
           A standard or custom <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -7930,6 +9218,8 @@ public class TimeSpanToStringExample {
         >
         <param name="formatProvider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7966,6 +9256,8 @@ public class TimeSpanToStringExample {
 
             
 
+            
+
              that specifies the total number of days represented by the current instance.</para
           >
         </value>
@@ -7973,6 +9265,8 @@ public class TimeSpanToStringExample {
           <para
             >This example demonstrates using the <see
              cref="P:System.TimeSpan.TotalDays" />
+
+            
 
             
 
@@ -8008,8 +9302,12 @@ public class TimeSpanTotalUnitsProperties{
 
             
 
+            
+
              property represents whole and fractional days, whereas the <see
              cref="P:System.TimeSpan.Days" />
+
+            
 
             
 
@@ -8023,6 +9321,8 @@ public class TimeSpanTotalUnitsProperties{
           <para
             >Gets the value of the current <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -8062,6 +9362,8 @@ public class TimeSpanTotalUnitsProperties{
 
             
 
+            
+
              that specifies the total number of hours represented by the current instance.</para
           >
         </value>
@@ -8069,6 +9371,8 @@ public class TimeSpanTotalUnitsProperties{
           <para
             >This example demonstrates using the <see
              cref="P:System.TimeSpan.TotalHours" />
+
+            
 
             
 
@@ -8104,8 +9408,12 @@ public class TimeSpanTotalUnitsProperties{
 
             
 
+            
+
              property represents whole and fractional hours, whereas the <see
              cref="P:System.TimeSpan.Hours" />
+
+            
 
             
 
@@ -8119,6 +9427,8 @@ public class TimeSpanTotalUnitsProperties{
           <para
             >Gets the value of the current <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -8158,6 +9468,8 @@ public class TimeSpanTotalUnitsProperties{
 
             
 
+            
+
              that specifies the total number of milliseconds represented by the current instance.</para
           >
         </value>
@@ -8165,6 +9477,8 @@ public class TimeSpanTotalUnitsProperties{
           <para
             >This example demonstrates using the <see
              cref="P:System.TimeSpan.TotalMilliseconds" />
+
+            
 
             
 
@@ -8200,8 +9514,12 @@ public class TimeSpanTotalUnitsProperties{
 
             
 
+            
+
              property represents whole and fractional milliseconds, whereas the <see
              cref="P:System.TimeSpan.Milliseconds" />
+
+            
 
             
 
@@ -8215,6 +9533,8 @@ public class TimeSpanTotalUnitsProperties{
           <para
             >Gets the value of the current <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -8254,6 +9574,8 @@ public class TimeSpanTotalUnitsProperties{
 
             
 
+            
+
              that specifies the total number of minutes represented by the current instance.</para
           >
         </value>
@@ -8261,6 +9583,8 @@ public class TimeSpanTotalUnitsProperties{
           <para
             >This example demonstrates using the <see
              cref="P:System.TimeSpan.TotalMinutes" />
+
+            
 
             
 
@@ -8296,8 +9620,12 @@ public class TimeSpanTotalUnitsProperties{
 
             
 
+            
+
              property represents whole and fractional minutes, whereas the <see
              cref="P:System.TimeSpan.Minutes" />
+
+            
 
             
 
@@ -8311,6 +9639,8 @@ public class TimeSpanTotalUnitsProperties{
           <para
             >Gets the value of the current <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -8350,6 +9680,8 @@ public class TimeSpanTotalUnitsProperties{
 
             
 
+            
+
              that specifies the total number of seconds represented by the current instance.</para
           >
         </value>
@@ -8357,6 +9689,8 @@ public class TimeSpanTotalUnitsProperties{
           <para
             >This example demonstrates using the <see
              cref="P:System.TimeSpan.TotalSeconds" />
+
+            
 
             
 
@@ -8392,8 +9726,12 @@ public class TimeSpanTotalUnitsProperties{
 
             
 
+            
+
              property represents whole and fractional seconds, whereas the <see
              cref="P:System.TimeSpan.Seconds" />
+
+            
 
             
 
@@ -8407,6 +9745,8 @@ public class TimeSpanTotalUnitsProperties{
           <para
             >Gets the value of the current <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -8642,8 +9982,12 @@ public class TimeSpanTotalUnitsProperties{
 
             
 
+            
+
              field is a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -8656,8 +10000,12 @@ public class TimeSpanTotalUnitsProperties{
 
             
 
+            
+
              objects to determine whether the latter represent positive, non-zero, or negative time intervals. You can also use this field to initialize a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -8671,6 +10019,8 @@ public class TimeSpanTotalUnitsProperties{
           <para
             >Represents the zero <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 

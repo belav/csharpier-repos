@@ -26,8 +26,12 @@
 
         
 
+        
+
          class to convert object types before assignment to a control property. In general, the <see
          cref="T:System.Web.UI.Design.DataSourceViewSchemaConverter" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          and override the <see
          cref="M:System.Web.UI.Design.DataSourceViewSchemaConverter.CanConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Type)" />
+
+        
 
         
 
@@ -57,8 +65,12 @@
 
         
 
+        
+
          methods for the additional object types. To support a custom list of standard assignable values, override the <see
          cref="M:System.Web.UI.Design.DataSourceViewSchemaConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
+
+        
 
         
 
@@ -74,8 +86,12 @@
 
         
 
+        
+
          attribute to specify the <see
          cref="T:System.Web.UI.Design.DataSourceViewSchemaConverter" />
+
+        
 
         
 
@@ -88,8 +104,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.UI.WebControls.DataControlField" />
+
+        
 
         
 
@@ -102,6 +122,8 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.UI.WebControls.BoundField" />
 
@@ -109,8 +131,12 @@
 
         
 
+        
+
          class use the <see
          cref="T:System.Web.UI.Design.DataSourceViewSchemaConverter" />
+
+        
 
         
 
@@ -127,8 +153,12 @@
 
           
 
+          
+
            object. For more information, see the examples in <see
            cref="T:System.ComponentModel.TypeConverter" />
+
+          
 
           
 
@@ -145,6 +175,8 @@
 
         
 
+        
+
          method indicates that the converter supports returning a list of available values through the <see
          cref="Overload:System.Web.UI.Design.DataSourceViewSchemaConverter.GetStandardValues" />
 
@@ -152,8 +184,12 @@
 
         
 
+        
+
          method. The <see
          cref="Overload:System.Web.UI.Design.DataSourceViewSchemaConverter.GetStandardValuesExclusive" />
+
+        
 
         
 
@@ -187,8 +223,12 @@
 
               
 
+              
+
                object. For more information, see the examples in <see
                cref="T:System.ComponentModel.TypeConverter" />
+
+              
 
               
 
@@ -203,6 +243,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.DataSourceViewSchemaConverter" />
+
+            
 
             
 
@@ -240,8 +282,12 @@
 
             
 
+            
+
              method to determine whether the <see
              cref="M:System.Web.UI.Design.DataSourceViewSchemaConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)" />
+
+            
 
             
 
@@ -257,6 +303,8 @@
 
             
 
+            
+
              method can convert only from a string, so the <see
              cref="M:System.Web.UI.Design.DataSourceViewSchemaConverter.CanConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Type)" />
 
@@ -264,8 +312,12 @@
 
             
 
+            
+
              method returns true when <paramref
              name="sourceType" />
+
+            
 
             
 
@@ -289,8 +341,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -300,6 +356,8 @@
         >
         <param name="sourceType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -337,8 +395,12 @@
 
             
 
+            
+
              is a string, then the string representation of <paramref
              name="value" />
+
+            
 
             
 
@@ -351,8 +413,12 @@
 
             
 
+            
+
              is null, an empty string ("") is returned. For all other specified values, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -368,8 +434,12 @@
 
             
 
+            
+
              method to determine whether the <see
              cref="M:System.Web.UI.Design.DataSourceViewSchemaConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)" />
+
+            
 
             
 
@@ -392,6 +462,8 @@
 
             
 
+            
+
              instance that represents the converted object.</para
           >
         </returns>
@@ -402,8 +474,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -418,8 +494,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -429,6 +509,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -464,8 +546,12 @@
 
             
 
+            
+
              method uses the <see
              cref="P:System.ComponentModel.ITypeDescriptorContext.Instance" />
+
+            
 
             
 
@@ -478,6 +564,8 @@
 
             
 
+            
+
              object to obtain an <see
              cref="T:System.Web.UI.IDataSourceViewSchemaAccessor" />
 
@@ -485,8 +573,12 @@
 
             
 
+            
+
              implementation. If the <see
              cref="T:System.Web.UI.IDataSourceViewSchemaAccessor" />
+
+            
 
             
 
@@ -510,6 +602,8 @@
 
             
 
+            
+
              containing available values for assignment to the associated control property.</para
           >
         </returns>
@@ -520,8 +614,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -563,11 +661,15 @@
 
             
 
+            
+
              containing available values for assignment to the associated control property.</para
           >
         </returns>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -580,10 +682,14 @@
 
           
 
+          
+
             implementation that can be used to gain additional context information.</param
         >
         <param name="typeFilter">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -619,6 +725,8 @@
 
             
 
+            
+
              method for a <see
              cref="T:System.Web.UI.Design.DataSourceViewSchemaConverter" />
 
@@ -626,8 +734,12 @@
 
             
 
+            
+
              returns false, indicating that the list returned by the <see
              cref="Overload:System.Web.UI.Design.DataSourceViewSchemaConverter.GetStandardValues" />
+
+            
 
             
 
@@ -651,8 +763,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -688,8 +804,12 @@
 
             
 
+            
+
              method indicates whether the converter supports returning a list of available values through the <see
              cref="M:System.Web.UI.Design.DataSourceViewSchemaConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
+
+            
 
             
 
@@ -705,8 +825,12 @@
 
             
 
+            
+
              method for the <see
              cref="T:System.Web.UI.Design.DataSourceViewSchemaConverter" />
+
+            
 
             
 
@@ -719,8 +843,12 @@
 
             
 
+            
+
              object supplies an <see
              cref="T:System.Web.UI.IDataSourceViewSchemaAccessor" />
+
+            
 
             
 
@@ -733,6 +861,8 @@
 
             
 
+            
+
              property. The <see
              cref="M:System.Web.UI.Design.DataSourceViewSchemaConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
 
@@ -740,8 +870,12 @@
 
             
 
+            
+
              method uses the <see
              cref="T:System.Web.UI.IDataSourceViewSchemaAccessor" />
+
+            
 
             
 
@@ -765,8 +899,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 

@@ -3,7 +3,7 @@
   <paragraph
     >The predefined reference type equality operators are: <code_example
     >
-<![CDATA[
+      <![CDATA[
 bool operator ==(object x, object y);  
 bool operator !=(object x, object y);  
 ]]>
@@ -13,9 +13,9 @@ bool operator !=(object x, object y);
   <paragraph>Since the predefined reference type equality operators accept operands of type object, they apply to all types that do not declare applicable operator == and operator != members. Conversely, any applicable user-defined equality operators effectively hide the predefined reference type equality operators. </paragraph>
   <paragraph
     >The predefined reference type equality operators require the operands to be <non_terminal
-     where="11.2"
->reference-type</non_terminal
-    >
+     where="11.2">reference-type</non_terminal>
+
+    
 
     
 
@@ -23,6 +23,8 @@ bool operator !=(object x, object y);
 
      values or the value null; furthermore, they require that a standard implicit conversion (<hyperlink
     >13.3.1</hyperlink>
+
+    
 
     
 
@@ -46,11 +48,13 @@ bool operator !=(object x, object y);
 
     
 
+    
+
     ) rules will select that operator instead of the predefined reference type equality operator. However, it is always possible to select the predefined reference type equality operator by explicitly casting one or both of the operands to type object. <example
 
       >[Example: The example <code_example
       >
-<![CDATA[
+        <![CDATA[
 using System;  
 class Test  
 {  
@@ -70,9 +74,11 @@ class Test
 
       
 
+      
+
       produces the output <code_example
       >
-<![CDATA[
+        <![CDATA[
 True  
 False  
 False  
@@ -90,6 +96,8 @@ False
 
       
 
+      
+
       ) is selected when both operands are of type string. The remaining comparisons all output False because the predefined reference type equality operator is selected when one or both of the operands are of type object. </example
     >
   </paragraph>
@@ -97,7 +105,7 @@ False
     <example
       >Note that the above technique is not meaningful for value types. The example <code_example
       >
-<![CDATA[
+        <![CDATA[
 class Test  
 {  
    static void Main() {  
@@ -113,8 +121,12 @@ class Test
 
       
 
+      
+
       outputs False because the casts create references to two separate instances of boxed <keyword
       >int</keyword>
+
+      
 
       
 

@@ -8,6 +8,8 @@
 
     
 
+    
+
      of the element-accessmust be a variable or value of a class, struct, or interface type, and this type must implement one or more indexers that are applicable with respect to the <non_terminal
      where="14.5.6">expression-list</non_terminal>
 
@@ -15,8 +17,12 @@
 
     
 
+    
+
      of the <non_terminal
      where="14.5.6">element-access</non_terminal>
+
+    
 
     
 
@@ -32,8 +38,12 @@
 
     
 
+    
+
      of a class, struct, or interface type T, and A is an <non_terminal
      where="14.5.6">expression-list</non_terminal>
+
+    
 
     
 
@@ -44,6 +54,8 @@
       <list_item
         > The set of indexers provided by T is constructed. The set consists of all indexers declared in T or a base type of T that are not override declarations and are accessible in the current context (<hyperlink
         >10.5</hyperlink>
+
+        
 
         
 
@@ -61,11 +73,15 @@
 
           
 
+          
+
           ), then I is removed from the set. </list_item
         >
         <list_item
           > If I is applicable with respect to A (<hyperlink
           >14.4.2.1</hyperlink>
+
+          
 
           
 
@@ -83,11 +99,15 @@
 
         
 
+        
+
         . If a single best indexer cannot be identified, the indexer access is ambiguous, and a compile-time error occurs. </list_item
       >
       <list_item
         > The index expressions of the <non_terminal
          where="14.5.6">expression-list</non_terminal>
+
+        
 
         
 
@@ -105,8 +125,12 @@
 
     
 
+    
+
     ). In all other cases, the get-accessor is invoked to obtain the current value (<hyperlink
     >14.1.1</hyperlink>
+
+    
 
     
 

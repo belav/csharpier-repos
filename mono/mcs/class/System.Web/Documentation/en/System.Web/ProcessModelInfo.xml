@@ -23,8 +23,12 @@
 
         
 
+        
+
          class is not meant to be instantiated in your own code. Use the static <see
          cref="M:System.Web.ProcessModelInfo.GetCurrentProcessInfo" />
+
+        
 
         
 
@@ -37,6 +41,8 @@
 
         
 
+        
+
          methods to populate <see
          cref="T:System.Web.ProcessInfo" />
 
@@ -44,8 +50,12 @@
 
         
 
+        
+
          objects, and then use the properties of the <see
          cref="T:System.Web.ProcessInfo" />
+
+        
 
         
 
@@ -62,8 +72,12 @@
 
           
 
+          
+
            and <see
            cref="M:System.Web.ProcessModelInfo.GetHistory(System.Int32)" />
+
+          
 
           
 
@@ -75,6 +89,8 @@
               >How to: Configure ASP.NET Applications for an ASP.NET Version</a
             >
           </format>
+
+          
 
           
 
@@ -102,6 +118,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.ProcessModelInfo" />
+
+            
 
             
 
@@ -137,6 +155,8 @@
 
             
 
+            
+
              method is applicable only for applications that are running under the ASP.NET process model.</para
           >
         </remarks>
@@ -149,6 +169,8 @@
           <para
             >A <see
              cref="T:System.Web.ProcessInfo" />
+
+            
 
             
 
@@ -186,6 +208,8 @@
 
             
 
+            
+
              method is applicable only for applications that are running under the ASP.NET process model.</para
           >
         </remarks>
@@ -203,8 +227,12 @@
 
             
 
+            
+
              objects (up to 100); otherwise, if the number of available objects is less than <paramref
              name="numRecords" />
+
+            
 
             
 
@@ -215,6 +243,8 @@
         </returns>
         <param name="numRecords">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -21,6 +21,8 @@
 
         
 
+        
+
          control to define a set of content templates that contain the content that is displayed to Web site users based on the role assigned by Web site administrators. The <see
          cref="T:System.Web.UI.WebControls.RoleGroup" />
 
@@ -28,8 +30,12 @@
 
         
 
+        
+
          class is used by the <see
          cref="T:System.Web.UI.WebControls.LoginView" />
+
+        
 
         
 
@@ -45,8 +51,12 @@
 
         
 
+        
+
          property to a reference to an object that implements the <see
          cref="T:System.Web.UI.ITemplate" />
+
+        
 
         
 
@@ -62,10 +72,14 @@
 
         
 
+        
+
          class. For more information, see <format
          type="text/html">
           <a href="A0D2F19D-A2A7-496D-88B6-30133F8EA3D6">Understanding Role Management</a>
         </format>
+
+        
 
         
 
@@ -79,6 +93,8 @@
       <para
         >Associates a content template in a <see
          cref="T:System.Web.UI.WebControls.LoginView" />
+
+        
 
         
 
@@ -105,6 +121,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -113,6 +131,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.RoleGroup" />
+
+            
 
             
 
@@ -150,8 +170,12 @@
 
             
 
+            
+
              method returns true if the specified user is a member of any of the roles associated with this role group. Roles are searched in the order they are listed in the <see
              cref="P:System.Web.UI.WebControls.RoleGroup.Roles" />
+
+            
 
             
 
@@ -167,8 +191,12 @@
 
             
 
+            
+
              method to determine whether a user is a member of a role. You must configure role management to use the <see
              cref="M:System.Web.UI.WebControls.RoleGroup.ContainsUser(System.Security.Principal.IPrincipal)" />
+
+            
 
             
 
@@ -180,6 +208,8 @@
                 >Understanding ASP.NET Role Management</a
               >
             </format>
+
+            
 
             
 
@@ -198,6 +228,8 @@
         </returns>
         <param name="user">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -241,6 +273,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.WebControls.RoleGroup.ContentTemplate" />
+
+            
 
             
 
@@ -301,8 +335,12 @@
 
             
 
+            
+
              method returns the contents of the <see
              cref="P:System.Web.UI.WebControls.RoleGroup.Roles" />
+
+            
 
             
 

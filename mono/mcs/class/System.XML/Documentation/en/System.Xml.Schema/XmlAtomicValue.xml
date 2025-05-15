@@ -34,6 +34,8 @@
 
         
 
+        
+
          class cannot be inherited.</para
       >
     </summary>
@@ -67,6 +69,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -80,8 +84,12 @@
 
             
 
+            
+
              object copy of this <see
              cref="T:System.Xml.Schema.XmlAtomicValue" />
+
+            
 
             
 
@@ -111,6 +119,8 @@
           <para
             >The <see
              cref="P:System.Xml.Schema.XmlAtomicValue.IsNode" />
+
+            
 
             
 
@@ -152,8 +162,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ICloneable" />
+
+            
 
             
 
@@ -172,6 +186,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -180,6 +196,8 @@
           <para
             >Returns a copy of this <see
              cref="T:System.Xml.Schema.XmlAtomicValue" />
+
+            
 
             
 
@@ -241,8 +259,12 @@
 
             
 
+            
+
              property is equivalent to the value of the <see
              cref="P:System.Xml.Schema.XmlAtomicValue.Value" />
+
+            
 
             
 
@@ -258,12 +280,16 @@
 
             
 
+            
+
              namespace, see <format
              type="text/html">
               <a href="63570538-06e3-4401-ad4d-ac50be90c7bf"
                 >Type Support in the System.Xml Classes</a
               >
             </format>
+
+            
 
             
 
@@ -332,6 +358,8 @@
 
             
 
+            
+
              method attempts to convert the value of the validated XML element or attribute to the Microsoft .NET Framework type specified.</para
           >
           <para
@@ -342,11 +370,15 @@
 
             
 
+            
+
              object is used to resolve namespace prefixes related to type conversions. For example, when converting an xs:QName to an xs:string.</para
           >
           <para
             >For more information about type support in the <see
              cref="N:System.Xml" />
+
+            
 
             
 
@@ -363,6 +395,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -371,6 +405,8 @@
           <para
             >Returns the validated XML element or attribute's value as the type specified using the <see
              cref="T:System.Xml.IXmlNamespaceResolver" />
+
+            
 
             
 
@@ -390,6 +426,8 @@
 
           
 
+          
+
           The type to return the validated XML element or attribute's value as.</param
         >
         <param name="nsResolver">
@@ -399,8 +437,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.IXmlNamespaceResolver" />
+
+          
 
           
 
@@ -434,8 +476,12 @@
 
             
 
+            
+
              property attempts to convert the value of the validated XML element or attribute to the Microsoft .NET Framework <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -446,6 +492,8 @@
           <para
             >For more information about type support in the <see
              cref="N:System.Xml" />
+
+            
 
             
 
@@ -462,6 +510,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -470,6 +520,8 @@
           <para
             >Gets the validated XML element or attribute's value as a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -507,8 +559,12 @@
 
             
 
+            
+
              property attempts to convert the value of the validated XML element or attribute to the Microsoft .NET Framework <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -519,6 +575,8 @@
           <para
             >For more information about type support in the <see
              cref="N:System.Xml" />
+
+            
 
             
 
@@ -535,6 +593,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -543,6 +603,8 @@
           <para
             >Gets the validated XML element or attribute's value as a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -596,8 +658,12 @@
 
             
 
+            
+
              property attempts to convert the value of the validated XML element or attribute to the Microsoft .NET Framework <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -608,6 +674,8 @@
           <para
             >For more information about type support in the <see
              cref="N:System.Xml" />
+
+            
 
             
 
@@ -624,6 +692,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -632,6 +702,8 @@
           <para
             >Gets the validated XML element or attribute's value as a <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -666,8 +738,12 @@
 
             
 
+            
+
              property attempts to convert the value of the validated XML element or attribute to the Microsoft .NET Framework <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -678,6 +754,8 @@
           <para
             >For more information about type support in the <see
              cref="N:System.Xml" />
+
+            
 
             
 
@@ -694,6 +772,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -702,6 +782,8 @@
           <para
             >Gets the validated XML element or attribute's value as an <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -736,8 +818,12 @@
 
             
 
+            
+
              property attempts to convert the value of the validated XML element or attribute to the Microsoft .NET Framework <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -748,6 +834,8 @@
           <para
             >For more information about type support in the <see
              cref="N:System.Xml" />
+
+            
 
             
 
@@ -764,6 +852,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -772,6 +862,8 @@
           <para
             >Gets the validated XML element or attribute's value as an <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -806,11 +898,15 @@
 
             
 
+            
+
              property gets the .NET Framework type of the typed value of the validated XML element or attribute.</para
           >
           <para
             >For example, an element of type xs:int would have a <see
              cref="P:System.Xml.Schema.XmlAtomicValue.ValueType" />
+
+            
 
             
 
@@ -823,8 +919,12 @@
 
             
 
+            
+
              by default. However, the <see
              cref="P:System.Xml.Schema.XmlAtomicValue.ValueType" />
+
+            
 
             
 
@@ -837,8 +937,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -854,12 +958,16 @@
 
             
 
+            
+
              namespace, see <format
              type="text/html">
               <a href="63570538-06e3-4401-ad4d-ac50be90c7bf"
                 >Type Support in the System.Xml Classes</a
               >
             </format>
+
+            
 
             
 
@@ -904,8 +1012,12 @@
 
             
 
+            
+
              property gets the <see
              cref="T:System.Xml.Schema.XmlSchemaType" />
+
+            
 
             
 
@@ -918,8 +1030,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Xml.Schema.XmlSchemaComplexType" />
+
+            
 
             
 
@@ -933,6 +1049,8 @@
           <para
             >Gets the <see
              cref="T:System.Xml.Schema.XmlSchemaType" />
+
+            
 
             
 

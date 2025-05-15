@@ -20,6 +20,8 @@
 
         
 
+        
+
          values represent the return values of the <see
          cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.GetEnumValue(System.Windows.Forms.VisualStyles.EnumProperty)" />
 
@@ -27,8 +29,12 @@
 
         
 
+        
+
          method when it is called with an argument value of <see
          cref="F:System.Windows.Forms.VisualStyles.EnumProperty.ImageLayout" />
+
+        
 
         
 

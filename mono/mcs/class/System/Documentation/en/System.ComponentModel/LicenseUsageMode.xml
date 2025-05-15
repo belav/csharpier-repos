@@ -28,8 +28,12 @@
 
         
 
+        
+
          and the <see
          cref="T:System.ComponentModel.LicenseContext" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
         . See the <see
          cref="T:System.ComponentModel.LicenseManager" />
+
+        
 
         
 
@@ -63,6 +71,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -71,6 +81,8 @@
       <para
         >Specifies when the <see
          cref="T:System.ComponentModel.License" />
+
+        
 
         
 

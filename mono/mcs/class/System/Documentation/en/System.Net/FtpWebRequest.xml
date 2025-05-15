@@ -26,8 +26,12 @@
 
         
 
+        
+
         , use the <see
          cref="M:System.Net.WebRequest.Create(System.String)" />
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
          class to upload and download information from an FTP server. Using either of these approaches, when you specify a network resource that uses the FTP scheme (for example, "ftp://contoso.com") the <see
          cref="T:System.Net.FtpWebRequest" />
+
+        
 
         
 
@@ -57,11 +65,15 @@
 
         
 
+        
+
          property), then the current directory is set to &lt;UserLoginDirectory&gt;/path.</para
       >
       <para
         >You must have a valid user name and password for the server or the server must allow anonymous logon. You can specify the credentials used to connect to the server by setting the <see
          cref="P:System.Net.FtpWebRequest.Credentials" />
+
+        
 
         
 
@@ -74,8 +86,12 @@
 
         
 
+        
+
          portion of the URI passed to the <see
          cref="Overload:System.Net.WebRequest.Create" />
+
+        
 
         
 
@@ -88,8 +104,12 @@
 
         
 
+        
+
          information in the URI, the <see
          cref="P:System.Net.FtpWebRequest.Credentials" />
+
+        
 
         
 
@@ -106,8 +126,12 @@
 
           
 
+          
+
            property is true, all data and commands, including your user name and password information, are sent to the server in clear text. Anyone monitoring network traffic can view your credentials and use them to connect to the server. If you are connecting to an FTP server that requires credentials and supports Secure Sockets Layer (SSL), you should set <see
            cref="P:System.Net.FtpWebRequest.EnableSsl" />
+
+          
 
           
 
@@ -124,8 +148,12 @@
 
         
 
+        
+
          to access the FTP resource; otherwise, a <see
          cref="T:System.Security.SecurityException" />
+
+        
 
         
 
@@ -141,8 +169,12 @@
 
         
 
+        
+
          property to a value defined in the <see
          cref="T:System.Net.WebRequestMethods.Ftp" />
+
+        
 
         
 
@@ -155,8 +187,12 @@
 
         
 
+        
+
          property from its default value (true) to false. For details and restrictions, see <see
          cref="P:System.Net.FtpWebRequest.Method" />
+
+        
 
         
 
@@ -172,8 +208,12 @@
 
         
 
+        
+
          object to upload a file to a server, you must write the file content to the request stream obtained by calling the <see
          cref="M:System.Net.FtpWebRequest.GetRequestStream" />
+
+        
 
         
 
@@ -186,8 +226,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Net.FtpWebRequest.EndGetRequestStream(System.IAsyncResult)" />
+
+        
 
         
 
@@ -203,8 +247,12 @@
 
         
 
+        
+
          method or its asynchronous counterparts, the <see
          cref="M:System.Net.FtpWebRequest.BeginGetResponse(System.AsyncCallback,System.Object)" />
+
+        
 
         
 
@@ -217,6 +265,8 @@
 
         
 
+        
+
          methods. When the requested operation completes, an <see
          cref="T:System.Net.FtpWebResponse" />
 
@@ -224,8 +274,12 @@
 
         
 
+        
+
          object is returned. The <see
          cref="T:System.Net.FtpWebResponse" />
+
+        
 
         
 
@@ -241,8 +295,12 @@
 
         
 
+        
+
          property. If the time-out period is exceeded, the calling method throws a <see
          cref="T:System.Net.WebException" />
+
+        
 
         
 
@@ -255,8 +313,12 @@
 
         
 
+        
+
          set to <see
          cref="F:System.Net.WebExceptionStatus.Timeout" />
+
+        
 
         
 
@@ -272,8 +334,12 @@
 
         
 
+        
+
          method. For more information, see <see
          cref="T:System.Net.FtpWebResponse" />
+
+        
 
         
 
@@ -289,8 +355,12 @@
 
         
 
+        
+
          property is set, either directly or in a configuration file, communications with the FTP server are made through the specified proxy. If the specified proxy is an HTTP proxy, only the <see
          cref="F:System.Net.WebRequestMethods.Ftp.DownloadFile" />
+
+        
 
         
 
@@ -303,8 +373,12 @@
 
         
 
+        
+
         , and <see
          cref="F:System.Net.WebRequestMethods.Ftp.ListDirectoryDetails" />
+
+        
 
         
 
@@ -320,8 +394,12 @@
 
         
 
+        
+
          command with the <see
          cref="P:System.Net.FtpWebRequest.UseBinary" />
+
+        
 
         
 
@@ -337,11 +415,15 @@
 
         
 
+        
+
         s reuse existing connections, if possible.</para
       >
       <para
         >For more information about the FTP protocol, see RFC 959, "File Transfer Protocol," available at <see
          cref="http://www.ietf.org/rfc/rfc959.txt">http://www.rfc-editor.org/</see>
+
+        
 
         
 
@@ -384,6 +466,8 @@
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
               </format>
+
+              
 
               
 
@@ -432,8 +516,12 @@
 
             
 
+            
+
              method. Typically, <see
              cref="M:System.Net.FtpWebRequest.EndGetRequestStream(System.IAsyncResult)" />
+
+            
 
             
 
@@ -446,8 +534,12 @@
 
             
 
+            
+
             . To determine the state of the operation, check the properties in the <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -458,6 +550,8 @@
           <para
             >This method does not block while waiting for the stream. To block, call <see
              cref="M:System.Net.FtpWebRequest.GetRequestStream" />
+
+            
 
             
 
@@ -477,6 +571,8 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -487,6 +583,8 @@
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
               </format>
+
+              
 
               
 
@@ -510,6 +608,8 @@
 
             
 
+            
+
              instance that indicates the status of the operation.</para
           >
         </returns>
@@ -520,8 +620,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -536,8 +640,12 @@
 
           
 
+          
+
           A user-defined object that contains information about the operation. This object is passed to the <paramref
            name="callback" />
+
+          
 
           
 
@@ -580,8 +688,12 @@
 
             
 
+            
+
              method. Typically, <see
              cref="M:System.Net.FtpWebRequest.EndGetResponse(System.IAsyncResult)" />
+
+            
 
             
 
@@ -594,6 +706,8 @@
 
             
 
+            
+
             . To determine the state of the operation, check the properties in the <see
              cref="T:System.IAsyncResult" />
 
@@ -601,8 +715,12 @@
 
             
 
+            
+
              object returned by the <see
              cref="M:System.Net.FtpWebRequest.BeginGetResponse(System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -618,10 +736,14 @@
 
             
 
+            
+
              property is set, either directly or in a configuration file, communications with the FTP server are made through the specified proxy.</para
           >
           <para>
             <see cref="M:System.Net.FtpWebRequest.BeginGetResponse(System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -634,8 +756,12 @@
 
             
 
+            
+
              method in place of <see
              cref="M:System.Net.FtpWebRequest.BeginGetResponse(System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -655,6 +781,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -664,6 +792,8 @@
                 >[&lt;topic://conUsingNetworkTracing&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -680,6 +810,8 @@
 
               
 
+              
+
                is thrown, use the <see
                cref="P:System.Net.WebException.Response" />
 
@@ -687,8 +819,12 @@
 
               
 
+              
+
                and <see
                cref="P:System.Net.WebException.Status" />
+
+              
 
               
 
@@ -712,6 +848,8 @@
 
             
 
+            
+
              instance that indicates the status of the operation.</para
           >
         </returns>
@@ -722,8 +860,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -738,8 +880,12 @@
 
           
 
+          
+
           A user-defined object that contains information about the operation. This object is passed to the <paramref
            name="callback" />
+
+          
 
           
 
@@ -783,6 +929,8 @@
 
             
 
+            
+
             . </para
           >
           <block subset="none" type="note">
@@ -794,8 +942,12 @@
 
               
 
+              
+
                (if there is one), or tries to reuse an anonymous session if <see
                cref="P:System.Net.HttpWebRequest.ClientCertificates" />
+
+              
 
               
 
@@ -844,8 +996,12 @@
 
             
 
+            
+
              property after calling the <see
              cref="M:System.Net.FtpWebRequest.GetRequestStream" />
+
+            
 
             
 
@@ -858,8 +1014,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Net.FtpWebRequest.GetResponse" />
+
+            
 
             
 
@@ -872,8 +1032,12 @@
 
             
 
+            
+
              method causes an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -912,8 +1076,12 @@
 
             
 
+            
+
              property is provided only for compatibility with other implementations of the <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -926,8 +1094,12 @@
 
             
 
+            
+
              classes. There is no reason to use <see
              cref="P:System.Net.FtpWebRequest.ContentLength" />
+
+            
 
             
 
@@ -941,6 +1113,8 @@
           <para
             >Gets or sets a value that is ignored by the <see
              cref="T:System.Net.FtpWebRequest" />
+
+            
 
             
 
@@ -975,6 +1149,8 @@
 
             
 
+            
+
              property when downloading a file from an FTP server. This offset indicates the position in the server's file that marks the start of the data to be downloaded. The offset is specified as the number of bytes from the start of the file; the offset of the first byte is zero.  </para
           >
           <para
@@ -985,8 +1161,12 @@
 
             
 
+            
+
              causes the <see
              cref="T:System.Net.FtpWebRequest" />
+
+            
 
             
 
@@ -1002,8 +1182,12 @@
 
             
 
+            
+
              after calling the <see
              cref="M:System.Net.FtpWebRequest.GetRequestStream" />
+
+            
 
             
 
@@ -1016,8 +1200,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Net.FtpWebRequest.GetResponse" />
+
+            
 
             
 
@@ -1030,8 +1218,12 @@
 
             
 
+            
+
              method causes an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -1070,8 +1262,12 @@
 
             
 
+            
+
              property is provided only for compatibility with other implementations of the <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -1084,8 +1280,12 @@
 
             
 
+            
+
              classes. There is no reason to use <see
              cref="P:System.Net.FtpWebRequest.ContentType" />
+
+            
 
             
 
@@ -1099,6 +1299,8 @@
           <para
             >Always throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -1139,8 +1341,12 @@
 
             
 
+            
+
              property by using a credential of type <see
              cref="T:System.Net.NetworkCredential" />
+
+            
 
             
 
@@ -1157,12 +1363,16 @@
 
               
 
+              
+
                property is set to true.</para
             >
           </block>
           <para
             >Changing <see
              cref="P:System.Net.FtpWebRequest.Credentials" />
+
+            
 
             
 
@@ -1175,8 +1385,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Net.FtpWebRequest.BeginGetRequestStream(System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -1189,6 +1403,8 @@
 
             
 
+            
+
             , or <see
              cref="M:System.Net.FtpWebRequest.BeginGetResponse(System.AsyncCallback,System.Object)" />
 
@@ -1196,8 +1412,12 @@
 
             
 
+            
+
              method causes an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -1246,11 +1466,15 @@
 
             
 
+            
+
              command is cached. </para
           >
           <para
             >The following table describes the effects of FTP caching policies on <see
              cref="T:System.Net.FtpWebRequest" />
+
+            
 
             
 
@@ -1299,6 +1523,8 @@
                 <para
                   >Returns the cached resource if the content length is present and matches the entry size; otherwise, throws a <see
                    cref="T:System.Net.WebException" />
+
+                  
 
                   
 
@@ -1358,6 +1584,8 @@
 
               
 
+              
+
                overrides any configuration setting.</para
             >
           </block>
@@ -1393,8 +1621,12 @@
 
               
 
+              
+
                property is true, all data and commands, including your user name and password information, are sent to the server in clear text. Anyone monitoring network traffic can view your credentials and use them to connect to the server. If you are connecting to an FTP server that requires credentials and supports SSL, you should set <see
                cref="P:System.Net.FtpWebRequest.EnableSsl" />
+
+              
 
               
 
@@ -1411,6 +1643,8 @@
 
             
 
+            
+
              exception. </para
           >
         </remarks>
@@ -1419,6 +1653,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -1461,8 +1697,12 @@
 
             
 
+            
+
              method blocks until the operation completes. To determine whether the operation has completed, check the <see
              cref="P:System.IAsyncResult.IsCompleted" />
+
+            
 
             
 
@@ -1475,11 +1715,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >In addition to the exceptions noted in "Exceptions," <see
              cref="M:System.Net.FtpWebRequest.EndGetRequestStream(System.IAsyncResult)" />
+
+            
 
             
 
@@ -1500,6 +1744,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -1509,6 +1755,8 @@
           <para
             >Ends a pending asynchronous operation started with <see
              cref="M:System.Net.FtpWebRequest.BeginGetRequestStream(System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -1527,6 +1775,8 @@
 
             
 
+            
+
              instance associated with this instance.</para
           >
         </returns>
@@ -1537,8 +1787,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IAsyncResult" />
+
+          
 
           
 
@@ -1580,8 +1834,12 @@
 
             
 
+            
+
              method is called, <see
              cref="M:System.Net.FtpWebRequest.EndGetResponse(System.IAsyncResult)" />
+
+            
 
             
 
@@ -1594,8 +1852,12 @@
 
             
 
+            
+
              property before calling <see
              cref="M:System.Net.FtpWebRequest.EndGetResponse(System.IAsyncResult)" />
+
+            
 
             
 
@@ -1606,6 +1868,8 @@
           <para
             >In addition to the exceptions noted in "Exceptions," <see
              cref="M:System.Net.FtpWebRequest.EndGetResponse(System.IAsyncResult)" />
+
+            
 
             
 
@@ -1626,6 +1890,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -1635,6 +1901,8 @@
           <para
             >Ends a pending asynchronous operation started with <see
              cref="M:System.Net.FtpWebRequest.BeginGetResponse(System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -1653,8 +1921,12 @@
 
             
 
+            
+
              reference that contains an <see
              cref="T:System.Net.FtpWebResponse" />
+
+            
 
             
 
@@ -1670,8 +1942,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IAsyncResult" />
+
+          
 
           
 
@@ -1711,11 +1987,15 @@
 
             
 
+            
+
              method. After writing the data to the stream, you must close the stream prior to sending the request.</para
           >
           <para
             >If you have not set the <see
              cref="P:System.Net.FtpWebRequest.Method" />
+
+            
 
             
 
@@ -1728,8 +2008,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Net.WebRequestMethods.Ftp.AppendFile" />
+
+            
 
             
 
@@ -1744,6 +2028,8 @@
 
             
 
+            
+
              blocks while waiting for the stream. To prevent this, call the <see
              cref="M:System.Net.FtpWebRequest.BeginGetRequestStream(System.AsyncCallback,System.Object)" />
 
@@ -1751,8 +2037,12 @@
 
             
 
+            
+
              method in place of <see
              cref="M:System.Net.FtpWebRequest.GetRequestStream" />
+
+            
 
             
 
@@ -1773,6 +2063,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -1786,6 +2078,8 @@
           <para
             >A writable <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -1826,8 +2120,12 @@
 
             
 
+            
+
              object returned by this method to <see
              cref="T:System.Net.FtpWebResponse" />
+
+            
 
             
 
@@ -1842,8 +2140,12 @@
 
             
 
+            
+
              causes a control connection to be established, and might also create a data connection. <see
              cref="M:System.Net.FtpWebRequest.GetResponse" />
+
+            
 
             
 
@@ -1856,6 +2158,8 @@
 
             
 
+            
+
              and <see
              cref="M:System.Net.FtpWebRequest.EndGetResponse(System.IAsyncResult)" />
 
@@ -1863,8 +2167,12 @@
 
             
 
+            
+
              methods in place of <see
              cref="M:System.Net.FtpWebRequest.GetResponse" />
+
+            
 
             
 
@@ -1880,11 +2188,15 @@
 
             
 
+            
+
              property is set, either directly or in a configuration file, communications with the FTP server are made through the proxy.</para
           >
           <para
             >If a <see
              cref="T:System.Net.WebException" />
+
+            
 
             
 
@@ -1897,8 +2209,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.WebException.Status" />
+
+            
 
             
 
@@ -1918,12 +2234,16 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
             <para
               >Multiple calls to <see
                cref="M:System.Net.FtpWebRequest.GetResponse" />
+
+              
 
               
 
@@ -1947,8 +2267,12 @@
 
             
 
+            
+
              reference that contains an <see
              cref="T:System.Net.FtpWebResponse" />
+
+            
 
             
 
@@ -1993,8 +2317,12 @@
 
             
 
+            
+
              property is provided only for compatibility with other implementations of the <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -2007,8 +2335,12 @@
 
             
 
+            
+
              classes. There is no reason to use <see
              cref="P:System.Net.FtpWebRequest.Headers" />
+
+            
 
             
 
@@ -2022,6 +2354,8 @@
           <para
             >Gets an empty <see
              cref="T:System.Net.WebHeaderCollection" />
+
+            
 
             
 
@@ -2061,8 +2395,12 @@
 
             
 
+            
+
              property is set to false, the control connection is closed when you call the <see
              cref="M:System.Net.FtpWebResponse.Close" />
+
+            
 
             
 
@@ -2078,8 +2416,12 @@
 
             
 
+            
+
              after calling the <see
              cref="M:System.Net.FtpWebRequest.GetRequestStream" />
+
+            
 
             
 
@@ -2092,8 +2434,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Net.FtpWebRequest.GetResponse" />
+
+            
 
             
 
@@ -2106,8 +2452,12 @@
 
             
 
+            
+
              method causes an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -2121,6 +2471,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -2155,8 +2507,12 @@
 
             
 
+            
+
              property determines which command is sent to the server. You set the <see
              cref="P:System.Net.FtpWebRequest.Method" />
+
+            
 
             
 
@@ -2169,8 +2525,12 @@
 
             
 
+            
+
              class. Note that the strings defined in the <see
              cref="T:System.Net.WebRequestMethods.Ftp" />
+
+            
 
             
 
@@ -2183,6 +2543,8 @@
 
             
 
+            
+
              property. Setting the <see
              cref="P:System.Net.FtpWebRequest.Method" />
 
@@ -2190,8 +2552,12 @@
 
             
 
+            
+
              property to any other value will result in an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -2207,8 +2573,12 @@
 
             
 
+            
+
              to <see
              cref="F:System.Net.WebRequestMethods.Ftp.UploadFile" />
+
+            
 
             
 
@@ -2221,8 +2591,12 @@
 
             
 
+            
+
              method. Failure to call these members in the correct order causes a <see
              cref="T:System.Net.ProtocolViolationException" />
+
+            
 
             
 
@@ -2238,6 +2612,8 @@
 
             
 
+            
+
              object must have permission to perform the specified method. If not, the FTP command fails.</para
           >
           <para
@@ -2248,8 +2624,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.FtpWebResponse.StatusDescription" />
+
+            
 
             
 
@@ -2288,6 +2668,8 @@
 
             
 
+            
+
              property is provided only for compatibility with other implementations of the <see
              cref="T:System.Net.WebRequest" />
 
@@ -2295,8 +2677,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Net.WebResponse" />
+
+            
 
             
 
@@ -2310,6 +2696,8 @@
           <para
             >Always throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -2350,8 +2738,12 @@
 
             
 
+            
+
              property identifies the <see
              cref="T:System.Net.IWebProxy" />
+
+            
 
             
 
@@ -2364,8 +2756,12 @@
 
             
 
+            
+
              to the proxy instance returned by the <see
              cref="M:System.Net.GlobalProxySelection.GetEmptyWebProxy" />
+
+            
 
             
 
@@ -2375,6 +2771,8 @@
              type="text/html">
               <a href="fcd9c3bd-93de-4c92-8ff3-837327ad18de">Automatic Proxy Detection</a>
             </format>
+
+            
 
             
 
@@ -2390,8 +2788,12 @@
 
             
 
+            
+
              before writing data to the request's stream or getting the response. Changing <see
              cref="P:System.Net.FtpWebRequest.Proxy" />
+
+            
 
             
 
@@ -2404,8 +2806,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Net.FtpWebRequest.BeginGetRequestStream(System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -2418,6 +2824,8 @@
 
             
 
+            
+
             , or <see
              cref="M:System.Net.FtpWebRequest.BeginGetResponse(System.AsyncCallback,System.Object)" />
 
@@ -2425,8 +2833,12 @@
 
             
 
+            
+
              method causes an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -2442,11 +2854,15 @@
 
             
 
+            
+
              class supports HTTP and ISA Firewall Client proxies.</para
           >
           <para
             >If the specified proxy is an HTTP proxy, only the <see
              cref="F:System.Net.WebRequestMethods.Ftp.DownloadFile" />
+
+            
 
             
 
@@ -2459,8 +2875,12 @@
 
             
 
+            
+
             , and <see
              cref="F:System.Net.WebRequestMethods.Ftp.ListDirectoryDetails" />
+
+            
 
             
 
@@ -2499,6 +2919,8 @@
 
             
 
+            
+
              is used when writing to the stream returned by the <see
              cref="M:System.Net.FtpWebRequest.GetRequestStream" />
 
@@ -2506,8 +2928,12 @@
 
             
 
+            
+
              method or reading from the stream returned by the <see
              cref="M:System.Net.FtpWebResponse.GetResponseStream" />
+
+            
 
             
 
@@ -2523,8 +2949,12 @@
 
             
 
+            
+
              property controls the time-out for the <see
              cref="M:System.IO.Stream.Read(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -2537,8 +2967,12 @@
 
             
 
+            
+
              method, and for the <see
              cref="M:System.IO.Stream.Write(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -2551,8 +2985,12 @@
 
             
 
+            
+
              method. If the time-out period is exceeded, the calling method throws a <see
              cref="T:System.Net.WebException" />
+
+            
 
             
 
@@ -2565,8 +3003,12 @@
 
             
 
+            
+
              set to <see
              cref="F:System.Net.WebExceptionStatus.Timeout" />
+
+            
 
             
 
@@ -2577,6 +3019,8 @@
           <para
             >To specify the amount of time to wait for the request to complete, use the <see
              cref="P:System.Net.FtpWebRequest.Timeout" />
+
+            
 
             
 
@@ -2636,8 +3080,12 @@
 
             
 
+            
+
              property is the URI specified when the <see
              cref="M:System.Net.WebRequest.Create(System.String)" />
+
+            
 
             
 
@@ -2679,6 +3127,8 @@
 
             
 
+            
+
              object exists, one is created for the FTP server. To set the maximum number of connections that can be open for an FTP server, set the <see
              cref="P:System.Net.ServicePoint.ConnectionLimit" />
 
@@ -2686,8 +3136,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Net.ServicePoint" />
+
+            
 
             
 
@@ -2701,6 +3155,8 @@
           <para
             >Gets the <see
              cref="T:System.Net.ServicePoint" />
+
+            
 
             
 
@@ -2735,8 +3191,12 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Threading.Timeout.Infinite" />
+
+            
 
             
 
@@ -2751,8 +3211,12 @@
 
             
 
+            
+
              is the number of milliseconds that a synchronous request made with the <see
              cref="M:System.Net.FtpWebRequest.GetResponse" />
+
+            
 
             
 
@@ -2765,8 +3229,12 @@
 
             
 
+            
+
              method waits for a stream. If a resource does not respond within the time-out period, the request throws a <see
              cref="T:System.Net.WebException" />
+
+            
 
             
 
@@ -2779,8 +3247,12 @@
 
             
 
+            
+
              property set to <see
              cref="F:System.Net.WebExceptionStatus.Timeout" />
+
+            
 
             
 
@@ -2796,8 +3268,12 @@
 
             
 
+            
+
              after calling the <see
              cref="M:System.Net.FtpWebRequest.GetRequestStream" />
+
+            
 
             
 
@@ -2810,8 +3286,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Net.FtpWebRequest.GetResponse" />
+
+            
 
             
 
@@ -2824,8 +3304,12 @@
 
             
 
+            
+
              method causes an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -2841,8 +3325,12 @@
 
             
 
+            
+
              to a value less than 15 seconds, it may take 15 seconds or more before a <see
              cref="T:System.Net.WebException" />
+
+            
 
             
 
@@ -2881,8 +3369,12 @@
 
             
 
+            
+
              to send a "TYPE I" command to the server. Specifying false causes the <see
              cref="T:System.Net.FtpWebRequest" />
+
+            
 
             
 
@@ -2898,8 +3390,12 @@
 
             
 
+            
+
              after calling the <see
              cref="M:System.Net.FtpWebRequest.GetRequestStream" />
+
+            
 
             
 
@@ -2912,8 +3408,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Net.FtpWebRequest.GetResponse" />
+
+            
 
             
 
@@ -2926,8 +3426,12 @@
 
             
 
+            
+
              method causes an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -2941,6 +3445,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -2982,8 +3488,12 @@
 
             
 
+            
+
              property is provided only for compatibility with other implementations of the <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -2996,8 +3506,12 @@
 
             
 
+            
+
              classes. There is no reason to use <see
              cref="P:System.Net.FtpWebRequest.UseDefaultCredentials" />
+
+            
 
             
 
@@ -3011,6 +3525,8 @@
           <para
             >Always throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -3045,6 +3561,8 @@
 
             
 
+            
+
              property to true sends the "PASV" command to the server. This command requests the server to listen on a data port and to wait for a connection rather than initiate one upon receipt of a transfer command.</para
           >
           <para
@@ -3055,8 +3573,12 @@
 
             
 
+            
+
             , see RFC 959, "File Transfer Protocol," Section 3.2, "Establishing Data Connections" and Section 4.1.2, "Transfer Parameter Commands," available at <see
              cref="">http://www.rfc-editor.org/</see>
+
+            
 
             
 
@@ -3072,8 +3594,12 @@
 
             
 
+            
+
              after calling the <see
              cref="M:System.Net.FtpWebRequest.GetRequestStream" />
+
+            
 
             
 
@@ -3086,8 +3612,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Net.FtpWebRequest.GetResponse" />
+
+            
 
             
 
@@ -3100,8 +3630,12 @@
 
             
 
+            
+
              method causes an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -3117,8 +3651,12 @@
 
             
 
+            
+
              is set to true, the FTP server may not send the size of the file, and download progress can always be zero. If <see
              cref="P:System.Net.FtpWebRequest.UsePassive" />
+
+            
 
             
 

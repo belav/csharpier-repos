@@ -24,8 +24,12 @@
 
         
 
+        
+
          class is a strongly typed <see
          cref="T:System.Collections.Hashtable" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          objects. In addition to the two add methods, <see
          cref="M:System.Web.SiteMapProviderCollection.Add(System.Configuration.Provider.ProviderBase)" />
+
+        
 
         
 
@@ -52,8 +60,12 @@
 
         
 
+        
+
         , the <see
          cref="T:System.Web.SiteMapProviderCollection" />
+
+        
 
         
 
@@ -66,8 +78,12 @@
 
         
 
+        
+
          method to add an array of type <see
          cref="T:System.Web.SiteMapProvider" />
+
+        
 
         
 
@@ -83,8 +99,12 @@
 
         
 
+        
+
          is used by the <see
          cref="T:System.Web.SiteMap" />
+
+        
 
         
 
@@ -97,8 +117,12 @@
 
         
 
+        
+
          objects that are available to the <see
          cref="T:System.Web.SiteMap" />
+
+        
 
         
 
@@ -111,8 +135,12 @@
 
         
 
+        
+
          in the provider collection does not necessarily mean it is used by a <see
          cref="T:System.Web.SiteMap" />
+
+        
 
         
 
@@ -128,6 +156,8 @@
 
         
 
+        
+
          is stored in the <see
          cref="T:System.Web.SiteMapProviderCollection" />
 
@@ -135,8 +165,12 @@
 
         
 
+        
+
         , the <see
          cref="P:System.Configuration.Provider.ProviderBase.Name" />
+
+        
 
         
 
@@ -155,6 +189,8 @@
 
         
 
+        
+
          class to track the set of <see
          cref="T:System.Web.SiteMapProvider" />
 
@@ -162,8 +198,12 @@
 
         
 
+        
+
          objects that are available to the <see
          cref="T:System.Web.SiteMap" />
+
+        
 
         
 
@@ -190,6 +230,8 @@
 
             
 
+            
+
              default constructor initializes any fields to their default values</para
           >
         </remarks>
@@ -198,6 +240,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.SiteMapProviderCollection" />
+
+            
 
             
 
@@ -235,8 +279,12 @@
 
             
 
+            
+
              object that is returned by the <see
              cref="P:System.Web.SiteMap.Providers" />
+
+            
 
             
 
@@ -249,8 +297,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.SiteMapProviderCollection.AddArray(System.Web.SiteMapProvider[])" />
+
+            
 
             
 
@@ -263,8 +315,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.SiteMapProviderCollection.AddArray(System.Web.SiteMapProvider[])" />
+
+            
 
             
 
@@ -277,6 +333,8 @@
 
             
 
+            
+
              class. The <see
              cref="M:System.Web.SiteMapProviderCollection.Add(System.Configuration.Provider.ProviderBase)" />
 
@@ -284,8 +342,12 @@
 
             
 
+            
+
              method checks the type of the specified provider, and then calls the <see
              cref="M:System.Web.SiteMapProviderCollection.Add(System.Web.SiteMapProvider)" />
+
+            
 
             
 
@@ -301,6 +363,8 @@
 
             
 
+            
+
              class is static, any <see
              cref="T:System.Web.SiteMapProvider" />
 
@@ -308,8 +372,12 @@
 
             
 
+            
+
              contained in its <see
              cref="P:System.Web.SiteMap.Providers" />
+
+            
 
             
 
@@ -328,8 +396,12 @@
 
             
 
+            
+
              to the provider collection using the <see
              cref="P:System.Configuration.Provider.ProviderBase.Name" />
+
+            
 
             
 
@@ -345,8 +417,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SiteMapProvider" />
+
+          
 
           
 
@@ -383,8 +459,12 @@
 
             
 
+            
+
              object that is returned by the <see
              cref="P:System.Web.SiteMap.Providers" />
+
+            
 
             
 
@@ -397,8 +477,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.SiteMapProviderCollection.AddArray(System.Web.SiteMapProvider[])" />
+
+            
 
             
 
@@ -411,8 +495,12 @@
 
             
 
+            
+
              at run time. Therefore, the <see
              cref="Overload:System.Web.SiteMapProviderCollection.Add" />
+
+            
 
             
 
@@ -425,8 +513,12 @@
 
             
 
+            
+
              methods are used only in scenarios where you manually create site map provider objects and manage them with an instance of the <see
              cref="T:System.Web.SiteMapProviderCollection" />
+
+            
 
             
 
@@ -439,6 +531,8 @@
 
             
 
+            
+
              method when you want to add a single <see
              cref="T:System.Web.SiteMapProvider" />
 
@@ -446,8 +540,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Web.SiteMapProviderCollection" />
+
+            
 
             
 
@@ -463,6 +561,8 @@
 
             
 
+            
+
              class is static, any <see
              cref="T:System.Web.SiteMapProvider" />
 
@@ -470,8 +570,12 @@
 
             
 
+            
+
              contained in its <see
              cref="P:System.Web.SiteMap.Providers" />
+
+            
 
             
 
@@ -490,8 +594,12 @@
 
             
 
+            
+
              object to the provider collection using the <see
              cref="P:System.Configuration.Provider.ProviderBase.Name" />
+
+            
 
             
 
@@ -507,8 +615,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SiteMapProvider" />
+
+          
 
           
 
@@ -545,8 +657,12 @@
 
             
 
+            
+
              that is returned by the <see
              cref="P:System.Web.SiteMap.Providers" />
+
+            
 
             
 
@@ -559,8 +675,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.SiteMapProviderCollection.AddArray(System.Web.SiteMapProvider[])" />
+
+            
 
             
 
@@ -573,6 +693,8 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.SiteMapProviderCollection.AddArray(System.Web.SiteMapProvider[])" />
 
@@ -580,8 +702,12 @@
 
             
 
+            
+
              methods are only used in scenarios where you manually create site map provider objects and manage them with an instance of the <see
              cref="T:System.Web.SiteMapProviderCollection" />
+
+            
 
             
 
@@ -597,6 +723,8 @@
 
             
 
+            
+
              class is static, any <see
              cref="T:System.Web.SiteMapProvider" />
 
@@ -604,8 +732,12 @@
 
             
 
+            
+
              contained in its <see
              cref="P:System.Web.SiteMap.Providers" />
+
+            
 
             
 
@@ -624,8 +756,12 @@
 
             
 
+            
+
              objects into the provider collection using the <see
              cref="P:System.Configuration.Provider.ProviderBase.Name" />
+
+            
 
             
 
@@ -641,8 +777,12 @@
 
           
 
+          
+
           The array of <see
            cref="T:System.Web.SiteMapProvider" />
+
+          
 
           
 

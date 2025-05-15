@@ -31,6 +31,8 @@
 
         
 
+        
+
          configuration element.</para
       >
       <para>This class provides programmatic access to information that can be stored in configuration files.</para>
@@ -61,6 +63,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.Configuration.ConnectionManagementSection" />
+
+            
 
             
 
@@ -102,6 +106,8 @@
           <para
             >Gets the configuration element that controls the settings used by an <see
              cref="T:System.Net.HttpWebRequest" />
+
+            
 
             
 
@@ -230,6 +236,8 @@
           <para
             >The settings correspond to properties in the <see
              cref="T:System.Net.ServicePointManager" />
+
+            
 
             
 

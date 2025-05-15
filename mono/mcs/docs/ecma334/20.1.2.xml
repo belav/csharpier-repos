@@ -11,6 +11,8 @@
 
       
 
+      
+
        : <rhs
       >
         <terminal>:</terminal>
@@ -21,6 +23,8 @@
   <paragraph
     >The explicit base interfaces of an interface must be at least as accessible as the interface itself (<hyperlink
     >10.5.4</hyperlink>
+
+    
 
     
 
@@ -37,6 +41,8 @@
 
       
 
+      
+
        of a public interface. end note]</note
     >
   </paragraph>
@@ -46,7 +52,7 @@
 
       >[Example: In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 interface IControl  
 {  
    void Paint();  
@@ -62,6 +68,8 @@ interface IListBox: IControl
 interface IComboBox: ITextBox, IListBox {}  
 ]]>
       </code_example>
+
+      
 
       
 

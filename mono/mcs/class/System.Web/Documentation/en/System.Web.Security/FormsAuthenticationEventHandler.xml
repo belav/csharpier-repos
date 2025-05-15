@@ -32,6 +32,8 @@
 
         
 
+        
+
          delegate is defined for the <see
          cref="E:System.Web.Security.FormsAuthenticationModule.Authenticate" />
 
@@ -39,8 +41,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.Security.FormsAuthenticationModule" />
+
+        
 
         
 
@@ -53,8 +59,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.Security.FormsAuthenticationModule" />
+
+        
 
         
 
@@ -67,6 +77,8 @@
 
         
 
+        
+
          in the Global.asax file for your ASP.NET application. The <see
          cref="E:System.Web.Security.FormsAuthenticationModule.Authenticate" />
 
@@ -74,8 +86,12 @@
 
         
 
+        
+
          event is raised during the <see
          cref="E:System.Web.HttpApplication.AuthenticateRequest" />
+
+        
 
         
 
@@ -91,8 +107,12 @@
 
         
 
+        
+
          constructs a <see
          cref="T:System.Web.Security.FormsAuthenticationEventArgs" />
+
+        
 
         
 
@@ -105,8 +125,12 @@
 
         
 
+        
+
          and passes it to the <system
         >FormsAuthentication_OnAuthenticate</system>
+
+        
 
         
 
@@ -122,8 +146,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.Security.FormsAuthenticationEventArgs" />
+
+        
 
         
 
@@ -136,8 +164,12 @@
 
         
 
+        
+
          event to set the <see
          cref="P:System.Web.HttpContext.User" />
+
+        
 
         
 
@@ -150,8 +182,12 @@
 
         
 
+        
+
          to a custom <see
          cref="T:System.Security.Principal.IPrincipal" />
+
+        
 
         
 
@@ -164,8 +200,12 @@
 
         
 
+        
+
          property during the <system
         >FormsAuthentication_OnAuthenticate</system>
+
+        
 
         
 
@@ -181,8 +221,12 @@
 
         
 
+        
+
          event is only raised when the authentication <see
          cref="P:System.Web.Configuration.AuthenticationSection.Mode" />
+
+        
 
         
 
@@ -195,8 +239,12 @@
 
         
 
+        
+
          and the <see
          cref="T:System.Web.Security.FormsAuthenticationModule" />
+
+        
 
         
 
@@ -215,8 +263,12 @@
 
         
 
+        
+
          event of a <see
          cref="T:System.Web.Security.FormsAuthenticationModule" />
+
+        
 
         
 

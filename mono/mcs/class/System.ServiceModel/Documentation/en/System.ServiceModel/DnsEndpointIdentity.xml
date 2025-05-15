@@ -54,8 +54,12 @@
 
             
 
+            
+
              is used to create an endpoint identity by the <see
              cref="M:System.ServiceModel.EndpointIdentity.Initialize(System.IdentityModel.Claims.Claim)" />
+
+            
 
             
 
@@ -74,6 +78,8 @@
 
             
 
+            
+
              class from a claim.</para
           >
         </summary>
@@ -84,8 +90,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IdentityModel.Claims.Claim" />
+
+          
 
           
 
@@ -120,8 +130,12 @@
 
             
 
+            
+
              is used to create a DNS claim and an endpoint identity is created by the <see
              cref="M:System.ServiceModel.EndpointIdentity.Initialize(System.IdentityModel.Claims.Claim)" />
+
+            
 
             
 

@@ -29,6 +29,8 @@
 
         
 
+        
+
          class uses the Windows interprocess communication (IPC) system to transport messages between application domains on the same computer. When communicating between application domains on the same computer, the IPC channel is much faster than the TCP or HTTP channels.</para
       >
       <para
@@ -39,8 +41,12 @@
 
         
 
+        
+
          interface through which all messages processed by the <see
          cref="T:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel" />
+
+        
 
         
 
@@ -56,11 +62,15 @@
 
         
 
+        
+
          instance accepts messages serialized in either binary or SOAP format.</para
       >
       <para
         >A <see
          cref="T:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel" />
+
+        
 
         
 
@@ -73,8 +83,12 @@
 
         
 
+        
+
          method) or programmatically (by passing an <see
          cref="T:System.Collections.IDictionary" />
+
+        
 
         
 
@@ -87,8 +101,12 @@
 
         
 
+        
+
          constructor). For a list of these configuration properties, see the documentation for the <see
          cref="M:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel.#ctor(System.Collections.IDictionary,System.Runtime.Remoting.Channels.IServerChannelSinkProvider)" />
+
+        
 
         
 
@@ -105,8 +123,12 @@
 
           
 
+          
+
            argument, several <see
            cref="T:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel" />
+
+          
 
           
 
@@ -141,11 +163,15 @@
 
             
 
+            
+
              class with the specified IPC port name.</para
           >
         </summary>
         <param name="portName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -188,11 +214,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >If you do not require sink functionality, set the <paramref
              name="sinkProvider" />
+
+            
 
             
 
@@ -209,8 +239,12 @@
 
               
 
+              
+
                argument, several <see
                cref="T:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel" />
+
+              
 
               
 
@@ -230,6 +264,8 @@
 
             
 
+            
+
              class with the specified channel properties and sink.</para
           >
         </summary>
@@ -240,8 +276,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -276,8 +316,12 @@
 
             
 
+            
+
              property by using the <paramref
              name="name" />
+
+            
 
             
 
@@ -296,6 +340,8 @@
 
             
 
+            
+
              class with the specified channel name and IPC port name.</para
           >
         </summary>
@@ -306,10 +352,14 @@
 
           
 
+          
+
           The name of the channel.</param
         >
         <param name="portName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -349,8 +399,12 @@
 
             
 
+            
+
              property by using the <paramref
              name="name" />
+
+            
 
             
 
@@ -361,6 +415,8 @@
           <para
             >If you do not require sink functionality, set the <paramref
              name="sinkProvider" />
+
+            
 
             
 
@@ -379,6 +435,8 @@
 
             
 
+            
+
              class with the specified channel name, IPC port name, and sink.</para
           >
         </summary>
@@ -389,10 +447,14 @@
 
           
 
+          
+
           The name of the channel.</param
         >
         <param name="portName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -424,6 +486,8 @@
 
             
 
+            
+
              class, the value of this property can be cast to an instance of <see
              cref="T:System.Runtime.Remoting.Channels.ChannelDataStore" />
 
@@ -431,8 +495,12 @@
 
             
 
+            
+
              that describes the channel to which the <see
              cref="T:System.Runtime.Remoting.Channels.Ipc.IpcServerChannel" />
+
+            
 
             
 
@@ -469,6 +537,8 @@
 
             
 
+            
+
              method. The default name is "ipc server".</para
           >
         </remarks>
@@ -500,8 +570,12 @@
 
             
 
+            
+
              instance; higher priority channels appear before lower priority channels. Clients try to connect to the server channels in the order that they are listed in the <see
              cref="T:System.Runtime.Remoting.ObjRef" />
+
+            
 
             
 
@@ -546,6 +620,8 @@
 
             
 
+            
+
              that contains the URI of the channel.</para
           >
         </returns>
@@ -575,6 +651,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -583,6 +661,8 @@
           <para
             >Returns an array of all the URLs for the object with the specified URI, hosted on the current <see
              cref="T:System.Runtime.Remoting.Channels.Ipc.IpcChannel" />
+
+            
 
             
 
@@ -601,11 +681,15 @@
 
             
 
+            
+
              instance.</para
           >
         </returns>
         <param name="objectUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -665,11 +749,15 @@
 
             
 
+            
+
              method has been called to stop listening on the channel.</para
           >
           <para
             >The data object can be used to pass a specific initialization state to the channel. If you do not want to pass a specific state to the channel, pass null as the <paramref
              name="data" />
+
+            
 
             
 
@@ -684,6 +772,8 @@
         </summary>
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -717,11 +807,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >The data object can be used to pass a specific initialization state to the channel. If you do not want to pass a specific state to the channel, pass null as the <paramref
              name="data" />
+
+            
 
             
 
@@ -736,6 +830,8 @@
         </summary>
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

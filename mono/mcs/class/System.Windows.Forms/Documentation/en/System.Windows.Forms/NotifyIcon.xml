@@ -38,8 +38,12 @@
 
         
 
+        
+
          class provides a way to program in this functionality. The <see
          cref="P:System.Windows.Forms.NotifyIcon.Icon" />
+
+        
 
         
 
@@ -52,6 +56,8 @@
 
         
 
+        
+
          property. The <see
          cref="P:System.Windows.Forms.NotifyIcon.Text" />
 
@@ -59,8 +65,12 @@
 
         
 
+        
+
          property assigns ToolTip text. In order for the icon to show up in the notification area, the <see
          cref="P:System.Windows.Forms.NotifyIcon.Visible" />
+
+        
 
         
 
@@ -90,8 +100,12 @@
 
             
 
+            
+
              is created, the <see
              cref="P:System.Windows.Forms.NotifyIcon.Visible" />
+
+            
 
             
 
@@ -104,8 +118,12 @@
 
             
 
+            
+
              property to true in order to use the <see
              cref="T:System.Windows.Forms.NotifyIcon" />
+
+            
 
             
 
@@ -119,6 +137,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.NotifyIcon" />
+
+            
 
             
 
@@ -153,8 +173,12 @@
 
             
 
+            
+
              is created, the <see
              cref="P:System.Windows.Forms.NotifyIcon.Visible" />
+
+            
 
             
 
@@ -167,8 +191,12 @@
 
             
 
+            
+
              property to true in order to use the <see
              cref="T:System.Windows.Forms.NotifyIcon" />
+
+            
 
             
 
@@ -187,11 +215,15 @@
 
             
 
+            
+
              class with the specified container.</para
           >
         </summary>
         <param name="container">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -204,8 +236,12 @@
 
           
 
+          
+
            that represents the container for the <see
            cref="T:System.Windows.Forms.NotifyIcon" />
+
+          
 
           
 
@@ -241,6 +277,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -267,6 +305,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -311,6 +351,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -333,6 +375,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -380,6 +424,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -418,6 +464,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -437,6 +485,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -518,6 +568,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -556,6 +608,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -626,6 +680,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -634,6 +690,8 @@
           <para
             >Occurs when the user clicks a <see
              cref="T:System.Windows.Forms.NotifyIcon" />
+
+            
 
             
 
@@ -669,6 +727,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -677,6 +737,8 @@
           <para
             >Occurs when the user double-clicks the <see
              cref="T:System.Windows.Forms.NotifyIcon" />
+
+            
 
             
 
@@ -704,6 +766,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -744,6 +808,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -774,6 +840,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -816,6 +884,8 @@
 
             
 
+            
+
              value to be ignored. The behavior is slightly different depending on the operating system and whether the balloon tip is from another, or the same, application. When the second balloon tip is from another application, the first balloon tip will display for the minimum timeout value before the second appears, regardless of the value of <paramref
              name="timeout" />
 
@@ -823,8 +893,12 @@
 
             
 
+            
+
             . In most cases, if the balloon tips are from the same application, the first balloon tip immediately closes when another call to the <see
              cref="M:System.Windows.Forms.NotifyIcon.ShowBalloonTip(System.Int32,System.String,System.String,System.Windows.Forms.ToolTipIcon)" />
+
+            
 
             
 
@@ -840,6 +914,8 @@
         </summary>
         <param name="timeout">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -879,6 +955,8 @@
 
             
 
+            
+
              value to be ignored. The behavior is slightly different depending on the operating system and whether the balloon tip is from another, or the same, application. When the second balloon tip is from another application, the first balloon tip will display for the minimum timeout value before the second appears, regardless of the value of <paramref
              name="timeout" />
 
@@ -886,8 +964,12 @@
 
             
 
+            
+
             . In most cases, if the balloon tips are from the same application, the first balloon tip immediately closes when another call to the <see
              cref="M:System.Windows.Forms.NotifyIcon.ShowBalloonTip(System.Int32,System.String,System.String,System.Windows.Forms.ToolTipIcon)" />
+
+            
 
             
 
@@ -908,10 +990,14 @@
 
           
 
+          
+
           The time period, in milliseconds, the balloon tip should display.</param
         >
         <param name="tipTitle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -926,6 +1012,8 @@
 
           
 
+          
+
           The text to display on the balloon tip.</param
         >
         <param name="tipIcon">
@@ -935,8 +1023,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.ToolTipIcon" />
+
+          
 
           
 
@@ -977,6 +1069,8 @@
           <para
             >Gets or sets an object that contains data about the <see
              cref="T:System.Windows.Forms.NotifyIcon" />
+
+            
 
             
 
@@ -1041,6 +1135,8 @@
           <para
             >Since the default value is false, in order for the icon to show up in the notification area, you must set the <see
              cref="P:System.Windows.Forms.NotifyIcon.Visible" />
+
+            
 
             
 

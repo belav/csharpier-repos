@@ -36,6 +36,8 @@
 
         
 
+        
+
         , you access the <see
          cref="T:System.Windows.Forms.GridColumnStylesCollection" />
 
@@ -43,8 +45,12 @@
 
         
 
+        
+
          through the <see
          cref="P:System.Windows.Forms.DataGridTableStyle.GridColumnStyles" />
+
+        
 
         
 
@@ -60,6 +66,8 @@
 
         
 
+        
+
          uses standard <see
          cref="M:System.Windows.Forms.GridColumnStylesCollection.Add(System.Windows.Forms.DataGridColumnStyle)" />
 
@@ -67,8 +75,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Windows.Forms.GridColumnStylesCollection.Remove(System.Windows.Forms.DataGridColumnStyle)" />
+
+        
 
         
 
@@ -84,6 +96,8 @@
 
         
 
+        
+
          method to determine if a specific property value exists in the collection. Additionally, use the <see
          cref="M:System.Windows.Forms.GridColumnStylesCollection.IndexOf(System.Windows.Forms.DataGridColumnStyle)" />
 
@@ -91,8 +105,12 @@
 
         
 
+        
+
          method to determine the index of any <see
          cref="T:System.Windows.Forms.DataGridColumnStyle" />
+
+        
 
         
 
@@ -109,8 +127,12 @@
 
           
 
+          
+
            objects and add them to the <see
            cref="T:System.Windows.Forms.GridColumnStylesCollection" />
+
+          
 
           
 
@@ -123,8 +145,12 @@
 
           
 
+          
+
            objects to the <see
            cref="T:System.Windows.Forms.GridTableStylesCollection" />
+
+          
 
           
 
@@ -137,8 +163,12 @@
 
           
 
+          
+
            with a valid <see
            cref="P:System.Windows.Forms.DataGridTableStyle.MappingName" />
+
+          
 
           
 
@@ -151,8 +181,12 @@
 
           
 
+          
+
            objects are automatically generated for you. Consequently, an exception will be thrown if you try to add new <see
            cref="T:System.Windows.Forms.DataGridColumnStyle" />
+
+          
 
           
 
@@ -165,8 +199,12 @@
 
           
 
+          
+
            values to the <see
            cref="T:System.Windows.Forms.GridColumnStylesCollection" />
+
+          
 
           
 
@@ -186,8 +224,12 @@
 
         
 
+        
+
          objects in the <see
          cref="T:System.Windows.Forms.DataGrid" />
+
+        
 
         
 
@@ -226,6 +268,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -236,8 +280,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridColumnStyle" />
+
+          
 
           
 
@@ -276,8 +324,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Windows.Forms.DataGridColumnStyle" />
+
+          
 
           
 
@@ -305,6 +357,8 @@
           <para
             >Clears the collection of <see
              cref="T:System.Windows.Forms.DataGridColumnStyle" />
+
+            
 
             
 
@@ -343,6 +397,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -351,6 +407,8 @@
           <para
             >Occurs when a change is made to the <see
              cref="T:System.Windows.Forms.GridColumnStylesCollection" />
+
+            
 
             
 
@@ -388,8 +446,12 @@
 
             
 
+            
+
             , use the <see
              cref="M:System.Windows.Forms.BindingManagerBase.GetItemProperties" />
+
+            
 
             
 
@@ -402,8 +464,12 @@
 
             
 
+            
+
              class. Pass the <see
              cref="P:System.Windows.Forms.DataGridColumnStyle.MappingName" />
+
+            
 
             
 
@@ -416,8 +482,12 @@
 
             
 
+            
+
              to the <see
              cref="P:System.ComponentModel.PropertyDescriptorCollection.Item(System.Int32)" />
+
+            
 
             
 
@@ -430,8 +500,12 @@
 
             
 
+            
+
              to return the <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -447,8 +521,12 @@
 
             
 
+            
+
              method to determine if a particular <see
              cref="T:System.Windows.Forms.DataGridColumnStyle" />
+
+            
 
             
 
@@ -461,6 +539,8 @@
 
             
 
+            
+
              method to remove the item. If you need to know the index of a particular <see
              cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
@@ -468,8 +548,12 @@
 
             
 
+            
+
             , use the <see
              cref="M:System.Windows.Forms.GridColumnStylesCollection.IndexOf(System.Windows.Forms.DataGridColumnStyle)" />
+
+            
 
             
 
@@ -488,6 +572,8 @@
 
             
 
+            
+
              contains a <see
              cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
@@ -495,8 +581,12 @@
 
             
 
+            
+
              associated with the specified <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -515,11 +605,15 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
         <param name="propertyDescriptor">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -532,8 +626,12 @@
 
           
 
+          
+
            associated with the desired <see
            cref="T:System.Windows.Forms.DataGridColumnStyle" />
+
+          
 
           
 
@@ -567,8 +665,12 @@
 
             
 
+            
+
              is set with the <see
              cref="P:System.Windows.Forms.DataGridColumnStyle.HeaderText" />
+
+            
 
             
 
@@ -584,8 +686,12 @@
 
             
 
+            
+
              method to determine if a particular <see
              cref="T:System.Windows.Forms.DataGridColumnStyle" />
+
+            
 
             
 
@@ -598,6 +704,8 @@
 
             
 
+            
+
              method to remove the item. If you need to know the index of a particular <see
              cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
@@ -605,8 +713,12 @@
 
             
 
+            
+
             , use the <see
              cref="M:System.Windows.Forms.GridColumnStylesCollection.IndexOf(System.Windows.Forms.DataGridColumnStyle)" />
+
+            
 
             
 
@@ -625,8 +737,12 @@
 
             
 
+            
+
              contains the <see
              cref="T:System.Windows.Forms.DataGridColumnStyle" />
+
+            
 
             
 
@@ -645,11 +761,15 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -662,8 +782,12 @@
 
           
 
+          
+
            of the desired <see
            cref="T:System.Windows.Forms.DataGridColumnStyle" />
+
+          
 
           
 
@@ -700,8 +824,12 @@
 
             
 
+            
+
              method to determine if a particular <see
              cref="T:System.Windows.Forms.DataGridColumnStyle" />
+
+            
 
             
 
@@ -714,6 +842,8 @@
 
             
 
+            
+
              method to remove the item. If you need to know the index of a particular <see
              cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
@@ -721,8 +851,12 @@
 
             
 
+            
+
             , use the <see
              cref="M:System.Windows.Forms.GridColumnStylesCollection.IndexOf(System.Windows.Forms.DataGridColumnStyle)" />
+
+            
 
             
 
@@ -741,8 +875,12 @@
 
             
 
+            
+
              contains the specified <see
              cref="T:System.Windows.Forms.DataGridColumnStyle" />
+
+            
 
             
 
@@ -761,6 +899,8 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
@@ -771,8 +911,12 @@
 
           
 
+          
+
           The desired <see
            cref="T:System.Windows.Forms.DataGridColumnStyle" />
+
+          
 
           
 
@@ -809,6 +953,8 @@
 
             
 
+            
+
              method to determine if a specific <see
              cref="T:System.Windows.Forms.DataGridColumnStyle" />
 
@@ -816,8 +962,12 @@
 
             
 
+            
+
              exists. If so, and you need the index of the element within the collection, use the <see
              cref="M:System.Windows.Forms.GridColumnStylesCollection.IndexOf(System.Windows.Forms.DataGridColumnStyle)" />
+
+            
 
             
 
@@ -836,6 +986,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -849,6 +1001,8 @@
 
             
 
+            
+
              within the <see
              cref="T:System.Windows.Forms.GridColumnStylesCollection" />
 
@@ -856,8 +1010,12 @@
 
             
 
+            
+
              or -1 if no corresponding <see
              cref="T:System.Windows.Forms.DataGridColumnStyle" />
+
+            
 
             
 
@@ -873,8 +1031,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridColumnStyle" />
+
+          
 
           
 
@@ -1006,6 +1168,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1014,6 +1178,8 @@
           <para
             >Raises the <see
              cref="E:System.Windows.Forms.GridColumnStylesCollection.CollectionChanged" />
+
+            
 
             
 
@@ -1029,8 +1195,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.CollectionChangeEventArgs" />
+
+          
 
           
 
@@ -1067,8 +1237,12 @@
 
             
 
+            
+
              method to determine whether the <see
              cref="T:System.Windows.Forms.DataGridColumnStyle" />
+
+            
 
             
 
@@ -1087,8 +1261,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Windows.Forms.GridColumnStylesCollection" />
+
+            
 
             
 
@@ -1104,8 +1282,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridColumnStyle" />
+
+          
 
           
 
@@ -1139,8 +1321,12 @@
 
             
 
+            
+
              method to determine whether the <see
              cref="T:System.Windows.Forms.DataGridColumnStyle" />
+
+            
 
             
 
@@ -1151,6 +1337,8 @@
           <para
             >Use the <see
              cref="M:System.Windows.Forms.GridColumnStylesCollection.IndexOf(System.Windows.Forms.DataGridColumnStyle)" />
+
+            
 
             
 
@@ -1169,8 +1357,12 @@
 
             
 
+            
+
              with the specified index from the <see
              cref="T:System.Windows.Forms.GridColumnStylesCollection" />
+
+            
 
             
 
@@ -1186,8 +1378,12 @@
 
           
 
+          
+
           The zero-based index of the <see
            cref="T:System.Windows.Forms.DataGridColumnStyle" />
+
+          
 
           
 
@@ -1215,6 +1411,8 @@
           <para
             >Sets the <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -1255,11 +1453,15 @@
 
             
 
+            
+
             , starting at the specified index of the target array.</para
           >
         </summary>
         <param name="array">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1272,10 +1474,14 @@
 
           
 
+          
+
            that is the destination of the elements copied from collection. The array must have zero-based indexing.  </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1330,6 +1536,8 @@
 
             
 
+            
+
              is synchronized (thread safe).</para
           >
         </summary>
@@ -1356,6 +1564,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Windows.Forms.GridColumnStylesCollection" />
+
+            
 
             
 
@@ -1396,6 +1606,8 @@
 
             
 
+            
+
              for the collection.</para
           >
         </returns>
@@ -1431,6 +1643,8 @@
 
           
 
+          
+
           The object to be added to the collection. The value can be null.</param
         >
       </Docs>
@@ -1453,6 +1667,8 @@
           <para
             >Clears the collection of <see
              cref="T:System.Windows.Forms.DataGridColumnStyle" />
+
+            
 
             
 
@@ -1493,6 +1709,8 @@
 
           
 
+          
+
           The object to locate in the collection. The value can be null.</param
         >
       </Docs>
@@ -1526,11 +1744,15 @@
 
             
 
+            
+
              parameter within the collection, if found; otherwise, -1.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1567,8 +1789,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="value" />
+
+          
 
           
 
@@ -1578,6 +1804,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1673,8 +1901,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Windows.Forms.GridColumnStylesCollection" />
+
+            
 
             
 
@@ -1690,8 +1922,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridColumnStyle" />
+
+          
 
           
 
@@ -1726,8 +1962,12 @@
 
             
 
+            
+
              at the specified index from the <see
              cref="T:System.Windows.Forms.GridColumnStylesCollection" />
+
+            
 
             
 
@@ -1743,8 +1983,12 @@
 
           
 
+          
+
           The zero-based index of the <see
            cref="T:System.Windows.Forms.DataGridColumnStyle" />
+
+          
 
           
 

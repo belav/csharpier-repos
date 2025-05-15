@@ -27,6 +27,8 @@
 
         
 
+        
+
          class defines the recipient of a CMS/PKCS #7 message.</para
       >
     </summary>
@@ -59,6 +61,8 @@
           <para
             >The <see
              cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
+
+            
 
             
 
@@ -101,8 +105,12 @@
 
             
 
+            
+
              constructor constructs an instance of the <see
              cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
+
+            
 
             
 
@@ -118,8 +126,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+          
 
           
 
@@ -166,8 +178,12 @@
 
             
 
+            
+
              constructor constructs an instance of the <see
              cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
+
+            
 
             
 
@@ -183,8 +199,12 @@
 
           
 
+          
+
           A member of the <see
            cref="T:System.Security.Cryptography.Pkcs.SubjectIdentifierType" />
+
+          
 
           
 
@@ -199,8 +219,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+          
 
           
 
@@ -241,6 +265,8 @@
 
             
 
+            
+
              property retrieves the certificate associated with the recipient.</para
           >
         </summary>
@@ -272,6 +298,8 @@
           <para
             >The <see
              cref="P:System.Security.Cryptography.Pkcs.CmsRecipient.RecipientIdentifierType" />
+
+            
 
             
 

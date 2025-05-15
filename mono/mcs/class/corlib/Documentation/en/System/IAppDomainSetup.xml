@@ -36,6 +36,8 @@
 
         
 
+        
+
          and <see
          cref="M:System.AppDomain.SetData(System.String,System.Object)" />
 
@@ -43,8 +45,12 @@
 
         
 
+        
+
          methods to identify the <see
          cref="T:System.AppDomain" />
+
+        
 
         
 
@@ -58,6 +64,8 @@
       <para
         >Represents assembly binding information that can be added to an instance of <see
          cref="T:System.AppDomain" />
+
+        
 
         
 
@@ -88,6 +96,8 @@
           <para
             >Used when getting or setting the assembly cache manager's APPBASE variable. This is the directory where the assembly manager should begin probing for assemblies. This property cannot be changed after the <see
              cref="T:System.AppDomain" />
+
+            
 
             
 
@@ -173,6 +183,8 @@
 
             
 
+            
+
              has finished its first bind.</para
           >
         </remarks>
@@ -207,8 +219,12 @@
 
             
 
+            
+
              is created, a directory called the Dynamic Directory can be specified to store dynamic assemblies. This directory is logically located under the <see
              cref="P:System.AppDomainSetup.ApplicationBase" />
+
+            
 
             
 
@@ -219,6 +235,8 @@
           <para
             >This property cannot be changed after the <see
              cref="T:System.AppDomain" />
+
+            
 
             
 
@@ -284,6 +302,8 @@
 
             
 
+            
+
              directory to probe for private assemblies.</para
           >
         </summary>
@@ -310,6 +330,8 @@
           <para
             >This property cannot be changed after the <see
              cref="T:System.AppDomain" />
+
+            
 
             
 
@@ -349,8 +371,12 @@
 
             
 
+            
+
             , including the directory specified by <see
              cref="P:System.AppDomainSetup.ApplicationBase" />
+
+            
 
             
 
@@ -362,6 +388,8 @@
           <para
             >This property cannot be changed after the <see
              cref="T:System.AppDomain" />
+
+            
 
             
 
@@ -396,6 +424,8 @@
           <para
             >This property cannot be changed after the <see
              cref="T:System.AppDomain" />
+
+            
 
             
 

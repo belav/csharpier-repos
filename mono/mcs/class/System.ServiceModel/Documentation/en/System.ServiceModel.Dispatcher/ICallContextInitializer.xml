@@ -24,6 +24,8 @@
 
         
 
+        
+
          interface and add it to the <see
          cref="P:System.ServiceModel.Dispatcher.DispatchOperation.CallContextInitializers" />
 
@@ -31,8 +33,12 @@
 
         
 
+        
+
          property to initialize and clean up thread-local storage for the thread that invokes user code. Typical usage is to set some value, such as impersonation or changing the <see
          cref="T:System.Globalization.CultureInfo" />
+
+        
 
         
 
@@ -79,8 +85,12 @@
 
           
 
+          
+
           The correlation object returned from the <see
            cref="M:System.ServiceModel.Dispatcher.ICallContextInitializer.BeforeInvoke(System.ServiceModel.InstanceContext,System.ServiceModel.IClientChannel,System.ServiceModel.Channels.Message)" />
+
+          
 
           
 
@@ -122,8 +132,12 @@
 
             
 
+            
+
              method to initialize and clean up thread-local storage for the thread that invokes user code. Typical usage is to set some value, such as impersonation or changing the <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -146,11 +160,15 @@
 
             
 
+            
+
              method.</para
           >
         </returns>
         <param name="instanceContext">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -165,10 +183,14 @@
 
           
 
+          
+
           The client channel.</param
         >
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

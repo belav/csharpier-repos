@@ -21,10 +21,14 @@
 
         
 
+        
+
          class provides utility methods for common operations involving virtual paths. For ASP.NET server controls and server code, virtual paths using the Web application root operator, the tilde (~), commonly are used instead of relative and absolute paths. For more information, see <format
          type="text/html">
           <a href="2447f50c-b849-483c-8093-85ed53e7a5bd">ASP.NET Web Site Paths</a>
         </format>
+
+        
 
         
 
@@ -35,6 +39,8 @@
       <para
         >Use the <see
          cref="T:System.Web.VirtualPathUtility" />
+
+        
 
         
 
@@ -51,8 +57,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.HttpRequest.ApplicationPath" />
+
+        
 
         
 
@@ -69,6 +79,8 @@
 
           
 
+          
+
            class is not intended for security or canonicalization purposes. For more information about Web application security, see <format
            type="text/html">
             <a href="88d61678-f84e-4622-ae80-53128821855a"
@@ -80,8 +92,12 @@
 
           
 
+          
+
           . For generic URL processing functionality, see <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -131,6 +147,8 @@
 
           
 
+          
+
           The virtual path to append the slash mark to.</param
         >
       </Docs>
@@ -163,8 +181,12 @@
 
             
 
+            
+
              method returns the value of the <see
              cref="P:System.Web.HttpRuntime.AppDomainAppVirtualPath" />
+
+            
 
             
 
@@ -180,6 +202,8 @@
 
             
 
+            
+
              method uses the <see
              cref="P:System.Web.HttpRuntime.AppDomainAppVirtualPath" />
 
@@ -187,8 +211,12 @@
 
             
 
+            
+
              property value rather than the base path, if the relative path starts with a tilde and a slash mark (~/); otherwise, the <see
              cref="M:System.Web.VirtualPathUtility.Combine(System.String,System.String)" />
+
+            
 
             
 
@@ -211,8 +239,12 @@
 
             
 
+            
+
              and <paramref
              name="relativePath" />
+
+            
 
             
 
@@ -228,10 +260,14 @@
 
           
 
+          
+
           The base path.</param
         >
         <param name="relativePath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -268,8 +304,12 @@
 
             
 
+            
+
              is not rooted; that is, it does not equal the root operator (the tilde [~]), does not start with a tilde (~), such as a tilde and a slash mark (~/) or a tilde and a double backslash (~//), or does not start with a slash mark (/), an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -280,6 +320,8 @@
           <para
             >If the virtual path that is passed into the <see
              cref="M:System.Web.VirtualPathUtility.GetDirectory(System.String)" />
+
+            
 
             
 
@@ -298,6 +340,8 @@
         </returns>
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -334,6 +378,8 @@
 
             
 
+            
+
              method is "/images/image1.gif", the returned extension is ".gif".</para
           >
         </remarks>
@@ -347,6 +393,8 @@
         </returns>
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -383,6 +431,8 @@
 
             
 
+            
+
              method is "/images/image1.gif", the returned file name is "image1.gif".</para
           >
         </remarks>
@@ -400,8 +450,12 @@
 
             
 
+            
+
             ; otherwise, the last directory name if the last character of <paramref
              name="virtualPath" />
+
+            
 
             
 
@@ -412,6 +466,8 @@
         </returns>
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -445,6 +501,8 @@
 
             
 
+            
+
              property returns an absolute virtual path.</para
           >
         </remarks>
@@ -462,11 +520,15 @@
 
             
 
+            
+
              is an absolute path and is not null or an empty string (""); otherwise, false.</para
           >
         </returns>
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -503,8 +565,12 @@
 
             
 
+            
+
              is null, an <see
              cref="T:System.ArgumentNullException" />
+
+            
 
             
 
@@ -517,8 +583,12 @@
 
             
 
+            
+
              is an empty string (""), the <see
              cref="M:System.Web.VirtualPathUtility.IsAppRelative(System.String)" />
+
+            
 
             
 
@@ -535,8 +605,12 @@
 
               
 
+              
+
               " is not a valid virtual path and returns false for the <see
                cref="M:System.Web.VirtualPathUtility.IsAppRelative(System.String)" />
+
+              
 
               
 
@@ -561,11 +635,15 @@
 
             
 
+            
+
              is relative to the application; otherwise, false.</para
           >
         </returns>
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -603,6 +681,8 @@
 
             
 
+            
+
              and <paramref
              name="toPath" />
 
@@ -610,8 +690,12 @@
 
             
 
+            
+
              parameters are not rooted; that is, they do not equal the root operator (the tilde [~]), do not start with a tilde (~), such as a tilde and a slash mark (~/) or a tilde and a double backslash (~//), or do not start with a slash mark (/), an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -628,6 +712,8 @@
 
             
 
+            
+
              is "/directory1/file1.aspx" and <paramref
              name="toPath" />
 
@@ -635,8 +721,12 @@
 
             
 
+            
+
              is "/directory2/file2.aspx", the <see
              cref="M:System.Web.VirtualPathUtility.MakeRelative(System.String,System.String)" />
+
+            
 
             
 
@@ -659,8 +749,12 @@
 
             
 
+            
+
              to <paramref
              name="toPath" />
+
+            
 
             
 
@@ -676,10 +770,14 @@
 
           
 
+          
+
           The starting virtual path to return the relative virtual path from.</param
         >
         <param name="toPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -716,8 +814,12 @@
 
             
 
+            
+
              method removes a slash mark (/) from the end of the virtual path. If the virtual path is already the root directory ("/"), no action is taken. If the virtual path is null or an empty string (""), the <see
              cref="M:System.Web.VirtualPathUtility.RemoveTrailingSlash(System.String)" />
+
+            
 
             
 
@@ -736,6 +838,8 @@
         </returns>
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -773,6 +877,8 @@
 
             
 
+            
+
              is: </para
           >
           <list type="bullet">
@@ -780,6 +886,8 @@
               <para
                 >Absolute, the <see
                  cref="M:System.Web.VirtualPathUtility.ToAbsolute(System.String)" />
+
+                
 
                 
 
@@ -797,6 +905,8 @@
 
                 
 
+                
+
                  method appends the current application virtual directory path to the beginning of the <paramref
                  name="virtualPath" />
 
@@ -804,8 +914,12 @@
 
                 
 
+                
+
                 . For example, the current application virtual directory path can be accessed from the <see
                  cref="P:System.Web.HttpRuntime.AppDomainAppVirtualPath" />
+
+                
 
                 
 
@@ -823,8 +937,12 @@
 
                 
 
+                
+
                  method raises an <see
                  cref="T:System.ArgumentOutOfRangeException" />
+
+                
 
                 
 
@@ -845,6 +963,8 @@
         </returns>
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -882,8 +1002,12 @@
 
             
 
+            
+
              overload of the <see
              cref="Overload:System.Web.VirtualPathUtility.ToAbsolute" />
+
+            
 
             
 
@@ -894,6 +1018,8 @@
           <para
             >If <paramref
              name="virtualPath" />
+
+            
 
             
 
@@ -911,6 +1037,8 @@
 
                 
 
+                
+
                  method returns the virtual path with no changes.</para
               >
             </item>
@@ -923,8 +1051,12 @@
 
                 
 
+                
+
                  method adds <paramref
                  name="applicationPath" />
+
+                
 
                 
 
@@ -942,8 +1074,12 @@
 
                 
 
+                
+
                  method raises an <see
                  cref="T:System.ArgumentOutOfRangeException" />
+
+                
 
                 
 
@@ -968,11 +1104,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -987,8 +1127,12 @@
 
           
 
+          
+
           The application path to use to convert <paramref
            name="virtualPath" />
+
+          
 
           
 
@@ -1051,6 +1195,8 @@
 
             
 
+            
+
              method, the resulting application-relative path is "~/sub/default.aspx".</para
           >
           <para
@@ -1061,8 +1207,12 @@
 
             
 
+            
+
              does not start with the current application path, the <see
              cref="M:System.Web.VirtualPathUtility.ToAppRelative(System.String)" />
+
+            
 
             
 
@@ -1078,8 +1228,12 @@
 
             
 
+            
+
              is the same as the application path, the root operator (the tilde [~]), is returned. For example, the current application virtual directory path can be accessed from the <see
              cref="P:System.Web.HttpRuntime.AppDomainAppVirtualPath" />
+
+            
 
             
 
@@ -1098,6 +1252,8 @@
 
             
 
+            
+
              property. </para
           >
         </summary>
@@ -1111,11 +1267,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1153,8 +1313,12 @@
 
             
 
+            
+
              overload of the <see
              cref="Overload:System.Web.VirtualPathUtility.ToAppRelative" />
+
+            
 
             
 
@@ -1167,8 +1331,12 @@
 
             
 
+            
+
              rather than the current application path. If <paramref
              name="virtualPath" />
+
+            
 
             
 
@@ -1181,8 +1349,12 @@
 
             
 
+            
+
             , the <see
              cref="M:System.Web.VirtualPathUtility.ToAppRelative(System.String,System.String)" />
+
+            
 
             
 
@@ -1205,11 +1377,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1224,8 +1400,12 @@
 
           
 
+          
+
           The application path to use to convert <paramref
            name="virtualPath" />
+
+          
 
           
 

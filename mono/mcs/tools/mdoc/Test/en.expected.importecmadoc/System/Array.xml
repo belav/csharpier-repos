@@ -28,6 +28,8 @@
 
         
 
+        
+
          are not to be created by the developer.</para
       >
       <block subset="none" type="note">
@@ -35,6 +37,8 @@
           >An array is a collection of
          identically typed data <paramref
            name="elements" />
+
+          
 
           
 
@@ -48,11 +52,15 @@
 
           
 
+          
+
           . </para
         >
         <para
           >The <paramref
            name="rank" />
+
+          
 
           
 
@@ -73,12 +81,16 @@
 
           
 
+          
+
            of a dimension
    is the starting index of that dimension. </para
         >
         <para
           >The <paramref
            name="length" />
+
+          
 
           
 
@@ -95,9 +107,13 @@ dimensions. </para
 
           
 
+          
+
            is a
 one-dimensional array with a <paramref
            name="lower bound" />
+
+          
 
           
 
@@ -113,8 +129,12 @@ one-dimensional array with a <paramref
 
           
 
+          
+
           , expected <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -129,8 +149,12 @@ functionality, see the <see
 
           
 
+          
+
            and <see
            cref="T:System.Collections.Generic.IList&lt;T&gt;" />
+
+          
 
           
 
@@ -143,6 +167,8 @@ of collections, see Partition V of the CLI Specification. </para
       <para
         >Every specific <see
          cref="T:System.Array" />
+
+        
 
         
 
@@ -163,8 +189,12 @@ of collections, see Partition V of the CLI Specification. </para
 
               
 
+              
+
               : Takes as many <see
                cref="T:System.Int32" />
+
+              
 
               
 
@@ -174,6 +204,8 @@ of collections, see Partition V of the CLI Specification. </para
    has dimensions and returns the value stored at the given index. It throws a
 <see
                cref="T:System.IndexOutOfRangeException" />
+
+              
 
               
 
@@ -193,8 +225,12 @@ exception for invalid indices. </para
 
               
 
+              
+
               : Takes as many <see
                cref="T:System.Int32" />
+
+              
 
               
 
@@ -205,6 +241,8 @@ exception for invalid indices. </para
    same type as an array element. It stores the final value in the specified
    index of the array. It throws a <see
                cref="T:System.IndexOutOfRangeException" />
+
+              
 
               
 
@@ -224,8 +262,12 @@ exception for invalid indices. </para
 
               
 
+              
+
               : Takes as many <see
                cref="T:System.Int32" />
+
+              
 
               
 
@@ -235,6 +277,8 @@ exception for invalid indices. </para
    array has dimensions and returns the address of the element at the given index.
    It throws a <see
                cref="T:System.IndexOutOfRangeException" />
+
+              
 
               
 
@@ -254,9 +298,13 @@ exception for invalid indices. </para
 
         
 
+        
+
          type has a constructor on it that takes as many non-negative 
 <see
          cref="T:System.Int32" />
+
+        
 
         
 
@@ -272,9 +320,13 @@ two-dimensional array of <see
 
         
 
+        
+
          objects would have a constructor that could be called with
 <c
         >(2, 4)</c>
+
+        
 
         
 
@@ -298,9 +350,13 @@ with 0 and 1 and the second dimension indexed with 0, 1, 2, and 3. </para
         
 
         
+
+        
    
    objects would also have a constructor that could be called with <c
         >(-1, 2, 1, 3)</c>
+
+        
 
         
 
@@ -314,6 +370,8 @@ and the second dimension indexed by 1, 2, and 3. </para
       <para
         >Parallel implementation of methods taking a <see
          cref="T:System.Predicate" />
+
+        
 
         
 
@@ -339,6 +397,8 @@ and the second dimension indexed by 1, 2, and 3. </para
         <summary
           >Constructs a new instance of the <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -416,6 +476,8 @@ and the second dimension indexed by 1, 2, and 3. </para
 
             
 
+            
+
              that converts each element from one type to another type.</para
           >
         </param>
@@ -426,6 +488,8 @@ and the second dimension indexed by 1, 2, and 3. </para
           <para
             >A new array of the target type containing the converted elements from <paramref
              name="array" />
+
+            
 
             
 
@@ -443,8 +507,12 @@ and the second dimension indexed by 1, 2, and 3. </para
 
             
 
+            
+
              is a delegate that converts an array element to the target type.  The elements of  <paramref
              name="array" />
+
+            
 
             
 
@@ -460,8 +528,12 @@ and the second dimension indexed by 1, 2, and 3. </para
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -474,8 +546,12 @@ and the second dimension indexed by 1, 2, and 3. </para
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 

@@ -32,8 +32,12 @@
 
         
 
+        
+
          custom attribute. Every UDT must be annotated with this attribute. See <see
          cref="http://go.microsoft.com/fwlink/?LinkId=128028">CLR User-Defined Types</see>
+
+        
 
         
 
@@ -96,6 +100,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -123,11 +129,15 @@
 
             
 
+            
+
              property in effect guarantees that the serialized binary data can be used for semantic ordering of the information. Thus, each instance of a byte-ordered UDT object can only have one serialized representation. When a comparison operation is performed in SQL Server on the serialized bytes, its results should be the same as if the same comparison operation had taken place in managed code..</para
           >
           <para
             >The following features are supported when <see
              cref="P:Microsoft.SqlServer.Server.SqlUserDefinedTypeAttribute.IsByteOrdered" />
+
+            
 
             
 
@@ -155,6 +165,8 @@
           <para
             >Note that both the Native and UserDefined serialization formats support the following comparison operators when <see
              cref="P:Microsoft.SqlServer.Server.SqlUserDefinedTypeAttribute.IsByteOrdered" />
+
+            
 
             
 
@@ -211,8 +223,12 @@
 
             
 
+            
+
             . This attribute is only relevant for UDTs with UserDefined serialization <see
              cref="T:Microsoft.SqlServer.Server.Format" />
+
+            
 
             
 
@@ -249,8 +265,12 @@
 
             
 
+            
+
              property with the UserDefined serialization <see
              cref="T:Microsoft.SqlServer.Server.Format" />
+
+            
 
             
 
@@ -266,11 +286,15 @@
 
             
 
+            
+
              must be between 1 and 8000.</para
           >
           <para
             >When connecting to SQL Server 2008 or later, set <see
              cref="P:Microsoft.SqlServer.Server.SqlUserDefinedTypeAttribute.MaxByteSize" />
+
+            
 
             
 
@@ -286,8 +310,12 @@
 
             
 
+            
+
              refers to the total size of the UDT in its serialized form as defined by the user. Consider a UDT with a property of a string of 10 characters (<see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -300,8 +328,12 @@
 
             
 
+            
+
             , the total size of the serialized string is 22 bytes: 2 bytes per Unicode UTF-16 character, multiplied by the maximum number of characters, plus 2 control bytes of overhead incurred from serializing a binary stream. So, when determining the value of <see
              cref="P:Microsoft.SqlServer.Server.SqlUserDefinedTypeAttribute.MaxByteSize" />
+
+            
 
             
 
@@ -312,6 +344,8 @@
           <para
             >This property should not be used with Native serialization <see
              cref="T:Microsoft.SqlServer.Server.Format" />
+
+            
 
             
 

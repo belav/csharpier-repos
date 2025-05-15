@@ -47,6 +47,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -81,11 +83,15 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
         <param name="claimType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -98,10 +104,14 @@
 
           
 
+          
+
            class. </param
         >
         <param name="isOptional">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -136,6 +146,8 @@
           <para
             >Predefined claim types are available as static properties of the <see
              cref="T:System.IdentityModel.Claims.ClaimTypes" />
+
+            
 
             
 

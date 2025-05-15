@@ -22,6 +22,8 @@
 
         
 
+        
+
          enumeration represents the different gridline styles for controls that display items in a table structure. You can display the horizontal, the vertical, both the horizontal and vertical, or no grid lines.</para
       >
     </remarks>

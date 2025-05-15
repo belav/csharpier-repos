@@ -18,10 +18,10 @@
       <para
         >To enable role management for your ASP.NET application, use the <format
          type="text/html">
-          <a href="4b0f6078-4824-4fc8-a5ee-4ae00ee3ceec"
->roleManager</a
-          >
+          <a href="4b0f6078-4824-4fc8-a5ee-4ae00ee3ceec">roleManager</a>
         </format>
+
+        
 
         
 
@@ -69,6 +69,8 @@
 
         
 
+        
+
          section from a Web.config file requires users to log on (by denying anonymous users), and then allows only users in the Administrators role to have access.</para
       >
       <code>&lt;authorization&gt;
@@ -84,11 +86,15 @@
 
         
 
+        
+
          classes.</para
       >
       <para
         >To verify role membership programmatically, you can use the <see
          cref="T:System.Web.Security.Roles" />
+
+        
 
         
 
@@ -101,8 +107,12 @@
 
         
 
+        
+
          property with the <see
          cref="M:System.Web.Security.Roles.IsUserInRole(System.String)" />
+
+        
 
         
 
@@ -115,8 +125,12 @@
 
         
 
+        
+
          property with the <see
          cref="M:System.Security.Principal.IPrincipal.IsInRole(System.String)" />
+
+        
 
         
 
@@ -127,6 +141,8 @@
       <para
         >The <see
          cref="T:System.Web.Security.Roles" />
+
+        
 
         
 
@@ -143,8 +159,12 @@
 
           
 
+          
+
            class, you cannot modify roles or role membership. The <see
            cref="T:System.Web.Security.WindowsTokenRoleProvider" />
+
+          
 
           
 
@@ -164,6 +184,8 @@
 
             
 
+            
+
              class to retrieve role information based on membership in Windows groups. </para
           >
         </item>
@@ -171,6 +193,8 @@
           <para
             >You can store role information in a SQL Server database by using the <see
              cref="T:System.Web.Security.SqlRoleProvider" />
+
+            
 
             
 
@@ -188,10 +212,14 @@
 
             
 
+            
+
              abstract class. For more information, see <format
              type="text/html">
               <a href="851671ce-bf9b-43f2-aba4-bc9d28b11c7d">Implementing a Role Provider</a>
             </format>
+
+            
 
             
 
@@ -210,8 +238,12 @@
 
         
 
+        
+
          property when you configure ASP.NET roles. The default <see
          cref="P:System.Web.Security.Roles.CookieProtectionValue" />
+
+        
 
         
 
@@ -252,6 +284,8 @@
 
             
 
+            
+
              method calls the default role provider to associate the specified users with the specified role at the data source.</para
           >
           <para
@@ -262,8 +296,12 @@
 
             
 
+            
+
              class, the database updates that are performed during the call to the <see
              cref="M:System.Web.Security.SqlRoleProvider.AddUsersToRoles(System.String[],System.String[])" />
+
+            
 
             
 
@@ -281,6 +319,8 @@
         </summary>
         <param name="usernames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -319,6 +359,8 @@
 
             
 
+            
+
              method calls the default role provider to associate the specified users with the specified roles at the data source.</para
           >
           <para
@@ -329,8 +371,12 @@
 
             
 
+            
+
              class, the database updates that are performed during the call to the <see
              cref="M:System.Web.Security.SqlRoleProvider.AddUsersToRoles(System.String[],System.String[])" />
+
+            
 
             
 
@@ -348,6 +394,8 @@
         </summary>
         <param name="usernames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -386,6 +434,8 @@
 
             
 
+            
+
              method calls the default role provider to associate the specified user with the specified role at the data source.</para
           >
           <block subset="none" type="note">
@@ -398,6 +448,8 @@
         </summary>
         <param name="username">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -436,6 +488,8 @@
 
             
 
+            
+
              method calls the default role provider to associate the specified user with the specified roles at the data source.</para
           >
           <para
@@ -446,8 +500,12 @@
 
             
 
+            
+
              class, the database updates that are performed during the call to the <see
              cref="M:System.Web.Security.Roles.AddUserToRoles(System.String,System.String[])" />
+
+            
 
             
 
@@ -465,6 +523,8 @@
         </summary>
         <param name="username">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -496,8 +556,12 @@
 
             
 
+            
+
              property is used by the <see
              cref="T:System.Web.Security.Roles" />
+
+            
 
             
 
@@ -510,8 +574,12 @@
 
             
 
+            
+
              property. You can set the <see
              cref="P:System.Web.Security.Roles.ApplicationName" />
+
+            
 
             
 
@@ -527,6 +595,8 @@
 
             
 
+            
+
              class and a value is not specified for the applicationName attribute in the configuration file, the <see
              cref="P:System.Web.HttpRequest.ApplicationPath" />
 
@@ -534,8 +604,12 @@
 
             
 
+            
+
              property value for the current <see
              cref="P:System.Web.HttpContext.Request" />
+
+            
 
             
 
@@ -552,8 +626,12 @@
 
               
 
+              
+
                object, you can have multiple requests executing concurrently and attempting to set the <see
                cref="P:System.Web.Security.Roles.ApplicationName" />
+
+              
 
               
 
@@ -566,8 +644,12 @@
 
               
 
+              
+
                property is not thread safe for multiple writes, and changing the <see
                cref="P:System.Web.Security.Roles.ApplicationName" />
+
+              
 
               
 
@@ -580,8 +662,12 @@
 
               
 
+              
+
                property, unless required. An example of an application where setting the <see
                cref="P:System.Web.Security.Roles.ApplicationName" />
+
+              
 
               
 
@@ -619,6 +705,8 @@
 
             
 
+            
+
              property is set to true in the Web.config file, role information for each user is stored in a cookie. When role management checks to see whether a user is in a particular role, the roles cookie is checked before the role provider is called to check the list of roles at the data source. The cookie is dynamically updated to cache the most recently validated role names.</para
           >
           <para
@@ -629,8 +717,12 @@
 
             
 
+            
+
              property when you configure ASP.NET roles. The default <see
              cref="P:System.Web.Security.Roles.CookieProtectionValue" />
+
+            
 
             
 
@@ -692,6 +784,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -721,6 +815,8 @@
           <para
             >You can specify the protection of the cookie where roles are cached for your application by setting the cookieProtection attribute in the Web.config file for your ASP.NET application. The cookieProtection attribute takes a <see
              cref="T:System.Web.Security.CookieProtection" />
+
+            
 
             
 
@@ -757,6 +853,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -788,6 +886,8 @@
 
             
 
+            
+
              in minutes. While the user continues to actively use the ASP.NET application, the expiration date and time of the cookie will be automatically refreshed if there is less than half of the <see
              cref="P:System.Web.Security.Roles.CookieTimeout" />
 
@@ -795,8 +895,12 @@
 
             
 
+            
+
              remaining. For more information, see the <see
              cref="P:System.Web.HttpCookie.Expires" />
+
+            
 
             
 
@@ -833,8 +937,12 @@
 
             
 
+            
+
              property is used when the <see
              cref="P:System.Web.Security.Roles.CookieSlidingExpiration" />
+
+            
 
             
 
@@ -847,12 +955,14 @@
 
             
 
+            
+
              value, add the cookieTimeout attribute to the <format
              type="text/html">
-              <a href="4b0f6078-4824-4fc8-a5ee-4ae00ee3ceec"
->roleManager</a
-              >
+              <a href="4b0f6078-4824-4fc8-a5ee-4ae00ee3ceec">roleManager</a>
             </format>
+
+            
 
             
 
@@ -863,6 +973,8 @@
           <para
             >If <see
              cref="P:System.Web.Security.Roles.CookieSlidingExpiration" />
+
+            
 
             
 
@@ -899,12 +1011,14 @@
 
             
 
+            
+
              property value is set in the configuration for an ASP.NET application using the createPersistentCookie attribute of the <format
              type="text/html">
-              <a href="4b0f6078-4824-4fc8-a5ee-4ae00ee3ceec"
->roleManager</a
-              >
+              <a href="4b0f6078-4824-4fc8-a5ee-4ae00ee3ceec">roleManager</a>
             </format>
+
+            
 
             
 
@@ -915,6 +1029,8 @@
           <para
             >When false, the role-names cookie is a session cookie, that is, the cookie is lost when the browser is closed. When true, the role-names cookie is a persistent cookie that is available across multiple browser sessions. The persistent cookie expiration date and time are set to the current date and time plus the <see
              cref="P:System.Web.Security.Roles.CookieTimeout" />
+
+            
 
             
 
@@ -954,6 +1070,8 @@
 
             
 
+            
+
              method adds a role name to the data source. <see
              cref="M:System.Web.Security.Roles.CreateRole(System.String)" />
 
@@ -961,8 +1079,12 @@
 
             
 
+            
+
              calls the <see
              cref="M:System.Web.Security.RoleProvider.CreateRole(System.String)" />
+
+            
 
             
 
@@ -1002,8 +1124,12 @@
 
             
 
+            
+
              method clears the contents of the cookie that is used to cache role names. For more information on caching role names, see <see
              cref="P:System.Web.Security.Roles.CacheRolesInCookie" />
+
+            
 
             
 
@@ -1043,8 +1169,12 @@
 
             
 
+            
+
              method removes a role name from the data source. <see
              cref="M:System.Web.Security.Roles.DeleteRole(System.String)" />
+
+            
 
             
 
@@ -1057,11 +1187,15 @@
 
             
 
+            
+
              method of the default role provider to remove the specified role from the data source.</para
           >
           <para
             >If the role identified by the <paramref
              name="roleName" />
+
+            
 
             
 
@@ -1079,6 +1213,8 @@
           <para
             >true if <paramref
              name="roleName" />
+
+            
 
             
 
@@ -1118,6 +1254,8 @@
 
             
 
+            
+
              method removes a role name from the data source. <see
              cref="M:System.Web.Security.Roles.DeleteRole(System.String,System.Boolean)" />
 
@@ -1125,8 +1263,12 @@
 
             
 
+            
+
              calls the <see
              cref="M:System.Web.Security.RoleProvider.DeleteRole(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1142,6 +1284,8 @@
 
             
 
+            
+
              is true, then an exception will be thrown and the role will not be deleted if the role identified by the <paramref
              name="roleName" />
 
@@ -1149,8 +1293,12 @@
 
             
 
+            
+
              parameter has one or more members. If <paramref
              name="throwOnPopulatedRole" />
+
+            
 
             
 
@@ -1173,6 +1321,8 @@
 
             
 
+            
+
              was deleted from the data source; otherwise; false.</para
           >
         </returns>
@@ -1183,8 +1333,12 @@
 
           
 
+          
+
           If true, throws an exception if <paramref
            name="roleName" />
+
+          
 
           
 
@@ -1216,12 +1370,14 @@
 
             
 
+            
+
              property value is set in the configuration for an ASP.NET application using the domain attribute of the <format
              type="text/html">
-              <a href="4b0f6078-4824-4fc8-a5ee-4ae00ee3ceec"
->roleManager</a
-              >
+              <a href="4b0f6078-4824-4fc8-a5ee-4ae00ee3ceec">roleManager</a>
             </format>
+
+            
 
             
 
@@ -1237,9 +1393,13 @@
 
             
 
+            
+
              property returns null and the role-names cookie domain defaults to the behavior of the <see
              cref="T:System.Web.HttpCookie" />
             <see cref="P:System.Web.HttpCookie.Domain" />
+
+            
 
             
 
@@ -1301,6 +1461,8 @@
 
             
 
+            
+
              returns a list of users in a role where the user name contains a match of the supplied <paramref
              name="usernameToMatch" />
 
@@ -1308,8 +1470,12 @@
 
             
 
+            
+
              for the configured applicationName. For example, if the <paramref
              name="usernameToMatch" />
+
+            
 
             
 
@@ -1325,6 +1491,8 @@
 
             
 
+            
+
              performs its search using a LIKE clause against the <paramref
              name="usernameToMatch" />
 
@@ -1332,8 +1500,12 @@
 
             
 
+            
+
              parameter. Any wildcards that are supported by SQL Server in LIKE clauses can be used in the <paramref
              name="usernameToMatch" />
+
+            
 
             
 
@@ -1356,11 +1528,15 @@
 
             
 
+            
+
              and who are members of the specified role.</para
           >
         </returns>
         <param name="usernameToMatch">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1392,6 +1568,8 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.Security.RoleProvider.GetAllRoles" />
 
@@ -1399,8 +1577,12 @@
 
             
 
+            
+
              method of the default role provider to get a list of all the roles from the data source for an application. Only the roles for the application that is specified in the <see
              cref="P:System.Web.Security.Roles.ApplicationName" />
+
+            
 
             
 
@@ -1441,8 +1623,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.Security.RoleProvider.GetRolesForUser(System.String)" />
+
+            
 
             
 
@@ -1455,8 +1641,12 @@
 
             
 
+            
+
              property of the current <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -1469,8 +1659,12 @@
 
             
 
+            
+
              for non-HTTP hosting environments. If no user is logged on, an exception will be thrown. Only the roles for the application that is specified in the <see
              cref="P:System.Web.Security.Roles.ApplicationName" />
+
+            
 
             
 
@@ -1486,8 +1680,12 @@
 
             
 
+            
+
              is true, then the results of the <see
              cref="M:System.Web.Security.Roles.GetRolesForUser" />
+
+            
 
             
 
@@ -1533,6 +1731,8 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.Security.RoleProvider.GetRolesForUser(System.String)" />
 
@@ -1540,8 +1740,12 @@
 
             
 
+            
+
              method of the default role provider to retrieve from the data source the roles that the user is in. Only the roles for the application that is specified in the <see
              cref="P:System.Web.Security.Roles.ApplicationName" />
+
+            
 
             
 
@@ -1557,8 +1761,12 @@
 
             
 
+            
+
              is equal to the current logged-on user and <see
              cref="P:System.Web.Security.Roles.CacheRolesInCookie" />
+
+            
 
             
 
@@ -1571,8 +1779,12 @@
 
             
 
+            
+
              method may be returned from the role cache rather than the specified <see
              cref="P:System.Web.Security.Roles.Provider" />
+
+            
 
             
 
@@ -1591,6 +1803,8 @@
         </returns>
         <param name="username">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1628,6 +1842,8 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.Security.RoleProvider.GetUsersInRole(System.String)" />
 
@@ -1635,8 +1851,12 @@
 
             
 
+            
+
              method of the default role provider to retrieve the user names associated with a role from the data source. Only the roles for the application that is specified in the <see
              cref="P:System.Web.Security.Roles.ApplicationName" />
+
+            
 
             
 
@@ -1680,8 +1900,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.Security.RoleProvider.IsUserInRole(System.String,System.String)" />
+
+            
 
             
 
@@ -1694,8 +1918,12 @@
 
             
 
+            
+
              property. The currently logged-on user is identified by the <see
              cref="P:System.Web.HttpContext.User" />
+
+            
 
             
 
@@ -1708,6 +1936,8 @@
 
             
 
+            
+
             , or by <see
              cref="P:System.Threading.Thread.CurrentPrincipal" />
 
@@ -1715,8 +1945,12 @@
 
             
 
+            
+
              for non-HTTP hosting environments. If no user is logged on, an exception will be thrown. Only the roles for the application that is specified in the <see
              cref="P:System.Web.Security.Roles.ApplicationName" />
+
+            
 
             
 
@@ -1732,8 +1966,12 @@
 
             
 
+            
+
              is true, then <paramref
              name="roleName" />
+
+            
 
             
 
@@ -1781,6 +2019,8 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.Security.RoleProvider.IsUserInRole(System.String,System.String)" />
 
@@ -1788,8 +2028,12 @@
 
             
 
+            
+
              method of the default role provider to determine whether a user name is associated with a role from the data source for the application that is specified in the <see
              cref="P:System.Web.Security.Roles.ApplicationName" />
+
+            
 
             
 
@@ -1805,8 +2049,12 @@
 
             
 
+            
+
              is equal to the current logged-on user and the <see
              cref="P:System.Web.Security.Roles.CacheRolesInCookie" />
+
+            
 
             
 
@@ -1819,8 +2067,12 @@
 
             
 
+            
+
              may be checked against the role cache rather than the specified <see
              cref="P:System.Web.Security.Roles.Provider" />
+
+            
 
             
 
@@ -1839,6 +2091,8 @@
         </returns>
         <param name="username">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1865,6 +2119,8 @@
           <para
             >The <see
              cref="P:System.Web.Security.Roles.MaxCachedResults" />
+
+            
 
             
 
@@ -1904,8 +2160,12 @@
 
             
 
+            
+
              property enables you to directly reference the default role provider for an application. This is commonly used to access custom members of the role provider that are not part of the <see
              cref="T:System.Web.Security.RoleProvider" />
+
+            
 
             
 
@@ -1921,8 +2181,12 @@
 
             
 
+            
+
              class includes an overload of the <see
              cref="M:System.Web.Security.WindowsTokenRoleProvider.IsUserInRole(System.String,System.Security.Principal.WindowsBuiltInRole)" />
+
+            
 
             
 
@@ -1935,8 +2199,12 @@
 
             
 
+            
+
              enumeration value. A reference to the <see
              cref="T:System.Web.Security.WindowsTokenRoleProvider" />
+
+            
 
             
 
@@ -1949,8 +2217,12 @@
 
             
 
+            
+
              property and can be cast as a <see
              cref="T:System.Web.Security.WindowsTokenRoleProvider" />
+
+            
 
             
 
@@ -1963,11 +2235,15 @@
 
             
 
+            
+
              overload.</para
           >
           <para
             >If multiple role providers are configured for an application, you can access different role providers using the <see
              cref="P:System.Web.Security.Roles.Providers" />
+
+            
 
             
 
@@ -2007,12 +2283,14 @@
 
             
 
+            
+
              property references all the role providers enabled for an application, including any providers added in the Web.config file. You can control which role providers are available for an application by using the providers element of the <format
              type="text/html">
-              <a href="4b0f6078-4824-4fc8-a5ee-4ae00ee3ceec"
->roleManager</a
-              >
+              <a href="4b0f6078-4824-4fc8-a5ee-4ae00ee3ceec">roleManager</a>
             </format>
+
+            
 
             
 
@@ -2023,10 +2301,10 @@
           <para
             >The following example shows a <format
              type="text/html">
-              <a href="4b0f6078-4824-4fc8-a5ee-4ae00ee3ceec"
->roleManager</a
-              >
+              <a href="4b0f6078-4824-4fc8-a5ee-4ae00ee3ceec">roleManager</a>
             </format>
+
+            
 
             
 
@@ -2034,6 +2312,8 @@
 
              section that removes any existing providers (such as those specified in the Machine.config file) and adds a <see
              cref="T:System.Web.Security.SqlRoleProvider" />
+
+            
 
             
 
@@ -2077,11 +2357,15 @@
 
             
 
+            
+
              collection by indexing the role provider by name and casting it as the desired type.</para
           >
           <para
             >You can obtain a reference to the default provider for an application using the <see
              cref="P:System.Web.Security.Roles.Provider" />
+
+            
 
             
 
@@ -2125,6 +2409,8 @@
 
             
 
+            
+
              method calls the default role provider to remove the specified user from the specified role at the data source.</para
           >
         </remarks>
@@ -2134,6 +2420,8 @@
         </summary>
         <param name="username">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2172,6 +2460,8 @@
 
             
 
+            
+
              method calls the default role provider to remove the specified user from the specified roles at the data source.</para
           >
           <para
@@ -2182,8 +2472,12 @@
 
             
 
+            
+
              class, the database updates that are performed during the call to the <see
              cref="M:System.Web.Security.Roles.RemoveUserFromRoles(System.String,System.String[])" />
+
+            
 
             
 
@@ -2198,6 +2492,8 @@
         </summary>
         <param name="username">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2236,6 +2532,8 @@
 
             
 
+            
+
              method calls the default role provider to remove the specified users from the specified role at the data source.</para
           >
           <para
@@ -2246,8 +2544,12 @@
 
             
 
+            
+
              class, the database updates that are performed during the call to the <see
              cref="M:System.Web.Security.SqlRoleProvider.RemoveUsersFromRoles(System.String[],System.String[])" />
+
+            
 
             
 
@@ -2262,6 +2564,8 @@
         </summary>
         <param name="usernames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2300,6 +2604,8 @@
 
             
 
+            
+
              method calls the default role provider to remove the specified users from the specified roles at the data source.</para
           >
           <para
@@ -2310,8 +2616,12 @@
 
             
 
+            
+
              class, the database updates that are performed during the call to the <see
              cref="M:System.Web.Security.SqlRoleProvider.RemoveUsersFromRoles(System.String[],System.String[])" />
+
+            
 
             
 
@@ -2326,6 +2636,8 @@
         </summary>
         <param name="usernames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2360,8 +2672,12 @@
 
             
 
+            
+
              method calls the RoleExists method of the default role provider to determine whether a role name exists in the data source for the application that is specified in the <see
              cref="P:System.Web.Security.Roles.ApplicationName" />
+
+            
 
             
 

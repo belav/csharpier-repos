@@ -25,8 +25,12 @@
 
         
 
+        
+
          enumeration is used by the <see
          cref="T:System.Windows.Forms.TextRenderer" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
          does not support adding tab stops to drawn text, although you can expand existing tab stops using the <see
          cref="F:System.Windows.Forms.TextFormatFlags.ExpandTabs" />
+
+        
 
         
 
@@ -124,8 +132,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Windows.Forms.TextFormatFlags.PathEllipsis" />
+
+            
 
             
 
@@ -138,8 +150,12 @@
 
             
 
+            
+
              values cannot be used with <see
              cref="F:System.Windows.Forms.TextFormatFlags.ExpandTabs" />
+
+            
 
             
 
@@ -205,6 +221,8 @@
 
             
 
+            
+
              applied would result in output of "Abc&amp;d".</para
           >
           <para
@@ -215,8 +233,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Windows.Forms.TextFormatFlags.PrefixOnly" />
+
+            
 
             
 
@@ -354,8 +376,12 @@
 
             
 
+            
+
              increases the readability of icon labels in Korean windows. This value has no effect unless <see
              cref="F:System.Windows.Forms.TextFormatFlags.WordBreak" />
+
+            
 
             
 
@@ -408,8 +434,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Windows.Forms.TextFormatFlags.PrefixOnly" />
+
+            
 
             
 
@@ -428,8 +458,12 @@
 
             
 
+            
+
             , this processing is turned off. For example, an input string of "A&amp;bc&amp;&amp;d" with <see
              cref="F:System.Windows.Forms.TextFormatFlags.NoPrefix" />
+
+            
 
             
 
@@ -479,8 +513,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Windows.Forms.TextFormatFlags.NoPrefix" />
+
+            
 
             
 
@@ -516,6 +554,8 @@
 
             
 
+            
+
              object. Applies only to methods receiving an <see
              cref="T:System.Drawing.IDeviceContext" />
 
@@ -523,8 +563,12 @@
 
             
 
+            
+
              that is a <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -556,6 +600,8 @@
 
             
 
+            
+
             . Applies only to methods receiving an <see
              cref="T:System.Drawing.IDeviceContext" />
 
@@ -563,8 +609,12 @@
 
             
 
+            
+
              that is a <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -642,6 +692,8 @@
           <para
             >Specifies the text should be formatted for display on a <see
              cref="T:System.Windows.Forms.TextBox" />
+
+            
 
             
 

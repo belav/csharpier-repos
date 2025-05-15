@@ -11,6 +11,8 @@
 
       
 
+      
+
        :: <rhs
       >
         <non_terminal where="9.5.6">pp-start-region</non_terminal>
@@ -28,6 +30,8 @@
 
       
 
+      
+
        :: <rhs
       >
         <non_terminal where="9.3.3">whitespace</non_terminal>
@@ -35,8 +39,7 @@
         <terminal>#</terminal>
         <non_terminal where="9.3.3">whitespace</non_terminal>
         <opt />
-        <terminal
->region</terminal>
+        <terminal>region</terminal>
         <non_terminal where="9.5.5">pp-message</non_terminal>
       </rhs>
     </grammar_production>
@@ -44,6 +47,8 @@
       <name>
         <non_terminal where="9.5.6">pp-end-region</non_terminal>
       </name>
+
+      
 
       
 
@@ -69,8 +74,12 @@
 
     
 
+    
+
      or <symbol
     >#endregion</symbol>
+
+    
 
     
 
@@ -83,8 +92,12 @@
 
     
 
+    
+
      and <symbol
     >#endregion</symbol>
+
+    
 
     
 
@@ -97,12 +110,14 @@
 
     
 
+    
+
     s. </paragraph
   >
   <paragraph
     >The lexical processing of a region: <code_example
     >
-<![CDATA[
+      <![CDATA[
 #region  
 ...  
 #endregion  
@@ -113,9 +128,11 @@
 
     
 
+    
+
     corresponds exactly to the lexical processing of a conditional compilation directive of the form: <code_example
     >
-<![CDATA[
+      <![CDATA[
 #if true  
 ...  
 #endif  

@@ -26,6 +26,8 @@
 
         
 
+        
+
          event.</para
       >
     </remarks>
@@ -34,6 +36,8 @@
       <para
         >Prepares data for the <see
          cref="E:System.IO.Ports.SerialPort.ErrorReceived" />
+
+        
 
         
 
@@ -69,6 +73,8 @@
           <para
             >This property provides information on the event type that caused the <see
              cref="E:System.IO.Ports.SerialPort.ErrorReceived" />
+
+            
 
             
 

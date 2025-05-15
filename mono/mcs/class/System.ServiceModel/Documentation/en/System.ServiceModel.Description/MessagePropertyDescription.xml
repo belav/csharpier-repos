@@ -30,8 +30,12 @@
 
         
 
+        
+
          class represents message properties specified in a message contract by the use of the <see
          cref="T:System.ServiceModel.MessagePropertyAttribute" />
+
+        
 
         
 
@@ -45,6 +49,8 @@
       <para
         >Represents a message property specified by the <see
          cref="T:System.ServiceModel.MessagePropertyAttribute" />
+
+        
 
         
 
@@ -80,11 +86,15 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

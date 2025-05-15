@@ -50,11 +50,15 @@
 
         
 
+        
+
          are inserted at one end and removed from the other.</para
       >
       <para
         >The capacity of a <see
          cref="T:System.Collections.Queue" />
+
+        
 
         
 
@@ -67,6 +71,8 @@
 
         
 
+        
+
          can hold. As elements are added to a <see
          cref="T:System.Collections.Queue" />
 
@@ -74,8 +80,12 @@
 
         
 
+        
+
         , the capacity is automatically increased as required through reallocation.  The capacity can be decreased by calling <see
          cref="M:System.Collections.Queue.TrimToSize" />
+
+        
 
         
 
@@ -91,8 +101,12 @@
 
         
 
+        
+
          is constructed. The default growth factor is 2.0. The capacity of the <see
          cref="T:System.Collections.Queue" />
+
+        
 
         
 
@@ -105,10 +119,14 @@
 
         
 
+        
+
          with a growth factor of 1.0 will always increase in capacity by four when a greater capacity is required.</para
       >
       <para>
         <see cref="T:System.Collections.Queue" />
+
+        
 
         
 
@@ -152,8 +170,12 @@
 
             
 
+            
+
              is the number of elements the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -166,8 +188,12 @@
 
             
 
+            
+
             , the capacity is automatically increased as required through reallocation.  The capacity can be decreased by calling <see
              cref="M:System.Collections.Queue.TrimToSize" />
+
+            
 
             
 
@@ -183,6 +209,8 @@
 
             
 
+            
+
              is constructed.</para
           >
           <para>This constructor is an O(1) operation.</para>
@@ -192,6 +220,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -229,8 +259,12 @@
 
             
 
+            
+
              is the number of elements the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -243,8 +277,12 @@
 
             
 
+            
+
             , the capacity is automatically increased as required through reallocation.  The capacity can be decreased by calling <see
              cref="M:System.Collections.Queue.TrimToSize" />
+
+            
 
             
 
@@ -260,11 +298,15 @@
 
             
 
+            
+
              is constructed.</para
           >
           <para
             >The elements are copied onto the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -277,8 +319,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -294,6 +340,8 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -301,8 +349,12 @@
 
             
 
+            
+
              is the number of elements in <paramref
              name="col" />
+
+            
 
             
 
@@ -321,6 +373,8 @@
 
             
 
+            
+
              class that contains elements copied from the specified collection, has the same initial capacity as the number of elements copied, and uses the default growth factor.</para
           >
         </summary>
@@ -331,8 +385,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.ICollection" />
+
+          
 
           
 
@@ -369,8 +427,12 @@
 
             
 
+            
+
              is the number of elements the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -383,8 +445,12 @@
 
             
 
+            
+
             , the capacity is automatically increased as required through reallocation.  The capacity can be decreased by calling <see
              cref="M:System.Collections.Queue.TrimToSize" />
+
+            
 
             
 
@@ -400,11 +466,15 @@
 
             
 
+            
+
              is constructed.</para
           >
           <para
             >If the size of the collection can be estimated, specifying the initial capacity eliminates the need to perform a number of resizing operations while adding elements to the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -420,6 +490,8 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -427,8 +499,12 @@
 
             
 
+            
+
              is <paramref
              name="capacity" />
+
+            
 
             
 
@@ -447,6 +523,8 @@
 
             
 
+            
+
              class that is empty, has the specified initial capacity, and uses the default growth factor.</para
           >
         </summary>
@@ -457,8 +535,12 @@
 
           
 
+          
+
           The initial number of elements that the <see
            cref="T:System.Collections.Queue" />
+
+          
 
           
 
@@ -496,8 +578,12 @@
 
             
 
+            
+
              is the number of elements the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -510,8 +596,12 @@
 
             
 
+            
+
             , the capacity is automatically increased as required through reallocation.  The capacity can be decreased by calling <see
              cref="M:System.Collections.Queue.TrimToSize" />
+
+            
 
             
 
@@ -527,6 +617,8 @@
 
             
 
+            
+
              is constructed. The capacity of the <see
              cref="T:System.Collections.Queue" />
 
@@ -534,8 +626,12 @@
 
             
 
+            
+
              will always increase by a minimum value, regardless of the growth factor; a growth factor of 1.0 will not prevent the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -551,11 +647,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This constructor is an O(<paramref
              name="n" />
+
+            
 
             
 
@@ -568,8 +668,12 @@
 
             
 
+            
+
              is <paramref
              name="capacity" />
+
+            
 
             
 
@@ -588,6 +692,8 @@
 
             
 
+            
+
              class that is empty, has the specified initial capacity, and uses the specified growth factor.</para
           >
         </summary>
@@ -598,8 +704,12 @@
 
           
 
+          
+
           The initial number of elements that the <see
            cref="T:System.Collections.Queue" />
+
+          
 
           
 
@@ -614,8 +724,12 @@
 
           
 
+          
+
           The factor by which the capacity of the <see
            cref="T:System.Collections.Queue" />
+
+          
 
           
 
@@ -651,11 +765,15 @@
 
             
 
+            
+
              is set to zero, and references to other objects from elements of the collection are also released.</para
           >
           <para
             >The capacity remains unchanged. To reset the capacity of the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -668,6 +786,8 @@
 
             
 
+            
+
             . Trimming an empty <see
              cref="T:System.Collections.Queue" />
 
@@ -675,8 +795,12 @@
 
             
 
+            
+
              sets the capacity of the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -692,6 +816,8 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -699,8 +825,12 @@
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Queue.Count" />
+
+            
 
             
 
@@ -714,6 +844,8 @@
           <para
             >Removes all objects from the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -753,6 +885,8 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -760,8 +894,12 @@
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Queue.Count" />
+
+            
 
             
 
@@ -780,6 +918,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -788,6 +928,8 @@
           <para
             >A shallow copy of the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -827,11 +969,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This method performs a linear search; therefore, this method is an O(<paramref
              name="n" />
+
+            
 
             
 
@@ -844,8 +990,12 @@
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Queue.Count" />
+
+            
 
             
 
@@ -861,8 +1011,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -875,8 +1029,12 @@
 
             
 
+            
+
              to determine whether <paramref
              name="item" />
+
+            
 
             
 
@@ -889,6 +1047,8 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
 
@@ -896,8 +1056,12 @@
 
             
 
+            
+
              methods of the <paramref
              name="obj" />
+
+            
 
             
 
@@ -916,6 +1080,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -929,8 +1095,12 @@
 
             
 
+            
+
              is found in the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -946,6 +1116,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -953,8 +1125,12 @@
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Collections.Queue" />
+
+          
 
           
 
@@ -994,8 +1170,12 @@
 
             
 
+            
+
              in the same order in which the enumerator iterates through the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -1011,6 +1191,8 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -1018,8 +1200,12 @@
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Queue.Count" />
+
+            
 
             
 
@@ -1038,8 +1224,12 @@
 
             
 
+            
+
              elements to an existing one-dimensional <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -1055,8 +1245,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -1069,8 +1263,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -1085,8 +1283,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -1120,8 +1322,12 @@
 
             
 
+            
+
              is the number of elements that the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -1134,8 +1340,12 @@
 
             
 
+            
+
              is the number of elements that are actually in the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -1151,8 +1361,12 @@
 
             
 
+            
+
              is always greater than or equal to <see
              cref="P:System.Collections.Queue.Count" />
+
+            
 
             
 
@@ -1165,8 +1379,12 @@
 
             
 
+            
+
              exceeds the capacity while adding elements, the capacity is automatically increased by reallocating the internal array before copying the old elements and adding the new elements. The new capacity is determined by multiplying the current capacity by the growth factor, which is determined when the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -1179,8 +1397,12 @@
 
             
 
+            
+
              will always increase by a minimum value, regardless of the growth factor; a growth factor of 1.0 will not prevent the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -1196,6 +1418,8 @@
 
             
 
+            
+
             .</para
           >
           <para>Retrieving the value of this property is an O(1) operation.</para>
@@ -1205,6 +1429,8 @@
           <para
             >Gets the number of elements contained in the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -1242,6 +1468,8 @@
 
             
 
+            
+
              method, but <see
              cref="M:System.Collections.Queue.Peek" />
 
@@ -1249,8 +1477,12 @@
 
             
 
+            
+
              does not modify the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -1266,8 +1498,12 @@
 
             
 
+            
+
              as a value. To distinguish between a null value and the end of the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -1280,6 +1516,8 @@
 
             
 
+            
+
              property or catch the <see
              cref="T:System.InvalidOperationException" />
 
@@ -1287,8 +1525,12 @@
 
             
 
+            
+
             , which is thrown when the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -1308,6 +1550,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1316,6 +1560,8 @@
           <para
             >The object that is removed from the beginning of the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -1355,8 +1601,12 @@
 
             
 
+            
+
              is the number of elements the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -1369,8 +1619,12 @@
 
             
 
+            
+
             , the capacity is automatically increased as required through reallocation.  The capacity can be decreased by calling <see
              cref="M:System.Collections.Queue.TrimToSize" />
+
+            
 
             
 
@@ -1386,6 +1640,8 @@
 
             
 
+            
+
              is constructed. The capacity of the <see
              cref="T:System.Collections.Queue" />
 
@@ -1393,8 +1649,12 @@
 
             
 
+            
+
              will always increase by a minimum value, regardless of the growth factor; a growth factor of 1.0 will not prevent the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -1410,8 +1670,12 @@
 
             
 
+            
+
              is less than the capacity of the internal array, this method is an O(1) operation. If the internal array needs to be reallocated to accommodate the new element, this method becomes an O(<paramref
              name="n" />
+
+            
 
             
 
@@ -1424,8 +1688,12 @@
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Queue.Count" />
+
+            
 
             
 
@@ -1444,6 +1712,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1454,8 +1724,12 @@
 
           
 
+          
+
           The object to add to the <see
            cref="T:System.Collections.Queue" />
+
+          
 
           
 
@@ -1497,8 +1771,12 @@
 
             
 
+            
+
              also brings the enumerator back to this position.  At this position, <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1511,8 +1789,12 @@
 
             
 
+            
+
              to advance the enumerator to the first element of the collection before reading the value of <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1527,8 +1809,12 @@
 
             
 
+            
+
              returns the same object until either <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1541,6 +1827,8 @@
 
             
 
+            
+
              is called. <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
 
@@ -1548,8 +1836,12 @@
 
             
 
+            
+
              sets <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1565,8 +1857,12 @@
 
             
 
+            
+
              passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1579,8 +1875,12 @@
 
             
 
+            
+
              also return false. If the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1593,8 +1893,12 @@
 
             
 
+            
+
              is undefined. To set <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1607,8 +1911,12 @@
 
             
 
+            
+
              followed by <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1630,6 +1938,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1643,8 +1953,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -1679,8 +1993,12 @@
 
             
 
+            
+
             , all operations must be done through the wrapper returned by the <see
              cref="M:System.Collections.Queue.Synchronized(System.Collections.Queue)" />
+
+            
 
             
 
@@ -1695,6 +2013,8 @@
           <para
             >Gets a value indicating whether access to the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -1732,6 +2052,8 @@
 
             
 
+            
+
              method, but <see
              cref="M:System.Collections.Queue.Peek" />
 
@@ -1739,8 +2061,12 @@
 
             
 
+            
+
              does not modify the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -1756,8 +2082,12 @@
 
             
 
+            
+
              as a value. To distinguish between a null value and the end of the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -1770,6 +2100,8 @@
 
             
 
+            
+
              property or catch the <see
              cref="T:System.InvalidOperationException" />
 
@@ -1777,8 +2109,12 @@
 
             
 
+            
+
             , which is thrown when the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -1798,6 +2134,8 @@
 
             
 
+            
+
              without removing it.</para
           >
         </summary>
@@ -1806,6 +2144,8 @@
           <para
             >The object at the beginning of the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -1848,6 +2188,8 @@
 
             
 
+            
+
             , all operations must be done through this wrapper only.</para
           >
           <para>Enumerating through a collection is intrinsically not a thread-safe procedure. Even when a collection is synchronized, other threads can still modify the collection, which causes the enumerator to throw an exception. To guarantee thread safety during enumeration, you can either lock the collection during the entire enumeration or catch the exceptions resulting from changes made by other threads.</para>
@@ -1857,6 +2199,8 @@
           <para
             >Returns a <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -1875,6 +2219,8 @@
 
             
 
+            
+
              wrapper that is synchronized (thread safe).</para
           >
         </returns>
@@ -1885,8 +2231,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.Queue" />
+
+          
 
           
 
@@ -1920,8 +2270,12 @@
 
             
 
+            
+
             , use the <see
              cref="M:System.Collections.Queue.Synchronized(System.Collections.Queue)" />
+
+            
 
             
 
@@ -1934,8 +2288,12 @@
 
             
 
+            
+
              using the <see
              cref="P:System.Collections.Queue.SyncRoot" />
+
+            
 
             
 
@@ -1948,8 +2306,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -1962,8 +2324,12 @@
 
             
 
+            
+
             . This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -1978,6 +2344,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -2015,8 +2383,12 @@
 
             
 
+            
+
              is not modified. The order of the elements in the new array is the same as the order of the elements from the beginning of the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -2032,6 +2404,8 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -2039,8 +2413,12 @@
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Queue.Count" />
+
+            
 
             
 
@@ -2059,6 +2437,8 @@
 
             
 
+            
+
              elements to a new array.</para
           >
         </summary>
@@ -2067,6 +2447,8 @@
           <para
             >A new array containing elements copied from the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -2105,8 +2487,12 @@
 
             
 
+            
+
              to its initial state, call the <see
              cref="M:System.Collections.Queue.Clear" />
+
+            
 
             
 
@@ -2119,6 +2505,8 @@
 
             
 
+            
+
             . Trimming an empty <see
              cref="T:System.Collections.Queue" />
 
@@ -2126,8 +2514,12 @@
 
             
 
+            
+
              sets the capacity of the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 
@@ -2143,6 +2535,8 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -2150,8 +2544,12 @@
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Queue.Count" />
+
+            
 
             
 
@@ -2165,6 +2563,8 @@
           <para
             >Sets the capacity to the actual number of elements in the <see
              cref="T:System.Collections.Queue" />
+
+            
 
             
 

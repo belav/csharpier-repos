@@ -10,15 +10,19 @@
 
     
 
+    
+
     ) with the delegate's type. This makes delegates perfectly suited for "anonymous" invocation. This is a powerful capability. </paragraph
   >
   <paragraph
     >There are three steps in defining and using delegates: declaration, instantiation, and invocation. Delegates are declared using delegate declaration syntax. The example <code_example
     >
-<![CDATA[
+      <![CDATA[
 delegate void SimpleDelegate();  
 ]]>
     </code_example>
+
+    
 
     
 
@@ -29,7 +33,7 @@ delegate void SimpleDelegate();
   <paragraph
     >The example <code_example
     >
-<![CDATA[
+      <![CDATA[
 class Test  
 {  
    static void F() {  
@@ -47,12 +51,14 @@ class Test
 
     
 
+    
+
     creates a SimpleDelegate instance and then immediately calls it. </paragraph
   >
   <paragraph
     >There is not much point in instantiating a delegate for a method and then immediately calling that method via the delegate, as it would be simpler to call the method directly. Delegates really show their usefulness when their anonymity is used. The example <code_example
     >
-<![CDATA[
+      <![CDATA[
 void MultiCall(SimpleDelegate d, int count) {  
    for (int i = 0; i < count; i++) {  
       d();  
@@ -65,8 +71,12 @@ void MultiCall(SimpleDelegate d, int count) {
 
     
 
+    
+
     shows a MultiCall method that repeatedly calls a SimpleDelegate. The MultiCall method doesn't know or care about the type of the target method for the SimpleDelegate, what accessibility that method has, or whether or not that method is static. All that matters is that the target method is compatible (<hyperlink
     >22.1</hyperlink>
+
+    
 
     
 

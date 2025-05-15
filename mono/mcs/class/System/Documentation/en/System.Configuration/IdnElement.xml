@@ -27,11 +27,15 @@
 
         
 
+        
+
          class has been extended to provide support for International Resource Identifiers (IRI) based on RFC 3987. Current users will not see any change from the .NET Framework 2.0 behavior unless they specifically enable IRI. This ensures application compatibility with prior versions of the .NET Framework.</para
       >
       <para
         >The configuration setting for the <see
          cref="T:System.Configuration.IdnElement" />
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
          configuration setting that controls IRI processing in the <see
          cref="T:System.Uri" />
+
+        
 
         
 
@@ -62,8 +70,12 @@
 
         
 
+        
+
          will be read once when the first <see
          cref="T:System.Uri" />
+
+        
 
         
 
@@ -79,6 +91,8 @@
 
         
 
+        
+
          class.</para
       >
     </remarks>
@@ -87,6 +101,8 @@
       <para
         >Provides the configuration setting for International Domain Name (IDN) processing in the <see
          cref="T:System.Uri" />
+
+        
 
         
 
@@ -119,6 +135,8 @@
 
             
 
+            
+
              instance</para
           >
         </remarks>
@@ -127,6 +145,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Configuration.IdnElement" />
+
+            
 
             
 
@@ -168,6 +188,8 @@
 
             
 
+            
+
              is indirectly controlled by the <see
              cref="T:System.Configuration.IriParsingElement" />
 
@@ -175,8 +197,12 @@
 
             
 
+            
+
              configuration setting that controls IRI processing in the <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -192,8 +218,12 @@
 
             
 
+            
+
              will be read once when the first <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -209,6 +239,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -217,6 +249,8 @@
           <para
             >Gets or sets the value of the <see
              cref="T:System.Configuration.IdnElement" />
+
+            
 
             
 

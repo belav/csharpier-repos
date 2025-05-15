@@ -18,8 +18,12 @@
 
         
 
+        
+
          interface is the base interface for all sessions. It contains a <see
          cref="P:System.ServiceModel.Channels.ISession.ID" />
+
+        
 
         
 
@@ -44,6 +48,8 @@
 
             
 
+            
+
              interface is not informed as to the number of participants in a session or the lifetime of a session.</para
           >
         </item>
@@ -51,6 +57,8 @@
       <para>These session properties are provided by associating an ID with a session. </para>
       <para>
         <see cref="T:System.ServiceModel.Channels.ISession" />
+
+        
 
         
 
@@ -77,6 +85,8 @@
         <item>
           <para>
             <see cref="T:System.ServiceModel.Channels.ISessionChannel`1" />
+
+            
 
             
 
@@ -111,6 +121,8 @@
           <para
             >If the session is interrupted, it can be retrieved using the <see
              cref="P:System.ServiceModel.Channels.ISession.Id" />
+
+            
 
             
 

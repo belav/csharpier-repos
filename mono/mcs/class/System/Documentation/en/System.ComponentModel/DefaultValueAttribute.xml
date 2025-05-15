@@ -38,12 +38,16 @@
 
         
 
+        
+
          with any value. A member's default value is typically its initial value. A visual designer can use the default value to reset the member's value. Code generators can use the default values also to determine whether code should be generated for the member.</para
       >
       <block subset="none" type="note">
         <para
           >A <see
            cref="T:System.ComponentModel.DefaultValueAttribute" />
+
+          
 
           
 
@@ -57,6 +61,8 @@
          type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
+
+        
 
         
 
@@ -99,8 +105,12 @@
 
             
 
+            
+
              class using a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -116,8 +126,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -155,11 +169,15 @@
 
             
 
+            
+
              class using an 8-bit unsigned integer.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -197,11 +215,15 @@
 
             
 
+            
+
              class using a Unicode character.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -239,11 +261,15 @@
 
             
 
+            
+
              class using a double-precision floating point number.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -281,11 +307,15 @@
 
             
 
+            
+
              class using a 16-bit signed integer.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -323,11 +353,15 @@
 
             
 
+            
+
              class using a 32-bit signed integer.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -365,11 +399,15 @@
 
             
 
+            
+
              class using a 64-bit signed integer.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -407,6 +445,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -417,8 +457,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -456,11 +500,15 @@
 
             
 
+            
+
              class using a single-precision floating point number.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -498,8 +546,12 @@
 
             
 
+            
+
              class using a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -515,8 +567,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -558,6 +614,8 @@
 
             
 
+            
+
              class, converting the specified value to the specified type, and using an invariant culture as the translation context.</para
           >
         </summary>
@@ -568,8 +626,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -584,6 +646,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
 
@@ -591,8 +655,12 @@
 
           
 
+          
+
            that can be converted to the type using the <see
            cref="T:System.ComponentModel.TypeConverter" />
+
+          
 
           
 
@@ -632,6 +700,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -641,6 +711,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -697,6 +769,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

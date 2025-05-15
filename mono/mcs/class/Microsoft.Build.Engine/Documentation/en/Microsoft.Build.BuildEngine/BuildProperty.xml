@@ -41,6 +41,8 @@
 
             
 
+            
+
              class with the specified name and value.</para
           >
         </summary>
@@ -51,10 +53,14 @@
 
           
 
+          
+
           The property name.</param
         >
         <param name="propertyValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -91,8 +97,12 @@
 
             
 
+            
+
              references the same XML element as the original. Modifications to the name or value of a shallow copy will be reflected in both copies. However, depending on property evaluation, the two copies could have different <see
              cref="P:Microsoft.Build.BuildEngine.BuildProperty.FinalValue" />
+
+            
 
             
 
@@ -108,8 +118,12 @@
 
             
 
+            
+
              creates a new XML element to reference so that both copies of the <see
              cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+
+            
 
             
 
@@ -128,6 +142,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -136,6 +152,8 @@
           <para
             >A copy of the <see
              cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+
+            
 
             
 
@@ -151,8 +169,12 @@
 
           
 
+          
+
           true to create a deep copy of the <see
            cref="T:Microsoft.Build.BuildEngine.BuildProperty" />
+
+          
 
           
 
@@ -180,6 +202,8 @@
           <para
             >Gets or sets the <unmanagedCodeEntityReference
             >Condition</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -295,6 +319,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -303,6 +329,8 @@
           <para
             >The string that represents the property <see
              cref="P:Microsoft.Build.BuildEngine.BuildProperty.Value" />
+
+            
 
             
 

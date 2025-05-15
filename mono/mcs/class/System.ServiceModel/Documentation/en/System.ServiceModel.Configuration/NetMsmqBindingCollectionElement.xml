@@ -38,6 +38,8 @@
 
         
 
+        
+
          objects contains all of the settings required for the <see
          cref="T:System.ServiceModel.NetMsmqBinding" />
 
@@ -45,8 +47,12 @@
 
         
 
+        
+
          binding to function. The <see
          cref="T:System.ServiceModel.NetMsmqBinding" />
+
+        
 
         
 
@@ -60,6 +66,8 @@
       <para
         >Represents a configuration section that holds a collection of <see
          cref="T:System.ServiceModel.Configuration.NetMsmqBindingElement" />
+
+        
 
         
 
@@ -88,6 +96,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Configuration.NetMsmqBindingCollectionElement" />
+
+            
 
             
 

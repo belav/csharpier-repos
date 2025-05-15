@@ -30,6 +30,8 @@
 
         
 
+        
+
         . </para
       >
     </remarks>
@@ -38,6 +40,8 @@
       <para
         >Signals to a <see
          cref="T:System.Threading.CancellationToken" />
+
+        
 
         
 
@@ -66,6 +70,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Threading.CancellationTokenSource" />
+
+            
 
             
 
@@ -103,6 +109,8 @@
 
             
 
+            
+
              starts during the call to the constructor.  When the <paramref
              name="millisecondsDelay" />
 
@@ -110,8 +118,12 @@
 
             
 
+            
+
              expires, the constructed <see
              cref="T:System.Threading.CancellationTokenSource" />
+
+            
 
             
 
@@ -127,6 +139,8 @@
 
             
 
+            
+
              will reset the <paramref
              name="millisecondsDelay" />
 
@@ -134,8 +148,12 @@
 
             
 
+            
+
              for the constructed <see
              cref="T:System.Threading.CancellationTokenSource" />
+
+            
 
             
 
@@ -154,6 +172,8 @@
 
             
 
+            
+
              class that will be canceled after the specified delay in milliseconds.</para
           >
         </summary>
@@ -164,8 +184,12 @@
 
           
 
+          
+
           The time span to wait before canceling this <see
            cref="T:System.Threading.CancellationTokenSource" />
+
+          
 
           
 
@@ -199,6 +223,8 @@
 
             
 
+            
+
              is canceled, if it has not been canceled already.</para
           >
           <para
@@ -209,8 +235,12 @@
 
             
 
+            
+
              will reset the delay for the constructed <see
              cref="T:System.Threading.CancellationTokenSource" />
+
+            
 
             
 
@@ -229,6 +259,8 @@
 
             
 
+            
+
              class that will be canceled after the specified time span.</para
           >
         </summary>
@@ -239,8 +271,12 @@
 
           
 
+          
+
           The time span to wait before canceling this <see
            cref="T:System.Threading.CancellationTokenSource" />
+
+          
 
           
 
@@ -275,8 +311,12 @@
 
             
 
+            
+
              will be notified of the cancellation and will transition to a state where <see
              cref="P:System.Threading.CancellationToken.IsCancellationRequested" />
+
+            
 
             
 
@@ -287,6 +327,8 @@
           <para
             >Any callbacks or cancelable operations registered with the <see
              cref="T:System.Threading.CancellationToken" />
+
+            
 
             
 
@@ -303,11 +345,15 @@
 
             
 
+            
+
             , such that one callback throwing an exception will not prevent other registered callbacks from being executed.</para
           >
           <para
             >The <see
              cref="T:System.Threading.ExecutionContext" />
+
+            
 
             
 
@@ -350,8 +396,12 @@
 
             
 
+            
+
              will be notified of the cancellation and will transition to a state where <see
              cref="P:System.Threading.CancellationToken.IsCancellationRequested" />
+
+            
 
             
 
@@ -362,6 +412,8 @@
           <para
             >Any callbacks or cancelable operations registered with the <see
              cref="T:System.Threading.CancellationToken" />
+
+            
 
             
 
@@ -378,8 +430,12 @@
 
             
 
+            
+
              is true, an exception will immediately propagate out of the call to <see
              cref="M:System.Threading.CancellationTokenSource.Cancel(System.Boolean)" />
+
+            
 
             
 
@@ -395,8 +451,12 @@
 
             
 
+            
+
              is false, this overload will aggregate any exceptions thrown into an <see
              cref="T:System.AggregateException" />
+
+            
 
             
 
@@ -412,6 +472,8 @@
 
             
 
+            
+
              that was captured when each callback was registered will be reestablished when the callback is invoked.</para
           >
           <para></para>
@@ -422,6 +484,8 @@
         </summary>
         <param name="throwOnFirstException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -458,6 +522,8 @@
 
             
 
+            
+
              starts during this call. When the <paramref
              name="millisecondsDelay" />
 
@@ -465,8 +531,12 @@
 
             
 
+            
+
              expires, this <see
              cref="T:System.Threading.CancellationTokenSource" />
+
+            
 
             
 
@@ -482,8 +552,12 @@
 
             
 
+            
+
              for this <see
              cref="T:System.Threading.CancellationTokenSource" />
+
+            
 
             
 
@@ -502,6 +576,8 @@
 
             
 
+            
+
              after the specified number of milliseconds.</para
           >
         </summary>
@@ -512,8 +588,12 @@
 
           
 
+          
+
           The time span to wait before canceling this <see
            cref="T:System.Threading.CancellationTokenSource" />
+
+          
 
           
 
@@ -551,6 +631,8 @@
 
             
 
+            
+
              after the specified time span.</para
           >
         </summary>
@@ -561,8 +643,12 @@
 
           
 
+          
+
           The time span to wait before canceling this <see
            cref="T:System.Threading.CancellationTokenSource" />
+
+          
 
           
 
@@ -609,6 +695,8 @@
 
             
 
+            
+
              that will be in the canceled state when any of the source tokens in the specified array are in the canceled state.</para
           >
         </summary>
@@ -622,11 +710,15 @@
 
             
 
+            
+
              that is linked to the source tokens.</para
           >
         </returns>
         <param name="tokens">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -668,6 +760,8 @@
 
             
 
+            
+
              that will be in the canceled state when any of the source tokens are in the canceled state.</para
           >
         </summary>
@@ -676,6 +770,8 @@
           <para
             >A <see
              cref="T:System.Threading.CancellationTokenSource" />
+
+            
 
             
 
@@ -691,10 +787,14 @@
 
           
 
+          
+
           The first cancellation token to observe.</param
         >
         <param name="token2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -729,8 +829,12 @@
 
             
 
+            
+
             . The Dispose method leaves the <see
              cref="T:System.Threading.CancellationTokenSource" />
+
+            
 
             
 
@@ -743,8 +847,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Threading.CancellationTokenSource" />
+
+            
 
             
 
@@ -762,10 +870,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -782,8 +894,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Threading.CancellationTokenSource" />
+
+              
 
               
 
@@ -798,6 +914,8 @@
           <para
             >Releases all resources used by the current instance of the <see
              cref="T:System.Threading.CancellationTokenSource" />
+
+            
 
             
 
@@ -836,11 +954,15 @@
 
             
 
+            
+
              class and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -872,6 +994,8 @@
 
             
 
+            
+
              method.</para
           >
           <para>  If this property returns true, it only guarantees that cancellation has been requested. It does not guarantee that every handler registered with the corresponding token has finished executing, nor that cancellation requests have finished propagating to all registered handlers. Additional synchronization may be required, particularly in situations where related objects are being canceled concurrently.</para>
@@ -882,6 +1006,8 @@
           <para
             >Gets whether cancellation has been requested for this <see
              cref="T:System.Threading.CancellationTokenSource" />
+
+            
 
             
 
@@ -921,8 +1047,12 @@
 
             
 
+            
+
              associated with this <see
              cref="T:System.Threading.CancellationTokenSource" />
+
+            
 
             
 

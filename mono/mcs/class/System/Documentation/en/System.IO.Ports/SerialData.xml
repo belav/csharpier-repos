@@ -25,8 +25,12 @@
 
         
 
+        
+
          event. You examine the type of character that was received by retrieving the value of the <see
          cref="P:System.IO.Ports.SerialDataReceivedEventArgs.EventType" />
+
+        
 
         
 
@@ -39,6 +43,8 @@
 
         
 
+        
+
          class. The <see
          cref="P:System.IO.Ports.SerialDataReceivedEventArgs.EventType" />
 
@@ -46,8 +52,12 @@
 
         
 
+        
+
          property contains one of the values from the <see
          cref="T:System.IO.Ports.SerialData" />
+
+        
 
         
 
@@ -61,6 +71,8 @@
       <para
         >Specifies the type of character that was received on the serial port of the <see
          cref="T:System.IO.Ports.SerialPort" />
+
+        
 
         
 

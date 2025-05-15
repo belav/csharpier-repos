@@ -47,6 +47,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -81,6 +83,8 @@
 
             
 
+            
+
              objects used to import custom policy assertions about bindings.</para
           >
         </summary>
@@ -89,6 +93,8 @@
           <para
             >A collection of <see
              cref="T:System.ServiceModel.Description.IPolicyImportExtension" />
+
+            
 
             
 
@@ -128,6 +134,8 @@
 
             
 
+            
+
              objects used to import custom WSDL information.</para
           >
         </summary>
@@ -136,6 +144,8 @@
           <para
             >A collection of <see
              cref="T:System.ServiceModel.Description.IWsdlImportExtension" />
+
+            
 
             
 
@@ -229,6 +239,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Description.WsdlImporter" />
+
+            
 
             
 

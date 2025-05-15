@@ -26,8 +26,12 @@
 
         
 
+        
+
          class provides an efficient, high-performance mechanism to validate XML data against XML schemas in a push-based manner. For example, the <see
          cref="T:System.Xml.Schema.XmlSchemaValidator" />
+
+        
 
         
 
@@ -40,11 +44,15 @@
 
         
 
+        
+
          class can also be used to build validation engines over custom XML data sources or as a way to build a validating XML writer.</para
       >
       <para
         >For more information about the <see
          cref="T:System.Xml.Schema.XmlSchemaValidator" />
+
+        
 
         
 
@@ -61,12 +69,16 @@
 
         
 
+        
+
          topic.</para
       >
       <block subset="none" type="note">
         <para
           >The <see
            cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessInlineSchema" />
+
+          
 
           
 
@@ -79,8 +91,12 @@
 
           
 
+          
+
            validation flags of an <see
            cref="T:System.Xml.Schema.XmlSchemaValidator" />
+
+          
 
           
 
@@ -93,8 +109,12 @@
 
           
 
+          
+
            property of an <see
            cref="T:System.Xml.Schema.XmlSchemaValidator" />
+
+          
 
           
 
@@ -109,6 +129,8 @@
       <para
         >Represents an XML Schema Definition Language (XSD) Schema validation engine. The <see
          cref="T:System.Xml.Schema.XmlSchemaValidator" />
+
+        
 
         
 
@@ -151,6 +173,8 @@
 
             
 
+            
+
              constructor.</para
           >
           <list type="bullet">
@@ -163,8 +187,12 @@
 
                 
 
+                
+
                  parameter are copied into an internal <see
                  cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+                
 
                 
 
@@ -177,6 +205,8 @@
 
                 
 
+                
+
                  or the <see
                  cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessSchemaLocation" />
 
@@ -184,8 +214,12 @@
 
                 
 
+                
+
                  validation options are set. As a result, changes to the input <see
                  cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+                
 
                 
 
@@ -203,8 +237,12 @@
 
                 
 
+                
+
                  parameter specified is not compiled, its <see
                  cref="M:System.Xml.Schema.XmlSchemaSet.Compile" />
+
+                
 
                 
 
@@ -222,8 +260,12 @@
 
                 
 
+                
+
                  parameter is especially important for validating xs:QName types. The <see
                  cref="T:System.Xml.Schema.XmlSchemaValidator" />
+
+                
 
                 
 
@@ -236,8 +278,12 @@
 
                 
 
+                
+
                  object but instead holds a reference to it. This allows new namespaces to be added to the <see
                  cref="T:System.Xml.IXmlNamespaceResolver" />
+
+                
 
                 
 
@@ -256,8 +302,12 @@
 
               
 
+              
+
                and <see
                cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessSchemaLocation" />
+
+              
 
               
 
@@ -270,6 +320,8 @@
 
               
 
+              
+
                object are not set be default. Additionally, the <see
                cref="P:System.Xml.Schema.XmlSchemaValidator.XmlResolver" />
 
@@ -277,8 +329,12 @@
 
               
 
+              
+
                property of an <see
                cref="T:System.Xml.Schema.XmlSchemaValidator" />
+
+              
 
               
 
@@ -298,6 +354,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -308,8 +366,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlNameTable" />
+
+          
 
           
 
@@ -324,8 +386,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -340,8 +406,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.IXmlNamespaceResolver" />
+
+          
 
           
 
@@ -356,8 +426,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaValidationFlags" />
+
+          
 
           
 
@@ -399,6 +473,8 @@
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -406,6 +482,8 @@
               <para
                 >The <see
                  cref="M:System.Xml.Schema.XmlSchemaValidator.AddSchema(System.Xml.Schema.XmlSchema)" />
+
+                
 
                 
 
@@ -423,8 +501,12 @@
 
                 
 
+                
+
                  parameter cannot match that of any element or attribute already encountered by the <see
                  cref="T:System.Xml.Schema.XmlSchemaValidator" />
+
+                
 
                 
 
@@ -442,8 +524,12 @@
 
                 
 
+                
+
                  validation option is not set, the <see
                  cref="M:System.Xml.Schema.XmlSchemaValidator.AddSchema(System.Xml.Schema.XmlSchema)" />
+
+                
 
                 
 
@@ -465,8 +551,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchema" />
+
+          
 
           
 
@@ -503,8 +593,12 @@
 
             
 
+            
+
              method ends validation and checks identity constraints for the entire XML document if the <see
              cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessIdentityConstraints" />
+
+            
 
             
 
@@ -549,6 +643,8 @@
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -561,8 +657,12 @@
 
                 
 
+                
+
                  method is called immediately after the <see
                  cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateElement" />
+
+                
 
                 
 
@@ -580,8 +680,12 @@
 
                 
 
+                
+
                  method is called after one or more calls to the <see
                  cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateAttribute" />
+
+                
 
                 
 
@@ -601,6 +705,8 @@
           <para
             >An array of <see
              cref="T:System.Xml.Schema.XmlSchemaAttribute" />
+
+            
 
             
 
@@ -641,6 +747,8 @@
 
             
 
+            
+
              method are instances of the <see
              cref="T:System.Xml.Schema.XmlSchemaElement" />
 
@@ -648,8 +756,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Xml.Schema.XmlSchemaAny" />
+
+            
 
             
 
@@ -666,8 +778,12 @@
 
             
 
+            
+
              method returns an array containing a single <see
              cref="T:System.Xml.Schema.XmlSchemaElement" />
+
+            
 
             
 
@@ -680,8 +796,12 @@
 
             
 
+            
+
              method returns an empty array. If the <see
              cref="M:System.Xml.Schema.XmlSchemaValidator.GetExpectedParticles" />
+
+            
 
             
 
@@ -694,6 +814,8 @@
 
             
 
+            
+
              object representing the description element. If the <see
              cref="M:System.Xml.Schema.XmlSchemaValidator.GetExpectedParticles" />
 
@@ -701,8 +823,12 @@
 
             
 
+            
+
              method is called after the description element has been validated then it returns an array containing a single <see
              cref="T:System.Xml.Schema.XmlSchemaAny" />
+
+            
 
             
 
@@ -834,6 +960,8 @@ validator.ValidateEndElement(null);</code>
 
             
 
+            
+
              objects or an empty array if there are no expected particles.</para
           >
         </returns>
@@ -871,6 +999,8 @@ validator.ValidateEndElement(null);</code>
 
             
 
+            
+
              method must be called after validating all the attributes for the current element with the <see
              cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateAttribute" />
 
@@ -878,8 +1008,12 @@ validator.ValidateEndElement(null);</code>
 
             
 
+            
+
              method. The <see
              cref="M:System.Xml.Schema.XmlSchemaValidator.GetUnspecifiedDefaultAttributes(System.Collections.ArrayList)" />
+
+            
 
             
 
@@ -898,6 +1032,8 @@ validator.ValidateEndElement(null);</code>
 
             
 
+            
+
              specified with <see
              cref="T:System.Xml.Schema.XmlSchemaAttribute" />
 
@@ -905,8 +1041,12 @@ validator.ValidateEndElement(null);</code>
 
             
 
+            
+
              objects for any attributes with default values that have not been previously validated using the <see
              cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateAttribute" />
+
+            
 
             
 
@@ -922,6 +1062,8 @@ validator.ValidateEndElement(null);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Collections.ArrayList" />
 
@@ -929,8 +1071,12 @@ validator.ValidateEndElement(null);</code>
 
           
 
+          
+
            to populate with <see
            cref="T:System.Xml.Schema.XmlSchemaAttribute" />
+
+          
 
           
 
@@ -967,6 +1113,8 @@ validator.ValidateEndElement(null);</code>
 
             
 
+            
+
              method is only valid if called immediately after the construction of an <see
              cref="T:System.Xml.Schema.XmlSchemaValidator" />
 
@@ -974,8 +1122,12 @@ validator.ValidateEndElement(null);</code>
 
             
 
+            
+
              object or after a call to <see
              cref="M:System.Xml.Schema.XmlSchemaValidator.EndValidation" />
+
+            
 
             
 
@@ -989,6 +1141,8 @@ validator.ValidateEndElement(null);</code>
           <para
             >Initializes the state of the <see
              cref="T:System.Xml.Schema.XmlSchemaValidator" />
+
+            
 
             
 
@@ -1031,6 +1185,8 @@ validator.ValidateEndElement(null);</code>
 
             
 
+            
+
              method that takes an <see
              cref="T:System.Xml.Schema.XmlSchemaObject" />
 
@@ -1038,8 +1194,12 @@ validator.ValidateEndElement(null);</code>
 
             
 
+            
+
              as a parameter initializes an <see
              cref="T:System.Xml.Schema.XmlSchemaValidator" />
+
+            
 
             
 
@@ -1058,8 +1218,12 @@ validator.ValidateEndElement(null);</code>
 
             
 
+            
+
              object using the <see
              cref="T:System.Xml.Schema.XmlSchemaObject" />
+
+            
 
             
 
@@ -1075,8 +1239,12 @@ validator.ValidateEndElement(null);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaElement" />
+
+          
 
           
 
@@ -1089,6 +1257,8 @@ validator.ValidateEndElement(null);</code>
 
           
 
+          
+
           , or <see
            cref="T:System.Xml.Schema.XmlSchemaType" />
 
@@ -1096,8 +1266,12 @@ validator.ValidateEndElement(null);</code>
 
           
 
+          
+
            object used to initialize the validation context of the <see
            cref="T:System.Xml.Schema.XmlSchemaValidator" />
+
+          
 
           
 
@@ -1139,6 +1313,8 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  thrown during the validation process.</para
               >
             </item>
@@ -1151,8 +1327,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  object returned by the <see
                  cref="P:System.Xml.Schema.XmlSchemaValidator.LineInfoProvider" />
+
+                
 
                 
 
@@ -1165,8 +1345,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  and <see
                  cref="P:System.Xml.IXmlLineInfo.LinePosition" />
+
+                
 
                 
 
@@ -1215,6 +1399,8 @@ validator.ValidateEndElement(null);</code>
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -1227,6 +1413,8 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  method skips validation of the current element content and prepares the <see
                  cref="T:System.Xml.Schema.XmlSchemaValidator" />
 
@@ -1234,8 +1422,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  object to validate content in the parent element's context; it is equivalent to skipping validation for all the children of the current element and then calling the <see
                  cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement" />
+
+                
 
                 
 
@@ -1253,6 +1445,8 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  object's (if specified) <see
                  cref="P:System.Xml.Schema.XmlSchemaInfo.Validity" />
 
@@ -1260,8 +1454,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  property is set to <see
                  cref="F:System.Xml.Schema.XmlSchemaValidity.NotKnown" />
+
+                
 
                 
 
@@ -1285,6 +1483,8 @@ validator.ValidateEndElement(null);</code>
 
             
 
+            
+
              object to validate content in the parent element's context.</para
           >
         </summary>
@@ -1295,8 +1495,12 @@ validator.ValidateEndElement(null);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaInfo" />
+
+          
 
           
 
@@ -1332,6 +1536,8 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  thrown during the validation process.</para
               >
             </item>
@@ -1344,8 +1550,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  property is not set, the file name for the XML document is <see
                  cref="F:System.String.Empty" />
+
+                
 
                 
 
@@ -1397,6 +1607,8 @@ validator.ValidateEndElement(null);</code>
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -1409,8 +1621,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  method must be called after validating all the attributes for the current element with the <see
                  cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateAttribute" />
+
+                
 
                 
 
@@ -1428,8 +1644,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  object was passed to the <see
                  cref="M:System.Xml.Schema.XmlSchemaValidator.Initialize(System.Xml.Schema.XmlSchemaObject)" />
+
+                
 
                 
 
@@ -1442,8 +1662,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  method validates the attribute against the <see
                  cref="T:System.Xml.Schema.XmlSchemaAttribute" />
+
+                
 
                 
 
@@ -1461,8 +1685,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  object's (if specified) <see
                  cref="P:System.Xml.Schema.XmlSchemaInfo.SchemaAttribute" />
+
+                
 
                 
 
@@ -1475,6 +1703,8 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                 , <see
                  cref="P:System.Xml.Schema.XmlSchemaInfo.MemberType" />
 
@@ -1482,8 +1712,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                 , and <see
                  cref="P:System.Xml.Schema.XmlSchemaInfo.Validity" />
+
+                
 
                 
 
@@ -1509,10 +1743,14 @@ validator.ValidateEndElement(null);</code>
 
           
 
+          
+
           The local name of the attribute to validate.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1527,6 +1765,8 @@ validator.ValidateEndElement(null);</code>
 
           
 
+          
+
           The value of the attribute to validate.</param
         >
         <param name="schemaInfo">
@@ -1536,8 +1776,12 @@ validator.ValidateEndElement(null);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaInfo" />
+
+          
 
           
 
@@ -1582,6 +1826,8 @@ validator.ValidateEndElement(null);</code>
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -1594,8 +1840,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  method must be called after validating all the attributes for the current element with the <see
                  cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateAttribute" />
+
+                
 
                 
 
@@ -1613,8 +1863,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  object was passed to the <see
                  cref="M:System.Xml.Schema.XmlSchemaValidator.Initialize(System.Xml.Schema.XmlSchemaObject)" />
+
+                
 
                 
 
@@ -1627,8 +1881,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  method validates the attribute against the <see
                  cref="T:System.Xml.Schema.XmlSchemaAttribute" />
+
+                
 
                 
 
@@ -1646,8 +1904,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  object's (if specified) <see
                  cref="P:System.Xml.Schema.XmlSchemaInfo.SchemaAttribute" />
+
+                
 
                 
 
@@ -1660,6 +1922,8 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                 , <see
                  cref="P:System.Xml.Schema.XmlSchemaInfo.MemberType" />
 
@@ -1667,8 +1931,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                 , and <see
                  cref="P:System.Xml.Schema.XmlSchemaInfo.Validity" />
+
+                
 
                 
 
@@ -1694,10 +1962,14 @@ validator.ValidateEndElement(null);</code>
 
           
 
+          
+
           The local name of the attribute to validate.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1712,8 +1984,12 @@ validator.ValidateEndElement(null);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlValueGetter" />
+
+          
 
           
 
@@ -1728,8 +2004,12 @@ validator.ValidateEndElement(null);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaInfo" />
+
+          
 
           
 
@@ -1773,6 +2053,8 @@ validator.ValidateEndElement(null);</code>
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -1785,8 +2067,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  object's (if specified) <see
                  cref="P:System.Xml.Schema.XmlSchemaInfo.IsNil" />
+
+                
 
                 
 
@@ -1799,6 +2085,8 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                 , <see
                  cref="P:System.Xml.Schema.XmlSchemaInfo.SchemaElement" />
 
@@ -1806,8 +2094,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                 , and <see
                  cref="P:System.Xml.Schema.XmlSchemaInfo.Validity" />
+
+                
 
                 
 
@@ -1825,8 +2117,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  property is set to <see
                  cref="F:System.Xml.Schema.XmlSchemaValidity.Invalid" />
+
+                
 
                 
 
@@ -1839,8 +2135,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  property is set to <see
                  cref="F:System.Xml.Schema.XmlSchemaValidity.NotKnown" />
+
+                
 
                 
 
@@ -1862,10 +2162,14 @@ validator.ValidateEndElement(null);</code>
 
           
 
+          
+
           The local name of the element to validate.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1880,8 +2184,12 @@ validator.ValidateEndElement(null);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaInfo" />
+
+          
 
           
 
@@ -1929,6 +2237,8 @@ validator.ValidateEndElement(null);</code>
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -1941,8 +2251,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  object's (if specified) <see
                  cref="P:System.Xml.Schema.XmlSchemaInfo.IsNil" />
+
+                
 
                 
 
@@ -1955,6 +2269,8 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                 , <see
                  cref="P:System.Xml.Schema.XmlSchemaInfo.SchemaElement" />
 
@@ -1962,8 +2278,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                 , and <see
                  cref="P:System.Xml.Schema.XmlSchemaInfo.Validity" />
+
+                
 
                 
 
@@ -1981,8 +2301,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  property is set to <see
                  cref="F:System.Xml.Schema.XmlSchemaValidity.Invalid" />
+
+                
 
                 
 
@@ -1995,8 +2319,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  property is set to <see
                  cref="F:System.Xml.Schema.XmlSchemaValidity.NotKnown" />
+
+                
 
                 
 
@@ -2014,8 +2342,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  value was not passed as a parameter to the <see
                  cref="M:System.Xml.Schema.XmlSchemaValidator.#ctor(System.Xml.XmlNameTable,System.Xml.Schema.XmlSchemaSet,System.Xml.IXmlNamespaceResolver,System.Xml.Schema.XmlSchemaValidationFlags)" />
+
+                
 
                 
 
@@ -2037,10 +2369,14 @@ validator.ValidateEndElement(null);</code>
 
           
 
+          
+
           The local name of the element to validate.</param
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2055,8 +2391,12 @@ validator.ValidateEndElement(null);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaInfo" />
+
+          
 
           
 
@@ -2071,10 +2411,14 @@ validator.ValidateEndElement(null);</code>
 
           
 
+          
+
           The xsi:Type attribute value of the element. This parameter can be null.</param
         >
         <param name="xsiNil">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2089,10 +2433,14 @@ validator.ValidateEndElement(null);</code>
 
           
 
+          
+
           The xsi:SchemaLocation attribute value of the element. This parameter can be null.</param
         >
         <param name="xsiNoNamespaceSchemaLocation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2134,6 +2482,8 @@ validator.ValidateEndElement(null);</code>
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -2146,8 +2496,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  method verifies that the text content of the element is valid according to its data type and returns the parsed typed value. The text content of the element is obtained from the results of previous calls to <see
                  cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateText" />
+
+                
 
                 
 
@@ -2165,6 +2519,8 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  method verifies if the content of the current element is complete.</para
               >
             </item>
@@ -2172,6 +2528,8 @@ validator.ValidateEndElement(null);</code>
               <para
                 >If the element has a default value, the value returned from the <see
                  cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement(System.Xml.Schema.XmlSchemaInfo)" />
+
+                
 
                 
 
@@ -2189,6 +2547,8 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  object was constructed with the <see
                  cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessIdentityConstraints" />
 
@@ -2196,8 +2556,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  value as a parameter, the <see
                  cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement(System.Xml.Schema.XmlSchemaInfo)" />
+
+                
 
                 
 
@@ -2215,8 +2579,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  object's (if specified) <see
                  cref="P:System.Xml.Schema.XmlSchemaInfo.IsDefault" />
+
+                
 
                 
 
@@ -2229,8 +2597,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                 , and <see
                  cref="P:System.Xml.Schema.XmlSchemaInfo.Validity" />
+
+                
 
                 
 
@@ -2256,8 +2628,12 @@ validator.ValidateEndElement(null);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaInfo" />
+
+          
 
           
 
@@ -2301,8 +2677,12 @@ validator.ValidateEndElement(null);</code>
 
               
 
+              
+
                method overload. Instead, call the <see
                cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateText" />
+
+              
 
               
 
@@ -2315,8 +2695,12 @@ validator.ValidateEndElement(null);</code>
 
               
 
+              
+
                method overload, which takes <see
                cref="T:System.Xml.Schema.XmlSchemaInfo" />
+
+              
 
               
 
@@ -2328,6 +2712,8 @@ validator.ValidateEndElement(null);</code>
           <para
             >The following are important notes to consider when using the <see
              cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement(System.Xml.Schema.XmlSchemaInfo,System.Object)" />
+
+            
 
             
 
@@ -2345,6 +2731,8 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  method verifies that the text content of the element is valid according to its data type and returns the parsed typed value. The text content of the element is obtained from the typed content passed as a parameter.</para
               >
             </item>
@@ -2357,8 +2745,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  method have been previously made, an <see
                  cref="T:System.InvalidOperationException" />
+
+                
 
                 
 
@@ -2376,6 +2768,8 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  is thrown.</para
               >
             </item>
@@ -2388,6 +2782,8 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  object was constructed with the <see
                  cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessIdentityConstraints" />
 
@@ -2395,8 +2791,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  value as a parameter, the <see
                  cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement(System.Xml.Schema.XmlSchemaInfo,System.Object)" />
+
+                
 
                 
 
@@ -2414,8 +2814,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  object's (if specified) <see
                  cref="P:System.Xml.Schema.XmlSchemaInfo.IsDefault" />
+
+                
 
                 
 
@@ -2428,8 +2832,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                 , and <see
                  cref="P:System.Xml.Schema.XmlSchemaInfo.Validity" />
+
+                
 
                 
 
@@ -2455,8 +2863,12 @@ validator.ValidateEndElement(null);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaInfo" />
+
+          
 
           
 
@@ -2466,6 +2878,8 @@ validator.ValidateEndElement(null);</code>
         >
         <param name="typedValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2507,6 +2921,8 @@ validator.ValidateEndElement(null);</code>
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -2519,8 +2935,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  method should always be called before <see
                  cref="M:System.Xml.Schema.XmlSchemaValidator.ValidateEndOfAttributes(System.Xml.Schema.XmlSchemaInfo)" />
+
+                
 
                 
 
@@ -2538,6 +2958,8 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  method must be called before proceeding with validation of an element's content.</para
               >
             </item>
@@ -2550,6 +2972,8 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  object's (if specified) <see
                  cref="P:System.Xml.Schema.XmlSchemaInfo.Validity" />
 
@@ -2557,8 +2981,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  property is set to <see
                  cref="F:System.Xml.Schema.XmlSchemaValidity.Valid" />
+
+                
 
                 
 
@@ -2579,6 +3007,8 @@ validator.ValidateEndElement(null);</code>
 
             
 
+            
+
              object to validate the child content of the element.</para
           >
         </summary>
@@ -2589,8 +3019,12 @@ validator.ValidateEndElement(null);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaInfo" />
+
+          
 
           
 
@@ -2629,6 +3063,8 @@ validator.ValidateEndElement(null);</code>
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -2641,6 +3077,8 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  method until the <see
                  cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement" />
 
@@ -2648,8 +3086,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  method is called. When the <see
                  cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement" />
+
+                
 
                 
 
@@ -2669,6 +3111,8 @@ validator.ValidateEndElement(null);</code>
         </summary>
         <param name="elementValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2710,6 +3154,8 @@ validator.ValidateEndElement(null);</code>
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -2722,6 +3168,8 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  method until the <see
                  cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement" />
 
@@ -2729,8 +3177,12 @@ validator.ValidateEndElement(null);</code>
 
                 
 
+                
+
                  method is called. When the <see
                  cref="Overload:System.Xml.Schema.XmlSchemaValidator.ValidateEndElement" />
+
+                
 
                 
 
@@ -2754,6 +3206,8 @@ validator.ValidateEndElement(null);</code>
 
             
 
+            
+
              object specified is allowed in the current element context, and accumulates the text for validation if the current element has simple content.</para
           >
         </summary>
@@ -2764,8 +3218,12 @@ validator.ValidateEndElement(null);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlValueGetter" />
+
+          
 
           
 
@@ -2809,6 +3267,8 @@ validator.ValidateEndElement(null);</code>
 
           
 
+          
+
           A white space string to validate in the current element context.</param
         >
       </Docs>
@@ -2846,6 +3306,8 @@ validator.ValidateEndElement(null);</code>
 
             
 
+            
+
              object specified is allowed in the current element context, and accumulates the white space for validation if the current element has simple content.</para
           >
         </summary>
@@ -2856,8 +3318,12 @@ validator.ValidateEndElement(null);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlValueGetter" />
+
+          
 
           
 
@@ -2896,8 +3362,12 @@ validator.ValidateEndElement(null);</code>
 
             
 
+            
+
              is specified, an <see
              cref="T:System.Xml.Schema.XmlSchemaValidationException" />
+
+            
 
             
 
@@ -2910,8 +3380,12 @@ validator.ValidateEndElement(null);</code>
 
             
 
+            
+
              value of <see
              cref="F:System.Xml.Schema.XmlSeverityType.Error" />
+
+            
 
             
 
@@ -2924,6 +3398,8 @@ validator.ValidateEndElement(null);</code>
 
             
 
+            
+
              is not thrown for validation warnings with an <see
              cref="T:System.Xml.Schema.XmlSeverityType" />
 
@@ -2931,8 +3407,12 @@ validator.ValidateEndElement(null);</code>
 
             
 
+            
+
              value of <see
              cref="F:System.Xml.Schema.XmlSeverityType.Warning" />
+
+            
 
             
 
@@ -2946,6 +3426,8 @@ validator.ValidateEndElement(null);</code>
           <para
             >The <see
              cref="T:System.Xml.Schema.ValidationEventHandler" />
+
+            
 
             
 
@@ -3005,8 +3487,12 @@ validator.ValidateEndElement(null);</code>
 
               
 
+              
+
                and <see
                cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessSchemaLocation" />
+
+              
 
               
 
@@ -3019,6 +3505,8 @@ validator.ValidateEndElement(null);</code>
 
               
 
+              
+
                object are not set be default. Additionally, the <see
                cref="P:System.Xml.Schema.XmlSchemaValidator.XmlResolver" />
 
@@ -3026,8 +3514,12 @@ validator.ValidateEndElement(null);</code>
 
               
 
+              
+
                property of an <see
                cref="T:System.Xml.Schema.XmlSchemaValidator" />
+
+              
 
               
 
@@ -3042,6 +3534,8 @@ validator.ValidateEndElement(null);</code>
           <para
             >Sets the <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 

@@ -21,11 +21,15 @@
 
         
 
+        
+
          method starts a user interface for selecting a color value.</para
       >
       <para
         >The <see
          cref="T:System.Web.UI.Design.ColorBuilder" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          requires the <see
          cref="T:System.Web.UI.Design.IWebFormsBuilderUIService" />
+
+        
 
         
 
@@ -52,8 +60,12 @@
 
         
 
+        
+
          object to an HTML-compatible RRGGBB format string. If you intend to use a control to select a color or configure a color, you can build a user interface for this, or you may want to use a <see
          cref="T:System.Windows.Forms.PropertyGrid" />
+
+        
 
         
 
@@ -66,8 +78,12 @@
 
         
 
+        
+
          properties with the default <see
          cref="T:System.Drawing.Design.ColorEditor" />
+
+        
 
         
 
@@ -116,8 +132,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -132,8 +152,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Control" />
+
+          
 
           
 
@@ -143,6 +167,8 @@
         >
         <param name="initialColor">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

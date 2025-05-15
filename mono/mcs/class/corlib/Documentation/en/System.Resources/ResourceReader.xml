@@ -41,8 +41,12 @@
 
         
 
+        
+
          class provides a standard implementation of the <see
          cref="T:System.Resources.IResourceReader" />
+
+        
 
         
 
@@ -55,8 +59,12 @@
 
         
 
+        
+
          instance represents either a standalone .resources file or a .resources file that is embedded in an assembly. It is used to enumerate the resources in a .resources file and retrieve its name/value pairs. It differs from the <see
          cref="T:System.Resources.ResourceManager" />
+
+        
 
         
 
@@ -69,8 +77,12 @@
 
         
 
+        
+
          class is used to retrieve resources whose names are known in advance, whereas the <see
          cref="T:System.Resources.ResourceReader" />
+
+        
 
         
 
@@ -83,11 +95,15 @@
 
         
 
+        
+
          object.</para
       >
       <para
         >For more information about using the <see
          cref="T:System.Resources.ResourceReader" />
+
+        
 
         
 
@@ -145,8 +161,12 @@
 
         
 
+        
+
         . A <see
          cref="T:System.Resources.ResourceReader" />
+
+        
 
         
 
@@ -162,8 +182,12 @@
 
         
 
+        
+
          object that reads from a standalone .resources file, use the <see
          cref="T:System.Resources.ResourceReader" />
+
+        
 
         
 
@@ -176,8 +200,12 @@
 
         
 
+        
+
          object that represents a .resources file named Resources1.resources by using its file name. The second instantiates a <see
          cref="T:System.Resources.ResourceReader" />
+
+        
 
         
 
@@ -194,8 +222,12 @@
 
         
 
+        
+
          object that represents an embedded .resources file, instantiate an <see
          cref="T:System.Reflection.Assembly" />
+
+        
 
         
 
@@ -208,8 +240,12 @@
 
         
 
+        
+
          method returns a <see
          cref="T:System.IO.Stream" />
+
+        
 
         
 
@@ -222,8 +258,12 @@
 
         
 
+        
+
          constructor. The following example instantiates a <see
          cref="T:System.Resources.ResourceReader" />
+
+        
 
         
 
@@ -246,8 +286,12 @@
 
         
 
+        
+
          method, which returns an <see
          cref="T:System.Collections.IDictionaryEnumerator" />
+
+        
 
         
 
@@ -264,8 +308,12 @@
 
           
 
+          
+
            class implements the <see
            cref="T:System.Collections.IEnumerable" />
+
+          
 
           
 
@@ -278,8 +326,12 @@
 
           
 
+          
+
            method, the <see
            cref="M:System.Resources.ResourceReader.GetEnumerator" />
+
+          
 
           
 
@@ -292,6 +344,8 @@
 
           
 
+          
+
            implementation. Instead, the <see
            cref="M:System.Resources.ResourceReader.GetEnumerator" />
 
@@ -299,8 +353,12 @@
 
           
 
+          
+
            method  returns an <see
            cref="T:System.Collections.IDictionaryEnumerator" />
+
+          
 
           
 
@@ -320,8 +378,12 @@
 
             
 
+            
+
              collection and use <see
              cref="T:System.Collections.IDictionaryEnumerator" />
+
+            
 
             
 
@@ -339,8 +401,12 @@
 
             
 
+            
+
              collection and call the <see
              cref="M:System.Resources.ResourceReader.GetResourceData(System.String,System.String@,System.Byte[]@)" />
+
+            
 
             
 
@@ -364,8 +430,12 @@
 
         
 
+        
+
          property and the resource data from the <see
          cref="P:System.Collections.IDictionaryEnumerator.Value" />
+
+        
 
         
 
@@ -381,8 +451,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Collections.IDictionaryEnumerator.Value" />
+
+        
 
         
 
@@ -408,12 +482,13 @@ Label14="Email Address:"
 Label15="Alternate Email Address:"</code>
       <para>You can then convert the text resource file to a binary file named ApplicationResources.resources by using the following command:</para>
       <para>
-        <system
->resgen ApplicationResources.txt</system>
+        <system>resgen ApplicationResources.txt</system>
       </para>
       <para
         >The following example then uses the <see
          cref="T:System.Resources.ResourceReader" />
+
+        
 
         
 
@@ -425,6 +500,8 @@ Label15="Alternate Email Address:"</code>
       <para
         >The attempt to retrieve resource data from the <see
          cref="P:System.Collections.IDictionaryEnumerator.Value" />
+
+        
 
         
 
@@ -442,6 +519,8 @@ Label15="Alternate Email Address:"</code>
 
             
 
+            
+
              if the data is not in the expected format.</para
           >
         </item>
@@ -449,6 +528,8 @@ Label15="Alternate Email Address:"</code>
           <para
             >A <see
              cref="T:System.IO.FileNotFoundException" />
+
+            
 
             
 
@@ -466,6 +547,8 @@ Label15="Alternate Email Address:"</code>
 
             
 
+            
+
              if the type to which the data belongs cannot be cannot be found.</para
           >
         </item>
@@ -478,8 +561,12 @@ Label15="Alternate Email Address:"</code>
 
         
 
+        
+
          method, as the following section shows. This approach provides you with some information about the data type that the <see
          cref="P:System.Collections.IDictionaryEnumerator.Value" />
+
+        
 
         
 
@@ -501,6 +588,8 @@ Label15="Alternate Email Address:"</code>
 
         
 
+        
+
          property, which is then passed to the <see
          cref="M:System.Resources.ResourceReader.GetResourceData(System.String,System.String@,System.Byte[]@)" />
 
@@ -508,8 +597,12 @@ Label15="Alternate Email Address:"</code>
 
         
 
+        
+
          method to retrieve the resource's data. This is returned as a byte array in the <paramref
          name="resourceData" />
+
+        
 
         
 
@@ -525,8 +618,12 @@ Label15="Alternate Email Address:"</code>
 
         
 
+        
+
          and <see
          cref="P:System.Collections.IDictionaryEnumerator.Value" />
+
+        
 
         
 
@@ -539,8 +636,12 @@ Label15="Alternate Email Address:"</code>
 
         
 
+        
+
          method can help identify the source of the exception by supplying information about the resource's data type. For more information about the string that indicates the resource's data type, see <see
          cref="M:System.Resources.ResourceReader.GetResourceData(System.String,System.String@,System.Byte[]@)" />
+
+        
 
         
 
@@ -577,8 +678,12 @@ Label15="Alternate Email Address:"</code>
 
             
 
+            
+
              at the end of the try block) or renaming the Library.dll assembly so that it is unavailable at runtime, you can run the example to see how calls to <see
              cref="M:System.Resources.ResourceReader.GetResourceData(System.String,System.String@,System.Byte[]@)" />
+
+            
 
             
 
@@ -622,8 +727,12 @@ Label15="Alternate Email Address:"</code>
 
             
 
+            
+
              constructor instantiates a <see
              cref="T:System.Resources.ResourceReader" />
+
+            
 
             
 
@@ -636,8 +745,12 @@ Label15="Alternate Email Address:"</code>
 
             
 
+            
+
              object and pass it to the <see
              cref="M:System.Resources.ResourceReader.#ctor(System.IO.Stream)" />
+
+            
 
             
 
@@ -650,6 +763,8 @@ Label15="Alternate Email Address:"</code>
 
             
 
+            
+
              method with the case-sensitive name of the .resources file, and pass the returned <see
              cref="T:System.IO.Stream" />
 
@@ -657,8 +772,12 @@ Label15="Alternate Email Address:"</code>
 
             
 
+            
+
              object to the <see
              cref="M:System.Resources.ResourceReader.#ctor(System.IO.Stream)" />
+
+            
 
             
 
@@ -672,6 +791,8 @@ Label15="Alternate Email Address:"</code>
                cref="http://go.microsoft.com/fwlink/?LinkId=330378"
                 >Untrusted Data Security Risks</see
               >
+
+              
 
               
 
@@ -691,11 +812,15 @@ Label15="Alternate Email Address:"</code>
 
             
 
+            
+
              class for the specified stream.</para
           >
         </summary>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -732,6 +857,8 @@ Label15="Alternate Email Address:"</code>
 
             
 
+            
+
              constructor instantiates a <see
              cref="T:System.Resources.ResourceReader" />
 
@@ -739,8 +866,12 @@ Label15="Alternate Email Address:"</code>
 
             
 
+            
+
              object that retrieves resources from a standalone .resources file. To retrieve resources from an embedded .resources file, use the <see
              cref="M:System.Resources.ResourceReader.#ctor(System.IO.Stream)" />
+
+            
 
             
 
@@ -754,6 +885,8 @@ Label15="Alternate Email Address:"</code>
                cref="http://go.microsoft.com/fwlink/?LinkId=330378"
                 >Untrusted Data Security Risks</see
               >
+
+              
 
               
 
@@ -773,6 +906,8 @@ Label15="Alternate Email Address:"</code>
 
             
 
+            
+
              class for the specified named resource file.</para
           >
         </summary>
@@ -783,8 +918,12 @@ Label15="Alternate Email Address:"</code>
 
           
 
+          
+
           The path and name of the resource file to read. <paramref
            name="filename" />
+
+          
 
           
 
@@ -820,6 +959,8 @@ Label15="Alternate Email Address:"</code>
 
             
 
+            
+
              can be safely called multiple times.</para
           >
         </remarks>
@@ -828,6 +969,8 @@ Label15="Alternate Email Address:"</code>
           <para
             >Releases all operating system resources associated with this <see
              cref="T:System.Resources.ResourceReader" />
+
+            
 
             
 
@@ -863,6 +1006,8 @@ Label15="Alternate Email Address:"</code>
 
             
 
+            
+
             , call <see
              cref="M:System.Resources.ResourceReader.Dispose" />
 
@@ -870,8 +1015,12 @@ Label15="Alternate Email Address:"</code>
 
             
 
+            
+
              to release all resources used by this instance. You should eliminate further references to this <see
              cref="T:System.Resources.ResourceReader" />
+
+            
 
             
 
@@ -886,10 +1035,14 @@ Label15="Alternate Email Address:"</code>
 
             
 
+            
+
              calls the private Dispose(Boolean) method, which contains the code to release managed and unmanaged resources. For more information, see <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -903,6 +1056,8 @@ Label15="Alternate Email Address:"</code>
           <para
             >Releases all resources used by the current instance of the <see
              cref="T:System.Resources.ResourceReader" />
+
+            
 
             
 
@@ -943,8 +1098,12 @@ Label15="Alternate Email Address:"</code>
 
             
 
+            
+
              method and then repeatedly calling the <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -957,6 +1116,8 @@ Label15="Alternate Email Address:"</code>
 
             
 
+            
+
              object until the method returns false. The resource name is available from the <see
              cref="P:System.Collections.IDictionaryEnumerator.Key" />
 
@@ -964,8 +1125,12 @@ Label15="Alternate Email Address:"</code>
 
             
 
+            
+
              property; its value from the <see
              cref="P:System.Collections.IDictionaryEnumerator.Value" />
+
+            
 
             
 
@@ -981,8 +1146,12 @@ Label15="Alternate Email Address:"</code>
 
             
 
+            
+
              property by the <see
              cref="T:System.Resources.ResourceReader" />
+
+            
 
             
 
@@ -1018,8 +1187,12 @@ Label15="Alternate Email Address:"</code>
 
             
 
+            
+
              method to retrieve information about the data type and the byte array assigned to the named resource. For more information, see the "Retrieving Resources by Name with GetResourceData" section in the <see
              cref="T:System.Resources.ResourceReader" />
+
+            
 
             
 
@@ -1036,6 +1209,8 @@ Label15="Alternate Email Address:"</code>
 
               
 
+              
+
                class includes two methods that return enumerators. The <see
                cref="M:System.Resources.ResourceReader.GetEnumerator" />
 
@@ -1043,8 +1218,12 @@ Label15="Alternate Email Address:"</code>
 
               
 
+              
+
                method returns an <see
                cref="T:System.Collections.IDictionaryEnumerator" />
+
+              
 
               
 
@@ -1064,6 +1243,8 @@ Label15="Alternate Email Address:"</code>
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1072,6 +1253,8 @@ Label15="Alternate Email Address:"</code>
           <para
             >An enumerator for this <see
              cref="T:System.Resources.ResourceReader" />
+
+            
 
             
 
@@ -1141,8 +1324,12 @@ Label15="Alternate Email Address:"</code>
 
             
 
+            
+
              is an explicit interface implementation. It can be used only when the <see
              cref="T:System.Resources.ResourceReader" />
+
+            
 
             
 
@@ -1155,8 +1342,12 @@ Label15="Alternate Email Address:"</code>
 
             
 
+            
+
              interface. The recommended approach to enumerating the resources in a .resources file is to call the <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1169,8 +1360,12 @@ Label15="Alternate Email Address:"</code>
 
             
 
+            
+
              object returned by the <see
              cref="M:System.Resources.ResourceReader.GetEnumerator" />
+
+            
 
             
 
@@ -1189,6 +1384,8 @@ Label15="Alternate Email Address:"</code>
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1197,6 +1394,8 @@ Label15="Alternate Email Address:"</code>
           <para
             >An enumerator for this <see
              cref="T:System.Resources.ResourceReader" />
+
+            
 
             
 
@@ -1225,8 +1424,12 @@ Label15="Alternate Email Address:"</code>
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -1240,6 +1443,8 @@ Label15="Alternate Email Address:"</code>
           <para
             >Releases all resources used by the <see
              cref="T:System.Resources.ResourceReader" />
+
+            
 
             
 

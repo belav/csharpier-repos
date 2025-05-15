@@ -42,8 +42,12 @@
 
         
 
+        
+
          class provides a simple collection object that can be used to store a set of <see
          cref="T:System.CodeDom.CodeExpression" />
+
+        
 
         
 
@@ -57,6 +61,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.CodeDom.CodeExpression" />
+
+        
 
         
 
@@ -88,6 +94,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeExpressionCollection" />
+
+            
 
             
 
@@ -129,8 +137,12 @@
 
             
 
+            
+
              class containing the specified array of <see
              cref="T:System.CodeDom.CodeExpression" />
+
+            
 
             
 
@@ -146,8 +158,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 
@@ -188,6 +204,8 @@
 
             
 
+            
+
              class containing the elements of the specified source collection.</para
           >
         </summary>
@@ -198,8 +216,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeExpressionCollection" />
+
+          
 
           
 
@@ -242,6 +264,8 @@
 
             
 
+            
+
              object to the collection.</para
           >
         </summary>
@@ -256,8 +280,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 
@@ -301,8 +329,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 
@@ -345,6 +377,8 @@
 
             
 
+            
+
              object to the end of the collection.</para
           >
         </summary>
@@ -355,8 +389,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeExpressionCollection" />
+
+          
 
           
 
@@ -399,6 +437,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -413,8 +453,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 
@@ -458,11 +502,15 @@
 
             
 
+            
+
              instance beginning at the specified index.</para
           >
         </summary>
         <param name="array">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -475,10 +523,14 @@
 
           
 
+          
+
            that is the destination of the values copied from the collection. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -521,6 +573,8 @@
 
             
 
+            
+
              object in the collection, if it exists in the collection.</para
           >
         </summary>
@@ -535,8 +589,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 
@@ -580,11 +638,15 @@
 
             
 
+            
+
              object into the collection at the specified index.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -599,8 +661,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 
@@ -671,6 +737,8 @@
 
             
 
+            
+
              object from the collection.</para
           >
         </summary>
@@ -681,8 +749,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 

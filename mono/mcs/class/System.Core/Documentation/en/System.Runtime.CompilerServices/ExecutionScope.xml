@@ -20,6 +20,8 @@
 
         
 
+        
+
          type is used by the expression tree compiler, which is an internal component of the vbteclinq expression tree API, and by the dynamic methods that it generates.</para
       >
     </remarks>
@@ -61,6 +63,8 @@
 
             
 
+            
+
              that can execute a dynamically generated method.</para
           >
         </returns>
@@ -71,10 +75,14 @@
 
           
 
+          
+
           The index of the object that stores information about associated lambda expression of the dynamic method.</param
         >
         <param name="locals">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -156,10 +164,14 @@
 
           
 
+          
+
           An expression tree to free of external parameter references.</param
         >
         <param name="locals">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

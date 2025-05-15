@@ -45,9 +45,13 @@
 
         
 
+        
+
          to create an instance of
 <see
          cref="T:System.Net.HttpWebRequest" />
+
+        
 
         
 
@@ -86,8 +90,12 @@ public class WebRequestExample {
 
         
 
+        
+
          is the abstract base class for the .NET Framework's request/response model for accessing data from the Internet. An application that uses the request/response model can request data from the Internet in a protocol-agnostic manner, in which the application works with instances of the <see
          cref="T:System.Net.WebRequest" />
+
+        
 
         
 
@@ -103,8 +111,12 @@ public class WebRequestExample {
 
         
 
+        
+
          descendants registered for the application. <see
          cref="T:System.Net.WebRequest" />
+
+        
 
         
 
@@ -120,8 +132,12 @@ public class WebRequestExample {
 
         
 
+        
+
          class throws a <see
          cref="T:System.Net.WebException" />
+
+        
 
         
 
@@ -134,8 +150,12 @@ public class WebRequestExample {
 
         
 
+        
+
          property is one of the <see
          cref="T:System.Net.WebExceptionStatus" />
+
+        
 
         
 
@@ -148,8 +168,12 @@ public class WebRequestExample {
 
         
 
+        
+
          is <see
          cref="F:System.Net.WebExceptionStatus.ProtocolError" />
+
+        
 
         
 
@@ -162,8 +186,12 @@ public class WebRequestExample {
 
         
 
+        
+
          property contains the <see
          cref="T:System.Net.WebResponse" />
+
+        
 
         
 
@@ -179,8 +207,12 @@ public class WebRequestExample {
 
         
 
+        
+
          class is an abstract class, the actual behavior of <see
          cref="T:System.Net.WebRequest" />
+
+        
 
         
 
@@ -193,6 +225,8 @@ public class WebRequestExample {
 
         
 
+        
+
          method. For more information about default values and exceptions, see the documentation for the descendant classes, such as <see
          cref="T:System.Net.HttpWebRequest" />
 
@@ -200,8 +234,12 @@ public class WebRequestExample {
 
         
 
+        
+
          and <see
          cref="T:System.Net.FileWebRequest" />
+
+        
 
         
 
@@ -218,6 +256,8 @@ public class WebRequestExample {
 
           
 
+          
+
            method to initialize new <see
            cref="T:System.Net.WebRequest" />
 
@@ -225,8 +265,12 @@ public class WebRequestExample {
 
           
 
+          
+
            instances. Do not use the <see
            cref="T:System.Net.WebRequest" />
+
+          
 
           
 
@@ -274,8 +318,12 @@ public class WebRequestExample {
 
             
 
+            
+
              method to initialize new <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -289,6 +337,8 @@ public class WebRequestExample {
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -330,8 +380,12 @@ public class WebRequestExample {
 
             
 
+            
+
              interface for the <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -351,6 +405,8 @@ public class WebRequestExample {
 
             
 
+            
+
              class from the specified instances of the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
@@ -358,8 +414,12 @@ public class WebRequestExample {
 
             
 
+            
+
              and <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -375,6 +435,8 @@ public class WebRequestExample {
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
@@ -382,8 +444,12 @@ public class WebRequestExample {
 
           
 
+          
+
            that contains the information required to serialize the new <see
            cref="T:System.Net.WebRequest" />
+
+          
 
           
 
@@ -398,6 +464,8 @@ public class WebRequestExample {
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
 
@@ -405,8 +473,12 @@ public class WebRequestExample {
 
           
 
+          
+
            that indicates the source of the serialized stream associated with the new <see
            cref="T:System.Net.WebRequest" />
+
+          
 
           
 
@@ -447,8 +519,12 @@ public class WebRequestExample {
 
             
 
+            
+
              method cancels asynchronous requests to Internet resources started with the <see
              cref="M:System.Net.WebRequest.BeginGetResponse(System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -465,8 +541,12 @@ public class WebRequestExample {
 
               
 
+              
+
                class is an abstract class. The actual behavior of <see
                cref="T:System.Net.WebRequest" />
+
+              
 
               
 
@@ -479,6 +559,8 @@ public class WebRequestExample {
 
               
 
+              
+
                method. For more information about default values and exceptions, see the documentation for the descendant classes, such as <see
                cref="T:System.Net.HttpWebRequest" />
 
@@ -486,8 +568,12 @@ public class WebRequestExample {
 
               
 
+              
+
                and <see
                cref="T:System.Net.FileWebRequest" />
+
+              
 
               
 
@@ -570,6 +656,8 @@ public class WebRequestExample {
 
             
 
+            
+
              method starts an asynchronous request for a stream used to send data to an Internet resource. The callback method that implements the <see
              cref="T:System.AsyncCallback" />
 
@@ -577,8 +665,12 @@ public class WebRequestExample {
 
             
 
+            
+
              delegate uses the <see
              cref="M:System.Net.WebRequest.EndGetRequestStream(System.IAsyncResult)" />
+
+            
 
             
 
@@ -595,8 +687,12 @@ public class WebRequestExample {
 
               
 
+              
+
                class is an abstract class. The actual behavior of <see
                cref="T:System.Net.WebRequest" />
+
+              
 
               
 
@@ -609,6 +705,8 @@ public class WebRequestExample {
 
               
 
+              
+
                method. For more information about default values and exceptions, see the documentation for the descendant classes, such as <see
                cref="T:System.Net.HttpWebRequest" />
 
@@ -616,8 +714,12 @@ public class WebRequestExample {
 
               
 
+              
+
                and <see
                cref="T:System.Net.FileWebRequest" />
+
+              
 
               
 
@@ -637,6 +739,8 @@ public class WebRequestExample {
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -645,6 +749,8 @@ public class WebRequestExample {
           <para
             >An <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -660,8 +766,12 @@ public class WebRequestExample {
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -671,6 +781,8 @@ public class WebRequestExample {
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -721,8 +833,12 @@ public class WebRequestExample {
 
             
 
+            
+
              method starts an asynchronous request for a response. The callback method that implements the <see
              cref="T:System.AsyncCallback" />
+
+            
 
             
 
@@ -735,8 +851,12 @@ public class WebRequestExample {
 
             
 
+            
+
              method to return the <see
              cref="T:System.Net.WebResponse" />
+
+            
 
             
 
@@ -753,8 +873,12 @@ public class WebRequestExample {
 
               
 
+              
+
                class is an abstract class. The actual behavior of <see
                cref="T:System.Net.WebRequest" />
+
+              
 
               
 
@@ -767,6 +891,8 @@ public class WebRequestExample {
 
               
 
+              
+
                method. For more information about default values and exceptions, see the documentation for the descendant classes, such as <see
                cref="T:System.Net.HttpWebRequest" />
 
@@ -774,8 +900,12 @@ public class WebRequestExample {
 
               
 
+              
+
                and <see
                cref="T:System.Net.FileWebRequest" />
+
+              
 
               
 
@@ -793,8 +923,12 @@ public class WebRequestExample {
 
               
 
+              
+
                and <see
                cref="P:System.Net.WebException.Status" />
+
+              
 
               
 
@@ -818,11 +952,15 @@ public class WebRequestExample {
 
             
 
+            
+
              that references the asynchronous request.</para
           >
         </returns>
         <param name="callback">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -835,10 +973,14 @@ public class WebRequestExample {
 
           
 
+          
+
            delegate. </param
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -884,6 +1026,8 @@ public class WebRequestExample {
 
             
 
+            
+
              property for requests that use the Hypertext Transfer Protocol (HTTP) or Secure Hypertext Transfer Protocol (HTTPS) URI scheme.</para
           >
           <para>A copy of a resource is only added to the cache if the response stream for the resource is retrieved and read to the end of the stream. So another request for the same resource could use a cached copy, depending on the cache policy level for this request.</para>
@@ -924,6 +1068,8 @@ public class WebRequestExample {
 
             
 
+            
+
              that contains the name of the connection group for the current instance.</para
           >
         </value>
@@ -940,12 +1086,16 @@ public class WebRequestExample {
 
             
 
+            
+
              property associates specific requests within an application to one or more connection pools.</para
           >
           <block subset="none" type="note">
             <para
               >The <see
                cref="T:System.Net.WebRequest" />
+
+              
 
               
 
@@ -958,8 +1108,12 @@ public class WebRequestExample {
 
               
 
+              
+
                instances at run time is determined by the descendant class returned by the <see
                cref="M:System.Net.WebRequest.Create(System.Uri)" />
+
+              
 
               
 
@@ -972,8 +1126,12 @@ public class WebRequestExample {
 
               
 
+              
+
                and <see
                cref="T:System.Net.FileWebRequest" />
+
+              
 
               
 
@@ -1017,6 +1175,8 @@ public class WebRequestExample {
 
             
 
+            
+
              containing the number of bytes of request data being sent.</para
           >
         </value>
@@ -1039,8 +1199,12 @@ public class WebRequestExample {
 
             
 
+            
+
              property contains the number of bytes of data sent to the Internet resource by the <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -1057,8 +1221,12 @@ public class WebRequestExample {
 
               
 
+              
+
                class is an abstract class. The actual behavior of <see
                cref="T:System.Net.WebRequest" />
+
+              
 
               
 
@@ -1071,6 +1239,8 @@ public class WebRequestExample {
 
               
 
+              
+
                method. For more information about default values and exceptions, see the documentation for the descendant classes, such as <see
                cref="T:System.Net.HttpWebRequest" />
 
@@ -1078,8 +1248,12 @@ public class WebRequestExample {
 
               
 
+              
+
                and <see
                cref="T:System.Net.FileWebRequest" />
+
+              
 
               
 
@@ -1123,6 +1297,8 @@ public class WebRequestExample {
 
             
 
+            
+
              that represents the content type of the request data.</para
           >
         </value>
@@ -1139,12 +1315,16 @@ public class WebRequestExample {
 
             
 
+            
+
              property contains the media type of the request. This is typically the MIME encoding of the content.</para
           >
           <block subset="none" type="note">
             <para
               >The <see
                cref="T:System.Net.WebRequest" />
+
+              
 
               
 
@@ -1157,8 +1337,12 @@ public class WebRequestExample {
 
               
 
+              
+
                instances at run time is determined by the descendant class returned by the <see
                cref="M:System.Net.WebRequest.Create(System.Uri)" />
+
+              
 
               
 
@@ -1171,8 +1355,12 @@ public class WebRequestExample {
 
               
 
+              
+
                and <see
                cref="T:System.Net.FileWebRequest" />
+
+              
 
               
 
@@ -1222,8 +1410,12 @@ public class WebRequestExample {
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -1239,11 +1431,15 @@ public class WebRequestExample {
 
           
 
+          
+
            is not registered.</exception
         >
         <exception cref="T:System.UriFormatException"
           >The URI specified in <paramref
            name="requestUriString" />
+
+          
 
           
 
@@ -1262,6 +1458,8 @@ public class WebRequestExample {
 
           
 
+          
+
           .</permission
         >
         <remarks>
@@ -1274,6 +1472,8 @@ public class WebRequestExample {
 
             
 
+            
+
              method returns a descendant of the <see
              cref="T:System.Net.WebRequest" />
 
@@ -1281,8 +1481,12 @@ public class WebRequestExample {
 
             
 
+            
+
              class determined at run time as the closest registered match for <paramref
              name="requestUri" />
+
+            
 
             
 
@@ -1298,8 +1502,12 @@ public class WebRequestExample {
 
             
 
+            
+
             , an <see
              cref="T:System.Net.HttpWebRequest" />
+
+            
 
             
 
@@ -1312,6 +1520,8 @@ public class WebRequestExample {
 
             
 
+            
+
             . If a URI beginning with ftp:// is passed instead, the <see
              cref="M:System.Net.WebRequest.Create(System.Uri)" />
 
@@ -1319,8 +1529,12 @@ public class WebRequestExample {
 
             
 
+            
+
              method will return a <see
              cref="T:System.Net.FileWebRequest" />
+
+            
 
             
 
@@ -1333,8 +1547,12 @@ public class WebRequestExample {
 
             
 
+            
+
              method will return a <see
              cref="T:System.Net.FileWebRequest" />
+
+            
 
             
 
@@ -1365,8 +1583,12 @@ public class WebRequestExample {
 
             
 
+            
+
              descendants to handle other requests are registered with the <see
              cref="M:System.Net.WebRequest.RegisterPrefix(System.String,System.Net.IWebRequestCreate)" />
+
+            
 
             
 
@@ -1382,8 +1604,12 @@ public class WebRequestExample {
 
             
 
+            
+
              method uses the <paramref
              name="requestUriString" />
+
+            
 
             
 
@@ -1396,8 +1622,12 @@ public class WebRequestExample {
 
             
 
+            
+
              instance that it passes to the new <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -1418,6 +1648,8 @@ public class WebRequestExample {
 
               
 
+              
+
               .</para
             >
           </block>
@@ -1427,6 +1659,8 @@ public class WebRequestExample {
           <para
             >Initializes a new <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -1445,11 +1679,15 @@ public class WebRequestExample {
 
             
 
+            
+
              descendant for the specific URI scheme.</para
           >
         </returns>
         <param name="requestUriString">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1493,8 +1731,12 @@ public class WebRequestExample {
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -1505,6 +1747,8 @@ public class WebRequestExample {
         <exception cref="T:System.NotSupportedException"
           >The request scheme specified in <paramref
            name="requestUri " />
+
+          
 
           
 
@@ -1523,6 +1767,8 @@ public class WebRequestExample {
 
           
 
+          
+
           .</permission
         >
         <remarks>
@@ -1535,6 +1781,8 @@ public class WebRequestExample {
 
             
 
+            
+
              method returns a descendant of the <see
              cref="T:System.Net.WebRequest" />
 
@@ -1542,8 +1790,12 @@ public class WebRequestExample {
 
             
 
+            
+
              class determined at run time as the closest registered match for <paramref
              name="requestUri" />
+
+            
 
             
 
@@ -1559,8 +1811,12 @@ public class WebRequestExample {
 
             
 
+            
+
              descendant, Handler1, to handle requests to http://www.contoso.com/text/ and another named Handler2 to handle requests to http://www.contoso.com/code/, you can use <see
              cref="M:System.Net.WebRequest.Create(System.Uri)" />
+
+            
 
             
 
@@ -1576,8 +1832,12 @@ public class WebRequestExample {
 
             
 
+            
+
              class based on only the scheme portion of a URI, use the <see
              cref="M:System.Net.WebRequest.CreateDefault(System.Uri)" />
+
+            
 
             
 
@@ -1593,8 +1853,12 @@ public class WebRequestExample {
 
             
 
+            
+
             , an <see
              cref="T:System.Net.HttpWebRequest" />
+
+            
 
             
 
@@ -1607,6 +1871,8 @@ public class WebRequestExample {
 
             
 
+            
+
             . If a URI beginning with ftp:// is passed instead, the <see
              cref="M:System.Net.WebRequest.Create(System.Uri)" />
 
@@ -1614,8 +1880,12 @@ public class WebRequestExample {
 
             
 
+            
+
              method will return a <see
              cref="T:System.Net.FileWebRequest" />
+
+            
 
             
 
@@ -1628,8 +1898,12 @@ public class WebRequestExample {
 
             
 
+            
+
              method will return a <see
              cref="T:System.Net.FileWebRequest" />
+
+            
 
             
 
@@ -1660,8 +1934,12 @@ public class WebRequestExample {
 
             
 
+            
+
              descendants to handle other requests are registered with the <see
              cref="M:System.Net.WebRequest.RegisterPrefix(System.String,System.Net.IWebRequestCreate)" />
+
+            
 
             
 
@@ -1682,6 +1960,8 @@ public class WebRequestExample {
 
               
 
+              
+
               .</para
             >
           </block>
@@ -1691,6 +1971,8 @@ public class WebRequestExample {
           <para
             >Initializes a new <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -1709,6 +1991,8 @@ public class WebRequestExample {
 
             
 
+            
+
              descendant for the specified URI scheme.</para
           >
         </returns>
@@ -1719,8 +2003,12 @@ public class WebRequestExample {
 
           
 
+          
+
           A <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -1764,8 +2052,12 @@ public class WebRequestExample {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1776,6 +2068,8 @@ public class WebRequestExample {
         <exception cref="T:System.NotSupportedException"
           >The request scheme specified in <paramref
            name="requestUri " />
+
+          
 
           
 
@@ -1794,6 +2088,8 @@ public class WebRequestExample {
 
           
 
+          
+
           .</permission
         >
         <example>
@@ -1805,8 +2101,12 @@ public class WebRequestExample {
 
             
 
+            
+
              and <see
              cref="M:System.Net.WebRequest.CreateDefault(System.Uri)" />
+
+            
 
             
 
@@ -1860,8 +2160,12 @@ public class CreateDefaultExample
 
             
 
+            
+
              method returns a <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -1877,8 +2181,12 @@ public class CreateDefaultExample
 
             
 
+            
+
             , an <see
              cref="T:System.Net.HttpWebRequest" />
+
+            
 
             
 
@@ -1891,6 +2199,8 @@ public class CreateDefaultExample
 
             
 
+            
+
             . If a URI beginning with file:// is passed instead, the <see
              cref="M:System.Net.WebRequest.CreateDefault(System.Uri)" />
 
@@ -1898,8 +2208,12 @@ public class CreateDefaultExample
 
             
 
+            
+
              method will return a <see
              cref="T:System.Net.FileWebRequest" />
+
+            
 
             
 
@@ -1920,6 +2234,8 @@ public class CreateDefaultExample
 
               
 
+              
+
               .</para
             >
           </block>
@@ -1929,6 +2245,8 @@ public class CreateDefaultExample
           <para
             >Initializes a new <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -1947,6 +2265,8 @@ public class CreateDefaultExample
 
             
 
+            
+
              descendant for the specified URI scheme.</para
           >
         </returns>
@@ -1957,8 +2277,12 @@ public class CreateDefaultExample
 
           
 
+          
+
           A <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -2004,6 +2328,8 @@ public class CreateDefaultExample
 
             
 
+            
+
              method returns an instance of the <see
              cref="T:System.Net.HttpWebRequest" />
 
@@ -2011,8 +2337,12 @@ public class CreateDefaultExample
 
             
 
+            
+
              class for the <paramref
              name="requestUriString" />
+
+            
 
             
 
@@ -2028,8 +2358,12 @@ public class CreateDefaultExample
 
             
 
+            
+
              parameter, a <see
              cref="T:System.Net.HttpWebRequest" />
+
+            
 
             
 
@@ -2042,8 +2376,12 @@ public class CreateDefaultExample
 
             
 
+            
+
             . Another other scheme will throw an <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -2059,8 +2397,12 @@ public class CreateDefaultExample
 
             
 
+            
+
              method uses the <paramref
              name="requestUriString" />
+
+            
 
             
 
@@ -2073,8 +2415,12 @@ public class CreateDefaultExample
 
             
 
+            
+
              instance that it passes to the new <see
              cref="T:System.Net.HttpWebRequest" />
+
+            
 
             
 
@@ -2087,8 +2433,12 @@ public class CreateDefaultExample
 
             
 
+            
+
              property on the returned <see
              cref="T:System.Net.HttpWebRequest" />
+
+            
 
             
 
@@ -2104,8 +2454,12 @@ public class CreateDefaultExample
 
             
 
+            
+
              descendants to handle other requests are registered with the <see
              cref="M:System.Net.WebRequest.RegisterPrefix(System.String,System.Net.IWebRequestCreate)" />
+
+            
 
             
 
@@ -2118,8 +2472,12 @@ public class CreateDefaultExample
 
             
 
+            
+
              method can be used to create a descendant of the <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -2138,6 +2496,8 @@ public class CreateDefaultExample
 
             
 
+            
+
              instance for the specified URI string.</para
           >
         </summary>
@@ -2146,6 +2506,8 @@ public class CreateDefaultExample
           <para
             >Returns <see
              cref="T:System.Net.HttpWebRequest" />
+
+            
 
             
 
@@ -2161,11 +2523,15 @@ public class CreateDefaultExample
 
             
 
+            
+
               instance for the specific URI string.</para
           >
         </returns>
         <param name="requestUriString">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2210,6 +2576,8 @@ public class CreateDefaultExample
 
             
 
+            
+
              method returns an instance of the <see
              cref="T:System.Net.HttpWebRequest" />
 
@@ -2217,8 +2585,12 @@ public class CreateDefaultExample
 
             
 
+            
+
              class for the <paramref
              name="requestUri" />
+
+            
 
             
 
@@ -2234,8 +2606,12 @@ public class CreateDefaultExample
 
             
 
+            
+
              parameter, an <see
              cref="T:System.Net.HttpWebRequest" />
+
+            
 
             
 
@@ -2248,8 +2624,12 @@ public class CreateDefaultExample
 
             
 
+            
+
             . Another other scheme will throw a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -2265,8 +2645,12 @@ public class CreateDefaultExample
 
             
 
+            
+
              method uses the <paramref
              name="requestUri" />
+
+            
 
             
 
@@ -2279,6 +2663,8 @@ public class CreateDefaultExample
 
             
 
+            
+
              instance. If the method is successful, the <see
              cref="P:System.Net.HttpWebRequest.AllowReadStreamBuffering" />
 
@@ -2286,8 +2672,12 @@ public class CreateDefaultExample
 
             
 
+            
+
              property on the returned <see
              cref="T:System.Net.HttpWebRequest" />
+
+            
 
             
 
@@ -2303,8 +2693,12 @@ public class CreateDefaultExample
 
             
 
+            
+
              descendants to handle other requests are registered with the <see
              cref="M:System.Net.WebRequest.RegisterPrefix(System.String,System.Net.IWebRequestCreate)" />
+
+            
 
             
 
@@ -2317,8 +2711,12 @@ public class CreateDefaultExample
 
             
 
+            
+
              method can be used to create a descendant of the <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -2337,6 +2735,8 @@ public class CreateDefaultExample
 
             
 
+            
+
              instance for the specified URI.</para
           >
         </summary>
@@ -2345,6 +2745,8 @@ public class CreateDefaultExample
           <para
             >Returns <see
              cref="T:System.Net.HttpWebRequest" />
+
+            
 
             
 
@@ -2360,11 +2762,15 @@ public class CreateDefaultExample
 
             
 
+            
+
              instance for the specific URI string.</para
           >
         </returns>
         <param name="requestUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2407,9 +2813,13 @@ public class CreateDefaultExample
 
             
 
+            
+
              object containing the authentication credentials
    associated with the request. The default is <see
              langword="null" />
+
+            
 
             
 
@@ -2431,12 +2841,16 @@ public class CreateDefaultExample
 
             
 
+            
+
              property contains the authentication credentials required to access the Internet resource.</para
           >
           <block subset="none" type="note">
             <para
               >The <see
                cref="T:System.Net.WebRequest" />
+
+              
 
               
 
@@ -2449,8 +2863,12 @@ public class CreateDefaultExample
 
               
 
+              
+
                instances at run time is determined by the descendant class returned by the <see
                cref="M:System.Net.WebRequest.Create(System.Uri)" />
+
+              
 
               
 
@@ -2463,8 +2881,12 @@ public class CreateDefaultExample
 
               
 
+              
+
                and <see
                cref="T:System.Net.FileWebRequest" />
+
+              
 
               
 
@@ -2508,6 +2930,8 @@ public class CreateDefaultExample
               <para
                 >There is no <see
                  cref="P:System.Net.HttpWebRequest.DefaultCachePolicy" />
+
+                
 
                 
 
@@ -2558,8 +2982,12 @@ public class CreateDefaultExample
 
             
 
+            
+
              property gets or sets the global proxy. The <see
              cref="P:System.Net.WebRequest.DefaultWebProxy" />
+
+            
 
             
 
@@ -2572,8 +3000,12 @@ public class CreateDefaultExample
 
             
 
+            
+
              instances use if the request supports proxies and no proxy is set explicitly using the <see
              cref="P:System.Net.HttpWebRequest.Proxy" />
+
+            
 
             
 
@@ -2586,8 +3018,12 @@ public class CreateDefaultExample
 
             
 
+            
+
              and <see
              cref="T:System.Net.HttpWebRequest" />
+
+            
 
             
 
@@ -2603,11 +3039,15 @@ public class CreateDefaultExample
 
             
 
+            
+
              property reads proxy settings from the app.config file. If there is no config file, the current user's Internet Explorer (IE) proxy settings are used.</para
           >
           <para
             >If the <see
              cref="P:System.Net.WebRequest.DefaultWebProxy" />
+
+            
 
             
 
@@ -2620,6 +3060,8 @@ public class CreateDefaultExample
 
             
 
+            
+
              class created by the <see
              cref="M:System.Net.WebRequest.Create(System.String)" />
 
@@ -2627,8 +3069,12 @@ public class CreateDefaultExample
 
             
 
+            
+
              or <see
              cref="M:System.Net.WebRequest.CreateDefault(System.Uri)" />
+
+            
 
             
 
@@ -2679,8 +3125,12 @@ public class CreateDefaultExample
 
           
 
+          
+
            was not returned by a call to <see
            cref="M:System.Net.WebRequest.BeginGetRequestStream(System.AsyncCallback,System.Object)" />
+
+          
 
           
 
@@ -2690,6 +3140,8 @@ public class CreateDefaultExample
         >
         <exception cref="T:System.ArgumentNullException">
           <paramref name="asyncResult" />
+
+          
 
           
 
@@ -2718,8 +3170,12 @@ public class CreateDefaultExample
 
             
 
+            
+
              method completes an asynchronous stream request that was started by the <see
              cref="M:System.Net.WebRequest.BeginGetRequestStream(System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -2736,6 +3192,8 @@ public class CreateDefaultExample
 
               
 
+              
+
                method on the stream returned by <see
                cref="M:System.Net.WebResponse.GetResponseStream" />
 
@@ -2743,8 +3201,12 @@ public class CreateDefaultExample
 
               
 
+              
+
                after calling <see
                cref="M:System.Net.WebRequest.EndGetResponse(System.IAsyncResult)" />
+
+              
 
               
 
@@ -2762,8 +3224,12 @@ public class CreateDefaultExample
 
               
 
+              
+
                class is an abstract class. The actual behavior of <see
                cref="T:System.Net.WebRequest" />
+
+              
 
               
 
@@ -2776,6 +3242,8 @@ public class CreateDefaultExample
 
               
 
+              
+
                method. For more information about default values and exceptions, see the documentation for the descendant classes, such as <see
                cref="T:System.Net.HttpWebRequest" />
 
@@ -2783,8 +3251,12 @@ public class CreateDefaultExample
 
               
 
+              
+
                and <see
                cref="T:System.Net.FileWebRequest" />
+
+              
 
               
 
@@ -2804,6 +3276,8 @@ public class CreateDefaultExample
 
             
 
+            
+
              for writing data to the Internet resource.</para
           >
         </summary>
@@ -2812,6 +3286,8 @@ public class CreateDefaultExample
           <para
             >A <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -2827,8 +3303,12 @@ public class CreateDefaultExample
 
           
 
+          
+
           An <see
            cref="T:System.IAsyncResult" />
+
+          
 
           
 
@@ -2875,8 +3355,12 @@ public class CreateDefaultExample
 
           
 
+          
+
            was not returned by a call to <see
            cref="M:System.Net.WebRequest.BeginGetResponse(System.AsyncCallback,System.Object)" />
+
+          
 
           
 
@@ -2891,12 +3375,16 @@ public class CreateDefaultExample
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.InvalidOperationException">
           <para
             >The <see
              cref="P:System.Net.WebRequest.ContentLength" />
+
+            
 
             
 
@@ -2923,8 +3411,12 @@ public class CreateDefaultExample
 
             
 
+            
+
              method completes an asynchronous request for an Internet resource that was started with the <see
              cref="M:System.Net.WebRequest.BeginGetResponse(System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -2941,8 +3433,12 @@ public class CreateDefaultExample
 
               
 
+              
+
                class is an abstract class. The actual behavior of <see
                cref="T:System.Net.WebRequest" />
+
+              
 
               
 
@@ -2955,6 +3451,8 @@ public class CreateDefaultExample
 
               
 
+              
+
                method. For more information about default values and exceptions, see the documentation for the descendant classes, such as <see
                cref="T:System.Net.HttpWebRequest" />
 
@@ -2962,8 +3460,12 @@ public class CreateDefaultExample
 
               
 
+              
+
                and <see
                cref="T:System.Net.FileWebRequest" />
+
+              
 
               
 
@@ -2983,6 +3485,8 @@ public class CreateDefaultExample
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2991,6 +3495,8 @@ public class CreateDefaultExample
           <para
             >A <see
              cref="T:System.Net.WebResponse" />
+
+            
 
             
 
@@ -3006,8 +3512,12 @@ public class CreateDefaultExample
 
           
 
+          
+
           An <see
            cref="T:System.IAsyncResult" />
+
+          
 
           
 
@@ -3050,6 +3560,8 @@ public class CreateDefaultExample
 
             
 
+            
+
              are automatically tracked and serialized by the formatter.</para
           >
         </remarks>
@@ -3058,6 +3570,8 @@ public class CreateDefaultExample
           <para
             >Populates a <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -3073,8 +3587,12 @@ public class CreateDefaultExample
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -3089,8 +3607,12 @@ public class CreateDefaultExample
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -3134,8 +3656,12 @@ public class CreateDefaultExample
 
             
 
+            
+
              method initiates a request to send data to the Internet resource and returns a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -3151,8 +3677,12 @@ public class CreateDefaultExample
 
             
 
+            
+
              method provides synchronous access to the <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -3165,8 +3695,12 @@ public class CreateDefaultExample
 
             
 
+            
+
              and <see
              cref="M:System.Net.WebRequest.EndGetRequestStream(System.IAsyncResult)" />
+
+            
 
             
 
@@ -3183,8 +3717,12 @@ public class CreateDefaultExample
 
               
 
+              
+
                class is an abstract class. The actual behavior of <see
                cref="T:System.Net.WebRequest" />
+
+              
 
               
 
@@ -3197,6 +3735,8 @@ public class CreateDefaultExample
 
               
 
+              
+
                method. For more information about default values and exceptions, see the documentation for the descendant classes, such as <see
                cref="T:System.Net.HttpWebRequest" />
 
@@ -3204,8 +3744,12 @@ public class CreateDefaultExample
 
               
 
+              
+
                and <see
                cref="T:System.Net.FileWebRequest" />
+
+              
 
               
 
@@ -3225,6 +3769,8 @@ public class CreateDefaultExample
 
             
 
+            
+
              for writing data to the Internet resource.</para
           >
         </summary>
@@ -3233,6 +3779,8 @@ public class CreateDefaultExample
           <para
             >A <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -3272,8 +3820,12 @@ public class CreateDefaultExample
 
             
 
+            
+
             object will complete when the <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -3292,6 +3844,8 @@ public class CreateDefaultExample
 
             
 
+            
+
              for writing data to the Internet resource as an asynchronous operation.</para
           >
         </summary>
@@ -3300,6 +3854,8 @@ public class CreateDefaultExample
           <para
             >Returns <see
              cref="T:System.Threading.Tasks.Task`1" />
+
+            
 
             
 
@@ -3353,8 +3909,12 @@ public class CreateDefaultExample
 
             
 
+            
+
              method sends a request to an Internet resource and returns a <see
              cref="T:System.Net.WebResponse" />
+
+            
 
             
 
@@ -3367,8 +3927,12 @@ public class CreateDefaultExample
 
             
 
+            
+
             , the <see
              cref="M:System.Net.WebRequest.GetResponse" />
+
+            
 
             
 
@@ -3384,8 +3948,12 @@ public class CreateDefaultExample
 
             
 
+            
+
              method provides synchronous access to the <see
              cref="T:System.Net.WebResponse" />
+
+            
 
             
 
@@ -3398,8 +3966,12 @@ public class CreateDefaultExample
 
             
 
+            
+
              and <see
              cref="M:System.Net.WebRequest.EndGetResponse(System.IAsyncResult)" />
+
+            
 
             
 
@@ -3416,8 +3988,12 @@ public class CreateDefaultExample
 
               
 
+              
+
                class is an abstract class. The actual behavior of <see
                cref="T:System.Net.WebRequest" />
+
+              
 
               
 
@@ -3430,6 +4006,8 @@ public class CreateDefaultExample
 
               
 
+              
+
                method. For more information about default values and exceptions, see the documentation for the descendant classes, such as <see
                cref="T:System.Net.HttpWebRequest" />
 
@@ -3437,8 +4015,12 @@ public class CreateDefaultExample
 
               
 
+              
+
                and <see
                cref="T:System.Net.FileWebRequest" />
+
+              
 
               
 
@@ -3456,8 +4038,12 @@ public class CreateDefaultExample
 
               
 
+              
+
                and <see
                cref="P:System.Net.WebException.Status" />
+
+              
 
               
 
@@ -3477,6 +4063,8 @@ public class CreateDefaultExample
           <para
             >A <see
              cref="T:System.Net.WebResponse" />
+
+            
 
             
 
@@ -3516,6 +4104,8 @@ public class CreateDefaultExample
 
             
 
+            
+
              object will complete after a response to an Internet request is available.</para
           >
         </remarks>
@@ -3528,6 +4118,8 @@ public class CreateDefaultExample
           <para
             >Returns <see
              cref="T:System.Threading.Tasks.Task`1" />
+
+            
 
             
 
@@ -3572,6 +4164,8 @@ public class CreateDefaultExample
 
             
 
+            
+
              creates an appropriate proxy object for the current user.</para
           >
           <para>On Windows, the method reads the current user's Internet Explorer (IE) proxy settings. The settings supported on Mono are proxy enabled, proxy URL, and proxy excluded domains.</para>
@@ -3579,6 +4173,8 @@ public class CreateDefaultExample
           <para
             >If your application is impersonating several users, you can use the <see
              cref="M:System.Net.WebRequest.GetSystemWebProxy" />
+
+            
 
             
 
@@ -3601,8 +4197,12 @@ public class CreateDefaultExample
 
             
 
+            
+
              used by every call to instances of <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -3646,6 +4246,8 @@ public class CreateDefaultExample
 
             
 
+            
+
              containing the header name/value pairs associated
  with the current instance.</para
           >
@@ -3663,8 +4265,12 @@ public class CreateDefaultExample
 
             
 
+            
+
              property contains a <see
              cref="T:System.Net.WebHeaderCollection" />
+
+            
 
             
 
@@ -3681,8 +4287,12 @@ public class CreateDefaultExample
 
               
 
+              
+
                class is an abstract class. The actual behavior of <see
                cref="T:System.Net.WebRequest" />
+
+              
 
               
 
@@ -3695,6 +4305,8 @@ public class CreateDefaultExample
 
               
 
+              
+
                method. For more information about default values and exceptions, see the documentation for the descendant classes, such as <see
                cref="T:System.Net.HttpWebRequest" />
 
@@ -3702,8 +4314,12 @@ public class CreateDefaultExample
 
               
 
+              
+
                and <see
                cref="T:System.Net.FileWebRequest" />
+
+              
 
               
 
@@ -3776,6 +4392,8 @@ public class CreateDefaultExample
 
             
 
+            
+
              containing the protocol method to use in the current instance.</para
           >
         </value>
@@ -3792,12 +4410,16 @@ public class CreateDefaultExample
 
             
 
+            
+
              property contains the request method to use in this request.</para
           >
           <block subset="none" type="note">
             <para
               >The <see
                cref="T:System.Net.WebRequest" />
+
+              
 
               
 
@@ -3810,8 +4432,12 @@ public class CreateDefaultExample
 
               
 
+              
+
                instances at run time is determined by the descendant class returned by the <see
                cref="M:System.Net.WebRequest.Create(System.Uri)" />
+
+              
 
               
 
@@ -3824,8 +4450,12 @@ public class CreateDefaultExample
 
               
 
+              
+
                and <see
                cref="T:System.Net.FileWebRequest" />
+
+              
 
               
 
@@ -3868,6 +4498,8 @@ public class CreateDefaultExample
 
             
 
+            
+
              if
    authentication information will be
    sent with the current request without waiting for an authentication challenge
@@ -3875,6 +4507,8 @@ public class CreateDefaultExample
    the requested resource;
    otherwise, <see
              langword="false" />
+
+            
 
             
 
@@ -3896,6 +4530,8 @@ public class CreateDefaultExample
 
             
 
+            
+
              property indicates whether to send authentication information with subsequent requests without waiting to be challenged by the server. When <see
              cref="P:System.Net.WebRequest.PreAuthenticate" />
 
@@ -3903,8 +4539,12 @@ public class CreateDefaultExample
 
             
 
+            
+
              is false, the <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -3921,8 +4561,12 @@ public class CreateDefaultExample
 
               
 
+              
+
                class is an abstract class. The actual behavior of <see
                cref="T:System.Net.WebRequest" />
+
+              
 
               
 
@@ -3935,6 +4579,8 @@ public class CreateDefaultExample
 
               
 
+              
+
                method. For more information about default values and exceptions, see the documentation for the descendant classes, such as <see
                cref="T:System.Net.HttpWebRequest" />
 
@@ -3942,8 +4588,12 @@ public class CreateDefaultExample
 
               
 
+              
+
                and <see
                cref="T:System.Net.FileWebRequest" />
+
+              
 
               
 
@@ -3993,6 +4643,8 @@ public class CreateDefaultExample
 
             
 
+            
+
              to use to access resources.</para
           >
         </value>
@@ -4009,12 +4661,16 @@ public class CreateDefaultExample
 
             
 
+            
+
              property identifies the network proxy that the request uses to access the Internet resource. The request is made through the proxy server rather than directly to the Internet resource.</para
           >
           <block subset="none" type="note">
             <para
               >The <see
                cref="T:System.Net.WebRequest" />
+
+              
 
               
 
@@ -4027,8 +4683,12 @@ public class CreateDefaultExample
 
               
 
+              
+
                instances at run time is determined by the descendant class returned by the <see
                cref="M:System.Net.WebRequest.Create(System.Uri)" />
+
+              
 
               
 
@@ -4041,8 +4701,12 @@ public class CreateDefaultExample
 
               
 
+              
+
                and <see
                cref="T:System.Net.FileWebRequest" />
+
+              
 
               
 
@@ -4094,8 +4758,12 @@ public class CreateDefaultExample
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -4109,8 +4777,12 @@ public class CreateDefaultExample
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -4165,6 +4837,8 @@ public class RegisterPrefixExample
 
             
 
+            
+
              method registers <see
              cref="T:System.Net.WebRequest" />
 
@@ -4172,8 +4846,12 @@ public class RegisterPrefixExample
 
             
 
+            
+
              descendants to service requests. <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -4204,8 +4882,12 @@ public class RegisterPrefixExample
 
             
 
+            
+
              and <see
              cref="M:System.Net.WebRequest.Create(System.Uri)" />
+
+            
 
             
 
@@ -4216,6 +4898,8 @@ public class RegisterPrefixExample
           <para
             >Duplicate prefixes are not allowed. <see
              cref="M:System.Net.WebRequest.RegisterPrefix(System.String,System.Net.IWebRequestCreate)" />
+
+            
 
             
 
@@ -4232,8 +4916,12 @@ public class RegisterPrefixExample
 
               
 
+              
+
                class is registered to service requests for HTTP and HTTPS schemes by default. Attempts to register a different <see
                cref="T:System.Net.WebRequest" />
+
+              
 
               
 
@@ -4253,6 +4941,8 @@ public class RegisterPrefixExample
 
             
 
+            
+
              descendant for the specified URI.</para
           >
         </summary>
@@ -4267,8 +4957,12 @@ public class RegisterPrefixExample
 
           
 
+          
+
           The complete URI or URI prefix that the <see
            cref="T:System.Net.WebRequest" />
+
+          
 
           
 
@@ -4283,6 +4977,8 @@ public class RegisterPrefixExample
 
           
 
+          
+
           The create method that the <see
            cref="T:System.Net.WebRequest" />
 
@@ -4290,8 +4986,12 @@ public class RegisterPrefixExample
 
           
 
+          
+
            calls to create the <see
            cref="T:System.Net.WebRequest" />
+
+          
 
           
 
@@ -4329,6 +5029,8 @@ public class RegisterPrefixExample
 
             
 
+            
+
              containing the URI 
    of
    the resource associated with the current instance</para
@@ -4347,6 +5049,8 @@ public class RegisterPrefixExample
 
             
 
+            
+
              property contains the <see
              cref="T:System.Uri" />
 
@@ -4354,8 +5058,12 @@ public class RegisterPrefixExample
 
             
 
+            
+
              instance that <see
              cref="M:System.Net.WebRequest.Create(System.Uri)" />
+
+            
 
             
 
@@ -4372,8 +5080,12 @@ public class RegisterPrefixExample
 
               
 
+              
+
                class is an abstract class. The actual behavior of <see
                cref="T:System.Net.WebRequest" />
+
+              
 
               
 
@@ -4386,6 +5098,8 @@ public class RegisterPrefixExample
 
               
 
+              
+
                method. For more information about default values and exceptions, see the documentation for the descendant classes, such as <see
                cref="T:System.Net.HttpWebRequest" />
 
@@ -4393,8 +5107,12 @@ public class RegisterPrefixExample
 
               
 
+              
+
                and <see
                cref="T:System.Net.FileWebRequest" />
+
+              
 
               
 
@@ -4445,8 +5163,12 @@ public class RegisterPrefixExample
 
             
 
+            
+
              instance with the data needed to serialize the <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -4462,6 +5184,8 @@ public class RegisterPrefixExample
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
@@ -4469,8 +5193,12 @@ public class RegisterPrefixExample
 
           
 
+          
+
           , which holds the serialized data for the <see
            cref="T:System.Net.WebRequest" />
+
+          
 
           
 
@@ -4485,6 +5213,8 @@ public class RegisterPrefixExample
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
 
@@ -4492,8 +5222,12 @@ public class RegisterPrefixExample
 
           
 
+          
+
            that contains the destination of the serialized stream associated with the new <see
            cref="T:System.Net.WebRequest" />
+
+          
 
           
 
@@ -4530,9 +5264,13 @@ public class RegisterPrefixExample
 
             
 
+            
+
              containing the length of time, in milliseconds, before the current request
    will time out, or <see
              cref="F:System.Threading.Timeout.Infinite" qualify="true" />
+
+            
 
             
 
@@ -4554,8 +5292,12 @@ public class RegisterPrefixExample
 
             
 
+            
+
              property indicates the length of time, in milliseconds, until the request times out and throws a <see
              cref="T:System.Net.WebException" />
+
+            
 
             
 
@@ -4568,6 +5310,8 @@ public class RegisterPrefixExample
 
             
 
+            
+
              property affects only synchronous requests made with the <see
              cref="M:System.Net.WebRequest.GetResponse" />
 
@@ -4575,8 +5319,12 @@ public class RegisterPrefixExample
 
             
 
+            
+
              method. To time out asynchronous requests, use the <see
              cref="M:System.Net.WebRequest.Abort" />
+
+            
 
             
 
@@ -4593,8 +5341,12 @@ public class RegisterPrefixExample
 
               
 
+              
+
                class is an abstract class. The actual behavior of <see
                cref="T:System.Net.WebRequest" />
+
+              
 
               
 
@@ -4607,6 +5359,8 @@ public class RegisterPrefixExample
 
               
 
+              
+
                method. For more information about default values and exceptions, see the documentation for the descendant classes, such as <see
                cref="T:System.Net.HttpWebRequest" />
 
@@ -4614,8 +5368,12 @@ public class RegisterPrefixExample
 
               
 
+              
+
                and <see
                cref="T:System.Net.FileWebRequest" />
+
+              
 
               
 
@@ -4658,8 +5416,12 @@ public class RegisterPrefixExample
 
             
 
+            
+
              object should, if requested by the server, be authenticated using the credentials of the currently logged on user. For client applications, this is the desired behavior in most scenarios. For middle tier applications, such as ASP.NET applications, instead of using this property, you would typically set the <see
              cref="P:System.Net.WebRequest.Credentials" />
+
+            
 
             
 
@@ -4678,8 +5440,12 @@ public class RegisterPrefixExample
 
             
 
+            
+
              value that controls whether <see
              cref="P:System.Net.CredentialCache.DefaultCredentials" />
+
+            
 
             
 

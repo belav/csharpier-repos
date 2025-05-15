@@ -27,10 +27,14 @@
 
         
 
+        
+
          class is an HTTP-specific exception class that enables ASP.NET to output parser exception information. For more information on throwing and handling exceptions, see <format
          type="text/html">
           <a href="f99a1d29-a2a8-47af-9707-9909f9010735">Handling and Throwing Exceptions</a>
         </format>
+
+        
 
         
 
@@ -64,6 +68,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -90,11 +96,15 @@
 
             
 
+            
+
              class with a specified error message. </para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -129,11 +139,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner. </para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -148,8 +162,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 
@@ -187,11 +205,15 @@
 
             
 
+            
+
              class with specific information about the source code being compiled and the line number on which the exception occurred. </para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -206,8 +228,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If <paramref
            name="innerException" />
+
+          
 
           
 
@@ -222,6 +248,8 @@
 
           
 
+          
+
           The virtual path for the exception.</param
         >
         <param name="sourceCode">
@@ -231,10 +259,14 @@
 
           
 
+          
+
           The source code being compiled when the exception occurs.</param
         >
         <param name="line">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -257,6 +289,8 @@
           <para
             >The <see
              cref="P:System.Web.HttpParseException.FileName" />
+
+            
 
             
 
@@ -303,8 +337,12 @@
 
             
 
+            
+
              method sets a <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -323,6 +361,8 @@
 
             
 
+            
+
              object with information about the exception.</para
           >
         </summary>
@@ -333,8 +373,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 

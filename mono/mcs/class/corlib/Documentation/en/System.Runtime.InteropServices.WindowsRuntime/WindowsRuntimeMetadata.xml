@@ -81,11 +81,15 @@
 
             
 
+            
+
              event for managed assemblies. </para
           >
           <para
             >See the <see
              cref="T:System.Runtime.InteropServices.WindowsRuntime.NamespaceResolveEventArgs" />
+
+            
 
             
 
@@ -137,8 +141,12 @@
 
             
 
+            
+
              method overload and specifying null for the <paramref
              name="windowsSdkFilePath" />
+
+            
 
             
 
@@ -161,6 +169,8 @@
 
             
 
+            
+
             . </para
           >
         </returns>
@@ -171,10 +181,14 @@
 
           
 
+          
+
           The namespace to resolve. </param
         >
         <param name="packageGraphFilePaths">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -219,6 +233,8 @@
 
             
 
+            
+
              is searched only for namespaces that begin with Windows. </para
           >
         </remarks>
@@ -236,11 +252,15 @@
 
             
 
+            
+
             . </para
           >
         </returns>
         <param name="namespaceName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -255,10 +275,14 @@
 
           
 
+          
+
           The path to search for Windows Metadata files provided by the SDK, or null to search for Windows Metadata files from the operating system installation. </param
         >
         <param name="packageGraphFilePaths">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

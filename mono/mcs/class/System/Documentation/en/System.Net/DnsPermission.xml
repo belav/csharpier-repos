@@ -77,8 +77,12 @@
 
           
 
+          
+
            is not a valid <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -96,8 +100,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
+
+            
 
             
 
@@ -110,6 +118,8 @@
 
             
 
+            
+
              instance passes all demands. If <paramref
              name="state" />
 
@@ -117,8 +127,12 @@
 
             
 
+            
+
              contains any other value, the <see
              cref="T:System.Net.DnsPermission" />
+
+            
 
             
 
@@ -137,6 +151,8 @@
 
             
 
+            
+
              class that either allows unrestricted DNS access or disallows DNS access.</para
           >
         </summary>
@@ -147,8 +163,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -190,6 +210,8 @@
 
             
 
+            
+
              instance provides the same access to DNS servers as the original permission instance.</para
           >
         </remarks>
@@ -202,6 +224,8 @@
           <para
             >A new instance of the <see
              cref="T:System.Net.DnsPermission" />
+
+            
 
             
 
@@ -247,6 +271,8 @@
 
             
 
+            
+
             is <see
              langword="null" />
           </para>
@@ -259,8 +285,12 @@
 
             
 
+            
+
             is not a <see
              cref="T:System.Net.DnsPermission" />
+
+            
 
             
 
@@ -279,6 +309,8 @@
 
             
 
+            
+
              method reconstructs a <see
              cref="T:System.Net.DnsPermission" />
 
@@ -286,8 +318,12 @@
 
             
 
+            
+
              instance from an XML encoding defined by the <see
              cref="T:System.Security.SecurityElement" />
+
+            
 
             
 
@@ -303,8 +339,12 @@
 
             
 
+            
+
              method to XML-encode the <see
              cref="T:System.Net.DnsPermission" />
+
+            
 
             
 
@@ -323,6 +363,8 @@
 
             
 
+            
+
              instance from an XML encoding.</para
           >
         </summary>
@@ -333,8 +375,12 @@
 
           
 
+          
+
           The XML encoding to use to reconstruct the <see
            cref="T:System.Net.DnsPermission" />
+
+          
 
           
 
@@ -378,8 +424,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -397,8 +447,12 @@
 
             
 
+            
+
              method returns a <see
              cref="T:System.Net.DnsPermission" />
+
+            
 
             
 
@@ -411,8 +465,12 @@
 
             
 
+            
+
              instance and the specified <see
              cref="T:System.Net.DnsPermission" />
+
+            
 
             
 
@@ -435,8 +493,12 @@
 
             
 
+            
+
              instance that represents the intersection of the current <see
              cref="T:System.Net.DnsPermission" />
+
+            
 
             
 
@@ -449,6 +511,8 @@
 
             
 
+            
+
              instance, or null if the intersection is empty. If both the current instance and <paramref
              name="target" />
 
@@ -456,8 +520,12 @@
 
             
 
+            
+
              are unrestricted, this method returns a new <see
              cref="T:System.Net.DnsPermission" />
+
+            
 
             
 
@@ -473,8 +541,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.DnsPermission" />
+
+          
 
           
 
@@ -521,8 +593,12 @@
 
             
 
+            
+
              instance is a subset of the specified <see
              cref="T:System.Net.DnsPermission" />
+
+            
 
             
 
@@ -535,8 +611,12 @@
 
             
 
+            
+
              instance specifies a set of operations that is wholly contained by the specified <see
              cref="T:System.Net.DnsPermission" />
+
+            
 
             
 
@@ -552,6 +632,8 @@
 
             
 
+            
+
              method returns true, the current <see
              cref="T:System.Net.DnsPermission" />
 
@@ -559,8 +641,12 @@
 
             
 
+            
+
              instance allows no more access to DNS servers than does the specified <see
              cref="T:System.Net.DnsPermission" />
+
+            
 
             
 
@@ -583,6 +669,8 @@
 
             
 
+            
+
              is either null or unrestricted; otherwise, true.</para
           >
         </returns>
@@ -593,8 +681,12 @@
 
           
 
+          
+
           The second <see
            cref="T:System.Net.DnsPermission" />
+
+          
 
           
 
@@ -637,8 +729,12 @@
 
             
 
+            
+
              instance was created with <see
              cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
+
+            
 
             
 
@@ -683,6 +779,8 @@
 
             
 
+            
+
              method creates a <see
              cref="T:System.Security.SecurityElement" />
 
@@ -690,8 +788,12 @@
 
             
 
+            
+
              instance to XML-encode a representation of the <see
              cref="T:System.Net.DnsPermission" />
+
+            
 
             
 
@@ -707,8 +809,12 @@
 
             
 
+            
+
              method to restore the state information from a <see
              cref="T:System.Security.SecurityElement" />
+
+            
 
             
 
@@ -727,6 +833,8 @@
 
             
 
+            
+
              instance and its current state.</para
           >
         </summary>
@@ -735,6 +843,8 @@
           <para
             >A <see
              cref="T:System.Security.SecurityElement" />
+
+            
 
             
 
@@ -779,8 +889,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -798,8 +912,12 @@
 
             
 
+            
+
              method returns a <see
              cref="T:System.Net.DnsPermission" />
+
+            
 
             
 
@@ -812,8 +930,12 @@
 
             
 
+            
+
              instance or the specified <see
              cref="T:System.Net.DnsPermission" />
+
+            
 
             
 
@@ -836,8 +958,12 @@
 
             
 
+            
+
              instance that represents the union of the current <see
              cref="T:System.Net.DnsPermission" />
+
+            
 
             
 
@@ -850,8 +976,12 @@
 
             
 
+            
+
              instance. If <paramref
              name="target" />
+
+            
 
             
 
@@ -864,6 +994,8 @@
 
             
 
+            
+
              is unrestricted, this method returns a <see
              cref="T:System.Net.DnsPermission" />
 
@@ -871,8 +1003,12 @@
 
             
 
+            
+
              instance that is unrestricted; otherwise, it returns a <see
              cref="T:System.Net.DnsPermission" />
+
+            
 
             
 
@@ -888,8 +1024,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.DnsPermission" />
+
+          
 
           
 

@@ -30,8 +30,12 @@
 
         
 
+        
+
          control or closing the edit display mode (a special page view associated with the <see
          cref="T:System.Web.UI.WebControls.WebParts.EditorZone" />
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Web.UI.WebControls.WebParts.EditorZone" />
+
+        
 
         
 
@@ -58,8 +66,12 @@
 
         
 
+        
+
         , or <see
          cref="T:System.Web.UI.WebControls.WebParts.ConnectionsZone" />
+
+        
 
         
 
@@ -72,8 +84,12 @@
 
         
 
+        
+
          control (<see
          cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+        
 
         
 
@@ -86,6 +102,8 @@
 
         
 
+        
+
         , <see
          cref="T:System.Web.UI.WebControls.WebParts.EditorPart" />
 
@@ -93,8 +111,12 @@
 
         
 
+        
+
         , or <see
          cref="T:System.Web.UI.WebControls.WebParts.CatalogPart" />
+
+        
 
         
 
@@ -127,6 +149,8 @@
 
               
 
+              
+
                class. Hides the UI for a zone and typically returns the page to its normal browse mode view.</para
             >
           </description>
@@ -139,6 +163,8 @@
             <para
               >Used with zones that inherit from the <see
                cref="T:System.Web.UI.WebControls.WebParts.EditorZoneBase" />
+
+              
 
               
 
@@ -161,6 +187,8 @@
 
               
 
+              
+
                class. Has the combined effect of the apply and close verbs; it applies changes and hides the zone's UI.</para
             >
           </description>
@@ -173,6 +201,8 @@
             <para
               >Used with zones that inherit from the <see
                cref="T:System.Web.UI.WebControls.WebParts.ToolZone" />
+
+              
 
               
 
@@ -195,8 +225,12 @@
 
               
 
+              
+
                class. Adds a control that a user has selected from a catalog of controls to a specified <see
                cref="T:System.Web.UI.WebControls.WebParts.WebPartZone" />
+
+              
 
               
 
@@ -219,6 +253,8 @@
 
               
 
+              
+
                class. Opens a view to enable users to configure existing connections.</para
             >
           </description>
@@ -231,6 +267,8 @@
             <para
               >Used with zones that inherit from the <see
                cref="T:System.Web.UI.WebControls.WebParts.ConnectionsZone" />
+
+              
 
               
 
@@ -249,6 +287,8 @@
 
         
 
+        
+
          controls, their actions apply to the control itself (or to its child controls). The part control acts as a container for the verb and manages the rendering of the verb. Most standard verbs associated with part controls appear either directly in the title bar or in a drop-down verbs menu within the title bar. Whether these verbs appear directly in the header or in a verbs menu is determined by the <see
          cref="P:System.Web.UI.WebControls.WebParts.WebPartZoneBase.WebPartVerbRenderMode" />
 
@@ -256,8 +296,12 @@
 
         
 
+        
+
          property; by default, the verbs appear in a verbs menu. The following table lists common verbs associated with the various <see
          cref="T:System.Web.UI.WebControls.WebParts.Part" />
+
+        
 
         
 
@@ -289,6 +333,8 @@
 
               
 
+              
+
                zone. Reduces the control to a minimal representation, hiding everything in its UI except the restore verb.</para
             >
           </description>
@@ -301,6 +347,8 @@
             <para
               >Appears in the verbs menu of each server control contained in a <see
                cref="T:System.Web.UI.WebControls.WebParts.WebPartZoneBase" />
+
+              
 
               
 
@@ -323,6 +371,8 @@
 
               
 
+              
+
                zone. Closes a control and adds it to the page catalog, which means the control is removed from the page but, if there is a properly designed catalog, users can reopen the closed control and return it to the page.</para
             >
           </description>
@@ -335,6 +385,8 @@
             <para
               >Appears in the verbs menu of a control contained in a <see
                cref="T:System.Web.UI.WebControls.WebParts.WebPartZoneBase" />
+
+              
 
               
 
@@ -357,6 +409,8 @@
 
               
 
+              
+
                zone, if the control was added to the page programmatically (rather than being declared in persistence format). Permanently deletes the control instance and any associated personalization data so that, unlike a closed control, the deleted instance can never be restored to the page.</para
             >
           </description>
@@ -369,6 +423,8 @@
             <para
               >Appears in the verbs menu of a control contained in a <see
                cref="T:System.Web.UI.WebControls.WebParts.WebPartZoneBase" />
+
+              
 
               
 
@@ -391,8 +447,12 @@
 
               
 
+              
+
                zone, if the control and application are enabled for export. Opens a dialog box that enables users to export a description file that contains the serialized state of the control. For details, see the <see
                cref="P:System.Web.UI.WebControls.WebParts.WebPart.ExportMode" />
+
+              
 
               
 
@@ -415,6 +475,8 @@
 
               
 
+              
+
                zone, if the control is designed to provide a Help file. Launches a page that provides help for the control.</para
             >
           </description>
@@ -428,8 +490,12 @@
 
         
 
+        
+
          controls. When you create these verbs, by default they will appear on the verbs menu along with the standard verbs. The basic approach for creating such verbs is to inherit from the <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPartVerb" />
+
+        
 
         
 
@@ -442,8 +508,12 @@
 
         
 
+        
+
          base class and add the custom <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPartVerb" />
+
+        
 
         
 
@@ -456,6 +526,8 @@
 
         
 
+        
+
          collection. This collection can then be added to the <see
          cref="P:System.Web.UI.WebControls.WebParts.WebPart.Verbs" />
 
@@ -463,8 +535,12 @@
 
         
 
+        
+
          collection of the control, which will cause the custom verbs to appear automatically on the control's verbs menu at run time. As with the standard verbs, you can access the custom verbs programmatically on a <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+        
 
         
 
@@ -480,8 +556,12 @@
 
         
 
+        
+
          class, such as custom controls, user controls, or ASP.NET controls. These server controls, if added to a <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPartZoneBase" />
+
+        
 
         
 
@@ -494,8 +574,12 @@
 
         
 
+        
+
          object at run time, which enables them to function as run-time <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+        
 
         
 
@@ -508,6 +592,8 @@
 
         
 
+        
+
          class, the server control must implement the <see
          cref="T:System.Web.UI.WebControls.WebParts.IWebActionable" />
 
@@ -515,8 +601,12 @@
 
         
 
+        
+
          interface and override its <see
          cref="P:System.Web.UI.WebControls.WebParts.IWebActionable.Verbs" />
+
+        
 
         
 
@@ -533,8 +623,12 @@
 
         
 
+        
+
          class does not expose any unique methods; its exposed methods are all overrides of base methods. It does however contain a number of properties for developers to be aware of. The <see
          cref="P:System.Web.UI.WebControls.WebParts.WebPartVerb.Checked" />
+
+        
 
         
 
@@ -547,8 +641,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.WebControls.WebParts.WebPartVerb.ServerClickHandler" />
+
+        
 
         
 
@@ -561,8 +659,12 @@
 
         
 
+        
+
          property contains text that describes the purpose of a verb in a ToolTip when users position a mouse pointer over the verb in the UI. The <see
          cref="P:System.Web.UI.WebControls.WebParts.WebPartVerb.Enabled" />
+
+        
 
         
 
@@ -575,8 +677,12 @@
 
         
 
+        
+
          property provides a unique ID for the verb object. The <see
          cref="P:System.Web.UI.WebControls.WebParts.WebPartVerb.ImageUrl" />
+
+        
 
         
 
@@ -589,8 +695,12 @@
 
         
 
+        
+
          property contains the label text that appears directly on the verb in the UI. The overridden <see
          cref="P:System.Web.UI.WebControls.WebParts.WebPartVerb.Visible" />
+
+        
 
         
 
@@ -606,8 +716,12 @@
 
         
 
+        
+
          method, which is an event handler that can be overridden for custom handling of the verb creation process, and the <see
          cref="E:System.Web.UI.WebControls.WebParts.WebPartZoneBase.CreateVerbs" />
+
+        
 
         
 
@@ -649,6 +763,8 @@
 
             
 
+            
+
              class and associates a client-side click event handler with the instance.</para
           >
         </summary>
@@ -659,8 +775,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -702,6 +822,8 @@
 
             
 
+            
+
              class and associates a server-side click event handler with the instance.</para
           >
         </summary>
@@ -712,8 +834,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -728,8 +854,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.WebParts.WebPartEventHandler" />
+
+          
 
           
 
@@ -772,6 +902,8 @@
 
             
 
+            
+
              class and associates both client and server-side click event handlers with the instance.</para
           >
         </summary>
@@ -782,8 +914,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -798,8 +934,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.WebParts.WebPartEventHandler" />
+
+          
 
           
 
@@ -814,8 +954,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -856,8 +1000,12 @@
 
             
 
+            
+
              controls in a zone. If a user clicks the verb, this property value could be set to true, which would cause a selected check box to appear next to the <ui
             >Increase Text Size</ui>
+
+            
 
             
 
@@ -873,10 +1021,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -920,6 +1072,8 @@
           <para
             >Gets the string containing the method name of the client-side event handler defined in the <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPartVerb" />
+
+            
 
             
 
@@ -990,6 +1144,8 @@
 
             
 
+            
+
              controls in a zone for any reason, the developer can set the <see
              cref="P:System.Web.UI.WebControls.WebParts.WebPartVerb.Enabled" />
 
@@ -997,8 +1153,12 @@
 
             
 
+            
+
              property value on the <see
              cref="P:System.Web.UI.WebControls.WebParts.WebPartZoneBase.CloseVerb" />
+
+            
 
             
 
@@ -1014,10 +1174,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -1054,8 +1218,12 @@
 
             
 
+            
+
              constructor for the <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPartVerb" />
+
+            
 
             
 
@@ -1098,6 +1266,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.WebControls.WebParts.WebPartVerb.ImageUrl" />
+
+            
 
             
 
@@ -1160,6 +1330,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -1170,8 +1342,12 @@
 
             
 
+            
+
              from a previous page request, and if so, restores it. Included in the process of restoring view state is the verb's visibility, which is determined by the value of the <see
              cref="P:System.Web.UI.WebControls.WebParts.WebPartVerb.Visible" />
+
+            
 
             
 
@@ -1190,6 +1366,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -1200,8 +1378,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1237,6 +1419,8 @@
 
             
 
+            
+
              object's view-state changes that occurred since the page was last posted back to the server.</para
           >
         </summary>
@@ -1245,6 +1429,8 @@
           <para
             >An <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -1315,8 +1501,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 
@@ -1329,8 +1519,12 @@
 
             
 
+            
+
              property on the <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPartVerb" />
+
+            
 
             
 
@@ -1349,6 +1543,8 @@
 
             
 
+            
+
              property by calling the <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPartVerb" />
 
@@ -1356,8 +1552,12 @@
 
             
 
+            
+
              class's own <see
              cref="P:System.Web.UI.WebControls.WebParts.WebPartVerb.IsTrackingViewState" />
+
+            
 
             
 
@@ -1394,8 +1594,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 
@@ -1408,8 +1612,12 @@
 
             
 
+            
+
              method on the <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPartVerb" />
+
+            
 
             
 
@@ -1428,8 +1636,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 
@@ -1442,8 +1654,12 @@
 
             
 
+            
+
              class's own <see
              cref="M:System.Web.UI.WebControls.WebParts.WebPartVerb.LoadViewState(System.Object)" />
+
+            
 
             
 
@@ -1459,8 +1675,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1491,8 +1711,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 
@@ -1505,8 +1729,12 @@
 
             
 
+            
+
              method on the <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPartVerb" />
+
+            
 
             
 
@@ -1525,6 +1753,8 @@
 
             
 
+            
+
              method by calling the <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPartVerb" />
 
@@ -1532,8 +1762,12 @@
 
             
 
+            
+
              class's own <see
              cref="M:System.Web.UI.WebControls.WebParts.WebPartVerb.SaveViewState" />
+
+            
 
             
 
@@ -1547,6 +1781,8 @@
           <para
             >Returns an <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -1578,8 +1814,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 
@@ -1592,8 +1832,12 @@
 
             
 
+            
+
              method on the <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPartVerb" />
+
+            
 
             
 
@@ -1612,6 +1856,8 @@
 
             
 
+            
+
              method by calling the <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPartVerb" />
 
@@ -1619,8 +1865,12 @@
 
             
 
+            
+
              class's own <see
              cref="M:System.Web.UI.WebControls.WebParts.WebPartVerb.TrackViewState" />
+
+            
 
             
 
@@ -1658,11 +1908,15 @@
 
             
 
+            
+
              object; it is what represents the verb to users in the UI. </para
           >
           <para
             >If developers (optionally) assign a value to the <see
              cref="P:System.Web.UI.WebControls.WebParts.WebPartVerb.ImageUrl" />
+
+            
 
             
 
@@ -1699,6 +1953,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1707,6 +1963,8 @@
           <para
             >Tracks view-state changes to a verb so the changes can be stored in the verb's <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 
@@ -1734,6 +1992,8 @@
           <para
             >Because the <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPartVerb" />
+
+            
 
             
 
@@ -1782,6 +2042,8 @@
 
             
 
+            
+
              property is set to false is hidden from users, but is still rendered on a page, can still be accessed programmatically, and still fully participates in page and control life cycle events.</para
           >
           <para
@@ -1792,10 +2054,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 

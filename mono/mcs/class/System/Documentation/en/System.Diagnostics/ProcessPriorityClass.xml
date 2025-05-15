@@ -29,6 +29,8 @@
 
         
 
+        
+
          to temporarily boost the priority level of threads that have been taken out of the wait state. The priority is reset when the process returns to the wait state.</para
       >
     </remarks>
@@ -66,8 +68,12 @@
 
             
 
+            
+
              but below <see
              cref="F:System.Diagnostics.ProcessPriorityClass.High" />
+
+            
 
             
 
@@ -106,8 +112,12 @@
 
             
 
+            
+
              but below <see
              cref="F:System.Diagnostics.ProcessPriorityClass.Normal" />
+
+            
 
             
 
@@ -141,6 +151,8 @@
             <para
               >Use extreme care when specifying <see
                cref="F:System.Diagnostics.ProcessPriorityClass.High" />
+
+              
 
               
 
@@ -237,8 +249,12 @@
 
               
 
+              
+
                priority preempt the threads of all other processes, including operating system processes performing important tasks. Thus, a <see
                cref="F:System.Diagnostics.ProcessPriorityClass.RealTime" />
+
+              
 
               
 

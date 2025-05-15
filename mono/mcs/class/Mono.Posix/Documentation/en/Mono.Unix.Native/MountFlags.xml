@@ -30,6 +30,8 @@
 
       
 
+      
+
        
     values.</summary
     >
@@ -214,9 +216,13 @@
 
           
 
+          
+
            and
         <see
            cref="F:Mono.Unix.Native.FilePermissions.S_ISGID" />
+
+          
 
           
 

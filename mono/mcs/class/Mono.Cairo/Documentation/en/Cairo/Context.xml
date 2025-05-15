@@ -134,11 +134,15 @@ public class CairoGraphic : DrawingArea
 
           
 
+          
+
            on which this Context object will render everything.</param
         >
         <summary
           >Creates a <see
            cref="T:Cairo.Context" />
+
+          
 
           
 
@@ -170,9 +174,13 @@ Cairo.Context g = new Cairo.Context (s);
 
           
 
+          
+
 
 Note that the <paramref
            name="surface" />
+
+          
 
           
 
@@ -185,8 +193,12 @@ Note that the <paramref
 
           
 
+          
+
            or <see
            cref="T:Cairo.ImageSurface" />
+
+          
 
           
 
@@ -216,6 +228,8 @@ Note that the <paramref
 
           
 
+          
+
            class.</summary
         >
         <remarks />
@@ -237,6 +251,8 @@ Note that the <paramref
         <remarks
           >This value is a hint, and a particular backend may or may not support a particular value. At the current time, no backend supports <see
            cref="F:Cairo.Antialias.Subpixel" />
+
+          
 
           
 
@@ -273,6 +289,8 @@ Note that the <paramref
 
           
 
+          
+
            onto the current path.</summary
         >
         <remarks
@@ -283,8 +301,12 @@ Note that the <paramref
 
           
 
+          
+
            or <see
            cref="P:Cairo.Context.CopyPathFlat" />
+
+          
 
           
 
@@ -324,8 +346,12 @@ Note that the <paramref
 
           
 
+          
+
            to <paramref
            name="angle2" />
+
+          
 
           
 
@@ -344,6 +370,8 @@ Note that the <paramref
 	  * (M_PI / 180.) )  This function gives the arc in the
 	  direction of increasing angle; see  <see
              cref="M:Cairo.Context.ArcNegative" />
+
+            
 
             
 
@@ -413,8 +441,12 @@ gr.Stroke ();
 
           
 
+          
+
            to <paramref
            name="angle2" />
+
+          
 
           
 
@@ -427,6 +459,8 @@ gr.Stroke ();
           <para
             >The function behaves identically to <see
              cref="M:Cairo.Context.Arc" />
+
+            
 
             
 
@@ -477,8 +511,12 @@ gr.Stroke ();
 
           
 
+          
+
            and according to the current fill rule (see <see
            cref="M:Cairo.Context.FillRule" />
+
+          
 
           
 
@@ -508,8 +546,12 @@ gr.Stroke ();
 
             
 
+            
+
              / <see
              cref="M:Cairo.Context.Restore" />
+
+            
 
             
 
@@ -518,6 +560,8 @@ gr.Stroke ();
              pair. The only other
 	    means of increasing the size of the clip region is <see
              cref="M:Cairo.Context.ClipReset" />
+
+            
 
             
 
@@ -549,8 +593,12 @@ gr.Stroke ();
 
           
 
+          
+
            and according to the current fill rule (see <see
            cref="P:Cairo.Context.FillRule()" />
+
+          
 
           
 
@@ -683,6 +731,8 @@ gr.ClosePath ();
 
           
 
+          
+
            if you want to get an empty page
 	  after the emission.
       </remarks
@@ -713,12 +763,16 @@ gr.ClosePath ();
 
           
 
+          
+
           .</summary
         >
         <returns>Copy of current path</returns>
         <remarks
           >This function creates a copy of the current path and returns it to the user as <see
            cref="T:Cairo.Path" />
+
+          
 
           
 
@@ -748,12 +802,16 @@ gr.ClosePath ();
 
           
 
+          
+
           .</summary
         >
         <returns>Flattened copy of current path.</returns>
         <remarks
           >This function is like <see
            cref="P:Cairo.Context.CopyPath" />
+
+          
 
           
 
@@ -766,8 +824,12 @@ gr.ClosePath ();
 
           
 
+          
+
            which will instead be replaced by a series of <see
            cref="P:Cairo.Context.LineTo" />
+
+          
 
           
 
@@ -901,6 +963,8 @@ gr.ClosePath ();
 
           
 
+          
+
            except that the translation components of the inverse CTM will be ignored when transforming (dx,dy).</remarks
         >
         <since version="Mono-1.2.5" />
@@ -951,8 +1015,12 @@ gr.ClosePath ();
           
 
           
+
+          
 	  and <see
            cref="M:Cairo.Context.FillPreserve" />
+
+          
 
           
 
@@ -983,6 +1051,8 @@ gr.ClosePath ();
 
           
 
+          
+
           .</summary
         >
         <returns>The rectangle describing the area that would be affected.</returns>
@@ -1004,6 +1074,8 @@ gr.ClosePath ();
         <summary
           >A drawing operator that fills the current path according to the current fill rule. Unlike <see
            cref="M:Cairo.Context.Fill" />
+
+          
 
           
 
@@ -1041,8 +1113,12 @@ gr.ClosePath ();
 
           
 
+          
+
            and <see
            cref="M:Cairo.Context.Clip()" />
+
+          
 
           
 
@@ -1051,6 +1127,8 @@ gr.ClosePath ();
           . See
 	  <see
            cref="T:Cairo.FillRule" />
+
+          
 
           
 
@@ -1153,6 +1231,8 @@ gr.ClosePath ();
 
           
 
+          
+
           ), but a more complex font matrix can be used to shear the font or stretch it unequally along the two axes</remarks
         >
       </Docs>
@@ -1192,6 +1272,8 @@ gr.ClosePath ();
         <remarks
           >If text is drawn without a call to <see
            cref="S:Cairo.Context.FontSetSize" />
+
+          
 
           
 
@@ -1252,6 +1334,8 @@ gr.ClosePath ();
         <returns
           >The extents of an array of glyphs as <see
            cref="P:Cairo.Context.TextExtends" />
+
+          
 
           
 
@@ -1331,6 +1415,8 @@ gr.ClosePath ();
 
           
 
+          
+
           .</remarks
         >
         <since version="cairo 1.2" />
@@ -1394,6 +1480,8 @@ gr.ClosePath ();
 
           
 
+          
+
            operation given the current path and filling parameters.</summary
         >
         <returns>True if the point is inside, or false if outside.</returns>
@@ -1420,6 +1508,8 @@ gr.ClosePath ();
         <summary
           >Tests whether the given point is inside the area that would be affected by a <see
            cref="P:Cairo.Context.Stroke" />
+
+          
 
           
 
@@ -1505,6 +1595,8 @@ gr.ClosePath ();
 
           
 
+          
+
           .</value
         >
         <remarks></remarks>
@@ -1525,6 +1617,8 @@ gr.ClosePath ();
         <value
           >See <see
            cref="T:Cairo.LineJoin" />
+
+          
 
           
 
@@ -1614,6 +1708,8 @@ gr.ClosePath ();
 
           
 
+          
+
            as a mask.</summary
         >
         <remarks>Opaque areas of mask are painted with the source, transparent areas are not painted.</remarks>
@@ -1650,6 +1746,8 @@ gr.ClosePath ();
         <summary
           >A drawing operator that paints the current source using the alpha channel of <paramref
            name="surface" />
+
+          
 
           
 
@@ -1770,9 +1868,13 @@ In many cases, this call is not needed since new sub-paths are frequently starte
 
           
 
+          
+
           .
 A call to <see
            cref="P:Cairo.Context.NewSubPath" />
+
+          
 
           
 
@@ -1785,8 +1887,12 @@ A call to <see
 
           
 
+          
+
            calls. This makes things easier as it is no longer necessary to manually compute the arc's initial coordinates for a call to <see
            cref="P:Cairo.Context.MoveTo" />
+
+          
 
           
 
@@ -1852,11 +1958,15 @@ A call to <see
 
           
 
+          
+
           .</summary
         >
         <remarks
           >The effect is similar to <see
            cref="M:Cairo.Context.Paint()" />
+
+          
 
           
 
@@ -1885,11 +1995,15 @@ A call to <see
 
           
 
+          
+
           .</summary
         >
         <value
           >See <see
            cref="P:Cairo.Context.Source" />
+
+          
 
           
 
@@ -1920,12 +2034,16 @@ A call to <see
 
           
 
+          
+
            and returns a new pattern containing the results of all drawing operations performed to the group.</summary
         >
         <returns>A newly created (surface) pattern containing the results of all drawing operations performed to the group. The caller owns the returned object and should call cairo_pattern_destroy() when finished with it.</returns>
         <remarks
           >The <see
            cref="P:Cairo.Context.PopGroup" />
+
+          
 
           
 
@@ -1938,8 +2056,12 @@ A call to <see
 
           
 
+          
+
           , (balancing a call to <see
            cref="P:Cairo.Context.Save" />
+
+          
 
           
 
@@ -1970,11 +2092,15 @@ A call to <see
 
           
 
+          
+
            and installs the resulting pattern as the source pattern in the given cairo context.</summary
         >
         <remarks
           >The <see
            cref="P:Cairo.Context.PopGroup" />
+
+          
 
           
 
@@ -1987,8 +2113,12 @@ A call to <see
 
           
 
+          
+
           , (balancing a call to <see
            cref="P:Cairo.Context.Save" />
+
+          
 
           
 
@@ -2020,8 +2150,12 @@ A call to <see
 
           
 
+          
+
            or <see
            cref="P:Cairo.Context.PopGroupToSource" />
+
+          
 
           
 
@@ -2036,8 +2170,12 @@ Groups can be nested arbitrarily deep by making balanced calls to <see
 
           
 
+          
+
           /<see
            cref="P:Cairo.Context.PopGroup" />
+
+          
 
           
 
@@ -2051,8 +2189,12 @@ The <see
 
           
 
+          
+
            function calls <see
            cref="P:Cairo.Context.Save" />
+
+          
 
           
 
@@ -2065,8 +2207,12 @@ The <see
 
           
 
+          
+
            functions call <see
            cref="P:Cairo.Context.Restore" />
+
+          
 
           
 
@@ -2099,12 +2245,16 @@ The <see
 
           
 
+          
+
            indicating the type of group that will be created</param
         >
         <summary>Temporarily redirects drawing to an intermediate surface known as a group. The group will have a content type of content.</summary>
         <remarks
           >Temporarily redirects drawing to an intermediate surface known as a group. The redirection lasts until the group is completed by a call to <see
            cref="P:Cairo.Context.PopGroup" />
+
+          
 
           
 
@@ -2117,9 +2267,13 @@ The <see
 
           
 
+          
+
           . These calls provide the result of any drawing to the group as a pattern, (either as an explicit object, or set as the source pattern).
 The group will have a content type of content. The ability to control this content type is the only distinction between this function and  <see
            cref="P:Cairo.Context.PushGroup" />
+
+          
 
           
 
@@ -2169,16 +2323,14 @@ The group will have a content type of content. The ability to control this conte
       </Parameters>
       <Docs>
         <param name="p">point at which to draw</param>
-        <param name="width"
->rectangle's width</param
-        >
-        <param name="height"
->rectangle's height</param
-        >
+        <param name="width">rectangle's width</param>
+        <param name="height">rectangle's height</param>
         <summary
           >Draw a rectangle at <see
            cref="T:Cairo.PointD" />
           <paramref name=" p" />
+
+          
 
           
 
@@ -2191,8 +2343,12 @@ The group will have a content type of content. The ability to control this conte
 
           
 
+          
+
            and <paramref
            name="height" />
+
+          
 
           
 
@@ -2277,6 +2433,8 @@ The group will have a content type of content. The ability to control this conte
 
           
 
+          
+
           . </summary
         >
         <remarks>
@@ -2321,6 +2479,8 @@ The group will have a content type of content. The ability to control this conte
 
           
 
+          
+
           . </summary
         >
         <remarks>
@@ -2352,6 +2512,8 @@ The group will have a content type of content. The ability to control this conte
 
           
 
+          
+
           .</summary
         >
         <remarks>Adds a line to the path from the current point to a point that is offset from the current point by (d.Dx, d.Dy) in user space. After this call the current point will be offset by (d.Dx, d.Dy).  Given a current point of (x, y), Cairo.Context.RelLineTo (d) is logically equivalent to Cairo.Context.LineTo (x + d.Dx, y + d.Dy).</remarks>
@@ -2377,6 +2539,8 @@ The group will have a content type of content. The ability to control this conte
         <summary
           >Relative-coordinate version of <see
            cref="M:Cairo.Context.LineTo()" />
+
+          
 
           
 
@@ -2465,6 +2629,8 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
 
           
 
+          
+
            and removes that state from the stack of saved states.
 </summary
         >
@@ -2492,6 +2658,8 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
         <summary
           >Modifies the current transformation matrix (CTM) by rotating the user-space axes by <paramref
            name="angle" />
+
+          
 
           
 
@@ -2529,8 +2697,12 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
 
           
 
+          
+
            is called, @cr will be restored to the saved state. Multiple calls to <see
            cref="M:Cairo.Context.Save" />
+
+          
 
           
 
@@ -2543,6 +2715,8 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
 
           
 
+          
+
            can be nested; each call to <see
            cref="M:Cairo.Context.Restore" />
 
@@ -2550,8 +2724,12 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
 
           
 
+          
+
            restores the state from the matching paired <see
            cref="M:Cairo.Context.Save" />
+
+          
 
           
 
@@ -2586,8 +2764,12 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
 
           
 
+          
+
            and <paramref
            name="sy" />
+
+          
 
           
 
@@ -2672,6 +2854,8 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
 
           
 
+          
+
           .</summary
         >
         <remarks>A dash pattern is specified by dashes, an array of positive values. Each value provides the user-space length of alternate "on" and "off" portions of the stroke. The offset specifies an offset into the pattern at which the stroke begins.</remarks>
@@ -2700,8 +2884,12 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
 
           
 
+          
+
           , replacing any font matrix previously set with <see
            cref="M:Cairo.Context.SetFontSize()" />
+
+          
 
           
 
@@ -2714,11 +2902,15 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
 
           
 
+          
+
           .</summary
         >
         <remarks
           >This results in a font size of <paramref
            name="scale" />
+
+          
 
           
 
@@ -2746,6 +2938,8 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
         <summary
           >This is a convenience function for creating a pattern from surface and setting it as the source in cr with <see
            cref="P:Cairo.Context.GetSource" />
+
+          
 
           
 
@@ -2787,6 +2981,8 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
 
           
 
+          
+
           .</summary
         >
         <remarks>The x and y parameters give the user-space coordinate at which the surface origin should appear. (The surface origin is its upper-left corner before any transformation has been applied.) The x and y patterns are negated and then set as translation values in the pattern matrix.</remarks>
@@ -2811,9 +3007,7 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
         <Parameter Name="b" Type="System.Double" />
       </Parameters>
       <Docs>
-        <param name="r"
->red component of color</param
-        >
+        <param name="r">red component of color</param>
         <param name="g">green component of color</param>
         <param name="b">blue component of color</param>
         <summary>Sets the source pattern to an opaque color.</summary>
@@ -2840,9 +3034,7 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
         <Parameter Name="a" Type="System.Double" />
       </Parameters>
       <Docs>
-        <param name="r"
->red component of color</param
-        >
+        <param name="r">red component of color</param>
         <param name="g">green component of color</param>
         <param name="b">blue component of color</param>
         <param name="a">alpha component of color</param>
@@ -2947,6 +3139,8 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
 
           
 
+          
+
            if you do not want to clear the page.</remarks
         >
       </Docs>
@@ -2978,6 +3172,8 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
 
             
 
+            
+
              for the "real" text display API in cairo.</para
           >
         </remarks>
@@ -3002,11 +3198,15 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
 
           
 
+          
+
           .</summary
         >
         <value
           >A <see
            cref="T:Cairo.Pattern" />
+
+          
 
           
 
@@ -3057,9 +3257,13 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
 
           
 
+          
+
           ,
 	  <see
            cref="P:Cairo.Context.LineJoin" />
+
+          
 
           
 
@@ -3072,6 +3276,8 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
 
           
 
+          
+
           , <see
            cref="M:Cairo.Context.SetDash" />
 
@@ -3079,8 +3285,12 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
 
           
 
+          
+
           , and <see
            cref="M:Cairo.Context.StrokePreserve" />
+
+          
 
           
 
@@ -3112,6 +3322,8 @@ Note that code meant to be reusable should not call Cairo.Context.ResetClip() as
 
           
 
+          
+
            using the current stroke parameters.</summary
         >
         <returns>The rectangle describing the area that would be affected.</returns>
@@ -3135,6 +3347,8 @@ into account.</remarks>
         <summary
           >A drawing operator that strokes the current path according to the current line width, line join, line cap, and dash settings. Unlike <see
            cref="M:Cairo.Context.Stroke" />
+
+          
 
           
 
@@ -3181,6 +3395,8 @@ into account.</remarks>
 
           
 
+          
+
           .</summary
         >
         <value>the target surface.</value>
@@ -3213,8 +3429,12 @@ into account.</remarks>
 
             
 
+            
+
             ). Additionally, the <see
              cref="F:Cairo.TextExtents.XAdvance" />
+
+            
 
             
 
@@ -3227,8 +3447,12 @@ into account.</remarks>
 
             
 
+            
+
              values indicate the amount by which the current point would be advanced by <see
              cref="M:Cairo.Context.ShowText()" />
+
+            
 
             
 
@@ -3244,8 +3468,12 @@ into account.</remarks>
 
             
 
+            
+
              and <see
              cref="F:Cairo.TextExtents.YAdvance" />
+
+            
 
             
 
@@ -3275,6 +3503,8 @@ into account.</remarks>
         <remarks
           >Adds closed paths for text to the current path. The generated path if filled, achieves an effect similar to that of <see
            cref="P:Cairo.Context.ShowText" />
+
+          
 
           
 
@@ -3470,6 +3700,8 @@ image.Destroy ();
         <remarks
           > This function is similar to <see
            cref="P:Cairo.Context.UserToDevice" />
+
+          
 
           
 

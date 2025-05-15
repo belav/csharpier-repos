@@ -35,6 +35,8 @@
 
       
 
+      
+
       .</summary
     >
     <remarks />
@@ -133,6 +135,8 @@
         <remarks
           >File descriptor to poll.  If fd is equal to -1 then <see
            cref="F:Mono.Unix.Native.Pollfd.revents" />
+
+          
 
           
 

@@ -31,8 +31,12 @@
 
         
 
+        
+
          is set to <see
          cref="F:System.Web.Configuration.AuthenticationMode.Windows" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          sets the <see
          cref="P:System.Web.HttpContext.User" />
+
+        
 
         
 
@@ -59,8 +67,12 @@
 
         
 
+        
+
          to an <see
          cref="T:System.Security.Principal.IPrincipal" />
+
+        
 
         
 
@@ -73,8 +85,12 @@
 
         
 
+        
+
          uses the identity returned by the <see
          cref="M:System.Security.Principal.WindowsIdentity.GetAnonymous" />
+
+        
 
         
 
@@ -90,8 +106,12 @@
 
         
 
+        
+
          exposes an <see
          cref="E:System.Web.Security.WindowsAuthenticationModule.Authenticate" />
+
+        
 
         
 
@@ -104,8 +124,12 @@
 
         
 
+        
+
          object for the <see
          cref="P:System.Web.HttpContext.User" />
+
+        
 
         
 
@@ -118,6 +142,8 @@
 
         
 
+        
+
         . The <see
          cref="E:System.Web.Security.WindowsAuthenticationModule.Authenticate" />
 
@@ -125,8 +151,12 @@
 
         
 
+        
+
          event is accessed by specifying a subroutine named <system
         >WindowsAuthentication_OnAuthenticate</system>
+
+        
 
         
 
@@ -143,8 +173,12 @@
 
           
 
+          
+
            class with the <see
            cref="T:System.Web.Security.FormsAuthenticationModule" />
+
+          
 
           
 
@@ -156,6 +190,8 @@
               >Moving an ASP.NET Application from IIS 6.0 to IIS 7.0</a
             >
           </format>
+
+          
 
           
 
@@ -188,6 +224,8 @@
 
             
 
+            
+
              class. After calling the constructor, it calls the <see
              cref="M:System.Web.Security.WindowsAuthenticationModule.Init(System.Web.HttpApplication)" />
 
@@ -195,8 +233,12 @@
 
             
 
+            
+
              method to initialize the new <see
              cref="T:System.Web.Security.WindowsAuthenticationModule" />
+
+            
 
             
 
@@ -210,6 +252,8 @@
           <para
             >Creates an instance of the <see
              cref="T:System.Web.Security.WindowsAuthenticationModule" />
+
+            
 
             
 
@@ -245,8 +289,12 @@
 
             
 
+            
+
              event is raised during the <see
              cref="E:System.Web.HttpApplication.AuthenticateRequest" />
+
+            
 
             
 
@@ -262,6 +310,8 @@
 
             
 
+            
+
              event of the <see
              cref="T:System.Web.Security.WindowsAuthenticationModule" />
 
@@ -269,8 +319,12 @@
 
             
 
+            
+
              class by specifying a subroutine named <system
             >WindowsAuthentication_OnAuthenticate</system>
+
+            
 
             
 
@@ -286,8 +340,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.Security.WindowsAuthenticationEventArgs" />
+
+            
 
             
 
@@ -300,8 +358,12 @@
 
             
 
+            
+
              event to set the <see
              cref="P:System.Web.HttpContext.User" />
+
+            
 
             
 
@@ -314,8 +376,12 @@
 
             
 
+            
+
              to a custom <see
              cref="T:System.Security.Principal.IPrincipal" />
+
+            
 
             
 
@@ -328,8 +394,12 @@
 
             
 
+            
+
              property during the <system
             >WindowsAuthentication_OnAuthenticate</system>
+
+            
 
             
 
@@ -342,8 +412,12 @@
 
             
 
+            
+
              property is set to the identity returned by the <see
              cref="M:System.Security.Principal.WindowsIdentity.GetAnonymous" />
+
+            
 
             
 
@@ -359,8 +433,12 @@
 
             
 
+            
+
              event is raised only when the authentication <see
              cref="P:System.Web.Configuration.AuthenticationSection.Mode" />
+
+            
 
             
 
@@ -373,8 +451,12 @@
 
             
 
+            
+
              and the <see
              cref="T:System.Web.Security.WindowsAuthenticationModule" />
+
+            
 
             
 
@@ -391,8 +473,12 @@
 
               
 
+              
+
                event of the <see
                cref="T:System.Web.Security.WindowsAuthenticationModule" />
+
+              
 
               
 
@@ -405,8 +491,12 @@
 
               
 
+              
+
                and the IIS AnonymousAuthenticationModule modules are enabled. In this scenario, to receive authentication notification, subscribe to the <see
                cref="E:System.Web.HttpApplication.AuthenticateRequest" />
+
+              
 
               
 
@@ -419,12 +509,16 @@
 
               
 
+              
+
                instance. For more information about compatibility issues in Integrated modes, see <format
                type="text/html">
                 <a href="76f9cc78-f978-4837-b1c8-51d642ec4847"
                   >Moving an ASP.NET Application from IIS 6.0 to IIS 7.0</a
                 >
               </format>
+
+              
 
               
 
@@ -466,6 +560,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -496,6 +592,8 @@
 
             
 
+            
+
              method ensures that the <see
              cref="T:System.Web.Security.WindowsAuthenticationModule" />
 
@@ -503,8 +601,12 @@
 
             
 
+            
+
              is included in the processing of the <see
              cref="E:System.Web.HttpApplication.AuthenticateRequest" />
+
+            
 
             
 
@@ -523,6 +625,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -533,8 +637,12 @@
 
           
 
+          
+
           The current <see
            cref="T:System.Web.HttpApplication" />
+
+          
 
           
 

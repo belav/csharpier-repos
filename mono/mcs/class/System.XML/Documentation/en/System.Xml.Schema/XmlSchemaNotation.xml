@@ -35,6 +35,8 @@
 
         
 
+        
+
         . An XML Schema notation declaration is a reconstruction of XML 1.0 NOTATION declarations. The purpose of notations is to describe the format of non-XML data within an XML document.</para
       >
     </summary>
@@ -61,6 +63,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Schema.XmlSchemaNotation" />
+
+            
 
             
 

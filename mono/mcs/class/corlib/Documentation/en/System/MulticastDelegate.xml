@@ -38,8 +38,12 @@
 
         
 
+        
+
          is a special class. Compilers and other tools can derive from this class, but you cannot derive from it explicitly. The same is true of the <see
          cref="T:System.Delegate" />
+
+        
 
         
 
@@ -50,6 +54,8 @@
       <para
         >In addition to the methods that delegate types inherit from <see
          cref="T:System.MulticastDelegate" />
+
+        
 
         
 
@@ -66,11 +72,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >A <see
          cref="T:System.MulticastDelegate" />
+
+        
 
         
 
@@ -116,8 +126,12 @@
 
             
 
+            
+
              method that specifies a method name and a target object. For example, the <see
              cref="M:System.Delegate.CreateDelegate(System.Type,System.Object,System.String)" />
+
+            
 
             
 
@@ -136,11 +150,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -153,10 +171,14 @@
 
           
 
+          
+
            is defined. </param
         >
         <param name="method">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -197,8 +219,12 @@
 
             
 
+            
+
              method that specifies a method name but does not specify a target object. For example, the <see
              cref="M:System.Delegate.CreateDelegate(System.Type,System.Type,System.String)" />
+
+            
 
             
 
@@ -217,11 +243,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -234,10 +264,14 @@
 
           
 
+          
+
            is defined. </param
         >
         <param name="method">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -280,8 +314,12 @@
 
             
 
+            
+
              with the specified <see
              cref="T:System.Delegate" />
+
+            
 
             
 
@@ -300,11 +338,15 @@
 
             
 
+            
+
              invocation list.</para
           >
         </returns>
         <param name="follow">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -352,6 +394,8 @@
 
           
 
+          
+
           The arguments to pass to the encapsulated method. </param
         >
       </Docs>
@@ -394,11 +438,15 @@
 
             
 
+            
+
              and this instance have the same invocation lists; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -503,11 +551,15 @@
 
             
 
+            
+
              necessary to serialize this instance.</para
           >
           <para
             >The <paramref
              name="context" />
+
+            
 
             
 
@@ -526,6 +578,8 @@
 
             
 
+            
+
              object with all the data needed to serialize this instance.</para
           >
         </summary>
@@ -536,10 +590,14 @@
 
           
 
+          
+
           An object that holds all the data needed to serialize or deserialize this instance. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -587,6 +645,8 @@
 
             
 
+            
+
              objects are equal.</para
           >
         </summary>
@@ -600,8 +660,12 @@
 
             
 
+            
+
              and <paramref
              name="d2" />
+
+            
 
             
 
@@ -617,10 +681,14 @@
 
           
 
+          
+
           The left operand. </param
         >
         <param name="d2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -668,6 +736,8 @@
 
             
 
+            
+
              objects are not equal.</para
           >
         </summary>
@@ -681,8 +751,12 @@
 
             
 
+            
+
              and <paramref
              name="d2" />
+
+            
 
             
 
@@ -698,10 +772,14 @@
 
           
 
+          
+
           The left operand. </param
         >
         <param name="d2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -744,6 +822,8 @@
 
             
 
+            
+
              that is equal to the specified delegate.</para
           >
         </summary>
@@ -757,8 +837,12 @@
 
             
 
+            
+
              is found in the invocation list for this instance, then a new <see
              cref="T:System.Delegate" />
+
+            
 
             
 
@@ -771,11 +855,15 @@
 
             
 
+            
+
              in its invocation list; otherwise, this instance with its original invocation list.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

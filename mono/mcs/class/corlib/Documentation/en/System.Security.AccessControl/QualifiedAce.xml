@@ -30,8 +30,12 @@
 
         
 
+        
+
          object, specifies whether the ACE allows access, denies access, causes system audits, or causes system alarms. The <see
          cref="T:System.Security.AccessControl.QualifiedAce" />
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Security.AccessControl.ObjectAce" />
+
+        
 
         
 
@@ -114,6 +122,8 @@
 
             
 
+            
+
              object. </para
           >
         </summary>
@@ -122,6 +132,8 @@
           <para
             >An array of byte values that represents the opaque callback data associated with this <see
              cref="T:System.Security.AccessControl.QualifiedAce" />
+
+            
 
             
 
@@ -157,6 +169,8 @@
 
             
 
+            
+
              object contains callback data.</para
           >
         </summary>
@@ -182,6 +196,8 @@
           <para
             >Gets the length of the opaque callback data associated with this <see
              cref="T:System.Security.AccessControl.QualifiedAce" />
+
+            
 
             
 
@@ -225,6 +241,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -235,8 +253,12 @@
 
           
 
+          
+
           An array of byte values that represents the opaque callback data for this <see
            cref="T:System.Security.AccessControl.QualifiedAce" />
+
+          
 
           
 

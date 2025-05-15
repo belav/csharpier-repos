@@ -28,6 +28,8 @@
 
         
 
+        
+
          event. </para
       >
     </summary>
@@ -57,6 +59,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -67,8 +71,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -83,8 +91,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStripSeparator" />
+
+          
 
           
 
@@ -99,8 +111,12 @@
 
           
 
+          
+
           A value indicating whether or not the <see
            cref="T:System.Windows.Forms.ToolStripSeparator" />
+
+          
 
           
 

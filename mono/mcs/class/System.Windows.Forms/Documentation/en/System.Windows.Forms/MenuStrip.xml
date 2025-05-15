@@ -28,8 +28,12 @@
 
         
 
+        
+
          is the top-level container that supersedes <see
          cref="T:System.Windows.Forms.MainMenu" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+        
 
         
 
@@ -56,8 +64,12 @@
 
         
 
+        
+
         , although they are derived from <see
          cref="T:System.Windows.Forms.ToolStripItem" />
+
+        
 
         
 
@@ -73,6 +85,8 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" />
 
@@ -80,8 +94,12 @@
 
         
 
+        
+
          in all orientations. They are available by default at design time for the <see
          cref="T:System.Windows.Forms.MenuStrip" />
+
+        
 
         
 
@@ -114,8 +132,12 @@
 
         
 
+        
+
          control represents the container for the menu structure of a form. You can add <see
          cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+        
 
         
 
@@ -128,8 +150,12 @@
 
         
 
+        
+
          that represent the individual menu commands in the menu structure. Each <see
          cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+        
 
         
 
@@ -145,6 +171,8 @@
 
         
 
+        
+
          replaces and adds functionality to the <see
          cref="T:System.Windows.Forms.MainMenu" />
 
@@ -152,8 +180,12 @@
 
         
 
+        
+
          control of previous versions, <see
          cref="T:System.Windows.Forms.MainMenu" />
+
+        
 
         
 
@@ -184,8 +216,12 @@
 
             
 
+            
+
              to which you can add <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+            
 
             
 
@@ -199,6 +235,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.MenuStrip" />
+
+            
 
             
 
@@ -239,6 +277,8 @@
 
             
 
+            
+
             . When you set the <see
              cref="P:System.Windows.Forms.MenuStrip.CanOverflow" />
 
@@ -246,8 +286,12 @@
 
             
 
+            
+
              property to true, you must also enable overflow for specific menu items by setting the <see
              cref="P:System.Windows.Forms.ToolStripMenuItem.Overflow" />
+
+            
 
             
 
@@ -261,6 +305,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Windows.Forms.MenuStrip" />
+
+            
 
             
 
@@ -298,8 +344,12 @@
 
             
 
+            
+
              method, it will be called when the <see
              cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+
+            
 
             
 
@@ -316,6 +366,8 @@
 
               
 
+              
+
                property, you must add a reference to the Accessibility assembly installed with the .NET Framework.</para
             >
           </block>
@@ -327,8 +379,12 @@
 
             
 
+            
+
             , see <see
              cref="M:System.Windows.Forms.Control.CreateAccessibilityInstance" />
+
+            
 
             
 
@@ -346,6 +402,8 @@
           <para
             >A new <see
              cref="T:System.Windows.Forms.AccessibleObject" />
+
+            
 
             
 
@@ -384,6 +442,8 @@
 
             
 
+            
+
              method to add a <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
@@ -391,8 +451,12 @@
 
             
 
+            
+
              with commonly used characteristics to a <see
              cref="T:System.Windows.Forms.MenuStrip" />
+
+            
 
             
 
@@ -411,8 +475,12 @@
 
             
 
+            
+
              with the specified text, image, and event handler on a new <see
              cref="T:System.Windows.Forms.MenuStrip" />
+
+            
 
             
 
@@ -431,6 +499,8 @@
 
             
 
+            
+
             , or a <see
              cref="T:System.Windows.Forms.ToolStripSeparator" />
 
@@ -438,8 +508,12 @@
 
             
 
+            
+
              if the <paramref
              name="text" />
+
+            
 
             
 
@@ -455,8 +529,12 @@
 
           
 
+          
+
           The text to use for the <see
            cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+          
 
           
 
@@ -469,8 +547,12 @@
 
           
 
+          
+
            parameter is a hyphen (-), this method creates a <see
            cref="T:System.Windows.Forms.ToolStripSeparator" />
+
+          
 
           
 
@@ -485,6 +567,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
 
@@ -492,8 +576,12 @@
 
           
 
+          
+
            to display on the <see
            cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+          
 
           
 
@@ -508,6 +596,8 @@
 
           
 
+          
+
           An event handler that raises the <see
            cref="E:System.Windows.Forms.Control.Click" />
 
@@ -515,8 +605,12 @@
 
           
 
+          
+
            event when the <see
            cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+          
 
           
 
@@ -544,6 +638,8 @@
           <para
             >Gets the default spacing, in pixels, between the sizing grip and the edges of the <see
              cref="T:System.Windows.Forms.MenuStrip" />
+
+            
 
             
 
@@ -579,6 +675,8 @@
 
             
 
+            
+
              property to set the interior space between controls. When a control is a container of items, padding represents the space from the edge of the container.</para
           >
         </remarks>
@@ -587,6 +685,8 @@
           <para
             >Gets the spacing, in pixels, between the left, right, top, and bottom edges of the <see
              cref="T:System.Windows.Forms.MenuStrip" />
+
+            
 
             
 
@@ -622,6 +722,8 @@
 
             
 
+            
+
              property always returns false because typically, ToolTips are not used for menus or menu items.</para
           >
         </remarks>
@@ -630,6 +732,8 @@
           <para
             >Gets a value indicating whether ToolTips are shown for the <see
              cref="T:System.Windows.Forms.MenuStrip" />
+
+            
 
             
 
@@ -661,6 +765,8 @@
           <para
             >Gets the horizontal and vertical dimensions, in pixels, of the <see
              cref="T:System.Windows.Forms.MenuStrip" />
+
+            
 
             
 
@@ -736,8 +842,12 @@
 
             
 
+            
+
              property to designate or discover which <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+            
 
             
 
@@ -753,6 +863,8 @@
 
             
 
+            
+
              and <see
              cref="E:System.Windows.Forms.MenuStrip.MenuDeactivate" />
 
@@ -760,8 +872,12 @@
 
             
 
+            
+
              events on child menus to reflect changes to the value of <see
              cref="P:System.Windows.Forms.MenuStrip.MdiWindowListItem" />
+
+            
 
             
 
@@ -775,6 +891,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+            
 
             
 
@@ -803,8 +921,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -817,8 +939,12 @@
 
             
 
+            
+
              or a drop-down of the <see
              cref="T:System.Windows.Forms.MenuStrip" />
+
+            
 
             
 
@@ -831,8 +957,12 @@
 
             
 
+            
+
             , <see
              cref="E:System.Windows.Forms.Control.LostFocus" />
+
+            
 
             
 
@@ -845,8 +975,12 @@
 
             
 
+            
+
             , and <see
              cref="E:System.Windows.Forms.Control.Leave" />
+
+            
 
             
 
@@ -859,8 +993,12 @@
 
             
 
+            
+
              might not be raised when they are activated by the keyboard. In such cases, use the <see
              cref="E:System.Windows.Forms.MenuStrip.MenuActivate" />
+
+            
 
             
 
@@ -873,6 +1011,8 @@
 
             
 
+            
+
              events instead.</para
           >
           <para
@@ -880,6 +1020,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -915,8 +1057,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -929,8 +1075,12 @@
 
             
 
+            
+
              or a drop-down of the <see
              cref="T:System.Windows.Forms.MenuStrip" />
+
+            
 
             
 
@@ -943,8 +1093,12 @@
 
             
 
+            
+
             , <see
              cref="E:System.Windows.Forms.Control.LostFocus" />
+
+            
 
             
 
@@ -957,8 +1111,12 @@
 
             
 
+            
+
             , and <see
              cref="E:System.Windows.Forms.Control.Leave" />
+
+            
 
             
 
@@ -971,6 +1129,8 @@
 
             
 
+            
+
              might not be raised when they are activated by the keyboard. In such cases, use the <see
              cref="E:System.Windows.Forms.MenuStrip.MenuActivate" />
 
@@ -978,8 +1138,12 @@
 
             
 
+            
+
              and <see
              cref="E:System.Windows.Forms.MenuStrip.MenuDeactivate" />
+
+            
 
             
 
@@ -997,6 +1161,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1005,6 +1171,8 @@
           <para
             >Occurs when the <see
              cref="T:System.Windows.Forms.MenuStrip" />
+
+            
 
             
 
@@ -1041,11 +1209,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.MenuStrip.OnMenuActivate(System.EventArgs)" />
+
+            
 
             
 
@@ -1064,6 +1236,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1074,8 +1248,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1114,11 +1292,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.MenuStrip.OnMenuDeactivate(System.EventArgs)" />
+
+            
 
             
 
@@ -1137,6 +1319,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1147,8 +1331,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1210,6 +1398,8 @@
 
             
 
+            
+
              property returns false by default because typically, ToolTips are not used for menus or menu items.</para
           >
         </remarks>
@@ -1218,6 +1408,8 @@
           <para
             >Gets or sets a value indicating whether ToolTips are shown for the <see
              cref="T:System.Windows.Forms.MenuStrip" />
+
+            
 
             
 
@@ -1251,6 +1443,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Windows.Forms.MenuStrip" />
+
+            
 
             
 

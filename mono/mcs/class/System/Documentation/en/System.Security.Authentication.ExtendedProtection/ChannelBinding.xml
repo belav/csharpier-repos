@@ -30,6 +30,8 @@
 
         
 
+        
+
          class instance is used to provide extended protection for integrated windows authentication.</para
       >
     </remarks>
@@ -38,6 +40,8 @@
       <para
         >The <see
          cref="T:System.Security.Authentication.ExtendedProtection.ChannelBinding" />
+
+        
 
         
 
@@ -74,6 +78,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -103,6 +109,8 @@
 
             
 
+            
+
              constructor is designed to deal with how the channel binding is acquired to compensate for allocation and deallocation semantics in the native calls that provide extended protection for integrated windows authentication.</para
           >
         </remarks>
@@ -116,11 +124,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="ownsHandle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -152,6 +164,8 @@
 
             
 
+            
+
              instance that contains a channel binding token to other classes or to the native Windows security functions that implement extended protection. The channel binding token is used to provide extended protection for integrated Windows authentication. </para
           >
         </remarks>
@@ -165,8 +179,12 @@
 
             
 
+            
+
              property gets the size, in bytes, of the channel binding token associated with the <see
              cref="T:System.Security.Authentication.ExtendedProtection.ChannelBinding" />
+
+            
 
             
 

@@ -20,6 +20,8 @@
 
         
 
+        
+
         .</para
       >
     </summary>
@@ -40,6 +42,8 @@
           <para
             >The <see
              cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+            
 
             
 
@@ -70,6 +74,8 @@
 
             
 
+            
+
              is selected.</para
           >
         </summary>
@@ -90,6 +96,8 @@
           <para
             >The <see
              cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+            
 
             
 

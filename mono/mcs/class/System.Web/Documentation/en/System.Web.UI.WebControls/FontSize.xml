@@ -22,11 +22,15 @@
 
         
 
+        
+
          enumeration represents the font sizes defined by HTML 4.0. The font size can be an absolute or relative size.</para
       >
       <para
         >An absolute font size represents a predefined font size determined by the browser. The possible values for an absolute font size are <see
          cref="F:System.Web.UI.WebControls.FontSize.XXSmall" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
         , <see
          cref="F:System.Web.UI.WebControls.FontSize.Small" />
+
+        
 
         
 
@@ -53,8 +61,12 @@
 
         
 
+        
+
         , <see
          cref="F:System.Web.UI.WebControls.FontSize.Large" />
+
+        
 
         
 
@@ -67,8 +79,12 @@
 
         
 
+        
+
         , and <see
          cref="F:System.Web.UI.WebControls.FontSize.XXLarge" />
+
+        
 
         
 
@@ -84,8 +100,12 @@
 
         
 
+        
+
          and <see
          cref="F:System.Web.UI.WebControls.FontSize.Larger" />
+
+        
 
         
 
@@ -102,8 +122,12 @@
 
           
 
+          
+
            and <see
            cref="F:System.Web.UI.WebControls.FontSize.Larger" />
+
+          
 
           
 

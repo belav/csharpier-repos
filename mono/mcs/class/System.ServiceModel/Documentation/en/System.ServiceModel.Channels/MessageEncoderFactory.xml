@@ -43,8 +43,12 @@
 
         
 
+        
+
          to return an instance of your custom <see
          cref="T:System.ServiceModel.Channels.MessageEncoder" />
+
+        
 
         
 
@@ -57,8 +61,12 @@
 
         
 
+        
+
          to the binding element stack used to configure the service or client by overriding the <see
          cref="M:System.ServiceModel.Channels.MessageEncodingBindingElement.CreateMessageEncoderFactory" />
+
+        
 
         
 
@@ -68,6 +76,8 @@
          type="text/html">
           <a href="0f03c635-f3e7-4c5c-9463-3cb0135e221e">Custom Encoders</a>
         </format>
+
+        
 
         
 
@@ -100,6 +110,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.MessageEncoderFactory" />
+
+            
 
             
 
@@ -141,6 +153,8 @@
           <para
             >The <see
              cref="T:System.ServiceModel.Channels.MessageEncoder" />
+
+            
 
             
 
@@ -204,6 +218,8 @@
 
             
 
+            
+
              property. <see
              cref="T:System.ServiceModel.Channels.MessageVersion" />
 
@@ -211,8 +227,12 @@
 
             
 
+            
+
              is limited to using certain versions of SOAP and WS-Addressing and is not extensible. So if these versions are not to be used, this property should be overridden to return <see
              cref="P:System.ServiceModel.Channels.MessageVersion.None" />
+
+            
 
             
 

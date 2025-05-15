@@ -21,8 +21,12 @@
 
         
 
+        
+
          class contains information for several different Web Parts events. These events include the <see
          cref="E:System.Web.UI.WebControls.WebParts.WebPartManager.WebPartAdded" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Web.UI.WebControls.WebParts.WebPartManager.WebPartClosed" />
+
+        
 
         
 
@@ -49,8 +57,12 @@
 
         
 
+        
+
         , and <see
          cref="E:System.Web.UI.WebControls.WebParts.WebPartManager.SelectedWebPartChanged" />
+
+        
 
         
 
@@ -63,8 +75,12 @@
 
         
 
+        
+
          class provides access to the Web Parts control involved in the event. The Web Parts control is accessed through the <see
          cref="P:System.Web.UI.WebControls.WebParts.WebPartEventArgs.WebPart" />
+
+        
 
         
 
@@ -83,8 +99,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Web.UI.WebControls.WebParts.WebPartManager.WebPartDeleted" />
+
+        
 
         
 
@@ -97,6 +117,8 @@
 
         
 
+        
+
         , <see
          cref="E:System.Web.UI.WebControls.WebParts.WebPartManager.WebPartMoved" />
 
@@ -104,8 +126,12 @@
 
         
 
+        
+
         , and <see
          cref="E:System.Web.UI.WebControls.WebParts.WebPartManager.SelectedWebPartChanged" />
+
+        
 
         
 
@@ -134,6 +160,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPartEventArgs" />
+
+            
 
             
 

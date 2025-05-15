@@ -21,8 +21,12 @@
 
         
 
+        
+
          objects, implement the <see
          cref="T:System.ServiceModel.Description.IWsdlExportExtension" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.ServiceModel.Description.IEndpointBehavior" />
+
+        
 
         
 
@@ -49,8 +57,12 @@
 
         
 
+        
+
         ) and add the behavior to the <see
          cref="P:System.ServiceModel.Description.ServiceEndpoint.Behaviors" />
+
+        
 
         
 
@@ -63,8 +75,12 @@
 
         
 
+        
+
         , or <see
          cref="P:System.ServiceModel.Description.OperationDescription.Behaviors" />
+
+        
 
         
 
@@ -77,8 +93,12 @@
 
         
 
+        
+
          on a <see
          cref="T:System.ServiceModel.Channels.BindingElement" />
+
+        
 
         
 
@@ -94,8 +114,12 @@
 
           
 
+          
+
            implementations are never invoked if they are implemented as an <see
            cref="T:System.ServiceModel.Description.IServiceBehavior" />
+
+          
 
           
 
@@ -111,8 +135,12 @@
 
         
 
+        
+
          does not export custom policy assertions even though indigo1 exports custom binding policy assertions to the appropriate element inside WSDL. If you want to export custom policy assertions, implement the <see
          cref="T:System.ServiceModel.Description.IPolicyExportExtension" />
+
+        
 
         
 
@@ -128,8 +156,12 @@
 
         
 
+        
+
          which in turn calls <see
          cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoint(System.ServiceModel.Description.ServiceEndpoint)" />
+
+        
 
         
 
@@ -145,8 +177,12 @@
 
         
 
+        
+
          calls the <see
          cref="M:System.ServiceModel.Description.IWsdlExportExtension.ExportContract(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlContractConversionContext)" />
+
+        
 
         
 
@@ -159,8 +195,12 @@
 
         
 
+        
+
          implementations on the contract, and operation behaviors for that contract. Operations that use wildcard actions are not exported in metadata, so <see
          cref="T:System.ServiceModel.Description.IWsdlExportExtension" />
+
+        
 
         
 
@@ -177,8 +217,12 @@
 
         
 
+        
+
          and the <see
          cref="M:System.ServiceModel.Description.IWsdlExportExtension.ExportEndpoint(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" />
+
+        
 
         
 
@@ -191,8 +235,12 @@
 
         
 
+        
+
          so that <see
          cref="T:System.ServiceModel.Description.IWsdlExportExtension" />
+
+        
 
         
 
@@ -205,6 +253,8 @@
 
         
 
+        
+
          property. The context objects passed into both methods provide convenient mappings from exported WSDL elements to properties of <see
          cref="T:System.ServiceModel.Description.ContractDescription" />
 
@@ -212,8 +262,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+
+        
 
         
 
@@ -229,8 +283,12 @@
 
         
 
+        
+
          implementation throws an exception on export, the generated metadata is in an inconsistent state and the <see
          cref="T:System.ServiceModel.Description.WsdlExporter" />
+
+        
 
         
 
@@ -282,8 +340,12 @@
 
             
 
+            
+
              method is called when the metadata export system is exporting the contract. Only contract and operation behaviors implementing <see
              cref="T:System.ServiceModel.Description.IWsdlExportExtension" />
+
+            
 
             
 
@@ -296,8 +358,12 @@
 
             
 
+            
+
              call. All behaviors implementing <see
              cref="T:System.ServiceModel.Description.IWsdlExportExtension" />
+
+            
 
             
 
@@ -310,11 +376,15 @@
 
             
 
+            
+
              call.</para
           >
           <para
             >Use the <paramref
              name="context" />
+
+            
 
             
 
@@ -334,8 +404,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.WsdlExporter" />
+
+          
 
           
 
@@ -345,6 +419,8 @@
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -388,8 +464,12 @@
 
             
 
+            
+
              method to modify the WSDL exported for an endpoint. This method is called after the contract has been exported by <see
              cref="M:System.ServiceModel.Description.IWsdlExportExtension.ExportContract(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlContractConversionContext)" />
+
+            
 
             
 
@@ -409,8 +489,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.WsdlExporter" />
+
+          
 
           
 
@@ -420,6 +504,8 @@
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -26,6 +26,8 @@
 
         
 
+        
+
          overrides the <see
          cref="M:System.Diagnostics.TraceFilter.ShouldTrace(System.Diagnostics.TraceEventCache,System.String,System.Diagnostics.TraceEventType,System.Int32,System.String,System.Object[],System.Object,System.Object[])" />
 
@@ -33,8 +35,12 @@
 
         
 
+        
+
          method and defines a <see
          cref="P:System.Diagnostics.SourceFilter.Source" />
+
+        
 
         
 
@@ -77,8 +83,12 @@
 
             
 
+            
+
              parameter is used to initialize the <see
              cref="P:System.Diagnostics.SourceFilter.Source" />
+
+            
 
             
 
@@ -97,11 +107,15 @@
 
             
 
+            
+
              class, specifying the name of the trace source. </para
           >
         </summary>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -149,8 +163,12 @@
 
             
 
+            
+
              parameter matches the value of the <see
              cref="P:System.Diagnostics.SourceFilter.Source" />
+
+            
 
             
 
@@ -174,10 +192,14 @@
 
           
 
+          
+
           An object that represents the information cache for the trace event.</param
         >
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -192,10 +214,14 @@
 
           
 
+          
+
           One of the enumeration values that identifies the event type. </param
         >
         <param name="id">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -210,10 +236,14 @@
 
           
 
+          
+
           The format to use for writing an array of arguments or a message to write.</param
         >
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -228,10 +258,14 @@
 
           
 
+          
+
           A trace data object.</param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -263,6 +297,8 @@
 
             
 
+            
+
              identifies the trace source for which to write trace information. Trace information will not be written for other trace sources. The name of the trace source is the <paramref
              name="name" />
 
@@ -270,8 +306,12 @@
 
             
 
+            
+
              parameter from the constructor for the <see
              cref="T:System.Diagnostics.TraceSource" />
+
+            
 
             
 

@@ -33,6 +33,8 @@
 
         
 
+        
+
          objects.</para
       >
     </summary>
@@ -50,6 +52,8 @@
           <para
             >Creates an empty <see
              cref="T:System.Data.Common.DataColumnMappingCollection" />
+
+            
 
             
 
@@ -85,6 +89,8 @@
 
             
 
+            
+
              object to the collection.</para
           >
         </summary>
@@ -94,6 +100,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -132,8 +140,12 @@
 
             
 
+            
+
              object to the collection when given a source column name and a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -153,6 +165,8 @@
 
           
 
+          
+
           The case-sensitive name of the source column to map to. </param
         >
         <param name="dataSetColumn">
@@ -162,8 +176,12 @@
 
           
 
+          
+
           The name, which is not case-sensitive, of the <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -201,6 +219,8 @@
 
             
 
+            
+
              to the end of the collection.</para
           >
         </summary>
@@ -211,8 +231,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -246,6 +270,8 @@
 
             
 
+            
+
              array to the end of the collection.</para
           >
         </summary>
@@ -256,8 +282,12 @@
 
           
 
+          
+
           The array of <see
            cref="T:System.Data.Common.DataColumnMapping" />
+
+          
 
           
 
@@ -285,6 +315,8 @@
           <para
             >Removes all <see
              cref="T:System.Data.Common.DataColumnMapping" />
+
+            
 
             
 
@@ -320,8 +352,12 @@
 
             
 
+            
+
              object with the given <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -340,11 +376,15 @@
 
             
 
+            
+
              object; otherwise, false.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -357,8 +397,12 @@
 
           
 
+          
+
            that is the <see
            cref="T:System.Data.Common.DataColumnMapping" />
+
+          
 
           
 
@@ -393,6 +437,8 @@
 
             
 
+            
+
              object with the given source column name exists in the collection.</para
           >
         </summary>
@@ -401,6 +447,8 @@
           <para
             >true if collection contains a <see
              cref="T:System.Data.Common.DataColumnMapping" />
+
+            
 
             
 
@@ -416,8 +464,12 @@
 
           
 
+          
+
           The case-sensitive source column name of the <see
            cref="T:System.Data.Common.DataColumnMapping" />
+
+          
 
           
 
@@ -453,11 +505,15 @@
 
             
 
+            
+
              to the specified array.</para
           >
         </summary>
         <param name="array">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -470,8 +526,12 @@
 
           
 
+          
+
            to which to copy <see
            cref="T:System.Data.Common.DataColumnMappingCollection" />
+
+          
 
           
 
@@ -481,6 +541,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -523,8 +585,12 @@
 
             
 
+            
+
              to the specified <see
              cref="T:System.Data.Common.DataColumnMapping" />
+
+            
 
             
 
@@ -540,8 +606,12 @@
 
           
 
+          
+
           The zero-based index in the <paramref
            name="array" />
+
+          
 
           
 
@@ -565,6 +635,8 @@
           <para
             >Gets the number of <see
              cref="T:System.Data.Common.DataColumnMapping" />
+
+            
 
             
 
@@ -611,8 +683,12 @@
 
             
 
+            
+
              object with the specified <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -631,8 +707,12 @@
 
             
 
+            
+
              object with the specified <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -648,8 +728,12 @@
 
           
 
+          
+
           The name, which is not case-sensitive, of the <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -688,6 +772,8 @@
 
             
 
+            
+
              exists in the collection, it is returned.</para
           >
           <para
@@ -698,8 +784,12 @@
 
             
 
+            
+
              does not exist in the collection, for a given <see
              cref="T:System.Data.MissingMappingAction" />
+
+            
 
             
 
@@ -731,6 +821,8 @@
 
                   
 
+                  
+
                    with the specified source column name as both the source column name and the <see
                    cref="T:System.Data.DataSet" />
 
@@ -738,8 +830,12 @@
 
                   
 
+                  
+
                    column name. This <see
                    cref="T:System.Data.Common.DataColumnMapping" />
+
+                  
 
                   
 
@@ -757,6 +853,8 @@
                 <para
                   >An <see
                    cref="T:System.InvalidOperationException" />
+
+                  
 
                   
 
@@ -786,6 +884,8 @@
 
             
 
+            
+
              for the specified <see
              cref="T:System.Data.Common.DataColumnMappingCollection" />
 
@@ -793,8 +893,12 @@
 
             
 
+            
+
             , source column name, and <see
              cref="T:System.Data.MissingMappingAction" />
+
+            
 
             
 
@@ -813,6 +917,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -823,8 +929,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.Common.DataColumnMappingCollection" />
+
+          
 
           
 
@@ -839,6 +949,8 @@
 
           
 
+          
+
           The case-sensitive source column name to find. </param
         >
         <param name="mappingAction">
@@ -848,8 +960,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.MissingMappingAction" />
+
+          
 
           
 
@@ -905,8 +1021,12 @@
 
             
 
+            
+
              object without instantiating a <see
              cref="T:System.Data.Common.DataColumnMappingCollection" />
+
+            
 
             
 
@@ -925,6 +1045,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -935,8 +1057,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.Common.DataColumnMappingCollection" />
+
+          
 
           
 
@@ -951,10 +1077,14 @@
 
           
 
+          
+
           The case-sensitive column name from a data source.</param
         >
         <param name="dataType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -969,8 +1099,12 @@
 
           
 
+          
+
           An instance of <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -985,8 +1119,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.MissingMappingAction" />
+
+          
 
           
 
@@ -1001,8 +1139,12 @@
 
           
 
+          
+
           Determines the action to take when the existing <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -1038,6 +1180,8 @@
 
             
 
+            
+
              that can be used to iterate through the collection.</para
           >
         </returns>
@@ -1068,8 +1212,12 @@
 
             
 
+            
+
              that is a <see
              cref="T:System.Data.Common.DataColumnMapping" />
+
+            
 
             
 
@@ -1088,8 +1236,12 @@
 
             
 
+            
+
              that is a <see
              cref="T:System.Data.Common.DataColumnMapping" />
+
+            
 
             
 
@@ -1105,6 +1257,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
 
@@ -1112,8 +1266,12 @@
 
           
 
+          
+
            that is the <see
            cref="T:System.Data.Common.DataColumnMapping" />
+
+          
 
           
 
@@ -1148,6 +1306,8 @@
 
             
 
+            
+
              with the specified source column name.</para
           >
         </summary>
@@ -1161,11 +1321,15 @@
 
             
 
+            
+
              with the specified case-sensitive source column name.</para
           >
         </returns>
         <param name="sourceColumn">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1203,8 +1367,12 @@
 
             
 
+            
+
              with the given <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1223,11 +1391,15 @@
 
             
 
+            
+
              with the given DataSet column name, or -1 if the DataColumnMapping object does not exist in the collection.</para
           >
         </returns>
         <param name="dataSetColumn">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1270,8 +1442,12 @@
 
             
 
+            
+
              object into the <see
              cref="T:System.Data.Common.DataColumnMappingCollection" />
+
+            
 
             
 
@@ -1287,8 +1463,12 @@
 
           
 
+          
+
           The zero-based index of the <see
            cref="T:System.Data.Common.DataColumnMapping" />
+
+          
 
           
 
@@ -1320,8 +1500,12 @@
 
             
 
+            
+
              object into the <see
              cref="T:System.Data.Common.DataColumnMappingCollection" />
+
+            
 
             
 
@@ -1340,6 +1524,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -1350,8 +1536,12 @@
 
           
 
+          
+
           The zero-based index of the <see
            cref="T:System.Data.Common.DataColumnMapping" />
+
+          
 
           
 
@@ -1366,8 +1556,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.Common.DataColumnMapping" />
+
+          
 
           
 
@@ -1470,6 +1664,8 @@
 
             
 
+            
+
              from the collection.</para
           >
         </summary>
@@ -1480,8 +1676,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.Common.DataColumnMapping" />
+
+          
 
           
 
@@ -1512,8 +1712,12 @@
 
             
 
+            
+
              that is a <see
              cref="T:System.Data.Common.DataColumnMapping" />
+
+            
 
             
 
@@ -1529,6 +1733,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -1536,8 +1742,12 @@
 
           
 
+          
+
            that is the <see
            cref="T:System.Data.Common.DataColumnMapping" />
+
+          
 
           
 
@@ -1572,6 +1782,8 @@
 
             
 
+            
+
              object with the specified index from the collection.</para
           >
         </summary>
@@ -1582,8 +1794,12 @@
 
           
 
+          
+
           The zero-based index of the <see
            cref="T:System.Data.Common.DataColumnMapping" />
+
+          
 
           
 
@@ -1618,11 +1834,15 @@
 
             
 
+            
+
              object with the specified source column name from the collection.</para
           >
         </summary>
         <param name="sourceColumn">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1661,8 +1881,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1678,6 +1902,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1686,6 +1912,8 @@
           <para
             >Gets a value that indicates whether access to the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1721,8 +1949,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1738,6 +1970,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1746,6 +1980,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1778,8 +2014,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1795,6 +2035,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1803,6 +2045,8 @@
           <para
             >Gets a value that indicates whether the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1835,8 +2079,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1852,6 +2100,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1860,6 +2110,8 @@
           <para
             >Gets a value that indicates whether the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1921,8 +2173,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Data.IColumnMappingCollection" />
+
+            
 
             
 
@@ -1933,6 +2189,8 @@
           <para
             >For more information, see <see
              cref="M:System.Data.IColumnMappingCollection.Add(System.String,System.String)" />
+
+            
 
             
 
@@ -1951,6 +2209,8 @@
 
             
 
+            
+
              object to the <see
              cref="T:System.Data.Common.DataColumnMappingCollection" />
 
@@ -1958,8 +2218,12 @@
 
             
 
+            
+
              by using the source column and <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1979,6 +2243,8 @@
 
           
 
+          
+
           The case-sensitive name of the source column.</param
         >
         <param name="dataSetColumnName">
@@ -1988,8 +2254,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -2026,8 +2296,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Data.IColumnMappingCollection" />
+
+            
 
             
 
@@ -2038,6 +2312,8 @@
           <para
             >For more information, see <see
              cref="M:System.Data.IColumnMappingCollection.GetByDataSetColumn(System.String)" />
+
+            
 
             
 
@@ -2056,8 +2332,12 @@
 
             
 
+            
+
              object that has the specified <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2076,8 +2356,12 @@
 
             
 
+            
+
              object that  has the specified <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2093,8 +2377,12 @@
 
           
 
+          
+
           The name, which is not case-sensitive, of the <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 

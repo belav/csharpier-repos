@@ -38,11 +38,15 @@
 
         
 
+        
+
          class to detect whether a remote computer is reachable. </para
       >
       <para
         >Network topology can determine whether <see
          cref="T:System.Net.NetworkInformation.Ping" />
+
+        
 
         
 
@@ -55,8 +59,12 @@
 
         
 
+        
+
          from succeeding. A successful <see
          cref="T:System.Net.NetworkInformation.Ping" />
+
+        
 
         
 
@@ -72,8 +80,12 @@
 
         
 
+        
+
          and <see
          cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+        
 
         
 
@@ -86,11 +98,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >The following types are used with the <see
          cref="T:System.Net.NetworkInformation.Ping" />
+
+        
 
         
 
@@ -134,8 +150,12 @@
 
               
 
+              
+
               ), and whether it can be fragmented (<see
                cref="P:System.Net.NetworkInformation.PingOptions.DontFragment" />
+
+              
 
               
 
@@ -180,8 +200,12 @@
 
               
 
+              
+
                events, which are raised when a <see
                cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+              
 
               
 
@@ -206,6 +230,8 @@
 
               
 
+              
+
                call completes or is canceled.</para
             >
           </description>
@@ -219,8 +245,12 @@
 
         
 
+        
+
          and <see
          cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+        
 
         
 
@@ -233,8 +263,12 @@
 
         
 
+        
+
          object. The <see
          cref="P:System.Net.NetworkInformation.PingReply.Status" />
+
+        
 
         
 
@@ -247,11 +281,15 @@
 
         
 
+        
+
          value to indicate the outcome of the request. </para
       >
       <para
         >When sending the request, you must specify the remote computer. You can do this by providing a host name string, an IP address in string format, or an <see
          cref="T:System.Net.IPAddress" />
+
+        
 
         
 
@@ -270,8 +308,12 @@
 
             
 
+            
+
              allows you to learn the amount of time required for a packet of a particular size to travel to and from the remote host and the maximum transmission unit of the network path. (See the <see
              cref="Overload:System.Net.NetworkInformation.Ping.Send" />
+
+            
 
             
 
@@ -284,8 +326,12 @@
 
             
 
+            
+
              overloads that take a <paramref
              name="buffer" />
+
+            
 
             
 
@@ -303,8 +349,12 @@
 
             
 
+            
+
              property and the <see
              cref="Overload:System.Net.NetworkInformation.Ping.Send" />
+
+            
 
             
 
@@ -317,8 +367,12 @@
 
             
 
+            
+
              overloads that take an <paramref
              name="options" />
+
+            
 
             
 
@@ -336,8 +390,12 @@
 
             
 
+            
+
              and the <see
              cref="Overload:System.Net.NetworkInformation.Ping.Send" />
+
+            
 
             
 
@@ -350,8 +408,12 @@
 
             
 
+            
+
              overloads that take an <paramref
              name="options" />
+
+            
 
             
 
@@ -369,6 +431,8 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
 
@@ -376,8 +440,12 @@
 
             
 
+            
+
              overloads that take a <paramref
              name="timeout" />
+
+            
 
             
 
@@ -395,8 +463,12 @@
 
         
 
+        
+
          class offers both synchronous and asynchronous methods for sending the request. If your application should block while waiting for a reply, use the <see
          cref="Overload:System.Net.NetworkInformation.Ping.Send" />
+
+        
 
         
 
@@ -409,8 +481,12 @@
 
         
 
+        
+
          methods. A call to <see
          cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+        
 
         
 
@@ -423,8 +499,12 @@
 
         
 
+        
+
          event. Applications use a <see
          cref="T:System.Net.NetworkInformation.PingCompletedEventHandler" />
+
+        
 
         
 
@@ -437,8 +517,12 @@
 
         
 
+        
+
          events. You must add a <see
          cref="T:System.Net.NetworkInformation.PingCompletedEventHandler" />
+
+        
 
         
 
@@ -451,8 +535,12 @@
 
         
 
+        
+
         . The delegate's method receives a <see
          cref="T:System.Net.NetworkInformation.PingCompletedEventArgs" />
+
+        
 
         
 
@@ -465,8 +553,12 @@
 
         
 
+        
+
          object that describes the result of the <see
          cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+        
 
         
 
@@ -482,8 +574,12 @@
 
         
 
+        
+
          class to generate multiple simultaneous ICMP Echo requests. Calling <see
          cref="Overload:System.Net.NetworkInformation.Ping.Send" />
+
+        
 
         
 
@@ -496,6 +592,8 @@
 
         
 
+        
+
          call is in progress or calling <see
          cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
 
@@ -503,8 +601,12 @@
 
         
 
+        
+
          multiple times before all previous calls have completed causes an <see
          cref="T:System.InvalidOperationException" />
+
+        
 
         
 
@@ -539,6 +641,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.NetworkInformation.Ping" />
+
+            
 
             
 
@@ -581,8 +685,12 @@
 
             
 
+            
+
              class can override this method to perform additional tasks, such as logging the data contained in the <paramref
              name="e" />
+
+            
 
             
 
@@ -600,11 +708,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Net.NetworkInformation.Ping.OnPingCompleted(System.Net.NetworkInformation.PingCompletedEventArgs)" />
+
+            
 
             
 
@@ -623,6 +735,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -633,8 +747,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.NetworkInformation.PingCompletedEventArgs" />
+
+          
 
           
 
@@ -673,8 +791,12 @@
 
             
 
+            
+
              event to get information about the completion status and data collected by a call to one of the <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+            
 
             
 
@@ -687,8 +809,12 @@
 
             
 
+            
+
              delegate provides the call back method invoked when <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+            
 
             
 
@@ -735,8 +861,12 @@
 
             
 
+            
+
              a 32 <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -749,8 +879,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.TimedOut" />
+
+            
 
             
 
@@ -766,6 +900,8 @@
 
             
 
+            
+
              methods that takes an <paramref
              name="options" />
 
@@ -773,8 +909,12 @@
 
             
 
+            
+
              parameter, and set the <see
              cref="P:System.Net.NetworkInformation.PingOptions.DontFragment" />
+
+            
 
             
 
@@ -787,8 +927,12 @@
 
             
 
+            
+
              is true and the total packet size exceeds the maximum packet size that can be transmitted by one of the routing nodes between the local and remote computers, the ICMP echo request fails. When this happens, the <see
              cref="P:System.Net.NetworkInformation.PingReply.Status" />
+
+            
 
             
 
@@ -801,8 +945,12 @@
 
             
 
+            
+
             . The packet or packet fragments (if fragmented) can be forwarded by routing nodes 128 times before being discarded. To change this setting, use a <see
              cref="Overload:System.Net.NetworkInformation.Ping.Send" />
+
+            
 
             
 
@@ -815,8 +963,12 @@
 
             
 
+            
+
              parameter, and set the <see
              cref="P:System.Net.NetworkInformation.PingOptions.Ttl" />
+
+            
 
             
 
@@ -829,8 +981,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.TtlExpired" />
+
+            
 
             
 
@@ -849,6 +1005,8 @@
 
             
 
+            
+
             , and receive a corresponding ICMP echo reply message from that computer.</para
           >
         </summary>
@@ -857,6 +1015,8 @@
           <para
             >A <see
              cref="T:System.Net.NetworkInformation.PingReply" />
+
+            
 
             
 
@@ -872,8 +1032,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Net.IPAddress" />
+
+          
 
           
 
@@ -915,6 +1079,8 @@
 
             
 
+            
+
              data buffer with the ICMP echo message. The method waits five seconds for an ICMP echo reply message. If it does not receive a reply in that time, the method returns and the <see
              cref="P:System.Net.NetworkInformation.PingReply.Status" />
 
@@ -922,8 +1088,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.TimedOut" />
+
+            
 
             
 
@@ -939,6 +1109,8 @@
 
             
 
+            
+
              methods that takes an <paramref
              name="options" />
 
@@ -946,8 +1118,12 @@
 
             
 
+            
+
              parameter, and set the <see
              cref="P:System.Net.NetworkInformation.PingOptions.DontFragment" />
+
+            
 
             
 
@@ -960,8 +1136,12 @@
 
             
 
+            
+
              is true and the total packet size exceeds the maximum packet size that can be transmitted by one of the routing nodes between the local and remote computers, the ICMP echo request fails. When this happens, the <see
              cref="P:System.Net.NetworkInformation.PingReply.Status" />
+
+            
 
             
 
@@ -974,8 +1154,12 @@
 
             
 
+            
+
             . The packet or packet fragments (if fragmented) can be forwarded by routing nodes 128 times before being discarded. To change this setting, use a <see
              cref="Overload:System.Net.NetworkInformation.Ping.Send" />
+
+            
 
             
 
@@ -988,8 +1172,12 @@
 
             
 
+            
+
              parameter, and set the <see
              cref="P:System.Net.NetworkInformation.PingOptions.Ttl" />
+
+            
 
             
 
@@ -1002,8 +1190,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.TtlExpired" />
+
+            
 
             
 
@@ -1026,6 +1218,8 @@
 
             
 
+            
+
              object that provides information about the ICMP echo reply message, if one was received, or provides the reason for the failure, if no message was received.</para
           >
         </returns>
@@ -1036,8 +1230,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1080,6 +1278,8 @@
 
             
 
+            
+
              parameter, the ICMP echo fails, and the <see
              cref="P:System.Net.NetworkInformation.PingReply.Status" />
 
@@ -1087,8 +1287,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.TimedOut" />
+
+            
 
             
 
@@ -1105,8 +1309,12 @@
 
               
 
+              
+
               , the Ping reply can be received even if <paramref
                name="timeout" />
+
+              
 
               
 
@@ -1123,8 +1331,12 @@
 
             
 
+            
+
              methods that takes an <paramref
              name="options" />
+
+            
 
             
 
@@ -1137,8 +1349,12 @@
 
             
 
+            
+
              property to true. When <see
              cref="P:System.Net.NetworkInformation.PingOptions.DontFragment" />
+
+            
 
             
 
@@ -1151,8 +1367,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.PacketTooBig" />
+
+            
 
             
 
@@ -1168,8 +1388,12 @@
 
             
 
+            
+
              overload that takes an <paramref
              name="options" />
+
+            
 
             
 
@@ -1182,6 +1406,8 @@
 
             
 
+            
+
              property to the desired value. If the packet does not reach its destination after being forwarded the specified number of times, the packet is discarded and the ICMP echo request fails. When this happens, the <see
              cref="P:System.Net.NetworkInformation.PingReply.Status" />
 
@@ -1189,8 +1415,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.TtlExpired" />
+
+            
 
             
 
@@ -1209,6 +1439,8 @@
 
             
 
+            
+
             , and receive a corresponding ICMP echo reply message from that computer. This method allows you to specify a time-out value for the operation. </para
           >
         </summary>
@@ -1217,6 +1449,8 @@
           <para
             >A <see
              cref="T:System.Net.NetworkInformation.PingReply" />
+
+            
 
             
 
@@ -1232,8 +1466,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Net.IPAddress" />
+
+          
 
           
 
@@ -1248,8 +1486,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -1292,6 +1534,8 @@
 
             
 
+            
+
              parameter, the ICMP echo fails, and the <see
              cref="P:System.Net.NetworkInformation.PingReply.Status" />
 
@@ -1299,8 +1543,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.TimedOut" />
+
+            
 
             
 
@@ -1317,8 +1565,12 @@
 
               
 
+              
+
               , the Ping reply can be received even if <paramref
                name="timeout" />
+
+              
 
               
 
@@ -1335,6 +1587,8 @@
 
             
 
+            
+
              methods that takes an <paramref
              name="options" />
 
@@ -1342,8 +1596,12 @@
 
             
 
+            
+
              parameter, and set the <see
              cref="P:System.Net.NetworkInformation.PingOptions.DontFragment" />
+
+            
 
             
 
@@ -1356,8 +1614,12 @@
 
             
 
+            
+
              is true and the total packet size exceeds the maximum packet size that can be transmitted by one of the routing nodes between the local and remote computers, the ICMP echo request fails. When this happens, the <see
              cref="P:System.Net.NetworkInformation.PingReply.Status" />
+
+            
 
             
 
@@ -1370,8 +1632,12 @@
 
             
 
+            
+
             . The packet or packet fragments (if fragmented) can be forwarded by routing nodes 128 times before being discarded. To change this setting, use a <see
              cref="Overload:System.Net.NetworkInformation.Ping.Send" />
+
+            
 
             
 
@@ -1384,8 +1650,12 @@
 
             
 
+            
+
              parameter, and set the <see
              cref="P:System.Net.NetworkInformation.PingOptions.Ttl" />
+
+            
 
             
 
@@ -1398,8 +1668,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.TtlExpired" />
+
+            
 
             
 
@@ -1422,6 +1696,8 @@
 
             
 
+            
+
              object that provides information about the ICMP echo reply message if one was received, or provides the reason for the failure if no message was received.</para
           >
         </returns>
@@ -1432,8 +1708,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1448,8 +1728,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -1493,6 +1777,8 @@
 
             
 
+            
+
              parameter, the ICMP echo fails, and the <see
              cref="P:System.Net.NetworkInformation.PingReply.Status" />
 
@@ -1500,8 +1786,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.TimedOut" />
+
+            
 
             
 
@@ -1518,8 +1808,12 @@
 
               
 
+              
+
               , the Ping reply can be received even if <paramref
                name="timeout" />
+
+              
 
               
 
@@ -1536,8 +1830,12 @@
 
             
 
+            
+
              methods that takes an <paramref
              name="options" />
+
+            
 
             
 
@@ -1550,8 +1848,12 @@
 
             
 
+            
+
              property to true. When <see
              cref="P:System.Net.NetworkInformation.PingOptions.DontFragment" />
+
+            
 
             
 
@@ -1564,8 +1866,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.PacketTooBig" />
+
+            
 
             
 
@@ -1581,8 +1887,12 @@
 
             
 
+            
+
              overload that takes an <paramref
              name="options" />
+
+            
 
             
 
@@ -1595,6 +1905,8 @@
 
             
 
+            
+
              property to the desired value. If the packet does not reach its destination after being forwarded the specified number of times, the packet is discarded and the ICMP echo request fails. When this happens, the <see
              cref="P:System.Net.NetworkInformation.PingReply.Status" />
 
@@ -1602,8 +1914,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.TtlExpired" />
+
+            
 
             
 
@@ -1622,6 +1938,8 @@
 
             
 
+            
+
             , and receive a corresponding ICMP echo reply message from that computer. This overload allows you to specify a time-out value for the operation.</para
           >
         </summary>
@@ -1635,8 +1953,12 @@
 
             
 
+            
+
              object that provides information about the ICMP echo reply message, if one was received, or provides the reason for the failure, if no message was received. The method will return <see
              cref="F:System.Net.NetworkInformation.IPStatus.PacketTooBig" />
+
+            
 
             
 
@@ -1652,8 +1974,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Net.IPAddress" />
+
+          
 
           
 
@@ -1668,8 +1994,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -1684,8 +2014,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -1729,6 +2063,8 @@
 
             
 
+            
+
              parameter, the ICMP echo fails, and the <see
              cref="P:System.Net.NetworkInformation.PingReply.Status" />
 
@@ -1736,8 +2072,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.TimedOut" />
+
+            
 
             
 
@@ -1754,8 +2094,12 @@
 
               
 
+              
+
               , the Ping reply can be received even if <paramref
                name="timeout" />
+
+              
 
               
 
@@ -1772,8 +2116,12 @@
 
             
 
+            
+
              methods that takes an <paramref
              name="options" />
+
+            
 
             
 
@@ -1786,8 +2134,12 @@
 
             
 
+            
+
              property to true. When <see
              cref="P:System.Net.NetworkInformation.PingOptions.DontFragment" />
+
+            
 
             
 
@@ -1800,8 +2152,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.PacketTooBig" />
+
+            
 
             
 
@@ -1817,8 +2173,12 @@
 
             
 
+            
+
              overload that takes an <paramref
              name="options" />
+
+            
 
             
 
@@ -1831,6 +2191,8 @@
 
             
 
+            
+
              property to the desired value. If the packet does not reach its destination after being forwarded the specified number of times, the packet is discarded and the ICMP echo request fails. When this happens, the <see
              cref="P:System.Net.NetworkInformation.PingReply.Status" />
 
@@ -1838,8 +2200,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.TtlExpired" />
+
+            
 
             
 
@@ -1862,6 +2228,8 @@
 
             
 
+            
+
              object that provides information about the ICMP echo reply message if one was received, or provides the reason for the failure if no message was received.</para
           >
         </returns>
@@ -1872,8 +2240,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1888,8 +2260,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -1904,8 +2280,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -1950,6 +2330,8 @@
 
             
 
+            
+
              parameter, the ICMP echo fails, and the <see
              cref="P:System.Net.NetworkInformation.PingReply.Status" />
 
@@ -1957,8 +2339,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.TimedOut" />
+
+            
 
             
 
@@ -1975,8 +2361,12 @@
 
               
 
+              
+
               , the Ping reply can be received even if <paramref
                name="timeout" />
+
+              
 
               
 
@@ -1993,6 +2383,8 @@
 
             
 
+            
+
              property is true and the total packet size exceeds the maximum packet size that can be transmitted by one of the routing nodes between the local and remote computers, the ICMP echo request fails. When this happens, the <see
              cref="P:System.Net.NetworkInformation.PingReply.Status" />
 
@@ -2000,8 +2392,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.PacketTooBig" />
+
+            
 
             
 
@@ -2017,6 +2413,8 @@
 
             
 
+            
+
              property to specify the maximum number of times the ICMP echo message can be forwarded before reaching its destination. If the packet does not reach its destination after being forwarded the specified number of times, the packet is discarded and the ICMP echo request fails. When this happens, the <see
              cref="P:System.Net.NetworkInformation.PingReply.Status" />
 
@@ -2024,8 +2422,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.TtlExpired" />
+
+            
 
             
 
@@ -2044,6 +2446,8 @@
 
             
 
+            
+
              and receive a corresponding ICMP echo reply message from that computer. This overload allows you to specify a time-out value for the operation and control fragmentation and Time-to-Live values for the ICMP echo message packet.</para
           >
         </summary>
@@ -2057,8 +2461,12 @@
 
             
 
+            
+
              object that provides information about the ICMP echo reply message, if one was received, or provides the reason for the failure, if no message was received. The method will return <see
              cref="F:System.Net.NetworkInformation.IPStatus.PacketTooBig" />
+
+            
 
             
 
@@ -2074,8 +2482,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Net.IPAddress" />
+
+          
 
           
 
@@ -2090,8 +2502,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -2106,8 +2522,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -2122,8 +2542,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.NetworkInformation.PingOptions" />
+
+          
 
           
 
@@ -2168,6 +2592,8 @@
 
             
 
+            
+
              parameter, the ICMP echo fails, and the <see
              cref="P:System.Net.NetworkInformation.PingReply.Status" />
 
@@ -2175,8 +2601,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.TimedOut" />
+
+            
 
             
 
@@ -2193,8 +2623,12 @@
 
               
 
+              
+
               , the Ping reply can be received even if <paramref
                name="timeout" />
+
+              
 
               
 
@@ -2211,6 +2645,8 @@
 
             
 
+            
+
              property is true and the total packet size exceeds the maximum packet size that can be transmitted by one of the routing nodes between the local and remote computers, the ICMP echo request fails. When this happens, the <see
              cref="P:System.Net.NetworkInformation.PingReply.Status" />
 
@@ -2218,8 +2654,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.PacketTooBig" />
+
+            
 
             
 
@@ -2235,6 +2675,8 @@
 
             
 
+            
+
              property to specify the maximum number of times the ICMP echo message can be forwarded before reaching its destination. If the packet does not reach its destination after being forwarded the specified number of times, the packet is discarded and the ICMP echo request fails. When this happens, the <see
              cref="P:System.Net.NetworkInformation.PingReply.Status" />
 
@@ -2242,8 +2684,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.TtlExpired" />
+
+            
 
             
 
@@ -2266,6 +2712,8 @@
 
             
 
+            
+
              object that provides information about the ICMP echo reply message if one was received, or provides the reason for the failure if no message was received.</para
           >
         </returns>
@@ -2276,8 +2724,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -2292,8 +2744,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -2308,8 +2764,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -2324,8 +2784,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.NetworkInformation.PingOptions" />
+
+          
 
           
 
@@ -2368,8 +2832,12 @@
 
             
 
+            
+
              method sends the echo message asynchronously and, when the operation completes (successfully or unsuccessfully), returns the status to your application. Call the <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+            
 
             
 
@@ -2382,8 +2850,12 @@
 
             
 
+            
+
              event. To specify the method that is called when <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+            
 
             
 
@@ -2396,8 +2868,12 @@
 
             
 
+            
+
              delegate to the event before calling <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+            
 
             
 
@@ -2410,8 +2886,12 @@
 
             
 
+            
+
              object that contains a <see
              cref="T:System.Net.NetworkInformation.PingReply" />
+
+            
 
             
 
@@ -2424,8 +2904,12 @@
 
             
 
+            
+
              call. The <see
              cref="T:System.Net.NetworkInformation.PingCompletedEventArgs" />
+
+            
 
             
 
@@ -2438,6 +2922,8 @@
 
             
 
+            
+
              property. This property contains the <paramref
              name="userToken" />
 
@@ -2445,8 +2931,12 @@
 
             
 
+            
+
              object passed into the <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+            
 
             
 
@@ -2463,12 +2953,16 @@
 
               
 
+              
+
                methods; these methods are synchronous.</para
             >
           </block>
           <para
             >This method sends a 32 <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -2481,8 +2975,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.TimedOut" />
+
+            
 
             
 
@@ -2498,8 +2996,12 @@
 
             
 
+            
+
              methods that takes an <paramref
              name="options" />
+
+            
 
             
 
@@ -2512,8 +3014,12 @@
 
             
 
+            
+
              property to true. When <see
              cref="P:System.Net.NetworkInformation.PingOptions.DontFragment" />
+
+            
 
             
 
@@ -2526,8 +3032,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.PacketTooBig" />
+
+            
 
             
 
@@ -2543,8 +3053,12 @@
 
             
 
+            
+
              overload that takes an <paramref
              name="options" />
+
+            
 
             
 
@@ -2557,6 +3071,8 @@
 
             
 
+            
+
              property to the desired value. If the packet does not reach its destination after being forwarded the specified number of times, the packet is discarded and the ICMP echo request fails. When this happens, the <see
              cref="P:System.Net.NetworkInformation.PingReply.Status" />
 
@@ -2564,8 +3080,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.TtlExpired" />
+
+            
 
             
 
@@ -2584,11 +3104,15 @@
 
             
 
+            
+
             , and receive a corresponding ICMP echo reply message from that computer.</para
           >
         </summary>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2601,10 +3125,14 @@
 
           
 
+          
+
            that identifies the computer that is the destination for the ICMP echo message.</param
         >
         <param name="userToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2647,8 +3175,12 @@
 
             
 
+            
+
              method sends the echo message asynchronously and, when the operation completes (successfully or unsuccessfully), returns the status to your application. Call the <see
              cref="M:System.Net.NetworkInformation.Ping.SendAsync(System.String,System.Object)" />
+
+            
 
             
 
@@ -2661,8 +3193,12 @@
 
             
 
+            
+
              event. To specify the method that is called when <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+            
 
             
 
@@ -2675,8 +3211,12 @@
 
             
 
+            
+
              delegate to the event before calling <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+            
 
             
 
@@ -2689,8 +3229,12 @@
 
             
 
+            
+
              object that contains a <see
              cref="T:System.Net.NetworkInformation.PingReply" />
+
+            
 
             
 
@@ -2703,8 +3247,12 @@
 
             
 
+            
+
              call. The <see
              cref="T:System.Net.NetworkInformation.PingCompletedEventArgs" />
+
+            
 
             
 
@@ -2717,6 +3265,8 @@
 
             
 
+            
+
              property. This property contains the <paramref
              name="userToken" />
 
@@ -2724,8 +3274,12 @@
 
             
 
+            
+
              object passed into the <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+            
 
             
 
@@ -2742,12 +3296,16 @@
 
               
 
+              
+
                methods; these methods are synchronous.</para
             >
           </block>
           <para
             >This method sends a 32 <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -2760,8 +3318,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.TimedOut" />
+
+            
 
             
 
@@ -2777,8 +3339,12 @@
 
             
 
+            
+
              methods that takes an <paramref
              name="options" />
+
+            
 
             
 
@@ -2791,8 +3357,12 @@
 
             
 
+            
+
              property to true. When <see
              cref="P:System.Net.NetworkInformation.PingOptions.DontFragment" />
+
+            
 
             
 
@@ -2805,8 +3375,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.PacketTooBig" />
+
+            
 
             
 
@@ -2822,8 +3396,12 @@
 
             
 
+            
+
              overload that takes an <paramref
              name="options" />
+
+            
 
             
 
@@ -2836,6 +3414,8 @@
 
             
 
+            
+
              property to the desired value. If the packet does not reach its destination after being forwarded the specified number of times, the packet is discarded and the ICMP echo request fails. When this happens, the <see
              cref="P:System.Net.NetworkInformation.PingReply.Status" />
 
@@ -2843,8 +3423,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.TtlExpired" />
+
+            
 
             
 
@@ -2864,8 +3448,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -2875,6 +3463,8 @@
         >
         <param name="userToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2918,8 +3508,12 @@
 
             
 
+            
+
              method sends the Echo message asynchronously and, when the operation completes (successfully or unsuccessfully), returns the status to your application. Call the <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+            
 
             
 
@@ -2932,8 +3526,12 @@
 
             
 
+            
+
              event. Applications use a <see
              cref="T:System.Net.NetworkInformation.PingCompletedEventHandler" />
+
+            
 
             
 
@@ -2946,8 +3544,12 @@
 
             
 
+            
+
              raises the event. You must add a <see
              cref="T:System.Net.NetworkInformation.PingCompletedEventHandler" />
+
+            
 
             
 
@@ -2960,8 +3562,12 @@
 
             
 
+            
+
             . The delegate's method receives a <see
              cref="T:System.Net.NetworkInformation.PingCompletedEventArgs" />
+
+            
 
             
 
@@ -2974,8 +3580,12 @@
 
             
 
+            
+
              object that describes the result of the <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+            
 
             
 
@@ -2988,8 +3598,12 @@
 
             
 
+            
+
              object inherits the <see
              cref="P:System.ComponentModel.AsyncCompletedEventArgs.UserState" />
+
+            
 
             
 
@@ -3002,8 +3616,12 @@
 
             
 
+            
+
              object passed into the <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+            
 
             
 
@@ -3019,11 +3637,15 @@
 
             
 
+            
+
              methods; these methods are synchronous.</para
           >
           <para
             >If the ICMP echo reply message is not received within the time specified by the <paramref
              name="timeout" />
+
+            
 
             
 
@@ -3036,8 +3658,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.TimedOut" />
+
+            
 
             
 
@@ -3054,8 +3680,12 @@
 
               
 
+              
+
               , the Ping reply can be received even if <paramref
                name="timeout" />
+
+              
 
               
 
@@ -3072,6 +3702,8 @@
 
             
 
+            
+
              methods that takes an <paramref
              name="options" />
 
@@ -3079,8 +3711,12 @@
 
             
 
+            
+
              parameter, and set the <see
              cref="P:System.Net.NetworkInformation.PingOptions.DontFragment" />
+
+            
 
             
 
@@ -3093,8 +3729,12 @@
 
             
 
+            
+
              is true and the total packet size exceeds the maximum packet size that can be transmitted by one of the routing nodes between the local and remote computers, the ICMP echo request fails. When this happens, the <see
              cref="P:System.Net.NetworkInformation.PingReply.Status" />
+
+            
 
             
 
@@ -3107,8 +3747,12 @@
 
             
 
+            
+
             . The packet or packet fragments (if fragmented) can be forwarded by routing nodes 128 times before being discarded. To change this setting, use a <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+            
 
             
 
@@ -3121,8 +3765,12 @@
 
             
 
+            
+
              parameter, and set the <see
              cref="P:System.Net.NetworkInformation.PingOptions.Ttl" />
+
+            
 
             
 
@@ -3135,8 +3783,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.TtlExpired" />
+
+            
 
             
 
@@ -3155,6 +3807,8 @@
 
             
 
+            
+
             , and receive a corresponding ICMP echo reply message from that computer. This overload allows you to specify a time-out value for the operation.</para
           >
         </summary>
@@ -3165,8 +3819,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Net.IPAddress" />
+
+          
 
           
 
@@ -3181,8 +3839,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -3192,6 +3854,8 @@
         >
         <param name="userToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3235,8 +3899,12 @@
 
             
 
+            
+
              method sends the Echo message asynchronously and, when the operation completes (successfully or unsuccessfully), returns the status to your application. Call the <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+            
 
             
 
@@ -3249,8 +3917,12 @@
 
             
 
+            
+
              event. Applications use a <see
              cref="T:System.Net.NetworkInformation.PingCompletedEventHandler" />
+
+            
 
             
 
@@ -3263,8 +3935,12 @@
 
             
 
+            
+
              raises the event. You must add a <see
              cref="T:System.Net.NetworkInformation.PingCompletedEventHandler" />
+
+            
 
             
 
@@ -3277,8 +3953,12 @@
 
             
 
+            
+
             . The delegate's method receives a <see
              cref="T:System.Net.NetworkInformation.PingCompletedEventArgs" />
+
+            
 
             
 
@@ -3291,8 +3971,12 @@
 
             
 
+            
+
              object that describes the result of the <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+            
 
             
 
@@ -3305,8 +3989,12 @@
 
             
 
+            
+
              object inherits the <see
              cref="P:System.ComponentModel.AsyncCompletedEventArgs.UserState" />
+
+            
 
             
 
@@ -3319,8 +4007,12 @@
 
             
 
+            
+
              object passed into the <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+            
 
             
 
@@ -3336,11 +4028,15 @@
 
             
 
+            
+
              methods; these methods are synchronous.</para
           >
           <para
             >If the ICMP echo reply message is not received within the time specified by the <paramref
              name="timeout" />
+
+            
 
             
 
@@ -3353,8 +4049,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.TimedOut" />
+
+            
 
             
 
@@ -3371,8 +4071,12 @@
 
               
 
+              
+
               , the Ping reply can be received even if <paramref
                name="timeout" />
+
+              
 
               
 
@@ -3389,6 +4093,8 @@
 
             
 
+            
+
              methods that takes an <paramref
              name="options" />
 
@@ -3396,8 +4102,12 @@
 
             
 
+            
+
              parameter, and set the <see
              cref="P:System.Net.NetworkInformation.PingOptions.DontFragment" />
+
+            
 
             
 
@@ -3410,8 +4120,12 @@
 
             
 
+            
+
              is true and the total packet size exceeds the maximum packet size that can be transmitted by one of the routing nodes between the local and remote computers, the ICMP echo request fails. When this happens, the <see
              cref="P:System.Net.NetworkInformation.PingReply.Status" />
+
+            
 
             
 
@@ -3424,8 +4138,12 @@
 
             
 
+            
+
             . The packet or packet fragments (if fragmented) can be forwarded by routing nodes 128 times before being discarded. To change this setting, use a <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+            
 
             
 
@@ -3438,8 +4156,12 @@
 
             
 
+            
+
              parameter, and set the <see
              cref="P:System.Net.NetworkInformation.PingOptions.Ttl" />
+
+            
 
             
 
@@ -3452,8 +4174,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.TtlExpired" />
+
+            
 
             
 
@@ -3473,8 +4199,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -3489,8 +4219,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -3500,6 +4234,8 @@
         >
         <param name="userToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3544,8 +4280,12 @@
 
             
 
+            
+
              method when your application should not block. Each call executes in a separate thread that is automatically allocated from the thread pool. When the asynchronous operation completes, it raises the <see
              cref="E:System.Net.NetworkInformation.Ping.PingCompleted" />
+
+            
 
             
 
@@ -3558,8 +4298,12 @@
 
             
 
+            
+
              raises the event, you must add a <see
              cref="T:System.Net.NetworkInformation.PingCompletedEventHandler" />
+
+            
 
             
 
@@ -3572,8 +4316,12 @@
 
             
 
+            
+
             . The delegate's method receives a <see
              cref="T:System.Net.NetworkInformation.PingCompletedEventArgs" />
+
+            
 
             
 
@@ -3586,8 +4334,12 @@
 
             
 
+            
+
              object that describes the result of the <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+            
 
             
 
@@ -3600,8 +4352,12 @@
 
             
 
+            
+
              object inherits the <see
              cref="P:System.ComponentModel.AsyncCompletedEventArgs.UserState" />
+
+            
 
             
 
@@ -3614,8 +4370,12 @@
 
             
 
+            
+
              object passed into the <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+            
 
             
 
@@ -3632,12 +4392,16 @@
 
               
 
+              
+
                methods; these methods are synchronous.</para
             >
           </block>
           <para
             >If the ICMP echo reply message is not received within the time specified by the <paramref
              name="timeout" />
+
+            
 
             
 
@@ -3650,8 +4414,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.TimedOut" />
+
+            
 
             
 
@@ -3668,8 +4436,12 @@
 
               
 
+              
+
               , the Ping reply can be received even if <paramref
                name="timeout" />
+
+              
 
               
 
@@ -3686,6 +4458,8 @@
 
             
 
+            
+
              methods that takes an <paramref
              name="options" />
 
@@ -3693,8 +4467,12 @@
 
             
 
+            
+
              parameter, and set the <see
              cref="P:System.Net.NetworkInformation.PingOptions.DontFragment" />
+
+            
 
             
 
@@ -3707,8 +4485,12 @@
 
             
 
+            
+
              is true and the total packet size exceeds the maximum packet size that can be transmitted by one of the routing nodes between the local and remote computers, the ICMP echo request fails. When this happens, the <see
              cref="P:System.Net.NetworkInformation.PingReply.Status" />
+
+            
 
             
 
@@ -3721,8 +4503,12 @@
 
             
 
+            
+
             . The packet or packet fragments (if fragmented) can be forwarded by routing nodes 128 times before being discarded. To change this setting, use a <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+            
 
             
 
@@ -3735,8 +4521,12 @@
 
             
 
+            
+
              parameter, and set the <see
              cref="P:System.Net.NetworkInformation.PingOptions.Ttl" />
+
+            
 
             
 
@@ -3749,8 +4539,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.TtlExpired" />
+
+            
 
             
 
@@ -3769,6 +4563,8 @@
 
             
 
+            
+
             , and receive a corresponding ICMP echo reply message from that computer. This overload allows you to specify a time-out value for the operation.</para
           >
         </summary>
@@ -3779,8 +4575,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Net.IPAddress" />
+
+          
 
           
 
@@ -3795,8 +4595,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -3811,8 +4615,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -3822,6 +4630,8 @@
         >
         <param name="userToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3866,8 +4676,12 @@
 
             
 
+            
+
              method sends the Echo message asynchronously and, when the operation completes (successfully or unsuccessfully), returns the status to your application. Call the <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+            
 
             
 
@@ -3880,8 +4694,12 @@
 
             
 
+            
+
              event. Applications use a <see
              cref="T:System.Net.NetworkInformation.PingCompletedEventHandler" />
+
+            
 
             
 
@@ -3894,8 +4712,12 @@
 
             
 
+            
+
              raises the event. You must add a <see
              cref="T:System.Net.NetworkInformation.PingCompletedEventHandler" />
+
+            
 
             
 
@@ -3908,8 +4730,12 @@
 
             
 
+            
+
             . The delegate's method receives a <see
              cref="T:System.Net.NetworkInformation.PingCompletedEventArgs" />
+
+            
 
             
 
@@ -3922,8 +4748,12 @@
 
             
 
+            
+
              object that describes the result of the <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+            
 
             
 
@@ -3936,8 +4766,12 @@
 
             
 
+            
+
              object inherits the <see
              cref="P:System.ComponentModel.AsyncCompletedEventArgs.UserState" />
+
+            
 
             
 
@@ -3950,8 +4784,12 @@
 
             
 
+            
+
              object passed into the <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+            
 
             
 
@@ -3967,11 +4805,15 @@
 
             
 
+            
+
              methods; these methods are synchronous.</para
           >
           <para
             >If the ICMP echo reply message is not received within the time specified by the <paramref
              name="timeout" />
+
+            
 
             
 
@@ -3984,8 +4826,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.TimedOut" />
+
+            
 
             
 
@@ -4002,8 +4848,12 @@
 
               
 
+              
+
               , the Ping reply can be received even if <paramref
                name="timeout" />
+
+              
 
               
 
@@ -4020,6 +4870,8 @@
 
             
 
+            
+
              methods that takes an <paramref
              name="options" />
 
@@ -4027,8 +4879,12 @@
 
             
 
+            
+
              parameter, and set the <see
              cref="P:System.Net.NetworkInformation.PingOptions.DontFragment" />
+
+            
 
             
 
@@ -4041,8 +4897,12 @@
 
             
 
+            
+
              is true and the total packet size exceeds the maximum packet size that can be transmitted by one of the routing nodes between the local and remote computers, the ICMP echo request fails. When this happens, the <see
              cref="P:System.Net.NetworkInformation.PingReply.Status" />
+
+            
 
             
 
@@ -4055,8 +4915,12 @@
 
             
 
+            
+
             . The packet or packet fragments (if fragmented) can be forwarded by routing nodes 128 times before being discarded. To change this setting, use a <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+            
 
             
 
@@ -4069,8 +4933,12 @@
 
             
 
+            
+
              parameter, and set the <see
              cref="P:System.Net.NetworkInformation.PingOptions.Ttl" />
+
+            
 
             
 
@@ -4083,8 +4951,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.TtlExpired" />
+
+            
 
             
 
@@ -4104,8 +4976,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -4120,8 +4996,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -4136,8 +5016,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -4147,6 +5031,8 @@
         >
         <param name="userToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4192,8 +5078,12 @@
 
             
 
+            
+
              method sends the Echo message asynchronously and, when the operation completes (successfully or unsuccessfully), returns the status to your application. Call the <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+            
 
             
 
@@ -4206,8 +5096,12 @@
 
             
 
+            
+
              event. Applications use a <see
              cref="T:System.Net.NetworkInformation.PingCompletedEventHandler" />
+
+            
 
             
 
@@ -4220,8 +5114,12 @@
 
             
 
+            
+
              raises the event. You must add a <see
              cref="T:System.Net.NetworkInformation.PingCompletedEventHandler" />
+
+            
 
             
 
@@ -4234,8 +5132,12 @@
 
             
 
+            
+
             . The delegate's method receives a <see
              cref="T:System.Net.NetworkInformation.PingCompletedEventArgs" />
+
+            
 
             
 
@@ -4248,8 +5150,12 @@
 
             
 
+            
+
              object that describes the result of the <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+            
 
             
 
@@ -4262,8 +5168,12 @@
 
             
 
+            
+
              object inherits the <see
              cref="P:System.ComponentModel.AsyncCompletedEventArgs.UserState" />
+
+            
 
             
 
@@ -4276,8 +5186,12 @@
 
             
 
+            
+
              object passed into the <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+            
 
             
 
@@ -4293,11 +5207,15 @@
 
             
 
+            
+
              methods; these methods are synchronous.</para
           >
           <para
             >If the ICMP echo reply message is not received within the time specified by the <paramref
              name="timeout" />
+
+            
 
             
 
@@ -4310,8 +5228,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.TimedOut" />
+
+            
 
             
 
@@ -4328,8 +5250,12 @@
 
               
 
+              
+
               , the Ping reply can be received even if <paramref
                name="timeout" />
+
+              
 
               
 
@@ -4346,6 +5272,8 @@
 
             
 
+            
+
              property is true and the total packet size exceeds the maximum packet size that can be transmitted by one of the routing nodes between the local and remote computers, the ICMP echo request fails. When this happens, the <see
              cref="P:System.Net.NetworkInformation.PingReply.Status" />
 
@@ -4353,8 +5281,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.PacketTooBig" />
+
+            
 
             
 
@@ -4370,6 +5302,8 @@
 
             
 
+            
+
              property to specify the maximum number of times the ICMP echo message can be forwarded before reaching its destination. If the packet does not reach its destination after being forwarded the specified number of times, the packet is discarded and the ICMP echo request fails. When this happens, the <see
              cref="P:System.Net.NetworkInformation.PingReply.Status" />
 
@@ -4377,8 +5311,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.TtlExpired" />
+
+            
 
             
 
@@ -4397,6 +5335,8 @@
 
             
 
+            
+
             , and receive a corresponding ICMP echo reply message from that computer. This overload allows you to specify a time-out value for the operation and control fragmentation and Time-to-Live values for the ICMP echo message packet.</para
           >
         </summary>
@@ -4407,8 +5347,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Net.IPAddress" />
+
+          
 
           
 
@@ -4423,8 +5367,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -4439,8 +5387,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -4455,8 +5407,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.NetworkInformation.PingOptions" />
+
+          
 
           
 
@@ -4466,6 +5422,8 @@
         >
         <param name="userToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4511,8 +5469,12 @@
 
             
 
+            
+
              method sends the Echo message asynchronously and, when the operation completes (successfully or unsuccessfully), returns the status to your application. Call the <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+            
 
             
 
@@ -4525,8 +5487,12 @@
 
             
 
+            
+
              event. Applications use a <see
              cref="T:System.Net.NetworkInformation.PingCompletedEventHandler" />
+
+            
 
             
 
@@ -4539,8 +5505,12 @@
 
             
 
+            
+
              raises the event. You must add a <see
              cref="T:System.Net.NetworkInformation.PingCompletedEventHandler" />
+
+            
 
             
 
@@ -4553,8 +5523,12 @@
 
             
 
+            
+
             . The delegate's method receives a <see
              cref="T:System.Net.NetworkInformation.PingCompletedEventArgs" />
+
+            
 
             
 
@@ -4567,8 +5541,12 @@
 
             
 
+            
+
              object that describes the result of the <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+            
 
             
 
@@ -4581,8 +5559,12 @@
 
             
 
+            
+
              object inherits the <see
              cref="P:System.ComponentModel.AsyncCompletedEventArgs.UserState" />
+
+            
 
             
 
@@ -4595,8 +5577,12 @@
 
             
 
+            
+
              object passed into the <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+            
 
             
 
@@ -4612,11 +5598,15 @@
 
             
 
+            
+
              methods; these methods are synchronous.</para
           >
           <para
             >If the ICMP echo reply message is not received within the time specified by the <paramref
              name="timeout" />
+
+            
 
             
 
@@ -4629,8 +5619,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.TimedOut" />
+
+            
 
             
 
@@ -4647,8 +5641,12 @@
 
               
 
+              
+
               , the Ping reply can be received even if <paramref
                name="timeout" />
+
+              
 
               
 
@@ -4665,6 +5663,8 @@
 
             
 
+            
+
              property is true and the total packet size exceeds the maximum packet size that can be transmitted by one of the routing nodes between the local and remote computers, the ICMP echo request fails. When this happens, the <see
              cref="P:System.Net.NetworkInformation.PingReply.Status" />
 
@@ -4672,8 +5672,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.PacketTooBig" />
+
+            
 
             
 
@@ -4689,6 +5693,8 @@
 
             
 
+            
+
              property to specify the maximum number of times the ICMP echo message can be forwarded before reaching its destination. If the packet does not reach its destination after being forwarded the specified number of times, the packet is discarded and the ICMP echo request fails. When this happens, the <see
              cref="P:System.Net.NetworkInformation.PingReply.Status" />
 
@@ -4696,8 +5702,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Net.NetworkInformation.IPStatus.TtlExpired" />
+
+            
 
             
 
@@ -4717,8 +5727,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -4733,8 +5747,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -4749,8 +5767,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -4765,8 +5787,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.NetworkInformation.PingOptions" />
+
+          
 
           
 
@@ -4776,6 +5802,8 @@
         >
         <param name="userToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4807,6 +5835,8 @@
           <para
             >Call this method to terminate any calls to <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+            
 
             
 
@@ -4851,6 +5881,8 @@
 
             
 
+            
+
             &gt; object will complete after the ICMP packet has been sent and the response has been received.</para
           >
         </remarks>
@@ -4859,6 +5891,8 @@
           <para
             >Send an Internet Control Message Protocol (ICMP) echo message with the specified data buffer to the computer that has the specified <see
              cref="T:System.Net.IPAddress" />
+
+            
 
             
 
@@ -4877,12 +5911,16 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4922,6 +5960,8 @@
 
             
 
+            
+
             &gt; object will complete after the ICMP packet has been sent and the response has been received.</para
           >
         </remarks>
@@ -4939,12 +5979,16 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="hostNameOrAddress">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4985,6 +6029,8 @@
 
             
 
+            
+
             &gt; object will complete after the ICMP packet has been sent and the response has been received.</para
           >
         </remarks>
@@ -4993,6 +6039,8 @@
           <para
             >Send an Internet Control Message Protocol (ICMP) echo message with the specified data buffer to the computer that has the specified <see
              cref="T:System.Net.IPAddress" />
+
+            
 
             
 
@@ -5011,6 +6059,8 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
@@ -5022,10 +6072,14 @@
 
           
 
+          
+
           An IP address that identifies the computer that is the destination for the ICMP echo message.</param
         >
         <param name="timeout">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5066,6 +6120,8 @@
 
             
 
+            
+
             &gt; object will complete after the ICMP packet has been sent and the response has been received.</para
           >
         </remarks>
@@ -5083,6 +6139,8 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
@@ -5094,10 +6152,14 @@
 
           
 
+          
+
           The computer that is the destination for the ICMP echo message. The value specified for this parameter can be a host name or a string representation of an IP address.</param
         >
         <param name="timeout">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5139,6 +6201,8 @@
 
             
 
+            
+
             &gt; object will complete after the ICMP packet has been sent and the response has been received.</para
           >
         </remarks>
@@ -5147,6 +6211,8 @@
           <para
             >Send an Internet Control Message Protocol (ICMP) echo message with the specified data buffer to the computer that has the specified <see
              cref="T:System.Net.IPAddress" />
+
+            
 
             
 
@@ -5165,12 +6231,16 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5185,6 +6255,8 @@
 
           
 
+          
+
           The maximum number of milliseconds (after sending the echo message) to wait for the ICMP echo reply message.</param
         >
         <param name="buffer">
@@ -5194,8 +6266,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -5237,6 +6313,8 @@
 
             
 
+            
+
             &gt; object will complete after the ICMP packet has been sent and the response has been received.</para
           >
         </remarks>
@@ -5254,12 +6332,16 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="hostNameOrAddress">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5274,6 +6356,8 @@
 
           
 
+          
+
           The maximum number of milliseconds (after sending the echo message) to wait for the ICMP echo reply message.</param
         >
         <param name="buffer">
@@ -5283,8 +6367,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -5327,6 +6415,8 @@
 
             
 
+            
+
             &gt; object will complete after the ICMP packet has been sent and the response has been received.</para
           >
         </remarks>
@@ -5335,6 +6425,8 @@
           <para
             >Send an Internet Control Message Protocol (ICMP) echo message with the specified data buffer to the computer that has the specified <see
              cref="T:System.Net.IPAddress" />
+
+            
 
             
 
@@ -5353,12 +6445,16 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5373,6 +6469,8 @@
 
           
 
+          
+
           The maximum number of milliseconds (after sending the echo message) to wait for the ICMP echo reply message.</param
         >
         <param name="buffer">
@@ -5382,8 +6480,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -5398,8 +6500,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.NetworkInformation.PingOptions" />
+
+          
 
           
 
@@ -5442,6 +6548,8 @@
 
             
 
+            
+
             &gt; object will complete after the ICMP packet has been sent and the response has been received.</para
           >
         </remarks>
@@ -5459,12 +6567,16 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
         </returns>
         <param name="hostNameOrAddress">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5479,6 +6591,8 @@
 
           
 
+          
+
           The maximum number of milliseconds (after sending the echo message) to wait for the ICMP echo reply message.</param
         >
         <param name="buffer">
@@ -5488,8 +6602,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -5504,8 +6622,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.NetworkInformation.PingOptions" />
+
+          
 
           
 
@@ -5541,8 +6663,12 @@
 
             
 
+            
+
              object that has been disposed, you receive an <see
              cref="T:System.ObjectDisposedException" />
+
+            
 
             
 
@@ -5556,6 +6682,8 @@
           <para
             >Releases all resources used by instances of the <see
              cref="T:System.Net.NetworkInformation.Ping" />
+
+            
 
             
 

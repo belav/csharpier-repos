@@ -24,11 +24,15 @@
 
         
 
+        
+
          class provides a way to programmatically access and modify the add element of the outputCacheProfiles section in the caching section of a configuration file.</para
       >
       <para
         >The <see
          cref="T:System.Web.Configuration.OutputCacheProfile" />
+
+        
 
         
 
@@ -44,10 +48,14 @@
 
         
 
+        
+
          can be applied to a page using the CacheProfile attribute of the <format
          type="text/html">
           <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
         </format>
+
+        
 
         
 
@@ -66,8 +74,12 @@
 
           
 
+          
+
            directive can override all the settings contained by an <see
            cref="T:System.Web.Configuration.OutputCacheProfile" />
+
+          
 
           
 
@@ -80,8 +92,12 @@
 
           
 
+          
+
            attribute. This is to enable or disable the <see
            cref="T:System.Web.Configuration.OutputCacheProfile" />
+
+          
 
           
 
@@ -93,6 +109,8 @@
       <para
         >The <see
          cref="T:System.Web.Caching.CacheDependency" />
+
+        
 
         
 
@@ -126,11 +144,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -167,6 +189,8 @@
 
             
 
+            
+
              represents the time in seconds that the page or user control is cached. Setting this property establishes an expiration policy for HTTP responses from the page or control to which it applies and will automatically cause the caching of their output. </para
           >
           <block subset="none" type="note">
@@ -178,10 +202,14 @@
 
               
 
+              
+
                must be defined in either the profile or the <format
                type="text/html">
                 <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
               </format>
+
+              
 
               
 
@@ -224,8 +252,12 @@
 
             
 
+            
+
              property allows enabling or disabling the caching mechanism in one place only. It affects all the pages or controls that use this <see
              cref="T:System.Web.Configuration.OutputCacheProfile" />
+
+            
 
             
 
@@ -265,6 +297,8 @@
           <para
             >If <see
              cref="P:System.Web.Configuration.OutputCacheProfile.Location" />
+
+            
 
             
 
@@ -312,6 +346,8 @@
 
             
 
+            
+
              to assign a value to the CacheProfile attribute of the <format
              type="text/html">
               <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
@@ -321,8 +357,12 @@
 
             
 
+            
+
              directive if you want to apply the <see
              cref="T:System.Web.Configuration.OutputCacheProfile" />
+
+            
 
             
 
@@ -336,6 +376,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Web.Configuration.OutputCacheProfile" />
+
+            
 
             
 
@@ -373,11 +415,15 @@
 
             
 
+            
+
              property set to true issues a response specifying in its header to prevent secondary storage of sensitive information.</para
           >
           <para
             >Setting this attribute to true is equivalent to invoking the <see
              cref="M:System.Web.HttpCachePolicy.SetNoStore" />
+
+            
 
             
 
@@ -438,8 +484,12 @@
 
             
 
+            
+
              defines a relationship between a Web application and an instance of SQL Server, allowing the detection of changes in the data at the server. The <see
              cref="P:System.Web.Configuration.OutputCacheProfile.SqlDependency" />
+
+            
 
             
 
@@ -456,6 +506,8 @@
 
               
 
+              
+
                class monitors the table so that when the table changes, the item will be automatically removed from the Cache. This class cannot be inherited. </para
             >
           </block>
@@ -465,6 +517,8 @@
           <para
             >Gets or sets the <see
              cref="P:System.Web.Configuration.OutputCacheProfile.SqlDependency" />
+
+            
 
             
 
@@ -504,10 +558,14 @@
 
             
 
+            
+
              settings are the same ones used by the VaryByContentEncoding attribute of the <format
              type="text/html">
               <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
             </format>
+
+            
 
             
 
@@ -522,10 +580,14 @@
 
             
 
+            
+
              is introduced in the .NET Framework version 3.5.  For more information, see <format
              type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
+
+            
 
             
 
@@ -564,6 +626,8 @@
 
             
 
+            
+
              is a semicolon-delimited set of IDs of controls to be cached. </para
           >
           <para
@@ -573,6 +637,8 @@
                 >Caching Multiple Versions of User Control Output</a
               >
             </format>
+
+            
 
             
 
@@ -589,10 +655,14 @@
 
               
 
+              
+
                settings are the same ones used by the VaryByControls attribute of the <format
                type="text/html">
                 <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
               </format>
+
+              
 
               
 
@@ -607,6 +677,8 @@
           <para
             >Gets or sets the <see
              cref="P:System.Web.Configuration.OutputCacheProfile.VaryByControl" />
+
+            
 
             
 
@@ -644,8 +716,12 @@
 
             
 
+            
+
              can be any text that represents custom output-caching requirements. If a custom string is entered, you must override the <see
              cref="M:System.Web.HttpApplication.GetVaryByCustomString(System.Web.HttpContext,System.String)" />
+
+            
 
             
 
@@ -662,10 +738,14 @@
 
               
 
+              
+
                settings are the same ones used by the VaryByCustom attribute of the <format
                type="text/html">
                 <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
               </format>
+
+              
 
               
 
@@ -680,6 +760,8 @@
           <para
             >Gets or sets the <see
              cref="P:System.Web.Configuration.OutputCacheProfile.VaryByCustom" />
+
+            
 
             
 
@@ -717,10 +799,14 @@
 
             
 
+            
+
              is a semicolon-delimited set of headers used to vary the cached output. These are HTTP headers associated with the request. For more information, see <format
              type="text/html">
               <a href="c60284a9-9899-4fdc-a97c-020766b7572e">Caching Multiple Versions of a Page</a>
             </format>
+
+            
 
             
 
@@ -737,10 +823,14 @@
 
               
 
+              
+
                settings are the same ones used by the VaryByHeader attribute of the <format
                type="text/html">
                 <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
               </format>
+
+              
 
               
 
@@ -755,6 +845,8 @@
           <para
             >Gets or sets the <see
              cref="P:System.Web.Configuration.OutputCacheProfile.VaryByHeader" />
+
+            
 
             
 
@@ -792,12 +884,16 @@
 
             
 
+            
+
              is a semicolon-delimited set of parameters used to vary the cached output. It allows varying the cached output by GET query string or form POST parameters. For instance, you can vary the user-control output to the cache by specifying the user-control name along with either a query string or a form POST parameter. For more information, see <format
              type="text/html">
               <a href="7f7d839a-c060-4d2a-9c4e-7fd1080ec0ad"
                 >Caching Multiple Versions of User Control Output</a
               >
             </format>
+
+            
 
             
 
@@ -813,10 +909,14 @@
 
             
 
+            
+
              setting must be defined in either the profile or the <format
              type="text/html">
               <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
             </format>
+
+            
 
             
 
@@ -833,10 +933,14 @@
 
               
 
+              
+
                settings are the same ones used by the VaryByParam attribute of the <format
                type="text/html">
                 <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
               </format>
+
+              
 
               
 
@@ -851,6 +955,8 @@
           <para
             >Gets or sets the <see
              cref="P:System.Web.Configuration.OutputCacheProfile.VaryByParam" />
+
+            
 
             
 

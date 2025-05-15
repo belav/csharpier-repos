@@ -28,10 +28,14 @@
 
         
 
+        
+
          object can represent an <format
          type="text/html">
           <a href="aac894e3-a9f1-4bbc-a796-6ef07001f35b">ItemGroup</a>
         </format>
+
+        
 
         
 
@@ -44,6 +48,8 @@
 
         
 
+        
+
          and <unmanagedCodeEntityReference
         >Exclude</unmanagedCodeEntityReference>
 
@@ -51,8 +57,12 @@
 
         
 
+        
+
          attributes of an <unmanagedCodeEntityReference
         >Item</unmanagedCodeEntityReference>
+
+        
 
         
 
@@ -66,6 +76,8 @@
       <para
         >Represents a collection of <see
          cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+
+        
 
         
 
@@ -88,6 +100,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+
+            
 
             
 
@@ -127,8 +141,12 @@
 
             
 
+            
+
              with the specified <see
              cref="P:Microsoft.Build.BuildEngine.BuildItem.Name" />
+
+            
 
             
 
@@ -141,8 +159,12 @@
 
             
 
+            
+
              property values to the <see
              cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+
+            
 
             
 
@@ -161,11 +183,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="itemName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -178,8 +204,12 @@
 
           
 
+          
+
            property value to assign the new <see
            cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+
+          
 
           
 
@@ -194,6 +224,8 @@
 
           
 
+          
+
           The <see
            cref="P:Microsoft.Build.BuildEngine.BuildItem.Include" />
 
@@ -201,8 +233,12 @@
 
           
 
+          
+
            property value to assign the new <see
            cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+
+          
 
           
 
@@ -242,8 +278,12 @@
 
             
 
+            
+
              with the specified <see
              cref="P:Microsoft.Build.BuildEngine.BuildItem.Name" />
+
+            
 
             
 
@@ -256,6 +296,8 @@
 
             
 
+            
+
              property values to the <see
              cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
 
@@ -263,8 +305,12 @@
 
             
 
+            
+
             , allowing you to specify whether the <see
              cref="P:Microsoft.Build.BuildEngine.BuildItem.Include" />
+
+            
 
             
 
@@ -283,11 +329,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="itemName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -300,8 +350,12 @@
 
           
 
+          
+
            property value to assign the new <see
            cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+
+          
 
           
 
@@ -316,6 +370,8 @@
 
           
 
+          
+
           The <see
            cref="P:Microsoft.Build.BuildEngine.BuildItem.Include" />
 
@@ -323,8 +379,12 @@
 
           
 
+          
+
            property value to assign the new <see
            cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+
+          
 
           
 
@@ -339,8 +399,12 @@
 
           
 
+          
+
           true to treat the <paramref
            name="itemInclude" />
+
+          
 
           
 
@@ -373,6 +437,8 @@
 
             
 
+            
+
              property value and all <see
              cref="T:Microsoft.Build.BuildEngine.BuildItem" />
 
@@ -380,8 +446,12 @@
 
             
 
+            
+
              objects from the <see
              cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+
+            
 
             
 
@@ -419,6 +489,8 @@
 
             
 
+            
+
              references the same property group as the original. Modifications a shallow copy will be reflected in both copies.</para
           >
           <para
@@ -429,8 +501,12 @@
 
             
 
+            
+
              creates a new XML element to reference so that both copies of the <see
              cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+
+            
 
             
 
@@ -446,10 +522,14 @@
 
             
 
+            
+
              corresponds directly to a <format
              type="text/html">
               <a href="aac894e3-a9f1-4bbc-a796-6ef07001f35b">ItemGroup</a>
             </format>
+
+            
 
             
 
@@ -462,6 +542,8 @@
 
             
 
+            
+
              and <unmanagedCodeEntityReference
             >Exclude</unmanagedCodeEntityReference>
 
@@ -469,8 +551,12 @@
 
             
 
+            
+
              attributes of an <unmanagedCodeEntityReference
             >Item</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -489,6 +575,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -497,6 +585,8 @@
           <para
             >A copy of the <see
              cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+
+            
 
             
 
@@ -512,8 +602,12 @@
 
           
 
+          
+
           true to create a deep copy of the <see
            cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+
+          
 
           
 
@@ -541,6 +635,8 @@
           <para
             >Gets or sets the <unmanagedCodeEntityReference
             >Condition</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -574,8 +670,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+
+            
 
             
 
@@ -611,8 +711,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+
+            
 
             
 
@@ -631,6 +735,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -644,8 +750,12 @@
 
             
 
+            
+
              for the entire <see
              cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+
+            
 
             
 
@@ -726,8 +836,12 @@
 
             
 
+            
+
              from the <see
              cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+
+            
 
             
 
@@ -743,8 +857,12 @@
 
           
 
+          
+
           The <see
            cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+
+          
 
           
 
@@ -779,8 +897,12 @@
 
             
 
+            
+
              at the specified index from the <see
              cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+
+            
 
             
 
@@ -796,8 +918,12 @@
 
           
 
+          
+
           The zero-based index of the <see
            cref="T:Microsoft.Build.BuildEngine.BuildItem" />
+
+          
 
           
 
@@ -833,8 +959,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+
+            
 
             
 
@@ -853,8 +983,12 @@
 
             
 
+            
+
              objects copied from the <see
              cref="T:Microsoft.Build.BuildEngine.BuildItemGroup" />
+
+            
 
             
 

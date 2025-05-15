@@ -27,6 +27,8 @@
 
         
 
+        
+
          class represents the CMS/PKCS #7 ContentInfo data structure as defined in the CMS/PKCS #7 standards document. This data structure is the basis for all CMS/PKCS #7 messages.</para
       >
     </summary>
@@ -53,6 +55,8 @@
           <para
             >The <see
              cref="T:System.Security.Cryptography.Pkcs.ContentInfo" />
+
+            
 
             
 
@@ -93,6 +97,8 @@
 
             
 
+            
+
              constructor  creates an instance of the <see
              cref="T:System.Security.Cryptography.Pkcs.ContentInfo" />
 
@@ -100,8 +106,12 @@
 
             
 
+            
+
              class by using an array of byte values as the data and a default <paramref
              name="object identifier" />
+
+            
 
             
 
@@ -117,8 +127,12 @@
 
           
 
+          
+
           An array of byte values that represents the data from which to create the <see
            cref="T:System.Security.Cryptography.Pkcs.ContentInfo" />
+
+          
 
           
 
@@ -160,8 +174,12 @@
 
             
 
+            
+
              constructor to build the <paramref
              name="contentType" />
+
+            
 
             
 
@@ -175,6 +193,8 @@
                 <term>
                   <para>
                     <paramref name="contentType " />
+
+                    
 
                     
 
@@ -256,8 +276,12 @@
 
             
 
+            
+
               constructor  creates an instance of the <see
              cref="T:System.Security.Cryptography.Pkcs.ContentInfo" />
+
+            
 
             
 
@@ -273,8 +297,12 @@
 
           
 
+          
+
           An array of byte values that represents the data from which to create the <see
            cref="T:System.Security.Cryptography.Pkcs.ContentInfo" />
+
+          
 
           
 
@@ -304,6 +332,8 @@
           <para
             >The <see
              cref="P:System.Security.Cryptography.Pkcs.ContentInfo.Content" />
+
+            
 
             
 
@@ -345,6 +375,8 @@
 
             
 
+            
+
              property  retrieves the <see
              cref="T:System.Security.Cryptography.Oid" />
 
@@ -352,8 +384,12 @@
 
             
 
+            
+
                object that contains the <paramref
              name="object identifier" />
+
+            
 
             
 
@@ -418,8 +454,12 @@
 
             
 
+            
+
              static method  retrieves the outer content type of the encoded <see
              cref="T:System.Security.Cryptography.Pkcs.ContentInfo" />
+
+            
 
             
 
@@ -438,8 +478,12 @@
 
             
 
+            
+
              object that contains the outer content type of the specified encoded <see
              cref="T:System.Security.Cryptography.Pkcs.ContentInfo" />
+
+            
 
             
 
@@ -456,8 +500,12 @@
 
           
 
+          
+
           An array of byte values that represents the encoded <see
            cref="T:System.Security.Cryptography.Pkcs.ContentInfo" />
+
+          
 
           
 

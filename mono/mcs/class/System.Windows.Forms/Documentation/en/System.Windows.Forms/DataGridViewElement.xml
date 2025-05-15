@@ -21,6 +21,8 @@
 
         
 
+        
+
         : <see
          cref="T:System.Windows.Forms.DataGridViewCell" />
 
@@ -28,8 +30,12 @@
 
         
 
+        
+
         , which represents individual elements, and <see
          cref="T:System.Windows.Forms.DataGridViewBand" />
+
+        
 
         
 
@@ -43,6 +49,8 @@
       <para
         >Provides the base class for elements of a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -69,6 +77,8 @@
 
             
 
+            
+
              property to null.</para
           >
         </remarks>
@@ -77,6 +87,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.DataGridViewElement" />
+
+            
 
             
 
@@ -108,6 +120,8 @@
           <para
             >Gets the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -149,6 +163,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -182,6 +198,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -192,8 +210,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellEventArgs" />
+
+          
 
           
 
@@ -231,6 +253,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -241,8 +265,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellEventArgs" />
+
+          
 
           
 
@@ -280,6 +308,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -290,8 +320,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellEventArgs" />
+
+          
 
           
 
@@ -329,6 +363,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -339,8 +375,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellEventArgs" />
+
+          
 
           
 
@@ -378,6 +418,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -388,8 +430,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewDataErrorEventArgs" />
+
+          
 
           
 
@@ -427,6 +473,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -437,8 +485,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -468,6 +520,8 @@
           <para
             >The states specified by the <see
              cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+            
 
             
 

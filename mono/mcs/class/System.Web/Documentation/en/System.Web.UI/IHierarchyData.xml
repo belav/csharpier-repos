@@ -18,6 +18,8 @@
 
         
 
+        
+
          interface is implemented by classes that represent nodes of a hierarchical structure, and track the hierarchical relationships to their parent and child nodes. Classes that implement the <see
          cref="T:System.Web.UI.IHierarchyData" />
 
@@ -25,8 +27,12 @@
 
         
 
+        
+
          interface can be contained in collections that implement the <see
          cref="T:System.Web.UI.IHierarchicalEnumerable" />
+
+        
 
         
 
@@ -45,8 +51,12 @@
 
         
 
+        
+
          interface can be contained in <see
          cref="T:System.Web.UI.IHierarchicalEnumerable" />
+
+        
 
         
 
@@ -79,8 +89,12 @@
 
             
 
+            
+
              property to determine whether the <see
              cref="T:System.Web.UI.IHierarchyData" />
+
+            
 
             
 
@@ -98,6 +112,8 @@
           <para
             >An <see
              cref="T:System.Web.UI.IHierarchicalEnumerable" />
+
+            
 
             
 
@@ -130,6 +146,8 @@
 
             
 
+            
+
              interface does not define a HasParent convenience property, so callers must check the return value of the <see
              cref="M:System.Web.UI.IHierarchyData.GetParent" />
 
@@ -137,8 +155,12 @@
 
             
 
+            
+
              method for null to determine whether the current <see
              cref="T:System.Web.UI.IHierarchyData" />
+
+            
 
             
 
@@ -157,6 +179,8 @@
 
             
 
+            
+
              object that represents the parent node of the current hierarchical node.</para
           >
         </summary>
@@ -165,6 +189,8 @@
           <para
             >An <see
              cref="T:System.Web.UI.IHierarchyData" />
+
+            
 
             
 
@@ -197,8 +223,12 @@
 
             
 
+            
+
              property is a convenience property that enables callers to avoid checking the return value of the <see
              cref="M:System.Web.UI.IHierarchyData.GetChildren" />
+
+            
 
             
 
@@ -211,6 +241,8 @@
 
             
 
+            
+
              property returns true, call the <see
              cref="M:System.Web.UI.IHierarchyData.GetChildren" />
 
@@ -218,8 +250,12 @@
 
             
 
+            
+
              method to retrieve an <see
              cref="T:System.Web.UI.IHierarchicalEnumerable" />
+
+            
 
             
 
@@ -233,6 +269,8 @@
           <para
             >Indicates whether the hierarchical data node that the <see
              cref="T:System.Web.UI.IHierarchyData" />
+
+            
 
             
 
@@ -265,8 +303,12 @@
 
             
 
+            
+
              class, implement the <see
              cref="T:System.Web.UI.IHierarchyData" />
+
+            
 
             
 
@@ -279,8 +321,12 @@
 
             
 
+            
+
              property is provided for these design situations, when business objects are functionally equivalent to an <see
              cref="T:System.Web.UI.IHierarchyData" />
+
+            
 
             
 
@@ -294,6 +340,8 @@
           <para
             >Gets the hierarchical data node that the <see
              cref="T:System.Web.UI.IHierarchyData" />
+
+            
 
             
 
@@ -326,8 +374,12 @@
 
             
 
+            
+
              property can be passed to the <see
              cref="M:System.Web.UI.HierarchicalDataSourceControl.GetHierarchicalView(System.String)" />
+
+            
 
             
 
@@ -340,8 +392,12 @@
 
             
 
+            
+
              object that corresponds to the node identified by <see
              cref="P:System.Web.UI.IHierarchyData.Path" />
+
+            
 
             
 
@@ -353,6 +409,8 @@
             <para
               >The <see
                cref="P:System.Web.UI.IHierarchyData.Path" />
+
+              
 
               
 
@@ -390,6 +448,8 @@
 
             
 
+            
+
              property does not return the <see
              cref="T:System.Type" />
 
@@ -397,8 +457,12 @@
 
             
 
+            
+
              of the object represented in an <see
              cref="T:System.Web.UI.IHierarchyData" />
+
+            
 
             
 
@@ -417,8 +481,12 @@
 
             
 
+            
+
              contained in the <see
              cref="P:System.Web.UI.IHierarchyData.Item" />
+
+            
 
             
 

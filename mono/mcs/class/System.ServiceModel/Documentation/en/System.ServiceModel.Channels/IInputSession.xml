@@ -28,8 +28,12 @@
 
         
 
+        
+
          interface represents an outgoing <see
          cref="T:System.ServiceModel.Channels.ISession" />
+
+        
 
         
 

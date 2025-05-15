@@ -22,8 +22,12 @@
 
         
 
+        
+
          collection is empty—the columns are mapped implicitly based on ordinal position. For this to work, source and target schemas must match. If they do not, an <see
          cref="T:System.InvalidOperationException" />
+
+        
 
         
 
@@ -39,6 +43,8 @@
 
         
 
+        
+
          collection is not empty, not every column present in the data source has to be specified. Those not mapped by the collection are ignored.</para
       >
       <para>You can refer to source and target columns by either name or ordinal. You can also mix by-name and by-ordinal column references in the same mappings collection.</para>
@@ -48,6 +54,8 @@
       <para
         >Defines the mapping between a column in a <see
          cref="T:System.Data.SqlClient.SqlBulkCopy" />
+
+        
 
         
 
@@ -74,8 +82,12 @@
 
             
 
+            
+
              property or the <see
              cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.SourceOrdinal" />
+
+            
 
             
 
@@ -88,8 +100,12 @@
 
             
 
+            
+
              property or the <see
              cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.DestinationOrdinal" />
+
+            
 
             
 
@@ -103,6 +119,8 @@
           <para
             >Default constructor that initializes a new <see
              cref="T:System.Data.SqlClient.SqlBulkCopyColumnMapping" />
+
+            
 
             
 
@@ -140,10 +158,14 @@
 
           
 
+          
+
           The ordinal position of the source column within the data source.</param
         >
         <param name="destinationOrdinal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -180,10 +202,14 @@
 
           
 
+          
+
           The ordinal position of the source column within the data source.</param
         >
         <param name="destinationColumn">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -220,10 +246,14 @@
 
           
 
+          
+
           The name of the source column within the data source.</param
         >
         <param name="destinationOrdinal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -260,10 +290,14 @@
 
           
 
+          
+
           The name of the source column within the data source.</param
         >
         <param name="destinationColumn">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -295,8 +329,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.DestinationOrdinal" />
+
+            
 
             
 
@@ -333,8 +371,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.DestinationOrdinal" />
+
+            
 
             
 
@@ -371,8 +413,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.SourceOrdinal" />
+
+            
 
             
 
@@ -409,8 +455,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Data.SqlClient.SqlBulkCopyColumnMapping.SourceOrdinal" />
+
+            
 
             
 

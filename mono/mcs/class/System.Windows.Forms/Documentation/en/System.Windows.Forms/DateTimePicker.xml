@@ -41,8 +41,12 @@
 
         
 
+        
+
          control is used to allow the user to select a date and time, and to display that date and time in the specified format. The <see
          cref="T:System.Windows.Forms.DateTimePicker" />
+
+        
 
         
 
@@ -59,12 +63,16 @@
 
           
 
+          
+
            control only supports Gregorian calendars.</para
         >
       </block>
       <para
         >When used to represent a date, the <see
          cref="T:System.Windows.Forms.DateTimePicker" />
+
+        
 
         
 
@@ -77,8 +85,12 @@
 
         
 
+        
+
          control, which can be used for selecting multiple dates. For more information about the <see
          cref="T:System.Windows.Forms.MonthCalendar" />
+
+        
 
         
 
@@ -95,11 +107,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >You can change the look of the calendar portion of the control by setting the <see
          cref="P:System.Windows.Forms.DateTimePicker.CalendarForeColor" />
+
+        
 
         
 
@@ -112,8 +128,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Windows.Forms.DateTimePicker.CalendarTitleBackColor" />
+
+        
 
         
 
@@ -126,6 +146,8 @@
 
         
 
+        
+
         , <see
          cref="P:System.Windows.Forms.DateTimePicker.CalendarTrailingForeColor" />
 
@@ -133,8 +155,12 @@
 
         
 
+        
+
         , and <see
          cref="P:System.Windows.Forms.DateTimePicker.CalendarMonthBackground" />
+
+        
 
         
 
@@ -150,11 +176,15 @@
 
         
 
+        
+
          property to true. The calendar will not drop down when the control is selected. The date and time can be adjusted by selecting each element individually and using the up and down buttons to change the value.</para
       >
       <para
         >The <see
          cref="P:System.Windows.Forms.DateTimePicker.Value" />
+
+        
 
         
 
@@ -167,8 +197,12 @@
 
         
 
+        
+
          property or the appropriate member of <see
          cref="P:System.Windows.Forms.DateTimePicker.Value" />
+
+        
 
         
 
@@ -185,6 +219,8 @@
 
         
 
+        
+
         . You can limit the dates and times that can be selected by setting the <see
          cref="P:System.Windows.Forms.DateTimePicker.MinDate" />
 
@@ -192,8 +228,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.DateTimePicker.MaxDate" />
+
+        
 
         
 
@@ -209,8 +249,12 @@
 
         
 
+        
+
          property: <see
          cref="F:System.Windows.Forms.DateTimePickerFormat.Long" />
+
+        
 
         
 
@@ -223,8 +267,12 @@
 
         
 
+        
+
         , <see
          cref="F:System.Windows.Forms.DateTimePickerFormat.Time" />
+
+        
 
         
 
@@ -237,6 +285,8 @@
 
         
 
+        
+
         . The default date <see
          cref="P:System.Windows.Forms.DateTimePicker.Format" />
 
@@ -244,8 +294,12 @@
 
         
 
+        
+
          is <see
          cref="F:System.Windows.Forms.DateTimePickerFormat.Long" />
+
+        
 
         
 
@@ -261,8 +315,12 @@
 
         
 
+        
+
          to appear as a control for picking or editing times instead of dates, set the <see
          cref="P:System.Windows.Forms.DateTimePicker.ShowUpDown" />
+
+        
 
         
 
@@ -275,8 +333,12 @@
 
         
 
+        
+
          property to <see
          cref="F:System.Windows.Forms.DateTimePickerFormat.Time" />
+
+        
 
         
 
@@ -293,11 +355,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >If the <see
          cref="P:System.Windows.Forms.DateTimePicker.Format" />
+
+        
 
         
 
@@ -310,6 +376,8 @@
 
         
 
+        
+
         , you can create your own format style by setting the <see
          cref="P:System.Windows.Forms.DateTimePicker.CustomFormat" />
 
@@ -317,8 +385,12 @@
 
         
 
+        
+
          property and building a custom format string. The custom format string can be a combination of custom field characters and other literal characters. For example, you can display the date as "June 01, 2012 - Friday" by setting the <see
          cref="P:System.Windows.Forms.DateTimePicker.CustomFormat" />
+
+        
 
         
 
@@ -335,10 +407,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom Date and Time Format Strings</a>
         </format>
+
+        
 
         
 
@@ -355,8 +431,12 @@
 
           
 
+          
+
            is data-bound and the backing value is changed to null, the value of the <see
            cref="T:System.Windows.Forms.DateTimePicker" />
+
+          
 
           
 
@@ -369,6 +449,8 @@
 
           
 
+          
+
            event of the <see
            cref="T:System.Windows.Forms.Binding" />
 
@@ -376,8 +458,12 @@
 
           
 
+          
+
            class to set the <see
            cref="T:System.Windows.Forms.DateTimePicker" />
+
+          
 
           
 
@@ -405,6 +491,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.DateTimePicker" />
+
+            
 
             
 
@@ -448,8 +536,12 @@
 
             
 
+            
+
              has no effect on the appearance of the <see
              cref="T:System.Windows.Forms.DateTimePicker" />
+
+            
 
             
 
@@ -462,8 +554,12 @@
 
             
 
+            
+
             , see the <see
              cref="P:System.Windows.Forms.DateTimePicker.CalendarMonthBackground" />
+
+            
 
             
 
@@ -477,6 +573,8 @@
           <para
             >Gets or sets a value indicating the background color of the <see
              cref="T:System.Windows.Forms.DateTimePicker" />
+
+            
 
             
 
@@ -512,6 +610,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.DateTimePicker.BackColor" />
+
+            
 
             
 
@@ -585,6 +685,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -626,8 +728,12 @@
 
             
 
+            
+
              property has no effect on the appearance of the <see
              cref="T:System.Windows.Forms.DateTimePicker" />
+
+            
 
             
 
@@ -641,6 +747,8 @@
           <para
             >Gets or sets the layout of the background image of the <see
              cref="T:System.Windows.Forms.DateTimePicker" />
+
+            
 
             
 
@@ -683,6 +791,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -717,12 +827,16 @@
 
             
 
+            
+
              check box. To disable visual styles in C#, open Program.cs and comment out Application.EnableVisualStyles();. For more information about visual styles, see <format
              type="text/html">
               <a href="0a038ade-31cf-4e56-9cfe-7a1e6b83b57f"
                 >How to: Enable Windows XP Visual Styles</a
               >
             </format>
+
+            
 
             
 
@@ -762,8 +876,12 @@
 
             
 
+            
+
              is created, this property is initially set equal to the <see
              cref="P:System.Windows.Forms.Control.ForeColor" />
+
+            
 
             
 
@@ -779,12 +897,16 @@
 
             
 
+            
+
              check box. To disable visual styles in C#, open Program.cs and comment out Application.EnableVisualStyles();. For more information about visual styles, see <format
              type="text/html">
               <a href="0a038ade-31cf-4e56-9cfe-7a1e6b83b57f"
                 >How to: Enable Windows XP Visual Styles</a
               >
             </format>
+
+            
 
             
 
@@ -824,8 +946,12 @@
 
             
 
+            
+
              is created, this property is initially set equal to the <see
              cref="F:System.Windows.Forms.DateTimePicker.DefaultMonthBackColor" />
+
+            
 
             
 
@@ -841,12 +967,16 @@
 
             
 
+            
+
              check box. To disable visual styles in C#, open Program.cs and comment out Application.EnableVisualStyles();. For more information about visual styles, see <format
              type="text/html">
               <a href="0a038ade-31cf-4e56-9cfe-7a1e6b83b57f"
                 >How to: Enable Windows XP Visual Styles</a
               >
             </format>
+
+            
 
             
 
@@ -886,8 +1016,12 @@
 
             
 
+            
+
              is created, this property is initially set equal to the <see
              cref="F:System.Windows.Forms.DateTimePicker.DefaultTitleBackColor" />
+
+            
 
             
 
@@ -903,12 +1037,16 @@
 
             
 
+            
+
              check box. To disable visual styles in C#, open Program.cs and comment out Application.EnableVisualStyles();. For more information about visual styles, see <format
              type="text/html">
               <a href="0a038ade-31cf-4e56-9cfe-7a1e6b83b57f"
                 >How to: Enable Windows XP Visual Styles</a
               >
             </format>
+
+            
 
             
 
@@ -948,8 +1086,12 @@
 
             
 
+            
+
              is created, this property is initially set equal to the <see
              cref="F:System.Windows.Forms.DateTimePicker.DefaultTitleForeColor" />
+
+            
 
             
 
@@ -965,12 +1107,16 @@
 
             
 
+            
+
              check box. To disable visual styles in C#, open Program.cs and comment out Application.EnableVisualStyles();. For more information about visual styles, see <format
              type="text/html">
               <a href="0a038ade-31cf-4e56-9cfe-7a1e6b83b57f"
                 >How to: Enable Windows XP Visual Styles</a
               >
             </format>
+
+            
 
             
 
@@ -1010,8 +1156,12 @@
 
             
 
+            
+
              is created, this property is initially set equal to the <see
              cref="F:System.Windows.Forms.DateTimePicker.DefaultTrailingForeColor" />
+
+            
 
             
 
@@ -1028,12 +1178,16 @@
 
             
 
+            
+
              check box. To disable visual styles in C#, open Program.cs and comment out Application.EnableVisualStyles();. For more information about visual styles, see <format
              type="text/html">
               <a href="0a038ade-31cf-4e56-9cfe-7a1e6b83b57f"
                 >How to: Enable Windows XP Visual Styles</a
               >
             </format>
+
+            
 
             
 
@@ -1078,8 +1232,12 @@
 
             
 
+            
+
              property value is true. If the <see
              cref="P:System.Windows.Forms.DateTimePicker.Checked" />
+
+            
 
             
 
@@ -1092,8 +1250,12 @@
 
             
 
+            
+
              control displays the properly formatted <see
              cref="P:System.Windows.Forms.DateTimePicker.Value" />
+
+            
 
             
 
@@ -1106,8 +1268,12 @@
 
             
 
+            
+
              property or the current date and time (<see
              cref="P:System.DateTime.Now" />
+
+            
 
             
 
@@ -1121,6 +1287,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="P:System.Windows.Forms.DateTimePicker.Value" />
+
+            
 
             
 
@@ -1182,6 +1350,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1216,8 +1386,12 @@
 
             
 
+            
+
              method, it will be called when the <see
              cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+
+            
 
             
 
@@ -1229,6 +1403,8 @@
             <para
               >To get or set the <see
                cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+
+              
 
               
 
@@ -1248,6 +1424,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -1256,6 +1434,8 @@
           <para
             >A new <see
              cref="T:System.Windows.Forms.DateTimePicker.DateTimePickerAccessibleObject" />
+
+            
 
             
 
@@ -1311,6 +1491,8 @@
 
             
 
+            
+
              used to create this window.</para
           >
         </summary>
@@ -1349,6 +1531,8 @@
 
             
 
+            
+
              property to "MMMM dd 'at' t:mm tt". If the "at" substring is not enclosed by escape characters, the result is "June 15 aP 12:00PM" because the "t" character is read as the one-letter A.M./P.M. format string (see the format string table below).</para
           >
           <para
@@ -1356,6 +1540,8 @@
              type="text/html">
               <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom Date and Time Format Strings</a>
             </format>
+
+            
 
             
 
@@ -1372,8 +1558,12 @@
 
               
 
+              
+
                property must be set to <see
                cref="F:System.Windows.Forms.DateTimePickerFormat.Custom" />
+
+              
 
               
 
@@ -1595,6 +1785,8 @@
 
             
 
+            
+
              control. This field is read-only.</para
           >
         </summary>
@@ -1644,6 +1836,8 @@
 
             
 
+            
+
              control. This field is read-only.</para
           >
         </summary>
@@ -1674,6 +1868,8 @@
 
             
 
+            
+
              control. This field is read-only.</para
           >
         </summary>
@@ -1699,6 +1895,8 @@
           <para
             >Specifies the default trailing foreground color of the <see
              cref="T:System.Windows.Forms.DateTimePicker" />
+
+            
 
             
 
@@ -1776,8 +1974,12 @@
 
             
 
+            
+
              property has no effect on the <see
              cref="T:System.Windows.Forms.DateTimePicker" />
+
+            
 
             
 
@@ -1791,6 +1993,8 @@
           <para
             >Gets or sets a value indicating whether the control should redraw its surface using a secondary buffer. Setting this property has no effect on the <see
              cref="T:System.Windows.Forms.DateTimePicker" />
+
+            
 
             
 
@@ -1848,6 +2052,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1894,6 +2100,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -1932,8 +2140,12 @@
 
             
 
+            
+
              property has no effect on the appearance of the <see
              cref="T:System.Windows.Forms.DateTimePicker" />
+
+            
 
             
 
@@ -1949,8 +2161,12 @@
 
             
 
+            
+
             , see the <see
              cref="P:System.Windows.Forms.DateTimePicker.CalendarForeColor" />
+
+            
 
             
 
@@ -1964,6 +2180,8 @@
           <para
             >Gets or sets the foreground color of the <see
              cref="T:System.Windows.Forms.DateTimePicker" />
+
+            
 
             
 
@@ -2003,6 +2221,8 @@
 
             
 
+            
+
              property is changed either by a programmatic modification or through interaction.</para
           >
           <para
@@ -2010,6 +2230,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -2023,6 +2245,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.DateTimePicker.ForeColor" />
+
+            
 
             
 
@@ -2065,6 +2289,8 @@
 
               
 
+              
+
                property must be set to <see
                cref="F:System.Windows.Forms.DateTimePickerFormat.Custom" />
 
@@ -2072,8 +2298,12 @@
 
               
 
+              
+
                for the <see
                cref="P:System.Windows.Forms.DateTimePicker.CustomFormat" />
+
+              
 
               
 
@@ -2090,8 +2320,12 @@
 
             
 
+            
+
             , set the <see
              cref="P:System.Windows.Forms.DateTimePicker.Format" />
+
+            
 
             
 
@@ -2104,8 +2338,12 @@
 
             
 
+            
+
             , and the <see
              cref="P:System.Windows.Forms.DateTimePicker.ShowUpDown" />
+
+            
 
             
 
@@ -2143,6 +2381,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -2151,6 +2391,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.DateTimePicker.Format" />
+
+            
 
             
 
@@ -2197,8 +2439,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.Keys" />
+
+          
 
           
 
@@ -2256,6 +2502,8 @@
 
             
 
+            
+
              control. This field is read-only.</para
           >
         </summary>
@@ -2293,6 +2541,8 @@
           <para
             >Gets the maximum date value allowed for the <see
              cref="T:System.Windows.Forms.DateTimePicker" />
+
+            
 
             
 
@@ -2347,6 +2597,8 @@
 
             
 
+            
+
              control. </para
           >
         </summary>
@@ -2384,6 +2636,8 @@
           <para
             >Gets the minimum date value allowed for the <see
              cref="T:System.Windows.Forms.DateTimePicker" />
+
+            
 
             
 
@@ -2479,6 +2733,8 @@
 
             
 
+            
+
              event occurs when the drop-down calendar is dismissed and disappears.</para
           >
           <para
@@ -2491,11 +2747,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.DateTimePicker.OnCloseUp(System.EventArgs)" />
+
+            
 
             
 
@@ -2514,6 +2774,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2524,8 +2786,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2562,6 +2828,8 @@
 
             
 
+            
+
              event occurs when the drop-down calendar is shown.</para
           >
           <para
@@ -2574,11 +2842,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.DateTimePicker.OnDropDown(System.EventArgs)" />
+
+            
 
             
 
@@ -2597,6 +2869,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2607,8 +2881,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2644,11 +2922,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.DateTimePicker.OnFontChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -2667,6 +2949,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2675,6 +2959,8 @@
           <para
             >The <see
              cref="T:System.Windows.Forms.DateTimePicker" />
+
+            
 
             
 
@@ -2690,8 +2976,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2728,8 +3018,12 @@
 
             
 
+            
+
              event occurs when the <see
              cref="P:System.Windows.Forms.DateTimePicker.Format" />
+
+            
 
             
 
@@ -2747,11 +3041,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.DateTimePicker.OnFormatChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -2770,6 +3068,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2780,8 +3080,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2823,11 +3127,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.DateTimePicker.OnHandleCreated(System.EventArgs)" />
+
+            
 
             
 
@@ -2846,6 +3154,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2856,8 +3166,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2895,11 +3209,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.DateTimePicker.OnHandleDestroyed(System.EventArgs)" />
+
+            
 
             
 
@@ -2918,6 +3236,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2928,8 +3248,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2972,11 +3296,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.DateTimePicker.OnRightToLeftLayoutChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -2995,6 +3323,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -3005,8 +3335,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -3040,6 +3374,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -3050,8 +3386,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -3088,6 +3428,8 @@
 
             
 
+            
+
              event occurs when the value for the control changes.</para
           >
           <para
@@ -3100,11 +3442,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.DateTimePicker.OnValueChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -3123,6 +3469,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -3133,8 +3481,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -3183,8 +3535,12 @@
 
             
 
+            
+
              property has no effect on the <see
              cref="T:System.Windows.Forms.DateTimePicker" />
+
+            
 
             
 
@@ -3198,6 +3554,8 @@
           <para
             >Gets or sets the spacing between the contents of the <see
              cref="T:System.Windows.Forms.DateTimePicker" />
+
+            
 
             
 
@@ -3235,6 +3593,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.DateTimePicker.Padding" />
+
+            
 
             
 
@@ -3300,6 +3660,8 @@
 
             
 
+            
+
              applied.</para
           >
         </remarks>
@@ -3308,6 +3670,8 @@
           <para
             >Gets the preferred height of the <see
              cref="T:System.Windows.Forms.DateTimePicker" />
+
+            
 
             
 
@@ -3351,6 +3715,8 @@
 
             
 
+            
+
              property is used for international applications where the language is written from right to left, such as Hebrew or Arabic.</para
           >
         </remarks>
@@ -3359,6 +3725,8 @@
           <para
             >Gets or sets whether the contents of the <see
              cref="T:System.Windows.Forms.DateTimePicker" />
+
+            
 
             
 
@@ -3391,6 +3759,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -3399,6 +3769,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.DateTimePicker.RightToLeftLayout" />
+
+            
 
             
 
@@ -3461,6 +3833,8 @@
 
             
 
+            
+
              property is set to true, a check box is displayed to the left of the date in the control. When the check box is selected, the date/time value can be updated. When the check box is cleared, the date/time value is unable to be changed.</para
           >
         </remarks>
@@ -3497,11 +3871,15 @@
 
             
 
+            
+
              property is set to true, a spin button control (also known as an up-down control), rather than a drop-down calendar, is used to adjust time values. The date and time can be adjusted by selecting each element individually and using the up and down buttons to change the value.</para
           >
           <para
             >To display only time in a <see
              cref="T:System.Windows.Forms.DateTimePicker" />
+
+            
 
             
 
@@ -3514,6 +3892,8 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Windows.Forms.DateTimePickerFormat.Time" />
 
@@ -3521,8 +3901,12 @@
 
             
 
+            
+
             , and the <see
              cref="P:System.Windows.Forms.DateTimePicker.ShowUpDown" />
+
+            
 
             
 
@@ -3570,8 +3954,12 @@
 
             
 
+            
+
              property with the appropriate formatting or custom formatting applied. For example, if the <see
              cref="P:System.Windows.Forms.DateTimePicker.Value" />
+
+            
 
             
 
@@ -3584,8 +3972,12 @@
 
             
 
+            
+
              property is set to "dddd, MMMM dd, yyyy", the <see
              cref="P:System.Windows.Forms.DateTimePicker.Text" />
+
+            
 
             
 
@@ -3601,8 +3993,12 @@
 
             
 
+            
+
              class. It is possible to define a custom format that results in a string that cannot be converted to a valid <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -3615,8 +4011,12 @@
 
             
 
+            
+
              property might cause an error if it is passed back to the <see
              cref="P:System.Windows.Forms.DateTimePicker.Text" />
+
+            
 
             
 
@@ -3629,8 +4029,12 @@
 
             
 
+            
+
              class throws a <see
              cref="T:System.FormatException" />
+
+            
 
             
 
@@ -3675,6 +4079,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -3703,6 +4109,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -3716,8 +4124,12 @@
 
             
 
+            
+
             . The string includes the type and the <see
              cref="P:System.Windows.Forms.DateTimePicker.Value" />
+
+            
 
             
 
@@ -3758,8 +4170,12 @@
 
             
 
+            
+
              property has not been changed in code or by the user, it is set to the current date and time (<see
              cref="P:System.DateTime.Now" />
+
+            
 
             
 
@@ -3795,8 +4211,12 @@
 
             
 
+            
+
              or later than <see
              cref="F:System.Windows.Forms.DateTimePicker.MaxDateTime" />
+
+            
 
             
 
@@ -3814,6 +4234,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -3822,6 +4244,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.DateTimePicker.Value" />
+
+            
 
             
 

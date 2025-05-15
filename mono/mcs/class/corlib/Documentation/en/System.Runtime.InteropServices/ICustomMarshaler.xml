@@ -63,6 +63,8 @@ library OldLib {
 
         
 
+        
+
          interface to provide the appropriate wrappers to the runtime. </para
       >
       <para>The following C# code displays the base interface that must be implemented by all custom marshalers. </para>
@@ -70,6 +72,8 @@ library OldLib {
       <para
         >The <see
          cref="T:System.Runtime.InteropServices.ICustomMarshaler" />
+
+        
 
         
 
@@ -135,6 +139,8 @@ library OldLib {
 
               
 
+              
+
                method.</para
             >
           </description>
@@ -152,6 +158,8 @@ library OldLib {
             <para
               >Enables the marshaler to clean up the managed data (the RCW) that is returned by the <see
                cref="M:System.Runtime.InteropServices.ICustomMarshaler.MarshalNativeToManaged(System.IntPtr)" />
+
+              
 
               
 
@@ -200,6 +208,8 @@ library OldLib {
 
         
 
+        
+
          method.</para
       >
       <para>
@@ -208,6 +218,8 @@ library OldLib {
       <para
         >Enables the marshaler to clean up the managed data (the RCW) that is returned by the <see
          cref="M:System.Runtime.InteropServices.ICustomMarshaler.MarshalNativeToManaged(System.IntPtr)" />
+
+        
 
         
 
@@ -233,6 +245,8 @@ library OldLib {
 
         
 
+        
+
          interface, custom marshalers must implement a static method called GetInstance that accepts a <see
          cref="T:System.String" />
 
@@ -240,8 +254,12 @@ library OldLib {
 
         
 
+        
+
          as a parameter and has a return type of <see
          cref="T:System.Runtime.InteropServices.ICustomMarshaler" />
+
+        
 
         
 
@@ -261,11 +279,15 @@ library OldLib {
 
         
 
+        
+
          attribute to the parameter or field that is being marshaled.</para
       >
       <para
         >You must also pass the <see
          cref="F:System.Runtime.InteropServices.UnmanagedType.CustomMarshaler" />
+
+        
 
         
 
@@ -278,8 +300,12 @@ library OldLib {
 
         
 
+        
+
          constructor. In addition, you must specify the <see
          cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalType" />
+
+        
 
         
 
@@ -296,12 +322,16 @@ library OldLib {
 
             
 
+            
+
              (required): The assembly-qualified name of the custom marshaler. The name should include the namespace and class of the custom marshaler. If the custom marshaler is not defined in the assembly it is used in, you must specify the name of the assembly in which it is defined.</para
           >
           <block subset="none" type="note">
             <para
               >You can use the <see
                cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalTypeRef" />
+
+              
 
               
 
@@ -314,8 +344,12 @@ library OldLib {
 
               
 
+              
+
                field. <see
                cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalTypeRef" />
+
+              
 
               
 
@@ -333,6 +367,8 @@ library OldLib {
 
             
 
+            
+
              (optional): A cookie that is passed to the custom marshaler. You can use the cookie to provide additional information to the marshaler. For example, if the same marshaler is used to provide a number of wrappers, the cookie identifies a specific wrapper. The cookie is passed to the GetInstance method of the marshaler.</para
           >
         </item>
@@ -340,6 +376,8 @@ library OldLib {
       <para
         >The <see
          cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
+
+        
 
         
 
@@ -355,8 +393,12 @@ library OldLib {
 
         
 
+        
+
          and <see
          cref="M:System.Runtime.InteropServices.ICustomMarshaler.MarshalManagedToNative(System.Object)" />
+
+        
 
         
 
@@ -384,6 +426,8 @@ library UserLib {
 
         
 
+        
+
          attribute applied to the INew argument in the managed definition of the DoSomeStuff method indicates that the argument uses a custom marshaler, as the following example shows.</para
       >
       <para>code reference: System.Runtime.InteropServices.ICustomMarshaler#4</para>
@@ -396,8 +440,12 @@ library UserLib {
 
         
 
+        
+
          attribute is the <see
          cref="F:System.Runtime.InteropServices.UnmanagedType.CustomMarshaler" />
+
+        
 
         
 
@@ -408,6 +456,8 @@ library UserLib {
       <para
         >The second parameter is the <see
          cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalType" />
+
+        
 
         
 
@@ -453,6 +503,8 @@ library UserLib {
 
           
 
+          
+
           The managed object to be destroyed. </param
         >
       </Docs>
@@ -483,6 +535,8 @@ library UserLib {
         </summary>
         <param name="pNativeData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -558,6 +612,8 @@ library UserLib {
 
           
 
+          
+
           The managed object to be converted. </param
         >
       </Docs>
@@ -595,6 +651,8 @@ library UserLib {
         </returns>
         <param name="pNativeData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

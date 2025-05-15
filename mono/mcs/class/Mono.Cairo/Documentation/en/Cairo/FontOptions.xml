@@ -80,6 +80,8 @@
 
           
 
+          
+
            or <see
            cref="M:Cairo.FontOptions.Copy()" />
         </summary>
@@ -192,6 +194,8 @@
 
           
 
+          
+
            for full details.</remarks
         >
       </Docs>
@@ -212,6 +216,8 @@
         <remarks
           >This controls whether to fit font outlines to the pixel grid, and if so, whether to optimize for fidelity or contrast. See the documentation for <see
            cref="T:Cairo.HintStyle" />
+
+          
 
           
 
@@ -239,6 +245,8 @@
         <summary
           >Merges non-default options from <paramref
            name="other" />
+
+          
 
           
 
@@ -334,6 +342,8 @@
         <remarks
           >The subpixel order specifies the order of color elements within each pixel on the display device when rendering with an antialiasing mode of Cairo.Antialias.Subpixel. See the documentation for <see
            cref="T:Cairo.SubpixelOrder" />
+
+          
 
           
 

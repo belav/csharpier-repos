@@ -37,6 +37,8 @@
 
         
 
+        
+
          class for typical operations such as copying, moving, renaming, creating, and deleting directories.</para
       >
       <para
@@ -47,8 +49,12 @@
 
         
 
+        
+
          instead of the corresponding static methods of the <see
          cref="T:System.IO.Directory" />
+
+        
 
         
 
@@ -80,6 +86,8 @@
          type="text/html">
           <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
         </format>
+
+        
 
         
 
@@ -122,6 +130,8 @@
 
             
 
+            
+
              parameter can be a file name, including a file on a Universal Naming Convention (UNC) share.</para
           >
           <block subset="none" type="note">
@@ -132,6 +142,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -150,11 +162,15 @@
 
             
 
+            
+
              class on the specified path.</para
           >
         </summary>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -189,6 +205,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -242,6 +260,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -255,11 +275,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="directorySecurity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -301,6 +325,8 @@
 
             
 
+            
+
              are created, unless some part of <paramref
              name="path" />
 
@@ -308,8 +334,12 @@
 
             
 
+            
+
              is invalid. The <paramref
              name="path" />
+
+            
 
             
 
@@ -330,6 +360,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -338,6 +370,8 @@
           <para
             >Creates a subdirectory or subdirectories on the specified path. The specified path can be relative to this instance of the <see
              cref="T:System.IO.DirectoryInfo" />
+
+            
 
             
 
@@ -356,11 +390,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -406,6 +444,8 @@
 
             
 
+            
+
              are created, unless some part of <paramref
              name="path" />
 
@@ -413,8 +453,12 @@
 
             
 
+            
+
              is invalid. The <paramref
              name="path" />
+
+            
 
             
 
@@ -435,6 +479,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -443,6 +489,8 @@
           <para
             >Creates a subdirectory or subdirectories on the specified path with the specified security. The specified path can be relative to this instance of the <see
              cref="T:System.IO.DirectoryInfo" />
+
+            
 
             
 
@@ -461,6 +509,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -471,10 +521,14 @@
 
           
 
+          
+
           The specified path. This cannot be a different disk volume or Universal Naming Convention (UNC) name.</param
         >
         <param name="directorySecurity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -513,6 +567,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -521,6 +577,8 @@
           <para
             >Deletes this <see
              cref="T:System.IO.DirectoryInfo" />
+
+            
 
             
 
@@ -560,8 +618,12 @@
 
             
 
+            
+
              is false. Attempting to delete a DirectoryInfo that is not empty when <paramref
              name="recursive" />
+
+            
 
             
 
@@ -574,6 +636,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -581,6 +645,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -599,11 +665,15 @@
 
             
 
+            
+
             , specifying whether to delete subdirectories and files.</para
           >
         </summary>
         <param name="recursive">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -641,8 +711,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IO.DirectoryInfo.GetDirectories" />
+
+            
 
             
 
@@ -660,8 +734,12 @@
 
                 
 
+                
+
                 , you can start enumerating the collection of <see
                  cref="T:System.IO.DirectoryInfo" />
+
+                
 
                 
 
@@ -679,8 +757,12 @@
 
                 
 
+                
+
                 , you must wait for the whole array of <see
                  cref="T:System.IO.DirectoryInfo" />
+
+                
 
                 
 
@@ -698,11 +780,15 @@
 
             
 
+            
+
              can be more efficient.</para
           >
           <para
             >This method pre-populates the values of the following <see
              cref="T:System.IO.DirectoryInfo" />
+
+            
 
             
 
@@ -750,6 +836,8 @@
           <para
             >The returned collection is not cached; each call to the <see
              cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
+
+            
 
             
 
@@ -797,8 +885,12 @@
 
             
 
+            
+
              can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref
              name="searchPattern" />
+
+            
 
             
 
@@ -842,8 +934,12 @@
 
             
 
+            
+
              string "s*" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -859,8 +955,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IO.DirectoryInfo.GetDirectories" />
+
+            
 
             
 
@@ -878,8 +978,12 @@
 
                 
 
+                
+
                 , you can start enumerating the collection of <see
                  cref="T:System.IO.DirectoryInfo" />
+
+                
 
                 
 
@@ -897,8 +1001,12 @@
 
                 
 
+                
+
                 , you must wait for the whole array of <see
                  cref="T:System.IO.DirectoryInfo" />
+
+                
 
                 
 
@@ -916,11 +1024,15 @@
 
             
 
+            
+
              can be more efficient.</para
           >
           <para
             >This method pre-populates the values of the following <see
              cref="T:System.IO.DirectoryInfo" />
+
+            
 
             
 
@@ -973,6 +1085,8 @@
 
             
 
+            
+
              method on  the collection will start a new enumeration.</para
           >
         </remarks>
@@ -990,11 +1104,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="searchPattern">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1034,8 +1152,12 @@
 
             
 
+            
+
              can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref
              name="searchPattern" />
+
+            
 
             
 
@@ -1079,8 +1201,12 @@
 
             
 
+            
+
              string "s*" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -1096,8 +1222,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IO.DirectoryInfo.GetDirectories" />
+
+            
 
             
 
@@ -1115,8 +1245,12 @@
 
                 
 
+                
+
                 , you can start enumerating the collection of <see
                  cref="T:System.IO.DirectoryInfo" />
+
+                
 
                 
 
@@ -1134,8 +1268,12 @@
 
                 
 
+                
+
                 , you must wait for the whole array of <see
                  cref="T:System.IO.DirectoryInfo" />
+
+                
 
                 
 
@@ -1153,11 +1291,15 @@
 
             
 
+            
+
              can be more efficient.</para
           >
           <para
             >This method pre-populates the values of the following <see
              cref="T:System.IO.DirectoryInfo" />
+
+            
 
             
 
@@ -1210,6 +1352,8 @@
 
             
 
+            
+
              method on  the collection will start a new enumeration.</para
           >
         </remarks>
@@ -1227,8 +1371,12 @@
 
             
 
+            
+
              and <paramref
              name="searchOption" />
+
+            
 
             
 
@@ -1244,6 +1392,8 @@
 
           
 
+          
+
           The search string to match against the names of directories.  This parameter can contain a combination of valid literal path and wildcard (* and ?) characters (see Remarks), but doesn't support regular expressions. The default pattern is "*", which returns all files.</param
         >
         <param name="searchOption">
@@ -1253,8 +1403,12 @@
 
           
 
+          
+
           One of the enumeration values that specifies whether the search operation should include only the current directory or all subdirectories. The default value is <see
            cref="F:System.IO.SearchOption.TopDirectoryOnly" />
+
+          
 
           
 
@@ -1292,8 +1446,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IO.DirectoryInfo.GetFiles" />
+
+            
 
             
 
@@ -1311,8 +1469,12 @@
 
                 
 
+                
+
                 , you can start enumerating the collection of <see
                  cref="T:System.IO.FileInfo" />
+
+                
 
                 
 
@@ -1330,8 +1492,12 @@
 
                 
 
+                
+
                 , you must wait for the whole array of <see
                  cref="T:System.IO.FileInfo" />
+
+                
 
                 
 
@@ -1349,11 +1515,15 @@
 
             
 
+            
+
              can be more efficient.</para
           >
           <para
             >This method pre-populates the values of the following <see
              cref="T:System.IO.FileInfo" />
+
+            
 
             
 
@@ -1406,6 +1576,8 @@
           <para
             >The returned collection is not cached; each call to the <see
              cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
+
+            
 
             
 
@@ -1453,8 +1625,12 @@
 
             
 
+            
+
              can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref
              name="searchPattern" />
+
+            
 
             
 
@@ -1498,8 +1674,12 @@
 
             
 
+            
+
              string "s*" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -1515,8 +1695,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IO.DirectoryInfo.GetFiles" />
+
+            
 
             
 
@@ -1534,8 +1718,12 @@
 
                 
 
+                
+
                 , you can start enumerating the collection of <see
                  cref="T:System.IO.FileInfo" />
+
+                
 
                 
 
@@ -1553,8 +1741,12 @@
 
                 
 
+                
+
                 , you must wait for the whole array of <see
                  cref="T:System.IO.FileInfo" />
+
+                
 
                 
 
@@ -1572,11 +1764,15 @@
 
             
 
+            
+
              can be more efficient.</para
           >
           <para
             >This method pre-populates the values of the following <see
              cref="T:System.IO.FileInfo" />
+
+            
 
             
 
@@ -1634,6 +1830,8 @@
 
             
 
+            
+
              method on the collection will start a new enumeration.</para
           >
         </remarks>
@@ -1651,11 +1849,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="searchPattern">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1695,8 +1897,12 @@
 
             
 
+            
+
              can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref
              name="searchPattern" />
+
+            
 
             
 
@@ -1740,8 +1946,12 @@
 
             
 
+            
+
              string "s*" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -1757,8 +1967,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IO.DirectoryInfo.GetFiles" />
+
+            
 
             
 
@@ -1776,8 +1990,12 @@
 
                 
 
+                
+
                 , you can start enumerating the collection of <see
                  cref="T:System.IO.FileInfo" />
+
+                
 
                 
 
@@ -1795,8 +2013,12 @@
 
                 
 
+                
+
                 , you must wait for the whole array of <see
                  cref="T:System.IO.FileInfo" />
+
+                
 
                 
 
@@ -1814,11 +2036,15 @@
 
             
 
+            
+
              can be more efficient.</para
           >
           <para
             >This method pre-populates the values of the following <see
              cref="T:System.IO.FileInfo" />
+
+            
 
             
 
@@ -1876,6 +2102,8 @@
 
             
 
+            
+
              method on the collection will start a new enumeration.</para
           >
         </remarks>
@@ -1893,8 +2121,12 @@
 
             
 
+            
+
              and <paramref
              name="searchOption" />
+
+            
 
             
 
@@ -1910,6 +2142,8 @@
 
           
 
+          
+
           The search string to match against the names of files.  This parameter can contain a combination of valid literal path and wildcard (* and ?) characters (see Remarks), but doesn't support regular expressions. The default pattern is "*", which returns all files.</param
         >
         <param name="searchOption">
@@ -1919,8 +2153,12 @@
 
           
 
+          
+
           One of the enumeration values that specifies whether the search operation should include only the current directory or all subdirectories. The default value is <see
            cref="F:System.IO.SearchOption.TopDirectoryOnly" />
+
+          
 
           
 
@@ -1958,8 +2196,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IO.DirectoryInfo.GetFileSystemInfos" />
+
+            
 
             
 
@@ -1977,8 +2219,12 @@
 
                 
 
+                
+
                 , you can start enumerating the collection of <see
                  cref="T:System.IO.FileInfo" />
+
+                
 
                 
 
@@ -1996,8 +2242,12 @@
 
                 
 
+                
+
                 , you must wait for the whole array of <see
                  cref="T:System.IO.FileSystemInfo" />
+
+                
 
                 
 
@@ -2015,11 +2265,15 @@
 
             
 
+            
+
              can be more efficient.</para
           >
           <para
             >This method pre-populates the values of the following <see
              cref="T:System.IO.FileSystemInfo" />
+
+            
 
             
 
@@ -2067,6 +2321,8 @@
           <para
             >The returned collection is not cached; each call to the <see
              cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
+
+            
 
             
 
@@ -2114,8 +2370,12 @@
 
             
 
+            
+
              can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref
              name="searchPattern" />
+
+            
 
             
 
@@ -2159,8 +2419,12 @@
 
             
 
+            
+
              string "s*" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -2176,8 +2440,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IO.DirectoryInfo.GetFileSystemInfos" />
+
+            
 
             
 
@@ -2195,8 +2463,12 @@
 
                 
 
+                
+
                 , you can start enumerating the collection of <see
                  cref="T:System.IO.FileInfo" />
+
+                
 
                 
 
@@ -2214,8 +2486,12 @@
 
                 
 
+                
+
                 , you must wait for the whole array of <see
                  cref="T:System.IO.FileSystemInfo" />
+
+                
 
                 
 
@@ -2233,11 +2509,15 @@
 
             
 
+            
+
              can be more efficient.</para
           >
           <para
             >This method pre-populates the values of the following <see
              cref="T:System.IO.FileSystemInfo" />
+
+            
 
             
 
@@ -2290,6 +2570,8 @@
 
             
 
+            
+
              method on the collection will start a new enumeration.</para
           >
         </remarks>
@@ -2307,11 +2589,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="searchPattern">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2351,8 +2637,12 @@
 
             
 
+            
+
              can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref
              name="searchPattern" />
+
+            
 
             
 
@@ -2396,8 +2686,12 @@
 
             
 
+            
+
              string "s*" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -2413,8 +2707,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IO.DirectoryInfo.GetFileSystemInfos" />
+
+            
 
             
 
@@ -2432,8 +2730,12 @@
 
                 
 
+                
+
                 , you can start enumerating the collection of <see
                  cref="T:System.IO.FileInfo" />
+
+                
 
                 
 
@@ -2451,8 +2753,12 @@
 
                 
 
+                
+
                 , you must wait for the whole array of <see
                  cref="T:System.IO.FileSystemInfo" />
+
+                
 
                 
 
@@ -2470,11 +2776,15 @@
 
             
 
+            
+
              can be more efficient.</para
           >
           <para
             >This method pre-populates the values of the following <see
              cref="T:System.IO.FileSystemInfo" />
+
+            
 
             
 
@@ -2527,6 +2837,8 @@
 
             
 
+            
+
              method on the collection will start a new enumeration.</para
           >
         </remarks>
@@ -2544,8 +2856,12 @@
 
             
 
+            
+
              and <paramref
              name="searchOption" />
+
+            
 
             
 
@@ -2561,6 +2877,8 @@
 
           
 
+          
+
           The search string to match against the names of directories.  This parameter can contain a combination of valid literal path and wildcard (* and ?) characters (see Remarks), but doesn't support regular expressions. The default pattern is "*", which returns all files.</param
         >
         <param name="searchOption">
@@ -2570,8 +2888,12 @@
 
           
 
+          
+
           One of the enumeration values that specifies whether the search operation should include only the current directory or all subdirectories. The default value is <see
            cref="F:System.IO.SearchOption.TopDirectoryOnly" />
+
+          
 
           
 
@@ -2600,6 +2922,8 @@
           <para
             >The <see
              cref="P:System.IO.DirectoryInfo.Exists" />
+
+            
 
             
 
@@ -2644,8 +2968,12 @@
 
             
 
+            
+
              method overload and specifying the access control sections <see
              cref="F:System.Security.AccessControl.AccessControlSections.Access" />
+
+            
 
             
 
@@ -2658,8 +2986,12 @@
 
             
 
+            
+
              | <see
              cref="F:System.Security.AccessControl.AccessControlSections.Group" />
+
+            
 
             
 
@@ -2672,8 +3004,12 @@
 
             
 
+            
+
              Or <see
              cref="F:System.Security.AccessControl.AccessControlSections.Owner" />
+
+            
 
             
 
@@ -2686,11 +3022,15 @@
 
             
 
+            
+
              in Visual Basic).</para
           >
           <para
             >Use the <see
              cref="M:System.IO.DirectoryInfo.GetAccessControl" />
+
+            
 
             
 
@@ -2708,12 +3048,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="53758b39-bd9b-4640-bb04-cad5ed8d0abf"
                 >How to: Add or Remove an Access Control List Entry</a
               >
             </format>
+
+            
 
             
 
@@ -2732,8 +3076,12 @@
 
             
 
+            
+
              object that encapsulates the access control list (ACL) entries for the directory described by the current <see
              cref="T:System.IO.DirectoryInfo" />
+
+            
 
             
 
@@ -2747,6 +3095,8 @@
           <para
             >A <see
              cref="T:System.Security.AccessControl.DirectorySecurity" />
+
+            
 
             
 
@@ -2792,6 +3142,8 @@
 
             
 
+            
+
              method to retrieve the access control list (ACL) entries for the current file.</para
           >
           <para
@@ -2804,12 +3156,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="53758b39-bd9b-4640-bb04-cad5ed8d0abf"
                 >How to: Add or Remove an Access Control List Entry</a
               >
             </format>
+
+            
 
             
 
@@ -2828,8 +3184,12 @@
 
             
 
+            
+
              object that encapsulates the specified type of access control list (ACL) entries for the directory described by the current <see
              cref="T:System.IO.DirectoryInfo" />
+
+            
 
             
 
@@ -2848,8 +3208,12 @@
 
             
 
+            
+
              object that encapsulates the access control rules for the file described by the <paramref
              name="path" />
+
+            
 
             
 
@@ -2932,8 +3296,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AccessControlSections" />
+
+          
 
           
 
@@ -2966,6 +3334,8 @@
           <para
             >This method pre-populates the values of the following <see
              cref="T:System.IO.DirectoryInfo" />
+
+            
 
             
 
@@ -3025,6 +3395,8 @@
 
             
 
+            
+
              objects.</para
           >
         </returns>
@@ -3061,8 +3433,12 @@
 
             
 
+            
+
              can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref
              name="searchPattern" />
+
+            
 
             
 
@@ -3106,8 +3482,12 @@
 
             
 
+            
+
              string "s*" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -3118,6 +3498,8 @@
           <para
             >This method pre-populates the values of the following <see
              cref="T:System.IO.DirectoryInfo" />
+
+            
 
             
 
@@ -3173,6 +3555,8 @@
 
             
 
+            
+
              matching the given search criteria.</para
           >
         </summary>
@@ -3186,11 +3570,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="searchPattern">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3232,8 +3620,12 @@
 
             
 
+            
+
              can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref
              name="searchPattern" />
+
+            
 
             
 
@@ -3277,8 +3669,12 @@
 
             
 
+            
+
              string "s*" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -3294,11 +3690,15 @@
 
             
 
+            
+
              parameter, this method returns an empty array.</para
           >
           <para
             >This method pre-populates the values of the following <see
              cref="T:System.IO.DirectoryInfo" />
+
+            
 
             
 
@@ -3354,6 +3754,8 @@
 
             
 
+            
+
              matching the given search criteria and using a value to determine whether to search subdirectories.</para
           >
         </summary>
@@ -3362,6 +3764,8 @@
           <para
             >An array of type DirectoryInfo matching <paramref
              name="searchPattern" />
+
+            
 
             
 
@@ -3377,10 +3781,14 @@
 
           
 
+          
+
           The search string to match against the names of directories.  This parameter can contain a combination of valid literal path and wildcard (* and ?) characters (see Remarks), but doesn't support regular expressions. The default pattern is "*", which returns all files.</param
         >
         <param name="searchOption">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3417,8 +3825,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IO.DirectoryInfo.GetFiles" />
+
+            
 
             
 
@@ -3436,8 +3848,12 @@
 
                 
 
+                
+
                 , you can start enumerating the collection of <see
                  cref="T:System.IO.FileInfo" />
+
+                
 
                 
 
@@ -3455,8 +3871,12 @@
 
                 
 
+                
+
                 , you must wait for the whole array of <see
                  cref="T:System.IO.FileInfo" />
+
+                
 
                 
 
@@ -3474,11 +3894,15 @@
 
             
 
+            
+
              can be more efficient.</para
           >
           <para
             >If there are no files in the <see
              cref="T:System.IO.DirectoryInfo" />
+
+            
 
             
 
@@ -3494,11 +3918,15 @@
 
             
 
+            
+
              method if a specific sort order is required.</para
           >
           <para
             >This method pre-populates the values of the following <see
              cref="T:System.IO.FileInfo" />
+
+            
 
             
 
@@ -3563,6 +3991,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -3599,8 +4029,12 @@
 
             
 
+            
+
              can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref
              name="searchPattern" />
+
+            
 
             
 
@@ -3644,8 +4078,12 @@
 
             
 
+            
+
              string "s*" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -3661,8 +4099,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IO.DirectoryInfo.GetFiles" />
+
+            
 
             
 
@@ -3680,8 +4122,12 @@
 
                 
 
+                
+
                 , you can start enumerating the collection of <see
                  cref="T:System.IO.FileInfo" />
+
+                
 
                 
 
@@ -3699,8 +4145,12 @@
 
                 
 
+                
+
                 , you must wait for the whole array of <see
                  cref="T:System.IO.FileInfo" />
+
+                
 
                 
 
@@ -3718,6 +4168,8 @@
 
             
 
+            
+
              can be more efficient.</para
           >
           <para
@@ -3728,11 +4180,15 @@
 
             
 
+            
+
             , this method returns an empty array.</para
           >
           <para
             >The following wildcard specifiers are permitted in the <paramref
              name="searchPattern" />
+
+            
 
             
 
@@ -3776,11 +4232,15 @@
 
             
 
+            
+
              method if a specific sort order is required.</para
           >
           <para
             >Wildcards are permitted. For example, the <paramref
              name="searchPattern" />
+
+            
 
             
 
@@ -3793,6 +4253,8 @@
 
             
 
+            
+
              string "s*" searches for all file names beginning with the letter "s". If there are no files, or no files that match the <paramref
              name="searchPattern" />
 
@@ -3800,8 +4262,12 @@
 
             
 
+            
+
              string in the <see
              cref="T:System.IO.DirectoryInfo" />
+
+            
 
             
 
@@ -3818,8 +4284,12 @@
 
               
 
+              
+
                (for example, "*.txt"), the matching behavior varies depending on the length of the specified file extension. A <paramref
                name="searchPattern" />
+
+              
 
               
 
@@ -3832,6 +4302,8 @@
 
               
 
+              
+
               . A <paramref
                name="searchPattern" />
 
@@ -3839,8 +4311,12 @@
 
               
 
+              
+
                with a file extension of one, two, or more than three characters returns only files with extensions of exactly that length that match the file extension specified in the <paramref
                name="searchPattern" />
+
+              
 
               
 
@@ -3855,6 +4331,8 @@
           <para
             >This method pre-populates the values of the following <see
              cref="T:System.IO.FileInfo" />
+
+            
 
             
 
@@ -3919,11 +4397,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="searchPattern">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3966,8 +4448,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IO.DirectoryInfo.GetFiles" />
+
+            
 
             
 
@@ -3985,8 +4471,12 @@
 
                 
 
+                
+
                 , you can start enumerating the collection of <see
                  cref="T:System.IO.FileInfo" />
+
+                
 
                 
 
@@ -4004,8 +4494,12 @@
 
                 
 
+                
+
                 , you must wait for the whole array of <see
                  cref="T:System.IO.FileInfo" />
+
+                
 
                 
 
@@ -4023,6 +4517,8 @@
 
             
 
+            
+
              can be more efficient.</para
           >
           <para
@@ -4033,11 +4529,15 @@
 
             
 
+            
+
             , this method returns an empty array.</para
           >
           <para
             >The following wildcard specifiers are permitted in <paramref
              name="searchPattern" />
+
+            
 
             
 
@@ -4081,11 +4581,15 @@
 
             
 
+            
+
              method if a specific sort order is required.</para
           >
           <para
             >Wildcards are permitted. For example, the <paramref
              name="searchPattern" />
+
+            
 
             
 
@@ -4098,6 +4602,8 @@
 
             
 
+            
+
              string "s*" searches for all file names beginning with the letter "s". If there are no files, or no files that match the <paramref
              name="searchPattern" />
 
@@ -4105,8 +4611,12 @@
 
             
 
+            
+
              string in the <see
              cref="T:System.IO.DirectoryInfo" />
+
+            
 
             
 
@@ -4123,8 +4633,12 @@
 
               
 
+              
+
                (for example, "*.txt"), the matching behavior varies depending on the length of the specified file extension. A <paramref
                name="searchPattern" />
+
+              
 
               
 
@@ -4137,8 +4651,12 @@
 
               
 
+              
+
               . A <paramref
                name="searchPattern" />
+
+              
 
               
 
@@ -4151,12 +4669,16 @@
 
               
 
+              
+
               . When using the question mark wildcard character, this method returns only files that match the specified file extension. For example, given two files in a directory, "file1.txt" and "file1.txtother", a search pattern of "file?.txt" returns only the first file, while a search pattern of "file*.txt" returns both files.</para
             >
           </block>
           <para
             >The following list shows the behavior of different lengths for the <paramref
              name="searchPattern" />
+
+            
 
             
 
@@ -4184,6 +4706,8 @@
           <para
             >This method pre-populates the values of the following <see
              cref="T:System.IO.FileInfo" />
+
+            
 
             
 
@@ -4248,6 +4772,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -4258,10 +4784,14 @@
 
           
 
+          
+
           The search string to match against the names of files.  This parameter can contain a combination of valid literal path and wildcard (* and ?) characters (see Remarks), but doesn't support regular expressions. The default pattern is "*", which returns all files.</param
         >
         <param name="searchOption">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4301,11 +4831,15 @@
 
             
 
+            
+
             , this method returns an empty array. This method is not recursive.</para
           >
           <para
             >For subdirectories, the <see
              cref="T:System.IO.FileSystemInfo" />
+
+            
 
             
 
@@ -4318,8 +4852,12 @@
 
             
 
+            
+
             . Use the <see
              cref="T:System.IO.FileAttributes" />
+
+            
 
             
 
@@ -4332,8 +4870,12 @@
 
             
 
+            
+
              property to determine whether the <see
              cref="T:System.IO.FileSystemInfo" />
+
+            
 
             
 
@@ -4344,6 +4886,8 @@
           <para
             >This method pre-populates the values of the following <see
              cref="T:System.IO.FileSystemInfo" />
+
+            
 
             
 
@@ -4399,6 +4943,8 @@
 
             
 
+            
+
              entries representing all the files and subdirectories in a directory.</para
           >
         </summary>
@@ -4407,6 +4953,8 @@
           <para
             >An array of strongly typed <see
              cref="T:System.IO.FileSystemInfo" />
+
+            
 
             
 
@@ -4448,8 +4996,12 @@
 
             
 
+            
+
              can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref
              name="searchPattern" />
+
+            
 
             
 
@@ -4493,8 +5045,12 @@
 
             
 
+            
+
              string "s*" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -4511,8 +5067,12 @@
 
             
 
+            
+
              objects returned by this method can be cast to the derived class <see
              cref="T:System.IO.DirectoryInfo" />
+
+            
 
             
 
@@ -4525,6 +5085,8 @@
 
             
 
+            
+
              value returned by the <see
              cref="P:System.IO.FileSystemInfo.Attributes" />
 
@@ -4532,8 +5094,12 @@
 
             
 
+            
+
              property to determine whether the <see
              cref="T:System.IO.FileSystemInfo" />
+
+            
 
             
 
@@ -4549,8 +5115,12 @@
 
             
 
+            
+
              string "*t" searches for all directory names in <paramref
              name="path" />
+
+            
 
             
 
@@ -4563,8 +5133,12 @@
 
             
 
+            
+
              string "s*" searches for all directory names in <paramref
              name="path" />
+
+            
 
             
 
@@ -4580,8 +5154,12 @@
 
             
 
+            
+
              if it is specified as a part of a valid directory name, such as in the directory name "a..b". It cannot be used to move up the directory hierarchy. If there are no files or directories, or no files or directories that match the <paramref
              name="searchPattern" />
+
+            
 
             
 
@@ -4594,11 +5172,15 @@
 
             
 
+            
+
             , this method returns an empty array.</para
           >
           <para
             >This method pre-populates the values of the following <see
              cref="T:System.IO.FileSystemInfo" />
+
+            
 
             
 
@@ -4654,6 +5236,8 @@
 
             
 
+            
+
              objects representing the files and subdirectories that match the specified search criteria.</para
           >
         </summary>
@@ -4663,6 +5247,8 @@
         </returns>
         <param name="searchPattern">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4702,8 +5288,12 @@
 
             
 
+            
+
              can be a combination of literal and wildcard characters, but doesn't support regular expressions. The following wildcard specifiers are permitted in <paramref
              name="searchPattern" />
+
+            
 
             
 
@@ -4747,8 +5337,12 @@
 
             
 
+            
+
              string "s*" searches for all names in <paramref
              name="path" />
+
+            
 
             
 
@@ -4764,8 +5358,12 @@
 
             
 
+            
+
              objects returned by this method can be cast to the derived class <see
              cref="T:System.IO.DirectoryInfo" />
+
+            
 
             
 
@@ -4778,8 +5376,12 @@
 
             
 
+            
+
              value returned by the <see
              cref="P:System.IO.FileSystemInfo.Attributes" />
+
+            
 
             
 
@@ -4792,11 +5394,15 @@
 
             
 
+            
+
              represents a file or a directory.</para
           >
           <para
             >This method pre-populates the values of the following <see
              cref="T:System.IO.FileSystemInfo" />
+
+            
 
             
 
@@ -4852,6 +5458,8 @@
 
             
 
+            
+
              objects that represent the files and subdirectories matching the specified search criteria.</para
           >
         </summary>
@@ -4866,6 +5474,8 @@
 
           
 
+          
+
           The search string to match against the names of directories and filesa.  This parameter can contain a combination of valid literal path and wildcard (* and ?) characters (see Remarks), but doesn't support regular expressions. The default pattern is "*", which returns all files.</param
         >
         <param name="searchOption">
@@ -4875,8 +5485,12 @@
 
           
 
+          
+
           One of the enumeration values that specifies whether the search operation should include only the current directory or all subdirectories. The default value is <see
            cref="F:System.IO.SearchOption.TopDirectoryOnly" />
+
+          
 
           
 
@@ -4915,8 +5529,12 @@
 
             
 
+            
+
              if, for example, you try to move c:\mydir to c:\public, and c:\public already exists. You must specify "c:\\public\\mydir" as the <paramref
              name="destDirName" />
+
+            
 
             
 
@@ -4935,6 +5553,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4948,11 +5568,15 @@
 
             
 
+            
+
              instance and its contents to a new path.</para
           >
         </summary>
         <param name="destDirName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4986,8 +5610,12 @@
 
             
 
+            
+
              property returns only the name of the directory, such as "Bin". To get the full path, such as "c:\public\Bin", use the <see
              cref="P:System.IO.FileSystemInfo.FullName" />
+
+            
 
             
 
@@ -5003,8 +5631,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.IO.DirectoryInfo" />
+
+            
 
             
 
@@ -5017,8 +5649,12 @@
 
             
 
+            
+
             ) but can give out the directory name. If it is necessary to hand out a <see
              cref="T:System.IO.DirectoryInfo" />
+
+            
 
             
 
@@ -5036,6 +5672,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5044,6 +5682,8 @@
           <para
             >Gets the name of this <see
              cref="T:System.IO.DirectoryInfo" />
+
+            
 
             
 
@@ -5078,6 +5718,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -5153,6 +5795,8 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="53758b39-bd9b-4640-bb04-cad5ed8d0abf"
@@ -5164,11 +5808,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.IO.DirectoryInfo.SetAccessControl(System.Security.AccessControl.DirectorySecurity)" />
+
+            
 
             
 
@@ -5185,8 +5833,12 @@
 
               
 
+              
+
                replaces the existing ACL for the directory. To add permissions for a new user, use the <see
                cref="Overload:System.IO.DirectoryInfo.GetAccessControl" />
+
+              
 
               
 
@@ -5203,8 +5855,12 @@
 
             
 
+            
+
              method persists only <see
              cref="T:System.Security.AccessControl.DirectorySecurity" />
+
+            
 
             
 
@@ -5217,8 +5873,12 @@
 
             
 
+            
+
              object has not been modified, it will not be persisted to a file.  Therefore, it is not possible to retrieve a <see
              cref="T:System.Security.AccessControl.DirectorySecurity" />
+
+            
 
             
 
@@ -5237,8 +5897,12 @@
 
                 
 
+                
+
                  method to retrieve the <see
                  cref="T:System.Security.AccessControl.DirectorySecurity" />
+
+                
 
                 
 
@@ -5256,6 +5920,8 @@
 
                 
 
+                
+
                  object for the destination file.</para
               >
             </item>
@@ -5268,6 +5934,8 @@
 
                 
 
+                
+
                  or <see
                  cref="M:System.Security.AccessControl.ObjectSecurity.GetSecurityDescriptorSddlForm(System.Security.AccessControl.AccessControlSections)" />
 
@@ -5275,8 +5943,12 @@
 
                 
 
+                
+
                  method of the source <see
                  cref="T:System.Security.AccessControl.DirectorySecurity" />
+
+                
 
                 
 
@@ -5294,6 +5966,8 @@
 
                 
 
+                
+
                  or <see
                  cref="M:System.Security.AccessControl.ObjectSecurity.SetSecurityDescriptorSddlForm(System.String)" />
 
@@ -5301,8 +5975,12 @@
 
                 
 
+                
+
                  method to copy the information retrieved in step 3 to the destination <see
                  cref="T:System.Security.AccessControl.DirectorySecurity" />
+
+                
 
                 
 
@@ -5320,8 +5998,12 @@
 
                 
 
+                
+
                  object to the destination file using the <see
                  cref="M:System.IO.DirectoryInfo.SetAccessControl(System.Security.AccessControl.DirectorySecurity)" />
+
+                
 
                 
 
@@ -5342,8 +6024,12 @@
 
             
 
+            
+
              object to the directory described by the current <see
              cref="T:System.IO.DirectoryInfo" />
+
+            
 
             
 
@@ -5359,8 +6045,12 @@
 
           
 
+          
+
           An object that describes an ACL entry to apply to the directory described by the <paramref
            name="path" />
+
+          
 
           
 

@@ -42,6 +42,8 @@
 
         
 
+        
+
          to instruct indigo1 to confirm that the binding provides the features required by the service or client implementation. If a <see
          cref="T:System.ServiceModel.DeliveryRequirementsAttribute" />
 
@@ -49,8 +51,12 @@
 
         
 
+        
+
          attribute is detected when a service description is loaded from an application configuration file or built programmatically in code, indigo2 validates the configured binding and supports all the features that the attribute specifies. For example, your service may require the bindings to support queuing. Using <see
          cref="T:System.ServiceModel.DeliveryRequirementsAttribute" />
+
+        
 
         
 
@@ -68,6 +74,8 @@
 
             
 
+            
+
              property specifies the queuing requirements that a binding must meet.</para
           >
         </item>
@@ -75,6 +83,8 @@
           <para
             >The <see
              cref="P:System.ServiceModel.DeliveryRequirementsAttribute.RequireOrderedDelivery" />
+
+            
 
             
 
@@ -92,6 +102,8 @@
 
             
 
+            
+
              property indicates to which type the requirements apply.</para
           >
         </item>
@@ -104,8 +116,12 @@
 
         
 
+        
+
          attribute is applied to a class, which can implement any number of service contract interfaces. <see
          cref="T:System.ServiceModel.DeliveryRequirementsAttribute" />
+
+        
 
         
 
@@ -145,8 +161,12 @@
 
                 
 
+                
+
                  property is set to <see
                  cref="F:System.ServiceModel.QueuedDeliveryRequirementsMode.Allowed" />
+
+                
 
                 
 
@@ -164,6 +184,8 @@
 
                 
 
+                
+
                  property is set to false.</para
               >
             </item>
@@ -174,6 +196,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.DeliveryRequirementsAttribute" />
+
+            
 
             
 
@@ -212,8 +236,12 @@
 
             
 
+            
+
              instructs indigo2 to confirm that the binding supports queued delivery. The <see
              cref="F:System.ServiceModel.QueuedDeliveryRequirementsMode.NotAllowed" />
+
+            
 
             
 
@@ -245,6 +273,8 @@
           <para
             >Setting the <see
              cref="P:System.ServiceModel.DeliveryRequirementsAttribute.RequireOrderedDelivery" />
+
+            
 
             
 
@@ -295,11 +325,15 @@
 
             
 
+            
+
              method to attach binding parameters correctly.</para
           >
         </summary>
         <param name="description">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -314,10 +348,14 @@
 
           
 
+          
+
           The service endpoint for the contract.</param
         >
         <param name="parameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -360,11 +398,15 @@
 
             
 
+            
+
              method for client support.</para
           >
         </summary>
         <param name="description">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -379,10 +421,14 @@
 
           
 
+          
+
           The endpoint for the contract.</param
         >
         <param name="proxy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -425,11 +471,15 @@
 
             
 
+            
+
              method that enables service support.</para
           >
         </summary>
         <param name="description">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -444,10 +494,14 @@
 
           
 
+          
+
           The endpoint for the contract.</param
         >
         <param name="dispatch">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -489,6 +543,8 @@
 
             
 
+            
+
              method to enable validation support.</para
           >
         </summary>
@@ -499,10 +555,14 @@
 
           
 
+          
+
           The contract description.</param
         >
         <param name="endpoint">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -537,8 +597,12 @@
 
             
 
+            
+
              property to validate that endpoints with the <see
              cref="P:System.ServiceModel.DeliveryRequirementsAttribute.TargetContract" />
+
+            
 
             
 

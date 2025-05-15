@@ -23,6 +23,8 @@
 
         
 
+        
+
          class contains the <see
          cref="P:System.Windows.Forms.Design.Behavior.ComponentGlyph.RelatedComponent" />
 
@@ -30,8 +32,12 @@
 
         
 
+        
+
          property, which points back to the glyph's related component. This property can be used to trace <see
          cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+        
 
         
 
@@ -45,6 +51,8 @@
       <para
         >Associates a <see
          cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+        
 
         
 
@@ -79,6 +87,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -89,8 +99,12 @@
 
           
 
+          
+
           The component with which the <see
            cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+          
 
           
 
@@ -125,6 +139,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -135,8 +151,12 @@
 
           
 
+          
+
           The component with which the <see
            cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+          
 
           
 
@@ -151,6 +171,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
@@ -158,8 +180,12 @@
 
           
 
+          
+
            with which the <see
            cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+          
 
           
 
@@ -199,6 +225,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -212,8 +240,12 @@
 
             
 
+            
+
              if the <see
              cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+            
 
             
 
@@ -226,11 +258,15 @@
 
             
 
+            
+
             ; otherwise, null.</para
           >
         </returns>
         <param name="p">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -271,8 +307,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.PaintEventArgs" />
+
+          
 
           
 
@@ -285,8 +325,12 @@
 
           
 
+          
+
             of the <see
            cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+          
 
           
 
@@ -316,6 +360,8 @@
           <para
             >Gets the component that is associated with the <see
              cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+            
 
             
 

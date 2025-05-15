@@ -12,7 +12,7 @@
     <example
       >[Example: The example below shows several namespace and type declarations along with their associated fully qualified names. <code_example
       >
-<![CDATA[
+        <![CDATA[
 class A {}        // A  
 namespace X       // X  
 {  
@@ -31,6 +31,8 @@ namespace X.Y    // X.Y
 }  
 ]]>
       </code_example>
+
+      
 
       
 

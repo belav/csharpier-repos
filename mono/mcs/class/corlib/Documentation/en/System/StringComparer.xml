@@ -47,8 +47,12 @@
 
         
 
+        
+
          class embodies string-based comparison, equality, and hash code operations that take into account both case and culture-specific comparison rules. You can use the <see
          cref="T:System.StringComparer" />
+
+        
 
         
 
@@ -61,8 +65,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Collections.Generic.Dictionary`2" />
+
+        
 
         
 
@@ -75,6 +83,8 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Collections.Generic.SortedList`2" />
 
@@ -82,8 +92,12 @@
 
         
 
+        
+
          use the <see
          cref="T:System.StringComparer" />
+
+        
 
         
 
@@ -99,8 +113,12 @@
 
         
 
+        
+
          class is defined to be either case-sensitive or case-insensitive, and use either word (culture-sensitive) or ordinal (culture-insensitive) comparison rules. For more information about word and ordinal comparison rules, see <see
          cref="T:System.Globalization.CompareOptions" />
+
+        
 
         
 
@@ -119,8 +137,12 @@
 
         
 
+        
+
          class properties because of a seeming contradiction. The <see
          cref="T:System.StringComparer" />
+
+        
 
         
 
@@ -133,8 +155,12 @@
 
         
 
+        
+
          class. The contradiction is that each property of the <see
          cref="T:System.StringComparer" />
+
+        
 
         
 
@@ -150,8 +176,12 @@
 
         
 
+        
+
          property directly because each property actually returns an instance of an anonymous class that is derived from the <see
          cref="T:System.StringComparer" />
+
+        
 
         
 
@@ -164,6 +194,8 @@
 
         
 
+        
+
         , which is the base class of the anonymous class, not the type of the anonymous class itself. Each <see
          cref="T:System.StringComparer" />
 
@@ -171,8 +203,12 @@
 
         
 
+        
+
          class property returns a <see
          cref="T:System.StringComparer" />
+
+        
 
         
 
@@ -207,6 +243,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.StringComparer" />
+
+            
 
             
 
@@ -247,8 +285,12 @@
 
             
 
+            
+
              method is more efficient than the <see
              cref="M:System.StringComparer.Compare(System.Object,System.Object)" />
+
+            
 
             
 
@@ -261,8 +303,12 @@
 
             
 
+            
+
              and <paramref
              name="y" />
+
+            
 
             
 
@@ -285,8 +331,12 @@
 
             
 
+            
+
              and <paramref
              name="y" />
+
+            
 
             
 
@@ -317,8 +367,12 @@
 
                   
 
+                  
+
                    is less than <paramref
                    name="y" />
+
+                  
 
                   
 
@@ -329,6 +383,8 @@
                 <para>-or-</para>
                 <para>
                   <paramref name="x" />
+
+                  
 
                   
 
@@ -350,8 +406,12 @@
 
                   
 
+                  
+
                    is equal to <paramref
                    name="y" />
+
+                  
 
                   
 
@@ -373,8 +433,12 @@
 
                   
 
+                  
+
                    is greater than <paramref
                    name="y" />
+
+                  
 
                   
 
@@ -385,6 +449,8 @@
                 <para>-or-</para>
                 <para>
                   <paramref name="y" />
+
+                  
 
                   
 
@@ -403,8 +469,12 @@
 
           
 
+          
+
           An object to compare to <paramref
            name="y" />
+
+          
 
           
 
@@ -419,8 +489,12 @@
 
           
 
+          
+
           An object to compare to <paramref
            name="x" />
+
+          
 
           
 
@@ -460,8 +534,12 @@
 
             
 
+            
+
              method is more efficient than the <see
              cref="M:System.StringComparer.Compare(System.Object,System.Object)" />
+
+            
 
             
 
@@ -474,8 +552,12 @@
 
             
 
+            
+
              and <paramref
              name="y" />
+
+            
 
             
 
@@ -498,8 +580,12 @@
 
             
 
+            
+
              and <paramref
              name="y" />
+
+            
 
             
 
@@ -530,8 +616,12 @@
 
                   
 
+                  
+
                    is less than <paramref
                    name="y" />
+
+                  
 
                   
 
@@ -542,6 +632,8 @@
                 <para>-or-</para>
                 <para>
                   <paramref name="x" />
+
+                  
 
                   
 
@@ -563,8 +655,12 @@
 
                   
 
+                  
+
                    is equal to <paramref
                    name="y" />
+
+                  
 
                   
 
@@ -586,8 +682,12 @@
 
                   
 
+                  
+
                    is greater than <paramref
                    name="y" />
+
+                  
 
                   
 
@@ -598,6 +698,8 @@
                 <para>-or-</para>
                 <para>
                   <paramref name="y" />
+
+                  
 
                   
 
@@ -616,8 +718,12 @@
 
           
 
+          
+
           A string to compare to <paramref
            name="y" />
+
+          
 
           
 
@@ -632,8 +738,12 @@
 
           
 
+          
+
           A string to compare to <paramref
            name="x" />
+
+          
 
           
 
@@ -677,6 +787,8 @@
 
             
 
+            
+
              object that compares strings according to the rules of a specified culture.</para
           >
         </summary>
@@ -690,6 +802,8 @@
 
             
 
+            
+
              object that performs string comparisons according to the comparison rules used by the <paramref
              name="culture" />
 
@@ -697,8 +811,12 @@
 
             
 
+            
+
              parameter and the case rule specified by the <paramref
              name="ignoreCase" />
+
+            
 
             
 
@@ -714,10 +832,14 @@
 
           
 
+          
+
           A culture whose linguistic rules are used to perform a string comparison.</param
         >
         <param name="ignoreCase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -754,8 +876,12 @@
 
             
 
+            
+
              returned by the <see
              cref="P:System.StringComparer.CurrentCulture" />
+
+            
 
             
 
@@ -771,6 +897,8 @@
 
             
 
+            
+
              object associated with the current thread.</para
           >
           <para
@@ -781,8 +909,12 @@
 
             
 
+            
+
              property actually returns an instance of an anonymous class derived from the <see
              cref="T:System.StringComparer" />
+
+            
 
             
 
@@ -798,8 +930,12 @@
 
             
 
+            
+
              property get accessor returns a new <see
              cref="T:System.StringComparer" />
+
+            
 
             
 
@@ -816,8 +952,12 @@
 
             
 
+            
+
              object in a local variable rather than retrieve the value of the <see
              cref="P:System.StringComparer.CurrentCulture" />
+
+            
 
             
 
@@ -831,6 +971,8 @@
           <para
             >Gets a <see
              cref="T:System.StringComparer" />
+
+            
 
             
 
@@ -871,6 +1013,8 @@
 
             
 
+            
+
              object associated with the current thread.</para
           >
           <para
@@ -881,8 +1025,12 @@
 
             
 
+            
+
              returned by the <see
              cref="P:System.StringComparer.CurrentCultureIgnoreCase" />
+
+            
 
             
 
@@ -898,8 +1046,12 @@
 
             
 
+            
+
              property actually returns an instance of an anonymous class derived from the <see
              cref="T:System.StringComparer" />
+
+            
 
             
 
@@ -915,8 +1067,12 @@
 
             
 
+            
+
              property get accessor returns a new <see
              cref="T:System.StringComparer" />
+
+            
 
             
 
@@ -933,8 +1089,12 @@
 
             
 
+            
+
              object in a local variable rather than retrieve the value of the <see
              cref="P:System.StringComparer.CurrentCultureIgnoreCase" />
+
+            
 
             
 
@@ -948,6 +1108,8 @@
           <para
             >Gets a <see
              cref="T:System.StringComparer" />
+
+            
 
             
 
@@ -988,8 +1150,12 @@
 
             
 
+            
+
              method is more efficient than the <see
              cref="M:System.StringComparer.Equals(System.Object,System.Object)" />
+
+            
 
             
 
@@ -1002,8 +1168,12 @@
 
             
 
+            
+
              and <paramref
              name="y" />
+
+            
 
             
 
@@ -1026,8 +1196,12 @@
 
             
 
+            
+
              and <paramref
              name="y" />
+
+            
 
             
 
@@ -1040,8 +1214,12 @@
 
             
 
+            
+
              and <paramref
              name="y" />
+
+            
 
             
 
@@ -1057,8 +1235,12 @@
 
           
 
+          
+
           An object to compare to <paramref
            name="y" />
+
+          
 
           
 
@@ -1073,8 +1255,12 @@
 
           
 
+          
+
           An object to compare to <paramref
            name="x" />
+
+          
 
           
 
@@ -1114,8 +1300,12 @@
 
             
 
+            
+
              method is more efficient than the <see
              cref="M:System.StringComparer.Equals(System.Object,System.Object)" />
+
+            
 
             
 
@@ -1128,8 +1318,12 @@
 
             
 
+            
+
              and <paramref
              name="y" />
+
+            
 
             
 
@@ -1152,8 +1346,12 @@
 
             
 
+            
+
              and <paramref
              name="y" />
+
+            
 
             
 
@@ -1166,8 +1364,12 @@
 
             
 
+            
+
              and <paramref
              name="y" />
+
+            
 
             
 
@@ -1183,8 +1385,12 @@
 
           
 
+          
+
           A string to compare to <paramref
            name="y" />
+
+          
 
           
 
@@ -1199,8 +1405,12 @@
 
           
 
+          
+
           A string to compare to <paramref
            name="x" />
+
+          
 
           
 
@@ -1239,6 +1449,8 @@
 
             
 
+            
+
              method is more efficient than the <see
              cref="M:System.StringComparer.GetHashCode(System.Object)" />
 
@@ -1246,8 +1458,12 @@
 
             
 
+            
+
              method because the <paramref
              name="obj" />
+
+            
 
             
 
@@ -1263,8 +1479,12 @@
 
             
 
+            
+
              method allocates an amount of memory that is proportional to the size of <paramref
              name="obj" />
+
+            
 
             
 
@@ -1277,8 +1497,12 @@
 
             
 
+            
+
             . In the case of large strings, trying to retrieve the hash code can throw an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -1295,10 +1519,14 @@
 
             
 
+            
+
              element to the <format
              type="text/html">
               <a href="1eb2fae3-de4b-45b6-852f-517c39b751bd">&lt;runtime&gt;</a>
             </format>
+
+            
 
             
 
@@ -1321,11 +1549,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1364,6 +1596,8 @@
 
             
 
+            
+
              method is more efficient than the <see
              cref="M:System.StringComparer.GetHashCode(System.Object)" />
 
@@ -1371,8 +1605,12 @@
 
             
 
+            
+
              method because the <paramref
              name="obj" />
+
+            
 
             
 
@@ -1388,8 +1626,12 @@
 
             
 
+            
+
              method allocates an amount of memory that is proportional to the size of <paramref
              name="obj" />
+
+            
 
             
 
@@ -1402,8 +1644,12 @@
 
             
 
+            
+
             . In the case of large strings, trying to retrieve the hash code can throw an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -1420,10 +1666,14 @@
 
             
 
+            
+
              element to the <format
              type="text/html">
               <a href="1eb2fae3-de4b-45b6-852f-517c39b751bd">&lt;runtime&gt;</a>
             </format>
+
+            
 
             
 
@@ -1446,11 +1696,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1490,8 +1744,12 @@
 
             
 
+            
+
              returned by the <see
              cref="P:System.StringComparer.InvariantCulture" />
+
+            
 
             
 
@@ -1507,8 +1765,12 @@
 
             
 
+            
+
              object returned by the <see
              cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+            
 
             
 
@@ -1524,8 +1786,12 @@
 
             
 
+            
+
              property actually returns an instance of an anonymous class derived from the <see
              cref="T:System.StringComparer" />
+
+            
 
             
 
@@ -1539,6 +1805,8 @@
           <para
             >Gets a <see
              cref="T:System.StringComparer" />
+
+            
 
             
 
@@ -1579,8 +1847,12 @@
 
             
 
+            
+
              returned by the <see
              cref="P:System.StringComparer.InvariantCultureIgnoreCase" />
+
+            
 
             
 
@@ -1596,8 +1868,12 @@
 
             
 
+            
+
              object returned by the <see
              cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+            
 
             
 
@@ -1613,8 +1889,12 @@
 
             
 
+            
+
              property actually returns an instance of an anonymous class derived from the <see
              cref="T:System.StringComparer" />
+
+            
 
             
 
@@ -1628,6 +1908,8 @@
           <para
             >Gets a <see
              cref="T:System.StringComparer" />
+
+            
 
             
 
@@ -1662,8 +1944,12 @@
 
             
 
+            
+
              returned by the <see
              cref="P:System.StringComparer.Ordinal" />
+
+            
 
             
 
@@ -1679,8 +1965,12 @@
 
             
 
+            
+
              property actually returns an instance of an anonymous class derived from the <see
              cref="T:System.StringComparer" />
+
+            
 
             
 
@@ -1694,6 +1984,8 @@
           <para
             >Gets a <see
              cref="T:System.StringComparer" />
+
+            
 
             
 
@@ -1734,8 +2026,12 @@
 
             
 
+            
+
              returned by the <see
              cref="P:System.StringComparer.OrdinalIgnoreCase" />
+
+            
 
             
 
@@ -1751,8 +2047,12 @@
 
             
 
+            
+
              property actually returns an instance of an anonymous class derived from the <see
              cref="T:System.StringComparer" />
+
+            
 
             
 
@@ -1766,6 +2066,8 @@
           <para
             >Gets a <see
              cref="T:System.StringComparer" />
+
+            
 
             
 

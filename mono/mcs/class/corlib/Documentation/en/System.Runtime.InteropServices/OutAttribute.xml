@@ -47,8 +47,12 @@
 
         
 
+        
+
          is optional. The attribute is supported for COM interop and platform invoke only. In the absence of explicit settings, the interop marshaler assumes rules based on the parameter type, whether the parameter is passed by reference or by value, and whether the type is blittable or non-blittable. For example, the <see
          cref="T:System.Text.StringBuilder" />
+
+        
 
         
 
@@ -64,6 +68,8 @@
 
         
 
+        
+
          to value and reference types passed by reference to change In/Out behavior to Out-only behavior, which is equivalent to using the out keyword in C#. For example, arrays passed by value, marshaled as In-only parameters by default, can be changed to Out-only. However, the behavior does not always provide expected semantics when the types include all-blittable elements or fields because the interop marshaler uses pinning. If you do not care about passing data into the callee, Out-only marshaling can provide better performance for non-blittable types.</para
       >
       <para
@@ -74,8 +80,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Runtime.InteropServices.OutAttribute" />
+
+        
 
         
 
@@ -88,8 +98,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Runtime.InteropServices.OutAttribute" />
+
+        
 
         
 
@@ -105,12 +119,16 @@
 
         
 
+        
+
          on marshaling behavior, see <format
          type="text/html">
           <a href="241AC5B5-928E-4969-8F58-1DBC048F9EA2"
             >[&lt;topic://cpcondirectionalattributes&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -150,6 +168,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.InteropServices.OutAttribute" />
+
+            
 
             
 

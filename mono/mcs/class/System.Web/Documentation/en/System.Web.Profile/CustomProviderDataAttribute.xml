@@ -29,6 +29,8 @@
 
         
 
+        
+
          class is used to supply a string of data with a profile property to a custom profile provider. The custom data string can be set to any string value and is set using the customProviderData attribute of the <format
          type="text/html">
           <a href="d3ea033b-751b-4bdc-8917-a5d44560808e">add</a>
@@ -38,8 +40,12 @@
 
         
 
+        
+
          configuration element for adding profile properties. If the customProviderData attribute is set, then the value is placed in the <see
          cref="P:System.Configuration.SettingsProperty.Attributes" />
+
+        
 
         
 
@@ -75,6 +81,8 @@
 
             
 
+            
+
              class is used to supply a string of data with a profile property to a custom profile provider. The custom data string can be set to any string value and is set using the customProviderData attribute of the <format
              type="text/html">
               <a href="d3ea033b-751b-4bdc-8917-a5d44560808e">add</a>
@@ -84,8 +92,12 @@
 
             
 
+            
+
              configuration element for adding profile properties. If the customProviderData attribute is set, then the value is placed in the <see
              cref="P:System.Configuration.SettingsProperty.Attributes" />
+
+            
 
             
 
@@ -105,11 +117,15 @@
 
             
 
+            
+
              class and specifies a string of custom data.</para
           >
         </summary>
         <param name="customProviderData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -141,10 +157,14 @@
 
             
 
+            
+
              property value is set using the customProviderData attribute of the <format
              type="text/html">
               <a href="d3ea033b-751b-4bdc-8917-a5d44560808e">add</a>
             </format>
+
+            
 
             
 
@@ -157,8 +177,12 @@
 
             
 
+            
+
              property can be set to any string value to be used by the profile provider for the property. If the customProviderData attribute is set, then the value is placed in the <see
              cref="P:System.Configuration.SettingsProperty.Attributes" />
+
+            
 
             
 
@@ -195,6 +219,8 @@
 
             
 
+            
+
              property is null, or an empty string for profile properties of type String.</para
           >
         </remarks>
@@ -208,6 +234,8 @@
 
             
 
+            
+
              property is set to the default value.</para
           >
         </summary>
@@ -216,6 +244,8 @@
           <para
             >true if the <see
              cref="P:System.Web.Profile.CustomProviderDataAttribute.CustomProviderData" />
+
+            
 
             
 

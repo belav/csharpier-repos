@@ -38,11 +38,15 @@
 
         
 
+        
+
          algorithm is 512 bits.</para
       >
       <para
         >This is an abstract class. The only implementation of this class is <see
          cref="T:System.Security.Cryptography.SHA512Managed" />
+
+        
 
         
 
@@ -56,6 +60,8 @@
       <para
         >Computes the <see
          cref="T:System.Security.Cryptography.SHA512" />
+
+        
 
         
 
@@ -90,6 +96,8 @@
           <para
             >Initializes a new instance of <see
              cref="T:System.Security.Cryptography.SHA512" />
+
+            
 
             
 
@@ -131,6 +139,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -139,6 +149,8 @@
           <para
             >A new instance of <see
              cref="T:System.Security.Cryptography.SHA512" />
+
+            
 
             
 
@@ -181,6 +193,8 @@
 
             
 
+            
+
              are SHA512, System.Security.Cryptography.SHA51, System.Security.Cryptography.SHA512Managed, and System.Security.Cryptography.SHA512CryptoServiceProvider.</para
           >
         </remarks>
@@ -189,6 +203,8 @@
           <para
             >Creates an instance of a specified implementation of <see
              cref="T:System.Security.Cryptography.SHA512" />
+
+            
 
             
 
@@ -207,6 +223,8 @@
 
             
 
+            
+
              using the specified implementation.</para
           >
         </returns>
@@ -217,8 +235,12 @@
 
           
 
+          
+
           The name of the specific implementation of <see
            cref="T:System.Security.Cryptography.SHA512" />
+
+          
 
           
 

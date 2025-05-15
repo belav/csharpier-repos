@@ -33,8 +33,12 @@
 
         
 
+        
+
          factory methods to create a <see
          cref="T:System.Linq.Expressions.ListInitExpression" />
+
+        
 
         
 
@@ -50,6 +54,8 @@
 
         
 
+        
+
          property of a <see
          cref="T:System.Linq.Expressions.ListInitExpression" />
 
@@ -57,8 +63,12 @@
 
         
 
+        
+
          is <see
          cref="F:System.Linq.Expressions.ExpressionType.ListInit" />
+
+        
 
         
 
@@ -199,6 +209,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -260,6 +272,8 @@
 
             
 
+            
+
              represents.</para
           >
         </summary>
@@ -305,8 +319,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.ListInitExpression.NewExpression" />
+
+          
 
           
 
@@ -321,8 +339,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.ListInitExpression.Initializers" />
+
+          
 
           
 

@@ -23,8 +23,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          types to indicate the appearance of the cell when it is not in edit mode. In edit mode, the cell displays the hosted <see
          cref="T:System.Windows.Forms.ComboBox" />
+
+        
 
         
 
@@ -52,6 +60,8 @@
       <para
         >Defines constants that indicate how a <see
          cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
+
+        
 
         
 
@@ -80,8 +90,12 @@
 
             
 
+            
+
              mimics the appearance of a <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -113,8 +127,12 @@
 
             
 
+            
+
              is displayed with a drop-down button but does not otherwise mimic the appearance of a <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -141,6 +159,8 @@
           <para
             >When it is not in edit mode, the <see
              cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
+
+            
 
             
 

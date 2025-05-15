@@ -35,6 +35,8 @@
 
         
 
+        
+
          class. It describes the format of an invalid handle that uses a value of -1. Further derivations of this class (for example, file or registry handles) can specialize this further. See the <see
          cref="T:Microsoft.Win32.SafeHandles.SafeFileHandle" />
 
@@ -42,8 +44,12 @@
 
         
 
+        
+
          class for an example of a class that derives from <see
          cref="T:Microsoft.Win32.SafeHandles.SafeHandleMinusOneIsInvalid" />
+
+        
 
         
 
@@ -93,11 +99,15 @@
 
             
 
+            
+
              class, specifying whether the handle is to be reliably released. </para
           >
         </summary>
         <param name="ownsHandle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -41,6 +41,8 @@
 
               
 
+              
+
               .</para
             >
           </step>
@@ -53,8 +55,12 @@
 
               
 
+              
+
                and <see
                cref="T:System.ServiceModel.Channels.ReliableSessionBindingElement" />
+
+              
 
               
 
@@ -72,8 +78,12 @@
 
               
 
+              
+
                using the <see
                cref="M:System.ServiceModel.Channels.BindingElementCollection.InsertItem(System.Int32,System.ServiceModel.Channels.BindingElement)" />
+
+              
 
               
 
@@ -91,6 +101,8 @@
 
               
 
+              
+
                and add it to the collection.</para
             >
           </step>
@@ -98,6 +110,8 @@
             <para
               >Add any additional custom binding elements to the collection, such as <see
                cref="T:System.ServiceModel.Channels.TcpTransportBindingElement" />
+
+              
 
               
 
@@ -117,6 +131,8 @@
 
           
 
+          
+
           , as immutable. Calling set on some properties may have unpredictable effects: the binding may behave as if the property retained its old value, with a run-time failure being the only indication of an issue. Two properties known to behave this way are <see
            cref="P:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters.KeyType" />
 
@@ -124,8 +140,12 @@
 
           
 
+          
+
            and <see
            cref="P:System.ServiceModel.Channels.SecurityBindingElement.MessageSecurityVersion" />
+
+          
 
           
 
@@ -159,6 +179,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.SymmetricSecurityBindingElement" />
+
+            
 
             
 
@@ -200,6 +222,8 @@
 
             
 
+            
+
              class using specified security token parameters. </para
           >
         </summary>
@@ -210,8 +234,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Security.Tokens.SecurityTokenParameters" />
+
+          
 
           
 
@@ -323,6 +351,8 @@
 
             
 
+            
+
              object with property values equal to those of the current instance.</para
           >
         </returns>
@@ -365,6 +395,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -373,6 +405,8 @@
           <para
             >Gets a specified object from the <see
              cref="T:System.ServiceModel.Channels.BindingContext" />
+
+            
 
             
 
@@ -391,8 +425,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.ServiceModel.Channels.BindingContext" />
+
+            
 
             
 
@@ -408,8 +446,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -419,6 +461,8 @@
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -457,8 +501,12 @@
 
               
 
+              
+
                property is set to <see
                cref="F:System.ServiceModel.Security.MessageProtectionOrder.SignBeforeEncryptAndEncryptSignature" />
+
+              
 
               
 
@@ -470,6 +518,8 @@
           <para
             >For a listing of the members and their descriptions, see <see
              cref="T:System.ServiceModel.Security.MessageProtectionOrder" />
+
+            
 
             
 
@@ -572,6 +622,8 @@
 
           
 
+          
+
           true to indicate that derived keys are required; otherwise, false.</param
         >
       </Docs>
@@ -612,8 +664,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+
+            
 
             
 
@@ -626,6 +682,8 @@
 
             
 
+            
+
             , <see
              cref="M:System.ServiceModel.Description.PolicyConversionContext.GetMessageBindingAssertions(System.ServiceModel.Description.MessageDescription)" />
 
@@ -633,8 +691,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.ServiceModel.Description.PolicyConversionContext.GetOperationBindingAssertions(System.ServiceModel.Description.OperationDescription)" />
+
+            
 
             
 
@@ -650,8 +712,12 @@
 
             
 
+            
+
              property exposes the <see
              cref="T:System.ServiceModel.Description.ContractDescription" />
+
+            
 
             
 
@@ -664,11 +730,15 @@
 
             
 
+            
+
              that indicate where security policy assertions should be added.</para
           >
           <para
             >Once custom policy assertions are attached to the WSDL information, clients can detect and import the custom binding assertions by implementing the <see
              cref="T:System.ServiceModel.Description.IPolicyImportExtension" />
+
+            
 
             
 
@@ -688,8 +758,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.MetadataExporter" />
+
+          
 
           
 
@@ -724,8 +798,12 @@
 
             
 
+            
+
              includes the <see
              cref="P:System.ServiceModel.Channels.SymmetricSecurityBindingElement.MessageProtectionOrder" />
+
+            
 
             
 
@@ -738,8 +816,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.ServiceModel.Channels.SymmetricSecurityBindingElement.ProtectionTokenParameters" />
+
+            
 
             
 
@@ -758,6 +840,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -766,6 +850,8 @@
           <para
             >A string that represents this <see
              cref="T:System.ServiceModel.Channels.SymmetricSecurityBindingElement" />
+
+            
 
             
 

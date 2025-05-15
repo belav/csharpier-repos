@@ -28,8 +28,12 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.Xml.XPath.XPathNavigator" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
         , <see
          cref="Overload:System.Xml.XPath.XPathNavigator.Matches" />
+
+        
 
         
 
@@ -56,6 +64,8 @@
 
         
 
+        
+
         , and <see
          cref="Overload:System.Xml.XPath.XPathNavigator.SelectSingleNode" />
 
@@ -63,8 +73,12 @@
 
         
 
+        
+
          methods of the <see
          cref="T:System.Xml.XPath.XPathNavigator" />
+
+        
 
         
 
@@ -112,8 +126,12 @@
 
             
 
+            
+
              method enables users to sort objects by their data type instead of by string or number. The <see
              cref="T:System.Collections.IComparer" />
+
+            
 
             
 
@@ -126,11 +144,15 @@
 
             
 
+            
+
              method that supports sorting on user-defined classes.</para
           >
           <para
             >In the following example, the books are sorted by ISBN number, where isbn is an object that implements the <see
              cref="T:System.Collections.IComparer" />
+
+            
 
             
 
@@ -152,6 +174,8 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
             
 
+            
+
              method.</para
           >
           <list type="bullet">
@@ -167,6 +191,8 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
                 
 
+                
+
                  or the sort key requires namespace resolution, you must use the <see
                  cref="M:System.Xml.XPath.XPathExpression.SetContext(System.Xml.XmlNamespaceManager)" />
 
@@ -174,8 +200,12 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
                 
 
+                
+
                  method to provide an <see
                  cref="T:System.Xml.XmlNamespaceManager" />
+
+                
 
                 
 
@@ -193,6 +223,8 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
                 
 
+                
+
                  does not include a prefix, it is assumed that the namespace Uniform Resource Identifier (URI) is the empty namespace. If your XML includes a default namespace, you must still use the <see
                  cref="M:System.Xml.XPath.XPathExpression.SetContext(System.Xml.XmlNamespaceManager)" />
 
@@ -200,8 +232,12 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
                 
 
+                
+
                  method and provide an <see
                  cref="T:System.Xml.XmlNamespaceManager" />
+
+                
 
                 
 
@@ -222,6 +258,8 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -232,8 +270,12 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
           
 
+          
+
           An object representing the sort key. This can be the string value of the node or an <see
            cref="T:System.Xml.XPath.XPathExpression" />
+
+          
 
           
 
@@ -248,8 +290,12 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IComparer" />
+
+          
 
           
 
@@ -300,6 +346,8 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
                 
 
+                
+
                  or the sort key requires namespace resolution, you must use the <see
                  cref="M:System.Xml.XPath.XPathExpression.SetContext(System.Xml.XmlNamespaceManager)" />
 
@@ -307,8 +355,12 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
                 
 
+                
+
                  method to provide an <see
                  cref="T:System.Xml.XmlNamespaceManager" />
+
+                
 
                 
 
@@ -326,6 +378,8 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
                 
 
+                
+
                  does not include a prefix, it is assumed that the namespace Uniform Resource Identifier (URI) is the empty namespace. If your XML includes a default namespace, you must still use the <see
                  cref="M:System.Xml.XPath.XPathExpression.SetContext(System.Xml.XmlNamespaceManager)" />
 
@@ -333,8 +387,12 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
                 
 
+                
+
                  method and provide an <see
                  cref="T:System.Xml.XmlNamespaceManager" />
+
+                
 
                 
 
@@ -356,8 +414,12 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
           
 
+          
+
           An object representing the sort key. This can be the string value of the node or an <see
            cref="T:System.Xml.XPath.XPathExpression" />
+
+          
 
           
 
@@ -372,8 +434,12 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XPath.XmlSortOrder" />
+
+          
 
           
 
@@ -388,8 +454,12 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XPath.XmlCaseOrder" />
+
+          
 
           
 
@@ -404,8 +474,12 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
           
 
+          
+
           The language to use for comparison. Uses the <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -418,8 +492,12 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
           
 
+          
+
            method for the language types, for example, "us-en" for U.S. English. If an empty string is specified, the system environment is used to determine the <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -434,8 +512,12 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XPath.XmlDataType" />
+
+          
 
           
 
@@ -475,6 +557,8 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
             
 
+            
+
              method returns a clone of this <see
              cref="T:System.Xml.XPath.XPathExpression" />
 
@@ -482,8 +566,12 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
             
 
+            
+
              object with the same state as this <see
              cref="T:System.Xml.XPath.XPathExpression" />
+
+            
 
             
 
@@ -502,6 +590,8 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -510,6 +600,8 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
           <para
             >A new <see
              cref="T:System.Xml.XPath.XPathExpression" />
+
+            
 
             
 
@@ -581,6 +673,8 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
             
 
+            
+
              object representing the XPath expression.</para
           >
         </summary>
@@ -594,11 +688,15 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="xpath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -669,8 +767,12 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
               
 
+              
+
                with a custom context in one step by passing an <see
                cref="T:System.Xml.Xsl.XsltContext" />
+
+              
 
               
 
@@ -683,6 +785,8 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
               
 
+              
+
               , as an argument to this method. To use a <see
                cref="T:System.Xml.XPath.XPathExpression" />
 
@@ -690,8 +794,12 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
               
 
+              
+
                with a custom context, you must call the <see
                cref="Overload:System.Xml.XPath.XPathExpression.SetContext" />
+
+              
 
               
 
@@ -711,8 +819,12 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
             
 
+            
+
              object specified for namespace resolution, and returns an <see
              cref="T:System.Xml.XPath.XPathExpression" />
+
+            
 
             
 
@@ -731,11 +843,15 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="xpath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -750,8 +866,12 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.Xml.IXmlNamespaceResolver" />
+
+          
 
           
 
@@ -781,6 +901,8 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
           <para
             >When overridden in a derived class, gets a string representation of the <see
              cref="T:System.Xml.XPath.XPathExpression" />
+
+            
 
             
 
@@ -818,11 +940,15 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
           
 
+          
+
            value that indicates the return type.</value
         >
         <remarks
           >The return type varies for each XPath expression and it might be <see
            cref="F:System.Xml.XPath.XPathResultType.Any" />
+
+          
 
           
 
@@ -868,8 +994,12 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
             
 
+            
+
              interface, such as the <see
              cref="T:System.Xml.XmlNamespaceManager" />
+
+            
 
             
 
@@ -882,8 +1012,12 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
             
 
+            
+
              stores prefix and namespace Uniform Resource Identifier (URI) mappings. If the <see
              cref="T:System.Xml.XPath.XPathExpression" />
+
+            
 
             
 
@@ -896,8 +1030,12 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
             
 
+            
+
              class, which implements the <see
              cref="T:System.Xml.IXmlNamespaceResolver" />
+
+            
 
             
 
@@ -910,8 +1048,12 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
             
 
+            
+
              method must be called to specify the <see
              cref="T:System.Xml.IXmlNamespaceResolver" />
+
+            
 
             
 
@@ -922,6 +1064,8 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
           <para
             >The following are important notes to consider when using the <see
              cref="M:System.Xml.XPath.XPathExpression.SetContext(System.Xml.IXmlNamespaceResolver)" />
+
+            
 
             
 
@@ -939,8 +1083,12 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
                 
 
+                
+
                  does not include a prefix, it is assumed that the namespace URI is the empty namespace. If your XML includes a default namespace, you must still use the <see
                  cref="M:System.Xml.XPath.XPathExpression.SetContext(System.Xml.IXmlNamespaceResolver)" />
+
+                
 
                 
 
@@ -958,6 +1106,8 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
                 
 
+                
+
                  interface object for namespace resolution to the <see
                  cref="M:System.Xml.XPath.XPathExpression.Compile(System.String,System.Xml.IXmlNamespaceResolver)" />
 
@@ -965,8 +1115,12 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
                 
 
+                
+
                  method when you create your <see
                  cref="T:System.Xml.XPath.XPathExpression" />
+
+                
 
                 
 
@@ -983,8 +1137,12 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
                 
 
+                
+
                  accepts <see
                  cref="T:System.Xml.Xsl.XsltContext" />
+
+                
 
                 
 
@@ -997,8 +1155,12 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
                 
 
+                
+
                  and <see
                  cref="T:System.Xml.Xsl.IXsltContextVariable" />
+
+                
 
                 
 
@@ -1010,6 +1172,8 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
                     >User Defined Functions and Variables</a
                   >
                 </format>
+
+                
 
                 
 
@@ -1030,6 +1194,8 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
             
 
+            
+
              object to use for namespace resolution.</para
           >
         </summary>
@@ -1040,8 +1206,12 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.Xml.IXmlNamespaceResolver" />
+
+          
 
           
 
@@ -1083,8 +1253,12 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
             
 
+            
+
              class which stores prefix and namespace Uniform Resource Identifier (URI) mappings. If the <see
              cref="T:System.Xml.XPath.XPathExpression" />
+
+            
 
             
 
@@ -1097,8 +1271,12 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
             
 
+            
+
              object and the <see
              cref="M:System.Xml.XPath.XPathExpression.SetContext(System.Xml.XmlNamespaceManager)" />
+
+            
 
             
 
@@ -1111,11 +1289,15 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
             
 
+            
+
              object to use for namespace resolution.</para
           >
           <para
             >The following are important notes to consider when using the <see
              cref="M:System.Xml.XPath.XPathExpression.SetContext(System.Xml.XmlNamespaceManager)" />
+
+            
 
             
 
@@ -1133,6 +1315,8 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
                 
 
+                
+
                  does not include a prefix, it is assumed that the namespace URI is the empty namespace. If your XML includes a default namespace, you must still use the <see
                  cref="M:System.Xml.XPath.XPathExpression.SetContext(System.Xml.XmlNamespaceManager)" />
 
@@ -1140,8 +1324,12 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
                 
 
+                
+
                  method and provide an <see
                  cref="T:System.Xml.XmlNamespaceManager" />
+
+                
 
                 
 
@@ -1159,6 +1347,8 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
                 
 
+                
+
                  object for namespace resolution to the <see
                  cref="M:System.Xml.XPath.XPathExpression.Compile(System.String,System.Xml.IXmlNamespaceResolver)" />
 
@@ -1166,8 +1356,12 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
                 
 
+                
+
                  method when you create your <see
                  cref="T:System.Xml.XPath.XPathExpression" />
+
+                
 
                 
 
@@ -1184,8 +1378,12 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
                 
 
+                
+
                  accepts <see
                  cref="T:System.Xml.Xsl.XsltContext" />
+
+                
 
                 
 
@@ -1198,8 +1396,12 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
                 
 
+                
+
                  and <see
                  cref="T:System.Xml.Xsl.IXsltContextVariable" />
+
+                
 
                 
 
@@ -1211,6 +1413,8 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
                     >User Defined Functions and Variables</a
                   >
                 </format>
+
+                
 
                 
 
@@ -1231,6 +1435,8 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
             
 
+            
+
              object to use for namespace resolution.</para
           >
         </summary>
@@ -1241,8 +1447,12 @@ expression.AddSort("@ISBN", (IComparer)isbn);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlNamespaceManager" />
+
+          
 
           
 

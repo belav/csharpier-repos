@@ -60,6 +60,8 @@
 
             
 
+            
+
              and is equal to the current instance.</para
           >
         </summary>
@@ -73,11 +75,15 @@
 
             
 
+            
+
              is equal to the value of the current instance; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -120,6 +126,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -128,6 +136,8 @@
           <para
             >true if <paramref
              name="obj" />
+
+            
 
             
 
@@ -143,8 +153,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.LockCookie" />
+
+          
 
           
 
@@ -215,6 +229,8 @@
 
             
 
+            
+
              structures are equal.</para
           >
         </summary>
@@ -228,8 +244,12 @@
 
             
 
+            
+
              is equal to <paramref
              name="b" />
+
+            
 
             
 
@@ -245,6 +265,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.LockCookie" />
 
@@ -252,8 +274,12 @@
 
           
 
+          
+
            to compare to <paramref
            name="b" />
+
+          
 
           
 
@@ -268,6 +294,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.LockCookie" />
 
@@ -275,8 +303,12 @@
 
           
 
+          
+
            to compare to <paramref
            name="a" />
+
+          
 
           
 
@@ -319,6 +351,8 @@
 
             
 
+            
+
              structures are not equal.</para
           >
         </summary>
@@ -332,8 +366,12 @@
 
             
 
+            
+
              is not equal to <paramref
              name="b" />
+
+            
 
             
 
@@ -349,6 +387,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.LockCookie" />
 
@@ -356,8 +396,12 @@
 
           
 
+          
+
            to compare to <paramref
            name="b" />
+
+          
 
           
 
@@ -372,6 +416,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.LockCookie" />
 
@@ -379,8 +425,12 @@
 
           
 
+          
+
            to compare to <paramref
            name="a" />
+
+          
 
           
 

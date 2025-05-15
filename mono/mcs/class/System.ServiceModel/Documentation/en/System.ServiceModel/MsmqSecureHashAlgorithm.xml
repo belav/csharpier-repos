@@ -23,6 +23,8 @@
 
         
 
+        
+
          class is an enumeration that contains the hashing algorithms that Message Queuing can use to sign messages.</para
       >
       <para>
@@ -32,8 +34,12 @@
 
         
 
+        
+
          and <see
          cref="F:System.ServiceModel.MsmqSecureHashAlgorithm.Sha512" />
+
+        
 
         
 
@@ -74,6 +80,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -98,6 +106,8 @@
           <para
             >The <see
              cref="http://go.microsoft.com/fwlink/?LinkId=95940">Secure Hash Algorithm (SHA-1)</see>
+
+            
 
             
 
@@ -132,6 +142,8 @@
 
             
 
+            
+
              algorithm.</para
           >
         </summary>
@@ -156,6 +168,8 @@
           <para
             >The <see
              cref="http://go.microsoft.com/fwlink/?LinkId=95940">SHA 512</see>
+
+            
 
             
 

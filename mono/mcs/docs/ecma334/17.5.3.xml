@@ -9,6 +9,8 @@
 
     
 
+    
+
     ). </paragraph
   >
   <paragraph
@@ -17,6 +19,8 @@
       <list_item
         > First, overload resolution is applied to C, N, and A, to select a specific method M from the set of methods declared in and inherited by C. This is described in <hyperlink
         >14.5.5.1</hyperlink>
+
+        
 
         
 
@@ -40,7 +44,7 @@
     <example
       >[Example: The following example illustrates the differences between virtual and non-virtual methods: <code_example
       >
-<![CDATA[
+        <![CDATA[
 using System;  
 class A  
 {  
@@ -71,7 +75,7 @@ class Test
     <example
       >In the example, A introduces a non-virtual method F and a virtual method G. The class B introduces a new non-virtual method F, thus hiding the inherited F, and also overrides the inherited method G. The example produces the output: <code_example
       >
-<![CDATA[
+        <![CDATA[
 A.F  
 B.F  
 B.G  
@@ -88,7 +92,7 @@ B.G
 
       >[Example: In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 using System;  
 class A  
 {  
@@ -126,9 +130,11 @@ class Test
 
       
 
+      
+
       the C and D classes contain two virtual methods with the same signature: The one introduced by A and the one introduced by C. The method introduced by C hides the method inherited from A. Thus, the override declaration in D overrides the method introduced by C, and it is not possible for D to override the method introduced by A. The example produces the output: <code_example
       >
-<![CDATA[
+        <![CDATA[
 B.F  
 B.F  
 D.F  

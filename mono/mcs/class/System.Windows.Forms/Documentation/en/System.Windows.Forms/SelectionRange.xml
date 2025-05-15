@@ -26,8 +26,12 @@
 
         
 
+        
+
          is the date or dates selected and highlighted on the <see
          cref="T:System.Windows.Forms.MonthCalendar" />
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.SelectionRange.End" />
+
+        
 
         
 
@@ -54,8 +62,12 @@
 
         
 
+        
+
          can be changed by the user clicking a date while dragging the mouse pointer across the desired dates, or you can set the range in code. For example, you might want to have the user enter a date range into two <see
          cref="T:System.Windows.Forms.TextBox" />
+
+        
 
         
 
@@ -68,8 +80,12 @@
 
         
 
+        
+
          controls and set the <see
          cref="T:System.Windows.Forms.SelectionRange" />
+
+        
 
         
 
@@ -99,8 +115,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.SelectionRange.End" />
+
+            
 
             
 
@@ -114,6 +134,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.SelectionRange" />
+
+            
 
             
 
@@ -148,8 +170,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.SelectionRange.End" />
+
+            
 
             
 
@@ -162,6 +188,8 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.SelectionRange.End" />
 
@@ -169,8 +197,12 @@
 
             
 
+            
+
              property values of the assigned <see
              cref="T:System.Windows.Forms.SelectionRange" />
+
+            
 
             
 
@@ -189,6 +221,8 @@
 
             
 
+            
+
              class with the specified selection range.</para
           >
         </summary>
@@ -199,8 +233,12 @@
 
           
 
+          
+
           The existing <see
            cref="T:System.Windows.Forms.SelectionRange" />
+
+          
 
           
 
@@ -237,9 +275,13 @@
 
               
 
+              
+
                value is greater than the <paramref
                name="upper" />
               <see cref="T:System.DateTime" />
+
+              
 
               
 
@@ -252,6 +294,8 @@
 
               
 
+              
+
                value will be assigned to the <see
                cref="P:System.Windows.Forms.SelectionRange.End" />
 
@@ -259,8 +303,12 @@
 
               
 
+              
+
                property instead of the <see
                cref="P:System.Windows.Forms.SelectionRange.Start" />
+
+              
 
               
 
@@ -280,6 +328,8 @@
 
             
 
+            
+
              class with the specified beginning and ending dates.</para
           >
         </summary>
@@ -290,8 +340,12 @@
 
           
 
+          
+
           The starting date in the <see
            cref="T:System.Windows.Forms.SelectionRange" />
+
+          
 
           
 
@@ -306,8 +360,12 @@
 
           
 
+          
+
           The ending date in the <see
            cref="T:System.Windows.Forms.SelectionRange" />
+
+          
 
           
 
@@ -377,6 +435,8 @@
 
             
 
+            
+
              method returns a string that includes the values for the <see
              cref="P:System.Windows.Forms.SelectionRange.Start" />
 
@@ -384,8 +444,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.SelectionRange.End" />
+
+            
 
             
 
@@ -404,6 +468,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -412,6 +478,8 @@
           <para
             >A string that represents the current <see
              cref="T:System.Windows.Forms.SelectionRange" />
+
+            
 
             
 

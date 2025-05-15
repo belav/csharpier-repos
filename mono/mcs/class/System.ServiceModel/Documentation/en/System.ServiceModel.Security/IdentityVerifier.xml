@@ -24,8 +24,12 @@
 
         
 
+        
+
          method first to retrieve the service's identity from the message. Next, the infrastructure calls the <see
          cref="M:System.ServiceModel.Security.IdentityVerifier.CheckAccess(System.ServiceModel.EndpointIdentity,System.IdentityModel.Policy.AuthorizationContext)" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.IdentityModel.Policy.AuthorizationContext" />
+
+        
 
         
 
@@ -54,6 +62,8 @@
             >How To: Create a Custom Client Identity Verifier</a
           >
         </format>
+
+        
 
         
 
@@ -124,8 +134,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.EndpointIdentity" />
+
+          
 
           
 
@@ -140,6 +154,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.IdentityModel.Policy.AuthorizationContext" />
 
@@ -147,8 +163,12 @@
 
           
 
+          
+
            to test the <paramref
            name="identity" />
+
+          
 
           
 
@@ -186,6 +206,8 @@
           <para
             >A default instance of <see
              cref="T:System.ServiceModel.Security.IdentityVerifier" />
+
+            
 
             
 

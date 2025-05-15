@@ -33,6 +33,8 @@
 
         
 
+        
+
          event is raised when you change which items are in a collection, for example, by adding an element to a collection or removing an element from the collection. This event is not raised when an individual element changes its value.</para
       >
     </remarks>
@@ -41,6 +43,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Data.DataColumnCollection.CollectionChanged" />
+
+        
 
         
 
@@ -83,6 +87,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -93,8 +99,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.ComponentModel.CollectionChangeAction" />
+
+          
 
           
 
@@ -109,8 +119,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 

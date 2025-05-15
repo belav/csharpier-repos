@@ -21,6 +21,8 @@
 
         
 
+        
+
          class provides information about the invalid input character, namely its zero-based position in the formatted string and a general description about why the character was rejected.</para
       >
     </remarks>
@@ -29,6 +31,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.MaskedTextBox.MaskInputRejected" />
+
+        
 
         
 
@@ -61,6 +65,8 @@
 
             
 
+            
+
              constructor sets the values of the <see
              cref="P:System.Windows.Forms.MaskInputRejectedEventArgs.Position" />
 
@@ -68,8 +74,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.MaskInputRejectedEventArgs.RejectionHint" />
+
+            
 
             
 
@@ -88,6 +98,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -98,8 +110,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -114,8 +130,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.MaskedTextResultHint" />
+
+          
 
           
 
@@ -147,8 +167,12 @@
 
             
 
+            
+
              property is set in the <see
              cref="M:System.Windows.Forms.MaskInputRejectedEventArgs.#ctor(System.Int32,System.ComponentModel.MaskedTextResultHint)" />
+
+            
 
             
 
@@ -188,8 +212,12 @@
 
             
 
+            
+
              property is set in the <see
              cref="M:System.Windows.Forms.MaskInputRejectedEventArgs.#ctor(System.Int32,System.ComponentModel.MaskedTextResultHint)" />
+
+            
 
             
 

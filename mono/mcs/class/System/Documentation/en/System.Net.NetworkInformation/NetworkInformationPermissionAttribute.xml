@@ -37,11 +37,15 @@
 
         
 
+        
+
          namespace.</para
       >
       <para
         >The security information declared by a security attribute is stored in the metadata of the attribute target and is accessed by the system at run time. Security attributes are used only for declarative security. For imperative security, use the <see
          cref="T:System.Net.NetworkInformation.NetworkInformationPermission" />
+
+        
 
         
 
@@ -55,6 +59,8 @@
       <para
         >Allows security actions for <see
          cref="T:System.Net.NetworkInformation.NetworkInformationPermission" />
+
+        
 
         
 
@@ -98,6 +104,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -108,8 +116,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 
@@ -218,6 +230,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -226,6 +240,8 @@
           <para
             >A <see
              cref="T:System.Net.NetworkInformation.NetworkInformationPermission" />
+
+            
 
             
 

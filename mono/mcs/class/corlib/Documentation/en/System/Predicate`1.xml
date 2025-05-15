@@ -37,6 +37,8 @@
 
         
 
+        
+
          if <paramref
          name="obj" />
 
@@ -44,8 +46,12 @@
 
         
 
+        
+
          meets the criteria defined within the method represented by this delegate; otherwise, <see
          langword="false" />
+
+        
 
         
 
@@ -62,6 +68,8 @@
 
         
 
+        
+
          if <paramref
          name="obj" />
 
@@ -69,8 +77,12 @@
 
         
 
+        
+
          meets the criteria defined within the method represented by this delegate; otherwise, <see
          langword="false" />
+
+        
 
         
 
@@ -91,8 +103,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Collections.Generic.List`1" />
+
+        
 
         
 
@@ -108,8 +124,12 @@
 
         
 
+        
+
          delegate is represented by a lambda expression. Because locally scoped variables are available to the lambda expression, it is easy to test for a condition that is not precisely known at compile time. This is simulated in the following example, which defines a HockeyTeam class that contains information about a National Hockey League team and the year in which it was founded. The example defines an array of integer values that represent years, and randomly assigns one element of the array to foundedBeforeYear, which is a variable that is locally scoped to the example's Main method. Because locally scoped variables are available to a lambda expression, the lambda expression passed to the <see
          cref="M:System.Collections.Generic.List`1.FindAll(System.Predicate{`0})" />
+
+        
 
         
 

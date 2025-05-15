@@ -27,6 +27,8 @@
 
         
 
+        
+
          class is used by custom control designer components to list the structural elements of an XML document at design time. Use the XmlDocumentSchema class to populate lists of document elements to allow users to select document elements in UI features at design time.</para
       >
     </remarks>
@@ -35,6 +37,8 @@
       <para
         >Represents the structure, or schema, of an <see
          cref="T:System.Xml.XmlDocument" />
+
+        
 
         
 
@@ -69,6 +73,8 @@
 
             
 
+            
+
              parameter to specify either a specific node within the XML document to examine, or specify the empty string ("") to examine the complete document.</para
           >
         </remarks>
@@ -82,8 +88,12 @@
 
             
 
+            
+
              class using a specified <see
              cref="T:System.Xml.XmlDocument" />
+
+            
 
             
 
@@ -99,8 +109,12 @@
 
           
 
+          
+
           An instance of an <see
            cref="T:System.Xml.XmlDocument" />
+
+          
 
           
 
@@ -110,6 +124,8 @@
         >
         <param name="xPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -144,8 +160,12 @@
 
             
 
+            
+
              parameter in the constructor, or each child node starting at the document root if the <paramref
              name="xPath" />
+
+            
 
             
 
@@ -159,6 +179,8 @@
           <para
             >An array of <see
              cref="T:System.Web.UI.Design.IDataSourceViewSchema" />
+
+            
 
             
 

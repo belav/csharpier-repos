@@ -33,6 +33,8 @@
 
         
 
+        
+
          to partially trusted code. The ability to read and write the event log enables code to perform actions such as issuing event log messages in the name of another application. </para
       >
       <block subset="none" type="note">
@@ -44,11 +46,15 @@
 
           
 
+          
+
            property for the event log does not exist, a new event source is created. To create an event source in Windows Vista and later versions of Windows, or Windows Server 2003, you must have administrative privileges. </para
         >
         <para
           >The reason for this requirement is that all event logs, including security, must be searched to determine whether the event source is unique. Starting with Windows Vista, users do not have permission to access the security log; therefore, a <see
            cref="T:System.Security.SecurityException" />
+
+          
 
           
 
@@ -86,6 +92,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Diagnostics.EventLogPermission" />
+
+            
 
             
 
@@ -130,6 +138,8 @@
 
             
 
+            
+
              class with the specified permission entries.</para
           >
         </summary>
@@ -140,8 +150,12 @@
 
           
 
+          
+
           An array of  objects that represent permission entries. The <see
            cref="P:System.Diagnostics.EventLogPermission.PermissionEntries" />
+
+          
 
           
 
@@ -182,11 +196,15 @@
 
             
 
+            
+
              class with the specified permission state.</para
           >
         </summary>
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -228,6 +246,8 @@
 
             
 
+            
+
              class with the specified access levels and the name of the computer to use.</para
           >
         </summary>
@@ -238,10 +258,14 @@
 
           
 
+          
+
           One of the enumeration values that specifies an access level. </param
         >
         <param name="machineName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

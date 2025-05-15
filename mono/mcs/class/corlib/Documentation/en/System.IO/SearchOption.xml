@@ -30,6 +30,8 @@
 
         
 
+        
+
          in your search and the directory structure contains a link that creates a loop, the search operation enters an infinite loop.</para
       >
     </remarks>

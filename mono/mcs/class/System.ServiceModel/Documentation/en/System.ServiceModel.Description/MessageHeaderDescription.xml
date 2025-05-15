@@ -56,6 +56,8 @@
 
             
 
+            
+
              class with a specified qualified name.</para
           >
         </summary>
@@ -66,10 +68,14 @@
 
           
 
+          
+
           The name of the message header.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

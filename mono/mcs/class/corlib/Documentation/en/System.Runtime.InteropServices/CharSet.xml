@@ -41,8 +41,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Runtime.InteropServices.StructLayoutAttribute" />
+
+        
 
         
 
@@ -52,6 +56,8 @@
          type="text/html">
           <a href="A8347EB1-295F-46B9-8A78-63331F9ECC50">Specifying a Character Set</a>
         </format>
+
+        
 
         
 
@@ -129,8 +135,12 @@
 
             
 
+            
+
              on Windows NT, Windows 2000, Windows XP, and the Windows Server 2003 family; the default is <see
              cref="F:System.Runtime.InteropServices.CharSet.Ansi" />
+
+            
 
             
 
@@ -143,8 +153,12 @@
 
             
 
+            
+
             , languages may override this default. For example, by default C# marks all methods and types as <see
              cref="F:System.Runtime.InteropServices.CharSet.Ansi" />
+
+            
 
             
 
@@ -179,6 +193,8 @@
           <para
             >This value is obsolete and has the same behavior as <see
              cref="F:System.Runtime.InteropServices.CharSet.Ansi" />
+
+            
 
             
 

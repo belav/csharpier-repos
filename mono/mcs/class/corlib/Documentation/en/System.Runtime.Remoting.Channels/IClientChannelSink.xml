@@ -78,10 +78,14 @@
 
           
 
+          
+
           A stack of channel sinks that called this sink. </param
         >
         <param name="msg">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -96,10 +100,14 @@
 
           
 
+          
+
           The headers to add to the outgoing message heading to the server. </param
         >
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -149,10 +157,14 @@
 
           
 
+          
+
           A stack of sinks that called this sink. </param
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -167,10 +179,14 @@
 
           
 
+          
+
           The headers retrieved from the server response stream. </param
         >
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -213,6 +229,8 @@
 
             
 
+            
+
              method is called by the formatter sink before it serializes the message.</para
           >
         </remarks>
@@ -221,6 +239,8 @@
           <para
             >Returns the <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -239,11 +259,15 @@
 
             
 
+            
+
              onto which the provided message is to be serialized.</para
           >
         </returns>
         <param name="msg">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -256,10 +280,14 @@
 
           
 
+          
+
            containing details about the method call. </param
         >
         <param name="headers">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

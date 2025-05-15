@@ -34,8 +34,12 @@
 
         
 
+        
+
          and the formatter-provided class best suited to parse the data inside the <see
          cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+        
 
         
 
@@ -77,6 +81,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -85,6 +91,8 @@
           <para
             >The converted <paramref
              name="value" />
+
+            
 
             
 
@@ -100,10 +108,14 @@
 
           
 
+          
+
           The object to be converted. </param
         >
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -116,8 +128,12 @@
 
           
 
+          
+
            into which <paramref
            name="value" />
+
+          
 
           
 
@@ -161,6 +177,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -169,6 +187,8 @@
           <para
             >The converted <paramref
              name="value" />
+
+            
 
             
 
@@ -184,10 +204,14 @@
 
           
 
+          
+
           The object to be converted. </param
         >
         <param name="typeCode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -200,8 +224,12 @@
 
           
 
+          
+
            into which <paramref
            name="value" />
+
+          
 
           
 
@@ -241,6 +269,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -254,11 +284,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -302,11 +336,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -350,11 +388,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -394,6 +436,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -407,11 +451,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -451,6 +499,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -464,11 +514,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -512,11 +566,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -560,11 +618,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -608,11 +670,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -656,11 +722,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -700,6 +770,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -713,11 +785,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -761,11 +837,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -805,6 +885,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -818,11 +900,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -866,11 +952,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -914,11 +1004,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -962,11 +1056,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

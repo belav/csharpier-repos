@@ -47,6 +47,8 @@
 
         
 
+        
+
          and related classes.</para
       >
       <para>For incoming messages, this property is added to messages. </para>
@@ -60,8 +62,12 @@
 
             
 
+            
+
              is set to <see
              cref="P:System.ServiceModel.Channels.HttpRequestMessageProperty.Method" />
+
+            
 
             
 
@@ -78,8 +84,12 @@
 
             
 
+            
+
              is appended to the <see
              cref="P:System.Net.HttpWebRequest.RequestUri" />
+
+            
 
             
 
@@ -91,6 +101,8 @@
         <item>
           <para>
             <see cref="P:System.ServiceModel.Channels.HttpRequestMessageProperty.Headers" />
+
+            
 
             
 
@@ -131,12 +143,16 @@
 
                 
 
+                
+
                  = POST.</para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.ServiceModel.Channels.HttpRequestMessageProperty.QueryString" />
+
+                
 
                 
 
@@ -153,6 +169,8 @@
 
                 
 
+                
+
                  = false.</para
               >
             </item>
@@ -163,6 +181,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.HttpRequestMessageProperty" />
+
+            
 
             
 
@@ -223,6 +243,8 @@
 
             
 
+            
+
              are PUT, DELETE, HEAD, OPTIONS, TRACE, and CONNECT. These methods have special behaviors when interoperating with other services. </para
           >
         </remarks>
@@ -250,6 +272,8 @@
           <para
             >Gets the name of the message property associated with the <see
              cref="T:System.ServiceModel.Channels.HttpRequestMessageProperty" />
+
+            
 
             
 
@@ -304,8 +328,12 @@
 
             
 
+            
+
              object for the response message, set the <see
              cref="P:System.ServiceModel.Channels.HttpRequestMessageProperty.SuppressEntityBody" />
+
+            
 
             
 
@@ -349,6 +377,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Channels.IMessageProperty" />
+
+            
 
             
 

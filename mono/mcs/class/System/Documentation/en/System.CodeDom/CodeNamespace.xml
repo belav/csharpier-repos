@@ -40,11 +40,15 @@
 
         
 
+        
+
          can be used to represent a namespace declaration.</para
       >
       <para
         >The <see
          cref="P:System.CodeDom.CodeNamespace.Name" />
+
+        
 
         
 
@@ -57,6 +61,8 @@
 
         
 
+        
+
          property contains the namespace import directives for the namespace. The <see
          cref="P:System.CodeDom.CodeNamespace.Types" />
 
@@ -64,8 +70,12 @@
 
         
 
+        
+
          property contains the type declarations for the namespace. The <see
          cref="P:System.CodeDom.CodeNamespace.Comments" />
+
+        
 
         
 
@@ -107,6 +117,8 @@
 
           
 
+          
+
            property
 has to be set before the Code Generator is called on it.</remarks
         >
@@ -115,6 +127,8 @@ has to be set before the Code Generator is called on it.</remarks
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeNamespace" />
+
+            
 
             
 
@@ -182,11 +196,15 @@ class CodeDomDemo {
 
             
 
+            
+
              class using the specified name.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -217,6 +235,8 @@ class CodeDomDemo {
       <Docs>
         <value>
           <see cref="T:System.CodeDom.CodeCommentStatementCollection" />
+
+          
 
           
 
@@ -266,6 +286,8 @@ demoNs.Comments.Add(new CodeCommentStatement("Demo Namespace"));
       <Docs>
         <value>
           <see cref="T:System.CodeDom.CodeNamespaceImportCollection" />
+
+          
 
           
 
@@ -340,6 +362,8 @@ demoNs.Imports.Add(new CodeNamespaceImport("System.Data"));
 
             
 
+            
+
              collection is accessed.</para
           >
         </summary>
@@ -365,6 +389,8 @@ demoNs.Imports.Add(new CodeNamespaceImport("System.Data"));
           <para
             >An event that will be raised the first time the <see
              cref="P:System.CodeDom.CodeNamespace.Imports" />
+
+            
 
             
 
@@ -400,6 +426,8 @@ demoNs.Imports.Add(new CodeNamespaceImport("System.Data"));
 
             
 
+            
+
              collection is accessed.</para
           >
         </summary>
@@ -428,6 +456,8 @@ demoNs.Imports.Add(new CodeNamespaceImport("System.Data"));
         <remarks
           >This is a  collection of <see
            cref="T:System.CodeDom.CodeTypeDeclaration" />
+
+          
 
           
 

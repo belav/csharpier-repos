@@ -27,6 +27,8 @@
 
         
 
+        
+
          provides access to the frequently used properties for Soapsuds-generated proxies that point to well-known objects (XML Web services).</para
       >
     </remarks>
@@ -37,6 +39,8 @@
          type="text/html">
           <a href="40F6F8C8-B80C-4E9F-A920-31BCD0CF45C5">Soapsuds tool</a>
         </format>
+
+        
 
         
 
@@ -59,6 +63,8 @@
           <para
             >Creates an instance of <see
              cref="T:System.Runtime.Remoting.Services.RemotingClientProxy" />
+
+            
 
             
 
@@ -105,6 +111,8 @@
           <para
             >The <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -191,8 +199,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -202,6 +214,8 @@
         >
         <param name="url">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -229,6 +243,8 @@
           <para
             >Internal. Connects the proxy to the remoting channel that is specified by the <see
              cref="P:System.Runtime.Remoting.Services.RemotingClientProxy.Url" />
+
+            
 
             
 
@@ -283,6 +299,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -316,6 +334,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -341,6 +361,8 @@
              type="text/html">
               <a href="9574262C-D4B1-41C5-8600-24FF147C0ADD">Security</a>
             </format>
+
+            
 
             
 
@@ -458,6 +480,8 @@
 
             
 
+            
+
              property is -1, and indicates that a time-out never occurs (infinite time-out).</para
           >
         </remarks>
@@ -527,6 +551,8 @@
              type="text/html">
               <a href="9574262C-D4B1-41C5-8600-24FF147C0ADD">Security</a>
             </format>
+
+            
 
             
 

@@ -21,6 +21,8 @@
 
         
 
+        
+
          interface. The <see
          cref="T:System.Web.UI.IUserControlTypeResolutionService" />
 
@@ -28,8 +30,12 @@
 
         
 
+        
+
          interface is implemented by tool developers to return the <see
          cref="T:System.Type" />
+
+        
 
         
 
@@ -78,11 +84,15 @@
 
             
 
+            
+
              that represents the type of control the prefix and tag identify.</para
           >
         </returns>
         <param name="tagName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

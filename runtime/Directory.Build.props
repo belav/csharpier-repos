@@ -433,8 +433,7 @@
   </PropertyGroup>
   <!-- Packaging -->
   <PropertyGroup>
-    <GitHubRepositoryName
->runtime</GitHubRepositoryName>
+    <GitHubRepositoryName>runtime</GitHubRepositoryName>
     <RepositoryUrl>https://github.com/dotnet/$(GitHubRepositoryName)</RepositoryUrl>
     <PackageProjectUrl>https://dot.net</PackageProjectUrl>
     <Owners>microsoft,dotnetframework</Owners>

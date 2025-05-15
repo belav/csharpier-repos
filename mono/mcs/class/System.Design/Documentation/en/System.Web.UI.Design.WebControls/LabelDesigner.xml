@@ -24,11 +24,15 @@
 
         
 
+        
+
          control allows text to be displayed programmatically on a Web page.</para
       >
       <para
         >In a visual designer, when you switch from Source to Design view, the markup source code that describes a <see
          cref="T:System.Web.UI.WebControls.Label" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          class provides design-time support for the <see
          cref="T:System.Web.UI.WebControls.Label" />
+
+        
 
         
 
@@ -58,8 +66,12 @@
 
         
 
+        
+
          method is called when there is a change to the associated <see
          cref="T:System.Web.UI.WebControls.Label" />
+
+        
 
         
 
@@ -73,6 +85,8 @@
       <para
         >Provides design-time support in a visual designer for the <see
          cref="T:System.Web.UI.WebControls.Label" />
+
+        
 
         
 
@@ -98,6 +112,8 @@
 
             
 
+            
+
              class when it creates the associated <see
              cref="T:System.Web.UI.WebControls.Label" />
 
@@ -105,8 +121,12 @@
 
             
 
+            
+
              control or a copy of the <see
              cref="T:System.Web.UI.WebControls.Label" />
+
+            
 
             
 
@@ -120,6 +140,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.WebControls.LabelDesigner" />
+
+            
 
             
 

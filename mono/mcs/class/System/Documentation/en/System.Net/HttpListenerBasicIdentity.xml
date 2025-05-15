@@ -56,6 +56,8 @@
 
             
 
+            
+
              class when performing basic authentication.</para
           >
         </remarks>
@@ -64,6 +66,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.HttpListenerBasicIdentity" />
+
+            
 
             
 
@@ -79,10 +83,14 @@
 
           
 
+          
+
           The user name.</param
         >
         <param name="password">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

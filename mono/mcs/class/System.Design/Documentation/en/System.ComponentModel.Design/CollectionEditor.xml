@@ -39,11 +39,15 @@
 
             
 
+            
+
              class using the specified collection type.</para
           >
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -104,6 +108,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -238,6 +244,8 @@
 
             
 
+            
+
              to provide as the user interface for editing the collection.</para
           >
         </returns>
@@ -265,6 +273,8 @@
 
             
 
+            
+
              property, which is faster than this method.</para
           >
           <para>This method does not need to be called by users, except in derived classes where this method has been overridden and implemented.</para>
@@ -279,6 +289,8 @@
           <para
             >The data type of the items in the collection, or an <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -322,6 +334,8 @@
 
           
 
+          
+
           The type of item to create. </param
         >
       </Docs>
@@ -343,6 +357,8 @@
           <para
             >You can retrieve the data type of the items of the collection from the <see
              cref="P:System.ComponentModel.Design.CollectionEditor.NewItemTypes" />
+
+            
 
             
 
@@ -392,6 +408,8 @@
 
           
 
+          
+
           The object to destroy. </param
         >
       </Docs>
@@ -431,8 +449,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -447,10 +469,14 @@
 
           
 
+          
+
           A service provider object through which editing services can be obtained. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -496,11 +522,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -534,6 +564,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -547,8 +579,12 @@
 
             
 
+            
+
              enumeration value indicating the provided editing style. If the method is not supported in the specified context, this method will return the <see
              cref="F:System.Drawing.Design.UITypeEditorEditStyle.None" />
+
+            
 
             
 
@@ -564,8 +600,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -607,11 +647,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="editValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -657,6 +701,8 @@
 
             
 
+            
+
              which contains the individual objects to be created.</para
           >
         </returns>
@@ -667,8 +713,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.ArrayList" />
+
+          
 
           
 
@@ -699,6 +749,8 @@
         </returns>
         <param name="serviceType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -752,6 +804,8 @@
 
             
 
+            
+
             . If more than one type is returned, the collection editor UI provides a way to choose which item type to create. </para
           >
         </remarks>
@@ -789,6 +843,8 @@
 
             
 
+            
+
              parameter is returned.</para
           >
         </remarks>
@@ -806,6 +862,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
@@ -816,10 +874,14 @@
 
           
 
+          
+
           The collection to edit. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -29,11 +29,15 @@
 
         
 
+        
+
          object emits a replacement string into the output to represent the original input byte sequence. The conversion process then continues to decode the remainder of the original input. </para
       >
       <para
         >The value of a <see
          cref="T:System.Text.DecoderReplacementFallback" />
+
+        
 
         
 
@@ -72,6 +76,8 @@
 
             
 
+            
+
              object is "?".</para
           >
         </remarks>
@@ -80,6 +86,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Text.DecoderReplacementFallback" />
+
+            
 
             
 
@@ -119,8 +127,12 @@
 
             
 
+            
+
              parameter initializes the replacement string that is the value of the <see
              cref="T:System.Text.DecoderReplacementFallback" />
+
+            
 
             
 
@@ -139,11 +151,15 @@
 
             
 
+            
+
              class using a specified replacement string.</para
           >
         </summary>
         <param name="replacement">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -184,8 +200,12 @@
 
             
 
+            
+
              object that is initialized with the replacement string of this <see
              cref="T:System.Text.DecoderReplacementFallback" />
+
+            
 
             
 
@@ -199,6 +219,8 @@
           <para
             >A <see
              cref="T:System.Text.DecoderFallbackBuffer" />
+
+            
 
             
 
@@ -229,6 +251,8 @@
           <para
             >Gets the replacement string that is the value of the <see
              cref="T:System.Text.DecoderReplacementFallback" />
+
+            
 
             
 
@@ -269,6 +293,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -282,8 +308,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Text.DecoderReplacementFallback" />
+
+            
 
             
 
@@ -296,6 +326,8 @@
 
             
 
+            
+
              property that is equal to the <see
              cref="P:System.Text.DecoderReplacementFallback.DefaultString" />
 
@@ -303,8 +335,12 @@
 
             
 
+            
+
              property of the current <see
              cref="T:System.Text.DecoderReplacementFallback" />
+
+            
 
             
 
@@ -320,8 +356,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Text.DecoderReplacementFallback" />
+
+          
 
           
 
@@ -358,8 +398,12 @@
 
             
 
+            
+
              object is the value of its <see
              cref="P:System.Text.DecoderReplacementFallback.DefaultString" />
+
+            
 
             
 
@@ -373,6 +417,8 @@
           <para
             >Retrieves the hash code for the value of the <see
              cref="T:System.Text.DecoderReplacementFallback" />
+
+            
 
             
 
@@ -407,6 +453,8 @@
           <para
             >Gets the number of characters in the replacement string for the <see
              cref="T:System.Text.DecoderReplacementFallback" />
+
+            
 
             
 

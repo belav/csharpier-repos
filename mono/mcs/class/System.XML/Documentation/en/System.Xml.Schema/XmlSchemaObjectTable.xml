@@ -29,6 +29,8 @@
 
         
 
+        
+
          class (for example, Attributes, AttributeGroups, Elements, and so on).</para
       >
     </summary>
@@ -65,6 +67,8 @@
 
             
 
+            
+
              returns false if a null value is supplied because there is not a qualified name for a null name.</para
           >
         </remarks>
@@ -83,8 +87,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlQualifiedName" />
+
+          
 
           
 
@@ -114,6 +122,8 @@
           <para
             >Gets the number of items contained in the <see
              cref="T:System.Xml.Schema.XmlSchemaObjectTable" />
+
+            
 
             
 
@@ -155,6 +165,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -168,8 +180,12 @@
 
             
 
+            
+
              that can iterate through <see
              cref="T:System.Xml.Schema.XmlSchemaObjectTable" />
+
+            
 
             
 
@@ -236,6 +252,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -267,6 +285,8 @@
           <para
             >Returns a collection of all the values for all the elements in the <see
              cref="T:System.Xml.Schema.XmlSchemaObjectTable" />
+
+            
 
             
 

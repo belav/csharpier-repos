@@ -10,8 +10,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -30,6 +34,8 @@
       <name>
         <non_terminal where="20.2">interface-member-declaration</non_terminal>
       </name>
+
+      
 
       
 
@@ -56,7 +62,7 @@
     <example
       >[Example: The example <code_example
       >
-<![CDATA[
+        <![CDATA[
 public delegate void StringListEvent(IStringList sender);  
 public interface IStringList  
 {  
@@ -67,6 +73,8 @@ public interface IStringList
 }  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -83,8 +91,12 @@ public interface IStringList
 
     
 
+    
+
      creates a new declaration space (<hyperlink
     >10.3</hyperlink>
+
+    
 
     
 
@@ -97,8 +109,12 @@ public interface IStringList
 
     
 
+    
+
     s immediately contained by the <non_terminal
      where="20.1">interface-declaration</non_terminal>
+
+    
 
     
 
@@ -114,6 +130,8 @@ public interface IStringList
 
         
 
+        
+
         ) of a method must differ from the signatures of all other methods declared in the same interface. </list_item
       >
       <list_item> The name of a property or event must differ from the names of all other members declared in the same interface. </list_item>
@@ -123,6 +141,8 @@ public interface IStringList
   <paragraph
     >The inherited members of an interface are specifically not part of the declaration space of the interface. Thus, an interface is allowed to declare a member with the same name or signature as an inherited member. When this occurs, the derived interface member is said to hide the base interface member. Hiding an inherited member is not considered an error, but it does cause the compiler to issue a warning. To suppress the warning, the declaration of the derived interface member must include a new modifier to indicate that the derived member is intended to hide the base member. This topic is discussed further in <hyperlink
     >10.7.1.2</hyperlink>
+
+    
 
     
 

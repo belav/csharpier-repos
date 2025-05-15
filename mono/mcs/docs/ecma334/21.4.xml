@@ -8,11 +8,15 @@
 
     
 
+    
+
     ) is required to convert between an enum type and an integral type, or between two enum types. The set of values that an enum type can take on is not limited by its enum members. In particular, any value of the underlying type of an enum can be cast to the enum type, and is a distinct valid value of that enum type. </paragraph
   >
   <paragraph
     >Enum members have the type of their containing enum type (except within other enum member initializers: see <hyperlink
     >21.3</hyperlink>
+
+    
 
     
 
@@ -28,8 +32,12 @@
 
     
 
+    
+
     ), + (<hyperlink
     >14.7.4</hyperlink>
+
+    
 
     
 
@@ -42,8 +50,12 @@
 
     
 
+    
+
     ), -^, &amp;, | (<hyperlink
     >14.10.2</hyperlink>
+
+    
 
     
 
@@ -56,8 +68,12 @@
 
     
 
+    
+
     ), ++,  (<hyperlink
     >14.5.9</hyperlink>
+
+    
 
     
 
@@ -70,8 +86,12 @@
 
     
 
+    
+
     ), and sizeof (<hyperlink
     >25.5.4</hyperlink>
+
+    
 
     
 

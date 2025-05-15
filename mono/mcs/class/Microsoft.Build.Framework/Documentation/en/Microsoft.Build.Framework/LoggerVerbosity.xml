@@ -29,6 +29,8 @@
 
         
 
+        
+
         . </para
       >
     </summary>
@@ -52,6 +54,8 @@
 
             
 
+            
+
              values of <see
              cref="F:Microsoft.Build.Framework.MessageImportance.High" />
 
@@ -59,8 +63,12 @@
 
             
 
+            
+
              or <see
              cref="F:Microsoft.Build.Framework.MessageImportance.Normal" />
+
+            
 
             
 
@@ -109,8 +117,12 @@
 
             
 
+            
+
              values of <see
              cref="F:Microsoft.Build.Framework.MessageImportance.High" />
+
+            
 
             
 
@@ -142,8 +154,12 @@
 
             
 
+            
+
              values of <see
              cref="F:Microsoft.Build.Framework.MessageImportance.High" />
+
+            
 
             
 

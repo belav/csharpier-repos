@@ -24,6 +24,8 @@
 
         
 
+        
+
          class provides a way to programmatically access and modify the content of the MachineKey section in the configuration file. The MachineKey section can be configured at the machine (Machine.config) or application (Web.config) level and controls the keys and algorithms that are used for Windows Forms authentication, view-state validation, and session-state application isolation. For any of these features to work across a network of Web servers (a Web farm), the DecryptionKey and ValidationKey attributes of the MachineKey section must be configured explicitly and identically with valid key values. The AutoGenerate value does not work for Web farms, because it relies on a cryptographically random secret, which is persisted using machine-local protection and will not be the same across more than one computer.</para
       >
     </remarks>
@@ -49,8 +51,12 @@
 
             
 
+            
+
              class by using the <see
              cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+
+            
 
             
 
@@ -64,6 +70,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.MachineKeySection" />
+
+            
 
             
 
@@ -107,6 +115,8 @@
 
             
 
+            
+
              property supports the following decryption values: </para
           >
           <list type="bullet">
@@ -122,6 +132,8 @@
 
                 
 
+                
+
                  algorithm to encrypt data. AES is the default algorithm to encrypt data.</para
               >
             </item>
@@ -129,6 +141,8 @@
               <para
                 >3DES, which specifies that ASP.NET uses the <see
                  cref="F:System.Web.Configuration.MachineKeyValidation.TripleDES" />
+
+                
 
                 
 
@@ -151,10 +165,14 @@
 
             
 
+            
+
              element of the Web.config file. For more information, see the <format
              type="text/html">
               <a href="4b5699a9-bc21-4c4a-85f1-8b3b8ebd2d46">machineKey</a>
             </format>
+
+            
 
             
 
@@ -202,8 +220,12 @@
 
             
 
+            
+
              property is used for encryption and decryption, such as in Windows Forms authentication, and for view state when the <see
              cref="P:System.Web.Configuration.MachineKeySection.Validation" />
+
+            
 
             
 
@@ -220,8 +242,12 @@
 
             
 
+            
+
              value, ASP.NET generates a unique encrypted key for each application by using each application's <see
              cref="P:System.Web.HttpRuntime.AppDomainAppVirtualPath" />
+
+            
 
             
 
@@ -237,6 +263,8 @@
 
             
 
+            
+
              value, ASP.NET generates a unique encrypted key for each application by using each application's <see
              cref="P:System.Web.HttpRuntime.AppDomainAppId" />
 
@@ -244,8 +272,12 @@
 
             
 
+            
+
             . If two distinct applications share a virtual path (perhaps because those applications are running on different ports), this flag can be used to further distinguish them from one another. The “IsolateByAppId” flag is understood only by ASP.NET 4.5, but it can be used regardless of the <see
              cref="P:System.Web.Configuration.MachineKeySection.CompatibilityMode" />
+
+            
 
             
 
@@ -261,10 +293,14 @@
 
             
 
+            
+
              property manually to ensure consistent configuration. For information about how to manually generate values for the DecryptionKey attribute, see <see
              cref="http://go.microsoft.com/fwlink/?linkid=155113"
               >How To: Configure MachineKey in ASP.NET 2.0</see
             >
+
+            
 
             
 
@@ -282,10 +318,14 @@
 
             
 
+            
+
              element of the Web.config file. For more information, see the <format
              type="text/html">
               <a href="4b5699a9-bc21-4c4a-85f1-8b3b8ebd2d46">machineKey</a>
             </format>
+
+            
 
             
 
@@ -374,8 +414,12 @@
 
             
 
+            
+
              property supports encryption algorithms that are defined by the <see
              cref="T:System.Web.Configuration.MachineKeyValidation" />
+
+            
 
             
 
@@ -390,10 +434,14 @@
 
             
 
+            
+
              element of the Web.config file. For more information, see the <format
              type="text/html">
               <a href="4b5699a9-bc21-4c4a-85f1-8b3b8ebd2d46">machineKey</a>
             </format>
+
+            
 
             
 
@@ -441,8 +489,12 @@
 
             
 
+            
+
              property is used when enableViewStateMAC is true to create a message authentication code (MAC) to enable ASP.NET to determine whether view state has been tampered with. The <see
              cref="P:System.Web.Configuration.MachineKeySection.ValidationKey" />
+
+            
 
             
 
@@ -459,8 +511,12 @@
 
             
 
+            
+
              value, ASP.NET generates a unique encrypted key for each application by using each application's <see
              cref="P:System.Web.HttpRuntime.AppDomainAppVirtualPath" />
+
+            
 
             
 
@@ -476,6 +532,8 @@
 
             
 
+            
+
              value, ASP.NET generates a unique encrypted key for each application by using each application's <see
              cref="P:System.Web.HttpRuntime.AppDomainAppId" />
 
@@ -483,8 +541,12 @@
 
             
 
+            
+
             . If two distinct applications share a virtual path (perhaps because those applications are running on different ports), this flag can be used to further distinguish them from one another. The “IsolateByAppId” flag is understood only by ASP.NET 4.5, but it can be used regardless of the <see
              cref="P:System.Web.Configuration.MachineKeySection.CompatibilityMode" />
+
+            
 
             
 
@@ -500,10 +562,14 @@
 
             
 
+            
+
              property manually to ensure consistent configuration. For information about how to manually generate values for the DecryptionKey attribute, see <see
              cref="http://go.microsoft.com/fwlink/?linkid=155113"
               >How To: Configure MachineKey in ASP.NET 2.0</see
             >
+
+            
 
             
 
@@ -516,6 +582,8 @@
              type="text/html">
               <a href="4b5699a9-bc21-4c4a-85f1-8b3b8ebd2d46">machineKey</a>
             </format>
+
+            
 
             
 

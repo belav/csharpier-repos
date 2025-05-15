@@ -26,6 +26,8 @@
 
         
 
+        
+
          event.</para
       >
     </remarks>
@@ -34,6 +36,8 @@
       <para
         >Provides data for the <see
          cref="E:System.IO.Ports.SerialPort.PinChanged" />
+
+        
 
         
 
@@ -69,6 +73,8 @@
           <para
             >This property provides information about the event type that caused the <see
              cref="E:System.IO.Ports.SerialPort.PinChanged" />
+
+            
 
             
 

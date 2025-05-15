@@ -27,6 +27,8 @@
 
         
 
+        
+
          class has been extended to provide support for International Resource Identifiers (IRI) based on RFC 3987. Current users will not see any change from the .NET Framework 2.0 behavior unless they specifically enable IRI. This ensures application compatibility with prior versions of the .NET Framework.</para
       >
       <para
@@ -37,8 +39,12 @@
 
         
 
+        
+
          will be read once when the first <see
          cref="T:System.Uri" />
+
+        
 
         
 
@@ -54,6 +60,8 @@
 
         
 
+        
+
          class.</para
       >
     </remarks>
@@ -62,6 +70,8 @@
       <para
         >Provides the configuration setting for International Resource Identifier (IRI) processing in the <see
          cref="T:System.Uri" />
+
+        
 
         
 
@@ -94,6 +104,8 @@
 
             
 
+            
+
              instance.</para
           >
         </remarks>
@@ -102,6 +114,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Configuration.IriParsingElement" />
+
+            
 
             
 
@@ -139,6 +153,8 @@
 
             
 
+            
+
              configuration setting controls IRI processing in the <see
              cref="T:System.Uri" />
 
@@ -146,8 +162,12 @@
 
             
 
+            
+
              class. This setting also indirectly controls International Domain Name (IDN) processing set with the <see
              cref="T:System.Configuration.IdnElement" />
+
+            
 
             
 
@@ -163,8 +183,12 @@
 
             
 
+            
+
              will be read once when the first <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -180,6 +204,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -188,6 +214,8 @@
           <para
             >Gets or sets the value of the <see
              cref="T:System.Configuration.IriParsingElement" />
+
+            
 
             
 

@@ -37,8 +37,12 @@
 
         
 
+        
+
         . For evidence that implements this interface, the <see
          cref="M:System.IO.IsolatedStorage.INormalizeForIsolatedStorage.Normalize" />
+
+        
 
         
 

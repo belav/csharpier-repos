@@ -34,8 +34,12 @@
 
         
 
+        
+
          is the base class for <see
          cref="T:System.Windows.Forms.ContextMenuStrip" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.ToolStripDropDownMenu.ShowImageMargin" />
+
+        
 
         
 
@@ -68,8 +76,12 @@
 
         
 
+        
+
          control. Although <see
          cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
+
+        
 
         
 
@@ -82,6 +94,8 @@
 
         
 
+        
+
          replace and add functionality to the <see
          cref="T:System.Windows.Forms.Menu" />
 
@@ -89,8 +103,12 @@
 
         
 
+        
+
          control of previous versions, <see
          cref="T:System.Windows.Forms.Menu" />
+
+        
 
         
 
@@ -113,6 +131,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
+
+            
 
             
 
@@ -154,6 +174,8 @@
 
             
 
+            
+
              method to add a <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
 
@@ -161,8 +183,12 @@
 
             
 
+            
+
              with commonly used characteristics to a <see
              cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
+
+            
 
             
 
@@ -181,8 +207,12 @@
 
             
 
+            
+
              with the specified text, image, and event handler on a new <see
              cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
+
+            
 
             
 
@@ -201,6 +231,8 @@
 
             
 
+            
+
             , or a <see
              cref="T:System.Windows.Forms.ToolStripSeparator" />
 
@@ -208,8 +240,12 @@
 
             
 
+            
+
              if the <paramref
              name="text" />
+
+            
 
             
 
@@ -225,8 +261,12 @@
 
           
 
+          
+
           The text to use for the <see
            cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+          
 
           
 
@@ -239,8 +279,12 @@
 
           
 
+          
+
            parameter is a hyphen (-), this method creates a <see
            cref="T:System.Windows.Forms.ToolStripSeparator" />
+
+          
 
           
 
@@ -255,6 +299,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
 
@@ -262,8 +308,12 @@
 
           
 
+          
+
            to display on the <see
            cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+          
 
           
 
@@ -278,6 +328,8 @@
 
           
 
+          
+
           An event handler that raises the <see
            cref="E:System.Windows.Forms.ToolStripItem.Click" />
 
@@ -285,8 +337,12 @@
 
           
 
+          
+
            event when the <see
            cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+          
 
           
 
@@ -341,6 +397,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -390,8 +448,12 @@
 
             
 
+            
+
              items flow horizontally or vertically as necessary. See the <see
              cref="T:System.Windows.Forms.ToolStripLayoutStyle" />
+
+            
 
             
 
@@ -405,6 +467,8 @@
           <para
             >Gets or sets a value indicating how the items of <see
              cref="T:System.Windows.Forms.ContextMenuStrip" />
+
+            
 
             
 
@@ -448,6 +512,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -478,11 +544,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripDropDownMenu.OnFontChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -501,6 +571,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -511,8 +583,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -550,11 +626,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripDropDownMenu.OnLayout(System.Windows.Forms.LayoutEventArgs)" />
+
+            
 
             
 
@@ -573,6 +653,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -583,8 +665,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.LayoutEventArgs" />
+
+          
 
           
 
@@ -622,8 +708,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.PaintEventArgs" />
+
+          
 
           
 
@@ -670,8 +760,12 @@
 
             
 
+            
+
              property to true to display a check mark when the user chooses the <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+            
 
             
 
@@ -685,6 +779,8 @@
           <para
             >Gets or sets a value indicating whether space for a check mark is shown on the left edge of the <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+            
 
             
 
@@ -722,8 +818,12 @@
 
             
 
+            
+
              property to true to display a graphic image with the <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+            
 
             
 
@@ -737,6 +837,8 @@
           <para
             >Gets or sets a value indicating whether space for an image is shown on the left edge of the <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+            
 
             
 

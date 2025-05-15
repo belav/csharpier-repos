@@ -33,11 +33,15 @@
 
         
 
+        
+
          attribute can be used on an assembly, class, constructor, method, property, or event.</para
       >
       <para
         >The <see
          cref="T:System.Diagnostics.SwitchAttribute" />
+
+        
 
         
 
@@ -81,8 +85,12 @@
 
             
 
+            
+
              parameter should match the <see
              cref="P:System.Diagnostics.Switch.DisplayName" />
+
+            
 
             
 
@@ -101,6 +109,8 @@
 
             
 
+            
+
              class, specifying the name and the type of the switch. </para
           >
         </summary>
@@ -111,10 +121,14 @@
 
           
 
+          
+
           The display name of the switch.</param
         >
         <param name="switchType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -161,6 +175,8 @@
 
           
 
+          
+
           The assembly to check for switch attributes.</param
         >
       </Docs>
@@ -183,6 +199,8 @@
           <para
             >The <see
              cref="P:System.Diagnostics.SwitchAttribute.SwitchDescription" />
+
+            
 
             
 
@@ -220,8 +238,12 @@
 
             
 
+            
+
              property should match the <see
              cref="P:System.Diagnostics.Switch.DisplayName" />
+
+            
 
             
 

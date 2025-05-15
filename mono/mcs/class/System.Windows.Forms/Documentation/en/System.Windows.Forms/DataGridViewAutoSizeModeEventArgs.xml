@@ -24,8 +24,12 @@
 
         
 
+        
+
          event is raised when the value of the <see
          cref="P:System.Windows.Forms.DataGridView.AutoSizeRowsMode" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          control changes. The <see
          cref="E:System.Windows.Forms.DataGridView.RowHeadersWidthSizeModeChanged" />
+
+        
 
         
 
@@ -52,6 +60,8 @@
 
         
 
+        
+
          property changes.</para
       >
       <para
@@ -59,6 +69,8 @@
          type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
         </format>
+
+        
 
         
 
@@ -78,8 +90,12 @@
 
         
 
+        
+
          and <see
          cref="E:System.Windows.Forms.DataGridView.RowHeadersWidthSizeModeChanged" />
+
+        
 
         
 
@@ -111,8 +127,12 @@
 
             
 
+            
+
              and <see
              cref="E:System.Windows.Forms.DataGridView.RowHeadersWidthSizeModeChanged" />
+
+            
 
             
 
@@ -125,6 +145,8 @@
 
             
 
+            
+
              if the <see
              cref="T:System.Windows.Forms.DataGridView" />
 
@@ -132,8 +154,12 @@
 
             
 
+            
+
              already had an automatic resizing mode and the new mode is different. Otherwise, pass in false for <paramref
              name="previousModeAutoSized" />
+
+            
 
             
 
@@ -152,11 +178,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="previousModeAutoSized">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -169,8 +199,12 @@
 
           
 
+          
+
            property was previously set to any <see
            cref="T:System.Windows.Forms.DataGridViewAutoSizeRowsMode" />
+
+          
 
           
 
@@ -183,8 +217,12 @@
 
           
 
+          
+
            or the <see
            cref="P:System.Windows.Forms.DataGridView.RowHeadersWidthSizeMode" />
+
+          
 
           
 
@@ -197,6 +235,8 @@
 
           
 
+          
+
            value other than <see
            cref="F:System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing" />
 
@@ -204,8 +244,12 @@
 
           
 
+          
+
            or <see
            cref="F:System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.EnableResizing" />
+
+          
 
           
 
@@ -237,8 +281,12 @@
 
             
 
+            
+
              class is used with the <see
              cref="E:System.Windows.Forms.DataGridView.AutoSizeRowsModeChanged" />
+
+            
 
             
 
@@ -251,6 +299,8 @@
 
             
 
+            
+
              events, so this property relates specifically to the previous state of either the <see
              cref="P:System.Windows.Forms.DataGridView.AutoSizeRowsMode" />
 
@@ -258,8 +308,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Windows.Forms.DataGridView.RowHeadersWidthSizeMode" />
+
+            
 
             
 
@@ -273,6 +327,8 @@
           <para
             >Gets a value specifying whether the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 

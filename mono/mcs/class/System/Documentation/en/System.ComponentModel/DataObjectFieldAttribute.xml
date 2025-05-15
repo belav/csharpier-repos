@@ -30,6 +30,8 @@
 
         
 
+        
+
          attribute to provide information about the schema of the underlying data. Design-time classes such as the <see
          cref="T:System.Web.UI.Design.WebControls.ObjectDataSourceDesigner" />
 
@@ -37,8 +39,12 @@
 
         
 
+        
+
          class use the <see
          cref="T:System.ComponentModel.DataObjectAttribute" />
+
+        
 
         
 
@@ -54,8 +60,12 @@
 
         
 
+        
+
          attribute to members of the data item objects that are returned by the Select method of an object marked with the <see
          cref="T:System.ComponentModel.DataObjectAttribute" />
+
+        
 
         
 
@@ -68,8 +78,12 @@
 
         
 
+        
+
          attribute, and returns an <see
          cref="T:System.Collections.IEnumerable" />
+
+        
 
         
 
@@ -82,6 +96,8 @@
 
         
 
+        
+
          attribute to indicate they represent data fields in the underlying data source.</para
       >
       <para
@@ -89,6 +105,8 @@
          type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
+
+        
 
         
 
@@ -129,11 +147,15 @@
 
             
 
+            
+
              class and indicates whether the field is the primary key for the data row.</para
           >
         </summary>
         <param name="primaryKey">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -173,6 +195,8 @@
 
             
 
+            
+
              class and indicates whether the field is the primary key for the data row, and whether the field is a database identity field.</para
           >
         </summary>
@@ -183,10 +207,14 @@
 
           
 
+          
+
           true to indicate that the field is in the primary key of the data row; otherwise, false.</param
         >
         <param name="isIdentity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -227,11 +255,15 @@
 
             
 
+            
+
              class and indicates whether the field is the primary key for the data row, whether the field is a database identity field, and whether the field can be null.</para
           >
         </summary>
         <param name="primaryKey">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -246,10 +278,14 @@
 
           
 
+          
+
           true to indicate that the field is an identity field that uniquely identifies the data row; otherwise, false.</param
         >
         <param name="isNullable">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -291,11 +327,15 @@
 
             
 
+            
+
              class and indicates whether the field is the primary key for the data row, whether it is a database identity field, and whether it can be null and sets the length of the field.</para
           >
         </summary>
         <param name="primaryKey">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -310,6 +350,8 @@
 
           
 
+          
+
           true to indicate that the field is an identity field that uniquely identifies the data row; otherwise, false.</param
         >
         <param name="isNullable">
@@ -319,10 +361,14 @@
 
           
 
+          
+
           true to indicate that the field can be null in the data store; otherwise, false.</param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -360,6 +406,8 @@
 
             
 
+            
+
              fits the pattern of another object.</para
           >
         </remarks>
@@ -377,6 +425,8 @@
 
             
 
+            
+
              parameter; otherwise, false.</para
           >
         </returns>
@@ -387,8 +437,12 @@
 
           
 
+          
+
           An object to compare with this instance of <see
            cref="T:System.ComponentModel.DataObjectFieldAttribute" />
+
+          
 
           
 
@@ -448,8 +502,12 @@
 
             
 
+            
+
              property to true when the <see
              cref="T:System.ComponentModel.DataObjectFieldAttribute" />
+
+            
 
             
 
@@ -465,8 +523,12 @@
 
             
 
+            
+
              property with one of the <see
              cref="T:System.ComponentModel.DataObjectFieldAttribute" />
+
+            
 
             
 
@@ -504,8 +566,12 @@
 
             
 
+            
+
              property to true when then <see
              cref="T:System.ComponentModel.DataObjectFieldAttribute" />
+
+            
 
             
 
@@ -521,8 +587,12 @@
 
             
 
+            
+
              property with one of the <see
              cref="T:System.ComponentModel.DataObjectFieldAttribute" />
+
+            
 
             
 
@@ -560,8 +630,12 @@
 
             
 
+            
+
              property to the length, in bytes, of the data from the underlying data store. If the <see
              cref="P:System.ComponentModel.DataObjectFieldAttribute.Length" />
+
+            
 
             
 
@@ -577,8 +651,12 @@
 
             
 
+            
+
              property with one of the <see
              cref="T:System.ComponentModel.DataObjectFieldAttribute" />
+
+            
 
             
 
@@ -616,8 +694,12 @@
 
             
 
+            
+
              property to true when the <see
              cref="T:System.ComponentModel.DataObjectFieldAttribute" />
+
+            
 
             
 
@@ -633,8 +715,12 @@
 
             
 
+            
+
              property with one of the <see
              cref="T:System.ComponentModel.DataObjectFieldAttribute" />
+
+            
 
             
 

@@ -12,6 +12,8 @@
 
       
 
+      
+
        : <rhs
       >
         <keyword>try</keyword>
@@ -39,6 +41,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="15.10">specific-catch-clauses</non_terminal>
@@ -54,6 +58,8 @@
     <grammar_production>
       <name>
         <non_terminal where="15.10">specific-catch-clause</non_terminal>
+
+        
 
         
 
@@ -66,6 +72,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="15.10">specific-catch-clause</non_terminal>
@@ -79,6 +87,8 @@
       <name>
         <non_terminal where="15.10">specific-catch-clause</non_terminal>
       </name>
+
+      
 
       
 
@@ -104,6 +114,8 @@
 
       
 
+      
+
        : <rhs
       >
         <keyword>catch</keyword>
@@ -114,6 +126,8 @@
       <name>
         <non_terminal where="15.10">finally-clause</non_terminal>
       </name>
+
+      
 
       
 
@@ -142,11 +156,15 @@
 
     
 
+    
+
     , the type must be System.Exception or a type that derives from System.Exception. </paragraph
   >
   <paragraph
     >When a catch clause specifies both a <non_terminal
      where="11.2">class-type</non_terminal>
+
+    
 
     
 
@@ -171,13 +189,15 @@
 
     
 
+    
+
     ) with no expression can be used to re-throw the exception that was caught by the catch block. Assignments to an exception variable do not alter the exception that is re-thrown. </paragraph
   >
   <paragraph>
     <example
       >[Example: In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 using System;  
 class Test  
 {  
@@ -210,9 +230,11 @@ class Test
 
       
 
+      
+
       the method F catches an exception, writes some diagnostic information to the console, alters the exception variable, and re-throws the exception. The exception that is re-thrown is the original exception, so the output produced is: <code_example
       >
-<![CDATA[
+        <![CDATA[
 Exception in F: G  
 Exception in Main: G  
 ]]>
@@ -223,11 +245,13 @@ Exception in Main: G
     <example
       >If the first catch block had thrown e instead of rethrowing the current exception, the output produced would be as follows: <code_example
       >
-<![CDATA[
+        <![CDATA[
 Exception in F: G  
 Exception in Main: F  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -276,6 +300,8 @@ Exception in Main: F
   <paragraph
     >If an exception is thrown during execution of a finally block, the exception is propagated to the next enclosing try statement. If another exception was in the process of being propagated, that exception is lost. The process of propagating an exception is discussed further in the description of the throw statement (<hyperlink
     >15.9.5</hyperlink>
+
+    
 
     
 

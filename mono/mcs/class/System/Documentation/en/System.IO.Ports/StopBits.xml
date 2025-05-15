@@ -25,8 +25,12 @@
 
         
 
+        
+
          property on the <see
          cref="T:System.IO.Ports.SerialPort" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
          class throws an <see
          cref="T:System.ArgumentOutOfRangeException" />
+
+        
 
         
 
@@ -56,8 +64,12 @@
 
         
 
+        
+
          property to <see
          cref="F:System.IO.Ports.StopBits.None" />
+
+        
 
         
 
@@ -71,6 +83,8 @@
       <para
         >Specifies the number of stop bits used on the <see
          cref="T:System.IO.Ports.SerialPort" />
+
+        
 
         
 
@@ -102,6 +116,8 @@
           <para
             >No stop bits are used. This value is not supported by the <see
              cref="P:System.IO.Ports.SerialPort.StopBits" />
+
+            
 
             
 

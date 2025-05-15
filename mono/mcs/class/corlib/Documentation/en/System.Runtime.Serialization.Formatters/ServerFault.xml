@@ -36,8 +36,12 @@
 
         
 
+        
+
          object is used to hold information about an exception that was thrown on the server to the client. The <see
          cref="T:System.Runtime.Serialization.Formatters.ServerFault" />
+
+        
 
         
 
@@ -85,11 +89,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="exceptionType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -104,10 +112,14 @@
 
           
 
+          
+
           The message that accompanied the exception. </param
         >
         <param name="stackTrace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -27,8 +27,12 @@
 
         
 
+        
+
          server control or an <see
          cref="T:System.Web.UI.WebControls.ImageButton" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          server control causes a <see
          cref="E:System.Web.UI.HtmlControls.HtmlInputImage.ServerClick" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          server control causes a <see
          cref="E:System.Web.UI.WebControls.ImageButton.Click" />
+
+        
 
         
 
@@ -77,6 +89,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -90,8 +104,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Web.UI.WebControls.ImageButton" />
+
+        
 
         
 
@@ -122,6 +140,8 @@
 
             
 
+            
+
              class using the <paramref
              name="x" />
 
@@ -129,8 +149,12 @@
 
             
 
+            
+
              and <paramref
              name="y" />
+
+            
 
             
 
@@ -146,10 +170,14 @@
 
           
 
+          
+
           The x-coordinate where the user clicked an image-based ASP.NET server control. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

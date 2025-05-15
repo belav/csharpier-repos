@@ -22,8 +22,12 @@
 
         
 
+        
+
          class: <see
          cref="Overload:System.Web.UI.HtmlTextWriter.AddAttribute" />
+
+        
 
         
 
@@ -36,6 +40,8 @@
 
         
 
+        
+
         , <see
          cref="Overload:System.Web.UI.HtmlTextWriter.IsAttributeDefined" />
 
@@ -43,8 +49,12 @@
 
         
 
+        
+
         , <see
          cref="Overload:System.Web.UI.HtmlTextWriter.RenderBeginTag" />
+
+        
 
         
 
@@ -63,8 +73,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Web.UI.Html32TextWriter" />
+
+        
 
         
 

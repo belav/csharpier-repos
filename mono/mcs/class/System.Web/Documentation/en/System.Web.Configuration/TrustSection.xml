@@ -24,6 +24,8 @@
 
         
 
+        
+
          class lets you programmatically access and modify the configuration file &lt;trust&gt; section. The &lt;trust&gt; section configures the code-access-security permissions set that is used to run a particular application. This section can be declared at the machine, site, and application levels.</para
       >
     </remarks>
@@ -49,8 +51,12 @@
 
             
 
+            
+
              constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see
              cref="T:System.Web.Configuration.TrustSection" />
+
+            
 
             
 
@@ -63,11 +69,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >The following table shows the default settings that are used for the <see
              cref="M:System.Web.Configuration.TrustSection.#ctor" />
+
+            
 
             
 
@@ -118,6 +128,8 @@
 
             
 
+            
+
              class using default settings.</para
           >
         </summary>
@@ -148,6 +160,8 @@
           <para
             >The <see
              cref="P:System.Web.Configuration.TrustSection.Level" />
+
+            
 
             
 
@@ -208,6 +222,8 @@
 
             
 
+            
+
              property specifies the URL of origin for an application. If present, this can be used for some permissions, such as those associated with the <see
              cref="T:System.Net.WebRequest" />
 
@@ -215,8 +231,12 @@
 
             
 
+            
+
              class. This enables you to specify a single URL that is used to create permission through a <see
              cref="T:System.Net.WebPermission" />
+
+            
 
             
 

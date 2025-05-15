@@ -31,8 +31,12 @@
 
         
 
+        
+
          class provides information about the clauses in a try…catch…finally block (Try…Catch…Finally in Visual Basic). To get a list of exception-handling clauses in a method, obtain a <see
          cref="T:System.Reflection.MethodInfo" />
+
+        
 
         
 
@@ -45,6 +49,8 @@
 
         
 
+        
+
          method to obtain a <see
          cref="T:System.Reflection.MethodBody" />
 
@@ -52,8 +58,12 @@
 
         
 
+        
+
          object, and then use the <see
          cref="P:System.Reflection.MethodBody.ExceptionHandlingClauses" />
+
+        
 
         
 
@@ -72,10 +82,14 @@
 
           
 
+          
+
            on MSDN and <see
            cref="http://go.microsoft.com/fwlink/?LinkID=65552"
             >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
           >
+
+          
 
           
 
@@ -113,6 +127,8 @@
 
             
 
+            
+
              objects.</para
           >
         </remarks>
@@ -121,6 +137,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Reflection.ExceptionHandlingClause" />
+
+            
 
             
 
@@ -158,10 +176,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -201,6 +223,8 @@
 
             
 
+            
+
              clause.</para
           >
           <block subset="none" type="note">
@@ -214,10 +238,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -266,10 +294,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -312,10 +344,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -358,10 +394,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -432,10 +472,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -478,10 +522,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 

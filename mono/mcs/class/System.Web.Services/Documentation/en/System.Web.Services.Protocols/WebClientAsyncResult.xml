@@ -31,8 +31,12 @@
 
         
 
+        
+
          is returned. Following the standard asynchronous design pattern, that instance of <see
          cref="T:System.Web.Services.Protocols.WebClientAsyncResult" />
+
+        
 
         
 
@@ -52,6 +56,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -60,6 +66,8 @@
       <para
         >Provides an implementation of <see
          cref="T:System.IAsyncResult" />
+
+        
 
         
 
@@ -133,8 +141,12 @@
 
             
 
+            
+
              can be used to perform a <see
              cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -147,8 +159,12 @@
 
             
 
+            
+
             , or <see
              cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -164,6 +180,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -172,6 +190,8 @@
           <para
             >Gets a <see
              cref="T:System.Threading.WaitHandle" />
+
+            
 
             
 
@@ -204,6 +224,8 @@
 
             
 
+            
+
              is set to true within the <see
              cref="T:System.AsyncCallback" />
 
@@ -211,8 +233,12 @@
 
             
 
+            
+
              delegate, it is probable that the thread that called <see
              cref="M:System.Web.Services.Protocols.SoapHttpClientProtocol.BeginInvoke(System.String,System.Object[],System.AsyncCallback,System.Object)" />
+
+            
 
             
 

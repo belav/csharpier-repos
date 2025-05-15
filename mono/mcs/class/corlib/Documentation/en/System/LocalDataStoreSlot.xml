@@ -36,6 +36,8 @@
 
             
 
+            
+
              attribute. They provide better performance than data slots, and enable compile-time type checking. </para
           >
         </item>
@@ -43,6 +45,8 @@
           <para
             >Data slots are slower and more awkward to use than thread-relative static fields. Also, data is stored as type <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -64,6 +68,8 @@
 
         
 
+        
+
         . </para
       >
       <para
@@ -74,11 +80,15 @@
 
         
 
+        
+
          attribute. The trade-offs between using these two mechanisms are similar to the tradeoffs between using thread-relative static fields and data slots. </para
       >
       <para
         >The <see
          cref="T:System.LocalDataStoreSlot" />
+
+        
 
         
 
@@ -95,8 +105,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Runtime.Remoting.Contexts.Context" />
+
+        
 
         
 
@@ -109,8 +123,12 @@
 
         
 
+        
+
          class is used with methods such as <see
          cref="M:System.Threading.Thread.AllocateNamedDataSlot(System.String)" />
+
+        
 
         
 
@@ -123,6 +141,8 @@
 
         
 
+        
+
         , <see
          cref="M:System.Threading.Thread.GetData(System.LocalDataStoreSlot)" />
 
@@ -130,8 +150,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Runtime.Remoting.Contexts.Context.GetData(System.LocalDataStoreSlot)" />
+
+        
 
         
 

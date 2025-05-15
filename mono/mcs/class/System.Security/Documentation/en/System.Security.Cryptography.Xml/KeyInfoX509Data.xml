@@ -24,6 +24,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -41,11 +43,15 @@
 
         
 
+        
+
          class represents the &lt;X509Data&gt; element that contains X.509v3 certificate information related to the validation or encryption key. For example, an &lt;X509Data&gt; element might contain an X.509 certificate whose subject public key is the validation key, or a chain of X.509 certificates that terminate in a certificate for the validating key, or other identifiers for related X.509 certificates.</para
       >
       <para
         >Use the <see
          cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+
+        
 
         
 
@@ -87,6 +93,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -120,11 +128,15 @@
 
             
 
+            
+
              class from the specified ASN.1 DER encoding of an X.509v3 certificate.</para
           >
         </summary>
         <param name="rgbCert">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -137,8 +149,12 @@
 
           
 
+          
+
            object to initialize the new instance of <see
            cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+
+          
 
           
 
@@ -182,11 +198,15 @@
 
             
 
+            
+
              class from the specified X.509v3 certificate.</para
           >
         </summary>
         <param name="cert">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -199,8 +219,12 @@
 
           
 
+          
+
            object to initialize the new instance of <see
            cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+
+          
 
           
 
@@ -246,11 +270,15 @@
 
             
 
+            
+
              class from the specified X.509v3 certificate.</para
           >
         </summary>
         <param name="cert">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -263,8 +291,12 @@
 
           
 
+          
+
            object to initialize the new instance of <see
            cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+
+          
 
           
 
@@ -279,8 +311,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Cryptography.X509Certificates.X509IncludeOption" />
+
+          
 
           
 
@@ -326,11 +362,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="certificate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -343,8 +383,12 @@
 
           
 
+          
+
            object to add to the <see
            cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+
+          
 
           
 
@@ -388,6 +432,8 @@
 
             
 
+            
+
              method adds information about an issuer name and serial number pair to a list of <see
              cref="T:System.Security.Cryptography.Xml.X509IssuerSerial" />
 
@@ -395,8 +441,12 @@
 
             
 
+            
+
              objects that are accessible through the <see
              cref="P:System.Security.Cryptography.Xml.KeyInfoX509Data.IssuerSerials" />
+
+            
 
             
 
@@ -415,6 +465,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -425,8 +477,12 @@
 
           
 
+          
+
           The issuer name portion of the pair to add to the <see
            cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+
+          
 
           
 
@@ -441,8 +497,12 @@
 
           
 
+          
+
           The serial number portion of the pair to add to the <see
            cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+
+          
 
           
 
@@ -485,6 +545,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -495,8 +557,12 @@
 
           
 
+          
+
           A byte array that represents the subject key identifier (SKI) to add to the <see
            cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+
+          
 
           
 
@@ -543,6 +609,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -553,8 +621,12 @@
 
           
 
+          
+
           A string that represents the subject key identifier (SKI) to add to the <see
            cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+
+          
 
           
 
@@ -594,6 +666,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -604,8 +678,12 @@
 
           
 
+          
+
           The name of the entity that was issued an X.509 certificate to add to the <see
            cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+
+          
 
           
 
@@ -650,6 +728,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -679,6 +759,8 @@
           <para
             >Gets or sets the Certificate Revocation List (CRL) contained within the <see
              cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+
+            
 
             
 
@@ -716,6 +798,8 @@
 
             
 
+            
+
              object returned by this method is suitable for use as a subelement of an XMLDSIG or XML encryption &lt;KeyInfo&gt; element.</para
           >
         </remarks>
@@ -729,6 +813,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -737,6 +823,8 @@
           <para
             >An XML representation of the <see
              cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+
+            
 
             
 
@@ -781,8 +869,12 @@
 
             
 
+            
+
              property represents the &lt;X509IssuerSerial&gt; element of an XML digital signature using a list of <see
              cref="T:System.Security.Cryptography.Xml.X509IssuerSerial" />
+
+            
 
             
 
@@ -799,6 +891,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -807,6 +901,8 @@
           <para
             >Gets a list of <see
              cref="T:System.Security.Cryptography.Xml.X509IssuerSerial" />
+
+            
 
             
 
@@ -853,8 +949,12 @@
 
             
 
+            
+
              object and configures the internal state of the <see
              cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+
+            
 
             
 
@@ -870,6 +970,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlElement" />
 
@@ -877,8 +979,12 @@
 
           
 
+          
+
            object that specifies the state of the <see
            cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+
+          
 
           
 
@@ -926,6 +1032,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -964,6 +1072,8 @@
           <para
             >Gets a list of the subject names of the entities contained in the <see
              cref="T:System.Security.Cryptography.Xml.KeyInfoX509Data" />
+
+            
 
             
 

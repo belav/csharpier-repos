@@ -58,6 +58,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -95,6 +97,8 @@
           <para
             >Gets or sets an array of <see
              cref="T:System.Xml.XmlNode" />
+
+            
 
             
 

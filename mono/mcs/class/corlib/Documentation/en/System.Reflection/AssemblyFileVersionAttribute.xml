@@ -40,6 +40,8 @@
 
         
 
+        
+
          is not supplied, the <see
          cref="T:System.Reflection.AssemblyVersionAttribute" />
 
@@ -47,8 +49,12 @@
 
         
 
+        
+
          is used for the Win32 file version that is displayed on the <ui
         >Version</ui>
+
+        
 
         
 
@@ -93,6 +99,8 @@
 
             
 
+            
+
              is not in this format, a compiler warning occurs, and the results displayed in the file properties dialog are unpredictable. Wildcards are not supported.</para
           >
         </remarks>
@@ -106,11 +114,15 @@
 
             
 
+            
+
              class, specifying the file version.</para
           >
         </summary>
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

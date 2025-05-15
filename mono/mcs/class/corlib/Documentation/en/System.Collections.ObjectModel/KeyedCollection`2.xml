@@ -52,8 +52,12 @@
 
         
 
+        
+
          class provides both O(1) indexed retrieval and keyed retrieval that approaches O(1). It is an abstract type, or more accurately an infinite set of abstract types, because each of its constructed generic types is an abstract base class. To use <see
          cref="T:System.Collections.ObjectModel.KeyedCollection`2" />
+
+        
 
         
 
@@ -69,8 +73,12 @@
 
         
 
+        
+
          class is a hybrid between a collection based on the <see
          cref="T:System.Collections.Generic.IList`1" />
+
+        
 
         
 
@@ -83,6 +91,8 @@
 
         
 
+        
+
          generic interface. Like collections based on the <see
          cref="T:System.Collections.Generic.IList`1" />
 
@@ -90,8 +100,12 @@
 
         
 
+        
+
          generic interface, <see
          cref="T:System.Collections.ObjectModel.KeyedCollection`2" />
+
+        
 
         
 
@@ -104,8 +118,12 @@
 
         
 
+        
+
          generic interface, <see
          cref="T:System.Collections.ObjectModel.KeyedCollection`2" />
+
+        
 
         
 
@@ -121,8 +139,12 @@
 
         
 
+        
+
          is not a key/value pair; instead, the entire element is the value and the key is embedded within the value.  For example, an element of a collection derived from KeyedCollection&lt;String,String&gt; (KeyedCollection(Of String, String) in Visual Basic) might be "John Doe Jr." where the value is "John Doe Jr." and the key is "Doe"; or a collection of employee records containing integer keys could be derived from KeyedCollection&lt;int,Employee&gt;. The abstract <see
          cref="M:System.Collections.ObjectModel.KeyedCollection`2.GetKeyForItem(`1)" />
+
+        
 
         
 
@@ -138,8 +160,12 @@
 
         
 
+        
+
          includes a lookup dictionary that you can obtain with the <see
          cref="P:System.Collections.ObjectModel.KeyedCollection`2.Dictionary" />
+
+        
 
         
 
@@ -152,8 +178,12 @@
 
         
 
+        
+
         , the item's key is extracted once and saved in the lookup dictionary for faster searches. This behavior is overridden by specifying a dictionary creation threshold when you create the <see
          cref="T:System.Collections.ObjectModel.KeyedCollection`2" />
+
+        
 
         
 
@@ -170,8 +200,12 @@
 
           
 
+          
+
            is a reference type, or copies of all the items in the collection if <paramref
            name="TItem" />
+
+          
 
           
 
@@ -184,12 +218,16 @@
 
           
 
+          
+
            is a value type.</para
         >
       </block>
       <para
         >You can access an item by its index or key by using the <see
          cref="P:System.Collections.ObjectModel.KeyedCollection`2.Item(`0)" />
+
+        
 
         
 
@@ -228,8 +266,12 @@
 
             
 
+            
+
              created with this constructor uses the default generic equality comparer for the type of the key, obtained from <see
              cref="P:System.Collections.Generic.EqualityComparer`1.Default" />
+
+            
 
             
 
@@ -242,8 +284,12 @@
 
             
 
+            
+
              constructor or the <see
              cref="M:System.Collections.ObjectModel.KeyedCollection`2.#ctor(System.Collections.Generic.IEqualityComparer{`0},System.Int32)" />
+
+            
 
             
 
@@ -259,6 +305,8 @@
 
             
 
+            
+
              includes a lookup dictionary that is created when the first item is added. When an item is added to the <see
              cref="T:System.Collections.ObjectModel.KeyedCollection`2" />
 
@@ -266,8 +314,12 @@
 
             
 
+            
+
             , the item's key is extracted once and saved in the lookup dictionary for faster searches. This behavior can be overridden by using the <see
              cref="M:System.Collections.ObjectModel.KeyedCollection`2.#ctor(System.Collections.Generic.IEqualityComparer{`0},System.Int32)" />
+
+            
 
             
 
@@ -284,8 +336,12 @@
 
               
 
+              
+
                class is abstract (MustInherit in Visual Basic), you must derive from it in order to use it. In the constructor for your derived type, call the appropriate <see
                cref="T:System.Collections.ObjectModel.KeyedCollection`2" />
+
+              
 
               
 
@@ -301,6 +357,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Collections.ObjectModel.KeyedCollection`2" />
+
+            
 
             
 
@@ -424,11 +482,15 @@
 
             
 
+            
+
              is using a lookup dictionary, it will continue to use a lookup dictionary even though the number of elements is again under the threshold.</para
           >
           <para
             >This method is an O(<paramref
              name="n" />
+
+            
 
             
 
@@ -441,8 +503,12 @@
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ObjectModel.Collection`1.Count" />
+
+            
 
             
 
@@ -461,8 +527,12 @@
 
             
 
+            
+
              method, inherited from the <see
              cref="T:System.Collections.ObjectModel.Collection`1" />
+
+            
 
             
 
@@ -477,6 +547,8 @@
           <para
             >Removes all elements from the <see
              cref="T:System.Collections.ObjectModel.KeyedCollection`2" />
+
+            
 
             
 
@@ -572,6 +644,8 @@
 
             
 
+            
+
              includes a lookup dictionary that is created when the first item is added. When an item is added to the <see
              cref="T:System.Collections.ObjectModel.KeyedCollection`2" />
 
@@ -579,8 +653,12 @@
 
             
 
+            
+
             , the item's key is extracted once and saved in the lookup dictionary for faster searches. This behavior can be overridden by using the <see
              cref="M:System.Collections.ObjectModel.KeyedCollection`2.#ctor(System.Collections.Generic.IEqualityComparer{`0},System.Int32)" />
+
+            
 
             
 
@@ -595,6 +673,8 @@
           <para
             >Gets the lookup dictionary of the <see
              cref="T:System.Collections.ObjectModel.KeyedCollection`2" />
+
+            
 
             
 
@@ -736,11 +816,15 @@
 
             
 
+            
+
              is using a lookup dictionary, it will continue to use a lookup dictionary even though the number of elements is again under the threshold.</para
           >
           <para
             >This method is an O(<paramref
              name="n" />
+
+            
 
             
 
@@ -753,8 +837,12 @@
 
             
 
+            
+
              is <see
              cref="P:System.Collections.ObjectModel.Collection`1.Count" />
+
+            
 
             
 
@@ -773,8 +861,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Collections.ObjectModel.Collection`1.RemoveAt(System.Int32)" />
+
+            
 
             
 
@@ -787,8 +879,12 @@
 
             
 
+            
+
              generic class, and the <see
              cref="M:System.Collections.ObjectModel.KeyedCollection`2.Remove(`0)" />
+
+            
 
             
 
@@ -808,11 +904,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

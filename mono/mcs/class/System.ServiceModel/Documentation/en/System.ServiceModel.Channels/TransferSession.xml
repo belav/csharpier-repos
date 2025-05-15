@@ -23,8 +23,12 @@
 
         
 
+        
+
          enumerations are typically used in association with a service contract. When a client sends messages to a remote application or service to call operations, <see
          cref="T:System.ServiceModel.Channels.TransferSession" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
             
 
+            
+
              that an application uses specifies whether the application requires a specific order in the calling sequence. If <see
              cref="F:System.ServiceModel.Channels.TransferSession.Ordered" />
+
+            
 
             
 
@@ -62,6 +70,8 @@
 
             
 
+            
+
             , then the messages used to invoke public operations can arrive in any order. </para
           >
         </item>
@@ -69,6 +79,8 @@
       <para
         >If <see
          cref="F:System.ServiceModel.Channels.TransferSession.None" />
+
+        
 
         
 

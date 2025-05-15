@@ -38,8 +38,12 @@
 
         
 
+        
+
          by marking the component with a <see
          cref="T:System.ComponentModel.LicenseProviderAttribute" />
+
+        
 
         
 
@@ -55,6 +59,8 @@
 
         
 
+        
+
          property to get the <see
          cref="T:System.Type" />
 
@@ -62,8 +68,12 @@
 
         
 
+        
+
          of the <see
          cref="T:System.ComponentModel.LicenseProvider" />
+
+        
 
         
 
@@ -81,10 +91,14 @@
 
         
 
+        
+
         . For more information about licensing, see <format
          type="text/html">
           <a href="8e66c1ed-a445-4b26-8185-990b6e2bbd57">How to: License Components and Controls</a>
         </format>
+
+        
 
         
 
@@ -101,8 +115,12 @@
 
           
 
+          
+
            attribute applied to this class has the following <see
            cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+
+          
 
           
 
@@ -115,6 +133,8 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Security.Permissions.HostProtectionAttribute" />
 
@@ -122,8 +142,12 @@
 
           
 
+          
+
            does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see
            cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+          
 
           
 
@@ -140,6 +164,8 @@
 
           
 
+          
+
           .</para
         >
       </block>
@@ -149,6 +175,8 @@
       <para
         >Specifies the <see
          cref="T:System.ComponentModel.LicenseProvider" />
+
+        
 
         
 
@@ -180,6 +208,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.LicenseProviderAttribute" />
+
+            
 
             
 
@@ -218,11 +248,15 @@
 
             
 
+            
+
              class with the specified type.</para
           >
         </summary>
         <param name="typeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -260,6 +294,8 @@
 
             
 
+            
+
              class with the specified type of license provider.</para
           >
         </summary>
@@ -270,8 +306,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -343,6 +383,8 @@
 
             
 
+            
+
              is equal to this instance; otherwise, false.</para
           >
         </returns>
@@ -375,6 +417,8 @@
           <para
             >A hash code for the current <see
              cref="T:System.ComponentModel.LicenseProviderAttribute" />
+
+            
 
             
 

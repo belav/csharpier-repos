@@ -26,8 +26,12 @@
 
         
 
+        
+
          class with the <see
          cref="T:System.Web.UI.Design.ResourceExpressionEditorSheet" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          method returns a <see
          cref="T:System.Web.UI.Design.ResourceExpressionEditorSheet" />
+
+        
 
         
 
@@ -57,8 +65,12 @@
 
         
 
+        
+
          method. The visual designer uses the returned <see
          cref="T:System.Web.UI.Design.ResourceExpressionEditorSheet" />
+
+        
 
         
 
@@ -71,6 +83,8 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.Design.ResourceExpressionEditorSheet.ResourceKey" />
 
@@ -78,8 +92,12 @@
 
         
 
+        
+
          properties. Once the resource expression properties are selected, the visual designer calls the <see
          cref="M:System.Web.UI.Design.ResourceExpressionEditorSheet.GetExpression" />
+
+        
 
         
 
@@ -95,8 +113,12 @@
 
         
 
+        
+
          property must be specified in a resource expression; it indexes the resource value. The <see
          cref="P:System.Web.UI.Design.ResourceExpressionEditorSheet.ClassKey" />
+
+        
 
         
 
@@ -135,8 +157,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.Design.ResourceExpressionEditorSheet.ResourceKey" />
+
+            
 
             
 
@@ -149,6 +175,8 @@
 
             
 
+            
+
              string. The <see
              cref="P:System.Web.UI.Design.ExpressionEditorSheet.ServiceProvider" />
 
@@ -156,8 +184,12 @@
 
             
 
+            
+
              property is set using the input <paramref
              name="serviceProvider" />
+
+            
 
             
 
@@ -176,6 +208,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -186,10 +220,14 @@
 
           
 
+          
+
           A resource expression, used to initialize the expression editor sheet.</param
         >
         <param name="serviceProvider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -294,11 +332,15 @@
 
             
 
+            
+
              property is required for a resource expression; it indicates the name of the resource. The name of the resource is used at both run time and design time to look up a resource and assign it to a control property.</para
           >
           <para
             >For example, if the <see
              cref="P:System.Web.UI.WebControls.Label.Text" />
+
+            
 
             
 
@@ -311,8 +353,12 @@
 
             
 
+            
+
              control is assigned to the resource expression &lt;%$ Resources:Strings, labelText $&gt;, the resource expression is evaluated and the <see
              cref="P:System.Web.UI.WebControls.Label.Text" />
+
+            
 
             
 

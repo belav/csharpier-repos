@@ -53,6 +53,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -90,8 +92,12 @@
 
             
 
+            
+
              is an enumeration that contains the following values: <see
              cref="F:System.ServiceModel.MsmqIntegration.MsmqIntegrationSecurityMode.None" />
+
+            
 
             
 
@@ -104,8 +110,12 @@
 
             
 
+            
+
             . The default value is <see
              cref="F:System.ServiceModel.MsmqIntegration.MsmqIntegrationSecurityMode.Transport" />
+
+            
 
             
 
@@ -119,6 +129,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationSecurityMode" />
+
+            
 
             
 
@@ -183,8 +195,12 @@
 
             
 
+            
+
              encapsulates the security settings for the Message Queuing integration transport. The settings are the same for both the Message Queuing integration and queued transports. <see
              cref="T:System.ServiceModel.MsmqTransportSecurity" />
+
+            
 
             
 
@@ -198,6 +214,8 @@
           <para
             >Gets the <see
              cref="T:System.ServiceModel.MsmqTransportSecurity" />
+
+            
 
             
 

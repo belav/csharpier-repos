@@ -29,6 +29,8 @@
 
         
 
+        
+
          class and its associated classes when an error occurs during initialization of the <see
          cref="T:System.Net.HttpListener" />
 
@@ -36,8 +38,12 @@
 
         
 
+        
+
          or while creating or sending a response to an HTTP request. For example, this exception is thrown if the <see
          cref="T:System.Net.HttpListener" />
+
+        
 
         
 
@@ -76,8 +82,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Exception.Message" />
+
+            
 
             
 
@@ -91,6 +101,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.HttpListenerException" />
+
+            
 
             
 
@@ -127,8 +139,12 @@
 
             
 
+            
+
              is used to set the <see
              cref="P:System.Net.HttpListenerException.ErrorCode" />
+
+            
 
             
 
@@ -147,6 +163,8 @@
 
             
 
+            
+
              class using the specified error code.</para
           >
         </summary>
@@ -157,8 +175,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -198,8 +220,12 @@
 
             
 
+            
+
              is used to set the <see
              cref="P:System.Net.HttpListenerException.ErrorCode" />
+
+            
 
             
 
@@ -212,8 +238,12 @@
 
             
 
+            
+
              parameter is used to set the <see
              cref="P:System.Exception.Message" />
+
+            
 
             
 
@@ -232,6 +262,8 @@
 
             
 
+            
+
              class using the specified error code and message.</para
           >
         </summary>
@@ -242,8 +274,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -258,8 +294,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -300,6 +340,8 @@
 
             
 
+            
+
              class from the specified instances of the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
@@ -307,8 +349,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -324,6 +370,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
@@ -331,8 +379,12 @@
 
           
 
+          
+
            object that contains the information required to deserialize the new <see
            cref="T:System.Net.HttpListenerException" />
+
+          
 
           
 
@@ -347,8 +399,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 

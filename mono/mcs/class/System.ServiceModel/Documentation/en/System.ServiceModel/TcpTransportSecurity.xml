@@ -24,6 +24,8 @@
 
         
 
+        
+
          to set the transport-level security settings for a binding.</para
       >
     </remarks>
@@ -51,6 +53,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.TcpTransportSecurity" />
+
+            
 
             
 
@@ -145,6 +149,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Net.Security.ProtectionLevel" />
+
+            
 
             
 

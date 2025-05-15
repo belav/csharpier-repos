@@ -31,8 +31,12 @@
 
         
 
+        
+
         , <see
          cref="Overload:System.Reflection.MemberInfo.GetCustomAttributes" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
          structure is used by the <see
          cref="T:System.Reflection.CustomAttributeData" />
+
+        
 
         
 
@@ -62,8 +70,12 @@
 
         
 
+        
+
          property returns a <see
          cref="T:System.Reflection.CustomAttributeTypedArgument" />
+
+        
 
         
 
@@ -80,6 +92,8 @@
 
           
 
+          
+
            structure. </para
         >
       </block>
@@ -91,8 +105,12 @@
 
         
 
+        
+
          class, use the static <see
          cref="Overload:System.Reflection.CustomAttributeData.GetCustomAttributes" />
+
+        
 
         
 
@@ -135,6 +153,8 @@
 
             
 
+            
+
              class. It is not intended for use in application code.</para
           >
         </remarks>
@@ -143,6 +163,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Reflection.CustomAttributeNamedArgument" />
+
+            
 
             
 
@@ -158,8 +180,12 @@
 
           
 
+          
+
           A field or property of the custom attribute. The new <see
            cref="T:System.Reflection.CustomAttributeNamedArgument" />
+
+          
 
           
 
@@ -169,6 +195,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -206,6 +234,8 @@
 
             
 
+            
+
              class. It is not intended for use in application code.</para
           >
         </remarks>
@@ -219,8 +249,12 @@
 
             
 
+            
+
              class, which represents the specified field or property of the custom attribute, and specifies a <see
              cref="T:System.Reflection.CustomAttributeTypedArgument" />
+
+            
 
             
 
@@ -236,8 +270,12 @@
 
           
 
+          
+
           A field or property of the custom attribute. The new <see
            cref="T:System.Reflection.CustomAttributeNamedArgument" />
+
+          
 
           
 
@@ -247,6 +285,8 @@
         >
         <param name="typedArgument">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -289,11 +329,15 @@
 
             
 
+            
+
              equals the type and value of this instance; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -431,6 +475,8 @@
 
             
 
+            
+
              structures are equivalent.</para
           >
         </summary>
@@ -439,6 +485,8 @@
           <para
             >true if the two <see
              cref="T:System.Reflection.CustomAttributeNamedArgument" />
+
+            
 
             
 
@@ -454,10 +502,14 @@
 
           
 
+          
+
           The structure to the left of the equality operator.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -500,6 +552,8 @@
 
             
 
+            
+
              structures are different.</para
           >
         </summary>
@@ -508,6 +562,8 @@
           <para
             >true if the two <see
              cref="T:System.Reflection.CustomAttributeNamedArgument" />
+
+            
 
             
 
@@ -523,10 +579,14 @@
 
           
 
+          
+
           The structure to the left of the inequality operator.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -594,8 +654,12 @@
 
             
 
+            
+
              structure only contains information about how the argument value was set. Use this property to obtain a <see
              cref="T:System.Reflection.CustomAttributeTypedArgument" />
+
+            
 
             
 
@@ -609,6 +673,8 @@
           <para
             >Gets a <see
              cref="T:System.Reflection.CustomAttributeTypedArgument" />
+
+            
 
             
 

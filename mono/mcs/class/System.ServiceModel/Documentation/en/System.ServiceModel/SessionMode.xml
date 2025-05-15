@@ -23,8 +23,12 @@
 
         
 
+        
+
          enumeration with the <see
          cref="P:System.ServiceModel.ServiceContractAttribute.SessionMode" />
+
+        
 
         
 
@@ -34,6 +38,8 @@
          type="text/html">
           <a href="864ba12f-3331-4359-a359-6d6d387f1035">Using Sessions</a>
         </format>
+
+        
 
         
 
@@ -49,11 +55,15 @@
 
         
 
+        
+
          property to specify the relationship between instances of your service contract implementation and the channel session.</para
       >
       <para
         >For example, if the <see
          cref="P:System.ServiceModel.ServiceContractAttribute.SessionMode" />
+
+        
 
         
 
@@ -66,6 +76,8 @@
 
         
 
+        
+
          and the <see
          cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
 
@@ -73,8 +85,12 @@
 
         
 
+        
+
          property is set to <see
          cref="F:System.ServiceModel.InstanceContextMode.PerSession" />
+
+        
 
         
 
@@ -90,8 +106,12 @@
 
         
 
+        
+
          enumeration in a contract and the <see
          cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
+
+        
 
         
 
@@ -107,8 +127,12 @@
 
         
 
+        
+
          property and the <see
          cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
+
+        
 
         
 
@@ -154,6 +178,8 @@
 
                   
 
+                  
+
                    for each call.</para
                 >
               </item>
@@ -173,6 +199,8 @@
 
                   
 
+                  
+
                    for each call.</para
                 >
               </item>
@@ -180,6 +208,8 @@
                 <para
                   >Behavior with sessionless channel: An <see
                    cref="T:System.ServiceModel.InstanceContext" />
+
+                  
 
                   
 
@@ -199,6 +229,8 @@
                 <para
                   >Behavior with sessionless channel: An <see
                    cref="T:System.ServiceModel.InstanceContext" />
+
+                  
 
                   
 
@@ -225,6 +257,8 @@
 
                   
 
+                  
+
                    for each channel.</para
                 >
               </item>
@@ -244,6 +278,8 @@
 
                   
 
+                  
+
                    for each channel.</para
                 >
               </item>
@@ -251,6 +287,8 @@
                 <para
                   >Behavior with sessionless channel: An <see
                    cref="T:System.ServiceModel.InstanceContext" />
+
+                  
 
                   
 
@@ -270,6 +308,8 @@
                 <para
                   >Behavior with sessionless channel: An <see
                    cref="T:System.ServiceModel.InstanceContext" />
+
+                  
 
                   
 
@@ -296,6 +336,8 @@
 
                   
 
+                  
+
                    for all calls.</para
                 >
               </item>
@@ -315,6 +357,8 @@
 
                   
 
+                  
+
                    for each created singleton or for the user-specified singleton.</para
                 >
               </item>
@@ -322,6 +366,8 @@
                 <para
                   >Behavior with sessionless channel: An <see
                    cref="T:System.ServiceModel.InstanceContext" />
+
+                  
 
                   
 
@@ -341,6 +387,8 @@
                 <para
                   >Behavior with sessionless channel: An <see
                    cref="T:System.ServiceModel.InstanceContext" />
+
+                  
 
                   
 

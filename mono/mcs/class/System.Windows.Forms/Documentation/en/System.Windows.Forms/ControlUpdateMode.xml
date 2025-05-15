@@ -20,8 +20,12 @@
 
         
 
+        
+
          is used by the <see
          cref="P:System.Windows.Forms.Binding.ControlUpdateMode" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
          class. <see
          cref="F:System.Windows.Forms.ControlUpdateMode.OnPropertyChanged" />
+
+        
 
         
 
@@ -48,6 +56,8 @@
 
         
 
+        
+
         , use the <see
          cref="M:System.Windows.Forms.Binding.ReadValue" />
 
@@ -55,8 +65,12 @@
 
         
 
+        
+
          method on the related <see
          cref="T:System.Windows.Forms.Binding" />
+
+        
 
         
 

@@ -45,6 +45,8 @@
 
         
 
+        
+
          objects and provides a means of converting sets of <see
          cref="T:System.Security.Principal.IdentityReference" />
 
@@ -52,8 +54,12 @@
 
         
 
+        
+
         -derived objects to <see
          cref="T:System.Security.Principal.IdentityReference" />
+
+        
 
         
 
@@ -84,6 +90,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Principal.IdentityReferenceCollection" />
+
+            
 
             
 
@@ -121,6 +129,8 @@
 
             
 
+            
+
              class by using the specified initial size.</para
           >
         </summary>
@@ -131,8 +141,12 @@
 
           
 
+          
+
           The initial number of items in the collection. The value of <paramref
            name="capacity" />
+
+          
 
           
 
@@ -175,8 +189,12 @@
 
             
 
+            
+
              object to the <see
              cref="T:System.Security.Principal.IdentityReferenceCollection" />
+
+            
 
             
 
@@ -192,8 +210,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Principal.IdentityReference" />
+
+          
 
           
 
@@ -231,8 +253,12 @@
 
             
 
+            
+
              objects from the <see
              cref="T:System.Security.Principal.IdentityReferenceCollection" />
+
+            
 
             
 
@@ -276,8 +302,12 @@
 
             
 
+            
+
              collection contains the specified <see
              cref="T:System.Security.Principal.IdentityReference" />
+
+            
 
             
 
@@ -297,8 +327,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Principal.IdentityReference" />
+
+          
 
           
 
@@ -342,8 +376,12 @@
 
             
 
+            
+
              collection to an <see
              cref="T:System.Security.Principal.IdentityReferenceCollection" />
+
+            
 
             
 
@@ -359,6 +397,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Principal.IdentityReferenceCollection" />
 
@@ -366,8 +406,12 @@
 
           
 
+          
+
            array object to which the <see
            cref="T:System.Security.Principal.IdentityReferenceCollection" />
+
+          
 
           
 
@@ -382,6 +426,8 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
 
@@ -389,8 +435,12 @@
 
           
 
+          
+
            where the <see
            cref="T:System.Security.Principal.IdentityReferenceCollection" />
+
+          
 
           
 
@@ -420,6 +470,8 @@
           <para
             >Gets the number of items in the <see
              cref="T:System.Security.Principal.IdentityReferenceCollection" />
+
+            
 
             
 
@@ -461,6 +513,8 @@
 
             
 
+            
+
              collection.</para
           >
         </summary>
@@ -469,6 +523,8 @@
           <para
             >An enumerator for the <see
              cref="T:System.Security.Principal.IdentityReferenceCollection" />
+
+            
 
             
 
@@ -499,6 +555,8 @@
           <para
             >Gets a value that indicates whether the <see
              cref="T:System.Security.Principal.IdentityReferenceCollection" />
+
+            
 
             
 
@@ -570,6 +628,8 @@
 
             
 
+            
+
              object from the collection.</para
           >
         </summary>
@@ -584,8 +644,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Principal.IdentityReference" />
+
+          
 
           
 
@@ -626,6 +690,8 @@
 
             
 
+            
+
              collection.</para
           >
         </summary>
@@ -634,6 +700,8 @@
           <para
             >An enumerator for the <see
              cref="T:System.Security.Principal.IdentityReferenceCollection" />
+
+            
 
             
 
@@ -681,6 +749,8 @@
 
             
 
+            
+
              with the second parameter set to false, which means that exceptions will not be thrown for items that fail conversion.</para
           >
         </summary>
@@ -694,11 +764,15 @@
 
             
 
+            
+
              collection that represents the converted contents of the original collection.</para
           >
         </returns>
         <param name="targetType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -750,6 +824,8 @@
 
             
 
+            
+
              collection that represents the converted contents of the original collection.</para
           >
         </returns>
@@ -760,10 +836,14 @@
 
           
 
+          
+
           The type to which items in the collection are being converted.</param
         >
         <param name="forceSuccess">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

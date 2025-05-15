@@ -26,8 +26,12 @@
 
         
 
+        
+
          control represents the container for the menu structure of a form. A menu is composed of <see
          cref="T:System.Windows.Forms.MenuItem" />
+
+        
 
         
 
@@ -40,6 +44,8 @@
 
         
 
+        
+
          can be a command for your application or a parent menu for other submenu items. To bind the <see
          cref="T:System.Windows.Forms.MainMenu" />
 
@@ -47,8 +53,12 @@
 
         
 
+        
+
          to the <see
          cref="T:System.Windows.Forms.Form" />
+
+        
 
         
 
@@ -61,6 +71,8 @@
 
         
 
+        
+
          to the <see
          cref="P:System.Windows.Forms.Form.Menu" />
 
@@ -68,8 +80,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.Form" />
+
+        
 
         
 
@@ -85,11 +101,15 @@
 
         
 
+        
+
          property to display the text of the menu from right to left to support languages such as Arabic.</para
       >
       <para
         >You can create different <see
          cref="T:System.Windows.Forms.MainMenu" />
+
+        
 
         
 
@@ -102,8 +122,12 @@
 
         
 
+        
+
         , you can use its <see
          cref="M:System.Windows.Forms.MainMenu.CloneMenu" />
+
+        
 
         
 
@@ -125,6 +149,8 @@
 
         
 
+        
+
          replaces and adds functionality to the <see
          cref="T:System.Windows.Forms.MainMenu" />
 
@@ -132,8 +158,12 @@
 
         
 
+        
+
          control of previous versions, <see
          cref="T:System.Windows.Forms.MainMenu" />
+
+        
 
         
 
@@ -159,8 +189,12 @@
 
             
 
+            
+
              without any specified <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -173,6 +207,8 @@
 
             
 
+            
+
              objects as its parameter or use the <see
              cref="M:System.Windows.Forms.Menu.MenuItemCollection.Add(System.String)" />
 
@@ -180,8 +216,12 @@
 
             
 
+            
+
              method of the <see
              cref="P:System.Windows.Forms.Menu.MenuItems" />
+
+            
 
             
 
@@ -195,6 +235,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.MainMenu" />
+
+            
 
             
 
@@ -231,11 +273,15 @@
 
             
 
+            
+
              class with the specified container. </para
           >
         </summary>
         <param name="container">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -248,8 +294,12 @@
 
           
 
+          
+
            representing the container of the <see
            cref="T:System.Windows.Forms.MainMenu" />
+
+          
 
           
 
@@ -282,8 +332,12 @@
 
             
 
+            
+
              objects to the <see
              cref="T:System.Windows.Forms.MainMenu" />
+
+            
 
             
 
@@ -296,8 +350,12 @@
 
             
 
+            
+
              has been created you can add additional <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -310,6 +368,8 @@
 
             
 
+            
+
              using the <see
              cref="M:System.Windows.Forms.Menu.MenuItemCollection.Add(System.String)" />
 
@@ -317,8 +377,12 @@
 
             
 
+            
+
              method of the <see
              cref="P:System.Windows.Forms.Menu.MenuItems" />
+
+            
 
             
 
@@ -337,8 +401,12 @@
 
             
 
+            
+
              with a specified set of <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -354,6 +422,8 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Windows.Forms.MenuItem" />
 
@@ -361,8 +431,12 @@
 
           
 
+          
+
            objects that will be added to the <see
            cref="T:System.Windows.Forms.MainMenu" />
+
+          
 
           
 
@@ -397,8 +471,12 @@
 
             
 
+            
+
             . You can use this method to reuse the menu structure stored in a <see
              cref="T:System.Windows.Forms.MainMenu" />
+
+            
 
             
 
@@ -411,8 +489,12 @@
 
             
 
+            
+
             . For example, if you want to create a menu structure that has the same menu items as an existing <see
              cref="T:System.Windows.Forms.MainMenu" />
+
+            
 
             
 
@@ -425,8 +507,12 @@
 
             
 
+            
+
              objects added to it, you can use the <see
              cref="M:System.Windows.Forms.MainMenu.CloneMenu" />
+
+            
 
             
 
@@ -439,6 +525,8 @@
 
             
 
+            
+
              and then add the new <see
              cref="T:System.Windows.Forms.MenuItem" />
 
@@ -446,8 +534,12 @@
 
             
 
+            
+
              objects to the cloned <see
              cref="T:System.Windows.Forms.MainMenu" />
+
+            
 
             
 
@@ -466,8 +558,12 @@
 
             
 
+            
+
              that is a duplicate of the current <see
              cref="T:System.Windows.Forms.MainMenu" />
+
+            
 
             
 
@@ -481,6 +577,8 @@
           <para
             >A <see
              cref="T:System.Windows.Forms.MainMenu" />
+
+            
 
             
 
@@ -512,6 +610,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -563,8 +663,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Windows.Forms.MainMenu" />
+
+            
 
             
 
@@ -577,8 +681,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Windows.Forms.MainMenu" />
+
+            
 
             
 
@@ -591,8 +699,12 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Windows.Forms.MainMenu" />
+
+            
 
             
 
@@ -609,8 +721,12 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.Windows.Forms.MainMenu" />
+
+              
 
               
 
@@ -623,8 +739,12 @@
 
               
 
+              
+
                is using will not be freed until garbage collection calls the <see
                cref="T:System.Windows.Forms.MainMenu" />
+
+              
 
               
 
@@ -644,11 +764,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -680,8 +804,12 @@
 
             
 
+            
+
              is parented to a form. The property is typically used when multiple <see
              cref="T:System.Windows.Forms.MainMenu" />
+
+            
 
             
 
@@ -700,6 +828,8 @@
 
             
 
+            
+
              that contains this control.</para
           >
         </summary>
@@ -713,8 +843,12 @@
 
             
 
+            
+
              that is the container for this control. Returns null if the <see
              cref="T:System.Windows.Forms.MainMenu" />
+
+            
 
             
 
@@ -754,11 +888,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.MainMenu.OnCollapse(System.EventArgs)" />
+
+            
 
             
 
@@ -777,6 +915,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -787,8 +927,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -829,6 +973,8 @@
 
               
 
+              
+
                property.</para
             >
           </block>
@@ -861,8 +1007,12 @@
 
             
 
+            
+
              method if the <see
              cref="T:System.Windows.Forms.MainMenu" />
+
+            
 
             
 
@@ -881,6 +1031,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -889,6 +1041,8 @@
           <para
             >A string that represents the current <see
              cref="T:System.Windows.Forms.MainMenu" />
+
+            
 
             
 

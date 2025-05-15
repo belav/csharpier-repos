@@ -38,8 +38,12 @@
 
             
 
+            
+
              will be displayed in the <see
              cref="T:System.Windows.Forms.ThreadExceptionDialog" />
+
+            
 
             
 
@@ -58,6 +62,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -68,8 +74,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Exception" />
+
+          
 
           
 
@@ -136,6 +146,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.ThreadExceptionDialog.AutoSize" />
+
+            
 
             
 

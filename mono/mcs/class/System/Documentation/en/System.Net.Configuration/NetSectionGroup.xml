@@ -31,10 +31,14 @@
 
         
 
+        
+
          configuration element described in the <format
          type="text/html">
           <a href="f1de5a0f-76c5-4833-819f-5222b8146340">Network Settings Schema</a>
         </format>
+
+        
 
         
 
@@ -101,6 +105,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -140,6 +146,8 @@
                 >AuthenticationModules Element (Network Settings)</a
               >
             </format>
+
+            
 
             
 
@@ -193,6 +201,8 @@
 
             
 
+            
+
              configuration element.</para
           >
         </remarks>
@@ -236,6 +246,8 @@
                 >DefaultProxy Element (Network Settings)</a
               >
             </format>
+
+            
 
             
 
@@ -295,8 +307,12 @@
 
             
 
+            
+
              that represents the System.Net settings in <paramref
              name="config" />
+
+            
 
             
 
@@ -312,8 +328,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.Configuration" />
+
+          
 
           
 
@@ -350,6 +370,8 @@
              type="text/html">
               <a href="54f0f153-17e5-4f49-afdc-deadb940c9c1">mailSettings for System.Net</a>
             </format>
+
+            
 
             
 
@@ -403,6 +425,8 @@
 
             
 
+            
+
              configuration element.</para
           >
         </remarks>
@@ -444,6 +468,8 @@
              type="text/html">
               <a href="189ce989-c39b-427d-b004-6b82a668b931">Settings Element (Network Settings)</a>
             </format>
+
+            
 
             
 
@@ -497,6 +523,8 @@
 
             
 
+            
+
              configuration element.</para
           >
         </remarks>
@@ -505,6 +533,8 @@
           <para
             >Gets the configuration section containing the modules registered for use with the <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 

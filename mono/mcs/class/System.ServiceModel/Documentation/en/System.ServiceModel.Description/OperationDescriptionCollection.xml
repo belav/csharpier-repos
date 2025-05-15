@@ -35,6 +35,8 @@
 
         
 
+        
+
          is used to describe the contract for a service, including the associated operations. The operations are accessed from the <see
          cref="P:System.ServiceModel.Description.ContractDescription.Operations" />
 
@@ -42,8 +44,12 @@
 
         
 
+        
+
          property which returns the <see
          cref="T:System.ServiceModel.Description.OperationDescriptionCollection" />
+
+        
 
         
 
@@ -59,6 +65,8 @@
 
         
 
+        
+
          that describes aspects of the operation, such as whether the operation is one-way or request/reply. Each <see
          cref="T:System.ServiceModel.Description.OperationDescription" />
 
@@ -66,8 +74,12 @@
 
         
 
+        
+
          in turn describes the messages that make up the operation using a collection of <see
          cref="T:System.ServiceModel.Description.MessageDescription" />
+
+        
 
         
 
@@ -112,6 +124,8 @@
 
             
 
+            
+
              in the collection with the name specified. If you need to find all of the <see
              cref="T:System.ServiceModel.Description.OperationDescription" />
 
@@ -119,8 +133,12 @@
 
             
 
+            
+
              objects in the collection use the <see
              cref="M:System.ServiceModel.Description.OperationDescriptionCollection.FindAll(System.String)" />
+
+            
 
             
 
@@ -143,11 +161,15 @@
 
             
 
+            
+
              with the name specified.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -192,8 +214,12 @@
 
             
 
+            
+
              of type <see
              cref="T:System.ServiceModel.Description.OperationDescription" />
+
+            
 
             
 
@@ -204,6 +230,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -249,8 +277,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="item" />
+
+          
 
           
 
@@ -265,8 +297,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.OperationDescription" />
+
+          
 
           
 
@@ -312,8 +348,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="item" />
+
+          
 
           
 
@@ -328,8 +368,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.OperationDescription" />
+
+          
 
           
 

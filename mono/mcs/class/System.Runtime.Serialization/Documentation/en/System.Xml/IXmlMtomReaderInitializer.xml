@@ -55,10 +55,14 @@
 
           
 
+          
+
           The stream from which to read.</param
         >
         <param name="encodings">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -73,6 +77,8 @@
 
           
 
+          
+
           The Content-Type of the message. Can be null if the MIME type is present in the document being read.</param
         >
         <param name="quotas">
@@ -82,8 +88,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+
+          
 
           
 
@@ -98,10 +108,14 @@
 
           
 
+          
+
           The maximum allowed size of the buffer.</param
         >
         <param name="onClose">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -150,6 +164,8 @@
 
           
 
+          
+
           The buffer from which to read.</param
         >
         <param name="offset">
@@ -159,8 +175,12 @@
 
           
 
+          
+
           The starting position from which to read in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -175,8 +195,12 @@
 
           
 
+          
+
           The number of bytes that can be read from <paramref
            name="buffer" />
+
+          
 
           
 
@@ -191,10 +215,14 @@
 
           
 
+          
+
           The possible character encodings of the input.</param
         >
         <param name="contentType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -209,8 +237,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryReaderQuotas" />
+
+          
 
           
 
@@ -225,10 +257,14 @@
 
           
 
+          
+
           The maximum allowed size of the buffer.</param
         >
         <param name="onClose">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

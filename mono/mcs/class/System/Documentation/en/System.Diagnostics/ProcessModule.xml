@@ -95,6 +95,8 @@
 
               
 
+              
+
                will always return 0 on win8 or win81 and should not be relied on for those platforms.</para
             >
           </block>
@@ -194,6 +196,8 @@
 
             
 
+            
+
              does not include any additional memory allocations that the module makes once it is running; it includes only the size of the static code and data in the module file.</para
           >
         </remarks>
@@ -259,6 +263,8 @@
           <para
             >The value of the <see
              cref="P:System.Diagnostics.ProcessModule.ModuleName" />
+
+            
 
             
 

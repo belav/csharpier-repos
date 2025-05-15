@@ -47,6 +47,8 @@
 
         
 
+        
+
         , <see
          cref="M:System.Reflection.Emit.ModuleBuilder.DefineInitializedData(System.String,System.Byte[],System.Reflection.FieldAttributes)" />
 
@@ -54,8 +56,12 @@
 
         
 
+        
+
         , or <see
          cref="M:System.Reflection.Emit.ModuleBuilder.DefineUninitializedData(System.String,System.Int32,System.Reflection.FieldAttributes)" />
+
+        
 
         
 
@@ -72,6 +78,8 @@
 
           
 
+          
+
            method is currently not supported. As a workaround, retrieve the <see
            cref="T:System.Reflection.FieldInfo" />
 
@@ -79,8 +87,12 @@
 
           
 
+          
+
            by reflecting on the finished type and call <see
            cref="M:System.Reflection.FieldInfo.SetValue(System.Object,System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Globalization.CultureInfo)" />
+
+          
 
           
 
@@ -155,6 +167,8 @@
 
             
 
+            
+
              object for the type that declares this field. This property is read-only.</para
           >
         </summary>
@@ -212,6 +226,8 @@
 
             
 
+            
+
              object that represents the type of this field. This property is read-only.</para
           >
         </summary>
@@ -254,8 +270,12 @@
 
             
 
+            
+
              representing all the custom attributes of the constructor represented by this <see
              cref="T:System.Reflection.Emit.FieldBuilder" />
+
+            
 
             
 
@@ -266,6 +286,8 @@
         </returns>
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -313,8 +335,12 @@
 
             
 
+            
+
              representing all the custom attributes of the constructor represented by this <see
              cref="T:System.Reflection.Emit.FieldBuilder" />
+
+            
 
             
 
@@ -330,10 +356,14 @@
 
           
 
+          
+
           The custom attribute type. </param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -378,6 +408,8 @@
 
             
 
+            
+
              object that represents the token for this field.</para
           >
         </returns>
@@ -412,8 +444,12 @@
 
             
 
+            
+
              parameter is ignored. For non-static fields, <paramref
              name="obj" />
+
+            
 
             
 
@@ -429,8 +465,12 @@
 
             
 
+            
+
              is <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -443,8 +483,12 @@
 
             
 
+            
+
              with the appropriate Boolean value is returned. Before returning the value, <see
              cref="M:System.Reflection.Emit.FieldBuilder.GetValue(System.Object)" />
+
+            
 
             
 
@@ -468,11 +512,15 @@
 
             
 
+            
+
              containing the value of the field reflected by this instance.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -520,6 +568,8 @@
 
             
 
+            
+
              is defined on this field; otherwise, false.</para
           >
         </returns>
@@ -530,10 +580,14 @@
 
           
 
+          
+
           The type of the attribute. </param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -622,8 +676,12 @@
 
             
 
+            
+
              object represents a field of a particular class. In order to obtain a <see
              cref="T:System.Reflection.Emit.FieldBuilder" />
+
+            
 
             
 
@@ -636,8 +694,12 @@
 
             
 
+            
+
              object that represents the class that supports the field is queried. This property holds a reference to that <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -653,6 +715,8 @@
           <para
             >Indicates the reference to the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -691,8 +755,12 @@
 
             
 
+            
+
              is restricted to the following types: Boolean, SByte, Int16, Int32, Int64, Byte, UInt16, UInt32, UInt64, Single, Double, DateTime, Char, String, and Enum. If the field type is a reference type, CLS compliance requires <paramref
              name="defaultValue" />
+
+            
 
             
 
@@ -705,8 +773,12 @@
 
             
 
+            
+
              can be non-null for a reference type as long as the value can be assigned to that reference type. For example, an Int32 value can be assigned to a field of type <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -721,6 +793,8 @@
         </summary>
         <param name="defaultValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -759,6 +833,8 @@
         </summary>
         <param name="customBuilder">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -806,6 +882,8 @@
 
             
 
+            
+
             . The documentation is available online; see <see
              cref="http://go.microsoft.com/fwlink/?LinkID=99212"
               >ECMA C# and Common Language Infrastructure Standards</see
@@ -815,10 +893,14 @@
 
             
 
+            
+
              on MSDN and <see
              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
+
+            
 
             
 
@@ -838,10 +920,14 @@
 
           
 
+          
+
           The constructor for the custom attribute. </param
         >
         <param name="binaryAttribute">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -894,6 +980,8 @@
 
           
 
+          
+
           A descriptor specifying the native marshalling of this field. </param
         >
       </Docs>
@@ -928,6 +1016,8 @@
         </summary>
         <param name="iOffset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -973,9 +1063,13 @@
 
             
 
+            
+
              parameter to the field reflected by this instance on <see
              cref="T:System.Object" />
             <paramref name="obj" />
+
+            
 
             
 
@@ -988,8 +1082,12 @@
 
             
 
+            
+
              will be ignored. For non-static fields, <paramref
              name="obj" />
+
+            
 
             
 
@@ -1005,6 +1103,8 @@
 
             
 
+            
+
             . For example, if the field's type is Boolean, an instance of <see
              cref="T:System.Object" />
 
@@ -1012,8 +1112,12 @@
 
             
 
+            
+
              with the appropriate Boolean value is passed. Before setting the value, <see
              cref="M:System.Reflection.Emit.FieldBuilder.SetValue(System.Object,System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Globalization.CultureInfo)" />
+
+            
 
             
 
@@ -1031,8 +1135,12 @@
 
               
 
+              
+
                by reflecting on the finished type and call <see
                cref="M:System.Reflection.FieldInfo.SetValue(System.Object,System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Globalization.CultureInfo)" />
+
+              
 
               
 
@@ -1053,10 +1161,14 @@
 
           
 
+          
+
           The object on which to access the field. </param
         >
         <param name="val">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1071,6 +1183,8 @@
 
           
 
+          
+
           A member of IBinder that specifies the type of binding that is desired (for example, IBinder.CreateInstance, IBinder.ExactBinding). </param
         >
         <param name="binder">
@@ -1080,10 +1194,14 @@
 
           
 
+          
+
           A set of properties and enabling for binding, coercion of argument types, and invocation of members using reflection. If binder is null, then IBinder.DefaultBinding is used. </param
         >
         <param name="culture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1162,6 +1280,8 @@
 
             
 
+            
+
             , see the MSDN Library.</para
           >
         </remarks>
@@ -1176,6 +1296,8 @@
 
           
 
+          
+
           The type information to return.</param
         >
         <param name="lcid">
@@ -1185,10 +1307,14 @@
 
           
 
+          
+
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

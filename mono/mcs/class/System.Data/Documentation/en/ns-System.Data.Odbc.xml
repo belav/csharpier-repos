@@ -11,6 +11,8 @@
 
         
 
+        
+
          namespace is the .NET Framework Data Provider for ODBC.</para
       >
     </summary>
@@ -24,8 +26,12 @@
 
         
 
+        
+
          class, you can fill a memory-resident <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -41,6 +47,8 @@
 
         
 
+        
+
         , <see
          cref="T:System.Data.Odbc.OdbcCommand" />
 
@@ -48,8 +56,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Data.Odbc.OdbcConnection" />
+
+        
 
         
 

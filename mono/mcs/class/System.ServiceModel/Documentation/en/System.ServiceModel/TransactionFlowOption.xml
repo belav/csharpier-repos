@@ -23,6 +23,8 @@
 
         
 
+        
+
          class, which is used to mark a service contract method to indicate its transaction flow policy.</para
       >
     </remarks>
@@ -31,6 +33,8 @@
       <para
         >An enumeration that is used with the <see
          cref="T:System.ServiceModel.TransactionFlowAttribute" />
+
+        
 
         
 

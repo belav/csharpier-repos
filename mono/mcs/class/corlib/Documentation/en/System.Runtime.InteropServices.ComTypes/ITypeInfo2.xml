@@ -40,6 +40,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -183,6 +185,8 @@
 
           
 
+          
+
           A pointer to CUSTDATA, which holds all custom data items. </param
         >
       </Docs>
@@ -265,10 +269,14 @@
 
           
 
+          
+
           The index of the function to get the custom data for. </param
         >
         <param name="pCustData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -356,10 +364,14 @@
 
           
 
+          
+
           The index of the implementation type for the custom data. </param
         >
         <param name="pCustData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -448,6 +460,8 @@
 
           
 
+          
+
           The index of the function to get the custom data for. </param
         >
         <param name="indexParam">
@@ -457,10 +471,14 @@
 
           
 
+          
+
           The index of the parameter of this function to get the custom data for. </param
         >
         <param name="pCustData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -548,10 +566,14 @@
 
           
 
+          
+
           The index of the variable to get the custom data for. </param
         >
         <param name="pCustData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -662,10 +684,14 @@
 
           
 
+          
+
           The ID of the member function whose DLL entry description is to be returned. </param
         >
         <param name="invKind">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -678,8 +704,12 @@
 
           
 
+          
+
            values that specifies the kind of member identified by <paramref
            name="memid" />
+
+          
 
           
 
@@ -694,8 +724,12 @@
 
           
 
+          
+
           If not null, the function sets <paramref
            name="pBstrDllName" />
+
+          
 
           
 
@@ -710,8 +744,12 @@
 
           
 
+          
+
           If not null, the function sets <paramref
            name="lpbstrName" />
+
+          
 
           
 
@@ -726,8 +764,12 @@
 
           
 
+          
+
           If not null, and the function is defined by an ordinal, then <paramref
            name="lpwOrdinal" />
+
+          
 
           
 
@@ -937,6 +979,8 @@
 
           
 
+          
+
           An array of names to map. </param
         >
         <param name="cNames">
@@ -946,10 +990,14 @@
 
           
 
+          
+
           The count of names to map. </param
         >
         <param name="pMemId">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1445,8 +1493,12 @@
 
             
 
+            
+
              structure previously returned by the <see
              cref="M:System.Runtime.InteropServices.ComTypes.ITypeInfo.GetFuncDesc(System.Int32,System.IntPtr@)" />
+
+            
 
             
 
@@ -1457,6 +1509,8 @@
         </summary>
         <param name="pFuncDesc">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1498,8 +1552,12 @@
 
             
 
+            
+
              structure previously returned by the <see
              cref="M:System.Runtime.InteropServices.ComTypes.ITypeInfo.GetTypeAttr(System.IntPtr@)" />
+
+            
 
             
 
@@ -1510,6 +1568,8 @@
         </summary>
         <param name="pTypeAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1551,11 +1611,15 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
         <param name="pVarDesc">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

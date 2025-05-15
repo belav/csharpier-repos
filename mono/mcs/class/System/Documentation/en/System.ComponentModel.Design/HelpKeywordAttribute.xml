@@ -31,11 +31,15 @@
 
         
 
+        
+
          property value. For members, the Help keyword is given by the full name of the type that declared the property, plus the property name itself.</para
       >
       <para
         >For example, consider the <see
          cref="P:System.Windows.Forms.Control.Text" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
          control. The class keyword is "System.Windows.Forms.Button", but the <see
          cref="P:System.Windows.Forms.Control.Text" />
+
+        
 
         
 
@@ -62,8 +70,12 @@
 
         
 
+        
+
          property is declared on the <see
          cref="T:System.Windows.Forms.Control" />
+
+        
 
         
 
@@ -76,8 +88,12 @@
 
         
 
+        
+
          class itself; the <see
          cref="T:System.Windows.Forms.Button" />
+
+        
 
         
 
@@ -93,8 +109,12 @@
 
         
 
+        
+
          property is declared on the <see
          cref="T:System.Windows.Forms.Button" />
+
+        
 
         
 
@@ -110,8 +130,12 @@
 
         
 
+        
+
         . At the class level, it will return the string specified by the <see
          cref="T:System.ComponentModel.Design.HelpKeywordAttribute" />
+
+        
 
         
 
@@ -151,6 +175,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -183,11 +209,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="keyword">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -223,8 +253,12 @@
 
             
 
+            
+
              property of <paramref
              name="t" />
+
+            
 
             
 
@@ -243,11 +277,15 @@
 
             
 
+            
+
              class from the given type. </para
           >
         </summary>
         <param name="t">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -287,6 +325,8 @@
 
             
 
+            
+
              is null.</para
           >
         </remarks>
@@ -295,6 +335,8 @@
           <para
             >Represents the default value for <see
              cref="T:System.ComponentModel.Design.HelpKeywordAttribute" />
+
+            
 
             
 
@@ -335,6 +377,8 @@
 
             
 
+            
+
              are equal if their Help keywords are equal.</para
           >
         </remarks>
@@ -343,6 +387,8 @@
           <para
             >Determines whether two <see
              cref="T:System.ComponentModel.Design.HelpKeywordAttribute" />
+
+            
 
             
 
@@ -361,8 +407,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.ComponentModel.Design.HelpKeywordAttribute" />
+
+            
 
             
 
@@ -400,6 +450,8 @@
           <para
             >A hash code for the current <see
              cref="T:System.ComponentModel.Design.HelpKeywordAttribute" />
+
+            
 
             
 

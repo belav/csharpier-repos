@@ -33,12 +33,16 @@
 
         
 
+        
+
          guarantees that the managed object is not garbage collected until the platform invoke call completes. For a description of platform invoke services, see <format
          type="text/html">
           <a href="ECA7606E-EBFB-4F47-B8D9-289903FDC045"
             >[&lt;topic://cpconconsumingunmanageddllfunctions&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -54,8 +58,12 @@
 
         
 
+        
+
          value type, like <see
          cref="T:System.Runtime.InteropServices.GCHandle" />
+
+        
 
         
 
@@ -68,8 +76,12 @@
 
         
 
+        
+
          also prevents untimely garbage collection, yet <see
          cref="T:System.Runtime.InteropServices.HandleRef" />
+
+        
 
         
 
@@ -82,8 +94,12 @@
 
         
 
+        
+
          to keep an object alive for the duration of a platform invoke call is preferred, you can also use the <see
          cref="M:System.GC.KeepAlive(System.Object)" />
+
+        
 
         
 
@@ -99,6 +115,8 @@
 
         
 
+        
+
          constructor takes two parameters: an <see
          cref="T:System.Object" />
 
@@ -106,8 +124,12 @@
 
         
 
+        
+
          representing the wrapper, and an <see
          cref="T:System.IntPtr" />
+
+        
 
         
 
@@ -151,11 +173,15 @@
 
             
 
+            
+
              class with the object to wrap and a handle to the resource used by unmanaged code.</para
           >
         </summary>
         <param name="wrapper">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -170,8 +196,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IntPtr" />
+
+          
 
           
 
@@ -263,6 +293,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -276,8 +308,12 @@
 
             
 
+            
+
              object that represents a <see
              cref="T:System.Runtime.InteropServices.HandleRef" />
+
+            
 
             
 
@@ -293,8 +329,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.InteropServices.HandleRef" />
+
+          
 
           
 

@@ -26,6 +26,8 @@
 
         
 
+        
+
          class provides methods that can be used to retrieve a list of the hierarchical data sources that are accessible to the current design-time component.</para
       >
       <para
@@ -36,8 +38,12 @@
 
         
 
+        
+
          type converter is used by Microsoft Visual Studio to provide the values that appear in the list of data sources in the <ui
         >Properties</ui>
+
+        
 
         
 
@@ -54,8 +60,12 @@
 
           
 
+          
+
            class. For more information, see the examples in <see
            cref="T:System.ComponentModel.TypeConverter" />
+
+          
 
           
 
@@ -72,10 +82,14 @@
 
         
 
+        
+
          base class and <format
          type="text/html">
           <a href="90373A3F-D8C8-492D-841C-945D62393C56">How to: Implement a Type Converter</a>
         </format>
+
+        
 
         
 
@@ -104,6 +118,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.HierarchicalDataSourceConverter" />
+
+            
 
             
 
@@ -140,8 +156,12 @@
 
             
 
+            
+
              method uses the <see
              cref="M:System.Web.UI.Design.HierarchicalDataSourceConverter.IsValidDataSource(System.ComponentModel.IComponent)" />
+
+            
 
             
 
@@ -154,8 +174,12 @@
 
             
 
+            
+
              class, a valid data source is a component that implements the <see
              cref="T:System.Web.UI.IHierarchicalEnumerable" />
+
+            
 
             
 
@@ -178,8 +202,12 @@
 
             
 
+            
+
              implements <see
              cref="T:System.Web.UI.IHierarchicalEnumerable" />
+
+            
 
             
 
@@ -190,6 +218,8 @@
         </returns>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

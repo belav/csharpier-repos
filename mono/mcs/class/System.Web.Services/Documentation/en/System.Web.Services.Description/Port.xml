@@ -32,6 +32,8 @@
 
         
 
+        
+
         , which defines message format and protocol details for operations and messages for a given <see
          cref="T:System.Web.Services.Description.PortType" />
 
@@ -39,8 +41,12 @@
 
         
 
+        
+
         . The <see
          cref="P:System.Web.Services.Description.Port.Binding" />
+
+        
 
         
 
@@ -68,6 +74,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Description.Port" />
+
+            
 
             
 
@@ -107,6 +115,8 @@
 
             
 
+            
+
             . This property gets or sets those values for a specific Port.</para
           >
         </remarks>
@@ -115,6 +125,8 @@
           <para
             >Gets or sets the value of the XML &lt;binding&gt; attribute of the <see
              cref="T:System.Web.Services.Description.Port" />
+
+            
 
             
 
@@ -151,6 +163,8 @@
           <para
             >Gets the collection of extensibility elements associated with the <see
              cref="T:System.Web.Services.Description.Port" />
+
+            
 
             
 
@@ -214,8 +228,12 @@
 
             
 
+            
+
              of which the <see
              cref="T:System.Web.Services.Description.Port" />
+
+            
 
             
 

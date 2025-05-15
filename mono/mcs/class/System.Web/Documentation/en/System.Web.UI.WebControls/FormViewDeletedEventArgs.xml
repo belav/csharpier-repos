@@ -21,6 +21,8 @@
 
         
 
+        
+
          control raises the <see
          cref="E:System.Web.UI.WebControls.FormView.ItemDeleted" />
 
@@ -28,8 +30,12 @@
 
         
 
+        
+
          event when a Delete button (a button with its CommandName property set to "Delete") within the control is clicked, but after the <see
          cref="T:System.Web.UI.WebControls.FormView" />
+
+        
 
         
 
@@ -45,8 +51,12 @@
 
         
 
+        
+
          object is passed to the event-handling method, which allows you to determine the number of records affected and any exceptions that might have occurred. To determine the number of records affected by the delete operation, use the <see
          cref="P:System.Web.UI.WebControls.FormViewDeletedEventArgs.AffectedRows" />
+
+        
 
         
 
@@ -59,8 +69,12 @@
 
         
 
+        
+
          property to determine whether any exceptions occurred. You can also indicate whether the exception was handled in the event-handling method by setting the <see
          cref="P:System.Web.UI.WebControls.FormViewDeletedEventArgs.ExceptionHandled" />
+
+        
 
         
 
@@ -77,8 +91,12 @@
 
           
 
+          
+
            property is set to false, the <see
            cref="T:System.Web.UI.WebControls.FormView" />
+
+          
 
           
 
@@ -95,8 +113,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.WebControls.FormViewDeletedEventArgs.Values" />
+
+        
 
         
 
@@ -114,6 +136,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -122,6 +146,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Web.UI.WebControls.FormView.ItemDeleted" />
+
+        
 
         
 
@@ -154,11 +180,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Web.UI.WebControls.FormViewDeletedEventArgs" />
+
+            
 
             
 
@@ -192,6 +222,8 @@
 
                   
 
+                  
+
                    parameter.</para
                 >
               </description>
@@ -211,8 +243,12 @@
 
                   
 
+                  
+
                    object contained in the <paramref
                    name="e" />
+
+                  
 
                   
 
@@ -247,11 +283,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="affectedRows">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -266,8 +306,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Exception" />
+
+          
 
           
 
@@ -299,6 +343,8 @@
 
             
 
+            
+
              property to determine the number of records affected by the delete operation. This property is commonly used to verify that the correct number of records was deleted in the following situations:</para
           >
           <list type="bullet">
@@ -317,6 +363,8 @@
 
                 
 
+                
+
                  and <see
                  cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
@@ -324,8 +372,12 @@
 
                 
 
+                
+
                  controls, has its <see
                  cref="P:System.Web.UI.WebControls.SqlDataSource.ConflictDetection" />
+
+                
 
                 
 
@@ -364,6 +416,8 @@
 
             
 
+            
+
              property to determine the exception (if any) that was raised during the delete operation. If no exceptions were raised, this property returns null.</para
           >
           <block subset="none" type="note">
@@ -375,8 +429,12 @@
 
               
 
+              
+
                property to true; otherwise, the <see
                cref="T:System.Web.UI.WebControls.FormView" />
+
+              
 
               
 
@@ -414,6 +472,8 @@
 
             
 
+            
+
              property to indicate whether the exception was handled in the event handler. When this property is set to true, the exception is considered handled and is not re-thrown. If this property is set to false, the <see
              cref="T:System.Web.UI.WebControls.FormView" />
 
@@ -421,8 +481,12 @@
 
             
 
+            
+
              control re-throws the exception. To determine which exception was raised, use the <see
              cref="P:System.Web.UI.WebControls.FormViewDeletedEventArgs.Exception" />
+
+            
 
             
 
@@ -462,8 +526,12 @@
 
             
 
+            
+
              property contains the values of the key fields listed in the <see
              cref="P:System.Web.UI.WebControls.FormView.DataKeyNames" />
+
+            
 
             
 
@@ -476,6 +544,8 @@
 
             
 
+            
+
              control. Use the <see
              cref="P:System.Web.UI.WebControls.FormViewDeletedEventArgs.Keys" />
 
@@ -483,8 +553,12 @@
 
             
 
+            
+
              property to access the values of the key fields (as specified by the <see
              cref="P:System.Web.UI.WebControls.FormView.DataKeyNames" />
+
+            
 
             
 
@@ -501,8 +575,12 @@
 
               
 
+              
+
                property. To access the non-key fields, use the <see
                cref="P:System.Web.UI.WebControls.FormViewDeletedEventArgs.Values" />
+
+              
 
               
 
@@ -519,8 +597,12 @@
 
             
 
+            
+
              property returns an <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -533,8 +615,12 @@
 
             
 
+            
+
              interface. The <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -547,8 +633,12 @@
 
             
 
+            
+
              objects that represent the key fields of the deleted record. To access the field names, use the <see
              cref="P:System.Collections.Specialized.OrderedDictionary.Keys" />
+
+            
 
             
 
@@ -561,8 +651,12 @@
 
             
 
+            
+
              object. Similarly, you can access the field values by using the <see
              cref="P:System.Collections.Specialized.OrderedDictionary.Values" />
+
+            
 
             
 
@@ -579,8 +673,12 @@
 
               
 
+              
+
                object to access the key field values. The advantage in using the indexer is that it returns key field values directly. Data source controls that rely on the field order (such as <see
                cref="T:System.Web.UI.WebControls.AccessDataSource" />
+
+              
 
               
 
@@ -621,6 +719,8 @@
 
             
 
+            
+
              property to access the values of the non-key fields for a deleted record. For example, you can use these values to keep a log of deleted records.</para
           >
           <block subset="none" type="note">
@@ -632,10 +732,14 @@
 
               
 
+              
+
                property is populated only when two-way binding expressions are used in the item template. For more information on two-way binding expressions, see <format
                type="text/html">
                 <a href="ab7b2846-975b-4057-a948-45527497c742">ASP.NET Data Binding</a>
               </format>
+
+              
 
               
 
@@ -652,8 +756,12 @@
 
             
 
+            
+
              property returns an <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -666,8 +774,12 @@
 
             
 
+            
+
              interface. The <see
              cref="T:System.Collections.Specialized.OrderedDictionary" />
+
+            
 
             
 
@@ -680,8 +792,12 @@
 
             
 
+            
+
              objects that represent the non-key fields of the deleted record. To access the field names, use the <see
              cref="P:System.Collections.Specialized.OrderedDictionary.Keys" />
+
+            
 
             
 
@@ -694,8 +810,12 @@
 
             
 
+            
+
              object. Similarly, you can access the field values by using the <see
              cref="P:System.Collections.Specialized.OrderedDictionary.Values" />
+
+            
 
             
 
@@ -712,8 +832,12 @@
 
               
 
+              
+
                object to access the field values. The advantage in using the indexer is that it returns field values directly. Data source controls that rely on the field order (such as <see
                cref="T:System.Web.UI.WebControls.AccessDataSource" />
+
+              
 
               
 
@@ -730,8 +854,12 @@
 
             
 
+            
+
              property) for the deleted record. To access the key fields, use the <see
              cref="P:System.Web.UI.WebControls.FormViewDeletedEventArgs.Keys" />
+
+            
 
             
 

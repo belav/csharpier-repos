@@ -32,8 +32,12 @@
 
         
 
+        
+
          object. Because the third column of a matrix that represents an affine transformation is always (0, 0, 1), you specify only the six numbers in the first two columns when you construct a <see
          cref="T:System.Drawing.Drawing2D.Matrix" />
+
+        
 
         
 
@@ -90,6 +94,8 @@
 
         
 
+        
+
          object.</para
       >
       <block subset="none" type="note">
@@ -103,8 +109,12 @@
 
         
 
+        
+
          class provides several methods for building a composite transformation: <see
          cref="Overload:System.Drawing.Drawing2D.Matrix.Multiply" />
+
+        
 
         
 
@@ -117,8 +127,12 @@
 
         
 
+        
+
         , <see
          cref="Overload:System.Drawing.Drawing2D.Matrix.RotateAt" />
+
+        
 
         
 
@@ -131,6 +145,8 @@
 
         
 
+        
+
         , <see
          cref="Overload:System.Drawing.Drawing2D.Matrix.Shear" />
 
@@ -138,8 +154,12 @@
 
         
 
+        
+
         , and <see
          cref="Overload:System.Drawing.Drawing2D.Matrix.Translate" />
+
+        
 
         
 
@@ -167,6 +187,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Drawing.Drawing2D.Matrix" />
+
+            
 
             
 
@@ -203,6 +225,8 @@
 
             
 
+            
+
              parameter to the parallelogram defined by the three points in the <paramref
              name="plgpts" />
 
@@ -210,8 +234,12 @@
 
             
 
+            
+
              parameter. The upper-left corner of the rectangle is mapped to the first point in the <paramref
              name="plgpts" />
+
+            
 
             
 
@@ -230,6 +258,8 @@
 
             
 
+            
+
              class to the geometric transform defined by the specified rectangle and array of points.</para
           >
         </summary>
@@ -240,8 +270,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -256,8 +290,12 @@
 
           
 
+          
+
           An array of three <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -293,8 +331,12 @@
 
             
 
+            
+
              such that it represents the geometric transform that maps the rectangle specified by the <paramref
              name="rect" />
+
+            
 
             
 
@@ -307,8 +349,12 @@
 
             
 
+            
+
              parameter. The upper-left corner of the rectangle is mapped to the first point in the <paramref
              name="plgpts" />
+
+            
 
             
 
@@ -327,6 +373,8 @@
 
             
 
+            
+
              class to the geometric transform defined by the specified rectangle and array of points.</para
           >
         </summary>
@@ -337,8 +385,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.RectangleF" />
+
+          
 
           
 
@@ -353,8 +405,12 @@
 
           
 
+          
+
           An array of three <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -395,6 +451,8 @@
 
             
 
+            
+
              class with the specified elements.</para
           >
         </summary>
@@ -405,8 +463,12 @@
 
           
 
+          
+
           The value in the first row and first column of the new <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -421,8 +483,12 @@
 
           
 
+          
+
           The value in the first row and second column of the new <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -437,8 +503,12 @@
 
           
 
+          
+
           The value in the second row and first column of the new <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -453,8 +523,12 @@
 
           
 
+          
+
           The value in the second row and second column of the new <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -469,8 +543,12 @@
 
           
 
+          
+
           The value in the third row and first column of the new <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -485,8 +563,12 @@
 
           
 
+          
+
           The value in the third row and second column of the new <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -519,6 +601,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -527,6 +611,8 @@
           <para
             >The <see
              cref="T:System.Drawing.Drawing2D.Matrix" />
+
+            
 
             
 
@@ -559,6 +645,8 @@
 
             
 
+            
+
              object to be reallocated for other purposes.</para
           >
         </remarks>
@@ -567,6 +655,8 @@
           <para
             >Releases all resources used by this <see
              cref="T:System.Drawing.Drawing2D.Matrix" />
+
+            
 
             
 
@@ -603,6 +693,8 @@
 
             
 
+            
+
              are represented by the values in the array in that order.</para
           >
         </remarks>
@@ -611,6 +703,8 @@
           <para
             >Gets an array of floating-point values that represents the elements of this <see
              cref="T:System.Drawing.Drawing2D.Matrix" />
+
+            
 
             
 
@@ -646,8 +740,12 @@
 
             
 
+            
+
              and is identical to this <see
              cref="T:System.Drawing.Drawing2D.Matrix" />
+
+            
 
             
 
@@ -666,8 +764,12 @@
 
             
 
+            
+
              is the specified <see
              cref="T:System.Drawing.Drawing2D.Matrix" />
+
+            
 
             
 
@@ -680,11 +782,15 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -737,6 +843,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -760,6 +868,8 @@
           <para
             >Inverts this <see
              cref="T:System.Drawing.Drawing2D.Matrix" />
+
+            
 
             
 
@@ -793,6 +903,8 @@
 
             
 
+            
+
              is the identity matrix.</para
           >
         </summary>
@@ -816,6 +928,8 @@
           <para
             >Gets a value indicating whether this <see
              cref="T:System.Drawing.Drawing2D.Matrix" />
+
+            
 
             
 
@@ -854,6 +968,8 @@
 
             
 
+            
+
              by the matrix specified in the <paramref
              name="matrix" />
 
@@ -861,8 +977,12 @@
 
             
 
+            
+
              parameter, by prepending the specified <see
              cref="T:System.Drawing.Drawing2D.Matrix" />
+
+            
 
             
 
@@ -878,6 +998,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
 
@@ -885,8 +1007,12 @@
 
           
 
+          
+
            by which this <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -924,8 +1050,12 @@
 
             
 
+            
+
             , this <see
              cref="T:System.Drawing.Drawing2D.Matrix" />
+
+            
 
             
 
@@ -938,8 +1068,12 @@
 
             
 
+            
+
             , this <see
              cref="T:System.Drawing.Drawing2D.Matrix" />
+
+            
 
             
 
@@ -958,6 +1092,8 @@
 
             
 
+            
+
              by the matrix specified in the <paramref
              name="matrix" />
 
@@ -965,8 +1101,12 @@
 
             
 
+            
+
              parameter, and in the order specified in the <paramref
              name="order" />
+
+            
 
             
 
@@ -982,6 +1122,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
 
@@ -989,8 +1131,12 @@
 
           
 
+          
+
            by which this <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -1005,8 +1151,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Drawing2D.MatrixOrder" />
+
+          
 
           
 
@@ -1039,6 +1189,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1062,6 +1214,8 @@
           <para
             >Gets the y translation value (the dy value, or the element in the third row and second column) of this <see
              cref="T:System.Drawing.Drawing2D.Matrix" />
+
+            
 
             
 
@@ -1098,6 +1252,8 @@
 
             
 
+            
+
              to have the elements of the identity matrix.</para
           >
         </summary>
@@ -1128,11 +1284,15 @@
 
             
 
+            
+
              a clockwise rotation, around the origin and by the specified angle.</para
           >
         </summary>
         <param name="angle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1171,8 +1331,12 @@
 
             
 
+            
+
              parameter, around the origin (zero x and y coordinates) for this <see
              cref="T:System.Drawing.Drawing2D.Matrix" />
+
+            
 
             
 
@@ -1188,10 +1352,14 @@
 
           
 
+          
+
           The angle (extent) of the rotation, in degrees. </param
         >
         <param name="order">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1204,8 +1372,12 @@
 
           
 
+          
+
            that specifies the order (append or prepend) in which the rotation is applied to this <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -1244,8 +1416,12 @@
 
             
 
+            
+
              around the point specified in the <paramref
              name="point" />
+
+            
 
             
 
@@ -1261,6 +1437,8 @@
 
           
 
+          
+
           The angle (extent) of the rotation, in degrees. </param
         >
         <param name="point">
@@ -1270,8 +1448,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -1311,11 +1493,15 @@
 
             
 
+            
+
              in the specified order.</para
           >
         </summary>
         <param name="angle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1330,8 +1516,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -1346,8 +1536,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.MatrixOrder" />
+
+          
 
           
 
@@ -1383,6 +1577,8 @@
 
             
 
+            
+
              by prepending the scale vector.</para
           >
         </summary>
@@ -1393,8 +1589,12 @@
 
           
 
+          
+
           The value by which to scale this <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -1409,8 +1609,12 @@
 
           
 
+          
+
           The value by which to scale this <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -1450,6 +1654,8 @@
 
             
 
+            
+
              and <paramref
              name="scaleY" />
 
@@ -1457,8 +1663,12 @@
 
             
 
+            
+
             ) to this <see
              cref="T:System.Drawing.Drawing2D.Matrix" />
+
+            
 
             
 
@@ -1474,8 +1684,12 @@
 
           
 
+          
+
           The value by which to scale this <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -1490,8 +1704,12 @@
 
           
 
+          
+
           The value by which to scale this <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -1506,6 +1724,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.MatrixOrder" />
 
@@ -1513,8 +1733,12 @@
 
           
 
+          
+
            that specifies the order (append or prepend) in which the scale vector is applied to this <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -1549,8 +1773,12 @@
 
             
 
+            
+
              factor is 0, the transformation moves the bottom edge horizontally by <paramref
              name="shearX" />
+
+            
 
             
 
@@ -1563,8 +1791,12 @@
 
             
 
+            
+
              factor is 0, it moves the right edge vertically by <paramref
              name="shearY" />
+
+            
 
             
 
@@ -1583,6 +1815,8 @@
 
             
 
+            
+
              by prepending the shear transformation.</para
           >
         </summary>
@@ -1593,10 +1827,14 @@
 
           
 
+          
+
           The horizontal shear factor. </param
         >
         <param name="shearY">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1635,8 +1873,12 @@
 
             
 
+            
+
              factor is 0, the transformation moves the bottom edge horizontally by <paramref
              name="shearX" />
+
+            
 
             
 
@@ -1649,8 +1891,12 @@
 
             
 
+            
+
              factor is 0, it moves the right edge vertically by <paramref
              name="shearY" />
+
+            
 
             
 
@@ -1669,11 +1915,15 @@
 
             
 
+            
+
              in the specified order.</para
           >
         </summary>
         <param name="shearX">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1688,6 +1938,8 @@
 
           
 
+          
+
           The vertical shear factor. </param
         >
         <param name="order">
@@ -1697,8 +1949,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.MatrixOrder" />
+
+          
 
           
 
@@ -1736,6 +1992,8 @@
 
             
 
+            
+
              to a specified array of points.</para
           >
         </summary>
@@ -1746,8 +2004,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -1785,6 +2047,8 @@
 
             
 
+            
+
              to a specified array of points.</para
           >
         </summary>
@@ -1795,8 +2059,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Drawing.PointF" />
+
+          
 
           
 
@@ -1834,6 +2102,8 @@
 
             
 
+            
+
              to the specified array of points.</para
           >
         </summary>
@@ -1844,8 +2114,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -1884,8 +2158,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -1924,6 +2202,8 @@
 
             
 
+            
+
              and <paramref
              name="offsetY" />
 
@@ -1931,8 +2211,12 @@
 
             
 
+            
+
             ) to this <see
              cref="T:System.Drawing.Drawing2D.Matrix" />
+
+            
 
             
 
@@ -1948,8 +2232,12 @@
 
           
 
+          
+
           The x value by which to translate this <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -1964,8 +2252,12 @@
 
           
 
+          
+
           The y value by which to translate this <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -2005,6 +2297,8 @@
 
             
 
+            
+
              in the specified order.</para
           >
         </summary>
@@ -2015,8 +2309,12 @@
 
           
 
+          
+
           The x value by which to translate this <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -2031,8 +2329,12 @@
 
           
 
+          
+
           The y value by which to translate this <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -2047,6 +2349,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.MatrixOrder" />
 
@@ -2054,8 +2358,12 @@
 
           
 
+          
+
            that specifies the order (append or prepend) in which the translation is applied to this <see
            cref="T:System.Drawing.Drawing2D.Matrix" />
+
+          
 
           
 
@@ -2094,8 +2402,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 

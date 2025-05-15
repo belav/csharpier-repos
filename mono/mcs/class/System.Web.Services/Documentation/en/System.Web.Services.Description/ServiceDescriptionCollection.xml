@@ -31,6 +31,8 @@
 
         
 
+        
+
          class. This class cannot be inherited.</para
       >
     </summary>
@@ -48,6 +50,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Description.ServiceDescriptionCollection" />
+
+            
 
             
 
@@ -89,8 +93,12 @@
 
             
 
+            
+
              to the end of the <see
              cref="T:System.Web.Services.Description.ServiceDescriptionCollection" />
+
+            
 
             
 
@@ -109,6 +117,8 @@
 
             
 
+            
+
              parameter has been added.</para
           >
         </returns>
@@ -119,8 +129,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.ServiceDescription" />
+
+          
 
           
 
@@ -161,6 +175,8 @@
 
             
 
+            
+
              is a member of the collection.</para
           >
         </summary>
@@ -174,8 +190,12 @@
 
             
 
+            
+
              parameter is a member of the <see
              cref="T:System.Web.Services.Description.ServiceDescriptionCollection" />
+
+            
 
             
 
@@ -191,8 +211,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.ServiceDescription" />
+
+          
 
           
 
@@ -231,8 +255,12 @@
 
             
 
+            
+
              to a one-dimensional array of type <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -248,8 +276,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Web.Services.Description.ServiceDescription" />
+
+          
 
           
 
@@ -259,6 +291,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -296,6 +330,8 @@
 
             
 
+            
+
              and returns the <see
              cref="T:System.Web.Services.Description.Binding" />
 
@@ -303,8 +339,12 @@
 
             
 
+            
+
              with the specified name that is a member of one of the <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -324,8 +364,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlQualifiedName" />
+
+          
 
           
 
@@ -338,8 +382,12 @@
 
           
 
+          
+
            property is used to retrieve a <see
            cref="T:System.Web.Services.Description.Binding" />
+
+          
 
           
 
@@ -403,6 +451,8 @@
 
             
 
+            
+
              and returns the <see
              cref="T:System.Web.Services.Description.Message" />
 
@@ -410,8 +460,12 @@
 
             
 
+            
+
              with the specified name that is a member of one of the <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -431,8 +485,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlQualifiedName" />
+
+          
 
           
 
@@ -445,8 +503,12 @@
 
           
 
+          
+
            property is shared by the <see
            cref="T:System.Web.Services.Description.Message" />
+
+          
 
           
 
@@ -484,6 +546,8 @@
 
             
 
+            
+
              and returns the <see
              cref="T:System.Web.Services.Description.PortType" />
 
@@ -491,8 +555,12 @@
 
             
 
+            
+
              with the specified name that is a member of one of the <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -512,8 +580,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlQualifiedName" />
+
+          
 
           
 
@@ -526,8 +598,12 @@
 
           
 
+          
+
            property is shared by the <see
            cref="T:System.Web.Services.Description.PortType" />
+
+          
 
           
 
@@ -565,6 +641,8 @@
 
             
 
+            
+
              and returns the <see
              cref="T:System.Web.Services.Description.Service" />
 
@@ -572,8 +650,12 @@
 
             
 
+            
+
              with the specified name that is a member of one of the <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -593,8 +675,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlQualifiedName" />
+
+          
 
           
 
@@ -607,8 +693,12 @@
 
           
 
+          
+
            property is shared by the <see
            cref="T:System.Web.Services.Description.Service" />
+
+          
 
           
 
@@ -649,6 +739,8 @@
 
             
 
+            
+
              and returns the zero-based index of the first occurrence within the collection.</para
           >
         </summary>
@@ -663,8 +755,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.ServiceDescription" />
+
+          
 
           
 
@@ -706,8 +802,12 @@
 
             
 
+            
+
              parameter is equal to <see
              cref="P:System.Collections.CollectionBase.Count" />
+
+            
 
             
 
@@ -720,8 +820,12 @@
 
             
 
+            
+
              parameter is added to the end of the <see
              cref="T:System.Web.Services.Description.ServiceDescriptionCollection" />
+
+            
 
             
 
@@ -741,8 +845,12 @@
 
             
 
+            
+
              instance to the <see
              cref="T:System.Web.Services.Description.ServiceDescriptionCollection" />
+
+            
 
             
 
@@ -758,8 +866,12 @@
 
           
 
+          
+
           The zero-based index at which to insert the <paramref
            name="serviceDescription" />
+
+          
 
           
 
@@ -774,8 +886,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.ServiceDescription" />
+
+          
 
           
 
@@ -884,11 +1000,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The elements that follow the removed <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -907,6 +1027,8 @@
 
             
 
+            
+
              from the collection.</para
           >
         </summary>
@@ -917,8 +1039,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.ServiceDescription" />
+
+          
 
           
 

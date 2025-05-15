@@ -45,6 +45,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -75,6 +77,8 @@
 
             
 
+            
+
              into the collection.</para
           >
         </summary>
@@ -83,6 +87,8 @@
           <para
             >The position in the collection where the <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -98,8 +104,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -134,11 +144,15 @@
 
             
 
+            
+
              collection to the end. </para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -213,6 +227,8 @@
 
             
 
+            
+
              exists within the collection.</para
           >
         </summary>
@@ -221,6 +237,8 @@
           <para
             >true if the <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -236,8 +254,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -273,11 +295,15 @@
 
             
 
+            
+
              objects into the collection, starting at the specified position.</para
           >
         </summary>
         <param name="array">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -290,10 +316,14 @@
 
           
 
+          
+
            objects to add to the collection.</param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -326,6 +356,8 @@
 
             
 
+            
+
              .</para
           >
         </summary>
@@ -352,6 +384,8 @@
           <para
             >Returns an enumerator that iterates through the <see
              cref="T:System.Windows.Forms.AutoCompleteStringCollection" />
+
+            
 
             
 
@@ -390,6 +424,8 @@
 
             
 
+            
+
              returns the index for the first occurrence of the string within the collection.</para
           >
         </remarks>
@@ -408,8 +444,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -446,10 +486,14 @@
 
           
 
+          
+
           The position at which to insert the string.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -496,6 +540,8 @@
           <para
             >Gets a value indicating whether access to the <see
              cref="T:System.Windows.Forms.AutoCompleteStringCollection" />
+
+            
 
             
 
@@ -554,6 +600,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -564,8 +612,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.CollectionChangeEventArgs" />
+
+          
 
           
 
@@ -601,8 +653,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -638,6 +694,8 @@
 
           
 
+          
+
           The zero-based index of the string to remove.</param
         >
       </Docs>
@@ -660,6 +718,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Windows.Forms.AutoCompleteStringCollection" />
+
+            
 
             
 
@@ -697,8 +757,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -717,6 +781,8 @@
 
             
 
+            
+
             , starting at a particular <see
              cref="T:System.Array" />
 
@@ -724,8 +790,12 @@
 
             
 
+            
+
              index. For a description of this member, see <see
              cref="M:System.Collections.ICollection.CopyTo(System.Array,System.Int32)" />
+
+            
 
             
 
@@ -741,6 +811,8 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
 
@@ -748,8 +820,12 @@
 
           
 
+          
+
            that is the destination of the strings copied from collection. The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -764,8 +840,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -798,8 +878,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -818,6 +902,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -831,11 +917,15 @@
 
             
 
+            
+
              has been added. </para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -868,8 +958,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -888,6 +982,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -901,11 +997,15 @@
 
             
 
+            
+
              is found in the collection; otherwise, false.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -938,8 +1038,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -958,6 +1062,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -971,11 +1077,15 @@
 
             
 
+            
+
              if found in the list; otherwise, -1.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1009,8 +1119,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1029,11 +1143,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1046,10 +1164,14 @@
 
           
 
+          
+
            should be inserted.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1080,8 +1202,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1095,6 +1221,8 @@
           <para
             >Gets a value indicating whether the collection has a fixed size. For a description of this member, see <see
              cref="P:System.Collections.IList.IsFixedSize" />
+
+            
 
             
 
@@ -1126,8 +1254,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1141,6 +1273,8 @@
           <para
             >Gets a value indicating whether the collection is read-only. For a description of this member, see <see
              cref="P:System.Collections.IList.IsReadOnly" />
+
+            
 
             
 
@@ -1196,8 +1330,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1216,11 +1354,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

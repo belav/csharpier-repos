@@ -31,6 +31,8 @@
 
         
 
+        
+
          is reset automatically or manually after receiving a signal.</para
       >
     </summary>
@@ -62,8 +64,12 @@
 
             
 
+            
+
              resets automatically after releasing a single thread. If no threads are waiting, the <see
              cref="T:System.Threading.EventWaitHandle" />
+
+            
 
             
 
@@ -95,6 +101,8 @@
           <para
             >When signaled, the <see
              cref="T:System.Threading.EventWaitHandle" />
+
+            
 
             
 

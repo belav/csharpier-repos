@@ -31,6 +31,8 @@
 
         
 
+        
+
         .</para
       >
     </summary>
@@ -62,6 +64,8 @@
 
             
 
+            
+
              is set to -1.</para
           >
         </remarks>
@@ -70,6 +74,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Description.BasicProfileViolationEnumerator" />
+
+            
 
             
 
@@ -108,8 +114,12 @@
 
             
 
+            
+
              element in the <see
              cref="T:System.Web.Services.Description.BasicProfileViolationCollection" />
+
+            
 
             
 
@@ -142,8 +152,12 @@
 
             
 
+            
+
              class.Releases all resources used by the <see
              cref="T:System.Web.Services.Description.BasicProfileViolationEnumerator" />
+
+            
 
             
 
@@ -171,6 +185,8 @@
           <para
             >Enumerates to the next element in the <see
              cref="T:System.Web.Services.Description.BasicProfileViolationCollection" />
+
+            
 
             
 
@@ -210,6 +226,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -232,6 +250,8 @@
           <para
             >Sets the enumerator to its initial position, which is before the first element in the <see
              cref="T:System.Web.Services.Description.BasicProfileViolationCollection" />
+
+            
 
             
 

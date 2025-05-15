@@ -27,8 +27,12 @@
 
         
 
+        
+
          event is raised when the Cancel button for an item in the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
          event is raised when the Delete button for an item in the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -61,8 +69,12 @@
 
         
 
+        
+
          event is raised when the Edit button for an item in the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -78,6 +90,8 @@
 
         
 
+        
+
          event is raised when any button for an item in the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
 
@@ -85,8 +99,12 @@
 
         
 
+        
+
          control is clicked. This allows you to programmatically test for when a specific command button is clicked and take appropriate action. This event is commonly used to handle custom command buttons for the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -102,8 +120,12 @@
 
         
 
+        
+
          event is raised when the Update button for an item in the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -119,8 +141,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.WebControls.DataGridCommandEventArgs.#ctor(System.Web.UI.WebControls.DataGridItem,System.Object,System.Web.UI.WebControls.CommandEventArgs)" />
+
+        
 
         
 
@@ -133,6 +159,8 @@
          type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
         </format>
+
+        
 
         
 
@@ -151,8 +179,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Web.UI.WebControls.DataGrid.DeleteCommand" />
+
+        
 
         
 
@@ -165,8 +197,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Web.UI.WebControls.DataGrid.ItemCommand" />
+
+        
 
         
 
@@ -179,8 +215,12 @@
 
         
 
+        
+
          events of the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -216,11 +256,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >When an instance of <see
              cref="T:System.Web.UI.WebControls.DataGridCommandEventArgs" />
+
+            
 
             
 
@@ -254,6 +298,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -268,6 +314,8 @@
                 <para
                   >The value of the <paramref
                    name="item" />
+
+                  
 
                   
 
@@ -289,11 +337,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="item">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -306,8 +358,12 @@
 
           
 
+          
+
            that represents the selected item in the <see
            cref="T:System.Web.UI.WebControls.DataGrid" />
+
+          
 
           
 
@@ -334,6 +390,8 @@
           <para
             >Use the <see
              cref="P:System.Web.UI.WebControls.DataGridCommandEventArgs.CommandSource" />
+
+            
 
             
 
@@ -373,8 +431,12 @@
 
             
 
+            
+
              property is used to access the properties of the selected item in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -388,6 +450,8 @@
           <para
             >Gets the item containing the command source in the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 

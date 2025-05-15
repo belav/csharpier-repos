@@ -24,8 +24,12 @@
 
         
 
+        
+
          type converter is used to convert <see
          cref="T:System.Drawing.Font" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          class through the <see
          cref="T:System.ComponentModel.TypeDescriptor" />
+
+        
 
         
 
@@ -53,6 +61,8 @@
       <para
         >Converts <see
          cref="T:System.Drawing.SizeF" />
+
+        
 
         
 
@@ -75,6 +85,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Drawing.SizeFConverter" />
+
+            
 
             
 
@@ -113,6 +125,8 @@
 
             
 
+            
+
             , this method will always return true.</para
           >
         </remarks>
@@ -121,6 +135,8 @@
           <para
             >Returns a value indicating whether the converter can convert from the type specified to the <see
              cref="T:System.Drawing.SizeF" />
+
+            
 
             
 
@@ -140,8 +156,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -156,8 +176,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -196,8 +220,12 @@
 
             
 
+            
+
              can convert a <see
              cref="T:System.Drawing.SizeF" />
+
+            
 
             
 
@@ -217,8 +245,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -233,8 +265,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -329,6 +365,8 @@
 
             
 
+            
+
              with the specified property values using the specified context.</para
           >
         </summary>
@@ -342,8 +380,12 @@
 
             
 
+            
+
              representing the new <see
              cref="T:System.Drawing.SizeF" />
+
+            
 
             
 
@@ -359,8 +401,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -375,8 +421,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -414,6 +464,8 @@
 
             
 
+            
+
              method to create a new value.</para
           >
         </summary>
@@ -428,8 +480,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -468,8 +524,12 @@
 
             
 
+            
+
              type regardless of the <paramref
              name="value" />
+
+            
 
             
 
@@ -488,6 +548,8 @@
 
             
 
+            
+
              type using the specified context and attributes.</para
           >
         </summary>
@@ -496,6 +558,8 @@
           <para
             >A <see
              cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+
+            
 
             
 
@@ -511,8 +575,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -527,8 +595,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -543,8 +615,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -582,6 +658,8 @@
 
             
 
+            
+
              type supports properties.</para
           >
         </summary>
@@ -596,8 +674,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 

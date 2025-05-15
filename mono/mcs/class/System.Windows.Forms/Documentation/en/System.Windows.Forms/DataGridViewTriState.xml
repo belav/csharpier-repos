@@ -20,8 +20,12 @@
 
         
 
+        
+
          enumeration is useful whenever a third state is needed in addition to the two states of the <see
          cref="T:System.Boolean" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
          property is of type <see
          cref="T:System.Windows.Forms.DataGridViewTriState" />
+
+        
 
         
 
@@ -48,6 +56,8 @@
 
         
 
+        
+
          object can indicate no preference in regards to the text wrapping of a cell value, and can instead indicate that the <see
          cref="P:System.Windows.Forms.DataGridViewCellStyle.WrapMode" />
 
@@ -55,8 +65,12 @@
 
         
 
+        
+
          value of a different <see
          cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+        
 
         
 

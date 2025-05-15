@@ -51,8 +51,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Xml.IXmlLineInfo.LinePosition" />
+
+            
 
             
 
@@ -87,6 +91,8 @@
 
             
 
+            
+
             , a value of 1,1 indicates the start of a document.</para
           >
         </remarks>
@@ -115,6 +121,8 @@
           <para
             >This property is used primarily for error reporting, but can be called at any time. The starting value is 1. Combined with <see
              cref="P:System.Xml.IXmlLineInfo.LineNumber" />
+
+            
 
             
 

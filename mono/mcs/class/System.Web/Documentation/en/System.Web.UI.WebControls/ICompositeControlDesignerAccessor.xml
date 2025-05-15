@@ -21,8 +21,12 @@
 
         
 
+        
+
          implements the <see
          cref="T:System.Web.UI.WebControls.ICompositeControlDesignerAccessor" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          method at design time. The associated designer must derive from <see
          cref="T:System.Web.UI.Design.WebControls.CompositeControlDesigner" />
+
+        
 
         
 
@@ -47,6 +55,8 @@
       <para
         >The <see
          cref="T:System.Web.UI.WebControls.ICompositeControlDesignerAccessor" />
+
+        
 
         
 
@@ -80,11 +90,15 @@
 
             
 
+            
+
              method allows a designer for a composite control to recreate the control's child controls at design time. </para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.ICompositeControlDesignerAccessor.RecreateChildControls" />
+
+            
 
             
 
@@ -98,6 +112,8 @@
           <para
             >In a control derived from <see
              cref="T:System.Web.UI.WebControls.CompositeControl" />
+
+            
 
             
 

@@ -51,6 +51,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -90,6 +92,8 @@
 
             
 
+            
+
              will be parsed and validated.</para
           >
           <para
@@ -100,11 +104,15 @@
 
             
 
+            
+
              method inserts a new header into the list of header name/value pairs.</para
           >
           <para
             >If the specified header is already present, <paramref
              name="values" />
+
+            
 
             
 
@@ -123,6 +131,8 @@
 
             
 
+            
+
              collection.</para
           >
         </summary>
@@ -133,10 +143,14 @@
 
           
 
+          
+
           The header to add to the collection.</param
         >
         <param name="values">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -174,6 +188,8 @@
 
             
 
+            
+
              will be parsed and validated.</para
           >
           <para
@@ -184,11 +200,15 @@
 
             
 
+            
+
              method inserts a new header into the list of header name/value pairs.</para
           >
           <para
             >If the specified header is already present, <paramref
              name="value" />
+
+            
 
             
 
@@ -207,6 +227,8 @@
 
             
 
+            
+
              collection.</para
           >
         </summary>
@@ -217,10 +239,14 @@
 
           
 
+          
+
           The header to add to the collection.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -251,6 +277,8 @@
           <para
             >Removes all headers from the <see
              cref="T:System.Net.Http.Headers.HttpHeaders" />
+
+            
 
             
 
@@ -289,6 +317,8 @@
 
             
 
+            
+
              collection.</para
           >
         </summary>
@@ -302,12 +332,16 @@
 
             
 
+            
+
             .</para
           >
           <para>true is the specified header exists in the collection; otherwise false.</para>
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -346,6 +380,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -359,11 +395,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >An enumerator for the <see
              cref="T:System.Net.Http.Headers.HttpHeaders" />
+
+            
 
             
 
@@ -405,6 +445,8 @@
 
             
 
+            
+
              collection.</para
           >
         </summary>
@@ -418,12 +460,16 @@
 
             
 
+            
+
             .</para
           >
           <para>An array of header strings.</para>
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -461,6 +507,8 @@
 
             
 
+            
+
              collection.</para
           >
         </summary>
@@ -474,11 +522,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -517,6 +569,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -525,6 +579,8 @@
           <para
             >Returns <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -540,8 +596,12 @@
 
             
 
+            
+
              that can iterate through a <see
              cref="T:System.Net.Http.Headers.HttpHeaders" />
+
+            
 
             
 
@@ -578,6 +638,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -586,6 +648,8 @@
           <para
             >Returns <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -632,6 +696,8 @@
 
             
 
+            
+
              collection without validating the provided information.</para
           >
         </summary>
@@ -640,6 +706,8 @@
           <para
             >Returns <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -655,8 +723,12 @@
 
             
 
+            
+
              and <paramref
              name="values" />
+
+            
 
             
 
@@ -672,10 +744,14 @@
 
           
 
+          
+
           The header to add to the collection.</param
         >
         <param name="values">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -717,6 +793,8 @@
 
             
 
+            
+
              collection without validating the provided information.</para
           >
         </summary>
@@ -725,6 +803,8 @@
           <para
             >Returns <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -740,8 +820,12 @@
 
             
 
+            
+
              and <paramref
              name="value" />
+
+            
 
             
 
@@ -757,10 +841,14 @@
 
           
 
+          
+
           The header to add to the collection.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

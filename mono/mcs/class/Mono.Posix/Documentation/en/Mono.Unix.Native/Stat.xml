@@ -34,8 +34,12 @@
 
       
 
+      
+
        and <see
        cref="M:Mono.Unix.Native.Syscall.lstat" />
+
+      
 
       
 
@@ -51,8 +55,12 @@
 
       
 
+      
+
       (2) for more information. Not all filesystems implement all of the time fields and certain mount types can affect the ATime value as well. See <c
       >mount</c>
+
+      
 
       
 
@@ -434,6 +442,8 @@
         <remarks
           >If the file is a symlink and <see
            cref="M:Mono.Unix.Native.Syscall.lstat" />
+
+          
 
           
 

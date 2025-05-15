@@ -32,6 +32,8 @@
 
         
 
+        
+
          interface defines the properties and methods that custom authentication modules must use.</para
       >
       <para>Authentication modules conduct the entire authentication process with a server, responding to an authentication challenge as appropriate. This process may consist of requests to an authentication server separate from the resource server, as well as any other activities required to properly authenticate a request for a URI.</para>
@@ -43,8 +45,12 @@
 
         
 
+        
+
          interface and then register with the <see
          cref="M:System.Net.AuthenticationManager.Register(System.Net.IAuthenticationModule)" />
+
+        
 
         
 
@@ -97,6 +103,8 @@
 
             
 
+            
+
              method conducts the authentication process with the server and returns an <see
              cref="T:System.Net.Authorization" />
 
@@ -104,8 +112,12 @@
 
             
 
+            
+
              instance to the <see
              cref="T:System.Net.AuthenticationManager" />
+
+            
 
             
 
@@ -124,6 +136,8 @@
 
             
 
+            
+
              class in respose to an authentication challenge from a server.</para
           >
         </summary>
@@ -132,6 +146,8 @@
           <para
             >An <see
              cref="T:System.Net.Authorization" />
+
+            
 
             
 
@@ -147,10 +163,14 @@
 
           
 
+          
+
           The authentication challenge sent by the server. </param
         >
         <param name="request">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -163,10 +183,14 @@
 
           
 
+          
+
            instance associated with the challenge. </param
         >
         <param name="credentials">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -204,6 +228,8 @@
 
             
 
+            
+
              indicating the
    authentication type of the current authentication module.</para
           >
@@ -218,8 +244,12 @@
 
             
 
+            
+
              property identifies the authentication type implemented by this authentication module. The <see
              cref="P:System.Net.IAuthenticationModule.AuthenticationType" />
+
+            
 
             
 
@@ -232,8 +262,12 @@
 
             
 
+            
+
              method to determine if the authentication module has been registered, and by the <see
              cref="M:System.Net.AuthenticationManager.Unregister(System.Net.IAuthenticationModule)" />
+
+            
 
             
 
@@ -275,9 +309,13 @@
 
             
 
+            
+
             if the authentication module supports
    preauthentication; otherwise <see
              langword="false" />
+
+            
 
             
 
@@ -296,6 +334,8 @@
 
             
 
+            
+
              property is set to true to indicate that the authentication module can respond with a valid <see
              cref="T:System.Net.Authorization" />
 
@@ -303,8 +343,12 @@
 
             
 
+            
+
              instance when the <see
              cref="M:System.Net.IAuthenticationModule.PreAuthenticate(System.Net.WebRequest,System.Net.ICredentials)" />
+
+            
 
             
 
@@ -357,6 +401,8 @@
 
             
 
+            
+
              property is true, the <see
              cref="M:System.Net.IAuthenticationModule.PreAuthenticate(System.Net.WebRequest,System.Net.ICredentials)" />
 
@@ -364,8 +410,12 @@
 
             
 
+            
+
              method will return an instance of the <see
              cref="T:System.Net.Authorization" />
+
+            
 
             
 
@@ -384,6 +434,8 @@
 
             
 
+            
+
              class for an authentication request to a server.</para
           >
         </summary>
@@ -392,6 +444,8 @@
           <para
             >An <see
              cref="T:System.Net.Authorization" />
+
+            
 
             
 
@@ -407,8 +461,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.WebRequest" />
+
+          
 
           
 
@@ -418,6 +476,8 @@
         >
         <param name="credentials">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

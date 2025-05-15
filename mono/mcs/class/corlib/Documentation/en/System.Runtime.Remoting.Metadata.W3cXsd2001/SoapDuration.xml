@@ -33,6 +33,8 @@
 
         
 
+        
+
         . </para
       >
     </remarks>
@@ -41,6 +43,8 @@
       <para
         >Provides static methods for the serialization and deserialization of <see
          cref="T:System.TimeSpan" />
+
+        
 
         
 
@@ -72,6 +76,8 @@
           <para
             >Creates an instance of <see
              cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapDuration" />
+
+            
 
             
 
@@ -112,8 +118,12 @@
 
             
 
+            
+
              into a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -132,8 +142,12 @@
 
             
 
+            
+
              object that is obtained from <paramref
              name="value" />
+
+            
 
             
 
@@ -149,8 +163,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -190,8 +208,12 @@
 
             
 
+            
+
              object as a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -210,6 +232,8 @@
 
             
 
+            
+
              representation of <paramref
              name="timeSpan" />
 
@@ -217,8 +241,12 @@
 
             
 
+            
+
              in the format "PxxYxxDTxxHxxMxx.xxxS" or "PxxYxxDTxxHxxMxxS". The "PxxYxxDTxxHxxMxx.xxxS" is used if <see
              cref="P:System.TimeSpan.Milliseconds" />
+
+            
 
             
 
@@ -234,8 +262,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 

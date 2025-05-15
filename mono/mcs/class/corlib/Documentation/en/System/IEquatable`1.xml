@@ -27,12 +27,16 @@
 
         
 
+        
+
          method to create a type-specific method suitable for determining equality of instances.</para
       >
       <block subset="none" type="note">
         <para
           >The <see
            cref="T:System.IComparable`1" />
+
+          
 
           
 
@@ -45,6 +49,8 @@
 
           
 
+          
+
            method, which determines the sort order of instances of the implementing type. The <see
            cref="T:System.IEquatable`1" />
 
@@ -52,8 +58,12 @@
 
           
 
+          
+
            interface defines the <see
            cref="M:System.IEquatable`1.Equals(`0)" />
+
+          
 
           
 
@@ -70,8 +80,12 @@
 
         
 
+        
+
          interface is used by generic collection objects such as <see
          cref="T:System.Collections.Generic.Dictionary`2" />
+
+        
 
         
 
@@ -84,8 +98,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Collections.Generic.LinkedList`1" />
+
+        
 
         
 
@@ -130,8 +148,12 @@
 
             
 
+            
+
              if the specified object is equal to the current object; otherwise, <see
              langword="false" />
+
+            
 
             
 

@@ -20,8 +20,12 @@
 
         
 
+        
+
          interface has no behavior except to dynamically manufacture new instances of classes that implement the <see
          cref="T:System.Web.IHttpHandler" />
+
+        
 
         
 
@@ -35,6 +39,8 @@
       <para
         >Defines the contract that class factories must implement to create new <see
          cref="T:System.Web.IHttpHandler" />
+
+        
 
         
 
@@ -72,6 +78,8 @@
 
             
 
+            
+
              interface.</para
           >
         </summary>
@@ -80,6 +88,8 @@
           <para
             >A new <see
              cref="T:System.Web.IHttpHandler" />
+
+            
 
             
 
@@ -95,8 +105,12 @@
 
           
 
+          
+
           An instance of the <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -111,6 +125,8 @@
 
           
 
+          
+
           The HTTP data transfer method (GET or POST) that the client uses. </param
         >
         <param name="url">
@@ -120,8 +136,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Web.HttpRequest.RawUrl" />
+
+          
 
           
 
@@ -136,8 +156,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Web.HttpRequest.PhysicalApplicationPath" />
+
+          
 
           
 
@@ -176,8 +200,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.IHttpHandler" />
+
+          
 
           
 

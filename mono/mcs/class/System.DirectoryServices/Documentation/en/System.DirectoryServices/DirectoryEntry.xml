@@ -89,6 +89,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -111,6 +113,8 @@
 
             
 
+            
+
              class on a native Active Directory Domain Services object that implements the IADs interface through a native API. For more information about the IADs interface, see the topic <see
 
               cref="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/adsi/adsi/iads.asp"
@@ -121,8 +125,12 @@
 
             
 
+            
+
              in the MSDN Library at <see
              cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>
+
+            
 
             
 
@@ -141,11 +149,15 @@
 
             
 
+            
+
              class that binds to the specified native Active Directory Domain Services object.</para
           >
         </summary>
         <param name="adsObject">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -173,11 +185,15 @@
 
             
 
+            
+
              class that binds this instance to the node in Active Directory Domain Services located at the specified path.</para
           >
         </summary>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -190,8 +206,12 @@
 
           
 
+          
+
            to the directory. The <see
            cref="P:System.DirectoryServices.DirectoryEntry.Path" />
+
+          
 
           
 
@@ -226,6 +246,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -236,8 +258,12 @@
 
           
 
+          
+
           The user name to use when authenticating the client. The <see
            cref="P:System.DirectoryServices.DirectoryEntry.Username" />
+
+          
 
           
 
@@ -273,6 +299,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -283,8 +311,12 @@
 
           
 
+          
+
           The user name to use when authenticating the client. The <see
            cref="P:System.DirectoryServices.DirectoryEntry.Username" />
+
+          
 
           
 
@@ -299,6 +331,8 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.DirectoryServices.AuthenticationTypes" />
 
@@ -306,8 +340,12 @@
 
           
 
+          
+
            values. The <see
            cref="P:System.DirectoryServices.DirectoryEntry.AuthenticationType" />
+
+          
 
           
 
@@ -336,8 +374,12 @@
 
             
 
+            
+
             , any operations on the <see
              cref="T:System.DirectoryServices.DirectoryEntry" />
+
+            
 
             
 
@@ -351,6 +393,8 @@
           <para
             >Closes the <see
              cref="T:System.DirectoryServices.DirectoryEntry" />
+
+            
 
             
 
@@ -384,8 +428,12 @@
 
             
 
+            
+
              is true, call <see
              cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" />
+
+            
 
             
 
@@ -396,6 +444,8 @@
           <para
             >The Lightweight Directory Access Protocol (LDAP) provider does not currently support the <see
              cref="M:System.DirectoryServices.DirectoryEntry.CopyTo(System.DirectoryServices.DirectoryEntry)" />
+
+            
 
             
 
@@ -418,6 +468,8 @@
 
             
 
+            
+
              object that represents the copy of this entry as a child of the new parent.</para
           >
         </returns>
@@ -428,8 +480,12 @@
 
           
 
+          
+
           The distinguished name of the <see
            cref="T:System.DirectoryServices.DirectoryEntry" />
+
+          
 
           
 
@@ -466,8 +522,12 @@
 
                 
 
+                
+
                  for deleting entries from the Active Directory Domain Services hierarchy. Associated enumeration: <see
                  cref="T:System.DirectoryServices.DirectoryServicesPermissionAccess" />
+
+                
 
                 
 
@@ -510,6 +570,8 @@
 
           
 
+          
+
           The path of the entry to verify.</param
         >
       </Docs>
@@ -537,8 +599,12 @@
 
             
 
+            
+
              is true, call the <see
              cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" />
+
+            
 
             
 
@@ -557,11 +623,15 @@
 
             
 
+            
+
              object to the specified parent.</para
           >
         </summary>
         <param name="newParent">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -595,8 +665,12 @@
 
             
 
+            
+
              is true, call <see
              cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" />
+
+            
 
             
 
@@ -615,6 +689,8 @@
 
             
 
+            
+
              object to the specified parent and changes its name to the specified value.</para
           >
         </summary>
@@ -625,10 +701,14 @@
 
           
 
+          
+
           The parent to which you want to move this entry.</param
         >
         <param name="newName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -661,8 +741,12 @@
 
             
 
+            
+
              is true, be sure to call the <see
              cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" />
+
+            
 
             
 
@@ -681,11 +765,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="newName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -725,6 +813,8 @@
 
             
 
+            
+
              is returned. For more information about the IADs interface, see the topic <see
 
               cref="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/adsi/adsi/iads.asp"
@@ -735,11 +825,15 @@
 
             
 
+            
+
              in the MSDN Library at <see
 
               cref="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/adsi/adsi/iads.asp"
               >http://msdn.microsoft.com/library</see
             >
+
+            
 
             
 
@@ -763,6 +857,8 @@
 
           
 
+          
+
           The name of the method to invoke.</param
         >
         <param name="args">
@@ -772,8 +868,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -808,8 +908,12 @@
 
             
 
+            
+
              is true, call <see
              cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" />
+
+            
 
             
 
@@ -828,8 +932,12 @@
 
             
 
+            
+
              object, as a child of the specified parent <see
              cref="T:System.DirectoryServices.DirectoryEntry" />
+
+            
 
             
 
@@ -849,8 +957,12 @@
 
           
 
+          
+
           The DN of the <see
            cref="T:System.DirectoryServices.DirectoryEntry" />
+
+          
 
           
 
@@ -860,6 +972,8 @@
         >
         <param name="newName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -887,11 +1001,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >Changes made to the cache include changes to the properties as well as calls to <see
              cref="M:System.DirectoryServices.DirectoryEntries.Add(System.String,System.String)" />
+
+            
 
             
 
@@ -908,8 +1026,12 @@
 
               
 
+              
+
                before calling <see
                cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" />
+
+              
 
               
 
@@ -931,8 +1053,12 @@
 
                 
 
+                
+
                  class for reading, writing, deleting, changing, and adding to the Active Directory Domain Services hierarchy. Associated enumeration: <see
                  cref="T:System.DirectoryServices.DirectoryServicesPermissionAccess" />
+
+                
 
                 
 
@@ -968,6 +1094,8 @@
 
               
 
+              
+
                method to persist changes to the directory store.</para
             >
           </block>
@@ -977,6 +1105,8 @@
           <para
             >Loads the property values for this <see
              cref="T:System.DirectoryServices.DirectoryEntry" />
+
+            
 
             
 
@@ -1004,6 +1134,8 @@
             <para
               >Any uncommitted changes to the property cache will be lost. Use <see
                cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" />
+
+              
 
               
 
@@ -1048,8 +1180,12 @@
 
             
 
+            
+
             . Beginning with dnprdnlong, the default value is <see
              cref="F:System.DirectoryServices.AuthenticationTypes.Secure" />
+
+            
 
             
 
@@ -1097,12 +1233,16 @@
 
             
 
+            
+
              method through which you add a node to the collection directly below the parent node that you are currently bound to. When adding a node to the collection, you must specify a name for the new node and the name of a schema template that you want to associate with the node. For example, you might want to use a schema titled "Computer" to add new computers to the hierarchy.</para
           >
           <block subset="none" type="note">
             <para
               >By default, changes are made locally to a cache. After you modify or add a node, you must call the <see
                cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" />
+
+              
 
               
 
@@ -1115,8 +1255,12 @@
 
               
 
+              
+
                before calling <see
                cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" />
+
+              
 
               
 
@@ -1129,6 +1273,8 @@
 
               
 
+              
+
                and <see
                cref="M:System.DirectoryServices.DirectoryEntry.RefreshCache" />
 
@@ -1136,8 +1282,12 @@
 
               
 
+              
+
                methods, and the <see
                cref="P:System.DirectoryServices.DirectoryEntry.UsePropertyCache" />
+
+              
 
               
 
@@ -1182,6 +1332,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -1190,6 +1342,8 @@
           <para
             >Gets the GUID of the <see
              cref="T:System.DirectoryServices.DirectoryEntry" />
+
+            
 
             
 
@@ -1224,6 +1378,8 @@
           <para
             >This name, along with <see
              cref="P:System.DirectoryServices.DirectoryEntry.SchemaClassName" />
+
+            
 
             
 
@@ -1296,12 +1452,16 @@
 
             
 
+            
+
              property when binding an object in Active Directory Domain Services.</para
           >
           <block subset="none" type="note">
             <para
               >The Lightweight Directory Access Protocol (LDAP) provider returns the globally unique identifier of a <see
                cref="T:System.DirectoryServices.DirectoryEntry" />
+
+              
 
               
 
@@ -1316,6 +1476,8 @@
           <para
             >Gets the GUID of the <see
              cref="T:System.DirectoryServices.DirectoryEntry" />
+
+            
 
             
 
@@ -1358,6 +1520,8 @@
 
             
 
+            
+
              in the MSDN Library at <see
 
               cref="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/adsi/adsi/iads.asp"
@@ -1368,11 +1532,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This object is for advanced scenarios that cannot be accomplished with the <see
              cref="N:System.DirectoryServices" />
+
+            
 
             
 
@@ -1413,8 +1581,12 @@
 
             
 
+            
+
              property is true, access to the <see
              cref="T:System.DirectoryServices.DirectoryEntry" />
+
+            
 
             
 
@@ -1430,6 +1602,8 @@
 
             
 
+            
+
              property is true and you want to commit cached changes, call the <see
              cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" />
 
@@ -1437,8 +1611,12 @@
 
             
 
+            
+
              method. To update values in the cache after changes to the directory are made, call the <see
              cref="M:System.DirectoryServices.DirectoryEntry.RefreshCache" />
+
+            
 
             
 
@@ -1455,8 +1633,12 @@
 
               
 
+              
+
                before calling <see
                cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" />
+
+              
 
               
 
@@ -1504,8 +1686,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.DirectoryServices.DirectoryEntry.Password" />
+
+            
 
             
 
@@ -1518,8 +1704,12 @@
 
             
 
+            
+
              objects retrieved from this instance (for example, through <see
              cref="P:System.DirectoryServices.DirectoryEntry.Children" />
+
+            
 
             
 
@@ -1566,8 +1756,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.DirectoryServices.DirectoryEntry.Password" />
+
+            
 
             
 
@@ -1580,8 +1774,12 @@
 
             
 
+            
+
              objects retrieved from this instance (for example, through <see
              cref="P:System.DirectoryServices.DirectoryEntry.Children" />
+
+            
 
             
 
@@ -1628,8 +1826,12 @@
 
             
 
+            
+
              property uniquely identifies this entry in a networked environment. This entry can always be retrieved using this <see
              cref="P:System.DirectoryServices.DirectoryEntry.Path" />
+
+            
 
             
 
@@ -1645,11 +1847,15 @@
 
             
 
+            
+
              retrieves a new entry from the directory store; it does not change the path of the currently bound entry.</para
           >
           <para
             >The classes associated with the <see
              cref="T:System.DirectoryServices.DirectoryEntry" />
+
+            
 
             
 
@@ -1666,12 +1872,16 @@
 
               
 
+              
+
                that identifies the provider (precedes "://") is case-sensitive. For example, "LDAP://" or "WinNT://".</para
             >
           </block>
           <para
             >The syntax for the <see
              cref="P:System.DirectoryServices.DirectoryEntry.Path" />
+
+            
 
             
 
@@ -1690,8 +1900,12 @@
 
                 
 
+                
+
                 ". If you are connecting to a local computer, "WinNT://<userInputLocalizable
                 >&lt;computer name&gt;/&lt;group name&gt;</userInputLocalizable>
+
+                
 
                 
 
@@ -1709,8 +1923,12 @@
 
                 
 
+                
+
                 ". If you are connecting to a local computer, "WinNT://<userInputLocalizable
                 >&lt;computer name&gt;/&lt;user name&gt;</userInputLocalizable>
+
+                
 
                 
 
@@ -1728,8 +1946,12 @@
 
                 
 
+                
+
                 ". If you are connecting to a local computer, "WinNT://<userInputLocalizable
                 >&lt;computer name&gt;/&lt;service name&gt;</userInputLocalizable>
+
+                
 
                 
 
@@ -1774,8 +1996,12 @@ DirectoryEntry domain = new DirectoryEntry("LDAP://" + str);</code>
 
             
 
+            
+
              in the MSDN Library at <see
              cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>
+
+            
 
             
 
@@ -1789,6 +2015,8 @@ DirectoryEntry domain = new DirectoryEntry("LDAP://" + str);</code>
           <para
             >Gets or sets the path for this <see
              cref="T:System.DirectoryServices.DirectoryEntry" />
+
+            
 
             
 
@@ -1831,8 +2059,12 @@ DirectoryEntry domain = new DirectoryEntry("LDAP://" + str);</code>
 
             
 
+            
+
              calls the ADSI interface <see
              cref="http://msdn2.microsoft.com/en-us/library/aa746347.aspx">IADs::Get</see>
+
+            
 
             
 
@@ -1845,8 +2077,12 @@ DirectoryEntry domain = new DirectoryEntry("LDAP://" + str);</code>
 
             
 
+            
+
              implicitly calls <see
              cref="http://msdn2.microsoft.com/en-us/library/aa746349.aspx">IADs::GetInfo</see>
+
+            
 
             
 
@@ -1859,8 +2095,12 @@ DirectoryEntry domain = new DirectoryEntry("LDAP://" + str);</code>
 
             
 
+            
+
              retrieves the property values in the cache only. To control property cache loading, call <see
              cref="M:System.DirectoryServices.DirectoryEntry.RefreshCache" />
+
+            
 
             
 
@@ -1877,6 +2117,8 @@ DirectoryEntry domain = new DirectoryEntry("LDAP://" + str);</code>
 
             
 
+            
+
              property is not supported for use with the Active Directory Client Extension (DSClient) for WinNt4Family. </para
           >
         </remarks>
@@ -1885,6 +2127,8 @@ DirectoryEntry domain = new DirectoryEntry("LDAP://" + str);</code>
           <para
             >Gets the Active Directory Domain Services properties for this <see
              cref="T:System.DirectoryServices.DirectoryEntry" />
+
+            
 
             
 
@@ -1924,8 +2168,12 @@ DirectoryEntry domain = new DirectoryEntry("LDAP://" + str);</code>
 
             
 
+            
+
              property of the <see
              cref="P:System.DirectoryServices.DirectoryEntry.SchemaEntry" />
+
+            
 
             
 
@@ -1941,6 +2189,8 @@ DirectoryEntry domain = new DirectoryEntry("LDAP://" + str);</code>
 
             
 
+            
+
              object's schema defines its properties and methods.</para
           >
         </remarks>
@@ -1949,6 +2199,8 @@ DirectoryEntry domain = new DirectoryEntry("LDAP://" + str);</code>
           <para
             >Gets the name of the schema class for this <see
              cref="T:System.DirectoryServices.DirectoryEntry" />
+
+            
 
             
 
@@ -2004,8 +2256,12 @@ DirectoryEntry domain = new DirectoryEntry("LDAP://" + str);</code>
 
         
 
+        
+
         , along with helper classes, provides support for life-cycle management and navigation methods. These include creating, deleting, renaming, moving a child node, and enumerating children. After you modify a node, you must commit your changes in order for them to be saved to the tree. For more information, see the <see
          cref="M:System.DirectoryServices.DirectoryEntry.CommitChanges" />
+
+        
 
         
 
@@ -2015,6 +2271,8 @@ DirectoryEntry domain = new DirectoryEntry("LDAP://" + str);</code>
       >
       <para>
         <see cref="T:System.DirectoryServices.DirectoryEntry" />
+
+        
 
         
 
@@ -2031,6 +2289,8 @@ DirectoryEntry domain = new DirectoryEntry("LDAP://" + str);</code>
 
         
 
+        
+
          property. The <see
          cref="P:System.DirectoryServices.DirectoryEntry.Children" />
 
@@ -2038,8 +2298,12 @@ DirectoryEntry domain = new DirectoryEntry("LDAP://" + str);</code>
 
         
 
+        
+
          property is a collection that provides an <see
          cref="M:System.DirectoryServices.DirectoryEntries.Add(System.String,System.String)" />
+
+        
 
         
 
@@ -2055,11 +2319,15 @@ DirectoryEntry domain = new DirectoryEntry("LDAP://" + str);</code>
 
         
 
+        
+
          property.</para
       >
       <para
         >The classes associated with the <see
          cref="T:System.DirectoryServices.DirectoryEntry" />
+
+        
 
         
 
@@ -2076,6 +2344,8 @@ DirectoryEntry domain = new DirectoryEntry("LDAP://" + str);</code>
 
           
 
+          
+
            namespace overview.</para
         >
       </block>
@@ -2085,6 +2355,8 @@ DirectoryEntry domain = new DirectoryEntry("LDAP://" + str);</code>
       <para
         >The <see
          cref="T:System.DirectoryServices.DirectoryEntry" />
+
+        
 
         
 

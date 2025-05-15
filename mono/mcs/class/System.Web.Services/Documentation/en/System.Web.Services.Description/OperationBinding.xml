@@ -32,6 +32,8 @@
 
         
 
+        
+
          class. For more information about WSDL, see the specification at http://www.w3.org/TR/wsdl/.</para
       >
     </remarks>
@@ -53,6 +55,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Description.OperationBinding" />
+
+            
 
             
 
@@ -88,8 +92,12 @@
 
             
 
+            
+
              is a member of the <see
              cref="P:System.Web.Services.Description.Binding.Operations" />
+
+            
 
             
 
@@ -108,8 +116,12 @@
 
             
 
+            
+
              of which the current <see
              cref="T:System.Web.Services.Description.OperationBinding" />
+
+            
 
             
 
@@ -144,6 +156,8 @@
           <para
             >Gets the collection of extensibility elements specific to the current <see
              cref="T:System.Web.Services.Description.OperationBinding" />
+
+            
 
             
 
@@ -185,8 +199,12 @@
 
             
 
+            
+
              associated with the <see
              cref="T:System.Web.Services.Description.OperationBinding" />
+
+            
 
             
 
@@ -232,8 +250,12 @@
 
             
 
+            
+
              associated with the <see
              cref="T:System.Web.Services.Description.OperationBinding" />
+
+            
 
             
 
@@ -301,8 +323,12 @@
 
             
 
+            
+
              associated with the <see
              cref="T:System.Web.Services.Description.OperationBinding" />
+
+            
 
             
 

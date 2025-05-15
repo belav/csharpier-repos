@@ -27,8 +27,12 @@
 
         
 
+        
+
          class derives from the <see
          cref="T:System.ComponentModel.StringConverter" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
           
 
+          
+
            class. For more information, see the examples in the <see
            cref="T:System.ComponentModel.TypeConverter" />
+
+          
 
           
 
@@ -78,8 +86,12 @@
 
             
 
+            
+
              class. For more information, see the examples in the <see
              cref="T:System.ComponentModel.TypeConverter" />
+
+            
 
             
 
@@ -93,6 +105,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.ControlPropertyNameConverter" />
+
+            
 
             
 
@@ -132,8 +146,12 @@
 
             
 
+            
+
              method returns a <see
              cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
+
+            
 
             
 
@@ -149,8 +167,12 @@
 
             
 
+            
+
              parameter to extract additional information about the design-time environment from which this converter is invoked. This parameter can be null, and properties on the context object can return null. If the <paramref
              name="context" />
+
+            
 
             
 
@@ -169,6 +191,8 @@
 
             
 
+            
+
              when provided with a format context.</para
           >
         </summary>
@@ -182,8 +206,12 @@
 
             
 
+            
+
              that contains a set of strings representing property names for the current control. If the current control is null, an empty collection is returned. If the <paramref
              name="context" />
+
+            
 
             
 
@@ -199,8 +227,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -236,8 +268,12 @@
 
             
 
+            
+
              method always returns false to indicate that the list of property values returned by the <see
              cref="Overload:System.Web.UI.WebControls.ControlPropertyNameConverter.GetStandardValues" />
+
+            
 
             
 
@@ -253,6 +289,8 @@
 
             
 
+            
+
              parameter to extract additional information about the environment from which this converter is invoked. This parameter can be null, and properties on the context object can return null.</para
           >
         </remarks>
@@ -261,6 +299,8 @@
           <para
             >Returns a value that indicates whether the collection of standard values returned by the <see
              cref="Overload:System.Web.UI.WebControls.ControlPropertyNameConverter.GetStandardValues" />
+
+            
 
             
 
@@ -280,8 +320,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -317,6 +361,8 @@
 
             
 
+            
+
              method returns a value that indicates whether this object supports a standard set of values. </para
           >
           <para
@@ -327,8 +373,12 @@
 
             
 
+            
+
              parameter extracts additional information about the design-time environment from which this converter is invoked. This parameter can be null, and properties on the context object can return null. If the <paramref
              name="context" />
+
+            
 
             
 
@@ -351,6 +401,8 @@
 
             
 
+            
+
              parameter is not null; otherwise, false.</para
           >
         </returns>
@@ -361,8 +413,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 

@@ -27,11 +27,15 @@
 
         
 
+        
+
          method of this class to convert a single string containing a list of font names to an array of strings containing the individual names. Each font name in the string must be separated by a comma. For example, the string "arial, times new roman, verdana", converts to an array that contains the strings "arial", "times new roman", and "verdana". Notice the commas are removed along with any white space at the beginning or end of the font name. White space in the middle of a font name is not removed.</para
       >
       <para
         >The <see
          cref="M:System.Web.UI.WebControls.FontNamesConverter.ConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object,System.Type)" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          method to verify that the conversion can be made before calling the <see
          cref="M:System.Web.UI.WebControls.FontNamesConverter.ConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Globalization.CultureInfo,System.Object)" />
+
+        
 
         
 
@@ -79,8 +87,12 @@
 
             
 
+            
+
              object. For more information, see the examples in <see
              cref="T:System.ComponentModel.TypeConverter" />
+
+            
 
             
 
@@ -94,6 +106,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.FontNamesConverter" />
+
+            
 
             
 
@@ -132,12 +146,16 @@
 
             
 
+            
+
              method to determine whether the specified data type can be converted to an array of strings containing individual font names.</para
           >
           <block subset="none" type="note">
             <para
               >This converter can convert only from a string data type. The <paramref
                name="sourceType" />
+
+              
 
               
 
@@ -150,12 +168,16 @@
 
               
 
+              
+
               . Otherwise, this method returns false to indicate that the specified data type cannot be converted.</para
             >
           </block>
           <para
             >You can optionally pass in null for the <paramref
              name="context" />
+
+            
 
             
 
@@ -179,8 +201,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -195,8 +221,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -235,6 +265,8 @@
 
             
 
+            
+
              method to convert a string containing a list of font names to an array of strings containing the individual names. Each font name in the string must be separated by a comma. For example, the string "arial, times new roman, verdana", converts to an array that contains the strings "arial", "times new roman", and "verdana". Notice that the commas are removed along with any white space at the beginning or end of the font name. White space in the middle of a font name is not removed.</para
           >
           <block subset="none" type="note">
@@ -246,8 +278,12 @@
 
               
 
+              
+
                and <paramref
                name="culture" />
+
+              
 
               
 
@@ -271,6 +307,8 @@
 
             
 
+            
+
              instance that represents the array of strings containing the individual font names.</para
           >
         </returns>
@@ -281,8 +319,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -297,8 +339,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -313,8 +359,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -354,6 +404,8 @@
 
             
 
+            
+
              method to convert an array of strings containing the individual font names to a single string containing a list of the names. For example, an array that contains the strings "arial", "times new roman", and "verdana" converts to the string "arial,times new roman,verdana". Notice that commas are automatically inserted between the font names without any white space.</para
           >
           <block subset="none" type="note">
@@ -365,8 +417,12 @@
 
               
 
+              
+
                parameter must be of type <see
                cref="T:System.String" />
+
+              
 
               
 
@@ -384,8 +440,12 @@
 
               
 
+              
+
                and <paramref
                name="culture" />
+
+              
 
               
 
@@ -409,6 +469,8 @@
 
             
 
+            
+
              instance that represents a string containing a list of font names.</para
           >
         </returns>
@@ -419,8 +481,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -435,8 +501,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -451,10 +521,14 @@
 
           
 
+          
+
           An object that represents the source array of strings to convert from. </param
         >
         <param name="destinationType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -467,8 +541,12 @@
 
           
 
+          
+
            instance object that represents the data type to convert to. This parameter must be of type <see
            cref="T:System.String" />
+
+          
 
           
 

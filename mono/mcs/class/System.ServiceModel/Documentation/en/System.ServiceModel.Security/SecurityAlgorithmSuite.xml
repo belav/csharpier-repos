@@ -51,6 +51,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -112,6 +114,8 @@
 
             
 
+            
+
              returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para
           >
         </remarks>
@@ -149,6 +153,8 @@
 
             
 
+            
+
              returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para
           >
         </remarks>
@@ -181,6 +187,8 @@
           <para
             >The <see
              cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+
+            
 
             
 
@@ -251,6 +259,8 @@
 
             
 
+            
+
              returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para
           >
         </remarks>
@@ -288,6 +298,8 @@
 
             
 
+            
+
              returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para
           >
         </remarks>
@@ -320,6 +332,8 @@
           <para
             >The <see
              cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+
+            
 
             
 
@@ -390,6 +404,8 @@
 
             
 
+            
+
              returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para
           >
         </remarks>
@@ -422,6 +438,8 @@
           <para
             >The <see
              cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+
+            
 
             
 
@@ -464,6 +482,8 @@
 
             
 
+            
+
              returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para
           >
         </remarks>
@@ -496,6 +516,8 @@
           <para
             >The <see
              cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+
+            
 
             
 
@@ -538,6 +560,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -570,6 +594,8 @@
           <para
             >When overridden, provides a string value that will be used for comparison in the <see
              cref="M:System.ServiceModel.Security.SecurityAlgorithmSuite.IsAsymmetricSignatureAlgorithmSupported(System.String)" />
+
+            
 
             
 
@@ -612,6 +638,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -641,6 +669,8 @@
           <para
             >When overridden, provides a string value that will be used for comparison in the <see
              cref="M:System.ServiceModel.Security.SecurityAlgorithmSuite.IsDigestAlgorithmSupported(System.String)" />
+
+            
 
             
 
@@ -678,6 +708,8 @@
           <para
             >When overridden, provides a string value that will be used for comparison in the <see
              cref="M:System.ServiceModel.Security.SecurityAlgorithmSuite.IsEncryptionAlgorithmSupported(System.String)" />
+
+            
 
             
 
@@ -724,6 +756,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -761,6 +795,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -793,6 +829,8 @@
           <para
             >Gets the default symmetric key length as an <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -892,6 +930,8 @@
 
           
 
+          
+
           The key length to check.</param
         >
       </Docs>
@@ -925,8 +965,12 @@
 
             
 
+            
+
              gets compared to the string returned from <see
              cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultAsymmetricKeyWrapAlgorithm" />
+
+            
 
             
 
@@ -945,6 +989,8 @@
         </returns>
         <param name="algorithm">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -983,8 +1029,12 @@
 
             
 
+            
+
              gets compared to the string returned from <see
              cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultAsymmetricSignatureAlgorithm" />
+
+            
 
             
 
@@ -1003,6 +1053,8 @@
         </returns>
         <param name="algorithm">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1041,8 +1093,12 @@
 
             
 
+            
+
              gets compared to the string returned from <see
              cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultCanonicalizationAlgorithm" />
+
+            
 
             
 
@@ -1061,6 +1117,8 @@
         </returns>
         <param name="algorithm">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1099,8 +1157,12 @@
 
             
 
+            
+
              gets compared to the string returned from <see
              cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultDigestAlgorithm" />
+
+            
 
             
 
@@ -1119,6 +1181,8 @@
         </returns>
         <param name="algorithm">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1157,8 +1221,12 @@
 
             
 
+            
+
              gets compared to the string returned from <see
              cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.DefaultEncryptionAlgorithm" />
+
+            
 
             
 
@@ -1177,6 +1245,8 @@
         </returns>
         <param name="algorithm">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1222,6 +1292,8 @@
 
           
 
+          
+
           The algorithm name to check.</param
         >
       </Docs>
@@ -1262,6 +1334,8 @@
 
           
 
+          
+
           The algorithm name to check.</param
         >
       </Docs>
@@ -1296,8 +1370,12 @@
 
             
 
+            
+
              is compared to a range of values depending on the subclass. For example, in the TripleDES subclass, this method verifies that <paramref
              name="length" />
+
+            
 
             
 
@@ -1316,6 +1394,8 @@
         </returns>
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1361,6 +1441,8 @@
 
           
 
+          
+
           The algorithm name to check.</param
         >
       </Docs>
@@ -1401,6 +1483,8 @@
 
           
 
+          
+
           The algorithm name to check.</param
         >
       </Docs>
@@ -1428,6 +1512,8 @@
           <para
             >The <see
              cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+
+            
 
             
 
@@ -1470,6 +1556,8 @@
 
             
 
+            
+
              returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para
           >
         </remarks>
@@ -1507,6 +1595,8 @@
 
             
 
+            
+
              returned is actually an internal subclass that overrides some of the properties specifying default values as well as some of the methods.</para
           >
         </remarks>
@@ -1539,6 +1629,8 @@
           <para
             >The <see
              cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+
+            
 
             
 

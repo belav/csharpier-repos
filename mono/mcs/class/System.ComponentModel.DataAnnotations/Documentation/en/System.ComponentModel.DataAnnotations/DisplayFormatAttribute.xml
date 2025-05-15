@@ -34,6 +34,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -66,6 +68,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -93,6 +97,8 @@
 
             
 
+            
+
              property is applied to field values only when the data-bound control is in read-only mode.</para
           >
         </remarks>
@@ -101,6 +107,8 @@
           <para
             >Gets or sets a value that indicates whether the formatting string that is specified by the <see
              cref="P:System.ComponentModel.DataAnnotations.DisplayFormatAttribute.DataFormatString" />
+
+            
 
             
 
@@ -133,6 +141,8 @@
 
             
 
+            
+
              property to specify whether an empty string value is automatically converted to null when the data field is updated in the database.</para
           >
           <block subset="none" type="note">
@@ -144,8 +154,12 @@
 
               
 
+              
+
                object displays null values as empty strings. To display a different value, set the <see
                cref="P:System.ComponentModel.DataAnnotations.DisplayFormatAttribute.NullDisplayText" />
+
+              
 
               
 
@@ -183,8 +197,12 @@
 
             
 
+            
+
              property to specify a custom display format for the values that are displayed in the <see
              cref="T:System.Web.DynamicData.DynamicField" />
+
+            
 
             
 
@@ -197,10 +215,14 @@
 
             
 
+            
+
              property is not set, the field's value is displayed without any special formatting. For more information, see <format
              type="text/html">
               <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Overview</a>
             </format>
+
+            
 
             
 
@@ -217,8 +239,12 @@
 
               
 
+              
+
                property is true, the value of the field is HTML encoded to its string representation before the formatting string is applied. For some objects, such as dates, you might want to control how the object is displayed with a formatting string. In those cases, you must set the <see
                cref="P:System.Web.DynamicData.DynamicField.HtmlEncode" />
+
+              
 
               
 
@@ -235,8 +261,12 @@
 
             
 
+            
+
              object is in read-only mode. To apply the formatting string to field values when they are in edit mode, set the <see
              cref="P:System.Web.DynamicData.DynamicField.ApplyFormatInEditMode" />
+
+            
 
             
 
@@ -247,6 +277,8 @@
           <para
             >The formatting string can be any literal string and usually includes a placeholder for the field's value. For example, in the formatting string "Item Value: {0}", the field's value is substituted for the {0} placeholder when the string is displayed in the <see
              cref="T:System.Web.DynamicData.DynamicField" />
+
+            
 
             
 
@@ -305,12 +337,16 @@
 
             
 
+            
+
              property. If this property is not set, null field values are displayed as empty strings (""). </para
           >
           <block subset="none" type="note">
             <para
               >To convert an empty string field value to a null value, you must set the <see
                cref="P:System.ComponentModel.DataAnnotations.DisplayFormatAttribute.ConvertEmptyStringToNull" />
+
+              
 
               
 

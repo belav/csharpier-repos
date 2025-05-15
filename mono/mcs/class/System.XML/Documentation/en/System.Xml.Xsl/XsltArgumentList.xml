@@ -28,11 +28,15 @@
 
         
 
+        
+
          method. It allows parameters and extension objects to be invoked from within the style sheet.</para
       >
       <para
         >When the parameters and objects are added to the <see
          cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+        
 
         
 
@@ -57,6 +61,8 @@
 
             
 
+            
+
             ) to the style sheet.</para
           >
         </item>
@@ -64,6 +70,8 @@
       <para
         >For more information about using the <see
          cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+        
 
         
 
@@ -78,10 +86,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="fe60aaa0-ae43-4b1c-9be1-426af66ba757">XSLT Parameters</a>
         </format>
+
+        
 
         
 
@@ -117,6 +129,8 @@
           <para
             >Implements a new instance of the <see
              cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+            
 
             
 
@@ -162,6 +176,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -170,6 +186,8 @@
           <para
             >Adds a new object to the <see
              cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+            
 
             
 
@@ -185,10 +203,14 @@
 
           
 
+          
+
           The namespace URI to associate with the object. To use the default namespace, specify an empty string. </param
         >
         <param name="extension">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -227,6 +249,8 @@
           <para
             >The <paramref
              name="parameter" />
+
+            
 
             
 
@@ -319,6 +343,8 @@
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -331,8 +357,12 @@
 
                 
 
+                
+
                  type is converted to <see
                  cref="T:System.String" />
+
+                
 
                 
 
@@ -349,6 +379,8 @@
 
                 
 
+                
+
                  types are converted to <see
                  cref="T:System.Xml.XPath.XPathNavigator" />
 
@@ -356,8 +388,12 @@
 
                 
 
+                
+
                 . XPathNavigator[] is converted to <see
                  cref="T:System.Xml.XPath.XPathNodeIterator" />
+
+                
 
                 
 
@@ -379,11 +415,15 @@
 
             
 
+            
+
              and associates it with the namespace qualified name.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -398,10 +438,14 @@
 
           
 
+          
+
           The namespace URI to associate with the parameter. To use the default namespace, specify an empty string. </param
         >
         <param name="parameter">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -434,6 +478,8 @@
           <para
             >Removes all parameters and extension objects from the <see
              cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+            
 
             
 
@@ -482,6 +528,8 @@
 
           
 
+          
+
           The namespace URI of the object. </param
         >
       </Docs>
@@ -525,8 +573,12 @@
 
           
 
+          
+
           The name of the parameter. <see
            cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+          
 
           
 
@@ -536,6 +588,8 @@
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -578,6 +632,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -587,6 +643,8 @@
         </returns>
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -630,6 +688,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -644,8 +704,12 @@
 
           
 
+          
+
           The name of the parameter to remove. <see
            cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+          
 
           
 
@@ -655,6 +719,8 @@
         >
         <param name="namespaceUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

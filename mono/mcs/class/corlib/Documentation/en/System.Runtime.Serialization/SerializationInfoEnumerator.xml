@@ -44,6 +44,8 @@
 
         
 
+        
+
         . Instead of recording the values, the <see
          cref="T:System.Runtime.Serialization.SerializationInfoEnumerator" />
 
@@ -51,8 +53,12 @@
 
         
 
+        
+
          keeps pointers to the member variables of the <see
          cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+        
 
         
 
@@ -68,6 +74,8 @@
 
         
 
+        
+
          mechanism.</para
       >
     </remarks>
@@ -76,6 +84,8 @@
       <para
         >Provides a formatter-friendly mechanism for parsing the data in <see
          cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+        
 
         
 
@@ -135,6 +145,8 @@
           <para
             >To initialize the enumerator, call <see
              cref="M:System.Runtime.Serialization.SerializationInfoEnumerator.MoveNext" />
+
+            
 
             
 
@@ -217,6 +229,8 @@
           <para
             >After calling this method, the <see
              cref="P:System.Runtime.Serialization.SerializationInfoEnumerator.Current" />
+
+            
 
             
 

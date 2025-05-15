@@ -51,8 +51,12 @@
 
         
 
+        
+
          and vsprvsext use methods exposed by the <see
          cref="T:System.Runtime.InteropServices.RegistrationServices" />
+
+        
 
         
 
@@ -93,8 +97,12 @@
 
         
 
+        
+
          tool with the /regfile option to perform this task. <see
          cref="T:System.Runtime.InteropServices.RegistrationServices" />
+
+        
 
         
 
@@ -109,10 +117,14 @@
 
         
 
+        
+
          tool and the <format
          type="text/html">
           <a href="a487d61b-d166-467b-a7ca-d8b52fbff42d">Type Library Exporter (Tlbexp.exe)</a>
         </format>
+
+        
 
         
 
@@ -148,6 +160,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.InteropServices.RegistrationServices" />
+
+            
 
             
 
@@ -221,6 +235,8 @@
 
           
 
+          
+
           The type corresponding to the ProgID that is being requested. </param
         >
       </Docs>
@@ -258,6 +274,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -271,8 +289,12 @@
 
             
 
+            
+
              array containing a list of classes in <paramref
              name="assembly" />
+
+            
 
             
 
@@ -283,6 +305,8 @@
         </returns>
         <param name="assembly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -326,6 +350,8 @@
 
             
 
+            
+
              to get an assembly.</para
           >
         </remarks>
@@ -343,11 +369,15 @@
 
             
 
+            
+
              contains types that were successfully registered; otherwise false if the assembly contains no eligible types.</para
           >
         </returns>
         <param name="assembly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -362,6 +392,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Runtime.InteropServices.AssemblyRegistrationFlags" />
 
@@ -369,8 +401,12 @@
 
           
 
+          
+
            value indicating any special settings used when registering <paramref
            name="assembly" />
+
+          
 
           
 
@@ -451,11 +487,15 @@
 
             
 
+            
+
              method is not atomic and can cause unpredictable results when used in a multithreaded context. </para
           >
           <para
             >In the .NET Framework version 2.0 and later, use the <see
              cref="M:System.Runtime.InteropServices.RegistrationServices.UnregisterTypeForComClients(System.Int32)" />
+
+            
 
             
 
@@ -480,8 +520,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -496,8 +540,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Runtime.InteropServices.RegistrationClassContext" />
+
+          
 
           
 
@@ -512,8 +560,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Runtime.InteropServices.RegistrationConnectionType" />
+
+          
 
           
 
@@ -556,8 +608,12 @@
 
             
 
+            
+
             , or derives from a type marked with the <see
              cref="T:System.Runtime.InteropServices.ComImportAttribute" />
+
+            
 
             
 
@@ -576,8 +632,12 @@
 
             
 
+            
+
             , or derives from a type marked with the <see
              cref="T:System.Runtime.InteropServices.ComImportAttribute" />
+
+            
 
             
 
@@ -588,6 +648,8 @@
         </returns>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -635,6 +697,8 @@
 
           
 
+          
+
           The type to check for COM registration requirements. </param
         >
       </Docs>
@@ -671,6 +735,8 @@
 
             
 
+            
+
             . This method also calls any unregistration functions found in the assembly.</para
           >
         </remarks>
@@ -688,11 +754,15 @@
 
             
 
+            
+
              contains types that were successfully unregistered; otherwise false if the assembly contains no eligible types.</para
           >
         </returns>
         <param name="assembly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -743,6 +813,8 @@
 
             
 
+            
+
              method. </para
           >
         </summary>
@@ -753,8 +825,12 @@
 
           
 
+          
+
           The cookie value returned by a previous call to the <see
            cref="M:System.Runtime.InteropServices.RegistrationServices.RegisterTypeForComClients(System.Type,System.Runtime.InteropServices.RegistrationClassContext,System.Runtime.InteropServices.RegistrationConnectionType)" />
+
+          
 
           
 

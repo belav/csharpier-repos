@@ -31,8 +31,12 @@
 
         
 
+        
+
          is an abstract class that contains common behavior for the <see
          cref="T:System.Windows.Forms.OpenFileDialog" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          classes. It is not intended to be used directly but contains common behavior for those two classes. You cannot create an instance of <see
          cref="T:System.Windows.Forms.FileDialog" />
+
+        
 
         
 
@@ -59,8 +67,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Windows.Forms.SaveFileDialog" />
+
+        
 
         
 
@@ -70,6 +82,8 @@
       >
       <para>
         <see cref="T:System.Windows.Forms.FileDialog" />
+
+        
 
         
 
@@ -86,8 +100,12 @@
 
           
 
+          
+
           , such as <see
            cref="T:System.Windows.Forms.OpenFileDialog" />
+
+          
 
           
 
@@ -100,12 +118,16 @@
 
           
 
+          
+
           , avoid using string literals containing absolute paths. Instead, dynamically obtain the path using one or more of the techniques described in the following table.</para
         >
       </block>
       <para
         >If you want to enable users to select a folder instead of a file, use the <see
          cref="T:System.Windows.Forms.FolderBrowserDialog" />
+
+        
 
         
 
@@ -138,8 +160,12 @@
 
               
 
+              
+
                class is the most complete source for these, either through its static methods, such as <see
                cref="P:System.Environment.SystemDirectory" />
+
+              
 
               
 
@@ -152,8 +178,12 @@
 
               
 
+              
+
                method, using one of the <see
                cref="T:System.Environment.SpecialFolder" />
+
+              
 
               
 
@@ -176,8 +206,12 @@
 
               
 
+              
+
                class has static members to obtain certain paths, such as <see
                cref="P:System.Windows.Forms.Application.StartupPath" />
+
+              
 
               
 
@@ -190,6 +224,8 @@
 
               
 
+              
+
               , <see
                cref="P:System.Windows.Forms.Application.LocalUserAppDataPath" />
 
@@ -197,8 +233,12 @@
 
               
 
+              
+
               , and <see
                cref="P:System.Windows.Forms.Application.CommonAppDataPath" />
+
+              
 
               
 
@@ -214,8 +254,12 @@
 
               
 
+              
+
                method of the <see
                cref="T:System.IO.Path" />
+
+              
 
               
 
@@ -231,8 +275,12 @@
 
               
 
+              
+
                method of the <see
                cref="T:System.IO.Directory" />
+
+              
 
               
 
@@ -248,8 +296,12 @@
 
               
 
+              
+
                property of the <see
                cref="T:System.IO.DriveInfo" />
+
+              
 
               
 
@@ -272,12 +324,16 @@
 
               
 
+              
+
               . For more information, see <format
                type="text/html">
                 <a href="64090a34-8556-4904-8ea0-20efe9f8c886"
                   >Application Settings for Windows Forms</a
                 >
               </format>
+
+              
 
               
 
@@ -300,8 +356,12 @@
 
               
 
+              
+
                class has the <see
                cref="P:System.Windows.Forms.Application.CommonAppDataPath" />
+
+              
 
               
 
@@ -314,8 +374,12 @@
 
               
 
+              
+
                properties that resolve to a <see
                cref="T:Microsoft.Win32.RegistryKey" />
+
+              
 
               
 
@@ -338,8 +402,12 @@
 
               
 
+              
+
                class members such as <see
                cref="P:System.Windows.Forms.Application.UserAppDataPath" />
+
+              
 
               
 
@@ -351,6 +419,8 @@
                   >Accessing Local and Remote Data in ClickOnce Applications</a
                 >
               </format>
+
+              
 
               
 
@@ -373,10 +443,14 @@
 
               
 
+              
+
                class. For more information about globalization and localization, see the topic <format
                type="text/html">
                 <a href="9a59696b-d89b-45bd-946d-c75da4732d02">Encoding and Localization</a>
               </format>
+
+              
 
               
 
@@ -395,11 +469,15 @@
 
         
 
+        
+
          method might be used to obtain the path to the MyDocuments folder, then an application setting may be used to add a relative subdirectory portion.</para
       >
       <para
         >The <see
          cref="T:System.IO.Path" />
+
+        
 
         
 
@@ -412,8 +490,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.IO.Directory" />
+
+        
 
         
 
@@ -430,6 +512,8 @@
 
           
 
+          
+
           , then the current working directory for your application is set to the location specified in the <see
            cref="T:System.Windows.Forms.FileDialog" />
 
@@ -437,8 +521,12 @@
 
           
 
+          
+
           . To prevent this, set the <see
            cref="P:System.Windows.Forms.FileDialog.RestoreDirectory" />
+
+          
 
           
 
@@ -477,11 +565,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >If the <see
              cref="P:System.Windows.Forms.FileDialog.CheckFileExists" />
+
+            
 
             
 
@@ -494,6 +586,8 @@
 
             
 
+            
+
              property.</para
           >
           <para
@@ -504,8 +598,12 @@
 
             
 
+            
+
              property is false, the dialog box adds the first valid file name extension from the current file filter. If the current file filter contains no valid file name extensions, the dialog box adds the extension specified in the <see
              cref="P:System.Windows.Forms.FileDialog.DefaultExt" />
+
+            
 
             
 
@@ -550,6 +648,8 @@
 
             
 
+            
+
              class will have a winxp-style appearance and behavior on wiprlhext.</para
           >
           <para>On winxp, this property does not have any effect.</para>
@@ -559,6 +659,8 @@
           <para
             >Gets or sets a value indicating whether this <see
              cref="T:System.Windows.Forms.FileDialog" />
+
+            
 
             
 
@@ -592,8 +694,12 @@
 
             
 
+            
+
              and false for an inheriting <see
              cref="T:System.Windows.Forms.SaveFileDialog" />
+
+            
 
             
 
@@ -672,6 +778,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -700,8 +808,12 @@
 
             
 
+            
+
              appends an extension to the file name. The extension that is used is determined by the <see
              cref="P:System.Windows.Forms.FileDialog.Filter" />
+
+            
 
             
 
@@ -714,6 +826,8 @@
 
             
 
+            
+
              properties. If a filter is selected in the <see
              cref="T:System.Windows.Forms.FileDialog" />
 
@@ -721,8 +835,12 @@
 
             
 
+            
+
              and the filter specifies an extension, then that extension is used. If the filter selected uses a wildcard in place of the extension, then the extension specified in the <see
              cref="P:System.Windows.Forms.FileDialog.DefaultExt" />
+
+            
 
             
 
@@ -783,6 +901,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -816,8 +936,12 @@
 
             
 
+            
+
              class, this property represents the file being saved; when used from the <see
              cref="T:System.Windows.Forms.OpenFileDialog" />
+
+            
 
             
 
@@ -828,6 +952,8 @@
           <para
             >This property can only be the name of one selected file. If you want to return an array containing the names of all selected files in a multiple-selection dialog box, use <see
              cref="P:System.Windows.Forms.FileDialog.FileNames" />
+
+            
 
             
 
@@ -898,6 +1024,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -911,8 +1039,12 @@
 
             
 
+            
+
              or <ui
             >Save</ui>
+
+            
 
             
 
@@ -958,6 +1090,8 @@
 
             
 
+            
+
              property to set which filtering option is shown first to the user.</para
           >
         </remarks>
@@ -994,8 +1128,12 @@
 
             
 
+            
+
              property to set which filtering option is shown first to the user. You can also use the value of <see
              cref="P:System.Windows.Forms.FileDialog.FilterIndex" />
+
+            
 
             
 
@@ -1053,10 +1191,14 @@
 
           
 
+          
+
           The handle to the dialog box window. </param
         >
         <param name="msg">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1071,10 +1213,14 @@
 
           
 
+          
+
           Additional information about the message. </param
         >
         <param name="lparam">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1111,6 +1257,8 @@
 
             
 
+            
+
              property is typically set using one of the following sources:</para
           >
           <list type="bullet">
@@ -1121,6 +1269,8 @@
               <para
                 >A path read from a persistent source, such as an application setting, a <see
                  cref="T:Microsoft.Win32.Registry" />
+
+                
 
                 
 
@@ -1138,6 +1288,8 @@
 
                 
 
+                
+
                   method)</para
               >
             </item>
@@ -1145,6 +1297,8 @@
               <para
                 >A path related to the current application, such as its startup directory (which you can obtain using properties on the <see
                  cref="T:System.Windows.Forms.Application" />
+
+                
 
                 
 
@@ -1162,11 +1316,15 @@
 
             
 
+            
+
              class overview.</para
           >
           <para
             >On wiprlhext, if <see
              cref="P:System.Windows.Forms.FileDialog.InitialDirectory" />
+
+            
 
             
 
@@ -1228,6 +1386,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1238,8 +1398,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.CancelEventArgs" />
+
+          
 
           
 
@@ -1271,8 +1435,12 @@
 
             
 
+            
+
              property corresponds to the flags used to initialize a file dialog box using Win32. Use the properties of the <see
              cref="T:System.Windows.Forms.FileDialog" />
+
+            
 
             
 
@@ -1286,6 +1454,8 @@
           <para
             >Gets values to initialize the <see
              cref="T:System.Windows.Forms.FileDialog" />
+
+            
 
             
 
@@ -1366,8 +1536,12 @@
 
             
 
+            
+
             , and is invoked when the user of a file dialog invokes <see
              cref="M:System.Windows.Forms.CommonDialog.ShowDialog" />
+
+            
 
             
 
@@ -1383,6 +1557,8 @@
 
             
 
+            
+
              and <see
              cref="T:System.Windows.Forms.SaveFileDialog" />
 
@@ -1390,8 +1566,12 @@
 
             
 
+            
+
              an invalid file name <see
              cref="T:System.Exception" />
+
+            
 
             
 
@@ -1410,6 +1590,8 @@
         </returns>
         <param name="hWndOwner">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1446,8 +1628,12 @@
 
             
 
+            
+
              event is raised when the user clicks the <ui
             >Help</ui>
+
+            
 
             
 
@@ -1461,6 +1647,8 @@
           <para
             >Gets or sets a value indicating whether the <ui
             >Help</ui>
+
+            
 
             
 
@@ -1504,11 +1692,15 @@
 
             
 
+            
+
              property to a multi-dotted extension.</para
           >
           <para
             >If <see
              cref="P:System.Windows.Forms.FileDialog.SupportMultiDottedExtensions" />
+
+            
 
             
 
@@ -1521,8 +1713,12 @@
 
             
 
+            
+
             , derived controls such as <see
              cref="T:System.Windows.Forms.SaveFileDialog" />
+
+            
 
             
 
@@ -1608,6 +1804,8 @@
           <para
             >If the edit control contains anything but spaces when the user clicks <ui
             >OK</ui>
+
+            
 
             
 

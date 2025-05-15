@@ -24,6 +24,8 @@
 
         
 
+        
+
          control is parsed. A design-time version of the control is created on the design surface. When you switch back to source view, the design-time control code is persisted to the markup for the Web page. </para
       >
     </remarks>
@@ -32,6 +34,8 @@
       <para
         >Provides design-time support in a visual designer for the <see
          cref="T:System.Web.UI.WebControls.AdRotator" />
+
+        
 
         
 
@@ -53,6 +57,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.WebControls.AdRotatorDesigner" />
+
+            
 
             
 

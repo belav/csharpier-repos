@@ -60,11 +60,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="pattern">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -104,6 +108,8 @@
 
             
 
+            
+
              creates the error message by using the name of the data field that caused the validation failure. You can override this method in custom validation attributes to customize how errors are created or to provide a more complex message that contains parameters that you evaluate at run time. </para
           >
         </remarks>
@@ -117,6 +123,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -154,6 +162,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

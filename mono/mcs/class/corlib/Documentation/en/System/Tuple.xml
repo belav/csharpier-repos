@@ -24,8 +24,12 @@
 
         
 
+        
+
          property of a <see
          cref="T:System.Tuple`8" />
+
+        
 
         
 
@@ -53,8 +57,12 @@
 
             
 
+            
+
              method has a single parameter that lets you supply one value to the method that the thread executes at startup time. If you supply a <see
              cref="T:System.Tuple`3" />
+
+            
 
             
 
@@ -67,6 +75,8 @@
       <para
         >The <see
          cref="T:System.Tuple" />
+
+        
 
         
 
@@ -86,8 +96,12 @@
 
         
 
+        
+
          helper methods directly support the creation of tuple objects that have from one to eight components (that is, singletons through octuples). Although there is no practical limit to the number of components a tuple may have, helper methods are not available to create a tuple with nine or more components. To create such a tuple, you must call the <see
          cref="M:System.Tuple`8.#ctor(`0,`1,`2,`3,`4,`5,`6,`7)" />
+
+        
 
         
 

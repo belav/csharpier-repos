@@ -25,6 +25,8 @@
 
         
 
+        
+
          instances.</para
       >
     </summary>
@@ -64,8 +66,12 @@
 
             
 
+            
+
             , where the inner Task represents work done as part of the outer <see
              cref="T:System.Threading.Tasks.Task`1" />
+
+            
 
             
 
@@ -84,8 +90,12 @@
 
             
 
+            
+
              that represents the asynchronous operation of a <see
              cref="M:System.Threading.Tasks.TaskScheduler.TryExecuteTaskInline(System.Threading.Tasks.Task,System.Boolean)" />
+
+            
 
             
 
@@ -100,6 +110,8 @@
         </returns>
         <param name="task">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -146,8 +158,12 @@
 
             
 
+            
+
              from a <see
              cref="T:System.Threading.Tasks.Task" />
+
+            
 
             
 
@@ -160,6 +176,8 @@
 
             
 
+            
+
              represents work done as part of the outer <see
              cref="T:System.Threading.Tasks.Task" />
 
@@ -167,8 +185,12 @@
 
             
 
+            
+
             . However, doing so results in a Task&lt;Task&lt;T&gt;&gt; (C#) or Task (Of Task(Of T)) (Visual Basic), which, if not dealt with carefully, could produce unexpected behavior. Unwrap solves this problem by creating a proxy <see
              cref="T:System.Threading.Tasks.Task`1" />
+
+            
 
             
 
@@ -187,6 +209,8 @@
 
             
 
+            
+
              that represents the asynchronous operation of a Task&lt;Task&lt;T&gt;&gt; (C#) or Task (Of Task(Of T)) (Visual Basic).</para
           >
         </summary>
@@ -195,6 +219,8 @@
           <para
             >A <see
              cref="T:System.Threading.Tasks.Task" />
+
+            
 
             
 
@@ -210,10 +236,14 @@
 
           
 
+          
+
           The Task&lt;Task&lt;T&gt;&gt; (C#) or Task (Of Task(Of T)) (Visual Basic) to unwrap.</param
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

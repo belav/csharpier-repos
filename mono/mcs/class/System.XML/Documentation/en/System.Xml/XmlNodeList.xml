@@ -36,6 +36,8 @@
 
         
 
+        
+
          collection was created from are immediately reflected in the nodes returned by the XmlNodeList properties and methods. XmlNodeList supports iteration and indexed access.</para
       >
       <para>XmlNodeList is returned by the following properties and methods.</para>
@@ -48,12 +50,16 @@
 
             
 
+            
+
              - Returns an XmlNodeList containing all the children of the node.</para
           >
         </item>
         <item>
           <para>
             <see cref="M:System.Xml.XmlNode.SelectNodes(System.String)" />
+
+            
 
             
 
@@ -71,8 +77,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Xml.XmlElement" />
+
+            
 
             
 
@@ -110,6 +120,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.XmlNodeList" />
+
+            
 
             
 
@@ -209,8 +221,12 @@
 
             
 
+            
+
              with the specified index in the collection. If <paramref
              name="index" />
+
+            
 
             
 
@@ -221,6 +237,8 @@
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

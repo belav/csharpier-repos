@@ -28,8 +28,12 @@
 
         
 
+        
+
          class helps manipulate value types in their fundamental form, as a series of bytes. A byte is defined as an 8-bit unsigned integer. The <see
          cref="T:System.BitConverter" />
+
+        
 
         
 
@@ -238,8 +242,12 @@
 
         
 
+        
+
          methods to round-trip data, make sure that the <see
          cref="Overload:System.BitConverter.GetBytes" />
+
+        
 
         
 
@@ -252,10 +260,14 @@
 
         
 
+        
+
          method can result in a value that is different from the original. For more information, see the entry <see
          cref="http://go.microsoft.com/fwlink/?LinkId=186999"
           >Working with Signed Non-Decimal and Bitwise Values</see
         >
+
+        
 
         
 
@@ -272,8 +284,12 @@
 
         
 
+        
+
          method overloads (as well as the order of bits in the integer returned by the <see
          cref="M:System.BitConverter.DoubleToInt64Bits(System.Double)" />
+
+        
 
         
 
@@ -286,8 +302,12 @@
 
         
 
+        
+
          method) depends on whether the computer architecture is little-endian or big-endian. Similarly, the order of bytes in the array and returned by the ToIntegerValue methods and the <see
          cref="M:System.BitConverter.ToChar(System.Byte[],System.Int32)" />
+
+        
 
         
 
@@ -300,8 +320,12 @@
 
         
 
+        
+
          property, which returns true on little-endian systems and false on big-endian systems. On little-endian systems, lower-order bytes precede higher-order bytes. On big-endian system, higher-order bytes precede lower-order bytes. The following table illustrates the difference in the byte arrays that result from passing the integer 1,234,567,890 (0x499602D2) to the <see
          cref="M:System.BitConverter.GetBytes(System.Int32)" />
+
+        
 
         
 
@@ -345,8 +369,12 @@
 
             
 
+            
+
              method to convert the data to network byte order and the <see
              cref="M:System.Net.IPAddress.NetworkToHostOrder(System.Int32)" />
+
+            
 
             
 
@@ -392,6 +420,8 @@
 
             
 
+            
+
              method depends on whether the computer architecture is little-endian or big-endian.</para
           >
         </remarks>
@@ -409,11 +439,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -458,6 +492,8 @@
 
           
 
+          
+
           A Boolean value. </param
         >
       </Docs>
@@ -491,6 +527,8 @@
 
             
 
+            
+
              method depends on whether the computer architecture is little-endian or big-endian.</para
           >
         </remarks>
@@ -504,6 +542,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -542,6 +582,8 @@
 
             
 
+            
+
              method depends on whether the computer architecture is little-endian or big-endian.</para
           >
         </remarks>
@@ -555,6 +597,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -593,6 +637,8 @@
 
             
 
+            
+
              method depends on whether the computer architecture is little-endian or big-endian.</para
           >
         </remarks>
@@ -606,6 +652,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -644,6 +692,8 @@
 
             
 
+            
+
              method depends on whether the computer architecture is little-endian or big-endian.</para
           >
         </remarks>
@@ -657,6 +707,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -695,6 +747,8 @@
 
             
 
+            
+
              method depends on whether the computer architecture is little-endian or big-endian.</para
           >
         </remarks>
@@ -708,6 +762,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -746,6 +802,8 @@
 
             
 
+            
+
              method depends on whether the computer architecture is little-endian or big-endian.</para
           >
         </remarks>
@@ -759,6 +817,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -802,6 +862,8 @@
 
             
 
+            
+
              method depends on whether the computer architecture is little-endian or big-endian.</para
           >
         </remarks>
@@ -815,6 +877,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -858,6 +922,8 @@
 
             
 
+            
+
              method depends on whether the computer architecture is little-endian or big-endian.</para
           >
         </remarks>
@@ -871,6 +937,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -914,6 +982,8 @@
 
             
 
+            
+
              method depends on whether the computer architecture is little-endian or big-endian.</para
           >
         </remarks>
@@ -927,6 +997,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -965,8 +1037,12 @@
 
             
 
+            
+
              is an integer that is returned by the <see
              cref="M:System.BitConverter.DoubleToInt64Bits(System.Double)" />
+
+            
 
             
 
@@ -989,11 +1065,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1066,8 +1146,12 @@
 
             
 
+            
+
              in <paramref
              name="value" />
+
+            
 
             
 
@@ -1083,6 +1167,8 @@
 
           
 
+          
+
           An array of bytes. </param
         >
         <param name="startIndex">
@@ -1092,8 +1178,12 @@
 
           
 
+          
+
           The starting position within <paramref
            name="value" />
+
+          
 
           
 
@@ -1136,8 +1226,12 @@
 
             
 
+            
+
              method converts the bytes from index <paramref
              name="startIndex" />
+
+            
 
             
 
@@ -1150,6 +1244,8 @@
 
             
 
+            
+
              + 1 to a <see
              cref="T:System.Char" />
 
@@ -1157,8 +1253,12 @@
 
             
 
+            
+
              value. The order of bytes in the array must reflect the endianness of the computer system's architecture; for more information, see the Remarks section of the <see
              cref="T:System.BitConverter" />
+
+            
 
             
 
@@ -1181,11 +1281,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1200,8 +1304,12 @@
 
           
 
+          
+
           The starting position within <paramref
            name="value" />
+
+          
 
           
 
@@ -1244,8 +1352,12 @@
 
             
 
+            
+
              method converts the bytes from index <paramref
              name="startIndex" />
+
+            
 
             
 
@@ -1258,6 +1370,8 @@
 
             
 
+            
+
              + 7 to a <see
              cref="T:System.Double" />
 
@@ -1265,8 +1379,12 @@
 
             
 
+            
+
              value. The order of bytes in the array must reflect the endianness of the computer system's architecture; for more information, see the Remarks section of the <see
              cref="T:System.BitConverter" />
+
+            
 
             
 
@@ -1289,11 +1407,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1308,8 +1430,12 @@
 
           
 
+          
+
           The starting position within <paramref
            name="value" />
+
+          
 
           
 
@@ -1352,8 +1478,12 @@
 
             
 
+            
+
              method converts the bytes from index <paramref
              name="startIndex" />
+
+            
 
             
 
@@ -1366,6 +1496,8 @@
 
             
 
+            
+
              + 1 to an <see
              cref="T:System.Int16" />
 
@@ -1373,8 +1505,12 @@
 
             
 
+            
+
              value. The order of bytes in the array must reflect the endianness of the computer system's architecture; for more information, see the Remarks section of the <see
              cref="T:System.BitConverter" />
+
+            
 
             
 
@@ -1397,11 +1533,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1416,8 +1556,12 @@
 
           
 
+          
+
           The starting position within <paramref
            name="value" />
+
+          
 
           
 
@@ -1460,8 +1604,12 @@
 
             
 
+            
+
              method converts the bytes from index <paramref
              name="startIndex" />
+
+            
 
             
 
@@ -1474,6 +1622,8 @@
 
             
 
+            
+
              + 3 to an <see
              cref="T:System.Int32" />
 
@@ -1481,8 +1631,12 @@
 
             
 
+            
+
              value. The order of bytes in the array must reflect the endianness of the computer system's architecture; for more information, see the Remarks section of <see
              cref="T:System.BitConverter" />
+
+            
 
             
 
@@ -1505,11 +1659,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1524,8 +1682,12 @@
 
           
 
+          
+
           The starting position within <paramref
            name="value" />
+
+          
 
           
 
@@ -1568,8 +1730,12 @@
 
             
 
+            
+
              method converts the bytes from index <paramref
              name="startIndex" />
+
+            
 
             
 
@@ -1582,6 +1748,8 @@
 
             
 
+            
+
              + 7 to a <see
              cref="T:System.Int64" />
 
@@ -1589,8 +1757,12 @@
 
             
 
+            
+
              value. The order of bytes in the array must reflect the endianness of the computer system's architecture; for more information, see the Remarks section of the <see
              cref="T:System.BitConverter" />
+
+            
 
             
 
@@ -1613,11 +1785,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1632,8 +1808,12 @@
 
           
 
+          
+
           The starting position within <paramref
            name="value" />
+
+          
 
           
 
@@ -1676,8 +1856,12 @@
 
             
 
+            
+
              method converts the bytes from index <paramref
              name="startIndex" />
+
+            
 
             
 
@@ -1690,6 +1874,8 @@
 
             
 
+            
+
              + 3 to a <see
              cref="T:System.Single" />
 
@@ -1697,8 +1883,12 @@
 
             
 
+            
+
              value. The order of bytes in the array must reflect the endianness of the computer system's architecture; for more information, see the Remarks section of <see
              cref="T:System.BitConverter" />
+
+            
 
             
 
@@ -1721,11 +1911,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1740,8 +1934,12 @@
 
           
 
+          
+
           The starting position within <paramref
            name="value" />
+
+          
 
           
 
@@ -1780,8 +1978,12 @@
 
             
 
+            
+
              are converted. The order of hexadecimal strings returned by the <see
              cref="M:System.BitConverter.ToString(System.Byte[])" />
+
+            
 
             
 
@@ -1804,11 +2006,15 @@
 
             
 
+            
+
             ; for example, "7F-2C-4A-00".</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1851,8 +2057,12 @@
 
             
 
+            
+
              to the end of the array are converted. The order of hexadecimal strings returned by the <see
              cref="M:System.BitConverter.ToString(System.Byte[])" />
+
+            
 
             
 
@@ -1875,11 +2085,15 @@
 
             
 
+            
+
             ; for example, "7F-2C-4A-00".</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1894,8 +2108,12 @@
 
           
 
+          
+
           The starting position within <paramref
            name="value" />
+
+          
 
           
 
@@ -1939,8 +2157,12 @@
 
             
 
+            
+
              elements from array position <paramref
              name="startIndex" />
+
+            
 
             
 
@@ -1953,8 +2175,12 @@
 
             
 
+            
+
              equals zero, the method returns <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -1965,6 +2191,8 @@
           <para
             >The order of hexadecimal strings returned by the <see
              cref="M:System.BitConverter.ToString(System.Byte[])" />
+
+            
 
             
 
@@ -1987,11 +2215,15 @@
 
             
 
+            
+
             ; for example, "7F-2C-4A-00".</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2006,8 +2238,12 @@
 
           
 
+          
+
           The starting position within <paramref
            name="value" />
+
+          
 
           
 
@@ -2022,8 +2258,12 @@
 
           
 
+          
+
           The number of array elements in <paramref
            name="value" />
+
+          
 
           
 
@@ -2071,8 +2311,12 @@
 
             
 
+            
+
              method converts the bytes from index <paramref
              name="startIndex" />
+
+            
 
             
 
@@ -2085,6 +2329,8 @@
 
             
 
+            
+
              + 1 to a <see
              cref="T:System.UInt16" />
 
@@ -2092,8 +2338,12 @@
 
             
 
+            
+
              value. The order of bytes in the array must reflect the endianness of the computer system's architecture; for more information, see the Remarks section of the <see
              cref="T:System.BitConverter" />
+
+            
 
             
 
@@ -2116,11 +2366,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2135,8 +2389,12 @@
 
           
 
+          
+
           The starting position within <paramref
            name="value" />
+
+          
 
           
 
@@ -2184,8 +2442,12 @@
 
             
 
+            
+
              method converts the bytes from index <paramref
              name="startIndex" />
+
+            
 
             
 
@@ -2198,6 +2460,8 @@
 
             
 
+            
+
              + 3 to a <see
              cref="T:System.UInt32" />
 
@@ -2205,8 +2469,12 @@
 
             
 
+            
+
              value. The order of bytes in the array must reflect the endianness of the computer system's architecture; for more information, see the Remarks section of the <see
              cref="T:System.BitConverter" />
+
+            
 
             
 
@@ -2229,11 +2497,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2248,8 +2520,12 @@
 
           
 
+          
+
           The starting position within <paramref
            name="value" />
+
+          
 
           
 
@@ -2297,8 +2573,12 @@
 
             
 
+            
+
              method converts the bytes from index <paramref
              name="startIndex" />
+
+            
 
             
 
@@ -2311,6 +2591,8 @@
 
             
 
+            
+
              + 7 to a <see
              cref="T:System.UInt64" />
 
@@ -2318,8 +2600,12 @@
 
             
 
+            
+
              value. The order of bytes in the array must reflect the endianness of the computer system's architecture; for more information, see the Remarks section of the <see
              cref="T:System.BitConverter" />
+
+            
 
             
 
@@ -2342,11 +2628,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2361,8 +2651,12 @@
 
           
 
+          
+
           The starting position within <paramref
            name="value" />
+
+          
 
           
 

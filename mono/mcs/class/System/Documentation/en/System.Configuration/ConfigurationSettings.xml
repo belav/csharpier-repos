@@ -33,12 +33,16 @@
 
         
 
+        
+
          type is the recommended method for reading configuration information at runtime for versions 1.0 and 1.1 applications. </para
       >
       <block subset="none" type="note">
         <para
           >The <see
            cref="T:System.Configuration.ConfigurationSettings" />
+
+          
 
           
 
@@ -51,8 +55,12 @@
 
           
 
+          
+
            class or <see
            cref="T:System.Web.Configuration.WebConfigurationManager" />
+
+          
 
           
 
@@ -100,6 +108,8 @@
 
           
 
+          
+
            containing values of the keys contained in the &lt;appSettings&gt; element of the config file.</value
         >
         <remarks>
@@ -115,6 +125,8 @@
 
               
 
+              
+
                class provides backward compatibility only. You should use the <see
                cref="T:System.Configuration.ConfigurationManager" />
 
@@ -122,8 +134,12 @@
 
               
 
+              
+
                class or <see
                cref="T:System.Web.Configuration.WebConfigurationManager" />
+
+              
 
               
 
@@ -138,6 +154,8 @@
           <para
             >Gets a read-only <see
              cref="T:System.Collections.Specialized.NameValueCollection" />
+
+            
 
             
 
@@ -186,6 +204,8 @@
 
             
 
+            
+
              object for the passed configuration section name and path.</para
           >
         </summary>
@@ -194,6 +214,8 @@
           <para
             >The <see
              cref="T:System.Configuration.ConfigurationSection" />
+
+            
 
             
 
@@ -210,8 +232,12 @@
 
               
 
+              
+
                class provides backward compatibility only. You should use the <see
                cref="T:System.Configuration.ConfigurationManager" />
+
+              
 
               
 
@@ -224,12 +250,16 @@
 
               
 
+              
+
                class instead.</para
             >
           </block>
         </returns>
         <param name="sectionName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

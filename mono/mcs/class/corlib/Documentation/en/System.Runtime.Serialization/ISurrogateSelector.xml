@@ -30,6 +30,8 @@
 
         
 
+        
+
          interface to assist formatters in selecting surrogates to delegate to the serialization or deserialization of other objects.</para
       >
     </remarks>
@@ -71,6 +73,8 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Security.Permissions.SecurityPermission" />
 
@@ -78,8 +82,12 @@
 
             
 
+            
+
              with the <see
              cref="F:System.Security.Permissions.SecurityPermissionFlag.SerializationFormatter" />
+
+            
 
             
 
@@ -98,11 +106,15 @@
 
             
 
+            
+
              for surrogates to examine if the current instance does not have a surrogate for the specified type and assembly in the specified context.</para
           >
         </summary>
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -142,6 +154,8 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Security.Permissions.SecurityPermission" />
 
@@ -149,8 +163,12 @@
 
             
 
+            
+
              with the <see
              cref="F:System.Security.Permissions.SecurityPermissionFlag.SerializationFormatter" />
+
+            
 
             
 

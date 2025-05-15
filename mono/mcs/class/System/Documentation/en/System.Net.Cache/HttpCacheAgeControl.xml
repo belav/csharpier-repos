@@ -25,6 +25,8 @@
 
         
 
+        
+
          class to configure the time values for cache policies.</para
       >
     </remarks>
@@ -33,6 +35,8 @@
       <para
         >Specifies the meaning of time values that control caching behavior for resources obtained using <see
          cref="T:System.Net.HttpWebRequest" />
+
+        
 
         
 
@@ -90,8 +94,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.Cache.HttpRequestCachePolicy.MaxStale" />
+
+            
 
             
 
@@ -126,8 +134,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.Cache.HttpRequestCachePolicy.MinFresh" />
+
+            
 
             
 
@@ -202,6 +214,8 @@
           <para
             >For internal use only. The Framework will throw an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 

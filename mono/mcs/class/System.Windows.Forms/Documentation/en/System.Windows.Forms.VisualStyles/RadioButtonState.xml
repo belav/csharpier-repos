@@ -20,8 +20,12 @@
 
         
 
+        
+
          values correspond to the states of the <see
          cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+
+        
 
         
 
@@ -34,6 +38,8 @@
 
         
 
+        
+
          class. The <see
          cref="T:System.Windows.Forms.VisualStyles.RadioButtonState" />
 
@@ -41,8 +47,12 @@
 
         
 
+        
+
          values are also used as an argument in the <see
          cref="Overload:System.Windows.Forms.RadioButtonRenderer.DrawRadioButton" />
+
+        
 
         
 

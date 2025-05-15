@@ -25,8 +25,12 @@
 
         
 
+        
+
          method and passing in the appropriate <see
          cref="T:System.Windows.Forms.ControlStyles" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          bit is set to true, the window message WM_ERASEBKGND is ignored, and both <see
          cref="M:System.Windows.Forms.Control.OnPaintBackground(System.Windows.Forms.PaintEventArgs)" />
+
+        
 
         
 
@@ -57,6 +65,8 @@
 
         
 
+        
+
          methods are called directly from the window message WM_PAINT. This generally reduces flicker unless other controls send the window message WM_ERASEBKGND to the control. You might send the window message WM_ERASEBKGRND to achieve a pseudo-transparent effect similar to <see
          cref="F:System.Windows.Forms.ControlStyles.SupportsTransparentBackColor" />
 
@@ -64,8 +74,12 @@
 
         
 
+        
+
         ; for example, a <see
          cref="T:System.Windows.Forms.ToolBar" />
+
+        
 
         
 
@@ -82,6 +96,8 @@
 
         
 
+        
+
          and <see
          cref="F:System.Windows.Forms.ControlStyles.AllPaintingInWmPaint" />
 
@@ -89,8 +105,12 @@
 
         
 
+        
+
          bits to true. However the preferred method for enabling double buffering, which yields the same result, is to set the <see
          cref="P:System.Windows.Forms.Control.DoubleBuffered" />
+
+        
 
         
 
@@ -106,6 +126,8 @@
 
         
 
+        
+
          bit is set to true, and the <see
          cref="P:System.Windows.Forms.Control.BackColor" />
 
@@ -113,8 +135,12 @@
 
         
 
+        
+
          is set to a color whose alpha component is less than 255, <see
          cref="M:System.Windows.Forms.Control.OnPaintBackground(System.Windows.Forms.PaintEventArgs)" />
+
+        
 
         
 
@@ -133,8 +159,12 @@
 
         
 
+        
+
          bit is set to true, the following methods are still called: <see
          cref="M:System.Windows.Forms.Control.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
+
+        
 
         
 
@@ -147,8 +177,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Windows.Forms.Control.OnMouseEnter(System.EventArgs)" />
+
+        
 
         
 
@@ -161,8 +195,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Windows.Forms.Control.OnMouseHover(System.EventArgs)" />
+
+        
 
         
 
@@ -175,8 +213,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Windows.Forms.Control.OnMouseWheel(System.Windows.Forms.MouseEventArgs)" />
+
+        
 
         
 
@@ -192,6 +234,8 @@
 
         
 
+        
+
          bit is set to true the <see
          cref="M:System.Windows.Forms.Control.OnClick(System.EventArgs)" />
 
@@ -199,8 +243,12 @@
 
         
 
+        
+
          method is called and it raises the <see
          cref="E:System.Windows.Forms.Control.Click" />
+
+        
 
         
 
@@ -213,8 +261,12 @@
 
         
 
+        
+
          and <see
          cref="F:System.Windows.Forms.ControlStyles.StandardDoubleClick" />
+
+        
 
         
 
@@ -227,8 +279,12 @@
 
         
 
+        
+
          event. Then the <see
          cref="M:System.Windows.Forms.Control.OnDoubleClick(System.EventArgs)" />
+
+        
 
         
 
@@ -241,8 +297,12 @@
 
         
 
+        
+
          event. However, the control can call <see
          cref="M:System.Windows.Forms.Control.OnClick(System.EventArgs)" />
+
+        
 
         
 
@@ -255,8 +315,12 @@
 
         
 
+        
+
          directly regardless of the <see
          cref="F:System.Windows.Forms.ControlStyles.StandardClick" />
+
+        
 
         
 
@@ -269,6 +333,8 @@
 
         
 
+        
+
          bit values. For more information on control click and double click behaviors, see the <see
          cref="E:System.Windows.Forms.Control.Click" />
 
@@ -276,8 +342,12 @@
 
         
 
+        
+
          and <see
          cref="E:System.Windows.Forms.Control.DoubleClick" />
+
+        
 
         
 
@@ -293,8 +363,12 @@
 
         
 
+        
+
          bit is set and there is a value in the control's Text property, the value of that control's Text property determines the control's default Active Accessibility name and shortcut key. Otherwise, the text of the preceding <see
          cref="T:System.Windows.Forms.Label" />
+
+        
 
         
 
@@ -307,8 +381,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.ComboBox" />
+
+        
 
         
 
@@ -340,6 +418,8 @@
 
             
 
+            
+
              bit is set to true.</para
           >
         </summary>
@@ -361,6 +441,8 @@
           <para
             >If true, the control keeps a copy of the text rather than getting it from the <see
              cref="P:System.Windows.Forms.Control.Handle" />
+
+            
 
             
 
@@ -409,6 +491,8 @@
 
             
 
+            
+
              to true, you should also set <see
              cref="F:System.Windows.Forms.ControlStyles.UserPaint" />
 
@@ -416,8 +500,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Windows.Forms.ControlStyles.AllPaintingInWmPaint" />
+
+            
 
             
 
@@ -454,6 +542,8 @@
 
             
 
+            
+
              method is called for every message sent to the control's <see
              cref="M:System.Windows.Forms.Control.WndProc(System.Windows.Forms.Message@)" />
 
@@ -461,8 +551,12 @@
 
             
 
+            
+
             . This style defaults to false. <see
              cref="F:System.Windows.Forms.ControlStyles.EnableNotifyMessage" />
+
+            
 
             
 
@@ -494,8 +588,12 @@
 
             
 
+            
+
             , the control's <see
              cref="P:System.Windows.Forms.Control.Height" />
+
+            
 
             
 
@@ -527,8 +625,12 @@
 
             
 
+            
+
             , the control's <see
              cref="P:System.Windows.Forms.Control.Width" />
+
+            
 
             
 
@@ -573,6 +675,8 @@
           <para
             >If true, the control is first drawn to a buffer rather than directly to the screen, which can reduce flicker. If you set this property to true, you should also set the <see
              cref="F:System.Windows.Forms.ControlStyles.AllPaintingInWmPaint" />
+
+            
 
             
 
@@ -637,6 +741,8 @@
 
             
 
+            
+
              behavior.</para
           >
         </summary>
@@ -663,8 +769,12 @@
 
             
 
+            
+
              behavior. This style is ignored if the <see
              cref="F:System.Windows.Forms.ControlStyles.StandardClick" />
+
+            
 
             
 
@@ -696,6 +806,8 @@
 
             
 
+            
+
              with an alpha component of less than 255 to simulate transparency. Transparency will be simulated only if the <see
              cref="F:System.Windows.Forms.ControlStyles.UserPaint" />
 
@@ -703,8 +815,12 @@
 
             
 
+            
+
              bit is set to true and the parent control is derived from <see
              cref="T:System.Windows.Forms.Control" />
+
+            
 
             
 
@@ -753,8 +869,12 @@
 
             
 
+            
+
              event is not raised. This style only applies to classes derived from <see
              cref="T:System.Windows.Forms.Control" />
+
+            
 
             
 

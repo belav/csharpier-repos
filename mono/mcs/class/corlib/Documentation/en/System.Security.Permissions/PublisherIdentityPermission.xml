@@ -46,8 +46,12 @@
 
           
 
+          
+
            permission state value. Starting with the .NET Framework version 2.0, identity permissions can have any permission state value. This means that in 2.0 and later versions, identity permissions have the same behavior as permissions that implement the <see
            cref="T:System.Security.Permissions.IUnrestrictedPermission" />
+
+          
 
           
 
@@ -66,8 +70,12 @@
 
           
 
+          
+
            evidence. Unless your computer has a custom code group based on the <see
            cref="T:System.Security.Policy.PublisherMembershipCondition" />
+
+          
 
           
 
@@ -80,10 +88,14 @@
 
           
 
+          
+
            evidence for code access security. For more information about how to configure this option and which applications can use it, see the <format
            type="text/html">
             <a href="7d208f50-e8d5-4a42-bc1a-1cf3590706a8">&lt;generatePublisherEvidence&gt;</a>
           </format>
+
+          
 
           
 
@@ -136,11 +148,15 @@
 
             
 
+            
+
              class with the specified Authenticode X.509v3 certificate.</para
           >
         </summary>
         <param name="certificate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -182,8 +198,12 @@
 
               
 
+              
+
                permission state value. Starting with the .NET Framework version 2.0, identity permissions can have any permission state value. This means that in 2.0 and later versions, identity permissions have the same behavior as permissions that implement the <see
                cref="T:System.Security.Permissions.IUnrestrictedPermission" />
+
+              
 
               
 
@@ -204,8 +224,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Security.Permissions.PermissionState" />
+
+            
 
             
 
@@ -221,8 +245,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -325,6 +353,8 @@
 
           
 
+          
+
           The XML encoding to use to reconstruct the permission. </param
         >
       </Docs>
@@ -361,8 +391,12 @@
 
             
 
+            
+
              only supports set operations (<see
              cref="M:System.Security.Permissions.PublisherIdentityPermission.IsSubsetOf(System.Security.IPermission)" />
+
+            
 
             
 
@@ -375,8 +409,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Security.Permissions.PublisherIdentityPermission.Union(System.Security.IPermission)" />
+
+            
 
             
 
@@ -395,6 +433,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -436,8 +476,12 @@
 
             
 
+            
+
              supports set operations (<see
              cref="M:System.Security.Permissions.PublisherIdentityPermission.IsSubsetOf(System.Security.IPermission)" />
+
+            
 
             
 
@@ -450,8 +494,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Security.Permissions.PublisherIdentityPermission.Union(System.Security.IPermission)" />
+
+            
 
             
 
@@ -470,6 +518,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -564,11 +614,15 @@
 
             
 
+            
+
              method is a permission that represents all the operations represented by both the current permission and the specified permission. Any demand that passes either permission passes their union.</para
           >
           <para
             >The <see
              cref="T:System.Security.Permissions.PublisherIdentityPermission" />
+
+            
 
             
 
@@ -581,6 +635,8 @@
 
             
 
+            
+
             , <see
              cref="M:System.Security.Permissions.PublisherIdentityPermission.Intersect(System.Security.IPermission)" />
 
@@ -588,8 +644,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Security.Permissions.PublisherIdentityPermission.Union(System.Security.IPermission)" />
+
+            
 
             
 
@@ -608,6 +668,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

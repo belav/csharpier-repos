@@ -21,11 +21,15 @@
 
         
 
+        
+
          namespace contains the health-event types responsible for packaging application health-status data and the provider types responsible for processing this data. It also contains supporting types that help during the management of health events.</para
       >
       <para
         >The <see
          cref="T:System.Web.Management.WebBaseEvent" />
+
+        
 
         
 
@@ -38,12 +42,16 @@
 
         
 
+        
+
          class to obtain application information that is available to its derived class.</para
       >
       <block subset="none" type="note">
         <para
           >In most cases you will be able to use the ASP.NET health-monitoring types as implemented, and you will control the health-monitoring system by specifying values in the &lt;healthMonitoring&gt; configuration section. You can also derive from the health-monitoring types to create your own custom events and providers. For an example of deriving from the <see
            cref="T:System.Web.Management.WebBaseEvent" />
+
+          
 
           
 
@@ -84,6 +92,8 @@
 
             
 
+            
+
              class, but you can call this constructor when you implement your own event type that inherits from this class.</para
           >
         </remarks>
@@ -97,11 +107,15 @@
 
             
 
+            
+
              class using the supplied parameters.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -141,6 +155,8 @@
 
             
 
+            
+
              class, but you can call this constructor when you implement your own event type that inherits from this class.</para
           >
         </remarks>
@@ -154,11 +170,15 @@
 
             
 
+            
+
              class using the supplied parameters.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -194,6 +214,8 @@
 
             
 
+            
+
              object that contains information about the current application being monitored.</para
           >
         </summary>
@@ -221,6 +243,8 @@
 
             
 
+            
+
              value.</para
           >
           <block subset="none" type="note">
@@ -232,8 +256,12 @@
 
               
 
+              
+
                class, the event code you specify for your custom event must be greater than <see
                cref="F:System.Web.Management.WebEventCodes.WebExtendedBase" />
+
+              
 
               
 
@@ -393,8 +421,12 @@
 
             
 
+            
+
              method provides a uniform format for event information, which is useful if the event data must be logged and later presented to the user. It is called internally when the provider invokes one of the <see
              cref="Overload:System.Web.Management.WebBaseEvent.ToString" />
+
+            
 
             
 
@@ -411,8 +443,12 @@
 
               
 
+              
+
                method rather than the <see
                cref="Overload:System.Web.Management.WebBaseEvent.ToString" />
+
+              
 
               
 
@@ -433,8 +469,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Management.WebEventFormatter" />
+
+          
 
           
 
@@ -461,6 +501,8 @@
           <para
             >This property describes the meaning of the <see
              cref="T:System.Web.Management.WebEventCodes" />
+
+            
 
             
 
@@ -553,6 +595,8 @@
 
             
 
+            
+
              method is generally invoked by the provider that processes the event. The method ensures that the standard <see
              cref="T:System.Web.Management.WebApplicationInformation" />
 
@@ -560,8 +604,12 @@
 
             
 
+            
+
              object is provided with the event-specific data. It formats event information by calling the event-specific <see
              cref="M:System.Web.Management.WebBaseEvent.FormatCustomEventDetails(System.Web.Management.WebEventFormatter)" />
+
+            
 
             
 
@@ -578,8 +626,12 @@
 
               
 
+              
+
                method rather than the <see
                cref="Overload:System.Web.Management.WebBaseEvent.ToString" />
+
+              
 
               
 
@@ -629,8 +681,12 @@
 
             
 
+            
+
              method is generally invoked by the provider that processes the event. It formats event information by calling the event-specific <see
              cref="M:System.Web.Management.WebBaseEvent.FormatCustomEventDetails(System.Web.Management.WebEventFormatter)" />
+
+            
 
             
 
@@ -643,8 +699,12 @@
 
             
 
+            
+
              is true, the standard <see
              cref="T:System.Web.Management.WebApplicationInformation" />
+
+            
 
             
 
@@ -661,8 +721,12 @@
 
               
 
+              
+
                method rather than the <see
                cref="Overload:System.Web.Management.WebBaseEvent.ToString" />
+
+              
 
               
 

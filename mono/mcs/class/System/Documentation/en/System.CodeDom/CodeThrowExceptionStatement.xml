@@ -40,8 +40,12 @@
 
         
 
+        
+
          can represent a statement that throws an exception. The expression should be, or evaluate to, a reference to an instance of a type that derives from the <see
          cref="T:System.Exception" />
+
+        
 
         
 
@@ -52,6 +56,8 @@
       <para
         >The <see
          cref="P:System.CodeDom.CodeThrowExceptionStatement.ToThrow" />
+
+        
 
         
 
@@ -87,6 +93,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeThrowExceptionStatement" />
+
+            
 
             
 
@@ -128,6 +136,8 @@
 
             
 
+            
+
              class with the specified exception type instance.</para
           >
         </summary>
@@ -138,8 +148,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 

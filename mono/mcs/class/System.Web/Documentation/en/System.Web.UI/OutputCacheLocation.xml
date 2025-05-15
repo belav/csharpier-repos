@@ -24,6 +24,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -52,6 +54,8 @@
 
             
 
+            
+
              enumeration value.</para
           >
         </summary>
@@ -75,6 +79,8 @@
           <para
             >The output cache is located on the browser client where the request originated. This value corresponds to the <see
              cref="F:System.Web.HttpCacheability.Private" />
+
+            
 
             
 
@@ -127,6 +133,8 @@
 
             
 
+            
+
              enumeration value.</para
           >
         </summary>
@@ -150,6 +158,8 @@
           <para
             >The output cache is located on the Web server where the request was processed. This value corresponds to the <see
              cref="F:System.Web.HttpCacheability.Server" />
+
+            
 
             
 
@@ -183,8 +193,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Web.HttpCacheability.Server" />
+
+            
 
             
 

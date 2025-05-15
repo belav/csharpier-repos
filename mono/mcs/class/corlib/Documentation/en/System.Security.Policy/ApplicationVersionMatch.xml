@@ -30,8 +30,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Security.Policy.ApplicationTrustCollection.Find(System.ApplicationIdentity,System.Security.Policy.ApplicationVersionMatch)" />
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
          can act either on all versions of an application or on the exact version. The <see
          cref="T:System.Security.Policy.ApplicationVersionMatch" />
+
+        
 
         
 

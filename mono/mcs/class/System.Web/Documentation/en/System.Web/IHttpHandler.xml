@@ -21,6 +21,8 @@
 
         
 
+        
+
          interface (a marker interface with no methods).</para
       >
     </remarks>
@@ -48,8 +50,12 @@
 
             
 
+            
+
              property to true or false by code you provide that overrides the <see
              cref="P:System.Web.IHttpHandler.IsReusable" />
+
+            
 
             
 
@@ -63,6 +69,8 @@
           <para
             >Gets a value indicating whether another request can use the <see
              cref="T:System.Web.IHttpHandler" />
+
+            
 
             
 
@@ -100,6 +108,8 @@
 
             
 
+            
+
              virtual method, as shown in the following example.</para
           >
         </remarks>
@@ -108,6 +118,8 @@
           <para
             >Enables processing of HTTP Web requests by a custom HttpHandler that implements the <see
              cref="T:System.Web.IHttpHandler" />
+
+            
 
             
 
@@ -123,8 +135,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 

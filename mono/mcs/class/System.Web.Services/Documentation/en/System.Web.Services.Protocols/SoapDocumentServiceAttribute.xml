@@ -35,8 +35,12 @@
 
         
 
+        
+
          allows you to set the default formatting styles for XML Web service methods within an XML Web service. If an individual XML Web service method must change these defaults, apply a <see
          cref="T:System.Web.Services.Protocols.SoapDocumentMethodAttribute" />
+
+        
 
         
 
@@ -52,8 +56,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.Services.Protocols.SoapDocumentServiceAttribute.ParameterStyle" />
+
+        
 
         
 
@@ -66,8 +74,12 @@
 
         
 
+        
+
          property determines whether parameters are formatted Encoded or Literal. The <see
          cref="P:System.Web.Services.Protocols.SoapDocumentServiceAttribute.ParameterStyle" />
+
+        
 
         
 
@@ -78,6 +90,8 @@
       <para
         >To set the default method level formatting to RPC, apply a <see
          cref="T:System.Web.Services.Protocols.SoapRpcServiceAttribute" />
+
+        
 
         
 
@@ -97,6 +111,8 @@
 
         
 
+        
+
         .</para
       >
       <para>This attribute can be applied to a class implementing an XML Web service.</para>
@@ -106,6 +122,8 @@
       <para
         >Applying the optional <see
          cref="T:System.Web.Services.Protocols.SoapDocumentServiceAttribute" />
+
+        
 
         
 
@@ -128,6 +146,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Protocols.SoapDocumentServiceAttribute" />
+
+            
 
             
 
@@ -164,6 +184,8 @@
 
             
 
+            
+
              class setting the parameter formatting.</para
           >
         </summary>
@@ -174,8 +196,12 @@
 
           
 
+          
+
           The parameter formatting of the XML Web service. Sets the <see
            cref="P:System.Web.Services.Protocols.SoapDocumentServiceAttribute.Use" />
+
+          
 
           
 
@@ -212,6 +238,8 @@
 
             
 
+            
+
              class that sets the parameter formatting and sets whether parameters are encapsulated within a single XML element, under the Body element, in SOAP messages.</para
           >
         </summary>
@@ -222,8 +250,12 @@
 
           
 
+          
+
           The parameter formatting style. Sets the <see
            cref="P:System.Web.Services.Protocols.SoapDocumentServiceAttribute.Use" />
+
+          
 
           
 
@@ -238,8 +270,12 @@
 
           
 
+          
+
           Sets whether parameters are encapsulated within a single XML element, under the Body element, in SOAP messages sent to and from XML Web service methods within the XML Web service. Sets the <see
            cref="P:System.Web.Services.Protocols.SoapDocumentServiceAttribute.ParameterStyle" />
+
+          
 
           
 
@@ -324,8 +360,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Web.Services.Description.SoapBindingUse.Literal" />
+
+            
 
             
 
@@ -338,8 +378,12 @@
 
             
 
+            
+
              refers to formatting the parameters using the SOAP encoding outlined in the SOAP specification in section 5. <see
              cref="F:System.Web.Services.Description.SoapBindingUse.Literal" />
+
+            
 
             
 
@@ -354,6 +398,8 @@
                 >[&lt;topic://cpconCustomizingSOAPInASPNETWebServicesWebServiceClients&gt;]</a
               >
             </format>
+
+            
 
             
 

@@ -56,8 +56,12 @@
 
         
 
+        
+
          is an immutable value type that represents unsigned integers with values that range from 0 (which is represented by the <see
          cref="F:System.Byte.MinValue" />
+
+        
 
         
 
@@ -70,8 +74,12 @@
 
         
 
+        
+
          constant). The .NET Framework also includes a signed 8-bit integer value type, <see
          cref="T:System.SByte" />
+
+        
 
         
 
@@ -90,6 +98,8 @@
 
         
 
+        
+
          value in several ways:</para
       >
       <list type="bullet">
@@ -102,6 +112,8 @@
 
             
 
+            
+
              variable and assign it a literal integer value that is within the range of the <see
              cref="T:System.Byte" />
 
@@ -109,8 +121,12 @@
 
             
 
+            
+
              data type. The following example declares two <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -129,8 +145,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -143,8 +163,12 @@
 
             
 
+            
+
              value that includes a fractional component, the handling of its fractional part depends on the compiler performing the conversion. The following example assigns several numeric values to <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -163,8 +187,12 @@
 
             
 
+            
+
              class to convert any supported type to a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -177,8 +205,12 @@
 
             
 
+            
+
              supports the <see
              cref="T:System.IConvertible" />
+
+            
 
             
 
@@ -191,8 +223,12 @@
 
             
 
+            
+
              values to <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -211,8 +247,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Byte.TryParse(System.String,System.Byte@)" />
+
+            
 
             
 
@@ -225,8 +265,12 @@
 
             
 
+            
+
              value to a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -248,8 +292,12 @@
 
         
 
+        
+
          type supports standard mathematical operations such as addition, subtraction, division, multiplication, subtraction, negation, and unary negation. Like the other integral types, the <see
          cref="T:System.Byte" />
+
+        
 
         
 
@@ -265,8 +313,12 @@
 
         
 
+        
+
          values, or you can call the <see
          cref="M:System.Byte.CompareTo(System.Byte)" />
+
+        
 
         
 
@@ -279,11 +331,15 @@
 
         
 
+        
+
          method.</para
       >
       <para
         >You can also call the members of the <see
          cref="T:System.Math" />
+
+        
 
         
 
@@ -302,10 +358,14 @@
 
         
 
+        
+
          type provides full support for standard and custom numeric format strings. (For more information, see <format
          type="text/html">
           <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
         </format>
+
+        
 
         
 
@@ -320,10 +380,14 @@
 
         
 
+        
+
         , and <format
          type="text/html">
           <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
         </format>
+
+        
 
         
 
@@ -339,8 +403,12 @@
 
         
 
+        
+
          value as an integral string with no leading zeros, you can call the parameterless <see
          cref="M:System.Byte.ToString" />
+
+        
 
         
 
@@ -353,8 +421,12 @@
 
         
 
+        
+
          value as a hexadecimal string. The following example formats the elements in an array of <see
          cref="T:System.Byte" />
+
+        
 
         
 
@@ -371,8 +443,12 @@
 
         
 
+        
+
          value as a binary, octal, decimal, or hexadecimal string by calling the <see
          cref="M:System.Convert.ToString(System.Byte,System.Int32)" />
+
+        
 
         
 
@@ -392,6 +468,8 @@
 
         
 
+        
+
          method can convert each of the primitive data types to a byte array, and the <see
          cref="M:System.Numerics.BigInteger.ToByteArray" />
 
@@ -399,8 +477,12 @@
 
         
 
+        
+
          method converts a <see
          cref="T:System.Numerics.BigInteger" />
+
+        
 
         
 
@@ -415,8 +497,12 @@
 
         
 
+        
+
          values are represented in 8 bits by their magnitude only, without a sign bit. This is important to keep in mind when you perform bitwise operations on <see
          cref="T:System.Byte" />
+
+        
 
         
 
@@ -432,8 +518,12 @@
 
         
 
+        
+
          values, the values share the same representation, so the result is accurate. This is illustrated in the following example, which masks the lowest-order bit of a <see
          cref="T:System.Byte" />
+
+        
 
         
 
@@ -445,6 +535,8 @@
       <para
         >On the other hand, when you work with both unsigned and signed bits, bitwise operations are complicated by the fact that the <see
          cref="T:System.SByte" />
+
+        
 
         
 
@@ -489,6 +581,8 @@
 
             
 
+            
+
              interface and performs slightly better than the <see
              cref="M:System.Byte.CompareTo(System.Object)" />
 
@@ -496,8 +590,12 @@
 
             
 
+            
+
              method because it does not have to convert the <paramref
              name="value" />
+
+            
 
             
 
@@ -513,11 +611,15 @@
 
             
 
+            
+
              method where the parameter type has fewer bits (is narrower) than the instance type. This is possible because some programming languages perform an implicit widening conversion that represents the parameter as a type with as many bits as the instance.</para
           >
           <para
             >For example, suppose the instance type is <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -530,8 +632,12 @@
 
             
 
+            
+
             . The Microsoft C# compiler generates instructions to represent the value of the parameter as an <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -544,6 +650,8 @@
 
             
 
+            
+
              method that compares the values of the <see
              cref="T:System.Int32" />
 
@@ -551,8 +659,12 @@
 
             
 
+            
+
              instance and the <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -571,6 +683,8 @@
           <para
             >A signed integer that indicates the relative order of this instance and <paramref
              name="value" />
+
+            
 
             
 
@@ -602,6 +716,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -614,6 +730,8 @@
                 <para
                   >This instance is equal to <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -636,6 +754,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -644,6 +764,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -683,8 +805,12 @@
 
           
 
+          
+
            is not a <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -701,8 +827,12 @@
 
             
 
+            
+
              must be null or an instance of <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -718,11 +848,15 @@
 
             
 
+            
+
             , regardless of its value, is considered greater than null.</para
           >
           <para
             >This method is implemented to support the <see
              cref="T:System.IComparable" />
+
+            
 
             
 
@@ -740,6 +874,8 @@
           <para
             >A signed integer that indicates the relative order of this instance and <paramref
              name="value" />
+
+            
 
             
 
@@ -771,6 +907,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -783,6 +921,8 @@
                 <para
                   >This instance is equal to <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -805,11 +945,15 @@
 
                   
 
+                  
+
                   .</para
                 >
                 <para>-or- </para>
                 <para>
                   <paramref name="value" />
+
+                  
 
                   
 
@@ -823,6 +967,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -862,6 +1008,8 @@
 
             
 
+            
+
              interface, and performs slightly better than <see
              cref="M:System.Byte.Equals(System.Object)" />
 
@@ -869,8 +1017,12 @@
 
             
 
+            
+
              because it does not have to convert the <paramref
              name="obj" />
+
+            
 
             
 
@@ -889,6 +1041,8 @@
 
             
 
+            
+
              object represent the same value.</para
           >
         </summary>
@@ -902,11 +1056,15 @@
 
             
 
+            
+
              is equal to this instance; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -950,12 +1108,16 @@
 
               
 
+              
+
               .</block
             >
           </para>
         </remarks>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -977,8 +1139,12 @@
 
             
 
+            
+
              is an instance of <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -989,6 +1155,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1033,6 +1201,8 @@
 
               
 
+              
+
               .</block
             >
           </para>
@@ -1046,6 +1216,8 @@
           <para
             >A hash code for the current <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -1085,8 +1257,12 @@
 
             
 
+            
+
              for value type <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -1100,6 +1276,8 @@
           <para
             >The enumerated constant, <see
              cref="F:System.TypeCode.Byte" />
+
+            
 
             
 
@@ -1141,6 +1319,8 @@
           <para
             >Represents the largest possible value of a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -1188,6 +1368,8 @@
 
             
 
+            
+
             . This field is constant.</para
           >
         </summary>
@@ -1224,10 +1406,14 @@
 
           
 
+          
+
           is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s " />
+
+          
 
           
 
@@ -1242,8 +1428,12 @@
 
           
 
+          
+
           represents a number greater than <see
            cref="F:System.Byte.MaxValue" />
+
+          
 
           
 
@@ -1256,12 +1446,16 @@
 
           
 
+          
+
           .</exception
         >
         <example>
           <para
             >The following example demonstrates the <see
              cref="M:System.Byte.Parse(System.String)" />
+
+            
 
             
 
@@ -1290,6 +1484,8 @@ public static void Main() {
           <para
             >The <paramref
              name="s" />
+
+            
 
             
 
@@ -1343,8 +1539,12 @@ public static void Main() {
 
             
 
+            
+
              parameter is interpreted using the <see
              cref="F:System.Globalization.NumberStyles.Integer" />
+
+            
 
             
 
@@ -1357,8 +1557,12 @@ public static void Main() {
 
             
 
+            
+
             .) To explicitly define the style elements that can be present in <paramref
              name="s" />
+
+            
 
             
 
@@ -1371,8 +1575,12 @@ public static void Main() {
 
             
 
+            
+
              or the <see
              cref="M:System.Byte.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" />
+
+            
 
             
 
@@ -1388,8 +1596,12 @@ public static void Main() {
 
             
 
+            
+
              parameter is parsed using the formatting information in a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -1402,8 +1614,12 @@ public static void Main() {
 
             
 
+            
+
             . To parse a string using the formatting information of some other culture, use the <see
              cref="M:System.Byte.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" />
+
+            
 
             
 
@@ -1422,6 +1638,8 @@ public static void Main() {
 
             
 
+            
+
              equivalent.</para
           >
         </summary>
@@ -1430,6 +1648,8 @@ public static void Main() {
           <para
             >A byte value that is equivalent to the number contained in <paramref
              name="s" />
+
+            
 
             
 
@@ -1445,8 +1665,12 @@ public static void Main() {
 
           
 
+          
+
           A string that contains a number to convert. The string is interpreted using the <see
            cref="F:System.Globalization.NumberStyles.Integer" />
+
+          
 
           
 
@@ -1491,10 +1715,14 @@ public static void Main() {
 
           
 
+          
+
           is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s " />
+
+          
 
           
 
@@ -1509,6 +1737,8 @@ public static void Main() {
 
           
 
+          
+
            represents a number greater than <see
            cref="F:System.Byte.MaxValue" />
 
@@ -1516,8 +1746,12 @@ public static void Main() {
 
           
 
+          
+
            or less than <see
            cref="F:System.Byte.MinValue" />
+
+          
 
           
 
@@ -1532,8 +1766,12 @@ public static void Main() {
 
           
 
+          
+
           A string that contains a number to convert. The string is interpreted using the style specified by <paramref
            name="style" />
+
+          
 
           
 
@@ -1548,6 +1786,8 @@ public static void Main() {
 
           
 
+          
+
           A bitwise combination of enumeration values that indicates the style elements that can be present in <paramref
            name="s" />
 
@@ -1555,8 +1795,12 @@ public static void Main() {
 
           
 
+          
+
           . A typical value to specify is <see
            cref="F:System.Globalization.NumberStyles.Integer" />
+
+          
 
           
 
@@ -1574,8 +1818,12 @@ public static void Main() {
 
             
 
+            
+
              parameter defines the style elements (such as white space or the positive sign) that are allowed in the <paramref
              name="s" />
+
+            
 
             
 
@@ -1588,6 +1836,8 @@ public static void Main() {
 
             
 
+            
+
              enumeration. Depending on the value of <paramref
              name="style" />
 
@@ -1595,8 +1845,12 @@ public static void Main() {
 
             
 
+            
+
             , the <paramref
              name="s" />
+
+            
 
             
 
@@ -1613,8 +1867,12 @@ public static void Main() {
 
             
 
+            
+
              includes <see
              cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
+
+            
 
             
 
@@ -1648,8 +1906,12 @@ public static void Main() {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -1662,8 +1924,12 @@ public static void Main() {
 
                   
 
+                  
+
                    flag, or at the end of s if style includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+
+                  
 
                   
 
@@ -1686,8 +1952,12 @@ public static void Main() {
 
                   
 
+                  
+
                    property of the current culture. The current culture's currency symbol can appear in <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -1700,8 +1970,12 @@ public static void Main() {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowCurrencySymbol" />
+
+                  
 
                   
 
@@ -1724,8 +1998,12 @@ public static void Main() {
 
                   
 
+                  
+
                    if a negative sign is present in <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -1738,8 +2016,12 @@ public static void Main() {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -1752,8 +2034,12 @@ public static void Main() {
 
                   
 
+                  
+
                    flag, or at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -1766,8 +2052,12 @@ public static void Main() {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowTrailingSign" />
+
+                  
 
                   
 
@@ -1798,6 +2088,8 @@ public static void Main() {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
 
@@ -1805,8 +2097,12 @@ public static void Main() {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
+
+                  
 
                   
 
@@ -1829,6 +2125,8 @@ public static void Main() {
 
                   
 
+                  
+
                    only if <paramref
                    name="style" />
 
@@ -1836,8 +2134,12 @@ public static void Main() {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
+
+                  
 
                   
 
@@ -1860,6 +2162,8 @@ public static void Main() {
 
                   
 
+                  
+
                    parameter can represent a number in exponential notation if <paramref
                    name="style" />
 
@@ -1867,8 +2171,12 @@ public static void Main() {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowExponent" />
+
+                  
 
                   
 
@@ -1895,8 +2203,12 @@ public static void Main() {
 
             
 
+            
+
              style) always parses successfully. Most of the remaining <see
              cref="T:System.Globalization.NumberStyles" />
+
+            
 
             
 
@@ -1909,8 +2221,12 @@ public static void Main() {
 
             
 
+            
+
              members affect the elements that may be present in <paramref
              name="s" />
+
+            
 
             
 
@@ -1954,6 +2270,8 @@ public static void Main() {
 
                   
 
+                  
+
                    is thrown. </para
                 >
               </description>
@@ -1968,6 +2286,8 @@ public static void Main() {
                 <para
                   >The <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -1992,6 +2312,8 @@ public static void Main() {
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -2006,6 +2328,8 @@ public static void Main() {
                 <para
                   >The ws element at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -2050,8 +2374,12 @@ public static void Main() {
 
                   
 
+                  
+
                    results in an <see
                    cref="T:System.OverflowException" />
+
+                  
 
                   
 
@@ -2071,6 +2399,8 @@ public static void Main() {
                 <para
                   >Although the group separator symbol can appear in <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -2099,8 +2429,12 @@ public static void Main() {
 
             
 
+            
+
              flag is used, <paramref
              name="s" />
+
+            
 
             
 
@@ -2113,8 +2447,12 @@ public static void Main() {
 
             
 
+            
+
              and <see
              cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+
+            
 
             
 
@@ -2127,8 +2465,12 @@ public static void Main() {
 
             
 
+            
+
              enumeration includes a composite number style, <see
              cref="F:System.Globalization.NumberStyles.HexNumber" />
+
+            
 
             
 
@@ -2144,6 +2486,8 @@ public static void Main() {
 
             
 
+            
+
              parameter is parsed using the formatting information in a <see
              cref="T:System.Globalization.NumberFormatInfo" />
 
@@ -2151,8 +2495,12 @@ public static void Main() {
 
             
 
+            
+
              object that is initialized for the current system culture. To use the formatting information of some other culture, call the <see
              cref="M:System.Byte.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" />
+
+            
 
             
 
@@ -2171,6 +2519,8 @@ public static void Main() {
 
             
 
+            
+
              equivalent.</para
           >
         </summary>
@@ -2179,6 +2529,8 @@ public static void Main() {
           <para
             >A byte value that is equivalent to the number contained in <paramref
              name="s" />
+
+            
 
             
 
@@ -2194,8 +2546,12 @@ public static void Main() {
 
           
 
+          
+
           A string that contains a number to convert. The string is interpreted using the style specified by <paramref
            name="style" />
+
+          
 
           
 
@@ -2210,6 +2566,8 @@ public static void Main() {
 
           
 
+          
+
           A bitwise combination of enumeration values that indicates the style elements that can be present in <paramref
            name="s" />
 
@@ -2217,8 +2575,12 @@ public static void Main() {
 
           
 
+          
+
           . A typical value to specify is <see
            cref="F:System.Globalization.NumberStyles.Integer" />
+
+          
 
           
 
@@ -2263,10 +2625,14 @@ public static void Main() {
 
           
 
+          
+
           is a null reference.</exception
         >
         <exception cref="T:System.OverflowException">
           <paramref name="s" />
+
+          
 
           
 
@@ -2279,8 +2645,12 @@ public static void Main() {
 
           
 
+          
+
            or less than <see
            cref="F:System.Byte.MinValue" />
+
+          
 
           
 
@@ -2295,6 +2665,8 @@ public static void Main() {
 
           
 
+          
+
            is not in the correct style.</exception
         >
         <param name="s">
@@ -2304,8 +2676,12 @@ public static void Main() {
 
           
 
+          
+
           A string that contains a number to convert. The string is interpreted using the <see
            cref="F:System.Globalization.NumberStyles.Integer" />
+
+          
 
           
 
@@ -2320,8 +2696,12 @@ public static void Main() {
 
           
 
+          
+
           An object that supplies culture-specific parsing information about <paramref
            name="s" />
+
+          
 
           
 
@@ -2334,6 +2714,8 @@ public static void Main() {
 
           
 
+          
+
            is null, the thread current culture is used. </param
         >
         <remarks>
@@ -2341,6 +2723,8 @@ public static void Main() {
           <para
             >The <paramref
              name="s" />
+
+            
 
             
 
@@ -2394,8 +2778,12 @@ public static void Main() {
 
             
 
+            
+
              parameter is interpreted using the <see
              cref="F:System.Globalization.NumberStyles.Integer" />
+
+            
 
             
 
@@ -2408,6 +2796,8 @@ public static void Main() {
 
             
 
+            
+
             .) To explicitly define the style elements together with the culture-specific formatting information that can be present in <paramref
              name="s" />
 
@@ -2415,8 +2805,12 @@ public static void Main() {
 
             
 
+            
+
             , use the <see
              cref="M:System.Byte.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" />
+
+            
 
             
 
@@ -2432,8 +2826,12 @@ public static void Main() {
 
             
 
+            
+
              parameter is parsed using the formatting information in a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -2446,8 +2844,12 @@ public static void Main() {
 
             
 
+            
+
             . The <paramref
              name="provider" />
+
+            
 
             
 
@@ -2460,8 +2862,12 @@ public static void Main() {
 
             
 
+            
+
              implementation such as a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -2474,6 +2880,8 @@ public static void Main() {
 
             
 
+            
+
              object. The <paramref
              name="provider" />
 
@@ -2481,8 +2889,12 @@ public static void Main() {
 
             
 
+            
+
              parameter supplies culture-specific information used in parsing. If <paramref
              name="provider" />
+
+            
 
             
 
@@ -2501,6 +2913,8 @@ public static void Main() {
 
             
 
+            
+
              equivalent.</para
           >
         </summary>
@@ -2509,6 +2923,8 @@ public static void Main() {
           <para
             >A byte value that is equivalent to the number contained in <paramref
              name="s" />
+
+            
 
             
 
@@ -2524,8 +2940,12 @@ public static void Main() {
 
           
 
+          
+
           A string that contains a number to convert. The string is interpreted using the <see
            cref="F:System.Globalization.NumberStyles.Integer" />
+
+          
 
           
 
@@ -2540,6 +2960,8 @@ public static void Main() {
 
           
 
+          
+
           An object that supplies culture-specific parsing information about <paramref
            name="s" />
 
@@ -2547,8 +2969,12 @@ public static void Main() {
 
           
 
+          
+
           . If <paramref
            name="provider" />
+
+          
 
           
 
@@ -2594,10 +3020,14 @@ public static void Main() {
 
           
 
+          
+
           is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s " />
+
+          
 
           
 
@@ -2612,6 +3042,8 @@ public static void Main() {
 
           
 
+          
+
            represents a number greater than <see
            cref="F:System.Byte.MaxValue" />
 
@@ -2619,8 +3051,12 @@ public static void Main() {
 
           
 
+          
+
            or less than <see
            cref="F:System.Byte.MinValue" />
+
+          
 
           
 
@@ -2635,8 +3071,12 @@ public static void Main() {
 
           
 
+          
+
           A string that contains a number to convert. The string is interpreted using the style specified by <paramref
            name="style" />
+
+          
 
           
 
@@ -2651,6 +3091,8 @@ public static void Main() {
 
           
 
+          
+
           A bitwise combination of enumeration values that indicates the style elements that can be present in <paramref
            name="s" />
 
@@ -2658,8 +3100,12 @@ public static void Main() {
 
           
 
+          
+
           . A typical value to specify is <see
            cref="F:System.Globalization.NumberStyles.Integer" />
+
+          
 
           
 
@@ -2674,6 +3120,8 @@ public static void Main() {
 
           
 
+          
+
           An object that supplies culture-specific information about the format of <paramref
            name="s" />
 
@@ -2681,8 +3129,12 @@ public static void Main() {
 
           
 
+          
+
           . If <paramref
            name="provider" />
+
+          
 
           
 
@@ -2700,8 +3152,12 @@ public static void Main() {
 
             
 
+            
+
              parameter defines the style elements (such as white space or the positive sign) that are allowed in the <paramref
              name="s" />
+
+            
 
             
 
@@ -2714,6 +3170,8 @@ public static void Main() {
 
             
 
+            
+
              enumeration. Depending on the value of <paramref
              name="style" />
 
@@ -2721,8 +3179,12 @@ public static void Main() {
 
             
 
+            
+
             , the <paramref
              name="s" />
+
+            
 
             
 
@@ -2739,8 +3201,12 @@ public static void Main() {
 
             
 
+            
+
              parameter includes <see
              cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
+
+            
 
             
 
@@ -2774,8 +3240,12 @@ public static void Main() {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -2788,8 +3258,12 @@ public static void Main() {
 
                   
 
+                  
+
                    flag, or at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -2802,8 +3276,12 @@ public static void Main() {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+
+                  
 
                   
 
@@ -2826,8 +3304,12 @@ public static void Main() {
 
                   
 
+                  
+
                    property of the <see
                    cref="T:System.Globalization.NumberFormatInfo" />
+
+                  
 
                   
 
@@ -2840,8 +3322,12 @@ public static void Main() {
 
                   
 
+                  
+
                    method of the <paramref
                    name="provider" />
+
+                  
 
                   
 
@@ -2854,6 +3340,8 @@ public static void Main() {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
 
@@ -2861,8 +3349,12 @@ public static void Main() {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowCurrencySymbol" />
+
+                  
 
                   
 
@@ -2885,8 +3377,12 @@ public static void Main() {
 
                   
 
+                  
+
                    if a negative sign is present in <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -2899,8 +3395,12 @@ public static void Main() {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -2913,8 +3413,12 @@ public static void Main() {
 
                   
 
+                  
+
                    flag, or at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -2927,8 +3431,12 @@ public static void Main() {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowTrailingSign" />
+
+                  
 
                   
 
@@ -2959,8 +3467,12 @@ public static void Main() {
 
                   
 
+                  
+
                    can appear in <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -2973,8 +3485,12 @@ public static void Main() {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
+
+                  
 
                   
 
@@ -2997,6 +3513,8 @@ public static void Main() {
 
                   
 
+                  
+
                    only if <paramref
                    name="style" />
 
@@ -3004,8 +3522,12 @@ public static void Main() {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
+
+                  
 
                   
 
@@ -3028,8 +3550,12 @@ public static void Main() {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowExponent" />
+
+                  
 
                   
 
@@ -3056,8 +3582,12 @@ public static void Main() {
 
             
 
+            
+
              style) always parses successfully. Most of the remaining <see
              cref="T:System.Globalization.NumberStyles" />
+
+            
 
             
 
@@ -3070,8 +3600,12 @@ public static void Main() {
 
             
 
+            
+
              members affect the elements that may be present in <paramref
              name="s" />
+
+            
 
             
 
@@ -3115,6 +3649,8 @@ public static void Main() {
 
                   
 
+                  
+
                    is thrown. </para
                 >
               </description>
@@ -3129,6 +3665,8 @@ public static void Main() {
                 <para
                   >The <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -3153,6 +3691,8 @@ public static void Main() {
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -3167,6 +3707,8 @@ public static void Main() {
                 <para
                   >The ws element at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -3211,8 +3753,12 @@ public static void Main() {
 
                   
 
+                  
+
                    results in an <see
                    cref="T:System.OverflowException" />
+
+                  
 
                   
 
@@ -3232,6 +3778,8 @@ public static void Main() {
                 <para
                   >Although the group separator symbol can appear in <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -3260,8 +3808,12 @@ public static void Main() {
 
             
 
+            
+
              flag is used, <paramref
              name="s" />
+
+            
 
             
 
@@ -3274,8 +3826,12 @@ public static void Main() {
 
             
 
+            
+
              are <see
              cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+
+            
 
             
 
@@ -3288,6 +3844,8 @@ public static void Main() {
 
             
 
+            
+
             . (The <see
              cref="T:System.Globalization.NumberStyles" />
 
@@ -3295,8 +3853,12 @@ public static void Main() {
 
             
 
+            
+
              enumeration has a composite number style, <see
              cref="F:System.Globalization.NumberStyles.HexNumber" />
+
+            
 
             
 
@@ -3312,8 +3874,12 @@ public static void Main() {
 
             
 
+            
+
              parameter is an <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -3326,8 +3892,12 @@ public static void Main() {
 
             
 
+            
+
              or <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -3340,8 +3910,12 @@ public static void Main() {
 
             
 
+            
+
              parameter supplies culture-specific information used in parsing. If <paramref
              name="provider" />
+
+            
 
             
 
@@ -3360,6 +3934,8 @@ public static void Main() {
 
             
 
+            
+
              equivalent.</para
           >
         </summary>
@@ -3368,6 +3944,8 @@ public static void Main() {
           <para
             >A byte value that is equivalent to the number contained in <paramref
              name="s" />
+
+            
 
             
 
@@ -3383,8 +3961,12 @@ public static void Main() {
 
           
 
+          
+
           A string that contains a number to convert. The string is interpreted using the style specified by <paramref
            name="style" />
+
+          
 
           
 
@@ -3399,6 +3981,8 @@ public static void Main() {
 
           
 
+          
+
           A bitwise combination of enumeration values that indicates the style elements that can be present in <paramref
            name="s" />
 
@@ -3406,8 +3990,12 @@ public static void Main() {
 
           
 
+          
+
           . A typical value to specify is <see
            cref="F:System.Globalization.NumberStyles.Integer" />
+
+          
 
           
 
@@ -3422,6 +4010,8 @@ public static void Main() {
 
           
 
+          
+
           An object that supplies culture-specific information about the format of <paramref
            name="s" />
 
@@ -3429,8 +4019,12 @@ public static void Main() {
 
           
 
+          
+
           . If <paramref
            name="provider" />
+
+          
 
           
 
@@ -3473,6 +4067,8 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -3480,8 +4076,12 @@ public static void Main() {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToBoolean(System.Byte)" />
+
+            
 
             
 
@@ -3500,6 +4100,8 @@ public static void Main() {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -3509,6 +4111,8 @@ public static void Main() {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3547,8 +4151,12 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
+
+            
 
             
 
@@ -3567,6 +4175,8 @@ public static void Main() {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -3576,6 +4186,8 @@ public static void Main() {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3614,6 +4226,8 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -3621,8 +4235,12 @@ public static void Main() {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToChar(System.Byte)" />
+
+            
 
             
 
@@ -3641,6 +4259,8 @@ public static void Main() {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -3654,11 +4274,15 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3701,6 +4325,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3710,6 +4336,8 @@ public static void Main() {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3751,6 +4379,8 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -3758,8 +4388,12 @@ public static void Main() {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToDecimal(System.Byte)" />
+
+            
 
             
 
@@ -3778,6 +4412,8 @@ public static void Main() {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -3791,11 +4427,15 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3837,6 +4477,8 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -3844,8 +4486,12 @@ public static void Main() {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToDouble(System.Byte)" />
+
+            
 
             
 
@@ -3864,6 +4510,8 @@ public static void Main() {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -3877,11 +4525,15 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3923,6 +4575,8 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -3930,8 +4584,12 @@ public static void Main() {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToInt16(System.Byte)" />
+
+            
 
             
 
@@ -3950,6 +4608,8 @@ public static void Main() {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -3963,11 +4623,15 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4006,6 +4670,8 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -4013,8 +4679,12 @@ public static void Main() {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToInt32(System.Byte)" />
+
+            
 
             
 
@@ -4033,6 +4703,8 @@ public static void Main() {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -4046,11 +4718,15 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4092,6 +4768,8 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -4099,8 +4777,12 @@ public static void Main() {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToInt64(System.Byte)" />
+
+            
 
             
 
@@ -4119,6 +4801,8 @@ public static void Main() {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -4132,11 +4816,15 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4178,6 +4866,8 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -4185,8 +4875,12 @@ public static void Main() {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToSByte(System.Byte)" />
+
+            
 
             
 
@@ -4205,6 +4899,8 @@ public static void Main() {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -4218,11 +4914,15 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4264,6 +4964,8 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -4271,8 +4973,12 @@ public static void Main() {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToSingle(System.Byte)" />
+
+            
 
             
 
@@ -4291,6 +4997,8 @@ public static void Main() {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -4304,11 +5012,15 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4352,6 +5064,8 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -4359,8 +5073,12 @@ public static void Main() {
 
             
 
+            
+
              interface. The recommended alternative is to call the static (Shared in Visual Basic) <see
              cref="M:System.Convert.ChangeType(System.Object,System.Type,System.IFormatProvider)" />
+
+            
 
             
 
@@ -4379,6 +5097,8 @@ public static void Main() {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -4387,6 +5107,8 @@ public static void Main() {
           <para
             >The value of the current instance, converted to <paramref
              name="type" />
+
+            
 
             
 
@@ -4402,8 +5124,12 @@ public static void Main() {
 
           
 
+          
+
           An <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -4445,6 +5171,8 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -4452,8 +5180,12 @@ public static void Main() {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToUInt16(System.Byte)" />
+
+            
 
             
 
@@ -4472,6 +5204,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -4485,11 +5219,15 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4531,6 +5269,8 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -4538,8 +5278,12 @@ public static void Main() {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToUInt32(System.Byte)" />
+
+            
 
             
 
@@ -4558,6 +5302,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -4571,11 +5317,15 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4617,6 +5367,8 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -4624,8 +5376,12 @@ public static void Main() {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToUInt64(System.Byte)" />
+
+            
 
             
 
@@ -4644,6 +5400,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -4657,11 +5415,15 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4702,8 +5464,12 @@ public static void Main() {
 
             
 
+            
+
              object for the thread current culture. To define the formatting of the <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -4716,6 +5482,8 @@ public static void Main() {
 
             
 
+            
+
              method. To define both the format specifiers and culture used to create the string representation of a <see
              cref="T:System.Byte" />
 
@@ -4723,8 +5491,12 @@ public static void Main() {
 
             
 
+            
+
              value, call the <see
              cref="M:System.Byte.ToString(System.String,System.IFormatProvider)" />
+
+            
 
             
 
@@ -4745,10 +5517,14 @@ public static void Main() {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -4768,6 +5544,8 @@ public static void Main() {
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -4775,6 +5553,8 @@ public static void Main() {
           <para
             >For information about the thread current culture, see <see
              cref="P:System.Threading.Thread.CurrentCulture" />
+
+            
 
             
 
@@ -4788,6 +5568,8 @@ public static void Main() {
           <para
             >Converts the value of the current <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -4837,8 +5619,12 @@ public static void Main() {
 
             
 
+            
+
              parameter is an object that implements the <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -4851,6 +5637,8 @@ public static void Main() {
 
             
 
+            
+
              method returns a <see
              cref="T:System.Globalization.NumberFormatInfo" />
 
@@ -4858,8 +5646,12 @@ public static void Main() {
 
             
 
+            
+
              object that provides culture-specific information about the format of the string that is returned by this method. The object that implements <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -4877,6 +5669,8 @@ public static void Main() {
 
                 
 
+                
+
                  object that represents the culture whose formatting rules are to be used.</para
               >
             </item>
@@ -4884,6 +5678,8 @@ public static void Main() {
               <para
                 >A <see
                  cref="T:System.Globalization.NumberFormatInfo" />
+
+                
 
                 
 
@@ -4901,6 +5697,8 @@ public static void Main() {
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -4913,8 +5711,12 @@ public static void Main() {
 
             
 
+            
+
              is null or a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -4927,6 +5729,8 @@ public static void Main() {
 
             
 
+            
+
             , the return value is formatted using the <see
              cref="T:System.Globalization.NumberFormatInfo" />
 
@@ -4934,8 +5738,12 @@ public static void Main() {
 
             
 
+            
+
              object for the thread current culture. For information about the thread current culture, see <see
              cref="P:System.Threading.Thread.CurrentCulture" />
+
+            
 
             
 
@@ -4956,10 +5764,14 @@ public static void Main() {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -4974,6 +5786,8 @@ public static void Main() {
                  type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
                 </format>
+
+                
 
                 
 
@@ -4994,6 +5808,8 @@ public static void Main() {
 
             
 
+            
+
              object to its equivalent string representation using the specified culture-specific formatting information.</para
           >
         </summary>
@@ -5007,11 +5823,15 @@ public static void Main() {
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5052,12 +5872,16 @@ public static void Main() {
 
           
 
+          
+
            is invalid.</exception
         >
         <example>
           <para
             >The following example demonstrates the <see
              cref="M:System.Byte.ToString" />
+
+            
 
             
 
@@ -5101,8 +5925,12 @@ public class ByteToStringExample {
 
             
 
+            
+
              parameter can be either a standard or a custom numeric format string. All standard numeric format strings other than "R" (or "r") are supported, as are all custom numeric format characters. If <paramref
              name="format" />
+
+            
 
             
 
@@ -5118,6 +5946,8 @@ public class ByteToStringExample {
 
             
 
+            
+
              object for the thread current culture. For information about the thread current culture, see <see
              cref="P:System.Threading.Thread.CurrentCulture" />
 
@@ -5125,8 +5955,12 @@ public class ByteToStringExample {
 
             
 
+            
+
             . To provide formatting information for cultures other than the current culture, call the <see
              cref="M:System.Byte.ToString(System.String,System.IFormatProvider)" />
+
+            
 
             
 
@@ -5147,10 +5981,14 @@ public class ByteToStringExample {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -5165,6 +6003,8 @@ public class ByteToStringExample {
                  type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
                 </format>
+
+                
 
                 
 
@@ -5185,6 +6025,8 @@ public class ByteToStringExample {
 
             
 
+            
+
              object to its equivalent string representation using the specified format.</para
           >
         </summary>
@@ -5198,8 +6040,12 @@ public class ByteToStringExample {
 
             
 
+            
+
              object, formatted as specified by the <paramref
              name="format" />
+
+            
 
             
 
@@ -5210,6 +6056,8 @@ public class ByteToStringExample {
         </returns>
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5254,6 +6102,8 @@ public class ByteToStringExample {
 
           
 
+          
+
            is invalid.</exception
         >
         <param name="format">
@@ -5263,10 +6113,14 @@ public class ByteToStringExample {
 
           
 
+          
+
           A standard or custom numeric format string.</param
         >
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5284,8 +6138,12 @@ public class ByteToStringExample {
 
             
 
+            
+
              method formats a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -5298,8 +6156,12 @@ public class ByteToStringExample {
 
             
 
+            
+
              method. To format a number by using a specified format of the current culture, call the <see
              cref="M:System.Byte.ToString(System.String)" />
+
+            
 
             
 
@@ -5315,8 +6177,12 @@ public class ByteToStringExample {
 
             
 
+            
+
              parameter can be either a standard or a custom numeric format string. All standard numeric format strings other than "R" (or "r") are supported, as are all custom numeric format characters. If <paramref
              name="format" />
+
+            
 
             
 
@@ -5332,8 +6198,12 @@ public class ByteToStringExample {
 
             
 
+            
+
              parameter is an object that implements the <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -5346,6 +6216,8 @@ public class ByteToStringExample {
 
             
 
+            
+
              method returns a <see
              cref="T:System.Globalization.NumberFormatInfo" />
 
@@ -5353,8 +6225,12 @@ public class ByteToStringExample {
 
             
 
+            
+
              object that provides culture-specific information about the format of the string that is returned by this method. The object that implements <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -5372,6 +6248,8 @@ public class ByteToStringExample {
 
                 
 
+                
+
                  object that represents the culture whose formatting rules are to be used.</para
               >
             </item>
@@ -5379,6 +6257,8 @@ public class ByteToStringExample {
               <para
                 >A <see
                  cref="T:System.Globalization.NumberFormatInfo" />
+
+                
 
                 
 
@@ -5396,6 +6276,8 @@ public class ByteToStringExample {
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -5408,8 +6290,12 @@ public class ByteToStringExample {
 
             
 
+            
+
              is null or a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -5422,6 +6308,8 @@ public class ByteToStringExample {
 
             
 
+            
+
             , the return value is formatted using the <see
              cref="T:System.Globalization.NumberFormatInfo" />
 
@@ -5429,8 +6317,12 @@ public class ByteToStringExample {
 
             
 
+            
+
              object for the thread current culture. For information about the thread current culture, see <see
              cref="P:System.Threading.Thread.CurrentCulture" />
+
+            
 
             
 
@@ -5451,10 +6343,14 @@ public class ByteToStringExample {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -5469,6 +6365,8 @@ public class ByteToStringExample {
                  type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
                 </format>
+
+                
 
                 
 
@@ -5489,6 +6387,8 @@ public class ByteToStringExample {
 
             
 
+            
+
              object to its equivalent string representation using the specified format and culture-specific formatting information.</para
           >
         </summary>
@@ -5502,6 +6402,8 @@ public class ByteToStringExample {
 
             
 
+            
+
              object, formatted as specified by the <paramref
              name="format" />
 
@@ -5509,8 +6411,12 @@ public class ByteToStringExample {
 
             
 
+            
+
              and <paramref
              name="provider" />
+
+            
 
             
 
@@ -5526,10 +6432,14 @@ public class ByteToStringExample {
 
           
 
+          
+
           A standard or custom numeric format string.</param
         >
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

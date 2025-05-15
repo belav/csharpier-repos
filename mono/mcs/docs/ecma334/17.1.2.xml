@@ -8,8 +8,12 @@
 
     
 
+    
+
      specification, which defines the direct base class of the class and the interfaces (<hyperlink
     >20</hyperlink>
+
+    
 
     
 
@@ -20,6 +24,8 @@
       <name>
         <non_terminal where="17.1.2">class-base</non_terminal>
       </name>
+
+      
 
       
 
@@ -45,6 +51,8 @@
       <name>
         <non_terminal where="17.1.2">interface-type-list</non_terminal>
       </name>
+
+      
 
       
 

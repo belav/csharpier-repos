@@ -27,8 +27,12 @@
 
         
 
+        
+
          address for the message destination, the physical ("Via") address, used by the transport, at which a service listens, and the <see
          cref="P:System.ServiceModel.Channels.MessageHeaders.ReplyTo" />
+
+        
 
         
 
@@ -39,6 +43,8 @@
       <para
         >In the most basic case, when two parties exchange messages between themselves only, it is not necessary to specify these addresses separately. But because exchanges can involve other message destinations, you must be able to specify when addresses must be explicitly provided. Even between just two parties this ability is sometimes required, as with dual HTTP where the server must create its own HTTP request. The following kinds of relationships are defined by the <see
          cref="T:System.ServiceModel.Channels.SupportedAddressingMode" />
+
+        
 
         
 
@@ -55,8 +61,12 @@
 
             
 
+            
+
              addresses are the most basic form of addressing. Anonymous addressing is used when there is a default path for a response. TCP is a bi-directional communication transport and the response to a TCP message can be sent back to the other side of the socket that sent the original message. Similarly, the request-reply model of HTTP sends responses through the HTTP reply channel. Neither of these responses requires specifying where the response messages are going. When a server requires anonymous responses from the client, it uses the <see
              cref="F:System.ServiceModel.Channels.SupportedAddressingMode.Anonymous" />
+
+            
 
             
 
@@ -69,8 +79,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.ServiceModel.BasicHttpBinding" />
+
+            
 
             
 
@@ -83,8 +97,12 @@
 
             
 
+            
+
              bindings always use <see
              cref="F:System.ServiceModel.Channels.SupportedAddressingMode.Anonymous" />
+
+            
 
             
 
@@ -101,8 +119,12 @@
 
             
 
+            
+
              addresses are used when sending the response requires creating a new channel for communication. The indigo2 system-provided <see
              cref="T:System.ServiceModel.WSDualHttpBinding" />
+
+            
 
             
 
@@ -115,8 +137,12 @@
 
             
 
+            
+
              address. With dual HTTP, the client creates an HTTP request to send a message and then the server must create its own HTTP request to send a response. Because the server is initiating the send, it must have a specific endpoint to establish the connection. You must provide the server the address of an endpoint for its response. Similarly, if a service must respond to a one-way message that it received, it also requires a <see
              cref="F:System.ServiceModel.Channels.SupportedAddressingMode.NonAnonymous" />
+
+            
 
             
 
@@ -133,8 +159,12 @@
 
             
 
+            
+
              is a third form of addressing which combines <see
              cref="F:System.ServiceModel.Channels.SupportedAddressingMode.Anonymous" />
+
+            
 
             
 
@@ -147,8 +177,12 @@
 
             
 
+            
+
              addresses depending on the message that is being sent. A typical example of mixed-mode addressing is the use of a dedicated machine for processing fault or acknowledgment messages. If the standard exchange sequence for replies is HTTP or TCP, the responses use <see
              cref="F:System.ServiceModel.Channels.SupportedAddressingMode.Anonymous" />
+
+            
 
             
 
@@ -161,8 +195,12 @@
 
             
 
+            
+
              addressing functionality in one of its standard bindings, it is possible to write a channel that allows the service to send responses directly on the back-channel (when the response address is <see
              cref="F:System.ServiceModel.Channels.SupportedAddressingMode.Anonymous" />
+
+            
 
             
 
@@ -175,6 +213,8 @@
 
             
 
+            
+
             ). In such a case, the binding element of the channel is used to set <see
              cref="T:System.ServiceModel.Channels.SupportedAddressingMode" />
 
@@ -182,8 +222,12 @@
 
             
 
+            
+
              to <see
              cref="F:System.ServiceModel.Channels.SupportedAddressingMode.Mixed" />
+
+            
 
             
 

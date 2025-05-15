@@ -35,6 +35,8 @@
 
             
 
+            
+
              field are mutually exclusive.</para
           >
         </remarks>
@@ -60,6 +62,8 @@
           <para
             >The value of this field and the value of the <see
              cref="F:System.Data.Common.CatalogLocation.End" />
+
+            
 
             
 

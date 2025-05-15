@@ -38,6 +38,8 @@
 
         
 
+        
+
          methods, but they have no run-time behavior.</para
       >
     </remarks>
@@ -65,6 +67,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Diagnostics.Contracts.ContractRuntimeIgnoredAttribute" />
+
+            
 
             
 

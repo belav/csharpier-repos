@@ -37,6 +37,8 @@
 
         
 
+        
+
          objects.</para
       >
     </summary>
@@ -68,8 +70,12 @@
 
             
 
+            
+
              class, with no associated <see
              cref="T:System.Diagnostics.CounterCreationData" />
+
+            
 
             
 
@@ -111,8 +117,12 @@
 
             
 
+            
+
              class by using the specified array of <see
              cref="T:System.Diagnostics.CounterCreationData" />
+
+            
 
             
 
@@ -128,6 +138,8 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Diagnostics.CounterCreationData" />
 
@@ -135,8 +147,12 @@
 
           
 
+          
+
            instances with which to initialize this <see
            cref="T:System.Diagnostics.CounterCreationDataCollection" />
+
+          
 
           
 
@@ -177,8 +193,12 @@
 
             
 
+            
+
              class by using the specified collection of <see
              cref="T:System.Diagnostics.CounterCreationData" />
+
+            
 
             
 
@@ -194,8 +214,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Diagnostics.CounterCreationDataCollection" />
+
+          
 
           
 
@@ -208,8 +232,12 @@
 
           
 
+          
+
            instances with which to initialize this <see
            cref="T:System.Diagnostics.CounterCreationDataCollection" />
+
+          
 
           
 
@@ -252,6 +280,8 @@
 
             
 
+            
+
              class to the collection.</para
           >
         </summary>
@@ -260,6 +290,8 @@
           <para
             >The index of the new <see
              cref="T:System.Diagnostics.CounterCreationData" />
+
+            
 
             
 
@@ -275,8 +307,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Diagnostics.CounterCreationData" />
+
+          
 
           
 
@@ -319,6 +355,8 @@
 
             
 
+            
+
              instances to the collection.</para
           >
         </summary>
@@ -329,8 +367,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Diagnostics.CounterCreationData" />
+
+          
 
           
 
@@ -373,6 +415,8 @@
 
             
 
+            
+
              instances to the collection.</para
           >
         </summary>
@@ -383,8 +427,12 @@
 
           
 
+          
+
           A collection of <see
            cref="T:System.Diagnostics.CounterCreationData" />
+
+          
 
           
 
@@ -427,6 +475,8 @@
 
             
 
+            
+
              instance exists in the collection.</para
           >
         </summary>
@@ -435,6 +485,8 @@
           <para
             >true if the specified <see
              cref="T:System.Diagnostics.CounterCreationData" />
+
+            
 
             
 
@@ -450,8 +502,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Diagnostics.CounterCreationData" />
+
+          
 
           
 
@@ -495,11 +551,15 @@
 
             
 
+            
+
              to an array, starting at the specified index of the array.</para
           >
         </summary>
         <param name="array">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -512,10 +572,14 @@
 
           
 
+          
+
            instances to add to the collection. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -558,6 +622,8 @@
 
             
 
+            
+
              object in the collection.</para
           >
         </summary>
@@ -566,6 +632,8 @@
           <para
             >The zero-based index of the specified <see
              cref="T:System.Diagnostics.CounterCreationData" />
+
+            
 
             
 
@@ -581,8 +649,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Diagnostics.CounterCreationData" />
+
+          
 
           
 
@@ -626,6 +698,8 @@
 
             
 
+            
+
              object into the collection, at the specified index.</para
           >
         </summary>
@@ -636,8 +710,12 @@
 
           
 
+          
+
           The zero-based index of the location at which the <see
            cref="T:System.Diagnostics.CounterCreationData" />
+
+          
 
           
 
@@ -652,8 +730,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Diagnostics.CounterCreationData" />
+
+          
 
           
 
@@ -742,8 +824,12 @@
 
             
 
+            
+
              method determines whether the object specified in the <paramref
              name="value" />
+
+            
 
             
 
@@ -756,8 +842,12 @@
 
             
 
+            
+
              instance. If not, it throws an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -776,11 +866,15 @@
 
             
 
+            
+
              type.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -823,6 +917,8 @@
 
             
 
+            
+
              object from the collection.</para
           >
         </summary>
@@ -833,8 +929,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Diagnostics.CounterCreationData" />
+
+          
 
           
 

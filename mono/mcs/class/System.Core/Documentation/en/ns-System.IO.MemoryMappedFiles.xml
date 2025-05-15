@@ -12,6 +12,8 @@
 
         
 
+        
+
          namespace provides classes for using a memory-mapped file, which maps the contents of a file to an application’s logical address space.  </para
       >
     </summary>

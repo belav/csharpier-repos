@@ -26,6 +26,8 @@
 
         
 
+        
+
          event is raised when the user suspends or resumes the operating system, or when a system power status notification occurs. A system power status notification can occur when a weak or charging power source is detected, or when a transition from AC or battery power source occurs.</para
       >
       <para
@@ -36,8 +38,12 @@
 
         
 
+        
+
          property of a <see
          cref="T:Microsoft.Win32.PowerModeChangedEventArgs" />
+
+        
 
         
 
@@ -51,6 +57,8 @@
       <para
         >Provides data for the <see
          cref="E:Microsoft.Win32.SystemEvents.PowerModeChanged" />
+
+        
 
         
 
@@ -90,6 +98,8 @@
 
             
 
+            
+
              that indicates a type of power mode event.</para
           >
         </remarks>
@@ -98,6 +108,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:Microsoft.Win32.PowerModeChangedEventArgs" />
+
+            
 
             
 
@@ -113,8 +125,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:Microsoft.Win32.PowerModes" />
+
+          
 
           
 

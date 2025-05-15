@@ -26,8 +26,12 @@
 
         
 
+        
+
          event occurs when the user requests help for a control. A <see
          cref="T:System.Windows.Forms.HelpEventArgs" />
+
+        
 
         
 
@@ -45,6 +49,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -53,6 +59,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.Control.HelpRequested" />
+
+        
 
         
 
@@ -84,11 +92,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="mousePos">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

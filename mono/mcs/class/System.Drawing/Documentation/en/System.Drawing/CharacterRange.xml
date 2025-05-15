@@ -41,11 +41,15 @@
 
             
 
+            
+
              structure, specifying a range of character positions within a string.</para
           >
         </summary>
         <param name="First">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -58,10 +62,14 @@
 
           
 
+          
+
            is set to 0, the first position of the range is position 0 in the string. </param
         >
         <param name="Length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -98,6 +106,8 @@
 
             
 
+            
+
              to test for equality.</para
           >
         </remarks>
@@ -115,8 +125,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Drawing.CharacterRange.Length" />
+
+            
 
             
 
@@ -127,6 +141,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -151,6 +167,8 @@
           <para
             >Gets or sets the position in the string of the first character of this <see
              cref="T:System.Drawing.CharacterRange" />
+
+            
 
             
 
@@ -201,6 +219,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -237,6 +257,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -250,8 +272,12 @@
 
             
 
+            
+
              objects. Gets a value indicating whether the <see
              cref="P:System.Drawing.CharacterRange.First" />
+
+            
 
             
 
@@ -264,8 +290,12 @@
 
             
 
+            
+
              values of the two <see
              cref="T:System.Drawing.CharacterRange" />
+
+            
 
             
 
@@ -284,6 +314,8 @@
 
             
 
+            
+
              objects have the same <see
              cref="P:System.Drawing.CharacterRange.First" />
 
@@ -291,8 +323,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Drawing.CharacterRange.Length" />
+
+            
 
             
 
@@ -308,8 +344,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.CharacterRange" />
+
+          
 
           
 
@@ -324,8 +364,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.CharacterRange" />
+
+          
 
           
 
@@ -362,8 +406,12 @@
 
             
 
+            
+
              method returns the opposite of the <see
              cref="M:System.Drawing.CharacterRange.op_Equality(System.Drawing.CharacterRange,System.Drawing.CharacterRange)" />
+
+            
 
             
 
@@ -382,8 +430,12 @@
 
             
 
+            
+
              objects. Gets a value indicating whether the <see
              cref="P:System.Drawing.CharacterRange.First" />
+
+            
 
             
 
@@ -396,8 +448,12 @@
 
             
 
+            
+
              values of the two <see
              cref="T:System.Drawing.CharacterRange" />
+
+            
 
             
 
@@ -416,6 +472,8 @@
 
             
 
+            
+
              or <see
              cref="P:System.Drawing.CharacterRange.Length" />
 
@@ -423,8 +481,12 @@
 
             
 
+            
+
              values of the two <see
              cref="T:System.Drawing.CharacterRange" />
+
+            
 
             
 
@@ -440,8 +502,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.CharacterRange" />
+
+          
 
           
 
@@ -456,8 +522,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.CharacterRange" />
+
+          
 
           
 

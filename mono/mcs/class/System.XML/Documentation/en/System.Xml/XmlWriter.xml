@@ -39,10 +39,14 @@
 
         
 
+        
+
          class writes XML data to a stream, file, text reader, or string. It supports the W3C <see
          cref="http://www.w3.org/TR/2006/REC-xml-20060816/"
           >Extensible Markup Language (XML) 1.0 (fourth edition)</see
         >
+
+        
 
         
 
@@ -55,11 +59,15 @@
 
         
 
+        
+
          recommendations.</para
       >
       <para
         >The members of the <see
          cref="T:System.Xml.XmlWriter" />
+
+        
 
         
 
@@ -143,8 +151,12 @@
 
         
 
+        
+
          instance, use the <see
          cref="Overload:System.Xml.XmlWriter.Create" />
+
+        
 
         
 
@@ -157,6 +169,8 @@
 
         
 
+        
+
          to the <see
          cref="Overload:System.Xml.XmlWriter.Create" />
 
@@ -164,8 +178,12 @@
 
         
 
+        
+
          method. Otherwise, default settings are used. See the <see
          cref="Overload:System.Xml.XmlWriter.Create" />
+
+        
 
         
 
@@ -187,8 +205,12 @@
 
         
 
+        
+
          class includes several properties that control how <see
          cref="T:System.Xml.XmlWriter" />
+
+        
 
         
 
@@ -272,6 +294,8 @@
 
               
 
+              
+
                should be set to true when using this property. The default is false.</para
             >
           </description>
@@ -295,8 +319,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Xml.XmlWriterSettings.IndentChars" />
+
+        
 
         
 
@@ -308,6 +336,8 @@
       <para
         >Use the <see
          cref="P:System.Xml.XmlWriterSettings.NewLineOnAttributes" />
+
+        
 
         
 
@@ -330,6 +360,8 @@
 
         
 
+        
+
          class to check for data conformance:</para
       >
       <list type="bullet">
@@ -342,8 +374,12 @@
 
             
 
+            
+
              property instructs the XML writer to check characters and throw an <see
              cref="T:System.Xml.XmlException" />
+
+            
 
             
 
@@ -361,8 +397,12 @@
 
             
 
+            
+
              property configures the XML writer to check that the stream being written complies with the rules for a well-formed XML 1.0 document or document fragment, as defined by the W3C. The three conformance levels are described in the following table. The default is <see
              cref="F:System.Xml.ConformanceLevel.Document" />
+
+            
 
             
 
@@ -375,8 +415,12 @@
 
             
 
+            
+
              property and the <see
              cref="T:System.Xml.ConformanceLevel" />
+
+            
 
             
 
@@ -442,6 +486,8 @@
 
         
 
+        
+
          methods to write element nodes. For examples, see the methods listed.</para
       >
       <list type="table">
@@ -480,8 +526,12 @@
 
               
 
+              
+
                to write a typed value, <see
                cref="M:System.Xml.XmlWriter.WriteCharEntity(System.Char)" />
+
+              
 
               
 
@@ -494,8 +544,12 @@
 
               
 
+              
+
                to write an attribute, or you can write a child element. This is a more sophisticated version of the <see
                cref="Overload:System.Xml.XmlWriter.WriteElementString" />
+
+              
 
               
 
@@ -511,8 +565,12 @@
 
               
 
+              
+
                or <see
                cref="M:System.Xml.XmlWriter.WriteFullEndElement" />
+
+              
 
               
 
@@ -538,6 +596,8 @@
 
               
 
+              
+
                or <see
                cref="T:System.Xml.XPath.XPathNavigator" />
 
@@ -545,8 +605,12 @@
 
               
 
+              
+
                object. When called, it copies everything from the source object to the <see
                cref="T:System.Xml.XmlWriter" />
+
+              
 
               
 
@@ -567,6 +631,8 @@
       <para
         >You can use the following <see
          cref="T:System.Xml.XmlWriter" />
+
+        
 
         
 
@@ -610,8 +676,12 @@
 
               
 
+              
+
                to write a typed value. This is a more sophisticated version of the <see
                cref="Overload:System.Xml.XmlWriter.WriteElementString" />
+
+              
 
               
 
@@ -622,6 +692,8 @@
             <para
               >To close the element, you call the <see
                cref="M:System.Xml.XmlWriter.WriteEndAttribute" />
+
+              
 
               
 
@@ -641,6 +713,8 @@
             <para
               >To copy all the attributes found at the current position of an <see
                cref="T:System.Xml.XmlReader" />
+
+              
 
               
 
@@ -680,6 +754,8 @@
 
         
 
+        
+
          maintains a namespace stack that corresponds to all the namespaces defined in the current namespace scope. When writing elements and attributes you can utilize namespaces in the following ways:</para
       >
       <list type="bullet">
@@ -692,8 +768,12 @@
 
             
 
+            
+
              method. This can be useful when you know how to best optimize the number of namespace declarations. For an example, see the <see
              cref="M:System.Xml.XmlWriter.WriteAttributeString(System.String,System.String,System.String,System.String)" />
+
+            
 
             
 
@@ -711,6 +791,8 @@
 
             
 
+            
+
              method changes the namespace URI for the "x" prefix from "123" to "abc".</para
           >
           <para>code reference: XmlWriter_v2#18</para>
@@ -723,6 +805,8 @@
           <para
             >Specify a namespace prefix when writing attributes or elements. Many of the methods used to write element and attributes enable you to do this. For example, the <see
              cref="M:System.Xml.XmlWriter.WriteStartElement(System.String,System.String,System.String)" />
+
+            
 
             
 
@@ -746,6 +830,8 @@
 
         
 
+        
+
          method accepts a common language runtime (CLR) object, converts the input value to its string representation according to XML schema definition language (XSD) data type conversion rules, and writes it out by using the <see
          cref="M:System.Xml.XmlWriter.WriteString(System.String)" />
 
@@ -753,8 +839,12 @@
 
         
 
+        
+
          method. This is easier than using the methods in the <see
          cref="T:System.Xml.XmlConvert" />
+
+        
 
         
 
@@ -770,11 +860,15 @@
 
         
 
+        
+
          rules for that schema type.</para
       >
       <para
         >For default XSD data types that correspond to CLR types, see the <see
          cref="Overload:System.Xml.XmlWriter.WriteValue" />
+
+        
 
         
 
@@ -790,8 +884,12 @@
 
         
 
+        
+
          can also be used to write to an XML data store. For example, the <see
          cref="T:System.Xml.XPath.XPathNavigator" />
+
+        
 
         
 
@@ -804,8 +902,12 @@
 
         
 
+        
+
          object to create nodes for an <see
          cref="T:System.Xml.XmlDocument" />
+
+        
 
         
 
@@ -818,8 +920,12 @@
 
         
 
+        
+
          method throws an exception if you try to convert to a type that is not allowed.If the data store does not have schema information available to it, the <see
          cref="Overload:System.Xml.XmlWriter.WriteValue" />
+
+        
 
         
 
@@ -841,8 +947,12 @@
 
         
 
+        
+
          methods to output XML, the elements and attributes are not written until you call the <see
          cref="M:System.Xml.XmlWriter.Close" />
+
+        
 
         
 
@@ -855,6 +965,8 @@
 
         
 
+        
+
          to populate an <see
          cref="T:System.Xml.XmlDocument" />
 
@@ -862,8 +974,12 @@
 
         
 
+        
+
          object, you won't be able to see the written elements and attributes in the target document until you close the <see
          cref="T:System.Xml.XmlWriter" />
+
+        
 
         
 
@@ -885,6 +1001,8 @@
 
         
 
+        
+
          methods have asynchronous counterparts that have "Async" at the end of their method names. For example, the asynchronous equivalent of <see
          cref="Overload:System.Xml.XmlWriter.WriteAttributeString" />
 
@@ -892,8 +1010,12 @@
 
         
 
+        
+
          is <see
          cref="Overload:System.Xml.XmlWriter.WriteAttributeStringAsync" />
+
+        
 
         
 
@@ -909,8 +1031,12 @@
 
         
 
+        
+
          method, which doesn't have an asynchronous counterpart, convert the return value to a string and use the <see
          cref="M:System.Xml.XmlWriter.WriteStringAsync(System.String)" />
+
+        
 
         
 
@@ -932,6 +1058,8 @@
 
         
 
+        
+
          class:</para
       >
       <list type="bullet">
@@ -939,6 +1067,8 @@
           <para
             >Exceptions thrown by the <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -955,6 +1085,8 @@
 
             
 
+            
+
              does not validate any data that is passed to the <see
              cref="M:System.Xml.XmlWriter.WriteDocType(System.String,System.String,System.String,System.String)" />
 
@@ -962,8 +1094,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.Xml.XmlWriter.WriteRaw" />
+
+            
 
             
 
@@ -1002,6 +1138,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -1046,8 +1184,12 @@
 
               
 
+              
+
                methods to output XML, the elements and attributes will not be written until you call the <see
                cref="M:System.Xml.XmlWriter.Close" />
+
+              
 
               
 
@@ -1060,8 +1202,12 @@
 
               
 
+              
+
               , until you close the <see
                cref="T:System.Xml.XmlWriter" />
+
+              
 
               
 
@@ -1105,6 +1251,8 @@
           <para
             >When you use this overload, an <see
              cref="T:System.Xml.XmlWriterSettings" />
+
+            
 
             
 
@@ -1201,6 +1349,8 @@
 
                   
 
+                  
+
                    (no removal)</para
                 >
               </description>
@@ -1278,8 +1428,12 @@
 
             
 
+            
+
              object as one of its arguments, and pass in an <see
              cref="T:System.Xml.XmlWriterSettings" />
+
+            
 
             
 
@@ -1295,8 +1449,12 @@
 
             
 
+            
+
              object and set the Encoding property to be a new <see
              cref="T:System.Text.UTF8Encoding" />
+
+            
 
             
 
@@ -1315,6 +1473,8 @@
 
             
 
+            
+
              instance using the specified stream.</para
           >
         </summary>
@@ -1323,6 +1483,8 @@
           <para
             >An <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -1338,8 +1500,12 @@
 
           
 
+          
+
           The stream to which you want to write. The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -1381,6 +1547,8 @@
 
             
 
+            
+
              object with default settings is used to create the XML writer. </para
           >
           <list type="table">
@@ -1467,6 +1635,8 @@
               <description>
                 <para>
                   <see cref="F:System.Xml.NamespaceHandling.Default" />
+
+                  
 
                   
 
@@ -1549,8 +1719,12 @@
 
             
 
+            
+
              object as one of its arguments, and pass in an <see
              cref="T:System.Xml.XmlWriterSettings" />
+
+            
 
             
 
@@ -1569,8 +1743,12 @@
 
             
 
+            
+
              instance using the specified <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -1589,11 +1767,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="output">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1606,6 +1788,8 @@
 
           
 
+          
+
            to which you want to write. The <see
            cref="T:System.Xml.XmlWriter" />
 
@@ -1613,8 +1797,12 @@
 
           
 
+          
+
            writes XML 1.0 text syntax and appends it to the specified <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -1656,6 +1844,8 @@
 
             
 
+            
+
              object with default settings is used to create the XML writer. </para
           >
           <list type="table">
@@ -1747,6 +1937,8 @@
 
                   
 
+                  
+
                    (no removal)</para
                 >
               </description>
@@ -1824,8 +2016,12 @@
 
             
 
+            
+
              object as one of its arguments, and pass in a <see
              cref="T:System.Xml.XmlWriterSettings" />
+
+            
 
             
 
@@ -1844,6 +2040,8 @@
 
             
 
+            
+
              instance using the specified filename.</para
           >
         </summary>
@@ -1852,6 +2050,8 @@
           <para
             >An <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -1867,6 +2067,8 @@
 
           
 
+          
+
           The file to which you want to write. The <see
            cref="T:System.Xml.XmlWriter" />
 
@@ -1874,8 +2076,12 @@
 
           
 
+          
+
            creates a file at the specified path and writes to it in XML 1.0 text syntax. The <paramref
            name="outputFileName" />
+
+          
 
           
 
@@ -1917,6 +2123,8 @@
 
             
 
+            
+
              object with default settings is used to create the XML writer. </para
           >
           <list type="table">
@@ -2008,6 +2216,8 @@
 
                   
 
+                  
+
                    (no removal)</para
                 >
               </description>
@@ -2085,8 +2295,12 @@
 
             
 
+            
+
              object as one of its arguments, and pass in a <see
              cref="T:System.Xml.XmlWriterSettings" />
+
+            
 
             
 
@@ -2105,8 +2319,12 @@
 
             
 
+            
+
              instance using the specified <see
              cref="T:System.Text.StringBuilder" />
+
+            
 
             
 
@@ -2125,11 +2343,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="output">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2142,6 +2364,8 @@
 
           
 
+          
+
            to which to write to. Content written by the <see
            cref="T:System.Xml.XmlWriter" />
 
@@ -2149,8 +2373,12 @@
 
           
 
+          
+
            is appended to the <see
            cref="T:System.Text.StringBuilder" />
+
+          
 
           
 
@@ -2192,8 +2420,12 @@
 
             
 
+            
+
              object. The underlying <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -2206,8 +2438,12 @@
 
             
 
+            
+
              method, or an object created using the <see
              cref="T:System.Xml.XmlTextWriter" />
+
+            
 
             
 
@@ -2218,6 +2454,8 @@
           <para
             >When you use this overload, an <see
              cref="T:System.Xml.XmlWriterSettings" />
+
+            
 
             
 
@@ -2314,6 +2552,8 @@
 
                   
 
+                  
+
                    (no removal)</para
                 >
               </description>
@@ -2391,8 +2631,12 @@
 
             
 
+            
+
              object as one of its arguments, and pass in a <see
              cref="T:System.Xml.XmlWriterSettings" />
+
+            
 
             
 
@@ -2411,8 +2655,12 @@
 
             
 
+            
+
              instance using the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -2431,8 +2679,12 @@
 
             
 
+            
+
              object that is wrapped around the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -2448,8 +2700,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -2492,8 +2748,12 @@
 
             
 
+            
+
              object and set the Encoding property to be a new <see
              cref="T:System.Text.UTF8Encoding" />
+
+            
 
             
 
@@ -2512,8 +2772,12 @@
 
             
 
+            
+
              instance using the stream and <see
              cref="T:System.Xml.XmlWriterSettings" />
+
+            
 
             
 
@@ -2532,6 +2796,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -2542,8 +2808,12 @@
 
           
 
+          
+
           The stream to which you want to write. The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -2558,8 +2828,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriterSettings" />
+
+          
 
           
 
@@ -2572,8 +2846,12 @@
 
           
 
+          
+
            instance. If this is null, a <see
            cref="T:System.Xml.XmlWriterSettings" />
+
+          
 
           
 
@@ -2617,6 +2895,8 @@
 
             
 
+            
+
              instance using the <see
              cref="T:System.IO.TextWriter" />
 
@@ -2624,8 +2904,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Xml.XmlWriterSettings" />
+
+            
 
             
 
@@ -2644,11 +2928,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="output">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2661,6 +2949,8 @@
 
           
 
+          
+
            to which you want to write. The <see
            cref="T:System.Xml.XmlWriter" />
 
@@ -2668,8 +2958,12 @@
 
           
 
+          
+
            writes XML 1.0 text syntax and appends it to the specified <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -2684,8 +2978,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriterSettings" />
+
+          
 
           
 
@@ -2698,8 +2996,12 @@
 
           
 
+          
+
            instance. If this is null, a <see
            cref="T:System.Xml.XmlWriterSettings" />
+
+          
 
           
 
@@ -2743,8 +3045,12 @@
 
             
 
+            
+
              instance using the filename and <see
              cref="T:System.Xml.XmlWriterSettings" />
+
+            
 
             
 
@@ -2763,11 +3069,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="outputFileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2780,8 +3090,12 @@
 
           
 
+          
+
            creates a file at the specified path and writes to it in XML 1.0 text syntax. The <paramref
            name="outputFileName" />
+
+          
 
           
 
@@ -2796,8 +3110,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriterSettings" />
+
+          
 
           
 
@@ -2810,8 +3128,12 @@
 
           
 
+          
+
            instance. If this is null, a <see
            cref="T:System.Xml.XmlWriterSettings" />
+
+          
 
           
 
@@ -2855,6 +3177,8 @@
 
             
 
+            
+
              instance using the <see
              cref="T:System.Text.StringBuilder" />
 
@@ -2862,8 +3186,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Xml.XmlWriterSettings" />
+
+            
 
             
 
@@ -2882,11 +3210,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="output">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2899,6 +3231,8 @@
 
           
 
+          
+
            to which to write to. Content written by the <see
            cref="T:System.Xml.XmlWriter" />
 
@@ -2906,8 +3240,12 @@
 
           
 
+          
+
            is appended to the <see
            cref="T:System.Text.StringBuilder" />
+
+          
 
           
 
@@ -2922,8 +3260,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriterSettings" />
+
+          
 
           
 
@@ -2936,8 +3278,12 @@
 
           
 
+          
+
            instance. If this is null, a <see
            cref="T:System.Xml.XmlWriterSettings" />
+
+          
 
           
 
@@ -2980,8 +3326,12 @@
 
             
 
+            
+
              object. The underlying <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -2994,8 +3344,12 @@
 
             
 
+            
+
              method, or an object created using the <see
              cref="T:System.Xml.XmlTextWriter" />
+
+            
 
             
 
@@ -3014,6 +3368,8 @@
 
             
 
+            
+
              instance using the specified <see
              cref="T:System.Xml.XmlWriter" />
 
@@ -3021,8 +3377,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Xml.XmlWriterSettings" />
+
+            
 
             
 
@@ -3041,8 +3401,12 @@
 
             
 
+            
+
              object that is wrapped around the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -3058,8 +3422,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -3074,8 +3442,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriterSettings" />
+
+          
 
           
 
@@ -3088,8 +3460,12 @@
 
           
 
+          
+
            instance. If this is null, a <see
            cref="T:System.Xml.XmlWriterSettings" />
+
+          
 
           
 
@@ -3120,6 +3496,8 @@
           <para
             >Releases all resources used by the current instance of the <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -3160,11 +3538,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3205,11 +3587,15 @@
 
             
 
+            
+
              when you want to write more to the underlying stream without losing what is still in the buffer.</para
           >
           <para
             >For the asynchronous version of this method, see <see
              cref="M:System.Xml.XmlWriter.FlushAsync" />
+
+            
 
             
 
@@ -3253,8 +3639,12 @@
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlWriterSettings.Async" />
+
+            
 
             
 
@@ -3315,6 +3705,8 @@
 
           
 
+          
+
           is <see
            langword="null" />
 
@@ -3322,8 +3714,12 @@
 
           
 
+          
+
            or <see
            cref="F:System.String.Empty" qualify="true" />
+
+          
 
           
 
@@ -3341,6 +3737,8 @@
         </returns>
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3381,6 +3779,8 @@
 
             
 
+            
+
              class is used to specify the set of features to support on the created writer instance. The <see
              cref="T:System.Xml.XmlWriterSettings" />
 
@@ -3388,8 +3788,12 @@
 
             
 
+            
+
              object returned by the <see
              cref="P:System.Xml.XmlWriter.Settings" />
+
+            
 
             
 
@@ -3408,8 +3812,12 @@
 
             
 
+            
+
              object used to create this <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -3439,8 +3847,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -3454,6 +3866,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.IDisposable.Dispose" />
+
+            
 
             
 
@@ -3501,8 +3915,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -3518,8 +3936,12 @@
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -3534,9 +3956,13 @@
 
           
 
+          
+
            is not positioned on a node of <see
            cref="T:System.Xml.XmlNodeType" />
           <see langword="Attribute" />
+
+          
 
           
 
@@ -3549,8 +3975,12 @@
 
           
 
+          
+
           , or <see
            langword="XmlDeclaration" />
+
+          
 
           
 
@@ -3568,6 +3998,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -3578,11 +4010,15 @@
 
             
 
+            
+
             , to ensure well-formed XML any content (which has been expanded from the entities) that could result in an invalid document is replaced when written. For example, if an attribute includes an &amp;gt; entity that has been expanded, to ensure a well-formed document the expanded &gt; is replaced when written out with &amp;gt;.</para
           >
           <para
             >For the asynchronous version of this method, see <see
              cref="M:System.Xml.XmlWriter.WriteAttributesAsync(System.Xml.XmlReader,System.Boolean)" />
+
+            
 
             
 
@@ -3601,6 +4037,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3611,10 +4049,14 @@
 
           
 
+          
+
           The XmlReader from which to copy the attributes.</param
         >
         <param name="defattr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3656,8 +4098,12 @@
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlWriterSettings.Async" />
+
+            
 
             
 
@@ -3671,6 +4117,8 @@
           <para
             >Asynchronously writes out all the attributes found at the current position in the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -3690,10 +4138,14 @@
 
           
 
+          
+
           The XmlReader from which to copy the attributes.</param
         >
         <param name="defattr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3737,6 +4189,8 @@
 
           
 
+          
+
            is <see
            langword="null" />
 
@@ -3744,8 +4198,12 @@
 
           
 
+          
+
            or <see
            cref="F:System.String.Empty" qualify="true" />
+
+          
 
           
 
@@ -3761,8 +4219,12 @@
 
           
 
+          
+
            is not <see
            cref="F:System.Xml.WriteState.Element" qualify="true" />
+
+          
 
           
 
@@ -3772,6 +4234,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3801,6 +4265,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3815,10 +4281,14 @@
 
           
 
+          
+
           The local name of the attribute.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3864,6 +4334,8 @@
 
           
 
+          
+
            is <see
            langword="null" />
 
@@ -3871,8 +4343,12 @@
 
           
 
+          
+
            or <see
            cref="F:System.String.Empty" qualify="true" />
+
+          
 
           
 
@@ -3888,8 +4364,12 @@
 
           
 
+          
+
            is not <see
            cref="F:System.Xml.WriteState.Element" qualify="true" />
+
+          
 
           
 
@@ -3904,10 +4384,14 @@
 
           
 
+          
+
           The namespace URI to associate with the attribute.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3925,8 +4409,12 @@
 
             
 
+            
+
              is "xmlns" then this method also treats this as a namespace declaration. In this case, the <paramref
              name="ns" />
+
+            
 
             
 
@@ -3954,6 +4442,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3968,6 +4458,8 @@
 
           
 
+          
+
           The local name of the attribute.</param
         >
         <param name="ns">
@@ -3977,10 +4469,14 @@
 
           
 
+          
+
           The namespace URI to associate with the attribute.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4027,6 +4523,8 @@
 
           
 
+          
+
            is <see
            langword="null" />
 
@@ -4034,8 +4532,12 @@
 
           
 
+          
+
            or <see
            cref="F:System.String.Empty" qualify="true" />
+
+          
 
           
 
@@ -4051,8 +4553,12 @@
 
           
 
+          
+
            is not <see
            cref="F:System.Xml.WriteState.Element" qualify="true" />
+
+          
 
           
 
@@ -4067,10 +4573,14 @@
 
           
 
+          
+
           The local name of the attribute.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4085,6 +4595,8 @@
 
           
 
+          
+
           The value of the attribute.</param
         >
         <remarks>
@@ -4092,6 +4604,8 @@
           <para
             >This method writes out the attribute with a user defined namespace prefix and associates it with the given namespace. If the prefix is "xmlns" then this method also treats this as a namespace declaration and associates the declared prefix with the namespace URI provided in the given attribute value. In this case the <paramref
              name="ns" />
+
+            
 
             
 
@@ -4119,6 +4633,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4133,10 +4649,14 @@
 
           
 
+          
+
           The namespace prefix of the attribute.</param
         >
         <param name="localName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4151,10 +4671,14 @@
 
           
 
+          
+
           The namespace URI of the attribute.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4198,8 +4722,12 @@
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlWriterSettings.Async" />
+
+            
 
             
 
@@ -4223,10 +4751,14 @@
 
           
 
+          
+
           The namespace prefix of the attribute.</param
         >
         <param name="localName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4241,10 +4773,14 @@
 
           
 
+          
+
           The namespace URI of the attribute.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4289,8 +4825,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -4306,8 +4846,12 @@
 
           
 
+          
+
            is less than <paramref
            name="count" />
+
+          
 
           
 
@@ -4322,8 +4866,12 @@
 
           
 
+          
+
            or <paramref
            name="count" />
+
+          
 
           
 
@@ -4339,8 +4887,12 @@
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -4354,6 +4906,8 @@
           <para
             >For the asynchronous version of this method, see <see
              cref="M:System.Xml.XmlWriter.WriteBase64Async(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -4373,6 +4927,8 @@
 
           
 
+          
+
           Byte array to encode.</param
         >
         <param name="index">
@@ -4382,10 +4938,14 @@
 
           
 
+          
+
           The position in the buffer indicating the start of the bytes to write.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4428,8 +4988,12 @@
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlWriterSettings.Async" />
+
+            
 
             
 
@@ -4453,6 +5017,8 @@
 
           
 
+          
+
           Byte array to encode.</param
         >
         <param name="index">
@@ -4462,10 +5028,14 @@
 
           
 
+          
+
           The position in the buffer indicating the start of the bytes to write.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4510,8 +5080,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -4527,8 +5101,12 @@
 
           
 
+          
+
            is less than <paramref
            name="count" />
+
+          
 
           
 
@@ -4543,8 +5121,12 @@
 
           
 
+          
+
            or <paramref
            name="count" />
+
+          
 
           
 
@@ -4560,8 +5142,12 @@
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -4574,6 +5160,8 @@
           <para
             >For the asynchronous version of this method, see <see
              cref="M:System.Xml.XmlWriter.WriteBinHexAsync(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -4593,6 +5181,8 @@
 
           
 
+          
+
           Byte array to encode.</param
         >
         <param name="index">
@@ -4602,10 +5192,14 @@
 
           
 
+          
+
           The position in the buffer indicating the start of the bytes to write.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4648,8 +5242,12 @@
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlWriterSettings.Async" />
+
+            
 
             
 
@@ -4673,6 +5271,8 @@
 
           
 
+          
+
           Byte array to encode.</param
         >
         <param name="index">
@@ -4682,10 +5282,14 @@
 
           
 
+          
+
           The position in the buffer indicating the start of the bytes to write.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4729,8 +5333,12 @@
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -4748,11 +5356,15 @@
 
             
 
+            
+
              is either null or String.Empty, this method writes an empty CDATA block, for example &lt;![CDATA[]]&gt;.</para
           >
           <para
             >For the asynchronous version of this method, see <see
              cref="M:System.Xml.XmlWriter.WriteCDataAsync(System.String)" />
+
+            
 
             
 
@@ -4767,6 +5379,8 @@
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4807,8 +5421,12 @@
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlWriterSettings.Async" />
+
+            
 
             
 
@@ -4827,6 +5445,8 @@
         </returns>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4870,8 +5490,12 @@
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -4890,6 +5514,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4899,6 +5525,8 @@
         </summary>
         <param name="ch">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4939,8 +5567,12 @@
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlWriterSettings.Async" />
+
+            
 
             
 
@@ -4959,6 +5591,8 @@
         </returns>
         <param name="ch">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5003,8 +5637,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -5020,8 +5658,12 @@
 
           
 
+          
+
            is less than <paramref
            name="count" />
+
+          
 
           
 
@@ -5036,8 +5678,12 @@
 
           
 
+          
+
            or <paramref
            name="count" />
+
+          
 
           
 
@@ -5053,8 +5699,12 @@
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -5074,6 +5724,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5088,6 +5740,8 @@
 
           
 
+          
+
           Character array containing the text to write.</param
         >
         <param name="index">
@@ -5097,10 +5751,14 @@
 
           
 
+          
+
           The position in the buffer indicating the start of the text to write.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5143,8 +5801,12 @@
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlWriterSettings.Async" />
+
+            
 
             
 
@@ -5168,6 +5830,8 @@
 
           
 
+          
+
           Character array containing the text to write.</param
         >
         <param name="index">
@@ -5177,10 +5841,14 @@
 
           
 
+          
+
           The position in the buffer indicating the start of the text to write.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5224,8 +5892,12 @@
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -5243,11 +5915,15 @@
 
             
 
+            
+
              is either null or String.Empty, this method writes a comment with no data content, for example &lt;!----&gt;.</para
           >
           <para
             >If <paramref
              name="text" />
+
+            
 
             
 
@@ -5260,8 +5936,12 @@
 
             
 
+            
+
              can either throw an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -5274,6 +5954,8 @@
 
             
 
+            
+
              objects) or insert a space between the dashes "- -" so that the text is a valid XML comment (<see
              cref="T:System.Xml.XmlWriter" />
 
@@ -5281,8 +5963,12 @@
 
             
 
+            
+
              objects created by the <see
              cref="Overload:System.Xml.XmlWriter.Create" />
+
+            
 
             
 
@@ -5298,6 +5984,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5307,6 +5995,8 @@
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5347,8 +6037,12 @@
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlWriterSettings.Async" />
+
+            
 
             
 
@@ -5367,6 +6061,8 @@
         </returns>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5413,8 +6109,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -5427,12 +6127,16 @@
 
             
 
+            
+
             .</para
           >
           <para>-or-</para>
           <para
             >The value for <paramref
              name="name" />
+
+            
 
             
 
@@ -5454,6 +6158,8 @@
 
             
 
+            
+
             , <paramref
              name="sysid" />
 
@@ -5461,8 +6167,12 @@
 
             
 
+            
+
              or <paramref
              name="subset" />
+
+            
 
             
 
@@ -5479,8 +6189,12 @@
 
               
 
+              
+
                does not validate the data that is passed to the <see
                cref="M:System.Xml.XmlWriter.WriteDocType(System.String,System.String,System.String,System.String)" />
+
+              
 
               
 
@@ -5492,6 +6206,8 @@
           <para
             >For the asynchronous version of this method, see <see
              cref="M:System.Xml.XmlWriter.WriteDocTypeAsync(System.String,System.String,System.String,System.String)" />
+
+            
 
             
 
@@ -5511,10 +6227,14 @@
 
           
 
+          
+
           The name of the DOCTYPE. This must be non-empty.</param
         >
         <param name="pubid">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5527,8 +6247,12 @@
 
           
 
+          
+
            and <paramref
            name="sysid" />
+
+          
 
           
 
@@ -5543,8 +6267,12 @@
 
           
 
+          
+
           If <paramref
            name="pubid" />
+
+          
 
           
 
@@ -5557,8 +6285,12 @@
 
           
 
+          
+
            is non-null it writes SYSTEM "sysid" where <paramref
            name="sysid" />
+
+          
 
           
 
@@ -5568,6 +6300,8 @@
         >
         <param name="subset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5611,8 +6345,12 @@
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlWriterSettings.Async" />
+
+            
 
             
 
@@ -5636,10 +6374,14 @@
 
           
 
+          
+
           The name of the DOCTYPE. This must be non-empty.</param
         >
         <param name="pubid">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5652,8 +6394,12 @@
 
           
 
+          
+
            and <paramref
            name="sysid" />
+
+          
 
           
 
@@ -5668,8 +6414,12 @@
 
           
 
+          
+
           If <paramref
            name="pubid" />
+
+          
 
           
 
@@ -5682,8 +6432,12 @@
 
           
 
+          
+
            is non-null it writes SYSTEM "sysid" where <paramref
            name="sysid" />
+
+          
 
           
 
@@ -5693,6 +6447,8 @@
         >
         <param name="subset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5737,8 +6493,12 @@
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -5753,6 +6513,8 @@
 
           
 
+          
+
           The value of the element.</param
         >
         <remarks>
@@ -5760,6 +6522,8 @@
           <para
             >For the asynchronous version of this method, see <see
              cref="M:System.Xml.XmlWriter.WriteElementStringAsync(System.String,System.String)" />
+
+            
 
             
 
@@ -5779,10 +6543,14 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5829,8 +6597,12 @@
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -5845,6 +6617,8 @@
 
           
 
+          
+
           The value of the element.</param
         >
         <remarks>
@@ -5852,6 +6626,8 @@
           <para
             >For the asynchronous version of this method, see <see
              cref="M:System.Xml.XmlWriter.WriteElementStringAsync(System.String,System.String,System.String)" />
+
+            
 
             
 
@@ -5871,6 +6647,8 @@
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="ns">
@@ -5880,10 +6658,14 @@
 
           
 
+          
+
           The namespace URI to associate with the element.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5929,6 +6711,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5943,10 +6727,14 @@
 
           
 
+          
+
           The prefix of the element.</param
         >
         <param name="localName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5961,10 +6749,14 @@
 
           
 
+          
+
           The namespace URI of the element.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6007,8 +6799,12 @@
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlWriterSettings.Async" />
+
+            
 
             
 
@@ -6032,10 +6828,14 @@
 
           
 
+          
+
           The prefix of the element.</param
         >
         <param name="localName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6050,10 +6850,14 @@
 
           
 
+          
+
           The namespace URI of the element.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6092,8 +6896,12 @@
 
           
 
+          
+
            is not <see
            cref="F:System.Xml.WriteState.Attribute" qualify="true" />
+
+          
 
           
 
@@ -6112,8 +6920,12 @@
 
             
 
+            
+
             , or calling <see
              cref="M:System.Xml.XmlWriter.WriteEndElement" />
+
+            
 
             
 
@@ -6130,8 +6942,12 @@
 
               
 
+              
+
                methods to output XML, the elements and attributes will not be written until you call the <see
                cref="M:System.Xml.XmlWriter.Close" />
+
+              
 
               
 
@@ -6144,8 +6960,12 @@
 
               
 
+              
+
               , until you close the <see
                cref="T:System.Xml.XmlWriter" />
+
+              
 
               
 
@@ -6162,6 +6982,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -6170,6 +6992,8 @@
           <para
             >When overridden in a derived class, closes the previous <see
              cref="M:System.Xml.XmlWriter.WriteStartAttribute(System.String,System.String)" />
+
+            
 
             
 
@@ -6209,8 +7033,12 @@
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlWriterSettings.Async" />
+
+            
 
             
 
@@ -6224,6 +7052,8 @@
           <para
             >Asynchronously closes the previous <see
              cref="M:System.Xml.XmlWriter.WriteStartAttribute(System.String,System.String)" />
+
+            
 
             
 
@@ -6267,6 +7097,8 @@
 
           
 
+          
+
           , or the document does not have a root element.</exception
         >
         <remarks>
@@ -6280,8 +7112,12 @@
 
               
 
+              
+
                methods to output XML, the elements and attributes will not be written until you call the <see
                cref="M:System.Xml.XmlWriter.Close" />
+
+              
 
               
 
@@ -6294,8 +7130,12 @@
 
               
 
+              
+
               , until you close the <see
                cref="T:System.Xml.XmlWriter" />
+
+              
 
               
 
@@ -6307,6 +7147,8 @@
           <para
             >For the asynchronous version of this method, see <see
              cref="M:System.Xml.XmlWriter.WriteEndDocumentAsync" />
+
+            
 
             
 
@@ -6350,8 +7192,12 @@
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlWriterSettings.Async" />
+
+            
 
             
 
@@ -6399,8 +7245,12 @@
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -6420,8 +7270,12 @@
 
               
 
+              
+
                methods to output XML, the elements and attributes will not be written until you call the <see
                cref="M:System.Xml.XmlWriter.Close" />
+
+              
 
               
 
@@ -6434,8 +7288,12 @@
 
               
 
+              
+
               , until you close the <see
                cref="T:System.Xml.XmlWriter" />
+
+              
 
               
 
@@ -6447,6 +7305,8 @@
           <para
             >For the asynchronous version of this method, see <see
              cref="M:System.Xml.XmlWriter.WriteEndElementAsync" />
+
+            
 
             
 
@@ -6490,8 +7350,12 @@
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlWriterSettings.Async" />
+
+            
 
             
 
@@ -6540,6 +7404,8 @@
 
           
 
+          
+
            is either <see
            langword="null" />
 
@@ -6547,8 +7413,12 @@
 
           
 
+          
+
            or <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -6566,6 +7436,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -6575,6 +7447,8 @@
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6615,8 +7489,12 @@
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlWriterSettings.Async" />
+
+            
 
             
 
@@ -6635,6 +7513,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6673,8 +7553,12 @@
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -6688,6 +7572,8 @@
           <para
             >For the asynchronous version of this method, see <see
              cref="M:System.Xml.XmlWriter.WriteFullEndElementAsync" />
+
+            
 
             
 
@@ -6731,8 +7617,12 @@
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlWriterSettings.Async" />
+
+            
 
             
 
@@ -6782,8 +7672,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -6796,8 +7690,12 @@
 
             
 
+            
+
             ; or <paramref
              name="name" />
+
+            
 
             
 
@@ -6814,8 +7712,12 @@
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -6833,11 +7735,15 @@
 
             
 
+            
+
              is set to true, WriteName also checks that the name is also valid according to the W3C Namespaces in XML recommendation.</para
           >
           <para
             >For the asynchronous version of this method, see <see
              cref="M:System.Xml.XmlWriter.WriteNameAsync(System.String)" />
+
+            
 
             
 
@@ -6852,6 +7758,8 @@
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6892,8 +7800,12 @@
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlWriterSettings.Async" />
+
+            
 
             
 
@@ -6912,6 +7824,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6952,8 +7866,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -6966,8 +7884,12 @@
 
             
 
+            
+
             ; or <paramref
              name="name" />
+
+            
 
             
 
@@ -6984,8 +7906,12 @@
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -7003,6 +7929,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -7012,6 +7940,8 @@
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7052,8 +7982,12 @@
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlWriterSettings.Async" />
+
+            
 
             
 
@@ -7072,6 +8006,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7115,8 +8051,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -7132,8 +8072,12 @@
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -7150,9 +8094,13 @@
 
             
 
+            
+
              and
    a <see
              cref="T:System.Xml.XmlTextWriter" />
+
+            
 
             
 
@@ -7207,6 +8155,8 @@ public class Copier {
 
                   
 
+                  
+
                    and writes out all the nodes read including attributes, processing instructions, comments, and so on. </para
                 >
                 <para
@@ -7217,8 +8167,12 @@ public class Copier {
 
                   
 
+                  
+
                    is in an initial state. (The <see
                    cref="P:System.Xml.XmlReader.ReadState" />
+
+                  
 
                   
 
@@ -7249,8 +8203,12 @@ public class Copier {
 
                   
 
+                  
+
                    or <see
                    cref="M:System.Xml.XmlWriter.WriteAttributeString(System.String,System.String,System.String)" />
+
+                  
 
                   
 
@@ -7372,6 +8330,8 @@ while (!reader.EOF){
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -7386,8 +8346,12 @@ while (!reader.EOF){
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -7397,6 +8361,8 @@ while (!reader.EOF){
         >
         <param name="defattr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7457,6 +8423,8 @@ while (!reader.EOF){
 
                   
 
+                  
+
                    and writes out all the nodes from the root node (including attributes, processing instructions, comments and so on.)</para
                 >
               </description>
@@ -7482,8 +8450,12 @@ while (!reader.EOF){
 
                   
 
+                  
+
                    or <see
                    cref="M:System.Xml.XmlWriter.WriteAttributeString(System.String,System.String,System.String)" />
+
+                  
 
                   
 
@@ -7514,8 +8486,12 @@ while (!reader.EOF){
 
                   
 
+                  
+
                    or <see
                    cref="M:System.Xml.XmlWriter.WriteAttributeString(System.String,System.String,System.String)" />
+
+                  
 
                   
 
@@ -7566,6 +8542,8 @@ while (!reader.EOF){
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -7579,8 +8557,12 @@ while (!reader.EOF){
 
             
 
+            
+
              object to the writer. The position of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -7596,8 +8578,12 @@ while (!reader.EOF){
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XPath.XPathNavigator" />
+
+          
 
           
 
@@ -7607,6 +8593,8 @@ while (!reader.EOF){
         >
         <param name="defattr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7647,8 +8635,12 @@ while (!reader.EOF){
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlWriterSettings.Async" />
+
+            
 
             
 
@@ -7672,8 +8664,12 @@ while (!reader.EOF){
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -7683,6 +8679,8 @@ while (!reader.EOF){
         >
         <param name="defattr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7723,8 +8721,12 @@ while (!reader.EOF){
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlWriterSettings.Async" />
+
+            
 
             
 
@@ -7743,8 +8745,12 @@ while (!reader.EOF){
 
             
 
+            
+
              object to the writer. The position of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -7764,8 +8770,12 @@ while (!reader.EOF){
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XPath.XPathNavigator" />
+
+          
 
           
 
@@ -7775,6 +8785,8 @@ while (!reader.EOF){
         >
         <param name="defattr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7821,6 +8833,8 @@ while (!reader.EOF){
 
             
 
+            
+
              is <see
              langword="null" />
 
@@ -7828,8 +8842,12 @@ while (!reader.EOF){
 
             
 
+            
+
              or <see
              cref="F:System.String.Empty" qualify="true" />
+
+            
 
             
 
@@ -7846,6 +8864,8 @@ while (!reader.EOF){
 
             
 
+            
+
              has already been called. </para
           >
         </exception>
@@ -7857,8 +8877,12 @@ while (!reader.EOF){
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -7873,6 +8897,8 @@ while (!reader.EOF){
 
           
 
+          
+
           The text to include in the processing instruction.</param
         >
         <remarks>
@@ -7880,6 +8906,8 @@ while (!reader.EOF){
           <para
             >This method can be used to write the XML declaration (rather than <see
              cref="M:System.Xml.XmlWriter.WriteStartDocument" />
+
+            
 
             
 
@@ -7899,11 +8927,15 @@ writer.Close();</code>
 
             
 
+            
+
              is either null or String.Empty, this method writes a ProcessingInstruction with no data content, for example &lt;?name?&gt;.</para
           >
           <para
             >If text contains an invalid sequence of "?&gt;", the <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -7916,8 +8948,12 @@ writer.Close();</code>
 
             
 
+            
+
              (<see
              cref="T:System.Xml.XmlTextWriter" />
+
+            
 
             
 
@@ -7930,8 +8966,12 @@ writer.Close();</code>
 
             
 
+            
+
              objects created by the <see
              cref="Overload:System.Xml.XmlWriter.Create" />
+
+            
 
             
 
@@ -7942,6 +8982,8 @@ writer.Close();</code>
           <para
             >For the asynchronous version of this method, see <see
              cref="M:System.Xml.XmlWriter.WriteProcessingInstructionAsync(System.String,System.String)" />
+
+            
 
             
 
@@ -7961,10 +9003,14 @@ writer.Close();</code>
 
           
 
+          
+
           The name of the processing instruction.</param
         >
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8006,8 +9052,12 @@ writer.Close();</code>
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlWriterSettings.Async" />
+
+            
 
             
 
@@ -8031,10 +9081,14 @@ writer.Close();</code>
 
           
 
+          
+
           The name of the processing instruction.</param
         >
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8079,6 +9133,8 @@ writer.Close();</code>
 
             
 
+            
+
              is <see
              langword="null" />
 
@@ -8086,8 +9142,12 @@ writer.Close();</code>
 
             
 
+            
+
             , is <see
              cref="F:System.String.Empty" qualify="true" />
+
+            
 
             
 
@@ -8104,8 +9164,12 @@ writer.Close();</code>
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -8120,10 +9184,14 @@ writer.Close();</code>
 
           
 
+          
+
            is not a valid XML name.</exception
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8141,6 +9209,8 @@ writer.Close();</code>
 
             
 
+            
+
              maps to the current default namespace, no prefix is generated.</para
           >
           <para
@@ -8151,8 +9221,12 @@ writer.Close();</code>
 
             
 
+            
+
              is not found. When writing element content, it throws an exception if <paramref
              name="ns" />
+
+            
 
             
 
@@ -8169,8 +9243,12 @@ writer.Close();</code>
 
               
 
+              
+
                does not override this method <paramref
                name="localName" />
+
+              
 
               
 
@@ -8183,12 +9261,16 @@ writer.Close();</code>
 
               
 
+              
+
                method.</para
             >
           </block>
           <para
             >For the asynchronous version of this method, see <see
              cref="M:System.Xml.XmlWriter.WriteQualifiedNameAsync(System.String,System.String)" />
+
+            
 
             
 
@@ -8208,10 +9290,14 @@ writer.Close();</code>
 
           
 
+          
+
           The local name to write.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8253,8 +9339,12 @@ writer.Close();</code>
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlWriterSettings.Async" />
+
+            
 
             
 
@@ -8278,10 +9368,14 @@ writer.Close();</code>
 
           
 
+          
+
           The local name to write.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8322,8 +9416,12 @@ writer.Close();</code>
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -8343,8 +9441,12 @@ writer.Close();</code>
 
               
 
+              
+
                does not validate the data that is passed to the <see
                cref="M:System.Xml.XmlWriter.WriteRaw(System.String)" />
+
+              
 
               
 
@@ -8361,6 +9463,8 @@ writer.Close();</code>
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -8370,6 +9474,8 @@ writer.Close();</code>
         </summary>
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8415,8 +9521,12 @@ writer.Close();</code>
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -8432,8 +9542,12 @@ writer.Close();</code>
 
           
 
+          
+
            is less than <paramref
            name="count" />
+
+          
 
           
 
@@ -8448,8 +9562,12 @@ writer.Close();</code>
 
           
 
+          
+
            or <paramref
            name="count" />
+
+          
 
           
 
@@ -8465,8 +9583,12 @@ writer.Close();</code>
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -8486,8 +9608,12 @@ writer.Close();</code>
 
               
 
+              
+
                does not validate the data that is passed to the <see
                cref="M:System.Xml.XmlWriter.WriteRaw(System.Char[],System.Int32,System.Int32)" />
+
+              
 
               
 
@@ -8499,6 +9625,8 @@ writer.Close();</code>
           <para
             >For the asynchronous version of this method, see <see
              cref="M:System.Xml.XmlWriter.WriteRawAsync(System.Char[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -8518,6 +9646,8 @@ writer.Close();</code>
 
           
 
+          
+
           Character array containing the text to write.</param
         >
         <param name="index">
@@ -8527,10 +9657,14 @@ writer.Close();</code>
 
           
 
+          
+
           The position within the buffer indicating the start of the text to write.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8571,8 +9705,12 @@ writer.Close();</code>
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlWriterSettings.Async" />
+
+            
 
             
 
@@ -8591,6 +9729,8 @@ writer.Close();</code>
         </returns>
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8632,8 +9772,12 @@ writer.Close();</code>
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlWriterSettings.Async" />
+
+            
 
             
 
@@ -8657,6 +9801,8 @@ writer.Close();</code>
 
           
 
+          
+
           Character array containing the text to write.</param
         >
         <param name="index">
@@ -8666,10 +9812,14 @@ writer.Close();</code>
 
           
 
+          
+
           The position within the buffer indicating the start of the text to write.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8709,6 +9859,8 @@ writer.Close();</code>
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -8718,6 +9870,8 @@ writer.Close();</code>
         </summary>
         <param name="localName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8762,8 +9916,12 @@ writer.Close();</code>
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -8773,6 +9931,8 @@ writer.Close();</code>
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8790,8 +9950,12 @@ writer.Close();</code>
 
             
 
+            
+
              that allows you to write an attribute value using multiple write methods, such as <see
              cref="M:System.Xml.XmlWriter.WriteString(System.String)" />
+
+            
 
             
 
@@ -8804,11 +9968,15 @@ writer.Close();</code>
 
             
 
+            
+
             , and so on.</para
           >
           <para
             >For the asynchronous version of this method, see <see
              cref="M:System.Xml.XmlWriter.WriteStartAttributeAsync(System.String,System.String)" />
+
+            
 
             
 
@@ -8828,10 +9996,14 @@ writer.Close();</code>
 
           
 
+          
+
           The local name of the attribute.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8878,6 +10050,8 @@ writer.Close();</code>
 
           
 
+          
+
            is not one of the following:<see
            cref="F:System.Xml.WriteState.Attribute" qualify="true" />
 
@@ -8885,8 +10059,12 @@ writer.Close();</code>
 
           
 
+          
+
            or <see
            cref="F:System.Xml.WriteState.Element" qualify="true" />
+
+          
 
           
 
@@ -8901,10 +10079,14 @@ writer.Close();</code>
 
           
 
+          
+
           The local name of the attribute.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8918,6 +10100,8 @@ writer.Close();</code>
           <para
             >For the asynchronous version of this method, see <see
              cref="M:System.Xml.XmlWriter.WriteStartAttributeAsync(System.String,System.String,System.String)" />
+
+            
 
             
 
@@ -8937,6 +10121,8 @@ writer.Close();</code>
 
           
 
+          
+
           The namespace prefix of the attribute.</param
         >
         <param name="localName">
@@ -8946,10 +10132,14 @@ writer.Close();</code>
 
           
 
+          
+
           The local name of the attribute.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8992,8 +10182,12 @@ writer.Close();</code>
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlWriterSettings.Async" />
+
+            
 
             
 
@@ -9017,6 +10211,8 @@ writer.Close();</code>
 
           
 
+          
+
           The namespace prefix of the attribute.</param
         >
         <param name="localName">
@@ -9026,10 +10222,14 @@ writer.Close();</code>
 
           
 
+          
+
           The local name of the attribute.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9068,8 +10268,12 @@ writer.Close();</code>
 
           
 
+          
+
            is not <see
            cref="F:System.Xml.WriteState.Start" qualify="true" />
+
+          
 
           
 
@@ -9087,6 +10291,8 @@ writer.Close();</code>
 
             
 
+            
+
              object is specified in the XmlTextWriter constructor, this determines the value of the encoding attribute. This method does not create a standalone attribute.</para
           >
           <para>When WriteStartDocument is called the writer validates that what you are writing is a well-formed XML document. For example, it checks that the XML declaration is the first node, that one and only one root-level element exists, and so on. If this method is not called, the writer assumes an XML fragment is being written and applies no root level rules.</para>
@@ -9098,11 +10304,15 @@ writer.Close();</code>
 
             
 
+            
+
              method is used to create another XML declaration, an exception will be thrown.</para
           >
           <para
             >For the asynchronous version of this method, see <see
              cref="M:System.Xml.XmlWriter.WriteStartDocumentAsync" />
+
+            
 
             
 
@@ -9152,8 +10362,12 @@ writer.Close();</code>
 
           
 
+          
+
            is not <see
            cref="F:System.Xml.WriteState.Start" qualify="true" />
+
+          
 
           
 
@@ -9171,12 +10385,16 @@ writer.Close();</code>
 
             
 
+            
+
              object is specified in the XmlTextWriter constructor, this determines the value of the encoding attribute.</para
           >
           <para>When WriteStartDocument is called, the writer validates that what you are writing is a well-formed XML document. For example, it checks that the XML declaration is the first node, that one and only one root-level element exists, and so on. If this method is not called, the writer assumes an XML fragment is being written and applies no root level rules.</para>
           <para
             >If WriteStartDocument has been called and then the <see
              cref="M:System.Xml.XmlWriter.WriteProcessingInstruction(System.String,System.String)" />
+
+            
 
             
 
@@ -9192,6 +10410,8 @@ writer.Close();</code>
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -9201,6 +10421,8 @@ writer.Close();</code>
         </summary>
         <param name="standalone">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9239,8 +10461,12 @@ writer.Close();</code>
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlWriterSettings.Async" />
+
+            
 
             
 
@@ -9289,8 +10515,12 @@ writer.Close();</code>
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlWriterSettings.Async" />
+
+            
 
             
 
@@ -9309,6 +10539,8 @@ writer.Close();</code>
         </returns>
         <param name="standalone">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9349,8 +10581,12 @@ writer.Close();</code>
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -9368,6 +10604,8 @@ writer.Close();</code>
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -9377,6 +10615,8 @@ writer.Close();</code>
         </summary>
         <param name="localName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9422,8 +10662,12 @@ writer.Close();</code>
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -9441,8 +10685,12 @@ writer.Close();</code>
 
             
 
+            
+
             , <see
              cref="M:System.Xml.XmlWriter.WriteString(System.String)" />
+
+            
 
             
 
@@ -9455,8 +10703,12 @@ writer.Close();</code>
 
             
 
+            
+
              or <see
              cref="M:System.Xml.XmlWriter.WriteFullEndElement" />
+
+            
 
             
 
@@ -9477,6 +10729,8 @@ writer.Close();</code>
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -9491,10 +10745,14 @@ writer.Close();</code>
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9541,8 +10799,12 @@ writer.Close();</code>
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -9559,6 +10821,8 @@ writer.Close();</code>
 
             
 
+            
+
              for an example demonstrating this method.</para
           >
         </example>
@@ -9567,6 +10831,8 @@ writer.Close();</code>
           <para
             >For the asynchronous version of this method, see <see
              cref="M:System.Xml.XmlWriter.WriteStartElementAsync(System.String,System.String,System.String)" />
+
+            
 
             
 
@@ -9586,6 +10852,8 @@ writer.Close();</code>
 
           
 
+          
+
           The namespace prefix of the element.</param
         >
         <param name="localName">
@@ -9595,10 +10863,14 @@ writer.Close();</code>
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9641,8 +10913,12 @@ writer.Close();</code>
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlWriterSettings.Async" />
+
+            
 
             
 
@@ -9666,6 +10942,8 @@ writer.Close();</code>
 
           
 
+          
+
           The namespace prefix of the element.</param
         >
         <param name="localName">
@@ -9675,10 +10953,14 @@ writer.Close();</code>
 
           
 
+          
+
           The local name of the element.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9716,6 +10998,8 @@ writer.Close();</code>
           <para
             > One of the members of the <see
              cref="T:System.Xml.WriteState" />
+
+            
 
             
 
@@ -9782,8 +11066,12 @@ writer.Close();</code>
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -9807,8 +11095,12 @@ writer.Close();</code>
 
                 
 
+                
+
                  created using <see
                  cref="Overload:System.Xml.XmlWriter.Create" />
+
+                
 
                 
 
@@ -9821,8 +11113,12 @@ writer.Close();</code>
 
                 
 
+                
+
                  when attempting to write character values in the range 0x-0x1F (excluding white space characters 0x9, 0xA, and 0xD). These invalid XML characters can be written by creating the <see
                  cref="T:System.Xml.XmlWriter" />
+
+                
 
                 
 
@@ -9835,8 +11131,12 @@ writer.Close();</code>
 
                 
 
+                
+
                  property set to false. Doing so will result in the characters being replaced with numeric character entities (&amp;#0; through &amp;#0x1F). Additionally, an <see
                  cref="T:System.Xml.XmlTextWriter" />
+
+                
 
                 
 
@@ -9862,11 +11162,15 @@ writer.Close();</code>
 
             
 
+            
+
              is either null or String.Empty, this method writes a text node with no data content.</para
           >
           <para
             >For the asynchronous version of this method, see <see
              cref="M:System.Xml.XmlWriter.WriteStringAsync(System.String)" />
+
+            
 
             
 
@@ -9881,6 +11185,8 @@ writer.Close();</code>
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9921,8 +11227,12 @@ writer.Close();</code>
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlWriterSettings.Async" />
+
+            
 
             
 
@@ -9941,6 +11251,8 @@ writer.Close();</code>
         </returns>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9988,8 +11300,12 @@ writer.Close();</code>
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -9999,6 +11315,8 @@ writer.Close();</code>
         >
         <param name="highChar">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10017,8 +11335,12 @@ writer.Close();</code>
 
             
 
+            
+
              -0xD800) * 0x400 + (<paramref
              name="lowChar" />
+
+            
 
             
 
@@ -10031,6 +11353,8 @@ writer.Close();</code>
           <para
             >For the asynchronous version of this method, see <see
              cref="M:System.Xml.XmlWriter.WriteSurrogateCharEntityAsync(System.Char,System.Char)" />
+
+            
 
             
 
@@ -10050,10 +11374,14 @@ writer.Close();</code>
 
           
 
+          
+
           The low surrogate. This must be a value between 0xDC00 and 0xDFFF.</param
         >
         <param name="highChar">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10095,8 +11423,12 @@ writer.Close();</code>
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlWriterSettings.Async" />
+
+            
 
             
 
@@ -10120,10 +11452,14 @@ writer.Close();</code>
 
           
 
+          
+
           The low surrogate. This must be a value between 0xDC00 and 0xDFFF.</param
         >
         <param name="highChar">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10163,6 +11499,8 @@ writer.Close();</code>
 
             
 
+            
+
              method is called, the <see
              cref="T:System.Xml.XmlWriter" />
 
@@ -10170,8 +11508,12 @@ writer.Close();</code>
 
             
 
+            
+
              converts the value to its string representations according to the XML Schema (XSD) data type rules and writes it out using the <see
              cref="M:System.Xml.XmlWriter.WriteString(System.String)" />
+
+            
 
             
 
@@ -10187,8 +11529,12 @@ writer.Close();</code>
 
             
 
+            
+
              is called multiple times in succession, the values are not delimited by a space. You must call <see
              cref="M:System.Xml.XmlWriter.WriteWhitespace(System.String)" />
+
+            
 
             
 
@@ -10201,8 +11547,12 @@ writer.Close();</code>
 
             
 
+            
+
              to insert white space. Pass an array type to the <see
              cref="M:System.Xml.XmlWriter.WriteValue(System.Object)" />
+
+            
 
             
 
@@ -10218,11 +11568,15 @@ writer.Close();</code>
 
             
 
+            
+
              instance that outputs text-only, the typed value is serialized to text.</para
           >
           <para
             >For asynchronous operations, convert the return value of this method to a string and use the <see
              cref="M:System.Xml.XmlWriter.WriteStringAsync(System.String)" />
+
+            
 
             
 
@@ -10241,6 +11595,8 @@ writer.Close();</code>
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -10251,8 +11607,12 @@ writer.Close();</code>
 
           
 
+          
+
           The <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -10292,6 +11652,8 @@ writer.Close();</code>
 
             
 
+            
+
              method is called, the <see
              cref="T:System.Xml.XmlWriter" />
 
@@ -10299,8 +11661,12 @@ writer.Close();</code>
 
             
 
+            
+
              converts the value to its string representations according to the XML Schema (XSD) data type rules and writes it out using the <see
              cref="M:System.Xml.XmlWriter.WriteString(System.String)" />
+
+            
 
             
 
@@ -10316,8 +11682,12 @@ writer.Close();</code>
 
             
 
+            
+
              is called multiple times in succession, the values are not delimited by a space. You must call <see
              cref="M:System.Xml.XmlWriter.WriteWhitespace(System.String)" />
+
+            
 
             
 
@@ -10330,8 +11700,12 @@ writer.Close();</code>
 
             
 
+            
+
              to insert white space. Pass an array type to the <see
              cref="M:System.Xml.XmlWriter.WriteValue(System.Object)" />
+
+            
 
             
 
@@ -10347,11 +11721,15 @@ writer.Close();</code>
 
             
 
+            
+
              instance that outputs text-only, the typed value is serialized to text.</para
           >
           <para
             >For asynchronous operations, convert the return value of this method to a string and use the <see
              cref="M:System.Xml.XmlWriter.WriteStringAsync(System.String)" />
+
+            
 
             
 
@@ -10370,6 +11748,8 @@ writer.Close();</code>
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -10380,8 +11760,12 @@ writer.Close();</code>
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -10421,6 +11805,8 @@ writer.Close();</code>
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -10429,6 +11815,8 @@ writer.Close();</code>
           <para
             >Writes a <see
              cref="T:System.DateTimeOffset" />
+
+            
 
             
 
@@ -10444,8 +11832,12 @@ writer.Close();</code>
 
           
 
+          
+
           The <see
            cref="T:System.DateTimeOffset" />
+
+          
 
           
 
@@ -10485,6 +11877,8 @@ writer.Close();</code>
 
             
 
+            
+
              method is called, the <see
              cref="T:System.Xml.XmlWriter" />
 
@@ -10492,8 +11886,12 @@ writer.Close();</code>
 
             
 
+            
+
              converts the value to its string representations according to the XML Schema (XSD) data type rules and writes it out using the <see
              cref="M:System.Xml.XmlWriter.WriteString(System.String)" />
+
+            
 
             
 
@@ -10509,8 +11907,12 @@ writer.Close();</code>
 
             
 
+            
+
              is called multiple times in succession, the values are not delimited by a space. You must call <see
              cref="M:System.Xml.XmlWriter.WriteWhitespace(System.String)" />
+
+            
 
             
 
@@ -10523,8 +11925,12 @@ writer.Close();</code>
 
             
 
+            
+
              to insert white space. Pass an array type to the <see
              cref="M:System.Xml.XmlWriter.WriteValue(System.Object)" />
+
+            
 
             
 
@@ -10540,11 +11946,15 @@ writer.Close();</code>
 
             
 
+            
+
              instance that outputs text-only, the typed value is serialized to text.</para
           >
           <para
             >For asynchronous operations, convert the return value of this method to a string and use the <see
              cref="M:System.Xml.XmlWriter.WriteStringAsync(System.String)" />
+
+            
 
             
 
@@ -10563,6 +11973,8 @@ writer.Close();</code>
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -10573,8 +11985,12 @@ writer.Close();</code>
 
           
 
+          
+
           The <see
            cref="T:System.Decimal" />
+
+          
 
           
 
@@ -10614,6 +12030,8 @@ writer.Close();</code>
 
             
 
+            
+
              method is called, the <see
              cref="T:System.Xml.XmlWriter" />
 
@@ -10621,8 +12039,12 @@ writer.Close();</code>
 
             
 
+            
+
              converts the value to its string representations according to the XML Schema (XSD) data type rules and writes it out using the <see
              cref="M:System.Xml.XmlWriter.WriteString(System.String)" />
+
+            
 
             
 
@@ -10638,8 +12060,12 @@ writer.Close();</code>
 
             
 
+            
+
              is called multiple times in succession, the values are not delimited by a space. You must call <see
              cref="M:System.Xml.XmlWriter.WriteWhitespace(System.String)" />
+
+            
 
             
 
@@ -10652,8 +12078,12 @@ writer.Close();</code>
 
             
 
+            
+
              to insert white space. Pass an array type to the <see
              cref="M:System.Xml.XmlWriter.WriteValue(System.Object)" />
+
+            
 
             
 
@@ -10669,11 +12099,15 @@ writer.Close();</code>
 
             
 
+            
+
              instance that outputs text-only, the typed value is serialized to text.</para
           >
           <para
             >For asynchronous operations, convert the return value of this method to a string and use the <see
              cref="M:System.Xml.XmlWriter.WriteStringAsync(System.String)" />
+
+            
 
             
 
@@ -10692,6 +12126,8 @@ writer.Close();</code>
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -10702,8 +12138,12 @@ writer.Close();</code>
 
           
 
+          
+
           The <see
            cref="T:System.Double" />
+
+          
 
           
 
@@ -10743,6 +12183,8 @@ writer.Close();</code>
 
             
 
+            
+
              method is called, the <see
              cref="T:System.Xml.XmlWriter" />
 
@@ -10750,8 +12192,12 @@ writer.Close();</code>
 
             
 
+            
+
              converts the value to its string representations according to the XML Schema (XSD) data type rules and writes it out using the <see
              cref="M:System.Xml.XmlWriter.WriteString(System.String)" />
+
+            
 
             
 
@@ -10767,8 +12213,12 @@ writer.Close();</code>
 
             
 
+            
+
              is called multiple times in succession, the values are not delimited by a space. You must call <see
              cref="M:System.Xml.XmlWriter.WriteWhitespace(System.String)" />
+
+            
 
             
 
@@ -10781,8 +12231,12 @@ writer.Close();</code>
 
             
 
+            
+
              to insert white space. Pass an array type to the <see
              cref="M:System.Xml.XmlWriter.WriteValue(System.Object)" />
+
+            
 
             
 
@@ -10798,11 +12252,15 @@ writer.Close();</code>
 
             
 
+            
+
              instance that outputs text-only, the typed value is serialized to text.</para
           >
           <para
             >For asynchronous operations, convert the return value of this method to a string and use the <see
              cref="M:System.Xml.XmlWriter.WriteStringAsync(System.String)" />
+
+            
 
             
 
@@ -10821,6 +12279,8 @@ writer.Close();</code>
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -10831,8 +12291,12 @@ writer.Close();</code>
 
           
 
+          
+
           The <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -10872,6 +12336,8 @@ writer.Close();</code>
 
             
 
+            
+
              method is called, the <see
              cref="T:System.Xml.XmlWriter" />
 
@@ -10879,8 +12345,12 @@ writer.Close();</code>
 
             
 
+            
+
              converts the value to its string representations according to the XML Schema (XSD) data type rules and writes it out using the <see
              cref="M:System.Xml.XmlWriter.WriteString(System.String)" />
+
+            
 
             
 
@@ -10896,8 +12366,12 @@ writer.Close();</code>
 
             
 
+            
+
              is called multiple times in succession, the values are not delimited by a space. You must call <see
              cref="M:System.Xml.XmlWriter.WriteWhitespace(System.String)" />
+
+            
 
             
 
@@ -10910,8 +12384,12 @@ writer.Close();</code>
 
             
 
+            
+
              to insert white space. Pass an array type to the <see
              cref="M:System.Xml.XmlWriter.WriteValue(System.Object)" />
+
+            
 
             
 
@@ -10927,11 +12405,15 @@ writer.Close();</code>
 
             
 
+            
+
              instance that outputs text-only, the typed value is serialized to text.</para
           >
           <para
             >For asynchronous operations, convert the return value of this method to a string and use the <see
              cref="M:System.Xml.XmlWriter.WriteStringAsync(System.String)" />
+
+            
 
             
 
@@ -10950,6 +12432,8 @@ writer.Close();</code>
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -10960,8 +12444,12 @@ writer.Close();</code>
 
           
 
+          
+
           The <see
            cref="T:System.Int64" />
+
+          
 
           
 
@@ -11001,8 +12489,12 @@ writer.Close();</code>
 
             
 
+            
+
             , <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -11015,6 +12507,8 @@ writer.Close();</code>
 
             
 
+            
+
             , it is treated as an array of the value type. The <see
              cref="T:System.Xml.XmlWriter" />
 
@@ -11022,8 +12516,12 @@ writer.Close();</code>
 
             
 
+            
+
              converts the value to its string representations according to the XML Schema (XSD) data type rules and writes it out using the <see
              cref="M:System.Xml.XmlWriter.WriteString(System.String)" />
+
+            
 
             
 
@@ -11039,11 +12537,15 @@ writer.Close();</code>
 
             
 
+            
+
              instance that outputs text-only, the typed value is serialized to text.</para
           >
           <para
             >For asynchronous operations, convert the return value of this method to a string and use the <see
              cref="M:System.Xml.XmlWriter.WriteStringAsync(System.String)" />
+
+            
 
             
 
@@ -11058,6 +12560,8 @@ writer.Close();</code>
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11097,6 +12601,8 @@ writer.Close();</code>
 
             
 
+            
+
              method is called, the <see
              cref="T:System.Xml.XmlWriter" />
 
@@ -11104,8 +12610,12 @@ writer.Close();</code>
 
             
 
+            
+
              converts the value to its string representations according to the XML Schema (XSD) data type rules and writes it out using the <see
              cref="M:System.Xml.XmlWriter.WriteString(System.String)" />
+
+            
 
             
 
@@ -11121,8 +12631,12 @@ writer.Close();</code>
 
             
 
+            
+
              is called multiple times in succession, the values are not delimited by a space. You must call <see
              cref="M:System.Xml.XmlWriter.WriteWhitespace(System.String)" />
+
+            
 
             
 
@@ -11135,8 +12649,12 @@ writer.Close();</code>
 
             
 
+            
+
              to insert white space. Pass an array type to the <see
              cref="M:System.Xml.XmlWriter.WriteValue(System.Object)" />
+
+            
 
             
 
@@ -11152,11 +12670,15 @@ writer.Close();</code>
 
             
 
+            
+
              instance that outputs text-only, the typed value is serialized to text.</para
           >
           <para
             >For asynchronous operations, convert the return value of this method to a string and use the <see
              cref="M:System.Xml.XmlWriter.WriteStringAsync(System.String)" />
+
+            
 
             
 
@@ -11171,6 +12693,8 @@ writer.Close();</code>
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11210,8 +12734,12 @@ writer.Close();</code>
 
             
 
+            
+
              is called multiple times in succession, the values are not delimited by a space. You must call <see
              cref="M:System.Xml.XmlWriter.WriteWhitespace(System.String)" />
+
+            
 
             
 
@@ -11224,8 +12752,12 @@ writer.Close();</code>
 
             
 
+            
+
              to insert white space. Pass an array type to the <see
              cref="M:System.Xml.XmlWriter.WriteValue(System.Object)" />
+
+            
 
             
 
@@ -11241,11 +12773,15 @@ writer.Close();</code>
 
             
 
+            
+
              instance that outputs text-only, the typed value is serialized to text.</para
           >
           <para
             >For asynchronous operations, use the <see
              cref="M:System.Xml.XmlWriter.WriteStringAsync(System.String)" />
+
+            
 
             
 
@@ -11264,6 +12800,8 @@ writer.Close();</code>
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -11274,8 +12812,12 @@ writer.Close();</code>
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -11315,6 +12857,8 @@ writer.Close();</code>
 
           
 
+          
+
            is <see
            langword="null" />
 
@@ -11322,8 +12866,12 @@ writer.Close();</code>
 
           
 
+          
+
            or <see
            cref="F:System.String.Empty" qualify="true" />
+
+          
 
           
 
@@ -11339,8 +12887,12 @@ writer.Close();</code>
 
           
 
+          
+
            is <see
            cref="F:System.Xml.WriteState.Closed" qualify="true" />
+
+          
 
           
 
@@ -11359,6 +12911,8 @@ writer.Close();</code>
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -11368,6 +12922,8 @@ writer.Close();</code>
         </summary>
         <param name="ws">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11408,8 +12964,12 @@ writer.Close();</code>
 
             
 
+            
+
             , with the same functionality. To use this method, you must set the <see
              cref="P:System.Xml.XmlWriterSettings.Async" />
+
+            
 
             
 
@@ -11428,6 +12988,8 @@ writer.Close();</code>
         </returns>
         <param name="ws">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11465,8 +13027,12 @@ writer.Close();</code>
             
 
             
+
+            
 containing the language attribute, or <see
              langword="null" />
+
+            
 
             
 
@@ -11517,8 +13083,12 @@ attribute is not specified for the element.</para
 
             
 
+            
+
              enumeration, or <see
              cref="F:System.Xml.XmlSpace.None" />
+
+            
 
             
 
@@ -11537,6 +13107,8 @@ attribute is not specified for the element.</para
           <para
             >When overridden in a derived class, gets an <see
              cref="T:System.Xml.XmlSpace" />
+
+            
 
             
 

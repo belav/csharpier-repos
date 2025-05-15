@@ -35,8 +35,12 @@
 
         
 
+        
+
          to specify a degree of scope for an isolated store. You can specify combinations of these levels that are supported by <see
          cref="T:System.IO.IsolatedStorage.IsolatedStorage" />
+
+        
 
         
 
@@ -50,6 +54,8 @@
       <para
         >Enumerates the levels of isolated storage scope that are supported by <see
          cref="T:System.IO.IsolatedStorage.IsolatedStorage" />
+
+        
 
         
 

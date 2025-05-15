@@ -40,11 +40,15 @@
 
         
 
+        
+
          can be used to represent the declaration for a method.</para
       >
       <para
         >The <see
          cref="P:System.CodeDom.CodeMemberMethod.ReturnType" />
+
+        
 
         
 
@@ -57,8 +61,12 @@
 
         
 
+        
+
          property contains the method's parameters. The <see
          cref="P:System.CodeDom.CodeMemberMethod.Statements" />
+
+        
 
         
 
@@ -98,6 +106,8 @@
 
             
 
+            
+
              object.</para
           >
         </remarks>
@@ -106,6 +116,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeMemberMethod" />
+
+            
 
             
 
@@ -147,11 +159,15 @@
 
             
 
+            
+
              represents a declaration for a public method, and this method implements a method on an interface, the interface or interfaces this method implements a method of should be referenced in this collection.</para
           >
           <para
             >The method should still have the same name as the method of the interface that is implemented by this method. For some languages, like C#, this has no effect on the syntax. For others, like Visual Basic, there is a special syntax for implementing interfaces. If the method is privately implementing a single interface, the <see
              cref="P:System.CodeDom.CodeMemberMethod.PrivateImplementationType" />
+
+            
 
             
 
@@ -165,6 +181,8 @@
           <para
             >Gets the data types of the interfaces implemented by this method, unless it is a private method implementation, which is indicated by the <see
              cref="P:System.CodeDom.CodeMemberMethod.PrivateImplementationType" />
+
+            
 
             
 
@@ -233,6 +251,8 @@
 
             
 
+            
+
              collection is accessed.</para
           >
         </summary>
@@ -261,6 +281,8 @@
           <para
             >An event that will be raised the first time the <see
              cref="P:System.CodeDom.CodeMemberMethod.Parameters" />
+
+            
 
             
 
@@ -299,6 +321,8 @@
 
             
 
+            
+
              collection is accessed.</para
           >
         </summary>
@@ -330,6 +354,8 @@
           <para
             >If this <see
              cref="T:System.CodeDom.CodeMemberMethod" />
+
+            
 
             
 

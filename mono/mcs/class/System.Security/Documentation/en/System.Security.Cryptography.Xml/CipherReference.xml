@@ -32,8 +32,12 @@
 
         
 
+        
+
          property is null. For example, when you attempt to decrypt a file containing a &lt;CipherReference&gt; element that references a file on the Web, a <see
          cref="T:System.Security.SecurityException" />
+
+        
 
         
 
@@ -76,8 +80,12 @@
 
             
 
+            
+
              object that provides reference information for a <see
              cref="T:System.Security.Cryptography.Xml.CipherData" />
+
+            
 
             
 
@@ -91,6 +99,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.Xml.CipherReference" />
+
+            
 
             
 
@@ -127,8 +137,12 @@
 
             
 
+            
+
              object using a Uniform Resource Identifier (URI) that points to the encrypted data. The object is then used to provide reference information for a <see
              cref="T:System.Security.Cryptography.Xml.CipherData" />
+
+            
 
             
 
@@ -158,11 +172,15 @@
 
             
 
+            
+
              class using the specified Uniform Resource Identifier (URI).</para
           >
         </summary>
         <param name="uri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -203,8 +221,12 @@
 
             
 
+            
+
              object using a Uniform Resource Identifier (URI) and transform chain to indicate the encrypted data. The object is then used to provide reference information for a <see
              cref="T:System.Security.Cryptography.Xml.CipherData" />
+
+            
 
             
 
@@ -223,11 +245,15 @@
 
             
 
+            
+
              class using the specified Uniform Resource Identifier (URI) and transform chain information.</para
           >
         </summary>
         <param name="uri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -268,6 +294,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -276,6 +304,8 @@
           <para
             >An <see
              cref="T:System.Xml.XmlElement" />
+
+            
 
             
 
@@ -318,6 +348,8 @@
 
             
 
+            
+
              object.</para
           >
         </remarks>
@@ -332,8 +364,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlElement" />
+
+          
 
           
 

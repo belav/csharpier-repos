@@ -21,6 +21,8 @@
 
         
 
+        
+
          control.</para
       >
     </summary>
@@ -78,8 +80,12 @@
 
             
 
+            
+
              and <ui
             >Previous</ui>
+
+            
 
             
 
@@ -111,8 +117,12 @@
 
             
 
+            
+
              button is rendered but a <ui
             >Previous</ui>
+
+            
 
             
 
@@ -144,6 +154,8 @@
 
             
 
+            
+
              and <ui
             >Next</ui>
 
@@ -151,8 +163,12 @@
 
             
 
+            
+
              buttons are rendered for navigation. This step type is useful for overriding the <see
              cref="F:System.Web.UI.WebControls.WizardStepType.Auto" />
+
+            
 
             
 

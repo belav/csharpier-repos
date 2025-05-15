@@ -40,6 +40,8 @@
 
         
 
+        
+
          attribute is a custom attribute that can be applied to objects, value types, and interface objects. This attribute is used to specify information on an object type that controls how SOAP will generate the SOAP XML wire format.</para
       >
     </remarks>
@@ -70,6 +72,8 @@
           <para
             >Creates an instance of <see
              cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" />
+
+            
 
             
 
@@ -110,8 +114,12 @@
 
             
 
+            
+
              value indicates the SOAP configuration options that will be used with a <see
              cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" />
+
+            
 
             
 
@@ -128,8 +136,12 @@
 
               
 
+              
+
                enumeration has no effect on serialization of objects with the <see
                cref="T:System.Runtime.Serialization.Formatters.Soap.SoapFormatter" />
+
+              
 
               
 
@@ -144,6 +156,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.Runtime.Remoting.Metadata.SoapOption" />
+
+            
 
             
 
@@ -178,8 +192,12 @@
 
             
 
+            
+
              property cannot be set on the <see
              cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" />
+
+            
 
             
 

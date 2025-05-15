@@ -25,10 +25,14 @@
 
         
 
+        
+
          class provides methods for retrieving the sounds associated with a set of operating system sound-event types for the current user. The sounds associated with each type of operating system sound event can be configured in Windows Control Panel.</para
       >
       <para>
         <see cref="T:System.Media.SystemSounds" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Media.SystemSounds.Beep" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Media.SystemSounds.Hand" />
+
+        
 
         
 
@@ -69,8 +81,12 @@
 
         
 
+        
+
          sound events. Each property returns a <see
          cref="T:System.Media.SystemSound" />
+
+        
 
         
 

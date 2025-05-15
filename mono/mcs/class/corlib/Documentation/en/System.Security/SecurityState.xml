@@ -25,8 +25,12 @@
 
         
 
+        
+
          object that is instantiated from the derived class is passed to the <see
          cref="M:System.AppDomainManager.CheckSecuritySettings(System.Security.SecurityState)" />
+
+        
 
         
 
@@ -39,11 +43,15 @@
 
         
 
+        
+
          method always returns false.  The method must be overridden to detect the actions that are allowed.</para
       >
       <para
         >For example, if you want to access a Web camera in your library code, you would create a WebcamSecurityState object and call the <see
          cref="M:System.Security.SecurityState.EnsureState" />
+
+        
 
         
 
@@ -70,8 +78,12 @@ catch (ApplicationException e)
 
         
 
+        
+
          must be made aware of WebcamSecurityState through an override of the <see
          cref="M:System.AppDomainManager.CheckSecuritySettings(System.Security.SecurityState)" />
+
+        
 
         
 
@@ -115,6 +127,8 @@ private bool PromptUser(string text)
 
         
 
+        
+
          object.</para
       >
     </summary>
@@ -139,6 +153,8 @@ private bool PromptUser(string text)
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.SecurityState" />
+
+            
 
             
 
@@ -185,6 +201,8 @@ private bool PromptUser(string text)
 
             
 
+            
+
              is available on the host.</para
           >
         </summary>
@@ -215,8 +233,12 @@ private bool PromptUser(string text)
 
             
 
+            
+
              calls the <see
              cref="M:System.AppDomainManager.CheckSecuritySettings(System.Security.SecurityState)" />
+
+            
 
             
 
@@ -232,8 +254,12 @@ private bool PromptUser(string text)
 
             
 
+            
+
              class for an example implementation of the <see
              cref="M:System.AppDomainManager.CheckSecuritySettings(System.Security.SecurityState)" />
+
+            
 
             
 
@@ -247,6 +273,8 @@ private bool PromptUser(string text)
           <para
             >Gets a value that indicates whether the state for this implementation of the <see
              cref="T:System.Security.SecurityState" />
+
+            
 
             
 

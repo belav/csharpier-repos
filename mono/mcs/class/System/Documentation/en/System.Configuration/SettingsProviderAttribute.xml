@@ -31,11 +31,15 @@
 
         
 
+        
+
         —that actually provides the storage mechanism. </para
       >
       <para
         >The <see
          cref="T:System.Configuration.SettingsProviderAttribute" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
          set at the property level will override the class-level attribute. If a settings provider is not explicitly specified, the default provider is used. For client applications, the default provider is <see
          cref="T:System.Configuration.LocalFileSettingsProvider" />
+
+        
 
         
 
@@ -97,6 +105,8 @@
 
             
 
+            
+
             , that is being specified as the settings provider.</para
           >
           <block subset="none" type="note">
@@ -113,6 +123,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -123,8 +135,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -164,6 +180,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -174,8 +192,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -209,8 +231,12 @@
 
             
 
+            
+
              property is set in the <see
              cref="M:System.Configuration.SettingsProviderAttribute.#ctor(System.String)" />
+
+            
 
             
 

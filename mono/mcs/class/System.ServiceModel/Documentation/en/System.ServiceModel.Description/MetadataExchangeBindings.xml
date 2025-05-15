@@ -27,12 +27,16 @@
 
         
 
+        
+
          methods and properties to create system-provided bindings to support WS-Transfer GET metadata exchanges. For more information and examples, see <format
          type="text/html">
           <a href="f061443f-92df-4824-b36a-609c4cd14a17"
             >How to: Publish Metadata for a Service Using a Configuration File</a
           >
         </format>
+
+        
 
         
 
@@ -47,6 +51,8 @@
       <para
         >Used to create system-provided bindings for WS-Transfer metadata exchange using the <see
          cref="T:System.ServiceModel.Description.IMetadataExchange" />
+
+        
 
         
 
@@ -85,6 +91,8 @@
 
             
 
+            
+
              method to return a binding that supports most metadata requests. </para
           >
         </remarks>
@@ -98,6 +106,8 @@
 
             
 
+            
+
              with security disabled.</para
           >
         </summary>
@@ -106,6 +116,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.WSHttpBinding" />
+
+            
 
             
 
@@ -144,12 +156,16 @@
 
             
 
+            
+
              method to return a binding that can be secured at the transport level using certificates. For more information about configuring and using such a metadata endpoint, see <format
              type="text/html">
               <a href="cdba4d73-da64-4805-bc56-9822becfd1e4"
                 >How to: Configure a Custom WS-Metadata Exchange Binding</a
               >
             </format>
+
+            
 
             
 
@@ -166,10 +182,14 @@
 
             
 
+            
+
             , and the sample <format
              type="text/html">
               <a href="9e369e99-ea4a-49ff-aed2-9fdf61091a48">Custom Secure Metadata Endpoint</a>
             </format>
+
+            
 
             
 
@@ -188,6 +208,8 @@
 
             
 
+            
+
              that supports transport-level security.</para
           >
         </summary>
@@ -196,6 +218,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.WSHttpBinding" />
+
+            
 
             
 
@@ -235,8 +259,12 @@
 
             
 
+            
+
              with a <see
              cref="T:System.ServiceModel.Channels.NamedPipeTransportBindingElement" />
+
+            
 
             
 
@@ -255,8 +283,12 @@
 
             
 
+            
+
              with a <see
              cref="T:System.ServiceModel.Channels.NamedPipeTransportBindingElement" />
+
+            
 
             
 
@@ -296,8 +328,12 @@
 
             
 
+            
+
              with a <see
              cref="T:System.ServiceModel.Channels.TcpTransportBindingElement" />
+
+            
 
             
 
@@ -316,8 +352,12 @@
 
             
 
+            
+
              with a <see
              cref="T:System.ServiceModel.Channels.TcpTransportBindingElement" />
+
+            
 
             
 

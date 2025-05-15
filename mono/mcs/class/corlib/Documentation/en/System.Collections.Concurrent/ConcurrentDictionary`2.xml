@@ -57,10 +57,14 @@
 
         
 
+        
+
          objects, you can increase the maximum array size to 2 gigabytes (GB) on a 64-bit system by setting the <format
          type="text/html">
           <a href="5c7ea24a-39ac-4e5f-83b7-b9f9a1b556ab">&lt;gcAllowVeryLargeObjects&gt;</a>
         </format>
+
+        
 
         
 
@@ -76,8 +80,12 @@
 
         
 
+        
+
          class, <see
          cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />
+
+        
 
         
 
@@ -90,8 +98,12 @@
 
         
 
+        
+
          interface. In addition, <see
          cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />
+
+        
 
         
 
@@ -144,6 +156,8 @@
 
               
 
+              
+
                method, except that it's used for dictionary elements.</para
             >
           </description>
@@ -180,10 +194,14 @@
 
               
 
+              
+
                accepts the key and two delegates. It uses the first delegate if the key doesn’t exist in the dictionary; it accepts the key and returns the value that should be added for the key. It uses the second delegate if the key does exist; it accepts the key and its current value, and it returns the new value that should be set for the key.</para
             >
             <para>
               <see cref="M:System.Collections.Concurrent.ConcurrentDictionary`2.AddOrUpdate(`0,System.Func{`0,`1},System.Func{`0,`1,`1})" />
+
+              
 
               
 
@@ -215,10 +233,14 @@
 
               
 
+              
+
                takes the value to be added if the key doesn’t exist.</para
             >
             <para>
               <see cref="M:System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(`0,System.Func{`0,`1})" />
+
+              
 
               
 
@@ -237,8 +259,12 @@
 
         
 
+        
+
          class. The only exceptions are the methods that accept a delegate, that is, <see
          cref="Overload:System.Collections.Concurrent.ConcurrentDictionary`2.AddOrUpdate" />
+
+        
 
         
 
@@ -251,8 +277,12 @@
 
         
 
+        
+
         . For modifications and write operations to the dictionary, <see
          cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />
+
+        
 
         
 
@@ -288,6 +318,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />
+
+            
 
             
 
@@ -407,6 +439,8 @@
 
             
 
+            
+
              class that is empty, has the specified concurrency level and capacity, and uses the default comparer for the key type.</para
           >
         </summary>
@@ -417,8 +451,12 @@
 
           
 
+          
+
           The estimated number of threads that will update the <see
            cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />
+
+          
 
           
 
@@ -433,8 +471,12 @@
 
           
 
+          
+
           The initial number of elements that the <see
            cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />
+
+          
 
           
 
@@ -591,6 +633,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -641,6 +685,8 @@
 
             
 
+            
+
              at the moment when the property was accessed.</para
           >
         </remarks>
@@ -649,6 +695,8 @@
           <para
             >Gets the number of key/value pairs contained in the <see
              cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />
+
+            
 
             
 
@@ -687,6 +735,8 @@
 
             
 
+            
+
              was called.</para
           >
         </remarks>
@@ -700,6 +750,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -708,6 +760,8 @@
           <para
             >An enumerator for the <see
              cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />
+
+            
 
             
 
@@ -794,6 +848,8 @@
 
             
 
+            
+
              is empty.</para
           >
         </summary>
@@ -843,6 +899,8 @@
           <para
             >Gets a collection containing the keys in the <see
              cref="T:System.Collections.Generic.Dictionary`2" />
+
+            
 
             
 
@@ -1068,6 +1126,8 @@
 
             
 
+            
+
              to an array, starting at the specified array index.</para
           >
         </summary>
@@ -1078,8 +1138,12 @@
 
           
 
+          
+
           The one-dimensional array that is the destination of the elements copied from the <see
            cref="T:System.Collections.ICollection" />
+
+          
 
           
 
@@ -1118,6 +1182,8 @@
 
             
 
+            
+
              is synchronized with the SyncRoot.</para
           >
         </summary>
@@ -1147,6 +1213,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1187,10 +1255,14 @@
 
           
 
+          
+
           The object to use as the key.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1228,6 +1300,8 @@
 
             
 
+            
+
              contains an element with the specified key.</para
           >
         </summary>
@@ -1236,6 +1310,8 @@
           <para
             >true if the <see
              cref="T:System.Collections.Generic.IDictionary`2" />
+
+            
 
             
 
@@ -1251,8 +1327,12 @@
 
           
 
+          
+
           The key to locate in the <see
            cref="T:System.Collections.Generic.IDictionary`2" />
+
+          
 
           
 
@@ -1291,8 +1371,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Collections.Generic.IDictionary`2" />
+
+            
 
             
 
@@ -1311,8 +1395,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Collections.Generic.IDictionary`2" />
+
+            
 
             
 
@@ -1352,6 +1440,8 @@
 
             
 
+            
+
              has a fixed size.</para
           >
         </summary>
@@ -1381,6 +1471,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Collections.Generic.IDictionary`2" />
+
+            
 
             
 
@@ -1446,8 +1538,12 @@
 
             
 
+            
+
              that contains the keys of the  <see
              cref="T:System.Collections.Generic.IDictionary`2" />
+
+            
 
             
 
@@ -1486,11 +1582,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1529,8 +1629,12 @@
 
             
 
+            
+
              that contains the values in the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -1569,6 +1673,8 @@
 
             
 
+            
+
              was called.</para
           >
         </remarks>
@@ -1582,6 +1688,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1590,6 +1698,8 @@
           <para
             >An enumerator for the <see
              cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />
+
+            
 
             
 
@@ -1629,6 +1739,8 @@
 
             
 
+            
+
              to a new array.</para
           >
         </summary>
@@ -1637,6 +1749,8 @@
           <para
             >A new array containing a snapshot of key and value pairs copied from the <see
              cref="T:System.Collections.Concurrent.ConcurrentDictionary`2" />
+
+            
 
             
 
@@ -1779,6 +1893,8 @@
           <para
             >Gets a collection that contains the values in the <see
              cref="T:System.Collections.Generic.Dictionary`2" />
+
+            
 
             
 

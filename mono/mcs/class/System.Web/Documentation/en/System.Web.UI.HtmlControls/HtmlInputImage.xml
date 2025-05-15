@@ -42,6 +42,8 @@
 
         
 
+        
+
          control to create a button that displays an image. You can programmatically control the action associated with the <see
          cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
@@ -49,8 +51,12 @@
 
         
 
+        
+
          control by providing an event handler for the <see
          cref="E:System.Web.UI.HtmlControls.HtmlInputImage.ServerClick" />
+
+        
 
         
 
@@ -66,8 +72,12 @@
 
         
 
+        
+
          control can be determined by using the <see
          cref="F:System.Web.UI.ImageClickEventArgs.X" />
+
+        
 
         
 
@@ -80,8 +90,12 @@
 
         
 
+        
+
          properties of the <see
          cref="T:System.Web.UI.ImageClickEventArgs" />
+
+        
 
         
 
@@ -97,8 +111,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.HtmlControls.HtmlInputImage.#ctor" />
+
+        
 
         
 
@@ -129,11 +147,15 @@
 
             
 
+            
+
              control.</para
           >
           <para
             >The following table shows the initial property value for an instance of <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+
+            
 
             
 
@@ -174,6 +196,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -202,8 +226,12 @@
 
             
 
+            
+
              property to specify the alignment of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+
+            
 
             
 
@@ -217,6 +245,8 @@
           <para
             >Gets or sets the alignment of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+
+            
 
             
 
@@ -258,11 +288,15 @@
 
             
 
+            
+
              property to specify the text to display when the specified image is not available or has not been downloaded. You can also use this property to programmatically determine the specified alternative text.</para
           >
           <para
             >In browsers that support the ToolTip feature, this text also appears as a ToolTip for the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+
+            
 
             
 
@@ -311,8 +345,12 @@
 
             
 
+            
+
              property to specify the border width for the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+
+            
 
             
 
@@ -329,6 +367,8 @@
           <para
             >Gets or sets the border width for the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+
+            
 
             
 
@@ -370,11 +410,15 @@
 
             
 
+            
+
              control is clicked. Page validation determines whether the input controls associated with a validation control on the page all pass the validation rules specified by the validation control.</para
           >
           <para
             >You can specify or determine whether validation is performed on both the client and the server when an <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+
+            
 
             
 
@@ -387,8 +431,12 @@
 
             
 
+            
+
              property. To prevent validation from being performed, set the <see
              cref="P:System.Web.UI.HtmlControls.HtmlInputImage.CausesValidation" />
+
+            
 
             
 
@@ -404,6 +452,8 @@
 
             
 
+            
+
              event to prevent page validation from occurring when a Cancel or Reset button is clicked.</para
           >
         </remarks>
@@ -412,6 +462,8 @@
           <para
             >Gets or sets a value indicating whether validation is performed when the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+
+            
 
             
 
@@ -461,8 +513,12 @@
 
             
 
+            
+
              method checks to see whether coordinates that represent the location where the image was clicked by the user are part of the postback data for the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+
+            
 
             
 
@@ -475,8 +531,12 @@
 
             
 
+            
+
              method registers the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+
+            
 
             
 
@@ -495,8 +555,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+
+            
 
             
 
@@ -515,6 +579,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -523,6 +589,8 @@
           <para
             >true if the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+
+            
 
             
 
@@ -538,10 +606,14 @@
 
           
 
+          
+
           The key identifier for the control.</param
         >
         <param name="postCollection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -571,8 +643,12 @@
 
             
 
+            
+
              method is called just prior to rendering the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+
+            
 
             
 
@@ -585,8 +661,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+
+            
 
             
 
@@ -605,6 +685,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -615,8 +697,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -653,8 +739,12 @@
 
             
 
+            
+
              event is raised when the user clicks an <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+
+            
 
             
 
@@ -670,8 +760,12 @@
 
             
 
+            
+
              control can be determined by using the <see
              cref="F:System.Web.UI.ImageClickEventArgs.X" />
+
+            
 
             
 
@@ -684,6 +778,8 @@
 
             
 
+            
+
              properties of the <see
              cref="T:System.Web.UI.ImageClickEventArgs" />
 
@@ -691,8 +787,12 @@
 
             
 
+            
+
              object. The <see
              cref="T:System.Web.UI.ImageClickEventArgs" />
+
+            
 
             
 
@@ -713,11 +813,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.HtmlControls.HtmlInputImage.OnServerClick(System.Web.UI.ImageClickEventArgs)" />
+
+            
 
             
 
@@ -736,6 +840,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -746,8 +852,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.ImageClickEventArgs" />
+
+          
 
           
 
@@ -787,6 +897,8 @@
 
             
 
+            
+
              method is used by the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
@@ -794,8 +906,12 @@
 
             
 
+            
+
              control, when it is clicked, to raise a <see
              cref="E:System.Web.UI.HtmlControls.HtmlInputImage.ServerClick" />
+
+            
 
             
 
@@ -811,8 +927,12 @@
 
             
 
+            
+
              property is true; the <see
              cref="M:System.Web.UI.Page.Validate(System.String)" />
+
+            
 
             
 
@@ -825,11 +945,15 @@
 
             
 
+            
+
              property. </para
           >
           <para
             >This method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+
+            
 
             
 
@@ -848,11 +972,15 @@
 
             
 
+            
+
              control when it posts back to the server.</para
           >
         </summary>
         <param name="eventArgument">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -883,6 +1011,8 @@
 
             
 
+            
+
              method does not participate in the processing of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
 
@@ -890,8 +1020,12 @@
 
             
 
+            
+
              control and is included to complete the <see
              cref="T:System.Web.UI.IPostBackDataHandler" />
+
+            
 
             
 
@@ -907,8 +1041,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+
+            
 
             
 
@@ -922,6 +1060,8 @@
           <para
             >Notifies the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+
+            
 
             
 
@@ -955,8 +1095,12 @@
 
             
 
+            
+
              method resolves the URL set in the <see
              cref="P:System.Web.UI.HtmlControls.HtmlInputImage.Src" />
+
+            
 
             
 
@@ -969,8 +1113,12 @@
 
             
 
+            
+
              control if the <see
              cref="P:System.Web.UI.HtmlControls.HtmlInputImage.CausesValidation" />
+
+            
 
             
 
@@ -983,6 +1131,8 @@
 
             
 
+            
+
              method. If the value of the <see
              cref="P:System.Web.UI.HtmlControls.HtmlInputImage.Src" />
 
@@ -990,8 +1140,12 @@
 
             
 
+            
+
              property is a malformed URL, an <see
              cref="T:System.Web.HttpException" />
+
+            
 
             
 
@@ -1007,8 +1161,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+
+            
 
             
 
@@ -1027,8 +1185,12 @@
 
             
 
+            
+
              control's attributes to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -1044,8 +1206,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -1080,8 +1246,12 @@
 
             
 
+            
+
              event is raised when the user clicks an <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+
+            
 
             
 
@@ -1099,6 +1269,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1107,6 +1279,8 @@
           <para
             >Occurs on the server when the user clicks an <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+
+            
 
             
 
@@ -1140,8 +1314,12 @@
 
             
 
+            
+
              property to specify the location of the image to display in the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+
+            
 
             
 
@@ -1154,11 +1332,15 @@
 
             
 
+            
+
              property is displayed.</para
           >
           <para
             >You can use a relative or absolute URL. A relative URL relates the location of the image to the location of the Web page without specifying a complete path on the server. The path is relative to the location of the Web page. This makes it easier to move the entire site to another directory on the server without updating the path to the image in code. You can use the relative path " ~/ " to refer to the current virtual directory where the page is located. For example, the value of <see
              cref="P:System.Web.UI.HtmlControls.HtmlInputImage.Src" />
+
+            
 
             
 
@@ -1220,8 +1402,12 @@
 
             
 
+            
+
              interface method by calling the <see
              cref="M:System.Web.UI.HtmlControls.HtmlInputImage.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+
+            
 
             
 
@@ -1240,6 +1426,8 @@
 
             
 
+            
+
              control's state has changed as a result of the postback; otherwise, false.</para
           >
         </returns>
@@ -1250,10 +1438,14 @@
 
           
 
+          
+
           The key identifier for the control.</param
         >
         <param name="postCollection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1289,8 +1481,12 @@
 
             
 
+            
+
              interface method by calling the <see
              cref="M:System.Web.UI.HtmlControls.HtmlInputImage.RaisePostDataChangedEvent" />
+
+            
 
             
 
@@ -1329,11 +1525,15 @@
 
             
 
+            
+
              control to raise events on postback.</para
           >
         </summary>
         <param name="eventArgument">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1369,8 +1569,12 @@
 
             
 
+            
+
              property to specify the name of the validation group for which the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+
+            
 
             
 
@@ -1386,8 +1590,12 @@
 
             
 
+            
+
              property is set to true. When you specify a value for the <see
              cref="P:System.Web.UI.HtmlControls.HtmlInputImage.ValidationGroup" />
+
+            
 
             
 
@@ -1400,8 +1608,12 @@
 
             
 
+            
+
              control posts back to the server. If you do not specify a value for this property and the <see
              cref="P:System.Web.UI.HtmlControls.HtmlInputImage.CausesValidation" />
+
+            
 
             
 
@@ -1415,6 +1627,8 @@
           <para
             >Gets or sets the group of controls for which the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+
+            
 
             
 

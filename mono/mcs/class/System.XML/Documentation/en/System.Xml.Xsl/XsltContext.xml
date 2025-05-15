@@ -32,6 +32,8 @@
 
         
 
+        
+
         , see article Q324899, "HOW TO: Implement and Use Custom Functions When You Execute XPath Queries in Visual Basic .NET" in the Microsoft Knowledge Base at http://support.microsoft.com.</para
       >
     </remarks>
@@ -62,6 +64,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Xsl.XsltContext" />
+
+            
 
             
 
@@ -100,8 +104,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Xml.NameTable" />
+
+            
 
             
 
@@ -117,8 +125,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.NameTable" />
+
+          
 
           
 
@@ -168,6 +180,8 @@
 
             
 
+            
+
              class).</para
           >
         </summary>
@@ -181,8 +195,12 @@
 
             
 
+            
+
              occurs before <paramref
              name="nextbaseUri" />
+
+            
 
             
 
@@ -195,8 +213,12 @@
 
             
 
+            
+
              occurs after <paramref
              name="nextbaseUri" />
+
+            
 
             
 
@@ -212,10 +234,14 @@
 
           
 
+          
+
           The base URI of the first document to compare. </param
         >
         <param name="nextbaseUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -263,6 +289,8 @@
 
           
 
+          
+
           The white space node that is to be preserved or stripped in the current context. </param
         >
       </Docs>
@@ -302,8 +330,12 @@
 
             
 
+            
+
              representing the function. The <see
              cref="T:System.Xml.Xsl.IXsltContextFunction" />
+
+            
 
             
 
@@ -322,11 +354,15 @@
 
             
 
+            
+
              representing the function.</para
           >
         </returns>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -341,10 +377,14 @@
 
           
 
+          
+
           The name of the function. </param
         >
         <param name="ArgTypes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -387,6 +427,8 @@
 
             
 
+            
+
              is used at execution time to get the value of the variable.</para
           >
         </remarks>
@@ -395,6 +437,8 @@
           <para
             >When overridden in a derived class, resolves a variable reference and returns an <see
              cref="T:System.Xml.Xsl.IXsltContextVariable" />
+
+            
 
             
 
@@ -413,6 +457,8 @@
 
             
 
+            
+
              representing the variable at runtime.</para
           >
         </returns>
@@ -423,10 +469,14 @@
 
           
 
+          
+
           The prefix of the variable as it appears in the XPath expression. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

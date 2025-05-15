@@ -41,8 +41,12 @@
 
         
 
+        
+
          enumeration is returned by the <see
          cref="M:System.Char.GetUnicodeCategory(System.Char)" />
+
+        
 
         
 
@@ -55,8 +59,12 @@
 
         
 
+        
+
          methods. The <see
          cref="T:System.Globalization.UnicodeCategory" />
+
+        
 
         
 
@@ -69,8 +77,12 @@
 
         
 
+        
+
          methods, such as <see
          cref="M:System.Char.IsUpper(System.Char)" />
+
+        
 
         
 
@@ -81,6 +93,8 @@
       <para
         >This enumeration is based on The Unicode Standard, version 5.0. For more information, see the "UCD File Format" and "General Category Values" subtopics at the <see
          cref="http://go.microsoft.com/fwlink/?LinkId=57650">Unicode Character Database</see>
+
+        
 
         
 

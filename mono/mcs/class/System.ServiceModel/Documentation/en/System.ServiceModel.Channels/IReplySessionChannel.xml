@@ -31,6 +31,8 @@
 
         
 
+        
+
          interface indicates that an <see
          cref="T:System.ServiceModel.Channels.IReplyChannel" />
 
@@ -38,8 +40,12 @@
 
         
 
+        
+
          implements <see
          cref="T:System.ServiceModel.Channels.IInputSession" />
+
+        
 
         
 
@@ -55,6 +61,8 @@
 
         
 
+        
+
          associated with its <see
          cref="T:System.ServiceModel.Channels.IReplySessionChannel" />
 
@@ -62,8 +70,12 @@
 
         
 
+        
+
          can be retrieved through the <see
          cref="P:System.ServiceModel.Channels.ISessionChannel`1.Session" />
+
+        
 
         
 

@@ -34,6 +34,8 @@
 
         
 
+        
+
          is typically thrown when 16-bit, 32-bit, or 64-bit data is read from or written to an address that is not a multiple of two, four, or eight bytes. </para
       >
       <para
@@ -44,8 +46,12 @@
 
         
 
+        
+
          exposes the underlying hardware exception, which allows you to respond in an appropriate manner. For example, a routine in your application attempts to copy a sequence of bytes from one location to another in 64-bit units. However, the write operation starts at a misaligned address, which causes the common language runtime to throw a <see
          cref="T:System.DataMisalignedException" />
+
+        
 
         
 
@@ -85,6 +91,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -117,11 +125,15 @@
 
             
 
+            
+
              class using the specified error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -134,8 +146,12 @@
 
           
 
+          
+
            object that describes the error. The content of <paramref
            name="message" />
+
+          
 
           
 
@@ -176,11 +192,15 @@
 
             
 
+            
+
              class using the specified error message and underlying exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -193,8 +213,12 @@
 
           
 
+          
+
            object that describes the error. The content of <paramref
            name="message" />
+
+          
 
           
 
@@ -209,6 +233,8 @@
 
           
 
+          
+
           The exception that is the cause of the current <see
            cref="T:System.DataMisalignedException" />
 
@@ -216,8 +242,12 @@
 
           
 
+          
+
           . If the <paramref
            name="innerException" />
+
+          
 
           
 

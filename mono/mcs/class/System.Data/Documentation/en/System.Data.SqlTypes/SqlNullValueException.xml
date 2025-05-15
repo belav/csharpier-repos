@@ -32,6 +32,8 @@
 
         
 
+        
+
          structure is set to null.</para
       >
     </summary>
@@ -53,11 +55,15 @@
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "DefaultMessageDisplayedByParameterlessCtorWriterMustSupply" This message takes into account the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.InsufficientMemoryException" />
+
+            
 
             
 
@@ -108,6 +114,8 @@
 
             
 
+            
+
              class with a system-supplied message that describes the error.</para
           >
         </summary>
@@ -130,6 +138,8 @@
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Data.SqlTypes.SqlNullValueException" />
+
+            
 
             
 
@@ -173,6 +183,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -189,11 +201,15 @@
 
             
 
+            
+
              class with a specified message that describes the error.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -233,11 +249,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -252,8 +272,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 
@@ -291,6 +315,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -299,6 +325,8 @@
           <para
             >Populates a <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -314,10 +342,14 @@
 
           
 
+          
+
           The SerializationInfo to populate with the data needed to serialize the target object. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

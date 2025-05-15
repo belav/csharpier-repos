@@ -38,11 +38,15 @@
 
         
 
+        
+
          interface.</para
       >
       <para
         >Use the <see
          cref="P:System.ComponentModel.DesignerAttribute.DesignerBaseTypeName" />
+
+        
 
         
 
@@ -55,6 +59,8 @@
 
         
 
+        
+
          property to get the name of the type of designer associated with this member.</para
       >
       <para
@@ -62,6 +68,8 @@
          type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
+
+        
 
         
 
@@ -103,6 +111,8 @@
 
             
 
+            
+
              interface.</para
           >
         </remarks>
@@ -116,11 +126,15 @@
 
             
 
+            
+
              class using the name of the type that provides design-time services.</para
           >
         </summary>
         <param name="designerTypeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -157,6 +171,8 @@
 
             
 
+            
+
              interface.</para
           >
         </remarks>
@@ -165,6 +181,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.DesignerAttribute" />
+
+            
 
             
 
@@ -180,8 +198,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -222,11 +244,15 @@
 
             
 
+            
+
              interface.</para
           >
           <para
             >The <paramref
              name="designerBaseTypeName" />
+
+            
 
             
 
@@ -245,6 +271,8 @@
 
             
 
+            
+
              class using the designer type and the base class for the designer.</para
           >
         </summary>
@@ -255,10 +283,14 @@
 
           
 
+          
+
           The concatenation of the fully qualified name of the type that provides design-time services for the component this attribute is bound to, and the name of the assembly this type resides in. </param
         >
         <param name="designerBaseTypeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -299,11 +331,15 @@
 
             
 
+            
+
              interface.</para
           >
           <para
             >The <paramref
              name="designerBaseType" />
+
+            
 
             
 
@@ -322,11 +358,15 @@
 
             
 
+            
+
              class, using the name of the designer class and the base class for the designer.</para
           >
         </summary>
         <param name="designerTypeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -341,6 +381,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
 
@@ -348,8 +390,12 @@
 
           
 
+          
+
            that represents the base class to associate with the <paramref
            name="designerTypeName" />
+
+          
 
           
 
@@ -390,11 +436,15 @@
 
             
 
+            
+
              interface.</para
           >
           <para
             >The <paramref
              name="designerBaseType" />
+
+            
 
             
 
@@ -413,6 +463,8 @@
 
             
 
+            
+
              class using the types of the designer and designer base class.</para
           >
         </summary>
@@ -423,8 +475,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -439,6 +495,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
 
@@ -446,8 +504,12 @@
 
           
 
+          
+
            that represents the base class to associate with the <paramref
            name="designerType" />
+
+          
 
           
 
@@ -529,6 +591,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -538,6 +602,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -593,8 +659,12 @@
 
             
 
+            
+
              instance for the attribute. <see
              cref="T:System.ComponentModel.DesignerAttribute" />
+
+            
 
             
 

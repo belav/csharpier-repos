@@ -23,8 +23,12 @@
 
         
 
+        
+
          class to convert links of one type to another type, and to access standard values and subordinate properties. Access this class through <see
          cref="T:System.ComponentModel.TypeDescriptor" />
+
+        
 
         
 
@@ -38,6 +42,8 @@
       <para
         >Provides a type converter for <see
          cref="T:System.Windows.Forms.LinkLabel.Link" />
+
+        
 
         
 
@@ -62,6 +68,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.LinkConverter" />
+
+            
 
             
 
@@ -100,8 +108,12 @@
 
             
 
+            
+
              can convert an object having the specified context and source type to the native type of the <see
              cref="T:System.Windows.Forms.LinkConverter" />
+
+            
 
             
 
@@ -120,11 +132,15 @@
 
             
 
+            
+
              can convert the specified object; otherwise, false. </para
           >
         </returns>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -137,10 +153,14 @@
 
           
 
+          
+
            providing contextual information about the object to be converted.</param
         >
         <param name="sourceType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -178,6 +198,8 @@
 
             
 
+            
+
              can convert an object having the specified context to the specified type.</para
           >
         </summary>
@@ -186,6 +208,8 @@
           <para
             >true if this <see
              cref="T:System.Windows.Forms.LinkConverter" />
+
+            
 
             
 
@@ -201,8 +225,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -212,6 +240,8 @@
         >
         <param name="destinationType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -250,6 +280,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -264,8 +296,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -280,8 +316,12 @@
 
           
 
+          
+
           Cultural attributes of the object to be converted. If this parameter is null, the <see
            cref="P:System.Globalization.CultureInfo.CurrentCulture" />
+
+          
 
           
 
@@ -291,6 +331,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -329,8 +371,12 @@
 
             
 
+            
+
              to another <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -343,6 +389,8 @@
 
             
 
+            
+
              on the object if the object is valid and if the <paramref
              name="destinationType" />
 
@@ -350,8 +398,12 @@
 
             
 
+            
+
              is <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -375,8 +427,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -391,8 +447,12 @@
 
           
 
+          
+
           Cultural attributes of the object to be converted. If this parameter is null, the <see
            cref="P:System.Globalization.CultureInfo.CurrentCulture" />
+
+          
 
           
 
@@ -407,10 +467,14 @@
 
           
 
+          
+
           The object to be converted.</param
         >
         <param name="destinationType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -33,8 +33,12 @@
 
         
 
+        
+
          class is used to manipulate the width of margins in <see
          cref="T:System.Drawing.Printing.PageSettings" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
         . <see
          cref="T:System.Drawing.Printing.MarginsConverter" />
+
+        
 
         
 
@@ -63,8 +71,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Drawing.Printing.Margins.Right" />
+
+        
 
         
 
@@ -77,8 +89,12 @@
 
         
 
+        
+
         , and <see
          cref="P:System.Drawing.Printing.Margins.Bottom" />
+
+        
 
         
 
@@ -91,8 +107,12 @@
 
         
 
+        
+
          creates an identical <see
          cref="T:System.Drawing.Printing.Margins" />
+
+        
 
         
 
@@ -105,8 +125,12 @@
 
         
 
+        
+
          determines if another object has the same dimensions as a <see
          cref="T:System.Drawing.Printing.Margins" />
+
+        
 
         
 
@@ -117,6 +141,8 @@
       <para
         >For more information about printing, see the <see
          cref="N:System.Drawing.Printing" />
+
+        
 
         
 
@@ -143,6 +169,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Drawing.Printing.Margins" />
+
+            
 
             
 
@@ -182,11 +210,15 @@
 
             
 
+            
+
              class with the specified left, right, top, and bottom margins.</para
           >
         </summary>
         <param name="left">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -201,6 +233,8 @@
 
           
 
+          
+
           The right margin, in hundredths of an inch. </param
         >
         <param name="top">
@@ -210,10 +244,14 @@
 
           
 
+          
+
           The top margin, in hundredths of an inch. </param
         >
         <param name="bottom">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -241,6 +279,8 @@
           <para
             >If you measure margins in millimeters, multiply the margin width you want in millimeters by 3.937 to determine the correct measurement in hundredths of an inch. For example, if you want a margin of 25mm, multiply by 3.937 and the result is 98 when rounded down. You would then set the appropriate <see
              cref="T:System.Drawing.Printing.Margins" />
+
+            
 
             
 
@@ -303,8 +343,12 @@
 
             
 
+            
+
              to the specified <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -323,8 +367,12 @@
 
             
 
+            
+
              and has the same <see
              cref="P:System.Drawing.Printing.Margins.Top" />
+
+            
 
             
 
@@ -337,8 +385,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Drawing.Printing.Margins.Right" />
+
+            
 
             
 
@@ -351,8 +403,12 @@
 
             
 
+            
+
              values as this <see
              cref="T:System.Drawing.Printing.Margins" />
+
+            
 
             
 
@@ -368,8 +424,12 @@
 
           
 
+          
+
           The object to which to compare this <see
            cref="T:System.Drawing.Printing.Margins" />
+
+          
 
           
 
@@ -425,6 +485,8 @@
 
             
 
+            
+
              member to 98.</para
           >
         </remarks>
@@ -466,6 +528,8 @@
 
             
 
+            
+
              to determine if they have the same dimensions.</para
           >
         </summary>
@@ -479,8 +543,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Drawing.Printing.Margins.Right" />
+
+            
 
             
 
@@ -493,8 +561,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Drawing.Printing.Margins.Bottom" />
+
+            
 
             
 
@@ -510,8 +582,12 @@
 
           
 
+          
+
           The first <see
            cref="T:System.Drawing.Printing.Margins" />
+
+          
 
           
 
@@ -526,8 +602,12 @@
 
           
 
+          
+
           The second <see
            cref="T:System.Drawing.Printing.Margins" />
+
+          
 
           
 
@@ -565,6 +645,8 @@
 
             
 
+            
+
              to determine whether they are of unequal width.</para
           >
         </summary>
@@ -578,8 +660,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Drawing.Printing.Margins.Right" />
+
+            
 
             
 
@@ -592,8 +678,12 @@
 
             
 
+            
+
             , or <see
              cref="P:System.Drawing.Printing.Margins.Bottom" />
+
+            
 
             
 
@@ -609,8 +699,12 @@
 
           
 
+          
+
           The first <see
            cref="T:System.Drawing.Printing.Margins" />
+
+          
 
           
 
@@ -625,8 +719,12 @@
 
           
 
+          
+
           The second <see
            cref="T:System.Drawing.Printing.Margins" />
+
+          
 
           
 
@@ -650,6 +748,8 @@
           <para
             >If you measure margins in millimeters, multiply the margin width you want in millimeters by 3.937 to determine the correct measurement in hundredths of an inch. For example, if you want a margin of 25mm, multiply by 3.937 and the result is 98 rounded down. You would then set the appropriate <see
              cref="T:System.Drawing.Printing.Margins" />
+
+            
 
             
 
@@ -687,6 +787,8 @@
 
             
 
+            
+
              member to 98.</para
           >
         </remarks>
@@ -719,6 +821,8 @@
 
             
 
+            
+
              to a string.</para
           >
         </summary>
@@ -732,8 +836,12 @@
 
             
 
+            
+
              representation of the <see
              cref="T:System.Drawing.Printing.Margins" />
+
+            
 
             
 

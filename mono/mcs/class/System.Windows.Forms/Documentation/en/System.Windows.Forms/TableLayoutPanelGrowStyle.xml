@@ -20,6 +20,8 @@
 
         
 
+        
+
          are filled and the <see
          cref="P:System.Windows.Forms.TableLayoutPanel.GrowStyle" />
 
@@ -27,8 +29,12 @@
 
         
 
+        
+
          property is set to <see
          cref="F:System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize" />
+
+        
 
         
 
@@ -42,6 +48,8 @@
       <para
         >Specifies how a <see
          cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+        
 
         
 
@@ -65,6 +73,8 @@
           <para
             >The <see
              cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+            
 
             
 
@@ -96,6 +106,8 @@
 
             
 
+            
+
              gains additional rows after it is full.</para
           >
         </summary>
@@ -117,6 +129,8 @@
           <para
             >The <see
              cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+            
 
             
 

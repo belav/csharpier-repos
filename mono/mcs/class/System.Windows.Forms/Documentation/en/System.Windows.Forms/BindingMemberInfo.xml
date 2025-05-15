@@ -21,6 +21,8 @@
 
         
 
+        
+
          is returned by the <see
          cref="P:System.Windows.Forms.Binding.BindingMemberInfo" />
 
@@ -28,8 +30,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.Binding" />
+
+        
 
         
 
@@ -45,8 +51,12 @@
 
         
 
+        
+
          is created from the string passed to the <see
          cref="M:System.Windows.Forms.BindingMemberInfo.#ctor(System.String)" />
+
+        
 
         
 
@@ -60,6 +70,8 @@
       <para
         >Contains information that enables a <see
          cref="T:System.Windows.Forms.Binding" />
+
+        
 
         
 
@@ -87,8 +99,12 @@
 
             
 
+            
+
              is created automatically when you call the <see
              cref="M:System.Windows.Forms.BindingMemberInfo.#ctor(System.String)" />
+
+            
 
             
 
@@ -101,8 +117,12 @@
 
             
 
+            
+
              parameter contains the <see
              cref="P:System.Windows.Forms.BindingMemberInfo.BindingMember" />
+
+            
 
             
 
@@ -121,11 +141,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="dataMember">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -157,8 +181,12 @@
 
             
 
+            
+
              is the last item found in the navigation path returned by the <see
              cref="P:System.Windows.Forms.BindingMemberInfo.BindingMember" />
+
+            
 
             
 
@@ -171,6 +199,8 @@
 
             
 
+            
+
              is created that has a <paramref
              name="dataMember" />
 
@@ -178,8 +208,12 @@
 
             
 
+            
+
              parameter of "Customers.custToOrders.OrderDate", <see
              cref="P:System.Windows.Forms.BindingMemberInfo.BindingMember" />
+
+            
 
             
 
@@ -216,8 +250,12 @@
 
             
 
+            
+
              is created automatically when you call the <see
              cref="M:System.Windows.Forms.BindingMemberInfo.#ctor(System.String)" />
+
+            
 
             
 
@@ -230,8 +268,12 @@
 
             
 
+            
+
              parameter contains the <see
              cref="P:System.Windows.Forms.BindingMemberInfo.BindingMember" />
+
+            
 
             
 
@@ -247,8 +289,12 @@
 
             
 
+            
+
              is the period delimitated combination of the <see
              cref="P:System.Windows.Forms.BindingMemberInfo.BindingPath" />
+
+            
 
             
 
@@ -261,8 +307,12 @@
 
             
 
+            
+
              values. For example, when a new <see
              cref="T:System.Windows.Forms.Binding" />
+
+            
 
             
 
@@ -275,8 +325,12 @@
 
             
 
+            
+
              parameter of "Customers.custToOrders.OrderDate", <see
              cref="P:System.Windows.Forms.BindingMemberInfo.BindingMember" />
+
+            
 
             
 
@@ -313,8 +367,12 @@
 
             
 
+            
+
              is the period delimitated combination of property names that comes before the <see
              cref="P:System.Windows.Forms.BindingMemberInfo.BindingField" />
+
+            
 
             
 
@@ -327,8 +385,12 @@
 
             
 
+            
+
              property. For example, when a new <see
              cref="T:System.Windows.Forms.Binding" />
+
+            
 
             
 
@@ -341,8 +403,12 @@
 
             
 
+            
+
              parameter of "Customers.custToOrders.OrderDate", <see
              cref="P:System.Windows.Forms.BindingMemberInfo.BindingPath" />
+
+            
 
             
 
@@ -381,8 +447,12 @@
 
             
 
+            
+
              strings are compared with a culture setting of <see
              cref="P:System.Globalization.CultureInfo.InvariantCulture" />
+
+            
 
             
 
@@ -401,6 +471,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -414,8 +486,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Windows.Forms.BindingMemberInfo" />
+
+            
 
             
 
@@ -428,11 +504,15 @@
 
             
 
+            
+
              strings are equal; otherwise false.</para
           >
         </returns>
         <param name="otherObject">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -465,6 +545,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -473,6 +555,8 @@
           <para
             >The hash code for this <see
              cref="T:System.Windows.Forms.BindingMemberInfo" />
+
+            
 
             
 
@@ -515,6 +599,8 @@
 
             
 
+            
+
              objects are equal.</para
           >
         </summary>
@@ -528,6 +614,8 @@
 
             
 
+            
+
              strings for <paramref
              name="a" />
 
@@ -535,8 +623,12 @@
 
             
 
+            
+
              and <paramref
              name="b" />
+
+            
 
             
 
@@ -552,8 +644,12 @@
 
           
 
+          
+
           The first <see
            cref="T:System.Windows.Forms.BindingMemberInfo" />
+
+          
 
           
 
@@ -568,8 +664,12 @@
 
           
 
+          
+
           The second <see
            cref="T:System.Windows.Forms.BindingMemberInfo" />
+
+          
 
           
 
@@ -607,6 +707,8 @@
 
             
 
+            
+
              objects are not equal.</para
           >
         </summary>
@@ -620,6 +722,8 @@
 
             
 
+            
+
              strings for <paramref
              name="a" />
 
@@ -627,8 +731,12 @@
 
             
 
+            
+
              and <paramref
              name="b" />
+
+            
 
             
 
@@ -644,8 +752,12 @@
 
           
 
+          
+
           The first <see
            cref="T:System.Windows.Forms.BindingMemberInfo" />
+
+          
 
           
 
@@ -660,8 +772,12 @@
 
           
 
+          
+
           The second <see
            cref="T:System.Windows.Forms.BindingMemberInfo" />
+
+          
 
           
 

@@ -24,6 +24,8 @@
 
         
 
+        
+
          provides a design-time user interface for configuring an <see
          cref="P:System.Windows.Forms.Control.Anchor" />
 
@@ -31,8 +33,12 @@
 
         
 
+        
+
          property. An <see
          cref="P:System.Windows.Forms.Control.Anchor" />
+
+        
 
         
 
@@ -46,6 +52,8 @@
       <para
         >Provides a user interface for configuring an <see
          cref="P:System.Windows.Forms.Control.Anchor" />
+
+        
 
         
 
@@ -67,6 +75,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.Design.AnchorEditor" />
+
+            
 
             
 
@@ -115,8 +125,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -131,8 +145,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IServiceProvider" />
+
+          
 
           
 
@@ -142,6 +160,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -179,6 +199,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -192,8 +214,12 @@
 
             
 
+            
+
              values indicating the provided editing style. If the method is not supported, this method will return <see
              cref="F:System.Drawing.Design.UITypeEditorEditStyle.None" />
+
+            
 
             
 
@@ -209,8 +235,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 

@@ -24,6 +24,8 @@
 
         
 
+        
+
          class provides a set of methods for implementing a virtual file system for a Web application. In a virtual file system, the files and directories are managed by a data store other than the file system provided by the server's operating system. For example, you can use a virtual file system to store content in a SQL Server database.</para
       >
       <para>You can store any file that is processed on request in a virtual file system. This includes:</para>
@@ -38,6 +40,8 @@
           <para
             >Any custom extension mapped to a <see
              cref="T:System.Web.Compilation.BuildProvider" />
+
+            
 
             
 
@@ -67,6 +71,8 @@
 
             
 
+            
+
             .</para
           >
         </item>
@@ -86,8 +92,12 @@
 
           
 
+          
+
            instance is not compiled, and no <see
            cref="T:System.Web.Hosting.VirtualPathProvider" />
+
+          
 
           
 
@@ -107,8 +117,12 @@
 
         
 
+        
+
          instance should be registered with the ASP.NET compilation system by using the <see
          cref="M:System.Web.Hosting.HostingEnvironment.RegisterVirtualPathProvider(System.Web.Hosting.VirtualPathProvider)" />
+
+        
 
         
 
@@ -124,8 +138,12 @@
 
         
 
+        
+
          instance is registered in an AppInitialize method defined in the App_Code directory, or during the Application_Start event in the Global.asax file. For an example of registering a <see
          cref="T:System.Web.Hosting.VirtualPathProvider" />
+
+        
 
         
 
@@ -141,6 +159,8 @@
 
         
 
+        
+
          instance during other events, but pages compiled and cached before the <see
          cref="T:System.Web.Hosting.VirtualPathProvider" />
 
@@ -148,8 +168,12 @@
 
         
 
+        
+
          instance is registered will not be invalidated, even if the new <see
          cref="T:System.Web.Hosting.VirtualPathProvider" />
+
+        
 
         
 
@@ -180,6 +204,8 @@
 
             
 
+            
+
              constructor, defer any initialization that must occur after the <see
              cref="T:System.Web.Hosting.VirtualPathProvider" />
 
@@ -187,8 +213,12 @@
 
             
 
+            
+
              object is registered to the <see
              cref="M:System.Web.Hosting.VirtualPathProvider.Initialize" />
+
+            
 
             
 
@@ -231,6 +261,8 @@
 
             
 
+            
+
              method to inspect the contents of a relative path to a virtual resource and perform any modifications required. </para
           >
           <para
@@ -241,8 +273,12 @@
 
             
 
+            
+
              and <paramref
              name="relativePath" />
+
+            
 
             
 
@@ -266,10 +302,14 @@
 
           
 
+          
+
           The base path for the application.</param
         >
         <param name="relativePath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -306,6 +346,8 @@
 
             
 
+            
+
              method to indicate to the compilation system that the resource represented by <paramref
              name="virtualDir" />
 
@@ -313,8 +355,12 @@
 
             
 
+            
+
              exists in the virtual file system provided by this <see
              cref="T:System.Web.Hosting.VirtualPathProvider" />
+
+            
 
             
 
@@ -330,8 +376,12 @@
 
             
 
+            
+
              class does not support directories, the <see
              cref="M:System.Web.Hosting.VirtualPathProvider.DirectoryExists(System.String)" />
+
+            
 
             
 
@@ -343,6 +393,8 @@
             <para
               >If your virtual file system will contain themes for the Web site (by creating a virtual App_Themes directory), your custom <see
                cref="T:System.Web.Hosting.VirtualPathProvider" />
+
+              
 
               
 
@@ -362,6 +414,8 @@
         </returns>
         <param name="virtualDir">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -395,6 +449,8 @@
 
             
 
+            
+
              method to indicate to the compilation system that the resource represented by <paramref
              name="virtualPath" />
 
@@ -402,8 +458,12 @@
 
             
 
+            
+
              exists in the virtual file system provided by this <see
              cref="T:System.Web.Hosting.VirtualPathProvider" />
+
+            
 
             
 
@@ -422,6 +482,8 @@
         </returns>
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -460,6 +522,8 @@
 
             
 
+            
+
              method returns null. To cache virtual resources for later use you must override either the <see
              cref="M:System.Web.Hosting.VirtualPathProvider.GetCacheDependency(System.String,System.Collections.IEnumerable,System.DateTime)" />
 
@@ -467,8 +531,12 @@
 
             
 
+            
+
              method or the <see
              cref="M:System.Web.Hosting.VirtualPathProvider.GetFileHash(System.String,System.Collections.IEnumerable)" />
+
+            
 
             
 
@@ -491,11 +559,15 @@
 
             
 
+            
+
              object for the specified virtual resources.</para
           >
         </returns>
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -510,10 +582,14 @@
 
           
 
+          
+
           An array of paths to other resources required by the primary virtual resource.</param
         >
         <param name="utcStart">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -550,8 +626,12 @@
 
             
 
+            
+
              method to provide a custom cache key for virtual resources. If you do not override the <see
              cref="M:System.Web.Hosting.VirtualPathProvider.GetCacheKey(System.String)" />
+
+            
 
             
 
@@ -570,6 +650,8 @@
         </returns>
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -606,6 +688,8 @@
 
             
 
+            
+
              method returns a descendent of the <see
              cref="T:System.Web.Hosting.VirtualDirectory" />
 
@@ -613,8 +697,12 @@
 
             
 
+            
+
              class that contains the file and directories contained in the directory specified in the <paramref
              name="virtualDir" />
+
+            
 
             
 
@@ -630,8 +718,12 @@
 
             
 
+            
+
              class does not support directories, the <see
              cref="M:System.Web.Hosting.VirtualPathProvider.GetDirectory(System.String)" />
+
+            
 
             
 
@@ -643,6 +735,8 @@
             <para
               >If your virtual file system will contain themes for the Web site (by creating a virtual App_Themes directory), your custom <see
                cref="T:System.Web.Hosting.VirtualPathProvider" />
+
+              
 
               
 
@@ -666,11 +760,15 @@
 
             
 
+            
+
              class that represents a directory in the virtual file system.</para
           >
         </returns>
         <param name="virtualDir">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -707,6 +805,8 @@
 
             
 
+            
+
              method returns a descendent of the <see
              cref="T:System.Web.Hosting.VirtualFile" />
 
@@ -714,8 +814,12 @@
 
             
 
+            
+
              class that represents the file specified by the <paramref
              name="virtualPath" />
+
+            
 
             
 
@@ -738,11 +842,15 @@
 
             
 
+            
+
              class that represents a file in the virtual file system.</para
           >
         </returns>
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -780,6 +888,8 @@
 
             
 
+            
+
              method to provide a hash of the dependencies for a virtual-file-system resource. </para
           >
         </remarks>
@@ -798,10 +908,14 @@
 
           
 
+          
+
           The path to the primary virtual resource.</param
         >
         <param name="virtualPathDependencies">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -833,6 +947,8 @@
 
             
 
+            
+
              method is called after the provider is registered with the ASP.NET compilation system. The <see
              cref="M:System.Web.Hosting.VirtualPathProvider.Initialize" />
 
@@ -840,8 +956,12 @@
 
             
 
+            
+
              method is used to provide any initialization required after the <see
              cref="T:System.Web.Hosting.VirtualPathProvider" />
+
+            
 
             
 
@@ -855,6 +975,8 @@
           <para
             >Initializes the <see
              cref="T:System.Web.Hosting.VirtualPathProvider" />
+
+            
 
             
 
@@ -887,8 +1009,12 @@
 
             
 
+            
+
              method in its base class. It always returns null and thereby prevents a lease from being created that would limit the <see
              cref="T:System.Web.Hosting.VirtualPathProvider" />
+
+            
 
             
 
@@ -902,6 +1028,8 @@
           <para
             >Gives the <see
              cref="T:System.Web.Hosting.VirtualPathProvider" />
+
+            
 
             
 
@@ -943,8 +1071,12 @@
 
             
 
+            
+
              method is a convenience method that enables you to get a stream from a virtual file without creating a <see
              cref="T:System.Web.Hosting.VirtualPathProvider" />
+
+            
 
             
 
@@ -967,11 +1099,15 @@
 
             
 
+            
+
              object for the specified virtual file or resource.</para
           >
         </returns>
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1008,8 +1144,12 @@
 
             
 
+            
+
              object is registered with the ASP.NET compilation system, it is added to a chain of providers. Use the <see
              cref="P:System.Web.Hosting.VirtualPathProvider.Previous" />
+
+            
 
             
 
@@ -1022,8 +1162,12 @@
 
             
 
+            
+
              object in the chain if the requested path is not provided by this <see
              cref="T:System.Web.Hosting.VirtualPathProvider" />
+
+            
 
             
 
@@ -1038,6 +1182,8 @@
           <para
             >Gets a reference to a previously registered <see
              cref="T:System.Web.Hosting.VirtualPathProvider" />
+
+            
 
             
 

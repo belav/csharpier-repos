@@ -44,6 +44,8 @@
 
         
 
+        
+
          class contains information about an operating system. For example, the <see
          cref="P:System.Environment.OSVersion" />
 
@@ -51,8 +53,12 @@
 
         
 
+        
+
          property returns information about the currently executing operating system in an <see
          cref="T:System.OperatingSystem" />
+
+        
 
         
 
@@ -68,6 +74,8 @@
 
         
 
+        
+
          class is not a general purpose means of describing an operating system, and you cannot derive a more inclusive type from the <see
          cref="T:System.OperatingSystem" />
 
@@ -75,8 +83,12 @@
 
         
 
+        
+
          class. If you need a type to contain other information about an operating system, create your own type, then include a field of type <see
          cref="T:System.OperatingSystem" />
+
+        
 
         
 
@@ -133,6 +145,8 @@ class SystemDemo
             
 
             
+
+            
 prints
 <para
             >
@@ -150,6 +164,8 @@ Microsoft Windows NT 5.1.2600.0
 
             
 
+            
+
              class, using the specified platform identifier value and version object.</para
           >
         </summary>
@@ -160,8 +176,12 @@ Microsoft Windows NT 5.1.2600.0
 
           
 
+          
+
           One of the <see
            cref="T:System.PlatformID" />
+
+          
 
           
 
@@ -176,8 +196,12 @@ Microsoft Windows NT 5.1.2600.0
 
           
 
+          
+
           A <see
            cref="T:System.Version" />
+
+          
 
           
 
@@ -215,6 +239,8 @@ Microsoft Windows NT 5.1.2600.0
 
             
 
+            
+
              object that is identical to this instance.</para
           >
         </summary>
@@ -223,6 +249,8 @@ Microsoft Windows NT 5.1.2600.0
           <para
             >An <see
              cref="T:System.OperatingSystem" />
+
+            
 
             
 
@@ -265,8 +293,12 @@ Microsoft Windows NT 5.1.2600.0
 
             
 
+            
+
              parameter is reserved for future use; it is currently not implemented in the <see
              cref="M:System.OperatingSystem.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+
+            
 
             
 
@@ -277,6 +309,8 @@ Microsoft Windows NT 5.1.2600.0
           <para
             >For more information, see the <see
              cref="M:System.Runtime.Serialization.SerializationInfo.AddValue(System.String,System.Object,System.Type)" />
+
+            
 
             
 
@@ -295,6 +329,8 @@ Microsoft Windows NT 5.1.2600.0
 
             
 
+            
+
              object with the data necessary to deserialize this instance.</para
           >
         </summary>
@@ -305,10 +341,14 @@ Microsoft Windows NT 5.1.2600.0
 
           
 
+          
+
           The object to populate with serialization information.</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -341,6 +381,8 @@ Microsoft Windows NT 5.1.2600.0
           <para
             >Gets a <see
              cref="T:System.PlatformID" />
+
+            
 
             
 
@@ -380,6 +422,8 @@ Microsoft Windows NT 5.1.2600.0
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -413,6 +457,8 @@ Microsoft Windows NT 5.1.2600.0
 
             
 
+            
+
              object to its equivalent string representation.</para
           >
         </summary>
@@ -426,6 +472,8 @@ Microsoft Windows NT 5.1.2600.0
 
             
 
+            
+
             , <see
              cref="P:System.OperatingSystem.Version" />
 
@@ -433,8 +481,12 @@ Microsoft Windows NT 5.1.2600.0
 
             
 
+            
+
             , and <see
              cref="P:System.OperatingSystem.ServicePack" />
+
+            
 
             
 
@@ -471,6 +523,8 @@ Microsoft Windows NT 5.1.2600.0
 
             
 
+            
+
              on the Windows Dev Center for a list of Windows operating system versions and their corresponding version numbers. </para
           >
         </remarks>
@@ -479,6 +533,8 @@ Microsoft Windows NT 5.1.2600.0
           <para
             >Gets a <see
              cref="T:System.Version" />
+
+            
 
             
 
@@ -513,8 +569,12 @@ Microsoft Windows NT 5.1.2600.0
 
             
 
+            
+
              is the same as the value returned by the <see
              cref="M:System.OperatingSystem.ToString" />
+
+            
 
             
 

@@ -37,8 +37,12 @@
 
         
 
+        
+
          class represents a set of <see
          cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
+
+        
 
         
 
@@ -51,8 +55,12 @@
 
         
 
+        
+
          implements the <see
          cref="T:System.Collections.ICollection" />
+
+        
 
         
 
@@ -88,8 +96,12 @@
 
             
 
+            
+
              constructor creates an instance of the <see
              cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+
+            
 
             
 
@@ -130,8 +142,12 @@
 
             
 
+            
+
              constructor creates an instance of the <see
              cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+
+            
 
             
 
@@ -147,8 +163,12 @@
 
           
 
+          
+
           An instance of the <see
            cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
+
+          
 
           
 
@@ -195,8 +215,12 @@
 
             
 
+            
+
              constructor creates an instance of the <see
              cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+
+            
 
             
 
@@ -212,8 +236,12 @@
 
           
 
+          
+
           A member of the <see
            cref="T:System.Security.Cryptography.Pkcs.SubjectIdentifierType" />
+
+          
 
           
 
@@ -228,8 +256,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+
+          
 
           
 
@@ -272,8 +304,12 @@
 
             
 
+            
+
              method adds a recipient to the <see
              cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+
+            
 
             
 
@@ -292,12 +328,16 @@
 
             
 
+            
+
              value that represents the zero-based position where the recipient is to be inserted.</para
           >
           <para>If the method fails, it throws an exception.</para>
         </returns>
         <param name="recipient">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -310,8 +350,12 @@
 
           
 
+          
+
            object that represents the recipient to add to the <see
            cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+
+          
 
           
 
@@ -352,8 +396,12 @@
 
             
 
+            
+
              method copies the <see
              cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+
+            
 
             
 
@@ -369,6 +417,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Array" />
 
@@ -376,8 +426,12 @@
 
           
 
+          
+
            object to which the <see
            cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+
+          
 
           
 
@@ -392,6 +446,8 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
 
@@ -399,8 +455,12 @@
 
           
 
+          
+
            where the <see
            cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+
+          
 
           
 
@@ -444,6 +504,8 @@
 
             
 
+            
+
              method copies the <see
              cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
 
@@ -451,8 +513,12 @@
 
             
 
+            
+
              collection to a <see
              cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
+
+            
 
             
 
@@ -468,6 +534,8 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
 
@@ -475,8 +543,12 @@
 
           
 
+          
+
            objects where the <see
            cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+
+          
 
           
 
@@ -491,8 +563,12 @@
 
           
 
+          
+
           The zero-based index for the array of <see
            cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
+
+          
 
           
 
@@ -505,8 +581,12 @@
 
           
 
+          
+
            to which the <see
            cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+
+          
 
           
 
@@ -541,8 +621,12 @@
 
             
 
+            
+
              property retrieves the number of items in the <see
              cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+
+            
 
             
 
@@ -584,6 +668,8 @@
 
             
 
+            
+
              method returns a <see
              cref="T:System.Security.Cryptography.Pkcs.CmsRecipientEnumerator" />
 
@@ -591,8 +677,12 @@
 
             
 
+            
+
              object for the <see
              cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+
+            
 
             
 
@@ -611,8 +701,12 @@
 
             
 
+            
+
              object that can be used to enumerate the <see
              cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+
+            
 
             
 
@@ -643,6 +737,8 @@
           <para
             >The <see
              cref="P:System.Security.Cryptography.Pkcs.CmsRecipientCollection.IsSynchronized" />
+
+            
 
             
 
@@ -714,8 +810,12 @@
 
             
 
+            
+
              method removes a recipient from the <see
              cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+
+            
 
             
 
@@ -731,8 +831,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
+
+          
 
           
 
@@ -767,6 +871,8 @@
 
             
 
+            
+
              property retrieves an <see
              cref="T:System.Object" />
 
@@ -774,8 +880,12 @@
 
             
 
+            
+
              object used to synchronize access to the <see
              cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+
+            
 
             
 
@@ -816,6 +926,8 @@
 
             
 
+            
+
              method returns a <see
              cref="T:System.Security.Cryptography.Pkcs.CmsRecipientEnumerator" />
 
@@ -823,8 +935,12 @@
 
             
 
+            
+
              object for the <see
              cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+
+            
 
             
 
@@ -843,8 +959,12 @@
 
             
 
+            
+
              object that can be used to enumerate the <see
              cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+
+            
 
             
 

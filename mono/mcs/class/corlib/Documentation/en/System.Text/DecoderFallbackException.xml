@@ -50,6 +50,8 @@
 
             
 
+            
+
              property for this exception is set to COR_E_ARGUMENT (0x80070057).</para
           >
         </remarks>
@@ -58,6 +60,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Text.DecoderFallbackException" />
+
+            
 
             
 
@@ -94,6 +98,8 @@
 
             
 
+            
+
              property for this exception is set to COR_E_ARGUMENT (0x80070057).</para
           >
         </remarks>
@@ -107,11 +113,15 @@
 
             
 
+            
+
              class. A parameter specifies the error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -151,6 +161,8 @@
 
             
 
+            
+
              property for this exception is set to COR_E_ARGUMENT (0x80070057).</para
           >
         </remarks>
@@ -159,6 +171,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Text.DecoderFallbackException" />
+
+            
 
             
 
@@ -174,10 +188,14 @@
 
           
 
+          
+
           An error message.</param
         >
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -218,6 +236,8 @@
 
             
 
+            
+
              property for this exception is set to COR_E_ARGUMENT (0x80070057).</para
           >
         </remarks>
@@ -226,6 +246,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Text.DecoderFallbackException" />
+
+            
 
             
 
@@ -241,10 +263,14 @@
 
           
 
+          
+
           An error message.</param
         >
         <param name="bytesUnknown">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -259,8 +285,12 @@
 
           
 
+          
+
           The index position in <paramref
            name="bytesUnknown" />
+
+          
 
           
 
@@ -294,6 +324,8 @@
 
             
 
+            
+
              property to get the position in the input byte array of the byte that cannot be decoded.</para
           >
         </remarks>
@@ -322,6 +354,8 @@
           <para
             >The application uses the <see
              cref="P:System.Text.DecoderFallbackException.BytesUnknown" />
+
+            
 
             
 

@@ -37,6 +37,8 @@
 
         
 
+        
+
          is the root event arguments class for all component management events. This type of event occurs when you add or remove components using a designer.</para
       >
     </remarks>
@@ -50,8 +52,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentAdding" />
+
+        
 
         
 
@@ -64,8 +70,12 @@
 
         
 
+        
+
         , and <see
          cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentRemoving" />
+
+        
 
         
 
@@ -107,11 +117,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

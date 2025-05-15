@@ -43,11 +43,15 @@
 
         
 
+        
+
          can be used to represent code that declares a variable.</para
       >
       <para
         >The <see
          cref="P:System.CodeDom.CodeVariableDeclarationStatement.Type" />
+
+        
 
         
 
@@ -60,8 +64,12 @@
 
         
 
+        
+
          property specifies the name of the variable to declare. The <see
          cref="P:System.CodeDom.CodeVariableDeclarationStatement.InitExpression" />
+
+        
 
         
 
@@ -105,6 +113,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -142,11 +152,15 @@
 
             
 
+            
+
              class using the specified type and name.</para
           >
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -159,10 +173,14 @@
 
           
 
+          
+
            that indicates the data type of the variable. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -204,6 +222,8 @@
 
             
 
+            
+
              class using the specified data type name and variable name.</para
           >
         </summary>
@@ -214,10 +234,14 @@
 
           
 
+          
+
           The name of the data type of the variable. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -259,6 +283,8 @@
 
             
 
+            
+
              class using the specified data type and variable name.</para
           >
         </summary>
@@ -269,10 +295,14 @@
 
           
 
+          
+
           The data type for the variable. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -315,6 +345,8 @@
 
             
 
+            
+
              class using the specified data type, variable name, and initialization expression.</para
           >
         </summary>
@@ -325,8 +357,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeTypeReference" />
+
+          
 
           
 
@@ -341,6 +377,8 @@
 
           
 
+          
+
           The name of the variable. </param
         >
         <param name="initExpression">
@@ -350,8 +388,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 
@@ -394,11 +436,15 @@
 
             
 
+            
+
              class using the specified data type, variable name, and initialization expression.</para
           >
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -413,6 +459,8 @@
 
           
 
+          
+
           The name of the variable. </param
         >
         <param name="initExpression">
@@ -422,8 +470,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 
@@ -466,11 +518,15 @@
 
             
 
+            
+
              class using the specified data type, variable name, and initialization expression.</para
           >
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -485,6 +541,8 @@
 
           
 
+          
+
           The name of the variable. </param
         >
         <param name="initExpression">
@@ -494,8 +552,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 

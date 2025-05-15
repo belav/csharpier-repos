@@ -37,8 +37,12 @@
 
         
 
+        
+
         , defines one or more properties that belong to the same application property group. <see
          cref="T:System.Configuration.SettingsGroupDescriptionAttribute" />
+
+        
 
         
 
@@ -85,8 +89,12 @@
 
             
 
+            
+
              parameter is constrained by the upper bounds of an <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -105,6 +113,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -115,8 +125,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -150,8 +164,12 @@
 
             
 
+            
+
              property value is set in the <see
              cref="M:System.Configuration.SettingsGroupDescriptionAttribute.#ctor(System.String)" />
+
+            
 
             
 

@@ -24,8 +24,12 @@
 
         
 
+        
+
          interface. The state of an object can be obtained using the <see
          cref="P:System.ServiceModel.ICommunicationObject.State" />
+
+        
 
         
 
@@ -77,11 +81,15 @@
 
         
 
+        
+
          state. For example, its properties can be changed, and its events can be registered. No input or output can occur in this state. So messages, for example, cannot be sent or received from a channel in this state.</para
       >
       <para
         >The <see
          cref="F:System.ServiceModel.CommunicationState.Opening" />
+
+        
 
         
 
@@ -94,8 +102,12 @@
 
         
 
+        
+
          method is invoked. Unless otherwise noted on derived classes, objects in the opening state cannot be configured. This transition state can only be entered from the <see
          cref="F:System.ServiceModel.CommunicationState.Created" />
+
+        
 
         
 
@@ -111,6 +123,8 @@
 
         
 
+        
+
          state when the open process completes. This transition to the <see
          cref="F:System.ServiceModel.CommunicationState.Opened" />
 
@@ -118,8 +132,12 @@
 
         
 
+        
+
          state is only valid from the <see
          cref="F:System.ServiceModel.CommunicationState.Opening" />
+
+        
 
         
 
@@ -135,6 +153,8 @@
 
         
 
+        
+
          is a temporary state that the object enters when the <see
          cref="M:System.ServiceModel.ICommunicationObject.Close" />
 
@@ -142,8 +162,12 @@
 
         
 
+        
+
          method is invoked for a graceful shutdown or the object is aborted. At this point, the object becomes (if not already) unusable. This transition is valid from any state except the <see
          cref="F:System.ServiceModel.CommunicationState.Closed" />
+
+        
 
         
 
@@ -159,11 +183,15 @@
 
         
 
+        
+
          state is equivalent to being disposed and the configuration of the object can still be inspected.</para
       >
       <para
         >The <see
          cref="F:System.ServiceModel.CommunicationState.Faulted" />
+
+        
 
         
 
@@ -176,6 +204,8 @@
           <para
             >If the <see
              cref="M:System.ServiceModel.ICommunicationObject.Open" />
+
+            
 
             
 
@@ -196,8 +226,12 @@
 
         
 
+        
+
          state is not closed and may be holding resources. The <see
          cref="M:System.ServiceModel.ICommunicationObject.Abort" />
+
+        
 
         
 
@@ -210,6 +244,8 @@
 
         
 
+        
+
          is called on an object in the <see
          cref="F:System.ServiceModel.CommunicationState.Faulted" />
 
@@ -217,8 +253,12 @@
 
         
 
+        
+
          state, a <see
          cref="T:System.ServiceModel.CommunicationObjectFaultedException" />
+
+        
 
         
 
@@ -232,6 +272,8 @@
       <para
         >Defines the states in which an <see
          cref="T:System.ServiceModel.ICommunicationObject" />
+
+        
 
         
 
@@ -281,6 +323,8 @@
           <para
             >Indicates that the communication object is transitioning to the <see
              cref="F:System.ServiceModel.CommunicationState.Closed" />
+
+            
 
             
 
@@ -375,8 +419,12 @@
 
             
 
+            
+
              state to the <see
              cref="F:System.ServiceModel.CommunicationState.Opened" />
+
+            
 
             
 

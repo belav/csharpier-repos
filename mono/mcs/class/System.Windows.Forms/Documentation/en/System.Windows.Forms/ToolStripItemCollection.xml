@@ -32,8 +32,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Windows.Forms.ToolStripItemCollection.Remove(System.Windows.Forms.ToolStripItem)" />
+
+        
 
         
 
@@ -46,6 +50,8 @@
 
         
 
+        
+
          methods enable you to add and remove individual controls from the collection. You can also use the <see
          cref="M:System.Windows.Forms.ToolStripItemCollection.AddRange(System.Windows.Forms.ToolStripItem[])" />
 
@@ -53,8 +59,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.Windows.Forms.ToolStripItemCollection.Clear" />
+
+        
 
         
 
@@ -70,8 +80,12 @@
 
         
 
+        
+
          is a member of the collection by passing the control into the <see
          cref="M:System.Windows.Forms.ToolStripItemCollection.Contains(System.Windows.Forms.ToolStripItem)" />
+
+        
 
         
 
@@ -84,6 +98,8 @@
 
         
 
+        
+
          in the collection, pass the control into the <see
          cref="M:System.Windows.Forms.ToolStripItemCollection.IndexOf(System.Windows.Forms.ToolStripItem)" />
 
@@ -91,8 +107,12 @@
 
         
 
+        
+
          method. The collection can be copied into an array by calling the <see
          cref="M:System.Windows.Forms.ToolStripItemCollection.CopyTo(System.Windows.Forms.ToolStripItem[],System.Int32)" />
+
+        
 
         
 
@@ -106,6 +126,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.Windows.Forms.ToolStripItem" />
+
+        
 
         
 
@@ -139,6 +161,8 @@
 
             
 
+            
+
              class with the specified container <see
              cref="T:System.Windows.Forms.ToolStrip" />
 
@@ -146,8 +170,12 @@
 
             
 
+            
+
              and the specified array of <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -163,6 +191,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStrip" />
 
@@ -170,8 +200,12 @@
 
           
 
+          
+
            to which this <see
            cref="T:System.Windows.Forms.ToolStripItemCollection" />
+
+          
 
           
 
@@ -186,6 +220,8 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Windows.Forms.ToolStripItem" />
 
@@ -193,8 +229,12 @@
 
           
 
+          
+
            containing the initial controls for this <see
            cref="T:System.Windows.Forms.ToolStripItemCollection" />
+
+          
 
           
 
@@ -232,6 +272,8 @@
 
             
 
+            
+
              that displays the specified image to the collection.</para
           >
         </summary>
@@ -240,6 +282,8 @@
           <para
             >The new <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -255,6 +299,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
 
@@ -262,8 +308,12 @@
 
           
 
+          
+
            to be displayed on the <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -301,6 +351,8 @@
 
             
 
+            
+
              that displays the specified text to the collection.</para
           >
         </summary>
@@ -309,6 +361,8 @@
           <para
             >The new <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -324,8 +378,12 @@
 
           
 
+          
+
           The text to be displayed on the <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -367,6 +425,8 @@
 
             
 
+            
+
              representing the zero-based index of the new item in the collection.</para
           >
         </returns>
@@ -377,8 +437,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -417,6 +481,8 @@
 
             
 
+            
+
              that displays the specified image and text to the collection.</para
           >
         </summary>
@@ -425,6 +491,8 @@
           <para
             >The new <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -440,8 +508,12 @@
 
           
 
+          
+
           The text to be displayed on the <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -456,6 +528,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
 
@@ -463,8 +537,12 @@
 
           
 
+          
+
            to be displayed on the <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -504,8 +582,12 @@
 
             
 
+            
+
              that displays the specified image and text to the collection and that raises the <see
              cref="E:System.Windows.Forms.ToolStripItem.Click" />
+
+            
 
             
 
@@ -524,6 +606,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -534,8 +618,12 @@
 
           
 
+          
+
           The text to be displayed on the <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -550,6 +638,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
 
@@ -557,8 +647,12 @@
 
           
 
+          
+
            to be displayed on the <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -573,8 +667,12 @@
 
           
 
+          
+
           Raises the <see
            cref="E:System.Windows.Forms.ToolStripItem.Click" />
+
+          
 
           
 
@@ -611,8 +709,12 @@
 
             
 
+            
+
              to copy a <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -625,8 +727,12 @@
 
             
 
+            
+
             . Use the overload of <see
              cref="M:System.Windows.Forms.ToolStripItemCollection.AddRange(System.Windows.Forms.ToolStripItem[])" />
+
+            
 
             
 
@@ -639,8 +745,12 @@
 
             
 
+            
+
              parameter to merge one <see
              cref="T:System.Windows.Forms.ToolStripItemCollection" />
+
+            
 
             
 
@@ -659,6 +769,8 @@
 
             
 
+            
+
              controls to the collection.</para
           >
         </summary>
@@ -669,8 +781,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -707,8 +823,12 @@
 
             
 
+            
+
              to merge one <see
              cref="T:System.Windows.Forms.ToolStripItemCollection" />
+
+            
 
             
 
@@ -721,8 +841,12 @@
 
             
 
+            
+
             , and you can easily use the <see
              cref="M:System.Windows.Forms.ToolStripItemCollection.Add(System.Windows.Forms.ToolStripItem)" />
+
+            
 
             
 
@@ -735,6 +859,8 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Windows.Forms.ToolStripItemCollection.Remove(System.Windows.Forms.ToolStripItem)" />
 
@@ -742,8 +868,12 @@
 
             
 
+            
+
              methods to modify the merged <see
              cref="T:System.Windows.Forms.ToolStripItemCollection" />
+
+            
 
             
 
@@ -759,8 +889,12 @@
 
             
 
+            
+
              that takes a <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -773,8 +907,12 @@
 
             
 
+            
+
              controls to a <see
              cref="T:System.Windows.Forms.ToolStripItemCollection" />
+
+            
 
             
 
@@ -793,6 +931,8 @@
 
             
 
+            
+
              to the current collection.</para
           >
         </summary>
@@ -803,8 +943,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStripItemCollection" />
+
+          
 
           
 
@@ -836,6 +980,8 @@
 
             
 
+            
+
              method to remove the entire collection of controls from a parent control.</para
           >
           <para
@@ -846,8 +992,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.ToolStripItemCollection.RemoveAt(System.Int32)" />
+
+            
 
             
 
@@ -863,8 +1013,12 @@
 
             
 
+            
+
              controls to the <see
              cref="T:System.Windows.Forms.ToolStripItemCollection" />
+
+            
 
             
 
@@ -877,8 +1031,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.ToolStripItemCollection.AddRange(System.Windows.Forms.ToolStripItem[])" />
+
+            
 
             
 
@@ -925,8 +1083,12 @@
 
             
 
+            
+
              is a member of the current <see
              cref="T:System.Windows.Forms.ToolStripItemCollection" />
+
+            
 
             
 
@@ -942,6 +1104,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStripItem" />
 
@@ -949,8 +1113,12 @@
 
           
 
+          
+
            to search for in the <see
            cref="T:System.Windows.Forms.ToolStripItemCollection" />
+
+          
 
           
 
@@ -984,8 +1152,12 @@
 
             
 
+            
+
              parameter value corresponds to the <see
              cref="P:System.Windows.Forms.ToolStripItem.Name" />
+
+            
 
             
 
@@ -1008,8 +1180,12 @@
 
             
 
+            
+
              contains a <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -1025,8 +1201,12 @@
 
           
 
+          
+
           The key to locate in the <see
            cref="T:System.Windows.Forms.ToolStripItemCollection" />
+
+          
 
           
 
@@ -1065,6 +1245,8 @@
 
             
 
+            
+
              array.</para
           >
         </summary>
@@ -1075,8 +1257,12 @@
 
           
 
+          
+
           The array of type <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -1091,8 +1277,12 @@
 
           
 
+          
+
           The position in the <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -1135,6 +1325,8 @@
 
             
 
+            
+
              array of the search results.</para
           >
         </returns>
@@ -1145,8 +1337,12 @@
 
           
 
+          
+
           The item name to search the <see
            cref="T:System.Windows.Forms.ToolStripItemCollection" />
+
+          
 
           
 
@@ -1161,6 +1357,8 @@
 
           
 
+          
+
           true to search child items of the <see
            cref="T:System.Windows.Forms.ToolStripItem" />
 
@@ -1168,8 +1366,12 @@
 
           
 
+          
+
            specified by the <paramref
            name="key" />
+
+          
 
           
 
@@ -1211,8 +1413,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Windows.Forms.ToolStripItemCollection" />
+
+            
 
             
 
@@ -1228,6 +1434,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStripItem" />
 
@@ -1235,8 +1443,12 @@
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Windows.Forms.ToolStripItemCollection" />
+
+          
 
           
 
@@ -1270,8 +1482,12 @@
 
             
 
+            
+
              parameter value corresponds to the <see
              cref="P:System.Windows.Forms.ToolStripItem.Name" />
+
+            
 
             
 
@@ -1282,6 +1498,8 @@
           <para
             >If <see
              cref="M:System.Windows.Forms.ToolStripItemCollection.IndexOfKey(System.String)" />
+
+            
 
             
 
@@ -1304,8 +1522,12 @@
 
             
 
+            
+
              specified by the <paramref
              name="key" />
+
+            
 
             
 
@@ -1321,8 +1543,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -1362,6 +1588,8 @@
 
           
 
+          
+
           The location in the <see
            cref="T:System.Windows.Forms.ToolStripItemCollection" />
 
@@ -1369,8 +1597,12 @@
 
           
 
+          
+
            at which to insert the <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -1385,8 +1617,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -1414,6 +1650,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Windows.Forms.ToolStripItemCollection" />
+
+            
 
             
 
@@ -1497,8 +1735,12 @@
 
             
 
+            
+
              is removed from the <see
              cref="T:System.Windows.Forms.ToolStripItemCollection" />
+
+            
 
             
 
@@ -1514,6 +1756,8 @@
 
             
 
+            
+
              by using the <see
              cref="M:System.Windows.Forms.ToolStripItemCollection.RemoveAt(System.Int32)" />
 
@@ -1521,8 +1765,12 @@
 
             
 
+            
+
              method, or remove all controls by using the <see
              cref="M:System.Windows.Forms.ToolStripItemCollection.Clear" />
+
+            
 
             
 
@@ -1538,6 +1786,8 @@
 
             
 
+            
+
              objects to the collection, use the <see
              cref="M:System.Windows.Forms.ToolStripItemCollection.Add(System.Windows.Forms.ToolStripItem)" />
 
@@ -1545,8 +1795,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.ToolStripItemCollection.AddRange(System.Windows.Forms.ToolStripItem[])" />
+
+            
 
             
 
@@ -1566,6 +1820,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStripItem" />
 
@@ -1573,8 +1829,12 @@
 
           
 
+          
+
            to remove from the <see
            cref="T:System.Windows.Forms.ToolStripItemCollection" />
+
+          
 
           
 
@@ -1608,8 +1868,12 @@
 
             
 
+            
+
              is removed from the <see
              cref="T:System.Windows.Forms.ToolStripItemCollection" />
+
+            
 
             
 
@@ -1625,6 +1889,8 @@
 
             
 
+            
+
              by using the <see
              cref="M:System.Windows.Forms.ToolStripItemCollection.Remove(System.Windows.Forms.ToolStripItem)" />
 
@@ -1632,8 +1898,12 @@
 
             
 
+            
+
              method, or remove all controls by using the <see
              cref="M:System.Windows.Forms.ToolStripItemCollection.Clear" />
+
+            
 
             
 
@@ -1649,6 +1919,8 @@
 
             
 
+            
+
              objects to the collection, use the <see
              cref="M:System.Windows.Forms.ToolStripItemCollection.Add(System.Windows.Forms.ToolStripItem)" />
 
@@ -1656,8 +1928,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.ToolStripItemCollection.AddRange(System.Windows.Forms.ToolStripItem[])" />
+
+            
 
             
 
@@ -1677,8 +1953,12 @@
 
           
 
+          
+
           The index value of the <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -1712,8 +1992,12 @@
 
             
 
+            
+
              parameter value corresponds to the <see
              cref="P:System.Windows.Forms.ToolStripItem.Name" />
+
+            
 
             
 
@@ -1733,8 +2017,12 @@
 
           
 
+          
+
           The key of the <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -1770,8 +2058,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1794,11 +2086,15 @@
 
             
 
+            
+
              was inserted.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1829,8 +2125,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1868,8 +2168,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1892,11 +2196,15 @@
 
             
 
+            
+
              is contained in the collection; otherwise, false.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1929,8 +2237,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1949,6 +2261,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1982,8 +2296,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -2003,8 +2321,12 @@
 
           
 
+          
+
           The zero-based index at which to insert <paramref
            name="value" />
+
+          
 
           
 
@@ -2014,6 +2336,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2044,8 +2368,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -2105,8 +2433,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -2121,6 +2453,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2153,8 +2487,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -2169,6 +2507,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

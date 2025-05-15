@@ -36,8 +36,12 @@
 
         
 
+        
+
          interface supplies an object that provides formatting information for formatting and parsing operations. Formatting operations convert the value of a type to the string representation of that value. Typical formatting methods are the ToString methods of a type, as well as <see
          cref="M:System.String.Format(System.String,System.Object)" />
+
+        
 
         
 
@@ -53,8 +57,12 @@
 
         
 
+        
+
          interface consists of a single method, <see
          cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+
+        
 
         
 
@@ -67,6 +75,8 @@
 
         
 
+        
+
          is a callback method: The parsing or formatting method calls it and passes it a <see
          cref="T:System.Type" />
 
@@ -74,8 +84,12 @@
 
         
 
+        
+
          object that represents the type of object that the formatting or parsing method expects will provide formatting information. The <see
          cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+
+        
 
         
 
@@ -90,8 +104,12 @@
 
         
 
+        
+
          implementations are often used implicitly by formatting and parsing methods. For example, the <see
          cref="M:System.DateTime.ToString(System.String)" />
+
+        
 
         
 
@@ -104,8 +122,12 @@
 
         
 
+        
+
          implementation that represents the system's current culture. <see
          cref="T:System.IFormatProvider" />
+
+        
 
         
 
@@ -118,8 +140,12 @@
 
         
 
+        
+
         , such as <see
          cref="M:System.Int32.Parse(System.String,System.IFormatProvider)" />
+
+        
 
         
 
@@ -132,11 +158,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >The .NET Framework includes the following three predefined <see
          cref="T:System.IFormatProvider" />
+
+        
 
         
 
@@ -154,8 +184,12 @@
 
             
 
+            
+
              class, which provides information that is used to format numbers, such as the currency, thousands separator, and decimal separator symbols for a particular culture. For information about the predefined format strings recognized by a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -170,10 +204,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
             </format>
+
+            
 
             
 
@@ -191,8 +229,12 @@
 
             
 
+            
+
              class, which provides information that is used to format dates and times, such as the date and time separator symbols for a particular culture or the order and format of a date's year, month, and day components. For information about the predefined format strings recognized by a <see
              cref="T:System.Globalization.DateTimeFormatInfo" />
+
+            
 
             
 
@@ -209,10 +251,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom Date and Time Format Strings</a>
             </format>
+
+            
 
             
 
@@ -230,8 +276,12 @@
 
             
 
+            
+
              class, which represents a particular culture. Its <see
              cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+
+            
 
             
 
@@ -244,6 +294,8 @@
 
             
 
+            
+
              or <see
              cref="T:System.Globalization.DateTimeFormatInfo" />
 
@@ -251,8 +303,12 @@
 
             
 
+            
+
              object, depending on whether the <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -270,6 +326,8 @@
 
         
 
+        
+
          and <see
          cref="T:System.ICustomFormatter" />
 
@@ -277,8 +335,12 @@
 
         
 
+        
+
         . An instance of this class is then passed as a parameter to a method that performs a custom formatting operation, such as <see
          cref="M:System.String.Format(System.IFormatProvider,System.String,System.Object[])" />
+
+        
 
         
 
@@ -325,6 +387,8 @@
 
             
 
+            
+
              is a callback method that formatting and parsing methods invoke to retrieve information about the format of the input string in parsing operations or the format of the output string in formatting operations. In the <paramref
              name="formatType" />
 
@@ -332,8 +396,12 @@
 
             
 
+            
+
              parameter, the formatting or parsing method passes the type of object it requires to perform its operation. If the <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -349,8 +417,12 @@
 
             
 
+            
+
              method, the method argument is an <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -363,8 +435,12 @@
 
             
 
+            
+
              object's <see
              cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+
+            
 
             
 
@@ -377,8 +453,12 @@
 
             
 
+            
+
              object that represents the <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -391,8 +471,12 @@
 
             
 
+            
+
              object can supply a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -408,8 +492,12 @@
 
             
 
+            
+
              interface and the <see
              cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+
+            
 
             
 
@@ -422,8 +510,12 @@
 
             
 
+            
+
              implementation is then passed as an argument to any overload of a parsing or formatting method that has a parameter of type <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -436,6 +528,8 @@
 
             
 
+            
+
             , <see
              cref="M:System.Int32.ToString(System.String,System.IFormatProvider)" />
 
@@ -443,8 +537,12 @@
 
             
 
+            
+
             , or <see
              cref="M:System.DateTime.Parse(System.String,System.IFormatProvider)" />
+
+            
 
             
 
@@ -467,8 +565,12 @@
 
             
 
+            
+
             , if the <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -479,6 +581,8 @@
         </returns>
         <param name="formatType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

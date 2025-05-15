@@ -41,8 +41,12 @@
 
         
 
+        
+
          object is used to represent a type for CodeDOM objects. When CodeDOM types have a Type property, it is of type <see
          cref="T:System.CodeDom.CodeTypeReference" />
+
+        
 
         
 
@@ -55,8 +59,12 @@
 
         
 
+        
+
          property is a <see
          cref="T:System.CodeDom.CodeTypeReference" />
+
+        
 
         
 
@@ -72,6 +80,8 @@
 
         
 
+        
+
          can be initialized with a <see
          cref="T:System.Type" />
 
@@ -79,8 +89,12 @@
 
         
 
+        
+
          object or a string. It is generally recommended to use a <see
          cref="T:System.Type" />
+
+        
 
         
 
@@ -96,6 +110,8 @@
 
         
 
+        
+
          property specifies the name of the type to reference. For references to array types, the <see
          cref="P:System.CodeDom.CodeTypeReference.ArrayElementType" />
 
@@ -103,8 +119,12 @@
 
         
 
+        
+
          property indicates the type of the elements of the array, and the <see
          cref="P:System.CodeDom.CodeTypeReference.ArrayRank" />
+
+        
 
         
 
@@ -142,6 +162,8 @@
 
             
 
+            
+
              object.  If you use this constructor, set properties to establish the type reference.</para
           >
         </remarks>
@@ -150,6 +172,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeTypeReference" />
+
+            
 
             
 
@@ -189,6 +213,8 @@
 
             
 
+            
+
              class using the specified code type parameter. </para
           >
         </summary>
@@ -199,8 +225,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeTypeParameter" />
+
+          
 
           
 
@@ -243,8 +273,12 @@
 
             
 
+            
+
              parameter references a generic type, it must follow the syntax conventions for generic types. For example, the reflection signature for a <see
              cref="T:System.Collections.Generic.Dictionary`2" />
+
+            
 
             
 
@@ -257,6 +291,8 @@
 
             
 
+            
+
              is a string and <paramref
              name="V" />
 
@@ -264,8 +300,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Collections.Generic.List`1" />
+
+            
 
             
 
@@ -283,6 +323,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeTypeReference" />
+
+            
 
             
 
@@ -327,6 +369,8 @@
 
             
 
+            
+
              class using the specified type.</para
           >
         </summary>
@@ -365,6 +409,8 @@
 
             
 
+            
+
              objects.</para
           >
         </remarks>
@@ -373,6 +419,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeTypeReference" />
+
+            
 
             
 
@@ -419,11 +467,15 @@
 
             
 
+            
+
              class using the specified type name and type arguments.</para
           >
         </summary>
         <param name="typeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -438,8 +490,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.CodeDom.CodeTypeReference" />
+
+          
 
           
 
@@ -480,11 +536,15 @@
 
             
 
+            
+
              class using the specified type name and code type reference option.</para
           >
         </summary>
         <param name="typeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -532,11 +592,15 @@
 
             
 
+            
+
              class using the specified array type name and rank.</para
           >
         </summary>
         <param name="baseType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -577,6 +641,8 @@
 
             
 
+            
+
              class using the specified type and code type reference.</para
           >
         </summary>
@@ -587,8 +653,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -624,6 +694,8 @@
           <para
             >This is disregarded unless the <see
              cref="P:System.CodeDom.CodeTypeReference.ArrayRank" />
+
+            
 
             
 
@@ -687,6 +759,8 @@
 
               
 
+              
+
                value for System.Collections.Generic.Dictionary`2[[System.String], [System.Collections.Generic.List`1[[System.Int32]]]] is System.Collections.Generic.Dictionary`2.</para
             >
           </block>
@@ -701,8 +775,12 @@
 
             
 
+            
+
              returned by the <see
              cref="P:System.CodeDom.CodeTypeReference.TypeArguments" />
+
+            
 
             
 
@@ -715,8 +793,12 @@
 
             
 
+            
+
              and the associated <see
              cref="P:System.CodeDom.CodeTypeReference.TypeArguments" />
+
+            
 
             
 
@@ -732,8 +814,12 @@
 
             
 
+            
+
              where <paramref
              name="K" />
+
+            
 
             
 
@@ -746,8 +832,12 @@
 
             
 
+            
+
              is a constructed <see
              cref="T:System.Collections.Generic.List`1" />
+
+            
 
             
 
@@ -764,6 +854,8 @@
 
             
 
+            
+
              property from the <see
              cref="T:System.CodeDom.CodeTypeReference" />
 
@@ -771,8 +863,12 @@
 
             
 
+            
+
              for <see
              cref="T:System.Collections.Generic.Dictionary`2" />
+
+            
 
             
 
@@ -790,8 +886,12 @@
 
                 
 
+                
+
                  property for the parent <see
                  cref="T:System.CodeDom.CodeTypeReference" />
+
+                
 
                 
 
@@ -810,6 +910,8 @@
 
                 
 
+                
+
                  property for the first <see
                  cref="T:System.CodeDom.CodeTypeReference" />
 
@@ -817,8 +919,12 @@
 
                 
 
+                
+
                  object in the <see
                  cref="P:System.CodeDom.CodeTypeReference.TypeArguments" />
+
+                
 
                 
 
@@ -837,6 +943,8 @@
 
                 
 
+                
+
                  property for the second <see
                  cref="T:System.CodeDom.CodeTypeReference" />
 
@@ -844,8 +952,12 @@
 
                 
 
+                
+
                  object in the <see
                  cref="P:System.CodeDom.CodeTypeReference.TypeArguments" />
+
+                
 
                 
 
@@ -864,8 +976,12 @@
 
                 
 
+                
+
                  property in the <see
                  cref="T:System.CodeDom.CodeTypeReference" />
+
+                
 
                 
 
@@ -884,12 +1000,16 @@
 
             
 
+            
+
              values. The common practice is to remove the type argument count from the generated code, but the practice is compiler specific.  It is important to note that the type argument count can be found within a nested type name, in which case it is followed by a plus sign ("+"). </para
           >
           <block subset="none" type="note">
             <para
               >When creating a generic <see
                cref="T:System.CodeDom.CodeTypeReference" />
+
+              
 
               
 
@@ -902,6 +1022,8 @@
 
               
 
+              
+
                objects or use the constructor that takes a <see
                cref="T:System.Type" />
 
@@ -909,8 +1031,12 @@
 
               
 
+              
+
               . Use of the constructor that creates a <see
                cref="T:System.CodeDom.CodeTypeReference" />
+
+              
 
               
 
@@ -991,8 +1117,12 @@
 
             
 
+            
+
              property is a collection of type references to be substituted for the type parameter references of the current generic type. The collection contains all the type arguments for all nested types. For an example, see the <see
              cref="P:System.CodeDom.CodeTypeReference.BaseType" />
+
+            
 
             
 

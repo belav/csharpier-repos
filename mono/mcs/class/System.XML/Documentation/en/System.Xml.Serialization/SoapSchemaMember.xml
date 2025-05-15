@@ -28,11 +28,15 @@
 
         
 
+        
+
          class is used by the Wsdl.exe tool while generating client proxy classes or abstract server classes from a Web Services Description Language (WSDL) document. Instead of using this class directly, use Wsdl.exe.</para
       >
       <para
         >The <see
          cref="T:System.Xml.Serialization.SoapSchemaMember" />
+
+        
 
         
 
@@ -73,6 +77,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -103,11 +109,15 @@
 
             
 
+            
+
             . </para
           >
           <para
             >The <see
              cref="T:System.Xml.Serialization.SoapSchemaMember" />
+
+            
 
             
 
@@ -153,11 +163,15 @@
 
             
 
+            
+
             . </para
           >
           <para
             >The <see
              cref="T:System.Xml.Serialization.SoapSchemaMember" />
+
+            
 
             
 

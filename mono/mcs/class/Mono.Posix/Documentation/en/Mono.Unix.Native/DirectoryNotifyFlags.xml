@@ -30,12 +30,16 @@
 
       
 
+      
+
       .</summary
     >
     <remarks>
       <para
         >These values may be bitwise ORed together to form the <paramref
          name="arg" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
         .  They may only be used with the <see
          cref="F:Mono.Unix.Native.FcntlCommand.F_NOTIFY" />
+
+        
 
         
 

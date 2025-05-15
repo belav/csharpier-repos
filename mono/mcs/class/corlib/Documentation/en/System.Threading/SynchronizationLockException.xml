@@ -45,8 +45,12 @@
 
         
 
+        
+
          is thrown by calling the <see
          cref="M:System.Threading.Monitor.Exit(System.Object)" />
+
+        
 
         
 
@@ -59,8 +63,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Threading.Monitor.PulseAll(System.Object)" />
+
+        
 
         
 
@@ -73,8 +81,12 @@
 
         
 
+        
+
          methods of the <see
          cref="T:System.Threading.Monitor" />
+
+        
 
         
 
@@ -84,6 +96,8 @@
       >
       <para>
         <see cref="T:System.Threading.SynchronizationLockException" />
+
+        
 
         
 
@@ -99,8 +113,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Threading.SynchronizationLockException.#ctor" />
+
+        
 
         
 
@@ -139,6 +157,8 @@
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Threading.SynchronizationLockException" />
+
+            
 
             
 
@@ -189,6 +209,8 @@
 
             
 
+            
+
              class with default properties.</para
           >
         </summary>
@@ -224,6 +246,8 @@
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Threading.SynchronizationLockException" />
+
+            
 
             
 
@@ -274,11 +298,15 @@
 
             
 
+            
+
              class with a specified error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -321,6 +349,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -329,6 +359,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Threading.SynchronizationLockException" />
+
+            
 
             
 
@@ -344,8 +376,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -360,8 +396,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -406,8 +446,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -420,11 +464,15 @@
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Threading.SynchronizationLockException" />
+
+            
 
             
 
@@ -475,11 +523,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -494,8 +546,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 

@@ -54,11 +54,15 @@
 
             
 
+            
+
              structure using the supplied byte array parameter.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -91,8 +95,12 @@
 
             
 
+            
+
              structure using the specified <see
              cref="T:System.Guid" />
+
+            
 
             
 
@@ -103,6 +111,8 @@
         </summary>
         <param name="g">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -136,8 +146,12 @@
 
             
 
+            
+
              structure using the specified <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -153,8 +167,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -203,6 +221,8 @@
 
             
 
+            
+
              structure using the specified values.</para
           >
         </summary>
@@ -213,8 +233,12 @@
 
           
 
+          
+
           The first four bytes of the <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -229,8 +253,12 @@
 
           
 
+          
+
           The next two bytes of the <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -245,8 +273,12 @@
 
           
 
+          
+
           The next two bytes of the <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -261,8 +293,12 @@
 
           
 
+          
+
           The next byte of the <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -277,8 +313,12 @@
 
           
 
+          
+
           The next byte of the <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -293,8 +333,12 @@
 
           
 
+          
+
           The next byte of the <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -309,8 +353,12 @@
 
           
 
+          
+
           The next byte of the <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -325,8 +373,12 @@
 
           
 
+          
+
           The next byte of the <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -341,8 +393,12 @@
 
           
 
+          
+
           The next byte of the <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -357,8 +413,12 @@
 
           
 
+          
+
           The next byte of the <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -373,8 +433,12 @@
 
           
 
+          
+
           The next byte of the <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -415,8 +479,12 @@
 
             
 
+            
+
              structure to the supplied <see
              cref="T:System.Data.SqlTypes.SqlGuid" />
+
+            
 
             
 
@@ -474,8 +542,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -501,6 +573,8 @@
           <para
             >Compares this <see
              cref="T:System.Data.SqlTypes.SqlGuid" />
+
+            
 
             
 
@@ -558,8 +632,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -594,8 +672,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Data.SqlTypes.SqlGuid" />
+
+            
 
             
 
@@ -614,11 +696,15 @@
 
             
 
+            
+
              and the two are equal; otherwise false.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -657,6 +743,8 @@
 
             
 
+            
+
              structures to determine whether they are equal.</para
           >
         </summary>
@@ -671,8 +759,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -687,8 +779,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -716,6 +812,8 @@
           <para
             >Returns the hash code of this <see
              cref="T:System.Data.SqlTypes.SqlGuid" />
+
+            
 
             
 
@@ -761,6 +859,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -769,6 +869,8 @@
           <para
             >A string value that indicates the XSD of the specified <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -784,8 +886,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -820,6 +926,8 @@
 
             
 
+            
+
              to determine whether the first is greater than the second.</para
           >
         </summary>
@@ -833,8 +941,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -847,8 +959,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlGuid" />
+
+            
 
             
 
@@ -861,6 +977,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -868,8 +986,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -885,8 +1007,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -901,8 +1027,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -941,6 +1071,8 @@
 
             
 
+            
+
              to determine whether the first is greater than or equal to the second.</para
           >
         </summary>
@@ -954,8 +1086,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -968,8 +1104,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlGuid" />
+
+            
 
             
 
@@ -982,6 +1122,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -989,8 +1131,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1006,8 +1152,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -1022,8 +1172,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -1057,6 +1211,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1065,6 +1221,8 @@
           <para
             >Gets a Boolean value that indicates whether this <see
              cref="T:System.Data.SqlTypes.SqlGuid" />
+
+            
 
             
 
@@ -1104,6 +1262,8 @@
 
             
 
+            
+
              to determine whether the first is less than the second.</para
           >
         </summary>
@@ -1117,8 +1277,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1131,8 +1295,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlGuid" />
+
+            
 
             
 
@@ -1145,6 +1313,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -1152,8 +1322,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1169,8 +1343,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -1185,8 +1363,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -1225,6 +1407,8 @@
 
             
 
+            
+
              to determine whether the first is less than or equal to the second.</para
           >
         </summary>
@@ -1238,8 +1422,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1252,8 +1440,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlGuid" />
+
+            
 
             
 
@@ -1266,6 +1458,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -1273,8 +1467,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1290,8 +1488,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -1306,8 +1508,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -1346,6 +1552,8 @@
 
             
 
+            
+
              structures to determine whether they are not equal.</para
           >
         </summary>
@@ -1359,8 +1567,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1373,8 +1585,12 @@
 
             
 
+            
+
              if the two instances are equal. If either instance of <see
              cref="T:System.Data.SqlTypes.SqlGuid" />
+
+            
 
             
 
@@ -1387,6 +1603,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -1394,8 +1612,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1411,8 +1633,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -1427,8 +1653,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -1462,8 +1692,12 @@
 
             
 
+            
+
              functions as a constant for the <see
              cref="T:System.Data.SqlTypes.SqlGuid" />
+
+            
 
             
 
@@ -1473,6 +1707,8 @@
              type="text/html">
               <a href="f18b288f-b265-4bbe-957f-c6833c0645ef">Handling Null Values (ADO.NET)</a>
             </format>
+
+            
 
             
 
@@ -1491,8 +1727,12 @@
 
             
 
+            
+
               that can be assigned to this instance of the <see
              cref="T:System.Data.SqlTypes.SqlGuid" />
+
+            
 
             
 
@@ -1536,6 +1776,8 @@
 
             
 
+            
+
              structures to determine whether they are equal.</para
           >
         </summary>
@@ -1549,8 +1791,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1563,8 +1809,12 @@
 
             
 
+            
+
              if the two instances are not equal. If either instance of <see
              cref="T:System.Data.SqlTypes.SqlGuid" />
+
+            
 
             
 
@@ -1577,6 +1827,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -1584,8 +1836,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1601,8 +1857,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -1617,8 +1877,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -1726,6 +1990,8 @@
 
             
 
+            
+
              to determine whether the first is greater than the second.</para
           >
         </summary>
@@ -1739,8 +2005,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1753,8 +2023,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlGuid" />
+
+            
 
             
 
@@ -1767,6 +2041,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -1774,8 +2050,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1791,8 +2071,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -1807,8 +2091,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -1847,6 +2135,8 @@
 
             
 
+            
+
              to determine whether the first is greater than or equal to the second.</para
           >
         </summary>
@@ -1860,8 +2150,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1874,8 +2168,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlGuid" />
+
+            
 
             
 
@@ -1888,6 +2186,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -1895,8 +2195,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1912,8 +2216,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -1928,8 +2236,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -1991,6 +2303,8 @@
 
             
 
+            
+
              structures to determine whether they are not equal.</para
           >
         </summary>
@@ -2004,8 +2318,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2018,8 +2336,12 @@
 
             
 
+            
+
              if the two instances are equal. If either instance of <see
              cref="T:System.Data.SqlTypes.SqlGuid" />
+
+            
 
             
 
@@ -2032,6 +2354,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -2039,8 +2363,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2056,8 +2384,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -2072,8 +2404,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -2112,6 +2448,8 @@
 
             
 
+            
+
              to determine whether the first is less than the second.</para
           >
         </summary>
@@ -2125,8 +2463,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2139,8 +2481,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlGuid" />
+
+            
 
             
 
@@ -2153,6 +2499,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -2160,8 +2508,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2177,8 +2529,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -2193,8 +2549,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -2233,6 +2593,8 @@
 
             
 
+            
+
              to determine whether the first is less than or equal to the second.</para
           >
         </summary>
@@ -2246,8 +2608,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2260,8 +2626,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlGuid" />
+
+            
 
             
 
@@ -2274,6 +2644,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -2281,8 +2653,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2298,8 +2674,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -2314,8 +2694,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlGuid" />
+
+          
 
           
 
@@ -2349,8 +2733,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlGuid" />
+
+            
 
             
 
@@ -2369,8 +2757,12 @@
 
             
 
+            
+
              equivalent to the value that is contained in the specified <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -2381,6 +2773,8 @@
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2447,6 +2841,8 @@
 
           
 
+          
+
           XmlReader </param
         >
       </Docs>
@@ -2479,6 +2875,8 @@
 
           
 
+          
+
           XmlWriter </param
         >
       </Docs>
@@ -2502,6 +2900,8 @@
 
             
 
+            
+
              structure to a byte array.</para
           >
         </summary>
@@ -2515,8 +2915,12 @@
 
             
 
+            
+
              of this <see
              cref="T:System.Data.SqlTypes.SqlGuid" />
+
+            
 
             
 
@@ -2553,8 +2957,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlBinary" />
+
+            
 
             
 
@@ -2568,6 +2976,8 @@
           <para
             >A SqlBinary structure that contains the bytes in the <see
              cref="T:System.Data.SqlTypes.SqlGuid" />
+
+            
 
             
 
@@ -2604,8 +3014,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -2624,8 +3038,12 @@
 
             
 
+            
+
              structure that contains the string representation of the <see
              cref="T:System.Data.SqlTypes.SqlGuid" />
+
+            
 
             
 
@@ -2659,8 +3077,12 @@
 
             
 
+            
+
              structure to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -2679,8 +3101,12 @@
 
             
 
+            
+
              that contains the string representation of the <see
              cref="T:System.Data.SqlTypes.SqlGuid" />
+
+            
 
             
 
@@ -2709,6 +3135,8 @@
           <para
             >Gets the value of the <see
              cref="T:System.Data.SqlTypes.SqlGuid" />
+
+            
 
             
 

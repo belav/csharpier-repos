@@ -32,6 +32,8 @@
 
         
 
+        
+
          class represents the exclusive C14N XML canonicalization transform without comments.  This class is similar to the <see
          cref="T:System.Security.Cryptography.Xml.XmlDsigC14NTransform" />
 
@@ -39,8 +41,12 @@
 
         
 
+        
+
          class, which allows a signer to create a digest using the canonical form of an XML document.  However, the <see
          cref="T:System.Security.Cryptography.Xml.XmlDsigExcC14NTransform" />
+
+        
 
         
 
@@ -56,8 +62,12 @@
 
         
 
+        
+
          class when you need to canonicalize an XML subdocument so that it is independent from its XML context. For example, applications such as Web services that use signed XML within complex communication protocols often need to canonicalize XML in this manner.  Such applications often envelop XML within various dynamically constructed elements, which can substantially change the document and cause XML signature verification to fail.  The <see
          cref="T:System.Security.Cryptography.Xml.XmlDsigExcC14NTransform" />
+
+        
 
         
 
@@ -73,8 +83,12 @@
 
         
 
+        
+
          property, which is accessible from the <see
          cref="P:System.Security.Cryptography.Xml.SignedXml.SignedInfo" />
+
+        
 
         
 
@@ -87,8 +101,12 @@
 
         
 
+        
+
          property, which is accessible from the <see
          cref="P:System.Security.Cryptography.Xml.SignedXml.SignedInfo" />
+
+        
 
         
 
@@ -105,8 +123,12 @@
 
         
 
+        
+
          class is defined by the <see
          cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigExcC14NWithCommentsTransformUrl" />
+
+        
 
         
 
@@ -122,8 +144,12 @@
 
         
 
+        
+
          class is defined by the <see
          cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigExcC14NTransformUrl" />
+
+        
 
         
 
@@ -164,6 +190,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -199,11 +227,15 @@
 
             
 
+            
+
              class specifying a value that determines whether to include comments. </para
           >
         </summary>
         <param name="includeComments">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -242,6 +274,8 @@
 
             
 
+            
+
              parameter contains a whitespace-delimited list of namespace prefixes to canonicalize using the standard canonicalization algorithm rather than the exclusive canonicalization algorithm.  To specify the default namespace, which does not have a prefix, pass the special prefix "#default".</para
           >
         </remarks>
@@ -255,11 +289,15 @@
 
             
 
+            
+
              class specifying a list of namespace prefixes to canonicalize using the standard canonicalization algorithm. </para
           >
         </summary>
         <param name="inclusiveNamespacesPrefixList">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -299,6 +337,8 @@
 
             
 
+            
+
              parameter contains a whitespace-delimited list of namespace prefixes to canonicalize using the standard canonicalization algorithm rather than the exclusive canonicalization algorithm.  To specify the default namespace, which does not have a prefix, pass the special prefix "#default".</para
           >
         </remarks>
@@ -307,6 +347,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigExcC14NTransform" />
+
+            
 
             
 
@@ -322,10 +364,14 @@
 
           
 
+          
+
           true to include comments; otherwise, false.</param
         >
         <param name="inclusiveNamespacesPrefixList">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -368,6 +414,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -376,6 +424,8 @@
           <para
             >The digest associated with a <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigExcC14NTransform" />
+
+            
 
             
 
@@ -391,8 +441,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.HashAlgorithm" />
+
+          
 
           
 
@@ -433,6 +487,8 @@
 
             
 
+            
+
              object that are suitable to be included as subelements of an XMLDSIG &lt;Transform&gt; element.</para
           >
         </summary>
@@ -441,6 +497,8 @@
           <para
             >A list of the XML nodes that represent the transform-specific content needed to describe the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigExcC14NTransform" />
+
+            
 
             
 
@@ -479,6 +537,8 @@
 
             
 
+            
+
              object</para
           >
         </summary>
@@ -487,6 +547,8 @@
           <para
             >The output of the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigExcC14NTransform" />
+
+            
 
             
 
@@ -526,8 +588,12 @@
 
             
 
+            
+
              method returns the output of the current transform after it is run on the value previously set by a call to the <see
              cref="M:System.Security.Cryptography.Xml.XmlDsigExcC14NTransform.LoadInput(System.Object)" />
+
+            
 
             
 
@@ -538,6 +604,8 @@
           <para
             >The type of the returned object must be one of the type objects in the <see
              cref="P:System.Security.Cryptography.Xml.XmlDsigExcC14NTransform.OutputTypes" />
+
+            
 
             
 
@@ -556,6 +624,8 @@
 
             
 
+            
+
              object as an object of the specified type.</para
           >
         </summary>
@@ -564,6 +634,8 @@
           <para
             >The output of the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigExcC14NTransform" />
+
+            
 
             
 
@@ -579,8 +651,12 @@
 
           
 
+          
+
           The type of the output to return. This must be one of the types in the <see
            cref="P:System.Security.Cryptography.Xml.XmlDsigExcC14NTransform.OutputTypes" />
+
+          
 
           
 
@@ -620,6 +696,8 @@
 
             
 
+            
+
              property contains a whitespace-delimited list of namespace prefixes to canonicalize using the standard canonicalization algorithm rather than the exclusive canonicalization algorithm.  To specify the default namespace, which does not have a prefix, pass the special prefix "#default".  </para
           >
         </remarks>
@@ -653,8 +731,12 @@
 
             
 
+            
+
              property must contain at least one element because every <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigExcC14NTransform" />
+
+            
 
             
 
@@ -670,8 +752,12 @@
 
             
 
+            
+
              object typically accepts one or more of the following types as input: <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -684,8 +770,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Xml.XmlNodeList" />
+
+            
 
             
 
@@ -704,8 +794,12 @@
 
             
 
+            
+
              method of the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigExcC14NTransform" />
+
+            
 
             
 
@@ -752,8 +846,12 @@
 
             
 
+            
+
              object as transform-specific content of a &lt;Transform&gt; element and configures the internal state of the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigExcC14NTransform" />
+
+            
 
             
 
@@ -769,6 +867,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlNodeList" />
 
@@ -776,8 +876,12 @@
 
           
 
+          
+
            object that specifies transform-specific content for the current <see
            cref="T:System.Security.Cryptography.Xml.XmlDsigExcC14NTransform" />
+
+          
 
           
 
@@ -816,6 +920,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -824,6 +930,8 @@
           <para
             >When overridden in a derived class, loads the specified input into the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigExcC14NTransform" />
+
+            
 
             
 
@@ -839,8 +947,12 @@
 
           
 
+          
+
           The input to load into the current <see
            cref="T:System.Security.Cryptography.Xml.XmlDsigExcC14NTransform" />
+
+          
 
           
 
@@ -877,6 +989,8 @@
 
             
 
+            
+
              property must contain at least one element because every transform must generate at least one type as output.</para
           >
         </remarks>
@@ -890,8 +1004,12 @@
 
             
 
+            
+
              methods of the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigExcC14NTransform" />
+
+            
 
             
 

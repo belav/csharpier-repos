@@ -35,6 +35,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -66,6 +68,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -76,8 +80,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -92,6 +100,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
 
@@ -99,8 +109,12 @@
 
           
 
+          
+
            with which to initialize this <see
            cref="T:System.Web.Services.Protocols.SoapServerMethod" />
+
+          
 
           
 
@@ -155,6 +169,8 @@
 
             
 
+            
+
              value that specifies whether the parts of SOAP messages sent to this XML Web service method are encoded as abstract type definitions or concrete schema definitions.</para
           >
         </summary>
@@ -181,6 +197,8 @@
           <para
             >Gets the <see
              cref="T:System.Xml.Serialization.XmlMembersMapping" />
+
+            
 
             
 
@@ -217,6 +235,8 @@
 
             
 
+            
+
              used with SOAP requests to this Web service method.</para
           >
         </summary>
@@ -248,6 +268,8 @@
 
             
 
+            
+
              associated with this XML Web service method.</para
           >
         </summary>
@@ -271,6 +293,8 @@
           <para
             >Gets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -307,6 +331,8 @@
 
             
 
+            
+
              used with SOAP responses from this Web service method.</para
           >
         </summary>
@@ -333,6 +359,8 @@
           <para
             >Gets the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -369,6 +397,8 @@
 
             
 
+            
+
              used with parameters that are passed to this Web service method.</para
           >
         </summary>
@@ -395,6 +425,8 @@
           <para
             >Gets a <see
              cref="T:System.Web.Services.Protocols.SoapParameterStyle" />
+
+            
 
             
 
@@ -431,6 +463,8 @@
 
             
 
+            
+
              used with return values from this Web service method.</para
           >
         </summary>
@@ -454,6 +488,8 @@
           <para
             >Gets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -485,6 +521,8 @@
           <para
             >Gets a <see
              cref="T:System.Web.Services.WsiProfiles" />
+
+            
 
             
 

@@ -41,8 +41,12 @@
 
         
 
+        
+
         , are nullable, but all value types, such as <see
          cref="T:System.Int32" />
+
+        
 
         
 
@@ -59,11 +63,15 @@
 
         
 
+        
+
          structure supports using only a value type as a nullable type because reference types are nullable by design. </para
       >
       <para
         >The <see
          cref="T:System.Nullable" />
+
+        
 
         
 
@@ -76,8 +84,12 @@
 
         
 
+        
+
          structure. The <see
          cref="T:System.Nullable" />
+
+        
 
         
 
@@ -96,8 +108,12 @@
 
         
 
+        
+
          structure are the <see
          cref="P:System.Nullable`1.HasValue" />
+
+        
 
         
 
@@ -110,8 +126,12 @@
 
         
 
+        
+
          properties. If the <see
          cref="P:System.Nullable`1.HasValue" />
+
+        
 
         
 
@@ -124,8 +144,12 @@
 
         
 
+        
+
          object is true, the value of the object can be accessed with the <see
          cref="P:System.Nullable`1.Value" />
+
+        
 
         
 
@@ -138,6 +162,8 @@
 
         
 
+        
+
          property is false, the value of the object is undefined and an attempt to access the <see
          cref="P:System.Nullable`1.Value" />
 
@@ -145,8 +171,12 @@
 
         
 
+        
+
          property throws an <see
          cref="T:System.InvalidOperationException" />
+
+        
 
         
 
@@ -165,8 +195,12 @@
 
         
 
+        
+
          object, not the <see
          cref="T:System.Nullable`1" />
+
+        
 
         
 
@@ -179,6 +213,8 @@
 
         
 
+        
+
          property is true, the contents of the <see
          cref="P:System.Nullable`1.Value" />
 
@@ -186,8 +222,12 @@
 
         
 
+        
+
          property is boxed. When the underlying value of a nullable type is unboxed, the common language runtime creates a new <see
          cref="T:System.Nullable`1" />
+
+        
 
         
 
@@ -203,6 +243,8 @@
 
         
 
+        
+
          structure and initializes its HasValue property to false.</para
       >
       <format type="text/html">
@@ -211,6 +253,8 @@
       <para
         >Starting with the net_v451, you can include a <see
          cref="T:System.Nullable`1" />
+
+        
 
         
 
@@ -250,6 +294,8 @@
 
             
 
+            
+
              giving it the specified initial value.</para
           >
         </summary>
@@ -263,8 +309,12 @@
 
               
 
+              
+
                 to the new instance returns <see
                langword="true" />
+
+              
 
               
 
@@ -306,8 +356,12 @@
 
             
 
+            
+
              property of the current <see
              cref="T:System.Nullable`1" />
+
+            
 
             
 
@@ -320,8 +374,12 @@
 
             
 
+            
+
              parameter to the Equals method of the underlying value of the current <see
              cref="T:System.Nullable`1" />
+
+            
 
             
 
@@ -340,6 +398,8 @@
 
             
 
+            
+
              object is equal to a specified object.</para
           >
         </summary>
@@ -353,8 +413,12 @@
 
             
 
+            
+
              parameter is equal to the current <see
              cref="T:System.Nullable`1" />
+
+            
 
             
 
@@ -387,8 +451,12 @@
 
                   
 
+                  
+
                    property is false, and the <paramref
                    name="other" />
+
+                  
 
                   
 
@@ -405,6 +473,8 @@
 
                   
 
+                  
+
                    property is true, and the value returned by the <see
                    cref="P:System.Nullable`1.Value" />
 
@@ -412,8 +482,12 @@
 
                   
 
+                  
+
                    property is equal to the <paramref
                    name="other" />
+
+                  
 
                   
 
@@ -436,6 +510,8 @@
 
                   
 
+                  
+
                    property for the current <see
                    cref="T:System.Nullable`1" />
 
@@ -443,8 +519,12 @@
 
                   
 
+                  
+
                    structure is true, and the <paramref
                    name="other" />
+
+                  
 
                   
 
@@ -461,6 +541,8 @@
 
                   
 
+                  
+
                    property for the current <see
                    cref="T:System.Nullable`1" />
 
@@ -468,8 +550,12 @@
 
                   
 
+                  
+
                    structure is false, and the <paramref
                    name="other" />
+
+                  
 
                   
 
@@ -486,8 +572,12 @@
 
                   
 
+                  
+
                    property for the current <see
                    cref="T:System.Nullable`1" />
+
+                  
 
                   
 
@@ -500,8 +590,12 @@
 
                   
 
+                  
+
                    property is not equal to the <paramref
                    name="other" />
+
+                  
 
                   
 
@@ -515,6 +609,8 @@
         </returns>
         <param name="other">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -552,6 +648,8 @@
 
               
 
+              
+
               .</block
             >
           </para>
@@ -562,6 +660,8 @@
           <para
             >Retrieves the hash code of the object returned by the <see
              cref="P:System.Nullable`1.Value" />
+
+            
 
             
 
@@ -580,6 +680,8 @@
 
             
 
+            
+
              property if the <see
              cref="P:System.Nullable`1.HasValue" />
 
@@ -587,8 +689,12 @@
 
             
 
+            
+
              property is true, or zero if the <see
              cref="P:System.Nullable`1.HasValue" />
+
+            
 
             
 
@@ -626,6 +732,8 @@
 
             
 
+            
+
              method returns a value even if the <see
              cref="P:System.Nullable`1.HasValue" />
 
@@ -633,8 +741,12 @@
 
             
 
+            
+
              property is false (unlike the <see
              cref="P:System.Nullable`1.Value" />
+
+            
 
             
 
@@ -653,6 +765,8 @@
 
             
 
+            
+
              object, or the object's default value.</para
           >
         </summary>
@@ -666,8 +780,12 @@
 
             
 
+            
+
              property if the  <see
              cref="P:System.Nullable`1.HasValue" />
+
+            
 
             
 
@@ -680,8 +798,12 @@
 
             
 
+            
+
              object. The type of the default value is the type argument of the current <see
              cref="T:System.Nullable`1" />
+
+            
 
             
 
@@ -720,6 +842,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -732,8 +856,12 @@
 
             
 
+            
+
             , which is either the value of the current instance, or if it has none, the value of <paramref
              name="alternateDefaultValue" />
+
+            
 
             
 
@@ -752,8 +880,12 @@
 
               
 
+              
+
                allows the default value for type <see
                langword="T" />
+
+              
 
               
 
@@ -786,8 +918,12 @@
 
             
 
+            
+
              if the current instance contains a value; otherwise <see
              langword="false" />
+
+            
 
             
 
@@ -807,8 +943,12 @@
 
             
 
+            
+
              property is true, the value of the current <see
              cref="T:System.Nullable`1" />
+
+            
 
             
 
@@ -821,8 +961,12 @@
 
             
 
+            
+
              property. Otherwise, attempting to access its value throws an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -836,6 +980,8 @@
           <para
             >Gets a value indicating whether the current <see
              cref="T:System.Nullable`1" />
+
+            
 
             
 
@@ -875,8 +1021,12 @@
 
           
 
+          
+
             value to convert to type <see
            langword="T" />
+
+          
 
           
 
@@ -893,8 +1043,12 @@
 
             
 
+            
+
               value to type <see
              langword="T" />
+
+            
 
             
 
@@ -906,6 +1060,8 @@
         <returns
           >The value, if any, of the specified nullable value. Otherwise, a <see
            cref="T:System.InvalidOperationException" />
+
+          
 
           
 
@@ -923,6 +1079,8 @@
 
               
 
+              
+
                property.</block
             >
           </para>
@@ -935,8 +1093,12 @@
 
           
 
+          
+
            is <see
            langword="false" />
+
+          
 
           
 
@@ -975,8 +1137,12 @@
 
           
 
+          
+
             value to convert to <see
            cref="T:System.Nullable&lt;T&gt;" />
+
+          
 
           
 
@@ -993,8 +1159,12 @@
 
             
 
+            
+
               value to   <see
              cref="T:System.Nullable&lt;T&gt;" />
+
+            
 
             
 
@@ -1012,6 +1182,8 @@
 
             
 
+            
+
              with the specified value.</para
           >
         </returns>
@@ -1021,6 +1193,8 @@
               >The conversion implemented by this method corresponds exactly to invoking the <see
                cref="M:System.Nullable&lt;T&gt;" />
               <see langword="(T)" />
+
+              
 
               
 
@@ -1060,8 +1234,12 @@
 
             
 
+            
+
              property returns the string yielded by calling the ToString property of the object returned by the <see
              cref="P:System.Nullable`1.Value" />
+
+            
 
             
 
@@ -1080,6 +1258,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1093,6 +1273,8 @@
 
             
 
+            
+
              object if the <see
              cref="P:System.Nullable`1.HasValue" />
 
@@ -1100,8 +1282,12 @@
 
             
 
+            
+
              property is true, or an empty string ("") if the <see
              cref="P:System.Nullable`1.HasValue" />
+
+            
 
             
 
@@ -1135,8 +1321,12 @@
 
           
 
+          
+
            is <see
            langword="false" />
+
+          
 
           
 
@@ -1154,6 +1344,8 @@
 
             
 
+            
+
              object, you can compare it to null and retrieve its <see
              cref="P:System.Nullable`1.HasValue" />
 
@@ -1161,8 +1353,12 @@
 
             
 
+            
+
              property, but you cannot access its <see
              cref="P:System.Nullable`1.Value" />
+
+            
 
             
 
@@ -1176,6 +1372,8 @@
           <para
             >Gets the value of the current <see
              cref="T:System.Nullable`1" />
+
+            
 
             
 

@@ -37,11 +37,15 @@
 
         
 
+        
+
          is a synchronization primitive that grants exclusive access to the shared resource to only one thread. If a thread acquires a mutex, the second thread that wants to acquire that mutex is suspended until the first thread releases the mutex.</para
       >
       <para
         >You can use the <see
          cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
+
+        
 
         
 
@@ -54,8 +58,12 @@
 
         
 
+        
+
          without blocking its execution. However, the thread must call the <see
          cref="M:System.Threading.Mutex.ReleaseMutex" />
+
+        
 
         
 
@@ -68,8 +76,12 @@
 
         
 
+        
+
          class enforces thread identity, so a mutex can be released only by the thread that acquired it. By contrast, the <see
          cref="T:System.Threading.Semaphore" />
+
+        
 
         
 
@@ -80,6 +92,8 @@
       <para
         >If a thread terminates while owning a mutex, the mutex is said to be abandoned. The state of the mutex is set to signaled, and the next waiting thread gets ownership. Beginning in version 2.0 of the .NET Framework, an <see
          cref="T:System.Threading.AbandonedMutexException" />
+
+        
 
         
 
@@ -99,8 +113,12 @@
 
         
 
+        
+
          object that represents the mutex. Each unnamed <see
          cref="T:System.Threading.Mutex" />
+
+        
 
         
 
@@ -116,8 +134,12 @@
 
         
 
+        
+
          object that represents a named system mutex by using a constructor that accepts a name. The operating-system object can be created at the same time, or it can exist before the creation of the <see
          cref="T:System.Threading.Mutex" />
+
+        
 
         
 
@@ -130,8 +152,12 @@
 
         
 
+        
+
          objects that represent the same named system mutex, and you can use the <see
          cref="Overload:System.Threading.Mutex.OpenExisting" />
+
+        
 
         
 
@@ -179,6 +205,8 @@
 
             
 
+            
+
              constructor overload and specifying false for initial ownership of the mutex. That is, the calling thread does not own the mutex.</para
           >
         </remarks>
@@ -187,6 +215,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Threading.Mutex" />
+
+            
 
             
 
@@ -230,11 +260,15 @@
 
             
 
+            
+
              class with a Boolean value that indicates whether the calling thread should have initial ownership of the mutex.</para
           >
         </summary>
         <param name="initiallyOwned">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -277,8 +311,12 @@
 
             
 
+            
+
              is not null and <paramref
              name="initiallyOwned" />
+
+            
 
             
 
@@ -291,8 +329,12 @@
 
             
 
+            
+
              when calling this constructor overload. You can use the <see
              cref="M:System.Threading.Mutex.#ctor(System.Boolean,System.String,System.Boolean@)" />
+
+            
 
             
 
@@ -308,8 +350,12 @@
 
             
 
+            
+
              object that represents a named system mutex. You can create multiple <see
              cref="T:System.Threading.Mutex" />
+
+            
 
             
 
@@ -325,8 +371,12 @@
 
             
 
+            
+
             , an exception is thrown. To open an existing named mutex with only those permissions needed for synchronizing thread activities, see the <see
              cref="Overload:System.Threading.Mutex.OpenExisting" />
+
+            
 
             
 
@@ -342,6 +392,8 @@
 
             
 
+            
+
             , a local mutex is created, as if you had called the <see
              cref="M:System.Threading.Mutex.#ctor(System.Boolean)" />
 
@@ -349,8 +401,12 @@
 
             
 
+            
+
              constructor. In this case, <paramref
              name="createdNew" />
+
+            
 
             
 
@@ -373,11 +429,15 @@
 
             
 
+            
+
              class with a Boolean value that indicates whether the calling thread should have initial ownership of the mutex, and a string that is the name of the mutex.</para
           >
         </summary>
         <param name="initiallyOwned">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -392,6 +452,8 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Threading.Mutex" />
 
@@ -399,8 +461,12 @@
 
           
 
+          
+
           . If the value is null, the <see
            cref="T:System.Threading.Mutex" />
+
+          
 
           
 
@@ -509,8 +575,12 @@
 
             
 
+            
+
              method uses the following combination of flags (combined using the bitwise OR operation) to search for permissions: <see
              cref="F:System.Security.AccessControl.AccessControlSections.Access" />
+
+            
 
             
 
@@ -523,8 +593,12 @@
 
             
 
+            
+
             , and <see
              cref="F:System.Security.AccessControl.AccessControlSections.Group" />
+
+            
 
             
 
@@ -540,8 +614,12 @@
 
             
 
+            
+
              to call this method, and the mutex must have been opened with <see
              cref="F:System.Security.AccessControl.MutexRights.ReadPermissions" />
+
+            
 
             
 
@@ -560,6 +638,8 @@
 
             
 
+            
+
              object that represents the access control security for the named mutex.</para
           >
         </summary>
@@ -568,6 +648,8 @@
           <para
             >A <see
              cref="T:System.Security.AccessControl.MutexSecurity" />
+
+            
 
             
 
@@ -610,6 +692,8 @@
 
             
 
+            
+
              method tries to open the specified named system mutex. If the system mutex does not exist, this method throws an exception instead of creating the system object. To create the system mutex when it does not already exist, use one of the <see
              cref="M:System.Threading.Mutex.#ctor(System.Boolean,System.String)" />
 
@@ -617,8 +701,12 @@
 
             
 
+            
+
              constructors that has a <paramref
              name="name" />
+
+            
 
             
 
@@ -634,8 +722,12 @@
 
             
 
+            
+
              do not necessarily return the same <see
              cref="T:System.Threading.Mutex" />
+
+            
 
             
 
@@ -651,6 +743,8 @@
 
             
 
+            
+
              method overload and specifying <see
              cref="F:System.Security.AccessControl.MutexRights.Synchronize" />
 
@@ -658,8 +752,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Security.AccessControl.MutexRights.Modify" />
+
+            
 
             
 
@@ -675,6 +773,8 @@
 
             
 
+            
+
              flag allows a thread to wait on the mutex, and specifying the <see
              cref="F:System.Security.AccessControl.MutexRights.Modify" />
 
@@ -682,8 +782,12 @@
 
             
 
+            
+
              flag allows a thread to call the <see
              cref="M:System.Threading.Mutex.ReleaseMutex" />
+
+            
 
             
 
@@ -703,6 +807,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -745,8 +851,12 @@
 
             
 
+            
+
              parameter must include the <see
              cref="F:System.Security.AccessControl.MutexRights.Synchronize" />
+
+            
 
             
 
@@ -759,8 +869,12 @@
 
             
 
+            
+
              flag to allow threads to call the <see
              cref="M:System.Threading.Mutex.ReleaseMutex" />
+
+            
 
             
 
@@ -776,6 +890,8 @@
 
             
 
+            
+
              method tries to open an existing named mutex. If the system mutex does not exist, this method throws an exception instead of creating the system object. To create the system mutex when it does not already exist, use one of the <see
              cref="M:System.Threading.Mutex.#ctor(System.Boolean,System.String)" />
 
@@ -783,8 +899,12 @@
 
             
 
+            
+
              constructors that has a <paramref
              name="name" />
+
+            
 
             
 
@@ -800,8 +920,12 @@
 
             
 
+            
+
              do not necessarily return the same <see
              cref="T:System.Threading.Mutex" />
+
+            
 
             
 
@@ -826,10 +950,14 @@
 
           
 
+          
+
           The name of the system mutex to open.</param
         >
         <param name="rights">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -871,11 +999,15 @@
 
             
 
+            
+
              the same number of times to release ownership of the mutex. </para
           >
           <para
             >If a thread terminates while owning a mutex, the mutex is said to be abandoned. The state of the mutex is set to signaled and the next waiting thread gets ownership. If no one owns the mutex, the state of the mutex is signaled. Beginning in version 2.0 of the .NET Framework, an <see
              cref="T:System.Threading.AbandonedMutexException" />
+
+            
 
             
 
@@ -893,6 +1025,8 @@
           <para
             >Releases the <see
              cref="T:System.Threading.Mutex" />
+
+            
 
             
 
@@ -935,8 +1069,12 @@
 
             
 
+            
+
              rights to call this method, and the mutex must have been opened with <see
              cref="F:System.Security.AccessControl.MutexRights.ChangePermissions" />
+
+            
 
             
 
@@ -956,8 +1094,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.AccessControl.MutexSecurity" />
+
+          
 
           
 

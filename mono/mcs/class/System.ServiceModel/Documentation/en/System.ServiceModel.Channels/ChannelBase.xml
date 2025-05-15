@@ -34,8 +34,12 @@
 
         
 
+        
+
          class provides an abstract base class implementation of the <see
          cref="T:System.ServiceModel.Channels.IChannel" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
          requires a <paramref
          name="channelManager" />
+
+        
 
         
 
@@ -65,11 +73,15 @@
 
         
 
+        
+
          implementation of the state machine.</para
       >
       <para
         >The <see
          cref="T:System.ServiceModel.Channels.ChannelBase" />
+
+        
 
         
 
@@ -82,11 +94,15 @@
 
         
 
+        
+
          associated with it.</para
       >
       <para
         >The <see
          cref="T:System.ServiceModel.Channels.ChannelBase" />
+
+        
 
         
 
@@ -103,6 +119,8 @@
 
         
 
+        
+
          whenever you implement a channel. <see
          cref="M:System.ServiceModel.Channels.ChannelBase.GetProperty``1" />
 
@@ -110,8 +128,12 @@
 
         
 
+        
+
          is an excellent way to communicate information along the channel stack without having to know what channels are below you, or what channels above you may perform queries. Define interfaces that can be queried for available information. Whenever you do not recognize the type argument for <see
          cref="M:System.ServiceModel.Channels.ChannelBase.GetProperty``1" />
+
+        
 
         
 
@@ -154,8 +176,12 @@
 
             
 
+            
+
              requires a <paramref
              name="channelManager" />
+
+            
 
             
 
@@ -169,6 +195,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.ChannelBase" />
+
+            
 
             
 
@@ -207,8 +235,12 @@
 
             
 
+            
+
              associated with <see
              cref="P:System.ServiceModel.Channels.ChannelBase.Manager" />
+
+            
 
             
 
@@ -252,8 +284,12 @@
 
             
 
+            
+
              associated with <see
              cref="P:System.ServiceModel.Channels.ChannelBase.Manager" />
+
+            
 
             
 
@@ -294,8 +330,12 @@
 
             
 
+            
+
              associated with <see
              cref="P:System.ServiceModel.Channels.ChannelBase.Manager" />
+
+            
 
             
 
@@ -336,8 +376,12 @@
 
             
 
+            
+
              associated with <see
              cref="P:System.ServiceModel.Channels.ChannelBase.Manager" />
+
+            
 
             
 
@@ -389,6 +433,8 @@
 
             
 
+            
+
              whenever you implement a channel. <see
              cref="M:System.ServiceModel.Channels.ChannelBase.GetProperty``1" />
 
@@ -396,8 +442,12 @@
 
             
 
+            
+
              is an excellent way to communicate information along the channel stack without having to know what channels are below you, or what channels above you may perform queries. Define interfaces that can be queried for available information. Whenever you do not recognize the type argument for <see
              cref="M:System.ServiceModel.Channels.ChannelBase.GetProperty``1" />
+
+            
 
             
 
@@ -420,11 +470,15 @@
 
             
 
+            
+
              requested, if it is present, or null, if it is not.</para
           >
         </returns>
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -462,8 +516,12 @@
 
             
 
+            
+
              must have a <see
              cref="T:System.ServiceModel.Channels.ChannelManagerBase" />
+
+            
 
             
 
@@ -530,8 +588,12 @@
 
             
 
+            
+
              calls <see
              cref="P:System.ServiceModel.Channels.ChannelBase.DefaultCloseTimeout" />
+
+            
 
             
 
@@ -573,8 +635,12 @@
 
             
 
+            
+
              calls <see
              cref="P:System.ServiceModel.Channels.ChannelBase.DefaultOpenTimeout" />
+
+            
 
             
 
@@ -616,8 +682,12 @@
 
             
 
+            
+
              calls <see
              cref="P:System.ServiceModel.Channels.ChannelBase.DefaultReceiveTimeout" />
+
+            
 
             
 
@@ -659,8 +729,12 @@
 
             
 
+            
+
              calls <see
              cref="P:System.ServiceModel.Channels.ChannelBase.DefaultSendTimeout" />
+
+            
 
             
 

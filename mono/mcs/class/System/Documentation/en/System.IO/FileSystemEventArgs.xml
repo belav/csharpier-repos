@@ -33,11 +33,15 @@
 
         
 
+        
+
          class is passed as a parameter to event handlers for these events: </para
       >
       <para
         >The <see
          cref="E:System.IO.FileSystemWatcher.Changed" />
+
+        
 
         
 
@@ -50,8 +54,12 @@
 
         
 
+        
+
          of a <see
          cref="T:System.IO.FileSystemWatcher" />
+
+        
 
         
 
@@ -67,6 +75,8 @@
 
         
 
+        
+
          event occurs when a file or directory in the specified <see
          cref="P:System.IO.FileSystemWatcher.Path" />
 
@@ -74,8 +84,12 @@
 
         
 
+        
+
          of a <see
          cref="T:System.IO.FileSystemWatcher" />
+
+        
 
         
 
@@ -91,8 +105,12 @@
 
         
 
+        
+
          event occurs when a file or directory in the specified <see
          cref="P:System.IO.FileSystemWatcher.Path" />
+
+        
 
         
 
@@ -105,8 +123,12 @@
 
         
 
+        
+
          is deleted. For more information, see <see
          cref="T:System.IO.FileSystemWatcher" />
+
+        
 
         
 
@@ -125,6 +147,8 @@
 
         
 
+        
+
         , <see
          cref="E:System.IO.FileSystemWatcher.Created" />
 
@@ -132,8 +156,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.IO.FileSystemWatcher.Deleted" />
+
+        
 
         
 
@@ -177,6 +205,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -187,8 +217,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.IO.WatcherChangeTypes" />
+
+          
 
           
 
@@ -203,10 +237,14 @@
 
           
 
+          
+
           The root directory of the affected file or directory. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -288,6 +326,8 @@
 
             
 
+            
+
              property is the relative path of the affected file or directory, with respect to the directory being watched. For example, if a <see
              cref="T:System.IO.FileSystemWatcher" />
 
@@ -295,8 +335,12 @@
 
             
 
+            
+
              object is watching the directory "C:\temp" and the file at "C:\temp\test\file.txt" changes, the <see
              cref="P:System.IO.FileSystemEventArgs.Name" />
+
+            
 
             
 

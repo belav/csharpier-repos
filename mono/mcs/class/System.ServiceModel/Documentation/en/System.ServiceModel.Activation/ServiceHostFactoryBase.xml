@@ -27,6 +27,8 @@
 
         
 
+        
+
          in these hosting environments. If you have implemented a custom derivative of <see
          cref="T:System.ServiceModel.ServiceHost" />
 
@@ -34,8 +36,12 @@
 
         
 
+        
+
         , consider deriving from <see
          cref="T:System.ServiceModel.Activation.ServiceHostFactory" />
+
+        
 
         
 
@@ -68,6 +74,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Activation.ServiceHostFactoryBase" />
+
+            
 
             
 
@@ -110,6 +118,8 @@
 
             
 
+            
+
              with a specific base address using custom initiation data. </para
           >
         </summary>
@@ -118,6 +128,8 @@
           <para
             >The <see
              cref="T:System.ServiceModel.ServiceHostBase" />
+
+            
 
             
 
@@ -133,8 +145,12 @@
 
           
 
+          
+
           The initialization data that is passed to the <see
            cref="T:System.ServiceModel.ServiceHostBase" />
+
+          
 
           
 
@@ -149,6 +165,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Array" />
 
@@ -156,8 +174,12 @@
 
           
 
+          
+
            of type <see
            cref="T:System.Uri" />
+
+          
 
           
 

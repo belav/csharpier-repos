@@ -42,6 +42,8 @@
 
         
 
+        
+
         . This class is used to include declarations and definitions from an external schema. The included declarations and definitions are then available for processing in the containing schema.</para
       >
     </summary>
@@ -68,6 +70,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Schema.XmlSchemaInclude" />
+
+            
 
             
 

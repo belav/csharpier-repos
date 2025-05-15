@@ -24,8 +24,12 @@
 
         
 
+        
+
          class is used to convert index values of an <see
          cref="T:System.Windows.Forms.ImageList" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
         . For more information about type converters, see the <see
          cref="T:System.ComponentModel.TypeConverter" />
+
+        
 
         
 
@@ -56,12 +64,16 @@
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
         <para
           >Typically, you do not directly create an instance of an <see
            cref="T:System.Windows.Forms.ImageIndexConverter" />
+
+          
 
           
 
@@ -74,6 +86,8 @@
 
           
 
+          
+
            method of <see
            cref="T:System.ComponentModel.TypeDescriptor" />
 
@@ -81,8 +95,12 @@
 
           
 
+          
+
           . For more information, see the examples in the <see
            cref="T:System.ComponentModel.TypeConverter" />
+
+          
 
           
 
@@ -113,8 +131,12 @@
 
             
 
+            
+
             . Instead, call the <see
              cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+
+            
 
             
 
@@ -127,8 +149,12 @@
 
             
 
+            
+
             . For more information, see the examples in the <see
              cref="T:System.ComponentModel.TypeConverter" />
+
+            
 
             
 
@@ -142,6 +168,8 @@
           <para
             >Initializes and instance of the <see
              cref="T:System.Windows.Forms.ImageIndexConverter" />
+
+            
 
             
 
@@ -182,6 +210,8 @@
 
             
 
+            
+
              can be used to extract additional information about the environment this type converter is being invoked from. This may be null, so you should always check. Also, properties on the context object may also return null.</para
           >
         </remarks>
@@ -199,8 +229,12 @@
 
             
 
+            
+
              that represents the converted <paramref
              name="value" />
+
+            
 
             
 
@@ -216,8 +250,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -232,8 +270,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -248,8 +290,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -289,8 +335,12 @@
 
             
 
+            
+
              to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -313,8 +363,12 @@
 
             
 
+            
+
              that represents the converted <paramref
              name="value" />
+
+            
 
             
 
@@ -330,8 +384,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -346,8 +404,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -362,8 +424,12 @@
 
           
 
+          
+
           The object to convert, typically an index represented as an <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -378,8 +444,12 @@
 
           
 
+          
+
           The type to convert the object to, often a <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -416,6 +486,8 @@
 
             
 
+            
+
              property of the <paramref
              name="context" />
 
@@ -423,8 +495,12 @@
 
             
 
+            
+
              parameter. If an <see
              cref="T:System.Windows.Forms.ImageList" />
+
+            
 
             
 
@@ -440,6 +516,8 @@
 
             
 
+            
+
              method is called to before an attempt is made to use the <see
              cref="Overload:System.Windows.Forms.ImageIndexConverter.GetStandardValues" />
 
@@ -447,8 +525,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.Windows.Forms.ImageIndexConverter.GetStandardValuesExclusive" />
+
+            
 
             
 
@@ -471,6 +553,8 @@
 
             
 
+            
+
              that holds a standard set of valid index values. If no image list is found, this collection will contain a single object with a value of -1.</para
           >
         </returns>
@@ -481,8 +565,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -519,8 +607,12 @@
 
             
 
+            
+
              method is exclusive, then no other values are valid. This is typical of an enumerated data type. If the list is not exclusive, then there are other valid values besides the list of standard values that <see
              cref="Overload:System.Windows.Forms.ImageIndexConverter.GetStandardValues" />
+
+            
 
             
 
@@ -537,6 +629,8 @@
 
             
 
+            
+
              method is called to before an attempt is made to use the <see
              cref="Overload:System.Windows.Forms.ImageIndexConverter.GetStandardValues" />
 
@@ -544,8 +638,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.Windows.Forms.ImageIndexConverter.GetStandardValuesExclusive" />
+
+            
 
             
 
@@ -564,6 +662,8 @@
 
             
 
+            
+
              method is an exclusive list. </para
           >
         </summary>
@@ -577,11 +677,15 @@
 
             
 
+            
+
              method returns an exclusive list of valid values; otherwise, false. This implementation always returns false.</para
           >
         </returns>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -618,6 +722,8 @@
 
             
 
+            
+
              always returns true since this object supports a standard set of index values for images that can be picked from a list.</para
           >
         </remarks>
@@ -635,6 +741,8 @@
 
             
 
+            
+
              method returns a standard set of values; otherwise, false. Always returns true.</para
           >
         </returns>
@@ -645,8 +753,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -680,6 +792,8 @@
           <para
             >Gets or sets a value indicating whether a none or null value is valid in the <see
              cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
+
+            
 
             
 

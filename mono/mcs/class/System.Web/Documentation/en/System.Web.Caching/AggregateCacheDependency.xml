@@ -24,8 +24,12 @@
 
         
 
+        
+
          class monitors a collection of dependency objects so that when any of them change, the cached item is automatically removed. The objects in the array can be <see
          cref="T:System.Web.Caching.CacheDependency" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          objects, custom objects derived from <see
          cref="T:System.Web.Caching.CacheDependency" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          class differs from the <see
          cref="T:System.Web.Caching.CacheDependency" />
+
+        
 
         
 
@@ -69,8 +81,12 @@
 
         
 
+        
+
          object to represent a dependency on the database table and a <see
          cref="T:System.Web.Caching.CacheDependency" />
+
+        
 
         
 
@@ -83,8 +99,12 @@
 
         
 
+        
+
          method call for each dependency, you can create an instance of the <see
          cref="T:System.Web.Caching.AggregateCacheDependency" />
+
+        
 
         
 
@@ -97,8 +117,12 @@
 
         
 
+        
+
           call to make the page dependent on the <see
          cref="T:System.Web.Caching.AggregateCacheDependency" />
+
+        
 
         
 
@@ -117,8 +141,12 @@
 
         
 
+        
+
          object and an array of <see
          cref="T:System.Web.Caching.CacheDependency" />
+
+        
 
         
 
@@ -145,6 +173,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -153,6 +183,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Caching.AggregateCacheDependency" />
+
+            
 
             
 
@@ -197,8 +229,12 @@
 
             
 
+            
+
              objects to the <see
              cref="T:System.Web.Caching.AggregateCacheDependency" />
+
+            
 
             
 
@@ -214,8 +250,12 @@
 
           
 
+          
+
           The array of <see
            cref="T:System.Web.Caching.CacheDependency" />
+
+          
 
           
 
@@ -251,6 +291,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -264,8 +306,12 @@
 
             
 
+            
+
              object. If one of the associated dependency objects does not have a unique identifier, the <see
              cref="M:System.Web.Caching.AggregateCacheDependency.GetUniqueId" />
+
+            
 
             
 

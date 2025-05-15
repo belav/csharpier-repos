@@ -27,8 +27,12 @@
 
         
 
+        
+
          class adapts the associated <see
          cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          class to further customize rendering of the <see
          cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" />
+
+        
 
         
 
@@ -58,8 +66,12 @@
 
         
 
+        
+
          control is bound to a data source and generates its user interface (or child control hierarchy, typically), by enumerating the items in the data source to which it is bound. For more information on hierarchical data-bound controls, see <see
          cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" />
+
+        
 
         
 
@@ -75,8 +87,12 @@
 
         
 
+        
+
          class provides access to the life-cycle stages of the <see
          cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" />
+
+        
 
         
 
@@ -93,11 +109,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >The initial request for an adapter causes the .NET Framework to search for a mapped adapter for the control, given the characteristics of the requesting browser. Browser definition files are used by the <see
          cref="T:System.Web.HttpBrowserCapabilities" />
+
+        
 
         
 
@@ -111,6 +131,8 @@
       <para
         >Customizes the behavior of a <see
          cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" />
+
+        
 
         
 
@@ -137,8 +159,12 @@
 
             
 
+            
+
              class. The initial request for an adapter causes the .NET Framework to search for a mapped adapter for the control given the characteristics of the requesting browser. After the adapter is found, the control holds a reference to the mapped adapter instance in its <see
              cref="P:System.Web.UI.Control.Adapter" />
+
+            
 
             
 
@@ -152,6 +178,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.Adapters.HierarchicalDataBoundControlAdapter" />
+
+            
 
             
 
@@ -187,6 +215,8 @@
 
             
 
+            
+
              property provides access to the corresponding control, including its properties and methods.</para
           >
         </remarks>
@@ -200,8 +230,12 @@
 
             
 
+            
+
              control associated with this <see
              cref="T:System.Web.UI.WebControls.Adapters.HierarchicalDataBoundControlAdapter" />
+
+            
 
             
 
@@ -236,8 +270,12 @@
 
             
 
+            
+
              method binds the data in the specified data source of the associated <see
              cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" />
+
+            
 
             
 
@@ -250,8 +288,12 @@
 
             
 
+            
+
              object. You can override <see
              cref="M:System.Web.UI.WebControls.Adapters.HierarchicalDataBoundControlAdapter.PerformDataBinding" />
+
+            
 
             
 
@@ -264,8 +306,12 @@
 
             
 
+            
+
              control or to provide additional data-binding functionality if the associated <see
              cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" />
+
+            
 
             
 

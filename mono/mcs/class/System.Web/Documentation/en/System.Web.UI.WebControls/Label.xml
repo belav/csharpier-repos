@@ -84,8 +84,12 @@
 
         
 
+        
+
          control to display text in a set location on the page. Unlike static text, you can customize the displayed text through the <see
          cref="P:System.Web.UI.WebControls.Label.Text" />
+
+        
 
         
 
@@ -101,6 +105,8 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.WebControls.PlaceHolder" />
 
@@ -108,8 +114,12 @@
 
         
 
+        
+
          controls to display text on the Web Forms page. However, unlike the <see
          cref="T:System.Web.UI.WebControls.Label" />
+
+        
 
         
 
@@ -123,6 +133,8 @@
            type="text/html">
             <a href="772c7312-211a-4eb3-8d6e-eec0aa1dcc07">Script Exploits Overview</a>
           </format>
+
+          
 
           
 
@@ -149,10 +161,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0">ASP.NET Controls and Accessibility</a>
         </format>
+
+        
 
         
 
@@ -179,12 +195,16 @@
 
         
 
+        
+
         |None|Dotted|Dashed|Solid|Double|Groove|Ridge|
         Inset|Outset"
     BorderWidth="size"
     CssClass="string"
     Enabled="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -198,9 +218,13 @@
 
         
 
+        
+
         |False"
     EnableViewState="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -214,9 +238,13 @@
 
         
 
+        
+
         "
     Font-Italic="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -226,6 +254,8 @@
     Font-Names="string"
     Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -241,9 +271,13 @@
 
         
 
+        
+
         "
     Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -267,6 +301,8 @@
     ToolTip="string"
     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -299,6 +335,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -307,6 +345,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.Label" />
+
+            
 
             
 
@@ -348,6 +388,8 @@
 
             
 
+            
+
              method is used primarily by control developers to insert the additional attributes and styles to the <see
              cref="T:System.Web.UI.HtmlTextWriter" />
 
@@ -355,8 +397,12 @@
 
             
 
+            
+
              output stream for a <see
              cref="T:System.Web.UI.WebControls.Label" />
+
+            
 
             
 
@@ -372,6 +418,8 @@
 
             
 
+            
+
              method for a <see
              cref="T:System.Web.UI.WebControls.Label" />
 
@@ -379,8 +427,12 @@
 
             
 
+            
+
              control determines whether the for attribute should be added with the <see
              cref="P:System.Web.UI.WebControls.Label.AssociatedControlID" />
+
+            
 
             
 
@@ -399,6 +451,8 @@
 
             
 
+            
+
              control to render to the specified output stream. </para
           >
         </summary>
@@ -409,8 +463,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -443,8 +501,12 @@
 
             
 
+            
+
              method is used primarily by control developers when deriving a custom control from the <see
              cref="T:System.Web.UI.WebControls.Label" />
+
+            
 
             
 
@@ -460,8 +522,12 @@
 
             
 
+            
+
             , and the <see
              cref="T:System.Web.UI.WebControls.Label" />
+
+            
 
             
 
@@ -474,8 +540,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.Label" />
+
+            
 
             
 
@@ -488,6 +558,8 @@
 
             
 
+            
+
              method of the base <see
              cref="T:System.Web.UI.Control" />
 
@@ -495,8 +567,12 @@
 
             
 
+            
+
              class is called and the specified object is added to the <see
              cref="P:System.Web.UI.Control.Controls" />
+
+            
 
             
 
@@ -515,11 +591,15 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -572,8 +652,12 @@
 
             
 
+            
+
              property to associate a <see
              cref="T:System.Web.UI.WebControls.Label" />
+
+            
 
             
 
@@ -586,8 +670,12 @@
 
             
 
+            
+
              control is associated with another server control, its attributes can be used to extend the functionality of the associated control. You can use the <see
              cref="T:System.Web.UI.WebControls.Label" />
+
+            
 
             
 
@@ -603,8 +691,12 @@
 
             
 
+            
+
              property is set, the <see
              cref="T:System.Web.UI.WebControls.Label" />
+
+            
 
             
 
@@ -617,8 +709,12 @@
 
             
 
+            
+
              property of the associated control. You can set other attributes of the label element using the <see
              cref="T:System.Web.UI.WebControls.Label" />
+
+            
 
             
 
@@ -631,8 +727,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.WebControl.AccessKey" />
+
+            
 
             
 
@@ -648,10 +748,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -665,6 +769,8 @@
           <para
             >Gets or sets the identifier for a server control that the <see
              cref="T:System.Web.UI.WebControls.Label" />
+
+            
 
             
 
@@ -700,11 +806,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.Label.LoadViewState(System.Object)" />
+
+            
 
             
 
@@ -717,8 +827,12 @@
 
             
 
+            
+
              control from a previous page request that was saved by the <see
              cref="M:System.Web.UI.WebControls.WebControl.SaveViewState" />
+
+            
 
             
 
@@ -733,6 +847,8 @@
         </summary>
         <param name="savedState">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -770,11 +886,15 @@
 
             
 
+            
+
              into the specified writer.</para
           >
         </summary>
         <param name="writer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -813,8 +933,12 @@
 
             
 
+            
+
              property to determine the <see
              cref="T:System.Web.UI.HtmlTextWriterTag" />
+
+            
 
             
 
@@ -827,8 +951,12 @@
 
             
 
+            
+
              control. The <see
              cref="P:System.Web.UI.WebControls.Label.TagKey" />
+
+            
 
             
 
@@ -842,6 +970,8 @@
           <para
             >Gets the HTML tag that is used to render the <see
              cref="T:System.Web.UI.WebControls.Label" />
+
+            
 
             
 
@@ -871,6 +1001,8 @@
 
             
 
+            
+
              property to specify or determine the text content of the <see
              cref="T:System.Web.UI.WebControls.Label" />
 
@@ -878,8 +1010,12 @@
 
             
 
+            
+
              control. This property is commonly used to programmatically customize the text that is displayed in the <see
              cref="T:System.Web.UI.WebControls.Label" />
+
+            
 
             
 
@@ -895,8 +1031,12 @@
 
             
 
+            
+
              property can include HTML. If it does, the HTML will be passed unchanged to the browser, where is might be interpreted as markup and not as text. If you want the browser to display HTML markup as plain text, you can use the <see
              cref="M:System.Web.HttpServerUtility.HtmlEncode(System.String)" />
+
+            
 
             
 
@@ -909,8 +1049,12 @@
 
             
 
+            
+
              control instead of the <see
              cref="T:System.Web.UI.WebControls.Label" />
+
+            
 
             
 
@@ -923,8 +1067,12 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Web.UI.WebControls.LiteralMode.Encode" />
+
+            
 
             
 
@@ -941,8 +1089,12 @@
 
               
 
+              
+
                property will clear any other controls contained in the <see
                cref="T:System.Web.UI.WebControls.Label" />
+
+              
 
               
 
@@ -962,12 +1114,16 @@
 
               
 
+              
+
               .</para
             >
           </block>
           <para
             >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
              cref="T:System.ComponentModel.LocalizableAttribute" />
+
+            
 
             
 
@@ -984,11 +1140,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This property is the default property that a <see
              cref="T:System.Web.UI.WebControls.ControlParameter" />
+
+            
 
             
 
@@ -1001,8 +1161,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.UI.WebControls.ControlParameter" />
+
+            
 
             
 
@@ -1019,6 +1183,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1027,6 +1193,8 @@
           <para
             >Gets or sets the text content of the <see
              cref="T:System.Web.UI.WebControls.Label" />
+
+            
 
             
 

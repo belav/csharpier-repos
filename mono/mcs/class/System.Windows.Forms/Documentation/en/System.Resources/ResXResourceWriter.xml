@@ -28,8 +28,12 @@
 
         
 
+        
+
          writes resources in XML format. To write a binary resource file, use <see
          cref="T:System.Resources.ResourceWriter" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          method. Resource names are case-sensitive when used for lookups; but to more easily support authoring tools and help eliminate bugs, <see
          cref="T:System.Resources.ResXResourceWriter" />
+
+        
 
         
 
@@ -62,8 +70,12 @@
 
         
 
+        
+
          with a unique file name, call <see
          cref="M:System.Resources.ResXResourceWriter.AddResource(System.String,System.Byte[])" />
+
+        
 
         
 
@@ -76,8 +88,12 @@
 
         
 
+        
+
          to write the resources file to disk, and then call <see
          cref="M:System.Resources.ResXResourceWriter.Close" />
+
+        
 
         
 
@@ -90,8 +106,12 @@
 
         
 
+        
+
          will implicitly <see
          cref="M:System.Resources.ResXResourceWriter.Generate" />
+
+        
 
         
 
@@ -112,12 +132,16 @@
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
         <para
           >This class contains a link demand and an inheritance demand at the class level that applies to all members. A <see
            cref="T:System.Security.SecurityException" />
+
+          
 
           
 
@@ -132,10 +156,14 @@
 
           
 
+          
+
            and <format
            type="text/html">
             <a href="28b9adbb-8f08-4f10-b856-dbf59eb932d9">Inheritance Demands</a>
           </format>
+
+          
 
           
 
@@ -169,8 +197,12 @@
 
               
 
+              
+
                method closes the stream you specify as a parameter. To write the resource to the stream without closing the stream, you must use the <see
                cref="M:System.Resources.ResXResourceWriter.Generate" />
+
+              
 
               
 
@@ -190,11 +222,15 @@
 
             
 
+            
+
              class that writes the resources to the specified stream object.</para
           >
         </summary>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -229,8 +265,12 @@
 
             
 
+            
+
              class that writes to the specified <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -246,8 +286,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -278,6 +322,8 @@
 
             
 
+            
+
              if it does not exist and overwrites it if it does. If <paramref
              name="filename" />
 
@@ -285,8 +331,12 @@
 
             
 
+            
+
              includes a directory path, the full path must exist or the constructor throws a <see
              cref="T:System.IO.DirectoryNotFoundException" />
+
+            
 
             
 
@@ -305,11 +355,15 @@
 
             
 
+            
+
              class that writes the resources to the specified file.</para
           >
         </summary>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -350,6 +404,8 @@
 
             
 
+            
+
              is called.</para
           >
         </remarks>
@@ -364,6 +420,8 @@
 
           
 
+          
+
           The name of the alias.</param
         >
         <param name="assemblyName">
@@ -373,8 +431,12 @@
 
           
 
+          
+
           The name of the assembly represented by <paramref
            name="aliasName" />
+
+          
 
           
 
@@ -410,10 +472,14 @@
 
           
 
+          
+
           The name of a property.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -449,10 +515,14 @@
 
           
 
+          
+
           The name of a property.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -488,10 +558,14 @@
 
           
 
+          
+
           The name of a property.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -528,6 +602,8 @@
 
             
 
+            
+
              object to the list of resources to write.</para
           >
         </summary>
@@ -538,8 +614,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Resources.ResXDataNode" />
+
+          
 
           
 
@@ -570,6 +650,8 @@
 
             
 
+            
+
              is called.</para
           >
           <para>The resource is serialized and stored in a binary format.</para>
@@ -585,10 +667,14 @@
 
           
 
+          
+
           The name of the resource. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -623,6 +709,8 @@
 
             
 
+            
+
              is called. The resource that was added must be serializable.</para
           >
           <para>If the resource being added is a string, it is written as a string; otherwise, the resource is serialized and stored in a binary format.</para>
@@ -638,10 +726,14 @@
 
           
 
+          
+
           The name of the resource. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -676,6 +768,8 @@
 
             
 
+            
+
              is called.</para
           >
         </remarks>
@@ -690,10 +784,14 @@
 
           
 
+          
+
           The name of the resource. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -724,6 +822,8 @@
           <para
             >Gets or sets the base path for the relative file path specified in a <see
              cref="T:System.Resources.ResXFileRef" />
+
+            
 
             
 
@@ -794,6 +894,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -802,6 +904,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.Resources.ResXResourceWriter" />
+
+            
 
             
 
@@ -855,8 +959,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Resources.ResXResourceWriter.Generate" />
+
+            
 
             
 
@@ -872,6 +980,8 @@
 
             
 
+            
+
              allows the system resources used by the <see
              cref="T:System.Resources.ResXResourceWriter" />
 
@@ -879,8 +989,12 @@
 
             
 
+            
+
              to be reallocated for other purposes. For more information about <see
              cref="M:System.Resources.ResXResourceWriter.Dispose" />
+
+            
 
             
 
@@ -895,6 +1009,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -903,6 +1019,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.Resources.ResXResourceWriter" />
+
+            
 
             
 
@@ -937,8 +1055,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Resources.ResXResourceWriter.Generate" />
+
+            
 
             
 
@@ -954,8 +1076,12 @@
 
             
 
+            
+
               method and the <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -968,6 +1094,8 @@
 
             
 
+            
+
              parameter set to true. <see
              cref="M:System.Object.Finalize" />
 
@@ -975,8 +1103,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -992,8 +1124,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Resources.ResXResourceWriter" />
+
+            
 
             
 
@@ -1012,11 +1148,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1049,6 +1189,8 @@
 
             
 
+            
+
              method. </para
           >
         </summary>
@@ -1076,8 +1218,12 @@
 
             
 
+            
+
              method writes the resources to the output file or stream. If you want to write the resources as well as close the output file or stream, call the <see
              cref="M:System.Resources.ResXResourceWriter.Close" />
+
+            
 
             
 
@@ -1093,8 +1239,12 @@
 
             
 
+            
+
              method can be called only once. After calling the <see
              cref="M:System.Resources.ResXResourceWriter.Generate" />
+
+            
 
             
 
@@ -1107,8 +1257,12 @@
 
             
 
+            
+
              methods other than <see
              cref="M:System.Resources.ResXResourceWriter.Close" />
+
+            
 
             
 
@@ -1122,6 +1276,8 @@
           <para
             >Writes all resources added by the <see
              cref="M:System.Resources.ResXResourceWriter.AddResource(System.String,System.Byte[])" />
+
+            
 
             
 

@@ -48,8 +48,12 @@
 
         
 
+        
+
          exposes a managed interface to COM as a dual interface, giving you the flexibility of late binding or the performance of early binding. The <see
          cref="T:System.Runtime.InteropServices.ComInterfaceType" />
+
+        
 
         
 
@@ -66,6 +70,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -75,6 +81,8 @@
             >[&lt;topic://cpgrftypelibraryImportertlbimpexe&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -116,12 +124,16 @@
 
             
 
+            
+
              enumeration member. The <format
              type="text/html">
               <a href="EC0A8D63-11B3-4ACD-B398-DA1E37E97382"
                 >[&lt;topic://cpgrftypelibraryimportertlbimpexe&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -140,8 +152,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Runtime.InteropServices.ComInterfaceType" />
+
+            
 
             
 
@@ -152,6 +168,8 @@
         </summary>
         <param name="interfaceType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -195,8 +213,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Runtime.InteropServices.ComInterfaceType" />
+
+            
 
             
 
@@ -212,8 +234,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Runtime.InteropServices.ComInterfaceType" />
+
+          
 
           
 
@@ -249,6 +275,8 @@
           <para
             >Gets the <see
              cref="T:System.Runtime.InteropServices.ComInterfaceType" />
+
+            
 
             
 

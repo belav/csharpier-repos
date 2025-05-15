@@ -25,8 +25,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Security.Cryptography.ProtectedData.Unprotect(System.Byte[],System.Byte[],System.Security.Cryptography.DataProtectionScope)" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
          enumeration value allows multiple accounts to unprotect data.  Use this value only when you trust every account on a computer.  For most situations, you should use the <see
          cref="F:System.Security.Cryptography.DataProtectionScope.CurrentUser" />
+
+        
 
         
 
@@ -57,6 +65,8 @@
       <para
         >Specifies the scope of the data protection to be applied by the <see
          cref="M:System.Security.Cryptography.ProtectedData.Protect(System.Byte[],System.Byte[],System.Security.Cryptography.DataProtectionScope)" />
+
+        
 
         
 

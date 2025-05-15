@@ -49,8 +49,12 @@
 
         
 
+        
+
          method also brings the enumerator back to this position. At this position, calling the <see
          cref="P:System.Collections.IEnumerator.Current" />
+
+        
 
         
 
@@ -63,8 +67,12 @@
 
         
 
+        
+
          method to advance the enumerator to the first element of the collection before reading the value of <see
          cref="P:System.Collections.IEnumerator.Current" />
+
+        
 
         
 
@@ -79,8 +87,12 @@
 
         
 
+        
+
          returns the same object until either <see
          cref="M:System.Collections.IEnumerator.MoveNext" />
+
+        
 
         
 
@@ -93,6 +105,8 @@
 
         
 
+        
+
          is called. <see
          cref="M:System.Collections.IEnumerator.MoveNext" />
 
@@ -100,8 +114,12 @@
 
         
 
+        
+
          sets <see
          cref="P:System.Collections.IEnumerator.Current" />
+
+        
 
         
 
@@ -117,8 +135,12 @@
 
         
 
+        
+
          passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
          cref="M:System.Collections.IEnumerator.MoveNext" />
+
+        
 
         
 
@@ -131,8 +153,12 @@
 
         
 
+        
+
          also return false. If the last call to <see
          cref="M:System.Collections.IEnumerator.MoveNext" />
+
+        
 
         
 
@@ -145,8 +171,12 @@
 
         
 
+        
+
          throws an exception. To set <see
          cref="P:System.Collections.IEnumerator.Current" />
+
+        
 
         
 
@@ -159,8 +189,12 @@
 
         
 
+        
+
          followed by <see
          cref="M:System.Collections.IEnumerator.MoveNext" />
+
+        
 
         
 
@@ -176,8 +210,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.Collections.IEnumerator.Reset" />
+
+        
 
         
 
@@ -190,8 +228,12 @@
 
         
 
+        
+
         . If the collection is modified between <see
          cref="M:System.Collections.IEnumerator.MoveNext" />
+
+        
 
         
 
@@ -204,8 +246,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Collections.IEnumerator.Current" />
+
+        
 
         
 
@@ -254,6 +300,8 @@
 
             
 
+            
+
              in the collection over which the current instance is positioned.</para
           >
         </value>
@@ -266,12 +314,16 @@
 
             
 
+            
+
              is positioned before the first element of the dictionary or after the last element.</para
           >
           <para>-or-</para>
           <para
             >The dictionary was modified after the <see
              cref="T:System.Collections.IDictionaryEnumerator" />
+
+            
 
             
 
@@ -290,8 +342,12 @@
 
             
 
+            
+
              method is called, the <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -304,8 +360,12 @@
 
             
 
+            
+
              property; otherwise, <see
              cref="P:System.Collections.IDictionaryEnumerator.Entry" />
+
+            
 
             
 
@@ -320,8 +380,12 @@
 
             
 
+            
+
              also throws an exception if the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -336,8 +400,12 @@
 
             
 
+            
+
              does not move the position of the enumerator, and consecutive calls to <see
              cref="P:System.Collections.IDictionaryEnumerator.Entry" />
+
+            
 
             
 
@@ -350,8 +418,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 
@@ -394,6 +466,8 @@
 
             
 
+            
+
              that contains the
 <see
              cref="P:System.Collections.DictionaryEntry.Key" />
@@ -402,9 +476,13 @@
 
             
 
+            
+
              
 of the <see
              cref="T:System.Collections.DictionaryEntry" />
+
+            
 
             
 
@@ -422,12 +500,16 @@ of the <see
 
             
 
+            
+
              is positioned before the first element of the dictionary or after the last element.</para
           >
           <para>-or-</para>
           <para
             >The dictionary was modified after the <see
              cref="T:System.Collections.IDictionaryEnumerator" />
+
+            
 
             
 
@@ -446,8 +528,12 @@ of the <see
 
             
 
+            
+
              method is called, the <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -460,8 +546,12 @@ of the <see
 
             
 
+            
+
              property; otherwise, <see
              cref="P:System.Collections.IDictionaryEnumerator.Key" />
+
+            
 
             
 
@@ -476,8 +566,12 @@ of the <see
 
             
 
+            
+
              also throws an exception if the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -492,8 +586,12 @@ of the <see
 
             
 
+            
+
              does not move the position of the enumerator, and consecutive calls to <see
              cref="P:System.Collections.IDictionaryEnumerator.Key" />
+
+            
 
             
 
@@ -506,8 +604,12 @@ of the <see
 
             
 
+            
+
              or <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 
@@ -550,6 +652,8 @@ of the <see
 
             
 
+            
+
              that contains the
 <see
              cref="P:System.Collections.DictionaryEntry.Value" />
@@ -558,9 +662,13 @@ of the <see
 
             
 
+            
+
              
 of the <see
              cref="T:System.Collections.DictionaryEntry" />
+
+            
 
             
 
@@ -578,12 +686,16 @@ of the <see
 
             
 
+            
+
              is positioned before the first element of the dictionary or after the last element.</para
           >
           <para>-or-</para>
           <para
             >The dictionary was modified after the <see
              cref="T:System.Collections.IDictionaryEnumerator" />
+
+            
 
             
 
@@ -602,8 +714,12 @@ of the <see
 
             
 
+            
+
              method is called, the <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -616,8 +732,12 @@ of the <see
 
             
 
+            
+
              property; otherwise, <see
              cref="P:System.Collections.IDictionaryEnumerator.Value" />
+
+            
 
             
 
@@ -632,8 +752,12 @@ of the <see
 
             
 
+            
+
              also throws an exception if the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -648,8 +772,12 @@ of the <see
 
             
 
+            
+
              does not move the position of the enumerator, and consecutive calls to <see
              cref="P:System.Collections.IDictionaryEnumerator.Value" />
+
+            
 
             
 
@@ -662,8 +790,12 @@ of the <see
 
             
 
+            
+
              or <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 

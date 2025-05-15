@@ -34,6 +34,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -59,6 +61,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -67,6 +71,8 @@
           <para
             >Creates a new instance of the <see
              cref="T:System.Web.Security.PassportAuthenticationModule" />
+
+            
 
             
 
@@ -97,6 +103,8 @@
           <para
             >This class has been deprecated and is no longer supported. Microsoft Passport Network has been replaced by Windows Live ID. For more information about how to use Windows Live ID to authenticate users in a Web application, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=106346">Windows Live ID SDK</see>
+
+            
 
             
 
@@ -133,6 +141,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -146,8 +156,12 @@
 
             
 
+            
+
              when called by the <see
              cref="T:System.Web.HttpRuntime" />
+
+            
 
             
 
@@ -182,6 +196,8 @@
 
             
 
+            
+
             .</para
           >
           <para />
@@ -196,8 +212,12 @@
 
             
 
+            
+
              when called by the <see
              cref="T:System.Web.HttpRuntime" />
+
+            
 
             
 
@@ -213,8 +233,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.HttpApplication" />
+
+          
 
           
 

@@ -27,11 +27,15 @@
 
         
 
+        
+
          can be caused by incompatible bindings between endpoints, the use of an incorrect remote endpoint address, or similar incorrect configuration.</para
       >
       <para
         >This exception derives from <see
          cref="T:System.ServiceModel.CommunicationException" />
+
+        
 
         
 
@@ -44,6 +48,8 @@
 
         
 
+        
+
          from catching the more specific <see
          cref="T:System.ServiceModel.ProtocolException" />
 
@@ -51,8 +57,12 @@
 
         
 
+        
+
         , catch this exception prior to handling <see
          cref="T:System.ServiceModel.CommunicationException" />
+
+        
 
         
 
@@ -90,6 +100,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -121,6 +133,8 @@
 
             
 
+            
+
              constructor.</para
           >
         </remarks>
@@ -129,6 +143,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.ProtocolException" />
+
+            
 
             
 
@@ -171,6 +187,8 @@
 
             
 
+            
+
              class with serialization information and streaming context specified.  </para
           >
         </summary>
@@ -181,8 +199,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -197,8 +219,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -239,6 +265,8 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
 
@@ -246,8 +274,12 @@
 
             
 
+            
+
              property returns the same value that is passed into the constructor, or a null reference (Nothing in Visual Basic) if the <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -261,6 +293,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.ProtocolException" />
+
+            
 
             
 

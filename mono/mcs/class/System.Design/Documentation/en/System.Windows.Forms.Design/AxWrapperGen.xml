@@ -37,6 +37,8 @@
 
           
 
+          
+
           The type of ActiveX control to generate a wrapper for. </param
         >
       </Docs>
@@ -65,6 +67,8 @@
           <para
             >This field initializes a local <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 

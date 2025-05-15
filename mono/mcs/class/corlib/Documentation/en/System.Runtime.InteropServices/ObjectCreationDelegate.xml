@@ -47,6 +47,8 @@
 
         
 
+        
+
          to avoid marshaling.</para
       >
       <para
@@ -57,8 +59,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.MulticastDelegate" />
+
+        
 
         
 

@@ -53,6 +53,8 @@
 
         
 
+        
+
         , code can use reflection to access only the public members of objects. Code with <see
          cref="T:System.Security.Permissions.ReflectionPermission" />
 
@@ -60,8 +62,12 @@
 
         
 
+        
+
          and the appropriate <see
          cref="T:System.Security.Permissions.ReflectionPermissionFlag" />
+
+        
 
         
 
@@ -78,8 +84,12 @@
 
           
 
+          
+
            can provide access to non-public types and members, we recommend that you do not grant <see
            cref="T:System.Security.Permissions.ReflectionPermission" />
+
+          
 
           
 
@@ -92,8 +102,12 @@
 
           
 
+          
+
            flag. <see
            cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+          
 
           
 
@@ -110,8 +124,12 @@
 
         
 
+        
+
          with the <see
          cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+        
 
         
 
@@ -122,6 +140,8 @@
       <para
         >For more information, see the <see
          cref="T:System.Security.Permissions.ReflectionPermissionFlag" />
+
+        
 
         
 
@@ -140,8 +160,12 @@
 
         
 
+        
+
          APIs. Controls some features of the <see
          cref="N:System.Reflection.Emit" />
+
+        
 
         
 
@@ -185,6 +209,8 @@
 
             
 
+            
+
              class with either fully restricted or unrestricted permission as specified.</para
           >
         </summary>
@@ -195,8 +221,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -239,8 +269,12 @@
 
           
 
+          
+
            parameter contains a value that is not a combination of <see
            cref="T:System.Security.Permissions.ReflectionPermissionFlag" />
+
+          
 
           
 
@@ -258,6 +292,8 @@
 
             
 
+            
+
              class with the specified access.</para
           >
         </summary>
@@ -268,8 +304,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.ReflectionPermissionFlag" />
+
+          
 
           
 
@@ -379,6 +419,8 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -386,6 +428,8 @@
               >For the XML encoding for this class, see the 
       <see
                cref="T:System.Security.Permissions.ReflectionPermission" />
+
+              
 
               
 
@@ -405,6 +449,8 @@
 
               
 
+              
+
                .</para
             >
           </block>
@@ -417,8 +463,12 @@
 
           
 
+          
+
            parameter is <see
            langword="null" />
+
+          
 
           
 
@@ -435,8 +485,12 @@
 
             
 
+            
+
              parameter is not a <see
              cref="T:System.Security.Permissions.ReflectionPermission" />
+
+            
 
             
 
@@ -453,6 +507,8 @@
 
             
 
+            
+
              parameter's version number is not valid.</para
           >
         </exception>
@@ -462,6 +518,8 @@
         </summary>
         <param name="esd">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -506,6 +564,8 @@
 
           
 
+          
+
            parameter is not <see
            langword="null" />
 
@@ -513,8 +573,12 @@
 
           
 
+          
+
            and is not an instance of <see
            cref="T:System.Security.Permissions.ReflectionPermission" />
+
+          
 
           
 
@@ -536,6 +600,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -580,6 +646,8 @@
 
           
 
+          
+
            parameter is not <see
            langword="null" />
 
@@ -587,8 +655,12 @@
 
           
 
+          
+
            and is not an instance of <see
            cref="T:System.Security.Permissions.ReflectionPermission" />
+
+          
 
           
 
@@ -610,6 +682,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -707,11 +781,15 @@
 
               
 
+              
+
                class page.</para
             >
             <para
               >This method overrides <see
                cref="M:System.Security.CodeAccessPermission.ToXml" qualify="true" />
+
+              
 
               
 
@@ -766,8 +844,12 @@
 
           
 
+          
+
           parameter is not <see
            langword="null" />
+
+          
 
           
 
@@ -780,6 +862,8 @@
 
           
 
+          
+
            .</exception
         >
         <remarks>
@@ -787,6 +871,8 @@
           <para
             >The result of a call to <see
              cref="M:System.Security.Permissions.ReflectionPermission.Union(System.Security.IPermission)" />
+
+            
 
             
 
@@ -805,6 +891,8 @@
         </returns>
         <param name="other">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

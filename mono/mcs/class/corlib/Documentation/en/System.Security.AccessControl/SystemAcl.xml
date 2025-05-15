@@ -58,6 +58,8 @@
 
             
 
+            
+
              class with the specified values.</para
           >
         </summary>
@@ -68,8 +70,12 @@
 
           
 
+          
+
           true if the new <see
            cref="T:System.Security.AccessControl.SystemAcl" />
+
+          
 
           
 
@@ -84,8 +90,12 @@
 
           
 
+          
+
           true if the new <see
            cref="T:System.Security.AccessControl.SystemAcl" />
+
+          
 
           
 
@@ -100,8 +110,12 @@
 
           
 
+          
+
           The number of Access Control Entries (ACEs) this <see
            cref="T:System.Security.AccessControl.SystemAcl" />
+
+          
 
           
 
@@ -142,6 +156,8 @@
 
             
 
+            
+
              object are cloned.</para
           >
         </remarks>
@@ -155,8 +171,12 @@
 
             
 
+            
+
              class with the specified values from the specified <see
              cref="T:System.Security.AccessControl.RawAcl" />
+
+            
 
             
 
@@ -172,8 +192,12 @@
 
           
 
+          
+
           true if the new <see
            cref="T:System.Security.AccessControl.SystemAcl" />
+
+          
 
           
 
@@ -188,8 +212,12 @@
 
           
 
+          
+
           true if the new <see
            cref="T:System.Security.AccessControl.SystemAcl" />
+
+          
 
           
 
@@ -204,6 +232,8 @@
 
           
 
+          
+
           The underlying <see
            cref="T:System.Security.AccessControl.RawAcl" />
 
@@ -211,8 +241,12 @@
 
           
 
+          
+
            object for the new <see
            cref="T:System.Security.AccessControl.SystemAcl" />
+
+          
 
           
 
@@ -255,6 +289,8 @@
 
             
 
+            
+
              class with the specified values.</para
           >
         </summary>
@@ -265,8 +301,12 @@
 
           
 
+          
+
           true if the new <see
            cref="T:System.Security.AccessControl.SystemAcl" />
+
+          
 
           
 
@@ -281,8 +321,12 @@
 
           
 
+          
+
           true if the new <see
            cref="T:System.Security.AccessControl.SystemAcl" />
+
+          
 
           
 
@@ -297,8 +341,12 @@
 
           
 
+          
+
           The revision level of the new <see
            cref="T:System.Security.AccessControl.SystemAcl" />
+
+          
 
           
 
@@ -313,8 +361,12 @@
 
           
 
+          
+
           The number of Access Control Entries (ACEs) this <see
            cref="T:System.Security.AccessControl.SystemAcl" />
+
+          
 
           
 
@@ -364,11 +416,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="auditFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -383,8 +439,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -399,6 +459,8 @@
 
           
 
+          
+
           The access mask for the new audit rule.</param
         >
         <param name="inheritanceFlags">
@@ -408,10 +470,14 @@
 
           
 
+          
+
           Flags that specify the inheritance properties of the new audit rule.</param
         >
         <param name="propagationFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -461,11 +527,15 @@
 
             
 
+            
+
              object. Use this method for directory object Access Control Lists (ACLs) when specifying the object type or the inherited object type for the new audit rule.</para
           >
         </summary>
         <param name="auditFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -480,8 +550,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -496,10 +570,14 @@
 
           
 
+          
+
           The access mask for the new audit rule.</param
         >
         <param name="inheritanceFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -514,10 +592,14 @@
 
           
 
+          
+
           Flags that specify the inheritance propagation properties for the new audit rule.</param
         >
         <param name="objectFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -530,8 +612,12 @@
 
           
 
+          
+
            and <paramref
            name="inheritedObjectType" />
+
+          
 
           
 
@@ -546,10 +632,14 @@
 
           
 
+          
+
           The identity of the class of objects to which the new audit rule applies.</param
         >
         <param name="inheritedObjectType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -599,6 +689,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -613,6 +705,8 @@
 
           
 
+          
+
           The type of audit rule to remove.</param
         >
         <param name="sid">
@@ -622,8 +716,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -638,6 +736,8 @@
 
           
 
+          
+
           The access mask for the rule to be removed.</param
         >
         <param name="inheritanceFlags">
@@ -647,10 +747,14 @@
 
           
 
+          
+
           Flags that specify the inheritance properties of the rule to be removed.</param
         >
         <param name="propagationFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -703,6 +807,8 @@
 
             
 
+            
+
              object. Use this method for directory object Access Control Lists (ACLs) when specifying the object type or the inherited object type.</para
           >
         </summary>
@@ -717,6 +823,8 @@
 
           
 
+          
+
           The type of audit rule to remove.</param
         >
         <param name="sid">
@@ -726,8 +834,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -742,10 +854,14 @@
 
           
 
+          
+
           The access mask for the rule to be removed.</param
         >
         <param name="inheritanceFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -760,10 +876,14 @@
 
           
 
+          
+
           Flags that specify the inheritance propagation properties for the rule to be removed.</param
         >
         <param name="objectFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -776,8 +896,12 @@
 
           
 
+          
+
            and <paramref
            name="inheritedObjectType" />
+
+          
 
           
 
@@ -792,10 +916,14 @@
 
           
 
+          
+
           The identity of the class of objects to which the removed audit control rule applies.</param
         >
         <param name="inheritedObjectType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -842,11 +970,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="auditFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -861,8 +993,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -877,6 +1013,8 @@
 
           
 
+          
+
           The access mask for the rule to be removed.</param
         >
         <param name="inheritanceFlags">
@@ -886,10 +1024,14 @@
 
           
 
+          
+
           Flags that specify the inheritance properties of the rule to be removed.</param
         >
         <param name="propagationFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -939,11 +1081,15 @@
 
             
 
+            
+
              object. Use this method for directory object Access Control Lists (ACLs) when specifying the object type or the inherited object type.</para
           >
         </summary>
         <param name="auditFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -958,8 +1104,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -974,10 +1124,14 @@
 
           
 
+          
+
           The access mask for the rule to be removed.</param
         >
         <param name="inheritanceFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -992,10 +1146,14 @@
 
           
 
+          
+
           Flags that specify the inheritance propagation properties for the rule to be removed.</param
         >
         <param name="objectFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1008,8 +1166,12 @@
 
           
 
+          
+
            and <paramref
            name="inheritedObjectType" />
+
+          
 
           
 
@@ -1024,10 +1186,14 @@
 
           
 
+          
+
           The identity of the class of objects to which the removed audit control rule applies.</param
         >
         <param name="inheritedObjectType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1073,6 +1239,8 @@
 
             
 
+            
+
              object and the specified audit condition.</para
           >
         </remarks>
@@ -1081,6 +1249,8 @@
           <para
             >Sets the specified audit rule for the specified <see
              cref="T:System.Security.Principal.SecurityIdentifier" />
+
+            
 
             
 
@@ -1096,6 +1266,8 @@
 
           
 
+          
+
           The audit condition to set.</param
         >
         <param name="sid">
@@ -1105,8 +1277,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -1121,6 +1297,8 @@
 
           
 
+          
+
           The access mask for the new audit rule.</param
         >
         <param name="inheritanceFlags">
@@ -1130,10 +1308,14 @@
 
           
 
+          
+
           Flags that specify the inheritance properties of the new audit rule.</param
         >
         <param name="propagationFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1182,6 +1364,8 @@
 
             
 
+            
+
              object and the specified audit condition.</para
           >
         </remarks>
@@ -1190,6 +1374,8 @@
           <para
             >Sets the specified audit rule for the specified <see
              cref="T:System.Security.Principal.SecurityIdentifier" />
+
+            
 
             
 
@@ -1205,6 +1391,8 @@
 
           
 
+          
+
           The audit condition to set.</param
         >
         <param name="sid">
@@ -1214,8 +1402,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -1230,10 +1422,14 @@
 
           
 
+          
+
           The access mask for the new audit rule.</param
         >
         <param name="inheritanceFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1248,10 +1444,14 @@
 
           
 
+          
+
           Flags that specify the inheritance propagation properties for the new audit rule.</param
         >
         <param name="objectFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1264,8 +1464,12 @@
 
           
 
+          
+
            and <paramref
            name="inheritedObjectType" />
+
+          
 
           
 
@@ -1280,10 +1484,14 @@
 
           
 
+          
+
           The identity of the class of objects to which the new audit rule applies.</param
         >
         <param name="inheritedObjectType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

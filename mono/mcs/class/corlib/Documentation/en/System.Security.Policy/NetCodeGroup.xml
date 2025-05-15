@@ -37,8 +37,12 @@
 
         
 
+        
+
          has the same merge semantics as that of <see
          cref="T:System.Security.Policy.UnionCodeGroup" />
+
+        
 
         
 
@@ -51,8 +55,12 @@
 
         
 
+        
+
          objects of all matching child code groups and the <see
          cref="T:System.Security.Policy.PolicyStatement" />
+
+        
 
         
 
@@ -65,8 +73,12 @@
 
         
 
+        
+
          evidence. However, <see
          cref="T:System.Security.Policy.NetCodeGroup" />
+
+        
 
         
 
@@ -79,8 +91,12 @@
 
         
 
+        
+
          that grants connect access to the site from which the code is run; <see
          cref="T:System.Security.Policy.UnionCodeGroup" />
+
+        
 
         
 
@@ -91,6 +107,8 @@
       <para
         >When a <see
          cref="T:System.Security.Policy.NetCodeGroup" />
+
+        
 
         
 
@@ -142,8 +160,12 @@
 
         
 
+        
+
          object with the appropriate <see
          cref="P:System.Security.Policy.CodeConnectAccess.Scheme" />
+
+        
 
         
 
@@ -156,8 +178,12 @@
 
         
 
+        
+
          property values to the <see
          cref="M:System.Security.Policy.NetCodeGroup.AddConnectAccess(System.String,System.Security.Policy.CodeConnectAccess)" />
+
+        
 
         
 
@@ -170,8 +196,12 @@
 
         
 
+        
+
          ("") as the scheme. You can also create a connection access rule that applies when there is no connection access rule with a matching scheme by specifying <see
          cref="F:System.Security.Policy.NetCodeGroup.AnyOtherOriginScheme" />
+
+        
 
         
 
@@ -214,6 +244,8 @@
           <para
             >When a <see
              cref="T:System.Security.Policy.NetCodeGroup" />
+
+            
 
             
 
@@ -268,11 +300,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="membershipCondition">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -308,8 +344,12 @@
 
             
 
+            
+
              method, you specify a scheme and an associated <see
              cref="T:System.Security.Policy.CodeConnectAccess" />
+
+            
 
             
 
@@ -322,8 +362,12 @@
 
             
 
+            
+
              objects that you add to the <see
              cref="T:System.Security.Policy.NetCodeGroup" />
+
+            
 
             
 
@@ -336,8 +380,12 @@
 
             
 
+            
+
              as the origin scheme are applied when the code's origin scheme is not present in its evidence, or is not a scheme recognized by the <see
              cref="T:System.Security.Policy.NetCodeGroup" />
+
+            
 
             
 
@@ -353,8 +401,12 @@
 
             
 
+            
+
              objects to use when the code's origin scheme does not match any of the schemes contained in the set of origin schemes added to the current <see
              cref="T:System.Security.Policy.NetCodeGroup" />
+
+            
 
             
 
@@ -367,11 +419,15 @@
 
             
 
+            
+
              value. </para
           >
           <para
             >The value of the <see
              cref="F:System.Security.Policy.NetCodeGroup.AbsentOriginScheme" />
+
+            
 
             
 
@@ -419,8 +475,12 @@
 
             
 
+            
+
              objects for the same <paramref
              name="origin scheme" />
+
+            
 
             
 
@@ -433,6 +493,8 @@
 
             
 
+            
+
              already has one or more associated <see
              cref="T:System.Security.Policy.CodeConnectAccess" />
 
@@ -440,8 +502,12 @@
 
             
 
+            
+
              objects, specifying null for <paramref
              name="connectAccess" />
+
+            
 
             
 
@@ -454,6 +520,8 @@
 
             
 
+            
+
              objects, specifying null for <paramref
              name="connectAccess" />
 
@@ -461,8 +529,12 @@
 
             
 
+            
+
              prevents code with an origin scheme that matches <paramref
              name="originScheme" />
+
+            
 
             
 
@@ -482,8 +554,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -498,8 +574,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Policy.CodeConnectAccess" />
+
+          
 
           
 
@@ -535,8 +615,12 @@
 
             
 
+            
+
              method, you specify a scheme and an associated <see
              cref="T:System.Security.Policy.CodeConnectAccess" />
+
+            
 
             
 
@@ -549,6 +633,8 @@
 
             
 
+            
+
              field to specify the <see
              cref="T:System.Security.Policy.CodeConnectAccess" />
 
@@ -556,8 +642,12 @@
 
             
 
+            
+
              objects that should be used for any scheme that is not explicitly contained in the set of origin schemes added to the current <see
              cref="T:System.Security.Policy.NetCodeGroup" />
+
+            
 
             
 
@@ -573,6 +663,8 @@
 
             
 
+            
+
              objects specified with the <see
              cref="F:System.Security.Policy.NetCodeGroup.AnyOtherOriginScheme" />
 
@@ -580,8 +672,12 @@
 
             
 
+            
+
              field are only used if the code's origin scheme does not match any of the schemes contained in the set of origin schemes added to the current <see
              cref="T:System.Security.Policy.NetCodeGroup" />
+
+            
 
             
 
@@ -597,8 +693,12 @@
 
             
 
+            
+
              objects to apply when the code's origin scheme is not available in its evidence or is not recognized, use the <see
              cref="F:System.Security.Policy.NetCodeGroup.AbsentOriginScheme" />
+
+            
 
             
 
@@ -609,6 +709,8 @@
           <para
             >The value of the <see
              cref="F:System.Security.Policy.NetCodeGroup.AnyOtherOriginScheme" />
+
+            
 
             
 
@@ -736,6 +838,8 @@
 
             
 
+            
+
              objects:</para
           >
           <list type="bullet">
@@ -748,8 +852,12 @@
 
                 
 
+                
+
                  and <see
                  cref="P:System.Security.Policy.CodeGroup.Description" />
+
+                
 
                 
 
@@ -767,6 +875,8 @@
 
                 
 
+                
+
                  property.</para
               >
             </item>
@@ -774,6 +884,8 @@
               <para
                 >The set of origin schemes and the associated <see
                  cref="T:System.Security.Policy.CodeConnectAccess" />
+
+                
 
                 
 
@@ -799,8 +911,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Policy.NetCodeGroup" />
+
+          
 
           
 
@@ -840,8 +956,12 @@
 
             
 
+            
+
              property value is the origin scheme, and the <see
              cref="P:System.Collections.DictionaryEntry.Value" />
+
+            
 
             
 
@@ -854,6 +974,8 @@
 
             
 
+            
+
              objects. If there are no associated <see
              cref="T:System.Security.Policy.CodeConnectAccess" />
 
@@ -861,8 +983,12 @@
 
             
 
+            
+
              objects, <see
              cref="P:System.Collections.DictionaryEntry.Value" />
+
+            
 
             
 
@@ -880,6 +1006,8 @@
           <para
             >A <see
              cref="T:System.Collections.DictionaryEntry" />
+
+            
 
             
 
@@ -982,6 +1110,8 @@
           <para
             >Gets the name of the <see
              cref="T:System.Security.NamedPermissionSet" />
+
+            
 
             
 
@@ -1098,6 +1228,8 @@
 
             
 
+            
+
              that consists of the permissions granted by the code group with optional attributes, or null if the code group does not apply (the membership condition does not match the specified evidence).</para
           >
         </returns>
@@ -1108,8 +1240,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Policy.Evidence" />
+
+          
 
           
 
@@ -1155,6 +1291,8 @@
         </returns>
         <param name="evidence">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

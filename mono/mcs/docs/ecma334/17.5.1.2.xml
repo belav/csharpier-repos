@@ -9,8 +9,12 @@
 
     
 
+    
+
      (<hyperlink
     >12.3.3</hyperlink>
+
+    
 
     
 
@@ -23,7 +27,7 @@
     <example
       >[Example: The example <code_example
       >
-<![CDATA[
+        <![CDATA[
 using System;  
 class Test  
 {  
@@ -45,9 +49,11 @@ class Test
 
       
 
+      
+
       produces the output <code_example
       >
-<![CDATA[
+        <![CDATA[
 i = 2, j = 1  
 ]]>
       </code_example>
@@ -61,7 +67,7 @@ i = 2, j = 1
 
       >[Example: In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 class A  
 {  
    string s;  
@@ -76,6 +82,8 @@ class A
 }  
 ]]>
       </code_example>
+
+      
 
       
 

@@ -33,8 +33,12 @@
 
         
 
+        
+
          class exposes an <see
          cref="M:System.Security.Cryptography.RSA.ExportParameters(System.Boolean)" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          structure. Understanding the contents of this structure requires familiarity with how the <see
          cref="T:System.Security.Cryptography.RSA" />
+
+        
 
         
 
@@ -67,8 +75,12 @@
 
         
 
+        
+
          and <math
         >q</math>
+
+        
 
         
 
@@ -81,8 +93,12 @@
 
         
 
+        
+
         . Because <math
         >p</math>
+
+        
 
         
 
@@ -95,8 +111,12 @@
 
         
 
+        
+
          are both prime numbers, the only factors of <math
         >n</math>
+
+        
 
         
 
@@ -109,6 +129,8 @@
 
         
 
+        
+
         , <math
         >q</math>
 
@@ -116,8 +138,12 @@
 
         
 
+        
+
         , and <math
         >n</math>
+
+        
 
         
 
@@ -133,8 +159,12 @@
 
         
 
+        
+
         , the count of numbers that are relatively prime to <math
         >n</math>
+
+        
 
         
 
@@ -147,8 +177,12 @@
 
         
 
+        
+
         , equals <math
         >(p - 1)(q - 1)</math>
+
+        
 
         
 
@@ -164,8 +198,12 @@
 
         
 
+        
+
         , which is relatively prime to the value you calculated. The public key is now represented as <math
         >{e, n}</math>
+
+        
 
         
 
@@ -181,6 +219,8 @@
 
         
 
+        
+
         , which is a number such that <math
         >(d)(e) mod (p - 1)(q - 1) = 1</math>
 
@@ -188,8 +228,12 @@
 
         
 
+        
+
         . In accordance with the Euclidean algorithm, the private key is now <math
         >{d, n}</math>
+
+        
 
         
 
@@ -205,8 +249,12 @@
 
         
 
+        
+
          to ciphertext <math
         >c</math>
+
+        
 
         
 
@@ -219,8 +267,12 @@
 
         
 
+        
+
         . Decryption would then be defined as <math
         >m = (c ^ d) mod n</math>
+
+        
 
         
 
@@ -241,11 +293,15 @@
 
         
 
+        
+
          on the RSA Laboratories Web site defines a format for RSA private keys.</para
       >
       <para
         >The following table summarizes the fields of the <see
          cref="T:System.Security.Cryptography.RSAParameters" />
+
+        
 
         
 
@@ -260,6 +316,8 @@
 
         
 
+        
+
         . </para
       >
       <list type="table">
@@ -268,6 +326,8 @@
             <term>
               <para>
                 <see cref="T:System.Security.Cryptography.RSAParameters" />
+
+                
 
                 
 
@@ -293,6 +353,8 @@
           <description>
             <para>
               <math>d</math>
+
+              
 
               
 
@@ -344,6 +406,8 @@
           <description>
             <para>
               <math>e</math>
+
+              
 
               
 
@@ -425,8 +489,12 @@
 
         
 
+        
+
         , it is computationally infeasible to calculate <math
         >d</math>
+
+        
 
         
 
@@ -439,8 +507,12 @@
 
         
 
+        
+
          into <math
         >p</math>
+
+        
 
         
 
@@ -453,8 +525,12 @@
 
         
 
+        
+
         . Therefore, any part of the key related to <math
         >d</math>
+
+        
 
         
 
@@ -467,8 +543,12 @@
 
         
 
+        
+
         , or <math
         >q</math>
+
+        
 
         
 
@@ -483,6 +563,8 @@
 
         
 
+        
+
          and ask for only the public key information, this is why you will receive only <see
          cref="F:System.Security.Cryptography.RSAParameters.Exponent" />
 
@@ -490,8 +572,12 @@
 
         
 
+        
+
          and <see
          cref="F:System.Security.Cryptography.RSAParameters.Modulus" />
+
+        
 
         
 
@@ -506,8 +592,12 @@
 
         
 
+        
+
          is not encrypted in any way, so you must be careful when you use it with the private key information. In fact, none of the fields that contain private key information can be serialized. If you try to serialize an <see
          cref="T:System.Security.Cryptography.RSAParameters" />
+
+        
 
         
 
@@ -521,6 +611,8 @@
       <para
         >Represents the standard parameters for the <see
          cref="T:System.Security.Cryptography.RSA" />
+
+        
 
         
 
@@ -556,6 +648,8 @@
 
             
 
+            
+
              algorithm.</para
           >
         </summary>
@@ -581,6 +675,8 @@
           <para
             >Represents the DP parameter for the <see
              cref="T:System.Security.Cryptography.RSA" />
+
+            
 
             
 
@@ -616,6 +712,8 @@
 
             
 
+            
+
              algorithm.</para
           >
         </summary>
@@ -641,6 +739,8 @@
           <para
             >Represents the Exponent parameter for the <see
              cref="T:System.Security.Cryptography.RSA" />
+
+            
 
             
 
@@ -676,6 +776,8 @@
 
             
 
+            
+
              algorithm.</para
           >
         </summary>
@@ -701,6 +803,8 @@
           <para
             >Represents the Modulus parameter for the <see
              cref="T:System.Security.Cryptography.RSA" />
+
+            
 
             
 
@@ -736,6 +840,8 @@
 
             
 
+            
+
              algorithm.</para
           >
         </summary>
@@ -761,6 +867,8 @@
           <para
             >Represents the Q parameter for the <see
              cref="T:System.Security.Cryptography.RSA" />
+
+            
 
             
 

@@ -40,8 +40,12 @@
 
             
 
+            
+
              contains cookies transmitted by the client to the server in the Cookie header. The collection accessible through <see
              cref="P:System.Web.HttpResponse.Cookies" />
+
+            
 
             
 
@@ -55,6 +59,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.HttpCookieCollection" />
+
+            
 
             
 
@@ -89,6 +95,8 @@
 
             
 
+            
+
              object is sent to the client.</para
           >
           <para
@@ -99,8 +107,12 @@
 
             
 
+            
+
              method allows duplicate cookies in the cookie collection. Use the <see
              cref="M:System.Web.HttpCookieCollection.Set(System.Web.HttpCookie)" />
+
+            
 
             
 
@@ -120,8 +132,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.HttpCookie" />
+
+          
 
           
 
@@ -196,11 +212,15 @@
 
             
 
+            
+
              beginning at the specified index of the array.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -235,6 +255,8 @@
 
             
 
+            
+
              item with the specified index from the cookie collection.</para
           >
         </summary>
@@ -248,8 +270,12 @@
 
             
 
+            
+
              specified by <paramref
              name="index" />
+
+            
 
             
 
@@ -260,6 +286,8 @@
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -301,8 +329,12 @@
 
             
 
+            
+
              specified by <paramref
              name="name" />
+
+            
 
             
 
@@ -313,6 +345,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -351,11 +385,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -435,6 +473,8 @@
 
             
 
+            
+
              does not exist in the collection, no exception is thrown.</para
           >
         </remarks>
@@ -444,6 +484,8 @@
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -477,6 +519,8 @@
 
             
 
+            
+
              method first checks to see if a cookie already exists in the collection and if so updates it. The <see
              cref="M:System.Web.HttpCookieCollection.Set(System.Web.HttpCookie)" />
 
@@ -484,8 +528,12 @@
 
             
 
+            
+
              method does not allow duplicate cookies in the cookie collection. To add duplicate cookies in the cookie collection, use the <see
              cref="M:System.Web.HttpCookieCollection.Add(System.Web.HttpCookie)" />
+
+            
 
             
 
@@ -505,8 +553,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.HttpCookie" />
+
+          
 
           
 

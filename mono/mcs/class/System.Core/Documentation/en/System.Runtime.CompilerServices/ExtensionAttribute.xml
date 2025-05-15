@@ -27,6 +27,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -39,12 +41,16 @@
 
         
 
+        
+
          modifier for the first parameter to create an extension method. The compiler automatically emits ExtensionAttribute for extension methods. For more information, see <format
          type="text/html">
           <a href="175ce3ff-9bbf-4e64-8421-faeb81a0bb51"
             >Extension Methods (C# Programming Guide)</a
           >
         </format>
+
+        
 
         
 
@@ -74,6 +80,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.CompilerServices.ExtensionAttribute" />
+
+            
 
             
 

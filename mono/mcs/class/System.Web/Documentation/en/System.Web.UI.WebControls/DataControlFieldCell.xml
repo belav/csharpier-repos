@@ -24,8 +24,12 @@
 
         
 
+        
+
          class is a strongly typed <see
          cref="T:System.Web.UI.WebControls.TableCell" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          object that contains the <see
          cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
+
+        
 
         
 
@@ -69,8 +81,12 @@
 
         
 
+        
+
          object using the <see
          cref="P:System.Web.UI.WebControls.DataControlFieldCell.ContainingField" />
+
+        
 
         
 
@@ -89,8 +105,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 
@@ -123,6 +143,8 @@
 
             
 
+            
+
              element defined by its base class to render the cell. The <see
              cref="T:System.Web.UI.WebControls.DataControlField" />
 
@@ -130,8 +152,12 @@
 
             
 
+            
+
              object passed in the <paramref
              name="containingField" />
+
+            
 
             
 
@@ -150,8 +176,12 @@
 
             
 
+            
+
              class, setting the specified <see
              cref="T:System.Web.UI.WebControls.DataControlField" />
+
+            
 
             
 
@@ -188,8 +218,12 @@
 
             
 
+            
+
              parameter is passed to the <see
              cref="T:System.Web.UI.WebControls.WebControl" />
+
+            
 
             
 
@@ -202,8 +236,12 @@
 
             
 
+            
+
              passed in the <paramref
              name="containingField" />
+
+            
 
             
 
@@ -222,8 +260,12 @@
 
             
 
+            
+
              class, setting the specified <see
              cref="T:System.Web.UI.WebControls.DataControlField" />
+
+            
 
             
 
@@ -239,8 +281,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriterTag" />
+
+          
 
           
 
@@ -253,8 +299,12 @@
 
           
 
+          
+
            class is <see
            cref="F:System.Web.UI.HtmlTextWriterTag.Td" />
+
+          
 
           
 
@@ -289,8 +339,12 @@
 
             
 
+            
+
              object might be affected by the various <see
              cref="T:System.Web.UI.WebControls.DataControlField" />
+
+            
 
             
 
@@ -303,6 +357,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.UI.WebControls.DataControlField.ControlStyle" />
 
@@ -310,8 +366,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Web.UI.WebControls.DataControlField.ShowHeader" />
+
+            
 
             
 
@@ -325,6 +385,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.UI.WebControls.DataControlField" />
+
+            
 
             
 

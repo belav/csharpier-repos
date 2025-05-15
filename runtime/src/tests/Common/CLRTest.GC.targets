@@ -20,7 +20,7 @@ WARNING:   When setting properties based on their current state (for example:
   <PropertyGroup>
     <GCBashScriptExitCode>0</GCBashScriptExitCode>
     <GCLongGCTestBashScript Condition="'$(IsLongRunningGCTest)' != 'true'">
-<![CDATA[
+      <![CDATA[
 # Long GC script
 if [ ! -z $RunningLongGCTests ]
 then
@@ -30,7 +30,7 @@ fi
         ]]>
     </GCLongGCTestBashScript>
     <GCLongGCTestBashScript Condition="'$(IsLongRunningGCTest)' == 'true'">
-<![CDATA[
+      <![CDATA[
 # Long GC script
 if [ -z $RunningLongGCTests ]
 then
@@ -40,7 +40,7 @@ fi
         ]]>
     </GCLongGCTestBashScript>
     <GCSimulatorTestBashScript Condition="'$(IsGCSimulatorTest)' != 'true'">
-<![CDATA[
+      <![CDATA[
 # GCSimulator script
 if [ ! -z $RunningGCSimulatorTests ]
 then
@@ -50,7 +50,7 @@ fi
         ]]>
     </GCSimulatorTestBashScript>
     <GCSimulatorTestBashScript Condition="'$(IsGCSimulatorTest)' == 'true'">
-<![CDATA[
+      <![CDATA[
 # GCSimulator script
 if [ -z $RunningGCSimulatorTests ]
 then
@@ -61,7 +61,7 @@ fi
     </GCSimulatorTestBashScript>
     <CLRTestBashPreCommands>$(CLRTestBashPreCommands);$(GCLongGCTestBashScript);$(GCSimulatorTestBashScript)</CLRTestBashPreCommands>
     <GCLongGCTestBatchScript Condition="'$(IsLongRunningGCTest)' != 'true'">
-<![CDATA[
+      <![CDATA[
 REM Long GC script
 if defined RunningLongGCTests (
   echo Skipping execution because this is not a long-running GC test.
@@ -70,7 +70,7 @@ if defined RunningLongGCTests (
         ]]>
     </GCLongGCTestBatchScript>
     <GCLongGCTestBatchScript Condition="'$(IsLongRunningGCTest)' == 'true'">
-<![CDATA[
+      <![CDATA[
 REM Long GC script
 if not defined RunningLongGCTests (
   echo Skipping execution because long-running GC tests are not enabled.
@@ -79,7 +79,7 @@ if not defined RunningLongGCTests (
         ]]>
     </GCLongGCTestBatchScript>
     <GCSimulatorTestBatchScript Condition="'$(IsGCSimulatorTest)' != 'true'">
-<![CDATA[
+      <![CDATA[
 REM GCSimulator script
 if defined RunningGCSimulatorTests (
   echo Skipping execution because this is not a GCSimulator test.
@@ -88,7 +88,7 @@ if defined RunningGCSimulatorTests (
         ]]>
     </GCSimulatorTestBatchScript>
     <GCSimulatorTestBatchScript Condition="'$(IsGCSimulatorTest)' == 'true'">
-<![CDATA[
+      <![CDATA[
 REM GCSimulator script
 if not defined RunningGCSimulatorTests (
   echo Skipping execution because GCSimulator tests are not enabled

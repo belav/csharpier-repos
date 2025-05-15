@@ -16,6 +16,8 @@
 
         
 
+        
+
          namespace contains classes that control and provide functionality for proxies. A proxy is a local object that is an image of a remote object. Proxies enable clients to access objects across remoting boundaries.</para
       >
     </summary>
@@ -29,8 +31,12 @@
 
         
 
+        
+
          namespace is the <see
          cref="T:System.Runtime.Remoting.Proxies.RealProxy" />
+
+        
 
         
 

@@ -23,6 +23,8 @@
 
         
 
+        
+
          values are used by the <see
          cref="P:System.Data.IDbCommand.UpdatedRowSource" />
 
@@ -30,8 +32,12 @@
 
         
 
+        
+
          property of <see
          cref="T:System.Data.IDbCommand" />
+
+        
 
         
 
@@ -46,6 +52,8 @@
             >[&lt;topic://cpconusingparameterswithdataadapters&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -79,6 +87,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -102,6 +112,8 @@
           <para
             >The data in the first returned row is mapped to the changed row in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -149,6 +161,8 @@
           <para
             >Output parameters are mapped to the changed row in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 

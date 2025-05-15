@@ -32,6 +32,8 @@
 
         
 
+        
+
          event occurs during XSLT processing when an xsl:message is specified in the style sheet.</para
       >
       <block subset="none" type="note">
@@ -43,6 +45,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Xml.Xsl.XsltArgumentList.XsltMessageEncountered" />
+
+        
 
         
 
@@ -73,6 +77,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Xsl.XsltMessageEncounteredEventArgs" />
+
+            
 
             
 

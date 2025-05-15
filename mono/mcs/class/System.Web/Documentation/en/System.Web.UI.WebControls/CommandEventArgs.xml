@@ -27,8 +27,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Web.UI.WebControls.ImageButton" />
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
          object contains data about the Command event that can be accessed in the event handler. Using the properties available in the <see
          cref="T:System.Web.UI.WebControls.CommandEventArgs" />
+
+        
 
         
 
@@ -61,8 +69,12 @@
 
         
 
+        
+
         , see the <see
          cref="Overload:System.Web.UI.WebControls.CommandEventArgs.#ctor" />
+
+        
 
         
 
@@ -75,6 +87,8 @@
          type="text/html">
           <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">[&lt;topic://cpconEventsOverview&gt;]</a>
         </format>
+
+        
 
         
 
@@ -110,8 +124,12 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.Web.UI.WebControls.CommandEventArgs" />
+
+            
 
             
 
@@ -122,6 +140,8 @@
           <para
             >When an instance of <see
              cref="T:System.Web.UI.WebControls.CommandEventArgs" />
+
+            
 
             
 
@@ -153,6 +173,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -165,6 +187,8 @@
                 <para
                   >The <paramref
                    name="e.CommandArgument" />
+
+                  
 
                   
 
@@ -186,8 +210,12 @@
 
             
 
+            
+
              class with another <see
              cref="T:System.Web.UI.WebControls.CommandEventArgs" />
+
+            
 
             
 
@@ -203,8 +231,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.CommandEventArgs" />
+
+          
 
           
 
@@ -241,11 +273,15 @@
 
             
 
+            
+
              class using the specified command name and argument.</para
           >
           <para
             >When an instance of <see
              cref="T:System.Web.UI.WebControls.CommandEventArgs" />
+
+            
 
             
 
@@ -277,6 +313,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -289,6 +327,8 @@
                 <para
                   >The value of the <paramref
                    name="argument" />
+
+                  
 
                   
 
@@ -310,6 +350,8 @@
 
             
 
+            
+
              class with the specified command name and argument.</para
           >
         </summary>
@@ -320,8 +362,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -353,8 +399,12 @@
 
             
 
+            
+
              can contain any string set by the programmer. The <see
              cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandArgument" />
+
+            
 
             
 
@@ -367,6 +417,8 @@
 
             
 
+            
+
              property by allowing you to provide any additional information for the command. For example, you can set the <see
              cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandName" />
 
@@ -374,8 +426,12 @@
 
             
 
+            
+
              property to Sort and set the <see
              cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandArgument" />
+
+            
 
             
 
@@ -412,8 +468,12 @@
 
             
 
+            
+
              property to determine the command to perform. The <see
              cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandName" />
+
+            
 
             
 

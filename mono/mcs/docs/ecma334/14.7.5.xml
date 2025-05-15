@@ -8,6 +8,8 @@
 
     
 
+    
+
     ) is applied to select a specific operator implementation. The operands are converted to the parameter types of the selected operator, and the type of the result is the return type of the operator. </paragraph
   >
   <paragraph
@@ -16,7 +18,7 @@
       <list_item
         > Integer subtraction: <code_example
         >
-<![CDATA[
+          <![CDATA[
 int operator -(int x, int y);  
 uint operator -(uint x, uint y);  
 long operator -(long x, long y);  
@@ -28,16 +30,20 @@ ulong operator -(ulong x, ulong y);
 
         
 
+        
+
         In a checked context, if the difference is outside the range of the result type, a System.OverflowException is thrown. In an unchecked context, overflows are not reported and any significant high-order bits outside the range of the result type are discarded. </list_item
       >
       <list_item
         > Floating-point subtraction: <code_example
         >
-<![CDATA[
+          <![CDATA[
 float operator -(float x, float y);  
 double operator -(double x, double y);  
 ]]>
         </code_example>
+
+        
 
         
 
@@ -52,10 +58,14 @@ double operator -(double x, double y);
 
           
 
+          
+
           0 +<infinity
            />
           <unicode>150</unicode>
           <infinity />
+
+          
 
           
 
@@ -72,8 +82,12 @@ double operator -(double x, double y);
 
           
 
+          
+
            +<infinity
            />
+
+          
 
           
 
@@ -89,6 +103,8 @@ double operator -(double x, double y);
 
           
 
+          
+
           y +0 +0 <unicode
           >150</unicode>
           <infinity />
@@ -97,8 +113,12 @@ double operator -(double x, double y);
 
           
 
+          
+
            +<infinity
            />
+
+          
 
           
 
@@ -113,6 +133,8 @@ double operator -(double x, double y);
 
           
 
+          
+
           0 <unicode
           >150</unicode>
 
@@ -120,8 +142,12 @@ double operator -(double x, double y);
 
           
 
+          
+
           y <unicode
           >150</unicode>
+
+          
 
           
 
@@ -135,8 +161,12 @@ double operator -(double x, double y);
 
           
 
+          
+
            +<infinity
            />
+
+          
 
           
 
@@ -152,11 +182,6 @@ double operator -(double x, double y);
 
           
 
-           +<infinity
-           />
-
-          
-
           
 
            +<infinity
@@ -166,8 +191,21 @@ double operator -(double x, double y);
 
           
 
+          
+
            +<infinity
            />
+
+          
+
+          
+
+          
+
+           +<infinity
+           />
+
+          
 
           
 
@@ -175,6 +213,8 @@ double operator -(double x, double y);
 
            NaN +<infinity
            />
+
+          
 
           
 
@@ -198,6 +238,8 @@ double operator -(double x, double y);
 
           
 
+          
+
            NaN NaN </table_line
         >
         <table_line>NaN NaN NaN NaN NaN NaN NaN </table_line>
@@ -205,10 +247,12 @@ double operator -(double x, double y);
       <list_item
         > Decimal subtraction: <code_example
         >
-<![CDATA[
+          <![CDATA[
 decimal operator {UNICODE_150}(decimal x, decimal y);  
 ]]>
         </code_example>
+
+        
 
         
 
@@ -221,12 +265,14 @@ decimal operator {UNICODE_150}(decimal x, decimal y);
 
         
 
+        
+
          format, a System.OverflowException is thrown. The scale of the result, before any rounding, is the larger of the scales of the two operands. Decimal subtraction is equivalent to using the subtraction operator of type System.Decimal. </list_item
       >
       <list_item
         > Enumeration subtraction. Every enumeration type implicitly provides the following predefined operator, where E is the enum type, and U is the underlying type of E: <code_example
         >
-<![CDATA[
+          <![CDATA[
 U operator -(E x, E y);  
 ]]>
         </code_example>
@@ -235,12 +281,16 @@ U operator -(E x, E y);
 
         
 
+        
+
         This operator is evaluated exactly as (U)((U)x  -(U)y). In other words, the operator computes the difference between the ordinal values of x and y, and the type of the result is the underlying type of the enumeration. <code_example
         >
-<![CDATA[
+          <![CDATA[
 E operator -(E x, U y);  
 ]]>
         </code_example>
+
+        
 
         
 
@@ -251,10 +301,12 @@ E operator -(E x, U y);
       <list_item
         > Delegate removal. Every delegate type implicitly provides the following predefined operator, where D is the delegate type: <code_example
         >
-<![CDATA[
+          <![CDATA[
 D operator -(D x, D y);  
 ]]>
         </code_example>
+
+        
 
         
 
@@ -267,8 +319,12 @@ D operator -(D x, D y);
 
         
 
+        
+
         ) having one or more entries, and the result is a new invocation list consisting of the first operand's list with the second operand's entries removed from it, provided the second operand's list is a proper contiguous subset of the first's. (For determining subset equality, corresponding entries are compared as for the delegate equality operator (<hyperlink
         >14.9.8</hyperlink>
+
+        
 
         
 
@@ -278,7 +334,7 @@ D operator -(D x, D y);
 
           >[Example: For example: <code_example
           >
-<![CDATA[
+            <![CDATA[
 using System;  
 delegate void D(int x);  
 class Test  
@@ -305,6 +361,8 @@ class Demo
 }  
 ]]>
           </code_example>
+
+          
 
           
 

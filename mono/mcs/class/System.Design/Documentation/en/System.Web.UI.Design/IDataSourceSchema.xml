@@ -17,8 +17,12 @@
 
         
 
+        
+
          interface to describe a custom data source at design time. For example, the <see
          cref="T:System.Web.UI.Design.DataSetSchema" />
+
+        
 
         
 
@@ -31,8 +35,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Web.UI.Design.TypeSchema" />
+
+        
 
         
 
@@ -45,11 +53,15 @@
 
         
 
+        
+
          interface.</para
       >
       <para
         >Classes that implement the <see
          cref="T:System.Web.UI.Design.IDataSourceSchema" />
+
+        
 
         
 
@@ -88,8 +100,12 @@
 
             
 
+            
+
              method returns an array of objects that implement the <see
              cref="T:System.Web.UI.Design.IDataSourceViewSchema" />
+
+            
 
             
 
@@ -102,6 +118,8 @@
 
             
 
+            
+
              method, each element of the array is a <see
              cref="T:System.Web.UI.Design.DataSetViewSchema" />
 
@@ -109,8 +127,12 @@
 
             
 
+            
+
              object that implements <see
              cref="T:System.Web.UI.Design.IDataSourceViewSchema" />
+
+            
 
             
 
@@ -128,6 +150,8 @@
           <para
             >An array of <see
              cref="T:System.Web.UI.Design.IDataSourceViewSchema" />
+
+            
 
             
 

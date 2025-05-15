@@ -24,6 +24,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -41,11 +43,15 @@
 
         
 
+        
+
          class represents the C14N XML canonicalization transform that describes the canonical form of an XML document.  This transform allows a signer to create a digest (used to create a digital signature) using the canonical form of an XML document.  A recipient can then verify the XML digital signature using the same canonical form of the XML document with the same transform.         </para
       >
       <para
         >Use the <see
          cref="T:System.Security.Cryptography.Xml.XmlDsigC14NTransform" />
+
+        
 
         
 
@@ -61,8 +67,12 @@
 
         
 
+        
+
          property, which is accessible from the <see
          cref="P:System.Security.Cryptography.Xml.SignedXml.SignedInfo" />
+
+        
 
         
 
@@ -75,8 +85,12 @@
 
         
 
+        
+
          property, which is accessible from the <see
          cref="P:System.Security.Cryptography.Xml.SignedXml.SignedInfo" />
+
+        
 
         
 
@@ -92,6 +106,8 @@
 
         
 
+        
+
          class is defined by the <see
          cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigC14NTransformUrl" />
 
@@ -99,8 +115,12 @@
 
         
 
+        
+
          field and the <see
          cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigCanonicalizationUrl" />
+
+        
 
         
 
@@ -143,6 +163,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -176,11 +198,15 @@
 
             
 
+            
+
              class with comments, if specified.</para
           >
         </summary>
         <param name="includeComments">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -227,6 +253,8 @@
 
             
 
+            
+
              object. </para
           >
         </summary>
@@ -235,6 +263,8 @@
           <para
             >The digest associated with an <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigC14NTransform" />
+
+            
 
             
 
@@ -250,8 +280,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.HashAlgorithm" />
+
+          
 
           
 
@@ -292,6 +326,8 @@
 
             
 
+            
+
              object that are suitable to be included as subelements of an XMLDSIG &lt;Transform&gt; element.</para
           >
         </summary>
@@ -300,6 +336,8 @@
           <para
             >A list of the XML nodes that represent the transform-specific content needed to describe the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigC14NTransform" />
+
+            
 
             
 
@@ -337,6 +375,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -350,6 +390,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -358,6 +400,8 @@
           <para
             >The output of the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigC14NTransform" />
+
+            
 
             
 
@@ -397,6 +441,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -410,8 +456,12 @@
 
             
 
+            
+
              object of type <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -430,8 +480,12 @@
 
             
 
+            
+
              object of type <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -447,8 +501,12 @@
 
           
 
+          
+
           The type of the output to return. <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -486,8 +544,12 @@
 
             
 
+            
+
              are <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -500,8 +562,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Xml.XmlNodeList" />
+
+            
 
             
 
@@ -520,8 +586,12 @@
 
             
 
+            
+
              method of the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigC14NTransform" />
+
+            
 
             
 
@@ -564,6 +634,8 @@
 
             
 
+            
+
              object has no inner XML elements.</para
           >
         </remarks>
@@ -572,6 +644,8 @@
           <para
             >Parses the specified <see
              cref="T:System.Xml.XmlNodeList" />
+
+            
 
             
 
@@ -587,6 +661,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlNodeList" />
 
@@ -594,8 +670,12 @@
 
           
 
+          
+
            object to load into the current <see
            cref="T:System.Security.Cryptography.Xml.XmlDsigC14NTransform" />
+
+          
 
           
 
@@ -634,6 +714,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -642,6 +724,8 @@
           <para
             >Loads the specified input into the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigC14NTransform" />
+
+            
 
             
 
@@ -657,8 +741,12 @@
 
           
 
+          
+
           The input to load into the current <see
            cref="T:System.Security.Cryptography.Xml.XmlDsigC14NTransform" />
+
+          
 
           
 
@@ -698,8 +786,12 @@
 
             
 
+            
+
              is the only valid output type for <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigC14NTransform" />
+
+            
 
             
 
@@ -718,8 +810,12 @@
 
             
 
+            
+
              methods of the current <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigC14NTransform" />
+
+            
 
             
 

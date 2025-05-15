@@ -43,8 +43,12 @@
 
         
 
+        
+
          class is a collection (see <see
          cref="T:System.Collections.ICollection" />
+
+        
 
         
 
@@ -62,8 +66,12 @@
 
             
 
+            
+
              is provided by the host, and can only be provided by hosts that have been granted the <see
              cref="F:System.Security.Permissions.SecurityPermissionFlag.ControlEvidence" />
+
+            
 
             
 
@@ -76,8 +84,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Security.Policy.Site" />
+
+            
 
             
 
@@ -90,12 +102,16 @@
 
             
 
+            
+
              evidence. Signatures refer to software publisher (AuthentiCode X.509v3 signature) and strong name identities. Both kinds of digital signature-based identity are built into the assembly, but must be validated and passed to policy by the host; when loaded, the security system verifies the signature. The system then creates the appropriate evidence and passes it to policy only if the corresponding signature is valid.</para
           >
         </item>
         <item>
           <para>
             <paramref name="Assembly evidence" />
+
+            
 
             
 
@@ -138,6 +154,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -174,6 +192,8 @@
 
             
 
+            
+
              class from a shallow copy of an existing one.</para
           >
         </summary>
@@ -184,8 +204,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Policy.Evidence" />
+
+          
 
           
 
@@ -232,6 +256,8 @@
 
             
 
+            
+
              class from multiple sets of host and assembly evidence.</para
           >
         </summary>
@@ -242,10 +268,14 @@
 
           
 
+          
+
           The host evidence from which to create the new instance. </param
         >
         <param name="assemblyEvidence">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -297,6 +327,8 @@
 
           
 
+          
+
           Any evidence object. </param
         >
       </Docs>
@@ -343,6 +375,8 @@
 
           
 
+          
+
           Any evidence object. </param
         >
       </Docs>
@@ -373,6 +407,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="M:System.Security.Policy.Evidence.Clear" />
+
+            
 
             
 
@@ -423,6 +459,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -433,10 +471,14 @@
 
           
 
+          
+
           The target array to which to copy evidence objects. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -532,6 +574,8 @@
 
             
 
+            
+
              method.</para
           >
         </returns>
@@ -577,8 +621,12 @@
 
             
 
+            
+
              method and the <see
              cref="M:System.Security.Policy.Evidence.AddAssembly(System.Object)" />
+
+            
 
             
 
@@ -641,6 +689,8 @@
           <para
             >An enumerator for evidence added by the <see
              cref="M:System.Security.Policy.Evidence.AddHost(System.Object)" />
+
+            
 
             
 
@@ -760,6 +810,8 @@
 
           
 
+          
+
           The evidence set to be merged into the current evidence set. </param
         >
       </Docs>
@@ -798,6 +850,8 @@
 
             
 
+            
+
              method can be confirmed using the <see
              cref="M:System.Security.Policy.Evidence.GetAssemblyEnumerator" />
 
@@ -805,8 +859,12 @@
 
             
 
+            
+
              method and the <see
              cref="M:System.Security.Policy.Evidence.GetHostEnumerator" />
+
+            
 
             
 
@@ -821,6 +879,8 @@
         </summary>
         <param name="t">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

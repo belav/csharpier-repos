@@ -31,8 +31,12 @@
 
         
 
+        
+
          namespace are supported on Windows 7, Windows Vista SP2, and Windows Server 2008. However, the only public implementations of client and server WebSockets are supported on Windows 8 and Windows Server 2012. The class elements in the <see
          cref="N:System.Net.WebSockets" />
+
+        
 
         
 
@@ -66,6 +70,8 @@
           <para
             >Creates an instance of the <see
              cref="T:System.Net.WebSockets.ClientWebSocket" />
+
+            
 
             
 
@@ -143,8 +149,12 @@
 
             
 
+            
+
              object will complete after the <see
              cref="T:System.Net.WebSockets.ClientWebSocket" />
+
+            
 
             
 
@@ -163,6 +173,8 @@
 
             
 
+            
+
              instance as an asynchronous operation.</para
           >
         </summary>
@@ -171,6 +183,8 @@
           <para
             >Returns <see
              cref="T:System.Threading.Tasks.Task" />
+
+            
 
             
 
@@ -187,6 +201,8 @@
 
           
 
+          
+
           The WebSocket close status.</param
         >
         <param name="statusDescription">
@@ -196,10 +212,14 @@
 
           
 
+          
+
           A description of the close status.</param
         >
         <param name="cancellationToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -249,8 +269,12 @@
 
             
 
+            
+
               object will complete after the output on the <see
              cref="T:System.Net.WebSockets.ClientWebSocket" />
+
+            
 
             
 
@@ -269,6 +293,8 @@
 
             
 
+            
+
              instance as an asynchronous operation.</para
           >
         </summary>
@@ -277,6 +303,8 @@
           <para
             >Returns <see
              cref="T:System.Threading.Tasks.Task" />
+
+            
 
             
 
@@ -293,6 +321,8 @@
 
           
 
+          
+
           The WebSocket close status.</param
         >
         <param name="statusDescription">
@@ -302,10 +332,14 @@
 
           
 
+          
+
           A description of the close status.</param
         >
         <param name="cancellationToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -344,6 +378,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -370,6 +406,8 @@
           <para
             >Gets a description of the reason why the <see
              cref="T:System.Net.WebSockets.ClientWebSocket" />
+
+            
 
             
 
@@ -419,6 +457,8 @@
 
             
 
+            
+
               method initiates the WebSocket handshake with a remote network destination, and then negotiates the sub-protocol.</para
           >
           <para>For plain WebSocket connections, use the ws:// scheme in the uri. For secure WebSocket connections over TLS/SSL, use the wss:// scheme.</para>
@@ -430,8 +470,12 @@
 
             
 
+            
+
               object will complete after the connect request on the <see
              cref="T:System.Net.WebSockets.ClientWebSocket" />
+
+            
 
             
 
@@ -454,6 +498,8 @@
 
             
 
+            
+
             .</para
           >
           <para>The task object representing the asynchronous operation.</para>
@@ -465,10 +511,14 @@
 
           
 
+          
+
           The URI of the WebSocket server to connect to.</param
         >
         <param name="cancellationToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -504,6 +554,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -533,6 +585,8 @@
           <para
             >Gets the WebSocket options for the <see
              cref="T:System.Net.WebSockets.ClientWebSocket" />
+
+            
 
             
 
@@ -574,8 +628,12 @@
 
             
 
+            
+
              object will complete after the receive request on the <see
              cref="T:System.Net.WebSockets.ClientWebSocket" />
+
+            
 
             
 
@@ -594,6 +652,8 @@
 
             
 
+            
+
              as an asynchronous operation.</para
           >
         </summary>
@@ -602,6 +662,8 @@
           <para
             >Returns <see
              cref="T:System.Threading.Tasks.Task`1" />
+
+            
 
             
 
@@ -618,10 +680,14 @@
 
           
 
+          
+
           The buffer to receive the response.</param
         >
         <param name="cancellationToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -664,8 +730,12 @@
 
             
 
+            
+
               object will complete after the send request on the <see
              cref="T:System.Net.WebSockets.ClientWebSocket" />
+
+            
 
             
 
@@ -684,6 +754,8 @@
 
             
 
+            
+
              as an asynchronous operation.</para
           >
         </summary>
@@ -692,6 +764,8 @@
           <para
             >Returns <see
              cref="T:System.Threading.Tasks.Task" />
+
+            
 
             
 
@@ -708,10 +782,14 @@
 
           
 
+          
+
           The buffer containing the message to be sent.</param
         >
         <param name="messageType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -726,10 +804,14 @@
 
           
 
+          
+
           Specifies whether this is the final asynchronous send. Set to true if this is the final send; false otherwise.</param
         >
         <param name="cancellationToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -768,6 +850,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -791,6 +875,8 @@
           <para
             >Gets the supported WebSocket sub-protocol for the <see
              cref="T:System.Net.WebSockets.ClientWebSocket" />
+
+            
 
             
 

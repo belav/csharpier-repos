@@ -34,8 +34,12 @@
 
         
 
+        
+
          interface is the base interface for classes in the <see
          cref="N:System.Collections.Generic" />
+
+        
 
         
 
@@ -51,8 +55,12 @@
 
         
 
+        
+
          interface extends <see
          cref="T:System.Collections.Generic.IEnumerable`1" />
+
+        
 
         
 
@@ -65,8 +73,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Collections.Generic.IList`1" />
+
+        
 
         
 
@@ -79,8 +91,12 @@
 
         
 
+        
+
         . A <see
          cref="T:System.Collections.Generic.IDictionary`2" />
+
+        
 
         
 
@@ -93,6 +109,8 @@
 
         
 
+        
+
          class. A <see
          cref="T:System.Collections.Generic.IList`1" />
 
@@ -100,8 +118,12 @@
 
         
 
+        
+
          implementation is a collection of values, and its members can be accessed by index, like the <see
          cref="T:System.Collections.Generic.List`1" />
+
+        
 
         
 
@@ -117,6 +139,8 @@
 
         
 
+        
+
          interface nor the <see
          cref="T:System.Collections.Generic.IList`1" />
 
@@ -124,8 +148,12 @@
 
         
 
+        
+
          interface meet the requirements of the required collection, derive the new collection class from the <see
          cref="T:System.Collections.Generic.ICollection`1" />
+
+        
 
         
 
@@ -198,6 +226,8 @@
 
             
 
+            
+
              must be set to 0, and references to other objects from elements of the collection must be released.</para
           >
         </remarks>
@@ -206,6 +236,8 @@
           <para
             >Removes all items from the <see
              cref="T:System.Collections.Generic.ICollection`1" />
+
+            
 
             
 
@@ -245,8 +277,12 @@
 
           
 
+          
+
           , if item is found in the current collection; otherwise, <see
            langword="false" />
+
+          
 
           
 
@@ -287,6 +323,8 @@
 
           
 
+          
+
            that is the destination of the elements copied from the current instance.</param
         >
         <param name="arrayIndex">To be added.</param>
@@ -294,6 +332,8 @@
           <para
             >Copies the elements of the current collection to a <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -313,8 +353,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -324,6 +368,8 @@
         >
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="index" />
+
+          
 
           
 
@@ -339,6 +385,8 @@
 
             
 
+            
+
              has more than one dimension.</para
           >
           <para>-or-</para>
@@ -349,8 +397,12 @@
 
             
 
+            
+
              is greater than or equal to <paramref
              name="array" />
+
+            
 
             
 
@@ -367,8 +419,12 @@
 
             
 
+            
+
              and the <see
              cref="P:System.Collections.ICollection.Count" />
+
+            
 
             
 
@@ -381,12 +437,16 @@
 
             
 
+            
+
             .Length.</para
           >
           <para>-or-</para>
           <para
             >Type <see
              langword="T" />
+
+            
 
             
 
@@ -418,6 +478,8 @@
 
             
 
+            
+
              that indicates the number of elements contained in the current
    instance.</para
           >
@@ -431,6 +493,8 @@
           <para
             >Gets the number of elements contained in the <see
              cref="T:System.Collections.Generic.ICollection`1" />
+
+            
 
             
 
@@ -461,8 +525,12 @@
 
             
 
+            
+
             , if the current collection is read-only; otherwise, <see
              langword="false" />
+
+            
 
             
 
@@ -481,6 +549,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Collections.Generic.ICollection`1" />
+
+            
 
             
 
@@ -520,8 +590,12 @@
 
           
 
+          
+
           , if <paramref
            name="item" />
+
+          
 
           
 
@@ -534,8 +608,12 @@
 
           
 
+          
+
            if <paramref
            name="item" />
+
+          
 
           
 
@@ -547,6 +625,8 @@
           <para
             >If <paramref
              name="item" />
+
+            
 
             
 

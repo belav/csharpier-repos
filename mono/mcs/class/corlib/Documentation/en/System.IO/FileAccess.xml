@@ -48,12 +48,16 @@
 
         
 
+        
+
         . For an example of reading text from a file, see <format
          type="text/html">
           <a href="ED180BAA-DFC6-4C69-A725-46E87EDAFB27"
             >[&lt;topic://cpconreadingtextfromfile&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -70,11 +74,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >A FileAccess parameter is specified in many of the constructors for <see
          cref="T:System.IO.File" />
+
+        
 
         
 
@@ -87,8 +95,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.IO.FileStream" />
+
+        
 
         
 

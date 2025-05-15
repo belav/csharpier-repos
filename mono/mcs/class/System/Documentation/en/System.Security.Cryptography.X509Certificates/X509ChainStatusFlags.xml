@@ -33,8 +33,12 @@
 
         
 
+        
+
          structure and the <see
          cref="P:System.Security.Cryptography.X509Certificates.X509Chain.ChainStatus" />
+
+        
 
         
 

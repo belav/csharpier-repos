@@ -24,11 +24,15 @@
 
         
 
+        
+
          interface to search WSDL information exposed by a particular endpoint for custom policy assertions about endpoint capabilities or requirements. Typically, a policy importer searches for a specific assertion and either inserts a binding element, configures a binding element, or modifies the contract to support the requirements of the assertion. </para
       >
       <para
         >Unlike its counterpart, <see
          cref="T:System.ServiceModel.Description.IPolicyExportExtension" />
+
+        
 
         
 
@@ -41,6 +45,8 @@
 
         
 
+        
+
          does not require implementation by a <see
          cref="T:System.ServiceModel.Channels.BindingElement" />
 
@@ -48,8 +54,12 @@
 
         
 
+        
+
          object; you can load it using the client configuration section shown in the Examples section or programmatically by adding it to the <see
          cref="T:System.ServiceModel.Description.WsdlImporter" />
+
+        
 
         
 
@@ -65,8 +75,12 @@
 
         
 
+        
+
          method, a <see
          cref="T:System.ServiceModel.Description.MetadataImporter" />
+
+        
 
         
 
@@ -79,8 +93,12 @@
 
         
 
+        
+
         . Typically the <see
          cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+
+        
 
         
 
@@ -91,6 +109,8 @@
       <para
         >An <see
          cref="T:System.ServiceModel.Description.IPolicyImportExtension" />
+
+        
 
         
 
@@ -108,6 +128,8 @@
 
             
 
+            
+
             , <see
              cref="M:System.ServiceModel.Description.PolicyConversionContext.GetMessageBindingAssertions(System.ServiceModel.Description.MessageDescription)" />
 
@@ -115,8 +137,12 @@
 
             
 
+            
+
             , or <see
              cref="M:System.ServiceModel.Description.PolicyConversionContext.GetOperationBindingAssertions(System.ServiceModel.Description.OperationDescription)" />
+
+            
 
             
 
@@ -134,6 +160,8 @@
 
             
 
+            
+
              method locates, returns, and removes the assertion in one step.</para
           >
         </item>
@@ -146,6 +174,8 @@
 
             
 
+            
+
              to the <see
              cref="P:System.ServiceModel.Description.PolicyConversionContext.BindingElements" />
 
@@ -153,8 +183,12 @@
 
             
 
+            
+
              property or by modifying the <see
              cref="P:System.ServiceModel.Description.PolicyConversionContext.Contract" />
+
+            
 
             
 
@@ -176,8 +210,12 @@
 
         
 
+        
+
          implementations must implement their own <see
          cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+
+        
 
         
 
@@ -193,8 +231,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.ServiceModel.Description.IWsdlImportExtension" />
+
+        
 
         
 
@@ -210,6 +252,8 @@
               >ServiceModel Metadata Utility Tool (Svcutil.exe)</a
             >
           </format>
+
+          
 
           
 
@@ -258,8 +302,12 @@
 
             
 
+            
+
              method, a <see
              cref="T:System.ServiceModel.Description.MetadataImporter" />
+
+            
 
             
 
@@ -272,8 +320,12 @@
 
             
 
+            
+
             . Typically the <see
              cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+
+            
 
             
 
@@ -284,6 +336,8 @@
           <para
             >An <see
              cref="T:System.ServiceModel.Description.IPolicyImportExtension" />
+
+            
 
             
 
@@ -301,6 +355,8 @@
 
                 
 
+                
+
                 , <see
                  cref="M:System.ServiceModel.Description.PolicyConversionContext.GetMessageBindingAssertions(System.ServiceModel.Description.MessageDescription)" />
 
@@ -308,8 +364,12 @@
 
                 
 
+                
+
                 , or <see
                  cref="M:System.ServiceModel.Description.PolicyConversionContext.GetOperationBindingAssertions(System.ServiceModel.Description.OperationDescription)" />
+
+                
 
                 
 
@@ -327,6 +387,8 @@
 
                 
 
+                
+
                  method locates, returns, and removes the assertion in one step.</para
               >
             </item>
@@ -339,6 +401,8 @@
 
                 
 
+                
+
                  to the <see
                  cref="P:System.ServiceModel.Description.PolicyConversionContext.BindingElements" />
 
@@ -346,8 +410,12 @@
 
                 
 
+                
+
                  property or by modifying the <see
                  cref="P:System.ServiceModel.Description.PolicyConversionContext.Contract" />
+
+                
 
                 
 
@@ -370,8 +438,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.MetadataImporter" />
+
+          
 
           
 
@@ -386,8 +458,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+
+          
 
           
 

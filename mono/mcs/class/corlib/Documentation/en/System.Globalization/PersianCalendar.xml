@@ -31,10 +31,14 @@
 
           
 
+          
+
            class and the other calendar classes in the .NET Framework, see <format
            type="text/html">
             <a href="0c1534e5-979b-4c8a-a588-1c24301aefb3">Working with Calendars</a>
           </format>
+
+          
 
           
 
@@ -57,11 +61,15 @@
 
         
 
+        
+
          object to calculate dates in the Persian calendar or convert Persian dates to and from Gregorian dates. </para
       >
       <para
         >Your application should not use a <see
          cref="T:System.Globalization.PersianCalendar" />
+
+        
 
         
 
@@ -74,8 +82,12 @@
 
         
 
+        
+
          property and must be one of the calendars returned by the <see
          cref="P:System.Globalization.CultureInfo.OptionalCalendars" />
+
+        
 
         
 
@@ -88,8 +100,12 @@
 
         
 
+        
+
          class is not an optional calendar for any culture supported by the <see
          cref="T:System.Globalization.CultureInfo" />
+
+        
 
         
 
@@ -124,6 +140,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Globalization.PersianCalendar" />
+
+            
 
             
 
@@ -167,8 +185,12 @@
 
             
 
+            
+
              property of the returned <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -181,8 +203,12 @@
 
             
 
+            
+
             . You can preserve the <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -195,8 +221,12 @@
 
             
 
+            
+
              parameter by calling the <see
              cref="M:System.DateTime.SpecifyKind(System.DateTime,System.DateTimeKind)" />
+
+            
 
             
 
@@ -216,8 +246,12 @@
 
             
 
+            
+
              object that is offset the specified number of months from the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -236,6 +270,8 @@
 
             
 
+            
+
              object that represents the date yielded by adding the number of months specified by the <paramref
              name="months" />
 
@@ -243,8 +279,12 @@
 
             
 
+            
+
              parameter to the date specified by the <paramref
              name="time" />
+
+            
 
             
 
@@ -260,8 +300,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -271,6 +315,8 @@
         >
         <param name="months">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -313,8 +359,12 @@
 
             
 
+            
+
              property of the returned <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -327,8 +377,12 @@
 
             
 
+            
+
             . You can preserve the <see
              cref="P:System.DateTime.Kind" />
+
+            
 
             
 
@@ -341,8 +395,12 @@
 
             
 
+            
+
              parameter by calling the <see
              cref="M:System.DateTime.SpecifyKind(System.DateTime,System.DateTimeKind)" />
+
+            
 
             
 
@@ -362,8 +420,12 @@
 
             
 
+            
+
              object that is offset the specified number of years from the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -382,8 +444,12 @@
 
             
 
+            
+
              object that results from adding the specified number of years to the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -399,8 +465,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -410,6 +480,8 @@
         >
         <param name="years">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -473,6 +545,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -508,6 +582,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -516,6 +592,8 @@
           <para
             >An integer from 1 through 31 that represents the day of the month in the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -531,8 +609,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -575,6 +657,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -588,8 +672,12 @@
 
             
 
+            
+
              value that represents the day of the week in the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -605,8 +693,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -646,6 +738,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -654,6 +748,8 @@
           <para
             >An integer from 1 through 366 that represents the day of the year in the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -669,8 +765,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -720,10 +820,14 @@
 
           
 
+          
+
           An integer from 1 through 9378 that represents the year. </param
         >
         <param name="month">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -736,8 +840,12 @@
 
           
 
+          
+
            is not 9378, or 1 through 10 if <paramref
            name="year" />
+
+          
 
           
 
@@ -747,6 +855,8 @@
         >
         <param name="era">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -795,10 +905,14 @@
 
           
 
+          
+
           An integer from 1 through 9378 that represents the year. </param
         >
         <param name="era">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -838,6 +952,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -846,6 +962,8 @@
           <para
             >Always returns <see
              cref="F:System.Globalization.PersianCalendar.PersianEra" />
+
+            
 
             
 
@@ -861,8 +979,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -910,10 +1032,14 @@
 
           
 
+          
+
           An integer from 1 through 9378 that represents the year to convert. </param
         >
         <param name="era">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -953,6 +1079,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -961,6 +1089,8 @@
           <para
             >An integer from 1 through 12 that represents the month in the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -976,8 +1106,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -1025,6 +1159,8 @@
 
             
 
+            
+
              parameter is 9378; otherwise, always returns 12.</para
           >
         </returns>
@@ -1035,10 +1171,14 @@
 
           
 
+          
+
           An integer from 1 through 9378 that represents the year. </param
         >
         <param name="era">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1078,6 +1218,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1086,6 +1228,8 @@
           <para
             >An integer from 1 through 9378 that represents the year in the specified <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -1101,8 +1245,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -1156,10 +1304,14 @@
 
           
 
+          
+
           An integer from 1 through 9378 that represents the year. </param
         >
         <param name="month">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1172,8 +1324,12 @@
 
           
 
+          
+
            is not 9378, or 1 through 10 if <paramref
            name="year" />
+
+          
 
           
 
@@ -1188,10 +1344,14 @@
 
           
 
+          
+
           An integer from 1 through 31 that represents the day. </param
         >
         <param name="era">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1240,11 +1400,15 @@
 
             
 
+            
+
              class does not support the notion of a leap month.</para
           >
         </returns>
         <param name="year">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1259,8 +1423,12 @@
 
           
 
+          
+
           An integer that represents the month and ranges from 1 through 12 if <paramref
            name="year" />
+
+          
 
           
 
@@ -1273,10 +1441,14 @@
 
           
 
+          
+
            is 9378.</param
         >
         <param name="era">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1322,10 +1494,14 @@
 
           
 
+          
+
           An integer from 1 through 9378 that represents the year. </param
         >
         <param name="era">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1363,6 +1539,8 @@
           <para
             >Gets the latest date and time supported by the <see
              cref="T:System.Globalization.PersianCalendar" />
+
+            
 
             
 
@@ -1406,6 +1584,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -1430,6 +1610,8 @@
           <para
             >The value of <see
              cref="F:System.Globalization.PersianCalendar.PersianEra" />
+
+            
 
             
 
@@ -1483,6 +1665,8 @@
 
             
 
+            
+
               method is useful because it can convert any date in the current calendar to a Gregorian calendar date. The Gregorian date can subsequently be used, for example, to compare dates in different calendars or create an equivalent date in a particular calendar.</para
           >
         </remarks>
@@ -1491,6 +1675,8 @@
           <para
             >Returns a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -1509,11 +1695,15 @@
 
             
 
+            
+
              object that is set to the specified date and time in the current era.</para
           >
         </returns>
         <param name="year">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1528,10 +1718,14 @@
 
           
 
+          
+
           An integer from 1 through 12 that represents the month. </param
         >
         <param name="day">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1546,10 +1740,14 @@
 
           
 
+          
+
           An integer from 0 through 23 that represents the hour. </param
         >
         <param name="minute">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1564,6 +1762,8 @@
 
           
 
+          
+
           An integer from 0 through 59 that represents the second. </param
         >
         <param name="millisecond">
@@ -1573,10 +1773,14 @@
 
           
 
+          
+
           An integer from 0 through 999 that represents the millisecond. </param
         >
         <param name="era">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1615,8 +1819,12 @@
 
             
 
+            
+
              parameter to a four-digit year representation using the <see
              cref="P:System.Globalization.PersianCalendar.TwoDigitYearMax" />
+
+            
 
             
 
@@ -1631,6 +1839,8 @@
 
             
 
+            
+
              supports either a two-digit year or a four-digit year. Passing a two-digit year value (less than 100) causes the method to convert the value to a four-digit value according to the <see
              cref="P:System.Globalization.PersianCalendar.TwoDigitYearMax" />
 
@@ -1638,8 +1848,12 @@
 
             
 
+            
+
              value representing the appropriate century. If the application supplies a four-digit year value that is within the supported calendar range to <see
              cref="M:System.Globalization.PersianCalendar.ToFourDigitYear(System.Int32)" />
+
+            
 
             
 
@@ -1662,11 +1876,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="year">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1701,8 +1919,12 @@
 
             
 
+            
+
             . The <see
              cref="T:System.Globalization.PersianCalendar" />
+
+            
 
             
 

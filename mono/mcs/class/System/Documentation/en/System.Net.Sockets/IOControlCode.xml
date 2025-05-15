@@ -24,8 +24,12 @@
 
         
 
+        
+
          enumeration provides named values for specifying socket operational modes. These values are the control codes passed to the Windows Sockets 2 (Winsock 2) <unmanagedCodeEntityReference
         >WSAIoctl</unmanagedCodeEntityReference>
+
+        
 
         
 
@@ -39,6 +43,8 @@
       <para
         >Specifies the IO control codes supported by the <see
          cref="M:System.Net.Sockets.Socket.IOControl(System.Int32,System.Byte[],System.Byte[])" />
+
+        
 
         
 
@@ -153,6 +159,8 @@
           <para
             >Sort the structure returned by the <see
              cref="F:System.Net.Sockets.IOControlCode.AddressListQuery" />
+
+            
 
             
 
@@ -330,6 +338,8 @@
           <para
             >Return a SOCKADDR structure that contains the broadcast address for the address family of the current socket. The returned address can be used with the <see
              cref="Overload:System.Net.Sockets.Socket.SendTo" />
+
+            
 
             
 
@@ -617,6 +627,8 @@
 
             
 
+            
+
             , the socket type must be <see
              cref="F:System.Net.Sockets.SocketType.Raw" />
 
@@ -624,8 +636,12 @@
 
             
 
+            
+
             , and the protocol type must be <see
              cref="F:System.Net.Sockets.ProtocolType.IP" />
+
+            
 
             
 
@@ -661,6 +677,8 @@
 
             
 
+            
+
             , the socket type must be <see
              cref="F:System.Net.Sockets.SocketType.Raw" />
 
@@ -668,8 +686,12 @@
 
             
 
+            
+
             , and the protocol type must be <see
              cref="F:System.Net.Sockets.ProtocolType.Igmp" />
+
+            
 
             
 
@@ -705,6 +727,8 @@
 
             
 
+            
+
             , the socket type must be <see
              cref="F:System.Net.Sockets.SocketType.Raw" />
 
@@ -712,8 +736,12 @@
 
             
 
+            
+
             , and the protocol type must be <see
              cref="F:System.Net.Sockets.ProtocolType.Udp" />
+
+            
 
             
 

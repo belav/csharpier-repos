@@ -29,6 +29,8 @@
 
           
 
+          
+
            class.</para
         >
       </block>
@@ -40,10 +42,14 @@
 
         
 
+        
+
          class converts tracing and debugging information into an XML-encoded text stream. The description of the XML output is shown in the tables that follow. You can use the <see
          cref="http://go.microsoft.com/fwlink/p/?LinkId=240129"
           >Service Trace Viewer Tool (SvcTraceViewer.exe)</see
         >
+
+        
 
         
 
@@ -59,8 +65,12 @@
 
         
 
+        
+
          through the application configuration file and then use the configured <see
          cref="T:System.Diagnostics.XmlWriterTraceListener" />
+
+        
 
         
 
@@ -73,11 +83,15 @@
 
         
 
+        
+
          in your code.</para
       >
       <para
         >To configure an <see
          cref="T:System.Diagnostics.XmlWriterTraceListener" />
+
+        
 
         
 
@@ -106,8 +120,12 @@
 
         
 
+        
+
          class inherits the <see
          cref="P:System.Diagnostics.TraceListener.Filter" />
+
+        
 
         
 
@@ -120,6 +138,8 @@
 
         
 
+        
+
         .  The <see
          cref="P:System.Diagnostics.TraceListener.Filter" />
 
@@ -127,8 +147,12 @@
 
         
 
+        
+
          property allows an additional level of trace output filtering at the listener.  If there is a filter present, the Trace methods of the trace listener call the <see
          cref="M:System.Diagnostics.TraceFilter.ShouldTrace(System.Diagnostics.TraceEventCache,System.String,System.Diagnostics.TraceEventType,System.Int32,System.String,System.Object[],System.Object,System.Object[])" />
+
+        
 
         
 
@@ -148,8 +172,12 @@
 
           
 
+          
+
           , <see
            cref="T:System.Diagnostics.Trace" />
+
+          
 
           
 
@@ -162,8 +190,12 @@
 
           
 
+          
+
            classes.  The listener methods are not intended to be called directly from application code. The <see
            cref="T:System.Diagnostics.XmlWriterTraceListener" />
+
+          
 
           
 
@@ -176,8 +208,12 @@
 
           
 
+          
+
             class. The <see
            cref="Overload:System.Diagnostics.XmlWriterTraceListener.Write" />
+
+          
 
           
 
@@ -190,6 +226,8 @@
 
           
 
+          
+
            methods can be called by the <see
            cref="T:System.Diagnostics.Trace" />
 
@@ -197,8 +235,12 @@
 
           
 
+          
+
            and <see
            cref="T:System.Diagnostics.Debug" />
+
+          
 
           
 
@@ -211,8 +253,12 @@
 
           
 
+          
+
            and <see
            cref="T:System.Diagnostics.Debug" />
+
+          
 
           
 
@@ -255,8 +301,12 @@
 
               
 
+              
+
                flag in the <see
                cref="P:System.Diagnostics.TraceListener.TraceOutputOptions" />
+
+              
 
               
 
@@ -283,6 +333,8 @@
             <para
               >The value of the <see
                cref="P:System.Environment.MachineName" />
+
+              
 
               
 
@@ -322,6 +374,8 @@
 
               
 
+              
+
                parameter in the Trace method call.</para
             >
           </description>
@@ -334,8 +388,12 @@
 
               
 
+              
+
                parameter of the <see
                cref="M:System.Diagnostics.XmlWriterTraceListener.TraceTransfer(System.Diagnostics.TraceEventCache,System.String,System.Int32,System.String,System.Guid)" />
+
+              
 
               
 
@@ -361,8 +419,12 @@
 
               
 
+              
+
                parameter of the <see
                cref="Overload:System.Diagnostics.XmlWriterTraceListener.TraceData" />
+
+              
 
               
 
@@ -395,6 +457,8 @@
 
               
 
+              
+
               ).</para
             >
           </description>
@@ -413,6 +477,8 @@
             <para
               >From the <see
                cref="T:System.Diagnostics.TraceEventCache" />
+
+              
 
               
 
@@ -441,6 +507,8 @@
 
               
 
+              
+
               . On Windows 98 and Windows Me operating systems, if ProcessID is greater than 2,147,483,647 it is a positive representation of a negative number and should be converted to obtain the correct process identifier.</para
             >
           </description>
@@ -459,6 +527,8 @@
             <para
               >From the <see
                cref="T:System.Diagnostics.TraceEventCache" />
+
+              
 
               
 
@@ -487,6 +557,8 @@
 
               
 
+              
+
               ). Parameter values greater than 255 are output as 255.</para
             >
           </description>
@@ -507,8 +579,12 @@
 
               
 
+              
+
                flag in the <see
                cref="P:System.Diagnostics.TraceListener.TraceOutputOptions" />
+
+              
 
               
 
@@ -582,6 +658,8 @@
 
               
 
+              
+
               , the default is the current time.</para
             >
           </description>
@@ -602,8 +680,12 @@
 
               
 
+              
+
                flag in the <see
                cref="P:System.Diagnostics.TraceListener.TraceOutputOptions" />
+
+              
 
               
 
@@ -616,6 +698,8 @@
             <para
               >From the <see
                cref="T:System.Diagnostics.TraceEventCache" />
+
+              
 
               
 
@@ -648,8 +732,12 @@
 
         
 
+        
+
          parameter of the <see
          cref="Overload:System.Diagnostics.XmlWriterTraceListener.TraceData" />
+
+        
 
         
 
@@ -662,6 +750,8 @@
 
         
 
+        
+
          object. If an <see
          cref="T:System.Xml.XPath.XPathNavigator" />
 
@@ -669,8 +759,12 @@
 
         
 
+        
+
          is used for the data object, the <see
          cref="M:System.Xml.XPath.XPathNavigator.MoveToRoot" />
+
+        
 
         
 
@@ -757,6 +851,8 @@
 
         
 
+        
+
          or to a <see
          cref="T:System.IO.Stream" />
 
@@ -764,8 +860,12 @@
 
         
 
+        
+
         , such as a <see
          cref="T:System.IO.FileStream" />
+
+        
 
         
 
@@ -804,6 +904,8 @@
 
             
 
+            
+
              property is initialized to an empty string ("").</para
           >
         </remarks>
@@ -812,6 +914,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Diagnostics.XmlWriterTraceListener" />
+
+            
 
             
 
@@ -827,8 +931,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -866,6 +974,8 @@
 
             
 
+            
+
              property is initialized to an empty string ("").</para
           >
         </remarks>
@@ -874,6 +984,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Diagnostics.XmlWriterTraceListener" />
+
+            
 
             
 
@@ -889,8 +1001,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -925,8 +1041,12 @@
 
             
 
+            
+
              class for the specified file on the specified path, using <see
              cref="P:System.Text.Encoding.UTF8" />
+
+            
 
             
 
@@ -945,6 +1065,8 @@
 
             
 
+            
+
              property is initialized to an empty string ("").</para
           >
         </remarks>
@@ -958,11 +1080,15 @@
 
             
 
+            
+
              class, using the specified file as the recipient of the debugging and tracing output. </para
           >
         </summary>
         <param name="filename">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1002,8 +1128,12 @@
 
             
 
+            
+
              property to the <paramref
              name="name" />
+
+            
 
             
 
@@ -1016,8 +1146,12 @@
 
             
 
+            
+
              parameter is null. The name can be used as an index into the <see
              cref="P:System.Diagnostics.Trace.Listeners" />
+
+            
 
             
 
@@ -1030,6 +1164,8 @@
 
             
 
+            
+
              property for an instance of <see
              cref="T:System.Diagnostics.XmlWriterTraceListener" />
 
@@ -1037,8 +1173,12 @@
 
             
 
+            
+
              whose <see
              cref="P:System.Diagnostics.TraceListener.Name" />
+
+            
 
             
 
@@ -1059,11 +1199,15 @@
 
             
 
+            
+
              class with the specified name, using the specified stream as the recipient of the debugging and tracing output. </para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1102,8 +1246,12 @@
 
             
 
+            
+
              property to the <paramref
              name="name" />
+
+            
 
             
 
@@ -1116,8 +1264,12 @@
 
             
 
+            
+
              parameter is null. The name can be used as an index into the <see
              cref="P:System.Diagnostics.Trace.Listeners" />
+
+            
 
             
 
@@ -1130,6 +1282,8 @@
 
             
 
+            
+
              property for an instance of <see
              cref="T:System.Diagnostics.XmlWriterTraceListener" />
 
@@ -1137,8 +1291,12 @@
 
             
 
+            
+
              whose <see
              cref="P:System.Diagnostics.TraceListener.Name" />
+
+            
 
             
 
@@ -1159,11 +1317,15 @@
 
             
 
+            
+
              class with the specified name, using the specified writer as the recipient of the debugging and tracing output. </para
           >
         </summary>
         <param name="writer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1176,10 +1338,14 @@
 
           
 
+          
+
            that receives the output from the trace listener. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1218,8 +1384,12 @@
 
             
 
+            
+
              class for the specified file on the specified path, using <see
              cref="P:System.Text.Encoding.UTF8" />
+
+            
 
             
 
@@ -1238,8 +1408,12 @@
 
             
 
+            
+
              property is set to the <paramref
              name="name" />
+
+            
 
             
 
@@ -1252,8 +1426,12 @@
 
             
 
+            
+
              parameter is null. The name can be used as an index into the <see
              cref="P:System.Diagnostics.Trace.Listeners" />
+
+            
 
             
 
@@ -1266,6 +1444,8 @@
 
             
 
+            
+
              property for an instance of <see
              cref="T:System.Diagnostics.XmlWriterTraceListener" />
 
@@ -1273,8 +1453,12 @@
 
             
 
+            
+
              whose <see
              cref="P:System.Diagnostics.TraceListener.Name" />
+
+            
 
             
 
@@ -1295,6 +1479,8 @@
 
             
 
+            
+
              class with the specified name, using the specified file as the recipient of the debugging and tracing output.  </para
           >
         </summary>
@@ -1305,10 +1491,14 @@
 
           
 
+          
+
           The name of the file to write to. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1340,6 +1530,8 @@
           <para
             >Closes the <see
              cref="P:System.Diagnostics.TextWriterTraceListener.Writer" />
+
+            
 
             
 
@@ -1382,8 +1574,12 @@
 
             
 
+            
+
              instances in the <see
              cref="P:System.Diagnostics.Trace.Listeners" />
+
+            
 
             
 
@@ -1396,8 +1592,12 @@
 
             
 
+            
+
             . You can customize this behavior by adding or removing a <see
              cref="T:System.Diagnostics.TraceListener" />
+
+            
 
             
 
@@ -1417,10 +1617,14 @@
 
           
 
+          
+
           The error message to write.</param
         >
         <param name="detailMessage">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1465,8 +1669,12 @@
 
             
 
+            
+
             , <paramref
              name="source" />
+
+            
 
             
 
@@ -1479,8 +1687,12 @@
 
             
 
+            
+
             , and <paramref
              name="id" />
+
+            
 
             
 
@@ -1493,6 +1705,8 @@
 
             
 
+            
+
              parameter is converted to an unsigned integer before writing, so a negative <paramref
              name="id" />
 
@@ -1500,8 +1714,12 @@
 
             
 
+            
+
              value is written as a large positive integer. The <paramref
              name="data" />
+
+            
 
             
 
@@ -1518,6 +1736,8 @@
 
               
 
+              
+
               , <see
                cref="T:System.Diagnostics.Trace" />
 
@@ -1525,8 +1745,12 @@
 
               
 
+              
+
               , and <see
                cref="T:System.Diagnostics.TraceSource" />
+
+              
 
               
 
@@ -1547,8 +1771,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Diagnostics.TraceEventCache" />
+
+          
 
           
 
@@ -1563,6 +1791,8 @@
 
           
 
+          
+
           The source name. </param
         >
         <param name="eventType">
@@ -1572,8 +1802,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Diagnostics.TraceEventType" />
+
+          
 
           
 
@@ -1588,10 +1822,14 @@
 
           
 
+          
+
           A numeric identifier for the event.</param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1647,8 +1885,12 @@
 
             
 
+            
+
             , <paramref
              name="source" />
+
+            
 
             
 
@@ -1661,8 +1903,12 @@
 
             
 
+            
+
             , and <paramref
              name="id" />
+
+            
 
             
 
@@ -1675,6 +1921,8 @@
 
             
 
+            
+
              parameter is converted to an unsigned integer before writing, so a negative <paramref
              name="id" />
 
@@ -1682,8 +1930,12 @@
 
             
 
+            
+
              value is written as a large positive integer. The objects in the <paramref
              name="data" />
+
+            
 
             
 
@@ -1700,6 +1952,8 @@
 
               
 
+              
+
               , <see
                cref="T:System.Diagnostics.Trace" />
 
@@ -1707,8 +1961,12 @@
 
               
 
+              
+
               , and <see
                cref="T:System.Diagnostics.TraceSource" />
+
+              
 
               
 
@@ -1729,8 +1987,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Diagnostics.TraceEventCache" />
+
+          
 
           
 
@@ -1745,6 +2007,8 @@
 
           
 
+          
+
           The source name. </param
         >
         <param name="eventType">
@@ -1754,8 +2018,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Diagnostics.TraceEventType" />
+
+          
 
           
 
@@ -1770,10 +2038,14 @@
 
           
 
+          
+
           A numeric identifier for the event.</param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1823,8 +2095,12 @@
 
             
 
+            
+
             , <paramref
              name="source" />
+
+            
 
             
 
@@ -1837,8 +2113,12 @@
 
             
 
+            
+
             , and <paramref
              name="id" />
+
+            
 
             
 
@@ -1851,6 +2131,8 @@
 
             
 
+            
+
              parameter is converted to an unsigned integer before writing, so a negative <paramref
              name="id" />
 
@@ -1858,8 +2140,12 @@
 
             
 
+            
+
              value is written as a large positive integer. The <paramref
              name="message" />
+
+            
 
             
 
@@ -1876,6 +2162,8 @@
 
               
 
+              
+
               , <see
                cref="T:System.Diagnostics.Trace" />
 
@@ -1883,8 +2171,12 @@
 
               
 
+              
+
               , and <see
                cref="T:System.Diagnostics.TraceSource" />
+
+              
 
               
 
@@ -1905,8 +2197,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Diagnostics.TraceEventCache" />
+
+          
 
           
 
@@ -1921,6 +2217,8 @@
 
           
 
+          
+
           The source name. </param
         >
         <param name="eventType">
@@ -1930,8 +2228,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Diagnostics.TraceEventType" />
+
+          
 
           
 
@@ -1946,10 +2248,14 @@
 
           
 
+          
+
           A numeric identifier for the event.</param
         >
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2006,8 +2312,12 @@
 
             
 
+            
+
             , <paramref
              name="source" />
+
+            
 
             
 
@@ -2020,8 +2330,12 @@
 
             
 
+            
+
             , and <paramref
              name="id" />
+
+            
 
             
 
@@ -2034,8 +2348,12 @@
 
             
 
+            
+
              parameter is converted to an unsigned integer before writing, so a negative <paramref
              name="id" />
+
+            
 
             
 
@@ -2048,8 +2366,12 @@
 
             
 
+            
+
              method is called, passing in the <paramref
              name="format" />
+
+            
 
             
 
@@ -2062,8 +2384,12 @@
 
             
 
+            
+
              array as parameters, to format the <paramref
              name="args" />
+
+            
 
             
 
@@ -2080,6 +2406,8 @@
 
               
 
+              
+
               , <see
                cref="T:System.Diagnostics.Trace" />
 
@@ -2087,8 +2415,12 @@
 
               
 
+              
+
               , and <see
                cref="T:System.Diagnostics.TraceSource" />
+
+              
 
               
 
@@ -2109,8 +2441,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Diagnostics.TraceEventCache" />
+
+          
 
           
 
@@ -2125,6 +2461,8 @@
 
           
 
+          
+
           The source name. </param
         >
         <param name="eventType">
@@ -2134,8 +2472,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Diagnostics.TraceEventType" />
+
+          
 
           
 
@@ -2150,10 +2492,14 @@
 
           
 
+          
+
           A numeric identifier for the event.</param
         >
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2166,10 +2512,14 @@
 
           
 
+          
+
            array.</param
         >
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2214,8 +2564,12 @@
 
             
 
+            
+
              method is used for the correlation of related traces. The <paramref
              name="eventCache" />
+
+            
 
             
 
@@ -2228,8 +2582,12 @@
 
             
 
+            
+
             , <paramref
              name="id" />
+
+            
 
             
 
@@ -2242,8 +2600,12 @@
 
             
 
+            
+
              parameters are used in the header and footer of the trace. The <paramref
              name="id" />
+
+            
 
             
 
@@ -2256,8 +2618,12 @@
 
             
 
+            
+
              value is written as a large positive integer. The <paramref
              name="message" />
+
+            
 
             
 
@@ -2270,6 +2636,8 @@
 
             
 
+            
+
              method is called to convert the <paramref
              name="relatedActivityId" />
 
@@ -2277,8 +2645,12 @@
 
             
 
+            
+
              value to a "B" formatted string, which appears in the header. The SubTypeName element in the footer identifies the trace event type as a <see
              cref="F:System.Diagnostics.TraceEventType.Transfer" />
+
+            
 
             
 
@@ -2295,6 +2667,8 @@
 
               
 
+              
+
                method is not intended to be called by application code.  It is intended to be called by a <see
                cref="T:System.Diagnostics.TraceSource" />
 
@@ -2302,8 +2676,12 @@
 
               
 
+              
+
                object to emit the trace information for its <see
                cref="M:System.Diagnostics.TraceSource.TraceTransfer(System.Int32,System.String,System.Guid)" />
+
+              
 
               
 
@@ -2324,8 +2702,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Diagnostics.TraceEventCache" />
+
+          
 
           
 
@@ -2340,10 +2722,14 @@
 
           
 
+          
+
           The source name. </param
         >
         <param name="id">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2358,6 +2744,8 @@
 
           
 
+          
+
           A trace message to write.</param
         >
         <param name="relatedActivityId">
@@ -2367,8 +2755,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Guid" />
+
+          
 
           
 
@@ -2406,6 +2798,8 @@
 
             
 
+            
+
              method to include context information in the log output.</para
           >
         </remarks>
@@ -2415,6 +2809,8 @@
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2457,6 +2853,8 @@
 
             
 
+            
+
              method to include context information in the log output.</para
           >
         </remarks>
@@ -2466,6 +2864,8 @@
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

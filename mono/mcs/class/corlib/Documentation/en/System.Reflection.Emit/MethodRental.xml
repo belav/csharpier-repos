@@ -136,10 +136,14 @@
 
           
 
+          
+
           The class containing the method. </param
         >
         <param name="methodtoken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -154,6 +158,8 @@
 
           
 
+          
+
           A pointer to the method. This should include the method header. </param
         >
         <param name="methodSize">
@@ -163,10 +169,14 @@
 
           
 
+          
+
           The size of the new method body in bytes. </param
         >
         <param name="flags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -245,6 +255,8 @@
 
             
 
+            
+
             , see the MSDN Library.</para
           >
         </remarks>
@@ -259,6 +271,8 @@
 
           
 
+          
+
           The type information to return.</param
         >
         <param name="lcid">
@@ -268,10 +282,14 @@
 
           
 
+          
+
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

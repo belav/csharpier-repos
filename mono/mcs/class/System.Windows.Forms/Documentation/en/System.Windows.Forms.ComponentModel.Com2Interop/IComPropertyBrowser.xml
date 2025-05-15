@@ -22,6 +22,8 @@
 
         
 
+        
+
          control.</para
       >
     </summary>
@@ -47,6 +49,8 @@
 
             
 
+            
+
              event.</para
           >
         </remarks>
@@ -55,6 +59,8 @@
           <para
             >Occurs when the <see
              cref="T:System.Windows.Forms.PropertyGrid" />
+
+            
 
             
 
@@ -88,6 +94,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -116,6 +124,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -124,6 +134,8 @@
           <para
             >true if the <see
              cref="T:System.Windows.Forms.PropertyGrid" />
+
+            
 
             
 
@@ -157,8 +169,12 @@
 
             
 
+            
+
              control when the user chooses <ui
             >Properties</ui>
+
+            
 
             
 
@@ -187,6 +203,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Windows.Forms.PropertyGrid" />
+
+            
 
             
 
@@ -224,6 +242,8 @@
 
             
 
+            
+
              control states, such as the <see
              cref="P:System.Windows.Forms.PropertyGrid.PropertySort" />
 
@@ -231,8 +251,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.PropertyGrid.HelpVisible" />
+
+            
 
             
 
@@ -251,11 +275,15 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -292,6 +320,8 @@
 
             
 
+            
+
              control states, such as the <see
              cref="P:System.Windows.Forms.PropertyGrid.PropertySort" />
 
@@ -299,8 +329,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.PropertyGrid.HelpVisible" />
+
+            
 
             
 
@@ -319,11 +353,15 @@
 
             
 
+            
+
              control to the registry.</para
           >
         </summary>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

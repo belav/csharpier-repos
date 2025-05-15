@@ -29,6 +29,8 @@
 
         
 
+        
+
          uses.</para
       >
     </summary>
@@ -85,6 +87,8 @@
 
             
 
+            
+
              is typically specified on a root designer class to indicate that the designer wishes to accept or reject a toolbox item through code. The designer must implement the <see
              cref="M:System.Drawing.Design.IToolboxUser.GetToolSupported(System.Drawing.Design.ToolboxItem)" />
 
@@ -92,8 +96,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Drawing.Design.IToolboxUser" />
+
+            
 
             
 
@@ -135,8 +143,12 @@
 
             
 
+            
+
              of <see
              cref="F:System.ComponentModel.ToolboxItemFilterType.Prevent" />
+
+            
 
             
 
@@ -178,6 +190,8 @@
 
             
 
+            
+
              to be enabled, the designer and the component class must have a matching filter string. Additionally, neither the designer or component class can have a <see
              cref="T:System.ComponentModel.ToolboxItemFilterType" />
 
@@ -185,8 +199,12 @@
 
             
 
+            
+
              of <see
              cref="F:System.ComponentModel.ToolboxItemFilterType.Prevent" />
+
+            
 
             
 

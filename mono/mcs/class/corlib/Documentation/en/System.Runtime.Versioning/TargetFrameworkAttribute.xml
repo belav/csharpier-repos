@@ -29,12 +29,16 @@
 
         
 
+        
+
          class provides an attribute that you can apply to an assembly to indicate the version of the .NET Framework runtime against which the assembly was built. For example, the following example applies the TargetFrameworkAttribute to an assembly to indicate that it was built using net_v40_long.</para
       >
       <para>code reference: System.Runtime.Versioning.TargetFrameworkAttribute#1</para>
       <para
         >The <see
          cref="T:System.Runtime.Versioning.TargetFrameworkAttribute" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
         , that specifies the .NET Framework version against which the assembly was built. This parameter maps to the <see
          cref="P:System.Runtime.Versioning.TargetFrameworkAttribute.FrameworkName" />
+
+        
 
         
 
@@ -61,8 +69,12 @@
 
         
 
+        
+
          attribute can specify a <see
          cref="P:System.Runtime.Versioning.TargetFrameworkAttribute.FrameworkDisplayName" />
+
+        
 
         
 
@@ -105,8 +117,12 @@
 
             
 
+            
+
              parameter generally takes the same form as the string that is returned by the <see
              cref="M:System.Runtime.Versioning.FrameworkName.ToString" />
+
+            
 
             
 
@@ -125,11 +141,15 @@
 
             
 
+            
+
              class by specifying the .NET Framework version against which an assembly was built.</para
           >
         </summary>
         <param name="frameworkName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -156,6 +176,8 @@
           <para
             >The <see
              cref="P:System.Runtime.Versioning.TargetFrameworkAttribute.FrameworkDisplayName" />
+
+            
 
             
 
@@ -192,8 +214,12 @@
 
             
 
+            
+
              property maps to the <paramref
              name="frameworkName" />
+
+            
 
             
 
@@ -206,8 +232,12 @@
 
             
 
+            
+
              constructor. It represents the .NET Framework version in a compact form and typically corresponds to the string that is returned by the <see
              cref="M:System.Runtime.Versioning.FrameworkName.ToString" />
+
+            
 
             
 

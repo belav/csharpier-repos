@@ -26,8 +26,12 @@
 
         
 
+        
+
          and other classes in the <see
          cref="N:System.Web.Services.Protocols" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          class establishes a common <see
          cref="M:System.Web.Services.Protocols.MimeParameterReader.Read(System.Web.HttpRequest)" />
+
+        
 
         
 
@@ -55,6 +63,8 @@
       <para
         >You will typically not need to use <see
          cref="T:System.Web.Services.Protocols.MimeParameterReader" />
+
+        
 
         
 
@@ -81,6 +91,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Protocols.MimeParameterReader" />
+
+            
 
             
 
@@ -123,6 +135,8 @@
 
             
 
+            
+
              objects that contains the deserialized HTTP request.</para
           >
         </returns>
@@ -133,8 +147,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.HttpRequest" />
+
+          
 
           
 

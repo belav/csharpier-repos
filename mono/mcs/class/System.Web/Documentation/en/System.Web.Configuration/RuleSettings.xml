@@ -75,6 +75,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -121,6 +123,8 @@
 
             
 
+            
+
              class using default settings; however, the name, event name, and provider are specified.</para
           >
         </summary>
@@ -131,8 +135,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Web.Configuration.RuleSettings" />
+
+          
 
           
 
@@ -147,8 +155,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Web.Configuration.EventMappingSettings" />
+
+          
 
           
 
@@ -163,8 +175,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Configuration.ProviderSettings" />
+
+          
 
           
 
@@ -230,8 +246,12 @@
 
             
 
+            
+
              class where all values except those of the <see
              cref="P:System.Web.Configuration.RuleSettings.Custom" />
+
+            
 
             
 
@@ -247,8 +267,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Web.Configuration.RuleSettings" />
+
+          
 
           
 
@@ -263,8 +287,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Web.Configuration.EventMappingSettings" />
+
+          
 
           
 
@@ -279,8 +307,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Configuration.ProviderSettings" />
+
+          
 
           
 
@@ -295,8 +327,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Web.Configuration.ProfileSettings" />
+
+          
 
           
 
@@ -311,6 +347,8 @@
 
           
 
+          
+
           The minimum number of occurrences of the same type of event that can occur before the event is raised to the provider. </param
         >
         <param name="maxLimit">
@@ -320,10 +358,14 @@
 
           
 
+          
+
           The maximum number of times events of the same type can be raised.</param
         >
         <param name="minInterval">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -368,6 +410,8 @@
 
             
 
+            
+
              class where all values are specified.</para
           >
         </summary>
@@ -378,8 +422,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Web.Configuration.RuleSettings" />
+
+          
 
           
 
@@ -394,8 +442,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Web.Configuration.EventMappingSettings" />
+
+          
 
           
 
@@ -410,8 +462,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Configuration.ProviderSettings" />
+
+          
 
           
 
@@ -426,8 +482,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Web.Configuration.ProfileSettings" />
+
+          
 
           
 
@@ -442,10 +502,14 @@
 
           
 
+          
+
           The minimum number of occurrences of an event of the same type before the event is fired to the provider. </param
         >
         <param name="maxLimit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -460,6 +524,8 @@
 
           
 
+          
+
           The minimum time interval between two events of the same type.</param
         >
         <param name="custom">
@@ -469,8 +535,12 @@
 
           
 
+          
+
           The fully qualified type of a custom class that implements <see
            cref="T:System.Web.Management.IWebEventCustomEvaluator" />
+
+          
 
           
 
@@ -511,6 +581,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -543,8 +615,12 @@
 
             
 
+            
+
              object referenced by this property must be contained by the same <see
              cref="T:System.Web.Configuration.HealthMonitoringSection" />
+
+            
 
             
 
@@ -560,6 +636,8 @@
           <para
             >Gets or sets the name of the <see
              cref="T:System.Web.Configuration.EventMappingSettings" />
+
+            
 
             
 
@@ -665,6 +743,8 @@
 
             
 
+            
+
             . Invalid values may cause an exception to be thrown when the configuration section is saved.</para
           >
           <para>If the value is zero, then there is no minimum interval.</para>
@@ -709,6 +789,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -741,8 +823,12 @@
 
             
 
+            
+
              object referenced by this property must be contained by the same <see
              cref="T:System.Web.Configuration.HealthMonitoringSection" />
+
+            
 
             
 
@@ -758,6 +844,8 @@
           <para
             >Gets or sets the name of the <see
              cref="T:System.Web.Configuration.ProfileSettings" />
+
+            
 
             
 
@@ -814,6 +902,8 @@
 
             
 
+            
+
              object referenced by this property must be contained by the same <see
              cref="T:System.Web.Configuration.HealthMonitoringSection" />
 
@@ -821,8 +911,12 @@
 
             
 
+            
+
              object that also contains this <see
              cref="T:System.Web.Configuration.RuleSettings" />
+
+            
 
             
 
@@ -836,6 +930,8 @@
           <para
             >Gets or sets the name of the <see
              cref="T:System.Configuration.ProviderSettings" />
+
+            
 
             
 

@@ -23,6 +23,8 @@
 
         
 
+        
+
          class to specify the data type you want to associate with the data field or parameter. You select the data type from this enumeration. </para
       >
       <para
@@ -33,8 +35,12 @@
 
         
 
+        
+
          attribute lets you mark fields by using a type that is more specific than the database intrinsic types. For example, a string data field that contains e-mail addresses can be attributed with the <see
          cref="F:System.ComponentModel.DataAnnotations.DataType.EmailAddress" />
+
+        
 
         
 

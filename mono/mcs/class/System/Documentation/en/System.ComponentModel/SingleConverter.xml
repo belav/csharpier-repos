@@ -33,12 +33,16 @@
 
         
 
+        
+
          value type represents a single-precision 32-bit number with values ranging from negative 3.402823e38 to positive 3.402823e38.</para
       >
       <block subset="none" type="note">
         <para
           >You should never create an instance of <see
            cref="T:System.ComponentModel.SingleConverter" />
+
+          
 
           
 
@@ -51,8 +55,12 @@
 
           
 
+          
+
            method of <see
            cref="T:System.ComponentModel.TypeDescriptor" />
+
+          
 
           
 
@@ -65,10 +73,14 @@
 
           
 
+          
+
            base class and <format
            type="text/html">
             <a href="90373a3f-d8c8-492d-841c-945d62393c56">How to: Implement a Type Converter</a>
           </format>
+
+          
 
           
 
@@ -105,6 +117,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.SingleConverter" />
+
+            
 
             
 

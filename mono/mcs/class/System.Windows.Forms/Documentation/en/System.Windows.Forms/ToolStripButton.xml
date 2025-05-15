@@ -29,8 +29,12 @@
 
         
 
+        
+
          to create a toolbar button that supports both text and images. Use the <see
          cref="P:System.Windows.Forms.ToolStripItem.ImageAlign" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          properties to get or set the positioning of <see
          cref="T:System.Windows.Forms.ToolStripButton" />
+
+        
 
         
 
@@ -60,11 +68,15 @@
 
         
 
+        
+
          with various border styles, and you can use it to represent and activate operational states. You can also define it to have the focus by default.</para
       >
       <para
         >Although <see
          cref="T:System.Windows.Forms.ToolStripButton" />
+
+        
 
         
 
@@ -77,8 +89,12 @@
 
         
 
+        
+
          control of previous versions, <see
          cref="T:System.Windows.Forms.ToolBarButton" />
+
+        
 
         
 
@@ -92,6 +108,8 @@
       <para
         >Represents a selectable <see
          cref="T:System.Windows.Forms.ToolStripItem" />
+
+        
 
         
 
@@ -114,6 +132,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ToolStripButton" />
+
+            
 
             
 
@@ -145,8 +165,12 @@
 
             
 
+            
+
              that displays only an image on the <see
              cref="T:System.Windows.Forms.ToolStripButton" />
+
+            
 
             
 
@@ -165,6 +189,8 @@
 
             
 
+            
+
              class that displays the specified image.</para
           >
         </summary>
@@ -175,8 +201,12 @@
 
           
 
+          
+
           The image to display on the <see
            cref="T:System.Windows.Forms.ToolStripButton" />
+
+          
 
           
 
@@ -207,8 +237,12 @@
 
             
 
+            
+
              that displays only text on the <see
              cref="T:System.Windows.Forms.ToolStripButton" />
+
+            
 
             
 
@@ -227,6 +261,8 @@
 
             
 
+            
+
              class that displays the specified text.</para
           >
         </summary>
@@ -237,8 +273,12 @@
 
           
 
+          
+
           The text to display on the <see
            cref="T:System.Windows.Forms.ToolStripButton" />
+
+          
 
           
 
@@ -273,6 +313,8 @@
 
             
 
+            
+
              that displays both an image and text.</para
           >
         </remarks>
@@ -281,6 +323,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ToolStripButton" />
+
+            
 
             
 
@@ -296,8 +340,12 @@
 
           
 
+          
+
           The text to display on the <see
            cref="T:System.Windows.Forms.ToolStripButton" />
+
+          
 
           
 
@@ -312,8 +360,12 @@
 
           
 
+          
+
           The image to display on the <see
            cref="T:System.Windows.Forms.ToolStripButton" />
+
+          
 
           
 
@@ -349,8 +401,12 @@
 
             
 
+            
+
              that displays both an image and text and raises the <see
              cref="E:System.Windows.Forms.ToolStripItem.Click" />
+
+            
 
             
 
@@ -369,8 +425,12 @@
 
             
 
+            
+
              class that displays the specified text and image and that raises the <see
              cref="E:System.Windows.Forms.ToolStripItem.Click" />
+
+            
 
             
 
@@ -386,8 +446,12 @@
 
           
 
+          
+
           The text to display on the <see
            cref="T:System.Windows.Forms.ToolStripButton" />
+
+          
 
           
 
@@ -402,8 +466,12 @@
 
           
 
+          
+
           The image to display on the <see
            cref="T:System.Windows.Forms.ToolStripButton" />
+
+          
 
           
 
@@ -418,8 +486,12 @@
 
           
 
+          
+
           An event handler that raises the <see
            cref="E:System.Windows.Forms.ToolStripItem.Click" />
+
+          
 
           
 
@@ -456,8 +528,12 @@
 
             
 
+            
+
              with the specified name that displays both an image and text and raises the <see
              cref="E:System.Windows.Forms.ToolStripItem.Click" />
+
+            
 
             
 
@@ -476,8 +552,12 @@
 
             
 
+            
+
              class with the specified name that displays the specified text and image and that raises the <see
              cref="E:System.Windows.Forms.ToolStripItem.Click" />
+
+            
 
             
 
@@ -493,8 +573,12 @@
 
           
 
+          
+
           The text to display on the <see
            cref="T:System.Windows.Forms.ToolStripButton" />
+
+          
 
           
 
@@ -509,8 +593,12 @@
 
           
 
+          
+
           The image to display on the <see
            cref="T:System.Windows.Forms.ToolStripButton" />
+
+          
 
           
 
@@ -525,8 +613,12 @@
 
           
 
+          
+
           An event handler that raises the <see
            cref="E:System.Windows.Forms.ToolStripItem.Click" />
+
+          
 
           
 
@@ -541,8 +633,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Windows.Forms.ToolStripButton" />
+
+          
 
           
 
@@ -579,6 +675,8 @@
 
             
 
+            
+
              property to false to display custom <see
              cref="P:System.Windows.Forms.ToolStripItem.ToolTipText" />
 
@@ -586,8 +684,12 @@
 
             
 
+            
+
              on a <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -606,8 +708,12 @@
 
             
 
+            
+
              text is displayed on the <see
              cref="T:System.Windows.Forms.ToolStripButton" />
+
+            
 
             
 
@@ -636,6 +742,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Windows.Forms.ToolStripButton" />
+
+            
 
             
 
@@ -674,6 +782,8 @@
 
             
 
+            
+
              is pressed or not pressed.</para
           >
         </summary>
@@ -702,6 +812,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -710,6 +822,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ToolStripButton.Checked" />
+
+            
 
             
 
@@ -743,6 +857,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Windows.Forms.ToolStripButton" />
+
+            
 
             
 
@@ -783,6 +899,8 @@
 
             
 
+            
+
              to Indeterminate when you do not want to set a default state.</para
           >
         </remarks>
@@ -791,6 +909,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Windows.Forms.ToolStripButton" />
+
+            
 
             
 
@@ -824,6 +944,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -832,6 +954,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ToolStripButton.CheckState" />
+
+            
 
             
 
@@ -867,8 +991,12 @@
 
             
 
+            
+
             , it will be called when the <see
              cref="P:System.Windows.Forms.ToolStripItem.AccessibilityObject" />
+
+            
 
             
 
@@ -880,6 +1008,8 @@
             <para
               >To get or set the <see
                cref="P:System.Windows.Forms.ToolStripItem.AccessibilityObject" />
+
+              
 
               
 
@@ -899,6 +1029,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -912,8 +1044,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Windows.Forms.ToolStripButton" />
+
+            
 
             
 
@@ -976,6 +1112,8 @@
 
             
 
+            
+
              can be fitted.</para
           >
         </summary>
@@ -984,6 +1122,8 @@
           <para
             >An ordered pair of type <see
              cref="T:System.Drawing.Size" />
+
+            
 
             
 
@@ -999,8 +1139,12 @@
 
           
 
+          
+
           The specified area for a <see
            cref="T:System.Windows.Forms.ToolStripButton" />
+
+          
 
           
 
@@ -1039,11 +1183,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripButton.OnCheckedChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1062,6 +1210,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1072,8 +1222,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1112,11 +1266,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripButton.OnCheckStateChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1135,6 +1293,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1145,8 +1305,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1182,11 +1346,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripButton.OnClick(System.EventArgs)" />
+
+            
 
             
 
@@ -1205,6 +1373,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1215,8 +1385,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1255,11 +1429,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripButton.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+
+            
 
             
 
@@ -1278,6 +1456,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1288,8 +1468,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.PaintEventArgs" />
+
+          
 
           
 

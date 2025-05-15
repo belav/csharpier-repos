@@ -23,8 +23,12 @@
 
         
 
+        
+
          manages the association between the channel and the user-defined service objects. Use the <see
          cref="T:System.ServiceModel.InstanceContextMode" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          property to specify the lifetime of the <see
          cref="T:System.ServiceModel.InstanceContext" />
+
+        
 
         
 
@@ -51,8 +59,12 @@
 
         
 
+        
+
          object for every call, every session or specify that the <see
          cref="T:System.ServiceModel.InstanceContext" />
+
+        
 
         
 
@@ -62,6 +74,8 @@
          type="text/html">
           <a href="c290fa54-f6ae-45a1-9186-d9504ebc6ee6">Instancing Sample</a>
         </format>
+
+        
 
         
 
@@ -77,8 +91,12 @@
 
         
 
+        
+
          value specifies that a single <see
          cref="T:System.ServiceModel.InstanceContext" />
+
+        
 
         
 
@@ -95,8 +113,12 @@
 
           
 
+          
+
            value is set to <see
            cref="F:System.ServiceModel.InstanceContextMode.Single" />
+
+          
 
           
 
@@ -109,8 +131,12 @@
 
           
 
+          
+
            value to <see
            cref="F:System.ServiceModel.ConcurrencyMode.Multiple" />
+
+          
 
           
 
@@ -150,8 +176,12 @@
 
             
 
+            
+
              object is created prior to and recycled subsequent to each call. If the channel does not create a session this value behaves as if it were <see
              cref="F:System.ServiceModel.InstanceContextMode.PerCall" />
+
+            
 
             
 
@@ -181,6 +211,8 @@
           <para
             >A new <see
              cref="T:System.ServiceModel.InstanceContext" />
+
+            
 
             
 
@@ -216,6 +248,8 @@
 
               
 
+              
+
                constructor and passes an object to use as the service), the service class must set <see
                cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
 
@@ -223,8 +257,12 @@
 
               
 
+              
+
                to <see
                cref="F:System.ServiceModel.InstanceContextMode.Single" />
+
+              
 
               
 
@@ -239,6 +277,8 @@
           <para
             >Only one <see
              cref="T:System.ServiceModel.InstanceContext" />
+
+            
 
             
 

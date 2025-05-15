@@ -48,8 +48,12 @@
 
           
 
+          
+
            method to prevent inadvertent access to system resources by trusted code. <see
            cref="M:System.Security.CodeAccessPermission.Deny" />
+
+          
 
           
 
@@ -61,6 +65,8 @@
               >How To: Run Partially Trusted Code in a Sandbox</a
             >
           </format>
+
+          
 
           
 
@@ -78,8 +84,12 @@
 
           
 
+          
+
            permission state value. Starting with the .NET Framework version 2.0, identity permissions can have any permission state value. This means that in 2.0 and later versions, identity permissions have the same behavior as permissions that implement the <see
            cref="T:System.Security.Permissions.IUnrestrictedPermission" />
+
+          
 
           
 
@@ -125,6 +135,8 @@
 
             
 
+            
+
              matches no sites. This constructor is included for consistency with the design of other permissions, but is not useful in practice.</para
           >
           <block subset="none" type="note">
@@ -136,8 +148,12 @@
 
               
 
+              
+
                permission state value. Starting with the .NET Framework version 2.0, identity permissions can have any permission state value. This means that in 2.0 and later versions, identity permissions have the same behavior as permissions that implement the <see
                cref="T:System.Security.Permissions.IUnrestrictedPermission" />
+
+              
 
               
 
@@ -158,8 +174,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Security.Permissions.PermissionState" />
+
+            
 
             
 
@@ -175,8 +195,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -218,11 +242,15 @@
 
             
 
+            
+
              class to represent the specified site identity.</para
           >
         </summary>
         <param name="site">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -297,6 +325,8 @@
 
           
 
+          
+
           The XML encoding to use to reconstruct the permission. </param
         >
       </Docs>
@@ -343,6 +373,8 @@
 
           
 
+          
+
           A permission to intersect with the current permission. It must be of the same type as the current permission. </param
         >
       </Docs>
@@ -375,6 +407,8 @@
           <para
             >The following table shows the value of <see
              cref="M:System.Security.Permissions.SiteIdentityPermission.IsSubsetOf(System.Security.IPermission)" />
+
+            
 
             
 
@@ -512,6 +546,8 @@
 
           
 
+          
+
           A permission that is to be tested for the subset relationship. This permission must be of the same type as the current permission. </param
         >
       </Docs>
@@ -626,11 +662,15 @@
 
             
 
+            
+
              is a permission that represents all the sites represented by both the current permission and the specified permission. Any demand that passes either permission passes their union. For example, the union of a permission that represents access to www.fourthcoffee.com and one that represents access to *.fourthcoffee.com is a permission that represents access to *.fourthcoffee.com.</para
           >
           <para
             >The union of a permission and null is the permission that is not null. The union of a permission and a subset of that permission is the permission that contains the subset. Any other combination results in an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -649,6 +689,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

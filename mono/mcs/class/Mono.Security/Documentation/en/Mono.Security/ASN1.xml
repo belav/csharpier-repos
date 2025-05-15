@@ -14,6 +14,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -34,6 +36,8 @@
         <summary
           >Initializes a new instance of the <see
            cref="T:Mono.Security.ASN1" />
+
+          
 
           
 
@@ -64,11 +68,15 @@
 
           
 
+          
+
            value indicating an ASN.1 tag ID.</param
         >
         <summary
           >Initializes a new instance of the <see
            cref="T:Mono.Security.ASN1" />
+
+          
 
           
 
@@ -99,11 +107,15 @@
 
           
 
+          
+
            array consisting of the ASN.1 content data.</param
         >
         <summary
           >Initializes a new instance of the <see
            cref="T:Mono.Security.ASN1" />
+
+          
 
           
 
@@ -135,6 +147,8 @@
 
           
 
+          
+
            value indicating an ASN.1 tag ID.</param
         >
         <param name="data"
@@ -145,11 +159,15 @@
 
           
 
+          
+
            array consisting of the ASN.1 content data.</param
         >
         <summary
           >Initializes a new instance of the <see
            cref="T:Mono.Security.ASN1" />
+
+          
 
           
 
@@ -185,12 +203,16 @@
 
           
 
+          
+
            object to be added to the current instance's children elements.</param
         >
         <summary>Adds a ASN.1 data representation instance to the children element list.</summary>
         <returns
           >A reference to the <see
            cref="T:Mono.Security.ASN1" />
+
+          
 
           
 
@@ -223,6 +245,8 @@
 
           
 
+          
+
            instance's content.</param
         >
         <summary
@@ -233,11 +257,15 @@
 
           
 
+          
+
            array.</summary
         >
         <returns
           >A <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -268,6 +296,8 @@
 
           
 
+          
+
            children elements contained in the current instance.</summary
         >
         <value
@@ -278,8 +308,12 @@
 
           
 
+          
+
            that specifies the number of <see
            cref="T:Mono.Security.ASN1" />
+
+          
 
           
 
@@ -326,8 +360,12 @@
 
           
 
+          
+
            instance by recursively decoding the specified ASN.1 content <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -387,8 +425,12 @@
 
           
 
+          
+
            instance by recursively decoding the specified ASN.1 content <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -433,6 +475,8 @@
 
           
 
+          
+
            instance that matches the specified tag.</summary
         >
         <returns
@@ -464,11 +508,15 @@
 
           
 
+          
+
            array.</param
         >
         <summary
           >Determines if the current ASN.1 representation content, as well as its children's element's content, is equal to the specified <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -503,6 +551,8 @@
 
           
 
+          
+
            array.</summary
         >
         <returns
@@ -516,6 +566,8 @@
           <para>
 	The <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -549,6 +601,8 @@
 
           
 
+          
+
            value that specifies the zero-based index of the element in the current instance to get.</param
         >
         <summary
@@ -559,11 +613,15 @@
 
           
 
+          
+
            class instance that is associated with the specified index.</summary
         >
         <value
           >The <see
            cref="T:Mono.Security.ASN1" />
+
+          
 
           
 
@@ -618,6 +676,8 @@
 
           
 
+          
+
            array returned is encoded with ASN.1 standard-specific formatting.</remarks
         >
       </Docs>
@@ -662,11 +722,15 @@
 
           
 
+          
+
            representation.</summary
         >
         <returns
           >The ASN.1 content in <see
            cref="T:System.String" />
+
+          
 
           
 

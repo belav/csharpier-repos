@@ -40,8 +40,12 @@
 
         
 
+        
+
          delegate is used by a <see
          cref="T:System.Net.ServicePoint" />
+
+        
 
         
 
@@ -54,8 +58,12 @@
 
         
 
+        
+
          property with the delegate as an argument. This delegate should specify a local IP address and port number in the returned <see
          cref="T:System.Net.IPEndPoint" />
+
+        
 
         
 
@@ -71,8 +79,12 @@
 
         
 
+        
+
          to the <see
          cref="T:System.Net.ServicePoint" />
+
+        
 
         
 
@@ -85,8 +97,12 @@
 
         
 
+        
+
          attempts, an <see
          cref="T:System.OverflowException" />
+
+        
 
         
 
@@ -101,6 +117,8 @@
       <para
         >Represents the method that specifies a local Internet Protocol address and port number for a <see
          cref="T:System.Net.ServicePoint" />
+
+        
 
         
 

@@ -31,8 +31,12 @@
 
         
 
+        
+
          provides the same support for Web Service protocols as the <see
          cref="T:System.ServiceModel.WSHttpBinding" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          only supports SOAP security and requires reliable messaging. This binding requires that the client has a public URI that provides a callback endpoint for the service. This is provided by the <see
          cref="P:System.ServiceModel.Channels.CompositeDuplexBindingElement.ClientBaseAddress" />
+
+        
 
         
 
@@ -57,6 +65,8 @@
       <para
         >By default the <see
          cref="T:System.ServiceModel.WSDualHttpBinding" />
+
+        
 
         
 
@@ -131,6 +141,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -163,6 +175,8 @@
 
             
 
+            
+
             , so there is no constructor that provides a switch to turn it off as there is on the <see
              cref="M:System.ServiceModel.WSHttpBinding.#ctor(System.ServiceModel.SecurityMode)" />
 
@@ -170,8 +184,12 @@
 
             
 
+            
+
              constructor for the <see
              cref="T:System.ServiceModel.WSHttpBinding" />
+
+            
 
             
 
@@ -190,6 +208,8 @@
 
             
 
+            
+
              class with a specified type of security used by the binding.</para
           >
         </summary>
@@ -200,8 +220,12 @@
 
           
 
+          
+
           The value of <see
            cref="T:System.ServiceModel.WSDualHttpSecurityMode" />
+
+          
 
           
 
@@ -234,8 +258,12 @@
 
             
 
+            
+
              property determines whether endpoints configured with the <see
              cref="T:System.ServiceModel.WSDualHttpBinding" />
+
+            
 
             
 
@@ -251,11 +279,15 @@
 
             
 
+            
+
              is true, requests to local Internet resources do not use the proxy server. Use the host name (rather than localhost) if you want clients to go through a proxy when talking to services on the same machine when this property is set to true.</para
           >
           <para
             >When <see
              cref="P:System.ServiceModel.WSDualHttpBinding.BypassProxyOnLocal" />
+
+            
 
             
 
@@ -328,8 +360,12 @@
 
             
 
+            
+
              that includes a <see
              cref="T:System.ServiceModel.Channels.TransactionFlowBindingElement" />
+
+            
 
             
 
@@ -342,8 +378,12 @@
 
             
 
+            
+
             , a <see
              cref="T:System.ServiceModel.Channels.ReliableSessionBindingElement" />
+
+            
 
             
 
@@ -426,6 +466,8 @@
 
             
 
+            
+
              minimizes the cost of using buffers with a buffer pool. Buffers are required to process messages by the service when they come out of the channel. If there is not sufficient memory in the buffer pool to process the message load, the <see
              cref="T:System.ServiceModel.Channels.BufferManager" />
 
@@ -433,8 +475,12 @@
 
             
 
+            
+
              must allocate additional memory from the CLR heap, which increases the garbage collection overhead. Extensive allocation from the CLR garbage heap is an indication that the buffer pool size is too small and that performance can be improved with a larger allocation by increasing the <see
              cref="P:System.ServiceModel.WSDualHttpBinding.MaxBufferPoolSize" />
+
+            
 
             
 
@@ -472,6 +518,8 @@
 
             
 
+            
+
              is bounded by the amount of memory allocated for each message. This bound on message size is intended to limit exposure to DOS-style attacks. </para
           >
           <para
@@ -482,8 +530,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ServiceModel.BasicHttpBinding.MaxReceivedMessageSize" />
+
+            
 
             
 
@@ -545,8 +597,12 @@
 
             
 
+            
+
              is set to true, the value of the <see
              cref="P:System.ServiceModel.WSDualHttpBinding.ProxyAddress" />
+
+            
 
             
 
@@ -612,6 +668,8 @@
           <para
             >The reliable session is required for service configured with a <see
              cref="T:System.ServiceModel.WSDualHttpBinding" />
+
+            
 
             
 

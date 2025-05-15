@@ -27,8 +27,12 @@
 
         
 
+        
+
          stores references to items that will be embedded in an e-mail message. The embedded items can be image files such as company logos. The <see
          cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+        
 
         
 
@@ -53,6 +61,8 @@
       <para
         >E-mail messages that allow embedded objects are configurable in the following Web controls by setting their <see
          cref="T:System.Web.UI.WebControls.MailDefinition" />
+
+        
 
         
 
@@ -86,8 +96,12 @@
 
           
 
+          
+
            and <see
            cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+
+          
 
           
 
@@ -102,6 +116,8 @@
       <para
         >Represents an ordered set of <see
          cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
+
+        
 
         
 
@@ -124,6 +140,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+
+            
 
             
 
@@ -162,8 +180,12 @@
 
             
 
+            
+
              to the end of the <see
              cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+
+            
 
             
 
@@ -182,8 +204,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+
+            
 
             
 
@@ -199,6 +225,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
 
@@ -206,8 +234,12 @@
 
           
 
+          
+
            to add to the <see
            cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+
+          
 
           
 
@@ -244,6 +276,8 @@
 
             
 
+            
+
              method to identify the position of the <see
              cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
 
@@ -251,8 +285,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+
+            
 
             
 
@@ -271,8 +309,12 @@
 
             
 
+            
+
              contains a specific <see
              cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
+
+            
 
             
 
@@ -291,8 +333,12 @@
 
             
 
+            
+
              contains <paramref
              name="obj" />
+
+            
 
             
 
@@ -308,6 +354,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
 
@@ -315,8 +363,12 @@
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+
+          
 
           
 
@@ -355,11 +407,15 @@
 
             
 
+            
+
              instance beginning at the specified index in the array.</para
           >
         </summary>
         <param name="array">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -372,8 +428,12 @@
 
           
 
+          
+
            is the destination of the elements copied from the current <see
            cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+
+          
 
           
 
@@ -388,8 +448,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array " />
+
+          
 
           
 
@@ -427,8 +491,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+
+            
 
             
 
@@ -447,8 +515,12 @@
 
             
 
+            
+
              if it exists in the <see
              cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+
+            
 
             
 
@@ -464,6 +536,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
 
@@ -471,8 +545,12 @@
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+
+          
 
           
 
@@ -510,8 +588,12 @@
 
             
 
+            
+
              is 0, <paramref
              name="value " />
+
+            
 
             
 
@@ -524,8 +606,12 @@
 
             
 
+            
+
             . If <paramref
              name="index" />
+
+            
 
             
 
@@ -538,8 +624,12 @@
 
             
 
+            
+
             , <paramref
              name="value" />
+
+            
 
             
 
@@ -558,8 +648,12 @@
 
             
 
+            
+
              into the <see
              cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+
+            
 
             
 
@@ -575,8 +669,12 @@
 
           
 
+          
+
           An integer value that indicates the index position at which to insert the <see
            cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
+
+          
 
           
 
@@ -591,6 +689,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
 
@@ -598,8 +698,12 @@
 
           
 
+          
+
            object to insert into the <see
            cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+
+          
 
           
 
@@ -678,8 +782,12 @@
 
             
 
+            
+
              method uses the information contained in the <see
              cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
+
+            
 
             
 
@@ -698,8 +806,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+
+            
 
             
 
@@ -715,6 +827,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.EmbeddedMailObject" />
 
@@ -722,8 +836,12 @@
 
           
 
+          
+
            to remove from the <see
            cref="T:System.Web.UI.WebControls.EmbeddedMailObjectsCollection" />
+
+          
 
           
 

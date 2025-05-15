@@ -46,6 +46,8 @@
 
             
 
+            
+
              object that contains three columns with names indicating that the columns are connected to a data source.</para
           >
         </summary>
@@ -54,6 +56,8 @@
           <para
             >A new <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -85,6 +89,8 @@
 
             
 
+            
+
              method to add rows of data to the resulting table.</para
           >
         </remarks>
@@ -98,6 +104,8 @@
 
             
 
+            
+
              object that contains three columns with names that indicate that the columns contain sample data.</para
           >
         </summary>
@@ -106,6 +114,8 @@
           <para
             >A new <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -143,6 +153,8 @@
 
             
 
+            
+
              method to add rows of data to the resulting table.</para
           >
         </remarks>
@@ -151,6 +163,8 @@
           <para
             >Creates a sample <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -169,8 +183,12 @@
 
             
 
+            
+
              object that contains columns with the same names and data types as the provided <paramref
              name="referenceData" />
+
+            
 
             
 
@@ -186,8 +204,12 @@
 
           
 
+          
+
           A data source with the desired schema to use as the format for the sample <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -228,6 +250,8 @@
 
             
 
+            
+
              to add rows of data to the resulting table.</para
           >
         </remarks>
@@ -236,6 +260,8 @@
           <para
             >Creates a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -254,11 +280,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="referenceData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -271,10 +301,14 @@
 
           
 
+          
+
            object containing data.</param
         >
         <param name="useDataBoundData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -333,11 +367,15 @@
 
             
 
+            
+
              object that describes the data fields of the specified data source.</para
           >
         </returns>
         <param name="dataSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -375,6 +413,8 @@
 
             
 
+            
+
              is null, the first data member in the specified data source is returned.</para
           >
         </remarks>
@@ -392,11 +432,15 @@
 
             
 
+            
+
              containing the specified data member from the specified data source, if it exists.</para
           >
         </returns>
         <param name="dataSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -409,10 +453,14 @@
 
           
 
+          
+
            that contains the data in which to find the member. </param
         >
         <param name="dataMember">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -455,6 +503,8 @@
 
           
 
+          
+
           The data source from which to retrieve the names of the members. </param
         >
       </Docs>
@@ -492,11 +542,15 @@
 
             
 
+            
+
              containing sample data for use at design time.</para
           >
         </returns>
         <param name="dataTable">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -509,10 +563,14 @@
 
           
 
+          
+
            object to which the sample rows are added. </param
         >
         <param name="minimumRows">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -555,8 +613,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -572,8 +634,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -583,6 +649,8 @@
         >
         <param name="dataSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -626,6 +694,8 @@
 
             
 
+            
+
              containing the data member, or null if the data source, member, or component's site could not be accessed.</para
           >
         </returns>
@@ -636,8 +706,12 @@
 
           
 
+          
+
           The object implementing <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -652,10 +726,14 @@
 
           
 
+          
+
           The data source to retrieve. </param
         >
         <param name="dataMember">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

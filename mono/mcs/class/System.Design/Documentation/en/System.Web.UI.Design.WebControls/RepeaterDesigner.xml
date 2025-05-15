@@ -29,6 +29,8 @@
 
         
 
+        
+
          control.</para
       >
     </summary>
@@ -45,6 +47,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.WebControls.RepeaterDesigner" />
+
+            
 
             
 
@@ -78,6 +82,8 @@
 
             
 
+            
+
              control to.</para
           >
         </summary>
@@ -101,6 +107,8 @@
           <para
             >A data-binding expression that identifies the source of data for the associated <see
              cref="T:System.Web.UI.WebControls.Repeater" />
+
+            
 
             
 
@@ -135,6 +143,8 @@
 
             
 
+            
+
              object references.</para
           >
         </remarks>
@@ -148,11 +158,15 @@
 
             
 
+            
+
              object and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -191,6 +205,8 @@
 
             
 
+            
+
              method and using the specified number of rows.</para
           >
         </summary>
@@ -199,6 +215,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -239,6 +257,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -322,6 +342,8 @@
 
           
 
+          
+
           The exception that occurred.</param
         >
       </Docs>
@@ -351,8 +373,12 @@
 
             
 
+            
+
              method uses the <see
              cref="M:System.Web.UI.Design.WebControls.RepeaterDesigner.GetSelectedDataSource" />
+
+            
 
             
 
@@ -365,8 +391,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.Design.WebControls.RepeaterDesigner.DataMember" />
+
+            
 
             
 
@@ -384,6 +414,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -416,6 +448,8 @@
 
             
 
+            
+
              method uses the <see
              cref="M:System.Web.UI.Design.DesignTimeData.GetSelectedDataSource(System.ComponentModel.IComponent,System.String)" />
 
@@ -423,8 +457,12 @@
 
             
 
+            
+
              method to construct a data source from the object that is specified by the <see
              cref="P:System.Web.UI.Design.WebControls.RepeaterDesigner.DataSource" />
+
+            
 
             
 
@@ -438,6 +476,8 @@
           <para
             >Retrieves the selected data source component from the container of the associated <see
              cref="T:System.Web.UI.WebControls.Repeater" />
+
+            
 
             
 
@@ -480,6 +520,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -490,8 +532,12 @@
 
           
 
+          
+
           The associated <see
            cref="T:System.Web.UI.WebControls.Repeater" />
+
+          
 
           
 
@@ -571,6 +617,8 @@
         </summary>
         <param name="properties">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

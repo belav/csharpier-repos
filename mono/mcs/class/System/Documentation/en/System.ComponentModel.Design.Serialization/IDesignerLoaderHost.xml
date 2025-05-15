@@ -40,8 +40,12 @@
 
         
 
+        
+
          can implement this interface to enable support for loading by a <see
          cref="T:System.ComponentModel.Design.Serialization.DesignerLoader" />
+
+        
 
         
 
@@ -53,6 +57,8 @@
       <para
         >This class is isolated from <see
          cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+        
 
         
 
@@ -101,11 +107,15 @@
 
             
 
+            
+
              that loads the design document calls this method to indicate that the load terminated.</para
           >
           <para
             >If errors are encountered during loading, they must be passed in the <paramref
              name="errorCollection" />
+
+            
 
             
 
@@ -118,8 +128,12 @@
 
             
 
+            
+
              on them and pass them as a collection. If the load is successful, then the <paramref
              name="errorCollection" />
+
+            
 
             
 
@@ -139,6 +153,8 @@
 
           
 
+          
+
           The fully qualified name of the base class of the document that this designer is designing. </param
         >
         <param name="successful">
@@ -148,10 +164,14 @@
 
           
 
+          
+
           true if the designer is successfully loaded; otherwise, false. </param
         >
         <param name="errorCollection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -183,6 +203,8 @@
           <para
             >The <see
              cref="T:System.ComponentModel.Design.Serialization.DesignerLoader" />
+
+            
 
             
 

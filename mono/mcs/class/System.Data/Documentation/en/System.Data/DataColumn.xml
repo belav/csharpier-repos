@@ -42,8 +42,12 @@
 
         
 
+        
+
          is the fundamental building block for creating the schema of a <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -56,8 +60,12 @@
 
         
 
+        
+
          objects to the <see
          cref="T:System.Data.DataColumnCollection" />
+
+        
 
         
 
@@ -67,6 +75,8 @@
          type="text/html">
           <a href="e85c4a0e-4f3f-458c-b58b-0ddbc06bf974">Adding Columns to a Table</a>
         </format>
+
+        
 
         
 
@@ -82,8 +92,12 @@
 
         
 
+        
+
          has a <see
          cref="P:System.Data.DataColumn.DataType" />
+
+        
 
         
 
@@ -96,8 +110,12 @@
 
         
 
+        
+
          contains. For example, you can restrict the data type to integers, or strings, or decimals. Because data that is contained by the <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -114,11 +132,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >Properties such as <see
          cref="P:System.Data.DataColumn.AllowDBNull" />
+
+        
 
         
 
@@ -131,8 +153,12 @@
 
         
 
+        
+
         , and <see
          cref="P:System.Data.DataColumn.ReadOnly" />
+
+        
 
         
 
@@ -145,8 +171,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Data.DataColumn.AutoIncrementSeed" />
+
+        
 
         
 
@@ -159,8 +189,12 @@
 
         
 
+        
+
          properties to control automatic data generation. For more information about <see
          cref="P:System.Data.DataColumn.AutoIncrement" />
+
+        
 
         
 
@@ -175,10 +209,14 @@
 
         
 
+        
+
         . For more information, see <format
          type="text/html">
           <a href="2ea85959-e763-4669-8bd9-46a9dab894bd">Defining a Primary Key for a Table</a>
         </format>
+
+        
 
         
 
@@ -194,8 +232,12 @@
 
         
 
+        
+
          are unique by creating a <see
          cref="T:System.Data.UniqueConstraint" />
+
+        
 
         
 
@@ -208,8 +250,12 @@
 
         
 
+        
+
          of the <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -222,10 +268,14 @@
 
         
 
+        
+
          belongs. For more information, see <format
          type="text/html">
           <a href="27c9f2fd-f64d-4b4e-bbf6-1d24f47067cb">Adding Constraints to a Table</a>
         </format>
+
+        
 
         
 
@@ -241,8 +291,12 @@
 
         
 
+        
+
          objects, create a <see
          cref="T:System.Data.DataRelation" />
+
+        
 
         
 
@@ -255,8 +309,12 @@
 
         
 
+        
+
          of a <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -272,8 +330,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Data.DataColumn" />
+
+        
 
         
 
@@ -288,6 +350,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -296,6 +360,8 @@
       <para
         >Represents the schema of a column in a <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -322,8 +388,12 @@
 
             
 
+            
+
              object has no default <see
              cref="P:System.Data.DataColumn.ColumnName" />
+
+            
 
             
 
@@ -336,6 +406,8 @@
 
             
 
+            
+
             . When you add it to a <see
              cref="T:System.Data.DataColumnCollection" />
 
@@ -343,8 +415,12 @@
 
             
 
+            
+
             , a default name ("Column1", "Column2", and so on) will be generated if a name has not been assigned to the <see
              cref="P:System.Data.DataColumn.ColumnName" />
+
+            
 
             
 
@@ -358,6 +434,8 @@
           <para
             >Initializes a new instance of a <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -390,6 +468,8 @@
 
             
 
+            
+
              property value.</para
           >
         </remarks>
@@ -403,11 +483,15 @@
 
             
 
+            
+
              class, as type string, using the specified column name.</para
           >
         </summary>
         <param name="columnName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -444,11 +528,15 @@
 
             
 
+            
+
              class using the specified column name and data type.</para
           >
         </summary>
         <param name="columnName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -463,8 +551,12 @@
 
           
 
+          
+
           A supported <see
            cref="P:System.Data.DataColumn.DataType" />
+
+          
 
           
 
@@ -502,11 +594,15 @@
 
             
 
+            
+
              class using the specified name, data type, and expression.</para
           >
         </summary>
         <param name="columnName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -521,8 +617,12 @@
 
           
 
+          
+
           A supported <see
            cref="P:System.Data.DataColumn.DataType" />
+
+          
 
           
 
@@ -537,8 +637,12 @@
 
           
 
+          
+
           The expression used to create this column. For more information, see the <see
            cref="P:System.Data.DataColumn.Expression" />
+
+          
 
           
 
@@ -576,8 +680,12 @@
 
             
 
+            
+
              argument sets the <see
              cref="P:System.Data.DataColumn.ColumnMapping" />
+
+            
 
             
 
@@ -590,8 +698,12 @@
 
             
 
+            
+
              is mapped when a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -604,12 +716,16 @@
 
             
 
+            
+
              is set to MappingType.Attribute, the XML element would be as follows: </para
           >
           <para>&lt;Name fName = 'Bob'/&gt; </para>
           <para
             >For more information about how columns are mapped to elements or attributes, see the <see
              cref="P:System.Data.DataColumn.ColumnMapping" />
+
+            
 
             
 
@@ -628,11 +744,15 @@
 
             
 
+            
+
              class using the specified name, data type, expression, and value that determines whether the column is an attribute.</para
           >
         </summary>
         <param name="columnName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -647,8 +767,12 @@
 
           
 
+          
+
           A supported <see
            cref="P:System.Data.DataColumn.DataType" />
+
+          
 
           
 
@@ -663,8 +787,12 @@
 
           
 
+          
+
           The expression used to create this column. For more information, see the <see
            cref="P:System.Data.DataColumn.Expression" />
+
+          
 
           
 
@@ -679,8 +807,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.MappingType" />
+
+          
 
           
 
@@ -738,8 +870,12 @@
 
             
 
+            
+
              property is coerced to Int32. An exception is generated if this is a computed column. The <see
              cref="P:System.Data.DataColumn.Expression" />
+
+            
 
             
 
@@ -755,8 +891,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -769,8 +909,12 @@
 
             
 
+            
+
              set to true, because its value is generated automatically. To use the <see
              cref="P:System.Data.DataRow.ItemArray" />
+
+            
 
             
 
@@ -783,8 +927,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -800,6 +948,8 @@
 
             
 
+            
+
              or <see
              cref="T:System.Data.SqlTypes.SqlInt32" />
 
@@ -807,8 +957,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Data.DataColumn.AutoIncrement" />
+
+            
 
             
 
@@ -824,8 +978,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -838,11 +996,15 @@
 
             
 
+            
+
              will only partially work. Use Int64 or Decimal instead.</para
           >
           <para
             >When the <see
              cref="P:System.Data.DataColumn.AutoIncrementStep" />
+
+            
 
             
 
@@ -889,6 +1051,8 @@
 
             
 
+            
+
              property set to true. The default is 0.</para
           >
         </summary>
@@ -918,6 +1082,8 @@
           <para
             >Gets or sets the increment used by a column with its <see
              cref="P:System.Data.DataColumn.AutoIncrement" />
+
+            
 
             
 
@@ -956,8 +1122,12 @@
 
             
 
+            
+
              property to display a descriptive or friendly name for a <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -1036,8 +1206,12 @@
 
             
 
+            
+
              property determines how a <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -1050,8 +1224,12 @@
 
             
 
+            
+
              is saved as an XML document using the <see
              cref="M:System.Data.DataSet.WriteXml(System.IO.Stream)" />
+
+            
 
             
 
@@ -1067,8 +1245,12 @@
 
             
 
+            
+
              is named "customerID," and its <see
              cref="P:System.Data.DataColumn.ColumnMapping" />
+
+            
 
             
 
@@ -1099,8 +1281,12 @@
 
             
 
+            
+
              constructor that contains the <paramref
              name="type" />
+
+            
 
             
 
@@ -1113,8 +1299,12 @@
 
             
 
+            
+
              is mapped when its <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1130,8 +1320,12 @@
 
             
 
+            
+
              property corresponds to the constructor argument <paramref
              name="type" />
+
+            
 
             
 
@@ -1145,6 +1339,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Data.MappingType" />
+
+            
 
             
 
@@ -1183,8 +1379,12 @@
 
             
 
+            
+
              is created, it has no <see
              cref="P:System.Data.DataColumn.ColumnName" />
+
+            
 
             
 
@@ -1197,6 +1397,8 @@
 
             
 
+            
+
              is added to a <see
              cref="T:System.Data.DataColumnCollection" />
 
@@ -1204,8 +1406,12 @@
 
             
 
+            
+
              for a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1221,8 +1427,12 @@
 
             
 
+            
+
              value is set to the <see
              cref="P:System.Data.DataColumn.ColumnName" />
+
+            
 
             
 
@@ -1236,6 +1446,8 @@
           <para
             >Gets or sets the name of the column in the <see
              cref="T:System.Data.DataColumnCollection" />
+
+            
 
             
 
@@ -1277,11 +1489,15 @@
 
             
 
+            
+
              value is very important to guaranteeing the correct creation and updating of data in a data source.</para
           >
           <para
             >The <see
              cref="P:System.Data.DataColumn.DataType" />
+
+            
 
             
 
@@ -1391,8 +1607,12 @@
 
             
 
+            
+
              is set to true before setting the <see
              cref="P:System.Data.DataColumn.DataType" />
+
+            
 
             
 
@@ -1409,8 +1629,12 @@
 
               
 
+              
+
               , or as a <see
                cref="P:System.Data.DataView.Sort" />
+
+              
 
               
 
@@ -1423,8 +1647,12 @@
 
               
 
+              
+
                key for a <see
                cref="T:System.Data.DataView" />
+
+              
 
               
 
@@ -1450,6 +1678,8 @@ myDataTable.Rows[0][0] = newValue;</code>
 
               
 
+              
+
               .)</para
             >
           </block>
@@ -1463,8 +1693,12 @@ myDataTable.Rows[0][0] = newValue;</code>
 
                 
 
+                
+
                  or <see
                  cref="M:System.Data.DataTable.Select" />
+
+                
 
                 
 
@@ -1482,6 +1716,8 @@ myDataTable.Rows[0][0] = newValue;</code>
 
                 
 
+                
+
                 , or as a <see
                  cref="P:System.Data.DataView.Sort" />
 
@@ -1489,8 +1725,12 @@ myDataTable.Rows[0][0] = newValue;</code>
 
                 
 
+                
+
                  or for a <see
                  cref="T:System.Data.DataView" />
+
+                
 
                 
 
@@ -1508,6 +1748,8 @@ myDataTable.Rows[0][0] = newValue;</code>
 
                 
 
+                
+
                  can be only set to MappingType.Element.</para
               >
             </item>
@@ -1520,6 +1762,8 @@ myDataTable.Rows[0][0] = newValue;</code>
 
                 
 
+                
+
                 , and if necessary implement the <see
                  cref="T:System.Runtime.Serialization.ISerializable" />
 
@@ -1527,8 +1771,12 @@ myDataTable.Rows[0][0] = newValue;</code>
 
                 
 
+                
+
                  or <see
                  cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+                
 
                 
 
@@ -1546,8 +1794,12 @@ myDataTable.Rows[0][0] = newValue;</code>
 
                 
 
+                
+
                  class’s change tracking mechanism, the class that implements the column’s data type must either implement the <see
                  cref="T:System.ComponentModel.IChangeTracking" />
+
+                
 
                 
 
@@ -1560,8 +1812,12 @@ myDataTable.Rows[0][0] = newValue;</code>
 
                 
 
+                
+
                  when the column value has been modified, either by calling <see
                  cref="M:System.Data.DataRow.SetModified" />
+
+                
 
                 
 
@@ -1625,8 +1881,12 @@ myDataTable.Rows[0][0] = newValue;</code>
 
             
 
+            
+
              cannot be modified after rows are added to a <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -1639,8 +1899,12 @@ myDataTable.Rows[0][0] = newValue;</code>
 
             
 
+            
+
              and <see
              cref="F:System.Data.DataSetDateTime.UnspecifiedLocal" />
+
+            
 
             
 
@@ -1674,8 +1938,12 @@ myDataTable.Rows[0][0] = newValue;</code>
 
             
 
+            
+
              is created (for example, the date and time when the <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -1691,11 +1959,15 @@ myDataTable.Rows[0][0] = newValue;</code>
 
             
 
+            
+
              is set to true, there can be no default value.</para
           >
           <para
             >You can create a new row using the <see
              cref="P:System.Data.DataRow.ItemArray" />
+
+            
 
             
 
@@ -1708,6 +1980,8 @@ myDataTable.Rows[0][0] = newValue;</code>
 
             
 
+            
+
              class and passing the method an array of values. This is a potential problem for a column with a default value because its value is generated automatically. To use the <see
              cref="P:System.Data.DataRow.ItemArray" />
 
@@ -1715,8 +1989,12 @@ myDataTable.Rows[0][0] = newValue;</code>
 
             
 
+            
+
              property with such a column, place null in the column's position in the array. For more information, see the <see
              cref="P:System.Data.DataRow.ItemArray" />
+
+            
 
             
 
@@ -1759,8 +2037,12 @@ myDataTable.Rows[0][0] = newValue;</code>
 
             
 
+            
+
              property is to create calculated columns. For example, to calculate a tax value, the unit price is multiplied by a tax rate of a specific region. Because tax rates vary from region to region, it would be impossible to put a single tax rate in a column; instead, the value is calculated using the <see
              cref="P:System.Data.DataColumn.Expression" />
+
+            
 
             
 
@@ -1772,6 +2054,8 @@ myDataTable.Rows[0][0] = newValue;</code>
           <para
             >A second use is to create an aggregate column. Similar to a calculated value, an aggregate performs an operation based on the complete set of rows in the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1791,8 +2075,12 @@ myDataTable.Rows[0][0] = newValue;</code>
 
             
 
+            
+
              property to refer to columns. For example, if the <see
              cref="P:System.Data.DataColumn.ColumnName" />
+
+            
 
             
 
@@ -1879,8 +2167,12 @@ myDataTable.Rows[0][0] = newValue;</code>
 
             
 
+            
+
              property of the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1893,8 +2185,12 @@ myDataTable.Rows[0][0] = newValue;</code>
 
             
 
+            
+
              property of the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1919,6 +2215,8 @@ myDataTable.Rows[0][0] = newValue;</code>
           <para
             >If a table has more than one child, the syntax is: Child(RelationName). For example, if a table has two child tables named Customers and Orders, and the <see
              cref="T:System.Data.DataRelation" />
+
+            
 
             
 
@@ -1955,6 +2253,8 @@ myDataTable.Rows[0][0] = newValue;</code>
 
             
 
+            
+
              property of a column. You can also convert data types using the Convert function, shown in the following section.</para
           >
           <para>An aggregate can only be applied to a single column and no other expressions can be used inside the aggregate.</para>
@@ -1985,8 +2285,12 @@ myDataTable.Rows[0][0] = newValue;</code>
 
                   
 
+                  
+
                   , <paramref
                    name="type" />
+
+                  
 
                   
 
@@ -2008,10 +2312,14 @@ myDataTable.Rows[0][0] = newValue;</code>
 
                   
 
+                  
+
                    -- The expression to convert.</para
                 >
                 <para>
                   <paramref name="type" />
+
+                  
 
                   
 
@@ -2047,6 +2355,8 @@ myDataTable.Rows[0][0] = newValue;</code>
 
                   
 
+                  
+
                   ) </para
                 >
               </description>
@@ -2058,6 +2368,8 @@ myDataTable.Rows[0][0] = newValue;</code>
               <description>
                 <para>
                   <paramref name="expression" />
+
+                  
 
                   
 
@@ -2092,8 +2404,12 @@ myDataTable.Rows[0][0] = newValue;</code>
 
                   
 
+                  
+
                   , <paramref
                    name="replacementvalue" />
+
+                  
 
                   
 
@@ -2115,6 +2431,8 @@ myDataTable.Rows[0][0] = newValue;</code>
 
                   
 
+                  
+
                    -- The expression to check.</para
                 >
                 <para>
@@ -2124,8 +2442,12 @@ myDataTable.Rows[0][0] = newValue;</code>
 
                   
 
+                  
+
                    -- If expression is null, <paramref
                    name="replacementvalue" />
+
+                  
 
                   
 
@@ -2160,6 +2482,8 @@ myDataTable.Rows[0][0] = newValue;</code>
 
                   
 
+                  
+
                   , <paramref
                    name="truepart" />
 
@@ -2167,8 +2491,12 @@ myDataTable.Rows[0][0] = newValue;</code>
 
                   
 
+                  
+
                   , <paramref
                    name="falsepart" />
+
+                  
 
                   
 
@@ -2190,6 +2518,8 @@ myDataTable.Rows[0][0] = newValue;</code>
 
                   
 
+                  
+
                    -- The expression to evaluate.</para
                 >
                 <para>
@@ -2199,10 +2529,14 @@ myDataTable.Rows[0][0] = newValue;</code>
 
                   
 
+                  
+
                    -- The value to return if the expression is true.</para
                 >
                 <para>
                   <paramref name="falsepart" />
+
+                  
 
                   
 
@@ -2237,6 +2571,8 @@ myDataTable.Rows[0][0] = newValue;</code>
 
                   
 
+                  
+
                   ) </para
                 >
               </description>
@@ -2248,6 +2584,8 @@ myDataTable.Rows[0][0] = newValue;</code>
               <description>
                 <para>
                   <paramref name="expression" />
+
+                  
 
                   
 
@@ -2281,6 +2619,8 @@ myDataTable.Rows[0][0] = newValue;</code>
 
                   
 
+                  
+
                   ,<paramref
                    name=" start" />
 
@@ -2288,8 +2628,12 @@ myDataTable.Rows[0][0] = newValue;</code>
 
                   
 
+                  
+
                   ,<paramref
                    name=" length" />
+
+                  
 
                   
 
@@ -2311,6 +2655,8 @@ myDataTable.Rows[0][0] = newValue;</code>
 
                   
 
+                  
+
                    -- The source string for the substring.</para
                 >
                 <para>
@@ -2320,10 +2666,14 @@ myDataTable.Rows[0][0] = newValue;</code>
 
                   
 
+                  
+
                    -- Integer that specifies where the substring starts.</para
                 >
                 <para>
                   <paramref name="length" />
+
+                  
 
                   
 
@@ -2344,8 +2694,12 @@ myDataTable.Rows[0][0] = newValue;</code>
 
               
 
+              
+
                property by assigning it a null value or empty string. If a default value is set on the expression column, all previously filled rows are assigned the default value after the <see
                cref="P:System.Data.DataColumn.Expression" />
+
+              
 
               
 
@@ -2394,11 +2748,15 @@ myDataTable.Rows[0][0] = newValue;</code>
 
             
 
+            
+
              property lets you store custom information with the object. For example, you may store a time when the data should be refreshed.</para
           >
           <para
             >Extended properties must be of type <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -2411,8 +2769,12 @@ myDataTable.Rows[0][0] = newValue;</code>
 
             
 
+            
+
              are not persisted when the <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -2426,6 +2788,8 @@ myDataTable.Rows[0][0] = newValue;</code>
           <para
             >Gets the collection of custom user information associated with a <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -2464,6 +2828,8 @@ myDataTable.Rows[0][0] = newValue;</code>
 
             
 
+            
+
              property is ignored for non-text columns. A <see
              cref="T:System.ArgumentException" />
 
@@ -2471,8 +2837,12 @@ myDataTable.Rows[0][0] = newValue;</code>
 
             
 
+            
+
              exception is raised if you assign <see
              cref="P:System.Data.DataColumn.MaxLength" />
+
+            
 
             
 
@@ -2515,8 +2885,12 @@ myDataTable.Rows[0][0] = newValue;</code>
 
             
 
+            
+
              property is used when reading and writing an XML document into a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -2529,8 +2903,12 @@ myDataTable.Rows[0][0] = newValue;</code>
 
             
 
+            
+
              using the <see
              cref="M:System.Data.DataSet.ReadXml(System.Xml.XmlReader)" />
+
+            
 
             
 
@@ -2543,6 +2921,8 @@ myDataTable.Rows[0][0] = newValue;</code>
 
             
 
+            
+
             , <see
              cref="M:System.Data.DataSet.ReadXmlSchema(System.Xml.XmlReader)" />
 
@@ -2550,8 +2930,12 @@ myDataTable.Rows[0][0] = newValue;</code>
 
             
 
+            
+
             , or <see
              cref="M:System.Data.DataSet.WriteXmlSchema(System.IO.Stream)" />
+
+            
 
             
 
@@ -2567,6 +2951,8 @@ myDataTable.Rows[0][0] = newValue;</code>
 
             
 
+            
+
             . For example, a <see
              cref="T:System.Data.DataSet" />
 
@@ -2574,8 +2960,12 @@ myDataTable.Rows[0][0] = newValue;</code>
 
             
 
+            
+
              contains a schema read from a document that has the namespace "myCompany," and an attempt is made to read data (with the <see
              cref="M:System.Data.DataSet.ReadXml(System.Xml.XmlReader)" />
+
+            
 
             
 
@@ -2589,6 +2979,8 @@ myDataTable.Rows[0][0] = newValue;</code>
           <para
             >Gets or sets the namespace of the <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -2632,6 +3024,8 @@ myDataTable.Rows[0][0] = newValue;</code>
 
           
 
+          
+
           Parameter reference.</param
         >
       </Docs>
@@ -2650,6 +3044,8 @@ myDataTable.Rows[0][0] = newValue;</code>
           <para
             >Gets the (zero-based) position of the column in the <see
              cref="T:System.Data.DataColumnCollection" />
+
+            
 
             
 
@@ -2691,6 +3087,8 @@ myDataTable.Rows[0][0] = newValue;</code>
 
             
 
+            
+
              is used throughout an XML document to identify elements which belong to the namespace for a <see
              cref="T:System.Data.DataSet" />
 
@@ -2698,8 +3096,12 @@ myDataTable.Rows[0][0] = newValue;</code>
 
             
 
+            
+
              object (as set by the <see
              cref="P:System.Data.DataSet.Namespace" />
+
+            
 
             
 
@@ -2713,6 +3115,8 @@ myDataTable.Rows[0][0] = newValue;</code>
           <para
             >Gets or sets an XML prefix that aliases the namespace of the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -2753,6 +3157,8 @@ myDataTable.Rows[0][0] = newValue;</code>
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2810,8 +3216,12 @@ myDataTable.Rows[0][0] = newValue;</code>
 
             
 
+            
+
              to the specified ordinal or position. If ordinal is less than 0 or greater than the existing number of columns – 1 (greater than the ordinal of the last column) then an Invalid <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -2831,11 +3241,15 @@ myDataTable.Rows[0][0] = newValue;</code>
 
             
 
+            
+
              to the specified ordinal or position.</para
           >
         </summary>
         <param name="ordinal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2859,6 +3273,8 @@ myDataTable.Rows[0][0] = newValue;</code>
           <para
             >Gets the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -2900,6 +3316,8 @@ myDataTable.Rows[0][0] = newValue;</code>
 
             
 
+            
+
              of the column, if one exists.</para
           >
         </summary>
@@ -2913,8 +3331,12 @@ myDataTable.Rows[0][0] = newValue;</code>
 
             
 
+            
+
              value, if the property is set; otherwise, the <see
              cref="P:System.Data.DataColumn.ColumnName" />
+
+            
 
             
 

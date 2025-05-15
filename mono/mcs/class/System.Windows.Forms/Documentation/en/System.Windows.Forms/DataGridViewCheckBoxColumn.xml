@@ -24,8 +24,12 @@
 
         
 
+        
+
          class is a specialized type of the <see
          cref="T:System.Windows.Forms.DataGridViewColumn" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          has an associated <see
          cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
+
+        
 
         
 
@@ -52,8 +60,12 @@
 
         
 
+        
+
          that intersects it. Each cell supplies a user interface (UI) that is similar to a <see
          cref="T:System.Windows.Forms.CheckBox" />
+
+        
 
         
 
@@ -69,11 +81,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >Typically, check box cell values are intended either for storage, like any other data, or for performing bulk operations. If you want to respond immediately when users click a check box cell, you can handle the <see
          cref="E:System.Windows.Forms.DataGridView.CellContentClick" />
+
+        
 
         
 
@@ -86,8 +102,12 @@
 
         
 
+        
+
          event to respond to it. To commit the change when the cell is clicked, you must handle the <see
          cref="E:System.Windows.Forms.DataGridView.CurrentCellDirtyStateChanged" />
+
+        
 
         
 
@@ -100,8 +120,12 @@
 
         
 
+        
+
          method and pass in the <see
          cref="F:System.Windows.Forms.DataGridViewDataErrorContexts.Commit" />
+
+        
 
         
 
@@ -115,6 +139,8 @@
       <para
         >Hosts a collection of <see
          cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
+
+        
 
         
 
@@ -141,6 +167,8 @@
 
             
 
+            
+
              constructor.</para
           >
         </remarks>
@@ -149,6 +177,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.DataGridViewCheckBoxColumn" />
+
+            
 
             
 
@@ -199,6 +229,8 @@
 
                   
 
+                  
+
                    with its <see
                    cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ThreeState" />
 
@@ -206,8 +238,12 @@
 
                   
 
+                  
+
                    property initialized to the <paramref
                    name="threeState" />
+
+                  
 
                   
 
@@ -227,6 +263,8 @@
                 <para
                   >The value of the <paramref
                    name="threeState" />
+
+                  
 
                   
 
@@ -258,6 +296,8 @@
 
                   
 
+                  
+
                    property of the <see
                    cref="T:System.Windows.Forms.DataGridViewCellStyle" />
 
@@ -265,8 +305,12 @@
 
                   
 
+                  
+
                    object returned by the <see
                    cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.DefaultCellStyle" />
+
+                  
 
                   
 
@@ -291,6 +335,8 @@
 
                   
 
+                  
+
                    property of the <see
                    cref="T:System.Windows.Forms.DataGridViewCellStyle" />
 
@@ -298,8 +344,12 @@
 
                   
 
+                  
+
                    object returned by the <see
                    cref="P:System.Windows.Forms.DataGridViewColumn.DefaultCellStyle" />
+
+                  
 
                   
 
@@ -316,8 +366,12 @@
 
                   
 
+                  
+
                    if <paramref
                    name="threeState" />
+
+                  
 
                   
 
@@ -339,11 +393,15 @@
 
             
 
+            
+
              and configures it to display check boxes with two or three states. </para
           >
         </summary>
         <param name="threeState">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -378,8 +436,12 @@
 
             
 
+            
+
              class initialize this property to a newly created <see
              cref="T:System.Windows.Forms.DataGridViewCheckBoxCell" />
+
+            
 
             
 
@@ -391,6 +453,8 @@
             <para
               >Changing the properties of the cell template will not immediately affect the user interface (UI) of the column's existing cells. These changes are only apparent after the column is regenerated (for example, by sorting the column or through a call to the <see
                cref="M:System.Windows.Forms.DataGridView.InvalidateColumn(System.Int32)" />
+
+              
 
               
 
@@ -439,6 +503,8 @@
 
             
 
+            
+
              returned by this property has the following initial property values:</para
           >
           <list type="table">
@@ -478,8 +544,12 @@
 
                   
 
+                  
+
                    if the initial <see
                    cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.ThreeState" />
+
+                  
 
                   
 
@@ -498,8 +568,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -516,11 +590,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >If the <see
              cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+
+            
 
             
 
@@ -533,8 +611,12 @@
 
             
 
+            
+
              property has a value of false, changing the <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.ThreeState" />
+
+            
 
             
 
@@ -547,8 +629,12 @@
 
             
 
+            
+
              to <see
              cref="F:System.Windows.Forms.CheckState.Indeterminate" />
+
+            
 
             
 
@@ -561,8 +647,12 @@
 
             
 
+            
+
              has a value of <see
              cref="F:System.Windows.Forms.CheckState.Indeterminate" />
+
+            
 
             
 
@@ -575,8 +665,12 @@
 
             
 
+            
+
              property value to false automatically sets <see
              cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+
+            
 
             
 
@@ -618,6 +712,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.TrueValue" />
 
@@ -625,8 +721,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.IndeterminateValue" />
+
+            
 
             
 
@@ -642,6 +742,8 @@
 
             
 
+            
+
              property of the cell object returned by the <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.CellTemplate" />
 
@@ -649,8 +751,12 @@
 
             
 
+            
+
              property. Setting this property also sets the <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.FalseValue" />
+
+            
 
             
 
@@ -698,6 +804,8 @@
 
             
 
+            
+
              and call the <see
              cref="M:System.Windows.Forms.Application.EnableVisualStyles" />
 
@@ -705,8 +813,12 @@
 
             
 
+            
+
              method before <see
              cref="Overload:System.Windows.Forms.Application.Run" />
+
+            
 
             
 
@@ -722,6 +834,8 @@
 
             
 
+            
+
              property of the cell object returned by the <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.CellTemplate" />
 
@@ -729,8 +843,12 @@
 
             
 
+            
+
              property. Setting this property also sets the <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.FlatStyle" />
+
+            
 
             
 
@@ -772,6 +890,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.TrueValue" />
 
@@ -779,8 +899,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.IndeterminateValue" />
+
+            
 
             
 
@@ -796,6 +920,8 @@
 
             
 
+            
+
              property of the cell object returned by the <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.CellTemplate" />
 
@@ -803,8 +929,12 @@
 
             
 
+            
+
              property. Setting this property also sets the <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.IndeterminateValue" />
+
+            
 
             
 
@@ -850,6 +980,8 @@
 
             
 
+            
+
              property of the cell object returned by the <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.CellTemplate" />
 
@@ -857,8 +989,12 @@
 
             
 
+            
+
              property. Setting this property also sets the <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.ThreeState" />
+
+            
 
             
 
@@ -874,8 +1010,12 @@
 
             
 
+            
+
              property of the object returned by the <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.DefaultCellStyle" />
+
+            
 
             
 
@@ -888,8 +1028,12 @@
 
             
 
+            
+
              property value to true automatically sets <see
              cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+
+            
 
             
 
@@ -902,8 +1046,12 @@
 
             
 
+            
+
             . If <see
              cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+
+            
 
             
 
@@ -916,6 +1064,8 @@
 
             
 
+            
+
             , changing the <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.ThreeState" />
 
@@ -923,8 +1073,12 @@
 
             
 
+            
+
              property value to false automatically sets <see
              cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+
+            
 
             
 
@@ -983,6 +1137,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.TrueValue" />
 
@@ -990,8 +1146,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.IndeterminateValue" />
+
+            
 
             
 
@@ -1007,6 +1167,8 @@
 
             
 
+            
+
              property of the cell object returned by the <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxColumn.CellTemplate" />
 
@@ -1014,8 +1176,12 @@
 
             
 
+            
+
              property. Setting this property also sets the <see
              cref="P:System.Windows.Forms.DataGridViewCheckBoxCell.TrueValue" />
+
+            
 
             
 

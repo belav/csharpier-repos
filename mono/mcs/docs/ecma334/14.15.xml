@@ -8,11 +8,15 @@
 
     
 
+    
+
      is an expression that can be fully evaluated at compile-time. <grammar_production
     >
       <name>
         <non_terminal where="14.15">constant-expression</non_terminal>
       </name>
+
+      
 
       
 
@@ -32,8 +36,12 @@
 
     
 
+    
+
     , <keyword
     >byte</keyword>
+
+    
 
     
 
@@ -46,8 +54,12 @@
 
     
 
+    
+
     , <keyword
     >ushort</keyword>
+
+    
 
     
 
@@ -60,8 +72,12 @@
 
     
 
+    
+
     , <keyword
     >uint</keyword>
+
+    
 
     
 
@@ -74,8 +90,12 @@
 
     
 
+    
+
     , <keyword
     >ulong</keyword>
+
+    
 
     
 
@@ -88,8 +108,12 @@
 
     
 
+    
+
     , <keyword
     >float</keyword>
+
+    
 
     
 
@@ -102,6 +126,8 @@
 
     
 
+    
+
     , <keyword
     >decimal</keyword>
 
@@ -109,8 +135,12 @@
 
     
 
+    
+
     , <keyword
     >bool</keyword>
+
+    
 
     
 
@@ -138,8 +168,12 @@
 
     
 
+    
+
      arithmetic operations and conversions during the compile-time evaluation of the expression always cause compile-time errors (<hyperlink
     >14.5.12</hyperlink>
+
+    
 
     
 
@@ -158,11 +192,15 @@
 
         
 
+        
+
         ). </list_item
       >
       <list_item
         > Enumeration member declarations (<hyperlink
         >21.30</hyperlink>
+
+        
 
         
 
@@ -178,11 +216,15 @@
 
         
 
+        
+
         ). </list_item
       >
       <list_item
         > goto case statements (<hyperlink
         >15.9.3</hyperlink>
+
+        
 
         
 
@@ -198,11 +240,15 @@
 
         
 
+        
+
         ) that includes an initializer. </list_item
       >
       <list_item
         > Attributes (<hyperlink
         >24</hyperlink>
+
+        
 
         
 
@@ -220,8 +266,12 @@
 
     
 
+    
+
     ) permits a constant expression of type <keyword
     >int</keyword>
+
+    
 
     
 
@@ -234,8 +284,12 @@
 
     
 
+    
+
     , <keyword
     >byte</keyword>
+
+    
 
     
 
@@ -248,8 +302,12 @@
 
     
 
+    
+
     , <keyword
     >ushort</keyword>
+
+    
 
     
 
@@ -262,8 +320,12 @@
 
     
 
+    
+
     , or <keyword
     >ulong</keyword>
+
+    
 
     
 

@@ -42,6 +42,8 @@
 
         
 
+        
+
          attribute to the class, or apply the Windows.Foundations.Metadata.DefaultAttribute attribute to an interface. The latter takes precedence if both attributes are supplied. </para
       >
     </remarks>
@@ -79,11 +81,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="defaultInterface">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

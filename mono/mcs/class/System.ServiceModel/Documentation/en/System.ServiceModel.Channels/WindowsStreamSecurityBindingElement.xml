@@ -40,8 +40,12 @@
 
         
 
+        
+
         , which can be configured and added to a custom binding. In addition, a third party can write its own custom StreamSecurityBindingElement. These binding elements extend the <see
          cref="T:System.ServiceModel.Channels.StreamUpgradeBindingElement" />
+
+        
 
         
 
@@ -64,6 +68,8 @@
 
               
 
+              
+
               .</para
             >
           </step>
@@ -76,8 +82,12 @@
 
               
 
+              
+
                and <see
                cref="T:System.ServiceModel.Channels.ReliableSessionBindingElement" />
+
+              
 
               
 
@@ -95,8 +105,12 @@
 
               
 
+              
+
                using the <see
                cref="M:System.ServiceModel.Channels.BindingElementCollection.InsertItem(System.Int32,System.ServiceModel.Channels.BindingElement)" />
+
+              
 
               
 
@@ -114,6 +128,8 @@
 
               
 
+              
+
                and add it to the collection.</para
             >
           </step>
@@ -121,6 +137,8 @@
             <para
               >Add any additional custom binding elements to the collection, such as <see
                cref="T:System.ServiceModel.Channels.TcpTransportBindingElement" />
+
+              
 
               
 
@@ -161,6 +179,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -193,6 +213,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.WindowsStreamSecurityBindingElement" />
+
+            
 
             
 
@@ -244,8 +266,12 @@
 
             
 
+            
+
              and delegates to the build method <see
              cref="M:System.ServiceModel.Channels.BindingContext.BuildInnerChannelFactory``1" />
+
+            
 
             
 
@@ -262,10 +288,14 @@
 
           
 
+          
+
            members that describe bindings, behaviors, contracts, and other information required to create the channel factory.</param
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -321,8 +351,12 @@
 
             
 
+            
+
              and delegates to the build method <see
              cref="M:System.ServiceModel.Channels.BindingContext.BuildInnerChannelListener``1" />
+
+            
 
             
 
@@ -339,10 +373,14 @@
 
           
 
+          
+
            members that describe bindings, behaviors, contracts, and other information required to create the channel listener.</param
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -385,6 +423,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -403,10 +443,14 @@
 
           
 
+          
+
           The binding context.</param
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -454,6 +498,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -472,8 +518,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -483,6 +533,8 @@
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -519,6 +571,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="T:System.ServiceModel.Channels.BindingElement" />
+
+            
 
             
 
@@ -567,6 +621,8 @@
 
             
 
+            
+
              is <see
              cref="T:System.ServiceModel.Channels.ISecurityCapabilities" />
 
@@ -574,8 +630,12 @@
 
             
 
+            
+
             , then an instance of this class is returned with <see
              cref="P:System.ServiceModel.Channels.ISecurityCapabilities.SupportsClientAuthentication" />
+
+            
 
             
 
@@ -590,8 +650,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.ServiceModel.Channels.ISecurityCapabilities.SupportsServerAuthentication" />
+
+            
 
             
 
@@ -604,8 +668,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ServiceModel.Channels.ISecurityCapabilities.SupportedResponseProtectionLevel" />
+
+            
 
             
 
@@ -621,8 +689,12 @@
 
             
 
+            
+
              is <see
              cref="T:System.ServiceModel.Security.IdentityVerifier" />
+
+            
 
             
 
@@ -638,6 +710,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.ServiceModel.Channels.IChannelListener" />
 
@@ -645,8 +719,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.ServiceModel.Channels.IChannel" />
+
+            
 
             
 
@@ -665,6 +743,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -673,6 +753,8 @@
           <para
             >The specified object from the <see
              cref="T:System.ServiceModel.Channels.BindingContext" />
+
+            
 
             
 
@@ -688,8 +770,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -699,6 +785,8 @@
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -740,6 +828,8 @@
 
             
 
+            
+
              that represents the transport token used in the security binding.</para
           >
         </summary>
@@ -748,6 +838,8 @@
           <para
             >An <see
              cref="T:System.Xml.XmlElement" />
+
+            
 
             
 
@@ -925,8 +1017,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+
+            
 
             
 
@@ -939,6 +1035,8 @@
 
             
 
+            
+
             , <see
              cref="M:System.ServiceModel.Description.PolicyConversionContext.GetMessageBindingAssertions(System.ServiceModel.Description.MessageDescription)" />
 
@@ -946,8 +1044,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.ServiceModel.Description.PolicyConversionContext.GetOperationBindingAssertions(System.ServiceModel.Description.OperationDescription)" />
+
+            
 
             
 
@@ -963,8 +1065,12 @@
 
             
 
+            
+
              property exposes the <see
              cref="T:System.ServiceModel.Description.ContractDescription" />
+
+            
 
             
 
@@ -977,11 +1083,15 @@
 
             
 
+            
+
              that indicate where security policy assertions should be added.</para
           >
           <para
             >Once custom policy assertions are attached to the WSDL information, clients can detect and import the custom binding assertions by implementing an <see
              cref="T:System.ServiceModel.Description.IPolicyImportExtension" />
+
+            
 
             
 
@@ -1001,8 +1111,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.MetadataExporter" />
+
+          
 
           
 
@@ -1017,8 +1131,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+
+          
 
           
 

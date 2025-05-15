@@ -23,8 +23,12 @@
 
         
 
+        
+
          provides data for the following <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -100,6 +104,8 @@
 
         
 
+        
+
         . </para
       >
     </summary>
@@ -127,11 +133,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="dataGridViewColumn">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

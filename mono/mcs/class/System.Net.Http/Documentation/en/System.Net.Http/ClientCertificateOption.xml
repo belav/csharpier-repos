@@ -44,6 +44,8 @@
 
             
 
+            
+
              will attempt to provide  all available client certificates  automatically.</para
           >
         </summary>
@@ -68,6 +70,8 @@
           <para
             >The application manually provides the client certificates to the <see
              cref="T:System.Net.Http.WebRequestHandler" />
+
+            
 
             
 

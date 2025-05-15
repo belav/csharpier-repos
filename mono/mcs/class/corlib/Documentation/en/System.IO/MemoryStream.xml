@@ -43,8 +43,12 @@
 
         
 
+        
+
          method. When a new instance of <see
          cref="T:System.IO.MemoryStream" />
+
+        
 
         
 
@@ -61,8 +65,12 @@
 
         
 
+        
+
          object is added to a ResX file or a .resources file, call the <see
          cref="M:System.Resources.ResourceManager.GetStream(System.String)" />
+
+        
 
         
 
@@ -78,6 +86,8 @@
 
         
 
+        
+
          object is serialized to a resource file it will actually be serialized as an <see
          cref="T:System.IO.UnmanagedMemoryStream" />
 
@@ -85,8 +95,12 @@
 
         
 
+        
+
         . This behavior provides better performance, as well as the ability to get a pointer to the data directly, without having to go through <see
          cref="T:System.IO.Stream" />
+
+        
 
         
 
@@ -130,6 +144,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.IO.MemoryStream.CanSeek" />
 
@@ -137,8 +153,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.IO.MemoryStream.CanWrite" />
+
+            
 
             
 
@@ -154,11 +174,15 @@
 
             
 
+            
+
              method to set the length to a value larger than the capacity of the current stream.</para
           >
           <para
             >This constructor exposes the underlying stream, which <see
              cref="M:System.IO.MemoryStream.GetBuffer" />
+
+            
 
             
 
@@ -172,6 +196,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.MemoryStream" />
+
+            
 
             
 
@@ -212,8 +238,12 @@
 
           
 
+          
+
            parameter is <see
            langword="null" />
+
+          
 
           
 
@@ -231,8 +261,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.IO.MemoryStream.CanSeek" />
+
+            
 
             
 
@@ -245,8 +279,12 @@
 
             
 
+            
+
              properties are all set to true. <see
              cref="P:System.IO.MemoryStream.Capacity" />
+
+            
 
             
 
@@ -262,6 +300,8 @@
 
             
 
+            
+
             ).</para
           >
           <para
@@ -272,8 +312,12 @@
 
             
 
+            
+
              throws <see
              cref="T:System.UnauthorizedAccessException" />
+
+            
 
             
 
@@ -292,11 +336,15 @@
 
             
 
+            
+
              class based on the specified byte array.</para
           >
         </summary>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -335,6 +383,8 @@
 
           
 
+          
+
            is negative.</exception
         >
         <remarks>
@@ -347,6 +397,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.IO.MemoryStream.CanSeek" />
 
@@ -354,8 +406,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.IO.MemoryStream.CanWrite" />
+
+            
 
             
 
@@ -371,11 +427,15 @@
 
             
 
+            
+
              method to set the length to a value larger than the capacity of the current stream. Except for a MemoryStream constructed with a byte[] parameter, write operations at the end of a MemoryStream expand the MemoryStream.</para
           >
           <para
             >This constructor exposes the underlying stream that <see
              cref="M:System.IO.MemoryStream.GetBuffer" />
+
+            
 
             
 
@@ -394,11 +454,15 @@
 
             
 
+            
+
              class with an expandable capacity initialized as specified.</para
           >
         </summary>
         <param name="capacity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -438,8 +502,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -457,6 +525,8 @@
 
             
 
+            
+
              and <see
              cref="P:System.IO.MemoryStream.CanSeek" />
 
@@ -464,8 +534,12 @@
 
             
 
+            
+
              properties are both set to true. <see
              cref="P:System.IO.MemoryStream.Capacity" />
+
+            
 
             
 
@@ -481,6 +555,8 @@
 
             
 
+            
+
             ).</para
           >
           <para
@@ -491,8 +567,12 @@
 
             
 
+            
+
              throws <see
              cref="T:System.UnauthorizedAccessException" />
+
+            
 
             
 
@@ -511,8 +591,12 @@
 
             
 
+            
+
              class based on the specified byte array with the <see
              cref="P:System.IO.MemoryStream.CanWrite" />
+
+            
 
             
 
@@ -528,6 +612,8 @@
 
           
 
+          
+
           The array of unsigned bytes from which to create this stream. </param
         >
         <param name="writable">
@@ -537,8 +623,12 @@
 
           
 
+          
+
           The setting of the <see
            cref="P:System.IO.MemoryStream.CanWrite" />
+
+          
 
           
 
@@ -582,8 +672,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -598,8 +692,12 @@
 
           
 
+          
+
            or <paramref
            name="count" />
+
+          
 
           
 
@@ -615,6 +713,8 @@
 
           
 
+          
+
            + <paramref
            name="count" />
 
@@ -622,8 +722,12 @@
 
           
 
+          
+
            ) is greater than the length of <paramref
            name="buffer" />
+
+          
 
           
 
@@ -641,8 +745,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.IO.MemoryStream.CanSeek" />
+
+            
 
             
 
@@ -655,6 +763,8 @@
 
             
 
+            
+
              properties are all set to true, but the capacity cannot be changed. <see
              cref="P:System.IO.MemoryStream.Capacity" />
 
@@ -662,8 +772,12 @@
 
             
 
+            
+
              is set to <paramref
              name="count" />
+
+            
 
             
 
@@ -679,6 +793,8 @@
 
             
 
+            
+
             ).</para
           >
           <para
@@ -689,8 +805,12 @@
 
             
 
+            
+
              throws <see
              cref="T:System.UnauthorizedAccessException" />
+
+            
 
             
 
@@ -709,11 +829,15 @@
 
             
 
+            
+
              class based on the specified region (index) of a byte array.</para
           >
         </summary>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -728,8 +852,12 @@
 
           
 
+          
+
           The index into <paramref
            name="buffer" />
+
+          
 
           
 
@@ -739,6 +867,8 @@
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -783,8 +913,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -799,8 +933,12 @@
 
           
 
+          
+
            or <paramref
            name="count" />
+
+          
 
           
 
@@ -816,6 +954,8 @@
 
           
 
+          
+
            + <paramref
            name="count" />
 
@@ -823,8 +963,12 @@
 
           
 
+          
+
            ) is greater than the length of <paramref
            name="buffer" />
+
+          
 
           
 
@@ -842,8 +986,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.IO.MemoryStream.CanSeek" />
+
+            
 
             
 
@@ -856,8 +1004,12 @@
 
             
 
+            
+
              is set to <paramref
              name="count" />
+
+            
 
             
 
@@ -873,11 +1025,15 @@
 
             
 
+            
+
             ).</para
           >
           <para
             >This constructor does not expose the underlying stream. <see
              cref="M:System.IO.MemoryStream.GetBuffer" />
+
+            
 
             
 
@@ -890,8 +1046,12 @@
 
             
 
+            
+
             . However, you can write to the stream if <paramref
              name="writable" />
+
+            
 
             
 
@@ -910,8 +1070,12 @@
 
             
 
+            
+
              class based on the specified region of a byte array, with the <see
              cref="P:System.IO.MemoryStream.CanWrite" />
+
+            
 
             
 
@@ -927,6 +1091,8 @@
 
           
 
+          
+
           The array of unsigned bytes from which to create this stream. </param
         >
         <param name="index">
@@ -936,8 +1102,12 @@
 
           
 
+          
+
           The index in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -952,6 +1122,8 @@
 
           
 
+          
+
           The length of the stream in bytes. </param
         >
         <param name="writable">
@@ -961,8 +1133,12 @@
 
           
 
+          
+
           The setting of the <see
            cref="P:System.IO.MemoryStream.CanWrite" />
+
+          
 
           
 
@@ -1008,8 +1184,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1024,8 +1204,12 @@
 
           
 
+          
+
            or <paramref
            name="count" />
+
+          
 
           
 
@@ -1041,6 +1225,8 @@
 
           
 
+          
+
            + <paramref
            name="count" />
 
@@ -1048,8 +1234,12 @@
 
           
 
+          
+
            ) is greater than the length of <paramref
            name="buffer" />
+
+          
 
           
 
@@ -1067,8 +1257,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.IO.MemoryStream.CanSeek" />
+
+            
 
             
 
@@ -1081,8 +1275,12 @@
 
             
 
+            
+
              is set to <paramref
              name="count" />
+
+            
 
             
 
@@ -1098,8 +1296,12 @@
 
             
 
+            
+
              of the underlying byte array cannot be changed. The length of the stream cannot be set to a value greater than the initial length of the specified byte array; however, the stream can be truncated (see <see
              cref="M:System.IO.MemoryStream.SetLength(System.Int64)" />
+
+            
 
             
 
@@ -1118,6 +1320,8 @@
 
             
 
+            
+
              class based on the specified region of a byte array, with the <see
              cref="P:System.IO.MemoryStream.CanWrite" />
 
@@ -1125,8 +1329,12 @@
 
             
 
+            
+
              property set as specified, and the ability to call <see
              cref="M:System.IO.MemoryStream.GetBuffer" />
+
+            
 
             
 
@@ -1142,6 +1350,8 @@
 
           
 
+          
+
           The array of unsigned bytes from which to create this stream. </param
         >
         <param name="index">
@@ -1151,8 +1361,12 @@
 
           
 
+          
+
           The index into <paramref
            name="buffer" />
+
+          
 
           
 
@@ -1167,6 +1381,8 @@
 
           
 
+          
+
           The length of the stream in bytes. </param
         >
         <param name="writable">
@@ -1176,8 +1392,12 @@
 
           
 
+          
+
           The setting of the <see
            cref="P:System.IO.MemoryStream.CanWrite" />
+
+          
 
           
 
@@ -1192,8 +1412,12 @@
 
           
 
+          
+
           true to enable <see
            cref="M:System.IO.MemoryStream.GetBuffer" />
+
+          
 
           
 
@@ -1230,9 +1454,13 @@
 
             
 
+            
+
             if the current 
    stream is open and supports reading; otherwise <see
              langword="false" />
+
+            
 
             
 
@@ -1252,8 +1480,12 @@
 
             
 
+            
+
              does not support reading, calls to the <see
              cref="M:System.IO.MemoryStream.Read(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -1266,8 +1498,12 @@
 
             
 
+            
+
              methods throw a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -1310,9 +1546,13 @@
 
             
 
+            
+
              if the stream is open and 
    supports seeking; otherwise <see
              langword="false" />
+
+            
 
             
 
@@ -1332,8 +1572,12 @@
 
             
 
+            
+
              does not support seeking, calls to <see
              cref="P:System.IO.MemoryStream.Length" />
+
+            
 
             
 
@@ -1346,8 +1590,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.IO.MemoryStream.Position" />
+
+            
 
             
 
@@ -1360,8 +1608,12 @@
 
             
 
+            
+
              throw a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -1404,9 +1656,13 @@
 
             
 
+            
+
              if the stream supports writing;
    otherwise, <see
              langword="false" />
+
+            
 
             
 
@@ -1425,8 +1681,12 @@
 
             
 
+            
+
              does not support writing, a call to <see
              cref="M:System.IO.Stream.SetLength(System.Int64)" />
+
+            
 
             
 
@@ -1439,6 +1699,8 @@
 
             
 
+            
+
             , or <see
              cref="M:System.IO.Stream.WriteByte(System.Byte)" />
 
@@ -1446,8 +1708,12 @@
 
             
 
+            
+
              throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -1486,6 +1752,8 @@
           <para
             > A <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -1531,6 +1799,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -1539,6 +1809,8 @@
             > The stream will not support reading or writing after
       this method is invoked. Following a call to <see
              cref="M:System.IO.MemoryStream.Close" />
+
+            
 
             
 
@@ -1556,8 +1828,12 @@
 
             
 
+            
+
              is still available, and the <see
              cref="M:System.IO.MemoryStream.ToArray" />
+
+            
 
             
 
@@ -1571,12 +1847,16 @@ and <see
 
             
 
+            
+
              methods can
 be called successfully. </para
           >
           <block subset="none" type="note"
             > This method overrides <see
              cref="M:System.IO.Stream.Close" />
+
+            
 
             
 
@@ -1630,6 +1910,8 @@ be called successfully. </para
 
           
 
+          
+
           The stream to which the contents of the current stream will be copied.</param
         >
         <param name="bufferSize">
@@ -1639,10 +1921,14 @@ be called successfully. </para
 
           
 
+          
+
           The size, in bytes, of the buffer. This value must be greater than zero.</param
         >
         <param name="cancellationToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1680,8 +1966,12 @@ be called successfully. </para
 
             
 
+            
+
              method and the <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -1694,8 +1984,12 @@ be called successfully. </para
 
             
 
+            
+
              invokes the protected <see
              cref="M:System.IO.MemoryStream.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -1708,8 +2002,12 @@ be called successfully. </para
 
             
 
+            
+
              parameter set to true. <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -1722,8 +2020,12 @@ be called successfully. </para
 
             
 
+            
+
              with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -1739,6 +2041,8 @@ be called successfully. </para
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.IO.MemoryStream" />
 
@@ -1746,8 +2050,12 @@ be called successfully. </para
 
             
 
+            
+
              references. This method invokes the <see
              cref="M:System.ComponentModel.Component.Dispose" />
+
+            
 
             
 
@@ -1766,11 +2074,15 @@ be called successfully. </para
 
             
 
+            
+
              class and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1808,11 +2120,15 @@ be called successfully. </para
 
             
 
+            
+
              method.</para
           >
           <para
             >Because any data written to a <see
              cref="T:System.IO.MemoryStream" />
+
+            
 
             
 
@@ -1826,6 +2142,8 @@ be called successfully. </para
           <para
             >Overrides the <see
              cref="M:System.IO.Stream.Flush" />
+
+            
 
             
 
@@ -1867,6 +2185,8 @@ be called successfully. </para
 
             
 
+            
+
              object is written into RAM, this method is redundant.</para
           >
           <para
@@ -1877,8 +2197,12 @@ be called successfully. </para
 
             
 
+            
+
              value for the <see
              cref="P:System.Threading.Tasks.Task.Status" />
+
+            
 
             
 
@@ -1894,6 +2218,8 @@ be called successfully. </para
 
             
 
+            
+
              class and passing the <see
              cref="P:System.Threading.CancellationTokenSource.Token" />
 
@@ -1901,8 +2227,12 @@ be called successfully. </para
 
             
 
+            
+
              property as the <paramref
              name="cancellationToken" />
+
+            
 
             
 
@@ -1921,6 +2251,8 @@ be called successfully. </para
         </returns>
         <param name="cancellationToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1958,6 +2290,8 @@ be called successfully. </para
           <para
             >The following example demonstrates that two calls to the <see
              cref="M:System.IO.MemoryStream.GetBuffer" />
+
+            
 
             
 
@@ -2014,8 +2348,12 @@ public class MemoryStreamTest {
 
             
 
+            
+
              object, the length of the buffer returned from <see
              cref="M:System.IO.MemoryStream.GetBuffer" />
+
+            
 
             
 
@@ -2028,8 +2366,12 @@ public class MemoryStreamTest {
 
             
 
+            
+
              method; however, <see
              cref="M:System.IO.MemoryStream.ToArray" />
+
+            
 
             
 
@@ -2046,8 +2388,12 @@ public class MemoryStreamTest {
 
             
 
+            
+
             , <see
              cref="M:System.IO.MemoryStream.#ctor(System.Byte[],System.Int32,System.Int32,System.Boolean,System.Boolean)" />
+
+            
 
             
 
@@ -2060,8 +2406,12 @@ public class MemoryStreamTest {
 
             
 
+            
+
             . If the current stream is resizable, two calls to this method do not return the same array if the underlying byte array is resized between calls. For additional information, see <see
              cref="P:System.IO.MemoryStream.Capacity" />
+
+            
 
             
 
@@ -2082,6 +2432,8 @@ public class MemoryStreamTest {
           <para
             >The byte array from which this stream was created, or the underlying array if a byte array was not provided to the <see
              cref="T:System.IO.MemoryStream" />
+
+            
 
             
 
@@ -2120,6 +2472,8 @@ public class MemoryStreamTest {
 
             
 
+            
+
              containing the length of the stream in bytes.</para
           >
         </value>
@@ -2130,6 +2484,8 @@ public class MemoryStreamTest {
               >This property 
       overrides <see
                cref="P:System.IO.Stream.Length" />
+
+              
 
               
 
@@ -2174,6 +2530,8 @@ public class MemoryStreamTest {
 
             
 
+            
+
              containing the current position within the stream.</para
           >
         </value>
@@ -2187,6 +2545,8 @@ public class MemoryStreamTest {
 
               
 
+              
+
               .</block
             >
           </para>
@@ -2194,6 +2554,8 @@ public class MemoryStreamTest {
         <exception cref="T:System.ArgumentOutOfRangeException"
           >The value specified for a set operation is negative or greater than  the maximum length of a <see
            cref="T:System.IO.MemoryStream" />
+
+          
 
           
 
@@ -2244,8 +2606,12 @@ public class MemoryStreamTest {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -2260,8 +2626,12 @@ public class MemoryStreamTest {
 
           
 
+          
+
            or <paramref
            name="count" />
+
+          
 
           
 
@@ -2277,6 +2647,8 @@ public class MemoryStreamTest {
 
           
 
+          
+
            + <paramref
            name="count" />
 
@@ -2284,8 +2656,12 @@ public class MemoryStreamTest {
 
           
 
+          
+
            ) is larger than the length of <paramref
            name="buffer" />
+
+          
 
           
 
@@ -2300,6 +2676,8 @@ public class MemoryStreamTest {
           <para
             >The following example demonstrates the result of reading from a <see
              cref="T:System.IO.MemoryStream" />
+
+            
 
             
 
@@ -2350,11 +2728,15 @@ public class MemoryStreamTest {
 
             
 
+            
+
             .</para
           >
           <para
             >The <paramref
              name="offset" />
+
+            
 
             
 
@@ -2367,8 +2749,12 @@ public class MemoryStreamTest {
 
             
 
+            
+
              to which data from the current stream is written. The <paramref
              name="count" />
+
+            
 
             
 
@@ -2386,6 +2772,8 @@ public class MemoryStreamTest {
 
             
 
+            
+
              for reading primitive data types.</para
           >
           <block subset="none" type="note">
@@ -2397,8 +2785,12 @@ public class MemoryStreamTest {
 
               
 
+              
+
                parameter is the underlying buffer returned by the <see
                cref="M:System.IO.MemoryStream.GetBuffer" />
+
+              
 
               
 
@@ -2423,8 +2815,12 @@ public class MemoryStreamTest {
 
           
 
+          
+
           When this method returns, contains the specified byte array with the values between <paramref
            name="offset" />
+
+          
 
           
 
@@ -2437,8 +2833,12 @@ public class MemoryStreamTest {
 
           
 
+          
+
            + <paramref
            name="count" />
+
+          
 
           
 
@@ -2453,8 +2853,12 @@ public class MemoryStreamTest {
 
           
 
+          
+
           The zero-based byte offset in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -2464,6 +2868,8 @@ public class MemoryStreamTest {
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2507,8 +2913,12 @@ public class MemoryStreamTest {
 
             
 
+            
+
              value for the <see
              cref="P:System.Threading.Tasks.Task.Status" />
+
+            
 
             
 
@@ -2524,6 +2934,8 @@ public class MemoryStreamTest {
 
             
 
+            
+
              class and passing the <see
              cref="P:System.Threading.CancellationTokenSource.Token" />
 
@@ -2531,8 +2943,12 @@ public class MemoryStreamTest {
 
             
 
+            
+
              property as the <paramref
              name="cancellationToken" />
+
+            
 
             
 
@@ -2555,11 +2971,15 @@ public class MemoryStreamTest {
 
             
 
+            
+
              parameter contains the total number of bytes read into the buffer. The result value can be less than the number of bytes requested if the number of bytes currently available is less than the requested number, or it can be 0 (zero) if the end of the stream has been reached. </para
           >
         </returns>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2574,8 +2994,12 @@ public class MemoryStreamTest {
 
           
 
+          
+
           The byte offset in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -2590,6 +3014,8 @@ public class MemoryStreamTest {
 
           
 
+          
+
           The maximum number of bytes to read.</param
         >
         <param name="cancellationToken">
@@ -2599,8 +3025,12 @@ public class MemoryStreamTest {
 
           
 
+          
+
           The token to monitor for cancellation requests. The default value is <see
            cref="P:System.Threading.CancellationToken.None" />
+
+          
 
           
 
@@ -2641,6 +3071,8 @@ public class MemoryStreamTest {
 
             
 
+            
+
             .</para
           >
           <para>If the read operation is successful, the current position within the stream is advanced by one byte. If an exception occurs, the current position within the stream is unchanged.</para>
@@ -2654,6 +3086,8 @@ public class MemoryStreamTest {
           <para
             >The byte cast to a <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -2702,8 +3136,12 @@ public class MemoryStreamTest {
 
           
 
+          
+
            is greater than the maximum length of <see
            cref="T:System.IO.MemoryStream" />
+
+          
 
           
 
@@ -2718,8 +3156,12 @@ public class MemoryStreamTest {
 
           
 
+          
+
            is not a valid <see
            cref="T:System.IO.SeekOrigin" />
+
+          
 
           
 
@@ -2740,12 +3182,16 @@ public class MemoryStreamTest {
 
             
 
+            
+
             .</para
           >
           <para>Seeking to any location beyond the length of the stream is supported.</para>
           <para
             >Do not use the <see
              cref="M:System.IO.MemoryStream.Seek(System.Int64,System.IO.SeekOrigin)" />
+
+            
 
             
 
@@ -2758,6 +3204,8 @@ public class MemoryStreamTest {
 
             
 
+            
+
              was initialized with a non-zero offset. If you do, <see
              cref="M:System.IO.MemoryStream.Seek(System.Int64,System.IO.SeekOrigin)" />
 
@@ -2765,8 +3213,12 @@ public class MemoryStreamTest {
 
             
 
+            
+
              will return an inaccurate value. Instead, use the <see
              cref="P:System.IO.MemoryStream.Position" />
+
+            
 
             
 
@@ -2790,8 +3242,12 @@ public class MemoryStreamTest {
 
           
 
+          
+
           The new position within the stream. This is relative to the <paramref
            name="loc" />
+
+          
 
           
 
@@ -2806,8 +3262,12 @@ public class MemoryStreamTest {
 
           
 
+          
+
           A value of type <see
            cref="T:System.IO.SeekOrigin" />
+
+          
 
           
 
@@ -2850,8 +3310,12 @@ public class MemoryStreamTest {
 
             
 
+            
+
              is greater than the current <see
              cref="P:System.IO.MemoryStream.Capacity" />
+
+            
 
             
 
@@ -2869,8 +3333,12 @@ public class MemoryStreamTest {
 
           
 
+          
+
            is negative or is greater than the maximum length of the <see
            cref="T:System.IO.MemoryStream" />
+
+          
 
           
 
@@ -2883,8 +3351,12 @@ public class MemoryStreamTest {
 
           
 
+          
+
           , where <paramref
            name="origin" />
+
+          
 
           
 
@@ -2902,11 +3374,15 @@ public class MemoryStreamTest {
 
             
 
+            
+
             .</para
           >
           <para
             >If the specified value is less than the current length of the stream, the stream is truncated. If after the truncation the current position within the stream is past the end of the stream, the <see
              cref="M:System.IO.MemoryStream.ReadByte" />
+
+            
 
             
 
@@ -2919,6 +3395,8 @@ public class MemoryStreamTest {
 
             
 
+            
+
              method reads zero bytes into the provided byte array, and <see
              cref="M:System.IO.MemoryStream.Write(System.Byte[],System.Int32,System.Int32)" />
 
@@ -2926,8 +3404,12 @@ public class MemoryStreamTest {
 
             
 
+            
+
              and <see
              cref="M:System.IO.MemoryStream.WriteByte(System.Byte)" />
+
+            
 
             
 
@@ -2944,6 +3426,8 @@ public class MemoryStreamTest {
 
               
 
+              
+
                instance must support writing for this method to work. Use the <see
                cref="P:System.IO.MemoryStream.CanWrite" />
 
@@ -2951,8 +3435,12 @@ public class MemoryStreamTest {
 
               
 
+              
+
                property to determine whether the current instance supports writing. For additional information, see <see
                cref="P:System.IO.Stream.CanWrite" />
+
+              
 
               
 
@@ -2968,6 +3456,8 @@ public class MemoryStreamTest {
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3009,8 +3499,12 @@ public class MemoryStreamTest {
 
             
 
+            
+
              from the array. To get the entire buffer, use the <see
              cref="M:System.IO.MemoryStream.GetBuffer" />
+
+            
 
             
 
@@ -3026,8 +3520,12 @@ public class MemoryStreamTest {
 
             
 
+            
+
              as a byte array. If the current instance was constructed on a provided byte array, a copy of the section of the array to which this instance has access is returned. See the <see
              cref="M:System.IO.MemoryStream.#ctor(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -3044,6 +3542,8 @@ public class MemoryStreamTest {
 
               
 
+              
+
                is closed.</para
             >
           </block>
@@ -3053,6 +3553,8 @@ public class MemoryStreamTest {
           <para
             >Writes the stream contents to a byte array, regardless of the <see
              cref="P:System.IO.MemoryStream.Position" />
+
+            
 
             
 
@@ -3103,8 +3605,12 @@ public class MemoryStreamTest {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -3123,12 +3629,16 @@ public class MemoryStreamTest {
 
             
 
+            
+
             bytes to the end of the stream, and the capacity cannot be modified.</para
           >
         </exception>
         <exception cref="T:System.ArgumentException"
           >(<paramref
            name="offset " />
+
+          
 
           
 
@@ -3141,8 +3651,12 @@ public class MemoryStreamTest {
 
           
 
+          
+
            ) is greater than the length of <paramref
            name="buffer" />
+
+          
 
           
 
@@ -3157,8 +3671,12 @@ public class MemoryStreamTest {
 
           
 
+          
+
            or <paramref
            name="count" />
+
+          
 
           
 
@@ -3178,11 +3696,15 @@ public class MemoryStreamTest {
 
             
 
+            
+
             .</para
           >
           <para
             >The <paramref
              name="offset" />
+
+            
 
             
 
@@ -3195,8 +3717,12 @@ public class MemoryStreamTest {
 
             
 
+            
+
              to write from, and the <paramref
              name="count" />
+
+            
 
             
 
@@ -3217,10 +3743,14 @@ public class MemoryStreamTest {
 
           
 
+          
+
           The buffer to write data from. </param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3233,10 +3763,14 @@ public class MemoryStreamTest {
 
           
 
+          
+
            at which to begin copying bytes to the current stream.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3280,8 +3814,12 @@ public class MemoryStreamTest {
 
             
 
+            
+
              value for the <see
              cref="P:System.Threading.Tasks.Task.Status" />
+
+            
 
             
 
@@ -3297,6 +3835,8 @@ public class MemoryStreamTest {
 
             
 
+            
+
              class and passing the <see
              cref="P:System.Threading.CancellationTokenSource.Token" />
 
@@ -3304,8 +3844,12 @@ public class MemoryStreamTest {
 
             
 
+            
+
              property as the <paramref
              name="cancellationToken" />
+
+            
 
             
 
@@ -3329,6 +3873,8 @@ public class MemoryStreamTest {
 
           
 
+          
+
           The buffer to write data from.</param
         >
         <param name="offset">
@@ -3338,8 +3884,12 @@ public class MemoryStreamTest {
 
           
 
+          
+
           The zero-based byte offset in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -3354,6 +3904,8 @@ public class MemoryStreamTest {
 
           
 
+          
+
           The maximum number of bytes to write.</param
         >
         <param name="cancellationToken">
@@ -3363,8 +3915,12 @@ public class MemoryStreamTest {
 
           
 
+          
+
           The token to monitor for cancellation requests. The default value is <see
            cref="P:System.Threading.CancellationToken.None" />
+
+          
 
           
 
@@ -3413,6 +3969,8 @@ public class MemoryStreamTest {
 
             
 
+            
+
             .</para
           >
           <para>Except for a MemoryStream constructed with a byte[] parameter, write operations at the end of a MemoryStream expand the MemoryStream.</para>
@@ -3423,6 +3981,8 @@ public class MemoryStreamTest {
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3466,8 +4026,12 @@ public class MemoryStreamTest {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -3488,6 +4052,8 @@ public class MemoryStreamTest {
 
             
 
+            
+
              on the underlying buffer of this stream.</para
           >
         </remarks>
@@ -3497,6 +4063,8 @@ public class MemoryStreamTest {
         </summary>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

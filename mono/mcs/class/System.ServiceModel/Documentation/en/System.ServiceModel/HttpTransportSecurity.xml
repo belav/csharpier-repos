@@ -24,6 +24,8 @@
 
         
 
+        
+
          to set the transport-level security settings for a binding.</para
       >
     </remarks>
@@ -32,6 +34,8 @@
       <para
         >Represents the transport-level security settings for the <see
          cref="T:System.ServiceModel.WSHttpBinding" />
+
+        
 
         
 
@@ -60,6 +64,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.HttpTransportSecurity" />
+
+            
 
             
 
@@ -227,6 +233,8 @@
           <para
             >An <newTerm
             >authentication realm</newTerm>
+
+            
 
             
 

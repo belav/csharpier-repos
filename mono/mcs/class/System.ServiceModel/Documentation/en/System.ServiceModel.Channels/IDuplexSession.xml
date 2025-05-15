@@ -31,8 +31,12 @@
 
         
 
+        
+
          interface is the union of the inbound session, defined by the <see
          cref="T:System.ServiceModel.Channels.IInputSession" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          interface. Either the inbound session or outbound session can be terminated independently of the other. The outbound session can be terminated synchronously by calling <see
          cref="M:System.ServiceModel.Channels.IDuplexSession.CloseOutputSession" />
+
+        
 
         
 
@@ -59,11 +67,15 @@
 
         
 
+        
+
         . </para
       >
       <para
         >The inbound session can be remotely terminated. The <see
          cref="M:System.ServiceModel.Channels.IInputChannel.Receive" />
+
+        
 
         
 
@@ -117,11 +129,15 @@
 
             
 
+            
+
              that references the asynchronous outbound session termination. </para
           >
         </returns>
         <param name="callback">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -134,10 +150,14 @@
 
           
 
+          
+
            delegate. </param
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -187,6 +207,8 @@
 
             
 
+            
+
              that references the asynchronous outbound session termination. </para
           >
         </returns>
@@ -197,8 +219,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -213,8 +239,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -224,6 +254,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -258,6 +290,8 @@
 
             
 
+            
+
              signals to the other side of the session that it should return null from any outstanding or subsequent calls made to <see
              cref="M:System.ServiceModel.Channels.IInputChannel.Receive" />
 
@@ -265,8 +299,12 @@
 
             
 
+            
+
             . <see
              cref="M:System.ServiceModel.Channels.IDuplexSession.CloseOutputSession" />
+
+            
 
             
 
@@ -309,6 +347,8 @@
 
             
 
+            
+
              signals to the other side of the session that it should return null from any outstanding or subsequent calls made to <see
              cref="M:System.ServiceModel.Channels.IInputChannel.Receive" />
 
@@ -316,8 +356,12 @@
 
             
 
+            
+
             . <see
              cref="M:System.ServiceModel.Channels.IDuplexSession.CloseOutputSession" />
+
+            
 
             
 
@@ -338,8 +382,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -384,6 +432,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.IAsyncResult" />
 
@@ -391,8 +441,12 @@
 
           
 
+          
+
            returned by a call to one of the <see
            cref="Overload:System.ServiceModel.Channels.IDuplexSession.BeginCloseOutputSession" />
+
+          
 
           
 

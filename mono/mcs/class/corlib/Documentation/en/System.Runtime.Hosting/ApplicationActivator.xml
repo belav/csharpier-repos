@@ -31,8 +31,12 @@
 
         
 
+        
+
          class in each <see
          cref="T:System.AppDomain" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
           for the current <see
          cref="T:System.AppDomain" />
+
+        
 
         
 
@@ -59,8 +67,12 @@
 
         
 
+        
+
          for this purpose. If a custom <see
          cref="T:System.Runtime.Hosting.ApplicationActivator" />
+
+        
 
         
 
@@ -73,11 +85,15 @@
 
         
 
+        
+
          is created. </para
       >
       <para
         >The following steps describe the behavior of the default <see
          cref="Overload:System.Runtime.Hosting.ApplicationActivator.CreateInstance" />
+
+        
 
         
 
@@ -95,8 +111,12 @@
 
             
 
+            
+
              of the add-in to be activated matches the <see
              cref="T:System.ActivationContext" />
+
+            
 
             
 
@@ -114,6 +134,8 @@
 
             
 
+            
+
             . The following steps are taken to initialize a new <see
              cref="T:System.AppDomain" />
 
@@ -121,8 +143,12 @@
 
             
 
+            
+
              using the <see
              cref="T:System.Runtime.Hosting.ActivationArguments" />
+
+            
 
             
 
@@ -140,8 +166,12 @@
 
                 
 
+                
+
                   object using an <see
                  cref="T:System.Runtime.Hosting.ActivationArguments" />
+
+                
 
                 
 
@@ -159,8 +189,12 @@
 
                 
 
+                
+
                  method to create a new domain using the <see
                  cref="T:System.AppDomainSetup" />
+
+                
 
                 
 
@@ -178,8 +212,12 @@
 
                 
 
+                
+
                  method calls the <see
                  cref="M:System.Security.HostSecurityManager.DetermineApplicationTrust(System.Security.Policy.Evidence,System.Security.Policy.Evidence,System.Security.Policy.TrustManagerContext)" />
+
+                
 
                 
 
@@ -192,8 +230,12 @@
 
                 
 
+                
+
                  object for the add-in. If the <see
                  cref="P:System.Security.Policy.ApplicationTrust.IsApplicationTrustedToRun" />
+
+                
 
                 
 
@@ -206,8 +248,12 @@
 
                 
 
+                
+
                  throws a <see
                  cref="T:System.Security.Policy.PolicyException" />
+
+                
 
                 
 
@@ -225,8 +271,12 @@
 
                 
 
+                
+
                  is created and configured for the <see
                  cref="T:System.ActivationContext" />
+
+                
 
                 
 
@@ -249,6 +299,8 @@
 
         
 
+        
+
           to activate this add-in instead of creating a new domain every time. </para
       >
       <para
@@ -259,8 +311,12 @@
 
         
 
+        
+
          that activates an add-in in an existing <see
          cref="T:System.AppDomain" />
+
+        
 
         
 
@@ -278,6 +334,8 @@
 
             
 
+            
+
              as the add-in that is being activated.</para
           >
         </item>
@@ -290,8 +348,12 @@
 
             
 
+            
+
              has never been seen before in the process, the custom activator creates a new <see
              cref="T:System.AppDomain" />
+
+            
 
             
 
@@ -304,6 +366,8 @@
 
             
 
+            
+
              by calling the <see
              cref="Overload:System.AppDomain.CreateDomain" />
 
@@ -311,8 +375,12 @@
 
             
 
+            
+
              method directly, or delegating this activity to the <see
              cref="M:System.Runtime.Hosting.ApplicationActivator.CreateInstanceHelper(System.AppDomainSetup)" />
+
+            
 
             
 
@@ -330,8 +398,12 @@
 
             
 
+            
+
             , then the activator can delegate the <see
              cref="Overload:System.Runtime.Hosting.ApplicationActivator.CreateInstance" />
+
+            
 
             
 
@@ -344,6 +416,8 @@
 
             
 
+            
+
              in the target domain. Note that this would be a cross-domain call to an <see
              cref="T:System.Runtime.Hosting.ApplicationActivator" />
 
@@ -351,8 +425,12 @@
 
             
 
+            
+
              that resides in the target <see
              cref="T:System.AppDomain" />
+
+            
 
             
 
@@ -389,6 +467,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Hosting.ApplicationActivator" />
+
+            
 
             
 
@@ -439,6 +519,8 @@
 
             
 
+            
+
              that is a wrapper for the return value of the application execution. The return value must be unwrapped to access the real object.  </para
           >
         </returns>
@@ -449,8 +531,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ActivationContext" />
+
+          
 
           
 
@@ -501,11 +587,15 @@
 
             
 
+            
+
              that is a wrapper for the return value of the application execution. The return value must be unwrapped to access the real object.</para
           >
         </returns>
         <param name="activationContext">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -518,10 +608,14 @@
 
           
 
+          
+
            that identifies the application to activate.</param
         >
         <param name="activationCustomData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -567,6 +661,8 @@
 
             
 
+            
+
               object.</para
           >
         </summary>
@@ -575,6 +671,8 @@
           <para
             >An <see
              cref="T:System.Runtime.Remoting.ObjectHandle" />
+
+            
 
             
 
@@ -590,6 +688,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.AppDomainSetup" />
 
@@ -597,8 +697,12 @@
 
           
 
+          
+
            object whose <see
            cref="P:System.AppDomainSetup.ActivationArguments" />
+
+          
 
           
 

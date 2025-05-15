@@ -11,6 +11,8 @@
 
         
 
+        
+
          namespace provides classes that allow you to interact with system processes, event logs, and performance counters.</para
       >
     </summary>
@@ -26,8 +28,12 @@
 
             
 
+            
+
              component provides functionality to write to event logs, read event log entries, and create and delete event logs and event sources on the network. The <see
              cref="T:System.Diagnostics.EntryWrittenEventHandler" />
+
+            
 
             
 
@@ -40,6 +46,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.Diagnostics.EventLogEntryType" />
 
@@ -47,8 +55,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Diagnostics.EventLogEntryCollection" />
+
+            
 
             
 
@@ -66,8 +78,12 @@
 
             
 
+            
+
              class provides functionality to monitor system processes across the network, and to start and stop local system processes. In addition to retrieving lists of running processes (by specifying either the computer, the process name, or the process id) or viewing information about the process that currently has access to the processor, you can get detailed knowledge of process threads and modules both through the <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -80,6 +96,8 @@
 
             
 
+            
+
              and <see
              cref="T:System.Diagnostics.ProcessModule" />
 
@@ -87,8 +105,12 @@
 
             
 
+            
+
              classes. The <see
              cref="T:System.Diagnostics.ProcessStartInfo" />
+
+            
 
             
 
@@ -106,8 +128,12 @@
 
             
 
+            
+
              class enables you to monitor system performance, while the <see
              cref="T:System.Diagnostics.PerformanceCounterCategory" />
+
+            
 
             
 
@@ -120,6 +146,8 @@
 
             
 
+            
+
              class, and calculate results from successive performance counter samples using the <see
              cref="T:System.Diagnostics.CounterSample" />
 
@@ -127,8 +155,12 @@
 
             
 
+            
+
              class. The <see
              cref="T:System.Diagnostics.CounterCreationData" />
+
+            
 
             
 
@@ -146,6 +178,8 @@
 
         
 
+        
+
          namespace also provides classes that allow you to debug your application and to trace the execution of your code. For more information, see the <see
          cref="T:System.Diagnostics.Trace" />
 
@@ -153,8 +187,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Diagnostics.Debug" />
+
+        
 
         
 

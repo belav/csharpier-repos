@@ -32,8 +32,12 @@
 
         
 
+        
+
          enumeration represents the day of the week in calendars that have seven days per week. The value of the constants in this enumeration ranges from <see
          cref="F:System.DayOfWeek.Sunday" />
+
+        
 
         
 
@@ -46,6 +50,8 @@
 
         
 
+        
+
         . If cast to an integer, its value ranges from zero (which indicates <see
          cref="F:System.DayOfWeek.Sunday" />
 
@@ -53,8 +59,12 @@
 
         
 
+        
+
         ) to six (which indicates <see
          cref="F:System.DayOfWeek.Saturday" />
+
+        
 
         
 
@@ -70,11 +80,15 @@
 
         
 
+        
+
          property.</para
       >
       <para
         >The members of the <see
          cref="T:System.DayOfWeek" />
+
+        
 
         
 
@@ -87,8 +101,12 @@
 
         
 
+        
+
          or the <see
          cref="M:System.DateTime.ToString(System.String,System.IFormatProvider)" />
+
+        
 
         
 

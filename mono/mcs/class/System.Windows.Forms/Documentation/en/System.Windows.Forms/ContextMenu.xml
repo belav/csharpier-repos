@@ -26,8 +26,12 @@
 
         
 
+        
+
          class represents shortcut menus that can be displayed when the user clicks the right mouse button over a control or area of the form. Shortcut menus are typically used to combine different menu items from a <see
          cref="T:System.Windows.Forms.MainMenu" />
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
          control to provide menu items for changing the font of the text, finding text within the control, or Clipboard features for copying and pasting text. You can also display new <see
          cref="T:System.Windows.Forms.MenuItem" />
+
+        
 
         
 
@@ -54,8 +62,12 @@
 
         
 
+        
+
          to provide situation specific commands that are not appropriate for the <see
          cref="T:System.Windows.Forms.MainMenu" />
+
+        
 
         
 
@@ -71,8 +83,12 @@
 
         
 
+        
+
          have a <see
          cref="P:System.Windows.Forms.Control.ContextMenu" />
+
+        
 
         
 
@@ -85,8 +101,12 @@
 
         
 
+        
+
          class to the control that displays the shortcut menu. More than one control can use a <see
          cref="T:System.Windows.Forms.ContextMenu" />
+
+        
 
         
 
@@ -99,11 +119,15 @@
 
         
 
+        
+
          property to determine which control last displayed the shortcut menu in order to perform tasks specific to the control or to modify the shortcut menu displayed for the control.</para
       >
       <para
         >You might want to know when the shortcut menu is being displayed in order to set check marks, disable items, and perform other menu tasks before the menu is displayed to the user. You can handle the <see
          cref="E:System.Windows.Forms.ContextMenu.Popup" />
+
+        
 
         
 
@@ -120,8 +144,12 @@
 
           
 
+          
+
            objects that are displayed in a <see
            cref="T:System.Windows.Forms.MainMenu" />
+
+          
 
           
 
@@ -134,6 +162,8 @@
 
           
 
+          
+
           , you must create a copy of the menu using the <see
            cref="M:System.Windows.Forms.MenuItem.CloneMenu" />
 
@@ -141,8 +171,12 @@
 
           
 
+          
+
            method of the <see
            cref="T:System.Windows.Forms.MenuItem" />
+
+          
 
           
 
@@ -155,6 +189,8 @@
 
           
 
+          
+
            object using the <see
            cref="M:System.Windows.Forms.MenuItem.MergeMenu" />
 
@@ -162,8 +198,12 @@
 
           
 
+          
+
            method of the <see
            cref="T:System.Windows.Forms.MenuItem" />
+
+          
 
           
 
@@ -183,6 +223,8 @@
 
         
 
+        
+
          replaces and adds functionality to the <see
          cref="T:System.Windows.Forms.ContextMenu" />
 
@@ -190,8 +232,12 @@
 
         
 
+        
+
          control of previous versions, <see
          cref="T:System.Windows.Forms.ContextMenu" />
+
+        
 
         
 
@@ -217,8 +263,12 @@
 
             
 
+            
+
              by using the <see
              cref="M:System.Windows.Forms.Menu.MenuItemCollection.Add(System.String)" />
+
+            
 
             
 
@@ -231,6 +281,8 @@
 
             
 
+            
+
              class. You can access the <see
              cref="T:System.Windows.Forms.Menu.MenuItemCollection" />
 
@@ -238,8 +290,12 @@
 
             
 
+            
+
              through the <see
              cref="P:System.Windows.Forms.Menu.MenuItems" />
+
+            
 
             
 
@@ -253,6 +309,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ContextMenu" />
+
+            
 
             
 
@@ -287,8 +345,12 @@
 
             
 
+            
+
              that has its menu items specified at the time it is created. Once you have used this version of the constructor, you can add additional menu items to the <see
              cref="T:System.Windows.Forms.ContextMenu" />
+
+            
 
             
 
@@ -301,8 +363,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Windows.Forms.Menu.MenuItemCollection" />
+
+            
 
             
 
@@ -315,8 +381,12 @@
 
             
 
+            
+
              through the <see
              cref="P:System.Windows.Forms.Menu.MenuItems" />
+
+            
 
             
 
@@ -335,8 +405,12 @@
 
             
 
+            
+
              class with a specified set of <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -352,8 +426,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Windows.Forms.MenuItem" />
+
+          
 
           
 
@@ -384,6 +462,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -422,6 +502,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -432,8 +514,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -468,6 +554,8 @@
 
             
 
+            
+
              event </para
           >
         </summary>
@@ -478,8 +566,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -506,8 +598,12 @@
 
             
 
+            
+
              objects before they are displayed. For example, if you use a <see
              cref="T:System.Windows.Forms.ContextMenu" />
+
+            
 
             
 
@@ -520,8 +616,12 @@
 
             
 
+            
+
              controls and you want to disable certain menu items in the <see
              cref="T:System.Windows.Forms.ContextMenu" />
+
+            
 
             
 
@@ -534,8 +634,12 @@
 
             
 
+            
+
              is displaying the shortcut menu, you can create an event handler for this event. You could use the <see
              cref="P:System.Windows.Forms.ContextMenu.SourceControl" />
+
+            
 
             
 
@@ -548,8 +652,12 @@
 
             
 
+            
+
              is about to display the <see
              cref="T:System.Windows.Forms.ContextMenu" />
+
+            
 
             
 
@@ -562,6 +670,8 @@
 
             
 
+            
+
              objects.</para
           >
           <para
@@ -569,6 +679,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -644,6 +756,8 @@
 
               
 
+              
+
                property.</para
             >
           </block>
@@ -682,8 +796,12 @@
 
             
 
+            
+
              is displayed when the user clicks the right mouse button on a control or area of the form that the <see
              cref="T:System.Windows.Forms.ContextMenu" />
+
+            
 
             
 
@@ -703,8 +821,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -719,6 +841,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Point" />
 
@@ -726,8 +850,12 @@
 
           
 
+          
+
            that specifies the coordinates at which to display the menu. These coordinates are specified relative to the client coordinates of the control specified in the <paramref
            name="control" />
+
+          
 
           
 
@@ -771,8 +899,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -787,6 +919,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Point" />
 
@@ -794,8 +928,12 @@
 
           
 
+          
+
            that specifies the coordinates at which to display the menu. These coordinates are specified relative to the client coordinates of the control specified in the <paramref
            name="control" />
+
+          
 
           
 
@@ -810,6 +948,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.LeftRightAlignment" />
 
@@ -817,8 +957,12 @@
 
           
 
+          
+
            that specifies the alignment of the control relative to the <paramref
            name="pos" />
+
+          
 
           
 
@@ -857,8 +1001,12 @@
 
             
 
+            
+
             . If the shortcut menu is not currently displayed, you can use this property to determine which control last displayed the shortcut menu. You can use this property in the <see
              cref="E:System.Windows.Forms.ContextMenu.Popup" />
+
+            
 
             
 
@@ -871,6 +1019,8 @@
 
             
 
+            
+
              class inherits from <see
              cref="T:System.Windows.Forms.Control" />
 
@@ -878,8 +1028,12 @@
 
             
 
+            
+
             , you can also use this property if the <see
              cref="T:System.Windows.Forms.ContextMenu" />
+
+            
 
             
 

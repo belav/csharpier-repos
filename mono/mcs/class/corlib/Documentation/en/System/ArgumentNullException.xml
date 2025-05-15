@@ -44,8 +44,12 @@
         
 
         
+
+        
       class to throw a <see
          cref="T:System.ArgumentNullException" />
+
+        
 
         
 
@@ -88,8 +92,12 @@ class ArgumentNullTest {
 
         
 
+        
+
         . It is provided so that application code can differentiate between exceptions caused by null arguments and exceptions caused by arguments that are not null. For errors caused by arguments that are not null, see <see
          cref="T:System.ArgumentOutOfRangeException" />
+
+        
 
         
 
@@ -99,6 +107,8 @@ class ArgumentNullTest {
       >
       <para>
         <see cref="T:System.ArgumentNullException" />
+
+        
 
         
 
@@ -114,8 +124,12 @@ class ArgumentNullTest {
 
         
 
+        
+
         , see the <see
          cref="T:System.ArgumentNullException" />
+
+        
 
         
 
@@ -159,11 +173,15 @@ class ArgumentNullTest {
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "Argument cannot be null." This message takes into account the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.ArgumentNullException" />
+
+            
 
             
 
@@ -214,6 +232,8 @@ class ArgumentNullTest {
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -251,11 +271,15 @@ class ArgumentNullTest {
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "Argument cannot be null." This message takes into account the current system culture.</para
           >
           <para
             >This constructor initializes the <see
              cref="P:System.ArgumentException.ParamName" />
+
+            
 
             
 
@@ -268,8 +292,12 @@ class ArgumentNullTest {
 
             
 
+            
+
              parameter. The content of <paramref
              name="paramName" />
+
+            
 
             
 
@@ -280,6 +308,8 @@ class ArgumentNullTest {
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.ArgumentNullException" />
+
+            
 
             
 
@@ -340,11 +370,15 @@ class ArgumentNullTest {
 
             
 
+            
+
              class with the name of the parameter that causes this exception.</para
           >
         </summary>
         <param name="paramName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -389,6 +423,8 @@ class ArgumentNullTest {
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -397,6 +433,8 @@ class ArgumentNullTest {
           <para
             >Initializes a new instance of the <see
              cref="T:System.ArgumentNullException" />
+
+            
 
             
 
@@ -412,10 +450,14 @@ class ArgumentNullTest {
 
           
 
+          
+
           The object that holds the serialized object data. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -456,6 +498,8 @@ class ArgumentNullTest {
 
             
 
+            
+
              class with a specified error message and the exception that is the cause of this exception.</para
           >
         </summary>
@@ -466,10 +510,14 @@ class ArgumentNullTest {
 
           
 
+          
+
           The error message that explains the reason for this exception. </param
         >
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -514,6 +562,8 @@ class ArgumentNullTest {
 
             
 
+            
+
              property of the new instance using the value of the <paramref
              name="message" />
 
@@ -521,8 +571,12 @@ class ArgumentNullTest {
 
             
 
+            
+
              parameter. The content of the <paramref
              name="message" />
+
+            
 
             
 
@@ -538,8 +592,12 @@ class ArgumentNullTest {
 
             
 
+            
+
              property of the new instance using the <paramref
              name="paramName" />
+
+            
 
             
 
@@ -552,11 +610,15 @@ class ArgumentNullTest {
 
             
 
+            
+
              is intended to be understood by humans.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.ArgumentNullException" />
+
+            
 
             
 
@@ -617,6 +679,8 @@ class ArgumentNullTest {
 
             
 
+            
+
              class with a specified error message and the name of the parameter that causes this exception.</para
           >
         </summary>
@@ -627,10 +691,14 @@ class ArgumentNullTest {
 
           
 
+          
+
           The name of the parameter that caused the exception. </param
         >
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

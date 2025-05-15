@@ -12,11 +12,15 @@
 
         
 
+        
+
         , the base type of T is the class type object. </list_item
       >
       <list_item
         > If T is a <non_terminal
          where="11.2">class-type</non_terminal>
+
+        
 
         
 
@@ -32,6 +36,8 @@
 
         
 
+        
+
         , the base types of T are the base interfaces of T and the class type object. </list_item
       >
       <list_item
@@ -42,11 +48,15 @@
 
         
 
+        
+
         , the base types of T are the class types System.Array and object. </list_item
       >
       <list_item
         > If T is a <non_terminal
          where="11.2">delegate-type</non_terminal>
+
+        
 
         
 

@@ -24,8 +24,12 @@
 
         
 
+        
+
          or the <see
          cref="P:System.ServiceModel.Description.ServiceSecurityAuditBehavior.ServiceAuthorizationAuditLevel" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          class to one of the <see
          cref="T:System.ServiceModel.AuditLevel" />
+
+        
 
         
 
@@ -57,12 +65,16 @@
 
         
 
+        
+
          binding.</para
       >
       <block subset="none" type="note">
         <para
           >If the <see
            cref="P:System.ServiceModel.Description.ServiceSecurityAuditBehavior.AuditLogLocation" />
+
+          
 
           
 
@@ -75,6 +87,8 @@
 
           
 
+          
+
            and <paramref
            name="Audit Object Access" />
 
@@ -82,8 +96,12 @@
 
           
 
+          
+
            is not set in the <paramref
            name="Local Security Policy" />
+
+          
 
           
 
@@ -103,10 +121,14 @@
 
         
 
+        
+
          value, the operating system determines which log will actually be written to. For more information, see <format
          type="text/html">
           <a href="5633f61c-a3c9-40dd-8070-1c373b66a716">Auditing Security Events</a>
         </format>
+
+        
 
         
 

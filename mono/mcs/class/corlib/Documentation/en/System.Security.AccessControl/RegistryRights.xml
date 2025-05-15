@@ -30,8 +30,12 @@
 
         
 
+        
+
          enumeration to specify registry access rights when you create <see
          cref="T:System.Security.AccessControl.RegistrySecurity" />
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
          objects to a <see
          cref="T:System.Security.AccessControl.RegistrySecurity" />
+
+        
 
         
 
@@ -58,6 +66,8 @@
 
         
 
+        
+
          object to the key using the <see
          cref="M:Microsoft.Win32.RegistryKey.SetAccessControl(System.Security.AccessControl.RegistrySecurity)" />
 
@@ -65,8 +75,12 @@
 
         
 
+        
+
          method, or an appropriate overload of the <see
          cref="Overload:Microsoft.Win32.RegistryKey.CreateSubKey" />
+
+        
 
         
 
@@ -212,6 +226,8 @@
           <para
             >Same as <see
              cref="F:System.Security.AccessControl.RegistryRights.ReadKey" />
+
+            
 
             
 

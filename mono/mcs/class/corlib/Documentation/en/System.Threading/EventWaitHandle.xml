@@ -31,8 +31,12 @@
 
         
 
+        
+
          class allows threads to communicate with each other by signaling. Typically, one or more threads block on an <see
          cref="T:System.Threading.EventWaitHandle" />
+
+        
 
         
 
@@ -45,6 +49,8 @@
 
         
 
+        
+
          method, releasing one or more of the blocked threads. A thread can signal an <see
          cref="T:System.Threading.EventWaitHandle" />
 
@@ -52,8 +58,12 @@
 
         
 
+        
+
          and then block on it, by calling the static (Shared in Visual Basic) <see
          cref="Overload:System.Threading.WaitHandle.SignalAndWait" />
+
+        
 
         
 
@@ -70,12 +80,16 @@
 
           
 
+          
+
            class provides access to named system synchronization events.</para
         >
       </block>
       <para
         >The behavior of an <see
          cref="T:System.Threading.EventWaitHandle" />
+
+        
 
         
 
@@ -88,8 +102,12 @@
 
         
 
+        
+
          created with the <see
          cref="F:System.Threading.EventResetMode.AutoReset" />
+
+        
 
         
 
@@ -102,6 +120,8 @@
 
         
 
+        
+
          created with the <see
          cref="F:System.Threading.EventResetMode.ManualReset" />
 
@@ -109,8 +129,12 @@
 
         
 
+        
+
          flag remains signaled until its <see
          cref="M:System.Threading.EventWaitHandle.Reset" />
+
+        
 
         
 
@@ -127,10 +151,14 @@
 
         
 
+        
+
          method is called. Manual reset events are useful when one thread must complete an activity before other threads can proceed.</para
       >
       <para>
         <see cref="T:System.Threading.EventWaitHandle" />
+
+        
 
         
 
@@ -143,8 +171,12 @@
 
         
 
+        
+
          and <see
          cref="Overload:System.Threading.WaitHandle.WaitAny" />
+
+        
 
         
 
@@ -159,6 +191,8 @@
             >EventWaitHandle, AutoResetEvent, and ManualResetEvent</a
           >
         </format>
+
+        
 
         
 
@@ -203,8 +237,12 @@
 
             
 
+            
+
              flag is specified for <paramref
              name="mode" />
+
+            
 
             
 
@@ -217,8 +255,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.Threading.EventResetMode.AutoReset" />
+
+            
 
             
 
@@ -237,11 +279,15 @@
 
             
 
+            
+
              class, specifying whether the wait handle is initially signaled, and whether it resets automatically or manually.</para
           >
         </summary>
         <param name="initialState">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -256,8 +302,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Threading.EventResetMode" />
+
+          
 
           
 
@@ -298,8 +348,12 @@
 
             
 
+            
+
              is null or an empty string, a local <see
              cref="T:System.Threading.EventWaitHandle" />
+
+            
 
             
 
@@ -315,8 +369,12 @@
 
             
 
+            
+
              parameter already exists, the <paramref
              name="initialState" />
+
+            
 
             
 
@@ -333,6 +391,8 @@
 
               
 
+              
+
               . This constructor provides no way to determine whether a named system event was created, so you cannot make any assumptions about the state of the named event. To determine whether a named event was created, use the <see
                cref="M:System.Threading.EventWaitHandle.#ctor(System.Boolean,System.Threading.EventResetMode,System.String,System.Boolean@)" />
 
@@ -340,8 +400,12 @@
 
               
 
+              
+
                constructor or the <see
                cref="M:System.Threading.EventWaitHandle.#ctor(System.Boolean,System.Threading.EventResetMode,System.String,System.Boolean@,System.Security.AccessControl.EventWaitHandleSecurity)" />
+
+              
 
               
 
@@ -358,8 +422,12 @@
 
             
 
+            
+
              flag is specified for <paramref
              name="mode" />
+
+            
 
             
 
@@ -372,8 +440,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.Threading.EventResetMode.AutoReset" />
+
+            
 
             
 
@@ -392,11 +464,15 @@
 
             
 
+            
+
              class, specifying whether the wait handle is initially signaled if created as a result of this call, whether it resets automatically or manually, and the name of a system synchronization event.</para
           >
         </summary>
         <param name="initialState">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -411,8 +487,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Threading.EventResetMode" />
+
+          
 
           
 
@@ -422,6 +502,8 @@
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -526,8 +608,12 @@
 
             
 
+            
+
              method uses the following combination of flags (combined using the bitwise OR operation) to search for permissions: <see
              cref="F:System.Security.AccessControl.AccessControlSections.Access" />
+
+            
 
             
 
@@ -540,8 +626,12 @@
 
             
 
+            
+
             , and <see
              cref="F:System.Security.AccessControl.AccessControlSections.Group" />
+
+            
 
             
 
@@ -557,8 +647,12 @@
 
             
 
+            
+
              rights to call this method, and the event must have been opened with the <see
              cref="F:System.Security.AccessControl.EventWaitHandleRights.ReadPermissions" />
+
+            
 
             
 
@@ -577,8 +671,12 @@
 
             
 
+            
+
              object that represents the access control security for the named system event represented by the current <see
              cref="T:System.Threading.EventWaitHandle" />
+
+            
 
             
 
@@ -592,6 +690,8 @@
           <para
             >An <see
              cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+
+            
 
             
 
@@ -634,6 +734,8 @@
 
             
 
+            
+
              method tries to open the specified named system event. If the system event does not exist, this method throws an exception instead of creating the system event. To create the system event when it does not already exist, use one of the <see
              cref="M:System.Threading.EventWaitHandle.#ctor(System.Boolean,System.Threading.EventResetMode,System.String,System.Boolean@,System.Security.AccessControl.EventWaitHandleSecurity)" />
 
@@ -641,8 +743,12 @@
 
             
 
+            
+
              constructors that has a <paramref
              name="name" />
+
+            
 
             
 
@@ -658,8 +764,12 @@
 
             
 
+            
+
              do not necessarily return the same <see
              cref="T:System.Threading.EventWaitHandle" />
+
+            
 
             
 
@@ -675,6 +785,8 @@
 
             
 
+            
+
              method overload and specifying <see
              cref="F:System.Security.AccessControl.EventWaitHandleRights.Synchronize" />
 
@@ -682,8 +794,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Security.AccessControl.EventWaitHandleRights.Modify" />
+
+            
 
             
 
@@ -699,8 +815,12 @@
 
             
 
+            
+
              flag allows a thread to wait on the named system event, and specifying the <see
              cref="F:System.Security.AccessControl.EventWaitHandleRights.Modify" />
+
+            
 
             
 
@@ -713,8 +833,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Threading.EventWaitHandle.Reset" />
+
+            
 
             
 
@@ -733,6 +857,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -775,8 +901,12 @@
 
             
 
+            
+
              parameter must include the <see
              cref="F:System.Security.AccessControl.EventWaitHandleRights.Synchronize" />
+
+            
 
             
 
@@ -789,6 +919,8 @@
 
             
 
+            
+
              flag to allow threads to call the <see
              cref="M:System.Threading.EventWaitHandle.Set" />
 
@@ -796,8 +928,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Threading.EventWaitHandle.Reset" />
+
+            
 
             
 
@@ -813,6 +949,8 @@
 
             
 
+            
+
              method tries to open an existing named system event. If the system event does not exist, this method throws an exception instead of creating the system event. To create the system event when it does not already exist, use one of the <see
              cref="M:System.Threading.EventWaitHandle.#ctor(System.Boolean,System.Threading.EventResetMode,System.String,System.Boolean@,System.Security.AccessControl.EventWaitHandleSecurity)" />
 
@@ -820,8 +958,12 @@
 
             
 
+            
+
              constructors that has a <paramref
              name="name" />
+
+            
 
             
 
@@ -837,8 +979,12 @@
 
             
 
+            
+
              do not necessarily return the same <see
              cref="T:System.Threading.EventWaitHandle" />
+
+            
 
             
 
@@ -862,10 +1008,14 @@
 
           
 
+          
+
           The name of the system synchronization event to open.</param
         >
         <param name="rights">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -930,8 +1080,12 @@
 
             
 
+            
+
              with <see
              cref="F:System.Threading.EventResetMode.AutoReset" />
+
+            
 
             
 
@@ -944,6 +1098,8 @@
 
             
 
+            
+
             ), the <see
              cref="M:System.Threading.EventWaitHandle.Set" />
 
@@ -951,8 +1107,12 @@
 
             
 
+            
+
              method releases a single thread. If there are no waiting threads, the wait handle remains signaled until a thread attempts to wait on it, or until its <see
              cref="M:System.Threading.EventWaitHandle.Reset" />
+
+            
 
             
 
@@ -969,8 +1129,12 @@
 
               
 
+              
+
                method will release a thread from an <see
                cref="T:System.Threading.EventWaitHandle" />
+
+              
 
               
 
@@ -983,6 +1147,8 @@
 
               
 
+              
+
               . If two calls are too close together, so that the second call occurs before a thread has been released, only one thread is released. It is as if the second call did not happen. Also, if <see
                cref="M:System.Threading.EventWaitHandle.Set" />
 
@@ -990,8 +1156,12 @@
 
               
 
+              
+
                is called when there are no threads waiting and the <see
                cref="T:System.Threading.EventWaitHandle" />
+
+              
 
               
 
@@ -1008,8 +1178,12 @@
 
             
 
+            
+
              with <see
              cref="F:System.Threading.EventResetMode.ManualReset" />
+
+            
 
             
 
@@ -1022,6 +1196,8 @@
 
             
 
+            
+
             ), calling the <see
              cref="M:System.Threading.EventWaitHandle.Set" />
 
@@ -1029,8 +1205,12 @@
 
             
 
+            
+
              method leaves the wait handle in a signaled state until its <see
              cref="M:System.Threading.EventWaitHandle.Reset" />
+
+            
 
             
 
@@ -1084,8 +1264,12 @@
 
             
 
+            
+
              rights to call this method, and the event must have been opened with the <see
              cref="F:System.Security.AccessControl.EventWaitHandleRights.ChangePermissions" />
+
+            
 
             
 
@@ -1105,8 +1289,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+
+          
 
           
 

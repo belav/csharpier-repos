@@ -33,11 +33,15 @@
 
         
 
+        
+
          and to specify how updates are processed. For example, you may opt to skip the update of the current row or skip the update of all remaining rows. Note that the rows are updated in the order that they were received from the data source.</para
       >
       <para
         >When you create an <see
          cref="T:System.Data.Odbc.OdbcRowUpdatingEventArgs" />
+
+        
 
         
 
@@ -59,8 +63,12 @@
 
         
 
+        
+
          event of an <see
          cref="T:System.Data.Odbc.OdbcDataAdapter" />
+
+        
 
         
 

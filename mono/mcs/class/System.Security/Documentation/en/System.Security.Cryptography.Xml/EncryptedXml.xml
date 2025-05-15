@@ -26,11 +26,15 @@
 
         
 
+        
+
          class is the main class used for XML encryption in the .NET Framework. XML Encryption is a standards-based, interoperable way to encrypt all or part of an XML document or any arbitrary data. The .NET Framework XML encryption classes implement the World Wide Web Consortium (W3C) specification for XML encryption located at http://www.w3.org/TR/xmlenc-core/.</para
       >
       <para
         >Use the <see
          cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
+
+        
 
         
 
@@ -90,6 +94,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -124,8 +130,12 @@
 
             
 
+            
+
              object when you want to specify the XML document to encrypt.  The <paramref
              name="document" />
+
+            
 
             
 
@@ -144,11 +154,15 @@
 
             
 
+            
+
              class using the specified XML document.</para
           >
         </summary>
         <param name="document">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -161,8 +175,12 @@
 
           
 
+          
+
            object used to initialize the <see
            cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
+
+          
 
           
 
@@ -202,8 +220,12 @@
 
             
 
+            
+
              object when you want to specify the XML document to encrypt and provide security evidence. The <paramref
              name="document" />
+
+            
 
             
 
@@ -222,11 +244,15 @@
 
             
 
+            
+
              class using the specified XML document and evidence.</para
           >
         </summary>
         <param name="document">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -239,8 +265,12 @@
 
           
 
+          
+
            object used to initialize the <see
            cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
+
+          
 
           
 
@@ -255,6 +285,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Policy.Evidence" />
 
@@ -262,8 +294,12 @@
 
           
 
+          
+
            object associated with the <see
            cref="T:System.Xml.XmlDocument" />
+
+          
 
           
 
@@ -306,8 +342,12 @@
 
             
 
+            
+
              method allows you to map a symmetric key or an asymmetric key to a string name. This method adds the values of the <paramref
              name="keyName" />
+
+            
 
             
 
@@ -320,11 +360,15 @@
 
             
 
+            
+
              parameters to a table of valid key name mappings.</para
           >
           <para
             >Use the <see
              cref="M:System.Security.Cryptography.Xml.EncryptedXml.ClearKeyNameMappings" />
+
+            
 
             
 
@@ -344,8 +388,12 @@
 
           
 
+          
+
           The name to map to <paramref
            name="keyObject" />
+
+          
 
           
 
@@ -360,8 +408,12 @@
 
           
 
+          
+
           The symmetric key to map to <paramref
            name="keyName" />
+
+          
 
           
 
@@ -393,6 +445,8 @@
           <para
             >Use this method to clear all key name mapping that you have set using the <see
              cref="M:System.Security.Cryptography.Xml.EncryptedXml.AddKeyNameMapping(System.String,System.Object)" />
+
+            
 
             
 
@@ -441,8 +495,12 @@
 
             
 
+            
+
              method to decrypt an <see
              cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+
+            
 
             
 
@@ -458,6 +516,8 @@
 
             
 
+            
+
              method only decrypts top-level &lt;EncryptedData&gt; tags.  In cases where one or more &lt;EncryptedData&gt; tags have been encrypted and are contained within higher level &lt;EncryptedData&gt; tags, you can call the <see
              cref="M:System.Security.Cryptography.Xml.EncryptedXml.DecryptDocument" />
 
@@ -465,8 +525,12 @@
 
             
 
+            
+
              method separately for each one.  See the <see
              cref="M:System.Security.Cryptography.Xml.EncryptedXml.DecryptDocument" />
+
+            
 
             
 
@@ -485,6 +549,8 @@
         </returns>
         <param name="encryptedData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -521,6 +587,8 @@
 
             
 
+            
+
              method decrypts all &lt;EncryptedData&gt; elements of the XML document loaded during initialization. After you call this method, all &lt;EncryptedData&gt; elements in the document are replaced with plain text versions.</para
           >
           <para
@@ -531,8 +599,12 @@
 
             
 
+            
+
              method decrypts only top-level &lt;EncryptedData&gt; elements.  If you need to decrypt a super-encrypted document (a document that is encrypted more than once), you must call the <see
              cref="M:System.Security.Cryptography.Xml.EncryptedXml.DecryptDocument" />
+
+            
 
             
 
@@ -549,8 +621,12 @@
 
               
 
+              
+
                method decrypts only valid XML data. To decrypt arbitrary data, use the <see
                cref="M:System.Security.Cryptography.Xml.EncryptedXml.DecryptData(System.Security.Cryptography.Xml.EncryptedData,System.Security.Cryptography.SymmetricAlgorithm)" />
+
+              
 
               
 
@@ -567,6 +643,8 @@
 
             
 
+            
+
              with an "Unknown Error" will be thrown when you decrypt an XML document.</para
           >
         </remarks>
@@ -575,6 +653,8 @@
           <para
             >Decrypts all &lt;EncryptedData&gt; elements of the XML document that were specified during initialization of the <see
              cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
+
+            
 
             
 
@@ -617,11 +697,15 @@
 
             
 
+            
+
              method decrypts an encrypted key contained within the &lt;EncryptedKey&gt; element of an XML document.</para
           >
           <para
             >This recursive method finds the key represented by the <see
              cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+
+            
 
             
 
@@ -634,6 +718,8 @@
 
             
 
+            
+
              object can contain another <see
              cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
 
@@ -641,8 +727,12 @@
 
             
 
+            
+
              object that specifies its <see
              cref="T:System.Security.Cryptography.Xml.KeyInfo" />
+
+            
 
             
 
@@ -656,6 +746,8 @@
           <para
             >Determines the key represented by the <see
              cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+
+            
 
             
 
@@ -675,8 +767,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+
+          
 
           
 
@@ -720,8 +816,12 @@
 
             
 
+            
+
              method decrypts an encrypted key contained within the &lt;EncryptedKey&gt; element of an XML document. This method accepts a value for the <paramref
              name="symmetricAlgorithm" />
+
+            
 
             
 
@@ -740,6 +840,8 @@
         </returns>
         <param name="keyData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -784,8 +886,12 @@
 
             
 
+            
+
              method decrypts an encrypted key contained within the &lt;EncryptedKey&gt; element of an XML document. This method accepts a value for the <paramref
              name="rsa" />
+
+            
 
             
 
@@ -809,6 +915,8 @@
 
           
 
+          
+
           An array of bytes that represents an encrypted &lt;EncryptedKey&gt; element.</param
         >
         <param name="rsa">
@@ -818,8 +926,12 @@
 
           
 
+          
+
           The asymmetric key used to decrypt <paramref
            name="keyData" />
+
+          
 
           
 
@@ -859,6 +971,8 @@
 
             
 
+            
+
              object has any security evidence, you should add the evidence to the <see
              cref="P:System.Security.Cryptography.Xml.EncryptedXml.DocumentEvidence" />
 
@@ -866,8 +980,12 @@
 
             
 
+            
+
              property.  If you do not set this property, any associated <see
              cref="T:System.Security.Cryptography.Xml.CipherReference" />
+
+            
 
             
 
@@ -886,8 +1004,12 @@
 
             
 
+            
+
              object from which the <see
              cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
+
+            
 
             
 
@@ -920,6 +1042,8 @@
           <para
             >UTF-8 encoding is the default encoding for XML encryption. You can use this property to specify other types of encoding from the <see
              cref="T:System.Text.Encoding" />
+
+            
 
             
 
@@ -970,8 +1094,12 @@
 
             
 
+            
+
              method is a convenient way to encrypt the outer XML of an element using a certificate. This method generates a 256-bit Advanced Encryption Standard (AES) session key to encrypt an XML element and then encrypts and signs the AES key using the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+            
 
             
 
@@ -984,8 +1112,12 @@
 
             
 
+            
+
              method then returns the resulting XML as an <see
              cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+
+            
 
             
 
@@ -1001,11 +1133,15 @@
 
             
 
+            
+
              method overloads.</para
           >
           <para
             >To use XML Encryption with X.509 certificates, you must have the Microsoft Enhanced Cryptographic Provider installed and the X.509 certificate must use the Enhanced Provider. If you do not have the Microsoft Enhanced Cryptographic Provider installed or the X.509 certificate does not use the Enhanced Provider, a <see
              cref="T:System.Security.Cryptography.CryptographicException" />
+
+            
 
             
 
@@ -1028,6 +1164,8 @@
 
             
 
+            
+
              element that represents the encrypted XML data.</para
           >
         </returns>
@@ -1038,10 +1176,14 @@
 
           
 
+          
+
           The XML element to encrypt.</param
         >
         <param name="certificate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1084,11 +1226,15 @@
 
             
 
+            
+
              method overloads.</para
           >
           <para
             >For a list of all supported algorithms, see the list of constant fields associated with the <see
              cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
+
+            
 
             
 
@@ -1111,6 +1257,8 @@
 
             
 
+            
+
              object that represents the encrypted XML data.</para
           >
         </returns>
@@ -1121,10 +1269,14 @@
 
           
 
+          
+
           The XML element to encrypt.</param
         >
         <param name="keyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1164,6 +1316,8 @@
           <para
             >The returned byte array can be placed into a &lt;CipherValue&gt; element. This method assumes that the data specified in the <paramref
              name="plaintext" />
+
+            
 
             
 
@@ -1226,10 +1380,14 @@
 
           
 
+          
+
           The element or its contents to encrypt.</param
         >
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1273,8 +1431,12 @@
 
             
 
+            
+
              method to encrypt the key that a recipient uses to decrypt an &lt;EncryptedData&gt; element. This method accepts a value for the <paramref
              name="symmetricAlgorithm" />
+
+            
 
             
 
@@ -1298,11 +1460,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="keyData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1347,8 +1513,12 @@
 
             
 
+            
+
              method to encrypt the key that a recipient uses to decrypt an &lt;EncryptedData&gt; element. This method accepts a value for <paramref
              name="rsa" />
+
+            
 
             
 
@@ -1372,11 +1542,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="keyData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1391,8 +1565,12 @@
 
           
 
+          
+
           The asymmetric key used to encrypt <paramref
            name="keyData" />
+
+          
 
           
 
@@ -1436,8 +1614,12 @@
 
             
 
+            
+
              object, this method retrieves the decryption initialization vector (IV). The default behavior retrieves the IV as the first bytes of the <see
              cref="P:System.Security.Cryptography.Xml.CipherData.CipherValue" />
+
+            
 
             
 
@@ -1453,8 +1635,12 @@
 
             
 
+            
+
              parameter, see the list of constant fields associated with the <see
              cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
+
+            
 
             
 
@@ -1468,6 +1654,8 @@
           <para
             >Retrieves the decryption initialization vector (IV) from an <see
              cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+
+            
 
             
 
@@ -1487,8 +1675,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+
+          
 
           
 
@@ -1532,8 +1724,12 @@
 
             
 
+            
+
              object, this method looks for the decryption key that can be used to retrieve the plain text data. If a key name is specified, the method looks for the symmetric algorithm or asymmetric algorithm that is associated with the key name as defined in the key name mapping. Otherwise, if a retrieval method or an <see
              cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+
+            
 
             
 
@@ -1546,8 +1742,12 @@
 
             
 
+            
+
              object and calls the <see
              cref="M:System.Security.Cryptography.Xml.EncryptedXml.GetDecryptionKey(System.Security.Cryptography.Xml.EncryptedData,System.String)" />
+
+            
 
             
 
@@ -1566,6 +1766,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1574,6 +1776,8 @@
           <para
             >A <see
              cref="T:System.Security.Cryptography.SymmetricAlgorithm" />
+
+            
 
             
 
@@ -1589,8 +1793,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+
+          
 
           
 
@@ -1633,6 +1841,8 @@
 
             
 
+            
+
              method determines how to resolve internal Uniform Resource Identifiers (URIs). It looks for elements with a specified value or for elements with an ID attribute that has a specified value.</para
           >
         </remarks>
@@ -1650,11 +1860,15 @@
 
             
 
+            
+
              object that contains an ID indicating how internal Uniform Resource Identifiers (URIs) are to be resolved.</para
           >
         </returns>
         <param name="document">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1667,10 +1881,14 @@
 
           
 
+          
+
            object that contains an element with an ID value.</param
         >
         <param name="idValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1705,6 +1923,8 @@
           <para
             >Cipher Block Chaining (CBC) mode is the default cipher mode for XML encryption. You can use this property to specify other cipher modes of the <see
              cref="T:System.Security.Cryptography.CipherMode" />
+
+            
 
             
 
@@ -1749,6 +1969,8 @@
 
             
 
+            
+
              enumeration, such as ANSI X9.23 or PKCS#5.</para
           >
         </remarks>
@@ -1782,8 +2004,12 @@
 
             
 
+            
+
              object referenced by a key name by examining the <see
              cref="P:System.Security.Cryptography.Xml.EncryptedKey.CarriedKeyName" />
+
+            
 
             
 
@@ -1799,8 +2025,12 @@
 
             
 
+            
+
              property to identify the <see
              cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
+
+            
 
             
 
@@ -1848,8 +2078,12 @@
 
             
 
+            
+
              method replaces an &lt;EncryptedData&gt; element with the value of the <paramref
              name="decryptedData" />
+
+            
 
             
 
@@ -1869,6 +2103,8 @@
 
           
 
+          
+
           The &lt;EncryptedData&gt; element to replace.</param
         >
         <param name="decryptedData">
@@ -1878,8 +2114,12 @@
 
           
 
+          
+
           The decrypted data to replace <paramref
            name="inputElement" />
+
+          
 
           
 
@@ -1923,6 +2163,8 @@
 
             
 
+            
+
              method replaces the <paramref
              name="inputElement" />
 
@@ -1930,8 +2172,12 @@
 
             
 
+            
+
              parameter with the value specified by the <paramref
              name="encryptedData" />
+
+            
 
             
 
@@ -1950,11 +2196,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="inputElement">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1969,8 +2219,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+
+          
 
           
 
@@ -1983,10 +2237,14 @@
 
           
 
+          
+
            parameter with.</param
         >
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2023,6 +2281,8 @@
 
             
 
+            
+
              object used to resolve external XML resources such as entities, document type definitions (DTDs), or schemas.</para
           >
         </remarks>
@@ -2031,6 +2291,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -2062,6 +2324,8 @@
           <para
             >The value of the <see
              cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncAES128KeyWrapUrl" />
+
+            
 
             
 
@@ -2102,6 +2366,8 @@
 
             
 
+            
+
              field is "http://www.w3.org/2001/04/xmlenc#aes128-cbc".</para
           >
         </remarks>
@@ -2132,6 +2398,8 @@
           <para
             >The value of the <see
              cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncAES192KeyWrapUrl" />
+
+            
 
             
 
@@ -2172,6 +2440,8 @@
 
             
 
+            
+
              field is "http://www.w3.org/2001/04/xmlenc#aes192-cbc".</para
           >
         </remarks>
@@ -2202,6 +2472,8 @@
           <para
             >The value of the <see
              cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncAES256KeyWrapUrl" />
+
+            
 
             
 
@@ -2242,6 +2514,8 @@
 
             
 
+            
+
              field is "http://www.w3.org/2001/04/xmlenc#aes256-cbc".</para
           >
         </remarks>
@@ -2269,6 +2543,8 @@
           <para
             >The value of the <see
              cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncDESUrl" />
+
+            
 
             
 
@@ -2309,6 +2585,8 @@
 
             
 
+            
+
              field is "http://www.w3.org/2001/04/xmlenc#Content".</para
           >
         </remarks>
@@ -2339,6 +2617,8 @@
           <para
             >The value of the <see
              cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncElementUrl" />
+
+            
 
             
 
@@ -2379,6 +2659,8 @@
 
             
 
+            
+
              field is "http://www.w3.org/2001/04/xmlenc#EncryptedKey".</para
           >
         </remarks>
@@ -2409,6 +2691,8 @@
           <para
             >The value of the <see
              cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncNamespaceUrl" />
+
+            
 
             
 
@@ -2449,6 +2733,8 @@
 
             
 
+            
+
              field is "http://www.w3.org/2001/04/xmlenc#rsa-1_5".</para
           >
         </remarks>
@@ -2479,6 +2765,8 @@
           <para
             >The value of the <see
              cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncRSAOAEPUrl" />
+
+            
 
             
 
@@ -2519,6 +2807,8 @@
 
             
 
+            
+
              field is "http://www.w3.org/2001/04/xmlenc#sha256".</para
           >
         </remarks>
@@ -2549,6 +2839,8 @@
           <para
             >The value of the <see
              cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncSHA512Url" />
+
+            
 
             
 
@@ -2589,6 +2881,8 @@
 
             
 
+            
+
              field is "http://www.w3.org/2001/04/xmlenc#kw-tripledes".</para
           >
         </remarks>
@@ -2619,6 +2913,8 @@
           <para
             >The value of the <see
              cref="F:System.Security.Cryptography.Xml.EncryptedXml.XmlEncTripleDESUrl" />
+
+            
 
             
 

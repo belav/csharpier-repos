@@ -21,13 +21,11 @@ This package is an internal implementation of the .NET Core SDK and is not meant
     <BaseRuntimeVersionFileName>aspnetcore_base_runtime.version</BaseRuntimeVersionFileName>
     <BaseRuntimeVersionFileOutputPath>$(InstallersOutputPath)$(BaseRuntimeVersionFileName)</BaseRuntimeVersionFileOutputPath>
     <!-- NuGet appends target framework to this value. Example: runtimes/win-x64/lib/netcoreappX.Y/ -->
-    <BuildOutputTargetFolder
->runtimes/$(RuntimeIdentifier)/lib/</BuildOutputTargetFolder>
+    <BuildOutputTargetFolder>runtimes/$(RuntimeIdentifier)/lib/</BuildOutputTargetFolder>
     <!-- We still need the native path to these assets though for the RuntimeList.xml manifest -->
     <ManagedAssetsPackagePath>$(BuildOutputTargetFolder)$(DefaultNetCoreTargetFramework)</ManagedAssetsPackagePath>
     <!-- Target framework is not appended to this because native assets do not have a target framework. -->
-    <NativeAssetsPackagePath
->runtimes/$(RuntimeIdentifier)/native/</NativeAssetsPackagePath>
+    <NativeAssetsPackagePath>runtimes/$(RuntimeIdentifier)/native/</NativeAssetsPackagePath>
     <!-- Use the BrowserDebugHost as a sentinel for the nonshipping version for .NETCoreApp -->
     <DotNetRuntimeArchiveFileName>dotnet-runtime-$(MicrosoftNETCoreAppRuntimeVersion)-$(TargetRuntimeIdentifier)$(ArchiveExtension)</DotNetRuntimeArchiveFileName>
     <DotNetRuntimeDownloadPath>Runtime/$(MicrosoftNETCoreBrowserDebugHostTransportVersion)/$(DotNetRuntimeArchiveFileName)</DotNetRuntimeDownloadPath>

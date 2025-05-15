@@ -38,6 +38,8 @@
 
           
 
+          
+
            algorithm and its derived classes instead of the <see
            cref="T:System.Security.Cryptography.RC2" />
 
@@ -45,8 +47,12 @@
 
           
 
+          
+
            class. Use <see
            cref="T:System.Security.Cryptography.RC2" />
+
+          
 
           
 
@@ -61,6 +67,8 @@
       <para
         >Represents the base class from which all implementations of the <see
          cref="T:System.Security.Cryptography.RC2" />
+
+        
 
         
 
@@ -97,11 +105,15 @@
 
             
 
+            
+
              implementation only supports key lengths from 40 bits to 128 bits in increments of 8 bits.</para
           >
           <para
             >This method initializes the protected fields of <see
              cref="T:System.Security.Cryptography.SymmetricAlgorithm" />
+
+            
 
             
 
@@ -162,6 +174,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -196,6 +210,8 @@
           <para
             >Creates an instance of a cryptographic object to perform the <see
              cref="T:System.Security.Cryptography.RC2" />
+
+            
 
             
 
@@ -246,6 +262,8 @@
 
             
 
+            
+
              algorithm.</para
           >
         </summary>
@@ -260,8 +278,12 @@
 
           
 
+          
+
           The name of the specific implementation of <see
            cref="T:System.Security.Cryptography.RC2" />
+
+          
 
           
 
@@ -296,6 +318,8 @@
 
             
 
+            
+
              algorithm in bits.</para
           >
         </summary>
@@ -325,6 +349,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -333,6 +359,8 @@
           <para
             >Represents the effective size of the secret key used by the <see
              cref="T:System.Security.Cryptography.RC2" />
+
+            
 
             
 
@@ -366,6 +394,8 @@
           <para
             >Gets or sets the size of the secret key used by the <see
              cref="T:System.Security.Cryptography.RC2" />
+
+            
 
             
 

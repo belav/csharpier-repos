@@ -16,9 +16,7 @@
       ResolveProjectReferences;
       _Build;
     </BuildDependsOn>
-    <NpmBuildArgs Condition="'$(NpmBuildArgs)' == ''"
->run build</NpmBuildArgs
-    >
+    <NpmBuildArgs Condition="'$(NpmBuildArgs)' == ''">run build</NpmBuildArgs>
   </PropertyGroup>
   <ItemGroup>
     <TSFiles Include="src\**\*.ts" />

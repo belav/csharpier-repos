@@ -23,8 +23,12 @@
 
         
 
+        
+
          enumeration is used in an application's configuration file to set the protocol used to secure communications between an <see
          cref="T:System.Web.Security.ActiveDirectoryMembershipProvider" />
+
+        
 
         
 
@@ -39,6 +43,8 @@
 
         
 
+        
+
          configuration element. The connectionProtection attribute can be set only to either "None" or "Secure".</para
       >
     </remarks>
@@ -47,6 +53,8 @@
       <para
         >Specifies the connection protection options supported by the <see
          cref="T:System.Web.Security.ActiveDirectoryMembershipProvider" />
+
+        
 
         
 

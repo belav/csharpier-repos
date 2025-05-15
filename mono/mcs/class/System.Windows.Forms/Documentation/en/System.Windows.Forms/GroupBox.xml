@@ -38,8 +38,12 @@
 
         
 
+        
+
          displays a frame around a group of controls with or without a caption. Use a <see
          cref="T:System.Windows.Forms.GroupBox" />
+
+        
 
         
 
@@ -55,11 +59,15 @@
 
         
 
+        
+
          controls. If you have two group boxes, each of which contain several option buttons (also known as radio buttons), each group of buttons is mutually exclusive, setting one option value per group.</para
       >
       <para
         >You can add controls to the <see
          cref="T:System.Windows.Forms.GroupBox" />
+
+        
 
         
 
@@ -72,8 +80,12 @@
 
         
 
+        
+
          method of the <see
          cref="P:System.Windows.Forms.Control.Controls" />
+
+        
 
         
 
@@ -90,8 +102,12 @@
 
           
 
+          
+
            control can be selected or receive focus. The complete <see
            cref="T:System.Windows.Forms.GroupBox" />
+
+          
 
           
 
@@ -104,8 +120,12 @@
 
           
 
+          
+
            and <see
            cref="M:System.Windows.Forms.Control.Select" />
+
+          
 
           
 
@@ -118,8 +138,12 @@
 
           
 
+          
+
            members: <see
            cref="P:System.Windows.Forms.Control.CanFocus" />
+
+          
 
           
 
@@ -132,8 +156,12 @@
 
           
 
+          
+
           , <see
            cref="P:System.Windows.Forms.Control.Focused" />
+
+          
 
           
 
@@ -146,6 +174,8 @@
 
           
 
+          
+
           , <see
            cref="M:System.Windows.Forms.Control.Focus" />
 
@@ -153,8 +183,12 @@
 
           
 
+          
+
           , <see
            cref="M:System.Windows.Forms.Control.Select" />
+
+          
 
           
 
@@ -171,6 +205,8 @@
 
         
 
+        
+
          cannot display a scroll bar. If you need a control similar to a <see
          cref="T:System.Windows.Forms.GroupBox" />
 
@@ -178,8 +214,12 @@
 
         
 
+        
+
          that can contain a scroll bar, see the <see
          cref="T:System.Windows.Forms.Panel" />
+
+        
 
         
 
@@ -209,8 +249,12 @@
 
             
 
+            
+
              property is set to false when a new <see
              cref="T:System.Windows.Forms.GroupBox" />
+
+            
 
             
 
@@ -224,6 +268,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.GroupBox" />
+
+            
 
             
 
@@ -298,6 +344,8 @@
 
             
 
+            
+
              resizes based on its contents.</para
           >
         </summary>
@@ -333,6 +381,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -341,6 +391,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.GroupBox.AutoSize" />
+
+            
 
             
 
@@ -387,8 +439,12 @@
 
             
 
+            
+
              behaves when its <see
              cref="P:System.Windows.Forms.Control.AutoSize" />
+
+            
 
             
 
@@ -420,6 +476,8 @@
           <para
             >Occurs when the user clicks the <see
              cref="T:System.Windows.Forms.GroupBox" />
+
+            
 
             
 
@@ -458,8 +516,12 @@
 
             
 
+            
+
              method, it will be called when the <see
              cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+
+            
 
             
 
@@ -478,6 +540,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -491,8 +555,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Windows.Forms.GroupBox" />
+
+            
 
             
 
@@ -550,8 +618,12 @@
 
             
 
+            
+
              structure that contains the default padding settings for a <see
              cref="T:System.Windows.Forms.GroupBox" />
+
+            
 
             
 
@@ -603,6 +675,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -633,6 +707,8 @@
           <para
             >Occurs when the user double-clicks the <see
              cref="T:System.Windows.Forms.GroupBox" />
+
+            
 
             
 
@@ -673,6 +749,8 @@
 
             
 
+            
+
              with a <see
              cref="P:System.Windows.Forms.GroupBox.FlatStyle" />
 
@@ -680,8 +758,12 @@
 
             
 
+            
+
              value of <see
              cref="F:System.Windows.Forms.FlatStyle.System" />
+
+            
 
             
 
@@ -728,6 +810,8 @@
 
             
 
+            
+
              control cannot get focus, this event is never raised.</para
           >
         </remarks>
@@ -736,6 +820,8 @@
           <para
             >Occurs when the user presses a key while the <see
              cref="T:System.Windows.Forms.GroupBox" />
+
+            
 
             
 
@@ -778,6 +864,8 @@
 
             
 
+            
+
              control cannot get focus, this event is never raised.</para
           >
         </remarks>
@@ -786,6 +874,8 @@
           <para
             >Occurs when the user presses a key while the <see
              cref="T:System.Windows.Forms.GroupBox" />
+
+            
 
             
 
@@ -828,6 +918,8 @@
 
             
 
+            
+
              control cannot get focus, this event is never raised.</para
           >
         </remarks>
@@ -836,6 +928,8 @@
           <para
             >Occurs when the user releases a key while the <see
              cref="T:System.Windows.Forms.GroupBox" />
+
+            
 
             
 
@@ -882,6 +976,8 @@
 
             
 
+            
+
              control with the mouse.</para
           >
         </summary>
@@ -914,6 +1010,8 @@
           <para
             >Occurs when the user double-clicks the <see
              cref="T:System.Windows.Forms.GroupBox" />
+
+            
 
             
 
@@ -1154,6 +1252,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </remarks>
@@ -1162,6 +1262,8 @@
           <para
             >Scales the <see
              cref="T:System.Windows.Forms.GroupBox" />
+
+            
 
             
 
@@ -1177,8 +1279,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.SizeF" />
+
+          
 
           
 
@@ -1193,8 +1299,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.BoundsSpecified" />
+
+          
 
           
 
@@ -1230,8 +1340,12 @@
 
             
 
+            
+
              property to true, the <see
              cref="T:System.Windows.Forms.GroupBox" />
+
+            
 
             
 
@@ -1245,6 +1359,8 @@
           <para
             >Gets or sets a value that indicates whether the user can press the TAB key to give the focus to the <see
              cref="T:System.Windows.Forms.GroupBox" />
+
+            
 
             
 
@@ -1280,6 +1396,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.GroupBox.TabStop" />
+
+            
 
             
 
@@ -1335,6 +1453,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1363,8 +1483,12 @@
 
             
 
+            
+
              class and net_v10_short and net_v11_short applications that perform custom text rendering using the <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -1380,8 +1504,12 @@
 
             
 
+            
+
              class was introduced in the dnprdnlong to improve performance, make text look better, and improve support for international fonts. In earlier versions of the dnprdnshort, the ndptecgdiplus based <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -1394,6 +1522,8 @@
 
             
 
+            
+
              class to render text, this could cause the text for controls that use <see
              cref="T:System.Windows.Forms.TextRenderer" />
 
@@ -1401,8 +1531,12 @@
 
             
 
+            
+
              to appear different from the other text in the application. To resolve this incompatibility, you can set the UseCompatibleTextRendering property to true for a specific control. To set UseCompatibleTextRendering to true for all supported controls in the application, call the <see
              cref="M:System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(System.Boolean)" />
+
+            
 
             
 
@@ -1421,8 +1555,12 @@
 
             
 
+            
+
              class (ndptecgdiplus) or the <see
              cref="T:System.Windows.Forms.TextRenderer" />
+
+            
 
             
 

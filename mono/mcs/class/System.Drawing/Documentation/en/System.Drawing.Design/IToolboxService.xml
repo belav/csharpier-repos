@@ -29,6 +29,8 @@
 
         
 
+        
+
          interface provides properties and methods for adding and removing toolbox items and toolbox creator callback delegates, serializing and deserializing toolbox items, and retrieving toolbox state information and managing toolbox state.</para
       >
       <para>You can retrieve information about the contents of the toolbox with the following methods: </para>
@@ -37,6 +39,8 @@
           <para
             >The <see
              cref="P:System.Drawing.Design.IToolboxService.CategoryNames" />
+
+            
 
             
 
@@ -54,6 +58,8 @@
 
             
 
+            
+
              property indicates the currently selected toolbox category.</para
           >
         </item>
@@ -61,6 +67,8 @@
           <para
             >The <see
              cref="M:System.Drawing.Design.IToolboxService.GetToolboxItems" />
+
+            
 
             
 
@@ -78,8 +86,12 @@
 
             
 
+            
+
              method retrieves the currently selected <see
              cref="T:System.Drawing.Design.ToolboxItem" />
+
+            
 
             
 
@@ -97,8 +109,12 @@
 
             
 
+            
+
              method selects the specified <see
              cref="T:System.Drawing.Design.ToolboxItem" />
+
+            
 
             
 
@@ -116,8 +132,12 @@
 
             
 
+            
+
              method indicates whether the specified serialized object, if it is a <see
              cref="T:System.Drawing.Design.ToolboxItem" />
+
+            
 
             
 
@@ -135,8 +155,12 @@
 
             
 
+            
+
              method indicates whether the specified serialized object is a <see
              cref="T:System.Drawing.Design.ToolboxItem" />
+
+            
 
             
 
@@ -157,8 +181,12 @@
 
             
 
+            
+
              method adds a <see
              cref="T:System.Drawing.Design.ToolboxItem" />
+
+            
 
             
 
@@ -176,8 +204,12 @@
 
             
 
+            
+
              method adds a <see
              cref="T:System.Drawing.Design.ToolboxItem" />
+
+            
 
             
 
@@ -195,8 +227,12 @@
 
             
 
+            
+
              method removes the specified <see
              cref="T:System.Drawing.Design.ToolboxItem" />
+
+            
 
             
 
@@ -214,6 +250,8 @@
 
             
 
+            
+
              method adds a <see
              cref="T:System.Drawing.Design.ToolboxItemCreatorCallback" />
 
@@ -221,8 +259,12 @@
 
             
 
+            
+
              delegate capable of converting some type of data stored on the toolbox to a <see
              cref="T:System.Drawing.Design.ToolboxItem" />
+
+            
 
             
 
@@ -240,8 +282,12 @@
 
             
 
+            
+
              method removes any <see
              cref="T:System.Drawing.Design.ToolboxItemCreatorCallback" />
+
+            
 
             
 
@@ -262,6 +308,8 @@
 
             
 
+            
+
              method refreshes the toolbox display to reflect the current state of the toolbox items.</para
           >
         </item>
@@ -274,6 +322,8 @@
 
             
 
+            
+
              method signals the toolbox that the selected toolbox item has been used.</para
           >
         </item>
@@ -281,6 +331,8 @@
           <para
             >The <see
              cref="M:System.Drawing.Design.IToolboxService.SetCursor" />
+
+            
 
             
 
@@ -301,8 +353,12 @@
 
             
 
+            
+
              method attempts to return a <see
              cref="T:System.Drawing.Design.ToolboxItem" />
+
+            
 
             
 
@@ -320,8 +376,12 @@
 
             
 
+            
+
              method returns a serialized object representing the specified <see
              cref="T:System.Drawing.Design.ToolboxItem" />
+
+            
 
             
 
@@ -362,8 +422,12 @@
 
             
 
+            
+
             . If a creator handles more than one format, call <see
              cref="M:System.Drawing.Design.IToolboxService.AddCreator(System.Drawing.Design.ToolboxItemCreatorCallback,System.String)" />
+
+            
 
             
 
@@ -383,8 +447,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Design.ToolboxItemCreatorCallback" />
+
+          
 
           
 
@@ -394,6 +462,8 @@
         >
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -432,8 +502,12 @@
 
             
 
+            
+
             . If a creator handles more than one format, call <see
              cref="M:System.Drawing.Design.IToolboxService.AddCreator(System.Drawing.Design.ToolboxItemCreatorCallback,System.String)" />
+
+            
 
             
 
@@ -444,6 +518,8 @@
           <para
             >If the <paramref
              name="host" />
+
+            
 
             
 
@@ -463,8 +539,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Design.ToolboxItemCreatorCallback" />
+
+          
 
           
 
@@ -479,6 +559,8 @@
 
           
 
+          
+
           The data format that the creator handles. </param
         >
         <param name="host">
@@ -488,8 +570,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+          
 
           
 
@@ -532,8 +618,12 @@
 
           
 
+          
+
           The linked <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 
@@ -548,8 +638,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+          
 
           
 
@@ -593,8 +687,12 @@
 
           
 
+          
+
           The linked <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 
@@ -609,6 +707,8 @@
 
           
 
+          
+
           The toolbox item category to add the toolbox item to. </param
         >
         <param name="host">
@@ -618,8 +718,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+          
 
           
 
@@ -658,8 +762,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 
@@ -699,8 +807,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 
@@ -715,8 +827,12 @@
 
           
 
+          
+
           The toolbox item category to add the <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 
@@ -780,6 +896,8 @@
 
             
 
+            
+
              created from the serialized object.</para
           >
         </returns>
@@ -790,8 +908,12 @@
 
           
 
+          
+
           The object that contains the <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 
@@ -834,6 +956,8 @@
 
             
 
+            
+
              created from deserialization.</para
           >
         </returns>
@@ -844,8 +968,12 @@
 
           
 
+          
+
           The object that contains the <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 
@@ -860,6 +988,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
 
@@ -867,8 +997,12 @@
 
           
 
+          
+
            to associate with this <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 
@@ -908,6 +1042,8 @@
 
             
 
+            
+
              that is currently selected, or null if no toolbox item has been selected.</para
           >
         </returns>
@@ -940,8 +1076,12 @@
 
             
 
+            
+
              if it is not designer specific, and only returns a designer-specific currently selected <see
              cref="T:System.Drawing.Design.ToolboxItem" />
+
+            
 
             
 
@@ -954,8 +1094,12 @@
 
             
 
+            
+
              parameter matches the type of designer that the currently selected <see
              cref="T:System.Drawing.Design.ToolboxItem" />
+
+            
 
             
 
@@ -978,6 +1122,8 @@
 
             
 
+            
+
              that is currently selected, or null if no toolbox item is currently selected.</para
           >
         </returns>
@@ -988,8 +1134,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+          
 
           
 
@@ -1024,6 +1174,8 @@
           <para
             >A <see
              cref="T:System.Drawing.Design.ToolboxItemCollection" />
+
+            
 
             
 
@@ -1066,6 +1218,8 @@
 
             
 
+            
+
              that contains the current toolbox items that are associated with the specified designer host.</para
           >
         </returns>
@@ -1076,8 +1230,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+          
 
           
 
@@ -1119,11 +1277,15 @@
 
             
 
+            
+
              that contains the current toolbox items that are associated with the specified category.</para
           >
         </returns>
         <param name="category">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1166,11 +1328,15 @@
 
             
 
+            
+
              that contains the current toolbox items that are associated with the specified category and designer host.</para
           >
         </returns>
         <param name="category">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1185,8 +1351,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+          
 
           
 
@@ -1230,8 +1400,12 @@
 
           
 
+          
+
           The object that contains the <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 
@@ -1246,8 +1420,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.ICollection" />
+
+          
 
           
 
@@ -1291,8 +1469,12 @@
 
           
 
+          
+
           The object that contains the <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 
@@ -1307,6 +1489,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
 
@@ -1314,8 +1498,12 @@
 
           
 
+          
+
            to test for support for the <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 
@@ -1350,6 +1538,8 @@
         </returns>
         <param name="serializedObject">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1393,6 +1583,8 @@
 
           
 
+          
+
           The object to inspect. </param
         >
         <param name="host">
@@ -1402,8 +1594,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+          
 
           
 
@@ -1430,6 +1626,8 @@
           <para
             >The <see
              cref="M:System.Drawing.Design.IToolboxService.Refresh" />
+
+            
 
             
 
@@ -1470,6 +1668,8 @@
 
           
 
+          
+
           The data format of the creator to remove. </param
         >
       </Docs>
@@ -1504,6 +1704,8 @@
 
           
 
+          
+
           The data format of the creator to remove. </param
         >
         <param name="host">
@@ -1513,8 +1715,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+          
 
           
 
@@ -1553,8 +1759,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 
@@ -1594,8 +1804,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 
@@ -1610,8 +1824,12 @@
 
           
 
+          
+
           The toolbox item category to remove the <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 
@@ -1687,6 +1905,8 @@
 
             
 
+            
+
              to an object that can be persisted. The returned object can be stored in a stream or passed around in a drag-and-drop or clipboard operation.</para
           >
         </remarks>
@@ -1704,6 +1924,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1714,8 +1936,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 
@@ -1780,8 +2006,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 

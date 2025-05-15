@@ -5,7 +5,7 @@
 
       >[Note: Thus, the default constructor is always of the form <code_example
       >
-<![CDATA[
+        <![CDATA[
 protected C(): base() {}  
 ]]>
       </code_example>
@@ -14,12 +14,16 @@ protected C(): base() {}
 
       
 
+      
+
       or <code_example
       >
-<![CDATA[
+        <![CDATA[
 public C(): base() {}  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -32,7 +36,7 @@ public C(): base() {}
     <example
       >[Example: In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 class Message  
 {  
    object sender;  
@@ -45,9 +49,11 @@ class Message
 
       
 
+      
+
       a default constructor is provided because the class contains no instance constructor declarations. Thus, the example is precisely equivalent to <code_example
       >
-<![CDATA[
+        <![CDATA[
 class Message  
 {  
    object sender;  
@@ -56,6 +62,8 @@ class Message
 }  
 ]]>
       </code_example>
+
+      
 
       
 

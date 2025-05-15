@@ -34,8 +34,12 @@
 
         
 
+        
+
          factory method to create a <see
          cref="T:System.Linq.Expressions.TypeBinaryExpression" />
+
+        
 
         
 
@@ -51,6 +55,8 @@
 
         
 
+        
+
          property of a <see
          cref="T:System.Linq.Expressions.TypeBinaryExpression" />
 
@@ -58,8 +64,12 @@
 
         
 
+        
+
          object is <see
          cref="F:System.Linq.Expressions.ExpressionType.TypeIs" />
+
+        
 
         
 
@@ -155,6 +165,8 @@
 
             
 
+            
+
              when overriding this method.</para
           >
         </summary>
@@ -178,6 +190,8 @@
           <para
             >Gets the static type of the expression that this <see
              cref="P:System.Linq.Expressions.TypeBinaryExpression.Expression" />
+
+            
 
             
 
@@ -244,8 +258,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.TypeBinaryExpression.Expression" />
+
+          
 
           
 

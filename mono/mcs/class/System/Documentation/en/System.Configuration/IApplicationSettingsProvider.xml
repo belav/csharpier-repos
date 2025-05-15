@@ -26,8 +26,12 @@
 
         
 
+        
+
         . Such a class contains the basic functionality for storing and retrieving properties. However, you can add additional standardized functionality by implementing the <see
          cref="T:System.Configuration.IApplicationSettingsProvider" />
+
+        
 
         
 
@@ -54,8 +58,12 @@
 
         
 
+        
+
          class implements the <see
          cref="T:System.Configuration.IApplicationSettingsProvider" />
+
+        
 
         
 
@@ -68,8 +76,12 @@
 
         
 
+        
+
          is also found in the <see
          cref="T:System.Configuration.ApplicationSettingsBase" />
+
+        
 
         
 
@@ -120,8 +132,12 @@
 
             
 
+            
+
              method in conjunction with the <see
              cref="M:System.Configuration.IApplicationSettingsProvider.Upgrade(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />
+
+            
 
             
 
@@ -144,6 +160,8 @@
 
             
 
+            
+
              containing the value of the specified property setting as it was last set in the previous version of the application; or null if the setting cannot be found.</para
           >
         </returns>
@@ -154,8 +172,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.SettingsContext" />
+
+          
 
           
 
@@ -170,8 +192,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Configuration.SettingsProperty" />
+
+          
 
           
 
@@ -213,8 +239,12 @@
 
             
 
+            
+
              method reinitializes the stored values of the specified application settings group. In contrast, <see
              cref="T:System.Configuration.DefaultSettingValueAttribute" />
+
+            
 
             
 
@@ -225,6 +255,8 @@
           <para
             >The settings provider determines what reasonable defaults are for the specified group of application settings. For example, the implementation in <see
              cref="T:System.Configuration.LocalFileSettingsProvider" />
+
+            
 
             
 
@@ -244,8 +276,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.SettingsContext" />
+
+          
 
           
 
@@ -288,8 +324,12 @@
 
             
 
+            
+
              method, implemented in a class derived from <see
              cref="T:System.Configuration.SettingsProvider" />
+
+            
 
             
 
@@ -305,8 +345,12 @@
 
             
 
+            
+
              method in conjunction with the <see
              cref="M:System.Configuration.IApplicationSettingsProvider.GetPreviousVersion(System.Configuration.SettingsContext,System.Configuration.SettingsProperty)" />
+
+            
 
             
 
@@ -322,8 +366,12 @@
 
             
 
+            
+
              is applied to it, or to the entire settings wrapper class, derived from <see
              cref="T:System.Configuration.ApplicationSettingsBase" />
+
+            
 
             
 
@@ -343,8 +391,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.SettingsContext" />
+
+          
 
           
 
@@ -359,8 +411,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.SettingsPropertyCollection" />
+
+          
 
           
 

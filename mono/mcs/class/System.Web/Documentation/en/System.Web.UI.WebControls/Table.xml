@@ -75,11 +75,15 @@
 
         
 
+        
+
          control allows you to build an HTML table and specify its characteristics in a straightforward manner.</para
       >
       <para
         >A table can be built at design time given some static content, but the power of a <see
          cref="T:System.Web.UI.WebControls.Table" />
+
+        
 
         
 
@@ -98,12 +102,16 @@
 
           
 
+          
+
            element in the Web.config file is set to 3.5, the control renders a border attribute that is set to "0" on the HTML table element.</para
         >
       </block>
       <para
         >It is important to remember that any programmatic addition or modification of table rows or cells will not persist across posts to the server. This is because table rows and cells are controls of their own, and not properties of the <see
          cref="T:System.Web.UI.WebControls.Table" />
+
+        
 
         
 
@@ -116,8 +124,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -130,6 +142,8 @@
 
         
 
+        
+
          control be used instead of the <see
          cref="T:System.Web.UI.WebControls.Table" />
 
@@ -137,8 +151,12 @@
 
         
 
+        
+
          control. As a result, the <see
          cref="T:System.Web.UI.WebControls.Table" />
+
+        
 
         
 
@@ -157,6 +175,8 @@
 
           
 
+          
+
           , <format
            type="text/html">
             <a href="6f67973f-dda0-45a1-ba9d-e88532d7dc5b"
@@ -168,12 +188,16 @@
 
           
 
+          
+
           , and <format
            type="text/html">
             <a href="4ad3dacb-89e0-4cee-89ac-40a3f2a85461"
               >Introduction to Validating User Input in ASP.NET Web Pages</a
             >
           </format>
+
+          
 
           
 
@@ -200,10 +224,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0">ASP.NET Controls and Accessibility</a>
         </format>
+
+        
 
         
 
@@ -230,12 +258,16 @@
 
         
 
+        
+
         |None|Dotted|Dashed|Solid|Double|Groove|Ridge|
         Inset|Outset"
     BorderWidth="size"
     Caption="string"
     CaptionAlign="<codeFeaturedElement
         >NotSet</codeFeaturedElement>
+
+        
 
         
 
@@ -252,9 +284,13 @@
 
         
 
+        
+
         |False"
     EnableTheming="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -268,9 +304,13 @@
 
         
 
+        
+
         |False"
     Font-Bold="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -284,10 +324,14 @@
 
         
 
+        
+
         "
     Font-Names="string"
     Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -303,9 +347,13 @@
 
         
 
+        
+
         "
     Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -320,10 +368,14 @@
 
         
 
+        
+
         |Horizontal|Vertical|Both"
     Height="size"
     HorizontalAlign="<codeFeaturedElement
         >NotSet</codeFeaturedElement>
+
+        
 
         
 
@@ -349,6 +401,8 @@
 
         
 
+        
+
         |False"
     Width="size"
 &gt;
@@ -358,6 +412,8 @@
                 BorderColor="color name|#dddddd"
                 BorderStyle="<codeFeaturedElement
         >NotSet</codeFeaturedElement>
+
+        
 
         
 
@@ -374,9 +430,13 @@
 
         
 
+        
+
         |False"
                 EnableTheming="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -390,9 +450,13 @@
 
         
 
+        
+
         |False"
                 Font-Bold="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -406,10 +470,14 @@
 
         
 
+        
+
         "
                 Font-Names="string"
                 Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -425,9 +493,13 @@
 
         
 
+        
+
         "
                 Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -438,6 +510,8 @@
                 Height="size"
                 HorizontalAlign="<codeFeaturedElement
         >NotSet</codeFeaturedElement>
+
+        
 
         
 
@@ -462,6 +536,8 @@
 
         
 
+        
+
         |TableFooter"
                 ToolTip="string"
                 VerticalAlign="<codeFeaturedElement
@@ -471,9 +547,13 @@
 
         
 
+        
+
         |Top|Middle|Bottom"
                 Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -494,6 +574,8 @@
 
         
 
+        
+
         |None|Dotted|Dashed|
                                 Solid|Double|Groove|Ridge|Inset|
                                 Outset"
@@ -507,9 +589,13 @@
 
         
 
+        
+
         |False"
                             EnableTheming="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -523,9 +609,13 @@
 
         
 
+        
+
         |False"
                             Font-Bold="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -539,10 +629,14 @@
 
         
 
+        
+
         "
                             Font-Names="string"
                             Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -559,9 +653,13 @@
 
         
 
+        
+
         "
                             Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -572,6 +670,8 @@
                             Height="size"
                             HorizontalAlign="<codeFeaturedElement
         >NotSet</codeFeaturedElement>
+
+        
 
         
 
@@ -600,9 +700,13 @@
 
         
 
+        
+
         |Top|Middle|Bottom"
                             Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -612,6 +716,8 @@
                             Width="size"
                             Wrap="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -632,6 +738,8 @@
 
         
 
+        
+
         |None|Dotted|Dashed|
                                 Solid|Double|Groove|Ridge|Inset|
                                 Outset"
@@ -646,9 +754,13 @@
 
         
 
+        
+
         |False"
                             EnableTheming="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -662,9 +774,13 @@
 
         
 
+        
+
         |False"
                             Font-Bold="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -678,10 +794,14 @@
 
         
 
+        
+
         "
                             Font-Names="string"
                             Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -698,9 +818,13 @@
 
         
 
+        
+
         "
                             Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -711,6 +835,8 @@
                             Height="size"
                             HorizontalAlign="<codeFeaturedElement
         >NotSet</codeFeaturedElement>
+
+        
 
         
 
@@ -734,6 +860,8 @@
 
         
 
+        
+
         |Row|Column"
                             SkinID="string"
                             Style="string"
@@ -747,9 +875,13 @@
 
         
 
+        
+
         |Top|Middle|Bottom"
                             Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -759,6 +891,8 @@
                             Width="size"
                             Wrap="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -778,12 +912,16 @@
 
         
 
+        
+
         |None|Dotted|Dashed|Solid|Double|
                     Groove|Ridge|Inset|Outset"
                 BorderWidth="size"
                 CssClass="string"
                 Enabled="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -797,9 +935,13 @@
 
         
 
+        
+
         |False"
                 EnableViewState="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -813,9 +955,13 @@
 
         
 
+        
+
         "
                 Font-Italic="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -825,6 +971,8 @@
                 Font-Names="string"
                 Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -840,9 +988,13 @@
 
         
 
+        
+
         "
                 Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -853,6 +1005,8 @@
                 Height="size"
                 HorizontalAlign="<codeFeaturedElement
         >NotSet</codeFeaturedElement>
+
+        
 
         
 
@@ -877,6 +1031,8 @@
 
         
 
+        
+
         |TableFooter"
                 ToolTip="string"
                 VerticalAlign="<codeFeaturedElement
@@ -886,9 +1042,13 @@
 
         
 
+        
+
         |Top|Middle|Bottom"
                 Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -909,6 +1069,8 @@
 
         
 
+        
+
         |None|Dotted|Dashed|
                                 Solid|Double|Groove|Ridge|Inset|
                                 Outset"
@@ -922,9 +1084,13 @@
 
         
 
+        
+
         |False"
                             EnableTheming="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -938,9 +1104,13 @@
 
         
 
+        
+
         |False"
                             Font-Bold="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -954,10 +1124,14 @@
 
         
 
+        
+
         "
                             Font-Names="string"
                             Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -974,9 +1148,13 @@
 
         
 
+        
+
         "
                             Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -987,6 +1165,8 @@
                             Height="size"
                             HorizontalAlign="<codeFeaturedElement
         >NotSet</codeFeaturedElement>
+
+        
 
         
 
@@ -1015,9 +1195,13 @@
 
         
 
+        
+
         |Top|Middle|Bottom"
                             Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -1027,6 +1211,8 @@
                             Width="size"
                             Wrap="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -1047,6 +1233,8 @@
 
         
 
+        
+
         |None|Dotted|Dashed|
                                 Solid|Double|Groove|Ridge|Inset|
                                 Outset"
@@ -1061,9 +1249,13 @@
 
         
 
+        
+
         |False"
                             EnableTheming="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -1077,9 +1269,13 @@
 
         
 
+        
+
         |False"
                             Font-Bold="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1093,10 +1289,14 @@
 
         
 
+        
+
         "
                             Font-Names="string"
                             Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1113,9 +1313,13 @@
 
         
 
+        
+
         "
                             Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1126,6 +1330,8 @@
                             Height="size"
                             HorizontalAlign="<codeFeaturedElement
         >NotSet</codeFeaturedElement>
+
+        
 
         
 
@@ -1149,6 +1355,8 @@
 
         
 
+        
+
         |Row|Column"
                             SkinID="string"
                             Style="string"
@@ -1162,9 +1370,13 @@
 
         
 
+        
+
         |Top|Middle|Bottom"
                             Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -1174,6 +1386,8 @@
                             Width="size"
                             Wrap="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -1193,12 +1407,16 @@
 
         
 
+        
+
         |None|Dotted|Dashed|Solid|Double|
                     Groove|Ridge|Inset|Outset"
                 BorderWidth="size"
                 CssClass="string"
                 Enabled="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -1212,9 +1430,13 @@
 
         
 
+        
+
         |False"
                 EnableViewState="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -1228,9 +1450,13 @@
 
         
 
+        
+
         "
                 Font-Italic="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1240,6 +1466,8 @@
                 Font-Names="string"
                 Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1255,9 +1483,13 @@
 
         
 
+        
+
         "
                 Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1268,6 +1500,8 @@
                 Height="size"
                 HorizontalAlign="<codeFeaturedElement
         >NotSet</codeFeaturedElement>
+
+        
 
         
 
@@ -1292,6 +1526,8 @@
 
         
 
+        
+
         |TableFooter"
                 ToolTip="string"
                 VerticalAlign="<codeFeaturedElement
@@ -1301,9 +1537,13 @@
 
         
 
+        
+
         |Top|Middle|Bottom"
                 Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -1324,6 +1564,8 @@
 
         
 
+        
+
         |None|Dotted|Dashed|
                                 Solid|Double|Groove|Ridge|Inset|
                                 Outset"
@@ -1337,9 +1579,13 @@
 
         
 
+        
+
         |False"
                             EnableTheming="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -1353,9 +1599,13 @@
 
         
 
+        
+
         |False"
                             Font-Bold="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1369,10 +1619,14 @@
 
         
 
+        
+
         "
                             Font-Names="string"
                             Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1389,9 +1643,13 @@
 
         
 
+        
+
         "
                             Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1402,6 +1660,8 @@
                             Height="size"
                             HorizontalAlign="<codeFeaturedElement
         >NotSet</codeFeaturedElement>
+
+        
 
         
 
@@ -1430,9 +1690,13 @@
 
         
 
+        
+
         |Top|Middle|Bottom"
                             Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -1442,6 +1706,8 @@
                             Width="size"
                             Wrap="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -1462,6 +1728,8 @@
 
         
 
+        
+
         |None|Dotted|Dashed|
                                 Solid|Double|Groove|Ridge|Inset|
                                 Outset"
@@ -1476,9 +1744,13 @@
 
         
 
+        
+
         |False"
                             EnableTheming="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -1492,9 +1764,13 @@
 
         
 
+        
+
         |False"
                             Font-Bold="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1508,10 +1784,14 @@
 
         
 
+        
+
         "
                             Font-Names="string"
                             Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1528,9 +1808,13 @@
 
         
 
+        
+
         "
                             Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1541,6 +1825,8 @@
                             Height="size"
                             HorizontalAlign="<codeFeaturedElement
         >NotSet</codeFeaturedElement>
+
+        
 
         
 
@@ -1564,6 +1850,8 @@
 
         
 
+        
+
         |Row|Column"
                             SkinID="string"
                             Style="string"
@@ -1572,6 +1860,8 @@
                             ToolTip="string"
                             VerticalAlign="<codeFeaturedElement
         >NotSet</codeFeaturedElement>
+
+        
 
         
 
@@ -1608,6 +1898,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -1616,6 +1908,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -1653,6 +1947,8 @@
 
             
 
+            
+
              output stream for a <see
              cref="T:System.Web.UI.WebControls.Table" />
 
@@ -1660,8 +1956,12 @@
 
             
 
+            
+
              control. This method overrides <see
              cref="M:System.Web.UI.WebControls.WebControl.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -1680,11 +1980,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="writer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1717,8 +2021,12 @@
 
             
 
+            
+
              property to specify the location of an image to display in the background of the <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -1735,6 +2043,8 @@
 
               
 
+              
+
                control, it will be tiled.</para
             >
           </block>
@@ -1744,6 +2054,8 @@
           <para
             >Gets or sets the URL of the background image to display behind the <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -1799,8 +2111,12 @@
 
             
 
+            
+
              property to specify the text to render in an HTML caption element in a <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -1816,8 +2132,12 @@
 
             
 
+            
+
              control is provided by the <see
              cref="P:System.Web.UI.WebControls.Table.CaptionAlign" />
+
+            
 
             
 
@@ -1830,8 +2150,12 @@
 
             
 
+            
+
              property to specify the alignment of the HTML caption element in a <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -1842,6 +2166,8 @@
           <para
             >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
              cref="T:System.ComponentModel.LocalizableAttribute" />
+
+            
 
             
 
@@ -1858,6 +2184,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1866,6 +2194,8 @@
           <para
             >Gets or sets the text to render in an HTML caption element in a <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -1906,8 +2236,12 @@
 
             
 
+            
+
              property to specify the horizontal or vertical position of the HTML caption element in a <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -1918,6 +2252,8 @@
           <para
             >This property is set using one of the <see
              cref="T:System.Web.UI.WebControls.TableCaptionAlign" />
+
+            
 
             
 
@@ -1985,8 +2321,12 @@
 
             
 
+            
+
              control is provided by the <see
              cref="P:System.Web.UI.WebControls.Table.Caption" />
+
+            
 
             
 
@@ -1999,8 +2339,12 @@
 
             
 
+            
+
              property to specify the text to render in an HTML caption element in a <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -2014,6 +2358,8 @@
           <para
             >Gets or sets the horizontal or vertical position of the HTML caption element in a <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -2043,11 +2389,15 @@
 
             
 
+            
+
              property to control the spacing between the contents of a cell and the cell's border. The padding amount specified is added to all four sides of the cell.</para
           >
           <para
             >All cells in the same column of a <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -2091,8 +2441,12 @@
 
             
 
+            
+
              property to control the spacing between adjacent cells in the <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -2109,8 +2463,12 @@
 
               
 
+              
+
                property to a value that displays the cell borders, a gap is displayed between the borders of adjacent cells. In this situation, the <see
                cref="P:System.Web.UI.WebControls.Table.CellSpacing" />
+
+              
 
               
 
@@ -2156,11 +2514,15 @@
 
             
 
+            
+
              control.</para
           >
           <para
             >This method overrides the <see
              cref="M:System.Web.UI.Control.CreateControlCollection" />
+
+            
 
             
 
@@ -2173,8 +2535,12 @@
 
             
 
+            
+
              class. For a <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -2187,8 +2553,12 @@
 
             
 
+            
+
              always returns a <see
              cref="T:System.Web.UI.ControlCollection" />
+
+            
 
             
 
@@ -2201,8 +2571,12 @@
 
             
 
+            
+
              controls of the current <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -2221,6 +2595,8 @@
 
             
 
+            
+
              object to hold the <see
              cref="T:System.Web.UI.WebControls.TableRow" />
 
@@ -2228,8 +2604,12 @@
 
             
 
+            
+
              controls of the current <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -2248,6 +2628,8 @@
 
             
 
+            
+
              object to contain the <see
              cref="T:System.Web.UI.WebControls.TableRow" />
 
@@ -2255,8 +2637,12 @@
 
             
 
+            
+
              controls of the current <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -2292,6 +2678,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -2300,6 +2688,8 @@
           <para
             >Gets a reference to a collection of properties that define the appearance of a <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -2318,8 +2708,12 @@
 
             
 
+            
+
              object that contains the properties that define the appearance of the <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -2356,8 +2750,12 @@
 
             
 
+            
+
              property to specify which cell borders are displayed in the <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -2420,6 +2818,8 @@
 
             
 
+            
+
              control. </para
           >
         </summary>
@@ -2456,8 +2856,12 @@
 
             
 
+            
+
              property to specify the horizontal alignment of the <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -2489,6 +2893,8 @@
 
                   
 
+                  
+
                    control has not been set. </para
                 >
               </description>
@@ -2501,6 +2907,8 @@
                 <para
                   >The <see
                    cref="T:System.Web.UI.WebControls.Table" />
+
+                  
 
                   
 
@@ -2523,6 +2931,8 @@
 
                   
 
+                  
+
                    control is centered on the page. </para
                 >
               </description>
@@ -2535,6 +2945,8 @@
                 <para
                   >The <see
                    cref="T:System.Web.UI.WebControls.Table" />
+
+                  
 
                   
 
@@ -2557,6 +2969,8 @@
 
                   
 
+                  
+
                    control is aligned with both the left and right margins of the page. </para
                 >
               </description>
@@ -2568,6 +2982,8 @@
           <para
             >Gets or sets the horizontal alignment of the <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -2613,8 +3029,12 @@
 
             
 
+            
+
              parameter to the <see
              cref="M:System.Web.UI.WebControls.Table.RaisePostBackEvent(System.String)" />
+
+            
 
             
 
@@ -2633,6 +3053,8 @@
 
             
 
+            
+
              control when a form is posted back to the server.</para
           >
         </summary>
@@ -2643,8 +3065,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -2681,6 +3107,8 @@
 
             
 
+            
+
              control.</para
           >
           <para
@@ -2691,8 +3119,12 @@
 
             
 
+            
+
              method renders the opening tag for the <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -2711,6 +3143,8 @@
 
             
 
+            
+
              control to the specified writer. </para
           >
         </summary>
@@ -2721,8 +3155,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -2755,11 +3193,15 @@
 
             
 
+            
+
              control. </para
           >
           <para
             >The <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -2772,8 +3214,12 @@
 
             
 
+            
+
              to render the <see
              cref="P:System.Web.UI.WebControls.Table.Rows" />
+
+            
 
             
 
@@ -2793,8 +3239,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -2829,8 +3279,12 @@
 
             
 
+            
+
              collection to programmatically manage the <see
              cref="T:System.Web.UI.WebControls.TableRow" />
+
+            
 
             
 
@@ -2843,8 +3297,12 @@
 
             
 
+            
+
              control. A <see
              cref="T:System.Web.UI.WebControls.TableRow" />
+
+            
 
             
 
@@ -2861,8 +3319,12 @@
 
               
 
+              
+
                objects between the opening and closing tags of the <see
                cref="T:System.Web.UI.WebControls.Table" />
+
+              
 
               
 
@@ -2877,6 +3339,8 @@
           <para
             >Gets the collection of rows in the <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -2926,8 +3390,12 @@
 
             
 
+            
+
              method to raise an event for the <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -2943,8 +3411,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IPostBackEventHandler" />
+
+            
 
             
 
@@ -2958,6 +3430,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.Web.UI.IPostBackEventHandler.RaisePostBackEvent(System.String)" />
+
+            
 
             
 

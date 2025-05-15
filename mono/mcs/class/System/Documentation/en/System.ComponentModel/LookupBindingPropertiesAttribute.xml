@@ -36,8 +36,12 @@
 
         
 
+        
+
          is used to specify the properties used with lookup-based binding, particularly <see
          cref="T:System.Windows.Forms.ListBox" />
+
+        
 
         
 
@@ -50,11 +54,15 @@
 
         
 
+        
+
          controls.</para
       >
       <para
         >The <see
          cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
+
+        
 
         
 
@@ -92,8 +100,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.DisplayMember" />
+
+            
 
             
 
@@ -106,8 +118,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.LookupMember" />
+
+            
 
             
 
@@ -121,6 +137,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
+
+            
 
             
 
@@ -162,8 +180,12 @@
 
             
 
+            
+
              property is set to <paramref
              name="dataSource" />
+
+            
 
             
 
@@ -182,11 +204,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="dataSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -201,6 +227,8 @@
 
           
 
+          
+
           The name of the property to be used for the display name.</param
         >
         <param name="valueMember">
@@ -210,10 +238,14 @@
 
           
 
+          
+
           The name of the property to be used as the source for values.</param
         >
         <param name="lookupMember">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -246,6 +278,8 @@
 
             
 
+            
+
              property is set in the constructors for this class.</para
           >
         </remarks>
@@ -254,6 +288,8 @@
           <para
             >Gets the name of the data source property for the component to which the <see
              cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
+
+            
 
             
 
@@ -292,8 +328,12 @@
 
             
 
+            
+
              member is a static, read-only field that defines an instance of the <see
              cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
+
+            
 
             
 
@@ -307,6 +347,8 @@
           <para
             >Represents the default value for the <see
              cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
+
+            
 
             
 
@@ -340,6 +382,8 @@
 
             
 
+            
+
              property is set in the constructors for this class.</para
           >
         </remarks>
@@ -348,6 +392,8 @@
           <para
             >Gets the name of the display member property for the component to which the <see
              cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
+
+            
 
             
 
@@ -386,8 +432,12 @@
 
             
 
+            
+
              method returns true if the <paramref
              name="obj" />
+
+            
 
             
 
@@ -400,8 +450,12 @@
 
             
 
+            
+
              and all the public properties—<see
              cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.DataSource" />
+
+            
 
             
 
@@ -414,6 +468,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.ValueMember" />
 
@@ -421,8 +477,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.LookupMember" />
+
+            
 
             
 
@@ -441,8 +501,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
+
+            
 
             
 
@@ -462,6 +526,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -469,8 +535,12 @@
 
           
 
+          
+
            to compare with the current <see
            cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
+
+          
 
           
 
@@ -511,6 +581,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -534,6 +606,8 @@
           <para
             >The <see
              cref="P:System.ComponentModel.LookupBindingPropertiesAttribute.LookupMember" />
+
+            
 
             
 
@@ -571,6 +645,8 @@
 
             
 
+            
+
              property is set in the constructors for this class.</para
           >
         </remarks>
@@ -579,6 +655,8 @@
           <para
             >Gets the name of the value member property for the component to which the <see
              cref="T:System.ComponentModel.LookupBindingPropertiesAttribute" />
+
+            
 
             
 

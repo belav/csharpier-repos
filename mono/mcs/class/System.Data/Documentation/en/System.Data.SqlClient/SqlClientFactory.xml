@@ -25,6 +25,8 @@
 
         
 
+        
+
          provider's implementation of the data source classes.</para
       >
     </summary>
@@ -52,6 +54,8 @@
 
             
 
+            
+
              class provides the <see
              cref="P:System.Data.Common.DbProviderFactory.CanCreateDataSourceEnumerator" />
 
@@ -59,8 +63,12 @@
 
             
 
+            
+
              property so that inheritors can indicate whether they can provide a data source enumerator. The <see
              cref="T:System.Data.SqlClient.SqlClientFactory" />
+
+            
 
             
 
@@ -74,6 +82,8 @@
           <para
             >Returns true if a <see
              cref="T:System.Data.Sql.SqlDataSourceEnumerator" />
+
+            
 
             
 
@@ -110,6 +120,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -118,6 +130,8 @@
           <para
             >A new strongly typed instance of <see
              cref="T:System.Data.Common.DbCommand" />
+
+            
 
             
 
@@ -154,6 +168,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -162,6 +178,8 @@
           <para
             >A new strongly typed instance of <see
              cref="T:System.Data.Common.DbCommandBuilder" />
+
+            
 
             
 
@@ -198,6 +216,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -206,6 +226,8 @@
           <para
             >A new strongly typed instance of <see
              cref="T:System.Data.Common.DbConnection" />
+
+            
 
             
 
@@ -244,6 +266,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -252,6 +276,8 @@
           <para
             >A new strongly typed instance of <see
              cref="T:System.Data.Common.DbConnectionStringBuilder" />
+
+            
 
             
 
@@ -285,6 +311,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -293,6 +321,8 @@
           <para
             >A new strongly typed instance of <see
              cref="T:System.Data.Common.DbDataAdapter" />
+
+            
 
             
 
@@ -324,6 +354,8 @@
           <para
             >Returns a new <see
              cref="T:System.Data.Sql.SqlDataSourceEnumerator" />
+
+            
 
             
 
@@ -364,6 +396,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -372,6 +406,8 @@
           <para
             >A new strongly typed instance of <see
              cref="T:System.Data.Common.DbParameter" />
+
+            
 
             
 
@@ -412,6 +448,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -420,6 +458,8 @@
           <para
             >A strongly typed instance of <see
              cref="T:System.Security.CodeAccessPermission" />
+
+            
 
             
 
@@ -435,8 +475,12 @@
 
           
 
+          
+
           A member of the <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -463,6 +507,8 @@
           <para
             >Gets an instance of the <see
              cref="T:System.Data.SqlClient.SqlClientFactory" />
+
+            
 
             
 

@@ -8,8 +8,12 @@
 
     
 
+    
+
      and <keyword
     >long</keyword>
+
+    
 
     
 
@@ -22,6 +26,8 @@
 
     
 
+    
+
      to <keyword
     >long</keyword>
 
@@ -29,9 +35,11 @@
 
     
 
+    
+
      is an implicit conversion. This conversion always succeeds, and never results in a loss of information. The following example <code_example
     >
-<![CDATA[
+      <![CDATA[
 using System;  
 class Test  
 {  
@@ -48,8 +56,12 @@ class Test
 
     
 
+    
+
     implicitly converts an <keyword
     >int</keyword>
+
+    
 
     
 
@@ -62,12 +74,14 @@ class Test
 
     
 
+    
+
     . </paragraph
   >
   <paragraph
     >In contrast, explicit conversions are performed with a cast expression. The example <code_example
     >
-<![CDATA[
+      <![CDATA[
 using System;  
 class Test  
 {  
@@ -84,8 +98,12 @@ class Test
 
     
 
+    
+
     uses an explicit conversion to convert a <keyword
     >long</keyword>
+
+    
 
     
 
@@ -98,12 +116,16 @@ class Test
 
     
 
+    
+
     . The output is: <code_example
     >
-<![CDATA[
+      <![CDATA[
 (int) 9223372036854775807 = -1  
 ]]>
     </code_example>
+
+    
 
     
 

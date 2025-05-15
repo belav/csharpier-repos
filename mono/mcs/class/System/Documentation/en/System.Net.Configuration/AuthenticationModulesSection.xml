@@ -36,6 +36,8 @@
 
         
 
+        
+
          configuration element.</para
       >
       <para
@@ -46,8 +48,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Net.WebClient" />
+
+        
 
         
 
@@ -87,8 +93,12 @@
 
             
 
+            
+
              class to the <see
              cref="P:System.Configuration.ConfigurationElement.Properties" />
+
+            
 
             
 
@@ -102,6 +112,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.Configuration.AuthenticationModulesSection" />
+
+            
 
             
 
@@ -147,8 +159,12 @@
 
             
 
+            
+
              returned by this property contains one <see
              cref="T:System.Net.Configuration.AuthenticationModuleElement" />
+
+            
 
             
 
@@ -246,6 +262,8 @@
           <para
             >The collection contains one element, which corresponds to the <see
              cref="P:System.Net.Configuration.AuthenticationModulesSection.AuthenticationModules" />
+
+            
 
             
 

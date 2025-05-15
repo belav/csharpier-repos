@@ -22,6 +22,8 @@
 
         
 
+        
+
          enumeration represents the different display behaviors of error messages in validation controls.</para
       >
       <para>
@@ -31,8 +33,12 @@
 
         
 
+        
+
          specifies that you only want to display the error message in a <see
          cref="T:System.Web.UI.WebControls.ValidationSummary" />
+
+        
 
         
 
@@ -47,10 +53,14 @@
 
         
 
+        
+
          specifies that you don't want the layout of the Web page to change when validator controls display error messages. Space on the page is allocated for the error messages when displaying the page. The validator contents are physically part of the page; therefore, multiple validators for the same input control must occupy different locations on the page.</para
       >
       <para>
         <see cref="F:System.Web.UI.WebControls.ValidatorDisplay.Dynamic" />
+
+        
 
         
 
@@ -73,10 +83,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0">ASP.NET Controls and Accessibility</a>
         </format>
+
+        
 
         
 

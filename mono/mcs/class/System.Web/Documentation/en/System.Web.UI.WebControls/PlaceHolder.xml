@@ -55,8 +55,12 @@
 
         
 
+        
+
          control as a container to store server controls that are dynamically added to the Web page. The <see
          cref="T:System.Web.UI.WebControls.PlaceHolder" />
+
+        
 
         
 
@@ -69,8 +73,12 @@
 
         
 
+        
+
          collection to add, insert, or remove a control in the <see
          cref="T:System.Web.UI.WebControls.PlaceHolder" />
+
+        
 
         
 
@@ -93,9 +101,13 @@
 
         
 
+        
+
         |False"
     EnableViewState="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -113,6 +125,8 @@
     SkinID="string"
     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -140,6 +154,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.PlaceHolder" />
+
+            
 
             
 

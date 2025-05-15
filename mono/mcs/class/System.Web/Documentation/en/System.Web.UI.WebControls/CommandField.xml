@@ -24,6 +24,8 @@
 
         
 
+        
+
          class is a special field used by data-bound controls (such as <see
          cref="T:System.Web.UI.WebControls.GridView" />
 
@@ -31,8 +33,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -66,6 +72,8 @@
 
               
 
+              
+
                field for each record in the data-bound control. The Delete button allows the user to delete a record from the data source.</para
             >
           </description>
@@ -80,6 +88,8 @@
             <para
               >Shows or hides an Edit button in a <see
                cref="T:System.Web.UI.WebControls.CommandField" />
+
+              
 
               
 
@@ -104,12 +114,16 @@
 
               
 
+              
+
                field. The New button allows the user to insert a new record in the data source. When the user clicks the New button, it is replaced with an Insert button and a Cancel button. All other command buttons are also hidden.</para
             >
             <block subset="none" type="note">
               <para
                 >This property applies only to data-bound controls that support inserting operations, such as the <see
                  cref="T:System.Web.UI.WebControls.DetailsView" />
+
+                
 
                 
 
@@ -135,6 +149,8 @@
 
               
 
+              
+
                field for each record in the data-bound control. The Select button allows the user to select a record in the data-bound control.</para
             >
           </description>
@@ -143,6 +159,8 @@
       <para
         >In addition, the Cancel button displayed when a record is in edit or insert mode can be shown or hidden by setting the <see
          cref="P:System.Web.UI.WebControls.CommandField.ShowCancelButton" />
+
+        
 
         
 
@@ -159,12 +177,16 @@
 
           
 
+          
+
            control), the data-bound control can take advantage of the data source control's capabilities and provide automatic delete, update, and insert functionality. For other data sources, you need to provide the routines to perform these operations during the appropriate events for the data-bound control. </para
         >
       </block>
       <para
         >The <see
          cref="T:System.Web.UI.WebControls.CommandField" />
+
+        
 
         
 
@@ -177,6 +199,8 @@
 
         
 
+        
+
          control displays a <see
          cref="T:System.Web.UI.WebControls.CommandField" />
 
@@ -184,8 +208,12 @@
 
         
 
+        
+
          field as a column, while the <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -201,8 +229,12 @@
 
         
 
+        
+
          property. When the <see
          cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+
+        
 
         
 
@@ -268,6 +300,8 @@
 
                 
 
+                
+
                  control.</para
               >
             </block>
@@ -285,6 +319,8 @@
               <para
                 >This property applies only to data-bound controls that support insert operations, such as the <see
                  cref="T:System.Web.UI.WebControls.DetailsView" />
+
+                
 
                 
 
@@ -319,6 +355,8 @@
       <para
         >Instead of displaying a command button or a link button, you can display an image button by setting the <see
          cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+
+        
 
         
 
@@ -384,6 +422,8 @@
 
                 
 
+                
+
                  control.</para
               >
             </block>
@@ -401,6 +441,8 @@
               <para
                 >This property applies only to data-bound controls that support insert operations, such as the <see
                  cref="T:System.Web.UI.WebControls.DetailsView" />
+
+                
 
                 
 
@@ -440,8 +482,12 @@
 
         
 
+        
+
          field, validation is performed on all validation controls on the page. To prevent validation from occurring when a button is clicked, set the <see
          cref="P:System.Web.UI.WebControls.CommandField.CausesValidation" />
+
+        
 
         
 
@@ -457,8 +503,12 @@
 
         
 
+        
+
          field in a data-bound control by setting the <see
          cref="P:System.Web.UI.WebControls.DataControlField.Visible" />
+
+        
 
         
 
@@ -474,8 +524,12 @@
 
         
 
+        
+
          field allows you to customize its header and footer sections. To display a caption in the header or the footer section, set the <see
          cref="P:System.Web.UI.WebControls.DataControlField.HeaderText" />
+
+        
 
         
 
@@ -488,8 +542,12 @@
 
         
 
+        
+
          property, respectively. Instead of displaying text in the header section, you can display an image by setting the <see
          cref="P:System.Web.UI.WebControls.DataControlField.HeaderImageUrl" />
+
+        
 
         
 
@@ -502,8 +560,12 @@
 
         
 
+        
+
          object, set the <see
          cref="P:System.Web.UI.WebControls.ButtonFieldBase.ShowHeader" />
+
+        
 
         
 
@@ -520,8 +582,12 @@
 
           
 
+          
+
            control) can show or hide only the entire header section of the control. These data-bound controls do not support the <see
            cref="P:System.Web.UI.WebControls.ButtonFieldBase.ShowHeader" />
+
+          
 
           
 
@@ -533,6 +599,8 @@
       <para
         >You also can customize the appearance of the <see
          cref="T:System.Web.UI.WebControls.CommandField" />
+
+        
 
         
 
@@ -566,6 +634,8 @@
 
               
 
+              
+
                object. </para
             >
           </description>
@@ -580,6 +650,8 @@
             <para
               >The style settings for the footer section of the <see
                cref="T:System.Web.UI.WebControls.CommandField" />
+
+              
 
               
 
@@ -604,6 +676,8 @@
 
               
 
+              
+
                object. </para
             >
           </description>
@@ -618,6 +692,8 @@
             <para
               >The style settings for the data items in the <see
                cref="T:System.Web.UI.WebControls.CommandField" />
+
+              
 
               
 
@@ -651,11 +727,15 @@
 
             
 
+            
+
              class. This constructor is commonly used when adding fields to a dynamically created data-bound control.</para
           >
           <para
             >To dynamically add a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -668,8 +748,12 @@
 
             
 
+            
+
              object, set its properties, and then add it to the data-bound control's field collection. For example, if you are using the <see
              cref="T:System.Web.UI.WebControls.GridView" />
+
+            
 
             
 
@@ -682,8 +766,12 @@
 
             
 
+            
+
              object to the <see
              cref="P:System.Web.UI.WebControls.GridView.Columns" />
+
+            
 
             
 
@@ -700,6 +788,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -743,6 +833,8 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
 
@@ -750,8 +842,12 @@
 
             
 
+            
+
              field is set to ButtonType.Image, use the <see
              cref="P:System.Web.UI.WebControls.CommandField.CancelImageUrl" />
+
+            
 
             
 
@@ -768,8 +864,12 @@
 
               
 
+              
+
                property to ButtonType.Button or ButtonType.Link and then setting the <see
                cref="P:System.Web.UI.WebControls.CommandField.CancelText" />
+
+              
 
               
 
@@ -784,6 +884,8 @@
           <para
             >Gets or sets the URL to an image to display for the Cancel button in a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -821,6 +923,8 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
 
@@ -828,8 +932,12 @@
 
             
 
+            
+
              field is set to ButtonType.Button or ButtonType.Link, use the <see
              cref="P:System.Web.UI.WebControls.CommandField.CancelText" />
+
+            
 
             
 
@@ -846,8 +954,12 @@
 
               
 
+              
+
                property to ButtonType.Image and then setting the <see
                cref="P:System.Web.UI.WebControls.CommandField.CancelImageUrl" />
+
+              
 
               
 
@@ -864,12 +976,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -883,6 +999,8 @@
           <para
             >Gets or sets the caption for the Cancel button displayed in a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -920,8 +1038,12 @@
 
             
 
+            
+
              property to specify whether validation is performed when a button in a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -934,8 +1056,12 @@
 
             
 
+            
+
              property to the validation group's name. For more information on validation groups, see <see
              cref="P:System.Web.UI.WebControls.BaseValidator.ValidationGroup" />
+
+            
 
             
 
@@ -949,6 +1075,8 @@
           <para
             >Gets or sets a value indicating whether validation is performed when the user clicks a button in a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -986,8 +1114,12 @@
 
             
 
+            
+
              method is a helper method used by the <see
              cref="M:System.Web.UI.WebControls.DataControlField.CloneField" />
+
+            
 
             
 
@@ -1000,8 +1132,12 @@
 
             
 
+            
+
              object to the <see
              cref="T:System.Web.UI.WebControls.DataControlField" />
+
+            
 
             
 
@@ -1020,8 +1156,12 @@
 
             
 
+            
+
              object to the specified <see
              cref="T:System.Web.UI.WebControls.DataControlField" />
+
+            
 
             
 
@@ -1037,6 +1177,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.DataControlField" />
 
@@ -1044,8 +1186,12 @@
 
           
 
+          
+
            to copy the properties of the current <see
            cref="T:System.Web.UI.WebControls.CommandField" />
+
+          
 
           
 
@@ -1080,8 +1226,12 @@
 
             
 
+            
+
              method is a helper method used by the <see
              cref="M:System.Web.UI.WebControls.DataControlField.CloneField" />
+
+            
 
             
 
@@ -1094,8 +1244,12 @@
 
             
 
+            
+
              object to copy the properties of the current <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -1114,6 +1268,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1122,6 +1278,8 @@
           <para
             >An empty <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -1165,6 +1323,8 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
 
@@ -1172,8 +1332,12 @@
 
             
 
+            
+
              field is set to ButtonType.Image, use the <see
              cref="P:System.Web.UI.WebControls.CommandField.DeleteImageUrl" />
+
+            
 
             
 
@@ -1190,8 +1354,12 @@
 
               
 
+              
+
                property to ButtonType.Button or ButtonType.Link and then setting the <see
                cref="P:System.Web.UI.WebControls.CommandField.DeleteText" />
+
+              
 
               
 
@@ -1206,6 +1374,8 @@
           <para
             >Gets or sets the URL to an image to display for a Delete button in a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -1243,6 +1413,8 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
 
@@ -1250,8 +1422,12 @@
 
             
 
+            
+
              field is set to ButtonType.Button or ButtonType.Link, use the <see
              cref="P:System.Web.UI.WebControls.CommandField.DeleteText" />
+
+            
 
             
 
@@ -1268,8 +1444,12 @@
 
               
 
+              
+
                property to ButtonType.Image and then setting the <see
                cref="P:System.Web.UI.WebControls.CommandField.DeleteImageUrl" />
+
+              
 
               
 
@@ -1286,12 +1466,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -1305,6 +1489,8 @@
           <para
             >Gets or sets the caption for a Delete button in a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -1348,6 +1534,8 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
 
@@ -1355,8 +1543,12 @@
 
             
 
+            
+
              field is set to ButtonType.Image, use the <see
              cref="P:System.Web.UI.WebControls.CommandField.EditImageUrl" />
+
+            
 
             
 
@@ -1373,8 +1565,12 @@
 
               
 
+              
+
                property to ButtonType.Button or ButtonType.Link and then setting the <see
                cref="P:System.Web.UI.WebControls.CommandField.EditText" />
+
+              
 
               
 
@@ -1389,6 +1585,8 @@
           <para
             >Gets or sets the URL to an image to display for an Edit button in a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -1426,6 +1624,8 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
 
@@ -1433,8 +1633,12 @@
 
             
 
+            
+
              object is set to ButtonType.Button or ButtonType.Link, use the <see
              cref="P:System.Web.UI.WebControls.CommandField.EditText" />
+
+            
 
             
 
@@ -1451,8 +1655,12 @@
 
               
 
+              
+
                property to ButtonType.Image and then setting the <see
                cref="P:System.Web.UI.WebControls.CommandField.EditImageUrl" />
+
+              
 
               
 
@@ -1469,12 +1677,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -1488,6 +1700,8 @@
           <para
             >Gets or sets the caption for an Edit button in a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -1528,8 +1742,12 @@
 
             
 
+            
+
              method is implemented by <see
              cref="T:System.Web.UI.WebControls.DataControlField" />
+
+            
 
             
 
@@ -1542,8 +1760,12 @@
 
             
 
+            
+
              object of a data control that uses tables to display a user interface (UI). These data controls create the complete table structure row-by-row when the control's CreateChildControls method is called. The <see
              cref="M:System.Web.UI.WebControls.CommandField.InitializeCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlCellType,System.Web.UI.WebControls.DataControlRowState,System.Int32)" />
+
+            
 
             
 
@@ -1556,8 +1778,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.UI.WebControls.GridView" />
+
+            
 
             
 
@@ -1573,8 +1799,12 @@
 
             
 
+            
+
              objects to initialize the cells of the table structure with data or controls. Implement this method when you are writing a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -1593,6 +1823,8 @@
 
             
 
+            
+
              object to the specified row state.</para
           >
         </summary>
@@ -1603,8 +1835,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
+
+          
 
           
 
@@ -1619,8 +1855,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.DataControlCellType" />
+
+          
 
           
 
@@ -1635,8 +1875,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.DataControlRowState" />
+
+          
 
           
 
@@ -1646,6 +1890,8 @@
         >
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1688,6 +1934,8 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
 
@@ -1695,8 +1943,12 @@
 
             
 
+            
+
              field is set to ButtonType.Image, use the <see
              cref="P:System.Web.UI.WebControls.CommandField.InsertImageUrl" />
+
+            
 
             
 
@@ -1713,8 +1965,12 @@
 
               
 
+              
+
                property to ButtonType.Button or ButtonType.Link and then setting the <see
                cref="P:System.Web.UI.WebControls.CommandField.InsertText" />
+
+              
 
               
 
@@ -1729,6 +1985,8 @@
           <para
             >Gets or sets the URL to an image to display for the Insert button in a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -1766,6 +2024,8 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
 
@@ -1773,8 +2033,12 @@
 
             
 
+            
+
              field is set to ButtonType.Button or ButtonType.Link, use the <see
              cref="P:System.Web.UI.WebControls.CommandField.InsertText" />
+
+            
 
             
 
@@ -1791,8 +2055,12 @@
 
               
 
+              
+
                property to ButtonType.Image and then setting the <see
                cref="P:System.Web.UI.WebControls.CommandField.InsertImageUrl" />
+
+              
 
               
 
@@ -1809,12 +2077,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -1828,6 +2100,8 @@
           <para
             >Gets or sets the caption for the Insert button in a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -1871,6 +2145,8 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
 
@@ -1878,8 +2154,12 @@
 
             
 
+            
+
              field is set to ButtonType.Image, use the <see
              cref="P:System.Web.UI.WebControls.CommandField.NewImageUrl" />
+
+            
 
             
 
@@ -1896,8 +2176,12 @@
 
               
 
+              
+
                property to ButtonType.Button or ButtonType.Link and then setting the <see
                cref="P:System.Web.UI.WebControls.CommandField.NewText" />
+
+              
 
               
 
@@ -1912,6 +2196,8 @@
           <para
             >Gets or sets the URL to an image to display for the New button in a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -1949,6 +2235,8 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
 
@@ -1956,8 +2244,12 @@
 
             
 
+            
+
              object is set to ButtonType.Button or ButtonType.Link, use the <see
              cref="P:System.Web.UI.WebControls.CommandField.NewText" />
+
+            
 
             
 
@@ -1974,8 +2266,12 @@
 
               
 
+              
+
                property to ButtonType.Image and then setting the <see
                cref="P:System.Web.UI.WebControls.CommandField.NewImageUrl" />
+
+              
 
               
 
@@ -1992,12 +2288,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -2011,6 +2311,8 @@
           <para
             >Gets or sets the caption for the New button in a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -2054,6 +2356,8 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
 
@@ -2061,8 +2365,12 @@
 
             
 
+            
+
              field is set to ButtonType.Image, use the <see
              cref="P:System.Web.UI.WebControls.CommandField.SelectImageUrl" />
+
+            
 
             
 
@@ -2079,8 +2387,12 @@
 
               
 
+              
+
                property to ButtonType.Button or ButtonType.Link and then setting the <see
                cref="P:System.Web.UI.WebControls.CommandField.SelectText" />
+
+              
 
               
 
@@ -2095,6 +2407,8 @@
           <para
             >Gets or sets the URL to an image to display for a Select button in a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -2132,6 +2446,8 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
 
@@ -2139,8 +2455,12 @@
 
             
 
+            
+
              field is set to ButtonType.Button or ButtonType.Link, use the <see
              cref="P:System.Web.UI.WebControls.CommandField.SelectText" />
+
+            
 
             
 
@@ -2157,8 +2477,12 @@
 
               
 
+              
+
                property to ButtonType.Image and then setting the <see
                cref="P:System.Web.UI.WebControls.CommandField.SelectImageUrl" />
+
+              
 
               
 
@@ -2175,12 +2499,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -2194,6 +2522,8 @@
           <para
             >Gets or sets the caption for a Select button in a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -2231,6 +2561,8 @@
 
             
 
+            
+
              property to specify whether the Cancel button is displayed in a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
 
@@ -2238,8 +2570,12 @@
 
             
 
+            
+
              object. A Cancel button can be displayed in a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -2255,8 +2591,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -2269,6 +2609,8 @@
 
             
 
+            
+
              property to specify the text to display for a Cancel button. Alternatively, you can display an image by first setting the <see
              cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
@@ -2276,8 +2618,12 @@
 
             
 
+            
+
              property to ButtonType.Image and then setting the <see
              cref="P:System.Web.UI.WebControls.CommandField.CancelImageUrl" />
+
+            
 
             
 
@@ -2291,6 +2637,8 @@
           <para
             >Gets or sets a value indicating whether a Cancel button is displayed in a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -2328,8 +2676,12 @@
 
             
 
+            
+
              property to specify whether a Delete button is displayed in a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -2346,12 +2698,16 @@
 
               
 
+              
+
                control), the data-bound control can take advantage of the data source control's capabilities and provide automatic delete functionality. For other data sources, you must provide the routines to perform the delete operation during the appropriate event for the data-bound control.</para
             >
           </block>
           <para
             >When the <see
              cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+
+            
 
             
 
@@ -2364,8 +2720,12 @@
 
             
 
+            
+
              field is set to ButtonType.Button or ButtonType.Link, use the <see
              cref="P:System.Web.UI.WebControls.CommandField.DeleteText" />
+
+            
 
             
 
@@ -2378,8 +2738,12 @@
 
             
 
+            
+
              property to ButtonType.Image and then setting the <see
              cref="P:System.Web.UI.WebControls.CommandField.DeleteImageUrl" />
+
+            
 
             
 
@@ -2393,6 +2757,8 @@
           <para
             >Gets or sets a value indicating whether a Delete button is displayed in a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -2430,8 +2796,12 @@
 
             
 
+            
+
              property to specify whether an Edit button is displayed in the <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -2449,12 +2819,16 @@
 
               
 
+              
+
                control), the data-bound control can take advantage of the data source control's capabilities and provide automatic updating functionality. For other data sources, you must provide the routines to perform the update operation during the appropriate event for the data-bound control.</para
             >
           </block>
           <para
             >When the <see
              cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+
+            
 
             
 
@@ -2467,8 +2841,12 @@
 
             
 
+            
+
              field is set to ButtonType.Button or ButtonType.Link, use the <see
              cref="P:System.Web.UI.WebControls.CommandField.EditText" />
+
+            
 
             
 
@@ -2481,8 +2859,12 @@
 
             
 
+            
+
              property to ButtonType.Image and then setting the <see
              cref="P:System.Web.UI.WebControls.CommandField.EditImageUrl" />
+
+            
 
             
 
@@ -2496,6 +2878,8 @@
           <para
             >Gets or sets a value indicating whether an Edit button is displayed in a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -2533,6 +2917,8 @@
 
             
 
+            
+
              property to specify whether a New button is displayed in a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
 
@@ -2540,8 +2926,12 @@
 
             
 
+            
+
              field. The New button is displayed only once in the <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -2558,12 +2948,16 @@
 
               
 
+              
+
                control.</para
             >
           </block>
           <para
             >When the user clicks the New button, input controls are displayed for each field displayed in the data-bound control, allowing the user to enter the values for the new record. The New button is replaced with an Insert button and a Cancel button, and all other command buttons in the <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -2580,12 +2974,16 @@
 
               
 
+              
+
                control), the data-bound control can take advantage of the data source control's capabilities and provide automatic insert functionality. For other data sources, you must provide the routines to perform the insert operation during the appropriate event for the data-bound control.</para
             >
           </block>
           <para
             >When the <see
              cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+
+            
 
             
 
@@ -2598,8 +2996,12 @@
 
             
 
+            
+
              field is set to ButtonType.Button or ButtonType.Link, use the <see
              cref="P:System.Web.UI.WebControls.CommandField.NewText" />
+
+            
 
             
 
@@ -2612,8 +3014,12 @@
 
             
 
+            
+
              property to ButtonType.Image and then setting the <see
              cref="P:System.Web.UI.WebControls.CommandField.NewImageUrl" />
+
+            
 
             
 
@@ -2627,6 +3033,8 @@
           <para
             >Gets or sets a value indicating whether a New button is displayed in a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -2664,8 +3072,12 @@
 
             
 
+            
+
              property to specify whether a Select button is displayed in a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -2678,8 +3090,12 @@
 
             
 
+            
+
              control updates the <see
              cref="P:System.Web.UI.WebControls.GridView.SelectedDataKey" />
+
+            
 
             
 
@@ -2692,8 +3108,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.UI.WebControls.GridView.SelectedRow" />
+
+            
 
             
 
@@ -2706,8 +3126,12 @@
 
             
 
+            
+
              properties to values corresponding to the selected row. The <see
              cref="P:System.Web.UI.WebControls.GridView.SelectedRowStyle" />
+
+            
 
             
 
@@ -2720,8 +3144,12 @@
 
             
 
+            
+
              and <see
              cref="E:System.Web.UI.WebControls.GridView.SelectedIndexChanging" />
+
+            
 
             
 
@@ -2737,8 +3165,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -2751,6 +3183,8 @@
 
             
 
+            
+
              property to specify the text to display for a Select button. Alternatively, you can display an image by first setting the <see
              cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
 
@@ -2758,8 +3192,12 @@
 
             
 
+            
+
              property to ButtonType.Image and then setting the <see
              cref="P:System.Web.UI.WebControls.CommandField.SelectImageUrl" />
+
+            
 
             
 
@@ -2773,6 +3211,8 @@
           <para
             >Gets or sets a value indicating whether a Select button is displayed in a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -2816,6 +3256,8 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
 
@@ -2823,8 +3265,12 @@
 
             
 
+            
+
              field is set to ButtonType.Image, use the <see
              cref="P:System.Web.UI.WebControls.CommandField.UpdateImageUrl" />
+
+            
 
             
 
@@ -2841,8 +3287,12 @@
 
               
 
+              
+
                property to ButtonType.Button or ButtonType.Link and then setting the <see
                cref="P:System.Web.UI.WebControls.CommandField.UpdateText" />
+
+              
 
               
 
@@ -2857,6 +3307,8 @@
           <para
             >Gets or sets the URL to an image to display for an Update button in a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -2894,6 +3346,8 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
 
@@ -2901,8 +3355,12 @@
 
             
 
+            
+
              field is set to ButtonType.Button or ButtonType.Link, use the <see
              cref="P:System.Web.UI.WebControls.CommandField.UpdateText" />
+
+            
 
             
 
@@ -2919,8 +3377,12 @@
 
               
 
+              
+
                property to ButtonType.Image and then setting the <see
                cref="P:System.Web.UI.WebControls.CommandField.UpdateImageUrl" />
+
+              
 
               
 
@@ -2937,12 +3399,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -2956,6 +3422,8 @@
           <para
             >Gets or sets the caption for an Update button in a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -2988,8 +3456,12 @@
 
             
 
+            
+
              method is a helper method used to determine whether the controls contained in a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 
@@ -3002,8 +3474,12 @@
 
             
 
+            
+
              class does not support callbacks when the Select button is displayed. This method has been implemented to throw a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -3020,6 +3496,8 @@
           <para
             >Determines whether the controls contained in a <see
              cref="T:System.Web.UI.WebControls.CommandField" />
+
+            
 
             
 

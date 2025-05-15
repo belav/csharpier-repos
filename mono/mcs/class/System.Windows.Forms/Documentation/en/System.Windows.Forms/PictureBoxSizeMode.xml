@@ -20,8 +20,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.PictureBox" />
+
+        
 
         
 
@@ -35,6 +39,8 @@
       <para
         >Specifies how an image is positioned within a <see
          cref="T:System.Windows.Forms.PictureBox" />
+
+        
 
         
 
@@ -57,6 +63,8 @@
           <para
             >The <see
              cref="T:System.Windows.Forms.PictureBox" />
+
+            
 
             
 
@@ -88,6 +96,8 @@
 
             
 
+            
+
              is larger than the image. If the image is larger than the <see
              cref="T:System.Windows.Forms.PictureBox" />
 
@@ -95,8 +105,12 @@
 
             
 
+            
+
             , the picture is placed in the center of the <see
              cref="T:System.Windows.Forms.PictureBox" />
+
+            
 
             
 
@@ -128,8 +142,12 @@
 
             
 
+            
+
             . The image is clipped if it is larger than the <see
              cref="T:System.Windows.Forms.PictureBox" />
+
+            
 
             
 
@@ -161,8 +179,12 @@
 
             
 
+            
+
              is stretched or shrunk to fit the size of the <see
              cref="T:System.Windows.Forms.PictureBox" />
+
+            
 
             
 

@@ -20,8 +20,12 @@
 
         
 
+        
+
          enumeration represents the behaviors that you can apply to a <see
          cref="T:System.Web.UI.WebControls.HotSpot" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
          control. The <see
          cref="P:System.Web.UI.WebControls.ImageMap.HotSpotMode" />
+
+        
 
         
 
@@ -48,8 +56,12 @@
 
         
 
+        
+
          properties use these enumeration values to set the behavior of a <see
          cref="T:System.Web.UI.WebControls.HotSpot" />
+
+        
 
         
 
@@ -62,6 +74,8 @@
 
         
 
+        
+
          property specified on each individual <see
          cref="T:System.Web.UI.WebControls.HotSpot" />
 
@@ -69,8 +83,12 @@
 
         
 
+        
+
          object takes precedence over the <see
          cref="P:System.Web.UI.WebControls.ImageMap.HotSpotMode" />
+
+        
 
         
 
@@ -86,8 +104,12 @@
 
         
 
+        
+
          property of an individual <see
          cref="T:System.Web.UI.WebControls.HotSpot" />
+
+        
 
         
 
@@ -100,6 +122,8 @@
 
         
 
+        
+
          gets its behavior from the containing <see
          cref="T:System.Web.UI.WebControls.ImageMap" />
 
@@ -107,8 +131,12 @@
 
         
 
+        
+
          control's <see
          cref="P:System.Web.UI.WebControls.ImageMap.HotSpotMode" />
+
+        
 
         
 
@@ -121,8 +149,12 @@
 
         
 
+        
+
          control's <see
          cref="P:System.Web.UI.WebControls.ImageMap.HotSpotMode" />
+
+        
 
         
 
@@ -139,8 +171,12 @@
 
           
 
+          
+
            control's behavior is not specified using either the <see
            cref="P:System.Web.UI.WebControls.ImageMap.HotSpotMode" />
+
+          
 
           
 
@@ -153,8 +189,12 @@
 
           
 
+          
+
            property on the <see
            cref="T:System.Web.UI.WebControls.HotSpot" />
+
+          
 
           
 
@@ -167,8 +207,12 @@
 
           
 
+          
+
            properties on the <see
            cref="T:System.Web.UI.WebControls.HotSpot" />
+
+          
 
           
 
@@ -181,8 +225,12 @@
 
           
 
+          
+
            control contains are set to HotSpotMode.NotSet and no value is specified for the <see
            cref="P:System.Web.UI.WebControls.ImageMap.HotSpotMode" />
+
+          
 
           
 
@@ -199,8 +247,12 @@
 
         
 
+        
+
          property or the <see
          cref="P:System.Web.UI.WebControls.HotSpot.HotSpotMode" />
+
+        
 
         
 
@@ -213,6 +265,8 @@
 
         
 
+        
+
          is clicked. Use the <see
          cref="P:System.Web.UI.MobileControls.Image.NavigateUrl" />
 
@@ -220,8 +274,12 @@
 
         
 
+        
+
          or the <see
          cref="P:System.Web.UI.WebControls.HotSpot.NavigateUrl" />
+
+        
 
         
 
@@ -237,8 +295,12 @@
 
         
 
+        
+
          property or the <see
          cref="P:System.Web.UI.WebControls.HotSpot.HotSpotMode" />
+
+        
 
         
 
@@ -251,8 +313,12 @@
 
         
 
+        
+
          is clicked. Use the <see
          cref="P:System.Web.UI.WebControls.HotSpot.PostBackValue" />
+
+        
 
         
 
@@ -265,8 +331,12 @@
 
         
 
+        
+
          object. This name will be passed in the <see
          cref="T:System.Web.UI.WebControls.ImageMapEventArgs" />
+
+        
 
         
 
@@ -279,8 +349,12 @@
 
         
 
+        
+
          is clicked, the <see
          cref="E:System.Web.UI.WebControls.ImageMap.Click" />
+
+        
 
         
 
@@ -293,8 +367,12 @@
 
         
 
+        
+
          is clicked, provide an event handler for the <see
          cref="E:System.Web.UI.WebControls.ImageMap.Click" />
+
+        
 
         
 
@@ -310,6 +388,8 @@
 
         
 
+        
+
          property, the <see
          cref="T:System.Web.UI.WebControls.HotSpot" />
 
@@ -317,8 +397,12 @@
 
         
 
+        
+
          object does not have any behavior when it is clicked. You can use this value to create an inactive hot spot within a larger active hot spot. This option is provided to allow you to create more complex hot spot zones within an <see
          cref="T:System.Web.UI.WebControls.ImageMap" />
+
+        
 
         
 
@@ -334,8 +418,12 @@
 
         
 
+        
+
          control. For example, the following <see
          cref="T:System.Web.UI.WebControls.ImageMap" />
+
+        
 
         
 
@@ -365,6 +453,8 @@
 
         
 
+        
+
          object in an <see
          cref="T:System.Web.UI.WebControls.ImageMap" />
 
@@ -372,8 +462,12 @@
 
         
 
+        
+
          control when the <see
          cref="T:System.Web.UI.WebControls.HotSpot" />
+
+        
 
         
 
@@ -397,6 +491,8 @@
           <para
             >The <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -428,6 +524,8 @@
 
             
 
+            
+
              navigates to a URL.</para
           >
         </summary>
@@ -454,8 +552,12 @@
 
             
 
+            
+
              uses the behavior set by the <see
              cref="T:System.Web.UI.WebControls.ImageMap" />
+
+            
 
             
 
@@ -468,6 +570,8 @@
 
             
 
+            
+
              property. If the <see
              cref="T:System.Web.UI.WebControls.ImageMap" />
 
@@ -475,8 +579,12 @@
 
             
 
+            
+
              control does not define the behavior, the <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 
@@ -503,6 +611,8 @@
           <para
             >The <see
              cref="T:System.Web.UI.WebControls.HotSpot" />
+
+            
 
             
 

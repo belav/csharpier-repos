@@ -32,8 +32,12 @@
 
         
 
+        
+
          class uses the flags in the <see
          cref="T:System.Security.Cryptography.X509Certificates.X509KeyUsageFlags" />
+
+        
 
         
 
@@ -68,6 +72,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509KeyUsageExtension" />
+
+            
 
             
 
@@ -108,6 +114,8 @@
 
             
 
+            
+
              object.</para
           >
         </remarks>
@@ -121,8 +129,12 @@
 
             
 
+            
+
              class using an <see
              cref="T:System.Security.Cryptography.AsnEncodedData" />
+
+            
 
             
 
@@ -138,10 +150,14 @@
 
           
 
+          
+
           The encoded data to use to create the extension.</param
         >
         <param name="critical">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -185,8 +201,12 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.Security.Cryptography.X509Certificates.X509KeyUsageFlags" />
+
+            
 
             
 
@@ -202,8 +222,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Cryptography.X509Certificates.X509KeyUsageFlags" />
+
+          
 
           
 
@@ -213,6 +237,8 @@
         >
         <param name="critical">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -256,8 +282,12 @@
 
             
 
+            
+
              class using an <see
              cref="T:System.Security.Cryptography.AsnEncodedData" />
+
+            
 
             
 
@@ -293,6 +323,8 @@
           <para
             >This property returns a value from the <see
              cref="P:System.Security.Cryptography.X509Certificates.X509KeyUsageExtension.KeyUsages" />
+
+            
 
             
 

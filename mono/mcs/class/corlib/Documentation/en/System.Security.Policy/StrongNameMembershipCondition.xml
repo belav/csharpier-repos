@@ -80,8 +80,12 @@
 
             
 
+            
+
              and <paramref
              name="version" />
+
+            
 
             
 
@@ -94,8 +98,12 @@
 
             
 
+            
+
              that checks for <see
              cref="P:System.Security.Policy.StrongNameMembershipCondition.PublicKey" />
+
+            
 
             
 
@@ -108,8 +116,12 @@
 
             
 
+            
+
              (but not <see
              cref="P:System.Security.Policy.StrongNameMembershipCondition.Version" />
+
+            
 
             
 
@@ -122,6 +134,8 @@
 
             
 
+            
+
              parameter. If <paramref
              name="name" />
 
@@ -129,8 +143,12 @@
 
             
 
+            
+
              is an empty string (""), an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -149,11 +167,15 @@
 
             
 
+            
+
              class with the strong name public key blob, name, and version number that determine membership.</para
           >
         </summary>
         <param name="blob">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -168,10 +190,14 @@
 
           
 
+          
+
           The simple name section of the strong name. </param
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -213,11 +239,15 @@
 
             
 
+            
+
              evidence object.</para
           >
           <para
             >The membership condition is satisfied if the specified evidence contains a <see
              cref="T:System.Security.Policy.StrongName" />
+
+            
 
             
 
@@ -230,8 +260,12 @@
 
             
 
+            
+
              (public key, name, and version) as specified by the <see
              cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+
+            
 
             
 
@@ -255,8 +289,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Policy.Evidence" />
+
+          
 
           
 
@@ -292,6 +330,8 @@
           <para
             >Creates an equivalent copy of the current <see
              cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+
+            
 
             
 
@@ -338,6 +378,8 @@
 
             
 
+            
+
              classes to be equal, their name, version, and public key blob must match exactly.</para
           >
         </remarks>
@@ -351,6 +393,8 @@
 
             
 
+            
+
              from the specified object is equivalent to the <see
              cref="T:System.Security.Policy.StrongName" />
 
@@ -358,8 +402,12 @@
 
             
 
+            
+
              contained in the current <see
              cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+
+            
 
             
 
@@ -378,6 +426,8 @@
 
             
 
+            
+
              from the specified object is equivalent to the <see
              cref="T:System.Security.Policy.StrongName" />
 
@@ -385,8 +435,12 @@
 
             
 
+            
+
              contained in the current <see
              cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+
+            
 
             
 
@@ -402,8 +456,12 @@
 
           
 
+          
+
           The object to compare to the current <see
            cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+
+          
 
           
 
@@ -442,6 +500,8 @@
         </summary>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -486,10 +546,14 @@
 
           
 
+          
+
           The XML encoding to use to reconstruct the security object. </param
         >
         <param name="level">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -502,8 +566,12 @@
 
           
 
+          
+
            context, used to resolve <see
            cref="T:System.Security.NamedPermissionSet" />
+
+          
 
           
 
@@ -541,6 +609,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -549,6 +619,8 @@
           <para
             >The hash code for the current <see
              cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+
+            
 
             
 
@@ -583,8 +655,12 @@
 
             
 
+            
+
              property to an empty string (""), an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -598,6 +674,8 @@
           <para
             >Gets or sets the simple name of the <see
              cref="T:System.Security.Policy.StrongName" />
+
+            
 
             
 
@@ -643,8 +721,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Security.Policy.StrongName" />
+
+            
 
             
 
@@ -683,6 +765,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -691,6 +775,8 @@
           <para
             >A representation of the current <see
              cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+
+            
 
             
 
@@ -762,6 +848,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -776,6 +864,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Policy.PolicyLevel" />
 
@@ -783,8 +873,12 @@
 
           
 
+          
+
            context, which is used to resolve <see
            cref="T:System.Security.NamedPermissionSet" />
+
+          
 
           
 
@@ -819,8 +913,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Security.Policy.StrongName" />
+
+            
 
             
 

@@ -24,6 +24,8 @@
 
         
 
+        
+
          class is used to represent the style for a section of a <see
          cref="T:System.Web.UI.WebControls.Table" />
 
@@ -31,8 +33,12 @@
 
         
 
+        
+
          control. It encapsulates the properties that allow you to customize the appearance of a table. You can apply these properties to sections in multiple <see
          cref="T:System.Web.UI.WebControls.Table" />
+
+        
 
         
 
@@ -46,6 +52,8 @@
       <para
         >Represents the style for a section of a <see
          cref="T:System.Web.UI.WebControls.Table" />
+
+        
 
         
 
@@ -68,6 +76,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.TableSectionStyle" />
+
+            
 
             
 

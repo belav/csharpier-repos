@@ -65,6 +65,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -123,6 +125,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -210,6 +214,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -282,6 +288,8 @@
 
           
 
+          
+
           The identifier of the element to add to the collection.</param
         >
         <param name="endpoint">
@@ -291,10 +299,14 @@
 
           
 
+          
+
           The endpoint element to add.</param
         >
         <param name="config">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

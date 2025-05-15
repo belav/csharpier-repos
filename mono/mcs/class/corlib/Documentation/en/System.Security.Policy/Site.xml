@@ -44,8 +44,12 @@
 
         
 
+        
+
          evidence produces a <see
          cref="T:System.Security.Permissions.SiteIdentityPermission" />
+
+        
 
         
 
@@ -58,8 +62,12 @@
 
         
 
+        
+
          for <see
          cref="T:System.Security.Permissions.SiteIdentityPermission" />
+
+        
 
         
 
@@ -72,8 +80,12 @@
 
         
 
+        
+
          that corresponds to the <see
          cref="T:System.Security.Policy.Site" />
+
+        
 
         
 
@@ -117,11 +129,15 @@
 
             
 
+            
+
              class with the website from which a code assembly originates.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -159,6 +175,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -167,6 +185,8 @@
           <para
             >A new object that is identical to the current <see
              cref="T:System.Security.Policy.Site" />
+
+            
 
             
 
@@ -210,6 +230,8 @@
 
             
 
+            
+
              object from the specified URL.</para
           >
         </summary>
@@ -224,8 +246,12 @@
 
           
 
+          
+
           The URL from which to create the new <see
            cref="T:System.Security.Policy.Site" />
+
+          
 
           
 
@@ -268,6 +294,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -281,11 +309,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="evidence">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -323,6 +355,8 @@
 
             
 
+            
+
              objects are equal if they designate the same website name.</para
           >
         </remarks>
@@ -331,6 +365,8 @@
           <para
             >Compares the current <see
              cref="T:System.Security.Policy.Site" />
+
+            
 
             
 
@@ -349,11 +385,15 @@
 
             
 
+            
+
              class are equal; otherwise, false.</para
           >
         </returns>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -522,6 +562,8 @@
           <para
             >Returns a string representation of the current <see
              cref="T:System.Security.Policy.Site" />
+
+            
 
             
 

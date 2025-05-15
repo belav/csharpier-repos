@@ -51,6 +51,8 @@
 
         
 
+        
+
          class is generally accessed through <see
          cref="P:System.Net.WebRequest.Headers" />
 
@@ -58,8 +60,12 @@
 
         
 
+        
+
          or <see
          cref="P:System.Net.WebResponse.Headers" />
+
+        
 
         
 
@@ -146,6 +152,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -182,8 +190,12 @@
 
             
 
+            
+
              interface for the <see
              cref="T:System.Net.WebHeaderCollection" />
+
+            
 
             
 
@@ -202,6 +214,8 @@
 
             
 
+            
+
              class from the specified instances of the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
@@ -209,8 +223,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -226,6 +244,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
@@ -233,8 +253,12 @@
 
           
 
+          
+
            containing the information required to serialize the <see
            cref="T:System.Net.WebHeaderCollection" />
+
+          
 
           
 
@@ -249,6 +273,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
 
@@ -256,8 +282,12 @@
 
           
 
+          
+
            containing the source of the serialized stream associated with the new <see
            cref="T:System.Net.WebHeaderCollection" />
+
+          
 
           
 
@@ -297,6 +327,8 @@
 
           
 
+          
+
            is <see
            langword="null" />
 
@@ -304,8 +336,12 @@
 
           
 
+          
+
            or <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -321,6 +357,8 @@
 
             
 
+            
+
              does not contain a colon (:) character.</para
           >
           <para>-or-</para>
@@ -331,8 +369,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -348,11 +390,15 @@
 
             
 
+            
+
              is a protected header that can only be set with a property accessor or by the system. </para
           >
           <para>-or-</para>
           <para>
             <c>value</c>
+
+            
 
             
 
@@ -371,6 +417,8 @@
 
             
 
+            
+
              parameter must be specified in the format "name:value". If the specified header does not exist in the collection, a new header is added to the collection.</para
           >
           <para
@@ -381,8 +429,12 @@
 
             
 
+            
+
              is already present in the collection, the value part of the <paramref
              name="header" />
+
+            
 
             
 
@@ -397,6 +449,8 @@
         </summary>
         <param name="header">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -439,11 +493,15 @@
 
             
 
+            
+
              method inserts a new header into the list of header name/value pairs.</para
           >
           <para
             >If the specified header is already present, <paramref
              name="value" />
+
+            
 
             
 
@@ -463,10 +521,14 @@
 
           
 
+          
+
           The header to add to the collection. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -508,11 +570,15 @@
 
             
 
+            
+
              method inserts a new header into the list of header name/value pairs.</para
           >
           <para
             >If the specified header is already present, <paramref
              name="value" />
+
+            
 
             
 
@@ -532,10 +598,14 @@
 
           
 
+          
+
           The header to add to the collection. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -580,6 +650,8 @@
 
             
 
+            
+
              is <see
              langword="null" />
 
@@ -587,8 +659,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -604,11 +680,15 @@
 
             
 
+            
+
              is a protected header that can only be set with a property accessor or by the system.</para
           >
           <para>-or-</para>
           <para>
             <paramref name="value" />
+
+            
 
             
 
@@ -627,8 +707,12 @@
 
             
 
+            
+
              does not exist, the <see
              cref="M:System.Net.WebHeaderCollection.Add(System.Net.HttpRequestHeader,System.String)" />
+
+            
 
             
 
@@ -644,6 +728,8 @@
 
             
 
+            
+
              is already present, <paramref
              name="value" />
 
@@ -651,8 +737,12 @@
 
             
 
+            
+
              is added to the existing comma-separated list of values associated with <paramref
              name="name" />
+
+            
 
             
 
@@ -672,10 +762,14 @@
 
           
 
+          
+
           The header to add to the collection. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -721,6 +815,8 @@
 
             
 
+            
+
              is <see
              langword="null" />
 
@@ -728,8 +824,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -745,6 +845,8 @@
 
             
 
+            
+
              contains invalid characters.</para
           >
         </exception>
@@ -753,6 +855,8 @@
           <para
             >The <see
              cref="M:System.Net.WebHeaderCollection.AddWithoutValidate(System.String,System.String)" />
+
+            
 
             
 
@@ -772,10 +876,14 @@
 
           
 
+          
+
           The header to add to the collection. </param
         >
         <param name="headerValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -885,11 +993,15 @@
 
             
 
+            
+
              containing the value of the specified header.</para
           >
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -928,6 +1040,8 @@
 
             
 
+            
+
              header in the collection.</para
           >
         </remarks>
@@ -945,11 +1059,15 @@
 
             
 
+            
+
              holding the value of the specified header.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -989,6 +1107,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -1002,8 +1122,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Net.WebHeaderCollection" />
+
+            
 
             
 
@@ -1048,11 +1172,15 @@
 
             
 
+            
+
              holding the header name.</para
           >
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1095,6 +1223,8 @@
 
             
 
+            
+
              are automatically tracked and serialized by the formatter.</para
           >
         </remarks>
@@ -1103,6 +1233,8 @@
           <para
             >Populates a <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -1118,8 +1250,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -1134,8 +1270,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -1173,6 +1313,8 @@
 
             
 
+            
+
              returns the contents of the specified header as an array.</para
           >
         </remarks>
@@ -1181,6 +1323,8 @@
           <para
             >Gets an array of header values stored in the <paramref
              name="index" />
+
+            
 
             
 
@@ -1195,6 +1339,8 @@
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1231,6 +1377,8 @@
           <para
             >This example demonstrates the <see
              cref="M:System.Net.WebHeaderCollection.GetValues(System.String)" />
+
+            
 
             
 
@@ -1280,6 +1428,8 @@ Transfer-Encoding:</para>
 
             
 
+            
+
              returns the contents of the specified header as an array.</para
           >
         </remarks>
@@ -1293,6 +1443,8 @@ Transfer-Encoding:</para>
         </returns>
         <param name="header">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1333,6 +1485,8 @@ Transfer-Encoding:</para>
 
           
 
+          
+
            is <see
            langword="null" />
 
@@ -1340,8 +1494,12 @@ Transfer-Encoding:</para>
 
           
 
+          
+
            or <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -1357,6 +1515,8 @@ Transfer-Encoding:</para>
 
             
 
+            
+
              contains invalid characters.</para
           >
         </exception>
@@ -1365,6 +1525,8 @@ Transfer-Encoding:</para>
           <para
             >The <see
              cref="M:System.Net.WebHeaderCollection.IsRestricted(System.String)" />
+
+            
 
             
 
@@ -1429,6 +1591,8 @@ Transfer-Encoding:</para>
 
           
 
+          
+
           The header to test. </param
         >
       </Docs>
@@ -1461,6 +1625,8 @@ Transfer-Encoding:</para>
           <para
             >The <see
              cref="M:System.Net.WebHeaderCollection.IsRestricted(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1525,10 +1691,14 @@ Transfer-Encoding:</para>
 
           
 
+          
+
           The header to test.</param
         >
         <param name="response">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1652,11 +1822,15 @@ Transfer-Encoding:</para>
 
             
 
+            
+
              interface and raises the deserialization event when the deserialization is complete.</para
           >
         </summary>
         <param name="sender">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1696,6 +1870,8 @@ Transfer-Encoding:</para>
 
             
 
+            
+
              deletes the specified header from the collection. If the specified header does not exist, the method does nothing.</para
           >
         </remarks>
@@ -1710,8 +1886,12 @@ Transfer-Encoding:</para>
 
           
 
+          
+
           The <see
            cref="T:System.Net.HttpRequestHeader" />
+
+          
 
           
 
@@ -1751,6 +1931,8 @@ Transfer-Encoding:</para>
 
             
 
+            
+
              deletes the specified header from the collection. If the specified header does not exist, the method does nothing.</para
           >
         </remarks>
@@ -1765,8 +1947,12 @@ Transfer-Encoding:</para>
 
           
 
+          
+
           The <see
            cref="T:System.Net.HttpResponseHeader" />
+
+          
 
           
 
@@ -1806,6 +1992,8 @@ Transfer-Encoding:</para>
 
           
 
+          
+
            is <see
            langword="null" />
 
@@ -1813,8 +2001,12 @@ Transfer-Encoding:</para>
 
           
 
+          
+
            or <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -1830,11 +2022,15 @@ Transfer-Encoding:</para>
 
             
 
+            
+
              contains invalid characters.</para
           >
           <para>-or-</para>
           <para>
             <paramref name="name " />
+
+            
 
             
 
@@ -1852,6 +2048,8 @@ Transfer-Encoding:</para>
 
             
 
+            
+
              deletes the specified header from the collection. If the specified header does not exist, the method returns.</para
           >
         </remarks>
@@ -1861,6 +2059,8 @@ Transfer-Encoding:</para>
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1903,6 +2103,8 @@ Transfer-Encoding:</para>
 
             
 
+            
+
              method inserts a new header into the list of header name/value pairs.</para
           >
           <para
@@ -1913,8 +2115,12 @@ Transfer-Encoding:</para>
 
             
 
+            
+
              is already present, <paramref
              name="value" />
+
+            
 
             
 
@@ -1934,8 +2140,12 @@ Transfer-Encoding:</para>
 
           
 
+          
+
           The <see
            cref="T:System.Net.HttpRequestHeader" />
+
+          
 
           
 
@@ -1945,6 +2155,8 @@ Transfer-Encoding:</para>
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1986,6 +2198,8 @@ Transfer-Encoding:</para>
 
             
 
+            
+
              method inserts a new header into the list of header name/value pairs.</para
           >
           <para
@@ -1996,8 +2210,12 @@ Transfer-Encoding:</para>
 
             
 
+            
+
              is already present, <paramref
              name="value" />
+
+            
 
             
 
@@ -2017,8 +2235,12 @@ Transfer-Encoding:</para>
 
           
 
+          
+
           The <see
            cref="T:System.Net.HttpResponseHeader" />
+
+          
 
           
 
@@ -2028,6 +2250,8 @@ Transfer-Encoding:</para>
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2071,6 +2295,8 @@ Transfer-Encoding:</para>
 
           
 
+          
+
            is <see
            langword="null" />
 
@@ -2078,8 +2304,12 @@ Transfer-Encoding:</para>
 
           
 
+          
+
            or <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -2095,6 +2325,8 @@ Transfer-Encoding:</para>
 
             
 
+            
+
              contains invalid characters.</para
           >
           <para>-or-</para>
@@ -2105,11 +2337,15 @@ Transfer-Encoding:</para>
 
             
 
+            
+
              is a protected header that can only be set with a property accessor or by the system.</para
           >
           <para> -or-</para>
           <para>
             <paramref name="value " />
+
+            
 
             
 
@@ -2128,6 +2364,8 @@ Transfer-Encoding:</para>
 
             
 
+            
+
              method inserts a new header into the list of header name/value pairs.</para
           >
           <para
@@ -2138,8 +2376,12 @@ Transfer-Encoding:</para>
 
             
 
+            
+
              is already present, <paramref
              name="value" />
+
+            
 
             
 
@@ -2159,10 +2401,14 @@ Transfer-Encoding:</para>
 
           
 
+          
+
           The header to set. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2207,11 +2453,15 @@ Transfer-Encoding:</para>
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="serializationInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2224,10 +2474,14 @@ Transfer-Encoding:</para>
 
           
 
+          
+
            will be serialized. </param
         >
         <param name="streamingContext">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2265,6 +2519,8 @@ Transfer-Encoding:</para>
 
             
 
+            
+
              to a byte array..</para
           >
         </summary>
@@ -2273,6 +2529,8 @@ Transfer-Encoding:</para>
           <para
             >A <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -2310,6 +2568,8 @@ Transfer-Encoding:</para>
           <para
             >The <see
              cref="T:System.String" />
+
+            
 
             
 

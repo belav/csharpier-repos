@@ -299,6 +299,8 @@
 
             
 
+            
+
              gets to the end of an element.</para
           >
         </remarks>
@@ -337,6 +339,8 @@
           <para
             >Returned when XmlReader gets to the end of the entity replacement as a result of a call to <see
              cref="M:System.Xml.XmlReader.ResolveEntity" />
+
+            
 
             
 
@@ -442,6 +446,8 @@
           <para
             >This is returned by the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 

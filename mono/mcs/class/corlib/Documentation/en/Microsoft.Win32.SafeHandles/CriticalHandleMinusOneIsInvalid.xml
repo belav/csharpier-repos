@@ -35,12 +35,16 @@
 
         
 
+        
+
          class. It describes the format of an invalid handle that uses a value of -1. Further derivations of this class (for example, file or registry handles) can specialize this further.</para
       >
       <block subset="none" type="note">
         <para
           >See the <see
            cref="T:System.Runtime.InteropServices.CriticalHandle" />
+
+          
 
           
 
@@ -81,6 +85,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:Microsoft.Win32.SafeHandles.CriticalHandleMinusOneIsInvalid" />
+
+            
 
             
 

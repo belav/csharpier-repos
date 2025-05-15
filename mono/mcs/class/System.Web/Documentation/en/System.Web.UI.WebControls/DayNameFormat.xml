@@ -22,8 +22,12 @@
 
         
 
+        
+
          enumeration represents the display formats for the days of the week in a <see
          cref="T:System.Web.UI.WebControls.Calendar" />
+
+        
 
         
 
@@ -40,6 +44,8 @@
       <para
         >Specifies the display format for the days of the week on a <see
          cref="T:System.Web.UI.WebControls.Calendar" />
+
+        
 
         
 

@@ -50,8 +50,12 @@
 
         
 
+        
+
          is the base class for all components in the common language runtime that marshal by reference. <see
          cref="T:System.ComponentModel.Component" />
+
+        
 
         
 
@@ -64,8 +68,12 @@
 
         
 
+        
+
          class. <see
          cref="T:System.ComponentModel.Component" />
+
+        
 
         
 
@@ -78,6 +86,8 @@
 
         
 
+        
+
          interface. The <see
          cref="T:System.ComponentModel.MarshalByValueComponent" />
 
@@ -85,8 +95,12 @@
 
         
 
+        
+
          provides an implementation of <see
          cref="T:System.ComponentModel.IComponent" />
+
+        
 
         
 
@@ -102,8 +116,12 @@
 
         
 
+        
+
          in any object that implements the <see
          cref="T:System.ComponentModel.IContainer" />
+
+        
 
         
 
@@ -116,8 +134,12 @@
 
         
 
+        
+
          for each <see
          cref="T:System.ComponentModel.Component" />
+
+        
 
         
 
@@ -130,8 +152,12 @@
 
         
 
+        
+
          and is used by the <see
          cref="T:System.ComponentModel.Component" />
+
+        
 
         
 
@@ -147,8 +173,12 @@
 
         
 
+        
+
          should release resources explicitly by calls to its <see
          cref="M:System.ComponentModel.Component.Dispose" />
+
+        
 
         
 
@@ -161,6 +191,8 @@
 
         
 
+        
+
          method. When a <see
          cref="T:System.ComponentModel.Container" />
 
@@ -168,8 +200,12 @@
 
         
 
+        
+
          is disposed, all components within the <see
          cref="T:System.ComponentModel.Container" />
+
+        
 
         
 
@@ -183,6 +219,8 @@
       <para
         >Provides the base implementation for the <see
          cref="T:System.ComponentModel.IComponent" />
+
+        
 
         
 
@@ -219,6 +257,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -247,6 +287,8 @@
 
             
 
+            
+
              class should override this property to provide the ability to disable the raising of events. For example, in the <see
              cref="T:System.Windows.Forms.Control" />
 
@@ -254,8 +296,12 @@
 
             
 
+            
+
              class, if the control is being hosted as an ActiveX control, the <see
              cref="P:System.Windows.Forms.Control.CanRaiseEvents" />
+
+            
 
             
 
@@ -312,8 +358,12 @@
 
             
 
+            
+
              that contains the <see
              cref="T:System.ComponentModel.Component" />
+
+            
 
             
 
@@ -356,6 +406,8 @@
 
             
 
+            
+
             ; therefore, if the <see
              cref="T:System.ComponentModel.Component" />
 
@@ -363,8 +415,12 @@
 
             
 
+            
+
              does not have an <see
              cref="T:System.ComponentModel.ISite" />
+
+            
 
             
 
@@ -378,6 +434,8 @@
           <para
             >Gets a value that indicates whether the <see
              cref="T:System.ComponentModel.Component" />
+
+            
 
             
 
@@ -415,8 +473,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.ComponentModel.Component" />
+
+            
 
             
 
@@ -429,8 +491,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.ComponentModel.Component" />
+
+            
 
             
 
@@ -443,6 +509,8 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.ComponentModel.Component" />
 
@@ -450,8 +518,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.ComponentModel.Component" />
+
+            
 
             
 
@@ -466,10 +538,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -486,6 +562,8 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.ComponentModel.Component" />
 
@@ -493,8 +571,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.ComponentModel.Component" />
+
+              
 
               
 
@@ -509,6 +591,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.ComponentModel.Component" />
+
+            
 
             
 
@@ -549,8 +633,12 @@
 
             
 
+            
+
              method and the <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -563,6 +651,8 @@
 
             
 
+            
+
              parameter set to true. <see
              cref="M:System.Object.Finalize" />
 
@@ -570,8 +660,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -587,8 +681,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.ComponentModel.Component" />
+
+            
 
             
 
@@ -602,6 +700,8 @@
           <para
             >Releases the unmanaged resources used by the <see
              cref="T:System.ComponentModel.Component" />
+
+            
 
             
 
@@ -644,10 +744,14 @@
 
             
 
+            
+
              delegate, you identify the method that handles the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about the event handler delegates, see <format
              type="text/html">
               <a href="D98FD58B-FA4F-4598-8378-ADDF4355A115">Events and Delegates</a>
             </format>
+
+            
 
             
 
@@ -661,6 +765,8 @@
           <para
             >Occurs when the component is disposed by a call to the <see
              cref="M:System.ComponentModel.Component.Dispose" />
+
+            
 
             
 
@@ -703,6 +809,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -711,6 +819,8 @@
           <para
             >Gets the list of event handlers that are attached to this <see
              cref="T:System.ComponentModel.Component" />
+
+            
 
             
 
@@ -748,8 +858,12 @@
 
             
 
+            
+
             . Application code should not call this method; an object's Finalize method is automatically invoked during garbage collection, unless finalization by the garbage collector has been disabled by a call to the <see
              cref="M:System.GC.SuppressFinalize(System.Object)" />
+
+            
 
             
 
@@ -767,10 +881,14 @@
 
             
 
+            
+
             , <format
              type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
+
+            
 
             
 
@@ -785,6 +903,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -793,6 +913,8 @@
           <para
             >Releases unmanaged resources and performs other cleanup operations before the <see
              cref="T:System.ComponentModel.Component" />
+
+            
 
             
 
@@ -836,8 +958,12 @@
 
             
 
+            
+
              or by its <see
              cref="T:System.ComponentModel.Container" />
+
+            
 
             
 
@@ -856,6 +982,8 @@
 
             
 
+            
+
              that represents a service provided by the <see
              cref="T:System.ComponentModel.Component" />
 
@@ -863,8 +991,12 @@
 
             
 
+            
+
             , or null if the <see
              cref="T:System.ComponentModel.Component" />
+
+            
 
             
 
@@ -880,8 +1012,12 @@
 
           
 
+          
+
           A service provided by the <see
            cref="T:System.ComponentModel.Component" />
+
+          
 
           
 
@@ -930,8 +1066,12 @@
 
             
 
+            
+
              will have an <see
              cref="T:System.ComponentModel.ISite" />
+
+            
 
             
 
@@ -944,8 +1084,12 @@
 
             
 
+            
+
              and the <see
              cref="T:System.ComponentModel.IContainer" />
+
+            
 
             
 
@@ -958,8 +1102,12 @@
 
             
 
+            
+
              to it. The <see
              cref="T:System.ComponentModel.IContainer" />
+
+            
 
             
 
@@ -972,8 +1120,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.ComponentModel.Component" />
+
+            
 
             
 
@@ -986,8 +1138,12 @@
 
             
 
+            
+
              does not necessarily change the name of the site the <see
              cref="T:System.ComponentModel.Component" />
+
+            
 
             
 
@@ -1000,8 +1156,12 @@
 
             
 
+            
+
              property should be set only by an <see
              cref="T:System.ComponentModel.IContainer" />
+
+            
 
             
 
@@ -1017,8 +1177,12 @@
 
             
 
+            
+
              is removed from its <see
              cref="T:System.ComponentModel.IContainer" />
+
+            
 
             
 
@@ -1031,8 +1195,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.ComponentModel.IContainer" />
+
+            
 
             
 
@@ -1048,8 +1216,12 @@
 
             
 
+            
+
              might or might not have a name. If a <see
              cref="T:System.ComponentModel.Component" />
+
+            
 
             
 
@@ -1062,8 +1234,12 @@
 
             
 
+            
+
              objects within its <see
              cref="T:System.ComponentModel.IContainer" />
+
+            
 
             
 
@@ -1076,8 +1252,12 @@
 
             
 
+            
+
              stores the name of the <see
              cref="T:System.ComponentModel.Component" />
+
+            
 
             
 
@@ -1090,8 +1270,12 @@
 
             
 
+            
+
              if it has an <see
              cref="T:System.ComponentModel.ISite" />
+
+            
 
             
 
@@ -1110,8 +1294,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.ComponentModel.Component" />
+
+            
 
             
 
@@ -1149,8 +1337,12 @@
 
             
 
+            
+
              may or may not have a name. If a <see
              cref="T:System.ComponentModel.Component" />
+
+            
 
             
 
@@ -1163,8 +1355,12 @@
 
             
 
+            
+
              objects within its <see
              cref="T:System.ComponentModel.IContainer" />
+
+            
 
             
 
@@ -1180,8 +1376,12 @@
 
             
 
+            
+
              stores the name of the <see
              cref="T:System.ComponentModel.Component" />
+
+            
 
             
 
@@ -1194,8 +1394,12 @@
 
             
 
+            
+
              can only have an <see
              cref="T:System.ComponentModel.ISite" />
+
+            
 
             
 
@@ -1208,6 +1412,8 @@
 
             
 
+            
+
              and the <see
              cref="T:System.ComponentModel.IContainer" />
 
@@ -1215,8 +1421,12 @@
 
             
 
+            
+
              assigns an <see
              cref="T:System.ComponentModel.ISite" />
+
+            
 
             
 
@@ -1235,8 +1445,12 @@
 
             
 
+            
+
              containing the name of the <see
              cref="T:System.ComponentModel.Component" />
+
+            
 
             
 
@@ -1255,6 +1469,8 @@
 
             
 
+            
+
              containing the name of the <see
              cref="T:System.ComponentModel.Component" />
 
@@ -1262,8 +1478,12 @@
 
             
 
+            
+
             , if any, or null if the <see
              cref="T:System.ComponentModel.Component" />
+
+            
 
             
 

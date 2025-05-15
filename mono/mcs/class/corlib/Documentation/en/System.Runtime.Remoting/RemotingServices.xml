@@ -75,6 +75,8 @@
 
             
 
+            
+
              and URL.</para
           >
         </summary>
@@ -89,8 +91,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -100,6 +106,8 @@
         >
         <param name="url">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -149,8 +157,12 @@
 
             
 
+            
+
              object is used to communicate information to the channel, and is passed to the <see
              cref="M:System.Runtime.Remoting.Channels.IChannelSender.CreateMessageSink(System.String,System.Object,System.String@)" />
+
+            
 
             
 
@@ -164,6 +176,8 @@
           <para
             >Creates a proxy for a well-known object, given the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -183,8 +197,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -199,10 +217,14 @@
 
           
 
+          
+
           The URL of the well-known object. </param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -250,6 +272,8 @@
 
           
 
+          
+
           Object to disconnect from its channel. </param
         >
       </Docs>
@@ -291,6 +315,8 @@
 
             
 
+            
+
              on it.</para
           >
         </summary>
@@ -305,10 +331,14 @@
 
           
 
+          
+
           The remote object whose method you want to call. </param
         >
         <param name="reqMsg">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -350,6 +380,8 @@
 
             
 
+            
+
              of an object that is used when returning messages to that object. The current method returns the envoy sinks that are used during communication between the proxy of the object and the object itself.</para
           >
         </remarks>
@@ -363,6 +395,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -404,8 +438,12 @@
 
             
 
+            
+
             . If the <paramref
              name="obj" />
+
+            
 
             
 
@@ -428,11 +466,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -474,8 +516,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Runtime.Remoting.Messaging.IMethodMessage.MethodName" />
+
+            
 
             
 
@@ -488,8 +534,12 @@
 
             
 
+            
+
              properties of <see
              cref="T:System.Runtime.Remoting.Messaging.IMethodMessage" />
+
+            
 
             
 
@@ -502,6 +552,8 @@
 
             
 
+            
+
              interface. Consumers of <see
              cref="T:System.Runtime.Remoting.Messaging.IMethodMessage" />
 
@@ -509,8 +561,12 @@
 
             
 
+            
+
              classes should reference the <see
              cref="P:System.Runtime.Remoting.Messaging.IMethodMessage.MethodBase" />
+
+            
 
             
 
@@ -529,6 +585,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -542,11 +600,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="msg">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -591,11 +653,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -610,8 +676,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -621,6 +691,8 @@
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -668,8 +740,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.MarshalByRefObject" />
+
+          
 
           
 
@@ -711,8 +787,12 @@
 
             
 
+            
+
              is a serializable representation of an object used to transfer an object reference across an application domain boundary. Creating a <see
              cref="T:System.Runtime.Remoting.ObjRef" />
+
+            
 
             
 
@@ -725,8 +805,12 @@
 
             
 
+            
+
              can be transferred through a channel into another application domain (possibly on another process or computer). Once in the other application domain, the <see
              cref="T:System.Runtime.Remoting.ObjRef" />
+
+            
 
             
 
@@ -739,8 +823,12 @@
 
             
 
+            
+
              is parsed to extract the method information of the remote object and both the transparent proxy and <see
              cref="T:System.Runtime.Remoting.Proxies.RealProxy" />
+
+            
 
             
 
@@ -756,8 +844,12 @@
 
             
 
+            
+
              contains information that describes the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -776,6 +868,8 @@
 
             
 
+            
+
              that represents the remote object from the specified proxy.</para
           >
         </summary>
@@ -784,6 +878,8 @@
           <para
             >A <see
              cref="T:System.Runtime.Remoting.ObjRef" />
+
+            
 
             
 
@@ -799,8 +895,12 @@
 
           
 
+          
+
           A proxy connected to the object you want to create a <see
            cref="T:System.Runtime.Remoting.ObjRef" />
+
+          
 
           
 
@@ -848,8 +948,12 @@
 
             
 
+            
+
             . The <see
              cref="T:System.Runtime.Remoting.Proxies.RealProxy" />
+
+            
 
             
 
@@ -869,6 +973,8 @@
         </returns>
         <param name="proxy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -907,8 +1013,12 @@
 
             
 
+            
+
              method is very useful in the pluggable parts of the remoting infrastructure (for example, channel sinks, dynamic sinks, and context sinks) that use <see
              cref="T:System.Runtime.Remoting.Messaging.IMessage" />
+
+            
 
             
 
@@ -927,6 +1037,8 @@
 
             
 
+            
+
              of the object with the specified URI.</para
           >
         </summary>
@@ -935,6 +1047,8 @@
           <para
             >The <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -950,8 +1064,12 @@
 
           
 
+          
+
           The URI of the object whose <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -996,6 +1114,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1014,8 +1134,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Remoting.Messaging.IMethodMessage" />
+
+          
 
           
 
@@ -1062,11 +1186,15 @@
 
             
 
+            
+
              is overloaded; otherwise, false.</para
           >
         </returns>
         <param name="msg">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1110,6 +1238,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1123,6 +1253,8 @@
         </returns>
         <param name="tp">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1170,6 +1302,8 @@
 
           
 
+          
+
           The object to check. </param
         >
       </Docs>
@@ -1206,6 +1340,8 @@
 
             
 
+            
+
             .</para
           >
           <para>One-way methods cannot have a return value or any out parameters.</para>
@@ -1220,6 +1356,8 @@
         </returns>
         <param name="method">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1267,8 +1405,12 @@
 
             
 
+            
+
             . The <see
              cref="T:System.Runtime.Remoting.Proxies.RealProxy" />
+
+            
 
             
 
@@ -1279,6 +1421,8 @@
           <para
             >A proxy object can be used without regard to any remoting subdivisions within a <see
              cref="T:System.AppDomain" />
+
+            
 
             
 
@@ -1301,11 +1445,15 @@
 
             
 
+            
+
              parameter is a transparent proxy or a real object.</para
           >
         </returns>
         <param name="proxy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1352,6 +1500,8 @@
 
             
 
+            
+
              attribute.</para
           >
         </remarks>
@@ -1361,6 +1511,8 @@
         </summary>
         <param name="stage">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1402,8 +1554,12 @@
 
             
 
+            
+
              is a serializable representation of an object used to transfer an object reference across an application domain boundary. Creating a <see
              cref="T:System.Runtime.Remoting.ObjRef" />
+
+            
 
             
 
@@ -1416,8 +1572,12 @@
 
             
 
+            
+
              can be transferred through a channel into another application domain (possibly on another process or computer). Once in the other application domain, the <see
              cref="T:System.Runtime.Remoting.ObjRef" />
+
+            
 
             
 
@@ -1433,8 +1593,12 @@
 
             
 
+            
+
              contains information that describes the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -1450,11 +1614,15 @@
 
             
 
+            
+
              method, it is automatically generated by the remoting identity infrastructure.</para
           >
           <para
             >You cannot associate a URI with a proxy for one of two reasons: either the URI was generated at the server side for the object it represents, or the object is well known, in which case the URI is known. For this reason, if the <paramref
              name="Obj" />
+
+            
 
             
 
@@ -1473,8 +1641,12 @@
 
             
 
+            
+
             , registers it with the remoting infrastructure, and converts it into an instance of the <see
              cref="T:System.Runtime.Remoting.ObjRef" />
+
+            
 
             
 
@@ -1493,8 +1665,12 @@
 
             
 
+            
+
              class that represents the object specified in the <paramref
              name="Obj" />
+
+            
 
             
 
@@ -1505,6 +1681,8 @@
         </returns>
         <param name="Obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1547,8 +1725,12 @@
 
             
 
+            
+
              is a serializable representation of an object used to transfer an object reference across an application domain boundary. Creating a <see
              cref="T:System.Runtime.Remoting.ObjRef" />
+
+            
 
             
 
@@ -1561,8 +1743,12 @@
 
             
 
+            
+
              can be transferred through a channel into another application domain (possibly on another process or computer). Once in the other application domain, the <see
              cref="T:System.Runtime.Remoting.ObjRef" />
+
+            
 
             
 
@@ -1578,8 +1764,12 @@
 
             
 
+            
+
              contains information that describes the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -1591,6 +1781,8 @@
           <para
             >You cannot associate a URI with a proxy for one of two reasons: either the URI was generated at the server side for the object it represents, or the object is well known, in which case the URI is known. For this reason, if the <paramref
              name="Obj" />
+
+            
 
             
 
@@ -1609,8 +1801,12 @@
 
             
 
+            
+
              into an instance of the <see
              cref="T:System.Runtime.Remoting.ObjRef" />
+
+            
 
             
 
@@ -1629,8 +1825,12 @@
 
             
 
+            
+
              class that represents the object specified in the <paramref
              name="Obj" />
+
+            
 
             
 
@@ -1646,6 +1846,8 @@
 
           
 
+          
+
           The object to convert. </param
         >
         <param name="URI">
@@ -1655,8 +1857,12 @@
 
           
 
+          
+
           The specified URI with which to initialize the new <see
            cref="T:System.Runtime.Remoting.ObjRef" />
+
+          
 
           
 
@@ -1700,8 +1906,12 @@
 
             
 
+            
+
              is a serializable representation of an object used to transfer an object reference across an application domain boundary. Creating a <see
              cref="T:System.Runtime.Remoting.ObjRef" />
+
+            
 
             
 
@@ -1714,8 +1924,12 @@
 
             
 
+            
+
              can be transferred through a channel into another application domain (possibly on another process or computer). Once in the other application domain, the <see
              cref="T:System.Runtime.Remoting.ObjRef" />
+
+            
 
             
 
@@ -1731,8 +1945,12 @@
 
             
 
+            
+
              contains information that describes the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -1748,8 +1966,12 @@
 
             
 
+            
+
              is used by the remoting infrastructure to limit the scope of the exposed type hierarchy. For example, if object A derives from object B, which derives from object C, and <see
              cref="M:System.Runtime.Remoting.RemotingServices.Marshal(System.MarshalByRefObject)" />
+
+            
 
             
 
@@ -1761,6 +1983,8 @@
           <para
             >You cannot associate a URI with a proxy for one of two reasons: either the URI was generated at the server side for the object it represents, or the object is well known, in which case the URI is known. For this reason, if the <paramref
              name="Obj" />
+
+            
 
             
 
@@ -1779,6 +2003,8 @@
 
             
 
+            
+
              and converts it into an instance of the <see
              cref="T:System.Runtime.Remoting.ObjRef" />
 
@@ -1786,8 +2012,12 @@
 
             
 
+            
+
              class with the specified URI, and the provided <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -1806,8 +2036,12 @@
 
             
 
+            
+
              class that represents the object specified in the <paramref
              name="Obj" />
+
+            
 
             
 
@@ -1823,8 +2057,12 @@
 
           
 
+          
+
           The object to convert into a <see
            cref="T:System.Runtime.Remoting.ObjRef" />
+
+          
 
           
 
@@ -1839,8 +2077,12 @@
 
           
 
+          
+
           The URI the object specified in the <paramref
            name="Obj" />
+
+          
 
           
 
@@ -1855,9 +2097,13 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
           <paramref name="Obj" />
+
+          
 
           
 
@@ -1901,6 +2147,8 @@
 
             
 
+            
+
              parameter appended onto the <see
              cref="T:System.Guid" />
 
@@ -1908,8 +2156,12 @@
 
             
 
+            
+
              of the current <see
              cref="T:System.AppDomain" />
+
+            
 
             
 
@@ -1925,8 +2177,12 @@
 
             
 
+            
+
              parameter and the <paramref
              name="uri" />
+
+            
 
             
 
@@ -1939,6 +2195,8 @@
 
             
 
+            
+
              of the current <see
              cref="T:System.AppDomain" />
 
@@ -1946,8 +2204,12 @@
 
             
 
+            
+
              route to the specified object. For example, if the application is listening on HTTP port 9000, then both http://localhost:9000/objectUri, and http://localhost:9000/&lt;appdomainguid&gt;/objectUri route to the object specified in the <paramref
              name="obj" />
+
+            
 
             
 
@@ -1966,6 +2228,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -1976,10 +2240,14 @@
 
           
 
+          
+
           The object to set a URI for. </param
         >
         <param name="uri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2021,8 +2289,12 @@
 
             
 
+            
+
              is a serializable representation of an object used to transfer an object reference across an application domain boundary. Creating a <see
              cref="T:System.Runtime.Remoting.ObjRef" />
+
+            
 
             
 
@@ -2035,8 +2307,12 @@
 
             
 
+            
+
              can be transferred through a channel into another application domain (possibly on another process or computer). Once in the other application domain, the <see
              cref="T:System.Runtime.Remoting.ObjRef" />
+
+            
 
             
 
@@ -2049,6 +2325,8 @@
 
             
 
+            
+
              is parsed to extract the method information of the remote object and both the transparent proxy and <see
              cref="T:System.Runtime.Remoting.Proxies.RealProxy" />
 
@@ -2056,8 +2334,12 @@
 
             
 
+            
+
              objects are created. The content of the parsed <see
              cref="T:System.Runtime.Remoting.ObjRef" />
+
+            
 
             
 
@@ -2073,8 +2355,12 @@
 
             
 
+            
+
              contains information that describes the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -2093,6 +2379,8 @@
 
             
 
+            
+
              and creates a proxy object out of it.</para
           >
         </summary>
@@ -2101,6 +2389,8 @@
           <para
             >A proxy to the object that the given <see
              cref="T:System.Runtime.Remoting.ObjRef" />
+
+            
 
             
 
@@ -2116,8 +2406,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Remoting.ObjRef" />
+
+          
 
           
 
@@ -2160,8 +2454,12 @@
 
             
 
+            
+
              is a serializable representation of an object used to transfer an object reference across an application domain boundary. Creating a <see
              cref="T:System.Runtime.Remoting.ObjRef" />
+
+            
 
             
 
@@ -2174,8 +2472,12 @@
 
             
 
+            
+
              can be transferred through a channel into another application domain (possibly on another process or computer). Once in the other application domain, the <see
              cref="T:System.Runtime.Remoting.ObjRef" />
+
+            
 
             
 
@@ -2188,6 +2490,8 @@
 
             
 
+            
+
              is parsed to extract the method information of the remote object and both the transparent proxy and <see
              cref="T:System.Runtime.Remoting.Proxies.RealProxy" />
 
@@ -2195,8 +2499,12 @@
 
             
 
+            
+
              objects are created. The content of the parsed <see
              cref="T:System.Runtime.Remoting.ObjRef" />
+
+            
 
             
 
@@ -2212,8 +2520,12 @@
 
             
 
+            
+
              contains information that describes the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -2224,6 +2536,8 @@
           <para
             >When first created, the proxy is of type <see
              cref="T:System.MarshalByRefObject" />
+
+            
 
             
 
@@ -2242,6 +2556,8 @@
 
             
 
+            
+
              and creates a proxy object out of it, refining it to the type on the server.</para
           >
         </summary>
@@ -2250,6 +2566,8 @@
           <para
             >A proxy to the object that the given <see
              cref="T:System.Runtime.Remoting.ObjRef" />
+
+            
 
             
 
@@ -2265,8 +2583,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Remoting.ObjRef" />
+
+          
 
           
 
@@ -2276,6 +2598,8 @@
         >
         <param name="fRefine">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

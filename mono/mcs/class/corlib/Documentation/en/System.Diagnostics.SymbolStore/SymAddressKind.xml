@@ -32,8 +32,12 @@
 
         
 
+        
+
         , <paramref
          name="addr2" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
          parameters refer to the address parameters in the <see
          cref="T:System.Diagnostics.SymbolStore.ISymbolWriter" />
+
+        
 
         
 
@@ -66,8 +74,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Diagnostics.SymbolStore.ISymbolWriter.DefineParameter(System.String,System.Reflection.ParameterAttributes,System.Int32,System.Diagnostics.SymbolStore.SymAddressKind,System.Int32,System.Int32,System.Int32)" />
+
+        
 
         
 
@@ -80,8 +92,12 @@
 
         
 
+        
+
          of the <see
          cref="T:System.Diagnostics.SymbolStore.ISymbolWriter" />
+
+        
 
         
 
@@ -120,8 +136,12 @@
 
             
 
+            
+
              parameter is the position where the field starts, and the <paramref
              name="addr2" />
+
+            
 
             
 
@@ -160,6 +180,8 @@
 
             
 
+            
+
              parameter is the MSIL local variable or parameter index.</para
           >
         </summary>
@@ -188,6 +210,8 @@
           <para
             >A native offset. The <paramref
              name="addr1" />
+
+            
 
             
 
@@ -226,6 +250,8 @@
 
             
 
+            
+
              parameter is the register in which the variable is stored.</para
           >
         </summary>
@@ -259,8 +285,12 @@
 
             
 
+            
+
              parameter is the low-order register, and the <paramref
              name="addr2" />
+
+            
 
             
 
@@ -299,8 +329,12 @@
 
             
 
+            
+
              parameter is the register, and the <paramref
              name="addr2" />
+
+            
 
             
 
@@ -339,6 +373,8 @@
 
             
 
+            
+
              parameter is the low-order register, the <paramref
              name="addr2" />
 
@@ -346,8 +382,12 @@
 
             
 
+            
+
              parameter is the stack register, and the <paramref
              name="addr3" />
+
+            
 
             
 
@@ -386,6 +426,8 @@
 
             
 
+            
+
              parameter is the RVA in the module.</para
           >
         </summary>
@@ -417,8 +459,12 @@
 
             
 
+            
+
              parameter is the section, and the <paramref
              name="addr2" />
+
+            
 
             
 
@@ -457,6 +503,8 @@
 
             
 
+            
+
              parameter is the stack register, the <paramref
              name="addr2" />
 
@@ -464,8 +512,12 @@
 
             
 
+            
+
              parameter is the offset from the stack pointer to the low-order part of the value, and the <paramref
              name="addr3" />
+
+            
 
             
 

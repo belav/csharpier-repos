@@ -55,8 +55,12 @@
 
             
 
+            
+
              with the specified <see
              cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
+
+            
 
             
 
@@ -72,8 +76,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
+
+          
 
           
 
@@ -111,6 +119,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -121,8 +131,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -164,8 +178,12 @@
 
             
 
+            
+
              with the specified type and <see
              cref="T:System.ServiceModel.Syndication.SyndicationElementExtension" />
+
+            
 
             
 
@@ -181,10 +199,14 @@
 
           
 
+          
+
           The type of the content, typically expressed as a MIME content type, for example application/xml or application/xml+customer.</param
         >
         <param name="extension">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -197,8 +219,12 @@
 
           
 
+          
+
            to place in the <see
            cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
+
+          
 
           
 
@@ -240,6 +266,8 @@
 
             
 
+            
+
              is one subtype of <see
              cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
 
@@ -247,8 +275,12 @@
 
             
 
+            
+
             . If null is passed, a default instance of <see
              cref="T:System.Runtime.Serialization.DataContractSerializer" />
+
+            
 
             
 
@@ -267,8 +299,12 @@
 
             
 
+            
+
              with the specified type, object, and <see
              cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
+
+            
 
             
 
@@ -284,10 +320,14 @@
 
           
 
+          
+
           The type of content.</param
         >
         <param name="dataContractExtension">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -302,8 +342,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
+
+          
 
           
 
@@ -343,8 +387,12 @@
 
             
 
+            
+
              with the specified type, object and <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -360,10 +408,14 @@
 
           
 
+          
+
           The type of content.</param
         >
         <param name="xmlSerializerExtension">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -378,8 +430,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Serialization.XmlSerializer" />
+
+          
 
           
 
@@ -418,6 +474,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -426,6 +484,8 @@
           <para
             >A new <see
              cref="T:System.ServiceModel.Syndication.SyndicationContent" />
+
+            
 
             
 
@@ -469,6 +529,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -503,6 +565,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -516,8 +580,12 @@
 
             
 
+            
+
              from the content of the <see
              cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
+
+            
 
             
 
@@ -556,6 +624,8 @@
 
             
 
+            
+
             ) is returned. If not, a new instance of <see
              cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
@@ -563,8 +633,12 @@
 
             
 
+            
+
              is created and is used to deserialize the inner XML of the XML syndication content element into an instance of <paramref
              name="TContent" />
+
+            
 
             
 
@@ -583,6 +657,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -592,6 +668,8 @@
         </returns>
         <typeparam name="TContent">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -635,6 +713,8 @@
 
             
 
+            
+
             ) is returned. If not, the instance of <see
              cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
 
@@ -642,8 +722,12 @@
 
             
 
+            
+
              passed in is used to deserialize the inner XML of XML syndication content element into an instance of <paramref
              name="TContent" />
+
+            
 
             
 
@@ -662,6 +746,8 @@
 
             
 
+            
+
              using the specified serializer.</para
           >
         </summary>
@@ -671,6 +757,8 @@
         </returns>
         <typeparam name="TContent">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -713,6 +801,8 @@
 
             
 
+            
+
             ) is returned. If not, the instance of <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
 
@@ -720,8 +810,12 @@
 
             
 
+            
+
              passed in is used to deserialize the inner XML of XML syndication content element into an instance of <paramref
              name="TContent" />
+
+            
 
             
 
@@ -735,6 +829,8 @@
           <para
             >Reads the content of the specified type into the <see
              cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
+
+            
 
             
 
@@ -754,8 +850,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Serialization.XmlSerializer" />
+
+          
 
           
 
@@ -765,6 +865,8 @@
         >
         <typeparam name="TContent">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -823,6 +925,8 @@
 
             
 
+            
+
              instance (for example, it does not write the top level start and end elements of the syndication content).</para
           >
         </remarks>
@@ -836,8 +940,12 @@
 
             
 
+            
+
              to the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -853,8 +961,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 

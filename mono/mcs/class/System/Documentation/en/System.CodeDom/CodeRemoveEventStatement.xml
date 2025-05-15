@@ -40,6 +40,8 @@
 
         
 
+        
+
          can be used to represent a statement that removes an event handler for an event.</para
       >
       <para
@@ -50,8 +52,12 @@
 
         
 
+        
+
          property specifies the event to remove the event handler from. The <see
          cref="P:System.CodeDom.CodeRemoveEventStatement.Listener" />
+
+        
 
         
 
@@ -87,6 +93,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeRemoveEventStatement" />
+
+            
 
             
 
@@ -129,6 +137,8 @@
 
             
 
+            
+
              class with the specified event and event handler.</para
           >
         </summary>
@@ -139,8 +149,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeEventReferenceExpression" />
+
+          
 
           
 
@@ -155,8 +169,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 
@@ -199,6 +217,8 @@
 
             
 
+            
+
              class using the specified target object, event name, and event handler.</para
           >
         </summary>
@@ -209,8 +229,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 
@@ -225,6 +249,8 @@
 
           
 
+          
+
           The name of the event. </param
         >
         <param name="listener">
@@ -234,8 +260,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 

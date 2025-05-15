@@ -33,6 +33,8 @@
 
         
 
+        
+
          under which the dynamic binding is valid.</para
       >
     </summary>
@@ -72,6 +74,8 @@
 
             
 
+            
+
              instances into one set of restrictions.</para
           >
         </summary>
@@ -86,8 +90,12 @@
 
           
 
+          
+
           The list of <see
            cref="T:System.Dynamic.DynamicMetaObject" />
+
+          
 
           
 
@@ -160,6 +168,8 @@
 
           
 
+          
+
           The expression representing the restrictions.</param
         >
       </Docs>
@@ -201,10 +211,14 @@
 
           
 
+          
+
           The expression to test.</param
         >
         <param name="instance">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -251,10 +265,14 @@
 
           
 
+          
+
           The expression to test.</param
         >
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -300,6 +318,8 @@
 
           
 
+          
+
           The set of restrictions with which to merge the current binding restrictions.</param
         >
       </Docs>
@@ -328,6 +348,8 @@
           <para
             >Creates the <see
              cref="T:System.Linq.Expressions.Expression" />
+
+            
 
             
 

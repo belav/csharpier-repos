@@ -30,8 +30,12 @@
 
         
 
+        
+
          objects contain a 32-bit access mask and a <see
          cref="T:System.Security.Principal.SecurityIdentifier" />
+
+        
 
         
 
@@ -62,6 +66,8 @@
           <para
             >Gets or sets the access mask for this <see
              cref="T:System.Security.AccessControl.KnownAce" />
+
+            
 
             
 
@@ -102,6 +108,8 @@
 
             
 
+            
+
              object.</para
           >
         </remarks>
@@ -115,8 +123,12 @@
 
             
 
+            
+
              object associated with this <see
              cref="T:System.Security.AccessControl.KnownAce" />
+
+            
 
             
 

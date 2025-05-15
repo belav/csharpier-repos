@@ -26,8 +26,12 @@
 
         
 
+        
+
          modifier key and the <see
          cref="F:System.ConsoleKey.C" />
+
+        
 
         
 
@@ -40,6 +44,8 @@
 
         
 
+        
+
          modifier key and the Break console key (Ctrl+Break). The .NET Framework consequently provides a <see
          cref="T:System.ConsoleCancelEventArgs" />
 
@@ -47,8 +53,12 @@
 
         
 
+        
+
          object to the event handler for the <see
          cref="E:System.Console.CancelKeyPress" />
+
+        
 
         
 
@@ -64,8 +74,12 @@
 
         
 
+        
+
          property is set to true in the event handler, the process is resumed; otherwise, the process is terminated. By default, the value of the <see
          cref="T:System.ConsoleCancelEventArgs" />
+
+        
 
         
 
@@ -79,6 +93,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Console.CancelKeyPress" />
+
+        
 
         
 
@@ -113,6 +129,8 @@
 
             
 
+            
+
              property is automatically initialized to false when the handler for the <see
              cref="E:System.Console.CancelKeyPress" />
 
@@ -120,8 +138,12 @@
 
             
 
+            
+
              event is invoked. The value of the <see
              cref="P:System.ConsoleCancelEventArgs.Cancel" />
+
+            
 
             
 
@@ -141,8 +163,12 @@
 
             
 
+            
+
              modifier key and the <see
              cref="F:System.ConsoleKey.C" />
+
+            
 
             
 

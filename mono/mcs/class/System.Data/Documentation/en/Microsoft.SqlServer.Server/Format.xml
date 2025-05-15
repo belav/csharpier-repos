@@ -20,8 +20,12 @@
 
         
 
+        
+
          and <see
          cref="T:Microsoft.SqlServer.Server.SqlUserDefinedAggregateAttribute" />
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
          and <see
          cref="T:Microsoft.SqlServer.Server.SqlUserDefinedAggregateAttribute" />
+
+        
 
         
 
@@ -79,6 +87,8 @@
 
                 
 
+                
+
                 , that is, they must have a common representation in both managed and unmanaged memory and not require special handling by the interop marshaler.</para
               >
             </item>
@@ -91,8 +101,12 @@
 
                 
 
+                
+
                 , <see
                  cref="T:System.Data.SqlTypes.SqlInt16" />
+
+                
 
                 
 
@@ -105,8 +119,12 @@
 
                 
 
+                
+
                 , <see
                  cref="T:System.Data.SqlTypes.SqlInt64" />
+
+                
 
                 
 
@@ -119,8 +137,12 @@
 
                 
 
+                
+
                 , <see
                  cref="T:System.Data.SqlTypes.SqlSingle" />
+
+                
 
                 
 
@@ -133,8 +155,12 @@
 
                 
 
+                
+
                 , <see
                  cref="T:System.Data.SqlTypes.SqlMoney" />
+
+                
 
                 
 
@@ -158,6 +184,8 @@
 
                 
 
+                
+
                 ).</para
               >
             </item>
@@ -168,6 +196,8 @@
           <para
             >The Native serialization format uses a very simple algorithm that enables SQL Server to store an efficient representation of the UDT on disk. Types marked for Native serialization can only have value types (structs in Microsoft Visual C# and structures in Microsoft Visual Basic .NET) as members. Members of reference types (such as classes in Visual C# and Visual Basic), either user-defined or those existing in the framework (such as <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -217,6 +247,8 @@
 
             
 
+            
+
              attribute property. The default value is false.</para
           >
           <para
@@ -227,8 +259,12 @@
 
             
 
+            
+
              or <see
              cref="M:Microsoft.SqlServer.Server.IBinarySerialize.Write(System.IO.BinaryWriter)" />
+
+            
 
             
 
@@ -247,8 +283,12 @@
 
             
 
+            
+
             .Write and <see
              cref="T:Microsoft.SqlServer.Server.IBinarySerialize" />
+
+            
 
             
 

@@ -23,6 +23,8 @@
 
         
 
+        
+
          class is used by developers of custom data source designers.</para
       >
     </remarks>
@@ -57,11 +59,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="owner">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -74,10 +80,14 @@
 
           
 
+          
+
            that is the designer for the associated control.</param
         >
         <param name="viewPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -151,6 +161,8 @@
 
             
 
+            
+
              property is determined by the nature of the data. For XML data, it would be an XPath query, but for other kinds of data it could be a URL or some other unique identifying path.</para
           >
         </remarks>
@@ -179,6 +191,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.Design.DesignerHierarchicalDataSourceView.Schema" />
+
+            
 
             
 

@@ -42,11 +42,15 @@
 
       
 
+      
+
       .</param
     >
     <param name="value"
       >A value of type <typeparamref
        name="TValue" />
+
+      
 
       
 
@@ -63,6 +67,8 @@
 
       
 
+      
+
       .
     </summary
     >
@@ -70,6 +76,8 @@
       <para>
         Use this to support <see
          cref="T:Mono.Options.Option" />
+
+        
 
         
 

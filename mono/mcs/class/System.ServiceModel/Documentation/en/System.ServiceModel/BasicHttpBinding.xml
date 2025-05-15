@@ -27,6 +27,8 @@
 
         
 
+        
+
          uses HTTP as the transport for sending SOAP 1.1 messages. A service can use this binding to expose endpoints that conform to WS-I BP 1.1, such as those that ASMX clients access. Similarly, a client can use the <see
          cref="T:System.ServiceModel.BasicHttpBinding" />
 
@@ -34,8 +36,12 @@
 
         
 
+        
+
          to communicate with services exposing endpoints that conform to WS-I BP 1.1, such as ASMX Web services or indigo1 services configured with the <see
          cref="T:System.ServiceModel.BasicHttpBinding" />
+
+        
 
         
 
@@ -51,6 +57,8 @@
 
         
 
+        
+
          to a value other than <see
          cref="F:System.ServiceModel.BasicHttpSecurityMode.None" />
 
@@ -58,8 +66,12 @@
 
         
 
+        
+
          in the <see
          cref="M:System.ServiceModel.BasicHttpBinding.#ctor(System.ServiceModel.BasicHttpSecurityMode)" />
+
+        
 
         
 
@@ -96,8 +108,12 @@
 
             
 
+            
+
              used is <see
              cref="F:System.ServiceModel.BasicHttpSecurityMode.None" />
+
+            
 
             
 
@@ -111,6 +127,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.BasicHttpBinding" />
+
+            
 
             
 
@@ -148,8 +166,12 @@
 
             
 
+            
+
              used is <see
              cref="F:System.ServiceModel.BasicHttpSecurityMode.None" />
+
+            
 
             
 
@@ -168,6 +190,8 @@
 
             
 
+            
+
              class with a specified type of security used by the binding.</para
           >
         </summary>
@@ -178,8 +202,12 @@
 
           
 
+          
+
           The value of <see
            cref="T:System.ServiceModel.BasicHttpSecurityMode" />
+
+          
 
           
 
@@ -214,6 +242,8 @@
 
             
 
+            
+
              class with a binding specified by its configuration name. </para
           >
         </summary>
@@ -224,8 +254,12 @@
 
           
 
+          
+
           The binding configuration name for the <see
            cref="T:System.ServiceModel.Configuration.BasicHttpBindingElement" />
+
+          
 
           
 
@@ -263,6 +297,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -280,8 +316,12 @@
 
             
 
+            
+
              that contains the ordered stack of binding elements described by the <see
              cref="T:System.ServiceModel.BasicHttpBinding" />
+
+            
 
             
 
@@ -359,6 +399,8 @@
           <para
             >By default, the SOAP message is not secured and the client is not authenticated. To use a non-default type of security, use the <see
              cref="M:System.ServiceModel.BasicHttpBinding.#ctor(System.ServiceModel.BasicHttpSecurityMode)" />
+
+            
 
             
 

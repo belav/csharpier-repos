@@ -30,8 +30,12 @@
 
         
 
+        
+
          provides security information about a manifest-activated application using information obtained from the application's manifests and its <see
          cref="T:System.ActivationContext" />
+
+        
 
         
 
@@ -75,8 +79,12 @@
 
             
 
+            
+
              object contains an <see
              cref="T:System.ApplicationIdentity" />
+
+            
 
             
 
@@ -95,6 +103,8 @@
 
             
 
+            
+
              class using the provided activation context. </para
           >
         </summary>
@@ -105,8 +115,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ActivationContext" />
+
+          
 
           
 
@@ -203,8 +217,12 @@
 
             
 
+            
+
              with a permission state of <see
              cref="F:System.Security.Permissions.PermissionState.None" />
+
+            
 
             
 

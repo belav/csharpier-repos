@@ -33,8 +33,12 @@
 
         
 
+        
+
          that has a specific node type, represented by the <see
          cref="P:System.Linq.Expressions.Expression.NodeType" />
+
+        
 
         
 
@@ -443,8 +447,12 @@
 
         
 
+        
+
          methods can also be used to create a <see
          cref="T:System.Linq.Expressions.BinaryExpression" />
+
+        
 
         
 
@@ -457,8 +465,12 @@
 
         
 
+        
+
          of any node type that represents a binary operation. The parameter of these methods that is of type <see
          cref="P:System.Linq.Expressions.Expression.NodeType" />
+
+        
 
         
 
@@ -503,8 +515,12 @@
 
             
 
+            
+
              nodes calls <see
              cref="M:System.Linq.Expressions.ExpressionVisitor.VisitExtension(System.Linq.Expressions.Expression)" />
+
+            
 
             
 
@@ -517,8 +533,12 @@
 
             
 
+            
+
              class. However, it should still support unknown visitors by calling <see
              cref="M:System.Linq.Expressions.ExpressionVisitor.VisitExtension(System.Linq.Expressions.Expression)" />
+
+            
 
             
 
@@ -537,8 +557,12 @@
 
             
 
+            
+
              calls the <see
              cref="M:System.Linq.Expressions.ExpressionVisitor.VisitMethodCall(System.Linq.Expressions.MethodCallExpression)" />
+
+            
 
             
 
@@ -553,6 +577,8 @@
         </returns>
         <param name="visitor">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -610,8 +636,12 @@
 
             
 
+            
+
              property is null for any <see
              cref="T:System.Linq.Expressions.BinaryExpression" />
+
+            
 
             
 
@@ -624,8 +654,12 @@
 
             
 
+            
+
              property is not <see
              cref="F:System.Linq.Expressions.ExpressionType.Coalesce" />
+
+            
 
             
 
@@ -667,6 +701,8 @@
 
             
 
+            
+
              call to an operator.</para
           >
         </summary>
@@ -695,6 +731,8 @@
 
             
 
+            
+
              is true, the operator returns a nullable type, and if a nullable operand evaluates to null, the operator returns null.</para
           >
         </remarks>
@@ -703,6 +741,8 @@
           <para
             >Gets a value that indicates whether the expression tree node represents a <newTerm
             >lifted</newTerm>
+
+            
 
             
 
@@ -765,8 +805,12 @@
 
             
 
+            
+
              represents an operation that uses a predefined operator, the <see
              cref="P:System.Linq.Expressions.BinaryExpression.Method" />
+
+            
 
             
 
@@ -878,8 +922,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.BinaryExpression.Left" />
+
+          
 
           
 
@@ -894,8 +942,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.BinaryExpression.Conversion" />
+
+          
 
           
 
@@ -910,8 +962,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.BinaryExpression.Right" />
+
+          
 
           
 

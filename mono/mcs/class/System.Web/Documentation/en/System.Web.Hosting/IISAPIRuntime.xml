@@ -29,6 +29,8 @@
 
         
 
+        
+
          objects in the .NET Framework.</para
       >
     </summary>
@@ -78,6 +80,8 @@
 
             
 
+            
+
              object to process the current request.</para
           >
         </summary>
@@ -86,6 +90,8 @@
           <para
             >0 if <see
              cref="T:System.Web.HttpWorkerRequest" />
+
+            
 
             
 
@@ -101,10 +107,14 @@
 
           
 
+          
+
           An ISAPI extension control block.</param
         >
         <param name="useProcessModel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

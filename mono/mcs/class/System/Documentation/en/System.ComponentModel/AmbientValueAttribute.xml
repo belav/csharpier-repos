@@ -38,8 +38,12 @@
 
         
 
+        
+
          property or a <see
          cref="P:System.Windows.Forms.Control.BackColor" />
+
+        
 
         
 
@@ -55,8 +59,12 @@
 
         
 
+        
+
          attribute to decide which value to persist for a property. This is usually a value that causes the property to get its value from another source. An example of an ambient value is <see
          cref="F:System.Drawing.Color.Empty" />
+
+        
 
         
 
@@ -69,8 +77,12 @@
 
         
 
+        
+
          property. If you have a control on a form and the <see
          cref="P:System.Windows.Forms.Control.BackColor" />
+
+        
 
         
 
@@ -83,8 +95,12 @@
 
         
 
+        
+
          property of the form, you can reset the <see
          cref="P:System.Windows.Forms.Control.BackColor" />
+
+        
 
         
 
@@ -97,8 +113,12 @@
 
         
 
+        
+
          of the control to <see
          cref="F:System.Drawing.Color.Empty" />
+
+        
 
         
 
@@ -112,6 +132,8 @@
       <para
         >Specifies the value to pass to a property to cause the property to get its value from another source. This is known as <newTerm
         >ambience</newTerm>
+
+        
 
         
 
@@ -150,11 +172,15 @@
 
             
 
+            
+
              class, given a Boolean value for its value.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -192,11 +218,15 @@
 
             
 
+            
+
              class, given an 8-bit unsigned integer for its value.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -234,11 +264,15 @@
 
             
 
+            
+
              class, given a Unicode character for its value.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -276,11 +310,15 @@
 
             
 
+            
+
              class, given a double-precision floating-point number for its value.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -318,11 +356,15 @@
 
             
 
+            
+
              class, given a 16-bit signed integer for its value.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -360,11 +402,15 @@
 
             
 
+            
+
              class, given a 32-bit signed integer for its value.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -402,11 +448,15 @@
 
             
 
+            
+
              class, given a 64-bit signed integer for its value.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -444,11 +494,15 @@
 
             
 
+            
+
              class, given an object for its value.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -486,11 +540,15 @@
 
             
 
+            
+
              class, given a single-precision floating point number for its value.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -528,11 +586,15 @@
 
             
 
+            
+
              class, given a string for its value.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -574,11 +636,15 @@
 
             
 
+            
+
              class, given the value and its type.</para
           >
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -591,8 +657,12 @@
 
           
 
+          
+
            of the <paramref
            name="value" />
+
+          
 
           
 
@@ -602,6 +672,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -641,8 +713,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.ComponentModel.AmbientValueAttribute" />
+
+            
 
             
 
@@ -661,8 +737,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.ComponentModel.AmbientValueAttribute" />
+
+            
 
             
 
@@ -678,6 +758,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.AmbientValueAttribute" />
 
@@ -685,8 +767,12 @@
 
           
 
+          
+
            to compare with the current <see
            cref="T:System.ComponentModel.AmbientValueAttribute" />
+
+          
 
           
 
@@ -728,6 +814,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -753,6 +841,8 @@
           <para
             >Gets the object that is the value of this <see
              cref="T:System.ComponentModel.AmbientValueAttribute" />
+
+            
 
             
 

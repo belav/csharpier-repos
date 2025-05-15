@@ -24,6 +24,8 @@
 
         
 
+        
+
          class provides a way to programmatically access and modify the httpHandlers section of a configuration file. This type is part of a group that includes the <see
          cref="T:System.Web.Configuration.HttpHandlerAction" />
 
@@ -31,8 +33,12 @@
 
         
 
+        
+
          and the <see
          cref="T:System.Web.Configuration.HttpHandlerActionCollection" />
+
+        
 
         
 
@@ -49,6 +55,8 @@
 
           
 
+          
+
            can read and write information from and to the related section of the configuration file according to the <see
            cref="P:System.Configuration.SectionInformation.AllowDefinition" />
 
@@ -56,8 +64,12 @@
 
           
 
+          
+
            section property whose value is <see
            cref="F:System.Configuration.ConfigurationAllowDefinition.Everywhere" />
+
+          
 
           
 
@@ -89,6 +101,8 @@
 
             
 
+            
+
              constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see
              cref="T:System.Web.Configuration.HttpHandlersSection" />
 
@@ -96,8 +110,12 @@
 
             
 
+            
+
              class by using the <see
              cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+
+            
 
             
 
@@ -111,6 +129,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.HttpHandlersSection" />
+
+            
 
             
 
@@ -151,8 +171,12 @@
 
             
 
+            
+
              property collection returned by this method does not refer to any actual element in the underlying configuration file. It is a <see
              cref="N:System.Web.Configuration" />
+
+            
 
             
 
@@ -171,6 +195,8 @@
 
             
 
+            
+
              collection of <see
              cref="T:System.Web.Configuration.HttpHandlerAction" />
 
@@ -178,8 +204,12 @@
 
             
 
+            
+
              objects contained by the <see
              cref="T:System.Web.Configuration.HttpHandlersSection" />
+
+            
 
             
 

@@ -36,6 +36,8 @@
 
         
 
+        
+
          and <see
          cref="T:System.ComponentModel.ICustomTypeDescriptor" />
 
@@ -43,8 +45,12 @@
 
         
 
+        
+
         , and provides data binding support for <see
          cref="T:System.Data.Common.DbEnumerator" />
+
+        
 
         
 
@@ -103,6 +109,8 @@
 
           
 
+          
+
           The column ordinal. </param
         >
       </Docs>
@@ -135,6 +143,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -184,10 +194,14 @@
 
           
 
+          
+
           The zero-based column ordinal.</param
         >
         <param name="dataIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -202,10 +216,14 @@
 
           
 
+          
+
           The buffer into which to read the stream of bytes.</param
         >
         <param name="bufferIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -218,10 +236,14 @@
 
           
 
+          
+
            to start the read operation.</param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -259,6 +281,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -308,10 +332,14 @@
 
           
 
+          
+
           Column ordinal. </param
         >
         <param name="dataIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -326,6 +354,8 @@
 
           
 
+          
+
           Maximum length to copy into the buffer. </param
         >
         <param name="bufferIndex">
@@ -335,10 +365,14 @@
 
           
 
+          
+
           Point to start from within the buffer. </param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -378,6 +412,8 @@
 
           
 
+          
+
           Not currently supported.</param
         >
       </Docs>
@@ -412,6 +448,8 @@
 
           
 
+          
+
           The column ordinal. </param
         >
       </Docs>
@@ -440,6 +478,8 @@
 
             
 
+            
+
              object.</para
           >
         </remarks>
@@ -448,6 +488,8 @@
           <para
             >Returns the value of the specified column as a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -462,6 +504,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -495,6 +539,8 @@
 
             
 
+            
+
              object.</para
           >
         </remarks>
@@ -503,6 +549,8 @@
           <para
             >Returns the value of the specified column as a <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -517,6 +565,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -559,6 +609,8 @@
 
           
 
+          
+
           The column ordinal. </param
         >
       </Docs>
@@ -588,6 +640,8 @@
 
             
 
+            
+
              that is the data type of the object.</para
           >
         </summary>
@@ -601,11 +655,15 @@
 
             
 
+            
+
              that is the data type of the object.</para
           >
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -648,6 +706,8 @@
 
           
 
+          
+
           The column ordinal. </param
         >
       </Docs>
@@ -677,6 +737,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -719,6 +781,8 @@
 
           
 
+          
+
           The column ordinal. </param
         >
       </Docs>
@@ -751,6 +815,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -793,6 +859,8 @@
 
           
 
+          
+
           The column ordinal. </param
         >
       </Docs>
@@ -827,6 +895,8 @@
 
           
 
+          
+
           The column ordinal. </param
         >
       </Docs>
@@ -856,6 +926,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -898,6 +970,8 @@
 
           
 
+          
+
           The column ordinal. </param
         >
       </Docs>
@@ -927,6 +1001,8 @@
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -968,6 +1044,8 @@
 
             
 
+            
+
              in the array.</para
           >
         </returns>
@@ -978,8 +1056,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1013,8 +1095,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Data.SqlClient.SqlDataReader.GetChar(System.Int32)" />
+
+            
 
             
 
@@ -1037,11 +1123,15 @@
 
             
 
+            
+
             ; otherwise false.</para
           >
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1120,6 +1210,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1132,6 +1224,8 @@
           <para
             >An <see
              cref="T:System.ComponentModel.AttributeCollection" />
+
+            
 
             
 
@@ -1159,6 +1253,8 @@
           <para
             >For more information, see <see
              cref="M:System.ComponentModel.ICustomTypeDescriptor.GetClassName" />
+
+            
 
             
 
@@ -1194,6 +1290,8 @@
           <para
             >For more information, see <see
              cref="M:System.ComponentModel.ICustomTypeDescriptor.GetComponentName" />
+
+            
 
             
 
@@ -1237,6 +1335,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1254,8 +1354,12 @@
 
             
 
+            
+
              that is the converter for this object, or null if there is no <see
              cref="T:System.ComponentModel.TypeConverter" />
+
+            
 
             
 
@@ -1291,6 +1395,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1303,6 +1409,8 @@
           <para
             >An <see
              cref="T:System.ComponentModel.EventDescriptor" />
+
+            
 
             
 
@@ -1338,6 +1446,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1350,6 +1460,8 @@
           <para
             >A <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -1387,6 +1499,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1404,6 +1518,8 @@
 
             
 
+            
+
              of the specified type that is the editor for this object, or null if the editor cannot be found.</para
           >
         </returns>
@@ -1414,8 +1530,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1450,6 +1570,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1462,6 +1584,8 @@
           <para
             >An <see
              cref="T:System.ComponentModel.EventDescriptorCollection" />
+
+            
 
             
 
@@ -1499,6 +1623,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1516,6 +1642,8 @@
 
             
 
+            
+
              that represents the filtered events for this component instance.</para
           >
         </returns>
@@ -1526,8 +1654,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -1562,6 +1694,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1574,6 +1708,8 @@
           <para
             >A <see
              cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+
+            
 
             
 
@@ -1611,6 +1747,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1628,6 +1766,8 @@
 
             
 
+            
+
              that represents the filtered properties for this component instance.</para
           >
         </returns>
@@ -1638,8 +1778,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -1676,6 +1820,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1693,6 +1839,8 @@
 
             
 
+            
+
              that represents the owner of the specified property.</para
           >
         </returns>
@@ -1703,8 +1851,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 

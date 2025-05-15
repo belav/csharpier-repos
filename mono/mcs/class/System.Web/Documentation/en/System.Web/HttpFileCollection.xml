@@ -27,8 +27,12 @@
 
         
 
+        
+
         . Methods and properties of the <see
          cref="T:System.Web.HttpPostedFile" />
+
+        
 
         
 
@@ -84,11 +88,15 @@
 
             
 
+            
+
              beginning at the specified index of the array.</para
           >
         </summary>
         <param name="dest">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -101,10 +109,14 @@
 
           
 
+          
+
           . </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -139,6 +151,8 @@
 
             
 
+            
+
              object with the specified numerical index from the file collection.</para
           >
         </summary>
@@ -152,11 +166,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -195,6 +213,8 @@
 
             
 
+            
+
              object with the specified name from the file collection.</para
           >
         </summary>
@@ -203,6 +223,8 @@
           <para
             >An <see
              cref="T:System.Web.HttpPostedFile" />
+
+            
 
             
 
@@ -238,6 +260,8 @@
 
             
 
+            
+
              member with the specified numerical index.</para
           >
         </summary>
@@ -251,8 +275,12 @@
 
             
 
+            
+
              member specified by <paramref
              name="index" />
+
+            
 
             
 
@@ -263,6 +291,8 @@
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

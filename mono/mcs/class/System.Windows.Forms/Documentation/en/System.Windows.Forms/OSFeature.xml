@@ -24,6 +24,8 @@
 
         
 
+        
+
          property to query for operating system features. You cannot create an instance of this class.</para
       >
       <para
@@ -34,8 +36,12 @@
 
         
 
+        
+
          method. To determine if a feature or a specific version is present, call the <see
          cref="M:System.Windows.Forms.FeatureSupport.IsPresent(System.String,System.String)" />
+
+        
 
         
 
@@ -65,6 +71,8 @@
 
             
 
+            
+
              provided in this class. </para
           >
         </remarks>
@@ -73,6 +81,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.OSFeature" />
+
+            
 
             
 
@@ -109,8 +119,12 @@
 
             
 
+            
+
              method. To determine if a feature or a specific version is present, call the <see
              cref="M:System.Windows.Forms.FeatureSupport.IsPresent(System.String,System.String)" />
+
+            
 
             
 
@@ -124,6 +138,8 @@
           <para
             >Gets a static instance of the <see
              cref="T:System.Windows.Forms.OSFeature" />
+
+            
 
             
 
@@ -161,8 +177,12 @@
 
             
 
+            
+
              property, the static instance of <see
              cref="T:System.Windows.Forms.OSFeature" />
+
+            
 
             
 
@@ -185,11 +205,15 @@
 
             
 
+            
+
              representing the version of the specified operating system feature currently available on the system; or null if the feature cannot be found.</para
           >
         </returns>
         <param name="feature">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -202,8 +226,12 @@
 
           
 
+          
+
            or <see
            cref="F:System.Windows.Forms.OSFeature.Themes" />
+
+          
 
           
 
@@ -243,8 +271,12 @@
 
             
 
+            
+
              method to determine if the operating system supports the specific feature or metric identified by <paramref
              name="enumValue" />
+
+            
 
             
 
@@ -257,8 +289,12 @@
 
             
 
+            
+
             , you would perform conditional actions in your code. For example, if calling this method with a parameter value of <see
              cref="F:System.Windows.Forms.SystemParameter.FlatMenu" />
+
+            
 
             
 
@@ -274,8 +310,12 @@
 
             
 
+            
+
              enumeration value, along with <see
              cref="M:System.Windows.Forms.OSFeature.IsPresent(System.Windows.Forms.SystemParameter)" />
+
+            
 
             
 
@@ -288,6 +328,8 @@
 
             
 
+            
+
              with <see
              cref="P:System.Windows.Forms.SystemInformation.CaretWidth" />
 
@@ -295,8 +337,12 @@
 
             
 
+            
+
              before getting the <see
              cref="P:System.Windows.Forms.SystemInformation.CaretWidth" />
+
+            
 
             
 
@@ -320,8 +366,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.SystemParameter" />
+
+          
 
           
 
@@ -350,6 +400,8 @@
 
             
 
+            
+
              property to call the base class method <see
              cref="M:System.Windows.Forms.FeatureSupport.IsPresent(System.Object)" />
 
@@ -357,8 +409,12 @@
 
             
 
+            
+
              with <see
              cref="F:System.Windows.Forms.OSFeature.LayeredWindows" />
+
+            
 
             
 
@@ -374,8 +430,12 @@
 
             
 
+            
+
              method with <see
              cref="F:System.Windows.Forms.OSFeature.LayeredWindows" />
+
+            
 
             
 
@@ -412,6 +472,8 @@
 
             
 
+            
+
              namespace. For more information about Windows Themes, see the topics Themes and Visual Styles and Visual Styles Reference in the Win32 SDK.</para
           >
           <para
@@ -422,8 +484,12 @@
 
             
 
+            
+
              with <see
              cref="F:System.Windows.Forms.OSFeature.Themes" />
+
+            
 
             
 
@@ -439,8 +505,12 @@
 
             
 
+            
+
              method with <see
              cref="F:System.Windows.Forms.OSFeature.Themes" />
+
+            
 
             
 

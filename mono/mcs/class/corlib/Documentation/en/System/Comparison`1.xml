@@ -40,6 +40,8 @@
 
         
 
+        
+
          containing a value that reflects the sort order of the objects.</para
       >
       <list type="table">
@@ -56,8 +58,12 @@
 
             
 
+            
+
              is less than <paramref
              name="y" />
+
+            
 
             
 
@@ -76,8 +82,12 @@
 
             
 
+            
+
              equals <paramref
              name="y" />
+
+            
 
             
 
@@ -95,8 +105,12 @@
 
             
 
+            
+
              is greater than <paramref
              name="y" />
+
+            
 
             
 
@@ -116,6 +130,8 @@
 
         
 
+        
+
          containing a value that reflects the sort order of the objects.</para
       >
       <list type="table">
@@ -132,8 +148,12 @@
 
             
 
+            
+
              is less than <paramref
              name="y" />
+
+            
 
             
 
@@ -152,8 +172,12 @@
 
             
 
+            
+
              equals <paramref
              name="y" />
+
+            
 
             
 
@@ -171,8 +195,12 @@
 
             
 
+            
+
              is greater than <paramref
              name="y" />
+
+            
 
             
 
@@ -195,8 +223,12 @@
 
         
 
+        
+
          method overload of the <see
          cref="T:System.Array" />
+
+        
 
         
 
@@ -209,8 +241,12 @@
 
         
 
+        
+
          method overload of the <see
          cref="T:System.Collections.Generic.List`1" />
+
+        
 
         
 

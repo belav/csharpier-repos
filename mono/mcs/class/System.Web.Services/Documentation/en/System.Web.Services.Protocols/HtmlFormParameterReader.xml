@@ -29,8 +29,12 @@
 
         
 
+        
+
          and other classes in the <see
          cref="N:System.Web.Services.Protocols" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
           class provides a <see
          cref="M:System.Web.Services.Protocols.HtmlFormParameterReader.Read(System.Web.HttpRequest)" />
+
+        
 
         
 
@@ -60,10 +68,14 @@
 
         
 
+        
+
           directly. HTTP-POST Web services are enabled when an ASP.NET configuration file's (Web.config) <format
          type="text/html">
           <a href="f3b301dc-855c-4062-8bcf-5ccadb598fab">&lt;protocols&gt;</a>
         </format>
+
+        
 
         
 
@@ -78,8 +90,12 @@
 
         
 
+        
+
          element whose name attribute's value is "HttpPost". The <see
          cref="T:System.Web.Services.Protocols.HtmlFormParameterReader" />
+
+        
 
         
 
@@ -106,6 +122,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Protocols.HtmlFormParameterReader" />
+
+            
 
             
 
@@ -143,6 +161,8 @@
 
             
 
+            
+
              method uses the content of the <see
              cref="T:System.Web.HttpRequest" />
 
@@ -150,8 +170,12 @@
 
             
 
+            
+
              object's <see
              cref="P:System.Web.HttpRequest.Form" />
+
+            
 
             
 
@@ -175,8 +199,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.HttpRequest" />
+
+          
 
           
 

@@ -50,6 +50,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -80,11 +82,15 @@
 
             
 
+            
+
              class with the specified configuration name. </para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -234,6 +240,8 @@
 
             
 
+            
+
             , whose default value is also 65,536 (64 KB). </para
           >
         </remarks>
@@ -331,11 +339,15 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
         <param name="binding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -398,6 +410,8 @@
 
             
 
+            
+
              instance that contains a collection of <see
              cref="T:System.Configuration.ConfigurationProperty" />
 
@@ -405,8 +419,12 @@
 
             
 
+            
+
              objects that can be attributes or <see
              cref="T:System.Configuration.ConfigurationElement" />
+
+            
 
             
 

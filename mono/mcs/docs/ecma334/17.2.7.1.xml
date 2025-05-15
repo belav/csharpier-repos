@@ -8,9 +8,11 @@
 
     
 
+    
+
     ) of type T, the following signatures are reserved: <code_example
     >
-<![CDATA[
+      <![CDATA[
 T get_P();  
 void set_P(T value);  
 ]]>
@@ -21,7 +23,7 @@ void set_P(T value);
     <example
       >[Example: In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 using System;  
 class A {  
    public int P {  
@@ -52,14 +54,18 @@ class Test
 
       
 
+      
+
       a class A defines a read-only property P, thus reserving signatures for get_P and set_P methods. A class B derives from A and hides both of these reserved signatures. The example produces the output: <code_example
       >
-<![CDATA[
+        <![CDATA[
 123  
 123  
 456  
 ]]>
       </code_example>
+
+      
 
       
 

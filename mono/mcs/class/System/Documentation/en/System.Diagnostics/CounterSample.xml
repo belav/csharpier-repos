@@ -62,6 +62,8 @@
 
             
 
+            
+
              method for the first time.</para
           >
         </remarks>
@@ -75,8 +77,12 @@
 
             
 
+            
+
              structure and sets the <see
              cref="P:System.Diagnostics.CounterSample.CounterTimeStamp" />
+
+            
 
             
 
@@ -92,10 +98,14 @@
 
           
 
+          
+
           The numeric value associated with the performance counter sample. </param
         >
         <param name="baseValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -110,10 +120,14 @@
 
           
 
+          
+
           The frequency with which the counter is read. </param
         >
         <param name="systemFrequency">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -128,10 +142,14 @@
 
           
 
+          
+
           The raw time stamp. </param
         >
         <param name="timeStamp100nSec">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -146,8 +164,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Diagnostics.PerformanceCounterType" />
+
+          
 
           
 
@@ -194,6 +216,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -207,8 +231,12 @@
 
             
 
+            
+
              structure and sets the <see
              cref="P:System.Diagnostics.CounterSample.CounterTimeStamp" />
+
+            
 
             
 
@@ -224,10 +252,14 @@
 
           
 
+          
+
           The numeric value associated with the performance counter sample. </param
         >
         <param name="baseValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -242,10 +274,14 @@
 
           
 
+          
+
           The frequency with which the counter is read. </param
         >
         <param name="systemFrequency">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -260,10 +296,14 @@
 
           
 
+          
+
           The raw time stamp. </param
         >
         <param name="timeStamp100nSec">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -278,8 +318,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Diagnostics.PerformanceCounterType" />
+
+          
 
           
 
@@ -289,6 +333,8 @@
         >
         <param name="counterTimeStamp">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -357,8 +403,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Diagnostics.CounterSample" />
+
+          
 
           
 
@@ -407,8 +457,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Diagnostics.CounterSample" />
+
+          
 
           
 
@@ -423,8 +477,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Diagnostics.CounterSample" />
+
+          
 
           
 
@@ -562,6 +620,8 @@
 
             
 
+            
+
              structures are equal if they have identical property values.</para
           >
         </remarks>
@@ -575,8 +635,12 @@
 
             
 
+            
+
              structure is equal to the current <see
              cref="T:System.Diagnostics.CounterSample" />
+
+            
 
             
 
@@ -590,6 +654,8 @@
           <para
             >true if <paramref
              name="sample" />
+
+            
 
             
 
@@ -629,6 +695,8 @@
 
             
 
+            
+
              structures are equal if they have identical property values.</para
           >
         </remarks>
@@ -642,8 +710,12 @@
 
             
 
+            
+
              structure and is identical to the current <see
              cref="T:System.Diagnostics.CounterSample" />
+
+            
 
             
 
@@ -662,8 +734,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Diagnostics.CounterSample" />
+
+            
 
             
 
@@ -735,6 +811,8 @@
 
             
 
+            
+
              structures are equal if they have identical property values.</para
           >
         </remarks>
@@ -743,6 +821,8 @@
           <para
             >Returns a value that indicates whether two <see
              cref="T:System.Diagnostics.CounterSample" />
+
+            
 
             
 
@@ -761,8 +841,12 @@
 
             
 
+            
+
              and <paramref
              name="b" />
+
+            
 
             
 
@@ -807,6 +891,8 @@
 
             
 
+            
+
              structures are not equal if any of their property values are different.</para
           >
         </remarks>
@@ -815,6 +901,8 @@
           <para
             >Returns a value that indicates whether two <see
              cref="T:System.Diagnostics.CounterSample" />
+
+            
 
             
 
@@ -833,8 +921,12 @@
 
             
 
+            
+
              and <paramref
              name="b" />
+
+            
 
             
 

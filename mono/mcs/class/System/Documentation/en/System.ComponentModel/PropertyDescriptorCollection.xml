@@ -42,11 +42,15 @@
 
         
 
+        
+
          is read-only; it does not implement methods that add or remove properties. You must inherit from this class to implement these methods.</para
       >
       <para
         >Using the properties available in the <see
          cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+
+        
 
         
 
@@ -59,8 +63,12 @@
 
         
 
+        
+
          property to determine the number of elements in the collection. Use the <see
          cref="P:System.ComponentModel.PropertyDescriptorCollection.Item(System.Int32)" />
+
+        
 
         
 
@@ -76,6 +84,8 @@
 
         
 
+        
+
          method to get a description of the property with the specified name from the collection.</para
       >
     </remarks>
@@ -84,6 +94,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.ComponentModel.PropertyDescriptor" />
+
+        
 
         
 
@@ -125,6 +137,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -135,8 +149,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -176,11 +194,15 @@
 
             
 
+            
+
              class, which is optionally read-only.</para
           >
         </summary>
         <param name="properties">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -193,10 +215,14 @@
 
           
 
+          
+
            that provides the properties for this collection.</param
         >
         <param name="readOnly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -239,6 +265,8 @@
 
             
 
+            
+
              to the collection.</para
           >
         </summary>
@@ -247,6 +275,8 @@
           <para
             >The index of the <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -262,8 +292,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -296,6 +330,8 @@
           <para
             >Removes all <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -339,6 +375,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -347,6 +385,8 @@
           <para
             >true if the collection contains the given <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -362,8 +402,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -405,8 +449,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -421,8 +469,12 @@
 
           
 
+          
+
           The index of the <paramref
            name="array" />
+
+          
 
           
 
@@ -451,6 +503,8 @@
           <para
             >You can use the <see
              cref="P:System.ComponentModel.PropertyDescriptorCollection.Count" />
+
+            
 
             
 
@@ -526,6 +580,8 @@
 
             
 
+            
+
              with the specified name, using a Boolean to indicate whether to ignore case.</para
           >
         </summary>
@@ -534,6 +590,8 @@
           <para
             >A <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -549,8 +607,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -560,6 +622,8 @@
         >
         <param name="ignoreCase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -604,6 +668,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -642,6 +708,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -650,6 +718,8 @@
           <para
             >The index of the given <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -665,8 +735,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -710,6 +784,8 @@
 
             
 
+            
+
              to the collection at the specified index number.</para
           >
         </summary>
@@ -720,8 +796,12 @@
 
           
 
+          
+
           The index at which to add the <paramref
            name="value" />
+
+          
 
           
 
@@ -736,8 +816,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -776,6 +860,8 @@
           <para
             >Sorts the members of this collection, using the specified <see
              cref="T:System.Collections.IComparer" />
+
+            
 
             
 
@@ -902,6 +988,8 @@
 
             
 
+            
+
              from the collection.</para
           >
         </summary>
@@ -912,8 +1000,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -953,6 +1045,8 @@
 
             
 
+            
+
              at the specified index from the collection.</para
           >
         </summary>
@@ -963,8 +1057,12 @@
 
           
 
+          
+
           The index of the <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -1009,8 +1107,12 @@
 
             
 
+            
+
              that contains the sorted <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -1054,6 +1156,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1067,8 +1171,12 @@
 
             
 
+            
+
              that contains the sorted <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -1084,8 +1192,12 @@
 
           
 
+          
+
           A comparer to use to sort the <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -1133,8 +1245,12 @@
 
             
 
+            
+
              that contains the sorted <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -1180,6 +1296,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1193,8 +1311,12 @@
 
             
 
+            
+
              that contains the sorted <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -1210,8 +1332,12 @@
 
           
 
+          
+
           A comparer to use to sort the <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -1330,6 +1456,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1340,8 +1468,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1356,8 +1488,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1390,6 +1526,8 @@
           <para
             >Removes all elements from the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -1431,6 +1569,8 @@
 
             
 
+            
+
              contains an element with the specified key.</para
           >
         </summary>
@@ -1439,6 +1579,8 @@
           <para
             >true if the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -1489,6 +1631,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1525,6 +1669,8 @@
 
             
 
+            
+
              has a fixed size.</para
           >
         </summary>
@@ -1556,6 +1702,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -1625,8 +1773,12 @@
 
             
 
+            
+
              containing the keys of the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -1668,6 +1820,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -1704,8 +1858,12 @@
 
             
 
+            
+
              containing the values in the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -1747,8 +1905,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -1767,8 +1929,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -1809,6 +1975,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1818,6 +1986,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1886,6 +2056,8 @@
 
           
 
+          
+
           The item to locate in the collection.</param
         >
       </Docs>
@@ -1924,11 +2096,15 @@
 
             
 
+            
+
              if found in the list, otherwise -1.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1970,8 +2146,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="value" />
+
+          
 
           
 
@@ -1981,6 +2161,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2097,6 +2279,8 @@
 
           
 
+          
+
           The item to remove from the collection.</param
         >
       </Docs>
@@ -2127,6 +2311,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

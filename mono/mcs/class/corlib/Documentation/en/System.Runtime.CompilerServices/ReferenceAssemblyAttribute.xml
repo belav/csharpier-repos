@@ -55,6 +55,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -88,11 +90,15 @@
 
             
 
+            
+
              class by using the specified description. </para
           >
         </summary>
         <param name="description">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

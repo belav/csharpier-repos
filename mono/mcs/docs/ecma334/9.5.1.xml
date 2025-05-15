@@ -8,8 +8,12 @@
 
     
 
+    
+
     , <symbol
     >#elif</symbol>
+
+    
 
     
 
@@ -22,6 +26,8 @@
 
     
 
+    
+
     , and <symbol
     >#endif</symbol>
 
@@ -29,8 +35,12 @@
 
     
 
+    
+
      directives is controlled through pre-processing expressions (<hyperlink
     >9.5.2</hyperlink>
+
+    
 
     
 
@@ -46,6 +56,8 @@
 
       
 
+      
+
        :: <rhs
 
         >Any <non_terminal
@@ -55,8 +67,12 @@
 
         
 
+        
+
          except <keyword
         >true</keyword>
+
+        
 
         
 
@@ -75,8 +91,12 @@
 
     
 
+    
+
      directive is processed, the conditional compilation symbol named in that directive becomes defined in that source file. The symbol remains defined until an <symbol
     >#undef</symbol>
+
+    
 
     
 
@@ -89,8 +109,12 @@
 
     
 
+    
+
      and <symbol
     >#undef</symbol>
+
+    
 
     
 
@@ -106,8 +130,12 @@
 
     
 
+    
+
      and <symbol
     >#undef</symbol>
+
+    
 
     
 

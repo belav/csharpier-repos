@@ -53,6 +53,8 @@
 
         
 
+        
+
          class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see
          cref="T:System.Runtime.Remoting.Messaging.MethodCall" />
 
@@ -60,8 +62,12 @@
 
         
 
+        
+
          class directly; instead, use the <see
          cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
+
+        
 
         
 
@@ -76,8 +82,12 @@
 
         
 
+        
+
          contains remoting data that is passed between message sinks. A remoting client sends a <see
          cref="T:System.Runtime.Remoting.Messaging.MethodCall" />
+
+        
 
         
 
@@ -91,6 +101,8 @@
       <para
         >Implements the <see
          cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
+
+        
 
         
 
@@ -131,6 +143,8 @@
 
             
 
+            
+
              class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see
              cref="T:System.Runtime.Remoting.Messaging.MethodCall" />
 
@@ -138,8 +152,12 @@
 
             
 
+            
+
              class directly; instead, use the <see
              cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
+
+            
 
             
 
@@ -158,6 +176,8 @@
 
             
 
+            
+
              class from an array of remoting headers.</para
           >
         </summary>
@@ -168,8 +188,12 @@
 
           
 
+          
+
           An array of remoting headers that contains key/value pairs. This array is used to initialize <see
            cref="T:System.Runtime.Remoting.Messaging.MethodCall" />
+
+          
 
           
 
@@ -209,6 +233,8 @@
 
             
 
+            
+
              class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see
              cref="T:System.Runtime.Remoting.Messaging.MethodCall" />
 
@@ -216,8 +242,12 @@
 
             
 
+            
+
              class directly; instead, use the <see
              cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
+
+            
 
             
 
@@ -236,11 +266,15 @@
 
             
 
+            
+
              class by copying an existing message.</para
           >
         </summary>
         <param name="msg">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -328,8 +362,12 @@
 
             
 
+            
+
              field is also accessible through the <see
              cref="P:System.Runtime.Remoting.Messaging.MethodCall.Properties" />
+
+            
 
             
 
@@ -343,6 +381,8 @@
           <para
             >An <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -391,6 +431,8 @@
 
           
 
+          
+
           The index of the requested argument.</param
         >
       </Docs>
@@ -428,6 +470,8 @@
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -475,6 +519,8 @@
 
           
 
+          
+
           The index of the requested argument.</param
         >
       </Docs>
@@ -517,6 +563,8 @@
 
           
 
+          
+
           The index of the requested argument. </param
         >
       </Docs>
@@ -554,8 +602,12 @@
 
             
 
+            
+
              method throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -574,6 +626,8 @@
 
             
 
+            
+
              method is not implemented. </para
           >
         </summary>
@@ -584,10 +638,14 @@
 
           
 
+          
+
           The data for serializing or deserializing the remote object.</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -662,8 +720,12 @@
 
           
 
+          
+
           An array of remoting headers that contain key/value pairs. This array is used to initialize <see
            cref="T:System.Runtime.Remoting.Messaging.MethodCall" />
+
+          
 
           
 
@@ -749,6 +811,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -780,6 +844,8 @@
           <para
             >An <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -824,6 +890,8 @@
 
             
 
+            
+
              for the current method call. </para
           >
         </summary>
@@ -858,6 +926,8 @@
           <para
             >Gets the <see
              cref="T:System.Reflection.MethodBase" />
+
+            
 
             
 
@@ -946,8 +1016,12 @@
 
             
 
+            
+
              property returns the value of the <see
              cref="F:System.Runtime.Remoting.Messaging.MethodCall.ExternalProperties" />
+
+            
 
             
 
@@ -961,6 +1035,8 @@
           <para
             >Gets an <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -998,8 +1074,12 @@
 
             
 
+            
+
              property is set through the <see
              cref="M:System.Runtime.Remoting.Messaging.MethodCall.ResolveMethod" />
+
+            
 
             
 
@@ -1052,10 +1132,14 @@
 
           
 
+          
+
           The data for serializing or deserializing the remote object.</param
         >
         <param name="ctx">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -27,6 +27,8 @@
 
         
 
+        
+
          objects for a component.</para
       >
     </summary>
@@ -56,11 +58,15 @@
 
             
 
+            
+
              class using the provided reference to the design host.</para
           >
         </summary>
         <param name="serviceProvider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -102,6 +108,8 @@
 
           
 
+          
+
           A reference to the control associated with the designer.</param
         >
         <param name="actionLists">
@@ -111,8 +119,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
+
+          
 
           
 

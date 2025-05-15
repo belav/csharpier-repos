@@ -50,8 +50,12 @@
 
         
 
+        
+
          (Step Into) key, the attribute will cause the step to behave like an <ui
         >F10</ui>
+
+        
 
         
 
@@ -64,6 +68,8 @@
          type="text/html">
           <a href="30386922-1E00-4602-9EBF-526B271A8B87">Extending Metadata Using Attributes</a>
         </format>
+
+        
 
         
 
@@ -99,6 +105,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Diagnostics.DebuggerStepThroughAttribute" />
+
+            
 
             
 

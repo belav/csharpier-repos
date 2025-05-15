@@ -32,6 +32,8 @@
 
         
 
+        
+
          control can be programmatically manipulated to change the image displayed, the image size, and the alignment of the image relative to other page elements.</para
       >
       <para
@@ -42,8 +44,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.HtmlControls.HtmlImage.#ctor" />
+
+        
 
         
 
@@ -74,11 +80,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The following table shows the initial property value for an instance of <see
              cref="T:System.Web.UI.HtmlControls.HtmlImage" />
+
+            
 
             
 
@@ -114,6 +124,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlImage" />
+
+            
 
             
 
@@ -170,8 +182,7 @@
             </item>
             <item>
               <term>
-                <para
->right </para>
+                <para>right </para>
               </term>
               <description>
                 <para>The image is aligned on the right side of the Web page. </para>
@@ -206,6 +217,8 @@
             <para
               >The center value might not work on all browsers. To center an image, wrap the <see
                cref="T:System.Web.UI.HtmlControls.HtmlImage" />
+
+              
 
               
 
@@ -247,6 +260,8 @@
           <para
             >Use this property to specify the caption displayed when the image specified by the <see
              cref="P:System.Web.UI.HtmlControls.HtmlImage.Src" />
+
+            
 
             
 
@@ -326,8 +341,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.HtmlControls.HtmlImage.Width" />
+
+            
 
             
 
@@ -340,8 +359,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.HtmlControls.HtmlImage.Width" />
+
+            
 
             
 
@@ -357,8 +380,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.HtmlControls.HtmlImage.Width" />
+
+            
 
             
 
@@ -369,6 +396,8 @@
           <para
             >By default, the <see
              cref="P:System.Web.UI.HtmlControls.HtmlImage.Height" />
+
+            
 
             
 
@@ -422,6 +451,8 @@
 
             
 
+            
+
              property is a malformed URL, the <see
              cref="M:System.Web.UI.HtmlControls.HtmlImage.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
 
@@ -429,8 +460,12 @@
 
             
 
+            
+
              method throws an <see
              cref="T:System.Web.HttpException" />
+
+            
 
             
 
@@ -446,8 +481,12 @@
 
             
 
+            
+
              method overrides the base class's <see
              cref="M:System.Web.UI.HtmlControls.HtmlImage.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -460,8 +499,12 @@
 
             
 
+            
+
              attribute of the rendered <see
              cref="T:System.Web.UI.HtmlControls.HtmlImage" />
+
+            
 
             
 
@@ -477,8 +520,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlImage" />
+
+            
 
             
 
@@ -497,8 +544,12 @@
 
             
 
+            
+
              control's attributes to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -527,6 +578,8 @@
           <para
             >Use this property to specify the path to the image file to display. If the image file is in the same directory as the Web page source file that uses it, you can just specify the file name. Otherwise, you must also include the path to the file. The path can be absolute or relative to the directory that contains the Web page source file. You can use the relative path " ~/ " to refer to the current virtual directory where the page is located. For example, the value of <see
              cref="P:System.Web.UI.HtmlControls.HtmlImage.Src" />
+
+            
 
             
 
@@ -575,8 +628,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.HtmlControls.HtmlImage.Width" />
+
+            
 
             
 
@@ -589,8 +646,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.HtmlControls.HtmlImage.Width" />
+
+            
 
             
 
@@ -606,8 +667,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.HtmlControls.HtmlImage.Width" />
+
+            
 
             
 
@@ -618,6 +683,8 @@
           <para
             >By default, the <see
              cref="P:System.Web.UI.HtmlControls.HtmlImage.Width" />
+
+            
 
             
 

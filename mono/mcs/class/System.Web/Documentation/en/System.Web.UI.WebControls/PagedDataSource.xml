@@ -34,8 +34,12 @@
 
         
 
+        
+
          class encapsulates the properties that allow data-source controls, such as the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -48,6 +52,8 @@
 
         
 
+        
+
         , <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
 
@@ -55,8 +61,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Web.UI.WebControls.FormView" />
+
+        
 
         
 
@@ -72,6 +82,8 @@
 
         
 
+        
+
          and <see
          cref="T:System.Collections.IList" />
 
@@ -79,8 +91,12 @@
 
         
 
+        
+
         ), this class uses it. Otherwise, it uses the enumerator created by the <see
          cref="M:System.Collections.IEnumerable.GetEnumerator" />
+
+        
 
         
 
@@ -96,8 +112,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.WebControls.PagedDataSource.#ctor" />
+
+        
 
         
 
@@ -116,8 +136,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 
@@ -130,8 +154,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Web.UI.WebControls.FormView" />
+
+        
 
         
 
@@ -158,11 +186,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.Web.UI.WebControls.PagedDataSource" />
+
+            
 
             
 
@@ -253,6 +285,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -281,8 +315,12 @@
 
             
 
+            
+
              property to indicate whether custom paging is enabled. Custom paging is an optional type of paging provided specifically by the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -295,8 +333,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.UI.WebControls.DetailsView" />
+
+            
 
             
 
@@ -309,8 +351,12 @@
 
             
 
+            
+
             ) uses server-side paging and does not support custom paging. Custom paging and server-side paging are mutually exclusive. If you set <see
              cref="P:System.Web.UI.WebControls.PagedDataSource.AllowCustomPaging" />
+
+            
 
             
 
@@ -323,11 +369,15 @@
 
             
 
+            
+
              is set to false.</para
           >
           <para
             >For more information about custom paging, see <see
              cref="P:System.Web.UI.WebControls.DataGrid.AllowCustomPaging" />
+
+            
 
             
 
@@ -365,8 +415,12 @@
 
             
 
+            
+
              property to specify whether a data-bound control has paging enabled. ASP.NET version 2.0 data-bound controls (such as <see
              cref="T:System.Web.UI.WebControls.GridView" />
+
+            
 
             
 
@@ -379,8 +433,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -393,8 +451,12 @@
 
             
 
+            
+
             . When using the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -407,8 +469,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.PagedDataSource.AllowCustomPaging" />
+
+            
 
             
 
@@ -449,6 +515,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.UI.WebControls.DetailsView" />
 
@@ -456,8 +524,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -474,8 +546,12 @@
 
               
 
+              
+
                to true, be sure that <see
                cref="P:System.Web.UI.WebControls.PagedDataSource.AllowCustomPaging" />
+
+              
 
               
 
@@ -512,8 +588,12 @@
 
             
 
+            
+
             , starting at the specified index. The <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -532,8 +612,12 @@
 
             
 
+            
+
             , starting at the specified index in the <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -549,8 +633,12 @@
 
           
 
+          
+
           A zero-based <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -565,8 +653,12 @@
 
           
 
+          
+
           The first position in the specified <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -598,6 +690,8 @@
 
             
 
+            
+
              property to determine the number of items to be used from the data source. The value returned depends on whether paging is enabled and whether custom paging is used.</para
           >
           <list type="bullet">
@@ -610,8 +704,12 @@
 
                 
 
+                
+
                  property to false), the value of the <see
                  cref="P:System.Web.UI.WebControls.PagedDataSource.DataSourceCount" />
+
+                
 
                 
 
@@ -624,6 +722,8 @@
               <para
                 >If paging is enabled (by setting the <see
                  cref="P:System.Web.UI.WebControls.PagedDataSource.IsPagingEnabled" />
+
+                
 
                 
 
@@ -636,8 +736,12 @@
 
                 
 
+                
+
                  property set to true), the value of the <see
                  cref="P:System.Web.UI.WebControls.PagedDataSource.PageSize" />
+
+                
 
                 
 
@@ -650,6 +754,8 @@
               <para
                 >If paging is enabled (by setting the <see
                  cref="P:System.Web.UI.WebControls.PagedDataSource.IsPagingEnabled" />
+
+                
 
                 
 
@@ -662,8 +768,12 @@
 
                 
 
+                
+
                  property is set to false, the value of the <see
                  cref="P:System.Web.UI.WebControls.PagedDataSource.PageSize" />
+
+                
 
                 
 
@@ -681,8 +791,12 @@
 
                 
 
+                
+
                  property to true), custom paging is disabled (by setting the <see
                  cref="P:System.Web.UI.WebControls.PagedDataSource.IsCustomPagingEnabled" />
+
+                
 
                 
 
@@ -695,6 +809,8 @@
 
                 
 
+                
+
                  property is set to true, the value of the <see
                  cref="P:System.Web.UI.WebControls.PagedDataSource.DataSourceCount" />
 
@@ -702,8 +818,12 @@
 
                 
 
+                
+
                  property is subtracted from the value of the <see
                  cref="P:System.Web.UI.WebControls.PagedDataSource.FirstIndexInPage" />
+
+                
 
                 
 
@@ -717,6 +837,8 @@
             <para
               >If the <see
                cref="P:System.Web.UI.WebControls.PagedDataSource.DataSource" />
+
+              
 
               
 
@@ -750,6 +872,8 @@
           <para
             >Use the <see
              cref="P:System.Web.UI.WebControls.PagedDataSource.CurrentPageIndex" />
+
+            
 
             
 
@@ -793,6 +917,8 @@
 
             
 
+            
+
              property to specify or determine the data source being paged.</para
           >
         </remarks>
@@ -824,8 +950,12 @@
 
             
 
+            
+
              property to determine the number of items in the data source. If custom paging or server-side paging is used, the value of the <see
              cref="P:System.Web.UI.WebControls.PagedDataSource.VirtualCount" />
+
+            
 
             
 
@@ -837,6 +967,8 @@
             <para
               >If the <see
                cref="P:System.Web.UI.WebControls.PagedDataSource.DataSource" />
+
+              
 
               
 
@@ -874,12 +1006,16 @@
 
             
 
+            
+
              property to determine the index of the first item on the current page.</para
           >
           <block subset="none" type="note">
             <para
               >If the <see
                cref="P:System.Web.UI.WebControls.PagedDataSource.IsPagingEnabled" />
+
+              
 
               
 
@@ -892,6 +1028,8 @@
 
               
 
+              
+
                or <see
                cref="P:System.Web.UI.WebControls.PagedDataSource.AllowServerPaging" />
 
@@ -899,8 +1037,12 @@
 
               
 
+              
+
                properties are set to true, or the <see
                cref="P:System.Web.UI.WebControls.PagedDataSource.DataSource" />
+
+              
 
               
 
@@ -941,8 +1083,12 @@
 
             
 
+            
+
              that can be iterated through to get each item in the data source. To access the item at the current position in the enumerator, use the <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -955,8 +1101,12 @@
 
             
 
+            
+
              method to move to the next item in the collection. To move the enumerator to its initial position, use the <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 
@@ -973,6 +1123,8 @@
 
               
 
+              
+
                method to move the enumerator to the first item in the collection, you must call the <see
                cref="M:System.Collections.IEnumerator.MoveNext" />
 
@@ -980,8 +1132,12 @@
 
               
 
+              
+
                method. Otherwise, the item represented by the <see
                cref="P:System.Collections.IEnumerator.Current" />
+
+              
 
               
 
@@ -1001,6 +1157,8 @@
 
             
 
+            
+
              implemented object that contains all items in the data source.</para
           >
         </summary>
@@ -1009,6 +1167,8 @@
           <para
             >A <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -1050,8 +1210,12 @@
 
             
 
+            
+
              method to create a <see
              cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+
+            
 
             
 
@@ -1064,8 +1228,12 @@
 
             
 
+            
+
              property is null or is not a <see
              cref="T:System.ComponentModel.ITypedList" />
+
+            
 
             
 
@@ -1078,8 +1246,12 @@
 
             
 
+            
+
              method, see <see
              cref="M:System.ComponentModel.ITypedList.GetItemProperties(System.ComponentModel.PropertyDescriptor[])" />
+
+            
 
             
 
@@ -1098,6 +1270,8 @@
 
             
 
+            
+
              that represents the properties on each item used to bind data.</para
           >
         </summary>
@@ -1106,6 +1280,8 @@
           <para
             >The <see
              cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+
+            
 
             
 
@@ -1147,8 +1323,12 @@
 
             
 
+            
+
              and is not applicable to this class. It has been implemented to return <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -1165,6 +1345,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -1197,6 +1379,8 @@
 
             
 
+            
+
              property to determine whether custom paging is enabled.</para
           >
           <block subset="none" type="note">
@@ -1208,8 +1392,12 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.PagedDataSource.AllowCustomPaging" />
+
+              
 
               
 
@@ -1247,6 +1435,8 @@
 
             
 
+            
+
              property to determine whether the current page is the first page.</para
           >
         </remarks>
@@ -1273,6 +1463,8 @@
           <para
             >Use the <see
              cref="P:System.Web.UI.WebControls.PagedDataSource.IsLastPage" />
+
+            
 
             
 
@@ -1309,6 +1501,8 @@
 
             
 
+            
+
              property to determine whether paging is enabled.</para
           >
           <block subset="none" type="note">
@@ -1320,8 +1514,12 @@
 
               
 
+              
+
                property must be true and the <see
                cref="P:System.Web.UI.WebControls.PagedDataSource.PageSize" />
+
+              
 
               
 
@@ -1384,8 +1582,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.PagedDataSource.AllowServerPaging" />
+
+            
 
             
 
@@ -1418,11 +1620,15 @@
 
             
 
+            
+
              class and is overridden to always return false to indicate that this class is not thread-safe.</para
           >
           <para
             >For more information on the <see
              cref="P:System.Web.UI.WebControls.PagedDataSource.IsSynchronized" />
+
+            
 
             
 
@@ -1435,8 +1641,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1473,12 +1683,16 @@
 
             
 
+            
+
              property to determine the number of pages necessary to display all items in the data source.</para
           >
           <block subset="none" type="note">
             <para
               >If the <see
                cref="P:System.Web.UI.WebControls.PagedDataSource.DataSource" />
+
+              
 
               
 
@@ -1491,8 +1705,12 @@
 
               
 
+              
+
                property is set to false or the <see
                cref="P:System.Web.UI.WebControls.PagedDataSource.DataSourceCount" />
+
+              
 
               
 
@@ -1531,6 +1749,8 @@
 
             
 
+            
+
              property to specify or determine the number of items to display on a single page.</para
           >
         </remarks>
@@ -1562,11 +1782,15 @@
 
             
 
+            
+
              object itself.</para
           >
           <para
             >For more information on the <see
              cref="P:System.Web.UI.WebControls.DataGridColumnCollection.SyncRoot" />
+
+            
 
             
 
@@ -1579,8 +1803,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1618,6 +1846,8 @@
 
             
 
+            
+
              property when custom paging or server-side paging is used to determine the virtual number of items in the data source. For more information on the <see
              cref="P:System.Web.UI.WebControls.PagedDataSource.VirtualCount" />
 
@@ -1625,8 +1855,12 @@
 
             
 
+            
+
              property, see <see
              cref="P:System.Web.UI.WebControls.DataGrid.VirtualItemCount" />
+
+            
 
             
 

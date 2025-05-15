@@ -36,8 +36,12 @@
 
         
 
+        
+
          class encapsulates the properties that control the appearance of a Web server control and can be applied to multiple Web server controls to provide a common appearance. You can specify the background color and font color of a control by setting the <see
          cref="P:System.Web.UI.WebControls.WebControl.BackColor" />
+
+        
 
         
 
@@ -50,8 +54,12 @@
 
         
 
+        
+
          properties, respectively. On controls that can display a border, you can control the border width, the border style, and the border color by setting the <see
          cref="P:System.Web.UI.WebControls.WebControl.BorderWidth" />
+
+        
 
         
 
@@ -64,8 +72,12 @@
 
         
 
+        
+
         , and <see
          cref="P:System.Web.UI.WebControls.WebControl.BorderColor" />
+
+        
 
         
 
@@ -78,8 +90,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.WebControls.WebControl.Width" />
+
+        
 
         
 
@@ -110,6 +126,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -118,6 +136,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -150,6 +170,8 @@
 
             
 
+            
+
              class using the <see
              cref="T:System.Web.UI.StateBag" />
 
@@ -157,8 +179,12 @@
 
             
 
+            
+
              specified by the <paramref
              name="bag" />
+
+            
 
             
 
@@ -177,6 +203,8 @@
 
             
 
+            
+
              class with the specified state bag information.</para
           >
         </summary>
@@ -187,8 +215,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.StateBag" />
+
+          
 
           
 
@@ -225,8 +257,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.UI.HtmlTextWriter.AddStyleAttribute(System.String,System.String)" />
+
+            
 
             
 
@@ -239,8 +275,12 @@
 
             
 
+            
+
              output stream. To simplify the process, this method encapsulates all calls to the <see
              cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.String,System.String)" />
+
+            
 
             
 
@@ -253,8 +293,12 @@
 
             
 
+            
+
              methods for every attribute and style associated with the Web server control. All attributes and styles are inserted into the <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -273,6 +317,8 @@
 
             
 
+            
+
             . This method is primarily used by control developers.</para
           >
         </summary>
@@ -283,8 +329,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -322,8 +372,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.UI.HtmlTextWriter.AddStyleAttribute(System.String,System.String)" />
+
+            
 
             
 
@@ -336,8 +390,12 @@
 
             
 
+            
+
              output stream. To simplify the process, this method encapsulates all calls to the <see
              cref="M:System.Web.UI.HtmlTextWriter.AddAttribute(System.String,System.String)" />
+
+            
 
             
 
@@ -350,6 +408,8 @@
 
             
 
+            
+
              methods for every attribute and style associated with the Web Server control. All attributes and styles are inserted into the <see
              cref="T:System.Web.UI.HtmlTextWriter" />
 
@@ -357,8 +417,12 @@
 
             
 
+            
+
              output stream in a single method call. This method is typically overridden by control developers in derived classes to insert the appropriate attributes and styles to the <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -377,6 +441,8 @@
 
             
 
+            
+
              and Web server control. This method is primarily used by control developers.</para
           >
         </summary>
@@ -387,8 +453,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -403,8 +473,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.WebControl" />
+
+          
 
           
 
@@ -417,8 +491,12 @@
 
           
 
+          
+
            derived object that represents the Web server control associated with the <see
            cref="T:System.Web.UI.WebControls.Style" />
+
+          
 
           
 
@@ -454,8 +532,12 @@
 
             
 
+            
+
              property to specify the background color of the Web server control. This property is set using a <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -472,8 +554,12 @@
 
               
 
+              
+
               , <see
                cref="T:System.Web.UI.WebControls.Panel" />
+
+              
 
               
 
@@ -486,8 +572,12 @@
 
               
 
+              
+
               , <see
                cref="T:System.Web.UI.WebControls.Calendar" />
+
+              
 
               
 
@@ -500,8 +590,12 @@
 
               
 
+              
+
                will render this property. It will also work for <see
                cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+              
 
               
 
@@ -514,8 +608,12 @@
 
               
 
+              
+
                and <see
                cref="T:System.Web.UI.WebControls.DataList" />
+
+              
 
               
 
@@ -528,6 +626,8 @@
           <para
             >For controls that render as a &lt;span&gt; tag (including <see
              cref="T:System.Web.UI.WebControls.Label" />
+
+            
 
             
 
@@ -582,8 +682,12 @@
 
             
 
+            
+
              property to specify the border color of the Web server control. This property is set using a <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -600,8 +704,12 @@
 
               
 
+              
+
               , <see
                cref="T:System.Web.UI.WebControls.Panel" />
+
+              
 
               
 
@@ -614,8 +722,12 @@
 
               
 
+              
+
               , <see
                cref="T:System.Web.UI.WebControls.Calendar" />
+
+              
 
               
 
@@ -628,8 +740,12 @@
 
               
 
+              
+
                will render this property. It will also work for <see
                cref="T:System.Web.UI.WebControls.CheckBoxList" />
+
+              
 
               
 
@@ -642,8 +758,12 @@
 
               
 
+              
+
               , and <see
                cref="T:System.Web.UI.WebControls.DataList" />
+
+              
 
               
 
@@ -696,8 +816,12 @@
 
             
 
+            
+
              property to specify the border style for the Web server control. This property is set using one of the <see
              cref="T:System.Web.UI.WebControls.BorderStyle" />
+
+            
 
             
 
@@ -841,6 +965,8 @@
 
             
 
+            
+
              property to specify a border width for a control.</para
           >
           <block subset="none" type="note">
@@ -852,8 +978,12 @@
 
               
 
+              
+
                and <see
                cref="T:System.Web.UI.WebControls.DataGrid" />
+
+              
 
               
 
@@ -870,6 +1000,8 @@
 
             
 
+            
+
              object. If the <see
              cref="P:System.Web.UI.WebControls.Unit.Value" />
 
@@ -877,8 +1009,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.Unit" />
+
+            
 
             
 
@@ -931,6 +1067,8 @@
 
             
 
+            
+
              method to duplicate the style properties of the specified <see
              cref="T:System.Web.UI.WebControls.Style" />
 
@@ -938,8 +1076,12 @@
 
             
 
+            
+
              into the instance of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -955,8 +1097,12 @@
 
             
 
+            
+
             , and then copied using <see
              cref="M:System.Web.UI.WebControls.Style.CopyFrom(System.Web.UI.WebControls.Style)" />
+
+            
 
             
 
@@ -969,8 +1115,12 @@
 
             
 
+            
+
              property is copied to the destination, not all the individual properties. This could lead to unexpected results if you then copy or examine the properties of the destination style. For example, if you are using <see
              cref="M:System.Web.UI.WebControls.FontInfo.CopyFrom(System.Web.UI.WebControls.FontInfo)" />
+
+            
 
             
 
@@ -983,8 +1133,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -1001,6 +1155,8 @@
 
               
 
+              
+
                class, will be replaced by the associated property in the <see
                cref="T:System.Web.UI.WebControls.Style" />
 
@@ -1008,8 +1164,12 @@
 
               
 
+              
+
                specified by the <paramref
                name="s" />
+
+              
 
               
 
@@ -1030,8 +1190,12 @@
 
             
 
+            
+
              into the instance of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -1047,8 +1211,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.Style" />
+
+          
 
           
 
@@ -1081,6 +1249,8 @@
 
             
 
+            
+
              property to specify the CSS class to render on the client for the Web server control. This property will render on browsers for all controls. It will always be rendered as the class attribute, regardless of the browser.</para
           >
           <para>For example, suppose you have the following Web server control declaration: </para>
@@ -1091,6 +1261,8 @@
             <para
               >On browsers that do not support CSS, setting the <see
                cref="P:System.Web.UI.WebControls.Style.CssClass" />
+
+              
 
               
 
@@ -1145,8 +1317,12 @@
 
             
 
+            
+
              method to add the style properties of an object to the specified <see
              cref="T:System.Web.UI.CssStyleCollection" />
+
+            
 
             
 
@@ -1159,6 +1335,8 @@
 
             
 
+            
+
             . All classes derived from <see
              cref="T:System.Web.UI.Control" />
 
@@ -1166,8 +1344,12 @@
 
             
 
+            
+
              implement <see
              cref="T:System.Web.UI.IUrlResolutionService" />
+
+            
 
             
 
@@ -1186,6 +1368,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1196,8 +1380,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.CssStyleCollection" />
+
+          
 
           
 
@@ -1212,8 +1400,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.IUrlResolutionService" />
+
+          
 
           
 
@@ -1244,6 +1436,8 @@
 
             
 
+            
+
              property to specify the font properties of the Web server control. This property includes subproperties that can be accessed declaratively in the form of <paramref
              name="Property-Subproperty" />
 
@@ -1251,8 +1445,12 @@
 
             
 
+            
+
              (for example Font-Bold) or programmatically in the form of <paramref
              name="Property.Subproperty" />
+
+            
 
             
 
@@ -1268,8 +1466,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.UI.WebControls.FontInfo.Italic" />
+
+            
 
             
 
@@ -1282,8 +1484,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.UI.WebControls.FontInfo.Names" />
+
+            
 
             
 
@@ -1296,6 +1502,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.UI.WebControls.FontInfo.Underline" />
 
@@ -1303,8 +1511,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Web.UI.WebControls.FontInfo.Size" />
+
+            
 
             
 
@@ -1318,6 +1530,8 @@
           <para
             >One subproperty that will not render on some browsers is <see
              cref="P:System.Web.UI.WebControls.FontInfo.Overline" />
+
+            
 
             
 
@@ -1366,8 +1580,12 @@
 
             
 
+            
+
              property to specify the foreground color of the Web server control. The foreground color is usually the color of the text. This property will render on browsers earlier than Microsoft Internet Explorer version 4 for all controls, except the <see
              cref="T:System.Web.UI.WebControls.Image" />
+
+            
 
             
 
@@ -1380,6 +1598,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.UI.WebControls.HyperLink" />
 
@@ -1387,8 +1607,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.UI.WebControls.LinkButton" />
+
+            
 
             
 
@@ -1448,8 +1672,12 @@
 
             
 
+            
+
              method to retrieve the <see
              cref="T:System.Web.UI.CssStyleCollection" />
+
+            
 
             
 
@@ -1462,6 +1690,8 @@
 
             
 
+            
+
             -implemented object. All classes derived from <see
              cref="T:System.Web.UI.Control" />
 
@@ -1469,8 +1699,12 @@
 
             
 
+            
+
              implement <see
              cref="T:System.Web.UI.IUrlResolutionService" />
+
+            
 
             
 
@@ -1489,8 +1723,12 @@
 
             
 
+            
+
              object for the specified <see
              cref="T:System.Web.UI.IUrlResolutionService" />
+
+            
 
             
 
@@ -1504,6 +1742,8 @@
           <para
             >A <see
              cref="T:System.Web.UI.CssStyleCollection" />
+
+            
 
             
 
@@ -1536,8 +1776,12 @@
 
             
 
+            
+
              property to specify or determine the height of the Web server control. This property is set with a <see
              cref="T:System.Web.UI.WebControls.Unit" />
+
+            
 
             
 
@@ -1609,6 +1853,8 @@
 
             
 
+            
+
              property to determine whether any style elements have been defined in the state bag. This property is primarily used by control developers.</para
           >
         </remarks>
@@ -1648,6 +1894,8 @@
 
           
 
+          
+
           The previously saved state. </param
         >
       </Docs>
@@ -1675,6 +1923,8 @@
 
             
 
+            
+
              method to combine the style properties of the specified <see
              cref="T:System.Web.UI.WebControls.Style" />
 
@@ -1682,8 +1932,12 @@
 
             
 
+            
+
              with the instance of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -1700,8 +1954,12 @@
 
               
 
+              
+
                specified by the <paramref
                name="s" />
+
+              
 
               
 
@@ -1721,8 +1979,12 @@
 
             
 
+            
+
              with the instance of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -1738,8 +2000,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.Style" />
+
+          
 
           
 
@@ -1785,11 +2051,15 @@
 
             
 
+            
+
              property to retrieve the CSS class that is registered with the control.</para
           >
           <para
             >A style is registered on the current page with a <see
              cref="M:System.Web.UI.IStyleSheet.RegisterStyle(System.Web.UI.WebControls.Style,System.Web.UI.IUrlResolutionService)" />
+
+            
 
             
 
@@ -1849,6 +2119,8 @@
 
             
 
+            
+
              method was invoked.</para
           >
         </summary>
@@ -1884,6 +2156,8 @@
 
           
 
+          
+
           A bitmask value.</param
         >
       </Docs>
@@ -1909,8 +2183,12 @@
 
             
 
+            
+
              method is called directly by the <see
              cref="M:System.Web.UI.WebControls.StyleCollection.SetDirtyObject(System.Object)" />
+
+            
 
             
 
@@ -1923,8 +2201,12 @@
 
             
 
+            
+
             , to mark a <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -1938,6 +2220,8 @@
           <para
             >Marks the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -1973,8 +2257,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 
@@ -2013,8 +2301,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 
@@ -2029,6 +2321,8 @@
         </summary>
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2060,8 +2354,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 
@@ -2102,8 +2400,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 
@@ -2211,8 +2513,12 @@
 
             
 
+            
+
              property to specify or determine the width of the Web server control. This property is set with a <see
              cref="T:System.Web.UI.WebControls.Unit" />
+
+            
 
             
 

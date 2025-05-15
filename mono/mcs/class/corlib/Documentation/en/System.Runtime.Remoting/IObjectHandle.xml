@@ -37,8 +37,12 @@
 
         
 
+        
+
          interface can be used to pass an object (in a wrapped state) between multiple application domains without loading the metadata for the wrapped object in each <see
          cref="T:System.AppDomain" />
+
+        
 
         
 
@@ -51,6 +55,8 @@
 
         
 
+        
+
          travels. Thus, the <see
          cref="T:System.Runtime.Remoting.IObjectHandle" />
 
@@ -58,8 +64,12 @@
 
         
 
+        
+
          class gives the caller control of when the <see
          cref="T:System.Type" />
+
+        
 
         
 

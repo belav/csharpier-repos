@@ -21,8 +21,12 @@
 
         
 
+        
+
          interface allows an inheriting class to implement a DataAdapter class, which represents the bridge between a data source and a <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -39,6 +43,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -49,8 +55,12 @@
 
         
 
+        
+
          interface directly, but implements an instance of a class that inherits <see
          cref="T:System.Data.IDataAdapter" />
+
+        
 
         
 
@@ -66,8 +76,12 @@
 
         
 
+        
+
          must implement the inherited members, and they typically define additional members to add provider-specific functionality. For example, the <see
          cref="T:System.Data.IDataAdapter" />
+
+        
 
         
 
@@ -80,8 +94,12 @@
 
         
 
+        
+
          method that takes a <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -94,6 +112,8 @@
 
         
 
+        
+
          class inherits the <see
          cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
 
@@ -101,8 +121,12 @@
 
         
 
+        
+
          method and also defines two additional overloads of the <see
          cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataTable,System.Object)" />
+
+        
 
         
 
@@ -121,6 +145,8 @@
 
         
 
+        
+
          and update a data source.</para
       >
       <para>
@@ -130,8 +156,12 @@
 
         
 
+        
+
          instances are for data sources that are (or resemble) relational databases with textual commands (like tsql), while <see
          cref="T:System.Data.IDataAdapter" />
+
+        
 
         
 
@@ -161,8 +191,12 @@
 
             
 
+            
+
              retrieves rows from the data source using the SELECT statement specified by an associated <see
              cref="P:System.Data.IDbDataAdapter.SelectCommand" />
+
+            
 
             
 
@@ -175,8 +209,12 @@
 
             
 
+            
+
              is called, it is opened to retrieve data, then closed. If the connection is open before <see
              cref="M:System.Data.IDataAdapter.Fill(System.Data.DataSet)" />
+
+            
 
             
 
@@ -192,8 +230,12 @@
 
             
 
+            
+
              operation then adds the rows to destination <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -206,8 +248,12 @@
 
             
 
+            
+
             , creating the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -220,6 +266,8 @@
 
             
 
+            
+
              objects, the <see
              cref="M:System.Data.IDataAdapter.Fill(System.Data.DataSet)" />
 
@@ -227,8 +275,12 @@
 
             
 
+            
+
              operation usually creates only column name metadata. However, if the <see
              cref="P:System.Data.IDataAdapter.MissingSchemaAction" />
+
+            
 
             
 
@@ -244,8 +296,12 @@
 
             
 
+            
+
              value for the resulting <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -262,11 +318,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >If the <see
              cref="T:System.Data.IDataAdapter" />
+
+            
 
             
 
@@ -279,6 +339,8 @@
 
             
 
+            
+
             , it generates names for the successive columns, using the pattern "columnname1", "columnname2", "columnname3", and so on. If the incoming data contains unnamed columns, they are put in the <see
              cref="T:System.Data.DataSet" />
 
@@ -286,8 +348,12 @@
 
             
 
+            
+
              according to the pattern "Column1", "Column2", and so on. When multiple result sets are added to the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -303,8 +369,12 @@
 
             
 
+            
+
              returns multiple results, such as a batch SQL statement, if one of the results contains an error, all successive results are skipped and not added to the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -320,6 +390,8 @@
 
             
 
+            
+
              method multiple times on the same <see
              cref="T:System.Data.DataTable" />
 
@@ -327,8 +399,12 @@
 
             
 
+            
+
             . If a primary key exists, incoming rows are merged with matching rows that already exist. If no primary key exists, incoming rows are appended to the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -345,8 +421,12 @@
 
               
 
+              
+
                and <see
                cref="M:System.Data.IDataAdapter.FillSchema(System.Data.DataSet,System.Data.SchemaType)" />
+
+              
 
               
 
@@ -366,6 +446,8 @@
 
             
 
+            
+
              to match those in the data source using the <see
              cref="T:System.Data.DataSet" />
 
@@ -373,8 +455,12 @@
 
             
 
+            
+
              name, and creates a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -393,6 +479,8 @@
 
             
 
+            
+
             . This does not include rows affected by statements that do not return rows.</para
           >
         </returns>
@@ -403,8 +491,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -442,8 +534,12 @@
 
             
 
+            
+
              method retrieves the schema from the data source using the <see
              cref="P:System.Data.IDbDataAdapter.SelectCommand" />
+
+            
 
             
 
@@ -456,6 +552,8 @@
 
             
 
+            
+
              must be valid, but it does not need to be open. If the connection is closed before <see
              cref="M:System.Data.IDataAdapter.FillSchema(System.Data.DataSet,System.Data.SchemaType)" />
 
@@ -463,8 +561,12 @@
 
             
 
+            
+
              is called, it is opened to retrieve data, then closed. If the connection is open before <see
              cref="M:System.Data.IDataAdapter.FillSchema(System.Data.DataSet,System.Data.SchemaType)" />
+
+            
 
             
 
@@ -480,8 +582,12 @@
 
             
 
+            
+
              operation adds a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -494,8 +600,12 @@
 
             
 
+            
+
             . It then adds columns to the <see
              cref="T:System.Data.DataColumnCollection" />
+
+            
 
             
 
@@ -508,8 +618,12 @@
 
             
 
+            
+
              and configures the following <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -531,6 +645,8 @@
 
                 
 
+                
+
                 . You must set <see
                  cref="P:System.Data.DataColumn.AutoIncrementStep" />
 
@@ -538,8 +654,12 @@
 
                 
 
+                
+
                  and <see
                  cref="P:System.Data.DataColumn.AutoIncrementSeed" />
+
+                
 
                 
 
@@ -571,6 +691,8 @@
 
             
 
+            
+
              also configures the <see
              cref="P:System.Data.DataTable.PrimaryKey" />
 
@@ -578,8 +700,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Data.DataTable.Constraints" />
+
+            
 
             
 
@@ -597,8 +723,12 @@
 
                 
 
+                
+
                 , they are used as the primary key columns for the <see
                  cref="T:System.Data.DataTable" />
+
+                
 
                 
 
@@ -616,6 +746,8 @@
 
                 
 
+                
+
                  is added to the <see
                  cref="T:System.Data.ConstraintCollection" />
 
@@ -623,8 +755,12 @@
 
                 
 
+                
+
                 , but the <see
                  cref="P:System.Data.DataTable.PrimaryKey" />
+
+                
 
                 
 
@@ -642,6 +778,8 @@
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -649,6 +787,8 @@
           <para
             >Note that primary keys and unique constraints are added to the <see
              cref="T:System.Data.ConstraintCollection" />
+
+            
 
             
 
@@ -664,11 +804,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >If the <see
              cref="T:System.Data.IDataAdapter" />
+
+            
 
             
 
@@ -681,6 +825,8 @@
 
             
 
+            
+
             , it generates names for the successive columns, using the pattern "columnname1", "columnname2", "columnname3", and so on. If the incoming data contains unnamed columns, they are put in the <see
              cref="T:System.Data.DataSet" />
 
@@ -688,8 +834,12 @@
 
             
 
+            
+
              according to the pattern "Column1", "Column2", and so on. When multiple result sets are added to the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -704,6 +854,8 @@
 
             
 
+            
+
              returns no rows. Use the <see
              cref="M:System.Data.IDataAdapter.Fill(System.Data.DataSet)" />
 
@@ -711,8 +863,12 @@
 
             
 
+            
+
              method to add rows to a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -731,6 +887,8 @@
 
             
 
+            
+
              named "Table" to the specified <see
              cref="T:System.Data.DataSet" />
 
@@ -738,8 +896,12 @@
 
             
 
+            
+
              and configures the schema to match that in the data source based on the specified <see
              cref="T:System.Data.SchemaType" />
+
+            
 
             
 
@@ -758,6 +920,8 @@
 
             
 
+            
+
              objects that contain schema information returned from the data source.</para
           >
         </returns>
@@ -768,8 +932,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -784,8 +952,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.SchemaType" />
+
+          
 
           
 
@@ -843,6 +1015,8 @@
 
             
 
+            
+
              objects that contains the parameters set by the user.</para
           >
         </returns>
@@ -874,8 +1048,12 @@
 
             
 
+            
+
              property provides the master mapping between the returned records and the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -938,8 +1116,12 @@
 
             
 
+            
+
              uses only the mappings for the source table named "Table". All SELECT, INSERT, DELETE, and UPDATE statements returning data must do so using consistent column naming. The column names returned in the records must be unique, otherwise columns with duplicate names overwrite previous data. On <see
              cref="M:System.Data.IDataAdapter.Update(System.Data.DataSet)" />
+
+            
 
             
 
@@ -978,8 +1160,12 @@
 
             
 
+            
+
              method, the <see
              cref="T:System.Data.IDataAdapter" />
+
+            
 
             
 
@@ -992,8 +1178,12 @@
 
             
 
+            
+
              property, and executes the required INSERT, UPDATE, or DELETE statements iteratively for each row, based on the order of the indexes configured in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1006,8 +1196,12 @@
 
             
 
+            
+
              might execute a DELETE statement, followed by an INSERT statement, and then another DELETE statement, because of the ordering of the rows in the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1018,6 +1212,8 @@
           <para
             >Be aware that these statements are not performed as a batch process; each row is updated individually. An application can call the <see
              cref="M:System.Data.DataSet.GetChanges" />
+
+            
 
             
 
@@ -1034,11 +1230,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >If INSERT, UPDATE, or DELETE statements have not been specified, the <see
              cref="M:System.Data.Common.DataAdapter.Update(System.Data.DataSet)" />
+
+            
 
             
 
@@ -1051,6 +1251,8 @@
 
             
 
+            
+
              or <see
              cref="T:System.Data.OleDb.OleDbCommandBuilder" />
 
@@ -1058,8 +1260,12 @@
 
             
 
+            
+
              object to automatically generate SQL statements for single-table updates if you set the SelectCommand property of a .NET Framework data provider. Then, any additional SQL statements that you do not set are generated by the CommandBuilder. This generation logic requires key column information to be present in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1076,11 +1282,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Data.Common.DataAdapter.Update(System.Data.DataSet)" />
+
+            
 
             
 
@@ -1093,8 +1303,12 @@
 
             
 
+            
+
              then updates the row using the value of the <see
              cref="P:System.Data.IDbCommand.UpdatedRowSource" />
+
+            
 
             
 
@@ -1110,8 +1324,12 @@
 
             
 
+            
+
             , the <see
              cref="M:System.Data.Common.DbDataAdapter.OnRowUpdated(System.Data.Common.RowUpdatedEventArgs)" />
+
+            
 
             
 
@@ -1124,11 +1342,15 @@
 
             
 
+            
+
              row and any output parameters returned by the command. After a row updates successfully, the changes to that row are accepted.</para
           >
           <para
             >When using <see
              cref="M:System.Data.IDataAdapter.Update(System.Data.DataSet)" />
+
+            
 
             
 
@@ -1146,6 +1368,8 @@
 
                 
 
+                
+
                  are moved to the parameter values.</para
               >
             </item>
@@ -1153,6 +1377,8 @@
               <para
                 >The <see
                  cref="M:System.Data.Common.DbDataAdapter.OnRowUpdating(System.Data.Common.RowUpdatingEventArgs)" />
+
+                
 
                 
 
@@ -1173,6 +1399,8 @@
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -1180,6 +1408,8 @@
               <para
                 >If there are output parameters, they are put in the <see
                  cref="T:System.Data.DataRow" />
+
+                
 
                 
 
@@ -1197,12 +1427,16 @@
 
                 
 
+                
+
                  event is raised.</para
               >
             </item>
             <item>
               <para>
                 <see cref="M:System.Data.DataRow.AcceptChanges" />
+
+                
 
                 
 
@@ -1220,8 +1454,12 @@
 
             
 
+            
+
              usually has a parameter collection associated with it. Parameters are mapped to the current row through the SourceColumn and SourceVersion properties of a .NET Framework data provider's Parameter class. SourceColumn refers to a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1234,11 +1472,15 @@
 
             
 
+            
+
              references to obtain parameter values for the current row.</para
           >
           <para
             >SourceColumn refers to the unmapped column name before any table mappings have been applied. If SourceColumn refers to a nonexistent column, the action taken depends on one of the following <see
              cref="T:System.Data.MissingMappingAction" />
+
+            
 
             
 
@@ -1270,6 +1512,8 @@
 
                   
 
+                  
+
                    if no mapping is present. </para
                 >
               </description>
@@ -1282,6 +1526,8 @@
                 <para
                   >A <see
                    cref="T:System.SystemException" />
+
+                  
 
                   
 
@@ -1304,6 +1550,8 @@
 
                   
 
+                  
+
                    is generated. </para
                 >
               </description>
@@ -1320,8 +1568,12 @@
 
               
 
+              
+
                property to true before calling <see
                cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+              
 
               
 
@@ -1334,6 +1586,8 @@
 
               
 
+              
+
                property of the <see
                cref="T:System.Data.Common.RowUpdatedEventArgs" />
 
@@ -1341,8 +1595,12 @@
 
               
 
+              
+
                to <see
                cref="F:System.Data.UpdateStatus.Continue" />
+
+              
 
               
 
@@ -1362,8 +1620,12 @@
 
             
 
+            
+
              from a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1382,6 +1644,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1392,8 +1656,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 

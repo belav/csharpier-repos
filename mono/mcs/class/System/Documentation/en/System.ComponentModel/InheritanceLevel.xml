@@ -27,8 +27,12 @@
 
         
 
+        
+
          defines identifiers for numeric IDs that are used with the <see
          cref="T:System.ComponentModel.InheritanceAttribute" />
+
+        
 
         
 

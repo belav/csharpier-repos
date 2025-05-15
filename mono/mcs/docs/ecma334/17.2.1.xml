@@ -13,6 +13,8 @@
 
         
 
+        
+
         ). However, depending on their declared accessibility, inherited members might not be accessible in a derived class. </list_item
       >
       <list_item
@@ -23,11 +25,15 @@
 
         
 
+        
+
         ) inherited members by declaring new members with the same name or signature. Note however that hiding an inherited member does not remove that member-it merely makes that member inaccessible in the derived class. </list_item
       >
       <list_item
         > An instance of a class contains a set of all instance fields declared in the class and its base classes, and an implicit conversion (<hyperlink
         >13.1.4</hyperlink>
+
+        
 
         
 

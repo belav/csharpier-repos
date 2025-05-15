@@ -26,6 +26,8 @@
 
         
 
+        
+
          class indicates that a conflict occurred while an attempt is being made to generate a typed dataset class.</para
       >
     </remarks>
@@ -34,6 +36,8 @@
       <para
         >The exception that is thrown when a name conflict occurs while a strongly typed <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -62,11 +66,15 @@
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "DefaultMessageDisplayedByParameterlessCtorWriterMustSupply" This message takes into account the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.InsufficientMemoryException" />
+
+            
 
             
 
@@ -114,6 +122,8 @@
 
             
 
+            
+
              class indicates that a conflict occurred while an attempt is being made to generate a typed dataset class.</para
           >
         </remarks>
@@ -122,6 +132,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.Design.TypedDataSetGeneratorException" />
+
+            
 
             
 
@@ -155,6 +167,8 @@
 
             
 
+            
+
              class indicates that a conflict occurred while an attempt is being made to generate a typed dataset class.</para
           >
         </remarks>
@@ -163,6 +177,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.Design.TypedDataSetGeneratorException" />
+
+            
 
             
 
@@ -178,8 +194,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -208,6 +228,8 @@
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Data.Design.TypedDataSetGeneratorException" />
+
+            
 
             
 
@@ -251,6 +273,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -264,6 +288,8 @@
 
             
 
+            
+
              class indicates that a conflict occurred while an attempt is being made to generate a typed dataset class.</para
           >
         </remarks>
@@ -272,6 +298,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.Design.TypedDataSetGeneratorException" />
+
+            
 
             
 
@@ -308,8 +336,12 @@
 
             
 
+            
+
             .The <see
              cref="T:System.Data.Design.TypedDataSetGeneratorException" />
+
+            
 
             
 
@@ -328,6 +360,8 @@
 
             
 
+            
+
              class, using the specified serialization information and streaming context.</para
           >
         </summary>
@@ -338,8 +372,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -354,8 +392,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -391,8 +433,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -405,11 +451,15 @@
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Data.Design.TypedDataSetGeneratorException" />
+
+            
 
             
 
@@ -453,6 +503,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -466,6 +518,8 @@
 
             
 
+            
+
              class indicates that a conflict occurred while an attempt is being made to generate a typed dataset class.</para
           >
         </remarks>
@@ -474,6 +528,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.Design.TypedDataSetGeneratorException" />
+
+            
 
             
 
@@ -500,6 +556,8 @@
           <para
             >The <see
              cref="T:System.Data.Design.TypedDataSetGeneratorException" />
+
+            
 
             
 
@@ -544,8 +602,12 @@
 
             
 
+            
+
             . The <see
              cref="T:System.Data.Design.TypedDataSetGeneratorException" />
+
+            
 
             
 
@@ -564,6 +626,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -574,8 +638,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 

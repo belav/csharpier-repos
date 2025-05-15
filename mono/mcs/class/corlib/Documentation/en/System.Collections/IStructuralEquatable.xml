@@ -21,8 +21,12 @@
 
         
 
+        
+
          interface enables you to implement customized comparisons to check for the structural equality of collection objects. That is, you can create your own definition of structural equality and specify that this definition be used with a collection type that accepts the <see
          cref="T:System.Collections.IStructuralEquatable" />
+
+        
 
         
 
@@ -35,6 +39,8 @@
 
         
 
+        
+
         , which tests for equality by using a specified <see
          cref="T:System.Collections.IEqualityComparer" />
 
@@ -42,8 +48,12 @@
 
         
 
+        
+
          implementation, and <see
          cref="M:System.Collections.IStructuralEquatable.GetHashCode(System.Collections.IEqualityComparer)" />
+
+        
 
         
 
@@ -60,8 +70,12 @@
 
           
 
+          
+
            interface supports only custom comparisons for structural equality. The <see
            cref="T:System.Collections.IStructuralComparable" />
+
+          
 
           
 
@@ -78,8 +92,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Collections.StructuralComparisons.StructuralEqualityComparer" />
+
+        
 
         
 
@@ -95,8 +113,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Tuple`2" />
+
+        
 
         
 
@@ -109,8 +131,12 @@
 
         
 
+        
+
         , and so on) and the <see
          cref="T:System.Array" />
+
+        
 
         
 
@@ -123,8 +149,12 @@
 
         
 
+        
+
          interface. By casting (in C#) or converting (in Visual Basic) the current instance of an array or tuple to an <see
          cref="T:System.Collections.IStructuralEquatable" />
+
+        
 
         
 
@@ -137,8 +167,12 @@
 
         
 
+        
+
          implementation as an argument to the <see
          cref="M:System.Collections.IStructuralEquatable.Equals(System.Object,System.Collections.IEqualityComparer)" />
+
+        
 
         
 
@@ -184,8 +218,12 @@
 
             
 
+            
+
              method supports custom structural comparison of array and tuple objects. This method in turn calls the <paramref
              name="comparer" />
+
+            
 
             
 
@@ -198,6 +236,8 @@
 
             
 
+            
+
              method to compare individual array elements or tuple components, starting with the first element or component. The individual calls to <see
              cref="M:System.Collections.IEqualityComparer.Equals(System.Object,System.Object)" />
 
@@ -205,8 +245,12 @@
 
             
 
+            
+
              end and the <see
              cref="M:System.Collections.IStructuralEquatable.Equals(System.Object,System.Collections.IEqualityComparer)" />
+
+            
 
             
 
@@ -230,6 +274,8 @@
 
           
 
+          
+
           The object to compare with the current instance.</param
         >
         <param name="comparer">
@@ -239,8 +285,12 @@
 
           
 
+          
+
           An object that determines whether the current instance and <paramref
            name="other" />
+
+          
 
           
 
@@ -280,6 +330,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -293,6 +345,8 @@
         </returns>
         <param name="comparer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

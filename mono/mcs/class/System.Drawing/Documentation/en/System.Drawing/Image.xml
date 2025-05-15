@@ -52,8 +52,12 @@
 
         
 
+        
+
          on a Windows Form, you should use one of the <see
          cref="M:System.Drawing.Graphics.DrawImage(System.Drawing.Image,System.Drawing.Point)" />
+
+        
 
         
 
@@ -72,8 +76,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Drawing.Imaging.Metafile" />
+
+        
 
         
 
@@ -103,6 +111,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -111,6 +121,8 @@
           <para
             >The <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -143,8 +155,12 @@
 
             
 
+            
+
              method allows the resources used by this <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -160,8 +176,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -174,8 +194,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -188,6 +212,8 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Drawing.Image" />
 
@@ -195,8 +221,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -211,10 +241,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -231,6 +265,8 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.Drawing.Image" />
 
@@ -238,8 +274,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Drawing.Image" />
+
+              
 
               
 
@@ -254,6 +294,8 @@
           <para
             >Releases all resources used by this <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -293,6 +335,8 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.Drawing.Image" />
 
@@ -300,8 +344,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Drawing.Image" />
+
+              
 
               
 
@@ -322,11 +370,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -369,6 +421,8 @@
           <para
             >The integer value returned from this method will correspond to a sum of <see
              cref="T:System.Drawing.Imaging.ImageFlags" />
+
+            
 
             
 
@@ -508,8 +562,12 @@
 
             
 
+            
+
              property for an image returned 77960, the <see
              cref="T:System.Drawing.Imaging.ImageFlags" />
+
+            
 
             
 
@@ -522,8 +580,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Drawing.Imaging.ImageFlags.HasRealDpi" />
+
+            
 
             
 
@@ -536,6 +598,8 @@
 
             
 
+            
+
             , <see
              cref="F:System.Drawing.Imaging.ImageFlags.ColorSpaceYcbcr" />
 
@@ -543,8 +607,12 @@
 
             
 
+            
+
             , and <see
              cref="F:System.Drawing.Imaging.ImageFlags.PartiallyScalable" />
+
+            
 
             
 
@@ -558,6 +626,8 @@
           <para
             >Gets attribute flags for the pixel data of this <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -597,6 +667,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -605,6 +677,8 @@
           <para
             >Gets an array of GUIDs that represent the dimensions of frames within this <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -665,11 +739,15 @@
 
             
 
+            
+
              is disposed.</para
           >
           <para
             >If the file does not have a valid image format or if ndptecgdiplus does not support the pixel format of the file, this method throws an <see
              cref="T:System.OutOfMemoryException" />
+
+            
 
             
 
@@ -681,6 +759,8 @@
             <para
               >The <see
                cref="T:System.Drawing.Image" />
+
+              
 
               
 
@@ -700,6 +780,8 @@
 
             
 
+            
+
              from the specified file.</para
           >
         </summary>
@@ -708,6 +790,8 @@
           <para
             >The <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -723,8 +807,12 @@
 
           
 
+          
+
           A string that contains the name of the file from which to create the <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -780,11 +868,15 @@
 
             
 
+            
+
              exception.</para
           >
           <para
             >The file remains locked until the <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -800,8 +892,12 @@
 
             
 
+            
+
              parameter specifies whether the new <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -813,6 +909,8 @@
             <para
               >The <see
                cref="T:System.Drawing.Image" />
+
+              
 
               
 
@@ -832,6 +930,8 @@
 
             
 
+            
+
              from the specified file using embedded color management information in that file.</para
           >
         </summary>
@@ -840,6 +940,8 @@
           <para
             >The <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -855,8 +957,12 @@
 
           
 
+          
+
           A string that contains the name of the file from which to create the <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -866,6 +972,8 @@
         >
         <param name="useEmbeddedColorManagement">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -902,8 +1010,12 @@
 
             
 
+            
+
              method makes a copy of the ndptecgdi bitmap; so you can release the incoming ndptecgdi bitmap using the ndptecgdi DeleteObject method immediately after creating the new <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -922,6 +1034,8 @@
 
             
 
+            
+
              from a handle to a GDI bitmap.</para
           >
         </summary>
@@ -930,6 +1044,8 @@
           <para
             >The <see
              cref="T:System.Drawing.Bitmap" />
+
+            
 
             
 
@@ -945,8 +1061,12 @@
 
           
 
+          
+
           The ndptecgdi bitmap handle from which to create the <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -984,8 +1104,12 @@
 
             
 
+            
+
              method makes a copy of the ndptecgdi bitmap; so you can release the incoming ndptecgdi bitmap using the ndptecgdi DeleteObject method immediately after creating the new <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -1004,6 +1128,8 @@
 
             
 
+            
+
              from a handle to a GDI bitmap and a handle to a GDI palette.</para
           >
         </summary>
@@ -1012,6 +1138,8 @@
           <para
             >The <see
              cref="T:System.Drawing.Bitmap" />
+
+            
 
             
 
@@ -1027,8 +1155,12 @@
 
           
 
+          
+
           The ndptecgdi bitmap handle from which to create the <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -1043,8 +1175,12 @@
 
           
 
+          
+
           A handle to a ndptecgdi palette used to define the bitmap colors if the bitmap specified in the <paramref
            name="hBitmap" />
+
+          
 
           
 
@@ -1081,6 +1217,8 @@
 
             
 
+            
+
             .</para
           >
           <para>The stream is reset to zero if this method is called successively with the same stream.</para>
@@ -1088,6 +1226,8 @@
             <para
               >The <see
                cref="T:System.Drawing.Image" />
+
+              
 
               
 
@@ -1107,6 +1247,8 @@
 
             
 
+            
+
              from the specified data stream.</para
           >
         </summary>
@@ -1115,6 +1257,8 @@
           <para
             >The <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -1130,6 +1274,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Stream" />
 
@@ -1137,8 +1283,12 @@
 
           
 
+          
+
            that contains the data for this <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -1176,11 +1326,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <paramref
              name="useEmbeddedColorManagement" />
+
+            
 
             
 
@@ -1193,6 +1347,8 @@
 
             
 
+            
+
              applies color correction according to color management information that is embedded in the data stream. Embedded information can include International Color Consortium (ICC) profiles, gamma values, and chromaticity information.</para
           >
           <para>The stream is reset to zero if this method is called successively with the same stream.</para>
@@ -1200,6 +1356,8 @@
             <para
               >The <see
                cref="T:System.Drawing.Image" />
+
+              
 
               
 
@@ -1219,6 +1377,8 @@
 
             
 
+            
+
              from the specified data stream, optionally using embedded color management information in that stream.</para
           >
         </summary>
@@ -1227,6 +1387,8 @@
           <para
             >The <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -1242,8 +1404,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -1256,10 +1422,14 @@
 
           
 
+          
+
           . </param
         >
         <param name="useEmbeddedColorManagement">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1302,8 +1472,12 @@
 
             
 
+            
+
              parameter specifies whether the new <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -1315,6 +1489,8 @@
             <para
               >The <see
                cref="T:System.Drawing.Image" />
+
+              
 
               
 
@@ -1334,6 +1510,8 @@
 
             
 
+            
+
              from the specified data stream, optionally using embedded color management information and validating the image data.</para
           >
         </summary>
@@ -1342,6 +1520,8 @@
           <para
             >The <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -1357,6 +1537,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Stream" />
 
@@ -1364,8 +1546,12 @@
 
           
 
+          
+
            that contains the data for this <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -1380,10 +1566,14 @@
 
           
 
+          
+
           true to use color management information embedded in the data stream; otherwise, false. </param
         >
         <param name="validateImageData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1444,8 +1634,12 @@
 
             
 
+            
+
              that contains an array of <see
              cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+            
 
             
 
@@ -1458,11 +1652,15 @@
 
             
 
+            
+
              contains information about one of the parameters supported by the specified image encoder.</para
           >
         </returns>
         <param name="encoder">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1501,6 +1699,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1519,8 +1719,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Imaging.FrameDimension" />
+
+          
 
           
 
@@ -1563,8 +1767,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Imaging.PixelFormat" />
+
+          
 
           
 
@@ -1601,11 +1809,15 @@
 
             
 
+            
+
             . </para
           >
           <para
             >It is difficult to set property items, because the <see
              cref="T:System.Drawing.Imaging.PropertyItem" />
+
+            
 
             
 
@@ -1618,8 +1830,12 @@
 
             
 
+            
+
              by retrieving the <see
              cref="P:System.Drawing.Image.PropertyItems" />
+
+            
 
             
 
@@ -1632,8 +1848,12 @@
 
             
 
+            
+
              method of an <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -1646,8 +1866,12 @@
 
             
 
+            
+
              and pass it to <see
              cref="M:System.Drawing.Image.SetPropertyItem(System.Drawing.Imaging.PropertyItem)" />
+
+            
 
             
 
@@ -1666,6 +1890,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1679,11 +1905,15 @@
 
             
 
+            
+
              this method gets.</para
           >
         </returns>
         <param name="propid">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1745,6 +1975,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1784,6 +2016,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1817,6 +2051,8 @@
 
             
 
+            
+
              contains alpha information.</para
           >
         </summary>
@@ -1825,6 +2061,8 @@
           <para
             >true if <paramref
              name="pixfmt" />
+
+            
 
             
 
@@ -1840,8 +2078,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Imaging.PixelFormat" />
+
+          
 
           
 
@@ -1886,6 +2128,8 @@
 
             
 
+            
+
              is canonical; otherwise, false.</para
           >
         </returns>
@@ -1896,8 +2140,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Imaging.PixelFormat" />
+
+          
 
           
 
@@ -1939,6 +2187,8 @@
 
             
 
+            
+
              is extended; otherwise, false.</para
           >
         </returns>
@@ -1949,8 +2199,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Imaging.PixelFormat" />
+
+          
 
           
 
@@ -1986,8 +2240,12 @@
 
             
 
+            
+
              object used by this <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -2001,6 +2259,8 @@
           <para
             >Gets or sets the color palette used for this <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -2067,6 +2327,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2094,6 +2356,8 @@
 
             
 
+            
+
              property returns an empty array (that is, an array of length zero).</para
           >
         </remarks>
@@ -2102,6 +2366,8 @@
           <para
             >Gets IDs of the property items stored in this <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -2142,6 +2408,8 @@
 
             
 
+            
+
              returns an empty array (that is, an array of length zero).</para
           >
         </remarks>
@@ -2150,6 +2418,8 @@
           <para
             >Gets all the property items (pieces of metadata) stored in this <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -2191,6 +2461,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2220,8 +2492,12 @@
 
             
 
+            
+
              class has no public constructors. One way to work around this restriction is to obtain a <see
              cref="T:System.Drawing.Imaging.PropertyItem" />
+
+            
 
             
 
@@ -2234,8 +2510,12 @@
 
             
 
+            
+
              property value or calling the <see
              cref="M:System.Drawing.Image.GetPropertyItem(System.Int32)" />
+
+            
 
             
 
@@ -2248,6 +2528,8 @@
 
             
 
+            
+
              that already has property items. Then you can set the fields of the <see
              cref="T:System.Drawing.Imaging.PropertyItem" />
 
@@ -2255,8 +2537,12 @@
 
             
 
+            
+
              and pass it to <see
              cref="M:System.Drawing.Image.SetPropertyItem(System.Drawing.Imaging.PropertyItem)" />
+
+            
 
             
 
@@ -2275,11 +2561,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="propid">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2316,6 +2606,8 @@
 
             
 
+            
+
              method rotates the image clockwise. </para
           >
           <para>If you wish to draw on an image once it has been rotated, you should always retrieve a new graphics object from the image, otherwise an exception could occur.</para>
@@ -2325,6 +2617,8 @@
           <para
             >Rotates, flips, or rotates and flips the <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -2340,8 +2634,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.RotateFlipType" />
+
+          
 
           
 
@@ -2375,6 +2673,8 @@
 
             
 
+            
+
              method to save a graphic image as a Windows Metafile Format (WMF) or Enhanced Metafile Format (EMF) file, the resulting file is saved as a Portable Network Graphics (PNG) file. This behavior occurs because the ndptecgdiplus component of the dnprdnshort does not have an encoder that you can use to save files as .wmf or .emf files.</para
           >
           <para>Saving the image to the same file it was constructed from is not allowed and throws an exception.</para>
@@ -2384,6 +2684,8 @@
           <para
             >Saves this <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -2399,8 +2701,12 @@
 
           
 
+          
+
           A string that contains the name of the file to which to save this <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -2444,8 +2750,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -2460,8 +2770,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Drawing.Imaging.ImageFormat" />
+
+          
 
           
 
@@ -2500,6 +2814,8 @@
 
             
 
+            
+
              to the specified file in the specified format.</para
           >
         </summary>
@@ -2510,8 +2826,12 @@
 
           
 
+          
+
           A string that contains the name of the file to which to save this <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -2526,6 +2846,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Imaging.ImageFormat" />
 
@@ -2533,8 +2855,12 @@
 
           
 
+          
+
            for this <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -2579,8 +2905,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -2595,6 +2925,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Imaging.ImageCodecInfo" />
 
@@ -2602,8 +2934,12 @@
 
           
 
+          
+
            for this <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -2618,8 +2954,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Drawing.Imaging.EncoderParameters" />
+
+          
 
           
 
@@ -2662,6 +3002,8 @@
 
             
 
+            
+
              to the specified file, with the specified encoder and image-encoder parameters.</para
           >
         </summary>
@@ -2672,8 +3014,12 @@
 
           
 
+          
+
           A string that contains the name of the file to which to save this <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -2688,6 +3034,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Imaging.ImageCodecInfo" />
 
@@ -2695,8 +3043,12 @@
 
           
 
+          
+
            for this <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -2711,6 +3063,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Drawing.Imaging.EncoderParameters" />
 
@@ -2718,8 +3072,12 @@
 
           
 
+          
+
            to use for this <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -2757,6 +3115,8 @@
 
             
 
+            
+
              method. Use this method to save selected frames from a multiple-frame image to another multiple-frame image.</para
           >
         </summary>
@@ -2771,8 +3131,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Drawing.Imaging.EncoderParameters" />
+
+          
 
           
 
@@ -2811,6 +3175,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -2825,8 +3191,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -2841,8 +3211,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Drawing.Imaging.EncoderParameters" />
+
+          
 
           
 
@@ -2880,8 +3254,12 @@
 
             
 
+            
+
              parameter are properties of the <see
              cref="T:System.Drawing.Imaging.FrameDimension" />
+
+            
 
             
 
@@ -2892,6 +3270,8 @@
           <para
             >Calling this method causes all changes made to the previous frame to be discarded. Before selecting another frame, save all changes made to the current frame, including changes to pixel values and properties. If the call to the <see
              cref="M:System.Drawing.Image.SelectActiveFrame(System.Drawing.Imaging.FrameDimension,System.Int32)" />
+
+            
 
             
 
@@ -2915,8 +3295,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Imaging.FrameDimension" />
+
+          
 
           
 
@@ -2926,6 +3310,8 @@
         >
         <param name="frameIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2962,11 +3348,15 @@
 
             
 
+            
+
              with the message "Property not supported." If the image format supports property items but does not support the particular property you are attempting to set, this method ignores the attempt but does not throw an exception.</para
           >
           <para
             >It is difficult to set property items, because the <see
              cref="T:System.Drawing.Imaging.PropertyItem" />
+
+            
 
             
 
@@ -2979,8 +3369,12 @@
 
             
 
+            
+
              by retrieving the <see
              cref="P:System.Drawing.Image.PropertyItems" />
+
+            
 
             
 
@@ -2993,8 +3387,12 @@
 
             
 
+            
+
              method of an <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -3007,8 +3405,12 @@
 
             
 
+            
+
              and pass it to <see
              cref="M:System.Drawing.Image.SetPropertyItem(System.Drawing.Imaging.PropertyItem)" />
+
+            
 
             
 
@@ -3022,6 +3424,8 @@
           <para
             >Stores a property item (piece of metadata) in this <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -3041,8 +3445,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Imaging.PropertyItem" />
+
+          
 
           
 
@@ -3104,6 +3512,8 @@
 
             
 
+            
+
              with the data needed to serialize the target object.</para
           >
         </summary>
@@ -3114,8 +3524,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -3130,8 +3544,12 @@
 
           
 
+          
+
           The destination (see <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -3192,6 +3610,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3215,6 +3635,8 @@
           <para
             >Gets the width, in pixels, of this <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 

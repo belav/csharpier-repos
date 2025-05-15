@@ -19,8 +19,12 @@
 
         
 
+        
+
          cannot be set on non-<see
          cref="T:System.DateTime" />
+
+        
 
         
 
@@ -33,8 +37,12 @@
 
         
 
+        
+
          property with the default value <see
          cref="F:System.Data.DataSetDateTime.UnspecifiedLocal" />
+
+        
 
         
 
@@ -47,8 +55,12 @@
 
         
 
+        
+
          columns is permitted. Modifying the column data type from <see
          cref="T:System.DateTime" />
+
+        
 
         
 
@@ -61,8 +73,12 @@
 
         
 
+        
+
          to the default value <see
          cref="F:System.Data.DataSetDateTime.UnspecifiedLocal" />
+
+        
 
         
 
@@ -78,8 +94,12 @@
 
         
 
+        
+
          columns with matching <see
          cref="P:System.Data.DataColumn.DateTimeMode" />
+
+        
 
         
 
@@ -92,6 +112,8 @@
 
         
 
+        
+
          and <see
          cref="F:System.Data.DataSetDateTime.UnspecifiedLocal" />
 
@@ -99,8 +121,12 @@
 
         
 
+        
+
         . It is permitted to have a relation or a ForeignKeyConstraint between two DateTime columns with one in Unspecified and other in UnspecifiedLocal <see
          cref="P:System.Data.DataColumn.DateTimeMode" />
+
+        
 
         
 
@@ -119,8 +145,12 @@
 
         
 
+        
+
          columns in a <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -149,8 +179,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Data.DataSetDateTime.Unspecified" />
+
+            
 
             
 
@@ -182,6 +216,8 @@
 
             
 
+            
+
              or <see
              cref="F:System.Data.DataSetDateTime.Utc" />
 
@@ -189,8 +225,12 @@
 
             
 
+            
+
              is assigned to a column in this mode, it is first converted into <see
              cref="F:System.Data.DataSetDateTime.Unspecified" />
+
+            
 
             
 
@@ -222,8 +262,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Data.DataSetDateTime.Utc" />
+
+            
 
             
 
@@ -236,8 +280,12 @@
 
             
 
+            
+
             . Serialization in this mode causes offset. This is the default behavior and is backward compatible. This option should be thought of as being Unspecified in storage but applying an offset that is similar to <see
              cref="F:System.Data.DataSetDateTime.Local" />
+
+            
 
             
 
@@ -269,8 +317,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Data.DataSetDateTime.Unspecified" />
+
+            
 
             
 

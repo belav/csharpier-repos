@@ -38,8 +38,12 @@
 
         
 
+        
+
          indicates the category to associate the associated property or event with, when listing properties or events in a <see
          cref="T:System.Windows.Forms.PropertyGrid" />
+
+        
 
         
 
@@ -52,8 +56,12 @@
 
         
 
+        
+
          mode. If a <see
          cref="T:System.ComponentModel.CategoryAttribute" />
+
+        
 
         
 
@@ -66,6 +74,8 @@
 
         
 
+        
+
          associates it with the <ui
         >Misc</ui>
 
@@ -73,8 +83,12 @@
 
         
 
+        
+
          category. A new category can be created for any name by specifying the name of the category in the constructor for the <see
          cref="T:System.ComponentModel.CategoryAttribute" />
+
+        
 
         
 
@@ -90,8 +104,12 @@
 
         
 
+        
+
          property indicates the name of the category that the attribute represents. The <see
          cref="P:System.ComponentModel.CategoryAttribute.Category" />
+
+        
 
         
 
@@ -105,6 +123,8 @@
       <para
         >Specifies the name of the category in which to group the property or event when displayed in a <see
          cref="T:System.Windows.Forms.PropertyGrid" />
+
+        
 
         
 
@@ -136,6 +156,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.CategoryAttribute" />
+
+            
 
             
 
@@ -173,8 +195,12 @@
 
             
 
+            
+
              parameter is one of the predefined category names, the name will be automatically localized by the <see
              cref="P:System.ComponentModel.CategoryAttribute.Category" />
+
+            
 
             
 
@@ -185,6 +211,8 @@
           <para
             >If the name you provide is not a predefined category name, and you do not override the <see
              cref="M:System.ComponentModel.CategoryAttribute.GetLocalizedString(System.String)" />
+
+            
 
             
 
@@ -203,11 +231,15 @@
 
             
 
+            
+
              class using the specified category name.</para
           >
         </summary>
         <param name="category">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -243,6 +275,8 @@
           <para
             >Gets a <see
              cref="T:System.ComponentModel.CategoryAttribute" />
+
+            
 
             
 
@@ -284,6 +318,8 @@
 
             
 
+            
+
              representing the Appearance category.</para
           >
         </summary>
@@ -314,6 +350,8 @@
           <para
             >Gets a <see
              cref="T:System.ComponentModel.CategoryAttribute" />
+
+            
 
             
 
@@ -355,6 +393,8 @@
 
             
 
+            
+
              representing the Behavior category.</para
           >
         </summary>
@@ -379,6 +419,8 @@
           <para
             >This property calls <see
              cref="M:System.ComponentModel.CategoryAttribute.GetLocalizedString(System.String)" />
+
+            
 
             
 
@@ -424,6 +466,8 @@
 
             
 
+            
+
              representing the Data category.</para
           >
         </summary>
@@ -455,6 +499,8 @@
           <para
             >Gets a <see
              cref="T:System.ComponentModel.CategoryAttribute" />
+
+            
 
             
 
@@ -496,6 +542,8 @@
 
             
 
+            
+
              representing the Design category.</para
           >
         </summary>
@@ -527,6 +575,8 @@
           <para
             >Gets a <see
              cref="T:System.ComponentModel.CategoryAttribute" />
+
+            
 
             
 
@@ -567,6 +617,8 @@
 
             
 
+            
+
             ..</para
           >
         </summary>
@@ -576,6 +628,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -616,6 +670,8 @@
 
             
 
+            
+
              representing the Focus category.</para
           >
         </summary>
@@ -647,6 +703,8 @@
           <para
             >Gets a <see
              cref="T:System.ComponentModel.CategoryAttribute" />
+
+            
 
             
 
@@ -717,6 +775,8 @@
 
             
 
+            
+
              property calls this method the first time it is accessed to look up the localized name for the specified category.</para
           >
         </remarks>
@@ -730,6 +790,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -798,6 +860,8 @@
 
             
 
+            
+
              representing the Key category.</para
           >
         </summary>
@@ -829,6 +893,8 @@
           <para
             >Gets a <see
              cref="T:System.ComponentModel.CategoryAttribute" />
+
+            
 
             
 
@@ -870,6 +936,8 @@
 
             
 
+            
+
              representing the Mouse category.</para
           >
         </summary>
@@ -901,6 +969,8 @@
           <para
             >Gets a <see
              cref="T:System.ComponentModel.CategoryAttribute" />
+
+            
 
             
 

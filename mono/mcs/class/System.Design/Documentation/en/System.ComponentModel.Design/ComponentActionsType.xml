@@ -36,8 +36,12 @@
 
               
 
+              
+
                that is associated with the component overrides the <see
                cref="P:System.ComponentModel.Design.ComponentDesigner.ActionLists" />
+
+              
 
               
 
@@ -60,6 +64,8 @@
 
               
 
+              
+
                method explicitly associates the specified smart tags with the specified component.</para
             >
           </description>
@@ -73,8 +79,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
+
+        
 
         
 

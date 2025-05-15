@@ -47,6 +47,8 @@
 
         
 
+        
+
          and related classes.</para
       >
     </remarks>
@@ -80,8 +82,12 @@
 
                 
 
+                
+
                  = <see
                  cref="F:System.Net.HttpStatusCode.OK" />
+
+                
 
                 
 
@@ -98,12 +104,16 @@
 
                 
 
+                
+
                  is set to null.</para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.ServiceModel.Channels.HttpResponseMessageProperty.SuppressEntityBody" />
+
+                
 
                 
 
@@ -119,6 +129,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.HttpResponseMessageProperty" />
+
+            
 
             
 
@@ -177,6 +189,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -205,6 +219,8 @@
           <para
             >This property has one of the values in the <see
              cref="T:System.Net.HttpStatusCode" />
+
+            
 
             
 
@@ -263,6 +279,8 @@
 
             
 
+            
+
              associated with this response has this property set to true.</para
           >
         </remarks>
@@ -300,6 +318,8 @@
           <para
             >A newly created copy of type <see
              cref="T:System.ServiceModel.Channels.IMessageProperty" />
+
+            
 
             
 

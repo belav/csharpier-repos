@@ -32,6 +32,8 @@
 
         
 
+        
+
          objects.</para
       >
     </summary>
@@ -49,6 +51,8 @@
           <para
             >Initializes an instance of the <see
              cref="T:System.Web.Services.Description.BasicProfileViolationCollection" />
+
+            
 
             
 
@@ -87,6 +91,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -95,6 +101,8 @@
           <para
             >true if the <see
              cref="T:System.Web.Services.Description.BasicProfileViolation" />
+
+            
 
             
 
@@ -110,8 +118,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.BasicProfileViolation" />
+
+          
 
           
 
@@ -151,8 +163,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Web.Services.Description.BasicProfileViolation" />
+
+          
 
           
 
@@ -167,8 +183,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -206,6 +226,8 @@
 
             
 
+            
+
              in the collection.</para
           >
         </summary>
@@ -214,6 +236,8 @@
           <para
             >The zero-based index of the specified <see
              cref="T:System.Web.Services.Description.BasicProfileViolation" />
+
+            
 
             
 
@@ -229,8 +253,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.BasicProfileViolation" />
+
+          
 
           
 
@@ -269,6 +297,8 @@
 
             
 
+            
+
              to the collection at the specified location.</para
           >
         </summary>
@@ -279,8 +309,12 @@
 
           
 
+          
+
           The zero-based index in the collection at which to insert the <paramref
            name="violation" />
+
+          
 
           
 
@@ -295,8 +329,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.BasicProfileViolation" />
+
+          
 
           
 
@@ -357,6 +395,8 @@
 
             
 
+            
+
              from the collection.</para
           >
         </summary>
@@ -367,8 +407,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.BasicProfileViolation" />
+
+          
 
           
 
@@ -420,8 +464,12 @@
 
             
 
+            
+
              representation of the <see
              cref="T:System.Web.Services.Description.BasicProfileViolation" />
+
+            
 
             
 
@@ -440,8 +488,12 @@
 
             
 
+            
+
              representation of the <see
              cref="T:System.Web.Services.Description.BasicProfileViolation" />
+
+            
 
             
 

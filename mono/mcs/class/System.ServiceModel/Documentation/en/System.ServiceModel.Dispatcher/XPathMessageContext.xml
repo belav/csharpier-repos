@@ -27,8 +27,12 @@
 
         
 
+        
+
          class in the same way that <see
          cref="T:System.Xml.XPath.XPathNavigator" />
+
+        
 
         
 
@@ -41,6 +45,8 @@
 
         
 
+        
+
          is an abstract class that allows developers to implement custom XPath function libraries and declare XPath variables. <see
          cref="T:System.Xml.Xsl.XsltContext" />
 
@@ -48,8 +54,12 @@
 
         
 
+        
+
          is an <see
          cref="T:System.Xml.XmlNamespaceManager" />
+
+        
 
         
 
@@ -65,8 +75,12 @@
 
         
 
+        
+
          named <see
          cref="T:System.ServiceModel.Dispatcher.XPathMessageContext" />
+
+        
 
         
 
@@ -79,8 +93,12 @@
 
         
 
+        
+
          defines custom functions that can be used in XPath expressions and it declares several common namespace prefix mappings. The following table lists the custom functions defined by <see
          cref="T:System.ServiceModel.Dispatcher.XPathMessageContext" />
+
+        
 
         
 
@@ -133,8 +151,7 @@
         </item>
         <item>
           <term>
-            <para
->relatesTo</para>
+            <para>relatesTo</para>
           </term>
           <description>
             <para>Returns the value of the WS-Addressing RelatesTo header, regardless of version (August2004 or WSA 1.0).</para>
@@ -142,8 +159,7 @@
         </item>
         <item>
           <term>
-            <para
->replyTo</para>
+            <para>replyTo</para>
           </term>
           <description>
             <para>Returns the value of the WS-Addressing ReplyTo header, regardless of version (August2004 or WSA 1.0).</para>
@@ -258,6 +274,8 @@
 
               
 
+              
+
               .</para
             >
           </description>
@@ -266,6 +284,8 @@
       <para
         >The following table lists the default namespaces and namespace prefixes that are declared by <see
          cref="T:System.ServiceModel.Dispatcher.XPathMessageContext" />
+
+        
 
         
 
@@ -371,6 +391,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -404,8 +426,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -418,8 +444,12 @@
 
             
 
+            
+
              class internally to store attribute and element names. When an element or attribute name occurs multiple times in an XML document, it is stored only once in the <see
              cref="T:System.Xml.NameTable" />
+
+            
 
             
 
@@ -438,8 +468,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Xml.NameTable" />
+
+            
 
             
 
@@ -526,6 +560,8 @@
 
           
 
+          
+
           The white space node that is to be preserved or stripped in the current context.</param
         >
       </Docs>
@@ -565,6 +601,8 @@
 
             
 
+            
+
              is used at execution time to evaluate the function.</para
           >
         </remarks>
@@ -576,6 +614,8 @@
               cref="ms-help://MS.MSSDK.1033/MS.WinFXSDK.1033/cpref37/html/T_System_Xml_Xsl_IXsltContextFunction.htm"
               >T:System.Xml.Xsl.IXsltContextFunction</see
             >
+
+            
 
             
 
@@ -597,11 +637,15 @@
 
             
 
+            
+
              that represents the function.</para
           >
         </returns>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -616,10 +660,14 @@
 
           
 
+          
+
           The name of the function.</param
         >
         <param name="argTypes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -660,6 +708,8 @@
 
             
 
+            
+
              is used at execution time to get the value of the variable.</para
           >
         </remarks>
@@ -668,6 +718,8 @@
           <para
             >Resolves a variable reference and returns an <see
              cref="T:System.Xml.Xsl.IXsltContextVariable" />
+
+            
 
             
 
@@ -686,6 +738,8 @@
 
             
 
+            
+
              that represents the variable at runtime.</para
           >
         </returns>
@@ -696,10 +750,14 @@
 
           
 
+          
+
           The prefix of the variable as it appears in the XPath expression.</param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

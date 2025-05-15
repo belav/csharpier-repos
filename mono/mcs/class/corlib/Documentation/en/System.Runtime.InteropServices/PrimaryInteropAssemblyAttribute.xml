@@ -47,6 +47,8 @@
 
         
 
+        
+
          typically applies it for you when it imports a type library.</para
       >
       <para>An interop assembly contains metadata that describes existing COM types, which are often already described in a COM type library. Tlbimp.exe produces interop assemblies from COM type libraries. Interop assemblies typically only contain metadata (no code). Primary interop assemblies are provided by the same publisher as the type library they describe, and provide the official definitions of the types defined with that type library. Primary interop assemblies are always signed by their publisher to ensure uniqueness.</para>
@@ -64,6 +66,8 @@
 
             
 
+            
+
              at design time.</para
           >
         </item>
@@ -76,8 +80,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Runtime.InteropServices.PrimaryInteropAssemblyAttribute" />
+
+        
 
         
 
@@ -90,6 +98,8 @@
 
         
 
+        
+
          on the primary interop assembly identifies the LIBID of the type library and the <see
          cref="T:System.Runtime.InteropServices.PrimaryInteropAssemblyAttribute" />
 
@@ -97,8 +107,12 @@
 
         
 
+        
+
          identifies the version of the particular type library for which this assembly is the primary interop assembly. The <see
          cref="T:System.Runtime.InteropServices.PrimaryInteropAssemblyAttribute" />
+
+        
 
         
 
@@ -118,12 +132,16 @@
 
         
 
+        
+
         . For a detailed description of the type library importing process, see <format
          type="text/html">
           <a href="BF3F90C5-4770-4AB8-895C-3BA1055CC958"
             >[&lt;topic://cpcontypelibrarytoassemblyconversionsummary&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -169,6 +187,8 @@
 
             
 
+            
+
              can appear multiple times if the assembly is the primary interop assembly for multiple versions of the same type library.</para
           >
         </remarks>
@@ -177,6 +197,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.InteropServices.PrimaryInteropAssemblyAttribute" />
+
+            
 
             
 
@@ -192,10 +214,14 @@
 
           
 
+          
+
           The major version of the type library for which this assembly is the primary interop assembly. </param
         >
         <param name="minor">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

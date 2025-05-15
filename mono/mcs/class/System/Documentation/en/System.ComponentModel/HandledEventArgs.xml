@@ -26,11 +26,15 @@
 
         
 
+        
+
          property is set in an event handler to indicate that the system should perform no further processing. </para
       >
       <para
         >This class is a base class for types such as the <see
          cref="T:System.Windows.Forms.DataGridViewCellPaintingEventArgs" />
+
+        
 
         
 
@@ -43,6 +47,8 @@
 
         
 
+        
+
         , <see
          cref="T:System.Windows.Forms.DataGridViewRowHeightInfoPushedEventArgs" />
 
@@ -50,8 +56,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Windows.Forms.DataGridViewSortCompareEventArgs" />
+
+        
 
         
 
@@ -91,8 +101,12 @@
 
             
 
+            
+
              class with a default <see
              cref="P:System.ComponentModel.HandledEventArgs.Handled" />
+
+            
 
             
 
@@ -130,8 +144,12 @@
 
             
 
+            
+
              class with the specified default value for the <see
              cref="P:System.ComponentModel.HandledEventArgs.Handled" />
+
+            
 
             
 
@@ -147,8 +165,12 @@
 
           
 
+          
+
           The default value for the <see
            cref="P:System.ComponentModel.HandledEventArgs.Handled" />
+
+          
 
           
 

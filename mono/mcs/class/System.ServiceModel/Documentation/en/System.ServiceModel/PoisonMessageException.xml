@@ -44,6 +44,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -70,6 +72,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.PoisonMessageException" />
+
+            
 
             
 
@@ -109,6 +113,8 @@
 
             
 
+            
+
              class with serialized data.</para
           >
         </summary>
@@ -119,8 +125,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -135,8 +145,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -172,6 +186,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.PoisonMessageException" />
+
+            
 
             
 

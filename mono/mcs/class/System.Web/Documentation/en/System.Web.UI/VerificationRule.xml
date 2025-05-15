@@ -20,8 +20,12 @@
 
         
 
+        
+
         , you may define how the conditional expression, defined by the <see
          cref="P:System.Web.UI.VerificationAttribute.ConditionalProperty" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
          properties, is used by specifying one of the <see
          cref="T:System.Web.UI.VerificationRule" />
+
+        
 
         
 
@@ -48,6 +56,8 @@
 
         
 
+        
+
          no <see
          cref="T:System.Web.UI.VerificationRule" />
 
@@ -55,8 +65,12 @@
 
         
 
+        
+
          is specified, the default value of <see
          cref="F:System.Web.UI.VerificationRule.Required" />
+
+        
 
         
 
@@ -72,8 +86,12 @@
 
         
 
+        
+
          and the right side is the <see
          cref="P:System.Web.UI.VerificationAttribute.ConditionalValue" />
+
+        
 
         
 
@@ -86,6 +104,8 @@
 
         
 
+        
+
          specifies how the <see
          cref="P:System.Web.UI.VerificationAttribute.ConditionalProperty" />
 
@@ -93,8 +113,12 @@
 
         
 
+        
+
          is to be compared to the <see
          cref="P:System.Web.UI.VerificationAttribute.ConditionalValue" />
+
+        
 
         
 
@@ -108,6 +132,8 @@
       <para
         >Specifies how conditional expressions defined by an <see
          cref="T:System.Web.UI.VerificationAttribute" />
+
+        
 
         
 
@@ -131,6 +157,8 @@
           <para
             >The conditional expression specified in an <see
              cref="T:System.Web.UI.VerificationAttribute" />
+
+            
 
             
 
@@ -162,6 +190,8 @@
 
             
 
+            
+
              instance is prohibited.</para
           >
         </summary>
@@ -183,6 +213,8 @@
           <para
             >The conditional expression specified in an <see
              cref="T:System.Web.UI.VerificationAttribute" />
+
+            
 
             
 

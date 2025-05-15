@@ -46,6 +46,8 @@
 
         
 
+        
+
          for more information.</para
       >
     </remarks>
@@ -76,6 +78,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Remoting.Channels.ServerChannelSinkStack" />
+
+            
 
             
 
@@ -120,6 +124,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -134,6 +140,8 @@
 
           
 
+          
+
           The message to be serialized onto the requested stream.</param
         >
         <param name="headers">
@@ -143,10 +151,14 @@
 
           
 
+          
+
           The headers retrieved from the server response stream. </param
         >
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -189,8 +201,12 @@
 
             
 
+            
+
              called with the <paramref
              name="msg" />
+
+            
 
             
 
@@ -203,8 +219,12 @@
 
             
 
+            
+
              parameters (<see
              cref="M:System.Runtime.Remoting.Channels.IServerChannelSink.GetResponseStream(System.Runtime.Remoting.Channels.IServerResponseChannelSinkStack,System.Object,System.Runtime.Remoting.Messaging.IMessage,System.Runtime.Remoting.Channels.ITransportHeaders)" />
+
+            
 
             
 
@@ -217,8 +237,12 @@
 
             
 
+            
+
             , <paramref
              name="headers" />
+
+            
 
             
 
@@ -237,6 +261,8 @@
 
             
 
+            
+
              onto which the specified message is to be serialized.</para
           >
         </summary>
@@ -245,6 +271,8 @@
           <para
             >The <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -260,10 +288,14 @@
 
           
 
+          
+
           The message to be serialized onto the requested stream. </param
         >
         <param name="headers">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -311,6 +343,8 @@
 
           
 
+          
+
           The sink to remove and return from the sink stack. </param
         >
       </Docs>
@@ -348,6 +382,8 @@
 
             
 
+            
+
              parameter is returned in the <paramref
              name="state" />
 
@@ -355,8 +391,12 @@
 
             
 
+            
+
              parameter of the <see
              cref="M:System.Runtime.Remoting.Channels.IServerChannelSink.AsyncProcessResponse(System.Runtime.Remoting.Channels.IServerResponseChannelSinkStack,System.Object,System.Runtime.Remoting.Messaging.IMessage,System.Runtime.Remoting.Channels.ITransportHeaders,System.IO.Stream)" />
+
+            
 
             
 
@@ -376,10 +416,14 @@
 
           
 
+          
+
           The sink to push onto the sink stack. </param
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -419,6 +463,8 @@
 
             
 
+            
+
              method is intended for use only by the .NET Framework remoting infrastructure. You should not call it directly.</para
           >
         </remarks>
@@ -432,11 +478,15 @@
 
             
 
+            
+
              delegate to handle a callback after a message has been dispatched asynchronously. </para
           >
         </summary>
         <param name="ar">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -479,6 +529,8 @@
 
             
 
+            
+
              method is intended for use only by the .NET Framework remoting infrastructure. You should not call it directly.</para
           >
         </remarks>
@@ -493,6 +545,8 @@
 
           
 
+          
+
           A server channel sink.</param
         >
         <param name="state">
@@ -502,8 +556,12 @@
 
           
 
+          
+
           The state associated with <paramref
            name="sink" />
+
+          
 
           
 
@@ -546,6 +604,8 @@
 
             
 
+            
+
              method is intended for use only by the .NET Framework remoting infrastructure. You should not call it directly.</para
           >
           <para>The method should be only called by a transport sink to complete an asynchronous dispatch.</para>
@@ -561,6 +621,8 @@
 
           
 
+          
+
           A server channel sink.</param
         >
         <param name="state">
@@ -570,8 +632,12 @@
 
           
 
+          
+
           The state associated with <paramref
            name="sink" />
+
+          
 
           
 

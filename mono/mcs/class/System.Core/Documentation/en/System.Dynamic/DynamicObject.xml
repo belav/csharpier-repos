@@ -33,8 +33,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Dynamic.DynamicObject.TryGetMember(System.Dynamic.GetMemberBinder,System.Object@)" />
+
+        
 
         
 
@@ -54,6 +58,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -61,6 +67,8 @@
          type="text/html">
           <a href="d6ff7f1e-b94f-4205-ab8d-5cfa91758724">Early and Late Binding</a>
         </format>
+
+        
 
         
 
@@ -84,8 +92,12 @@ Dim sampleObject As Object = New SampleDynamicObject()</code>
 
         
 
+        
+
          method, the dynamic language runtime (DLR) first uses the language binder to look for a static definition of a property in the class. If there is no such property, the DLR calls the <see
          cref="M:System.Dynamic.DynamicObject.TrySetMember(System.Dynamic.SetMemberBinder,System.Object)" />
+
+        
 
         
 
@@ -101,6 +113,8 @@ Dim sampleObject As Object = New SampleDynamicObject()</code>
 
         
 
+        
+
         , which enables you to share instances of the DynamicObject class between languages that support the DLR interoperability model. For example, you can create an instance of the DynamicObject class in C# and then pass it to an IronPython function. For more information, see <format
          type="text/html">
           <a href="f769a271-8aff-4bea-bfab-6160217ce23d">Dynamic Language Runtime Overview</a>
@@ -110,8 +124,12 @@ Dim sampleObject As Object = New SampleDynamicObject()</code>
 
         
 
+        
+
          and documentation on the <see
          cref="http://go.microsoft.com/fwlink/?LinkId=141028">CodePlex</see>
+
+        
 
         
 
@@ -128,11 +146,15 @@ Dim sampleObject As Object = New SampleDynamicObject()</code>
 
           
 
+          
+
            class.</para
         >
         <para
           >If you have a more advanced scenario in which you need to define how dynamic objects participate in the interoperability protocol, or you need to manage DLR fast dynamic dispatch caching, create your own implementation of the <see
            cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
+
+          
 
           
 
@@ -170,8 +192,12 @@ Dim sampleObject As Object = New SampleDynamicObject()</code>
 
             
 
+            
+
              class. To implement dynamic behavior, you have to inherit from the <see
              cref="T:System.Dynamic.DynamicObject" />
+
+            
 
             
 
@@ -187,12 +213,16 @@ Dim sampleObject As Object = New SampleDynamicObject()</code>
 
             
 
+            
+
              class, you must use the dynamic keyword. For more information, see <format
              type="text/html">
               <a href="3828989d-c967-4a51-b948-857ebc8fdf26"
                 >Using Type Dynamic (C# Programming Guide)</a
               >
             </format>
+
+            
 
             
 
@@ -210,6 +240,8 @@ Dim sampleObject As Object = New SampleDynamicObject()</code>
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -218,6 +250,8 @@ Dim sampleObject As Object = New SampleDynamicObject()</code>
           <para
             >Enables derived types to initialize a new instance of the <see
              cref="T:System.Dynamic.DynamicObject" />
+
+            
 
             
 
@@ -291,8 +325,12 @@ Dim sampleObject As Object = New SampleDynamicObject()</code>
 
             
 
+            
+
              that dispatches to the dynamic virtual methods. The object can be encapsulated inside another <see
              cref="T:System.Dynamic.DynamicMetaObject" />
+
+            
 
             
 
@@ -311,6 +349,8 @@ Dim sampleObject As Object = New SampleDynamicObject()</code>
 
             
 
+            
+
              type.</para
           >
         </returns>
@@ -321,8 +361,12 @@ Dim sampleObject As Object = New SampleDynamicObject()</code>
 
           
 
+          
+
           The expression that represents <see
            cref="T:System.Dynamic.DynamicMetaObject" />
+
+          
 
           
 
@@ -451,6 +495,8 @@ Dim sampleObject As Object = New SampleDynamicObject()</code>
 
             
 
+            
+
              class can override this method to specify how a value that has a specified index should be deleted. When the method is not overridden, the run-time binder of the language determines the behavior. (In most cases, a language-specific run-time exception is thrown.)</para
           >
           <para>C# and Visual Basic compilers never emit code to use this method because they do not support this kind of operation. This method is intended for languages that support syntax for deleting objects by index, such as del sampleObject[1,2] in Python.</para>
@@ -470,10 +516,14 @@ Dim sampleObject As Object = New SampleDynamicObject()</code>
 
           
 
+          
+
           Provides information about the deletion.</param
         >
         <param name="indexes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -513,6 +563,8 @@ Dim sampleObject As Object = New SampleDynamicObject()</code>
 
             
 
+            
+
              class can override this method to specify how an object member should be deleted. When this method is not overridden, the run-time binder of the language determines the behavior. (In most cases, a language-specific run-time exception is thrown.)</para
           >
           <para>C# and Visual Basic compilers never emit code to use this method because they do not support this kind of operation. This method is intended for languages that support syntax for deleting members, such as del sampleObject.SampleMember in Python.</para>
@@ -527,6 +579,8 @@ Dim sampleObject As Object = New SampleDynamicObject()</code>
         </returns>
         <param name="binder">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -686,11 +740,15 @@ Dim sampleObject As Object = New SampleDynamicObject()</code>
 
             
 
+            
+
              class can override this method to specify how operations that access an object by index should be performed for a dynamic object. When the method is not overridden, the run-time binder of the language determines the behavior. (In most cases, a language-specific run-time exception is thrown.)</para
           >
           <para
             >If this method is overridden, it is automatically invoked when you have an operation like sampleObject[3] = 10 in C# or sampleObject(3) = 10 in Visual Basic, where sampleObject is derived from the <see
              cref="T:System.Dynamic.DynamicObject" />
+
+            
 
             
 
@@ -704,6 +762,8 @@ Dim sampleObject As Object = New SampleDynamicObject()</code>
           <para
             >Provides the implementation for operations that set a value by index. Classes derived from the <see
              cref="T:System.Dynamic.DynamicObject" />
+
+            
 
             
 
@@ -723,10 +783,14 @@ Dim sampleObject As Object = New SampleDynamicObject()</code>
 
           
 
+          
+
           Provides information about the operation. </param
         >
         <param name="indexes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -739,8 +803,12 @@ Dim sampleObject As Object = New SampleDynamicObject()</code>
 
           
 
+          
+
            class, <paramref
            name="indexes[0]" />
+
+          
 
           
 
@@ -755,6 +823,8 @@ Dim sampleObject As Object = New SampleDynamicObject()</code>
 
           
 
+          
+
           The value to set to the object that has the specified index. For example, for the sampleObject[3] = 10 operation in C# (sampleObject(3) = 10 in Visual Basic), where sampleObject is derived from the <see
            cref="T:System.Dynamic.DynamicObject" />
 
@@ -762,8 +832,12 @@ Dim sampleObject As Object = New SampleDynamicObject()</code>
 
           
 
+          
+
            class, <paramref
            name="value" />
+
+          
 
           
 
@@ -804,11 +878,15 @@ Dim sampleObject As Object = New SampleDynamicObject()</code>
 
             
 
+            
+
              class can override this method to specify how operations that set a value to a member should be performed for a dynamic object. When the method is not overridden, the run-time binder of the language determines the behavior. (In most cases, a language-specific run-time exception is thrown.)</para
           >
           <para
             >This method is called when you have statements like sampleObject.SampleProperty = "Test", where sampleObject is an instance of the class that is derived from the <see
              cref="T:System.Dynamic.DynamicObject" />
+
+            
 
             
 
@@ -824,8 +902,12 @@ Dim sampleObject As Object = New SampleDynamicObject()</code>
 
             
 
+            
+
              method, the dynamic language runtime (DLR) first uses the language binder to look for a static definition of a property in the class. If there is no such property, the DLR calls the <see
              cref="M:System.Dynamic.DynamicObject.TrySetMember(System.Dynamic.SetMemberBinder,System.Object)" />
+
+            
 
             
 
@@ -839,6 +921,8 @@ Dim sampleObject As Object = New SampleDynamicObject()</code>
           <para
             >Provides the implementation for operations that set member values. Classes derived from the <see
              cref="T:System.Dynamic.DynamicObject" />
+
+            
 
             
 
@@ -858,8 +942,12 @@ Dim sampleObject As Object = New SampleDynamicObject()</code>
 
           
 
+          
+
           Provides information about the object that called the dynamic operation. The binder.Name property provides the name of the member to which the value is being assigned. For example, for the statement sampleObject.SampleProperty = "Test", where sampleObject is an instance of the class derived from the <see
            cref="T:System.Dynamic.DynamicObject" />
+
+          
 
           
 
@@ -874,6 +962,8 @@ Dim sampleObject As Object = New SampleDynamicObject()</code>
 
           
 
+          
+
           The value to set to the member. For example, for sampleObject.SampleProperty = "Test", where sampleObject is an instance of the class derived from the <see
            cref="T:System.Dynamic.DynamicObject" />
 
@@ -881,8 +971,12 @@ Dim sampleObject As Object = New SampleDynamicObject()</code>
 
           
 
+          
+
            class, the <paramref
            name="value" />
+
+          
 
           
 

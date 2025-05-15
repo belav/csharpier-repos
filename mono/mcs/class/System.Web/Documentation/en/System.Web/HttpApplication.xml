@@ -39,8 +39,12 @@
 
         
 
+        
+
          class are created in the ASP.NET infrastructure, not by the user directly. One instance of the <see
          cref="T:System.Web.HttpApplication" />
+
+        
 
         
 
@@ -56,8 +60,12 @@
 
         
 
+        
+
          interface or by event handler code that is defined in the Global.asax file. Custom modules that implement the <see
          cref="T:System.Web.IHttpModule" />
+
+        
 
         
 
@@ -72,10 +80,14 @@
 
         
 
+        
+
          is introduced in the .NET Framework version 3.5.  For more information, see <format
          type="text/html">
           <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
         </format>
+
+        
 
         
 
@@ -130,6 +142,8 @@
 
             
 
+            
+
              event and before the <see
              cref="E:System.Web.HttpApplication.PostMapRequestHandler" />
 
@@ -137,8 +151,12 @@
 
             
 
+            
+
              event, an event handler (which is a page that corresponds to the request URL) is created. When a server is running IIS 7.0 in Integrated mode and at least the .NET Framework version 3.0, the <see
              cref="E:System.Web.HttpApplication.MapRequestHandler" />
+
+            
 
             
 
@@ -190,6 +208,8 @@
 
             
 
+            
+
              event is raised, any existing response filters will filter the output.</para
           >
         </item>
@@ -206,6 +226,8 @@
         <item>
           <para>
             <see cref="E:System.Web.HttpApplication.LogRequest" />
+
+            
 
             
 
@@ -251,6 +273,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -278,6 +302,8 @@
 
             
 
+            
+
              event is raised after the event handler has been created.</para
           >
           <para
@@ -285,6 +311,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -328,8 +356,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.AcquireRequestState" />
+
+            
 
             
 
@@ -345,6 +377,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.BeginEventHandler" />
 
@@ -352,8 +386,12 @@
 
           
 
+          
+
            that starts asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.AcquireRequestState" />
+
+          
 
           
 
@@ -368,6 +406,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.EndEventHandler" />
 
@@ -375,8 +415,12 @@
 
           
 
+          
+
            that ends asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.AcquireRequestState" />
+
+          
 
           
 
@@ -422,8 +466,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.AcquireRequestState" />
+
+            
 
             
 
@@ -459,8 +507,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.AuthenticateRequest" />
+
+            
 
             
 
@@ -476,6 +528,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.BeginEventHandler" />
 
@@ -483,8 +537,12 @@
 
           
 
+          
+
            that starts asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.AuthenticateRequest" />
+
+          
 
           
 
@@ -499,6 +557,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.EndEventHandler" />
 
@@ -506,8 +566,12 @@
 
           
 
+          
+
            that ends asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.AuthenticateRequest" />
+
+          
 
           
 
@@ -553,8 +617,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.AuthenticateRequest" />
+
+            
 
             
 
@@ -590,8 +658,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.AuthorizeRequest" />
+
+            
 
             
 
@@ -607,6 +679,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.BeginEventHandler" />
 
@@ -614,8 +688,12 @@
 
           
 
+          
+
            that starts asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.AuthorizeRequest" />
+
+          
 
           
 
@@ -630,6 +708,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.EndEventHandler" />
 
@@ -637,8 +717,12 @@
 
           
 
+          
+
            that ends asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.AuthorizeRequest" />
+
+          
 
           
 
@@ -684,8 +768,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.AuthorizeRequest" />
+
+            
 
             
 
@@ -721,8 +809,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.BeginRequest" />
+
+            
 
             
 
@@ -738,6 +830,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.BeginEventHandler" />
 
@@ -745,8 +839,12 @@
 
           
 
+          
+
            that starts asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.BeginRequest" />
+
+          
 
           
 
@@ -761,6 +859,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.EndEventHandler" />
 
@@ -768,8 +868,12 @@
 
           
 
+          
+
            that ends asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.BeginRequest" />
+
+          
 
           
 
@@ -815,8 +919,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.BeginRequest" />
+
+            
 
             
 
@@ -852,8 +960,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.EndRequest" />
+
+            
 
             
 
@@ -869,6 +981,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.BeginEventHandler" />
 
@@ -876,8 +990,12 @@
 
           
 
+          
+
            that starts asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.EndRequest" />
+
+          
 
           
 
@@ -892,6 +1010,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.EndEventHandler" />
 
@@ -899,8 +1019,12 @@
 
           
 
+          
+
            that ends asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.EndRequest" />
+
+          
 
           
 
@@ -946,8 +1070,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.EndRequest" />
+
+            
 
             
 
@@ -984,10 +1112,14 @@
 
             
 
+            
+
              is introduced in the .NET Framework version 3.5.  For more information, see <format
              type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
+
+            
 
             
 
@@ -1006,8 +1138,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.LogRequest" />
+
+            
 
             
 
@@ -1023,6 +1159,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.BeginEventHandler" />
 
@@ -1030,8 +1168,12 @@
 
           
 
+          
+
            that starts asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.LogRequest" />
+
+          
 
           
 
@@ -1046,6 +1188,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.EndEventHandler" />
 
@@ -1053,8 +1197,12 @@
 
           
 
+          
+
            that ends asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.LogRequest" />
+
+          
 
           
 
@@ -1093,8 +1241,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.LogRequest" />
+
+            
 
             
 
@@ -1110,6 +1262,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.BeginEventHandler" />
 
@@ -1117,8 +1271,12 @@
 
           
 
+          
+
            that starts asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.LogRequest" />
+
+          
 
           
 
@@ -1133,6 +1291,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.EndEventHandler" />
 
@@ -1140,8 +1300,12 @@
 
           
 
+          
+
            that ends asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.LogRequest" />
+
+          
 
           
 
@@ -1156,8 +1320,12 @@
 
           
 
+          
+
           The associated state to add to the asynchronous <see
            cref="E:System.Web.HttpApplication.LogRequest" />
+
+          
 
           
 
@@ -1193,10 +1361,14 @@
 
             
 
+            
+
              is introduced in the .NET Framework version 3.5.  For more information, see <format
              type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
+
+            
 
             
 
@@ -1215,8 +1387,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.MapRequestHandler" />
+
+            
 
             
 
@@ -1232,6 +1408,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.BeginEventHandler" />
 
@@ -1239,8 +1417,12 @@
 
           
 
+          
+
            that starts asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.MapRequestHandler" />
+
+          
 
           
 
@@ -1255,6 +1437,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.EndEventHandler" />
 
@@ -1262,8 +1446,12 @@
 
           
 
+          
+
            that ends asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.MapRequestHandler" />
+
+          
 
           
 
@@ -1302,8 +1490,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.MapRequestHandler" />
+
+            
 
             
 
@@ -1319,6 +1511,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.BeginEventHandler" />
 
@@ -1326,8 +1520,12 @@
 
           
 
+          
+
            that starts asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.MapRequestHandler" />
+
+          
 
           
 
@@ -1342,6 +1540,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.EndEventHandler" />
 
@@ -1349,8 +1549,12 @@
 
           
 
+          
+
            that ends asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.MapRequestHandler" />
+
+          
 
           
 
@@ -1365,8 +1569,12 @@
 
           
 
+          
+
           The associated state to add to the asynchronous <see
            cref="E:System.Web.HttpApplication.MapRequestHandler" />
+
+          
 
           
 
@@ -1404,8 +1612,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.PostAcquireRequestState" />
+
+            
 
             
 
@@ -1421,6 +1633,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.BeginEventHandler" />
 
@@ -1428,8 +1642,12 @@
 
           
 
+          
+
            that starts asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.PostAcquireRequestState" />
+
+          
 
           
 
@@ -1444,6 +1662,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.EndEventHandler" />
 
@@ -1451,8 +1671,12 @@
 
           
 
+          
+
            that ends asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.PostAcquireRequestState" />
+
+          
 
           
 
@@ -1494,8 +1718,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.PostAcquireRequestState" />
+
+            
 
             
 
@@ -1534,8 +1762,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.PostAuthenticateRequest" />
+
+            
 
             
 
@@ -1551,6 +1783,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.BeginEventHandler" />
 
@@ -1558,8 +1792,12 @@
 
           
 
+          
+
            that starts asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.PostAuthenticateRequest" />
+
+          
 
           
 
@@ -1574,6 +1812,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.EndEventHandler" />
 
@@ -1581,8 +1821,12 @@
 
           
 
+          
+
            that ends asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.PostAuthenticateRequest" />
+
+          
 
           
 
@@ -1624,8 +1868,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.PostAuthorizeRequest" />
+
+            
 
             
 
@@ -1664,8 +1912,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.PostAuthorizeRequest" />
+
+            
 
             
 
@@ -1681,6 +1933,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.BeginEventHandler" />
 
@@ -1688,8 +1942,12 @@
 
           
 
+          
+
            that starts asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.PostAuthorizeRequest" />
+
+          
 
           
 
@@ -1704,6 +1962,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.EndEventHandler" />
 
@@ -1711,8 +1971,12 @@
 
           
 
+          
+
            that ends asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.PostAuthorizeRequest" />
+
+          
 
           
 
@@ -1754,8 +2018,12 @@
 
             
 
+            
+
              to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.PostAuthorizeRequest" />
+
+            
 
             
 
@@ -1792,10 +2060,14 @@
 
             
 
+            
+
              is introduced in the .NET Framework version 3.5.  For more information, see <format
              type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
+
+            
 
             
 
@@ -1814,8 +2086,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.PostLogRequest" />
+
+            
 
             
 
@@ -1831,6 +2107,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.BeginEventHandler" />
 
@@ -1838,8 +2116,12 @@
 
           
 
+          
+
            that starts asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.PostLogRequest" />
+
+          
 
           
 
@@ -1854,6 +2136,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.EndEventHandler" />
 
@@ -1861,8 +2145,12 @@
 
           
 
+          
+
            that ends asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.PostLogRequest" />
+
+          
 
           
 
@@ -1901,8 +2189,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.PostLogRequest" />
+
+            
 
             
 
@@ -1918,6 +2210,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.BeginEventHandler" />
 
@@ -1925,8 +2219,12 @@
 
           
 
+          
+
            that starts asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.PostLogRequest" />
+
+          
 
           
 
@@ -1941,6 +2239,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.EndEventHandler" />
 
@@ -1948,8 +2248,12 @@
 
           
 
+          
+
            that ends asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.PostLogRequest" />
+
+          
 
           
 
@@ -1964,8 +2268,12 @@
 
           
 
+          
+
           The associated state to add to the asynchronous <see
            cref="E:System.Web.HttpApplication.PostLogRequest" />
+
+          
 
           
 
@@ -2003,8 +2311,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.PostMapRequestHandler" />
+
+            
 
             
 
@@ -2020,6 +2332,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.BeginEventHandler" />
 
@@ -2027,8 +2341,12 @@
 
           
 
+          
+
            that starts asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.PostMapRequestHandler" />
+
+          
 
           
 
@@ -2043,6 +2361,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.EndEventHandler" />
 
@@ -2050,8 +2370,12 @@
 
           
 
+          
+
            that ends asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.PostMapRequestHandler" />
+
+          
 
           
 
@@ -2093,8 +2417,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.PostMapRequestHandler" />
+
+            
 
             
 
@@ -2133,8 +2461,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.PostReleaseRequestState" />
+
+            
 
             
 
@@ -2150,6 +2482,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.BeginEventHandler" />
 
@@ -2157,8 +2491,12 @@
 
           
 
+          
+
            that starts asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.PostReleaseRequestState" />
+
+          
 
           
 
@@ -2173,6 +2511,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.EndEventHandler" />
 
@@ -2180,8 +2520,12 @@
 
           
 
+          
+
            that ends asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.PostReleaseRequestState" />
+
+          
 
           
 
@@ -2223,8 +2567,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.PostReleaseRequestState" />
+
+            
 
             
 
@@ -2260,8 +2608,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.PostRequestHandlerExecute" />
+
+            
 
             
 
@@ -2277,6 +2629,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.BeginEventHandler" />
 
@@ -2284,8 +2638,12 @@
 
           
 
+          
+
            that starts asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.PostRequestHandlerExecute" />
+
+          
 
           
 
@@ -2300,6 +2658,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.EndEventHandler" />
 
@@ -2307,8 +2667,12 @@
 
           
 
+          
+
            that ends asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.PostRequestHandlerExecute" />
+
+          
 
           
 
@@ -2354,8 +2718,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.PostRequestHandlerExecute" />
+
+            
 
             
 
@@ -2394,8 +2762,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.PostResolveRequestCache" />
+
+            
 
             
 
@@ -2411,6 +2783,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.BeginEventHandler" />
 
@@ -2418,8 +2792,12 @@
 
           
 
+          
+
            that starts asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.PostResolveRequestCache" />
+
+          
 
           
 
@@ -2434,6 +2812,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.EndEventHandler" />
 
@@ -2441,8 +2821,12 @@
 
           
 
+          
+
            that ends asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.PostResolveRequestCache" />
+
+          
 
           
 
@@ -2484,8 +2868,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.PostResolveRequestCache" />
+
+            
 
             
 
@@ -2524,8 +2912,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.PostUpdateRequestCache" />
+
+            
 
             
 
@@ -2541,6 +2933,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.BeginEventHandler" />
 
@@ -2548,8 +2942,12 @@
 
           
 
+          
+
            that starts asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.PostUpdateRequestCache" />
+
+          
 
           
 
@@ -2564,6 +2962,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.EndEventHandler" />
 
@@ -2571,8 +2971,12 @@
 
           
 
+          
+
            that ends asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.PostUpdateRequestCache" />
+
+          
 
           
 
@@ -2614,8 +3018,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.PostUpdateRequestCache" />
+
+            
 
             
 
@@ -2651,8 +3059,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.PreRequestHandlerExecute" />
+
+            
 
             
 
@@ -2668,6 +3080,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.BeginEventHandler" />
 
@@ -2675,8 +3089,12 @@
 
           
 
+          
+
            that starts asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.PreRequestHandlerExecute" />
+
+          
 
           
 
@@ -2691,6 +3109,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.EndEventHandler" />
 
@@ -2698,8 +3118,12 @@
 
           
 
+          
+
            that ends asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.PreRequestHandlerExecute" />
+
+          
 
           
 
@@ -2745,8 +3169,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.PreRequestHandlerExecute" />
+
+            
 
             
 
@@ -2782,8 +3210,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.ReleaseRequestState" />
+
+            
 
             
 
@@ -2799,6 +3231,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.BeginEventHandler" />
 
@@ -2806,8 +3240,12 @@
 
           
 
+          
+
            that starts asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.ReleaseRequestState" />
+
+          
 
           
 
@@ -2822,6 +3260,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.EndEventHandler" />
 
@@ -2829,8 +3269,12 @@
 
           
 
+          
+
            that ends asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.ReleaseRequestState" />
+
+          
 
           
 
@@ -2876,8 +3320,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.ReleaseRequestState" />
+
+            
 
             
 
@@ -2913,8 +3361,12 @@
 
             
 
+            
+
              event handler to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.ResolveRequestCache" />
+
+            
 
             
 
@@ -2930,6 +3382,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.BeginEventHandler" />
 
@@ -2937,8 +3391,12 @@
 
           
 
+          
+
            that starts asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.ResolveRequestCache" />
+
+          
 
           
 
@@ -2953,6 +3411,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.EndEventHandler" />
 
@@ -2960,8 +3420,12 @@
 
           
 
+          
+
            that ends asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.ResolveRequestCache" />
+
+          
 
           
 
@@ -3007,8 +3471,12 @@
 
             
 
+            
+
              event handler to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.ResolveRequestCache" />
+
+            
 
             
 
@@ -3044,8 +3512,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.UpdateRequestCache" />
+
+            
 
             
 
@@ -3061,6 +3533,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.BeginEventHandler" />
 
@@ -3068,8 +3542,12 @@
 
           
 
+          
+
            that starts asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.UpdateRequestCache" />
+
+          
 
           
 
@@ -3084,6 +3562,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.EndEventHandler" />
 
@@ -3091,8 +3571,12 @@
 
           
 
+          
+
            that ends asynchronous processing of the <see
            cref="E:System.Web.HttpApplication.UpdateRequestCache" />
+
+          
 
           
 
@@ -3138,8 +3622,12 @@
 
             
 
+            
+
              event to the collection of asynchronous <see
              cref="E:System.Web.HttpApplication.UpdateRequestCache" />
+
+            
 
             
 
@@ -3201,8 +3689,12 @@
 
             
 
+            
+
              event signals that the configured authentication mechanism has authenticated the current request. Subscribing to the <see
              cref="E:System.Web.HttpApplication.AuthenticateRequest" />
+
+            
 
             
 
@@ -3215,6 +3707,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -3251,8 +3745,12 @@
 
             
 
+            
+
              event signals that ASP.NET has authorized the current request. Subscribing to the <see
              cref="E:System.Web.HttpApplication.AuthorizeRequest" />
+
+            
 
             
 
@@ -3265,6 +3763,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -3301,6 +3801,8 @@
 
             
 
+            
+
              event signals the creation of any given new request. This event is always raised and is always the first event to occur during the processing of a request.</para
           >
           <para
@@ -3308,6 +3810,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -3346,6 +3850,8 @@
 
             
 
+            
+
             ) the remaining steps of the pipeline are not executed.  The only step executed is the EndRequest step.
 </para
           >
@@ -3355,6 +3861,8 @@
           <para
             >Causes ASP.NET to bypass all events and filtering in the HTTP pipeline chain of execution and directly execute the <see
              cref="E:System.Web.HttpApplication.EndRequest" />
+
+            
 
             
 
@@ -3414,8 +3922,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.HttpApplication.Response" />
+
+            
 
             
 
@@ -3428,6 +3940,8 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Web.HttpApplication.Application" />
 
@@ -3435,8 +3949,12 @@
 
             
 
+            
+
              properties are not available for use when the <see
              cref="M:System.Web.HttpApplication.Dispose" />
+
+            
 
             
 
@@ -3452,8 +3970,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.IHttpModule.Dispose" />
+
+            
 
             
 
@@ -3466,8 +3988,12 @@
 
             
 
+            
+
              in the application instance and raises the <see
              cref="E:System.Web.HttpApplication.Disposed" />
+
+            
 
             
 
@@ -3481,6 +4007,8 @@
           <para
             >Disposes the <see
              cref="T:System.Web.HttpApplication" />
+
+            
 
             
 
@@ -3513,8 +4041,12 @@
 
             
 
+            
+
              delegate, you identify the method that handles the event. To associate the event with your event handler, add an instance of the <see
              cref="E:System.Web.HttpApplication.Disposed" />
+
+            
 
             
 
@@ -3527,6 +4059,8 @@
 
             
 
+            
+
              delegate.</para
           >
           <para
@@ -3534,6 +4068,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -3570,8 +4106,12 @@
 
             
 
+            
+
              event is always raised when the <see
              cref="M:System.Web.HttpApplication.CompleteRequest" />
+
+            
 
             
 
@@ -3584,6 +4124,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -3620,6 +4162,8 @@
 
             
 
+            
+
              event can be accessed by a call to the <see
              cref="M:System.Web.HttpServerUtility.GetLastError" />
 
@@ -3627,8 +4171,12 @@
 
             
 
+            
+
              method. If your application generates custom error output, suppress the default error message that is generated by ASP.NET by a call to the <see
              cref="M:System.Web.HttpServerUtility.ClearError" />
+
+            
 
             
 
@@ -3645,8 +4193,12 @@
 
               
 
+              
+
                event for global exception handling of those services. The HTTP handler for XML Web services consumes any exception that occurs in an XML Web service and converts it to a SOAP fault before the <see
                cref="E:System.Web.HttpApplication.Error" />
+
+              
 
               
 
@@ -3660,6 +4212,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -3728,12 +4282,16 @@
 
             
 
+            
+
              to add a new method for calculating custom vary-by values that are based on the current request. The implementation has to call the base class for custom values that it does not recognize. For more information, see <format
              type="text/html">
               <a href="b6c73735-a3cd-4d19-ba4d-0431881b0db0"
                 >How to: Cache Versions of a Page Using Custom Strings</a
               >
             </format>
+
+            
 
             
 
@@ -3752,6 +4310,8 @@
 
             
 
+            
+
              property.</para
           >
         </summary>
@@ -3765,8 +4325,12 @@
 
             
 
+            
+
              parameter is "browser", the browser's <see
              cref="P:System.Web.Configuration.HttpCapabilitiesBase.Type" />
+
+            
 
             
 
@@ -3782,8 +4346,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -3793,6 +4361,8 @@
         >
         <param name="custom">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3819,6 +4389,8 @@
           <para
             >In a derived class, you can override the <see
              cref="M:System.Web.HttpApplication.Init" />
+
+            
 
             
 
@@ -3857,8 +4429,12 @@
 
             
 
+            
+
              event is raised even if an error occurs. You can provide an event handler for the <see
              cref="E:System.Web.HttpApplication.LogRequest" />
+
+            
 
             
 
@@ -3876,6 +4452,8 @@
 
             
 
+            
+
             .</para
           >
           <para>
@@ -3885,10 +4463,14 @@
 
             
 
+            
+
              is introduced in the .NET Framework version 3.5.  For more information, see <format
              type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
+
+            
 
             
 
@@ -3923,10 +4505,14 @@
 
             
 
+            
+
              event is used by the ASP.NET infrastructure to determine the request handler for the current request. For more information, see <format
              type="text/html">
               <a href="d5633f9a-03fb-4ccc-a799-dc67d656fa60">How to: Register HTTP Handlers</a>
             </format>
+
+            
 
             
 
@@ -3944,6 +4530,8 @@
 
             
 
+            
+
             .</para
           >
           <para>
@@ -3953,10 +4541,14 @@
 
             
 
+            
+
              is introduced in the .NET Framework version 3.5.  For more information, see <format
              type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
+
+            
 
             
 
@@ -4021,8 +4613,12 @@
 
             
 
+            
+
              event is raised after the <see
              cref="E:System.Web.HttpApplication.AcquireRequestState" />
+
+            
 
             
 
@@ -4035,8 +4631,12 @@
 
             
 
+            
+
              event can access any data that is processed by the <see
              cref="E:System.Web.HttpApplication.PostAcquireRequestState" />
+
+            
 
             
 
@@ -4049,6 +4649,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -4083,8 +4685,12 @@
 
             
 
+            
+
              event is raised after the <see
              cref="E:System.Web.HttpApplication.AuthenticateRequest" />
+
+            
 
             
 
@@ -4097,8 +4703,12 @@
 
             
 
+            
+
              event can access any data that is processed by the <see
              cref="E:System.Web.HttpApplication.PostAuthenticateRequest" />
+
+            
 
             
 
@@ -4111,6 +4721,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -4145,8 +4757,12 @@
 
             
 
+            
+
              event signals that ASP.NET has authorized the current request. Subscribing to the <see
              cref="E:System.Web.HttpApplication.PostAuthorizeRequest" />
+
+            
 
             
 
@@ -4159,6 +4775,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -4195,10 +4813,14 @@
 
             
 
+            
+
             .</para
           >
           <para>
             <see cref="E:System.Web.HttpApplication.PostLogRequest" />
+
+            
 
             
 
@@ -4213,6 +4835,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4221,6 +4845,8 @@
           <para
             >Occurs when ASP.NET has completed processing all the event handlers for the <see
              cref="E:System.Web.HttpApplication.LogRequest" />
+
+            
 
             
 
@@ -4248,6 +4874,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -4284,6 +4912,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4308,6 +4938,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -4348,6 +4980,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4377,8 +5011,12 @@
 
             
 
+            
+
              event is raised after the <see
              cref="E:System.Web.HttpApplication.UpdateRequestCache" />
+
+            
 
             
 
@@ -4391,6 +5029,8 @@
 
             
 
+            
+
              is raised, ASP.NET has completed processing code and the content of the cache is finalized.</para
           >
           <para
@@ -4398,6 +5038,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -4427,6 +5069,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -4463,6 +5107,8 @@
 
             
 
+            
+
              event may occur multiple times.</para
           >
           <para
@@ -4470,6 +5116,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -4508,6 +5156,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4539,6 +5189,8 @@
 
             
 
+            
+
              event is raised, the application is finished with the request and ASP.NET is signaled to store the request state.</para
           >
           <para
@@ -4546,6 +5198,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -4606,6 +5260,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -4734,6 +5390,8 @@
 
             
 
+            
+
              implementation.</para
           >
         </summary>
@@ -4785,6 +5443,8 @@
 
             
 
+            
+
              that contains information about the status of the process.</para
           >
           <para />
@@ -4796,8 +5456,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -4812,8 +5476,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -4826,10 +5494,14 @@
 
           
 
+          
+
            parameter is null, the delegate is not called.</param
         >
         <param name="extraData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4866,6 +5538,8 @@
 
             
 
+            
+
              method to raise any exceptions that are caught during the asynchronous process.</para
           >
         </remarks>
@@ -4880,8 +5554,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IAsyncResult" />
+
+          
 
           
 
@@ -4912,6 +5590,8 @@
           <para
             >Gets a Boolean value indicating whether another request can use the <see
              cref="T:System.Web.IHttpHandler" />
+
+            
 
             
 
@@ -4949,6 +5629,8 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.IHttpHandler" />
 
@@ -4956,8 +5638,12 @@
 
             
 
+            
+
              interfaces are provided as a reference to an <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -4976,6 +5662,8 @@
 
             
 
+            
+
              interface.</para
           >
         </summary>
@@ -4986,8 +5674,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -5012,6 +5704,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 

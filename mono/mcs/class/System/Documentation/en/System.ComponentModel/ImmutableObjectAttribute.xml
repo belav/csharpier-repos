@@ -38,6 +38,8 @@
 
         
 
+        
+
          window to determine whether to render an expandable object as read-only. As such, this property is used only at design time.</para
       >
       <para
@@ -45,6 +47,8 @@
          type="text/html">
           <a href="30386922-1e00-4602-9ebf-526b271a8b87">Extending Metadata Using Attributes</a>
         </format>
+
+        
 
         
 
@@ -86,6 +90,8 @@
 
             
 
+            
+
              window to determine whether to render an expandable object as read-only.</para
           >
         </remarks>
@@ -99,11 +105,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="immutable">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -143,6 +153,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -151,6 +163,8 @@
           <para
             >Represents the default value for <see
              cref="T:System.ComponentModel.ImmutableObjectAttribute" />
+
+            
 
             
 
@@ -218,6 +232,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -242,6 +258,8 @@
           <para
             >This attribute is typically used in the <ui
             >Properties</ui>
+
+            
 
             
 
@@ -315,6 +333,8 @@
 
             
 
+            
+
              window to determine whether to render an expandable object as read-only.</para
           >
         </remarks>
@@ -349,6 +369,8 @@
           <para
             >This attribute is typically used in the <ui
             >Properties</ui>
+
+            
 
             
 

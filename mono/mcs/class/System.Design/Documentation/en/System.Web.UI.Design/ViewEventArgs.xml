@@ -20,8 +20,12 @@
 
         
 
+        
+
          event is raised by the designer host for certain actions on a control on the design surface. The <see
          cref="E:System.Web.UI.Design.IControlDesignerView.ViewEvent" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
          delegate method, which takes a <see
          cref="T:System.Web.UI.Design.ViewEventArgs" />
+
+        
 
         
 
@@ -51,8 +59,12 @@
 
         
 
+        
+
          class supplies a default delegate to handle the <see
          cref="E:System.Web.UI.Design.IControlDesignerView.ViewEvent" />
+
+        
 
         
 
@@ -65,6 +77,8 @@
 
         
 
+        
+
         , <see
          cref="M:System.Web.UI.Design.ControlDesigner.OnPaint(System.Windows.Forms.PaintEventArgs)" />
 
@@ -72,8 +86,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Web.UI.Design.TemplatedControlDesigner.OnTemplateModeChanged" />
+
+        
 
         
 
@@ -89,8 +107,12 @@
 
         
 
+        
+
          object for the type of action on the design surface, and then passes the object to the <see
          cref="T:System.Web.UI.Design.ViewEventHandler" />
+
+        
 
         
 
@@ -103,6 +125,8 @@
 
         
 
+        
+
          property represents the control designer region that the event applies to. The <see
          cref="P:System.Web.UI.Design.ViewEventArgs.EventType" />
 
@@ -110,8 +134,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.UI.Design.ViewEventArgs" />
+
+        
 
         
 
@@ -129,6 +157,8 @@
 
             
 
+            
+
              event.</para
           >
         </item>
@@ -136,6 +166,8 @@
           <para
             >A <see
              cref="F:System.Web.UI.Design.ViewEvent.Paint" />
+
+            
 
             
 
@@ -153,6 +185,8 @@
 
             
 
+            
+
              event. </para
           >
         </item>
@@ -165,11 +199,15 @@
 
         
 
+        
+
          property supplies the event arguments that are specific to the type of action. </para
       >
       <para
         >For example, the designer host initializes <see
          cref="T:System.Web.UI.Design.ViewEventArgs" />
+
+        
 
         
 
@@ -187,6 +225,8 @@
 
             
 
+            
+
              object when you click a region.</para
           >
         </item>
@@ -199,6 +239,8 @@
 
             
 
+            
+
              object when a control is drawn on the design surface.</para
           >
         </item>
@@ -206,6 +248,8 @@
           <para
             >A <see
              cref="T:System.Web.UI.Design.TemplateModeChangedEventArgs" />
+
+            
 
             
 
@@ -225,6 +269,8 @@
 
         
 
+        
+
         . </para
       >
     </remarks>
@@ -233,6 +279,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Web.UI.Design.IControlDesignerView.ViewEvent" />
+
+        
 
         
 
@@ -268,8 +316,12 @@
 
             
 
+            
+
              constructor is used by the designer host to initialize a <see
              cref="T:System.Web.UI.Design.ViewEventArgs" />
+
+            
 
             
 
@@ -282,6 +334,8 @@
 
             
 
+            
+
              event. The designer host passes the initialized <see
              cref="T:System.Web.UI.Design.ViewEventArgs" />
 
@@ -289,8 +343,12 @@
 
             
 
+            
+
              object to the <see
              cref="T:System.Web.UI.Design.ViewEventHandler" />
+
+            
 
             
 
@@ -306,8 +364,12 @@
 
             
 
+            
+
              is set for <see
              cref="F:System.Web.UI.Design.ViewEvent.Click" />
+
+            
 
             
 
@@ -320,8 +382,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Web.UI.Design.ViewEvent.TemplateModeChanged" />
+
+            
 
             
 
@@ -340,6 +406,8 @@
 
             
 
+            
+
              class for the type of view event on the design surface. </para
           >
         </summary>
@@ -350,8 +418,12 @@
 
           
 
+          
+
           The type of action that raised the event; used to initialize the <see
            cref="P:System.Web.UI.Design.ViewEventArgs.EventType" />
+
+          
 
           
 
@@ -366,8 +438,12 @@
 
           
 
+          
+
           The designer region that the action applies to; used to initialize the <see
            cref="P:System.Web.UI.Design.ViewEventArgs.Region" />
+
+          
 
           
 
@@ -382,6 +458,8 @@
 
           
 
+          
+
           The event arguments associated with <paramref
            name="eventType" />
 
@@ -389,8 +467,12 @@
 
           
 
+          
+
           ; used to initialize the <see
            cref="P:System.Web.UI.Design.ViewEventArgs.EventArgs" />
+
+          
 
           
 
@@ -421,8 +503,12 @@
 
             
 
+            
+
              property supplies the event arguments that are specific to the type of action that is specified in the <see
              cref="P:System.Web.UI.Design.ViewEventArgs.EventType" />
+
+            
 
             
 
@@ -438,8 +524,12 @@
 
             
 
+            
+
              as a <see
              cref="F:System.Web.UI.Design.ViewEvent.Click" />
+
+            
 
             
 
@@ -452,8 +542,12 @@
 
             
 
+            
+
              property as a <see
              cref="T:System.Web.UI.Design.DesignerRegionMouseEventArgs" />
+
+            
 
             
 
@@ -469,8 +563,12 @@
 
             
 
+            
+
              property with a <see
              cref="T:System.Windows.Forms.PaintEventArgs" />
+
+            
 
             
 
@@ -483,6 +581,8 @@
 
             
 
+            
+
              event, or a <see
              cref="T:System.Web.UI.Design.TemplateModeChangedEventArgs" />
 
@@ -490,8 +590,12 @@
 
             
 
+            
+
              object for a <see
              cref="F:System.Web.UI.Design.ViewEvent.TemplateModeChanged" />
+
+            
 
             
 
@@ -507,8 +611,12 @@
 
             
 
+            
+
              property is initialized by the <see
              cref="M:System.Web.UI.Design.ViewEventArgs.#ctor(System.Web.UI.Design.ViewEvent,System.Web.UI.Design.DesignerRegion,System.EventArgs)" />
+
+            
 
             
 
@@ -547,8 +655,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.Design.ViewEventArgs" />
+
+            
 
             
 
@@ -566,6 +678,8 @@
 
                 
 
+                
+
                  event.</para
               >
             </item>
@@ -573,6 +687,8 @@
               <para
                 >A <see
                  cref="F:System.Web.UI.Design.ViewEvent.Paint" />
+
+                
 
                 
 
@@ -590,6 +706,8 @@
 
                 
 
+                
+
                  event.</para
               >
             </item>
@@ -597,6 +715,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.Design.ViewEventArgs.EventArgs" />
+
+            
 
             
 
@@ -612,8 +732,12 @@
 
             
 
+            
+
              property is initialized by the <see
              cref="M:System.Web.UI.Design.ViewEventArgs.#ctor(System.Web.UI.Design.ViewEvent,System.Web.UI.Design.DesignerRegion,System.EventArgs)" />
+
+            
 
             
 
@@ -652,8 +776,12 @@
 
             
 
+            
+
              property represents the control designer region that the event applies to. Typically, the <see
              cref="P:System.Web.UI.Design.ViewEventArgs.Region" />
+
+            
 
             
 
@@ -666,6 +794,8 @@
 
             
 
+            
+
              events, and null (Nothing in Visual Basic) for <see
              cref="F:System.Web.UI.Design.ViewEvent.Paint" />
 
@@ -673,8 +803,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Web.UI.Design.ViewEvent.TemplateModeChanged" />
+
+            
 
             
 
@@ -690,8 +824,12 @@
 
             
 
+            
+
              property is initialized by the <see
              cref="M:System.Web.UI.Design.ViewEventArgs.#ctor(System.Web.UI.Design.ViewEvent,System.Web.UI.Design.DesignerRegion,System.EventArgs)" />
+
+            
 
             
 

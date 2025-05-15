@@ -27,8 +27,12 @@
 
         
 
+        
+
          class is both a root-level <see
          cref="T:System.Web.Configuration.ProfilePropertySettingsCollection" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          collection. These collections allow you to create named groups of more <see
          cref="T:System.Web.Configuration.ProfilePropertySettingsCollection" />
+
+        
 
         
 
@@ -55,10 +63,14 @@
 
         
 
+        
+
          objects. For more information about the profile features added to vstecasplong, see <format
          type="text/html">
           <a href="06a7bf4a-a5a2-462d-9793-c79063a2018d">Creating Web Sites for Individual Users</a>
         </format>
+
+        
 
         
 
@@ -74,8 +86,12 @@
 
         
 
+        
+
          property is a <see
          cref="T:System.Web.Configuration.RootProfilePropertySettingsCollection" />
+
+        
 
         
 
@@ -89,6 +105,8 @@
       <para
         >Acts as the top of a two-level named hierarchy of <see
          cref="T:System.Web.Configuration.ProfilePropertySettingsCollection" />
+
+        
 
         
 
@@ -115,8 +133,12 @@
 
             
 
+            
+
              property is a <see
              cref="T:System.Web.Configuration.RootProfilePropertySettingsCollection" />
+
+            
 
             
 
@@ -161,6 +183,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -172,6 +196,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.RootProfilePropertySettingsCollection" />
+
+            
 
             
 
@@ -201,6 +227,8 @@
           <para
             >The value of the <see
              cref="P:System.Web.Configuration.ProfilePropertySettingsCollection.AllowClear" />
+
+            
 
             
 
@@ -260,8 +288,12 @@
 
             
 
+            
+
              object to another A <see
              cref="T:System.Web.Configuration.RootProfilePropertySettingsCollection" />
+
+            
 
             
 
@@ -275,6 +307,8 @@
           <para
             >true if the passed <see
              cref="T:System.Web.Configuration.RootProfilePropertySettingsCollection" />
+
+            
 
             
 
@@ -341,8 +375,12 @@
 
             
 
+            
+
              property allows you to create groups of <see
              cref="T:System.Web.Configuration.ProfilePropertySettingsCollection" />
+
+            
 
             
 
@@ -361,8 +399,12 @@
 
             
 
+            
+
              containing a collection of <see
              cref="T:System.Web.Configuration.ProfileGroupSettings" />
+
+            
 
             
 
@@ -478,6 +520,8 @@
           <para
             >Resets the value of the <see
              cref="M:System.Web.Configuration.RootProfilePropertySettingsCollection.IsModified" />
+
+            
 
             
 

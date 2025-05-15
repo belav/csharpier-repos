@@ -35,8 +35,12 @@
 
         
 
+        
+
          event to provide custom value conversion from a user-specified value to a value in the type specified by the cell <see
          cref="P:System.Windows.Forms.DataGridViewCell.ValueType" />
+
+        
 
         
 
@@ -52,8 +56,12 @@
 
         
 
+        
+
          event, you can convert the value yourself or you can customize the default conversion. For example, you can convert the value yourself using the cell <see
          cref="M:System.Windows.Forms.DataGridViewCell.ParseFormattedValue(System.Object,System.Windows.Forms.DataGridViewCellStyle,System.ComponentModel.TypeConverter,System.ComponentModel.TypeConverter)" />
+
+        
 
         
 
@@ -66,8 +74,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Windows.Forms.DataGridViewCellStyle.DataSourceNullValue" />
+
+        
 
         
 
@@ -80,6 +92,8 @@
 
         
 
+        
+
          properties of the object returned by the <see
          cref="P:System.Windows.Forms.DataGridViewCellParsingEventArgs.InheritedCellStyle" />
 
@@ -87,8 +101,12 @@
 
         
 
+        
+
          property, which is initialized using the cell <see
          cref="P:System.Windows.Forms.DataGridViewCell.InheritedStyle" />
+
+        
 
         
 
@@ -104,6 +122,8 @@
 
         
 
+        
+
          property with the converted value in the type specified by the cell <see
          cref="P:System.Windows.Forms.DataGridViewCell.ValueType" />
 
@@ -111,8 +131,12 @@
 
         
 
+        
+
          property. To indicate that no further parsing is necessary, set the <see
          cref="P:System.Windows.Forms.DataGridViewCellParsingEventArgs.ParsingApplied" />
+
+        
 
         
 
@@ -128,8 +152,12 @@
 
         
 
+        
+
          is null or is not of the correct type, or the <see
          cref="P:System.Windows.Forms.DataGridViewCellParsingEventArgs.ParsingApplied" />
+
+        
 
         
 
@@ -142,8 +170,12 @@
 
         
 
+        
+
          is parsed using the cell <see
          cref="M:System.Windows.Forms.DataGridViewCell.ParseFormattedValue(System.Object,System.Windows.Forms.DataGridViewCellStyle,System.ComponentModel.TypeConverter,System.ComponentModel.TypeConverter)" />
+
+        
 
         
 
@@ -156,8 +188,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Windows.Forms.DataGridViewCellStyle.DataSourceNullValue" />
+
+        
 
         
 
@@ -170,8 +206,12 @@
 
         
 
+        
+
          properties of the cell style passed in. If the value is not equal to <see
          cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+
+        
 
         
 
@@ -184,11 +224,15 @@
 
         
 
+        
+
          property and the type converters passed in. </para
       >
       <para
         >To customize the conversion of a cell value into a formatted value for display, handle the <see
          cref="E:System.Windows.Forms.DataGridView.CellFormatting" />
+
+        
 
         
 
@@ -206,6 +250,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -216,10 +262,14 @@
 
         
 
+        
+
          delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event-handler delegates, see <format
          type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
         </format>
+
+        
 
         
 
@@ -238,8 +288,12 @@
 
         
 
+        
+
          event of a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 

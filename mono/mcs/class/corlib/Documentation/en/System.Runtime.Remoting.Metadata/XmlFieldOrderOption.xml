@@ -32,6 +32,8 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" />
 
@@ -39,8 +41,12 @@
 
         
 
+        
+
          class gets or sets a value of type <see
          cref="T:System.Runtime.Remoting.Metadata.XmlFieldOrderOption" />
+
+        
 
         
 

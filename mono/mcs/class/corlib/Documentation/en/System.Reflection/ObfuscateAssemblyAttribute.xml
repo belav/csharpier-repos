@@ -34,8 +34,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Reflection.ObfuscateAssemblyAttribute" />
+
+        
 
         
 
@@ -50,6 +54,8 @@
       <para
         >You can apply <see
          cref="T:System.Reflection.ObfuscationAttribute" />
+
+        
 
         
 
@@ -100,11 +106,15 @@
 
             
 
+            
+
              class, specifying whether the assembly to be obfuscated is public or private.</para
           >
         </summary>
         <param name="assemblyIsPrivate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -145,6 +155,8 @@
 
             
 
+            
+
              value indicating whether the assembly was marked private.</para
           >
         </summary>
@@ -175,8 +187,12 @@
 
             
 
+            
+
              does not affect instances of <see
              cref="T:System.Reflection.ObfuscationAttribute" />
+
+            
 
             
 
@@ -193,6 +209,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 

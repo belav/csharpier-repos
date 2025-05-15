@@ -26,8 +26,12 @@
 
         
 
+        
+
          control is an extender provider. When you add a <see
          cref="T:System.Windows.Forms.ToolTip" />
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
         , all other controls on the form have a <see
          cref="T:System.Windows.Forms.ToolTip" />
+
+        
 
         
 
@@ -57,8 +65,12 @@
 
         
 
+        
+
         . A visual designer can then call <see
          cref="M:System.ComponentModel.IExtenderProvider.CanExtend(System.Object)" />
+
+        
 
         
 
@@ -71,6 +83,8 @@
          type="text/html">
           <a href="d824f40e-b20b-464c-ac22-97974d5ab4fe">How to: Implement an Extender Provider</a>
         </format>
+
+        
 
         
 
@@ -118,6 +132,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -136,8 +152,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 

@@ -27,8 +27,12 @@
 
         
 
+        
+
          by the <see
          cref="P:System.Web.Security.Membership.Providers" />
+
+        
 
         
 
@@ -41,6 +45,8 @@
 
         
 
+        
+
          class. You can access a specific membership provider in the collection by name and cast it as the specific provider type, such as <see
          cref="T:System.Web.Security.SqlMembershipProvider" />
 
@@ -48,8 +54,12 @@
 
         
 
+        
+
         . This enables you to manage membership information from multiple data stores in a single application as well as access custom members of a membership provider that are not part of the <see
          cref="T:System.Web.Security.MembershipProvider" />
+
+        
 
         
 
@@ -68,10 +78,14 @@
 
           
 
+          
+
            before continuing. For a list of other topics related to membership, see <format
            type="text/html">
             <a href="824c3a24-f0af-427c-a652-0d2d1e9397cd">Managing Users By Using Membership</a>
           </format>
+
+          
 
           
 
@@ -86,6 +100,8 @@
       <para
         >A collection of objects that inherit the <see
          cref="T:System.Web.Security.MembershipProvider" />
+
+        
 
         
 
@@ -144,6 +160,8 @@
 
           
 
+          
+
           The membership provider to add to the collection.</param
         >
       </Docs>
@@ -176,6 +194,8 @@
 
             
 
+            
+
              to copy role provider objects to the specified array.</para
           >
         </remarks>
@@ -190,8 +210,12 @@
 
           
 
+          
+
           A one-dimensional array that is the destination of the elements copied from the <see
            cref="T:System.Web.Security.MembershipProviderCollection" />
+
+          
 
           
 
@@ -206,8 +230,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 

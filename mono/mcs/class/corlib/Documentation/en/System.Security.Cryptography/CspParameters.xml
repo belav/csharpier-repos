@@ -33,11 +33,15 @@
 
         
 
+        
+
          class represents parameters that you can pass to managed cryptography classes that internally use Microsoft Cryptographic Service Providers (CSPs) from the unmanaged Microsoft Cryptography API (CAPI). Classes with names ending in "CryptoServiceProvider" are managed code wrappers for the corresponding CSP.</para
       >
       <para
         >Use the <see
          cref="T:System.Security.Cryptography.CspParameters" />
+
+        
 
         
 
@@ -55,8 +59,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Security.Cryptography.CspParameters.ProviderName" />
+
+            
 
             
 
@@ -78,6 +86,8 @@
 
             
 
+            
+
             . </para
           >
         </item>
@@ -85,6 +95,8 @@
           <para
             >Specify whether to create an asymmetric signature key or an asymmetric exchange key using the <see
              cref="F:System.Security.Cryptography.CspParameters.KeyNumber" />
+
+            
 
             
 
@@ -126,8 +138,12 @@
 
             
 
+            
+
              initializes the <see
              cref="F:System.Security.Cryptography.CspParameters.ProviderType" />
+
+            
 
             
 
@@ -140,11 +156,15 @@
 
             
 
+            
+
              algorithm.  </para
           >
           <para
             >For information about other provider types, see the <see
              cref="F:System.Security.Cryptography.CspParameters.ProviderType" />
+
+            
 
             
 
@@ -163,6 +183,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -171,6 +193,8 @@
           <para
             >The newly created instance of <see
              cref="T:System.Security.Cryptography.CspParameters" />
+
+            
 
             
 
@@ -208,6 +232,8 @@
 
             
 
+            
+
              constructor to specify a provider type by passing a numeric value that represents that provider.  The numeric values that represent the default provider types are defined in the WinCrypt.h header file:</para
           >
           <list type="bullet">
@@ -220,6 +246,8 @@
 
                 
 
+                
+
                  algorithm, pass a value of 1<paramref
                  name=" " />
 
@@ -227,8 +255,12 @@
 
                 
 
+                
+
                 to the <paramref
                  name="dwTypeIn" />
+
+                
 
                 
 
@@ -246,8 +278,12 @@
 
                 
 
+                
+
                  algorithm, pass a value of 13<paramref
                  name=" " />
+
+                
 
                 
 
@@ -260,6 +296,8 @@
 
                 
 
+                
+
                  parameter.</para
               >
             </item>
@@ -267,6 +305,8 @@
           <para
             >For information about other provider type values, see the <see
              cref="F:System.Security.Cryptography.CspParameters.ProviderType" />
+
+            
 
             
 
@@ -285,11 +325,15 @@
 
             
 
+            
+
              class with the specified provider type code.</para
           >
         </summary>
         <param name="dwTypeIn">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -330,6 +374,8 @@
 
             
 
+            
+
              constructor to specify a provider type and name.  </para
           >
           <para>Specify a provider type by passing a numeric value that represents the desired provider type.  The numeric values that represent the default provider types are defined in the WinCrypt.h header file:</para>
@@ -343,6 +389,8 @@
 
                 
 
+                
+
                  algorithm, pass a value of 1<paramref
                  name=" " />
 
@@ -350,8 +398,12 @@
 
                 
 
+                
+
                 to the <paramref
                  name="dwTypeIn" />
+
+                
 
                 
 
@@ -369,8 +421,12 @@
 
                 
 
+                
+
                  algorithm, pass a value of 13<paramref
                  name=" " />
+
+                
 
                 
 
@@ -383,6 +439,8 @@
 
                 
 
+                
+
                  parameter.</para
               >
             </item>
@@ -390,6 +448,8 @@
           <para
             >For information about other provider type values, see the <see
              cref="F:System.Security.Cryptography.CspParameters.ProviderType" />
+
+            
 
             
 
@@ -408,6 +468,8 @@
 
             
 
+            
+
              class with the specified provider type code and name.</para
           >
         </summary>
@@ -418,10 +480,14 @@
 
           
 
+          
+
           A provider type code that specifies the kind of provider to create.</param
         >
         <param name="strProviderNameIn">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -463,6 +529,8 @@
 
             
 
+            
+
              constructor to specify a provider type, a provider name, and a container name.</para
           >
           <para>You can use the container name to retrieve a key within that container.     </para>
@@ -477,6 +545,8 @@
 
                 
 
+                
+
                  algorithm, pass a value of 1<paramref
                  name=" " />
 
@@ -484,8 +554,12 @@
 
                 
 
+                
+
                 to the <paramref
                  name="dwTypeIn" />
+
+                
 
                 
 
@@ -503,8 +577,12 @@
 
                 
 
+                
+
                  algorithm, pass a value of 13<paramref
                  name=" " />
+
+                
 
                 
 
@@ -517,6 +595,8 @@
 
                 
 
+                
+
                  parameter.</para
               >
             </item>
@@ -524,6 +604,8 @@
           <para
             >For information about other provider type values, see the <see
              cref="F:System.Security.Cryptography.CspParameters.ProviderType" />
+
+            
 
             
 
@@ -542,11 +624,15 @@
 
             
 
+            
+
              class with the specified provider type code and name, and the specified container name.</para
           >
         </summary>
         <param name="dwTypeIn">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -561,10 +647,14 @@
 
           
 
+          
+
           A provider name. </param
         >
         <param name="strContainerNameIn">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -614,6 +704,8 @@
 
                 
 
+                
+
                  algorithm, pass a value of 1<paramref
                  name=" " />
 
@@ -621,8 +713,12 @@
 
                 
 
+                
+
                 to the <paramref
                  name="dwTypeIn" />
+
+                
 
                 
 
@@ -640,8 +736,12 @@
 
                 
 
+                
+
                  algorithm, pass a value of 13<paramref
                  name=" " />
+
+                
 
                 
 
@@ -654,6 +754,8 @@
 
                 
 
+                
+
                  parameter.</para
               >
             </item>
@@ -661,6 +763,8 @@
           <para
             >For information about other provider type values, see the <see
              cref="F:System.Security.Cryptography.CspParameters.ProviderType" />
+
+            
 
             
 
@@ -679,11 +783,15 @@
 
             
 
+            
+
              class using a provider type, a provider name, a container name, access information, and a handle to an unmanaged smart card password dialog. </para
           >
         </summary>
         <param name="providerType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -698,10 +806,14 @@
 
           
 
+          
+
           A provider name. </param
         >
         <param name="keyContainerName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -716,10 +828,14 @@
 
           
 
+          
+
           An object that represents access rights and audit rules for the container.</param
         >
         <param name="parentWindowHandle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -769,6 +885,8 @@
 
                 
 
+                
+
                  algorithm, pass a value of 1<paramref
                  name=" " />
 
@@ -776,8 +894,12 @@
 
                 
 
+                
+
                 to the <paramref
                  name="dwTypeIn" />
+
+                
 
                 
 
@@ -795,8 +917,12 @@
 
                 
 
+                
+
                  algorithm, pass a value of 13<paramref
                  name=" " />
+
+                
 
                 
 
@@ -809,6 +935,8 @@
 
                 
 
+                
+
                  parameter.</para
               >
             </item>
@@ -816,6 +944,8 @@
           <para
             >For information about other provider type values, see the <see
              cref="F:System.Security.Cryptography.CspParameters.ProviderType" />
+
+            
 
             
 
@@ -834,11 +964,15 @@
 
             
 
+            
+
              class using a provider type, a provider name, a container name, access information, and a password associated with a smart card key.</para
           >
         </summary>
         <param name="providerType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -853,10 +987,14 @@
 
           
 
+          
+
           A provider name. </param
         >
         <param name="keyContainerName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -871,10 +1009,14 @@
 
           
 
+          
+
           An object that represents access rights and audit rules for a container. </param
         >
         <param name="keyPassword">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -914,8 +1056,12 @@
 
             
 
+            
+
              property to specify a <see
              cref="T:System.Security.AccessControl.CryptoKeySecurity" />
+
+            
 
             
 
@@ -929,6 +1075,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.Security.AccessControl.CryptoKeySecurity" />
+
+            
 
             
 
@@ -970,6 +1118,8 @@
 
             
 
+            
+
              that modify the behavior of the cryptographic service provider (CSP).</para
           >
         </summary>
@@ -999,6 +1149,8 @@
 
             
 
+            
+
              field to specify a name for your key container.  You can use the container name to retrieve the persisted key within that container. </para
           >
           <para
@@ -1013,6 +1165,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1021,6 +1175,8 @@
           <para
             >Represents the key container name for <see
              cref="T:System.Security.Cryptography.CspParameters" />
+
+            
 
             
 
@@ -1055,8 +1211,12 @@
 
             
 
+            
+
              field initializes the <see
              cref="P:System.Security.Cryptography.CspKeyContainerInfo.KeyNumber" />
+
+            
 
             
 
@@ -1069,8 +1229,12 @@
 
             
 
+            
+
              object with a <see
              cref="T:System.Security.Cryptography.CspParameters" />
+
+            
 
             
 
@@ -1086,6 +1250,8 @@
 
             
 
+            
+
              value (1) to specify an exchange key.  This value corresponds to the AT_KEYEXCHANGE value used in the unmanaged Microsoft Cryptographic API (CAPI).  </para
           >
           <para
@@ -1096,11 +1262,15 @@
 
             
 
+            
+
              value (2) to specify a signature key.  This value corresponds to the AT_SIGNATURE value used in CAPI.</para
           >
           <para
             >By default, the <see
              cref="F:System.Security.Cryptography.CspParameters.KeyNumber" />
+
+            
 
             
 
@@ -1145,6 +1315,8 @@
 
             
 
+            
+
              property to supply a password for a smart card key.  When you specify a password using this property, a password dialog box will not be presented to the user.  </para
           >
         </remarks>
@@ -1178,11 +1350,15 @@
 
             
 
+            
+
              property to specify a handle to the unmanaged parent window for a smart card password dialog box.  When you specify a handle using this property, a smart card password dialog box will be presented to the user.  </para
           >
           <para
             >You can avoid presenting a smart card password dialog box by explicitly specifying a password by using the <see
              cref="P:System.Security.Cryptography.CspParameters.KeyPassword" />
+
+            
 
             
 
@@ -1225,6 +1401,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1254,6 +1432,8 @@
 
             
 
+            
+
              field to specify a provider type by passing a numeric value that represents that provider.  The numeric values that represent the default provider types are defined in the WinCrypt.h header file:</para
           >
           <list type="bullet">
@@ -1266,6 +1446,8 @@
 
                 
 
+                
+
                  class, pass a value of 1.</para
               >
             </item>
@@ -1273,6 +1455,8 @@
               <para
                 >To specify a provider compatible with the <see
                  cref="T:System.Security.Cryptography.DSA" />
+
+                
 
                 
 
@@ -1446,6 +1630,8 @@
           <para
             >Represents the provider type code for <see
              cref="T:System.Security.Cryptography.CspParameters" />
+
+            
 
             
 

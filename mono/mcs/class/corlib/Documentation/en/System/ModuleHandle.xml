@@ -31,6 +31,8 @@
 
         
 
+        
+
         , <see
          cref="M:System.ModuleHandle.ResolveMethodHandle(System.Int32)" />
 
@@ -38,8 +40,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.ModuleHandle.ResolveTypeHandle(System.Int32)" />
+
+        
 
         
 
@@ -112,6 +118,8 @@
 
             
 
+            
+
              value indicating whether the specified <see
              cref="T:System.ModuleHandle" />
 
@@ -119,8 +127,12 @@
 
             
 
+            
+
              structure is equal to the current <see
              cref="T:System.ModuleHandle" />
+
+            
 
             
 
@@ -139,8 +151,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.ModuleHandle" />
+
+            
 
             
 
@@ -156,6 +172,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.ModuleHandle" />
 
@@ -163,8 +181,12 @@
 
           
 
+          
+
            structure to be compared with the current <see
            cref="T:System.ModuleHandle" />
+
+          
 
           
 
@@ -209,6 +231,8 @@
 
             
 
+            
+
              value indicating whether the specified object is a <see
              cref="T:System.ModuleHandle" />
 
@@ -216,8 +240,12 @@
 
             
 
+            
+
              structure, and equal to the current <see
              cref="T:System.ModuleHandle" />
+
+            
 
             
 
@@ -236,6 +264,8 @@
 
             
 
+            
+
              is a <see
              cref="T:System.ModuleHandle" />
 
@@ -243,8 +273,12 @@
 
             
 
+            
+
              structure, and is equal to the current <see
              cref="T:System.ModuleHandle" />
+
+            
 
             
 
@@ -260,8 +294,12 @@
 
           
 
+          
+
           The object to be compared with the current <see
            cref="T:System.ModuleHandle" />
+
+          
 
           
 
@@ -330,8 +368,12 @@
 
             
 
+            
+
              for the field identified by <paramref
              name="fieldToken" />
+
+            
 
             
 
@@ -342,6 +384,8 @@
         </returns>
         <param name="fieldToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -388,8 +432,12 @@
 
             
 
+            
+
              for the method or constructor identified by <paramref
              name="methodToken" />
+
+            
 
             
 
@@ -400,6 +448,8 @@
         </returns>
         <param name="methodToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -446,8 +496,12 @@
 
             
 
+            
+
              for the type identified by <paramref
              name="typeToken" />
+
+            
 
             
 
@@ -458,6 +512,8 @@
         </returns>
         <param name="typeToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -493,10 +549,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -545,6 +605,8 @@
 
             
 
+            
+
              structures are equal.</para
           >
         </summary>
@@ -553,6 +615,8 @@
           <para
             >true if the <see
              cref="T:System.ModuleHandle" />
+
+            
 
             
 
@@ -568,8 +632,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ModuleHandle" />
+
+          
 
           
 
@@ -584,8 +652,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ModuleHandle" />
+
+          
 
           
 
@@ -628,6 +700,8 @@
 
             
 
+            
+
              structures are unequal.</para
           >
         </summary>
@@ -636,6 +710,8 @@
           <para
             >true if the <see
              cref="T:System.ModuleHandle" />
+
+            
 
             
 
@@ -651,8 +727,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ModuleHandle" />
+
+          
 
           
 
@@ -667,8 +747,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ModuleHandle" />
+
+          
 
           
 
@@ -710,6 +794,8 @@
 
             
 
+            
+
              method overload, which allows you to supply the necessary context. </para
           >
           <block subset="none" type="note">
@@ -723,10 +809,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -750,8 +840,12 @@
 
             
 
+            
+
              for the field identified by <paramref
              name="fieldToken" />
+
+            
 
             
 
@@ -762,6 +856,8 @@
         </returns>
         <param name="fieldToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -807,10 +903,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -834,8 +934,12 @@
 
             
 
+            
+
              for the field identified by <paramref
              name="fieldToken" />
+
+            
 
             
 
@@ -851,6 +955,8 @@
 
           
 
+          
+
           A metadata token that identifies a field in the module.</param
         >
         <param name="typeInstantiationContext">
@@ -860,8 +966,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.RuntimeTypeHandle" />
+
+          
 
           
 
@@ -876,8 +986,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.RuntimeTypeHandle" />
+
+          
 
           
 
@@ -919,6 +1033,8 @@
 
             
 
+            
+
              method overload, which allows you to supply the necessary context. </para
           >
           <block subset="none" type="note">
@@ -932,10 +1048,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -959,8 +1079,12 @@
 
             
 
+            
+
              for the method or constructor identified by <paramref
              name="methodToken" />
+
+            
 
             
 
@@ -971,6 +1095,8 @@
         </returns>
         <param name="methodToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1016,10 +1142,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -1043,8 +1173,12 @@
 
             
 
+            
+
              for the method or constructor identified by <paramref
              name="methodToken" />
+
+            
 
             
 
@@ -1060,6 +1194,8 @@
 
           
 
+          
+
           A metadata token that identifies a method or constructor in the module.</param
         >
         <param name="typeInstantiationContext">
@@ -1069,8 +1205,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.RuntimeTypeHandle" />
+
+          
 
           
 
@@ -1085,8 +1225,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.RuntimeTypeHandle" />
+
+          
 
           
 
@@ -1128,6 +1272,8 @@
 
             
 
+            
+
              method overload, which allows you to supply the necessary context. </para
           >
           <block subset="none" type="note">
@@ -1141,10 +1287,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -1168,8 +1318,12 @@
 
             
 
+            
+
              for the type identified by <paramref
              name="typeToken" />
+
+            
 
             
 
@@ -1180,6 +1334,8 @@
         </returns>
         <param name="typeToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1225,10 +1381,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -1252,8 +1412,12 @@
 
             
 
+            
+
              for the type identified by <paramref
              name="typeToken" />
+
+            
 
             
 
@@ -1269,6 +1433,8 @@
 
           
 
+          
+
           A metadata token that identifies a type in the module.</param
         >
         <param name="typeInstantiationContext">
@@ -1278,8 +1444,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.RuntimeTypeHandle" />
+
+          
 
           
 
@@ -1294,8 +1464,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.RuntimeTypeHandle" />
+
+          
 
           
 

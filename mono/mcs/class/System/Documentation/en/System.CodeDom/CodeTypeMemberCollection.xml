@@ -41,8 +41,12 @@
 
         
 
+        
+
          class provides a simple collection object that can be used to store a set of <see
          cref="T:System.CodeDom.CodeTypeMember" />
+
+        
 
         
 
@@ -56,6 +60,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.CodeDom.CodeTypeMember" />
+
+        
 
         
 
@@ -87,6 +93,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeTypeMemberCollection" />
+
+            
 
             
 
@@ -128,8 +136,12 @@
 
             
 
+            
+
              class containing the specified array of <see
              cref="T:System.CodeDom.CodeTypeMember" />
+
+            
 
             
 
@@ -145,8 +157,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.CodeDom.CodeTypeMember" />
+
+          
 
           
 
@@ -187,6 +203,8 @@
 
             
 
+            
+
              class containing the elements of the specified source collection.</para
           >
         </summary>
@@ -197,8 +215,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeTypeMemberCollection" />
+
+          
 
           
 
@@ -241,6 +263,8 @@
 
             
 
+            
+
              with the specified value to the collection.</para
           >
         </summary>
@@ -255,8 +279,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeTypeMember" />
+
+          
 
           
 
@@ -299,6 +327,8 @@
 
             
 
+            
+
              array to the end of the collection.</para
           >
         </summary>
@@ -309,8 +339,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.CodeDom.CodeTypeMember" />
+
+          
 
           
 
@@ -353,6 +387,8 @@
 
             
 
+            
+
              to the end of the collection.</para
           >
         </summary>
@@ -363,8 +399,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeTypeMemberCollection" />
+
+          
 
           
 
@@ -407,6 +447,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -421,8 +463,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeTypeMember" />
+
+          
 
           
 
@@ -466,11 +512,15 @@
 
             
 
+            
+
              instance, beginning at the specified index.</para
           >
         </summary>
         <param name="array">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -483,10 +533,14 @@
 
           
 
+          
+
            that is the destination of the values copied from the collection. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -529,6 +583,8 @@
 
             
 
+            
+
             , if it exists in the collection.</para
           >
         </summary>
@@ -543,8 +599,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeTypeMember" />
+
+          
 
           
 
@@ -588,11 +648,15 @@
 
             
 
+            
+
              into the collection at the specified index.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -607,8 +671,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeTypeMember" />
+
+          
 
           
 
@@ -679,6 +747,8 @@
 
             
 
+            
+
              from the collection.</para
           >
         </summary>
@@ -689,8 +759,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeTypeMember" />
+
+          
 
           
 

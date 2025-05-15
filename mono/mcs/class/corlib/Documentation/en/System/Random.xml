@@ -35,11 +35,15 @@
 
         
 
+        
+
          class is based on Donald E. Knuth's subtractive random number generator algorithm. For more information, see D. E. Knuth. "The Art of Computer Programming, volume 2: Seminumerical Algorithms". Addison-Wesley, Reading, MA, second edition, 1981. </para
       >
       <para
         >The random number generation starts from a seed value. If the same seed is used repeatedly, the same series of numbers is generated. One way to produce different sequences is to make the seed value time-dependent, thereby producing a different series with each new instance of <see
          cref="T:System.Random" />
+
+        
 
         
 
@@ -52,8 +56,12 @@
 
         
 
+        
+
          class uses the system clock to generate its seed value, while its parameterized constructor can take an <see
          cref="T:System.Int32" />
+
+        
 
         
 
@@ -66,8 +74,12 @@
 
         
 
+        
+
          objects in close succession creates random number generators that produce identical sequences of random numbers. The following example illustrates that two <see
          cref="T:System.Random" />
+
+        
 
         
 
@@ -85,8 +97,12 @@
 
         
 
+        
+
          object to generate many random numbers over time, instead of repeatedly creating a new <see
          cref="T:System.Random" />
+
+        
 
         
 
@@ -102,8 +118,12 @@
 
         
 
+        
+
          such as <see
          cref="T:System.Security.Cryptography.RNGCryptoServiceProvider" />
+
+        
 
         
 
@@ -148,8 +168,12 @@
 
             
 
+            
+
              objects that are created in close succession by a call to the default constructor will have identical default seed values and, therefore, will produce identical sets of random numbers. This problem can be avoided by using a single <see
              cref="T:System.Random" />
+
+            
 
             
 
@@ -162,8 +186,12 @@
 
             
 
+            
+
              constructor. For more information, see the <see
              cref="M:System.Random.#ctor(System.Int32)" />
+
+            
 
             
 
@@ -177,6 +205,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Random" />
+
+            
 
             
 
@@ -248,6 +278,8 @@ class RandomTest {
 
             
 
+            
+
              objects causes each instance to produce identical sequences of random numbers.</para
           >
           <para
@@ -258,8 +290,12 @@ class RandomTest {
 
             
 
+            
+
              objects in the following example. To prevent this, apply an algorithm to differentiate the seed value in each invocation, or call the <see
              cref="M:System.Threading.Thread.Sleep(System.Int32)" />
+
+            
 
             
 
@@ -279,11 +315,15 @@ class RandomTest {
 
             
 
+            
+
              class, using the specified seed value.</para
           >
         </summary>
         <param name="Seed">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -317,6 +357,8 @@ class RandomTest {
             >The following example demonstrates using the
    <see
              langword="Next" />
+
+            
 
             
 
@@ -371,8 +413,12 @@ class RandomTest {
 
             
 
+            
+
              generates a random number whose value ranges from zero to less than <see
              cref="F:System.Int32.MaxValue" />
+
+            
 
             
 
@@ -385,8 +431,12 @@ class RandomTest {
 
             
 
+            
+
              method overload. To generate a random number within a different range, use the <see
              cref="M:System.Random.Next(System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -404,6 +454,8 @@ class RandomTest {
           <para
             >A 32-bit signed integer greater than or equal to zero and less than <see
              cref="F:System.Int32.MaxValue" />
+
+            
 
             
 
@@ -463,6 +515,8 @@ class RandomTest {
 
           
 
+          
+
            is less than zero.</exception
         >
         <summary>
@@ -479,8 +533,12 @@ class RandomTest {
 
             
 
+            
+
             ; that is, the range of return values ordinarily includes zero but not <paramref
              name="maxValue" />
+
+            
 
             
 
@@ -493,8 +551,12 @@ class RandomTest {
 
             
 
+            
+
              equals zero, <paramref
              name="maxValue" />
+
+            
 
             
 
@@ -510,8 +572,12 @@ class RandomTest {
 
           
 
+          
+
           The exclusive upper bound of the random number to be generated. <paramref
            name="maxValue" />
+
+          
 
           
 
@@ -556,8 +622,12 @@ class RandomTest {
 
           
 
+          
+
            is greater than <paramref
            name="maxValue" />
+
+          
 
           
 
@@ -570,6 +640,8 @@ class RandomTest {
           <para
             >Unlike the other overloads of the <see
              cref="M:System.Random.Next" />
+
+            
 
             
 
@@ -592,8 +664,12 @@ class RandomTest {
 
             
 
+            
+
              and less than <paramref
              name="maxValue" />
+
+            
 
             
 
@@ -606,8 +682,12 @@ class RandomTest {
 
             
 
+            
+
              but not <paramref
              name="maxValue" />
+
+            
 
             
 
@@ -620,6 +700,8 @@ class RandomTest {
 
             
 
+            
+
              equals <paramref
              name="maxValue" />
 
@@ -627,8 +709,12 @@ class RandomTest {
 
             
 
+            
+
             , <paramref
              name="minValue" />
+
+            
 
             
 
@@ -644,10 +730,14 @@ class RandomTest {
 
           
 
+          
+
           The inclusive lower bound of the random number returned. </param
         >
         <param name="maxValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -660,8 +750,12 @@ class RandomTest {
 
           
 
+          
+
            must be greater than or equal to <paramref
            name="minValue" />
+
+          
 
           
 
@@ -702,8 +796,12 @@ class RandomTest {
 
           
 
+          
+
            is a <see
            langword="null" />
+
+          
 
           
 
@@ -721,11 +819,15 @@ class RandomTest {
 
             
 
+            
+
             .</para
           >
           <para
             >To generate a cryptographically secured random number suitable for creating a random password, for example, use a method such as <see
              cref="M:System.Security.Cryptography.RNGCryptoServiceProvider.GetBytes(System.Byte[])" />
+
+            
 
             
 
@@ -740,6 +842,8 @@ class RandomTest {
         </summary>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -776,6 +880,8 @@ class RandomTest {
           <para
             >This method is the public version of the protected method, <see
              cref="M:System.Random.Sample" />
+
+            
 
             
 
@@ -823,8 +929,12 @@ class RandomTest {
 
             
 
+            
+
              class and override the <see
              cref="M:System.Random.Sample" />
+
+            
 
             
 
@@ -841,8 +951,12 @@ class RandomTest {
 
               
 
+              
+
                method is protected, which means that it is accessible only within the <see
                cref="T:System.Random" />
+
+              
 
               
 
@@ -855,8 +969,12 @@ class RandomTest {
 
               
 
+              
+
                instance, call the <see
                cref="M:System.Random.NextDouble" />
+
+              
 
               
 

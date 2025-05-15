@@ -21,8 +21,12 @@
 
         
 
+        
+
          class is the base class for expression builders, such as the <see
          cref="T:System.Web.Compilation.AppSettingsExpressionBuilder" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
          object. Prefixes are associated with expression builders in the Web.config file in the <see
          cref="P:System.Web.Configuration.CompilationSection.ExpressionBuilders" />
+
+        
 
         
 
@@ -56,11 +64,15 @@
 
         
 
+        
+
          method to generate code that will be compiled with the page. </para
       >
       <para
         >If you want the custom expression builder to be active on pages that are not compiled, you must also override the <see
          cref="M:System.Web.Compilation.ExpressionBuilder.EvaluateExpression(System.Object,System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" />
+
+        
 
         
 
@@ -73,11 +85,15 @@
 
         
 
+        
+
          property to indicate that the custom expression builder does support no-compile pages. </para
       >
       <para
         >You can define a set of properties and methods for selecting and evaluating an expression that is associated with a control property at design time by implementing an expression editor. The editor is marked on the expression builder through class-level metadata. For more information, see <see
          cref="T:System.Web.UI.Design.ExpressionEditor" />
+
+        
 
         
 
@@ -108,6 +124,8 @@
 
             
 
+            
+
              class is abstract, you cannot create an instance of <see
              cref="T:System.Web.Compilation.ExpressionBuilder" />
 
@@ -115,8 +133,12 @@
 
             
 
+            
+
              directly by using the <see
              cref="M:System.Web.Compilation.ExpressionBuilder.#ctor" />
+
+            
 
             
 
@@ -130,6 +152,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Compilation.ExpressionBuilder" />
+
+            
 
             
 
@@ -170,8 +194,12 @@
 
             
 
+            
+
              object to be active on a page that supports the no-compile feature, you can override the <see
              cref="M:System.Web.Compilation.ExpressionBuilder.EvaluateExpression(System.Object,System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" />
+
+            
 
             
 
@@ -184,8 +212,12 @@
 
             
 
+            
+
              property. The <see
              cref="M:System.Web.Compilation.ExpressionBuilder.EvaluateExpression(System.Object,System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" />
+
+            
 
             
 
@@ -208,11 +240,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -227,10 +263,14 @@
 
           
 
+          
+
           The object that represents information about the property bound to by the expression.</param
         >
         <param name="parsedData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -243,10 +283,14 @@
 
           
 
+          
+
           .</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -285,8 +329,12 @@
 
             
 
+            
+
              class must implement the <see
              cref="M:System.Web.Compilation.ExpressionBuilder.GetCodeExpression(System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" />
+
+            
 
             
 
@@ -309,11 +357,15 @@
 
             
 
+            
+
              that is used for property assignment.</para
           >
         </returns>
         <param name="entry">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -328,8 +380,12 @@
 
           
 
+          
+
           The object containing parsed data as returned by <see
            cref="M:System.Web.Compilation.ExpressionBuilder.ParseExpression(System.String,System.Type,System.Web.Compilation.ExpressionBuilderContext)" />
+
+          
 
           
 
@@ -339,6 +395,8 @@
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -377,6 +435,8 @@
 
             
 
+            
+
              parameter in a <see
              cref="M:System.Web.Compilation.ExpressionBuilder.GetCodeExpression(System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" />
 
@@ -384,8 +444,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Web.Compilation.ExpressionBuilder.EvaluateExpression(System.Object,System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" />
+
+            
 
             
 
@@ -408,8 +472,12 @@
 
             
 
+            
+
              containing the parsed representation of the expression; otherwise, null if <see
              cref="M:System.Web.Compilation.ExpressionBuilder.ParseExpression(System.String,System.Type,System.Web.Compilation.ExpressionBuilderContext)" />
+
+            
 
             
 
@@ -425,6 +493,8 @@
 
           
 
+          
+
           The value of the declarative expression.</param
         >
         <param name="propertyType">
@@ -434,10 +504,14 @@
 
           
 
+          
+
           The type of the property bound to by the expression.</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -469,6 +543,8 @@
 
             
 
+            
+
              property is false. To support no-compile pages, you must override both the <see
              cref="M:System.Web.Compilation.ExpressionBuilder.EvaluateExpression(System.Object,System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" />
 
@@ -476,8 +552,12 @@
 
             
 
+            
+
              method and the <see
              cref="P:System.Web.Compilation.ExpressionBuilder.SupportsEvaluate" />
+
+            
 
             
 
@@ -491,6 +571,8 @@
           <para
             >When overridden in a derived class, returns a value indicating whether the current <see
              cref="T:System.Web.Compilation.ExpressionBuilder" />
+
+            
 
             
 

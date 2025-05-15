@@ -26,8 +26,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.Net.Sockets.Socket.EndReceiveMessageFrom(System.IAsyncResult,System.Net.Sockets.SocketFlags@,System.Net.EndPoint@,System.Net.Sockets.IPPacketInformation@)" />
+
+        
 
         
 
@@ -65,8 +69,12 @@
 
             
 
+            
+
              method or <see
              cref="M:System.Net.Sockets.Socket.EndReceiveMessageFrom(System.IAsyncResult,System.Net.Sockets.SocketFlags@,System.Net.EndPoint@,System.Net.Sockets.IPPacketInformation@)" />
+
+            
 
             
 
@@ -110,8 +118,12 @@
 
             
 
+            
+
              is an instance of <see
              cref="T:System.Net.Sockets.IPPacketInformation" />
+
+            
 
             
 
@@ -122,6 +134,8 @@
         </returns>
         <param name="comparand">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -157,8 +171,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.Sockets.IPPacketInformation.Interface" />
+
+            
 
             
 
@@ -201,8 +219,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Net.Sockets.Socket.EndReceiveMessageFrom(System.IAsyncResult,System.Net.Sockets.SocketFlags@,System.Net.EndPoint@,System.Net.Sockets.IPPacketInformation@)" />
+
+            
 
             
 
@@ -247,8 +269,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.Sockets.IPPacketInformation.Interface" />
+
+            
 
             
 
@@ -267,6 +293,8 @@
 
             
 
+            
+
              instances are equivalent.</para
           >
         </summary>
@@ -280,8 +308,12 @@
 
             
 
+            
+
              and <paramref
              name="packetInformation2" />
+
+            
 
             
 
@@ -326,8 +358,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.Sockets.IPPacketInformation.Interface" />
+
+            
 
             
 
@@ -346,6 +382,8 @@
 
             
 
+            
+
              instances are not equal.</para
           >
         </summary>
@@ -359,8 +397,12 @@
 
             
 
+            
+
              and <paramref
              name="packetInformation2" />
+
+            
 
             
 

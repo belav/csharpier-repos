@@ -25,6 +25,8 @@
 
       
 
+      
+
       .</remarks
     >
   </Docs>
@@ -47,6 +49,8 @@
         <summary>To be added.</summary>
         <remarks>
           <c>T:Mono.DocTest.Widget.Direction.East</c>
+
+          
 
           
 
@@ -79,6 +83,8 @@
 
           
 
+          
+
           .</remarks
         >
       </Docs>
@@ -106,6 +112,8 @@
 
           
 
+          
+
           .</remarks
         >
       </Docs>
@@ -128,6 +136,8 @@
         <summary>To be added.</summary>
         <remarks>
           <c>T:Mono.DocTest.Widget.Direction.West</c>
+
+          
 
           
 

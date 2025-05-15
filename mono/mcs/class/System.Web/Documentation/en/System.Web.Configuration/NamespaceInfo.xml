@@ -24,6 +24,8 @@
 
         
 
+        
+
          contains <see
          cref="T:System.Web.Configuration.NamespaceInfo" />
 
@@ -31,8 +33,12 @@
 
         
 
+        
+
          objects, which correspond to the add elements within the namespaces section. Each <see
          cref="T:System.Web.Configuration.NamespaceInfo" />
+
+        
 
         
 
@@ -69,6 +75,8 @@
 
             
 
+            
+
              class with the specified namespace reference.</para
           >
         </summary>
@@ -79,8 +87,12 @@
 
           
 
+          
+
           A namespace reference for the new <see
            cref="T:System.Web.Configuration.NamespaceInfo" />
+
+          
 
           
 
@@ -118,6 +130,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -132,8 +146,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Configuration.NamespaceInfo" />
+
+          
 
           
 
@@ -217,6 +235,8 @@
           <para
             >Gets a collection of all the properties belonging to this <see
              cref="T:System.Web.Configuration.NamespaceInfo" />
+
+            
 
             
 

@@ -55,6 +55,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -65,10 +67,14 @@
 
           
 
+          
+
           true if the groups to which the Windows accounts belong are extracted; otherwise, false.</param
         >
         <param name="allowUnauthenticatedCallers">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -112,11 +118,15 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
         <param name="impersonationLevel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -129,10 +139,14 @@
 
           
 
+          
+
           .</param
         >
         <param name="allowNtlm">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

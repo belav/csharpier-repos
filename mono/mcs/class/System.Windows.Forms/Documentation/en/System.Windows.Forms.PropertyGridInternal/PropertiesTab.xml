@@ -25,8 +25,12 @@
 
         
 
+        
+
          tab on a <see
          cref="T:System.Windows.Forms.PropertyGrid" />
+
+        
 
         
 
@@ -48,6 +52,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.PropertyGridInternal.PropertiesTab" />
+
+            
 
             
 
@@ -170,6 +176,8 @@
           <para
             >Gets the name of the <ui
             >Properties</ui>
+
+            
 
             
 

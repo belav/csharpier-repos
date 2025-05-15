@@ -20,8 +20,12 @@
 
         
 
+        
+
          enumeration represents the modes that you can specify for how the content in a <see
          cref="T:System.Web.UI.WebControls.Literal" />
+
+        
 
         
 
@@ -34,6 +38,8 @@
 
         
 
+        
+
          property uses these enumeration values to set the behavior of the contents of the <see
          cref="P:System.Web.UI.WebControls.Literal.Text" />
 
@@ -41,8 +47,12 @@
 
         
 
+        
+
          property in a <see
          cref="T:System.Web.UI.WebControls.Literal" />
+
+        
 
         
 
@@ -58,6 +68,8 @@
 
         
 
+        
+
          property are passed to the device or browser without any modifications. For example, if the <see
          cref="P:System.Web.UI.WebControls.Literal.Text" />
 
@@ -65,8 +77,12 @@
 
         
 
+        
+
          property of a <see
          cref="T:System.Web.UI.WebControls.Literal" />
+
+        
 
         
 
@@ -82,6 +98,8 @@
 
         
 
+        
+
          property are converted into an HTML-encoded string before rendering. For example, if the <see
          cref="P:System.Web.UI.WebControls.Literal.Text" />
 
@@ -89,8 +107,12 @@
 
         
 
+        
+
          property of a <see
          cref="T:System.Web.UI.WebControls.Literal" />
+
+        
 
         
 
@@ -106,8 +128,12 @@
 
         
 
+        
+
          property depends on the type of markup being rendered. When the <see
          cref="T:System.Web.UI.WebControls.Literal" />
+
+        
 
         
 
@@ -120,6 +146,8 @@
 
         
 
+        
+
          produces the same behavior as specifying <see
          cref="F:System.Web.UI.WebControls.LiteralMode.PassThrough" />
 
@@ -127,8 +155,12 @@
 
         
 
+        
+
         . All markup tags and elements for the <see
          cref="P:System.Web.UI.WebControls.Literal.Text" />
+
+        
 
         
 
@@ -144,8 +176,12 @@
 
         
 
+        
+
          control is rendered for a markup language other than HTML or XHTML, such as WML or cHTML, you can use the <see
          cref="F:System.Web.UI.WebControls.LiteralMode.Transform" />
+
+        
 
         
 
@@ -158,8 +194,12 @@
 
         
 
+        
+
          property that are not supported in the targeted markup language are not rendered for the control. For example, if the <see
          cref="P:System.Web.UI.WebControls.Literal.Text" />
+
+        
 
         
 
@@ -172,8 +212,12 @@
 
         
 
+        
+
          control contains an &lt;hr&gt; tag, the tag is removed before the content is sent to a WML device. If an unsupported tag contains content, only the tag is removed and the content is sent to the device or browser. For example, if the <see
          cref="P:System.Web.UI.WebControls.Literal.Text" />
+
+        
 
         
 
@@ -187,6 +231,8 @@
       <para
         >Specifies how the content in a <see
          cref="T:System.Web.UI.WebControls.Literal" />
+
+        
 
         
 

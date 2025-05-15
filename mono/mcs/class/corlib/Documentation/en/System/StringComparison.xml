@@ -30,12 +30,16 @@
 
         
 
+        
+
          enumeration is used to specify whether a string comparison should use the current culture or the invariant culture, word or ordinal sort rules, and be case-sensitive or case-insensitive.</para
       >
       <block subset="none" type="note">
         <para
           >When you call a string comparison method such as <see
            cref="M:System.String.Compare(System.String,System.String)" />
+
+          
 
           
 
@@ -48,8 +52,12 @@
 
           
 
+          
+
           , or <see
            cref="M:System.String.IndexOf(System.String)" />
+
+          
 
           
 
@@ -62,12 +70,16 @@
 
           
 
+          
+
            so that you can specify the type of comparison that the method performs. For more information, see <format
            type="text/html">
             <a href="b9f0bf53-e2de-4116-8ce9-d4f91a1df4f7"
               >Best Practices for Using Strings in the .NET Framework</a
             >
           </format>
+
+          
 
           
 
@@ -85,11 +97,15 @@
 
         
 
+        
+
          in the string. An ordinal comparison is fast but culture-insensitive. When you use ordinal sort rules to sort strings that start with Unicode characters (U+), the string U+xxxx comes before the string U+yyyy if the value of xxxx is numerically less than yyyy.</para
       >
       <para
         >For more information about comparisons, see the <see
          cref="T:System.String" />
+
+        
 
         
 
@@ -102,12 +118,16 @@
 
         
 
+        
+
          class remarks. For guidelines on when to use ordinal or culture-sensitive comparison rules or the rules of the invariant culture, see <format
          type="text/html">
           <a href="b9f0bf53-e2de-4116-8ce9-d4f91a1df4f7"
             >Best Practices for Using Strings in the .NET Framework</a
           >
         </format>
+
+        
 
         
 
@@ -126,8 +146,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.String.Equals(System.Object)" />
+
+        
 
         
 

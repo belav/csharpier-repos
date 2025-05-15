@@ -27,6 +27,8 @@
 
         
 
+        
+
          class represents the context in which the custom WSDL for an endpoint is either exported using <see
          cref="T:System.ServiceModel.Description.IWsdlExportExtension" />
 
@@ -34,8 +36,12 @@
 
         
 
+        
+
          or imported using <see
          cref="T:System.ServiceModel.Description.IWsdlImportExtension" />
+
+        
 
         
 
@@ -53,8 +59,12 @@
 
             
 
+            
+
              property gets the <see
              cref="T:System.ServiceModel.Description.WsdlContractConversionContext" />
+
+            
 
             
 
@@ -72,8 +82,12 @@
 
             
 
+            
+
              property gets the <see
              cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+
+            
 
             
 
@@ -91,6 +105,8 @@
 
             
 
+            
+
              property gets the binding for the current endpoint.</para
           >
         </item>
@@ -98,6 +114,8 @@
           <para
             >The <see
              cref="P:System.ServiceModel.Description.WsdlEndpointConversionContext.WsdlPort" />
+
+            
 
             
 
@@ -121,6 +139,8 @@
 
             
 
+            
+
              method returns the fault binding for the specified fault.</para
           >
         </item>
@@ -128,6 +148,8 @@
           <para
             >The <see
              cref="M:System.ServiceModel.Description.WsdlEndpointConversionContext.GetFaultDescription(System.Web.Services.Description.FaultBinding)" />
+
+            
 
             
 
@@ -145,6 +167,8 @@
 
             
 
+            
+
              method returns the message binding for the specified message.</para
           >
         </item>
@@ -152,6 +176,8 @@
           <para
             >The <see
              cref="M:System.ServiceModel.Description.WsdlEndpointConversionContext.GetMessageDescription(System.Web.Services.Description.MessageBinding)" />
+
+            
 
             
 
@@ -169,6 +195,8 @@
 
             
 
+            
+
              method returns the operation binding for the specified operation.</para
           >
         </item>
@@ -176,6 +204,8 @@
           <para
             >The <see
              cref="M:System.ServiceModel.Description.WsdlEndpointConversionContext.GetOperationDescription(System.Web.Services.Description.OperationBinding)" />
+
+            
 
             
 
@@ -220,6 +250,8 @@
 
             
 
+            
+
              to obtain the conversion context of the contract for the endpoint.</para
           >
         </remarks>
@@ -228,6 +260,8 @@
           <para
             >Gets the <see
              cref="T:System.ServiceModel.Description.WsdlContractConversionContext" />
+
+            
 
             
 
@@ -266,6 +300,8 @@
 
             
 
+            
+
              property to obtain the service endpoint description on export or import.</para
           >
         </remarks>
@@ -274,6 +310,8 @@
           <para
             >Gets the <see
              cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+
+            
 
             
 
@@ -314,6 +352,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -331,6 +371,8 @@
 
             
 
+            
+
              for the message specified by the description.</para
           >
         </returns>
@@ -341,8 +383,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.MessageDescription" />
+
+          
 
           
 
@@ -383,6 +429,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -395,6 +443,8 @@
           <para
             >The <see
              cref="T:System.ServiceModel.Description.MessageDescription" />
+
+            
 
             
 
@@ -435,6 +485,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -452,6 +504,8 @@
 
             
 
+            
+
              for the operation specified by the description.</para
           >
         </returns>
@@ -462,8 +516,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.OperationDescription" />
+
+          
 
           
 
@@ -504,6 +562,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -516,6 +576,8 @@
           <para
             >The <see
              cref="T:System.ServiceModel.Description.OperationDescription" />
+
+            
 
             
 
@@ -555,6 +617,8 @@
 
             
 
+            
+
              for the WSDL endpoint.</para
           >
         </summary>
@@ -584,6 +648,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.Services.Description.Port" />
+
+            
 
             
 

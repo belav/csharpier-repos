@@ -28,6 +28,8 @@
 
         
 
+        
+
          class.</para
       >
       <para>You must enable tracing or debugging to use a switch. The following syntax is compiler specific. If you use compilers other than C# or Visual Basic, refer to the documentation for your compiler.</para>
@@ -47,8 +49,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Diagnostics.Trace" />
+
+        
 
         
 
@@ -65,8 +71,12 @@
 
           
 
+          
+
            or the text representing an enumeration value such as Error for a <see
            cref="T:System.Diagnostics.TraceSwitch" />
+
+          
 
           
 
@@ -91,11 +101,15 @@
 
         
 
+        
+
         . The line &lt;add name="mySwitch" value="Verbose" /&gt; is equivalent to &lt;add name="mySwitch" value="4" /&gt;.</para
       >
       <para
         >The following table shows the relationship between the <see
          cref="T:System.Diagnostics.TraceLevel" />
+
+        
 
         
 
@@ -166,6 +180,8 @@
 
         
 
+        
+
         , <see
          cref="T:System.Diagnostics.Trace" />
 
@@ -173,8 +189,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Diagnostics.TraceSwitch" />
+
+        
 
         
 

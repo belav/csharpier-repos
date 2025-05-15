@@ -11,8 +11,12 @@
 
         
 
+        
+
          namespace deals with general security-related topics, for example, <see
          cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+
+        
 
         
 
@@ -31,8 +35,12 @@
 
         
 
+        
+
          see <see
          cref="N:System.ServiceModel.Security.Tokens" />
+
+        
 
         
 
@@ -48,8 +56,12 @@
 
         
 
+        
+
         , see <see
          cref="N:System.ServiceModel" />
+
+        
 
         
 

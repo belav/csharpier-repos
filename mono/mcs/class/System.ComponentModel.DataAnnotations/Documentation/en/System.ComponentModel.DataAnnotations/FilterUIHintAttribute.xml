@@ -54,11 +54,15 @@
 
             
 
+            
+
              class by using the filter UI hint.</para
           >
         </summary>
         <param name="filterUIHint">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -97,6 +101,8 @@
 
             
 
+            
+
              class by using the filter UI hint and presentation layer name.</para
           >
         </summary>
@@ -107,10 +113,14 @@
 
           
 
+          
+
           The name of the control to use for filtering.</param
         >
         <param name="presentationLayer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -156,11 +166,15 @@
 
             
 
+            
+
              class by using the filter UI hint, presentation layer name, and control parameters.</para
           >
         </summary>
         <param name="filterUIHint">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -175,10 +189,14 @@
 
           
 
+          
+
           The name of the presentation layer that supports this control.</param
         >
         <param name="controlParameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -243,6 +261,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

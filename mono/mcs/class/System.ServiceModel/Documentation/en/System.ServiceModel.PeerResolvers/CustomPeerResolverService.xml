@@ -39,6 +39,8 @@
 
         
 
+        
+
          class defines the base implementation of a custom peer resolver service and provides lookup for the resolution of registration IDs to peer endpoint addresses within the mesh maintained by this resolver. </para
       >
     </remarks>
@@ -71,6 +73,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -97,6 +101,8 @@
           <para
             >This value must be less than the value of <see
              cref="P:System.ServiceModel.PeerResolvers.CustomPeerResolverService.RefreshInterval" />
+
+            
 
             
 
@@ -184,6 +190,8 @@
 
             
 
+            
+
              that contains the specific response settings for the custom peer resolver service, including cleanup and refresh interval settings.</para
           >
         </returns>
@@ -209,6 +217,8 @@
           <para
             >When this method is called, it schedules the first registration lookup table cleanup based on the value set for the <see
              cref="P:System.ServiceModel.PeerResolvers.CustomPeerResolverService.CleanupInterval" />
+
+            
 
             
 
@@ -253,6 +263,8 @@
 
             
 
+            
+
              object supplied to this method.</para
           >
         </remarks>
@@ -269,12 +281,16 @@
 
             
 
+            
+
              that contains the newly refreshed registration entry.</para
           >
         </returns>
         <param name="refreshInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.ServiceModel.PeerResolvers.RefreshInfo" />
+
+          
 
           
 
@@ -305,6 +321,8 @@
           <para
             >When the amount of time supplied to this property has passed for a given entry in a peer resolver service's registration lookup table, that entry is marked for deletion. The delete occurs when interval specified in the <see
              cref="P:System.ServiceModel.PeerResolvers.CustomPeerResolverService.CleanupInterval" />
+
+            
 
             
 
@@ -356,12 +374,16 @@
 
             
 
+            
+
              that contains a copy of the entry added to the peer resolver service's registration lookup table.</para
           >
         </returns>
         <param name="registerInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.ServiceModel.PeerResolvers.RegisterInfo" />
+
+          
 
           
 
@@ -408,6 +430,8 @@
 
             
 
+            
+
              that contains a copy of the entry added to the peer resolver service's registration lookup table.</para
           >
         </returns>
@@ -418,8 +442,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Guid" />
+
+          
 
           
 
@@ -434,8 +462,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -450,8 +482,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.PeerNodeAddress" />
+
+          
 
           
 
@@ -491,6 +527,8 @@
 
             
 
+            
+
              object and returns any corresponding endpoint addresses found in the peer resolver service's registration lookup table. The number of endpoint addresses returned is equal to or less than the value of the  <see
              cref="P:System.ServiceModel.PeerResolvers.ResolveInfo.MaxAddresses" />
 
@@ -498,8 +536,12 @@
 
             
 
+            
+
              property set on the <see
              cref="T:System.ServiceModel.PeerResolvers.ResolveInfo" />
+
+            
 
             
 
@@ -521,8 +563,12 @@
 
             
 
+            
+
              that contains the endpoints for the registration entry in the lookup table that matches the information supplied in the <paramref
              name="resolveInfo" />
+
+            
 
             
 
@@ -534,6 +580,8 @@
         <param name="resolveInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.ServiceModel.PeerResolvers.ResolveInfo" />
+
+          
 
           
 
@@ -571,6 +619,8 @@
         <param name="unregisterInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.ServiceModel.PeerResolvers.UnregisterInfo" />
+
+          
 
           
 
@@ -614,12 +664,16 @@
 
             
 
+            
+
              that contains a copy of the updated registration entry entry.</para
           >
         </returns>
         <param name="updateInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.ServiceModel.PeerResolvers.UpdateInfo" />
+
+          
 
           
 

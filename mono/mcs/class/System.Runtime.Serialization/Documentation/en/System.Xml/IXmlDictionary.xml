@@ -21,8 +21,12 @@
 
         
 
+        
+
         , which is used in indigo1 to optimize the performance of serialization and deserialization of XML messages. Implement this interface to provide custom <see
          cref="T:System.Xml.XmlDictionaryString" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Xml.XmlDictionaryWriter" />
+
+        
 
         
 

@@ -24,6 +24,8 @@
 
         
 
+        
+
          creates a <see
          cref="T:System.Net.Sockets.SocketInformation" />
 
@@ -31,8 +33,12 @@
 
         
 
+        
+
          instance for use with the <see
          cref="M:System.Net.Sockets.Socket.#ctor(System.Net.Sockets.SocketInformation)" />
+
+        
 
         
 
@@ -46,6 +52,8 @@
       <para
         >Encapsulates the information that is necessary to duplicate a <see
          cref="T:System.Net.Sockets.Socket" />
+
+        
 
         
 
@@ -85,8 +93,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Net.Sockets.SocketInformationOptions.Listening" />
+
+            
 
             
 
@@ -99,8 +111,12 @@
 
             
 
+            
+
             , and <see
              cref="F:System.Net.Sockets.SocketInformationOptions.UseOnlyOverlappedIO" />
+
+            
 
             
 
@@ -114,6 +130,8 @@
           <para
             >Gets or sets the options for a <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -146,6 +164,8 @@
           <para
             >Gets or sets the protocol information for a <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 

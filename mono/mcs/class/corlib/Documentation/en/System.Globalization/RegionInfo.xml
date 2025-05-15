@@ -33,8 +33,12 @@
 
         
 
+        
+
          class, the <see
          cref="T:System.Globalization.RegionInfo" />
+
+        
 
         
 
@@ -53,8 +57,12 @@
 
         
 
+        
+
          object is one of the two-letter codes defined in ISO 3166 for country/region. Case is not significant. The <see
          cref="P:System.Globalization.RegionInfo.Name" />
+
+        
 
         
 
@@ -67,8 +75,12 @@
 
         
 
+        
+
         , and <see
          cref="P:System.Globalization.RegionInfo.ThreeLetterISORegionName" />
+
+        
 
         
 
@@ -81,10 +93,14 @@
 
         
 
+        
+
          names, see <see
          cref="http://go.microsoft.com/fwlink/?LinkId=190591"
           >English country names and code elements</see
         >
+
+        
 
         
 
@@ -103,8 +119,12 @@
 
         
 
+        
+
          object, you pass the <see
          cref="M:System.Globalization.RegionInfo.#ctor(System.String)" />
+
+        
 
         
 
@@ -117,8 +137,12 @@
 
         
 
+        
+
          object is not completely language-independent. Several <see
          cref="T:System.Globalization.RegionInfo" />
+
+        
 
         
 
@@ -131,6 +155,8 @@
 
         
 
+        
+
         , <see
          cref="P:System.Globalization.RegionInfo.NativeName" />
 
@@ -138,8 +164,12 @@
 
         
 
+        
+
         , and <see
          cref="P:System.Globalization.RegionInfo.CurrencyNativeName" />
+
+        
 
         
 
@@ -155,8 +185,12 @@
 
         
 
+        
+
          property values for three objects that represent Belgium. The first is instantiated from a region name (BE) only, while the second and third are instantiated from culture names (fr-BE for French (Belgium) and and nl-BE for Dutch (Belgium), respectively). The example uses reflection to retrieve the property values of each <see
          cref="T:System.Globalization.RegionInfo" />
+
+        
 
         
 
@@ -168,6 +202,8 @@
       <para
         >In scenarios such as the following, use culture names instead of country/region names when you instantiate a <see
          cref="T:System.Globalization.RegionInfo" />
+
+        
 
         
 
@@ -191,6 +227,8 @@
 
             
 
+            
+
              members can differ depending on whether the <see
              cref="T:System.Globalization.RegionInfo" />
 
@@ -198,8 +236,12 @@
 
             
 
+            
+
              object was instantiated by using a culture name or a region name. For example, the following table lists the differences in return values when a <see
              cref="T:System.Globalization.RegionInfo" />
+
+            
 
             
 
@@ -324,6 +366,8 @@
 
             
 
+            
+
              is the recommended constructor for instantiating a <see
              cref="T:System.Globalization.RegionInfo" />
 
@@ -331,8 +375,12 @@
 
             
 
+            
+
              object. Unlike the <see
              cref="M:System.Globalization.RegionInfo.#ctor(System.Int32)" />
+
+            
 
             
 
@@ -350,11 +398,15 @@
 
             
 
+            
+
              at the Go Global Developer Center.</para
           >
           <para
             >The value of the <see
              cref="P:System.Globalization.RegionInfo.Name" />
+
+            
 
             
 
@@ -367,8 +419,12 @@
 
             
 
+            
+
              object instantiated by calling this constructor is the ISO 3166 2-letter code for the country/region, not the combined language and country/region code. For example, if a <see
              cref="T:System.Globalization.RegionInfo" />
+
+            
 
             
 
@@ -381,6 +437,8 @@
 
             
 
+            
+
              property is "US". In contrast, if a <see
              cref="T:System.Globalization.RegionInfo" />
 
@@ -388,8 +446,12 @@
 
             
 
+            
+
              object is instantiated with the combined language and country/region code en-US for the English (United States) culture, the value of the <see
              cref="P:System.Globalization.RegionInfo.Name" />
+
+            
 
             
 
@@ -408,11 +470,15 @@
 
             
 
+            
+
              class based on the country/region associated with the specified culture identifier.</para
           >
         </summary>
         <param name="culture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -449,8 +515,12 @@
 
             
 
+            
+
              parameter is either one of the codes defined for country/region, or a specific, custom, or Windows-only culture name. Case is not significant. However, the <see
              cref="P:System.Globalization.RegionInfo.Name" />
+
+            
 
             
 
@@ -463,8 +533,12 @@
 
             
 
+            
+
             , and the <see
              cref="P:System.Globalization.RegionInfo.ThreeLetterISORegionName" />
+
+            
 
             
 
@@ -481,6 +555,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -491,10 +567,14 @@
 
             
 
+            
+
              names are listed in <see
              cref="http://go.microsoft.com/fwlink/?LinkId=190591"
               >Country names and code elements</see
             >
+
+            
 
             
 
@@ -510,8 +590,12 @@
 
             
 
+            
+
              parameter. For example, en-US for English (United States) or es-US for Spanish (United States) is preferable to US because properties such as <see
              cref="P:System.Globalization.RegionInfo.NativeName" />
+
+            
 
             
 
@@ -524,8 +608,12 @@
 
             
 
+            
+
              reflect a specific language. az-Latn-AZ or az-Cyrl-AZ is preferable to AZ because properties such as <see
              cref="P:System.Globalization.RegionInfo.NativeName" />
+
+            
 
             
 
@@ -538,8 +626,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Globalization.RegionInfo.CurrencySymbol" />
+
+            
 
             
 
@@ -554,6 +646,8 @@
 
             
 
+            
+
              at the Go Global Developer Center. Note that a call to this constructor throws an <see
              cref="T:System.ArgumentException" />
 
@@ -561,8 +655,12 @@
 
             
 
+            
+
              if <paramref
              name="name" />
+
+            
 
             
 
@@ -581,11 +679,15 @@
 
             
 
+            
+
              class based on the country/region or specific culture, specified by name.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -650,8 +752,12 @@
 
             
 
+            
+
              object is created with a specific culture and more than one language is used in the corresponding country/region, the <see
              cref="P:System.Globalization.RegionInfo.CurrencyNativeName" />
+
+            
 
             
 
@@ -667,8 +773,12 @@
 
             
 
+            
+
              property, you should instantiate the <see
              cref="T:System.Globalization.RegionInfo" />
+
+            
 
             
 
@@ -681,8 +791,12 @@
 
             
 
+            
+
              constructor a combined language and country/region code. For example, if a <see
              cref="T:System.Globalization.RegionInfo" />
+
+            
 
             
 
@@ -695,8 +809,12 @@
 
             
 
+            
+
              property is "Canadian Dollar". If it is instantiated with a combined language and country/region code of "fr-CA" for French (Canada), the value of its <see
              cref="P:System.Globalization.RegionInfo.CurrencyNativeName" />
+
+            
 
             
 
@@ -736,8 +854,12 @@
 
             
 
+            
+
              object is created with a specific culture and more than one language is used in the corresponding country/region, the <see
              cref="P:System.Globalization.RegionInfo.CurrencySymbol" />
+
+            
 
             
 
@@ -782,8 +904,12 @@
 
             
 
+            
+
             . The <see
              cref="T:System.Globalization.RegionInfo" />
+
+            
 
             
 
@@ -796,8 +922,12 @@
 
             
 
+            
+
              property is updated when you call the <see
              cref="M:System.Globalization.CultureInfo.ClearCachedData" />
+
+            
 
             
 
@@ -811,6 +941,8 @@
           <para
             >Gets the <see
              cref="T:System.Globalization.RegionInfo" />
+
+            
 
             
 
@@ -845,8 +977,12 @@
 
             
 
+            
+
              property displays the country/region name in the language of the localized version of .NET Framework. For example, the <see
              cref="P:System.Globalization.RegionInfo.DisplayName" />
+
+            
 
             
 
@@ -862,8 +998,12 @@
 
             
 
+            
+
              property is taken from the resource files in the language of the current user interface culture, represented by <see
              cref="P:System.Globalization.CultureInfo.CurrentUICulture" />
+
+            
 
             
 
@@ -876,8 +1016,12 @@
 
             
 
+            
+
              is the same as the value of the <see
              cref="P:System.Globalization.RegionInfo.NativeName" />
+
+            
 
             
 
@@ -911,6 +1055,8 @@
           <para
             >For example, a <see
              cref="T:System.Globalization.RegionInfo" />
+
+            
 
             
 
@@ -954,6 +1100,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -962,6 +1110,8 @@
           <para
             >Determines whether the specified object is the same instance as the current <see
              cref="T:System.Globalization.RegionInfo" />
+
+            
 
             
 
@@ -980,8 +1130,12 @@
 
             
 
+            
+
              parameter is a <see
              cref="T:System.Globalization.RegionInfo" />
+
+            
 
             
 
@@ -994,6 +1148,8 @@
 
             
 
+            
+
              property is the same as the <see
              cref="P:System.Globalization.RegionInfo.Name" />
 
@@ -1001,8 +1157,12 @@
 
             
 
+            
+
              property of the current <see
              cref="T:System.Globalization.RegionInfo" />
+
+            
 
             
 
@@ -1018,8 +1178,12 @@
 
           
 
+          
+
           The object to compare with the current <see
            cref="T:System.Globalization.RegionInfo" />
+
+          
 
           
 
@@ -1058,8 +1222,12 @@
 
             
 
+            
+
              property to provide culture-specific services to customers. For example, the <see
              cref="P:System.Globalization.RegionInfo.GeoId" />
+
+            
 
             
 
@@ -1072,6 +1240,8 @@
              cref="http://go.microsoft.com/fwlink/?LinkId=191287"
               >Table of Geographical Locations</see
             >
+
+            
 
             
 
@@ -1113,11 +1283,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This method generates the same hash code for two objects that are equal according to the <see
              cref="M:System.Globalization.RegionInfo.Equals(System.Object)" />
+
+            
 
             
 
@@ -1136,6 +1310,8 @@
 
             
 
+            
+
             , suitable for hashing algorithms and data structures, such as a hash table.</para
           >
         </summary>
@@ -1144,6 +1320,8 @@
           <para
             >A hash code for the current <see
              cref="T:System.Globalization.RegionInfo" />
+
+            
 
             
 
@@ -1194,6 +1372,8 @@
           <para
             >The following example lists some of the ISO 4217 currency symbols returned by the <see
              cref="P:System.Globalization.RegionInfo.ISOCurrencySymbol" />
+
+            
 
             
 
@@ -2468,6 +2648,8 @@
 
             
 
+            
+
              object is created with the <see
              cref="M:System.Globalization.RegionInfo.#ctor(System.Int32)" />
 
@@ -2475,8 +2657,12 @@
 
             
 
+            
+
              constructor that takes a culture identifier parameter, the <see
              cref="P:System.Globalization.RegionInfo.Name" />
+
+            
 
             
 
@@ -2492,6 +2678,8 @@
 
             
 
+            
+
              object is created with the <see
              cref="M:System.Globalization.RegionInfo.#ctor(System.String)" />
 
@@ -2499,8 +2687,12 @@
 
             
 
+            
+
              constructor and is passed a full culture name such as "en-US", the <see
              cref="P:System.Globalization.RegionInfo.Name" />
+
+            
 
             
 
@@ -2514,6 +2706,8 @@
           <para
             >Gets the name or ISO 3166 two-letter country/region code for the current <see
              cref="T:System.Globalization.RegionInfo" />
+
+            
 
             
 
@@ -2554,12 +2748,16 @@
 
               
 
+              
+
                property retrieves a full culture name if the RegionInfo object is constructed using a full culture name.</para
             >
           </block>
           <para
             >We recommend that you use the culture name—for example, "en-US" for English (United States)—to access the <see
              cref="P:System.Globalization.RegionInfo.NativeName" />
+
+            
 
             
 
@@ -2604,11 +2802,15 @@
 
             
 
+            
+
              property contains the three-letter code defined in ISO 3166 for this country/region. For example, the three-letter code for United States is "USA".</para
           >
           <para
             >Case is not significant. However, the <see
              cref="P:System.Globalization.RegionInfo.Name" />
+
+            
 
             
 
@@ -2621,8 +2823,12 @@
 
             
 
+            
+
             , and the <see
              cref="P:System.Globalization.RegionInfo.ThreeLetterISORegionName" />
+
+            
 
             
 
@@ -2671,6 +2877,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2704,11 +2912,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This method returns the value of the <see
              cref="P:System.Globalization.RegionInfo.Name" />
+
+            
 
             
 
@@ -2724,6 +2936,8 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Globalization.RegionInfo.TwoLetterISORegionName" />
 
@@ -2731,8 +2945,12 @@
 
             
 
+            
+
             , and the <see
              cref="P:System.Globalization.RegionInfo.ThreeLetterISORegionName" />
+
+            
 
             
 
@@ -2748,8 +2966,12 @@
 
             
 
+            
+
              names are listed in the <see
              cref="T:System.Globalization.RegionInfo" />
+
+            
 
             
 
@@ -2768,6 +2990,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2776,6 +3000,8 @@
           <para
             >A string containing the culture name or ISO 3166 two-letter country/region codes defined for the current <see
              cref="T:System.Globalization.RegionInfo" />
+
+            
 
             
 
@@ -2813,6 +3039,8 @@
 
             
 
+            
+
              name is one of the two-letter codes defined in ISO 3166 for country/region. For example, the two-letter code for United States is "US".</para
           >
           <block subset="none" type="note">
@@ -2824,8 +3052,12 @@
 
               
 
+              
+
                property may have more than two characters. For example, the value of the <see
                cref="P:System.Globalization.RegionInfo.TwoLetterISORegionName" />
+
+              
 
               
 
@@ -2842,6 +3074,8 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Globalization.RegionInfo.TwoLetterISORegionName" />
 
@@ -2849,8 +3083,12 @@
 
             
 
+            
+
             , and the <see
              cref="P:System.Globalization.RegionInfo.ThreeLetterISORegionName" />
+
+            
 
             
 
@@ -2867,6 +3105,8 @@
 
               
 
+              
+
                object or communicate it between processes, you should instantiate it by using a full culture name rather than a two-letter ISO region code. Because <see
                cref="T:System.Globalization.RegionInfo" />
 
@@ -2874,8 +3114,12 @@
 
               
 
+              
+
                properties depend on script and language, instantiating a <see
                cref="T:System.Globalization.RegionInfo" />
+
+              
 
               
 
@@ -2892,10 +3136,14 @@
 
             
 
+            
+
              names are listed in <see
              cref="http://go.microsoft.com/fwlink/?LinkId=190591"
               >English country names and code elements</see
             >
+
+            
 
             
 

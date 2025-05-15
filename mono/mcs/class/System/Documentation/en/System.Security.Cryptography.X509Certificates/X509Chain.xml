@@ -26,8 +26,12 @@
 
         
 
+        
+
          object has a global error status called <see
          cref="P:System.Security.Cryptography.X509Certificates.X509Chain.ChainStatus" />
+
+        
 
         
 
@@ -41,6 +45,8 @@
       <para
         >Represents a chain-building engine for <see
          cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+        
 
         
 
@@ -71,6 +77,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Chain" />
+
+            
 
             
 
@@ -107,6 +115,8 @@
 
             
 
+            
+
              parameter is set to true, the local machine context (HCCE_LOCAL_MACHINE flag) is used to create the chain. If the parameter is set to false, the current user context (HCCE_CURRENT_USER flag) is used.</para
           >
         </remarks>
@@ -120,11 +130,15 @@
 
             
 
+            
+
              class specifying a value that indicates whether the machine context should be used.</para
           >
         </summary>
         <param name="useMachineContext">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -169,8 +183,12 @@
 
             
 
+            
+
              class using an <see
              cref="T:System.IntPtr" />
+
+            
 
             
 
@@ -186,8 +204,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IntPtr" />
+
+          
 
           
 
@@ -237,6 +259,8 @@
 
             
 
+            
+
              object. Certificates that meet these chain policy rules might still be invalid for specific uses with such features as Security/MIME (SMIME), Authenticode, or Secure Sockets Layer (SSL). If further processing is required to determine whether the certificate is valid for a specific policy, derive a class from <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Chain" />
 
@@ -244,8 +268,12 @@
 
             
 
+            
+
              and override the <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Chain.Build(System.Security.Cryptography.X509Certificates.X509Certificate2)" />
+
+            
 
             
 
@@ -259,6 +287,8 @@
           <para
             >Builds an X.509 chain using the policy specified in <see
              cref="T:System.Security.Cryptography.X509Certificates.X509ChainPolicy" />
+
+            
 
             
 
@@ -278,8 +308,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+          
 
           
 
@@ -348,8 +382,12 @@
 
             
 
+            
+
              object is a representation of an element in the chain that was built during a call to the <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Chain.Build(System.Security.Cryptography.X509Certificates.X509Certificate2)" />
+
+            
 
             
 
@@ -365,8 +403,12 @@
 
             
 
+            
+
              object, an <see
              cref="T:System.Security.Cryptography.X509Certificates.X509ChainStatus" />
+
+            
 
             
 
@@ -380,6 +422,8 @@
           <para
             >Gets a collection of <see
              cref="T:System.Security.Cryptography.X509Certificates.X509ChainElement" />
+
+            
 
             
 
@@ -424,6 +468,8 @@
 
             
 
+            
+
              to use when building an X.509 certificate chain.</para
           >
         </summary>
@@ -458,6 +504,8 @@
           <para
             >Gets the status of each element in an <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Chain" />
+
+            
 
             
 
@@ -502,6 +550,8 @@
 
             
 
+            
+
              object after querying for the mapping defined in the CryptoConfig file, and maps the chain to that mapping.</para
           >
         </summary>
@@ -510,6 +560,8 @@
           <para
             >An <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Chain" />
+
+            
 
             
 
@@ -543,6 +595,8 @@
           <para
             >Clears the current <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Chain" />
+
+            
 
             
 

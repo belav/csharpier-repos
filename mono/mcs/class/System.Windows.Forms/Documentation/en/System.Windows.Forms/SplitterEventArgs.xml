@@ -26,8 +26,12 @@
 
         
 
+        
+
          event occurs when the user is moving the <see
          cref="T:System.Windows.Forms.Splitter" />
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
          event occurs when the user finishes moving the <see
          cref="T:System.Windows.Forms.Splitter" />
+
+        
 
         
 
@@ -54,8 +62,12 @@
 
         
 
+        
+
          class specifies the position of the mouse pointer and the position of the upper-left corner of the <see
          cref="T:System.Windows.Forms.Splitter" />
+
+        
 
         
 
@@ -74,8 +86,12 @@
 
         
 
+        
+
          and the <see
          cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
+
+        
 
         
 
@@ -110,8 +126,12 @@
 
             
 
+            
+
              class with the specified coordinates of the mouse pointer and the coordinates of the upper-left corner of the <see
              cref="T:System.Windows.Forms.Splitter" />
+
+            
 
             
 
@@ -127,10 +147,14 @@
 
           
 
+          
+
           The x-coordinate of the mouse pointer (in client coordinates). </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -145,8 +169,12 @@
 
           
 
+          
+
           The x-coordinate of the upper-left corner of the <see
            cref="T:System.Windows.Forms.Splitter" />
+
+          
 
           
 
@@ -161,8 +189,12 @@
 
           
 
+          
+
           The y-coordinate of the upper-left corner of the <see
            cref="T:System.Windows.Forms.Splitter" />
+
+          
 
           
 
@@ -194,8 +226,12 @@
 
             
 
+            
+
              property of this class to determine the position of the <see
              cref="T:System.Windows.Forms.Splitter" />
+
+            
 
             
 
@@ -208,8 +244,12 @@
 
             
 
+            
+
              and <see
              cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
+
+            
 
             
 
@@ -223,6 +263,8 @@
           <para
             >Gets or sets the x-coordinate of the upper-left corner of the <see
              cref="T:System.Windows.Forms.Splitter" />
+
+            
 
             
 
@@ -255,8 +297,12 @@
 
             
 
+            
+
              property of this class to determine the position of the <see
              cref="T:System.Windows.Forms.Splitter" />
+
+            
 
             
 
@@ -269,8 +315,12 @@
 
             
 
+            
+
              and <see
              cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
+
+            
 
             
 
@@ -284,6 +334,8 @@
           <para
             >Gets or sets the y-coordinate of the upper-left corner of the <see
              cref="T:System.Windows.Forms.Splitter" />
+
+            
 
             
 
@@ -316,6 +368,8 @@
 
             
 
+            
+
              property of this class to determine the current location of the mouse pointer when the <see
              cref="E:System.Windows.Forms.Splitter.SplitterMoving" />
 
@@ -323,8 +377,12 @@
 
             
 
+            
+
              and <see
              cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
+
+            
 
             
 
@@ -361,6 +419,8 @@
 
             
 
+            
+
              property of this class to determine the current location of the mouse pointer when the <see
              cref="E:System.Windows.Forms.Splitter.SplitterMoving" />
 
@@ -368,8 +428,12 @@
 
             
 
+            
+
              and <see
              cref="E:System.Windows.Forms.Splitter.SplitterMoved" />
+
+            
 
             
 

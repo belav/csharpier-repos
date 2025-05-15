@@ -38,8 +38,12 @@
 
         
 
+        
+
          types, the new wrapper type <see
          cref="T:System.Configuration.IgnoreSection" />
+
+        
 
         
 
@@ -55,6 +59,8 @@
 
         
 
+        
+
          is also provided.</para
       >
     </remarks>
@@ -63,6 +69,8 @@
       <para
         >Provides a legacy section-handler definition for configuration sections that are not handled by the <see
          cref="N:System.Configuration" />
+
+        
 
         
 
@@ -94,6 +102,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Configuration.IgnoreSectionHandler" />
+
+            
 
             
 
@@ -144,10 +154,14 @@
 
           
 
+          
+
           The configuration settings in a corresponding parent configuration section. </param
         >
         <param name="configContext">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -162,8 +176,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlNode" />
+
+          
 
           
 

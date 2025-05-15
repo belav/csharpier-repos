@@ -32,8 +32,12 @@
 
         
 
+        
+
          store is opened, the result is represented by an <see
          cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
          as a memory store of <see
          cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+        
 
         
 
@@ -61,6 +69,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+        
 
         
 
@@ -95,6 +105,8 @@
 
             
 
+            
+
              object, which is unlike the other constructors that use certificate or collection information to create the object.</para
           >
         </remarks>
@@ -108,8 +120,12 @@
 
             
 
+            
+
              class without any <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+            
 
             
 
@@ -153,8 +169,12 @@
 
             
 
+            
+
              class using an <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+            
 
             
 
@@ -170,8 +190,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+          
 
           
 
@@ -214,8 +238,12 @@
 
             
 
+            
+
              class using an array of <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+            
 
             
 
@@ -231,8 +259,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+          
 
           
 
@@ -275,6 +307,8 @@
 
             
 
+            
+
              class using the specified certificate collection.</para
           >
         </summary>
@@ -285,8 +319,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+
+          
 
           
 
@@ -331,6 +369,8 @@
 
             
 
+            
+
              object to a collection and returns the index location of the certificate.</para
           >
         </remarks>
@@ -339,6 +379,8 @@
           <para
             >Adds an object to the end of the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+
+            
 
             
 
@@ -357,8 +399,12 @@
 
             
 
+            
+
              index at which the <paramref
              name="certificate" />
+
+            
 
             
 
@@ -374,8 +420,12 @@
 
           
 
+          
+
           An X.509 certificate represented as an <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+          
 
           
 
@@ -425,8 +475,12 @@
 
             
 
+            
+
              objects to add to an <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+
+            
 
             
 
@@ -439,8 +493,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.RemoveRange(System.Security.Cryptography.X509Certificates.X509Certificate2[])" />
+
+            
 
             
 
@@ -459,8 +517,12 @@
 
             
 
+            
+
              objects in an array to the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+
+            
 
             
 
@@ -476,8 +538,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+          
 
           
 
@@ -527,8 +593,12 @@
 
             
 
+            
+
              object that you want to add to another <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+
+            
 
             
 
@@ -541,8 +611,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.RemoveRange(System.Security.Cryptography.X509Certificates.X509Certificate2[])" />
+
+            
 
             
 
@@ -561,6 +635,8 @@
 
             
 
+            
+
              objects in an <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
@@ -568,8 +644,12 @@
 
             
 
+            
+
              object to another <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+
+            
 
             
 
@@ -585,8 +665,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+
+          
 
           
 
@@ -631,8 +715,12 @@
 
             
 
+            
+
              property. That is, this method is an O(<paramref
              name="n" />
+
+            
 
             
 
@@ -645,8 +733,12 @@
 
             
 
+            
+
              is <see
              cref="P:System.Collections.CollectionBase.Count" />
+
+            
 
             
 
@@ -657,6 +749,8 @@
           <para
             >This method determines equality by calling the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -675,6 +769,8 @@
 
             
 
+            
+
              object contains a specific certificate.</para
           >
         </summary>
@@ -688,8 +784,12 @@
 
             
 
+            
+
              contains the specified <paramref
              name="certificate" />
+
+            
 
             
 
@@ -705,8 +805,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+          
 
           
 
@@ -765,8 +869,12 @@
 
           
 
+          
+
           A supported <see
            cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" />
+
+          
 
           
 
@@ -817,6 +925,8 @@
 
             
 
+            
+
              types: </para
           >
           <list type="bullet">
@@ -862,8 +972,12 @@
 
           
 
+          
+
           A supported <see
            cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" />
+
+          
 
           
 
@@ -873,6 +987,8 @@
         >
         <param name="password">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -924,6 +1040,8 @@
 
             
 
+            
+
              objects if no user interaction is needed. Use the <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.Find(System.Security.Cryptography.X509Certificates.X509FindType,System.Object,System.Boolean)" />
 
@@ -931,8 +1049,12 @@
 
             
 
+            
+
              method to allow the user to select <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+            
 
             
 
@@ -952,6 +1074,8 @@
 
             
 
+            
+
              object using the search criteria specified by the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509FindType" />
 
@@ -959,8 +1083,12 @@
 
             
 
+            
+
              enumeration and the <paramref
              name="findValue" />
+
+            
 
             
 
@@ -979,6 +1107,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -989,8 +1119,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Cryptography.X509Certificates.X509FindType" />
+
+          
 
           
 
@@ -1005,10 +1139,14 @@
 
           
 
+          
+
           The search criteria as an object. </param
         >
         <param name="validOnly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1052,6 +1190,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1065,8 +1205,12 @@
 
             
 
+            
+
              object that can iterate through the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+
+            
 
             
 
@@ -1111,8 +1255,12 @@
 
             
 
+            
+
              object. This method supports the following <see
              cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" />
+
+            
 
             
 
@@ -1163,11 +1311,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="rawData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1206,6 +1358,8 @@
           <para
             >This method supports the following <see
              cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" />
+
+            
 
             
 
@@ -1256,11 +1410,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1312,11 +1470,15 @@
 
             
 
+            
+
              value can be used to control this process. Note that if you do not create a key container, the private key is not persisted.</para
           >
           <para
             >This method imports a certificate byte array into a collection of certificates. This method supports the following <see
              cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" />
+
+            
 
             
 
@@ -1362,6 +1524,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1372,8 +1536,12 @@
 
           
 
+          
+
           A byte array containing data from an <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+          
 
           
 
@@ -1388,10 +1556,14 @@
 
           
 
+          
+
           The password required to access the certificate information. </param
         >
         <param name="keyStorageFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1443,12 +1615,16 @@
 
             
 
+            
+
              value can be used to control this process. Note that if you do not create a key container, the private key is not persisted.</para
           >
           <para>Note that a PFX/PKCS12 file can contain more than one certificate. This method imports the first certificate associated with the private key or, if no private key is found, the first certificate found.</para>
           <para
             >This method supports the following <see
              cref="T:System.Security.Cryptography.X509Certificates.X509ContentType" />
+
+            
 
             
 
@@ -1499,11 +1675,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1518,10 +1698,14 @@
 
           
 
+          
+
           The password required to access the certificate information. </param
         >
         <param name="keyStorageFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1567,11 +1751,15 @@
 
             
 
+            
+
              property already equals the capacity of the list, the capacity is doubled by automatically reallocating the internal array before the new element is inserted.</para
           >
           <para
             >If <paramref
              name="index" />
+
+            
 
             
 
@@ -1584,8 +1772,12 @@
 
             
 
+            
+
             , <paramref
              name="certificate" />
+
+            
 
             
 
@@ -1604,6 +1796,8 @@
 
             
 
+            
+
              object at the specified index.</para
           >
         </summary>
@@ -1614,8 +1808,12 @@
 
           
 
+          
+
           The zero-based index at which to insert <paramref
            name="certificate" />
+
+          
 
           
 
@@ -1630,8 +1828,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+          
 
           
 
@@ -1708,11 +1910,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="certificate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1725,8 +1931,12 @@
 
           
 
+          
+
            object to be removed from the <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+
+          
 
           
 
@@ -1776,8 +1986,12 @@
 
             
 
+            
+
              objects to remove from an <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+
+            
 
             
 
@@ -1790,8 +2004,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.RemoveRange(System.Security.Cryptography.X509Certificates.X509Certificate2[])" />
+
+            
 
             
 
@@ -1810,8 +2028,12 @@
 
             
 
+            
+
              objects in an array from an <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+
+            
 
             
 
@@ -1827,8 +2049,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+          
 
           
 
@@ -1878,8 +2104,12 @@
 
             
 
+            
+
              object that you want to remove from another <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+
+            
 
             
 
@@ -1892,8 +2122,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Collection.RemoveRange(System.Security.Cryptography.X509Certificates.X509Certificate2[])" />
+
+            
 
             
 
@@ -1912,6 +2146,8 @@
 
             
 
+            
+
              objects in an <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
@@ -1919,8 +2155,12 @@
 
             
 
+            
+
              object from another <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+
+            
 
             
 
@@ -1936,8 +2176,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+
+          
 
           
 

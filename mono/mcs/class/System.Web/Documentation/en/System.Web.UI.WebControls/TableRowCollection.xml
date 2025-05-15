@@ -36,8 +36,12 @@
 
         
 
+        
+
          objects. This class is commonly used to add or remove rows from a <see
          cref="T:System.Web.UI.WebControls.Table" />
+
+        
 
         
 
@@ -54,6 +58,8 @@
 
           
 
+          
+
            control contains a <see
            cref="P:System.Web.UI.WebControls.Table.Rows" />
 
@@ -61,8 +67,12 @@
 
           
 
+          
+
            collection that represents a collection of <see
            cref="T:System.Web.UI.WebControls.TableRow" />
+
+          
 
           
 
@@ -75,8 +85,12 @@
 
           
 
+          
+
            represents an individual row in the table and contains a <see
            cref="P:System.Web.UI.WebControls.TableRow.Cells" />
+
+          
 
           
 
@@ -89,8 +103,12 @@
 
           
 
+          
+
            objects. These <see
            cref="T:System.Web.UI.WebControls.TableCell" />
+
+          
 
           
 
@@ -103,8 +121,12 @@
 
           
 
+          
+
            from the <see
            cref="P:System.Web.UI.WebControls.Table.Rows" />
+
+          
 
           
 
@@ -117,8 +139,12 @@
 
           
 
+          
+
            control. You can then get a <see
            cref="T:System.Web.UI.WebControls.TableCell" />
+
+          
 
           
 
@@ -131,8 +157,12 @@
 
           
 
+          
+
            collection of the <see
            cref="T:System.Web.UI.WebControls.TableRow" />
+
+          
 
           
 
@@ -152,8 +182,12 @@
 
         
 
+        
+
          objects that represent a single row in a <see
          cref="T:System.Web.UI.WebControls.Table" />
+
+        
 
         
 
@@ -187,8 +221,12 @@
 
             
 
+            
+
              object to the end of a <see
              cref="T:System.Web.UI.WebControls.TableRowCollection" />
+
+            
 
             
 
@@ -207,8 +245,12 @@
 
             
 
+            
+
              object to the end of the <see
              cref="T:System.Web.UI.WebControls.TableRowCollection" />
+
+            
 
             
 
@@ -227,11 +269,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="row">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -244,8 +290,12 @@
 
           
 
+          
+
            object to add to the <see
            cref="T:System.Web.UI.WebControls.TableRowCollection" />
+
+          
 
           
 
@@ -283,8 +333,12 @@
 
             
 
+            
+
              in a <see
              cref="T:System.Web.UI.WebControls.TableRowCollection" />
+
+            
 
             
 
@@ -303,8 +357,12 @@
 
             
 
+            
+
              object to the <see
              cref="T:System.Web.UI.WebControls.TableRowCollection" />
+
+            
 
             
 
@@ -320,6 +378,8 @@
 
           
 
+          
+
           The location in the <see
            cref="T:System.Web.UI.WebControls.TableRowCollection" />
 
@@ -327,8 +387,12 @@
 
           
 
+          
+
            at which to add the <see
            cref="T:System.Web.UI.WebControls.TableRow" />
+
+          
 
           
 
@@ -343,6 +407,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.TableRow" />
 
@@ -350,8 +416,12 @@
 
           
 
+          
+
            object to add to the <see
            cref="T:System.Web.UI.WebControls.TableRowCollection" />
+
+          
 
           
 
@@ -388,8 +458,12 @@
 
             
 
+            
+
              method to append the <see
              cref="T:System.Web.UI.WebControls.TableRow" />
+
+            
 
             
 
@@ -402,6 +476,8 @@
 
             
 
+            
+
              objects to represent the rows of the table. Next, use the <see
              cref="M:System.Web.UI.WebControls.TableRowCollection.AddRange(System.Web.UI.WebControls.TableRow[])" />
 
@@ -409,8 +485,12 @@
 
             
 
+            
+
              method, passing the array as an argument, to add the <see
              cref="T:System.Web.UI.WebControls.TableRow" />
+
+            
 
             
 
@@ -429,6 +509,8 @@
 
             
 
+            
+
              objects from the specified array to the end of the collection.</para
           >
         </summary>
@@ -439,8 +521,12 @@
 
           
 
+          
+
           The array containing the <see
            cref="T:System.Web.UI.WebControls.TableRow" />
+
+          
 
           
 
@@ -472,6 +558,8 @@
 
             
 
+            
+
              objects from the <see
              cref="T:System.Web.UI.WebControls.TableRowCollection" />
 
@@ -479,8 +567,12 @@
 
             
 
+            
+
              and set the <see
              cref="P:System.Web.UI.WebControls.TableRowCollection.Count" />
+
+            
 
             
 
@@ -499,8 +591,12 @@
 
             
 
+            
+
              controls from the <see
              cref="T:System.Web.UI.WebControls.TableRowCollection" />
+
+            
 
             
 
@@ -536,8 +632,12 @@
 
             
 
+            
+
              into the specified <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -554,8 +654,12 @@
 
               
 
+              
+
                parameter must be a zero-based <see
                cref="T:System.Array" />
+
+              
 
               
 
@@ -575,6 +679,8 @@
 
             
 
+            
+
              to the specified <see
              cref="T:System.Array" />
 
@@ -582,8 +688,12 @@
 
             
 
+            
+
             , starting with the specified index in the <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -599,6 +709,8 @@
 
           
 
+          
+
           A zero-based <see
            cref="T:System.Array" />
 
@@ -606,8 +718,12 @@
 
           
 
+          
+
            that receives the copied items from the <see
            cref="T:System.Web.UI.WebControls.TableRowCollection" />
+
+          
 
           
 
@@ -622,8 +738,12 @@
 
           
 
+          
+
           The first position in the specified <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -655,8 +775,12 @@
 
             
 
+            
+
             . The <see
              cref="P:System.Web.UI.WebControls.TableRowCollection.Count" />
+
+            
 
             
 
@@ -675,8 +799,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:System.Web.UI.WebControls.TableRowCollection" />
+
+            
 
             
 
@@ -712,8 +840,12 @@
 
             
 
+            
+
              implemented object that can be iterated through easily to get each item in the <see
              cref="T:System.Web.UI.WebControls.TableRowCollection" />
+
+            
 
             
 
@@ -729,6 +861,8 @@
 
             
 
+            
+
              property to get the item currently pointed to in the collection.</para
           >
           <para
@@ -739,11 +873,15 @@
 
             
 
+            
+
              method to move to the next item in the collection.</para
           >
           <para
             >Use the <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 
@@ -760,8 +898,12 @@
 
               
 
+              
+
                method must be called after creating a <see
                cref="T:System.Collections.IEnumerator" />
+
+              
 
               
 
@@ -774,8 +916,12 @@
 
               
 
+              
+
                method to move the enumerator to the first item in the collection. Otherwise, the item represented by the <see
                cref="P:System.Collections.IEnumerator.Current" />
+
+              
 
               
 
@@ -795,6 +941,8 @@
 
             
 
+            
+
              implemented object that contains all <see
              cref="T:System.Web.UI.WebControls.TableRow" />
 
@@ -802,8 +950,12 @@
 
             
 
+            
+
              objects within the <see
              cref="T:System.Web.UI.WebControls.TableRowCollection" />
+
+            
 
             
 
@@ -822,6 +974,8 @@
 
             
 
+            
+
              implemented object that contains all <see
              cref="T:System.Web.UI.WebControls.TableRow" />
 
@@ -829,8 +983,12 @@
 
             
 
+            
+
              objects within the <see
              cref="T:System.Web.UI.WebControls.TableRowCollection" />
+
+            
 
             
 
@@ -868,6 +1026,8 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Web.UI.WebControls.TableRowCollection" />
 
@@ -875,8 +1035,12 @@
 
             
 
+            
+
             . If the specified <see
              cref="T:System.Web.UI.WebControls.TableRow" />
+
+            
 
             
 
@@ -895,8 +1059,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Web.UI.WebControls.TableRowCollection" />
+
+            
 
             
 
@@ -915,8 +1083,12 @@
 
             
 
+            
+
              within the collection. The default is -1, which indicates that the specified <see
              cref="T:System.Web.UI.WebControls.TableRow" />
+
+            
 
             
 
@@ -932,6 +1104,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.TableRow" />
 
@@ -939,8 +1113,12 @@
 
           
 
+          
+
            object to search for in the <see
            cref="T:System.Web.UI.WebControls.TableRowCollection" />
+
+          
 
           
 
@@ -972,6 +1150,8 @@
 
             
 
+            
+
              can be written to in all cases.</para
           >
         </remarks>
@@ -980,6 +1160,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Web.UI.WebControls.TableRowCollection" />
+
+            
 
             
 
@@ -1012,11 +1194,15 @@
 
             
 
+            
+
              and is overridden to always return false.</para
           >
           <para
             >For more information on the <see
              cref="P:System.Web.UI.WebControls.TableCellCollection.IsSynchronized" />
+
+            
 
             
 
@@ -1029,8 +1215,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1044,6 +1234,8 @@
           <para
             >Gets a value indicating whether access to the <see
              cref="T:System.Web.UI.WebControls.TableRowCollection" />
+
+            
 
             
 
@@ -1104,8 +1296,12 @@
 
             
 
+            
+
              from a <see
              cref="T:System.Web.UI.WebControls.TableRowCollection" />
+
+            
 
             
 
@@ -1124,8 +1320,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Web.UI.WebControls.TableRowCollection" />
+
+            
 
             
 
@@ -1141,6 +1341,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.TableRow" />
 
@@ -1148,8 +1350,12 @@
 
           
 
+          
+
            object to remove from the <see
            cref="T:System.Web.UI.WebControls.TableRowCollection" />
+
+          
 
           
 
@@ -1183,8 +1389,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Web.UI.WebControls.TableRowCollection" />
+
+            
 
             
 
@@ -1203,8 +1413,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Web.UI.WebControls.TableRowCollection" />
+
+            
 
             
 
@@ -1220,6 +1434,8 @@
 
           
 
+          
+
           The index of the <see
            cref="T:System.Web.UI.WebControls.TableRow" />
 
@@ -1227,8 +1443,12 @@
 
           
 
+          
+
            object to remove from the <see
            cref="T:System.Web.UI.WebControls.TableRowCollection" />
+
+          
 
           
 
@@ -1260,11 +1480,15 @@
 
             
 
+            
+
              itself.</para
           >
           <para
             >For more information on the <see
              cref="P:System.Web.UI.WebControls.TableCellCollection.SyncRoot" />
+
+            
 
             
 
@@ -1277,8 +1501,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1292,6 +1520,8 @@
           <para
             >Gets the object that can be used to synchronize access to the <see
              cref="T:System.Web.UI.WebControls.TableRowCollection" />
+
+            
 
             
 
@@ -1331,8 +1561,12 @@
 
             
 
+            
+
              method to add an element to a <see
              cref="T:System.Web.UI.WebControls.TableRowCollection" />
+
+            
 
             
 
@@ -1348,6 +1582,8 @@
 
             
 
+            
+
              method is an explicit interface member implementation. It can be used only when the <see
              cref="T:System.Web.UI.WebControls.TableRowCollection" />
 
@@ -1355,8 +1591,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1400,6 +1640,8 @@
 
             
 
+            
+
              method is an explicit interface member implementation. It can be used only when the <see
              cref="T:System.Web.UI.WebControls.TableRowCollection" />
 
@@ -1407,8 +1649,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1452,8 +1698,12 @@
 
             
 
+            
+
              method to get the index of an element in a <see
              cref="T:System.Web.UI.WebControls.TableRowCollection" />
+
+            
 
             
 
@@ -1469,6 +1719,8 @@
 
             
 
+            
+
              method is an explicit interface member implementation. It can be used only when the <see
              cref="T:System.Web.UI.WebControls.TableRowCollection" />
 
@@ -1476,8 +1728,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1522,8 +1778,12 @@
 
             
 
+            
+
              method to add an element to a <see
              cref="T:System.Web.UI.WebControls.TableRowCollection" />
+
+            
 
             
 
@@ -1539,6 +1799,8 @@
 
             
 
+            
+
              method is an explicit interface member implementation. It can be used only when the <see
              cref="T:System.Web.UI.WebControls.TableRowCollection" />
 
@@ -1546,8 +1808,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1562,6 +1828,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1593,8 +1861,12 @@
 
             
 
+            
+
              instance is cast to the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1608,6 +1880,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Collections.IList.IsFixedSize" />
+
+            
 
             
 
@@ -1666,8 +1940,12 @@
 
             
 
+            
+
              method to remove an element from a <see
              cref="T:System.Web.UI.WebControls.TableRowCollection" />
+
+            
 
             
 
@@ -1683,6 +1961,8 @@
 
             
 
+            
+
              method is an explicit interface member implementation. It can be used only when the <see
              cref="T:System.Web.UI.WebControls.TableRowCollection" />
 
@@ -1690,8 +1970,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 

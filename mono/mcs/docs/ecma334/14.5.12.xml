@@ -8,11 +8,15 @@
 
     
 
+    
+
      arithmetic operations and conversions. <grammar_production
     >
       <name>
         <non_terminal where="14.5.12">checked-expression</non_terminal>
       </name>
+
+      
 
       
 
@@ -35,6 +39,8 @@
 
       
 
+      
+
        : <rhs
       >
         <keyword>unchecked</keyword>
@@ -52,8 +58,12 @@
 
     
 
+    
+
      or  <non_terminal
      where="14.5.12">unchecked-expression</non_terminal>
+
+    
 
     
 
@@ -66,8 +76,12 @@
 
     
 
+    
+
      (<hyperlink
     >14.5.3</hyperlink>
+
+    
 
     
 
@@ -78,6 +92,8 @@
   <paragraph
     >The overflow checking context can also be controlled through the checked and unchecked statements (<hyperlink
     >15.11</hyperlink>
+
+    
 
     
 
@@ -96,8 +112,12 @@
 
         
 
+        
+
          and <hyperlink
         >14.6.5</hyperlink>
+
+        
 
         
 
@@ -113,11 +133,15 @@
 
         
 
+        
+
         ), when the operand is of an integral type. </list_item
       >
       <list_item
         > The predefined +, -, *, and / binary operators (<hyperlink
         >14.7</hyperlink>
+
+        
 
         
 
@@ -133,6 +157,8 @@
 
         
 
+        
+
         ) from one integral type to another integral type. </list_item
       >
     </list>
@@ -143,6 +169,8 @@
       <list_item
         > In a checked context, if the operation is a constant expression (<hyperlink
         >14.15</hyperlink>
+
+        
 
         
 
@@ -165,7 +193,7 @@
     <example
       >[Example: In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 class Test  
 {  
    static readonly int x = 1000000;  
@@ -187,6 +215,8 @@ class Test
 
       
 
+      
+
       no compile-time errors are reported since neither of the expressions can be evaluated at compile-time. At run-time, the F method throws a System.OverflowException, and the G method returns -727379968 (the lower 32 bits of the out-of-range result). The behavior of the H method depends on the default overflow checking context for the compilation, but it is either the same as F or the same as G. end example]</example
     >
   </paragraph>
@@ -194,7 +224,7 @@ class Test
     <example
       >[Example: In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 class Test  
 {  
    const int x = 1000000;  
@@ -216,6 +246,8 @@ class Test
 
       
 
+      
+
       the overflows that occur when evaluating the constant expressions in F and H cause compile-time errors to be reported because the expressions are evaluated in a checked context. An overflow also occurs when evaluating the constant expression in G, but since the evaluation takes place in an unchecked context, the overflow is not reported. end example]</example
     >
   </paragraph>
@@ -224,7 +256,7 @@ class Test
 
       >[Example: In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 class Test  
 {  
    static int Multiply(int x, int y) {  
@@ -241,6 +273,8 @@ class Test
 
       
 
+      
+
       the use of checked in F does not affect the evaluation of x * y in Multiply, so x * y is evaluated in the default overflow checking context. end example]</example
     >
   </paragraph>
@@ -249,7 +283,7 @@ class Test
 
       >[Example: For example: <code_example
       >
-<![CDATA[
+        <![CDATA[
 class Test  
 {  
    public const int AllBits = unchecked((int)0xFFFFFFFF);  
@@ -268,6 +302,8 @@ class Test
 
       
 
+      
+
       . Because the constants are outside the <keyword
       >int</keyword>
 
@@ -275,8 +311,12 @@ class Test
 
       
 
+      
+
        range, without the unchecked operator, the casts to <keyword
       >int</keyword>
+
+      
 
       
 

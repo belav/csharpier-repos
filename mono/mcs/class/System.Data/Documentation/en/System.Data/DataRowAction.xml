@@ -28,8 +28,12 @@
 
         
 
+        
+
          is returned as part of the <see
          cref="T:System.Data.DataRowChangeEventArgs" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          with regard to the <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -60,6 +68,8 @@
       <para
         >Describes an action performed on a <see
          cref="T:System.Data.DataRow" />
+
+        
 
         
 

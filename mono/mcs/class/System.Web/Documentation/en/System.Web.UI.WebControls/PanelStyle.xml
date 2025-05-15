@@ -20,11 +20,15 @@
 
         
 
+        
+
          class is used to represent the style settings for a panel control. It encapsulates the properties that control the appearance of a panel and can be applied to multiple panel controls to provide a common appearance.</para
       >
       <para
         >You can specify an image to display in the background of the panel by setting the <see
          cref="P:System.Web.UI.WebControls.PanelStyle.BackImageUrl" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          property. The direction of controls that contain text within the panel control can be specified by setting the <see
          cref="P:System.Web.UI.WebControls.PanelStyle.Direction" />
+
+        
 
         
 
@@ -52,6 +60,8 @@
       <para
         >Represents the style for a <see
          cref="T:System.Web.UI.WebControls.Panel" />
+
+        
 
         
 
@@ -83,6 +93,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -93,8 +105,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.StateBag" />
+
+          
 
           
 
@@ -120,6 +136,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.WebControls.PanelStyle.BackImageUrl" />
+
+            
 
             
 
@@ -160,6 +178,8 @@
 
             
 
+            
+
              method to duplicate the style settings of the specified <see
              cref="T:System.Web.UI.WebControls.Style" />
 
@@ -167,8 +187,12 @@
 
             
 
+            
+
              object for the current instance of the <see
              cref="T:System.Web.UI.WebControls.PanelStyle" />
+
+            
 
             
 
@@ -184,8 +208,12 @@
 
             
 
+            
+
              method copies non-blank elements from the specified <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -198,8 +226,12 @@
 
             
 
+            
+
             . Any element that is defined in <paramref
              name="s" />
+
+            
 
             
 
@@ -212,6 +244,8 @@
 
             
 
+            
+
              object. To replace only those style settings left blank in the <see
              cref="T:System.Web.UI.WebControls.PanelStyle" />
 
@@ -219,8 +253,12 @@
 
             
 
+            
+
              object, use the <see
              cref="M:System.Web.UI.WebControls.PanelStyle.MergeWith(System.Web.UI.WebControls.Style)" />
+
+            
 
             
 
@@ -239,8 +277,12 @@
 
             
 
+            
+
              object for the current instance of the <see
              cref="T:System.Web.UI.WebControls.PanelStyle" />
+
+            
 
             
 
@@ -256,8 +298,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.Style" />
+
+          
 
           
 
@@ -291,6 +337,8 @@
 
             
 
+            
+
              property specifies the direction in which to display controls that include text in a panel control.</para
           >
           <para
@@ -301,8 +349,12 @@
 
             
 
+            
+
              property is set using one of the <see
              cref="T:System.Web.UI.WebControls.ContentDirection" />
+
+            
 
             
 
@@ -354,6 +406,8 @@
 
             
 
+            
+
             , child controls that include text display from left to right. If you specify <see
              cref="F:System.Web.UI.WebControls.ContentDirection.RightToLeft" />
 
@@ -361,8 +415,12 @@
 
             
 
+            
+
             , child controls that include text display right to left. Use <see
              cref="F:System.Web.UI.WebControls.ContentDirection.RightToLeft" />
+
+            
 
             
 
@@ -401,6 +459,8 @@
 
             
 
+            
+
              property specifies the horizontal alignment of the contents within a panel control.</para
           >
           <para
@@ -411,8 +471,12 @@
 
             
 
+            
+
              property is set using one of the <see
              cref="T:System.Web.UI.WebControls.HorizontalAlign" />
+
+            
 
             
 
@@ -473,8 +537,12 @@
 
               
 
+              
+
                property is set to <see
                cref="F:System.Web.UI.WebControls.HorizontalAlign.NotSet" />
+
+              
 
               
 
@@ -516,6 +584,8 @@
 
             
 
+            
+
              method to combine the style settings of the specified <see
              cref="T:System.Web.UI.WebControls.Style" />
 
@@ -523,8 +593,12 @@
 
             
 
+            
+
              object with the current instance of the <see
              cref="T:System.Web.UI.WebControls.PanelStyle" />
+
+            
 
             
 
@@ -540,8 +614,12 @@
 
             
 
+            
+
              method copies non-blank elements from the specified <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -554,8 +632,12 @@
 
             
 
+            
+
             , but does not replace any existing style settings in the <see
              cref="T:System.Web.UI.WebControls.PanelStyle" />
+
+            
 
             
 
@@ -568,6 +650,8 @@
 
             
 
+            
+
              object with the style settings in <paramref
              name="s" />
 
@@ -575,8 +659,12 @@
 
             
 
+            
+
             , use the <see
              cref="M:System.Web.UI.WebControls.PanelStyle.CopyFrom(System.Web.UI.WebControls.Style)" />
+
+            
 
             
 
@@ -595,8 +683,12 @@
 
             
 
+            
+
              object with the current instance of the <see
              cref="T:System.Web.UI.WebControls.PanelStyle" />
+
+            
 
             
 
@@ -612,6 +704,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.Style" />
 
@@ -619,8 +713,12 @@
 
           
 
+          
+
            object that represents the style settings to combine with the <see
            cref="T:System.Web.UI.WebControls.PanelStyle" />
+
+          
 
           
 
@@ -651,6 +749,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -659,6 +759,8 @@
           <para
             >Removes any defined style settings from the <see
              cref="T:System.Web.UI.WebControls.PanelStyle" />
+
+            
 
             
 
@@ -693,6 +795,8 @@
 
             
 
+            
+
              property specifies the visibility and position of scroll bars in a panel control. </para
           >
           <para
@@ -703,8 +807,12 @@
 
             
 
+            
+
              property is set using one of the <see
              cref="T:System.Web.UI.WebControls.ScrollBars" />
+
+            
 
             
 
@@ -792,6 +900,8 @@
 
             
 
+            
+
              property indicates whether the content wraps within the panel. When the <see
              cref="P:System.Web.UI.WebControls.PanelStyle.Wrap" />
 
@@ -799,8 +909,12 @@
 
             
 
+            
+
              property is set to false and the <see
              cref="P:System.Web.UI.WebControls.PanelStyle.ScrollBars" />
+
+            
 
             
 
@@ -813,8 +927,12 @@
 
             
 
+            
+
             , if the content of the panel is longer than what will fit in the panel, the content of the panel will appear on one line with a horizontal scroll bar. When the <see
              cref="P:System.Web.UI.WebControls.PanelStyle.Wrap" />
+
+            
 
             
 
@@ -827,8 +945,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Web.UI.WebControls.ScrollBars.None" />
+
+            
 
             
 

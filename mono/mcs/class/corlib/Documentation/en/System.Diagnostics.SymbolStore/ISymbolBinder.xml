@@ -31,6 +31,8 @@
 
           
 
+          
+
            interface, which is one of the unmanaged symbol store interfaces that provide an alternate way to read and write debug symbol information.</para
         >
       </block>
@@ -80,8 +82,12 @@
 
             
 
+            
+
              method returns the <see
              cref="T:System.Diagnostics.SymbolStore.ISymbolReader" />
+
+            
 
             
 
@@ -104,11 +110,15 @@
 
             
 
+            
+
              interface that reads the debugging symbols.</para
           >
         </returns>
         <param name="importer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -123,10 +133,14 @@
 
           
 
+          
+
           The name of the file for which the reader interface is required. </param
         >
         <param name="searchPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

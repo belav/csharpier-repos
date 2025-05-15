@@ -23,8 +23,12 @@
 
         
 
+        
+
          property, this enumeration sets the vertical alignment for a drawn string. When used with the <see
          cref="P:System.Drawing.StringFormat.Alignment" />
+
+        
 
         
 

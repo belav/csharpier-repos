@@ -31,8 +31,12 @@
 
         
 
+        
+
          class represents a collection of objects arranged on a design surface or inside a parent <see
          cref="T:System.Windows.Forms.ContainerControl" />
+
+        
 
         
 
@@ -48,6 +52,8 @@
 
         
 
+        
+
          because it is designed to be used only internally within the dnprdnshort. However, classes derived from <see
          cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
 
@@ -55,8 +61,12 @@
 
         
 
+        
+
         , such as <see
          cref="T:System.Windows.Forms.Control.ControlCollection" />
+
+        
 
         
 
@@ -94,6 +104,8 @@
 
             
 
+            
+
              method to copy the elements.</para
           >
         </remarks>
@@ -102,6 +114,8 @@
           <para
             >Copies the entire contents of this collection to a compatible one-dimensional <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -117,8 +131,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -133,8 +151,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -191,6 +213,8 @@
 
             
 
+            
+
              instances are equal.</para
           >
         </summary>
@@ -204,8 +228,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
+
+            
 
             
 
@@ -221,6 +249,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
 
@@ -228,8 +258,12 @@
 
           
 
+          
+
            to compare with the current <see
            cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
+
+          
 
           
 
@@ -267,6 +301,8 @@
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -284,6 +320,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -316,6 +354,8 @@
           <para
             >A hash code for the current <see
              cref="T:System.Windows.Forms.Layout.ArrangedElementCollection" />
+
+            
 
             
 
@@ -376,8 +416,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -391,6 +435,8 @@
           <para
             >For a description of this member, see the <see
              cref="P:System.Collections.ICollection.IsSynchronized" />
+
+            
 
             
 
@@ -425,8 +471,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -440,6 +490,8 @@
           <para
             >For a description of this member, see the <see
              cref="P:System.Collections.ICollection.SyncRoot" />
+
+            
 
             
 
@@ -473,8 +525,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -488,6 +544,8 @@
           <para
             >For a description of this member, see the <see
              cref="M:System.Collections.IList.Add(System.Object)" />
+
+            
 
             
 
@@ -507,6 +565,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -514,8 +574,12 @@
 
           
 
+          
+
            to add to the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -546,8 +610,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -561,6 +629,8 @@
           <para
             >For a description of this member, see the <see
              cref="M:System.Collections.IList.Clear" />
+
+            
 
             
 
@@ -594,8 +664,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -614,6 +688,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -627,8 +703,12 @@
 
             
 
+            
+
              is found in the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -644,6 +724,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -651,8 +733,12 @@
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -685,8 +771,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -705,6 +795,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -713,6 +805,8 @@
           <para
             >The index of <paramref
              name="value" />
+
+            
 
             
 
@@ -728,6 +822,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -735,8 +831,12 @@
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -770,8 +870,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -790,6 +894,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -800,8 +906,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="value" />
+
+          
 
           
 
@@ -816,6 +926,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -823,8 +935,12 @@
 
           
 
+          
+
            to insert into the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -855,8 +971,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -870,6 +990,8 @@
           <para
             >For a description of this member, see the <see
              cref="P:System.Collections.IList.IsFixedSize" />
+
+            
 
             
 
@@ -925,8 +1047,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -945,11 +1071,15 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -962,8 +1092,12 @@
 
           
 
+          
+
            to remove from the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -996,8 +1130,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1016,11 +1154,15 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

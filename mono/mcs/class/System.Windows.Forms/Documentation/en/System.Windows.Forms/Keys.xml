@@ -34,6 +34,8 @@
 
         
 
+        
+
          class contains constants for processing keyboard input. The members of the Keys enumeration consist of a key code and a set of modifiers combined into a single integer value. In the Win32 application programming interface (API) a key value has two halves, with the high-order bits containing the key code (which is the same as a Windows virtual key code), and the low-order bits representing key modifiers such as the SHIFT, CONTROL, and ALT keys.</para
       >
       <block subset="none" type="note">
@@ -52,8 +54,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Windows.Forms.Control" />
+
+            
 
             
 
@@ -68,6 +74,8 @@
              type="text/html">
               <a href="eca7606e-ebfb-4f47-b8d9-289903fdc045">Consuming Unmanaged DLL Functions</a>
             </format>
+
+            
 
             
 
@@ -222,8 +230,12 @@
 
           
 
+          
+
            was added that supersedes the previous entry, <see
            cref="F:System.Windows.Forms.Keys.IMEAceept" />
+
+          
 
           
 
@@ -1583,6 +1595,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1603,6 +1617,8 @@
           <para
             >The IME accept key. Obsolete, use <see
              cref="F:System.Windows.Forms.Keys.IMEAccept" />
+
+            
 
             
 

@@ -50,6 +50,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -154,8 +156,12 @@
 
             
 
+            
+
              security token's <see
              cref="T:System.IdentityModel.Tokens.SamlAudienceRestrictionCondition" />
+
+            
 
             
 
@@ -337,6 +343,8 @@
           <para
             >Gets or sets the type of <see
              cref="T:System.IdentityModel.Tokens.SamlSerializer" />
+
+            
 
             
 

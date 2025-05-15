@@ -43,6 +43,8 @@
 
         
 
+        
+
          method returns an instance of this type.</para
       >
       <para
@@ -53,8 +55,12 @@
 
         
 
+        
+
          is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see
          cref="T:System.Collections.DictionaryEntry" />
+
+        
 
         
 
@@ -100,8 +106,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -114,6 +124,8 @@
           <para
             >In the dnprdnlong <paramref
              name="key" />
+
+            
 
             
 
@@ -132,11 +144,15 @@
 
             
 
+            
+
              type with the specified key and value.</para
           >
         </summary>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -151,8 +167,12 @@
 
           
 
+          
+
           The definition associated with <paramref
            name="key" />
+
+          
 
           
 
@@ -190,9 +210,13 @@
 
             
 
+            
+
              representing the
    key of the current <see
              cref="T:System.Collections.DictionaryEntry" />
+
+            
 
             
 
@@ -210,8 +234,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -253,9 +281,13 @@
 
             
 
+            
+
              representing the
    content of the current <see
              cref="T:System.Collections.DictionaryEntry" />
+
+            
 
             
 

@@ -23,8 +23,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.Drawing.Image.SaveAdd(System.Drawing.Image,System.Drawing.Imaging.EncoderParameters)" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          object, you can pass parameters to the image encoder by passing an <see
          cref="T:System.Drawing.Imaging.EncoderParameters" />
+
+        
 
         
 
@@ -51,8 +59,12 @@
 
         
 
+        
+
          or <see
          cref="Overload:System.Drawing.Image.SaveAdd" />
+
+        
 
         
 
@@ -65,8 +77,12 @@
 
         
 
+        
+
          object contains an array of <see
          cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+        
 
         
 
@@ -79,6 +95,8 @@
 
         
 
+        
+
          object has an array of values and an <see
          cref="T:System.Drawing.Imaging.Encoder" />
 
@@ -86,8 +104,12 @@
 
         
 
+        
+
          property that specifies the parameter category. The <see
          cref="T:System.Drawing.Imaging.EncoderValue" />
+
+        
 
         
 
@@ -106,8 +128,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.Drawing.Image.SaveAdd(System.Drawing.Imaging.EncoderParameters)" />
+
+        
 
         
 

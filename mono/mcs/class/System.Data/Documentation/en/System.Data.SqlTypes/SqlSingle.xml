@@ -38,6 +38,8 @@
 
         
 
+        
+
          or SQL Server Books Online. </para
       >
     </remarks>
@@ -66,11 +68,15 @@
 
             
 
+            
+
              structure using the supplied double parameter.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -83,8 +89,12 @@
 
           
 
+          
+
            of the new <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -117,11 +127,15 @@
 
             
 
+            
+
              structure.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -134,8 +148,12 @@
 
           
 
+          
+
            of the new <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -174,6 +192,8 @@
 
             
 
+            
+
              structures.</para
           >
         </summary>
@@ -187,8 +207,12 @@
 
             
 
+            
+
              structure that contains the sum of the two specified <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -204,8 +228,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -220,8 +248,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -262,8 +294,12 @@
 
             
 
+            
+
              instance to the supplied <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -321,8 +357,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -353,8 +393,12 @@
 
             
 
+            
+
              instance to the supplied <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -412,8 +456,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -452,6 +500,8 @@
 
             
 
+            
+
              structure by the second.</para
           >
         </summary>
@@ -466,8 +516,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -482,8 +536,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -518,8 +576,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -538,11 +600,15 @@
 
             
 
+            
+
              and the two are equal. Otherwise, false.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -581,6 +647,8 @@
 
             
 
+            
+
              parameters to determine whether they are equal.</para
           >
         </summary>
@@ -595,8 +663,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -611,8 +683,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -676,6 +752,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -684,6 +762,8 @@
           <para
             >A string value that indicates the XSD of the specified <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -699,8 +779,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -735,6 +819,8 @@
 
             
 
+            
+
              operands to determine whether the first is greater than the second.</para
           >
         </summary>
@@ -748,8 +834,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -762,8 +852,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -776,6 +870,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -783,8 +879,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -800,8 +900,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -816,8 +920,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -856,6 +964,8 @@
 
             
 
+            
+
              structures to determine whether the first is greater than or equal to the second.</para
           >
         </summary>
@@ -869,8 +979,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -883,8 +997,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -897,6 +1015,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -904,8 +1024,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -921,8 +1045,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -937,8 +1065,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -972,6 +1104,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -980,6 +1114,8 @@
           <para
             >Indicates whether this <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -1019,6 +1155,8 @@
 
             
 
+            
+
              parameters to determine whether the first is less than the second.</para
           >
         </summary>
@@ -1032,8 +1170,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1046,8 +1188,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -1060,6 +1206,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -1067,8 +1215,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1084,8 +1236,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -1100,8 +1256,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -1140,6 +1300,8 @@
 
             
 
+            
+
              parameters to determine whether the first is less than or equal to the second.</para
           >
         </summary>
@@ -1153,8 +1315,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1167,8 +1333,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -1181,6 +1351,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -1188,8 +1360,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1205,8 +1381,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -1221,8 +1401,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -1261,8 +1445,12 @@
 
             
 
+            
+
              property of an instance of the <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -1302,8 +1490,12 @@
 
             
 
+            
+
              property of an instance of the <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -1343,6 +1535,8 @@
 
             
 
+            
+
              structures.</para
           >
         </summary>
@@ -1351,6 +1545,8 @@
           <para
             >A <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -1366,8 +1562,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -1382,8 +1582,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -1422,6 +1626,8 @@
 
             
 
+            
+
              parameters to determine whether they are not equal.</para
           >
         </summary>
@@ -1435,8 +1641,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1449,8 +1659,12 @@
 
             
 
+            
+
              if the two instances are equal. If either instance of <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -1463,6 +1677,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -1470,8 +1686,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1487,8 +1707,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -1503,8 +1727,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -1541,6 +1769,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1554,8 +1784,12 @@
 
             
 
+            
+
              that can be assigned to this instance of the <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -1599,6 +1833,8 @@
 
             
 
+            
+
              structures.</para
           >
         </summary>
@@ -1612,8 +1848,12 @@
 
             
 
+            
+
              structure that contains the sum of the two specified <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -1629,8 +1869,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -1645,8 +1889,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -1685,6 +1933,8 @@
 
             
 
+            
+
              structure by the second.</para
           >
         </summary>
@@ -1693,6 +1943,8 @@
           <para
             >A <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -1708,8 +1960,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -1724,8 +1980,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -1768,8 +2028,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1782,8 +2046,12 @@
 
             
 
+            
+
              if the two instances are not equal. If either instance of <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -1796,6 +2064,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -1803,8 +2073,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1820,8 +2094,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -1836,8 +2114,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -1968,6 +2250,8 @@
 
             
 
+            
+
              operands to determine whether the first is greater than the second.</para
           >
         </summary>
@@ -1981,8 +2265,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1995,8 +2283,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -2009,6 +2301,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -2016,8 +2310,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2033,8 +2331,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -2049,8 +2351,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -2089,6 +2395,8 @@
 
             
 
+            
+
              structures to determine whether the first is greater than or equl to the second.</para
           >
         </summary>
@@ -2102,8 +2410,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2116,8 +2428,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -2130,6 +2446,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -2137,8 +2455,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2154,8 +2476,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -2170,8 +2496,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -2371,6 +2701,8 @@
 
             
 
+            
+
              parameters to determine whether they are not equal.</para
           >
         </summary>
@@ -2384,8 +2716,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2398,8 +2734,12 @@
 
             
 
+            
+
              if the two instances are equal. If either instance of <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -2412,6 +2752,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -2419,8 +2761,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2436,8 +2782,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -2452,8 +2802,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -2492,6 +2846,8 @@
 
             
 
+            
+
              parameters to determine whether the first is less than the second.</para
           >
         </summary>
@@ -2505,8 +2861,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2519,8 +2879,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -2533,6 +2897,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -2540,8 +2906,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2557,8 +2927,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -2573,8 +2947,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -2613,6 +2991,8 @@
 
             
 
+            
+
              parameters to determine whether the first is less than or equal to the second.</para
           >
         </summary>
@@ -2626,8 +3006,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2640,8 +3024,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -2654,6 +3042,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -2661,8 +3051,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2678,8 +3072,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -2694,8 +3092,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -2734,6 +3136,8 @@
 
             
 
+            
+
              structures.</para
           >
         </summary>
@@ -2742,6 +3146,8 @@
           <para
             >A <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -2757,8 +3163,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -2773,8 +3183,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -2813,6 +3227,8 @@
 
             
 
+            
+
              structure from the first.</para
           >
         </summary>
@@ -2821,6 +3237,8 @@
           <para
             >A <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -2836,8 +3254,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -2852,8 +3274,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -2891,8 +3317,12 @@
 
             
 
+            
+
              of the specified <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -2911,6 +3341,8 @@
 
             
 
+            
+
              structure that contains the negated value.</para
           >
         </returns>
@@ -2921,8 +3353,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -2956,8 +3392,12 @@
 
             
 
+            
+
              to a <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -2976,8 +3416,12 @@
 
             
 
+            
+
              equivalent to the value that is contained in the specified <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -2993,8 +3437,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -3033,6 +3481,8 @@
 
             
 
+            
+
              structure from the first.</para
           >
         </summary>
@@ -3041,6 +3491,8 @@
           <para
             >A <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -3056,8 +3508,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -3072,8 +3528,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlSingle" />
+
+          
 
           
 
@@ -3140,6 +3600,8 @@
 
           
 
+          
+
           XmlReader </param
         >
       </Docs>
@@ -3172,6 +3634,8 @@
 
           
 
+          
+
           XmlWriter</param
         >
       </Docs>
@@ -3198,8 +3662,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -3213,6 +3681,8 @@
           <para
             >true if the <see
              cref="P:System.Data.SqlTypes.SqlSingle.Value" />
+
+            
 
             
 
@@ -3246,8 +3716,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -3266,8 +3740,12 @@
 
             
 
+            
+
              structure whose Value equals the Value of this <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -3280,6 +3758,8 @@
 
             
 
+            
+
              structure's Value is true, the <see
              cref="T:System.Data.SqlTypes.SqlByte" />
 
@@ -3287,8 +3767,12 @@
 
             
 
+            
+
              structure's Value will be 1. Otherwise, the <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -3325,8 +3809,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -3340,6 +3828,8 @@
           <para
             >A new SqlDecimal equal to the value of this <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -3376,8 +3866,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -3391,6 +3885,8 @@
           <para
             >A new SqlDouble equal to the value of this <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -3424,8 +3920,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -3439,6 +3939,8 @@
           <para
             >A new SqlInt16 equal to the value of this <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -3472,8 +3974,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlInt32" />
+
+            
 
             
 
@@ -3492,8 +3998,12 @@
 
             
 
+            
+
              equal to the value of this <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -3527,8 +4037,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -3547,8 +4061,12 @@
 
             
 
+            
+
              equal to the value of this <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -3582,8 +4100,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlMoney" />
+
+            
 
             
 
@@ -3602,8 +4124,12 @@
 
             
 
+            
+
              equal to the value of this <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -3640,8 +4166,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -3660,8 +4190,12 @@
 
             
 
+            
+
              representing the value of this <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -3695,8 +4229,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -3710,6 +4248,8 @@
           <para
             >A String object representing the value of this <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -3738,6 +4278,8 @@
           <para
             >Gets the value of this <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -3773,6 +4315,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -3786,8 +4330,12 @@
 
             
 
+            
+
              property of an instance of the <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 

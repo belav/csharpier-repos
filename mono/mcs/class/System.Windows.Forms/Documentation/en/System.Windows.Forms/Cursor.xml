@@ -40,8 +40,12 @@
 
         
 
+        
+
          cursor is typically displayed. A wait cursor is commonly used to inform the user that a process is currently running. Examples of processes you might have the user wait for are opening a file, saving a file, or filling a control such as a <see
          cref="T:System.Windows.Forms.DataGrid" />
+
+        
 
         
 
@@ -54,8 +58,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Windows.Forms.TreeView" />
+
+        
 
         
 
@@ -71,8 +79,12 @@
 
         
 
+        
+
          class have a <see
          cref="P:System.Windows.Forms.Control.Cursor" />
+
+        
 
         
 
@@ -85,8 +97,12 @@
 
         
 
+        
+
          to the <see
          cref="P:System.Windows.Forms.Control.Cursor" />
+
+        
 
         
 
@@ -99,8 +115,12 @@
 
         
 
+        
+
          to the <see
          cref="P:System.Windows.Forms.Cursor.Current" />
+
+        
 
         
 
@@ -113,8 +133,12 @@
 
         
 
+        
+
          property to <see
          cref="P:System.Windows.Forms.Cursors.WaitCursor" />
+
+        
 
         
 
@@ -127,8 +151,12 @@
 
         
 
+        
+
          property to <see
          cref="P:System.Windows.Forms.Cursors.Default" />
+
+        
 
         
 
@@ -145,8 +173,12 @@
 
           
 
+          
+
            before resetting the <see
            cref="P:System.Windows.Forms.Cursor.Current" />
+
+          
 
           
 
@@ -159,8 +191,12 @@
 
           
 
+          
+
            cursor, the application will resume listening for mouse events and will resume displaying the appropriate <see
            cref="T:System.Windows.Forms.Cursor" />
+
+          
 
           
 
@@ -177,8 +213,12 @@
 
         
 
+        
+
         , a standard <see
          cref="T:System.Windows.Forms.Cursor" />
+
+        
 
         
 
@@ -195,12 +235,16 @@
 
           
 
+          
+
            class does not support animated cursors (.ani files) or cursors with colors other than black and white.</para
         >
       </block>
       <para
         >If the image you are using as a cursor is too small, you can use the <see
          cref="M:System.Windows.Forms.Cursor.DrawStretched(System.Drawing.Graphics,System.Drawing.Rectangle)" />
+
+        
 
         
 
@@ -213,8 +257,12 @@
 
         
 
+        
+
          method, and restore it by calling the <see
          cref="M:System.Windows.Forms.Cursor.Show" />
+
+        
 
         
 
@@ -248,6 +296,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -256,6 +306,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.Cursor" />
+
+            
 
             
 
@@ -271,8 +323,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IntPtr" />
+
+          
 
           
 
@@ -303,12 +359,16 @@
 
             
 
+            
+
              must contain a cursor (.cur) file.</para
           >
           <block subset="none" type="note">
             <para
               >Animated cursors (.ani files) are not supported by the <see
                cref="T:System.Windows.Forms.Cursor" />
+
+              
 
               
 
@@ -328,6 +388,8 @@
 
             
 
+            
+
              class from the specified data stream.</para
           >
         </summary>
@@ -338,8 +400,12 @@
 
           
 
+          
+
           The data stream to load the <see
            cref="T:System.Windows.Forms.Cursor" />
+
+          
 
           
 
@@ -370,12 +436,16 @@
 
             
 
+            
+
              parameter must reference a standard cursor (.cur) file.</para
           >
           <block subset="none" type="note">
             <para
               >Animated cursors (.ani files) are not supported by the <see
                cref="T:System.Windows.Forms.Cursor" />
+
+              
 
               
 
@@ -395,11 +465,15 @@
 
             
 
+            
+
              class from the specified file.</para
           >
         </summary>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -442,11 +516,15 @@
 
             
 
+            
+
              class from the specified resource with the specified resource type.</para
           >
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -459,10 +537,14 @@
 
           
 
+          
+
           . </param
         >
         <param name="resource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -523,6 +605,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -531,6 +615,8 @@
           <para
             >An <see
              cref="T:System.IntPtr" />
+
+            
 
             
 
@@ -566,6 +652,8 @@
 
             
 
+            
+
              property changes the cursor currently displayed. The application may or may not continue to listen for mouse events. To signal that the application should not respond to mouse events during a long-running operation, use the <see
              cref="P:System.Windows.Forms.Application.UseWaitCursor" />
 
@@ -573,8 +661,12 @@
 
             
 
+            
+
              property. In most cases, however, it's better to use a background thread to manage a long-running operation, and leave your user interface accessible to the user. For more information on easily implementing a background task, see <see
              cref="T:System.ComponentModel.BackgroundWorker" />
+
+            
 
             
 
@@ -611,8 +703,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Windows.Forms.Cursor" />
+
+            
 
             
 
@@ -625,8 +721,12 @@
 
             
 
+            
+
              in an unusable state. After calling <see
              cref="M:System.Windows.Forms.Cursor.Dispose" />
+
+            
 
             
 
@@ -639,8 +739,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Windows.Forms.Cursor" />
+
+            
 
             
 
@@ -655,10 +759,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="EB4E1AF0-3B48-4FBC-AD4E-FC2F64138BF9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -675,8 +783,12 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.Windows.Forms.Cursor" />
+
+              
 
               
 
@@ -691,6 +803,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.Windows.Forms.Cursor" />
+
+            
 
             
 
@@ -729,8 +843,12 @@
 
             
 
+            
+
              parameter, but a <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -743,8 +861,12 @@
 
             
 
+            
+
             . The <see
              cref="M:System.Windows.Forms.Cursor.Draw(System.Drawing.Graphics,System.Drawing.Rectangle)" />
+
+            
 
             
 
@@ -757,8 +879,12 @@
 
             
 
+            
+
              within which to draw the <see
              cref="T:System.Windows.Forms.Cursor" />
+
+            
 
             
 
@@ -771,8 +897,12 @@
 
             
 
+            
+
              control, or a group of <see
              cref="T:System.Windows.Forms.RadioButton" />
+
+            
 
             
 
@@ -792,6 +922,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
 
@@ -799,8 +931,12 @@
 
           
 
+          
+
            surface on which to draw the <see
            cref="T:System.Windows.Forms.Cursor" />
+
+          
 
           
 
@@ -815,6 +951,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
 
@@ -822,8 +960,12 @@
 
           
 
+          
+
            that represents the bounds of the <see
            cref="T:System.Windows.Forms.Cursor" />
+
+          
 
           
 
@@ -861,8 +1003,12 @@
 
             
 
+            
+
              parameter, but a <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -875,6 +1021,8 @@
 
             
 
+            
+
              object. The <see
              cref="M:System.Windows.Forms.Cursor.DrawStretched(System.Drawing.Graphics,System.Drawing.Rectangle)" />
 
@@ -882,8 +1030,12 @@
 
             
 
+            
+
              method stretches the image to fill the specified <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -903,6 +1055,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
 
@@ -910,8 +1064,12 @@
 
           
 
+          
+
            surface on which to draw the <see
            cref="T:System.Windows.Forms.Cursor" />
+
+          
 
           
 
@@ -926,6 +1084,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
 
@@ -933,8 +1093,12 @@
 
           
 
+          
+
            that represents the bounds of the <see
            cref="T:System.Windows.Forms.Cursor" />
+
+          
 
           
 
@@ -969,6 +1133,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -977,6 +1143,8 @@
           <para
             >true if this cursor is equal to the specified <see
              cref="T:System.Windows.Forms.Cursor" />
+
+            
 
             
 
@@ -992,8 +1160,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Cursor" />
+
+          
 
           
 
@@ -1042,6 +1214,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1050,6 +1224,8 @@
           <para
             >A hash code for the current <see
              cref="T:System.Windows.Forms.Cursor" />
+
+            
 
             
 
@@ -1104,8 +1280,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.Cursor.Hide" />
+
+            
 
             
 
@@ -1118,8 +1298,12 @@
 
             
 
+            
+
              method there must be a corresponding call to the <see
              cref="M:System.Windows.Forms.Cursor.Show" />
+
+            
 
             
 
@@ -1159,8 +1343,12 @@
 
             
 
+            
+
              is the <see
              cref="T:System.Drawing.Point" />
+
+            
 
             
 
@@ -1200,6 +1388,8 @@
 
             
 
+            
+
              class are equal.</para
           >
         </summary>
@@ -1208,6 +1398,8 @@
           <para
             >true if two instances of the <see
              cref="T:System.Windows.Forms.Cursor" />
+
+            
 
             
 
@@ -1223,8 +1415,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Cursor" />
+
+          
 
           
 
@@ -1239,8 +1435,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Cursor" />
+
+          
 
           
 
@@ -1279,6 +1479,8 @@
 
             
 
+            
+
              class are not equal.</para
           >
         </summary>
@@ -1287,6 +1489,8 @@
           <para
             >true if two instances of the <see
              cref="T:System.Windows.Forms.Cursor" />
+
+            
 
             
 
@@ -1302,8 +1506,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Cursor" />
+
+          
 
           
 
@@ -1318,8 +1526,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Cursor" />
+
+          
 
           
 
@@ -1354,8 +1566,12 @@
 
             
 
+            
+
              property is identical to the <see
              cref="P:System.Windows.Forms.Control.MousePosition" />
+
+            
 
             
 
@@ -1392,8 +1608,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.Cursor.Hide" />
+
+            
 
             
 
@@ -1406,8 +1626,12 @@
 
             
 
+            
+
              method there must be a corresponding call to the <see
              cref="M:System.Windows.Forms.Cursor.Show" />
+
+            
 
             
 
@@ -1475,8 +1699,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -1491,8 +1719,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -1538,6 +1770,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1562,6 +1796,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1575,8 +1811,12 @@
 
             
 
+            
+
              that represents this <see
              cref="T:System.Windows.Forms.Cursor" />
+
+            
 
             
 

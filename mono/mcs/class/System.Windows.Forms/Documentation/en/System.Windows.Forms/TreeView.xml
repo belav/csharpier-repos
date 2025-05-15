@@ -41,8 +41,12 @@
 
         
 
+        
+
          collection holds all the <see
          cref="T:System.Windows.Forms.TreeNode" />
+
+        
 
         
 
@@ -55,8 +59,12 @@
 
         
 
+        
+
          control. The tree nodes in this collection are referred to as the root tree nodes. Any tree node that is subsequently added to a root tree node is referred to as a child node. Because each <see
          cref="T:System.Windows.Forms.TreeNode" />
+
+        
 
         
 
@@ -69,8 +77,12 @@
 
         
 
+        
+
          objects, you might find it difficult to determine your location in the tree structure when you iterate through the collection. You can parse the <see
          cref="P:System.Windows.Forms.TreeNode.FullPath" />
+
+        
 
         
 
@@ -83,8 +95,12 @@
 
         
 
+        
+
          string value to determine where a <see
          cref="T:System.Windows.Forms.TreeNode" />
+
+        
 
         
 
@@ -100,8 +116,12 @@
 
         
 
+        
+
          to the <see
          cref="P:System.Windows.Forms.TreeView.ImageList" />
+
+        
 
         
 
@@ -114,6 +134,8 @@
 
         
 
+        
+
          in the <see
          cref="T:System.Windows.Forms.ImageList" />
 
@@ -121,8 +143,12 @@
 
         
 
+        
+
          to assign that <see
          cref="T:System.Drawing.Image" />
+
+        
 
         
 
@@ -140,8 +166,12 @@
 
             
 
+            
+
              property to the index value of the <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -159,8 +189,12 @@
 
             
 
+            
+
              property to the index value of the <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -178,8 +212,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.TreeView.SelectedImageIndex" />
+
+        
 
         
 
@@ -192,6 +230,8 @@
 
         
 
+        
+
          collection. Individual tree nodes can override the default images by setting the <see
          cref="P:System.Windows.Forms.TreeNode.ImageIndex" />
 
@@ -199,8 +239,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.TreeNode.SelectedImageIndex" />
+
+        
 
         
 
@@ -216,6 +260,8 @@
 
         
 
+        
+
          are 16 x 16 pixels by default. Setting the <see
          cref="P:System.Windows.Forms.ImageList.ImageSize" />
 
@@ -223,8 +269,12 @@
 
         
 
+        
+
          property of the <see
          cref="P:System.Windows.Forms.TreeView.StateImageList" />
+
+        
 
         
 
@@ -244,8 +294,12 @@
 
         
 
+        
+
          by clicking the plus-sign (+) button, if one is displayed next to the <see
          cref="T:System.Windows.Forms.TreeNode" />
+
+        
 
         
 
@@ -258,8 +312,12 @@
 
         
 
+        
+
          by calling the <see
          cref="M:System.Windows.Forms.TreeNode.Expand" />
+
+        
 
         
 
@@ -272,8 +330,12 @@
 
         
 
+        
+
          collection, call the <see
          cref="M:System.Windows.Forms.TreeNode.ExpandAll" />
+
+        
 
         
 
@@ -286,8 +348,12 @@
 
         
 
+        
+
          level by calling the <see
          cref="M:System.Windows.Forms.TreeNode.Collapse" />
+
+        
 
         
 
@@ -300,8 +366,12 @@
 
         
 
+        
+
         . You can also call the <see
          cref="M:System.Windows.Forms.TreeNode.Toggle" />
+
+        
 
         
 
@@ -317,6 +387,8 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.TreeView" />
 
@@ -324,8 +396,12 @@
 
         
 
+        
+
          to true. The <see
          cref="P:System.Windows.Forms.TreeNode.Checked" />
+
+        
 
         
 
@@ -342,6 +418,8 @@
 
           
 
+          
+
            property from within the <see
            cref="E:System.Windows.Forms.TreeView.BeforeCheck" />
 
@@ -349,8 +427,12 @@
 
           
 
+          
+
            or <see
            cref="E:System.Windows.Forms.TreeView.AfterCheck" />
+
+          
 
           
 
@@ -363,8 +445,12 @@
 
           
 
+          
+
            property in the event handler when you are recursively updating the child nodes so that the user does not have to expand and check each one individually. To prevent the event from being raised multiple times, add logic to your event handler that only executes your recursive code if the <see
            cref="P:System.Windows.Forms.TreeViewEventArgs.Action" />
+
+          
 
           
 
@@ -377,8 +463,12 @@
 
           
 
+          
+
            is not set to <see
            cref="F:System.Windows.Forms.TreeViewAction.Unknown" />
+
+          
 
           
 
@@ -391,8 +481,12 @@
 
           
 
+          
+
            or <see
            cref="E:System.Windows.Forms.TreeView.BeforeCheck" />
+
+          
 
           
 
@@ -409,8 +503,12 @@
 
         
 
+        
+
          control by setting some of its display and style properties. Setting <see
          cref="P:System.Windows.Forms.TreeView.ShowPlusMinus" />
+
+        
 
         
 
@@ -423,8 +521,12 @@
 
         
 
+        
+
          that can be expanded or collapsed, respectively. Setting the <see
          cref="P:System.Windows.Forms.TreeView.ShowRootLines" />
+
+        
 
         
 
@@ -437,8 +539,12 @@
 
         
 
+        
+
          to display lines that join all the root tree nodes together. You can display lines that connect child tree nodes to their root node by setting the <see
          cref="P:System.Windows.Forms.TreeView.ShowLines" />
+
+        
 
         
 
@@ -451,8 +557,12 @@
 
         
 
+        
+
          property to true changes the appearance of the tree node labels as the mouse pointer passes over them. When hot-tracked, the tree node labels take on the appearance of a hyperlink. You can also completely customize the appearance of the <see
          cref="T:System.Windows.Forms.TreeView" />
+
+        
 
         
 
@@ -465,6 +575,8 @@
 
         
 
+        
+
          property to a value other than <see
          cref="F:System.Windows.Forms.TreeViewDrawMode.Normal" />
 
@@ -472,8 +584,12 @@
 
         
 
+        
+
          and handle the <see
          cref="E:System.Windows.Forms.TreeView.DrawNode" />
+
+        
 
         
 
@@ -490,8 +606,12 @@
 
           
 
+          
+
           , <see
            cref="P:System.Windows.Forms.TreeView.Scrollable" />
+
+          
 
           
 
@@ -504,8 +624,12 @@
 
           
 
+          
+
           , and <see
            cref="P:System.Windows.Forms.TreeView.SelectedImageIndex" />
+
+          
 
           
 
@@ -518,6 +642,8 @@
 
           
 
+          
+
            handle is recreated (see <see
            cref="M:System.Windows.Forms.Control.RecreateHandle" />
 
@@ -525,8 +651,12 @@
 
           
 
+          
+
           ) to update the control's appearance. This causes all tree nodes to be collapsed, except for the selected <see
            cref="T:System.Windows.Forms.TreeNode" />
+
+          
 
           
 
@@ -541,6 +671,8 @@
       <para
         >Displays a hierarchical collection of labeled items, each represented by a <see
          cref="T:System.Windows.Forms.TreeNode" />
+
+        
 
         
 
@@ -562,6 +694,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -596,8 +730,12 @@
 
             
 
+            
+
              property from within a <see
              cref="E:System.Windows.Forms.TreeView.BeforeCheck" />
+
+            
 
             
 
@@ -610,8 +748,12 @@
 
             
 
+            
+
              event handler causes the event to be raised multiple times and can result in unexpected behavior. To prevent the event from being raised multiple times, add logic to your event handler that only executes your recursive code if the <see
              cref="P:System.Windows.Forms.TreeViewEventArgs.Action" />
+
+            
 
             
 
@@ -624,8 +766,12 @@
 
             
 
+            
+
              is not set to <see
              cref="F:System.Windows.Forms.TreeViewAction.Unknown" />
+
+            
 
             
 
@@ -638,6 +784,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -678,6 +826,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -708,6 +858,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -748,6 +900,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -781,6 +935,8 @@
 
             
 
+            
+
              property.</para
           >
           <para
@@ -788,6 +944,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -858,6 +1016,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -888,6 +1048,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.TreeView.BackgroundImage" />
+
+            
 
             
 
@@ -938,6 +1100,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -975,6 +1139,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -1001,8 +1167,12 @@
 
               
 
+              
+
                property from within the <see
                cref="E:System.Windows.Forms.TreeView.BeforeCheck" />
+
+              
 
               
 
@@ -1015,8 +1185,12 @@
 
               
 
+              
+
                event causes the event to be raised multiple times and can result in unexpected behavior. For example, you might set the <see
                cref="P:System.Windows.Forms.TreeNode.Checked" />
+
+              
 
               
 
@@ -1029,6 +1203,8 @@
 
               
 
+              
+
                property of the <see
                cref="T:System.Windows.Forms.TreeViewEventArgs" />
 
@@ -1036,8 +1212,12 @@
 
               
 
+              
+
                is not set to <see
                cref="F:System.Windows.Forms.TreeViewAction.Unknown" />
+
+              
 
               
 
@@ -1051,6 +1231,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1091,6 +1273,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1121,6 +1305,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1161,6 +1347,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1191,6 +1379,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1227,8 +1417,12 @@
 
             
 
+            
+
             , call the <see
              cref="M:System.Windows.Forms.TreeView.BeginUpdate" />
+
+            
 
             
 
@@ -1241,8 +1435,12 @@
 
             
 
+            
+
              method prevents the control from painting until the <see
              cref="M:System.Windows.Forms.TreeView.EndUpdate" />
+
+            
 
             
 
@@ -1258,8 +1456,12 @@
 
             
 
+            
+
              method to add an array of tree node items to a tree view. However, if you want to add items one at a time, use the <see
              cref="M:System.Windows.Forms.TreeView.BeginUpdate" />
+
+            
 
             
 
@@ -1272,8 +1474,12 @@
 
             
 
+            
+
              control from painting during the add operations. To allow the control to resume painting, call the <see
              cref="M:System.Windows.Forms.TreeView.EndUpdate" />
+
+            
 
             
 
@@ -1321,8 +1527,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Windows.Forms.BorderStyle.Fixed3D" />
+
+            
 
             
 
@@ -1335,8 +1545,12 @@
 
             
 
+            
+
              has a sunken, three-dimensional appearance. To display a flat, thin border around the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -1349,8 +1563,12 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Windows.Forms.BorderStyle.FixedSingle" />
+
+            
 
             
 
@@ -1392,11 +1610,15 @@
 
             
 
+            
+
             , if any. Check boxes allow the user to select more than one tree node at a time.</para
           >
           <para
             >When the <see
              cref="P:System.Windows.Forms.TreeView.CheckBoxes" />
+
+            
 
             
 
@@ -1409,8 +1631,12 @@
 
             
 
+            
+
              is set to true, and the <see
              cref="P:System.Windows.Forms.TreeView.StateImageList" />
+
+            
 
             
 
@@ -1423,8 +1649,12 @@
 
             
 
+            
+
              that is contained in the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -1437,8 +1667,12 @@
 
             
 
+            
+
              to indicate an unchecked or checked state, respectively. However, the displayed images may be different if the following situation occurs: If the <see
              cref="P:System.Windows.Forms.TreeView.SelectedImageIndex" />
+
+            
 
             
 
@@ -1451,8 +1685,12 @@
 
             
 
+            
+
              property of the parent <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -1465,6 +1703,8 @@
 
             
 
+            
+
              will not automatically reset to -1 to indicate it is not set. In this case, the state image at the indicated index position is shown. If <see
              cref="P:System.Windows.Forms.TreeView.CheckBoxes" />
 
@@ -1472,8 +1712,12 @@
 
             
 
+            
+
              is set to true again, the first and second images of the <see
              cref="P:System.Windows.Forms.TreeView.StateImageList" />
+
+            
 
             
 
@@ -1490,8 +1734,12 @@
 
               
 
+              
+
                property at run time, the <see
                cref="T:System.Windows.Forms.TreeView" />
+
+              
 
               
 
@@ -1504,8 +1752,12 @@
 
               
 
+              
+
               ) to update the control's appearance. This causes all tree nodes to be collapsed, with the exception of the selected <see
                cref="T:System.Windows.Forms.TreeNode" />
+
+              
 
               
 
@@ -1543,6 +1795,8 @@
 
             
 
+            
+
              method collapses all the <see
              cref="T:System.Windows.Forms.TreeNode" />
 
@@ -1550,8 +1804,12 @@
 
             
 
+            
+
              objects, which includes all the child tree nodes, that are in the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -1568,6 +1826,8 @@
 
               
 
+              
+
                persists. For example, suppose that you call the <see
                cref="M:System.Windows.Forms.TreeNode.Expand" />
 
@@ -1575,8 +1835,12 @@
 
               
 
+              
+
                method for a root tree node. If the child tree nodes were not previously collapsed, they will appear in their previously-expanded state. Calling the <see
                cref="M:System.Windows.Forms.TreeView.CollapseAll" />
+
+              
 
               
 
@@ -1634,6 +1898,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1682,8 +1948,12 @@
 
             
 
+            
+
              method. Dispose invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -1696,8 +1966,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -1713,8 +1987,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -1733,11 +2011,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1777,8 +2059,12 @@
 
             
 
+            
+
              property does not affect the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -1791,6 +2077,8 @@
 
             
 
+            
+
              is drawn, use the <see
              cref="M:System.Windows.Forms.TreeView.BeginUpdate" />
 
@@ -1798,8 +2086,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.TreeView.EndUpdate" />
+
+            
 
             
 
@@ -1818,8 +2110,12 @@
 
             
 
+            
+
              property does not affect the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -1859,8 +2155,12 @@
 
             
 
+            
+
              are typically drawn by the operating system. The <see
              cref="P:System.Windows.Forms.TreeView.DrawMode" />
+
+            
 
             
 
@@ -1873,8 +2173,12 @@
 
             
 
+            
+
              to <see
              cref="F:System.Windows.Forms.TreeViewDrawMode.OwnerDrawAll" />
+
+            
 
             
 
@@ -1887,8 +2191,12 @@
 
             
 
+            
+
              and provide a handler for the <see
              cref="E:System.Windows.Forms.TreeView.DrawNode" />
+
+            
 
             
 
@@ -1926,11 +2234,15 @@
 
             
 
+            
+
              control using owner drawing.</para
           >
           <para
             >This event is raised only when the <see
              cref="P:System.Windows.Forms.TreeView.DrawMode" />
+
+            
 
             
 
@@ -1943,8 +2255,12 @@
 
             
 
+            
+
              values of <see
              cref="F:System.Windows.Forms.TreeViewDrawMode.OwnerDrawAll" />
+
+            
 
             
 
@@ -1957,6 +2273,8 @@
 
             
 
+            
+
             . The following table indicates how the <see
              cref="T:System.Windows.Forms.TreeNode" />
 
@@ -1964,8 +2282,12 @@
 
             
 
+            
+
              can be customized when the <see
              cref="P:System.Windows.Forms.TreeView.DrawMode" />
+
+            
 
             
 
@@ -1999,8 +2321,12 @@
 
                   
 
+                  
+
                    label area can be customized. All other <see
                    cref="T:System.Windows.Forms.TreeNode" />
+
+                  
 
                   
 
@@ -2025,6 +2351,8 @@
 
                   
 
+                  
+
                    can be customized. Icons, check boxes, plus and minus signs, and lines connecting the nodes must be drawn manually if they are desired. </para
                 >
               </description>
@@ -2038,6 +2366,8 @@
 
             
 
+            
+
              value would occupy if it were drawn using the font specified by the <see
              cref="T:System.Windows.Forms.TreeView" />
 
@@ -2045,8 +2375,12 @@
 
             
 
+            
+
              control's <see
              cref="P:System.Windows.Forms.Control.Font" />
+
+            
 
             
 
@@ -2062,8 +2396,12 @@
 
             
 
+            
+
              property when using <see
              cref="F:System.Windows.Forms.TreeViewDrawMode.OwnerDrawText" />
+
+            
 
             
 
@@ -2076,8 +2414,12 @@
 
             
 
+            
+
             , however, the <see
              cref="P:System.Windows.Forms.DrawTreeNodeEventArgs.Bounds" />
+
+            
 
             
 
@@ -2090,8 +2432,12 @@
 
             
 
+            
+
             . In this case, you can access the hit test region by getting the <see
              cref="P:System.Windows.Forms.DrawTreeNodeEventArgs.Node" />
+
+            
 
             
 
@@ -2104,8 +2450,12 @@
 
             
 
+            
+
              property. You can then draw the hit test region of the node within these bounds, or you can provide your own hit test code. Note that setting the <see
              cref="P:System.Windows.Forms.TreeNode.NodeFont" />
+
+            
 
             
 
@@ -2118,6 +2468,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -2125,6 +2477,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -2143,8 +2497,12 @@
 
             
 
+            
+
              is drawn and the <see
              cref="P:System.Windows.Forms.TreeView.DrawMode" />
+
+            
 
             
 
@@ -2157,8 +2515,12 @@
 
             
 
+            
+
              value other than <see
              cref="F:System.Windows.Forms.TreeViewDrawMode.Normal" />
+
+            
 
             
 
@@ -2187,8 +2549,12 @@
 
             
 
+            
+
             , call the <see
              cref="M:System.Windows.Forms.TreeView.BeginUpdate" />
+
+            
 
             
 
@@ -2201,8 +2567,12 @@
 
             
 
+            
+
              method prevents the control from painting until the <see
              cref="M:System.Windows.Forms.TreeView.EndUpdate" />
+
+            
 
             
 
@@ -2218,8 +2588,12 @@
 
             
 
+            
+
              method to add an array of tree node items to a tree view. However, if you want to add items one at a time, use the <see
              cref="M:System.Windows.Forms.TreeView.BeginUpdate" />
+
+            
 
             
 
@@ -2232,8 +2606,12 @@
 
             
 
+            
+
              control from painting during the add operations. To allow control the control to resume painting, call the <see
              cref="M:System.Windows.Forms.TreeView.EndUpdate" />
+
+            
 
             
 
@@ -2270,6 +2648,8 @@
 
             
 
+            
+
              method expands all the <see
              cref="T:System.Windows.Forms.TreeNode" />
 
@@ -2277,8 +2657,12 @@
 
             
 
+            
+
              objects, which includes all the child tree nodes, that are in the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -2295,6 +2679,8 @@
 
               
 
+              
+
                persists. For example, suppose that you call the <see
                cref="M:System.Windows.Forms.TreeNode.ExpandAll" />
 
@@ -2302,8 +2688,12 @@
 
               
 
+              
+
                method, and then the individual root tree nodes are collapsed. The child tree nodes have not been collapsed, and will appear in their previously-expanded state when the root tree nodes are expanded again. Calling the <see
                cref="M:System.Windows.Forms.TreeView.CollapseAll" />
+
+              
 
               
 
@@ -2368,6 +2758,8 @@
 
             
 
+            
+
              is true, a selection highlight spans the entire width of the tree view, display instead of the width of just the tree node label. The <see
              cref="P:System.Windows.Forms.TreeView.FullRowSelect" />
 
@@ -2375,8 +2767,12 @@
 
             
 
+            
+
              property is ignored if <see
              cref="P:System.Windows.Forms.TreeView.ShowLines" />
+
+            
 
             
 
@@ -2420,8 +2816,12 @@
 
             
 
+            
+
              for the specified <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -2440,8 +2840,12 @@
 
             
 
+            
+
              for the specified <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -2457,6 +2861,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.TreeNode" />
 
@@ -2464,8 +2870,12 @@
 
           
 
+          
+
            for which to return an <see
            cref="T:System.Windows.Forms.OwnerDrawPropertyBag" />
+
+          
 
           
 
@@ -2480,8 +2890,12 @@
 
           
 
+          
+
           The visible state of the <see
            cref="T:System.Windows.Forms.TreeNode" />
+
+          
 
           
 
@@ -2518,8 +2932,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.MouseEventArgs.Y" />
+
+            
 
             
 
@@ -2532,8 +2950,12 @@
 
             
 
+            
+
              event as the <see
              cref="P:System.Drawing.Point.X" />
+
+            
 
             
 
@@ -2546,8 +2968,12 @@
 
             
 
+            
+
              values of a new <see
              cref="T:System.Drawing.Point" />
+
+            
 
             
 
@@ -2570,6 +2996,8 @@
 
             
 
+            
+
              at the specified point, in tree view (client) coordinates, or null if there is no node at that location.</para
           >
         </returns>
@@ -2580,8 +3008,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -2619,8 +3051,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.MouseEventArgs.Y" />
+
+            
 
             
 
@@ -2633,6 +3069,8 @@
 
             
 
+            
+
              event as the <paramref
              name="x" />
 
@@ -2640,8 +3078,12 @@
 
             
 
+            
+
              and <paramref
              name="y" />
+
+            
 
             
 
@@ -2664,6 +3106,8 @@
 
             
 
+            
+
              at the specified location, in tree view (client) coordinates, or null if there is no node at that location.</para
           >
         </returns>
@@ -2674,8 +3118,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Drawing.Point.X" />
+
+          
 
           
 
@@ -2690,8 +3138,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Drawing.Point.Y" />
+
+          
 
           
 
@@ -2725,6 +3177,8 @@
 
             
 
+            
+
              is true, the result is the number of all the tree nodes in the entire tree structure.</para
           >
         </remarks>
@@ -2743,8 +3197,12 @@
 
           
 
+          
+
           true to count the <see
            cref="T:System.Windows.Forms.TreeNode" />
+
+          
 
           
 
@@ -2781,8 +3239,12 @@
 
             
 
+            
+
              control remain highlighted in a different color than the current selection color when the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -2794,6 +3256,8 @@
             <para
               >If you are concerned with the accessibility of your applications, it is recommended that you set the <see
                cref="P:System.Windows.Forms.TreeView.HideSelection" />
+
+              
 
               
 
@@ -2839,6 +3303,8 @@
 
             
 
+            
+
              and where within the node the point is located, such as on the label or image area.</para
           >
         </remarks>
@@ -2857,8 +3323,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -2895,6 +3365,8 @@
 
             
 
+            
+
              and where within the node the point is located, such as on the label or image area.</para
           >
         </remarks>
@@ -2913,10 +3385,14 @@
 
           
 
+          
+
           The x-coordinate at which to retrieve node information </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2949,8 +3425,12 @@
 
             
 
+            
+
              property is set to true, the <see
              cref="P:System.Windows.Forms.TreeView.HotTracking" />
+
+            
 
             
 
@@ -2967,8 +3447,12 @@
 
               
 
+              
+
                property is set to true, each tree node label takes on the appearance of a hyperlink as the mouse pointer passes over it. The <see
                cref="F:System.Drawing.FontStyle.Underline" />
+
+              
 
               
 
@@ -2981,8 +3465,12 @@
 
               
 
+              
+
                and the <see
                cref="P:System.Windows.Forms.Control.ForeColor" />
+
+              
 
               
 
@@ -3040,8 +3528,12 @@
 
             
 
+            
+
              value is the index of an <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -3054,8 +3546,12 @@
 
             
 
+            
+
              assigned to the <see
              cref="P:System.Windows.Forms.TreeView.ImageList" />
+
+            
 
             
 
@@ -3071,8 +3567,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.TreeView.ImageIndex" />
+
+            
 
             
 
@@ -3085,8 +3585,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.TreeView.ImageIndex" />
+
+            
 
             
 
@@ -3099,8 +3603,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.TreeView.ImageKey" />
+
+            
 
             
 
@@ -3117,8 +3625,12 @@
 
               
 
+              
+
                property at run time, the <see
                cref="T:System.Windows.Forms.TreeView" />
+
+              
 
               
 
@@ -3131,8 +3643,12 @@
 
               
 
+              
+
               ) to update the control's appearance. This causes all tree nodes to be collapsed, with the exception of the selected <see
                cref="T:System.Windows.Forms.TreeNode" />
+
+              
 
               
 
@@ -3193,11 +3709,15 @@
 
             
 
+            
+
              property is case-insensitive.</para
           >
           <para
             >If a <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -3210,8 +3730,12 @@
 
             
 
+            
+
              property will be shown when the node is not selected. When the node is selected, the first item in the <see
              cref="T:System.Windows.Forms.ImageList" />
+
+            
 
             
 
@@ -3227,8 +3751,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.TreeView.ImageIndex" />
+
+            
 
             
 
@@ -3241,8 +3769,12 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Windows.Forms.TreeView.ImageIndex" />
+
+            
 
             
 
@@ -3255,8 +3787,12 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Windows.Forms.TreeView.ImageKey" />
+
+            
 
             
 
@@ -3270,6 +3806,8 @@
           <para
             >Gets or sets the key of the default image for each node in the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -3309,8 +3847,12 @@
 
             
 
+            
+
              property value is anything other than null, all the tree nodes display the first <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -3323,8 +3865,12 @@
 
             
 
+            
+
             . You can specify which images from the list are displayed for selected and unselected nodes by setting the <see
              cref="P:System.Windows.Forms.TreeView.ImageIndex" />
+
+            
 
             
 
@@ -3337,8 +3883,12 @@
 
             
 
+            
+
              properties. Individual <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -3351,6 +3901,8 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.TreeNode.SelectedImageIndex" />
 
@@ -3358,8 +3910,12 @@
 
             
 
+            
+
              properties. These individual settings will override the settings in the corresponding <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -3376,8 +3932,12 @@
 
               
 
+              
+
                nodes when your application calls <see
                cref="M:System.Windows.Forms.Application.EnableVisualStyles" />
+
+              
 
               
 
@@ -3390,8 +3950,12 @@
 
               
 
+              
+
                in your Main method immediately after you call <see
                cref="M:System.Windows.Forms.Application.EnableVisualStyles" />
+
+              
 
               
 
@@ -3411,8 +3975,12 @@
 
             
 
+            
+
              that contains the <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -3477,6 +4045,8 @@
 
             
 
+            
+
              control treats keys such as ENTER, ESC, HOME, and END as input keys.</para
           >
         </remarks>
@@ -3490,6 +4060,8 @@
         </returns>
         <param name="keyData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3525,6 +4097,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3551,6 +4125,8 @@
           <para
             >If the item height is set to a value larger than the height of the tree view control, calling the <see
              cref="M:System.Windows.Forms.TreeNode.EnsureVisible" />
+
+            
 
             
 
@@ -3592,6 +4168,8 @@
 
             
 
+            
+
              method works only if the <see
              cref="P:System.Windows.Forms.TreeView.LabelEdit" />
 
@@ -3599,8 +4177,12 @@
 
             
 
+            
+
              property is true. If <see
              cref="P:System.Windows.Forms.TreeView.LabelEdit" />
+
+            
 
             
 
@@ -3646,6 +4228,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -3674,8 +4258,12 @@
 
             
 
+            
+
             ) or minus sign (<ui
             >-</ui>
+
+            
 
             
 
@@ -3693,6 +4281,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3701,6 +4291,8 @@
           <para
             >Occurs when the user clicks a <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -3737,6 +4329,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3745,6 +4339,8 @@
           <para
             >Occurs when the user double-clicks a <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -3778,6 +4374,8 @@
 
             
 
+            
+
             , the <see
              cref="E:System.Windows.Forms.TreeView.NodeMouseHover" />
 
@@ -3785,8 +4383,12 @@
 
             
 
+            
+
              event will occur before the <see
              cref="E:System.Windows.Forms.Control.MouseHover" />
+
+            
 
             
 
@@ -3804,6 +4406,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -3812,6 +4416,8 @@
           <para
             >Occurs when the mouse hovers over a <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -3854,8 +4460,12 @@
 
             
 
+            
+
              property holds a collection of <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -3868,6 +4478,8 @@
 
             
 
+            
+
              property that can contain its own <see
              cref="T:System.Windows.Forms.TreeNodeCollection" />
 
@@ -3875,8 +4487,12 @@
 
             
 
+            
+
             . This nesting of tree nodes can make it difficult to navigate a tree structure, but the <see
              cref="P:System.Windows.Forms.TreeNode.FullPath" />
+
+            
 
             
 
@@ -3924,11 +4540,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.TreeView.OnAfterCheck(System.Windows.Forms.TreeViewEventArgs)" />
+
+            
 
             
 
@@ -3947,6 +4567,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -3957,8 +4579,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.TreeViewEventArgs" />
+
+          
 
           
 
@@ -3997,11 +4623,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.TreeView.OnAfterCollapse(System.Windows.Forms.TreeViewEventArgs)" />
+
+            
 
             
 
@@ -4020,6 +4650,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4030,8 +4662,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.TreeViewEventArgs" />
+
+          
 
           
 
@@ -4070,11 +4706,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.TreeView.OnAfterExpand(System.Windows.Forms.TreeViewEventArgs)" />
+
+            
 
             
 
@@ -4093,6 +4733,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4103,8 +4745,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.TreeViewEventArgs" />
+
+          
 
           
 
@@ -4139,11 +4785,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.TreeView.OnAfterLabelEdit(System.Windows.Forms.NodeLabelEditEventArgs)" />
+
+            
 
             
 
@@ -4162,6 +4812,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4172,8 +4824,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.NodeLabelEditEventArgs" />
+
+          
 
           
 
@@ -4212,11 +4868,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.TreeView.OnAfterSelect(System.Windows.Forms.TreeViewEventArgs)" />
+
+            
 
             
 
@@ -4235,6 +4895,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4245,8 +4907,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.TreeViewEventArgs" />
+
+          
 
           
 
@@ -4289,11 +4955,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.TreeView.OnBeforeCheck(System.Windows.Forms.TreeViewCancelEventArgs)" />
+
+            
 
             
 
@@ -4312,6 +4982,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4322,8 +4994,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.TreeViewCancelEventArgs" />
+
+          
 
           
 
@@ -4362,11 +5038,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.TreeView.OnBeforeCollapse(System.Windows.Forms.TreeViewCancelEventArgs)" />
+
+            
 
             
 
@@ -4385,6 +5065,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4395,8 +5077,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.TreeViewCancelEventArgs" />
+
+          
 
           
 
@@ -4435,11 +5121,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.TreeView.OnBeforeExpand(System.Windows.Forms.TreeViewCancelEventArgs)" />
+
+            
 
             
 
@@ -4458,6 +5148,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4468,8 +5160,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.TreeViewCancelEventArgs" />
+
+          
 
           
 
@@ -4504,11 +5200,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.TreeView.OnBeforeLabelEdit(System.Windows.Forms.NodeLabelEditEventArgs)" />
+
+            
 
             
 
@@ -4527,6 +5227,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4537,8 +5239,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.NodeLabelEditEventArgs" />
+
+          
 
           
 
@@ -4577,11 +5283,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.TreeView.OnBeforeSelect(System.Windows.Forms.TreeViewCancelEventArgs)" />
+
+            
 
             
 
@@ -4600,6 +5310,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4610,8 +5322,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.TreeViewCancelEventArgs" />
+
+          
 
           
 
@@ -4653,11 +5369,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.TreeView.OnDrawNode(System.Windows.Forms.DrawTreeNodeEventArgs)" />
+
+            
 
             
 
@@ -4676,6 +5396,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4686,8 +5408,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DrawTreeNodeEventArgs" />
+
+          
 
           
 
@@ -4722,11 +5448,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.TreeView.OnHandleCreated(System.EventArgs)" />
+
+            
 
             
 
@@ -4745,6 +5475,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -4755,8 +5487,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -4795,11 +5531,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.TreeView.OnHandleDestroyed(System.EventArgs)" />
+
+            
 
             
 
@@ -4818,6 +5558,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -4828,8 +5570,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -4868,11 +5614,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.TreeView.OnItemDrag(System.Windows.Forms.ItemDragEventArgs)" />
+
+            
 
             
 
@@ -4891,6 +5641,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4901,8 +5653,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Windows.Forms.ItemDragEventArgs" />
+
+          
 
           
 
@@ -4939,6 +5695,8 @@
 
             
 
+            
+
              property is set to true and the <see
              cref="P:System.Windows.Forms.KeyEventArgs.Handled" />
 
@@ -4946,8 +5704,12 @@
 
             
 
+            
+
              property is set to false, the <see
              cref="M:System.Windows.Forms.TreeView.OnKeyDown(System.Windows.Forms.KeyEventArgs)" />
+
+            
 
             
 
@@ -4965,11 +5727,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.TreeView.OnKeyDown(System.Windows.Forms.KeyEventArgs)" />
+
+            
 
             
 
@@ -4988,6 +5754,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4998,8 +5766,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyEventArgs" />
+
+          
 
           
 
@@ -5036,8 +5808,12 @@
 
             
 
+            
+
              property is set to false, the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -5050,8 +5826,12 @@
 
             
 
+            
+
              property of <paramref
              name="e" />
+
+            
 
             
 
@@ -5069,11 +5849,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.TreeView.OnKeyPress(System.Windows.Forms.KeyPressEventArgs)" />
+
+            
 
             
 
@@ -5092,6 +5876,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5102,8 +5888,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyPressEventArgs" />
+
+          
 
           
 
@@ -5142,11 +5932,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.TreeView.OnKeyUp(System.Windows.Forms.KeyEventArgs)" />
+
+            
 
             
 
@@ -5165,6 +5959,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -5175,8 +5971,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyEventArgs" />
+
+          
 
           
 
@@ -5213,6 +6013,8 @@
 
             
 
+            
+
              method performs a hit test to see whether the mouse is located over a <see
              cref="T:System.Windows.Forms.TreeNode" />
 
@@ -5220,8 +6022,12 @@
 
             
 
+            
+
             , and if it is, raises the <see
              cref="E:System.Windows.Forms.TreeView.NodeMouseHover" />
+
+            
 
             
 
@@ -5239,11 +6045,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.TreeView.OnMouseHover(System.EventArgs)" />
+
+            
 
             
 
@@ -5262,6 +6072,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5272,8 +6084,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5308,11 +6124,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.TreeView.OnMouseLeave(System.EventArgs)" />
+
+            
 
             
 
@@ -5331,6 +6151,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5341,8 +6163,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5380,11 +6206,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.TreeView.OnNodeMouseClick(System.Windows.Forms.TreeNodeMouseClickEventArgs)" />
+
+            
 
             
 
@@ -5403,6 +6233,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -5413,8 +6245,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.TreeNodeMouseClickEventArgs" />
+
+          
 
           
 
@@ -5452,11 +6288,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.TreeView.OnNodeMouseDoubleClick(System.Windows.Forms.TreeNodeMouseClickEventArgs)" />
+
+            
 
             
 
@@ -5475,6 +6315,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -5485,8 +6327,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.TreeNodeMouseClickEventArgs" />
+
+          
 
           
 
@@ -5524,11 +6370,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.TreeView.OnNodeMouseHover(System.Windows.Forms.TreeNodeMouseHoverEventArgs)" />
+
+            
 
             
 
@@ -5547,6 +6397,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -5557,8 +6409,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.TreeNodeMouseHoverEventArgs" />
+
+          
 
           
 
@@ -5601,11 +6457,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.TreeView.OnRightToLeftLayoutChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -5624,6 +6484,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5634,8 +6496,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5684,6 +6550,8 @@
 
             
 
+            
+
              control's contents and its edges.</para
           >
         </summary>
@@ -5713,6 +6581,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.TreeView.Padding" />
+
+            
 
             
 
@@ -5752,6 +6622,8 @@
 
             
 
+            
+
              is drawn.</para
           >
         </summary>
@@ -5779,6 +6651,8 @@
           <para
             >The tree node path consists of a set of tree node labels separated by the <see
              cref="P:System.Windows.Forms.TreeView.PathSeparator" />
+
+            
 
             
 
@@ -5826,6 +6700,8 @@
 
             
 
+            
+
              property is for use with international applications where the language is read from right-to-left. If you set <see
              cref="P:System.Windows.Forms.TreeView.RightToLeftLayout" />
 
@@ -5833,8 +6709,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.Control.RightToLeft" />
+
+            
 
             
 
@@ -5848,6 +6728,8 @@
           <para
             >Gets or sets a value that indicates whether the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -5880,6 +6762,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -5888,6 +6772,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.TreeView.RightToLeftLayout" />
+
+            
 
             
 
@@ -5921,8 +6807,12 @@
 
             
 
+            
+
              when any <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -5939,8 +6829,12 @@
 
               
 
+              
+
                property at run time, the <see
                cref="T:System.Windows.Forms.TreeView" />
+
+              
 
               
 
@@ -5953,8 +6847,12 @@
 
               
 
+              
+
               ) to update the control's appearance. This causes all tree nodes to be collapsed, with the exception of the selected <see
                cref="T:System.Windows.Forms.TreeNode" />
+
+              
 
               
 
@@ -6009,8 +6907,12 @@
 
             
 
+            
+
              value is the index of an <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -6023,8 +6925,12 @@
 
             
 
+            
+
              assigned to the <see
              cref="P:System.Windows.Forms.TreeView.ImageList" />
+
+            
 
             
 
@@ -6041,8 +6947,12 @@
 
               
 
+              
+
                property at run time, the <see
                cref="T:System.Windows.Forms.TreeView" />
+
+              
 
               
 
@@ -6055,8 +6965,12 @@
 
               
 
+              
+
               ) to update the control's appearance. This causes all tree nodes to be collapsed, except for the selected <see
                cref="T:System.Windows.Forms.TreeNode" />
+
+              
 
               
 
@@ -6117,8 +7031,12 @@
 
             
 
+            
+
              does not have a selected image set, the image specified by the <see
              cref="P:System.Windows.Forms.TreeView.SelectedImageKey" />
+
+            
 
             
 
@@ -6134,8 +7052,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.TreeView.SelectedImageIndex" />
+
+            
 
             
 
@@ -6148,8 +7070,12 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Windows.Forms.TreeView.SelectedImageIndex" />
+
+            
 
             
 
@@ -6162,8 +7088,12 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Windows.Forms.TreeView.SelectedImageKey" />
+
+            
 
             
 
@@ -6177,6 +7107,8 @@
           <para
             >Gets or sets the key of the default image shown when a <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -6216,8 +7148,12 @@
 
             
 
+            
+
              is currently selected, the <see
              cref="P:System.Windows.Forms.TreeView.SelectedNode" />
+
+            
 
             
 
@@ -6261,8 +7197,12 @@
 
             
 
+            
+
              is set to true, the <see
              cref="P:System.Windows.Forms.TreeView.FullRowSelect" />
+
+            
 
             
 
@@ -6307,8 +7247,12 @@
 
             
 
+            
+
              for a <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -6322,6 +7266,8 @@
           <para
             >Gets or sets a value indicating ToolTips are shown when the mouse pointer hovers over a <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -6350,6 +7296,8 @@
           <para
             >The plus sign and minus sign buttons appear next to the root tree nodes only if the <see
              cref="P:System.Windows.Forms.TreeView.ShowRootLines" />
+
+            
 
             
 
@@ -6391,8 +7339,12 @@
 
             
 
+            
+
              property is false, the plus-sign and minus-sign buttons will not appear next to the root tree nodes, and the <see
              cref="P:System.Windows.Forms.TreeView.ShowPlusMinus" />
+
+            
 
             
 
@@ -6432,12 +7384,16 @@
 
             
 
+            
+
              property. You can use this method if the text of existing nodes is changed or nodes are moved by the user, and you want to sort the items again. </para
           >
           <block subset="none" type="note">
             <para
               >The default sorter uses the <see
                cref="M:System.Globalization.CompareInfo.Compare(System.String,System.Int32,System.Int32,System.String,System.Int32,System.Int32)" />
+
+              
 
               
 
@@ -6450,6 +7406,8 @@
 
               
 
+              
+
                specified by the application. This means that <see
                cref="T:System.Windows.Forms.TreeNode" />
 
@@ -6457,8 +7415,12 @@
 
               
 
+              
+
                objects with equal value are kept in the order in which they were added to the <see
                cref="T:System.Windows.Forms.TreeView" />
+
+              
 
               
 
@@ -6473,6 +7435,8 @@
           <para
             >Sorts the items in <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -6512,8 +7476,12 @@
 
             
 
+            
+
              is set to true, the <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -6526,8 +7494,12 @@
 
             
 
+            
+
              property values. You should always use <see
              cref="M:System.Windows.Forms.TreeView.BeginUpdate" />
+
+            
 
             
 
@@ -6540,6 +7512,8 @@
 
             
 
+            
+
              to maintain performance when you add a large quantity of items to a sorted <see
              cref="T:System.Windows.Forms.TreeView" />
 
@@ -6547,8 +7521,12 @@
 
             
 
+            
+
             . When the text of an existing node is changed, you must call <see
              cref="M:System.Windows.Forms.TreeView.Sort" />
+
+            
 
             
 
@@ -6565,8 +7543,12 @@
 
               
 
+              
+
                method based on the <see
                cref="P:System.Windows.Forms.Application.CurrentCulture" />
+
+              
 
               
 
@@ -6579,8 +7561,12 @@
 
               
 
+              
+
                objects with equal value are kept in the order in which they were added to the <see
                cref="T:System.Windows.Forms.TreeView" />
+
+              
 
               
 
@@ -6629,8 +7615,12 @@
 
             
 
+            
+
             , set the <see
              cref="P:System.Windows.Forms.TreeView.StateImageList" />
+
+            
 
             
 
@@ -6643,6 +7633,8 @@
 
             
 
+            
+
              or <see
              cref="P:System.Windows.Forms.TreeNode.StateImageIndex" />
 
@@ -6650,8 +7642,12 @@
 
             
 
+            
+
              property for each <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -6667,6 +7663,8 @@
 
             
 
+            
+
              are 16 x 16 pixels by default. Setting the <see
              cref="P:System.Windows.Forms.ImageList.ImageSize" />
 
@@ -6674,8 +7672,12 @@
 
             
 
+            
+
              property of the <see
              cref="P:System.Windows.Forms.TreeView.StateImageList" />
+
+            
 
             
 
@@ -6695,8 +7697,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -6709,8 +7715,12 @@
 
             
 
+            
+
              property is set, each <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -6723,8 +7733,12 @@
 
             
 
+            
+
              displays the first and second images from the <see
              cref="P:System.Windows.Forms.TreeView.StateImageList" />
+
+            
 
             
 
@@ -6737,8 +7751,12 @@
 
             
 
+            
+
              property before you add nodes to the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -6752,6 +7770,8 @@
           <para
             >Gets or sets the image list that is used to indicate the state of the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -6795,6 +7815,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -6825,6 +7847,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.TreeView.Text" />
+
+            
 
             
 
@@ -6868,8 +7892,12 @@
 
             
 
+            
+
              returns the first root tree node, which is located at the top of the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -6881,6 +7909,8 @@
             <para
               >Setting this property has no effect when the <see
                cref="P:System.Windows.Forms.TreeView.Scrollable" />
+
+              
 
               
 
@@ -6915,6 +7945,8 @@
           <para
             >Overrides <see
              cref="M:System.ComponentModel.Component.ToString" />
+
+            
 
             
 
@@ -6961,11 +7993,15 @@
 
             
 
+            
+
              is set.</para
           >
           <para
             >If a <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -6978,8 +8014,12 @@
 
             
 
+            
+
              method to sort the items again with the custom sorter specified by the <see
              cref="P:System.Windows.Forms.TreeView.TreeViewNodeSorter" />
+
+            
 
             
 
@@ -6996,8 +8036,12 @@
 
               
 
+              
+
                method based on the <see
                cref="P:System.Windows.Forms.Application.CurrentCulture" />
+
+              
 
               
 
@@ -7010,8 +8054,12 @@
 
               
 
+              
+
                objects with equal value are kept in the order in which they were added to the <see
                cref="T:System.Windows.Forms.TreeView" />
+
+              
 
               
 
@@ -7031,8 +8079,12 @@
 
             
 
+            
+
              to perform a custom sort of the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -7069,6 +8121,8 @@
 
             
 
+            
+
              value can be greater than the number of tree nodes in the tree view. The value is calculated by dividing the height of the client window by the height of a tree node item. The result is the total number of <see
              cref="T:System.Windows.Forms.TreeNode" />
 
@@ -7076,8 +8130,12 @@
 
             
 
+            
+
              objects that the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 

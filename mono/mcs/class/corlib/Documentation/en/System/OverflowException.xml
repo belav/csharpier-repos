@@ -43,6 +43,8 @@
 
         
 
+        
+
          exception.</para
       >
       <code lang="C#"
@@ -77,6 +79,8 @@ Error caught: System.OverflowException: Arithmetic operation resulted in an over
 
         
 
+        
+
          is thrown at run time under the following conditions:</para
       >
       <list type="bullet">
@@ -89,8 +93,12 @@ Error caught: System.OverflowException: Arithmetic operation resulted in an over
 
             
 
+            
+
              that is thrown by a multiplication operation that overflows the bounds of the <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -104,6 +112,8 @@ Error caught: System.OverflowException: Arithmetic operation resulted in an over
           <para
             >A casting or conversion operation attempts to perform a narrowing conversion, and the value of the source data type is outside the range of the target data type. The following example illustrates the <see
              cref="T:System.OverflowException" />
+
+            
 
             
 
@@ -123,12 +133,16 @@ Error caught: System.OverflowException: Arithmetic operation resulted in an over
 
         
 
+        
+
         , the operation must occur in a checked context. By default, arithmetic operations and overflows in Visual Basic are checked; in C#, they are not. If the operation occurs in an unchecked context, the result is truncated by discarding any high-order bits that do not fit into the destination type. The following example illustrates such an unchecked conversion in C#. It repeats the previous example in an unchecked context.</para
       >
       <para>code reference: System.OverflowException#3</para>
       <para
         >The following Microsoft intermediate language (MSIL) instructions throw an <see
          cref="T:System.OverflowException" />
+
+        
 
         
 
@@ -163,6 +177,8 @@ Error caught: System.OverflowException: Arithmetic operation resulted in an over
 
         
 
+        
+
          uses the HRESULT COR_E_OVERFLOW, which has the value 0x80131516.</para
       >
       <para
@@ -173,8 +189,12 @@ Error caught: System.OverflowException: Arithmetic operation resulted in an over
 
         
 
+        
+
         , see the <see
          cref="M:System.OverflowException.#ctor" />
+
+        
 
         
 
@@ -213,6 +233,8 @@ Error caught: System.OverflowException: Arithmetic operation resulted in an over
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.OverflowException" />
+
+            
 
             
 
@@ -263,6 +285,8 @@ Error caught: System.OverflowException: Arithmetic operation resulted in an over
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -300,11 +324,15 @@ Error caught: System.OverflowException: Arithmetic operation resulted in an over
 
             
 
+            
+
              should be understandable to the user. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.OverflowException" />
+
+            
 
             
 
@@ -355,11 +383,15 @@ Error caught: System.OverflowException: Arithmetic operation resulted in an over
 
             
 
+            
+
              class with a specified error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -404,6 +436,8 @@ Error caught: System.OverflowException: Arithmetic operation resulted in an over
 
             
 
+            
+
              class with serialized data.</para
           >
         </summary>
@@ -414,10 +448,14 @@ Error caught: System.OverflowException: Arithmetic operation resulted in an over
 
           
 
+          
+
           The object that holds the serialized object data. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -462,8 +500,12 @@ Error caught: System.OverflowException: Arithmetic operation resulted in an over
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -476,11 +518,15 @@ Error caught: System.OverflowException: Arithmetic operation resulted in an over
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.OverflowException" />
+
+            
 
             
 
@@ -531,11 +577,15 @@ Error caught: System.OverflowException: Arithmetic operation resulted in an over
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -550,8 +600,12 @@ Error caught: System.OverflowException: Arithmetic operation resulted in an over
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 

@@ -21,7 +21,7 @@
       <Using Namespace="System.Text.RegularExpressions" />
       <Using Namespace="System.IO" />
       <Code Type="Fragment" Language="cs">
-<![CDATA[
+        <![CDATA[
 
                 ConfPropertyName = "";
                 ConfPropertyValue = "";
@@ -76,7 +76,7 @@
       <Using Namespace="System.Text" />
       <Using Namespace="System.Diagnostics" />
       <Code Type="Fragment" Language="cs">
-<![CDATA[
+        <![CDATA[
                 var process = new Process ();
 
                 process.StartInfo.FileName = LLVMConfTool;

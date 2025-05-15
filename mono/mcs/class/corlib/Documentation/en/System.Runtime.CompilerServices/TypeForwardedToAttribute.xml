@@ -34,11 +34,15 @@
 
         
 
+        
+
          attribute to move a type from one assembly to another without disrupting callers that compiled against the old assembly.</para
       >
       <para
         >Note   vbprvbext does not support the use of the <see
          cref="T:System.Runtime.CompilerServices.TypeForwardedToAttribute" />
+
+        
 
         
 
@@ -52,6 +56,8 @@
       <para
         >Specifies a destination <see
          cref="T:System.Type" />
+
+        
 
         
 
@@ -89,8 +95,12 @@
 
             
 
+            
+
              class specifying a destination <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -106,8 +116,12 @@
 
           
 
+          
+
           The destination <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -137,6 +151,8 @@
           <para
             >Gets the destination <see
              cref="T:System.Type" />
+
+            
 
             
 

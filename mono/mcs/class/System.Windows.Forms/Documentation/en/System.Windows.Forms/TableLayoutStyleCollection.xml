@@ -32,6 +32,8 @@
 
         
 
+        
+
          class represents the collection of all the styles used to describe the columns or rows in an associated <see
          cref="T:System.Windows.Forms.TableLayoutPanel" />
 
@@ -39,8 +41,12 @@
 
         
 
+        
+
         . Classes derived from <see
          cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
+
+        
 
         
 
@@ -58,8 +64,12 @@
 
             
 
+            
+
              aggregates column styles as a collection of <see
              cref="T:System.Windows.Forms.ColumnStyle" />
+
+            
 
             
 
@@ -77,8 +87,12 @@
 
             
 
+            
+
              aggregates row styles as a collection of <see
              cref="T:System.Windows.Forms.RowStyle" />
+
+            
 
             
 
@@ -96,8 +110,12 @@
 
         
 
+        
+
          are implementations of <see
          cref="T:System.Collections.IList" />
+
+        
 
         
 
@@ -138,8 +156,12 @@
 
             
 
+            
+
              method reapplies the table layout to all the controls in the current <see
              cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+            
 
             
 
@@ -159,6 +181,8 @@
 
             
 
+            
+
              to the end of the current collection.</para
           >
         </summary>
@@ -173,6 +197,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.TableLayoutStyle" />
 
@@ -180,8 +206,12 @@
 
           
 
+          
+
            to add to the <see
            cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
+
+          
 
           
 
@@ -213,6 +243,8 @@
 
             
 
+            
+
              method performs two main actions:</para
           >
           <list type="bullet">
@@ -225,8 +257,12 @@
 
                 
 
+                
+
                  from its <see
                  cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+                
 
                 
 
@@ -244,8 +280,12 @@
 
                 
 
+                
+
                  objects. As a result, the <see
                  cref="P:System.Windows.Forms.TableLayoutStyleCollection.Count" />
+
+                
 
                 
 
@@ -261,6 +301,8 @@
           <para
             >Disassociates the collection from its associated <see
              cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+            
 
             
 
@@ -291,6 +333,8 @@
           <para
             >Gets the number of styles actually contained in the <see
              cref="T:System.Windows.Forms.TableLayoutStyleCollection" />
+
+            
 
             
 
@@ -347,8 +391,12 @@
 
             
 
+            
+
              is removed, it is disassociated from its <see
              cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+            
 
             
 
@@ -368,8 +416,12 @@
 
           
 
+          
+
           The zero-based index of the <see
            cref="T:System.Windows.Forms.TableLayoutStyle" />
+
+          
 
           
 
@@ -406,8 +458,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -426,11 +482,15 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
         <param name="array">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -443,6 +503,8 @@
 
           
 
+          
+
            that is the destination of the elements copied from <see
            cref="T:System.Collections.ICollection" />
 
@@ -450,8 +512,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -466,8 +532,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -501,8 +571,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -516,6 +590,8 @@
           <para
             >For a description of this method, see the <see
              cref="P:System.Collections.ICollection.IsSynchronized" />
+
+            
 
             
 
@@ -550,8 +626,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -565,6 +645,8 @@
           <para
             >For a description of this method, see the <see
              cref="P:System.Collections.ICollection.SyncRoot" />
+
+            
 
             
 
@@ -599,8 +681,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -619,6 +705,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -627,6 +715,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -660,8 +750,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -680,6 +774,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -688,6 +784,8 @@
           <para
             >The position into which <paramref
              name="style" />
+
+            
 
             
 
@@ -703,6 +801,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -710,8 +810,12 @@
 
           
 
+          
+
            to add to the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -744,8 +848,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -764,6 +872,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -777,8 +887,12 @@
 
             
 
+            
+
              is found in the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -794,6 +908,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -801,8 +917,12 @@
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -835,8 +955,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -855,6 +979,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -863,6 +989,8 @@
           <para
             >The index of <paramref
              name="style" />
+
+            
 
             
 
@@ -878,6 +1006,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -885,8 +1015,12 @@
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -920,8 +1054,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -940,6 +1078,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -950,8 +1090,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="style" />
+
+          
 
           
 
@@ -966,6 +1110,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -973,8 +1119,12 @@
 
           
 
+          
+
            to insert into the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -1005,8 +1155,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1020,6 +1174,8 @@
           <para
             >For a description of this method, see the <see
              cref="P:System.Collections.IList.IsFixedSize" />
+
+            
 
             
 
@@ -1051,8 +1207,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1066,6 +1226,8 @@
           <para
             >For a description of this method, see the <see
              cref="P:System.Collections.IList.IsReadOnly" />
+
+            
 
             
 
@@ -1121,8 +1283,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1141,11 +1307,15 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
         <param name="style">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1158,8 +1328,12 @@
 
           
 
+          
+
            to remove from the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 

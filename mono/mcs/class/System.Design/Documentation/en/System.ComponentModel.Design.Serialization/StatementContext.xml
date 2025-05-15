@@ -23,8 +23,12 @@
 
         
 
+        
+
          method with a collection of objects whose statements you want stored in the statement table. As each object is serialized in the <see
          cref="M:System.ComponentModel.Design.Serialization.CodeDomSerializerBase.SerializeToExpression(System.ComponentModel.Design.Serialization.IDesignerSerializationManager,System.Object)" />
+
+        
 
         
 
@@ -53,6 +57,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.Design.Serialization.StatementContext" />
+
+            
 
             
 

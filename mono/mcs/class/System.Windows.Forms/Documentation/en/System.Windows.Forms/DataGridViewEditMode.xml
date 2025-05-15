@@ -20,8 +20,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          values except for <see
          cref="F:System.Windows.Forms.DataGridViewEditMode.EditProgrammatically" />
+
+        
 
         
 
@@ -52,6 +60,8 @@
       <para
         >Specifies how a user starts cell editing in the <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -143,6 +153,8 @@
           <para
             >Editing begins only when the <see
              cref="M:System.Windows.Forms.DataGridView.BeginEdit(System.Boolean)" />
+
+            
 
             
 

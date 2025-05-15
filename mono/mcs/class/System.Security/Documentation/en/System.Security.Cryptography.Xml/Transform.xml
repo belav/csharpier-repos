@@ -20,6 +20,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -33,6 +35,8 @@
       <para
         >Use a class that derives from the <see
          cref="T:System.Security.Cryptography.Xml.Transform" />
+
+        
 
         
 
@@ -74,6 +78,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -107,11 +113,15 @@
 
             
 
+            
+
              attribute of a &lt;Transform&gt; element in an XMLDSIG signature. For example, the algorithm URI for the Base64 decoding transform is defined as http://www.w3.org/2000/09/xmldsig#base64 in the XMLDSIG specification (Section 6.6.2).</para
           >
           <para
             >You can conveniently set this value using one of the static fields associated with the <see
              cref="T:System.Security.Cryptography.Xml.SignedXml" />
+
+            
 
             
 
@@ -157,8 +167,12 @@
 
             
 
+            
+
              property represents the value passed to the <see
              cref="T:System.Security.Cryptography.Xml.SignedXml" />
+
+            
 
             
 
@@ -171,8 +185,12 @@
 
             
 
+            
+
              property represents <see
              cref="T:System.Security.Cryptography.Xml.Signature" />
+
+            
 
             
 
@@ -183,6 +201,8 @@
           <para
             >The <see
              cref="P:System.Security.Cryptography.Xml.Transform.Context" />
+
+            
 
             
 
@@ -201,8 +221,12 @@
 
             
 
+            
+
              object that represents the document context under which the current <see
              cref="T:System.Security.Cryptography.Xml.Transform" />
+
+            
 
             
 
@@ -250,6 +274,8 @@
 
             
 
+            
+
              object. </para
           >
         </summary>
@@ -258,6 +284,8 @@
           <para
             >The digest associated with a <see
              cref="T:System.Security.Cryptography.Xml.Transform" />
+
+            
 
             
 
@@ -273,8 +301,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.HashAlgorithm" />
+
+          
 
           
 
@@ -315,6 +347,8 @@
 
             
 
+            
+
              object that are suitable to be included as subelements of an XMLDSIG &lt;Transform&gt; element.</para
           >
         </summary>
@@ -323,6 +357,8 @@
           <para
             >A list of the XML nodes that represent the transform-specific content needed to describe the current <see
              cref="T:System.Security.Cryptography.Xml.Transform" />
+
+            
 
             
 
@@ -361,6 +397,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -369,6 +407,8 @@
           <para
             >The output of the current <see
              cref="T:System.Security.Cryptography.Xml.Transform" />
+
+            
 
             
 
@@ -408,8 +448,12 @@
 
             
 
+            
+
              method returns the output of the current transform after it is run on the value previously set by a call to the <see
              cref="M:System.Security.Cryptography.Xml.Transform.LoadInput(System.Object)" />
+
+            
 
             
 
@@ -420,6 +464,8 @@
           <para
             >The type of the returned object must be one of the type objects in the <see
              cref="P:System.Security.Cryptography.Xml.Transform.OutputTypes" />
+
+            
 
             
 
@@ -438,6 +484,8 @@
 
             
 
+            
+
              object of the specified type.</para
           >
         </summary>
@@ -446,6 +494,8 @@
           <para
             >The output of the current <see
              cref="T:System.Security.Cryptography.Xml.Transform" />
+
+            
 
             
 
@@ -461,8 +511,12 @@
 
           
 
+          
+
           The type of the output to return. This must be one of the types in the <see
            cref="P:System.Security.Cryptography.Xml.Transform.OutputTypes" />
+
+          
 
           
 
@@ -499,6 +553,8 @@
 
             
 
+            
+
              object returned by this method conforms to the XML Scheme for the &lt;Transform&gt; element defined in Section 4.3.3.4 of the XMLDSIG specification.</para
           >
         </remarks>
@@ -512,6 +568,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -520,6 +578,8 @@
           <para
             >The XML representation of the current <see
              cref="T:System.Security.Cryptography.Xml.Transform" />
+
+            
 
             
 
@@ -558,8 +618,12 @@
 
             
 
+            
+
              property must contain at least one element because every <see
              cref="T:System.Security.Cryptography.Xml.Transform" />
+
+            
 
             
 
@@ -575,8 +639,12 @@
 
             
 
+            
+
              object typically accepts one or more of the following types as input: <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -589,8 +657,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Xml.XmlNodeList" />
+
+            
 
             
 
@@ -609,8 +681,12 @@
 
             
 
+            
+
              method of the current <see
              cref="T:System.Security.Cryptography.Xml.Transform" />
+
+            
 
             
 
@@ -657,8 +733,12 @@
 
             
 
+            
+
              object as transform-specific content of a &lt;Transform&gt; element and configures the internal state of the current <see
              cref="T:System.Security.Cryptography.Xml.Transform" />
+
+            
 
             
 
@@ -674,6 +754,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlNodeList" />
 
@@ -681,8 +763,12 @@
 
           
 
+          
+
            object that specifies transform-specific content for the current <see
            cref="T:System.Security.Cryptography.Xml.Transform" />
+
+          
 
           
 
@@ -721,6 +807,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -729,6 +817,8 @@
           <para
             >When overridden in a derived class, loads the specified input into the current <see
              cref="T:System.Security.Cryptography.Xml.Transform" />
+
+            
 
             
 
@@ -744,8 +834,12 @@
 
           
 
+          
+
           The input to load into the current <see
            cref="T:System.Security.Cryptography.Xml.Transform" />
+
+          
 
           
 
@@ -786,6 +880,8 @@
 
             
 
+            
+
              property must contain at least one element because every transform must generate at least one type as output.</para
           >
         </remarks>
@@ -799,8 +895,12 @@
 
             
 
+            
+
              methods of the current <see
              cref="T:System.Security.Cryptography.Xml.Transform" />
+
+            
 
             
 
@@ -846,6 +946,8 @@
 
             
 
+            
+
              keys of the <see
              cref="P:System.Security.Cryptography.Xml.Transform.PropagatedNamespaces" />
 
@@ -853,8 +955,12 @@
 
             
 
+            
+
              property are the namespace prefixes and the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -870,6 +976,8 @@
 
             
 
+            
+
              property is set automatically during signature computation and checking, but before transforms are invoked.</para
           >
         </remarks>
@@ -878,6 +986,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -923,6 +1033,8 @@
 
             
 
+            
+
              class resolves external XML resources named by a Uniform Resource Identifier (URI). If you do not trust the source of the XML file, you might not want to allow the XML file to access computer resources named by the URI. The <see
              cref="P:System.Security.Cryptography.Xml.Transform.Resolver" />
 
@@ -930,8 +1042,12 @@
 
             
 
+            
+
              property allows you to control the level of access that XML files have to computer resources by specifying different <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -945,6 +1061,8 @@
           <para
             >Sets the current <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 

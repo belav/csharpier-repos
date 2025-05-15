@@ -42,8 +42,12 @@
 
           
 
+          
+
            to lock objects (that is, reference types), not value types. For details, see the overloads of the <see
            cref="M:System.Threading.Monitor.Enter(System.Object)" />
+
+          
 
           
 
@@ -53,6 +57,8 @@
            type="text/html">
             <a href="33FE4AEF-B44B-42FD-9E72-C908E39E75DB">[&lt;topic://cpconMonitor&gt;]</a>
           </format>
+
+          
 
           
 
@@ -106,6 +112,8 @@
 
               
 
+              
+
               , <see
                cref="M:System.Threading.Monitor.TryEnter(System.Object)" />
             </para>
@@ -128,6 +136,8 @@
           <term>
             <para>
               <see cref="M:System.Threading.Monitor.Pulse(System.Object)" />
+
+              
 
               
 
@@ -160,8 +170,12 @@
 
         
 
+        
+
          method overload and the <see
          cref="M:System.Threading.Monitor.Exit(System.Object)" />
+
+        
 
         
 
@@ -177,6 +191,8 @@
 
         
 
+        
+
          and <see
          cref="Overload:System.Threading.Monitor.TryEnter" />
 
@@ -184,8 +200,12 @@
 
         
 
+        
+
          methods. One set of overloads has a ref (ByRef in Visual Basic) <see
          cref="T:System.Boolean" />
+
+        
 
         
 
@@ -201,8 +221,12 @@
 
         
 
+        
+
          on the method, and specifying the <see
          cref="F:System.Runtime.CompilerServices.MethodImplOptions.Synchronized" />
+
+        
 
         
 
@@ -249,8 +273,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -268,8 +296,12 @@
 
             
 
+            
+
              on the object passed as the parameter. If another thread has executed an Enter on the object but has not yet executed the corresponding <see
              cref="M:System.Threading.Monitor.Exit(System.Object)" />
+
+            
 
             
 
@@ -285,8 +317,12 @@
 
             
 
+            
+
              to lock objects (that is, reference types), not value types. When you pass a value type variable to Enter, it is boxed as an object. If you pass the same variable to Enter again, it is boxed as a separate object, and the thread does not block. In this case, the code that Monitor is supposedly protecting is not protected. Furthermore, when you pass the variable to Exit, still another separate object is created. Because the object passed to Exit is different from the object passed to Enter, Monitor throws <see
              cref="T:System.Threading.SynchronizationLockException" />
+
+            
 
             
 
@@ -301,6 +337,8 @@
 
             
 
+            
+
             .</para
           >
           <para>
@@ -310,8 +348,12 @@
 
             
 
+            
+
              can interrupt threads that are waiting to enter a Monitor on an object. A <see
              cref="T:System.Threading.ThreadInterruptedException" />
+
+            
 
             
 
@@ -327,8 +369,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Threading.Monitor.Exit(System.Object)" />
+
+            
 
             
 
@@ -343,6 +389,8 @@
         </summary>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -415,8 +463,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -437,8 +489,12 @@
 
             
 
+            
+
              parameter. If the calling thread owns the lock on the specified object, and has made an equal number of Exit and <see
              cref="M:System.Threading.Monitor.Enter(System.Object)" />
+
+            
 
             
 
@@ -454,8 +510,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Threading.Monitor.PulseAll(System.Object)" />
+
+            
 
             
 
@@ -470,6 +530,8 @@
         </summary>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -507,8 +569,12 @@
 
             
 
+            
+
              class, or by using the C# lock statement or the Visual Basic SyncLock statement, which are implemented with <see
              cref="T:System.Threading.Monitor" />
+
+            
 
             
 
@@ -524,6 +590,8 @@
 
             
 
+            
+
              method and the <see
              cref="T:System.Diagnostics.Contracts.Contract" />
 
@@ -531,8 +599,12 @@
 
             
 
+            
+
              class, to debug locking issues that involve the <see
              cref="T:System.Threading.Monitor" />
+
+            
 
             
 
@@ -555,11 +627,15 @@
 
             
 
+            
+
             ; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -599,8 +675,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -624,8 +704,12 @@
 
               
 
+              
+
                class does not maintain state indicating that the <see
                cref="M:System.Threading.Monitor.Pulse(System.Object)" />
+
+              
 
               
 
@@ -638,8 +722,12 @@
 
               
 
+              
+
                when no threads are waiting, the next thread that calls <see
                cref="Overload:System.Threading.Monitor.Wait" />
+
+              
 
               
 
@@ -652,8 +740,12 @@
 
               
 
+              
+
                had never been called. If two threads are using <see
                cref="M:System.Threading.Monitor.Pulse(System.Object)" />
+
+              
 
               
 
@@ -666,8 +758,12 @@
 
               
 
+              
+
                to interact, this could result in a deadlock. Contrast this with the behavior of the <see
                cref="T:System.Threading.AutoResetEvent" />
+
+              
 
               
 
@@ -680,8 +776,12 @@
 
               
 
+              
+
                by calling its <see
                cref="M:System.Threading.EventWaitHandle.Set" />
+
+              
 
               
 
@@ -694,8 +794,12 @@
 
               
 
+              
+
                remains in a signaled state until a thread calls <see
                cref="Overload:System.Threading.WaitHandle.WaitOne" />
+
+              
 
               
 
@@ -708,6 +812,8 @@
 
               
 
+              
+
               , or <see
                cref="Overload:System.Threading.WaitHandle.WaitAll" />
 
@@ -715,8 +821,12 @@
 
               
 
+              
+
               . The <see
                cref="T:System.Threading.AutoResetEvent" />
+
+              
 
               
 
@@ -734,8 +844,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Threading.Monitor.Wait(System.Object,System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -751,6 +865,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -760,6 +876,8 @@
         </summary>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -800,8 +918,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -824,8 +946,12 @@
 
             
 
+            
+
             , PulseAll, and <see
              cref="M:System.Threading.Monitor.Wait(System.Object,System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -841,8 +967,12 @@
 
             
 
+            
+
              method explain what happens if <see
              cref="M:System.Threading.Monitor.Pulse(System.Object)" />
+
+            
 
             
 
@@ -858,6 +988,8 @@
         </summary>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -898,8 +1030,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -917,11 +1053,15 @@
 
             
 
+            
+
              parameter. This method returns immediately, whether or not the lock is available.</para
           >
           <para
             >This method is similar to <see
              cref="M:System.Threading.Monitor.Enter(System.Object)" />
+
+            
 
             
 
@@ -938,8 +1078,12 @@
 
               
 
+              
+
                to lock objects (that is, reference types), not value types. For details, see <see
                cref="M:System.Threading.Monitor.Enter(System.Object)" />
+
+              
 
               
 
@@ -949,6 +1093,8 @@
                type="text/html">
                 <a href="33FE4AEF-B44B-42FD-9E72-C908E39E75DB">[&lt;topic://cpconMonitor&gt;]</a>
               </format>
+
+              
 
               
 
@@ -968,6 +1114,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1039,8 +1187,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -1055,8 +1207,12 @@
 
           
 
+          
+
           is negative, and not equal to <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -1066,6 +1222,8 @@
         >
         <param name="millisecondsTimeout">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1083,8 +1241,12 @@
 
             
 
+            
+
              parameter equals <see
              cref="F:System.Threading.Timeout.Infinite" />
+
+            
 
             
 
@@ -1097,6 +1259,8 @@
 
             
 
+            
+
             . If <paramref
              name="millisecondsTimeout" />
 
@@ -1104,8 +1268,12 @@
 
             
 
+            
+
              equals 0, this method is equivalent to <see
              cref="M:System.Threading.Monitor.TryEnter(System.Object)" />
+
+            
 
             
 
@@ -1122,8 +1290,12 @@
 
               
 
+              
+
                to lock objects (that is, reference types), not value types. For details, see <see
                cref="M:System.Threading.Monitor.Enter(System.Object)" />
+
+              
 
               
 
@@ -1133,6 +1305,8 @@
                type="text/html">
                 <a href="33FE4AEF-B44B-42FD-9E72-C908E39E75DB">[&lt;topic://cpconMonitor&gt;]</a>
               </format>
+
+              
 
               
 
@@ -1157,10 +1331,14 @@
 
           
 
+          
+
           The object on which to acquire the lock. </param
         >
         <param name="millisecondsTimeout">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1205,8 +1383,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -1222,6 +1404,8 @@
 
           
 
+          
+
           in milliseconds is negative and is not equal to <see
            cref="F:System.Threading.Timeout.Infinite" />
 
@@ -1229,8 +1413,12 @@
 
           
 
+          
+
            , or is greater than <see
            cref="F:System.Int32.MaxValue" />
+
+          
 
           
 
@@ -1245,8 +1433,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -1264,8 +1456,12 @@
 
             
 
+            
+
              parameter converted to milliseconds equals –1, this method is equivalent to <see
              cref="M:System.Threading.Monitor.Enter(System.Object)" />
+
+            
 
             
 
@@ -1278,8 +1474,12 @@
 
             
 
+            
+
              equals 0, this method is equivalent to <see
              cref="M:System.Threading.Monitor.TryEnter(System.Object)" />
+
+            
 
             
 
@@ -1296,8 +1496,12 @@
 
               
 
+              
+
                to lock objects (that is, reference types), not value types. For details, see <see
                cref="M:System.Threading.Monitor.Enter(System.Object)" />
+
+              
 
               
 
@@ -1307,6 +1511,8 @@
                type="text/html">
                 <a href="33FE4AEF-B44B-42FD-9E72-C908E39E75DB">[&lt;topic://cpconMonitor&gt;]</a>
               </format>
+
+              
 
               
 
@@ -1331,6 +1537,8 @@
 
           
 
+          
+
           The object on which to acquire the lock. </param
         >
         <param name="timeout">
@@ -1340,8 +1548,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -1440,8 +1652,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -1463,8 +1679,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Threading.Monitor.PulseAll(System.Object)" />
+
+            
 
             
 
@@ -1481,6 +1701,8 @@
 
             
 
+            
+
              has been invoked for the specified object. Conceptually, the Wait method stores the number of times the caller invoked Enter on the object and invokes Exit as many times as necessary to fully release the locked object. The caller then blocks while waiting to reacquire the object. When the caller reacquires the lock, the system calls Enter as many times as necessary to restore the saved Enter count for the caller. Calling Wait releases the lock for the specified object only; if the caller is the owner of locks on other objects, these locks are not released.</para
           >
           <para>Note that a synchronized object holds several references, including a reference to the thread that currently holds the lock, a reference to the ready queue, which contains the threads that are ready to obtain the lock, and a reference to the waiting queue, which contains the threads that are waiting for notification of a change in the object's state. </para>
@@ -1492,8 +1714,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Threading.Monitor.PulseAll(System.Object)" />
+
+            
 
             
 
@@ -1509,8 +1735,12 @@
 
             
 
+            
+
              method explain what happens if <see
              cref="M:System.Threading.Monitor.Pulse(System.Object)" />
+
+            
 
             
 
@@ -1529,6 +1759,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1573,8 +1805,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -1593,8 +1829,12 @@
 
           
 
+          
+
            is negative, and not equal to <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -1612,12 +1852,16 @@
 
             
 
+            
+
              parameter.</para
           >
           <para>The thread that currently owns the lock on the specified object invokes this method in order to release the object so that another thread can access it. The caller is blocked while waiting to reacquire the lock. This method is called when the caller needs to wait for a state change that will occur as a result of another thread's operations.</para>
           <para
             >The time-out ensures that the current thread does not block indefinitely if another thread releases the lock without first calling the <see
              cref="M:System.Threading.Monitor.Pulse(System.Object)" />
+
+            
 
             
 
@@ -1630,6 +1874,8 @@
 
             
 
+            
+
              method. It also moves the thread to the ready queue, bypassing other threads ahead of it in the wait queue, so that it can reacquire the lock sooner. The thread can test the return value of the <see
              cref="M:System.Threading.Monitor.Wait(System.Object,System.Int32)" />
 
@@ -1637,8 +1883,12 @@
 
             
 
+            
+
              method to determine whether it reacquired the lock prior to the time-out. The thread can evaluate the conditions that caused it to enter the wait, and if necessary call the <see
              cref="M:System.Threading.Monitor.Wait(System.Object,System.Int32)" />
+
+            
 
             
 
@@ -1654,8 +1904,12 @@
 
             
 
+            
+
             , or it is the next in the queue and a thread that holds the lock invokes <see
              cref="M:System.Threading.Monitor.Pulse(System.Object)" />
+
+            
 
             
 
@@ -1668,6 +1922,8 @@
 
             
 
+            
+
              elapses before another thread invokes this object's <see
              cref="M:System.Threading.Monitor.Pulse(System.Object)" />
 
@@ -1675,8 +1931,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Threading.Monitor.PulseAll(System.Object)" />
+
+            
 
             
 
@@ -1693,8 +1953,12 @@
 
               
 
+              
+
                is specified for the <paramref
                name="millisecondsTimeout" />
+
+              
 
               
 
@@ -1707,6 +1971,8 @@
 
               
 
+              
+
                or <see
                cref="M:System.Threading.Monitor.PulseAll(System.Object)" />
 
@@ -1714,8 +1980,12 @@
 
               
 
+              
+
               . If <paramref
                name="millisecondsTimeout" />
+
+              
 
               
 
@@ -1732,8 +2002,12 @@
 
             
 
+            
+
              has been invoked for the specified object. Conceptually, the Wait method stores the number of times the caller invoked <see
              cref="M:System.Threading.Monitor.Enter(System.Object)" />
+
+            
 
             
 
@@ -1746,6 +2020,8 @@
 
             
 
+            
+
              as many times as necessary to fully release the locked object. The caller then blocks while waiting to reacquire the object. When the caller reacquires the lock, the system calls <see
              cref="M:System.Threading.Monitor.Enter(System.Object)" />
 
@@ -1753,8 +2029,12 @@
 
             
 
+            
+
              as many times as necessary to restore the saved <see
              cref="M:System.Threading.Monitor.Enter(System.Object)" />
+
+            
 
             
 
@@ -1773,8 +2053,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Threading.Monitor.PulseAll(System.Object)" />
+
+            
 
             
 
@@ -1790,8 +2074,12 @@
 
             
 
+            
+
              method explain what happens if <see
              cref="M:System.Threading.Monitor.Pulse(System.Object)" />
+
+            
 
             
 
@@ -1815,10 +2103,14 @@
 
           
 
+          
+
           The object on which to wait. </param
         >
         <param name="millisecondsTimeout">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1863,8 +2155,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -1883,6 +2179,8 @@
 
           
 
+          
+
           is negative, and is not equal to <see
            cref="F:System.Threading.Timeout.Infinite" />
 
@@ -1890,8 +2188,12 @@
 
           
 
+          
+
            , or is greater than <see
            cref="F:System.Int32.MaxValue" />
+
+          
 
           
 
@@ -1909,12 +2211,16 @@
 
             
 
+            
+
              parameter.</para
           >
           <para>The thread that currently owns the lock on the specified object invokes this method in order to release the object so that another thread can access it. The caller is blocked while waiting to reacquire the lock. This method is called when the caller needs to wait for a state change that will occur as a result of another thread's operations.</para>
           <para
             >The time-out ensures that the current thread does not block indefinitely if another thread releases the lock without first calling the <see
              cref="M:System.Threading.Monitor.Pulse(System.Object)" />
+
+            
 
             
 
@@ -1927,6 +2233,8 @@
 
             
 
+            
+
              method. It also moves the thread to the ready queue, bypassing other threads ahead of it in the wait queue, so that it can reacquire the lock sooner. The thread can test the return value of the <see
              cref="M:System.Threading.Monitor.Wait(System.Object,System.TimeSpan)" />
 
@@ -1934,8 +2242,12 @@
 
             
 
+            
+
              method to determine whether it reacquired the lock prior to the time-out. The thread can evaluate the conditions that caused it to enter the wait, and if necessary call the <see
              cref="M:System.Threading.Monitor.Wait(System.Object,System.TimeSpan)" />
+
+            
 
             
 
@@ -1951,8 +2263,12 @@
 
             
 
+            
+
             , or it is the next in the queue and a thread that holds the lock invokes <see
              cref="M:System.Threading.Monitor.Pulse(System.Object)" />
+
+            
 
             
 
@@ -1965,6 +2281,8 @@
 
             
 
+            
+
              elapses before another thread invokes this object's <see
              cref="M:System.Threading.Monitor.Pulse(System.Object)" />
 
@@ -1972,8 +2290,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Threading.Monitor.PulseAll(System.Object)" />
+
+            
 
             
 
@@ -1990,8 +2312,12 @@
 
               
 
+              
+
                representing –1 millisecond is specified for the <paramref
                name="timeout" />
+
+              
 
               
 
@@ -2004,6 +2330,8 @@
 
               
 
+              
+
                or <see
                cref="M:System.Threading.Monitor.PulseAll(System.Object)" />
 
@@ -2011,8 +2339,12 @@
 
               
 
+              
+
               . If <paramref
                name="timeout" />
+
+              
 
               
 
@@ -2029,8 +2361,12 @@
 
             
 
+            
+
              has been invoked for the specified object. Conceptually, the Wait method stores the number of times the caller invoked <see
              cref="M:System.Threading.Monitor.Enter(System.Object)" />
+
+            
 
             
 
@@ -2043,6 +2379,8 @@
 
             
 
+            
+
              as many times as necessary to fully release the locked object. The caller then blocks while waiting to reacquire the object. When the caller reacquires the lock, the system calls <see
              cref="M:System.Threading.Monitor.Enter(System.Object)" />
 
@@ -2050,8 +2388,12 @@
 
             
 
+            
+
              as many times as necessary to restore the saved <see
              cref="M:System.Threading.Monitor.Enter(System.Object)" />
+
+            
 
             
 
@@ -2070,8 +2412,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Threading.Monitor.PulseAll(System.Object)" />
+
+            
 
             
 
@@ -2087,8 +2433,12 @@
 
             
 
+            
+
              method explain what happens if <see
              cref="M:System.Threading.Monitor.Pulse(System.Object)" />
+
+            
 
             
 
@@ -2112,6 +2462,8 @@
 
           
 
+          
+
           The object on which to wait. </param
         >
         <param name="timeout">
@@ -2121,8 +2473,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -2167,12 +2523,16 @@
 
             
 
+            
+
              parameter.</para
           >
           <para>The thread that currently owns the lock on the specified object invokes this method in order to release the object so that another thread can access it. The caller is blocked while waiting to reacquire the lock. This method is called when the caller needs to wait for a state change that will occur as a result of another thread's operations.</para>
           <para
             >The time-out ensures that the current thread does not block indefinitely if another thread releases the lock without first calling the <see
              cref="M:System.Threading.Monitor.Pulse(System.Object)" />
+
+            
 
             
 
@@ -2185,6 +2545,8 @@
 
             
 
+            
+
              method. It also moves the thread to the ready queue, bypassing other threads ahead of it in the wait queue, so that it can reacquire the lock sooner. The thread can test the return value of the <see
              cref="M:System.Threading.Monitor.Wait(System.Object,System.Int32,System.Boolean)" />
 
@@ -2192,8 +2554,12 @@
 
             
 
+            
+
              method to determine whether it reacquired the lock prior to the time-out. The thread can evaluate the conditions that caused it to enter the wait, and if necessary call the <see
              cref="M:System.Threading.Monitor.Wait(System.Object,System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -2209,8 +2575,12 @@
 
             
 
+            
+
             , or it is the next in the queue and a thread that holds the lock invokes <see
              cref="M:System.Threading.Monitor.Pulse(System.Object)" />
+
+            
 
             
 
@@ -2223,6 +2593,8 @@
 
             
 
+            
+
              elapses before another thread invokes this object's <see
              cref="M:System.Threading.Monitor.Pulse(System.Object)" />
 
@@ -2230,8 +2602,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Threading.Monitor.PulseAll(System.Object)" />
+
+            
 
             
 
@@ -2248,8 +2624,12 @@
 
               
 
+              
+
                is specified for the <paramref
                name="millisecondsTimeout" />
+
+              
 
               
 
@@ -2262,6 +2642,8 @@
 
               
 
+              
+
                or <see
                cref="M:System.Threading.Monitor.PulseAll(System.Object)" />
 
@@ -2269,8 +2651,12 @@
 
               
 
+              
+
               . If <paramref
                name="millisecondsTimeout" />
+
+              
 
               
 
@@ -2287,8 +2673,12 @@
 
             
 
+            
+
              has been invoked for the specified object. Conceptually, the Wait method stores the number of times the caller invoked <see
              cref="M:System.Threading.Monitor.Enter(System.Object)" />
+
+            
 
             
 
@@ -2301,6 +2691,8 @@
 
             
 
+            
+
              as many times as necessary to fully release the locked object. The caller then blocks while waiting to reacquire the object. When the caller reacquires the lock, the system calls <see
              cref="M:System.Threading.Monitor.Enter(System.Object)" />
 
@@ -2308,8 +2700,12 @@
 
             
 
+            
+
              as many times as necessary to restore the saved <see
              cref="M:System.Threading.Monitor.Enter(System.Object)" />
+
+            
 
             
 
@@ -2328,8 +2724,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Threading.Monitor.PulseAll(System.Object)" />
+
+            
 
             
 
@@ -2345,8 +2745,12 @@
 
             
 
+            
+
              method explain what happens if <see
              cref="M:System.Threading.Monitor.Pulse(System.Object)" />
+
+            
 
             
 
@@ -2365,8 +2769,12 @@
 
             
 
+            
+
              parameter has no effect unless the <see
              cref="M:System.Threading.Monitor.Wait(System.Object,System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -2379,8 +2787,12 @@
 
             
 
+            
+
             . Even if you are currently executing a method on a class that is not derived from <see
              cref="T:System.ContextBoundObject" />
+
+            
 
             
 
@@ -2393,8 +2805,12 @@
 
             
 
+            
+
             , you can be in a nondefault context if a <see
              cref="T:System.ContextBoundObject" />
+
+            
 
             
 
@@ -2410,6 +2826,8 @@
 
             
 
+            
+
              causes the thread to exit the nondefault managed context (that is, to transition to the default context) before executing the <see
              cref="M:System.Threading.Monitor.Wait(System.Object,System.Int32,System.Boolean)" />
 
@@ -2417,8 +2835,12 @@
 
             
 
+            
+
              method. It returns to the original nondefault context after the call to the <see
              cref="M:System.Threading.Monitor.Wait(System.Object,System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -2434,8 +2856,12 @@
 
             
 
+            
+
              attribute applied. In that case, all calls to members of the class are automatically synchronized, and the synchronization domain is the entire body of code for the class. If code in the call stack of a member calls the <see
              cref="M:System.Threading.Monitor.Wait(System.Object,System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -2448,8 +2874,12 @@
 
             
 
+            
+
             , the thread exits the synchronization domain, allowing a thread that is blocked on a call to any member of the object to proceed. When the <see
              cref="M:System.Threading.Monitor.Wait(System.Object,System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -2473,6 +2903,8 @@
 
           
 
+          
+
           The object on which to wait. </param
         >
         <param name="millisecondsTimeout">
@@ -2482,10 +2914,14 @@
 
           
 
+          
+
           The number of milliseconds to wait before the thread enters the ready queue. </param
         >
         <param name="exitContext">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2529,12 +2965,16 @@
 
             
 
+            
+
              parameter.</para
           >
           <para>The thread that currently owns the lock on the specified object invokes this method in order to release the object so that another thread can access it. The caller is blocked while waiting to reacquire the lock. This method is called when the caller needs to wait for a state change that will occur as a result of another thread's operations.</para>
           <para
             >The time-out ensures that the current thread does not block indefinitely if another thread releases the lock without first calling the <see
              cref="M:System.Threading.Monitor.Pulse(System.Object)" />
+
+            
 
             
 
@@ -2547,6 +2987,8 @@
 
             
 
+            
+
              method. It also moves the thread to the ready queue, bypassing other threads ahead of it in the wait queue, so that it can reacquire the lock sooner. The thread can test the return value of the <see
              cref="M:System.Threading.Monitor.Wait(System.Object,System.TimeSpan,System.Boolean)" />
 
@@ -2554,8 +2996,12 @@
 
             
 
+            
+
              method to determine whether it reacquired the lock prior to the time-out. The thread can evaluate the conditions that caused it to enter the wait, and if necessary call the <see
              cref="M:System.Threading.Monitor.Wait(System.Object,System.TimeSpan,System.Boolean)" />
+
+            
 
             
 
@@ -2571,8 +3017,12 @@
 
             
 
+            
+
             , or it is the next in the queue and a thread that holds the lock invokes <see
              cref="M:System.Threading.Monitor.Pulse(System.Object)" />
+
+            
 
             
 
@@ -2585,6 +3035,8 @@
 
             
 
+            
+
              milliseconds elapse before another thread invokes this object's <see
              cref="M:System.Threading.Monitor.Pulse(System.Object)" />
 
@@ -2592,8 +3044,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Threading.Monitor.PulseAll(System.Object)" />
+
+            
 
             
 
@@ -2610,8 +3066,12 @@
 
               
 
+              
+
                representing -1 millisecond is specified for the <paramref
                name="timeout" />
+
+              
 
               
 
@@ -2624,6 +3084,8 @@
 
               
 
+              
+
                or <see
                cref="M:System.Threading.Monitor.PulseAll(System.Object)" />
 
@@ -2631,8 +3093,12 @@
 
               
 
+              
+
               . If <paramref
                name="timeout" />
+
+              
 
               
 
@@ -2649,8 +3115,12 @@
 
             
 
+            
+
              has been invoked for the specified object. Conceptually, the Wait method stores the number of times the caller invoked <see
              cref="M:System.Threading.Monitor.Enter(System.Object)" />
+
+            
 
             
 
@@ -2663,6 +3133,8 @@
 
             
 
+            
+
              as many times as necessary to fully release the locked object. The caller then blocks while waiting to reacquire the object. When the caller reacquires the lock, the system calls <see
              cref="M:System.Threading.Monitor.Enter(System.Object)" />
 
@@ -2670,8 +3142,12 @@
 
             
 
+            
+
              as many times as necessary to restore the saved <see
              cref="M:System.Threading.Monitor.Enter(System.Object)" />
+
+            
 
             
 
@@ -2690,8 +3166,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Threading.Monitor.PulseAll(System.Object)" />
+
+            
 
             
 
@@ -2707,8 +3187,12 @@
 
             
 
+            
+
              method explain what happens if <see
              cref="M:System.Threading.Monitor.Pulse(System.Object)" />
+
+            
 
             
 
@@ -2727,8 +3211,12 @@
 
             
 
+            
+
              parameter has no effect unless the <see
              cref="M:System.Threading.Monitor.Wait(System.Object,System.TimeSpan,System.Boolean)" />
+
+            
 
             
 
@@ -2741,8 +3229,12 @@
 
             
 
+            
+
             . Even if you are currently executing a method on a class that is not derived from <see
              cref="T:System.ContextBoundObject" />
+
+            
 
             
 
@@ -2755,8 +3247,12 @@
 
             
 
+            
+
             , you can be in a nondefault context if a <see
              cref="T:System.ContextBoundObject" />
+
+            
 
             
 
@@ -2772,6 +3268,8 @@
 
             
 
+            
+
              causes the thread to exit the nondefault managed context (that is, to transition to the default context) before executing the <see
              cref="M:System.Threading.Monitor.Wait(System.Object,System.TimeSpan,System.Boolean)" />
 
@@ -2779,8 +3277,12 @@
 
             
 
+            
+
              method. It returns to the original nondefault context after the call to the <see
              cref="M:System.Threading.Monitor.Wait(System.Object,System.TimeSpan,System.Boolean)" />
+
+            
 
             
 
@@ -2796,8 +3298,12 @@
 
             
 
+            
+
              attribute applied. In that case, all calls to members of the class are automatically synchronized, and the synchronization domain is the entire body of code for the class. If code in the call stack of a member calls the <see
              cref="M:System.Threading.Monitor.Wait(System.Object,System.TimeSpan,System.Boolean)" />
+
+            
 
             
 
@@ -2810,8 +3316,12 @@
 
             
 
+            
+
             , the thread exits the synchronization domain, allowing a thread that is blocked on a call to any member of the object to proceed. When the <see
              cref="M:System.Threading.Monitor.Wait(System.Object,System.TimeSpan,System.Boolean)" />
+
+            
 
             
 
@@ -2835,10 +3345,14 @@
 
           
 
+          
+
           The object on which to wait. </param
         >
         <param name="timeout">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2851,10 +3365,14 @@
 
           
 
+          
+
            representing the amount of time to wait before the thread enters the ready queue. </param
         >
         <param name="exitContext">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

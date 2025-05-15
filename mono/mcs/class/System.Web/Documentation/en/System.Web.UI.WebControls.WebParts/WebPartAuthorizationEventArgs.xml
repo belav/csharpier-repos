@@ -24,6 +24,8 @@
 
         
 
+        
+
          event occurs before a <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
 
@@ -31,8 +33,12 @@
 
         
 
+        
+
          control is added to a page. There are a number of common scenarios where a control can be added to a page. For a full description of these, see the Remarks section for the <see
          cref="Overload:System.Web.UI.WebControls.WebParts.WebPartManager.IsAuthorized" />
+
+        
 
         
 
@@ -48,8 +54,12 @@
 
         
 
+        
+
          class provides access to properties about the Web Parts control being added to the page. When a control is added, it must be checked to see whether its <see
          cref="P:System.Web.UI.WebControls.WebParts.WebPart.AuthorizationFilter" />
+
+        
 
         
 
@@ -63,6 +73,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Web.UI.WebControls.WebParts.WebPartManager.AuthorizeWebPart" />
+
+        
 
         
 
@@ -98,6 +110,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -108,8 +122,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -124,10 +142,14 @@
 
           
 
+          
+
           The relative application path to the source file for the control being authorized, if the control is a user control. </param
         >
         <param name="authorizationFilter">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -140,8 +162,12 @@
 
           
 
+          
+
            property of a <see
            cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+          
 
           
 
@@ -156,8 +182,12 @@
 
           
 
+          
+
           Indicates whether the control being checked for authorization is a shared control, meaning that it is visible to many or all users of the application, and its <see
            cref="P:System.Web.UI.WebControls.WebParts.WebPart.IsShared" />
+
+          
 
           
 
@@ -190,8 +220,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+            
 
             
 
@@ -244,6 +278,8 @@
 
             
 
+            
+
              property value for that control will be false.</para
           >
           <para
@@ -251,6 +287,8 @@
              type="text/html">
               <a href="7dc34f74-52aa-4082-b98d-2bcf9e07e320">Web Parts Personalization</a>
             </format>
+
+            
 
             
 
@@ -302,6 +340,8 @@
           <para
             >Gets the <see
              cref="T:System.Type" />
+
+            
 
             
 

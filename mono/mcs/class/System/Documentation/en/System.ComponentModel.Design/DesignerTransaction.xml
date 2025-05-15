@@ -38,8 +38,12 @@
 
         
 
+        
+
          and <see
          cref="E:System.ComponentModel.Design.IDesignerHost.TransactionClosed" />
+
+        
 
         
 
@@ -55,11 +59,15 @@
 
         
 
+        
+
          for each operation or series of operations which should be reversible. Be careful not to perform actions outside the transactions that might prevent a sequence of undo events from completing successfully.</para
       >
       <para
         >You can obtain a new <see
          cref="T:System.ComponentModel.Design.DesignerTransaction" />
+
+        
 
         
 
@@ -72,8 +80,12 @@
 
         
 
+        
+
          method of an <see
          cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+        
 
         
 
@@ -86,6 +98,8 @@
 
         
 
+        
+
          from the active <see
          cref="T:System.ComponentModel.Design.IDesignerHost" />
 
@@ -93,8 +107,12 @@
 
         
 
+        
+
          in order to correctly integrate with the designer transaction processing mechanism, rather than creating a new <see
          cref="T:System.ComponentModel.Design.DesignerTransaction" />
+
+        
 
         
 
@@ -110,6 +128,8 @@
 
         
 
+        
+
          method before each change or set of changes occurs, and the <see
          cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanged(System.Object,System.ComponentModel.MemberDescriptor,System.Object,System.Object)" />
 
@@ -117,8 +137,12 @@
 
         
 
+        
+
          method after each change or set of changes occur. Finally, complete and close the transaction by calling the <see
          cref="M:System.ComponentModel.Design.DesignerTransaction.Commit" />
+
+        
 
         
 
@@ -135,8 +159,12 @@
 
           
 
+          
+
            method of a <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -149,8 +177,12 @@
 
           
 
+          
+
            and creates a <see
            cref="T:System.ComponentModel.Design.DesignerTransaction" />
+
+          
 
           
 
@@ -170,8 +202,12 @@
 
             
 
+            
+
              to obtain a <see
              cref="T:System.ComponentModel.Design.DesignerTransaction" />
+
+            
 
             
 
@@ -189,8 +225,12 @@
 
             
 
+            
+
             , call the <see
              cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanging(System.Object,System.ComponentModel.MemberDescriptor)" />
+
+            
 
             
 
@@ -203,6 +243,8 @@
 
             
 
+            
+
              method to signal that the change or changes have been made.</para
           >
         </item>
@@ -210,6 +252,8 @@
           <para
             >To complete the transaction, call <see
              cref="M:System.ComponentModel.Design.DesignerTransaction.Commit" />
+
+            
 
             
 
@@ -231,6 +275,8 @@
 
         
 
+        
+
          method. When the <see
          cref="M:System.ComponentModel.Design.DesignerTransaction.Cancel" />
 
@@ -238,8 +284,12 @@
 
         
 
+        
+
          method is invoked, the actions tracked by the <see
          cref="T:System.ComponentModel.Design.DesignerTransaction" />
+
+        
 
         
 
@@ -275,6 +325,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.Design.DesignerTransaction" />
+
+            
 
             
 
@@ -316,11 +368,15 @@
 
             
 
+            
+
              class using the specified transaction description.</para
           >
         </summary>
         <param name="description">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -483,8 +539,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -497,8 +557,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -514,8 +578,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.ComponentModel.Design.DesignerTransaction" />
+
+            
 
             
 
@@ -534,11 +602,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -575,11 +647,15 @@
 
             
 
+            
+
              and cleans up resources by calling Dispose(false). Override Dispose(Boolean) to customize the cleanup.</para
           >
           <para
             >Application code should not call this method; an object's Finalize method is automatically invoked during garbage collection, unless finalization by the garbage collector has been disabled by a call to the <see
              cref="M:System.GC.SuppressFinalize(System.Object)" />
+
+            
 
             
 
@@ -597,6 +673,8 @@
 
             
 
+            
+
             , <format
              type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
@@ -606,10 +684,14 @@
 
             
 
+            
+
             , and <format
              type="text/html">
               <a href="8026cb68-fe93-43fc-96c1-c09ad7d64cd3">Overriding the Finalize Method</a>
             </format>
+
+            
 
             
 
@@ -704,6 +786,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.ComponentModel.Design.DesignerTransaction" />
+
+            
 
             
 

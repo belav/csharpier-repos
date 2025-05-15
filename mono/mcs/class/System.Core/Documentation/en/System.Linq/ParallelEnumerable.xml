@@ -25,6 +25,8 @@
 
         
 
+        
+
         .</para
       >
     </summary>
@@ -70,10 +72,14 @@
 
           
 
+          
+
           A sequence to aggregate over.</param
         >
         <param name="func">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -88,8 +94,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -141,10 +151,14 @@
 
           
 
+          
+
           A sequence to aggregate over.</param
         >
         <param name="seed">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -159,10 +173,14 @@
 
           
 
+          
+
           An accumulator function to be invoked on each element.</param
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -175,10 +193,14 @@
 
           
 
+          
+
           .</typeparam
         >
         <typeparam name="TAccumulate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -232,10 +254,14 @@
 
           
 
+          
+
           A sequence to aggregate over.</param
         >
         <param name="seed">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -250,10 +276,14 @@
 
           
 
+          
+
           An accumulator function to be invoked on each element.</param
         >
         <param name="resultSelector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -268,8 +298,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -284,10 +318,14 @@
 
           
 
+          
+
           The type of the accumulator value.</typeparam
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -342,6 +380,8 @@
 
             
 
+            
+
              is invoked on each element within partitions. Each partition then yields a single accumulated result. The <paramref
              name="combineAccumulatorsFunc" />
 
@@ -349,8 +389,12 @@
 
             
 
+            
+
              is then invoked on the results of each partition to yield a single element. This element is then transformed by the <paramref
              name="resultSelector" />
+
+            
 
             
 
@@ -374,10 +418,14 @@
 
           
 
+          
+
           A sequence to aggregate over.</param
         >
         <param name="seedFactory">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -392,10 +440,14 @@
 
           
 
+          
+
           An accumulator function to be invoked on each element in a partition. </param
         >
         <param name="combineAccumulatorsFunc">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -410,6 +462,8 @@
 
           
 
+          
+
           A function to transform the final accumulator value into the result value. </param
         >
         <typeparam name="TSource">
@@ -419,8 +473,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -435,10 +493,14 @@
 
           
 
+          
+
           The type of the accumulator value.</typeparam
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -493,6 +555,8 @@
 
             
 
+            
+
              is invoked on each element within partitions. Each partition then yields a single accumulated result. The <paramref
              name="combineAccumulatorsFunc" />
 
@@ -500,8 +564,12 @@
 
             
 
+            
+
              is then invoked on the results of each partition to yield a single element. This element is then transformed by the <paramref
              name="resultSelector" />
+
+            
 
             
 
@@ -525,10 +593,14 @@
 
           
 
+          
+
           A sequence to aggregate over.</param
         >
         <param name="seed">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -543,10 +615,14 @@
 
           
 
+          
+
           An accumulator function to be invoked on each element in a partition. </param
         >
         <param name="combineAccumulatorsFunc">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -561,6 +637,8 @@
 
           
 
+          
+
           A function to transform the final accumulator value into the result value. </param
         >
         <typeparam name="TSource">
@@ -570,8 +648,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -586,10 +668,14 @@
 
           
 
+          
+
           The type of the accumulator value.</typeparam
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -639,10 +725,14 @@
 
           
 
+          
+
           A sequence whose elements to apply the predicate to.</param
         >
         <param name="predicate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -657,8 +747,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -710,6 +804,8 @@
 
           
 
+          
+
           The sequence to check for emptiness.</param
         >
         <typeparam name="TSource">
@@ -719,8 +815,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -770,10 +870,14 @@
 
           
 
+          
+
           A sequence to whose elements the predicate will be applied.</param
         >
         <param name="predicate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -788,8 +892,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -833,8 +941,12 @@
 
             
 
+            
+
              into an <see
              cref="T:System.Collections.Generic.IEnumerable`1" />
+
+            
 
             
 
@@ -853,6 +965,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -863,8 +977,12 @@
 
           
 
+          
+
           The sequence to cast as <see
            cref="T:System.Collections.Generic.IEnumerable`1" />
+
+          
 
           
 
@@ -879,8 +997,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -922,6 +1044,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -935,6 +1059,8 @@
         </returns>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -979,6 +1105,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -997,6 +1125,8 @@
 
           
 
+          
+
           The input sequence.</param
         >
         <typeparam name="TSource">
@@ -1006,8 +1136,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -1047,6 +1181,8 @@
 
             
 
+            
+
              operator can be used to convert a ParallelQuery to a ParallelQuery(T).</para
           >
         </remarks>
@@ -1065,6 +1201,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEnumerable`1" />
 
@@ -1072,8 +1210,12 @@
 
           
 
+          
+
            to convert to a <see
            cref="T:System.Linq.ParallelQuery" />
+
+          
 
           
 
@@ -1124,6 +1266,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1141,11 +1285,15 @@
 
             
 
+            
+
              as a ParallelQuery to bind to ParallelEnumerable extension methods.</para
           >
         </returns>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1160,8 +1308,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -1213,11 +1365,15 @@
 
             
 
+            
+
              to bind to ParallelEnumerable extension methods.</para
           >
         </returns>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1230,8 +1386,12 @@
 
           
 
+          
+
            to convert to a <see
            cref="T:System.Linq.ParallelQuery`1" />
+
+          
 
           
 
@@ -1246,8 +1406,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -1292,12 +1456,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="c67eccc7-004d-4b2f-987e-919cbbd62ef7"
                 >How to: Control Ordering in a PLINQ Query</a
               >
             </format>
+
+            
 
             
 
@@ -1316,8 +1484,12 @@
 
             
 
+            
+
              into an <see
              cref="T:System.Collections.Generic.IEnumerable`1" />
+
+            
 
             
 
@@ -1336,11 +1508,15 @@
 
             
 
+            
+
              to bind to sequential extension methods.</para
           >
         </returns>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1353,8 +1529,12 @@
 
           
 
+          
+
            to convert to an <see
            cref="T:System.Collections.Generic.IEnumerable`1" />
+
+          
 
           
 
@@ -1369,8 +1549,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -1415,10 +1599,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="10d202bc-19e1-4b5c-bbf1-9a977322a9ca">Order Preservation in PLINQ</a>
             </format>
+
+            
 
             
 
@@ -1442,6 +1630,8 @@
 
           
 
+          
+
           The input sequence.</param
         >
         <typeparam name="TSource">
@@ -1451,8 +1641,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -1502,6 +1696,8 @@
 
           
 
+          
+
           A sequence of values that are used to calculate an average.</param
         >
       </Docs>
@@ -1541,6 +1737,8 @@
         </returns>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1590,6 +1788,8 @@
 
           
 
+          
+
           A sequence of values that are used to calculate an average.</param
         >
       </Docs>
@@ -1629,6 +1829,8 @@
         </returns>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1678,6 +1880,8 @@
 
           
 
+          
+
           A sequence of values that are used to calculate an average.</param
         >
       </Docs>
@@ -1717,6 +1921,8 @@
         </returns>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1766,6 +1972,8 @@
 
           
 
+          
+
           A sequence of values that are used to calculate an average.</param
         >
       </Docs>
@@ -1805,6 +2013,8 @@
         </returns>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1854,6 +2064,8 @@
 
           
 
+          
+
           A sequence of values that are used to calculate an average.</param
         >
       </Docs>
@@ -1893,6 +2105,8 @@
         </returns>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1942,10 +2156,14 @@
 
           
 
+          
+
           A sequence of values that are used to calculate an average.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1960,8 +2178,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -2011,10 +2233,14 @@
 
           
 
+          
+
           A sequence of values that are used to calculate an average.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2029,8 +2255,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -2080,10 +2310,14 @@
 
           
 
+          
+
           A sequence of values that are used to calculate an average.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2098,8 +2332,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -2149,10 +2387,14 @@
 
           
 
+          
+
           A sequence of values that are used to calculate an average.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2167,8 +2409,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -2221,10 +2467,14 @@
 
           
 
+          
+
           A sequence of values that are used to calculate an average.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2239,8 +2489,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -2293,10 +2547,14 @@
 
           
 
+          
+
           A sequence of values that are used to calculate an average.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2311,8 +2569,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -2365,10 +2627,14 @@
 
           
 
+          
+
           A sequence of values that are used to calculate an average.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2383,8 +2649,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -2437,10 +2707,14 @@
 
           
 
+          
+
           A sequence of values that are used to calculate an average.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2455,8 +2729,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -2509,10 +2787,14 @@
 
           
 
+          
+
           A sequence of values that are used to calculate an average.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2527,8 +2809,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -2578,10 +2864,14 @@
 
           
 
+          
+
           A sequence of values that are used to calculate an average.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2596,8 +2886,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -2646,6 +2940,8 @@
 
           
 
+          
+
           The sequence that contains the elements to be converted.</param
         >
         <typeparam name="TResult">
@@ -2655,8 +2951,12 @@
 
           
 
+          
+
           The type to convert the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -2705,8 +3005,12 @@
 
             
 
+            
+
              and a right data source of type <see
              cref="T:System.Collections.Generic.IEnumerable`1" />
+
+            
 
             
 
@@ -2725,6 +3029,8 @@
 
             
 
+            
+
              when called.</para
           >
         </summary>
@@ -2733,6 +3039,8 @@
           <para
             >This overload always throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -2748,6 +3056,8 @@
 
           
 
+          
+
           This parameter is not used.</param
         >
         <param name="second">
@@ -2757,10 +3067,14 @@
 
           
 
+          
+
           This parameter is not used.</param
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2810,6 +3124,8 @@
 
           
 
+          
+
           The first sequence to concatenate.</param
         >
         <param name="second">
@@ -2819,10 +3135,14 @@
 
           
 
+          
+
           The sequence to concatenate to the first sequence.</param
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2872,10 +3192,14 @@
 
           
 
+          
+
           A sequence in which to locate a value.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2890,8 +3214,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -2940,6 +3268,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2954,10 +3284,14 @@
 
           
 
+          
+
           A sequence in which to locate a value.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2972,6 +3306,8 @@
 
           
 
+          
+
           An equality comparer to compare values.</param
         >
         <typeparam name="TSource">
@@ -2981,8 +3317,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -3031,6 +3371,8 @@
 
           
 
+          
+
           A sequence that contains elements to be counted.</param
         >
         <typeparam name="TSource">
@@ -3040,8 +3382,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -3091,10 +3437,14 @@
 
           
 
+          
+
           A sequence that contains elements to be counted.</param
         >
         <param name="predicate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3109,8 +3459,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -3158,8 +3512,12 @@
 
             
 
+            
+
              is empty; otherwise, <paramref
              name="source" />
+
+            
 
             
 
@@ -3175,6 +3533,8 @@
 
           
 
+          
+
           The sequence to return a default value for if it is empty.</param
         >
         <typeparam name="TSource">
@@ -3184,8 +3544,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -3234,8 +3598,12 @@
 
             
 
+            
+
              is empty; otherwise, <paramref
              name="source" />
+
+            
 
             
 
@@ -3251,10 +3619,14 @@
 
           
 
+          
+
           The sequence to return the specified value for if it is empty.</param
         >
         <param name="defaultValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3269,8 +3641,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -3319,6 +3695,8 @@
 
           
 
+          
+
           The sequence to remove duplicate elements from.</param
         >
         <typeparam name="TSource">
@@ -3328,8 +3706,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -3377,6 +3759,8 @@
 
             
 
+            
+
              to compare values.</para
           >
         </summary>
@@ -3391,6 +3775,8 @@
 
           
 
+          
+
           The sequence to remove duplicate elements from.</param
         >
         <param name="comparer">
@@ -3400,8 +3786,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEqualityComparer`1" />
+
+          
 
           
 
@@ -3416,8 +3806,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -3467,10 +3861,14 @@
 
           
 
+          
+
           A sequence to return an element from.</param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3485,8 +3883,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -3536,10 +3938,14 @@
 
           
 
+          
+
           A sequence to return an element from.</param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3554,8 +3960,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -3601,11 +4011,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3654,8 +4068,12 @@
 
             
 
+            
+
              and a right data source of type <see
              cref="T:System.Collections.Generic.IEnumerable`1" />
+
+            
 
             
 
@@ -3674,6 +4092,8 @@
 
             
 
+            
+
              when called.</para
           >
         </summary>
@@ -3682,6 +4102,8 @@
           <para
             >This overload always throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -3697,6 +4119,8 @@
 
           
 
+          
+
           This parameter is not used.</param
         >
         <param name="second">
@@ -3706,10 +4130,14 @@
 
           
 
+          
+
           This parameter is not used.</param
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3759,8 +4187,12 @@
 
           
 
+          
+
           A sequence whose elements that are not also in <paramref
            name="second" />
+
+          
 
           
 
@@ -3775,10 +4207,14 @@
 
           
 
+          
+
           A sequence whose elements that also occur in the first sequence will cause those elements to be removed from the returned sequence.</param
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3831,8 +4267,12 @@
 
             
 
+            
+
              and a right data source of type <see
              cref="T:System.Collections.Generic.IEnumerable`1" />
+
+            
 
             
 
@@ -3851,6 +4291,8 @@
 
             
 
+            
+
              when called.</para
           >
         </summary>
@@ -3859,6 +4301,8 @@
           <para
             >This overload always throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -3874,10 +4318,14 @@
 
           
 
+          
+
           This parameter is not used.</param
         >
         <param name="second">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3892,10 +4340,14 @@
 
           
 
+          
+
           This parameter is not used.</param
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3944,6 +4396,8 @@
 
             
 
+            
+
              to compare values.</para
           >
         </summary>
@@ -3958,8 +4412,12 @@
 
           
 
+          
+
           A sequence whose elements that are not also in <paramref
            name="second" />
+
+          
 
           
 
@@ -3969,6 +4427,8 @@
         >
         <param name="second">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3984,10 +4444,14 @@
 
           
 
+          
+
            to compare values.</param
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4032,6 +4496,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4050,6 +4516,8 @@
 
           
 
+          
+
           The sequence to return the first element of.</param
         >
         <typeparam name="TSource">
@@ -4059,8 +4527,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -4106,6 +4578,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4124,10 +4598,14 @@
 
           
 
+          
+
           The sequence to return an element from.</param
         >
         <param name="predicate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4142,8 +4620,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -4188,6 +4670,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4205,8 +4689,12 @@
 
             
 
+            
+
              is empty; otherwise, the first element in <paramref
              name="source" />
+
+            
 
             
 
@@ -4222,6 +4710,8 @@
 
           
 
+          
+
           The sequence to return the first element of.</param
         >
         <typeparam name="TSource">
@@ -4231,8 +4721,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -4278,6 +4772,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4295,8 +4791,12 @@
 
             
 
+            
+
              is empty or if no element passes the test specified by predicate; otherwise, the first element in <paramref
              name="source" />
+
+            
 
             
 
@@ -4312,10 +4812,14 @@
 
           
 
+          
+
           The sequence to return an element from.</param
         >
         <param name="predicate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4330,8 +4834,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -4377,10 +4885,14 @@
 
             
 
+            
+
              or <format
              type="text/html">
               <a href="10d202bc-19e1-4b5c-bbf1-9a977322a9ca">Order Preservation in PLINQ</a>
             </format>
+
+            
 
             
 
@@ -4399,11 +4911,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4416,8 +4932,12 @@
 
           
 
+          
+
            whose elements will be processed by <paramref
            name="action" />
+
+          
 
           
 
@@ -4432,6 +4952,8 @@
 
           
 
+          
+
           An Action to invoke on each element.</param
         >
         <typeparam name="TSource">
@@ -4441,8 +4963,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -4492,11 +5018,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4511,6 +5041,8 @@
 
           
 
+          
+
           A function to extract a key from an element.</param
         >
         <typeparam name="TSource">
@@ -4520,8 +5052,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -4536,8 +5072,12 @@
 
           
 
+          
+
           The type of the key returned by <paramref
            name="keySelector" />
+
+          
 
           
 
@@ -4587,6 +5127,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -4595,6 +5137,8 @@
           <para
             >A sequence of groups that are sorted descending according to <paramref
              name="TKey" />
+
+            
 
             
 
@@ -4610,8 +5154,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Linq.OrderedParallelQuery`1" />
+
+          
 
           
 
@@ -4626,6 +5174,8 @@
 
           
 
+          
+
           A function to extract a key from an element.</param
         >
         <param name="comparer">
@@ -4635,8 +5185,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IComparer`1" />
+
+          
 
           
 
@@ -4651,8 +5205,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -4667,8 +5225,12 @@
 
           
 
+          
+
           The type of the key returned by <paramref
            name="keySelector" />
+
+          
 
           
 
@@ -4720,6 +5282,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -4730,8 +5294,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Linq.OrderedParallelQuery`1" />
+
+          
 
           
 
@@ -4746,6 +5314,8 @@
 
           
 
+          
+
           A function to extract a key from an element.</param
         >
         <param name="elementSelector">
@@ -4755,8 +5325,12 @@
 
           
 
+          
+
           A function to map each source element to an element in an <see
            cref="T:System.Linq.IGrouping`2" />
+
+          
 
           
 
@@ -4771,8 +5345,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -4787,8 +5365,12 @@
 
           
 
+          
+
           The type of the key returned by <paramref
            name="keySelector" />
+
+          
 
           
 
@@ -4803,8 +5385,12 @@
 
           
 
+          
+
           The type of the elements in the <see
            cref="T:System.Linq.IGrouping`2" />
+
+          
 
           
 
@@ -4860,11 +5446,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4879,10 +5469,14 @@
 
           
 
+          
+
           A function to extract a key from an element.</param
         >
         <param name="elementSelector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4897,6 +5491,8 @@
 
           
 
+          
+
           An IComparer{TSource} to compare keys.</param
         >
         <typeparam name="TSource">
@@ -4906,8 +5502,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -4922,8 +5522,12 @@
 
           
 
+          
+
           The type of the key returned by <paramref
            name="keySelector" />
+
+          
 
           
 
@@ -4933,6 +5537,8 @@
         >
         <typeparam name="TElement">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4987,11 +5593,15 @@
 
             
 
+            
+
              where each element represents a projection over a group and its key.</para
           >
         </returns>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5006,10 +5616,14 @@
 
           
 
+          
+
           A function to extract the key for each element.</param
         >
         <param name="resultSelector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5024,8 +5638,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -5040,8 +5658,12 @@
 
           
 
+          
+
           The type of the key returned by <paramref
            name="keySelector" />
+
+          
 
           
 
@@ -5056,8 +5678,12 @@
 
           
 
+          
+
           The type of the result value returned by <paramref
            name="resultSelector" />
+
+          
 
           
 
@@ -5117,10 +5743,14 @@
 
           
 
+          
+
           A sequence whose elements to group.</param
         >
         <param name="keySelector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5135,6 +5765,8 @@
 
           
 
+          
+
           A function to create a result value from each group.</param
         >
         <param name="comparer">
@@ -5144,8 +5776,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEqualityComparer`1" />
+
+          
 
           
 
@@ -5160,8 +5796,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -5176,8 +5816,12 @@
 
           
 
+          
+
           The type of the key returned by <paramref
            name="keySelector" />
+
+          
 
           
 
@@ -5192,8 +5836,12 @@
 
           
 
+          
+
           The type of the result value returned by <paramref
            name="resultSelector" />
+
+          
 
           
 
@@ -5250,11 +5898,15 @@
 
             
 
+            
+
              where each element represents a projection over a group and its key.</para
           >
         </returns>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5269,10 +5921,14 @@
 
           
 
+          
+
           A function to extract the key for each element.</param
         >
         <param name="elementSelector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5287,6 +5943,8 @@
 
           
 
+          
+
           A function to create a result value from each group.</param
         >
         <typeparam name="TSource">
@@ -5296,8 +5954,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -5312,8 +5974,12 @@
 
           
 
+          
+
           The type of the key returned by <paramref
            name="keySelector" />
+
+          
 
           
 
@@ -5328,6 +5994,8 @@
 
           
 
+          
+
           The type of the elements in each IGrouping{TKey, TElement}.</typeparam
         >
         <typeparam name="TResult">
@@ -5337,8 +6005,12 @@
 
           
 
+          
+
           The type of the result value returned by <paramref
            name="resultSelector" />
+
+          
 
           
 
@@ -5399,11 +6071,15 @@
 
             
 
+            
+
              where each element represents a projection over a group and its key.</para
           >
         </returns>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5418,10 +6094,14 @@
 
           
 
+          
+
           A function to extract the key for each element.</param
         >
         <param name="elementSelector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5436,6 +6116,8 @@
 
           
 
+          
+
           A function to create a result value from each group.</param
         >
         <param name="comparer">
@@ -5445,8 +6127,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEqualityComparer`1" />
+
+          
 
           
 
@@ -5461,8 +6147,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -5477,8 +6167,12 @@
 
           
 
+          
+
           The type of the key returned by <paramref
            name="keySelector" />
+
+          
 
           
 
@@ -5493,6 +6187,8 @@
 
           
 
+          
+
           The type of the elements in each IGrouping{TKey, TElement}.</typeparam
         >
         <typeparam name="TResult">
@@ -5502,8 +6198,12 @@
 
           
 
+          
+
           The type of the result value returned by <paramref
            name="resultSelector" />
+
+          
 
           
 
@@ -5561,8 +6261,12 @@
 
             
 
+            
+
              and a right data source of type <see
              cref="T:System.Collections.Generic.IEnumerable`1" />
+
+            
 
             
 
@@ -5581,6 +6285,8 @@
 
             
 
+            
+
              when called.</para
           >
         </summary>
@@ -5589,6 +6295,8 @@
           <para
             >This overload always throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -5604,10 +6312,14 @@
 
           
 
+          
+
           This parameter is not used.</param
         >
         <param name="inner">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5622,10 +6334,14 @@
 
           
 
+          
+
           This parameter is not used.</param
         >
         <param name="innerKeySelector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5640,10 +6356,14 @@
 
           
 
+          
+
           This parameter is not used.</param
         >
         <typeparam name="TOuter">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5658,6 +6378,8 @@
 
           
 
+          
+
           This type parameter is not used.</typeparam
         >
         <typeparam name="TKey">
@@ -5667,10 +6389,14 @@
 
           
 
+          
+
           This type parameter is not used.</typeparam
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5728,11 +6454,15 @@
 
             
 
+            
+
              that are obtained by performing a grouped join on two sequences.</para
           >
         </returns>
         <param name="outer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5747,10 +6477,14 @@
 
           
 
+          
+
           The sequence to join to the first sequence.</param
         >
         <param name="outerKeySelector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5765,10 +6499,14 @@
 
           
 
+          
+
           A function to extract the join key from each element of the second sequence.</param
         >
         <param name="resultSelector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5783,10 +6521,14 @@
 
           
 
+          
+
           The type of the elements of the second sequence.</typeparam
         >
         <typeparam name="TInner">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5801,10 +6543,14 @@
 
           
 
+          
+
           The type of the keys returned by the key selector functions.</typeparam
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5866,8 +6612,12 @@
 
             
 
+            
+
              and a right data source of type <see
              cref="T:System.Collections.Generic.IEnumerable`1" />
+
+            
 
             
 
@@ -5886,6 +6636,8 @@
 
             
 
+            
+
              when called.</para
           >
         </summary>
@@ -5894,6 +6646,8 @@
           <para
             >This overload always throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -5909,10 +6663,14 @@
 
           
 
+          
+
           This parameter is not used.</param
         >
         <param name="inner">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5927,10 +6685,14 @@
 
           
 
+          
+
           This parameter is not used.</param
         >
         <param name="innerKeySelector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5945,10 +6707,14 @@
 
           
 
+          
+
           This parameter is not used.</param
         >
         <param name="comparer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5963,10 +6729,14 @@
 
           
 
+          
+
           This type parameter is not used.</typeparam
         >
         <typeparam name="TInner">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5981,10 +6751,14 @@
 
           
 
+          
+
           This type parameter is not used.</typeparam
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6042,6 +6816,8 @@
 
             
 
+            
+
              is used to compare keys.</para
           >
         </summary>
@@ -6050,6 +6826,8 @@
           <para
             >A sequence that has elements of type <paramref
              name="TResult" />
+
+            
 
             
 
@@ -6065,10 +6843,14 @@
 
           
 
+          
+
           The first sequence to join.</param
         >
         <param name="inner">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6083,10 +6865,14 @@
 
           
 
+          
+
           A function to extract the join key from each element of the first sequence.</param
         >
         <param name="innerKeySelector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6101,6 +6887,8 @@
 
           
 
+          
+
           A function to create a result element from an element from the first sequence and a collection of matching elements from the second sequence.</param
         >
         <param name="comparer">
@@ -6110,8 +6898,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEqualityComparer`1" />
+
+          
 
           
 
@@ -6126,10 +6918,14 @@
 
           
 
+          
+
           The type of the elements of the second sequence.</typeparam
         >
         <typeparam name="TInner">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6144,10 +6940,14 @@
 
           
 
+          
+
           The type of the keys returned by the key selector functions.</typeparam
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6196,8 +6996,12 @@
 
             
 
+            
+
              and a right data source of type <see
              cref="T:System.Collections.Generic.IEnumerable`1" />
+
+            
 
             
 
@@ -6216,6 +7020,8 @@
 
             
 
+            
+
              when called.</para
           >
         </summary>
@@ -6224,6 +7030,8 @@
           <para
             >This overload always throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -6239,6 +7047,8 @@
 
           
 
+          
+
           This parameter is not used.</param
         >
         <param name="second">
@@ -6248,10 +7058,14 @@
 
           
 
+          
+
           This parameter is not used.</param
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6301,8 +7115,12 @@
 
           
 
+          
+
           A sequence whose distinct elements that also appear in <paramref
            name="second" />
+
+          
 
           
 
@@ -6317,10 +7135,14 @@
 
           
 
+          
+
           A sequence whose distinct elements that also appear in the first sequence will be returned.</param
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6373,8 +7195,12 @@
 
             
 
+            
+
              and a right data source of type <see
              cref="T:System.Collections.Generic.IEnumerable`1" />
+
+            
 
             
 
@@ -6393,6 +7219,8 @@
 
             
 
+            
+
              when called.</para
           >
         </summary>
@@ -6401,6 +7229,8 @@
           <para
             >This overload always throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -6416,10 +7246,14 @@
 
           
 
+          
+
           This parameter is not used.</param
         >
         <param name="second">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6434,10 +7268,14 @@
 
           
 
+          
+
           This parameter is not used.</param
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6491,8 +7329,12 @@
 
           
 
+          
+
           A sequence whose distinct elements that also appear in <paramref
            name="second" />
+
+          
 
           
 
@@ -6507,10 +7349,14 @@
 
           
 
+          
+
           A sequence whose distinct elements that also appear in the first sequence will be returned.</param
         >
         <param name="comparer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6523,10 +7369,14 @@
 
           
 
+          
+
            to compare values.</param
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6581,8 +7431,12 @@
 
             
 
+            
+
              and a right data source of type <see
              cref="T:System.Collections.Generic.IEnumerable`1" />
+
+            
 
             
 
@@ -6601,6 +7455,8 @@
 
             
 
+            
+
              when invoked.</para
           >
         </summary>
@@ -6609,6 +7465,8 @@
           <para
             >This overload always throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -6624,10 +7482,14 @@
 
           
 
+          
+
           This parameter is not used.</param
         >
         <param name="inner">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6642,10 +7504,14 @@
 
           
 
+          
+
           This parameter is not used.</param
         >
         <param name="innerKeySelector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6660,10 +7526,14 @@
 
           
 
+          
+
           This parameter is not used.</param
         >
         <typeparam name="TOuter">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6678,6 +7548,8 @@
 
           
 
+          
+
           This type parameter is not used.</typeparam
         >
         <typeparam name="TKey">
@@ -6687,10 +7559,14 @@
 
           
 
+          
+
           This type parameter is not used.</typeparam
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6745,11 +7621,15 @@
 
             
 
+            
+
              that are obtained by performing an inner join on two sequences.</para
           >
         </returns>
         <param name="outer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6764,10 +7644,14 @@
 
           
 
+          
+
           The sequence to join to the first sequence.</param
         >
         <param name="outerKeySelector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6782,10 +7666,14 @@
 
           
 
+          
+
           A function to extract the join key from each element of the second sequence.</param
         >
         <param name="resultSelector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6800,10 +7688,14 @@
 
           
 
+          
+
           The type of the elements of the second sequence.</typeparam
         >
         <typeparam name="TInner">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6818,10 +7710,14 @@
 
           
 
+          
+
           The type of the keys returned by the key selector functions.</typeparam
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6880,8 +7776,12 @@
 
             
 
+            
+
              and a right data source of type <see
              cref="T:System.Collections.Generic.IEnumerable`1" />
+
+            
 
             
 
@@ -6900,6 +7800,8 @@
 
             
 
+            
+
              when invoked.</para
           >
         </summary>
@@ -6908,6 +7810,8 @@
           <para
             >This overload always throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -6923,10 +7827,14 @@
 
           
 
+          
+
           This parameter is not used.</param
         >
         <param name="inner">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6941,10 +7849,14 @@
 
           
 
+          
+
           This parameter is not used.</param
         >
         <param name="innerKeySelector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6959,10 +7871,14 @@
 
           
 
+          
+
           This parameter is not used.</param
         >
         <param name="comparer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6977,10 +7893,14 @@
 
           
 
+          
+
           This type parameter is not used.</typeparam
         >
         <typeparam name="TInner">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6995,10 +7915,14 @@
 
           
 
+          
+
           This type parameter is not used.</typeparam
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7053,6 +7977,8 @@
 
             
 
+            
+
              is used to compare keys.</para
           >
         </summary>
@@ -7061,6 +7987,8 @@
           <para
             >A sequence that has elements of type <paramref
              name="TResult" />
+
+            
 
             
 
@@ -7076,10 +8004,14 @@
 
           
 
+          
+
           The first sequence to join.</param
         >
         <param name="inner">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7094,10 +8026,14 @@
 
           
 
+          
+
           A function to extract the join key from each element of the first sequence.</param
         >
         <param name="innerKeySelector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7112,6 +8048,8 @@
 
           
 
+          
+
           A function to create a result element from two matching elements.</param
         >
         <param name="comparer">
@@ -7121,8 +8059,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEqualityComparer`1" />
+
+          
 
           
 
@@ -7137,10 +8079,14 @@
 
           
 
+          
+
           The type of the elements of the second sequence.</typeparam
         >
         <typeparam name="TInner">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7155,10 +8101,14 @@
 
           
 
+          
+
           The type of the keys returned by the key selector functions.</typeparam
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7203,6 +8153,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -7221,6 +8173,8 @@
 
           
 
+          
+
           The sequence to return the last element from.</param
         >
         <typeparam name="TSource">
@@ -7230,8 +8184,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -7277,6 +8235,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -7295,10 +8255,14 @@
 
           
 
+          
+
           The sequence to return an element from.</param
         >
         <param name="predicate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7313,8 +8277,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -7359,6 +8327,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -7377,6 +8347,8 @@
 
           
 
+          
+
           The sequence to return an element from.</param
         >
         <typeparam name="TSource">
@@ -7386,8 +8358,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -7433,6 +8409,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -7451,10 +8429,14 @@
 
           
 
+          
+
           The sequence to return an element from.</param
         >
         <param name="predicate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7469,8 +8451,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -7519,6 +8505,8 @@
 
           
 
+          
+
           A sequence that contains elements to be counted.</param
         >
         <typeparam name="TSource">
@@ -7528,8 +8516,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -7579,10 +8571,14 @@
 
           
 
+          
+
           A sequence that contains elements to be counted.</param
         >
         <param name="predicate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7597,8 +8593,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -7648,6 +8648,8 @@
 
           
 
+          
+
           A sequence of values to determine the maximum value of.</param
         >
       </Docs>
@@ -7687,6 +8689,8 @@
         </returns>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7736,6 +8740,8 @@
 
           
 
+          
+
           A sequence of values to determine the maximum value of.</param
         >
       </Docs>
@@ -7775,6 +8781,8 @@
         </returns>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7824,6 +8832,8 @@
 
           
 
+          
+
           A sequence of values to determine the maximum value of.</param
         >
       </Docs>
@@ -7863,6 +8873,8 @@
         </returns>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7912,6 +8924,8 @@
 
           
 
+          
+
           A sequence of values to determine the maximum value of.</param
         >
       </Docs>
@@ -7951,6 +8965,8 @@
         </returns>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8000,6 +9016,8 @@
 
           
 
+          
+
           A sequence of values to determine the maximum value of.</param
         >
       </Docs>
@@ -8039,6 +9057,8 @@
         </returns>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8087,10 +9107,14 @@
 
           
 
+          
+
           A sequence of values to determine the maximum value of.</param
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8140,10 +9164,14 @@
 
           
 
+          
+
           A sequence of values to determine the maximum value of.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8158,8 +9186,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -8209,10 +9241,14 @@
 
           
 
+          
+
           A sequence of values to determine the maximum value of.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8227,8 +9263,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -8278,10 +9318,14 @@
 
           
 
+          
+
           A sequence of values to determine the maximum value of.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8296,8 +9340,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -8347,10 +9395,14 @@
 
           
 
+          
+
           A sequence of values to determine the maximum value of.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8365,8 +9417,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -8419,10 +9475,14 @@
 
           
 
+          
+
           A sequence of values to determine the maximum value of.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8437,8 +9497,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -8491,10 +9555,14 @@
 
           
 
+          
+
           A sequence of values to determine the maximum value of.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8509,8 +9577,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -8563,10 +9635,14 @@
 
           
 
+          
+
           A sequence of values to determine the maximum value of.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8581,8 +9657,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -8635,10 +9715,14 @@
 
           
 
+          
+
           A sequence of values to determine the maximum value of.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8653,8 +9737,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -8707,10 +9795,14 @@
 
           
 
+          
+
           A sequence of values to determine the maximum value of.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8725,8 +9817,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -8776,10 +9872,14 @@
 
           
 
+          
+
           A sequence of values to determine the maximum value of.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8794,8 +9894,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -8846,10 +9950,14 @@
 
           
 
+          
+
           A sequence of values to determine the maximum value of.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8864,8 +9972,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -8880,8 +9992,12 @@
 
           
 
+          
+
           The type of the value returned by <paramref
            name="selector" />
+
+          
 
           
 
@@ -8931,6 +10047,8 @@
 
           
 
+          
+
           A sequence of values to determine the minimum value of.</param
         >
       </Docs>
@@ -8970,6 +10088,8 @@
         </returns>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9019,6 +10139,8 @@
 
           
 
+          
+
           A sequence of values to determine the minimum value of.</param
         >
       </Docs>
@@ -9058,6 +10180,8 @@
         </returns>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9107,6 +10231,8 @@
 
           
 
+          
+
           A sequence of values to determine the minimum value of.</param
         >
       </Docs>
@@ -9146,6 +10272,8 @@
         </returns>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9195,6 +10323,8 @@
 
           
 
+          
+
           A sequence of values to determine the minimum value of.</param
         >
       </Docs>
@@ -9234,6 +10364,8 @@
         </returns>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9283,6 +10415,8 @@
 
           
 
+          
+
           A sequence of values to determine the minimum value of.</param
         >
       </Docs>
@@ -9322,6 +10456,8 @@
         </returns>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9370,6 +10506,8 @@
 
           
 
+          
+
           A sequence of values to determine the minimum value of.</param
         >
         <typeparam name="TSource">
@@ -9379,8 +10517,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -9430,10 +10572,14 @@
 
           
 
+          
+
           A sequence of values to determine the minimum value of.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9448,8 +10594,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -9499,10 +10649,14 @@
 
           
 
+          
+
           A sequence of values to determine the minimum value of.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9517,8 +10671,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -9568,10 +10726,14 @@
 
           
 
+          
+
           A sequence of values to determine the minimum value of.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9586,8 +10748,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -9637,10 +10803,14 @@
 
           
 
+          
+
           A sequence of values to determine the minimum value of.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9655,8 +10825,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -9709,10 +10883,14 @@
 
           
 
+          
+
           A sequence of values to determine the minimum value of.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9727,8 +10905,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -9781,10 +10963,14 @@
 
           
 
+          
+
           A sequence of values to determine the minimum value of.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9799,8 +10985,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -9853,10 +11043,14 @@
 
           
 
+          
+
           A sequence of values to determine the minimum value of.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9871,8 +11065,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -9925,10 +11123,14 @@
 
           
 
+          
+
           A sequence of values to determine the minimum value of.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9943,8 +11145,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -9997,10 +11203,14 @@
 
           
 
+          
+
           A sequence of values to determine the minimum value of.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10015,8 +11225,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -10066,10 +11280,14 @@
 
           
 
+          
+
           A sequence of values to determine the minimum value of.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10084,8 +11302,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -10136,10 +11358,14 @@
 
           
 
+          
+
           A sequence of values to determine the minimum value of.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10154,8 +11380,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -10170,8 +11400,12 @@
 
           
 
+          
+
           The type of the value returned by <paramref
            name="selector" />
+
+          
 
           
 
@@ -10220,10 +11454,14 @@
 
           
 
+          
+
           The sequence whose elements to filter.</param
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10277,10 +11515,14 @@
 
           
 
+          
+
           A sequence of values to order.</param
         >
         <param name="keySelector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10295,8 +11537,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -10311,8 +11557,12 @@
 
           
 
+          
+
           The type of the key returned by <paramref
            name="keySelector" />
+
+          
 
           
 
@@ -10358,6 +11608,8 @@
 
             
 
+            
+
              for an approach to implementing a stable sort.</para
           >
         </remarks>
@@ -10376,10 +11628,14 @@
 
           
 
+          
+
           A sequence of values to order.</param
         >
         <param name="keySelector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10394,6 +11650,8 @@
 
           
 
+          
+
           An IComparer{TKey} to compare keys.</param
         >
         <typeparam name="TSource">
@@ -10403,8 +11661,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -10419,8 +11681,12 @@
 
           
 
+          
+
           The type of the key returned by <paramref
            name="keySelector" />
+
+          
 
           
 
@@ -10465,6 +11731,8 @@
 
             
 
+            
+
              for an approach to implementing a stable sort.</para
           >
         </remarks>
@@ -10483,10 +11751,14 @@
 
           
 
+          
+
           A sequence of values to order.</param
         >
         <param name="keySelector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10501,8 +11773,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -10517,8 +11793,12 @@
 
           
 
+          
+
           The type of the key returned by <paramref
            name="keySelector" />
+
+          
 
           
 
@@ -10564,6 +11844,8 @@
 
             
 
+            
+
              for an approach to implementing a stable sort.</para
           >
         </remarks>
@@ -10582,10 +11864,14 @@
 
           
 
+          
+
           A sequence of values to order.</param
         >
         <param name="keySelector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10600,6 +11886,8 @@
 
           
 
+          
+
           An IComparer{TKey} to compare keys.</param
         >
         <typeparam name="TSource">
@@ -10609,8 +11897,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -10625,8 +11917,12 @@
 
           
 
+          
+
           The type of the key returned by <paramref
            name="keySelector" />
+
+          
 
           
 
@@ -10673,10 +11969,14 @@
 
           
 
+          
+
           The value of the first integer in the sequence.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10757,6 +12057,8 @@
 
           
 
+          
+
           A sequence of values to reverse.</param
         >
         <typeparam name="TSource">
@@ -10766,8 +12068,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -10817,8 +12123,12 @@
 
             
 
+            
+
             , based on the index supplied to <paramref
              name="selector" />
+
+            
 
             
 
@@ -10834,10 +12144,14 @@
 
           
 
+          
+
           A sequence of values to invoke a transform function on.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10852,8 +12166,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -10863,6 +12181,8 @@
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10912,11 +12232,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10931,10 +12255,14 @@
 
           
 
+          
+
           A transform function to apply to each element.</param
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10947,10 +12275,14 @@
 
           
 
+          
+
           .</typeparam
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10999,6 +12331,8 @@
 
             
 
+            
+
              and flattens the resulting sequences into one sequence.</para
           >
         </summary>
@@ -11013,10 +12347,14 @@
 
           
 
+          
+
           A sequence of values to project.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11031,8 +12369,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -11042,6 +12384,8 @@
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11090,6 +12434,8 @@
 
             
 
+            
+
             , and flattens the resulting sequences into one sequence. The index of each source element is used in the projected form of that element.</para
           >
         </summary>
@@ -11104,10 +12450,14 @@
 
           
 
+          
+
           A sequence of values to project.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11122,8 +12472,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -11133,6 +12487,8 @@
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11183,6 +12539,8 @@
 
             
 
+            
+
             , flattens the resulting sequences into one sequence, and invokes a result selector function on each element therein.</para
           >
         </summary>
@@ -11196,6 +12554,8 @@
 
             
 
+            
+
              on each element of <paramref
              name="source" />
 
@@ -11203,8 +12563,12 @@
 
             
 
+            
+
              based on the index supplied to <paramref
              name="collectionSelector" />
+
+            
 
             
 
@@ -11220,10 +12584,14 @@
 
           
 
+          
+
           A sequence of values to project.</param
         >
         <param name="collectionSelector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11238,6 +12606,8 @@
 
           
 
+          
+
           A function to create a result element from an element from the first sequence and a collection of matching elements from the second sequence.</param
         >
         <typeparam name="TSource">
@@ -11247,8 +12617,12 @@
 
           
 
+          
+
           The type of the intermediate elements collected by <paramref
            name="collectionSelector" />
+
+          
 
           
 
@@ -11263,8 +12637,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -11274,6 +12652,8 @@
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11324,6 +12704,8 @@
 
             
 
+            
+
             , flattens the resulting sequences into one sequence, and invokes a result selector function on each element therein. The index of each source element is used in the intermediate projected form of that element.</para
           >
         </summary>
@@ -11337,6 +12719,8 @@
 
             
 
+            
+
              on each element of <paramref
              name="source" />
 
@@ -11344,8 +12728,12 @@
 
             
 
+            
+
              based on the index supplied to <paramref
              name="collectionSelector" />
+
+            
 
             
 
@@ -11361,10 +12749,14 @@
 
           
 
+          
+
           A sequence of values to project.</param
         >
         <param name="collectionSelector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11379,6 +12771,8 @@
 
           
 
+          
+
           A function to create a result element from an element from the first sequence and a collection of matching elements from the second sequence.</param
         >
         <typeparam name="TSource">
@@ -11388,8 +12782,12 @@
 
           
 
+          
+
           The type of the intermediate elements collected by <paramref
            name="collectionSelector" />
+
+          
 
           
 
@@ -11404,8 +12802,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -11415,6 +12817,8 @@
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11463,8 +12867,12 @@
 
             
 
+            
+
              and a right data source of type <see
              cref="T:System.Collections.Generic.IEnumerable`1" />
+
+            
 
             
 
@@ -11483,6 +12891,8 @@
 
             
 
+            
+
              when called.</para
           >
         </summary>
@@ -11491,6 +12901,8 @@
           <para
             >This overload always throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -11506,6 +12918,8 @@
 
           
 
+          
+
           This parameter is not used.</param
         >
         <param name="second">
@@ -11515,10 +12929,14 @@
 
           
 
+          
+
           This parameter is not used.</param
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11568,6 +12986,8 @@
 
           
 
+          
+
           A sequence to compare to second.</param
         >
         <param name="second">
@@ -11577,10 +12997,14 @@
 
           
 
+          
+
           A sequence to compare to the first input sequence.</param
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11633,8 +13057,12 @@
 
             
 
+            
+
              and a right data source of type <see
              cref="T:System.Collections.Generic.IEnumerable`1" />
+
+            
 
             
 
@@ -11653,6 +13081,8 @@
 
             
 
+            
+
              when called.</para
           >
         </summary>
@@ -11661,6 +13091,8 @@
           <para
             >This overload always throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -11676,10 +13108,14 @@
 
           
 
+          
+
           This parameter is not used.</param
         >
         <param name="second">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11694,10 +13130,14 @@
 
           
 
+          
+
           This parameter is not used.</param
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11751,8 +13191,12 @@
 
           
 
+          
+
           A sequence to compare to <paramref
            name="second" />
+
+          
 
           
 
@@ -11767,10 +13211,14 @@
 
           
 
+          
+
           A sequence to compare to the first input sequence.</param
         >
         <param name="comparer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11783,10 +13231,14 @@
 
           
 
+          
+
            to use to compare elements.</param
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11835,6 +13287,8 @@
 
           
 
+          
+
           The sequence to return the single element of.</param
         >
         <typeparam name="TSource">
@@ -11844,8 +13298,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -11895,10 +13353,14 @@
 
           
 
+          
+
           The sequence to return the single element of.</param
         >
         <param name="predicate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11913,8 +13375,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -11963,6 +13429,8 @@
 
           
 
+          
+
           The sequence to return the single element of.</param
         >
         <typeparam name="TSource">
@@ -11972,8 +13440,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -12023,10 +13495,14 @@
 
           
 
+          
+
           The sequence to return the single element of.</param
         >
         <param name="predicate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12041,8 +13517,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -12095,10 +13575,14 @@
 
           
 
+          
+
           The sequence to return elements from.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12113,8 +13597,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -12164,10 +13652,14 @@
 
           
 
+          
+
           The sequence to return elements from.</param
         >
         <param name="predicate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12182,8 +13674,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -12233,10 +13729,14 @@
 
           
 
+          
+
           The sequence to return elements from.</param
         >
         <param name="predicate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12251,8 +13751,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -12302,6 +13806,8 @@
 
           
 
+          
+
           A sequence of values to calculate the sum of.</param
         >
       </Docs>
@@ -12341,6 +13847,8 @@
         </returns>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12390,6 +13898,8 @@
 
           
 
+          
+
           A sequence of values to calculate the sum of.</param
         >
       </Docs>
@@ -12429,6 +13939,8 @@
         </returns>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12478,6 +13990,8 @@
 
           
 
+          
+
           A sequence of values to calculate the sum of.</param
         >
       </Docs>
@@ -12517,6 +14031,8 @@
         </returns>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12566,6 +14082,8 @@
 
           
 
+          
+
           A sequence of values to calculate the sum of.</param
         >
       </Docs>
@@ -12605,6 +14123,8 @@
         </returns>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12654,6 +14174,8 @@
 
           
 
+          
+
           A sequence of values to calculate the sum of.</param
         >
       </Docs>
@@ -12693,6 +14215,8 @@
         </returns>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12742,10 +14266,14 @@
 
           
 
+          
+
           A sequence of values to calculate the sum of.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12760,8 +14288,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -12811,10 +14343,14 @@
 
           
 
+          
+
           A sequence of values to calculate the sum of.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12829,8 +14365,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -12880,6 +14420,8 @@
 
           
 
+          
+
           A sequence of values to calculate the sum of.</param
         >
         <param name="selector">
@@ -12889,10 +14431,14 @@
 
           
 
+          
+
           A transform function to apply to each element.</param
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12942,10 +14488,14 @@
 
           
 
+          
+
           A sequence of values to calculate the sum of.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12960,8 +14510,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -13014,10 +14568,14 @@
 
           
 
+          
+
           A sequence of values to calculate the sum of.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -13032,8 +14590,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -13086,10 +14648,14 @@
 
           
 
+          
+
           A sequence of values to calculate the sum of.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -13104,8 +14670,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -13158,10 +14728,14 @@
 
           
 
+          
+
           A sequence of values to calculate the sum of.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -13176,8 +14750,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -13230,10 +14808,14 @@
 
           
 
+          
+
           A sequence of values to calculate the sum of.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -13248,8 +14830,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -13302,10 +14888,14 @@
 
           
 
+          
+
           A sequence of values to calculate the sum of.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -13320,8 +14910,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -13371,10 +14965,14 @@
 
           
 
+          
+
           A sequence of values to calculate the sum of.</param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -13389,8 +14987,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -13440,10 +15042,14 @@
 
           
 
+          
+
           The sequence to return elements from.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -13458,8 +15064,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -13509,10 +15119,14 @@
 
           
 
+          
+
           The sequence to return elements from.</param
         >
         <param name="predicate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -13527,8 +15141,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -13578,10 +15196,14 @@
 
           
 
+          
+
           The sequence to return elements from.</param
         >
         <param name="predicate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -13596,8 +15218,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -13646,6 +15272,8 @@
 
             
 
+            
+
              for an approach to implementing a stable sort.</para
           >
         </remarks>
@@ -13664,10 +15292,14 @@
 
           
 
+          
+
           An OrderedParallelQuery{TSource} that contains elements to sort.</param
         >
         <param name="keySelector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -13682,8 +15314,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -13698,8 +15334,12 @@
 
           
 
+          
+
           The type of the key returned by <paramref
            name="keySelector" />
+
+          
 
           
 
@@ -13749,6 +15389,8 @@
 
             
 
+            
+
              for an approach to implementing a stable sort.</para
           >
         </remarks>
@@ -13767,10 +15409,14 @@
 
           
 
+          
+
           An OrderedParallelQuery{TSource} that contains elements to sort.</param
         >
         <param name="keySelector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -13785,6 +15431,8 @@
 
           
 
+          
+
           An IComparer{TKey} to compare keys.</param
         >
         <typeparam name="TSource">
@@ -13794,8 +15442,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -13810,8 +15462,12 @@
 
           
 
+          
+
           The type of the key returned by <paramref
            name="keySelector" />
+
+          
 
           
 
@@ -13860,6 +15516,8 @@
 
             
 
+            
+
              for an approach to implementing a stable sort.</para
           >
         </remarks>
@@ -13878,10 +15536,14 @@
 
           
 
+          
+
           An OrderedParallelQuery{TSource} that contains elements to sort.</param
         >
         <param name="keySelector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -13896,8 +15558,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -13912,8 +15578,12 @@
 
           
 
+          
+
           The type of the key returned by <paramref
            name="keySelector" />
+
+          
 
           
 
@@ -13963,6 +15633,8 @@
 
             
 
+            
+
              for an approach to implementing a stable sort.</para
           >
         </remarks>
@@ -13981,10 +15653,14 @@
 
           
 
+          
+
           An OrderedParallelQuery{TSource} that contains elements to sort.</param
         >
         <param name="keySelector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -13999,6 +15675,8 @@
 
           
 
+          
+
           An IComparer{TKey} to compare keys.</param
         >
         <typeparam name="TSource">
@@ -14008,8 +15686,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -14024,8 +15706,12 @@
 
           
 
+          
+
           The type of the key returned by <paramref
            name="keySelector" />
+
+          
 
           
 
@@ -14069,6 +15755,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -14083,6 +15771,8 @@
 
           
 
+          
+
           A sequence to create an array from.</param
         >
         <typeparam name="TSource">
@@ -14092,8 +15782,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -14139,8 +15833,12 @@
 
             
 
+            
+
              from a <see
              cref="T:System.Linq.ParallelQuery`1" />
+
+            
 
             
 
@@ -14159,6 +15857,8 @@
 
             
 
+            
+
              that contains keys and values.</para
           >
         </returns>
@@ -14169,8 +15869,12 @@
 
           
 
+          
+
           A sequence to create a <see
            cref="T:System.Collections.Generic.Dictionary`2" />
+
+          
 
           
 
@@ -14185,6 +15889,8 @@
 
           
 
+          
+
           A function to extract a key from each element.</param
         >
         <typeparam name="TSource">
@@ -14194,8 +15900,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -14210,8 +15920,12 @@
 
           
 
+          
+
           The type of the key returned by <paramref
            name="keySelector" />
+
+          
 
           
 
@@ -14261,8 +15975,12 @@
 
             
 
+            
+
               from a <see
              cref="T:System.Linq.ParallelQuery`1" />
+
+            
 
             
 
@@ -14281,6 +15999,8 @@
 
             
 
+            
+
              that contains keys and values.</para
           >
         </returns>
@@ -14291,8 +16011,12 @@
 
           
 
+          
+
           A sequence to create a <see
            cref="T:System.Collections.Generic.Dictionary`2" />
+
+          
 
           
 
@@ -14307,6 +16031,8 @@
 
           
 
+          
+
           A function to extract a key from each element.</param
         >
         <param name="comparer">
@@ -14316,8 +16042,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEqualityComparer`1" />
+
+          
 
           
 
@@ -14332,8 +16062,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -14348,8 +16082,12 @@
 
           
 
+          
+
           The type of the key returned by <paramref
            name="keySelector" />
+
+          
 
           
 
@@ -14397,8 +16135,12 @@
 
             
 
+            
+
              from a <see
              cref="T:System.Linq.ParallelQuery`1" />
+
+            
 
             
 
@@ -14417,8 +16159,12 @@
 
             
 
+            
+
              that contains values of type <paramref
              name="TElement" />
+
+            
 
             
 
@@ -14434,8 +16180,12 @@
 
           
 
+          
+
           A sequence to create a <see
            cref="T:System.Collections.Generic.Dictionary`2" />
+
+          
 
           
 
@@ -14450,10 +16200,14 @@
 
           
 
+          
+
           A function to extract a key from each element.</param
         >
         <param name="elementSelector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -14468,8 +16222,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -14484,8 +16242,12 @@
 
           
 
+          
+
           The type of the key returned by <paramref
            name="keySelector" />
+
+          
 
           
 
@@ -14500,8 +16262,12 @@
 
           
 
+          
+
           The type of the value returned by <paramref
            name="elementSelector" />
+
+          
 
           
 
@@ -14553,8 +16319,12 @@
 
             
 
+            
+
              from a <see
              cref="T:System.Linq.ParallelQuery`1" />
+
+            
 
             
 
@@ -14573,8 +16343,12 @@
 
             
 
+            
+
              that contains values of type <paramref
              name="TElement" />
+
+            
 
             
 
@@ -14590,8 +16364,12 @@
 
           
 
+          
+
           A sequence to create a <see
            cref="T:System.Collections.Generic.Dictionary`2" />
+
+          
 
           
 
@@ -14606,10 +16384,14 @@
 
           
 
+          
+
           A function to extract a key from each element.</param
         >
         <param name="elementSelector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -14624,8 +16406,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEqualityComparer`1" />
+
+          
 
           
 
@@ -14640,8 +16426,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -14656,8 +16446,12 @@
 
           
 
+          
+
           The type of the key returned by <paramref
            name="keySelector" />
+
+          
 
           
 
@@ -14672,8 +16466,12 @@
 
           
 
+          
+
           The type of the value returned by <paramref
            name="elementSelector" />
+
+          
 
           
 
@@ -14717,8 +16515,12 @@
 
             
 
+            
+
              from an <see
              cref="T:System.Linq.ParallelQuery`1" />
+
+            
 
             
 
@@ -14737,6 +16539,8 @@
 
             
 
+            
+
               that contains elements from the input sequence.</para
           >
         </returns>
@@ -14747,8 +16551,12 @@
 
           
 
+          
+
           A sequence to create a <see
            cref="T:System.Collections.Generic.List`1" />
+
+          
 
           
 
@@ -14763,8 +16571,12 @@
 
           
 
+          
+
           The type of the elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -14810,8 +16622,12 @@
 
             
 
+            
+
              from a <see
              cref="T:System.Linq.ParallelQuery`1" />
+
+            
 
             
 
@@ -14830,6 +16646,8 @@
 
             
 
+            
+
              that contains keys and values.</para
           >
         </returns>
@@ -14840,8 +16658,12 @@
 
           
 
+          
+
           The sequence to create a <see
            cref="T:System.Linq.ILookup`2" />
+
+          
 
           
 
@@ -14856,6 +16678,8 @@
 
           
 
+          
+
           A function to extract a key from each element.</param
         >
         <typeparam name="TSource">
@@ -14865,8 +16689,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -14881,8 +16709,12 @@
 
           
 
+          
+
           The type of the key returned by <paramref
            name="keySelector" />
+
+          
 
           
 
@@ -14932,8 +16764,12 @@
 
             
 
+            
+
              from a <see
              cref="T:System.Linq.ParallelQuery`1" />
+
+            
 
             
 
@@ -14952,6 +16788,8 @@
 
             
 
+            
+
              that contains keys and values.</para
           >
         </returns>
@@ -14962,8 +16800,12 @@
 
           
 
+          
+
           The sequence to create a <see
            cref="T:System.Linq.ILookup`2" />
+
+          
 
           
 
@@ -14978,6 +16820,8 @@
 
           
 
+          
+
           A function to extract a key from each element.</param
         >
         <param name="comparer">
@@ -14987,8 +16831,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEqualityComparer`1" />
+
+          
 
           
 
@@ -15003,8 +16851,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -15019,8 +16871,12 @@
 
           
 
+          
+
           The type of the key returned by <paramref
            name="keySelector" />
+
+          
 
           
 
@@ -15068,8 +16924,12 @@
 
             
 
+            
+
              from a <see
              cref="T:System.Linq.ParallelQuery`1" />
+
+            
 
             
 
@@ -15088,8 +16948,12 @@
 
             
 
+            
+
              that contains values of type <paramref
              name="TElement" />
+
+            
 
             
 
@@ -15105,8 +16969,12 @@
 
           
 
+          
+
           The sequence to create a <see
            cref="T:System.Linq.ILookup`2" />
+
+          
 
           
 
@@ -15121,10 +16989,14 @@
 
           
 
+          
+
           A function to extract a key from each element.</param
         >
         <param name="elementSelector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -15139,8 +17011,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -15155,8 +17031,12 @@
 
           
 
+          
+
           The type of the key returned by <paramref
            name="keySelector" />
+
+          
 
           
 
@@ -15171,8 +17051,12 @@
 
           
 
+          
+
           The type of the value returned by <paramref
            name="elementSelector" />
+
+          
 
           
 
@@ -15224,8 +17108,12 @@
 
             
 
+            
+
              from a <see
              cref="T:System.Linq.ParallelQuery`1" />
+
+            
 
             
 
@@ -15245,8 +17133,12 @@
 
           
 
+          
+
           The sequence to create a <see
            cref="T:System.Linq.ILookup`2" />
+
+          
 
           
 
@@ -15261,10 +17153,14 @@
 
           
 
+          
+
           A function to extract a key from each element.</param
         >
         <param name="elementSelector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -15279,8 +17175,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEqualityComparer`1" />
+
+          
 
           
 
@@ -15295,8 +17195,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -15311,8 +17215,12 @@
 
           
 
+          
+
           The type of the key returned by <paramref
            name="keySelector" />
+
+          
 
           
 
@@ -15327,8 +17235,12 @@
 
           
 
+          
+
           The type of the value returned by <paramref
            name="elementSelector" />
+
+          
 
           
 
@@ -15377,8 +17289,12 @@
 
             
 
+            
+
              and a right data source of type <see
              cref="T:System.Collections.Generic.IEnumerable`1" />
+
+            
 
             
 
@@ -15397,6 +17313,8 @@
 
             
 
+            
+
              when called.</para
           >
         </summary>
@@ -15405,6 +17323,8 @@
           <para
             >This overload always throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -15420,6 +17340,8 @@
 
           
 
+          
+
           This parameter is not used.</param
         >
         <param name="second">
@@ -15429,10 +17351,14 @@
 
           
 
+          
+
           This parameter is not used.</param
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -15482,6 +17408,8 @@
 
           
 
+          
+
           A sequence whose distinct elements form the first set for the union.</param
         >
         <param name="second">
@@ -15491,10 +17419,14 @@
 
           
 
+          
+
           A sequence whose distinct elements form the second set for the union.</param
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -15547,8 +17479,12 @@
 
             
 
+            
+
              and a right data source of type <see
              cref="T:System.Collections.Generic.IEnumerable`1" />
+
+            
 
             
 
@@ -15567,6 +17503,8 @@
 
             
 
+            
+
              when called.</para
           >
         </summary>
@@ -15575,6 +17513,8 @@
           <para
             >This overload always throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -15590,10 +17530,14 @@
 
           
 
+          
+
           This parameter is not used.</param
         >
         <param name="second">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -15608,10 +17552,14 @@
 
           
 
+          
+
           This parameter is not used.</param
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -15665,10 +17613,14 @@
 
           
 
+          
+
           A sequence whose distinct elements form the first set for the union.</param
         >
         <param name="second">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -15683,8 +17635,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEqualityComparer`1" />
+
+          
 
           
 
@@ -15694,6 +17650,8 @@
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -15743,6 +17701,8 @@
 
           
 
+          
+
           A sequence to filter.</param
         >
         <param name="predicate">
@@ -15752,10 +17712,14 @@
 
           
 
+          
+
           A function to test each element for a condition.</param
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -15805,6 +17769,8 @@
 
           
 
+          
+
           A sequence to filter.</param
         >
         <param name="predicate">
@@ -15814,10 +17780,14 @@
 
           
 
+          
+
           A function to test each element for a condition.</param
         >
         <typeparam name="TSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -15862,6 +17832,8 @@
 
             
 
+            
+
              to associate with the query.</para
           >
         </summary>
@@ -15876,10 +17848,14 @@
 
           
 
+          
+
           A ParallelQuery on which to set the option.</param
         >
         <param name="cancellationToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -15894,8 +17870,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -15945,6 +17925,8 @@
 
           
 
+          
+
           A ParallelQuery on which to set the limit on the degrees of parallelism.</param
         >
         <param name="degreeOfParallelism">
@@ -15954,8 +17936,12 @@
 
           
 
+          
+
           The degree of parallelism for the query. The default value is Math.Min(<see
            cref="P:System.Environment.ProcessorCount" />
+
+          
 
           
 
@@ -15970,8 +17956,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -16019,6 +18009,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -16037,10 +18029,14 @@
 
           
 
+          
+
           A ParallelQuery on which to set the option.</param
         >
         <param name="executionMode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -16055,8 +18051,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -16106,10 +18106,14 @@
 
           
 
+          
+
           A ParallelQuery on which to set the option.</param
         >
         <param name="mergeOptions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -16124,8 +18128,12 @@
 
           
 
+          
+
           The type of elements of <paramref
            name="source" />
+
+          
 
           
 
@@ -16177,8 +18185,12 @@
 
             
 
+            
+
              and a right data source of type <see
              cref="T:System.Collections.Generic.IEnumerable`1" />
+
+            
 
             
 
@@ -16197,6 +18209,8 @@
 
             
 
+            
+
              when invoked.</para
           >
         </summary>
@@ -16205,6 +18219,8 @@
           <para
             >This overload always throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -16220,10 +18236,14 @@
 
           
 
+          
+
           This parameter is not used.</param
         >
         <param name="second">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -16238,10 +18258,14 @@
 
           
 
+          
+
           This parameter is not used.</param
         >
         <typeparam name="TFirst">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -16256,10 +18280,14 @@
 
           
 
+          
+
           This type parameter is not used.</typeparam
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -16311,8 +18339,12 @@
 
             
 
+            
+
              that are obtained by performing <paramref
              name="resultSelector" />
+
+            
 
             
 
@@ -16328,10 +18360,14 @@
 
           
 
+          
+
           The first sequence to zip.</param
         >
         <param name="second">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -16346,10 +18382,14 @@
 
           
 
+          
+
           A function to create a result element from two matching elements.</param
         >
         <typeparam name="TFirst">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -16364,10 +18404,14 @@
 
           
 
+          
+
           The type of the elements of the second sequence.</typeparam
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

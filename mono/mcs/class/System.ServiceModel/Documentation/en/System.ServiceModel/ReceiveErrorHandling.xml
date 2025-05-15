@@ -23,6 +23,8 @@
 
         
 
+        
+
          is thrown. The exception contains the LookupId of the MSMQ message that can be used to move the message out of the way using System.Messaging API. Certain values of the <see
          cref="T:System.ServiceModel.ReceiveErrorHandling" />
 
@@ -30,8 +32,12 @@
 
         
 
+        
+
          enumeration such as Reject and Move are only available on wv. You control poison message handling by setting the <see
          cref="P:System.ServiceModel.Channels.MsmqBindingElementBase.ReceiveErrorHandling" />
+
+        
 
         
 

@@ -21,8 +21,12 @@
 
         
 
+        
+
           class provides methods that can persist a <see
          cref="T:System.Web.UI.Control" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          interface implementation as a string of aspx code. The implementation of these methods is driven by metadata attributes, such as the <see
          cref="T:System.ComponentModel.DefaultValueAttribute" />
+
+        
 
         
 
@@ -49,8 +57,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.ComponentModel.DesignerSerializationVisibilityAttribute" />
+
+        
 
         
 
@@ -67,12 +79,16 @@
 
           
 
+          
+
            method that is optionally exposed by Microsoft Windows Forms-based controls for property persistence. </para
         >
       </block>
       <para
         >To create a <see
          cref="T:System.Web.UI.Control" />
+
+        
 
         
 
@@ -85,8 +101,12 @@
 
         
 
+        
+
          interface by parsing a string of control- or template-persistence data, use the <see
          cref="T:System.Web.UI.Design.ControlParser" />
+
+        
 
         
 
@@ -124,8 +144,12 @@
 
             
 
+            
+
              implementation to work correctly. This method uses the <see
              cref="P:System.Web.UI.Control.Site" />
+
+            
 
             
 
@@ -149,8 +173,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Control" />
+
+          
 
           
 
@@ -188,8 +216,12 @@
 
             
 
+            
+
              implementation to work correctly. This method uses the <see
              cref="P:System.Web.UI.Control.Site" />
+
+            
 
             
 
@@ -208,6 +240,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -218,8 +252,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -234,8 +272,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Control" />
+
+          
 
           
 
@@ -273,6 +315,8 @@
 
             
 
+            
+
              implementation to work correctly.</para
           >
         </remarks>
@@ -291,8 +335,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Control" />
+
+          
 
           
 
@@ -307,8 +355,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+          
 
           
 
@@ -347,6 +399,8 @@
 
             
 
+            
+
              implementation to work correctly.</para
           >
         </remarks>
@@ -355,6 +409,8 @@
           <para
             >Outputs a string of data that represents the persisted form of the specified control to the specified <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -370,8 +426,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -386,8 +446,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Control" />
+
+          
 
           
 
@@ -402,8 +466,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+          
 
           
 
@@ -441,6 +509,8 @@
 
             
 
+            
+
              implementation to work correctly.</para
           >
         </remarks>
@@ -459,6 +529,8 @@
 
           
 
+          
+
           The component to persist the inner properties of. </param
         >
         <param name="host">
@@ -468,8 +540,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+          
 
           
 
@@ -508,6 +584,8 @@
 
             
 
+            
+
              implementation to work correctly.</para
           >
         </remarks>
@@ -516,6 +594,8 @@
           <para
             >Outputs a string of data that can persist the inner properties of the specified control to the specified <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -531,8 +611,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -547,6 +631,8 @@
 
           
 
+          
+
           The component to persist. </param
         >
         <param name="host">
@@ -556,8 +642,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+          
 
           
 
@@ -598,8 +688,12 @@
 
             
 
+            
+
              method requires an <see
              cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+            
 
             
 
@@ -623,6 +717,8 @@
 
           
 
+          
+
           The template to persist.</param
         >
         <param name="host">
@@ -632,8 +728,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+          
 
           
 
@@ -671,8 +771,12 @@
 
             
 
+            
+
              method requires an <see
              cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+            
 
             
 
@@ -691,6 +795,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -701,8 +807,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -717,6 +827,8 @@
 
           
 
+          
+
           The template to persist.</param
         >
         <param name="host">
@@ -726,8 +838,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+          
 
           
 

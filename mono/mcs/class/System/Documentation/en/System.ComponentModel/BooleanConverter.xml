@@ -33,6 +33,8 @@
 
         
 
+        
+
          object to and from a string.</para
       >
       <para
@@ -43,10 +45,14 @@
 
         
 
+        
+
          base class and <format
          type="text/html">
           <a href="90373a3f-d8c8-492d-841c-945d62393c56">How to: Implement a Type Converter</a>
         </format>
+
+        
 
         
 
@@ -63,8 +69,12 @@
 
           
 
+          
+
           . Instead, call the <see
            cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+
+          
 
           
 
@@ -77,8 +87,12 @@
 
           
 
+          
+
            class. For more information, see the examples in the <see
            cref="T:System.ComponentModel.TypeConverter" />
+
+          
 
           
 
@@ -93,6 +107,8 @@
       <para
         >Provides a type converter to convert <see
          cref="T:System.Boolean" />
+
+        
 
         
 
@@ -124,6 +140,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.BooleanConverter" />
+
+            
 
             
 
@@ -168,6 +186,8 @@
 
             
 
+            
+
              parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
           >
         </remarks>
@@ -186,8 +206,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -202,8 +226,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -248,6 +276,8 @@
 
             
 
+            
+
              parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
           >
         </remarks>
@@ -265,8 +295,12 @@
 
             
 
+            
+
              that represents the converted <paramref
              name="value" />
+
+            
 
             
 
@@ -282,8 +316,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -298,8 +336,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -314,8 +356,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -365,6 +411,8 @@
 
             
 
+            
+
              that holds a standard set of valid values.</para
           >
         </returns>
@@ -375,8 +423,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -418,6 +470,8 @@
 
             
 
+            
+
              returned from this method has all possible values. Therefore, this method always returns true.</para
           >
         </remarks>
@@ -426,6 +480,8 @@
           <para
             >Gets a value indicating whether the list of standard values returned from the <see
              cref="M:System.ComponentModel.BooleanConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
+
+            
 
             
 
@@ -444,8 +500,12 @@
 
             
 
+            
+
              returned from <see
              cref="M:System.ComponentModel.BooleanConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
+
+            
 
             
 
@@ -461,8 +521,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -512,6 +576,8 @@
 
             
 
+            
+
              can be called to find a common set of values the object supports. This method never returns false.</para
           >
         </returns>
@@ -522,8 +588,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 

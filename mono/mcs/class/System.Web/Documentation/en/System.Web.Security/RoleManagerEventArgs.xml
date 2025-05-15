@@ -21,8 +21,12 @@
 
         
 
+        
+
          object provides event information to the <see
          cref="E:System.Web.Security.RoleManagerModule.GetRoles" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          class. The <see
          cref="T:System.Web.Security.RoleManagerEventArgs" />
+
+        
 
         
 
@@ -49,8 +57,12 @@
 
         
 
+        
+
          of the current request, and a Boolean <see
          cref="P:System.Web.Security.RoleManagerEventArgs.RolesPopulated" />
+
+        
 
         
 
@@ -63,8 +75,12 @@
 
         
 
+        
+
          by the <see
          cref="T:System.Web.Security.RoleManagerModule" />
+
+        
 
         
 
@@ -83,8 +99,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.Security.RoleManagerModule" />
+
+        
 
         
 
@@ -116,8 +136,12 @@
 
             
 
+            
+
              object provides event information to the <see
              cref="E:System.Web.Security.RoleManagerModule.GetRoles" />
+
+            
 
             
 
@@ -130,8 +154,12 @@
 
             
 
+            
+
              class. The <see
              cref="T:System.Web.Security.RoleManagerEventArgs" />
+
+            
 
             
 
@@ -144,8 +172,12 @@
 
             
 
+            
+
              of the current request, and a Boolean <see
              cref="P:System.Web.Security.RoleManagerEventArgs.RolesPopulated" />
+
+            
 
             
 
@@ -158,8 +190,12 @@
 
             
 
+            
+
              by the <see
              cref="T:System.Web.Security.RoleManagerModule" />
+
+            
 
             
 
@@ -178,6 +214,8 @@
 
             
 
+            
+
              class and sets the <see
              cref="P:System.Web.Security.RoleManagerEventArgs.Context" />
 
@@ -185,8 +223,12 @@
 
             
 
+            
+
              property to the specified <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -202,8 +244,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -235,8 +281,12 @@
 
             
 
+            
+
              object provides event information to the <see
              cref="E:System.Web.Security.RoleManagerModule.GetRoles" />
+
+            
 
             
 
@@ -249,6 +299,8 @@
 
             
 
+            
+
              class. The <see
              cref="P:System.Web.Security.RoleManagerEventArgs.Context" />
 
@@ -256,8 +308,12 @@
 
             
 
+            
+
              property provides access to the <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -271,6 +327,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -303,6 +361,8 @@
 
             
 
+            
+
              property is used to enable or cancel creation of a <see
              cref="T:System.Web.Security.RolePrincipal" />
 
@@ -310,8 +370,12 @@
 
             
 
+            
+
              by the <see
              cref="T:System.Web.Security.RoleManagerModule" />
+
+            
 
             
 
@@ -327,8 +391,12 @@
 
             
 
+            
+
              event, then the <see
              cref="T:System.Web.Security.RoleManagerModule" />
+
+            
 
             
 
@@ -341,8 +409,12 @@
 
             
 
+            
+
              to create a <see
              cref="T:System.Web.Security.RolePrincipal" />
+
+            
 
             
 

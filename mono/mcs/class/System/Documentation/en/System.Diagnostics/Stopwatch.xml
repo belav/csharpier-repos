@@ -26,8 +26,12 @@
 
         
 
+        
+
          instance can measure elapsed time for one interval, or the total of elapsed time across multiple intervals. In a typical <see
          cref="T:System.Diagnostics.Stopwatch" />
+
+        
 
         
 
@@ -40,6 +44,8 @@
 
         
 
+        
+
          method, then eventually call the <see
          cref="M:System.Diagnostics.Stopwatch.Stop" />
 
@@ -47,8 +53,12 @@
 
         
 
+        
+
          method, and then you check elapsed time using the <see
          cref="P:System.Diagnostics.Stopwatch.Elapsed" />
+
+        
 
         
 
@@ -64,8 +74,12 @@
 
         
 
+        
+
          instance is either running or stopped; use <see
          cref="P:System.Diagnostics.Stopwatch.IsRunning" />
+
+        
 
         
 
@@ -78,8 +92,12 @@
 
         
 
+        
+
         . Use <see
          cref="M:System.Diagnostics.Stopwatch.Start" />
+
+        
 
         
 
@@ -92,8 +110,12 @@
 
         
 
+        
+
          to stop measuring elapsed time. Query the elapsed time value through the properties <see
          cref="P:System.Diagnostics.Stopwatch.Elapsed" />
+
+        
 
         
 
@@ -106,6 +128,8 @@
 
         
 
+        
+
         , or <see
          cref="P:System.Diagnostics.Stopwatch.ElapsedTicks" />
 
@@ -113,8 +137,12 @@
 
         
 
+        
+
         . You can query the elapsed time properties while the instance is running or stopped. The elapsed time properties steadily increase while the <see
          cref="T:System.Diagnostics.Stopwatch" />
+
+        
 
         
 
@@ -130,8 +158,12 @@
 
         
 
+        
+
          instance equals the total of all measured time intervals. Each call to <see
          cref="M:System.Diagnostics.Stopwatch.Start" />
+
+        
 
         
 
@@ -144,6 +176,8 @@
 
         
 
+        
+
          ends the current interval measurement and freezes the cumulative elapsed time value. Use the <see
          cref="M:System.Diagnostics.Stopwatch.Reset" />
 
@@ -151,8 +185,12 @@
 
         
 
+        
+
          method to clear the cumulative elapsed time in an existing <see
          cref="T:System.Diagnostics.Stopwatch" />
+
+        
 
         
 
@@ -168,8 +206,12 @@
 
         
 
+        
+
          measures elapsed time by counting timer ticks in the underlying timer mechanism. If the installed hardware and operating system support a high-resolution performance counter, then the <see
          cref="T:System.Diagnostics.Stopwatch" />
+
+        
 
         
 
@@ -182,8 +224,12 @@
 
         
 
+        
+
          class uses the system timer to measure elapsed time. Use the <see
          cref="F:System.Diagnostics.Stopwatch.Frequency" />
+
+        
 
         
 
@@ -196,8 +242,12 @@
 
         
 
+        
+
          fields to determine the precision and resolution of the <see
          cref="T:System.Diagnostics.Stopwatch" />
+
+        
 
         
 
@@ -213,8 +263,12 @@
 
         
 
+        
+
          class assists the manipulation of timing-related performance counters within managed code. Specifically, the <see
          cref="F:System.Diagnostics.Stopwatch.Frequency" />
+
+        
 
         
 
@@ -227,12 +281,16 @@
 
         
 
+        
+
          method can be used in place of the unmanaged Win32 APIs QueryPerformanceFrequency and QueryPerformanceCounter.</para
       >
       <block subset="none" type="note">
         <para
           >On a multiprocessor computer, it does not matter which processor the thread runs on. However, because of bugs in the BIOS or the Hardware Abstraction Layer (HAL), you can get different timing results on different processors. To specify processor affinity for a thread, use the <see
            cref="P:System.Diagnostics.ProcessThread.ProcessorAffinity" />
+
+          
 
           
 
@@ -272,11 +330,15 @@
 
             
 
+            
+
              instance is stopped, and the elapsed time property of the instance is zero.</para
           >
           <para
             >Use the <see
              cref="M:System.Diagnostics.Stopwatch.Start" />
+
+            
 
             
 
@@ -289,6 +351,8 @@
 
             
 
+            
+
              instance. Use the <see
              cref="M:System.Diagnostics.Stopwatch.StartNew" />
 
@@ -296,8 +360,12 @@
 
             
 
+            
+
              method to initialize a new <see
              cref="T:System.Diagnostics.Stopwatch" />
+
+            
 
             
 
@@ -311,6 +379,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Diagnostics.Stopwatch" />
+
+            
 
             
 
@@ -348,8 +418,12 @@
 
             
 
+            
+
              scenario, you call the <see
              cref="M:System.Diagnostics.Stopwatch.Start" />
+
+            
 
             
 
@@ -362,8 +436,12 @@
 
             
 
+            
+
              method, and then you check elapsed time using the <see
              cref="P:System.Diagnostics.Stopwatch.Elapsed" />
+
+            
 
             
 
@@ -379,8 +457,12 @@
 
             
 
+            
+
              property to retrieve the elapsed time value using <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -393,8 +475,12 @@
 
             
 
+            
+
              instance into a text representation, or pass it to another class that requires a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -410,8 +496,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Diagnostics.Stopwatch.ElapsedMilliseconds" />
+
+            
 
             
 
@@ -424,6 +514,8 @@
 
             
 
+            
+
              while the <see
              cref="T:System.Diagnostics.Stopwatch" />
 
@@ -431,8 +523,12 @@
 
             
 
+            
+
              instance is running or stopped. The elapsed time properties steadily increase while the <see
              cref="T:System.Diagnostics.Stopwatch" />
+
+            
 
             
 
@@ -448,8 +544,12 @@
 
             
 
+            
+
              instance equals the total of all measured time intervals. Each call to <see
              cref="M:System.Diagnostics.Stopwatch.Start" />
+
+            
 
             
 
@@ -462,6 +562,8 @@
 
             
 
+            
+
              ends the current interval measurement and freezes the cumulative elapsed time value. Use the <see
              cref="M:System.Diagnostics.Stopwatch.Reset" />
 
@@ -469,8 +571,12 @@
 
             
 
+            
+
              method to clear the cumulative elapsed time in an existing <see
              cref="T:System.Diagnostics.Stopwatch" />
+
+            
 
             
 
@@ -509,8 +615,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Diagnostics.Stopwatch.ElapsedTicks" />
+
+            
 
             
 
@@ -526,8 +636,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Diagnostics.Stopwatch.ElapsedMilliseconds" />
+
+            
 
             
 
@@ -540,6 +654,8 @@
 
             
 
+            
+
              while the <see
              cref="T:System.Diagnostics.Stopwatch" />
 
@@ -547,8 +663,12 @@
 
             
 
+            
+
              instance is running or stopped. The elapsed time properties steadily increase while the <see
              cref="T:System.Diagnostics.Stopwatch" />
+
+            
 
             
 
@@ -564,8 +684,12 @@
 
             
 
+            
+
              instance equals the total of all measured time intervals. Each call to <see
              cref="M:System.Diagnostics.Stopwatch.Start" />
+
+            
 
             
 
@@ -578,6 +702,8 @@
 
             
 
+            
+
              ends the current interval measurement and freezes the cumulative elapsed time value. Use the <see
              cref="M:System.Diagnostics.Stopwatch.Reset" />
 
@@ -585,8 +711,12 @@
 
             
 
+            
+
              method to clear the cumulative elapsed time in an existing <see
              cref="T:System.Diagnostics.Stopwatch" />
+
+            
 
             
 
@@ -625,6 +755,8 @@
 
             
 
+            
+
              timer can measure. Use the <see
              cref="F:System.Diagnostics.Stopwatch.Frequency" />
 
@@ -632,8 +764,12 @@
 
             
 
+            
+
              field to convert the <see
              cref="P:System.Diagnostics.Stopwatch.ElapsedTicks" />
+
+            
 
             
 
@@ -649,8 +785,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Diagnostics.Stopwatch.ElapsedMilliseconds" />
+
+            
 
             
 
@@ -663,6 +803,8 @@
 
             
 
+            
+
              while the <see
              cref="T:System.Diagnostics.Stopwatch" />
 
@@ -670,8 +812,12 @@
 
             
 
+            
+
              instance is running or stopped. The elapsed time properties steadily increase while the <see
              cref="T:System.Diagnostics.Stopwatch" />
+
+            
 
             
 
@@ -687,8 +833,12 @@
 
             
 
+            
+
              instance equals the total of all measured time intervals. Each call to <see
              cref="M:System.Diagnostics.Stopwatch.Start" />
+
+            
 
             
 
@@ -701,6 +851,8 @@
 
             
 
+            
+
              ends the current interval measurement and freezes the cumulative elapsed time value. Use the <see
              cref="M:System.Diagnostics.Stopwatch.Reset" />
 
@@ -708,8 +860,12 @@
 
             
 
+            
+
              method to clear the cumulative elapsed time in an existing <see
              cref="T:System.Diagnostics.Stopwatch" />
+
+            
 
             
 
@@ -725,8 +881,12 @@
 
               
 
+              
+
                ticks are different from <see
                cref="P:System.DateTime.Ticks" />
+
+              
 
               
 
@@ -739,6 +899,8 @@
 
               
 
+              
+
                value represents one 100-nanosecond interval. Each tick in the <see
                cref="P:System.Diagnostics.Stopwatch.ElapsedTicks" />
 
@@ -746,8 +908,12 @@
 
               
 
+              
+
                value represents the time interval equal to 1 second divided by the <see
                cref="F:System.Diagnostics.Stopwatch.Frequency" />
+
+              
 
               
 
@@ -788,6 +954,8 @@
 
             
 
+            
+
              value depends on the resolution of the underlying timing mechanism. If the installed hardware and operating system support a high-resolution performance counter, then the <see
              cref="F:System.Diagnostics.Stopwatch.Frequency" />
 
@@ -795,8 +963,12 @@
 
             
 
+            
+
              value reflects the frequency of that counter. Otherwise, the <see
              cref="F:System.Diagnostics.Stopwatch.Frequency" />
+
+            
 
             
 
@@ -812,8 +984,12 @@
 
             
 
+            
+
              frequency depends on the installed hardware and operating system, the <see
              cref="F:System.Diagnostics.Stopwatch.Frequency" />
+
+            
 
             
 
@@ -855,8 +1031,12 @@
 
             
 
+            
+
              class uses a high-resolution performance counter, <see
              cref="M:System.Diagnostics.Stopwatch.GetTimestamp" />
+
+            
 
             
 
@@ -869,8 +1049,12 @@
 
             
 
+            
+
              class uses the system timer, <see
              cref="M:System.Diagnostics.Stopwatch.GetTimestamp" />
+
+            
 
             
 
@@ -883,8 +1067,12 @@
 
             
 
+            
+
              property of the <see
              cref="P:System.DateTime.Now" />
+
+            
 
             
 
@@ -929,8 +1117,12 @@
 
             
 
+            
+
              class depends on the system hardware and operating system. <see
              cref="F:System.Diagnostics.Stopwatch.IsHighResolution" />
+
+            
 
             
 
@@ -943,6 +1135,8 @@
 
             
 
+            
+
              timer is based on a high-resolution performance counter. Otherwise, <see
              cref="F:System.Diagnostics.Stopwatch.IsHighResolution" />
 
@@ -950,8 +1144,12 @@
 
             
 
+            
+
              is false, which indicates that the <see
              cref="T:System.Diagnostics.Stopwatch" />
+
+            
 
             
 
@@ -990,8 +1188,12 @@
 
             
 
+            
+
              instance begins running with a call to <see
              cref="M:System.Diagnostics.Stopwatch.Start" />
+
+            
 
             
 
@@ -1004,6 +1206,8 @@
 
             
 
+            
+
             . The instance stops running with a call to <see
              cref="M:System.Diagnostics.Stopwatch.Stop" />
 
@@ -1011,8 +1215,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Diagnostics.Stopwatch.Reset" />
+
+            
 
             
 
@@ -1026,6 +1234,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Diagnostics.Stopwatch" />
+
+            
 
             
 
@@ -1063,6 +1273,8 @@
 
             
 
+            
+
              instance calculates and retains the cumulative elapsed time across multiple time intervals, until the instance is reset. Use <see
              cref="M:System.Diagnostics.Stopwatch.Stop" />
 
@@ -1070,8 +1282,12 @@
 
             
 
+            
+
              to stop the current interval measurement and retain the cumulative elapsed time value. Use <see
              cref="M:System.Diagnostics.Stopwatch.Reset" />
+
+            
 
             
 
@@ -1111,8 +1327,12 @@
 
             
 
+            
+
              instance calculates and retains the cumulative elapsed time across multiple time intervals, until the instance is reset or restarted. Use <see
              cref="M:System.Diagnostics.Stopwatch.Stop" />
+
+            
 
             
 
@@ -1125,8 +1345,12 @@
 
             
 
+            
+
              to stop any interval measurement in progress and clear the elapsed time value. Use <see
              cref="M:System.Diagnostics.Stopwatch.Restart" />
+
+            
 
             
 
@@ -1168,8 +1392,12 @@
 
             
 
+            
+
              scenario, you call the <see
              cref="M:System.Diagnostics.Stopwatch.Start" />
+
+            
 
             
 
@@ -1182,8 +1410,12 @@
 
             
 
+            
+
              method, and then you check elapsed time using the <see
              cref="P:System.Diagnostics.Stopwatch.Elapsed" />
+
+            
 
             
 
@@ -1199,8 +1431,12 @@
 
             
 
+            
+
              timer measures the current interval, in elapsed timer ticks, until the instance is stopped or reset. Starting a <see
              cref="T:System.Diagnostics.Stopwatch" />
+
+            
 
             
 
@@ -1216,8 +1452,12 @@
 
             
 
+            
+
              instance measures more than one interval, the <see
              cref="M:System.Diagnostics.Stopwatch.Start" />
+
+            
 
             
 
@@ -1230,8 +1470,12 @@
 
             
 
+            
+
              instance calculates and retains the cumulative elapsed time across multiple time intervals, until the instance is reset. Use the <see
              cref="M:System.Diagnostics.Stopwatch.Reset" />
+
+            
 
             
 
@@ -1244,8 +1488,12 @@
 
             
 
+            
+
              to clear the cumulative elapsed time in a <see
              cref="T:System.Diagnostics.Stopwatch" />
+
+            
 
             
 
@@ -1258,8 +1506,12 @@
 
             
 
+            
+
              method to <see
              cref="M:System.Diagnostics.Stopwatch.Reset" />
+
+            
 
             
 
@@ -1272,8 +1524,12 @@
 
             
 
+            
+
              the <see
              cref="T:System.Diagnostics.Stopwatch" />
+
+            
 
             
 
@@ -1318,8 +1574,12 @@
 
             
 
+            
+
              constructor and then calling <see
              cref="M:System.Diagnostics.Stopwatch.Start" />
+
+            
 
             
 
@@ -1338,6 +1598,8 @@
 
             
 
+            
+
              instance, sets the elapsed time property to zero, and starts measuring elapsed time.</para
           >
         </summary>
@@ -1346,6 +1608,8 @@
           <para
             >A <see
              cref="T:System.Diagnostics.Stopwatch" />
+
+            
 
             
 
@@ -1383,8 +1647,12 @@
 
             
 
+            
+
              scenario, you call the <see
              cref="M:System.Diagnostics.Stopwatch.Start" />
+
+            
 
             
 
@@ -1397,8 +1665,12 @@
 
             
 
+            
+
              method, and then you check elapsed time using the <see
              cref="P:System.Diagnostics.Stopwatch.Elapsed" />
+
+            
 
             
 
@@ -1414,8 +1686,12 @@
 
             
 
+            
+
              method ends the current time interval measurement. Stopping a <see
              cref="T:System.Diagnostics.Stopwatch" />
+
+            
 
             
 
@@ -1431,8 +1707,12 @@
 
             
 
+            
+
              instance measures more than one interval, the <see
              cref="M:System.Diagnostics.Stopwatch.Stop" />
+
+            
 
             
 
@@ -1445,6 +1725,8 @@
 
             
 
+            
+
              resumes measuring time from the current elapsed time value. Use the <see
              cref="M:System.Diagnostics.Stopwatch.Reset" />
 
@@ -1452,8 +1734,12 @@
 
             
 
+            
+
              method to clear the cumulative elapsed time in a <see
              cref="T:System.Diagnostics.Stopwatch" />
+
+            
 
             
 

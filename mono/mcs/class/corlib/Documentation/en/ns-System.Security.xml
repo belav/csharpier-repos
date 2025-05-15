@@ -17,6 +17,8 @@
 
         
 
+        
+
          namespace provides the underlying structure of the common language runtime security system, including base classes for permissions.</para
       >
     </summary>

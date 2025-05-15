@@ -31,6 +31,8 @@
 
         
 
+        
+
          class represents the configuration element that specifies the character encoding and message versioning used for a message using a Message Transmission Optimization Mechanism (MTOM) encoding. MTOM is an efficient technology for transmitting binary data in indigo1 messages. The MTOM encoder attempts balance between efficiency and interoperability. The MTOM encoding transmits most XML in textual form, but optimizes large blocks of binary data by transmitting them as-is, without conversion to text.</para
       >
       <para
@@ -41,11 +43,15 @@
 
         
 
+        
+
          class represents a configuration element that specifies a text encoder used to create text-based messages on the wire. Messages produced by this encoder are suitable for WS-* based interoperability. Web service or Web service client can generally understand textual XML. However, transmitting large blocks of binary data as text is the least efficient method for encoding XML messages.</para
       >
       <para
         >The <see
          cref="T:System.ServiceModel.Configuration.BinaryMessageEncodingElement" />
+
+        
 
         
 
@@ -83,6 +89,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -109,6 +117,8 @@
           <para
             >Gets the <see
              cref="T:System.Type" />
+
+            
 
             
 

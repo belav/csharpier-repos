@@ -63,7 +63,7 @@ WARNING:   When setting properties based on their current state (for example:
       <IosTestTarget Condition="'$(TargetOS)' == 'tvossimulator'">tvos-simulator</IosTestTarget>
       <IosTestTarget Condition="'$(TargetOS)' == 'tvos'">tvos-device</IosTestTarget>
       <BashCLRTestEnvironmentCompatibilityCheck Condition="'$(GCStressIncompatible)' == 'true'">
-<![CDATA[
+        <![CDATA[
 $(BashCLRTestEnvironmentCompatibilityCheck)
 if [ ! -z "$DOTNET_GCStress" ]
 then
@@ -75,7 +75,7 @@ fi
       <BashCLRTestEnvironmentCompatibilityCheck
         Condition="'$(UnloadabilityIncompatible)' == 'true'"
       >
-<![CDATA[
+        <![CDATA[
 $(BashCLRTestEnvironmentCompatibilityCheck)
 if [ ! -z "$RunInUnloadableContext" ]
 then
@@ -85,7 +85,7 @@ fi
       ]]>
       </BashCLRTestEnvironmentCompatibilityCheck>
       <BashCLRTestEnvironmentCompatibilityCheck Condition="'$(TieringTestIncompatible)' == 'true'">
-<![CDATA[
+        <![CDATA[
 $(BashCLRTestEnvironmentCompatibilityCheck)
 if [ ! -z "$RunTieringTest" ]
 then
@@ -97,7 +97,7 @@ fi
       <BashCLRTestEnvironmentCompatibilityCheck
         Condition="'$(JitOptimizationSensitive)' == 'true' And '$(RuntimeFlavor)' != 'mono' and '$(TestBuildMode)' != 'nativeaot'"
       >
-<![CDATA[
+        <![CDATA[
 $(BashCLRTestEnvironmentCompatibilityCheck)
 if [[ ( ! -z "$DOTNET_JitStress" ) || ( ! -z "$DOTNET_JitStressRegs" ) || ( ! -z "$DOTNET_JITMinOpts" ) || ( ! -z "$DOTNET_TailcallStress" ) ]]
 then
@@ -112,7 +112,7 @@ fi
       ]]>
       </BashCLRTestEnvironmentCompatibilityCheck>
       <BashCLRTestEnvironmentCompatibilityCheck Condition="'$(HeapVerifyIncompatible)' == 'true'">
-<![CDATA[
+        <![CDATA[
 $(BashCLRTestEnvironmentCompatibilityCheck)
 if [ ! -z "$DOTNET_HeapVerify" ]
 then
@@ -124,7 +124,7 @@ fi
       <BashCLRTestEnvironmentCompatibilityCheck
         Condition="'$(IlasmRoundTripIncompatible)' == 'true'"
       >
-<![CDATA[
+        <![CDATA[
 $(BashCLRTestEnvironmentCompatibilityCheck)
 if [ ! -z "$RunningIlasmRoundTrip" ]
 then
@@ -136,7 +136,7 @@ fi
       <BashCLRTestEnvironmentCompatibilityCheck
         Condition="'$(SynthesizedPgoIncompatible)' == 'true'"
       >
-<![CDATA[
+        <![CDATA[
 $(BashCLRTestEnvironmentCompatibilityCheck)
 if [ ! -z "$CrossGen2SynthesizePgo" ]
 then
@@ -146,7 +146,7 @@ fi
       ]]>
       </BashCLRTestEnvironmentCompatibilityCheck>
       <BashCLRTestExitCodePrep Condition="$(_CLRTestNeedsToRun)">
-<![CDATA[
+        <![CDATA[
 export CLRTestExpectedExitCode=$(CLRTestExitCode)
 echo BEGIN EXECUTION]]>
       </BashCLRTestExitCodePrep>
@@ -155,7 +155,7 @@ echo BEGIN EXECUTION]]>
       </BashCLRTestArgPrep>
       <!-- By default, be prepared to do a full check -->
       <BashCLRTestExitCodeCheck>
-<![CDATA[
+        <![CDATA[
 echo Expected: $CLRTestExpectedExitCode
 echo Actual: $CLRTestExitCode
 
@@ -280,7 +280,7 @@ fi
     <PropertyGroup>
       <ReflectionRootsXml>$(AssemblyName).reflect.xml</ReflectionRootsXml>
       <BashLinkerTestLaunchCmds>
-<![CDATA[
+        <![CDATA[
 # Linker commands
 
 LinkBin=__Link
@@ -350,7 +350,7 @@ fi
 ]]>
       </BashLinkerTestLaunchCmds>
       <BashLinkerTestCleanupCmds>
-<![CDATA[
+        <![CDATA[
 # Clean up the LinkBin directories after test execution.
 # Otherwise, RunTests may run out of disk space.
 
@@ -373,7 +373,7 @@ fi
       <CLRTestBashPreCommands
         Condition="'$(CLRTestKind)' == 'BuildAndRun' and '$(TargetArchitecture)' == 'wasm'"
       >
-<![CDATA[
+        <![CDATA[
 # Build wasm app containing the test dll
 __Command=""
 if [ ! -z ${__TestDotNetCmd+x} ] %3B then
@@ -392,7 +392,7 @@ $__Command msbuild $CORE_ROOT/wasm-test-runner/WasmTestRunner.proj /p:NetCoreApp
       <BashCLRTestLaunchCmds
         Condition="'$(CLRTestKind)' == 'BuildAndRun' And '$(TargetOS)' != 'browser' And '$(TargetOS)' != 'android' And '$(TargetArchitecture)' != 'arm64'"
       >
-<![CDATA[
+        <![CDATA[
 $(BashLinkerTestLaunchCmds)
 
 _DebuggerArgsSeparator=
@@ -433,7 +433,7 @@ $(BashLinkerTestCleanupCmds)
       <BashCLRTestLaunchCmds
         Condition="'$(CLRTestKind)' == 'BuildAndRun' And '$(TargetOS)' != 'browser' And '$(TargetOS)' != 'android' And '$(TargetArchitecture)' == 'arm64'"
       >
-<![CDATA[
+        <![CDATA[
 $(BashLinkerTestLaunchCmds)
 
 if [ ! -z "$CLRCustomTestLauncher" ];
@@ -465,7 +465,7 @@ $(BashLinkerTestCleanupCmds)
       <BashCLRTestLaunchCmds
         Condition="'$(CLRTestKind)' == 'BuildAndRun' And '$(TargetOS)' == 'browser'"
       >
-<![CDATA[
+        <![CDATA[
 cd WasmApp
 ./run-v8.sh
 CLRTestExitCode=$?
@@ -474,7 +474,7 @@ CLRTestExitCode=$?
       <BashCLRTestLaunchCmds
         Condition="'$(CLRTestKind)' == 'BuildAndRun' And '$(TargetOS)' == 'android'"
       >
-<![CDATA[
+        <![CDATA[
 # run Android app
 __Command=""
 if [ ! -z ${__TestDotNetCmd+x} ] %3B then
@@ -501,7 +501,7 @@ CLRTestExpectedExitCode=0
       <BashCLRTestLaunchCmds
         Condition="'$(CLRTestKind)' == 'BuildAndRun' and ('$(TargetOS)' == 'iossimulator' or '$(TargetOS)' == 'ios' or '$(TargetOS)' == 'tvos' or '$(TargetOS)' == 'tvossimulator' or '$(TargetOS)' == 'maccatalyst')"
       >
-<![CDATA[
+        <![CDATA[
 __Command=""
 if [ ! -z ${__TestDotNetCmd+x} ] %3B then
   __Command+=" $__TestDotNetCmd"
@@ -532,7 +532,7 @@ CLRTestExpectedExitCode=0
       ]]>
       </BashCLRTestLaunchCmds>
       <BashCLRTestLaunchCmds Condition="'$(CLRTestKind)' == 'RunOnly'">
-<![CDATA[
+        <![CDATA[
 echo export CDPATH="$%28dirname "${BASH_SOURCE[0]}")"
 export CDPATH="$%28dirname "${BASH_SOURCE[0]}")"
 echo /usr/bin/env bash $(InputAssemblyName) %24(printf "'%s' " "${CLRTestExecutionArguments[@]}")
@@ -568,7 +568,7 @@ CLRTestExpectedExitCode=0
       when the argument is found.
       -->
       <BashCLRTestArgPrep>
-<![CDATA[
+        <![CDATA[
 usage()
 {
     echo "Usage: $0  $(_CLRTestParamList)"
@@ -602,19 +602,19 @@ $(BashCLRTestArgPrep)
       ]]>
       </BashCLRTestArgPrep>
       <CLRTestExecutionScriptHeader Condition="'$(TargetOS)' == 'android'">
-<![CDATA[
+        <![CDATA[
 %23%21/usr/bin/env bash
 set -e
       ]]>
       </CLRTestExecutionScriptHeader>
       <CLRTestExecutionScriptHeader Condition="'$(TargetOS)' != 'android'">
-<![CDATA[
+        <![CDATA[
 %23%21/usr/bin/env bash
       ]]>
       </CLRTestExecutionScriptHeader>
       <!-- NOTE! semicolons must be escaped with %3B boooo -->
       <_CLRTestExecutionScriptText>
-<![CDATA[
+        <![CDATA[
 $(CLRTestExecutionScriptHeader)
 TakeLock()
 {

@@ -27,8 +27,12 @@
 
         
 
+        
+
          class to serialize and deserialize instances of a type into an XML stream or document. For example, you can create a type named Person with properties that contain essential data, such as a name and address. You can then create and manipulate an instance of the Person class and write all of its property values in an XML document for later retrieval, or in an XML stream for immediate transport. Most important, the <see
          cref="T:System.Runtime.Serialization.DataContractSerializer" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          attribute to classes, and the <see
          cref="T:System.Runtime.Serialization.DataMemberAttribute" />
+
+        
 
         
 
@@ -62,11 +70,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >To use the <see
          cref="T:System.Runtime.Serialization.DataContractSerializer" />
+
+        
 
         
 
@@ -79,8 +91,12 @@
 
         
 
+        
+
         . Then call the <see
          cref="M:System.Runtime.Serialization.XmlObjectSerializer.WriteObject(System.Xml.XmlDictionaryWriter,System.Object)" />
+
+        
 
         
 
@@ -93,8 +109,12 @@
 
         
 
+        
+
          for an XML document) and call the <see
          cref="Overload:System.Runtime.Serialization.DataContractSerializer.ReadObject" />
+
+        
 
         
 
@@ -110,10 +130,14 @@
 
         
 
+        
+
         , see <format
          type="text/html">
           <a href="3d71814c-bda7-424b-85b7-15084ff9377a">Using Stand-alone Serialization</a>
         </format>
+
+        
 
         
 
@@ -126,6 +150,8 @@
          type="text/html">
           <a href="f41fb4d5-24e7-4059-8010-286a30bfea93">&lt;dataContractSerializer&gt;</a>
         </format>
+
+        
 
         
 
@@ -144,8 +170,12 @@
 
         
 
+        
+
          is used in combination with the <see
          cref="T:System.Runtime.Serialization.DataContractAttribute" />
+
+        
 
         
 
@@ -158,6 +188,8 @@
 
         
 
+        
+
          classes. To prepare a class for serialization, apply the <see
          cref="T:System.Runtime.Serialization.DataContractAttribute" />
 
@@ -165,8 +197,12 @@
 
         
 
+        
+
          to the class.  For each member of the class that returns data that you want to serialize, apply the <see
          cref="T:System.Runtime.Serialization.DataMemberAttribute" />
+
+        
 
         
 
@@ -182,8 +218,12 @@
 
         
 
+        
+
          to the class.  Then apply the <see
          cref="T:System.Runtime.Serialization.DataMemberAttribute" />
+
+        
 
         
 
@@ -200,12 +240,16 @@
 
           
 
+          
+
            to both private and public members. </para
         >
       </block>
       <para
         >The final format of the XML need not be text. Instead, the <see
          cref="T:System.Runtime.Serialization.DataContractSerializer" />
+
+        
 
         
 
@@ -218,8 +262,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Xml.XmlWriter" />
+
+        
 
         
 
@@ -232,6 +280,8 @@
 
         
 
+        
+
          and <see
          cref="T:System.Xml.XmlDictionaryWriter" />
 
@@ -239,8 +289,12 @@
 
         
 
+        
+
          classes to read and write, because both are optimized to work with the <see
          cref="T:System.Runtime.Serialization.DataContractSerializer" />
+
+        
 
         
 
@@ -260,6 +314,8 @@
 
         
 
+        
+
         . </para
       >
       <format type="text/html">
@@ -273,8 +329,12 @@
 
         
 
+        
+
         . Begin by creating an instance of a class that implements <see
          cref="T:System.Collections.Generic.IEnumerable`1" />
+
+        
 
         
 
@@ -287,8 +347,12 @@
 
         
 
+        
+
         ) and adding the known types to the collection. Then create an instance of the <see
          cref="T:System.Runtime.Serialization.DataContractSerializer" />
+
+        
 
         
 
@@ -301,8 +365,12 @@
 
         
 
+        
+
          (for example, <see
          cref="M:System.Runtime.Serialization.DataContractSerializer.#ctor(System.Type,System.Collections.Generic.IEnumerable{System.Type})" />
+
+        
 
         
 
@@ -319,10 +387,14 @@
 
           
 
+          
+
            structure is not a known type by default, so it must be manually added to the list of known types (see <format
            type="text/html">
             <a href="1a0baea1-27b7-470d-9136-5bbad86c4337">Data Contract Known Types</a>
           </format>
+
+          
 
           
 
@@ -342,8 +414,12 @@
 
         
 
+        
+
          understands data contracts that have been designed to be compatible with future versions of the contract. Such types implement the <see
          cref="T:System.Runtime.Serialization.IExtensibleDataObject" />
+
+        
 
         
 
@@ -356,8 +432,12 @@
 
         
 
+        
+
          property that returns an <see
          cref="T:System.Runtime.Serialization.ExtensionDataObject" />
+
+        
 
         
 
@@ -367,6 +447,8 @@
          type="text/html">
           <a href="413c9044-26f8-4ecb-968c-18495ea52cd9">Forward Compatible Data Contracts</a>
         </format>
+
+        
 
         
 
@@ -385,8 +467,12 @@
 
         
 
+        
+
          does not call the constructor of the target object. If you author a <newTerm
         >[DataContract]</newTerm>
+
+        
 
         
 
@@ -434,11 +520,15 @@
 
             
 
+            
+
              class to serialize or deserialize an object of the specified type.</para
           >
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -480,11 +570,15 @@
 
             
 
+            
+
              class to serialize or deserialize an object of the specified type, and a collection of known types that may be present in the object graph.</para
           >
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -499,6 +593,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEnumerable`1" />
 
@@ -506,8 +602,12 @@
 
           
 
+          
+
             of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -549,6 +649,8 @@
 
             
 
+            
+
              class to serialize or deserialize an object of the specified type and settings.</para
           >
         </summary>
@@ -559,10 +661,14 @@
 
           
 
+          
+
           The type of the instance to serialize or deserialize.</param
         >
         <param name="settings">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -602,11 +708,15 @@
 
             
 
+            
+
              class to serialize or deserialize an object of the specified type using the supplied XML root element and namespace.</para
           >
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -621,10 +731,14 @@
 
           
 
+          
+
           The name of the XML element that encloses the content to serialize or deserialize.</param
         >
         <param name="rootNamespace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -664,8 +778,12 @@
 
             
 
+            
+
              class to serialize or deserialize an object of the specified type using the XML root element and namespace specified through the parameters of type <see
              cref="T:System.Xml.XmlDictionaryString" />
+
+            
 
             
 
@@ -681,6 +799,8 @@
 
           
 
+          
+
           The type of the instances that are serialized or deserialized.</param
         >
         <param name="rootName">
@@ -690,8 +810,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlDictionaryString" />
+
+          
 
           
 
@@ -706,8 +830,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlDictionaryString" />
+
+          
 
           
 
@@ -751,11 +879,15 @@
 
             
 
+            
+
              class to serialize or deserialize an object of the specified type. This method also specifies the root XML element and namespace in two string parameters as well as a list of known types that may be present in the object graph.</para
           >
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -770,10 +902,14 @@
 
           
 
+          
+
           The root element name of the content.</param
         >
         <param name="rootNamespace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -788,6 +924,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEnumerable`1" />
 
@@ -795,8 +933,12 @@
 
           
 
+          
+
             of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -840,8 +982,12 @@
 
             
 
+            
+
              class to serialize or deserialize an object of the specified type. This method also specifies the root XML element and namespace in two <see
              cref="T:System.Xml.XmlDictionaryString" />
+
+            
 
             
 
@@ -857,6 +1003,8 @@
 
           
 
+          
+
           The type of the instances that are serialized or deserialized.</param
         >
         <param name="rootName">
@@ -866,8 +1014,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlDictionaryString" />
+
+          
 
           
 
@@ -882,8 +1034,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlDictionaryString" />
+
+          
 
           
 
@@ -898,6 +1054,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.Generic.IEnumerable`1" />
 
@@ -905,8 +1063,12 @@
 
           
 
+          
+
            of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -956,11 +1118,15 @@
 
             
 
+            
+
              class to serialize or deserialize an object of the specified type. This method also specifies a list of known types that may be present in the object graph, the maximum number of graph items to serialize, parameters to ignore unexpected data, whether to use non-standard XML constructs to preserve object reference data in the graph, and a surrogate for custom serialization.</para
           >
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -975,6 +1141,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEnumerable`1" />
 
@@ -982,8 +1150,12 @@
 
           
 
+          
+
            of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -998,10 +1170,14 @@
 
           
 
+          
+
           true to ignore the data supplied by an extension of the type upon serialization and deserialization; otherwise, false.</param
         >
         <param name="preserveObjectReferences">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1016,8 +1192,12 @@
 
           
 
+          
+
           An implementation of the <see
            cref="T:System.Runtime.Serialization.IDataContractSurrogate" />
+
+          
 
           
 
@@ -1076,11 +1256,15 @@
 
             
 
+            
+
              class to serialize or deserialize an object of the specified type. This method also specifies a list of known types that may be present in the object graph, the maximum number of graph items to serialize, parameters to ignore unexpected data, whether to use non-standard XML constructs to preserve object reference data in the graph, a surrogate for custom serialization, and an alternative for mapping xsi:type declarations at run time.</para
           >
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1095,6 +1279,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEnumerable`1" />
 
@@ -1102,8 +1288,12 @@
 
           
 
+          
+
            of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1118,10 +1308,14 @@
 
           
 
+          
+
           true to ignore the data supplied by an extension of the type upon serialization and deserialization; otherwise, false.</param
         >
         <param name="preserveObjectReferences">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1136,8 +1330,12 @@
 
           
 
+          
+
           An implementation of the <see
            cref="T:System.Runtime.Serialization.IDataContractSurrogate" />
+
+          
 
           
 
@@ -1152,8 +1350,12 @@
 
           
 
+          
+
           An implementation of the <see
            cref="T:System.Runtime.Serialization.DataContractResolver" />
+
+          
 
           
 
@@ -1205,11 +1407,15 @@
 
             
 
+            
+
              class to serialize or deserialize an object of the specified type. This method also specifies a list of known types that may be present in the object graph, the maximum number of graph items to serialize, parameters to ignore unexpected data, whether to use non-standard XML constructs to preserve object reference data in the graph, a surrogate for custom serialization, and the XML element and namespace that contain the content.</para
           >
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1224,10 +1430,14 @@
 
           
 
+          
+
           The XML element that encloses the content to serialize or deserialize.</param
         >
         <param name="rootNamespace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1242,6 +1452,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEnumerable`1" />
 
@@ -1249,8 +1461,12 @@
 
           
 
+          
+
            of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1265,10 +1481,14 @@
 
           
 
+          
+
           true to ignore the data supplied by an extension of the type upon serialization and deserialization; otherwise, false.</param
         >
         <param name="preserveObjectReferences">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1283,8 +1503,12 @@
 
           
 
+          
+
           An implementation of the <see
            cref="T:System.Runtime.Serialization.IDataContractSurrogate" />
+
+          
 
           
 
@@ -1336,8 +1560,12 @@
 
             
 
+            
+
              class to serialize or deserialize an object of the specified type. This method also specifies a list of known types that may be present in the object graph, the maximum number of graph items to serialize, parameters to ignore unexpected data, whether to use non-standard XML constructs to preserve object reference data in the graph, a surrogate for custom serialization, and parameters of <see
              cref="T:System.Xml.XmlDictionaryString" />
+
+            
 
             
 
@@ -1353,6 +1581,8 @@
 
           
 
+          
+
           The type of the instances that are serialized or deserialized.</param
         >
         <param name="rootName">
@@ -1362,8 +1592,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryString" />
+
+          
 
           
 
@@ -1378,8 +1612,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryString" />
+
+          
 
           
 
@@ -1394,6 +1632,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.Generic.IEnumerable`1" />
 
@@ -1401,8 +1641,12 @@
 
           
 
+          
+
            of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1417,10 +1661,14 @@
 
           
 
+          
+
           true to ignore the data supplied by an extension of the type upon serialization and deserialization; otherwise, false.</param
         >
         <param name="preserveObjectReferences">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1435,8 +1683,12 @@
 
           
 
+          
+
           An implementation of the <see
            cref="T:System.Runtime.Serialization.IDataContractSurrogate" />
+
+          
 
           
 
@@ -1492,11 +1744,15 @@
 
             
 
+            
+
              class to serialize or deserialize an object of the specified type. This method also specifies a list of known types that may be present in the object graph, the maximum number of graph items to serialize, parameters to ignore unexpected data, whether to use non-standard XML constructs to preserve object reference data in the graph, a surrogate for custom serialization, the XML element and namespace that contains the content, and an alternative for mapping xsi:type declarations at run time.</para
           >
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1511,10 +1767,14 @@
 
           
 
+          
+
           The XML element that encloses the content to serialize or deserialize.</param
         >
         <param name="rootNamespace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1529,6 +1789,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Generic.IEnumerable`1" />
 
@@ -1536,8 +1798,12 @@
 
           
 
+          
+
            of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1552,10 +1818,14 @@
 
           
 
+          
+
           true to ignore the data supplied by an extension of the type upon serialization and deserialization; otherwise, false.</param
         >
         <param name="preserveObjectReferences">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1570,8 +1840,12 @@
 
           
 
+          
+
           An implementation of the <see
            cref="T:System.Runtime.Serialization.IDataContractSurrogate" />
+
+          
 
           
 
@@ -1586,8 +1860,12 @@
 
           
 
+          
+
           An implementation of the <see
            cref="T:System.Runtime.Serialization.DataContractResolver" />
+
+          
 
           
 
@@ -1643,8 +1921,12 @@
 
             
 
+            
+
              class to serialize or deserialize an object of the specified type. This method also specifies a list of known types that may be present in the object graph, the maximum number of graph items to serialize, parameters to ignore unexpected data, whether to use non-standard XML constructs to preserve object reference data in the graph, a surrogate for custom serialization, parameters of <see
              cref="T:System.Xml.XmlDictionaryString" />
+
+            
 
             
 
@@ -1660,10 +1942,14 @@
 
           
 
+          
+
           The type of the instances that are serialized or deserialized.</param
         >
         <param name="rootName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1678,10 +1964,14 @@
 
           
 
+          
+
           The namespace of the XML element that encloses the content to serialize or deserialize.</param
         >
         <param name="knownTypes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1694,8 +1984,12 @@
 
           
 
+          
+
            of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1710,10 +2004,14 @@
 
           
 
+          
+
           true to ignore the data supplied by an extension of the type upon serialization and deserialization; otherwise, false.</param
         >
         <param name="preserveObjectReferences">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1728,8 +2026,12 @@
 
           
 
+          
+
           An implementation of the <see
            cref="T:System.Runtime.Serialization.IDataContractSurrogate" />
+
+          
 
           
 
@@ -1744,8 +2046,12 @@
 
           
 
+          
+
           An implementation of the <see
            cref="T:System.Runtime.Serialization.DataContractResolver" />
+
+          
 
           
 
@@ -1783,8 +2089,12 @@
 
             
 
+            
+
              is set using a <see
              cref="T:System.Runtime.Serialization.DataContractSerializer" />
+
+            
 
             
 
@@ -1827,8 +2137,12 @@
 
             
 
+            
+
              can be used to customize how instances of a type are serialized and deserialized. For example, it can be used to enable the serialization of legacy types that are not serializable, that is, types to which the <see
              cref="T:System.Runtime.Serialization.DataContractAttribute" />
+
+            
 
             
 
@@ -1865,8 +2179,12 @@
 
             
 
+            
+
              property is used when the class to which a <see
              cref="T:System.Runtime.Serialization.DataContractAttribute" />
+
+            
 
             
 
@@ -1879,10 +2197,14 @@
 
             
 
+            
+
              interface. In this case, the data added in a future version of the contract is ignored on read and write. crdefault <format
              type="text/html">
               <a href="413c9044-26f8-4ecb-968c-18495ea52cd9">Forward Compatible Data Contracts</a>
             </format>
+
+            
 
             
 
@@ -1927,6 +2249,8 @@
 
             
 
+            
+
              determines whether it can read an object by checking that it is positioned on an XML element. It also examines the name and namespace of the XML element that the reader is positioned at and compares the values to the expected name and namespace. The expected name and namespace can be set with the following: the data contract name and namespace of the type passed into the constructor, or the <paramref
              name="rootName" />
 
@@ -1934,8 +2258,12 @@
 
             
 
+            
+
              and <paramref
              name="rootNamespace" />
+
+            
 
             
 
@@ -1949,6 +2277,8 @@
           <para
             >Determines whether the <see
              cref="T:System.Xml.XmlDictionaryReader" />
+
+            
 
             
 
@@ -1968,8 +2298,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlDictionaryReader" />
+
+          
 
           
 
@@ -2010,6 +2344,8 @@
 
             
 
+            
+
              is positioned on an object that can be deserialized.</para
           >
         </summary>
@@ -2024,8 +2360,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -2063,8 +2403,12 @@
 
             
 
+            
+
              property provides the set of known types that are used for serialization and deserialization. For example, if an instance of the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -2077,6 +2421,8 @@
 
             
 
+            
+
              class and use the instance to construct an instance of the <see
              cref="T:System.Runtime.Serialization.DataContractSerializer" />
 
@@ -2084,8 +2430,12 @@
 
             
 
+            
+
             . If you know of other types to add to the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -2099,6 +2449,8 @@
           <para
             >Gets a collection of types that may be present in the object graph serialized using this instance of the <see
              cref="T:System.Runtime.Serialization.DataContractSerializer" />
+
+            
 
             
 
@@ -2137,8 +2489,12 @@
 
             
 
+            
+
              property specifies the maximum number of objects that the serializer serializes or deserializes in a single <see
              cref="Overload:System.Runtime.Serialization.DataContractSerializer.ReadObject" />
+
+            
 
             
 
@@ -2151,10 +2507,14 @@
 
             
 
+            
+
             . Note that when serializing or deserializing arrays, every array entry counts as a separate object. Also, note that some objects may have a large memory representation and so this quota alone may not be sufficient to prevent Denial of Service attacks. crdefault <format
              type="text/html">
               <a href="a7eb98da-4a93-4692-8b59-9d670c79ffb2">Security Considerations for Data</a>
             </format>
+
+            
 
             
 
@@ -2219,6 +2579,8 @@
 
             
 
+            
+
              and returns the deserialized object.</para
           >
         </summary>
@@ -2233,8 +2595,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -2276,6 +2642,8 @@
 
             
 
+            
+
              and returns the deserialized object, and also specifies whether a check is made to verify the object name before reading its value. </para
           >
         </summary>
@@ -2290,8 +2658,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryReader" />
+
+          
 
           
 
@@ -2301,6 +2673,8 @@
         >
         <param name="verifyObjectName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2342,6 +2716,8 @@
 
             
 
+            
+
              and returns the deserialized object, and also specifies whether a check is made to verify the object name before reading its value.</para
           >
         </summary>
@@ -2356,8 +2732,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -2367,6 +2747,8 @@
         >
         <param name="verifyObjectName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2415,10 +2797,14 @@
 
           
 
+          
+
           The XML reader used to read the content.</param
         >
         <param name="verifyObjectName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2478,6 +2864,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2488,8 +2876,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryWriter" />
+
+          
 
           
 
@@ -2530,6 +2922,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2540,8 +2934,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -2583,11 +2981,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="writer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2600,10 +3002,14 @@
 
           
 
+          
+
            used to write the XML document or stream.</param
         >
         <param name="graph">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2648,10 +3054,14 @@
 
           
 
+          
+
           An XmlDictionaryWriter used to write the content to the XML document or stream.</param
         >
         <param name="graph">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2693,11 +3103,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="writer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2710,10 +3124,14 @@
 
           
 
+          
+
            used to write the stream.</param
         >
         <param name="graph">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2755,11 +3173,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="writer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2772,10 +3194,14 @@
 
           
 
+          
+
            used to write the stream.</param
         >
         <param name="graph">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2817,11 +3243,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="writer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2834,10 +3264,14 @@
 
           
 
+          
+
            used to write the XML start element.</param
         >
         <param name="graph">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2879,11 +3313,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="writer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2896,10 +3334,14 @@
 
           
 
+          
+
            used to write the XML start element.</param
         >
         <param name="graph">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

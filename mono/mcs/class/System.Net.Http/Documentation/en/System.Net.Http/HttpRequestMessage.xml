@@ -28,6 +28,8 @@
 
         
 
+        
+
          class contains headers, the HTTP verb, and potentially data.</para
       >
     </remarks>
@@ -55,6 +57,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.Http.HttpRequestMessage" />
+
+            
 
             
 
@@ -94,8 +98,12 @@
 
             
 
+            
+
              class with an HTTP method and a request <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -111,6 +119,8 @@
 
           
 
+          
+
           The HTTP method.</param
         >
         <param name="requestUri">
@@ -120,8 +130,12 @@
 
           
 
+          
+
           A string that represents the request  <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -160,8 +174,12 @@
 
             
 
+            
+
              class with an HTTP method and a request <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -177,6 +195,8 @@
 
           
 
+          
+
           The HTTP method.</param
         >
         <param name="requestUri">
@@ -186,8 +206,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -228,12 +252,16 @@
 
                 
 
+                
+
                  - HTTP content based on a byte array.</para
               >
             </item>
             <item>
               <para>
                 <see cref="T:System.Net.Http.FormUrlEncodedContent" />
+
+                
 
                 
 
@@ -250,12 +278,16 @@
 
                 
 
+                
+
                  - HTTP content that gets serialized using the multipart/* content type specification. </para
               >
             </item>
             <item>
               <para>
                 <see cref="T:System.Net.Http.MultipartFormDataContent" />
+
+                
 
                 
 
@@ -272,12 +304,16 @@
 
                 
 
+                
+
                  - HTTP content based on a stream. </para
               >
             </item>
             <item>
               <para>
                 <see cref="T:System.Net.Http.StringContent" />
+
+                
 
                 
 
@@ -320,6 +356,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -352,8 +390,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -366,8 +408,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -380,8 +426,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Net.Http.HttpRequestMessage" />
+
+            
 
             
 
@@ -400,11 +450,15 @@
 
             
 
+            
+
              and optionally disposes of the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -511,8 +565,12 @@
 
             
 
+            
+
              is a relative Uri, it will be combined with the  <see
              cref="P:System.Net.Http.HttpClient.BaseAddress" />
+
+            
 
             
 
@@ -526,6 +584,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -561,6 +621,8 @@
           <para
             >Returns <see
              cref="T:System.String" />
+
+            
 
             
 

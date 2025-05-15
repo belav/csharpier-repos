@@ -27,6 +27,8 @@
 
         
 
+        
+
          property to true programmatically, you can enable the flow of managed exception information to the client for debugging purposes, as well as the publication of HTML information files for users browsing the service in Web browsers.</para
       >
       <block subset="none" type="note">
@@ -40,8 +42,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageEnabled" />
+
+        
 
         
 
@@ -57,8 +63,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageUrl" />
+
+        
 
         
 
@@ -69,6 +79,8 @@
       <para
         >To enable or disable one of the <see
          cref="T:System.ServiceModel.Configuration.ServiceDebugElement" />
+
+        
 
         
 
@@ -88,10 +100,14 @@
 
             
 
+            
+
              element for your indigo2 service. (Endpoint behaviors are configured on &lt;endpoint&gt; elements; service behaviors on <format
              type="text/html">
               <a href="13123dd6-c4a9-4a04-a984-df184b851788">&lt;service&gt;</a>
             </format>
+
+            
 
             
 
@@ -111,10 +127,14 @@
 
             
 
+            
+
              section and add a <format
              type="text/html">
               <a href="b90ca3bc-3c22-4174-b903-e3a39898bd27">&lt;behavior&gt;</a>
             </format>
+
+            
 
             
 
@@ -129,10 +149,14 @@
 
             
 
+            
+
              element; service behaviors are configured using a <format
              type="text/html">
               <a href="5aed9062-cc36-4b72-b9dd-a3018b8ffafc">&lt;serviceBehaviors&gt;</a>
             </format>
+
+            
 
             
 
@@ -152,10 +176,14 @@
 
             
 
+            
+
              element to the <format
              type="text/html">
               <a href="b90ca3bc-3c22-4174-b903-e3a39898bd27">&lt;behavior&gt;</a>
             </format>
+
+            
 
             
 
@@ -191,6 +219,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Configuration.ServiceDebugElement" />
+
+            
 
             
 
@@ -307,6 +337,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -340,6 +372,8 @@
 
             
 
+            
+
              property, you must set this property to true. In addition, one of the following conditions must also be met:</para
           >
           <list type="bullet">
@@ -347,6 +381,8 @@
               <para
                 >The <see
                  cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageUrl" />
+
+                
 
                 
 
@@ -367,6 +403,8 @@
 
             
 
+            
+
              property, any other scenario in which neither of the preceding criteria is met results in no exception and no HTML help page.</para
           >
         </remarks>
@@ -375,6 +413,8 @@
           <para
             >Gets or sets a value that indicates whether indigo1 publishes an HTML help page at the address specified by the <see
              cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageUrl" />
+
+            
 
             
 
@@ -422,6 +462,8 @@
           <para
             >This property is valid only when the <see
              cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpHelpPageEnabled" />
+
+            
 
             
 
@@ -503,6 +545,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -536,6 +580,8 @@
 
             
 
+            
+
              property, you must set this property to true. In addition, one of the following conditions must also be met:</para
           >
           <list type="bullet">
@@ -543,6 +589,8 @@
               <para
                 >The <see
                  cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageUrl" />
+
+                
 
                 
 
@@ -563,6 +611,8 @@
 
                 
 
+                
+
                  property, any other scenario in which neither of the preceding criteria is met results in no exception and no HTML help page.</para
               >
             </item>
@@ -573,6 +623,8 @@
           <para
             >Gets or sets a value that specifies whether indigo1 returns an HTML help file over HTTPS at the address specified by the <see
              cref="P:System.ServiceModel.Configuration.ServiceDebugElement.HttpsHelpPageUrl" />
+
+            
 
             
 
@@ -625,6 +677,8 @@
 
             
 
+            
+
              property is true.</para
           >
         </remarks>
@@ -662,6 +716,8 @@
           <para
             >If you set the <see
              cref="P:System.ServiceModel.Configuration.ServiceDebugElement.IncludeExceptionDetailInFaults" />
+
+            
 
             
 

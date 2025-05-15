@@ -32,12 +32,16 @@
 
         
 
+        
+
          changed in the .NET Framework version 2.0. The loader now shares resources across application domains only for assemblies that have been added to the global assembly cache. </para
       >
       <block subset="none" type="note">
         <para
           >If custom code access security policy is set for the <see
            cref="T:System.AppDomain" />
+
+          
 
           
 
@@ -50,8 +54,12 @@
 
           
 
+          
+
            property, and the <see
            cref="T:System.AppDomain" />
+
+          
 
           
 
@@ -64,6 +72,8 @@
 
           
 
+          
+
            flag, the effect is the same as specifying the <see
            cref="F:System.LoaderOptimization.MultiDomainHost" />
 
@@ -71,8 +81,12 @@
 
           
 
+          
+
            flag; that is, only assemblies in the GAC are shared. When this occurs, the loader does not throw an exception and the application does not experience the performance gains associated with the <see
            cref="F:System.LoaderOptimization.MultiDomain" />
+
+          
 
           
 
@@ -91,6 +105,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -99,6 +115,8 @@
       <para
         >An enumeration used with the <see
          cref="T:System.LoaderOptimizationAttribute" />
+
+        
 
         
 
@@ -166,6 +184,8 @@
           <para
             >Do not use. This mask selects the domain-related values, screening out the unused <see
              cref="F:System.LoaderOptimization.DisallowBindings" />
+
+            
 
             
 
@@ -247,6 +267,8 @@
           <para
             >Indicates that no optimizations for sharing internal resources are specified. If the default domain or hosting interface specified an optimization, then the loader uses that; otherwise, the loader uses <see
              cref="F:System.LoaderOptimization.SingleDomain" />
+
+            
 
             
 

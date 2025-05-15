@@ -31,6 +31,8 @@
 
         
 
+        
+
          elements in a project. </para
       >
     </summary>
@@ -63,6 +65,8 @@
 
             
 
+            
+
              element to the end of the project.</para
           >
         </summary>
@@ -76,8 +80,12 @@
 
             
 
+            
+
              object representing the created <unmanagedCodeEntityReference
             >Target</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -88,6 +96,8 @@
         </returns>
         <param name="targetName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -123,8 +133,12 @@
 
             
 
+            
+
              to a compatible one-dimensional <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -140,8 +154,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -154,8 +172,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -170,8 +192,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -203,10 +229,14 @@
 
             
 
+            
+
              object in the collection represents a <format
              type="text/html">
               <a href="350f6fc2-86b3-45f2-a31e-ece0e6bd4dca">Target</a>
             </format>
+
+            
 
             
 
@@ -225,8 +255,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:Microsoft.Build.BuildEngine.TargetCollection" />
+
+            
 
             
 
@@ -262,8 +296,12 @@
 
             
 
+            
+
              exists in the <see
              cref="T:Microsoft.Build.BuildEngine.TargetCollection" />
+
+            
 
             
 
@@ -282,11 +320,15 @@
 
             
 
+            
+
              element exists; otherwise, false.</para
           >
         </returns>
         <param name="targetName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -321,8 +363,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:Microsoft.Build.BuildEngine.TargetCollection" />
+
+            
 
             
 
@@ -341,6 +387,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -354,8 +402,12 @@
 
             
 
+            
+
              for the entire <see
              cref="T:Microsoft.Build.BuildEngine.TargetCollection" />
+
+            
 
             
 
@@ -384,6 +436,8 @@
           <para
             >Gets a value indicating whether access to the <see
              cref="T:Microsoft.Build.BuildEngine.TargetCollection" />
+
+            
 
             
 
@@ -447,11 +501,15 @@
 
             
 
+            
+
              element from the project.</para
           >
         </summary>
         <param name="targetToRemove">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -479,6 +537,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:Microsoft.Build.BuildEngine.TargetCollection" />
+
+            
 
             
 

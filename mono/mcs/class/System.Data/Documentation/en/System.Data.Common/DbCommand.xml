@@ -45,6 +45,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -71,6 +73,8 @@
           <para
             >Attempts to cancels the execution of a <see
              cref="T:System.Data.Common.DbCommand" />
+
+            
 
             
 
@@ -111,8 +115,12 @@
 
             
 
+            
+
              to StoredProcedure, you should set the <see
              cref="P:System.Data.Common.DbCommand.CommandText" />
+
+            
 
             
 
@@ -149,8 +157,12 @@
 
             
 
+            
+
              is generated if the assigned <see
              cref="P:System.Data.Common.DbCommand.CommandTimeout" />
+
+            
 
             
 
@@ -199,8 +211,12 @@
 
             
 
+            
+
              to StoredProcedure, you should set the <see
              cref="P:System.Data.Common.DbCommand.CommandText" />
+
+            
 
             
 
@@ -214,6 +230,8 @@
           <para
             >Indicates or specifies how the <see
              cref="P:System.Data.Common.DbCommand.CommandText" />
+
+            
 
             
 
@@ -261,8 +279,12 @@
 
             
 
+            
+
              used by this <see
              cref="T:System.Data.Common.DbCommand" />
+
+            
 
             
 
@@ -299,6 +321,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -307,6 +331,8 @@
           <para
             >A <see
              cref="T:System.Data.Common.DbParameter" />
+
+            
 
             
 
@@ -343,6 +369,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -351,6 +379,8 @@
           <para
             >A <see
              cref="T:System.Data.Common.DbParameter" />
+
+            
 
             
 
@@ -387,8 +417,12 @@
 
             
 
+            
+
              used by this <see
              cref="T:System.Data.Common.DbCommand" />
+
+            
 
             
 
@@ -425,6 +459,8 @@
 
             
 
+            
+
              objects.</para
           >
         </summary>
@@ -456,8 +492,12 @@
 
             
 
+            
+
              within which this <see
              cref="T:System.Data.Common.DbCommand" />
+
+            
 
             
 
@@ -534,8 +574,12 @@
 
           
 
+          
+
           An instance of <see
            cref="T:System.Data.CommandBehavior" />
+
+          
 
           
 
@@ -567,11 +611,15 @@
 
             
 
+            
+
              to perform catalog operations (for example, querying the structure of a database or creating database objects such as tables), or to change the data in a database by executing UPDATE, INSERT, or DELETE statements.</para
           >
           <para
             >Although <see
              cref="M:System.Data.Common.DbCommand.ExecuteNonQuery" />
+
+            
 
             
 
@@ -617,6 +665,8 @@
 
             
 
+            
+
              against the <see
              cref="P:System.Data.Common.DbCommand.Connection" />
 
@@ -624,8 +674,12 @@
 
             
 
+            
+
             , and returns an <see
              cref="T:System.Data.Common.DbDataReader" />
+
+            
 
             
 
@@ -639,6 +693,8 @@
           <para
             >A <see
              cref="T:System.Data.Common.DbDataReader" />
+
+            
 
             
 
@@ -677,8 +733,12 @@
 
             
 
+            
+
              against the <see
              cref="P:System.Data.Common.DbCommand.Connection" />
+
+            
 
             
 
@@ -691,8 +751,12 @@
 
             
 
+            
+
              using one of the <see
              cref="T:System.Data.CommandBehavior" />
+
+            
 
             
 
@@ -711,6 +775,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -721,8 +787,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.CommandBehavior" />
+
+          
 
           
 
@@ -754,6 +824,8 @@
 
             
 
+            
+
              method to retrieve a single value (for example, an aggregate value) from a database. This requires less code than using the <see
              cref="M:System.Data.Common.DbCommand.ExecuteReader" />
 
@@ -761,8 +833,12 @@
 
             
 
+            
+
              method and performing the operations necessary to generate the single value using the data returned by a <see
              cref="T:System.Data.Common.DbDataReader" />
+
+            
 
             
 
@@ -816,12 +892,16 @@
 
             
 
+            
+
              objects. For more information on parameters, see <format
              type="text/html">
               <a href="537d8a2c-d40b-4000-83eb-bc1fcc93f707"
                 >Configuring Parameters and Parameter Data Types (ADO.NET)</a
               >
             </format>
+
+            
 
             
 
@@ -854,8 +934,12 @@
 
             
 
+            
+
              property is set to TableDirect, Prepare does nothing. If <see
              cref="P:System.Data.Common.DbCommand.CommandType" />
+
+            
 
             
 
@@ -897,6 +981,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -910,8 +996,12 @@
 
             
 
+            
+
              used by this instance of the <see
              cref="T:System.Data.IDbCommand" />
+
+            
 
             
 
@@ -946,8 +1036,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Data.IDbCommand" />
+
+            
 
             
 
@@ -963,6 +1057,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -971,6 +1067,8 @@
           <para
             >Creates a new instance of an <see
              cref="T:System.Data.IDbDataParameter" />
+
+            
 
             
 
@@ -1006,8 +1104,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Data.IDbCommand" />
+
+            
 
             
 
@@ -1018,6 +1120,8 @@
           <para
             >For more information, see <see
              cref="M:System.Data.IDbCommand.ExecuteReader" />
+
+            
 
             
 
@@ -1036,6 +1140,8 @@
 
             
 
+            
+
              against the <see
              cref="P:System.Data.IDbCommand.Connection" />
 
@@ -1043,8 +1149,12 @@
 
             
 
+            
+
              and builds an <see
              cref="T:System.Data.IDataReader" />
+
+            
 
             
 
@@ -1058,6 +1168,8 @@
           <para
             >An <see
              cref="T:System.Data.IDataReader" />
+
+            
 
             
 
@@ -1094,8 +1206,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Data.IDbCommand" />
+
+            
 
             
 
@@ -1106,6 +1222,8 @@
           <para
             >For more information, see <see
              cref="M:System.Data.IDbCommand.ExecuteReader(System.Data.CommandBehavior)" />
+
+            
 
             
 
@@ -1124,8 +1242,12 @@
 
             
 
+            
+
              against the <see
              cref="P:System.Data.IDbCommand.Connection" />
+
+            
 
             
 
@@ -1138,8 +1260,12 @@
 
             
 
+            
+
              using one of the <see
              cref="T:System.Data.CommandBehavior" />
+
+            
 
             
 
@@ -1158,6 +1284,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -1168,8 +1296,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.CommandBehavior" />
+
+          
 
           
 
@@ -1203,8 +1335,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Data.IDbCommand" />
+
+            
 
             
 
@@ -1220,6 +1356,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1228,6 +1366,8 @@
           <para
             >Gets the <see
              cref="T:System.Data.IDataParameterCollection" />
+
+            
 
             
 
@@ -1262,6 +1402,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1275,8 +1417,12 @@
 
             
 
+            
+
              within which this <see
              cref="T:System.Data.Common.DbCommand" />
+
+            
 
             
 
@@ -1321,8 +1467,12 @@
 
             
 
+            
+
              within which this <see
              cref="T:System.Data.Common.DbCommand" />
+
+            
 
             
 
@@ -1363,8 +1513,12 @@
 
             
 
+            
+
              if the value entered was not one of the <see
              cref="T:System.Data.UpdateRowSource" />
+
+            
 
             
 
@@ -1383,8 +1537,12 @@
 
             
 
+            
+
              when used by the Update method of a <see
              cref="T:System.Data.Common.DbDataAdapter" />
+
+            
 
             
 

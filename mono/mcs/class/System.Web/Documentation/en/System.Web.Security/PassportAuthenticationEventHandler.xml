@@ -32,6 +32,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -40,6 +42,8 @@
       <para
         >Represents the method that handles the PassportAuthentication_OnAuthenticate event of a <see
          cref="T:System.Web.Security.PassportAuthenticationModule" />
+
+        
 
         
 

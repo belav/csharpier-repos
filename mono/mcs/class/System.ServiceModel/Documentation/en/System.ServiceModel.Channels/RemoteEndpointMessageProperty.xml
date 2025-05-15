@@ -63,6 +63,8 @@
 
             
 
+            
+
              class for a specified IP address and port that identify the client from which the message was sent.</para
           >
         </summary>
@@ -73,10 +75,14 @@
 
           
 
+          
+
           The IP address of the remote endpoint associated with the message.</param
         >
         <param name="port">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -26,6 +26,8 @@
 
         
 
+        
+
          event is raised when the user logs off or shuts down the system.</para
       >
     </remarks>
@@ -34,6 +36,8 @@
       <para
         >Provides data for the <see
          cref="E:Microsoft.Win32.SystemEvents.SessionEnded" />
+
+        
 
         
 
@@ -74,6 +78,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -84,8 +90,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:Microsoft.Win32.SessionEndReasons" />
+
+          
 
           
 

@@ -27,11 +27,15 @@
 
         
 
+        
+
          class is used to represent the style for a table control. It encapsulates the properties that control the appearance of a table and can be applied to multiple table controls to provide a common appearance.</para
       >
       <para
         >You can specify an image to display in the background of the table by setting the <see
          cref="P:System.Web.UI.WebControls.TableStyle.BackImageUrl" />
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
          property. The spacing between the contents of a cell and the cell border is specified using the <see
          cref="P:System.Web.UI.WebControls.TableStyle.CellPadding" />
+
+        
 
         
 
@@ -58,8 +66,12 @@
 
         
 
+        
+
          property. The horizontal alignment of the table in relation to other elements on the Web Forms page is indicated by the <see
          cref="P:System.Web.UI.WebControls.TableStyle.HorizontalAlign" />
+
+        
 
         
 
@@ -76,6 +88,8 @@
       <para
         >Represents the style for the <see
          cref="T:System.Web.UI.WebControls.Table" />
+
+        
 
         
 
@@ -102,6 +116,8 @@
 
             
 
+            
+
              class using default values.</para
           >
         </remarks>
@@ -110,6 +126,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.TableStyle" />
+
+            
 
             
 
@@ -142,8 +160,12 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 
@@ -162,6 +184,8 @@
 
             
 
+            
+
              class with the specified state bag information.</para
           >
         </summary>
@@ -172,8 +196,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.StateBag" />
+
+          
 
           
 
@@ -216,10 +244,14 @@
 
           
 
+          
+
           The output stream that renders HTML content to the client. </param
         >
         <param name="owner">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -247,6 +279,8 @@
           <para
             >Use the <see
              cref="P:System.Web.UI.WebControls.TableStyle.BackImageUrl" />
+
+            
 
             
 
@@ -299,6 +333,8 @@
 
             
 
+            
+
              property to control the spacing between the contents of a cell and the cell's border. The padding amount specified is added to all four sides of a cell.</para
           >
           <para>All cells in the same column of a data listing control share the same cell width. Therefore, if the content of one cell is longer than the content of other cells in the same column, the padding amount is applied to the widest cell. All other cells in the column are also set with this cell width.</para>
@@ -342,6 +378,8 @@
 
             
 
+            
+
              property to control the spacing between adjacent cells in a data listing control. This spacing is applied both vertically and horizontally. The cell spacing is uniform for the entire data list control. Individual cell spacing between each row or column cannot be specified.</para
           >
           <block subset="none" type="note">
@@ -353,8 +391,12 @@
 
               
 
+              
+
                property to a value that displays the cell borders, a gap is displayed between the borders of adjacent cells. In this situation, the <see
                cref="P:System.Web.UI.WebControls.TableStyle.CellSpacing" />
+
+              
 
               
 
@@ -408,6 +450,8 @@
 
           
 
+          
+
           The style to copy. </param
         >
       </Docs>
@@ -443,6 +487,8 @@
 
             
 
+            
+
              method to add the style properties of the <see
              cref="T:System.Web.UI.WebControls.TableStyle" />
 
@@ -450,8 +496,12 @@
 
             
 
+            
+
              object to the specified <see
              cref="T:System.Web.UI.CssStyleCollection" />
+
+            
 
             
 
@@ -470,8 +520,12 @@
 
             
 
+            
+
              object to the specified <see
              cref="T:System.Web.UI.CssStyleCollection" />
+
+            
 
             
 
@@ -487,8 +541,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.CssStyleCollection" />
+
+          
 
           
 
@@ -503,8 +561,12 @@
 
           
 
+          
+
           An object implemented by the <see
            cref="T:System.Web.UI.IUrlResolutionService" />
+
+          
 
           
 
@@ -536,8 +598,12 @@
 
             
 
+            
+
              property to specify whether the border between the cells of the data list control is displayed. This property is set with one of the <see
              cref="T:System.Web.UI.WebControls.GridLines" />
+
+            
 
             
 
@@ -639,8 +705,12 @@
 
             
 
+            
+
              property to specify the horizontal alignment of the data list control within its container. This property is set with one of the <see
              cref="T:System.Web.UI.WebControls.HorizontalAlign" />
+
+            
 
             
 
@@ -740,6 +810,8 @@
         </summary>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

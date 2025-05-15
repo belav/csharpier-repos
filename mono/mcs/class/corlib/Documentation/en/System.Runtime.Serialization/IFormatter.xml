@@ -27,11 +27,15 @@
 
         
 
+        
+
          architecture.</para
       >
       <para
         >Objects controlling their own serialization can do so by implementing the <see
          cref="T:System.Runtime.Serialization.ISerializable" />
+
+        
 
         
 
@@ -76,8 +80,12 @@
 
             
 
+            
+
              method on the <see
              cref="T:System.Runtime.Serialization.SerializationBinder" />
+
+            
 
             
 
@@ -90,8 +98,12 @@
 
             
 
+            
+
              object. The binder can find a <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -106,6 +118,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Runtime.Serialization.SerializationBinder" />
+
+            
 
             
 
@@ -146,8 +160,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Runtime.Serialization.ISerializationSurrogate" />
+
+            
 
             
 
@@ -160,6 +178,8 @@
 
             
 
+            
+
              indicates the destination (during serialization) or the source (during deserialization) of the data. An object implementing <see
              cref="T:System.Runtime.Serialization.ISerializable" />
 
@@ -167,8 +187,12 @@
 
             
 
+            
+
              can alter the data that it transmits depending on value of the <see
              cref="P:System.Runtime.Serialization.IFormatter.Context" />
+
+            
 
             
 
@@ -182,6 +206,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -224,11 +250,15 @@
 
             
 
+            
+
              method reads graph information from the stream and reconstructs a clone of the original graph. The topology of the graph is preserved.</para
           >
           <para
             >The deserialization process allocates an empty object of the appropriate type and repopulates its fields from the data transmitted in the <paramref
              name="serializationStream" />
+
+            
 
             
 
@@ -247,6 +277,8 @@
         </returns>
         <param name="serializationStream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -289,6 +321,8 @@
 
             
 
+            
+
              method automatically serializes the provided objects, and all objects connected to it, to the provided stream.</para
           >
           <para>By default, the serialization process records an object's state by gathering the values of all its fields (public and private). These fields are saved to the stream along with information about the object such as the name qualified by the assembly for its type.</para>
@@ -304,10 +338,14 @@
 
           
 
+          
+
           The stream where the formatter puts the serialized data. This stream can reference a variety of backing stores (such as files, network, memory, and so on). </param
         >
         <param name="graph">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -347,8 +385,12 @@
 
             
 
+            
+
              allows the user to specify an object best suited to handle the serialization of a particular object or class of objects. Think of it as an implementation of <see
              cref="T:System.Runtime.Serialization.ISerializable" />
+
+            
 
             
 
@@ -362,6 +404,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Runtime.Serialization.SurrogateSelector" />
+
+            
 
             
 

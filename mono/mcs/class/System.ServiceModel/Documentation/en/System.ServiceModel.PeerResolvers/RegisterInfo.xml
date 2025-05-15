@@ -30,8 +30,12 @@
 
         
 
+        
+
          (or an implementation of  <see
          cref="M:System.ServiceModel.PeerResolvers.IPeerResolverContract.Register(System.ServiceModel.PeerResolvers.RegisterInfo)" />
+
+        
 
         
 
@@ -64,6 +68,8 @@
           <para
             >Initializes a new default instance of the <see
              cref="T:System.ServiceModel.PeerResolvers.RegisterInfo" />
+
+            
 
             
 
@@ -104,12 +110,16 @@
 
             
 
+            
+
              class with the supplied client ID, mesh ID, and endpoint address(es).</para
           >
         </summary>
         <param name="client">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.Guid" />
+
+          
 
           
 
@@ -125,11 +135,15 @@
 
           
 
+          
+
            that specifies the ID of the mesh in which the peer node participates.</param
         >
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.ServiceModel.PeerNodeAddress" />
+
+          
 
           
 
@@ -157,6 +171,8 @@
           <para
             >Gets a <see
              cref="T:System.Guid" />
+
+            
 
             
 

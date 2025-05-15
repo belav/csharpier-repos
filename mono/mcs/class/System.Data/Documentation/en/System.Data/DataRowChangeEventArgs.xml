@@ -28,8 +28,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Data.DataTable.RowChanging" />
+
+        
 
         
 
@@ -42,6 +46,8 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Data.DataTable.OnRowDeleting(System.Data.DataRowChangeEventArgs)" />
 
@@ -49,8 +55,12 @@
 
         
 
+        
+
          events occur when an action is performed on a <see
          cref="T:System.Data.DataRow" />
+
+        
 
         
 
@@ -69,8 +79,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Data.DataTable.RowChanging" />
+
+        
 
         
 
@@ -83,8 +97,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Data.DataTable.OnRowDeleted(System.Data.DataRowChangeEventArgs)" />
+
+        
 
         
 
@@ -118,6 +136,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -128,8 +148,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataRow" />
+
+          
 
           
 
@@ -144,8 +168,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.DataRowAction" />
+
+          
 
           
 
@@ -173,6 +201,8 @@
           <para
             >Gets the action that has occurred on a <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 

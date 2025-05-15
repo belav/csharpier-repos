@@ -27,8 +27,12 @@
 
         
 
+        
+
          event is raised when the contents of the data source change or when the value of the <see
          cref="P:System.Windows.Forms.DataGridView.DataSource" />
+
+        
 
         
 
@@ -41,6 +45,8 @@
 
         
 
+        
+
         , or <see
          cref="P:System.Windows.Forms.Control.BindingContext" />
 
@@ -48,8 +54,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -65,6 +75,8 @@
 
         
 
+        
+
          to its underlying list.</para
       >
     </remarks>
@@ -73,6 +85,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.DataGridView.DataBindingComplete" />
+
+        
 
         
 
@@ -105,6 +119,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -115,8 +131,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.ComponentModel.ListChangedType" />
+
+          
 
           
 

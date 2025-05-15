@@ -32,6 +32,8 @@
 
         
 
+        
+
          class can be used to return information about a document type declaration. Use the <see
          cref="M:System.Xml.XmlDocument.CreateDocumentType(System.String,System.String,System.String,System.String)" />
 
@@ -39,8 +41,12 @@
 
         
 
+        
+
          method to create an <see
          cref="T:System.Xml.XmlDocumentType" />
+
+        
 
         
 
@@ -88,8 +94,12 @@
 
             
 
+            
+
              directly; instead, use members such as <see
              cref="P:System.Xml.XmlDocument.DocumentType" />
+
+            
 
             
 
@@ -108,6 +118,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -118,8 +130,12 @@
 
           
 
+          
+
           The qualified name; see the <see
            cref="P:System.Xml.XmlDocumentType.Name" />
+
+          
 
           
 
@@ -134,8 +150,12 @@
 
           
 
+          
+
           The public identifier; see the <see
            cref="P:System.Xml.XmlDocumentType.PublicId" />
+
+          
 
           
 
@@ -150,8 +170,12 @@
 
           
 
+          
+
           The system identifier; see the <see
            cref="P:System.Xml.XmlDocumentType.SystemId" />
+
+          
 
           
 
@@ -166,8 +190,12 @@
 
           
 
+          
+
           The DTD internal subset; see the <see
            cref="P:System.Xml.XmlDocumentType.InternalSubset" />
+
+          
 
           
 
@@ -177,6 +205,8 @@
         >
         <param name="doc">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -218,11 +248,15 @@
 
             
 
+            
+
              returns null).</para
           >
           <para
             >To see how this method behaves with other node types, see <see
              cref="M:System.Xml.XmlNode.CloneNode(System.Boolean)" />
+
+            
 
             
 
@@ -241,6 +275,8 @@
         </returns>
         <param name="deep">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -276,6 +312,8 @@
           <para
             >Gets the collection of <see
              cref="T:System.Xml.XmlEntity" />
+
+            
 
             
 
@@ -433,6 +471,8 @@
 
             
 
+            
+
              nodes present in the document type declaration.</para
           >
         </summary>
@@ -513,11 +553,15 @@
 
             
 
+            
+
             . For XmlDocumentType nodes, this method has no effect.</para
           >
         </summary>
         <param name="w">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -560,11 +604,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="w">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -24,8 +24,12 @@
 
         
 
+        
+
          class contains a host name or an IP address and remote port information needed by an application to connect to a service on a host. By combining the host name or IP address and port number of a service, the <see
          cref="T:System.Net.DnsEndPoint" />
+
+        
 
         
 
@@ -65,8 +69,12 @@
 
             
 
+            
+
              constructor can be used to initialize a <see
              cref="T:System.Net.DnsEndPoint" />
+
+            
 
             
 
@@ -79,8 +87,12 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Net.Sockets.AddressFamily.Unknown" />
+
+            
 
             
 
@@ -96,8 +108,12 @@
 
             
 
+            
+
              will remain <see
              cref="F:System.Net.Sockets.AddressFamily.Unknown" />
+
+            
 
             
 
@@ -110,6 +126,8 @@
 
             
 
+            
+
              property of any <see
              cref="T:System.Net.Sockets.Socket" />
 
@@ -117,8 +135,12 @@
 
             
 
+            
+
              that is created by calls to the <see
              cref="M:System.Net.Sockets.Socket.ConnectAsync(System.Net.Sockets.SocketType,System.Net.Sockets.ProtocolType,System.Net.Sockets.SocketAsyncEventArgs)" />
+
+            
 
             
 
@@ -137,11 +159,15 @@
 
             
 
+            
+
              class with the host name or string representation of an IP address and a port number.</para
           >
         </summary>
         <param name="host">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -156,8 +182,12 @@
 
           
 
+          
+
           The port number associated with the address, or 0 to specify any available port. <paramref
            name="port" />
+
+          
 
           
 
@@ -196,8 +226,12 @@
 
             
 
+            
+
              constructor can be used to initialize a <see
              cref="T:System.Net.DnsEndPoint" />
+
+            
 
             
 
@@ -213,8 +247,12 @@
 
             
 
+            
+
             , the address family of the <see
              cref="T:System.Net.DnsEndPoint" />
+
+            
 
             
 
@@ -227,8 +265,12 @@
 
             
 
+            
+
              even after use. The <see
              cref="P:System.Net.DnsEndPoint.AddressFamily" />
+
+            
 
             
 
@@ -241,8 +283,12 @@
 
             
 
+            
+
              that is created by calls to the <see
              cref="M:System.Net.Sockets.Socket.ConnectAsync(System.Net.Sockets.SocketType,System.Net.Sockets.ProtocolType,System.Net.Sockets.SocketAsyncEventArgs)" />
+
+            
 
             
 
@@ -261,11 +307,15 @@
 
             
 
+            
+
              class with the host name or string representation of an IP address, a port number, and an address family.</para
           >
         </summary>
         <param name="host">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -280,8 +330,12 @@
 
           
 
+          
+
           The port number associated with the address, or 0 to specify any available port. <paramref
            name="port" />
+
+          
 
           
 
@@ -296,8 +350,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Net.Sockets.AddressFamily" />
+
+          
 
           
 
@@ -335,8 +393,12 @@
 
             
 
+            
+
              property indicates the address family for an instance of the <see
              cref="T:System.Net.DnsEndPoint" />
+
+            
 
             
 
@@ -378,6 +440,8 @@
 
             
 
+            
+
              method compares the current <see
              cref="T:System.Net.DnsEndPoint" />
 
@@ -385,8 +449,12 @@
 
             
 
+            
+
              instance with the <paramref
              name="comparand" />
+
+            
 
             
 
@@ -405,6 +473,8 @@
 
             
 
+            
+
              objects.</para
           >
         </summary>
@@ -413,6 +483,8 @@
           <para
             >true if the two <see
              cref="T:System.Net.DnsEndPoint" />
+
+            
 
             
 
@@ -428,8 +500,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.DnsEndPoint" />
+
+          
 
           
 
@@ -464,8 +540,12 @@
 
             
 
+            
+
              method returns a hash code of the <see
              cref="T:System.Net.DnsEndPoint" />
+
+            
 
             
 
@@ -484,6 +564,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -492,6 +574,8 @@
           <para
             >An integer hash value for the <see
              cref="T:System.Net.DnsEndPoint" />
+
+            
 
             
 
@@ -524,8 +608,12 @@
 
             
 
+            
+
              property indicates the host name or string representation of the IP address for an instance of the <see
              cref="T:System.Net.DnsEndPoint" />
+
+            
 
             
 
@@ -563,6 +651,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -593,6 +683,8 @@
 
             
 
+            
+
              method returns a string that contains the address family, the host name or IP address string, and the port number.</para
           >
         </remarks>
@@ -606,6 +698,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -614,6 +708,8 @@
           <para
             >A string containing the address family, host name or IP address string, and the port number of the specified <see
              cref="T:System.Net.DnsEndPoint" />
+
+            
 
             
 

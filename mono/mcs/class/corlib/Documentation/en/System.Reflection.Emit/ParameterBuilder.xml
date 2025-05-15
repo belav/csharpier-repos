@@ -48,8 +48,12 @@
 
         
 
+        
+
          attributes require that you call <see
          cref="M:System.Reflection.Emit.TypeBuilder.DefineMethod(System.String,System.Reflection.MethodAttributes,System.Type,System.Type[])" />
+
+        
 
         
 
@@ -62,8 +66,12 @@
 
         
 
+        
+
          with ParameterAttributes.Out for parameter 1 of a MethodBuilder, then parameter 1 of <see
          cref="T:System.Reflection.Emit.MethodBuilder" />
+
+        
 
         
 
@@ -97,6 +105,8 @@
           <para
             >The values of the attribute correspond to the values of the <see
              cref="T:System.Reflection.ParameterAttributes" />
+
+            
 
             
 
@@ -281,8 +291,12 @@
 
             
 
+            
+
              is restricted to the following types: Boolean, SByte, Int16, Int32, Int64, Byte, UInt16, UInt32, UInt64, Single, Double, DateTime, Char, String, and Enum. If the parameter type is a reference type, CLS compliance requires <paramref
              name="defaultValue" />
+
+            
 
             
 
@@ -295,8 +309,12 @@
 
             
 
+            
+
              can be non-null for a reference type as long as the value can be assigned to that reference type. For example, an Int32 value can be assigned to a parameter of type <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -311,6 +329,8 @@
         </summary>
         <param name="defaultValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -349,6 +369,8 @@
         </summary>
         <param name="customBuilder">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -396,6 +418,8 @@
 
             
 
+            
+
             . The documentation is available online; see <see
              cref="http://go.microsoft.com/fwlink/?LinkID=99212"
               >ECMA C# and Common Language Infrastructure Standards</see
@@ -405,10 +429,14 @@
 
             
 
+            
+
              on MSDN and <see
              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
+
+            
 
             
 
@@ -428,10 +456,14 @@
 
           
 
+          
+
           The constructor for the custom attribute. </param
         >
         <param name="binaryAttribute">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -478,6 +510,8 @@
 
             
 
+            
+
              if the containing type has been created using TypeBuilder.CreateType().</para
           >
         </remarks>
@@ -487,6 +521,8 @@
         </summary>
         <param name="unmanagedMarshal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -565,6 +601,8 @@
 
             
 
+            
+
             , see the MSDN Library.</para
           >
         </remarks>
@@ -579,6 +617,8 @@
 
           
 
+          
+
           The type information to return.</param
         >
         <param name="lcid">
@@ -588,10 +628,14 @@
 
           
 
+          
+
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

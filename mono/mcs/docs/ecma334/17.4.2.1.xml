@@ -5,7 +5,7 @@
 
       >[Example: In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 public class Color  
 {  
    public static readonly Color Black = new Color(0, 0, 0);  
@@ -22,6 +22,8 @@ public class Color
 }  
 ]]>
       </code_example>
+
+      
 
       
 

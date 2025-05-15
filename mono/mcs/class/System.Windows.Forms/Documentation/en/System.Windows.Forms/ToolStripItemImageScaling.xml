@@ -20,8 +20,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Windows.Forms.ToolStripItem.ImageAlign" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Windows.Forms.ToolStripItem.ImageKey" />
+
+        
 
         
 
@@ -48,6 +56,8 @@
 
         
 
+        
+
          properties pertain to various aspects of image handling. Use images in <see
          cref="T:System.Windows.Forms.ToolStrip" />
 
@@ -55,8 +65,12 @@
 
         
 
+        
+
          controls by setting these properties directly or by setting the run-time–only <see
          cref="P:System.Windows.Forms.ToolStrip.ImageList" />
+
+        
 
         
 
@@ -72,8 +86,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.ToolStripItem" />
+
+        
 
         
 
@@ -90,6 +108,8 @@
 
             
 
+            
+
              is the scale of the final image as determined by the combination of the image's <see
              cref="P:System.Windows.Forms.ToolStripItem.ImageScaling" />
 
@@ -97,8 +117,12 @@
 
             
 
+            
+
              setting and the container's <see
              cref="P:System.Windows.Forms.ToolStrip.AutoSize" />
+
+            
 
             
 
@@ -116,8 +140,12 @@
 
                 
 
+                
+
                  is true (the default) and <see
                  cref="T:System.Windows.Forms.ToolStripItemImageScaling" />
+
+                
 
                 
 
@@ -130,8 +158,12 @@
 
                 
 
+                
+
                 , no image scaling occurs, and the <see
                  cref="T:System.Windows.Forms.ToolStrip" />
+
+                
 
                 
 
@@ -149,8 +181,12 @@
 
                 
 
+                
+
                  is false and <see
                  cref="T:System.Windows.Forms.ToolStripItemImageScaling" />
+
+                
 
                 
 
@@ -163,8 +199,12 @@
 
                 
 
+                
+
                 , neither image nor <see
                  cref="T:System.Windows.Forms.ToolStrip" />
+
+                
 
                 
 
@@ -184,6 +224,8 @@
 
         
 
+        
+
          property.</para
       >
     </remarks>
@@ -197,8 +239,12 @@
 
         
 
+        
+
          is automatically adjusted to fit on a <see
          cref="T:System.Windows.Forms.ToolStrip" />
+
+        
 
         
 
@@ -227,8 +273,12 @@
 
             
 
+            
+
              is not automatically adjusted to fit on a <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -260,8 +310,12 @@
 
             
 
+            
+
              is automatically adjusted to fit on a <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 

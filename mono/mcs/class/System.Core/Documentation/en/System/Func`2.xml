@@ -35,12 +35,16 @@
 
           
 
+          
+
            delegate instead. </para
         >
       </block>
       <para
         >When you use the <see
          cref="T:System.Func`2" />
+
+        
 
         
 
@@ -57,12 +61,16 @@
 
         
 
+        
+
          delegate instead of explicitly defining a new delegate and assigning a named method to it. </para
       >
       <para>code reference: System.Func~2#2</para>
       <para
         >You can also use the <see
          cref="T:System.Func`2" />
+
+        
 
         
 
@@ -79,6 +87,8 @@
 
         
 
+        
+
         .)</para
       >
       <para>code reference: System.Func~2#3</para>
@@ -90,10 +100,14 @@
 
         
 
+        
+
          delegate, as the following example illustrates. (For an introduction to lambda expressions, see <format
          type="text/html">
           <a href="137064b0-3928-4bfa-ba71-c3f9cbd951e2">Lambda Expressions</a>
         </format>
+
+        
 
         
 
@@ -110,12 +124,16 @@
 
         
 
+        
+
         .)</para
       >
       <para>code reference: System.Func~2#4</para>
       <para
         >The underlying type of a lambda expression is one of the generic Func delegates. This makes it possible to pass a lambda expression as a parameter without explicitly assigning it to a delegate. In particular, because many methods of types in the <see
          cref="N:System.Linq" />
+
+        
 
         
 
@@ -128,8 +146,12 @@
 
         
 
+        
+
          parameters, you can pass these methods a lambda expression without explicitly instantiating a <see
          cref="T:System.Func`2" />
+
+        
 
         
 
@@ -143,6 +165,8 @@
       <para
         >Encapsulates a method that has one parameter and returns a value of the type specified by the <paramref
          name="TResult" />
+
+        
 
         
 

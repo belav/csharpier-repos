@@ -25,8 +25,12 @@
 
         
 
+        
+
          wraps around a concrete implementation of <see
          cref="T:System.Xml.XmlResolver" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
          has access to. For instance, <see
          cref="T:System.Xml.XmlSecureResolver" />
+
+        
 
         
 
@@ -56,8 +64,12 @@
 
         
 
+        
+
          object, you provide a valid <see
          cref="T:System.Xml.XmlResolver" />
+
+        
 
         
 
@@ -70,8 +82,12 @@
 
         
 
+        
+
         , or a <see
          cref="T:System.Security.PermissionSet" />
+
+        
 
         
 
@@ -84,8 +100,12 @@
 
         
 
+        
+
          to determine security. Either a <see
          cref="T:System.Security.PermissionSet" />
+
+        
 
         
 
@@ -98,8 +118,12 @@
 
         
 
+        
+
          is called on it to help secure the underlying <see
          cref="T:System.Xml.XmlResolver" />
+
+        
 
         
 
@@ -115,6 +139,8 @@
 
           
 
+          
+
            objects can contain sensitive information such as user credentials. You should be careful when caching <see
            cref="T:System.Xml.XmlSecureResolver" />
 
@@ -122,8 +148,12 @@
 
           
 
+          
+
            objects and should not pass the <see
            cref="T:System.Xml.XmlSecureResolver" />
+
+          
 
           
 
@@ -141,8 +171,12 @@
 
           
 
+          
+
            class when you have evidence that is based on a URL (This can occur when you use the <see
            cref="M:System.Xml.XmlSecureResolver.CreateEvidenceForUrl(System.String)" />
+
+          
 
           
 
@@ -155,8 +189,12 @@
 
           
 
+          
+
            constructor). The policy resolution mechanism of the SQL Server integrated CLR does not utilize the <see
            cref="T:System.Security.Policy.Url" />
+
+          
 
           
 
@@ -169,6 +207,8 @@
 
           
 
+          
+
            information. Instead, the SQL Server integrated CLR grants permissions based on the GUID that the server adds when assemblies are loaded. When you use the <see
            cref="T:System.Xml.XmlSecureResolver" />
 
@@ -176,8 +216,12 @@
 
           
 
+          
+
            in the SQL Server integrated CLR, provide any required evidence directly using a specified <see
            cref="T:System.Security.PermissionSet" />
+
+          
 
           
 
@@ -197,6 +241,8 @@
 
         
 
+        
+
          by wrapping the <see
          cref="T:System.Xml.XmlResolver" />
 
@@ -204,8 +250,12 @@
 
         
 
+        
+
          object and restricting the resources that the underlying <see
          cref="T:System.Xml.XmlResolver" />
+
+        
 
         
 
@@ -247,6 +297,8 @@
 
             
 
+            
+
              class with the <see
              cref="T:System.Xml.XmlResolver" />
 
@@ -254,8 +306,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Security.PermissionSet" />
+
+            
 
             
 
@@ -271,6 +327,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlResolver" />
 
@@ -278,8 +336,12 @@
 
           
 
+          
+
            wrapped by the <see
            cref="T:System.Xml.XmlSecureResolver" />
+
+          
 
           
 
@@ -294,8 +356,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.PermissionSet" />
+
+          
 
           
 
@@ -308,8 +374,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Xml.XmlSecureResolver" />
+
+          
 
           
 
@@ -322,8 +392,12 @@
 
           
 
+          
+
            on the <see
            cref="T:System.Security.PermissionSet" />
+
+          
 
           
 
@@ -336,8 +410,12 @@
 
           
 
+          
+
            on the underlying <see
            cref="T:System.Xml.XmlResolver" />
+
+          
 
           
 
@@ -378,6 +456,8 @@
 
             
 
+            
+
              class with the <see
              cref="T:System.Xml.XmlResolver" />
 
@@ -385,8 +465,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Security.Policy.Evidence" />
+
+            
 
             
 
@@ -402,6 +486,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlResolver" />
 
@@ -409,8 +495,12 @@
 
           
 
+          
+
            wrapped by the <see
            cref="T:System.Xml.XmlSecureResolver" />
+
+          
 
           
 
@@ -425,8 +515,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Policy.Evidence" />
+
+          
 
           
 
@@ -439,8 +533,12 @@
 
           
 
+          
+
            that will be applied to the underlying <see
            cref="T:System.Xml.XmlResolver" />
+
+          
 
           
 
@@ -453,8 +551,12 @@
 
           
 
+          
+
            calls <see
            cref="M:System.Security.PermissionSet.PermitOnly" />
+
+          
 
           
 
@@ -467,6 +569,8 @@
 
           
 
+          
+
            before calling <see
            cref="M:System.Xml.XmlSecureResolver.GetEntity(System.Uri,System.String,System.Type)" />
 
@@ -474,8 +578,12 @@
 
           
 
+          
+
            on the underlying <see
            cref="T:System.Xml.XmlResolver" />
+
+          
 
           
 
@@ -516,8 +624,12 @@
 
               
 
+              
+
                class when you have evidence that is based on a URL (This can occur when you use the <see
                cref="M:System.Xml.XmlSecureResolver.CreateEvidenceForUrl(System.String)" />
+
+              
 
               
 
@@ -530,8 +642,12 @@
 
               
 
+              
+
                constructor). The policy resolution mechanism of the SQL Server integrated CLR does not utilize the <see
                cref="T:System.Security.Policy.Url" />
+
+              
 
               
 
@@ -544,6 +660,8 @@
 
               
 
+              
+
                information. Instead, the SQL Server integrated CLR grants permissions based on the GUID that the server adds when assemblies are loaded. When you use the <see
                cref="T:System.Xml.XmlSecureResolver" />
 
@@ -551,8 +669,12 @@
 
               
 
+              
+
                in the SQL Server integrated CLR, provide any required evidence directly using a specified <see
                cref="T:System.Security.PermissionSet" />
+
+              
 
               
 
@@ -572,8 +694,12 @@
 
             
 
+            
+
              class with the <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -589,6 +715,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlResolver" />
 
@@ -596,8 +724,12 @@
 
           
 
+          
+
            wrapped by the <see
            cref="T:System.Xml.XmlSecureResolver" />
+
+          
 
           
 
@@ -612,8 +744,12 @@
 
           
 
+          
+
           The URL used to create the <see
            cref="T:System.Security.PermissionSet" />
+
+          
 
           
 
@@ -626,8 +762,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Xml.XmlSecureResolver" />
+
+          
 
           
 
@@ -640,8 +780,12 @@
 
           
 
+          
+
            on the created <see
            cref="T:System.Security.PermissionSet" />
+
+          
 
           
 
@@ -654,8 +798,12 @@
 
           
 
+          
+
            on the underlying <see
            cref="T:System.Xml.XmlResolver" />
+
+          
 
           
 
@@ -698,8 +846,12 @@
 
               
 
+              
+
                class when you have evidence that is based on a URL (This can occur when you use the <see
                cref="M:System.Xml.XmlSecureResolver.CreateEvidenceForUrl(System.String)" />
+
+              
 
               
 
@@ -712,8 +864,12 @@
 
               
 
+              
+
                constructor). The policy resolution mechanism of the SQL Server integrated CLR does not utilize the <see
                cref="T:System.Security.Policy.Url" />
+
+              
 
               
 
@@ -726,6 +882,8 @@
 
               
 
+              
+
                information. Instead, the SQL Server integrated CLR grants permissions based on the GUID that the server adds when assemblies are loaded. When you use the <see
                cref="T:System.Xml.XmlSecureResolver" />
 
@@ -733,8 +891,12 @@
 
               
 
+              
+
                in the SQL Server integrated CLR, provide any required evidence directly using a specified <see
                cref="T:System.Security.PermissionSet" />
+
+              
 
               
 
@@ -754,6 +916,8 @@
         </returns>
         <param name="securityUrl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -825,8 +989,12 @@
 
               
 
+              
+
                method by implementing a wrapping implemented IStream that limits the number of bytes read. This helps to guard against situations where malicious code attempts to pass an infinite stream of bytes to the <see
                cref="M:System.Xml.XmlSecureResolver.GetEntity(System.Uri,System.String,System.Type)" />
+
+              
 
               
 
@@ -846,6 +1014,8 @@
 
             
 
+            
+
              created in the constructor by calling <see
              cref="M:System.Security.PermissionSet.PermitOnly" />
 
@@ -853,8 +1023,12 @@
 
             
 
+            
+
              before calling GetEntity on the underlying <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -873,8 +1047,12 @@
 
             
 
+            
+
              object returned by calling GetEntity on the underlying <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -890,8 +1068,12 @@
 
           
 
+          
+
           The URI returned from <see
            cref="M:System.Xml.XmlSecureResolver.ResolveUri(System.Uri,System.String)" />
+
+          
 
           
 
@@ -906,6 +1088,8 @@
 
           
 
+          
+
           The current version does not use this parameter when resolving URIs. This is provided for future extensibility purposes. For example, this can be mapped to the xlink:role and used as an implementation-specific argument in other scenarios.</param
         >
         <param name="ofObjectToReturn">
@@ -915,8 +1099,12 @@
 
           
 
+          
+
           The type of object to return. The current version only returns <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -963,6 +1151,8 @@
 
             
 
+            
+
              object or null if a type other than stream is specified.</para
           >
         </returns>
@@ -973,8 +1163,12 @@
 
           
 
+          
+
           The URI returned from <see
            cref="M:System.Xml.XmlSecureResolver.ResolveUri(System.Uri,System.String)" />
+
+          
 
           
 
@@ -989,6 +1183,8 @@
 
           
 
+          
+
           The current version does not use this parameter when resolving URIs. This is provided for future extensibility purposes. For example, this can be mapped to the xlink:role and used as an implementation-specific argument in other scenarios.</param
         >
         <param name="ofObjectToReturn">
@@ -998,8 +1194,12 @@
 
           
 
+          
+
           The type of object to return. The current version only returns <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -1043,6 +1243,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1056,8 +1258,12 @@
 
             
 
+            
+
              representing the absolute URI or null if the relative URI cannot be resolved (returned by calling ResolveUri on the underlying <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -1073,10 +1279,14 @@
 
           
 
+          
+
           The base URI used to resolve the relative URI.</param
         >
         <param name="relativeUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1089,8 +1299,12 @@
 
           
 
+          
+
            value. If relative, it combines with the <paramref
            name="baseUri" />
+
+          
 
           
 

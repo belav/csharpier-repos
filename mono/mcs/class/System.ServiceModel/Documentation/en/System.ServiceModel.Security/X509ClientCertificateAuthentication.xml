@@ -27,8 +27,12 @@
 
         
 
+        
+
          is set to <see
          cref="F:System.ServiceModel.Security.X509CertificateValidationMode.Custom" />
+
+        
 
         
 
@@ -41,12 +45,16 @@
 
         
 
+        
+
          class. crdefault <format
          type="text/html">
           <a href="bb0190ff-0738-4e54-8d22-c97d343708bf"
             >How To: Create a Service Employing a Custom Certificate Validator</a
           >
         </format>
+
+        
 
         
 
@@ -84,6 +92,8 @@
           <para
             >Allowed values of <see
              cref="T:System.ServiceModel.Security.X509CertificateValidationMode" />
+
+            
 
             
 
@@ -153,8 +163,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.ServiceModel.Security.X509CertificateValidationMode.Custom" />
+
+            
 
             
 
@@ -167,8 +181,12 @@
 
             
 
+            
+
              property to a custom validator that inherits from the <see
              cref="T:System.IdentityModel.Selectors.X509CertificateValidator" />
+
+            
 
             
 
@@ -183,6 +201,8 @@
                 >How To: Create a Service Employing a Custom Certificate Validator</a
               >
             </format>
+
+            
 
             
 
@@ -214,6 +234,8 @@
           <para
             >This property is valid only when the <see
              cref="P:System.ServiceModel.Security.X509ClientCertificateAuthentication.MapClientCertificateToWindowsAccount" />
+
+            
 
             
 
@@ -285,6 +307,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -292,6 +316,8 @@
              type="text/html">
               <a href="6ffb8682-8f07-4a45-afbb-8d2487e9dbc3">Working with Certificates</a>
             </format>
+
+            
 
             
 

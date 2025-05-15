@@ -40,8 +40,12 @@
 
         
 
+        
+
          provides a default implementation of the <see
          cref="T:System.Resources.IResourceWriter" />
+
+        
 
         
 
@@ -57,6 +61,8 @@
 
         
 
+        
+
          method. Resource names are case-sensitive when used for lookups, but to more easily support authoring tools and help eliminate bugs, <see
          cref="T:System.Resources.ResourceWriter" />
 
@@ -64,8 +70,12 @@
 
         
 
+        
+
          will not allow a .resources file to have names that vary only by case. The <see
          cref="T:System.Resources.ResourceWriter" />
+
+        
 
         
 
@@ -81,8 +91,12 @@
 
         
 
+        
+
          with a unique file name, call <see
          cref="M:System.Resources.ResourceWriter.AddResource(System.String,System.String)" />
+
+        
 
         
 
@@ -95,8 +109,12 @@
 
         
 
+        
+
          to write the resources file to disk, and then call <see
          cref="M:System.Resources.ResourceWriter.Close" />
+
+        
 
         
 
@@ -109,6 +127,8 @@
 
         
 
+        
+
          will implicitly call <see
          cref="M:System.Resources.ResourceWriter.Generate" />
 
@@ -116,8 +136,12 @@
 
         
 
+        
+
          if you do not explicitly call <see
          cref="M:System.Resources.ResourceWriter.Generate" />
+
+        
 
         
 
@@ -134,6 +158,8 @@
 
         
 
+        
+
          class, you can use the <see
          cref="T:System.Resources.ResourceManager" />
 
@@ -141,8 +167,12 @@
 
         
 
+        
+
          class, which lets you retrieve named resources, or the <see
          cref="T:System.Resources.ResourceReader" />
+
+        
 
         
 
@@ -185,11 +215,15 @@
 
             
 
+            
+
              class that writes the resources to the provided stream.</para
           >
         </summary>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -227,11 +261,15 @@
 
             
 
+            
+
              class that writes the resources to the specified file.</para
           >
         </summary>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -271,6 +309,8 @@
 
             
 
+            
+
              is called.</para
           >
           <para
@@ -281,8 +321,12 @@
 
             
 
+            
+
              method by calling the <see
              cref="M:System.Resources.ResourceManager.GetStream(System.String)" />
+
+            
 
             
 
@@ -302,10 +346,14 @@
 
           
 
+          
+
           The name of the resource. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -346,8 +394,12 @@
 
             
 
+            
+
              property for <paramref
              name="value" />
+
+            
 
             
 
@@ -363,8 +415,12 @@
 
             
 
+            
+
              method by calling the <see
              cref="M:System.Resources.ResourceManager.GetStream(System.String)" />
+
+            
 
             
 
@@ -384,6 +440,8 @@
 
           
 
+          
+
           The name of the resource to add. </param
         >
         <param name="value">
@@ -393,8 +451,12 @@
 
           
 
+          
+
           The value of the resource to add. The resource must support the <see
            cref="P:System.IO.Stream.Length" />
+
+          
 
           
 
@@ -433,11 +495,15 @@
 
             
 
+            
+
              must be serializable.</para
           >
           <para
             >The resource is not written until the <see
              cref="M:System.Resources.ResourceWriter.Generate" />
+
+            
 
             
 
@@ -453,8 +519,12 @@
 
             
 
+            
+
              method by calling the <see
              cref="M:System.Resources.ResourceManager.GetObject(System.String)" />
+
+            
 
             
 
@@ -474,10 +544,14 @@
 
           
 
+          
+
           The name of the resource. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -517,6 +591,8 @@
 
             
 
+            
+
              is called.</para
           >
           <para
@@ -527,8 +603,12 @@
 
             
 
+            
+
              method by calling the <see
              cref="M:System.Resources.ResourceManager.GetString(System.String)" />
+
+            
 
             
 
@@ -548,10 +628,14 @@
 
           
 
+          
+
           The name of the resource. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -593,8 +677,12 @@
 
             
 
+            
+
              property for <paramref
              name="value" />
+
+            
 
             
 
@@ -610,8 +698,12 @@
 
             
 
+            
+
              method by calling the <see
              cref="M:System.Resources.ResourceManager.GetStream(System.String)" />
+
+            
 
             
 
@@ -630,11 +722,15 @@
 
             
 
+            
+
              method is called. </para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -649,8 +745,12 @@
 
           
 
+          
+
           The value of the resource to add. The resource must support the <see
            cref="P:System.IO.Stream.Length" />
+
+          
 
           
 
@@ -665,8 +765,12 @@
 
           
 
+          
+
           true to close the stream after the <see
            cref="M:System.Resources.ResourceWriter.Generate" />
+
+          
 
           
 
@@ -710,8 +814,12 @@
 
             
 
+            
+
              method to add a resource in binary form (that is, as an array of bytes) to the list of resources to be written. You must specify the name of the resource, the type name of the data contained in the resource, and the binary representation of the data itself. After you have added each resource you require, use the <see
              cref="M:System.Resources.ResourceWriter.Generate" />
+
+            
 
             
 
@@ -724,10 +832,14 @@
 
             
 
+            
+
              constructor.</para
           >
           <para>
             <paramref name="typeName" />
+
+            
 
             
 
@@ -747,8 +859,12 @@
 
                 
 
+                
+
                  to indicate that a special binary format is used to store one of 19 common data types. These include the .NET Framework primitive data types (<see
                  cref="T:System.Boolean" />
+
+                
 
                 
 
@@ -761,8 +877,12 @@
 
                 
 
+                
+
                 , <see
                  cref="T:System.Char" />
+
+                
 
                 
 
@@ -775,8 +895,12 @@
 
                 
 
+                
+
                 , <see
                  cref="T:System.Double" />
+
+                
 
                 
 
@@ -789,8 +913,12 @@
 
                 
 
+                
+
                 , <see
                  cref="T:System.Int32" />
+
+                
 
                 
 
@@ -803,8 +931,12 @@
 
                 
 
+                
+
                 , <see
                  cref="T:System.Single" />
+
+                
 
                 
 
@@ -817,8 +949,12 @@
 
                 
 
+                
+
                 , <see
                  cref="T:System.UInt16" />
+
+                
 
                 
 
@@ -831,8 +967,12 @@
 
                 
 
+                
+
                 , <see
                  cref="T:System.UInt64" />
+
+                
 
                 
 
@@ -845,6 +985,8 @@
 
                 
 
+                
+
                 , <see
                  cref="T:System.DateTime" />
 
@@ -852,8 +994,12 @@
 
                 
 
+                
+
                 , and <see
                  cref="T:System.TimeSpan" />
+
+                
 
                 
 
@@ -907,6 +1053,8 @@
 
                 
 
+                
+
                  argument (for example, System.String). In addition, for types that are not part of the .NET Framework class library, the string includes the name, version, culture, and public key of the assembly that contains the type. For example, the following string indicates that the serialized data represents an instance of the Person type in the Extensions namespace, which is found in version 1.0 of an assembly named Utility that has no public key and no designated culture.</para
               >
               <para>Extensions.Person, Utility, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</para>
@@ -920,8 +1068,12 @@
 
             
 
+            
+
              method is <see
              cref="M:System.Resources.ResourceReader.GetResourceData(System.String,System.String@,System.Byte[]@)" />
+
+            
 
             
 
@@ -941,6 +1093,8 @@
 
           
 
+          
+
           A name that identifies the resource that contains the added data.</param
         >
         <param name="typeName">
@@ -950,10 +1104,14 @@
 
           
 
+          
+
           The type name of the added data. For more information, see the Remarks section.</param
         >
         <param name="serializedData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -989,8 +1147,12 @@
 
             
 
+            
+
              is called implicitly by <see
              cref="M:System.Resources.ResourceWriter.Close" />
+
+            
 
             
 
@@ -1032,6 +1194,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1068,8 +1232,12 @@
 
             
 
+            
+
              method is called implicitly by the <see
              cref="M:System.Resources.ResourceWriter.Close" />
+
+            
 
             
 
@@ -1084,6 +1252,8 @@
 
             
 
+            
+
              can only be called once, after all calls to <see
              cref="M:System.Resources.ResourceWriter.AddResource(System.String,System.String)" />
 
@@ -1091,8 +1261,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Resources.ResourceWriter.AddResourceData(System.String,System.String,System.Byte[])" />
+
+            
 
             
 
@@ -1107,8 +1281,12 @@
 
             
 
+            
+
              does not close the output stream in normal cases. Unless you are combining extra data with your .resources file or need access to the stream afterwards, you should call <see
              cref="M:System.Resources.ResourceWriter.Close" />
+
+            
 
             
 
@@ -1121,8 +1299,12 @@
 
             
 
+            
+
             , or simply call <see
              cref="M:System.Resources.ResourceWriter.Close" />
+
+            
 
             
 

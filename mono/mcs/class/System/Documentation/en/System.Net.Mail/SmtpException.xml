@@ -26,6 +26,8 @@
 
         
 
+        
+
          property contains the status code returned by the SMTP server.</para
       >
     </remarks>
@@ -39,6 +41,8 @@
 
         
 
+        
+
          is not able to complete a <see
          cref="Overload:System.Net.Mail.SmtpClient.Send" />
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
          or <see
          cref="Overload:System.Net.Mail.SmtpClient.SendAsync" />
+
+        
 
         
 
@@ -82,8 +90,12 @@
 
             
 
+            
+
              property set to <see
              cref="F:System.Net.Mail.SmtpStatusCode.GeneralFailure" />
+
+            
 
             
 
@@ -97,6 +109,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.Mail.SmtpException" />
+
+            
 
             
 
@@ -136,8 +150,12 @@
 
             
 
+            
+
              parameter to initialize the <see
              cref="P:System.Net.Mail.SmtpException.StatusCode" />
+
+            
 
             
 
@@ -156,6 +174,8 @@
 
             
 
+            
+
              class with the specified status code.</para
           >
         </summary>
@@ -166,8 +186,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Net.Mail.SmtpStatusCode" />
+
+          
 
           
 
@@ -203,8 +227,12 @@
 
             
 
+            
+
              parameter to initialize the <see
              cref="P:System.Exception.Message" />
+
+            
 
             
 
@@ -223,6 +251,8 @@
 
             
 
+            
+
              class with the specified error message.</para
           >
         </summary>
@@ -233,8 +263,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -274,8 +308,12 @@
 
             
 
+            
+
              parameter to initialize the <see
              cref="P:System.Net.Mail.SmtpException.StatusCode" />
+
+            
 
             
 
@@ -288,8 +326,12 @@
 
             
 
+            
+
              parameter to initialize the <see
              cref="P:System.Exception.Message" />
+
+            
 
             
 
@@ -308,6 +350,8 @@
 
             
 
+            
+
              class with the specified status code and error message.</para
           >
         </summary>
@@ -318,8 +362,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Net.Mail.SmtpStatusCode" />
+
+          
 
           
 
@@ -334,8 +382,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -377,8 +429,12 @@
 
             
 
+            
+
              interface for the <see
              cref="T:System.Net.Mail.SmtpException" />
+
+            
 
             
 
@@ -397,6 +453,8 @@
 
             
 
+            
+
              class from the specified instances of the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
@@ -404,8 +462,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -446,8 +508,12 @@
 
             
 
+            
+
              parameter to initialize the <see
              cref="P:System.Exception.Message" />
+
+            
 
             
 
@@ -460,8 +526,12 @@
 
             
 
+            
+
              parameter to initialize the <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -477,8 +547,12 @@
 
             
 
+            
+
              is not null, the current exception is raised in a catch block that handles <paramref
              name="innerException" />
+
+            
 
             
 
@@ -497,11 +571,15 @@
 
             
 
+            
+
              class with the specified error message and inner exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -514,10 +592,14 @@
 
           
 
+          
+
            that describes the error that occurred.</param
         >
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -562,6 +644,8 @@
 
             
 
+            
+
              are automatically tracked and serialized by the formatter.</para
           >
         </remarks>
@@ -575,8 +659,12 @@
 
             
 
+            
+
              instance with the data needed to serialize the <see
              cref="T:System.Net.Mail.SmtpException" />
+
+            
 
             
 
@@ -649,8 +737,12 @@
 
             
 
+            
+
              instance with the data needed to serialize the <see
              cref="T:System.Net.Mail.SmtpException" />
+
+            
 
             
 

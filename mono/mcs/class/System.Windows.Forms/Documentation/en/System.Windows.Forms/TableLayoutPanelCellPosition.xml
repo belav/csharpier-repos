@@ -29,6 +29,8 @@
 
         
 
+        
+
         .</para
       >
     </summary>
@@ -59,6 +61,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -69,10 +73,14 @@
 
           
 
+          
+
           The column position of the cell.</param
         >
         <param name="row">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -99,6 +107,8 @@
           <para
             >Gets or sets the column number of the current <see
              cref="T:System.Windows.Forms.TableLayoutPanelCellPosition" />
+
+            
 
             
 
@@ -133,8 +143,12 @@
 
             
 
+            
+
              contains the same row and column as the specified <see
              cref="T:System.Windows.Forms.TableLayoutPanelCellPosition" />
+
+            
 
             
 
@@ -153,6 +167,8 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Windows.Forms.TableLayoutPanelCellPosition" />
 
@@ -160,8 +176,12 @@
 
             
 
+            
+
              and has the same row and column as the specified <see
              cref="T:System.Windows.Forms.TableLayoutPanelCellPosition" />
+
+            
 
             
 
@@ -177,8 +197,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.TableLayoutPanelCellPosition" />
+
+          
 
           
 
@@ -210,6 +234,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -218,6 +244,8 @@
           <para
             >An integer value that specifies a hash value for this <see
              cref="T:System.Windows.Forms.TableLayoutPanelCellPosition" />
+
+            
 
             
 
@@ -256,8 +284,12 @@
 
             
 
+            
+
              objects. The result specifies whether the values of the <see
              cref="P:System.Windows.Forms.TableLayoutPanelCellPosition.Row" />
+
+            
 
             
 
@@ -270,8 +302,12 @@
 
             
 
+            
+
              properties of the two <see
              cref="T:System.Windows.Forms.TableLayoutPanelCellPosition" />
+
+            
 
             
 
@@ -290,8 +326,12 @@
 
             
 
+            
+
              and <paramref
              name="p2" />
+
+            
 
             
 
@@ -307,8 +347,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.TableLayoutPanelCellPosition" />
+
+          
 
           
 
@@ -323,8 +367,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.TableLayoutPanelCellPosition" />
+
+          
 
           
 
@@ -362,8 +410,12 @@
 
             
 
+            
+
              objects. The result specifies whether the values of the <see
              cref="P:System.Windows.Forms.TableLayoutPanelCellPosition.Row" />
+
+            
 
             
 
@@ -376,8 +428,12 @@
 
             
 
+            
+
              properties of the two <see
              cref="T:System.Windows.Forms.TableLayoutPanelCellPosition" />
+
+            
 
             
 
@@ -396,8 +452,12 @@
 
             
 
+            
+
              and <paramref
              name="p2" />
+
+            
 
             
 
@@ -413,8 +473,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.TableLayoutPanelCellPosition" />
+
+          
 
           
 
@@ -429,8 +493,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.TableLayoutPanelCellPosition" />
+
+          
 
           
 
@@ -457,6 +525,8 @@
           <para
             >Gets or sets the row number of the current <see
              cref="T:System.Windows.Forms.TableLayoutPanelCellPosition" />
+
+            
 
             
 
@@ -489,6 +559,8 @@
 
             
 
+            
+
              to a human readable string.</para
           >
         </summary>
@@ -497,6 +569,8 @@
           <para
             >A string that represents this <see
              cref="T:System.Windows.Forms.TableLayoutPanelCellPosition" />
+
+            
 
             
 

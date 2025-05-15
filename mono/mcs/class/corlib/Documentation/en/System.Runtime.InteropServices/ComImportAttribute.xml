@@ -44,10 +44,14 @@
 
         
 
+        
+
          typically applies it for you when it imports a type library.</para
       >
       <para>
         <see cref="T:System.Runtime.InteropServices.ComImportAttribute" />
+
+        
 
         
 
@@ -86,6 +90,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.InteropServices.ComImportAttribute" />
+
+            
 
             
 

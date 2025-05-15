@@ -38,11 +38,15 @@
 
         
 
+        
+
         . As a result, the new property can be used by other components in a container.</para
       >
       <para
         >Within the marked class, you must implement Get &lt;name&gt; and Set &lt;name&gt; methods. For example, if you mark a class with [ProvideProperty("PropertyName")], you must implement GetPropertyName and SetPropertyName methods. To specify that the new property will be an extender property, you must implement from <see
          cref="T:System.ComponentModel.IExtenderProvider" />
+
+        
 
         
 
@@ -60,6 +64,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -68,6 +74,8 @@
       <para
         >Specifies the name of the property that an implementer of <see
          cref="T:System.ComponentModel.IExtenderProvider" />
+
+        
 
         
 
@@ -110,6 +118,8 @@
 
             
 
+            
+
              class with the name of the property and the type of its receiver.</para
           >
         </summary>
@@ -120,10 +130,14 @@
 
           
 
+          
+
           The name of the property extending to an object of the specified type. </param
         >
         <param name="receiverTypeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -165,8 +179,12 @@
 
             
 
+            
+
              class with the name of the property and its <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -182,6 +200,8 @@
 
           
 
+          
+
           The name of the property extending to an object of the specified type. </param
         >
         <param name="receiverType">
@@ -191,8 +211,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -232,6 +256,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -241,6 +267,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -277,6 +305,8 @@
           <para
             >A hash code for the current <see
              cref="T:System.ComponentModel.ProvidePropertyAttribute" />
+
+            
 
             
 

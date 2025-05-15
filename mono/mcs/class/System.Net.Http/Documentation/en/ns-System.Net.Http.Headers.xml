@@ -11,6 +11,8 @@
 
         
 
+        
+
          namespace</para
       >
     </summary>
@@ -24,8 +26,12 @@
 
         
 
+        
+
          namespace provides support for HTTP headers as defined in <see
          cref="http://go.microsoft.com/fwlink/?LinkID=241642">RFC 2616</see>
+
+        
 
         
 

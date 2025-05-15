@@ -27,6 +27,8 @@
 
         
 
+        
+
         .</para
       >
     </summary>
@@ -65,6 +67,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -73,6 +77,8 @@
           <para
             >A <see
              cref="T:System.CodeDom.CodeCompileUnit" />
+
+            
 
             
 
@@ -88,8 +94,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.TextReader" />
+
+          
 
           
 

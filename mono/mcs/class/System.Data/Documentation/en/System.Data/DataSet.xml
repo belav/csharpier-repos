@@ -58,8 +58,12 @@
 
         
 
+        
+
         , which is an in-memory cache of data retrieved from a data source, is a major component of the ADO.NET architecture. The <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -72,8 +76,12 @@
 
         
 
+        
+
          objects that you can relate to each other with <see
          cref="T:System.Data.DataRelation" />
+
+        
 
         
 
@@ -86,8 +94,12 @@
 
         
 
+        
+
          by using the <see
          cref="T:System.Data.UniqueConstraint" />
+
+        
 
         
 
@@ -100,8 +112,12 @@
 
         
 
+        
+
          objects. For further details about working with <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -111,6 +127,8 @@
          type="text/html">
           <a href="6d4c4b69-8919-4224-8a65-6cca1c61b48f">Using DataSets in ADO.NET</a>
         </format>
+
+        
 
         
 
@@ -126,8 +144,12 @@
 
         
 
+        
+
          objects contain the data, the <see
          cref="T:System.Data.DataRelationCollection" />
+
+        
 
         
 
@@ -140,8 +162,12 @@
 
         
 
+        
+
          accessed through the <see
          cref="P:System.Data.DataSet.Tables" />
+
+        
 
         
 
@@ -154,8 +180,12 @@
 
         
 
+        
+
          objects, note that they are conditionally case sensitive. For example, if one <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -168,10 +198,14 @@
 
         
 
+        
+
          objects, see <format
          type="text/html">
           <a href="eecf9d78-60e3-4fdc-8de0-e56c13a89414">Creating a DataTable</a>
         </format>
+
+        
 
         
 
@@ -187,8 +221,12 @@
 
         
 
+        
+
          can read and write data and schema as XML documents. The data and schema can then be transported across HTTP and used by any application, on any platform that is XML-enabled. You can save the schema as an XML schema with the <see
          cref="M:System.Data.DataSet.WriteXmlSchema(System.IO.Stream)" />
+
+        
 
         
 
@@ -201,8 +239,12 @@
 
         
 
+        
+
          method. To read an XML document that includes both schema and data, use the <see
          cref="M:System.Data.DataSet.ReadXml(System.Xml.XmlReader)" />
+
+        
 
         
 
@@ -213,6 +255,8 @@
       <para
         >In a typical multiple-tier implementation, the steps for creating and refreshing a <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -230,6 +274,8 @@
 
             
 
+            
+
              in a <see
              cref="T:System.Data.DataSet" />
 
@@ -237,8 +283,12 @@
 
             
 
+            
+
              with data from a data source using a <see
              cref="T:System.Data.Common.DataAdapter" />
+
+            
 
             
 
@@ -256,8 +306,12 @@
 
             
 
+            
+
              objects by adding, updating, or deleting <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -275,8 +329,12 @@
 
             
 
+            
+
              method to create a second <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -294,6 +352,8 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Data.Common.DataAdapter" />
 
@@ -301,8 +361,12 @@
 
             
 
+            
+
             , passing the second <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -320,8 +384,12 @@
 
             
 
+            
+
              method to merge the changes from the second <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -339,6 +407,8 @@
 
             
 
+            
+
              on the <see
              cref="T:System.Data.DataSet" />
 
@@ -346,8 +416,12 @@
 
             
 
+            
+
             . Alternatively, invoke <see
              cref="M:System.Data.DataSet.RejectChanges" />
+
+            
 
             
 
@@ -366,8 +440,12 @@
 
           
 
+          
+
            and <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -380,8 +458,12 @@
 
           
 
+          
+
           , and support the <see
            cref="T:System.Runtime.Serialization.ISerializable" />
+
+          
 
           
 
@@ -399,6 +481,8 @@
 
           
 
+          
+
            are not finalized by the garbage collector, because the finalizer has been suppressed in <see
            cref="T:System.Data.DataSet" />
 
@@ -406,8 +490,12 @@
 
           
 
+          
+
           . The derived class can call the <see
            cref="M:System.GC.ReRegisterForFinalize(System.Object)" />
+
+          
 
           
 
@@ -439,6 +527,8 @@
 
             
 
+            
+
              constructor takes no parameters, and creates a default name, "NewDataSet," for the new instance.</para
           >
           <para
@@ -449,8 +539,12 @@
 
             
 
+            
+
              is required to ensure that the XML representation of the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -464,6 +558,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -496,8 +592,12 @@
 
             
 
+            
+
              is required to ensure that the XML representation of the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -516,6 +616,8 @@
 
             
 
+            
+
              class with the given name.</para
           >
         </summary>
@@ -526,8 +628,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -564,6 +670,8 @@
 
             
 
+            
+
              class that has the given serialization information and context.</para
           >
         </summary>
@@ -574,10 +682,14 @@
 
           
 
+          
+
           The data needed to serialize or deserialize an object. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -618,6 +730,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -628,8 +742,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -644,8 +762,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -673,8 +795,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -687,8 +813,12 @@
 
             
 
+            
+
              methods. Calling <see
              cref="M:System.Data.DataTable.AcceptChanges" />
+
+            
 
             
 
@@ -701,8 +831,12 @@
 
             
 
+            
+
              level causes the <see
              cref="M:System.Data.DataRow.AcceptChanges" />
+
+            
 
             
 
@@ -715,8 +849,12 @@
 
             
 
+            
+
              to be called. Similarly, invoking <see
              cref="M:System.Data.DataSet.AcceptChanges" />
+
+            
 
             
 
@@ -729,8 +867,12 @@
 
             
 
+            
+
              causes <see
              cref="M:System.Data.DataTable.AcceptChanges" />
+
+            
 
             
 
@@ -743,6 +885,8 @@
 
             
 
+            
+
             . In this manner, you have multiple levels at which the method can be invoked. Calling the <see
              cref="M:System.Data.DataSet.AcceptChanges" />
 
@@ -750,8 +894,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -767,6 +915,8 @@
 
             
 
+            
+
              objects still in edit-mode end their edits successfully. The <see
              cref="P:System.Data.DataRow.RowState" />
 
@@ -774,8 +924,12 @@
 
             
 
+            
+
              property of each <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -791,8 +945,12 @@
 
             
 
+            
+
              objects, invoking the AcceptChanges method also causes the <see
              cref="P:System.Data.ForeignKeyConstraint.AcceptRejectRule" />
+
+            
 
             
 
@@ -810,10 +968,14 @@
 
               
 
+              
+
                instead. See <see
                cref="http://msdn.microsoft.com/library/33y2221y.aspx"
                 >Updating Data Sources with DataAdapters</see
               >
+
+              
 
               
 
@@ -833,8 +995,12 @@
 
             
 
+            
+
              since it was loaded or since the last time <see
              cref="M:System.Data.DataSet.AcceptChanges" />
+
+            
 
             
 
@@ -867,6 +1033,8 @@
 
             
 
+            
+
              method ends the initialization. Using the <see
              cref="M:System.Data.DataSet.BeginInit" />
 
@@ -874,8 +1042,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Data.DataSet.EndInit" />
+
+            
 
             
 
@@ -889,6 +1061,8 @@
           <para
             >Begins the initialization of a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -918,6 +1092,8 @@
 
           
 
+          
+
            if string comparisons are case-sensitive, <see
            langword="false" />
 
@@ -925,8 +1101,12 @@
 
           
 
+          
+
            otherwise. The default is <see
            langword="false" />
+
+          
 
           
 
@@ -944,8 +1124,12 @@
 
             
 
+            
+
              property affects how sorting, searching, and filtering operations are performed on each <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -958,8 +1142,12 @@
 
             
 
+            
+
              when using the <see
              cref="M:System.Data.DataTable.Select" />
+
+            
 
             
 
@@ -975,8 +1163,12 @@
 
             
 
+            
+
              property for a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -989,8 +1181,12 @@
 
             
 
+            
+
              property of each associated <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1004,6 +1200,8 @@
           <para
             >Gets or sets a value indicating whether string comparisons within <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1041,8 +1239,12 @@
 
             
 
+            
+
              is bound to an <see
              cref="T:System.Xml.XmlDataDocument" />
+
+            
 
             
 
@@ -1055,6 +1257,8 @@
 
             
 
+            
+
              or <see
              cref="M:System.Data.DataTable.Clear" />
 
@@ -1062,8 +1266,12 @@
 
             
 
+            
+
              raises the <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -1077,6 +1285,8 @@
           <para
             >Clears the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1115,8 +1325,12 @@
 
             
 
+            
+
             , including all <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1135,8 +1349,12 @@
 
             
 
+            
+
              with the same schema as the current <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1170,6 +1388,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1183,8 +1403,12 @@
 
             
 
+            
+
              with the same structure (table schemas, relations, and constraints) and data as this <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1226,6 +1450,8 @@
 
             
 
+            
+
             , if a <see
              cref="T:System.Data.DataTable" />
 
@@ -1233,8 +1459,12 @@
 
             
 
+            
+
              within the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1253,6 +1483,8 @@
 
             
 
+            
+
              with one result set per <see
              cref="T:System.Data.DataTable" />
 
@@ -1260,8 +1492,12 @@
 
             
 
+            
+
             , in the same sequence as the tables appear in the <see
              cref="P:System.Data.DataSet.Tables" />
+
+            
 
             
 
@@ -1280,6 +1516,8 @@
 
             
 
+            
+
              containing one or more result sets, corresponding to the <see
              cref="T:System.Data.DataTable" />
 
@@ -1287,8 +1525,12 @@
 
             
 
+            
+
              instances contained within the source <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1331,6 +1573,8 @@
 
             
 
+            
+
             , if a <see
              cref="T:System.Data.DataTable" />
 
@@ -1338,8 +1582,12 @@
 
             
 
+            
+
              within the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1358,8 +1606,12 @@
 
             
 
+            
+
              with one result set per <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1378,8 +1630,12 @@
 
             
 
+            
+
              containing one or more result sets, corresponding to the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1392,8 +1648,12 @@
 
             
 
+            
+
             . The returned result sets are in the order specified by the <paramref
              name="dataTables" />
+
+            
 
             
 
@@ -1409,8 +1669,12 @@
 
           
 
+          
+
           An array of DataTables providing the order of the result sets to be returned in the <see
            cref="T:System.Data.DataTableReader" />
+
+          
 
           
 
@@ -1435,6 +1699,8 @@
           <para
             >Gets or sets the name of the current <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1472,8 +1738,12 @@
 
           
 
+          
+
            allows you to create custom settings for each <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -1491,8 +1761,12 @@
 
             
 
+            
+
              returned by the <see
              cref="P:System.Data.DataSet.DefaultViewManager" />
+
+            
 
             
 
@@ -1505,8 +1779,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1522,8 +1800,12 @@
 
             
 
+            
+
              from a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1536,8 +1818,12 @@
 
             
 
+            
+
              are configured according to the settings in the <see
              cref="P:System.Data.DataSet.DefaultViewManager" />
+
+            
 
             
 
@@ -1556,8 +1842,12 @@
 
             
 
+            
+
              to allow filtering, searching, and navigating using a custom <see
              cref="T:System.Data.DataViewManager" />
+
+            
 
             
 
@@ -1603,8 +1893,12 @@
 
             
 
+            
+
              to determine its <see
              cref="P:System.Data.DataSet.SchemaSerializationMode" />
+
+            
 
             
 
@@ -1623,8 +1917,12 @@
 
             
 
+            
+
              for a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1643,11 +1941,15 @@
 
             
 
+            
+
              enumeration indicating whether schema information has been omitted from the payload.</para
           >
         </returns>
         <param name="reader">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1660,8 +1962,12 @@
 
           
 
+          
+
            instance that is passed during deserialization of the <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -1698,8 +2004,12 @@
 
             
 
+            
+
              to determine its <see
              cref="P:System.Data.DataSet.SchemaSerializationMode" />
+
+            
 
             
 
@@ -1718,8 +2028,12 @@
 
             
 
+            
+
              for a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1738,11 +2052,15 @@
 
             
 
+            
+
              enumeration indicating whether schema information has been omitted from the payload.</para
           >
         </returns>
         <param name="info">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1755,8 +2073,12 @@
 
           
 
+          
+
            that a DataSet’s protected constructor <see
            cref="M:System.Data.DataSet.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+
+          
 
           
 
@@ -1771,6 +2093,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
 
@@ -1778,8 +2102,12 @@
 
           
 
+          
+
            that a DataSet’s protected constructor <see
            cref="M:System.Data.DataSet.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)" />
+
+          
 
           
 
@@ -1807,6 +2135,8 @@
 
             
 
+            
+
              method starts the initialization. Using the <see
              cref="M:System.Data.DataSet.BeginInit" />
 
@@ -1814,8 +2144,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Data.DataSet.EndInit" />
+
+            
 
             
 
@@ -1829,6 +2163,8 @@
           <para
             >Ends the initialization of a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1858,6 +2194,8 @@
 
           
 
+          
+
           , if rules are enforced, <see
            langword="false" />
 
@@ -1865,8 +2203,12 @@
 
           
 
+          
+
            otherwise. The default is <see
            langword="true" />
+
+          
 
           
 
@@ -1884,8 +2226,12 @@
 
             
 
+            
+
              level (<see
              cref="P:System.Data.DataTable.Constraints" />
+
+            
 
             
 
@@ -1895,6 +2241,8 @@
              type="text/html">
               <a href="27c9f2fd-f64d-4b4e-bbf6-1d24f47067cb">Adding Constraints to a Table</a>
             </format>
+
+            
 
             
 
@@ -1936,6 +2284,8 @@
 
           
 
+          
+
            with all custom user information.</value
         >
         <remarks>
@@ -1943,6 +2293,8 @@
           <para
             >The <see
              cref="P:System.Data.DataSet.ExtendedProperties" />
+
+            
 
             
 
@@ -1958,8 +2310,12 @@
 
             
 
+            
+
              if you want them persisted when the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2001,8 +2357,12 @@
 
             
 
+            
+
              that contains a copy of all rows in the original <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2015,8 +2375,12 @@
 
             
 
+            
+
              if the unchanged rows contain primary keys corresponding to foreign keys in the changed rows. The method returns null if there are no rows in the original <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2035,8 +2399,12 @@
 
             
 
+            
+
              that contains all changes made to it since it was loaded or since <see
              cref="M:System.Data.DataSet.AcceptChanges" />
+
+            
 
             
 
@@ -2055,8 +2423,12 @@
 
             
 
+            
+
              that can have actions performed on it and later be merged back in using <see
              cref="M:System.Data.DataSet.Merge(System.Data.DataSet)" />
+
+            
 
             
 
@@ -2094,6 +2466,8 @@
 
             
 
+            
+
              method is used to produce a second <see
              cref="T:System.Data.DataSet" />
 
@@ -2101,8 +2475,12 @@
 
             
 
+            
+
              object that contains only the changes introduced into the original. Use the <paramref
              name="rowStates" />
+
+            
 
             
 
@@ -2118,6 +2496,8 @@
 
             
 
+            
+
             . Relationship constraints may cause parent rows marked Unchanged to be included. If no rows of the desired <see
              cref="T:System.Data.DataRowState" />
 
@@ -2125,8 +2505,12 @@
 
             
 
+            
+
              are found, the <see
              cref="M:System.Data.DataSet.GetChanges" />
+
+            
 
             
 
@@ -2145,6 +2529,8 @@
 
             
 
+            
+
              containing all changes made to it since it was last loaded, or since <see
              cref="M:System.Data.DataSet.AcceptChanges" />
 
@@ -2152,8 +2538,12 @@
 
             
 
+            
+
              was called, filtered by <see
              cref="T:System.Data.DataRowState" />
+
+            
 
             
 
@@ -2172,6 +2562,8 @@
 
             
 
+            
+
              that can have actions performed on it, and subsequently be merged back in using <see
              cref="M:System.Data.DataSet.Merge(System.Data.DataSet)" />
 
@@ -2179,8 +2571,12 @@
 
             
 
+            
+
             . If no rows of the desired <see
              cref="T:System.Data.DataRowState" />
+
+            
 
             
 
@@ -2196,8 +2592,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.DataRowState" />
+
+          
 
           
 
@@ -2238,6 +2638,8 @@
 
             
 
+            
+
              for the DataSet.</para
           >
         </summary>
@@ -2251,11 +2653,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="schemaSet">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2293,11 +2699,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="info">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2310,8 +2720,12 @@
 
           
 
+          
+
            that holds the serialized data associated with the <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -2326,6 +2740,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
 
@@ -2333,8 +2749,12 @@
 
           
 
+          
+
            that contains the source and destination of the serialized stream associated with the <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -2366,6 +2786,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -2374,6 +2796,8 @@
           <para
             >The <see
              cref="T:System.Xml.Schema.XMLSchema" />
+
+            
 
             
 
@@ -2414,8 +2838,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -2425,6 +2853,8 @@
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2456,6 +2886,8 @@
 
             
 
+            
+
              with <see
              cref="T:System.Data.XmlWriteMode" />
 
@@ -2463,8 +2895,12 @@
 
             
 
+            
+
              set to <see
              cref="F:System.Data.XmlWriteMode.IgnoreSchema" />
+
+            
 
             
 
@@ -2479,8 +2915,12 @@
 
             
 
+            
+
              returns XML as a string, and therefore requires more overhead than <see
              cref="M:System.Data.DataSet.WriteXml(System.IO.Stream)" />
+
+            
 
             
 
@@ -2491,6 +2931,8 @@
           <para
             >If you build a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2509,6 +2951,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2517,6 +2961,8 @@
           <para
             >A string that is a representation of the data stored in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2549,10 +2995,14 @@
 
             
 
+            
+
             , except that only the primary schema is written.</para
           >
           <para>
             <see cref="M:System.Data.DataSet.GetXmlSchema" />
+
+            
 
             
 
@@ -2565,11 +3015,15 @@
 
             
 
+            
+
              to write XML to a file.</para
           >
           <para
             >If you build a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2588,6 +3042,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2596,6 +3052,8 @@
           <para
             >String that is the XML Schema for the XML representation of the data stored in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2626,6 +3084,8 @@
 
           
 
+          
+
           .</remarks
         >
         <summary>
@@ -2633,6 +3093,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2646,6 +3108,8 @@
           <para
             >true if the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2683,8 +3147,12 @@
 
             
 
+            
+
              property of the DataSet before invoking the <see
              cref="M:System.Data.DataSet.GetChanges" />
+
+            
 
             
 
@@ -2703,8 +3171,12 @@
 
             
 
+            
+
              has changes, including new, deleted, or modified rows, filtered by <see
              cref="T:System.Data.DataRowState" />
+
+            
 
             
 
@@ -2723,6 +3195,8 @@
 
             
 
+            
+
              has changes; otherwise false.</para
           >
         </returns>
@@ -2733,8 +3207,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.DataRowState" />
+
+          
 
           
 
@@ -2762,8 +3240,12 @@
 
           
 
+          
+
            if any table contains an error, <see
            langword="false" />
+
+          
 
           
 
@@ -2781,8 +3263,12 @@
 
             
 
+            
+
              in a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2795,8 +3281,12 @@
 
             
 
+            
+
              property. Use the HasErrors property of the DataSet first, to determine if any table has errors, before checking individual <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -2809,8 +3299,12 @@
 
             
 
+            
+
              method returns an array of <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -2829,8 +3323,12 @@
 
             
 
+            
+
              objects within this <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2875,8 +3373,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2892,10 +3394,14 @@
 
           
 
+          
+
           The Stream from which to read the schema. </param
         >
         <param name="nsArray">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2934,8 +3440,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2951,10 +3461,14 @@
 
           
 
+          
+
           The TextReader from which to read the schema. </param
         >
         <param name="nsArray">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2993,6 +3507,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3003,10 +3519,14 @@
 
           
 
+          
+
           The name of the file (including the path) from which to read the schema. </param
         >
         <param name="nsArray">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3045,8 +3565,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -3062,10 +3586,14 @@
 
           
 
+          
+
           The XMLReader from which to read the schema. </param
         >
         <param name="nsArray">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3099,6 +3627,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3107,6 +3637,8 @@
           <para
             >Occurs after the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -3170,6 +3702,8 @@
 
             
 
+            
+
              represents a DataSet serialized in its binary format, false otherwise.</para
           >
         </returns>
@@ -3180,8 +3714,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -3196,8 +3734,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -3233,6 +3775,8 @@
 
             
 
+            
+
              while it’s being constructed, for instance by Visual Studio. The <see
              cref="M:System.Data.DataSet.BeginInit" />
 
@@ -3240,8 +3784,12 @@
 
             
 
+            
+
              method sets it to false and <see
              cref="M:System.Data.DataSet.EndInit" />
+
+            
 
             
 
@@ -3255,6 +3803,8 @@
           <para
             >Gets a value that indicates whether the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -3299,8 +3849,12 @@
 
             
 
+            
+
              method provides a technique for filling a single <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -3313,6 +3867,8 @@
 
             
 
+            
+
              instance. This method provides the same functionality, but allows you to load multiple result sets from an <see
              cref="T:System.Data.IDataReader" />
 
@@ -3320,8 +3876,12 @@
 
             
 
+            
+
              into multiple tables within a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -3338,8 +3898,12 @@
 
               
 
+              
+
                if any of the source data columns in the incoming <paramref
                name="reader" />
+
+              
 
               
 
@@ -3356,8 +3920,12 @@
 
             
 
+            
+
              parameter allows you to specify how you want the imported data to interact with existing data, and can be any of the values from the <see
              cref="T:System.Data.LoadOption" />
+
+            
 
             
 
@@ -3366,6 +3934,8 @@
              enumeration. See the documentation for the <see
              cref="T:System.Data.DataTable" />
             <see cref="M:System.Data.DataTable.Load(System.Data.IDataReader,System.Data.LoadOption)" />
+
+            
 
             
 
@@ -3381,8 +3951,12 @@
 
             
 
+            
+
              parameter allows you to specify an array of <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -3395,6 +3969,8 @@
 
             
 
+            
+
              method fills each supplied <see
              cref="T:System.Data.DataTable" />
 
@@ -3402,8 +3978,12 @@
 
             
 
+            
+
              instance with data from a single result set from the source data reader. After each result set, the <see
              cref="M:System.Data.DataSet.Load(System.Data.IDataReader,System.Data.LoadOption,System.Data.DataTable[])" />
+
+            
 
             
 
@@ -3419,8 +3999,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Data.Common.DbDataAdapter" />
+
+            
 
             
 
@@ -3439,6 +4023,8 @@
 
             
 
+            
+
              with values from a data source using the supplied <see
              cref="T:System.Data.IDataReader" />
 
@@ -3446,8 +4032,12 @@
 
             
 
+            
+
             , using an array of <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -3463,8 +4053,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Data.IDataReader" />
+
+          
 
           
 
@@ -3479,8 +4073,12 @@
 
           
 
+          
+
           A value from the <see
            cref="T:System.Data.LoadOption" />
+
+          
 
           
 
@@ -3493,8 +4091,12 @@
 
           
 
+          
+
            instances within the <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -3509,8 +4111,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -3523,6 +4129,8 @@
 
           
 
+          
+
            method retrieves name and namespace information. Each of these tables must be a member of the <see
            cref="T:System.Data.DataTableCollection" />
 
@@ -3530,8 +4138,12 @@
 
           
 
+          
+
            contained by this <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -3575,6 +4187,8 @@
 
             
 
+            
+
              method provides a technique for filling a single <see
              cref="T:System.Data.DataTable" />
 
@@ -3582,8 +4196,12 @@
 
             
 
+            
+
              with data, retrieved from an <see
              cref="T:System.Data.IDataReader" />
+
+            
 
             
 
@@ -3600,8 +4218,12 @@
 
               
 
+              
+
                if any of the source data columns in the incoming <paramref
                name="reader" />
+
+              
 
               
 
@@ -3618,6 +4240,8 @@
 
             
 
+            
+
              parameter allows you to specify how you want the imported data to interact with existing data, and can be any of the values from the <see
              cref="T:System.Data.LoadOption" />
 
@@ -3625,8 +4249,12 @@
 
             
 
+            
+
              enumeration. See the documentation for the <see
              cref="M:System.Data.DataTable.Load(System.Data.IDataReader,System.Data.LoadOption)" />
+
+            
 
             
 
@@ -3642,6 +4270,8 @@
 
             
 
+            
+
              parameter allows you to specify an array of table names, indicating the order of the tables corresponding to each result set loaded from the reader. The Load method attempts to find a table within the DataSet matching the name found in the array of table names, in order. If a matching table is found, that table is loaded with the content of the current result set. If no matching table is found, a table is created using the name supplied in the array of table names, and the new table's schema is inferred from the result set. After each result set, the Load method moves on to the next result set within the reader, until there are no more result sets.</para
           >
           <para
@@ -3652,8 +4282,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Data.Common.DbDataAdapter" />
+
+            
 
             
 
@@ -3672,8 +4306,12 @@
 
             
 
+            
+
              with values from a data source using the supplied <see
              cref="T:System.Data.IDataReader" />
+
+            
 
             
 
@@ -3689,8 +4327,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Data.IDataReader" />
+
+          
 
           
 
@@ -3705,8 +4347,12 @@
 
           
 
+          
+
           A value from the <see
            cref="T:System.Data.LoadOption" />
+
+          
 
           
 
@@ -3719,10 +4365,14 @@
 
           
 
+          
+
            instances within the DataSet will be combined with incoming rows that share the same primary key. </param
         >
         <param name="tables">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3767,8 +4417,12 @@
 
             
 
+            
+
              method provides a technique for filling a single <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -3781,6 +4435,8 @@
 
             
 
+            
+
              instance. This method provides the same functionality, but allows you to load multiple result sets from an <see
              cref="T:System.Data.IDataReader" />
 
@@ -3788,8 +4444,12 @@
 
             
 
+            
+
              into multiple tables within a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -3806,8 +4466,12 @@
 
               
 
+              
+
                if any of the source data columns in the incoming <paramref
                name="reader" />
+
+              
 
               
 
@@ -3824,8 +4488,12 @@
 
             
 
+            
+
              parameter allows you to specify how you want the imported data to interact with existing data, and can be any of the values from the <see
              cref="T:System.Data.LoadOption" />
+
+            
 
             
 
@@ -3834,6 +4502,8 @@
              enumeration. See the documentation for the <see
              cref="T:System.Data.DataTable" />
             <see cref="M:System.Data.DataTable.Load(System.Data.IDataReader,System.Data.LoadOption)" />
+
+            
 
             
 
@@ -3849,8 +4519,12 @@
 
             
 
+            
+
              parameter is a <see
              cref="T:System.Data.FillErrorEventHandler" />
+
+            
 
             
 
@@ -3863,8 +4537,12 @@
 
             
 
+            
+
              parameter passed to the procedure provides properties that allow you to retrieve information about the error that occurred, the current row of data, and the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -3877,8 +4555,12 @@
 
             
 
+            
+
              parameter supplies a <see
              cref="P:System.Data.FillErrorEventArgs.Continue" />
+
+            
 
             
 
@@ -3894,8 +4576,12 @@
 
             
 
+            
+
              parameter allows you to specify an array of <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -3908,6 +4594,8 @@
 
             
 
+            
+
              method fills each supplied <see
              cref="T:System.Data.DataTable" />
 
@@ -3915,8 +4603,12 @@
 
             
 
+            
+
              instance with data from a single result set from the source data reader. After each result set, the <see
              cref="M:System.Data.DataSet.Load(System.Data.IDataReader,System.Data.LoadOption,System.Data.FillErrorEventHandler,System.Data.DataTable[])" />
+
+            
 
             
 
@@ -3932,8 +4624,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Data.Common.DbDataAdapter" />
+
+            
 
             
 
@@ -3952,6 +4648,8 @@
 
             
 
+            
+
              with values from a data source using the supplied <see
              cref="T:System.Data.IDataReader" />
 
@@ -3959,8 +4657,12 @@
 
             
 
+            
+
             , using an array of <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -3976,8 +4678,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Data.IDataReader" />
+
+          
 
           
 
@@ -3992,8 +4698,12 @@
 
           
 
+          
+
           A value from the <see
            cref="T:System.Data.LoadOption" />
+
+          
 
           
 
@@ -4006,8 +4716,12 @@
 
           
 
+          
+
            instances within the <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -4022,8 +4736,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.FillErrorEventHandler" />
+
+          
 
           
 
@@ -4038,6 +4756,8 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Data.DataTable" />
 
@@ -4045,8 +4765,12 @@
 
           
 
+          
+
            instances, from which the <see
            cref="M:System.Data.DataSet.Load(System.Data.IDataReader,System.Data.LoadOption,System.Data.FillErrorEventHandler,System.Data.DataTable[])" />
+
+          
 
           
 
@@ -4075,6 +4799,8 @@
 
           
 
+          
+
            that contains data about the user's machine locale. The default is a null reference.</value
         >
         <remarks>
@@ -4082,6 +4808,8 @@
           <para
             >The <see
              cref="P:System.Data.DataSet.Locale" />
+
+            
 
             
 
@@ -4097,8 +4825,12 @@
 
             
 
+            
+
              for a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4111,8 +4843,12 @@
 
             
 
+            
+
              for each <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -4129,8 +4865,12 @@
 
               
 
+              
+
                is used. The <see
                cref="F:System.StringComparison.CurrentCulture" />
+
+              
 
               
 
@@ -4170,8 +4910,12 @@
 
             
 
+            
+
              method is used to merge two <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4184,8 +4928,12 @@
 
             
 
+            
+
             . This allows the client application to have a refreshed <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4201,8 +4949,12 @@
 
             
 
+            
+
              method is typically called at the end of a series of procedures that involve validating changes, reconciling errors, updating the data source with the changes, and finally refreshing the existing <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4218,8 +4970,12 @@
 
             
 
+            
+
              method is first invoked. That method returns a second <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4232,8 +4988,12 @@
 
             
 
+            
+
              object contains only the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -4246,8 +5006,12 @@
 
             
 
+            
+
              objects that were changed, resulting in a subset of the original <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4260,8 +5024,12 @@
 
             
 
+            
+
              that includes original data and the latest data from the data source (by running the original query again), or it can send back the subset with any changes that have been made to it from the data source. (For example, if the data source automatically creates unique primary key values, these values can be propagated back to the client application.) In either case, the returned <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4274,8 +5042,12 @@
 
             
 
+            
+
              with the <see
              cref="M:System.Data.DataSet.Merge(System.Data.DataSet)" />
+
+            
 
             
 
@@ -4291,8 +5063,12 @@
 
             
 
+            
+
              method is called, the schemas of the two <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4305,8 +5081,12 @@
 
             
 
+            
+
              contains schema elements (added <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -4319,8 +5099,12 @@
 
             
 
+            
+
              argument to MissingSchemaAction.Add. In that case, the merged <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4337,6 +5121,8 @@
 
             
 
+            
+
              into the target, any source rows with a <see
              cref="T:System.Data.DataRowState" />
 
@@ -4344,8 +5130,12 @@
 
             
 
+            
+
              value of Unchanged, Modified, or Deleted are matched to target rows with the same primary key values. Source rows with a <see
              cref="T:System.Data.DataRowState" />
+
+            
 
             
 
@@ -4361,6 +5151,8 @@
 
             
 
+            
+
              is generated and the merged data is retained while the constraints are disabled. In this case, the <see
              cref="P:System.Data.DataSet.EnforceConstraints" />
 
@@ -4368,8 +5160,12 @@
 
             
 
+            
+
              property is set to false, and all rows that are invalid are marked in error. The errors must be resolved before attempting to reset the <see
              cref="P:System.Data.DataSet.EnforceConstraints" />
+
+            
 
             
 
@@ -4388,8 +5184,12 @@
 
             
 
+            
+
              objects into the current <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4400,6 +5200,8 @@
         </summary>
         <param name="rows">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4433,8 +5235,12 @@
 
             
 
+            
+
              method is used to merge two <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4447,8 +5253,12 @@
 
             
 
+            
+
             . This allows the client application to have a refreshed <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4464,8 +5274,12 @@
 
             
 
+            
+
              method is typically called at the end of a series of procedures that involve validating changes, reconciling errors, updating the data source with the changes, and finally refreshing the existing <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4481,8 +5295,12 @@
 
             
 
+            
+
              method is first invoked. That method returns a second <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4495,8 +5313,12 @@
 
             
 
+            
+
              object contains only the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -4509,8 +5331,12 @@
 
             
 
+            
+
              objects that were changed, resulting in a subset of the original <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4523,8 +5349,12 @@
 
             
 
+            
+
              that includes original data and the latest data from the data source (by running the original query again), or it can send back the subset with any changes that have been made to it from the data source. (For example, if the data source automatically creates unique primary key values, these values can be propagated back to the client application.) In either case, the returned <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4537,8 +5367,12 @@
 
             
 
+            
+
              with the <see
              cref="M:System.Data.DataSet.Merge(System.Data.DataSet)" />
+
+            
 
             
 
@@ -4554,8 +5388,12 @@
 
             
 
+            
+
              method is called, the schemas of the two <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4568,8 +5406,12 @@
 
             
 
+            
+
              contains schema elements (added <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -4582,8 +5424,12 @@
 
             
 
+            
+
              argument to MissingSchemaAction.Add. In that case, the merged <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4600,8 +5446,12 @@
 
             
 
+            
+
              into the target, any source rows with a <see
              cref="T:System.Data.DataRowState" />
+
+            
 
             
 
@@ -4617,6 +5467,8 @@
 
             
 
+            
+
              is generated and the merged data is retained while the constraints are disabled. In this case, the <see
              cref="P:System.Data.DataSet.EnforceConstraints" />
 
@@ -4624,8 +5476,12 @@
 
             
 
+            
+
              property is set to false, and all rows that are invalid are marked in error. The errors must be resolved before attempting to reset the <see
              cref="P:System.Data.DataSet.EnforceConstraints" />
+
+            
 
             
 
@@ -4644,11 +5500,15 @@
 
             
 
+            
+
              and its schema into the current DataSet.</para
           >
         </summary>
         <param name="dataSet">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4682,8 +5542,12 @@
 
             
 
+            
+
              method is used to merge two <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4696,8 +5560,12 @@
 
             
 
+            
+
             . This allows the client application to have a refreshed <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4713,8 +5581,12 @@
 
             
 
+            
+
              method is typically called at the end of a series of procedures that involve validating changes, reconciling errors, updating the data source with the changes, and finally refreshing the existing <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4730,8 +5602,12 @@
 
             
 
+            
+
              method is first invoked. That method returns a second <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4744,8 +5620,12 @@
 
             
 
+            
+
              object contains only the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -4758,8 +5638,12 @@
 
             
 
+            
+
              objects that were changed, resulting in a subset of the original <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4772,8 +5656,12 @@
 
             
 
+            
+
              that includes original data and the latest data from the data source (by running the original query again), or it can send back the subset with any changes that have been made to it from the data source. (For example, if the data source automatically creates unique primary key values, these values can be propagated back to the client application.) In either case, the returned <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4786,8 +5674,12 @@
 
             
 
+            
+
              with the <see
              cref="M:System.Data.DataSet.Merge(System.Data.DataSet)" />
+
+            
 
             
 
@@ -4803,8 +5695,12 @@
 
             
 
+            
+
              method is called, the schemas of the two <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4817,8 +5713,12 @@
 
             
 
+            
+
              contains schema elements (added <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -4831,8 +5731,12 @@
 
             
 
+            
+
              argument to MissingSchemaAction.Add. In that case, the merged <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4849,8 +5753,12 @@
 
             
 
+            
+
              into the target, any source rows with a <see
              cref="T:System.Data.DataRowState" />
+
+            
 
             
 
@@ -4866,6 +5774,8 @@
 
             
 
+            
+
              is generated and the merged data is retained while the constraints are disabled. In this case, the <see
              cref="P:System.Data.DataSet.EnforceConstraints" />
 
@@ -4873,8 +5783,12 @@
 
             
 
+            
+
              property is set to false, and all rows that are invalid are marked in error. The errors must be resolved before attempting to reset the <see
              cref="P:System.Data.DataSet.EnforceConstraints" />
+
+            
 
             
 
@@ -4893,8 +5807,12 @@
 
             
 
+            
+
              and its schema into the current <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4910,8 +5828,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -4949,8 +5871,12 @@
 
             
 
+            
+
              method is used to merge two <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4963,8 +5889,12 @@
 
             
 
+            
+
             . This allows the client application to have a refreshed <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4980,8 +5910,12 @@
 
             
 
+            
+
              method is typically called at the end of a series of procedures that involve validating changes, reconciling errors, updating the data source with the changes, and finally refreshing the existing <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4997,8 +5931,12 @@
 
             
 
+            
+
              method is first invoked. That method returns a second <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5011,8 +5949,12 @@
 
             
 
+            
+
              object contains only the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -5025,8 +5967,12 @@
 
             
 
+            
+
              objects that were changed, resulting in a subset of the original <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5039,8 +5985,12 @@
 
             
 
+            
+
              that includes original data and the latest data from the data source (by running the original query again), or it can send back the subset with any changes that have been made to it from the data source. (For example, if the data source automatically creates unique primary key values, these values can be propagated back to the client application.) In either case, the returned <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5053,8 +6003,12 @@
 
             
 
+            
+
              with the <see
              cref="M:System.Data.DataSet.Merge(System.Data.DataSet)" />
+
+            
 
             
 
@@ -5070,8 +6024,12 @@
 
             
 
+            
+
              method is called, the schemas of the two <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5084,8 +6042,12 @@
 
             
 
+            
+
              contains schema elements (added <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -5098,8 +6060,12 @@
 
             
 
+            
+
              argument to MissingSchemaAction.Add. In that case, the merged <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5116,8 +6082,12 @@
 
             
 
+            
+
              into the target, any source rows with a <see
              cref="T:System.Data.DataRowState" />
+
+            
 
             
 
@@ -5133,6 +6103,8 @@
 
             
 
+            
+
              is generated and the merged data is retained while the constraints are disabled. In this case, the <see
              cref="P:System.Data.DataSet.EnforceConstraints" />
 
@@ -5140,8 +6112,12 @@
 
             
 
+            
+
              property is set to false, and all rows that are invalid are marked in error. The errors must be resolved before attempting to reset the <see
              cref="P:System.Data.DataSet.EnforceConstraints" />
+
+            
 
             
 
@@ -5160,6 +6136,8 @@
 
             
 
+            
+
              and its schema into the current DataSet, preserving or discarding any changes in this DataSet according to the given argument.</para
           >
         </summary>
@@ -5170,10 +6148,14 @@
 
           
 
+          
+
           The DataSet whose data and schema will be merged. </param
         >
         <param name="preserveChanges">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5212,8 +6194,12 @@
 
             
 
+            
+
              method is used to merge two <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5226,8 +6212,12 @@
 
             
 
+            
+
             . This allows the client application to have a refreshed <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5243,8 +6233,12 @@
 
             
 
+            
+
              method is typically called at the end of a series of procedures that involve validating changes, reconciling errors, updating the data source with the changes, and finally refreshing the existing <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5260,8 +6254,12 @@
 
             
 
+            
+
              method is first invoked. That method returns a second <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5274,8 +6272,12 @@
 
             
 
+            
+
              object contains only the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -5288,8 +6290,12 @@
 
             
 
+            
+
              objects that were changed, resulting in a subset of the original <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5302,8 +6308,12 @@
 
             
 
+            
+
              that includes original data and the latest data from the data source (by running the original query again), or it can send back the subset with any changes that have been made to it from the data source. (For example, if the data source automatically creates unique primary key values, these values can be propagated back to the client application.) In either case, the returned <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5316,8 +6326,12 @@
 
             
 
+            
+
              with the <see
              cref="M:System.Data.DataSet.Merge(System.Data.DataSet)" />
+
+            
 
             
 
@@ -5333,8 +6347,12 @@
 
             
 
+            
+
              method, we use "target" to signify the current <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5347,8 +6365,12 @@
 
             
 
+            
+
             . The target <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5361,8 +6383,12 @@
 
             
 
+            
+
              is called a "source" because the information it contains does not change, but instead is merged into the current <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5378,8 +6404,12 @@
 
             
 
+            
+
              method is called, the schemas of the two <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5392,8 +6422,12 @@
 
             
 
+            
+
              contains schema elements (added <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -5406,8 +6440,12 @@
 
             
 
+            
+
              argument to MissingSchemaAction.Add. In that case, the merged <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5424,8 +6462,12 @@
 
             
 
+            
+
              into the target, any source rows with a <see
              cref="T:System.Data.DataRowState" />
+
+            
 
             
 
@@ -5441,6 +6483,8 @@
 
             
 
+            
+
              is generated and the merged data is retained while the constraints are disabled. In this case, the <see
              cref="P:System.Data.DataSet.EnforceConstraints" />
 
@@ -5448,8 +6492,12 @@
 
             
 
+            
+
              property is set to false, and all rows that are invalid are marked in error. The errors must be resolved before attempting to reset the <see
              cref="P:System.Data.DataSet.EnforceConstraints" />
+
+            
 
             
 
@@ -5468,8 +6516,12 @@
 
             
 
+            
+
              objects into the current <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5485,8 +6537,12 @@
 
           
 
+          
+
           The array of <see
            cref="T:System.Data.DataRow" />
+
+          
 
           
 
@@ -5501,6 +6557,8 @@
 
           
 
+          
+
           true to preserve changes in the DataSet; otherwise false. </param
         >
         <param name="missingSchemaAction">
@@ -5510,8 +6568,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.MissingSchemaAction" />
+
+          
 
           
 
@@ -5550,8 +6612,12 @@
 
             
 
+            
+
              method is used to merge two <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5564,8 +6630,12 @@
 
             
 
+            
+
             . This allows the client application to have a refreshed <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5581,8 +6651,12 @@
 
             
 
+            
+
              method is typically called at the end of a series of procedures that involve validating changes, reconciling errors, updating the data source with the changes, and finally refreshing the existing <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5598,8 +6672,12 @@
 
             
 
+            
+
              method is first invoked. That method returns a second <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5612,8 +6690,12 @@
 
             
 
+            
+
              object contains only the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -5626,8 +6708,12 @@
 
             
 
+            
+
              objects that were changed, resulting in a subset of the original <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5640,8 +6726,12 @@
 
             
 
+            
+
              that includes original data and the latest data from the data source (by running the original query again), or it can send back the subset with any changes that have been made to it from the data source. (For example, if the data source automatically creates unique primary key values, these values can be propagated back to the client application.) In either case, the returned <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5654,8 +6744,12 @@
 
             
 
+            
+
              with the <see
              cref="M:System.Data.DataSet.Merge(System.Data.DataSet)" />
+
+            
 
             
 
@@ -5671,8 +6765,12 @@
 
             
 
+            
+
              method, we use "target" to signify the current <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5685,8 +6783,12 @@
 
             
 
+            
+
             . The target <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5699,8 +6801,12 @@
 
             
 
+            
+
              is called a "source" because the information it contains does not change, but instead is merged into the current <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5716,8 +6822,12 @@
 
             
 
+            
+
              method is called, the schemas of the two <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5730,8 +6840,12 @@
 
             
 
+            
+
              contains schema elements (added <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -5744,8 +6858,12 @@
 
             
 
+            
+
              argument to MissingSchemaAction.Add. In that case, the merged <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5762,8 +6880,12 @@
 
             
 
+            
+
              into the target, any source rows with a <see
              cref="T:System.Data.DataRowState" />
+
+            
 
             
 
@@ -5779,6 +6901,8 @@
 
             
 
+            
+
              is generated and the merged data is retained while the constraints are disabled. In this case, the <see
              cref="P:System.Data.DataSet.EnforceConstraints" />
 
@@ -5786,8 +6910,12 @@
 
             
 
+            
+
              property is set to false, and all rows that are invalid are marked in error. The errors must be resolved before attempting to reset the <see
              cref="P:System.Data.DataSet.EnforceConstraints" />
+
+            
 
             
 
@@ -5806,11 +6934,15 @@
 
             
 
+            
+
              and its schema with the current DataSet, preserving or discarding changes in the current DataSet and handling an incompatible schema according to the given arguments.</para
           >
         </summary>
         <param name="dataSet">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5825,6 +6957,8 @@
 
           
 
+          
+
           true to preserve changes in the current DataSet; otherwise false. </param
         >
         <param name="missingSchemaAction">
@@ -5834,8 +6968,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.MissingSchemaAction" />
+
+          
 
           
 
@@ -5874,8 +7012,12 @@
 
             
 
+            
+
              method is used to merge two <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5888,8 +7030,12 @@
 
             
 
+            
+
             . This allows the client application to have a refreshed <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5905,8 +7051,12 @@
 
             
 
+            
+
              method is typically called at the end of a series of procedures that involve validating changes, reconciling errors, updating the data source with the changes, and finally refreshing the existing <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5922,8 +7072,12 @@
 
             
 
+            
+
              method is first invoked. That method returns a second <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5936,8 +7090,12 @@
 
             
 
+            
+
              object contains only the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -5950,8 +7108,12 @@
 
             
 
+            
+
              objects that were changed, resulting in a subset of the original <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5964,8 +7126,12 @@
 
             
 
+            
+
              that includes original data and the latest data from the data source (by running the original query again), or it can send back the subset with any changes that have been made to it from the data source. (For example, if the data source automatically creates unique primary key values, these values can be propagated back to the client application.) In either case, the returned <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5978,8 +7144,12 @@
 
             
 
+            
+
              with the <see
              cref="M:System.Data.DataSet.Merge(System.Data.DataSet)" />
+
+            
 
             
 
@@ -5995,8 +7165,12 @@
 
             
 
+            
+
              method is called, the schemas of the two <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -6009,8 +7183,12 @@
 
             
 
+            
+
              contains schema elements (added <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -6023,8 +7201,12 @@
 
             
 
+            
+
              argument to MissingSchemaAction.Add. In that case, the merged <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -6041,8 +7223,12 @@
 
             
 
+            
+
              into the target, any source rows with a <see
              cref="T:System.Data.DataRowState" />
+
+            
 
             
 
@@ -6058,6 +7244,8 @@
 
             
 
+            
+
              is generated and the merged data is retained while the constraints are disabled. In this case, the <see
              cref="P:System.Data.DataSet.EnforceConstraints" />
 
@@ -6065,8 +7253,12 @@
 
             
 
+            
+
              property is set to false, and all rows that are invalid are marked in error. The errors must be resolved before attempting to reset the <see
              cref="P:System.Data.DataSet.EnforceConstraints" />
+
+            
 
             
 
@@ -6085,11 +7277,15 @@
 
             
 
+            
+
              and its schema into the current DataSet, preserving or discarding changes in the DataSet and handling an incompatible schema according to the given arguments.</para
           >
         </summary>
         <param name="table">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6104,8 +7300,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.MissingSchemaAction" />
+
+          
 
           
 
@@ -6115,6 +7315,8 @@
         >
         <param name="missingSchemaAction">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6153,6 +7355,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -6166,8 +7370,12 @@
 
             
 
+            
+
              have the same primary key value, and <see
              cref="P:System.Data.DataSet.EnforceConstraints" />
+
+            
 
             
 
@@ -6201,8 +7409,12 @@
 
             
 
+            
+
              property is used when reading and writing an XML document into the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -6215,8 +7427,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Data.DataSet.WriteXml(System.IO.Stream)" />
+
+            
 
             
 
@@ -6229,8 +7445,12 @@
 
             
 
+            
+
             , or <see
              cref="M:System.Data.DataSet.WriteXmlSchema(System.IO.Stream)" />
+
+            
 
             
 
@@ -6246,8 +7466,12 @@
 
             
 
+            
+
             . For example, if a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -6261,6 +7485,8 @@
           <para
             >Gets or sets the namespace of the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -6309,6 +7535,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -6317,6 +7545,8 @@
           <para
             >Raises the <see
              cref="M:System.Data.DataSet.OnPropertyChanging(System.ComponentModel.PropertyChangedEventArgs)" />
+
+            
 
             
 
@@ -6332,8 +7562,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.PropertyChangedEventArgs" />
+
+          
 
           
 
@@ -6370,8 +7604,12 @@
 
             
 
+            
+
              object is removed from a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -6387,8 +7625,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataRelation" />
+
+          
 
           
 
@@ -6429,8 +7671,12 @@
 
             
 
+            
+
              is removed from a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -6446,8 +7692,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -6480,6 +7730,8 @@
 
             
 
+            
+
              property is used throughout an XML document to identify elements which belong to the namespace of the <see
              cref="T:System.Data.DataSet" />
 
@@ -6487,8 +7739,12 @@
 
             
 
+            
+
              object (as set by the <see
              cref="P:System.Data.DataSet.Namespace" />
+
+            
 
             
 
@@ -6502,6 +7758,8 @@
           <para
             >Gets or sets an XML prefix that aliases the namespace of the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -6546,11 +7804,15 @@
 
             
 
+            
+
              property is about to change.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6583,8 +7845,12 @@
 
             
 
+            
+
              method provides a way to read either data only, or both data and schema into a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -6597,8 +7863,12 @@
 
             
 
+            
+
              method reads only the schema. To read both data and schema, use one of the ReadXML overloads that includes the <paramref
              name="mode" />
+
+            
 
             
 
@@ -6614,8 +7884,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Data.DataSet.WriteXmlSchema(System.IO.Stream)" />
+
+            
 
             
 
@@ -6632,6 +7906,8 @@
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -6639,8 +7915,12 @@
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -6662,6 +7942,8 @@
 
             
 
+            
+
              includes targetNamespace, data may not be read, and you may encounter exceptions when calling <see
              cref="M:System.Data.DataSet.ReadXml(System.Xml.XmlReader)" />
 
@@ -6669,8 +7951,12 @@
 
             
 
+            
+
              to load the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -6694,6 +7980,8 @@
 
               
 
+              
+
                contains elements of the same name, but different type, in the same namespace, an exception is thrown when you attempt to read the schema into the <see
                cref="T:System.Data.DataSet" />
 
@@ -6701,8 +7989,12 @@
 
               
 
+              
+
                with <see
                cref="M:System.Data.DataSet.ReadXml(System.Xml.XmlReader)" />
+
+              
 
               
 
@@ -6722,8 +8014,12 @@
 
             
 
+            
+
              using the specified <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -6742,6 +8038,8 @@
 
             
 
+            
+
              used to read the data.</para
           >
         </returns>
@@ -6752,8 +8050,12 @@
 
           
 
+          
+
           An object that derives from <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -6790,8 +8092,12 @@
 
             
 
+            
+
              method provides a way to read either data only, or both data and schema into a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -6804,8 +8110,12 @@
 
             
 
+            
+
              method reads only the schema. To read both data and schema, use one of the ReadXML overloads that includes the <paramref
              name="mode" />
+
+            
 
             
 
@@ -6821,8 +8131,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Data.DataSet.WriteXmlSchema(System.IO.Stream)" />
+
+            
 
             
 
@@ -6839,6 +8153,8 @@
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -6846,8 +8162,12 @@
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -6869,6 +8189,8 @@
 
             
 
+            
+
              includes targetNamespace, data may not be read, and you may encounter exceptions when calling <see
              cref="M:System.Data.DataSet.ReadXml(System.Xml.XmlReader)" />
 
@@ -6876,8 +8198,12 @@
 
             
 
+            
+
              to load the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -6900,6 +8226,8 @@
 
             
 
+            
+
              class include the <see
              cref="T:System.IO.StreamReader" />
 
@@ -6907,8 +8235,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.IO.StringReader" />
+
+            
 
             
 
@@ -6925,6 +8257,8 @@
 
               
 
+              
+
                contains elements of the same name, but different type, in the same namespace, an exception is thrown when you attempt to read the schema into the <see
                cref="T:System.Data.DataSet" />
 
@@ -6932,8 +8266,12 @@
 
               
 
+              
+
                with <see
                cref="M:System.Data.DataSet.ReadXml(System.Xml.XmlReader)" />
+
+              
 
               
 
@@ -6953,8 +8291,12 @@
 
             
 
+            
+
              using the specified <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -6973,11 +8315,15 @@
 
             
 
+            
+
              used to read the data.</para
           >
         </returns>
         <param name="reader">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7014,8 +8360,12 @@
 
             
 
+            
+
              method provides a way to read either data only, or both data and schema into a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -7028,8 +8378,12 @@
 
             
 
+            
+
              method reads only the schema. To read both data and schema, use one of the ReadXML overloads that includes the <paramref
              name="mode" />
+
+            
 
             
 
@@ -7045,8 +8399,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Data.DataSet.WriteXmlSchema(System.IO.Stream)" />
+
+            
 
             
 
@@ -7063,6 +8421,8 @@
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -7070,8 +8430,12 @@
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -7093,6 +8457,8 @@
 
             
 
+            
+
              includes a targetNamespace, data may not be read, and you may encounter exceptions when calling <see
              cref="M:System.Data.DataSet.ReadXml(System.Xml.XmlReader)" />
 
@@ -7100,8 +8466,12 @@
 
             
 
+            
+
              to load the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -7125,6 +8495,8 @@
 
               
 
+              
+
                contains elements of the same name, but different type, in the same namespace, an exception is thrown when you attempt to read the schema into the <see
                cref="T:System.Data.DataSet" />
 
@@ -7132,8 +8504,12 @@
 
               
 
+              
+
                with <see
                cref="M:System.Data.DataSet.ReadXml(System.Xml.XmlReader)" />
+
+              
 
               
 
@@ -7153,6 +8529,8 @@
 
             
 
+            
+
              using the specified file.</para
           >
         </summary>
@@ -7162,6 +8540,8 @@
         </returns>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7198,8 +8578,12 @@
 
             
 
+            
+
              method provides a way to read either data only, or both data and schema into a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -7212,8 +8596,12 @@
 
             
 
+            
+
              method reads only the schema. To read both data and schema, use one of the ReadXML overloads that includes the <paramref
              name="mode" />
+
+            
 
             
 
@@ -7229,8 +8617,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Data.DataSet.WriteXmlSchema(System.IO.Stream)" />
+
+            
 
             
 
@@ -7247,6 +8639,8 @@
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -7254,8 +8648,12 @@
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -7277,6 +8675,8 @@
 
             
 
+            
+
              includes a targetNamespace, data may not be read, and you may encounter exceptions when calling <see
              cref="M:System.Data.DataSet.ReadXml(System.Xml.XmlReader)" />
 
@@ -7284,8 +8684,12 @@
 
             
 
+            
+
              to load the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -7307,8 +8711,12 @@
 
             
 
+            
+
              inherits from <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -7325,6 +8733,8 @@
 
               
 
+              
+
                contains elements of the same name, but different type, in the same namespace, an exception is thrown when you attempt to read the schema into the <see
                cref="T:System.Data.DataSet" />
 
@@ -7332,8 +8742,12 @@
 
               
 
+              
+
                with <see
                cref="M:System.Data.DataSet.ReadXml(System.Xml.XmlReader)" />
+
+              
 
               
 
@@ -7353,8 +8767,12 @@
 
             
 
+            
+
              using the specified <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -7374,8 +8792,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -7413,8 +8835,12 @@
 
             
 
+            
+
              method provides a way to read either data only, or both data and schema into a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -7427,8 +8853,12 @@
 
             
 
+            
+
              method reads only the schema. To read both data and schema, use one of the ReadXML overloads that includes the <paramref
              name="mode" />
+
+            
 
             
 
@@ -7444,8 +8874,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Data.DataSet.WriteXmlSchema(System.IO.Stream)" />
+
+            
 
             
 
@@ -7462,8 +8896,12 @@
 
               
 
+              
+
                and you set <see
                cref="T:System.Data.XmlReadMode" />
+
+              
 
               
 
@@ -7473,6 +8911,8 @@
                type="text/html">
                 <a href="037f3991-7bbc-424b-b52e-8b03585d3e34">DiffGrams</a>
               </format>
+
+              
 
               
 
@@ -7490,6 +8930,8 @@
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -7497,8 +8939,12 @@
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -7520,6 +8966,8 @@
 
             
 
+            
+
              includes targetNamespace, data may not be read, and you may encounter exceptions when calling <see
              cref="M:System.Data.DataSet.ReadXml(System.Xml.XmlReader)" />
 
@@ -7527,8 +8975,12 @@
 
             
 
+            
+
              to load the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -7552,6 +9004,8 @@
 
               
 
+              
+
                contains elements of the same name, but different type, in the same namespace, an exception is thrown when you attempt to read the schema into the <see
                cref="T:System.Data.DataSet" />
 
@@ -7559,8 +9013,12 @@
 
               
 
+              
+
                with <see
                cref="M:System.Data.DataSet.ReadXml(System.Xml.XmlReader)" />
+
+              
 
               
 
@@ -7580,6 +9038,8 @@
 
             
 
+            
+
              using the specified <see
              cref="T:System.IO.Stream" />
 
@@ -7587,8 +9047,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Data.XmlReadMode" />
+
+            
 
             
 
@@ -7608,8 +9072,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -7624,8 +9092,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.XmlReadMode" />
+
+          
 
           
 
@@ -7663,8 +9135,12 @@
 
             
 
+            
+
              method provides a way to read either data only, or both data and schema into a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -7677,8 +9153,12 @@
 
             
 
+            
+
              method reads only the schema. To read both data and schema, use one of the ReadXML overloads that includes the <paramref
              name="mode" />
+
+            
 
             
 
@@ -7694,8 +9174,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Data.DataSet.WriteXmlSchema(System.IO.Stream)" />
+
+            
 
             
 
@@ -7712,6 +9196,8 @@
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -7719,8 +9205,12 @@
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -7742,6 +9232,8 @@
 
             
 
+            
+
              includes targetNamespace, data may not be read, and you may encounter exceptions when calling <see
              cref="M:System.Data.DataSet.ReadXml(System.Xml.XmlReader)" />
 
@@ -7749,8 +9241,12 @@
 
             
 
+            
+
              to load the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -7774,6 +9270,8 @@
 
               
 
+              
+
                contains elements of the same name, but different type, in the same namespace, an exception is thrown when you attempt to read the schema into the <see
                cref="T:System.Data.DataSet" />
 
@@ -7781,8 +9279,12 @@
 
               
 
+              
+
                with <see
                cref="M:System.Data.DataSet.ReadXml(System.Xml.XmlReader)" />
+
+              
 
               
 
@@ -7802,6 +9304,8 @@
 
             
 
+            
+
              using the specified <see
              cref="T:System.IO.TextReader" />
 
@@ -7809,8 +9313,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Data.XmlReadMode" />
+
+            
 
             
 
@@ -7830,8 +9338,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextReader" />
+
+          
 
           
 
@@ -7846,8 +9358,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.XmlReadMode" />
+
+          
 
           
 
@@ -7885,8 +9401,12 @@
 
             
 
+            
+
              method provides a way to read either data only, or both data and schema into a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -7899,8 +9419,12 @@
 
             
 
+            
+
              method reads only the schema. To read both data and schema, use one of the ReadXML overloads that includes the <paramref
              name="mode" />
+
+            
 
             
 
@@ -7916,8 +9440,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Data.DataSet.WriteXmlSchema(System.IO.Stream)" />
+
+            
 
             
 
@@ -7934,6 +9462,8 @@
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -7941,8 +9471,12 @@
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -7964,6 +9498,8 @@
 
             
 
+            
+
              includes a targetNamespace, data may not be read, and you may encounter exceptions when calling <see
              cref="M:System.Data.DataSet.ReadXml(System.Xml.XmlReader)" />
 
@@ -7971,8 +9507,12 @@
 
             
 
+            
+
              to load the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -7996,6 +9536,8 @@
 
               
 
+              
+
                contains elements of the same name, but different type, in the same namespace, an exception is thrown when you attempt to read the schema into the <see
                cref="T:System.Data.DataSet" />
 
@@ -8003,8 +9545,12 @@
 
               
 
+              
+
                with <see
                cref="M:System.Data.DataSet.ReadXml(System.Xml.XmlReader)" />
+
+              
 
               
 
@@ -8024,8 +9570,12 @@
 
             
 
+            
+
              using the specified file and <see
              cref="T:System.Data.XmlReadMode" />
+
+            
 
             
 
@@ -8045,6 +9595,8 @@
 
           
 
+          
+
           The filename (including the path) from which to read. </param
         >
         <param name="mode">
@@ -8054,8 +9606,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.XmlReadMode" />
+
+          
 
           
 
@@ -8093,8 +9649,12 @@
 
             
 
+            
+
              method provides a way to read either data only, or both data and schema into a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -8107,8 +9667,12 @@
 
             
 
+            
+
              method reads only the schema. To read both data and schema, use one of the ReadXML overloads that includes the <paramref
              name="mode" />
+
+            
 
             
 
@@ -8124,8 +9688,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Data.DataSet.WriteXmlSchema(System.IO.Stream)" />
+
+            
 
             
 
@@ -8142,6 +9710,8 @@
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -8149,8 +9719,12 @@
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -8172,6 +9746,8 @@
 
             
 
+            
+
              includes a targetNamespace, data may not be read, and you may encounter exceptions when calling <see
              cref="M:System.Data.DataSet.ReadXml(System.Xml.XmlReader)" />
 
@@ -8179,8 +9755,12 @@
 
             
 
+            
+
              to load the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -8204,6 +9784,8 @@
 
               
 
+              
+
                contains elements of the same name, but different type, in the same namespace, an exception is thrown when you attempt to read the schema into the <see
                cref="T:System.Data.DataSet" />
 
@@ -8211,8 +9793,12 @@
 
               
 
+              
+
                with <see
                cref="M:System.Data.DataSet.ReadXml(System.Xml.XmlReader)" />
+
+              
 
               
 
@@ -8232,6 +9818,8 @@
 
             
 
+            
+
              using the specified <see
              cref="T:System.Xml.XmlReader" />
 
@@ -8239,8 +9827,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Data.XmlReadMode" />
+
+            
 
             
 
@@ -8260,8 +9852,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -8276,8 +9872,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.XmlReadMode" />
+
+          
 
           
 
@@ -8311,6 +9911,8 @@
 
             
 
+            
+
              method to create the schema for a <see
              cref="T:System.Data.DataSet" />
 
@@ -8318,8 +9920,12 @@
 
             
 
+            
+
             . The schema includes table, relation, and constraint definitions. To write a schema to an XML document, use the <see
              cref="M:System.Data.DataSet.WriteXmlSchema(System.IO.Stream)" />
+
+            
 
             
 
@@ -8339,6 +9945,8 @@
 
             
 
+            
+
              method is generally invoked before invoking the <see
              cref="M:System.Data.DataSet.ReadXml(System.Xml.XmlReader)" />
 
@@ -8346,8 +9954,12 @@
 
             
 
+            
+
              method which is used to fill the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -8363,8 +9975,12 @@
 
             
 
+            
+
              class include <see
              cref="T:System.IO.BufferedStream" />
+
+            
 
             
 
@@ -8377,6 +9993,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.IO.MemoryStream" />
 
@@ -8384,8 +10002,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -8402,6 +10024,8 @@
 
               
 
+              
+
                contains elements of the same name, but different type, in the same namespace, an exception is be thrown when you attempt to read the schema into the <see
                cref="T:System.Data.DataSet" />
 
@@ -8409,8 +10033,12 @@
 
               
 
+              
+
                with <see
                cref="M:System.Data.DataSet.ReadXmlSchema(System.Xml.XmlReader)" />
+
+              
 
               
 
@@ -8430,8 +10058,12 @@
 
             
 
+            
+
              into the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -8447,8 +10079,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -8485,6 +10121,8 @@
 
             
 
+            
+
              method to create the schema for a <see
              cref="T:System.Data.DataSet" />
 
@@ -8492,8 +10130,12 @@
 
             
 
+            
+
             . The schema includes table, relation, and constraint definitions. To write a schema to an XML document, use the <see
              cref="M:System.Data.DataSet.WriteXmlSchema(System.IO.Stream)" />
+
+            
 
             
 
@@ -8513,6 +10155,8 @@
 
             
 
+            
+
              method is generally invoked before invoking the <see
              cref="M:System.Data.DataSet.ReadXml(System.Xml.XmlReader)" />
 
@@ -8520,8 +10164,12 @@
 
             
 
+            
+
              method which is used to fill the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -8537,6 +10185,8 @@
 
             
 
+            
+
              class include the <see
              cref="T:System.IO.StreamReader" />
 
@@ -8544,8 +10194,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.IO.StringReader" />
+
+            
 
             
 
@@ -8562,6 +10216,8 @@
 
               
 
+              
+
                contains elements of the same name, but different type, in the same namespace, an exception is be thrown when you attempt to read the schema into the <see
                cref="T:System.Data.DataSet" />
 
@@ -8569,8 +10225,12 @@
 
               
 
+              
+
                with <see
                cref="M:System.Data.DataSet.ReadXmlSchema(System.Xml.XmlReader)" />
+
+              
 
               
 
@@ -8590,8 +10250,12 @@
 
             
 
+            
+
              into the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -8607,8 +10271,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextReader" />
+
+          
 
           
 
@@ -8642,6 +10310,8 @@
 
             
 
+            
+
              method to create the schema for a <see
              cref="T:System.Data.DataSet" />
 
@@ -8649,8 +10319,12 @@
 
             
 
+            
+
             . The schema includes table, relation, and constraint definitions. To write a schema to an XML document, use the <see
              cref="M:System.Data.DataSet.WriteXmlSchema(System.IO.Stream)" />
+
+            
 
             
 
@@ -8670,6 +10344,8 @@
 
             
 
+            
+
              method is generally invoked before invoking the <see
              cref="M:System.Data.DataSet.ReadXml(System.Xml.XmlReader)" />
 
@@ -8677,8 +10353,12 @@
 
             
 
+            
+
              method which is used to fill the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -8695,6 +10375,8 @@
 
               
 
+              
+
                contains elements of the same name, but different type, in the same namespace, an exception is thrown when you attempt to read the schema into the <see
                cref="T:System.Data.DataSet" />
 
@@ -8702,8 +10384,12 @@
 
               
 
+              
+
                with <see
                cref="M:System.Data.DataSet.ReadXmlSchema(System.Xml.XmlReader)" />
+
+              
 
               
 
@@ -8723,11 +10409,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8764,8 +10454,12 @@
 
             
 
+            
+
              method to create the schema for a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -8785,6 +10479,8 @@
 
             
 
+            
+
              method is generally invoked before invoking the <see
              cref="M:System.Data.DataSet.ReadXml(System.Xml.XmlReader)" />
 
@@ -8792,8 +10488,12 @@
 
             
 
+            
+
              method which is used to fill the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -8809,8 +10509,12 @@
 
             
 
+            
+
              class is abstract. A class that inherits from the XmlReader is the <see
              cref="T:System.Xml.XmlTextReader" />
+
+            
 
             
 
@@ -8827,6 +10531,8 @@
 
               
 
+              
+
                contains elements of the same name, but different type, in the same namespace, an exception is be thrown when you attempt to read the schema into the <see
                cref="T:System.Data.DataSet" />
 
@@ -8834,8 +10540,12 @@
 
               
 
+              
+
                with <see
                cref="M:System.Data.DataSet.ReadXmlSchema(System.Xml.XmlReader)" />
+
+              
 
               
 
@@ -8855,8 +10565,12 @@
 
             
 
+            
+
              into the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -8872,8 +10586,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -8912,6 +10630,8 @@
 
           
 
+          
+
           The specified XML reader. </param
         >
       </Docs>
@@ -8938,8 +10658,12 @@
 
             
 
+            
+
              to call the <see
              cref="M:System.Data.DataTable.RejectChanges" />
+
+            
 
             
 
@@ -8952,8 +10676,12 @@
 
             
 
+            
+
              objects contained by the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -8968,8 +10696,12 @@
 
             
 
+            
+
              objects contained by the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -8982,8 +10714,12 @@
 
             
 
+            
+
              method. After invoking the <see
              cref="M:System.Data.DataRow.EndEdit" />
+
+            
 
             
 
@@ -8996,6 +10732,8 @@
 
             
 
+            
+
              on the <see
              cref="T:System.Data.DataTable" />
 
@@ -9003,8 +10741,12 @@
 
             
 
+            
+
              to which the <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -9020,11 +10762,15 @@
 
             
 
+            
+
              method is called, any rows still in edit-mode cancel their edits. New rows are removed. Modified and deleted rows return back to their original state (DataRowState.Unchanged).</para
           >
           <para
             >AcceptChanges and RejectChanges only apply to <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -9043,8 +10789,12 @@
 
             
 
+            
+
              since it was created, or since the last time <see
              cref="M:System.Data.DataSet.AcceptChanges" />
+
+            
 
             
 
@@ -9077,8 +10827,12 @@
 
           
 
+          
+
            that contains a collection of <see
            cref="T:System.Data.DataRelation" />
+
+          
 
           
 
@@ -9132,8 +10886,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -9163,6 +10921,8 @@
 
             
 
+            
+
             . Subclasses should override <see
              cref="M:System.Data.DataSet.Reset" />
 
@@ -9170,8 +10930,12 @@
 
             
 
+            
+
              to restore a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -9218,6 +10982,8 @@
 
             
 
+            
+
              serializes its schema and instance data by default in Web services and remoting scenarios. Setting the <see
              cref="P:System.Data.DataSet.SchemaSerializationMode" />
 
@@ -9225,8 +10991,12 @@
 
             
 
+            
+
              property of a typed DataSet to <see
              cref="F:System.Data.SchemaSerializationMode.ExcludeSchema" />
+
+            
 
             
 
@@ -9241,8 +11011,12 @@
 
             
 
+            
+
              is supported only for a typed DataSet. For an un-typed DataSet this property can only be set to <see
              cref="F:System.Data.SchemaSerializationMode.IncludeSchema" />
+
+            
 
             
 
@@ -9257,8 +11031,12 @@
 
             
 
+            
+
              should only be used in cases where the schema information of the underlying typed DataTables, DataRelations and Constraints has not been modified. If modifications have occurred, complete schema information should be serialized with <see
              cref="F:System.Data.SchemaSerializationMode.IncludeSchema" />
+
+            
 
             
 
@@ -9268,6 +11046,8 @@
           >
           <para>
             <see cref="F:System.Data.SchemaSerializationMode.ExcludeSchema" />
+
+            
 
             
 
@@ -9283,8 +11063,12 @@
 
             
 
+            
+
              is set, only the top level runtime properties present on the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -9297,8 +11081,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Data.DataSet.Namespace" />
+
+            
 
             
 
@@ -9311,8 +11099,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Data.DataSet.Locale" />
+
+            
 
             
 
@@ -9325,8 +11117,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Data.DataSet.CaseSensitive" />
+
+            
 
             
 
@@ -9345,8 +11141,12 @@
 
             
 
+            
+
              for a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -9375,8 +11175,12 @@
 
             
 
+            
+
             , or creating your own control incorporating the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -9390,6 +11194,8 @@
           <para
             >Gets a value indicating whether <see
              cref="P:System.Data.DataSet.Relations" />
+
+            
 
             
 
@@ -9426,8 +11232,12 @@
 
             
 
+            
+
             , or creating your own control incorporating the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -9441,6 +11251,8 @@
           <para
             >Gets a value indicating whether <see
              cref="P:System.Data.DataSet.Tables" />
+
+            
 
             
 
@@ -9478,6 +11290,8 @@
 
           
 
+          
+
            for the DataSet.</value
         >
         <remarks>
@@ -9490,8 +11304,12 @@
 
             
 
+            
+
              to a <see
              cref="T:System.ComponentModel.Container" />
+
+            
 
             
 
@@ -9510,8 +11328,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -9559,8 +11381,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IListSource" />
+
+            
 
             
 
@@ -9574,6 +11400,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.ComponentModel.IListSource.ContainsListCollection" />
+
+            
 
             
 
@@ -9606,8 +11434,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IListSource" />
+
+            
 
             
 
@@ -9626,6 +11458,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -9634,6 +11468,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.ComponentModel.IListSource.GetList" />
+
+            
 
             
 
@@ -9672,6 +11508,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -9682,8 +11520,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -9698,8 +11540,12 @@
 
           
 
+          
+
           The destination (see <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -9734,8 +11580,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+            
 
             
 
@@ -9754,6 +11604,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -9762,6 +11614,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.Xml.Serialization.IXmlSerializable.GetSchema" />
+
+            
 
             
 
@@ -9799,8 +11653,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+            
 
             
 
@@ -9819,6 +11677,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -9829,8 +11689,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -9867,8 +11731,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+            
 
             
 
@@ -9887,6 +11755,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -9897,8 +11767,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -9926,6 +11800,8 @@
 
           
 
+          
+
            contained by this DataSet; otherwise a <see
            langword="null" />
 
@@ -9933,8 +11809,12 @@
 
           
 
+          
+
            value if no <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -9952,6 +11832,8 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Data.DataTableCollection" />
 
@@ -9959,8 +11841,12 @@
 
             
 
+            
+
             . To remove tables, use the <see
              cref="M:System.Data.DataTableCollection.Remove(System.Data.DataTable)" />
+
+            
 
             
 
@@ -9974,6 +11860,8 @@
           <para
             >Gets the collection of tables contained in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -10013,6 +11901,8 @@
 
             
 
+            
+
              into an XML document, whereas the <see
              cref="M:System.Data.DataSet.WriteXmlSchema(System.IO.Stream)" />
 
@@ -10020,8 +11910,12 @@
 
             
 
+            
+
              method writes only the schema. To write both data and schema, use one of the overloads that includes the <paramref
              name="mode" />
+
+            
 
             
 
@@ -10037,8 +11931,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Data.DataSet.ReadXmlSchema(System.Xml.XmlReader)" />
+
+            
 
             
 
@@ -10055,6 +11953,8 @@
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -10062,8 +11962,12 @@
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -10083,8 +11987,12 @@
 
             
 
+            
+
              using the specified <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -10100,8 +12008,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -10135,6 +12047,8 @@
 
             
 
+            
+
              into an XML document, whereas the <see
              cref="M:System.Data.DataSet.WriteXmlSchema(System.IO.Stream)" />
 
@@ -10142,8 +12056,12 @@
 
             
 
+            
+
              method writes only the schema. To write both data and schema, use one of the overloads that includes the <paramref
              name="mode" />
+
+            
 
             
 
@@ -10159,8 +12077,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Data.DataSet.ReadXmlSchema(System.Xml.XmlReader)" />
+
+            
 
             
 
@@ -10177,6 +12099,8 @@
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -10184,8 +12108,12 @@
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -10205,8 +12133,12 @@
 
             
 
+            
+
              using the specified <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -10222,8 +12154,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -10257,6 +12193,8 @@
 
             
 
+            
+
              into an XML document, whereas the <see
              cref="M:System.Data.DataSet.WriteXmlSchema(System.IO.Stream)" />
 
@@ -10264,8 +12202,12 @@
 
             
 
+            
+
              method writes only the schema. To write both data and schema, use one of the overloads that includes the <paramref
              name="mode" />
+
+            
 
             
 
@@ -10281,8 +12223,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Data.DataSet.ReadXmlSchema(System.Xml.XmlReader)" />
+
+            
 
             
 
@@ -10299,6 +12245,8 @@
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -10306,8 +12254,12 @@
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -10327,11 +12279,15 @@
 
             
 
+            
+
              to the specified file.</para
           >
         </summary>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10365,6 +12321,8 @@
 
             
 
+            
+
              into an XML document, whereas the <see
              cref="M:System.Data.DataSet.WriteXmlSchema(System.IO.Stream)" />
 
@@ -10372,8 +12330,12 @@
 
             
 
+            
+
              method writes only the schema. To write both data and schema, use one of the overloads that includes the <paramref
              name="mode" />
+
+            
 
             
 
@@ -10389,8 +12351,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Data.DataSet.ReadXmlSchema(System.Xml.XmlReader)" />
+
+            
 
             
 
@@ -10407,6 +12373,8 @@
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -10414,8 +12382,12 @@
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -10435,8 +12407,12 @@
 
             
 
+            
+
              to the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -10452,8 +12428,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -10491,6 +12471,8 @@
 
             
 
+            
+
              into an XML document, whereas the <see
              cref="M:System.Data.DataSet.WriteXmlSchema(System.IO.Stream)" />
 
@@ -10498,8 +12480,12 @@
 
             
 
+            
+
              method writes only the schema. To write both data and schema, set the <paramref
              name="mode" />
+
+            
 
             
 
@@ -10515,8 +12501,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Data.DataSet.ReadXmlSchema(System.Xml.XmlReader)" />
+
+            
 
             
 
@@ -10533,6 +12523,8 @@
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -10540,8 +12532,12 @@
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -10561,8 +12557,12 @@
 
             
 
+            
+
              using the specified <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -10575,8 +12575,12 @@
 
             
 
+            
+
             . To write the schema, set the value for the <paramref
              name="mode" />
+
+            
 
             
 
@@ -10592,8 +12596,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -10608,8 +12616,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.XmlWriteMode" />
+
+          
 
           
 
@@ -10647,6 +12659,8 @@
 
             
 
+            
+
              into an XML document, whereas the <see
              cref="M:System.Data.DataSet.WriteXmlSchema(System.IO.Stream)" />
 
@@ -10654,8 +12668,12 @@
 
             
 
+            
+
              method writes only the schema. To write both data and schema, set the <paramref
              name="mode" />
+
+            
 
             
 
@@ -10671,8 +12689,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Data.DataSet.ReadXmlSchema(System.Xml.XmlReader)" />
+
+            
 
             
 
@@ -10689,6 +12711,8 @@
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -10696,8 +12720,12 @@
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -10717,8 +12745,12 @@
 
             
 
+            
+
              using the specified <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -10731,8 +12763,12 @@
 
             
 
+            
+
             . To write the schema, set the value for the <paramref
              name="mode" />
+
+            
 
             
 
@@ -10748,8 +12784,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -10764,8 +12804,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.XmlWriteMode" />
+
+          
 
           
 
@@ -10803,6 +12847,8 @@
 
             
 
+            
+
              into an XML document, whereas the <see
              cref="M:System.Data.DataSet.WriteXmlSchema(System.IO.Stream)" />
 
@@ -10810,8 +12856,12 @@
 
             
 
+            
+
              method writes only the schema. To write both data and schema, set the <paramref
              name="mode" />
+
+            
 
             
 
@@ -10827,8 +12877,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Data.DataSet.ReadXmlSchema(System.Xml.XmlReader)" />
+
+            
 
             
 
@@ -10845,6 +12899,8 @@
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -10852,8 +12908,12 @@
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -10873,6 +12933,8 @@
 
             
 
+            
+
              to the specified file using the specified <see
              cref="T:System.Data.XmlWriteMode" />
 
@@ -10880,8 +12942,12 @@
 
             
 
+            
+
             . To write the schema, set the value for the <paramref
              name="mode" />
+
+            
 
             
 
@@ -10897,6 +12963,8 @@
 
           
 
+          
+
           The file name (including the path) to which to write. </param
         >
         <param name="mode">
@@ -10906,8 +12974,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.XmlWriteMode" />
+
+          
 
           
 
@@ -10945,6 +13017,8 @@
 
             
 
+            
+
              into an XML document, whereas the <see
              cref="M:System.Data.DataSet.WriteXmlSchema(System.IO.Stream)" />
 
@@ -10952,8 +13026,12 @@
 
             
 
+            
+
              method writes only the schema. To write both data and schema, set the <paramref
              name="mode" />
+
+            
 
             
 
@@ -10969,8 +13047,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Data.DataSet.ReadXmlSchema(System.Xml.XmlReader)" />
+
+            
 
             
 
@@ -10987,6 +13069,8 @@
 
               
 
+              
+
                will be thrown if a column type in the DataRow being read from or written to implements <see
                cref="T:System.Dynamic.IDynamicMetaObjectProvider" />
 
@@ -10994,8 +13078,12 @@
 
               
 
+              
+
                and does not implement <see
                cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+              
 
               
 
@@ -11015,8 +13103,12 @@
 
             
 
+            
+
              using the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -11029,8 +13121,12 @@
 
             
 
+            
+
             . To write the schema, set the value for the <paramref
              name="mode" />
+
+            
 
             
 
@@ -11046,8 +13142,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -11062,8 +13162,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.XmlWriteMode" />
+
+          
 
           
 
@@ -11100,6 +13204,8 @@
 
             
 
+            
+
              method to write the schema for a <see
              cref="T:System.Data.DataSet" />
 
@@ -11107,8 +13213,12 @@
 
             
 
+            
+
              to an XML document. The schema includes table, relation, and constraint definitions. To write a schema to an XML document, use the <see
              cref="M:System.Data.DataSet.WriteXmlSchema(System.IO.Stream)" />
+
+            
 
             
 
@@ -11125,11 +13235,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >Classes that derive from the <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -11142,8 +13256,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -11156,8 +13274,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Net.Sockets.NetworkStream" />
+
+            
 
             
 
@@ -11176,8 +13298,12 @@
 
             
 
+            
+
              structure as an XML schema to the specified <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -11193,8 +13319,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -11231,6 +13361,8 @@
 
             
 
+            
+
              method to write the schema for a <see
              cref="T:System.Data.DataSet" />
 
@@ -11238,8 +13370,12 @@
 
             
 
+            
+
              to an XML document. The schema includes table, relation, and constraint definitions. To write a schema to an XML document, use the <see
              cref="M:System.Data.DataSet.WriteXmlSchema(System.IO.Stream)" />
+
+            
 
             
 
@@ -11256,11 +13392,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >Classes the derive from the <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -11273,8 +13413,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.CodeDOM.Compiler.IndentedTextWriter" />
+
+            
 
             
 
@@ -11287,6 +13431,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.IO.StreamWriter" />
 
@@ -11294,8 +13440,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.IO.StringWriter" />
+
+            
 
             
 
@@ -11314,8 +13464,12 @@
 
             
 
+            
+
              structure as an XML schema to the specified <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -11331,8 +13485,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -11366,8 +13524,12 @@
 
             
 
+            
+
              method to write the schema for a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -11380,12 +13542,16 @@
 
             
 
+            
+
              method.</para
           >
           <para>The XML schema is written using the XSD standard.</para>
           <para
             >To write the data to an XML document, use the <see
              cref="M:System.Data.DataSet.WriteXml(System.IO.Stream)" />
+
+            
 
             
 
@@ -11404,11 +13570,15 @@
 
             
 
+            
+
              structure as an XML schema to a file.</para
           >
         </summary>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11445,6 +13615,8 @@
 
             
 
+            
+
              method to write the schema for a <see
              cref="T:System.Data.DataSet" />
 
@@ -11452,8 +13624,12 @@
 
             
 
+            
+
              to an XML document. The schema includes table, relation, and constraint definitions. To write a schema to an XML document, use the <see
              cref="M:System.Data.DataSet.WriteXmlSchema(System.IO.Stream)" />
+
+            
 
             
 
@@ -11470,6 +13646,8 @@
 
             
 
+            
+
              method.</para
           >
           <para
@@ -11480,8 +13658,12 @@
 
             
 
+            
+
              class is the <see
              cref="T:System.Xml.XmlTextWriter" />
+
+            
 
             
 
@@ -11500,8 +13682,12 @@
 
             
 
+            
+
              structure as an XML schema to an <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -11517,8 +13703,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 

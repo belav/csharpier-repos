@@ -34,10 +34,14 @@
 
         
 
+        
+
          base class and <format
          type="text/html">
           <a href="90373a3f-d8c8-492d-841c-945d62393c56">How to: Implement a Type Converter</a>
         </format>
+
+        
 
         
 
@@ -54,8 +58,12 @@
 
           
 
+          
+
           . Instead, call the <see
            cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+
+          
 
           
 
@@ -68,8 +76,12 @@
 
           
 
+          
+
            class. For more information, see the examples in the <see
            cref="T:System.ComponentModel.TypeConverter" />
+
+          
 
           
 
@@ -84,6 +96,8 @@
       <para
         >Provides a type converter to convert <see
          cref="T:System.Guid" />
+
+        
 
         
 
@@ -115,6 +129,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.GuidConverter" />
+
+            
 
             
 
@@ -159,6 +175,8 @@
 
             
 
+            
+
              parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
           >
         </remarks>
@@ -177,8 +195,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -193,8 +215,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -237,6 +263,8 @@
 
             
 
+            
+
              parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
           >
         </remarks>
@@ -255,8 +283,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -271,8 +303,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -317,6 +353,8 @@
 
             
 
+            
+
              parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
           >
         </remarks>
@@ -334,8 +372,12 @@
 
             
 
+            
+
              that represents the converted <paramref
              name="value" />
+
+            
 
             
 
@@ -351,8 +393,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -367,8 +413,12 @@
 
           
 
+          
+
           An optional <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -383,8 +433,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -429,11 +483,15 @@
 
             
 
+            
+
              on the object if the object is valid and if the destination type is string.</para
           >
           <para
             >The <paramref
              name="context" />
+
+            
 
             
 
@@ -457,6 +515,8 @@
 
           
 
+          
+
           A formatter context. </param
         >
         <param name="culture">
@@ -466,8 +526,12 @@
 
           
 
+          
+
           The culture into which <paramref
            name="value" />
+
+          
 
           
 
@@ -482,10 +546,14 @@
 
           
 
+          
+
           The object to convert. </param
         >
         <param name="destinationType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

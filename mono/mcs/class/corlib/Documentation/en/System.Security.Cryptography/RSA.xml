@@ -39,6 +39,8 @@
 
         
 
+        
+
          supports key lengths from 384 bits to 16384 bits in increments of 8 bits if you have the Microsoft Enhanced Cryptographic Provider installed.  It supports key lengths from 384 bits to 512 bits in increments of 8 bits if you have the Microsoft Base Cryptographic Provider installed. </para
       >
     </remarks>
@@ -47,6 +49,8 @@
       <para
         >Represents the base class from which all implementations of the <see
          cref="T:System.Security.Cryptography.RSA" />
+
+        
 
         
 
@@ -81,6 +85,8 @@
           <para
             >Initializes a new instance of <see
              cref="T:System.Security.Cryptography.RSA" />
+
+            
 
             
 
@@ -122,6 +128,8 @@
 
             
 
+            
+
              algorithm.</para
           >
         </summary>
@@ -130,6 +138,8 @@
           <para
             >A new instance of the default implementation of <see
              cref="T:System.Security.Cryptography.RSA" />
+
+            
 
             
 
@@ -173,6 +183,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -181,6 +193,8 @@
           <para
             >A new instance of the specified implementation of <see
              cref="T:System.Security.Cryptography.RSA" />
+
+            
 
             
 
@@ -196,8 +210,12 @@
 
           
 
+          
+
           The name of the implementation of <see
            cref="T:System.Security.Cryptography.RSA" />
+
+          
 
           
 
@@ -241,11 +259,15 @@
 
             
 
+            
+
              parameter in plain text.</para
           >
         </returns>
         <param name="rgb">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -289,11 +311,15 @@
 
             
 
+            
+
              parameter as cipher text.</para
           >
         </returns>
         <param name="rgb">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -333,8 +359,12 @@
 
           
 
+          
+
            parameters <see
            cref="M:System.Security.Cryptography.RSAParameters.D" />
+
+          
 
           
 
@@ -347,8 +377,12 @@
 
           
 
+          
+
           , <see
            cref="M:System.Security.Cryptography.RSAParameters.Q" />
+
+          
 
           
 
@@ -361,8 +395,12 @@
 
           
 
+          
+
           , <see
            cref="M:System.Security.Cryptography.RSAParameters.DQ" />
+
+          
 
           
 
@@ -375,6 +413,8 @@
 
           
 
+          
+
           ) if you export it from the instance.</remarks
         >
         <summary>
@@ -382,6 +422,8 @@
           <para
             >When overridden in a derived class, exports the <see
              cref="T:System.Security.Cryptography.RSAParameters" />
+
+            
 
             
 
@@ -400,11 +442,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="includePrivateParameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -446,6 +492,8 @@
 
             
 
+            
+
              initializes an RSA object using key information in an XML string that was generated using the <see
              cref="M:System.Security.Cryptography.RSA.ToXmlString(System.Boolean)" />
 
@@ -453,8 +501,12 @@
 
             
 
+            
+
              method.  The <see
              cref="M:System.Security.Cryptography.RSA.FromXmlString(System.String)" />
+
+            
 
             
 
@@ -470,8 +522,12 @@
 
             
 
+            
+
              method to conveniently initialize <see
              cref="T:System.Security.Cryptography.RSA" />
+
+            
 
             
 
@@ -492,6 +548,8 @@
 
               
 
+              
+
               . </para
             >
           </block>
@@ -501,6 +559,8 @@
           <para
             >Initializes an <see
              cref="T:System.Security.Cryptography.RSA" />
+
+            
 
             
 
@@ -516,8 +576,12 @@
 
           
 
+          
+
           The XML string containing <see
            cref="T:System.Security.Cryptography.RSA" />
+
+          
 
           
 
@@ -560,6 +624,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -570,8 +636,12 @@
 
           
 
+          
+
           The parameters for <see
            cref="T:System.Security.Cryptography.RSA" />
+
+          
 
           
 
@@ -613,6 +683,8 @@
 
             
 
+            
+
              method creates an XML string that contains either the public and private key of the current <see
              cref="T:System.Security.Cryptography.RSA" />
 
@@ -620,8 +692,12 @@
 
             
 
+            
+
              object or contains only the public key of the current <see
              cref="T:System.Security.Cryptography.RSA" />
+
+            
 
             
 
@@ -637,6 +713,8 @@
 
             
 
+            
+
              method whenever you need to conveniently persist RSA key information.  To initialize an <see
              cref="T:System.Security.Cryptography.RSA" />
 
@@ -644,8 +722,12 @@
 
             
 
+            
+
              object with the key in an XML string, use the <see
              cref="M:System.Security.Cryptography.RSA.FromXmlString(System.String)" />
+
+            
 
             
 
@@ -666,12 +748,16 @@
 
               
 
+              
+
               . </para
             >
           </block>
           <para
             >When you pass true to the <see
              cref="M:System.Security.Cryptography.RSA.ToXmlString(System.Boolean)" />
+
+            
 
             
 
@@ -697,6 +783,8 @@
 
             
 
+            
+
              method, the resulting XML string takes the following form:</para
           >
           <code>&lt;RSAKeyValue&gt;
@@ -709,6 +797,8 @@
           <para
             >Creates and returns an XML string containing the key of the current <see
              cref="T:System.Security.Cryptography.RSA" />
+
+            
 
             
 
@@ -727,11 +817,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="includePrivateParameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

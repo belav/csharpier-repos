@@ -21,6 +21,8 @@
 
         
 
+        
+
          interface to create a custom parameter inspector that can view and modify the contents of a call both before the call and after the call in either client or service applications. </para
       >
       <para>On outbound calls from a client, the inspector is invoked before the request contents are serialized and sent to the service. The inspector is also called after the response has been deserialized but before the return values have been dispatched to the proxy method. </para>
@@ -33,8 +35,12 @@
 
         
 
+        
+
          or the <see
          cref="P:System.ServiceModel.Dispatcher.DispatchOperation.ParameterInspectors" />
+
+        
 
         
 
@@ -47,11 +53,15 @@
 
         
 
+        
+
          implementation to the inspectors collection for a particular operation.  </para
       >
       <para
         >Note   Developers and administrators must ensure that the interaction with other <see
          cref="T:System.ServiceModel.Dispatcher.IParameterInspector" />
+
+        
 
         
 
@@ -105,10 +115,14 @@
 
           
 
+          
+
           The name of the invoked operation.</param
         >
         <param name="outputs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -123,6 +137,8 @@
 
           
 
+          
+
           The return value of the operation.</param
         >
         <param name="correlationState">
@@ -132,8 +148,12 @@
 
           
 
+          
+
           Any correlation state returned from the <see
            cref="M:System.ServiceModel.Dispatcher.IParameterInspector.BeforeCall(System.String,System.Object[])" />
+
+          
 
           
 
@@ -183,8 +203,12 @@
 
             
 
+            
+
              parameter in <see
              cref="M:System.ServiceModel.Dispatcher.IParameterInspector.AfterCall(System.String,System.Object[],System.Object,System.Object)" />
+
+            
 
             
 
@@ -200,10 +224,14 @@
 
           
 
+          
+
           The name of the operation.</param
         >
         <param name="inputs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

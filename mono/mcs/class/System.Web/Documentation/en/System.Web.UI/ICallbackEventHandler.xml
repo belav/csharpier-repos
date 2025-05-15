@@ -18,12 +18,16 @@
 
         
 
+        
+
          interface for any custom control that needs to receive callback events. For more information, see <format
          type="text/html">
           <a href="dfaaa7d4-e1f2-4322-b2f5-796e0419f185"
             >Client Callbacks Without Postbacks in ASP.NET Pages</a
           >
         </format>
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
          interface include the <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 
@@ -53,8 +61,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Web.UI.WebControls.TreeView" />
+
+        
 
         
 
@@ -67,6 +79,8 @@
 
         
 
+        
+
          interface, the <see
          cref="M:System.Web.UI.ICallbackEventHandler.RaiseCallbackEvent(System.String)" />
 
@@ -74,8 +88,12 @@
 
         
 
+        
+
          method is called to handle the event, passing the event argument as a parameter and the <see
          cref="M:System.Web.UI.ICallbackEventHandler.GetCallbackResult" />
+
+        
 
         
 
@@ -91,6 +109,8 @@
 
         
 
+        
+
         , <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
 
@@ -98,8 +118,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Web.UI.WebControls.TreeView" />
+
+        
 
         
 
@@ -116,11 +140,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >You can specify whether callback events originating from the user interface rendered by a control implementing the <see
          cref="T:System.Web.UI.ICallbackEventHandler" />
+
+        
 
         
 
@@ -135,10 +163,14 @@
 
         
 
+        
+
          directive or the enableEventValidation attribute of the <format
          type="text/html">
           <a href="4123bb66-3fe4-4d62-b70e-33758656b458">pages Element (ASP.NET Settings Schema)</a>
         </format>
+
+        
 
         
 
@@ -151,10 +183,14 @@
 
         
 
+        
+
          property in code, set it in the Page_Init phase of page processing. For more information on balancing the security benefit of event validation with its performance cost, see <format
          type="text/html">
           <a href="f882bf1b-a009-4312-ac06-74370ffabc0b">Performance Overview</a>
         </format>
+
+        
 
         
 
@@ -188,8 +224,12 @@
 
             
 
+            
+
              will not prevent <see
              cref="M:System.Web.UI.ICallbackEventHandler.GetCallbackResult" />
+
+            
 
             
 
@@ -202,6 +242,8 @@
 
             
 
+            
+
              from returning a result, set a flag when an exception is thrown in <see
              cref="M:System.Web.UI.ICallbackEventHandler.RaiseCallbackEvent(System.String)" />
 
@@ -209,8 +251,12 @@
 
             
 
+            
+
              and return an empty string from <see
              cref="M:System.Web.UI.ICallbackEventHandler.GetCallbackResult" />
+
+            
 
             
 
@@ -255,8 +301,12 @@
 
             
 
+            
+
              will not prevent <see
              cref="M:System.Web.UI.ICallbackEventHandler.GetCallbackResult" />
+
+            
 
             
 
@@ -269,6 +319,8 @@
 
             
 
+            
+
              from returning a result, set a flag when an exception is thrown in <see
              cref="M:System.Web.UI.ICallbackEventHandler.RaiseCallbackEvent(System.String)" />
 
@@ -276,8 +328,12 @@
 
             
 
+            
+
              and return an empty string from <see
              cref="M:System.Web.UI.ICallbackEventHandler.GetCallbackResult" />
+
+            
 
             
 

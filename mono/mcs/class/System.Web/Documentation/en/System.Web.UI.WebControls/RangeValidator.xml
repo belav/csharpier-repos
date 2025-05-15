@@ -32,11 +32,15 @@
 
         
 
+        
+
          control tests whether the value of an input control is within a specified range.</para
       >
       <para
         >The <see
          cref="T:System.Web.UI.WebControls.RangeValidator" />
+
+        
 
         
 
@@ -49,8 +53,12 @@
 
         
 
+        
+
          property contains the input control to validate. The <see
          cref="P:System.Web.UI.WebControls.RangeValidator.MinimumValue" />
+
+        
 
         
 
@@ -63,11 +71,15 @@
 
         
 
+        
+
          properties specify the minimum and maximum values of the valid range.</para
       >
       <para
         >The <see
          cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
+
+        
 
         
 
@@ -84,8 +96,12 @@
 
           
 
+          
+
            property is set to <see
            cref="F:System.Web.UI.WebControls.ValidationDataType.Date" />
+
+          
 
           
 
@@ -156,6 +172,8 @@
 
           
 
+          
+
            control to make the input control a mandatory field.</para
         >
       </block>
@@ -168,8 +186,12 @@
 
           
 
+          
+
            control throws an exception if the value specified by the <see
            cref="P:System.Web.UI.WebControls.RangeValidator.MaximumValue" />
+
+          
 
           
 
@@ -182,8 +204,12 @@
 
           
 
+          
+
            property cannot be converted to the specified <see
            cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
+
+          
 
           
 
@@ -201,6 +227,8 @@
 
           
 
+          
+
            control inside an <see
            cref="T:System.Web.UI.UpdatePanel" />
 
@@ -208,8 +236,12 @@
 
           
 
+          
+
            control, make sure that the validator control and the control it is associated with are in the same panel. For more information about using the <see
            cref="T:System.Web.UI.UpdatePanel" />
+
+          
 
           
 
@@ -224,12 +256,16 @@
 
           
 
+          
+
           .</para
         >
       </block>
       <para
         >For additional information on validation controls, see <see
          cref="T:System.Web.UI.WebControls.BaseValidator" />
+
+        
 
         
 
@@ -252,10 +288,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0">ASP.NET Controls and Accessibility</a>
         </format>
+
+        
 
         
 
@@ -282,6 +322,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.RangeValidator" />
+
+            
 
             
 
@@ -320,6 +362,8 @@
 
             
 
+            
+
              object. </para
           >
         </summary>
@@ -330,8 +374,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -410,8 +458,12 @@
 
             
 
+            
+
              property to specify the maximum value of the validation range. If the value specified by this property fails to convert to the data type specified by the <see
              cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
+
+            
 
             
 
@@ -428,6 +480,8 @@
 
               
 
+              
+
                property without programmatically setting the culture for the application, you should use a culture-neutral format, such as YYYY/MM/DD, for the <see
                cref="P:System.Web.UI.WebControls.RangeValidator.MaximumValue" />
 
@@ -435,8 +489,12 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.RangeValidator.MinimumValue" />
+
+              
 
               
 
@@ -453,10 +511,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -502,8 +564,12 @@
 
             
 
+            
+
              property to specify the minimum value of the validation range. If the value specified by this property fails to convert to the data type specified by the <see
              cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
+
+            
 
             
 
@@ -520,6 +586,8 @@
 
               
 
+              
+
                property without programmatically setting the culture for the application, you should use a culture-neutral format, such as YYYY/MM/DD, for the <see
                cref="P:System.Web.UI.WebControls.RangeValidator.MaximumValue" />
 
@@ -527,8 +595,12 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.RangeValidator.MinimumValue" />
+
+              
 
               
 
@@ -545,10 +617,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 

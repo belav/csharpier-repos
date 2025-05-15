@@ -64,6 +64,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -97,6 +99,8 @@
 
             
 
+            
+
              class with an XML NMTOKENS attribute.</para
           >
         </summary>
@@ -107,8 +111,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -145,6 +153,8 @@
           <para
             >A <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -188,8 +198,12 @@
 
             
 
+            
+
              into a <see
              cref="T:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapNmtokens" />
+
+            
 
             
 
@@ -208,8 +222,12 @@
 
             
 
+            
+
              object that is obtained from <paramref
              name="value" />
+
+            
 
             
 
@@ -220,6 +238,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -257,8 +277,12 @@
 
             
 
+            
+
              as a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -277,8 +301,12 @@
 
             
 
+            
+
              that is obtained from <see
              cref="P:System.Runtime.Remoting.Metadata.W3cXsd2001.SoapNmtokens.Value" />
+
+            
 
             
 

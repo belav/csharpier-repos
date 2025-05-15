@@ -40,6 +40,8 @@
 
         
 
+        
+
          instead.</para
       >
     </summary>
@@ -278,6 +280,8 @@
 
           
 
+          
+
           On succesful return, an array of names to map. </param
         >
         <param name="cNames">
@@ -287,10 +291,14 @@
 
           
 
+          
+
           Count of names to map. </param
         >
         <param name="pMemId">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -617,8 +625,12 @@
 
             
 
+            
+
              previously returned by <see
              cref="M:System.Runtime.InteropServices.UCOMITypeInfo.GetFuncDesc(System.Int32,System.IntPtr@)" />
+
+            
 
             
 
@@ -629,6 +641,8 @@
         </summary>
         <param name="pFuncDesc">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -671,8 +685,12 @@
 
             
 
+            
+
              previously returned by <see
              cref="M:System.Runtime.InteropServices.UCOMITypeInfo.GetTypeAttr(System.IntPtr@)" />
+
+            
 
             
 
@@ -683,6 +701,8 @@
         </summary>
         <param name="pTypeAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -725,11 +745,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="pVarDesc">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

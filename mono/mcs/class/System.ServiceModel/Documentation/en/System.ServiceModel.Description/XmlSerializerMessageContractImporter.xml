@@ -34,6 +34,8 @@
 
         
 
+        
+
          is invoked when converting a WSDL description. It examines the WSDL documents and generates an in-memory description to be used later for code generation.</para
       >
     </remarks>
@@ -42,6 +44,8 @@
       <para
         >Handles the import of messages from WSDL documents using the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -70,6 +74,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Description.XmlSerializerMessageContractImporter" />
+
+            
 
             
 
@@ -139,8 +145,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Services.Description.ServiceDescriptionCollection" />
+
+          
 
           
 
@@ -155,8 +165,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -171,8 +185,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.Generic.ICollection`1" />
+
+          
 
           
 
@@ -222,8 +240,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.WsdlImporter" />
+
+          
 
           
 
@@ -273,8 +295,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.Description.WsdlImporter" />
+
+          
 
           
 

@@ -24,6 +24,8 @@
 
       
 
+      
+
        instances that
       contain file or directory path information.
     </summary
@@ -36,6 +38,8 @@
         composed of the components described below. Component names are shown 
         in <paramref
          name="italics " />
+
+        
 
         
 
@@ -88,10 +92,14 @@
 
         
 
+        
+
         : A string that specifies one or 
         more directory levels in a file system. If a directory name contains
         multiple levels, a <paramref
          name="directory separator character" />
+
+        
 
         
 
@@ -107,8 +115,12 @@
 
         
 
+        
+
         , the directory name is "<c
         >foo/bar</c>
+
+        
 
         
 
@@ -117,6 +129,8 @@
         ". 
         <see
          cref="M:Mono.Unix.UnixPath.GetDirectoryName(System.String)" />
+
+        
 
         
 
@@ -135,11 +149,15 @@
 
         
 
+        
+
         : An 
         implementation-defined constant string containing a single printable
         non-alphanumeric character used to separate levels in a file system. 
         In the example path <c
         >/foo/bar/bat.txt</c>
+
+        
 
         
 
@@ -153,6 +171,8 @@
 
         
 
+        
+
         ". 
         The <see
          cref="F:Mono.Unix.UnixPath.DirectorySeparatorChar" />
@@ -161,9 +181,13 @@
 
         
 
+        
+
          and 
         <see
          cref="F:Mono.Unix.UnixPath.AltDirectorySeparatorChar" />
+
+        
 
         
 
@@ -180,10 +204,14 @@
 
         
 
+        
+
         : A string that consists of the 
         characters at the end of a file name, from and including the last 
         <paramref
          name="extension separator character" />
+
+        
 
         
 
@@ -198,9 +226,13 @@
 
         
 
+        
+
         ", the 
         <paramref
          name="extension" />
+
+        
 
         
 
@@ -213,9 +245,13 @@
 
         
 
+        
+
         ". The 
         <see
          cref="M:System.IO.Path.GetExtension(System.String)" />
+
+        
 
         
 
@@ -232,11 +268,15 @@
 
         
 
+        
+
         : An 
         implementation-defined constant string composed of a single character 
         that appears after the last character in the 
         <paramref
          name="file base" />
+
+        
 
         
 
@@ -250,6 +290,8 @@
 
         
 
+        
+
          component. If the extension separator 
         character "<paramref
          name="." />
@@ -258,9 +300,13 @@
 
         
 
+        
+
         " is the first character in a 
         <paramref
          name="file name" />
+
+        
 
         
 
@@ -277,9 +323,13 @@
 
         
 
+        
+
         ", 
         the extension separator character is "<c
         >.</c>
+
+        
 
         
 
@@ -295,6 +345,8 @@
 
         
 
+        
+
         : A string containing the 
         <paramref
          name="file name" />
@@ -303,8 +355,12 @@
 
         
 
+        
+
          with the <paramref
          name="extension" />
+
+        
 
         
 
@@ -318,9 +374,13 @@
 
         
 
+        
+
         ", 
         the file base is "<c
         >bat</c>
+
+        
 
         
 
@@ -334,12 +394,16 @@
 
         
 
+        
+
          
         method returns the file base component of a path.
       </para
       >
       <para>
         <paramref name="File Name" />
+
+        
 
         
 
@@ -362,9 +426,13 @@
 
         
 
+        
+
         ", the 
         file name is "<c
         >bat.txt</c>
+
+        
 
         
 
@@ -379,11 +447,15 @@
         
 
         
+
+        
         method returns the file name component of a path.
       </para
       >
       <para>
         <paramref name="Full Directory Name" />
+
+        
 
         
 
@@ -406,9 +478,13 @@
 
         
 
+        
+
         ", 
         the full directory name is "<c
         >/foo/bar</c>
+
+        
 
         
 
@@ -419,6 +495,8 @@
       >
       <para>
         <paramref name="Full Path" />
+
+        
 
         
 
@@ -442,9 +520,13 @@
 
         
 
+        
+
         ", the full 
         path is "<c
         >/foo/bar/bat.txt</c>
+
+        
 
         
 
@@ -458,12 +540,16 @@
 
         
 
+        
+
          
         method returns the full path component.
       </para
       >
       <para>
         <paramref name="Path Root" />
+
+        
 
         
 
@@ -486,9 +572,13 @@
 
         
 
+        
+
          , the path root is 
         "<c
         >/</c>
+
+        
 
         
 
@@ -503,8 +593,12 @@
         
 
         
+
+        
         method returns the <paramref
          name="path root" />
+
+        
 
         
 
@@ -529,9 +623,13 @@
 
         
 
+        
+
          class as well as the exact behavior
         of some members of the <see
          cref="T:Mono.Unix.UnixPath" />
+
+        
 
         
 
@@ -559,6 +657,8 @@
 
           
 
+          
+
           .
         </block
         >
@@ -566,6 +666,8 @@
       <para>
         Most members of the <see
          langword="UnixPath" />
+
+        
 
         
 
@@ -581,10 +683,14 @@
 
         
 
+        
+
          members that modify a path string, 
         such as 
         <see
          cref="M:Mono.Unix.UnixPath.Combine(System.String,System.String)" />
+
+        
 
         
 
@@ -599,10 +705,14 @@
 
         
 
+        
+
          members do, however, validate the 
         contents of a specified path string, and throw 
         <see
          cref="T:System.ArgumentException" />
+
+        
 
         
 
@@ -651,6 +761,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -693,6 +805,8 @@
 
           
 
+          
+
            containing the
           first path.
         </param
@@ -705,9 +819,13 @@
 
           
 
+          
+
            array containing paths to append to
           <paramref
            name="path1" />
+
+          
 
           
 
@@ -726,6 +844,8 @@
 
             
 
+            
+
              containing 
             <paramref
              name="path1" />
@@ -734,9 +854,13 @@
 
             
 
+            
+
              followed by each sequential element in
             <paramref
              name="paths" />
+
+            
 
             
 
@@ -777,6 +901,8 @@
           <para
             >This is the value <c
             >/</c>
+
+            
 
             
 
@@ -1039,6 +1165,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1123,6 +1251,8 @@
 
             
 
+            
+
             .</para
           >
           <para>
@@ -1130,6 +1260,8 @@
             singly-rooted file system, all volumes are sub-directories of the
             path <c
             >/</c>
+
+            
 
             
 

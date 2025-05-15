@@ -185,6 +185,8 @@
 
             
 
+            
+
              was obtained by a defaulting mechanism. Set by resource managers only; should not be set by callers.</para
           >
         </summary>
@@ -233,6 +235,8 @@
           <para
             >Specifies that the owner <see
              cref="T:System.Security.Principal.SecurityIdentifier" />
+
+            
 
             
 

@@ -56,6 +56,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -91,6 +93,8 @@
 
             
 
+            
+
              method, use the <see
              cref="M:System.Collections.Hashtable.#ctor(System.Collections.IEqualityComparer)" />
 
@@ -98,8 +102,12 @@
 
             
 
+            
+
              constructor to create a case-insensitive <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -118,6 +126,8 @@
 
             
 
+            
+
              class with the default initial capacity.</para
           >
         </summary>
@@ -126,6 +136,8 @@
           <para
             >A new case-insensitive instance of the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -168,6 +180,8 @@
 
             
 
+            
+
              method, use the <see
              cref="M:System.Collections.Hashtable.#ctor(System.Collections.IDictionary,System.Collections.IEqualityComparer)" />
 
@@ -175,8 +189,12 @@
 
             
 
+            
+
              constructor to create a case-insensitive <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -195,6 +213,8 @@
 
             
 
+            
+
              class with the same initial capacity as the number of entries copied.</para
           >
         </summary>
@@ -208,8 +228,12 @@
 
             
 
+            
+
              class containing the entries from the specified <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -225,6 +249,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IDictionary" />
 
@@ -232,8 +258,12 @@
 
           
 
+          
+
            to copy to a new case-insensitive <see
            cref="T:System.Collections.Hashtable" />
+
+          
 
           
 
@@ -275,6 +305,8 @@
 
             
 
+            
+
              method, use the <see
              cref="M:System.Collections.Hashtable.#ctor(System.Int32,System.Collections.IEqualityComparer)" />
 
@@ -282,8 +314,12 @@
 
             
 
+            
+
              constructor to create a case-insensitive <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -302,6 +338,8 @@
 
             
 
+            
+
              class with the specified initial capacity.</para
           >
         </summary>
@@ -310,6 +348,8 @@
           <para
             >A new case-insensitive instance of the <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -325,8 +365,12 @@
 
           
 
+          
+
           The approximate number of entries that the <see
            cref="T:System.Collections.Hashtable" />
+
+          
 
           
 
@@ -366,8 +410,12 @@
 
             
 
+            
+
              instance is sorted according to the <see
              cref="T:System.Collections.CaseInsensitiveComparer" />
+
+            
 
             
 
@@ -386,6 +434,8 @@
 
             
 
+            
+
              class that ignores the case of strings.</para
           >
         </summary>
@@ -394,6 +444,8 @@
           <para
             >A new instance of the <see
              cref="T:System.Collections.SortedList" />
+
+            
 
             
 

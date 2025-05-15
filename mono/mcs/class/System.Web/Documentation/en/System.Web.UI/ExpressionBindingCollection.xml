@@ -29,6 +29,8 @@
 
         
 
+        
+
          objects. This class cannot be inherited.</para
       >
     </summary>
@@ -46,6 +48,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.ExpressionBindingCollection" />
+
+            
 
             
 
@@ -84,11 +88,15 @@
 
             
 
+            
+
              object to the end of the collection.</para
           >
         </summary>
         <param name="binding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -101,8 +109,12 @@
 
           
 
+          
+
            to append to the <see
            cref="T:System.Web.UI.ExpressionBindingCollection" />
+
+          
 
           
 
@@ -133,8 +145,12 @@
 
             
 
+            
+
              event occurs when the <see
              cref="M:System.Web.UI.ExpressionBindingCollection.Add(System.Web.UI.ExpressionBinding)" />
+
+            
 
             
 
@@ -147,8 +163,12 @@
 
             
 
+            
+
              method, or the <see
              cref="M:System.Web.UI.ExpressionBindingCollection.Clear" />
+
+            
 
             
 
@@ -162,6 +182,8 @@
           <para
             >Occurs when the collection of <see
              cref="T:System.Web.UI.ExpressionBinding" />
+
+            
 
             
 
@@ -190,6 +212,8 @@
           <para
             >Removes all the <see
              cref="T:System.Web.UI.ExpressionBinding" />
+
+            
 
             
 
@@ -226,8 +250,12 @@
 
             
 
+            
+
              collection contains a specific <see
              cref="T:System.Web.UI.ExpressionBinding" />
+
+            
 
             
 
@@ -246,8 +274,12 @@
 
             
 
+            
+
              is found in the <see
              cref="T:System.Web.UI.ExpressionBindingCollection" />
+
+            
 
             
 
@@ -284,8 +316,12 @@
 
             
 
+            
+
              objects from the <see
              cref="T:System.Web.UI.ExpressionBindingCollection" />
+
+            
 
             
 
@@ -301,8 +337,12 @@
 
           
 
+          
+
           The zero-based array that receives the <see
            cref="T:System.Web.UI.ExpressionBinding" />
+
+          
 
           
 
@@ -312,6 +352,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -351,8 +393,12 @@
 
             
 
+            
+
              objects from the <see
              cref="T:System.Web.UI.ExpressionBindingCollection" />
+
+            
 
             
 
@@ -365,11 +411,15 @@
 
             
 
+            
+
              objects, starting at the specified index in the target array.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -402,8 +452,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:System.Web.UI.ExpressionBindingCollection" />
+
+            
 
             
 
@@ -440,8 +494,12 @@
 
             
 
+            
+
             -implemented object that can be used to iterate through the <see
              cref="T:System.Web.UI.ExpressionBinding" />
+
+            
 
             
 
@@ -460,6 +518,8 @@
 
             
 
+            
+
             -implemented object that contains all the <see
              cref="T:System.Web.UI.ExpressionBinding" />
 
@@ -467,8 +527,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:System.Web.UI.ExpressionBindingCollection" />
+
+            
 
             
 
@@ -497,6 +561,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Web.UI.ExpressionBinding" />
+
+            
 
             
 
@@ -574,11 +640,15 @@
 
             
 
+            
+
              object from the collection.</para
           >
         </summary>
         <param name="propertyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -591,8 +661,12 @@
 
           
 
+          
+
            of the <see
            cref="T:System.Web.UI.ExpressionBinding" />
+
+          
 
           
 
@@ -630,6 +704,8 @@
 
             
 
+            
+
              object from the collection.</para
           >
         </summary>
@@ -640,8 +716,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.ExpressionBinding" />
+
+          
 
           
 
@@ -680,11 +760,15 @@
 
             
 
+            
+
              object from the collection.</para
           >
         </summary>
         <param name="propertyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -697,8 +781,12 @@
 
           
 
+          
+
            of the <see
            cref="T:System.Web.UI.ExpressionBinding" />
+
+          
 
           
 
@@ -713,6 +801,8 @@
 
           
 
+          
+
           true to add the <see
            cref="T:System.Web.UI.ExpressionBinding" />
 
@@ -720,8 +810,12 @@
 
           
 
+          
+
            to the <see
            cref="P:System.Web.UI.ExpressionBindingCollection.RemovedBindings" />
+
+          
 
           
 

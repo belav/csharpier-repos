@@ -54,6 +54,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -86,11 +88,15 @@
 
             
 
+            
+
              class with the specified exception message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -132,6 +138,8 @@
 
             
 
+            
+
              and <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
 
@@ -139,8 +147,12 @@
 
             
 
+            
+
              objects to initialize a new instance of the <see
              cref="T:System.Xml.XPath.XPathException" />
+
+            
 
             
 
@@ -156,6 +168,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
@@ -163,8 +177,12 @@
 
           
 
+          
+
            object that contains all the properties of an <see
            cref="T:System.Xml.XPath.XPathException" />
+
+          
 
           
 
@@ -179,8 +197,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -222,8 +244,12 @@
 
             
 
+            
+
              class using the specified exception message and <see
              cref="T:System.Exception" />
+
+            
 
             
 
@@ -239,10 +265,14 @@
 
           
 
+          
+
           The description of the error condition. </param
         >
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -255,8 +285,12 @@
 
           
 
+          
+
            that threw the <see
            cref="T:System.Xml.XPath.XPathException" />
+
+          
 
           
 
@@ -300,6 +334,8 @@
 
             
 
+            
+
              properties into the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
@@ -307,8 +343,12 @@
 
             
 
+            
+
              class for the specified <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -324,8 +364,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -340,8 +384,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 

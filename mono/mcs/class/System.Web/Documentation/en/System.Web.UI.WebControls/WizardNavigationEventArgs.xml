@@ -24,8 +24,12 @@
 
         
 
+        
+
          class provides the data needed for the various navigation events in a <see
          cref="T:System.Web.UI.WebControls.Wizard" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          event of a <see
          cref="T:System.Web.UI.WebControls.Wizard" />
+
+        
 
         
 
@@ -52,8 +60,12 @@
 
         
 
+        
+
          object to indicate the <see
          cref="P:System.Web.UI.WebControls.WizardNavigationEventArgs.CurrentStepIndex" />
+
+        
 
         
 
@@ -66,6 +78,8 @@
 
         
 
+        
+
          for the control.</para
       >
       <para
@@ -73,6 +87,8 @@
          type="text/html">
           <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
         </format>
+
+        
 
         
 
@@ -91,8 +107,12 @@
 
         
 
+        
+
          property and the <see
          cref="P:System.Web.UI.WebControls.WizardNavigationEventArgs.NextStepIndex" />
+
+        
 
         
 
@@ -123,6 +143,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.WizardNavigationEventArgs" />
+
+            
 
             
 
@@ -175,8 +197,12 @@
 
             
 
+            
+
              object currently displayed in the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -210,8 +236,12 @@
 
             
 
+            
+
              object that the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 

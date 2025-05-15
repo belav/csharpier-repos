@@ -35,6 +35,8 @@
 
         
 
+        
+
          class is a convenience class combining the functionality of the <see
          cref="T:System.Runtime.Remoting.Channels.Tcp.TcpClientChannel" />
 
@@ -42,8 +44,12 @@
 
         
 
+        
+
          class and the <see
          cref="T:System.Runtime.Remoting.Channels.Tcp.TcpServerChannel" />
+
+        
 
         
 
@@ -60,6 +66,8 @@
 
         
 
+        
+
          and <see
          cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" />
 
@@ -67,8 +75,12 @@
 
         
 
+        
+
          through which all messages processed by the <see
          cref="T:System.Runtime.Remoting.Channels.Tcp.TcpChannel" />
+
+        
 
         
 
@@ -84,8 +96,12 @@
 
         
 
+        
+
          object has associated configuration properties that can be set at run time either in a configuration file (by invoking the static <see
          cref="M:System.Runtime.Remoting.RemotingConfiguration.Configure(System.String)" />
+
+        
 
         
 
@@ -98,8 +114,12 @@
 
         
 
+        
+
          collection to the <see
          cref="M:System.Runtime.Remoting.Channels.Tcp.TcpChannel.#ctor" />
+
+        
 
         
 
@@ -116,12 +136,16 @@
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
         <para
           >If the server computer is running Windows 95/98/Me, the server <see
            cref="T:System.Runtime.Remoting.Channels.Tcp.TcpChannel" />
+
+          
 
           
 
@@ -157,6 +181,8 @@
 
             
 
+            
+
              class, activating only a client channel, and not a server channel.</para
           >
         </summary>
@@ -184,8 +210,12 @@
 
             
 
+            
+
              instance to listen for requests on the dynamically assigned port. This is typically done on the client to make sure that a <see
              cref="T:System.Runtime.Remoting.Channels.Tcp.TcpServerChannel" />
+
+            
 
             
 
@@ -196,6 +226,8 @@
           <para
             >If 0 is passed to the constructor the <see
              cref="T:System.Runtime.Remoting.Channels.Tcp.TcpChannel" />
+
+            
 
             
 
@@ -214,11 +246,15 @@
 
             
 
+            
+
              class with a server channel that listens on the specified port.</para
           >
         </summary>
         <param name="port">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -265,12 +301,16 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
             <para
               >If the server computer is running Windows 95/98/Me, the server <see
                cref="T:System.Runtime.Remoting.Channels.Tcp.TcpChannel" />
+
+              
 
               
 
@@ -287,8 +327,12 @@
 
             
 
+            
+
              and <paramref
              name="serverSinkProvider" />
+
+            
 
             
 
@@ -307,6 +351,8 @@
 
             
 
+            
+
              class with the specified configuration properties and sinks.</para
           >
         </summary>
@@ -317,8 +363,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -333,8 +383,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Remoting.Channels.IClientChannelSinkProvider" />
+
+          
 
           
 
@@ -349,8 +403,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" />
+
+          
 
           
 
@@ -382,6 +440,8 @@
 
             
 
+            
+
             , the value of this property can be cast to an instance of <see
              cref="T:System.Runtime.Remoting.Channels.ChannelDataStore" />
 
@@ -389,8 +449,12 @@
 
             
 
+            
+
              describing the channel to which the <see
              cref="T:System.Runtime.Remoting.Channels.Http.HttpServerChannel" />
+
+            
 
             
 
@@ -427,6 +491,8 @@
 
             
 
+            
+
             . To set the <see
              cref="P:System.Runtime.Remoting.Channels.Tcp.TcpChannel.ChannelName" />
 
@@ -434,8 +500,12 @@
 
             
 
+            
+
              property, assign the value to the "name" indexed property in the dictionary passed to the <see
              cref="M:System.Runtime.Remoting.Channels.Tcp.TcpChannel.#ctor(System.Collections.IDictionary,System.Runtime.Remoting.Channels.IClientChannelSinkProvider,System.Runtime.Remoting.Channels.IServerChannelSinkProvider)" />
+
+            
 
             
 
@@ -521,6 +591,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -534,6 +606,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -542,6 +616,8 @@
           <para
             >An array of the URLs for an object with the specified URI, hosted on the current <see
              cref="T:System.Runtime.Remoting.Channels.Tcp.TcpChannel" />
+
+            
 
             
 
@@ -602,6 +678,8 @@
 
             
 
+            
+
              method has been called.</para
           >
           <para>If your channel uses a dynamically assigned port number, your port number might change when you restart listening.</para>
@@ -613,8 +691,12 @@
 
             
 
+            
+
              parameter can be used to pass a specific initialization state to the channel. If you do not want to pass a specific state to the channel, set <paramref
              name="data" />
+
+            
 
             
 
@@ -629,6 +711,8 @@
         </summary>
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -662,6 +746,8 @@
 
             
 
+            
+
              method.</para
           >
           <para>If your channel uses a dynamically assigned port number, your port number might change when you restart listening.</para>
@@ -673,8 +759,12 @@
 
             
 
+            
+
              parameter can be used to pass a specific initialization state to the channel. If you do not want to pass a specific state to the channel, set <paramref
              name="data" />
+
+            
 
             
 
@@ -689,6 +779,8 @@
         </summary>
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

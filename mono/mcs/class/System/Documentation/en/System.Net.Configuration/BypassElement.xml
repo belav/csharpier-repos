@@ -33,6 +33,8 @@
 
         
 
+        
+
          configuration element.</para
       >
       <para
@@ -43,8 +45,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Net.WebClient" />
+
+        
 
         
 
@@ -85,6 +91,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -116,8 +124,12 @@
 
             
 
+            
+
              property is set to <paramref
              name="address" />
+
+            
 
             
 
@@ -136,11 +148,15 @@
 
             
 
+            
+
              class with the specified type information.</para
           >
         </summary>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -22,6 +22,8 @@
 
         
 
+        
+
          enumeration represents the different layout options for a list control.</para
       >
     </remarks>
@@ -49,6 +51,8 @@
 
             
 
+            
+
              control whose <see
              cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatLayout" />
 
@@ -56,8 +60,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Web.UI.WebControls.RepeatLayout.Flow" />
+
+            
 
             
 
@@ -107,6 +115,8 @@
 
             
 
+            
+
              control whose <see
              cref="P:System.Web.UI.WebControls.CheckBoxList.RepeatLayout" />
 
@@ -114,8 +124,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Web.UI.WebControls.RepeatLayout.Table" />
+
+            
 
             
 
@@ -131,6 +145,8 @@
                   >Accessibility in Visual Studio 2010 and ASP.NET 4</a
                 >
               </format>
+
+              
 
               
 

@@ -12,6 +12,8 @@
 
         
 
+        
+
          namespace contains types that provide a means for interprocess communication through anonymous and/or named pipes.</para
       >
     </summary>

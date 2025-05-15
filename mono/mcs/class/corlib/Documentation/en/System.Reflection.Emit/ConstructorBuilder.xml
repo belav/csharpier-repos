@@ -46,8 +46,12 @@
 
         
 
+        
+
          is used to fully describe a constructor in Microsoft intermediate language (MSIL), including the name, attributes, signature, and constructor body. It is used in conjunction with the <see
          cref="T:System.Reflection.Emit.TypeBuilder" />
+
+        
 
         
 
@@ -60,8 +64,12 @@
 
         
 
+        
+
          to get an instance of <see
          cref="T:System.Reflection.Emit.ConstructorBuilder" />
+
+        
 
         
 
@@ -73,6 +81,8 @@
       <para
         >If you use <see
          cref="T:System.Reflection.Emit.ConstructorBuilder" />
+
+        
 
         
 
@@ -90,8 +100,12 @@
 
             
 
+            
+
              method to create one (and optionally restrict access to it). Do not provide an implementation for this default constructor. If you do, an exception is thrown when you try to use the constructor. No exception is thrown when the <see
              cref="M:System.Reflection.Emit.TypeBuilder.CreateType" />
+
+            
 
             
 
@@ -109,8 +123,12 @@
 
             
 
+            
+
              method to create a <see
              cref="T:System.Reflection.Emit.ConstructorBuilder" />
+
+            
 
             
 
@@ -159,6 +177,8 @@
 
             
 
+            
+
              can be called several times, with each call specifying a security action (such as Demand, Assert, and Deny) and a set of permissions that the action applies to.</para
           >
           <block subset="none" type="note">
@@ -176,10 +196,14 @@
 
           
 
+          
+
           The security action to be taken, such as Demand, Assert, and so on. </param
         >
         <param name="pset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -251,6 +275,8 @@
 
             
 
+            
+
              value that depends on whether the declaring type is generic.</para
           >
         </summary>
@@ -284,6 +310,8 @@
           <para
             >Retrieves a reference to the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -328,6 +356,8 @@
 
             
 
+            
+
             , this method returns a <see
              cref="T:System.Reflection.Emit.ParameterBuilder" />
 
@@ -335,8 +365,12 @@
 
             
 
+            
+
              instead of throwing an exception. There is nothing useful that you can do with this <see
              cref="T:System.Reflection.Emit.ParameterBuilder" />
+
+            
 
             
 
@@ -360,6 +394,8 @@
 
           
 
+          
+
           The position of the parameter in the parameter list. Parameters are indexed beginning with the number 1 for the first parameter. </param
         >
         <param name="attributes">
@@ -369,10 +405,14 @@
 
           
 
+          
+
           The attributes of the parameter. </param
         >
         <param name="strParamName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -414,11 +454,15 @@
 
             
 
+            
+
              parameter is ignored because a class never inherits constructors from base classes.</para
           >
           <para
             >To get the custom attributes, finish building the type by calling <see
              cref="M:System.Reflection.Emit.TypeBuilder.CreateType" />
+
+            
 
             
 
@@ -431,6 +475,8 @@
 
             
 
+            
+
              method on the returned type, and then call the <see
              cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Boolean)" />
 
@@ -438,8 +484,12 @@
 
             
 
+            
+
              method on the returned <see
              cref="T:System.Reflection.ConstructorInfo" />
+
+            
 
             
 
@@ -462,11 +512,15 @@
 
             
 
+            
+
              instance.</para
           >
         </returns>
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -509,11 +563,15 @@
 
             
 
+            
+
              parameter is ignored because a class never inherits constructors from base classes.</para
           >
           <para
             >To get the custom attributes, finish building the type by calling <see
              cref="M:System.Reflection.Emit.TypeBuilder.CreateType" />
+
+            
 
             
 
@@ -526,6 +584,8 @@
 
             
 
+            
+
              method on the returned type, and then call the <see
              cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Boolean)" />
 
@@ -533,8 +593,12 @@
 
             
 
+            
+
              method on the returned <see
              cref="T:System.Reflection.ConstructorInfo" />
+
+            
 
             
 
@@ -557,6 +621,8 @@
 
             
 
+            
+
              representing the attributes of this constructor.</para
           >
         </returns>
@@ -567,10 +633,14 @@
 
           
 
+          
+
           The custom attribute type. </param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -614,6 +684,8 @@
 
             
 
+            
+
              for this constructor.</para
           >
         </summary>
@@ -622,6 +694,8 @@
           <para
             >Returns an <see
              cref="T:System.Reflection.Emit.ILGenerator" />
+
+            
 
             
 
@@ -668,6 +742,8 @@
 
             
 
+            
+
              object, with the specified MSIL stream size, that can be used to build a method body for this constructor.</para
           >
         </summary>
@@ -681,11 +757,15 @@
 
             
 
+            
+
              for this constructor.</para
           >
         </returns>
         <param name="streamSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -792,6 +872,8 @@
 
             
 
+            
+
              method has been called. In the .NET Framework versions 1.0 and 1.1, <see
              cref="T:System.InvalidOperationException" />
 
@@ -799,8 +881,12 @@
 
             
 
+            
+
              is thrown. In the .NET Framework version 2.0, <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -818,6 +904,8 @@
           <para
             >Returns an array of <see
              cref="T:System.Reflection.ParameterInfo" />
+
+            
 
             
 
@@ -863,6 +951,8 @@
 
             
 
+            
+
              that represents the token for this constructor.</para
           >
         </summary>
@@ -871,6 +961,8 @@
           <para
             >Returns the <see
              cref="T:System.Reflection.Emit.MethodToken" />
+
+            
 
             
 
@@ -938,8 +1030,12 @@
 
             
 
+            
+
              parameter should be null. Otherwise, the number, type, and order of elements in the <paramref
              name="parameters" />
+
+            
 
             
 
@@ -955,8 +1051,12 @@
 
             
 
+            
+
              parameter should be an array of <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -982,6 +1082,8 @@
 
             
 
+            
+
              that is the return value of the invoked constructor.</para
           >
         </returns>
@@ -992,8 +1094,12 @@
 
           
 
+          
+
           This must be a bit flag from <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -1008,8 +1114,12 @@
 
           
 
+          
+
           An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects using reflection. If binder is null, the default binder is used. See <see
            cref="T:System.Reflection.Binder" />
+
+          
 
           
 
@@ -1024,10 +1134,14 @@
 
           
 
+          
+
           An argument list. This is an array of arguments with the same number, order, and type as the parameters of the constructor to be invoked. If there are no parameters this should be null. </param
         >
         <param name="culture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1040,8 +1154,12 @@
 
           
 
+          
+
            used to govern the coercion of types. If this is null, the <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -1054,8 +1172,12 @@
 
           
 
+          
+
            that represents 1000 to a <see
            cref="T:System.Double" />
+
+          
 
           
 
@@ -1112,10 +1234,14 @@
 
           
 
+          
+
           The object that needs to be reinitialized. </param
         >
         <param name="invokeAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1130,8 +1256,12 @@
 
           
 
+          
+
           A Binder that defines a set of properties and enables the binding, coercion of argument types, and invocation of members using reflection. If <paramref
            name="binder" />
+
+          
 
           
 
@@ -1146,10 +1276,14 @@
 
           
 
+          
+
           An argument list. This is an array of arguments with the same number, order, and type as the parameters of the constructor to be invoked. If there are no parameters, this should be a null reference (Nothing in Visual Basic). </param
         >
         <param name="culture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1162,8 +1296,12 @@
 
           
 
+          
+
            used to govern the coercion of types. If this is null, the <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -1206,6 +1344,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1224,10 +1364,14 @@
 
           
 
+          
+
           A custom attribute type. </param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1294,6 +1438,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -1355,8 +1501,12 @@
 
             
 
+            
+
              object represents a constructor on a particular class. In order to obtain a <see
              cref="T:System.Reflection.ConstructorInfo" />
+
+            
 
             
 
@@ -1369,8 +1519,12 @@
 
             
 
+            
+
              object that represents the class that supports the constructor is queried. This property holds a reference to that <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -1384,6 +1538,8 @@
           <para
             >Holds a reference to the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -1457,6 +1613,8 @@
 
           
 
+          
+
           An instance of a helper class to define the custom attribute. </param
         >
       </Docs>
@@ -1499,6 +1657,8 @@
 
             
 
+            
+
             . The documentation is available online; see <see
              cref="http://go.microsoft.com/fwlink/?LinkID=99212"
               >ECMA C# and Common Language Infrastructure Standards</see
@@ -1508,10 +1668,14 @@
 
             
 
+            
+
              on MSDN and <see
              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
+
+            
 
             
 
@@ -1531,10 +1695,14 @@
 
           
 
+          
+
           The constructor for the custom attribute. </param
         >
         <param name="binaryAttribute">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1577,6 +1745,8 @@
         </summary>
         <param name="attributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1625,10 +1795,14 @@
 
           
 
+          
+
           The name of the custom attribute. </param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1728,6 +1902,8 @@
 
             
 
+            
+
             , see the MSDN Library.</para
           >
         </remarks>
@@ -1742,6 +1918,8 @@
 
           
 
+          
+
           The type information to return.</param
         >
         <param name="lcid">
@@ -1751,10 +1929,14 @@
 
           
 
+          
+
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1860,8 +2042,12 @@
 
             
 
+            
+
              instance as a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -1875,6 +2061,8 @@
           <para
             >Returns a <see
              cref="T:System.String" />
+
+            
 
             
 

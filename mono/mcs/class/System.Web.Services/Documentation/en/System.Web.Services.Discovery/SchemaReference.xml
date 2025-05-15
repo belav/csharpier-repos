@@ -33,8 +33,12 @@
 
         
 
+        
+
          constant. The value of the ref attribute is placed in the <see
          cref="P:System.Web.Services.Discovery.SchemaReference.Ref" />
+
+        
 
         
 
@@ -61,6 +65,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Discovery.SchemaReference" />
+
+            
 
             
 
@@ -93,6 +99,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Discovery.SchemaReference" />
+
+            
 
             
 
@@ -153,6 +161,8 @@
 
             
 
+            
+
              constant.</para
           >
         </remarks>
@@ -190,6 +200,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -203,12 +215,16 @@
 
             
 
+            
+
              containing the contents of the referenced XSD schema.</para
           >
         </returns>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -236,6 +252,8 @@
           <para
             >In a discovery document, a reference to an XSD schema is contained within a schemaRef XML element. The schemaRef XML element has a ref attribute, which is the URL for the referenced XSD schema. The <see
              cref="P:System.Web.Services.Discovery.ContractReference.Ref" />
+
+            
 
             
 
@@ -287,8 +305,12 @@
 
             
 
+            
+
              are an XSD schema, then the contents of <paramref
              name="stream" />
+
+            
 
             
 
@@ -301,6 +323,8 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.Documents" />
 
@@ -308,8 +332,12 @@
 
             
 
+            
+
              properties of <see
              cref="P:System.Web.Services.Discovery.DiscoveryReference.ClientProtocol" />
+
+            
 
             
 
@@ -329,8 +357,12 @@
 
           
 
+          
+
           The MIME content type of <paramref
            name="stream" />
+
+          
 
           
 
@@ -345,8 +377,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -378,8 +414,12 @@
 
             
 
+            
+
              property of <see
              cref="P:System.Web.Services.Discovery.DiscoveryReference.ClientProtocol" />
+
+            
 
             
 
@@ -393,6 +433,8 @@
           <para
             >Gets an <see
              cref="T:System.Xml.Schema.XmlSchema" />
+
+            
 
             
 
@@ -462,6 +504,8 @@
 
             
 
+            
+
              class, the <see
              cref="P:System.Web.Services.Discovery.SchemaReference.Url" />
 
@@ -469,8 +513,12 @@
 
             
 
+            
+
              property returns the value of the <see
              cref="P:System.Web.Services.Discovery.SchemaReference.Ref" />
+
+            
 
             
 
@@ -519,11 +567,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="document">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -536,8 +588,12 @@
 
           
 
+          
+
            to write into <paramref
            name="stream" />
+
+          
 
           
 
@@ -552,8 +608,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 

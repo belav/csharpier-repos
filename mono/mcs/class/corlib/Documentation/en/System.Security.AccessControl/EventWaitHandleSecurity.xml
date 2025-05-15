@@ -32,6 +32,8 @@
 
         
 
+        
+
          object specifies access rights for a named system wait handle, and also specifies the way access attempts are audited. Access rights to the wait handle are expressed as rules, with each access rule represented by an <see
          cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />
 
@@ -39,8 +41,12 @@
 
         
 
+        
+
          object. Each auditing rule is represented by an <see
          cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />
+
+        
 
         
 
@@ -56,8 +62,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />
+
+        
 
         
 
@@ -74,12 +84,16 @@
 
           
 
+          
+
            object can represent a local wait handle or a named system wait handle. Windows access control security is meaningful only for named system wait handles. </para
         >
       </block>
       <para
         >The <see
          cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+
+        
 
         
 
@@ -92,8 +106,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />
+
+        
 
         
 
@@ -111,6 +129,8 @@
 
             
 
+            
+
              object always starts with an empty DACL, which denies all access for all users.</para
           >
         </item>
@@ -118,6 +138,8 @@
           <para
             >Violating the canonical ordering of ACEs. If the ACE list in the DACL is not kept in the canonical order, users might inadvertently be given access to the secured object. For example, denied access rights must always appear before allowed access rights. <see
              cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+
+            
 
             
 
@@ -156,6 +178,8 @@
 
         
 
+        
+
          method to get the <see
          cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
 
@@ -163,8 +187,12 @@
 
         
 
+        
+
          object. Modify the security object by adding and removing rules, and then use the <see
          cref="M:System.Threading.EventWaitHandle.SetAccessControl(System.Security.AccessControl.EventWaitHandleSecurity)" />
+
+        
 
         
 
@@ -181,8 +209,12 @@
 
           
 
+          
+
            object do not affect the access levels of the named wait handle until you call the <see
            cref="M:System.Threading.EventWaitHandle.SetAccessControl(System.Security.AccessControl.EventWaitHandleSecurity)" />
+
+          
 
           
 
@@ -199,8 +231,12 @@
 
         
 
+        
+
          method to get an <see
          cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+
+        
 
         
 
@@ -213,8 +249,12 @@
 
         
 
+        
+
          method, or a constructor that accepts an <see
          cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+
+        
 
         
 
@@ -230,8 +270,12 @@
 
         
 
+        
+
          method to set access rules for a named wait handle, and the <see
          cref="M:System.Security.AccessControl.ObjectSecurity.GetSecurityDescriptorSddlForm(System.Security.AccessControl.AccessControlSections)" />
+
+        
 
         
 
@@ -270,6 +314,8 @@
 
             
 
+            
+
              object always starts with an empty discretionary access list (DACL), which denies all access for all users.</para
           >
         </remarks>
@@ -278,6 +324,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+
+            
 
             
 
@@ -315,8 +363,12 @@
 
             
 
+            
+
              class override the <see
              cref="P:System.Security.AccessControl.ObjectSecurity.AccessRightType" />
+
+            
 
             
 
@@ -330,6 +382,8 @@
           <para
             >Gets the enumeration type that the <see
              cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+
+            
 
             
 
@@ -377,6 +431,8 @@
 
             
 
+            
+
              class.</para
           >
           <block subset="none" type="note">
@@ -397,6 +453,8 @@
 
             
 
+            
+
              object representing the specified rights for the specified user.</para
           >
         </returns>
@@ -407,8 +465,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Principal.IdentityReference" />
+
+          
 
           
 
@@ -423,8 +485,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Security.AccessControl.EventWaitHandleRights" />
+
+          
 
           
 
@@ -439,10 +505,14 @@
 
           
 
+          
+
           Meaningless for named wait handles, because they have no hierarchy.</param
         >
         <param name="inheritanceFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -457,6 +527,8 @@
 
           
 
+          
+
           Meaningless for named wait handles, because they have no hierarchy.</param
         >
         <param name="type">
@@ -466,8 +538,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AccessControlType" />
+
+          
 
           
 
@@ -504,8 +580,12 @@
 
             
 
+            
+
              class override the <see
              cref="P:System.Security.AccessControl.ObjectSecurity.AccessRuleType" />
+
+            
 
             
 
@@ -519,6 +599,8 @@
           <para
             >Gets the type that the <see
              cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+
+            
 
             
 
@@ -561,8 +643,12 @@
 
             
 
+            
+
              method searches for rules with the same user or group and the same <see
              cref="T:System.Security.AccessControl.AccessControlType" />
+
+            
 
             
 
@@ -575,6 +661,8 @@
 
             
 
+            
+
             . If none are found, <paramref
              name="rule" />
 
@@ -582,8 +670,12 @@
 
             
 
+            
+
              is added. If a matching rule is found, the rights in <paramref
              name="rule" />
+
+            
 
             
 
@@ -598,6 +690,8 @@
         </summary>
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -639,8 +733,12 @@
 
             
 
+            
+
              method searches for rules with the same user or group as <paramref
              name="rule" />
+
+            
 
             
 
@@ -653,8 +751,12 @@
 
             
 
+            
+
              is added. If a matching rule is found, the flags in <paramref
              name="rule" />
+
+            
 
             
 
@@ -669,6 +771,8 @@
         </summary>
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -715,6 +819,8 @@
 
             
 
+            
+
              class.</para
           >
           <block subset="none" type="note">
@@ -735,8 +841,12 @@
 
             
 
+            
+
              object representing the specified audit rule for the specified user. The return type of the method is the base class, <see
              cref="T:System.Security.AccessControl.AuditRule" />
+
+            
 
             
 
@@ -752,8 +862,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Principal.IdentityReference" />
+
+          
 
           
 
@@ -768,8 +882,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Security.AccessControl.EventWaitHandleRights" />
+
+          
 
           
 
@@ -784,10 +902,14 @@
 
           
 
+          
+
           Meaningless for named wait handles, because they have no hierarchy.</param
         >
         <param name="inheritanceFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -802,6 +924,8 @@
 
           
 
+          
+
           Meaningless for named wait handles, because they have no hierarchy.</param
         >
         <param name="flags">
@@ -811,8 +935,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Security.AccessControl.AuditFlags" />
+
+          
 
           
 
@@ -849,8 +977,12 @@
 
             
 
+            
+
              class override the <see
              cref="P:System.Security.AccessControl.ObjectSecurity.AuditRuleType" />
+
+            
 
             
 
@@ -864,6 +996,8 @@
           <para
             >Gets the type that the <see
              cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+
+            
 
             
 
@@ -906,8 +1040,12 @@
 
             
 
+            
+
              is searched for a rule that has the same user and the same <see
              cref="T:System.Security.AccessControl.AccessControlType" />
+
+            
 
             
 
@@ -920,8 +1058,12 @@
 
             
 
+            
+
             . If no such rule is found, no action is taken, and the method returns false. If matching rules are found, their inheritance and compatibility flags are checked for compatibility with the flags specified in <paramref
              name="rule" />
+
+            
 
             
 
@@ -934,8 +1076,12 @@
 
             
 
+            
+
              are removed from the compatible rule, and the method returns true. If <paramref
              name="rule" />
+
+            
 
             
 
@@ -948,12 +1094,16 @@
 
             
 
+            
+
              object. </para
           >
           <block subset="none" type="note">
             <para
               >Although you can specify inheritance and propagation flags for event access rules, by creating them with the <see
                cref="M:System.Security.AccessControl.EventWaitHandleSecurity.AccessRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)" />
+
+              
 
               
 
@@ -973,6 +1123,8 @@
 
             
 
+            
+
              (allow or deny) as the specified access rule, and with compatible inheritance and propagation flags; if such a rule is found, the rights contained in the specified access rule are removed from it.</para
           >
         </summary>
@@ -987,6 +1139,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />
 
@@ -994,8 +1148,12 @@
 
           
 
+          
+
            that specifies the user and <see
            cref="T:System.Security.AccessControl.AccessControlType" />
+
+          
 
           
 
@@ -1037,8 +1195,12 @@
 
             
 
+            
+
              is searched for rules that have the same user and the same <see
              cref="T:System.Security.AccessControl.AccessControlType" />
+
+            
 
             
 
@@ -1051,8 +1213,12 @@
 
             
 
+            
+
             . Any rights specified by <paramref
              name="rule" />
+
+            
 
             
 
@@ -1071,11 +1237,15 @@
 
             
 
+            
+
              (allow or deny) as the specified rule and, if found, removes them.</para
           >
         </summary>
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1088,8 +1258,12 @@
 
           
 
+          
+
            that specifies the user and <see
            cref="T:System.Security.AccessControl.AccessControlType" />
+
+          
 
           
 
@@ -1131,8 +1305,12 @@
 
             
 
+            
+
              in all details, including flags. Other rules with the same user and <see
              cref="T:System.Security.AccessControl.AccessControlType" />
+
+            
 
             
 
@@ -1144,6 +1322,8 @@
             <para
               >A rule represents one or more underlying access control entries (ACE), and these entries are split or combined as necessary when you modify the access security rules for a user. Thus, a rule might no longer exist in the specific form it had when it was added, and in that case the <see
                cref="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.EventWaitHandleAccessRule)" />
+
+              
 
               
 
@@ -1164,8 +1344,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />
+
+          
 
           
 
@@ -1207,8 +1391,12 @@
 
             
 
+            
+
              is searched for an audit rule that has the same user as <paramref
              name="rule" />
+
+            
 
             
 
@@ -1221,8 +1409,12 @@
 
             
 
+            
+
             . If no compatible rule is found, no action is taken, and the method returns false. If a rule with compatible flags is found, the rights specified in <paramref
              name="rule" />
+
+            
 
             
 
@@ -1235,8 +1427,12 @@
 
             
 
+            
+
              specifies rights not contained in the compatible rule, no action is taken with respect to those rights. If all rights are removed from the compatible rule, the entire rule is removed from the current <see
              cref="T:System.Security.AccessControl.EventWaitHandleSecurity" />
+
+            
 
             
 
@@ -1248,6 +1444,8 @@
             <para
               >Although you can specify inheritance and propagation flags for event audit rules, by creating them with the <see
                cref="M:System.Security.AccessControl.EventWaitHandleSecurity.AuditRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)" />
+
+              
 
               
 
@@ -1272,8 +1470,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />
+
+          
 
           
 
@@ -1315,6 +1517,8 @@
 
             
 
+            
+
              is searched for audit rules that have the same user as <paramref
              name="rule" />
 
@@ -1322,8 +1526,12 @@
 
             
 
+            
+
             . Any rights specified by <paramref
              name="rule" />
+
+            
 
             
 
@@ -1343,8 +1551,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />
+
+          
 
           
 
@@ -1386,12 +1598,16 @@
 
             
 
+            
+
              in all details, including flags. Other audit rules for the same user are not affected.</para
           >
           <block subset="none" type="note">
             <para
               >A rule represents one or more underlying access control entries (ACE), and these entries are split or combined as necessary when you modify the audit security rules for a user. Thus, a rule might no longer exist in the specific form it had when it was added, and in that case the <see
                cref="M:System.Security.AccessControl.EventWaitHandleSecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.EventWaitHandleAuditRule)" />
+
+              
 
               
 
@@ -1412,8 +1628,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />
+
+          
 
           
 
@@ -1455,6 +1675,8 @@
 
             
 
+            
+
              is added.</para
           >
         </remarks>
@@ -1463,6 +1685,8 @@
           <para
             >Removes all access control rules with the same user as the specified rule, regardless of <see
              cref="T:System.Security.AccessControl.AccessControlType" />
+
+            
 
             
 
@@ -1478,8 +1702,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.AccessControl.EventWaitHandleAccessRule" />
+
+          
 
           
 
@@ -1521,8 +1749,12 @@
 
             
 
+            
+
             , the effect of this method is to remove all <see
              cref="F:System.Security.AccessControl.AccessControlType.Allow" />
+
+            
 
             
 
@@ -1535,8 +1767,12 @@
 
             
 
+            
+
             , all <see
              cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+
+            
 
             
 
@@ -1552,8 +1788,12 @@
 
             
 
+            
+
              match the specified rule, <paramref
              name="rule" />
+
+            
 
             
 
@@ -1572,11 +1812,15 @@
 
             
 
+            
+
              (allow or deny) as the specified rule, and then adds the specified rule.</para
           >
         </summary>
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1589,8 +1833,12 @@
 
           
 
+          
+
            to add. The user and <see
            cref="T:System.Security.AccessControl.AccessControlType" />
+
+          
 
           
 
@@ -1632,6 +1880,8 @@
 
             
 
+            
+
              is added.</para
           >
         </remarks>
@@ -1640,6 +1890,8 @@
           <para
             >Removes all audit rules with the same user as the specified rule, regardless of the <see
              cref="T:System.Security.AccessControl.AuditFlags" />
+
+            
 
             
 
@@ -1655,8 +1907,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.AccessControl.EventWaitHandleAuditRule" />
+
+          
 
           
 

@@ -26,6 +26,8 @@
 
         
 
+        
+
          settings for Input Method Editor (IME) and Asian language support.</para
       >
     </summary>
@@ -83,6 +85,8 @@
 
             
 
+            
+
              control automatically changes the keyboard layout when the user explicitly changes to a different font, or when the user explicitly changes the insertion point to a new location in the text.  </para
           >
         </summary>
@@ -104,6 +108,8 @@
           <para
             >Sets the control to dual-font mode. Used for Asian language text. The <see
              cref="T:System.Windows.Forms.RichTextBox" />
+
+            
 
             
 

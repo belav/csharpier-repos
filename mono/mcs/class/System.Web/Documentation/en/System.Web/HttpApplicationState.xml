@@ -28,8 +28,12 @@
 
         
 
+        
+
          class is created the first time a client requests any URL resource from within a particular ASP.NET application virtual directory. A separate single instance is created for each ASP.NET application on a Web server. A reference to each instance is then exposed via the intrinsic <see
          cref="P:System.Web.HttpContext.Application" />
+
+        
 
         
 
@@ -67,6 +71,8 @@
 
             
 
+            
+
              collection.</para
           >
         </summary>
@@ -77,10 +83,14 @@
 
           
 
+          
+
           The name of the object to be added to the collection. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -113,6 +123,8 @@
 
             
 
+            
+
              collection.</para
           >
         </summary>
@@ -136,6 +148,8 @@
           <para
             >Removes all objects from an <see
              cref="T:System.Web.HttpApplicationState" />
+
+            
 
             
 
@@ -175,6 +189,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -202,6 +218,8 @@
           <para
             >Gets the number of objects in the <see
              cref="T:System.Web.HttpApplicationState" />
+
+            
 
             
 
@@ -237,6 +255,8 @@
 
             
 
+            
+
              object by numerical index.</para
           >
         </summary>
@@ -250,11 +270,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -288,8 +312,12 @@
 
             
 
+            
+
              collection of the intrinsic <see
              cref="P:System.Web.HttpContext.Application" />
+
+            
 
             
 
@@ -312,6 +340,8 @@ MyObject = Application.Get("MyAppVar1");</code>
 
             
 
+            
+
              object by name.</para
           >
         </summary>
@@ -325,11 +355,15 @@ MyObject = Application.Get("MyAppVar1");</code>
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -364,6 +398,8 @@ MyObject = Application.Get("MyAppVar1");</code>
 
             
 
+            
+
              object name by index.</para
           >
         </summary>
@@ -373,6 +409,8 @@ MyObject = Application.Get("MyAppVar1");</code>
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -444,8 +482,12 @@ MyObject = Application.Get("MyAppVar1");</code>
 
             
 
+            
+
              class performs automatic locking and unlocking with the <see
              cref="P:System.Web.HttpApplicationState.AllKeys" />
+
+            
 
             
 
@@ -458,8 +500,12 @@ MyObject = Application.Get("MyAppVar1");</code>
 
             
 
+            
+
              properties and the <see
              cref="M:System.Web.HttpApplicationState.Add(System.String,System.Object)" />
+
+            
 
             
 
@@ -472,8 +518,12 @@ MyObject = Application.Get("MyAppVar1");</code>
 
             
 
+            
+
             , <see
              cref="Overload:System.Web.HttpApplicationState.Get" />
+
+            
 
             
 
@@ -486,8 +536,12 @@ MyObject = Application.Get("MyAppVar1");</code>
 
             
 
+            
+
             , <see
              cref="M:System.Web.HttpApplicationState.Remove(System.String)" />
+
+            
 
             
 
@@ -500,8 +554,12 @@ MyObject = Application.Get("MyAppVar1");</code>
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpApplicationState.Set(System.String,System.Object)" />
+
+            
 
             
 
@@ -514,8 +572,12 @@ MyObject = Application.Get("MyAppVar1");</code>
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpApplicationState.UnLock" />
+
+            
 
             
 
@@ -529,6 +591,8 @@ MyObject = Application.Get("MyAppVar1");</code>
           <para
             >Locks access to an <see
              cref="T:System.Web.HttpApplicationState" />
+
+            
 
             
 
@@ -564,11 +628,15 @@ MyObject = Application.Get("MyAppVar1");</code>
 
             
 
+            
+
              collection.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -599,8 +667,12 @@ MyObject = Application.Get("MyAppVar1");</code>
 
             
 
+            
+
              is an internal call to <see
              cref="M:System.Web.HttpApplicationState.Clear" />
+
+            
 
             
 
@@ -614,6 +686,8 @@ MyObject = Application.Get("MyAppVar1");</code>
           <para
             >Removes all objects from an <see
              cref="T:System.Web.HttpApplicationState" />
+
+            
 
             
 
@@ -649,11 +723,15 @@ MyObject = Application.Get("MyAppVar1");</code>
 
             
 
+            
+
              object from a collection by index.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -689,6 +767,8 @@ MyObject = Application.Get("MyAppVar1");</code>
 
             
 
+            
+
              collection.</para
           >
         </summary>
@@ -699,10 +779,14 @@ MyObject = Application.Get("MyAppVar1");</code>
 
           
 
+          
+
           The name of the object to be updated. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -759,8 +843,12 @@ MyObject = Application.Get("MyAppVar1");</code>
 
             
 
+            
+
              class performs automatic locking and unlocking with the <see
              cref="P:System.Web.HttpApplicationState.AllKeys" />
+
+            
 
             
 
@@ -773,8 +861,12 @@ MyObject = Application.Get("MyAppVar1");</code>
 
             
 
+            
+
              properties and the <see
              cref="M:System.Web.HttpApplicationState.Add(System.String,System.Object)" />
+
+            
 
             
 
@@ -787,8 +879,12 @@ MyObject = Application.Get("MyAppVar1");</code>
 
             
 
+            
+
             , <see
              cref="Overload:System.Web.HttpApplicationState.Get" />
+
+            
 
             
 
@@ -801,8 +897,12 @@ MyObject = Application.Get("MyAppVar1");</code>
 
             
 
+            
+
             , <see
              cref="M:System.Web.HttpApplicationState.Remove(System.String)" />
+
+            
 
             
 
@@ -815,8 +915,12 @@ MyObject = Application.Get("MyAppVar1");</code>
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpApplicationState.Set(System.String,System.Object)" />
+
+            
 
             
 
@@ -829,8 +933,12 @@ MyObject = Application.Get("MyAppVar1");</code>
 
             
 
+            
+
              and <see
              cref="M:System.Web.HttpApplicationState.UnLock" />
+
+            
 
             
 
@@ -844,6 +952,8 @@ MyObject = Application.Get("MyAppVar1");</code>
           <para
             >Unlocks access to an <see
              cref="T:System.Web.HttpApplicationState" />
+
+            
 
             
 

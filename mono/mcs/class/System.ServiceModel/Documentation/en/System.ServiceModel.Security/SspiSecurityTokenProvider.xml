@@ -63,6 +63,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -73,8 +75,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.NetworkCredential" />
+
+          
 
           
 
@@ -89,10 +95,14 @@
 
           
 
+          
+
           true to expand users to include Windows Groups; otherwise, false.</param
         >
         <param name="allowUnauthenticatedCallers">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -138,6 +148,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -148,8 +160,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.NetworkCredential" />
+
+          
 
           
 
@@ -164,6 +180,8 @@
 
           
 
+          
+
           true to allow NTLM authentication; otherwise, false.</param
         >
         <param name="impersonationLevel">
@@ -173,8 +191,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Principal.TokenImpersonationLevel" />
+
+          
 
           
 
@@ -214,6 +236,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -232,8 +256,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Timespan" />
+
+          
 
           
 

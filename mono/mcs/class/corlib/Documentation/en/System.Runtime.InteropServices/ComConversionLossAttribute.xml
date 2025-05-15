@@ -47,6 +47,8 @@
 
         
 
+        
+
          applies this attribute to classes or interfaces.</para
       >
       <para>Methods that use void pointer arguments cause this attribute to be applied to the containing class or interface.</para>

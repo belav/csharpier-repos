@@ -21,8 +21,12 @@
 
         
 
+        
+
          property of a <see
          cref="T:System.Web.Compilation.BuildProvider" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          objects to generate source code for custom file types within the project. Classes derived from <see
          cref="T:System.Web.Compilation.BuildProvider" />
+
+        
 
         
 
@@ -52,6 +60,8 @@
 
         
 
+        
+
          property and calls the <see
          cref="M:System.Web.Compilation.BuildProvider.GetDefaultCompilerType" />
 
@@ -59,8 +69,12 @@
 
         
 
+        
+
          method to return a <see
          cref="T:System.Web.Compilation.CompilerType" />
+
+        
 
         
 
@@ -76,6 +90,8 @@
 
         
 
+        
+
          object within a build provider implementation, use the <see
          cref="M:System.Web.Compilation.BuildProvider.GetDefaultCompilerType" />
 
@@ -83,8 +99,12 @@
 
         
 
+        
+
          method or the <see
          cref="M:System.Web.Compilation.BuildProvider.GetDefaultCompilerTypeForLanguage(System.String)" />
+
+        
 
         
 
@@ -100,6 +120,8 @@
 
         
 
+        
+
          property specifies the <see
          cref="T:System.CodeDom.Compiler.CodeDomProvider" />
 
@@ -107,8 +129,12 @@
 
         
 
+        
+
          implementation used to generate and compile source code for a build provider. The <see
          cref="P:System.Web.Compilation.CompilerType.CompilerParameters" />
+
+        
 
         
 
@@ -142,8 +168,12 @@
 
             
 
+            
+
              property specifies the <see
              cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+            
 
             
 
@@ -159,6 +189,8 @@
 
             
 
+            
+
              returns a <see
              cref="T:System.Type" />
 
@@ -166,8 +198,12 @@
 
             
 
+            
+
              for the <see
              cref="T:Microsoft.VisualBasic.VBCodeProvider" />
+
+            
 
             
 
@@ -186,8 +222,12 @@
 
             
 
+            
+
              for the configured <see
              cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+            
 
             
 
@@ -223,8 +263,12 @@
 
             
 
+            
+
              property to examine the compiler options configured for the compiler. The <see
              cref="P:System.Web.Compilation.CompilerType.CompilerParameters" />
+
+            
 
             
 
@@ -263,8 +307,12 @@
 
             
 
+            
+
              method overrides the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -279,8 +327,12 @@
 
             
 
+            
+
              compares two instances based on their <see
              cref="P:System.Web.Compilation.CompilerType.CodeDomProviderType" />
+
+            
 
             
 
@@ -293,6 +345,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.CodeDom.Compiler.CompilerParameters.CompilerOptions" />
 
@@ -300,8 +354,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.CodeDom.Compiler.CompilerParameters.IncludeDebugInformation" />
+
+            
 
             
 
@@ -320,6 +378,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -333,8 +393,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Web.Compilation.CompilerType" />
+
+            
 
             
 
@@ -350,8 +414,12 @@
 
           
 
+          
+
           The object to compare with the current instance of <see
            cref="T:System.Web.Compilation.CompilerType" />
+
+          
 
           
 
@@ -383,8 +451,12 @@
 
             
 
+            
+
              method overrides the <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -399,8 +471,12 @@
 
             
 
+            
+
              generates the same hash code for two objects that are equal according to the <see
              cref="M:System.Web.Compilation.CompilerType.Equals(System.Object)" />
+
+            
 
             
 
@@ -418,6 +494,8 @@
           <para
             >A 32-bit signed integer hash code for the current instance of <see
              cref="T:System.Web.Compilation.CompilerType" />
+
+            
 
             
 

@@ -36,8 +36,12 @@
 
           
 
+          
+
            or <see
            cref="http://go.microsoft.com/fwlink/?LinkId=178102">AppLocker</see>
+
+          
 
           
 
@@ -49,6 +53,8 @@
               >Security Changes in the .NET Framework Version 4.0</a
             >
           </format>
+
+          
 
           
 
@@ -80,11 +86,15 @@
 
         
 
+        
+
         ), a set of named permission sets that are referenced by the code groups to specify permissions to be granted to code belonging to the code group, and a list of fully-trusted assemblies.</para
       >
       <para
         >Use <see
          cref="M:System.Security.SecurityManager.PolicyHierarchy" />
+
+        
 
         
 
@@ -136,6 +146,8 @@
 
             
 
+            
+
              method is not supported in version 2.0 or later of the .NET Framework because the list of full trust assemblies is not used in those versions. </para
           >
         </remarks>
@@ -149,6 +161,8 @@
 
             
 
+            
+
              corresponding to the specified <see
              cref="T:System.Security.Policy.StrongName" />
 
@@ -156,8 +170,12 @@
 
             
 
+            
+
              to the list of <see
              cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+
+            
 
             
 
@@ -173,8 +191,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Policy.StrongName" />
+
+          
 
           
 
@@ -187,8 +209,12 @@
 
           
 
+          
+
            to add to the list of <see
            cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+
+          
 
           
 
@@ -235,6 +261,8 @@
 
             
 
+            
+
              method is not supported in version 2.0 or later of the .NET Framework because the list of full trust assemblies is not used in those versions. </para
           >
         </remarks>
@@ -248,8 +276,12 @@
 
             
 
+            
+
              to the list of <see
              cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+
+            
 
             
 
@@ -265,6 +297,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Policy.StrongNameMembershipCondition" />
 
@@ -272,8 +306,12 @@
 
           
 
+          
+
            to add to the list of <see
            cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+
+          
 
           
 
@@ -319,6 +357,8 @@
 
             
 
+            
+
              to the current policy level.</para
           >
         </summary>
@@ -329,8 +369,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.NamedPermissionSet" />
+
+          
 
           
 
@@ -374,8 +418,12 @@
 
             
 
+            
+
              in the current policy level with the specified <see
              cref="T:System.Security.PermissionSet" />
+
+            
 
             
 
@@ -394,6 +442,8 @@
 
             
 
+            
+
              that was replaced.</para
           >
         </returns>
@@ -404,8 +454,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Security.NamedPermissionSet" />
+
+          
 
           
 
@@ -420,8 +474,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.PermissionSet" />
+
+          
 
           
 
@@ -434,8 +492,12 @@
 
           
 
+          
+
            specified by the <paramref
            name="name" />
+
+          
 
           
 
@@ -475,8 +537,12 @@
 
             
 
+            
+
              with the <see
              cref="P:System.Security.Policy.PolicyLevel.Label" />
+
+            
 
             
 
@@ -489,8 +555,12 @@
 
             
 
+            
+
              will initially contain the same <see
              cref="T:System.Security.NamedPermissionSet" />
+
+            
 
             
 
@@ -508,6 +578,8 @@
           <para
             >The newly created <see
              cref="T:System.Security.Policy.PolicyLevel" />
+
+            
 
             
 
@@ -552,6 +624,8 @@
 
           
 
+          
+
           The XML encoding to use to reconstruct the security object. </param
         >
       </Docs>
@@ -590,11 +664,15 @@
 
             
 
+            
+
              are granted full trust during security policy evaluation of assemblies not in the list, but are not automatically granted full trust when directly evaluated by the security policy system.</para
           >
           <para
             >The <see
              cref="P:System.Security.Policy.PolicyLevel.FullTrustAssemblies" />
+
+            
 
             
 
@@ -608,6 +686,8 @@
           <para
             >Gets a list of <see
              cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+
+            
 
             
 
@@ -651,6 +731,8 @@
 
             
 
+            
+
              in the current policy level with the specified name.</para
           >
         </summary>
@@ -659,6 +741,8 @@
           <para
             >The <see
              cref="T:System.Security.NamedPermissionSet" />
+
+            
 
             
 
@@ -674,8 +758,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Security.NamedPermissionSet" />
+
+          
 
           
 
@@ -763,6 +851,8 @@
 
             
 
+            
+
             . Instead, it updates the <see
              cref="T:System.Security.Policy.PolicyLevel" />
 
@@ -770,8 +860,12 @@
 
             
 
+            
+
              object's file and the <see
              cref="T:System.Security.Policy.PolicyLevel" />
+
+            
 
             
 
@@ -791,6 +885,8 @@
 
             
 
+            
+
             ).</para
           >
         </remarks>
@@ -799,6 +895,8 @@
           <para
             >Replaces the configuration file for this <see
              cref="T:System.Security.Policy.PolicyLevel" />
+
+            
 
             
 
@@ -846,6 +944,8 @@
 
             
 
+            
+
              method is not supported in version 2.0 or later of the .NET Framework because the list of full trust assemblies is not used in those versions. </para
           >
         </remarks>
@@ -854,6 +954,8 @@
           <para
             >Removes an assembly with the specified <see
              cref="T:System.Security.Policy.StrongName" />
+
+            
 
             
 
@@ -869,8 +971,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Policy.StrongName" />
+
+          
 
           
 
@@ -917,6 +1023,8 @@
 
             
 
+            
+
              method is not supported in version 2.0 or later of the .NET Framework because the list of full trust assemblies is not used in those versions.</para
           >
         </remarks>
@@ -925,6 +1033,8 @@
           <para
             >Removes an assembly with the specified <see
              cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+
+            
 
             
 
@@ -940,8 +1050,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Policy.StrongNameMembershipCondition" />
+
+          
 
           
 
@@ -984,6 +1098,8 @@
 
             
 
+            
+
              from the current policy level.</para
           >
         </summary>
@@ -992,6 +1108,8 @@
           <para
             >The <see
              cref="T:System.Security.NamedPermissionSet" />
+
+            
 
             
 
@@ -1007,8 +1125,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.NamedPermissionSet" />
+
+          
 
           
 
@@ -1051,6 +1173,8 @@
 
             
 
+            
+
              with the specified name from the current policy level.</para
           >
         </summary>
@@ -1059,6 +1183,8 @@
           <para
             >The <see
              cref="T:System.Security.NamedPermissionSet" />
+
+            
 
             
 
@@ -1074,8 +1200,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Security.NamedPermissionSet" />
+
+          
 
           
 
@@ -1143,8 +1273,12 @@
 
             
 
+            
+
              is the basic policy evaluation operation for policy levels. Given a set of evidence as input, this method tests membership conditions of code groups starting at the root and working down as matched. The combination of permissions resulting from the matching code groups produces a <see
              cref="T:System.Security.Policy.PolicyStatement" />
+
+            
 
             
 
@@ -1164,6 +1298,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1172,6 +1308,8 @@
           <para
             >The resulting <see
              cref="T:System.Security.Policy.PolicyStatement" />
+
+            
 
             
 
@@ -1187,6 +1325,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Policy.Evidence" />
 
@@ -1194,8 +1334,12 @@
 
           
 
+          
+
            used to resolve the <see
            cref="T:System.Security.Policy.PolicyLevel" />
+
+          
 
           
 
@@ -1246,6 +1390,8 @@
 
             
 
+            
+
              representing the root of a tree of code groups matching the specified evidence.</para
           >
         </returns>
@@ -1256,8 +1402,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Policy.Evidence" />
+
+          
 
           
 
@@ -1292,6 +1442,8 @@
           <para
             >Every policy level has one root <see
              cref="T:System.Security.Policy.CodeGroup" />
+
+            
 
             
 
@@ -1397,6 +1549,8 @@
           <para
             >For more information, see <see
              cref="T:System.Security.PolicyLevelType" />
+
+            
 
             
 

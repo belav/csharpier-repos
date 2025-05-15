@@ -35,6 +35,8 @@
 
         
 
+        
+
          class directly. The <see
          cref="T:System.Windows.Forms.ContainerControl" />
 
@@ -42,8 +44,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.Panel" />
+
+        
 
         
 
@@ -59,6 +65,8 @@
 
         
 
+        
+
          class acts as a base class for controls that require the ability to scroll. To enable a control to display scroll bars as needed, set the <see
          cref="P:System.Windows.Forms.ScrollableControl.AutoScroll" />
 
@@ -66,8 +74,12 @@
 
         
 
+        
+
          property to true and set the <see
          cref="P:System.Windows.Forms.ScrollableControl.AutoScrollMinSize" />
+
+        
 
         
 
@@ -83,6 +95,8 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.ScrollableControl.HScroll" />
 
@@ -90,8 +104,12 @@
 
         
 
+        
+
          properties. If either property is set to false, the corresponding scroll bar is not visible, even if the <see
          cref="P:System.Windows.Forms.ScrollableControl.AutoScroll" />
+
+        
 
         
 
@@ -107,11 +125,15 @@
 
         
 
+        
+
          event to know when the user or code scrolls the client area.</para
       >
       <para
         >When adding controls programmatically to a form, use the <see
          cref="P:System.Windows.Forms.ScrollableControl.AutoScrollPosition" />
+
+        
 
         
 
@@ -141,6 +163,8 @@
 
             
 
+            
+
              constructor performs the following actions:</para
           >
           <list type="bullet">
@@ -153,8 +177,12 @@
 
                 
 
+                
+
                  method to set the <see
                  cref="F:System.Windows.Forms.ControlStyles.ContainerControl" />
+
+                
 
                 
 
@@ -172,6 +200,8 @@
 
                 
 
+                
+
                  to false.</para
               >
             </item>
@@ -184,8 +214,12 @@
 
                 
 
+                
+
                  method to set the <see
                  cref="F:System.Windows.Forms.ScrollableControl.ScrollStateAutoScrolling" />
+
+                
 
                 
 
@@ -201,6 +235,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ScrollableControl" />
+
+            
 
             
 
@@ -238,6 +274,8 @@
 
             
 
+            
+
              method lays out the client area, including resizing the display area as required to accommodate the scroll bars.</para
           >
         </remarks>
@@ -247,6 +285,8 @@
         </summary>
         <param name="displayScrollbars">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -292,8 +332,12 @@
 
             
 
+            
+
              from acting properly when both <see
              cref="P:System.Windows.Forms.Control.RightToLeft" />
+
+            
 
             
 
@@ -306,8 +350,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Windows.Forms.RightToLeft.Yes" />
+
+            
 
             
 
@@ -320,8 +368,12 @@
 
             
 
+            
+
             —or a container class derived from <see
              cref="T:System.Windows.Forms.Panel" />
+
+            
 
             
 
@@ -334,8 +386,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+            
 
             
 
@@ -348,8 +404,12 @@
 
             
 
+            
+
              on the container to <see
              cref="F:System.Windows.Forms.RightToLeft.Yes" />
+
+            
 
             
 
@@ -362,8 +422,12 @@
 
             
 
+            
+
              property on one or more of the controls inside of the container to <see
              cref="F:System.Windows.Forms.AnchorStyles.Right" />
+
+            
 
             
 
@@ -376,6 +440,8 @@
 
             
 
+            
+
              acts as if <see
              cref="P:System.Windows.Forms.ScrollableControl.AutoScroll" />
 
@@ -383,8 +449,12 @@
 
             
 
+            
+
              were set to <see
              cref="F:System.Windows.Forms.RightToLeft.No" />
+
+            
 
             
 
@@ -400,8 +470,12 @@
 
             
 
+            
+
              inside another <see
              cref="T:System.Windows.Forms.ScrollableControl" />
+
+            
 
             
 
@@ -414,8 +488,12 @@
 
             
 
+            
+
              to work in this situation, you can place it inside of a <see
              cref="T:System.Windows.Forms.Panel" />
+
+            
 
             
 
@@ -428,6 +506,8 @@
 
             
 
+            
+
              on the <see
              cref="T:System.Windows.Forms.Panel" />
 
@@ -435,8 +515,12 @@
 
             
 
+            
+
              to <see
              cref="F:System.Windows.Forms.RightToLeft.Yes" />
+
+            
 
             
 
@@ -452,8 +536,12 @@
 
               
 
+              
+
                maintains the visibility of the scrollbars automatically. Therefore, setting the <see
                cref="P:System.Windows.Forms.ScrollableControl.HScroll" />
+
+              
 
               
 
@@ -466,8 +554,12 @@
 
               
 
+              
+
                property to true has no effect when <see
                cref="P:System.Windows.Forms.ScrollableControl.AutoScroll" />
+
+              
 
               
 
@@ -513,8 +605,12 @@
 
             
 
+            
+
              size is added to the size of any child controls contained in the scrollable control to determine whether or not scroll bars are needed. The <see
              cref="P:System.Windows.Forms.ScrollableControl.AutoScrollMargin" />
+
+            
 
             
 
@@ -531,6 +627,8 @@
 
               
 
+              
+
                property is set to <see
                cref="F:System.Windows.Forms.DockStyle.Fill" />
 
@@ -538,8 +636,12 @@
 
               
 
+              
+
               , the control fills the parent scrollable control and the docked control is ignored when using the <see
                cref="P:System.Windows.Forms.ScrollableControl.AutoScrollMargin" />
+
+              
 
               
 
@@ -556,8 +658,12 @@
 
             
 
+            
+
              property and the <see
              cref="P:System.Windows.Forms.ScrollableControl.AutoScroll" />
+
+            
 
             
 
@@ -574,8 +680,12 @@
 
               
 
+              
+
               , to contain any other controls that might require scrolling. You should add the child <see
                cref="T:System.Windows.Forms.Panel" />
+
+              
 
               
 
@@ -588,8 +698,12 @@
 
               
 
+              
+
                property set to <see
                cref="F:System.Windows.Forms.DockStyle.Fill" />
+
+              
 
               
 
@@ -602,8 +716,12 @@
 
               
 
+              
+
                property set to true. You should set the <see
                cref="P:System.Windows.Forms.ScrollableControl.AutoScroll" />
+
+              
 
               
 
@@ -644,6 +762,8 @@
           <para
             >The <see
              cref="P:System.Windows.Forms.ScrollableControl.AutoScrollMinSize" />
+
+            
 
             
 
@@ -691,11 +811,15 @@
 
             
 
+            
+
              property represents the location of the visible portion of a scrollable control. Use this property to change the portion of the control that is displayed.</para
           >
           <para
             >When adding controls programmatically to a form, use the <see
              cref="P:System.Windows.Forms.ScrollableControl.AutoScrollPosition" />
+
+            
 
             
 
@@ -712,8 +836,12 @@
 
               
 
+              
+
                and <see
                cref="P:System.Drawing.Point.Y" />
+
+              
 
               
 
@@ -726,6 +854,8 @@
 
               
 
+              
+
                and <see
                cref="P:System.Drawing.Point.Y" />
 
@@ -733,8 +863,12 @@
 
               
 
+              
+
                values to set the scroll position relative to the starting position. For example, if you have a horizontal scroll bar and you set x and y to 200, you move the scroll 200 pixels to the right; if you then set x and y to 100, the scroll appears to jump the left by 100 pixels, because you are setting it 100 pixels away from the starting position. In the first case, <see
                cref="P:System.Windows.Forms.ScrollableControl.AutoScrollPosition" />
+
+              
 
               
 
@@ -751,6 +885,8 @@
 
             
 
+            
+
              changes, create an event handler for the <see
              cref="E:System.Windows.Forms.Control.Paint" />
 
@@ -758,8 +894,12 @@
 
             
 
+            
+
              event, save the old position value in a private variable, and compare the new value to the old value on subsequent <see
              cref="E:System.Windows.Forms.Control.Paint" />
+
+            
 
             
 
@@ -818,8 +958,12 @@
 
             
 
+            
+
              property is set to true, the <see
              cref="P:System.Windows.Forms.ScrollableControl.DisplayRectangle" />
+
+            
 
             
 
@@ -832,8 +976,12 @@
 
             
 
+            
+
              control. For example, if the width and height of the <see
              cref="T:System.Windows.Forms.ScrollableControl" />
+
+            
 
             
 
@@ -846,8 +994,12 @@
 
             
 
+            
+
              represents the size the <see
              cref="T:System.Windows.Forms.ScrollableControl" />
+
+            
 
             
 
@@ -860,8 +1012,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Drawing.Rectangle.Y" />
+
+            
 
             
 
@@ -874,8 +1030,12 @@
 
             
 
+            
+
              are relevant to the scroll position of the <see
              cref="T:System.Windows.Forms.ScrollableControl" />
+
+            
 
             
 
@@ -950,6 +1110,8 @@
 
             
 
+            
+
              control uses.</para
           >
           <list type="table">
@@ -978,6 +1140,8 @@
 
                   
 
+                  
+
                    property is set to true.</para
                 >
               </description>
@@ -992,6 +1156,8 @@
                 <para
                   >A mask used to retrieve whether the <see
                    cref="P:System.Windows.Forms.ScrollableControl.HScroll" />
+
+                  
 
                   
 
@@ -1016,6 +1182,8 @@
 
                   
 
+                  
+
                    property is set to true.</para
                 >
               </description>
@@ -1030,6 +1198,8 @@
                 <para
                   >A mask used to retrieve whether the user has made the <see
                    cref="T:System.Windows.Forms.ScrollableControl" />
+
+                  
 
                   
 
@@ -1061,6 +1231,8 @@
         </returns>
         <param name="bit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1111,6 +1283,8 @@
 
             
 
+            
+
              class contains information about the scroll bar and its operation, such as whether it is enabled and visible, the scroll page size, orientation, display position, and so on.</para
           >
         </remarks>
@@ -1138,8 +1312,12 @@
 
             
 
+            
+
              property can also be accomplished through calls to the <see
              cref="M:System.Windows.Forms.ScrollableControl.GetScrollState(System.Int32)" />
+
+            
 
             
 
@@ -1152,8 +1330,12 @@
 
             
 
+            
+
              methods using <see
              cref="F:System.Windows.Forms.ScrollableControl.ScrollStateHScrollVisible" />
+
+            
 
             
 
@@ -1169,8 +1351,12 @@
 
             
 
+            
+
              maintains the visibility of the scrollbars automatically. Therefore, setting the <see
              cref="P:System.Windows.Forms.ScrollableControl.HScroll" />
+
+            
 
             
 
@@ -1183,8 +1369,12 @@
 
             
 
+            
+
              properties to true have no effect when <see
              cref="P:System.Windows.Forms.ScrollableControl.AutoScroll" />
+
+            
 
             
 
@@ -1253,8 +1443,12 @@
 
             
 
+            
+
              property is set to true, the mouse wheel scrolls through the <see
              cref="T:System.Windows.Forms.ScrollableControl" />
+
+            
 
             
 
@@ -1267,8 +1461,12 @@
 
             
 
+            
+
              is set to false and the <see
              cref="P:System.Windows.Forms.ScrollableControl.HScroll" />
+
+            
 
             
 
@@ -1286,11 +1484,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ScrollableControl.OnMouseWheel(System.Windows.Forms.MouseEventArgs)" />
+
+            
 
             
 
@@ -1309,6 +1511,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1319,8 +1523,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -1367,11 +1575,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ScrollableControl.OnPaddingChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1390,6 +1602,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1400,8 +1614,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1437,11 +1655,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ScrollableControl.OnPaintBackground(System.Windows.Forms.PaintEventArgs)" />
+
+            
 
             
 
@@ -1461,8 +1683,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.PaintEventArgs" />
+
+          
 
           
 
@@ -1528,11 +1754,15 @@
 
             
 
+            
+
             . </para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ScrollableControl.OnScroll(System.Windows.Forms.ScrollEventArgs)" />
+
+            
 
             
 
@@ -1551,6 +1781,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1561,8 +1793,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ScrollEventArgs" />
+
+          
 
           
 
@@ -1677,6 +1913,8 @@
 
             
 
+            
+
              event occurs when the user scrolls through the client area by interacting with the scroll bars, or when the user navigates between controls and the active control scrolls into view. The <see
              cref="E:System.Windows.Forms.ScrollableControl.Scroll" />
 
@@ -1684,8 +1922,12 @@
 
             
 
+            
+
              event also occurs when you write code, such as setting the <see
              cref="P:System.Windows.Forms.ScrollableControl.AutoScrollPosition" />
+
+            
 
             
 
@@ -1701,8 +1943,12 @@
 
             
 
+            
+
              property in your event handler to determine the scroll bar orientation for the <see
              cref="E:System.Windows.Forms.ScrollableControl.Scroll" />
+
+            
 
             
 
@@ -1715,6 +1961,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1752,8 +2000,12 @@
 
             
 
+            
+
              property must be set to true, and at least one of the scroll bars, horizontal or vertical, must also be visible, for the <see
              cref="M:System.Windows.Forms.ScrollableControl.ScrollControlIntoView(System.Windows.Forms.Control)" />
+
+            
 
             
 
@@ -1766,8 +2018,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ScrollableControl.VScroll" />
+
+            
 
             
 
@@ -1783,11 +2039,15 @@
 
             
 
+            
+
              parameter is not a child control, no action takes place.</para
           >
           <para
             >This method may raise the <see
              cref="E:System.Windows.Forms.ScrollableControl.Scroll" />
+
+            
 
             
 
@@ -1802,6 +2062,8 @@
         </summary>
         <param name="activeControl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1833,8 +2095,12 @@
 
             
 
+            
+
              field is a mask. You can use it with the <see
              cref="M:System.Windows.Forms.ScrollableControl.GetScrollState(System.Int32)" />
+
+            
 
             
 
@@ -1847,8 +2113,12 @@
 
             
 
+            
+
              methods to get and set the <see
              cref="P:System.Windows.Forms.ScrollableControl.AutoScroll" />
+
+            
 
             
 
@@ -1862,6 +2132,8 @@
           <para
             >Determines the value of the <see
              cref="P:System.Windows.Forms.ScrollableControl.AutoScroll" />
+
+            
 
             
 
@@ -1894,6 +2166,8 @@
 
             
 
+            
+
              field is a mask. Use it with the <see
              cref="M:System.Windows.Forms.ScrollableControl.GetScrollState(System.Int32)" />
 
@@ -1901,8 +2175,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.ScrollableControl.SetScrollState(System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -1940,8 +2218,12 @@
 
             
 
+            
+
              field is a mask. Use it with the <see
              cref="M:System.Windows.Forms.ScrollableControl.GetScrollState(System.Int32)" />
+
+            
 
             
 
@@ -1954,8 +2236,12 @@
 
             
 
+            
+
              methods to get and set the <see
              cref="P:System.Windows.Forms.ScrollableControl.HScroll" />
+
+            
 
             
 
@@ -1969,6 +2255,8 @@
           <para
             >Determines whether the value of the <see
              cref="P:System.Windows.Forms.ScrollableControl.HScroll" />
+
+            
 
             
 
@@ -2001,6 +2289,8 @@
 
             
 
+            
+
              field is a mask. Use it with the <see
              cref="M:System.Windows.Forms.ScrollableControl.GetScrollState(System.Int32)" />
 
@@ -2008,8 +2298,12 @@
 
             
 
+            
+
              method to get whether the user had scrolled through the <see
              cref="T:System.Windows.Forms.ScrollableControl" />
+
+            
 
             
 
@@ -2023,6 +2317,8 @@
           <para
             >Determines whether the user had scrolled through the <see
              cref="T:System.Windows.Forms.ScrollableControl" />
+
+            
 
             
 
@@ -2055,8 +2351,12 @@
 
             
 
+            
+
              field is a mask. Use it with the <see
              cref="M:System.Windows.Forms.ScrollableControl.GetScrollState(System.Int32)" />
+
+            
 
             
 
@@ -2069,8 +2369,12 @@
 
             
 
+            
+
              methods to get and set the <see
              cref="P:System.Windows.Forms.ScrollableControl.VScroll" />
+
+            
 
             
 
@@ -2084,6 +2388,8 @@
           <para
             >Determines whether the value of the <see
              cref="P:System.Windows.Forms.ScrollableControl.VScroll" />
+
+            
 
             
 
@@ -2124,6 +2430,8 @@
 
             
 
+            
+
              method uses the <see
              cref="M:System.Windows.Forms.ScrollableControl.ScrollToControl(System.Windows.Forms.Control)" />
 
@@ -2131,8 +2439,12 @@
 
             
 
+            
+
              method to calculate how far it must scroll to display the specified control. The <see
              cref="P:System.Windows.Forms.Control.AutoScrollOffset" />
+
+            
 
             
 
@@ -2147,8 +2459,12 @@
 
             
 
+            
+
              does not cause scrolling; the <see
              cref="M:System.Windows.Forms.ScrollableControl.SetDisplayRectLocation(System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -2171,11 +2487,15 @@
 
             
 
+            
+
              of the display area relative to the client area required to scroll the control into view.</para
           >
         </returns>
         <param name="activeControl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2208,8 +2528,12 @@
 
               
 
+              
+
                or <paramref
                name="y" />
+
+              
 
               
 
@@ -2230,8 +2554,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Drawing.Size.Width" />
+
+          
 
           
 
@@ -2246,8 +2574,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Drawing.Size.Height" />
+
+          
 
           
 
@@ -2285,8 +2617,12 @@
 
             
 
+            
+
              property is set to true, the <see
              cref="P:System.Windows.Forms.ScrollableControl.DisplayRectangle" />
+
+            
 
             
 
@@ -2299,6 +2635,8 @@
 
             
 
+            
+
             . Call the <see
              cref="M:System.Windows.Forms.ScrollableControl.SetDisplayRectLocation(System.Int32,System.Int32)" />
 
@@ -2306,8 +2644,12 @@
 
             
 
+            
+
              method to scroll through the <see
              cref="T:System.Windows.Forms.ScrollableControl" />
+
+            
 
             
 
@@ -2327,8 +2669,12 @@
 
           
 
+          
+
           The horizontal offset at which to position the <see
            cref="T:System.Windows.Forms.ScrollableControl" />
+
+          
 
           
 
@@ -2343,8 +2689,12 @@
 
           
 
+          
+
           The vertical offset at which to position the <see
            cref="T:System.Windows.Forms.ScrollableControl" />
+
+          
 
           
 
@@ -2379,8 +2729,12 @@
 
             
 
+            
+
              class, the <see
              cref="M:System.Windows.Forms.ScrollableControl.SetScrollState(System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -2393,8 +2747,12 @@
 
             
 
+            
+
              parameter. For more information about the valid parameters and their values, see the <see
              cref="M:System.Windows.Forms.ScrollableControl.GetScrollState(System.Int32)" />
+
+            
 
             
 
@@ -2414,10 +2772,14 @@
 
           
 
+          
+
           The scroll state flag to set. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2463,6 +2825,8 @@
 
             
 
+            
+
              class contains information about the scroll bar and its operation, such as whether it is enabled and visible, the scroll page size, orientation, display position, and so on.</para
           >
         </remarks>
@@ -2490,8 +2854,12 @@
 
             
 
+            
+
              property can also be accomplished through calls to the <see
              cref="M:System.Windows.Forms.ScrollableControl.GetScrollState(System.Int32)" />
+
+            
 
             
 
@@ -2504,8 +2872,12 @@
 
             
 
+            
+
              methods using <see
              cref="F:System.Windows.Forms.ScrollableControl.ScrollStateVScrollVisible" />
+
+            
 
             
 
@@ -2521,8 +2893,12 @@
 
             
 
+            
+
              maintains the visibility of the scrollbars automatically. Therefore, setting the <see
              cref="P:System.Windows.Forms.ScrollableControl.HScroll" />
+
+            
 
             
 
@@ -2535,8 +2911,12 @@
 
             
 
+            
+
              properties to true have no effect when <see
              cref="P:System.Windows.Forms.ScrollableControl.AutoScroll" />
+
+            
 
             
 

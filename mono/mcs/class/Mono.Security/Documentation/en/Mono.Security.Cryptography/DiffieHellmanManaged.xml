@@ -18,6 +18,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -70,6 +72,8 @@
 
           
 
+          
+
            in Visual Basic), a secret value of the default size will be generated.</param
         >
         <summary>Initializes a new DiffieHellmanManaged instance.</summary>
@@ -82,8 +86,12 @@
 
             
 
+            
+
              is thrown if <paramref
              name="p" />
+
+            
 
             
 
@@ -96,8 +104,12 @@
 
             
 
+            
+
              is a null reference (<b
             >Nothing</b>
+
+            
 
             
 
@@ -113,6 +125,8 @@
 
             
 
+            
+
              is thrown if <paramref
              name="p" />
 
@@ -120,8 +134,12 @@
 
             
 
+            
+
              or <paramref
              name="g" />
+
+            
 
             
 
@@ -169,8 +187,12 @@
 
             
 
+            
+
              is thrown if <paramref
              name="p" />
+
+            
 
             
 
@@ -183,8 +205,12 @@
 
             
 
+            
+
              is a null reference (<b
             >Nothing</b>
+
+            
 
             
 
@@ -200,8 +226,12 @@
 
             
 
+            
+
              if <paramref
              name="l" />
+
+            
 
             
 
@@ -217,6 +247,8 @@
 
             
 
+            
+
              is thrown if <paramref
              name="p" />
 
@@ -224,8 +256,12 @@
 
             
 
+            
+
              or <paramref
              name="g" />
+
+            
 
             
 
@@ -266,6 +302,8 @@
 
           
 
+          
+
            values.</param
         >
         <summary>Initializes a new DiffieHellmanManaged instance.</summary>
@@ -274,6 +312,8 @@
           <para
             >An <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -370,8 +410,12 @@
 
           
 
+          
+
            to include private parameters; otherwise, <b
           >false</b>
+
+          
 
           
 
@@ -427,8 +471,12 @@
 
           
 
+          
+
            is thrown if <paramref
            name="P" />
+
+          
 
           
 
@@ -441,6 +489,8 @@
 
           
 
+          
+
            is a null reference (<b
           >Nothing</b>
 
@@ -448,8 +498,12 @@
 
           
 
+          
+
            in Visual Basic) -or- <paramref
            name="P" />
+
+          
 
           
 

@@ -45,6 +45,8 @@
 
         
 
+        
+
          and <see
          cref="T:System.Security.Cryptography.MD5" />
 
@@ -52,8 +54,12 @@
 
         
 
+        
+
          hash algorithms is supported, although any hash algorithm can be used through <see
          cref="M:System.Security.Policy.Hash.GenerateHash(System.Security.Cryptography.HashAlgorithm)" />
+
+        
 
         
 
@@ -99,11 +105,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="assembly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -145,8 +155,12 @@
 
             
 
+            
+
              object contains only the <see
              cref="P:System.Security.Policy.Hash.MD5" />
+
+            
 
             
 
@@ -165,8 +179,12 @@
 
             
 
+            
+
              object that contains an <see
              cref="T:System.Security.Cryptography.MD5" />
+
+            
 
             
 
@@ -185,6 +203,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
@@ -195,8 +215,12 @@
 
           
 
+          
+
           A byte array that contains an <see
            cref="T:System.Security.Cryptography.MD5" />
+
+          
 
           
 
@@ -238,8 +262,12 @@
 
             
 
+            
+
              object contains only the <see
              cref="P:System.Security.Policy.Hash.SHA1" />
+
+            
 
             
 
@@ -258,8 +286,12 @@
 
             
 
+            
+
              object that contains a <see
              cref="T:System.Security.Cryptography.SHA1" />
+
+            
 
             
 
@@ -278,6 +310,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
@@ -288,8 +322,12 @@
 
           
 
+          
+
           A byte array that contains a <see
            cref="T:System.Security.Cryptography.SHA1" />
+
+          
 
           
 
@@ -331,6 +369,8 @@
 
             
 
+            
+
              parameter is an object derived from a specific <see
              cref="T:System.Security.Cryptography.HashAlgorithm" />
 
@@ -338,8 +378,12 @@
 
             
 
+            
+
             . The returned hash value is of the type identified by <paramref
              name="hashAlg" />
+
+            
 
             
 
@@ -358,6 +402,8 @@
         </returns>
         <param name="hashAlg">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -400,6 +446,8 @@
 
             
 
+            
+
              interface.</para
           >
         </remarks>
@@ -408,6 +456,8 @@
           <para
             >Gets the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -423,10 +473,14 @@
 
           
 
+          
+
           The object that holds the serialized object data. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -464,6 +518,8 @@
 
             
 
+            
+
              hash value for the assembly.</para
           >
         </summary>
@@ -492,6 +548,8 @@
           <para
             >Gets the <see
              cref="T:System.Security.Cryptography.SHA1" />
+
+            
 
             
 
@@ -620,6 +678,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -628,6 +688,8 @@
           <para
             >A representation of the current <see
              cref="T:System.Security.Policy.Hash" />
+
+            
 
             
 

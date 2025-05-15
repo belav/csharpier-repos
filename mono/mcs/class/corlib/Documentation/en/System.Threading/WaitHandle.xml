@@ -51,8 +51,12 @@
 
         
 
+        
+
          implements the <see
          cref="M:System.IDisposable.Dispose" />
+
+        
 
         
 
@@ -69,8 +73,12 @@
 
         
 
+        
+
         . When you derive from <see
          cref="T:System.Threading.WaitHandle" />
+
+        
 
         
 
@@ -83,8 +91,12 @@
 
         
 
+        
+
          property to store your native handle operating system handle. You do not need to override the protected <see
          cref="M:System.Threading.WaitHandle.Dispose(System.Boolean)" />
+
+        
 
         
 
@@ -129,6 +141,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -163,8 +177,12 @@
 
             
 
+            
+
              method implemented to support the <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -180,6 +198,8 @@
 
             
 
+            
+
              method.</para
           >
           <para>Override this method to release resources allocated in derived classes.</para>
@@ -190,6 +210,8 @@
           <para
             >When overridden in a derived class, releases all resources held by the current <see
              cref="T:System.Threading.WaitHandle" />
+
+            
 
             
 
@@ -226,8 +248,12 @@
 
             
 
+            
+
              method, but it can be called by using the <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -243,8 +269,12 @@
 
             
 
+            
+
             . The Dispose method leaves the <see
              cref="T:System.Threading.WaitHandle" />
+
+            
 
             
 
@@ -257,8 +287,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Threading.WaitHandle" />
+
+            
 
             
 
@@ -276,10 +310,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -296,8 +334,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Threading.WaitHandle" />
+
+              
 
               
 
@@ -312,6 +354,8 @@
           <para
             >Releases all resources used by the current instance of the <see
              cref="T:System.Threading.WaitHandle" />
+
+            
 
             
 
@@ -358,8 +402,12 @@
 
             
 
+            
+
              parameter set to true. Finalize invokes Dispose with <paramref
              name="explicitDisposing" />
+
+            
 
             
 
@@ -370,6 +418,8 @@
           <para
             >When the <paramref
              name="explicitDisposing" />
+
+            
 
             
 
@@ -389,11 +439,15 @@
 
             
 
+            
+
             , and optionally releases the managed resources.</para
           >
         </summary>
         <param name="explicitDisposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -426,6 +480,8 @@
 
             
 
+            
+
              and <see
              cref="M:System.Object.Finalize" />
 
@@ -433,8 +489,12 @@
 
             
 
+            
+
             . This method overrides <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -483,11 +543,15 @@
 
             
 
+            
+
              property does not close the previous handle. This can result in a leaked handle. </para
           >
           <para
             >Do not use this property in the .NET Framework version 2.0 or later; use the <see
              cref="P:System.Threading.WaitHandle.SafeWaitHandle" />
+
+            
 
             
 
@@ -500,8 +564,12 @@
 
             
 
+            
+
              property, but setting it to <see
              cref="F:System.Threading.WaitHandle.InvalidHandle" />
+
+            
 
             
 
@@ -537,6 +605,8 @@
           <para
             >Used internally to initialize the <see
              cref="P:System.Threading.WaitHandle.Handle" />
+
+            
 
             
 
@@ -589,8 +659,12 @@
 
             
 
+            
+
              property, the previous handle will be closed when the previous <see
              cref="T:Microsoft.Win32.SafeHandles.SafeWaitHandle" />
+
+            
 
             
 
@@ -603,8 +677,12 @@
 
             
 
+            
+
              when the <see
              cref="T:Microsoft.Win32.SafeHandles.SafeWaitHandle" />
+
+            
 
             
 
@@ -619,8 +697,12 @@
 
             
 
+            
+
              implements the <see
              cref="M:System.IDisposable.Dispose" />
+
+            
 
             
 
@@ -637,8 +719,12 @@
 
             
 
+            
+
             . When you derive from <see
              cref="T:System.Threading.WaitHandle" />
+
+            
 
             
 
@@ -651,8 +737,12 @@
 
             
 
+            
+
              property to store your native handle operating system handle. You do not need to override the protected <see
              cref="M:System.Threading.WaitHandle.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -700,6 +790,8 @@
 
             
 
+            
+
              but before it waits on <paramref
              name="toWaitOn" />
 
@@ -707,8 +799,12 @@
 
             
 
+            
+
             , a thread that is running on another processor might signal <paramref
              name="toWaitOn" />
+
+            
 
             
 
@@ -722,6 +818,8 @@
           <para
             >Signals one <see
              cref="T:System.Threading.WaitHandle" />
+
+            
 
             
 
@@ -741,8 +839,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.WaitHandle" />
+
+          
 
           
 
@@ -757,8 +859,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.WaitHandle" />
+
+          
 
           
 
@@ -803,6 +909,8 @@
 
             
 
+            
+
              but before it waits on <paramref
              name="toWaitOn" />
 
@@ -810,8 +918,12 @@
 
             
 
+            
+
             , a thread that is running on another processor might signal <paramref
              name="toWaitOn" />
+
+            
 
             
 
@@ -827,8 +939,12 @@
 
             
 
+            
+
              is zero, the method does not block. It tests the state of the <paramref
              name="toWaitOn" />
+
+            
 
             
 
@@ -847,8 +963,12 @@
 
             
 
+            
+
              parameter has no effect unless the <see
              cref="M:System.Threading.WaitHandle.SignalAndWait(System.Threading.WaitHandle,System.Threading.WaitHandle,System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -861,8 +981,12 @@
 
             
 
+            
+
             . Even if you are currently executing a method on a class that does not derive from <see
              cref="T:System.ContextBoundObject" />
+
+            
 
             
 
@@ -875,8 +999,12 @@
 
             
 
+            
+
             , you can be in a nondefault context if a <see
              cref="T:System.ContextBoundObject" />
+
+            
 
             
 
@@ -892,6 +1020,8 @@
 
             
 
+            
+
              causes the thread to exit the nondefault managed context (that is, to transition to the default context) before executing the <see
              cref="M:System.Threading.WaitHandle.SignalAndWait(System.Threading.WaitHandle,System.Threading.WaitHandle,System.Int32,System.Boolean)" />
 
@@ -899,8 +1029,12 @@
 
             
 
+            
+
              method. The thread returns to the original nondefault context after the call to the <see
              cref="M:System.Threading.WaitHandle.SignalAndWait(System.Threading.WaitHandle,System.Threading.WaitHandle,System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -916,8 +1050,12 @@
 
             
 
+            
+
             . In that case, all calls to members of the class are automatically synchronized, and the synchronization domain is the entire body of code for the class. If code in the call stack of a member calls the <see
              cref="M:System.Threading.WaitHandle.SignalAndWait(System.Threading.WaitHandle,System.Threading.WaitHandle,System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -930,8 +1068,12 @@
 
             
 
+            
+
             , the thread exits the synchronization domain, allowing a thread that is blocked on a call to any member of the object to proceed. When the <see
              cref="M:System.Threading.WaitHandle.SignalAndWait(System.Threading.WaitHandle,System.Threading.WaitHandle,System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -945,6 +1087,8 @@
           <para
             >Signals one <see
              cref="T:System.Threading.WaitHandle" />
+
+            
 
             
 
@@ -964,8 +1108,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.WaitHandle" />
+
+          
 
           
 
@@ -980,8 +1128,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.WaitHandle" />
+
+          
 
           
 
@@ -996,8 +1148,12 @@
 
           
 
+          
+
           An integer that represents the interval to wait. If the value is <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -1007,6 +1163,8 @@
         >
         <param name="exitContext">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1051,6 +1209,8 @@
 
             
 
+            
+
              but before it waits on <paramref
              name="toWaitOn" />
 
@@ -1058,8 +1218,12 @@
 
             
 
+            
+
             , a thread that is running on another processor might signal <paramref
              name="toWaitOn" />
+
+            
 
             
 
@@ -1075,8 +1239,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.Int32.MaxValue" />
+
+            
 
             
 
@@ -1092,8 +1260,12 @@
 
             
 
+            
+
              is zero, the method does not block. It tests the state of the <paramref
              name="toWaitOn" />
+
+            
 
             
 
@@ -1112,8 +1284,12 @@
 
             
 
+            
+
              parameter has no effect unless the <see
              cref="M:System.Threading.WaitHandle.SignalAndWait(System.Threading.WaitHandle,System.Threading.WaitHandle,System.TimeSpan,System.Boolean)" />
+
+            
 
             
 
@@ -1126,8 +1302,12 @@
 
             
 
+            
+
             . Even if you are currently executing a method on a class that does not derive from <see
              cref="T:System.ContextBoundObject" />
+
+            
 
             
 
@@ -1140,8 +1320,12 @@
 
             
 
+            
+
             , you can be in a nondefault context if a <see
              cref="T:System.ContextBoundObject" />
+
+            
 
             
 
@@ -1157,6 +1341,8 @@
 
             
 
+            
+
              causes the thread to exit the nondefault managed context (that is, to transition to the default context) before executing the <see
              cref="M:System.Threading.WaitHandle.SignalAndWait(System.Threading.WaitHandle,System.Threading.WaitHandle,System.TimeSpan,System.Boolean)" />
 
@@ -1164,8 +1350,12 @@
 
             
 
+            
+
              method. The thread returns to the original nondefault context after the call to the <see
              cref="M:System.Threading.WaitHandle.SignalAndWait(System.Threading.WaitHandle,System.Threading.WaitHandle,System.TimeSpan,System.Boolean)" />
+
+            
 
             
 
@@ -1181,8 +1371,12 @@
 
             
 
+            
+
             . In that case, all calls to members of the class are automatically synchronized, and the synchronization domain is the entire body of code for the class. If code in the call stack of a member calls the <see
              cref="M:System.Threading.WaitHandle.SignalAndWait(System.Threading.WaitHandle,System.Threading.WaitHandle,System.TimeSpan,System.Boolean)" />
+
+            
 
             
 
@@ -1195,8 +1389,12 @@
 
             
 
+            
+
             , the thread exits the synchronization domain, allowing a thread that is blocked on a call to any member of the object to proceed. When the <see
              cref="M:System.Threading.WaitHandle.SignalAndWait(System.Threading.WaitHandle,System.Threading.WaitHandle,System.TimeSpan,System.Boolean)" />
+
+            
 
             
 
@@ -1215,8 +1413,12 @@
 
             
 
+            
+
              and waits on another, specifying the time-out interval as a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -1236,8 +1438,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.WaitHandle" />
+
+          
 
           
 
@@ -1252,8 +1458,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.WaitHandle" />
+
+          
 
           
 
@@ -1268,8 +1478,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -1279,6 +1493,8 @@
         >
         <param name="exitContext">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1306,10 +1522,14 @@
 
             
 
+            
+
              to be reallocated for other purposes. For more information about Dispose, see <format
              type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
+
+            
 
             
 
@@ -1323,6 +1543,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.Threading.WaitHandle" />
+
+            
 
             
 
@@ -1370,8 +1592,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -1384,8 +1610,12 @@
 
           
 
+          
+
            array is <see
            langword="null" />
+
+          
 
           
 
@@ -1400,11 +1630,15 @@
 
           
 
+          
+
           contains elements that are duplicates.</exception
         >
         <exception cref="T:System.NotSupportedException"
           >The number of objects in <paramref
            name="waitHandles " />
+
+          
 
           
 
@@ -1421,8 +1655,12 @@
 
             
 
+            
+
              is new in the .NET Framework version 2.0. In previous versions, the <see
              cref="Overload:System.Threading.WaitHandle.WaitAll" />
+
+            
 
             
 
@@ -1438,6 +1676,8 @@
 
             
 
+            
+
              method returns when all the handles are signaled. On some implementations, if more than 64 handles are passed, a <see
              cref="T:System.NotSupportedException" />
 
@@ -1445,8 +1685,12 @@
 
             
 
+            
+
              is thrown. If the array contains duplicates, the call fails with a <see
              cref="T:System.DuplicateWaitObjectException" />
+
+            
 
             
 
@@ -1463,8 +1707,12 @@
 
               
 
+              
+
                method is not supported on threads that have <see
                cref="T:System.STAThreadAttribute" />
+
+              
 
               
 
@@ -1481,8 +1729,12 @@
 
             
 
+            
+
              method overload and specifying -1 (or <see
              cref="F:System.Threading.Timeout.Infinite" />
+
+            
 
             
 
@@ -1495,8 +1747,12 @@
 
             
 
+            
+
              and true for <paramref
              name="exitContext" />
+
+            
 
             
 
@@ -1519,11 +1775,15 @@
 
             
 
+            
+
              has received a signal; otherwise the method never returns.</para
           >
         </returns>
         <param name="waitHandles">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1566,11 +1826,15 @@
 
             
 
+            
+
              is zero, the method does not block. It tests the state of the wait handles and returns immediately. </para
           >
           <para
             >The <see
              cref="Overload:System.Threading.WaitHandle.WaitAll" />
+
+            
 
             
 
@@ -1583,8 +1847,12 @@
 
             
 
+            
+
              is thrown. If there are duplicates in the array, the call fails with a <see
              cref="T:System.DuplicateWaitObjectException" />
+
+            
 
             
 
@@ -1601,8 +1869,12 @@
 
               
 
+              
+
                method is not supported on threads that have <see
                cref="T:System.STAThreadAttribute" />
+
+              
 
               
 
@@ -1619,8 +1891,12 @@
 
             
 
+            
+
              overload and specifying false for <paramref
              name="exitContext" />
+
+            
 
             
 
@@ -1639,6 +1915,8 @@
 
             
 
+            
+
              value to specify the time interval.</para
           >
         </summary>
@@ -1647,6 +1925,8 @@
           <para
             >true when every element in <paramref
              name="waitHandles" />
+
+            
 
             
 
@@ -1662,6 +1942,8 @@
 
           
 
+          
+
           A WaitHandle array containing the objects for which the current instance will wait. This array cannot contain multiple references to the same object (duplicates). </param
         >
         <param name="millisecondsTimeout">
@@ -1671,8 +1953,12 @@
 
           
 
+          
+
           The number of milliseconds to wait, or <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -1714,6 +2000,8 @@
 
             
 
+            
+
              is zero, the method does not block. It tests the state of the wait handles and returns immediately. </para
           >
           <para
@@ -1724,8 +2012,12 @@
 
             
 
+            
+
              method returns when the wait terminates, which means either all the handles are signaled or a time-out occurs. On some implementations, if more than 64 handles are passed, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -1742,8 +2034,12 @@
 
               
 
+              
+
                method is not supported on threads that have <see
                cref="T:System.STAThreadAttribute" />
+
+              
 
               
 
@@ -1760,8 +2056,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.Int32.MaxValue" />
+
+            
 
             
 
@@ -1777,8 +2077,12 @@
 
             
 
+            
+
              overload and specifying false for <paramref
              name="exitContext" />
+
+            
 
             
 
@@ -1797,6 +2101,8 @@
 
             
 
+            
+
              value to specify the time interval.</para
           >
         </summary>
@@ -1805,6 +2111,8 @@
           <para
             >true when every element in <paramref
              name="waitHandles" />
+
+            
 
             
 
@@ -1820,10 +2128,14 @@
 
           
 
+          
+
           A WaitHandle array containing the objects for which the current instance will wait. This array cannot contain multiple references to the same object. </param
         >
         <param name="timeout">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1836,8 +2148,12 @@
 
           
 
+          
+
            that represents the number of milliseconds to wait, or a <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -1881,6 +2197,8 @@
 
             
 
+            
+
              is zero, the method does not block. It tests the state of the wait handles and returns immediately. </para
           >
           <para>
@@ -1890,8 +2208,12 @@
 
             
 
+            
+
              is new in the .NET Framework version 2.0. In previous versions, the <see
              cref="Overload:System.Threading.WaitHandle.WaitAll" />
+
+            
 
             
 
@@ -1907,6 +2229,8 @@
 
             
 
+            
+
              method returns when the wait terminates, which means either when all the handles are signaled or when time-out occurs. On some implementations, if more than 64 handles are passed, a <see
              cref="T:System.NotSupportedException" />
 
@@ -1914,8 +2238,12 @@
 
             
 
+            
+
              is thrown. If there are duplicates in the array, the call fails with a <see
              cref="T:System.DuplicateWaitObjectException" />
+
+            
 
             
 
@@ -1932,8 +2260,12 @@
 
               
 
+              
+
                method is not supported on threads that have <see
                cref="T:System.STAThreadAttribute" />
+
+              
 
               
 
@@ -1953,8 +2285,12 @@
 
             
 
+            
+
              parameter has no effect unless the <see
              cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -1967,8 +2303,12 @@
 
             
 
+            
+
             . Even if you are currently executing a method on a class that is not derived from <see
              cref="T:System.ContextBoundObject" />
+
+            
 
             
 
@@ -1981,8 +2321,12 @@
 
             
 
+            
+
             , you can be in a nondefault context if a <see
              cref="T:System.ContextBoundObject" />
+
+            
 
             
 
@@ -1998,6 +2342,8 @@
 
             
 
+            
+
              causes the thread to exit the nondefault managed context (that is, to transition to the default context) before executing the <see
              cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
 
@@ -2005,8 +2351,12 @@
 
             
 
+            
+
              method. The thread returns to the original nondefault context after the call to the <see
              cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -2022,8 +2372,12 @@
 
             
 
+            
+
              attribute. In that case, all calls to members of the class are automatically synchronized, and the synchronization domain is the entire body of code for the class. If code in the call stack of a member calls the <see
              cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -2036,8 +2390,12 @@
 
             
 
+            
+
             , the thread exits the synchronization domain, allowing a thread that is blocked on a call to any member of the object to proceed. When the <see
              cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -2056,6 +2414,8 @@
 
             
 
+            
+
              value to specify the time interval and specifying whether to exit the synchronization domain before the wait.</para
           >
         </summary>
@@ -2064,6 +2424,8 @@
           <para
             >true when every element in <paramref
              name="waitHandles" />
+
+            
 
             
 
@@ -2079,10 +2441,14 @@
 
           
 
+          
+
           A WaitHandle array containing the objects for which the current instance will wait. This array cannot contain multiple references to the same object (duplicates). </param
         >
         <param name="millisecondsTimeout">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2095,10 +2461,14 @@
 
           
 
+          
+
            (-1) to wait indefinitely. </param
         >
         <param name="exitContext">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2142,6 +2512,8 @@
 
             
 
+            
+
              is zero, the method does not block. It tests the state of the wait handles and returns immediately. </para
           >
           <para>
@@ -2151,8 +2523,12 @@
 
             
 
+            
+
              is new in the .NET Framework version 2.0. In previous versions, the <see
              cref="Overload:System.Threading.WaitHandle.WaitAll" />
+
+            
 
             
 
@@ -2168,8 +2544,12 @@
 
             
 
+            
+
              method returns when the wait terminates, which means either all the handles are signaled or a time-out occurs. On some implementations, if more than 64 handles are passed, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -2186,8 +2566,12 @@
 
               
 
+              
+
                method is not supported on threads that have <see
                cref="T:System.STAThreadAttribute" />
+
+              
 
               
 
@@ -2204,8 +2588,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.Int32.MaxValue" />
+
+            
 
             
 
@@ -2224,8 +2612,12 @@
 
             
 
+            
+
              parameter has no effect unless the <see
              cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" />
+
+            
 
             
 
@@ -2238,8 +2630,12 @@
 
             
 
+            
+
             . Even if you are currently executing a method on a class that is not derived from <see
              cref="T:System.ContextBoundObject" />
+
+            
 
             
 
@@ -2252,8 +2648,12 @@
 
             
 
+            
+
             , you can be in a nondefault context if a <see
              cref="T:System.ContextBoundObject" />
+
+            
 
             
 
@@ -2269,6 +2669,8 @@
 
             
 
+            
+
              causes the thread to exit the nondefault managed context (that is, to transition to the default context) before executing the <see
              cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" />
 
@@ -2276,8 +2678,12 @@
 
             
 
+            
+
              method. It returns to the original nondefault context after the call to the <see
              cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" />
+
+            
 
             
 
@@ -2293,8 +2699,12 @@
 
             
 
+            
+
             . In that case, all calls to members of the class are automatically synchronized, and the synchronization domain is the entire body of code for the class. If code in the call stack of a member calls the <see
              cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" />
+
+            
 
             
 
@@ -2307,8 +2717,12 @@
 
             
 
+            
+
             , the thread exits the synchronization domain, allowing a thread that is blocked on a call to any member of the object to proceed. When the <see
              cref="M:System.Threading.WaitHandle.WaitAll(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" />
+
+            
 
             
 
@@ -2327,6 +2741,8 @@
 
             
 
+            
+
              value to specify the time interval, and specifying whether to exit the synchronization domain before the wait.</para
           >
         </summary>
@@ -2335,6 +2751,8 @@
           <para
             >true when every element in <paramref
              name="waitHandles" />
+
+            
 
             
 
@@ -2350,10 +2768,14 @@
 
           
 
+          
+
           A WaitHandle array containing the objects for which the current instance will wait. This array cannot contain multiple references to the same object. </param
         >
         <param name="timeout">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2366,8 +2788,12 @@
 
           
 
+          
+
            that represents the number of milliseconds to wait, or a <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -2377,6 +2803,8 @@
         >
         <param name="exitContext">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2424,8 +2852,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -2438,8 +2870,12 @@
 
           
 
+          
+
            array is <see
            langword="null" />
+
+          
 
           
 
@@ -2454,11 +2890,15 @@
 
           
 
+          
+
           contains elements that are duplicates.</exception
         >
         <exception cref="T:System.NotSupportedException"
           >The number of objects in <paramref
            name="waitHandles " />
+
+          
 
           
 
@@ -2475,8 +2915,12 @@
 
             
 
+            
+
              is new in the .NET Framework version 2.0. In previous versions, the <see
              cref="Overload:System.Threading.WaitHandle.WaitAny" />
+
+            
 
             
 
@@ -2492,8 +2936,12 @@
 
             
 
+            
+
              method throws an <see
              cref="T:System.Threading.AbandonedMutexException" />
+
+            
 
             
 
@@ -2506,8 +2954,12 @@
 
             
 
+            
+
              contains a released mutex with a lower index number than the abandoned mutex, the <see
              cref="Overload:System.Threading.WaitHandle.WaitAny" />
+
+            
 
             
 
@@ -2524,12 +2976,16 @@
 
               
 
+              
+
               , and that Mutex is at index 0 (zero) in a WaitAny array on another thread, the index returned by WaitAny is 128 instead of 0.</para
             >
           </block>
           <para
             >This method returns when any handle is signaled. If more than one object becomes signaled during the call, the return value is the array index of the signaled object with the smallest index value of all the signaled objects. On some implementations, if more that 64 handles are passed, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -2545,8 +3001,12 @@
 
             
 
+            
+
              method overload and specifying -1 (or <see
              cref="F:System.Threading.Timeout.Infinite" />
+
+            
 
             
 
@@ -2559,8 +3019,12 @@
 
             
 
+            
+
              and true for <paramref
              name="exitContext" />
+
+            
 
             
 
@@ -2579,6 +3043,8 @@
         </returns>
         <param name="waitHandles">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2626,11 +3092,15 @@
 
             
 
+            
+
              is zero, the method does not block. It tests the state of the wait handles and returns immediately. </para
           >
           <para
             >The <see
              cref="Overload:System.Threading.WaitHandle.WaitAny" />
+
+            
 
             
 
@@ -2643,6 +3113,8 @@
 
             
 
+            
+
              only when the wait completes because of an abandoned mutex. If <paramref
              name="waitHandles" />
 
@@ -2650,8 +3122,12 @@
 
             
 
+            
+
              contains a released mutex with a lower index number than the abandoned mutex, the <see
              cref="Overload:System.Threading.WaitHandle.WaitAny" />
+
+            
 
             
 
@@ -2667,6 +3143,8 @@
 
             
 
+            
+
              is thrown.</para
           >
           <para
@@ -2677,8 +3155,12 @@
 
             
 
+            
+
              overload and specifying false for <paramref
              name="exitContext" />
+
+            
 
             
 
@@ -2701,8 +3183,12 @@
 
             
 
+            
+
              if no object satisfied the wait and a time interval equivalent to <paramref
              name="millisecondsTimeout" />
+
+            
 
             
 
@@ -2718,6 +3204,8 @@
 
           
 
+          
+
           A WaitHandle array containing the objects for which the current instance will wait. </param
         >
         <param name="millisecondsTimeout">
@@ -2727,8 +3215,12 @@
 
           
 
+          
+
           The number of milliseconds to wait, or <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -2775,11 +3267,15 @@
 
             
 
+            
+
              is zero, the method does not block. It tests the state of the wait handles and returns immediately. </para
           >
           <para
             >The <see
              cref="Overload:System.Threading.WaitHandle.WaitAny" />
+
+            
 
             
 
@@ -2792,6 +3288,8 @@
 
             
 
+            
+
              only when the wait completes because of an abandoned mutex. If <paramref
              name="waitHandles" />
 
@@ -2799,8 +3297,12 @@
 
             
 
+            
+
              contains a released mutex with a lower index number than the abandoned mutex, the <see
              cref="Overload:System.Threading.WaitHandle.WaitAny" />
+
+            
 
             
 
@@ -2816,6 +3318,8 @@
 
             
 
+            
+
              is thrown.</para
           >
           <para
@@ -2826,8 +3330,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.Int32.MaxValue" />
+
+            
 
             
 
@@ -2843,8 +3351,12 @@
 
             
 
+            
+
              overload and specifying false for <paramref
              name="exitContext" />
+
+            
 
             
 
@@ -2863,6 +3375,8 @@
 
             
 
+            
+
              to specify the time interval.</para
           >
         </summary>
@@ -2876,8 +3390,12 @@
 
             
 
+            
+
              if no object satisfied the wait and a time interval equivalent to <paramref
              name="timeout" />
+
+            
 
             
 
@@ -2893,10 +3411,14 @@
 
           
 
+          
+
           A WaitHandle array containing the objects for which the current instance will wait. </param
         >
         <param name="timeout">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2909,8 +3431,12 @@
 
           
 
+          
+
            that represents the number of milliseconds to wait, or a <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -2959,6 +3485,8 @@
 
             
 
+            
+
              is zero, the method does not block. It tests the state of the wait handles and returns immediately. </para
           >
           <para>
@@ -2968,8 +3496,12 @@
 
             
 
+            
+
              is new in the .NET Framework version 2.0. In previous versions, the <see
              cref="Overload:System.Threading.WaitHandle.WaitAny" />
+
+            
 
             
 
@@ -2985,8 +3517,12 @@
 
             
 
+            
+
              method throws an <see
              cref="T:System.Threading.AbandonedMutexException" />
+
+            
 
             
 
@@ -2999,8 +3535,12 @@
 
             
 
+            
+
              contains a released mutex with a lower index number than the abandoned mutex, the <see
              cref="Overload:System.Threading.WaitHandle.WaitAny" />
+
+            
 
             
 
@@ -3017,12 +3557,16 @@
 
               
 
+              
+
               , and that Mutex is at index 0 (zero) in a WaitAny array on another thread, the index returned by WaitAny is 128 instead of 0.</para
             >
           </block>
           <para
             >This method returns when the wait terminates, either when any of the handles are signaled or when a timeout occurs. If more than one object becomes signaled during the call, the return value is the array index of the signaled object with the smallest index value of all the signaled objects. On some implementations, if more that 64 handles are passed, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -3041,8 +3585,12 @@
 
             
 
+            
+
              parameter has no effect unless the <see
              cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -3055,8 +3603,12 @@
 
             
 
+            
+
             . Even if you are currently executing a method on a class that does not derive from <see
              cref="T:System.ContextBoundObject" />
+
+            
 
             
 
@@ -3069,8 +3621,12 @@
 
             
 
+            
+
             , you can be in a nondefault context if a <see
              cref="T:System.ContextBoundObject" />
+
+            
 
             
 
@@ -3086,6 +3642,8 @@
 
             
 
+            
+
              causes the thread to exit the nondefault managed context (that is, to transition to the default context) before executing the <see
              cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
 
@@ -3093,8 +3651,12 @@
 
             
 
+            
+
              method. The thread returns to the original nondefault context after the call to the <see
              cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -3110,8 +3672,12 @@
 
             
 
+            
+
             . In that case, all calls to members of the class are automatically synchronized, and the synchronization domain is the entire body of code for the class. If code in the call stack of a member calls the <see
              cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -3124,8 +3690,12 @@
 
             
 
+            
+
             , the thread exits the synchronization domain, allowing a thread that is blocked on a call to any member of the object to proceed. When the <see
              cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -3148,8 +3718,12 @@
 
             
 
+            
+
              if no object satisfied the wait and a time interval equivalent to <paramref
              name="millisecondsTimeout" />
+
+            
 
             
 
@@ -3165,10 +3739,14 @@
 
           
 
+          
+
           A WaitHandle array containing the objects for which the current instance will wait. </param
         >
         <param name="millisecondsTimeout">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3181,10 +3759,14 @@
 
           
 
+          
+
            (-1) to wait indefinitely. </param
         >
         <param name="exitContext">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3233,6 +3815,8 @@
 
             
 
+            
+
              is zero, the method does not block. It tests the state of the wait handles and returns immediately. </para
           >
           <para>
@@ -3242,8 +3826,12 @@
 
             
 
+            
+
              is new in the .NET Framework version 2.0. In previous versions, the <see
              cref="Overload:System.Threading.WaitHandle.WaitAny" />
+
+            
 
             
 
@@ -3259,8 +3847,12 @@
 
             
 
+            
+
              method throws an <see
              cref="T:System.Threading.AbandonedMutexException" />
+
+            
 
             
 
@@ -3273,8 +3865,12 @@
 
             
 
+            
+
              contains a released mutex with a lower index number than the abandoned mutex, the <see
              cref="Overload:System.Threading.WaitHandle.WaitAny" />
+
+            
 
             
 
@@ -3291,12 +3887,16 @@
 
               
 
+              
+
               , and that Mutex is at index 0 (zero) in a WaitAny array on another thread, the index returned by WaitAny is 128 instead of 0.</para
             >
           </block>
           <para
             >This method returns when the wait terminates, either when any of the handles are signaled or when a time-out occurs. If more than one object becomes signaled during the call, the return value is the array index of the signaled object with the smallest index value of all the signaled objects. On some implementations, if more that 64 handles are passed, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -3312,8 +3912,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.Int32.MaxValue" />
+
+            
 
             
 
@@ -3332,8 +3936,12 @@
 
             
 
+            
+
              parameter has no effect unless the <see
              cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" />
+
+            
 
             
 
@@ -3346,8 +3954,12 @@
 
             
 
+            
+
             . Even if you are currently executing a method on a class that does not derive from <see
              cref="T:System.ContextBoundObject" />
+
+            
 
             
 
@@ -3360,8 +3972,12 @@
 
             
 
+            
+
             , you can be in a nondefault context if a <see
              cref="T:System.ContextBoundObject" />
+
+            
 
             
 
@@ -3377,6 +3993,8 @@
 
             
 
+            
+
              causes the thread to exit the nondefault managed context (that is, to transition to the default context) before executing the <see
              cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" />
 
@@ -3384,8 +4002,12 @@
 
             
 
+            
+
              method. The thread returns to the original nondefault context after the call to the <see
              cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" />
+
+            
 
             
 
@@ -3401,8 +4023,12 @@
 
             
 
+            
+
             . In that case, all calls to members of the class are automatically synchronized, and the synchronization domain is the entire body of code for the class. If code in the call stack of a member calls the <see
              cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" />
+
+            
 
             
 
@@ -3415,8 +4041,12 @@
 
             
 
+            
+
             , the thread exits the synchronization domain, allowing a thread that is blocked on a call to any member of the object to proceed. When the <see
              cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.TimeSpan,System.Boolean)" />
+
+            
 
             
 
@@ -3435,6 +4065,8 @@
 
             
 
+            
+
              to specify the time interval and specifying whether to exit the synchronization domain before the wait.</para
           >
         </summary>
@@ -3448,8 +4080,12 @@
 
             
 
+            
+
              if no object satisfied the wait and a time interval equivalent to <paramref
              name="timeout" />
+
+            
 
             
 
@@ -3465,10 +4101,14 @@
 
           
 
+          
+
           A WaitHandle array containing the objects for which the current instance will wait. </param
         >
         <param name="timeout">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3481,8 +4121,12 @@
 
           
 
+          
+
            that represents the number of milliseconds to wait, or a <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -3492,6 +4136,8 @@
         >
         <param name="exitContext">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3531,8 +4177,12 @@
 
             
 
+            
+
              is new in the .NET Framework version 2.0. In previous versions, the <see
              cref="Overload:System.Threading.WaitHandle.WaitOne" />
+
+            
 
             
 
@@ -3548,8 +4198,12 @@
 
             
 
+            
+
              receives a signal from another thread, such as is generated when an asynchronous operation completes. For more information, see the <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -3565,8 +4219,12 @@
 
             
 
+            
+
              method overload and specifying -1 or <see
              cref="F:System.Threading.Timeout.Infinite" />
+
+            
 
             
 
@@ -3586,6 +4244,8 @@
 
             
 
+            
+
              receives a signal.</para
           >
         </summary>
@@ -3594,6 +4254,8 @@
           <para
             >true if the current instance receives a signal. If the current instance is never signaled, <see
              cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -3636,6 +4298,8 @@
 
             
 
+            
+
              is zero, the method does not block. It tests the state of the wait handle and returns immediately. </para
           >
           <para
@@ -3646,8 +4310,12 @@
 
             
 
+            
+
              receives a signal from another thread, such as is generated when an asynchronous operation completes. For more information, see the <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -3664,8 +4332,12 @@
 
             
 
+            
+
              overload and specifying false for <paramref
              name="exitContext" />
+
+            
 
             
 
@@ -3679,6 +4351,8 @@
           <para
             >Blocks the current thread until the current <see
              cref="T:System.Threading.WaitHandle" />
+
+            
 
             
 
@@ -3698,8 +4372,12 @@
 
           
 
+          
+
           The number of milliseconds to wait, or <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -3737,6 +4415,8 @@
 
             
 
+            
+
              is zero, the method does not block. It tests the state of the wait handle and returns immediately. </para
           >
           <para
@@ -3747,8 +4427,12 @@
 
             
 
+            
+
              receives a signal from another thread, such as is generated when an asynchronous operation completes. For more information, see the <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -3765,8 +4449,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.Int32.MaxValue" />
+
+            
 
             
 
@@ -3782,8 +4470,12 @@
 
             
 
+            
+
              overload and specifying false for <paramref
              name="exitContext" />
+
+            
 
             
 
@@ -3797,6 +4489,8 @@
           <para
             >Blocks the current thread until the current instance receives a signal, using a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -3816,6 +4510,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
 
@@ -3823,8 +4519,12 @@
 
           
 
+          
+
            that represents the number of milliseconds to wait, or a <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -3867,6 +4567,8 @@
 
             
 
+            
+
              is zero, the method does not block. It tests the state of the wait handle and returns immediately. </para
           >
           <para>
@@ -3876,8 +4578,12 @@
 
             
 
+            
+
              is new in the .NET Framework version 2.0. In previous versions, the <see
              cref="Overload:System.Threading.WaitHandle.WaitOne" />
+
+            
 
             
 
@@ -3893,8 +4599,12 @@
 
             
 
+            
+
              receives a signal from another thread, such as is generated when an asynchronous operation completes. For more information, see the <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -3914,8 +4624,12 @@
 
             
 
+            
+
              parameter has no effect unless the <see
              cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -3928,8 +4642,12 @@
 
             
 
+            
+
             . Even if you are currently executing a method on a class that does not derive from <see
              cref="T:System.ContextBoundObject" />
+
+            
 
             
 
@@ -3942,8 +4660,12 @@
 
             
 
+            
+
             , you can be in a nondefault context if a <see
              cref="T:System.ContextBoundObject" />
+
+            
 
             
 
@@ -3959,6 +4681,8 @@
 
             
 
+            
+
              causes the thread to exit the nondefault managed context (that is, to transition to the default context) before executing the <see
              cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
 
@@ -3966,8 +4690,12 @@
 
             
 
+            
+
              method. The thread returns to the original nondefault context after the call to the <see
              cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -3983,8 +4711,12 @@
 
             
 
+            
+
             . In that case, all calls to members of the class are automatically synchronized, and the synchronization domain is the entire body of code for the class. If code in the call stack of a member calls the <see
              cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -3997,8 +4729,12 @@
 
             
 
+            
+
             , the thread exits the synchronization domain, allowing a thread that is blocked on a call to any member of the object to proceed. When the <see
              cref="M:System.Threading.WaitHandle.WaitOne(System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -4012,6 +4748,8 @@
           <para
             >Blocks the current thread until the current <see
              cref="T:System.Threading.WaitHandle" />
+
+            
 
             
 
@@ -4031,8 +4769,12 @@
 
           
 
+          
+
           The number of milliseconds to wait, or <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -4042,6 +4784,8 @@
         >
         <param name="exitContext">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4084,6 +4828,8 @@
 
             
 
+            
+
              is zero, the method does not block. It tests the state of the wait handle and returns immediately. </para
           >
           <para>
@@ -4093,8 +4839,12 @@
 
             
 
+            
+
              is new in the .NET Framework version 2.0. In previous versions, the <see
              cref="Overload:System.Threading.WaitHandle.WaitOne" />
+
+            
 
             
 
@@ -4110,8 +4860,12 @@
 
             
 
+            
+
              receives a signal from another thread, such as is generated when an asynchronous operation completes. For more information, see the <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -4128,8 +4882,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.Int32.MaxValue" />
+
+            
 
             
 
@@ -4148,8 +4906,12 @@
 
             
 
+            
+
              parameter has no effect unless the <see
              cref="M:System.Threading.WaitHandle.WaitOne(System.TimeSpan,System.Boolean)" />
+
+            
 
             
 
@@ -4162,8 +4924,12 @@
 
             
 
+            
+
             . Even if you are currently executing a method on a class that does not derive from <see
              cref="T:System.ContextBoundObject" />
+
+            
 
             
 
@@ -4176,8 +4942,12 @@
 
             
 
+            
+
             , you can be in a nondefault context if a <see
              cref="T:System.ContextBoundObject" />
+
+            
 
             
 
@@ -4193,6 +4963,8 @@
 
             
 
+            
+
              causes the thread to exit the nondefault managed context (that is, to transition to the default context) before executing the <see
              cref="M:System.Threading.WaitHandle.WaitOne(System.TimeSpan,System.Boolean)" />
 
@@ -4200,8 +4972,12 @@
 
             
 
+            
+
              method. The thread returns to the original nondefault context after the call to the <see
              cref="M:System.Threading.WaitHandle.WaitOne(System.TimeSpan,System.Boolean)" />
+
+            
 
             
 
@@ -4217,8 +4993,12 @@
 
             
 
+            
+
             . In that case, all calls to members of the class are automatically synchronized, and the synchronization domain is the entire body of code for the class. If code in the call stack of a member calls the <see
              cref="M:System.Threading.WaitHandle.WaitOne(System.TimeSpan,System.Boolean)" />
+
+            
 
             
 
@@ -4231,8 +5011,12 @@
 
             
 
+            
+
             , the thread exits the synchronization domain, allowing a thread that is blocked on a call to any member of the object to proceed. When the <see
              cref="M:System.Threading.WaitHandle.WaitOne(System.TimeSpan,System.Boolean)" />
+
+            
 
             
 
@@ -4246,6 +5030,8 @@
           <para
             >Blocks the current thread until the current instance receives a signal, using a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -4265,8 +5051,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -4279,10 +5069,14 @@
 
           
 
+          
+
            that represents -1 milliseconds to wait indefinitely. </param
         >
         <param name="exitContext">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4318,6 +5112,8 @@
           <para
             >Indicates that a <see
              cref="M:System.Threading.WaitHandle.WaitAny(System.Threading.WaitHandle[],System.Int32,System.Boolean)" />
+
+            
 
             
 

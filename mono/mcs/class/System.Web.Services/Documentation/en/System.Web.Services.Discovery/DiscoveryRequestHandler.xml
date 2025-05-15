@@ -34,8 +34,12 @@
 
         
 
+        
+
           class, via its <see
          cref="M:System.Web.Services.Discovery.DiscoveryRequestHandler.ProcessRequest(System.Web.HttpContext)" />
+
+        
 
         
 
@@ -48,11 +52,15 @@
 
         
 
+        
+
          class and is usually serialized as a file using a .disco extension. Web services discovery provides a mechanism for determining the Web services that are available at a given location.</para
       >
       <para
         >The <see
          cref="T:System.Web.Services.Discovery.DiscoveryRequestHandler" />
+
+        
 
         
 
@@ -84,6 +92,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -107,6 +117,8 @@
           <para
             >Gets a value of true, indicates whether the instance of <see
              cref="T:System.Web.Services.Discovery.DiscoveryRequestHandler" />
+
+            
 
             
 
@@ -144,6 +156,8 @@
 
             
 
+            
+
               method searches for applicable files within the file system path corresponding to the HTTP request's Uniform Resource Locator (URL). The search may extend to subdirectories and switch target file extensions depending on what it finds in the root search directory.</para
           >
           <para
@@ -154,8 +168,12 @@
 
             
 
+            
+
              object's <see
              cref="P:System.Web.Services.Discovery.DiscoveryDocument.References" />
+
+            
 
             
 
@@ -175,8 +193,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Web.HttpContext.Request" />
+
+          
 
           
 
@@ -189,8 +211,12 @@
 
           
 
+          
+
            properties of the <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 

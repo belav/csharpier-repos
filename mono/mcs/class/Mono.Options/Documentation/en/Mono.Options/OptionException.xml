@@ -30,6 +30,8 @@
 
       
 
+      
+
       .</summary
     >
     <remarks>
@@ -45,10 +47,14 @@
 
             
 
+            
+
              within the callback
         registered by
         <see
              cref="M:Mono.Options.OptionSet.Add``1(System.String,System.String,System.Action{``0})" />
+
+            
 
             
 
@@ -68,8 +74,12 @@
             
 
             
+
+            
           could not convert a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -78,6 +88,8 @@
              to an object
           of type <typeparamref
              name="T" />
+
+            
 
             
 
@@ -96,9 +108,13 @@
 
             
 
+            
+
              
           value of <see
              cref="F:Mono.Options.OptionValueType.Required" />
+
+            
 
             
 
@@ -162,6 +178,8 @@
           
 
           
+
+          
           that holds the serialized object data about the exception being
           thrown.
         </param
@@ -169,6 +187,8 @@
         <param name="context">
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -183,6 +203,8 @@
           Initializes a new instance of the 
           <see
            cref="T:Mono.Options.OptionException" />
+
+          
 
           
 
@@ -228,12 +250,16 @@
 
           
 
+          
+
            that describes the error.
         </param
         >
         <param name="optionName">
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -252,6 +278,8 @@
 
           
 
+          
+
            class.
         </summary
         >
@@ -264,9 +292,13 @@
 
           
 
+          
+
            property of the new
           instance using <paramref
            name="message" />
+
+          
 
           
 
@@ -281,8 +313,12 @@
           
 
           
+
+          
           property of the new instance using <paramref
            name="optionName" />
+
+          
 
           
 
@@ -323,12 +359,16 @@
 
           
 
+          
+
            that describes the error.
         </param
         >
         <param name="optionName">
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -346,9 +386,13 @@
 
           
 
+          
+
            that is the cause
           of the current exception.  If <paramref
            name="innerException" />
+
+          
 
           
 
@@ -362,9 +406,13 @@
 
           
 
+          
+
           , then the current Exception was raised
           in a catch block handling <paramref
            name="innerException" />
+
+          
 
           
 
@@ -382,6 +430,8 @@
 
           
 
+          
+
            class.
         </summary
         >
@@ -389,6 +439,8 @@
           This constructor initializes the 
           <see
            cref="P:System.Exception.Message" />
+
+          
 
           
 
@@ -402,6 +454,8 @@
 
           
 
+          
+
           , the
           <see
            cref="P:System.Exception.InnerException" />
@@ -410,9 +464,13 @@
 
           
 
+          
+
            property of the new
           instance using <paramref
            name="innerException" />
+
+          
 
           
 
@@ -427,8 +485,12 @@
           
 
           
+
+          
           property of the new instance using <paramref
            name="optionName" />
+
+          
 
           
 
@@ -472,6 +534,8 @@
           
 
           
+
+          
           that holds the serialized object data about the exception being
           thrown.
         </param
@@ -479,6 +543,8 @@
         <param name="context">
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -498,6 +564,8 @@
 
           
 
+          
+
            
           instance.
         </summary
@@ -506,6 +574,8 @@
           Adds information about this exception instance to the provided 
           <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -540,6 +610,8 @@
 
           
 
+          
+
            containing the option name that 
           caused the exception.
         </summary
@@ -547,6 +619,8 @@
         <value>
           A <see
            cref="T:System.String" />
+
+          
 
           
 

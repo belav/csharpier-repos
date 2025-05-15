@@ -52,6 +52,8 @@
 
         
 
+        
+
          accepts filters of any type. It groups them internally into tables that contain all the filters of a given type. When a filter is added, it is put into an internal filter table, if one already exists, which contains filters of its type. If no such table exists, <see
          cref="M:System.ServiceModel.Dispatcher.MessageFilterTable`1.CreateFilterTable(System.ServiceModel.Dispatcher.MessageFilter)" />
 
@@ -59,8 +61,12 @@
 
         
 
+        
+
          is called to allocate a new filter table of the appropriate type. Its default operation is to call <see
          cref="M:System.ServiceModel.Dispatcher.MessageFilter.CreateFilterTable``1" />
+
+        
 
         
 
@@ -99,6 +105,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -107,6 +115,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Dispatcher.MessageFilterTable`1" />
+
+            
 
             
 
@@ -142,6 +152,8 @@
 
             
 
+            
+
              of 0.</para
           >
         </remarks>
@@ -150,6 +162,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Dispatcher.MessageFilterTable`1" />
+
+            
 
             
 
@@ -269,6 +283,8 @@
 
             
 
+            
+
             .  </para
           >
         </remarks>
@@ -337,6 +353,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -354,6 +372,8 @@
 
             
 
+            
+
              is contained in the filter table; otherwise false.</para
           >
         </returns>
@@ -364,8 +384,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
+
+          
 
           
 
@@ -427,6 +451,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -435,6 +461,8 @@
           <para
             >Gets the number of filter/<paramref
              name="FilterData" />
+
+            
 
             
 
@@ -480,6 +508,8 @@
 
             
 
+            
+
              that is created that contains the specified filter.</para
           >
         </returns>
@@ -490,8 +520,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
+
+          
 
           
 
@@ -556,6 +590,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -573,8 +609,12 @@
 
             
 
+            
+
             &lt;KeyValuePair&lt;Filter, <paramref
              name="FilterData" />
+
+            
 
             
 
@@ -686,8 +726,12 @@
 
             
 
+            
+
              objects are stored in the <paramref
              name="results" />
+
+            
 
             
 
@@ -700,8 +744,12 @@
 
             
 
+            
+
             . The <paramref
              name="FilterData" />
+
+            
 
             
 
@@ -714,11 +762,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This method implements <see
              cref="M:System.ServiceModel.Dispatcher.IMessageFilterTable`1.GetMatchingFilters(System.ServiceModel.Channels.Message,System.Collections.Generic.ICollection{System.ServiceModel.Dispatcher.MessageFilter})" />
+
+            
 
             
 
@@ -737,6 +789,8 @@
 
             
 
+            
+
              in the table is satisfied by the specified message, and adds the matching filters to a collection.</para
           >
         </summary>
@@ -750,8 +804,12 @@
 
             
 
+            
+
              in the table is satisfied by <paramref
              name="message" />
+
+            
 
             
 
@@ -767,8 +825,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Message" />
+
+          
 
           
 
@@ -783,6 +845,8 @@
 
           
 
+          
+
           The reference parameter that stores the <see
            cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
 
@@ -790,8 +854,12 @@
 
           
 
+          
+
            objects that match in <see
            cref="T:System.Collections.Generic.ICollection`1" />
+
+          
 
           
 
@@ -837,8 +905,12 @@
 
             
 
+            
+
              objects are stored in the <paramref
              name="results" />
+
+            
 
             
 
@@ -851,8 +923,12 @@
 
             
 
+            
+
             . The <paramref
              name="FilterData" />
+
+            
 
             
 
@@ -865,11 +941,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This method implements <see
              cref="M:System.ServiceModel.Dispatcher.MessageFilterTable`1.GetMatchingFilters(System.ServiceModel.Channels.MessageBuffer,System.Collections.Generic.ICollection{System.ServiceModel.Dispatcher.MessageFilter})" />
+
+            
 
             
 
@@ -892,6 +972,8 @@
 
             
 
+            
+
             ; false if no filter is satisfied.</para
           >
         </returns>
@@ -902,8 +984,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.MessageBuffer" />
+
+          
 
           
 
@@ -918,6 +1004,8 @@
 
           
 
+          
+
           The reference parameter that stores the <see
            cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
 
@@ -925,8 +1013,12 @@
 
           
 
+          
+
            objects that match in <see
            cref="T:System.Collections.Generic.ICollection`1" />
+
+          
 
           
 
@@ -1092,6 +1184,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1102,8 +1196,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
+
+          
 
           
 
@@ -1130,6 +1228,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Dispatcher.MessageFilterTable`1" />
+
+            
 
             
 
@@ -1198,8 +1298,12 @@
 
             
 
+            
+
             . The <see
              cref="T:System.Collections.Generic.IDictionary`2" />
+
+            
 
             
 
@@ -1212,6 +1316,8 @@
 
             
 
+            
+
             &gt; that the filter table implements uses the <see
              cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
 
@@ -1219,8 +1325,12 @@
 
             
 
+            
+
              as the key and the <paramref
              name="FilterData" />
+
+            
 
             
 
@@ -1236,8 +1346,12 @@
 
             
 
+            
+
              in the collection returned by the <see
              cref="P:System.ServiceModel.Dispatcher.MessageFilterTable`1.Values" />
+
+            
 
             
 
@@ -1311,6 +1425,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1319,6 +1435,8 @@
           <para
             >Removes a filter and its associated <paramref
              name="FilterData" />
+
+            
 
             
 
@@ -1338,8 +1456,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
+
+          
 
           
 
@@ -1377,6 +1499,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1389,6 +1513,8 @@
           <para
             >An <see
              cref="T:System.Collections.Generic.IEnumerator`1" />
+
+            
 
             
 
@@ -1455,8 +1581,12 @@
 
             
 
+            
+
             . The <see
              cref="T:System.Collections.Generic.IDictionary`2" />
+
+            
 
             
 
@@ -1469,6 +1599,8 @@
 
             
 
+            
+
             &gt; that the filter table implements uses the <see
              cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
 
@@ -1476,8 +1608,12 @@
 
             
 
+            
+
              as the key and the <paramref
              name="FilterData" />
+
+            
 
             
 
@@ -1493,8 +1629,12 @@
 
             
 
+            
+
              returned in the collection is unspecified, but it is guaranteed to be the same order as the corresponding filters in the collection returned by the <see
              cref="P:System.ServiceModel.Dispatcher.MessageFilterTable`1.Keys" />
+
+            
 
             
 
@@ -1508,6 +1648,8 @@
           <para
             >Gets a collection of all the <paramref
              name="FilterData" />
+
+            
 
             
 

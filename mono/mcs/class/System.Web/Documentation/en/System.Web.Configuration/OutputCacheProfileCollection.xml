@@ -32,11 +32,15 @@
 
         
 
+        
+
          allows to centralize the management of the output cache settings used by pages or user controls.</para
       >
       <para
         >It allows you to programmatically access and modify the <see
          cref="T:System.Web.Configuration.OutputCacheProfile" />
+
+        
 
         
 
@@ -53,10 +57,14 @@
 
           
 
+          
+
            can be applied to a page using the CacheProfile attribute of the <format
            type="text/html">
             <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
           </format>
+
+          
 
           
 
@@ -71,6 +79,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.Web.Configuration.OutputCacheProfile" />
+
+        
 
         
 
@@ -93,6 +103,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.OutputCacheProfileCollection" />
+
+            
 
             
 
@@ -130,6 +142,8 @@
 
             
 
+            
+
              object with the same name.</para
           >
         </remarks>
@@ -138,6 +152,8 @@
           <para
             >Adds a <see
              cref="T:System.Web.Configuration.OutputCacheProfile" />
+
+            
 
             
 
@@ -153,8 +169,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Web.Configuration.OutputCacheProfile" />
+
+          
 
           
 
@@ -187,6 +207,8 @@
 
             
 
+            
+
              keys.</para
           >
         </summary>
@@ -213,6 +235,8 @@
           <para
             >Removes all the  <see
              cref="T:System.Web.Configuration.OutputCacheProfile" />
+
+            
 
             
 
@@ -271,6 +295,8 @@
 
             
 
+            
+
              element at the specified index.</para
           >
         </summary>
@@ -279,6 +305,8 @@
           <para
             >The <see
              cref="T:System.Web.Configuration.OutputCacheProfile" />
+
+            
 
             
 
@@ -294,8 +322,12 @@
 
           
 
+          
+
           The index of the <see
            cref="T:System.Web.Configuration.OutputCacheProfileCollection" />
+
+          
 
           
 
@@ -333,6 +365,8 @@
 
             
 
+            
+
              element with the specified name.</para
           >
         </summary>
@@ -341,6 +375,8 @@
           <para
             >The <see
              cref="T:System.Web.Configuration.OutputCacheProfile" />
+
+            
 
             
 
@@ -356,8 +392,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Web.Configuration.OutputCacheProfileCollection" />
+
+          
 
           
 
@@ -415,6 +455,8 @@
 
             
 
+            
+
              index.</para
           >
         </summary>
@@ -423,6 +465,8 @@
           <para
             >The key with the specified <see
              cref="T:System.Web.Configuration.OutputCacheProfileCollection" />
+
+            
 
             
 
@@ -438,8 +482,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Configuration.OutputCacheProfileCollection" />
+
+          
 
           
 
@@ -538,6 +586,8 @@
 
             
 
+            
+
              method inserts a remove element into the appropriate section of the configuration file for any element defined in a higher-level configuration file. If the element is defined in the appropriate section of the current configuration file, its entry is removed from the configuration file. The object to remove must exist in the collection.</para
           >
         </remarks>
@@ -546,6 +596,8 @@
           <para
             >Removes the <see
              cref="T:System.Web.Configuration.OutputCacheProfile" />
+
+            
 
             
 
@@ -561,8 +613,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Web.Configuration.OutputCacheProfile" />
+
+          
 
           
 
@@ -596,6 +652,8 @@
 
             
 
+            
+
              method inserts a remove element into the corresponding section of the configuration file for any element defined in a higher-level configuration file. If the element is defined in the corresponding section of the current configuration file, its entry is removed from the configuration file. The object to remove must exist in the collection.</para
           >
         </remarks>
@@ -604,6 +662,8 @@
           <para
             >Removes the <see
              cref="T:System.Web.Configuration.OutputCacheProfile" />
+
+            
 
             
 
@@ -619,8 +679,12 @@
 
           
 
+          
+
           The index of the <see
            cref="T:System.Web.Configuration.OutputCacheProfile" />
+
+          
 
           
 
@@ -657,8 +721,12 @@
 
             
 
+            
+
              method modifies an existing <see
              cref="T:System.Web.Configuration.OutputCacheProfileCollection" />
+
+            
 
             
 
@@ -677,6 +745,8 @@
 
             
 
+            
+
              object. </para
           >
         </summary>
@@ -687,8 +757,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Configuration.OutputCacheProfileCollection" />
+
+          
 
           
 

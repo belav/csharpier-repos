@@ -21,8 +21,12 @@
 
         
 
+        
+
          class overview. Every Web Parts connection requires connection points. The provider and the consumer control must each have at least one defined <see
          cref="T:System.Web.UI.WebControls.WebParts.ConnectionPoint" />
+
+        
 
         
 
@@ -35,6 +39,8 @@
 
         
 
+        
+
          class), a <see
          cref="T:System.Web.UI.WebControls.WebParts.ProviderConnectionPoint" />
 
@@ -42,8 +48,12 @@
 
         
 
+        
+
          instance, and the consumer has its own object, a <see
          cref="T:System.Web.UI.WebControls.WebParts.ConsumerConnectionPoint" />
+
+        
 
         
 
@@ -59,8 +69,12 @@
 
         
 
+        
+
          class). Similarly, to create a consumer connection point, developers must add a method to the consumer that receives an interface instance, and they must mark that method with a ConnectionConsumer attribute (see the <see
          cref="T:System.Web.UI.WebControls.WebParts.ConnectionConsumerAttribute" />
+
+        
 
         
 
@@ -77,8 +91,12 @@
 
         
 
+        
+
          control. To create a connection in code, developers must get an instance of a <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPartConnection" />
+
+        
 
         
 
@@ -91,8 +109,12 @@
 
         
 
+        
+
          method on the <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPartManager" />
+
+        
 
         
 
@@ -105,6 +127,8 @@
 
         
 
+        
+
          and <see
          cref="M:System.Web.UI.WebControls.WebParts.WebPartManager.GetConsumerConnectionPoints(System.Web.UI.WebControls.WebParts.WebPart)" />
 
@@ -112,8 +136,12 @@
 
         
 
+        
+
          methods on the <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPartManager" />
+
+        
 
         
 
@@ -129,11 +157,15 @@
 
         
 
+        
+
          object must be used to translate the interface instance from the provider into a type that the consumer can work with. </para
       >
       <para
         >The abstract <see
          cref="T:System.Web.UI.WebControls.WebParts.ConnectionPoint" />
+
+        
 
         
 
@@ -146,8 +178,12 @@
 
         
 
+        
+
          property indicates whether a connection point can participate in more than one connection at a time. By default, provider connection points can participate in multiple connections, and consumer connection points cannot. The <see
          cref="P:System.Web.UI.WebControls.WebParts.ConnectionPoint.ControlType" />
+
+        
 
         
 
@@ -160,8 +196,12 @@
 
         
 
+        
+
          controls can form connections; any server control, whether an ASP.NET control, a custom control, or a user control, can be enabled to participate in connections if placed in a <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPartZoneBase" />
+
+        
 
         
 
@@ -174,8 +214,12 @@
 
         
 
+        
+
          property provides a friendly name for the connection point that can be displayed in the UI to assist users who are creating connections. The <see
          cref="P:System.Web.UI.WebControls.WebParts.ConnectionPoint.ID" />
+
+        
 
         
 
@@ -188,6 +232,8 @@
 
         
 
+        
+
          property indicates what type of interface instance the connection point understands. Whether a given connection point provides or consumes an instance of that interface is determined by whether it is a <see
          cref="T:System.Web.UI.WebControls.WebParts.ProviderConnectionPoint" />
 
@@ -195,8 +241,12 @@
 
         
 
+        
+
          or a <see
          cref="T:System.Web.UI.WebControls.WebParts.ConsumerConnectionPoint" />
+
+        
 
         
 
@@ -212,8 +262,12 @@
 
         
 
+        
+
          class has one method. The <see
          cref="M:System.Web.UI.WebControls.WebParts.ConnectionPoint.GetEnabled(System.Web.UI.Control)" />
+
+        
 
         
 
@@ -229,8 +283,12 @@
 
         
 
+        
+
          class also has one public field, <see
          cref="F:System.Web.UI.WebControls.WebParts.ConnectionPoint.DefaultID" />
+
+        
 
         
 
@@ -247,8 +305,12 @@
 
           
 
+          
+
           , so it is possible to create the default connection point attribute without specifying an ID. In such cases, the <see
            cref="F:System.Web.UI.WebControls.WebParts.ConnectionPoint.DefaultID" />
+
+          
 
           
 
@@ -282,6 +344,8 @@
 
             
 
+            
+
              objects have their <see
              cref="P:System.Web.UI.WebControls.WebParts.ConnectionPoint.AllowsMultipleConnections" />
 
@@ -289,8 +353,12 @@
 
             
 
+            
+
              property value set to true (by the <see
              cref="T:System.Web.UI.WebControls.WebParts.ConnectionProviderAttribute" />
+
+            
 
             
 
@@ -306,6 +374,8 @@
 
             
 
+            
+
              objects have their <see
              cref="P:System.Web.UI.WebControls.WebParts.ConnectionPoint.AllowsMultipleConnections" />
 
@@ -313,8 +383,12 @@
 
             
 
+            
+
              property value set to false (by the <see
              cref="T:System.Web.UI.WebControls.WebParts.ConnectionConsumerAttribute" />
+
+            
 
             
 
@@ -330,6 +404,8 @@
 
             
 
+            
+
              property (for providers) or the <see
              cref="P:System.Web.UI.WebControls.WebParts.ConnectionConsumerAttribute.AllowsMultipleConnections" />
 
@@ -337,8 +413,12 @@
 
             
 
+            
+
              property (for consumers) on the two <see
              cref="T:System.Attribute" />
+
+            
 
             
 
@@ -375,8 +455,12 @@
 
             
 
+            
+
              property is often the <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+            
 
             
 
@@ -389,8 +473,12 @@
 
             
 
+            
+
              zone, the <see
              cref="P:System.Web.UI.WebControls.WebParts.ConnectionPoint.ControlType" />
+
+            
 
             
 
@@ -406,8 +494,12 @@
 
             
 
+            
+
              controls are placed in a <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPartZoneBase" />
+
+            
 
             
 
@@ -420,8 +512,12 @@
 
             
 
+            
+
              object at run time so they can function as <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+            
 
             
 
@@ -434,6 +530,8 @@
 
             
 
+            
+
              property value does not return the <see
              cref="T:System.Web.UI.WebControls.WebParts.GenericWebPart" />
 
@@ -441,8 +539,12 @@
 
             
 
+            
+
              type; it returns the type of the <see
              cref="T:System.Web.UI.WebControls.WebParts.GenericWebPart" />
+
+            
 
             
 
@@ -456,6 +558,8 @@
           <para
             >Gets the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -487,8 +591,12 @@
 
             
 
+            
+
              control, using a <see
              cref="T:System.Web.UI.WebControls.WebParts.ConnectionConsumerAttribute" />
+
+            
 
             
 
@@ -501,6 +609,8 @@
 
             
 
+            
+
              attribute. However, when an attribute is added to a connection point in the source code, the <paramref
              name="ID" />
 
@@ -508,8 +618,12 @@
 
             
 
+            
+
              parameter is optional. If the ID is not specified in the attribute, the <see
              cref="F:System.Web.UI.WebControls.WebParts.ConnectionPoint.DefaultID" />
+
+            
 
             
 
@@ -552,6 +666,8 @@
 
             
 
+            
+
              method in the base <see
              cref="T:System.Web.UI.WebControls.WebParts.ConnectionPoint" />
 
@@ -559,8 +675,12 @@
 
             
 
+            
+
              class always returns true, but derived classes can override the method to return true or false at different times, based on the state of <paramref
              name="control" />
+
+            
 
             
 
@@ -584,8 +704,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+          
 
           
 
@@ -617,8 +741,12 @@
 
             
 
+            
+
              or a <see
              cref="T:System.Web.UI.WebControls.WebParts.ConnectionProviderAttribute" />
+
+            
 
             
 
@@ -631,6 +759,8 @@
 
             
 
+            
+
              parameter for the connection point attribute. The only required attribute is the <paramref
              name="displayName" />
 
@@ -638,8 +768,12 @@
 
             
 
+            
+
              parameter. A default ID is assigned to the connection point, using the value from the <see
              cref="F:System.Web.UI.WebControls.WebParts.ConnectionPoint.DefaultID" />
+
+            
 
             
 
@@ -677,8 +811,12 @@
 
             
 
+            
+
              property indicates what type of interface a connection point uses. This can help to determine whether two controls are compatible and able to form a connection. If the provider connection point's <see
              cref="P:System.Web.UI.WebControls.WebParts.ConnectionPoint.InterfaceType" />
+
+            
 
             
 
@@ -691,8 +829,12 @@
 
             
 
+            
+
             , then the two controls are incompatible (meaning that they cannot be directly connected without a transformer), and a <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPartTransformer" />
+
+            
 
             
 

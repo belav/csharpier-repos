@@ -124,8 +124,12 @@
 
           
 
+          
+
           The array of <see
            cref="T:System.DirectoryServices.PropertyValueCollection" />
+
+          
 
           
 
@@ -140,8 +144,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -177,6 +185,8 @@
 
           
 
+          
+
           The name of the property to find.</param
         >
       </Docs>
@@ -207,6 +217,8 @@
 
             
 
+            
+
              that you can use to iterate through this collection.</para
           >
         </returns>
@@ -230,8 +242,12 @@
 
             
 
+            
+
             , so each will throw a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -267,8 +283,12 @@
 
             
 
+            
+
              property, a <see
              cref="T:System.Runtime.InteropServices.COMException" />
+
+            
 
             
 
@@ -304,8 +324,12 @@
 
             
 
+            
+
              property, a <see
              cref="T:System.Runtime.InteropServices.COMException" />
+
+            
 
             
 
@@ -352,8 +376,12 @@
 
         
 
+        
+
          class contains the properties of a <see
          cref="T:System.DirectoryServices.DirectoryEntry" />
+
+        
 
         
 

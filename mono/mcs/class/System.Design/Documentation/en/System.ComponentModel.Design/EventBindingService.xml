@@ -27,6 +27,8 @@
 
         
 
+        
+
          provides a way to link an event handler with a component event from designer code.</para
       >
     </remarks>
@@ -35,6 +37,8 @@
       <para
         >A default implementation of the <see
          cref="T:System.ComponentModel.Design.IEventBindingService" />
+
+        
 
         
 
@@ -69,6 +73,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -79,8 +85,12 @@
 
           
 
+          
+
           The service provider from which <see
            cref="T:System.ComponentModel.Design.EventBindingService" />
+
+          
 
           
 
@@ -118,6 +128,8 @@
 
             
 
+            
+
              method must be compatible with the script language being used and it must not conflict with any other name in your code.</para
           >
         </remarks>
@@ -131,6 +143,8 @@
         </returns>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -168,8 +182,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.ComponentModel.Design.EventBindingService.FreeMethod(System.ComponentModel.IComponent,System.ComponentModel.EventDescriptor,System.String)" />
+
+            
 
             
 
@@ -189,10 +207,14 @@
 
           
 
+          
+
           The component to which the method is bound.</param
         >
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -205,10 +227,14 @@
 
           
 
+          
+
            for the event handler.</param
         >
         <param name="methodName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -245,8 +271,12 @@
 
             
 
+            
+
             . <see
              cref="M:System.ComponentModel.Design.EventBindingService.GetCompatibleMethods(System.ComponentModel.EventDescriptor)" />
+
+            
 
             
 
@@ -294,6 +324,8 @@
 
             
 
+            
+
             , or null if the requested service is not available.</para
           >
         </returns>
@@ -315,6 +347,8 @@
           <para
             >The <see
              cref="M:System.ComponentModel.Design.EventBindingService.ShowCode" />
+
+            
 
             
 
@@ -365,6 +399,8 @@
 
           
 
+          
+
           The line number to show.</param
         >
       </Docs>
@@ -397,6 +433,8 @@
 
             
 
+            
+
              method displays the body of the user code with the given method name.</para
           >
         </remarks>
@@ -415,10 +453,14 @@
 
           
 
+          
+
           The component to which the method is bound.</param
         >
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -431,10 +473,14 @@
 
           
 
+          
+
            for the event handler.</param
         >
         <param name="methodName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -478,6 +524,8 @@
 
           
 
+          
+
           The component instance the event is connected to.</param
         >
       </Docs>
@@ -509,8 +557,12 @@
 
             
 
+            
+
             . <see
              cref="M:System.ComponentModel.Design.EventBindingService.GetCompatibleMethods(System.ComponentModel.EventDescriptor)" />
+
+            
 
             
 
@@ -556,6 +608,8 @@
 
             
 
+            
+
              for the event that the specified property descriptor represents, if it represents an event.</para
           >
         </summary>
@@ -569,11 +623,15 @@
 
             
 
+            
+
              for the event that the property represents, or null if the property does not represent an event.</para
           >
         </returns>
         <param name="property">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -614,11 +672,15 @@
 
             
 
+            
+
              objects that describe the event set.</para
           >
         </returns>
         <param name="events">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -655,6 +717,8 @@
           <para
             >A <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -716,6 +780,8 @@
 
           
 
+          
+
           The line number to place the caret on.</param
         >
       </Docs>
@@ -754,6 +820,8 @@
 
           
 
+          
+
           The component that the event is connected to.</param
         >
       </Docs>
@@ -786,8 +854,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.ComponentModel.Design.EventBindingService.FreeMethod(System.ComponentModel.IComponent,System.ComponentModel.EventDescriptor,System.String)" />
+
+            
 
             
 
@@ -807,10 +879,14 @@
 
           
 
+          
+
           The component to which the method is bound.</param
         >
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -823,10 +899,14 @@
 
           
 
+          
+
            for the event handler.</param
         >
         <param name="methodName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -862,6 +942,8 @@
         </summary>
         <param name="methodName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

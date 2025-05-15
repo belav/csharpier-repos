@@ -24,6 +24,8 @@
 
         
 
+        
+
          control raises the <see
          cref="E:System.Web.UI.WebControls.GridView.RowEditing" />
 
@@ -31,8 +33,12 @@
 
         
 
+        
+
          event when an Edit button (a button with its CommandName property set to "Edit") is clicked, but before the <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 
@@ -48,6 +54,8 @@
 
         
 
+        
+
          object is passed to the event-handling method, which allows you to determine the index of the row being edited and to indicate that the edit operation should be canceled. To cancel the edit operation, set the <see
          cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.UI.WebControls.GridViewEditEventArgs" />
+
+        
 
         
 
@@ -74,6 +86,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -84,8 +98,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.WebControls.GridViewEditEventArgs.#ctor(System.Int32)" />
+
+        
 
         
 
@@ -99,6 +117,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Web.UI.WebControls.GridView.RowEditing" />
+
+        
 
         
 
@@ -128,11 +148,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The following table shows the initial property value for an instance of <see
              cref="T:System.Web.UI.WebControls.GridViewEditEventArgs" />
+
+            
 
             
 
@@ -166,6 +190,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -180,6 +206,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.GridViewEditEventArgs" />
+
+            
 
             
 
@@ -212,6 +240,8 @@
 
             
 
+            
+
              property to determine the index of the row being edited. The row index is often used to retrieve this row from the <see
              cref="P:System.Web.UI.WebControls.GridView.Rows" />
 
@@ -219,8 +249,12 @@
 
             
 
+            
+
              collection of the <see
              cref="T:System.Web.UI.WebControls.GridView" />
+
+            
 
             
 

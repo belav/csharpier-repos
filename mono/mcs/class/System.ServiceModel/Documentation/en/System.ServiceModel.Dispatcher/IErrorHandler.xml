@@ -21,8 +21,12 @@
 
         
 
+        
+
          interface and add it to the <see
          cref="T:System.ServiceModel.Dispatcher" />
+
+        
 
         
 
@@ -35,6 +39,8 @@
 
         
 
+        
+
          property. <see
          cref="T:System.ServiceModel.Dispatcher.IErrorHandler" />
 
@@ -42,8 +48,12 @@
 
         
 
+        
+
          enables you to explicitly control the SOAP fault generated, decide whether to send it back to the client, and perform associated tasks, such as logging. Error handlers are called in the order in which they were added to the <see
          cref="P:System.ServiceModel.Dispatcher.ChannelDispatcher.ErrorHandlers" />
+
+        
 
         
 
@@ -59,11 +69,15 @@
 
         
 
+        
+
          method to control the fault message that is returned to the client. </para
       >
       <para
         >Implement the <see
          cref="M:System.ServiceModel.Dispatcher.IErrorHandler.HandleError(System.Exception)" />
+
+        
 
         
 
@@ -80,8 +94,12 @@
 
           
 
+          
+
            method can be called from many different places there are no guarantees made about which thread the method is called on. Do not depend on <see
            cref="M:System.ServiceModel.Dispatcher.IErrorHandler.HandleError(System.Exception)" />
+
+          
 
           
 
@@ -98,8 +116,12 @@
 
         
 
+        
+
          implementations are called first, prior to sending a response message. When all <see
          cref="M:System.ServiceModel.Dispatcher.IErrorHandler.ProvideFault(System.Exception,System.ServiceModel.Channels.MessageVersion,System.ServiceModel.Channels.Message@)" />
+
+        
 
         
 
@@ -112,6 +134,8 @@
 
         
 
+        
+
          is non-null, it is sent back to the client according to the operation contract. If <paramref
          name="fault" />
 
@@ -119,8 +143,12 @@
 
         
 
+        
+
          is null after all implementations have been called, the response message is controlled by the <see
          cref="P:System.ServiceModel.ServiceBehaviorAttribute.IncludeExceptionDetailInFaults" />
+
+        
 
         
 
@@ -137,8 +165,12 @@
 
           
 
+          
+
            implementations are called and a response message is handed to the channel. If a channel exception occurs (for example, difficulty serializing the message) <see
            cref="T:System.ServiceModel.Dispatcher.IErrorHandler" />
+
+          
 
           
 
@@ -155,12 +187,16 @@
 
           
 
+          
+
           .</para
         >
       </block>
       <para
         >After the response message has been sent, all <see
          cref="M:System.ServiceModel.Dispatcher.IErrorHandler.HandleError(System.Exception)" />
+
+        
 
         
 
@@ -176,8 +212,12 @@
 
         
 
+        
+
          implementation is added to the <see
          cref="P:System.ServiceModel.Dispatcher.ChannelDispatcher.ErrorHandlers" />
+
+        
 
         
 
@@ -193,8 +233,12 @@
 
         
 
+        
+
          to the runtime by implementing a behavior (either an <see
          cref="T:System.ServiceModel.Description.IServiceBehavior" />
+
+        
 
         
 
@@ -207,8 +251,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.ServiceModel.Description.IContractBehavior" />
+
+        
 
         
 
@@ -221,8 +269,12 @@
 
         
 
+        
+
          object) and use the behavior programmatically, from a configuration file or with a custom attribute to attach your <see
          cref="T:System.ServiceModel.Dispatcher.IErrorHandler" />
+
+        
 
         
 
@@ -235,6 +287,8 @@
          type="text/html">
           <a href="149b99b6-6eb6-4f45-be22-c967279677d9">Attaching Extensions Using Behaviors</a>
         </format>
+
+        
 
         
 
@@ -277,6 +331,8 @@
 
             
 
+            
+
              method to implement error-related behaviors such as error logging, system notifications, shutting down the application, and so on, and return a value that specifies whether the exception has been handled appropriately. </para
           >
           <block subset="none" type="note">
@@ -288,8 +344,12 @@
 
               
 
+              
+
                method can be called from many different places there are no guarantees made about which thread the method is called on. Do not depend on <see
                cref="M:System.ServiceModel.Dispatcher.IErrorHandler.HandleError(System.Exception)" />
+
+              
 
               
 
@@ -306,8 +366,12 @@
 
             
 
+            
+
              implementations are called. By default (when the return value is false), if there is an exception, the dispatcher aborts any session and aborts the <see
              cref="T:System.ServiceModel.InstanceContext" />
+
+            
 
             
 
@@ -320,8 +384,12 @@
 
             
 
+            
+
              is anything other than <see
              cref="F:System.ServiceModel.InstanceContextMode.Single" />
+
+            
 
             
 
@@ -337,11 +405,15 @@
 
             
 
+            
+
              to prevent this default behavior. If any error handler returns true it instructs indigo2 that it is safe to continue using state associated with the failed request. </para
           >
           <para
             >If no error handler returns true from the <see
              cref="M:System.ServiceModel.Dispatcher.IErrorHandler.HandleError(System.Exception)" />
+
+            
 
             
 
@@ -354,8 +426,12 @@
 
             
 
+            
+
              and channel when communicating on a session channel or the <see
              cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
+
+            
 
             
 
@@ -368,11 +444,15 @@
 
             
 
+            
+
             . </para
           >
           <para
             >The <paramref
              name="error" />
+
+            
 
             
 
@@ -390,6 +470,8 @@
           <para
             >true if indigo1 should not abort the session (if there is one) and instance context if the instance context is not <see
              cref="F:System.ServiceModel.InstanceContextMode.Single" />
+
+            
 
             
 

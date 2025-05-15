@@ -24,8 +24,12 @@
 
         
 
+        
+
          property, which returns a <see
          cref="T:System.ServiceModel.NetTcpSecurity" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          property provides a reference to the <see
          cref="T:System.ServiceModel.MessageSecurityOverTcp" />
+
+        
 
         
 
@@ -82,6 +90,8 @@
                 >ServiceModel Metadata Utility Tool (Svcutil.exe)</a
               >
             </format>
+
+            
 
             
 

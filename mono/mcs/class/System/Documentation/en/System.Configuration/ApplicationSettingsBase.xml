@@ -32,8 +32,12 @@
 
         
 
+        
+
          adds the following functionality to the <see
          cref="T:System.Configuration.SettingsBase" />
+
+        
 
         
 
@@ -51,6 +55,8 @@
 
             
 
+            
+
              supports the declarative model used for wrapper class properties, as described later.</para
           >
         </item>
@@ -63,8 +69,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Configuration.ApplicationSettingsBase.Reload" />
+
+            
 
             
 
@@ -85,8 +95,12 @@
 
         
 
+        
+
         . The wrapper class customizes <see
          cref="T:System.Configuration.ApplicationSettingsBase" />
+
+        
 
         
 
@@ -107,6 +121,8 @@
 
             
 
+            
+
              or <see
              cref="T:System.Configuration.UserScopedSettingAttribute" />
 
@@ -114,8 +130,12 @@
 
             
 
+            
+
             . Application-scoped settings are read-only if the default <see
              cref="T:System.Configuration.LocalFileSettingsProvider" />
+
+            
 
             
 
@@ -133,11 +153,15 @@
 
         
 
+        
+
          class uses reflection to detect these attributes at run time. Most of this information gets passed to the settings provider layer, which is responsible for storage, persistence format, and so on. </para
       >
       <para
         >When an application has multiple settings wrapper classes, each class defines a <newTerm
         >settings group</newTerm>
+
+        
 
         
 
@@ -158,6 +182,8 @@
 
             
 
+            
+
             , then a name is automatically generated.</para
           >
         </item>
@@ -170,8 +196,12 @@
 
         
 
+        
+
          to provide storage. If an alternate settings provider is desired, then the wrapper class or property must be decorated with a corresponding <see
          cref="T:System.Configuration.SettingsProviderAttribute" />
+
+        
 
         
 
@@ -184,6 +214,8 @@
          type="text/html">
           <a href="64090a34-8556-4904-8ea0-20efe9f8c886">Application Settings for Windows Forms</a>
         </format>
+
+        
 
         
 
@@ -222,6 +254,8 @@
 
             
 
+            
+
             .</para
           >
           <para>When an instance of a wrapper class is created, inherited code will automatically perform the following actions:</para>
@@ -233,6 +267,8 @@
               <para
                 >For each property on the wrapper marked with either [UserScopedSettingAttribute] or [ApplicationScopedSettingAttribute], a corresponding <see
                  cref="T:System.Configuration.SettingsProperty" />
+
+                
 
                 
 
@@ -250,6 +286,8 @@
 
                 
 
+                
+
                  has some of its properties set based on other attributes that are optionally present on the wrapper's properties, such as the default value or the settings provider.</para
               >
             </item>
@@ -262,8 +300,12 @@
 
                 
 
+                
+
                  property of the <see
                  cref="T:System.Configuration.SettingsProperty" />
+
+                
 
                 
 
@@ -281,8 +323,12 @@
 
                 
 
+                
+
                  objects are added to a <see
                  cref="T:System.Configuration.SettingsPropertyCollection" />
+
+                
 
                 
 
@@ -295,6 +341,8 @@
 
                 
 
+                
+
                  property of the <see
                  cref="T:System.Configuration.ApplicationSettingsBase" />
 
@@ -302,8 +350,12 @@
 
                 
 
+                
+
                  class. This collection is then passed to the <see
                  cref="M:System.Configuration.SettingsBase.Initialize(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection,System.Configuration.SettingsProviderCollection)" />
+
+                
 
                 
 
@@ -321,8 +373,12 @@
 
             
 
+            
+
              natively works with several property attributes, specifically the following: <see
              cref="T:System.Configuration.SettingsProviderAttribute" />
+
+            
 
             
 
@@ -335,8 +391,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Configuration.SettingsSerializeAsAttribute" />
+
+            
 
             
 
@@ -350,6 +410,8 @@
           <para
             >Initializes an instance of the <see
              cref="T:System.Configuration.ApplicationSettingsBase" />
+
+            
 
             
 
@@ -389,12 +451,16 @@
 
             
 
+            
+
              constructor using the invocation: </para
           >
           <para>ApplicationSettingsBase(owner, String.Empty)</para>
           <para
             >For information about how reflection is used during the instantiation of a wrapper class, see the default <see
              cref="M:System.Configuration.ApplicationSettingsBase.#ctor" />
+
+            
 
             
 
@@ -413,11 +479,15 @@
 
             
 
+            
+
              class using the supplied owner component.</para
           >
         </summary>
         <param name="owner">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -456,8 +526,12 @@
 
             
 
+            
+
              property to the value of the <paramref
              name="settingsKey" />
+
+            
 
             
 
@@ -468,6 +542,8 @@
           <para
             >For information about how reflection is used during the instantiation of a wrapper class, see the default <see
              cref="M:System.Configuration.ApplicationSettingsBase.#ctor" />
+
+            
 
             
 
@@ -486,6 +562,8 @@
 
             
 
+            
+
              class using the supplied settings key.</para
           >
         </summary>
@@ -496,8 +574,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -537,8 +619,12 @@
 
             
 
+            
+
              object specified by the <paramref
              name="owner" />
+
+            
 
             
 
@@ -551,6 +637,8 @@
 
             
 
+            
+
             , the owner's site is queried for a <see
              cref="T:System.Configuration.ISettingsProviderService" />
 
@@ -558,8 +646,12 @@
 
             
 
+            
+
             . If one exists, it is used in preference to native settings provider for all the properties of the wrapper class, as specified by the <see
              cref="T:System.Configuration.SettingsProviderAttribute" />
+
+            
 
             
 
@@ -575,8 +667,12 @@
 
             
 
+            
+
              property to the value of the <paramref
              name="settingsKey" />
+
+            
 
             
 
@@ -587,6 +683,8 @@
           <para
             >For information about how reflection is used during the instantiation of a wrapper class, see the default <see
              cref="M:System.Configuration.ApplicationSettingsBase.#ctor" />
+
+            
 
             
 
@@ -605,11 +703,15 @@
 
             
 
+            
+
              class using the supplied owner component and settings key.</para
           >
         </summary>
         <param name="owner">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -624,8 +726,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -670,11 +776,15 @@
 
             
 
+            
+
              has a context associated with it. The context is passed to the settings provider for each property to identify how the property is used. Context therefore acts as a hint to help the settings provider determine how best to persist the associated application settings values. </para
           >
           <para
             >In contrast, the <see
              cref="P:System.Configuration.ApplicationSettingsBase.SettingsKey" />
+
+            
 
             
 
@@ -721,8 +831,12 @@
 
             
 
+            
+
              method is often used in conjunction with the <see
              cref="M:System.Configuration.ApplicationSettingsBase.Upgrade" />
+
+            
 
             
 
@@ -745,8 +859,12 @@
 
             
 
+            
+
              containing the value of the specified <see
              cref="T:System.Configuration.SettingsProperty" />
+
+            
 
             
 
@@ -762,8 +880,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -838,11 +960,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Configuration.ApplicationSettingsBase.OnPropertyChanged(System.Object,System.ComponentModel.PropertyChangedEventArgs)" />
+
+            
 
             
 
@@ -861,11 +987,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="sender">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -880,8 +1010,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.PropertyChangedEventArgs" />
+
+          
 
           
 
@@ -926,11 +1060,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Configuration.ApplicationSettingsBase.OnSettingChanging(System.Object,System.Configuration.SettingChangingEventArgs)" />
+
+            
 
             
 
@@ -949,11 +1087,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="sender">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -968,8 +1110,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.SettingChangingEventArgs" />
+
+          
 
           
 
@@ -1014,11 +1160,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Configuration.ApplicationSettingsBase.OnSettingsLoaded(System.Object,System.Configuration.SettingsLoadedEventArgs)" />
+
+            
 
             
 
@@ -1037,11 +1187,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="sender">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1056,8 +1210,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.SettingsLoadedEventArgs" />
+
+          
 
           
 
@@ -1102,11 +1260,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Configuration.ApplicationSettingsBase.OnSettingsSaving(System.Object,System.ComponentModel.CancelEventArgs)" />
+
+            
 
             
 
@@ -1125,11 +1287,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="sender">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1144,8 +1310,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.CancelEventArgs" />
+
+          
 
           
 
@@ -1190,8 +1360,12 @@
 
             
 
+            
+
              property reflects over the metadata of the settings wrapper class, which is derived from <see
              cref="T:System.Configuration.ApplicationSettingsBase" />
+
+            
 
             
 
@@ -1207,8 +1381,12 @@
 
             
 
+            
+
              class natively recognizes certain characteristics of an application setting, such as its name, property type, settings provider, default value, read only status, and a serialization preference. These characteristics are mirrored as properties in the <see
              cref="T:System.Configuration.SettingsProperty" />
+
+            
 
             
 
@@ -1252,8 +1430,12 @@
 
             
 
+            
+
              event is raised when a settings property is changed through the set accessor of the <see
              cref="P:System.Configuration.ApplicationSettingsBase.Item(System.String)" />
+
+            
 
             
 
@@ -1266,8 +1448,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Configuration.ApplicationSettingsBase.Reset" />
+
+            
 
             
 
@@ -1278,6 +1464,8 @@
           <para
             >There is no corresponding PropertyChanging event for this class; instead, see the <see
              cref="E:System.Configuration.ApplicationSettingsBase.SettingChanging" />
+
+            
 
             
 
@@ -1359,8 +1547,12 @@
 
             
 
+            
+
              determines what setting provider is used by a settings wrapper class or an individual setting property. If this attribute is not specified, a client application will use the <see
              cref="T:System.Configuration.LocalFileSettingsProvider" />
+
+            
 
             
 
@@ -1402,6 +1594,8 @@
 
             
 
+            
+
              method clears the currently cached property values, causing a reload of these values from persistent storage when they are subsequently accessed. This method performs the following actions:</para
           >
           <list type="bullet">
@@ -1409,6 +1603,8 @@
               <para
                 >It clears the currently cached properties by clearing the collection represented by the <see
                  cref="P:System.Configuration.SettingsBase.PropertyValues" />
+
+                
 
                 
 
@@ -1426,8 +1622,12 @@
 
                 
 
+                
+
                  event for every member of the <see
                  cref="P:System.Configuration.ApplicationSettingsBase.Properties" />
+
+                
 
                 
 
@@ -1444,8 +1644,12 @@
 
             
 
+            
+
              contrasts with <see
              cref="M:System.Configuration.ApplicationSettingsBase.Reset" />
+
+            
 
             
 
@@ -1487,6 +1691,8 @@
 
             
 
+            
+
              method overwrites the user-scoped settings properties by restoring the currently persisted value of each application settings. This method performs the following actions:</para
           >
           <list type="bullet">
@@ -1494,6 +1700,8 @@
               <para
                 >It calls the <see
                  cref="M:System.Configuration.IApplicationSettingsProvider.Reset(System.Configuration.SettingsContext)" />
+
+                
 
                 
 
@@ -1511,6 +1719,8 @@
 
                 
 
+                
+
                  method to force a refresh of the settings property values.</para
               >
             </item>
@@ -1522,8 +1732,12 @@
 
             
 
+            
+
              contrasts with <see
              cref="M:System.Configuration.ApplicationSettingsBase.Reset" />
+
+            
 
             
 
@@ -1565,8 +1779,12 @@
 
             
 
+            
+
              method writes the current value of each settings property to its associated data store. For each property, this method calls the <see
              cref="M:System.Configuration.SettingsProvider.SetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyValueCollection)" />
+
+            
 
             
 
@@ -1582,11 +1800,15 @@
 
             
 
+            
+
              event before the values are written.</para
           >
           <para
             >If the only settings defined are application-scoped settings, <see
              cref="M:System.Configuration.ApplicationSettingsBase.Save" />
+
+            
 
             
 
@@ -1599,8 +1821,12 @@
 
             
 
+            
+
             . <see
              cref="T:System.Configuration.LocalFileSettingsProvider" />
+
+            
 
             
 
@@ -1617,6 +1843,8 @@
 
               
 
+              
+
                method to persist the current values of the application settings. This is typically performed in the <see
                cref="E:System.Windows.Forms.Form.Closing" />
 
@@ -1624,8 +1852,12 @@
 
               
 
+              
+
                event handler of the primary or containing <see
                cref="T:System.Windows.Forms.Form" />
+
+              
 
               
 
@@ -1670,8 +1902,12 @@
 
             
 
+            
+
              event occurs before an application setting value property is changed through the <see
              cref="P:System.Configuration.ApplicationSettingsBase.Item(System.String)" />
+
+            
 
             
 
@@ -1684,8 +1920,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Configuration.ApplicationSettingsBase.Reset" />
+
+            
 
             
 
@@ -1698,8 +1938,12 @@
 
             
 
+            
+
              can be canceled through the <see
              cref="T:System.Configuration.SettingChangingEventArgs" />
+
+            
 
             
 
@@ -1710,6 +1954,8 @@
           <para
             >You typically use the <see
              cref="E:System.Configuration.ApplicationSettingsBase.SettingChanging" />
+
+            
 
             
 
@@ -1726,11 +1972,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >There is no corresponding SettingChanged event for this class; instead, see the <see
              cref="E:System.Configuration.ApplicationSettingsBase.PropertyChanged" />
+
+            
 
             
 
@@ -1774,11 +2024,15 @@
 
             
 
+            
+
              property is provided to enable client code, and in particular the settings provider, to disambiguate between multiple instances of the same application settings class.</para
           >
           <para
             >Unless the settings wrapper class is designed using the singleton pattern, there can be multiple instances of the same application settings class in a single application. The value of <see
              cref="P:System.Configuration.ApplicationSettingsBase.SettingsKey" />
+
+            
 
             
 
@@ -1796,8 +2050,12 @@
 
                 
 
+                
+
                  should have the same value in all of the instances. This is the default behavior of the <see
                  cref="T:System.Configuration.ApplicationSettingsBase" />
+
+                
 
                 
 
@@ -1815,6 +2073,8 @@
 
                 
 
+                
+
                  should have a unique value for every instance. The <see
                  cref="M:System.Configuration.ApplicationSettingsBase.#ctor(System.String)" />
 
@@ -1822,8 +2082,12 @@
 
                 
 
+                
+
                  version of the constructor enables you to initialize <see
                  cref="P:System.Configuration.ApplicationSettingsBase.SettingsKey" />
+
+                
 
                 
 
@@ -1841,11 +2105,15 @@
 
             
 
+            
+
              property provides hints to the settings provider to enable it to persist values in an efficient and orderly manner.</para
           >
           <para
             >The <see
              cref="T:System.Configuration.SettingChangingEventArgs" />
+
+            
 
             
 
@@ -1858,8 +2126,12 @@
 
             
 
+            
+
              property that helps identify the source of the <see
              cref="E:System.Configuration.ApplicationSettingsBase.SettingChanging" />
+
+            
 
             
 
@@ -1903,8 +2175,12 @@
 
             
 
+            
+
              event occurs only after the initial get access of the first configuration property used, typically through the <see
              cref="P:System.Configuration.ApplicationSettingsBase.Item(System.String)" />
+
+            
 
             
 
@@ -1917,8 +2193,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Configuration.ApplicationSettingsBase.Reload" />
+
+            
 
             
 
@@ -1962,8 +2242,12 @@
 
             
 
+            
+
              event is raised by the <see
              cref="M:System.Configuration.ApplicationSettingsBase.Save" />
+
+            
 
             
 
@@ -2005,6 +2289,8 @@
 
             
 
+            
+
              method performs two actions to assure smooth transition to a new version of an application:</para
           >
           <list type="bullet">
@@ -2017,6 +2303,8 @@
 
                 
 
+                
+
                  method, assuming they have implemented the <see
                  cref="T:System.Configuration.IApplicationSettingsProvider" />
 
@@ -2024,8 +2312,12 @@
 
                 
 
+                
+
                  interface. This action is not performed if the settings wrapper class is marked with <see
                  cref="T:System.Configuration.NoSettingsVersionUpgradeAttribute" />
+
+                
 
                 
 
@@ -2046,8 +2338,12 @@
 
             
 
+            
+
              to implement custom upgrading or merging behavior. Use the <see
              cref="M:System.Configuration.ApplicationSettingsBase.GetPreviousVersion(System.String)" />
+
+            
 
             
 

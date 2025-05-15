@@ -13,9 +13,13 @@
 
         
 
+        
+
          and 
         <see
          cref="T:Mono.Unix.Native.Stdlib" />
+
+        
 
         
 
@@ -35,9 +39,13 @@
 
         
 
+        
+
         , or the
 				<see
          cref="P:System.Exception.InnerException" />
+
+        
 
         
 
@@ -51,9 +59,13 @@
 
         
 
+        
+
         .  In either case, the
 				<see
          cref="P:Mono.Unix.UnixIOException.ErrorCode" />
+
+        
 
         
 
@@ -83,6 +95,8 @@
 
           
 
+          
+
            thread-safe?  It appears to be under
         glibc, but isn't necessarily under all Unix platforms.  
         <c
@@ -92,8 +106,12 @@
 
           
 
+          
+
            assumes that it is.  Only <i
           >obviously</i>
+
+          
 
           
 
@@ -108,9 +126,13 @@
 
           
 
+          
+
            and 
         <see
            cref="M:Mono.Unix.Native.Stdlib.strerror" />
+
+          
 
           
 

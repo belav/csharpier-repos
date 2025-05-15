@@ -34,11 +34,15 @@
 
         
 
+        
+
          method of this interface to explicitly release unmanaged resources in conjunction with the garbage collector. The consumer of an object can call this method when the object is no longer needed.</para
       >
       <para
         >It is a version-breaking change to add the <see
          cref="T:System.IDisposable" />
+
+        
 
         
 
@@ -59,8 +63,12 @@
 
           
 
+          
+
           . In the .NET Framework version, the C++ compiler provides support for implementing deterministic disposal of resources and does not allow direct implementation of the <see
            cref="M:System.IDisposable.Dispose" />
+
+          
 
           
 
@@ -77,6 +85,8 @@
 
         
 
+        
+
          method are used, see the <format
          type="text/html">
           <a href="22B6CB97-0C80-4EEB-A2CF-5ED7655E37F9">Garbage Collection</a>
@@ -86,10 +96,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
         </format>
+
+        
 
         
 
@@ -108,6 +122,8 @@
 
         
 
+        
+
          as follows: </para
       >
       <list type="bullet">
@@ -120,8 +136,12 @@
 
             
 
+            
+
              method and a protected virtual Dispose(Boolean <paramref
              name="disposing" />
+
+            
 
             
 
@@ -134,6 +154,8 @@
           <para
             >The <see
              cref="M:System.IDisposable.Dispose" />
+
+            
 
             
 
@@ -166,6 +188,8 @@
 
         
 
+        
+
          interface, use the try/finally pattern to make sure that unmanaged resources are disposed of even if an exception interrupts your application.  </para
       >
       <para
@@ -180,6 +204,8 @@
 
         
 
+        
+
         , <format
          type="text/html">
           <a href="c27623fb-7261-4464-862c-7a369d3c8f0a">try-finally (C# Reference)</a>
@@ -189,10 +215,14 @@
 
         
 
+        
+
         , or <format
          type="text/html">
           <a href="514400c1-c322-4bf3-9e48-3047240b8a82">The try-finally Statement(C++)</a>
         </format>
+
+        
 
         
 
@@ -210,10 +240,14 @@
 
         
 
+        
+
          documentation or the <format
          type="text/html">
           <a href="afc355e6-f0b9-4240-94dd-0d93f17d9fc3">using Statement (C# Reference)</a>
         </format>
+
+        
 
         
 
@@ -306,8 +340,12 @@
 
               
 
+              
+
               . In the .NET Framework version 2.0, the C++ compiler provides support for implementing deterministic disposal of resources and does not allow direct implementation of the <see
                cref="M:System.IDisposable.Dispose" />
+
+              
 
               
 
@@ -324,6 +362,8 @@
 
             
 
+            
+
              implementation must call <see
              cref="M:System.IDisposable.Dispose" />
 
@@ -331,8 +371,12 @@
 
             
 
+            
+
              on B, which must in turn call <see
              cref="M:System.IDisposable.Dispose" />
+
+            
 
             
 
@@ -348,8 +392,12 @@
 
             
 
+            
+
              method of its base class if the base class implements <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -362,8 +410,12 @@
 
             
 
+            
+
              on a base class and its subclasses, see the "IDisposable and the inheritance hierarchy" section in the <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -379,8 +431,12 @@
 
             
 
+            
+
              method is called more than once, the object must ignore all calls after the first one. The object must not throw an exception if its <see
              cref="M:System.IDisposable.Dispose" />
+
+            
 
             
 
@@ -393,8 +449,12 @@
 
             
 
+            
+
              can throw an <see
              cref="T:System.ObjectDisposedException" />
+
+            
 
             
 
@@ -410,11 +470,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >Because the <see
              cref="M:System.IDisposable.Dispose" />
+
+            
 
             
 
@@ -427,8 +491,12 @@
 
             
 
+            
+
              must also implement a finalizer to handle freeing resources when <see
              cref="M:System.IDisposable.Dispose" />
+
+            
 
             
 
@@ -441,6 +509,8 @@
 
             
 
+            
+
              method has been called, it is typically unnecessary for the garbage collector to call the disposed object's finalizer. To prevent automatic finalization, <see
              cref="M:System.IDisposable.Dispose" />
 
@@ -448,8 +518,12 @@
 
             
 
+            
+
              implementations can call the <see
              cref="M:System.GC.SuppressFinalize(System.Object)" />
+
+            
 
             
 
@@ -465,6 +539,8 @@
 
             
 
+            
+
              method, see the <see
              cref="T:System.GC" />
 
@@ -472,8 +548,12 @@
 
             
 
+            
+
              class, the <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -490,11 +570,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >When you use an object that accesses unmanaged resources, such as a <see
              cref="T:System.IO.StreamWriter" />
+
+            
 
             
 
@@ -507,8 +591,12 @@
 
             
 
+            
+
              on the object when the code that is using it has completed. For an example, see the <see
              cref="T:System.IO.StreamWriter" />
+
+            
 
             
 

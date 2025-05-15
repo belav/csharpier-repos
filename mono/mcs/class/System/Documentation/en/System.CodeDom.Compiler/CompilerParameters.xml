@@ -29,8 +29,12 @@
 
         
 
+        
+
          object represents the settings and options for an <see
          cref="T:System.CodeDom.Compiler.ICodeCompiler" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
          property to true. When the <see
          cref="P:System.CodeDom.Compiler.CompilerParameters.GenerateExecutable" />
+
+        
 
         
 
@@ -60,8 +68,12 @@
 
         
 
+        
+
          is initialized with its <see
          cref="P:System.CodeDom.Compiler.CompilerParameters.GenerateExecutable" />
+
+        
 
         
 
@@ -74,8 +86,12 @@
 
         
 
+        
+
          must be defined in the graph. If there are multiple code entry points, you can indicate the class that defines the entry point to use by setting the name of the class to the <see
          cref="P:System.CodeDom.Compiler.CompilerParameters.MainClass" />
+
+        
 
         
 
@@ -91,8 +107,12 @@
 
         
 
+        
+
          property. Otherwise, a default output file name will be used. To include debug information in a generated assembly, set the <see
          cref="P:System.CodeDom.Compiler.CompilerParameters.IncludeDebugInformation" />
+
+        
 
         
 
@@ -105,6 +125,8 @@
 
         
 
+        
+
          set to the <see
          cref="P:System.CodeDom.Compiler.CompilerParameters.ReferencedAssemblies" />
 
@@ -112,8 +134,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.CodeDom.Compiler.CompilerParameters" />
+
+        
 
         
 
@@ -129,6 +155,8 @@
 
         
 
+        
+
          property to true. When an assembly is generated in memory, your code can obtain a reference to the generated assembly from the <see
          cref="P:System.CodeDom.Compiler.CompilerResults.CompiledAssembly" />
 
@@ -136,8 +164,12 @@
 
         
 
+        
+
          property of a <see
          cref="T:System.CodeDom.Compiler.CompilerResults" />
+
+        
 
         
 
@@ -150,8 +182,12 @@
 
         
 
+        
+
          property of a <see
          cref="T:System.CodeDom.Compiler.CompilerResults" />
+
+        
 
         
 
@@ -167,8 +203,12 @@
 
         
 
+        
+
          property to an integer that represents the warning level at which to halt compilation. You can also configure the compiler to halt compilation if warnings are encountered by setting the <see
          cref="P:System.CodeDom.Compiler.CompilerParameters.TreatWarningsAsErrors" />
+
+        
 
         
 
@@ -184,8 +224,12 @@
 
         
 
+        
+
          property. If a Win32 security token is required to invoke the compiler process, specify the token in the <see
          cref="P:System.CodeDom.Compiler.CompilerParameters.UserToken" />
+
+        
 
         
 
@@ -198,6 +242,8 @@
 
         
 
+        
+
          property. To reference .NET Framework resources in another assembly, add the names of the resource files to the <see
          cref="P:System.CodeDom.Compiler.CompilerParameters.LinkedResources" />
 
@@ -205,8 +251,12 @@
 
         
 
+        
+
          property. To include a Win32 resource file in the compiled assembly, specify the name of the Win32 resource file in the <see
          cref="P:System.CodeDom.Compiler.CompilerParameters.Win32Resource" />
+
+        
 
         
 
@@ -223,6 +273,8 @@
 
           
 
+          
+
            is thrown when either the immediate caller or the derived class does not have full-trust permission. For details about security demands, see <format
            type="text/html">
             <a href="a33fd5f9-2de9-4653-a4f0-d9df25082c4d">Link Demands</a>
@@ -232,10 +284,14 @@
 
           
 
+          
+
            and <format
            type="text/html">
             <a href="28b9adbb-8f08-4f10-b856-dbf59eb932d9">Inheritance Demands</a>
           </format>
+
+          
 
           
 
@@ -277,6 +333,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -310,11 +368,15 @@
 
             
 
+            
+
              class using the specified assembly names.</para
           >
         </summary>
         <param name="assemblyNames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -357,11 +419,15 @@
 
             
 
+            
+
              class using the specified assembly names and output file name.</para
           >
         </summary>
         <param name="assemblyNames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -406,11 +472,15 @@
 
             
 
+            
+
              class using the specified assembly names, output name, and a value indicating whether to include debug information.</para
           >
         </summary>
         <param name="assemblyNames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -440,6 +510,8 @@
           <para
             >An <see
              cref="T:System.CodeDom.Compiler.ICodeCompiler" />
+
+            
 
             
 
@@ -489,8 +561,12 @@
 
             
 
+            
+
              method with the flag <see
              cref="F:System.CodeDom.Compiler.GeneratorSupport.Resources" />
+
+            
 
             
 
@@ -506,6 +582,8 @@
 
             
 
+            
+
              to embed the file resources in the compiled assembly. Adding a duplicate or invalid file path results in compilation errors; ensure that each string specifies a unique path to a valid .NET Framework resource file.</para
           >
           <para
@@ -516,8 +594,12 @@
 
             
 
+            
+
              to include default or neutral culture .NET Framework resources for an assembly; use the <see
              cref="P:System.CodeDom.Compiler.CompilerParameters.LinkedResources" />
+
+            
 
             
 
@@ -668,8 +750,12 @@
 
             
 
+            
+
              method with the flag <see
              cref="F:System.CodeDom.Compiler.GeneratorSupport.Resources" />
+
+            
 
             
 
@@ -685,6 +771,8 @@
 
             
 
+            
+
              to create links for the resources in the compiled assembly. Adding a duplicate or invalid file path results in compilation errors; ensure that each string specifies a unique path to a valid .NET Framework resource file.</para
           >
           <para
@@ -695,8 +783,12 @@
 
             
 
+            
+
              to reference .NET Framework resources in satellite assemblies, localized for a particular culture; use the <see
              cref="P:System.CodeDom.Compiler.CompilerParameters.EmbeddedResources" />
+
+            
 
             
 
@@ -788,6 +880,8 @@
 
             
 
+            
+
              to import the assembly manifest and reference the assembly type information in the current project.</para
           >
         </remarks>
@@ -828,8 +922,12 @@
 
             
 
+            
+
              property in the collection. The <see
              cref="P:System.CodeDom.Compiler.TempFileCollection.KeepFiles" />
+
+            
 
             
 
@@ -842,8 +940,12 @@
 
             
 
+            
+
              constructor with the <paramref
              name="keepFiles" />
+
+            
 
             
 
@@ -860,6 +962,8 @@
 
               
 
+              
+
                is thrown when either the immediate caller or the derived class does not have full-trust permission. For details about security demands, see <format
                type="text/html">
                 <a href="a33fd5f9-2de9-4653-a4f0-d9df25082c4d">Link Demands</a>
@@ -869,10 +973,14 @@
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="28b9adbb-8f08-4f10-b856-dbf59eb932d9">Inheritance Demands</a>
               </format>
+
+              
 
               
 
@@ -980,6 +1088,8 @@
 
             
 
+            
+
              to compile a Win32 resource file into the assembly. Use <see
              cref="P:System.CodeDom.Compiler.CompilerParameters.EmbeddedResources" />
 
@@ -987,8 +1097,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.CodeDom.Compiler.CompilerParameters.LinkedResources" />
+
+            
 
             
 
@@ -1004,8 +1118,12 @@
 
             
 
+            
+
              method with the flag <see
              cref="F:System.CodeDom.Compiler.GeneratorSupport.Win32Resources" />
+
+            
 
             
 

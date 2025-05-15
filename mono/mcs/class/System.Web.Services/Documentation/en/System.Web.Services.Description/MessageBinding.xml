@@ -61,6 +61,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -137,8 +139,12 @@
 
             
 
+            
+
              class corresponds to a Web Services Description Language (WSDL) element (&lt;input&gt;, &lt;output&gt; or &lt;fault&gt;) enclosed by the &lt;operation&gt; element, which is in turn enclosed by the &lt;binding&gt; element. The <see
              cref="T:System.Web.Services.Description.OperationBinding" />
+
+            
 
             
 
@@ -158,8 +164,12 @@
 
             
 
+            
+
              of which the current <see
              cref="T:System.Web.Services.Description.MessageBinding" />
+
+            
 
             
 

@@ -28,6 +28,8 @@
 
         
 
+        
+
          class provides methods to verify whether a given Web service or services conforms to a given Web Services Interoperability (WS-I) Organization specification.</para
       >
     </summary>
@@ -71,8 +73,12 @@
 
             
 
+            
+
              conforms to the Web services interoperability specification indicated by <paramref
              name="claims" />
+
+            
 
             
 
@@ -88,8 +94,12 @@
 
           
 
+          
+
           A member of <see
            cref="T:System.Web.Services.WsiProfiles" />
+
+          
 
           
 
@@ -104,8 +114,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Services.Description.BasicProfileViolationCollection" />
+
+          
 
           
 
@@ -159,8 +173,12 @@
 
             
 
+            
+
              conform to the Web services interoperability specification indicated by <paramref
              name="claims" />
+
+            
 
             
 
@@ -176,8 +194,12 @@
 
           
 
+          
+
           A member of <see
            cref="T:System.Web.Services.WsiProfiles" />
+
+          
 
           
 
@@ -192,8 +214,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Services.Description.BasicProfileViolationCollection" />
+
+          
 
           
 
@@ -243,8 +269,12 @@
 
             
 
+            
+
              conforms to the Web services interoperability specification indicated by <paramref
              name="claims" />
+
+            
 
             
 
@@ -260,8 +290,12 @@
 
           
 
+          
+
           A member of <see
            cref="T:System.Web.Services.WsiProfiles" />
+
+          
 
           
 
@@ -276,8 +310,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Services.Description.WebReference" />
+
+          
 
           
 
@@ -292,8 +330,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Services.Description.BasicProfileViolationCollection" />
+
+          
 
           
 

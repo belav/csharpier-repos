@@ -38,6 +38,8 @@
 
         
 
+        
+
          objects are equal.</para
       >
       <block subset="none" type="note">
@@ -75,6 +77,8 @@
 
             
 
+            
+
              with a <see
              cref="T:System.Security.Permissions.PermissionState" />
 
@@ -82,8 +86,12 @@
 
             
 
+            
+
              value of <see
              cref="F:System.Security.Permissions.PermissionState.None" />
+
+            
 
             
 
@@ -97,6 +105,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Permissions.GacIdentityPermission" />
+
+            
 
             
 
@@ -137,8 +147,12 @@
 
               
 
+              
+
                permission state value. Starting with the .NET Framework version 2.0, identity permissions can have any permission state value. This means that in 2.0 and later versions, identity permissions have the same behavior as permissions that implement the <see
                cref="T:System.Security.Permissions.IUnrestrictedPermission" />
+
+              
 
               
 
@@ -158,8 +172,12 @@
 
             
 
+            
+
              class with fully restricted <see
              cref="T:System.Security.Permissions.PermissionState" />
+
+            
 
             
 
@@ -175,8 +193,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -249,8 +271,12 @@
 
             
 
+            
+
              method creates a <see
              cref="T:System.Security.Permissions.GacIdentityPermission" />
+
+            
 
             
 
@@ -263,6 +289,8 @@
 
             
 
+            
+
              object. Use the <see
              cref="M:System.Security.Permissions.GacIdentityPermission.ToXml" />
 
@@ -270,8 +298,12 @@
 
             
 
+            
+
              method to XML-encode the <see
              cref="T:System.Security.Permissions.GacIdentityPermission" />
+
+            
 
             
 
@@ -291,8 +323,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.SecurityElement" />
+
+          
 
           
 
@@ -335,8 +371,12 @@
 
             
 
+            
+
              only supports set operations (the <see
              cref="M:System.Security.Permissions.GacIdentityPermission.IsSubsetOf(System.Security.IPermission)" />
+
+            
 
             
 
@@ -349,8 +389,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Security.Permissions.GacIdentityPermission.Union(System.Security.IPermission)" />
+
+            
 
             
 
@@ -369,6 +413,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -411,8 +457,12 @@
 
             
 
+            
+
              only supports set operations (the <see
              cref="M:System.Security.Permissions.GacIdentityPermission.IsSubsetOf(System.Security.IPermission)" />
+
+            
 
             
 
@@ -425,8 +475,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Security.Permissions.GacIdentityPermission.Union(System.Security.IPermission)" />
+
+            
 
             
 
@@ -445,6 +499,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -506,6 +562,8 @@
 
             
 
+            
+
              method to create a <see
              cref="T:System.Security.Permissions.GacIdentityPermission" />
 
@@ -513,8 +571,12 @@
 
             
 
+            
+
              from a <see
              cref="T:System.Security.SecurityElement" />
+
+            
 
             
 
@@ -532,6 +594,8 @@
           <para
             >A <see
              cref="T:System.Security.SecurityElement" />
+
+            
 
             
 
@@ -574,11 +638,15 @@
 
             
 
+            
+
              method is a permission that includes all the operations represented by both the current permission and the specified permission. Any demand that passes either permission passes their union.</para
           >
           <para
             >A <see
              cref="T:System.Security.Permissions.GacIdentityPermission" />
+
+            
 
             
 
@@ -591,6 +659,8 @@
 
             
 
+            
+
             , <see
              cref="M:System.Security.Permissions.GacIdentityPermission.Intersect(System.Security.IPermission)" />
 
@@ -598,8 +668,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Security.Permissions.GacIdentityPermission.Union(System.Security.IPermission)" />
+
+            
 
             
 
@@ -618,6 +692,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -23,8 +23,12 @@
 
         
 
+        
+
          class provides a base template definition class that can be inherited from and extended for a control designer to use in providing support for templated controls in a design host such as vsprvslong. A design host uses the properties and methods of the <see
          cref="T:System.Web.UI.Design.TemplateDefinition" />
+
+        
 
         
 
@@ -66,6 +70,8 @@
 
             
 
+            
+
              class, using the provided designer, template name, template, and property name.</para
           >
         </summary>
@@ -76,8 +82,12 @@
 
           
 
+          
+
           The parent <see
            cref="T:System.Web.UI.Design.ControlDesigner" />
+
+          
 
           
 
@@ -92,10 +102,14 @@
 
           
 
+          
+
           The name of the template.</param
         >
         <param name="templatedObject">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -110,8 +124,12 @@
 
           
 
+          
+
           The property name that represents this template in the <ui
           >Properties</ui>
+
+          
 
           
 
@@ -149,6 +167,8 @@
 
             
 
+            
+
              class, using the provided designer, template name, template, property name, and whether to limit the template contents to Web server controls.</para
           >
         </summary>
@@ -159,8 +179,12 @@
 
           
 
+          
+
           The parent <see
            cref="T:System.Web.UI.Design.ControlDesigner" />
+
+          
 
           
 
@@ -175,10 +199,14 @@
 
           
 
+          
+
           The name of the template.</param
         >
         <param name="templatedObject">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -193,8 +221,12 @@
 
           
 
+          
+
           The property name that represents this template in the <ui
           >Properties</ui>
+
+          
 
           
 
@@ -204,6 +236,8 @@
         >
         <param name="serverControlsOnly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -241,8 +275,12 @@
 
             
 
+            
+
              class, using the provided designer, template name, template, property name, and <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -258,8 +296,12 @@
 
           
 
+          
+
           The parent <see
            cref="T:System.Web.UI.Design.ControlDesigner" />
+
+          
 
           
 
@@ -274,10 +316,14 @@
 
           
 
+          
+
           The name of the template.</param
         >
         <param name="templatedObject">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -292,8 +338,12 @@
 
           
 
+          
+
           The property name that represents this template in the <ui
           >Properties</ui>
+
+          
 
           
 
@@ -308,8 +358,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.Style" />
+
+          
 
           
 
@@ -348,8 +402,12 @@
 
             
 
+            
+
              class, using the provided designer, template name, template, property name, <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -365,8 +423,12 @@
 
           
 
+          
+
           The parent <see
            cref="T:System.Web.UI.Design.ControlDesigner" />
+
+          
 
           
 
@@ -381,10 +443,14 @@
 
           
 
+          
+
           The name of the template.</param
         >
         <param name="templatedObject">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -399,8 +465,12 @@
 
           
 
+          
+
           The property name that represents this template in the <ui
           >Properties</ui>
+
+          
 
           
 
@@ -415,8 +485,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.Style" />
+
+          
 
           
 
@@ -426,6 +500,8 @@
         >
         <param name="serverControlsOnly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -451,6 +527,8 @@
           <para
             >To change the default, derived classes must override the <see
              cref="P:System.Web.UI.Design.TemplateDefinition.AllowEditing" />
+
+            
 
             
 
@@ -505,6 +583,8 @@
 
             
 
+            
+
              constructor. This property is read-only.</para
           >
         </summary>
@@ -534,8 +614,12 @@
 
             
 
+            
+
              property is read-only, the properties of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -549,6 +633,8 @@
           <para
             >Retrieves the style that should be applied to the template as set in the <see
              cref="Overload:System.Web.UI.Design.TemplateDefinition.#ctor" />
+
+            
 
             
 
@@ -598,8 +684,12 @@
 
             
 
+            
+
              property is read-only, its properties can be set, and if <see
              cref="P:System.Web.UI.Design.TemplateDefinition.AllowEditing" />
+
+            
 
             
 

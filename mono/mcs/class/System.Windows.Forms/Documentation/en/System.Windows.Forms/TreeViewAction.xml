@@ -20,6 +20,8 @@
 
         
 
+        
+
          constructor.</para
       >
     </remarks>
@@ -28,6 +30,8 @@
       <para
         >Specifies the action that raised a <see
          cref="T:System.Windows.Forms.TreeViewEventArgs" />
+
+        
 
         
 
@@ -89,6 +93,8 @@
 
             
 
+            
+
              collapsing.</para
           >
         </summary>
@@ -110,6 +116,8 @@
           <para
             >The event was caused by the <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 

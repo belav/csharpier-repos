@@ -37,6 +37,8 @@
 
         
 
+        
+
          list is used to specify the output listeners for the <see
          cref="P:System.Diagnostics.Trace.Listeners" />
 
@@ -44,8 +46,12 @@
 
         
 
+        
+
          and the <see
          cref="P:System.Diagnostics.Debug.Listeners" />
+
+        
 
         
 
@@ -61,6 +67,8 @@
 
         
 
+        
+
         , <see
          cref="M:System.Diagnostics.TraceListenerCollection.Remove(System.Diagnostics.TraceListener)" />
 
@@ -68,8 +76,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Diagnostics.TraceListenerCollection.Clear" />
+
+        
 
         
 
@@ -85,8 +97,12 @@
 
         
 
+        
+
          class provides the <see
          cref="P:System.Diagnostics.TraceListenerCollection.Count" />
+
+        
 
         
 
@@ -99,6 +115,8 @@
 
         
 
+        
+
         , <see
          cref="M:System.Diagnostics.TraceListenerCollection.GetEnumerator" />
 
@@ -106,8 +124,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Diagnostics.TraceListenerCollection.IndexOf(System.Diagnostics.TraceListener)" />
+
+        
 
         
 
@@ -123,8 +145,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Diagnostics.TraceListenerCollection.Clear" />
+
+        
 
         
 
@@ -137,8 +163,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Diagnostics.TraceListenerCollection.Remove(System.Diagnostics.TraceListener)" />
+
+        
 
         
 
@@ -151,8 +181,12 @@
 
         
 
+        
+
          method copies a part of the list to an array. The <see
          cref="M:System.Diagnostics.TraceListenerCollection.RemoveAt(System.Int32)" />
+
+        
 
         
 
@@ -166,6 +200,8 @@
       <para
         >Provides a thread-safe list of <see
          cref="T:System.Diagnostics.TraceListener" />
+
+        
 
         
 
@@ -209,6 +245,8 @@
 
             
 
+            
+
              to the list.</para
           >
         </summary>
@@ -223,8 +261,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Diagnostics.TraceListener" />
+
+          
 
           
 
@@ -267,6 +309,8 @@
 
             
 
+            
+
              objects to the list.</para
           >
         </summary>
@@ -277,8 +321,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Diagnostics.TraceListener" />
+
+          
 
           
 
@@ -321,6 +369,8 @@
 
             
 
+            
+
              to the list.</para
           >
         </summary>
@@ -331,8 +381,12 @@
 
           
 
+          
+
           Another <see
            cref="T:System.Diagnostics.TraceListenerCollection" />
+
+          
 
           
 
@@ -398,8 +452,12 @@
 
             
 
+            
+
              method can confirm the existence of a <see
              cref="T:System.Diagnostics.TraceListener" />
+
+            
 
             
 
@@ -423,8 +481,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Diagnostics.TraceListener" />
+
+          
 
           
 
@@ -468,11 +530,15 @@
 
             
 
+            
+
              list to the specified array at the specified index.</para
           >
         </summary>
         <param name="listeners">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -485,10 +551,14 @@
 
           
 
+          
+
            to copy the elements into. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -554,6 +624,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -597,8 +669,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Diagnostics.TraceListener" />
+
+          
 
           
 
@@ -647,8 +723,12 @@
 
           
 
+          
+
           The position in the list to insert the new <see
            cref="T:System.Diagnostics.TraceListener" />
+
+          
 
           
 
@@ -663,8 +743,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Diagnostics.TraceListener" />
+
+          
 
           
 
@@ -763,6 +847,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -773,8 +859,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Diagnostics.TraceListener" />
+
+          
 
           
 
@@ -813,8 +903,12 @@
 
             
 
+            
+
              parameter is case-sensitive. That is, if two listeners exist with the names "Rname" and "rname", the <see
              cref="M:System.Diagnostics.TraceListenerCollection.Remove(System.Diagnostics.TraceListener)" />
+
+            
 
             
 
@@ -833,6 +927,8 @@
 
             
 
+            
+
              with the specified name.</para
           >
         </summary>
@@ -843,8 +939,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Diagnostics.TraceListener" />
+
+          
 
           
 
@@ -883,6 +983,8 @@
 
             
 
+            
+
              to delete that <see
              cref="T:System.Diagnostics.TraceListener" />
 
@@ -890,8 +992,12 @@
 
             
 
+            
+
             . For example, to remove the third <see
              cref="T:System.Diagnostics.TraceListener" />
+
+            
 
             
 
@@ -910,6 +1016,8 @@
 
             
 
+            
+
              at the specified index.</para
           >
         </summary>
@@ -920,8 +1028,12 @@
 
           
 
+          
+
           The zero-based index of the <see
            cref="T:System.Diagnostics.TraceListener" />
+
+          
 
           
 
@@ -961,8 +1073,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Diagnostics.TraceListenerCollection" />
+
+            
 
             
 
@@ -981,8 +1097,12 @@
 
             
 
+            
+
              to the specified array of <see
              cref="T:System.Diagnostics.TraceListener" />
+
+            
 
             
 
@@ -998,6 +1118,8 @@
 
           
 
+          
+
           The one-dimensional array of <see
            cref="T:System.Diagnostics.TraceListener" />
 
@@ -1005,8 +1127,12 @@
 
           
 
+          
+
            objects that is the destination of the elements copied from the <see
            cref="T:System.Diagnostics.TraceListenerCollection" />
+
+          
 
           
 
@@ -1021,8 +1147,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -1058,6 +1188,8 @@
           <para
             >Gets a value indicating whether access to the <see
              cref="T:System.Diagnostics.TraceListenerCollection" />
+
+            
 
             
 
@@ -1099,6 +1231,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1133,6 +1267,8 @@
 
             
 
+            
+
              method to add a new trace listener to the collection.</para
           >
         </remarks>
@@ -1141,6 +1277,8 @@
           <para
             >Adds a trace listener to the <see
              cref="T:System.Diagnostics.TraceListenerCollection" />
+
+            
 
             
 
@@ -1160,8 +1298,12 @@
 
           
 
+          
+
           The object to add to the <see
            cref="T:System.Diagnostics.TraceListenerCollection" />
+
+          
 
           
 
@@ -1200,6 +1342,8 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Diagnostics.TraceListenerCollection" />
 
@@ -1207,8 +1351,12 @@
 
             
 
+            
+
              class to determine whether the collection contains a specific <see
              cref="T:System.Diagnostics.TraceListener" />
+
+            
 
             
 
@@ -1227,6 +1375,8 @@
 
             
 
+            
+
              contains a specific object.</para
           >
         </summary>
@@ -1240,8 +1390,12 @@
 
             
 
+            
+
              is found in the <see
              cref="T:System.Diagnostics.TraceListenerCollection" />
+
+            
 
             
 
@@ -1257,8 +1411,12 @@
 
           
 
+          
+
           The object to locate in the <see
            cref="T:System.Diagnostics.TraceListenerCollection" />
+
+          
 
           
 
@@ -1297,6 +1455,8 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Diagnostics.TraceListenerCollection" />
 
@@ -1304,8 +1464,12 @@
 
             
 
+            
+
              class to determine the index of a <see
              cref="T:System.Diagnostics.TraceListener" />
+
+            
 
             
 
@@ -1324,6 +1488,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1337,8 +1503,12 @@
 
             
 
+            
+
              if found in the <see
              cref="T:System.Diagnostics.TraceListenerCollection" />
+
+            
 
             
 
@@ -1354,8 +1524,12 @@
 
           
 
+          
+
           The object to locate in the <see
            cref="T:System.Diagnostics.TraceListenerCollection" />
+
+          
 
           
 
@@ -1395,6 +1569,8 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Diagnostics.TraceListenerCollection" />
 
@@ -1402,8 +1578,12 @@
 
             
 
+            
+
              class to insert a <see
              cref="T:System.Diagnostics.TraceListener" />
+
+            
 
             
 
@@ -1422,8 +1602,12 @@
 
             
 
+            
+
              object at the specified position in the <see
              cref="T:System.Diagnostics.TraceListenerCollection" />
+
+            
 
             
 
@@ -1439,8 +1623,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="value" />
+
+          
 
           
 
@@ -1455,6 +1643,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Diagnostics.TraceListener" />
 
@@ -1462,8 +1652,12 @@
 
           
 
+          
+
            object to insert into the <see
            cref="T:System.Diagnostics.TraceListenerCollection" />
+
+          
 
           
 
@@ -1501,6 +1695,8 @@
 
             
 
+            
+
              has a fixed size.</para
           >
         </summary>
@@ -1529,6 +1725,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Diagnostics.TraceListenerCollection" />
+
+            
 
             
 
@@ -1596,6 +1794,8 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Diagnostics.TraceListenerCollection" />
 
@@ -1603,8 +1803,12 @@
 
             
 
+            
+
              class to remove a <see
              cref="T:System.Diagnostics.TraceListener" />
+
+            
 
             
 
@@ -1623,6 +1827,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1633,8 +1839,12 @@
 
           
 
+          
+
           The object to remove from the <see
            cref="T:System.Diagnostics.TraceListenerCollection" />
+
+          
 
           
 

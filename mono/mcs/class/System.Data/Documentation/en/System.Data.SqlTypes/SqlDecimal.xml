@@ -37,8 +37,12 @@
 
         
 
+        
+
          has different underlying data structures from its corresponding .NET Framework <see
          cref="T:System.Decimal" />
+
+        
 
         
 
@@ -51,8 +55,12 @@
 
         
 
+        
+
          has no concept of precision. It uses 3 bytes to store the actual data, and therefore has a maximum scale of 28. The data range is -79,228,162,514,264,337,593,543,950,335 through 79,228,162,514,264,337,593,543,950,335. <see
          cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+        
 
         
 
@@ -86,8 +94,12 @@
 
             
 
+            
+
              structure using the supplied <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -103,6 +115,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Decimal" />
 
@@ -110,8 +124,12 @@
 
           
 
+          
+
            value to be stored as a <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -144,6 +162,8 @@
 
             
 
+            
+
              structure using the supplied double parameter.</para
           >
         </summary>
@@ -154,8 +174,12 @@
 
           
 
+          
+
           A double, representing the value for the new <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -188,6 +212,8 @@
 
             
 
+            
+
              structure using the supplied integer value.</para
           >
         </summary>
@@ -198,8 +224,12 @@
 
           
 
+          
+
           The supplied integer value which will the used as the value of the new <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -232,6 +262,8 @@
 
             
 
+            
+
              structure using the supplied long integer value.</para
           >
         </summary>
@@ -242,8 +274,12 @@
 
           
 
+          
+
           The supplied long integer value which will the used as the value of the new <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -282,11 +318,15 @@
 
             
 
+            
+
              structure using the supplied parameters.</para
           >
         </summary>
         <param name="bPrecision">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -299,8 +339,12 @@
 
           
 
+          
+
            property of the new <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -315,6 +359,8 @@
 
           
 
+          
+
           The number of decimal places to which the <see
            cref="P:System.Data.SqlTypes.SqlDecimal.Value" />
 
@@ -322,8 +368,12 @@
 
           
 
+          
+
            property will be resolved for the new <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -338,8 +388,12 @@
 
           
 
+          
+
           A Boolean value that indicates whether the new <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -354,8 +408,12 @@
 
           
 
+          
+
           The 128-bit unsigned integer that provides the value of the new <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -397,11 +455,15 @@
 
             
 
+            
+
              structure using the supplied parameters.</para
           >
         </summary>
         <param name="bPrecision">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -414,8 +476,12 @@
 
           
 
+          
+
            property of the new <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -430,6 +496,8 @@
 
           
 
+          
+
           The number of decimal places to which the <see
            cref="P:System.Data.SqlTypes.SqlDecimal.Value" />
 
@@ -437,8 +505,12 @@
 
           
 
+          
+
            property will be resolved for the new <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -453,8 +525,12 @@
 
           
 
+          
+
           A Boolean value that indicates whether the new <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -469,8 +545,12 @@
 
           
 
+          
+
           An 32-bit unsigned integer which will be combined with data2, data3, and data4 to make up the 128-bit unsigned integer that represents the new <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -485,8 +565,12 @@
 
           
 
+          
+
           An 32-bit unsigned integer which will be combined with data1, data3, and data4 to make up the 128-bit unsigned integer that represents the new <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -501,8 +585,12 @@
 
           
 
+          
+
           An 32-bit unsigned integer which will be combined with data1, data2, and data4 to make up the 128-bit unsigned integer that represents the new <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -517,8 +605,12 @@
 
           
 
+          
+
           An 32-bit unsigned integer which will be combined with data1, data2, and data3 to make up the 128-bit unsigned integer that represents the new <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -556,6 +648,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </summary>
@@ -569,6 +663,8 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlDecimal.Value" />
 
@@ -576,8 +672,12 @@
 
             
 
+            
+
              property contains the unsigned number representing the absolute value of the <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -593,8 +693,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -633,6 +737,8 @@
 
             
 
+            
+
              operators.</para
           >
         </summary>
@@ -646,8 +752,12 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlDecimal.Value" />
+
+            
 
             
 
@@ -663,8 +773,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -679,8 +793,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -720,6 +838,8 @@
 
             
 
+            
+
              operand will be adjusted to the number of digits indicated by the digits parameter. Depending on the value of the fRound parameter, the value will either be rounded to the appropriate number of digits or truncated.</para
           >
         </summary>
@@ -733,8 +853,12 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlDecimal.Value" />
+
+            
 
             
 
@@ -750,8 +874,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -766,10 +894,14 @@
 
           
 
+          
+
           The number of digits in the adjusted structure. </param
         >
         <param name="fRound">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -797,6 +929,8 @@
           <para
             >Get the binary representation of the value of this <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -835,6 +969,8 @@
 
             
 
+            
+
              structure.</para
           >
         </summary>
@@ -848,8 +984,12 @@
 
             
 
+            
+
              representing the smallest whole number greater than or equal to the specified <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -865,8 +1005,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -907,8 +1051,12 @@
 
             
 
+            
+
              instance to the supplied <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -966,8 +1114,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -998,8 +1150,12 @@
 
             
 
+            
+
              instance to the supplied <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -1057,8 +1213,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1098,6 +1258,8 @@
 
             
 
+            
+
              operand to the indicated precision and scale.</para
           >
         </summary>
@@ -1106,6 +1268,8 @@
           <para
             >A new <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -1121,8 +1285,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -1137,8 +1305,12 @@
 
           
 
+          
+
           The precision for the new <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -1153,8 +1325,12 @@
 
           
 
+          
+
           The scale for the new <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -1182,6 +1358,8 @@
           <para
             >Gets the binary representation of this <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -1221,6 +1399,8 @@
 
             
 
+            
+
              operand by the second.</para
           >
         </summary>
@@ -1234,8 +1414,12 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlDecimal.Value" />
+
+            
 
             
 
@@ -1251,8 +1435,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -1267,8 +1455,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -1303,6 +1495,8 @@
 
             
 
+            
+
              parameter to the <see
              cref="P:System.Data.SqlTypes.SqlDecimal.Value" />
 
@@ -1310,8 +1504,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -1330,6 +1528,8 @@
 
             
 
+            
+
              and the two are equal. Otherwise, false.</para
           >
         </returns>
@@ -1340,8 +1540,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1380,6 +1584,8 @@
 
             
 
+            
+
              operands to determine whether they are equal.</para
           >
         </summary>
@@ -1394,8 +1600,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -1410,8 +1620,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -1449,6 +1663,8 @@
 
             
 
+            
+
              number to the next lower whole number.</para
           >
         </summary>
@@ -1462,8 +1678,12 @@
 
             
 
+            
+
              structure that contains the whole number part of this <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -1479,8 +1699,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -1544,6 +1768,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1552,6 +1778,8 @@
           <para
             >A string value that indicates the XSD of the specified <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -1567,8 +1795,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -1603,6 +1835,8 @@
 
             
 
+            
+
              structures to determine whether the first is greater than the second.</para
           >
         </summary>
@@ -1616,8 +1850,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1630,8 +1868,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -1644,6 +1886,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -1651,8 +1895,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1668,8 +1916,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -1684,8 +1936,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -1724,6 +1980,8 @@
 
             
 
+            
+
              parameters to determine whether the first is greater than or equal to the second.</para
           >
         </summary>
@@ -1737,8 +1995,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1751,8 +2013,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -1765,6 +2031,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -1772,8 +2040,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1789,8 +2061,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -1805,8 +2081,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -1840,6 +2120,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1848,6 +2130,8 @@
           <para
             >Indicates whether this <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -1881,8 +2165,12 @@
 
             
 
+            
+
              of this <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -1922,6 +2210,8 @@
 
             
 
+            
+
              structures to determine whether the first is less than the second.</para
           >
         </summary>
@@ -1935,8 +2225,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1949,8 +2243,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -1963,6 +2261,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -1970,8 +2270,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1987,8 +2291,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -2003,8 +2311,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -2043,6 +2355,8 @@
 
             
 
+            
+
              parameters to determine whether the first is less than or equal to the second.</para
           >
         </summary>
@@ -2056,8 +2370,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2070,8 +2388,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -2084,6 +2406,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -2091,8 +2415,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2108,8 +2436,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -2124,8 +2456,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -2161,6 +2497,8 @@
 
             
 
+            
+
              property.</para
           >
         </summary>
@@ -2185,6 +2523,8 @@
           <para
             >A constant representing the maximum value for the <see
              cref="P:System.Data.SqlTypes.SqlDecimal.Scale" />
+
+            
 
             
 
@@ -2225,6 +2565,8 @@
 
             
 
+            
+
              structure.</para
           >
         </summary>
@@ -2254,6 +2596,8 @@
           <para
             >A constant representing the minimum value for a <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -2293,6 +2637,8 @@
 
             
 
+            
+
              parameters.</para
           >
         </summary>
@@ -2306,8 +2652,12 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlDecimal.Value" />
+
+            
 
             
 
@@ -2323,8 +2673,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -2339,8 +2693,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -2379,6 +2737,8 @@
 
             
 
+            
+
              parameters to determine whether they are not equal.</para
           >
         </summary>
@@ -2392,8 +2752,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2406,8 +2770,12 @@
 
             
 
+            
+
              if the two instances are equal. If either instance of <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -2420,6 +2788,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -2427,8 +2797,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2444,8 +2818,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -2460,8 +2838,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -2498,6 +2880,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2511,8 +2895,12 @@
 
             
 
+            
+
              that can be assigned to this instance of the <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -2556,6 +2944,8 @@
 
             
 
+            
+
              operators.</para
           >
         </summary>
@@ -2569,8 +2959,12 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlDecimal.Value" />
+
+            
 
             
 
@@ -2586,8 +2980,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -2602,8 +3000,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -2642,6 +3044,8 @@
 
             
 
+            
+
              operand by the second.</para
           >
         </summary>
@@ -2655,8 +3059,12 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlDecimal.Value" />
+
+            
 
             
 
@@ -2672,8 +3080,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -2688,8 +3100,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -2728,6 +3144,8 @@
 
             
 
+            
+
              operands to determine whether they are equal.</para
           >
         </summary>
@@ -2741,8 +3159,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2755,8 +3177,12 @@
 
             
 
+            
+
              if the two instances are not equal. If either instance of <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -2769,6 +3195,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -2776,8 +3204,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2793,8 +3225,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -2809,8 +3245,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -2986,6 +3426,8 @@
 
             
 
+            
+
              structures to determine whether the first is greater than the second.</para
           >
         </summary>
@@ -2999,8 +3441,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -3013,8 +3459,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -3027,6 +3477,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -3034,8 +3486,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -3051,8 +3507,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -3067,8 +3527,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -3107,6 +3571,8 @@
 
             
 
+            
+
              parameters to determine whether the first is greater than or equal to the second.</para
           >
         </summary>
@@ -3120,8 +3586,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -3134,8 +3604,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -3148,6 +3622,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -3155,8 +3631,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -3172,8 +3652,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -3188,8 +3672,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -3388,6 +3876,8 @@
 
             
 
+            
+
              parameters to determine whether they are not equal.</para
           >
         </summary>
@@ -3401,8 +3891,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -3415,8 +3909,12 @@
 
             
 
+            
+
              if the two instances are equal. If either instance of <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -3429,6 +3927,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -3436,8 +3936,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -3453,8 +3957,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -3469,8 +3977,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -3509,6 +4021,8 @@
 
             
 
+            
+
              structures to determine whether the first is less than the second.</para
           >
         </summary>
@@ -3522,8 +4036,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -3536,8 +4054,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -3550,6 +4072,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -3557,8 +4081,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -3574,8 +4102,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -3590,8 +4122,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -3630,6 +4166,8 @@
 
             
 
+            
+
              parameters to determine whether the first is less than or equal to the second.</para
           >
         </summary>
@@ -3643,8 +4181,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -3657,8 +4199,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -3671,6 +4217,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -3678,8 +4226,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -3695,8 +4247,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -3711,8 +4267,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -3751,6 +4311,8 @@
 
             
 
+            
+
              parameters.</para
           >
         </summary>
@@ -3764,8 +4326,12 @@
 
             
 
+            
+
              structure whose <see
              cref="P:System.Data.SqlTypes.SqlDecimal.Value" />
+
+            
 
             
 
@@ -3781,8 +4347,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -3797,8 +4367,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -3837,6 +4411,8 @@
 
             
 
+            
+
              operand from the first.</para
           >
         </summary>
@@ -3845,6 +4421,8 @@
           <para
             >A new <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -3860,8 +4438,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -3876,8 +4458,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -3915,6 +4501,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </summary>
@@ -3923,6 +4511,8 @@
           <para
             >A new <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -3938,8 +4528,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -3973,8 +4567,12 @@
 
             
 
+            
+
              representation of a number to its <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -3993,8 +4591,12 @@
 
             
 
+            
+
              equivalent to the value that is contained in the specified <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -4005,6 +4607,8 @@
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4043,6 +4647,8 @@
 
             
 
+            
+
              structure to the specified exponential power.</para
           >
         </summary>
@@ -4051,6 +4657,8 @@
           <para
             >A <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -4066,8 +4674,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -4077,6 +4689,8 @@
         >
         <param name="exp">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4104,6 +4718,8 @@
           <para
             >Gets the maximum number of digits used to represent the <see
              cref="P:System.Data.SqlTypes.SqlDecimal.Value" />
+
+            
 
             
 
@@ -4143,6 +4759,8 @@
 
             
 
+            
+
              structure's value with the specified precision.</para
           >
         </summary>
@@ -4151,6 +4769,8 @@
           <para
             >A <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -4166,8 +4786,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -4177,6 +4801,8 @@
         >
         <param name="position">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4204,6 +4830,8 @@
           <para
             >Gets the number of decimal places to which <see
              cref="P:System.Data.SqlTypes.SqlDecimal.Value" />
+
+            
 
             
 
@@ -4242,8 +4870,12 @@
 
             
 
+            
+
              structure's <see
              cref="P:System.Data.SqlTypes.SqlDecimal.Value" />
+
+            
 
             
 
@@ -4262,6 +4894,8 @@
 
             
 
+            
+
              structure.</para
           >
         </returns>
@@ -4272,8 +4906,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -4312,6 +4950,8 @@
 
             
 
+            
+
              operand from the first.</para
           >
         </summary>
@@ -4320,6 +4960,8 @@
           <para
             >A new <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -4335,8 +4977,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -4351,8 +4997,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -4419,6 +5069,8 @@
 
           
 
+          
+
           XmlReader </param
         >
       </Docs>
@@ -4451,6 +5103,8 @@
 
           
 
+          
+
           XmlWriter </param
         >
       </Docs>
@@ -4474,6 +5128,8 @@
 
             
 
+            
+
              property of this instance.</para
           >
         </summary>
@@ -4482,6 +5138,8 @@
           <para
             >The decimal representation of the <see
              cref="P:System.Data.SqlTypes.SqlDecimal.Value" />
+
+            
 
             
 
@@ -4518,8 +5176,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -4533,6 +5195,8 @@
           <para
             >true if the <see
              cref="P:System.Data.SqlTypes.SqlDecimal.Value" />
+
+            
 
             
 
@@ -4566,8 +5230,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -4586,8 +5254,12 @@
 
             
 
+            
+
              structure whose Value equals the Value of this <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -4600,6 +5272,8 @@
 
             
 
+            
+
              structure's Value is true, the <see
              cref="T:System.Data.SqlTypes.SqlByte" />
 
@@ -4607,8 +5281,12 @@
 
             
 
+            
+
              structure's Value will be 1. Otherwise, the <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -4645,8 +5323,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -4665,8 +5347,12 @@
 
             
 
+            
+
              structure with the same value as this instance of <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -4700,8 +5386,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -4720,8 +5410,12 @@
 
             
 
+            
+
              structure with the same value as this instance of <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -4755,8 +5449,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlInt32" />
+
+            
 
             
 
@@ -4775,8 +5473,12 @@
 
             
 
+            
+
              structure with the same value as this instance of <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -4810,8 +5512,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -4830,8 +5536,12 @@
 
             
 
+            
+
              structure with the same value as this instance of <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -4865,8 +5575,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlMoney" />
+
+            
 
             
 
@@ -4885,8 +5599,12 @@
 
             
 
+            
+
              structure with the same value as this instance of <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -4923,8 +5641,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -4943,8 +5665,12 @@
 
             
 
+            
+
              structure with the same value as this instance of <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -4981,8 +5707,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -5001,8 +5731,12 @@
 
             
 
+            
+
              structure whose value is a string representing the value contained in this <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -5036,8 +5770,12 @@
 
             
 
+            
+
              structure to <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -5056,6 +5794,8 @@
 
             
 
+            
+
              object that contains the string representation of the <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
 
@@ -5063,8 +5803,12 @@
 
             
 
+            
+
              structure's <see
              cref="P:System.Data.SqlTypes.SqlDecimal.Value" />
+
+            
 
             
 
@@ -5104,6 +5848,8 @@
 
             
 
+            
+
              structure's value to the that you want position.</para
           >
         </summary>
@@ -5112,6 +5858,8 @@
           <para
             >Supply a negative value for the <paramref
              name="position" />
+
+            
 
             
 
@@ -5127,8 +5875,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+          
 
           
 
@@ -5138,6 +5890,8 @@
         >
         <param name="position">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5165,6 +5919,8 @@
           <para
             >Gets the value of the <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 

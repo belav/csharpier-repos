@@ -67,6 +67,8 @@
 
         
 
+        
+
          class enables signing and verifying of CMS/PKCS #7 messages. </para
       >
     </summary>
@@ -91,6 +93,8 @@
           <para
             >The <see
              cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
+
+            
 
             
 
@@ -138,6 +142,8 @@
 
             
 
+            
+
              for signers is SubjectIdentifierType.IssuerAndSerialNumber.</para
           >
           <para>If the detached state is false (the default), the signed content is included in the CMS/PKCS #7 message along with the signature information. If the detached state is true, clients that cannot decode S/MIME messages can still see the content of the message if it is sent separately. This may be useful in an archiving application that archives message content whether the message sender can be verified for authenticity.</para>
@@ -152,8 +158,12 @@
 
             
 
+            
+
              constructor creates an instance of the <see
              cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
+
+            
 
             
 
@@ -194,6 +204,8 @@
 
             
 
+            
+
             .</para
           >
           <para>If the detached state is false (the default), the content that is signed is included in the CMS/PKCS #7 message along with the signature information. If the detached state is true, clients that cannot decode S/MIME messages can still see the content of the message if it is sent separately. This might be useful in an archiving application that archives message content whether the message sender can be verified for authenticity.</para>
@@ -208,8 +220,12 @@
 
             
 
+            
+
              constructor creates an instance of the <see
              cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
+
+            
 
             
 
@@ -252,6 +268,8 @@
 
             
 
+            
+
             .</para
           >
           <para>If the detached state is false (the default), the content that is signed is included in the CMS/PKCS #7 message along with the signature information. If the detached state is true, clients that cannot decode S/MIME messages can still see the content of the message if it is sent separately. This might be useful in an archiving application that archives message content whether the message sender can be verified for authenticity.</para>
@@ -266,8 +284,12 @@
 
             
 
+            
+
              constructor creates an instance of the <see
              cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
+
+            
 
             
 
@@ -283,8 +305,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Cryptography.Pkcs.SubjectIdentifierType" />
+
+          
 
           
 
@@ -325,6 +351,8 @@
 
             
 
+            
+
             .</para
           >
           <para>If the detached state is false (the default), the content that is signed is included in the CMS/PKCS #7 message along with the signature information. If the detached state is true, clients that cannot decode S/MIME messages can still see the content of the message if it is sent separately. This might be useful in an archiving application that archives message content whether the message sender can be verified for authenticity.</para>
@@ -339,8 +367,12 @@
 
             
 
+            
+
              constructor creates an instance of the <see
              cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
+
+            
 
             
 
@@ -356,8 +388,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -370,6 +406,8 @@
 
           
 
+          
+
            object is for a detached signature. If <paramref
            name="detached" />
 
@@ -377,8 +415,12 @@
 
           
 
+          
+
            is true, the signature is detached. If <paramref
            name="detached" />
+
+          
 
           
 
@@ -422,6 +464,8 @@
 
             
 
+            
+
             .</para
           >
           <para>If the detached state is false (the default), the content that is signed is included in the CMS/PKCS #7 message along with the signature information. If the detached state is true, clients that cannot decode S/MIME messages can still see the content of the message if it is sent separately. This might be useful in an archiving application that archives message content whether the message sender can be verified for authenticity.</para>
@@ -436,8 +480,12 @@
 
             
 
+            
+
              constructor creates an instance of the <see
              cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
+
+            
 
             
 
@@ -453,8 +501,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Cryptography.Pkcs.SubjectIdentifierType" />
+
+          
 
           
 
@@ -503,8 +555,12 @@
 
             
 
+            
+
              constructor creates an instance of the <see
              cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
+
+            
 
             
 
@@ -520,8 +576,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Cryptography.Pkcs.SubjectIdentifierType" />
+
+          
 
           
 
@@ -536,8 +596,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -550,8 +614,12 @@
 
           
 
+          
+
            object is for a detached signature. If <paramref
            name="detached" />
+
+          
 
           
 
@@ -587,6 +655,8 @@
           <para
             >The <see
              cref="P:System.Security.Cryptography.Pkcs.SignedCms.Certificates" />
+
+            
 
             
 
@@ -628,8 +698,12 @@
 
             
 
+            
+
              method verifies the data integrity of the CMS/PKCS #7 message. <see
              cref="M:System.Security.Cryptography.Pkcs.SignedCms.CheckHash" />
+
+            
 
             
 
@@ -642,6 +716,8 @@
 
             
 
+            
+
              does not authenticate the author nor sender of the message because this method does not involve verifying a digital signature. For general-purpose checking of the integrity and authenticity of a CMS/PKCS #7 message, use the <see
              cref="M:System.Security.Cryptography.Pkcs.SignedCms.CheckSignature(System.Boolean)" />
 
@@ -649,8 +725,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Security.Cryptography.Pkcs.SignedCms.CheckSignature(System.Security.Cryptography.X509Certificates.X509Certificate2Collection,System.Boolean)" />
+
+            
 
             
 
@@ -698,6 +778,8 @@
 
             
 
+            
+
              method verifies the digital signatures on the signed CMS/PKCS #7 message and, optionally, validates the signers' certificates.</para
           >
         </summary>
@@ -708,8 +790,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -760,11 +846,15 @@
 
             
 
+            
+
              method verifies the digital signatures on the signed CMS/PKCS #7 message by using the specified collection of certificates and, optionally, validates the signers' certificates.</para
           >
         </summary>
         <param name="extraStore">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -777,6 +867,8 @@
 
           
 
+          
+
            object that can be used to validate the certificate chain. If no additional certificates are to be used to validate the certificate chain, use <see
            cref="M:System.Security.Cryptography.Pkcs.SignedCms.CheckSignature(System.Boolean)" />
 
@@ -784,8 +876,12 @@
 
           
 
+          
+
            instead of <see
            cref="M:System.Security.Cryptography.Pkcs.SignedCms.CheckSignature(System.Security.Cryptography.X509Certificates.X509Certificate2Collection,System.Boolean)" />
+
+          
 
           
 
@@ -800,8 +896,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -838,8 +938,12 @@
 
             
 
+            
+
             , meaning that the <see
              cref="P:System.Environment.UserInteractive" />
+
+            
 
             
 
@@ -890,6 +994,8 @@
           <para
             >The <see
              cref="M:System.Security.Cryptography.Pkcs.SignedCms.ComputeSignature" />
+
+            
 
             
 
@@ -951,6 +1057,8 @@
 
             
 
+            
+
              method creates a signature using the specified signer and adds the signature to the CMS/PKCS #7 message.</para
           >
         </summary>
@@ -961,8 +1069,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
+
+          
 
           
 
@@ -1032,8 +1144,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
+
+            
 
             
 
@@ -1049,8 +1165,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Cryptography.Pkcs.CmsSigner" />
+
+          
 
           
 
@@ -1060,6 +1180,8 @@
         >
         <param name="silent">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1095,6 +1217,8 @@
           <para
             >The <see
              cref="P:System.Security.Cryptography.Pkcs.SignedCms.ContentInfo" />
+
+            
 
             
 
@@ -1138,8 +1262,12 @@
 
             
 
+            
+
              method decodes an encoded <see
              cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
+
+            
 
             
 
@@ -1152,11 +1280,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="encodedMessage">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1191,8 +1323,12 @@
 
             
 
+            
+
              property retrieves whether the <see
              cref="T:System.Security.Cryptography.Pkcs.SignedCms" />
+
+            
 
             
 
@@ -1231,6 +1367,8 @@
 
             
 
+            
+
              method encodes the information in the object into a CMS/PKCS #7 message.</para
           >
         </summary>
@@ -1239,6 +1377,8 @@
           <para
             >An array of byte values that represents the encoded message. The encoded message can be decoded by the <see
              cref="M:System.Security.Cryptography.Pkcs.SignedCms.Decode(System.Byte[])" />
+
+            
 
             
 
@@ -1279,11 +1419,15 @@
 
             
 
+            
+
              collection. </para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1326,8 +1470,12 @@
 
             
 
+            
+
              method removes the signature for the specified <see
              cref="T:System.Security.Cryptography.Pkcs.SignerInfo" />
+
+            
 
             
 
@@ -1343,8 +1491,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Cryptography.Pkcs.SignerInfo" />
+
+          
 
           
 
@@ -1385,8 +1537,12 @@
 
             
 
+            
+
              property retrieves the <see
              cref="T:System.Security.Cryptography.Pkcs.SignerInfoCollection" />
+
+            
 
             
 
@@ -1420,6 +1576,8 @@
           <para
             >The <see
              cref="P:System.Security.Cryptography.Pkcs.SignedCms.Version" />
+
+            
 
             
 

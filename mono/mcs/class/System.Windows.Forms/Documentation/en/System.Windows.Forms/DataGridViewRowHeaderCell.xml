@@ -32,6 +32,8 @@
 
         
 
+        
+
          control.</para
       >
     </summary>
@@ -49,6 +51,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.DataGridViewRowHeaderCell" />
+
+            
 
             
 
@@ -101,8 +105,12 @@
 
             
 
+            
+
              method, it will be called when the <see
              cref="P:System.Windows.Forms.DataGridViewCell.AccessibilityObject" />
+
+            
 
             
 
@@ -114,6 +122,8 @@
             <para
               > To get or set <see
                cref="P:System.Windows.Forms.DataGridViewCell.AccessibilityObject" />
+
+              
 
               
 
@@ -133,6 +143,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -146,8 +158,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Windows.Forms.DataGridViewRowHeaderCell" />
+
+            
 
             
 
@@ -190,6 +206,8 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.DataGridView" />
 
@@ -197,8 +215,12 @@
 
             
 
+            
+
              control, this method is called by the control's <see
              cref="M:System.Windows.Forms.DataGridView.GetClipboardContent" />
+
+            
 
             
 
@@ -214,11 +236,15 @@
 
             
 
+            
+
              control. Depending on the cell's position, formatting information may be returned by this method in addition to the cell value. For example, the HTML format for a cell in the first column of a row will include the tag that indicates the beginning of a row. </para
           >
           <para
             >The supported clipboard formats include <see
              cref="F:System.Windows.Forms.DataFormats.Text" />
+
+            
 
             
 
@@ -231,8 +257,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Windows.Forms.DataFormats.Html" />
+
+            
 
             
 
@@ -245,11 +275,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >For more information, see the <see
              cref="T:System.Windows.Forms.Clipboard" />
+
+            
 
             
 
@@ -268,6 +302,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -281,8 +317,12 @@
 
             
 
+            
+
              that represents the value of the cell to copy to the <see
              cref="T:System.Windows.Forms.Clipboard" />
+
+            
 
             
 
@@ -298,10 +338,14 @@
 
           
 
+          
+
           The zero-based index of the row containing the cell.</param
         >
         <param name="firstCell">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -316,10 +360,14 @@
 
           
 
+          
+
           true to indicate that the cell is the last column of the region defined by the selected cells; otherwise, false.</param
         >
         <param name="inFirstRow">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -334,10 +382,14 @@
 
           
 
+          
+
           true to indicate that the cell is in the last row of the region defined by the selected cells; otherwise, false.</param
         >
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -457,6 +509,8 @@
 
             
 
+            
+
              of the row if one exists; otherwise, the <see
              cref="T:System.Windows.Forms.ContextMenuStrip" />
 
@@ -464,8 +518,12 @@
 
             
 
+            
+
              inherited from <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -481,8 +539,12 @@
 
           
 
+          
+
           The index of the row to get the <see
            cref="T:System.Windows.Forms.ContextMenuStrip" />
+
+          
 
           
 
@@ -569,6 +631,8 @@
 
             
 
+            
+
              value of -1 indicates a shared row.</para
           >
         </remarks>
@@ -586,11 +650,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -641,11 +709,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="graphics">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -658,8 +730,12 @@
 
           
 
+          
+
            used to paint the <see
            cref="T:System.Windows.Forms.DataGridViewCell" />
+
+          
 
           
 
@@ -674,6 +750,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
 
@@ -681,8 +759,12 @@
 
           
 
+          
+
            that represents the area of the <see
            cref="T:System.Windows.Forms.DataGridView" />
+
+          
 
           
 
@@ -697,6 +779,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
 
@@ -704,8 +788,12 @@
 
           
 
+          
+
            that contains the bounds of the <see
            cref="T:System.Windows.Forms.DataGridViewCell" />
+
+          
 
           
 
@@ -720,6 +808,8 @@
 
           
 
+          
+
           The row index of the cell that is being painted.</param
         >
         <param name="cellState">
@@ -729,8 +819,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -745,8 +839,12 @@
 
           
 
+          
+
           The data of the <see
            cref="T:System.Windows.Forms.DataGridViewCell" />
+
+          
 
           
 
@@ -761,8 +859,12 @@
 
           
 
+          
+
           The formatted data of the <see
            cref="T:System.Windows.Forms.DataGridViewCell" />
+
+          
 
           
 
@@ -777,6 +879,8 @@
 
           
 
+          
+
           An error message that is associated with the cell.</param
         >
         <param name="cellStyle">
@@ -786,8 +890,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+          
 
           
 
@@ -802,8 +910,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
+
+          
 
           
 
@@ -818,8 +930,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.DataGridViewPaintParts" />
+
+          
 
           
 

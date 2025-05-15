@@ -27,8 +27,12 @@
 
         
 
+        
+
          event, you can perform any additional preprocessing required or cancel the database query entirely. Because the <see
          cref="T:System.Web.UI.WebControls.SqlDataSourceSelectingEventArgs" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          class, you can cancel a pending <see
          cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          property to true. You can examine and manipulate the <see
          cref="P:System.Data.Common.DbCommand.CommandText" />
+
+        
 
         
 
@@ -69,8 +81,12 @@
 
         
 
+        
+
          collection, and other database query properties prior to running the query by accessing the <see
          cref="T:System.Data.Common.DbCommand" />
+
+        
 
         
 
@@ -83,8 +99,12 @@
 
         
 
+        
+
          property. You can also examine the <see
          cref="T:System.Web.UI.DataSourceSelectArguments" />
+
+        
 
         
 
@@ -97,8 +117,12 @@
 
         
 
+        
+
          method by accessing the <see
          cref="P:System.Web.UI.WebControls.SqlDataSourceSelectingEventArgs.Arguments" />
+
+        
 
         
 
@@ -114,6 +138,8 @@
 
         
 
+        
+
          class is used in the <see
          cref="M:System.Web.UI.WebControls.SqlDataSourceView.OnSelecting(System.Web.UI.WebControls.SqlDataSourceSelectingEventArgs)" />
 
@@ -121,8 +147,12 @@
 
         
 
+        
+
          method to provide access to a <see
          cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+        
 
         
 
@@ -138,8 +168,12 @@
 
         
 
+        
+
          control exposes many events that you can handle to work with the underlying data objects during the course of a data operation. The following table lists the events and associated <see
          cref="T:System.EventArgs" />
+
+        
 
         
 
@@ -170,6 +204,8 @@
 
               
 
+              
+
               .</para
             >
             <para>Occurs before the data is retrieved.</para>
@@ -194,6 +230,8 @@
 
               
 
+              
+
               , <see
                cref="E:System.Web.UI.WebControls.SqlDataSource.Updating" />
 
@@ -201,8 +239,12 @@
 
               
 
+              
+
               , and <see
                cref="E:System.Web.UI.WebControls.SqlDataSource.Deleting" />
+
+              
 
               
 
@@ -232,8 +274,12 @@
 
               
 
+              
+
               , <see
                cref="E:System.Web.UI.WebControls.SqlDataSource.Inserted" />
+
+              
 
               
 
@@ -246,8 +292,12 @@
 
               
 
+              
+
               , and <see
                cref="E:System.Web.UI.WebControls.SqlDataSource.Deleted" />
+
+              
 
               
 
@@ -280,8 +330,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+        
 
         
 
@@ -315,8 +369,12 @@
 
             
 
+            
+
              parameter is an <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -335,8 +393,12 @@
 
             
 
+            
+
              class, using the specified <see
              cref="T:System.Data.Common.DbCommand" />
+
+            
 
             
 
@@ -349,8 +411,12 @@
 
             
 
+            
+
              passed to the <see
              cref="M:System.Web.UI.WebControls.SqlDataSource.Select(System.Web.UI.DataSourceSelectArguments)" />
+
+            
 
             
 
@@ -366,6 +432,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Data.Common.DbCommand" />
 
@@ -373,8 +441,12 @@
 
           
 
+          
+
            object that represents the cancelable <see
            cref="M:System.Web.UI.WebControls.SqlDataSource.Select(System.Web.UI.DataSourceSelectArguments)" />
+
+          
 
           
 
@@ -409,11 +481,15 @@
 
             
 
+            
+
              object to determine whether sorting, paging, or a row count are requested as part of the data retrieval operation. </para
           >
           <para
             >Data-bound controls use the <see
              cref="T:System.Web.UI.DataSourceSelectArguments" />
+
+            
 
             
 
@@ -426,6 +502,8 @@
 
             
 
+            
+
              perform additional data-related operations on a result set, such as sorting the data or returning a specific subset of data. These data-related operations are enumerated by the <see
              cref="T:System.Web.UI.DataSourceCapabilities" />
 
@@ -433,8 +511,12 @@
 
             
 
+            
+
              enumeration. For more information, see <see
              cref="T:System.Web.UI.DataSourceSelectArguments" />
+
+            
 
             
 
@@ -453,8 +535,12 @@
 
             
 
+            
+
              object passed to the <see
              cref="M:System.Web.UI.WebControls.SqlDataSource.Select(System.Web.UI.DataSourceSelectArguments)" />
+
+            
 
             
 

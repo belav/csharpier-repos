@@ -22,6 +22,8 @@
 
         
 
+        
+
          enumeration is used to set revalidation-specific HTTP headers, and is set using the <see
          cref="M:System.Web.HttpCachePolicy.SetRevalidation(System.Web.HttpCacheRevalidation)" />
 
@@ -29,8 +31,12 @@
 
         
 
+        
+
          method. If the <see
          cref="M:System.Web.HttpCachePolicy.SetRevalidation(System.Web.HttpCacheRevalidation)" />
+
+        
 
         
 

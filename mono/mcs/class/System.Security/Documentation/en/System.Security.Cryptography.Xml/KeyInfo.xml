@@ -24,6 +24,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -45,11 +47,15 @@
 
         
 
+        
+
          class represents key information in XML digital signing and encryption. </para
       >
       <para
         >The <see
          cref="T:System.Security.Cryptography.Xml.KeyInfo" />
+
+        
 
         
 
@@ -62,8 +68,12 @@
 
         
 
+        
+
         ; each type of key-related information has an associated class derived from <see
          cref="T:System.Security.Cryptography.Xml.KeyInfoClause" />
+
+        
 
         
 
@@ -100,6 +110,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.Xml.KeyInfo" />
+
+            
 
             
 
@@ -143,6 +155,8 @@
 
             
 
+            
+
              that represents a particular type of <see
              cref="T:System.Security.Cryptography.Xml.KeyInfo" />
 
@@ -150,8 +164,12 @@
 
             
 
+            
+
              information to the <see
              cref="T:System.Security.Cryptography.Xml.KeyInfo" />
+
+            
 
             
 
@@ -167,6 +185,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.Xml.KeyInfoClause" />
 
@@ -174,8 +194,12 @@
 
           
 
+          
+
            to add to the <see
            cref="T:System.Security.Cryptography.Xml.KeyInfo" />
+
+          
 
           
 
@@ -214,8 +238,12 @@
 
             
 
+            
+
              objects contained in the <see
              cref="T:System.Security.Cryptography.Xml.KeyInfo" />
+
+            
 
             
 
@@ -261,8 +289,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:System.Security.Cryptography.Xml.KeyInfo" />
+
+            
 
             
 
@@ -276,6 +308,8 @@
           <para
             >An enumerator of the subelements of <see
              cref="T:System.Security.Cryptography.Xml.KeyInfo" />
+
+            
 
             
 
@@ -323,8 +357,12 @@
 
             
 
+            
+
              objects of the specified type in the <see
              cref="T:System.Security.Cryptography.Xml.KeyInfo" />
+
+            
 
             
 
@@ -343,11 +381,15 @@
 
             
 
+            
+
              that can be used to iterate through the collection.</para
           >
         </returns>
         <param name="requestedObjectType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -385,6 +427,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -393,6 +437,8 @@
           <para
             >The XML representation of the <see
              cref="T:System.Security.Cryptography.Xml.KeyInfo" />
+
+            
 
             
 
@@ -458,6 +504,8 @@
 
             
 
+            
+
              state from an XML element.</para
           >
         </summary>
@@ -468,8 +516,12 @@
 
           
 
+          
+
           The XML element from which to load the <see
            cref="T:System.Security.Cryptography.Xml.KeyInfo" />
+
+          
 
           
 

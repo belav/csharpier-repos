@@ -21,8 +21,12 @@
 
         
 
+        
+
          event is raised when an attempt to create a new user with the <see
          cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+        
 
         
 
@@ -35,6 +39,8 @@
 
         
 
+        
+
          class provides the <see
          cref="P:System.Web.UI.WebControls.CreateUserErrorEventArgs.CreateUserError" />
 
@@ -42,8 +48,12 @@
 
         
 
+        
+
          property to indicate the <see
          cref="T:System.Web.Security.MembershipCreateStatus" />
+
+        
 
         
 
@@ -57,6 +67,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Web.UI.WebControls.CreateUserWizard.CreateUserError" />
+
+        
 
         
 
@@ -85,6 +97,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.CreateUserErrorEventArgs" />
+
+            
 
             
 
@@ -120,6 +134,8 @@
 
             
 
+            
+
              property indicates the <see
              cref="T:System.Web.Security.MembershipCreateStatus" />
 
@@ -127,8 +143,12 @@
 
             
 
+            
+
              enumeration value that corresponds to the error that occurred during the <see
              cref="E:System.Web.UI.WebControls.CreateUserWizard.CreatingUser" />
+
+            
 
             
 
@@ -142,6 +162,8 @@
           <para
             >Gets or sets a value indicating the result of a <see
              cref="E:System.Web.UI.WebControls.CreateUserWizard.CreatingUser" />
+
+            
 
             
 

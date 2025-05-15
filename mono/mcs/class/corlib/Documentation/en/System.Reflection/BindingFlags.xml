@@ -45,8 +45,12 @@
 
         
 
+        
+
          methods and other places such as <see
          cref="M:System.Reflection.MethodBase.Invoke(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
+
+        
 
         
 
@@ -221,6 +225,8 @@
       <para
         >The following table lists the coercions performed by the default <see
          cref="M:System.Reflection.Binder.ChangeType(System.Object,System.Type,System.Globalization.CultureInfo)" />
+
+        
 
         
 
@@ -467,11 +473,15 @@
 
             
 
+            
+
             . This is consistent with lookup of members that are protected, private, and so on.</para
           >
           <para
             >The general principle is that <see
              cref="M:System.Reflection.Binder.ChangeType(System.Object,System.Type,System.Globalization.CultureInfo)" />
+
+            
 
             
 
@@ -747,6 +757,8 @@
           <para
             >Returns the set of members whose parameter count matches the number of supplied arguments. This binding flag is used for methods with parameters that have default values and methods with variable arguments (varargs). This flag should only be used with <see
              cref="M:System.Type.InvokeMember(System.String,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object,System.Object[],System.Reflection.ParameterModifier[],System.Globalization.CultureInfo,System.String[])" />
+
+            
 
             
 

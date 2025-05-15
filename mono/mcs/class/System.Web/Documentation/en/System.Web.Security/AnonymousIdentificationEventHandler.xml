@@ -35,6 +35,8 @@
 
         
 
+        
+
          delegate is defined for the <see
          cref="E:System.Web.Security.AnonymousIdentificationModule.Creating" />
 
@@ -42,8 +44,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.Security.AnonymousIdentificationModule" />
+
+        
 
         
 
@@ -56,8 +62,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.Security.AnonymousIdentificationModule" />
+
+        
 
         
 
@@ -70,6 +80,8 @@
 
         
 
+        
+
          in the Global.asax file for your ASP.NET application. The <see
          cref="E:System.Web.Security.AnonymousIdentificationModule.Creating" />
 
@@ -77,8 +89,12 @@
 
         
 
+        
+
          event is raised during the <see
          cref="E:System.Web.HttpApplication.PostAuthenticateRequest" />
+
+        
 
         
 
@@ -94,8 +110,12 @@
 
         
 
+        
+
          constructs an <see
          cref="T:System.Web.Security.AnonymousIdentificationEventArgs" />
+
+        
 
         
 
@@ -108,8 +128,12 @@
 
         
 
+        
+
          and passes it to the <system
         >AnonymousIdentification_Creating</system>
+
+        
 
         
 
@@ -125,8 +149,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.Security.AnonymousIdentificationEventArgs" />
+
+        
 
         
 
@@ -139,8 +167,12 @@
 
         
 
+        
+
          event to set the anonymous identifier to a custom value. If you do not specify a value for the <see
          cref="P:System.Web.Security.AnonymousIdentificationEventArgs.AnonymousId" />
+
+        
 
         
 
@@ -153,8 +185,12 @@
 
         
 
+        
+
          event, a <see
          cref="T:System.Guid" />
+
+        
 
         
 
@@ -170,8 +206,12 @@
 
         
 
+        
+
          event is only raised when anonymous identification is <see
          cref="P:System.Web.Security.AnonymousIdentificationModule.Enabled" />
+
+        
 
         
 
@@ -181,6 +221,8 @@
          type="text/html">
           <a href="2bd927ef-9057-4703-9c55-4cfb6d7d0929">anonymousIdentification</a>
         </format>
+
+        
 
         
 
@@ -199,8 +241,12 @@
 
         
 
+        
+
          event of a <see
          cref="T:System.Web.Security.AnonymousIdentificationModule" />
+
+        
 
         
 

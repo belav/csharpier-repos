@@ -43,8 +43,12 @@
 
         
 
+        
+
          class. During this process, the .NET Framework generates collection fix-up methods that use the <see
          cref="T:System.Xml.Serialization.XmlSerializationCollectionFixupCallback" />
+
+        
 
         
 
@@ -60,6 +64,8 @@
 
         
 
+        
+
         .</para
       >
       <para>SOAP encoding is described in Section 5 of the SOAP 1.1 specification.</para>
@@ -69,6 +75,8 @@
       <para
         >Delegate used by the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 

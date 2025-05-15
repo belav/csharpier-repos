@@ -5,9 +5,9 @@
     >
       <list_item
         > From any <non_terminal
-         where="11.2"
->reference-type</non_terminal
-        >
+         where="11.2">reference-type</non_terminal>
+
+        
 
         
 
@@ -23,8 +23,12 @@
 
         
 
+        
+
          S to any <non_terminal
          where="11.2">class-type</non_terminal>
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
          S to any <non_terminal
          where="11.2">interface-type</non_terminal>
+
+        
 
         
 
@@ -57,8 +65,12 @@
 
         
 
+        
+
          S to any <non_terminal
          where="11.2">interface-type</non_terminal>
+
+        
 
         
 
@@ -74,8 +86,12 @@
 
         
 
+        
+
          S with an element type SE to an <non_terminal
          where="19.1">array-type</non_terminal>
+
+        
 
         
 
@@ -87,9 +103,9 @@
         <list_item> S and T differ only in element type. In other words, S and T have the same number of dimensions. </list_item>
         <list_item
           > Both SE and TE are <non_terminal
-           where="11.2"
->reference-type</non_terminal
-          >
+           where="11.2">reference-type</non_terminal>
+
+          
 
           
 
@@ -107,11 +123,15 @@
 
         
 
+        
+
          to System.Array. </list_item
       >
       <list_item
         > From any <non_terminal
          where="11.2">delegate-type</non_terminal>
+
+        
 
         
 
@@ -127,8 +147,12 @@
 
         
 
+        
+
          or <non_terminal
          where="11.2">delegate-type</non_terminal>
+
+        
 
         
 
@@ -138,9 +162,9 @@
       >
       <list_item
         > From the null type to any <non_terminal
-         where="11.2"
->reference-type</non_terminal
-        >
+         where="11.2">reference-type</non_terminal>
+
+        
 
         
 
@@ -152,9 +176,9 @@
   </paragraph>
   <paragraph
     >The implicit reference conversions are those conversions between <non_terminal
-     where="11.2"
->reference-type</non_terminal
-    >
+     where="11.2">reference-type</non_terminal>
+
+    
 
     
 

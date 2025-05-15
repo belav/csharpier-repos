@@ -13,6 +13,8 @@
 
         
 
+        
+
          enables the use of an unsafe context within a block. The entire textual extent of the associated block is considered an unsafe context. </list_item
       >
     </list>
@@ -23,6 +25,8 @@
       <name>
         <non_terminal where="17.1.1">class-modifier</non_terminal>
       </name>
+
+      
 
       
 
@@ -45,6 +49,8 @@
 
       
 
+      
+
        : <rhs
       >
         <terminal>...</terminal>
@@ -57,6 +63,8 @@
       <name>
         <non_terminal where="20.1.1">interface-modifier</non_terminal>
       </name>
+
+      
 
       
 
@@ -79,6 +87,8 @@
 
       
 
+      
+
        : <rhs
       >
         <terminal>...</terminal>
@@ -91,6 +101,8 @@
       <name>
         <non_terminal where="17.4">field-modifier</non_terminal>
       </name>
+
+      
 
       
 
@@ -113,6 +125,8 @@
 
       
 
+      
+
        : <rhs
       >
         <terminal>...</terminal>
@@ -125,6 +139,8 @@
       <name>
         <non_terminal where="17.6">property-modifier</non_terminal>
       </name>
+
+      
 
       
 
@@ -147,6 +163,8 @@
 
       
 
+      
+
        : <rhs
       >
         <terminal>...</terminal>
@@ -159,6 +177,8 @@
       <name>
         <non_terminal where="17.8">indexer-modifier</non_terminal>
       </name>
+
+      
 
       
 
@@ -181,6 +201,8 @@
 
       
 
+      
+
        : <rhs
       >
         <terminal>...</terminal>
@@ -198,6 +220,8 @@
 
       
 
+      
+
        : <rhs
       >
         <terminal>...</terminal>
@@ -210,6 +234,8 @@
       <name>
         <non_terminal where="17.12">destructor-declaration</non_terminal>
       </name>
+
+      
 
       
 
@@ -252,6 +278,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="24.2">attributes</non_terminal>
@@ -289,6 +317,8 @@
 
       
 
+      
+
        : <rhs
       >
         <terminal>...</terminal>
@@ -306,6 +336,8 @@
 
       
 
+      
+
        : <rhs
       >
         <keyword>unsafe</keyword>
@@ -317,7 +349,7 @@
     <example
       >[Example: In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 public unsafe struct Node  
 {  
    public int Value;  
@@ -331,9 +363,11 @@ public unsafe struct Node
 
       
 
+      
+
       the unsafe modifier specified in the struct declaration causes the entire textual extent of the struct declaration to become an unsafe context. Thus, it is possible to declare the Left and Right fields to be of a pointer type. The example above could also be written <code_example
       >
-<![CDATA[
+        <![CDATA[
 public struct Node  
 {  
    public int Value;  
@@ -352,7 +386,7 @@ public struct Node
 
       >[Example: In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 public class A  
 {  
    public unsafe virtual void F() {  
@@ -374,6 +408,8 @@ public class B: A
 
       
 
+      
+
       the unsafe modifier on the F method in A simply causes the textual extent of F to become an unsafe context in which the unsafe features of the language can be used. In the override of F in B, there is no need to re-specify the unsafe modifier-unless, of course, the F method in B itself needs access to unsafe features. </example
     >
   </paragraph>
@@ -381,7 +417,7 @@ public class B: A
     <example
       >The situation is slightly different when a pointer type is part of the method's signature <code_example
       >
-<![CDATA[
+        <![CDATA[
 public unsafe class A  
 {  
    public virtual void F(char* p) {...}  

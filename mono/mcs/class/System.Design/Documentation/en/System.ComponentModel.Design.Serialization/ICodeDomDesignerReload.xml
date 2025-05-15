@@ -21,11 +21,15 @@
 
         
 
+        
+
          can implement this interface to support optimized reloading by the designer. When a designer reparses a file for display, it can use this interface to improve performance.</para
       >
       <para
         >To support this performance optimization method, the designer can pass a <see
          cref="T:System.CodeDom.CodeCompileUnit" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          method. <see
          cref="M:System.ComponentModel.Design.Serialization.ICodeDomDesignerReload.ShouldReloadDesigner(System.CodeDom.CodeCompileUnit)" />
+
+        
 
         
 
@@ -83,8 +91,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeCompileUnit" />
+
+          
 
           
 

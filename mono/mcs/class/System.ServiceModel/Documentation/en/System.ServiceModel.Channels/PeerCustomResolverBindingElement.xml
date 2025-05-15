@@ -50,6 +50,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -86,12 +88,16 @@
 
             
 
+            
+
              class by cloning the provided custom peer resolver binding.</para
           >
         </summary>
         <param name="other">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.ServiceModel.Channels.PeerCustomResolverBindingElement" />
+
+          
 
           
 
@@ -132,12 +138,16 @@
 
             
 
+            
+
              class with the provided resolver settings.</para
           >
         </summary>
         <param name="settings">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.ServiceModel.PeerResolvers.PeerCustomResolverSettings" />
+
+          
 
           
 
@@ -179,6 +189,8 @@
 
             
 
+            
+
              class with the provided binding context and resolver settings.</para
           >
         </summary>
@@ -190,11 +202,15 @@
 
           
 
+          
+
            object that contains the binding context for resolvers created by this binding.</param
         >
         <param name="settings">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.ServiceModel.PeerResolvers.PeerCustomResolverSettings" />
+
+          
 
           
 
@@ -294,6 +310,8 @@
 
             
 
+            
+
              that contains the new channel factory of the specified type.</para
           >
         </returns>
@@ -305,10 +323,14 @@
 
           
 
+          
+
            that specifies the binding context for the channel factory.</param
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -363,6 +385,8 @@
 
             
 
+            
+
              that contains the new channel listener of the specified type.</para
           >
         </returns>
@@ -374,11 +398,15 @@
 
           
 
+          
+
            that specifies the binding context for the channel listener.</param
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.ServiceModel.Channels.IChannel" />
+
+          
 
           
 
@@ -428,11 +456,15 @@
 
           
 
+          
+
            that specifies the binding context for the channel factory.</param
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.ServiceModel.Channels.IChannel" />
+
+          
 
           
 
@@ -487,11 +519,15 @@
 
           
 
+          
+
            that specifies the binding context for the channel listener.</param
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.ServiceModel.Channels.IChannel" />
+
+          
 
           
 
@@ -529,6 +565,8 @@
 
             
 
+            
+
              type.</para
           >
         </remarks>
@@ -540,6 +578,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="T:System.ServiceModel.Channels.BindingElement" />
+
+            
 
             
 
@@ -577,6 +617,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="T:System.ServiceModel.PeerResolver" />
+
+            
 
             
 
@@ -625,6 +667,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -633,6 +677,8 @@
           <para
             >The property from the specified <see
              cref="T:System.ServiceModel.Channels.BindingContext" />
+
+            
 
             
 
@@ -649,10 +695,14 @@
 
           
 
+          
+
            that specifies the binding context.</param
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

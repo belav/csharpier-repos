@@ -25,6 +25,8 @@
 
         
 
+        
+
          Web server control.</para
       >
     </summary>
@@ -41,6 +43,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.WebControls.TableDesigner" />
+
+            
 
             
 
@@ -68,6 +72,8 @@
           <para
             >The <see
              cref="M:System.Web.UI.Design.WebControls.TableDesigner.GetDesignTimeHtml" />
+
+            
 
             
 
@@ -104,6 +110,8 @@
           <para
             >This member overrides <see
              cref="M:System.Web.UI.Design.ControlDesigner.GetPersistInnerHtml" />
+
+            
 
             
 

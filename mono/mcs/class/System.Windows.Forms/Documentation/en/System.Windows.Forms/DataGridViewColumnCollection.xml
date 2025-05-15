@@ -36,6 +36,8 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.DataGridView" />
 
@@ -43,8 +45,12 @@
 
         
 
+        
+
          control. The collection maintains a reference to the control through the <see
          cref="P:System.Windows.Forms.DataGridViewColumnCollection.DataGridView" />
+
+        
 
         
 
@@ -63,8 +69,12 @@
 
         
 
+        
+
          objects in a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -97,8 +107,12 @@
 
             
 
+            
+
              class for the given <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -114,8 +128,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridView" />
+
+          
 
           
 
@@ -158,8 +176,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridViewColumn" />
+
+          
 
           
 
@@ -197,8 +219,12 @@
 
             
 
+            
+
              and <paramref
              name="headerText" />
+
+            
 
             
 
@@ -211,8 +237,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.DataGridViewColumn.HeaderText" />
+
+            
 
             
 
@@ -226,6 +256,8 @@
           <para
             >Adds a <see
              cref="T:System.Windows.Forms.DataGridViewTextBoxColumn" />
+
+            
 
             
 
@@ -245,10 +277,14 @@
 
           
 
+          
+
           The name by which the column will be referred.</param
         >
         <param name="headerText">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -298,8 +334,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Windows.Forms.DataGridViewColumn" />
+
+          
 
           
 
@@ -355,6 +395,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -388,6 +430,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -401,6 +445,8 @@
         </returns>
         <param name="columnName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -443,8 +489,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridViewColumn" />
+
+          
 
           
 
@@ -484,8 +534,12 @@
 
           
 
+          
+
           The destination <see
            cref="T:System.Windows.Forms.DataGridViewColumn" />
+
+          
 
           
 
@@ -495,6 +549,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -525,6 +581,8 @@
           <para
             >Gets the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -568,8 +626,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -612,8 +674,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -650,6 +716,8 @@
 
             
 
+            
+
              value, regardless of whether the column is actually visible on the screen. </para
           >
           <para>This method lets you determine the first column that fits the given criteria without having to compare index values directly.</para>
@@ -669,8 +737,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -708,6 +780,8 @@
 
             
 
+            
+
              value, regardless of whether the column is actually visible on the screen. </para
           >
           <para>This method lets you determine the first column that fits the given criteria without having to compare index values directly. </para>
@@ -727,8 +801,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -743,8 +821,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -782,6 +864,8 @@
 
             
 
+            
+
              value, regardless of whether the column is actually visible on the screen. </para
           >
           <para>This method lets you determine the last column that fits the given criteria without having to compare index values directly. </para>
@@ -801,8 +885,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -817,8 +905,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -857,8 +949,12 @@
 
             
 
+            
+
              value higher than the <see
              cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" />
+
+            
 
             
 
@@ -883,6 +979,8 @@
 
           
 
+          
+
           The column from which to start searching for the next column.</param
         >
         <param name="includeFilter">
@@ -892,8 +990,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -908,8 +1010,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -948,8 +1054,12 @@
 
             
 
+            
+
              value lower than the <see
              cref="P:System.Windows.Forms.DataGridViewColumn.DisplayIndex" />
+
+            
 
             
 
@@ -974,6 +1084,8 @@
 
           
 
+          
+
           The column from which to start searching for the previous column.</param
         >
         <param name="includeFilter">
@@ -983,8 +1095,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -999,8 +1115,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -1038,6 +1158,8 @@
 
             
 
+            
+
              in the collection.</para
           >
         </summary>
@@ -1046,6 +1168,8 @@
           <para
             >The index of the given <see
              cref="T:System.Windows.Forms.DataGridViewColumn" />
+
+            
 
             
 
@@ -1061,8 +1185,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridViewColumn" />
+
+          
 
           
 
@@ -1102,6 +1230,8 @@
 
           
 
+          
+
           The zero-based index at which to insert the given column.</param
         >
         <param name="dataGridViewColumn">
@@ -1111,8 +1241,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridViewColumn" />
+
+          
 
           
 
@@ -1216,11 +1350,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.DataGridViewColumnCollection.OnCollectionChanged(System.ComponentModel.CollectionChangeEventArgs)" />
+
+            
 
             
 
@@ -1239,6 +1377,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1249,8 +1389,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.CollectionChangeEventArgs" />
+
+          
 
           
 
@@ -1284,11 +1428,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >To remove a column that is automatically generated when binding to a data source, call this method in a <see
              cref="E:System.Windows.Forms.DataGridView.DataBindingComplete" />
+
+            
 
             
 
@@ -1303,6 +1451,8 @@
         </summary>
         <param name="columnName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1339,6 +1489,8 @@
 
             
 
+            
+
              event handler. </para
           >
         </remarks>
@@ -1348,6 +1500,8 @@
         </summary>
         <param name="dataGridViewColumn">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1381,6 +1535,8 @@
 
             
 
+            
+
              event handler. </para
           >
         </remarks>
@@ -1390,6 +1546,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1425,8 +1583,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1449,6 +1611,8 @@
 
             
 
+            
+
              has been added.</para
           >
         </returns>
@@ -1459,8 +1623,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1493,8 +1661,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1517,8 +1689,12 @@
 
             
 
+            
+
              is found in the <see
              cref="T:System.Windows.Forms.DataGridViewColumnCollection" />
+
+            
 
             
 
@@ -1534,8 +1710,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1568,8 +1748,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1592,6 +1776,8 @@
 
             
 
+            
+
              within the collection, if found; otherwise, -1.</para
           >
         </returns>
@@ -1602,8 +1788,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1637,8 +1827,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1658,8 +1852,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="value" />
+
+          
 
           
 
@@ -1674,8 +1872,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1706,8 +1908,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1767,8 +1973,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1788,8 +1998,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 

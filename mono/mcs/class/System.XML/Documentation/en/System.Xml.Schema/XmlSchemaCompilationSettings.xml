@@ -26,8 +26,12 @@
 
         
 
+        
+
          class provides schema compilation options for the <see
          cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+        
 
         
 
@@ -40,6 +44,8 @@
 
         
 
+        
+
          property specifies that the <see
          cref="T:System.Xml.Schema.XmlSchemaSet" />
 
@@ -47,8 +53,12 @@
 
         
 
+        
+
          should check for Unique Particle Attribution (UPA) violations when schemas in the <see
          cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+        
 
         
 
@@ -62,6 +72,8 @@
       <para
         >Provides schema compilation options for the <see
          cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+        
 
         
 
@@ -97,6 +109,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -126,6 +140,8 @@
 
             
 
+            
+
              property is set to false, validation will be performed based on the following rules.</para
           >
           <list type="ordered">
@@ -133,6 +149,8 @@
               <para
                 >If there is a choice between a strong type and a wildcard, the <see
                  cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+                
 
                 
 
@@ -158,6 +176,8 @@
 
                 
 
+                
+
                  will pick the first one.</para
               >
             </item>
@@ -176,6 +196,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 

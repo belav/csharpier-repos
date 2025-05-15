@@ -21,8 +21,12 @@
 
         
 
+        
+
          event is raised when a link button in a <see
          cref="T:System.Web.UI.WebControls.BulletedList" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          class, see the <see
          cref="M:System.Web.UI.WebControls.BulletedListEventArgs.#ctor(System.Int32)" />
+
+        
 
         
 
@@ -58,8 +66,12 @@
 
         
 
+        
+
          event of a <see
          cref="T:System.Web.UI.WebControls.BulletedList" />
+
+        
 
         
 
@@ -88,11 +100,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The following table shows the initial property values for an instance of the <see
              cref="T:System.Web.UI.WebControls.BulletedListEventArgs" />
+
+            
 
             
 
@@ -126,6 +142,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -142,6 +160,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -152,8 +172,12 @@
 
           
 
+          
+
           The zero-based index of the list item in a <see
            cref="T:System.Web.UI.WebControls.BulletedList" />
+
+          
 
           
 
@@ -185,6 +209,8 @@
 
             
 
+            
+
              control that raised the event.</para
           >
         </remarks>
@@ -193,6 +219,8 @@
           <para
             >Gets the index of the list item in a <see
              cref="T:System.Web.UI.WebControls.BulletedList" />
+
+            
 
             
 

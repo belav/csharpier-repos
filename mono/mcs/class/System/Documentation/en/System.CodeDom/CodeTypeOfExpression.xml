@@ -41,8 +41,12 @@
 
         
 
+        
+
          represents a typeof expression that returns a <see
          cref="T:System.Type" />
+
+        
 
         
 
@@ -58,8 +62,12 @@
 
         
 
+        
+
          property specifies the data type to return a <see
          cref="T:System.Type" />
+
+        
 
         
 
@@ -75,8 +83,12 @@
 
         
 
+        
+
          to represent source code that refers to a type by name, such as when creating a <see
          cref="T:System.CodeDom.CodeCastExpression" />
+
+        
 
         
 
@@ -90,6 +102,8 @@
       <para
         >Represents a typeof expression, an expression that returns a <see
          cref="T:System.Type" />
+
+        
 
         
 
@@ -121,6 +135,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeTypeOfExpression" />
+
+            
 
             
 
@@ -162,6 +178,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -172,8 +190,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeTypeReference" />
+
+          
 
           
 
@@ -211,11 +233,15 @@
 
             
 
+            
+
              class using the specified type.</para
           >
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -253,11 +279,15 @@
 
             
 
+            
+
              class using the specified type.</para
           >
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -24,8 +24,12 @@
 
         
 
+        
+
          class is derived from <see
          cref="T:System.Web.UI.WebControls.TemplatedWizardStep" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          control. By default the <see
          cref="T:System.Web.UI.WebControls.CompleteWizardStep" />
+
+        
 
         
 
@@ -52,6 +60,8 @@
 
         
 
+        
+
          step. The <see
          cref="T:System.Web.UI.WebControls.CompleteWizardStep" />
 
@@ -59,8 +69,12 @@
 
         
 
+        
+
          step is a required step of the <see
          cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+        
 
         
 
@@ -74,6 +88,8 @@
       <para
         >Defines the template of the final step for creating a user account with the <see
          cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+        
 
         
 
@@ -96,6 +112,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.CompleteWizardStep" />
+
+            
 
             
 
@@ -136,6 +154,8 @@
 
             
 
+            
+
              property specifies the type of navigation UI to display for the final user account creation step (the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizardStep" />
 
@@ -143,8 +163,12 @@
 
             
 
+            
+
              step) of the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -161,8 +185,12 @@
 
               
 
+              
+
                property overrides the <see
                cref="P:System.Web.UI.WebControls.WizardStepBase.StepType" />
+
+              
 
               
 
@@ -175,8 +203,12 @@
 
               
 
+              
+
                is always set to the <see
                cref="F:System.Web.UI.WebControls.WizardStepType.Complete" />
+
+              
 
               
 
@@ -189,6 +221,8 @@
 
               
 
+              
+
                enumeration. Attempting to set the <see
                cref="P:System.Web.UI.WebControls.CompleteWizardStep.StepType" />
 
@@ -196,8 +230,12 @@
 
               
 
+              
+
                property to a different value will result in an <see
                cref="T:System.InvalidOperationException" />
+
+              
 
               
 
@@ -214,10 +252,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -236,8 +278,12 @@
 
             
 
+            
+
              page of a <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -275,12 +321,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -294,6 +344,8 @@
           <para
             >Gets or sets the title to display for the final user account creation step of the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 

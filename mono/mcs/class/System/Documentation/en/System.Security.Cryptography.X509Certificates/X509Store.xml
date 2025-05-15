@@ -50,6 +50,8 @@
 
             
 
+            
+
              object using the personal X.509 certificate store for the current user.</para
           >
         </remarks>
@@ -58,6 +60,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
+
+            
 
             
 
@@ -100,6 +104,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -113,11 +119,15 @@
 
             
 
+            
+
              class using an Intptr handle to an HCERTSTORE store.</para
           >
         </summary>
         <param name="storeHandle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -159,6 +169,8 @@
 
             
 
+            
+
              object, specifying the store location, which is either the location for the current user or the local computer.</para
           >
         </remarks>
@@ -172,8 +184,12 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.Security.Cryptography.X509Certificates.StoreLocation" />
+
+            
 
             
 
@@ -184,6 +200,8 @@
         </summary>
         <param name="storeLocation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -225,6 +243,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -238,8 +258,12 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.Security.Cryptography.X509Certificates.StoreName" />
+
+            
 
             
 
@@ -250,6 +274,8 @@
         </summary>
         <param name="storeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -285,6 +311,8 @@
 
             
 
+            
+
              object using a particular X.509 store name for the current user. To create a new store, specify a name that does not exist. A new store will be created with that name.</para
           >
         </remarks>
@@ -293,6 +321,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Store" />
+
+            
 
             
 
@@ -308,8 +338,12 @@
 
           
 
+          
+
           A string value that represents the store name. See <see
            cref="T:System.Security.Cryptography.X509Certificates.StoreName" />
+
+          
 
           
 
@@ -355,6 +389,8 @@
 
             
 
+            
+
              object, specifying both the store name and the store location.</para
           >
         </remarks>
@@ -368,6 +404,8 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.Security.Cryptography.X509Certificates.StoreName" />
 
@@ -375,8 +413,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Security.Cryptography.X509Certificates.StoreLocation" />
+
+            
 
             
 
@@ -392,10 +434,14 @@
 
           
 
+          
+
           One of the enumeration values that specifies the name of the X.509 certificate store. </param
         >
         <param name="storeLocation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -438,6 +484,8 @@
 
             
 
+            
+
              object using a store name and location. To create a new store, specify a name that does not exist. A new store will be created with that name.</para
           >
         </remarks>
@@ -451,6 +499,8 @@
 
             
 
+            
+
              class using a string that represents a value from the <see
              cref="T:System.Security.Cryptography.X509Certificates.StoreName" />
 
@@ -458,8 +508,12 @@
 
             
 
+            
+
              enumeration and a value from the <see
              cref="T:System.Security.Cryptography.X509Certificates.StoreLocation" />
+
+            
 
             
 
@@ -475,8 +529,12 @@
 
           
 
+          
+
           A string that represents a value from the <see
            cref="T:System.Security.Cryptography.X509Certificates.StoreName" />
+
+          
 
           
 
@@ -486,6 +544,8 @@
         >
         <param name="storeLocation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -530,6 +590,8 @@
         </summary>
         <param name="certificate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -584,6 +646,8 @@
 
           
 
+          
+
           The collection of certificates to add. </param
         >
       </Docs>
@@ -618,8 +682,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Store.Remove(System.Security.Cryptography.X509Certificates.X509Certificate2)" />
+
+            
 
             
 
@@ -747,6 +815,8 @@
 
             
 
+            
+
             , to enumerate the certificates in the store. You can create a new store by passing a store name that does not exist to the class constructor, and then using any of the <see
              cref="T:System.Security.Cryptography.X509Certificates.OpenFlags" />
 
@@ -754,8 +824,12 @@
 
             
 
+            
+
              flags except <see
              cref="F:System.Security.Cryptography.X509Certificates.OpenFlags.OpenExistingOnly" />
+
+            
 
             
 
@@ -774,11 +848,15 @@
 
             
 
+            
+
              flag settings.</para
           >
         </summary>
         <param name="flags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -823,6 +901,8 @@
         </summary>
         <param name="certificate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -877,6 +957,8 @@
 
           
 
+          
+
           A range of certificates to remove.</param
         >
       </Docs>
@@ -910,11 +992,15 @@
 
             
 
+            
+
              property to provide compatibility with the unmanaged Microsoft Cryptographic API (CAPI).</para
           >
           <para
             >For more information about the HCERTSTORE handle, see the unmanaged CAPI documentation in the Platform SDK section of the <see
              cref="http://go.microsoft.com/fwlink/?linkid=37118">MSDN Library</see>
+
+            
 
             
 
@@ -928,6 +1014,8 @@
           <para
             >Gets an <see
              cref="T:System.IntPtr" />
+
+            
 
             
 

@@ -32,6 +32,8 @@
 
         
 
+        
+
          to be used to create a custom control as shown in the following code: </para
       >
       <code>[ControlBuilderAttribute(typeof(ControlBuilderType))]</code>
@@ -41,6 +43,8 @@
       <para
         >Specifies a <see
          cref="T:System.Web.UI.ControlBuilder" />
+
+        
 
         
 
@@ -75,6 +79,8 @@
 
           
 
+          
+
           The control builder type </param
         >
       </Docs>
@@ -97,6 +103,8 @@
           <para
             >Gets the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -133,6 +141,8 @@
 
             
 
+            
+
              object. By default, the new object is set to null. This field is read-only.</para
           >
         </summary>
@@ -163,6 +173,8 @@
 
             
 
+            
+
              is identical to the specified object. </para
           >
         </summary>
@@ -176,6 +188,8 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Web.UI.ControlBuilderAttribute" />
 
@@ -183,8 +197,12 @@
 
             
 
+            
+
              and is identical to the current <see
              cref="T:System.Web.UI.ControlBuilderAttribute" />
+
+            
 
             
 
@@ -200,8 +218,12 @@
 
           
 
+          
+
           An object to compare to the current <see
            cref="T:System.Web.UI.ControlBuilderAttribute" />
+
+          
 
           
 
@@ -234,6 +256,8 @@
 
             
 
+            
+
              object. </para
           >
         </summary>
@@ -242,6 +266,8 @@
           <para
             >A 32-bit signed integer representing the hash code; otherwise, 0, if the <see
              cref="P:System.Web.UI.ControlBuilderAttribute.BuilderType" />
+
+            
 
             
 

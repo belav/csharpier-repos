@@ -36,8 +36,12 @@
 
         
 
+        
+
          and to create instances of <see
          cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+        
 
         
 
@@ -50,8 +54,12 @@
 
         
 
+        
+
          and want to serialize it, use the <see
          cref="T:System.ServiceModel.Syndication.Rss20FeedFormatter`1" />
+
+        
 
         
 
@@ -65,6 +73,8 @@
       <para
         >A class that serializes a <see
          cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+        
 
         
 
@@ -93,6 +103,8 @@
           <para
             >Creates a new instance of the <see
              cref="T:System.ServiceModel.Syndication.Rss20FeedFormatter" />
+
+            
 
             
 
@@ -131,8 +143,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+            
 
             
 
@@ -148,8 +164,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+          
 
           
 
@@ -183,6 +203,8 @@
 
             
 
+            
+
              to instantiate when a syndication feed is read in.</para
           >
         </remarks>
@@ -191,6 +213,8 @@
           <para
             >Creates a new instance of the <see
              cref="T:System.ServiceModel.Syndication.Rss20FeedFormatter" />
+
+            
 
             
 
@@ -206,8 +230,12 @@
 
           
 
+          
+
           The instance derived from <see
            cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+          
 
           
 
@@ -245,6 +273,8 @@
 
             
 
+            
+
              parameter is true, all elements defined in the Atom 1.0 specification that are not defined in the RSS 2.0 specification are serialized with in the Atom 1.0 namespace.</para
           >
         </remarks>
@@ -258,8 +288,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+            
 
             
 
@@ -275,8 +309,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+          
 
           
 
@@ -286,6 +324,8 @@
         >
         <param name="serializeExtensionsAsAtom">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -326,6 +366,8 @@
 
             
 
+            
+
              contains a valid RSS 2.0 syndication feed.</para
           >
         </summary>
@@ -334,6 +376,8 @@
           <para
             >A value that specifies whether the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -349,8 +393,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -389,6 +437,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -397,6 +447,8 @@
           <para
             >A new <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+            
 
             
 
@@ -430,8 +482,12 @@
 
             
 
+            
+
              that is associated with the <see
              cref="T:System.ServiceModel.Syndication.Rss20FeedFormatter" />
+
+            
 
             
 
@@ -470,6 +526,8 @@
 
             
 
+            
+
              instance when deserializing an RSS 2.0 feed.</para
           >
         </remarks>
@@ -496,6 +554,8 @@
           <para
             >The default value of this property is true. Element extensions are XML elements that are not defined in the RSS 2.0 specification. This property determines whether to write these elements during serialization. Similarly, this property determines whether to preserve unknown elements inside the ElementExtensions properties in the <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+            
 
             
 
@@ -541,6 +601,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -551,8 +613,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -593,6 +659,8 @@
 
             
 
+            
+
              instance is not added to the <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
@@ -600,8 +668,12 @@
 
             
 
+            
+
              associated with the <see
              cref="T:System.ServiceModel.Syndication.Rss20FeedFormatter" />
+
+            
 
             
 
@@ -620,8 +692,12 @@
 
             
 
+            
+
              instance using the <see
              cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
+
+            
 
             
 
@@ -640,6 +716,8 @@
 
             
 
+            
+
              instance.</para
           >
         </returns>
@@ -650,8 +728,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -666,6 +748,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
@@ -673,8 +757,12 @@
 
           
 
+          
+
            used to create the new <see
            cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+          
 
           
 
@@ -736,6 +824,8 @@
 
             
 
+            
+
              class that cannot be represented in the RSS 2.0 format are serialized within the Atom 1.0 namespace otherwise these properties are not serialized.</para
           >
         </remarks>
@@ -776,8 +866,12 @@
 
             
 
+            
+
              instance associated with the <see
              cref="T:System.ServiceModel.Syndication.Rss20FeedFormatter" />
+
+            
 
             
 
@@ -793,6 +887,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.SyndicationFeed" />
 
@@ -800,8 +896,12 @@
 
           
 
+          
+
            to associate with the <see
            cref="T:System.ServiceModel.Syndication.Rss20FeedFormatter" />
+
+          
 
           
 
@@ -838,6 +938,8 @@
           <para
             >Implements the <see
              cref="M:System.Xml.Serialization.IXmlSerializable.GetSchema" />
+
+            
 
             
 
@@ -883,6 +985,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -893,8 +997,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -935,6 +1043,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -945,8 +1055,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -1010,6 +1124,8 @@
 
             
 
+            
+
              is written.</para
           >
         </remarks>
@@ -1023,8 +1139,12 @@
 
             
 
+            
+
              instance to the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -1040,8 +1160,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -1056,8 +1180,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+          
 
           
 
@@ -1067,6 +1195,8 @@
         >
         <param name="feedBaseUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1111,6 +1241,8 @@
 
             
 
+            
+
              objects.</para
           >
         </remarks>
@@ -1124,8 +1256,12 @@
 
             
 
+            
+
              instances to the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -1141,8 +1277,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -1157,8 +1297,12 @@
 
           
 
+          
+
           A collection of <see
            cref="T:System.ServiceModel.Syndication.SyndicationItem" />
+
+          
 
           
 
@@ -1168,6 +1312,8 @@
         >
         <param name="feedBaseUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1208,6 +1354,8 @@
 
             
 
+            
+
              associated with the <see
              cref="T:System.ServiceModel.Syndication.Rss20FeedFormatter" />
 
@@ -1215,8 +1363,12 @@
 
             
 
+            
+
              to the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -1232,8 +1384,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 

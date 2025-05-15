@@ -27,6 +27,8 @@
 
       
 
+      
+
       (2)ed for.</summary
     >
     <remarks />
@@ -53,6 +55,8 @@
         <summary
           >An exceptional condition has occurred on the device or socket.  This flag is always checked, even if not present in the <see
            cref="F:Mono.Unix.Native.Pollfd.events" />
+
+          
 
           
 
@@ -86,8 +90,12 @@
 
           
 
+          
+
            bitmask.  Note that POLLHUP and POLLOUT should never be present in the <see
            cref="F:Mono.Unix.Native.Pollfd.revents" />
+
+          
 
           
 
@@ -135,6 +143,8 @@
         <summary
           >The file descriptor is not open.  This flag is always checked, even if not present in the <see
            cref="F:Mono.Unix.Native.Pollfd.events" />
+
+          
 
           
 

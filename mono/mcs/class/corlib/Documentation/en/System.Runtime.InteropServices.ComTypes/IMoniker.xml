@@ -31,6 +31,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -448,6 +450,8 @@
 
           
 
+          
+
           A reference to the moniker to use for comparison. </param
         >
       </Docs>
@@ -495,6 +499,8 @@
 
           
 
+          
+
           A reference to the bind context to use in this binding operation. </param
         >
         <param name="pmkToLeft">
@@ -504,10 +510,14 @@
 
           
 
+          
+
           A reference to the moniker to the left of the current moniker if the current moniker is part of a composite. </param
         >
         <param name="pmkNewlyRunning">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -574,6 +584,8 @@
         </summary>
         <param name="pStm">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -734,10 +746,14 @@
 
           
 
+          
+
           The stream to which the object is saved. </param
         >
         <param name="fClearDirty">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

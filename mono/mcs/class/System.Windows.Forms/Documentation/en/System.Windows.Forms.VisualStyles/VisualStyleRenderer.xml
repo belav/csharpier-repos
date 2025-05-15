@@ -21,8 +21,12 @@
 
         
 
+        
+
          namespace exposes <see
          cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          to the element you are interested in. A <see
          cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" />
+
+        
 
         
 
@@ -49,8 +57,12 @@
 
         
 
+        
+
          in the <see
          cref="Overload:System.Windows.Forms.VisualStyles.VisualStyleRenderer.#ctor" />
+
+        
 
         
 
@@ -63,8 +75,12 @@
 
         
 
+        
+
          to a different element by calling the <see
          cref="Overload:System.Windows.Forms.VisualStyles.VisualStyleRenderer.SetParameters" />
+
+        
 
         
 
@@ -80,8 +96,12 @@
 
         
 
+        
+
          method. The <see
          cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" />
+
+        
 
         
 
@@ -94,8 +114,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.GetEnumValue(System.Windows.Forms.VisualStyles.EnumProperty)" />
+
+        
 
         
 
@@ -111,6 +135,8 @@
 
         
 
+        
+
          constructor and many of the <see
          cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" />
 
@@ -118,8 +144,12 @@
 
         
 
+        
+
          methods throw exceptions unless visual styles are enabled in the operating system and visual styles are applied to the client area of application windows. To check for these conditions, use the static <see
          cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.IsSupported" />
+
+        
 
         
 
@@ -135,8 +165,12 @@
 
         
 
+        
+
          class wraps the functionality of the visual styles (UxTheme) API from the Windows Shell portion of the Windows Platform SDK. For more information about visual styles, see "Using Windows XP Visual Styles" in the Platform SDK portion of the MSDN Library at <see
          cref="http://msdn.microsoft.com/library/">http://msdn.microsoft.com/library</see>
+
+        
 
         
 
@@ -150,6 +184,8 @@
       <para
         >Provides methods for drawing and getting information about a <see
          cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+
+        
 
         
 
@@ -181,8 +217,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.VisualStyles.VisualStyleElement.Part" />
+
+            
 
             
 
@@ -195,8 +235,12 @@
 
             
 
+            
+
              properties of the <paramref
              name="element" />
+
+            
 
             
 
@@ -209,6 +253,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.Part" />
 
@@ -216,8 +262,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.State" />
+
+            
 
             
 
@@ -233,8 +283,12 @@
 
             
 
+            
+
              method to verify whether the current visual style provides a definition for the element specified by the <paramref
              name="element" />
+
+            
 
             
 
@@ -253,8 +307,12 @@
 
             
 
+            
+
              class using the given <see
              cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+
+            
 
             
 
@@ -270,6 +328,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
 
@@ -277,8 +337,12 @@
 
           
 
+          
+
            that this <see
            cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" />
+
+          
 
           
 
@@ -314,8 +378,12 @@
 
             
 
+            
+
             , <paramref
              name="part" />
+
+            
 
             
 
@@ -328,8 +396,12 @@
 
             
 
+            
+
              parameters to initialize the <see
              cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.Class" />
+
+            
 
             
 
@@ -342,8 +414,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.State" />
+
+            
 
             
 
@@ -359,8 +435,12 @@
 
             
 
+            
+
              method to verify whether the current visual style provides a definition for the element specified by the <paramref
              name="className" />
+
+            
 
             
 
@@ -373,8 +453,12 @@
 
             
 
+            
+
             , and <paramref
              name="state" />
+
+            
 
             
 
@@ -393,6 +477,8 @@
 
             
 
+            
+
              class using the given class, part, and state values.</para
           >
         </summary>
@@ -403,8 +489,12 @@
 
           
 
+          
+
           The class name of the element that this <see
            cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" />
+
+          
 
           
 
@@ -419,8 +509,12 @@
 
           
 
+          
+
           The part of the element that this <see
            cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" />
+
+          
 
           
 
@@ -435,8 +529,12 @@
 
           
 
+          
+
           The state of the element that this <see
            cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" />
+
+          
 
           
 
@@ -463,6 +561,8 @@
           <para
             >This property identifies a group of related controls or user interface (UI) elements. For more information about the class, part, and state of a visual style element, see the <see
              cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+
+            
 
             
 
@@ -505,6 +605,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.Part" />
 
@@ -512,8 +614,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.State" />
+
+            
 
             
 
@@ -529,8 +635,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Drawing.Rectangle.Height" />
+
+            
 
             
 
@@ -543,8 +653,12 @@
 
             
 
+            
+
              parameter is less than 0, the <see
              cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.DrawBackground(System.Drawing.IDeviceContext,System.Drawing.Rectangle)" />
+
+            
 
             
 
@@ -560,8 +674,12 @@
 
             
 
+            
+
              method with an argument value of <see
              cref="F:System.Windows.Forms.VisualStyles.EnumProperty.BackgroundType" />
+
+            
 
             
 
@@ -574,8 +692,12 @@
 
             
 
+            
+
              method with an argument value of <see
              cref="F:System.Windows.Forms.VisualStyles.EnumProperty.SizingType" />
+
+            
 
             
 
@@ -595,8 +717,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.IDeviceContext" />
+
+          
 
           
 
@@ -611,8 +737,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -651,8 +781,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.Part" />
+
+            
 
             
 
@@ -665,8 +799,12 @@
 
             
 
+            
+
              properties. The background will be clipped to the area specified by the <paramref
              name="clipRectangle " />
+
+            
 
             
 
@@ -682,8 +820,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Drawing.Rectangle.Height" />
+
+            
 
             
 
@@ -696,6 +838,8 @@
 
             
 
+            
+
              or <paramref
              name="clipRectangle" />
 
@@ -703,8 +847,12 @@
 
             
 
+            
+
              parameters is less than 0, the <see
              cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.DrawBackground(System.Drawing.IDeviceContext,System.Drawing.Rectangle,System.Drawing.Rectangle)" />
+
+            
 
             
 
@@ -720,8 +868,12 @@
 
             
 
+            
+
              method with an argument value of <see
              cref="F:System.Windows.Forms.VisualStyles.EnumProperty.BackgroundType" />
+
+            
 
             
 
@@ -734,8 +886,12 @@
 
             
 
+            
+
              method with an argument value of <see
              cref="F:System.Windows.Forms.VisualStyles.EnumProperty.SizingType" />
+
+            
 
             
 
@@ -755,8 +911,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.IDeviceContext" />
+
+          
 
           
 
@@ -771,8 +931,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -787,8 +951,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -834,8 +1002,12 @@
 
             
 
+            
+
              that represents the interior of the <paramref
              name="bounds" />
+
+            
 
             
 
@@ -851,8 +1023,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.IDeviceContext" />
+
+          
 
           
 
@@ -867,8 +1043,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -883,8 +1063,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.VisualStyles.Edges" />
+
+          
 
           
 
@@ -899,8 +1083,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.VisualStyles.EdgeStyle" />
+
+          
 
           
 
@@ -915,8 +1103,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.VisualStyles.EdgeEffects" />
+
+          
 
           
 
@@ -955,6 +1147,8 @@
 
             
 
+            
+
              values to the current element, this method will apply the effect to the drawn image.</para
           >
         </remarks>
@@ -969,8 +1163,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -985,8 +1183,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1001,8 +1203,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -1042,6 +1248,8 @@
 
             
 
+            
+
              values to the current element, this method will apply the effect to the drawn image.</para
           >
         </remarks>
@@ -1050,6 +1258,8 @@
           <para
             >Draws the image from the specified <see
              cref="T:System.Windows.Forms.ImageList" />
+
+            
 
             
 
@@ -1065,8 +1275,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -1081,8 +1295,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1097,6 +1315,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Windows.Forms.ImageList" />
 
@@ -1104,8 +1324,12 @@
 
           
 
+          
+
            that contains the <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -1120,6 +1344,8 @@
 
           
 
+          
+
           The index of the <see
            cref="T:System.Drawing.Image" />
 
@@ -1127,8 +1353,12 @@
 
           
 
+          
+
            within <paramref
            name="imageList" />
+
+          
 
           
 
@@ -1169,6 +1399,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.IDeviceContext" />
 
@@ -1176,8 +1408,12 @@
 
           
 
+          
+
            used to draw the background of the parent of <paramref
            name="childControl" />
+
+          
 
           
 
@@ -1192,8 +1428,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1203,6 +1443,8 @@
         >
         <param name="childControl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1243,8 +1485,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.IDeviceContext" />
+
+          
 
           
 
@@ -1259,8 +1505,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1270,6 +1520,8 @@
         >
         <param name="textToDraw">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1311,8 +1563,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.IDeviceContext" />
+
+          
 
           
 
@@ -1327,8 +1583,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1343,10 +1603,14 @@
 
           
 
+          
+
           The text to draw.</param
         >
         <param name="drawDisabled">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1389,8 +1653,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.IDeviceContext" />
+
+          
 
           
 
@@ -1405,8 +1673,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1421,10 +1693,14 @@
 
           
 
+          
+
           The text to draw.</param
         >
         <param name="drawDisabled">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1439,8 +1715,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.TextFormatFlags" />
+
+          
 
           
 
@@ -1486,6 +1766,8 @@
 
             
 
+            
+
              that contains the content area for the background of the current visual style element.</para
           >
         </returns>
@@ -1496,8 +1778,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.IDeviceContext" />
+
+          
 
           
 
@@ -1512,8 +1798,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1559,6 +1849,8 @@
 
             
 
+            
+
              that contains the entire background area of the current visual style element.</para
           >
         </returns>
@@ -1569,8 +1861,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.IDeviceContext" />
+
+          
 
           
 
@@ -1585,8 +1881,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1624,6 +1924,8 @@
 
             
 
+            
+
              of a visual style element that has partially transparent or alpha-blended parts in its background.</para
           >
         </remarks>
@@ -1641,6 +1943,8 @@
 
             
 
+            
+
              that contains the background of the current visual style element.</para
           >
         </returns>
@@ -1651,8 +1955,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.IDeviceContext" />
+
+          
 
           
 
@@ -1667,8 +1975,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1710,6 +2022,8 @@
 
             
 
+            
+
              values.</para
           >
         </remarks>
@@ -1727,6 +2041,8 @@
 
             
 
+            
+
              parameter is true for the current visual style element; otherwise, false.</para
           >
         </returns>
@@ -1737,8 +2053,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.BooleanProperty" />
+
+          
 
           
 
@@ -1775,6 +2095,8 @@
 
             
 
+            
+
              values.</para
           >
         </remarks>
@@ -1792,8 +2114,12 @@
 
             
 
+            
+
              that contains the value of the property specified by the <paramref
              name="prop" />
+
+            
 
             
 
@@ -1809,8 +2135,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.ColorProperty" />
+
+          
 
           
 
@@ -1847,6 +2177,8 @@
 
             
 
+            
+
              values.</para
           >
         </remarks>
@@ -1864,6 +2196,8 @@
 
             
 
+            
+
              parameter for the current visual style element.</para
           >
         </returns>
@@ -1874,8 +2208,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.EnumProperty" />
+
+          
 
           
 
@@ -1912,6 +2250,8 @@
 
             
 
+            
+
              values.</para
           >
         </remarks>
@@ -1929,8 +2269,12 @@
 
             
 
+            
+
              that contains the value of the property specified by the <paramref
              name="prop" />
+
+            
 
             
 
@@ -1946,8 +2290,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.FilenameProperty" />
+
+          
 
           
 
@@ -1985,6 +2333,8 @@
 
             
 
+            
+
              values.</para
           >
         </remarks>
@@ -2002,8 +2352,12 @@
 
             
 
+            
+
              that contains the value of the property specified by the <paramref
              name="prop" />
+
+            
 
             
 
@@ -2019,8 +2373,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.IDeviceContext" />
+
+          
 
           
 
@@ -2035,8 +2393,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.FontProperty" />
+
+          
 
           
 
@@ -2073,6 +2435,8 @@
 
             
 
+            
+
              values.</para
           >
         </remarks>
@@ -2090,6 +2454,8 @@
 
             
 
+            
+
              parameter for the current visual style element.</para
           >
         </returns>
@@ -2100,8 +2466,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.IntegerProperty" />
+
+          
 
           
 
@@ -2139,6 +2509,8 @@
 
             
 
+            
+
              values.</para
           >
         </remarks>
@@ -2156,8 +2528,12 @@
 
             
 
+            
+
              that contains the value of the property specified by the <paramref
              name="prop" />
+
+            
 
             
 
@@ -2173,8 +2549,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.IDeviceContext" />
+
+          
 
           
 
@@ -2189,8 +2569,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.MarginProperty" />
+
+          
 
           
 
@@ -2228,6 +2612,8 @@
 
             
 
+            
+
              and <see
              cref="F:System.Windows.Forms.VisualStyles.ThemeSizeType.Minimum" />
 
@@ -2235,8 +2621,12 @@
 
             
 
+            
+
              values should be used for the <paramref
              name="type" />
+
+            
 
             
 
@@ -2259,8 +2649,12 @@
 
             
 
+            
+
              that contains the size specified by the <paramref
              name="type" />
+
+            
 
             
 
@@ -2276,8 +2670,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.IDeviceContext" />
+
+          
 
           
 
@@ -2292,8 +2690,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.ThemeSizeType" />
+
+          
 
           
 
@@ -2337,8 +2739,12 @@
 
             
 
+            
+
              that contains the size specified by the <paramref
              name="type" />
+
+            
 
             
 
@@ -2354,8 +2760,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.IDeviceContext" />
+
+          
 
           
 
@@ -2370,8 +2780,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -2386,8 +2800,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.ThemeSizeType" />
+
+          
 
           
 
@@ -2424,6 +2842,8 @@
 
             
 
+            
+
              values.</para
           >
         </remarks>
@@ -2441,8 +2861,12 @@
 
             
 
+            
+
              that contains the value of the property specified by the <paramref
              name="prop" />
+
+            
 
             
 
@@ -2458,8 +2882,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.PointProperty" />
+
+          
 
           
 
@@ -2496,6 +2924,8 @@
 
             
 
+            
+
              values.</para
           >
         </remarks>
@@ -2513,8 +2943,12 @@
 
             
 
+            
+
              that contains the value of the property specified by the <paramref
              name="prop" />
+
+            
 
             
 
@@ -2530,8 +2964,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.StringProperty" />
+
+          
 
           
 
@@ -2575,6 +3013,8 @@
 
             
 
+            
+
              that contains the area required to fit the rendered text. </para
           >
         </returns>
@@ -2585,8 +3025,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.IDeviceContext" />
+
+          
 
           
 
@@ -2601,6 +3045,8 @@
 
           
 
+          
+
           The string to measure.</param
         >
         <param name="flags">
@@ -2610,8 +3056,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.TextFormatFlags" />
+
+          
 
           
 
@@ -2656,6 +3106,8 @@
 
             
 
+            
+
              that contains the area required to fit the rendered text. </para
           >
         </returns>
@@ -2666,8 +3118,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.IDeviceContext" />
+
+          
 
           
 
@@ -2682,8 +3138,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -2698,6 +3158,8 @@
 
           
 
+          
+
           The string to measure.</param
         >
         <param name="flags">
@@ -2707,8 +3169,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.TextFormatFlags" />
+
+          
 
           
 
@@ -2750,6 +3216,8 @@
 
             
 
+            
+
              that provides information about the font specified by the current visual style element. </para
           >
         </returns>
@@ -2760,8 +3228,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.IDeviceContext" />
+
+          
 
           
 
@@ -2793,6 +3265,8 @@
 
             
 
+            
+
              methods. If the class of elements specified by the <see
              cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.Class" />
 
@@ -2800,8 +3274,12 @@
 
             
 
+            
+
              property is not defined by the current visual style, then this property returns <see
              cref="F:System.IntPtr.Zero" />
+
+            
 
             
 
@@ -2817,6 +3295,8 @@
 
             
 
+            
+
              event is raised with the <see
              cref="P:Microsoft.Win32.UserPreferenceChangedEventArgs.Category" />
 
@@ -2824,8 +3304,12 @@
 
             
 
+            
+
              property value of <see
              cref="F:Microsoft.Win32.UserPreferenceCategory.VisualStyle" />
+
+            
 
             
 
@@ -2875,8 +3359,12 @@
 
             
 
+            
+
              that describes where <paramref
              name="pt" />
+
+            
 
             
 
@@ -2892,8 +3380,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.IDeviceContext" />
+
+          
 
           
 
@@ -2908,8 +3400,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -2924,8 +3420,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -2940,8 +3440,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.VisualStyles.HitTestOptions" />
+
+          
 
           
 
@@ -2987,8 +3491,12 @@
 
             
 
+            
+
              that describes where <paramref
              name="pt" />
+
+            
 
             
 
@@ -3004,8 +3512,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -3020,8 +3532,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -3036,8 +3552,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -3052,8 +3572,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -3068,8 +3592,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.VisualStyles.HitTestOptions" />
+
+          
 
           
 
@@ -3115,8 +3643,12 @@
 
             
 
+            
+
              that describes where <paramref
              name="pt" />
+
+            
 
             
 
@@ -3132,8 +3664,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.IDeviceContext" />
+
+          
 
           
 
@@ -3148,8 +3684,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -3164,8 +3704,12 @@
 
           
 
+          
+
           A Windows handle to a <see
            cref="T:System.Drawing.Region" />
+
+          
 
           
 
@@ -3180,8 +3724,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -3196,8 +3744,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.VisualStyles.HitTestOptions" />
+
+          
 
           
 
@@ -3257,6 +3809,8 @@
 
             
 
+            
+
              property internally.</para
           >
         </remarks>
@@ -3274,6 +3828,8 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.VisualStyles.VisualStyleElement.Part" />
 
@@ -3281,8 +3837,12 @@
 
             
 
+            
+
              properties of <paramref
              name="element" />
+
+            
 
             
 
@@ -3298,8 +3858,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+
+          
 
           
 
@@ -3331,6 +3895,8 @@
 
             
 
+            
+
              property to return true.</para
           >
           <list type="table">
@@ -3357,8 +3923,12 @@
 
                   
 
+                  
+
                    property of the <see
                    cref="T:System.Windows.Forms.VisualStyles.VisualStyleInformation" />
+
+                  
 
                   
 
@@ -3381,8 +3951,12 @@
 
                   
 
+                  
+
                    property of the <see
                    cref="T:System.Windows.Forms.VisualStyles.VisualStyleInformation" />
+
+                  
 
                   
 
@@ -3405,8 +3979,12 @@
 
                   
 
+                  
+
                    property of the <see
                    cref="T:System.Windows.Forms.Application" />
+
+                  
 
                   
 
@@ -3419,8 +3997,12 @@
 
                   
 
+                  
+
                    or <see
                    cref="F:System.Windows.Forms.VisualStyles.VisualStyleState.ClientAndNonClientAreasEnabled" />
+
+                  
 
                   
 
@@ -3460,8 +4042,12 @@
 
             
 
+            
+
              class. For more information about the native visual styles API, see "Using Windows XP Visual Styles" in the Platform SDK portion of the MSDN Library at <see
              cref="http://msdn.microsoft.com/library/">http://msdn.microsoft.com/library</see>
+
+            
 
             
 
@@ -3475,6 +4061,8 @@
           <para
             >Gets the last error code returned by the native visual styles (UxTheme) API methods encapsulated by the <see
              cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" />
+
+            
 
             
 
@@ -3502,6 +4090,8 @@
           <para
             >This property identifies a particular specialization of a class. For more information about the class, part, and state of a visual style element, see the <see
              cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+
+            
 
             
 
@@ -3543,6 +4133,8 @@
 
             
 
+            
+
              property internally. Before calling this method, you should call the <see
              cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.IsElementDefined(System.Windows.Forms.VisualStyles.VisualStyleElement)" />
 
@@ -3550,8 +4142,12 @@
 
             
 
+            
+
              method to verify that the current visual style provides a definition for the element specified by the <paramref
              name="element" />
+
+            
 
             
 
@@ -3570,8 +4166,12 @@
 
             
 
+            
+
              to the visual style element represented by the specified <see
              cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+
+            
 
             
 
@@ -3587,8 +4187,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+
+          
 
           
 
@@ -3601,6 +4205,8 @@
 
           
 
+          
+
           , <see
            cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.Part" />
 
@@ -3608,8 +4214,12 @@
 
           
 
+          
+
           , and <see
            cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.State" />
+
+          
 
           
 
@@ -3648,8 +4258,12 @@
 
             
 
+            
+
              property internally. Before calling this method, you should call the <see
              cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.IsElementDefined(System.Windows.Forms.VisualStyles.VisualStyleElement)" />
+
+            
 
             
 
@@ -3662,6 +4276,8 @@
 
             
 
+            
+
             , <paramref
              name="part" />
 
@@ -3669,8 +4285,12 @@
 
             
 
+            
+
             , and <paramref
              name="state" />
+
+            
 
             
 
@@ -3689,6 +4309,8 @@
 
             
 
+            
+
              to the visual style element represented by the specified class, part, and state values.</para
           >
         </summary>
@@ -3699,8 +4321,12 @@
 
           
 
+          
+
           The new value of the <see
            cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.Class" />
+
+          
 
           
 
@@ -3715,8 +4341,12 @@
 
           
 
+          
+
           The new value of the <see
            cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.Part" />
+
+          
 
           
 
@@ -3731,8 +4361,12 @@
 
           
 
+          
+
           The new value of the <see
            cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.State" />
+
+          
 
           
 
@@ -3764,6 +4398,8 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.Part" />
 
@@ -3771,8 +4407,12 @@
 
             
 
+            
+
              property values. For more information about the class, part, and state of a visual style element, see the <see
              cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+
+            
 
             
 

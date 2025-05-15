@@ -24,6 +24,8 @@
 
         
 
+        
+
          class enumerates over an <see
          cref="T:System.Resources.IResourceReader" />
 
@@ -31,8 +33,12 @@
 
         
 
+        
+
         , loads every name and value, and stores them in a hash table. You can then enumerate the resources in the <see
          cref="T:System.Resources.ResXResourceSet" />
+
+        
 
         
 
@@ -49,6 +55,8 @@
 
           
 
+          
+
            and an <see
            cref="F:System.Security.Permissions.SecurityAction.InheritanceDemand" />
 
@@ -56,8 +64,12 @@
 
           
 
+          
+
            at the class level that applies to all members. A <see
            cref="T:System.Security.SecurityException" />
+
+          
 
           
 
@@ -72,10 +84,14 @@
 
           
 
+          
+
            and <format
            type="text/html">
             <a href="28b9adbb-8f08-4f10-b856-dbf59eb932d9">Inheritance Demands</a>
           </format>
+
+          
 
           
 
@@ -92,6 +108,8 @@
 
         
 
+        
+
          object provides a convenient way to read all the resources in a .resx file into memory. You can use the <see
          cref="M:System.Resources.ResourceSet.GetObject(System.String)" />
 
@@ -99,8 +117,12 @@
 
         
 
+        
+
          method to retrieve a particular resource when the .resx file has been read into a <see
          cref="T:System.Resources.ResXResourceSet" />
+
+        
 
         
 
@@ -133,8 +155,12 @@
 
             
 
+            
+
              class using the system default <see
              cref="T:System.Resources.ResXResourceReader" />
+
+            
 
             
 
@@ -150,8 +176,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -183,8 +213,12 @@
 
             
 
+            
+
              class using the system default <see
              cref="T:System.Resources.ResXResourceReader" />
+
+            
 
             
 
@@ -195,6 +229,8 @@
         </summary>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -227,6 +263,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -240,8 +278,12 @@
 
             
 
+            
+
              of the preferred resource reader for this kind of <see
              cref="T:System.Resources.ResXResourceSet" />
+
+            
 
             
 
@@ -275,6 +317,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -288,8 +332,12 @@
 
             
 
+            
+
              of the preferred resource writer for this kind of <see
              cref="T:System.Resources.ResXResourceSet" />
+
+            
 
             
 

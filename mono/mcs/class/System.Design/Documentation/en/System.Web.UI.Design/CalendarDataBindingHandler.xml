@@ -37,6 +37,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -71,6 +73,8 @@
 
             
 
+            
+
              property is data-bound.</para
           >
         </summary>
@@ -81,8 +85,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+          
 
           
 
@@ -97,8 +105,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Control" />
+
+          
 
           
 

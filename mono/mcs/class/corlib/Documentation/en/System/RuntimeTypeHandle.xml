@@ -48,8 +48,12 @@
 
         
 
+        
+
          objects are created through the use of the CIL instruction <see
          langword="ldtoken" />
+
+        
 
         
 
@@ -61,6 +65,8 @@
         <block subset="none" type="note"
           >For more information on <see
            langword="ldtoken" />
+
+          
 
           
 
@@ -112,6 +118,8 @@
 
             
 
+            
+
              structure.</para
           >
         </summary>
@@ -125,8 +133,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.RuntimeTypeHandle" />
+
+            
 
             
 
@@ -137,6 +149,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -181,8 +195,12 @@
 
             
 
+            
+
              structure is equal to the current <see
              cref="T:System.RuntimeTypeHandle" />
+
+            
 
             
 
@@ -201,6 +219,8 @@
 
             
 
+            
+
              is equal to the value of this instance; otherwise, false.</para
           >
         </returns>
@@ -211,8 +231,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.RuntimeTypeHandle" />
+
+          
 
           
 
@@ -290,6 +314,8 @@
 
             
 
+            
+
              structure representing a handle to the module that contains the type represented by the current instance.</para
           >
         </returns>
@@ -328,11 +354,15 @@
 
             
 
+            
+
              parameter is reserved; it does not currently participate in this operation.</para
           >
           <para
             >For more information about the serialization operation performed by this method, see the <see
              cref="M:System.Runtime.Serialization.SerializationInfo.AddValue(System.String,System.Object,System.Type)" />
+
+            
 
             
 
@@ -351,6 +381,8 @@
 
             
 
+            
+
              with the data necessary to deserialize the type represented by the current instance.</para
           >
         </summary>
@@ -361,10 +393,14 @@
 
           
 
+          
+
           The object to be populated with serialization information. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -407,8 +443,12 @@
 
             
 
+            
+
              causes an ambiguous overload resolution error when compiled. Use the <see
              cref="Overload:System.RuntimeTypeHandle.Equals" />
+
+            
 
             
 
@@ -427,6 +467,8 @@
 
             
 
+            
+
              structure are equal.</para
           >
         </summary>
@@ -440,6 +482,8 @@
 
             
 
+            
+
              is a <see
              cref="T:System.RuntimeTypeHandle" />
 
@@ -447,8 +491,12 @@
 
             
 
+            
+
              structure and is equal to <paramref
              name="right" />
+
+            
 
             
 
@@ -464,8 +512,12 @@
 
           
 
+          
+
           An object to compare to <paramref
            name="right" />
+
+          
 
           
 
@@ -480,6 +532,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.RuntimeTypeHandle" />
 
@@ -487,8 +541,12 @@
 
           
 
+          
+
            structure to compare to <paramref
            name="left" />
+
+          
 
           
 
@@ -530,8 +588,12 @@
 
             
 
+            
+
              causes an ambiguous overload resolution error when compiled. Use the <see
              cref="Overload:System.RuntimeTypeHandle.Equals" />
+
+            
 
             
 
@@ -550,6 +612,8 @@
 
             
 
+            
+
              structure is equal to an object.</para
           >
         </summary>
@@ -563,6 +627,8 @@
 
             
 
+            
+
              is a <see
              cref="T:System.RuntimeTypeHandle" />
 
@@ -570,8 +636,12 @@
 
             
 
+            
+
              and is equal to <paramref
              name="left" />
+
+            
 
             
 
@@ -587,6 +657,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.RuntimeTypeHandle" />
 
@@ -594,8 +666,12 @@
 
           
 
+          
+
            structure to compare to <paramref
            name="right" />
+
+          
 
           
 
@@ -610,8 +686,12 @@
 
           
 
+          
+
           An object to compare to <paramref
            name="left" />
+
+          
 
           
 
@@ -654,8 +734,12 @@
 
             
 
+            
+
              causes an ambiguous overload resolution error when compiled. Use the <see
              cref="Overload:System.RuntimeTypeHandle.Equals" />
+
+            
 
             
 
@@ -674,6 +758,8 @@
 
             
 
+            
+
              structure are not equal.</para
           >
         </summary>
@@ -687,6 +773,8 @@
 
             
 
+            
+
              is a <see
              cref="T:System.RuntimeTypeHandle" />
 
@@ -694,8 +782,12 @@
 
             
 
+            
+
              and is not equal to <paramref
              name="right" />
+
+            
 
             
 
@@ -711,8 +803,12 @@
 
           
 
+          
+
           An object to compare to <paramref
            name="right" />
+
+          
 
           
 
@@ -727,6 +823,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.RuntimeTypeHandle" />
 
@@ -734,8 +832,12 @@
 
           
 
+          
+
            structure to compare to <paramref
            name="left" />
+
+          
 
           
 
@@ -777,8 +879,12 @@
 
             
 
+            
+
              causes an ambiguous overload resolution error when compiled. Use the <see
              cref="Overload:System.RuntimeTypeHandle.Equals" />
+
+            
 
             
 
@@ -797,6 +903,8 @@
 
             
 
+            
+
              structure is not equal to an object.</para
           >
         </summary>
@@ -810,6 +918,8 @@
 
             
 
+            
+
              is a <see
              cref="T:System.RuntimeTypeHandle" />
 
@@ -817,8 +927,12 @@
 
             
 
+            
+
              structure and is not equal to <paramref
              name="left" />
+
+            
 
             
 
@@ -834,6 +948,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.RuntimeTypeHandle" />
 
@@ -841,8 +957,12 @@
 
           
 
+          
+
            structure to compare to <paramref
            name="right" />
+
+          
 
           
 
@@ -857,8 +977,12 @@
 
           
 
+          
+
           An object to compare to <paramref
            name="left" />
+
+          
 
           
 
@@ -890,6 +1014,8 @@
           <para
             > A <see
              cref="T:System.IntPtr" />
+
+            
 
             
 

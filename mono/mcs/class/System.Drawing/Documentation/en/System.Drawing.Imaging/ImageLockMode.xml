@@ -24,8 +24,12 @@
 
         
 
+        
+
          method. The <see
          cref="Overload:System.Drawing.Bitmap.LockBits" />
+
+        
 
         
 
@@ -93,6 +97,8 @@
 
             
 
+            
+
              parameter of the <see
              cref="Overload:System.Drawing.Bitmap.LockBits" />
 
@@ -100,8 +106,12 @@
 
             
 
+            
+
              method serves as an input parameter (and possibly as an output parameter). If this flag is cleared, then the <paramref
              name="flags" />
+
+            
 
             
 

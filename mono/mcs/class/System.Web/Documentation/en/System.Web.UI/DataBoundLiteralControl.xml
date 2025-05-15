@@ -36,8 +36,12 @@
 
         
 
+        
+
          class persists the value of its <see
          cref="P:System.Web.UI.DataBoundLiteralControl.Text" />
+
+        
 
         
 
@@ -75,6 +79,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -85,10 +91,14 @@
 
           
 
+          
+
           Defines the size of the array to create for storing static literal strings.</param
         >
         <param name="dataBoundLiteralCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -221,8 +231,12 @@
 
           
 
+          
+
           The position in an array at which to retain the <paramref
            name="s" />
+
+          
 
           
 
@@ -237,8 +251,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -275,8 +293,12 @@
 
           
 
+          
+
           The position in an array at which to retain the <paramref
            name="s" />
+
+          
 
           
 
@@ -291,8 +313,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -327,6 +353,8 @@
 
             
 
+            
+
              interface returns the value of the <see
              cref="P:System.Web.UI.DataBoundLiteralControl.Text" />
 
@@ -334,8 +362,12 @@
 
             
 
+            
+
              property. The value of the <see
              cref="P:System.Web.UI.DataBoundLiteralControl.Text" />
+
+            
 
             
 
@@ -351,8 +383,12 @@
 
             
 
+            
+
              object implements <see
              cref="T:System.Web.UI.ITextControl" />
+
+            
 
             
 
@@ -365,8 +401,12 @@
 
             
 
+            
+
              property. All attempts to use this method will return a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -380,6 +420,8 @@
           <para
             >Gets or sets the text content of the <see
              cref="T:System.Web.UI.DataBoundLiteralControl" />
+
+            
 
             
 
@@ -408,8 +450,12 @@
 
             
 
+            
+
              class persists the value of its <see
              cref="P:System.Web.UI.DataBoundLiteralControl.Text" />
+
+            
 
             
 
@@ -423,6 +469,8 @@
           <para
             >Gets the text content of the <see
              cref="T:System.Web.UI.DataBoundLiteralControl" />
+
+            
 
             
 

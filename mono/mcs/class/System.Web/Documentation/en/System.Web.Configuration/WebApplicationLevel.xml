@@ -20,8 +20,12 @@
 
         
 
+        
+
          class provides three levels that are used to distinguish where a configuration file is in relation to the root level of an ASP.NET Web application. The three path-level types are <see
          cref="F:System.Web.Configuration.WebApplicationLevel.AboveApplication" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
         , and <see
          cref="F:System.Web.Configuration.WebApplicationLevel.BelowApplication" />
+
+        
 
         
 

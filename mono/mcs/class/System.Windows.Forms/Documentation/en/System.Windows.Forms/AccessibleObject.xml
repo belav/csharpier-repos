@@ -44,6 +44,8 @@
 
           
 
+          
+
           , you must add a reference to the Accessibility assembly installed with the dnprdnshort. Windows Forms only supports Active Accessibility 2.0. </para
         >
       </block>
@@ -68,6 +70,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.AccessibleObject" />
+
+            
 
             
 
@@ -104,8 +108,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:Accessibility.IAccessible" />
+
+            
 
             
 
@@ -119,6 +127,8 @@
           <para
             >Gets the number of child interfaces that belong to this object. For a description of this member, see <see
              cref="P:Accessibility.IAccessible.accChildCount" />
+
+            
 
             
 
@@ -156,8 +166,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:Accessibility.IAccessible" />
+
+            
 
             
 
@@ -176,6 +190,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -186,8 +202,12 @@
 
           
 
+          
+
           The child ID in the <see
            cref="T:Accessibility.IAccessible" />
+
+          
 
           
 
@@ -219,8 +239,12 @@
 
             
 
+            
+
              property depends on the object that has keyboard focus. The following table describes the object types that the <see
              cref="P:System.Windows.Forms.AccessibleObject.Accessibility#IAccessible#accFocus" />
+
+            
 
             
 
@@ -276,8 +300,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:Accessibility.IAccessible" />
+
+            
 
             
 
@@ -292,6 +320,8 @@
           <para
             >Gets the object that has the keyboard focus. For a description of this member, see <see
              cref="P:Accessibility.IAccessible.accFocus" />
+
+            
 
             
 
@@ -322,6 +352,8 @@
           <para
             >The following table describes the object types that the <see
              cref="M:System.Windows.Forms.AccessibleObject.Accessibility#IAccessible#accHitTest(System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -367,8 +399,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:Accessibility.IAccessible" />
+
+            
 
             
 
@@ -387,6 +423,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -400,8 +438,12 @@
 
             
 
+            
+
              and <paramref
              name="yTop" />
+
+            
 
             
 
@@ -417,10 +459,14 @@
 
           
 
+          
+
           The horizontal coordinate.</param
         >
         <param name="yTop">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -488,6 +534,8 @@
 
             
 
+            
+
              method can return.</para
           >
           <list type="table">
@@ -532,6 +580,8 @@
 
                   
 
+                  
+
                    and the child ID to access the accessible object.</para
                 >
               </description>
@@ -545,8 +595,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:Accessibility.IAccessible" />
+
+            
 
             
 
@@ -565,6 +619,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -573,6 +629,8 @@
           <para
             >The accessible object positioned at the value specified by <paramref
              name="navDir" />
+
+            
 
             
 
@@ -588,8 +646,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.AccessibleNavigation" />
+
+          
 
           
 
@@ -599,6 +661,8 @@
         >
         <param name="childID">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -630,8 +694,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:Accessibility.IAccessible" />
+
+            
 
             
 
@@ -645,6 +713,8 @@
           <para
             >Gets the parent accessible object of this object. For a description of this member, see <see
              cref="P:Accessibility.IAccessible.accParent" />
+
+            
 
             
 
@@ -683,6 +753,8 @@
 
             
 
+            
+
              values to specify when calling Select to perform complex selection operations.</para
           >
           <list type="table">
@@ -708,6 +780,8 @@
 
                   
 
+                  
+
                    OR <see
                    cref="F:System.Windows.Forms.AccessibleSelection.TakeSelection" />
                 </para>
@@ -720,6 +794,8 @@
               <description>
                 <para>
                   <see cref="F:System.Windows.Forms.AccessibleSelection.TakeFocus" />
+
+                  
 
                   
 
@@ -742,6 +818,8 @@
 
                   
 
+                  
+
                    OR <see
                    cref="F:System.Windows.Forms.AccessibleSelection.RemoveSelection" />
                 </para>
@@ -754,6 +832,8 @@
               <description>
                 <para>
                   <see cref="F:System.Windows.Forms.AccessibleSelection.TakeFocus" />
+
+                  
 
                   
 
@@ -777,6 +857,8 @@
 
                   
 
+                  
+
                    on the starting object to set the selection anchor. Then call Select again and specify <see
                    cref="F:System.Windows.Forms.AccessibleSelection.TakeFocus" />
 
@@ -784,8 +866,12 @@
 
                   
 
+                  
+
                    OR <see
                    cref="F:System.Windows.Forms.AccessibleSelection.ExtendSelection" />
+
+                  
 
                   
 
@@ -808,8 +894,12 @@
 
                   
 
+                  
+
                    on any object. This flag deselects all selected objects except the one just selected. Then call Select again and specify <see
                    cref="F:System.Windows.Forms.AccessibleSelection.RemoveSelection" />
+
+                  
 
                   
 
@@ -828,8 +918,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:Accessibility.IAccessible" />
+
+            
 
             
 
@@ -848,11 +942,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="flagsSelect">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -865,10 +963,14 @@
 
           
 
+          
+
            values.</param
         >
         <param name="childID">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -898,6 +1000,8 @@
           <para
             >The following table describes the object types that the <see
              cref="P:System.Windows.Forms.AccessibleObject.Accessibility#IAccessible#accSelection" />
+
+            
 
             
 
@@ -948,6 +1052,8 @@
 
                   
 
+                  
+
                    and the child ID to access the accessible object.</para
                 >
               </description>
@@ -970,8 +1076,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:Accessibility.IAccessible" />
+
+            
 
             
 
@@ -986,6 +1096,8 @@
           <para
             >Gets the selected child objects of an accessible object. For a description of this member, see <see
              cref="P:Accessibility.IAccessible.accSelection" />
+
+            
 
             
 
@@ -1279,6 +1391,8 @@
 
             
 
+            
+
              property retrieves the object's bounding rectangle in screen coordinates. If the object has a nonrectangular shape, then this property represents the smallest rectangle that completely encompasses the entire object region. Therefore, for nonrectangular objects such as list view items, the coordinates of the object's bounding rectangle can fail, if tested, by calling the <see
              cref="M:System.Windows.Forms.AccessibleObject.HitTest(System.Int32,System.Int32)" />
 
@@ -1286,8 +1400,12 @@
 
             
 
+            
+
              method, because <see
              cref="M:System.Windows.Forms.AccessibleObject.HitTest(System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -1368,6 +1486,8 @@
 
             
 
+            
+
              property. A client can use automation (if supported) instead of <see
              cref="M:System.Windows.Forms.AccessibleObject.DoDefaultAction" />
 
@@ -1375,8 +1495,12 @@
 
             
 
+            
+
              to perform an object's default action. However, <see
              cref="M:System.Windows.Forms.AccessibleObject.DoDefaultAction" />
+
+            
 
             
 
@@ -1423,11 +1547,15 @@
 
             
 
+            
+
              that represents the accessible child corresponding to the specified index.</para
           >
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1494,6 +1622,8 @@
 
             
 
+            
+
              that specifies the currently focused child. This method returns the calling object if the object itself is focused. Returns null if no object has focus.</para
           >
         </returns>
@@ -1552,6 +1682,8 @@
 
             
 
+            
+
              that represents the currently selected child. This method returns the calling object if the object itself is selected. Returns null if is no child is currently selected and the object itself does not have focus.</para
           >
         </returns>
@@ -1604,6 +1736,8 @@
 
             
 
+            
+
              can fail if tested with <see
              cref="M:System.Windows.Forms.AccessibleObject.HitTest(System.Int32,System.Int32)" />
 
@@ -1611,8 +1745,12 @@
 
             
 
+            
+
             , because <see
              cref="M:System.Windows.Forms.AccessibleObject.HitTest(System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -1635,6 +1773,8 @@
 
             
 
+            
+
              that represents the child object at the given screen coordinates. This method returns the calling object if the object itself is at the location specified. Returns null if no object is at the tested location.</para
           >
         </returns>
@@ -1645,10 +1785,14 @@
 
           
 
+          
+
           The horizontal screen coordinate. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1675,6 +1819,8 @@
           <para
             >An access key, also known as a mnemonic, is an underlined character in the text of a menu, menu item, label of a button, or some other control. For example, a user can display a menu by pressing the ALT key while also pressing the indicated underlined key, such as ALT+F, to open the File menu. To use the access key of a menu item, the menu containing the item must be active. Controls such as toolbar buttons and menu items often have an associated shortcut key. A menu item can have both an access key and a shortcut key associated with it. If the value of the <see
              cref="P:System.Windows.Forms.AccessibleObject.KeyboardShortcut" />
+
+            
 
             
 
@@ -1711,8 +1857,12 @@
 
             
 
+            
+
              property is a string used by clients to identify, find, or announce an object for the user. To access the name of a child object, you must first call <see
              cref="M:System.Windows.Forms.AccessibleObject.GetChild(System.Int32)" />
+
+            
 
             
 
@@ -1754,8 +1904,12 @@
 
             
 
+            
+
             . The <see
              cref="M:System.Windows.Forms.AccessibleObject.Navigate(System.Windows.Forms.AccessibleNavigation)" />
+
+            
 
             
 
@@ -1778,8 +1932,12 @@
 
             
 
+            
+
              that represents one of the <see
              cref="T:System.Windows.Forms.AccessibleNavigation" />
+
+            
 
             
 
@@ -1795,8 +1953,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.AccessibleNavigation" />
+
+          
 
           
 
@@ -1881,8 +2043,12 @@
 
             
 
+            
+
              values to specify when calling <see
              cref="M:System.Windows.Forms.AccessibleObject.Select(System.Windows.Forms.AccessibleSelection)" />
+
+            
 
             
 
@@ -1913,6 +2079,8 @@
 
                   
 
+                  
+
                    OR <see
                    cref="F:System.Windows.Forms.AccessibleSelection.TakeSelection" />
                 </para>
@@ -1928,6 +2096,8 @@
               <description>
                 <para>
                   <see cref="F:System.Windows.Forms.AccessibleSelection.TakeFocus" />
+
+                  
 
                   
 
@@ -1950,6 +2120,8 @@
 
                   
 
+                  
+
                    OR <see
                    cref="F:System.Windows.Forms.AccessibleSelection.RemoveSelection" />
                 </para>
@@ -1962,6 +2134,8 @@
               <description>
                 <para>
                   <see cref="F:System.Windows.Forms.AccessibleSelection.TakeFocus" />
+
+                  
 
                   
 
@@ -1985,8 +2159,12 @@
 
                   
 
+                  
+
                    on the starting object to set the selection anchor. Then call <see
                    cref="M:System.Windows.Forms.AccessibleObject.Select(System.Windows.Forms.AccessibleSelection)" />
+
+                  
 
                   
 
@@ -1999,8 +2177,12 @@
 
                   
 
+                  
+
                    OR <see
                    cref="F:System.Windows.Forms.AccessibleSelection.ExtendSelection" />
+
+                  
 
                   
 
@@ -2023,6 +2205,8 @@
 
                   
 
+                  
+
                    on any object. This flag deselects all selected objects except the one just selected. Then call <see
                    cref="M:System.Windows.Forms.AccessibleObject.Select(System.Windows.Forms.AccessibleSelection)" />
 
@@ -2030,8 +2214,12 @@
 
                   
 
+                  
+
                    again and specify <see
                    cref="F:System.Windows.Forms.AccessibleSelection.RemoveSelection" />
+
+                  
 
                   
 
@@ -2054,8 +2242,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.AccessibleSelection" />
+
+          
 
           
 
@@ -2119,8 +2311,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Reflection.IReflect" />
+
+            
 
             
 
@@ -2139,8 +2335,12 @@
 
             
 
+            
+
              object corresponding to the specified field and binding flag. For a description of this member, see <see
              cref="M:System.Reflection.IReflect.GetField(System.String,System.Reflection.BindingFlags)" />
+
+            
 
             
 
@@ -2159,8 +2359,12 @@
 
             
 
+            
+
              object containing the field information for the named object that meets the search constraints specified in <paramref
              name="bindingAttr" />
+
+            
 
             
 
@@ -2176,10 +2380,14 @@
 
           
 
+          
+
           The name of the field to find.</param
         >
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2216,8 +2424,12 @@
 
             
 
+            
+
              flag specifies that nonpublic fields are included in the search. The <see
              cref="F:System.Reflection.BindingFlags.Public" />
+
+            
 
             
 
@@ -2233,8 +2445,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Reflection.IReflect" />
+
+            
 
             
 
@@ -2253,8 +2469,12 @@
 
             
 
+            
+
              objects corresponding to all fields of the current class. For a description of this member, see <see
              cref="M:System.Reflection.IReflect.GetFields(System.Reflection.BindingFlags)" />
+
+            
 
             
 
@@ -2273,8 +2493,12 @@
 
             
 
+            
+
              objects containing all the field information for this reflection object that meets the search constraints specified in <paramref
              name="bindingAttr" />
+
+            
 
             
 
@@ -2285,6 +2509,8 @@
         </returns>
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2322,8 +2548,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Reflection.IReflect" />
+
+            
 
             
 
@@ -2342,8 +2572,12 @@
 
             
 
+            
+
              objects corresponding to all public members or to all members that match a specified name. For a description of this member, see <see
              cref="M:System.Reflection.IReflect.GetMember(System.String,System.Reflection.BindingFlags)" />
+
+            
 
             
 
@@ -2362,6 +2596,8 @@
 
             
 
+            
+
              objects matching the name parameter.</para
           >
         </returns>
@@ -2372,10 +2608,14 @@
 
           
 
+          
+
           The name of the member to find.</param
         >
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2412,8 +2652,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Reflection.IReflect" />
+
+            
 
             
 
@@ -2432,8 +2676,12 @@
 
             
 
+            
+
              objects corresponding either to all public members or to all members of the current class. For a description of this member, see <see
              cref="M:System.Reflection.IReflect.GetMembers(System.Reflection.BindingFlags)" />
+
+            
 
             
 
@@ -2452,11 +2700,15 @@
 
             
 
+            
+
              objects containing all the member information for this reflection object.</para
           >
         </returns>
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2494,8 +2746,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Reflection.IReflect" />
+
+            
 
             
 
@@ -2514,8 +2770,12 @@
 
             
 
+            
+
              object corresponding to a specified method under specified search constraints. For a description of this member, see <see
              cref="M:System.Reflection.IReflect.GetMethod(System.String,System.Reflection.BindingFlags)" />
+
+            
 
             
 
@@ -2534,8 +2794,12 @@
 
             
 
+            
+
              object containing the method information, with the match being based on the method name and search constraints specified in <paramref
              name="bindingAttr" />
+
+            
 
             
 
@@ -2551,10 +2815,14 @@
 
           
 
+          
+
           The name of the member to find.</param
         >
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2595,6 +2863,8 @@
 
             
 
+            
+
              enumeration, the kind of type conversion specified by the <paramref
              name="binder" />
 
@@ -2602,8 +2872,12 @@
 
             
 
+            
+
              parameter, the overload, and the <see
              cref="T:System.Reflection.ParameterInfo" />
+
+            
 
             
 
@@ -2619,8 +2893,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Reflection.IReflect" />
+
+            
 
             
 
@@ -2639,8 +2917,12 @@
 
             
 
+            
+
              object corresponding to a specified method, using a Type array to choose from among overloaded methods. For a description of this member, see <see
              cref="M:System.Reflection.IReflect.GetMethod(System.String,System.Reflection.BindingFlags,System.Reflection.Binder,System.Type[],System.Reflection.ParameterModifier[])" />
+
+            
 
             
 
@@ -2660,10 +2942,14 @@
 
           
 
+          
+
           The name of the member to find.</param
         >
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2678,8 +2964,12 @@
 
           
 
+          
+
           An object that implements <see
            cref="T:System.Reflection.Binder" />
+
+          
 
           
 
@@ -2694,10 +2984,14 @@
 
           
 
+          
+
           An array used to choose among overloaded methods.</param
         >
         <param name="modifiers">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2734,8 +3028,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Reflection.IReflect" />
+
+            
 
             
 
@@ -2754,8 +3052,12 @@
 
             
 
+            
+
              objects with all public methods or all methods of the current class. For a description of this member, see <see
              cref="M:System.Reflection.IReflect.GetMethods(System.Reflection.BindingFlags)" />
+
+            
 
             
 
@@ -2774,11 +3076,15 @@
 
             
 
+            
+
              objects containing all the methods defined for this reflection object that meet the search constraints specified in bindingAttr.</para
           >
         </returns>
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2815,8 +3121,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Reflection.IReflect" />
+
+            
 
             
 
@@ -2835,8 +3145,12 @@
 
             
 
+            
+
              objects corresponding to all public properties or to all properties of the current class. For a description of this member, see <see
              cref="M:System.Reflection.IReflect.GetProperties(System.Reflection.BindingFlags)" />
+
+            
 
             
 
@@ -2855,11 +3169,15 @@
 
             
 
+            
+
              objects for all the properties defined on the reflection object.</para
           >
         </returns>
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2897,8 +3215,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Reflection.IReflect" />
+
+            
 
             
 
@@ -2917,8 +3239,12 @@
 
             
 
+            
+
              object corresponding to a specified property under specified search constraints. For a description of this member, see <see
              cref="M:System.Reflection.IReflect.GetProperty(System.String,System.Reflection.BindingFlags)" />
+
+            
 
             
 
@@ -2937,8 +3263,12 @@
 
             
 
+            
+
              object for the located property that meets the search constraints specified in <paramref
              name="bindingAttr" />
+
+            
 
             
 
@@ -2954,10 +3284,14 @@
 
           
 
+          
+
           The name of the property to find.</param
         >
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2999,8 +3333,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Reflection.IReflect" />
+
+            
 
             
 
@@ -3019,8 +3357,12 @@
 
             
 
+            
+
              object corresponding to a specified property with specified search constraints. For a description of this member, see <see
              cref="M:System.Reflection.IReflect.GetProperty(System.String,System.Reflection.BindingFlags,System.Reflection.Binder,System.Type,System.Type[],System.Reflection.ParameterModifier[])" />
+
+            
 
             
 
@@ -3039,11 +3381,15 @@
 
             
 
+            
+
              object for the located property, if a property with the specified name was located in this reflection object, or null if the property was not located.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3058,10 +3404,14 @@
 
           
 
+          
+
           The binding attributes used to control the search.</param
         >
         <param name="binder">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3076,6 +3426,8 @@
 
           
 
+          
+
           An array used to choose among overloaded methods.</param
         >
         <param name="types">
@@ -3085,10 +3437,14 @@
 
           
 
+          
+
           An array of parameter modifiers used to make binding work with parameter signatures in which the types have been modified.</param
         >
         <param name="modifiers">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3132,6 +3488,8 @@
 
             
 
+            
+
              parameter may be a constructor, method, property, or field. A suitable invocation attribute must be specified. Invoke the default member of a class by passing the empty string ("") as the name of the member.</para
           >
           <para
@@ -3142,8 +3500,12 @@
 
             
 
+            
+
              parameter has the same length as the <paramref
              name="args" />
+
+            
 
             
 
@@ -3159,8 +3521,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Reflection.IReflect" />
+
+            
 
             
 
@@ -3174,6 +3540,8 @@
           <para
             >Invokes a specified member. For a description of this member, see <see
              cref="M:System.Reflection.IReflect.InvokeMember(System.String,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object,System.Object[],System.Reflection.ParameterModifier[],System.Globalization.CultureInfo,System.String[])" />
+
+            
 
             
 
@@ -3193,6 +3561,8 @@
 
           
 
+          
+
           The name of the member to find.</param
         >
         <param name="invokeAttr">
@@ -3202,8 +3572,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -3218,8 +3592,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -3234,10 +3612,14 @@
 
           
 
+          
+
           The object on which to invoke the specified member. This parameter is ignored for static members.</param
         >
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3252,8 +3634,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Reflection.ParameterModifier" />
+
+          
 
           
 
@@ -3268,8 +3654,12 @@
 
           
 
+          
+
           An instance of <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -3279,6 +3669,8 @@
         >
         <param name="namedParameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3313,8 +3705,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Reflection.IReflect" />
+
+            
 
             
 
@@ -3333,8 +3729,12 @@
 
             
 
+            
+
              object. For a description of this member, see <see
              cref="P:System.Reflection.IReflect.UnderlyingSystemType" />
+
+            
 
             
 
@@ -3368,8 +3768,12 @@
 
             
 
+            
+
              methods and properties as needed to match their custom object. This approach saves server developers the work of fully implementing all the <see
              cref="T:Accessibility.IAccessible" />
+
+            
 
             
 
@@ -3389,6 +3793,8 @@
 
             
 
+            
+
              based on the handle of the object.</para
           >
         </summary>
@@ -3399,8 +3805,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IntPtr" />
+
+          
 
           
 
@@ -3439,8 +3849,12 @@
 
             
 
+            
+
              methods and properties as needed to match their custom object. This approach saves server developers the work of fully implementing all the <see
              cref="T:Accessibility.IAccessible" />
+
+            
 
             
 
@@ -3451,6 +3865,8 @@
           <para
             >Valid <paramref
              name="objid" />
+
+            
 
             
 
@@ -3616,6 +4032,8 @@
 
             
 
+            
+
              based on the handle and the object id of the object.</para
           >
         </summary>
@@ -3626,8 +4044,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IntPtr" />
+
+          
 
           
 
@@ -3642,8 +4064,12 @@
 
           
 
+          
+
           An Int that defines the type of object that the <paramref
            name="handle" />
+
+          
 
           
 
@@ -3675,8 +4101,12 @@
 
             
 
+            
+
              property represents visual information contained by the object. Not all objects support the <see
              cref="P:System.Windows.Forms.AccessibleObject.Value" />
+
+            
 
             
 
@@ -3692,6 +4122,8 @@
 
             
 
+            
+
              property is used to tell the client about what visual information an object contains. For example, the value for an edit control is the text it contains, but a menu item has no value.</para
           >
           <para
@@ -3702,8 +4134,12 @@
 
             
 
+            
+
              property can provide hierarchical information in cases such as a tree view control. Although the parent object in the tree view control does not provide information in the <see
              cref="P:System.Windows.Forms.AccessibleObject.Value" />
+
+            
 
             
 

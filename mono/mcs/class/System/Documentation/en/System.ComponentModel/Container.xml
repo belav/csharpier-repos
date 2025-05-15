@@ -40,8 +40,12 @@
 
         
 
+        
+
          class is the default implementation for the <see
          cref="T:System.ComponentModel.IContainer" />
+
+        
 
         
 
@@ -79,6 +83,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.Container" />
+
+            
 
             
 
@@ -122,6 +128,8 @@
 
             
 
+            
+
              is added to the end of the list.</para
           >
         </remarks>
@@ -135,8 +143,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.ComponentModel.Container" />
+
+            
 
             
 
@@ -147,6 +159,8 @@
         </summary>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -190,6 +204,8 @@
 
             
 
+            
+
              is added to the end of the list.</para
           >
         </remarks>
@@ -203,8 +219,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.ComponentModel.Container" />
+
+            
 
             
 
@@ -220,10 +240,14 @@
 
           
 
+          
+
           The component to add. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -264,6 +288,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -272,6 +298,8 @@
           <para
             >Gets all the components in the <see
              cref="T:System.ComponentModel.Container" />
+
+            
 
             
 
@@ -315,6 +343,8 @@
 
             
 
+            
+
              parameter is null, the <see
              cref="T:System.ComponentModel.IComponent" />
 
@@ -322,8 +352,12 @@
 
             
 
+            
+
              is added to the <see
              cref="T:System.ComponentModel.Container" />
+
+            
 
             
 
@@ -339,8 +373,12 @@
 
             
 
+            
+
              method can provide a custom implementation through a class that implements the <see
              cref="T:System.ComponentModel.ISite" />
+
+            
 
             
 
@@ -359,8 +397,12 @@
 
             
 
+            
+
              for the given <see
              cref="T:System.ComponentModel.IComponent" />
+
+            
 
             
 
@@ -380,8 +422,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -396,8 +442,12 @@
 
           
 
+          
+
           The name to assign to <paramref
            name="component" />
+
+          
 
           
 
@@ -434,8 +484,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.ComponentModel.Container" />
+
+            
 
             
 
@@ -448,8 +502,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.ComponentModel.Container" />
+
+            
 
             
 
@@ -462,6 +520,8 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.ComponentModel.Container" />
 
@@ -469,8 +529,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.ComponentModel.Container" />
+
+            
 
             
 
@@ -485,10 +549,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -505,6 +573,8 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.ComponentModel.Container" />
 
@@ -512,8 +582,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.ComponentModel.Container" />
+
+              
 
               
 
@@ -528,6 +602,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.ComponentModel.Container" />
+
+            
 
             
 
@@ -567,8 +643,12 @@
 
             
 
+            
+
              method. Dispose invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -581,8 +661,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -598,8 +682,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.ComponentModel.Container" />
+
+            
 
             
 
@@ -618,11 +706,15 @@
 
             
 
+            
+
             , and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -659,8 +751,12 @@
 
             
 
+            
+
             . Application code should not call this method; an object's Finalize method is automatically invoked during garbage collection, unless finalization by the garbage collector has been disabled by a call to the <see
              cref="M:System.GC.SuppressFinalize(System.Object)" />
+
+            
 
             
 
@@ -678,10 +774,14 @@
 
             
 
+            
+
             , <format
              type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
+
+            
 
             
 
@@ -696,6 +796,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -704,6 +806,8 @@
           <para
             >Releases unmanaged resources and performs other cleanup operations before the <see
              cref="T:System.ComponentModel.Container" />
+
+            
 
             
 
@@ -743,6 +847,8 @@
 
             
 
+            
+
              is an <see
              cref="T:System.ComponentModel.IContainer" />
 
@@ -750,8 +856,12 @@
 
             
 
+            
+
             ; otherwise, it returns null. You can override this method to provide a custom implementation to return a service object. For more information, see the <see
              cref="M:System.IServiceProvider.GetService(System.Type)" />
+
+            
 
             
 
@@ -774,6 +884,8 @@
 
             
 
+            
+
              implementing the requested service, or null if the service cannot be resolved.</para
           >
         </returns>
@@ -784,8 +896,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -831,11 +947,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -876,8 +996,12 @@
 
             
 
+            
+
              method cleans up the site as usual, but it does not set the component's <see
              cref="P:System.ComponentModel.IComponent.Site" />
+
+            
 
             
 
@@ -896,8 +1020,12 @@
 
             
 
+            
+
              without setting <see
              cref="P:System.ComponentModel.IComponent.Site" />
+
+            
 
             
 
@@ -908,6 +1036,8 @@
         </summary>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -949,8 +1079,12 @@
 
             
 
+            
+
              method is called by the <see
              cref="M:System.ComponentModel.Container.Add(System.ComponentModel.IComponent,System.String)" />
+
+            
 
             
 
@@ -963,8 +1097,12 @@
 
             
 
+            
+
              being added is unique for this <see
              cref="T:System.ComponentModel.Container" />
+
+            
 
             
 
@@ -977,8 +1115,12 @@
 
             
 
+            
+
              parameter is not null and is not unique, an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -998,10 +1140,14 @@
 
           
 
+          
+
           The named component.</param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -32,6 +32,8 @@
 
         
 
+        
+
          class corresponds to the eventMappings configuration file element. The eventMappings element allows you to assign friendly names to event sources. These names are then used to associate event sources with the related event consumers, called providers, in the rules subsection of the healthMonitoring section of the configuration file.</para
       >
     </remarks>
@@ -40,6 +42,8 @@
       <para
         >Provides a collection of <see
          cref="T:System.Web.Configuration.EventMappingSettings" />
+
+        
 
         
 
@@ -66,6 +70,8 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.Configuration.HealthMonitoringSection" />
 
@@ -73,8 +79,12 @@
 
             
 
+            
+
              class always contains an instance of the <see
              cref="T:System.Web.Configuration.EventMappingSettingsCollection" />
+
+            
 
             
 
@@ -88,6 +98,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.EventMappingSettingsCollection" />
+
+            
 
             
 
@@ -128,6 +140,8 @@
 
             
 
+            
+
              object with the same name.</para
           >
         </remarks>
@@ -136,6 +150,8 @@
           <para
             >Adds an <see
              cref="T:System.Web.Configuration.EventMappingSettings" />
+
+            
 
             
 
@@ -151,8 +167,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.Configuration.EventMappingSettings" />
+
+          
 
           
 
@@ -183,6 +203,8 @@
           <para
             >Removes all <see
              cref="T:System.Web.Configuration.EventMappingSettings" />
+
+            
 
             
 
@@ -221,6 +243,8 @@
 
             
 
+            
+
              object with the specified name.</para
           >
         </summary>
@@ -229,6 +253,8 @@
           <para
             >true if the collection contains an <see
              cref="T:System.Web.Configuration.EventMappingSettings" />
+
+            
 
             
 
@@ -244,8 +270,12 @@
 
           
 
+          
+
           The name of an <see
            cref="T:System.Web.Configuration.EventMappingSettings" />
+
+          
 
           
 
@@ -302,8 +332,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.Configuration.EventMappingSettings" />
+
+          
 
           
 
@@ -338,6 +372,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -346,6 +382,8 @@
           <para
             >The index of the specified <see
              cref="T:System.Web.Configuration.EventMappingSettings" />
+
+            
 
             
 
@@ -361,8 +399,12 @@
 
           
 
+          
+
           The name of an <see
            cref="T:System.Web.Configuration.EventMappingSettings" />
+
+          
 
           
 
@@ -407,6 +449,8 @@
 
             
 
+            
+
              object to the specified index point in the collection.</para
           >
         </summary>
@@ -417,8 +461,12 @@
 
           
 
+          
+
           A valid index of an <see
            cref="T:System.Web.Configuration.EventMappingSettings" />
+
+          
 
           
 
@@ -433,8 +481,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Configuration.EventMappingSettings" />
+
+          
 
           
 
@@ -537,6 +589,8 @@
 
             
 
+            
+
              object from the collection.</para
           >
         </summary>
@@ -547,8 +601,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Web.Configuration.EventMappingSettings" />
+
+          
 
           
 
@@ -586,6 +644,8 @@
 
             
 
+            
+
              object from the collection.</para
           >
         </summary>
@@ -596,8 +656,12 @@
 
           
 
+          
+
           The index of an <see
            cref="T:System.Web.Configuration.EventMappingSettings" />
+
+          
 
           
 

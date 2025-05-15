@@ -38,6 +38,8 @@
 
         
 
+        
+
          class is used in the activation of manifest-based applications.</para
       >
     </remarks>
@@ -76,6 +78,8 @@
 
             
 
+            
+
              parameter is a comma-delimited Unicode string that begins with the name, as follows:</para
           >
           <code
@@ -86,8 +90,12 @@
 
             
 
+            
+
             deploymentIdentity<codeFeaturedElement
             >\</codeFeaturedElement>
+
+            
 
             
 
@@ -104,8 +112,12 @@
 
             
 
+            
+
             Major.Minor.Build.Revision<codeFeaturedElement
             >, Culture = </codeFeaturedElement>
+
+            
 
             
 
@@ -118,8 +130,12 @@
 
             
 
+            
+
             TokenNumber<codeFeaturedElement
             >, processorArchitecture=</codeFeaturedElement>
+
+            
 
             
 
@@ -136,8 +152,12 @@
 
             
 
+            
+
             Major.Minor.Build.Revision<codeFeaturedElement
             >, Culture = </codeFeaturedElement>
+
+            
 
             
 
@@ -150,6 +170,8 @@
 
             
 
+            
+
             TokenNumber<codeFeaturedElement
             >, processorArchitecture=</codeFeaturedElement>
 
@@ -157,8 +179,12 @@
 
             
 
+            
+
             processorArchitecture<codeFeaturedElement
             >, type=</codeFeaturedElement>
+
+            
 
             
 
@@ -182,11 +208,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="applicationIdentityFullName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -215,6 +245,8 @@
           <para
             >The following are two examples of <see
              cref="P:System.ApplicationIdentity.CodeBase" />
+
+            
 
             
 
@@ -261,8 +293,12 @@
 
             
 
+            
+
              property, see the <see
              cref="M:System.ApplicationIdentity.#ctor(System.String)" />
+
+            
 
             
 
@@ -311,6 +347,8 @@
 
             
 
+            
+
              object with the data needed to serialize the target object.</para
           >
         </summary>
@@ -321,8 +359,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -337,8 +379,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -370,6 +416,8 @@
           <para
             >For a description of the format of a full name for a manifest activated application, see the <see
              cref="M:System.ApplicationIdentity.#ctor(System.String)" />
+
+            
 
             
 

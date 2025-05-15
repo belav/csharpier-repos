@@ -8,11 +8,15 @@
 
     
 
+    
+
      introduces one or more constants of a given type. <grammar_production
     >
       <name>
         <non_terminal where="17.3">constant-declaration</non_terminal>
       </name>
+
+      
 
       
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -58,6 +66,8 @@
       <name>
         <non_terminal where="17.3">constant-modifier</non_terminal>
       </name>
+
+      
 
       
 
@@ -88,8 +98,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -114,6 +128,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="9.4.2">identifier</non_terminal>
@@ -130,8 +146,12 @@
 
     
 
+    
+
      may include a set of attributes (<hyperlink
     >24</hyperlink>
+
+    
 
     
 
@@ -144,8 +164,12 @@
 
     
 
+    
+
     ), and a valid combination of the four access modifiers (<hyperlink
     >17.2.3</hyperlink>
+
+    
 
     
 
@@ -158,8 +182,12 @@
 
     
 
+    
+
     . Even though constants are considered static members, a  <non_terminal
      where="17.3">constant-declaration</non_terminal>
+
+    
 
     
 
@@ -175,8 +203,12 @@
 
     
 
+    
+
      specifies the type of the members introduced by the declaration. The type is followed by a list of <non_terminal
      where="17.3">constant-declarator</non_terminal>
+
+    
 
     
 
@@ -189,6 +221,8 @@
 
     
 
+    
+
      consists of an identifier that names themember, followed by an "=" token, followed by a  <non_terminal
      where="14.15">constant-expression</non_terminal>
 
@@ -196,8 +230,12 @@
 
     
 
+    
+
      (<hyperlink
     >14.15</hyperlink>
+
+    
 
     
 
@@ -213,8 +251,12 @@
 
     
 
+    
+
     , <keyword
     >byte</keyword>
+
+    
 
     
 
@@ -227,8 +269,12 @@
 
     
 
+    
+
     , <keyword
     >ushort</keyword>
+
+    
 
     
 
@@ -241,8 +287,12 @@
 
     
 
+    
+
     , <keyword
     >uint</keyword>
+
+    
 
     
 
@@ -255,8 +305,12 @@
 
     
 
+    
+
     , <keyword
     >ulong</keyword>
+
+    
 
     
 
@@ -269,8 +323,12 @@
 
     
 
+    
+
     , <keyword
     >float</keyword>
+
+    
 
     
 
@@ -283,8 +341,12 @@
 
     
 
+    
+
     , <keyword
     >decimal</keyword>
+
+    
 
     
 
@@ -297,6 +359,8 @@
 
     
 
+    
+
     , string, an <non_terminal
      where="11.1">enum-type</non_terminal>
 
@@ -304,10 +368,12 @@
 
     
 
+    
+
     , or a <non_terminal
-     where="11.2"
->reference-type</non_terminal
-    >
+     where="11.2">reference-type</non_terminal>
+
+    
 
     
 
@@ -320,8 +386,12 @@
 
     
 
+    
+
      must yield a value of the target type or of a type that can be converted to the target type by an implicit conversion (<hyperlink
     >13.1</hyperlink>
+
+    
 
     
 
@@ -337,11 +407,15 @@
 
     
 
+    
+
     ). </paragraph
   >
   <paragraph
     >The value of a constant is obtained in an expression using a <non_terminal
      where="14.5.2">simple-name</non_terminal>
+
+    
 
     
 
@@ -354,6 +428,8 @@
 
     
 
+    
+
     ) or a <non_terminal
      where="14.5.4">member-access</non_terminal>
 
@@ -361,8 +437,12 @@
 
     
 
+    
+
      (<hyperlink
     >14.5.4</hyperlink>
+
+    
 
     
 
@@ -378,8 +458,12 @@
 
     
 
+    
+
     . Thus, a constant may be used in any construct that requires a <non_terminal
      where="14.15">constant-expression</non_terminal>
+
+    
 
     
 
@@ -397,6 +481,8 @@
 
       
 
+      
+
       , a <non_terminal
        where="14.15">constant-expression</non_terminal>
 
@@ -404,10 +490,12 @@
 
       
 
+      
+
        is an expression that can be fully evaluated at  compile-time. Since the only way to create a non-null value of a <non_terminal
-       where="11.2"
->reference-type</non_terminal
-      >
+       where="11.2">reference-type</non_terminal>
+
+      
 
       
 
@@ -420,10 +508,12 @@
 
       
 
+      
+
       , the only possible value for constants of <non_terminal
-       where="11.2"
->reference-type</non_terminal
-      >
+       where="11.2">reference-type</non_terminal>
+
+      
 
       
 
@@ -440,8 +530,12 @@
 
     
 
+    
+
     , a readonly field (<hyperlink
     >17.4.2</hyperlink>
+
+    
 
     
 
@@ -456,6 +550,8 @@
 
       
 
+      
+
       ). end note]</note
     >
   </paragraph>
@@ -464,7 +560,7 @@
 
       >[Example: For example <code_example
       >
-<![CDATA[
+        <![CDATA[
 class A  
 {  
    public const double X = 1.0, Y = 2.0, Z = 3.0;  
@@ -476,9 +572,11 @@ class A
 
       
 
+      
+
       is equivalent to <code_example
       >
-<![CDATA[
+        <![CDATA[
 class A  
 {  
    public const double X = 1.0;  
@@ -487,6 +585,8 @@ class A
 }  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -503,11 +603,13 @@ class A
 
     
 
+    
+
      as the dependencies are not of a circular nature. The compiler automatically arranges to evaluate the constant declarations in the appropriate order. <example
 
       >[Example: In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 class A  
 {  
    public const int X = B.Z + 1;  
@@ -524,8 +626,12 @@ class B
 
       
 
+      
+
       the compiler first evaluates A.Y, then evaluates B.Z, and finally evaluates A.X, producing the values 10, 11, and 12. end example]</example
     >
+
+    
 
     
 

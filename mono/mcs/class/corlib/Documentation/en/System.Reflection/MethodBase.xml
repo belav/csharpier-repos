@@ -56,8 +56,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Reflection.ConstructorInfo" />
+
+        
 
         
 
@@ -102,6 +106,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -136,6 +142,8 @@
           <para
             >A <see
              cref="T:System.Reflection.MethodAttributes" />
+
+            
 
             
 
@@ -230,8 +238,12 @@ class MethodAttributesExample
 
             
 
+            
+
             , first get the type. From the type, get the method. From the method, get the <see
              cref="T:System.Reflection.MethodAttributes" />
+
+            
 
             
 
@@ -297,8 +309,12 @@ class MethodAttributesExample
 
             
 
+            
+
              if the current method  contains unassigned generic type parameters; otherwise <see
              langword="false" />
+
+            
 
             
 
@@ -318,8 +334,12 @@ class MethodAttributesExample
 
             
 
+            
+
              property provides a standard way to distinguish between closed constructed methods, which can be invoked, and open constructed methods, which cannot. If the <see
              cref="P:System.Reflection.MethodBase.ContainsGenericParameters" />
+
+            
 
             
 
@@ -335,8 +355,12 @@ class MethodAttributesExample
 
             
 
+            
+
              property searches recursively for type parameters. For example, it returns true for any method in an open type A&lt;T&gt; (A(Of T) in Visual Basic), even though the method itself is not generic. Contrast this with the behavior of the <see
              cref="P:System.Reflection.MethodBase.IsGenericMethod" />
+
+            
 
             
 
@@ -352,6 +376,8 @@ class MethodAttributesExample
 
             
 
+            
+
              property parameter returns true for any constructor in an open type, even though constructors cannot have type parameters of their own.</para
           >
           <para
@@ -362,8 +388,12 @@ class MethodAttributesExample
 
             
 
+            
+
              property. For a list of the invariant conditions for other terms used in generic reflection, see the <see
              cref="P:System.Type.IsGenericType" />
+
+            
 
             
 
@@ -410,11 +440,15 @@ class MethodAttributesExample
 
             
 
+            
+
              equals the type and value of this instance; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -454,8 +488,12 @@ class MethodAttributesExample
 
             
 
+            
+
              that is returned by <see
              cref="M:System.Reflection.MethodBase.GetCurrentMethod" />
+
+            
 
             
 
@@ -468,6 +506,8 @@ class MethodAttributesExample
 
             
 
+            
+
              returns true). Therefore, it does not reflect the type arguments that were used when the method was called. For example, if a method M() is defined on a generic type C&lt;T&gt; (C(Of T) in Visual Basic), and <see
              cref="M:System.Reflection.MethodBase.GetCurrentMethod" />
 
@@ -475,8 +515,12 @@ class MethodAttributesExample
 
             
 
+            
+
              is called from C&lt;string&gt;.M(), then <see
              cref="M:System.Reflection.MethodBase.GetCurrentMethod" />
+
+            
 
             
 
@@ -492,8 +536,12 @@ class MethodAttributesExample
 
             
 
+            
+
              returns the generic method definition. If the generic method is defined on a generic type, the <see
              cref="T:System.Reflection.MethodInfo" />
+
+            
 
             
 
@@ -550,8 +598,12 @@ class MethodAttributesExample
 
                 
 
+                
+
                  property returns false), the array returned by the <see
                  cref="M:System.Reflection.MethodBase.GetGenericArguments" />
+
+                
 
                 
 
@@ -572,6 +624,8 @@ class MethodAttributesExample
 
                 
 
+                
+
                  property returns true) in which specific types have been assigned to some type parameters and type parameters of enclosing generic types have been assigned to other type parameters, the array contains both types and type parameters. Use the <see
                  cref="P:System.Type.IsGenericParameter" />
 
@@ -579,8 +633,12 @@ class MethodAttributesExample
 
                 
 
+                
+
                  property to tell them apart. For a demonstration of this scenario, see the code example provided for the <see
                  cref="P:System.Reflection.MethodBase.ContainsGenericParameters" />
+
+                
 
                 
 
@@ -598,8 +656,12 @@ class MethodAttributesExample
 
             
 
+            
+
              if not overridden in a derived class, so an exception is thrown if the current instance is of type <see
              cref="T:System.Reflection.ConstructorInfo" />
+
+            
 
             
 
@@ -615,8 +677,12 @@ class MethodAttributesExample
 
             
 
+            
+
              property. For a list of the invariant conditions for other terms used in generic reflection, see the <see
              cref="P:System.Type.IsGenericType" />
+
+            
 
             
 
@@ -635,6 +701,8 @@ class MethodAttributesExample
 
             
 
+            
+
              objects that represent the type arguments of a generic method or the type parameters of a generic method definition.</para
           >
         </summary>
@@ -643,6 +711,8 @@ class MethodAttributesExample
           <para
             >An array of <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -709,8 +779,12 @@ class MethodAttributesExample
 
             
 
+            
+
              in order to use it. You can call the <see
              cref="M:System.Reflection.MethodBase.GetMethodBody" />
+
+            
 
             
 
@@ -723,8 +797,12 @@ class MethodAttributesExample
 
             
 
+            
+
              and <see
              cref="T:System.Reflection.ConstructorInfo" />
+
+            
 
             
 
@@ -737,6 +815,8 @@ class MethodAttributesExample
 
             
 
+            
+
              class derives from the <see
              cref="T:System.Reflection.MethodInfo" />
 
@@ -744,8 +824,12 @@ class MethodAttributesExample
 
             
 
+            
+
              class, which in turn derives from the <see
              cref="T:System.Reflection.MethodBase" />
+
+            
 
             
 
@@ -764,6 +848,8 @@ class MethodAttributesExample
 
             
 
+            
+
              object that provides access to the MSIL stream, local variables, and exceptions for the current method.</para
           >
         </summary>
@@ -772,6 +858,8 @@ class MethodAttributesExample
           <para
             >A <see
              cref="T:System.Reflection.MethodBody" />
+
+            
 
             
 
@@ -827,6 +915,8 @@ class MethodAttributesExample
 
           
 
+          
+
           The method's handle. </param
         >
       </Docs>
@@ -872,8 +962,12 @@ class MethodAttributesExample
 
             
 
+            
+
              structure for a constructor or method of a generic type can represent different <see
              cref="T:System.Reflection.MethodBase" />
+
+            
 
             
 
@@ -886,8 +980,12 @@ class MethodAttributesExample
 
             
 
+            
+
              object for that method in a constructed class such as G&lt;int&gt; is different from the <see
              cref="T:System.Reflection.MethodBase" />
+
+            
 
             
 
@@ -906,6 +1004,8 @@ class MethodAttributesExample
 
             
 
+            
+
              object for the constructor or method represented by the specified handle, for the specified generic type.</para
           >
         </summary>
@@ -919,6 +1019,8 @@ class MethodAttributesExample
 
             
 
+            
+
              object representing the method or constructor specified by <paramref
              name="handle" />
 
@@ -926,8 +1028,12 @@ class MethodAttributesExample
 
             
 
+            
+
             , in the generic type specified by <paramref
              name="declaringType" />
+
+            
 
             
 
@@ -943,10 +1049,14 @@ class MethodAttributesExample
 
           
 
+          
+
           A handle to the internal metadata representation of a constructor or method.</param
         >
         <param name="declaringType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -982,6 +1092,8 @@ class MethodAttributesExample
           <para
             >When overridden in a derived class, returns the <see
              cref="T:System.Reflection.MethodImplAttributes" />
+
+            
 
             
 
@@ -1092,6 +1204,8 @@ class MethodAttributesExample
 
           
 
+          
+
            do not match the types of the parameters accepted by the constructor or method reflected by the current instance, under the constraints of  the default binder.</exception
         >
         <exception cref="T:System.Reflection.TargetException"
@@ -1102,8 +1216,12 @@ class MethodAttributesExample
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1121,11 +1239,15 @@ class MethodAttributesExample
 
           
 
+          
+
           .Length does not equal the number of parameters required by the contract of the member reflected by the current instance.</exception
         >
         <permission cref="T:System.Security.Permissions.ReflectionPermission"
           >Requires permission to invoke non-public members of loaded assemblies. See <see
            cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />
+
+          
 
           
 
@@ -1144,8 +1266,12 @@ class MethodAttributesExample
 
           
 
+          
+
            returns <see
            langword="true" />
+
+          
 
           
 
@@ -1160,8 +1286,12 @@ class MethodAttributesExample
 
           
 
+          
+
           An argument list for the invoked method or constructor. This is an array of objects with the same number, order, and type as the parameters of the method or constructor to be invoked. If there are no parameters, <paramref
            name="parameters" />
+
+          
 
           
 
@@ -1179,8 +1309,12 @@ class MethodAttributesExample
 
             
 
+            
+
              method overload, passing <see
              cref="F:System.Reflection.BindingFlags.Default" />
+
+            
 
             
 
@@ -1193,6 +1327,8 @@ class MethodAttributesExample
 
             
 
+            
+
              and null for <paramref
              name="binder" />
 
@@ -1200,8 +1336,12 @@ class MethodAttributesExample
 
             
 
+            
+
              and <paramref
              name="culture" />
+
+            
 
             
 
@@ -1217,11 +1357,15 @@ class MethodAttributesExample
 
             
 
+            
+
              method returns the exception.</para
           >
           <para
             >To invoke a static method using its <see
              cref="T:System.Reflection.MethodInfo" />
+
+            
 
             
 
@@ -1234,12 +1378,16 @@ class MethodAttributesExample
 
             
 
+            
+
             . </para
           >
           <block subset="none" type="note">
             <para
               >If this method overload is used to invoke an instance constructor, the object supplied for <paramref
                name="obj" />
+
+              
 
               
 
@@ -1257,8 +1405,12 @@ class MethodAttributesExample
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+              
 
               
 
@@ -1275,6 +1427,8 @@ class MethodAttributesExample
 
               
 
+              
+
               .) </para
             >
             <para>To use this functionality, your application should target the net_v35_long or later.</para>
@@ -1282,6 +1436,8 @@ class MethodAttributesExample
           <para
             >If a parameter of the current method is a value type, and the corresponding argument in <paramref
              name="parameters" />
+
+            
 
             
 
@@ -1306,12 +1462,16 @@ class MethodAttributesExample
 
               
 
+              
+
                array that represent parameters declared with the ref or out keyword may also be modified.</para
             >
           </block>
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1326,8 +1486,12 @@ class MethodAttributesExample
 
           
 
+          
+
           An argument list for the invoked method or constructor. This is an array of objects with the same number, order, and type as the parameters of the method or constructor to be invoked. If there are no parameters, <paramref
            name="parameters" />
+
+          
 
           
 
@@ -1376,6 +1540,8 @@ class MethodAttributesExample
 
           
 
+          
+
            do not match the types of the parameters accepted by the constructor or method reflected by the current instance, under the constraints of the default binder.</exception
         >
         <exception cref="T:System.Reflection.TargetException"
@@ -1386,8 +1552,12 @@ class MethodAttributesExample
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1405,11 +1575,15 @@ class MethodAttributesExample
 
           
 
+          
+
           .Length does not equal the number of parameters required by the contract of the constructor or method reflected by the current instance.</exception
         >
         <permission cref="T:System.Security.Permissions.ReflectionPermission"
           >Requires permission to invoke non-public members of loaded assemblies. See <see
            cref="F:System.Security.Permissions.ReflectionPermissionFlag.MemberAccess" />
+
+          
 
           
 
@@ -1428,8 +1602,12 @@ class MethodAttributesExample
 
           
 
+          
+
            returns <see
            langword="true" />
+
+          
 
           
 
@@ -1444,8 +1622,12 @@ class MethodAttributesExample
 
           
 
+          
+
           A bitmask that is a combination of 0 or more bit flags from <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -1458,8 +1640,12 @@ class MethodAttributesExample
 
           
 
+          
+
            is null, this parameter is assigned the value <see
            cref="F:System.Reflection.BindingFlags.Default" />
+
+          
 
           
 
@@ -1474,8 +1660,12 @@ class MethodAttributesExample
 
           
 
+          
+
           An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects via reflection. If <paramref
            name="binder" />
+
+          
 
           
 
@@ -1490,10 +1680,14 @@ class MethodAttributesExample
 
           
 
+          
+
           An argument list for the invoked method or constructor. This is an array of objects with the same number, order, and type as the parameters of the method or constructor to be invoked. If there are no parameters, this should be null.</param
         >
         <param name="culture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1511,8 +1705,12 @@ class MethodAttributesExample
 
             
 
+            
+
             , and passes along the specified parameters. If the method is static, the <paramref
              name="obj" />
+
+            
 
             
 
@@ -1525,6 +1723,8 @@ class MethodAttributesExample
 
             
 
+            
+
              should be an instance of a class that inherits or declares the method and must be the same type as this class. If the method has no parameters, the value of <paramref
              name="parameters" />
 
@@ -1532,8 +1732,12 @@ class MethodAttributesExample
 
             
 
+            
+
              should be null. Otherwise, the number, type, and order of elements in <paramref
              name="parameters" />
+
+            
 
             
 
@@ -1551,6 +1755,8 @@ class MethodAttributesExample
 
               
 
+              
+
                is reinitialized; that is, all instance initializers are executed. The return value is null. If a class constructor is invoked, the class is reinitialized; that is, all class initializers are executed. The return value is null.</para
             >
           </block>
@@ -1563,11 +1769,15 @@ class MethodAttributesExample
 
             
 
+            
+
              should be an array of Objects with length 2 such that parameters[0] = new Object("SomeString1") and parameters[1] = new Object("SomeString2").</para
           >
           <para
             >If a parameter of the current method is a value type, and the corresponding argument in <paramref
              name="parameters" />
+
+            
 
             
 
@@ -1588,8 +1798,12 @@ class MethodAttributesExample
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.RestrictedMemberAccess" />
+
+              
 
               
 
@@ -1601,6 +1815,8 @@ class MethodAttributesExample
                   >Security Considerations for Reflection</a
                 >
               </format>
+
+              
 
               
 
@@ -1627,12 +1843,16 @@ class MethodAttributesExample
 
               
 
+              
+
                array that represent parameters declared with the ref or out keyword may also be modified.</para
             >
           </block>
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1647,8 +1867,12 @@ class MethodAttributesExample
 
           
 
+          
+
           A bitmask that is a combination of 0 or more bit flags from <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -1661,8 +1885,12 @@ class MethodAttributesExample
 
           
 
+          
+
            is null, this parameter is assigned the value <see
            cref="F:System.Reflection.BindingFlags.Default" />
+
+          
 
           
 
@@ -1677,8 +1905,12 @@ class MethodAttributesExample
 
           
 
+          
+
           An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects via reflection. If <paramref
            name="binder" />
+
+          
 
           
 
@@ -1693,10 +1925,14 @@ class MethodAttributesExample
 
           
 
+          
+
           An argument list for the invoked method or constructor. This is an array of objects with the same number, order, and type as the parameters of the method or constructor to be invoked. If there are no parameters, this should be null.</param
         >
         <param name="culture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1732,8 +1968,12 @@ class MethodAttributesExample
 
             
 
+            
+
             , first get the type. From the type, get the method. From the method, get the MethodBase. If the MethodBase or constructor is other than public, it is protected and cannot be readily accessed. To access a non-public method, set the <see
              cref="T:System.Reflection.BindingFlags" />
+
+            
 
             
 
@@ -1772,6 +2012,8 @@ class MethodAttributesExample
 
             
 
+            
+
              property might be true for a method, but if it is a method of a private nested type then the method is not visible outside the containing type.</para
           >
           <para
@@ -1782,8 +2024,12 @@ class MethodAttributesExample
 
             
 
+            
+
              if the only visibility modifier is internal (Friend in Visual Basic). This property is false for methods that are protected internal in C# (Protected Friend in Visual Basic, protected public in C++); use the <see
              cref="P:System.Reflection.MethodBase.IsFamilyOrAssembly" />
+
+            
 
             
 
@@ -1797,6 +2043,8 @@ class MethodAttributesExample
           <para
             >Gets a value indicating whether the potential visibility of this method or constructor is described by <see
              cref="F:System.Reflection.MethodAttributes.Assembly" />
+
+            
 
             
 
@@ -1837,8 +2085,12 @@ class MethodAttributesExample
 
               
 
+              
+
                property returns false for a <see
                cref="T:System.Reflection.Emit.ConstructorBuilder" />
+
+              
 
               
 
@@ -1851,6 +2103,8 @@ class MethodAttributesExample
 
               
 
+              
+
                flag was included in the <paramref
                name="attributes" />
 
@@ -1858,8 +2112,12 @@ class MethodAttributesExample
 
               
 
+              
+
                parameter when the constructor was defined. Omitting the <see
                cref="F:System.Reflection.MethodAttributes.RTSpecialName" />
+
+              
 
               
 
@@ -1899,8 +2157,12 @@ class MethodAttributesExample
 
             
 
+            
+
              if the only visibility modifier is protected. This property is false for methods that are protected internal in C# (Protected Friend in Visual Basic, protected public in C++); use the <see
              cref="P:System.Reflection.MethodBase.IsFamilyOrAssembly" />
+
+            
 
             
 
@@ -1914,6 +2176,8 @@ class MethodAttributesExample
           <para
             >Gets a value indicating whether the visibility of this method or constructor is described by <see
              cref="F:System.Reflection.MethodAttributes.Family" />
+
+            
 
             
 
@@ -1948,6 +2212,8 @@ class MethodAttributesExample
 
             
 
+            
+
              if the visibility modifier is protected private in C++. Methods with this visibility cannot be defined in Visual Basic or C#.</para
           >
         </remarks>
@@ -1956,6 +2222,8 @@ class MethodAttributesExample
           <para
             >Gets a value indicating whether the visibility of this method or constructor is described by <see
              cref="F:System.Reflection.MethodAttributes.FamANDAssem" />
+
+            
 
             
 
@@ -1990,11 +2258,15 @@ class MethodAttributesExample
 
             
 
+            
+
              visibility, it can be called from any member in a derived class or any member in the same assembly, but not from any other type.</para
           >
           <para
             >The actual visibility of a method is limited by the visibility of its type. The <see
              cref="P:System.Reflection.MethodBase.IsFamilyOrAssembly" />
+
+            
 
             
 
@@ -2010,6 +2282,8 @@ class MethodAttributesExample
 
             
 
+            
+
              if the visibility modifier is protected internal in C# (Protected Friend in Visual Basic, protected public in C++). </para
           >
         </remarks>
@@ -2018,6 +2292,8 @@ class MethodAttributesExample
           <para
             >Gets a value indicating whether the potential visibility of this method or constructor is described by <see
              cref="F:System.Reflection.MethodAttributes.FamORAssem" />
+
+            
 
             
 
@@ -2047,6 +2323,8 @@ class MethodAttributesExample
           <para
             >To determine if a method is overridable, it is not sufficient to check that <see
              cref="P:System.Reflection.MethodBase.IsVirtual" />
+
+            
 
             
 
@@ -2083,8 +2361,12 @@ class MethodAttributesExample
 
           
 
+          
+
            if the current object is a generic method; otherwise <see
            langword="false" />
+
+          
 
           
 
@@ -2103,8 +2385,12 @@ class MethodAttributesExample
 
             
 
+            
+
              property to determine whether the current <see
              cref="T:System.Reflection.MethodBase" />
+
+            
 
             
 
@@ -2117,8 +2403,12 @@ class MethodAttributesExample
 
             
 
+            
+
              property to determine whether the current <see
              cref="T:System.Reflection.MethodBase" />
+
+            
 
             
 
@@ -2135,6 +2425,8 @@ class MethodAttributesExample
 
               
 
+              
+
               .</para
             >
           </block>
@@ -2146,8 +2438,12 @@ class MethodAttributesExample
 
             
 
+            
+
              property. For a list of the invariant conditions for other terms used in generic reflection, see the <see
              cref="P:System.Type.IsGenericType" />
+
+            
 
             
 
@@ -2184,6 +2480,8 @@ class MethodAttributesExample
 
           
 
+          
+
            if the current <see
            cref="T:System.Reflection.MethodBase" />
 
@@ -2191,8 +2489,12 @@ class MethodAttributesExample
 
           
 
+          
+
             object represents the definition of a generic method; otherwise <see
            langword="false" />
+
+          
 
           
 
@@ -2211,6 +2513,8 @@ class MethodAttributesExample
 
             
 
+            
+
              represents a generic method definition, then:</para
           >
           <list type="bullet">
@@ -2218,6 +2522,8 @@ class MethodAttributesExample
               <para
                 >The <see
                  cref="P:System.Reflection.MethodBase.IsGenericMethodDefinition" />
+
+                
 
                 
 
@@ -2235,8 +2541,12 @@ class MethodAttributesExample
 
                 
 
+                
+
                  object in the array returned by the <see
                  cref="M:System.Reflection.MethodBase.GetGenericArguments" />
+
+                
 
                 
 
@@ -2254,6 +2564,8 @@ class MethodAttributesExample
 
                     
 
+                    
+
                      property is true.</para
                   >
                 </item>
@@ -2261,6 +2573,8 @@ class MethodAttributesExample
                   <para
                     >The <see
                      cref="P:System.Type.DeclaringMethod" />
+
+                    
 
                     
 
@@ -2278,8 +2592,12 @@ class MethodAttributesExample
 
                     
 
+                    
+
                      property is the same as the position of the <see
                      cref="T:System.Type" />
+
+                    
 
                     
 
@@ -2300,6 +2618,8 @@ class MethodAttributesExample
 
               
 
+              
+
               .</para
             >
           </block>
@@ -2311,8 +2631,12 @@ class MethodAttributesExample
 
             
 
+            
+
              property. For a list of the invariant conditions for other terms used in generic reflection, see the <see
              cref="P:System.Type.IsGenericType" />
+
+            
 
             
 
@@ -2351,12 +2675,16 @@ class MethodAttributesExample
 
             
 
+            
+
              returns false on a member declared with the Visual Basic Shadows modifier, and true on a member declared with the C# new modifier. </para
           >
           <block subset="none" type="note">
             <para
               >This property does not determine whether a method has the <see
                cref="F:System.Reflection.MethodAttributes.NewSlot" />
+
+              
 
               
 
@@ -2369,8 +2697,12 @@ class MethodAttributesExample
 
               
 
+              
+
                attribute, but only methods declared with new (that is, only C# methods) will have the <see
                cref="P:System.Reflection.MethodBase.IsHideBySig" />
+
+              
 
               
 
@@ -2383,6 +2715,8 @@ class MethodAttributesExample
 
               
 
+              
+
                attribute, use code similar to the following: if ((myMethodInfo.Attributes &amp; MethodAttributes.VtableLayoutMask) == MethodAttributes.NewSlot) in C# or If (myMethodInfo.Attributes And MethodAttributes.VtableLayoutMask) = MethodAttributes.NewSlot in Visual Basic. Note, however, that although all methods declared with new or Shadows have the <see
                cref="F:System.Reflection.MethodAttributes.NewSlot" />
 
@@ -2390,8 +2724,12 @@ class MethodAttributesExample
 
               
 
+              
+
                attribute, not all methods that have the <see
                cref="F:System.Reflection.MethodAttributes.NewSlot" />
+
+              
 
               
 
@@ -2455,8 +2793,12 @@ class MethodAttributesExample
 
             
 
+            
+
             , first get the type. From the type, get the method. From the method, get the MethodBase. If the MethodBase or constructor is other than public, it is protected and cannot be readily accessed. To access a non-public method, set the <see
              cref="T:System.Reflection.BindingFlags" />
+
+            
 
             
 
@@ -2493,6 +2835,8 @@ class MethodAttributesExample
 
             
 
+            
+
             , <see
              cref="P:System.Reflection.MethodBase.IsSecuritySafeCritical" />
 
@@ -2500,8 +2844,12 @@ class MethodAttributesExample
 
             
 
+            
+
             , and <see
              cref="P:System.Reflection.MethodBase.IsSecurityTransparent" />
+
+            
 
             
 
@@ -2579,8 +2927,12 @@ class MethodAttributesExample
 
               
 
+              
+
                and <see
                cref="P:System.AppDomain.IsFullyTrusted" />
+
+              
 
               
 
@@ -2601,12 +2953,16 @@ class MethodAttributesExample
 
             
 
+            
+
             . For information about transparency, see <format
              type="text/html">
               <a href="5e87881c-9c13-4b52-8ad1-e34bb46e8aaa"
                 >Security Changes in the .NET Framework Version 4.0</a
               >
             </format>
+
+            
 
             
 
@@ -2643,6 +2999,8 @@ class MethodAttributesExample
 
             
 
+            
+
             , <see
              cref="P:System.Reflection.MethodBase.IsSecuritySafeCritical" />
 
@@ -2650,8 +3008,12 @@ class MethodAttributesExample
 
             
 
+            
+
             , and <see
              cref="P:System.Reflection.MethodBase.IsSecurityTransparent" />
+
+            
 
             
 
@@ -2729,8 +3091,12 @@ class MethodAttributesExample
 
               
 
+              
+
                and <see
                cref="P:System.AppDomain.IsFullyTrusted" />
+
+              
 
               
 
@@ -2751,12 +3117,16 @@ class MethodAttributesExample
 
             
 
+            
+
             . For information about transparency, see <format
              type="text/html">
               <a href="5e87881c-9c13-4b52-8ad1-e34bb46e8aaa"
                 >Security Changes in the .NET Framework Version 4.0</a
               >
             </format>
+
+            
 
             
 
@@ -2793,8 +3163,12 @@ class MethodAttributesExample
 
             
 
+            
+
              and <see
              cref="P:System.Reflection.MethodBase.IsSecuritySafeCritical" />
+
+            
 
             
 
@@ -2810,6 +3184,8 @@ class MethodAttributesExample
 
             
 
+            
+
             , <see
              cref="P:System.Reflection.MethodBase.IsSecuritySafeCritical" />
 
@@ -2817,8 +3193,12 @@ class MethodAttributesExample
 
             
 
+            
+
             , and <see
              cref="P:System.Reflection.MethodBase.IsSecurityTransparent" />
+
+            
 
             
 
@@ -2835,8 +3215,12 @@ class MethodAttributesExample
 
               
 
+              
+
                and <see
                cref="P:System.AppDomain.IsFullyTrusted" />
+
+              
 
               
 
@@ -2857,12 +3241,16 @@ class MethodAttributesExample
 
             
 
+            
+
             . For information about transparency, see <format
              type="text/html">
               <a href="5e87881c-9c13-4b52-8ad1-e34bb46e8aaa"
                 >Security Changes in the .NET Framework Version 4.0</a
               >
             </format>
+
+            
 
             
 
@@ -2896,6 +3284,8 @@ class MethodAttributesExample
           <para
             >The <see
              cref="F:System.Reflection.MethodAttributes.SpecialName" />
+
+            
 
             
 
@@ -2954,6 +3344,8 @@ class MethodAttributesExample
           <para
             >To determine if a method is overridable, it is not sufficient to check that IsVirtual is true. For a method to be overridable, IsVirtual must be true and <see
              cref="P:System.Reflection.MethodBase.IsFinal" />
+
+            
 
             
 
@@ -3029,6 +3421,8 @@ class MethodAttributesExample
 
             
 
+            
+
              method for more information.</para
           >
         </remarks>
@@ -3037,6 +3431,8 @@ class MethodAttributesExample
           <para
             >Gets the <see
              cref="T:System.Reflection.MethodImplAttributes" />
+
+            
 
             
 
@@ -3079,6 +3475,8 @@ class MethodAttributesExample
 
             
 
+            
+
              objects are equal.</para
           >
         </summary>
@@ -3092,8 +3490,12 @@ class MethodAttributesExample
 
             
 
+            
+
              is equal to <paramref
              name="right" />
+
+            
 
             
 
@@ -3109,10 +3511,14 @@ class MethodAttributesExample
 
           
 
+          
+
           The first object to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3154,6 +3560,8 @@ class MethodAttributesExample
 
             
 
+            
+
              objects are not equal.</para
           >
         </summary>
@@ -3167,8 +3575,12 @@ class MethodAttributesExample
 
             
 
+            
+
              is not equal to <paramref
              name="right" />
+
+            
 
             
 
@@ -3184,10 +3596,14 @@ class MethodAttributesExample
 
           
 
+          
+
           The first object to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3257,8 +3673,12 @@ class MethodAttributesExample
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Runtime.InteropServices._MethodBase" />
+
+            
 
             
 
@@ -3277,6 +3697,8 @@ class MethodAttributesExample
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3285,6 +3707,8 @@ class MethodAttributesExample
           <para
             >For a description of this member, see <see
              cref="M:System.Runtime.InteropServices._MethodBase.GetType" />
+
+            
 
             
 
@@ -3329,6 +3753,8 @@ class MethodAttributesExample
 
             
 
+            
+
             , see the MSDN Library.</para
           >
         </remarks>
@@ -3343,6 +3769,8 @@ class MethodAttributesExample
 
           
 
+          
+
           The type information to return.</param
         >
         <param name="lcid">
@@ -3352,10 +3780,14 @@ class MethodAttributesExample
 
           
 
+          
+
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

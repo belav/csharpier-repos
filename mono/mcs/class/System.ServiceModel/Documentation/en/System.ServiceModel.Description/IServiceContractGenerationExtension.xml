@@ -24,8 +24,12 @@
 
         
 
+        
+
          interface on a contract behavior (a <see
          cref="T:System.ServiceModel.Description.IContractBehavior" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          inserts a custom contract behavior into the <see
          cref="P:System.ServiceModel.Description.ContractDescription.Behaviors" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.ServiceModel.Description.IWsdlImportExtension.ImportEndpoint(System.ServiceModel.Description.WsdlImporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" />
+
+        
 
         
 
@@ -104,8 +116,12 @@
 
             
 
+            
+
              to modify the contract, operations, or the <see
              cref="T:System.ServiceModel.Description.ServiceContractGenerator" />
+
+            
 
             
 
@@ -120,6 +136,8 @@
         </summary>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

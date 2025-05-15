@@ -43,11 +43,15 @@
 
         
 
+        
+
          interface is intended for implementation by query providers.</para
       >
       <para
         >This interface represents the result of a sorting query that calls the method(s) <see
          cref="Overload:System.Linq.Queryable.OrderBy" />
+
+        
 
         
 
@@ -60,8 +64,12 @@
 
         
 
+        
+
         , <see
          cref="Overload:System.Linq.Queryable.ThenBy" />
+
+        
 
         
 
@@ -74,8 +82,12 @@
 
         
 
+        
+
         . When <see
          cref="M:System.Linq.IQueryProvider.CreateQuery``1(System.Linq.Expressions.Expression)" />
+
+        
 
         
 
@@ -88,8 +100,12 @@
 
         
 
+        
+
          object must be of a type that implements <see
          cref="T:System.Linq.IOrderedQueryable`1" />
+
+        
 
         
 
@@ -102,6 +118,8 @@
          cref="http://go.microsoft.com/fwlink/?LinkID=112370"
           >LINQ: Building an IQueryable Provider</see
         >
+
+        
 
         
 

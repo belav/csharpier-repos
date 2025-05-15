@@ -42,6 +42,8 @@
 
         
 
+        
+
          control replaces and adds functionality to the <see
          cref="T:System.Windows.Forms.Label" />
 
@@ -49,8 +51,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.LinkLabel" />
+
+        
 
         
 
@@ -63,8 +69,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.LinkLabel" />
+
+        
 
         
 
@@ -80,8 +90,12 @@
 
         
 
+        
+
          control is similar to a <see
          cref="T:System.Windows.Forms.Label" />
+
+        
 
         
 
@@ -97,8 +111,12 @@
 
         
 
+        
+
          control is an instance of the <see
          cref="T:System.Windows.Forms.LinkLabel.Link" />
+
+        
 
         
 
@@ -111,8 +129,12 @@
 
         
 
+        
+
          class defines display information, state, and location of the hyperlink. In addition, the <see
          cref="P:System.Windows.Forms.LinkLabel.Link.LinkData" />
+
+        
 
         
 
@@ -125,8 +147,12 @@
 
         
 
+        
+
          class enables you to associate information, such as a URL to display, with the hyperlink. When a user clicks a hyperlink within the control, the <see
          cref="E:System.Windows.Forms.LinkLabel.LinkClicked" />
+
+        
 
         
 
@@ -139,8 +165,12 @@
 
         
 
+        
+
          object representing the hyperlink that was clicked is passed as part of the <see
          cref="T:System.Windows.Forms.LinkLabelLinkClickedEventArgs" />
+
+        
 
         
 
@@ -153,6 +183,8 @@
 
         
 
+        
+
          object associated with the hyperlink that was clicked by the user. All hyperlinks contained within the <see
          cref="T:System.Windows.Forms.LinkLabel" />
 
@@ -160,8 +192,12 @@
 
         
 
+        
+
          control are stored in the <see
          cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
+
+        
 
         
 
@@ -177,8 +213,12 @@
 
         
 
+        
+
          control. The quickest way is to specify a <see
          cref="T:System.Windows.Forms.LinkArea" />
+
+        
 
         
 
@@ -191,8 +231,12 @@
 
         
 
+        
+
          property. This enables you to specify a single hyperlink within the text of the control. To add multiple hyperlinks, you can use the <see
          cref="M:System.Windows.Forms.LinkLabel.LinkCollection.Add(System.Int32,System.Int32)" />
+
+        
 
         
 
@@ -205,8 +249,12 @@
 
         
 
+        
+
          class by accessing the collection through the <see
          cref="P:System.Windows.Forms.LinkLabel.Links" />
+
+        
 
         
 
@@ -222,8 +270,12 @@
 
         
 
+        
+
          control is created, a default hyperlink that contains all the text within the <see
          cref="T:System.Windows.Forms.LinkLabel" />
+
+        
 
         
 
@@ -236,8 +288,12 @@
 
         
 
+        
+
         . You can override this default link by specifying a new link area with the <see
          cref="P:System.Windows.Forms.LinkLabel.LinkArea" />
+
+        
 
         
 
@@ -250,8 +306,12 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
+
+        
 
         
 
@@ -264,8 +324,12 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
+
+        
 
         
 
@@ -281,8 +345,12 @@
 
         
 
+        
+
          property is true by default, as long as there is at least one link of greater than zero length in the <see
          cref="P:System.Windows.Forms.LinkLabel.Links" />
+
+        
 
         
 
@@ -295,8 +363,12 @@
 
         
 
+        
+
          control has a single <see
          cref="P:System.Windows.Forms.Control.TabIndex" />
+
+        
 
         
 
@@ -309,8 +381,12 @@
 
         
 
+        
+
          control, set the <see
          cref="P:System.Windows.Forms.Label.TabStop" />
+
+        
 
         
 
@@ -323,8 +399,12 @@
 
         
 
+        
+
          collection will automatically set the <see
          cref="P:System.Windows.Forms.Label.TabStop" />
+
+        
 
         
 
@@ -340,8 +420,12 @@
 
         
 
+        
+
          provides a number of properties that enable you to define the display appearance of hyperlinks in the control. The <see
          cref="P:System.Windows.Forms.LinkLabel.ActiveLinkColor" />
+
+        
 
         
 
@@ -354,8 +438,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Windows.Forms.LinkLabel.LinkColor" />
+
+        
 
         
 
@@ -368,8 +456,12 @@
 
         
 
+        
+
          properties define the colors used when displaying a hyperlink in various states. The <see
          cref="P:System.Windows.Forms.LinkLabel.LinkBehavior" />
+
+        
 
         
 
@@ -395,6 +487,8 @@
           <para
             >Initializes a new default instance of the <see
              cref="T:System.Windows.Forms.LinkLabel" />
+
+            
 
             
 
@@ -430,11 +524,15 @@
 
             
 
+            
+
              control. You can use this property to specify the color that the link is displayed in when the link is in the process of being clicked.</para
           >
           <para
             >There are a number of colors associated with a link. The <see
              cref="P:System.Windows.Forms.LinkLabel.LinkColor" />
+
+            
 
             
 
@@ -447,6 +545,8 @@
 
             
 
+            
+
              control. The <see
              cref="P:System.Windows.Forms.LinkLabel.VisitedLinkColor" />
 
@@ -454,8 +554,12 @@
 
             
 
+            
+
              property enables you to specify the color of a link after it has been visited by the user. When a link is disabled, the <see
              cref="P:System.Windows.Forms.LinkLabel.DisabledLinkColor" />
+
+            
 
             
 
@@ -498,8 +602,12 @@
 
             
 
+            
+
              method, it will be called when the <see
              cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+
+            
 
             
 
@@ -515,6 +623,8 @@
 
             
 
+            
+
              property, you must add a reference to the Accessibility assembly installed with the .NET Framework. </para
           >
           <para
@@ -525,8 +635,12 @@
 
             
 
+            
+
              in a derived class, you should not call the base class's <see
              cref="M:System.Windows.Forms.LinkLabel.CreateAccessibilityInstance" />
+
+            
 
             
 
@@ -545,6 +659,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -553,6 +669,8 @@
           <para
             >A new <see
              cref="T:System.Windows.Forms.AccessibleObject" />
+
+            
 
             
 
@@ -607,8 +725,12 @@
 
             
 
+            
+
             . Disabled links do not cause the <see
              cref="E:System.Windows.Forms.LinkLabel.LinkClicked" />
+
+            
 
             
 
@@ -624,8 +746,12 @@
 
             
 
+            
+
              are initially displayed with the color defined in the <see
              cref="P:System.Windows.Forms.LinkLabel.LinkColor" />
+
+            
 
             
 
@@ -638,8 +764,12 @@
 
             
 
+            
+
              property enables you to specify the color of the link when it is in the process of being clicked. The <see
              cref="P:System.Windows.Forms.LinkLabel.VisitedLinkColor" />
+
+            
 
             
 
@@ -698,6 +828,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -735,8 +867,12 @@
 
             
 
+            
+
              property provides a quick way to specify a single hyperlink to display in the text of the <see
              cref="T:System.Windows.Forms.LinkLabel" />
+
+            
 
             
 
@@ -749,8 +885,12 @@
 
             
 
+            
+
              object provides properties that specify the starting position of the link within the text of the control and the length of text for the hyperlink. When a hyperlink is specified using the <see
              cref="P:System.Windows.Forms.LinkLabel.LinkArea" />
+
+            
 
             
 
@@ -763,8 +903,12 @@
 
             
 
+            
+
              of the control. The <see
              cref="P:System.Windows.Forms.LinkLabel.LinkArea" />
+
+            
 
             
 
@@ -777,8 +921,12 @@
 
             
 
+            
+
              object assigned to it to a <see
              cref="T:System.Windows.Forms.LinkLabel.Link" />
+
+            
 
             
 
@@ -794,8 +942,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Windows.Forms.LinkLabel.Links" />
+
+            
 
             
 
@@ -808,8 +960,12 @@
 
             
 
+            
+
             , which stores the links specified for the control. This method of adding links to the <see
              cref="T:System.Windows.Forms.LinkLabel" />
+
+            
 
             
 
@@ -822,8 +978,12 @@
 
             
 
+            
+
              property that is associated with the link being created. The value of the <see
              cref="P:System.Windows.Forms.LinkLabel.Link.LinkData" />
+
+            
 
             
 
@@ -839,8 +999,12 @@
 
             
 
+            
+
              control is created, a default hyperlink that contains all the text within the <see
              cref="T:System.Windows.Forms.LinkLabel" />
+
+            
 
             
 
@@ -853,8 +1017,12 @@
 
             
 
+            
+
             . You can override this default link by specifying a new link area with the <see
              cref="P:System.Windows.Forms.LinkLabel.LinkArea" />
+
+            
 
             
 
@@ -867,8 +1035,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
+
+            
 
             
 
@@ -881,8 +1053,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
+
+            
 
             
 
@@ -899,8 +1075,12 @@
 
               
 
+              
+
                property always returns the first item in the <see
                cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
+
+              
 
               
 
@@ -918,8 +1098,12 @@
 
               
 
+              
+
                property on <see
                cref="T:System.Windows.Forms.LinkArea" />
+
+              
 
               
 
@@ -932,6 +1116,8 @@
 
               
 
+              
+
               , and the <see
                cref="P:System.Windows.Forms.LinkLabel.Text" />
 
@@ -939,8 +1125,12 @@
 
               
 
+              
+
                property contains double-byte characters. If you call <see
                cref="P:System.Windows.Forms.LinkLabel.UseCompatibleTextRendering" />
+
+              
 
               
 
@@ -986,6 +1176,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1019,8 +1211,12 @@
 
             
 
+            
+
              event is handled to perform tasks when the user clicks on a link in the control. The event handler for the <see
              cref="E:System.Windows.Forms.LinkLabel.LinkClicked" />
+
+            
 
             
 
@@ -1033,8 +1229,12 @@
 
             
 
+            
+
              class that contains a <see
              cref="T:System.Windows.Forms.LinkLabel.Link" />
+
+            
 
             
 
@@ -1047,8 +1247,12 @@
 
             
 
+            
+
              property of <see
              cref="T:System.Windows.Forms.LinkLabel.Link" />
+
+            
 
             
 
@@ -1061,8 +1265,12 @@
 
             
 
+            
+
              control has a <see
              cref="T:System.Windows.Forms.LinkLabel.Link" />
+
+            
 
             
 
@@ -1075,8 +1283,12 @@
 
             
 
+            
+
              property set to the string www.microsoft.com, you can use this information in an event handler for the <see
              cref="E:System.Windows.Forms.LinkLabel.LinkClicked" />
+
+            
 
             
 
@@ -1089,6 +1301,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1125,11 +1339,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >There are a number of colors associated with a link. The <see
              cref="P:System.Windows.Forms.LinkLabel.ActiveLinkColor" />
+
+            
 
             
 
@@ -1142,8 +1360,12 @@
 
             
 
+            
+
              property enables you to specify the color of a link after it has been visited by the user. When a link is disabled, the <see
              cref="P:System.Windows.Forms.LinkLabel.DisabledLinkColor" />
+
+            
 
             
 
@@ -1194,8 +1416,12 @@
 
             
 
+            
+
              control can display any number of links within the text of the control. This property enables you to access the <see
              cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
+
+            
 
             
 
@@ -1208,6 +1434,8 @@
 
             
 
+            
+
              that represents the collection of links displayed in the control. You can then use the members of the <see
              cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
 
@@ -1215,8 +1443,12 @@
 
             
 
+            
+
              class to add, remove, and find links in the collection. For more information on the types of tasks you can perform with the link collection, see <see
              cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
+
+            
 
             
 
@@ -1232,8 +1464,12 @@
 
             
 
+            
+
              control is created, a default hyperlink that contains all the text within the <see
              cref="T:System.Windows.Forms.LinkLabel" />
+
+            
 
             
 
@@ -1246,8 +1482,12 @@
 
             
 
+            
+
             . You can override this default link by specifying a new link area with the <see
              cref="P:System.Windows.Forms.LinkLabel.LinkArea" />
+
+            
 
             
 
@@ -1260,8 +1500,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
+
+            
 
             
 
@@ -1274,8 +1518,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Windows.Forms.LinkLabel.LinkCollection" />
+
+            
 
             
 
@@ -1291,8 +1539,12 @@
 
             
 
+            
+
             , you can use the <see
              cref="P:System.Windows.Forms.LinkLabel.LinkArea" />
+
+            
 
             
 
@@ -1306,6 +1558,8 @@
           <para
             >Gets the collection of links contained within the <see
              cref="T:System.Windows.Forms.LinkLabel" />
+
+            
 
             
 
@@ -1343,8 +1597,12 @@
 
             
 
+            
+
              control does not automatically denote that a link is a visited link. To display the link as a visited link, you can set the value of this property to true in an event handler for the <see
              cref="E:System.Windows.Forms.LinkLabel.LinkClicked" />
+
+            
 
             
 
@@ -1357,8 +1615,12 @@
 
             
 
+            
+
             . A visited link is displayed using the color specified in the <see
              cref="P:System.Windows.Forms.LinkLabel.VisitedLinkColor" />
+
+            
 
             
 
@@ -1371,8 +1633,12 @@
 
             
 
+            
+
              control. Once the form containing the <see
              cref="T:System.Windows.Forms.LinkLabel" />
+
+            
 
             
 
@@ -1389,8 +1655,12 @@
 
               
 
+              
+
                control. If you have more than one link specified in the control, use the <see
                cref="P:System.Windows.Forms.LinkLabel.Link.Visited" />
+
+              
 
               
 
@@ -1403,6 +1673,8 @@
 
               
 
+              
+
                class. You can access all the links defined in the <see
                cref="T:System.Windows.Forms.LinkLabel" />
 
@@ -1410,8 +1682,12 @@
 
               
 
+              
+
                by using the <see
                cref="P:System.Windows.Forms.LinkLabel.Links" />
+
+              
 
               
 
@@ -1459,11 +1735,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.LinkLabel.OnAutoSizeChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1482,6 +1762,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1492,8 +1774,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1528,12 +1814,16 @@
 
             
 
+            
+
             .</para
           >
           <para />
           <para
             >The <see
              cref="M:System.Windows.Forms.LinkLabel.OnEnabledChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1553,6 +1843,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1563,8 +1855,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1599,6 +1895,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1609,8 +1907,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1646,6 +1948,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1654,6 +1958,8 @@
           <para
             >Raises the <see
              cref="E:System.Windows.Forms.Control.GotFocus" />
+
+            
 
             
 
@@ -1669,8 +1975,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1709,6 +2019,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1717,6 +2029,8 @@
           <para
             >Raises the <see
              cref="M:System.Windows.Forms.Control.OnKeyDown(System.Windows.Forms.KeyEventArgs)" />
+
+            
 
             
 
@@ -1732,8 +2046,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyEventArgs" />
+
+          
 
           
 
@@ -1772,11 +2090,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.LinkLabel.OnLinkClicked(System.Windows.Forms.LinkLabelLinkClickedEventArgs)" />
+
+            
 
             
 
@@ -1795,6 +2117,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1805,8 +2129,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.LinkLabelLinkClickedEventArgs" />
+
+          
 
           
 
@@ -1842,6 +2170,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1850,6 +2180,8 @@
           <para
             >Raises the <see
              cref="E:System.Windows.Forms.Control.LostFocus" />
+
+            
 
             
 
@@ -1865,8 +2197,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1905,6 +2241,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1913,6 +2251,8 @@
           <para
             >Raises the <see
              cref="M:System.Windows.Forms.Control.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
+
+            
 
             
 
@@ -1928,8 +2268,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -1965,6 +2309,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1973,6 +2319,8 @@
           <para
             >Raises the <see
              cref="M:System.Windows.Forms.Control.OnMouseLeave(System.EventArgs)" />
+
+            
 
             
 
@@ -1988,8 +2336,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2028,6 +2380,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2036,6 +2390,8 @@
           <para
             >Raises the <see
              cref="M:System.Windows.Forms.Control.OnMouseMove(System.Windows.Forms.MouseEventArgs)" />
+
+            
 
             
 
@@ -2051,8 +2407,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -2091,6 +2451,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2099,6 +2461,8 @@
           <para
             >Raises the <see
              cref="M:System.Windows.Forms.Control.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
+
+            
 
             
 
@@ -2114,8 +2478,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -2157,11 +2525,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.LinkLabel.OnPaddingChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -2180,6 +2552,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2190,8 +2564,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2226,6 +2604,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2234,6 +2614,8 @@
           <para
             >Raises the <see
              cref="M:System.Windows.Forms.Control.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+
+            
 
             
 
@@ -2249,8 +2631,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.PaintEventArgs" />
+
+          
 
           
 
@@ -2289,8 +2675,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.PaintEventArgs" />
+
+          
 
           
 
@@ -2347,6 +2737,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2357,8 +2749,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2389,6 +2785,8 @@
           <para
             >Gets or sets the mouse pointer to use when the mouse pointer is within the bounds of the <see
              cref="T:System.Windows.Forms.LinkLabel" />
+
+            
 
             
 
@@ -2433,6 +2831,8 @@
 
             
 
+            
+
              and its contents.</para
           >
         </summary>
@@ -2462,8 +2862,12 @@
 
             
 
+            
+
              control. You can use this method in an event handler for the <see
              cref="E:System.Windows.Forms.Control.MouseEnter" />
+
+            
 
             
 
@@ -2476,8 +2880,12 @@
 
             
 
+            
+
              text or a <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -2500,6 +2908,8 @@
 
             
 
+            
+
              representing the link located at the specified coordinates. If the point does not contain a link, null is returned.</para
           >
         </returns>
@@ -2510,10 +2920,14 @@
 
           
 
+          
+
           The horizontal coordinate of the point to search for a link. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2554,6 +2968,8 @@
         </returns>
         <param name="keyData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2623,10 +3039,14 @@
 
           
 
+          
+
           New left of the control. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2641,6 +3061,8 @@
 
           
 
+          
+
           New width of the control. </param
         >
         <param name="height">
@@ -2650,10 +3072,14 @@
 
           
 
+          
+
           New height of the control. </param
         >
         <param name="specified">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2692,8 +3118,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Windows.Forms.IButtonControl" />
+
+            
 
             
 
@@ -2707,6 +3137,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Windows.Forms.IButtonControl.DialogResult" />
+
+            
 
             
 
@@ -2741,8 +3173,12 @@
 
             
 
+            
+
              control appears the same regardless of whether it is the default button, so calling this method will not change the appearance or behavior of the <see
              cref="T:System.Windows.Forms.LinkLabel" />
+
+            
 
             
 
@@ -2761,11 +3197,15 @@
 
             
 
+            
+
              control that it is the default button.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2797,6 +3237,8 @@
 
             
 
+            
+
              to be clicked.</para
           >
         </remarks>
@@ -2810,8 +3252,12 @@
 
             
 
+            
+
              event for the <see
              cref="T:System.Windows.Forms.LinkLabel" />
+
+            
 
             
 
@@ -2852,6 +3298,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -2860,6 +3308,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.Label.TabStop" />
+
+            
 
             
 
@@ -2894,6 +3344,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2922,8 +3374,12 @@
 
             
 
+            
+
              property is set to false, the <see
              cref="T:System.Windows.Forms.LinkArea" />
+
+            
 
             
 
@@ -2939,8 +3395,12 @@
 
             
 
+            
+
              property is set to true, the <see
              cref="T:System.Windows.Forms.LinkArea" />
+
+            
 
             
 
@@ -2956,8 +3416,12 @@
 
             
 
+            
+
              class and net_v10_short and net_v11_short applications that perform custom text rendering using the <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -2973,8 +3437,12 @@
 
             
 
+            
+
              class was introduced in the dnprdnlong to improve performance, make text look better, and improve support for international fonts. In earlier versions of the dnprdnshort, the ndptecgdiplus based <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -2987,6 +3455,8 @@
 
             
 
+            
+
              class to render text, this could cause the text for controls that use <see
              cref="T:System.Windows.Forms.TextRenderer" />
 
@@ -2994,8 +3464,12 @@
 
             
 
+            
+
              to appear different from the other text in the application. To resolve this incompatibility, you can set the UseCompatibleTextRendering property to true for a specific control. To set UseCompatibleTextRendering to true for all supported controls in the application, call the <see
              cref="M:System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(System.Boolean)" />
+
+            
 
             
 
@@ -3014,8 +3488,12 @@
 
             
 
+            
+
              class (ndptecgdiplus) or the <see
              cref="T:System.Windows.Forms.TextRenderer" />
+
+            
 
             
 
@@ -3055,11 +3533,15 @@
 
             
 
+            
+
              that have been visited by the user.</para
           >
           <para
             >There are a number of colors associated with a link. All links in the <see
              cref="T:System.Windows.Forms.LinkLabel" />
+
+            
 
             
 
@@ -3072,6 +3554,8 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Windows.Forms.LinkLabel.ActiveLinkColor" />
 
@@ -3079,8 +3563,12 @@
 
             
 
+            
+
              property enables you to specify the color of the link when it is in the process of being clicked. When a link is disabled, the <see
              cref="P:System.Windows.Forms.LinkLabel.DisabledLinkColor" />
+
+            
 
             
 

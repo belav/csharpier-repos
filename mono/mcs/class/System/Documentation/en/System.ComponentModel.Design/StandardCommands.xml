@@ -29,11 +29,15 @@
 
         
 
+        
+
          identifiers for standard commands that are available to designers.</para
       >
       <para
         >To add a command from the <see
          cref="T:System.ComponentModel.Design.StandardCommands" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
          method of an <see
          cref="T:System.ComponentModel.Design.IMenuCommandService" />
+
+        
 
         
 
@@ -60,6 +68,8 @@
 
         
 
+        
+
          that contains a <see
          cref="T:System.ComponentModel.Design.CommandID" />
 
@@ -67,8 +77,12 @@
 
         
 
+        
+
          from <see
          cref="T:System.ComponentModel.Design.StandardCommands" />
+
+        
 
         
 
@@ -104,6 +118,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.Design.StandardCommands" />
+
+            
 
             
 
@@ -145,6 +161,8 @@
 
             
 
+            
+
              for the AlignBottom command. This field is read-only.</para
           >
         </summary>
@@ -176,6 +194,8 @@
           <para
             >Gets the <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -217,6 +237,8 @@
 
             
 
+            
+
              for the AlignLeft command. This field is read-only.</para
           >
         </summary>
@@ -248,6 +270,8 @@
           <para
             >Gets the <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -289,6 +313,8 @@
 
             
 
+            
+
              for the AlignToGrid command. This field is read-only.</para
           >
         </summary>
@@ -320,6 +346,8 @@
           <para
             >Gets the <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -361,6 +389,8 @@
 
             
 
+            
+
              for the AlignVerticalCenters command. This field is read-only.</para
           >
         </summary>
@@ -392,6 +422,8 @@
           <para
             >Gets the <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -433,6 +465,8 @@
 
             
 
+            
+
              for the ArrangeIcons command. This field is read-only.</para
           >
         </summary>
@@ -464,6 +498,8 @@
           <para
             >Gets the <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -505,6 +541,8 @@
 
             
 
+            
+
              for the BringForward command. This field is read-only.</para
           >
         </summary>
@@ -536,6 +574,8 @@
           <para
             >Gets the <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -577,6 +617,8 @@
 
             
 
+            
+
              for the CenterHorizontally command. This field is read-only.</para
           >
         </summary>
@@ -608,6 +650,8 @@
           <para
             >Gets the <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -649,6 +693,8 @@
 
             
 
+            
+
              for the Copy command. This field is read-only.</para
           >
         </summary>
@@ -680,6 +726,8 @@
           <para
             >Gets the <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -721,6 +769,8 @@
 
             
 
+            
+
              for the Delete command. This field is read-only.</para
           >
         </summary>
@@ -750,6 +800,8 @@
           <para
             >Gets the <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -791,6 +843,8 @@
 
             
 
+            
+
              for the F1Help command. This field is read-only.</para
           >
         </summary>
@@ -822,6 +876,8 @@
           <para
             >Gets the <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -863,6 +919,8 @@
 
             
 
+            
+
              for the HorizSpaceConcatenate command. This field is read-only.</para
           >
         </summary>
@@ -894,6 +952,8 @@
           <para
             >Gets the <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -935,6 +995,8 @@
 
             
 
+            
+
              for the HorizSpaceIncrease command. This field is read-only.</para
           >
         </summary>
@@ -966,6 +1028,8 @@
           <para
             >Gets the <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -1007,6 +1071,8 @@
 
             
 
+            
+
              for the LineupIcons command. This field is read-only.</para
           >
         </summary>
@@ -1038,6 +1104,8 @@
           <para
             >Gets the <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -1079,6 +1147,8 @@
 
             
 
+            
+
              for the MultiLevelRedo command. This field is read-only.</para
           >
         </summary>
@@ -1110,6 +1180,8 @@
           <para
             >Gets the <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -1151,6 +1223,8 @@
 
             
 
+            
+
              for the Paste command. This field is read-only.</para
           >
         </summary>
@@ -1182,6 +1256,8 @@
           <para
             >Gets the <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -1223,6 +1299,8 @@
 
             
 
+            
+
              for the PropertiesWindow command. This field is read-only.</para
           >
         </summary>
@@ -1254,6 +1332,8 @@
           <para
             >Gets the <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -1295,6 +1375,8 @@
 
             
 
+            
+
              for the Replace command. This field is read-only.</para
           >
         </summary>
@@ -1326,6 +1408,8 @@
           <para
             >Gets the <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -1367,6 +1451,8 @@
 
             
 
+            
+
              for the SendBackward command. This field is read-only.</para
           >
         </summary>
@@ -1398,6 +1484,8 @@
           <para
             >Gets the <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -1439,6 +1527,8 @@
 
             
 
+            
+
              for the ShowGrid command. This field is read-only.</para
           >
         </summary>
@@ -1470,6 +1560,8 @@
           <para
             >Gets the <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -1511,6 +1603,8 @@
 
             
 
+            
+
              for the SizeToControl command. This field is read-only.</para
           >
         </summary>
@@ -1542,6 +1636,8 @@
           <para
             >Gets the <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -1583,6 +1679,8 @@
 
             
 
+            
+
              for the SizeToControlWidth command. This field is read-only.</para
           >
         </summary>
@@ -1614,6 +1712,8 @@
           <para
             >Gets the <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -1655,6 +1755,8 @@
 
             
 
+            
+
              for the SizeToGrid command. This field is read-only.</para
           >
         </summary>
@@ -1686,6 +1788,8 @@
           <para
             >Gets the <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -1727,6 +1831,8 @@
 
             
 
+            
+
              for the TabOrder command. This field is read-only.</para
           >
         </summary>
@@ -1758,6 +1864,8 @@
           <para
             >Gets the <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -1799,6 +1907,8 @@
 
             
 
+            
+
              for the Ungroup command. This field is read-only.</para
           >
         </summary>
@@ -1834,6 +1944,8 @@
 
             
 
+            
+
              that identifies the first of a set of designer verbs.</para
           >
           <para
@@ -1844,8 +1956,12 @@
 
             
 
+            
+
              property on <see
              cref="T:System.ComponentModel.Design.IDesigner" />
+
+            
 
             
 
@@ -1861,6 +1977,8 @@
 
             
 
+            
+
              within a sequential range of IDs that begins with <see
              cref="F:System.ComponentModel.Design.StandardCommands.VerbFirst" />
 
@@ -1868,8 +1986,12 @@
 
             
 
+            
+
              and ends with <see
              cref="F:System.ComponentModel.Design.StandardCommands.VerbLast" />
+
+            
 
             
 
@@ -1914,6 +2036,8 @@
 
             
 
+            
+
              that identifies the last of a set of designer verbs.</para
           >
           <para
@@ -1924,8 +2048,12 @@
 
             
 
+            
+
              property on <see
              cref="T:System.ComponentModel.Design.IDesigner" />
+
+            
 
             
 
@@ -1941,6 +2069,8 @@
 
             
 
+            
+
              within a sequential range of IDs that begins with <see
              cref="F:System.ComponentModel.Design.StandardCommands.VerbFirst" />
 
@@ -1948,8 +2078,12 @@
 
             
 
+            
+
              and ends with <see
              cref="F:System.ComponentModel.Design.StandardCommands.VerbLast" />
+
+            
 
             
 
@@ -1995,6 +2129,8 @@
 
             
 
+            
+
              for the VertSpaceConcatenate command. This field is read-only.</para
           >
         </summary>
@@ -2026,6 +2162,8 @@
           <para
             >Gets the <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -2067,6 +2205,8 @@
 
             
 
+            
+
              for the VertSpaceIncrease command. This field is read-only.</para
           >
         </summary>
@@ -2098,6 +2238,8 @@
           <para
             >Gets the <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -2137,6 +2279,8 @@
 
             
 
+            
+
              for the ViewCode command. This field is read-only.</para
           >
         </summary>
@@ -2168,6 +2312,8 @@
           <para
             >Gets the <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 

@@ -21,6 +21,8 @@
 
       
 
+      
+
       .</remarks
     >
   </Docs>
@@ -79,6 +81,8 @@
 
           
 
+          
+
           .</param
         >
         <summary>To be added.</summary>
@@ -90,10 +94,14 @@
 
           
 
+          
+
            instance.</returns
         >
         <remarks>
           <c>M:Mono.DocTest.UseLists.GetValues``1(``0)</c>
+
+          
 
           
 
@@ -131,11 +139,15 @@
 
           
 
+          
+
           .</param
         >
         <summary>To be added.</summary>
         <remarks>
           <c>M:Mono.DocTest.UseLists.Process(Mono.DocTest.MyList{System.Int32})</c>
+
+          
 
           
 
@@ -173,12 +185,16 @@
 
           
 
+          
+
           .</param
         >
         <summary>To be added.</summary>
         <remarks>
           <para>
             <c>M:Mono.DocTest.UseLists.Process(System.Collections.Generic.List{System.Int32})</c>
+
+            
 
             
 
@@ -224,11 +240,15 @@
 
           
 
+          
+
           .</param
         >
         <summary>To be added.</summary>
         <remarks>
           <c>M:Mono.DocTest.UseLists.Process(System.Collections.Generic.List{System.Predicate{System.Int32}})</c>
+
+          
 
           
 
@@ -273,11 +293,15 @@
 
           
 
+          
+
           .</param
         >
         <summary>To be added.</summary>
         <remarks>
           <c>M:Mono.DocTest.UseLists.Process``1(System.Collections.Generic.List{System.Predicate{``0}})</c>
+
+          
 
           
 
@@ -329,11 +353,15 @@
 
           
 
+          
+
           .</param
         >
         <summary>To be added.</summary>
         <remarks>
           <c>M:Mono.DocTest.UseLists.UseHelper``3(Mono.DocTest.Generic.MyList{``0}.Helper{``1,``2})</c>
+
+          
 
           
 

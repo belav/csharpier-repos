@@ -39,6 +39,8 @@
 
         
 
+        
+
          class provides the following methods for executing commands against a data source: </para
       >
       <list type="table">
@@ -91,6 +93,8 @@
 
         
 
+        
+
          property and reuse the <see
          cref="T:System.Data.Odbc.OdbcCommand" />
 
@@ -98,8 +102,12 @@
 
         
 
+        
+
          object. However, you must close the <see
          cref="T:System.Data.Odbc.OdbcDataReader" />
+
+        
 
         
 
@@ -115,8 +123,12 @@
 
         
 
+        
+
          such as a SQL Server severity level of 20 or more, <see
          cref="T:System.Data.Odbc.OdbcConnection" />
+
+        
 
         
 
@@ -141,6 +153,8 @@
           <para
             >The base constructor initializes all fields to their default values. The following table shows initial property values for an instance of <see
              cref="T:System.Data.Odbc.OdbcCommand" />
+
+            
 
             
 
@@ -211,6 +225,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -238,11 +254,15 @@
 
             
 
+            
+
              class with the text of the query.</para
           >
         </summary>
         <param name="cmdText">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -278,8 +298,12 @@
 
             
 
+            
+
              class with the text of the query and an <see
              cref="T:System.Data.Odbc.OdbcConnection" />
+
+            
 
             
 
@@ -295,6 +319,8 @@
 
           
 
+          
+
           The text of the query. </param
         >
         <param name="connection">
@@ -304,8 +330,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Data.Odbc.OdbcConnection" />
+
+          
 
           
 
@@ -336,6 +366,8 @@
           <para
             >The following table shows initial property values for an instance of this implementation of the <see
              cref="T:System.Data.Odbc.OdbcCommand" />
+
+            
 
             
 
@@ -401,8 +433,12 @@
 
                   
 
+                  
+
                    that is the value for the <paramref
                    name="connection" />
+
+                  
 
                   
 
@@ -425,6 +461,8 @@
 
             
 
+            
+
              class with the text of the query, an <see
              cref="T:System.Data.Odbc.OdbcConnection" />
 
@@ -432,8 +470,12 @@
 
             
 
+            
+
              object, and the <see
              cref="P:System.Data.Odbc.OdbcCommand.Transaction" />
+
+            
 
             
 
@@ -449,6 +491,8 @@
 
           
 
+          
+
           The text of the query. </param
         >
         <param name="connection">
@@ -458,8 +502,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Data.Odbc.OdbcConnection" />
+
+          
 
           
 
@@ -474,8 +522,12 @@
 
           
 
+          
+
           The transaction in which the <see
            cref="T:System.Data.Odbc.OdbcCommand" />
+
+          
 
           
 
@@ -508,6 +560,8 @@
 
             
 
+            
+
              must be called from another thread. Because you cannot execute commands asynchronously with <see
              cref="T:System.Data.Odbc.OdbcCommand" />
 
@@ -515,8 +569,12 @@
 
             
 
+            
+
             , to cancel a command from another thread, one thread must be running synchronously. This means that the <see
              cref="T:System.Data.Odbc.OdbcCommand" />
+
+            
 
             
 
@@ -530,6 +588,8 @@
           <para
             >Tries to cancel the execution of an <see
              cref="T:System.Data.Odbc.OdbcCommand" />
+
+            
 
             
 
@@ -573,6 +633,8 @@
 
             
 
+            
+
              property is set to StoredProcedure, the <see
              cref="P:System.Data.Odbc.OdbcCommand.CommandText" />
 
@@ -580,8 +642,12 @@
 
             
 
+            
+
              property should be set using standard ODBC stored procedure escape sequences. Setting the <see
              cref="P:System.Data.Odbc.OdbcCommand.CommandText" />
+
+            
 
             
 
@@ -620,8 +686,12 @@
 
             
 
+            
+
              specifies the name of a procedure and <paramref
              name="parameter" />
+
+            
 
             
 
@@ -637,8 +707,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Data.Odbc.OdbcCommand.ExecuteNonQuery" />
+
+            
 
             
 
@@ -654,6 +728,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Data.Odbc.OdbcCommand.CommandType" />
 
@@ -661,8 +737,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Data.Odbc.OdbcCommand.CommandText" />
+
+            
 
             
 
@@ -678,8 +758,12 @@
 
             
 
+            
+
              when <see
              cref="P:System.Data.Odbc.OdbcCommand.CommandType" />
+
+            
 
             
 
@@ -696,8 +780,12 @@
 
             
 
+            
+
              objects are added to the <see
              cref="T:System.Data.Odbc.OdbcParameterCollection" />
+
+            
 
             
 
@@ -708,6 +796,8 @@
           <para
             >If a parameter contains a null value, the .NET Framework Data Provider for ODBC still binds that parameter, but uses a default parameter, if one has been defined by using SQL_DEFAULT_PARAM, instead of the null value. For example, the <see
              cref="T:System.Data.Odbc.OdbcParameterCollection" />
+
+            
 
             
 
@@ -724,6 +814,8 @@
 
             
 
+            
+
              property: </para
           >
           <code>{call sp(?, ?, ?)}</code>
@@ -735,12 +827,16 @@
 
             
 
+            
+
             : </para
           >
           <code>{1, 2}</code>
           <para
             >and set the <see
              cref="P:System.Data.Odbc.OdbcCommand.CommandText" />
+
+            
 
             
 
@@ -814,8 +910,12 @@
 
             
 
+            
+
              property is set to StoredProcedure, you should set the <see
              cref="P:System.Data.Odbc.OdbcCommand.CommandText" />
+
+            
 
             
 
@@ -828,8 +928,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Data.Odbc.OdbcCommand.ExecuteNonQuery" />
+
+            
 
             
 
@@ -845,8 +949,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Data.Odbc.OdbcCommand.CommandType" />
+
+            
 
             
 
@@ -859,11 +967,15 @@
 
             
 
+            
+
              properties cannot be set if the current connection is performing an execute or fetch operation.</para
           >
           <para
             >The .NET Framework Data Provider for ODBC does not support passing named parameters to an SQL statement or to a stored procedure called by an <see
              cref="T:System.Data.Odbc.OdbcCommand" />
+
+            
 
             
 
@@ -880,8 +992,12 @@
 
             
 
+            
+
              objects are added to the <see
              cref="T:System.Data.Odbc.OdbcParameterCollection" />
+
+            
 
             
 
@@ -898,6 +1014,8 @@
 
               
 
+              
+
                setting of TableDirect.</para
             >
           </block>
@@ -907,6 +1025,8 @@
           <para
             >Gets or sets a value that indicates how the <see
              cref="P:System.Data.Odbc.OdbcCommand.CommandText" />
+
+            
 
             
 
@@ -943,6 +1063,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Data.Odbc.OdbcCommand.CommandType" />
 
@@ -950,8 +1072,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Data.Odbc.OdbcCommand.CommandText" />
+
+            
 
             
 
@@ -967,8 +1093,12 @@
 
             
 
+            
+
              while a transaction is in progress and the <see
              cref="P:System.Data.Odbc.OdbcCommand.Transaction" />
+
+            
 
             
 
@@ -981,8 +1111,12 @@
 
             
 
+            
+
              is generated. If you set <see
              cref="P:System.Data.Odbc.OdbcCommand.Connection" />
+
+            
 
             
 
@@ -995,8 +1129,12 @@
 
             
 
+            
+
              property is not null, the <see
              cref="P:System.Data.Odbc.OdbcCommand.Transaction" />
+
+            
 
             
 
@@ -1015,8 +1153,12 @@
 
             
 
+            
+
              used by this instance of the <see
              cref="T:System.Data.Odbc.OdbcCommand" />
+
+            
 
             
 
@@ -1081,8 +1223,12 @@
 
             
 
+            
+
              method is a strongly-typed version of <see
              cref="M:System.Data.IDbCommand.CreateParameter" />
+
+            
 
             
 
@@ -1101,6 +1247,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1109,6 +1257,8 @@
           <para
             >An <see
              cref="T:System.Data.Odbc.OdbcParameter" />
+
+            
 
             
 
@@ -1273,8 +1423,12 @@
 
             
 
+            
+
              to perform catalog operations (for example, querying the structure of a database or creating database objects such as tables); or to change the data in a database, without using a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1290,11 +1444,15 @@
 
             
 
+            
+
              to execute multiple SQL statements if the underlying ODBC driver supports this functionality. In this case, the return value is the number of rows affected by all statements in the command.</para
           >
           <para
             >Although <see
              cref="M:System.Data.Odbc.OdbcCommand.ExecuteNonQuery" />
+
+            
 
             
 
@@ -1310,6 +1468,8 @@
           <para
             >Executes an SQL statement against the <see
              cref="P:System.Data.Odbc.OdbcCommand.Connection" />
+
+            
 
             
 
@@ -1350,8 +1510,12 @@
 
             
 
+            
+
              property to the full ODBC call syntax for stored procedures. The command executes this stored procedure when you call <see
              cref="M:System.Data.Odbc.OdbcCommand.ExecuteReader" />
+
+            
 
             
 
@@ -1367,8 +1531,12 @@
 
             
 
+            
+
              is used, the associated <see
              cref="T:System.Data.Odbc.OdbcConnection" />
+
+            
 
             
 
@@ -1381,8 +1549,12 @@
 
             
 
+            
+
             . While in this state, no other operations can be performed on the <see
              cref="T:System.Data.Odbc.OdbcConnection" />
+
+            
 
             
 
@@ -1395,8 +1567,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Data.Odbc.OdbcDataReader" />
+
+            
 
             
 
@@ -1415,6 +1591,8 @@
 
             
 
+            
+
              to the <see
              cref="P:System.Data.Odbc.OdbcCommand.Connection" />
 
@@ -1422,8 +1600,12 @@
 
             
 
+            
+
              and builds an <see
              cref="T:System.Data.Odbc.OdbcDataReader" />
+
+            
 
             
 
@@ -1437,6 +1619,8 @@
           <para
             >An <see
              cref="T:System.Data.Odbc.OdbcDataReader" />
+
+            
 
             
 
@@ -1475,6 +1659,8 @@
 
             
 
+            
+
              value may improve application performance.</para
           >
           <para
@@ -1485,8 +1671,12 @@
 
             
 
+            
+
              property to the full ODBC call syntax for stored procedures. The command executes this stored procedure when you call <see
              cref="M:System.Data.Odbc.OdbcCommand.ExecuteReader" />
+
+            
 
             
 
@@ -1502,8 +1692,12 @@
 
             
 
+            
+
              supports a special mode that enables large binary values to be read efficiently. For more information, see the SequentialAccess setting for <see
              cref="T:System.Data.CommandBehavior" />
+
+            
 
             
 
@@ -1520,6 +1714,8 @@
 
               
 
+              
+
                is not a limiting setting; it just means that you will have at least sequential access to the <see
                cref="T:System.Data.Odbc.OdbcDataReader" />
 
@@ -1527,8 +1723,12 @@
 
               
 
+              
+
               . For example, when you use the SQL Server ODBC Driver in SequentialAccess mode, you can still move to the first column of an <see
                cref="T:System.Data.Odbc.OdbcDataReader" />
+
+              
 
               
 
@@ -1545,8 +1745,12 @@
 
             
 
+            
+
              is used, the associated <see
              cref="T:System.Data.Odbc.OdbcConnection" />
+
+            
 
             
 
@@ -1559,8 +1763,12 @@
 
             
 
+            
+
             . While in this state, no other operations can be performed on the <see
              cref="T:System.Data.Odbc.OdbcConnection" />
+
+            
 
             
 
@@ -1573,8 +1781,12 @@
 
             
 
+            
+
              method. If the <see
              cref="T:System.Data.Odbc.OdbcDataReader" />
+
+            
 
             
 
@@ -1587,8 +1799,12 @@
 
             
 
+            
+
              set to CloseConnection, closing the <see
              cref="T:System.Data.Odbc.OdbcDataReader" />
+
+            
 
             
 
@@ -1607,6 +1823,8 @@
 
             
 
+            
+
              to the <see
              cref="P:System.Data.Odbc.OdbcCommand.Connection" />
 
@@ -1614,8 +1832,12 @@
 
             
 
+            
+
             , and builds an <see
              cref="T:System.Data.Odbc.OdbcDataReader" />
+
+            
 
             
 
@@ -1634,11 +1856,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="behavior">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1670,6 +1896,8 @@
 
             
 
+            
+
              method to retrieve a single value (for example, an aggregate value) from a data source. This requires less code than using the <see
              cref="M:System.Data.Odbc.OdbcCommand.ExecuteReader" />
 
@@ -1677,8 +1905,12 @@
 
             
 
+            
+
              method, and then performing the operations required to generate the single value from the data returned by an <see
              cref="T:System.Data.Odbc.OdbcDataReader" />
+
+            
 
             
 
@@ -1727,8 +1959,12 @@
 
             
 
+            
+
              is set to Text, the .NET Framework Data Provider for ODBC does not support passing named parameters to an SQL statement or to a stored procedure called by an <see
              cref="T:System.Data.Odbc.OdbcCommand" />
+
+            
 
             
 
@@ -1745,8 +1981,12 @@
 
             
 
+            
+
              objects are added to the <see
              cref="T:System.Data.Odbc.OdbcParameterCollection" />
+
+            
 
             
 
@@ -1763,6 +2003,8 @@
           <para
             >Gets the <see
              cref="T:System.Data.Odbc.OdbcParameterCollection" />
+
+            
 
             
 
@@ -1795,8 +2037,12 @@
 
             
 
+            
+
              method calls the ODBC SQLPrepare function. Depending on the capabilities of the underlying ODBC driver and data source, parameter information such as data types may be checked when the statement is prepared, if all parameters have been bound, or when it is executed if not all parameters have been bound. For maximum interoperability, an application should unbind all parameters that applied to a previous SQL statement before preparing a new SQL statement on the same <see
              cref="T:System.Data.Odbc.OdbcCommand" />
+
+            
 
             
 
@@ -1812,8 +2058,12 @@
 
             
 
+            
+
             , any parameter value that is larger than the value specified by the <see
              cref="!:System.Data.Odbc.OdbcParameter.Size" />
+
+            
 
             
 
@@ -1824,6 +2074,8 @@
           <para
             >Output parameters (whether prepared or not) must have a user-specified data type. If you specify a variable length data type, you must also specify the maximum <see
              cref="!:System.Data.Odbc.OdbcParameter.Size" />
+
+            
 
             
 
@@ -1860,6 +2112,8 @@
 
             
 
+            
+
              is 30 seconds.</para
           >
         </remarks>
@@ -1868,6 +2122,8 @@
           <para
             >Resets the <see
              cref="P:System.Data.Odbc.OdbcCommand.CommandTimeout" />
+
+            
 
             
 
@@ -2018,8 +2274,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:InterfaceName" />
+
+            
 
             
 
@@ -2038,6 +2298,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2046,6 +2308,8 @@
           <para
             >A new <see
              cref="T;System.Object" />
+
+            
 
             
 
@@ -2086,8 +2350,12 @@
 
             
 
+            
+
              property if it is already set to a specific value, and the command is in the process of executing. If you set the transaction property to an <see
              cref="T:System.Data.Odbc.OdbcTransaction" />
+
+            
 
             
 
@@ -2100,8 +2368,12 @@
 
             
 
+            
+
              as the <see
              cref="T:System.Data.Odbc.OdbcCommand" />
+
+            
 
             
 
@@ -2120,8 +2392,12 @@
 
             
 
+            
+
              within which the <see
              cref="T:System.Data.Odbc.OdbcCommand" />
+
+            
 
             
 
@@ -2162,8 +2438,12 @@
 
             
 
+            
+
              value is Both unless the command is automatically generated, as with the <see
              cref="T:System.Data.Odbc.OdbcCommandBuilder" />
+
+            
 
             
 
@@ -2179,10 +2459,14 @@
 
             
 
+            
+
              property, see <format
              type="text/html">
               <a href="f21e6aba-b76d-46ad-a83e-2ad8e0af1e12">Using Parameters with a DataAdapter</a>
             </format>
+
+            
 
             
 

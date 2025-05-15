@@ -35,8 +35,12 @@
 
         
 
+        
+
          in a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -86,6 +90,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -99,8 +105,12 @@
 
         
 
+        
+
          event of a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 

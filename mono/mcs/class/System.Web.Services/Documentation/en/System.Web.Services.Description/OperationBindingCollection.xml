@@ -30,8 +30,12 @@
 
         
 
+        
+
          class corresponds to the Web Services Description Language (WSDL) &lt;operation&gt; element enclosed by the &lt;binding&gt; element, which in turn corresponds to the <see
          cref="T:System.Web.Services.Description.Binding" />
+
+        
 
         
 
@@ -45,6 +49,8 @@
       <para
         >Represents a collection of instances of the <see
          cref="T:System.Web.Services.Description.OperationBinding" />
+
+        
 
         
 
@@ -82,8 +88,12 @@
 
             
 
+            
+
              to the end of the <see
              cref="T:System.Web.Services.Description.OperationBindingCollection" />
+
+            
 
             
 
@@ -102,6 +112,8 @@
 
             
 
+            
+
              parameter has been added.</para
           >
         </returns>
@@ -112,8 +124,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.OperationBinding" />
+
+          
 
           
 
@@ -154,8 +170,12 @@
 
             
 
+            
+
              is a member of the <see
              cref="T:System.Web.Services.Description.OperationBindingCollection" />
+
+            
 
             
 
@@ -174,8 +194,12 @@
 
             
 
+            
+
              parameter is a member of the <see
              cref="T:System.Web.Services.Description.OperationBindingCollection" />
+
+            
 
             
 
@@ -191,8 +215,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.OperationBinding" />
+
+          
 
           
 
@@ -231,11 +259,15 @@
 
             
 
+            
+
             , starting at the specified zero-based index of the target array.</para
           >
         </summary>
         <param name="array">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -248,10 +280,14 @@
 
           
 
+          
+
            serving as the destination for the copy action. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -292,6 +328,8 @@
 
             
 
+            
+
              and returns the zero-based index of the first occurrence within the collection.</para
           >
         </summary>
@@ -306,8 +344,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.OperationBinding" />
+
+          
 
           
 
@@ -349,8 +391,12 @@
 
             
 
+            
+
              parameter is equal to <see
              cref="P:System.Collections.CollectionBase.Count" />
+
+            
 
             
 
@@ -363,8 +409,12 @@
 
             
 
+            
+
              parameter is added to the end of the <see
              cref="T:System.Web.Services.Description.OperationBindingCollection" />
+
+            
 
             
 
@@ -384,8 +434,12 @@
 
             
 
+            
+
              instance to the <see
              cref="T:System.Web.Services.Description.OperationBindingCollection" />
+
+            
 
             
 
@@ -401,8 +455,12 @@
 
           
 
+          
+
           The zero-based index at which to insert the <paramref
            name="bindingOperation" />
+
+          
 
           
 
@@ -417,8 +475,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.OperationBinding" />
+
+          
 
           
 
@@ -481,11 +543,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The elements that follow the removed <see
              cref="T:System.Web.Services.Description.OperationBinding" />
+
+            
 
             
 
@@ -504,8 +570,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Web.Services.Description.OperationBindingCollection" />
+
+            
 
             
 
@@ -521,8 +591,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Description.OperationBinding" />
+
+          
 
           
 

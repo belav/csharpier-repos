@@ -24,8 +24,12 @@
 
         
 
+        
+
          for each of these versions of SOAP that can be recovered using the <see
          cref="P:System.ServiceModel.EnvelopeVersion.Soap11" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          properties. There is also a <see
          cref="P:System.ServiceModel.EnvelopeVersion.None" />
+
+        
 
         
 
@@ -52,8 +60,12 @@
 
         
 
+        
+
          property and the <see
          cref="M:System.ServiceModel.EnvelopeVersion.GetUltimateDestinationActorValues" />
+
+        
 
         
 
@@ -91,6 +103,8 @@
           <para
             >The ultimate receiver is null if <see
              cref="P:System.ServiceModel.EnvelopeVersion.None" />
+
+            
 
             
 
@@ -159,6 +173,8 @@
 
             
 
+            
+
              message version is used this means that a SOAP envelope is not written out and the message emits the contents of the body. This enables an indigo1 channel to communicate with an endpoint that is expecting XML with no SOAP formatting. The XML payload lives in the body of a message and is the only thing emitted when it hits the encoder. </para
           >
           <para>Similarly, when the arbitrary chunk of XML is received it is wrapped up in a Message for propagation up the channel stack. The required headers are inserted and the message is processed as if it had been a SOAP message. </para>
@@ -197,6 +213,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -229,6 +247,8 @@
           <para
             >crdefault the schema for <see
              cref="http://go.microsoft.com/fwlink/?LinkID=96642">SOAP 1.2</see>
+
+            
 
             
 

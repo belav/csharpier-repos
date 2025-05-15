@@ -40,6 +40,8 @@
 
         
 
+        
+
         .</para
       >
     </summary>
@@ -64,6 +66,8 @@
 
             
 
+            
+
              class directly. To clear the <see
              cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
 
@@ -71,8 +75,12 @@
 
             
 
+            
+
             , use the <see
              cref="M:System.Windows.Forms.DataGridView.ClearSelection" />
+
+            
 
             
 
@@ -124,8 +132,12 @@
 
             
 
+            
+
              is in the <see
              cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+            
 
             
 
@@ -141,6 +153,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridViewCell" />
 
@@ -148,8 +162,12 @@
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+          
 
           
 
@@ -188,6 +206,8 @@
 
             
 
+            
+
              array, starting at the specified index.</para
           >
         </summary>
@@ -198,8 +218,12 @@
 
           
 
+          
+
           The one-dimensional array of type <see
            cref="T:System.Windows.Forms.DataGridViewCell" />
+
+          
 
           
 
@@ -214,8 +238,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -253,6 +281,8 @@
 
             
 
+            
+
              class directly. To add a cell to the <see
              cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
 
@@ -260,8 +290,12 @@
 
             
 
+            
+
             , use the <see
              cref="P:System.Windows.Forms.DataGridViewCell.Selected" />
+
+            
 
             
 
@@ -281,8 +315,12 @@
 
           
 
+          
+
           The index at which <paramref
            name="dataGridViewCell" />
+
+          
 
           
 
@@ -297,8 +335,12 @@
 
           
 
+          
+
           The object to be added to the <see
            cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+          
 
           
 
@@ -383,6 +425,8 @@
 
             
 
+            
+
              class directly. To add a cell to the <see
              cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
 
@@ -390,8 +434,12 @@
 
             
 
+            
+
             , use the <see
              cref="P:System.Windows.Forms.DataGridViewCell.Selected" />
+
+            
 
             
 
@@ -407,8 +455,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -427,8 +479,12 @@
 
             
 
+            
+
              method. Always throws <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -448,8 +504,12 @@
 
           
 
+          
+
           The item to be added to the <see
            cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+          
 
           
 
@@ -480,6 +540,8 @@
 
             
 
+            
+
              class directly. To clear the <see
              cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
 
@@ -487,8 +549,12 @@
 
             
 
+            
+
             , use the <see
              cref="M:System.Windows.Forms.DataGridView.ClearSelection" />
+
+            
 
             
 
@@ -504,8 +570,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -524,8 +594,12 @@
 
             
 
+            
+
              method. Always throws <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -559,8 +633,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -583,11 +661,15 @@
 
             
 
+            
+
              is in the collection; otherwise, false.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -600,8 +682,12 @@
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+          
 
           
 
@@ -634,8 +720,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -658,11 +748,15 @@
 
             
 
+            
+
              parameter if it is found in the collection; otherwise, -1.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -696,6 +790,8 @@
 
             
 
+            
+
              class directly. To add a cell to the <see
              cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
 
@@ -703,8 +799,12 @@
 
             
 
+            
+
             , use the <see
              cref="P:System.Windows.Forms.DataGridViewCell.Selected" />
+
+            
 
             
 
@@ -720,8 +820,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -740,8 +844,12 @@
 
             
 
+            
+
              method. Always throws <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -757,8 +865,12 @@
 
           
 
+          
+
           The index at which <paramref
            name="value" />
+
+          
 
           
 
@@ -773,8 +885,12 @@
 
           
 
+          
+
           The object to be added to the <see
            cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+          
 
           
 
@@ -805,8 +921,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -866,6 +986,8 @@
 
             
 
+            
+
              class directly. To remove a cell from the <see
              cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
 
@@ -873,8 +995,12 @@
 
             
 
+            
+
             , use the <see
              cref="P:System.Windows.Forms.DataGridViewCell.Selected" />
+
+            
 
             
 
@@ -890,8 +1016,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -910,8 +1040,12 @@
 
             
 
+            
+
              method. Always throws <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -927,8 +1061,12 @@
 
           
 
+          
+
           The object to be removed from the <see
            cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
+
+          
 
           
 
@@ -961,6 +1099,8 @@
 
             
 
+            
+
              class directly. To remove a cell from the <see
              cref="T:System.Windows.Forms.DataGridViewSelectedCellCollection" />
 
@@ -968,8 +1108,12 @@
 
             
 
+            
+
             , use the <see
              cref="P:System.Windows.Forms.DataGridViewCell.Selected" />
+
+            
 
             
 
@@ -985,8 +1129,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1005,8 +1153,12 @@
 
             
 
+            
+
              method. Always throws <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -1017,6 +1169,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

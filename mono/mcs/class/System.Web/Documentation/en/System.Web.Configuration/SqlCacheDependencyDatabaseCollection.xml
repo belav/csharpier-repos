@@ -32,8 +32,12 @@
 
         
 
+        
+
          uses the <see
          cref="T:System.Web.Configuration.SqlCacheDependencyDatabaseCollection" />
+
+        
 
         
 
@@ -47,6 +51,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.Web.Configuration.SqlCacheDependencyDatabase" />
+
+        
 
         
 
@@ -73,6 +79,8 @@
 
             
 
+            
+
              constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see
              cref="T:System.Web.Configuration.SqlCacheDependencyDatabaseCollection" />
 
@@ -80,8 +88,12 @@
 
             
 
+            
+
              class by using the <see
              cref="P:System.Web.Configuration.SqlCacheDependencySection.Databases" />
+
+            
 
             
 
@@ -95,6 +107,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.SqlCacheDependencyDatabaseCollection" />
+
+            
 
             
 
@@ -132,6 +146,8 @@
 
             
 
+            
+
              in the collection must have a unique name.</para
           >
         </remarks>
@@ -140,6 +156,8 @@
           <para
             >Adds a <see
              cref="T:System.Web.Configuration.SqlCacheDependencyDatabase" />
+
+            
 
             
 
@@ -155,8 +173,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Web.Configuration.SqlCacheDependencyDatabase" />
+
+          
 
           
 
@@ -189,6 +211,8 @@
 
             
 
+            
+
              keys.</para
           >
         </summary>
@@ -215,6 +239,8 @@
           <para
             >Removes all the <see
              cref="T:System.Web.Configuration.SqlCacheDependencyDatabase" />
+
+            
 
             
 
@@ -254,6 +280,8 @@
 
             
 
+            
+
              element.</para
           >
         </summary>
@@ -262,6 +290,8 @@
           <para
             >A new <see
              cref="T:System.Web.Configuration.SqlCacheDependencyDatabase" />
+
+            
 
             
 
@@ -303,6 +333,8 @@
 
             
 
+            
+
              element at the specified index.</para
           >
         </summary>
@@ -311,6 +343,8 @@
           <para
             >The <see
              cref="T:System.Web.Configuration.SqlCacheDependencyDatabaseCollection" />
+
+            
 
             
 
@@ -326,8 +360,12 @@
 
           
 
+          
+
           The index of the <see
            cref="T:System.Web.Configuration.SqlCacheDependencyDatabaseCollection" />
+
+          
 
           
 
@@ -368,6 +406,8 @@
 
             
 
+            
+
              element with the specified name.</para
           >
         </summary>
@@ -376,6 +416,8 @@
           <para
             >The <see
              cref="T:System.Web.Configuration.SqlCacheDependencyDatabaseCollection" />
+
+            
 
             
 
@@ -391,8 +433,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Web.Configuration.SqlCacheDependencyDatabaseCollection" />
+
+          
 
           
 
@@ -453,6 +499,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -462,6 +510,8 @@
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -542,6 +592,8 @@
 
             
 
+            
+
              object with the specified name from the collection.</para
           >
         </summary>
@@ -552,8 +604,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Web.Configuration.SqlCacheDependencyDatabase" />
+
+          
 
           
 
@@ -588,6 +644,8 @@
 
             
 
+            
+
              object at the specified index from the collection.</para
           >
         </summary>
@@ -598,8 +656,12 @@
 
           
 
+          
+
           The index of the <see
            cref="T:System.Web.Configuration.SqlCacheDependencyDatabase" />
+
+          
 
           
 
@@ -636,11 +698,15 @@
 
             
 
+            
+
              element.</para
           >
           <para
             >A <see
              cref="T:System.Configuration.ConfigurationException" />
+
+            
 
             
 
@@ -659,6 +725,8 @@
 
             
 
+            
+
              object that exists within the collection. </para
           >
         </summary>
@@ -669,8 +737,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Configuration.SqlCacheDependencyDatabase" />
+
+          
 
           
 

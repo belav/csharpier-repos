@@ -36,6 +36,8 @@
 
         
 
+        
+
          class.</para
       >
       <block subset="none" type="note">
@@ -49,8 +51,12 @@
 
         
 
+        
+
         , <see
          cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Delete" />
+
+        
 
         
 
@@ -63,8 +69,12 @@
 
         
 
+        
+
         , <see
          cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Export" />
+
+        
 
         
 
@@ -77,6 +87,8 @@
 
         
 
+        
+
         , <see
          cref="F:System.Security.Permissions.KeyContainerPermissionFlags.Decrypt" />
 
@@ -84,8 +96,12 @@
 
         
 
+        
+
         , and <see
          cref="F:System.Security.Permissions.KeyContainerPermissionFlags.AllFlags" />
+
+        
 
         
 

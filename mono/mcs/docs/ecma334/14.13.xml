@@ -9,6 +9,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="14.6">unary-expression</non_terminal>
@@ -20,6 +22,8 @@
       <name>
         <non_terminal where="14.13">assignment-operator</non_terminal>
       </name>
+
+      
 
       
 
@@ -50,8 +54,12 @@
 
     
 
+    
+
     ). The simple assignment operator is described in <hyperlink
     >14.13.1</hyperlink>
+
+    
 
     
 
@@ -67,11 +75,15 @@
 
     
 
+    
+
     . </paragraph
   >
   <paragraph
     >The += and -= operators with an event access expression as the left operand are called the event assignment operators. No other assignment operator is valid with an event access as the left operand. The event assignment operators are described in <hyperlink
     >14.13.3</hyperlink>
+
+    
 
     
 

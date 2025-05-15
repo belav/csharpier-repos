@@ -26,11 +26,15 @@
 
         
 
+        
+
          class encapsulates the &lt;EncryptionMethod&gt; tag defined by the World Wide Web Consortium XML Encryption specification located at http://www.w3.org/TR/xmlenc-core/. </para
       >
       <para
         >Use the <see
          cref="T:System.Security.Cryptography.Xml.EncryptionMethod" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          element or the <see
          cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+
+        
 
         
 
@@ -55,6 +63,8 @@
       <para
         >Use one of the URI identifiers defined by the World Wide Web Consortium XML Encryption specification located at http://www.w3.org/TR/xmlenc-core/.  All URI identifiers are accessible as static fields of the <see
          cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
+
+        
 
         
 
@@ -93,6 +103,8 @@
 
             
 
+            
+
              class without specifying the Uniform Resource Identifier (URI) of an encryption algorithm.  </para
           >
         </remarks>
@@ -101,6 +113,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.Xml.EncryptionMethod" />
+
+            
 
             
 
@@ -138,11 +152,15 @@
 
             
 
+            
+
              class using the URI of an encryption algorithm.  </para
           >
           <para
             >Use one of the URI identifiers defined by the World Wide Web Consortium XML Encryption specification located at http://www.w3.org/TR/xmlenc-core/.  All URI identifiers are accessible as static fields of the <see
              cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
+
+            
 
             
 
@@ -156,6 +174,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.Xml.EncryptionMethod" />
+
+            
 
             
 
@@ -193,6 +213,8 @@
 
             
 
+            
+
              method returns a representation of the &lt;EncryptionMethod&gt; element. </para
           >
         </remarks>
@@ -206,8 +228,12 @@
 
             
 
+            
+
              object that encapsulates an instance of the <see
              cref="T:System.Security.Cryptography.Xml.EncryptionMethod" />
+
+            
 
             
 
@@ -226,8 +252,12 @@
 
             
 
+            
+
              object that encapsulates an instance of the <see
              cref="T:System.Security.Cryptography.Xml.EncryptionMethod" />
+
+            
 
             
 
@@ -262,8 +292,12 @@
 
             
 
+            
+
              property describes the Uniform Resource Identifier (URI) of the encryption algorithm used to encrypt data associated with either the <see
              cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+
+            
 
             
 
@@ -276,11 +310,15 @@
 
             
 
+            
+
              element.</para
           >
           <para
             >Use one of the URI identifiers defined by the World Wide Web Consortium XML Encryption specification located at http://www.w3.org/TR/xmlenc-core/.  All URI identifiers are accessible as static fields of the <see
              cref="T:System.Security.Cryptography.Xml.EncryptedXml" />
+
+            
 
             
 
@@ -319,6 +357,8 @@
 
             
 
+            
+
              property describes the key size of the encryption algorithm used to encrypt data associated with either the <see
              cref="T:System.Security.Cryptography.Xml.EncryptedData" />
 
@@ -326,8 +366,12 @@
 
             
 
+            
+
              element or the <see
              cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+
+            
 
             
 
@@ -371,6 +415,8 @@
 
             
 
+            
+
              method configures the <see
              cref="T:System.Security.Cryptography.Xml.EncryptionMethod" />
 
@@ -378,8 +424,12 @@
 
             
 
+            
+
              object to match the state of an <see
              cref="T:System.Xml.XmlElement" />
+
+            
 
             
 
@@ -398,8 +448,12 @@
 
             
 
+            
+
              object and configures the internal state of the <see
              cref="T:System.Security.Cryptography.Xml.EncryptionMethod" />
+
+            
 
             
 
@@ -415,8 +469,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlElement" />
+
+          
 
           
 

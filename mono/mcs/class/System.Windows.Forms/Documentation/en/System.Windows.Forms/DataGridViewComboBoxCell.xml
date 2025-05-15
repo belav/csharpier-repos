@@ -24,8 +24,12 @@
 
         
 
+        
+
          class is a specialized type of <see
          cref="T:System.Windows.Forms.DataGridViewCell" />
+
+        
 
         
 
@@ -38,6 +42,8 @@
 
         
 
+        
+
          hosts a <see
          cref="T:System.Windows.Forms.DataGridViewComboBoxEditingControl" />
 
@@ -45,8 +51,12 @@
 
         
 
+        
+
          in which the user can change the cell's value, assuming the cell's <see
          cref="P:System.Windows.Forms.DataGridViewCell.ReadOnly" />
+
+        
 
         
 
@@ -62,8 +72,12 @@
 
         
 
+        
+
          control, the <see
          cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
+
+        
 
         
 
@@ -76,6 +90,8 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.ListControl.SelectedValue" />
 
@@ -83,8 +99,12 @@
 
         
 
+        
+
          properties. Instead, selecting a value from a drop-down list sets the cell <see
          cref="P:System.Windows.Forms.DataGridViewCell.Value" />
+
+        
 
         
 
@@ -100,8 +120,12 @@
 
         
 
+        
+
          is the column type specialized to hold cells of this type. By default, the <see
          cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.CellTemplate" />
+
+        
 
         
 
@@ -114,6 +138,8 @@
 
         
 
+        
+
         . To pattern the cells within a column after an existing <see
          cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
 
@@ -121,8 +147,12 @@
 
         
 
+        
+
         , set the column's <see
          cref="P:System.Windows.Forms.DataGridViewComboBoxColumn.CellTemplate" />
+
+        
 
         
 
@@ -139,8 +169,12 @@
 
         
 
+        
+
          type unless you want to override column values for specific cells. The guidelines described in the <see
          cref="T:System.Windows.Forms.DataGridViewComboBoxColumn" />
+
+        
 
         
 
@@ -154,6 +188,8 @@
       <para
         >Displays a combo box in a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -180,6 +216,8 @@
 
             
 
+            
+
              property value to true.</para
           >
         </remarks>
@@ -188,6 +226,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
+
+            
 
             
 
@@ -244,8 +284,12 @@
 
             
 
+            
+
              method whenever you derive from <see
              cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
+
+            
 
             
 
@@ -268,8 +312,12 @@
 
             
 
+            
+
              that represents the cloned <see
              cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
+
+            
 
             
 
@@ -302,11 +350,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >If possible, set <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.DataSource" />
+
+            
 
             
 
@@ -319,8 +371,12 @@
 
             
 
+            
+
              property doesn't need to be set. But if the source is more complicated, set <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.DisplayMember" />
+
+            
 
             
 
@@ -336,6 +392,8 @@
 
             
 
+            
+
              is set to a string array, then <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.ValueMember" />
 
@@ -343,8 +401,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.DisplayMember" />
+
+            
 
             
 
@@ -360,8 +422,12 @@
 
             
 
+            
+
              property causes the cell to reinitialize its <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.Items" />
+
+            
 
             
 
@@ -377,8 +443,12 @@
 
             
 
+            
+
              property, the control attempts to use the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.ValueMember" />
+
+            
 
             
 
@@ -391,8 +461,12 @@
 
             
 
+            
+
              property values with the new data source, and sets each property to null if its value cannot be found. Any exception that occurs during this process is ignored unless it is one of the following critical exceptions: <see
              cref="T:System.NullReferenceException" />
+
+            
 
             
 
@@ -405,8 +479,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.OutOfMemoryException" />
+
+            
 
             
 
@@ -419,8 +497,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.ExecutionEngineException" />
+
+            
 
             
 
@@ -433,8 +515,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.AccessViolationException" />
+
+            
 
             
 
@@ -450,8 +536,12 @@
 
             
 
+            
+
              is set, the <see
              cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
+
+            
 
             
 
@@ -464,8 +554,12 @@
 
             
 
+            
+
              event of the data source. When the <see
              cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
+
+            
 
             
 
@@ -478,6 +572,8 @@
 
             
 
+            
+
             , the resource is not immediately released. The <see
              cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
 
@@ -485,8 +581,12 @@
 
             
 
+            
+
              resource is released when the attached data source is disposed. To release the resource for garbage collection immediately, set the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.DataSource" />
+
+            
 
             
 
@@ -538,8 +638,12 @@
 
             
 
+            
+
              represents the text information displayed in the combo box drop-down list. In contrast, the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.ValueMember" />
+
+            
 
             
 
@@ -555,8 +659,12 @@
 
             
 
+            
+
              is supposed to be drawn from a nondefault property or column of the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.DataSource" />
+
+            
 
             
 
@@ -569,8 +677,12 @@
 
             
 
+            
+
              must be set in addition to <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.DataSource" />
+
+            
 
             
 
@@ -586,8 +698,12 @@
 
             
 
+            
+
              is set to a string array, <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.DisplayMember" />
+
+            
 
             
 
@@ -603,8 +719,12 @@
 
             
 
+            
+
              property. <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.DisplayMember" />
+
+            
 
             
 
@@ -649,8 +769,12 @@
 
             
 
+            
+
              property affects the appearance of the cell when it is not in edit mode, and regardless of whether it is read-only. When the cell is in edit mode, it always looks like a <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -666,8 +790,12 @@
 
             
 
+            
+
              property value is true, the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.DisplayStyle" />
+
+            
 
             
 
@@ -683,11 +811,15 @@
 
             
 
+            
+
              property. </para
           >
           <para
             >To enable cell highlighting when the mouse pointer is over the cell, you must set the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.DisplayStyle" />
+
+            
 
             
 
@@ -700,6 +832,8 @@
 
             
 
+            
+
              and the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.FlatStyle" />
 
@@ -707,8 +841,12 @@
 
             
 
+            
+
              property value to <see
              cref="F:System.Windows.Forms.FlatStyle.Popup" />
+
+            
 
             
 
@@ -724,8 +862,12 @@
 
             
 
+            
+
              property of the owning column also sets the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.DisplayStyle" />
+
+            
 
             
 
@@ -770,8 +912,12 @@
 
             
 
+            
+
              property affects the appearance of the cell when it is not in edit mode, and regardless of whether it is read-only. When the cell is in edit mode, it always looks like a <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -790,8 +936,12 @@
 
             
 
+            
+
              property value applies to the cell only when it is the current cell in the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -829,8 +979,12 @@
 
             
 
+            
+
              property of the hosted <see
              cref="T:System.Windows.Forms.DataGridViewComboBoxEditingControl" />
+
+            
 
             
 
@@ -872,8 +1026,12 @@
 
             
 
+            
+
              class is derived from the <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -913,11 +1071,15 @@
 
             
 
+            
+
              property affects the behavior and appearance of the drop-down arrow in the cell. </para
           >
           <para
             >To enable cell highlighting when the mouse pointer is over the cell, you must set the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.DisplayStyle" />
+
+            
 
             
 
@@ -930,6 +1092,8 @@
 
             
 
+            
+
              and the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.FlatStyle" />
 
@@ -937,8 +1101,12 @@
 
             
 
+            
+
              property value to <see
              cref="F:System.Windows.Forms.FlatStyle.Popup" />
+
+            
 
             
 
@@ -954,8 +1122,12 @@
 
             
 
+            
+
              property of the owning column also sets the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.FlatStyle" />
+
+            
 
             
 
@@ -992,6 +1164,8 @@
           <para
             >Because a combo box only handles text information, the type of the underlying formatted value is always <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -1155,8 +1329,12 @@
 
             
 
+            
+
              method initializes the hosted <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -1169,8 +1347,12 @@
 
             
 
+            
+
              method. In addition, for every invocation, <see
              cref="M:System.Windows.Forms.DataGridViewComboBoxCell.InitializeEditingControl(System.Int32,System.Object,System.Windows.Forms.DataGridViewCellStyle)" />
+
+            
 
             
 
@@ -1188,8 +1370,12 @@
 
                 
 
+                
+
                  control, such as <see
                  cref="P:System.Windows.Forms.ComboBox.MaxDropDownItems" />
+
+                
 
                 
 
@@ -1202,8 +1388,12 @@
 
                 
 
+                
+
                 , and <see
                  cref="P:System.Windows.Forms.ComboBox.FlatStyle" />
+
+                
 
                 
 
@@ -1221,8 +1411,12 @@
 
                 
 
+                
+
                  control, such as <see
                  cref="P:System.Windows.Forms.ComboBox.DataSource" />
+
+                
 
                 
 
@@ -1235,8 +1429,12 @@
 
                 
 
+                
+
                 , and <see
                  cref="P:System.Windows.Forms.ListControl.ValueMember" />
+
+                
 
                 
 
@@ -1254,8 +1452,12 @@
 
                 
 
+                
+
                  property of the hosted <see
                  cref="T:System.Windows.Forms.ComboBox" />
+
+                
 
                 
 
@@ -1268,6 +1470,8 @@
           <para
             >This method also adjusts the cell's dimensions to accommodate the hosted <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -1287,10 +1491,14 @@
 
           
 
+          
+
           The index of the cell's parent row.</param
         >
         <param name="initialFormattedValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1305,8 +1513,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+          
 
           
 
@@ -1341,6 +1553,8 @@
 
             
 
+            
+
             . With this reference, you can add items, remove items, and obtain a count of the items in the collection. For more information on the tasks that can be performed with the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.Items" />
 
@@ -1348,8 +1562,12 @@
 
             
 
+            
+
              collection, see <see
              cref="T:System.Windows.Forms.DataGridViewComboBoxCell.ObjectCollection" />
+
+            
 
             
 
@@ -1365,8 +1583,12 @@
 
             
 
+            
+
             , then <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.ValueMember" />
+
+            
 
             
 
@@ -1379,11 +1601,15 @@
 
             
 
+            
+
              do not need to be set because each string added will be used for both value and display.</para
           >
           <block subset="none" type="note">
             <para>
               <see cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
+
+              
 
               
 
@@ -1400,8 +1626,12 @@
 
             
 
+            
+
              property is set, then the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.Items" />
+
+            
 
             
 
@@ -1417,6 +1647,8 @@
 
             
 
+            
+
              collection or an error will occur and the cell value will revert to the first item in the collection. You can customize this behavior by handling the <see
              cref="E:System.Windows.Forms.DataGridView.DataError" />
 
@@ -1424,8 +1656,12 @@
 
             
 
+            
+
              and <see
              cref="E:System.Windows.Forms.DataGridView.CellFormatting" />
+
+            
 
             
 
@@ -1441,12 +1677,16 @@
 
             
 
+            
+
              property will force the row to become unshared, allocating extra memory. For more information about row sharing, see <format
              type="text/html">
               <a href="8321a8a6-6340-4fd1-b475-fa090b905aaf"
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -1493,8 +1733,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -1507,8 +1751,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Windows.Forms.DataGridViewEditMode.EditOnKeystrokeOrF2" />
+
+            
 
             
 
@@ -1523,6 +1771,8 @@
                 >Default Keyboard and Mouse Handling in the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -1546,8 +1796,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyEventArgs" />
+
+          
 
           
 
@@ -1579,6 +1833,8 @@
 
             
 
+            
+
              property changes the corresponding <see
              cref="P:System.Windows.Forms.ComboBox.MaxDropDownItems" />
 
@@ -1586,8 +1842,12 @@
 
             
 
+            
+
              property of the hosted <see
              cref="T:System.Windows.Forms.DataGridViewComboBoxEditingControl" />
+
+            
 
             
 
@@ -1625,6 +1885,8 @@
           <para
             >Called when the <see
              cref="P:System.Windows.Forms.DataGridViewElement.DataGridView" />
+
+            
 
             
 
@@ -1806,6 +2068,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1816,8 +2080,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -1832,6 +2100,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
 
@@ -1839,8 +2109,12 @@
 
           
 
+          
+
            that represents the area of the <see
            cref="T:System.Windows.Forms.DataGridView" />
+
+          
 
           
 
@@ -1855,8 +2129,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1871,6 +2149,8 @@
 
           
 
+          
+
           The row index of the cell that is being painted.</param
         >
         <param name="elementState">
@@ -1880,8 +2160,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -1896,10 +2180,14 @@
 
           
 
+          
+
           The data of the cell that is being painted.</param
         >
         <param name="formattedValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1914,6 +2202,8 @@
 
           
 
+          
+
           An error message that is associated with the cell.</param
         >
         <param name="cellStyle">
@@ -1923,8 +2213,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+          
 
           
 
@@ -1939,8 +2233,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
+
+          
 
           
 
@@ -1955,8 +2253,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.DataGridViewPaintParts" />
+
+          
 
           
 
@@ -2017,6 +2319,8 @@
 
             
 
+            
+
              sorts existing entries and add new entries to the appropriate sorted position in the list. When this property is set to false, new items are added to the end of the existing list. The sorting operation is case-insensitive and performed in alphabetically ascending order.</para
           >
         </remarks>
@@ -2069,8 +2373,12 @@
 
             
 
+            
+
              represents the corresponding value of a selection. In contrast, the <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.DisplayMember" />
+
+            
 
             
 
@@ -2086,11 +2394,15 @@
 
             
 
+            
+
              property specifies the data source for the value of the selections displayed in the drop-down list.</para
           >
           <para
             >If the data for the selections displayed by the <see
              cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
+
+            
 
             
 
@@ -2103,6 +2415,8 @@
 
             
 
+            
+
             , then <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.ValueMember" />
 
@@ -2110,8 +2424,12 @@
 
             
 
+            
+
              must be set in addition to <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.DataSource" />
+
+            
 
             
 
@@ -2127,8 +2445,12 @@
 
             
 
+            
+
              is set to a string array, <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.ValueMember" />
+
+            
 
             
 
@@ -2144,8 +2466,12 @@
 
             
 
+            
+
              property. <see
              cref="P:System.Windows.Forms.DataGridViewComboBoxCell.ValueMember" />
+
+            
 
             
 

@@ -40,11 +40,15 @@
 
         
 
+        
+
          can represent a parameter passed to a method and the reference direction of the parameter.</para
       >
       <para
         >The <see
          cref="P:System.CodeDom.CodeDirectionExpression.Expression" />
+
+        
 
         
 
@@ -57,8 +61,12 @@
 
         
 
+        
+
          property indicates the direction of the parameter using one of the <see
          cref="T:System.CodeDom.FieldDirection" />
+
+        
 
         
 
@@ -69,6 +77,8 @@
       <block subset="none" type="note">
         <para>
           <see cref="T:System.CodeDom.CodeDirectionExpression" />
+
+          
 
           
 
@@ -105,6 +115,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeDirectionExpression" />
+
+            
 
             
 
@@ -147,6 +159,8 @@
 
             
 
+            
+
              class using the specified field direction and expression.</para
           >
         </summary>
@@ -157,8 +171,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.FieldDirection" />
+
+          
 
           
 
@@ -173,8 +191,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 

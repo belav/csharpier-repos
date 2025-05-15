@@ -31,8 +31,12 @@
 
         
 
+        
+
          class for a control, create a custom <see
          cref="T:System.Web.UI.ControlBuilder" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          control from the <see
          cref="M:System.Web.UI.ControlBuilder.GetChildControlType(System.String,System.Collections.IDictionary)" />
+
+        
 
         
 
@@ -73,6 +81,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.TemplateBuilder" />
+
+            
 
             
 
@@ -113,6 +123,8 @@
 
             
 
+            
+
              class.</para
           >
         </returns>
@@ -148,8 +160,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.TemplateParser" />
+
+          
 
           
 
@@ -164,8 +180,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.ControlBuilder" />
+
+          
 
           
 
@@ -180,8 +200,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -196,6 +220,8 @@
 
           
 
+          
+
           The name of the tag to build. This allows the builder to support multiple tag types. </param
         >
         <param name="ID">
@@ -205,8 +231,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Web.UI.ControlBuilder.ID" />
+
+          
 
           
 
@@ -221,8 +251,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -259,6 +293,8 @@
 
             
 
+            
+
              method is required when implementing the <see
              cref="T:System.Web.UI.ITemplate" />
 
@@ -266,8 +302,12 @@
 
             
 
+            
+
              interface. The <see
              cref="M:System.Web.UI.TemplateBuilder.InstantiateIn(System.Web.UI.Control)" />
+
+            
 
             
 
@@ -286,6 +326,8 @@
 
             
 
+            
+
              object that child controls and templates belong to in design time.</para
           >
         </summary>
@@ -296,8 +338,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Control" />
+
+          
 
           
 
@@ -329,8 +375,12 @@
 
             
 
+            
+
              method needs to be called when we are in design time. The <see
              cref="M:System.Web.UI.TemplateBuilder.NeedsTagInnerText" />
+
+            
 
             
 
@@ -343,8 +393,12 @@
 
             
 
+            
+
              property of the base <see
              cref="T:System.Web.UI.ControlBuilder" />
+
+            
 
             
 
@@ -387,6 +441,8 @@
 
             
 
+            
+
              method overrides the base class's <see
              cref="M:System.Web.UI.ControlBuilder.SetTagInnerText(System.String)" />
 
@@ -394,8 +450,12 @@
 
             
 
+            
+
              method and sets the value of the <see
              cref="P:System.Web.UI.TemplateBuilder.Text" />
+
+            
 
             
 
@@ -410,6 +470,8 @@
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -437,6 +499,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.TemplateBuilder.Text" />
+
+            
 
             
 

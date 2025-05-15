@@ -23,8 +23,12 @@
 
         
 
+        
+
          class gets and sets properties of individual cookies. The <see
          cref="T:System.Web.HttpCookieCollection" />
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
          collection of the <see
          cref="T:System.Web.HttpRequest" />
+
+        
 
         
 
@@ -54,8 +62,12 @@
 
         
 
+        
+
          collection of the <see
          cref="T:System.Web.HttpResponse" />
+
+        
 
         
 
@@ -90,6 +102,8 @@
 
           
 
+          
+
           The name of the new cookie. </param
         >
       </Docs>
@@ -119,10 +133,14 @@
 
           
 
+          
+
           The name of the new cookie. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -219,12 +237,16 @@
 
             
 
+            
+
             , that can help mitigate cross-site scripting threats that result in stolen cookies. Stolen cookies can contain sensitive information identifying the user to the site, such as the ASP.NET session ID or forms authentication ticket, and can be replayed by the attacker in order to masquerade as the user or obtain sensitive information. When an HttpOnly cookie is received by a compliant browser, it is inaccessible to client-side script. </para
           >
           <block subset="none" type="note">
             <para
               >Setting the <see
                cref="P:System.Web.HttpCookie.HttpOnly" />
+
+              
 
               
 
@@ -238,6 +260,8 @@
              cref="http://go.microsoft.com/fwlink/?LinkId=41580"
               >Mitigating Cross-site Scripting With HTTP-only Cookies</see
             >
+
+            
 
             
 
@@ -311,8 +335,12 @@
 
             
 
+            
+
              property extends the <see
              cref="P:System.Web.HttpCookie.Domain" />
+
+            
 
             
 
@@ -354,8 +382,12 @@
 
             
 
+            
+
             . Values set programmatically using the <see
              cref="P:System.Web.HttpCookie.Secure" />
+
+            
 
             
 
@@ -373,10 +405,14 @@
 
             
 
+            
+
             . For more information about configuring SSL on an Internet Information Services (IIS) Web server, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=38553"
               >Configuring SSL on a Web Server or a Web Site</see
             >
+
+            
 
             
 

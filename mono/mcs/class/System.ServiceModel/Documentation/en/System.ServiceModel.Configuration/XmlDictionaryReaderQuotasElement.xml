@@ -27,9 +27,7 @@
       </block>
       <para>
         <format type="text/html">
-          <a href="3e5e42ff-cef8-478f-bf14-034449239bfd"
->readerQuotas element</a
-          >
+          <a href="3e5e42ff-cef8-478f-bf14-034449239bfd">readerQuotas element</a>
         </format>
       </para>
     </remarks>
@@ -57,6 +55,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Configuration.XmlDictionaryReaderQuotasElement" />
+
+            
 
             
 

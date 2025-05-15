@@ -22,6 +22,8 @@
 
         
 
+        
+
          class is used to get, set, write, and read SOAP header content to and from SOAP messages.</para
       >
     </summary>
@@ -39,6 +41,8 @@
           <para
             >Initializes a new instance of <see
              cref="T:System.Web.Services.Protocols.SoapHeaderHandling" />
+
+            
 
             
 
@@ -78,8 +82,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+
+          
 
           
 
@@ -122,8 +130,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+
+          
 
           
 
@@ -138,8 +150,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -154,8 +170,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Web.Services.Protocols.SoapHeaderMapping" />
+
+          
 
           
 
@@ -170,8 +190,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Services.Protocols.SoapHeaderDirection" />
+
+          
 
           
 
@@ -181,6 +205,8 @@
         >
         <param name="client">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -225,6 +251,8 @@
 
             
 
+            
+
              that contains the SOAP header content of the SOAP message.</para
           >
         </summary>
@@ -233,6 +261,8 @@
           <para
             >A <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -248,8 +278,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -264,8 +298,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Serialization.XmlSerializer" />
+
+          
 
           
 
@@ -280,8 +318,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+
+          
 
           
 
@@ -296,8 +338,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Web.Services.Protocols.SoapHeaderMapping" />
+
+          
 
           
 
@@ -312,8 +358,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Services.Protocols.SoapHeaderDirection" />
+
+          
 
           
 
@@ -328,8 +378,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -344,8 +398,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -360,8 +418,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -404,8 +466,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+
+          
 
           
 
@@ -420,8 +486,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -436,8 +506,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Web.Services.Protocols.SoapHeaderMapping" />
+
+          
 
           
 
@@ -452,8 +526,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Services.Protocols.SoapHeaderDirection" />
+
+          
 
           
 
@@ -463,6 +541,8 @@
         >
         <param name="client">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -509,8 +589,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -525,8 +609,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Serialization.XmlSerializer" />
+
+          
 
           
 
@@ -541,8 +629,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+
+          
 
           
 
@@ -557,8 +649,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Web.Services.Protocols.SoapHeaderMapping" />
+
+          
 
           
 
@@ -573,8 +669,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Services.Protocols.SoapHeaderDirection" />
+
+          
 
           
 
@@ -589,8 +689,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -605,8 +709,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -621,8 +729,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -637,8 +749,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -679,8 +795,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -695,8 +815,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Protocols.SoapHeaderCollection" />
+
+          
 
           
 
@@ -711,8 +835,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 

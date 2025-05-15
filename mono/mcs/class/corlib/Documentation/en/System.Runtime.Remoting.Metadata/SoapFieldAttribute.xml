@@ -40,8 +40,12 @@
 
         
 
+        
+
          attribute are object fields. The <see
          cref="T:System.Runtime.Remoting.Metadata.SoapFieldAttribute" />
+
+        
 
         
 
@@ -77,6 +81,8 @@
           <para
             >Creates an instance of <see
              cref="T:System.Runtime.Remoting.Metadata.SoapFieldAttribute" />
+
+            
 
             
 
@@ -159,6 +165,8 @@
           <para
             >Gets or sets the XML element name of the field contained in the <see
              cref="T:System.Runtime.Remoting.Metadata.SoapFieldAttribute" />
+
+            
 
             
 

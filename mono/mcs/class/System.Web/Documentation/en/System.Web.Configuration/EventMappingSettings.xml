@@ -25,6 +25,8 @@
 
         
 
+        
+
          object. The mapping uses a range specified with the <see
          cref="P:System.Web.Configuration.EventMappingSettings.StartEventCode" />
 
@@ -32,8 +34,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.Configuration.EventMappingSettings.EndEventCode" />
+
+        
 
         
 
@@ -98,6 +104,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -114,11 +122,15 @@
 
             
 
+            
+
              class using the specified name and type.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -131,10 +143,14 @@
 
           
 
+          
+
            object being created.</param
         >
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -172,6 +188,8 @@
 
             
 
+            
+
              class using the specified values.</para
           >
         </summary>
@@ -182,8 +200,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Web.Configuration.EventMappingSettings" />
+
+          
 
           
 
@@ -198,6 +220,8 @@
 
           
 
+          
+
           The fully qualified type of the event class to use.</param
         >
         <param name="startEventCode">
@@ -207,10 +231,14 @@
 
           
 
+          
+
           The starting event code range.</param
         >
         <param name="endEventCode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -250,6 +278,8 @@
 
             
 
+            
+
              object. The mapping uses a range specified with the <see
              cref="P:System.Web.Configuration.EventMappingSettings.StartEventCode" />
 
@@ -257,8 +287,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.Configuration.EventMappingSettings.EndEventCode" />
+
+            
 
             
 
@@ -299,6 +333,8 @@
           <para
             >Gets or sets the name of the <see
              cref="T:System.Web.Configuration.EventMappingSettings" />
+
+            
 
             
 
@@ -358,6 +394,8 @@
 
             
 
+            
+
              object. The mapping uses a range specified with the <see
              cref="P:System.Web.Configuration.EventMappingSettings.StartEventCode" />
 
@@ -365,8 +403,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.Configuration.EventMappingSettings.EndEventCode" />
+
+            
 
             
 
@@ -403,6 +445,8 @@
           <para
             >Use this property to specify the type of the event. The specified type can be the actual class type or a parent type of the event class. If it is an empty string (""), no event is mapped, and the <see
              cref="T:System.Web.Configuration.EventMappingSettings" />
+
+            
 
             
 

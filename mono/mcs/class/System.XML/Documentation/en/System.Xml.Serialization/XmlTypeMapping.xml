@@ -32,8 +32,12 @@
 
         
 
+        
+
          class is used to serialize an object as encoded SOAP XML. The resulting XML conforms to section 5 of the World Wide Web Consortium (www.w3.org) document, "Simple Object Access Protocol (SOAP) 1.1". Create an <see
          cref="T:System.Xml.Serialization.XmlTypeMapping" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.Xml.Serialization.SoapReflectionImporter" />
+
+        
 
         
 
@@ -60,8 +68,12 @@
 
         
 
+        
+
          to construct an instance of the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -73,6 +85,8 @@
             >[&lt;topic://cpconAttributesThatControlSOAPEncodedSerialization&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -165,6 +179,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -198,8 +214,12 @@
 
             
 
+            
+
              to the class, and set the <see
              cref="P:System.Xml.Serialization.SoapTypeAttribute.TypeName" />
+
+            
 
             
 
@@ -238,8 +258,12 @@
 
             
 
+            
+
              to the class, and set the <see
              cref="P:System.Xml.Serialization.SoapTypeAttribute.Namespace" />
+
+            
 
             
 

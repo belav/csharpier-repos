@@ -16,6 +16,8 @@
 
           
 
+          
+
            If documentation is missing, the JDI documentation can be consulted instead.</format
         >
       </para>
@@ -30,8 +32,12 @@
 
         
 
+        
+
          object represents an entity in the debuggee. There is usually one mirror subclass for each type of entity, i.e. <c
         >TypeMirror</c>
+
+        
 
         
 
@@ -44,6 +50,8 @@
 
         
 
+        
+
          for application domains etc. These classes usually have a similar set of properties/methods as their non-mirror counterparts, the difference is that calling these properties/methods might result in a remote call to the debuggee to request information. The results of these remote calls are usually cached in the mirror object, so when multiple calls are made to <c
         >TypeMirror.Name</c>
 
@@ -51,8 +59,12 @@
 
         
 
+        
+
         , for example, only the first call involves a remote operation. The <c
         >ToString()/Equals()/GetHashCode ()</c>
+
+        
 
         
 
@@ -86,8 +98,12 @@
 
               
 
+              
+
               /<c
               >EventRequestManager</c>
+
+              
 
               
 
@@ -100,6 +116,8 @@
 
               
 
+              
+
               .</term
             >
           </item>
@@ -107,6 +125,8 @@
             <term
               >Values which have primitive types i.e. int are represented by a class called <c
               >PrimitiveValue</c>
+
+              
 
               
 

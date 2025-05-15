@@ -47,8 +47,12 @@
 
         
 
+        
+
         , use the <see
          cref="M:System.Reflection.Emit.AssemblyBuilder.DefineDynamicModule(System.String)" />
+
+        
 
         
 
@@ -91,6 +95,8 @@
 
             
 
+            
+
              object that is returned is the <see
              cref="T:System.Reflection.Emit.AssemblyBuilder" />
 
@@ -98,8 +104,12 @@
 
             
 
+            
+
              that defined this instance of <see
              cref="T:System.Reflection.Emit.ModuleBuilder" />
+
+            
 
             
 
@@ -113,6 +123,8 @@
           <para
             >Gets the dynamic assembly that defined this instance of <see
              cref="T:System.Reflection.Emit.ModuleBuilder" />
+
+            
 
             
 
@@ -152,8 +164,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -165,6 +181,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -216,6 +234,8 @@
 
               
 
+              
+
                instead of <see
                cref="T:System.ArgumentNullException" />
 
@@ -223,8 +243,12 @@
 
               
 
+              
+
                when <paramref
                name="url" />
+
+              
 
               
 
@@ -249,6 +273,8 @@
 
           
 
+          
+
           The URL for the document. </param
         >
         <param name="language">
@@ -258,8 +284,12 @@
 
           
 
+          
+
           The GUID that identifies the document language. This can be <see
            cref="F:System.Guid.Empty" />
+
+          
 
           
 
@@ -274,8 +304,12 @@
 
           
 
+          
+
           The GUID that identifies the document language vendor. This can be <see
            cref="F:System.Guid.Empty" />
+
+          
 
           
 
@@ -290,8 +324,12 @@
 
           
 
+          
+
           The GUID that identifies the document type. This can be <see
            cref="F:System.Guid.Empty" />
+
+          
 
           
 
@@ -335,8 +373,12 @@
 
             
 
+            
+
             . The <paramref
              name="value__" />
+
+            
 
             
 
@@ -349,8 +391,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Reflection.FieldAttributes.SpecialName" />
+
+            
 
             
 
@@ -370,12 +416,16 @@
 
             
 
+            
+
             . </para
           >
           <block subset="none" type="note">
             <para
               >In the .NET Framework versions 1.0 and 1.1, it is necessary to define enumerations using <see
                cref="T:System.Reflection.Emit.TypeBuilder" />
+
+              
 
               
 
@@ -388,6 +438,8 @@
 
               
 
+              
+
                emits enumerations whose elements are of type <see
                cref="T:System.Int32" />
 
@@ -395,8 +447,12 @@
 
               
 
+              
+
                instead of the enumeration type. In the .NET Framework version 2.0, <see
                cref="T:System.Reflection.Emit.EnumBuilder" />
+
+              
 
               
 
@@ -414,8 +470,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -427,6 +487,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -446,6 +508,8 @@
 
             
 
+            
+
              of the specified type.</para
           >
         </summary>
@@ -460,8 +524,12 @@
 
           
 
+          
+
           The full path of the enumeration type. <paramref
            name="name" />
+
+          
 
           
 
@@ -476,8 +544,12 @@
 
           
 
+          
+
           The type attributes for the enumeration. The attributes are any bits defined by <see
            cref="F:System.Reflection.TypeAttributes.VisibilityMask" />
+
+          
 
           
 
@@ -487,6 +559,8 @@
         >
         <param name="underlyingType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -531,12 +605,16 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
             <para
               >Starting with the net_v20sp1_long, this member no longer requires <see
                cref="T:System.Security.Permissions.ReflectionPermission" />
+
+              
 
               
 
@@ -549,12 +627,16 @@
 
               
 
+              
+
                flag. (See <format
                type="text/html">
                 <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -579,8 +661,12 @@
 
           
 
+          
+
           The name of the method. <paramref
            name="name" />
+
+          
 
           
 
@@ -595,6 +681,8 @@
 
           
 
+          
+
           The attributes of the method. <paramref
            name="attributes" />
 
@@ -602,8 +690,12 @@
 
           
 
+          
+
            must include <see
            cref="F:System.Reflection.MethodAttributes.Static" />
+
+          
 
           
 
@@ -618,10 +710,14 @@
 
           
 
+          
+
           The return type of the method. </param
         >
         <param name="parameterTypes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -667,12 +763,16 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
             <para
               >Starting with the net_v20sp1_long, this member no longer requires <see
                cref="T:System.Security.Permissions.ReflectionPermission" />
+
+              
 
               
 
@@ -685,12 +785,16 @@
 
               
 
+              
+
                flag. (See <format
                type="text/html">
                 <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -715,8 +819,12 @@
 
           
 
+          
+
           The name of the method. <paramref
            name="name" />
+
+          
 
           
 
@@ -731,6 +839,8 @@
 
           
 
+          
+
           The attributes of the method. <paramref
            name="attributes" />
 
@@ -738,8 +848,12 @@
 
           
 
+          
+
            must include <see
            cref="F:System.Reflection.MethodAttributes.Static" />
+
+          
 
           
 
@@ -754,6 +868,8 @@
 
           
 
+          
+
           The calling convention for the method. </param
         >
         <param name="returnType">
@@ -763,10 +879,14 @@
 
           
 
+          
+
           The return type of the method. </param
         >
         <param name="parameterTypes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -817,12 +937,16 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
             <para
               >Starting with the net_v20sp1_long, this member no longer requires <see
                cref="T:System.Security.Permissions.ReflectionPermission" />
+
+              
 
               
 
@@ -835,12 +959,16 @@
 
               
 
+              
+
                flag. (See <format
                type="text/html">
                 <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -865,8 +993,12 @@
 
           
 
+          
+
           The name of the method. <paramref
            name="name" />
+
+          
 
           
 
@@ -881,6 +1013,8 @@
 
           
 
+          
+
           The attributes of the method. <paramref
            name="attributes" />
 
@@ -888,8 +1022,12 @@
 
           
 
+          
+
            must include <see
            cref="F:System.Reflection.MethodAttributes.Static" />
+
+          
 
           
 
@@ -904,10 +1042,14 @@
 
           
 
+          
+
           The calling convention for the method. </param
         >
         <param name="returnType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -922,6 +1064,8 @@
 
           
 
+          
+
           An array of types representing the required custom modifiers for the return type, such as <see
            cref="T:System.Runtime.CompilerServices.IsConst" />
 
@@ -929,8 +1073,12 @@
 
           
 
+          
+
            or <see
            cref="T:System.Runtime.CompilerServices.IsBoxed" />
+
+          
 
           
 
@@ -945,6 +1093,8 @@
 
           
 
+          
+
           An array of types representing the optional custom modifiers for the return type, such as <see
            cref="T:System.Runtime.CompilerServices.IsConst" />
 
@@ -952,8 +1102,12 @@
 
           
 
+          
+
            or <see
            cref="T:System.Runtime.CompilerServices.IsBoxed" />
+
+          
 
           
 
@@ -968,6 +1122,8 @@
 
           
 
+          
+
           The types of the method's parameters. </param
         >
         <param name="requiredParameterTypeCustomModifiers">
@@ -977,10 +1133,14 @@
 
           
 
+          
+
           An array of arrays of types. Each array of types represents the required custom modifiers for the corresponding parameter of the global method. If a particular argument has no required custom modifiers, specify null instead of an array of types. If the global method has no arguments, or if none of the arguments have required custom modifiers, specify null instead of an array of arrays.</param
         >
         <param name="optionalParameterTypeCustomModifiers">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1023,8 +1183,12 @@
 
             
 
+            
+
              is automatically included in <paramref
              name="attributes" />
+
+            
 
             
 
@@ -1035,6 +1199,8 @@
           <para
             >The data defined by this method is not created until the <see
              cref="M:System.Reflection.Emit.ModuleBuilder.CreateGlobalFunctions" />
+
+            
 
             
 
@@ -1051,8 +1217,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -1064,6 +1234,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -1088,8 +1260,12 @@
 
           
 
+          
+
           The name used to refer to the data. <paramref
            name="name" />
+
+          
 
           
 
@@ -1104,10 +1280,14 @@
 
           
 
+          
+
           The binary large object (BLOB) of data. </param
         >
         <param name="attributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1157,8 +1337,12 @@
 
                 
 
+                
+
                  method to get a resource writer, and use the <see
                  cref="M:System.Resources.ResourceWriter.AddResource(System.String,System.String)" />
+
+                
 
                 
 
@@ -1176,8 +1360,12 @@
 
                 
 
+                
+
                  method to get a resource writer, and use the <see
                  cref="M:System.Resources.ResourceWriter.AddResource(System.String,System.String)" />
+
+                
 
                 
 
@@ -1195,6 +1383,8 @@
 
                 
 
+                
+
                  method to add the linked resource.</para
               >
             </item>
@@ -1207,8 +1397,12 @@
 
             
 
+            
+
              method or the <see
              cref="M:System.Reflection.Emit.ModuleBuilder.DefineUnmanagedResource(System.Byte[])" />
+
+            
 
             
 
@@ -1228,6 +1422,8 @@
 
           
 
+          
+
           The case-sensitive name for the resource.</param
         >
         <param name="stream">
@@ -1237,10 +1433,14 @@
 
           
 
+          
+
           A stream that contains the bytes for the resource.</param
         >
         <param name="attribute">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1291,8 +1491,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -1304,6 +1508,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -1328,8 +1534,12 @@
 
           
 
+          
+
           The name of the PInvoke method. <paramref
            name="name" />
+
+          
 
           
 
@@ -1344,10 +1554,14 @@
 
           
 
+          
+
           The name of the DLL in which the PInvoke method is defined. </param
         >
         <param name="attributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1362,10 +1576,14 @@
 
           
 
+          
+
           The method's calling convention. </param
         >
         <param name="returnType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1380,6 +1598,8 @@
 
           
 
+          
+
           The types of the method's parameters. </param
         >
         <param name="nativeCallConv">
@@ -1389,10 +1609,14 @@
 
           
 
+          
+
           The native calling convention. </param
         >
         <param name="nativeCharSet">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1442,12 +1666,16 @@
 
             
 
+            
+
             ) cannot be specified as arguments to this method. Such attributes should be set by emitting a custom attribute for the method. For example, the DLL import attribute PreserveSig is set by emitting a custom attribute.</para
           >
           <block subset="none" type="note">
             <para
               >Starting with the net_v20sp1_long, this member no longer requires <see
                cref="T:System.Security.Permissions.ReflectionPermission" />
+
+              
 
               
 
@@ -1460,12 +1688,16 @@
 
               
 
+              
+
                flag. (See <format
                type="text/html">
                 <a href="0f8bf8fa-b993-478f-87ab-1a1a7976d298"
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -1490,8 +1722,12 @@
 
           
 
+          
+
           The name of the PInvoke method. <paramref
            name="name" />
+
+          
 
           
 
@@ -1506,10 +1742,14 @@
 
           
 
+          
+
           The name of the DLL in which the PInvoke method is defined. </param
         >
         <param name="entryName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1524,10 +1764,14 @@
 
           
 
+          
+
           The attributes of the method. </param
         >
         <param name="callingConvention">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1542,10 +1786,14 @@
 
           
 
+          
+
           The method's return type. </param
         >
         <param name="parameterTypes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1560,10 +1808,14 @@
 
           
 
+          
+
           The native calling convention. </param
         >
         <param name="nativeCharSet">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1607,8 +1859,12 @@
 
             
 
+            
+
              method. For a summary of embedding and linking managed resources and manifest resource blobs, see the <see
              cref="M:System.Reflection.Emit.ModuleBuilder.DefineManifestResource(System.String,System.IO.Stream,System.Reflection.ResourceAttributes)" />
+
+            
 
             
 
@@ -1625,8 +1881,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -1638,6 +1898,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -1662,8 +1924,12 @@
 
           
 
+          
+
           The name of the resource. <paramref
            name="name" />
+
+          
 
           
 
@@ -1673,6 +1939,8 @@
         >
         <param name="description">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1717,8 +1985,12 @@
 
             
 
+            
+
              method. For a summary of embedding and linking managed resources and manifest resource blobs, see the <see
              cref="M:System.Reflection.Emit.ModuleBuilder.DefineManifestResource(System.String,System.IO.Stream,System.Reflection.ResourceAttributes)" />
+
+            
 
             
 
@@ -1735,8 +2007,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -1748,6 +2024,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -1772,8 +2050,12 @@
 
           
 
+          
+
           The name of the resource. <paramref
            name="name" />
+
+          
 
           
 
@@ -1788,10 +2070,14 @@
 
           
 
+          
+
           The description of the resource. </param
         >
         <param name="attribute">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1835,8 +2121,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -1848,6 +2138,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -1872,8 +2164,12 @@
 
           
 
+          
+
           The full path of the type, including the namespace. <paramref
            name="name" />
+
+          
 
           
 
@@ -1918,8 +2214,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -1931,6 +2231,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -1955,8 +2257,12 @@
 
           
 
+          
+
           The full path of the type. <paramref
            name="name" />
+
+          
 
           
 
@@ -1966,6 +2272,8 @@
         >
         <param name="attr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2011,8 +2319,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -2024,6 +2336,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -2048,8 +2362,12 @@
 
           
 
+          
+
           The full path of the type. <paramref
            name="name" />
+
+          
 
           
 
@@ -2064,10 +2382,14 @@
 
           
 
+          
+
           The attribute to be associated with the type. </param
         >
         <param name="parent">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2114,8 +2436,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -2127,6 +2453,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -2151,8 +2479,12 @@
 
           
 
+          
+
           The full path of the type. <paramref
            name="name" />
+
+          
 
           
 
@@ -2167,6 +2499,8 @@
 
           
 
+          
+
           The attributes of the defined type. </param
         >
         <param name="parent">
@@ -2176,10 +2510,14 @@
 
           
 
+          
+
           The type that the defined type extends. </param
         >
         <param name="typesize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2226,8 +2564,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -2239,6 +2581,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -2263,8 +2607,12 @@
 
           
 
+          
+
           The full path of the type. <paramref
            name="name" />
+
+          
 
           
 
@@ -2279,6 +2627,8 @@
 
           
 
+          
+
           The attributes of the defined type. </param
         >
         <param name="parent">
@@ -2288,10 +2638,14 @@
 
           
 
+          
+
           The type that the defined type extends. </param
         >
         <param name="packsize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2343,8 +2697,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -2356,6 +2714,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -2380,8 +2740,12 @@
 
           
 
+          
+
           The full path of the type. <paramref
            name="name" />
+
+          
 
           
 
@@ -2396,6 +2760,8 @@
 
           
 
+          
+
           The attributes to be associated with the type. </param
         >
         <param name="parent">
@@ -2405,10 +2771,14 @@
 
           
 
+          
+
           The type that the defined type extends. </param
         >
         <param name="interfaces">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2456,8 +2826,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -2469,6 +2843,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -2493,8 +2869,12 @@
 
           
 
+          
+
           The full path of the type. <paramref
            name="name" />
+
+          
 
           
 
@@ -2509,10 +2889,14 @@
 
           
 
+          
+
           The attributes of the defined type. </param
         >
         <param name="parent">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2527,10 +2911,14 @@
 
           
 
+          
+
           The packing size of the type. </param
         >
         <param name="typesize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2573,8 +2961,12 @@
 
             
 
+            
+
              is automatically included in <paramref
              name="attributes" />
+
+            
 
             
 
@@ -2585,6 +2977,8 @@
           <para
             >The data defined by this method is not created until the <see
              cref="M:System.Reflection.Emit.ModuleBuilder.CreateGlobalFunctions" />
+
+            
 
             
 
@@ -2601,8 +2995,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -2614,6 +3012,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -2638,8 +3038,12 @@
 
           
 
+          
+
           The name used to refer to the data. <paramref
            name="name" />
+
+          
 
           
 
@@ -2654,10 +3058,14 @@
 
           
 
+          
+
           The size of the data field. </param
         >
         <param name="attributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2699,6 +3107,8 @@
 
             
 
+            
+
             . Multiple unmanaged resources need to be merged with a tool such as the Microsoft ResMerge utility (not supplied with the common language runtime).</para
           >
           <block subset="none" type="note">
@@ -2710,8 +3120,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -2728,6 +3142,8 @@
 
               
 
+              
+
               .) To use this functionality, your application should target the net_v35_long or later.</para
             >
           </block>
@@ -2738,6 +3154,8 @@
         </summary>
         <param name="resource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2779,6 +3197,8 @@
 
             
 
+            
+
             . Multiple unmanaged resources need to be merged with a tool such as the Microsoft ResMerge utility (not supplied with the common language runtime).</para
           >
           <block subset="none" type="note">
@@ -2790,8 +3210,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -2808,6 +3232,8 @@
 
               
 
+              
+
               .) To use this functionality, your application should target the net_v35_long or later.</para
             >
           </block>
@@ -2818,6 +3244,8 @@
         </summary>
         <param name="resourceFileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2859,11 +3287,15 @@
 
             
 
+            
+
              equals the type and value of this instance; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2936,8 +3368,12 @@
 
             
 
+            
+
             . For example, you might define a type and want to define a method that takes an array of the type as a parameter. In order to access the elements of the array, you will need to call methods of the <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -2961,10 +3397,14 @@
 
           
 
+          
+
           An array class. </param
         >
         <param name="methodName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2979,6 +3419,8 @@
 
           
 
+          
+
           The method's calling convention. </param
         >
         <param name="returnType">
@@ -2988,10 +3430,14 @@
 
           
 
+          
+
           The return type of the method. </param
         >
         <param name="parameterTypes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3037,6 +3483,8 @@
 
             
 
+            
+
             , except that it returns the token of the array method instead of the method itself.</para
           >
         </remarks>
@@ -3055,10 +3503,14 @@
 
           
 
+          
+
           The object for the array. </param
         >
         <param name="methodName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3073,6 +3525,8 @@
 
           
 
+          
+
           The calling convention for the method. </param
         >
         <param name="returnType">
@@ -3082,10 +3536,14 @@
 
           
 
+          
+
           The return type of the method. </param
         >
         <param name="parameterTypes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3138,6 +3596,8 @@
 
           
 
+          
+
           The constructor to get a token for. </param
         >
       </Docs>
@@ -3173,6 +3633,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3182,6 +3644,8 @@
         </returns>
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3223,6 +3687,8 @@
 
             
 
+            
+
             , and that derive from a specified attribute type.</para
           >
         </summary>
@@ -3231,6 +3697,8 @@
           <para
             >An array that contains the custom attributes that are derived, at any level, from <paramref
              name="attributeType" />
+
+            
 
             
 
@@ -3246,10 +3714,14 @@
 
           
 
+          
+
           The base type from which attributes derive.</param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3290,8 +3762,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Emit.ModuleBuilder.DefineUninitializedData(System.String,System.Int32,System.Reflection.FieldAttributes)" />
+
+            
 
             
 
@@ -3303,6 +3779,8 @@
             <para
               >Module-level fields cannot be retrieved until after the <see
                cref="M:System.Reflection.Emit.ModuleBuilder.CreateGlobalFunctions" />
+
+              
 
               
 
@@ -3327,10 +3805,14 @@
 
           
 
+          
+
           The field name. </param
         >
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3370,8 +3852,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Emit.ModuleBuilder.DefineUninitializedData(System.String,System.Int32,System.Reflection.FieldAttributes)" />
+
+            
 
             
 
@@ -3383,6 +3869,8 @@
             <para
               >Module-level fields cannot be retrieved until after the <see
                cref="M:System.Reflection.Emit.ModuleBuilder.CreateGlobalFunctions" />
+
+              
 
               
 
@@ -3402,6 +3890,8 @@
         </returns>
         <param name="bindingFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3444,6 +3934,8 @@
         </returns>
         <param name="field">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3514,8 +4006,12 @@
 
             
 
+            
+
              method. Use the inherited <see
              cref="Overload:System.Reflection.Module.GetMethod" />
+
+            
 
             
 
@@ -3528,12 +4024,16 @@
 
             
 
+            
+
              method. </para
           >
           <block subset="none" type="note">
             <para
               >Module-level methods cannot be retrieved until after the <see
                cref="M:System.Reflection.Emit.ModuleBuilder.CreateGlobalFunctions" />
+
+              
 
               
 
@@ -3558,10 +4058,14 @@
 
           
 
+          
+
           The method name. </param
         >
         <param name="bindingAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3576,10 +4080,14 @@
 
           
 
+          
+
           An object that implements Binder, containing properties related to this method. </param
         >
         <param name="callConvention">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3594,10 +4102,14 @@
 
           
 
+          
+
           The parameter types of the method. </param
         >
         <param name="modifiers">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3637,12 +4149,16 @@
 
             
 
+            
+
              method. </para
           >
           <block subset="none" type="note">
             <para
               >Module-level methods cannot be retrieved until after the <see
                cref="M:System.Reflection.Emit.ModuleBuilder.CreateGlobalFunctions" />
+
+              
 
               
 
@@ -3662,6 +4178,8 @@
 
             
 
+            
+
             , and that match the specified binding flags.</para
           >
         </summary>
@@ -3675,11 +4193,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="bindingFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3727,6 +4249,8 @@
 
           
 
+          
+
           The method to get a token for. </param
         >
       </Docs>
@@ -3763,6 +4287,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3771,6 +4297,8 @@
           <para
             >Defines a token for the signature that is defined by the specified <see
              cref="T:System.Reflection.Emit.SignatureHelper" />
+
+            
 
             
 
@@ -3785,6 +4313,8 @@
         </returns>
         <param name="sigHelper">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3833,10 +4363,14 @@
 
           
 
+          
+
           The signature binary large object (BLOB). </param
         >
         <param name="sigLength">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3878,6 +4412,8 @@
 
             
 
+            
+
              has already been defined, the existing token will be returned.</para
           >
         </remarks>
@@ -3891,6 +4427,8 @@
         </returns>
         <param name="str">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3931,8 +4469,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -3944,6 +4486,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -3997,6 +4541,8 @@
 
             
 
+            
+
             , <see
              cref="M:System.Reflection.Emit.TypeBuilder.MakePointerType" />
 
@@ -4004,8 +4550,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Reflection.Emit.TypeBuilder.MakeByRefType" />
+
+            
 
             
 
@@ -4022,8 +4572,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -4035,6 +4589,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -4059,8 +4615,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -4108,6 +4668,8 @@
 
             
 
+            
+
             , <see
              cref="M:System.Reflection.Emit.TypeBuilder.MakePointerType" />
 
@@ -4115,8 +4677,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Reflection.Emit.TypeBuilder.MakeByRefType" />
+
+            
 
             
 
@@ -4133,8 +4699,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -4146,6 +4716,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -4170,8 +4742,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -4181,6 +4757,8 @@
         >
         <param name="ignoreCase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4229,6 +4807,8 @@
 
             
 
+            
+
              parameter only affects what happens when the type is not found. It does not affect any other exceptions that might be thrown. In particular, if the type is found but cannot be loaded, <see
              cref="T:System.TypeLoadException" />
 
@@ -4236,8 +4816,12 @@
 
             
 
+            
+
              can be thrown even if <paramref
              name="throwOnError" />
+
+            
 
             
 
@@ -4253,6 +4837,8 @@
 
             
 
+            
+
             , <see
              cref="M:System.Reflection.Emit.TypeBuilder.MakePointerType" />
 
@@ -4260,8 +4846,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Reflection.Emit.TypeBuilder.MakeByRefType" />
+
+            
 
             
 
@@ -4278,8 +4868,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -4291,6 +4885,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -4315,8 +4911,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -4331,10 +4931,14 @@
 
           
 
+          
+
           true to throw an exception if the type cannot be found; false to return null. </param
         >
         <param name="ignoreCase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4374,8 +4978,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -4387,6 +4995,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -4438,6 +5048,8 @@
 
             
 
+            
+
              class who want to directly modify the body of a method.</para
           >
         </remarks>
@@ -4451,6 +5063,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4501,6 +5115,8 @@
 
           
 
+          
+
           The type object that represents the class type. </param
         >
       </Docs>
@@ -4541,6 +5157,8 @@
 
             
 
+            
+
              have been applied to this module; otherwise, false.</para
           >
         </returns>
@@ -4551,10 +5169,14 @@
 
           
 
+          
+
           The type of custom attribute to test for.</param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4642,6 +5264,8 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -4655,10 +5279,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -4699,6 +5327,8 @@
 
             
 
+            
+
              property is referred to as the mvid, and is stored in the GUID heap.</para
           >
           <block subset="none" type="note">
@@ -4712,10 +5342,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -4785,6 +5419,8 @@
 
             
 
+            
+
              method on the type where <paramref
              name="metadataToken" />
 
@@ -4792,8 +5428,12 @@
 
             
 
+            
+
              is in scope to obtain an array of generic type arguments for <paramref
              name="genericTypeArguments" />
+
+            
 
             
 
@@ -4806,6 +5446,8 @@
 
             
 
+            
+
              method on the method where <paramref
              name="metadataToken" />
 
@@ -4813,8 +5455,12 @@
 
             
 
+            
+
              is in scope to obtain an array of generic type arguments for <paramref
              name="genericTypeArguments" />
+
+            
 
             
 
@@ -4833,10 +5479,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -4848,6 +5498,8 @@
           <para
             >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see
              cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />
+
+            
 
             
 
@@ -4870,11 +5522,15 @@
 
             
 
+            
+
              object representing the field that is identified by the specified metadata token.</para
           >
         </returns>
         <param name="metadataToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4889,8 +5545,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -4905,8 +5565,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -4948,6 +5612,8 @@
 
             
 
+            
+
              method on the type where <paramref
              name="metadataToken" />
 
@@ -4955,8 +5621,12 @@
 
             
 
+            
+
              is in scope to obtain an array of generic type arguments for <paramref
              name="genericTypeArguments" />
+
+            
 
             
 
@@ -4969,6 +5639,8 @@
 
             
 
+            
+
              method on the method where <paramref
              name="metadataToken" />
 
@@ -4976,8 +5648,12 @@
 
             
 
+            
+
              is in scope to obtain an array of generic type arguments for <paramref
              name="genericTypeArguments" />
+
+            
 
             
 
@@ -4996,10 +5672,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -5011,6 +5691,8 @@
           <para
             >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see
              cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />
+
+            
 
             
 
@@ -5033,11 +5715,15 @@
 
             
 
+            
+
              object representing the type or member that is identified by the specified metadata token.</para
           >
         </returns>
         <param name="metadataToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5052,8 +5738,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -5068,8 +5758,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -5111,8 +5805,12 @@
 
             
 
+            
+
              method on the type where <paramref
              name="metadataToken" />
+
+            
 
             
 
@@ -5125,8 +5823,12 @@
 
             
 
+            
+
             . Use the <see
              cref="M:System.Reflection.MethodInfo.GetGenericArguments" />
+
+            
 
             
 
@@ -5139,8 +5841,12 @@
 
             
 
+            
+
              is in scope to obtain an array of generic type arguments for <paramref
              name="genericMethodArguments" />
+
+            
 
             
 
@@ -5159,10 +5865,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -5174,6 +5884,8 @@
           <para
             >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see
              cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />
+
+            
 
             
 
@@ -5196,11 +5908,15 @@
 
             
 
+            
+
              object representing the method that is identified by the specified metadata token.</para
           >
         </returns>
         <param name="metadataToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5215,8 +5931,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -5231,8 +5951,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -5275,10 +5999,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -5298,6 +6026,8 @@
         </returns>
         <param name="metadataToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5340,10 +6070,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -5367,11 +6101,15 @@
 
             
 
+            
+
              containing a string value from the metadata string heap.</para
           >
         </returns>
         <param name="metadataToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5413,6 +6151,8 @@
 
             
 
+            
+
              method on the type where <paramref
              name="metadataToken" />
 
@@ -5420,8 +6160,12 @@
 
             
 
+            
+
              is in scope to obtain an array of generic type arguments for <paramref
              name="genericTypeArguments" />
+
+            
 
             
 
@@ -5434,6 +6178,8 @@
 
             
 
+            
+
              method on the method where <paramref
              name="metadataToken" />
 
@@ -5441,8 +6187,12 @@
 
             
 
+            
+
              is in scope to obtain an array of generic type arguments for <paramref
              name="genericTypeArguments" />
+
+            
 
             
 
@@ -5461,10 +6211,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -5476,6 +6230,8 @@
           <para
             >For code that demonstrates token resolution using the generic context (that is, the generic type parameters of the generic type and/or the generic method in which the token is embedded) see the <see
              cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />
+
+            
 
             
 
@@ -5498,11 +6254,15 @@
 
             
 
+            
+
              object representing the type that is identified by the specified metadata token.</para
           >
         </returns>
         <param name="metadataToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5517,8 +6277,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -5533,8 +6297,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -5596,8 +6364,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -5614,6 +6386,8 @@
 
               
 
+              
+
               .) To use this functionality, your application should target the net_v35_long or later.</para
             >
           </block>
@@ -5624,6 +6398,8 @@
         </summary>
         <param name="customBuilder">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5671,6 +6447,8 @@
 
             
 
+            
+
             , see the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
              cref="http://go.microsoft.com/fwlink/?LinkID=99212"
               >ECMA C# and Common Language Infrastructure Standards</see
@@ -5680,10 +6458,14 @@
 
             
 
+            
+
              on MSDN and <see
              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
+
+            
 
             
 
@@ -5700,8 +6482,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -5713,6 +6499,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -5733,10 +6521,14 @@
 
           
 
+          
+
           The constructor for the custom attribute. </param
         >
         <param name="binaryAttribute">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5781,8 +6573,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -5794,6 +6590,8 @@
                   >Security Issues in Reflection Emit</a
                 >
               </format>
+
+              
 
               
 
@@ -5814,10 +6612,14 @@
 
           
 
+          
+
           The name of the custom attribute </param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5861,8 +6663,12 @@
 
               
 
+              
+
                with the <see
                cref="F:System.Security.Permissions.ReflectionPermissionFlag.ReflectionEmit" />
+
+              
 
               
 
@@ -5879,6 +6685,8 @@
 
               
 
+              
+
               .) To use this functionality, your application should target the net_v35_long or later.</para
             >
           </block>
@@ -5889,6 +6697,8 @@
         </summary>
         <param name="entryPoint">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5967,6 +6777,8 @@
 
             
 
+            
+
             , see the MSDN Library.</para
           >
           <para
@@ -5977,8 +6789,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Runtime.InteropServices._ModuleBuilder" />
+
+            
 
             
 
@@ -5997,11 +6813,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="iTInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6016,10 +6836,14 @@
 
           
 
+          
+
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -20,8 +20,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.Configuration.ProfilePropertySettings" />
+
+        
 
         
 
@@ -35,6 +39,8 @@
       <para
         >Determines the serialization method used for a <see
          cref="T:System.Web.Configuration.ProfilePropertySettings" />
+
+        
 
         
 
@@ -58,6 +64,8 @@
           <para
             >The <see
              cref="T:System.Web.Configuration.ProfilePropertySettings" />
+
+            
 
             
 
@@ -89,6 +97,8 @@
 
             
 
+            
+
              object into the data store.</para
           >
         </summary>
@@ -115,6 +125,8 @@
 
             
 
+            
+
              object is serialized to a simple string.</para
           >
         </summary>
@@ -136,6 +148,8 @@
           <para
             >The profile <see
              cref="T:System.Web.Configuration.ProfilePropertySettings" />
+
+            
 
             
 

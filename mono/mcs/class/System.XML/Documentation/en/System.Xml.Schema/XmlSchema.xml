@@ -38,8 +38,12 @@
 
           
 
+          
+
            class, such as the <see
            cref="T:System.Xml.Schema.XmlSchemaException" />
+
+          
 
           
 
@@ -52,6 +56,8 @@
 
           
 
+          
+
            property of an <see
            cref="T:System.Xml.Schema.XmlSchemaException" />
 
@@ -59,8 +65,12 @@
 
           
 
+          
+
            returns the URI path to the schema file that caused the exception. The <see
            cref="P:System.Xml.Schema.XmlSchemaException.SourceUri" />
+
+          
 
           
 
@@ -97,6 +107,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Schema.XmlSchema" />
+
+            
 
             
 
@@ -146,6 +158,8 @@
 
             
 
+            
+
              values shown in the following table.</para
           >
           <list type="table">
@@ -154,6 +168,8 @@
                 <term>
                   <para>
                     <see cref="T:System.Xml.Schema.XmlSchemaForm" />
+
+                    
 
                     
 
@@ -310,6 +326,8 @@
 
             
 
+            
+
             .</para
           >
           <list type="table">
@@ -425,8 +443,12 @@
 
               
 
+              
+
                method is obsolete in the Microsoft .NET Framework version 2.0 and has been replaced by the <see
                cref="M:System.Xml.Schema.XmlSchemaSet.Compile" />
+
+              
 
               
 
@@ -442,6 +464,8 @@
         </summary>
         <param name="validationEventHandler">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -491,8 +515,12 @@
 
               
 
+              
+
                method is obsolete in the Microsoft .NET Framework version 2.0 and has been replaced by the <see
                cref="M:System.Xml.Schema.XmlSchemaSet.Compile" />
+
+              
 
               
 
@@ -510,6 +538,8 @@
 
               
 
+              
+
                method uses the <see
                cref="T:System.Xml.XmlUrlResolver" />
 
@@ -517,8 +547,12 @@
 
               
 
+              
+
                class to resolve external schemas referenced in include, import, or redefine elements by default. You can disable resolution of external schemas by passing null as the <see
                cref="T:System.Xml.XmlResolver" />
+
+              
 
               
 
@@ -539,10 +573,14 @@
 
           
 
+          
+
           The validation event handler that receives information about the XML Schema validation errors. </param
         >
         <param name="resolver">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -591,6 +629,8 @@
 
             
 
+            
+
              values shown in the following table.</para
           >
           <list type="table">
@@ -599,6 +639,8 @@
                 <term>
                   <para>
                     <see cref="T:System.Xml.Schema.XmlSchemaForm" />
+
+                    
 
                     
 
@@ -718,6 +760,8 @@
           <para
             >The following table lists the possible values of <see
              cref="T:System.Xml.Schema.XmlSchemaDerivationMethod" />
+
+            
 
             
 
@@ -900,8 +944,12 @@
 
             
 
+            
+
              method expects only <see
              cref="T:System.Xml.Schema.XmlSchemaExternal" />
+
+            
 
             
 
@@ -914,8 +962,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Xml.Schema.XmlSchemaInclude" />
+
+            
 
             
 
@@ -928,6 +980,8 @@
 
             
 
+            
+
             ) as parameters. The following example illustrates adding an included schema to the <see
              cref="P:System.Xml.Schema.XmlSchema.Includes" />
 
@@ -935,8 +989,12 @@
 
             
 
+            
+
              collection of an existing <see
              cref="T:System.Xml.Schema.XmlSchema" />
+
+            
 
             
 
@@ -1073,8 +1131,12 @@ schema.Includes.Add(include);</code>
 
             
 
+            
+
             , <see
              cref="T:System.Xml.Schema.XmlSchemaAttribute" />
+
+            
 
             
 
@@ -1087,8 +1149,12 @@ schema.Includes.Add(include);</code>
 
             
 
+            
+
             , <see
              cref="T:System.Xml.Schema.XmlSchemaComplexType" />
+
+            
 
             
 
@@ -1101,8 +1167,12 @@ schema.Includes.Add(include);</code>
 
             
 
+            
+
             , <see
              cref="T:System.Xml.Schema.XmlSchemaElement" />
+
+            
 
             
 
@@ -1115,8 +1185,12 @@ schema.Includes.Add(include);</code>
 
             
 
+            
+
             , or <see
              cref="T:System.Xml.Schema.XmlSchemaNotation" />
+
+            
 
             
 
@@ -1222,6 +1296,8 @@ schema.Includes.Add(include);</code>
 
             
 
+            
+
              object representing the XML Schema.</para
           >
         </returns>
@@ -1232,10 +1308,14 @@ schema.Includes.Add(include);</code>
 
           
 
+          
+
           The supplied data stream. </param
         >
         <param name="validationEventHandler">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1279,6 +1359,8 @@ schema.Includes.Add(include);</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1287,6 +1369,8 @@ schema.Includes.Add(include);</code>
           <para
             >The <see
              cref="T:System.Xml.Schema.XmlSchema" />
+
+            
 
             
 
@@ -1302,10 +1386,14 @@ schema.Includes.Add(include);</code>
 
           
 
+          
+
           The TextReader containing the XML Schema to read. </param
         >
         <param name="validationEventHandler">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1349,6 +1437,8 @@ schema.Includes.Add(include);</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1357,6 +1447,8 @@ schema.Includes.Add(include);</code>
           <para
             >The <see
              cref="T:System.Xml.Schema.XmlSchema" />
+
+            
 
             
 
@@ -1372,10 +1464,14 @@ schema.Includes.Add(include);</code>
 
           
 
+          
+
           The XmlReader containing the XML Schema to read. </param
         >
         <param name="validationEventHandler">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1442,6 +1538,8 @@ schema.Includes.Add(include);</code>
           <para
             >The <see
              cref="P:System.Xml.Schema.XmlSchema.TargetNamespace" />
+
+            
 
             
 
@@ -1547,6 +1645,8 @@ schema.Includes.Add(include);</code>
 
           
 
+          
+
           The supplied data stream. </param
         >
       </Docs>
@@ -1581,6 +1681,8 @@ schema.Includes.Add(include);</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1591,8 +1693,12 @@ schema.Includes.Add(include);</code>
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -1632,6 +1738,8 @@ schema.Includes.Add(include);</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1642,8 +1750,12 @@ schema.Includes.Add(include);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -1687,6 +1799,8 @@ schema.Includes.Add(include);</code>
 
               
 
+              
+
                disables automatic namespace prefix mapping.</para
             >
           </block>
@@ -1701,8 +1815,12 @@ schema.Includes.Add(include);</code>
 
             
 
+            
+
              using the <see
              cref="T:System.Xml.XmlNamespaceManager" />
+
+            
 
             
 
@@ -1718,6 +1836,8 @@ schema.Includes.Add(include);</code>
 
           
 
+          
+
           The supplied data stream. </param
         >
         <param name="namespaceManager">
@@ -1727,8 +1847,12 @@ schema.Includes.Add(include);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNamespaceManager" />
+
+          
 
           
 
@@ -1772,6 +1896,8 @@ schema.Includes.Add(include);</code>
 
               
 
+              
+
                disables automatic namespace prefix mapping.</para
             >
           </block>
@@ -1781,6 +1907,8 @@ schema.Includes.Add(include);</code>
           <para
             >Writes the XML Schema to the supplied <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -1796,8 +1924,12 @@ schema.Includes.Add(include);</code>
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -1812,8 +1944,12 @@ schema.Includes.Add(include);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNamespaceManager" />
+
+          
 
           
 
@@ -1857,6 +1993,8 @@ schema.Includes.Add(include);</code>
 
               
 
+              
+
                disables automatic namespace prefix mapping.</para
             >
           </block>
@@ -1866,6 +2004,8 @@ schema.Includes.Add(include);</code>
           <para
             >Writes the XML Schema to the supplied <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -1881,8 +2021,12 @@ schema.Includes.Add(include);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -1897,8 +2041,12 @@ schema.Includes.Add(include);</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNamespaceManager" />
+
+          
 
           
 

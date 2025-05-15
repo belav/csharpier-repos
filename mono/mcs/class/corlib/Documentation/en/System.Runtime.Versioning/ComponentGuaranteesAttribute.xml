@@ -35,8 +35,12 @@
 
         
 
+        
+
          is used by developers of components and class libraries to indicate the level of compatibility that consumers of their libraries can expect across multiple versions. It indicates the level of guarantee that a future version of the library or component will not break an existing client. Clients can then use the <see
          cref="T:System.Runtime.Versioning.ComponentGuaranteesAttribute" />
+
+        
 
         
 
@@ -58,8 +62,12 @@
 
         
 
+        
+
          supports the following levels of compatibility, which are represented by members of the <see
          cref="T:System.Runtime.Versioning.ComponentGuaranteesOptions" />
+
+        
 
         
 
@@ -77,10 +85,14 @@
 
             
 
+            
+
             ). The client can expect that future versions will break the existing client. For more information, see the <format
              type="text/html">
               <a href="#None">No Compatibility</a>
             </format>
+
+            
 
             
 
@@ -98,10 +110,14 @@
 
             
 
+            
+
             ). The component has been tested to work when more than one version of the assembly is loaded in the same application domain. In general, future versions can break compatibility. However, when breaking changes are made, the old version is not modified but exists alongside the new version. Side-by-side execution is the expected way to make existing clients work when breaking changes are made. For more information, see the <format
              type="text/html">
               <a href="#SideBySide">Side-by-Side Compatibility</a>
             </format>
+
+            
 
             
 
@@ -119,10 +135,14 @@
 
             
 
+            
+
             ). Future versions should not break the client, and side-by-side execution should not be needed. However, if the client is inadvertently broken, it may be possible to use side-by-side execution to fix the problem. For more information, see the <format
              type="text/html">
               <a href="#Standard">Stable Compatibility</a>
             </format>
+
+            
 
             
 
@@ -140,10 +160,14 @@
 
             
 
+            
+
             ). Extraordinary care is taken to ensure that future versions will not break the client. The client should use only these types in the signature of interfaces that are used for communication with other assemblies that are deployed independently of one another. Only one version of these types is expected to be in a given application domain, which means that if a client breaks, side-by-side execution cannot fix the compatibility problem. For more information, see the <format
              type="text/html">
               <a href="#Exchange">Exchange Type Compatibility</a>
             </format>
+
+            
 
             
 
@@ -168,8 +192,12 @@
 
         
 
+        
+
          indicates that the provider makes no guarantees about compatibility. Clients should avoid taking any dependencies on the exposed interfaces. This level of compatibility is useful for types that are experimental or that are publicly exposed but are intended only for components that are always updated at the same time. <see
          cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.None" />
+
+        
 
         
 
@@ -191,8 +219,12 @@
 
         
 
+        
+
          indicates that the component has been tested to work when more than one version of the assembly is loaded into the same application domain. Breaking changes are allowed as long as they are made to the assembly that has the greater version number. Components that are bound to an old version of the assembly are expected to continue to bind to the old version, and other components can bind to the new version. It is also possible to update a component that is declared to be <see
          cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.SideBySide" />
+
+        
 
         
 
@@ -209,6 +241,8 @@
       <para
         >Marking a type as <see
          cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.Stable" />
+
+        
 
         
 
@@ -245,8 +279,12 @@
 
         
 
+        
+
          provides a stronger version compatibility guarantee than <see
          cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.None" />
+
+        
 
         
 
@@ -261,8 +299,12 @@
 
         
 
+        
+
          can be combined with <see
          cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.SideBySide" />
+
+        
 
         
 
@@ -278,6 +320,8 @@
 
         
 
+        
+
         , it can be upgraded to <see
          cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.Exchange" />
 
@@ -285,8 +329,12 @@
 
         
 
+        
+
         . However, it cannot be downgraded to <see
          cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.None" />
+
+        
 
         
 
@@ -308,8 +356,12 @@
 
         
 
+        
+
          provides a stronger version compatibility guarantee than <see
          cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.Stable" />
+
+        
 
         
 
@@ -364,6 +416,8 @@
 
         
 
+        
+
          guarantee, it cannot be changed to either <see
          cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.Stable" />
 
@@ -371,8 +425,12 @@
 
         
 
+        
+
          or <see
          cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.None" />
+
+        
 
         
 
@@ -388,8 +446,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.String" />
+
+        
 
         
 
@@ -402,8 +464,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Collections.Generic.IEnumerable`1" />
+
+        
 
         
 
@@ -416,11 +482,15 @@
 
         
 
+        
+
         ) that are commonly used in public interfaces.</para
       >
       <para
         >Exchange types may publicly expose only other types that are also marked with <see
          cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.Exchange" />
+
+        
 
         
 
@@ -583,8 +653,12 @@
 
         
 
+        
+
          to an assembly, a type, or a type member. Its application is hierarchical. That is, by default, the guarantee defined by the <see
          cref="P:System.Runtime.Versioning.ComponentGuaranteesAttribute.Guarantees" />
+
+        
 
         
 
@@ -600,8 +674,12 @@
 
         
 
+        
+
          to individual types and type members. However, guarantees that override the default can only weaken the guarantee; they cannot strengthen it. For example, if an assembly is marked with the <see
          cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.None" />
+
+        
 
         
 
@@ -620,8 +698,12 @@
 
         
 
+        
+
          property returns a member of the <see
          cref="T:System.Runtime.Versioning.ComponentGuaranteesOptions" />
+
+        
 
         
 
@@ -634,8 +716,12 @@
 
         
 
+        
+
          attribute. This means that you should test for the flag that you are interested in by masking away potentially unknown flags. For example, the following example tests whether a type is marked as <see
          cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.Stable" />
+
+        
 
         
 
@@ -652,8 +738,12 @@
 
         
 
+        
+
          or <see
          cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.Exchange" />
+
+        
 
         
 
@@ -670,6 +760,8 @@
 
         
 
+        
+
          (that is, neither <see
          cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.Stable" />
 
@@ -677,8 +769,12 @@
 
         
 
+        
+
          nor <see
          cref="F:System.Runtime.Versioning.ComponentGuaranteesOptions.Exchange" />
+
+        
 
         
 
@@ -721,6 +817,8 @@
 
             
 
+            
+
              class is instantiated, the value of the <paramref
              name="guarantees" />
 
@@ -728,8 +826,12 @@
 
             
 
+            
+
              parameter is assigned to the <see
              cref="P:System.Runtime.Versioning.ComponentGuaranteesAttribute.Guarantees" />
+
+            
 
             
 
@@ -748,11 +850,15 @@
 
             
 
+            
+
              class with a value that indicates a library, type, or member's guaranteed level of compatibility across multiple versions.</para
           >
         </summary>
         <param name="guarantees">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -790,6 +896,8 @@
 
             
 
+            
+
              property corresponds to the <paramref
              name="guarantees" />
 
@@ -797,8 +905,12 @@
 
             
 
+            
+
              parameter of the <see
              cref="M:System.Runtime.Versioning.ComponentGuaranteesAttribute.#ctor(System.Runtime.Versioning.ComponentGuaranteesOptions)" />
+
+            
 
             
 

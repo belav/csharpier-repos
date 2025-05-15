@@ -29,6 +29,8 @@
 
         
 
+        
+
          with the appropriate number of arguments:</para
       >
       <example>
@@ -101,6 +103,8 @@ printf.Invoke (new object[]{"hello, %s\n", "world!"});
         <param name="returnType"
           >The return type of the function to invoke.  The default return type is <see
            cref="T:System.Void" />
+
+          
 
           
 

@@ -24,11 +24,15 @@
 
         
 
+        
+
          node.</para
       >
       <para
         >sqltecxlinq developers will often have to write code to work with arbitrary sqltecxlinq trees that they did not create. If you are writing code that has to work with sqltecxlinq trees that you have no control over creating, you should be aware of certain behaviors of <see
          cref="T:System.Xml.Linq.XText" />
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
          nodes to be adjacent to each other. Further, you should be prepared for <see
          cref="T:System.Xml.Linq.XText" />
+
+        
 
         
 
@@ -58,6 +66,8 @@
          type="text/html">
           <a href="18680d1c-6e7c-4645-8d53-27b5a96f2d3f">Programming With Nodes</a>
         </format>
+
+        
 
         
 
@@ -96,8 +106,12 @@
 
             
 
+            
+
              constructors. When you pass text content when constructing an <see
              cref="T:System.Xml.Linq.XElement" />
+
+            
 
             
 
@@ -116,11 +130,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -133,8 +151,12 @@
 
           
 
+          
+
            that contains the value of the <see
            cref="T:System.Xml.Linq.XText" />
+
+          
 
           
 
@@ -172,8 +194,12 @@
 
             
 
+            
+
              class from another <see
              cref="T:System.Xml.Linq.XText" />
+
+            
 
             
 
@@ -189,8 +215,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XText" />
+
+          
 
           
 
@@ -228,6 +258,8 @@
 
             
 
+            
+
              contain a <see
              cref="P:System.Xml.Linq.XObject.NodeType" />
 
@@ -235,8 +267,12 @@
 
             
 
+            
+
              property, you can write code that operates on collections of concrete subclass of <see
              cref="T:System.Xml.Linq.XObject" />
+
+            
 
             
 
@@ -273,8 +309,12 @@
 
             
 
+            
+
              and the <see
              cref="E:System.Xml.Linq.XObject.Changing" />
+
+            
 
             
 
@@ -319,6 +359,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -327,6 +369,8 @@
           <para
             >Writes this node to an <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -342,8 +386,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 

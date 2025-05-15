@@ -21,8 +21,12 @@
 
         
 
+        
+
          interface allows an inheriting class to implement a TableMapping class, which associates a data source column with a <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -39,6 +43,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -49,8 +55,12 @@
 
         
 
+        
+
          interface directly, but creates an instance of a class that inherits <see
          cref="T:System.Data.ITableMapping" />
+
+        
 
         
 
@@ -66,8 +76,12 @@
 
         
 
+        
+
          must implement the inherited members, and typically define additional members to add provider-specific functionality. For example, the <see
          cref="T:System.Data.ITableMapping" />
+
+        
 
         
 
@@ -80,6 +94,8 @@
 
         
 
+        
+
          property. In turn, the <see
          cref="T:System.Data.Common.DataTableMapping" />
 
@@ -87,8 +103,12 @@
 
         
 
+        
+
          class inherits this property, and also defines the <see
          cref="M:System.Data.Common.DataTableMapping.GetDataTableBySchemaAction(System.Data.DataSet,System.Data.MissingSchemaAction)" />
+
+        
 
         
 
@@ -107,8 +127,12 @@
 
         
 
+        
+
         , and is implemented by the <see
          cref="T:System.Data.Common.DataTableMapping" />
+
+        
 
         
 
@@ -141,8 +165,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -172,6 +200,8 @@
           <para
             >Gets or sets the case-insensitive name of the table within the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 

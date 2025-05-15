@@ -60,8 +60,12 @@
 
         
 
+        
+
          value type represents decimal numbers ranging from positive 79,228,162,514,264,337,593,543,950,335 to negative 79,228,162,514,264,337,593,543,950,335. The <see
          cref="T:System.Decimal" />
+
+        
 
         
 
@@ -74,12 +78,16 @@
 
         
 
+        
+
          type does not eliminate the need for rounding. Rather, it minimizes errors due to rounding. For example, the following code produces a result of 0.9999999999999999999999999999 instead of 1.</para
       >
       <para>code reference: System.Decimal.Class#1</para>
       <para
         >When the result of the division and multiplication is passed to the <see
          cref="M:System.Math.Round(System.Decimal,System.Int32)" />
+
+        
 
         
 
@@ -97,8 +105,12 @@
 
         
 
+        
+
          value consists of a 1-bit sign, a 96-bit integer number, and a scaling factor used to divide the 96-bit integer and specify what portion of it is a decimal fraction. The scaling factor is implicitly the number 10, raised to an exponent ranging from 0 to 28. Therefore, the binary representation of a <see
          cref="T:System.Decimal" />
+
+        
 
         
 
@@ -111,8 +123,12 @@
 
         
 
+        
+
          to 2<superscript
         >96</superscript>
+
+        
 
         
 
@@ -125,8 +141,12 @@
 
         
 
+        
+
         ), where -(2<superscript
         >96</superscript>
+
+        
 
         
 
@@ -139,8 +159,12 @@
 
         
 
+        
+
         , and 2<superscript
         >96</superscript>
+
+        
 
         
 
@@ -153,8 +177,12 @@
 
         
 
+        
+
         . For more information about the binary representation of <see
          cref="T:System.Decimal" />
+
+        
 
         
 
@@ -167,8 +195,12 @@
 
         
 
+        
+
          constructor and the <see
          cref="M:System.Decimal.GetBits(System.Decimal)" />
+
+        
 
         
 
@@ -184,6 +216,8 @@
 
         
 
+        
+
          number. Trailing zeros do not affect the value of a <see
          cref="T:System.Decimal" />
 
@@ -191,8 +225,12 @@
 
         
 
+        
+
          number in arithmetic or comparison operations. However, trailing zeros might be revealed by the <see
          cref="Overload:System.Decimal.ToString" />
+
+        
 
         
 
@@ -211,8 +249,12 @@
 
         
 
+        
+
          values to and from <see
          cref="T:System.SByte" />
+
+        
 
         
 
@@ -225,8 +267,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Int32" />
+
+        
 
         
 
@@ -239,8 +285,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Byte" />
+
+        
 
         
 
@@ -253,8 +303,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.UInt32" />
+
+        
 
         
 
@@ -267,8 +321,12 @@
 
         
 
+        
+
          values. Conversions from these integral types to <see
          cref="T:System.Decimal" />
+
+        
 
         
 
@@ -284,8 +342,12 @@
 
         
 
+        
+
          to any of the integral types are narrowing conversions that round the <see
          cref="T:System.Decimal" />
+
+        
 
         
 
@@ -298,6 +360,8 @@
 
         
 
+        
+
          values to <see
          cref="T:System.Char" />
 
@@ -305,8 +369,12 @@
 
         
 
+        
+
          values. If the result of these conversions cannot be represented in the destination type, an <see
          cref="T:System.OverflowException" />
+
+        
 
         
 
@@ -322,8 +390,12 @@
 
         
 
+        
+
          type also provides methods that convert <see
          cref="T:System.Decimal" />
+
+        
 
         
 
@@ -336,8 +408,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Double" />
+
+        
 
         
 
@@ -350,6 +426,8 @@
 
         
 
+        
+
          to <see
          cref="T:System.Single" />
 
@@ -357,8 +435,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Double" />
+
+        
 
         
 
@@ -374,8 +456,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Double" />
+
+        
 
         
 
@@ -388,6 +474,8 @@
 
         
 
+        
+
          throw an <see
          cref="T:System.OverflowException" />
 
@@ -395,8 +483,12 @@
 
         
 
+        
+
          exception if the result of the conversion cannot be represented as a <see
          cref="T:System.Decimal" />
+
+        
 
         
 
@@ -415,6 +507,8 @@
 
         
 
+        
+
          type supports standard mathematical operations such as addition, subtraction, division, multiplication, and unary negation. You can also work directly with the binary representation of a <see
          cref="T:System.Decimal" />
 
@@ -422,8 +516,12 @@
 
         
 
+        
+
          value by calling the <see
          cref="M:System.Decimal.GetBits(System.Decimal)" />
+
+        
 
         
 
@@ -439,6 +537,8 @@
 
         
 
+        
+
          values, you can use the standard numeric comparison operators, or you can call the <see
          cref="M:System.Decimal.CompareTo(System.Decimal)" />
 
@@ -446,8 +546,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.Decimal.Equals(System.Decimal)" />
+
+        
 
         
 
@@ -463,8 +567,12 @@
 
         
 
+        
+
          class to perform a wide range of numeric operations, including getting the absolute value of a number, determining the maximum or minimum value of two <see
          cref="T:System.Decimal" />
+
+        
 
         
 
@@ -508,6 +616,8 @@
 
             
 
+            
+
              is one of the following:</para
           >
           <para
@@ -526,6 +636,8 @@
 
             
 
+            
+
             , but the Decimal representation does not support NaNs.</para
           >
           <para
@@ -536,11 +648,15 @@
 
             
 
+            
+
             , but the Decimal representation does not support infinities.</para
           >
           <para
             >equal to <see
              cref="F:System.Double.NegativeInfinity" />
+
+            
 
             
 
@@ -559,6 +675,8 @@
 
             
 
+            
+
              to 15 significant digits using rounding to nearest. This is done even if the number has more than 15 digits and the less significant digits are zero.</para
           >
         </remarks>
@@ -567,6 +685,8 @@
           <para
             >Initializes a new instance of <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -582,8 +702,12 @@
 
           
 
+          
+
           The value to represent as a <see
            cref="T:System.Decimal" />
+
+          
 
           
 
@@ -624,6 +748,8 @@
 
             
 
+            
+
              to the value
    specified by <paramref
              name="value" />
@@ -632,8 +758,12 @@
 
             
 
+            
+
             . The scale of the new <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -652,6 +782,8 @@
 
             
 
+            
+
              to the value of the specified 32-bit signed integer.</para
           >
         </summary>
@@ -662,8 +794,12 @@
 
           
 
+          
+
           The value to represent as a <see
            cref="T:System.Decimal" />
+
+          
 
           
 
@@ -702,11 +838,15 @@
 
           
 
+          
+
            is a null reference. </exception
         >
         <exception cref="T:System.ArgumentException">
           <para>
             <paramref name="bits" />
+
+            
 
             
 
@@ -719,6 +859,8 @@
           <para
             >The following example demonstrates using the <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -783,10 +925,14 @@ class ConstructDecimal {
 
             
 
+            
+
              number consists of a 1-bit sign, a 96-bit integer number, and a scaling factor used to divide the integer number and specify what portion of it is a decimal fraction. The scaling factor is implicitly the number 10, raised to an exponent ranging from 0 to 28.</para
           >
           <para>
             <paramref name="bits" />
+
+            
 
             
 
@@ -801,8 +947,12 @@ class ConstructDecimal {
 
             
 
+            
+
              [0], <paramref
              name="bits" />
+
+            
 
             
 
@@ -815,10 +965,14 @@ class ConstructDecimal {
 
             
 
+            
+
              [2] contain the low, middle, and high 32 bits of the 96-bit integer number.</para
           >
           <para>
             <paramref name="bits" />
+
+            
 
             
 
@@ -842,11 +996,15 @@ class ConstructDecimal {
 
             
 
+            
+
              to a decimal value represented in binary and contained in a specified array.</para
           >
         </summary>
         <param name="bits">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -887,6 +1045,8 @@ class ConstructDecimal {
 
             
 
+            
+
              to the value
    specified by <paramref
              name="value" />
@@ -895,8 +1055,12 @@ class ConstructDecimal {
 
             
 
+            
+
             . The scale of the new <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -915,6 +1079,8 @@ class ConstructDecimal {
 
             
 
+            
+
              to the value of the specified 64-bit signed integer.</para
           >
         </summary>
@@ -925,8 +1091,12 @@ class ConstructDecimal {
 
           
 
+          
+
           The value to represent as a <see
            cref="T:System.Decimal" />
+
+          
 
           
 
@@ -966,6 +1136,8 @@ class ConstructDecimal {
 
             
 
+            
+
              is one of the following:</para
           >
           <para
@@ -984,6 +1156,8 @@ class ConstructDecimal {
 
             
 
+            
+
             , but the Decimal representation does not support NaNs.</para
           >
           <para
@@ -994,11 +1168,15 @@ class ConstructDecimal {
 
             
 
+            
+
             , but the Decimal representation does not support infinities.</para
           >
           <para
             >equal to <see
              cref="F:System.Single.NegativeInfinity" />
+
+            
 
             
 
@@ -1017,6 +1195,8 @@ class ConstructDecimal {
 
             
 
+            
+
              to 7 significant digits using rounding to nearest. This is done even if the number has more than 7 digits and the less significant digits are zero.</para
           >
         </remarks>
@@ -1025,6 +1205,8 @@ class ConstructDecimal {
           <para
             >Initializes a new instance of <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -1040,8 +1222,12 @@ class ConstructDecimal {
 
           
 
+          
+
           The value to represent as a <see
            cref="T:System.Decimal" />
+
+          
 
           
 
@@ -1088,8 +1274,12 @@ class ConstructDecimal {
 
             
 
+            
+
             (<see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -1105,6 +1295,8 @@ class ConstructDecimal {
 
             
 
+            
+
              to the value
    specified by <paramref
              name="value" />
@@ -1113,8 +1305,12 @@ class ConstructDecimal {
 
             
 
+            
+
             . The scale of the new <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -1133,6 +1329,8 @@ class ConstructDecimal {
 
             
 
+            
+
              to the value of the specified 32-bit unsigned integer.</para
           >
         </summary>
@@ -1143,8 +1341,12 @@ class ConstructDecimal {
 
           
 
+          
+
           The value to represent as a <see
            cref="T:System.Decimal" />
+
+          
 
           
 
@@ -1190,6 +1392,8 @@ class ConstructDecimal {
 
             
 
+            
+
              to the value
    specified by <paramref
              name="value" />
@@ -1198,8 +1402,12 @@ class ConstructDecimal {
 
             
 
+            
+
             . The scale of the new <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -1216,8 +1424,12 @@ class ConstructDecimal {
 
             
 
+            
+
             (<see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -1236,6 +1448,8 @@ class ConstructDecimal {
 
             
 
+            
+
              to the value of the specified 64-bit unsigned integer.</para
           >
         </summary>
@@ -1246,8 +1460,12 @@ class ConstructDecimal {
 
           
 
+          
+
           The value to represent as a <see
            cref="T:System.Decimal" />
+
+          
 
           
 
@@ -1291,6 +1509,8 @@ class ConstructDecimal {
 
             
 
+            
+
              number consists of a 1-bit sign, a 96-bit integer number, and a scaling factor used to divide the integer number and specify what portion of it is a decimal fraction. The scaling factor is implicitly the number 10 raised to an exponent ranging from 0 to 28.</para
           >
         </remarks>
@@ -1299,6 +1519,8 @@ class ConstructDecimal {
           <para
             >Initializes a new instance of <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -1314,6 +1536,8 @@ class ConstructDecimal {
 
           
 
+          
+
           The low 32 bits of a 96-bit integer. </param
         >
         <param name="mid">
@@ -1323,10 +1547,14 @@ class ConstructDecimal {
 
           
 
+          
+
           The middle 32 bits of a 96-bit integer. </param
         >
         <param name="hi">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1342,10 +1570,14 @@ class ConstructDecimal {
           
 
           
+
+          
                 true to indicate a negative number; false to indicate a positive number. </param
         >
         <param name="scale">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1387,8 +1619,12 @@ class ConstructDecimal {
 
           
 
+          
+
            and <paramref
            name="d2" />
+
+          
 
           
 
@@ -1401,8 +1637,12 @@ class ConstructDecimal {
 
           
 
+          
+
            or greater than <see
            cref="F:System.Decimal.MaxValue" />
+
+          
 
           
 
@@ -1425,6 +1665,8 @@ class ConstructDecimal {
 
             
 
+            
+
              values.</para
           >
         </summary>
@@ -1438,8 +1680,12 @@ class ConstructDecimal {
 
             
 
+            
+
              and <paramref
              name="d2" />
+
+            
 
             
 
@@ -1455,10 +1701,14 @@ class ConstructDecimal {
 
           
 
+          
+
           The first value to add. </param
         >
         <param name="d2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1498,8 +1748,12 @@ class ConstructDecimal {
 
             
 
+            
+
              is positive, the presence of any fractional component causes <paramref
              name="d" />
+
+            
 
             
 
@@ -1512,6 +1766,8 @@ class ConstructDecimal {
 
             
 
+            
+
              is negative, the rounding operation causes any fractional component of <paramref
              name="d" />
 
@@ -1519,8 +1775,12 @@ class ConstructDecimal {
 
             
 
+            
+
              to be discarded. The operation of this method differs from the <see
              cref="M:System.Decimal.Floor(System.Decimal)" />
+
+            
 
             
 
@@ -1543,8 +1803,12 @@ class ConstructDecimal {
 
             
 
+            
+
              parameter. Note that this method returns a <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -1555,6 +1819,8 @@ class ConstructDecimal {
         </returns>
         <param name="d">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1604,6 +1870,8 @@ class ConstructDecimal {
 
             
 
+            
+
              values.</para
           >
         </summary>
@@ -1617,8 +1885,12 @@ class ConstructDecimal {
 
             
 
+            
+
              and <paramref
              name="d2" />
+
+            
 
             
 
@@ -1649,8 +1921,12 @@ class ConstructDecimal {
 
                   
 
+                  
+
                    is less than <paramref
                    name="d2" />
+
+                  
 
                   
 
@@ -1672,8 +1948,12 @@ class ConstructDecimal {
 
                   
 
+                  
+
                    and <paramref
                    name="d2" />
+
+                  
 
                   
 
@@ -1695,8 +1975,12 @@ class ConstructDecimal {
 
                   
 
+                  
+
                    is greater than <paramref
                    name="d2" />
+
+                  
 
                   
 
@@ -1715,10 +1999,14 @@ class ConstructDecimal {
 
           
 
+          
+
           The first value to compare. </param
         >
         <param name="d2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1758,6 +2046,8 @@ class ConstructDecimal {
 
             
 
+            
+
              interface and performs slightly better than the <see
              cref="M:System.Decimal.CompareTo(System.Object)" />
 
@@ -1765,8 +2055,12 @@ class ConstructDecimal {
 
             
 
+            
+
              method because it does not have to convert the <paramref
              name="value" />
+
+            
 
             
 
@@ -1782,11 +2076,15 @@ class ConstructDecimal {
 
             
 
+            
+
              method where the parameter type has fewer bits (is narrower) than the instance type. This is possible because some programming languages perform an implicit widening conversion that represents the parameter as a type with as many bits as the instance.</para
           >
           <para
             >For example, suppose the instance type is <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -1799,8 +2097,12 @@ class ConstructDecimal {
 
             
 
+            
+
             . The Microsoft C# compiler generates instructions to represent the parameter as an <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -1813,6 +2115,8 @@ class ConstructDecimal {
 
             
 
+            
+
              method to compare the values of the <see
              cref="T:System.Int32" />
 
@@ -1820,8 +2124,12 @@ class ConstructDecimal {
 
             
 
+            
+
              instance and the <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -1841,6 +2149,8 @@ class ConstructDecimal {
 
             
 
+            
+
              object and returns a comparison of their relative values.</para
           >
         </summary>
@@ -1849,6 +2159,8 @@ class ConstructDecimal {
           <para
             >A signed number indicating the relative values of this instance and <paramref
              name="value" />
+
+            
 
             
 
@@ -1880,6 +2192,8 @@ class ConstructDecimal {
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -1892,6 +2206,8 @@ class ConstructDecimal {
                 <para
                   >This instance is equal to <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -1914,6 +2230,8 @@ class ConstructDecimal {
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -1922,6 +2240,8 @@ class ConstructDecimal {
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1961,8 +2281,12 @@ class ConstructDecimal {
 
           
 
+          
+
            is not a <see
            cref="T:System.Decimal" />
+
+          
 
           
 
@@ -1980,6 +2304,8 @@ class ConstructDecimal {
 
             
 
+            
+
             , regardless of its value, is considered greater than null.</para
           >
           <para
@@ -1990,8 +2316,12 @@ class ConstructDecimal {
 
             
 
+            
+
              must be null or an instance of <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -2009,6 +2339,8 @@ class ConstructDecimal {
           <para
             >A signed number indicating the relative values of this instance and <paramref
              name="value" />
+
+            
 
             
 
@@ -2040,6 +2372,8 @@ class ConstructDecimal {
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -2052,6 +2386,8 @@ class ConstructDecimal {
                 <para
                   >This instance is equal to <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -2074,11 +2410,15 @@ class ConstructDecimal {
 
                   
 
+                  
+
                   .</para
                 >
                 <para>-or- </para>
                 <para>
                   <paramref name="value" />
+
+                  
 
                   
 
@@ -2092,6 +2432,8 @@ class ConstructDecimal {
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2137,11 +2479,15 @@ class ConstructDecimal {
 
           
 
+          
+
            is zero. </exception
         >
         <exception cref="T:System.OverflowException"
           >The result is greater than <see
            cref="F:System.Decimal.MaxValue" />
+
+          
 
           
 
@@ -2154,6 +2500,8 @@ class ConstructDecimal {
 
           
 
+          
+
           . </exception
         >
         <summary>
@@ -2161,6 +2509,8 @@ class ConstructDecimal {
           <para
             >Divides two specified <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -2179,8 +2529,12 @@ class ConstructDecimal {
 
             
 
+            
+
              by <paramref
              name="d2" />
+
+            
 
             
 
@@ -2196,10 +2550,14 @@ class ConstructDecimal {
 
           
 
+          
+
           The dividend. </param
         >
         <param name="d2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2239,6 +2597,8 @@ class ConstructDecimal {
 
             
 
+            
+
              interface, and performs slightly better than <see
              cref="M:System.Decimal.Equals(System.Object)" />
 
@@ -2246,8 +2606,12 @@ class ConstructDecimal {
 
             
 
+            
+
              because it does not have to convert the <paramref
              name="value" />
+
+            
 
             
 
@@ -2263,11 +2627,15 @@ class ConstructDecimal {
 
             
 
+            
+
              has fewer bits (is narrower) than the instance type, some programming languages perform an implicit widening conversion that transforms the value of the parameter into a value with more bits.</para
           >
           <para
             >For example, suppose the instance type is <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -2280,8 +2648,12 @@ class ConstructDecimal {
 
             
 
+            
+
             . The Microsoft C# compiler generates instructions to represent the value of the parameter as an <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -2294,8 +2666,12 @@ class ConstructDecimal {
 
             
 
+            
+
              method to compare the <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -2315,6 +2691,8 @@ class ConstructDecimal {
 
             
 
+            
+
              object represent the same value.</para
           >
         </summary>
@@ -2328,11 +2706,15 @@ class ConstructDecimal {
 
             
 
+            
+
              is equal to this instance; otherwise, false.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2376,6 +2758,8 @@ class ConstructDecimal {
 
               
 
+              
+
               .</block
             >
           </para>
@@ -2385,6 +2769,8 @@ class ConstructDecimal {
           <para
             >Returns a value indicating whether this instance and a specified <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -2403,8 +2789,12 @@ class ConstructDecimal {
 
             
 
+            
+
              is a <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -2415,6 +2805,8 @@ class ConstructDecimal {
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2460,6 +2852,8 @@ class ConstructDecimal {
 
             
 
+            
+
              represent the same value.</para
           >
         </summary>
@@ -2473,8 +2867,12 @@ class ConstructDecimal {
 
             
 
+            
+
              and <paramref
              name="d2" />
+
+            
 
             
 
@@ -2490,10 +2888,14 @@ class ConstructDecimal {
 
           
 
+          
+
           The first value to compare. </param
         >
         <param name="d2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2536,6 +2938,8 @@ class ConstructDecimal {
 
             
 
+            
+
              method.</para
           >
           <code lang="C#"
@@ -2566,6 +2970,8 @@ class DecimalTest {
 
             
 
+            
+
              is positive, any fractional component is truncated. If <paramref
              name="d" />
 
@@ -2573,8 +2979,12 @@ class DecimalTest {
 
             
 
+            
+
              is negative, the presence of any fractional component causes it to be rounded to the smaller integer. The operation of this method differs from the <see
              cref="M:System.Decimal.Ceiling(System.Decimal)" />
+
+            
 
             
 
@@ -2593,6 +3003,8 @@ class DecimalTest {
 
             
 
+            
+
              number to the closest integer toward negative infinity.</para
           >
         </summary>
@@ -2606,6 +3018,8 @@ class DecimalTest {
 
             
 
+            
+
              has a fractional part, the next whole <see
              cref="T:System.Decimal" />
 
@@ -2613,8 +3027,12 @@ class DecimalTest {
 
             
 
+            
+
              number toward negative infinity that is less than <paramref
              name="d" />
+
+            
 
             
 
@@ -2631,8 +3049,12 @@ class DecimalTest {
 
             
 
+            
+
              doesn't have a fractional part, <paramref
              name="d" />
+
+            
 
             
 
@@ -2645,11 +3067,15 @@ class DecimalTest {
 
             
 
+            
+
             . </para
           >
         </returns>
         <param name="d">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2690,6 +3116,8 @@ class DecimalTest {
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -2703,8 +3131,12 @@ class DecimalTest {
 
             
 
+            
+
              that contains the equivalent of <paramref
              name="cy" />
+
+            
 
             
 
@@ -2715,6 +3147,8 @@ class DecimalTest {
         </returns>
         <param name="cy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2786,6 +3220,8 @@ public static void Main () {
 
             
 
+            
+
              number consists of a 1-bit sign, a 96-bit integer number, and a scaling factor used to divide the integer number and specify what portion of it is a decimal fraction. The scaling factor is implicitly the number 10, raised to an exponent ranging from 0 to 28.</para
           >
           <para>The return value is a four-element array of 32-bit signed integers.</para>
@@ -2807,6 +3243,8 @@ public static void Main () {
 
             
 
+            
+
              to its equivalent binary representation.</para
           >
         </summary>
@@ -2820,11 +3258,15 @@ public static void Main () {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="d">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2864,6 +3306,8 @@ public static void Main () {
               >This method
       overrides <see
                cref="M:System.Object.GetHashCode" />
+
+              
 
               
 
@@ -2912,8 +3356,12 @@ public static void Main () {
 
             
 
+            
+
              for value type <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -2927,6 +3375,8 @@ public static void Main () {
           <para
             >The enumerated constant <see
              cref="F:System.TypeCode.Decimal" />
+
+            
 
             
 
@@ -2965,6 +3415,8 @@ public static void Main () {
           <para
             >Represents the largest possible value of <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -3039,6 +3491,8 @@ public static void Main () {
 
             
 
+            
+
             . This field is constant and read-only.</para
           >
         </summary>
@@ -3081,8 +3535,12 @@ public static void Main () {
 
           
 
+          
+
            or less than <see
            cref="F:System.Decimal.MinValue" />
+
+          
 
           
 
@@ -3095,6 +3553,8 @@ public static void Main () {
           <para
             >Multiplies two specified <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -3113,8 +3573,12 @@ public static void Main () {
 
             
 
+            
+
              and <paramref
              name="d2" />
+
+            
 
             
 
@@ -3130,10 +3594,14 @@ public static void Main () {
 
           
 
+          
+
           The multiplicand. </param
         >
         <param name="d2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3178,6 +3646,8 @@ public static void Main () {
 
             
 
+            
+
              value by negative one.</para
           >
         </summary>
@@ -3186,6 +3656,8 @@ public static void Main () {
           <para
             >A decimal number with the value of <paramref
              name="d" />
+
+            
 
             
 
@@ -3202,11 +3674,15 @@ public static void Main () {
 
             
 
+            
+
              is zero.</para
           >
         </returns>
         <param name="d">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3282,8 +3758,12 @@ public static void Main () {
 
           
 
+          
+
            and <paramref
            name="d2" />
+
+          
 
           
 
@@ -3296,8 +3776,12 @@ public static void Main () {
 
           
 
+          
+
            or less than <see
            cref="F:System.Decimal.MinValue" />
+
+          
 
           
 
@@ -3315,8 +3799,12 @@ public static void Main () {
 
             
 
+            
+
              method defines the operation of the addition operator for <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -3328,6 +3816,8 @@ public static void Main () {
           <para
             >If the language you're using doesn't support custom operators, call the <see
              cref="M:System.Decimal.Add(System.Decimal,System.Decimal)" />
+
+            
 
             
 
@@ -3346,6 +3836,8 @@ public static void Main () {
 
             
 
+            
+
              values.</para
           >
         </summary>
@@ -3359,8 +3851,12 @@ public static void Main () {
 
             
 
+            
+
              and <paramref
              name="d2" />
+
+            
 
             
 
@@ -3376,10 +3872,14 @@ public static void Main () {
 
           
 
+          
+
           The first value to add. </param
         >
         <param name="d2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3421,8 +3921,12 @@ public static void Main () {
 
           
 
+          
+
            or less than <see
            cref="F:System.Decimal.MinValue" />
+
+          
 
           
 
@@ -3440,8 +3944,12 @@ public static void Main () {
 
             
 
+            
+
              method defines the operation of the decrement operator for <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -3458,12 +3966,16 @@ public static void Main () {
 
             
 
+            
+
              method directly, as the following example shows. </para
           >
           <para>code reference: System.Decimal.Operators#5</para>
           <para
             >If your language does not support custom operators, call the <see
              cref="M:System.Decimal.Subtract(System.Decimal,System.Decimal)" />
+
+            
 
             
 
@@ -3483,6 +3995,8 @@ public static void Main () {
 
             
 
+            
+
              operand by one.</para
           >
         </summary>
@@ -3496,11 +4010,15 @@ public static void Main () {
 
             
 
+            
+
              decremented by 1.</para
           >
         </returns>
         <param name="d">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3547,8 +4065,12 @@ public static void Main () {
 
           
 
+          
+
            or less than <see
            cref="F:System.Decimal.MinValue" />
+
+          
 
           
 
@@ -3566,8 +4088,12 @@ public static void Main () {
 
             
 
+            
+
              method defines the operation of the division operator for <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -3579,6 +4105,8 @@ public static void Main () {
           <para
             >If the language you're using doesn't support custom operators, call the <see
              cref="M:System.Decimal.Divide(System.Decimal,System.Decimal)" />
+
+            
 
             
 
@@ -3597,6 +4125,8 @@ public static void Main () {
 
             
 
+            
+
              values.</para
           >
         </summary>
@@ -3610,8 +4140,12 @@ public static void Main () {
 
             
 
+            
+
              by <paramref
              name="d2" />
+
+            
 
             
 
@@ -3627,10 +4161,14 @@ public static void Main () {
 
           
 
+          
+
           The dividend. </param
         >
         <param name="d2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3678,8 +4216,12 @@ public static void Main () {
 
             
 
+            
+
              method defines the operation of the equality operator for <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -3691,6 +4233,8 @@ public static void Main () {
           <para
             >If the language you're using doesn't support custom operators, call the <see
              cref="M:System.Decimal.Equals(System.Decimal)" />
+
+            
 
             
 
@@ -3709,6 +4253,8 @@ public static void Main () {
 
             
 
+            
+
              values are equal.</para
           >
         </summary>
@@ -3722,8 +4268,12 @@ public static void Main () {
 
             
 
+            
+
              and <paramref
              name="d2" />
+
+            
 
             
 
@@ -3739,10 +4289,14 @@ public static void Main () {
 
           
 
+          
+
           The first value to compare. </param
         >
         <param name="d2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3784,8 +4338,12 @@ public static void Main () {
 
           
 
+          
+
            value to convert to <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -3802,8 +4360,12 @@ public static void Main () {
 
             
 
+            
+
              value to <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -3816,6 +4378,8 @@ public static void Main () {
           <para
             > A <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -3835,8 +4399,12 @@ public static void Main () {
 
               
 
+              
+
                has fewer significant digits than, and has a different radix than,    <see
                cref="T:System.Decimal" />
+
+              
 
               
 
@@ -3854,8 +4422,12 @@ public static void Main () {
 
           
 
+          
+
            or less than <see
            cref="F:System.Byte.MinValue" />
+
+          
 
           
 
@@ -3897,8 +4469,12 @@ public static void Main () {
 
           
 
+          
+
            value to convert to <see
            cref="T:System.Char" />
+
+          
 
           
 
@@ -3915,8 +4491,12 @@ public static void Main () {
 
             
 
+            
+
              value to <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -3934,9 +4514,13 @@ public static void Main () {
 
             
 
+            
+
              containing
 <paramref
              name="value" />
+
+            
 
             
 
@@ -3955,8 +4539,12 @@ public static void Main () {
 
           
 
+          
+
            or less than <see
            cref="F:System.Char.MinValue" />
+
+          
 
           
 
@@ -3998,8 +4586,12 @@ public static void Main () {
 
           
 
+          
+
            value to convert to <see
            cref="T:System.Double" />
+
+          
 
           
 
@@ -4016,8 +4608,12 @@ public static void Main () {
 
             
 
+            
+
              value to <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -4030,6 +4626,8 @@ public static void Main () {
           <para
             > A <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -4049,9 +4647,13 @@ public static void Main () {
 
               
 
+              
+
                has fewer significant digits than
    <see
                cref="T:System.Decimal" />
+
+              
 
               
 
@@ -4095,8 +4697,12 @@ public static void Main () {
 
           
 
+          
+
            value to convert to <see
            cref="T:System.Int16" />
+
+          
 
           
 
@@ -4113,8 +4719,12 @@ public static void Main () {
 
             
 
+            
+
              value to <see
              cref="T:System.Int16" />
+
+            
 
             
 
@@ -4132,9 +4742,13 @@ public static void Main () {
 
             
 
+            
+
              containing
 <paramref
              name="value" />
+
+            
 
             
 
@@ -4153,8 +4767,12 @@ public static void Main () {
 
           
 
+          
+
            or less than <see
            cref="F:System.Int16.MinValue" />
+
+          
 
           
 
@@ -4196,8 +4814,12 @@ public static void Main () {
 
           
 
+          
+
            value to convert to <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -4214,8 +4836,12 @@ public static void Main () {
 
             
 
+            
+
              value to <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -4233,9 +4859,13 @@ public static void Main () {
 
             
 
+            
+
              containing
 <paramref
              name="value" />
+
+            
 
             
 
@@ -4254,8 +4884,12 @@ public static void Main () {
 
           
 
+          
+
            or less than <see
            cref="F:System.Int32.MinValue" />
+
+          
 
           
 
@@ -4297,8 +4931,12 @@ public static void Main () {
 
           
 
+          
+
            value to convert to <see
            cref="T:System.Int64" />
+
+          
 
           
 
@@ -4315,8 +4953,12 @@ public static void Main () {
 
             
 
+            
+
              value to <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -4334,9 +4976,13 @@ public static void Main () {
 
             
 
+            
+
              containing
 <paramref
              name="value" />
+
+            
 
             
 
@@ -4355,8 +5001,12 @@ public static void Main () {
 
           
 
+          
+
            or less than <see
            cref="F:System.Int64.MinValue" />
+
+          
 
           
 
@@ -4403,8 +5053,12 @@ public static void Main () {
 
           
 
+          
+
            value to convert to <see
            cref="T:System.SByte" />
+
+          
 
           
 
@@ -4421,8 +5075,12 @@ public static void Main () {
 
             
 
+            
+
              value to <see
              cref="T:System.SByte" />
+
+            
 
             
 
@@ -4440,9 +5098,13 @@ public static void Main () {
 
             
 
+            
+
              containing
 <paramref
              name="value" />
+
+            
 
             
 
@@ -4462,8 +5124,12 @@ public static void Main () {
 
             
 
+            
+
             , use <see
              cref="T:System.Int16" />
+
+            
 
             
 
@@ -4480,8 +5146,12 @@ public static void Main () {
 
           
 
+          
+
            or less than <see
            cref="F:System.SByte.MinValue" />
+
+          
 
           
 
@@ -4523,8 +5193,12 @@ public static void Main () {
 
           
 
+          
+
            value to convert to <see
            cref="T:System.Single" />
+
+          
 
           
 
@@ -4541,8 +5215,12 @@ public static void Main () {
 
             
 
+            
+
              value to <see
              cref="T:System.Int16" />
+
+            
 
             
 
@@ -4560,9 +5238,13 @@ public static void Main () {
 
             
 
+            
+
              containing
 <paramref
              name="value" />
+
+            
 
             
 
@@ -4582,8 +5264,12 @@ public static void Main () {
 
             
 
+            
+
             , use <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -4600,8 +5286,12 @@ public static void Main () {
 
           
 
+          
+
            or less than <see
            cref="F:System.Int16.MinValue" />
+
+          
 
           
 
@@ -4648,8 +5338,12 @@ public static void Main () {
 
           
 
+          
+
            value to convert to <see
            cref="T:System.UInt16" />
+
+          
 
           
 
@@ -4666,8 +5360,12 @@ public static void Main () {
 
             
 
+            
+
              value to <see
              cref="T:System.UInt16" />
+
+            
 
             
 
@@ -4685,9 +5383,13 @@ public static void Main () {
 
             
 
+            
+
              containing
 <paramref
              name="value" />
+
+            
 
             
 
@@ -4707,8 +5409,12 @@ public static void Main () {
 
             
 
+            
+
             , use <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -4725,8 +5431,12 @@ public static void Main () {
 
           
 
+          
+
            or less than <see
            cref="F:System.UInt16.MinValue" />
+
+          
 
           
 
@@ -4773,8 +5483,12 @@ public static void Main () {
 
           
 
+          
+
            value to convert to <see
            cref="T:System.UInt32" />
+
+          
 
           
 
@@ -4791,8 +5505,12 @@ public static void Main () {
 
             
 
+            
+
              value to <see
              cref="T:System.UInt32" />
+
+            
 
             
 
@@ -4810,8 +5528,12 @@ public static void Main () {
 
             
 
+            
+
              containing <paramref
              name="value" />
+
+            
 
             
 
@@ -4831,8 +5553,12 @@ public static void Main () {
 
             
 
+            
+
             , use <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -4849,8 +5575,12 @@ public static void Main () {
 
           
 
+          
+
            or less than <see
            cref="F:System.UInt32.MinValue" />
+
+          
 
           
 
@@ -4897,8 +5627,12 @@ public static void Main () {
 
           
 
+          
+
            value to convert to <see
            cref="T:System.UInt64" />
+
+          
 
           
 
@@ -4915,8 +5649,12 @@ public static void Main () {
 
             
 
+            
+
              value to <see
              cref="T:System.UInt64" />
+
+            
 
             
 
@@ -4934,9 +5672,13 @@ public static void Main () {
 
             
 
+            
+
              containing
 <paramref
              name="value" />
+
+            
 
             
 
@@ -4956,8 +5698,12 @@ public static void Main () {
 
             
 
+            
+
             , use <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -4974,8 +5720,12 @@ public static void Main () {
 
           
 
+          
+
            or less than <see
            cref="F:System.UInt64.MinValue" />
+
+          
 
           
 
@@ -5017,8 +5767,12 @@ public static void Main () {
 
           
 
+          
+
            value to convert to <see
            cref="T:System.Decimal" />
+
+          
 
           
 
@@ -5035,8 +5789,12 @@ public static void Main () {
 
             
 
+            
+
              value to <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -5055,6 +5813,8 @@ public static void Main () {
             
 
             
+
+            
 with the
 specified value.</para
           >
@@ -5063,6 +5823,8 @@ specified value.</para
         <exception cref="T:System.OverflowException">
           <para>
             <paramref name="value" />
+
+            
 
             
 
@@ -5086,6 +5848,8 @@ specified value.</para
 
             
 
+            
+
             , but the Decimal representation does not support NaNs.</para
           >
           <para
@@ -5096,11 +5860,15 @@ specified value.</para
 
             
 
+            
+
             , but the Decimal representation does not support infinities.</para
           >
           <para
             >equal to <see
              cref="F:System.Double.NegativeInfinity" />
+
+            
 
             
 
@@ -5143,8 +5911,12 @@ specified value.</para
 
           
 
+          
+
            value to convert to <see
            cref="T:System.Decimal" />
+
+          
 
           
 
@@ -5161,8 +5933,12 @@ specified value.</para
 
             
 
+            
+
              value to <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -5181,6 +5957,8 @@ specified value.</para
             
 
             
+
+            
 with the
 specified value.</para
           >
@@ -5189,6 +5967,8 @@ specified value.</para
         <exception cref="T:System.OverflowException">
           <para>
             <paramref name="value" />
+
+            
 
             
 
@@ -5212,6 +5992,8 @@ specified value.</para
 
             
 
+            
+
             , but the Decimal representation does not support NaNs.</para
           >
           <para
@@ -5222,11 +6004,15 @@ specified value.</para
 
             
 
+            
+
             , but the Decimal representation does not support infinities.</para
           >
           <para
             >equal to <see
              cref="F:System.Single.NegativeInfinity" />
+
+            
 
             
 
@@ -5275,8 +6061,12 @@ specified value.</para
 
             
 
+            
+
              method defines the operation of the greater than operator for <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -5293,8 +6083,12 @@ specified value.</para
 
             
 
+            
+
              method instead. They may also be able to call the <see
              cref="M:System.Decimal.op_GreaterThan(System.Decimal,System.Decimal)" />
+
+            
 
             
 
@@ -5314,8 +6108,12 @@ specified value.</para
 
             
 
+            
+
              is greater than another specified <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -5334,8 +6132,12 @@ specified value.</para
 
             
 
+            
+
              is greater than <paramref
              name="d2" />
+
+            
 
             
 
@@ -5351,10 +6153,14 @@ specified value.</para
 
           
 
+          
+
           The first value to compare. </param
         >
         <param name="d2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5402,8 +6208,12 @@ specified value.</para
 
             
 
+            
+
              method defines the operation of the greater than or equal operator for <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -5420,8 +6230,12 @@ specified value.</para
 
             
 
+            
+
              method instead. They may also be able to call the <see
              cref="M:System.Decimal.op_GreaterThanOrEqual(System.Decimal,System.Decimal)" />
+
+            
 
             
 
@@ -5441,8 +6255,12 @@ specified value.</para
 
             
 
+            
+
              is greater than or equal to another specified <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -5461,8 +6279,12 @@ specified value.</para
 
             
 
+            
+
              is greater than or equal to <paramref
              name="d2" />
+
+            
 
             
 
@@ -5478,10 +6300,14 @@ specified value.</para
 
           
 
+          
+
           The first value to compare. </param
         >
         <param name="d2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5523,8 +6349,12 @@ specified value.</para
 
           
 
+          
+
            value to convert to <see
            cref="T:System.Decimal" />
+
+          
 
           
 
@@ -5541,8 +6371,12 @@ specified value.</para
 
             
 
+            
+
              value to <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -5555,6 +6389,8 @@ specified value.</para
           <para
             >A <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -5600,8 +6436,12 @@ specified value.</para
 
           
 
+          
+
            value to convert to <see
            cref="T:System.Decimal" />
+
+          
 
           
 
@@ -5618,8 +6458,12 @@ specified value.</para
 
             
 
+            
+
              value to <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -5632,6 +6476,8 @@ specified value.</para
           <para
             >A <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -5677,8 +6523,12 @@ specified value.</para
 
           
 
+          
+
            value to convert to <see
            cref="T:System.Decimal" />
+
+          
 
           
 
@@ -5695,8 +6545,12 @@ specified value.</para
 
             
 
+            
+
              value to <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -5709,6 +6563,8 @@ specified value.</para
           <para
             >A <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -5754,8 +6610,12 @@ specified value.</para
 
           
 
+          
+
            value to convert to <see
            cref="T:System.Decimal" />
+
+          
 
           
 
@@ -5772,8 +6632,12 @@ specified value.</para
 
             
 
+            
+
              value to <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -5786,6 +6650,8 @@ specified value.</para
           <para
             >A <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -5831,8 +6697,12 @@ specified value.</para
 
           
 
+          
+
            value to convert to <see
            cref="T:System.Decimal" />
+
+          
 
           
 
@@ -5849,8 +6719,12 @@ specified value.</para
 
             
 
+            
+
              value to <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -5863,6 +6737,8 @@ specified value.</para
           <para
             >A <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -5913,8 +6789,12 @@ specified value.</para
 
           
 
+          
+
            value to convert to <see
            cref="T:System.Decimal" />
+
+          
 
           
 
@@ -5931,8 +6811,12 @@ specified value.</para
 
             
 
+            
+
              value to <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -5945,6 +6829,8 @@ specified value.</para
           <para
             >A <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -5998,8 +6884,12 @@ specified value.</para
 
           
 
+          
+
            value to convert to <see
            cref="T:System.Decimal" />
+
+          
 
           
 
@@ -6016,8 +6906,12 @@ specified value.</para
 
             
 
+            
+
              value to <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -6030,6 +6924,8 @@ specified value.</para
           <para
             >A <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -6082,8 +6978,12 @@ specified value.</para
 
           
 
+          
+
            value to convert to <see
            cref="T:System.Decimal" />
+
+          
 
           
 
@@ -6100,8 +7000,12 @@ specified value.</para
 
             
 
+            
+
              value to <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -6114,6 +7018,8 @@ specified value.</para
           <para
             >A <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -6167,8 +7073,12 @@ specified value.</para
 
           
 
+          
+
            value to convert to <see
            cref="T:System.Decimal" />
+
+          
 
           
 
@@ -6185,8 +7095,12 @@ specified value.</para
 
             
 
+            
+
              value to <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -6199,6 +7113,8 @@ specified value.</para
           <para
             >A <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -6246,8 +7162,12 @@ specified value.</para
 
           
 
+          
+
            or less than <see
            cref="F:System.Decimal.MinValue" />
+
+          
 
           
 
@@ -6265,8 +7185,12 @@ specified value.</para
 
             
 
+            
+
              method defines the operation of the increment operator for <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -6283,12 +7207,16 @@ specified value.</para
 
             
 
+            
+
              method directly, as the following example shows. </para
           >
           <para>code reference: System.Decimal.Operators#13</para>
           <para
             >If your language does not support custom operators, call the <see
              cref="M:System.Decimal.Add(System.Decimal,System.Decimal)" />
+
+            
 
             
 
@@ -6308,6 +7236,8 @@ specified value.</para
 
             
 
+            
+
              operand by 1.</para
           >
         </summary>
@@ -6321,11 +7251,15 @@ specified value.</para
 
             
 
+            
+
              incremented by 1.</para
           >
         </returns>
         <param name="d">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6373,8 +7307,12 @@ specified value.</para
 
             
 
+            
+
              method defines the operation of the inequality operator for <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -6394,8 +7332,12 @@ specified value.</para
 
                 
 
+                
+
                  method, which indicates the relationship between two <see
                  cref="T:System.Decimal" />
+
+                
 
                 
 
@@ -6408,6 +7350,8 @@ specified value.</para
               <para
                 >Calling the <see
                  cref="M:System.Decimal.Equals(System.Decimal)" />
+
+                
 
                 
 
@@ -6428,6 +7372,8 @@ specified value.</para
 
             
 
+            
+
              objects have different values.</para
           >
         </summary>
@@ -6441,8 +7387,12 @@ specified value.</para
 
             
 
+            
+
              and <paramref
              name="d2" />
+
+            
 
             
 
@@ -6458,10 +7408,14 @@ specified value.</para
 
           
 
+          
+
           The first value to compare. </param
         >
         <param name="d2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6509,8 +7463,12 @@ specified value.</para
 
             
 
+            
+
              method defines the operation of the less than operator for <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -6527,8 +7485,12 @@ specified value.</para
 
             
 
+            
+
              method instead. They may also be able to call the <see
              cref="M:System.Decimal.op_LessThan(System.Decimal,System.Decimal)" />
+
+            
 
             
 
@@ -6548,8 +7510,12 @@ specified value.</para
 
             
 
+            
+
              is less than another specified <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -6568,8 +7534,12 @@ specified value.</para
 
             
 
+            
+
              is less than <paramref
              name="d2" />
+
+            
 
             
 
@@ -6585,10 +7555,14 @@ specified value.</para
 
           
 
+          
+
           The first value to compare. </param
         >
         <param name="d2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6636,8 +7610,12 @@ specified value.</para
 
             
 
+            
+
              method defines the operation of the less than or equal operator for <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -6654,8 +7632,12 @@ specified value.</para
 
             
 
+            
+
              method instead. They may also be able to call the <see
              cref="M:System.Decimal.op_LessThanOrEqual(System.Decimal,System.Decimal)" />
+
+            
 
             
 
@@ -6675,8 +7657,12 @@ specified value.</para
 
             
 
+            
+
              is less than or equal to another specified <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -6695,8 +7681,12 @@ specified value.</para
 
             
 
+            
+
              is less than or equal to <paramref
              name="d2" />
+
+            
 
             
 
@@ -6712,10 +7702,14 @@ specified value.</para
 
           
 
+          
+
           The first value to compare. </param
         >
         <param name="d2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6760,10 +7754,14 @@ specified value.</para
 
           
 
+          
+
            is zero. </exception
         >
         <exception cref="T:System.OverflowException">
           <paramref name="d1" />
+
+          
 
           
 
@@ -6776,6 +7774,8 @@ specified value.</para
 
           
 
+          
+
            is greater than <see
            cref="F:System.Decimal.MaxValue" />
 
@@ -6783,8 +7783,12 @@ specified value.</para
 
           
 
+          
+
            or less than <see
            cref="F:System.Decimal.MinValue" />
+
+          
 
           
 
@@ -6802,8 +7806,12 @@ specified value.</para
 
             
 
+            
+
              method defines the operation of the modulus operator for <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -6815,6 +7823,8 @@ specified value.</para
           <para
             >If the language you're using doesn't support custom operators, call the <see
              cref="M:System.Decimal.Remainder(System.Decimal,System.Decimal)" />
+
+            
 
             
 
@@ -6834,6 +7844,8 @@ specified value.</para
 
             
 
+            
+
              values.</para
           >
         </summary>
@@ -6847,8 +7859,12 @@ specified value.</para
 
             
 
+            
+
              by <paramref
              name="d2" />
+
+            
 
             
 
@@ -6864,10 +7880,14 @@ specified value.</para
 
           
 
+          
+
           The dividend. </param
         >
         <param name="d2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6913,8 +7933,12 @@ specified value.</para
 
           
 
+          
+
            or less than <see
            cref="F:System.Decimal.MinValue" />
+
+          
 
           
 
@@ -6932,8 +7956,12 @@ specified value.</para
 
             
 
+            
+
              method defines the operation of the multiplication operator for <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -6945,6 +7973,8 @@ specified value.</para
           <para
             >If the language you're using doesn't support custom operators, call the <see
              cref="M:System.Decimal.Multiply(System.Decimal,System.Decimal)" />
+
+            
 
             
 
@@ -6963,6 +7993,8 @@ specified value.</para
 
             
 
+            
+
              values.</para
           >
         </summary>
@@ -6976,8 +8008,12 @@ specified value.</para
 
             
 
+            
+
              by <paramref
              name="d2" />
+
+            
 
             
 
@@ -6993,10 +8029,14 @@ specified value.</para
 
           
 
+          
+
           The first value to multiply. </param
         >
         <param name="d2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7042,8 +8082,12 @@ specified value.</para
 
           
 
+          
+
            or less than <see
            cref="F:System.Decimal.MinValue" />
+
+          
 
           
 
@@ -7061,8 +8105,12 @@ specified value.</para
 
             
 
+            
+
              method defines the operation of the subtraction operator for <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -7074,6 +8122,8 @@ specified value.</para
           <para
             >If the language you're using doesn't support custom operators, call the <see
              cref="M:System.Decimal.Subtract(System.Decimal,System.Decimal)" />
+
+            
 
             
 
@@ -7092,6 +8142,8 @@ specified value.</para
 
             
 
+            
+
              values.</para
           >
         </summary>
@@ -7105,8 +8157,12 @@ specified value.</para
 
             
 
+            
+
              from <paramref
              name="d1" />
+
+            
 
             
 
@@ -7122,10 +8178,14 @@ specified value.</para
 
           
 
+          
+
           The minuend. </param
         >
         <param name="d2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7169,6 +8229,8 @@ specified value.</para
 
             
 
+            
+
              method defines the operation of the unary negation operator (or the additive inverse operator) for <see
              cref="T:System.Decimal" />
 
@@ -7176,8 +8238,12 @@ specified value.</para
 
             
 
+            
+
              values. The operation produces a value that results in 0 (zero) when it is added to the original number. Languages that do not support custom operators can call the <see
              cref="M:System.Decimal.Negate(System.Decimal)" />
+
+            
 
             
 
@@ -7196,6 +8262,8 @@ specified value.</para
 
             
 
+            
+
              operand.</para
           >
         </summary>
@@ -7209,11 +8277,15 @@ specified value.</para
 
             
 
+            
+
              multiplied by negative one (-1).</para
           >
         </returns>
         <param name="d">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7257,8 +8329,12 @@ specified value.</para
 
             
 
+            
+
              method defines the operation of the unary positive operator for <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -7277,6 +8353,8 @@ specified value.</para
 
             
 
+            
+
              operand (the sign of the operand is unchanged).</para
           >
         </summary>
@@ -7290,11 +8368,15 @@ specified value.</para
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="d">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7335,10 +8417,14 @@ specified value.</para
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s " />
+
+          
 
           
 
@@ -7353,8 +8439,12 @@ specified value.</para
 
           
 
+          
+
            represents a number greater than <see
            cref="F:System.Decimal.MaxValue" />
+
+          
 
           
 
@@ -7367,12 +8457,16 @@ specified value.</para
 
           
 
+          
+
           .</exception
         >
         <example>
           <para
             >The following example demonstrates the <see
              cref="M:System.Decimal.Parse(System.String)" />
+
+            
 
             
 
@@ -7407,6 +8501,8 @@ class DecimalParseClass {
           <para
             >Parameter <paramref
              name="s" />
+
+            
 
             
 
@@ -7496,8 +8592,12 @@ class DecimalParseClass {
 
             
 
+            
+
              is interpreted using the <see
              cref="F:System.Globalization.NumberStyles.Number" />
+
+            
 
             
 
@@ -7510,6 +8610,8 @@ class DecimalParseClass {
 
             
 
+            
+
             , use either the <see
              cref="M:System.Decimal.Parse(System.String,System.Globalization.NumberStyles)" />
 
@@ -7517,8 +8619,12 @@ class DecimalParseClass {
 
             
 
+            
+
              or the <see
              cref="M:System.Decimal.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" />
+
+            
 
             
 
@@ -7534,8 +8640,12 @@ class DecimalParseClass {
 
             
 
+            
+
              is parsed using the formatting information in a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -7548,6 +8658,8 @@ class DecimalParseClass {
 
             
 
+            
+
             . To parse a string using the formatting information of some other culture, use the <see
              cref="M:System.Decimal.Parse(System.String,System.IFormatProvider)" />
 
@@ -7555,8 +8667,12 @@ class DecimalParseClass {
 
             
 
+            
+
              or <see
              cref="M:System.Decimal.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" />
+
+            
 
             
 
@@ -7572,11 +8688,15 @@ class DecimalParseClass {
 
             
 
+            
+
              is rounded using rounding to nearest.</para
           >
           <para
             >A <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -7589,6 +8709,8 @@ class DecimalParseClass {
 
             
 
+            
+
              represents a number that has more than 29 digits, but has a fractional part and is within the range of <see
              cref="F:System.Decimal.MaxValue" />
 
@@ -7596,8 +8718,12 @@ class DecimalParseClass {
 
             
 
+            
+
              and <see
              cref="F:System.Decimal.MinValue" />
+
+            
 
             
 
@@ -7613,8 +8739,12 @@ class DecimalParseClass {
 
             
 
+            
+
              parameter, and the applicable currency or number decimal and group separators are the same, the parse operation assumes that the separator is a decimal separator rather than a group separator. For more information about separators, see <see
              cref="P:System.Globalization.NumberFormatInfo.CurrencyDecimalSeparator" />
+
+            
 
             
 
@@ -7627,6 +8757,8 @@ class DecimalParseClass {
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.NumberFormatInfo.CurrencyGroupSeparator" />
 
@@ -7634,8 +8766,12 @@ class DecimalParseClass {
 
             
 
+            
+
             , and <see
              cref="P:System.Globalization.NumberFormatInfo.NumberGroupSeparator" />
+
+            
 
             
 
@@ -7654,6 +8790,8 @@ class DecimalParseClass {
 
             
 
+            
+
              equivalent.</para
           >
         </summary>
@@ -7667,11 +8805,15 @@ class DecimalParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7716,10 +8858,14 @@ class DecimalParseClass {
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -7734,6 +8880,8 @@ class DecimalParseClass {
 
           
 
+          
+
            represents a number greater than <see
            cref="F:System.Decimal.MaxValue" />
 
@@ -7741,8 +8889,12 @@ class DecimalParseClass {
 
           
 
+          
+
            or less than <see
            cref="F:System.Decimal.MinValue" />
+
+          
 
           
 
@@ -7759,8 +8911,12 @@ class DecimalParseClass {
 
             
 
+            
+
              values to the <see
              cref="M:System.Decimal.Parse(System.String)" />
+
+            
 
             
 
@@ -7799,8 +8955,12 @@ public static void Main() {
 
             
 
+            
+
              parameter defines the style elements (such as thousands separators, white space, and currency symbols) that are allowed in the <paramref
              name="s" />
+
+            
 
             
 
@@ -7813,8 +8973,12 @@ public static void Main() {
 
             
 
+            
+
              enumeration. The following <see
              cref="T:System.Globalization.NumberStyles" />
+
+            
 
             
 
@@ -7842,8 +9006,12 @@ public static void Main() {
 
             
 
+            
+
             , the <paramref
              name="s" />
+
+            
 
             
 
@@ -7879,8 +9047,12 @@ public static void Main() {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -7893,8 +9065,12 @@ public static void Main() {
 
                   
 
+                  
+
                    flag, and it can appear at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -7907,8 +9083,12 @@ public static void Main() {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+
+                  
 
                   
 
@@ -7933,8 +9113,12 @@ public static void Main() {
 
                   
 
+                  
+
                     and <see
                    cref="P:System.Globalization.NumberFormatInfo.CurrencyPositivePattern" />
+
+                  
 
                   
 
@@ -7947,6 +9131,8 @@ public static void Main() {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
 
@@ -7954,8 +9140,12 @@ public static void Main() {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowCurrencySymbol" />
+
+                  
 
                   
 
@@ -7980,8 +9170,12 @@ public static void Main() {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -7994,8 +9188,12 @@ public static void Main() {
 
                   
 
+                  
+
                    flag, and it can appear at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -8008,8 +9206,12 @@ public static void Main() {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowTrailingSign" />
+
+                  
 
                   
 
@@ -8022,6 +9224,8 @@ public static void Main() {
 
                   
 
+                  
+
                    to indicate a negative value if <paramref
                    name="style" />
 
@@ -8029,8 +9233,12 @@ public static void Main() {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowParentheses" />
+
+                  
 
                   
 
@@ -8065,6 +9273,8 @@ public static void Main() {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
 
@@ -8072,8 +9282,12 @@ public static void Main() {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowThousands" />
+
+                  
 
                   
 
@@ -8098,6 +9312,8 @@ public static void Main() {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
 
@@ -8105,8 +9321,12 @@ public static void Main() {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
+
+                  
 
                   
 
@@ -8131,6 +9351,8 @@ public static void Main() {
 
                   
 
+                  
+
                    only if <paramref
                    name="style" />
 
@@ -8138,8 +9360,12 @@ public static void Main() {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
+
+                  
 
                   
 
@@ -8164,6 +9390,8 @@ public static void Main() {
 
                   
 
+                  
+
                    parameter can represent a number in exponential notation if <paramref
                    name="style" />
 
@@ -8171,8 +9399,12 @@ public static void Main() {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowExponent" />
+
+                  
 
                   
 
@@ -8191,8 +9423,12 @@ public static void Main() {
 
             
 
+            
+
              style) always parses successfully. The remaining <see
              cref="T:System.Globalization.NumberStyles" />
+
+            
 
             
 
@@ -8205,8 +9441,12 @@ public static void Main() {
 
             
 
+            
+
              members affect the elements that may be present in <paramref
              name="s" />
+
+            
 
             
 
@@ -8260,6 +9500,8 @@ public static void Main() {
 
                   
 
+                  
+
                    parameter can also use exponential notation. This flag supports values in the form digitsEdigits; additional flags are needed to successfully parse strings with elements such as positive or negative signs and decimal point symbols.</para
                 >
               </description>
@@ -8274,6 +9516,8 @@ public static void Main() {
                 <para
                   >The ws element at the beginning of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -8298,6 +9542,8 @@ public static void Main() {
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -8317,6 +9563,8 @@ public static void Main() {
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -8331,6 +9579,8 @@ public static void Main() {
                 <para
                   >The sign element at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -8385,6 +9635,8 @@ public static void Main() {
 
                   
 
+                  
+
                    parameter cannot represent a hexadecimal number or a number in exponential notation.</para
                 >
               </description>
@@ -8404,6 +9656,8 @@ public static void Main() {
 
                   
 
+                  
+
                   , sign at the beginning of <paramref
                    name="s" />
 
@@ -8411,8 +9665,12 @@ public static void Main() {
 
                   
 
+                  
+
                   , and the . symbol. The <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -8437,8 +9695,12 @@ public static void Main() {
 
                   
 
+                  
+
                   , <paramref
                    name="sign" />
+
+                  
 
                   
 
@@ -8463,6 +9725,8 @@ public static void Main() {
 
                   
 
+                  
+
                    cannot represent a hexadecimal number.</para
                 >
               </description>
@@ -8476,6 +9740,8 @@ public static void Main() {
 
             
 
+            
+
              parameter is parsed using the formatting information in a <see
              cref="T:System.Globalization.NumberFormatInfo" />
 
@@ -8483,8 +9749,12 @@ public static void Main() {
 
             
 
+            
+
              object initialized for the current system culture. For more information, see <see
              cref="P:System.Globalization.NumberFormatInfo.CurrentInfo" />
+
+            
 
             
 
@@ -8500,8 +9770,12 @@ public static void Main() {
 
             
 
+            
+
              has 29 digits of precision. If <paramref
              name="s" />
+
+            
 
             
 
@@ -8514,8 +9788,12 @@ public static void Main() {
 
             
 
+            
+
              and <see
              cref="F:System.Decimal.MinValue" />
+
+            
 
             
 
@@ -8531,8 +9809,12 @@ public static void Main() {
 
             
 
+            
+
              parameter during a parse operation, <paramref
              name="styles" />
+
+            
 
             
 
@@ -8545,8 +9827,12 @@ public static void Main() {
 
             
 
+            
+
              and <see
              cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
+
+            
 
             
 
@@ -8559,8 +9845,12 @@ public static void Main() {
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.NumberFormatInfo.NumberDecimalSeparator" />
+
+            
 
             
 
@@ -8573,8 +9863,12 @@ public static void Main() {
 
             
 
+            
+
             , and <see
              cref="P:System.Globalization.NumberFormatInfo.NumberGroupSeparator" />
+
+            
 
             
 
@@ -8593,6 +9887,8 @@ public static void Main() {
 
             
 
+            
+
              equivalent.</para
           >
         </summary>
@@ -8606,6 +9902,8 @@ public static void Main() {
 
             
 
+            
+
              number equivalent to the number contained in <paramref
              name="s" />
 
@@ -8613,8 +9911,12 @@ public static void Main() {
 
             
 
+            
+
              as specified by <paramref
              name="style" />
+
+            
 
             
 
@@ -8630,10 +9932,14 @@ public static void Main() {
 
           
 
+          
+
           The string representation of the number to convert. </param
         >
         <param name="style">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8646,6 +9952,8 @@ public static void Main() {
 
           
 
+          
+
            values that indicates the style elements that can be present in <paramref
            name="s" />
 
@@ -8653,8 +9961,12 @@ public static void Main() {
 
           
 
+          
+
           . A typical value to specify is <see
            cref="F:System.Globalization.NumberStyles.Number" />
+
+          
 
           
 
@@ -8699,10 +10011,14 @@ public static void Main() {
 
           
 
+          
+
            is not in the correct style.</exception
         >
         <exception cref="T:System.OverflowException">
           <paramref name="s" />
+
+          
 
           
 
@@ -8715,8 +10031,12 @@ public static void Main() {
 
           
 
+          
+
            or less than <see
            cref="F:System.Decimal.MinValue" />
+
+          
 
           
 
@@ -8726,6 +10046,8 @@ public static void Main() {
         >
         <exception cref="T:System.ArgumentNullException">
           <paramref name="s" />
+
+          
 
           
 
@@ -8742,9 +10064,13 @@ public static void Main() {
 
             
 
+            
+
              to the
 <see
              cref="M:System.Decimal.Parse(System.String)" />
+
+            
 
             
 
@@ -8785,8 +10111,12 @@ public static void Main() {
 
             
 
+            
+
              method is commonly used to convert text that can be formatted in a variety of ways to a <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -8797,6 +10127,8 @@ public static void Main() {
           <para
             >The <paramref
              name="s" />
+
+            
 
             
 
@@ -8886,8 +10218,12 @@ public static void Main() {
 
             
 
+            
+
              parameter is interpreted using the <see
              cref="F:System.Globalization.NumberStyles.Number" />
+
+            
 
             
 
@@ -8900,8 +10236,12 @@ public static void Main() {
 
             
 
+            
+
             , use the <see
              cref="M:System.Decimal.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" />
+
+            
 
             
 
@@ -8917,8 +10257,12 @@ public static void Main() {
 
             
 
+            
+
              parameter is an <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -8931,8 +10275,12 @@ public static void Main() {
 
             
 
+            
+
              or <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -8945,8 +10293,12 @@ public static void Main() {
 
             
 
+            
+
              parameter supplies culture-specific information used in parsing. If <paramref
              name="provider" />
+
+            
 
             
 
@@ -8962,8 +10314,12 @@ public static void Main() {
 
             
 
+            
+
              object has 29 digits of precision. If <paramref
              name="s" />
+
+            
 
             
 
@@ -8976,8 +10332,12 @@ public static void Main() {
 
             
 
+            
+
              and <see
              cref="F:System.Decimal.MinValue" />
+
+            
 
             
 
@@ -8993,8 +10353,12 @@ public static void Main() {
 
             
 
+            
+
              parameter during a parse operation, and the applicable currency or number decimal and group separators are the same, the parse operation assumes that the separator is a decimal separator rather than a group separator. For more information about separators, see <see
              cref="P:System.Globalization.NumberFormatInfo.CurrencyDecimalSeparator" />
+
+            
 
             
 
@@ -9007,6 +10371,8 @@ public static void Main() {
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.NumberFormatInfo.CurrencyGroupSeparator" />
 
@@ -9014,8 +10380,12 @@ public static void Main() {
 
             
 
+            
+
             , and <see
              cref="P:System.Globalization.NumberFormatInfo.NumberGroupSeparator" />
+
+            
 
             
 
@@ -9034,6 +10404,8 @@ public static void Main() {
 
             
 
+            
+
              equivalent using the specified culture-specific format information.</para
           >
         </summary>
@@ -9047,6 +10419,8 @@ public static void Main() {
 
             
 
+            
+
              number equivalent to the number contained in <paramref
              name="s" />
 
@@ -9054,8 +10428,12 @@ public static void Main() {
 
             
 
+            
+
              as specified by <paramref
              name="provider" />
+
+            
 
             
 
@@ -9071,10 +10449,14 @@ public static void Main() {
 
           
 
+          
+
           The string representation of the number to convert. </param
         >
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9087,8 +10469,12 @@ public static void Main() {
 
           
 
+          
+
            that supplies culture-specific parsing information about <paramref
            name="s" />
+
+          
 
           
 
@@ -9135,11 +10521,15 @@ public static void Main() {
 
             
 
+            
+
              is a null reference. </para
           >
         </exception>
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -9154,6 +10544,8 @@ public static void Main() {
 
           
 
+          
+
            represents a number greater than <see
            cref="F:System.Decimal.MaxValue" />
 
@@ -9161,8 +10553,12 @@ public static void Main() {
 
           
 
+          
+
            or less than <see
            cref="F:System.Decimal.MinValue" />
+
+          
 
           
 
@@ -9179,8 +10575,12 @@ public static void Main() {
 
             
 
+            
+
              values and a <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -9189,6 +10589,8 @@ public static void Main() {
              to the
 <see
              cref="M:System.Decimal.Parse(System.String)" />
+
+            
 
             
 
@@ -9229,8 +10631,12 @@ public static void Main() {
 
             
 
+            
+
              parameter defines the allowable format of the <paramref
              name="s" />
+
+            
 
             
 
@@ -9243,8 +10649,12 @@ public static void Main() {
 
             
 
+            
+
              enumeration. The following <see
              cref="T:System.Globalization.NumberStyles" />
+
+            
 
             
 
@@ -9272,8 +10682,12 @@ public static void Main() {
 
             
 
+            
+
             , the <paramref
              name="s" />
+
+            
 
             
 
@@ -9309,8 +10723,12 @@ public static void Main() {
 
                   
 
+                  
+
                     and <see
                    cref="P:System.Globalization.NumberFormatInfo.CurrencyPositivePattern" />
+
+                  
 
                   
 
@@ -9323,8 +10741,12 @@ public static void Main() {
 
                   
 
+                  
+
                    object returned by the <see
                    cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+
+                  
 
                   
 
@@ -9337,8 +10759,12 @@ public static void Main() {
 
                   
 
+                  
+
                    parameter. The currency symbol can appear in <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -9351,8 +10777,12 @@ public static void Main() {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowCurrencySymbol" />
+
+                  
 
                   
 
@@ -9377,8 +10807,12 @@ public static void Main() {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -9391,8 +10825,12 @@ public static void Main() {
 
                   
 
+                  
+
                    flag, and it can appear at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -9405,8 +10843,12 @@ public static void Main() {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+
+                  
 
                   
 
@@ -9431,8 +10873,12 @@ public static void Main() {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -9445,8 +10891,12 @@ public static void Main() {
 
                   
 
+                  
+
                    flag, and it can appear at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -9459,8 +10909,12 @@ public static void Main() {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowTrailingSign" />
+
+                  
 
                   
 
@@ -9473,6 +10927,8 @@ public static void Main() {
 
                   
 
+                  
+
                    to indicate a negative value if <paramref
                    name="style" />
 
@@ -9480,8 +10936,12 @@ public static void Main() {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowParentheses" />
+
+                  
 
                   
 
@@ -9516,8 +10976,12 @@ public static void Main() {
 
                   
 
+                  
+
                    can appear in <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -9530,8 +10994,12 @@ public static void Main() {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowThousands" />
+
+                  
 
                   
 
@@ -9556,8 +11024,12 @@ public static void Main() {
 
                   
 
+                  
+
                    can appear in <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -9570,8 +11042,12 @@ public static void Main() {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
+
+                  
 
                   
 
@@ -9596,6 +11072,8 @@ public static void Main() {
 
                   
 
+                  
+
                    only if <paramref
                    name="style" />
 
@@ -9603,8 +11081,12 @@ public static void Main() {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
+
+                  
 
                   
 
@@ -9629,6 +11111,8 @@ public static void Main() {
 
                   
 
+                  
+
                    parameter can represent a number in exponential notation if <paramref
                    name="style" />
 
@@ -9636,8 +11120,12 @@ public static void Main() {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowExponent" />
+
+                  
 
                   
 
@@ -9656,8 +11144,12 @@ public static void Main() {
 
             
 
+            
+
              style) always parses successfully. The remaining <see
              cref="T:System.Globalization.NumberStyles" />
+
+            
 
             
 
@@ -9670,8 +11162,12 @@ public static void Main() {
 
             
 
+            
+
              members affect the elements that may be present in <paramref
              name="s" />
+
+            
 
             
 
@@ -9725,6 +11221,8 @@ public static void Main() {
 
                   
 
+                  
+
                    parameter can also use exponential notation.  This flag supports values in the form digitsEdigits; additional flags are needed to successfully parse strings with elements such as positive or negative signs and decimal point symbols.</para
                 >
               </description>
@@ -9739,6 +11237,8 @@ public static void Main() {
                 <para
                   >The ws element at the beginning of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -9763,6 +11263,8 @@ public static void Main() {
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -9782,6 +11284,8 @@ public static void Main() {
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -9796,6 +11300,8 @@ public static void Main() {
                 <para
                   >The sign element at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -9850,6 +11356,8 @@ public static void Main() {
 
                   
 
+                  
+
                    parameter cannot represent a hexadecimal number or a number in exponential notation.</para
                 >
               </description>
@@ -9869,8 +11377,12 @@ public static void Main() {
 
                   
 
+                  
+
                   , sign at the beginning of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -9880,6 +11392,8 @@ public static void Main() {
                                                                 
                                                                 symbol. The <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -9904,8 +11418,12 @@ public static void Main() {
 
                   
 
+                  
+
                   , <paramref
                    name="sign" />
+
+                  
 
                   
 
@@ -9930,6 +11448,8 @@ public static void Main() {
 
                   
 
+                  
+
                    cannot represent a hexadecimal number.</para
                 >
               </description>
@@ -9943,8 +11463,12 @@ public static void Main() {
 
             
 
+            
+
              parameter is an <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -9957,8 +11481,12 @@ public static void Main() {
 
             
 
+            
+
              or <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -9971,8 +11499,12 @@ public static void Main() {
 
             
 
+            
+
              parameter supplies culture-specific information used in parsing. If <paramref
              name="provider" />
+
+            
 
             
 
@@ -9988,8 +11520,12 @@ public static void Main() {
 
             
 
+            
+
              object has 29 digits of precision. If <paramref
              name="s" />
+
+            
 
             
 
@@ -10002,8 +11538,12 @@ public static void Main() {
 
             
 
+            
+
              and <see
              cref="F:System.Decimal.MinValue" />
+
+            
 
             
 
@@ -10019,8 +11559,12 @@ public static void Main() {
 
             
 
+            
+
              parameter during a parse operation, and the applicable currency or number decimal and group separators are the same, the parse operation assumes that the separator is a decimal separator rather than a group separator. For more information about separators, see <see
              cref="P:System.Globalization.NumberFormatInfo.CurrencyDecimalSeparator" />
+
+            
 
             
 
@@ -10033,6 +11577,8 @@ public static void Main() {
 
             
 
+            
+
             , <see
              cref="P:System.Globalization.NumberFormatInfo.CurrencyGroupSeparator" />
 
@@ -10040,8 +11586,12 @@ public static void Main() {
 
             
 
+            
+
             , and <see
              cref="P:System.Globalization.NumberFormatInfo.NumberGroupSeparator" />
+
+            
 
             
 
@@ -10060,6 +11610,8 @@ public static void Main() {
 
             
 
+            
+
              equivalent using the specified style and culture-specific format.</para
           >
         </summary>
@@ -10073,8 +11625,12 @@ public static void Main() {
 
             
 
+            
+
              number equivalent to the number contained in <paramref
              name="s" />
+
+            
 
             
 
@@ -10087,8 +11643,12 @@ public static void Main() {
 
             
 
+            
+
              and <paramref
              name="provider" />
+
+            
 
             
 
@@ -10104,10 +11664,14 @@ public static void Main() {
 
           
 
+          
+
           The string representation of the number to convert. </param
         >
         <param name="style">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10120,6 +11684,8 @@ public static void Main() {
 
           
 
+          
+
            values that indicates the style elements that can be present in <paramref
            name="s" />
 
@@ -10127,8 +11693,12 @@ public static void Main() {
 
           
 
+          
+
           . A typical value to specify is <see
            cref="F:System.Globalization.NumberStyles.Number" />
+
+          
 
           
 
@@ -10143,6 +11713,8 @@ public static void Main() {
 
           
 
+          
+
           An <see
            cref="T:System.IFormatProvider" />
 
@@ -10150,8 +11722,12 @@ public static void Main() {
 
           
 
+          
+
            object that supplies culture-specific information about the format of <paramref
            name="s" />
+
+          
 
           
 
@@ -10197,10 +11773,14 @@ public static void Main() {
 
           
 
+          
+
            is zero.</exception
         >
         <exception cref="T:System.OverflowException">
           <paramref name="d1" />
+
+          
 
           
 
@@ -10213,6 +11793,8 @@ public static void Main() {
 
           
 
+          
+
            is greater than <see
            cref="F:System.Decimal.MaxValue" />
 
@@ -10220,8 +11802,12 @@ public static void Main() {
 
           
 
+          
+
            or less than <see
            cref="F:System.Decimal.MinValue" />
+
+          
 
           
 
@@ -10236,6 +11822,8 @@ public static void Main() {
 
           
 
+          
+
           The divisor. </param
         >
         <summary>
@@ -10243,6 +11831,8 @@ public static void Main() {
           <para
             >Computes the remainder after dividing two <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -10261,8 +11851,12 @@ public static void Main() {
 
             
 
+            
+
              by <paramref
              name="d2" />
+
+            
 
             
 
@@ -10278,10 +11872,14 @@ public static void Main() {
 
           
 
+          
+
           The dividend. </param
         >
         <param name="d2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10315,8 +11913,9 @@ public static void Main() {
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para
             >The behavior of this method follows IEEE Standard 754, section 4. This kind of rounding is sometimes called <newTerm
+            >rounding to nearest</newTerm>
+
             
->rounding to nearest</newTerm>
 
             
 
@@ -10329,8 +11928,12 @@ public static void Main() {
 
             
 
+            
+
             . It minimizes rounding errors that result from consistently rounding a midpoint value in a single direction. It is equivalent to calling the <see
              cref="M:System.Decimal.Round(System.Decimal,System.MidpointRounding)" />
+
+            
 
             
 
@@ -10343,8 +11946,12 @@ public static void Main() {
 
             
 
+            
+
              argument of <see
              cref="F:System.MidpointRounding.ToEven" />
+
+            
 
             
 
@@ -10367,8 +11974,12 @@ public static void Main() {
 
             
 
+            
+
              parameter. If <paramref
              name="d" />
+
+            
 
             
 
@@ -10379,6 +11990,8 @@ public static void Main() {
         </returns>
         <param name="d">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10422,12 +12035,16 @@ public static void Main() {
 
           
 
+          
+
            is not between 0 and 28, inclusive. </exception
         >
         <example>
           <para
             >The following example demonstrates the <see
              cref="M:System.Decimal.Round(System.Decimal,System.Int32)" />
+
+            
 
             
 
@@ -10460,23 +12077,15 @@ public static void Main() {
           <para>The output is</para>
           <c>
             <para>Rounding to 0 places...</para>
-            <para
->round 2.5 = 2</para>
-            <para
->round 3.5 = 4</para>
-            <para
->round 2.98765432 = 3</para>
-            <para
->round 2.18765432 = 2</para>
+            <para>round 2.5 = 2</para>
+            <para>round 3.5 = 4</para>
+            <para>round 2.98765432 = 3</para>
+            <para>round 2.18765432 = 2</para>
             <para>Rounding to 2 places...</para>
-            <para
->round 2.5 = 2.5</para>
-            <para
->round 3.5 = 3.5</para>
-            <para
->round 2.98765432 = 2.99</para>
-            <para
->round 2.18765432 = 2.19</para>
+            <para>round 2.5 = 2.5</para>
+            <para>round 3.5 = 3.5</para>
+            <para>round 2.98765432 = 2.99</para>
+            <para>round 2.18765432 = 2.19</para>
           </c>
         </example>
         <remarks>
@@ -10489,8 +12098,12 @@ public static void Main() {
 
             
 
+            
+
              method with a <paramref
              name="mode" />
+
+            
 
             
 
@@ -10503,6 +12116,8 @@ public static void Main() {
 
             
 
+            
+
             .When <paramref
              name="d" />
 
@@ -10510,17 +12125,21 @@ public static void Main() {
 
             
 
-             is exactly halfway between two rounded values, the result is the rounded value that has an even digit in the far right decimal position. For example, when rounded to two decimals, the value 2.345 becomes 2.34 and the value 2.355 becomes 2.36. This process is known as <newTerm
             
->rounding toward even</newTerm>
+
+             is exactly halfway between two rounded values, the result is the rounded value that has an even digit in the far right decimal position. For example, when rounded to two decimals, the value 2.345 becomes 2.34 and the value 2.355 becomes 2.36. This process is known as <newTerm
+            >rounding toward even</newTerm>
+
+            
 
             
 
             
 
             , or <newTerm
+            >rounding to nearest</newTerm>
+
             
->rounding to nearest</newTerm>
 
             
 
@@ -10539,6 +12158,8 @@ public static void Main() {
 
             
 
+            
+
              value to a specified number of decimal places.</para
           >
         </summary>
@@ -10552,8 +12173,12 @@ public static void Main() {
 
             
 
+            
+
              rounded to <paramref
              name="decimals" />
+
+            
 
             
 
@@ -10569,10 +12194,14 @@ public static void Main() {
 
           
 
+          
+
           A decimal number to round. </param
         >
         <param name="decimals">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10624,6 +12253,8 @@ public static void Main() {
 
             
 
+            
+
              parameter. If <paramref
              name="d" />
 
@@ -10631,8 +12262,12 @@ public static void Main() {
 
             
 
+            
+
              is halfway between two numbers, one of which is even and the other odd, the <paramref
              name="mode" />
+
+            
 
             
 
@@ -10648,6 +12283,8 @@ public static void Main() {
 
           
 
+          
+
           A decimal number to round. </param
         >
         <param name="mode">
@@ -10657,8 +12294,12 @@ public static void Main() {
 
           
 
+          
+
           A value that specifies how to round <paramref
            name="d" />
+
+          
 
           
 
@@ -10702,8 +12343,12 @@ public static void Main() {
 
             
 
+            
+
              parameter specifies the number of significant decimal places in the return value and ranges from 0 to 28. If <paramref
              name="decimals" />
+
+            
 
             
 
@@ -10714,6 +12359,8 @@ public static void Main() {
           <para
             >The behavior of this method follows IEEE Standard 754, section 4. This kind of rounding is sometimes called rounding to nearest or banker's rounding. If <paramref
              name="decimals" />
+
+            
 
             
 
@@ -10736,8 +12383,12 @@ public static void Main() {
 
             
 
+            
+
              parameter with a precision equal to the <paramref
              name="decimals" />
+
+            
 
             
 
@@ -10750,8 +12401,12 @@ public static void Main() {
 
             
 
+            
+
              is halfway between two numbers, one of which is even and the other odd, the <paramref
              name="mode" />
+
+            
 
             
 
@@ -10764,6 +12419,8 @@ public static void Main() {
 
             
 
+            
+
              is less than <paramref
              name="decimals" />
 
@@ -10771,8 +12428,12 @@ public static void Main() {
 
             
 
+            
+
             , <paramref
              name="d" />
+
+            
 
             
 
@@ -10788,10 +12449,14 @@ public static void Main() {
 
           
 
+          
+
           A decimal number to round. </param
         >
         <param name="decimals">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10806,8 +12471,12 @@ public static void Main() {
 
           
 
+          
+
           A value that specifies how to round <paramref
            name="d" />
+
+          
 
           
 
@@ -10853,8 +12522,12 @@ public static void Main() {
 
           
 
+          
+
            or less than <see
            cref="F:System.Decimal.MinValue" />
+
+          
 
           
 
@@ -10867,6 +12540,8 @@ public static void Main() {
           <para
             >Subtracts one specified <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -10885,8 +12560,12 @@ public static void Main() {
 
             
 
+            
+
              from <paramref
              name="d1" />
+
+            
 
             
 
@@ -10902,10 +12581,14 @@ public static void Main() {
 
           
 
+          
+
           The minuend. </param
         >
         <param name="d2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10948,6 +12631,8 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -10955,8 +12640,12 @@ public static void Main() {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToBoolean(System.Decimal)" />
+
+            
 
             
 
@@ -10975,6 +12664,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -10985,6 +12676,8 @@ public static void Main() {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11023,8 +12716,12 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
+
+            
 
             
 
@@ -11037,8 +12734,12 @@ public static void Main() {
 
             
 
+            
+
              method or the <see
              cref="M:System.Convert.ToByte(System.Decimal)" />
+
+            
 
             
 
@@ -11057,6 +12758,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -11070,11 +12773,15 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11114,6 +12821,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -11123,6 +12832,8 @@ public static void Main() {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11165,6 +12876,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -11174,6 +12887,8 @@ public static void Main() {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11215,8 +12930,12 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
+
+            
 
             
 
@@ -11235,6 +12954,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -11244,6 +12965,8 @@ public static void Main() {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11285,8 +13008,12 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
+
+            
 
             
 
@@ -11299,8 +13026,12 @@ public static void Main() {
 
             
 
+            
+
              method or the <see
              cref="M:System.Convert.ToDouble(System.Decimal)" />
+
+            
 
             
 
@@ -11316,8 +13047,12 @@ public static void Main() {
 
             
 
+            
+
              has fewer significant digits than a <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -11336,6 +13071,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -11349,11 +13086,15 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11395,8 +13136,12 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
+
+            
 
             
 
@@ -11409,8 +13154,12 @@ public static void Main() {
 
             
 
+            
+
              method or the <see
              cref="M:System.Convert.ToInt16(System.Decimal)" />
+
+            
 
             
 
@@ -11421,6 +13170,8 @@ public static void Main() {
           <para
             >The <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -11439,6 +13190,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -11452,11 +13205,15 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11495,8 +13252,12 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
+
+            
 
             
 
@@ -11509,8 +13270,12 @@ public static void Main() {
 
             
 
+            
+
              method or the <see
              cref="M:System.Convert.ToInt32(System.Decimal)" />
+
+            
 
             
 
@@ -11521,6 +13286,8 @@ public static void Main() {
           <para
             >The <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -11539,6 +13306,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -11552,11 +13321,15 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11598,8 +13371,12 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
+
+            
 
             
 
@@ -11612,8 +13389,12 @@ public static void Main() {
 
             
 
+            
+
              method or the <see
              cref="M:System.Convert.ToInt64(System.Decimal)" />
+
+            
 
             
 
@@ -11632,6 +13413,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -11645,11 +13428,15 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11691,8 +13478,12 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
+
+            
 
             
 
@@ -11705,8 +13496,12 @@ public static void Main() {
 
             
 
+            
+
              method or the <see
              cref="M:System.Convert.ToSByte(System.Decimal)" />
+
+            
 
             
 
@@ -11725,6 +13520,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -11738,11 +13535,15 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11784,8 +13585,12 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
+
+            
 
             
 
@@ -11798,8 +13603,12 @@ public static void Main() {
 
             
 
+            
+
              method or the <see
              cref="M:System.Convert.ToSingle(System.Decimal)" />
+
+            
 
             
 
@@ -11818,6 +13627,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -11831,11 +13642,15 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -11879,6 +13694,8 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -11886,8 +13703,12 @@ public static void Main() {
 
             
 
+            
+
              interface. The recommended alternative is to call the static (Shared in Visual Basic) <see
              cref="M:System.Convert.ChangeType(System.Object,System.Type,System.IFormatProvider)" />
+
+            
 
             
 
@@ -11906,6 +13727,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -11914,6 +13737,8 @@ public static void Main() {
           <para
             >The value of the current instance, converted to a <paramref
              name="type" />
+
+            
 
             
 
@@ -11929,8 +13754,12 @@ public static void Main() {
 
           
 
+          
+
           An <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -11972,8 +13801,12 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
+
+            
 
             
 
@@ -11986,8 +13819,12 @@ public static void Main() {
 
             
 
+            
+
              method or the <see
              cref="M:System.Convert.ToUInt16(System.Decimal)" />
+
+            
 
             
 
@@ -12006,6 +13843,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -12019,11 +13858,15 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12065,8 +13908,12 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
+
+            
 
             
 
@@ -12079,8 +13926,12 @@ public static void Main() {
 
             
 
+            
+
              method or the <see
              cref="M:System.Convert.ToUInt32(System.Decimal)" />
+
+            
 
             
 
@@ -12091,6 +13942,8 @@ public static void Main() {
           <para
             >The <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -12109,6 +13962,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -12122,11 +13977,15 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12168,8 +14027,12 @@ public static void Main() {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
+
+            
 
             
 
@@ -12182,8 +14045,12 @@ public static void Main() {
 
             
 
+            
+
              method or the <see
              cref="M:System.Convert.ToUInt64(System.Decimal)" />
+
+            
 
             
 
@@ -12194,6 +14061,8 @@ public static void Main() {
           <para
             >The <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -12212,6 +14081,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -12225,11 +14096,15 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12271,6 +14146,8 @@ public static void Main() {
 
           
 
+          
+
           The object that initiated the callback. The functionality for this parameter is not currently implemented.</param
         >
       </Docs>
@@ -12304,6 +14181,8 @@ public static void Main() {
 
             
 
+            
+
              is rounded to the nearest integer value toward zero, and that result is returned.</para
           >
         </remarks>
@@ -12312,6 +14191,8 @@ public static void Main() {
           <para
             >Converts the value of the specified <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -12330,11 +14211,15 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12373,6 +14258,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -12381,6 +14268,8 @@ public static void Main() {
           <para
             >Converts the value of the specified <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -12399,11 +14288,15 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="d">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12443,6 +14336,8 @@ public static void Main() {
 
             
 
+            
+
              to the equivalent 16-bit signed integer.</para
           >
         </summary>
@@ -12456,11 +14351,15 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12503,6 +14402,8 @@ public static void Main() {
 
             
 
+            
+
              to the equivalent 32-bit signed integer.</para
           >
         </summary>
@@ -12516,11 +14417,15 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="d">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12563,6 +14468,8 @@ public static void Main() {
 
             
 
+            
+
              to the equivalent 64-bit signed integer.</para
           >
         </summary>
@@ -12576,11 +14483,15 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="d">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12620,6 +14531,8 @@ public static void Main() {
 
             
 
+            
+
              value to the equivalent OLE Automation Currency value, which is contained in a 64-bit signed integer.</para
           >
         </summary>
@@ -12633,11 +14546,15 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12682,6 +14599,8 @@ public static void Main() {
 
             
 
+            
+
              to the equivalent 8-bit signed integer.</para
           >
         </summary>
@@ -12695,11 +14614,15 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12738,6 +14661,8 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -12746,6 +14671,8 @@ public static void Main() {
           <para
             >Converts the value of the specified <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -12764,11 +14691,15 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="d">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12809,6 +14740,8 @@ public static void Main() {
 
             
 
+            
+
              method formats a <see
              cref="T:System.Decimal" />
 
@@ -12816,8 +14749,12 @@ public static void Main() {
 
             
 
+            
+
              value in the default ("G", or general) format of the current culture. If you want to specify a different format or culture, use the other overloads of the <see
              cref="M:System.Decimal.ToString(System.String)" />
+
+            
 
             
 
@@ -12893,10 +14830,14 @@ public static void Main() {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -12911,6 +14852,8 @@ public static void Main() {
                  type="text/html">
                   <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Types</a>
                 </format>
+
+                
 
                 
 
@@ -12965,6 +14908,8 @@ public static void Main() {
 
             
 
+            
+
              method formats a <see
              cref="T:System.Decimal" />
 
@@ -12972,8 +14917,12 @@ public static void Main() {
 
             
 
+            
+
              value in the default ("G", or general) format of a specified culture. If you want to specify a different format or the current culture, use the other overloads of the <see
              cref="M:System.Decimal.ToString(System.String)" />
+
+            
 
             
 
@@ -13049,10 +14998,14 @@ public static void Main() {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -13072,6 +15025,8 @@ public static void Main() {
 
                 
 
+                
+
                 . </para
               >
             </item>
@@ -13084,8 +15039,12 @@ public static void Main() {
 
             
 
+            
+
              parameter is an <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -13098,8 +15057,12 @@ public static void Main() {
 
             
 
+            
+
              method returns a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -13112,8 +15075,12 @@ public static void Main() {
 
             
 
+            
+
              is a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -13126,6 +15093,8 @@ public static void Main() {
 
             
 
+            
+
              object. The <paramref
              name="provider" />
 
@@ -13133,8 +15102,12 @@ public static void Main() {
 
             
 
+            
+
              parameter supplies culture-specific information used in formatting. If <paramref
              name="provider" />
+
+            
 
             
 
@@ -13150,8 +15123,12 @@ public static void Main() {
 
             
 
+            
+
              value to its string representation using a specified culture and a specific format string, call the <see
              cref="M:System.Decimal.ToString(System.String,System.IFormatProvider)" />
+
+            
 
             
 
@@ -13174,11 +15151,15 @@ public static void Main() {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -13219,6 +15200,8 @@ public static void Main() {
 
           
 
+          
+
            is invalid.</exception
         >
         <example>
@@ -13226,6 +15209,8 @@ public static void Main() {
             >The following example shows the effects of various
       formats on the string returned by <see
              cref="M:System.Decimal.ToString" />
+
+            
 
             
 
@@ -13268,6 +15253,8 @@ class test {
 
             
 
+            
+
              method formats a <see
              cref="T:System.Decimal" />
 
@@ -13275,8 +15262,12 @@ class test {
 
             
 
+            
+
              value in a specified format by using the conventions of the current culture. If you want to use the default ("G", or general) format or specify a different culture, use the other overloads of the <see
              cref="M:System.Decimal.ToString(System.String)" />
+
+            
 
             
 
@@ -13347,6 +15338,8 @@ class test {
 
             
 
+            
+
              method uses the standard or custom numeric format string specified by the <paramref
              name="format" />
 
@@ -13354,8 +15347,12 @@ class test {
 
             
 
+            
+
              parameter to convert the value of the current instance into its string representation. The <paramref
              name="format" />
+
+            
 
             
 
@@ -13370,6 +15367,8 @@ class test {
 
             
 
+            
+
              except for D, R, and X, as well as any combination of <format
              type="text/html">
               <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">custom numeric format specifiers</a>
@@ -13379,8 +15378,12 @@ class test {
 
             
 
+            
+
             . If <paramref
              name="format" />
+
+            
 
             
 
@@ -13401,10 +15404,14 @@ class test {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -13424,6 +15431,8 @@ class test {
 
                 
 
+                
+
                 . </para
               >
             </item>
@@ -13436,8 +15445,12 @@ class test {
 
             
 
+            
+
              object for the current culture. To apply the formatting conventions of a specified culture, call the <see
              cref="M:System.Decimal.ToString(System.String,System.IFormatProvider)" />
+
+            
 
             
 
@@ -13460,11 +15473,15 @@ class test {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -13509,6 +15526,8 @@ class test {
 
           
 
+          
+
            is invalid.</exception
         >
         <remarks>
@@ -13521,6 +15540,8 @@ class test {
 
             
 
+            
+
              method formats a <see
              cref="T:System.Double" />
 
@@ -13528,8 +15549,12 @@ class test {
 
             
 
+            
+
              value in a specified format of a specified culture. If you want to use default format or culture settings, use the other overloads of the <see
              cref="M:System.Double.ToString(System.String)" />
+
+            
 
             
 
@@ -13599,8 +15624,12 @@ class test {
 
             
 
+            
+
              parameter can be any valid standard numeric format specifier except for D, R, and X, as well as any combination of custom numeric format specifiers. If <paramref
              name="format" />
+
+            
 
             
 
@@ -13621,10 +15650,14 @@ class test {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -13644,6 +15677,8 @@ class test {
 
                 
 
+                
+
                 . </para
               >
             </item>
@@ -13656,8 +15691,12 @@ class test {
 
             
 
+            
+
              parameter is an <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -13670,8 +15709,12 @@ class test {
 
             
 
+            
+
              method returns a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -13684,8 +15727,12 @@ class test {
 
             
 
+            
+
              is a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -13698,6 +15745,8 @@ class test {
 
             
 
+            
+
              object. The <paramref
              name="provider" />
 
@@ -13705,8 +15754,12 @@ class test {
 
             
 
+            
+
              parameter supplies culture-specific information used in formatting. If <paramref
              name="provider" />
+
+            
 
             
 
@@ -13729,8 +15782,12 @@ class test {
 
             
 
+            
+
              and <paramref
              name="provider" />
+
+            
 
             
 
@@ -13746,10 +15803,14 @@ class test {
 
           
 
+          
+
           A numeric format string (see Remarks).</param
         >
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -13798,6 +15859,8 @@ class test {
 
             
 
+            
+
              to the equivalent 16-bit unsigned integer.</para
           >
         </summary>
@@ -13811,11 +15874,15 @@ class test {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -13863,6 +15930,8 @@ class test {
 
             
 
+            
+
              to the equivalent 32-bit unsigned integer.</para
           >
         </summary>
@@ -13876,11 +15945,15 @@ class test {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="d">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -13928,6 +16001,8 @@ class test {
 
             
 
+            
+
              to the equivalent 64-bit unsigned integer.</para
           >
         </summary>
@@ -13941,11 +16016,15 @@ class test {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="d">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -13987,6 +16066,8 @@ class test {
 
             
 
+            
+
              method.</para
           >
           <code lang="C#"
@@ -14017,6 +16098,8 @@ public static void Main() {
 
             
 
+            
+
              toward zero, to the nearest whole number, which corresponds to discarding any digits after the decimal point.</para
           >
         </remarks>
@@ -14025,6 +16108,8 @@ public static void Main() {
           <para
             >Returns the integral digits of the specified <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -14043,11 +16128,15 @@ public static void Main() {
 
             
 
+            
+
              rounded toward zero, to the nearest whole number.</para
           >
         </returns>
         <param name="d">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

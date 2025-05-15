@@ -21,8 +21,12 @@
 
         
 
+        
+
          object contains an error message that is raised by the SMTP mail provider when an e-mail message cannot be sent by the <see
          cref="T:System.Web.UI.WebControls.ChangePassword" />
+
+        
 
         
 
@@ -35,6 +39,8 @@
 
         
 
+        
+
          control. In such a case, the <see
          cref="T:System.Web.UI.WebControls.SendMailErrorEventArgs" />
 
@@ -42,8 +48,12 @@
 
         
 
+        
+
          object is sent to the <see
          cref="T:System.Web.UI.WebControls.SendMailErrorEventHandler" />
+
+        
 
         
 
@@ -59,6 +69,8 @@
 
         
 
+        
+
          delegate to handle the event. Handling the event allows your Web application to continue to run even though an exception has occurred. This is useful when it is not critical to send an e-mail message. For example, if the exception occurs when a user is working through a multi-step wizard, it can be advantageous to log the error, display an informative message to the user, and allow the user to complete the wizard. </para
       >
       <para
@@ -69,10 +81,14 @@
 
         
 
+        
+
          property to determine the actual cause of the exception. The most common reason for the exception is a configuration error in the <format
          type="text/html">
           <a href="220b0329-e384-4e0c-86b4-0945ad17efd9">smtp Element (Network Settings)</a>
         </format>
+
+        
 
         
 
@@ -88,6 +104,8 @@
 
         
 
+        
+
          property to true to signal that the exception has been handled; otherwise, the exception is rethrown, and will include the original call stack and error message.</para
       >
       <para
@@ -98,8 +116,12 @@
 
         
 
+        
+
          event, or if you create an event handler but leave the <see
          cref="P:System.Web.UI.WebControls.SendMailErrorEventArgs.Handled" />
+
+        
 
         
 
@@ -115,8 +137,12 @@
 
         
 
+        
+
          method also allows derived classes to handle the event, instead of this being done by the <see
          cref="T:System.Web.UI.WebControls.SendMailErrorEventHandler" />
+
+        
 
         
 
@@ -129,8 +155,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+        
 
         
 
@@ -150,6 +180,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -163,6 +195,8 @@
 
         
 
+        
+
          control, the <see
          cref="T:System.Web.UI.WebControls.CreateUserWizard" />
 
@@ -170,8 +204,12 @@
 
         
 
+        
+
          control, and the <see
          cref="T:System.Web.UI.WebControls.PasswordRecovery" />
+
+        
 
         
 
@@ -201,6 +239,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -211,8 +251,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Exception" />
+
+          
 
           
 
@@ -244,8 +288,12 @@
 
             
 
+            
+
              property contains the exception that is thrown by the SMTP mail provider when an e-mail message cannot be sent by the <see
              cref="T:System.Web.UI.WebControls.ChangePassword" />
+
+            
 
             
 
@@ -258,10 +306,14 @@
 
             
 
+            
+
             . The most common reason for this exception is a configuration error in the <format
              type="text/html">
               <a href="220b0329-e384-4e0c-86b4-0945ad17efd9">smtp Element (Network Settings)</a>
             </format>
+
+            
 
             
 
@@ -277,11 +329,15 @@
 
             
 
+            
+
             . Instead, the embedded file appears broken when the mail message is viewed.</para
           >
           <para
             >You must set the <see
              cref="P:System.Web.UI.WebControls.SendMailErrorEventArgs.Handled" />
+
+            
 
             
 
@@ -294,8 +350,12 @@
 
             
 
+            
+
              parameter of <see
              cref="T:System.Web.UI.WebControls.SendMailErrorEventArgs" />
+
+            
 
             
 
@@ -332,8 +392,12 @@
 
             
 
+            
+
              property indicates if the <see
              cref="P:System.Web.UI.WebControls.SendMailErrorEventArgs.Exception" />
+
+            
 
             
 
@@ -346,8 +410,12 @@
 
             
 
+            
+
              control or the <see
              cref="T:System.Web.UI.WebControls.CreateUserWizard" />
+
+            
 
             
 
@@ -357,6 +425,8 @@
              type="text/html">
               <a href="220b0329-e384-4e0c-86b4-0945ad17efd9">smtp Element (Network Settings)</a>
             </format>
+
+            
 
             
 
@@ -372,8 +442,12 @@
 
             
 
+            
+
              event, or if you create an event handler but leave the <see
              cref="P:System.Web.UI.WebControls.SendMailErrorEventArgs.Handled" />
+
+            
 
             
 
@@ -387,6 +461,8 @@
           <para
             >Indicates if the SMTP exception that is contained in the <see
              cref="P:System.Web.UI.WebControls.SendMailErrorEventArgs.Exception" />
+
+            
 
             
 

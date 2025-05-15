@@ -33,12 +33,16 @@
 
       
 
+      
+
       (2) advisory file locking information.</summary
     >
     <remarks
       >This can only be used with 
     <see
        cref="F:Mono.Unix.Native.FcntlCommand.F_GETLK" />
+
+      
 
       
 
@@ -52,9 +56,13 @@
 
       
 
+      
+
       , and
     <see
        cref="F:Mono.Unix.Native.FcntlCommand.F_SETLKW" />
+
+      
 
       
 
@@ -159,6 +167,8 @@
 
           
 
+          
+
            = 0 means until enf of file.</summary
         >
         <remarks />
@@ -247,6 +257,8 @@
         <summary
           >How to interpret <c
           >l_start</c>
+
+          
 
           
 

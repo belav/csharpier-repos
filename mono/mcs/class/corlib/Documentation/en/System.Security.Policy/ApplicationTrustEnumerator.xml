@@ -42,8 +42,12 @@
 
         
 
+        
+
          method also brings the enumerator back to this position. At this position, calling the <see
          cref="P:System.Security.Policy.ApplicationTrustEnumerator.Current" />
+
+        
 
         
 
@@ -56,8 +60,12 @@
 
         
 
+        
+
          method to advance the enumerator to the first element of the collection before reading the value of the <see
          cref="P:System.Security.Policy.ApplicationTrustEnumerator.Current" />
+
+        
 
         
 
@@ -72,8 +80,12 @@
 
         
 
+        
+
          returns the same object until either <see
          cref="M:System.Security.Policy.ApplicationTrustEnumerator.MoveNext" />
+
+        
 
         
 
@@ -86,6 +98,8 @@
 
         
 
+        
+
          is called. <see
          cref="M:System.Security.Policy.ApplicationTrustEnumerator.MoveNext" />
 
@@ -93,8 +107,12 @@
 
         
 
+        
+
          sets <see
          cref="P:System.Security.Policy.ApplicationTrustEnumerator.Current" />
+
+        
 
         
 
@@ -110,8 +128,12 @@
 
         
 
+        
+
          returns false. If the last call to <see
          cref="M:System.Security.Policy.ApplicationTrustEnumerator.MoveNext" />
+
+        
 
         
 
@@ -124,8 +146,12 @@
 
         
 
+        
+
          throws an exception. To reset <see
          cref="P:System.Security.Policy.ApplicationTrustEnumerator.Current" />
+
+        
 
         
 
@@ -138,8 +164,12 @@
 
         
 
+        
+
          followed by a call to <see
          cref="M:System.Security.Policy.ApplicationTrustEnumerator.MoveNext" />
+
+        
 
         
 
@@ -155,8 +185,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.Security.Policy.ApplicationTrustEnumerator.Reset" />
+
+        
 
         
 
@@ -169,8 +203,12 @@
 
         
 
+        
+
          exception. If the collection is modified between calling <see
          cref="M:System.Security.Policy.ApplicationTrustEnumerator.MoveNext" />
+
+        
 
         
 
@@ -183,8 +221,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Security.Policy.ApplicationTrustEnumerator.Current" />
+
+        
 
         
 
@@ -204,8 +246,12 @@
 
         
 
+        
+
          objects in the <see
          cref="T:System.Security.Policy.ApplicationTrustCollection" />
+
+        
 
         
 
@@ -246,8 +292,12 @@
 
             
 
+            
+
              property is not valid and will throw an exception if it is accessed. You must first call the <see
              cref="M:System.Security.Policy.ApplicationTrustEnumerator.MoveNext" />
+
+            
 
             
 
@@ -263,6 +313,8 @@
 
             
 
+            
+
              with no intervening calls to <see
              cref="M:System.Security.Policy.ApplicationTrustEnumerator.MoveNext" />
 
@@ -270,8 +322,12 @@
 
             
 
+            
+
              will return the same <see
              cref="T:System.Security.Policy.ApplicationTrust" />
+
+            
 
             
 
@@ -290,8 +346,12 @@
 
             
 
+            
+
              object in the <see
              cref="T:System.Security.Policy.ApplicationTrustCollection" />
+
+            
 
             
 
@@ -329,10 +389,14 @@
 
             
 
+            
+
              method immediately returns false if there are no objects in the collection.</para
           >
           <para>
             <see cref="M:System.Security.Policy.ApplicationTrustEnumerator.MoveNext" />
+
+            
 
             
 
@@ -345,8 +409,12 @@
 
             
 
+            
+
              has returned false, accessing the <see
              cref="P:System.Security.Policy.ApplicationTrustEnumerator.Current" />
+
+            
 
             
 
@@ -362,8 +430,12 @@
 
             
 
+            
+
              object in the collection, and the first call to <see
              cref="M:System.Security.Policy.ApplicationTrustEnumerator.MoveNext" />
+
+            
 
             
 
@@ -377,6 +449,8 @@
           <para
             >Moves to the next element in the <see
              cref="T:System.Security.Policy.ApplicationTrustCollection" />
+
+            
 
             
 
@@ -418,11 +492,15 @@
 
             
 
+            
+
              objects.</para
           >
           <para
             >The <see
              cref="M:System.Security.Policy.ApplicationTrustEnumerator.Reset" />
+
+            
 
             
 
@@ -435,8 +513,12 @@
 
             
 
+            
+
             , you do not need to call the <see
              cref="M:System.Security.Policy.ApplicationTrustEnumerator.MoveNext" />
+
+            
 
             
 
@@ -450,6 +532,8 @@
           <para
             >Resets the enumerator to the beginning of the <see
              cref="T:System.Security.Policy.ApplicationTrustCollection" />
+
+            
 
             
 
@@ -490,6 +574,8 @@
 
             
 
+            
+
              property instead.</para
           >
         </remarks>
@@ -503,8 +589,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Security.Policy.ApplicationTrustCollection" />
+
+            
 
             
 

@@ -49,10 +49,14 @@
 
         
 
+        
+
         .</para
       >
       <para>
         <see cref="T:System.Collections.Stack" />
+
+        
 
         
 
@@ -68,6 +72,8 @@
 
         
 
+        
+
          is the number of elements the <see
          cref="T:System.Collections.Stack" />
 
@@ -75,8 +81,12 @@
 
         
 
+        
+
          can hold. As elements are added to a <see
          cref="T:System.Collections.Stack" />
+
+        
 
         
 
@@ -92,8 +102,12 @@
 
         
 
+        
+
          is less than the capacity of the stack, <see
          cref="M:System.Collections.Stack.Push(System.Object)" />
+
+        
 
         
 
@@ -106,8 +120,12 @@
 
         
 
+        
+
          becomes an O(<paramref
          name="n" />
+
+        
 
         
 
@@ -120,8 +138,12 @@
 
         
 
+        
+
          is <see
          cref="P:System.Collections.Stack.Count" />
+
+        
 
         
 
@@ -134,10 +156,14 @@
 
         
 
+        
+
          is an O(1) operation.</para
       >
       <para>
         <see cref="T:System.Collections.Stack" />
+
+        
 
         
 
@@ -177,6 +203,8 @@
 
             
 
+            
+
              is the number of elements that the <see
              cref="T:System.Collections.Stack" />
 
@@ -184,8 +212,12 @@
 
             
 
+            
+
              can hold. As elements are added to a <see
              cref="T:System.Collections.Stack" />
+
+            
 
             
 
@@ -201,6 +233,8 @@
 
             
 
+            
+
             .</para
           >
           <para>This constructor is an O(1) operation.</para>
@@ -210,6 +244,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Collections.Stack" />
+
+            
 
             
 
@@ -247,6 +283,8 @@
 
             
 
+            
+
              is the number of elements that the <see
              cref="T:System.Collections.Stack" />
 
@@ -254,8 +292,12 @@
 
             
 
+            
+
              can hold. As elements are added to a <see
              cref="T:System.Collections.Stack" />
+
+            
 
             
 
@@ -271,11 +313,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The elements are copied onto the <see
              cref="T:System.Collections.Stack" />
+
+            
 
             
 
@@ -288,8 +334,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -305,6 +355,8 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -312,8 +364,12 @@
 
             
 
+            
+
              is the number of elements in <paramref
              name="col" />
+
+            
 
             
 
@@ -332,6 +388,8 @@
 
             
 
+            
+
              class that contains elements copied from the specified collection and has the same initial capacity as the number of elements copied.</para
           >
         </summary>
@@ -342,8 +400,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.ICollection" />
+
+          
 
           
 
@@ -380,6 +442,8 @@
 
             
 
+            
+
              is the number of elements that the <see
              cref="T:System.Collections.Stack" />
 
@@ -387,8 +451,12 @@
 
             
 
+            
+
              can hold. As elements are added to a <see
              cref="T:System.Collections.Stack" />
+
+            
 
             
 
@@ -404,11 +472,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This constructor is an O(<paramref
              name="n" />
+
+            
 
             
 
@@ -421,8 +493,12 @@
 
             
 
+            
+
              is <paramref
              name="initialCapacity" />
+
+            
 
             
 
@@ -441,6 +517,8 @@
 
             
 
+            
+
              class that is empty and has the specified initial capacity or the default initial capacity, whichever is greater.</para
           >
         </summary>
@@ -451,8 +529,12 @@
 
           
 
+          
+
           The initial number of elements that the <see
            cref="T:System.Collections.Stack" />
+
+          
 
           
 
@@ -488,11 +570,15 @@
 
             
 
+            
+
              is set to zero, and references to other objects from elements of the collection are also released.</para
           >
           <para
             >This method is an O(<paramref
              name="n" />
+
+            
 
             
 
@@ -505,8 +591,12 @@
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Stack.Count" />
+
+            
 
             
 
@@ -520,6 +610,8 @@
           <para
             >Removes all objects from the <see
              cref="T:System.Collections.Stack" />
+
+            
 
             
 
@@ -559,6 +651,8 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -566,8 +660,12 @@
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Stack.Count" />
+
+            
 
             
 
@@ -586,6 +684,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -594,6 +694,8 @@
           <para
             >A shallow copy of the <see
              cref="T:System.Collections.Stack" />
+
+            
 
             
 
@@ -633,11 +735,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This method performs a linear search; therefore, this method is an O(<paramref
              name="n" />
+
+            
 
             
 
@@ -650,8 +756,12 @@
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Stack.Count" />
+
+            
 
             
 
@@ -667,8 +777,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -681,8 +795,12 @@
 
             
 
+            
+
              to determine whether <paramref
              name="item" />
+
+            
 
             
 
@@ -695,6 +813,8 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
 
@@ -702,8 +822,12 @@
 
             
 
+            
+
              methods of the <paramref
              name="obj" />
+
+            
 
             
 
@@ -722,6 +846,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -735,8 +861,12 @@
 
             
 
+            
+
              is found in the <see
              cref="T:System.Collections.Stack" />
+
+            
 
             
 
@@ -752,6 +882,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -759,8 +891,12 @@
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Collections.Stack" />
+
+          
 
           
 
@@ -800,11 +936,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This method is an O(<paramref
              name="n" />
+
+            
 
             
 
@@ -817,8 +957,12 @@
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Stack.Count" />
+
+            
 
             
 
@@ -837,8 +981,12 @@
 
             
 
+            
+
              to an existing one-dimensional <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -854,8 +1002,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -868,8 +1020,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -884,8 +1040,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -919,6 +1079,8 @@
 
             
 
+            
+
              can store. <see
              cref="P:System.Collections.Stack.Count" />
 
@@ -926,8 +1088,12 @@
 
             
 
+            
+
              is the number of elements that are actually in the <see
              cref="T:System.Collections.Stack" />
+
+            
 
             
 
@@ -943,8 +1109,12 @@
 
             
 
+            
+
             . If <see
              cref="P:System.Collections.Stack.Count" />
+
+            
 
             
 
@@ -959,6 +1129,8 @@
           <para
             >Gets the number of elements contained in the <see
              cref="T:System.Collections.Stack" />
+
+            
 
             
 
@@ -1002,8 +1174,12 @@
 
             
 
+            
+
              also brings the enumerator back to this position.  At this position, <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1016,8 +1192,12 @@
 
             
 
+            
+
              to advance the enumerator to the first element of the collection before reading the value of <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1032,8 +1212,12 @@
 
             
 
+            
+
              returns the same object until either <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1046,6 +1230,8 @@
 
             
 
+            
+
              is called. <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
 
@@ -1053,8 +1239,12 @@
 
             
 
+            
+
              sets <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1070,8 +1260,12 @@
 
             
 
+            
+
              passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1084,8 +1278,12 @@
 
             
 
+            
+
              also return false. If the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1098,8 +1296,12 @@
 
             
 
+            
+
              is undefined. To set <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1112,8 +1314,12 @@
 
             
 
+            
+
              followed by <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1135,8 +1341,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Collections.Stack" />
+
+            
 
             
 
@@ -1155,8 +1365,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Collections.Stack" />
+
+            
 
             
 
@@ -1191,8 +1405,12 @@
 
             
 
+            
+
             , all operations must be done through the wrapper returned by the <see
              cref="M:System.Collections.Stack.Synchronized(System.Collections.Stack)" />
+
+            
 
             
 
@@ -1209,6 +1427,8 @@
 
             
 
+            
+
              during the entire enumeration.</para
           >
           <para>code reference: Classic Stack.IsSynchronized Example#2</para>
@@ -1219,6 +1439,8 @@
           <para
             >Gets a value indicating whether access to the <see
              cref="T:System.Collections.Stack" />
+
+            
 
             
 
@@ -1256,6 +1478,8 @@
 
             
 
+            
+
              method, but <see
              cref="M:System.Collections.Stack.Peek" />
 
@@ -1263,8 +1487,12 @@
 
             
 
+            
+
              does not modify the <see
              cref="T:System.Collections.Stack" />
+
+            
 
             
 
@@ -1280,8 +1508,12 @@
 
             
 
+            
+
              as a placeholder, if needed. To distinguish between a null value and the end of the stack, check the <see
              cref="P:System.Collections.Stack.Count" />
+
+            
 
             
 
@@ -1294,8 +1526,12 @@
 
             
 
+            
+
             , which is thrown when the <see
              cref="T:System.Collections.Stack" />
+
+            
 
             
 
@@ -1315,6 +1551,8 @@
 
             
 
+            
+
              without removing it.</para
           >
         </summary>
@@ -1328,8 +1566,12 @@
 
             
 
+            
+
              at the top of the <see
              cref="T:System.Collections.Stack" />
+
+            
 
             
 
@@ -1367,6 +1609,8 @@
 
             
 
+            
+
              method, but <see
              cref="M:System.Collections.Stack.Peek" />
 
@@ -1374,8 +1618,12 @@
 
             
 
+            
+
              does not modify the <see
              cref="T:System.Collections.Stack" />
+
+            
 
             
 
@@ -1391,8 +1639,12 @@
 
             
 
+            
+
              as a placeholder, if needed. To distinguish between a null value and the end of the stack, check the <see
              cref="P:System.Collections.Stack.Count" />
+
+            
 
             
 
@@ -1405,8 +1657,12 @@
 
             
 
+            
+
             , which is thrown when the <see
              cref="T:System.Collections.Stack" />
+
+            
 
             
 
@@ -1416,6 +1672,8 @@
           >
           <para>
             <see cref="T:System.Collections.Stack" />
+
+            
 
             
 
@@ -1434,6 +1692,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1447,8 +1707,12 @@
 
             
 
+            
+
              removed from the top of the <see
              cref="T:System.Collections.Stack" />
+
+            
 
             
 
@@ -1487,6 +1751,8 @@
 
             
 
+            
+
              is implemented as a circular buffer.</para
           >
           <para
@@ -1497,8 +1763,12 @@
 
             
 
+            
+
              already equals the capacity, the capacity of the <see
              cref="T:System.Collections.Stack" />
+
+            
 
             
 
@@ -1514,11 +1784,15 @@
 
             
 
+            
+
              as a placeholder, if needed. It occupies a slot in the stack and is treated like any object.</para
           >
           <para
             >If <see
              cref="P:System.Collections.Stack.Count" />
+
+            
 
             
 
@@ -1531,8 +1805,12 @@
 
             
 
+            
+
              is an O(1) operation. If the capacity needs to be increased to accommodate the new element, <see
              cref="M:System.Collections.Stack.Push(System.Object)" />
+
+            
 
             
 
@@ -1545,6 +1823,8 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -1552,8 +1832,12 @@
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Stack.Count" />
+
+            
 
             
 
@@ -1572,11 +1856,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1589,8 +1877,12 @@
 
           
 
+          
+
            to push onto the <see
            cref="T:System.Collections.Stack" />
+
+          
 
           
 
@@ -1632,12 +1924,16 @@
 
             
 
+            
+
             , all operations must be done through this wrapper.</para
           >
           <para>Enumerating through a collection is intrinsically not a thread-safe procedure. Even when a collection is synchronized, other threads can still modify the collection, which causes the enumerator to throw an exception. To guarantee thread safety during enumeration, you can either lock the collection during the entire enumeration or catch the exceptions resulting from changes made by other threads.</para>
           <para
             >The following code example shows how to lock the collection using the <see
              cref="P:System.Collections.Stack.SyncRoot" />
+
+            
 
             
 
@@ -1658,6 +1954,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1666,6 +1964,8 @@
           <para
             >A synchronized wrapper around the <see
              cref="T:System.Collections.Stack" />
+
+            
 
             
 
@@ -1681,8 +1981,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.Stack" />
+
+          
 
           
 
@@ -1716,8 +2020,12 @@
 
             
 
+            
+
             , use the <see
              cref="M:System.Collections.Stack.Synchronized(System.Collections.Stack)" />
+
+            
 
             
 
@@ -1730,8 +2038,12 @@
 
             
 
+            
+
              using the <see
              cref="P:System.Collections.Stack.SyncRoot" />
+
+            
 
             
 
@@ -1744,8 +2056,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Collections.Stack" />
+
+            
 
             
 
@@ -1758,8 +2074,12 @@
 
             
 
+            
+
             . This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see
              cref="T:System.Collections.Stack" />
+
+            
 
             
 
@@ -1776,6 +2096,8 @@
 
             
 
+            
+
              during the entire enumeration. </para
           >
           <para>code reference: Classic Stack.IsSynchronized Example#2</para>
@@ -1786,6 +2108,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Collections.Stack" />
+
+            
 
             
 
@@ -1823,11 +2147,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This method is an O(<paramref
              name="n" />
+
+            
 
             
 
@@ -1840,8 +2168,12 @@
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Stack.Count" />
+
+            
 
             
 
@@ -1860,6 +2192,8 @@
 
             
 
+            
+
              to a new array.</para
           >
         </summary>
@@ -1868,6 +2202,8 @@
           <para
             >A new array containing copies of the elements of the <see
              cref="T:System.Collections.Stack" />
+
+            
 
             
 

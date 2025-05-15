@@ -33,8 +33,12 @@
 
         
 
+        
+
          property of the thread to one of the values of the <see
          cref="T:System.Threading.ApartmentState" />
+
+        
 
         
 
@@ -45,6 +49,8 @@
       <para
         >For more information, see <see
          cref="T:System.Threading.Thread" />
+
+        
 
         
 
@@ -61,10 +67,14 @@
 
         
 
+        
+
         , and <format
          type="text/html">
           <a href="3ADA36E5-2390-4D70-B490-6AD8DE92F2FB">Advanced COM Interoperability</a>
         </format>
+
+        
 
         
 
@@ -78,6 +88,8 @@
       <para
         >Specifies the apartment state of a <see
          cref="T:System.Threading.Thread" />
+
+        
 
         
 
@@ -116,6 +128,8 @@
 
             
 
+            
+
              will create and enter a multithreaded apartment.</para
           >
         </summary>
@@ -149,6 +163,8 @@
 
             
 
+            
+
              will create and enter a single-threaded apartment.</para
           >
         </summary>
@@ -177,6 +193,8 @@
           <para
             >The <see
              cref="P:System.Threading.Thread.ApartmentState" />
+
+            
 
             
 

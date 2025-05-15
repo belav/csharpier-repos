@@ -36,6 +36,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -62,6 +64,8 @@
 
             
 
+            
+
              image that represents the data source is typically used in design-time pickers. The image may be null.</para
           >
         </remarks>
@@ -70,6 +74,8 @@
           <para
             >When overridden in a derived class, closes this stream and the underlying stream gets the <see
              cref="T:System.Drawing.Bitmap" />
+
+            
 
             
 
@@ -96,6 +102,8 @@
           <para
             >Indicates whether the data source is designable, meaning that an instance of this type will be added to the design surface when binding. Designable data sources are bound by instance rather than by type. Data sources of type <see
              cref="T:System.ComponentModel.IComponent" />
+
+            
 
             
 

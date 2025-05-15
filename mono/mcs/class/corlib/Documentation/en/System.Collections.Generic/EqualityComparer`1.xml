@@ -43,6 +43,8 @@
 
         
 
+        
+
          generic interface for use with collection classes such as the <see
          cref="T:System.Collections.Generic.Dictionary`2" />
 
@@ -50,8 +52,12 @@
 
         
 
+        
+
          generic class, or with methods such as <see
          cref="M:System.Collections.Generic.List`1.Sort(System.Int32,System.Int32,System.Collections.Generic.IComparer{`0})" />
+
+        
 
         
 
@@ -67,8 +73,12 @@
 
         
 
+        
+
          property checks whether type <paramref
          name="T" />
+
+        
 
         
 
@@ -81,8 +91,12 @@
 
         
 
+        
+
          generic interface and, if so, returns an <see
          cref="T:System.Collections.Generic.EqualityComparer`1" />
+
+        
 
         
 
@@ -95,6 +109,8 @@
 
         
 
+        
+
          method. Otherwise, it returns an <see
          cref="T:System.Collections.Generic.EqualityComparer`1" />
 
@@ -102,8 +118,12 @@
 
         
 
+        
+
         , as provided by <paramref
          name="T" />
+
+        
 
         
 
@@ -119,8 +139,12 @@
 
         
 
+        
+
          class instead of implementing the <see
          cref="T:System.Collections.Generic.IEqualityComparer`1" />
+
+        
 
         
 
@@ -133,8 +157,12 @@
 
         
 
+        
+
          class tests for equality using the <see
          cref="M:System.IEquatable`1.Equals(`0)" />
+
+        
 
         
 
@@ -147,8 +175,12 @@
 
         
 
+        
+
          method. This is consistent with the Contains, IndexOf, LastIndexOf, and Remove methods of the <see
          cref="T:System.Collections.Generic.Dictionary`2" />
+
+        
 
         
 
@@ -162,6 +194,8 @@
       <para
         >Provides a base class for implementations of the <see
          cref="T:System.Collections.Generic.IEqualityComparer`1" />
+
+        
 
         
 
@@ -192,6 +226,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Collections.Generic.EqualityComparer`1" />
+
+            
 
             
 
@@ -232,8 +268,12 @@
 
             
 
+            
+
              property checks whether type <paramref
              name="T" />
+
+            
 
             
 
@@ -246,8 +286,12 @@
 
             
 
+            
+
              interface and, if so, returns an <see
              cref="T:System.Collections.Generic.EqualityComparer`1" />
+
+            
 
             
 
@@ -260,8 +304,12 @@
 
             
 
+            
+
              that uses the overrides of <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -274,8 +322,12 @@
 
             
 
+            
+
              provided by <paramref
              name="T" />
+
+            
 
             
 
@@ -372,8 +424,12 @@
 
             
 
+            
+
              method, so <paramref
              name="obj" />
+
+            
 
             
 
@@ -386,6 +442,8 @@
 
             
 
+            
+
              of the current instance. If it cannot be cast to <paramref
              name="T" />
 
@@ -393,8 +451,12 @@
 
             
 
+            
+
             , an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -419,10 +481,14 @@
 
           
 
+          
+
           The first object to compare.</param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -461,6 +527,8 @@
 
             
 
+            
+
              method, so <paramref
              name="obj" />
 
@@ -468,8 +536,12 @@
 
             
 
+            
+
              must be a type that can be cast to the type specified by the generic type argument <paramref
              name="T" />
+
+            
 
             
 
@@ -493,8 +565,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 

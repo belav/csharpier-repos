@@ -28,8 +28,12 @@
 
         
 
+        
+
          event occurs when a change is made to the value of a column in the <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -43,6 +47,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Data.DataTable.ColumnChanging" />
+
+        
 
         
 
@@ -77,6 +83,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -87,8 +95,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataRow" />
+
+          
 
           
 
@@ -103,8 +115,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -114,6 +130,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -141,6 +159,8 @@
           <para
             >Gets the <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -189,6 +209,8 @@
           <para
             >Gets the <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 

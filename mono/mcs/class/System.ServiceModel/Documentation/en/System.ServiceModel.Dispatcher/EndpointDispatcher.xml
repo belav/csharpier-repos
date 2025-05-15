@@ -24,8 +24,12 @@
 
         
 
+        
+
          and the <see
          cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          can be used to control which messages it can process and some endpoint-related information. The <see
          cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          object is responsible for processing messages from a <see
          cref="T:System.ServiceModel.Dispatcher.ChannelDispatcher" />
+
+        
 
         
 
@@ -69,8 +81,12 @@
 
         
 
+        
+
          property and the message action matches the <see
          cref="P:System.ServiceModel.Dispatcher.EndpointDispatcher.ContractFilter" />
+
+        
 
         
 
@@ -83,8 +99,12 @@
 
         
 
+        
+
          objects can accept a message, the <see
          cref="P:System.ServiceModel.Dispatcher.EndpointDispatcher.FilterPriority" />
+
+        
 
         
 
@@ -100,8 +120,12 @@
 
         
 
+        
+
          object to configure or extend the process of receiving messages from the associated <see
          cref="T:System.ServiceModel.Dispatcher.ChannelDispatcher" />
+
+        
 
         
 
@@ -117,8 +141,12 @@
 
         
 
+        
+
          for an endpoint is obtained by implementing the <see
          cref="T:System.ServiceModel.Description.IEndpointBehavior" />
+
+        
 
         
 
@@ -131,11 +159,15 @@
 
         
 
+        
+
          from the other behavior interfaces.</para
       >
       <para
         >You can use the following <see
          cref="T:System.ServiceModel.Dispatcher.EndpointDispatcher" />
+
+        
 
         
 
@@ -153,6 +185,8 @@
 
             
 
+            
+
              property allows you to get or set a <see
              cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
 
@@ -160,8 +194,12 @@
 
             
 
+            
+
              object that the <see
              cref="P:System.ServiceModel.Dispatcher.EndpointDispatcher.ChannelDispatcher" />
+
+            
 
             
 
@@ -179,6 +217,8 @@
 
             
 
+            
+
              property gets the associated <see
              cref="T:System.ServiceModel.Dispatcher.ChannelDispatcher" />
 
@@ -186,8 +226,12 @@
 
             
 
+            
+
              object, which sends and receives messages to and from the <see
              cref="T:System.ServiceModel.Dispatcher.EndpointDispatcher" />
+
+            
 
             
 
@@ -205,8 +249,12 @@
 
             
 
+            
+
              gets the <see
              cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
+
+            
 
             
 
@@ -224,8 +272,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ServiceModel.Dispatcher.EndpointDispatcher.ContractNamespace" />
+
+            
 
             
 
@@ -243,8 +295,12 @@
 
             
 
+            
+
              property returns the <see
              cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
+
+            
 
             
 
@@ -262,6 +318,8 @@
 
             
 
+            
+
              property gets the address of the endpoint.</para
           >
         </item>
@@ -274,8 +332,12 @@
 
             
 
+            
+
              property returns the priority of the composite filter that the <see
              cref="P:System.ServiceModel.Dispatcher.EndpointDispatcher.ChannelDispatcher" />
+
+            
 
             
 
@@ -325,11 +387,15 @@
 
             
 
+            
+
              class with the specified address, contract name, and contract namespace.</para
           >
         </summary>
         <param name="address">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -344,10 +410,14 @@
 
           
 
+          
+
           The name of the endpoint contract.</param
         >
         <param name="contractNamespace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -385,8 +455,12 @@
 
             
 
+            
+
              has an <see
              cref="T:System.ServiceModel.Dispatcher.EndpointDispatcher" />
+
+            
 
             
 
@@ -399,8 +473,12 @@
 
             
 
+            
+
              property is a <see
              cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
+
+            
 
             
 
@@ -413,6 +491,8 @@
 
             
 
+            
+
              combines the <see
              cref="P:System.ServiceModel.Dispatcher.EndpointDispatcher.AddressFilter" />
 
@@ -420,8 +500,12 @@
 
             
 
+            
+
              value with the <see
              cref="P:System.ServiceModel.Dispatcher.EndpointDispatcher.ContractFilter" />
+
+            
 
             
 
@@ -437,8 +521,12 @@
 
             
 
+            
+
              objects that match can process a message, the <see
              cref="P:System.ServiceModel.Dispatcher.EndpointDispatcher.FilterPriority" />
+
+            
 
             
 
@@ -452,6 +540,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
+
+            
 
             
 
@@ -490,8 +580,12 @@
 
             
 
+            
+
              object receives a message from a channel and uses the <see
              cref="P:System.ServiceModel.Dispatcher.EndpointDispatcher.AddressFilter" />
+
+            
 
             
 
@@ -504,8 +598,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.ServiceModel.Dispatcher.EndpointDispatcher.FilterPriority" />
+
+            
 
             
 
@@ -519,6 +617,8 @@
           <para
             >Gets the associated <see
              cref="T:System.ServiceModel.Dispatcher.ChannelDispatcher" />
+
+            
 
             
 
@@ -557,8 +657,12 @@
 
             
 
+            
+
              property is a <see
              cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
+
+            
 
             
 
@@ -571,6 +675,8 @@
 
             
 
+            
+
              combines the <see
              cref="P:System.ServiceModel.Dispatcher.EndpointDispatcher.AddressFilter" />
 
@@ -578,8 +684,12 @@
 
             
 
+            
+
              value with the <see
              cref="P:System.ServiceModel.Dispatcher.EndpointDispatcher.ContractFilter" />
+
+            
 
             
 
@@ -595,8 +705,12 @@
 
             
 
+            
+
              objects that match can process a message, the <see
              cref="P:System.ServiceModel.Dispatcher.EndpointDispatcher.FilterPriority" />
+
+            
 
             
 
@@ -610,6 +724,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.ServiceModel.Dispatcher.MessageFilter" />
+
+            
 
             
 
@@ -686,8 +802,12 @@
 
             
 
+            
+
              property to obtain the <see
              cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
+
+            
 
             
 
@@ -700,8 +820,12 @@
 
             
 
+            
+
              property, you can also navigate to the <see
              cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
+
+            
 
             
 
@@ -715,6 +839,8 @@
           <para
             >Gets the <see
              cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
+
+            
 
             
 
@@ -772,6 +898,8 @@
 
             
 
+            
+
              combines the <see
              cref="P:System.ServiceModel.Dispatcher.EndpointDispatcher.AddressFilter" />
 
@@ -779,8 +907,12 @@
 
             
 
+            
+
              value with the <see
              cref="P:System.ServiceModel.Dispatcher.EndpointDispatcher.ContractFilter" />
+
+            
 
             
 
@@ -796,8 +928,12 @@
 
             
 
+            
+
              objects that match can process a message, the <see
              cref="P:System.ServiceModel.Dispatcher.EndpointDispatcher.FilterPriority" />
+
+            
 
             
 
@@ -813,8 +949,12 @@
 
             
 
+            
+
              property matches, a <see
              cref="T:System.ServiceModel.Dispatcher.MultipleFilterMatchesException" />
+
+            
 
             
 
@@ -833,6 +973,8 @@
 
             
 
+            
+
              and the <see
              cref="P:System.ServiceModel.Dispatcher.EndpointDispatcher.AddressFilter" />
 
@@ -840,8 +982,12 @@
 
             
 
+            
+
              combination when the <see
              cref="P:System.ServiceModel.Dispatcher.EndpointDispatcher.ChannelDispatcher" />
+
+            
 
             
 

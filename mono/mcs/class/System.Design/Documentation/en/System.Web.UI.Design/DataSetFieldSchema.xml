@@ -27,8 +27,12 @@
 
         
 
+        
+
          class to get the properties of a data field using a <see
          cref="T:System.Data.DataColumn" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Web.UI.Design.DataSetFieldSchema.IsReadOnly" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Web.UI.Design.DataSetFieldSchema.Name" />
+
+        
 
         
 
@@ -69,8 +81,12 @@
 
         
 
+        
+
         . In addition, you can use the <see
          cref="P:System.Web.UI.Design.DataSetFieldSchema.Identity" />
+
+        
 
         
 
@@ -83,8 +99,12 @@
 
         
 
+        
+
         , or the <see
          cref="P:System.Web.UI.Design.DataSetFieldSchema.PrimaryKey" />
+
+        
 
         
 
@@ -100,11 +120,15 @@
 
         
 
+        
+
          class is used by custom control designer components to provide information about a data field at design time. </para
       >
       <para
         >To examine the components of data using a <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -159,8 +183,12 @@
 
             
 
+            
+
              class to examine the properties of a data field using a <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -179,8 +207,12 @@
 
             
 
+            
+
              class using a specified <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -196,6 +228,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.DataColumn" />
 
@@ -203,8 +237,12 @@
 
           
 
+          
+
            object that the <see
            cref="T:System.Web.UI.Design.DataSetFieldSchema" />
+
+          
 
           
 
@@ -253,6 +291,8 @@
 
             
 
+            
+
              property corresponds to the <see
              cref="P:System.Data.DataColumn.AutoIncrement" />
 
@@ -260,8 +300,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -298,6 +342,8 @@
 
             
 
+            
+
              is read-only.</para
           >
         </summary>
@@ -324,6 +370,8 @@
 
             
 
+            
+
              property corresponds to the <see
              cref="P:System.Data.DataColumn.Unique" />
 
@@ -331,8 +379,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -368,6 +420,8 @@
 
             
 
+            
+
              property corresponds to the <see
              cref="P:System.Data.DataColumn.MaxLength" />
 
@@ -375,8 +429,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -412,6 +470,8 @@
 
             
 
+            
+
              property corresponds to the <see
              cref="P:System.Data.DataColumn.ColumnName" />
 
@@ -419,8 +479,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -456,6 +520,8 @@
 
             
 
+            
+
              property corresponds to the <see
              cref="P:System.Data.DataColumn.AllowDBNull" />
 
@@ -463,8 +529,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -500,6 +570,8 @@
 
             
 
+            
+
              property is required by the <see
              cref="T:System.Web.UI.Design.IDataSourceFieldSchema" />
 
@@ -507,8 +579,12 @@
 
             
 
+            
+
              interface, but is not used by the <see
              cref="T:System.Web.UI.Design.DataSetFieldSchema" />
+
+            
 
             
 
@@ -562,6 +638,8 @@
 
             
 
+            
+
              property is required by the <see
              cref="T:System.Web.UI.Design.IDataSourceFieldSchema" />
 
@@ -569,8 +647,12 @@
 
             
 
+            
+
              interface, but is not used by the <see
              cref="T:System.Web.UI.Design.DataSetFieldSchema" />
+
+            
 
             
 

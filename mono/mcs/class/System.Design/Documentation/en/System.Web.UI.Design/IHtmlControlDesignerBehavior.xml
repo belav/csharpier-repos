@@ -22,6 +22,8 @@
 
           
 
+          
+
            interface is obsolete. Use the <see
            cref="T:System.Web.UI.Design.IControlDesignerTag" />
 
@@ -29,8 +31,12 @@
 
           
 
+          
+
            and <see
            cref="T:System.Web.UI.Design.IControlDesignerView" />
+
+          
 
           
 
@@ -112,8 +118,12 @@
 
               
 
+              
+
                method is obsolete. Use the <see
                cref="M:System.Web.UI.Design.IControlDesignerTag.GetAttribute(System.String)" />
+
+              
 
               
 
@@ -126,8 +136,12 @@
 
               
 
+              
+
                property of the <see
                cref="T:System.Web.UI.Design.ControlDesigner" />
+
+              
 
               
 
@@ -152,10 +166,14 @@
 
           
 
+          
+
           The attribute to retrieve. </param
         >
         <param name="ignoreCase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -195,6 +213,8 @@
 
               
 
+              
+
                method is obsolete. Use the <see
                cref="M:System.Web.UI.Design.ContainerControlDesigner.GetDesignTimeCssAttributes" />
 
@@ -202,8 +222,12 @@
 
               
 
+              
+
                method on the <see
                cref="T:System.Web.UI.Design.ContainerControlDesigner" />
+
+              
 
               
 
@@ -228,6 +252,8 @@
 
           
 
+          
+
           The style attribute to retrieve. </param
         >
         <param name="designTimeOnly">
@@ -237,10 +263,14 @@
 
           
 
+          
+
           true if the attribute is only active at design time; otherwise, false. </param
         >
         <param name="ignoreCase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -279,8 +309,12 @@
 
               
 
+              
+
                method is obsolete. Use the <see
                cref="M:System.Web.UI.Design.IControlDesignerTag.RemoveAttribute(System.String)" />
+
+              
 
               
 
@@ -293,8 +327,12 @@
 
               
 
+              
+
                property of the <see
                cref="T:System.Web.UI.Design.ControlDesigner" />
+
+              
 
               
 
@@ -315,10 +353,14 @@
 
           
 
+          
+
           The attribute to remove. </param
         >
         <param name="ignoreCase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -359,6 +401,8 @@
 
           
 
+          
+
           The style attribute to remove. </param
         >
         <param name="designTimeOnly">
@@ -368,10 +412,14 @@
 
           
 
+          
+
           true if the attribute is only active at design time; otherwise, false. </param
         >
         <param name="ignoreCase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -411,8 +459,12 @@
 
               
 
+              
+
                method is obsolete. Use the <see
                cref="M:System.Web.UI.Design.IControlDesignerTag.SetAttribute(System.String,System.String)" />
+
+              
 
               
 
@@ -425,8 +477,12 @@
 
               
 
+              
+
                property of the <see
                cref="T:System.Web.UI.Design.ControlDesigner" />
+
+              
 
               
 
@@ -447,6 +503,8 @@
 
           
 
+          
+
           The attribute to set. </param
         >
         <param name="value">
@@ -456,10 +514,14 @@
 
           
 
+          
+
           The object on which to set the attribute. </param
         >
         <param name="ignoreCase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -500,6 +562,8 @@
 
               
 
+              
+
                method is obsolete. Use the <see
                cref="M:System.Web.UI.Design.ContainerControlDesigner.AddDesignTimeCssAttributes(System.Collections.IDictionary)" />
 
@@ -507,8 +571,12 @@
 
               
 
+              
+
                method on the <see
                cref="T:System.Web.UI.Design.ContainerControlDesigner" />
+
+              
 
               
 
@@ -529,10 +597,14 @@
 
           
 
+          
+
           The attribute to set. </param
         >
         <param name="designTimeOnly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -547,10 +619,14 @@
 
           
 
+          
+
           The object to set the attribute on. </param
         >
         <param name="ignoreCase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

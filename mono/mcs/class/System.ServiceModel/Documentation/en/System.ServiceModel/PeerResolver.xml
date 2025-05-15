@@ -47,6 +47,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -107,6 +109,8 @@
 
             
 
+            
+
             ).</para
           >
         </remarks>
@@ -122,11 +126,15 @@
 
           
 
+          
+
            that contains the new endpoint address of this peer resolver instance.</param
         >
         <param name="binding">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.ServiceModel.Channels.Binding" />
+
+          
 
           
 
@@ -142,11 +150,15 @@
 
           
 
+          
+
            that specifies the new client credentials for this peer resolver.</param
         >
         <param name="referralPolicy">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.ServiceModel.PeerResolvers.PeerReferralPolicy" />
+
+          
 
           
 
@@ -189,6 +201,8 @@
 
             
 
+            
+
              for a specific peer mesh.</para
           >
         </summary>
@@ -202,6 +216,8 @@
 
             
 
+            
+
              that represents the registration ID. This registration ID object is passed to the <see
              cref="M:System.ServiceModel.PeerResolver.Update(System.Object,System.ServiceModel.PeerNodeAddress,System.TimeSpan)" />
 
@@ -209,8 +225,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.ServiceModel.PeerResolver.Unregister(System.Object,System.TimeSpan)" />
+
+            
 
             
 
@@ -226,6 +246,8 @@
 
           
 
+          
+
           The ID of the peer mesh in which the peer node is to be registered.</param
         >
         <param name="nodeAddress">
@@ -235,8 +257,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.PeerNodeAddress" />
+
+          
 
           
 
@@ -251,8 +277,12 @@
 
           
 
+          
+
           The length of time to wait for success before aborting the attempt to register with the peer mesh. If the attempt fails, <see
            cref="T:System.TimeoutException" />
+
+          
 
           
 
@@ -299,8 +329,12 @@
 
             
 
+            
+
              that contains <see
              cref="T:System.ServiceModel.PeerNodeAddress" />
+
+            
 
             
 
@@ -316,8 +350,12 @@
 
           
 
+          
+
           The mesh ID of the peer mesh within which the <see
            cref="T:System.ServiceModel.PeerNodeAddress" />
+
+          
 
           
 
@@ -332,6 +370,8 @@
 
           
 
+          
+
           The number of endpoint addresses to return.</param
         >
         <param name="timeout">
@@ -341,8 +381,12 @@
 
           
 
+          
+
           The length of time to wait for success before aborting the attempt to resolve endpoint addresses within the peer mesh. If the attempt fails, <see
            cref="T:System.TimeoutException" />
+
+          
 
           
 
@@ -383,10 +427,14 @@
 
             
 
+            
+
             . </para
           >
           <para>
             <see cref="M:System.ServiceModel.PeerResolver.Unregister(System.Object,System.TimeSpan)" />
+
+            
 
             
 
@@ -404,6 +452,8 @@
 
                 
 
+                
+
                  is leaving the peer mesh (usually as the result of closing the last peer channel or service host that is associated with it).</para
               >
             </item>
@@ -416,8 +466,12 @@
 
                 
 
+                
+
                  can find no available endpoint addresses of other nodes participating in the peer mesh. As a result, the <see
                  cref="T:System.ServiceModel.PeerNode" />
+
+                
 
                 
 
@@ -430,6 +484,8 @@
 
                 
 
+                
+
                  to unregister itself from the <see
                  cref="T:System.ServiceModel.PeerResolver" />
 
@@ -437,8 +493,12 @@
 
                 
 
+                
+
                 . If other peer nodes within the mesh become available subsequent to unregistration, the node can re-register itself by calling <see
                  cref="M:System.ServiceModel.PeerResolver.Register(System.String,System.ServiceModel.PeerNodeAddress,System.TimeSpan)" />
+
+                
 
                 
 
@@ -460,8 +520,12 @@
 
           
 
+          
+
           A registration ID for the node obtained by a previous call to <see
            cref="M:System.ServiceModel.PeerResolver.Register(System.String,System.ServiceModel.PeerNodeAddress,System.TimeSpan)" />
+
+          
 
           
 
@@ -476,8 +540,12 @@
 
           
 
+          
+
           The length of time to wait for a successful removal of the registration from the peer mesh. If the attempt fails, <see
            cref="T:System.TimeoutException" />
+
+          
 
           
 
@@ -518,8 +586,12 @@
 
             
 
+            
+
              is called when the address of the <see
              cref="T:System.ServiceModel.PeerNode" />
+
+            
 
             
 
@@ -538,11 +610,15 @@
 
             
 
+            
+
              for a node registered with a specific peer mesh.</para
           >
         </summary>
         <param name="registrationId">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -558,6 +634,8 @@
 
           
 
+          
+
           The updated endpoint address (and other multihoming IP addresses). </param
         >
         <param name="timeout">
@@ -567,8 +645,12 @@
 
           
 
+          
+
           The length of time to wait for success before aborting the attempt to update the node's registration within the peer mesh. If the attempt fails, <see
            cref="T:System.TimeoutException" />
+
+          
 
           
 

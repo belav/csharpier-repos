@@ -25,8 +25,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
+
+        
 
         
 
@@ -37,6 +41,8 @@
       <para
         >For a detailed description of the upgrade process, see <see
          cref="T:System.ServiceModel.Channels.StreamUpgradeProvider" />
+
+        
 
         
 
@@ -69,6 +75,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.StreamUpgradeAcceptor" />
+
+            
 
             
 
@@ -118,6 +126,8 @@
 
           
 
+          
+
           The stream to be upgraded.</param
         >
       </Docs>
@@ -154,6 +164,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -162,6 +174,8 @@
           <para
             >Asynchronous version of <see
              cref="M:System.ServiceModel.Channels.StreamUpgradeAcceptor.AcceptUpgrade(System.IO.Stream)" />
+
+            
 
             
 
@@ -181,6 +195,8 @@
 
           
 
+          
+
           The stream to be upgraded.</param
         >
         <param name="callback">
@@ -190,10 +206,14 @@
 
           
 
+          
+
           The method to be called when the AcceptUpgrade call has completed.</param
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -242,6 +262,8 @@
 
           
 
+          
+
           The type of content to be checked. </param
         >
       </Docs>
@@ -276,6 +298,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -284,6 +308,8 @@
           <para
             >Asynchronous version of <see
              cref="M:System.ServiceModel.Channels.StreamUpgradeAcceptor.AcceptUpgrade(System.IO.Stream)" />
+
+            
 
             
 
@@ -298,6 +324,8 @@
         </returns>
         <param name="result">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

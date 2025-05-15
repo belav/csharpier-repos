@@ -26,8 +26,12 @@
 
         
 
+        
+
          and other classes in the <see
          cref="N:System.Web.Services.Protocols" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          class provides a non-reading implementation of the interface of the abstract class <see
          cref="T:System.Web.Services.Protocols.MimeReturnReader" />
+
+        
 
         
 
@@ -60,8 +68,12 @@
 
         
 
+        
+
          class. Instead, when the Wsdl.exe tool generates client proxy code according to the HTTP-GET or HTTP-POST implementations, .it applies the <see
          cref="T:System.Web.Services.Protocols.HttpMethodAttribute" />
+
+        
 
         
 
@@ -74,8 +86,12 @@
 
         
 
+        
+
          property to <see
          cref="T:System.Web.Services.Protocols.XmlReturnReader" />
+
+        
 
         
 
@@ -88,8 +104,12 @@
 
         
 
+        
+
         . Wsdl.exe sets the property to <see
          cref="T:System.Web.Services.Protocols.NopReturnReader" />
+
+        
 
         
 
@@ -116,6 +136,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Protocols.NopReturnReader" />
+
+            
 
             
 
@@ -153,8 +175,12 @@
 
             
 
+            
+
              method. For the <see
              cref="T:System.Web.Services.Protocols.NopReturnReader" />
+
+            
 
             
 
@@ -178,8 +204,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+
+          
 
           
 
@@ -216,8 +246,12 @@
 
             
 
+            
+
              method does nothing. It is invoked at the time a response is processed. The input parameter, <paramref
              name="initializer" />
+
+            
 
             
 
@@ -237,6 +271,8 @@
 
           
 
+          
+
           Another instance of the <see
            cref="T:System.Web.Services.Protocols.NopReturnReader" />
 
@@ -244,8 +280,12 @@
 
           
 
+          
+
            class, on which the <see
            cref="M:System.Web.Services.Protocols.NopReturnReader.GetInitializer(System.Web.Services.Protocols.LogicalMethodInfo)" />
+
+          
 
           
 
@@ -283,8 +323,12 @@
 
             
 
+            
+
              class's implementation of the <see
              cref="M:System.Web.Services.Protocols.MimeReturnReader.Read(System.Net.WebResponse,System.IO.Stream)" />
+
+            
 
             
 
@@ -308,8 +352,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.WebResponse" />
+
+          
 
           
 
@@ -324,6 +372,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Stream" />
 
@@ -331,8 +381,12 @@
 
           
 
+          
+
            whose content is the body of the HTTP response represented by the <paramref
            name="response" />
+
+          
 
           
 

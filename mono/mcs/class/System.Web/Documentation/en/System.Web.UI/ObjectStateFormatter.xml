@@ -31,10 +31,14 @@
 
         
 
+        
+
          class serializes and deserializes object state graphs in a compact format. </para
       >
       <para>
         <see cref="T:System.Web.UI.ObjectStateFormatter" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          class and classes that derive from it to serialize view state and control state. It is also used by the <see
          cref="T:System.Web.UI.LosFormatter" />
+
+        
 
         
 
@@ -59,6 +67,8 @@
       <para
         >The <see
          cref="T:System.Web.UI.ObjectStateFormatter" />
+
+        
 
         
 
@@ -200,8 +210,12 @@
 
         
 
+        
+
          object or if the string is actually an instance of the <see
          cref="T:System.Web.UI.IndexedString" />
+
+        
 
         
 
@@ -217,8 +231,12 @@
 
         
 
+        
+
          object if they implement the <see
          cref="T:System.Runtime.Serialization.ISerializable" />
+
+        
 
         
 
@@ -231,8 +249,12 @@
 
         
 
+        
+
          attribute. The <see
          cref="T:System.Web.UI.ObjectStateFormatter" />
+
+        
 
         
 
@@ -248,8 +270,12 @@
 
         
 
+        
+
          class encounters a type that is not serializable, an <see
          cref="T:System.ArgumentException" />
+
+        
 
         
 
@@ -278,6 +304,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.ObjectStateFormatter" />
+
+            
 
             
 
@@ -312,8 +340,12 @@
 
             
 
+            
+
              method can be deserialized with the <see
              cref="Overload:System.Web.UI.ObjectStateFormatter.Deserialize" />
+
+            
 
             
 
@@ -326,6 +358,8 @@
 
             
 
+            
+
              method is used to restore an object state graph stored in a <see
              cref="T:System.IO.Stream" />
 
@@ -333,8 +367,12 @@
 
             
 
+            
+
             , such as a <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -348,6 +386,8 @@
                cref="http://go.microsoft.com/fwlink/?LinkId=330378"
                 >Untrusted Data Security Risks</see
               >
+
+              
 
               
 
@@ -367,6 +407,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -381,6 +423,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Stream" />
 
@@ -388,8 +432,12 @@
 
           
 
+          
+
            that the <see
            cref="T:System.Web.UI.ObjectStateFormatter" />
+
+          
 
           
 
@@ -423,6 +471,8 @@
 
             
 
+            
+
              method can be deserialized with the <see
              cref="Overload:System.Web.UI.ObjectStateFormatter.Deserialize" />
 
@@ -430,8 +480,12 @@
 
             
 
+            
+
              method. The <see
              cref="M:System.Web.UI.ObjectStateFormatter.Deserialize(System.String)" />
+
+            
 
             
 
@@ -445,6 +499,8 @@
                cref="http://go.microsoft.com/fwlink/?LinkId=330378"
                 >Untrusted Data Security Risks</see
               >
+
+              
 
               
 
@@ -469,8 +525,12 @@
 
           
 
+          
+
           A string that the <see
            cref="T:System.Web.UI.ObjectStateFormatter" />
+
+          
 
           
 
@@ -504,6 +564,8 @@
 
             
 
+            
+
              method can be deserialized with the <see
              cref="Overload:System.Web.UI.ObjectStateFormatter.Deserialize" />
 
@@ -511,8 +573,12 @@
 
             
 
+            
+
              method. The <see
              cref="M:System.Web.UI.ObjectStateFormatter.Serialize(System.Object)" />
+
+            
 
             
 
@@ -535,11 +601,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="stateGraph">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -577,8 +647,12 @@
 
             
 
+            
+
              method can be deserialized with the <see
              cref="Overload:System.Web.UI.ObjectStateFormatter.Deserialize" />
+
+            
 
             
 
@@ -591,8 +665,12 @@
 
             
 
+            
+
              method is used to serialize an object state graph to a binary <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -611,11 +689,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="outputStream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -628,8 +710,12 @@
 
           
 
+          
+
            to which the <see
            cref="T:System.Web.UI.ObjectStateFormatter" />
+
+          
 
           
 
@@ -639,6 +725,8 @@
         >
         <param name="stateGraph">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -675,8 +763,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Runtime.Serialization.IFormatter" />
+
+            
 
             
 
@@ -690,6 +782,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Runtime.Serialization.Formatter.Binder" />
+
+            
 
             
 
@@ -724,8 +818,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Runtime.Serialization.IFormatter" />
+
+            
 
             
 
@@ -739,6 +837,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Runtime.Serialization.IFormatter.Context" />
+
+            
 
             
 
@@ -775,8 +875,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Runtime.Serialization.IFormatter" />
+
+            
 
             
 
@@ -795,6 +899,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -804,6 +910,8 @@
         </returns>
         <param name="serializationStream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -840,8 +948,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Runtime.Serialization.IFormatter" />
+
+            
 
             
 
@@ -860,6 +972,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -870,10 +984,14 @@
 
           
 
+          
+
           The stream where the formatter puts the serialized data. This stream can reference a variety of backing stores (such as files, network, memory, and so on). </param
         >
         <param name="stateGraph">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -907,8 +1025,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Runtime.Serialization.IFormatter" />
+
+            
 
             
 
@@ -922,6 +1044,8 @@
           <para
             >For a description of this member, see <see
              cref="T:System.Runtime.Serialization.SurrogateSelector" />
+
+            
 
             
 

@@ -26,8 +26,12 @@
 
         
 
+        
+
          defines a number of Unicode character categories. For example, a character might be categorized as an uppercase letter, a lowercase letter, a decimal digit number, a letter number, a paragraph separator, a math symbol, or a currency symbol. Your application can use the character category to govern string-based operations, such as parsing. The <see
          cref="T:System.Globalization.UnicodeCategory" />
+
+        
 
         
 
@@ -43,6 +47,8 @@
 
         
 
+        
+
          class to obtain the <see
          cref="T:System.Globalization.UnicodeCategory" />
 
@@ -50,8 +56,12 @@
 
         
 
+        
+
          value for a specific character. The <see
          cref="T:System.Globalization.CharUnicodeInfo" />
+
+        
 
         
 
@@ -75,6 +85,8 @@
 
             
 
+            
+
              category. </para
           >
         </item>
@@ -82,6 +94,8 @@
       <para
         >When using this class in your applications, keep in mind the following programming considerations for using the <see
          cref="T:System.Char" />
+
+        
 
         
 
@@ -99,6 +113,8 @@
 
             
 
+            
+
              object does not always correspond to a single character. Although the <see
              cref="T:System.Char" />
 
@@ -106,8 +122,12 @@
 
             
 
+            
+
              type represents a single 16-bit value, some characters (such as grapheme clusters and surrogate pairs) consist of two or more UTF-16 code units. For more information, see "Char Objects and Unicode Characters" in the <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -156,11 +176,15 @@
 
             
 
+            
+
              category that can represent one of ten digits in the decimal (base 10) numbering system, from zero through nine. It includes characters such as U+0030 (DIGIT ZERO) through U+0039 (DIGIT NINE), U+0660 (ARABIC-INDIC DIGIT ZERO) through U+0669 (ARABIC-INDIC DIGIT NINE), U+07C0 (NKO DIGIT ZERO) through U+07C9 (NKO DIGIT NINE), and U+1040 (MYANMAR DIGIT ZERO) through U+1049 (MYANMAR DIGIT NINE). </para
           >
           <para
             >For more information about Unicode characters, see the <see
              cref="http://go.microsoft.com/fwlink/?linkid=37123">Unicode Standard</see>
+
+            
 
             
 
@@ -181,6 +205,8 @@
         </returns>
         <param name="ch">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -223,11 +249,15 @@
 
             
 
+            
+
              category that can represent one of ten digits in the decimal (base 10) numbering system, from zero through nine. It includes characters such as U+0030 (DIGIT ZERO) through U+0039 (DIGIT NINE), U+0660 (ARABIC-INDIC DIGIT ZERO) through U+0669 (ARABIC-INDIC DIGIT NINE), U+07C0 (NKO DIGIT ZERO) through U+07C9 (NKO DIGIT NINE), and U+1040 (MYANMAR DIGIT ZERO) through U+1049 (MYANMAR DIGIT NINE). </para
           >
           <para
             >For more information about Unicode characters, see the <see
              cref="http://go.microsoft.com/fwlink/?linkid=37123">Unicode Standard</see>
+
+            
 
             
 
@@ -253,8 +283,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -264,6 +298,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -303,6 +339,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -318,6 +356,8 @@
         </returns>
         <param name="ch">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -361,6 +401,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -381,8 +423,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -392,6 +438,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -430,11 +478,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Globalization.CharUnicodeInfo.GetNumericValue(System.Char)" />
+
+            
 
             
 
@@ -447,8 +499,12 @@
 
             
 
+            
+
              corresponds to a single linguistic character and checks whether that character can be converted to a decimal digit. However, some numbers in the Unicode standard are represented by two <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -461,8 +517,12 @@
 
             
 
+            
+
              method to instantiate a string that represents AEGEAN NUMBER ONE. As the output from the example shows, the <see
              cref="M:System.Globalization.CharUnicodeInfo.GetNumericValue(System.Char)" />
+
+            
 
             
 
@@ -484,6 +544,8 @@
         </returns>
         <param name="ch">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -526,11 +588,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >If the <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -543,8 +609,12 @@
 
             
 
+            
+
              is the first character of a valid surrogate pair, the <see
              cref="M:System.Globalization.CharUnicodeInfo.GetNumericValue(System.String,System.Int32)" />
+
+            
 
             
 
@@ -557,8 +627,12 @@
 
             
 
+            
+
              method to instantiate a string that represents each Aegean number. As the output from the example shows, the <see
              cref="M:System.Globalization.CharUnicodeInfo.GetNumericValue(System.String,System.Int32)" />
+
+            
 
             
 
@@ -585,8 +659,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -596,6 +674,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -637,8 +717,12 @@
 
             
 
+            
+
              class returns the category of a Unicode character. For more information on Unicode characters, see the <see
              cref="http://go.microsoft.com/fwlink/?linkid=37123">Unicode Standard</see>
+
+            
 
             
 
@@ -654,8 +738,12 @@
 
             
 
+            
+
              method assumes that <paramref
              name="ch" />
+
+            
 
             
 
@@ -668,6 +756,8 @@
 
             
 
+            
+
              instead of the category to which the surrogate belongs. For example, the Ugaritic alphabet occupies code points U+10380 to U+1039F. The following example uses the <see
              cref="M:System.Char.ConvertFromUtf32(System.Int32)" />
 
@@ -675,8 +765,12 @@
 
             
 
+            
+
              method to instantiate a string that represents UGARITIC LETTER ALPA (U+10380), which is the first letter of the Ugaritic alphabet. As the output from the example shows, the <see
              cref="M:System.Char.IsNumber(System.Char)" />
+
+            
 
             
 
@@ -693,8 +787,12 @@
 
             
 
+            
+
              does not always return the same <see
              cref="T:System.Globalization.UnicodeCategory" />
+
+            
 
             
 
@@ -707,6 +805,8 @@
 
             
 
+            
+
              method when passed a particular character as a parameter. The <see
              cref="M:System.Globalization.CharUnicodeInfo.GetUnicodeCategory(System.Char)" />
 
@@ -714,8 +814,12 @@
 
             
 
+            
+
              method is designed to reflect the current version of the Unicode standard. In contrast, although the <see
              cref="M:System.Char.GetUnicodeCategory(System.Char)" />
+
+            
 
             
 
@@ -738,11 +842,15 @@
 
             
 
+            
+
              value indicating the category of the specified character.</para
           >
         </returns>
         <param name="ch">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -785,8 +893,12 @@
 
             
 
+            
+
              class returns the category of a Unicode character. For more information on Unicode characters, see the <see
              cref="http://go.microsoft.com/fwlink/?linkid=37123">Unicode Standard</see>
+
+            
 
             
 
@@ -802,8 +914,12 @@
 
             
 
+            
+
              object at position <paramref
              name="index" />
+
+            
 
             
 
@@ -816,8 +932,12 @@
 
             
 
+            
+
              method returns the Unicode category of the surrogate pair instead of returning <see
              cref="F:System.Globalization.UnicodeCategory.Surrogate" />
+
+            
 
             
 
@@ -830,8 +950,12 @@
 
             
 
+            
+
              method to instantiate a string that represents UGARITIC LETTER ALPA (U+10380), which is the first letter of the Ugaritic alphabet. As the output from the example shows, the <see
              cref="M:System.Globalization.CharUnicodeInfo.GetUnicodeCategory(System.String,System.Int32)" />
+
+            
 
             
 
@@ -844,8 +968,12 @@
 
             
 
+            
+
              if it is passed the high surrogate of this character, which indicates that it considers the surrogate pair. However, if it is passed the low surrogate, it considers only the low surrogate in isolation and returns <see
              cref="F:System.Globalization.UnicodeCategory.Surrogate" />
+
+            
 
             
 
@@ -862,8 +990,12 @@
 
             
 
+            
+
              method does not always return the same <see
              cref="T:System.Globalization.UnicodeCategory" />
+
+            
 
             
 
@@ -876,6 +1008,8 @@
 
             
 
+            
+
              method when passed a particular character as a parameter. The <see
              cref="M:System.Globalization.CharUnicodeInfo.GetUnicodeCategory(System.String,System.Int32)" />
 
@@ -883,8 +1017,12 @@
 
             
 
+            
+
              method is designed to reflect the current version of the Unicode standard. In contrast, although the <see
              cref="M:System.Char.GetUnicodeCategory(System.String,System.Int32)" />
+
+            
 
             
 
@@ -907,11 +1045,15 @@
 
             
 
+            
+
              value indicating the category of the character at the specified index of the specified string.</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -924,10 +1066,14 @@
 
           
 
+          
+
            containing the Unicode character for which to get the Unicode category. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

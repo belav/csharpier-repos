@@ -28,8 +28,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Windows.Forms.PrintPreviewDialog" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
          property. The <see
          cref="T:System.Drawing.Printing.PreviewPrintController" />
+
+        
 
         
 
@@ -56,6 +64,8 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.PrintPreviewDialog" />
 
@@ -63,8 +73,12 @@
 
         
 
+        
+
          classes, though you can use the <see
          cref="T:System.Drawing.Printing.PreviewPrintController" />
+
+        
 
         
 
@@ -79,8 +93,12 @@
 
         
 
+        
+
          creates the <see
          cref="T:System.Drawing.Graphics" />
+
+        
 
         
 
@@ -93,8 +111,12 @@
 
         
 
+        
+
          is called, the <see
          cref="M:System.Drawing.Printing.PreviewPrintController.OnStartPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+
+        
 
         
 
@@ -107,8 +129,12 @@
 
         
 
+        
+
          to a graphic of a single page. The <see
          cref="M:System.Drawing.Printing.PreviewPrintController.OnEndPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+
+        
 
         
 
@@ -121,8 +147,12 @@
 
         
 
+        
+
         , while the <see
          cref="M:System.Drawing.Printing.PreviewPrintController.OnEndPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+
+        
 
         
 
@@ -133,6 +163,8 @@
       <para
         >For more information about printing, see the <see
          cref="N:System.Drawing.Printing" />
+
+        
 
         
 
@@ -159,6 +191,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Drawing.Printing.PreviewPrintController" />
+
+            
 
             
 
@@ -194,8 +228,12 @@
 
             
 
+            
+
              image representation contained in a <see
              cref="T:System.Drawing.Printing.PreviewPageInfo" />
+
+            
 
             
 
@@ -218,8 +256,12 @@
 
             
 
+            
+
              that contains the pages of a <see
              cref="T:System.Drawing.Printing.PrintDocument" />
+
+            
 
             
 
@@ -275,8 +317,12 @@
 
             
 
+            
+
              is called immediately after the <see
              cref="T:System.Drawing.Printing.PrintDocument" />
+
+            
 
             
 
@@ -289,6 +335,8 @@
 
             
 
+            
+
              event. If an exception is thrown inside a <see
              cref="E:System.Drawing.Printing.PrintDocument.PrintPage" />
 
@@ -296,8 +344,12 @@
 
             
 
+            
+
              event of a <see
              cref="T:System.Drawing.Printing.PrintDocument" />
+
+            
 
             
 
@@ -312,8 +364,12 @@
 
             
 
+            
+
              creates the <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -326,8 +382,12 @@
 
             
 
+            
+
              is called, the <see
              cref="M:System.Drawing.Printing.PreviewPrintController.OnStartPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+
+            
 
             
 
@@ -340,8 +400,12 @@
 
             
 
+            
+
              to a graphic of a single page. The <see
              cref="M:System.Drawing.Printing.PreviewPrintController.OnEndPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+
+            
 
             
 
@@ -354,8 +418,12 @@
 
             
 
+            
+
             , while the <see
              cref="M:System.Drawing.Printing.PreviewPrintController.OnEndPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+
+            
 
             
 
@@ -375,8 +443,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Printing.PrintDocument" />
+
+          
 
           
 
@@ -391,8 +463,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Printing.PrintPageEventArgs" />
+
+          
 
           
 
@@ -430,6 +506,8 @@
 
             
 
+            
+
              raises the <see
              cref="E:System.Drawing.Printing.PrintDocument.EndPrint" />
 
@@ -437,8 +515,12 @@
 
             
 
+            
+
              event. Even if an uncaught exception was thrown during the print preview process, <see
              cref="M:System.Drawing.Printing.PreviewPrintController.OnEndPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+
+            
 
             
 
@@ -453,8 +535,12 @@
 
             
 
+            
+
              creates the <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -467,8 +553,12 @@
 
             
 
+            
+
              is called, the <see
              cref="M:System.Drawing.Printing.PreviewPrintController.OnStartPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+
+            
 
             
 
@@ -481,8 +571,12 @@
 
             
 
+            
+
              to a graphic of a single page. The <see
              cref="M:System.Drawing.Printing.PreviewPrintController.OnEndPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+
+            
 
             
 
@@ -495,8 +589,12 @@
 
             
 
+            
+
             , while the <see
              cref="M:System.Drawing.Printing.PreviewPrintController.OnEndPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+
+            
 
             
 
@@ -516,8 +614,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Printing.PrintDocument" />
+
+          
 
           
 
@@ -532,8 +634,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Printing.PrintEventArgs" />
+
+          
 
           
 
@@ -570,6 +676,8 @@
 
             
 
+            
+
              is called immediately before <see
              cref="T:System.Drawing.Printing.PrintDocument" />
 
@@ -577,8 +685,12 @@
 
             
 
+            
+
              raises the <see
              cref="E:System.Drawing.Printing.PrintDocument.PrintPage" />
+
+            
 
             
 
@@ -593,8 +705,12 @@
 
             
 
+            
+
              creates the <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -607,8 +723,12 @@
 
             
 
+            
+
              is called, the <see
              cref="M:System.Drawing.Printing.PreviewPrintController.OnStartPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+
+            
 
             
 
@@ -621,8 +741,12 @@
 
             
 
+            
+
              to a graphic of a single page. The <see
              cref="M:System.Drawing.Printing.PreviewPrintController.OnEndPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+
+            
 
             
 
@@ -635,8 +759,12 @@
 
             
 
+            
+
             , while the <see
              cref="M:System.Drawing.Printing.PreviewPrintController.OnEndPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+
+            
 
             
 
@@ -648,6 +776,8 @@
             <para
               >Anti-aliasing, also known as gray scaling, makes the print preview look better. However, the use of anti-aliasing can slow down the rendering speed. For more information about anti-aliasing, see the <see
                cref="P:System.Drawing.Printing.PreviewPrintController.UseAntiAlias" />
+
+              
 
               
 
@@ -671,8 +801,12 @@
 
             
 
+            
+
              that represents a page from a <see
              cref="T:System.Drawing.Printing.PrintDocument" />
+
+            
 
             
 
@@ -688,8 +822,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Printing.PrintDocument" />
+
+          
 
           
 
@@ -704,6 +842,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Printing.PrintPageEventArgs" />
 
@@ -711,8 +851,12 @@
 
           
 
+          
+
            that contains data about how to preview a page in the print document. Initially, the <see
            cref="P:System.Drawing.Printing.PrintPageEventArgs.Graphics" />
+
+          
 
           
 
@@ -749,6 +893,8 @@
 
             
 
+            
+
              is called immediately after <see
              cref="T:System.Drawing.Printing.PrintDocument" />
 
@@ -756,8 +902,12 @@
 
             
 
+            
+
              raises the <see
              cref="E:System.Drawing.Printing.PrintDocument.BeginPrint" />
+
+            
 
             
 
@@ -772,8 +922,12 @@
 
             
 
+            
+
              creates the <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -786,8 +940,12 @@
 
             
 
+            
+
              is called, the <see
              cref="M:System.Drawing.Printing.PreviewPrintController.OnStartPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+
+            
 
             
 
@@ -800,8 +958,12 @@
 
             
 
+            
+
              to a graphic of a single page. The <see
              cref="M:System.Drawing.Printing.PreviewPrintController.OnEndPage(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintPageEventArgs)" />
+
+            
 
             
 
@@ -814,8 +976,12 @@
 
             
 
+            
+
             , while the <see
              cref="M:System.Drawing.Printing.PreviewPrintController.OnEndPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+
+            
 
             
 
@@ -825,6 +991,8 @@
           >
           <para>
             <see cref="M:System.Drawing.Printing.PreviewPrintController.OnStartPrint(System.Drawing.Printing.PrintDocument,System.Drawing.Printing.PrintEventArgs)" />
+
+            
 
             
 
@@ -844,8 +1012,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Printing.PrintDocument" />
+
+          
 
           
 
@@ -860,8 +1032,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Printing.PrintEventArgs" />
+
+          
 
           
 

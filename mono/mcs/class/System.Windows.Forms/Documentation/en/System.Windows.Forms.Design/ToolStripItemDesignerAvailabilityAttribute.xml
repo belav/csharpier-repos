@@ -32,8 +32,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Windows.Forms.MenuStrip" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Windows.Forms.StatusStrip" />
+
+        
 
         
 
@@ -61,6 +69,8 @@
       <para
         >Specifies which types a <see
          cref="T:System.Windows.Forms.ToolStripItem" />
+
+        
 
         
 
@@ -86,6 +96,8 @@
           <para
             >Initializes a new default instance of the <see
              cref="T:System.Windows.Forms.Design.ToolStripItemDesignerAvailabilityAttribute" />
+
+            
 
             
 
@@ -124,6 +136,8 @@
 
             
 
+            
+
              class with the specified visibility. </para
           >
         </summary>
@@ -134,8 +148,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Design.ToolStripItemDesignerAvailability" />
+
+          
 
           
 
@@ -165,6 +183,8 @@
           <para
             >Specifies the default value of the <see
              cref="T:System.Windows.Forms.Design.ToolStripItemDesignerAvailabilityAttribute" />
+
+            
 
             
 
@@ -256,6 +276,8 @@
           <para
             >Gets the visibility of a <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 

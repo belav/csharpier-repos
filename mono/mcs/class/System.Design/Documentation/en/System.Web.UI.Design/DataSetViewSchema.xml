@@ -27,8 +27,12 @@
 
         
 
+        
+
          class to list the structure of data using a <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          method to get a list of information about each field as <see
          cref="T:System.Data.DataColumn" />
+
+        
 
         
 
@@ -58,11 +66,15 @@
 
         
 
+        
+
          class is used by custom control designer components to provide UI options to the user at design time that accurately reflect the structure of the data.</para
       >
       <para
         >To examine the components of data using a <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -98,6 +110,8 @@
 
         
 
+        
+
         . This class cannot be inherited.</para
       >
     </summary>
@@ -127,8 +141,12 @@
 
             
 
+            
+
              class using a specified <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -144,6 +162,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataTable" />
 
@@ -151,8 +171,12 @@
 
           
 
+          
+
            that the <see
            cref="T:System.Web.UI.Design.DataSetViewSchema" />
+
+          
 
           
 
@@ -186,8 +210,12 @@
 
             
 
+            
+
              method inherited from <see
              cref="T:System.Web.UI.Design.IDataSourceViewSchema" />
+
+            
 
             
 
@@ -230,6 +258,8 @@
 
             
 
+            
+
              method does not return information about hidden fields.</para
           >
         </remarks>
@@ -242,6 +272,8 @@
           <para
             >An array of <see
              cref="T:System.Web.UI.Design.IDataSourceFieldSchema" />
+
+            
 
             
 
@@ -269,6 +301,8 @@
           <para
             >Gets the name of the view using its <see
              cref="P:System.Data.DataTable.TableName" />
+
+            
 
             
 

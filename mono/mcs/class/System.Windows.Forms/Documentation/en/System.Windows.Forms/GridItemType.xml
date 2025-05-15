@@ -21,6 +21,8 @@
 
         
 
+        
+
         .</para
       >
     </summary>
@@ -38,6 +40,8 @@
           <para
             >The <see
              cref="T:System.Windows.Forms.GridItem" />
+
+            
 
             
 
@@ -64,6 +68,8 @@
           <para
             >A grid entry that is a category name. A category is a descriptive grouping for groups of <see
              cref="T:System.Windows.Forms.GridItem" />
+
+            
 
             
 

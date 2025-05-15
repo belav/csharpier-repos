@@ -59,6 +59,8 @@
 
             
 
+            
+
              class using the specified token and token policies.</para
           >
         </summary>
@@ -69,10 +71,14 @@
 
           
 
+          
+
           The security token.</param
         >
         <param name="tokenPolicies">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -133,6 +139,8 @@
           <para
             >An <see
              cref="T:System.IdentityModel.Policy.IAuthorizationPolicy" />
+
+            
 
             
 

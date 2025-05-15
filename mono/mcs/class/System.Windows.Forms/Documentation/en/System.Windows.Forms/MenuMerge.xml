@@ -20,8 +20,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.MenuItem" />
+
+        
 
         
 
@@ -35,6 +39,8 @@
       <para
         >Specifies the behavior of a <see
          cref="T:System.Windows.Forms.MenuItem" />
+
+        
 
         
 
@@ -62,8 +68,12 @@
 
             
 
+            
+
              is added to the collection of existing <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -95,8 +105,12 @@
 
             
 
+            
+
              are merged with those of existing <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -128,6 +142,8 @@
 
             
 
+            
+
              is not included in a merged menu.</para
           >
         </summary>
@@ -154,8 +170,12 @@
 
             
 
+            
+
              replaces an existing <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 

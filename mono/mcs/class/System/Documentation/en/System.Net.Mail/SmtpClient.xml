@@ -30,8 +30,12 @@
 
         
 
+        
+
          class is used to send e-mail to an SMTP server for delivery. The SMTP protocol is defined in RFC 2821, which is available at <see
          cref="http://www.ietf.org/">http://www.ietf.org</see>
+
+        
 
         
 
@@ -42,6 +46,8 @@
       <para
         >The classes shown in the following table are used to construct e-mail messages that can be sent using <see
          cref="T:System.Net.Mail.SmtpClient" />
+
+        
 
         
 
@@ -99,6 +105,8 @@
 
         
 
+        
+
         , you must specify the following information:</para
       >
       <list type="bullet">
@@ -111,8 +119,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.Mail.SmtpClient.Port" />
+
+            
 
             
 
@@ -130,6 +142,8 @@
 
             
 
+            
+
              property.</para
           >
         </item>
@@ -142,8 +156,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.Net.Mail.SmtpClient.SendAsync" />
+
+            
 
             
 
@@ -156,8 +174,12 @@
 
             
 
+            
+
              parameter. Also see the <see
              cref="P:System.Net.Mail.MailMessage.From" />
+
+            
 
             
 
@@ -175,8 +197,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.Net.Mail.SmtpClient.SendAsync" />
+
+            
 
             
 
@@ -189,8 +215,12 @@
 
             
 
+            
+
              parameter. Also see the <see
              cref="P:System.Net.Mail.MailMessage.To" />
+
+            
 
             
 
@@ -208,8 +238,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.Net.Mail.SmtpClient.SendAsync" />
+
+            
 
             
 
@@ -222,8 +256,12 @@
 
             
 
+            
+
              parameter. Also see the <see
              cref="P:System.Net.Mail.MailMessage.Body" />
+
+            
 
             
 
@@ -241,6 +279,8 @@
 
         
 
+        
+
          class, and then add it to the message by using the <see
          cref="P:System.Net.Mail.MailMessage.Attachments" />
 
@@ -248,8 +288,12 @@
 
         
 
+        
+
          property. Depending on the e-mail reader used by the recipients and the file type of the attachment, some recipients might not be able to read the attachment. For clients that cannot display the attachment in its original form, you can specify alternate views by using the <see
          cref="P:System.Net.Mail.MailMessage.AlternateViews" />
+
+        
 
         
 
@@ -265,10 +309,14 @@
 
         
 
+        
+
          objects. For more information, see <format
          type="text/html">
           <a href="54f0f153-17e5-4f49-afdc-deadb940c9c1">mailSettings for system.net</a>
         </format>
+
+        
 
         
 
@@ -284,8 +332,12 @@
 
         
 
+        
+
          methods. To allow your program's main thread to continue executing while the e-mail is transmitted, use one of the asynchronous <see
          cref="Overload:System.Net.Mail.SmtpClient.SendAsync" />
+
+        
 
         
 
@@ -298,8 +350,12 @@
 
         
 
+        
+
          event is raised when a <see
          cref="Overload:System.Net.Mail.SmtpClient.SendAsync" />
+
+        
 
         
 
@@ -312,8 +368,12 @@
 
         
 
+        
+
          delegate to <see
          cref="E:System.Net.Mail.SmtpClient.SendCompleted" />
+
+        
 
         
 
@@ -326,6 +386,8 @@
 
         
 
+        
+
          delegate must reference a callback method that handles notification of <see
          cref="E:System.Net.Mail.SmtpClient.SendCompleted" />
 
@@ -333,8 +395,12 @@
 
         
 
+        
+
          events. To cancel an asynchronous e-mail transmission, use the <see
          cref="M:System.Net.Mail.SmtpClient.SendAsyncCancel" />
+
+        
 
         
 
@@ -351,6 +417,8 @@
 
           
 
+          
+
            or <see
            cref="Overload:System.Net.Mail.SmtpClient.Send" />
 
@@ -358,8 +426,12 @@
 
           
 
+          
+
            again, you will receive an <see
            cref="T:System.InvalidOperationException" />
+
+          
 
           
 
@@ -376,11 +448,15 @@
 
         
 
+        
+
          class to the SMTP server may be re-used if an application wishes to send multiple messages to the same SMTP server. This is particularly useful when authentication or encryption are used establish a connection to the SMTP server. The process of authenticating and establishing a TLS session can be expensive operations. A requirement to re-establish a connection for each message when sending a large quantity of email to the same SMTP server could have a significant impact on performance. There are a number of high-volume email applications that send email status updates, newsletter distributions, or email alerts. Also many email client applications support an off-line mode where users can compose many email messages that are sent later when a connection to the SMTP server is established. It is typical for an email client to send all SMTP messages to a specific SMTP server (provided by the Internet service provider) that then forwards this email to other SMTP servers. </para
       >
       <para
         >The <see
          cref="T:System.Net.Mail.SmtpClient" />
+
+        
 
         
 
@@ -393,8 +469,12 @@
 
         
 
+        
+
          object to send many different emails to the same SMTP server and to many different SMTP servers. As a result, there is no way to determine when an application is finished using the <see
          cref="T:System.Net.Mail.SmtpClient" />
+
+        
 
         
 
@@ -411,8 +491,12 @@
 
         
 
+        
+
          class has no Finalize method, so an application must call <see
          cref="Overload:System.Net.Mail.SmtpClient.Dispose" />
+
+        
 
         
 
@@ -425,8 +509,12 @@
 
         
 
+        
+
          method iterates through all established connections to the SMTP server specified in the <see
          cref="P:System.Net.Mail.SmtpClient.Host" />
+
+        
 
         
 
@@ -439,8 +527,12 @@
 
         
 
+        
+
          method also releases the unmanaged resources used by the <see
          cref="T:System.Net.Sockets.Socket" />
+
+        
 
         
 
@@ -456,8 +548,12 @@
 
         
 
+        
+
          when you are finished using the <see
          cref="T:System.Net.Mail.SmtpClient" />
+
+        
 
         
 
@@ -470,8 +566,12 @@
 
         
 
+        
+
          method leaves the <see
          cref="T:System.Net.Mail.SmtpClient" />
+
+        
 
         
 
@@ -484,6 +584,8 @@
 
         
 
+        
+
         , you must release all references to the <see
          cref="T:System.Net.Mail.SmtpClient" />
 
@@ -491,8 +593,12 @@
 
         
 
+        
+
          so the garbage collector can reclaim the memory that the <see
          cref="T:System.Net.Mail.SmtpClient" />
+
+        
 
         
 
@@ -531,8 +637,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Net.Mail.SmtpClient.Credentials" />
+
+            
 
             
 
@@ -545,8 +655,12 @@
 
             
 
+            
+
              properties for the new <see
              cref="T:System.Net.Mail.SmtpClient" />
+
+            
 
             
 
@@ -561,6 +675,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -569,6 +685,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.Mail.SmtpClient" />
+
+            
 
             
 
@@ -605,8 +723,12 @@
 
             
 
+            
+
              parameter is used to initialize the value of the <see
              cref="P:System.Net.Mail.SmtpClient.Host" />
+
+            
 
             
 
@@ -619,8 +741,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.Mail.SmtpClient.Port" />
+
+            
 
             
 
@@ -633,6 +759,8 @@
 
             
 
+            
+
              is null or equal to <see
              cref="F:System.String.Empty" />
 
@@ -640,8 +768,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Net.Mail.SmtpClient.Host" />
+
+            
 
             
 
@@ -659,8 +791,12 @@
 
             
 
+            
+
             . If information is specified using <see
              cref="T:System.Net.Mail.SmtpClient" />
+
+            
 
             
 
@@ -679,6 +815,8 @@
 
             
 
+            
+
              class that sends e-mail by using the specified SMTP server. </para
           >
         </summary>
@@ -689,8 +827,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -727,8 +869,12 @@
 
             
 
+            
+
              and <paramref
              name="port" />
+
+            
 
             
 
@@ -741,8 +887,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.Mail.SmtpClient.Port" />
+
+            
 
             
 
@@ -755,8 +905,12 @@
 
             
 
+            
+
              is null or equal to <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -769,8 +923,12 @@
 
             
 
+            
+
              is initialized using the settings in the application or machine configuration files. If <paramref
              name="port" />
+
+            
 
             
 
@@ -783,8 +941,12 @@
 
             
 
+            
+
              is initialized using the settings in the application or machine configuration files. The <see
              cref="P:System.Net.Mail.SmtpClient.Credentials" />
+
+            
 
             
 
@@ -802,8 +964,12 @@
 
             
 
+            
+
             . If information is specified using <see
              cref="T:System.Net.Mail.SmtpClient" />
+
+            
 
             
 
@@ -822,6 +988,8 @@
 
             
 
+            
+
              class that sends e-mail by using the specified SMTP server and port.</para
           >
         </summary>
@@ -832,8 +1000,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -848,6 +1020,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
 
@@ -855,8 +1029,12 @@
 
           
 
+          
+
            greater than zero that contains the port to be used on <paramref
            name="host" />
+
+          
 
           
 
@@ -903,8 +1081,12 @@
 
               
 
+              
+
                (if there is one), or tries to reuse an anonymous sessions if <see
                cref="P:System.Net.Mail.SmtpClient.ClientCertificates" />
+
+              
 
               
 
@@ -950,8 +1132,12 @@
 
             
 
+            
+
              to true instead of setting this property. If the <see
              cref="P:System.Net.Mail.SmtpClient.UseDefaultCredentials" />
+
+            
 
             
 
@@ -964,6 +1150,8 @@
 
             
 
+            
+
              property will be used for the credentials when connecting to the server. If the <see
              cref="P:System.Net.Mail.SmtpClient.UseDefaultCredentials" />
 
@@ -971,8 +1159,12 @@
 
             
 
+            
+
              property is set to false and the <see
              cref="P:System.Net.Mail.SmtpClient.Credentials" />
+
+            
 
             
 
@@ -990,8 +1182,12 @@
 
             
 
+            
+
             . If information is specified using the <see
              cref="P:System.Net.Mail.SmtpClient.Credentials" />
+
+            
 
             
 
@@ -1048,6 +1244,8 @@
 
                 
 
+                
+
                  for later delivery by another application.</para
               >
             </item>
@@ -1055,6 +1253,8 @@
           <para
             >The default value for this property can also be set in a machine or application configuration file. Any changes made to the <see
              cref="P:System.Net.Mail.SmtpClient.PickupDirectoryLocation" />
+
+            
 
             
 
@@ -1094,11 +1294,15 @@
 
             
 
+            
+
              class to the SMTP server may be re-used if an application wishes to send multiple messages to the same SMTP server. This is particularly useful when authentication or encryption are used establish a connection to the SMTP server. The process of authenticating and establishing a TLS session can be expensive operations. A requirement to re-establish a connection for each message when sending a large quantity of email to the same SMTP server could have a significant impact on performance. There are a number of high-volume email applications that send email status updates, newsletter distributions, or email alerts. Also many email client applications support an off-line mode where users can compose many email messages that are sent later when a connection to the SMTP server is established. It is typical for an email client to send all SMTP messages to a specific SMTP server (provided by the Internet service provider) that then forwards this email to other SMTP servers. </para
           >
           <para
             >The <see
              cref="T:System.Net.Mail.SmtpClient" />
+
+            
 
             
 
@@ -1111,8 +1315,12 @@
 
             
 
+            
+
              object to send many different emails to the same SMTP server and to many different SMTP servers. As a result, there is no way to determine when an application is finished using the <see
              cref="T:System.Net.Mail.SmtpClient" />
+
+            
 
             
 
@@ -1129,8 +1337,12 @@
 
             
 
+            
+
              method on a <see
              cref="T:System.Net.Mail.SmtpClient" />
+
+            
 
             
 
@@ -1143,8 +1355,12 @@
 
             
 
+            
+
              operation will cancel the send operation as though the <see
              cref="M:System.Net.Mail.SmtpClient.SendAsyncCancel" />
+
+            
 
             
 
@@ -1160,8 +1376,12 @@
 
             
 
+            
+
              class has no Finalize method. So an application must call <see
              cref="Overload:System.Net.Mail.SmtpClient.Dispose" />
+
+            
 
             
 
@@ -1177,8 +1397,12 @@
 
             
 
+            
+
              method iterates through all established connections to the SMTP server specified in the <see
              cref="P:System.Net.Mail.SmtpClient.Host" />
+
+            
 
             
 
@@ -1191,8 +1415,12 @@
 
             
 
+            
+
              method also releases the unmanaged resources used by the underlying <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -1208,8 +1436,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Net.Mail.SmtpClient" />
+
+            
 
             
 
@@ -1222,8 +1454,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Net.Mail.SmtpClient" />
+
+            
 
             
 
@@ -1236,6 +1472,8 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Net.Mail.SmtpClient" />
 
@@ -1243,8 +1481,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Net.Mail.SmtpClient" />
+
+            
 
             
 
@@ -1262,10 +1504,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -1282,8 +1528,12 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.Net.Mail.SmtpClient" />
+
+              
 
               
 
@@ -1298,6 +1548,8 @@
           <para
             >Sends a QUIT message to the SMTP server, gracefully ends the TCP connection, and releases all resources used by the current instance of the <see
              cref="T:System.Net.Mail.SmtpClient" />
+
+            
 
             
 
@@ -1340,11 +1592,15 @@
 
             
 
+            
+
              class to the SMTP server may be re-used if an application wishes to send multiple messages to the same SMTP server. This is particularly useful when authentication or encryption are used establish a connection to the SMTP server. The process of authenticating and establishing a TLS session can be expensive operations. A requirement to re-establish a connection for each message when sending a large quantity of email to the same SMTP server could have a significant impact on performance. There are a number of high-volume email applications that send email status updates, newsletter distributions, or email alerts. Also many email client applications support an off-line mode where users can compose many email messages that are sent later when a connection to the SMTP server is established. It is typical for an email client to send all SMTP messages to a specific SMTP server (provided by the Internet service provider) that then forwards this email to other SMTP servers. </para
           >
           <para
             >The <see
              cref="T:System.Net.Mail.SmtpClient" />
+
+            
 
             
 
@@ -1357,8 +1613,12 @@
 
             
 
+            
+
              object to send many different emails to the same SMTP server and to many different SMTP servers. As a result, there is no way to determine when an application is finished using the <see
              cref="T:System.Net.Mail.SmtpClient" />
+
+            
 
             
 
@@ -1375,8 +1635,12 @@
 
             
 
+            
+
              method on a <see
              cref="T:System.Net.Mail.SmtpClient" />
+
+            
 
             
 
@@ -1389,8 +1653,12 @@
 
             
 
+            
+
              operation will cancel the send operation as though the <see
              cref="M:System.Net.Mail.SmtpClient.SendAsyncCancel" />
+
+            
 
             
 
@@ -1406,8 +1674,12 @@
 
             
 
+            
+
              class has no Finalize method. So an application must call <see
              cref="Overload:System.Net.Mail.SmtpClient.Dispose" />
+
+            
 
             
 
@@ -1423,8 +1695,12 @@
 
             
 
+            
+
              method iterates through all established connections to the SMTP server specified in the <see
              cref="P:System.Net.Mail.SmtpClient.Host" />
+
+            
 
             
 
@@ -1437,8 +1713,12 @@
 
             
 
+            
+
              method also releases the unmanaged resources used by the <see
              cref="T:System.Net.Sockets.Socket" />
+
+            
 
             
 
@@ -1454,8 +1734,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Net.Mail.SmtpClient" />
+
+            
 
             
 
@@ -1468,8 +1752,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Net.Mail.SmtpClient" />
+
+            
 
             
 
@@ -1482,6 +1770,8 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Net.Mail.SmtpClient" />
 
@@ -1489,8 +1779,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Net.Mail.SmtpClient" />
+
+            
 
             
 
@@ -1508,10 +1802,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -1528,8 +1826,12 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.Net.Mail.SmtpClient" />
+
+              
 
               
 
@@ -1549,11 +1851,15 @@
 
             
 
+            
+
              class, and optionally disposes of the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1587,6 +1893,8 @@
 
             
 
+            
+
              property specifies whether SSL is used to access the specified SMTP mail server. </para
           >
           <para
@@ -1597,11 +1905,15 @@
 
             
 
+            
+
              property override the configuration file settings.</para
           >
           <para
             >The <see
              cref="T:System.Net.Mail.SmtpClient" />
+
+            
 
             
 
@@ -1618,6 +1930,8 @@
 
             
 
+            
+
              to specify which client certificates should be used to establish the SSL connection. The <see
              cref="P:System.Net.ServicePointManager.ServerCertificateValidationCallback" />
 
@@ -1625,8 +1939,12 @@
 
             
 
+            
+
              allows you to reject the certificate provided by the SMTP server. The <see
              cref="P:System.Net.ServicePointManager.SecurityProtocol" />
+
+            
 
             
 
@@ -1643,8 +1961,12 @@
 
               
 
+              
+
                property is set to true, and the SMTP mail server does not advertise STARTTLS in the response to the EHLO command, then a call to the <see
                cref="Overload:System.Net.Mail.SmtpClient.Send" />
+
+              
 
               
 
@@ -1657,8 +1979,12 @@
 
               
 
+              
+
                methods will throw an <see
                cref="T:System.Net.Mail.SmtpException" />
+
+              
 
               
 
@@ -1673,6 +1999,8 @@
           <para
             >Specify whether the <see
              cref="T:System.Net.Mail.SmtpClient" />
+
+            
 
             
 
@@ -1707,10 +2035,14 @@
 
             
 
+            
+
              property can also be set using constructors or the application or machine configuration file. For more information, see <format
              type="text/html">
               <a href="54f0f153-17e5-4f49-afdc-deadb940c9c1">mailSettings for system.net</a>
             </format>
+
+            
 
             
 
@@ -1758,6 +2090,8 @@
 
             
 
+            
+
              class can override the <see
              cref="M:System.Net.Mail.SmtpClient.OnSendCompleted(System.ComponentModel.AsyncCompletedEventArgs)" />
 
@@ -1765,8 +2099,12 @@
 
             
 
+            
+
              method to perform additional tasks when the <see
              cref="E:System.Net.Mail.SmtpClient.SendCompleted" />
+
+            
 
             
 
@@ -1781,6 +2119,8 @@
 
             
 
+            
+
              also allows derived classes to handle <see
              cref="E:System.Net.Mail.SmtpClient.SendCompleted" />
 
@@ -1788,8 +2128,12 @@
 
             
 
+            
+
              without attaching a delegate. This is the preferred technique for handling <see
              cref="E:System.Net.Mail.SmtpClient.SendCompleted" />
+
+            
 
             
 
@@ -1808,6 +2152,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1818,8 +2164,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.AsyncCompletedEventArgs" />
+
+          
 
           
 
@@ -1849,6 +2199,8 @@
           <para
             >The default value for this property can also be set in a machine or application configuration file. Any changes made to the <see
              cref="P:System.Net.Mail.SmtpClient.PickupDirectoryLocation" />
+
+            
 
             
 
@@ -1887,10 +2239,14 @@
 
             
 
+            
+
              property can also be set using constructors or the application or machine configuration file. For more information about using configuration files, see <format
              type="text/html">
               <a href="54f0f153-17e5-4f49-afdc-deadb940c9c1">mailSettings for system.net</a>
             </format>
+
+            
 
             
 
@@ -1937,11 +2293,15 @@
 
             
 
+            
+
              property to ensure that the method returns after a specified amount of time elapses.</para
           >
           <para
             >Before calling this method, the <see
              cref="P:System.Net.Mail.SmtpClient.Host" />
+
+            
 
             
 
@@ -1954,8 +2314,12 @@
 
             
 
+            
+
              properties must be set either through the configuration files by setting the relevant properties, or by passing this information into the <see
              cref="M:System.Net.Mail.SmtpClient.#ctor(System.String,System.Int32)" />
+
+            
 
             
 
@@ -1972,8 +2336,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Net.Mail.SmtpClient.Credentials" />
+
+            
 
             
 
@@ -1989,6 +2357,8 @@
 
             
 
+            
+
              exception, check the <see
              cref="P:System.Net.Mail.SmtpException.StatusCode" />
 
@@ -1996,8 +2366,12 @@
 
             
 
+            
+
              property to find the reason the operation failed. The <see
              cref="T:System.Net.Mail.SmtpException" />
+
+            
 
             
 
@@ -2013,6 +2387,8 @@
 
             
 
+            
+
              to multiple recipients and the SMTP server accepts some recipients as valid and rejects others, <see
              cref="Overload:System.Net.Mail.SmtpClient.Send" />
 
@@ -2020,8 +2396,12 @@
 
             
 
+            
+
              sends e-mail to the accepted recipients and then a <see
              cref="T:System.Net.Mail.SmtpFailedRecipientsException" />
+
+            
 
             
 
@@ -2038,8 +2418,12 @@
 
               
 
+              
+
                property is set to true, and the SMTP mail server does not advertise STARTTLS in the response to the EHLO command, then a call to the <see
                cref="Overload:System.Net.Mail.SmtpClient.Send" />
+
+              
 
               
 
@@ -2052,8 +2436,12 @@
 
               
 
+              
+
                methods will throw an <see
                cref="T:System.Net.Mail.SmtpException" />
+
+              
 
               
 
@@ -2074,8 +2462,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.Mail.MailMessage" />
+
+          
 
           
 
@@ -2121,11 +2513,15 @@
 
             
 
+            
+
              property to ensure that the method returns after a specified amount of time elapses.</para
           >
           <para
             >Before calling this method, the <see
              cref="P:System.Net.Mail.SmtpClient.Host" />
+
+            
 
             
 
@@ -2138,8 +2534,12 @@
 
             
 
+            
+
              properties must be set either through the configuration files by setting the relevant properties, or by passing this information into the <see
              cref="M:System.Net.Mail.SmtpClient.#ctor(System.String,System.Int32)" />
+
+            
 
             
 
@@ -2156,8 +2556,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Net.Mail.SmtpClient.Credentials" />
+
+            
 
             
 
@@ -2173,6 +2577,8 @@
 
             
 
+            
+
              exception, check the <see
              cref="P:System.Net.Mail.SmtpException.StatusCode" />
 
@@ -2180,8 +2586,12 @@
 
             
 
+            
+
              property to find the reason the operation failed. The <see
              cref="T:System.Net.Mail.SmtpException" />
+
+            
 
             
 
@@ -2197,6 +2607,8 @@
 
             
 
+            
+
              to multiple recipients and the SMTP server accepts some recipients as valid and rejects others, <see
              cref="Overload:System.Net.Mail.SmtpClient.Send" />
 
@@ -2204,8 +2616,12 @@
 
             
 
+            
+
              sends e-mail to the accepted recipients and then a <see
              cref="T:System.Net.Mail.SmtpFailedRecipientsException" />
+
+            
 
             
 
@@ -2222,8 +2638,12 @@
 
               
 
+              
+
                property is set to true, and the SMTP mail server does not advertise STARTTLS in the response to the EHLO command, then a call to the <see
                cref="Overload:System.Net.Mail.SmtpClient.Send" />
+
+              
 
               
 
@@ -2236,8 +2656,12 @@
 
               
 
+              
+
                methods will throw an <see
                cref="T:System.Net.Mail.SmtpException" />
+
+              
 
               
 
@@ -2257,6 +2681,8 @@
 
             
 
+            
+
              objects.</para
           >
         </summary>
@@ -2267,8 +2693,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -2283,8 +2713,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -2299,8 +2733,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -2343,6 +2781,8 @@
 
             
 
+            
+
              event. You can cancel a <see
              cref="Overload:System.Net.Mail.SmtpClient.SendAsync" />
 
@@ -2350,8 +2790,12 @@
 
             
 
+            
+
              operation by calling the <see
              cref="M:System.Net.Mail.SmtpClient.SendAsyncCancel" />
+
+            
 
             
 
@@ -2367,6 +2811,8 @@
 
             
 
+            
+
             , you must wait for the e-mail transmission to complete before attempting to send another e-mail message using <see
              cref="Overload:System.Net.Mail.SmtpClient.Send" />
 
@@ -2374,8 +2820,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.Net.Mail.SmtpClient.SendAsync" />
+
+            
 
             
 
@@ -2391,6 +2841,8 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.Mail.SmtpClient.Port" />
 
@@ -2398,8 +2850,12 @@
 
             
 
+            
+
              must be set through the configuration files by setting the relevant properties, or by passing this information into the <see
              cref="M:System.Net.Mail.SmtpClient.#ctor(System.String,System.Int32)" />
+
+            
 
             
 
@@ -2415,8 +2871,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Net.Mail.SmtpClient.Credentials" />
+
+            
 
             
 
@@ -2432,6 +2892,8 @@
 
             
 
+            
+
              exception, check the <see
              cref="P:System.Net.Mail.SmtpException.StatusCode" />
 
@@ -2439,8 +2901,12 @@
 
             
 
+            
+
              property to find the reason the operation failed. The <see
              cref="T:System.Net.Mail.SmtpException" />
+
+            
 
             
 
@@ -2456,8 +2922,12 @@
 
             
 
+            
+
              to multiple recipients, if the SMTP server accepts some recipients as valid and rejects others, a <see
              cref="T:System.Net.Mail.SmtpException" />
+
+            
 
             
 
@@ -2470,8 +2940,12 @@
 
             
 
+            
+
              for the inner exception. If this occurs, <see
              cref="Overload:System.Net.Mail.SmtpClient.SendAsync" />
+
+            
 
             
 
@@ -2487,8 +2961,12 @@
 
             
 
+            
+
              property passed into the <see
              cref="T:System.Net.Mail.SendCompletedEventHandler" />
+
+            
 
             
 
@@ -2504,8 +2982,12 @@
 
             
 
+            
+
              property does not have any effect on a <see
              cref="Overload:System.Net.Mail.SmtpClient.SendAsync" />
+
+            
 
             
 
@@ -2516,6 +2998,8 @@
           <para
             >To send mail and block while it is transmitted to the SMTP server, use one of the <see
              cref="Overload:System.Net.Mail.SmtpClient.Send" />
+
+            
 
             
 
@@ -2532,8 +3016,12 @@
 
               
 
+              
+
                property is set to true, and the SMTP mail server does not advertise STARTTLS in the response to the EHLO command, then a call to the <see
                cref="Overload:System.Net.Mail.SmtpClient.Send" />
+
+              
 
               
 
@@ -2546,8 +3034,12 @@
 
               
 
+              
+
                methods will throw an <see
                cref="T:System.Net.Mail.SmtpException" />
+
+              
 
               
 
@@ -2568,8 +3060,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.Mail.MailMessage" />
+
+          
 
           
 
@@ -2579,6 +3075,8 @@
         >
         <param name="userToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2625,6 +3123,8 @@
 
             
 
+            
+
              event. You can cancel a <see
              cref="Overload:System.Net.Mail.SmtpClient.SendAsync" />
 
@@ -2632,8 +3132,12 @@
 
             
 
+            
+
              operation by calling the <see
              cref="M:System.Net.Mail.SmtpClient.SendAsyncCancel" />
+
+            
 
             
 
@@ -2649,6 +3153,8 @@
 
             
 
+            
+
             , you must wait for the e-mail transmission to complete before attempting to send another e-mail message using <see
              cref="Overload:System.Net.Mail.SmtpClient.Send" />
 
@@ -2656,8 +3162,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.Net.Mail.SmtpClient.SendAsync" />
+
+            
 
             
 
@@ -2673,6 +3183,8 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.Mail.SmtpClient.Port" />
 
@@ -2680,8 +3192,12 @@
 
             
 
+            
+
              properties must be set either through the configuration files or by setting the properties or passing this information into the <see
              cref="M:System.Net.Mail.SmtpClient.#ctor(System.String,System.Int32)" />
+
+            
 
             
 
@@ -2697,8 +3213,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Net.Mail.SmtpClient.Credentials" />
+
+            
 
             
 
@@ -2714,6 +3234,8 @@
 
             
 
+            
+
              exception, check the <see
              cref="P:System.Net.Mail.SmtpException.StatusCode" />
 
@@ -2721,8 +3243,12 @@
 
             
 
+            
+
              property to find the reason the operation failed. The <see
              cref="T:System.Net.Mail.SmtpException" />
+
+            
 
             
 
@@ -2738,8 +3264,12 @@
 
             
 
+            
+
              to multiple recipients, if the SMTP server accepts some recipients as valid and rejects others, a <see
              cref="T:System.Net.Mail.SmtpException" />
+
+            
 
             
 
@@ -2752,8 +3282,12 @@
 
             
 
+            
+
              for the inner exception. If this occurs, <see
              cref="Overload:System.Net.Mail.SmtpClient.SendAsync" />
+
+            
 
             
 
@@ -2769,8 +3303,12 @@
 
             
 
+            
+
              property passed into the <see
              cref="T:System.Net.Mail.SendCompletedEventHandler" />
+
+            
 
             
 
@@ -2786,8 +3324,12 @@
 
             
 
+            
+
              property does not have any effect on a <see
              cref="Overload:System.Net.Mail.SmtpClient.SendAsync" />
+
+            
 
             
 
@@ -2798,6 +3340,8 @@
           <para
             >To send mail and block while it is transmitted to the SMTP server, use one of the <see
              cref="Overload:System.Net.Mail.SmtpClient.Send" />
+
+            
 
             
 
@@ -2814,8 +3358,12 @@
 
               
 
+              
+
                property is set to true, and the SMTP mail server does not advertise STARTTLS in the response to the EHLO command, then a call to the <see
                cref="Overload:System.Net.Mail.SmtpClient.Send" />
+
+              
 
               
 
@@ -2828,8 +3376,12 @@
 
               
 
+              
+
                methods will throw an <see
                cref="T:System.Net.Mail.SmtpException" />
+
+              
 
               
 
@@ -2849,6 +3401,8 @@
 
             
 
+            
+
              objects. This method does not block the calling thread and allows the caller to pass an object to the method that is invoked when the operation completes.</para
           >
         </summary>
@@ -2859,8 +3413,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -2875,8 +3433,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -2891,8 +3453,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -2902,6 +3468,8 @@
         >
         <param name="userToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2938,8 +3506,12 @@
 
             
 
+            
+
              method to cancel a pending <see
              cref="Overload:System.Net.Mail.SmtpClient.SendAsync" />
+
+            
 
             
 
@@ -2983,8 +3555,12 @@
 
             
 
+            
+
              event is raised each time an e-mail message is sent asynchronously when the send operation completes. To send an e-mail message asynchronously, use the <see
              cref="Overload:System.Net.Mail.SmtpClient.SendAsync" />
+
+            
 
             
 
@@ -2999,6 +3575,8 @@
 
             
 
+            
+
              is the delegate for <see
              cref="E:System.Net.Mail.SmtpClient.SendCompleted" />
 
@@ -3006,8 +3584,12 @@
 
             
 
+            
+
             . The <see
              cref="T:System.ComponentModel.AsyncCompletedEventArgs" />
+
+            
 
             
 
@@ -3054,8 +3636,12 @@
 
             
 
+            
+
              property are created using defaults specified in the application or machine configuration files and the <see
              cref="T:System.Net.ServicePointManager" />
+
+            
 
             
 
@@ -3092,8 +3678,12 @@
 
             
 
+            
+
              property is used with integrated Windows authentication when an application is using extended protection. The <see
              cref="T:System.Net.Mail.SmtpClient" />
+
+            
 
             
 
@@ -3104,6 +3694,8 @@
           <para
             >The default value for this property can also be set in a machine or application configuration file. Any changes made to the <see
              cref="P:System.Net.Mail.SmtpClient.TargetName" />
+
+            
 
             
 
@@ -3142,8 +3734,12 @@
 
             
 
+            
+
              method block until the operation completes. If you set the <see
              cref="P:System.Net.Mail.SmtpClient.Timeout" />
+
+            
 
             
 
@@ -3156,6 +3752,8 @@
 
             
 
+            
+
              operation cannot complete in the allotted time, the <see
              cref="T:System.Net.Mail.SmtpClient" />
 
@@ -3163,8 +3761,12 @@
 
             
 
+            
+
              class throws an <see
              cref="T:System.Net.Mail.SmtpException" />
+
+            
 
             
 
@@ -3180,6 +3782,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -3188,6 +3792,8 @@
           <para
             >Gets or sets a value that specifies the amount of time after which a synchronous <see
              cref="Overload:System.Net.Mail.SmtpClient.Send" />
+
+            
 
             
 
@@ -3227,6 +3833,8 @@
 
             
 
+            
+
              object should, if requested by the server, authenticate using the default credentials of the currently logged on user. For client applications, this is the desired behavior in most scenarios. </para
           >
           <para
@@ -3234,6 +3842,8 @@
              type="text/html">
               <a href="54f0f153-17e5-4f49-afdc-deadb940c9c1">mailSettings for system.net</a>
             </format>
+
+            
 
             
 
@@ -3249,8 +3859,12 @@
 
             
 
+            
+
              property is set to false, then the value set in the <see
              cref="P:System.Net.Mail.SmtpClient.Credentials" />
+
+            
 
             
 
@@ -3263,8 +3877,12 @@
 
             
 
+            
+
              property is set to false and the <see
              cref="P:System.Net.Mail.SmtpClient.Credentials" />
+
+            
 
             
 
@@ -3286,8 +3904,12 @@
 
             
 
+            
+
              value that controls whether the <see
              cref="P:System.Net.CredentialCache.DefaultCredentials" />
+
+            
 
             
 

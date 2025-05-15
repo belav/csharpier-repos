@@ -45,11 +45,15 @@
 
         
 
+        
+
          type is designed to be an integer whose size is platform-specific. That is, an instance of this type is expected to be 32-bits on 32-bit hardware and operating systems, and 64-bits on 64-bit hardware and operating systems.</para
       >
       <para
         >The <see
          cref="T:System.IntPtr" />
+
+        
 
         
 
@@ -64,6 +68,8 @@
 
         
 
+        
+
          objects can also be used to hold handles. For example, instances of <see
          cref="T:System.IntPtr" />
 
@@ -71,8 +77,12 @@
 
         
 
+        
+
          are used extensively in the <see
          cref="T:System.IO.FileStream" />
+
+        
 
         
 
@@ -88,8 +98,12 @@
 
         
 
+        
+
          type is CLS-compliant, while the <see
          cref="T:System.UIntPtr" />
+
+        
 
         
 
@@ -102,8 +116,12 @@
 
         
 
+        
+
          type is used in the common language runtime. The <see
          cref="T:System.UIntPtr" />
+
+        
 
         
 
@@ -116,11 +134,15 @@
 
         
 
+        
+
          type.</para
       >
       <para
         >This type implements the <see
          cref="T:System.Runtime.Serialization.ISerializable" />
+
+        
 
         
 
@@ -172,11 +194,15 @@
 
             
 
+            
+
              using the specified 32-bit pointer or handle.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -221,8 +247,12 @@
 
           
 
+          
+
            or less than <see
            cref="F:System.Int32.MinValue" />
+
+          
 
           
 
@@ -235,6 +265,8 @@
           <para
             >An exception is only thrown if the value of <paramref
              name="value" />
+
+            
 
             
 
@@ -253,11 +285,15 @@
 
             
 
+            
+
              using the specified 64-bit pointer.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -303,11 +339,15 @@
 
             
 
+            
+
              using the specified pointer to an unspecified type.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -353,6 +393,8 @@
 
             
 
+            
+
              method does not throw an exception if the result is too large to represent as a pointer on the specified platform. Instead, the addition operation is performed in an unchecked context.</para
           >
           <para>Languages that do not support operator overloading or custom operators can use this method to add an offset to the value of a pointer.</para>
@@ -371,8 +413,12 @@
 
             
 
+            
+
              to <paramref
              name="pointer" />
+
+            
 
             
 
@@ -388,10 +434,14 @@
 
           
 
+          
+
           The pointer to add the offset to.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -435,6 +485,8 @@
 
               
 
+              
+
               .</block
             >
           </para>
@@ -453,8 +505,12 @@
 
             
 
+            
+
              is an instance of <see
              cref="T:System.IntPtr" />
+
+            
 
             
 
@@ -465,6 +521,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -508,6 +566,8 @@
               >This method
  overrides <see
                cref="M:System.Object.GetHashCode" qualify="true" />
+
+              
 
               
 
@@ -564,8 +624,12 @@
 
             
 
+            
+
              method defines the addition operation for <see
              cref="T:System.IntPtr" />
+
+            
 
             
 
@@ -577,6 +641,8 @@
           <para
             >Languages that do not support custom operators can call the <see
              cref="M:System.IntPtr.Add(System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -600,8 +666,12 @@
 
             
 
+            
+
              to <paramref
              name="pointer" />
+
+            
 
             
 
@@ -617,10 +687,14 @@
 
           
 
+          
+
           The pointer to add the offset to.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -674,6 +748,8 @@
 
             
 
+            
+
              are equal.</para
           >
         </summary>
@@ -687,8 +763,12 @@
 
             
 
+            
+
              equals <paramref
              name="value2" />
+
+            
 
             
 
@@ -704,10 +784,14 @@
 
           
 
+          
+
           The first pointer or handle to compare.</param
         >
         <param name="value2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -935,6 +1019,8 @@
 
             
 
+            
+
              are not equal.</para
           >
         </summary>
@@ -948,8 +1034,12 @@
 
             
 
+            
+
              does not equal <paramref
              name="value2" />
+
+            
 
             
 
@@ -965,10 +1055,14 @@
 
           
 
+          
+
           The first pointer or handle to compare. </param
         >
         <param name="value2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1015,8 +1109,12 @@
 
             
 
+            
+
              method defines the subtraction operation for <see
              cref="T:System.IntPtr" />
+
+            
 
             
 
@@ -1028,6 +1126,8 @@
           <para
             >Languages that do not support custom operators can call the <see
              cref="M:System.IntPtr.Subtract(System.IntPtr,System.Int32)" />
+
+            
 
             
 
@@ -1051,8 +1151,12 @@
 
             
 
+            
+
              from <paramref
              name="pointer" />
+
+            
 
             
 
@@ -1068,10 +1172,14 @@
 
           
 
+          
+
           The pointer to subtract the offset from.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1114,10 +1222,14 @@
 
             
 
+            
+
              containing the 
    number of bytes of a pointer or handle for the current implementation. The value
    of this property is equal to the number of bytes contained by the <see
              langword="native int" />
+
+            
 
             
 
@@ -1134,6 +1246,8 @@
             >For more information on the 
    <see
              langword="native int" />
+
+            
 
             
 
@@ -1186,6 +1300,8 @@
 
             
 
+            
+
              method does not throw an exception if the result is too small to represent as a pointer on the specified platform. Instead, the subtraction operation is performed in an unchecked context.</para
           >
           <para>Languages that do not support operator overloading or custom operators can use this method to subtract an offset from the value of a pointer.</para>
@@ -1204,8 +1320,12 @@
 
             
 
+            
+
              from <paramref
              name="pointer" />
+
+            
 
             
 
@@ -1221,10 +1341,14 @@
 
           
 
+          
+
           The pointer to subtract the offset from.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1267,8 +1391,12 @@
 
             
 
+            
+
              parameter with the value of the current <see
              cref="T:System.IntPtr" />
+
+            
 
             
 
@@ -1287,8 +1415,12 @@
 
             
 
+            
+
              object with the data needed to serialize the current <see
              cref="T:System.IntPtr" />
+
+            
 
             
 
@@ -1304,8 +1436,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -1315,6 +1451,8 @@
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1356,8 +1494,12 @@
 
           
 
+          
+
            or less than <see
            cref="F:System.Int32.MinValue" />
+
+          
 
           
 
@@ -1450,12 +1592,16 @@
 
             
 
+            
+
             .</para
           >
           <para>
             <block subset="none" type="note"
               >A pointer to <see
                langword="void" />
+
+              
 
               
 
@@ -1475,6 +1621,8 @@
           <para
             >A pointer to <see
              cref="T:System.Void" />
+
+            
 
             
 
@@ -1517,6 +1665,8 @@
 
             
 
+            
+
              property for this instance is 4, then this method is equivalent to <see
              cref="M:System.Int32.ToString" />
 
@@ -1524,8 +1674,12 @@
 
             
 
+            
+
             ; otherwise, this method is equivalent to <see
              cref="M:System.Int64.ToString" />
+
+            
 
             
 
@@ -1539,6 +1693,8 @@
           <para
             >Converts the numeric value of the current <see
              cref="T:System.IntPtr" />
+
+            
 
             
 
@@ -1582,10 +1738,14 @@
 
             
 
+            
+
              parameter is null or an empty string (""), the return value is formatted with the general format specifier ("G"). For more information about numeric format specifiers, see the <format
              type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">Standard Numeric Format Strings</a>
             </format>
+
+            
 
             
 
@@ -1605,6 +1765,8 @@
 
             
 
+            
+
              object to its equivalent string representation.</para
           >
         </summary>
@@ -1613,6 +1775,8 @@
           <para
             >The string representation of the value of the current <see
              cref="T:System.IntPtr" />
+
+            
 
             
 
@@ -1628,8 +1792,12 @@
 
           
 
+          
+
           A format specification that governs how the current <see
            cref="T:System.IntPtr" />
+
+          
 
           
 
@@ -1668,11 +1836,15 @@
 
             
 
+            
+
              has been set to a value other than zero.</para
           >
           <para
             >For example, assume the variable, ip, is an instance of <see
              cref="T:System.IntPtr" />
+
+            
 
             
 
@@ -1688,8 +1860,12 @@
 
             
 
+            
+
              instead of null if an argument is expected to be either a pointer or a null. For example, the following call to the Windows CreateFile function supplies <see
              cref="F:System.IntPtr.Zero" />
+
+            
 
             
 
@@ -1702,8 +1878,12 @@
 
             
 
+            
+
              and <paramref
              name="hTemplateFile" />
+
+            
 
             
 
@@ -1721,8 +1901,12 @@
 
               
 
+              
+
                is equivalent to null for Windows API functions with parameters or return values that can be either pointers or null, <see
                cref="F:System.IntPtr.Zero" />
+
+              
 
               
 
@@ -1739,8 +1923,12 @@
 
             
 
+            
+
             . For example, the call to the GetWindow function in the following example tries to retrieve the handle of a non-existent window. If it were called from unmanaged code, the function would return null, but when it is called from managed code, it returns <see
              cref="F:System.IntPtr.Zero" />
+
+            
 
             
 

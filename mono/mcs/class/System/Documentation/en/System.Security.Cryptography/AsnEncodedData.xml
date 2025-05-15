@@ -52,6 +52,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -84,11 +86,15 @@
 
             
 
+            
+
              class using a byte array.</para
           >
         </summary>
         <param name="rawData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -127,6 +133,8 @@
 
             
 
+            
+
              instance.</para
           >
         </remarks>
@@ -140,8 +148,12 @@
 
             
 
+            
+
              class using an instance of the <see
              cref="T:System.Security.Cryptography.AsnEncodedData" />
+
+            
 
             
 
@@ -157,8 +169,12 @@
 
           
 
+          
+
           An instance of the <see
            cref="T:System.Security.Cryptography.AsnEncodedData" />
+
+          
 
           
 
@@ -199,8 +215,12 @@
 
             
 
+            
+
              class using an <see
              cref="T:System.Security.Cryptography.Oid" />
+
+            
 
             
 
@@ -216,8 +236,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Cryptography.Oid" />
+
+          
 
           
 
@@ -227,6 +251,8 @@
         >
         <param name="rawData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -264,11 +290,15 @@
 
             
 
+            
+
              class using a byte array.</para
           >
         </summary>
         <param name="oid">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -281,10 +311,14 @@
 
           
 
+          
+
            information.</param
         >
         <param name="rawData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -326,8 +360,12 @@
 
             
 
+            
+
              object based on the specified <see
              cref="T:System.Security.Cryptography.AsnEncodedData" />
+
+            
 
             
 
@@ -346,6 +384,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -356,8 +396,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.AsnEncodedData" />
+
+          
 
           
 
@@ -396,6 +440,8 @@
 
             
 
+            
+
              parameter to control the layout of the output.</para
           >
         </remarks>
@@ -409,6 +455,8 @@
         </returns>
         <param name="multiLine">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -452,8 +500,12 @@
 
             
 
+            
+
              value for an <see
              cref="T:System.Security.Cryptography.AsnEncodedData" />
+
+            
 
             
 
@@ -483,6 +535,8 @@
           <para
             >This property is the easiest way to access the information in an <see
              cref="T:System.Security.Cryptography.AsnEncodedData" />
+
+            
 
             
 

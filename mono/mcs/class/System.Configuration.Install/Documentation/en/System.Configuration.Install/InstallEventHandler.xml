@@ -32,10 +32,14 @@
 
         
 
+        
+
          delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event handler delegates, see <format
          type="text/html">
           <a href="D98FD58B-FA4F-4598-8378-ADDF4355A115">[&lt;topic://cpconEventsDelegates&gt;]</a>
         </format>
+
+        
 
         
 
@@ -54,8 +58,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Configuration.Install.Installer.AfterInstall" />
+
+        
 
         
 
@@ -68,8 +76,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Configuration.Install.Installer.Committed" />
+
+        
 
         
 
@@ -82,8 +94,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Configuration.Install.Installer.AfterRollback" />
+
+        
 
         
 
@@ -96,6 +112,8 @@
 
         
 
+        
+
         , or <see
          cref="E:System.Configuration.Install.Installer.AfterUninstall" />
 
@@ -103,8 +121,12 @@
 
         
 
+        
+
          event of an <see
          cref="T:System.Configuration.Install.Installer" />
+
+        
 
         
 

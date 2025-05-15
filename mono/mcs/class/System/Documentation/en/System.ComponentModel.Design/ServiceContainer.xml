@@ -43,6 +43,8 @@
 
         
 
+        
+
          object can be used to store and provide services. <see
          cref="T:System.ComponentModel.Design.ServiceContainer" />
 
@@ -50,8 +52,12 @@
 
         
 
+        
+
          implements the <see
          cref="T:System.ComponentModel.Design.IServiceContainer" />
+
+        
 
         
 
@@ -67,8 +73,12 @@
 
         
 
+        
+
          object can be created using a constructor that adds a parent <see
          cref="T:System.ComponentModel.Design.IServiceContainer" />
+
+        
 
         
 
@@ -81,8 +91,12 @@
 
         
 
+        
+
          objects, including the immediate parent <see
          cref="T:System.ComponentModel.Design.IServiceContainer" />
+
+        
 
         
 
@@ -95,8 +109,12 @@
 
         
 
+        
+
          implementations that are linked to this <see
          cref="T:System.ComponentModel.Design.IServiceContainer" />
+
+        
 
         
 
@@ -109,8 +127,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.ComponentModel.Design.ServiceContainer.RemoveService(System.Type)" />
+
+        
 
         
 
@@ -127,8 +149,12 @@
 
           
 
+          
+
            attribute applied to this class has the following <see
            cref="P:System.Security.Permissions.HostProtectionAttribute.Resources" />
+
+          
 
           
 
@@ -141,6 +167,8 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Security.Permissions.HostProtectionAttribute" />
 
@@ -148,8 +176,12 @@
 
           
 
+          
+
            does not affect desktop applications (which are typically started by double-clicking an icon, typing a command, or entering a URL in a browser). For more information, see the <see
            cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+          
 
           
 
@@ -166,6 +198,8 @@
 
           
 
+          
+
           .</para
         >
       </block>
@@ -175,6 +209,8 @@
       <para
         >Provides a simple implementation of the <see
          cref="T:System.ComponentModel.Design.IServiceContainer" />
+
+        
 
         
 
@@ -206,6 +242,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.Design.ServiceContainer" />
+
+            
 
             
 
@@ -250,11 +288,15 @@
 
             
 
+            
+
              class using the specified parent service provider.</para
           >
         </summary>
         <param name="parentProvider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -299,10 +341,14 @@
 
           
 
+          
+
           The type of service to add. </param
         >
         <param name="callback">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -347,6 +393,8 @@
 
           
 
+          
+
           The type of service to add. </param
         >
         <param name="serviceInstance">
@@ -356,8 +404,12 @@
 
           
 
+          
+
           An instance of the service to add. This object must implement or inherit from the type indicated by the <paramref
            name="serviceType" />
+
+          
 
           
 
@@ -403,6 +455,8 @@
 
           
 
+          
+
           The type of service to add. </param
         >
         <param name="callback">
@@ -412,10 +466,14 @@
 
           
 
+          
+
           A callback object that can create the service. This allows a service to be declared as available, but delays creation of the object until the service is requested. </param
         >
         <param name="promote">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -461,10 +519,14 @@
 
           
 
+          
+
           The type of service to add. </param
         >
         <param name="serviceInstance">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -477,10 +539,14 @@
 
           
 
+          
+
            parameter. </param
         >
         <param name="promote">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -516,8 +582,12 @@
 
             
 
+            
+
             . the default implementation of this property is to return the <see
              cref="T:System.ComponentModel.Design.IServiceContainer" />
+
+            
 
             
 
@@ -530,8 +600,12 @@
 
             
 
+            
+
              types. You may override this property and return your own types, modifying the default behavior of <see
              cref="M:System.ComponentModel.Component.GetService(System.Type)" />
+
+            
 
             
 
@@ -545,6 +619,8 @@
           <para
             >Gets the default services implemented directly by <see
              cref="T:System.ComponentModel.Design.ServiceContainer" />
+
+            
 
             
 
@@ -580,8 +656,12 @@
 
             
 
+            
+
              walks all instantiated services within the container and disposes any that implement <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -597,8 +677,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.ComponentModel.Design.ServiceContainer" />
+
+            
 
             
 
@@ -611,8 +695,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.ComponentModel.Design.ServiceContainer" />
+
+            
 
             
 
@@ -625,6 +713,8 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.ComponentModel.Design.ServiceContainer" />
 
@@ -632,8 +722,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.ComponentModel.Design.ServiceContainer" />
+
+            
 
             
 
@@ -648,10 +742,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -668,6 +766,8 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.ComponentModel.Design.ServiceContainer" />
 
@@ -675,8 +775,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.ComponentModel.Design.ServiceContainer" />
+
+              
 
               
 
@@ -719,8 +823,12 @@
 
             
 
+            
+
              walks all instantiated services within the container and disposes any that implement <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -736,8 +844,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -750,8 +862,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -767,8 +883,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.ComponentModel.Design.ServiceContainer" />
+
+            
 
             
 
@@ -788,8 +908,12 @@
 
           
 
+          
+
           true if the <see
            cref="T:System.ComponentModel.Design.ServiceContainer" />
+
+          
 
           
 
@@ -834,6 +958,8 @@
 
           
 
+          
+
           The type of service to retrieve. </param
         >
       </Docs>
@@ -864,6 +990,8 @@
         </summary>
         <param name="serviceType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -908,10 +1036,14 @@
 
           
 
+          
+
           The type of service to remove. </param
         >
         <param name="promote">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

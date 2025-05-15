@@ -86,8 +86,12 @@
 
         
 
+        
+
          server control is an input control that lets the user enter text. By default, the <see
          cref="P:System.Web.UI.WebControls.TextBox.TextMode" />
+
+        
 
         
 
@@ -100,8 +104,12 @@
 
         
 
+        
+
          control to display a multiline text box or a text box that masks user input by changing the value of the <see
          cref="P:System.Web.UI.WebControls.TextBox.TextMode" />
+
+        
 
         
 
@@ -114,8 +122,12 @@
 
         
 
+        
+
          control is specified or determined by using the <see
          cref="P:System.Web.UI.WebControls.TextBox.Text" />
+
+        
 
         
 
@@ -131,8 +143,12 @@
 
         
 
+        
+
          control contains several properties that allow you to control the appearance of the control. The display width of the text box, in characters, is determined by its <see
          cref="P:System.Web.UI.WebControls.TextBox.Columns" />
+
+        
 
         
 
@@ -145,8 +161,12 @@
 
         
 
+        
+
          control is a multiline text box, the number of rows it displays is determined by the <see
          cref="P:System.Web.UI.WebControls.TextBox.Rows" />
+
+        
 
         
 
@@ -159,8 +179,12 @@
 
         
 
+        
+
          control, set the <see
          cref="P:System.Web.UI.WebControls.TextBox.Wrap" />
+
+        
 
         
 
@@ -176,6 +200,8 @@
 
         
 
+        
+
          control by setting a few properties. To prevent the text displayed in the control from being modified, set the <see
          cref="P:System.Web.UI.WebControls.TextBox.ReadOnly" />
 
@@ -183,8 +209,12 @@
 
         
 
+        
+
          property to true. If you want to limit the user input to a specified number of characters, set the <see
          cref="P:System.Web.UI.WebControls.TextBox.MaxLength" />
+
+        
 
         
 
@@ -200,8 +230,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.WebControls.TextBox.#ctor" />
+
+        
 
         
 
@@ -220,6 +254,8 @@
 
           
 
+          
+
           , <format
            type="text/html">
             <a href="6f67973f-dda0-45a1-ba9d-e88532d7dc5b"
@@ -231,12 +267,16 @@
 
           
 
+          
+
           , and <format
            type="text/html">
             <a href="4ad3dacb-89e0-4cee-89ac-40a3f2a85461"
               >Introduction to Validating User Input in ASP.NET Web Pages</a
             >
           </format>
+
+          
 
           
 
@@ -261,6 +301,8 @@
 
         
 
+        
+
         |Disabled|Cellular|Company|Department|
         DisplayName|Email|FirstName|Gender|HomeCity|HomeCountryRegion|
         HomeFax|HomePhone|HomeState|HomeStreetAddress|HomeZipCode|
@@ -270,6 +312,8 @@
         BusinessZipCode|Search"
     AutoPostBack="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -285,11 +329,15 @@
 
         
 
+        
+
         |None|Dotted|Dashed|Solid|Double|Groove|Ridge|
         Inset|Outset"
     BorderWidth="size"
     CausesValidation="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -305,9 +353,13 @@
 
         
 
+        
+
         |False"
     EnableTheming="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -321,9 +373,13 @@
 
         
 
+        
+
         |False"
     Font-Bold="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -337,10 +393,14 @@
 
         
 
+        
+
         "
     Font-Names="string"
     Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -356,9 +416,13 @@
 
         
 
+        
+
         "
     Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -383,6 +447,8 @@
 
         
 
+        
+
         "
     Rows="integer"
     runat="server"
@@ -392,6 +458,8 @@
     Text="string"
     TextMode="<codeFeaturedElement
         >SingleLine</codeFeaturedElement>
+
+        
 
         
 
@@ -407,10 +475,14 @@
 
         
 
+        
+
         |False"
     Width="size"
     Wrap="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -442,11 +514,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The following table shows the initial property value for an instance of <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -480,6 +556,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -521,6 +599,8 @@
 
             
 
+            
+
              output stream for a <see
              cref="T:System.Web.UI.WebControls.TextBox" />
 
@@ -528,8 +608,12 @@
 
             
 
+            
+
              control. This method overrides <see
              cref="M:System.Web.UI.WebControls.WebControl.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -543,6 +627,8 @@
           <para
             >Adds HTML attributes and styles that need to be rendered to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -581,6 +667,8 @@
 
             
 
+            
+
              property.</para
           >
         </summary>
@@ -591,8 +679,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -638,8 +730,12 @@
 
             
 
+            
+
              property to control the behavior of the AutoComplete feature for a <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -652,8 +748,12 @@
 
             
 
+            
+
              enumeration is used to represent the values that you can apply to the <see
              cref="P:System.Web.UI.WebControls.TextBox.AutoCompleteType" />
+
+            
 
             
 
@@ -672,8 +772,12 @@
 
             
 
+            
+
              property for a <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -686,8 +790,12 @@
 
             
 
+            
+
              control shares the list with other <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -700,8 +808,12 @@
 
             
 
+            
+
              property across different pages. You can also share a list between <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -714,8 +826,12 @@
 
             
 
+            
+
              property. When you set the <see
              cref="P:System.Web.UI.WebControls.TextBox.AutoCompleteType" />
+
+            
 
             
 
@@ -728,6 +844,8 @@
 
             
 
+            
+
              controls with the same category share the same list. You can disable the AutoComplete feature for a <see
              cref="T:System.Web.UI.WebControls.TextBox" />
 
@@ -735,8 +853,12 @@
 
             
 
+            
+
              control by setting the <see
              cref="P:System.Web.UI.WebControls.TextBox.AutoCompleteType" />
+
+            
 
             
 
@@ -752,8 +874,12 @@
 
             
 
+            
+
              from the <ui
             >Tools</ui>
+
+            
 
             
 
@@ -766,8 +892,12 @@
 
             
 
+            
+
              tab. Click the <ui
             >AutoComplete</ui>
+
+            
 
             
 
@@ -785,8 +915,12 @@
 
             
 
+            
+
              in the <see
              cref="http://go.microsoft.com/fwlink/?linkid=37118">MSDN Library</see>
+
+            
 
             
 
@@ -802,10 +936,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -819,6 +957,8 @@
           <para
             >Gets or sets a value that indicates the AutoComplete behavior of the <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -848,6 +988,8 @@
 
             
 
+            
+
              property to specify whether an automatic postback to the server will occur when the <see
              cref="T:System.Web.UI.WebControls.TextBox" />
 
@@ -855,8 +997,12 @@
 
             
 
+            
+
              control loses focus. Pressing the ENTER or the TAB key while in the <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -873,6 +1019,8 @@
 
               
 
+              
+
                control's parent container contains a button marked as the default button (for example, if the container's <see
                cref="P:System.Web.UI.HtmlControls.HtmlForm.DefaultButton" />
 
@@ -880,8 +1028,12 @@
 
               
 
+              
+
                or <see
                cref="P:System.Web.UI.WebControls.Panel.DefaultButton" />
+
+              
 
               
 
@@ -898,10 +1050,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -915,6 +1071,8 @@
           <para
             >Gets or sets a value that indicates whether an automatic postback to the server occurs when the <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -966,8 +1124,12 @@
 
             
 
+            
+
              property to determine whether validation is performed on both the client and the server when a <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -983,8 +1145,12 @@
 
             
 
+            
+
              control does not cause page validation when the control loses focus. To set the <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -997,8 +1163,12 @@
 
             
 
+            
+
              property to true and the <see
              cref="P:System.Web.UI.WebControls.TextBox.AutoPostBack" />
+
+            
 
             
 
@@ -1014,6 +1184,8 @@
 
             
 
+            
+
              property is set to true, you can also use the <see
              cref="P:System.Web.UI.WebControls.TextBox.ValidationGroup" />
 
@@ -1021,8 +1193,12 @@
 
             
 
+            
+
              property to specify the name of the validation group for which the <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -1038,10 +1214,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -1055,6 +1235,8 @@
           <para
             >Gets or sets a value indicating whether validation is performed when the <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -1120,8 +1302,12 @@
 
             
 
+            
+
              method checks whether the postback data of the <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -1135,6 +1321,8 @@
           <para
             >Processes the postback data for the <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -1154,10 +1342,14 @@
 
           
 
+          
+
           The index within the posted collection that references the content to load. </param
         >
         <param name="postCollection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1186,8 +1378,12 @@
 
             
 
+            
+
              property to limit the number of characters that can be entered in the <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -1204,6 +1400,8 @@
 
               
 
+              
+
                property is set to TextBoxMode.SingleLine or TextBoxMode.Password.</para
             >
           </block>
@@ -1215,10 +1413,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -1266,6 +1468,8 @@
 
             
 
+            
+
              is true.</para
           >
         </summary>
@@ -1276,8 +1480,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1311,12 +1519,16 @@
 
             
 
+            
+
              event is raised when the content of the text box changes between posts to the server.</para
           >
           <block subset="none" type="note">
             <para
               >A <see
                cref="T:System.Web.UI.WebControls.TextBox" />
+
+              
 
               
 
@@ -1335,11 +1547,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.TextBox.OnTextChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1358,6 +1574,8 @@
 
             
 
+            
+
              event. This allows you to handle the event directly.</para
           >
         </summary>
@@ -1368,8 +1586,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1404,8 +1626,12 @@
 
             
 
+            
+
              method invokes the <see
              cref="M:System.Web.UI.WebControls.TextBox.OnTextChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1418,6 +1644,8 @@
 
             
 
+            
+
              control has changed. If the <see
              cref="P:System.Web.UI.WebControls.TextBox.CausesValidation" />
 
@@ -1425,8 +1653,12 @@
 
             
 
+            
+
              property is true, the controls in the validation group set in the <see
              cref="P:System.Web.UI.WebControls.TextBox.ValidationGroup" />
+
+            
 
             
 
@@ -1445,8 +1677,12 @@
 
             
 
+            
+
              method when the posted data for the <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -1476,6 +1712,8 @@
 
             
 
+            
+
              property to specify whether the contents of the <see
              cref="T:System.Web.UI.WebControls.TextBox" />
 
@@ -1483,8 +1721,12 @@
 
             
 
+            
+
              control can be changed. Setting this property to true will prevent users from entering a value or changing the existing value. Note that the user of the <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -1501,8 +1743,12 @@
 
               
 
+              
+
                value of a <see
                cref="T:System.Web.UI.WebControls.TextBox" />
+
+              
 
               
 
@@ -1515,6 +1761,8 @@
 
               
 
+              
+
                property set to true is sent to the server when a postback occurs, but the server does no processing for a read-only text box. This prevents a malicious user from changing a <see
                cref="P:System.Web.UI.WebControls.TextBox.Text" />
 
@@ -1522,8 +1770,12 @@
 
               
 
+              
+
                value that is read-only. The value of the <see
                cref="P:System.Web.UI.WebControls.TextBox.Text" />
+
+              
 
               
 
@@ -1540,10 +1792,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -1557,6 +1813,8 @@
           <para
             >Gets or sets a value indicating whether the contents of the <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -1609,8 +1867,12 @@
 
             
 
+            
+
              method renders the begin tag and end tag of the <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -1623,8 +1885,12 @@
 
             
 
+            
+
              object for output on the client. If the <see
              cref="P:System.Web.UI.WebControls.TextBox.TextMode" />
+
+            
 
             
 
@@ -1637,8 +1903,12 @@
 
             
 
+            
+
             , the content of the <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -1654,8 +1924,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -1674,8 +1948,12 @@
 
             
 
+            
+
              control to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -1709,12 +1987,16 @@
 
             
 
+            
+
              property to specify the number of rows displayed in a multiline text box.</para
           >
           <block subset="none" type="note">
             <para
               >This property is applicable only when the <see
                cref="P:System.Web.UI.WebControls.TextBox.TextMode" />
+
+              
 
               
 
@@ -1731,10 +2013,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -1783,8 +2069,12 @@
 
             
 
+            
+
              property, which is an instance of the <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 
@@ -1801,6 +2091,8 @@
 
             
 
+            
+
             . </para
           >
           <para
@@ -1808,6 +2100,8 @@
              type="text/html">
               <a href="0218d965-5d30-445b-b6a6-8870e70e63ce">ASP.NET State Management Overview</a>
             </format>
+
+            
 
             
 
@@ -1830,8 +2124,12 @@
 
             
 
+            
+
              that contains the changes to the <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -1873,8 +2171,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IPostBackDataHandler" />
+
+            
 
             
 
@@ -1898,10 +2200,14 @@
 
           
 
+          
+
           The index within the posted collection that references the content to load. </param
         >
         <param name="postCollection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1936,8 +2242,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IPostBackDataHandler" />
+
+            
 
             
 
@@ -1951,6 +2261,8 @@
           <para
             >Invokes the <see
              cref="M:System.Web.UI.WebControls.TextBox.OnTextChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -2006,8 +2318,12 @@
 
             
 
+            
+
              property to specify or determine the text displayed in the <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -2020,8 +2336,12 @@
 
             
 
+            
+
              property. If you want to prevent the text from being modified, set the <see
              cref="P:System.Web.UI.WebControls.TextBox.ReadOnly" />
+
+            
 
             
 
@@ -2032,6 +2352,8 @@
           <para
             >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
              cref="T:System.ComponentModel.LocalizableAttribute" />
+
+            
 
             
 
@@ -2048,6 +2370,8 @@
 
             
 
+            
+
             .</para
           >
           <para>When the text box is rendered, the contents of this property are HTML-encoded. For example, if you set this property to "&lt;b&gt;Test&lt;/b&gt;", the browser will display "&lt;b&gt;Test&lt;/b&gt;", not "Test" in bold.</para>
@@ -2057,6 +2381,8 @@
           <para
             >Gets or sets the text content of the <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -2106,12 +2432,16 @@
 
             
 
+            
+
              event is raised when the content of the text box changes between posts to the server. The event is only raised if the text is changed by the user; the event is not raised if the text is changed programmatically.</para
           >
           <block subset="none" type="note">
             <para
               >A <see
                cref="T:System.Web.UI.WebControls.TextBox" />
+
+              
 
               
 
@@ -2125,6 +2455,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -2165,8 +2497,12 @@
 
             
 
+            
+
              property to specify whether a <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -2182,6 +2518,8 @@
 
             
 
+            
+
              control is in multiline mode, you can control the number of rows displayed by setting the <see
              cref="P:System.Web.UI.WebControls.TextBox.Rows" />
 
@@ -2189,8 +2527,12 @@
 
             
 
+            
+
              property. You can also specify whether the text should wrap by setting the <see
              cref="P:System.Web.UI.WebControls.TextBox.Wrap" />
+
+            
 
             
 
@@ -2206,11 +2548,15 @@
 
             
 
+            
+
              control is in password mode, all characters entered in the control are masked.</para
           >
           <para
             >This property cannot be set by themes or style sheet themes. For more information, see <see
              cref="T:System.Web.UI.ThemeableAttribute" />
+
+            
 
             
 
@@ -2225,6 +2571,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2233,6 +2581,8 @@
           <para
             >Gets or sets the behavior mode (single-line, multiline, or password) of the <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -2284,8 +2634,12 @@
 
             
 
+            
+
              property to specify the name of the validation group for which the <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -2301,8 +2655,12 @@
 
             
 
+            
+
              property is set to true. When you specify a value for the <see
              cref="P:System.Web.UI.WebControls.TextBox.ValidationGroup" />
+
+            
 
             
 
@@ -2315,8 +2673,12 @@
 
             
 
+            
+
              control posts back to the server. If you do not specify a value for this property and the <see
              cref="P:System.Web.UI.WebControls.TextBox.CausesValidation" />
+
+            
 
             
 
@@ -2332,10 +2694,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -2349,6 +2715,8 @@
           <para
             >Gets or sets the group of controls for which the <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -2378,8 +2746,12 @@
 
             
 
+            
+
              property to specify whether the text displayed in a multiline <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -2391,6 +2763,8 @@
             <para
               >This property is applicable only when the <see
                cref="P:System.Web.UI.WebControls.TextBox.TextMode" />
+
+              
 
               
 

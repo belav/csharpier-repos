@@ -8,11 +8,15 @@
 
     
 
+    
+
      is used to invoke a method. <grammar_production
     >
       <name>
         <non_terminal where="14.5.5">invocation-expression</non_terminal>
       </name>
+
+      
 
       
 
@@ -36,8 +40,12 @@
 
     
 
+    
+
      of an <non_terminal
      where="14.5.5">invocation-expression</non_terminal>
+
+    
 
     
 
@@ -50,8 +58,12 @@
 
     
 
+    
+
     . If the <non_terminal
      where="14.5">primary-expression</non_terminal>
+
+    
 
     
 
@@ -64,6 +76,8 @@
 
     
 
+    
+
      is a method invocation (<hyperlink
     >14.5.5.1</hyperlink>
 
@@ -71,8 +85,12 @@
 
     
 
+    
+
     ). If the <non_terminal
      where="14.5">primary-expression</non_terminal>
+
+    
 
     
 
@@ -85,8 +103,12 @@
 
     
 
+    
+
     , the <non_terminal
      where="14.5.5">invocation-expression</non_terminal>
+
+    
 
     
 
@@ -99,6 +121,8 @@
 
     
 
+    
+
     ). If the <non_terminal
      where="14.5">primary-expression</non_terminal>
 
@@ -106,8 +130,12 @@
 
     
 
+    
+
      is neither a method group nor a value of a <non_terminal
      where="11.2">delegate-type</non_terminal>
+
+    
 
     
 
@@ -123,8 +151,12 @@
 
     
 
+    
+
      (<hyperlink
     >14.4.1</hyperlink>
+
+    
 
     
 
@@ -140,11 +172,15 @@
 
     
 
+    
+
      is classified as follows: <list
     >
       <list_item
         > If the <non_terminal
          where="14.5.5">invocation-expression</non_terminal>
+
+        
 
         
 
@@ -157,6 +193,8 @@
 
         
 
+        
+
         , the result is nothing. An expression that is classified as nothing cannot be an operand of any operator, and is permitted only in the context of a <non_terminal
          where="15.6">statement-expression</non_terminal>
 
@@ -164,8 +202,12 @@
 
         
 
+        
+
          (<hyperlink
         >15.6</hyperlink>
+
+        
 
         
 

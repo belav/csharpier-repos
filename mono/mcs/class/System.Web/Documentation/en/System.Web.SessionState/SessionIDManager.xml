@@ -27,8 +27,12 @@
 
         
 
+        
+
          class is an HTTP module that manages unique session identifiers for use with ASP.NET session state. The unique identifier for an ASP.NET session is the <see
          cref="P:System.Web.SessionState.HttpSessionState.SessionID" />
+
+        
 
         
 
@@ -41,6 +45,8 @@
 
         
 
+        
+
          property of the current <see
          cref="T:System.Web.HttpContext" />
 
@@ -48,8 +54,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Web.UI.Page" />
+
+        
 
         
 
@@ -65,8 +75,12 @@
 
         
 
+        
+
          value is sent in a cookie with each request to the ASP.NET application. The name of the cookie that contains the <see
          cref="P:System.Web.SessionState.HttpSessionState.SessionID" />
+
+        
 
         
 
@@ -83,11 +97,15 @@
 
         
 
+        
+
          to the desired cookie name.</para
       >
       <para
         >If you want to disable the use of cookies in your ASP.NET application and still make use of session state, you can configure your application to store the session identifier in the URL instead of a cookie by setting the cookieless attribute of the sessionState element to true in the Web.config file for your application. For more information, see the <see
          cref="P:System.Web.SessionState.HttpSessionStateContainer.IsCookieless" />
+
+        
 
         
 
@@ -121,6 +139,8 @@
 
             
 
+            
+
              class. After calling the constructor, ASP.NET calls the <see
              cref="M:System.Web.SessionState.SessionIDManager.Initialize" />
 
@@ -128,8 +148,12 @@
 
             
 
+            
+
              method to initialize the new <see
              cref="T:System.Web.SessionState.SessionIDManager" />
+
+            
 
             
 
@@ -143,6 +167,8 @@
           <para
             >Creates an instance of the <see
              cref="T:System.Web.SessionState.SessionIDManager" />
+
+            
 
             
 
@@ -180,6 +206,8 @@
 
             
 
+            
+
              method returns a unique session identifier that is a randomly generated number encoded into a 24-character string consisting of lowercase characters from a to z and numbers from 0 to 5.</para
           >
         </remarks>
@@ -198,8 +226,12 @@
 
           
 
+          
+
           The current <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -212,8 +244,12 @@
 
           
 
+          
+
            and <see
            cref="P:System.Web.HttpContext.Response" />
+
+          
 
           
 
@@ -247,8 +283,12 @@
 
             
 
+            
+
              class to decode custom <see
              cref="P:System.Web.SessionState.HttpSessionState.SessionID" />
+
+            
 
             
 
@@ -261,8 +301,12 @@
 
             
 
+            
+
              class and override the <see
              cref="M:System.Web.SessionState.SessionIDManager.CreateSessionID(System.Web.HttpContext)" />
+
+            
 
             
 
@@ -275,8 +319,12 @@
 
             
 
+            
+
              methods. To ensure the fidelity of a custom session-identifier value retrieved from the HTTP request by the <see
              cref="M:System.Web.SessionState.SessionIDManager.GetSessionID(System.Web.HttpContext)" />
+
+            
 
             
 
@@ -289,8 +337,12 @@
 
             
 
+            
+
              decodes the custom value using the <see
              cref="Overload:System.Web.HttpUtility.UrlDecode" />
+
+            
 
             
 
@@ -309,6 +361,8 @@
         </returns>
         <param name="id">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -342,8 +396,12 @@
 
             
 
+            
+
              class to encode custom <see
              cref="P:System.Web.SessionState.HttpSessionState.SessionID" />
+
+            
 
             
 
@@ -356,8 +414,12 @@
 
             
 
+            
+
              class and override the <see
              cref="M:System.Web.SessionState.SessionIDManager.CreateSessionID(System.Web.HttpContext)" />
+
+            
 
             
 
@@ -370,8 +432,12 @@
 
             
 
+            
+
              methods. To ensure the fidelity of a custom session-identifier value stored in the HTTP response by the <see
              cref="M:System.Web.SessionState.SessionIDManager.SaveSessionID(System.Web.HttpContext,System.String,System.Boolean@,System.Boolean@)" />
+
+            
 
             
 
@@ -384,8 +450,12 @@
 
             
 
+            
+
              encodes the custom value using the <see
              cref="Overload:System.Web.HttpUtility.UrlEncode" />
+
+            
 
             
 
@@ -401,8 +471,12 @@
 
             
 
+            
+
              class and overrides the <see
              cref="M:System.Web.SessionState.SessionIDManager.CreateSessionID(System.Web.HttpContext)" />
+
+            
 
             
 
@@ -415,8 +489,12 @@
 
             
 
+            
+
              methods, see the <see
              cref="M:System.Web.SessionState.SessionIDManager.CreateSessionID(System.Web.HttpContext)" />
+
+            
 
             
 
@@ -435,6 +513,8 @@
         </returns>
         <param name="id">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -471,8 +551,12 @@
 
             
 
+            
+
              calls the <see
              cref="M:System.Web.SessionState.SessionIDManager.GetSessionID(System.Web.HttpContext)" />
+
+            
 
             
 
@@ -485,6 +569,8 @@
 
             
 
+            
+
              event to retrieve the <see
              cref="P:System.Web.SessionState.HttpSessionState.SessionID" />
 
@@ -492,8 +578,12 @@
 
             
 
+            
+
              from the current <see
              cref="T:System.Web.HttpRequest" />
+
+            
 
             
 
@@ -516,11 +606,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -533,6 +627,8 @@
 
           
 
+          
+
            object that references server objects used to process HTTP requests (for example, the <see
            cref="P:System.Web.HttpContext.Request" />
 
@@ -540,8 +636,12 @@
 
           
 
+          
+
            and <see
            cref="P:System.Web.HttpContext.Response" />
+
+          
 
           
 
@@ -572,10 +672,14 @@
 
             
 
+            
+
              method reads the session configuration data from the <format
              type="text/html">
               <a href="bda6fb8c-0076-43e3-9ce2-8cf1f8bdaa7d">sessionState</a>
             </format>
+
+            
 
             
 
@@ -589,6 +693,8 @@
           <para
             >Initializes the <see
              cref="T:System.Web.SessionState.SessionIDManager" />
+
+            
 
             
 
@@ -652,8 +758,12 @@
 
             
 
+            
+
              calls the <see
              cref="M:System.Web.SessionState.SessionIDManager.RemoveSessionID(System.Web.HttpContext)" />
+
+            
 
             
 
@@ -666,6 +776,8 @@
 
             
 
+            
+
              event to remove the session identifier from the <see
              cref="P:System.Web.HttpResponse.Cookies" />
 
@@ -673,8 +785,12 @@
 
             
 
+            
+
              collection of the <see
              cref="T:System.Web.HttpResponse" />
+
+            
 
             
 
@@ -694,8 +810,12 @@
 
           
 
+          
+
           The current <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -708,8 +828,12 @@
 
           
 
+          
+
            and <see
            cref="P:System.Web.HttpContext.Response" />
+
+          
 
           
 
@@ -768,8 +892,12 @@
 
             
 
+            
+
              method are 24 characters long, the maximum length of a session identifier allowed by the <see
              cref="T:System.Web.SessionState.SessionIDManager" />
+
+            
 
             
 
@@ -782,8 +910,12 @@
 
             
 
+            
+
             . The <see
              cref="M:System.Web.SessionState.SessionIDManager.GetSessionID(System.Web.HttpContext)" />
+
+            
 
             
 
@@ -796,8 +928,12 @@
 
             
 
+            
+
             , ensures that values do not exceed the <see
              cref="P:System.Web.SessionState.SessionIDManager.SessionIDMaxLength" />
+
+            
 
             
 
@@ -810,8 +946,12 @@
 
             
 
+            
+
              method. If you implement a custom <see
              cref="T:System.Web.SessionState.SessionIDManager" />
+
+            
 
             
 
@@ -824,8 +964,12 @@
 
             
 
+            
+
              class and overrides the <see
              cref="M:System.Web.SessionState.SessionIDManager.CreateSessionID(System.Web.HttpContext)" />
+
+            
 
             
 
@@ -838,6 +982,8 @@
 
             
 
+            
+
              method, your custom session-identifier values must meet the constraints above. For an example of overriding the <see
              cref="T:System.Web.SessionState.SessionIDManager" />
 
@@ -845,8 +991,12 @@
 
             
 
+            
+
              class and implementing these methods, see the example provided for the <see
              cref="M:System.Web.SessionState.SessionIDManager.CreateSessionID(System.Web.HttpContext)" />
+
+            
 
             
 
@@ -885,8 +1035,12 @@
 
             
 
+            
+
              method verifies that the supplied <paramref
              name="id" />
+
+            
 
             
 
@@ -902,8 +1056,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.SessionState.SessionIDManager.Validate(System.String)" />
+
+            
 
             
 
@@ -922,6 +1080,8 @@
         </returns>
         <param name="id">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

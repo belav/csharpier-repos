@@ -69,8 +69,12 @@
 
         
 
+        
+
          control to create a single-selection drop-down list control. You can control the appearance of the <see
          cref="T:System.Web.UI.WebControls.DropDownList" />
+
+        
 
         
 
@@ -83,6 +87,8 @@
 
         
 
+        
+
         , <see
          cref="P:System.Web.UI.WebControls.DropDownList.BorderStyle" />
 
@@ -90,8 +96,12 @@
 
         
 
+        
+
         , and <see
          cref="P:System.Web.UI.WebControls.DropDownList.BorderWidth" />
+
+        
 
         
 
@@ -107,6 +117,8 @@
 
         
 
+        
+
          control, place a <see
          cref="T:System.Web.UI.WebControls.ListItem" />
 
@@ -114,8 +126,12 @@
 
         
 
+        
+
          object for each entry between the opening and closing tags of the <see
          cref="T:System.Web.UI.WebControls.DropDownList" />
+
+        
 
         
 
@@ -131,8 +147,12 @@
 
         
 
+        
+
          control also supports data binding. To bind the control to a data source, create a data source, such as a <see
          cref="T:System.Collections.ArrayList" />
+
+        
 
         
 
@@ -145,8 +165,12 @@
 
         
 
+        
+
          method to bind the data source to the <see
          cref="T:System.Web.UI.WebControls.DropDownList" />
+
+        
 
         
 
@@ -162,8 +186,12 @@
 
         
 
+        
+
          property to programmatically determine the index of the item selected by the user from the <see
          cref="T:System.Web.UI.WebControls.DropDownList" />
+
+        
 
         
 
@@ -189,10 +217,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0">ASP.NET Controls and Accessibility</a>
         </format>
+
+        
 
         
 
@@ -216,9 +248,13 @@
 
         
 
+        
+
         "
     AutoPostBack="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -234,11 +270,15 @@
 
         
 
+        
+
         |None|Dotted|Dashed|Solid|Double|Groove|Ridge|
         Inset|Outset"
     BorderWidth="size"
     CausesValidation="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -259,9 +299,13 @@
 
         
 
+        
+
         |False"
     EnableTheming="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -275,9 +319,13 @@
 
         
 
+        
+
         |False"
     Font-Bold="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -291,10 +339,14 @@
 
         
 
+        
+
         "
     Font-Names="string"
     Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -310,9 +362,13 @@
 
         
 
+        
+
         "
     Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -346,6 +402,8 @@
 
         
 
+        
+
         |False"
     Width="size"
 &gt;
@@ -357,9 +415,13 @@
 
         
 
+        
+
         |False"
                 Selected="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -394,6 +456,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -402,6 +466,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.DropDownList" />
+
+            
 
             
 
@@ -439,6 +505,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -447,6 +515,8 @@
           <para
             >Adds HTML attributes and styles that need to be rendered to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -462,8 +532,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -503,6 +577,8 @@
 
               
 
+              
+
                property is inherited from the <see
                cref="T:System.Web.UI.WebControls.WebControl" />
 
@@ -510,8 +586,12 @@
 
               
 
+              
+
                class and is not applicable to the <see
                cref="T:System.Web.UI.WebControls.DropDownList" />
+
+              
 
               
 
@@ -562,6 +642,8 @@
 
               
 
+              
+
                property is inherited from the <see
                cref="T:System.Web.UI.WebControls.WebControl" />
 
@@ -569,8 +651,12 @@
 
               
 
+              
+
                class and is not applicable to the <see
                cref="T:System.Web.UI.WebControls.DropDownList" />
+
+              
 
               
 
@@ -621,6 +707,8 @@
 
               
 
+              
+
                property is inherited from the <see
                cref="T:System.Web.UI.WebControls.WebControl" />
 
@@ -628,8 +716,12 @@
 
               
 
+              
+
                class and is not applicable to the <see
                cref="T:System.Web.UI.WebControls.DropDownList" />
+
+              
 
               
 
@@ -680,6 +772,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -719,8 +813,12 @@
 
             
 
+            
+
              method on the <see
              cref="T:System.Web.UI.WebControls.DropDownList" />
+
+            
 
             
 
@@ -739,6 +837,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -747,6 +847,8 @@
           <para
             >true if the <see
              cref="T:System.Web.UI.WebControls.DropDownList" />
+
+            
 
             
 
@@ -762,10 +864,14 @@
 
           
 
+          
+
           The index within the posted collection that references the content to load.</param
         >
         <param name="postCollection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -796,8 +902,12 @@
 
             
 
+            
+
              method on a <see
              cref="T:System.Web.UI.WebControls.DropDownList" />
+
+            
 
             
 
@@ -810,8 +920,12 @@
 
             
 
+            
+
              method indicates that the state of the list items has changed in the <see
              cref="T:System.Web.UI.WebControls.DropDownList" />
+
+            
 
             
 
@@ -824,8 +938,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.UI.WebControls.ListControl.OnSelectedIndexChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -838,8 +956,12 @@
 
             
 
+            
+
              event. Control developers can override the <see
              cref="M:System.Web.UI.WebControls.ListControl.OnSelectedIndexChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -853,6 +975,8 @@
           <para
             >Raises events for the <see
              cref="T:System.Web.UI.WebControls.DropDownList" />
+
+            
 
             
 
@@ -909,6 +1033,8 @@
 
             
 
+            
+
              property to programmatically specify or determine the index of the selected item from the <see
              cref="T:System.Web.UI.WebControls.DropDownList" />
 
@@ -916,8 +1042,12 @@
 
             
 
+            
+
              control. An item is always selected in the <see
              cref="T:System.Web.UI.WebControls.DropDownList" />
+
+            
 
             
 
@@ -934,6 +1064,8 @@
 
               
 
+              
+
                control are zero-based.</para
             >
           </block>
@@ -943,6 +1075,8 @@
           <para
             >Gets or sets the index of the selected item in the <see
              cref="T:System.Web.UI.WebControls.DropDownList" />
+
+            
 
             
 
@@ -997,6 +1131,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -1011,6 +1147,8 @@
 
           
 
+          
+
           The key value used to index an entry in the collection. </param
         >
         <param name="postCollection">
@@ -1020,8 +1158,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.Specialized.NameValueCollection" />
+
+          
 
           
 
@@ -1052,6 +1194,8 @@
           <para
             >Raises events for the <see
              cref="T:System.Web.UI.WebControls.DropDownList" />
+
+            
 
             
 
@@ -1111,8 +1255,12 @@
 
             
 
+            
+
              control does not support multiple selections and throws an <see
              cref="T:System.Web.HttpException" />
+
+            
 
             
 
@@ -1131,8 +1279,12 @@
 
             
 
+            
+
              exception because multiple selection is not supported for the <see
              cref="T:System.Web.UI.WebControls.DropDownList" />
+
+            
 
             
 

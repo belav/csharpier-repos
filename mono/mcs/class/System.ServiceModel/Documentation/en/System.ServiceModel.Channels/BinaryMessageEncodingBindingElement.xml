@@ -38,11 +38,15 @@
 
         
 
+        
+
          is the binding element that specified the .NET Binary Format for XML should be used for encoding messages, and has options to specify the character encoding and the SOAP and WS-Addressing version to be used. Binary encoding is most efficient but least interoperable of the encoding options. </para
       >
       <para
         >crabout the binding element that specifies messages are encoded using a textual representation of XML, see <see
          cref="T:System.ServiceModel.Channels.TextMessageEncodingBindingElement" />
+
+        
 
         
 
@@ -58,11 +62,15 @@
 
         
 
+        
+
         . </para
       >
       <para
         >To implement a custom message encoder, use the <see
          cref="T:System.ServiceModel.Channels.MessageEncodingBindingElement" />
+
+        
 
         
 
@@ -95,6 +103,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.BinaryMessageEncodingBindingElement" />
+
+            
 
             
 
@@ -143,8 +153,12 @@
 
             
 
+            
+
              of type <paramref
              name="TChannel" />
+
+            
 
             
 
@@ -160,8 +174,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -171,6 +189,8 @@
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -223,8 +243,12 @@
 
             
 
+            
+
              of type <paramref
              name="TChannel" />
+
+            
 
             
 
@@ -240,8 +264,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -251,6 +279,8 @@
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -304,8 +334,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -315,6 +349,8 @@
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -357,6 +393,8 @@
 
             
 
+            
+
              object initialized from the current one.</para
           >
         </summary>
@@ -365,6 +403,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Channels.BinaryMessageEncodingBindingElement" />
+
+            
 
             
 
@@ -428,6 +468,8 @@
 
             
 
+            
+
              objects that the factory produces can read and write messages using the binary message encoding.</para
           >
         </remarks>
@@ -440,6 +482,8 @@
           <para
             >The <see
              cref="T:System.ServiceModel.Channels.MessageEncoderFactory" />
+
+            
 
             
 
@@ -495,11 +539,15 @@
 
             
 
+            
+
              requested if it is present or null if it is not.</para
           >
         </returns>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -512,10 +560,14 @@
 
           
 
+          
+
            for the binding element.</param
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -564,6 +616,8 @@
           <para
             >The .NET Binary Format for XML can optimize the transmission of strings when they are used in multiple messages within a session. Once a string is sent in a message, additional messages that contain that string can refer to it using only the string's ID. This requires that the strings and their IDs be stored in memory. This allows the ID to be retransmitted in subsequent messages instead of the entire string. This lookup increases the efficiency of message transmission when using the binary format. The <see
              cref="P:System.ServiceModel.Channels.BinaryMessageEncodingBindingElement.MaxSessionSize" />
+
+            
 
             
 
@@ -658,12 +712,16 @@
 
                 
 
+                
+
                  = 32</para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxStringContentLength" />
+
+                
 
                 
 
@@ -680,6 +738,8 @@
 
                 
 
+                
+
                  = 16384</para
               >
             </item>
@@ -691,12 +751,16 @@
 
                 
 
+                
+
                  = 4096</para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.Xml.XmlDictionaryReaderQuotas.MaxNameTableCharCount" />
+
+                
 
                 
 
@@ -747,8 +811,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.MetadataExporter" />
+
+          
 
           
 
@@ -794,8 +862,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.WsdlExporter" />
+
+          
 
           
 
@@ -810,8 +882,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.Description.WsdlContractConversionContext" />
+
+          
 
           
 
@@ -857,8 +933,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.WsdlExporter" />
+
+          
 
           
 
@@ -873,8 +953,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.Description.WsdlEndpointConversionContext" />
+
+          
 
           
 

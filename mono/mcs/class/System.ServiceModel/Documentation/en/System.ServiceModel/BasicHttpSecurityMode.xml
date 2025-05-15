@@ -25,8 +25,12 @@
 
         
 
+        
+
          is <see
          cref="F:System.ServiceModel.BasicHttpSecurityMode.None" />
+
+        
 
         
 
@@ -40,6 +44,8 @@
       <para
         >Specifies the types of security that can be used with the system-provided <see
          cref="T:System.ServiceModel.BasicHttpBinding" />
+
+        
 
         
 
@@ -69,6 +75,8 @@
           <para
             >Security is provided using SOAP message security. For the <see
              cref="T:System.ServiceModel.BasicHttpBinding" />
+
+            
 
             
 
@@ -118,6 +126,8 @@
           <para
             >Security is provided using HTTPS. The service must be configured with SSL certificates. The SOAP message is protected as a whole using HTTPS. The service is authenticated by the client using the service’s SSL certificate. The client authentication is controlled through the <see
              cref="P:System.ServiceModel.HttpTransportSecurity.ClientCredentialType" />
+
+            
 
             
 

@@ -25,6 +25,8 @@
 
         
 
+        
+
          enumeration is used by the <see
          cref="Overload:System.Drawing.Graphics.CopyFromScreen" />
 
@@ -32,8 +34,12 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.Drawing.Graphics" />
+
+        
 
         
 

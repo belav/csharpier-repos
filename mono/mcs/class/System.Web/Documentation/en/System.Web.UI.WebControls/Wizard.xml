@@ -117,6 +117,8 @@
 
         
 
+        
+
          control to: </para
       >
       <list type="bullet">
@@ -144,6 +146,8 @@
 
         
 
+        
+
          control is made up of the following components:</para
       >
       <list type="bullet">
@@ -156,6 +160,8 @@
 
             
 
+            
+
              collection of steps that contain the user interface for each step, as defined by the page developer.</para
           >
         </item>
@@ -163,6 +169,8 @@
           <para
             >Built-in navigation capabilities that determine the appropriate buttons to display based on the <see
              cref="P:System.Web.UI.WebControls.WizardStepBase.StepType" />
+
+            
 
             
 
@@ -185,6 +193,8 @@
 
               
 
+              
+
                is persisted in Source view. If you change the <see
                cref="P:System.Web.UI.WebControls.Wizard.WizardSteps" />
 
@@ -192,8 +202,12 @@
 
               
 
+              
+
                property in Design view by clicking the sidebar buttons, and you then run the page, the first step of the Wizard control might not be shown because the <see
                cref="P:System.Web.UI.WebControls.Wizard.ActiveStepIndex" />
+
+              
 
               
 
@@ -218,8 +232,12 @@
 
         
 
+        
+
          control has a <see
          cref="P:System.Web.UI.WebControls.WizardStepBase.StepType" />
+
+        
 
         
 
@@ -232,6 +250,8 @@
 
         
 
+        
+
          property, the default value is <see
          cref="F:System.Web.UI.WebControls.WizardStepType.Auto" />
 
@@ -239,8 +259,12 @@
 
         
 
+        
+
         . The following table lists the available settings for the <see
          cref="P:System.Web.UI.WebControls.WizardStepBase.StepType" />
+
+        
 
         
 
@@ -272,6 +296,8 @@
 
               
 
+              
+
                button is rendered for navigation.</para
             >
           </description>
@@ -282,6 +308,8 @@
             <para
               >The step is the first one to appear. A <ui
               >Previous</ui>
+
+              
 
               
 
@@ -302,8 +330,12 @@
 
               
 
+              
+
                and <ui
               >Next</ui>
+
+              
 
               
 
@@ -328,6 +360,8 @@
 
         
 
+        
+
          control, data can be collected through linear or nonlinear navigation. Some examples of nonlinear navigation are skipping unnecessary steps or returning to a previously completed step to change some value. The <see
          cref="T:System.Web.UI.WebControls.Wizard" />
 
@@ -335,8 +369,12 @@
 
         
 
+        
+
          control maintains its state between steps, so the data entered on a step does not need to be persisted to a data store until all the steps of the <see
          cref="T:System.Web.UI.WebControls.Wizard" />
+
+        
 
         
 
@@ -352,6 +390,8 @@
 
         
 
+        
+
          event is raised, you should set the <see
          cref="P:System.Web.UI.WebControls.WizardStepBase.AllowReturn" />
 
@@ -359,8 +399,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+        
 
         
 
@@ -382,8 +426,12 @@
 
         
 
+        
+
          control inherits the following command names from the <see
          cref="T:System.Web.UI.WebControls.View" />
+
+        
 
         
 
@@ -396,8 +444,12 @@
 
         
 
+        
+
          class: <see
          cref="F:System.Web.UI.WebControls.MultiView.NextViewCommandName" />
+
+        
 
         
 
@@ -410,8 +462,12 @@
 
         
 
+        
+
         , <see
          cref="F:System.Web.UI.WebControls.MultiView.SwitchViewByIDCommandName" />
+
+        
 
         
 
@@ -424,8 +480,12 @@
 
         
 
+        
+
         . The Wizard control ignores these command names and does not include any special logic to enable these commands to automatically work for navigation. If a command name is removed or is missing from a button in the <see
          cref="T:System.Web.UI.WebControls.Wizard" />
+
+        
 
         
 
@@ -438,8 +498,12 @@
 
         
 
+        
+
          button is missing a value for <see
          cref="P:System.Web.UI.WebControls.Button.CommandName" />
+
+        
 
         
 
@@ -461,8 +525,12 @@
 
         
 
+        
+
          method or the <see
          cref="P:System.Web.UI.WebControls.Wizard.ActiveStepIndex" />
+
+        
 
         
 
@@ -475,12 +543,16 @@
 
         
 
+        
+
          control.</para
       >
       <block subset="none" type="note">
         <para
           >If you programmatically add a <see
            cref="T:System.Web.UI.WebControls.WizardStep" />
+
+          
 
           
 
@@ -503,8 +575,12 @@
 
         
 
+        
+
          control is fully customizable through templates, skins, and style settings. For example, you can use the <see
          cref="P:System.Web.UI.WebControls.Wizard.HeaderTemplate" />
+
+        
 
         
 
@@ -517,8 +593,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Web.UI.WebControls.Wizard.StartNavigationTemplate" />
+
+        
 
         
 
@@ -531,6 +611,8 @@
 
         
 
+        
+
         , and <see
          cref="P:System.Web.UI.WebControls.Wizard.StepNavigationTemplate" />
 
@@ -538,8 +620,12 @@
 
         
 
+        
+
          properties to customize the interface of the <see
          cref="T:System.Web.UI.WebControls.Wizard" />
+
+        
 
         
 
@@ -556,8 +642,12 @@
 
           
 
+          
+
           , <see
            cref="P:System.Web.UI.WebControls.Wizard.DisplaySideBar" />
+
+          
 
           
 
@@ -570,8 +660,12 @@
 
           
 
+          
+
           , <see
            cref="P:System.Web.UI.WebControls.Wizard.SideBarTemplate" />
+
+          
 
           
 
@@ -584,8 +678,12 @@
 
           
 
+          
+
           , or <see
            cref="P:System.Web.UI.WebControls.Wizard.StepNavigationTemplate" />
+
+          
 
           
 
@@ -598,8 +696,12 @@
 
           
 
+          
+
            control. As a result, the view state for the child controls is lost in the process. To avoid this situation, explicitly maintain the control state of the <see
            cref="T:System.Web.UI.WebControls.Wizard" />
+
+          
 
           
 
@@ -616,8 +718,12 @@
 
         
 
+        
+
          control does not support special Microsoft Internet Explorer rendering for non-standard or quirks mode. To get the best Internet Explorer rendering using the <see
          cref="T:System.Web.UI.WebControls.Wizard" />
+
+        
 
         
 
@@ -639,6 +745,8 @@
 
         
 
+        
+
          control lets you specify the layout of the control without requiring you to use an HTML table element. Instead, you can use a LayoutTemplate element to specify the layout. In the template, you create placeholder controls to indicate where items should be dynamically inserted into the control. (This is similar to how the template model for the <see
          cref="T:System.Web.UI.WebControls.ListView" />
 
@@ -646,8 +754,12 @@
 
         
 
+        
+
          control works.) For more information, see the <see
          cref="P:System.Web.UI.WebControls.Wizard.LayoutTemplate" />
+
+        
 
         
 
@@ -673,10 +785,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0">ASP.NET Controls and Accessibility</a>
         </format>
+
+        
 
         
 
@@ -703,6 +819,8 @@
 
         
 
+        
+
         |None|Dotted|Dashed|Solid|Double|Groove|Ridge|
         Inset|Outset"
     BorderWidth="size"
@@ -710,6 +828,8 @@
     CancelButtonText="string"
     CancelButtonType="<codeFeaturedElement
         >Button</codeFeaturedElement>
+
+        
 
         
 
@@ -727,9 +847,13 @@
 
         
 
+        
+
         "
     DisplaySideBar="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -743,9 +867,13 @@
 
         
 
+        
+
         |False"
     EnableTheming="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -759,11 +887,15 @@
 
         
 
+        
+
         |False"
     FinishCompleteButtonImageUrl="uri"
     FinishCompleteButtonText="string"
     FinishCompleteButtonType="<codeFeaturedElement
         >Button</codeFeaturedElement>
+
+        
 
         
 
@@ -780,9 +912,13 @@
 
         
 
+        
+
         |Image|Link"
     Font-Bold="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -796,10 +932,14 @@
 
         
 
+        
+
         "
     Font-Names="string"
     Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -815,9 +955,13 @@
 
         
 
+        
+
         "
     Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -852,11 +996,15 @@
 
         
 
+        
+
         |Image|Link"
     StepNextButtonImageUrl="uri"
     StepNextButtonText="string"
     StepNextButtonType="<codeFeaturedElement
         >Button</codeFeaturedElement>
+
+        
 
         
 
@@ -872,12 +1020,16 @@
 
         
 
+        
+
         |Image|Link"
     Style="string"
     TabIndex="integer"
     ToolTip="string"
     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -922,6 +1074,8 @@
 
         
 
+        
+
         |False"
                     ContentTemplateContainer="string"
                     EnableTheming="<codeFeaturedElement
@@ -931,9 +1085,13 @@
 
         
 
+        
+
         |False"
                     EnableViewState="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -958,10 +1116,14 @@
 
         
 
+        
+
         |Complete|Finish|Start|Step"
                     Title="string"
                     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -984,6 +1146,8 @@
 
         
 
+        
+
         |False"
                     EnableTheming="<codeFeaturedElement
         >True</codeFeaturedElement>
@@ -992,9 +1156,13 @@
 
         
 
+        
+
         |False"
                     EnableViewState="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -1019,10 +1187,14 @@
 
         
 
+        
+
         |Complete|Finish|Start|Step"
                     Title="string"
                     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -1056,8 +1228,12 @@
 
             
 
+            
+
              constructor to create and initialize a new instance of the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -1071,6 +1247,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -1114,8 +1292,12 @@
 
             
 
+            
+
              property returns the <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 
@@ -1128,8 +1310,12 @@
 
             
 
+            
+
              control. The <see
              cref="P:System.Web.UI.WebControls.Wizard.ActiveStep" />
+
+            
 
             
 
@@ -1142,8 +1328,12 @@
 
             
 
+            
+
              property to access the properties of the current <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 
@@ -1156,8 +1346,12 @@
 
             
 
+            
+
              property to dynamically change the <see
              cref="P:System.Web.UI.WebControls.Wizard.ActiveStep" />
+
+            
 
             
 
@@ -1170,6 +1364,8 @@
 
             
 
+            
+
              object. Alternatively, you can use the <see
              cref="M:System.Web.UI.WebControls.Wizard.MoveTo(System.Web.UI.WebControls.WizardStepBase)" />
 
@@ -1177,8 +1373,12 @@
 
             
 
+            
+
              method to dynamically set the <see
              cref="P:System.Web.UI.WebControls.Wizard.ActiveStep" />
+
+            
 
             
 
@@ -1192,6 +1392,8 @@
           <para
             >Gets the step in the <see
              cref="P:System.Web.UI.WebControls.Wizard.WizardSteps" />
+
+            
 
             
 
@@ -1223,8 +1425,12 @@
 
             
 
+            
+
              event is raised when the current step that is displayed in the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -1237,8 +1443,12 @@
 
             
 
+            
+
              event to provide additional processing when the current step of the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -1251,6 +1461,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1295,8 +1507,12 @@
 
             
 
+            
+
              property provides the zero-based index of the <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 
@@ -1309,8 +1525,12 @@
 
             
 
+            
+
              control. You can programmatically set the <see
              cref="P:System.Web.UI.WebControls.Wizard.ActiveStepIndex" />
+
+            
 
             
 
@@ -1327,8 +1547,12 @@
 
               
 
+              
+
                is persisted in Source view. If you change the <see
                cref="P:System.Web.UI.WebControls.Wizard.WizardSteps" />
+
+              
 
               
 
@@ -1341,12 +1565,16 @@
 
               
 
+              
+
                might be pointing to a different step.</para
             >
           </block>
           <para
             >If you set the value of <see
              cref="P:System.Web.UI.WebControls.Wizard.ActiveStepIndex" />
+
+            
 
             
 
@@ -1364,6 +1592,8 @@
 
                 
 
+                
+
                  to -1 or set it to -1 as a default value, the control will always try to render the first step in the wizard.</para
               >
             </item>
@@ -1371,6 +1601,8 @@
               <para
                 >If you programmatically set <see
                  cref="P:System.Web.UI.WebControls.Wizard.ActiveStepIndex" />
+
+                
 
                 
 
@@ -1388,10 +1620,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -1405,6 +1641,8 @@
           <para
             >Gets or sets the index of the current <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 
@@ -1442,8 +1680,12 @@
 
             
 
+            
+
              method can be accessed from a derived class only because of its protected modifier. In a derived class, you can use the <see
              cref="M:System.Web.UI.WebControls.Wizard.AllowNavigationToStep(System.Int32)" />
+
+            
 
             
 
@@ -1456,8 +1698,12 @@
 
             
 
+            
+
              property. The <see
              cref="M:System.Web.UI.WebControls.Wizard.AllowNavigationToStep(System.Int32)" />
+
+            
 
             
 
@@ -1470,8 +1716,12 @@
 
             
 
+            
+
              object that has already been accessed and has its <see
              cref="P:System.Web.UI.WebControls.WizardStepBase.AllowReturn" />
+
+            
 
             
 
@@ -1490,8 +1740,12 @@
 
             
 
+            
+
              property can be set to the <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 
@@ -1510,8 +1764,12 @@
 
             
 
+            
+
              that has already been accessed and its <see
              cref="P:System.Web.UI.WebControls.WizardStepBase.AllowReturn" />
+
+            
 
             
 
@@ -1527,8 +1785,12 @@
 
           
 
+          
+
           The index of the <see
            cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+          
 
           
 
@@ -1559,8 +1821,12 @@
 
             
 
+            
+
              event is raised when the <ui
             >Cancel</ui>
+
+            
 
             
 
@@ -1573,6 +1839,8 @@
 
             
 
+            
+
              control is clicked. Use the <see
              cref="E:System.Web.UI.WebControls.Wizard.CancelButtonClick" />
 
@@ -1580,8 +1848,12 @@
 
             
 
+            
+
              event to provide additional processing when the <ui
             >Cancel</ui>
+
+            
 
             
 
@@ -1599,6 +1871,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1607,6 +1881,8 @@
           <para
             >Occurs when the <ui
             >Cancel</ui>
+
+            
 
             
 
@@ -1638,8 +1914,12 @@
 
             
 
+            
+
              field is used primarily by control developers. The value for the <see
              cref="F:System.Web.UI.WebControls.Wizard.CancelButtonID" />
+
+            
 
             
 
@@ -1653,6 +1933,8 @@
           <para
             >Specifies the identifier for the <ui
             >Cancel</ui>
+
+            
 
             
 
@@ -1699,8 +1981,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Web.UI.WebControls.ButtonType.Image" />
+
+            
 
             
 
@@ -1713,8 +1999,12 @@
 
             
 
+            
+
              property to specify the image to display for the <ui
             >Cancel</ui>
+
+            
 
             
 
@@ -1728,6 +2018,8 @@
           <para
             >Gets or sets the URL of the image displayed for the <ui
             >Cancel</ui>
+
+            
 
             
 
@@ -1777,8 +2069,12 @@
 
             
 
+            
+
              property defines the appearance for the <ui
             >Cancel</ui>
+
+            
 
             
 
@@ -1791,8 +2087,12 @@
 
             
 
+            
+
              control. The <see
              cref="P:System.Web.UI.WebControls.Wizard.CancelButtonStyle" />
+
+            
 
             
 
@@ -1805,6 +2105,8 @@
 
             
 
+            
+
              object that it returns. You can set these properties declaratively in the form Property-Subproperty, where <paramref
              name="Subproperty" />
 
@@ -1812,8 +2114,12 @@
 
             
 
+            
+
              represents a property of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -1829,8 +2135,12 @@
 
             
 
+            
+
              property are merged with the style settings for the <see
              cref="P:System.Web.UI.WebControls.Wizard.NavigationButtonStyle" />
+
+            
 
             
 
@@ -1843,8 +2153,12 @@
 
             
 
+            
+
              property overrides the corresponding setting in the <see
              cref="P:System.Web.UI.WebControls.Wizard.NavigationButtonStyle" />
+
+            
 
             
 
@@ -1858,6 +2172,8 @@
           <para
             >Gets a reference to a collection of style properties that define the appearance of the <ui
             >Cancel</ui>
+
+            
 
             
 
@@ -1895,8 +2211,12 @@
 
             
 
+            
+
              property contains the text that is displayed for the <ui
             >Cancel</ui>
+
+            
 
             
 
@@ -1909,8 +2229,12 @@
 
             
 
+            
+
              control. Depending on the value of the <see
              cref="P:System.Web.UI.WebControls.Wizard.CancelButtonType" />
+
+            
 
             
 
@@ -1923,6 +2247,8 @@
 
             
 
+            
+
              property can appear as text on a button, as text displayed as an alternative to an image, or as the text of a link. The following table lists the <see
              cref="P:System.Web.UI.WebControls.Wizard.CancelButtonType" />
 
@@ -1930,8 +2256,12 @@
 
             
 
+            
+
              values and their respective effects on the <ui
             >Cancel</ui>
+
+            
 
             
 
@@ -1973,12 +2303,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -1992,6 +2326,8 @@
           <para
             >Gets or sets the text caption that is displayed for the <ui
             >Cancel</ui>
+
+            
 
             
 
@@ -2033,6 +2369,8 @@
 
             
 
+            
+
              button.</para
           >
         </summary>
@@ -2059,8 +2397,12 @@
 
             
 
+            
+
              field is used primarily by control developers. The value for the <see
              cref="F:System.Web.UI.WebControls.Wizard.CancelCommandName" />
+
+            
 
             
 
@@ -2074,6 +2416,8 @@
           <para
             >Retrieves the command name for the <ui
             >Cancel</ui>
+
+            
 
             
 
@@ -2120,8 +2464,12 @@
 
             
 
+            
+
              property specifies the step that is displayed when the user clicks the <ui
             >Cancel</ui>
+
+            
 
             
 
@@ -2134,8 +2482,12 @@
 
             
 
+            
+
              control. If the <see
              cref="P:System.Web.UI.WebControls.Wizard.DisplayCancelButton" />
+
+            
 
             
 
@@ -2148,8 +2500,12 @@
 
             
 
+            
+
              property is not set, the Web page is refreshed and the <see
              cref="M:System.Web.UI.WebControls.Wizard.OnCancelButtonClick(System.EventArgs)" />
+
+            
 
             
 
@@ -2165,10 +2521,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -2182,6 +2542,8 @@
           <para
             >Gets or sets the URL that the user is directed to when they click the <ui
             >Cancel</ui>
+
+            
 
             
 
@@ -2219,6 +2581,8 @@
 
             
 
+            
+
              property to control the spacing between the contents of a cell and the cell border. The padding amount that is specified is added to all four sides of the cell. All cells in a column share the same cell width; therefore, the spacing is applied to the widest cell in the column. Similarly, all cells in the same row share the same cell height. Thus, the spacing is applied to the tallest cell in the row. Individual cell sizes cannot be specified.</para
           >
         </remarks>
@@ -2250,6 +2614,8 @@
           <para
             >Use the <see
              cref="P:System.Web.UI.WebControls.Wizard.CellSpacing" />
+
+            
 
             
 
@@ -2371,8 +2737,12 @@
 
             
 
+            
+
              field is used primarily by control developers. The value for the <see
              cref="F:System.Web.UI.WebControls.Wizard.CustomFinishButtonID" />
+
+            
 
             
 
@@ -2386,6 +2756,8 @@
           <para
             >Retrieves the identifier for a custom <ui
             >Finish</ui>
+
+            
 
             
 
@@ -2417,8 +2789,12 @@
 
             
 
+            
+
              field is used primarily by control developers. The value for the <see
              cref="F:System.Web.UI.WebControls.Wizard.CustomNextButtonID" />
+
+            
 
             
 
@@ -2432,6 +2808,8 @@
           <para
             >Retrieves the identifier for a custom <ui
             >Next</ui>
+
+            
 
             
 
@@ -2466,8 +2844,12 @@
 
             
 
+            
+
              field is used primarily by control developers. The value for the <see
              cref="F:System.Web.UI.WebControls.Wizard.CustomPreviousButtonID" />
+
+            
 
             
 
@@ -2481,6 +2863,8 @@
           <para
             >Retrieves the identifier for a custom <ui
             >Previous</ui>
+
+            
 
             
 
@@ -2512,8 +2896,12 @@
 
             
 
+            
+
              field is used primarily by control developers. The value for the <see
              cref="F:System.Web.UI.WebControls.Wizard.DataListID" />
+
+            
 
             
 
@@ -2527,6 +2915,8 @@
           <para
             >Retrieves the identifier for the sidebar <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -2571,6 +2961,8 @@
 
             
 
+            
+
              button.</para
           >
         </summary>
@@ -2606,6 +2998,8 @@
 
             
 
+            
+
              control depending on whether this property is set to true or false. When this property value is set to true and the sidebar is displayed, cell spacing is not applied to the HeadCell, StepCell, or NavigationCell elements of the control's table. When this value is false, cell spacing is applied. This may affect how the control is rendered.</para
           >
         </remarks>
@@ -2614,6 +3008,8 @@
           <para
             >Gets or sets a Boolean value indicating whether to display the sidebar area on the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -2648,8 +3044,12 @@
 
             
 
+            
+
              event is raised when the <ui
             >Finish</ui>
+
+            
 
             
 
@@ -2662,6 +3062,8 @@
 
             
 
+            
+
              control is clicked. Use the <see
              cref="E:System.Web.UI.WebControls.Wizard.FinishButtonClick" />
 
@@ -2669,8 +3071,12 @@
 
             
 
+            
+
              event to provide additional processing when the <ui
             >Finish</ui>
+
+            
 
             
 
@@ -2688,6 +3094,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -2696,6 +3104,8 @@
           <para
             >Occurs when the <ui
             >Finish</ui>
+
+            
 
             
 
@@ -2727,8 +3137,12 @@
 
             
 
+            
+
              field is used primarily by control developers. The value for the <see
              cref="F:System.Web.UI.WebControls.Wizard.FinishButtonID" />
+
+            
 
             
 
@@ -2742,6 +3156,8 @@
           <para
             >Retrieves the identifier for the <ui
             >Finish</ui>
+
+            
 
             
 
@@ -2788,8 +3204,12 @@
 
             
 
+            
+
              property is set to the <see
              cref="F:System.Web.UI.WebControls.ButtonType.Image" />
+
+            
 
             
 
@@ -2802,8 +3222,12 @@
 
             
 
+            
+
              property to specify the image to display for the <ui
             >Finish</ui>
+
+            
 
             
 
@@ -2817,6 +3241,8 @@
           <para
             >Gets or sets the URL of the image that is displayed for the <ui
             >Finish</ui>
+
+            
 
             
 
@@ -2866,8 +3292,12 @@
 
             
 
+            
+
              property defines the appearance for the <ui
             >Finish</ui>
+
+            
 
             
 
@@ -2880,8 +3310,12 @@
 
             
 
+            
+
              control. The <see
              cref="P:System.Web.UI.WebControls.Wizard.FinishCompleteButtonStyle" />
+
+            
 
             
 
@@ -2894,6 +3328,8 @@
 
             
 
+            
+
              object that it returns. You can set these properties declaratively in the form Property-Subproperty, where <paramref
              name="Subproperty" />
 
@@ -2901,8 +3337,12 @@
 
             
 
+            
+
              represents a property of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -2918,8 +3358,12 @@
 
             
 
+            
+
              property are merged with the style settings for the <see
              cref="P:System.Web.UI.WebControls.Wizard.NavigationButtonStyle" />
+
+            
 
             
 
@@ -2932,8 +3376,12 @@
 
             
 
+            
+
              property overrides the corresponding setting in the <see
              cref="P:System.Web.UI.WebControls.Wizard.NavigationButtonStyle" />
+
+            
 
             
 
@@ -2952,8 +3400,12 @@
 
             
 
+            
+
              object that defines the settings for the <ui
             >Finish</ui>
+
+            
 
             
 
@@ -2994,8 +3446,12 @@
 
             
 
+            
+
              property contains the text that is displayed for the <ui
             >Finish</ui>
+
+            
 
             
 
@@ -3008,8 +3464,12 @@
 
             
 
+            
+
              control. Depending on the value of the <see
              cref="P:System.Web.UI.WebControls.Wizard.FinishCompleteButtonType" />
+
+            
 
             
 
@@ -3022,6 +3482,8 @@
 
             
 
+            
+
              property can appear as text on a button, as text displayed as an alternative to an image in browsers that do not render images, or as the text of a link. The following table lists the field values for the <see
              cref="P:System.Web.UI.WebControls.Wizard.FinishCompleteButtonType" />
 
@@ -3029,8 +3491,12 @@
 
             
 
+            
+
              property and the respective effect of each on the <ui
             >Finish</ui>
+
+            
 
             
 
@@ -3072,12 +3538,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -3091,6 +3561,8 @@
           <para
             >Gets or sets the text caption that is displayed for the <ui
             >Finish</ui>
+
+            
 
             
 
@@ -3127,6 +3599,8 @@
           <para
             >Gets or sets the type of button that is rendered as the <ui
             >Finish</ui>
+
+            
 
             
 
@@ -3173,6 +3647,8 @@
 
             
 
+            
+
              property specifies the step that is displayed when the user clicks the <ui
             >Finish</ui>
 
@@ -3180,8 +3656,12 @@
 
             
 
+            
+
              button on the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -3197,10 +3677,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -3214,6 +3698,8 @@
           <para
             >Gets or sets the URL that the user is redirected to when they click the <ui
             >Finish</ui>
+
+            
 
             
 
@@ -3263,8 +3749,12 @@
 
             
 
+            
+
              property to specify the custom content that is displayed for the navigation area on the <see
              cref="F:System.Web.UI.WebControls.WizardStepType.Finish" />
+
+            
 
             
 
@@ -3277,8 +3767,12 @@
 
             
 
+            
+
              control. Define the content by creating a template that specifies how the navigation area is rendered on the <see
              cref="F:System.Web.UI.WebControls.WizardStepType.Finish" />
+
+            
 
             
 
@@ -3294,6 +3788,8 @@
 
             
 
+            
+
              object. You can add custom content to the <see
              cref="P:System.Web.UI.WebControls.Wizard.FinishNavigationTemplate" />
 
@@ -3301,8 +3797,12 @@
 
             
 
+            
+
              object either by using template-editing mode in design view or by defining the <see
              cref="P:System.Web.UI.WebControls.Wizard.FinishNavigationTemplate" />
+
+            
 
             
 
@@ -3319,8 +3819,12 @@
 
               
 
+              
+
                object that is contained in the <see
                cref="P:System.Web.UI.WebControls.Wizard.FinishNavigationTemplate" />
+
+              
 
               
 
@@ -3333,6 +3837,8 @@
 
               
 
+              
+
                controls, one with its <see
                cref="P:System.Web.UI.WebControls.IButtonControl.CommandName" />
 
@@ -3340,8 +3846,12 @@
 
               
 
+              
+
                property set to "MoveComplete" and the other with its <see
                cref="P:System.Web.UI.WebControls.IButtonControl.CommandName" />
+
+              
 
               
 
@@ -3358,8 +3868,12 @@
 
             
 
+            
+
              collection of the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -3372,6 +3886,8 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
 
@@ -3379,8 +3895,12 @@
 
             
 
+            
+
              object to find the control, if the control has an <see
              cref="P:System.Web.UI.Control.ID" />
+
+            
 
             
 
@@ -3394,6 +3914,8 @@
           <para
             >Gets or sets the template that is used to display the navigation area on the <see
              cref="F:System.Web.UI.WebControls.WizardStepType.Finish" />
+
+            
 
             
 
@@ -3428,8 +3950,12 @@
 
             
 
+            
+
              field is used primarily by control developers. The value for the <see
              cref="F:System.Web.UI.WebControls.Wizard.FinishPreviousButtonID" />
+
+            
 
             
 
@@ -3448,8 +3974,12 @@
 
             
 
+            
+
              button on the <see
              cref="F:System.Web.UI.WebControls.WizardStepType.Finish" />
+
+            
 
             
 
@@ -3496,8 +4026,12 @@
 
             
 
+            
+
              property is set to the <see
              cref="F:System.Web.UI.WebControls.ButtonType.Image" />
+
+            
 
             
 
@@ -3510,6 +4044,8 @@
 
             
 
+            
+
              property to specify the image to display for the <ui
             >Previous</ui>
 
@@ -3517,8 +4053,12 @@
 
             
 
+            
+
              button on the <see
              cref="F:System.Web.UI.WebControls.WizardStepType.Finish" />
+
+            
 
             
 
@@ -3537,8 +4077,12 @@
 
             
 
+            
+
              button on the <see
              cref="F:System.Web.UI.WebControls.WizardStepType.Finish" />
+
+            
 
             
 
@@ -3588,8 +4132,12 @@
 
             
 
+            
+
              property defines the appearance for the <ui
             >Previous</ui>
+
+            
 
             
 
@@ -3602,8 +4150,12 @@
 
             
 
+            
+
              step of the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -3616,8 +4168,12 @@
 
             
 
+            
+
              property is read-only; however, you can set the properties of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -3630,8 +4186,12 @@
 
             
 
+            
+
              represents a property of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -3647,8 +4207,12 @@
 
             
 
+            
+
              property are merged with the style settings for the <see
              cref="P:System.Web.UI.WebControls.Wizard.NavigationButtonStyle" />
+
+            
 
             
 
@@ -3661,8 +4225,12 @@
 
             
 
+            
+
              property overrides the corresponding setting in the <see
              cref="P:System.Web.UI.WebControls.Wizard.NavigationButtonStyle" />
+
+            
 
             
 
@@ -3681,6 +4249,8 @@
 
             
 
+            
+
              object that defines the settings for the <ui
             >Previous</ui>
 
@@ -3688,8 +4258,12 @@
 
             
 
+            
+
              button on the <see
              cref="F:System.Web.UI.WebControls.WizardStepType.Finish" />
+
+            
 
             
 
@@ -3730,8 +4304,12 @@
 
             
 
+            
+
              property contains the text that is displayed for the <ui
             >Previous</ui>
+
+            
 
             
 
@@ -3744,8 +4322,12 @@
 
             
 
+            
+
              step of the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -3758,8 +4340,12 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Web.UI.WebControls.Wizard.FinishPreviousButtonText" />
+
+            
 
             
 
@@ -3772,8 +4358,12 @@
 
             
 
+            
+
              property field values and the respective effects on the <ui
             >Previous</ui>
+
+            
 
             
 
@@ -3815,12 +4405,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -3839,8 +4433,12 @@
 
             
 
+            
+
              button on the <see
              cref="F:System.Web.UI.WebControls.WizardStepType.Finish" />
+
+            
 
             
 
@@ -3882,8 +4480,12 @@
 
             
 
+            
+
              button on the <see
              cref="F:System.Web.UI.WebControls.WizardStepType.Finish" />
+
+            
 
             
 
@@ -3939,8 +4541,12 @@
 
             
 
+            
+
              method returns a collection containing the <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 
@@ -3953,6 +4559,8 @@
 
             
 
+            
+
              objects are arranged in the order in which they were accessed: the first item in the collection is the previous <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
@@ -3960,8 +4568,12 @@
 
             
 
+            
+
              object, the second item in the collection is the <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 
@@ -3980,6 +4592,8 @@
 
             
 
+            
+
              objects that have been accessed.</para
           >
         </summary>
@@ -3993,8 +4607,12 @@
 
             
 
+            
+
              containing the <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 
@@ -4033,6 +4651,8 @@
 
             
 
+            
+
              method to determine the <see
              cref="T:System.Web.UI.WebControls.WizardStepType" />
 
@@ -4040,8 +4660,12 @@
 
             
 
+            
+
              value of the specified <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 
@@ -4060,8 +4684,12 @@
 
             
 
+            
+
              value for the specified <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 
@@ -4080,11 +4708,15 @@
 
             
 
+            
+
              values.</para
           >
         </returns>
         <param name="wizardStep">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4097,8 +4729,12 @@
 
           
 
+          
+
            for which the associated <see
            cref="T:System.Web.UI.WebControls.WizardStepType" />
+
+          
 
           
 
@@ -4113,6 +4749,8 @@
 
           
 
+          
+
           The index of the <see
            cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
@@ -4120,8 +4758,12 @@
 
           
 
+          
+
            for which the associated <see
            cref="T:System.Web.UI.WebControls.WizardStepType" />
+
+          
 
           
 
@@ -4170,8 +4812,12 @@
 
             
 
+            
+
              property defines the appearance for the header area on the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -4184,8 +4830,12 @@
 
             
 
+            
+
              property is read-only; however, you can set the properties of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -4198,8 +4848,12 @@
 
             
 
+            
+
              represents a property of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -4214,6 +4868,8 @@
           <para
             >Gets a reference to a <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -4263,8 +4919,12 @@
 
             
 
+            
+
              property to specify the custom content that is displayed for the header area on a <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -4280,6 +4940,8 @@
 
             
 
+            
+
              object. You can add custom content to the <see
              cref="P:System.Web.UI.WebControls.Wizard.HeaderTemplate" />
 
@@ -4287,8 +4949,12 @@
 
             
 
+            
+
              object either by using template-editing mode in design view or by defining the <see
              cref="P:System.Web.UI.WebControls.Wizard.HeaderTemplate" />
+
+            
 
             
 
@@ -4304,8 +4970,12 @@
 
             
 
+            
+
              collection of the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -4318,6 +4988,8 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
 
@@ -4325,8 +4997,12 @@
 
             
 
+            
+
              object to find the control, if the control has an <see
              cref="P:System.Web.UI.Control.ID" />
+
+            
 
             
 
@@ -4371,8 +5047,12 @@
 
             
 
+            
+
              property defines the text caption that is displayed for the header area on the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -4388,6 +5068,8 @@
 
             
 
+            
+
              property. Alternatively, you can define your own custom UI for the header row by setting the <see
              cref="P:System.Web.UI.WebControls.Wizard.HeaderTemplate" />
 
@@ -4395,8 +5077,12 @@
 
             
 
+            
+
              property instead of the <see
              cref="P:System.Web.UI.WebControls.Wizard.HeaderText" />
+
+            
 
             
 
@@ -4413,6 +5099,8 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.Wizard.HeaderTemplate" />
 
@@ -4420,8 +5108,12 @@
 
               
 
+              
+
                properties are defined, the <see
                cref="P:System.Web.UI.WebControls.Wizard.HeaderText" />
+
+              
 
               
 
@@ -4438,12 +5130,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -4511,6 +5207,8 @@
 
           
 
+          
+
           The control state to be restored.</param
         >
       </Docs>
@@ -4539,8 +5237,12 @@
 
             
 
+            
+
              field is used primarily by control developers. The value for the <see
              cref="F:System.Web.UI.WebControls.Wizard.MoveCompleteCommandName" />
+
+            
 
             
 
@@ -4554,6 +5256,8 @@
           <para
             >Retrieves the command name that is associated with the <ui
             >Finish</ui>
+
+            
 
             
 
@@ -4585,8 +5289,12 @@
 
             
 
+            
+
              field is used primarily by control developers. The value for the <see
              cref="F:System.Web.UI.WebControls.Wizard.MoveNextCommandName" />
+
+            
 
             
 
@@ -4600,6 +5308,8 @@
           <para
             >Retrieves the command name that is associated with the <ui
             >Next</ui>
+
+            
 
             
 
@@ -4634,8 +5344,12 @@
 
             
 
+            
+
              field is used primarily by control developers. The value for the <see
              cref="F:System.Web.UI.WebControls.Wizard.MovePreviousCommandName" />
+
+            
 
             
 
@@ -4649,6 +5363,8 @@
           <para
             >Retrieves the command name that is associated with the <ui
             >Previous</ui>
+
+            
 
             
 
@@ -4686,8 +5402,12 @@
 
             
 
+            
+
              method to control which <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 
@@ -4700,6 +5420,8 @@
 
             
 
+            
+
              property in the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
 
@@ -4707,8 +5429,12 @@
 
             
 
+            
+
              control programmatically. This way, you can change the <see
              cref="P:System.Web.UI.WebControls.Wizard.ActiveStep" />
+
+            
 
             
 
@@ -4727,6 +5453,8 @@
 
             
 
+            
+
             -derived object as the value for the <see
              cref="P:System.Web.UI.WebControls.Wizard.ActiveStep" />
 
@@ -4734,8 +5462,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -4751,6 +5483,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.WizardStepBase" />
 
@@ -4758,8 +5492,12 @@
 
           
 
+          
+
           -derived object to set as the <see
            cref="P:System.Web.UI.WebControls.Wizard.ActiveStep" />
+
+          
 
           
 
@@ -4790,8 +5528,12 @@
 
             
 
+            
+
              field is used primarily by control developers. The value for the <see
              cref="F:System.Web.UI.WebControls.Wizard.MoveToCommandName" />
+
+            
 
             
 
@@ -4845,8 +5587,12 @@
 
             
 
+            
+
              property defines the appearance for the buttons in the navigation area on the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -4859,8 +5605,12 @@
 
             
 
+            
+
              property is read-only; however, you can set the properties of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -4873,8 +5623,12 @@
 
             
 
+            
+
              represents a property of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -4890,8 +5644,12 @@
 
             
 
+            
+
              property are merged with the individual button styles. Any setting that is applied in the individual button style properties overrides the corresponding setting in the <see
              cref="P:System.Web.UI.WebControls.Wizard.NavigationButtonStyle" />
+
+            
 
             
 
@@ -4904,8 +5662,12 @@
 
             
 
+            
+
              property override the settings of the <see
              cref="P:System.Web.UI.WebControls.Wizard.NavigationButtonStyle" />
+
+            
 
             
 
@@ -4916,6 +5678,8 @@
           <para
             >The following <see
              cref="P:System.Web.UI.WebControls.Wizard.NavigationButtonStyle" />
+
+            
 
             
 
@@ -4976,6 +5740,8 @@
 
             
 
+            
+
              object that defines the settings for the buttons in the navigation area on the control.</para
           >
         </summary>
@@ -5020,8 +5786,12 @@
 
             
 
+            
+
              property defines the appearance for the navigation area on the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -5034,8 +5804,12 @@
 
             
 
+            
+
              property is read-only; however, you can set the properties of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -5048,8 +5822,12 @@
 
             
 
+            
+
              represents a property of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -5066,8 +5844,12 @@
 
             
 
+            
+
              property are merged with the style settings for the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -5080,8 +5862,12 @@
 
             
 
+            
+
              property override the corresponding settings in the properties of the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -5097,8 +5883,12 @@
 
             
 
+            
+
              style properties are overridden by the <see
              cref="P:System.Web.UI.WebControls.Wizard.NavigationStyle" />
+
+            
 
             
 
@@ -5159,6 +5949,8 @@
 
             
 
+            
+
              object that defines the settings for the navigation area on the control.</para
           >
         </summary>
@@ -5188,8 +5980,12 @@
 
             
 
+            
+
              event is raised when the <ui
             >Next</ui>
+
+            
 
             
 
@@ -5202,6 +5998,8 @@
 
             
 
+            
+
              control is clicked. Use the <see
              cref="E:System.Web.UI.WebControls.Wizard.NextButtonClick" />
 
@@ -5209,8 +6007,12 @@
 
             
 
+            
+
              event to provide additional processing when the <ui
             >Next</ui>
+
+            
 
             
 
@@ -5228,6 +6030,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -5236,6 +6040,8 @@
           <para
             >Occurs when the <ui
             >Next</ui>
+
+            
 
             
 
@@ -5274,8 +6080,12 @@
 
             
 
+            
+
              method raises the <see
              cref="E:System.Web.UI.WebControls.Wizard.ActiveStepChanged" />
+
+            
 
             
 
@@ -5288,8 +6098,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -5302,8 +6116,12 @@
 
             
 
+            
+
              event to provide additional processing when the current step that is displayed in the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -5321,11 +6139,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.Wizard.OnActiveStepChanged(System.Object,System.EventArgs)" />
+
+            
 
             
 
@@ -5344,11 +6166,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5363,8 +6189,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5408,10 +6238,14 @@
 
           
 
+          
+
           The source of the event.</param
         >
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5448,8 +6282,12 @@
 
             
 
+            
+
              event is raised when the <ui
             >Cancel</ui>
+
+            
 
             
 
@@ -5467,11 +6305,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.Wizard.OnCancelButtonClick(System.EventArgs)" />
+
+            
 
             
 
@@ -5490,6 +6332,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5500,8 +6344,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5538,8 +6386,12 @@
 
             
 
+            
+
              event is raised when the <ui
             >Finish</ui>
+
+            
 
             
 
@@ -5557,11 +6409,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.Wizard.OnFinishButtonClick(System.Web.UI.WebControls.WizardNavigationEventArgs)" />
+
+            
 
             
 
@@ -5580,6 +6436,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5590,8 +6448,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.WizardNavigationEventArgs" />
+
+          
 
           
 
@@ -5629,6 +6491,8 @@
 
           
 
+          
+
           The raised event.</param
         >
       </Docs>
@@ -5657,8 +6521,12 @@
 
             
 
+            
+
              event is raised when the <ui
             >Next</ui>
+
+            
 
             
 
@@ -5676,11 +6544,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.Wizard.OnNextButtonClick(System.Web.UI.WebControls.WizardNavigationEventArgs)" />
+
+            
 
             
 
@@ -5699,6 +6571,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5709,8 +6583,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.WizardNavigationEventArgs" />
+
+          
 
           
 
@@ -5747,8 +6625,12 @@
 
             
 
+            
+
              event is raised when the <ui
             >Previous</ui>
+
+            
 
             
 
@@ -5766,11 +6648,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.Wizard.OnPreviousButtonClick(System.Web.UI.WebControls.WizardNavigationEventArgs)" />
+
+            
 
             
 
@@ -5789,6 +6675,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5799,8 +6687,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.WizardNavigationEventArgs" />
+
+          
 
           
 
@@ -5837,12 +6729,16 @@
 
             
 
+            
+
              event is raised when a button on the sidebar area is clicked.</para
           >
           <block subset="none" type="note">
             <para
               >The <see
                cref="E:System.Web.UI.WebControls.Wizard.SideBarButtonClick" />
+
+              
 
               
 
@@ -5855,8 +6751,12 @@
 
               
 
+              
+
                control with the <see
                cref="P:System.Web.UI.WebControls.Button.CommandName" />
+
+              
 
               
 
@@ -5869,8 +6769,12 @@
 
               
 
+              
+
                control's sidebar list for the <see
                cref="P:System.Web.UI.WebControls.Wizard.SideBarTemplate" />
+
+              
 
               
 
@@ -5889,11 +6793,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.Wizard.OnSideBarButtonClick(System.Web.UI.WebControls.WizardNavigationEventArgs)" />
+
+            
 
             
 
@@ -5912,6 +6820,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5922,8 +6832,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.WizardNavigationEventArgs" />
+
+          
 
           
 
@@ -5957,8 +6871,12 @@
 
             
 
+            
+
              event is raised when the <ui
             >Previous</ui>
+
+            
 
             
 
@@ -5971,6 +6889,8 @@
 
             
 
+            
+
              control is clicked. Use the <see
              cref="E:System.Web.UI.WebControls.Wizard.PreviousButtonClick" />
 
@@ -5978,8 +6898,12 @@
 
             
 
+            
+
              event to provide additional processing when the <ui
             >Previous</ui>
+
+            
 
             
 
@@ -5997,6 +6921,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -6005,6 +6931,8 @@
           <para
             >Occurs when the <ui
             >Previous</ui>
+
+            
 
             
 
@@ -6045,8 +6973,12 @@
 
             
 
+            
+
              class for the specified <see
              cref="T:System.Web.UI.WebControls.IButtonControl" />
+
+            
 
             
 
@@ -6062,6 +6994,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.IButtonControl" />
 
@@ -6069,8 +7003,12 @@
 
           
 
+          
+
            for which the new instance of <see
            cref="T:System.Web.UI.WebControls.CommandEventHandler" />
+
+          
 
           
 
@@ -6103,6 +7041,8 @@
         </summary>
         <param name="writer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6178,6 +7118,8 @@
 
             
 
+            
+
              event is raised when a button in the sidebar area on the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
 
@@ -6185,8 +7127,12 @@
 
             
 
+            
+
              control is clicked. Use the <see
              cref="E:System.Web.UI.WebControls.Wizard.SideBarButtonClick" />
+
+            
 
             
 
@@ -6203,8 +7149,12 @@
 
               
 
+              
+
                event does not raise an event if a <see
                cref="T:System.Web.UI.WebControls.Button" />
+
+              
 
               
 
@@ -6217,6 +7167,8 @@
 
               
 
+              
+
                property set to Move is outside of the <see
                cref="T:System.Web.UI.WebControls.DataList" />
 
@@ -6224,8 +7176,12 @@
 
               
 
+              
+
                control's sidebar list for the <see
                cref="P:System.Web.UI.WebControls.Wizard.SideBarTemplate" />
+
+              
 
               
 
@@ -6239,6 +7195,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -6274,8 +7232,12 @@
 
             
 
+            
+
              field is used primarily by control developers. The value for the <see
              cref="F:System.Web.UI.WebControls.Wizard.SideBarButtonID" />
+
+            
 
             
 
@@ -6329,8 +7291,12 @@
 
             
 
+            
+
              property defines the appearance of the buttons on the sidebar of the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -6343,8 +7309,12 @@
 
             
 
+            
+
              property is read-only; however, you can set the properties of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -6357,8 +7327,12 @@
 
             
 
+            
+
              represents a property of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -6375,8 +7349,12 @@
 
             
 
+            
+
              property are merged with the style settings for the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -6389,8 +7367,12 @@
 
             
 
+            
+
              property override the corresponding settings in the properties of the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -6406,8 +7388,12 @@
 
             
 
+            
+
              style properties are overridden by <see
              cref="P:System.Web.UI.WebControls.Wizard.SideBarButtonStyle" />
+
+            
 
             
 
@@ -6465,8 +7451,12 @@
 
             
 
+            
+
              control sidebar, the <see
              cref="P:System.Web.UI.WebControls.Wizard.SideBarButtonStyle" />
+
+            
 
             
 
@@ -6480,6 +7470,8 @@
           <para
             >Gets a reference to a <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -6529,8 +7521,12 @@
 
             
 
+            
+
              property defines the appearance for the sidebar area on the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -6543,8 +7539,12 @@
 
             
 
+            
+
              property is read-only; however, you can set the properties of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -6557,8 +7557,12 @@
 
             
 
+            
+
              represents a property of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -6575,8 +7579,12 @@
 
             
 
+            
+
              property are merged with the style settings for the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -6589,8 +7597,12 @@
 
             
 
+            
+
              property override the corresponding settings in the properties of the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -6607,8 +7619,12 @@
 
               
 
+              
+
                is ignored if the height is set to less than the height of the wizard. Values set for <see
                cref="P:System.Web.UI.WebControls.Wizard.NavigationStyle" />
+
+              
 
               
 
@@ -6621,6 +7637,8 @@
 
               
 
+              
+
                height add to the total height of the wizard. For example, if the Wizard height is set to 500px and <see
                cref="P:System.Web.UI.WebControls.Wizard.NavigationStyle" />
 
@@ -6628,8 +7646,12 @@
 
               
 
+              
+
                height or <see
                cref="P:System.Web.UI.WebControls.Wizard.HeaderStyle" />
+
+              
 
               
 
@@ -6646,8 +7668,12 @@
 
             
 
+            
+
              style properties are overridden by <see
              cref="P:System.Web.UI.WebControls.Wizard.SideBarStyle" />
+
+            
 
             
 
@@ -6708,6 +7734,8 @@
 
             
 
+            
+
              object that defines the settings for the sidebar area on the control.</para
           >
         </summary>
@@ -6752,8 +7780,12 @@
 
             
 
+            
+
              property to specify the custom content that is displayed for the sidebar area on a <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -6769,6 +7801,8 @@
 
             
 
+            
+
              object. You can add custom content to the <see
              cref="P:System.Web.UI.WebControls.Wizard.SideBarTemplate" />
 
@@ -6776,8 +7810,12 @@
 
             
 
+            
+
              object either by using template-editing mode in design view or by defining the <see
              cref="P:System.Web.UI.WebControls.Wizard.SideBarTemplate" />
+
+            
 
             
 
@@ -6794,8 +7832,12 @@
 
               
 
+              
+
                object must contain a <see
                cref="T:System.Web.UI.WebControls.DataList" />
+
+              
 
               
 
@@ -6808,8 +7850,12 @@
 
               
 
+              
+
                control whose <see
                cref="P:System.Web.UI.Control.ID" />
+
+              
 
               
 
@@ -6822,6 +7868,8 @@
 
               
 
+              
+
                or <see
                cref="T:System.Web.UI.WebControls.ListView" />
 
@@ -6829,8 +7877,12 @@
 
               
 
+              
+
                control must contain an <see
                cref="T:System.Web.UI.WebControls.IButtonControl" />
+
+              
 
               
 
@@ -6847,8 +7899,12 @@
 
             
 
+            
+
              collection of the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -6861,6 +7917,8 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
 
@@ -6868,8 +7926,12 @@
 
             
 
+            
+
              object to find the control, if the control has an <see
              cref="P:System.Web.UI.Control.ID" />
+
+            
 
             
 
@@ -6911,6 +7973,8 @@
 
             
 
+            
+
              property to specify the alternate text for a hidden image that is read by screen readers to provide the ability to skip the content  for a sidebar area. The text that you specify provides assistive technology devices with a description of the hidden image that can be used to make the control more accessible.</para
           >
           <block subset="none" type="note">
@@ -6922,8 +7986,12 @@
 
               
 
+              
+
                property is set to false, the <see
                cref="P:System.Web.UI.WebControls.Wizard.SkipLinkText" />
+
+              
 
               
 
@@ -6940,12 +8008,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -6999,8 +8071,12 @@
 
             
 
+            
+
              property to specify the custom content that is displayed for the navigation area on the <see
              cref="F:System.Web.UI.WebControls.WizardStepType.Start" />
+
+            
 
             
 
@@ -7013,8 +8089,12 @@
 
             
 
+            
+
              control. Define the content by creating a template that specifies how the navigation area is rendered on the <see
              cref="F:System.Web.UI.WebControls.WizardStepType.Start" />
+
+            
 
             
 
@@ -7030,6 +8110,8 @@
 
             
 
+            
+
              object. You can add custom content to the <see
              cref="P:System.Web.UI.WebControls.Wizard.StartNavigationTemplate" />
 
@@ -7037,8 +8119,12 @@
 
             
 
+            
+
              object either by using template-editing mode in design view or by defining the <see
              cref="P:System.Web.UI.WebControls.Wizard.StartNavigationTemplate" />
+
+            
 
             
 
@@ -7055,8 +8141,12 @@
 
               
 
+              
+
                object that is contained in the <see
                cref="P:System.Web.UI.WebControls.Wizard.StartNavigationTemplate" />
+
+              
 
               
 
@@ -7069,8 +8159,12 @@
 
               
 
+              
+
                control with the <see
                cref="P:System.Web.UI.WebControls.IButtonControl.CommandName" />
+
+              
 
               
 
@@ -7087,8 +8181,12 @@
 
             
 
+            
+
              collection of the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -7101,6 +8199,8 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
 
@@ -7108,8 +8208,12 @@
 
             
 
+            
+
              object to find the control, if the control has an <see
              cref="P:System.Web.UI.Control.ID" />
+
+            
 
             
 
@@ -7128,8 +8232,12 @@
 
             
 
+            
+
              step of the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -7161,8 +8269,12 @@
 
             
 
+            
+
              is used primarily by control developers. The value for the <see
              cref="F:System.Web.UI.WebControls.Wizard.StartNextButtonID" />
+
+            
 
             
 
@@ -7181,8 +8293,12 @@
 
             
 
+            
+
              button on the <see
              cref="F:System.Web.UI.WebControls.WizardStepType.Start" />
+
+            
 
             
 
@@ -7229,8 +8345,12 @@
 
             
 
+            
+
              property is set to the <see
              cref="F:System.Web.UI.WebControls.ButtonType.Image" />
+
+            
 
             
 
@@ -7243,8 +8363,12 @@
 
             
 
+            
+
              property to specify the image to display for the <ui
             >Next</ui>
+
+            
 
             
 
@@ -7263,8 +8387,12 @@
 
             
 
+            
+
              button on the <see
              cref="F:System.Web.UI.WebControls.WizardStepType.Start" />
+
+            
 
             
 
@@ -7314,8 +8442,12 @@
 
             
 
+            
+
              property defines the appearance for the <ui
             >Next</ui>
+
+            
 
             
 
@@ -7328,8 +8460,12 @@
 
             
 
+            
+
              step of the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -7342,8 +8478,12 @@
 
             
 
+            
+
              property is read-only; however, you can set the properties of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -7356,8 +8496,12 @@
 
             
 
+            
+
              represents a property of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -7373,8 +8517,12 @@
 
             
 
+            
+
              property are merged with the style settings for the <see
              cref="P:System.Web.UI.WebControls.Wizard.NavigationButtonStyle" />
+
+            
 
             
 
@@ -7387,8 +8535,12 @@
 
             
 
+            
+
              property overrides the corresponding setting in the <see
              cref="P:System.Web.UI.WebControls.Wizard.NavigationButtonStyle" />
+
+            
 
             
 
@@ -7407,6 +8559,8 @@
 
             
 
+            
+
              object that defines the settings for the <ui
             >Next</ui>
 
@@ -7414,8 +8568,12 @@
 
             
 
+            
+
              button on the <see
              cref="F:System.Web.UI.WebControls.WizardStepType.Start" />
+
+            
 
             
 
@@ -7456,8 +8614,12 @@
 
             
 
+            
+
              property contains the text that is displayed for the <ui
             >Next</ui>
+
+            
 
             
 
@@ -7470,8 +8632,12 @@
 
             
 
+            
+
              step of the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -7484,8 +8650,12 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Web.UI.WebControls.Wizard.StartNextButtonText" />
+
+            
 
             
 
@@ -7498,8 +8668,12 @@
 
             
 
+            
+
              property and the respective effect of each on the <ui
             >Next</ui>
+
+            
 
             
 
@@ -7541,12 +8715,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -7565,8 +8743,12 @@
 
             
 
+            
+
              button on the <see
              cref="F:System.Web.UI.WebControls.WizardStepType.Start" />
+
+            
 
             
 
@@ -7608,8 +8790,12 @@
 
             
 
+            
+
              button on the <see
              cref="F:System.Web.UI.WebControls.WizardStepType.Start" />
+
+            
 
             
 
@@ -7659,8 +8845,12 @@
 
             
 
+            
+
              property to specify the custom content that is displayed for the navigation area on the <see
              cref="F:System.Web.UI.WebControls.WizardStepType.Step" />
+
+            
 
             
 
@@ -7673,8 +8863,12 @@
 
             
 
+            
+
              control. Define the content by creating a template that specifies how the navigation area is rendered on the <see
              cref="F:System.Web.UI.WebControls.WizardStepType.Step" />
+
+            
 
             
 
@@ -7690,6 +8884,8 @@
 
             
 
+            
+
              object. You can add custom content to the <see
              cref="P:System.Web.UI.WebControls.Wizard.StepNavigationTemplate" />
 
@@ -7697,8 +8893,12 @@
 
             
 
+            
+
              object either by using template-editing mode in design view or by defining the <see
              cref="P:System.Web.UI.WebControls.Wizard.StepNavigationTemplate" />
+
+            
 
             
 
@@ -7715,8 +8915,12 @@
 
               
 
+              
+
                object that is contained in the <see
                cref="P:System.Web.UI.WebControls.Wizard.StepNavigationTemplate" />
+
+              
 
               
 
@@ -7729,6 +8933,8 @@
 
               
 
+              
+
                controls, one with its <see
                cref="P:System.Web.UI.WebControls.IButtonControl.CommandName" />
 
@@ -7736,8 +8942,12 @@
 
               
 
+              
+
                property set to "MoveNext" and one with its <see
                cref="P:System.Web.UI.WebControls.IButtonControl.CommandName" />
+
+              
 
               
 
@@ -7754,8 +8964,12 @@
 
             
 
+            
+
              collection of the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -7768,6 +8982,8 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
 
@@ -7775,8 +8991,12 @@
 
             
 
+            
+
              object to find the control, if the control has an <see
              cref="P:System.Web.UI.Control.ID" />
+
+            
 
             
 
@@ -7795,8 +9015,12 @@
 
             
 
+            
+
             -derived objects other than the <see
              cref="F:System.Web.UI.WebControls.WizardStepType.Start" />
+
+            
 
             
 
@@ -7809,8 +9033,12 @@
 
             
 
+            
+
             , or <see
              cref="F:System.Web.UI.WebControls.WizardStepType.Complete" />
+
+            
 
             
 
@@ -7842,8 +9070,12 @@
 
             
 
+            
+
              field is used primarily by control developers. The value for the <see
              cref="F:System.Web.UI.WebControls.Wizard.StepNextButtonID" />
+
+            
 
             
 
@@ -7857,6 +9089,8 @@
           <para
             >Retrieves the identifier that is associated with the <ui
             >Next</ui>
+
+            
 
             
 
@@ -7903,8 +9137,12 @@
 
             
 
+            
+
              property is set to the <see
              cref="F:System.Web.UI.WebControls.ButtonType.Image" />
+
+            
 
             
 
@@ -7917,8 +9155,12 @@
 
             
 
+            
+
              property to specify the image to display for the <ui
             >Next</ui>
+
+            
 
             
 
@@ -7932,6 +9174,8 @@
           <para
             >Gets or sets the URL of the image that is displayed for the <ui
             >Next</ui>
+
+            
 
             
 
@@ -7981,8 +9225,12 @@
 
             
 
+            
+
              property defines the appearance for the <ui
             >Next</ui>
+
+            
 
             
 
@@ -7995,8 +9243,12 @@
 
             
 
+            
+
              control. The <see
              cref="P:System.Web.UI.WebControls.Wizard.StepNextButtonStyle" />
+
+            
 
             
 
@@ -8009,6 +9261,8 @@
 
             
 
+            
+
              object that it returns. You can set these properties declaratively in the form Property-Subproperty, where <paramref
              name="Subproperty" />
 
@@ -8016,8 +9270,12 @@
 
             
 
+            
+
              represents a property of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -8033,8 +9291,12 @@
 
             
 
+            
+
              property are merged with the style settings for the <see
              cref="P:System.Web.UI.WebControls.Wizard.NavigationButtonStyle" />
+
+            
 
             
 
@@ -8047,8 +9309,12 @@
 
             
 
+            
+
              property overrides the corresponding setting in the <see
              cref="P:System.Web.UI.WebControls.Wizard.NavigationButtonStyle" />
+
+            
 
             
 
@@ -8067,8 +9333,12 @@
 
             
 
+            
+
              object that defines the settings for the <ui
             >Next</ui>
+
+            
 
             
 
@@ -8109,8 +9379,12 @@
 
             
 
+            
+
              property contains the text that is displayed for the <ui
             >Next</ui>
+
+            
 
             
 
@@ -8123,8 +9397,12 @@
 
             
 
+            
+
              control. Depending on the value of the <see
              cref="P:System.Web.UI.WebControls.Wizard.StepNextButtonType" />
+
+            
 
             
 
@@ -8137,6 +9415,8 @@
 
             
 
+            
+
              property can appear as text on a button, as text displayed as an alternative to an image, or as the text of a link. The following table lists the field values for the <see
              cref="P:System.Web.UI.WebControls.Wizard.StepNextButtonType" />
 
@@ -8144,8 +9424,12 @@
 
             
 
+            
+
              property and the respective effect of each on the <ui
             >Next</ui>
+
+            
 
             
 
@@ -8187,12 +9471,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -8206,6 +9494,8 @@
           <para
             >Gets or sets the text caption that is displayed for the <ui
             >Next</ui>
+
+            
 
             
 
@@ -8247,6 +9537,8 @@
 
             
 
+            
+
              button.</para
           >
         </summary>
@@ -8276,8 +9568,12 @@
 
             
 
+            
+
              field is used primarily by control developers. The value for the <see
              cref="F:System.Web.UI.WebControls.Wizard.StepPreviousButtonID" />
+
+            
 
             
 
@@ -8291,6 +9587,8 @@
           <para
             >Retrieves the identifier that is associated with the <ui
             >Previous</ui>
+
+            
 
             
 
@@ -8337,8 +9635,12 @@
 
             
 
+            
+
              property is set to the <see
              cref="F:System.Web.UI.WebControls.ButtonType.Image" />
+
+            
 
             
 
@@ -8351,8 +9653,12 @@
 
             
 
+            
+
              property to specify the image to display for the <ui
             >Previous</ui>
+
+            
 
             
 
@@ -8366,6 +9672,8 @@
           <para
             >Gets or sets the URL of the image that is displayed for the <ui
             >Previous</ui>
+
+            
 
             
 
@@ -8415,8 +9723,12 @@
 
             
 
+            
+
              property defines the appearance of the <ui
             >Previous</ui>
+
+            
 
             
 
@@ -8429,8 +9741,12 @@
 
             
 
+            
+
              step for the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -8443,8 +9759,12 @@
 
             
 
+            
+
              property is read-only; however, you can set the properties of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -8457,8 +9777,12 @@
 
             
 
+            
+
              represents a property of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -8474,8 +9798,12 @@
 
             
 
+            
+
              property are merged with the style settings for the <see
              cref="P:System.Web.UI.WebControls.Wizard.NavigationButtonStyle" />
+
+            
 
             
 
@@ -8488,8 +9816,12 @@
 
             
 
+            
+
              property overrides the corresponding setting in the <see
              cref="P:System.Web.UI.WebControls.Wizard.NavigationButtonStyle" />
+
+            
 
             
 
@@ -8508,8 +9840,12 @@
 
             
 
+            
+
              object that defines the settings for the <ui
             >Previous</ui>
+
+            
 
             
 
@@ -8550,8 +9886,12 @@
 
             
 
+            
+
              property contains the text that is displayed for the <ui
             >Previous</ui>
+
+            
 
             
 
@@ -8564,8 +9904,12 @@
 
             
 
+            
+
              control. Depending on the value of the <see
              cref="P:System.Web.UI.WebControls.Wizard.StepPreviousButtonType" />
+
+            
 
             
 
@@ -8578,6 +9922,8 @@
 
             
 
+            
+
              property can appear as text on a button, as text displayed as an alternative to an image in browsers that do not render images, or as the text of a link. The following table lists the field values for the <see
              cref="P:System.Web.UI.WebControls.Wizard.StepPreviousButtonType" />
 
@@ -8585,8 +9931,12 @@
 
             
 
+            
+
              property and the respective effect of each on the <ui
             >Previous</ui>
+
+            
 
             
 
@@ -8628,12 +9978,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -8647,6 +10001,8 @@
           <para
             >Gets or sets the text caption that is displayed for the <ui
             >Previous</ui>
+
+            
 
             
 
@@ -8683,6 +10039,8 @@
           <para
             >Gets or sets the type of button that is rendered as the <ui
             >Previous</ui>
+
+            
 
             
 
@@ -8732,8 +10090,12 @@
 
             
 
+            
+
              property gets a reference to a <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -8746,8 +10108,12 @@
 
             
 
+            
+
              objects on the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -8760,8 +10126,12 @@
 
             
 
+            
+
              property is read-only; however, you can set the properties of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -8774,8 +10144,12 @@
 
             
 
+            
+
              represents a property of the <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -8791,6 +10165,8 @@
 
             
 
+            
+
              property are merged with the style settings for the <see
              cref="P:System.Web.UI.WebControls.WebControl.Style" />
 
@@ -8798,8 +10174,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -8812,6 +10192,8 @@
 
             
 
+            
+
              property overrides the corresponding setting in the <see
              cref="P:System.Web.UI.WebControls.WebControl.Style" />
 
@@ -8819,8 +10201,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -8836,6 +10222,8 @@
 
             
 
+            
+
              properties can be set to override the <see
              cref="P:System.Web.UI.WebControls.WebControl.Style" />
 
@@ -8843,8 +10231,12 @@
 
             
 
+            
+
              properties of the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -8907,6 +10299,8 @@
 
             
 
+            
+
              template to define the appearance for the <see
              cref="T:System.Web.UI.WebControls.WizardStep" />
 
@@ -8914,8 +10308,12 @@
 
             
 
+            
+
              objects, the <see
              cref="P:System.Web.UI.WebControls.Wizard.StepStyle" />
+
+            
 
             
 
@@ -8934,8 +10332,12 @@
 
             
 
+            
+
              object that defines the settings for the <see
              cref="T:System.Web.UI.WebControls.WizardStep" />
+
+            
 
             
 
@@ -8971,8 +10373,12 @@
 
             
 
+            
+
              property is used primarily by control developers to extend the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -8991,8 +10397,12 @@
 
             
 
+            
+
              value that corresponds to the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -9061,8 +10471,12 @@
 
             
 
+            
+
              property returns a collection of <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 
@@ -9075,8 +10489,12 @@
 
             
 
+            
+
              control. You can use the <see
              cref="P:System.Web.UI.WebControls.Wizard.WizardSteps" />
+
+            
 
             
 
@@ -9089,8 +10507,12 @@
 
             
 
+            
+
              objects that are contained in the <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -9103,8 +10525,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Web.UI.WebControls.WizardStepCollection.Remove(System.Web.UI.WebControls.WizardStepBase)" />
+
+            
 
             
 
@@ -9117,6 +10543,8 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Web.UI.WebControls.WizardStepCollection.Insert(System.Int32,System.Web.UI.WebControls.WizardStepBase)" />
 
@@ -9124,8 +10552,12 @@
 
             
 
+            
+
              methods to manipulate the <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 
@@ -9142,6 +10574,8 @@
 
               
 
+              
+
                is persisted in Source view. If you change the <see
                cref="P:System.Web.UI.WebControls.Wizard.WizardSteps" />
 
@@ -9149,8 +10583,12 @@
 
               
 
+              
+
                property in Design view by clicking the sidebar buttons, and you then run the page, the first step of the Wizard control might not be shown because the <see
                cref="P:System.Web.UI.WebControls.Wizard.ActiveStepIndex" />
+
+              
 
               
 
@@ -9167,8 +10605,12 @@
 
             
 
+            
+
              control contains multiple <see
              cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+
+            
 
             
 
@@ -9184,10 +10626,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -9201,6 +10647,8 @@
           <para
             >Gets a collection containing all the <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 

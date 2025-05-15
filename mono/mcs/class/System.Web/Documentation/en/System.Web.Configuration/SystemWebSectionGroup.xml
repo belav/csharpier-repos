@@ -24,6 +24,8 @@
 
         
 
+        
+
          class refers to the system.web group within a configuration file. You can use this type to access any of the sections contained in this group.</para
       >
     </remarks>
@@ -49,8 +51,12 @@
 
             
 
+            
+
              class by using the <see
              cref="M:System.Configuration.Configuration.GetSectionGroup(System.String)" />
+
+            
 
             
 
@@ -64,6 +70,8 @@
           <para
             >Creates a new instance of <see
              cref="T:System.Web.Configuration.SystemWebSectionGroup" />
+
+            
 
             
 
@@ -99,6 +107,8 @@
           <para
             >The <see
              cref="T:System.Web.Configuration.AnonymousIdentificationSection" />
+
+            
 
             
 
@@ -143,6 +153,8 @@
 
             
 
+            
+
              object refers to the authentication section of the configuration file.</para
           >
         </remarks>
@@ -177,6 +189,8 @@
           <para
             >The <see
              cref="T:System.Web.Configuration.AuthorizationSection" />
+
+            
 
             
 
@@ -221,6 +235,8 @@
 
             
 
+            
+
              object refers to the browserCaps section of the configuration file. </para
           >
         </remarks>
@@ -255,6 +271,8 @@
           <para
             >The <see
              cref="T:System.Web.Configuration.ClientTargetSection" />
+
+            
 
             
 
@@ -299,6 +317,8 @@
 
             
 
+            
+
              object refers to the compilation section of the configuration file.</para
           >
         </remarks>
@@ -333,6 +353,8 @@
           <para
             >The <see
              cref="T:System.Web.Configuration.CustomErrorsSection" />
+
+            
 
             
 
@@ -377,6 +399,8 @@
 
             
 
+            
+
              object refers to the deployement section of the configuration file. </para
           >
         </remarks>
@@ -411,6 +435,8 @@
           <para
             >The <see
              cref="T:System.Configuration.DefaultSection" />
+
+            
 
             
 
@@ -455,6 +481,8 @@
 
             
 
+            
+
              object refers to the globalization section of the configuration file. </para
           >
         </remarks>
@@ -489,6 +517,8 @@
           <para
             >The <see
              cref="T:System.Web.Configuration.HealthMonitoringSection" />
+
+            
 
             
 
@@ -560,6 +590,8 @@
 
             
 
+            
+
              object refers to the httpCookies section of the configuration file. </para
           >
         </remarks>
@@ -594,6 +626,8 @@
           <para
             >The <see
              cref="T:System.Web.Configuration.HttpHandlersSection" />
+
+            
 
             
 
@@ -638,6 +672,8 @@
 
             
 
+            
+
              object refers to the httpModules section of the configuration file. </para
           >
         </remarks>
@@ -672,6 +708,8 @@
           <para
             >The <see
              cref="T:System.Web.Configuration.HttpRuntimeSection" />
+
+            
 
             
 
@@ -716,6 +754,8 @@
 
             
 
+            
+
              object refers to the identity section of the configuration file.</para
           >
         </remarks>
@@ -755,6 +795,8 @@
 
             
 
+            
+
              object refers to the machineKey section of the configuration file. </para
           >
         </remarks>
@@ -789,6 +831,8 @@
           <para
             >The <see
              cref="T:System.Web.Configuration.MembershipSection" />
+
+            
 
             
 
@@ -860,6 +904,8 @@
 
             
 
+            
+
              object refers to the pages section of the configuration file. </para
           >
         </remarks>
@@ -899,6 +945,8 @@
 
             
 
+            
+
              object refers to the processModel section of the configuration file. </para
           >
         </remarks>
@@ -933,6 +981,8 @@
           <para
             >The <see
              cref="T:System.Web.Configuration.ProfileSection" />
+
+            
 
             
 
@@ -1004,6 +1054,8 @@
 
             
 
+            
+
              object refers to the roleManager section of the configuration file.</para
           >
         </remarks>
@@ -1038,6 +1090,8 @@
           <para
             >The <see
              cref="T:System.Web.Configuration.SecurityPolicySection" />
+
+            
 
             
 
@@ -1082,6 +1136,8 @@
 
             
 
+            
+
              object refers to the sessionState section of the configuration file. </para
           >
         </remarks>
@@ -1116,6 +1172,8 @@
           <para
             >The <see
              cref="T:System.Web.Configuration.SiteMapSection" />
+
+            
 
             
 
@@ -1160,6 +1218,8 @@
 
             
 
+            
+
              object refers to the trace section of the configuration file. </para
           >
         </remarks>
@@ -1194,6 +1254,8 @@
           <para
             >The <see
              cref="T:System.Web.Configuration.TrustSection" />
+
+            
 
             
 

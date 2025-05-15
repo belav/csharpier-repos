@@ -25,6 +25,8 @@
 
         
 
+        
+
          event. </para
       >
     </summary>
@@ -51,6 +53,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -64,11 +68,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="columnIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -20,6 +20,8 @@
 
         
 
+        
+
          values represent the return values of the <see
          cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.GetEnumValue(System.Windows.Forms.VisualStyles.EnumProperty)" />
 
@@ -27,8 +29,12 @@
 
         
 
+        
+
          method when it is called with an argument value of <see
          cref="F:System.Windows.Forms.VisualStyles.EnumProperty.BackgroundType" />
+
+        
 
         
 
@@ -73,6 +79,8 @@
           <para
             >The background of the element is a bitmap. If this value is set, then the property corresponding to the <see
              cref="F:System.Windows.Forms.VisualStyles.FilenameProperty.ImageFile" />
+
+            
 
             
 

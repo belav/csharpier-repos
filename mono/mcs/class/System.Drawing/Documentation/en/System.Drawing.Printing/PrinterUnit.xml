@@ -23,8 +23,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Drawing.Printing.PrinterSettings" />
+
+        
 
         
 
@@ -37,11 +41,15 @@
 
         
 
+        
+
          classes use this enumeration.</para
       >
       <para
         >For more information on printing, see the <see
          cref="N:System.Drawing.Printing" />
+
+        
 
         
 

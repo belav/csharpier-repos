@@ -38,11 +38,15 @@
 
         
 
+        
+
          is a hint to the Designer. The Designer will ignore this attribute for components that have a UI presence. It can only be applied to classes.</para
       >
       <para
         >The <see
          cref="T:System.ComponentModel.DesignTimeVisibleAttribute" />
+
+        
 
         
 
@@ -55,8 +59,12 @@
 
         
 
+        
+
          control's node items should not appear in the component tray because they are drawn by the <see
          cref="T:System.Windows.Forms.TreeView" />
+
+        
 
         
 
@@ -74,8 +82,12 @@
 
         
 
+        
+
          marks a component's visibility. If <see
          cref="F:System.ComponentModel.DesignTimeVisibleAttribute.Yes" />
+
+        
 
         
 
@@ -107,6 +119,8 @@
           <para
             >Creates a new <see
              cref="T:System.ComponentModel.DesignTimeVisibleAttribute" />
+
+            
 
             
 
@@ -145,6 +159,8 @@
 
             
 
+            
+
              with the <see
              cref="P:System.ComponentModel.DesignTimeVisibleAttribute.Visible" />
 
@@ -152,8 +168,12 @@
 
             
 
+            
+
              property set to the given value in <paramref
              name="visible" />
+
+            
 
             
 
@@ -169,8 +189,12 @@
 
           
 
+          
+
           The value that the <see
            cref="P:System.ComponentModel.DesignTimeVisibleAttribute.Visible" />
+
+          
 
           
 
@@ -236,6 +260,8 @@
 
           
 
+          
+
           The object to compare.</param
         >
       </Docs>
@@ -290,6 +316,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -298,6 +326,8 @@
           <para
             >true, if this instance is equal to the <see
              cref="F:System.ComponentModel.DesignTimeVisibleAttribute.Default" />
+
+            
 
             
 

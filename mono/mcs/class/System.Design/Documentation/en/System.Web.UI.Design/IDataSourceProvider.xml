@@ -18,6 +18,8 @@
 
         
 
+        
+
          interface. This interface is used by the <see
          cref="T:System.Web.UI.Design.DataFieldConverter" />
 
@@ -25,8 +27,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.Design.DataMemberConverter" />
+
+        
 
         
 
@@ -67,6 +73,8 @@
 
             
 
+            
+
              (such as a <see
              cref="T:System.Data.DataSet" />
 
@@ -74,8 +82,12 @@
 
             
 
+            
+
             ) for the data source, and provides a DataMember property to select a particular list (or <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 

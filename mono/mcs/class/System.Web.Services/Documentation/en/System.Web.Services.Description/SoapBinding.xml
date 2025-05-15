@@ -43,6 +43,8 @@
 
         
 
+        
+
         . For more information about Web Services Description Language (WSDL), see the specification at http://www.w3.org/TR/wsdl/.</para
       >
     </remarks>
@@ -51,6 +53,8 @@
       <para
         >Represents an extension added to a <see
          cref="T:System.Web.Services.Description.Binding" />
+
+        
 
         
 
@@ -73,6 +77,8 @@
           <para
             >Initializes an instance of the <see
              cref="T:System.Web.Services.Description.SoapBinding" />
+
+            
 
             
 
@@ -131,6 +137,8 @@
 
             
 
+            
+
              class. This field is constant.</para
           >
         </summary>
@@ -184,6 +192,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -215,6 +225,8 @@
           <para
             >This required property value will generally be the same as that of the <see
              cref="F:System.Web.Services.Description.SoapBinding.HttpTransport" />
+
+            
 
             
 

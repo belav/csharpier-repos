@@ -28,11 +28,15 @@
 
         
 
+        
+
          class to encode XML Web service messages.</para
       >
       <para
         >The data in your objects is described using programming language constructs like classes, fields, properties, primitive types, arrays, and even embedded XML in the form of <see
          cref="T:System.Xml.XmlElement" />
+
+        
 
         
 
@@ -45,10 +49,14 @@
 
         
 
+        
+
          objects. You have the option of creating your own classes, annotated with attributes, or using the <format
          type="text/html">
           <a href="a6e6e65c-347f-4494-9457-653bf29baac2">XML Schema Definition Tool (Xsd.exe)</a>
         </format>
+
+        
 
         
 
@@ -64,8 +72,12 @@
 
         
 
+        
+
          and related tools like Xsd.exe provide the bridge between these two technologies at both design time and runtime. At design time, use the Xsd.exe to produce an XML schema document (.xsd) from your custom classes or to produce classes from a given schema. In either case, the classes are annotated with custom attributes to instruct the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -84,8 +96,12 @@
 
         
 
+        
+
          to a public field or property, and set the <see
          cref="P:System.Xml.Serialization.XmlElementAttribute.ElementName" />
+
+        
 
         
 
@@ -102,8 +118,12 @@
 
         
 
+        
+
         . You can also implement the <see
          cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+        
 
         
 
@@ -119,8 +139,12 @@
 
         
 
+        
+
          with an <see
          cref="T:System.Xml.Serialization.XmlTypeMapping" />
+
+        
 
         
 
@@ -137,11 +161,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >With the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -154,6 +182,8 @@
 
         
 
+        
+
         , <see
          cref="T:System.Xml.XmlAttribute" />
 
@@ -161,8 +191,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Xml.XmlNode" />
+
+        
 
         
 
@@ -178,8 +212,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Xml.Serialization.XmlAnyAttributeAttribute" />
+
+        
 
         
 
@@ -192,8 +230,12 @@
 
         
 
+        
+
          to a field that returns an array of <see
          cref="T:System.Xml.XmlElement" />
+
+        
 
         
 
@@ -206,8 +248,12 @@
 
         
 
+        
+
          to a field that returns an array of <see
          cref="T:System.Xml.XmlAttribute" />
+
+        
 
         
 
@@ -218,6 +264,8 @@
       <para
         >If a property or field returns a complex object (such as an array or a class instance), the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -254,6 +302,8 @@ public class MyObject
 
         
 
+        
+
          to specify the default value, as shown in the following code.</para
       >
       <code>Public Class PurchaseOrder
@@ -273,8 +323,12 @@ End Class</code>
 
         
 
+        
+
         , and to apply the <see
          cref="T:System.Xml.Serialization.XmlIgnoreAttribute" />
+
+        
 
         
 
@@ -287,8 +341,12 @@ End Class</code>
 
         
 
+        
+
         . For example, if there is a field named "MyFirstName" you would also create a field named "MyFirstNameSpecified" that instructs the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -328,8 +386,12 @@ End Class</code>
 
         
 
+        
+
          class. Overriding serialization in this way has two uses: first, you can control and augment the serialization of objects found in a DLL, even if you do not have access to the source; second, you can create one set of serializable classes, but serialize the objects in multiple ways. For more details, see the <see
          cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+
+        
 
         
 
@@ -346,11 +408,15 @@ End Class</code>
 
         
 
+        
+
         .</para
       >
       <para
         >To serialize an object, call the <see
          cref="M:System.Xml.Serialization.XmlSerializer.Serialize(System.IO.TextWriter,System.Object)" />
+
+        
 
         
 
@@ -363,11 +429,15 @@ End Class</code>
 
         
 
+        
+
          method.</para
       >
       <para
         >To add XML namespaces to an XML document, see <see
          cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+
+        
 
         
 
@@ -384,8 +454,12 @@ End Class</code>
 
           
 
+          
+
            gives special treatment to classes that implement <see
            cref="T:System.Collections.IEnumerable" />
+
+          
 
           
 
@@ -398,8 +472,12 @@ End Class</code>
 
           
 
+          
+
           . A class that implements <see
            cref="T:System.Collections.IEnumerable" />
+
+          
 
           
 
@@ -412,8 +490,12 @@ End Class</code>
 
           
 
+          
+
            (such as <see
            cref="T:System.Collections.CollectionBase" />
+
+          
 
           
 
@@ -426,8 +508,12 @@ End Class</code>
 
           
 
+          
+
            must have a public Item indexed property (indexer in C#) that takes an integer, and it must have a public Count property of type integer. The parameter to the Add method must be the same type as is returned from the Item property, or one of that type's bases. For classes that implement <see
            cref="T:System.Collections.ICollection" />
+
+          
 
           
 
@@ -450,6 +536,8 @@ End Class</code>
       <para
         >If you use any of the other constructors, multiple versions of the same assembly are generated and never unloaded, which results in a memory leak and poor performance. The easiest solution is to use one of the previously mentioned two constructors. Otherwise, you must cache the assemblies in a <see
          cref="T:System.Collections.Hashtable" />
+
+        
 
         
 
@@ -512,6 +600,8 @@ End If</code>
 
         
 
+        
+
          cannot serialize or deserialize the following:</para
       >
       <list type="bullet">
@@ -539,6 +629,8 @@ End If</code>
 
         
 
+        
+
          cannot be instantiated to serialize an enumeration if the following conditions are true: The enumeration is of type unsigned long (ulong in C#) and the enumeration contains any member with a value larger than 9,223,372,036,854,775,807. For example, the following cannot be serialized.</para
       >
       <code>public enum LargeNumbers: ulong
@@ -558,6 +650,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
         
 
+        
+
          class no longer serializes objects that are marked as [Obsolete].</para
       >
     </remarks>
@@ -566,6 +660,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
       <para
         >Serializes and deserializes objects into and from XML documents. The <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -597,6 +693,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -634,6 +732,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              converts into a single XML-instance document. However, the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
 
@@ -641,8 +741,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              must know only one type--the type of the class that represents the XML root element. The <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -661,6 +765,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              class that can serialize objects of the specified type into XML documents, and deserialize XML documents into objects of the specified type.</para
           >
         </summary>
@@ -671,8 +777,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The type of the object that this <see
            cref="T:System.Xml.Serialization.XmlSerializer" />
+
+          
 
           
 
@@ -712,8 +822,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              when you serialize an object into a SOAP message. To control the SOAP messages generated, use the special attributes (beginning with the word "Soap") found in the <see
              cref="N:System.Xml.Serialization" />
+
+            
 
             
 
@@ -732,6 +846,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              class using an object that maps one type to another.</para
           >
         </summary>
@@ -742,8 +858,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Serialization.XmlTypeMapping" />
+
+          
 
           
 
@@ -785,11 +905,15 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              class that can serialize objects of the specified type into XML documents, and deserialize XML documents into objects of the specified type. Specifies the default namespace for all the XML elements.</para
           >
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -802,10 +926,14 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
            can serialize. </param
         >
         <param name="defaultNamespace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -843,8 +971,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
             , any object can be inserted into that array. In that case, the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -857,8 +989,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              array. To do this, use the <paramref
              name="extraTypes" />
+
+            
 
             
 
@@ -874,8 +1010,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              parameter to specify types derived from a base class. For example, suppose a base class named Phone exists, and a class named InternationalPhone derives from it. Use the <paramref
              name="extraTypes" />
+
+            
 
             
 
@@ -894,8 +1034,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              class that can serialize objects of the specified type into XML documents, and deserialize XML documents into object of a specified type. If a property or field returns an array, the <paramref
              name="extraTypes" />
+
+            
 
             
 
@@ -911,8 +1055,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The type of the object that this <see
            cref="T:System.Xml.Serialization.XmlSerializer" />
+
+          
 
           
 
@@ -927,8 +1075,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -969,6 +1121,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              parameter can be used to control how fields and properties are encoded in XML. These settings override any attributes that already exist on the objects. This can be useful when the source code cannot be modified or multiple encodings are required for the same classes.</para
           >
         </remarks>
@@ -977,6 +1131,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -992,6 +1148,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The type of the object to serialize. </param
         >
         <param name="overrides">
@@ -1001,8 +1159,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+
+          
 
           
 
@@ -1043,8 +1205,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              parameter is serialized as the root element. Properties, such as the XML element name of the root element, are taken from the <paramref
              name="type" />
+
+            
 
             
 
@@ -1057,8 +1223,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              parameter allows you to replace the default object's information by specifying an <see
              cref="T:System.Xml.Serialization.XmlRootAttribute" />
+
+            
 
             
 
@@ -1077,6 +1247,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              class that can serialize objects of the specified type into XML documents, and deserialize an XML document into object of the specified type. It also specifies the class to use as the XML root element.</para
           >
         </summary>
@@ -1087,8 +1259,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The type of the object that this <see
            cref="T:System.Xml.Serialization.XmlSerializer" />
+
+          
 
           
 
@@ -1103,8 +1279,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Serialization.XmlRootAttribute" />
+
+          
 
           
 
@@ -1148,8 +1328,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              parameter allows for the creation of an <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -1162,6 +1346,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              class when constructing the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
 
@@ -1169,8 +1355,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
             . For more details, see <see
              cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
+
+            
 
             
 
@@ -1186,8 +1376,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
             , any object can be inserted into that array. In that case, the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -1200,8 +1394,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              array. To do this, use the <paramref
              name="extraTypes" />
+
+            
 
             
 
@@ -1217,8 +1415,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              parameter is serialized as the root element. Properties, such as the XML element name of the root element are taken from the <paramref
              name="type" />
+
+            
 
             
 
@@ -1231,8 +1433,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              parameter allows you to replace the default object's information by specifying an <see
              cref="T:System.Xml.Serialization.XmlRootAttribute" />
+
+            
 
             
 
@@ -1248,8 +1454,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              parameter to specify the default namespace of all XML elements generated by the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -1268,6 +1478,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              class that can serialize objects of type <see
              cref="T:System.Object" />
 
@@ -1275,8 +1487,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              into XML document instances, and deserialize XML document instances into objects of type <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -1292,8 +1508,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The type of the object that this <see
            cref="T:System.Xml.Serialization.XmlSerializer" />
+
+          
 
           
 
@@ -1308,6 +1528,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
@@ -1315,8 +1537,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
            that extends or overrides the behavior of the class specified in the <paramref
            name="type" />
+
+          
 
           
 
@@ -1331,8 +1557,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1347,8 +1577,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Serialization.XmlRootAttribute" />
+
+          
 
           
 
@@ -1358,6 +1592,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
         >
         <param name="defaultNamespace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1406,6 +1642,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              class that can serialize objects of the specified type into XML document instances, and deserialize XML document instances into objects of the specified type. This overload allows you to supply other types that can be encountered during a serialization or deserialization operation, as well as a default namespace for all XML elements, the class to use as the XML root element, its location, and credentials required for access.</para
           >
         </summary>
@@ -1416,8 +1654,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The type of the object that this <see
            cref="T:System.Xml.Serialization.XmlSerializer" />
+
+          
 
           
 
@@ -1432,6 +1674,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Serialization.XmlAttributeOverrides" />
 
@@ -1439,8 +1683,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
            that extends or overrides the behavior of the class specified in the <paramref
            name="type" />
+
+          
 
           
 
@@ -1455,8 +1703,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1471,8 +1723,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Serialization.XmlRootAttribute" />
+
+          
 
           
 
@@ -1487,10 +1743,14 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The default namespace of all XML elements in the XML document.</param
         >
         <param name="location">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1505,8 +1765,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           An instance of the <see
            cref="T:System.Security.Policy.Evidence" />
+
+          
 
           
 
@@ -1549,6 +1813,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              can deserialize a specified XML document.</para
           >
         </summary>
@@ -1562,8 +1828,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              can deserialize the object that the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1579,8 +1849,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -1620,6 +1894,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
           <para
             >An <see
              cref="T:System.Xml.Serialization.XmlSerializationReader" />
+
+            
 
             
 
@@ -1665,6 +1941,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              class.</para
           >
         </returns>
@@ -1700,11 +1978,15 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              must be constructed using the type of the object that is being deserialized.</para
           >
           <para
             >Use the <paramref
              name="stream" />
+
+            
 
             
 
@@ -1717,8 +1999,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              class, which is designed to write to streams. Classes that derive from the <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -1762,6 +2048,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
               
 
+              
+
                cannot deserialize the following: arrays of <see
                cref="T:System.Collections.ArrayList" />
 
@@ -1769,8 +2057,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
               
 
+              
+
                and arrays of <see
                cref="T:System.Collections.Generic.List`1" />
+
+              
 
               
 
@@ -1790,6 +2082,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1798,6 +2092,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
           <para
             >The <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -1813,8 +2109,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -1857,11 +2157,15 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              must be constructed using the type of the object that is being deserialized.</para
           >
           <para
             >Classes that inherit from <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -1874,8 +2178,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              and <see
              cref="T:System.IO.StreamReader" />
+
+            
 
             
 
@@ -1888,6 +2196,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              to deserialize an object, you must construct the <see
              cref="T:System.IO.StreamReader" />
 
@@ -1895,8 +2205,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              with an appropriate <see
              cref="T:System.Text.Encoding" />
+
+            
 
             
 
@@ -1913,6 +2227,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
               
 
+              
+
                overload that takes an <see
                cref="T:System.Xml.XmlReader" />
 
@@ -1920,8 +2236,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
               
 
+              
+
                instead. The <see
                cref="T:System.Xml.XmlReader" />
+
+              
 
               
 
@@ -1939,6 +2259,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
               
 
+              
+
                cannot deserialize the following: arrays of <see
                cref="T:System.Collections.ArrayList" />
 
@@ -1946,8 +2268,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
               
 
+              
+
                and arrays of <see
                cref="T:System.Collections.Generic.List`1" />
+
+              
 
               
 
@@ -1967,6 +2293,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1975,6 +2303,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
           <para
             >The <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -1990,8 +2320,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextReader" />
+
+          
 
           
 
@@ -2034,6 +2368,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2048,8 +2384,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Serialization.XmlSerializationReader" />
+
+          
 
           
 
@@ -2092,11 +2432,15 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              must be constructed using the type of the object that is being deserialized.</para
           >
           <para
             >The <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2113,6 +2457,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
               
 
+              
+
                cannot deserialize the following: arrays of <see
                cref="T:System.Collections.ArrayList" />
 
@@ -2120,8 +2466,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
               
 
+              
+
                and arrays of <see
                cref="T:System.Collections.Generic.List`1" />
+
+              
 
               
 
@@ -2141,6 +2491,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2149,6 +2501,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
           <para
             >The <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -2164,8 +2518,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The <see
            cref="T:System.xml.XmlReader" />
+
+          
 
           
 
@@ -2209,11 +2567,15 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              must be constructed using the type of the object that is being deserialized.</para
           >
           <para
             >Set the <paramref
              name="encodingStyle" />
+
+            
 
             
 
@@ -2229,6 +2591,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              cannot deserialize the following: arrays of <see
              cref="T:System.Collections.ArrayList" />
 
@@ -2236,8 +2600,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              and arrays of <see
              cref="T:System.Collections.Generic.List`1" />
+
+            
 
             
 
@@ -2251,6 +2619,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
           <para
             >Deserializes the XML document contained by the specified <see
              cref="T:System.xml.XmlReader" />
+
+            
 
             
 
@@ -2270,8 +2640,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The <see
            cref="T:System.xml.XmlReader" />
+
+          
 
           
 
@@ -2281,6 +2655,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
         >
         <param name="encodingStyle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2327,6 +2703,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              and allows the overriding of events that occur during deserialization.</para
           >
         </summary>
@@ -2335,6 +2713,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
           <para
             >The <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -2350,8 +2730,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -2366,8 +2750,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           An instance of the <see
            cref="T:System.Xml.Serialization.XmlDeserializationEvents" />
+
+          
 
           
 
@@ -2415,6 +2803,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2429,8 +2819,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           An instance of the <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -2445,6 +2839,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The encoding used.</param
         >
         <param name="events">
@@ -2454,8 +2850,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           An instance of the <see
            cref="T:System.Xml.Serialization.XmlDeserializationEvents" />
+
+          
 
           
 
@@ -2498,8 +2898,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              objects created from an array of <see
              cref="T:System.Xml.Serialization.XmlTypeMapping" />
+
+            
 
             
 
@@ -2518,6 +2922,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              objects.</para
           >
         </returns>
@@ -2528,8 +2934,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           An array of <see
            cref="T:System.Xml.Serialization.XmlTypeMapping" />
+
+          
 
           
 
@@ -2573,6 +2983,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              class created from mappings of one XML type to another.</para
           >
         </summary>
@@ -2581,6 +2993,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
           <para
             >An instance of the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -2596,8 +3010,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           An array of <see
            cref="T:System.Xml.Serialization.XmlMapping" />
+
+          
 
           
 
@@ -2612,8 +3030,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           An instance of the <see
            cref="T:System.Security.Policy.Evidence" />
+
+          
 
           
 
@@ -2657,6 +3079,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              class from the specified mappings.</para
           >
         </summary>
@@ -2665,6 +3089,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
           <para
             >An instance of the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -2680,8 +3106,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           An array of <see
            cref="T:System.Xml.Serialization.XmlMapping" />
+
+          
 
           
 
@@ -2696,8 +3126,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -2739,6 +3173,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              method allows you to efficiently create an array of <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
 
@@ -2746,8 +3182,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              objects for processing an array of <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -2766,6 +3206,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              objects created from an array of types.</para
           >
         </summary>
@@ -2774,6 +3216,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
           <para
             >An array of <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -2789,8 +3233,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           An array of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -2838,11 +3286,15 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              object that contains serializers for the supplied types and mappings.</para
           >
         </returns>
         <param name="types">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2857,8 +3309,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           A collection of <see
            cref="T:System.Xml.Serialization.XmlMapping" />
+
+          
 
           
 
@@ -2907,8 +3363,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              that contains special versions of the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -2924,8 +3384,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           An array of type <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -2940,8 +3404,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           An array of type <see
            cref="T:System.Xml.Serialization.XmlMapping" />
+
+          
 
           
 
@@ -2956,8 +3424,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           An instance of the <see
            cref="T:System.CodeDom.Compiler.CompilerParameters" />
+
+          
 
           
 
@@ -3003,8 +3475,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              creates an XML serialization assembly for types in a specified assembly to improve the run-time performance of an <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -3017,11 +3493,15 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              to return the name of such an assembly.</para
           >
           <para
             >If you are distributing such an assembly as part of a client application that calls a Web service, you can apply the <see
              cref="T:System.Xml.Serialization.XmlSerializerAssemblyAttribute" />
+
+            
 
             
 
@@ -3040,6 +3520,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              especially created to serialize or deserialize the specified type.</para
           >
         </summary>
@@ -3048,6 +3530,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
           <para
             >The name of the assembly that contains an <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -3063,8 +3547,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -3111,8 +3599,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              creates an XML serialization assembly for types in a specified assembly to improve the run-time performance of an <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -3125,11 +3617,15 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              to return the name of such an assembly.</para
           >
           <para
             >If you are distributing such an assembly as part of a client application that calls a Web service, you can apply the <see
              cref="T:System.Xml.Serialization.XmlSerializerAssemblyAttribute" />
+
+            
 
             
 
@@ -3153,8 +3649,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -3164,6 +3664,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
         >
         <param name="defaultNamespace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3206,8 +3708,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              method converts the public fields and read/write properties of an object into XML. It does not convert methods, indexers, private fields, or read-only properties. To serialize all of an object's fields and properties, both public and private, use the <see
              cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
+
+            
 
             
 
@@ -3223,6 +3729,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              parameter, specify an object that derives from the abstract <see
              cref="T:System.IO.Stream" />
 
@@ -3230,8 +3738,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              class. Classes that derive from <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -3275,6 +3787,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
               
 
+              
+
                cannot serialize the following: arrays of <see
                cref="T:System.Collections.ArrayList" />
 
@@ -3282,8 +3796,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
               
 
+              
+
                and arrays of <see
                cref="T:System.Collections.Generic.List`1" />
+
+              
 
               
 
@@ -3303,8 +3821,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              and writes the XML document to a file using the specified <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -3320,8 +3842,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -3336,8 +3862,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -3380,8 +3910,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              method converts the public fields and read/write properties of an object into XML. It does not convert methods, indexers, private fields, or read-only properties. To serialize all an object's fields and properties, both public and private, use the <see
              cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
+
+            
 
             
 
@@ -3397,6 +3931,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              parameter, specify an object that derives from the abstract <see
              cref="T:System.IO.TextWriter" />
 
@@ -3404,8 +3940,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              class. Classes that derive from <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -3439,6 +3979,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
               
 
+              
+
                cannot serialize the following: arrays of <see
                cref="T:System.Collections.ArrayList" />
 
@@ -3446,8 +3988,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
               
 
+              
+
                and arrays of <see
                cref="T:System.Collections.Generic.List`1" />
+
+              
 
               
 
@@ -3467,8 +4013,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              and writes the XML document to a file using the specified <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -3484,8 +4034,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -3500,8 +4054,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -3545,8 +4103,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              and writes the XML document to a file using the specified <see
              cref="T:System.Xml.Serialization.XmlSerializationWriter" />
+
+            
 
             
 
@@ -3562,8 +4124,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -3578,8 +4144,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Serialization.XmlSerializationWriter" />
+
+          
 
           
 
@@ -3622,8 +4192,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              method converts the public fields and read/write properties of an object into XML. It does not convert methods, indexers, private fields, or read-only properties. To serialize all an object's fields and properties, both public and private, use the <see
              cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
+
+            
 
             
 
@@ -3639,8 +4213,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              parameter, specify an object that derives from the abstract <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -3653,8 +4231,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              derives from the <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -3671,6 +4253,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
               
 
+              
+
                cannot serialize the following: arrays of <see
                cref="T:System.Collections.ArrayList" />
 
@@ -3678,8 +4262,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
               
 
+              
+
                and arrays of <see
                cref="T:System.Collections.Generic.List`1" />
+
+              
 
               
 
@@ -3699,8 +4287,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              and writes the XML document to a file using the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -3716,8 +4308,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The <see
            cref="T:System.xml.XmlWriter" />
+
+          
 
           
 
@@ -3732,8 +4328,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -3777,8 +4377,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              method is invoked, the public fields and read/write properties of an object are converted into XML. Methods, indexers, private fields, and read-only properties are not serialized. To serialize all fields and properties, both public and private, use the <see
              cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
+
+            
 
             
 
@@ -3794,6 +4398,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              parameter to specify an object that derives from the abstract <see
              cref="T:System.IO.Stream" />
 
@@ -3801,8 +4407,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              class, which is designed to write to streams. Classes that derive from the <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -3846,6 +4456,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
               
 
+              
+
                cannot serialize the following: arrays of <see
                cref="T:System.Collections.ArrayList" />
 
@@ -3853,8 +4465,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
               
 
+              
+
                and arrays of <see
                cref="T:System.Collections.Generic.List`1" />
+
+              
 
               
 
@@ -3874,8 +4490,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              and writes the XML document to a file using the specified <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -3891,8 +4511,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -3907,8 +4531,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -3923,8 +4551,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+
+          
 
           
 
@@ -3968,8 +4600,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              method is invoked the public fields and read/write properties of an object are converted into XML. Methods, indexers, private fields, and read-only properties are not serialized. To serialize all fields and properties, both public and private, use the <see
              cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
+
+            
 
             
 
@@ -3985,6 +4621,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              parameter to specify an object that derives from the abstract <see
              cref="T:System.IO.TextWriter" />
 
@@ -3992,8 +4630,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              class. Classes that derive from <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -4027,6 +4669,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
               
 
+              
+
                cannot serialize the following: arrays of <see
                cref="T:System.Collections.ArrayList" />
 
@@ -4034,8 +4678,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
               
 
+              
+
                and arrays of <see
                cref="T:System.Collections.Generic.List`1" />
+
+              
 
               
 
@@ -4055,8 +4703,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              and writes the XML document to a file using the specified <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -4072,8 +4724,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -4088,8 +4744,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -4104,8 +4764,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+
+          
 
           
 
@@ -4149,8 +4813,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              method is invoked, the public fields and read/write properties of an object are converted into XML. Methods, indexers, private fields, and read-only properties are not serialized. To serialize all fields and properties, both public and private, use the <see
              cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
+
+            
 
             
 
@@ -4166,8 +4834,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              parameter to specify an object that derives from the abstract <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -4180,8 +4852,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              derives from the <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -4198,6 +4874,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
               
 
+              
+
                cannot serialize the following: arrays of <see
                cref="T:System.Collections.ArrayList" />
 
@@ -4205,8 +4883,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
               
 
+              
+
                and arrays of <see
                cref="T:System.Collections.Generic.List`1" />
+
+              
 
               
 
@@ -4226,8 +4908,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              and writes the XML document to a file using the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -4243,8 +4929,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The <see
            cref="T:System.xml.XmlWriter" />
+
+          
 
           
 
@@ -4259,8 +4949,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -4275,8 +4969,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+
+          
 
           
 
@@ -4321,8 +5019,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              method is invoked, the public fields and read/write properties of an object are converted into XML. Methods, indexers, private fields, and read-only properties are not serialized. To serialize all fields and properties, both public and private, use the <see
              cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
+
+            
 
             
 
@@ -4338,8 +5040,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              parameter to specify an object that derives from the abstract <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -4352,8 +5058,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              derives from the <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -4364,6 +5074,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
           <para
             >Set the <paramref
              name="encodingStyle" />
+
+            
 
             
 
@@ -4380,6 +5092,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
               
 
+              
+
                cannot serialize the following: arrays of <see
                cref="T:System.Collections.ArrayList" />
 
@@ -4387,8 +5101,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
               
 
+              
+
                and arrays of <see
                cref="T:System.Collections.Generic.List`1" />
+
+              
 
               
 
@@ -4408,6 +5126,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              and references the specified namespaces and encoding style.</para
           >
         </summary>
@@ -4418,8 +5138,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The <see
            cref="T:System.xml.XmlWriter" />
+
+          
 
           
 
@@ -4434,10 +5158,14 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The object to serialize. </param
         >
         <param name="namespaces">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4450,10 +5178,14 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
            referenced by the object. </param
         >
         <param name="encodingStyle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4503,8 +5235,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              and writes the XML document to a file using the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -4520,8 +5256,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -4536,10 +5276,14 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The object to serialize.</param
         >
         <param name="namespaces">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4554,10 +5298,14 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
           
 
+          
+
           The encoding used in the document.</param
         >
         <param name="id">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4597,8 +5345,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              method, the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -4614,6 +5366,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              objects and an <see
              cref="T:System.Xml.Serialization.XmlAnyAttributeAttribute" />
 
@@ -4621,8 +5375,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              has been applied to the field, the <see
              cref="E:System.Xml.Serialization.XmlSerializer.UnknownAttribute" />
+
+            
 
             
 
@@ -4636,6 +5394,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
           <para
             >Occurs when the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -4676,8 +5436,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              method, the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -4694,6 +5458,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
               
 
+              
+
                is applied to a field that returns an array of <see
                cref="T:System.Xml.XmlElement" />
 
@@ -4701,8 +5467,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
               
 
+              
+
                objects, all unknown elements are collected in the array. In that case, the <see
                cref="E:System.Xml.Serialization.XmlSerializer.UnknownElement" />
+
+              
 
               
 
@@ -4717,6 +5487,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
           <para
             >Occurs when the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -4757,8 +5529,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              method, the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -4772,6 +5548,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
           <para
             >Occurs when the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -4812,8 +5590,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              event only occurs when the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -4837,8 +5619,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              event occur when there is a type definition found in the document, but no parameter in the main body references it. When the event occurs, you can retrieve the XML type of the unreferenced object by examining the <see
              cref="P:System.Xml.Serialization.UnreferencedObjectEventArgs.UnreferencedObject" />
+
+            
 
             
 
@@ -4851,8 +5637,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              class. The XML ID of the object is returned by the <see
              cref="P:System.Xml.Serialization.UnreferencedObjectEventArgs.UnreferencedId" />
+
+            
 
             
 
@@ -4868,6 +5658,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              event should not be confused with the <see
              cref="E:System.Xml.Serialization.XmlSerializer.UnknownElement" />
 
@@ -4875,8 +5667,12 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
 
             
 
+            
+
              and <see
              cref="E:System.Xml.Serialization.XmlSerializer.UnknownNode" />
+
+            
 
             
 
@@ -4890,6 +5686,8 @@ xmlSerializer mySerializer=new XmlSerializer(typeof(LargeNumbers));</code>
           <para
             >Occurs during deserialization of a SOAP-encoded XML stream, when the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 

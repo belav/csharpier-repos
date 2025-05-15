@@ -31,6 +31,8 @@
 
         
 
+        
+
         ) and a default HTTP binding used for exposing metadata. </para
       >
     </summary>
@@ -54,6 +56,8 @@
           <para
             >Creates and initializes a new instance of the <see
              cref="T:System.ServiceModel.Description.ServiceMetadataEndpoint" />
+
+            
 
             
 
@@ -93,6 +97,8 @@
 
             
 
+            
+
              class using the specified endpoint address.</para
           >
         </summary>
@@ -124,6 +130,8 @@
           <para
             >Creates and initializes a new instance of the <see
              cref="T:System.ServiceModel.Description.ServiceMetadataEndpoint" />
+
+            
 
             
 

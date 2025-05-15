@@ -27,8 +27,12 @@
 
         
 
+        
+
          class is the base class for data source designers, such as the <see
          cref="T:System.Web.UI.Design.WebControls.SqlDataSourceDesigner" />
+
+        
 
         
 
@@ -41,6 +45,8 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Web.UI.Design.WebControls.ObjectDataSourceDesigner" />
 
@@ -48,8 +54,12 @@
 
         
 
+        
+
          classes. If you create a new data source control, you might also want to create a custom control designer for your control and derive it from the <see
          cref="T:System.Web.UI.Design.DataSourceDesigner" />
+
+        
 
         
 
@@ -65,8 +75,12 @@
 
         
 
+        
+
          class has two event methods: the <see
          cref="M:System.Web.UI.Design.DataSourceDesigner.OnDataSourceChanged(System.EventArgs)" />
+
+        
 
         
 
@@ -79,8 +93,12 @@
 
         
 
+        
+
          methods. Both of these events can be temporarily disabled with the <see
          cref="M:System.Web.UI.Design.DataSourceDesigner.SuppressDataSourceEvents" />
+
+        
 
         
 
@@ -93,8 +111,12 @@
 
         
 
+        
+
          property. The event methods can be enabled again with the <see
          cref="M:System.Web.UI.Design.DataSourceDesigner.ResumeDataSourceEvents" />
+
+        
 
         
 
@@ -113,6 +135,8 @@
 
             
 
+            
+
              method compares two schemas.</para
           >
         </item>
@@ -120,6 +144,8 @@
           <para
             >The <see
              cref="M:System.Web.UI.Design.DataSourceDesigner.ViewSchemasEquivalent(System.Web.UI.Design.IDataSourceViewSchema,System.Web.UI.Design.IDataSourceViewSchema)" />
+
+            
 
             
 
@@ -135,6 +161,8 @@
       <para
         >Provides design-time support in a design host for the <see
          cref="T:System.Web.UI.DataSourceControl" />
+
+        
 
         
 
@@ -163,6 +191,8 @@
 
             
 
+            
+
              constructor is called by the design host at design time.</para
           >
         </remarks>
@@ -171,6 +201,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.DataSourceDesigner" />
+
+            
 
             
 
@@ -223,11 +255,15 @@
 
             
 
+            
+
              property in a custom class to enable or disable design-time configuration for a specific data source.</para
           >
           <para
             >A design host such as vsprvslong uses the <see
              cref="P:System.Web.UI.Design.DataSourceDesigner.CanConfigure" />
+
+            
 
             
 
@@ -241,6 +277,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="M:System.Web.UI.Design.DataSourceDesigner.Configure" />
+
+            
 
             
 
@@ -272,8 +310,12 @@
 
             
 
+            
+
              property in a derived class to enable or disable the ability to refresh the schema at design time for a specific data source. If your application requires an invariant data structure and the schema will never change, you want the <see
              cref="P:System.Web.UI.Design.DataSourceDesigner.CanRefreshSchema" />
+
+            
 
             
 
@@ -289,11 +331,15 @@
 
             
 
+            
+
              property to determine whether a command to refresh the schema appears in the action list menu at design time.</para
           >
           <para
             >In a design host such as vsprvslong, you can see the <see
              cref="P:System.Web.UI.Design.DataSourceDesigner.CanRefreshSchema" />
+
+            
 
             
 
@@ -311,8 +357,12 @@
 
                 
 
+                
+
                  or an <see
                  cref="T:System.Web.UI.WebControls.AccessDataSource" />
+
+                
 
                 
 
@@ -325,6 +375,8 @@
               <para
                 >In Design view, on the action list, click <ui
                 >Configure</ui>
+
+                
 
                 
 
@@ -345,6 +397,8 @@
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -355,6 +409,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="M:System.Web.UI.Design.DataSourceDesigner.RefreshSchema(System.Boolean)" />
+
+            
 
             
 
@@ -386,8 +442,12 @@
 
             
 
+            
+
              method is not supported in the <see
              cref="T:System.Web.UI.Design.DataSourceDesigner" />
+
+            
 
             
 
@@ -400,11 +460,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >In a design host such as vsprvslong, you can see the <see
              cref="M:System.Web.UI.Design.DataSourceDesigner.Configure" />
+
+            
 
             
 
@@ -422,8 +486,12 @@
 
                 
 
+                
+
                  or an <see
                  cref="T:System.Web.UI.WebControls.AccessDataSource" />
+
+                
 
                 
 
@@ -436,6 +504,8 @@
               <para
                 >In Design view, on the action list, clicking <ui
                 >Configure</ui>
+
+                
 
                 
 
@@ -490,8 +560,12 @@
 
             
 
+            
+
              method returns the result from the base <see
              cref="M:System.Web.UI.Design.ControlDesigner.CreatePlaceHolderDesignTimeHtml" />
+
+            
 
             
 
@@ -536,8 +610,12 @@
 
             
 
+            
+
              does not exist, the <see
              cref="M:System.Web.UI.Design.DataSourceDesigner.GetView(System.String)" />
+
+            
 
             
 
@@ -556,6 +634,8 @@
 
             
 
+            
+
              object that is identified by the view name.</para
           >
         </summary>
@@ -565,6 +645,8 @@
         </returns>
         <param name="viewName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -622,8 +704,12 @@
 
             
 
+            
+
              method notifies the control designers of each control that is bound to the associated data source to refresh its control in the design host. The <see
              cref="M:System.Web.UI.Design.DataSourceDesigner.OnDataSourceChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -636,8 +722,12 @@
 
             
 
+            
+
              method or by calling the <see
              cref="M:System.Web.UI.Design.DataSourceDesigner.RefreshSchema(System.Boolean)" />
+
+            
 
             
 
@@ -656,8 +746,12 @@
 
             
 
+            
+
              event when the properties of the data source have changed and the <see
              cref="P:System.Web.UI.Design.DataSourceDesigner.SuppressingDataSourceEvents" />
+
+            
 
             
 
@@ -673,8 +767,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -710,8 +808,12 @@
 
             
 
+            
+
              method notifies the control designers of each control that is bound to the associated data source that the fields in the schema have changed. The <see
              cref="M:System.Web.UI.Design.DataSourceDesigner.OnSchemaRefreshed(System.EventArgs)" />
+
+            
 
             
 
@@ -724,8 +826,12 @@
 
             
 
+            
+
              method or by calling the <see
              cref="M:System.Web.UI.Design.DataSourceDesigner.RefreshSchema(System.Boolean)" />
+
+            
 
             
 
@@ -744,8 +850,12 @@
 
             
 
+            
+
              event when the schema of the data source has changed and the <see
              cref="P:System.Web.UI.Design.DataSourceDesigner.SuppressingDataSourceEvents" />
+
+            
 
             
 
@@ -761,8 +871,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -798,6 +912,8 @@
 
             
 
+            
+
              method is not supported in the <see
              cref="T:System.Web.UI.Design.DataSourceDesigner" />
 
@@ -805,8 +921,12 @@
 
             
 
+            
+
              class. However, it is supported in derived classes, such as the <see
              cref="T:System.Web.UI.Design.WebControls.XmlDataSourceDesigner" />
+
+            
 
             
 
@@ -826,6 +946,8 @@
 
           
 
+          
+
           true to allow events when refreshing the schema; false to disable the <see
            cref="E:System.Web.UI.Design.DataSourceDesigner.DataSourceChanged" />
 
@@ -833,8 +955,12 @@
 
           
 
+          
+
            and <see
            cref="E:System.Web.UI.Design.DataSourceDesigner.SchemaRefreshed" />
+
+          
 
           
 
@@ -865,8 +991,12 @@
 
             
 
+            
+
              property to false or by calling the <see
              cref="M:System.Web.UI.Design.DataSourceDesigner.RefreshSchema(System.Boolean)" />
+
+            
 
             
 
@@ -925,8 +1055,12 @@
 
             
 
+            
+
              method can be used without an instance of the <see
              cref="T:System.Web.UI.Design.DataSourceDesigner" />
+
+            
 
             
 
@@ -950,8 +1084,12 @@
 
           
 
+          
+
           The first schema to compare (derived from the <see
            cref="T:System.Web.UI.Design.IDataSourceSchema" />
+
+          
 
           
 
@@ -961,6 +1099,8 @@
         >
         <param name="schema2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -992,6 +1132,8 @@
 
             
 
+            
+
              method is called.</para
           >
         </summary>
@@ -1018,6 +1160,8 @@
 
             
 
+            
+
              property can be set by calling the <see
              cref="M:System.Web.UI.Design.DataSourceDesigner.SuppressDataSourceEvents" />
 
@@ -1025,8 +1169,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Web.UI.Design.DataSourceDesigner.RefreshSchema(System.Boolean)" />
+
+            
 
             
 
@@ -1045,8 +1193,12 @@
 
             
 
+            
+
              event or the <see
              cref="M:System.Web.UI.Design.DataSourceDesigner.RefreshSchema(System.Boolean)" />
+
+            
 
             
 
@@ -1084,8 +1236,12 @@
 
             
 
+            
+
              method can be used without an instance of the <see
              cref="T:System.Web.UI.Design.DataSourceDesigner" />
+
+            
 
             
 
@@ -1109,8 +1265,12 @@
 
           
 
+          
+
           The first view to compare (derived from the <see
            cref="T:System.Web.UI.Design.IDataSourceViewSchema" />
+
+          
 
           
 
@@ -1120,6 +1280,8 @@
         >
         <param name="viewSchema2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

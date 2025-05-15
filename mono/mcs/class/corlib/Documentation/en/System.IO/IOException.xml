@@ -42,6 +42,8 @@
 
         
 
+        
+
          is the base class for exceptions thrown while accessing information using streams, files and directories.</para
       >
       <para>The Base Class Library includes the following types, each of which is a derived class of IOException : </para>
@@ -75,6 +77,8 @@
       <para>Where appropriate, use these types instead of IOException.</para>
       <para>
         <see cref="T:System.IO.IOException" />
+
+        
 
         
 
@@ -118,6 +122,8 @@
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "An I/O error occurred while performing the requested operation." This message takes into account the current system culture.</para
           >
         </remarks>
@@ -126,6 +132,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.IOException" />
+
+            
 
             
 
@@ -168,8 +176,12 @@
 
             
 
+            
+
              property of the new instance using <paramref
              name="message" />
+
+            
 
             
 
@@ -188,8 +200,12 @@
 
             
 
+            
+
              class with its message string set to <paramref
              name="message" />
+
+            
 
             
 
@@ -205,6 +221,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
 
@@ -212,8 +230,12 @@
 
           
 
+          
+
            that describes the error. The content of <paramref
            name="message" />
+
+          
 
           
 
@@ -255,6 +277,8 @@
 
             
 
+            
+
              class with the specified serialization and context information.</para
           >
         </summary>
@@ -265,10 +289,14 @@
 
           
 
+          
+
           The data for serializing or deserializing the object. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -313,8 +341,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -327,11 +359,15 @@
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.IO.IOException" />
+
+            
 
             
 
@@ -379,6 +415,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -387,6 +425,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.IOException" />
+
+            
 
             
 
@@ -402,6 +442,8 @@
 
           
 
+          
+
           The error message that explains the reason for the exception. </param
         >
         <param name="innerException">
@@ -411,8 +453,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 
@@ -451,8 +497,12 @@
 
             
 
+            
+
              class with its message string set to <paramref
              name="message" />
+
+            
 
             
 
@@ -468,8 +518,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -482,10 +536,14 @@
 
           
 
+          
+
            is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture. </param
         >
         <param name="hresult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

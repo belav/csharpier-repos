@@ -25,6 +25,8 @@
 
         
 
+        
+
          event.</para
       >
     </summary>
@@ -52,6 +54,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -62,8 +66,12 @@
 
           
 
+          
+
           Indicates the number of rows affected by the statement that caused the <see
            cref="E:System.Data.SqlClient.SqlCommand.StatementCompleted" />
+
+          
 
           
 
@@ -91,6 +99,8 @@
           <para
             >Indicates the number of rows affected by the statement that caused the <see
              cref="E:System.Data.SqlClient.SqlCommand.StatementCompleted" />
+
+            
 
             
 

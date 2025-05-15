@@ -24,8 +24,12 @@
 
         
 
+        
+
          class is used with classes in the <see
          cref="N:System.Security.Authentication.ExtendedProtection" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          is the only class derived from <see
          cref="T:System.Net.WebRequest" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          class does only FTP clear text authentication. The <see
          cref="T:System.Net.FileWebRequest" />
+
+        
 
         
 
@@ -72,8 +84,12 @@
 
         
 
+        
+
          instance. An application that uses <see
          cref="T:System.Net.Security.SslStream" />
+
+        
 
         
 
@@ -86,8 +102,12 @@
 
         
 
+        
+
          using the <see
          cref="P:System.Net.Security.SslStream.TransportContext" />
+
+        
 
         
 
@@ -100,8 +120,12 @@
 
         
 
+        
+
          can get a <see
          cref="T:System.Net.TransportContext" />
+
+        
 
         
 
@@ -114,8 +138,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.Net.HttpWebRequest.EndGetRequestStream(System.IAsyncResult,System.Net.TransportContext@)" />
+
+        
 
         
 
@@ -129,6 +157,8 @@
       <para
         >The <see
          cref="T:System.Net.TransportContext" />
+
+        
 
         
 
@@ -157,6 +187,8 @@
           <para
             >Creates a new instance of the <see
              cref="T:System.Net.TransportContext" />
+
+            
 
             
 
@@ -200,6 +232,8 @@
 
             
 
+            
+
              parameter are <see
              cref="F:System.Security.Authentication.ExtendedProtection.ChannelBindingKind.Endpoint" />
 
@@ -207,8 +241,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Security.Authentication.ExtendedProtection.ChannelBindingKind.Unique" />
+
+            
 
             
 
@@ -224,8 +262,12 @@
 
             
 
+            
+
              property using the <see
              cref="M:System.Net.TransportContext.GetChannelBinding(System.Security.Authentication.ExtendedProtection.ChannelBindingKind)" />
+
+            
 
             
 
@@ -238,8 +280,12 @@
 
             
 
+            
+
              is not <see
              cref="F:System.Security.Authentication.ExtendedProtection.ChannelBindingKind.Endpoint" />
+
+            
 
             
 
@@ -252,8 +298,12 @@
 
             
 
+            
+
              will throw <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -266,8 +316,12 @@
 
             
 
+            
+
              overrides the <see
              cref="M:System.Net.TransportContext.GetChannelBinding(System.Security.Authentication.ExtendedProtection.ChannelBindingKind)" />
+
+            
 
             
 
@@ -290,11 +344,15 @@
 
             
 
+            
+
             , or null if the channel binding is not supported by the current transport or by the operating system.</para
           >
         </returns>
         <param name="kind">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

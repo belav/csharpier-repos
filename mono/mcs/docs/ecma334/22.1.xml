@@ -8,6 +8,8 @@
 
     
 
+    
+
      is a <non_terminal
      where="16.5">type-declaration</non_terminal>
 
@@ -15,8 +17,12 @@
 
     
 
+    
+
      (<hyperlink
     >16.5</hyperlink>
+
+    
 
     
 
@@ -32,6 +38,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="24.2">attributes</non_terminal>
@@ -39,9 +47,7 @@
         <non_terminal where="22.1">delegate-modifiers</non_terminal>
         <opt />
         <keyword>delegate</keyword>
-        <non_terminal where="17.5"
->return-type</non_terminal
-        >
+        <non_terminal where="17.5">return-type</non_terminal>
         <non_terminal where="9.4.2">identifier</non_terminal>
         <terminal>(</terminal>
         <non_terminal where="17.5.1">formal-parameter-list</non_terminal>
@@ -58,8 +64,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -78,6 +88,8 @@
       <name>
         <non_terminal where="22.1">delegate-modifier</non_terminal>
       </name>
+
+      
 
       
 
@@ -105,6 +117,8 @@
 
     
 
+    
+
     It is a compile-time error for the same modifier to appear multiple times in a delegate declaration. </paragraph
   >
   <paragraph
@@ -115,11 +129,15 @@
 
     
 
+    
+
     . </paragraph
   >
   <paragraph
     >The public, protected, internal, and private modifiers control the accessibility of the delegate type. Depending on the context in which the delegate declaration occurs, some of these modifiers may not be permitted (<hyperlink
     >10.5.1</hyperlink>
+
+    
 
     
 
@@ -136,10 +154,12 @@
 
     
 
+    
+
      specifies the parameters of the delegate, and <non_terminal
-     where="17.5"
->return-type</non_terminal
-    >
+     where="17.5">return-type</non_terminal>
+
+    
 
     
 
@@ -150,9 +170,9 @@
       <list_item> They have the same number or parameters, with the same types, in the same order, with the same parameter modifiers. </list_item>
       <list_item
         > Their <non_terminal
-         where="17.5"
->return-type</non_terminal
-        >
+         where="17.5">return-type</non_terminal>
+
+        
 
         
 
@@ -172,8 +192,12 @@
 
       
 
+      
+
       ). end note]</note
     >
+
+    
 
     
 
@@ -183,7 +207,7 @@
 
       >[Example: For example: <code_example
       >
-<![CDATA[
+        <![CDATA[
 delegate int D1(int i, double d);  
 class A  
 {  
@@ -212,12 +236,16 @@ class B
 
     
 
+    
+
     . A delegate type is a class type that is derived from System.Delegate. Delegate types are implicitly sealed, so it is not permissible to derive any type from a delegate type. It is also not permissible to derive a non-delegate class type from System.Delegate. Note that System.Delegate is not itself a delegate type; it is a class type from which all delegate types are derived. </paragraph
   >
   <paragraph>C# provides special syntax for delegate instantiation and invocation. Except for instantiation, any operation that can be applied to a class or class instance can also be applied to a delegate class or instance, respectively. In particular, it is possible to access members of the System.Delegate type via the usual member access syntax. </paragraph>
   <paragraph
     >The set of methods encapsulated by a delegate instance is called an invocation list. When a delegate instance is created (<hyperlink
     >22.2</hyperlink>
+
+    
 
     
 
@@ -233,8 +261,12 @@ class B
 
     
 
+    
+
     ) and += operators (<hyperlink
     >14.13.2</hyperlink>
+
+    
 
     
 
@@ -247,8 +279,12 @@ class B
 
     
 
+    
+
     ) -and -= operators (<hyperlink
     >14.13.2</hyperlink>
+
+    
 
     
 
@@ -261,13 +297,15 @@ class B
 
     
 
+    
+
     ). </paragraph
   >
   <paragraph>
     <example
       >[Example: The following example shows the instantiation of a number of delegates, and their corresponding invocation lists: <code_example
       >
-<![CDATA[
+        <![CDATA[
 delegate void D(int x);  
 class Test  
 {  
@@ -295,6 +333,8 @@ class Demo
     <example
       >For more examples of combining (as well as removing) delegates, see <hyperlink
       >22.3</hyperlink>
+
+      
 
       
 

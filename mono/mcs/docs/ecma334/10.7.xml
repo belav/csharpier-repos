@@ -10,8 +10,12 @@
 
       
 
+      
+
        that within a nested block it is not possible to declare a local variable with the same name as a local variable in an enclosing block. end note]</note
     >
+
+    
 
     
 
@@ -27,6 +31,8 @@
 
         
 
+        
+
          (<hyperlink
         >16.4</hyperlink>
 
@@ -34,8 +40,12 @@
 
         
 
+        
+
         ) with no enclosing <non_terminal
          where="16.2">namespace-declaration</non_terminal>
+
+        
 
         
 
@@ -51,8 +61,12 @@
 
         
 
+        
+
          within a  <non_terminal
          where="16.2">namespace-declaration</non_terminal>
+
+        
 
         
 
@@ -65,8 +79,12 @@
 
         
 
+        
+
          of every <non_terminal
          where="16.2">namespace-declaration</non_terminal>
+
+        
 
         
 
@@ -82,8 +100,12 @@
 
         
 
+        
+
          (<hyperlink
         >16.3</hyperlink>
+
+        
 
         
 
@@ -96,6 +118,8 @@
 
         
 
+        
+
         s of the <non_terminal
          where="16.1">compilation-unit</non_terminal>
 
@@ -103,8 +127,12 @@
 
         
 
+        
+
          or <non_terminal
          where="16.2">namespace-body</non_terminal>
+
+        
 
         
 
@@ -117,8 +145,12 @@
 
         
 
+        
+
          occurs. A <non_terminal
          where="16.3">using-directive</non_terminal>
+
+        
 
         
 
@@ -131,8 +163,12 @@
 
         
 
+        
+
          or <non_terminal
          where="16.2">namespace-body</non_terminal>
+
+        
 
         
 
@@ -145,6 +181,8 @@
 
         
 
+        
+
          is not transitive, but, rather, affects only the <non_terminal
          where="16.1">compilation-unit</non_terminal>
 
@@ -152,8 +190,12 @@
 
         
 
+        
+
          or  <non_terminal
          where="16.2">namespace-body</non_terminal>
+
+        
 
         
 
@@ -169,8 +211,12 @@
 
         
 
+        
+
          (<hyperlink
         >17.2</hyperlink>
+
+        
 
         
 
@@ -183,6 +229,8 @@
 
         
 
+        
+
          in which the declaration occurs. In addition, the scope of a class member extends to the <non_terminal
          where="17.1.3">class-body</non_terminal>
 
@@ -190,8 +238,12 @@
 
         
 
+        
+
          of those derived classes that are included in the accessibility domain (<hyperlink
         >10.5.2</hyperlink>
+
+        
 
         
 
@@ -207,6 +259,8 @@
 
         
 
+        
+
          (<hyperlink
         >18.2</hyperlink>
 
@@ -214,8 +268,12 @@
 
         
 
+        
+
         ) is the <non_terminal
          where="18.1.3">struct-body</non_terminal>
+
+        
 
         
 
@@ -231,6 +289,8 @@
 
         
 
+        
+
          (<hyperlink
         >21.3</hyperlink>
 
@@ -238,8 +298,12 @@
 
         
 
+        
+
         ) is the <non_terminal
          where="21.1">enum-body</non_terminal>
+
+        
 
         
 
@@ -255,8 +319,12 @@
 
         
 
+        
+
          (<hyperlink
         >17.5</hyperlink>
+
+        
 
         
 
@@ -269,8 +337,12 @@
 
         
 
+        
+
          of that  <non_terminal
          where="17.5">method-declaration</non_terminal>
+
+        
 
         
 
@@ -281,6 +353,8 @@
       <list_item
         > The scope of a parameter declared in an <non_terminal
          where="17.8">indexer-declaration</non_terminal>
+
+        
 
         
 
@@ -293,6 +367,8 @@
 
         
 
+        
+
         ) is the <non_terminal
          where="17.6.2">accessor-declarations</non_terminal>
 
@@ -300,8 +376,12 @@
 
         
 
+        
+
          of that <non_terminal
          where="17.8">indexer-declaration</non_terminal>
+
+        
 
         
 
@@ -317,6 +397,8 @@
 
         
 
+        
+
          (<hyperlink
         >17.9</hyperlink>
 
@@ -324,8 +406,12 @@
 
         
 
+        
+
         ) is the block of that  <non_terminal
          where="17.9">operator-declaration</non_terminal>
+
+        
 
         
 
@@ -341,8 +427,12 @@
 
         
 
+        
+
          (<hyperlink
         >17.10</hyperlink>
+
+        
 
         
 
@@ -355,8 +445,12 @@
 
         
 
+        
+
          and block of that <non_terminal
          where="17.10">constructor-declaration</non_terminal>
+
+        
 
         
 
@@ -372,8 +466,12 @@
 
         
 
+        
+
          (<hyperlink
         >15.4</hyperlink>
+
+        
 
         
 
@@ -389,8 +487,12 @@
 
         
 
+        
+
          (<hyperlink
         >15.5.1</hyperlink>
+
+        
 
         
 
@@ -406,6 +508,8 @@
 
         
 
+        
+
          of a switch statement (<hyperlink
         >15.7.2</hyperlink>
 
@@ -413,8 +517,12 @@
 
         
 
+        
+
         ) is the  <non_terminal
          where="15.7.2">switch-block</non_terminal>
+
+        
 
         
 
@@ -430,8 +538,12 @@
 
         
 
+        
+
          of a for statement (<hyperlink
         >15.8.3</hyperlink>
+
+        
 
         
 
@@ -444,6 +556,8 @@
 
         
 
+        
+
         , the <non_terminal
          where="15.8.3">for-condition</non_terminal>
 
@@ -451,8 +565,12 @@
 
         
 
+        
+
         , the <non_terminal
          where="15.8.3">for-iterator</non_terminal>
+
+        
 
         
 
@@ -468,6 +586,8 @@
 
         
 
+        
+
          (<hyperlink
         >15.5.2</hyperlink>
 
@@ -475,8 +595,12 @@
 
         
 
+        
+
         ) is the block in which the declaration occurs. It is a compile-time error to refer to a local constant in a textual position that precedes its <non_terminal
          where="17.3">constant-declarator</non_terminal>
+
+        
 
         
 
@@ -491,7 +615,7 @@
 
       >[Example: For example <code_example
       >
-<![CDATA[
+        <![CDATA[
 class A  
 {  
    void F() {  
@@ -514,11 +638,13 @@ class A
 
     
 
+    
+
      of the local variable. <example
 
       >[Example: For example <code_example
       >
-<![CDATA[
+        <![CDATA[
 class A  
 {  
    int i = 0;  
@@ -547,8 +673,12 @@ class A
 
       
 
+      
+
       . In the H method, a subsequent <non_terminal
        where="15.5.1">local-variable-declarator</non_terminal>
+
+      
 
       
 
@@ -561,8 +691,12 @@ class A
 
       
 
+      
+
        within the same <non_terminal
        where="15.5.1">local-variable-declaration</non_terminal>
+
+      
 
       
 
@@ -578,7 +712,7 @@ class A
     <note
       >The meaning of a name within a block may differ based on the context in which the name is used. In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 using System;  
 class A {}  
 class Test  
@@ -593,6 +727,8 @@ class Test
 }  
 ]]>
       </code_example>
+
+      
 
       
 

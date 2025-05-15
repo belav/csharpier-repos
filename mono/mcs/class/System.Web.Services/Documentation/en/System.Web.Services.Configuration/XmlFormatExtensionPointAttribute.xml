@@ -39,6 +39,8 @@
 
             
 
+            
+
             .</para
           >
         </item>
@@ -46,6 +48,8 @@
           <para
             >Apply a <see
              cref="T:System.Web.Services.Configuration.XmlFormatExtensionAttribute" />
+
+            
 
             
 
@@ -63,6 +67,8 @@
 
             
 
+            
+
              to the class and specify a member within the class to act as a new extension point.</para
           >
         </item>
@@ -70,6 +76,8 @@
           <para
             >Optionally, apply a <see
              cref="T:System.Web.Services.Configuration.XmlFormatExtensionPrefixAttribute" />
+
+            
 
             
 
@@ -111,11 +119,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="memberName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -144,6 +156,8 @@
           <para
             >Gets or sets a value that indicates whether the member of the class that implements the service description format extension specified in the <see
              cref="P:System.Web.Services.Configuration.XmlFormatExtensionPointAttribute.MemberName" />
+
+            
 
             
 

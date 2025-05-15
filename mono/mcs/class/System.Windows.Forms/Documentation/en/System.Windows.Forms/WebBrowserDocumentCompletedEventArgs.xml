@@ -27,8 +27,12 @@
 
         
 
+        
+
          event to receive notification when the new document finishes loading. The <see
          cref="T:System.Windows.Forms.WebBrowserDocumentCompletedEventArgs" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          property. When the <see
          cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" />
+
+        
 
         
 
@@ -55,6 +63,8 @@
 
         
 
+        
+
         , <see
          cref="P:System.Windows.Forms.WebBrowser.DocumentText" />
 
@@ -62,8 +72,12 @@
 
         
 
+        
+
         , or <see
          cref="P:System.Windows.Forms.WebBrowser.DocumentStream" />
+
+        
 
         
 
@@ -77,6 +91,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.WebBrowser.DocumentCompleted" />
+
+        
 
         
 
@@ -109,6 +125,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -119,8 +137,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -148,6 +170,8 @@
           <para
             >Gets the location of the document to which the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 

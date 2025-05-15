@@ -27,8 +27,12 @@
 
         
 
+        
+
         . The process by which these base addresses are constructed is transport protocol specific. Implementations of a transport that support WAS activation must provide an implementation that derives from <see
          cref="T:System.ServiceModel.Activation.HostedTransportConfiguration" />
+
+        
 
         
 
@@ -38,6 +42,8 @@
          type="text/html">
           <a href="4b0ccd10-0dfb-4603-93f9-f0857c581cb7">UDP Activation</a>
         </format>
+
+        
 
         
 
@@ -70,6 +76,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Activation.HostedTransportConfiguration" />
+
+            
 
             
 
@@ -112,6 +120,8 @@
 
             
 
+            
+
              sample, which demonstrates how to create a custom user datagram protocol (UDP) to be activated by WAS.</para
           >
         </remarks>
@@ -129,11 +139,15 @@
 
             
 
+            
+
              that contains the base address of the host.</para
           >
         </returns>
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

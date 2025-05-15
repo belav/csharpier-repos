@@ -30,6 +30,8 @@
 
         
 
+        
+
          containing UI items for the specified property to the <see
          cref="T:System.Collections.ArrayList" />
 
@@ -37,8 +39,12 @@
 
         
 
+        
+
          passed as the <paramref
          name="valueUIItemList" />
+
+        
 
         
 
@@ -52,6 +58,8 @@
       <para
         >Represents the method that adds a delegate to an implementation of <see
          cref="T:System.Drawing.Design.IPropertyValueUIService" />
+
+        
 
         
 

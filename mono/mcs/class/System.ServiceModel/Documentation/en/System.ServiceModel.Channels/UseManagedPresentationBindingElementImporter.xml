@@ -28,6 +28,8 @@
 
         
 
+        
+
         s into descriptions of the binding elements that can implement these policies for the service.</para
       >
     </summary>
@@ -54,6 +56,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.UseManagedPresentationBindingElementImporter" />
+
+            
 
             
 

@@ -31,8 +31,12 @@
 
         
 
+        
+
          sets the current <see
          cref="P:System.Web.HttpContext.User" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          object that represents the user identity for the current request when the authentication <see
          cref="P:System.Web.Configuration.AuthenticationSection.Mode" />
+
+        
 
         
 
@@ -59,10 +67,14 @@
 
         
 
+        
+
          in the <format
          type="text/html">
           <a href="27bc0ba9-f23a-45f3-ae42-dbe7916e3ee2">authentication</a>
         </format>
+
+        
 
         
 
@@ -78,8 +90,12 @@
 
         
 
+        
+
          exposes an <see
          cref="E:System.Web.Security.FormsAuthenticationModule.Authenticate" />
+
+        
 
         
 
@@ -92,8 +108,12 @@
 
         
 
+        
+
          object for the <see
          cref="P:System.Web.HttpContext.User" />
+
+        
 
         
 
@@ -106,6 +126,8 @@
 
         
 
+        
+
         . The <see
          cref="E:System.Web.Security.FormsAuthenticationModule.Authenticate" />
 
@@ -113,8 +135,12 @@
 
         
 
+        
+
          event is accessed by specifying a subroutine named <system
         >FormsAuthentication_OnAuthenticate</system>
+
+        
 
         
 
@@ -131,8 +157,12 @@
 
           
 
+          
+
            with the <see
            cref="T:System.Web.Security.FormsAuthenticationModule" />
+
+          
 
           
 
@@ -144,6 +174,8 @@
               >Moving an ASP.NET Application from IIS 6.0 to IIS 7.0</a
             >
           </format>
+
+          
 
           
 
@@ -176,6 +208,8 @@
 
             
 
+            
+
              class. After calling the constructor, it calls the <see
              cref="M:System.Web.Security.FormsAuthenticationModule.Init(System.Web.HttpApplication)" />
 
@@ -183,8 +217,12 @@
 
             
 
+            
+
              method to initialize the new <see
              cref="T:System.Web.Security.FormsAuthenticationModule" />
+
+            
 
             
 
@@ -198,6 +236,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Security.FormsAuthenticationModule" />
+
+            
 
             
 
@@ -233,8 +273,12 @@
 
             
 
+            
+
              event is raised during the <see
              cref="E:System.Web.HttpApplication.AuthenticateRequest" />
+
+            
 
             
 
@@ -250,6 +294,8 @@
 
             
 
+            
+
              event of the <see
              cref="T:System.Web.Security.FormsAuthenticationModule" />
 
@@ -257,8 +303,12 @@
 
             
 
+            
+
              class by specifying a subroutine named <system
             >FormsAuthentication_OnAuthenticate</system>
+
+            
 
             
 
@@ -275,8 +325,12 @@
 
             
 
+            
+
              property supplied to the <system
             >FormsAuthentication_OnAuthenticate</system>
+
+            
 
             
 
@@ -289,8 +343,12 @@
 
             
 
+            
+
              property of the current <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -303,6 +361,8 @@
 
             
 
+            
+
              object. If you do not specify a value for the <see
              cref="P:System.Web.Security.FormsAuthenticationEventArgs.User" />
 
@@ -310,8 +370,12 @@
 
             
 
+            
+
              property during the <system
             >FormsAuthentication_OnAuthenticate</system>
+
+            
 
             
 
@@ -327,8 +391,12 @@
 
             
 
+            
+
              event is only raised when the authentication mode is set to <see
              cref="F:System.Web.Configuration.AuthenticationMode.Forms" />
+
+            
 
             
 
@@ -343,8 +411,12 @@
 
             
 
+            
+
              element of the application's configuration file and the <see
              cref="T:System.Web.Security.FormsAuthenticationModule" />
+
+            
 
             
 
@@ -385,6 +457,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -415,8 +489,12 @@
 
             
 
+            
+
              method ensures that the <see
              cref="T:System.Web.Security.FormsAuthenticationModule" />
+
+            
 
             
 
@@ -429,8 +507,12 @@
 
             
 
+            
+
              and <see
              cref="E:System.Web.HttpApplication.EndRequest" />
+
+            
 
             
 
@@ -449,6 +531,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -459,8 +543,12 @@
 
           
 
+          
+
           The current <see
            cref="T:System.Web.HttpApplication" />
+
+          
 
           
 

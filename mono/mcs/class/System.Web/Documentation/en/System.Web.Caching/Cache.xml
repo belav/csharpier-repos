@@ -31,8 +31,12 @@
 
         
 
+        
+
          object or the Cache property of the <see
          cref="T:System.Web.UI.Page" />
+
+        
 
         
 
@@ -49,8 +53,12 @@
 
           
 
+          
+
            class is not intended for use outside of ASP.NET applications. It was designed and tested for use in ASP.NET to provide caching for Web applications. For other types of applications, such as console applications or Windows Forms applications, use the <see
            cref="T:System.Runtime.Caching.ObjectCache" />
+
+          
 
           
 
@@ -78,6 +86,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Caching.Cache" />
+
+            
 
             
 
@@ -121,6 +131,8 @@
 
             
 
+            
+
              parameter is already stored in the Cache. To overwrite an existing Cache item using the same <paramref
              name="key" />
 
@@ -128,8 +140,12 @@
 
             
 
+            
+
              parameter, use the <see
              cref="M:System.Web.Caching.Cache.Insert(System.String,System.Object)" />
+
+            
 
             
 
@@ -145,8 +161,12 @@
 
             
 
+            
+
              and <paramref
              name="slidingExpiration" />
+
+            
 
             
 
@@ -159,6 +179,8 @@
 
             
 
+            
+
              parameter to the specific time, and the <paramref
              name="slidingExpiration" />
 
@@ -166,8 +188,12 @@
 
             
 
+            
+
              parameter to <see
              cref="F:System.Web.Caching.Cache.NoSlidingExpiration" />
+
+            
 
             
 
@@ -183,6 +209,8 @@
 
             
 
+            
+
              parameter to the expiration interval, and the <paramref
              name="absoluteExpiration" />
 
@@ -190,8 +218,12 @@
 
             
 
+            
+
              parameter to <see
              cref="F:System.Web.Caching.Cache.NoAbsoluteExpiration" />
+
+            
 
             
 
@@ -205,6 +237,8 @@
           <para
             >Adds the specified item to the <see
              cref="T:System.Web.Caching.Cache" />
+
+            
 
             
 
@@ -224,10 +258,14 @@
 
           
 
+          
+
           The cache key used to reference the item. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -242,10 +280,14 @@
 
           
 
+          
+
           The file or cache key dependencies for the item. When any dependency changes, the object becomes invalid and is removed from the cache. If there are no dependencies, this parameter contains null.</param
         >
         <param name="absoluteExpiration">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -258,8 +300,12 @@
 
           
 
+          
+
            parameter must be <see
            cref="F:System.Web.Caching.Cache.NoAbsoluteExpiration" />
+
+          
 
           
 
@@ -274,6 +320,8 @@
 
           
 
+          
+
           The interval between the time the added object was last accessed and the time at which that object expires. If this value is the equivalent of 20 minutes, the object expires and is removed from the cache 20 minutes after it is last accessed. If you are using absolute expiration, the <paramref
            name="slidingExpiration" />
 
@@ -281,8 +329,12 @@
 
           
 
+          
+
            parameter must be <see
            cref="F:System.Web.Caching.Cache.NoSlidingExpiration" />
+
+          
 
           
 
@@ -297,8 +349,12 @@
 
           
 
+          
+
           The relative cost of the object, as expressed by the <see
            cref="T:System.Web.Caching.CacheItemPriority" />
+
+          
 
           
 
@@ -308,6 +364,8 @@
         >
         <param name="onRemoveCallback">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -364,6 +422,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -373,6 +433,8 @@
         </returns>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -415,6 +477,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -445,8 +509,12 @@
 
             
 
+            
+
              parameter. The object added to the cache using this overload of the Insert method is inserted with no file or cache dependencies, a priority of <see
              cref="F:System.Web.Caching.CacheItemPriority.Default" />
+
+            
 
             
 
@@ -459,8 +527,12 @@
 
             
 
+            
+
             , and an absolute expiration value of <see
              cref="F:System.Web.Caching.Cache.NoAbsoluteExpiration" />
+
+            
 
             
 
@@ -479,8 +551,12 @@
 
             
 
+            
+
              object with a cache key to reference its location, using default values provided by the <see
              cref="T:System.Web.Caching.CacheItemPriority" />
+
+            
 
             
 
@@ -496,10 +572,14 @@
 
           
 
+          
+
           The cache key used to reference the item. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -538,8 +618,12 @@
 
             
 
+            
+
              parameter. The object added to the cache using this overload of the Insert method is inserted with no file or cache dependencies, a priority of <see
              cref="F:System.Web.Caching.CacheItemPriority.Default" />
+
+            
 
             
 
@@ -552,8 +636,12 @@
 
             
 
+            
+
             , and an absolute expiration value of <see
              cref="F:System.Web.Caching.Cache.NoAbsoluteExpiration" />
+
+            
 
             
 
@@ -572,11 +660,15 @@
 
             
 
+            
+
              that has file or key dependencies.</para
           >
         </summary>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -591,10 +683,14 @@
 
           
 
+          
+
           The object to be inserted in the cache.</param
         >
         <param name="dependencies">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -635,11 +731,15 @@
 
             
 
+            
+
              parameter.</para
           >
           <para
             >If the <paramref
              name="slidingExpiration" />
+
+            
 
             
 
@@ -652,8 +752,12 @@
 
             
 
+            
+
             , sliding expiration is disabled. If you set the <paramref
              name="slidingExpiration" />
+
+            
 
             
 
@@ -666,8 +770,12 @@
 
             
 
+            
+
             , the <paramref
              name="absoluteExpiration" />
+
+            
 
             
 
@@ -680,8 +788,12 @@
 
             
 
+            
+
              plus the value contained in the <paramref
              name="slidingExpiration" />
+
+            
 
             
 
@@ -694,8 +806,12 @@
 
             
 
+            
+
              parameter, the item will be placed in the cache again, and <paramref
              name="absoluteExpiration" />
+
+            
 
             
 
@@ -708,6 +824,8 @@
 
             
 
+            
+
              parameter. If the item is not requested from the cache before the date in the <paramref
              name="absoluteExpiration" />
 
@@ -715,8 +833,12 @@
 
             
 
+            
+
              parameter, the item is removed from the cache. . The item added to the cache using this overload of the insert method is inserted with a priority of <see
              cref="F:System.Web.Caching.CacheItemPriority.Default" />
+
+            
 
             
 
@@ -735,11 +857,15 @@
 
             
 
+            
+
              with dependencies and expiration policies.</para
           >
         </summary>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -754,10 +880,14 @@
 
           
 
+          
+
           The object to be inserted in the cache. </param
         >
         <param name="dependencies">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -772,8 +902,12 @@
 
           
 
+          
+
           The time at which the inserted object expires and is removed from the cache. To avoid possible issues with local time such as changes from standard time to daylight saving time, use <see
            cref="P:System.DateTime.UtcNow" />
+
+          
 
           
 
@@ -786,6 +920,8 @@
 
           
 
+          
+
            for this parameter value. If you are using absolute expiration, the <paramref
            name="slidingExpiration" />
 
@@ -793,8 +929,12 @@
 
           
 
+          
+
            parameter must be <see
            cref="F:System.Web.Caching.Cache.NoSlidingExpiration" />
+
+          
 
           
 
@@ -809,6 +949,8 @@
 
           
 
+          
+
           The interval between the time the inserted object is last accessed and the time at which that object expires. If this value is the equivalent of 20 minutes, the object will expire and be removed from the cache 20 minutes after it was last accessed. If you are using sliding expiration, the <paramref
            name="absoluteExpiration" />
 
@@ -816,8 +958,12 @@
 
           
 
+          
+
            parameter must be <see
            cref="F:System.Web.Caching.Cache.NoAbsoluteExpiration" />
+
+          
 
           
 
@@ -860,11 +1006,15 @@
 
             
 
+            
+
              parameter. </para
           >
           <para
             >You cannot set both the <paramref
              name="absoluteExpiration" />
+
+            
 
             
 
@@ -877,8 +1027,12 @@
 
             
 
+            
+
              parameters. If you intend the cache item to expire at a specific time, you set the <paramref
              name="absoluteExpiration" />
+
+            
 
             
 
@@ -891,8 +1045,12 @@
 
             
 
+            
+
              parameter to <see
              cref="F:System.Web.Caching.Cache.NoSlidingExpiration" />
+
+            
 
             
 
@@ -908,6 +1066,8 @@
 
             
 
+            
+
              parameter to the expiration interval, and the <paramref
              name="absoluteExpiration" />
 
@@ -915,8 +1075,12 @@
 
             
 
+            
+
              parameter to <see
              cref="F:System.Web.Caching.Cache.NoAbsoluteExpiration" />
+
+            
 
             
 
@@ -935,11 +1099,15 @@
 
             
 
+            
+
              object with dependencies, expiration and priority policies, and a delegate you can use to notify your application when the inserted item is removed from the Cache.</para
           >
         </summary>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -954,10 +1122,14 @@
 
           
 
+          
+
           The object to be inserted in the cache.</param
         >
         <param name="dependencies">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -972,8 +1144,12 @@
 
           
 
+          
+
           The time at which the inserted object expires and is removed from the cache. To avoid possible issues with local time such as changes from standard time to daylight saving time, use <see
            cref="P:System.DateTime.UtcNow" />
+
+          
 
           
 
@@ -986,6 +1162,8 @@
 
           
 
+          
+
            for this parameter value. If you are using absolute expiration, the <paramref
            name="slidingExpiration" />
 
@@ -993,8 +1171,12 @@
 
           
 
+          
+
            parameter must be <see
            cref="F:System.Web.Caching.Cache.NoSlidingExpiration" />
+
+          
 
           
 
@@ -1009,6 +1191,8 @@
 
           
 
+          
+
           The interval between the time the inserted object was last accessed and the time at which that object expires. If this value is the equivalent of 20 minutes, the object will expire and be removed from the cache 20 minutes after it was last accessed. If you are using sliding expiration, the <paramref
            name="absoluteExpiration" />
 
@@ -1016,8 +1200,12 @@
 
           
 
+          
+
            parameter must be <see
            cref="F:System.Web.Caching.Cache.NoAbsoluteExpiration" />
+
+          
 
           
 
@@ -1032,8 +1220,12 @@
 
           
 
+          
+
           The cost of the object relative to other items stored in the cache, as expressed by the <see
            cref="T:System.Web.Caching.CacheItemPriority" />
+
+          
 
           
 
@@ -1043,6 +1235,8 @@
         >
         <param name="onRemoveCallback">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1097,8 +1291,12 @@
 
             
 
+            
+
              parameter equal to <see
              cref="F:System.DateTime.MaxValue" />
+
+            
 
             
 
@@ -1117,8 +1315,12 @@
 
             
 
+            
+
              parameter in an <see
              cref="M:System.Web.Caching.Cache.Insert(System.String,System.Object)" />
+
+            
 
             
 
@@ -1152,6 +1354,8 @@
 
             
 
+            
+
              parameter to the <see
              cref="F:System.TimeSpan.Zero" />
 
@@ -1159,8 +1363,12 @@
 
             
 
+            
+
              field, which has a constant value of zero. The cached item expires in accordance with the <paramref
              name="absoluteExpiration" />
+
+            
 
             
 
@@ -1179,6 +1387,8 @@
 
             
 
+            
+
              parameter in an <see
              cref="M:System.Web.Caching.Cache.Insert(System.String,System.Object)" />
 
@@ -1186,8 +1396,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Web.Caching.Cache.Add(System.String,System.Object,System.Web.Caching.CacheDependency,System.DateTime,System.TimeSpan,System.Web.Caching.CacheItemPriority,System.Web.Caching.CacheItemRemovedCallback)" />
+
+            
 
             
 
@@ -1223,6 +1437,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1237,8 +1453,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1278,6 +1498,8 @@
 
             
 
+            
+
              object collection.</para
           >
         </summary>
@@ -1286,6 +1508,8 @@
           <para
             >An enumerator that can iterate through the <see
              cref="T:System.Web.Caching.Cache" />
+
+            
 
             
 

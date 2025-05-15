@@ -24,8 +24,12 @@
 
         
 
+        
+
          interface supplement those of the <see
          cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+        
 
         
 

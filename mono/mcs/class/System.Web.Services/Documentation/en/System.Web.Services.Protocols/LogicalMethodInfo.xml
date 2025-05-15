@@ -22,8 +22,12 @@
 
         
 
+        
+
          is used primarily by a SOAP extension to interrogate the details of the XML Web service method with which the SOAP extension is configured to run. Depending on how the SOAP extension is configured, it can find out details about the XML Web service method in the <see
          cref="M:System.Web.Services.Protocols.SoapExtension.GetInitializer(System.Web.Services.Protocols.LogicalMethodInfo,System.Web.Services.Protocols.SoapExtensionAttribute)" />
+
+        
 
         
 
@@ -36,8 +40,12 @@
 
         
 
+        
+
          that takes a <see
          cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+
+        
 
         
 
@@ -50,6 +58,8 @@
 
         
 
+        
+
          provides details such as the XML Web service method's parameters by accessing the <see
          cref="P:System.Web.Services.Protocols.LogicalMethodInfo.Parameters" />
 
@@ -57,8 +67,12 @@
 
         
 
+        
+
          property and any custom attributes applied to the XML Web service method using the <see
          cref="M:System.Web.Services.Protocols.LogicalMethodInfo.GetCustomAttributes(System.Type)" />
+
+        
 
         
 
@@ -74,12 +88,16 @@
 
         
 
+        
+
          class or <format
          type="text/html">
           <a href="97D81ACE-95E7-4ACC-AE39-9692A0021E95"
             >[&lt;topic://cpconAlteringSOAPMessageUsingSOAPExtensions&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -120,8 +138,12 @@
 
             
 
+            
+
              class with the <see
              cref="T:System.Reflection.MethodInfo" />
+
+            
 
             
 
@@ -161,6 +183,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -175,6 +199,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -183,6 +209,8 @@
           <para
             >Gets the parameter information for the <paramref
              name="AsyncCallback" />
+
+            
 
             
 
@@ -222,8 +250,12 @@
 
             
 
+            
+
              interface, which can then be passed to the End method at a later time to complete the asynchronous method invocation. The returned object implementing the <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -238,6 +270,8 @@
                 >[&lt;topic://cpconInvokingWebServicesAsynchronously&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -286,6 +320,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -294,6 +330,8 @@
           <para
             >Gets the parameter information for the <paramref
              name="AsyncState" />
+
+            
 
             
 
@@ -335,6 +373,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -348,8 +388,12 @@
 
             
 
+            
+
              which is passed to <see
              cref="M:System.Web.Services.Protocols.LogicalMethodInfo.EndInvoke(System.Object,System.IAsyncResult)" />
+
+            
 
             
 
@@ -365,8 +409,12 @@
 
           
 
+          
+
           The instance of the <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -381,8 +429,12 @@
 
           
 
+          
+
           An argument list for the invoked method. This is an array of objects with the same number, order, and type as the parameters of the method. If the method does not require any parameters, <paramref
            name="values" />
+
+          
 
           
 
@@ -397,8 +449,12 @@
 
           
 
+          
+
           The delegate to call when the asynchronous invoke is complete. If <paramref
            name="callback" />
+
+          
 
           
 
@@ -408,6 +464,8 @@
         >
         <param name="asyncState">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -475,8 +533,12 @@
 
             
 
+            
+
              that can contain information about both asynchronous and synchronous methods, creates an array of <see
              cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+
+            
 
             
 
@@ -495,8 +557,12 @@
 
             
 
+            
+
             , representing the methods within <paramref
              name="methodInfos" />
+
+            
 
             
 
@@ -540,6 +606,8 @@
 
             
 
+            
+
             , where the returned array of <see
              cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
 
@@ -547,8 +615,12 @@
 
             
 
+            
+
              can be restricted to only asynchronous or synchronous methods, creates an array of <see
              cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+
+            
 
             
 
@@ -567,6 +639,8 @@
 
             
 
+            
+
             , representing the methods within <paramref
              name="methodInfos" />
 
@@ -574,8 +648,12 @@
 
             
 
+            
+
             , filtered by the value of <paramref
              name="types" />
+
+            
 
             
 
@@ -591,6 +669,8 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Web.Services.Protocols.LogicalMethodTypes" />
 
@@ -598,8 +678,12 @@
 
           
 
+          
+
            values. Determines whether just asynchronous or synchronous methods or both are included in the returned array of <see
            cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+
+          
 
           
 
@@ -657,8 +741,12 @@
 
             
 
+            
+
              property retrieves a reference to a <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -671,6 +759,8 @@
 
             
 
+            
+
              might not be the same as the <see
              cref="T:System.Type" />
 
@@ -678,8 +768,12 @@
 
             
 
+            
+
              of the class implementing the XML Web service (if that class derives from a base class and the method represented by this class is declared in that base class then the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -693,6 +787,8 @@
           <para
             >Gets the class that declares the method represented by the current <see
              cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+
+            
 
             
 
@@ -732,6 +828,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -746,8 +844,12 @@
 
           
 
+          
+
           The instance of the <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -762,6 +864,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.IAsyncResult" />
 
@@ -769,8 +873,12 @@
 
           
 
+          
+
            returned from <see
            cref="M:System.Web.Services.Protocols.LogicalMethodInfo.BeginInvoke(System.Object,System.Object[],System.AsyncCallback,System.Object)" />
+
+          
 
           
 
@@ -835,8 +943,12 @@
 
             
 
+            
+
              containing the first custom attribute applied to the <paramref
              name="type" />
+
+            
 
             
 
@@ -852,8 +964,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -892,8 +1008,12 @@
 
             
 
+            
+
              containing the custom attributes applied to <paramref
              name="type" />
+
+            
 
             
 
@@ -909,8 +1029,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -949,6 +1073,8 @@
 
             
 
+            
+
              to obtain information about the parameter's data type, default value, and so on.</para
           >
           <para>
@@ -958,8 +1084,12 @@
 
             
 
+            
+
              returns an array of <see
              cref="T:System.Reflection.ParameterInfo" />
+
+            
 
             
 
@@ -973,6 +1103,8 @@
           <para
             >Gets the parameters passed into the method represented by the instance of <see
              cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+
+            
 
             
 
@@ -1012,6 +1144,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1020,6 +1154,8 @@
           <para
             >An array of type <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -1035,8 +1171,12 @@
 
           
 
+          
+
           The instance of the <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1051,8 +1191,12 @@
 
           
 
+          
+
           An argument list for the invoked method. This is an array of objects with the same number, order, and type as the parameters of the method. If the method does not require any parameters, the <paramref
            name="values" />
+
+          
 
           
 
@@ -1080,6 +1224,8 @@
           <para
             >Gets a value indicating whether the method represented by the instance of <see
              cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+
+            
 
             
 
@@ -1126,6 +1272,8 @@
 
             
 
+            
+
              parameter is a Begin method of an asynchronous invocation; otherwise, false.</para
           >
         </returns>
@@ -1167,6 +1315,8 @@
 
             
 
+            
+
              parameter is an End method of an asynchronous invocation; otherwise, false.</para
           >
         </returns>
@@ -1190,6 +1340,8 @@
           <para
             >Gets a value indicating whether the return type for the method represented by the instance of <see
              cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+
+            
 
             
 
@@ -1249,6 +1401,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1278,6 +1432,8 @@
           <para
             >Use a <see
              cref="T:System.Reflection.ParameterInfo" />
+
+            
 
             
 
@@ -1321,6 +1477,8 @@
 
             
 
+            
+
              to obtain information about the parameter's data type, default value, and so on.</para
           >
           <para>
@@ -1330,8 +1488,12 @@
 
             
 
+            
+
              returns an array of <see
              cref="T:System.Reflection.ParameterInfo" />
+
+            
 
             
 
@@ -1414,6 +1576,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1427,8 +1591,12 @@
 
             
 
+            
+
              that represents the current <see
              cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+
+            
 
             
 

@@ -19,6 +19,8 @@
 
         
 
+        
+
          interface can be added to the application's message pump to filter out a message or perform other operations before the message is dispatched to a form or control. To add the message filter to an application's message pump, use the <see
          cref="M:System.Windows.Forms.Application.AddMessageFilter(System.Windows.Forms.IMessageFilter)" />
 
@@ -26,8 +28,12 @@
 
         
 
+        
+
          method in the <see
          cref="T:System.Windows.Forms.Application" />
+
+        
 
         
 

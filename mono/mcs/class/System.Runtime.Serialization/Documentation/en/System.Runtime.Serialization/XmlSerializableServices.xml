@@ -27,6 +27,8 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Runtime.Serialization.ImportOptions" />
 
@@ -34,8 +36,12 @@
 
         
 
+        
+
          class.  Setting the property to true specifies that these types are imported as XML types that implement the <see
          cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+        
 
         
 
@@ -51,8 +57,12 @@
 
         
 
+        
+
          is an abstract helper class that contains code that is used by the generated <see
          cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+        
 
         
 
@@ -103,8 +113,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -119,8 +133,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlQualifiedName" />
+
+          
 
           
 
@@ -160,6 +178,8 @@
 
             
 
+            
+
              objects. It is a helper method used by the types that implement <see
              cref="T:System.Xml.Serialization.IXmlSerializable" />
 
@@ -167,8 +187,12 @@
 
             
 
+            
+
              and that use the <see
              cref="M:System.Xml.Serialization.IXmlSerializable.ReadXml(System.Xml.XmlReader)" />
+
+            
 
             
 
@@ -191,6 +215,8 @@
 
             
 
+            
+
             . </para
           >
         </returns>
@@ -201,8 +227,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -245,8 +275,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -261,8 +295,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Xml.XmlNode" />
+
+          
 
           
 

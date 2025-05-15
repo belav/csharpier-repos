@@ -20,8 +20,12 @@
 
         
 
+        
+
          enumeration is used to represent the data-entry modes of a <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
          property. After an insert or update operation, the <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -48,8 +56,12 @@
 
         
 
+        
+
          property. By default, the control returns to read-only mode. You can specify an alternate mode to return to by setting the <see
          cref="P:System.Web.UI.WebControls.DetailsView.DefaultMode" />
+
+        
 
         
 
@@ -62,8 +74,12 @@
 
         
 
+        
+
          method. When the <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -97,6 +113,8 @@
 
               
 
+              
+
                control attempts to change between edit, insert, and read-only mode, but before the mode actually changes. This event is often used to cancel a mode change.</para
             >
           </description>
@@ -116,8 +134,12 @@
 
               
 
+              
+
                control has changed from edit, insert, or read-only mode to another mode. This event is often used to perform a task when the <see
                cref="T:System.Web.UI.WebControls.DetailsView" />
+
+              
 
               
 
@@ -134,6 +156,8 @@
       <para
         >Represents the different data-entry modes of a <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 

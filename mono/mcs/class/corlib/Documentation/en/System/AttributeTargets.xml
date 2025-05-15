@@ -43,9 +43,13 @@
 
         
 
+        
+
          can be
    used with <see
          cref="T:System.AttributeUsageAttribute" />
+
+        
 
         
 
@@ -58,9 +62,13 @@
 
         
 
+        
+
         ,
    can be applied to structures and classes. The <paramref
          name="Author" />
+
+        
 
         
 
@@ -102,10 +110,14 @@ class JohnsClass {
 
         
 
+        
+
          class uses this enumeration to specify the kind of element on which it is valid to apply an attribute.</para
       >
       <para>
         <see cref="T:System.AttributeTargets" />
+
+        
 
         
 
@@ -476,6 +488,8 @@ class JohnsClass {
           <block subset="none" type="note">
             <para>
               <paramref name="Module" />
+
+              
 
               
 

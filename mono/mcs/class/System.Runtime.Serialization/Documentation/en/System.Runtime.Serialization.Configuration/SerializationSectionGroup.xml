@@ -32,6 +32,8 @@
 
         
 
+        
+
          group, which contains the <format
          type="text/html">
           <a href="f41fb4d5-24e7-4059-8010-286a30bfea93">&lt;dataContractSerializer&gt;</a>
@@ -41,10 +43,14 @@
 
         
 
+        
+
          element, specifically, to allow the addition of types to the collection of known types. For more information about data contract known types, see <format
          type="text/html">
           <a href="1a0baea1-27b7-470d-9136-5bbad86c4337">Data Contract Known Types</a>
         </format>
+
+        
 
         
 
@@ -62,6 +68,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -70,6 +78,8 @@
       <para
         >Handles the XML elements used to configure serialization by the <see
          cref="T:System.Runtime.Serialization.DataContractSerializer" />
+
+        
 
         
 
@@ -98,6 +108,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Serialization.Configuration.SerializationSectionGroup" />
+
+            
 
             
 
@@ -132,6 +144,8 @@
           <para
             >Gets the <see
              cref="T:System.Runtime.Serialization.Configuration.DataContractSerializerSection" />
+
+            
 
             
 
@@ -177,6 +191,8 @@
 
             
 
+            
+
              that represents the configuration section.</para
           >
         </returns>
@@ -187,8 +203,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.Configuration" />
+
+          
 
           
 

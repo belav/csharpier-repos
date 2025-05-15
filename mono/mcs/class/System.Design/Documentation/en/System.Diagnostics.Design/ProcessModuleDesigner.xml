@@ -37,6 +37,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -73,6 +75,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -83,8 +87,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 

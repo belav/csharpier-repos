@@ -32,6 +32,8 @@
 
         
 
+        
+
          delegate is defined for the <see
          cref="E:System.Web.Security.DefaultAuthenticationModule.Authenticate" />
 
@@ -39,8 +41,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.Security.DefaultAuthenticationModule" />
+
+        
 
         
 
@@ -53,8 +59,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.Security.DefaultAuthenticationModule" />
+
+        
 
         
 
@@ -67,8 +77,12 @@
 
         
 
+        
+
          in the Global.asax file for your ASP.NET application. The <see
          cref="E:System.Web.Security.DefaultAuthenticationModule.Authenticate" />
+
+        
 
         
 
@@ -81,8 +95,12 @@
 
         
 
+        
+
          event and is used to ensure that the <see
          cref="P:System.Web.HttpContext.User" />
+
+        
 
         
 
@@ -95,8 +113,12 @@
 
         
 
+        
+
          is populated with an <see
          cref="T:System.Security.Principal.IPrincipal" />
+
+        
 
         
 
@@ -112,8 +134,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.Security.DefaultAuthenticationEventArgs" />
+
+        
 
         
 
@@ -126,8 +152,12 @@
 
         
 
+        
+
          event to set the <see
          cref="P:System.Web.HttpContext.User" />
+
+        
 
         
 
@@ -140,8 +170,12 @@
 
         
 
+        
+
          to a custom <see
          cref="T:System.Security.Principal.IPrincipal" />
+
+        
 
         
 
@@ -154,8 +188,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.HttpContext" />
+
+        
 
         
 
@@ -168,8 +206,12 @@
 
         
 
+        
+
          event, the <see
          cref="T:System.Web.Security.DefaultAuthenticationModule" />
+
+        
 
         
 
@@ -182,6 +224,8 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.HttpContext" />
 
@@ -189,8 +233,12 @@
 
         
 
+        
+
          to a <see
          cref="T:System.Security.Principal.GenericPrincipal" />
+
+        
 
         
 
@@ -206,6 +254,8 @@
 
         
 
+        
+
          event is raised after the <see
          cref="E:System.Web.HttpApplication.AuthenticateRequest" />
 
@@ -213,8 +263,12 @@
 
         
 
+        
+
          event and before the <see
          cref="E:System.Web.HttpApplication.AuthorizeRequest" />
+
+        
 
         
 
@@ -229,8 +283,12 @@
 
         
 
+        
+
          section that depends on the user name to deny or allow access to your application, modifying the <see
          cref="P:System.Web.HttpContext.User" />
+
+        
 
         
 
@@ -243,8 +301,12 @@
 
         
 
+        
+
          can affect the behavior of your application. Be sure that the user name you set during the <system
         >DefaultAuthentication_OnAuthenticate</system>
+
+        
 
         
 
@@ -254,6 +316,8 @@
          type="text/html">
           <a href="2d3d9bf6-f914-4c30-ad03-32eea98fa612">authorization</a>
         </format>
+
+        
 
         
 
@@ -272,8 +336,12 @@
 
         
 
+        
+
          event of a <see
          cref="T:System.Web.Security.DefaultAuthenticationModule" />
+
+        
 
         
 

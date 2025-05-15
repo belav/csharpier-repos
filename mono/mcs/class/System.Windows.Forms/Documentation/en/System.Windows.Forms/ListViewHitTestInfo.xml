@@ -20,6 +20,8 @@
 
         
 
+        
+
          is returned by the <see
          cref="T:System.Windows.Forms.ListView" />
 
@@ -27,8 +29,12 @@
 
         
 
+        
+
          class when the <see
          cref="Overload:System.Windows.Forms.ListView.HitTest" />
+
+        
 
         
 
@@ -47,8 +53,12 @@
 
         
 
+        
+
          control or a <see
          cref="T:System.Windows.Forms.ListViewItem" />
+
+        
 
         
 
@@ -104,6 +114,8 @@
 
             
 
+            
+
              does not contain items or the position indicated is not on an item.</para
           >
         </remarks>
@@ -117,8 +129,12 @@
 
             
 
+            
+
              at the position indicated by a hit test on a <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -154,6 +170,8 @@
 
             
 
+            
+
              if the hit test indicates a position that is within the client area of the <see
              cref="T:System.Windows.Forms.ListView" />
 
@@ -161,8 +179,12 @@
 
             
 
+            
+
              but is not located on a <see
              cref="T:System.Windows.Forms.ListViewItem" />
+
+            
 
             
 
@@ -181,8 +203,12 @@
 
             
 
+            
+
              control, in relation to the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -218,6 +244,8 @@
 
             
 
+            
+
              does not contain subitems or the position indicated is not on a subitem.</para
           >
         </remarks>
@@ -231,8 +259,12 @@
 
             
 
+            
+
              at the position indicated by a hit test on a <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 

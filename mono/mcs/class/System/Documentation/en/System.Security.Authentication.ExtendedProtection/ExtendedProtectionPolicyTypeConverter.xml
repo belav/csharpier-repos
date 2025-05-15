@@ -35,8 +35,12 @@
 
         
 
+        
+
          class is primarily used internally for XAML serialization of <see
          cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
+
+        
 
         
 
@@ -50,6 +54,8 @@
       <para
         >The <see
          cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicyTypeConverter" />
+
+        
 
         
 
@@ -78,6 +84,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicyTypeConverter" />
+
+            
 
             
 
@@ -125,6 +133,8 @@
 
           
 
+          
+
           The object to convert.</param
         >
         <param name="destinationType">
@@ -134,8 +144,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -178,8 +192,12 @@
 
             
 
+            
+
              parameter to extract additional information about the environment from which this converter is invoked. This parameter can be null, so always check it. Also, properties on the <paramref
              name="context" />
+
+            
 
             
 
@@ -202,8 +220,12 @@
 
             
 
+            
+
              that represents the converted <paramref
              name="value" />
+
+            
 
             
 
@@ -219,8 +241,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -235,8 +261,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -251,6 +281,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -258,8 +290,12 @@
 
           
 
+          
+
            to convert. This should be a <see
            cref="T:System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy" />
+
+          
 
           
 
@@ -274,8 +310,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 

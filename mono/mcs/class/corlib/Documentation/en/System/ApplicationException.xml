@@ -43,8 +43,12 @@
 
         
 
+        
+
          class. It was originally thought that custom exceptions should derive from the <see
          cref="T:System.ApplicationException" />
+
+        
 
         
 
@@ -59,10 +63,14 @@
 
         
 
+        
+
         .</para
       >
       <para>
         <see cref="T:System.ApplicationException" />
+
+        
 
         
 
@@ -78,8 +86,12 @@
 
         
 
+        
+
         , see the <see
          cref="T:System.ApplicationException" />
+
+        
 
         
 
@@ -123,11 +135,15 @@
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "An application error has occurred." This message takes into account the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.ApplicationException" />
+
+            
 
             
 
@@ -178,6 +194,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -215,12 +233,16 @@
 
             
 
+            
+
              parameter is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
           >
           <para>This message takes into account the current system culture.</para>
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.ApplicationException" />
+
+            
 
             
 
@@ -269,11 +291,15 @@
 
             
 
+            
+
              class with a specified error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -316,6 +342,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -324,6 +352,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ApplicationException" />
+
+            
 
             
 
@@ -339,10 +369,14 @@
 
           
 
+          
+
           The object that holds the serialized object data. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -387,11 +421,15 @@
 
             
 
+            
+
              parameter is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
           >
           <para
             >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -404,8 +442,12 @@
 
             
 
+            
+
              property returns the same value that is passed into the constructor, or a null reference if the <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -416,6 +458,8 @@
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.ApplicationException" />
+
+            
 
             
 
@@ -466,11 +510,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -485,8 +533,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 

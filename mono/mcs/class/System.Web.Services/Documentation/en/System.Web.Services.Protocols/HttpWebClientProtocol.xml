@@ -27,11 +27,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >To communicate with an XML Web service using HTTP, you must create a proxy class deriving indirectly or directly from <see
          cref="T:System.Web.Services.Protocols.HttpWebClientProtocol" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          property for calling XML Web services through a firewall. Many of these properties are used to initialize the <see
          cref="T:System.Net.HttpWebRequest" />
+
+        
 
         
 
@@ -63,8 +71,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Web.Services.Protocols.HttpGetClientProtocol" />
+
+        
 
         
 
@@ -77,8 +89,12 @@
 
         
 
+        
+
          derive directly or indirectly from <see
          cref="T:System.Web.Services.Protocols.HttpWebClientProtocol" />
+
+        
 
         
 
@@ -105,6 +121,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Protocols.HttpWebClientProtocol" />
+
+            
 
             
 
@@ -139,8 +157,12 @@
 
             
 
+            
+
              is thrown if the <see
              cref="P:System.Web.Services.Protocols.HttpWebClientProtocol.AllowAutoRedirect" />
+
+            
 
             
 
@@ -153,8 +175,12 @@
 
             
 
+            
+
              property contains an <see
              cref="T:System.Net.HttpWebResponse" />
+
+            
 
             
 
@@ -167,8 +193,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.HttpWebResponse.Headers" />
+
+            
 
             
 
@@ -181,6 +211,8 @@
 
             
 
+            
+
              property contains an <see
              cref="T:System.Net.HttpStatusCode" />
 
@@ -188,8 +220,12 @@
 
             
 
+            
+
              equivalent to one of the HTTP redirect status codes (301, 302, and 307) and the Location header within the <see
              cref="P:System.Net.HttpWebResponse.Headers" />
+
+            
 
             
 
@@ -233,6 +269,8 @@
         </summary>
         <param name="userState">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -304,8 +342,12 @@
 
             
 
+            
+
              and assigning that to the <see
              cref="P:System.Web.Services.Protocols.HttpWebClientProtocol.CookieContainer" />
+
+            
 
             
 
@@ -318,8 +360,12 @@
 
             
 
+            
+
              in its own session state. Because not all XML Web services use session state and thus clients are not always required to use the <see
              cref="P:System.Web.Services.Protocols.HttpWebClientProtocol.CookieContainer" />
+
+            
 
             
 
@@ -370,6 +416,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -404,8 +452,12 @@
 
             
 
+            
+
              for each XML Web service method exposed by the specified type, and stores the mappings in the specified <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -424,8 +476,12 @@
 
             
 
+            
+
              can be assigned to a <see
              cref="T:System.Web.Services.Protocols.SoapHttpClientProtocol" />
+
+            
 
             
 
@@ -441,8 +497,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -481,6 +541,8 @@
 
             
 
+            
+
              for each XML Web service method exposed by the specified types, and stores the mappings in the specified <see
              cref="T:System.Collections.ArrayList" />
 
@@ -488,8 +550,12 @@
 
             
 
+            
+
             , as well as in a <see
              cref="T:System.Collections.Hashtable" />
+
+            
 
             
 
@@ -508,6 +574,8 @@
 
             
 
+            
+
              that contains the <see
              cref="T:System.Xml.Serialization.XmlMembersMapping" />
 
@@ -515,8 +583,12 @@
 
             
 
+            
+
              for each XML Web service method exposed by the specified types. The types contained in <paramref
              name="types" />
+
+            
 
             
 
@@ -532,8 +604,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -567,6 +643,8 @@
 
             
 
+            
+
              for the specified URI.</para
           >
         </summary>
@@ -575,6 +653,8 @@
           <para
             >The created <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -590,6 +670,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Uri" />
 
@@ -597,8 +679,12 @@
 
           
 
+          
+
            for creating the <see
            cref="T:System.Net.WebRequest" />
+
+          
 
           
 
@@ -641,8 +727,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.WebRequest" />
+
+          
 
           
 
@@ -686,8 +776,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.WebRequest" />
+
+          
 
           
 
@@ -702,6 +796,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.IAsyncResult" />
 
@@ -709,8 +805,12 @@
 
           
 
+          
+
            to pass to <see
            cref="M:System.Net.HttpWebRequest.EndGetResponse(System.IAsyncResult)" />
+
+          
 
           
 
@@ -746,6 +846,8 @@
 
             
 
+            
+
              property if a client needs to use different proxy settings than those in the system settings. Use the <see
              cref="T:System.Net.WebProxy" />
 
@@ -753,8 +855,12 @@
 
             
 
+            
+
              class to set the proxy settings, because it implements <see
              cref="T:System.Net.IWebProxy" />
+
+            
 
             
 
@@ -769,6 +875,8 @@
                 >[&lt;topic://cpconconfiguringinternetapplications&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -820,8 +928,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Net.HttpWebRequest" />
+
+            
 
             
 

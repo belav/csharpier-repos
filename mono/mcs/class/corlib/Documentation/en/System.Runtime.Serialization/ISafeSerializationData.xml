@@ -21,6 +21,8 @@
 
         
 
+        
+
          method. Starting with .NET Framework 4.0, that method is marked with the <see
          cref="T:System.Security.SecurityCriticalAttribute" />
 
@@ -28,8 +30,12 @@
 
         
 
+        
+
          attribute which prevents execution in security-transparent code. To work around this condition, implement the <see
          cref="T:System.Runtime.Serialization.ISafeSerializationData interface" />
+
+        
 
         
 
@@ -45,8 +51,12 @@
 
         
 
+        
+
          method is called after serialization, and uses the <see
          cref="T:System.Runtime.Serialization.SafeSerializationEventArgs" />
+
+        
 
         
 
@@ -91,6 +101,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -100,6 +112,8 @@
         </summary>
         <param name="deserialized">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

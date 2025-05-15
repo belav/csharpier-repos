@@ -27,6 +27,8 @@
 
         
 
+        
+
          control interacts with the page parser to build HTML server controls that do not have a body or closing tag, such as &lt;img&gt;, &lt;link&gt;, &lt;input&gt;, and &lt;meta&gt;. The <see
          cref="M:System.Web.UI.HtmlControls.HtmlEmptyTagControlBuilder.HasBody" />
 
@@ -34,8 +36,12 @@
 
         
 
+        
+
          property always returns false, indicating that controls built with the <see
          cref="T:System.Web.UI.HtmlControls.HtmlEmptyTagControlBuilder" />
+
+        
 
         
 
@@ -66,6 +72,8 @@
 
             
 
+            
+
              method is used internally by the ASP.NET page framework and is not intended to be called from your code.</para
           >
         </remarks>
@@ -74,6 +82,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlEmptyTagControlBuilder" />
+
+            
 
             
 
@@ -106,8 +116,12 @@
 
             
 
+            
+
              method overrides the base class's <see
              cref="M:System.Web.UI.ControlBuilder.HasBody" />
+
+            
 
             
 
@@ -120,6 +134,8 @@
 
             
 
+            
+
              class represents controls that do not have closing tags. The <see
              cref="M:System.Web.UI.ControlBuilder.HasBody" />
 
@@ -127,8 +143,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Web.UI.ControlBuilder" />
+
+            
 
             
 
@@ -142,6 +162,8 @@
           <para
             >Indicates that the controls built with the <see
              cref="T:System.Web.UI.HtmlControls.HtmlEmptyTagControlBuilder" />
+
+            
 
             
 

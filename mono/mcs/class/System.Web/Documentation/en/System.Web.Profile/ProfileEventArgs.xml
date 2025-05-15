@@ -21,8 +21,12 @@
 
         
 
+        
+
          class during the <see
          cref="E:System.Web.Profile.ProfileModule.Personalize" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          event completes, the <see
          cref="T:System.Web.Profile.ProfileEventArgs" />
+
+        
 
         
 
@@ -49,8 +57,12 @@
 
         
 
+        
+
          has its <see
          cref="P:System.Web.Profile.ProfileEventArgs.Profile" />
+
+        
 
         
 
@@ -63,6 +75,8 @@
 
         
 
+        
+
          uses the value of the <see
          cref="P:System.Web.Profile.ProfileEventArgs.Profile" />
 
@@ -70,8 +84,12 @@
 
         
 
+        
+
          property in the current <see
          cref="T:System.Web.HttpContext" />
+
+        
 
         
 
@@ -90,8 +108,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.Profile.ProfileModule" />
+
+        
 
         
 
@@ -123,8 +145,12 @@
 
             
 
+            
+
              creates an instance of the <see
              cref="T:System.Web.Profile.ProfileEventArgs" />
+
+            
 
             
 
@@ -137,8 +163,12 @@
 
             
 
+            
+
              property to the specified <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -157,6 +187,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -167,8 +199,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -200,8 +236,12 @@
 
             
 
+            
+
              object provides event information to the <see
              cref="E:System.Web.Profile.ProfileModule.Personalize" />
+
+            
 
             
 
@@ -214,6 +254,8 @@
 
             
 
+            
+
              class. The <see
              cref="P:System.Web.Profile.ProfileEventArgs.Context" />
 
@@ -221,8 +263,12 @@
 
             
 
+            
+
              property provides access to the <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -236,6 +282,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -271,8 +319,12 @@
 
             
 
+            
+
              property during the <see
              cref="E:System.Web.Profile.ProfileModule.Personalize" />
+
+            
 
             
 
@@ -285,8 +337,12 @@
 
             
 
+            
+
              event completes, the <see
              cref="T:System.Web.Profile.ProfileEventArgs" />
+
+            
 
             
 
@@ -299,8 +355,12 @@
 
             
 
+            
+
              has its <see
              cref="P:System.Web.Profile.ProfileEventArgs.Profile" />
+
+            
 
             
 
@@ -313,6 +373,8 @@
 
             
 
+            
+
              uses the value of the <see
              cref="P:System.Web.Profile.ProfileEventArgs.Profile" />
 
@@ -320,8 +382,12 @@
 
             
 
+            
+
              property in the current <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -338,8 +404,12 @@
 
               
 
+              
+
                does not set the <see
                cref="P:System.Web.Profile.ProfileEventArgs.Profile" />
+
+              
 
               
 
@@ -352,8 +422,12 @@
 
               
 
+              
+
                event. The <see
                cref="T:System.Web.Profile.ProfileModule" />
+
+              
 
               
 
@@ -366,8 +440,12 @@
 
               
 
+              
+
                property when the code in the <see
                cref="E:System.Web.Profile.ProfileModule.Personalize" />
+
+              
 
               
 
@@ -380,6 +458,8 @@
 
               
 
+              
+
                property is not explicitly set by application code during the <see
                cref="E:System.Web.Profile.ProfileModule.Personalize" />
 
@@ -387,8 +467,12 @@
 
               
 
+              
+
                event, the <see
                cref="P:System.Web.Profile.ProfileEventArgs.Profile" />
+
+              
 
               
 

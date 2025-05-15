@@ -42,8 +42,12 @@
 
         
 
+        
+
          is designed for character output in a particular encoding, whereas classes derived from <see
          cref="T:System.IO.Stream" />
+
+        
 
         
 
@@ -58,8 +62,12 @@
 
         
 
+        
+
          defaults to using an instance of <see
          cref="T:System.Text.UTF8Encoding" />
+
+        
 
         
 
@@ -72,8 +80,12 @@
 
         
 
+        
+
          method returns an empty byte array. The default UTF-8 encoding for this constructor throws an exception on invalid bytes. This behavior is different from the behavior provided by the encoding object in the <see
          cref="P:System.Text.Encoding.UTF8" />
+
+        
 
         
 
@@ -86,8 +98,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.IO.StreamWriter.#ctor(System.IO.Stream,System.Text.Encoding)" />
+
+        
 
         
 
@@ -103,8 +119,12 @@
 
         
 
+        
+
          is not thread safe. See <see
          cref="M:System.IO.TextWriter.Synchronized(System.IO.TextWriter)" />
+
+        
 
         
 
@@ -122,6 +142,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -130,6 +152,8 @@
       <para
         >Implements a <see
          cref="T:System.IO.TextWriter" />
+
+        
 
         
 
@@ -168,6 +192,8 @@
 
           
 
+          
+
           does not support writing.</exception
         >
         <exception cref="T:System.ArgumentNullException">
@@ -177,8 +203,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -196,8 +226,12 @@
 
             
 
+            
+
              with UTF-8 encoding without a Byte-Order Mark (BOM), so its <see
              cref="M:System.Text.Encoding.GetPreamble" />
+
+            
 
             
 
@@ -210,8 +244,12 @@
 
             
 
+            
+
              property. To specify whether an exception is thrown on invalid bytes, use a constructor that accepts an encoding object as a parameter, such as <see
              cref="M:System.IO.StreamWriter.#ctor(System.IO.Stream,System.Text.Encoding)" />
+
+            
 
             
 
@@ -224,8 +262,12 @@
 
             
 
+            
+
              property is initialized using the <paramref
              name="stream" />
+
+            
 
             
 
@@ -241,8 +283,12 @@
 
             
 
+            
+
              object calls <see
              cref="M:System.IO.Stream.Dispose" />
+
+            
 
             
 
@@ -255,8 +301,12 @@
 
             
 
+            
+
              object when <see
              cref="M:System.IO.StreamWriter.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -277,6 +327,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -290,11 +342,15 @@
 
             
 
+            
+
              class for the specified stream by using UTF-8 encoding and the default buffer size.</para
           >
         </summary>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -333,11 +389,15 @@
 
           
 
+          
+
            is in an invalid format or contains invalid characters.</exception
         >
         <exception cref="T:System.IO.DirectoryNotFoundException"
           >The directory information specified in <paramref
            name="path" />
+
+          
 
           
 
@@ -353,10 +413,14 @@
 
           
 
+          
+
            is denied.</exception
         >
         <exception cref="T:System.ArgumentException">
           <paramref name="path " />
+
+          
 
           
 
@@ -371,8 +435,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -391,6 +459,8 @@
 
           
 
+          
+
           , <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
         </permission>
@@ -402,8 +472,12 @@
 
           
 
+          
+
             or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -421,8 +495,12 @@
 
             
 
+            
+
              with UTF-8 encoding without a Byte-Order Mark (BOM), so its <see
              cref="M:System.Text.Encoding.GetPreamble" />
+
+            
 
             
 
@@ -435,8 +513,12 @@
 
             
 
+            
+
              property. To specify a BOM and determine whether an exception is thrown on invalid bytes, use a constructor that accepts an encoding object as a parameter, such as <see
              cref="M:System.IO.StreamWriter.#ctor(System.String,System.Boolean,System.Text.Encoding)" />
+
+            
 
             
 
@@ -452,11 +534,15 @@
 
             
 
+            
+
              parameter can be a file name, including a file on a Universal Naming Convention (UNC) share. If the file exists, it is overwritten; otherwise, a new file is created.</para
           >
           <para
             >The <paramref
              name="path" />
+
+            
 
             
 
@@ -477,6 +563,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -485,6 +573,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.StreamWriter" />
+
+            
 
             
 
@@ -500,8 +590,12 @@
 
           
 
+          
+
           The complete file path to write to. <paramref
            name="path" />
+
+          
 
           
 
@@ -544,8 +638,12 @@
 
           
 
+          
+
            or <paramref
            name="encoding " />
+
+          
 
           
 
@@ -558,10 +656,14 @@
 
           
 
+          
+
           .</exception
         >
         <exception cref="T:System.ArgumentException">
           <paramref name="stream" />
+
+          
 
           
 
@@ -579,6 +681,8 @@
 
             
 
+            
+
              property using the encoding parameter, and the <see
              cref="P:System.IO.StreamWriter.BaseStream" />
 
@@ -586,8 +690,12 @@
 
             
 
+            
+
              property using the stream parameter. The position of the stream is not reset. For additional information, see <see
              cref="P:System.IO.TextWriter.Encoding" />
+
+            
 
             
 
@@ -603,8 +711,12 @@
 
             
 
+            
+
              object calls <see
              cref="M:System.IO.Stream.Dispose" />
+
+            
 
             
 
@@ -617,8 +729,12 @@
 
             
 
+            
+
              object when <see
              cref="M:System.IO.StreamWriter.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -639,6 +755,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -647,6 +765,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.StreamWriter" />
+
+            
 
             
 
@@ -662,10 +782,14 @@
 
           
 
+          
+
           The stream to write to. </param
         >
         <param name="encoding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -709,11 +833,15 @@
 
           
 
+          
+
            was not found.</exception
         >
         <exception cref="T:System.UnauthorizedAccessException"
           >Access to <paramref
            name="path" />
+
+          
 
           
 
@@ -728,6 +856,8 @@
 
           
 
+          
+
            is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters.</exception
         >
         <exception cref="T:System.ArgumentNullException">
@@ -737,8 +867,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -757,11 +891,15 @@
 
           
 
+          
+
           , <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
         </permission>
         <exception cref="T:System.IO.NotSupportedException">
           <paramref name="path " />
+
+          
 
           
 
@@ -777,8 +915,12 @@
 
           
 
+          
+
             or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -796,8 +938,12 @@
 
             
 
+            
+
              with UTF-8 encoding without a Byte-Order Mark (BOM), so its <see
              cref="M:System.Text.Encoding.GetPreamble" />
+
+            
 
             
 
@@ -810,8 +956,12 @@
 
             
 
+            
+
              property. To specify a BOM and determine whether an exception is thrown on invalid bytes, use a constructor that accepts an encoding object as a parameter, such as <see
              cref="M:System.IO.StreamWriter.#ctor(System.String,System.Boolean,System.Text.Encoding)" />
+
+            
 
             
 
@@ -827,11 +977,15 @@
 
             
 
+            
+
              parameter can be a file name, including a file on a Universal Naming Convention (UNC) share.</para
           >
           <para
             >The <paramref
              name="path" />
+
+            
 
             
 
@@ -852,6 +1006,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -860,6 +1016,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.StreamWriter" />
+
+            
 
             
 
@@ -875,10 +1033,14 @@
 
           
 
+          
+
           The complete file path to write to. </param
         >
         <param name="append">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -922,6 +1084,8 @@
 
           
 
+          
+
            or <paramref
            name="encoding " />
 
@@ -929,8 +1093,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -945,10 +1113,14 @@
 
           
 
+          
+
            is negative.</exception
         >
         <exception cref="T:System.ArgumentException">
           <paramref name="stream" />
+
+          
 
           
 
@@ -966,8 +1138,12 @@
 
             
 
+            
+
              property using the <paramref
              name="encoding" />
+
+            
 
             
 
@@ -980,6 +1156,8 @@
 
             
 
+            
+
              property using the <paramref
              name="stream" />
 
@@ -987,8 +1165,12 @@
 
             
 
+            
+
              parameter. The position of the stream is not reset. For additional information, see <see
              cref="P:System.IO.TextWriter.Encoding" />
+
+            
 
             
 
@@ -1004,8 +1186,12 @@
 
             
 
+            
+
              object calls <see
              cref="M:System.IO.Stream.Dispose" />
+
+            
 
             
 
@@ -1018,8 +1204,12 @@
 
             
 
+            
+
              object when <see
              cref="M:System.IO.StreamWriter.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -1040,6 +1230,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1048,6 +1240,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.StreamWriter" />
+
+            
 
             
 
@@ -1063,6 +1257,8 @@
 
           
 
+          
+
           The stream to write to. </param
         >
         <param name="encoding">
@@ -1072,10 +1268,14 @@
 
           
 
+          
+
           The character encoding to use. </param
         >
         <param name="bufferSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1123,6 +1323,8 @@
 
           
 
+          
+
            was not found.</exception
         >
         <exception cref="T:System.UnauthorizedAccessException"
@@ -1130,6 +1332,8 @@
         >
         <exception cref="T:System.ArgumentException">
           <paramref name="path " />
+
+          
 
           
 
@@ -1144,6 +1348,8 @@
 
           
 
+          
+
            or <paramref
            name="encoding" />
 
@@ -1151,8 +1357,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1171,11 +1381,15 @@
 
           
 
+          
+
           , <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
         </permission>
         <exception cref="T:System.IO.NotSupportedException">
           <paramref name="path " />
+
+          
 
           
 
@@ -1191,8 +1405,12 @@
 
           
 
+          
+
             or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -1210,8 +1428,12 @@
 
             
 
+            
+
              property using the encoding parameter. For additional information, see <see
              cref="P:System.IO.TextWriter.Encoding" />
+
+            
 
             
 
@@ -1226,10 +1448,14 @@
 
             
 
+            
+
              can be a file name, including a file on a Universal Naming Convention (UNC) share.</para
           >
           <para>
             <paramref name="path" />
+
+            
 
             
 
@@ -1250,6 +1476,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1258,6 +1486,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.StreamWriter" />
+
+            
 
             
 
@@ -1273,6 +1503,8 @@
 
           
 
+          
+
           The complete file path to write to. </param
         >
         <param name="append">
@@ -1282,10 +1514,14 @@
 
           
 
+          
+
           true to append data to the file; false to overwrite the file. If the specified file does not exist, this parameter has no effect, and the constructor creates a new file.</param
         >
         <param name="encoding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1326,8 +1562,12 @@
 
             
 
+            
+
              parameter to true, the <see
              cref="T:System.IO.StreamWriter" />
+
+            
 
             
 
@@ -1340,6 +1580,8 @@
 
             
 
+            
+
              on the provided <see
              cref="T:System.IO.Stream" />
 
@@ -1347,8 +1589,12 @@
 
             
 
+            
+
              object when <see
              cref="M:System.IO.StreamWriter.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -1364,8 +1610,12 @@
 
             
 
+            
+
              property by using the <paramref
              name="encoding" />
+
+            
 
             
 
@@ -1378,6 +1628,8 @@
 
             
 
+            
+
              property by using the <paramref
              name="stream" />
 
@@ -1385,8 +1637,12 @@
 
             
 
+            
+
              parameter. The position of the stream is not reset. For additional information, see the <see
              cref="P:System.IO.TextWriter.Encoding" />
+
+            
 
             
 
@@ -1408,11 +1664,15 @@
 
             
 
+            
+
              class for the specified stream by using the specified encoding and buffer size, and optionally leaves the stream open.</para
           >
         </summary>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1427,10 +1687,14 @@
 
           
 
+          
+
           The character encoding to use.</param
         >
         <param name="bufferSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1445,8 +1709,12 @@
 
           
 
+          
+
           true to leave the stream open after the <see
            cref="T:System.IO.StreamWriter" />
+
+          
 
           
 
@@ -1494,10 +1762,14 @@
 
           
 
+          
+
            was not found.</exception
         >
         <exception cref="T:System.ArgumentException">
           <paramref name="path " />
+
+          
 
           
 
@@ -1512,8 +1784,12 @@
 
           
 
+          
+
            or <paramref
            name="encoding" />
+
+          
 
           
 
@@ -1526,10 +1802,14 @@
 
           
 
+          
+
           .</exception
         >
         <exception cref="T:System.ArgumentOutOfRangeException">
           <paramref name="bufferSize " />
+
+          
 
           
 
@@ -1551,11 +1831,15 @@
 
           
 
+          
+
           , <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
         </permission>
         <exception cref="T:System.IO.NotSupportedException">
           <paramref name="path" />
+
+          
 
           
 
@@ -1571,8 +1855,12 @@
 
           
 
+          
+
             or the absolute path information for <paramref
            name="path" />
+
+          
 
           
 
@@ -1590,8 +1878,12 @@
 
             
 
+            
+
              property using the encoding parameter. For additional information, see <see
              cref="P:System.IO.TextWriter.Encoding" />
+
+            
 
             
 
@@ -1606,10 +1898,14 @@
 
             
 
+            
+
              can be a file name, including a file on a Universal Naming Convention (UNC) share.</para
           >
           <para>
             <paramref name="path" />
+
+            
 
             
 
@@ -1630,6 +1926,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1638,6 +1936,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.StreamWriter" />
+
+            
 
             
 
@@ -1653,10 +1953,14 @@
 
           
 
+          
+
           The complete file path to write to. </param
         >
         <param name="append">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1671,10 +1975,14 @@
 
           
 
+          
+
           The character encoding to use. </param
         >
         <param name="bufferSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1711,6 +2019,8 @@
 
             
 
+            
+
              to force
 <see
              cref="T:System.IO.StreamWriter" />
@@ -1719,9 +2029,13 @@
 
             
 
+            
+
              to flush its
    buffer; otherwise, <see
              langword="false" />
+
+            
 
             
 
@@ -1740,6 +2054,8 @@
 
             
 
+            
+
              or <see
              cref="M:System.IO.StreamWriter.Close" />
 
@@ -1747,8 +2063,12 @@
 
             
 
+            
+
             . Setting <see
              cref="P:System.IO.StreamWriter.AutoFlush" />
+
+            
 
             
 
@@ -1765,6 +2085,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -1772,6 +2094,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -1790,8 +2114,12 @@
 
             
 
+            
+
              will flush its buffer to the underlying stream after every call to <see
              cref="M:System.IO.StreamWriter.Write(System.Char)" />
+
+            
 
             
 
@@ -1833,8 +2161,12 @@
 
             
 
+            
+
              the current <see
              cref="T:System.IO.StreamWriter" />
+
+            
 
             
 
@@ -1851,6 +2183,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -1894,6 +2228,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -1904,8 +2240,12 @@
 
             
 
+            
+
              calls the <see
              cref="M:System.IO.StreamWriter.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -1921,8 +2261,12 @@
 
             
 
+            
+
              to ensure that all data is correctly written out to the underlying stream. Following a call to <see
              cref="M:System.IO.StreamWriter.Close" />
+
+            
 
             
 
@@ -1935,8 +2279,12 @@
 
             
 
+            
+
              might raise exceptions. If there is insufficient space on the disk, calling <see
              cref="M:System.IO.StreamWriter.Close" />
+
+            
 
             
 
@@ -1952,6 +2300,8 @@
 
             
 
+            
+
              or <see
              cref="M:System.IO.StreamWriter.Close" />
 
@@ -1959,8 +2309,12 @@
 
             
 
+            
+
             . Setting <see
              cref="P:System.IO.StreamWriter.AutoFlush" />
+
+            
 
             
 
@@ -2009,8 +2363,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.IO.StreamWriter" />
+
+            
 
             
 
@@ -2029,11 +2387,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2077,9 +2439,13 @@
 
             
 
+            
+
              specified in
    the constructor for the current instance, or <see
              cref="T:System.Text.UTF8Encoding" />
+
+            
 
             
 
@@ -2100,8 +2466,12 @@
 
             
 
+            
+
             . This allows the XML code to consume an arbitrary <see
              cref="T:System.IO.StreamWriter" />
+
+            
 
             
 
@@ -2119,6 +2489,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2127,6 +2499,8 @@
           <para
             >Gets the <see
              cref="T:System.Text.Encoding" />
+
+            
 
             
 
@@ -2160,8 +2534,12 @@
 
               
 
+              
+
               , and <see
                cref="M:System.Object.Finalize" />
+
+              
 
               
 
@@ -2177,6 +2555,8 @@
 
               
 
+              
+
                . </para
             >
           </block>
@@ -2186,6 +2566,8 @@
           <para
             >Frees the resources of the current <see
              cref="T:System.IO.StreamWriter" />
+
+            
 
             
 
@@ -2231,11 +2613,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >Flushing the stream will not flush its underlying encoder unless you explicitly call Flush or <see
              cref="M:System.IO.StreamWriter.Close" />
+
+            
 
             
 
@@ -2248,6 +2634,8 @@
 
             
 
+            
+
              to true means that data will be flushed from the buffer to the stream, but the encoder state will not be flushed. This allows the encoder to keep its state (partial characters) so that it can encode the next block of characters correctly. This scenario affects UTF8 and UTF7 where certain characters can only be encoded after the encoder receives the adjacent character or characters.</para
           >
           <para
@@ -2255,6 +2643,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -2329,6 +2719,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2369,8 +2761,12 @@
 
           
 
+          
+
            is <see
            langword="true" />
+
+          
 
           
 
@@ -2383,8 +2779,12 @@
 
           
 
+          
+
            buffer is full, and the contents of the buffer cannot be written to the underlying fixed size stream because the <see
            cref="T:System.IO.StreamWriter" />
+
+          
 
           
 
@@ -2403,6 +2803,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -2413,8 +2815,12 @@
 
             
 
+            
+
              is true, <see
              cref="M:System.IO.StreamWriter.Flush" />
+
+            
 
             
 
@@ -2432,6 +2838,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2441,6 +2849,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2482,8 +2892,12 @@
 
           
 
+          
+
            is <see
            langword="true" />
+
+          
 
           
 
@@ -2496,8 +2910,12 @@
 
           
 
+          
+
            buffer is full, and the contents of the buffer cannot be written to the underlying fixed size stream because the <see
            cref="T:System.IO.StreamWriter" />
+
+          
 
           
 
@@ -2516,6 +2934,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -2526,8 +2946,12 @@
 
             
 
+            
+
              is true, <see
              cref="M:System.IO.StreamWriter.Flush" />
+
+            
 
             
 
@@ -2545,6 +2969,8 @@
 
             
 
+            
+
             ) because it has fewer arguments to check.</para
           >
           <para
@@ -2552,6 +2978,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -2571,8 +2999,12 @@
 
           
 
+          
+
           A character array containing the data to write. If <paramref
            name="buffer" />
+
+          
 
           
 
@@ -2614,8 +3046,12 @@
 
           
 
+          
+
            is <see
            langword="true" />
+
+          
 
           
 
@@ -2628,8 +3064,12 @@
 
           
 
+          
+
            buffer is full, and the contents of the buffer cannot be written to the underlying fixed size stream because the <see
            cref="T:System.IO.StreamWriter" />
+
+          
 
           
 
@@ -2648,11 +3088,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The specified <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -2667,8 +3111,12 @@
 
             
 
+            
+
              is invoked automatically if <see
              cref="P:System.IO.StreamWriter.AutoFlush" />
+
+            
 
             
 
@@ -2681,6 +3129,8 @@
 
             
 
+            
+
              is null, no entries are written.</para
           >
           <para
@@ -2688,6 +3138,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -2707,8 +3159,12 @@
 
           
 
+          
+
           The string to write to the stream. If <paramref
            name="value" />
+
+          
 
           
 
@@ -2754,8 +3210,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -2771,8 +3231,12 @@
 
           
 
+          
+
            &lt; <paramref
            name="count" />
+
+          
 
           
 
@@ -2787,8 +3251,12 @@
 
           
 
+          
+
            or <paramref
            name="count" />
+
+          
 
           
 
@@ -2804,8 +3272,12 @@
 
           
 
+          
+
            is <see
            langword="true" />
+
+          
 
           
 
@@ -2818,8 +3290,12 @@
 
           
 
+          
+
            buffer is full, and the contents of the buffer cannot be written to the underlying fixed size stream because the <see
            cref="T:System.IO.StreamWriter" />
+
+          
 
           
 
@@ -2838,11 +3314,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The characters are read from <paramref
              name="buffer" />
+
+            
 
             
 
@@ -2855,8 +3335,12 @@
 
             
 
+            
+
              and continuing through <paramref
              name="index" />
+
+            
 
             
 
@@ -2869,8 +3353,12 @@
 
             
 
+            
+
              - 1). All characters are written to the underlying stream unless the end of the underlying stream is reached prematurely. <see
              cref="M:System.IO.StreamWriter.Flush" />
+
+            
 
             
 
@@ -2883,6 +3371,8 @@
 
             
 
+            
+
              is true.</para
           >
           <para
@@ -2890,6 +3380,8 @@
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -2909,6 +3401,8 @@
 
           
 
+          
+
           A character array that contains the data to write. </param
         >
         <param name="index">
@@ -2918,10 +3412,14 @@
 
           
 
+          
+
           The character position in the buffer at which to start reading data. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2968,6 +3466,8 @@
 
           
 
+          
+
           The character to write to the stream.</param
         >
       </Docs>
@@ -3008,8 +3508,12 @@
 
           
 
+          
+
           The string to write to the stream. If <paramref
            name="value" />
+
+          
 
           
 
@@ -3057,6 +3561,8 @@
 
           
 
+          
+
           A character array that contains the data to write.</param
         >
         <param name="index">
@@ -3066,10 +3572,14 @@
 
           
 
+          
+
           The character position in the buffer at which to begin reading data.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3102,6 +3612,8 @@
           <para
             >The line terminator is defined by the <see
              cref="P:System.IO.TextWriter.NewLine" />
+
+            
 
             
 
@@ -3150,6 +3662,8 @@
 
             
 
+            
+
              property. </para
           >
         </remarks>
@@ -3163,6 +3677,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3202,6 +3718,8 @@
 
             
 
+            
+
              property. </para
           >
         </remarks>
@@ -3215,6 +3733,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3256,6 +3776,8 @@
 
             
 
+            
+
              property. </para
           >
         </remarks>
@@ -3274,6 +3796,8 @@
 
           
 
+          
+
           The character array to write data from.</param
         >
         <param name="index">
@@ -3283,10 +3807,14 @@
 
           
 
+          
+
           The character position in the buffer at which to start reading data.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

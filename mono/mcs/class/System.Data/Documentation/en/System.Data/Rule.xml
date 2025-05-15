@@ -23,8 +23,12 @@
 
         
 
+        
+
          values are set to the <see
          cref="P:System.Data.ForeignKeyConstraint.UpdateRule" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          properties of a <see
          cref="T:System.Data.ForeignKeyConstraint" />
+
+        
 
         
 
@@ -51,8 +59,12 @@
 
         
 
+        
+
          object's <see
          cref="T:System.Data.ConstraintCollection" />
+
+        
 
         
 
@@ -63,6 +75,8 @@
       <para
         >The <see
          cref="T:System.Data.Rule" />
+
+        
 
         
 
@@ -80,8 +94,12 @@
 
         
 
+        
+
          are not enforced unless the <see
          cref="P:System.Data.DataSet.EnforceConstraints" />
+
+        
 
         
 
@@ -97,8 +115,12 @@
 
         
 
+        
+
          method is called, the <see
          cref="P:System.Data.ForeignKeyConstraint.AcceptRejectRule" />
+
+        
 
         
 
@@ -112,6 +134,8 @@
       <para
         >Indicates the action that occurs when a <see
          cref="T:System.Data.ForeignKeyConstraint" />
+
+        
 
         
 
@@ -174,6 +198,8 @@
           <para
             >Set values in related rows to the value contained in the <see
              cref="P:System.Data.DataColumn.DefaultValue" />
+
+            
 
             
 

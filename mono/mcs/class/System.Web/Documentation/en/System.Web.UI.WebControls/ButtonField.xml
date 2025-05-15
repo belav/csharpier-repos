@@ -24,8 +24,12 @@
 
         
 
+        
+
          class is used by data-bound controls (such as <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
         ) to display a button for each record that is displayed. The <see
          cref="T:System.Web.UI.WebControls.ButtonField" />
+
+        
 
         
 
@@ -52,6 +60,8 @@
 
         
 
+        
+
          control displays a <see
          cref="T:System.Web.UI.WebControls.ButtonField" />
 
@@ -59,8 +69,12 @@
 
         
 
+        
+
          object as a column, while the <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -78,8 +92,12 @@
 
           
 
+          
+
            control raises the <see
            cref="E:System.Web.UI.WebControls.GridView.RowCommand" />
+
+          
 
           
 
@@ -92,8 +110,12 @@
 
           
 
+          
+
            control raises the <see
            cref="E:System.Web.UI.WebControls.DetailsView.ItemCommand" />
+
+          
 
           
 
@@ -110,6 +132,8 @@
 
         
 
+        
+
          property of the event argument that is passed to the command event for the data-bound control. The <see
          cref="T:System.Web.UI.WebControls.ButtonField" />
 
@@ -117,8 +141,12 @@
 
         
 
+        
+
          class automatically populates the <see
          cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandArgument" />
+
+        
 
         
 
@@ -134,8 +162,12 @@
 
         
 
+        
+
          property. When displaying a link or command button, use the <see
          cref="P:System.Web.UI.WebControls.ButtonField.Text" />
+
+        
 
         
 
@@ -152,8 +184,12 @@
 
           
 
+          
+
            property, all buttons in a <see
            cref="T:System.Web.UI.WebControls.ButtonField" />
+
+          
 
           
 
@@ -170,8 +206,12 @@
 
         
 
+        
+
          object to a field in a data source. This allows you to display different captions for the buttons in the <see
          cref="T:System.Web.UI.WebControls.ButtonField" />
+
+        
 
         
 
@@ -184,8 +224,12 @@
 
         
 
+        
+
          property to bind a <see
          cref="T:System.Web.UI.WebControls.ButtonField" />
+
+        
 
         
 
@@ -201,8 +245,12 @@
 
         
 
+        
+
          property to specify the image to display for the buttons in the <see
          cref="T:System.Web.UI.WebControls.ButtonField" />
+
+        
 
         
 
@@ -219,6 +267,8 @@
 
           
 
+          
+
            object share the same image.</para
         >
       </block>
@@ -230,8 +280,12 @@
 
         
 
+        
+
          object in a data-bound control by setting the <see
          cref="P:System.Web.UI.WebControls.DataControlField.Visible" />
+
+        
 
         
 
@@ -247,8 +301,12 @@
 
         
 
+        
+
          object allows you to customize its header and footer sections. To display a caption in the header or footer section, set the <see
          cref="P:System.Web.UI.WebControls.DataControlField.HeaderText" />
+
+        
 
         
 
@@ -261,8 +319,12 @@
 
         
 
+        
+
          properties, respectively. Instead of displaying text in the header section, you can display an image by setting the <see
          cref="P:System.Web.UI.WebControls.DataControlField.HeaderImageUrl" />
+
+        
 
         
 
@@ -275,8 +337,12 @@
 
         
 
+        
+
          object, set the <see
          cref="P:System.Web.UI.WebControls.ButtonFieldBase.ShowHeader" />
+
+        
 
         
 
@@ -293,8 +359,12 @@
 
           
 
+          
+
            control) can show or hide only the entire header section of the control. These data-bound controls do not support the <see
            cref="P:System.Web.UI.WebControls.ButtonFieldBase.ShowHeader" />
+
+          
 
           
 
@@ -306,6 +376,8 @@
       <para
         >You also can customize the appearance of the <see
          cref="T:System.Web.UI.WebControls.ButtonField" />
+
+        
 
         
 
@@ -339,6 +411,8 @@
 
               
 
+              
+
               . </para
             >
           </description>
@@ -353,6 +427,8 @@
             <para
               >The footer section of the <see
                cref="T:System.Web.UI.WebControls.ButtonField" />
+
+              
 
               
 
@@ -377,6 +453,8 @@
 
               
 
+              
+
               . </para
             >
           </description>
@@ -391,6 +469,8 @@
             <para
               >The data items in the <see
                cref="T:System.Web.UI.WebControls.ButtonField" />
+
+              
 
               
 
@@ -424,8 +504,12 @@
 
             
 
+            
+
              constructor to initialize a new instance of the <see
              cref="T:System.Web.UI.WebControls.ButtonField" />
+
+            
 
             
 
@@ -441,8 +525,12 @@
 
             
 
+            
+
              object dynamically to a data-bound control, create a new <see
              cref="T:System.Web.UI.WebControls.ButtonField" />
+
+            
 
             
 
@@ -455,6 +543,8 @@
 
             
 
+            
+
              control, add the <see
              cref="T:System.Web.UI.WebControls.ButtonField" />
 
@@ -462,8 +552,12 @@
 
             
 
+            
+
              object to the <see
              cref="P:System.Web.UI.WebControls.GridView.Columns" />
+
+            
 
             
 
@@ -480,6 +574,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.ButtonField" />
+
+            
 
             
 
@@ -517,8 +613,12 @@
 
             
 
+            
+
              property to associate a command name, such as "Add" or "Remove", with the buttons in the <see
              cref="T:System.Web.UI.WebControls.ButtonField" />
+
+            
 
             
 
@@ -531,12 +631,16 @@
 
             
 
+            
+
              property to any string that identifies the action to perform when the command button is clicked. You can then programmatically determine the command name in an event handler and perform the appropriate actions.</para
           >
           <block subset="none" type="note">
             <para
               >All buttons in a <see
                cref="T:System.Web.UI.WebControls.ButtonField" />
+
+              
 
               
 
@@ -583,8 +687,12 @@
 
             
 
+            
+
              to "Page" and the <see
              cref="P:System.Web.UI.WebControls.Button.CommandArgument" />
+
+            
 
             
 
@@ -597,8 +705,12 @@
 
             
 
+            
+
              control to "First", "Last", "Prev", "Next", or a page number. However, since the <see
              cref="P:System.Web.UI.WebControls.Button.CommandArgument" />
+
+            
 
             
 
@@ -611,8 +723,12 @@
 
             
 
+            
+
              control is always the integer row index, a <see
              cref="T:System.Web.UI.WebControls.ButtonField" />
+
+            
 
             
 
@@ -625,8 +741,12 @@
 
             
 
+            
+
              to "Sort", the <see
              cref="P:System.Web.UI.WebControls.Button.CommandArgument" />
+
+            
 
             
 
@@ -639,6 +759,8 @@
 
             
 
+            
+
              control is always the integer row index. For this reason, a <see
              cref="T:System.Web.UI.WebControls.ButtonField" />
 
@@ -646,8 +768,12 @@
 
             
 
+            
+
              control is not suitable for invoking sorting. For custom command names, such as "Add" and "Remove", you need to write the event code to check the command name and perform some custom action. For more information, see <see
              cref="T:System.Web.UI.WebControls.DataControlCommands" />
+
+            
 
             
 
@@ -664,8 +790,12 @@
 
               
 
+              
+
                control and "Select" is not recognized by the <see
                cref="T:System.Web.UI.WebControls.DetailsView" />
+
+              
 
               
 
@@ -681,6 +811,8 @@
           <para
             >Gets or sets a string that represents the action to perform when a button in a <see
              cref="T:System.Web.UI.WebControls.ButtonField" />
+
+            
 
             
 
@@ -718,8 +850,12 @@
 
             
 
+            
+
              method is a helper method that is used by the <see
              cref="M:System.Web.UI.WebControls.DataControlField.CloneField" />
+
+            
 
             
 
@@ -732,6 +868,8 @@
 
             
 
+            
+
             -derived object to the <see
              cref="T:System.Web.UI.WebControls.DataControlField" />
 
@@ -739,8 +877,12 @@
 
             
 
+            
+
              object that was created by the <see
              cref="M:System.Web.UI.WebControls.DataControlField.CloneField" />
+
+            
 
             
 
@@ -759,8 +901,12 @@
 
             
 
+            
+
              object to the specified <see
              cref="T:System.Web.UI.WebControls.DataControlField" />
+
+            
 
             
 
@@ -776,6 +922,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.DataControlField" />
 
@@ -783,8 +931,12 @@
 
           
 
+          
+
            to which to copy the properties of the current <see
            cref="T:System.Web.UI.WebControls.ButtonField" />
+
+          
 
           
 
@@ -819,8 +971,12 @@
 
             
 
+            
+
              method is a helper method that is used by the <see
              cref="M:System.Web.UI.WebControls.DataControlField.CloneField" />
+
+            
 
             
 
@@ -833,8 +989,12 @@
 
             
 
+            
+
              object to which to copy the properties of the current <see
              cref="T:System.Web.UI.WebControls.ButtonField" />
+
+            
 
             
 
@@ -853,6 +1013,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -861,6 +1023,8 @@
           <para
             >A new instance of the  <see
              cref="T:System.Web.UI.WebControls.ButtonField" />
+
+            
 
             
 
@@ -901,8 +1065,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.ButtonField" />
+
+            
 
             
 
@@ -915,8 +1083,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Web.UI.WebControls.ButtonType.Link" />
+
+            
 
             
 
@@ -929,8 +1101,12 @@
 
             
 
+            
+
              property to specify the name of the field to bind to the <see
              cref="T:System.Web.UI.WebControls.ButtonField" />
+
+            
 
             
 
@@ -943,8 +1119,12 @@
 
             
 
+            
+
              object. Optionally, you can format the displayed text by setting the <see
              cref="P:System.Web.UI.WebControls.ButtonField.DataTextFormatString" />
+
+            
 
             
 
@@ -960,8 +1140,12 @@
 
             
 
+            
+
              property to bind a <see
              cref="T:System.Web.UI.WebControls.ButtonField" />
+
+            
 
             
 
@@ -974,6 +1158,8 @@
 
             
 
+            
+
              property to display static text for the text of the buttons in the <see
              cref="T:System.Web.UI.WebControls.ButtonField" />
 
@@ -981,8 +1167,12 @@
 
             
 
+            
+
              object. When the <see
              cref="P:System.Web.UI.WebControls.ButtonField.Text" />
+
+            
 
             
 
@@ -999,6 +1189,8 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.ButtonField.Text" />
 
@@ -1006,8 +1198,12 @@
 
               
 
+              
+
                properties are both set, the <see
                cref="P:System.Web.UI.WebControls.ButtonField.DataTextField" />
+
+              
 
               
 
@@ -1028,6 +1224,8 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.Button" />
 
@@ -1035,8 +1233,12 @@
 
             
 
+            
+
              control that is rendered by the <see
              cref="T:System.Web.UI.WebControls.ButtonField" />
+
+            
 
             
 
@@ -1077,6 +1279,8 @@
 
             
 
+            
+
              property to specify a custom display format for the values that are displayed in the <see
              cref="T:System.Web.UI.WebControls.ButtonField" />
 
@@ -1084,8 +1288,12 @@
 
             
 
+            
+
              object. If the <see
              cref="P:System.Web.UI.WebControls.ButtonField.DataTextFormatString" />
+
+            
 
             
 
@@ -1102,12 +1310,16 @@
 
               
 
+              
+
                property is set.</para
             >
           </block>
           <para
             >The format string can be any literal string and usually includes a placeholder for the value for the field. For example, in the format string "Item Value: {0}", the {0} placeholder is replaced with the value for the field when it is displayed in the <see
              cref="T:System.Web.UI.WebControls.ButtonField" />
+
+            
 
             
 
@@ -1126,6 +1338,8 @@
 
             
 
+            
+
              : <paramref
              name="Bxx" />
 
@@ -1133,8 +1347,12 @@
 
             
 
+            
+
              }. The value before the colon (<paramref
              name="A" />
+
+            
 
             
 
@@ -1151,12 +1369,16 @@
 
               
 
+              
+
                parameter is part of the formatting syntax. Because there is only one field value in each cell, this value can only be set to 0.</para
             >
           </block>
           <para
             >The colon and the values after the colon are optional. The character after the colon (<paramref
              name="B" />
+
+            
 
             
 
@@ -1243,6 +1465,8 @@
 
             
 
+            
+
              in the general example) specifies the number of significant digits or decimal places to display. For example, the format string "{0:F2}" displays a fixed-point number with two decimal places.</para
           >
           <para
@@ -1250,6 +1474,8 @@
              type="text/html">
               <a href="0d1364da-5b30-4d42-8e6b-03378343343f">Formatting Overview</a>
             </format>
+
+            
 
             
 
@@ -1293,8 +1519,12 @@
 
             
 
+            
+
              method is a helper method that is used to transform a field value to the format that is specified by the <see
              cref="P:System.Web.UI.WebControls.ButtonField.DataTextFormatString" />
+
+            
 
             
 
@@ -1313,6 +1543,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1321,6 +1553,8 @@
           <para
             >The field value converted to the format specified by the <see
              cref="P:System.Web.UI.WebControls.ButtonField.DataTextFormatString" />
+
+            
 
             
 
@@ -1364,8 +1598,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.ButtonField" />
+
+            
 
             
 
@@ -1378,8 +1616,12 @@
 
             
 
+            
+
              value, use the <see
              cref="P:System.Web.UI.WebControls.ButtonField.ImageUrl" />
+
+            
 
             
 
@@ -1394,6 +1636,8 @@
           <para
             >Gets or sets the image to display for each button in the <see
              cref="T:System.Web.UI.WebControls.ButtonField" />
+
+            
 
             
 
@@ -1432,8 +1676,12 @@
 
             
 
+            
+
              method is called by the data control with which the <see
              cref="T:System.Web.UI.WebControls.ButtonField" />
+
+            
 
             
 
@@ -1446,6 +1694,8 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.UI.WebControls.GridView" />
 
@@ -1453,8 +1703,12 @@
 
             
 
+            
+
             , call the <see
              cref="M:System.Web.UI.WebControls.DataControlField.Initialize(System.Boolean,System.Web.UI.Control)" />
+
+            
 
             
 
@@ -1470,8 +1724,12 @@
 
             
 
+            
+
              method when you are writing a custom data-bound control that uses <see
              cref="T:System.Web.UI.WebControls.TableCell" />
+
+            
 
             
 
@@ -1484,8 +1742,12 @@
 
             
 
+            
+
              object. Implement this method if your <see
              cref="T:System.Web.UI.WebControls.ButtonField" />
+
+            
 
             
 
@@ -1498,8 +1760,12 @@
 
             
 
+            
+
              objects with data or controls in the <see
              cref="M:System.Web.UI.WebControls.ButtonField.InitializeCell(System.Web.UI.WebControls.DataControlFieldCell,System.Web.UI.WebControls.DataControlCellType,System.Web.UI.WebControls.DataControlRowState,System.Int32)" />
+
+            
 
             
 
@@ -1513,6 +1779,8 @@
           <para
             >Initializes the current <see
              cref="T:System.Web.UI.WebControls.ButtonField" />
+
+            
 
             
 
@@ -1532,6 +1800,8 @@
 
           
 
+          
+
           true to enable sorting; otherwise, false. </param
         >
         <param name="control">
@@ -1541,8 +1811,12 @@
 
           
 
+          
+
           The data control that owns the <see
            cref="T:System.Web.UI.WebControls.ButtonField" />
+
+          
 
           
 
@@ -1582,8 +1856,12 @@
 
             
 
+            
+
              method creates the button type that is specified by the <see
              cref="P:System.Web.UI.WebControls.ButtonFieldBase.ButtonType" />
+
+            
 
             
 
@@ -1596,8 +1874,12 @@
 
             
 
+            
+
              collection of the <see
              cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
+
+            
 
             
 
@@ -1610,6 +1892,8 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.Button" />
 
@@ -1617,8 +1901,12 @@
 
             
 
+            
+
              control is set to <paramref
              name="rowIndex" />
+
+            
 
             
 
@@ -1637,6 +1925,8 @@
 
             
 
+            
+
              object to the specified row state.</para
           >
         </summary>
@@ -1647,8 +1937,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
+
+          
 
           
 
@@ -1663,8 +1957,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.DataControlCellType" />
+
+          
 
           
 
@@ -1679,8 +1977,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.DataControlRowState" />
+
+          
 
           
 
@@ -1690,6 +1992,8 @@
         >
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1729,8 +2033,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.ButtonField" />
+
+            
 
             
 
@@ -1743,8 +2051,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Web.UI.WebControls.ButtonType.Link" />
+
+            
 
             
 
@@ -1757,8 +2069,12 @@
 
             
 
+            
+
              property to display static text for the caption of the buttons in the <see
              cref="T:System.Web.UI.WebControls.ButtonField" />
+
+            
 
             
 
@@ -1774,8 +2090,12 @@
 
             
 
+            
+
              property to display static text in a <see
              cref="T:System.Web.UI.WebControls.ButtonField" />
+
+            
 
             
 
@@ -1788,8 +2108,12 @@
 
             
 
+            
+
              property to bind the <see
              cref="T:System.Web.UI.WebControls.ButtonField" />
+
+            
 
             
 
@@ -1806,6 +2130,8 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.ButtonField.Text" />
 
@@ -1813,8 +2139,12 @@
 
               
 
+              
+
                properties are both set, the <see
                cref="P:System.Web.UI.WebControls.ButtonField.DataTextField" />
+
+              
 
               
 
@@ -1832,12 +2162,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -1851,6 +2185,8 @@
           <para
             >Gets or sets the static caption that is displayed for each button in the <see
              cref="T:System.Web.UI.WebControls.ButtonField" />
+
+            
 
             
 
@@ -1883,8 +2219,12 @@
 
             
 
+            
+
              method is a helper method that is used to determine whether the controls that are contained in a <see
              cref="T:System.Web.UI.WebControls.ButtonField" />
+
+            
 
             
 
@@ -1901,6 +2241,8 @@
 
               
 
+              
+
                method is used primarily by control developers.</para
             >
           </block>
@@ -1910,6 +2252,8 @@
           <para
             >Determines whether the controls that are contained in a <see
              cref="T:System.Web.UI.WebControls.ButtonField" />
+
+            
 
             
 

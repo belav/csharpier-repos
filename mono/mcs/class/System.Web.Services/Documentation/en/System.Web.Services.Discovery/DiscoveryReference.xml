@@ -22,8 +22,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Web.Services.Discovery.SchemaReference" />
+
+        
 
         
 
@@ -36,8 +40,12 @@
 
         
 
+        
+
          all inherit from <see
          cref="T:System.Web.Services.Discovery.DiscoveryReference" />
+
+        
 
         
 
@@ -64,6 +72,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Discovery.DiscoveryReference" />
+
+            
 
             
 
@@ -96,6 +106,8 @@
           <para
             >Gets or sets the instance of <see
              cref="T:System.Web.Services.Discovery.DiscoveryClientProtocol" />
+
+            
 
             
 
@@ -165,6 +177,8 @@
 
           
 
+          
+
           The URL on which the name of the file is based. </param
         >
       </Docs>
@@ -196,8 +210,12 @@
 
             
 
+            
+
             . However, the underlying type varies, depending on the type of document referenced. For instance, a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -210,8 +228,12 @@
 
             
 
+            
+
              returns an instance of <see
              cref="T:System.Xml.Schema.XmlSchema" />
+
+            
 
             
 
@@ -230,6 +252,8 @@
 
             
 
+            
+
              and returns an instance of the class representing the type of referenced document.</para
           >
         </summary>
@@ -243,12 +267,16 @@
 
             
 
+            
+
              with an underlying type matching the type of referenced document.</para
           >
         </returns>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -280,8 +308,12 @@
 
             
 
+            
+
              member that takes a MIME type and a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -294,8 +326,12 @@
 
             
 
+            
+
              match those expected by the reference type, then the contents of <paramref
              name="stream" />
+
+            
 
             
 
@@ -308,6 +344,8 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.Documents" />
 
@@ -315,8 +353,12 @@
 
             
 
+            
+
              properties of <see
              cref="P:System.Web.Services.Discovery.DiscoveryReference.ClientProtocol" />
+
+            
 
             
 
@@ -330,6 +372,8 @@
           <para
             >Downloads the referenced document at <see
              cref="P:System.Web.Services.Discovery.DiscoveryReference.Url" />
+
+            
 
             
 
@@ -372,8 +416,12 @@
 
             
 
+            
+
              match those expected by the reference type, then the contents of <paramref
              name="stream" />
+
+            
 
             
 
@@ -386,6 +434,8 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.Documents" />
 
@@ -393,8 +443,12 @@
 
             
 
+            
+
              properties of <see
              cref="P:System.Web.Services.Discovery.DiscoveryReference.ClientProtocol" />
+
+            
 
             
 
@@ -414,8 +468,12 @@
 
           
 
+          
+
           The MIME type of <paramref
            name="stream" />
+
+          
 
           
 
@@ -430,8 +488,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -491,6 +553,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -501,8 +565,12 @@
 
           
 
+          
+
           The document to write into a <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -517,6 +585,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.Stream" />
 
@@ -524,8 +594,12 @@
 
           
 
+          
+
            into which the <paramref
            name="document" />
+
+          
 
           
 

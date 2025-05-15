@@ -21,6 +21,8 @@
 
         
 
+        
+
          interface is passed to <see
          cref="M:System.Runtime.Remoting.Channels.Tcp.TcpServerChannel.#ctor(System.Collections.IDictionary,System.Runtime.Remoting.Channels.IServerChannelSinkProvider,System.Runtime.Remoting.Channels.IAuthorizeRemotingConnection)" />
 
@@ -28,8 +30,12 @@
 
         
 
+        
+
         . It provides a single point of authorization for all incoming connections on a <see
          cref="T:System.Runtime.Remoting.Channels.Tcp.TcpServerChannel" />
+
+        
 
         
 
@@ -43,6 +49,8 @@
       <para
         >The <see
          cref="T:System.Runtime.Remoting.Channels.IAuthorizeRemotingConnection" />
+
+        
 
         
 
@@ -77,6 +85,8 @@
 
             
 
+            
+
              interface is passed to <see
              cref="M:System.Runtime.Remoting.Channels.Tcp.TcpServerChannel.#ctor(System.Collections.IDictionary,System.Runtime.Remoting.Channels.IServerChannelSinkProvider,System.Runtime.Remoting.Channels.IAuthorizeRemotingConnection)" />
 
@@ -84,8 +94,12 @@
 
             
 
+            
+
             . It provides a single point of authorization for all incoming connections on a <see
              cref="T:System.Runtime.Remoting.Channels.Tcp.TcpServerChannel" />
+
+            
 
             
 
@@ -109,8 +123,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.EndPoint" />
+
+          
 
           
 
@@ -147,6 +165,8 @@
 
             
 
+            
+
              interface is passed to <see
              cref="M:System.Runtime.Remoting.Channels.Tcp.TcpServerChannel.#ctor(System.Collections.IDictionary,System.Runtime.Remoting.Channels.IServerChannelSinkProvider,System.Runtime.Remoting.Channels.IAuthorizeRemotingConnection)" />
 
@@ -154,8 +174,12 @@
 
             
 
+            
+
             . It provides a single point of authorization for all incoming connections on a <see
              cref="T:System.Runtime.Remoting.Channels.Tcp.TcpServerChannel" />
+
+            
 
             
 
@@ -179,8 +203,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Principal.IIdentity" />
+
+          
 
           
 

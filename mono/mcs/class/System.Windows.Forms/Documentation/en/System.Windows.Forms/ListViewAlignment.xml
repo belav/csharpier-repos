@@ -20,6 +20,8 @@
 
         
 
+        
+
          property and the <see
          cref="M:System.Windows.Forms.ListView.ArrangeIcons(System.Windows.Forms.ListViewAlignment)" />
 
@@ -27,8 +29,12 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -42,6 +48,8 @@
       <para
         >Specifies how items align in the <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -86,6 +94,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -124,6 +134,8 @@
           <para
             >Items are aligned to the top of the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 

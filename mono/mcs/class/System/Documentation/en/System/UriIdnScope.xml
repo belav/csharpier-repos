@@ -24,12 +24,16 @@
 
         
 
+        
+
          class has been extended to provide support for International Resource Identifiers (IR) based on RFC 3987. Current users will not see any change from the .NET Framework 2.0 behavior unless they specifically enable IRI. This ensures application compatibility with prior versions of the .NET Framework.</para
       >
       <para>The Internationalized Domain Name (IDN) attribute only controls IDN processing. All other IRI processing (character normalization, for example) is always performed by default.</para>
       <para
         >The configuration setting for the <see
          cref="T:System.Configuration.IdnElement" />
+
+        
 
         
 
@@ -42,11 +46,15 @@
 
         
 
+        
+
          class is constructed. Changes to configuration settings after that time are ignored.</para
       >
       <para
         >For more information on IRI support, see the Remarks section for the <see
          cref="T:System.Uri" />
+
+        
 
         
 
@@ -65,8 +73,12 @@
 
         
 
+        
+
          in the <see
          cref="N:System.Configuration" />
+
+        
 
         
 

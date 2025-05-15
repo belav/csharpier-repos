@@ -34,8 +34,12 @@
 
         
 
+        
+
          is invoked by the <see
          cref="T:System.ServiceModel.Description.WsdlImporter" />
+
+        
 
         
 
@@ -71,6 +75,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Description.DataContractSerializerMessageContractImporter" />
+
+            
 
             
 
@@ -143,8 +149,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Services.Description.ServiceDescriptionCollection" />
+
+          
 
           
 
@@ -159,8 +169,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -175,8 +189,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.Generic.ICollection`1" />
+
+          
 
           
 
@@ -226,8 +244,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.Description.WsdlImporter" />
+
+          
 
           
 
@@ -277,8 +299,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.WsdlImporter" />
+
+          
 
           
 

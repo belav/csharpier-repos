@@ -37,6 +37,8 @@
 
         
 
+        
+
          objects.</para
       >
     </summary>
@@ -68,8 +70,12 @@
 
             
 
+            
+
              class, with no associated <see
              cref="T:System.Diagnostics.ProcessModule" />
+
+            
 
             
 
@@ -111,8 +117,12 @@
 
             
 
+            
+
              class, using the specified array of <see
              cref="T:System.Diagnostics.ProcessModule" />
+
+            
 
             
 
@@ -128,6 +138,8 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Diagnostics.ProcessModule" />
 
@@ -135,8 +147,12 @@
 
           
 
+          
+
            instances with which to initialize this <see
            cref="T:System.Diagnostics.ProcessModuleCollection" />
+
+          
 
           
 
@@ -187,8 +203,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Diagnostics.ProcessModule" />
+
+          
 
           
 
@@ -232,11 +252,15 @@
 
             
 
+            
+
              instances to the collection, at the specified index.</para
           >
         </summary>
         <param name="array">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -249,10 +273,14 @@
 
           
 
+          
+
            instances to add to the collection. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -299,6 +327,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -309,8 +339,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Diagnostics.ProcessModule" />
+
+          
 
           
 

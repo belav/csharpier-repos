@@ -55,6 +55,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -92,6 +94,8 @@
 
             
 
+            
+
              class from an enumerable set of binding elements.</para
           >
         </summary>
@@ -121,6 +125,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.BindingElementCollection" />
+
+            
 
             
 
@@ -169,6 +175,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Array" />
 
@@ -176,8 +184,12 @@
 
           
 
+          
+
            of type <see
            cref="T:System.ServiceModel.Channels.BindingElement" />
+
+          
 
           
 
@@ -215,6 +227,8 @@
           <para
             >A copy of the <see
              cref="T:System.ServiceModel.Channels.BindingElementCollection" />
+
+            
 
             
 
@@ -258,6 +272,8 @@
 
           
 
+          
+
           The type of binding element being tested for inclusion in the collection.</param
         >
       </Docs>
@@ -295,6 +311,8 @@
 
             
 
+            
+
              if found; if not found, 0 if <paramref
              name="T" />
 
@@ -302,8 +320,12 @@
 
             
 
+            
+
              is a value type and null if <paramref
              name="T" />
+
+            
 
             
 
@@ -319,8 +341,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -366,8 +392,12 @@
 
             
 
+            
+
              of all of the items of type <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -380,8 +410,12 @@
 
             
 
+            
+
              is a value type and null if <paramref
              name="T" />
+
+            
 
             
 
@@ -397,8 +431,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -441,6 +479,8 @@
 
           
 
+          
+
           The location at which to insert the binding element in the collection.</param
         >
         <param name="item">
@@ -450,8 +490,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingElement" />
+
+          
 
           
 
@@ -494,6 +538,8 @@
 
             
 
+            
+
              removed.</para
           >
         </returns>
@@ -504,8 +550,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -551,8 +601,12 @@
 
             
 
+            
+
              of all of the items of type <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -568,8 +622,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -612,10 +670,14 @@
 
           
 
+          
+
           The zero-based index of the element to replace.</param
         >
         <param name="item">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -628,8 +690,12 @@
 
           
 
+          
+
            item at the specified <paramref
            name="index" />
+
+          
 
           
 

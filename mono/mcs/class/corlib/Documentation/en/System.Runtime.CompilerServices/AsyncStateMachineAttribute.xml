@@ -35,8 +35,12 @@
 
         
 
+        
+
          attribute to methods in your code. For methods that have the async modifier, the compiler will apply the <unmanagedCodeEntityReference
         >AsyncStateMachine</unmanagedCodeEntityReference>
+
+        
 
         
 
@@ -52,6 +56,8 @@
 
         
 
+        
+
          attribute to the stub method so that tools can identify the corresponding state machine. Details of the emitted IL might change in future releases of the compilers.</para
       >
       <para
@@ -61,6 +67,8 @@
             >Asynchronous Programming with Async and Await (C# and Visual Basic)</a
           >
         </format>
+
+        
 
         
 
@@ -81,10 +89,14 @@
 
         
 
+        
+
          or <format
          type="text/html">
           <a href="16f14f09-b2ce-42c7-a875-e4eca5d50674">async (C# Reference)</a>
         </format>
+
+        
 
         
 
@@ -123,11 +135,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="stateMachineType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

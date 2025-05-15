@@ -34,6 +34,8 @@
 
         
 
+        
+
          structure is an object representation of a token that represents symbolic information.</para
       >
     </summary>
@@ -67,11 +69,15 @@
 
             
 
+            
+
              structure when given a value.</para
           >
         </summary>
         <param name="val">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -114,6 +120,8 @@
 
             
 
+            
+
              is equal to this instance.</para
           >
         </summary>
@@ -122,6 +130,8 @@
           <para
             >true if <paramref
              name="obj" />
+
+            
 
             
 
@@ -137,8 +147,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Diagnostics.SymbolStore.SymbolToken" />
+
+          
 
           
 
@@ -178,8 +192,12 @@
 
             
 
+            
+
              is an instance of <see
              cref="T:System.Diagnostics.SymbolStore.SymbolToken" />
+
+            
 
             
 
@@ -198,8 +216,12 @@
 
             
 
+            
+
              is an instance of <see
              cref="T:System.Diagnostics.SymbolStore.SymbolToken" />
+
+            
 
             
 
@@ -210,6 +232,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -308,6 +332,8 @@
 
             
 
+            
+
              objects are equal.</para
           >
         </summary>
@@ -321,8 +347,12 @@
 
             
 
+            
+
              and <paramref
              name="b" />
+
+            
 
             
 
@@ -338,8 +368,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Diagnostics.SymbolStore.SymbolToken" />
+
+          
 
           
 
@@ -354,8 +388,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Diagnostics.SymbolStore.SymbolToken" />
+
+          
 
           
 
@@ -398,6 +436,8 @@
 
             
 
+            
+
              objects are not equal.</para
           >
         </summary>
@@ -411,8 +451,12 @@
 
             
 
+            
+
              and <paramref
              name="b" />
+
+            
 
             
 
@@ -428,8 +472,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Diagnostics.SymbolStore.SymbolToken" />
+
+          
 
           
 
@@ -444,8 +492,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Diagnostics.SymbolStore.SymbolToken" />
+
+          
 
           
 

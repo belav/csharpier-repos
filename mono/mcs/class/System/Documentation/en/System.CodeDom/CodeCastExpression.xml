@@ -40,11 +40,15 @@
 
         
 
+        
+
          can be used to represent an expression cast to a different data type or interface.</para
       >
       <para
         >The <see
          cref="P:System.CodeDom.CodeCastExpression.Expression" />
+
+        
 
         
 
@@ -57,8 +61,12 @@
 
         
 
+        
+
          to cast. The <see
          cref="P:System.CodeDom.CodeCastExpression.TargetType" />
+
+        
 
         
 
@@ -94,6 +102,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeCastExpression" />
+
+            
 
             
 
@@ -136,6 +146,8 @@
 
             
 
+            
+
              class using the specified destination type and expression.</para
           >
         </summary>
@@ -146,8 +158,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeTypeReference" />
+
+          
 
           
 
@@ -162,8 +178,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 
@@ -205,11 +225,15 @@
 
             
 
+            
+
              class using the specified destination type and expression.</para
           >
         </summary>
         <param name="targetType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -224,8 +248,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 
@@ -267,11 +295,15 @@
 
             
 
+            
+
              class using the specified destination type and expression.</para
           >
         </summary>
         <param name="targetType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -286,8 +318,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 

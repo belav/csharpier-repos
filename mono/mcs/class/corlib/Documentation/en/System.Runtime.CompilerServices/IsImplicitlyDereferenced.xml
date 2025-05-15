@@ -29,6 +29,8 @@
 
         
 
+        
+
          modifier to distinguish reference classes that are passed by managed reference from those passed by managed pointer.  The <see
          cref="T:System.Runtime.CompilerServices.IsImplicitlyDereferenced" />
 
@@ -36,8 +38,12 @@
 
         
 
+        
+
          class and its partner, the <see
          cref="T:System.Runtime.CompilerServices.IsExplicitlyDereferenced" />
+
+        
 
         
 
@@ -57,8 +63,12 @@
 
             
 
+            
+
              class such as <see
              cref="Overload:System.Reflection.Emit.TypeBuilder.DefineMethod" />
+
+            
 
             
 
@@ -71,6 +81,8 @@
 
             
 
+            
+
             , <see
              cref="Overload:System.Reflection.Emit.TypeBuilder.DefineConstructor" />
 
@@ -78,8 +90,12 @@
 
             
 
+            
+
             , and <see
              cref="Overload:System.Reflection.Emit.TypeBuilder.DefineProperty" />
+
+            
 
             
 
@@ -94,6 +110,8 @@
              type="text/html">
               <a href="4ca3a4f0-4400-47ce-8936-8e219961c76f">MSIL Assembler (Ilasm.exe)</a>
             </format>
+
+            
 
             
 

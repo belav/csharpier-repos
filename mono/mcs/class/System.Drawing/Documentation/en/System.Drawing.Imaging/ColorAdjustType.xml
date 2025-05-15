@@ -22,8 +22,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Drawing.Brush" />
+
+        
 
         
 
@@ -36,8 +40,12 @@
 
         
 
+        
+
          objects use any color adjustments that have been set in the default <see
          cref="T:System.Drawing.Imaging.ImageAttributes" />
+
+        
 
         
 
@@ -90,6 +98,8 @@
 
             
 
+            
+
              objects.</para
           >
         </summary>
@@ -113,6 +123,8 @@
           <para
             >Color adjustment information for <see
              cref="T:System.Drawing.Brush" />
+
+            
 
             
 
@@ -179,6 +191,8 @@
           <para
             >Color adjustment information for <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 

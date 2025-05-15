@@ -29,6 +29,8 @@
 
         
 
+        
+
         s for the <see
          cref="M:System.Uri.IsWellFormedUriString(System.String,System.UriKind)" />
 
@@ -36,8 +38,12 @@
 
         
 
+        
+
          and several <see
          cref="Overload:System.Uri.#ctor" />
+
+        
 
         
 

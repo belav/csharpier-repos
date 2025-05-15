@@ -29,8 +29,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.IObservable`1" />
+
+        
 
         
 
@@ -43,6 +47,8 @@
 
         
 
+        
+
          interface represents the class that sends notifications (the provider); the <see
          cref="T:System.IObserver`1" />
 
@@ -50,8 +56,12 @@
 
         
 
+        
+
          interface represents the class that receives them (the observer). <paramref
          name="T" />
+
+        
 
         
 
@@ -67,8 +77,12 @@
 
         
 
+        
+
          implementation arranges to receive notifications from a provider (an <see
          cref="T:System.IObservable`1" />
+
+        
 
         
 
@@ -81,8 +95,12 @@
 
         
 
+        
+
          method. This method returns an <see
          cref="T:System.IDisposable" />
+
+        
 
         
 
@@ -93,6 +111,8 @@
       <para
         >The <see
          cref="T:System.IObserver`1" />
+
+        
 
         
 
@@ -110,6 +130,8 @@
 
             
 
+            
+
              method, which is typically called by the provider to supply the observer with new data or state information.</para
           >
         </item>
@@ -122,6 +144,8 @@
 
             
 
+            
+
              method, which is typically called by the provider to indicate that data is unavailable, inaccessible, or corrupted, or that the provider has experienced some other error condition. </para
           >
         </item>
@@ -129,6 +153,8 @@
           <para
             >The <see
              cref="M:System.IObserver`1.OnCompleted" />
+
+            
 
             
 
@@ -170,8 +196,12 @@
 
             
 
+            
+
              implementation is called, the <see
              cref="M:System.IObserver`1.OnCompleted" />
+
+            
 
             
 
@@ -184,6 +214,8 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.IDisposable" />
 
@@ -191,8 +223,12 @@
 
             
 
+            
+
              object that was returned to the observer when it called the <see
              cref="M:System.IObservable`1.Subscribe(System.IObserver{`0})" />
+
+            
 
             
 
@@ -234,6 +270,8 @@
 
             
 
+            
+
              is an object that is derived from <see
              cref="T:System.Exception" />
 
@@ -241,8 +279,12 @@
 
             
 
+            
+
             , it does not necessarily represent an exception that is thrown by the provider. It can also represent a routine or expected error condition, such as data that is missing or unavailable. The <see
              cref="M:System.IObserver`1.OnError(System.Exception)" />
+
+            
 
             
 
@@ -257,6 +299,8 @@
         </summary>
         <param name="error">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

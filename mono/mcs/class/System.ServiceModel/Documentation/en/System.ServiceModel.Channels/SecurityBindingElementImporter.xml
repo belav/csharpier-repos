@@ -54,6 +54,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -115,8 +117,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.MetadataImporter" />
+
+          
 
           
 

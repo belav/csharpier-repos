@@ -23,8 +23,12 @@
 
         
 
+        
+
          object represents a date in the <see
          cref="T:System.Web.UI.WebControls.Calendar" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          event handler to programmatically access the properties of a date as it is rendered on the <see
          cref="T:System.Web.UI.WebControls.Calendar" />
+
+        
 
         
 
@@ -54,8 +62,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.WebControls.CalendarDay.#ctor(System.DateTime,System.Boolean,System.Boolean,System.Boolean,System.Boolean,System.String)" />
+
+        
 
         
 
@@ -69,6 +81,8 @@
       <para
         >Represents a date in the <see
          cref="T:System.Web.UI.WebControls.Calendar" />
+
+        
 
         
 
@@ -105,6 +119,8 @@
 
             
 
+            
+
              class.</para
           >
           <block subset="none" type="note">
@@ -116,12 +132,16 @@
 
               
 
+              
+
                class is not typically created dynamically.</para
             >
           </block>
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.Web.UI.WebControls.CalendarDay" />
+
+            
 
             
 
@@ -153,6 +173,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -165,6 +187,8 @@
                 <para
                   >The value of the <paramref
                    name="dayNumberText" />
+
+                  
 
                   
 
@@ -187,6 +211,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -199,6 +225,8 @@
                 <para
                   >The value of the <paramref
                    name="isSelected" />
+
+                  
 
                   
 
@@ -221,6 +249,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -233,6 +263,8 @@
                 <para
                   >The value of the <paramref
                    name="isWeekEnd" />
+
+                  
 
                   
 
@@ -254,6 +286,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -264,8 +298,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -280,10 +318,14 @@
 
           
 
+          
+
           true to indicate that the date represented by an instance of this class is either a Saturday or a Sunday; otherwise, false. </param
         >
         <param name="isToday">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -298,8 +340,12 @@
 
           
 
+          
+
           true to indicate that the date represented by an instance of this class is selected on the <see
            cref="T:System.Web.UI.WebControls.Calendar" />
+
+          
 
           
 
@@ -314,8 +360,12 @@
 
           
 
+          
+
           true to indicate that the date represented by an instance of this class is in a month other than the displayed month on the <see
            cref="T:System.Web.UI.WebControls.Calendar" />
+
+          
 
           
 
@@ -325,6 +375,8 @@
         >
         <param name="dayNumberText">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -351,6 +403,8 @@
           <para
             >Use the <see
              cref="P:System.Web.UI.WebControls.CalendarDay.Date" />
+
+            
 
             
 
@@ -387,6 +441,8 @@
 
             
 
+            
+
              property to determine the string equivalent of the day number for the date represented by an instance of this class. This allows you to programmatically control the appearance or behavior of the day, based on this value.</para
           >
         </remarks>
@@ -395,6 +451,8 @@
           <para
             >Gets the string equivalent of the day number for the date represented by an instance of the <see
              cref="T:System.Web.UI.WebControls.CalendarDay" />
+
+            
 
             
 
@@ -427,8 +485,12 @@
 
             
 
+            
+
              property to programmatically determine whether the date represented by an instance of this class is in a month other than the month displayed in the <see
              cref="T:System.Web.UI.WebControls.Calendar" />
+
+            
 
             
 
@@ -442,6 +504,8 @@
           <para
             >Gets a value that indicates whether the date represented by an instance of this class is in a month other than the month displayed in the <see
              cref="T:System.Web.UI.WebControls.Calendar" />
+
+            
 
             
 
@@ -475,8 +539,12 @@
 
             
 
+            
+
              property to specify or determine whether the date represented by an instance of this class can be selected in the <see
              cref="T:System.Web.UI.WebControls.Calendar" />
+
+            
 
             
 
@@ -490,6 +558,8 @@
           <para
             >Gets or sets a value that indicates whether the date represented by an instance of this class can be selected in the <see
              cref="T:System.Web.UI.WebControls.Calendar" />
+
+            
 
             
 
@@ -522,8 +592,12 @@
 
             
 
+            
+
              property to programmatically determine whether the date represented by an instance of this class is selected in the <see
              cref="T:System.Web.UI.WebControls.Calendar" />
+
+            
 
             
 
@@ -537,6 +611,8 @@
           <para
             >Gets a value that indicates whether the date represented by an instance of this class is selected in the <see
              cref="T:System.Web.UI.WebControls.Calendar" />
+
+            
 
             
 
@@ -569,8 +645,12 @@
 
             
 
+            
+
              property to programmatically determine whether the date represented by an instance of this class is the same date specified by the <see
              cref="P:System.Web.UI.WebControls.Calendar.TodaysDate" />
+
+            
 
             
 
@@ -583,12 +663,16 @@
 
             
 
+            
+
              control. This allows you to programmatically control the appearance or behavior of the day, based on this value.</para
           >
           <block subset="none" type="note">
             <para
               >Although the date specified by the <see
                cref="P:System.Web.UI.WebControls.Calendar.TodaysDate" />
+
+              
 
               
 
@@ -608,8 +692,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.Calendar" />
+
+            
 
             
 
@@ -637,6 +725,8 @@
           <para
             >Use the <see
              cref="P:System.Web.UI.WebControls.CalendarDay.IsWeekend" />
+
+            
 
             
 

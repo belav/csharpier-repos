@@ -37,8 +37,12 @@
 
         
 
+        
+
          class provides a simple collection object that can be used to store a set of <see
          cref="T:System.CodeDom.CodeTypeParameter" />
+
+        
 
         
 
@@ -52,6 +56,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.CodeDom.CodeTypeParameter" />
+
+        
 
         
 
@@ -82,6 +88,8 @@
           <para
             >Initializes a new, empty instance of the <see
              cref="T:System.CodeDom.CodeTypeParameterCollection" />
+
+            
 
             
 
@@ -122,8 +130,12 @@
 
             
 
+            
+
              class containing the specified array of <see
              cref="T:System.CodeDom.CodeTypeParameter" />
+
+            
 
             
 
@@ -139,8 +151,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.CodeDom.CodeTypeParameter" />
+
+          
 
           
 
@@ -180,6 +196,8 @@
 
             
 
+            
+
              class containing the elements of the specified source collection.</para
           >
         </summary>
@@ -190,8 +208,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeTypeParameterCollection" />
+
+          
 
           
 
@@ -234,6 +256,8 @@
 
             
 
+            
+
              object to the collection.</para
           >
         </summary>
@@ -248,8 +272,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeTypeParameter" />
+
+          
 
           
 
@@ -289,6 +317,8 @@
 
             
 
+            
+
              object to the collection using the specified data type name.</para
           >
         </summary>
@@ -299,8 +329,12 @@
 
           
 
+          
+
           The name of a data type for which to add the <see
            cref="T:System.CodeDom.CodeTypeParameter" />
+
+          
 
           
 
@@ -343,6 +377,8 @@
 
             
 
+            
+
              array to the end of the collection.</para
           >
         </summary>
@@ -353,8 +389,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.CodeDom.CodeTypeParameter" />
+
+          
 
           
 
@@ -397,11 +437,15 @@
 
             
 
+            
+
              to the end of the collection.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -414,8 +458,12 @@
 
           
 
+          
+
            containing the <see
            cref="T:System.CodeDom.CodeTypeParameter" />
+
+          
 
           
 
@@ -458,6 +506,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -466,6 +516,8 @@
           <para
             >true if the <see
              cref="T:System.CodeDom.CodeTypeParameter" />
+
+            
 
             
 
@@ -481,8 +533,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeTypeParameter" />
+
+          
 
           
 
@@ -526,11 +582,15 @@
 
             
 
+            
+
              at the specified index.</para
           >
         </summary>
         <param name="array">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -543,10 +603,14 @@
 
           
 
+          
+
            that is the destination of the values copied from the collection. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -589,6 +653,8 @@
 
             
 
+            
+
              object, if it exists in the collection.</para
           >
         </summary>
@@ -597,6 +663,8 @@
           <para
             >The zero-based index of the specified <see
              cref="T:System.CodeDom.CodeTypeParameter" />
+
+            
 
             
 
@@ -612,8 +680,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeTypeParameter" />
+
+          
 
           
 
@@ -657,11 +729,15 @@
 
             
 
+            
+
              object into the collection at the specified index.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -676,8 +752,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeTypeParameter" />
+
+          
 
           
 
@@ -748,6 +828,8 @@
 
             
 
+            
+
              object from the collection.</para
           >
         </summary>
@@ -758,8 +840,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeTypeParameter" />
+
+          
 
           
 

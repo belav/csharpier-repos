@@ -24,6 +24,8 @@
 
         
 
+        
+
          to tune the performance characteristics of a service. The easiest way to configure the <see
          cref="T:System.ServiceModel.Dispatcher.ServiceThrottle" />
 
@@ -31,8 +33,12 @@
 
         
 
+        
+
          for a service is to use the <see
          cref="T:System.ServiceModel.Description.ServiceThrottlingBehavior" />
+
+        
 
         
 
@@ -48,8 +54,12 @@
 
         
 
+        
+
          property specifies the maximum number of messages actively processing across all the dispatcher objects in a <see
          cref="T:System.ServiceModel.ServiceHost" />
+
+        
 
         
 
@@ -65,8 +75,12 @@
 
         
 
+        
+
          property specifies the maximum number of <see
          cref="T:System.ServiceModel.InstanceContext" />
+
+        
 
         
 
@@ -82,8 +96,12 @@
 
         
 
+        
+
          property specifies the maximum number of sessions a <see
          cref="T:System.ServiceModel.ServiceHost" />
+
+        
 
         
 
@@ -95,6 +113,8 @@
         <para
           >A trace is written when the first call, <see
            cref="T:System.ServiceModel.InstanceContext" />
+
+          
 
           
 
@@ -132,6 +152,8 @@
 
             
 
+            
+
              property specifies the maximum number of messages actively processing across all the dispatcher objects in a <see
              cref="T:System.ServiceModel.ServiceHost" />
 
@@ -139,8 +161,12 @@
 
             
 
+            
+
              object. Each channel can have one pending message that does not count against the value of <see
              cref="P:System.ServiceModel.Dispatcher.ServiceThrottle.MaxConcurrentCalls" />
+
+            
 
             
 
@@ -157,6 +183,8 @@
           <para
             >Gets or sets the maximum number of messages actively processing across all dispatcher objects in a <see
              cref="T:System.ServiceModel.ServiceHost" />
+
+            
 
             
 
@@ -189,8 +217,12 @@
 
             
 
+            
+
              property specifies the maximum number of <see
              cref="T:System.ServiceModel.InstanceContext" />
+
+            
 
             
 
@@ -203,8 +235,12 @@
 
             
 
+            
+
              property and the <see
              cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
+
+            
 
             
 
@@ -217,8 +253,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.ServiceModel.InstanceContextMode.PerSession" />
+
+            
 
             
 
@@ -231,8 +271,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.ServiceModel.InstanceContextMode.PerCall" />
+
+            
 
             
 
@@ -245,8 +289,12 @@
 
             
 
+            
+
              objects already exist, the message is held until an <see
              cref="T:System.ServiceModel.InstanceContext" />
+
+            
 
             
 
@@ -286,6 +334,8 @@
 
             
 
+            
+
              property specifies the maximum number of channels a <see
              cref="T:System.ServiceModel.ServiceHost" />
 
@@ -293,8 +343,12 @@
 
             
 
+            
+
              can accept. Each listener object can have one pending channel that does not count against the value of <see
              cref="P:System.ServiceModel.Dispatcher.ServiceThrottle.MaxConcurrentSessions" />
+
+            
 
             
 
@@ -315,11 +369,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >Typically, this property is set using the <see
              cref="P:System.ServiceModel.Description.ServiceThrottlingBehavior.MaxConcurrentSessions" />
+
+            
 
             
 
@@ -333,6 +391,8 @@
           <para
             >Gets or sets a value that specifies the maximum number of sessions a <see
              cref="T:System.ServiceModel.ServiceHost" />
+
+            
 
             
 

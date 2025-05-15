@@ -32,6 +32,8 @@
 
         
 
+        
+
          attribute to an optional parameter that has a default value. You must specify an explicit default value for the optional parameter. You can't apply this attribute to parameters that aren't specified as optional.</para
       >
       <para
@@ -41,6 +43,8 @@
             >Caller Information (C# and Visual Basic)</a
           >
         </format>
+
+        
 
         
 
@@ -56,8 +60,12 @@
 
         
 
+        
+
          attribute to avoid specifying the member name as a String argument to the called method. By using this technique, you avoid the problem that <ui
         >Rename Refactoring</ui>
+
+        
 
         
 
@@ -78,8 +86,12 @@
 
             
 
+            
+
              interface when binding data. This interface allows the property of an object to notify a bound control that the property has changed, so that the control can display the updated information. Without the <unmanagedCodeEntityReference
             >CallerMemberName</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -92,6 +104,8 @@
       <para
         >The following chart shows the member names that are returned when you use the <unmanagedCodeEntityReference
         >CallerMemberName</unmanagedCodeEntityReference>
+
+        
 
         
 
@@ -190,6 +204,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.CompilerServices.CallerMemberNameAttribute" />
+
+            
 
             
 

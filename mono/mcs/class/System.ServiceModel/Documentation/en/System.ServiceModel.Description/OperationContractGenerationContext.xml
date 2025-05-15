@@ -27,8 +27,12 @@
 
         
 
+        
+
          object passed to the <see
          cref="M:System.ServiceModel.Description.IOperationContractGenerationExtension.GenerateOperation(System.ServiceModel.Description.OperationContractGenerationContext)" />
+
+        
 
         
 
@@ -41,6 +45,8 @@
 
         
 
+        
+
          interface is implemented on a custom <see
          cref="T:System.ServiceModel.Description.IWsdlImportExtension" />
 
@@ -48,8 +54,12 @@
 
         
 
+        
+
          implementation that is used to import custom WSDL elements or otherwise modify the code at the service or operation level. To modify the code at the service level, see <see
          cref="T:System.ServiceModel.Description.IServiceContractGenerationExtension" />
+
+        
 
         
 
@@ -63,6 +73,8 @@
       <para
         >Passed to the <see
          cref="M:System.ServiceModel.Description.IOperationContractGenerationExtension.GenerateOperation(System.ServiceModel.Description.OperationContractGenerationContext)" />
+
+        
 
         
 
@@ -111,11 +123,15 @@
 
             
 
+            
+
              class using the specified contract generator, contract context, operation description, code type declaration, synchronization method and task method.</para
           >
         </summary>
         <param name="serviceContractGenerator">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -130,10 +146,14 @@
 
           
 
+          
+
           The contract and its generation context.</param
         >
         <param name="operation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -148,10 +168,14 @@
 
           
 
+          
+
           The declaring code type.</param
         >
         <param name="method">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -202,11 +226,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="serviceContractGenerator">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -221,10 +249,14 @@
 
           
 
+          
+
           The contract and its generation context.</param
         >
         <param name="operation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -239,6 +271,8 @@
 
           
 
+          
+
           The declaring code type.</param
         >
         <param name="beginMethod">
@@ -248,10 +282,14 @@
 
           
 
+          
+
           The asynchronous begin method.</param
         >
         <param name="endMethod">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -289,6 +327,8 @@
 
             
 
+            
+
              to examine or modify the asynchronous begin method that represents the operation to be generated.</para
           >
         </remarks>
@@ -297,6 +337,8 @@
           <para
             >Gets the <see
              cref="T:System.CodeDom.CodeMemberMethod" />
+
+            
 
             
 
@@ -330,6 +372,8 @@
           <para
             >Use the <see
              cref="P:System.ServiceModel.Description.OperationContractGenerationContext.Contract" />
+
+            
 
             
 
@@ -372,6 +416,8 @@
 
             
 
+            
+
              property to examine or modify the code type declaration for the current operation.</para
           >
         </remarks>
@@ -404,6 +450,8 @@
           <para
             >Use the <see
              cref="P:System.ServiceModel.Description.OperationContractGenerationContext.EndMethod" />
+
+            
 
             
 
@@ -465,6 +513,8 @@
 
             
 
+            
+
              property to examine operation information prior to generating code for that operation.</para
           >
         </remarks>
@@ -473,6 +523,8 @@
           <para
             >Gets the <see
              cref="T:System.ServiceModel.Description.OperationDescription" />
+
+            
 
             
 
@@ -511,6 +563,8 @@
 
             
 
+            
+
              property to examine or modify the object that generates code for the current operation.</para
           >
         </remarks>
@@ -519,6 +573,8 @@
           <para
             >Gets the <see
              cref="T:System.ServiceModel.Description.ServiceContractGenerator" />
+
+            
 
             
 
@@ -557,6 +613,8 @@
 
             
 
+            
+
              property to examine or modify the synchronous operation before it is generated.</para
           >
         </remarks>
@@ -565,6 +623,8 @@
           <para
             >Gets the <see
              cref="T:System.CodeDom.CodeMemberMethod" />
+
+            
 
             
 

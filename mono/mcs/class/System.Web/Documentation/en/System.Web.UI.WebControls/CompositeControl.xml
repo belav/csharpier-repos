@@ -36,6 +36,8 @@
 
         
 
+        
+
          class is an abstract class that provides naming container and control designer functionality for custom controls that encompass child controls in their entirety or use the functionality of other controls. This class is inherited by controls such as <see
          cref="T:System.Web.UI.WebControls.Login" />
 
@@ -43,8 +45,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Web.UI.WebControls.Wizard" />
+
+        
 
         
 
@@ -60,8 +66,12 @@
 
         
 
+        
+
          class implements the <see
          cref="T:System.Web.UI.INamingContainer" />
+
+        
 
         
 
@@ -77,8 +87,12 @@
 
         
 
+        
+
          class. The functionality this class provides is built-in verification that child controls have been created prior to being accessed and it enables the design-time environment to recreate the collection of child controls. The <see
          cref="P:System.Web.UI.WebControls.CompositeControl.Controls" />
+
+        
 
         
 
@@ -91,8 +105,12 @@
 
         
 
+        
+
         . The <see
          cref="M:System.Web.UI.WebControls.CompositeControl.DataBind" />
+
+        
 
         
 
@@ -108,6 +126,8 @@
 
         
 
+        
+
          class to create a custom designer for a composite control derived from <see
          cref="T:System.Web.UI.WebControls.CompositeControl" />
 
@@ -115,8 +135,12 @@
 
         
 
+        
+
         . A control designer is a class that defines how a control is displayed and manipulated in design view. For more information, see <see
          cref="T:System.Web.UI.Design.WebControls.CompositeControlDesigner" />
+
+        
 
         
 
@@ -147,8 +171,12 @@
 
             
 
+            
+
              constructor is called by ASP.NET to create an instance of the <see
              cref="T:System.Web.UI.WebControls.CompositeControl" />
+
+            
 
             
 
@@ -162,6 +190,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.CompositeControl" />
+
+            
 
             
 
@@ -197,8 +227,12 @@
 
             
 
+            
+
              property overrides the base implementation to ensure that all child controls have been created prior to returning the <see
              cref="T:System.Web.UI.ControlCollection" />
+
+            
 
             
 
@@ -214,6 +248,8 @@
 
             
 
+            
+
              property allows you to programmatically access the <see
              cref="T:System.Web.UI.ControlCollection" />
 
@@ -221,8 +257,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Web.UI.WebControls.CompositeControl" />
+
+            
 
             
 
@@ -241,8 +281,12 @@
 
             
 
+            
+
              object that represents the child controls in a <see
              cref="T:System.Web.UI.WebControls.CompositeControl" />
+
+            
 
             
 
@@ -275,6 +319,8 @@
 
             
 
+            
+
              method binds a data source to the <see
              cref="T:System.Web.UI.WebControls.CompositeControl" />
 
@@ -282,8 +328,12 @@
 
             
 
+            
+
              control and all its child controls. This <see
              cref="M:System.Web.UI.WebControls.CompositeControl.DataBind" />
+
+            
 
             
 
@@ -297,6 +347,8 @@
           <para
             >Binds a data source to the <see
              cref="T:System.Web.UI.WebControls.CompositeControl" />
+
+            
 
             
 
@@ -329,6 +381,8 @@
 
             
 
+            
+
              method is used primarily by control developers.</para
           >
         </remarks>
@@ -337,6 +391,8 @@
           <para
             >Recreates the child controls in a control derived from <see
              cref="T:System.Web.UI.WebControls.CompositeControl" />
+
+            
 
             
 
@@ -377,8 +433,12 @@
 
             
 
+            
+
              method writes the rendered content of the control and its child controls to the client using the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -391,6 +451,8 @@
 
             
 
+            
+
              collection are created and then renders the control and its child controls using the base <see
              cref="M:System.Web.UI.Control.Render(System.Web.UI.HtmlTextWriter)" />
 
@@ -398,8 +460,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.UI.Control.RenderChildren(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -418,8 +484,12 @@
 
             
 
+            
+
              content to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 

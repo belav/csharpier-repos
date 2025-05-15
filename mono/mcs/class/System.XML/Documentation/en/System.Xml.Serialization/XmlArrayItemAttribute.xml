@@ -37,8 +37,12 @@
 
         
 
+        
+
          belongs to a family of attributes that controls how the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -55,11 +59,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >You can apply the <see
          cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+
+        
 
         
 
@@ -72,8 +80,12 @@
 
         
 
+        
+
         , or any class that implements the <see
          cref="T:System.Collections.IEnumerable" />
+
+        
 
         
 
@@ -89,8 +101,12 @@
 
         
 
+        
+
          supports polymorphism--in other words, it allows the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -103,8 +119,12 @@
 
         
 
+        
+
          to serialize both the Animal and Mammal type, apply the <see
          cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+
+        
 
         
 
@@ -121,8 +141,12 @@
 
           
 
+          
+
            or <see
            cref="T:System.Xml.Serialization.XmlElementAttribute" />
+
+          
 
           
 
@@ -144,12 +168,16 @@
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
         <para
           >You can use the word XmlArrayItem in your code instead of the longer <see
            cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+
+          
 
           
 
@@ -164,6 +192,8 @@
       <para
         >Represents an attribute that specifies the derived types that the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -195,6 +225,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+
+            
 
             
 
@@ -232,12 +264,16 @@
 
             
 
+            
+
              property.</para
           >
           <para>Use this overload if you want the name of the generated XML element to differ from the member's identifier.</para>
           <para
             >An XML document that includes namespaces can contain more than one version of an element name. For details, see the <see
              cref="P:System.Xml.Serialization.XmlArrayItemAttribute.ElementName" />
+
+            
 
             
 
@@ -256,11 +292,15 @@
 
             
 
+            
+
              class and specifies the name of the XML element generated in the XML document.</para
           >
         </summary>
         <param name="elementName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -298,8 +338,12 @@
 
             
 
+            
+
              class and specifies the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -315,8 +359,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -357,8 +405,12 @@
 
             
 
+            
+
              and the <see
              cref="P:System.Xml.Serialization.XmlArrayItemAttribute.Type" />
+
+            
 
             
 
@@ -370,6 +422,8 @@
           <para
             >An XML document that includes namespaces can contain more than one version of an element name. For details, see the <see
              cref="P:System.Xml.Serialization.XmlArrayItemAttribute.ElementName" />
+
+            
 
             
 
@@ -388,8 +442,12 @@
 
             
 
+            
+
              class and specifies the name of the XML element generated in the XML document and the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -405,6 +463,8 @@
 
           
 
+          
+
           The name of the XML element. </param
         >
         <param name="type">
@@ -414,8 +474,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -451,6 +515,8 @@
 
             
 
+            
+
              objects, and apply an <see
              cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
 
@@ -458,8 +524,12 @@
 
             
 
+            
+
              with the <see
              cref="P:System.Xml.Serialization.XmlArrayItemAttribute.DataType" />
+
+            
 
             
 
@@ -472,6 +542,8 @@
 
             
 
+            
+
              type and apply the <see
              cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
 
@@ -479,8 +551,12 @@
 
             
 
+            
+
              with the <see
              cref="P:System.Xml.Serialization.XmlArrayItemAttribute.DataType" />
+
+            
 
             
 
@@ -496,8 +572,12 @@
 
             
 
+            
+
              with its <see
              cref="P:System.Xml.Serialization.XmlArrayItemAttribute.DataType" />
+
+            
 
             
 
@@ -541,6 +621,8 @@
                 <para
                   >Array of <see
                    cref="T:System.Byte" />
+
+                  
 
                   
 
@@ -698,6 +780,8 @@
                 <para
                   >Array of <see
                    cref="T:System.Byte" />
+
+                  
 
                   
 
@@ -1010,6 +1094,8 @@
 
             
 
+            
+
              if you want the name of the generated XML element to differ from the member's identifier.</para
           >
           <para
@@ -1020,8 +1106,12 @@
 
             
 
+            
+
              value to more than one class member if the generated XML document uses XML namespaces to distinguish between identically named members. For details about how to use namespaces and prefixed names in the XML document, see the <see
              cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+
+            
 
             
 
@@ -1067,6 +1157,8 @@
 
             
 
+            
+
              property determines whether an XML element name is qualified, based on the World Wide Web Consortium (www.w3.org) specification "Namespaces in XML." </para
           >
           <para
@@ -1077,8 +1169,12 @@
 
             
 
+            
+
              property is set to any value, attempting to set the <see
              cref="P:System.Xml.Serialization.XmlElementAttribute.Form" />
+
+            
 
             
 
@@ -1094,8 +1190,12 @@
 
             
 
+            
+
              to check the schema for the XML document to determine whether the namespace is qualified. For elements, the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -1141,8 +1241,12 @@
 
             
 
+            
+
              property is true, the xsi:nil attribute is generated for class members that have been set to null. For example, if you set a field named MyStringArray to null, the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -1159,12 +1263,16 @@
 
             
 
+            
+
              property is false, no XML element is generated.</para
           >
           <block subset="none" type="note">
             <para
               >You cannot apply the <see
                cref="P:System.Xml.Serialization.XmlArrayItemAttribute.IsNullable" />
+
+              
 
               
 
@@ -1179,6 +1287,8 @@
           <para
             >Gets or sets a value that indicates whether the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -1214,11 +1324,15 @@
 
             
 
+            
+
              property conforms to the World Wide Web Consortium (www.w3.org) specification "Namespaces in XML." </para
           >
           <para
             >To create namespaces to use in the XML document and associated prefixes, you must create an <see
              cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
+
+            
 
             
 
@@ -1231,6 +1345,8 @@
 
             
 
+            
+
              must be contained in the <see
              cref="T:System.Xml.Serialization.XmlSerializerNamespaces" />
 
@@ -1238,8 +1354,12 @@
 
             
 
+            
+
             . When the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -1279,8 +1399,12 @@
 
             
 
+            
+
              property is only used when applying an <see
              cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+
+            
 
             
 
@@ -1296,8 +1420,12 @@
 
             
 
+            
+
             . The first index always has the value of 0; therefore it is optional to set its <see
              cref="P:System.Xml.Serialization.XmlArrayItemAttribute.NestingLevel" />
+
+            
 
             
 
@@ -1310,8 +1438,12 @@
 
             
 
+            
+
              without a <see
              cref="P:System.Xml.Serialization.XmlArrayItemAttribute.NestingLevel" />
+
+            
 
             
 
@@ -1324,8 +1456,12 @@
 
             
 
+            
+
              objects require <see
              cref="P:System.Xml.Serialization.XmlArrayItemAttribute.NestingLevel" />
+
+            
 
             
 
@@ -1339,6 +1475,8 @@
           <para
             >Gets or sets the level in a hierarchy of XML elements that the <see
              cref="T:System.Xml.Serialization.XmlArrayItemAttribute" />
+
+            
 
             
 
@@ -1374,11 +1512,15 @@
 
             
 
+            
+
              property to specify an overridden type for a public field or public read/write property value.</para
           >
           <para
             >If a field or property returns an array of type <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -1391,8 +1533,12 @@
 
             
 
+            
+
              to the field or property. For each instance, set the <see
              cref="P:System.Xml.Serialization.XmlElementAttribute.Type" />
+
+            
 
             
 
@@ -1408,8 +1554,12 @@
 
             
 
+            
+
             . By default, the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -1426,8 +1576,7 @@
     // No XmlArrayItemAttribute is applied.
     public object[] XSDTypes= new object[]{"one", 2, 3.2};
  }</code>
-          <para
->results in this XML: </para>
+          <para>results in this XML: </para>
           <code> &lt;?xml version="1.0" encoding="utf-8"?&gt;
  &lt;Arrays xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
    &lt;XSDTypes&gt;
@@ -1439,6 +1588,8 @@
           <para
             >However, if you specify the <see
              cref="P:System.Xml.Serialization.XmlArrayItemAttribute.Type" />
+
+            
 
             
 
@@ -1460,8 +1611,7 @@
     [XmlArrayItem(typeof(double))]
     public object [] PrimitiveTypes = new object[]{"one", 2, 3.0};
  }</code>
-          <para
->results in this XML: </para>
+          <para>results in this XML: </para>
           <code> &lt;?xml version="1.0" encoding="utf-8"?&gt;
  &lt;Arrays xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
    &lt;PrimitiveTypes&gt;

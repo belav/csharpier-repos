@@ -20,11 +20,15 @@
 
         
 
+        
+
          enumeration determines what kind of border surrounds a Web Parts control. Options include showing a title bar only, a border only, a title bar and border, or neither. </para
       >
       <para
         >If the enumeration value is set to <see
          cref="F:System.Web.UI.WebControls.WebParts.PartChromeType.Default" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          property of a part control, the control inherits its setting from the <see
          cref="P:System.Web.UI.WebControls.WebParts.WebZone.PartChromeType" />
+
+        
 
         
 

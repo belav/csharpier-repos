@@ -19,8 +19,12 @@
 
         
 
+        
+
          class, which is the base ASP.NET implementation of the <see
          cref="T:System.Web.UI.IHierarchicalDataSource" />
+
+        
 
         
 
@@ -33,8 +37,12 @@
 
         
 
+        
+
          interface is used to define data source controls that expose hierarchical data, rather than tabular or list-style data, to Web server controls that derive from the <see
          cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" />
+
+        
 
         
 
@@ -47,8 +55,12 @@
 
         
 
+        
+
          control. The interface defines a single method, <see
          cref="M:System.Web.UI.IHierarchicalDataSource.GetHierarchicalView(System.String)" />
+
+        
 
         
 
@@ -61,8 +73,12 @@
 
         
 
+        
+
          object. Data source controls that implement this interface support a hierarchical view for each hierarchical level of data they represent. The data source views are not named, like <see
          cref="T:System.Web.UI.DataSourceView" />
+
+        
 
         
 
@@ -75,8 +91,12 @@
 
         
 
+        
+
          parameter passed to the <see
          cref="M:System.Web.UI.IHierarchicalDataSource.GetHierarchicalView(System.String)" />
+
+        
 
         
 
@@ -92,8 +112,12 @@
 
         
 
+        
+
          object and its associated views on the underlying data. Each associated <see
          cref="T:System.Web.UI.HierarchicalDataSourceView" />
+
+        
 
         
 
@@ -109,8 +133,12 @@
 
         
 
+        
+
         , are derived from the <see
          cref="T:System.Web.UI.HierarchicalDataSourceControl" />
+
+        
 
         
 
@@ -123,8 +151,12 @@
 
         
 
+        
+
         , are derived from <see
          cref="T:System.Web.UI.HierarchicalDataSourceControl" />
+
+        
 
         
 
@@ -137,8 +169,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.ComponentModel.IListSource" />
+
+        
 
         
 
@@ -152,6 +188,8 @@
       <para
         >Represents a hierarchical data source that hierarchical data-bound controls such as <see
          cref="T:System.Web.UI.WebControls.TreeView" />
+
+        
 
         
 
@@ -180,8 +218,12 @@
 
             
 
+            
+
              event is raised when a change is made to the data source control's properties, such as changing the <see
              cref="P:System.Web.UI.WebControls.XmlDataSource.DataFile" />
+
+            
 
             
 
@@ -194,8 +236,12 @@
 
             
 
+            
+
              control, or changing the data in the underlying data storage, which happens when XML nodes are changed by an edit action performed by an <see
              cref="T:System.Web.UI.WebControls.XmlDataSource" />
+
+            
 
             
 
@@ -209,6 +255,8 @@
           <para
             >Occurs when the data storage that the <see
              cref="T:System.Web.UI.IHierarchicalDataSource" />
+
+            
 
             
 
@@ -246,8 +294,12 @@
 
             
 
+            
+
              interface, like the <see
              cref="T:System.Web.UI.IDataSource" />
+
+            
 
             
 
@@ -260,6 +312,8 @@
 
             
 
+            
+
              helper objects that are associated with data source controls, a <see
              cref="T:System.Web.UI.HierarchicalDataSourceView" />
 
@@ -267,8 +321,12 @@
 
             
 
+            
+
              object defines the operations that the data source can perform with the underlying data. However, although data source controls that represent tabular data typically have only one named view, hierarchical data source controls support a view for each level of hierarchical data that the data source control represents. The level of hierarchical data is identified by a unique hierarchical path, passed as the <paramref
              name="viewPath" />
+
+            
 
             
 
@@ -287,6 +345,8 @@
 
             
 
+            
+
              interface for the specified path.</para
           >
         </summary>
@@ -300,8 +360,12 @@
 
             
 
+            
+
              that represents a single view of the data at the hierarchical level identified by the <paramref
              name="viewPath" />
+
+            
 
             
 
@@ -312,6 +376,8 @@
         </returns>
         <param name="viewPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -28,11 +28,15 @@
 
         
 
+        
+
          methods are called to log the events.</para
       >
       <para
         >The basic functionality of <see
          cref="T:System.Diagnostics.Tracing.EventSource" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          attribute to the methods. For advanced event source applications, it is possible to intercept the commands being sent to the derived event source and change the filtering, or to cause actions (such as dumping a data structure) to be performed by the inheritor.  An event source can be activated with Windows ETW controllers, such as the Logman tool, immediately.  It is also possible to programmatically control and intercept the data dispatcher.  The <see
          cref="T:System.Diagnostics.Tracing.EventListener" />
+
+        
 
         
 
@@ -79,6 +87,8 @@
           <para
             >Creates a new instance of the <see
              cref="T:System.Diagnostics.Tracing.EventSource" />
+
+            
 
             
 
@@ -117,11 +127,15 @@
 
             
 
+            
+
              class and specifies whether to throw an exception when an error occurs in the underlying Windows code.</para
           >
         </summary>
         <param name="throwOnEventWriteErrors">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -156,8 +170,12 @@
 
             
 
+            
+
             . The Dispose method leaves the <see
              cref="T:System.Diagnostics.Tracing.EventSource" />
+
+            
 
             
 
@@ -170,8 +188,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Diagnostics.Tracing.EventSource" />
+
+            
 
             
 
@@ -189,10 +211,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -209,8 +235,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Diagnostics.Tracing.EventSource" />
+
+              
 
               
 
@@ -225,6 +255,8 @@
           <para
             >Releases all resources used by the current instance of the <see
              cref="T:System.Diagnostics.Tracing.EventSource" />
+
+            
 
             
 
@@ -262,8 +294,12 @@
 
             
 
+            
+
              parameter set to true. Finalize invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -279,8 +315,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Diagnostics.Tracing.EventSource" />
+
+            
 
             
 
@@ -299,11 +339,15 @@
 
             
 
+            
+
              class and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -371,11 +415,15 @@
 
             
 
+            
+
              should be greater than 0 or less than 65535 or errors can occur in the operation. If errors do occur, you can get more information about the source of the error by checking the output stream of the debugger, if you have a debugger attached to the process firing events. You can also look for errors reported in the ETW event stream, if you have an ETW listener on the event source where the error occurs.</para
           >
           <para
             >When you implement a method that is identified as an ETW event in an <see
              cref="T:System.Diagnostics.Tracing.EventSource" />
+
+            
 
             
 
@@ -388,8 +436,12 @@
 
             
 
+            
+
              method passing the <see
              cref="P:System.Diagnostics.Tracing.EventAttribute.EventId" />
+
+            
 
             
 
@@ -414,10 +466,14 @@ public void Info1(string arg1)
 
           
 
+          
+
           The event identifier.  This value should be between 0 and 65535.</param
         >
         <param name="arg1">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -432,10 +488,14 @@ public void Info1(string arg1)
 
           
 
+          
+
           An integer argument.</param
         >
         <param name="arg3">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

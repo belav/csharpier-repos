@@ -38,6 +38,8 @@
 
         
 
+        
+
          method. A type can have more than one contract invariant method, which can be public or private. </para
       >
     </remarks>
@@ -65,6 +67,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Diagnostics.Contracts.ContractInvariantMethodAttribute" />
+
+            
 
             
 

@@ -21,8 +21,12 @@
 
         
 
+        
+
          class is used in ASP.NET applications to validate user credentials and manage user settings such as passwords and e-mail addresses. The <see
          cref="T:System.Web.Security.Membership" />
+
+        
 
         
 
@@ -35,6 +39,8 @@
 
         
 
+        
+
          to create a complete system for authenticating users of a Web application or site. The <see
          cref="T:System.Web.UI.WebControls.Login" />
 
@@ -42,8 +48,12 @@
 
         
 
+        
+
          control encapsulates the <see
          cref="T:System.Web.Security.Membership" />
+
+        
 
         
 
@@ -62,10 +72,14 @@
 
           
 
+          
+
            before continuing. For a list of other topics related to membership, see <format
            type="text/html">
             <a href="824c3a24-f0af-427c-a652-0d2d1e9397cd">Managing Users By Using Membership</a>
           </format>
+
+          
 
           
 
@@ -77,6 +91,8 @@
       <para
         >The <see
          cref="T:System.Web.Security.Membership" />
+
+        
 
         
 
@@ -100,6 +116,8 @@
 
             
 
+            
+
              control to create a complete authentication system that requires little or no code.</para
           >
         </item>
@@ -115,10 +133,14 @@
 
         
 
+        
+
          to provide application-specific customization that can be tailored to individual users. For details, see <format
          type="text/html">
           <a href="a0d2f19d-a2a7-496d-88b6-30133f8ea3d6">Understanding ASP.NET Role Management</a>
         </format>
+
+        
 
         
 
@@ -135,11 +157,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >The <see
          cref="T:System.Web.Security.Membership" />
+
+        
 
         
 
@@ -152,8 +178,12 @@
 
         
 
+        
+
         , which stores user information in a Microsoft SQL Server database, and an <see
          cref="T:System.Web.Security.ActiveDirectoryMembershipProvider" />
+
+        
 
         
 
@@ -166,8 +196,12 @@
 
         
 
+        
+
          class. Custom membership providers inherit the <see
          cref="T:System.Web.Security.MembershipProvider" />
+
+        
 
         
 
@@ -177,6 +211,8 @@
          type="text/html">
           <a href="d8658b8e-c962-4f64-95e1-4acce35e4582">Implementing a Membership Provider</a>
         </format>
+
+        
 
         
 
@@ -192,8 +228,12 @@
 
         
 
+        
+
          and is specified in the machine configuration with the name AspNetSqlProvider. The default instance of the <see
          cref="T:System.Web.Security.SqlMembershipProvider" />
+
+        
 
         
 
@@ -209,10 +249,14 @@
 
         
 
+        
+
          other than the AspNetSqlProvider instance as the default provider, or specify an instance of a custom provider as the default provider for your ASP.NET application using the Web.config file. You can specify the ASP.NET membership configuration for your Web application using the <format
          type="text/html">
           <a href="b9c1ee8f-33ca-4361-8666-b42a0fe86049">membership</a>
         </format>
+
+        
 
         
 
@@ -227,10 +271,14 @@
 
         
 
+        
+
          section to specify a membership provider other than one of the default providers. For example, the following <format
          type="text/html">
           <a href="b9c1ee8f-33ca-4361-8666-b42a0fe86049">membership</a>
         </format>
+
+        
 
         
 
@@ -284,8 +332,12 @@
 
             
 
+            
+
              is used to identify users specific to an application. That is, the same user name can exist in the database for multiple ASP.NET applications that specify a different <see
              cref="P:System.Web.Security.Membership.ApplicationName" />
+
+            
 
             
 
@@ -298,8 +350,12 @@
 
             
 
+            
+
             . The <see
              cref="P:System.Web.Security.Membership.ApplicationName" />
+
+            
 
             
 
@@ -316,8 +372,12 @@
 
               
 
+              
+
                object, you can have multiple requests executing concurrently and attempting to set the <see
                cref="P:System.Web.Security.Membership.ApplicationName" />
+
+              
 
               
 
@@ -330,8 +390,12 @@
 
               
 
+              
+
                property is not thread safe for multiple writes, and changing the <see
                cref="P:System.Web.Security.Membership.ApplicationName" />
+
+              
 
               
 
@@ -344,8 +408,12 @@
 
               
 
+              
+
                property, unless you must. An example of an application where setting the <see
                cref="P:System.Web.Security.Membership.ApplicationName" />
+
+              
 
               
 
@@ -388,8 +456,12 @@
 
             
 
+            
+
              adds a new user to the data store and returns a <see
              cref="T:System.Web.Security.MembershipUser" />
+
+            
 
             
 
@@ -402,8 +474,12 @@
 
             
 
+            
+
              is thrown. You can retrieve a <see
              cref="T:System.Web.Security.MembershipCreateStatus" />
+
+            
 
             
 
@@ -416,8 +492,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.Security.MembershipCreateUserException" />
+
+            
 
             
 
@@ -433,8 +513,12 @@
 
             
 
+            
+
              object for that user, you can modify the settings for that user with the <see
              cref="T:System.Web.Security.MembershipUser" />
+
+            
 
             
 
@@ -447,8 +531,12 @@
 
             
 
+            
+
              for applications where <see
              cref="P:System.Web.Security.Membership.RequiresQuestionAndAnswer" />
+
+            
 
             
 
@@ -461,8 +549,12 @@
 
             
 
+            
+
              object and passing them to the <see
              cref="M:System.Web.Security.Membership.UpdateUser(System.Web.Security.MembershipUser)" />
+
+            
 
             
 
@@ -478,8 +570,12 @@
 
             
 
+            
+
              object for the existing user with the <see
              cref="M:System.Web.Security.Membership.GetUser" />
+
+            
 
             
 
@@ -495,8 +591,12 @@
 
             
 
+            
+
              provides an option to require a unique e-mail address for each user. If the <see
              cref="P:System.Web.Security.SqlMembershipProvider.RequiresUniqueEmail" />
+
+            
 
             
 
@@ -509,8 +609,12 @@
 
             
 
+            
+
              overloads that allows you to specify an e-mail address for the user being created. Otherwise, a <see
              cref="T:System.Web.Security.MembershipCreateUserException" />
+
+            
 
             
 
@@ -534,6 +638,8 @@
 
             
 
+            
+
              object for the newly created user.</para
           >
         </returns>
@@ -544,10 +650,14 @@
 
           
 
+          
+
           The user name for the new user. </param
         >
         <param name="password">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -585,8 +695,12 @@
 
             
 
+            
+
              adds a new user to the data store and returns a <see
              cref="T:System.Web.Security.MembershipUser" />
+
+            
 
             
 
@@ -599,8 +713,12 @@
 
             
 
+            
+
              is thrown. You can retrieve a <see
              cref="T:System.Web.Security.MembershipCreateStatus" />
+
+            
 
             
 
@@ -613,8 +731,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.Security.MembershipCreateUserException" />
+
+            
 
             
 
@@ -630,8 +752,12 @@
 
             
 
+            
+
              object for that user, you can modify the settings for that user with the <see
              cref="T:System.Web.Security.MembershipUser" />
+
+            
 
             
 
@@ -644,8 +770,12 @@
 
             
 
+            
+
              for applications where <see
              cref="P:System.Web.Security.Membership.RequiresQuestionAndAnswer" />
+
+            
 
             
 
@@ -658,8 +788,12 @@
 
             
 
+            
+
              object and passing them to the <see
              cref="M:System.Web.Security.Membership.UpdateUser(System.Web.Security.MembershipUser)" />
+
+            
 
             
 
@@ -675,8 +809,12 @@
 
             
 
+            
+
              object for the existing user with the <see
              cref="M:System.Web.Security.Membership.GetUser" />
+
+            
 
             
 
@@ -700,11 +838,15 @@
 
             
 
+            
+
              object for the newly created user.</para
           >
         </returns>
         <param name="username">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -719,10 +861,14 @@
 
           
 
+          
+
           The password for the new user. </param
         >
         <param name="email">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -836,8 +982,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.HttpContext.Profile" />
+
+            
 
             
 
@@ -850,8 +1000,12 @@
 
             
 
+            
+
              personalization is also deleted when you are using the <see
              cref="T:System.Web.Security.SqlRoleProvider" />
+
+            
 
             
 
@@ -864,8 +1018,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Web.UI.WebControls.WebParts.SqlPersonalizationProvider" />
+
+            
 
             
 
@@ -884,6 +1042,8 @@
         </returns>
         <param name="username">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -922,8 +1082,12 @@
 
             
 
+            
+
              is true, user data stored in the database for the <see
              cref="T:System.Web.Security.Roles" />
+
+            
 
             
 
@@ -936,8 +1100,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+            
 
             
 
@@ -950,6 +1118,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.Profile.SqlProfileProvider" />
 
@@ -957,8 +1127,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Web.UI.WebControls.WebParts.SqlPersonalizationProvider" />
+
+            
 
             
 
@@ -982,10 +1156,14 @@
 
           
 
+          
+
           The name of the user to delete.</param
         >
         <param name="deleteAllRelatedData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1012,6 +1190,8 @@
           <para
             >Password reset is the ability for ASP.NET membership to replace the current password for a user name with a new, randomly generated password when a user has forgotten their password or the current password is no longer valid. This is especially useful when password format is set to <see
              cref="F:System.Web.Security.MembershipPasswordFormat.Hashed" />
+
+            
 
             
 
@@ -1048,8 +1228,12 @@
 
             
 
+            
+
              is false, the underlying membership provider may throw a <see
              cref="T:System.Web.HttpException" />
+
+            
 
             
 
@@ -1065,6 +1249,8 @@
 
             
 
+            
+
             , then users will not be able to retrieve their existing password from the database. The <see
              cref="F:System.Web.Security.MembershipPasswordFormat.Hashed" />
 
@@ -1072,8 +1258,12 @@
 
             
 
+            
+
              password format provides one-way encoding of password values. Passwords are "hashed" and compared to values stored in the database for authentication. "Hashed" values cannot be un-encoded to retrieve the original password value. For more information, see <see
              cref="T:System.Web.Security.MembershipPasswordFormat" />
+
+            
 
             
 
@@ -1114,8 +1304,12 @@
 
             
 
+            
+
              returns a list of membership users where the e-mail address matches the supplied <paramref
              name="emailToMatch" />
+
+            
 
             
 
@@ -1131,6 +1325,8 @@
 
             
 
+            
+
              performs its search using a LIKE clause against the <paramref
              name="emailToMatch" />
 
@@ -1138,8 +1334,12 @@
 
             
 
+            
+
              parameter. Any wildcards that are supported by SQL Server in LIKE clauses can be used in the <paramref
              name="emailToMatch" />
+
+            
 
             
 
@@ -1162,8 +1362,12 @@
 
             
 
+            
+
              that contains all users that match the <paramref
              name="emailToMatch" />
+
+            
 
             
 
@@ -1179,11 +1383,15 @@
 
             
 
+            
+
              parameter value.</para
           >
         </returns>
         <param name="emailToMatch">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1249,8 +1457,12 @@
 
             
 
+            
+
              returns a list of membership users where the user name matches the supplied <paramref
              name="usernameToMatch" />
+
+            
 
             
 
@@ -1266,6 +1478,8 @@
 
             
 
+            
+
              performs its search using a LIKE clause against the <paramref
              name="usernameToMatch" />
 
@@ -1273,8 +1487,12 @@
 
             
 
+            
+
              parameter. Any wildcards that are supported by SQL Server in LIKE clauses can be used in the <paramref
              name="usernameToMatch" />
+
+            
 
             
 
@@ -1298,8 +1516,12 @@
 
             
 
+            
+
              that contains all users that match the <paramref
              name="usernameToMatch" />
+
+            
 
             
 
@@ -1310,6 +1532,8 @@
           <para
             >Leading and trailing spaces are trimmed from the <paramref
              name="usernameToMatch" />
+
+            
 
             
 
@@ -1377,8 +1601,12 @@
 
             
 
+            
+
              method is used to generate a random password and is most commonly used by the <see
              cref="M:System.Web.Security.MembershipProvider.ResetPassword(System.String,System.String)" />
+
+            
 
             
 
@@ -1396,8 +1624,12 @@
 
               
 
+              
+
                method is not guaranteed to pass the regular expression in the <see
                cref="P:System.Web.Security.Membership.PasswordStrengthRegularExpression" />
+
+              
 
               
 
@@ -1410,8 +1642,12 @@
 
               
 
+              
+
                property and the <paramref
                name="numberOfNonAlphanumericCharacters" />
+
+              
 
               
 
@@ -1436,10 +1672,14 @@
 
           
 
+          
+
           The number of characters in the generated password. The length must be between 1 and 128 characters. </param
         >
         <param name="numberOfNonAlphanumericCharacters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1473,8 +1713,12 @@
 
             
 
+            
+
              returns the information for all membership users for an application as a collection of <see
              cref="T:System.Web.Security.MembershipUser" />
+
+            
 
             
 
@@ -1487,8 +1731,12 @@
 
             
 
+            
+
              method with very large user databases, as the resulting <see
              cref="T:System.Web.Security.MembershipUserCollection" />
+
+            
 
             
 
@@ -1511,8 +1759,12 @@
 
             
 
+            
+
              of <see
              cref="T:System.Web.Security.MembershipUser" />
+
+            
 
             
 
@@ -1571,8 +1823,12 @@
 
             
 
+            
+
              returns the number of users for the current <see
              cref="P:System.Web.Security.Membership.ApplicationName" />
+
+            
 
             
 
@@ -1585,8 +1841,12 @@
 
             
 
+            
+
             . The last-activity date/time stamp is updated to the current date and time when user credentials are validated by way of the <see
              cref="M:System.Web.Security.Membership.ValidateUser(System.String,System.String)" />
+
+            
 
             
 
@@ -1599,6 +1859,8 @@
 
             
 
+            
+
              method or when a call to a <see
              cref="M:System.Web.Security.Membership.GetUser" />
 
@@ -1606,8 +1868,12 @@
 
             
 
+            
+
              overload that takes no parameters or one that uses the <paramref
              name="userIsOnline" />
+
+            
 
             
 
@@ -1650,8 +1916,12 @@
 
             
 
+            
+
              retrieves the user information from the data source and creates a <see
              cref="T:System.Web.Security.MembershipUser" />
+
+            
 
             
 
@@ -1664,8 +1934,12 @@
 
             
 
+            
+
              overloads that does not take a <paramref
              name="username" />
+
+            
 
             
 
@@ -1678,6 +1952,8 @@
 
             
 
+            
+
              returns the information for the current logged-on membership user. The current logged-on membership user is identified by the <see
              cref="P:System.Security.Principal.IIdentity.Name" />
 
@@ -1685,8 +1961,12 @@
 
             
 
+            
+
              of the user in the current <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -1702,8 +1982,12 @@
 
             
 
+            
+
              to update the last-activity date/time stamp for the user being retrieved using the <paramref
              name="userIsOnline" />
+
+            
 
             
 
@@ -1716,8 +2000,12 @@
 
             
 
+            
+
              overloads that do not take a <paramref
              name="userIsOnline" />
+
+            
 
             
 
@@ -1735,6 +2023,8 @@
           <para
             >A <see
              cref="T:System.Web.Security.MembershipUser" />
+
+            
 
             
 
@@ -1772,8 +2062,12 @@
 
             
 
+            
+
              method retrieves the user information from the data source and creates a <see
              cref="T:System.Web.Security.MembershipUser" />
+
+            
 
             
 
@@ -1786,8 +2080,12 @@
 
             
 
+            
+
              overloads that does not take a <paramref
              name="username" />
+
+            
 
             
 
@@ -1800,6 +2098,8 @@
 
             
 
+            
+
              returns the information for the current logged-on membership user. The current logged-on membership user is identified by the <see
              cref="P:System.Security.Principal.IIdentity.Name" />
 
@@ -1807,8 +2107,12 @@
 
             
 
+            
+
              of the user in the current <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -1824,8 +2128,12 @@
 
             
 
+            
+
              to update the last-activity date/time stamp for the user being retrieved using the <paramref
              name="userIsOnline" />
+
+            
 
             
 
@@ -1838,8 +2146,12 @@
 
             
 
+            
+
              overloads that do not take a <paramref
              name="userIsOnline" />
+
+            
 
             
 
@@ -1862,11 +2174,15 @@
 
             
 
+            
+
              object representing the current logged-on user.</para
           >
         </returns>
         <param name="userIsOnline">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1903,6 +2219,8 @@
 
             
 
+            
+
              method retrieves the user information from the data source and creates a <see
              cref="T:System.Web.Security.MembershipUser" />
 
@@ -1910,8 +2228,12 @@
 
             
 
+            
+
              object populated with the returned data. The user is identified using the unique identifier from the data source specified using the <paramref
              name="providerUserKey" />
+
+            
 
             
 
@@ -1927,8 +2249,12 @@
 
             
 
+            
+
              to update the last-activity date/time stamp for the user being retrieved with the <paramref
              name="userIsOnline" />
+
+            
 
             
 
@@ -1941,8 +2267,12 @@
 
             
 
+            
+
              overloads that do not take a <paramref
              name="userIsOnline" />
+
+            
 
             
 
@@ -1965,11 +2295,15 @@
 
             
 
+            
+
              object representing the user associated with the specified unique identifier.</para
           >
         </returns>
         <param name="providerUserKey">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2006,8 +2340,12 @@
 
             
 
+            
+
              method retrieves the user information from the data source and creates a <see
              cref="T:System.Web.Security.MembershipUser" />
+
+            
 
             
 
@@ -2020,8 +2358,12 @@
 
             
 
+            
+
              overloads that does not take a <paramref
              name="username" />
+
+            
 
             
 
@@ -2034,6 +2376,8 @@
 
             
 
+            
+
              returns the information for the current logged-on membership user. The current logged-on membership user is identified by the <see
              cref="P:System.Security.Principal.IIdentity.Name" />
 
@@ -2041,8 +2385,12 @@
 
             
 
+            
+
              of the user in the current <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -2058,8 +2406,12 @@
 
             
 
+            
+
              to update the last-activity date/time stamp for the user being retrieved with the <paramref
              name="userIsOnline" />
+
+            
 
             
 
@@ -2072,8 +2424,12 @@
 
             
 
+            
+
              overloads that do not take a <paramref
              name="userIsOnline" />
+
+            
 
             
 
@@ -2086,6 +2442,8 @@
 
             
 
+            
+
              implicitly updates the last-activity date/time stamp for the user. <see
              cref="M:System.Web.Security.Membership.GetUser(System.String)" />
 
@@ -2093,8 +2451,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.Security.Membership.GetUser(System.Object)" />
+
+            
 
             
 
@@ -2117,8 +2479,12 @@
 
             
 
+            
+
              object representing the specified user. If the <paramref
              name="username" />
+
+            
 
             
 
@@ -2129,6 +2495,8 @@
         </returns>
         <param name="username">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2166,6 +2534,8 @@
 
             
 
+            
+
              method retrieves the user information from the data source and creates a <see
              cref="T:System.Web.Security.MembershipUser" />
 
@@ -2173,8 +2543,12 @@
 
             
 
+            
+
              object populated with the returned data. The user is identified with the unique identifier from the data source specified in the <paramref
              name="providerUserKey" />
+
+            
 
             
 
@@ -2197,6 +2571,8 @@
 
             
 
+            
+
              object representing the user associated with the specified unique identifier.</para
           >
         </returns>
@@ -2207,10 +2583,14 @@
 
           
 
+          
+
           The unique user identifier from the membership data source for the user.</param
         >
         <param name="userIsOnline">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2248,8 +2628,12 @@
 
             
 
+            
+
              method retrieves the user information from the data source and creates a <see
              cref="T:System.Web.Security.MembershipUser" />
+
+            
 
             
 
@@ -2265,8 +2649,12 @@
 
             
 
+            
+
              overloads that does not take a <paramref
              name="username" />
+
+            
 
             
 
@@ -2279,6 +2667,8 @@
 
             
 
+            
+
              returns the information for the current logged-on membership user. The current logged-on membership user is identified by the <see
              cref="P:System.Security.Principal.IIdentity.Name" />
 
@@ -2286,8 +2676,12 @@
 
             
 
+            
+
              of the user in the current <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -2303,8 +2697,12 @@
 
             
 
+            
+
              to update the last-activity date/time stamp for the user being retrieved with the <paramref
              name="userIsOnline" />
+
+            
 
             
 
@@ -2317,8 +2715,12 @@
 
             
 
+            
+
              overloads that do not take a <paramref
              name="userIsOnline" />
+
+            
 
             
 
@@ -2331,6 +2733,8 @@
 
             
 
+            
+
              implicitly updates the last-activity date/time stamp for the user. <see
              cref="M:System.Web.Security.Membership.GetUser(System.String)" />
 
@@ -2338,8 +2742,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.Security.Membership.GetUser(System.Object)" />
+
+            
 
             
 
@@ -2362,8 +2770,12 @@
 
             
 
+            
+
              object representing the specified user. If the <paramref
              name="username" />
+
+            
 
             
 
@@ -2379,10 +2791,14 @@
 
           
 
+          
+
           The name of the user to retrieve. </param
         >
         <param name="userIsOnline">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2414,6 +2830,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="M:System.Web.Security.Membership.GetUserNameByEmail(System.String)" />
+
+            
 
             
 
@@ -2457,8 +2875,12 @@
 
             
 
+            
+
              property identifies the custom hash algorithm used by the <see
              cref="T:System.Web.Security.Membership" />
+
+            
 
             
 
@@ -2471,10 +2893,14 @@
 
             
 
+            
+
              property using the hashAlgorithmType attribute of the <format
              type="text/html">
               <a href="b9c1ee8f-33ca-4361-8666-b42a0fe86049">membership</a>
             </format>
+
+            
 
             
 
@@ -2492,8 +2918,12 @@
 
             
 
+            
+
              element configuration section. The <see
              cref="P:System.Web.Security.Membership.HashAlgorithmType" />
+
+            
 
             
 
@@ -2508,10 +2938,14 @@
 
             
 
+            
+
              element in a <format
              type="text/html">
               <a href="c59c9494-149b-4ce6-b38d-371f896ae85c">cryptoNameMapping</a>
             </format>
+
+            
 
             
 
@@ -2528,11 +2962,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >If the <see
              cref="P:System.Web.Security.Membership.HashAlgorithmType" />
+
+            
 
             
 
@@ -2545,10 +2983,14 @@
 
             
 
+            
+
              class uses the hash algorithm set in the validation attribute of the <format
              type="text/html">
               <a href="4b5699a9-bc21-4c4a-85f1-8b3b8ebd2d46">machineKey</a>
             </format>
+
+            
 
             
 
@@ -2585,8 +3027,12 @@
 
             
 
+            
+
              property works in conjunction with the <see
              cref="P:System.Web.Security.Membership.PasswordAttemptWindow" />
+
+            
 
             
 
@@ -2602,8 +3048,12 @@
 
             
 
+            
+
              property within the number of minutes specified by the <see
              cref="P:System.Web.Security.Membership.PasswordAttemptWindow" />
+
+            
 
             
 
@@ -2616,8 +3066,12 @@
 
             
 
+            
+
              property to true until the user is unlocked by a call to the <see
              cref="M:System.Web.Security.MembershipUser.UnlockUser" />
+
+            
 
             
 
@@ -2633,11 +3087,15 @@
 
             
 
+            
+
              property is reached, the counter that tracks the number of invalid attempts is set to zero.</para
           >
           <para
             >Invalid password and password answer attempts are tracked separately. For example, if the <see
              cref="P:System.Web.Security.Membership.MaxInvalidPasswordAttempts" />
+
+            
 
             
 
@@ -2653,10 +3111,14 @@
 
             
 
+            
+
              property value is set in the application configuration using the maxInvalidPasswordAttempts attribute of the <format
              type="text/html">
               <a href="b9c1ee8f-33ca-4361-8666-b42a0fe86049">membership</a>
             </format>
+
+            
 
             
 
@@ -2667,6 +3129,8 @@
           <para
             >If the <see
              cref="P:System.Web.Security.Membership.RequiresQuestionAndAnswer" />
+
+            
 
             
 
@@ -2706,8 +3170,12 @@
 
             
 
+            
+
              property returns the minimum number of special, non-alphanumeric characters that must be entered to create a valid password for the membership provider specified in the <see
              cref="P:System.Web.Security.Membership.Provider" />
+
+            
 
             
 
@@ -2723,10 +3191,14 @@
 
             
 
+            
+
              property value is set in the application configuration using the minRequiredNonAlphanumericCharacters attribute of the <format
              type="text/html">
               <a href="b9c1ee8f-33ca-4361-8666-b42a0fe86049">membership</a>
             </format>
+
+            
 
             
 
@@ -2737,6 +3209,8 @@
           <para
             >A non-alphanumeric character is a character for which the <see
              cref="M:System.Char.IsLetterOrDigit(System.Char)" />
+
+            
 
             
 
@@ -2773,8 +3247,12 @@
 
             
 
+            
+
              property gets the minimum number of characters that must be entered to create a valid password for the membership provider specified in the <see
              cref="P:System.Web.Security.Membership.Provider" />
+
+            
 
             
 
@@ -2790,10 +3268,14 @@
 
             
 
+            
+
              property value is set in the application configuration using the minRequiredPasswordLength attribute of the <format
              type="text/html">
               <a href="b9c1ee8f-33ca-4361-8666-b42a0fe86049">membership</a>
             </format>
+
+            
 
             
 
@@ -2830,6 +3312,8 @@
 
             
 
+            
+
              property works in conjunction with the <see
              cref="P:System.Web.Security.Membership.MaxInvalidPasswordAttempts" />
 
@@ -2837,8 +3321,12 @@
 
             
 
+            
+
              property to help guard against an unwanted source guessing the password or password answer of a membership user through repeated attempts. When a user attempts to log in with, change, or reset his or her password, only a certain number of consecutive attempts are allowed within a specified time window. The length of this time window is specified in the <see
              cref="P:System.Web.Security.Membership.PasswordAttemptWindow" />
+
+            
 
             
 
@@ -2854,8 +3342,12 @@
 
             
 
+            
+
              property, and the time elapsed since the last invalid attempt is less than the number of minutes specified in the <see
              cref="P:System.Web.Security.Membership.PasswordAttemptWindow" />
+
+            
 
             
 
@@ -2868,8 +3360,12 @@
 
             
 
+            
+
              property to true until the user is unlocked by a call to the <see
              cref="M:System.Web.Security.MembershipUser.UnlockUser" />
+
+            
 
             
 
@@ -2885,6 +3381,8 @@
 
             
 
+            
+
              property setting, the current invalid attempt is counted as the first. If a valid password answer is supplied before the maximum number of allowed invalid attempts is reached, the count of invalid password-answer attempts is set to 0 (zero). If a valid password is supplied before the maximum number of allowed invalid attempts is reached, the count of invalid password attempts and the count of invalid password-answer attempts are set to 0 (zero).</para
           >
           <para
@@ -2895,8 +3393,12 @@
 
             
 
+            
+
              is set to 5, and three invalid password attempts are made followed by two invalid password-answer attempts, two more invalid password attempts (or three more invalid password-answer attempts) must be made within <see
              cref="P:System.Web.Security.Membership.PasswordAttemptWindow" />
+
+            
 
             
 
@@ -2912,10 +3414,14 @@
 
             
 
+            
+
              property value is set in the application configuration by using the passwordAttemptWindow attribute of the <format
              type="text/html">
               <a href="b9c1ee8f-33ca-4361-8666-b42a0fe86049">membership</a>
             </format>
+
+            
 
             
 
@@ -2926,6 +3432,8 @@
           <para
             >If the <see
              cref="P:System.Web.Security.Membership.RequiresQuestionAndAnswer" />
+
+            
 
             
 
@@ -2965,8 +3473,12 @@
 
             
 
+            
+
              property gets the regular expression used to evaluate password complexity from the provider specified in the <see
              cref="P:System.Web.Security.Membership.Provider" />
+
+            
 
             
 
@@ -2982,10 +3494,14 @@
 
             
 
+            
+
              property is set in the application configuration using the passwordStrengthRegularExpression attribute of the <format
              type="text/html">
               <a href="b9c1ee8f-33ca-4361-8666-b42a0fe86049">membership</a>
             </format>
+
+            
 
             
 
@@ -2998,6 +3514,8 @@
              type="text/html">
               <a href="521b3f6d-f869-42e1-93e5-158c54a6895d">.NET Framework Regular Expressions</a>
             </format>
+
+            
 
             
 
@@ -3037,8 +3555,12 @@
 
             
 
+            
+
              property enables you to reference the default membership provider for an application directly. This is commonly used to access custom members of the membership provider that are not part of the <see
              cref="T:System.Web.Security.MembershipProvider" />
+
+            
 
             
 
@@ -3078,10 +3600,14 @@
 
             
 
+            
+
              property references all of the membership providers enabled for an application, including providers added in the Web.config file for the application and the Machine.config file for all applications. You can control which membership providers are available for an application using the providers element of the <format
              type="text/html">
               <a href="b9c1ee8f-33ca-4361-8666-b42a0fe86049">membership</a>
             </format>
+
+            
 
             
 
@@ -3096,6 +3622,8 @@
 
             
 
+            
+
              section in the Web.config file for an application that removes the <see
              cref="T:System.Web.Security.SqlMembershipProvider" />
 
@@ -3103,8 +3631,12 @@
 
             
 
+            
+
              instance (AspNetSqlProvider) specified in the machine configuration file and adds a <see
              cref="T:System.Web.Security.SqlMembershipProvider" />
+
+            
 
             
 
@@ -3142,10 +3674,14 @@
 
             
 
+            
+
              section, you must specify the defaultProvider attribute. If you do not specify a <format
              type="text/html">
               <a href="b9c1ee8f-33ca-4361-8666-b42a0fe86049">membership</a>
             </format>
+
+            
 
             
 
@@ -3158,11 +3694,15 @@
 
             
 
+            
+
              instance named AspNetSqlProvider is established as the defaultProvider. </para
           >
           <para
             >You can obtain a strongly typed reference to a provider from the <see
              cref="P:System.Web.Security.Membership.Providers" />
+
+            
 
             
 
@@ -3202,8 +3742,12 @@
 
             
 
+            
+
              is checked when <see
              cref="M:System.Web.Security.MembershipUser.ResetPassword(System.String)" />
+
+            
 
             
 
@@ -3216,6 +3760,8 @@
 
             
 
+            
+
              is called. The provider provided with the .NET Framework throws a <see
              cref="T:System.NotSupportedException" />
 
@@ -3223,8 +3769,12 @@
 
             
 
+            
+
              if <see
              cref="P:System.Web.Security.Membership.RequiresQuestionAndAnswer" />
+
+            
 
             
 
@@ -3240,8 +3790,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.Security.Membership.EnablePasswordRetrieval" />
+
+            
 
             
 
@@ -3254,8 +3808,12 @@
 
             
 
+            
+
              can still be used to enforce the creation of questions and answers when new users are created; however, the question and answer will not be used. You will be able to retrieve the question by using the <see
              cref="T:System.Web.Security.MembershipUser" />
+
+            
 
             
 
@@ -3271,8 +3829,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.Security.MembershipUser.GetPassword" />
+
+            
 
             
 
@@ -3313,8 +3875,12 @@
 
             
 
+            
+
              takes, as input, a <see
              cref="T:System.Web.Security.MembershipUser" />
+
+            
 
             
 
@@ -3327,8 +3893,12 @@
 
             
 
+            
+
              object. You can construct a new <see
              cref="T:System.Web.Security.MembershipUser" />
+
+            
 
             
 
@@ -3341,8 +3911,12 @@
 
             
 
+            
+
              object populated with current values at the data source using the <see
              cref="M:System.Web.Security.Membership.GetUser" />
+
+            
 
             
 
@@ -3355,6 +3929,8 @@
 
             
 
+            
+
             , <see
              cref="M:System.Web.Security.Membership.FindUsersByName(System.String)" />
 
@@ -3362,8 +3938,12 @@
 
             
 
+            
+
             , or <see
              cref="M:System.Web.Security.Membership.FindUsersByEmail(System.String)" />
+
+            
 
             
 
@@ -3383,8 +3963,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Security.MembershipUser" />
+
+          
 
           
 
@@ -3416,8 +4000,12 @@
 
             
 
+            
+
              property value is checked during the call to <see
              cref="M:System.Web.Security.Membership.GetNumberOfUsersOnline" />
+
+            
 
             
 
@@ -3430,8 +4018,12 @@
 
             
 
+            
+
              for a user is greater than the current date and time minus the <see
              cref="P:System.Web.Security.Membership.UserIsOnlineTimeWindow" />
+
+            
 
             
 
@@ -3444,8 +4036,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.Security.MembershipUser" />
+
+            
 
             
 
@@ -3461,8 +4057,12 @@
 
             
 
+            
+
              for a user is updated when a user's credentials are successfully validated by the <see
              cref="M:System.Web.Security.Membership.ValidateUser(System.String,System.String)" />
+
+            
 
             
 
@@ -3475,8 +4075,12 @@
 
             
 
+            
+
              for a membership user when you call one of the <see
              cref="M:System.Web.Security.Membership.GetUser" />
+
+            
 
             
 
@@ -3489,6 +4093,8 @@
 
             
 
+            
+
              overload that takes a <paramref
              name="userIsOnline" />
 
@@ -3496,8 +4102,12 @@
 
             
 
+            
+
              parameter, specify a value of true to update the <see
              cref="P:System.Web.Security.MembershipUser.LastActivityDate" />
+
+            
 
             
 
@@ -3539,6 +4149,8 @@
 
             
 
+            
+
              provides an easy way to verify a user name and password from the data source. Note that, if the <paramref
              name="username" />
 
@@ -3546,8 +4158,12 @@
 
             
 
+            
+
              parameter is empty or null, an <see
              cref="T:System.Web.HttpException" />
+
+            
 
             
 
@@ -3571,10 +4187,14 @@
 
           
 
+          
+
           The name of the user to be validated. </param
         >
         <param name="password">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3608,8 +4228,12 @@
 
             
 
+            
+
              event is raised when the <see
              cref="M:System.Web.Security.MembershipProvider.CreateUser(System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Object,System.Web.Security.MembershipCreateStatus@)" />
+
+            
 
             
 
@@ -3622,8 +4246,12 @@
 
             
 
+            
+
              method, or the <see
              cref="M:System.Web.Security.MembershipProvider.ResetPassword(System.String,System.String)" />
+
+            
 
             
 
@@ -3639,11 +4267,15 @@
 
             
 
+            
+
              event to validate password formats and values for membership users.</para
           >
           <para
             >You can cancel the current <see
              cref="M:System.Web.Security.MembershipProvider.CreateUser(System.String,System.String,System.String,System.String,System.String,System.Boolean,System.Object,System.Web.Security.MembershipCreateStatus@)" />
+
+            
 
             
 
@@ -3656,8 +4288,12 @@
 
             
 
+            
+
             , or <see
              cref="M:System.Web.Security.MembershipProvider.ResetPassword(System.String,System.String)" />
+
+            
 
             
 
@@ -3670,6 +4306,8 @@
 
             
 
+            
+
              property of the supplied <see
              cref="T:System.Web.Security.ValidatePasswordEventArgs" />
 
@@ -3677,8 +4315,12 @@
 
             
 
+            
+
              to true during the <see
              cref="E:System.Web.Security.MembershipProvider.ValidatingPassword" />
+
+            
 
             
 
@@ -3694,8 +4336,12 @@
 
             
 
+            
+
              property to true, you can set the <see
              cref="P:System.Web.Security.ValidatePasswordEventArgs.FailureInformation" />
+
+            
 
             
 
@@ -3708,6 +4354,8 @@
 
             
 
+            
+
              to an exception that describes the reason for the password-validation failure. The calling method will throw the exception that the <see
              cref="P:System.Web.Security.ValidatePasswordEventArgs.FailureInformation" />
 
@@ -3715,8 +4363,12 @@
 
             
 
+            
+
              property is set to. If the <see
              cref="P:System.Web.Security.ValidatePasswordEventArgs.FailureInformation" />
+
+            
 
             
 

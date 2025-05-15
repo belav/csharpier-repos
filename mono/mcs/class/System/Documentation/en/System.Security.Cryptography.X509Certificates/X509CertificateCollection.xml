@@ -37,6 +37,8 @@
 
         
 
+        
+
          objects.</para
       >
     </summary>
@@ -63,6 +65,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+
+            
 
             
 
@@ -107,8 +111,12 @@
 
             
 
+            
+
              class from an array of <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+            
 
             
 
@@ -124,8 +132,12 @@
 
           
 
+          
+
           The array of <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+          
 
           
 
@@ -169,8 +181,12 @@
 
             
 
+            
+
              class from another <see
              cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+
+            
 
             
 
@@ -186,8 +202,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+
+          
 
           
 
@@ -233,8 +253,12 @@
 
             
 
+            
+
              with the specified value to the current <see
              cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+
+            
 
             
 
@@ -253,8 +277,12 @@
 
             
 
+            
+
              at which the new <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+            
 
             
 
@@ -270,6 +298,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
@@ -277,8 +307,12 @@
 
           
 
+          
+
            to add to the current <see
            cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+
+          
 
           
 
@@ -324,8 +358,12 @@
 
             
 
+            
+
              to the end of the current <see
              cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+
+            
 
             
 
@@ -341,6 +379,8 @@
 
           
 
+          
+
           The array of type <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
@@ -348,8 +388,12 @@
 
           
 
+          
+
            containing the objects to add to the current <see
            cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+
+          
 
           
 
@@ -395,8 +439,12 @@
 
             
 
+            
+
              to the end of the current <see
              cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+
+            
 
             
 
@@ -412,8 +460,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+
+          
 
           
 
@@ -459,8 +511,12 @@
 
             
 
+            
+
              contains the specified <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+            
 
             
 
@@ -479,6 +535,8 @@
 
             
 
+            
+
              is contained in this collection; otherwise, false.</para
           >
         </returns>
@@ -489,8 +547,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+          
 
           
 
@@ -537,6 +599,8 @@
 
             
 
+            
+
              values in the current <see
              cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
 
@@ -544,8 +608,12 @@
 
             
 
+            
+
              to a one-dimensional <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -561,6 +629,8 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
 
@@ -568,8 +638,12 @@
 
           
 
+          
+
            that is the destination of the values copied from <see
            cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+
+          
 
           
 
@@ -584,8 +658,12 @@
 
           
 
+          
+
           The index into <paramref
            name="array" />
+
+          
 
           
 
@@ -626,6 +704,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -634,6 +714,8 @@
           <para
             >An enumerator of the subelements of <see
              cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+
+            
 
             
 
@@ -672,6 +754,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -680,6 +764,8 @@
           <para
             >A hash value based on all values contained in the current <see
              cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+
+            
 
             
 
@@ -726,8 +812,12 @@
 
             
 
+            
+
              in the current <see
              cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+
+            
 
             
 
@@ -746,6 +836,8 @@
 
             
 
+            
+
              specified by the <paramref
              name="value" />
 
@@ -753,8 +845,12 @@
 
             
 
+            
+
              parameter in the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+
+            
 
             
 
@@ -770,8 +866,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+          
 
           
 
@@ -818,8 +918,12 @@
 
             
 
+            
+
              into the current <see
              cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+
+            
 
             
 
@@ -835,8 +939,12 @@
 
           
 
+          
+
           The zero-based index where <paramref
            name="value" />
+
+          
 
           
 
@@ -851,8 +959,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+          
 
           
 
@@ -926,8 +1038,12 @@
 
             
 
+            
+
              from the current <see
              cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+
+            
 
             
 
@@ -943,6 +1059,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
 
@@ -950,8 +1068,12 @@
 
           
 
+          
+
            to remove from the current <see
            cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+
+          
 
           
 

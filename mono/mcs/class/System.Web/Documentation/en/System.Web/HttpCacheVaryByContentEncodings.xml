@@ -20,11 +20,15 @@
 
         
 
+        
+
          property is used to specify whether dynamically compressed responses are cached. Caching dynamically compressed responses means that the cost of compression is incurred only one time, during the first request for the resource (or after an application restart) and when the cache item expires.</para
       >
       <para
         >The <see
          cref="P:System.Web.HttpCachePolicy.VaryByContentEncodings" />
+
+        
 
         
 
@@ -37,11 +41,15 @@
 
         
 
+        
+
          class identifies which request header parameters ASP.NET uses to uniquely identify a variation of the response if there are multiple cached responses for a resource. This is useful when a response depends on a set of client inputs, such as headers, parameters, or content encodings. </para
       >
       <para
         >The <see
          cref="T:System.Web.HttpCacheVaryByContentEncodings" />
+
+        
 
         
 
@@ -59,6 +67,8 @@
 
             
 
+            
+
              list and a cached response exists, the cached response is sent.</para
           >
         </item>
@@ -66,6 +76,8 @@
           <para
             >If a matching encoding is also found in the <see
              cref="P:System.Web.HttpCachePolicy.VaryByContentEncodings" />
+
+            
 
             
 
@@ -83,6 +95,8 @@
 
             
 
+            
+
              list, the cache is searched for a non-encoded response, also referred to as the identity response. If the identity response is found, it is sent. Otherwise a new non-encoded response is generated and stored in the cache.</para
           >
         </item>
@@ -95,10 +109,14 @@
 
         
 
+        
+
          property, see RFC 2616: Hypertext Transfer Protocol -- HTTP/1.1, available on the <see
          cref="http://go.microsoft.com/fwlink/?linkid=37125"
           >World Wide Web Consortium (W3C) Web site</see
         >
+
+        
 
         
 
@@ -114,6 +132,8 @@
 
         
 
+        
+
          property by using the <format
          type="text/html">
           <a href="28a9e101-fb44-4198-9cb6-b8a52312fec2">@ OutputCache</a>
@@ -123,10 +143,14 @@
 
         
 
+        
+
          directive or by adding a profile to the <format
          type="text/html">
           <a href="6df16c27-207d-4b52-9a6e-b3a541222b3d">outputCacheProfile</a>
         </format>
+
+        
 
         
 
@@ -145,8 +169,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.HttpCachePolicy" />
+
+        
 
         
 

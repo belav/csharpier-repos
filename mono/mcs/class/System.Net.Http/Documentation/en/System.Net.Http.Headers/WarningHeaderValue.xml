@@ -55,11 +55,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="code">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -74,10 +78,14 @@
 
           
 
+          
+
           The host that attached the warning.</param
         >
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -118,11 +126,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="code">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -137,6 +149,8 @@
 
           
 
+          
+
           The host that attached the warning.</param
         >
         <param name="text">
@@ -146,10 +160,14 @@
 
           
 
+          
+
           A quoted-string containing the warning text.</param
         >
         <param name="date">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -247,8 +265,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Net.Http.Headers.WarningHeaderValue" />
+
+            
 
             
 
@@ -267,6 +289,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -277,11 +301,15 @@
 
             
 
+            
+
              is equal to the current object; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -317,6 +345,8 @@
 
             
 
+            
+
              method is suitable for use in hashing algorithms and data structures such as a hash table.</para
           >
         </remarks>
@@ -330,6 +360,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -338,6 +370,8 @@
           <para
             >Returns <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -380,6 +414,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -393,11 +429,15 @@
 
             
 
+            
+
              instance.</para
           >
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -433,6 +473,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -441,6 +483,8 @@
           <para
             >Returns <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -497,6 +541,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -505,6 +551,8 @@
           <para
             >Returns <see
              cref="T:System.String" />
+
+            
 
             
 

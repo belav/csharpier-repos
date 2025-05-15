@@ -27,8 +27,12 @@
 
         
 
+        
+
          enumeration can be passed to the <see
          cref="M:System.Xml.XPath.XPathNavigator.MoveToFirstNamespace(System.Xml.XPath.XPathNamespaceScope)" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          methods of the <see
          cref="T:System.Xml.XPath.XPathNavigator" />
+
+        
 
         
 

@@ -24,8 +24,12 @@
 
         
 
+        
+
          is used to evaluate and convert a property of an object into a <see
          cref="T:System.Windows.Forms.Binding" />
+
+        
 
         
 
@@ -41,6 +45,8 @@
 
         
 
+        
+
          is applied to the <see
          cref="T:System.Windows.Forms.Binding" />
 
@@ -48,8 +54,12 @@
 
         
 
+        
+
          class with the type of the <see
          cref="T:System.Windows.Forms.ListBindingConverter" />
+
+        
 
         
 
@@ -65,10 +75,14 @@
 
         
 
+        
+
          base class and <format
          type="text/html">
           <a href="90373A3F-D8C8-492D-841C-945D62393C56">How to: Implement a Type Converter</a>
         </format>
+
+        
 
         
 
@@ -85,8 +99,12 @@
 
           
 
+          
+
            class. Instead, call the <see
            cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+
+          
 
           
 
@@ -99,8 +117,12 @@
 
           
 
+          
+
           . For more information, see the examples in the <see
            cref="T:System.ComponentModel.TypeConverter" />
+
+          
 
           
 
@@ -115,6 +137,8 @@
       <para
         >Provides a type converter to convert <see
          cref="T:System.Windows.Forms.Binding" />
+
+        
 
         
 
@@ -136,6 +160,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ListBindingConverter" />
+
+            
 
             
 

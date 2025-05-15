@@ -40,8 +40,12 @@
 
         
 
+        
+
          can be used to represent a declaration of an instance constructor for a type. Use <see
          cref="T:System.CodeDom.CodeTypeConstructor" />
+
+        
 
         
 
@@ -57,8 +61,12 @@
 
         
 
+        
+
          property. If the constructor overloads another constuctor for the type, set the constructor arguments to pass to the overloaded type constructor in the <see
          cref="P:System.CodeDom.CodeConstructor.ChainedConstructorArgs" />
+
+        
 
         
 
@@ -99,6 +107,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -134,8 +144,12 @@
 
             
 
+            
+
              overloads a base class constructor, this collection contains any arguments to pass to a base class constructor. To call a base class constructor with no arguments, set a <see
              cref="T:System.CodeDom.CodeSnippetExpression" />
+
+            
 
             
 
@@ -180,8 +194,12 @@
 
             
 
+            
+
              overloads another constructor of the same type, this collection contains any arguments to pass to the overloaded type constructor. To call a constructor for the current type with no arguments, set a <see
              cref="T:System.CodeDom.CodeSnippetExpression" />
+
+            
 
             
 

@@ -34,8 +34,12 @@
 
         
 
+        
+
          object to the <see
          cref="P:System.ServiceModel.Description.ServiceDescription.Behaviors" />
+
+        
 
         
 
@@ -45,6 +49,8 @@
          type="text/html">
           <a href="2b4c3b4c-31d4-4908-a9b7-5bb411c221f2">&lt;serviceMetadata&gt;</a>
         </format>
+
+        
 
         
 
@@ -66,6 +72,8 @@
 
             
 
+            
+
             . The IMetadataExchange endpoint can be configured as can any other endpoint.</para
           >
         </item>
@@ -78,8 +86,12 @@
 
             
 
+            
+
              property to true. crabout the address of HTTP GET metadata, see <see
              cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetEnabled" />
+
+            
 
             
 
@@ -99,6 +111,8 @@
 
         
 
+        
+
         . </para
       >
       <para
@@ -106,6 +120,8 @@
          type="text/html">
           <a href="2b4c3b4c-31d4-4908-a9b7-5bb411c221f2">&lt;serviceMetadata&gt;</a>
         </format>
+
+        
 
         
 
@@ -120,10 +136,14 @@
 
         
 
+        
+
          element and associate the element with the <format
          type="text/html">
           <a href="13123dd6-c4a9-4a04-a984-df184b851788">&lt;service&gt;</a>
         </format>
+
+        
 
         
 
@@ -135,6 +155,8 @@
             >How to: Publish Metadata for a Service Using a Configuration File</a
           >
         </format>
+
+        
 
         
 
@@ -152,6 +174,8 @@
 
             
 
+            
+
              property specifies whether metadata is returned for HTTP/GET requests.</para
           >
         </item>
@@ -159,6 +183,8 @@
           <para
             >The <see
              cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetUrl" />
+
+            
 
             
 
@@ -176,6 +202,8 @@
 
             
 
+            
+
              property specifies whether metadata is returned for an HTTPS/GET request.</para
           >
         </item>
@@ -183,6 +211,8 @@
           <para
             >The <see
              cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpsGetUrl" />
+
+            
 
             
 
@@ -200,6 +230,8 @@
 
             
 
+            
+
              property returns the underlying exporter.</para
           >
         </item>
@@ -207,6 +239,8 @@
       <para
         >Typically the <see
          cref="T:System.ServiceModel.Description.ServiceMetadataBehavior" />
+
+        
 
         
 
@@ -243,6 +277,8 @@
 
             
 
+            
+
              with the following values:</para
           >
           <list type="bullet">
@@ -250,6 +286,8 @@
               <para
                 >The <see
                  cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetEnabled" />
+
+                
 
                 
 
@@ -267,6 +305,8 @@
 
                 
 
+                
+
                  property is false.</para
               >
             </item>
@@ -277,6 +317,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Description.ServiceMetadataBehavior" />
+
+            
 
             
 
@@ -312,6 +354,8 @@
 
             
 
+            
+
              property can be relative or absolute. If relative, the address is resolved by the client relative to the <see
              cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetUrl" />
 
@@ -319,8 +363,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpsGetUrl" />
+
+            
 
             
 
@@ -363,8 +411,12 @@
 
             
 
+            
+
              was  supported.  For metadata retrieval using HTTPS GET, only the <see
              cref="T:System.ServiceModel.Channels.HttpsTransportBindingElement" />
+
+            
 
             
 
@@ -381,8 +433,12 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
 
             
 
+            
+
             and <see
              cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageBinding" />
+
+            
 
             
 
@@ -420,6 +476,8 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
 
             
 
+            
+
              is relative, the address at which the metadata is published is the base address and the service address plus a ?wsdl querystring. </para
           >
           <para
@@ -430,8 +488,12 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
 
             
 
+            
+
              is absolute the address at which the metadata is published is the value of <see
              cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetUrl" />
+
+            
 
             
 
@@ -447,11 +509,15 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
 
             
 
+            
+
              is an empty string, the HTTP/GET metadata address is http://localhost:8080/CalculatorService?wsdl. </para
           >
           <para
             >If you do not enable this property and do not change <see
              cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetUrl" />
+
+            
 
             
 
@@ -488,6 +554,8 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
 
             
 
+            
+
              is relative, the address at which the metadata is published is the base address and the service address plus a ?wsdl querystring. </para
           >
           <para
@@ -498,11 +566,15 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
 
             
 
+            
+
              is absolute the address at which the metadata is published is this value plus a ?wsdl querystring. </para
           >
           <para
             >For example, if the service address is http://localhost:8080/CalculatorService and the <see
              cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpGetUrl" />
+
+            
 
             
 
@@ -545,8 +617,12 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
 
             
 
+            
+
              was  supported.  For metadata retrieval using HTTPS GET, only the <see
              cref="T:System.ServiceModel.Channels.HttpsTransportBindingElement" />
+
+            
 
             
 
@@ -563,8 +639,12 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
 
             
 
+            
+
             and <see
              cref="P:System.ServiceModel.Description.ServiceDebugBehavior.HttpsHelpPageBinding" />
+
+            
 
             
 
@@ -602,11 +682,15 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
 
             
 
+            
+
              is relative, the address at which the metadata is published is the base address and the service address plus a ?wsdl querystring. </para
           >
           <para
             >If the value of <see
              cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpsGetUrl" />
+
+            
 
             
 
@@ -619,11 +703,15 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
 
             
 
+            
+
              value plus a ?wsdl querystring. </para
           >
           <para
             >For example, if the service address is https://localhost:8080/CalculatorService and the <see
              cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpsGetUrl" />
+
+            
 
             
 
@@ -660,11 +748,15 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
 
             
 
+            
+
              is relative, the address at which the metadata is published is the base address and the service address plus a ?wsdl querystring. </para
           >
           <para
             >If the value of <see
              cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpsGetUrl" />
+
+            
 
             
 
@@ -677,11 +769,15 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
 
             
 
+            
+
              value plus a ?wsdl querystring. </para
           >
           <para
             >For example, if the service address is https://localhost:8080/CalculatorService and the <see
              cref="P:System.ServiceModel.Description.ServiceMetadataBehavior.HttpsGetUrl" />
+
+            
 
             
 
@@ -724,6 +820,8 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
 
             
 
+            
+
              object to modify the publication of the service metadata.</para
           >
         </remarks>
@@ -732,6 +830,8 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
           <para
             >Gets or sets the internal <see
              cref="T:System.ServiceModel.Description.MetadataExporter" />
+
+            
 
             
 
@@ -803,11 +903,15 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
 
             
 
+            
+
              that configures the underlying bindings to support the behavior.</para
           >
         </summary>
         <param name="description">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -822,6 +926,8 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
 
           
 
+          
+
           The host of the service.</param
         >
         <param name="endpoints">
@@ -831,10 +937,14 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
 
           
 
+          
+
           The endpoints to be configured.</param
         >
         <param name="parameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -876,6 +986,8 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
 
             
 
+            
+
              that configures the underlying bindings to support the behavior on the service.</para
           >
         </summary>
@@ -886,10 +998,14 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
 
           
 
+          
+
           The service description to be modified.</param
         >
         <param name="serviceHostBase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -931,6 +1047,8 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
 
             
 
+            
+
              that validates that the service description can support the behavior.</para
           >
         </summary>
@@ -941,10 +1059,14 @@ The HttpGetBinding and HttpsGetBinding properties enable the usage of bindings f
 
           
 
+          
+
           The service description to be validated.</param
         >
         <param name="serviceHostBase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

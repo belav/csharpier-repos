@@ -15,8 +15,12 @@
 
         
 
+        
+
          (<hyperlink
         >14.5.4</hyperlink>
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
          (<hyperlink
         >14.5.4</hyperlink>
+
+        
 
         
 
@@ -57,6 +65,8 @@
 
         
 
+        
+
         ). </list_item
       >
     </list>
@@ -65,7 +75,7 @@
     <example
       >[Example: The following example illustrates the rules for accessing static and instance members: <code_example
       >
-<![CDATA[
+        <![CDATA[
 class Test  
 {  
    int x;  
@@ -100,8 +110,12 @@ class Test
 
       
 
+      
+
        (<hyperlink
       >14.5.2</hyperlink>
+
+      
 
       
 
@@ -114,6 +128,8 @@ class Test
 
       
 
+      
+
       . The Main method shows that in a <non_terminal
        where="14.5.4">member-access</non_terminal>
 
@@ -121,8 +137,12 @@ class Test
 
       
 
+      
+
        (<hyperlink
       >14.5.4</hyperlink>
+
+      
 
       
 

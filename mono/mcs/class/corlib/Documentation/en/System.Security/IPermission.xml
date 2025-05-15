@@ -62,8 +62,12 @@
 
           
 
+          
+
           , <see
            cref="M:System.Security.IPermission.Intersect(System.Security.IPermission)" />
+
+          
 
           
 
@@ -76,8 +80,12 @@
 
           
 
+          
+
           , and <see
            cref="M:System.Security.IPermission.Copy" />
+
+          
 
           
 
@@ -163,8 +171,12 @@
 
             
 
+            
+
              for the necessary <see
              cref="T:System.Security.Permissions.FileIOPermission" />
+
+            
 
             
 
@@ -180,6 +192,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -190,8 +204,12 @@
 
             
 
+            
+
              succeeds only if no <see
              cref="T:System.Security.SecurityException" />
+
+            
 
             
 
@@ -205,6 +223,8 @@
           <para
             >Throws a <see
              cref="T:System.Security.SecurityException" />
+
+            
 
             
 
@@ -249,8 +269,12 @@
 
           
 
+          
+
            is not <see
            langword="null" />
+
+          
 
           
 
@@ -269,8 +293,12 @@
 
             
 
+            
+
              method. <paramref
              name="X" />
+
+            
 
             
 
@@ -283,8 +311,12 @@
 
             
 
+            
+
              represent <see
              cref="T:System.Security.IPermission" />
+
+            
 
             
 
@@ -301,6 +333,8 @@
 
                 
 
+                
+
                 .Intersect(<paramref
                  name="X" />
 
@@ -308,8 +342,12 @@
 
                 
 
+                
+
                 ) returns a value equal to <paramref
                  name="X" />
+
+                
 
                 
 
@@ -326,8 +364,12 @@
 
                 
 
+                
+
                 .Intersect(<paramref
                  name="Y" />
+
+                
 
                 
 
@@ -340,8 +382,12 @@
 
                 
 
+                
+
                 .Intersect(<paramref
                  name="X" />
+
+                
 
                 
 
@@ -353,6 +399,8 @@
             <item>
               <para>
                 <paramref name="X" />
+
+                
 
                 
 
@@ -373,6 +421,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -416,8 +466,12 @@
 
           
 
+          
+
            is not <see
            langword="null" />
+
+          
 
           
 
@@ -436,8 +490,12 @@
 
             
 
+            
+
              method. <paramref
              name="X" />
+
+            
 
             
 
@@ -450,6 +508,8 @@
 
             
 
+            
+
             , and <paramref
              name="Z" />
 
@@ -457,8 +517,12 @@
 
             
 
+            
+
              represent <see
              cref="T:System.Security.IPermission" />
+
+            
 
             
 
@@ -475,8 +539,12 @@
 
                 
 
+                
+
                 .IsSubsetOf(<paramref
                  name="X" />
+
+                
 
                 
 
@@ -493,8 +561,12 @@
 
                 
 
+                
+
                 .IsSubsetOf(<paramref
                  name="Y" />
+
+                
 
                 
 
@@ -507,8 +579,12 @@
 
                 
 
+                
+
                 .IsSubsetOf(<paramref
                  name="X" />
+
+                
 
                 
 
@@ -521,8 +597,12 @@
 
                 
 
+                
+
                  and <paramref
                  name="Y" />
+
+                
 
                 
 
@@ -540,8 +620,12 @@
 
                 
 
+                
+
                 .IsSubsetOf(<paramref
                  name="Y" />
+
+                
 
                 
 
@@ -554,8 +638,12 @@
 
                 
 
+                
+
                 .IsSubsetOf(<paramref
                  name="Z" />
+
+                
 
                 
 
@@ -568,8 +656,12 @@
 
                 
 
+                
+
                 .IsSubsetOf(<paramref
                  name="Z" />
+
+                
 
                 
 
@@ -587,8 +679,12 @@
 
             
 
+            
+
              represents an empty <see
              cref="T:System.Security.IPermission" />
+
+            
 
             
 
@@ -601,8 +697,12 @@
 
             
 
+            
+
              and <paramref
              name="Y" />
+
+            
 
             
 
@@ -615,8 +715,12 @@
 
             
 
+            
+
              object that is null, <paramref
              name="X" />
+
+            
 
             
 
@@ -629,6 +733,8 @@
 
             
 
+            
+
             ) returns true. If <paramref
              name="Z" />
 
@@ -636,8 +742,12 @@
 
             
 
+            
+
              is also an empty permission, the compound set operation <paramref
              name="X" />
+
+            
 
             
 
@@ -656,6 +766,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -699,8 +811,12 @@
 
           
 
+          
+
            is not <see
            langword="null" />
+
+          
 
           
 
@@ -718,11 +834,15 @@
 
             
 
+            
+
              is a permission that represents all the operations represented by both the current permission and the specified permission. Any demand that passes either permission passes their union.</para
           >
           <para
             >The following statements are required to be true for all implementations of the <see
              cref="M:System.Security.IPermission.Union(System.Security.IPermission)" />
+
+            
 
             
 
@@ -735,6 +855,8 @@
 
             
 
+            
+
              and <paramref
              name="Y" />
 
@@ -742,8 +864,12 @@
 
             
 
+            
+
              represent <see
              cref="T:System.Security.IPermission" />
+
+            
 
             
 
@@ -760,6 +886,8 @@
 
                 
 
+                
+
                 .Union(<paramref
                  name="X" />
 
@@ -767,8 +895,12 @@
 
                 
 
+                
+
                 ) returns an object that has the same value as <paramref
                  name="X" />
+
+                
 
                 
 
@@ -785,8 +917,12 @@
 
                 
 
+                
+
                 .Union(<paramref
                  name="Y" />
+
+                
 
                 
 
@@ -799,8 +935,12 @@
 
                 
 
+                
+
                 .Union(<paramref
                  name="X" />
+
+                
 
                 
 
@@ -817,8 +957,12 @@
 
                 
 
+                
+
                 .Union(null) returns an object that has the same value as <paramref
                  name="X" />
+
+                
 
                 
 
@@ -839,6 +983,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

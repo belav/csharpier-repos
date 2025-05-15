@@ -31,11 +31,15 @@
 
         
 
+        
+
          class provides access to information about the local variables and exception-handling clauses in a method body, and to the Microsoft intermediate language (MSIL) that makes up the method body. </para
       >
       <para
         >You can use the token-resolution methods of the module class, such as <see
          cref="M:System.Reflection.Module.ResolveType(System.Int32,System.Type[],System.Type[])" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Reflection.Module.ResolveType(System.Int32,System.Type[],System.Type[])" />
+
+        
 
         
 
@@ -62,6 +70,8 @@
 
         
 
+        
+
          objects, <see
          cref="T:System.Reflection.MethodInfo" />
 
@@ -69,8 +79,12 @@
 
         
 
+        
+
          objects, and <see
          cref="T:System.Reflection.FieldInfo" />
+
+        
 
         
 
@@ -89,10 +103,14 @@
 
           
 
+          
+
            on MSDN and <see
            cref="http://go.microsoft.com/fwlink/?LinkID=65552"
             >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
           >
+
+          
 
           
 
@@ -109,8 +127,12 @@
 
         
 
+        
+
          object for a given method, first obtain a <see
          cref="T:System.Reflection.MethodInfo" />
+
+        
 
         
 
@@ -123,8 +145,12 @@
 
         
 
+        
+
          object's <see
          cref="M:System.Reflection.MethodBase.GetMethodBody" />
+
+        
 
         
 
@@ -161,6 +187,8 @@
 
             
 
+            
+
              objects.</para
           >
         </remarks>
@@ -169,6 +197,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Reflection.MethodBody" />
+
+            
 
             
 
@@ -209,6 +239,8 @@
 
             
 
+            
+
              object contains information that identifies the try block with which it is associated.</para
           >
           <block subset="none" type="note">
@@ -222,10 +254,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -268,8 +304,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Reflection.Module.ResolveMethod(System.Int32,System.Type[],System.Type[])" />
+
+            
 
             
 
@@ -282,8 +322,12 @@
 
             
 
+            
+
             , to resolve the tokens in the method body to <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -296,8 +340,12 @@
 
             
 
+            
+
              objects, and <see
              cref="T:System.Reflection.FieldInfo" />
+
+            
 
             
 
@@ -316,10 +364,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -338,6 +390,8 @@
           <para
             >An array of type <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -367,6 +421,8 @@
           <para
             >The <see
              cref="P:System.Reflection.MethodBody.InitLocals" />
+
+            
 
             
 
@@ -412,6 +468,8 @@
 
             
 
+            
+
              property to obtain information about the method's local variables.</para
           >
           <block subset="none" type="note">
@@ -425,10 +483,14 @@
 
               
 
+              
+
                on MSDN and <see
                cref="http://go.microsoft.com/fwlink/?LinkID=65552"
                 >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
               >
+
+              
 
               
 
@@ -474,6 +536,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -509,10 +573,14 @@
 
             
 
+            
+
              on MSDN and <see
              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
+
+            
 
             
 

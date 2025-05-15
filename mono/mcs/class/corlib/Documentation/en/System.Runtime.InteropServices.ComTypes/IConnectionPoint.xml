@@ -34,6 +34,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -191,6 +193,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -201,8 +205,12 @@
 
           
 
+          
+
           The connection cookie previously returned from the <see
            cref="M:System.Runtime.InteropServices.ComTypes.IConnectionPoint.Advise(System.Object,System.Int32@)" />
+
+          
 
           
 

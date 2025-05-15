@@ -41,6 +41,8 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.RichTextBox" />
 
@@ -48,8 +50,12 @@
 
         
 
+        
+
         . These include text selection, <ui
         >Clipboard</ui>
+
+        
 
         
 
@@ -87,11 +93,15 @@
 
             
 
+            
+
              property must also be true to get a TAB character in the control.</para
           >
           <para
             >If the <see
              cref="P:System.Windows.Forms.TextBoxBase.AcceptsTab" />
+
+            
 
             
 
@@ -129,6 +139,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -137,6 +149,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.TextBoxBase.AcceptsTab" />
+
+            
 
             
 
@@ -171,6 +185,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -180,6 +196,8 @@
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -228,8 +246,12 @@
 
             
 
+            
+
              property to true for a <see
              cref="T:System.Windows.Forms.TextBox" />
+
+            
 
             
 
@@ -242,8 +264,12 @@
 
             
 
+            
+
              changes, the <see
              cref="T:System.Windows.Forms.TextBox" />
+
+            
 
             
 
@@ -256,6 +282,8 @@
 
             
 
+            
+
              to accommodate the larger or smaller text. The <see
              cref="P:System.Windows.Forms.Control.Width" />
 
@@ -263,8 +291,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Windows.Forms.TextBox" />
+
+            
 
             
 
@@ -280,8 +312,12 @@
 
             
 
+            
+
              control and use its <see
              cref="E:System.Windows.Forms.RichTextBox.ContentsResized" />
+
+            
 
             
 
@@ -355,11 +391,15 @@
 
             
 
+            
+
              property to change the background color of the text control to blend into the color scheme of your forms.</para
           >
           <para
             >To change the color of the text within the control, use the <see
              cref="P:System.Windows.Forms.TextBoxBase.ForeColor" />
+
+            
 
             
 
@@ -372,6 +412,8 @@
 
             
 
+            
+
              property of your text control, ensure that the color you choose does not cause the text of the control to disappear. For example, if the <see
              cref="P:System.Windows.Forms.TextBoxBase.BackColor" />
 
@@ -379,8 +421,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.TextBoxBase.ForeColor" />
+
+            
 
             
 
@@ -396,8 +442,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.TextBoxBase" />
+
+            
 
             
 
@@ -473,6 +523,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.TextBoxBase.BackgroundImage" />
+
+            
 
             
 
@@ -554,6 +606,8 @@
 
             
 
+            
+
              property changes. This event is not relevant for this class.</para
           >
         </summary>
@@ -588,6 +642,8 @@
 
             
 
+            
+
              property to create borderless and flat style controls, in addition to the default three-dimensional control.</para
           >
           <block subset="none" type="note">
@@ -599,8 +655,12 @@
 
               
 
+              
+
               , does not support the BorderStyle.FixedSingle style. This style will cause the <see
                cref="T:System.Windows.Forms.BorderStyle" />
+
+              
 
               
 
@@ -640,6 +700,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -648,6 +710,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.TextBoxBase.BorderStyle" />
+
+            
 
             
 
@@ -684,6 +748,8 @@
 
             
 
+            
+
              property can be set to an active value, to enable IME support.</para
           >
         </summary>
@@ -715,8 +781,12 @@
 
             
 
+            
+
              method to undo the last operation in a text box. You can use this method in the <see
              cref="E:System.Windows.Forms.MenuItem.Popup" />
+
+            
 
             
 
@@ -729,8 +799,12 @@
 
             
 
+            
+
             , or in code that manages the state of buttons on a <see
              cref="T:System.Windows.Forms.ToolBar" />
+
+            
 
             
 
@@ -763,6 +837,8 @@
           <para
             >You can use this method to clear the contents of the control instead of assigning the <see
              cref="P:System.Windows.Forms.TextBoxBase.Text" />
+
+            
 
             
 
@@ -832,6 +908,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -863,8 +941,12 @@
 
             
 
+            
+
              class, to copy text in the text box and place it in the <ui
             >Clipboard</ui>
+
+            
 
             
 
@@ -878,6 +960,8 @@
           <para
             >Copies the current selection in the text box to the <ui
             >Clipboard</ui>
+
+            
 
             
 
@@ -947,8 +1031,12 @@
 
             
 
+            
+
              class, to copy text in the text box and move it to the <ui
             >Clipboard</ui>
+
+            
 
             
 
@@ -962,6 +1050,8 @@
           <para
             >Moves the current selection in the text box to the <ui
             >Clipboard</ui>
+
+            
 
             
 
@@ -995,6 +1085,8 @@
           <para
             >Override <see
              cref="P:System.Windows.Forms.TextBoxBase.DefaultCursor" />
+
+            
 
             
 
@@ -1045,6 +1137,8 @@
           <para
             >Specifies that the value of the <see
              cref="P:System.Windows.Forms.TextBoxBase.SelectionLength" />
+
+            
 
             
 
@@ -1107,11 +1201,15 @@
 
             
 
+            
+
              property to change the color of the text within the control to match the text of other controls on your form. You can also use this property to highlight a specific text box that contains an invalid value.</para
           >
           <para
             >To change the background color of the control, use the <see
              cref="P:System.Windows.Forms.TextBoxBase.BackColor" />
+
+            
 
             
 
@@ -1124,6 +1222,8 @@
 
             
 
+            
+
              property of your text control, ensure that the color you choose does not cause the text of the control to disappear. For example, if the <see
              cref="P:System.Windows.Forms.TextBoxBase.ForeColor" />
 
@@ -1131,8 +1231,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.TextBoxBase.BackColor" />
+
+            
 
             
 
@@ -1148,8 +1252,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.TextBoxBase" />
+
+            
 
             
 
@@ -1194,8 +1302,12 @@
 
             
 
+            
+
              parameter is outside the client area of the control, the first character of the string closest to the point specified in <paramref
              name="pt" />
+
+            
 
             
 
@@ -1212,8 +1324,12 @@
 
               
 
+              
+
                parameter is located on the right side of the client area of the control, the last character of the string closest to the point specified in <paramref
                name="pt" />
+
+              
 
               
 
@@ -1233,6 +1349,8 @@
         </returns>
         <param name="pt">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1268,6 +1386,8 @@
 
             
 
+            
+
              parameter. The character index is a zero-based index of text in the control, including spaces. You can use this method to determine where in the text the user has the mouse over by passing the mouse coordinates to this method. This can be useful if you want to perform tasks when the user rests the mouse pointer over a word in the text of the control.</para
           >
           <block subset="none" type="note">
@@ -1284,6 +1404,8 @@
         </returns>
         <param name="pt">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1319,8 +1441,12 @@
 
             
 
+            
+
              parameter is greater than the last line in the text box, <see
              cref="M:System.Windows.Forms.TextBoxBase.GetFirstCharIndexFromLine(System.Int32)" />
+
+            
 
             
 
@@ -1335,8 +1461,12 @@
 
             
 
+            
+
              returns the first character index of a physical line. The physical line is the displayed line, not the assigned line. The number of displayed lines can be greater than the number of assigned lines due to word wrap. For example, if you assign two long lines to a <see
              cref="T:System.Windows.Forms.RichTextBox" />
+
+            
 
             
 
@@ -1349,8 +1479,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.TextBoxBase.WordWrap" />
+
+            
 
             
 
@@ -1369,6 +1503,8 @@
         </returns>
         <param name="lineNumber">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1423,8 +1559,12 @@
 
             
 
+            
+
              parameter of the method. The first line of text in the control returns the value zero. The <see
              cref="M:System.Windows.Forms.TextBoxBase.GetLineFromCharIndex(System.Int32)" />
+
+            
 
             
 
@@ -1437,8 +1577,12 @@
 
             
 
+            
+
              method returns 1 if the character at the specified character index has wrapped to the second physical line. If <see
              cref="P:System.Windows.Forms.TextBoxBase.WordWrap" />
+
+            
 
             
 
@@ -1451,8 +1595,12 @@
 
             
 
+            
+
              method to search for text, you can obtain the character index to where the search results are found. You can call this method with the character index returned by the <see
              cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+
+            
 
             
 
@@ -1464,6 +1612,8 @@
             <para
               >If the character index specified in the <paramref
                name="index" />
+
+              
 
               
 
@@ -1483,6 +1633,8 @@
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1518,6 +1670,8 @@
 
             
 
+            
+
              control.</para
           >
         </remarks>
@@ -1531,6 +1685,8 @@
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1587,6 +1743,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1595,6 +1753,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.TextBoxBase.HideSelection" />
+
+            
 
             
 
@@ -1632,8 +1792,12 @@
 
             
 
+            
+
              method returns true when the <paramref
              name="keyData" />
+
+            
 
             
 
@@ -1646,8 +1810,12 @@
 
             
 
+            
+
              value and the <see
              cref="P:System.Windows.Forms.TextBoxBase.AcceptsTab" />
+
+            
 
             
 
@@ -1660,8 +1828,12 @@
 
             
 
+            
+
              returns false if <paramref
              name="keyData" />
+
+            
 
             
 
@@ -1674,8 +1846,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Windows.Forms.Keys.Control" />
+
+            
 
             
 
@@ -1694,6 +1870,8 @@
         </returns>
         <param name="keyData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1739,12 +1917,16 @@
 
             
 
+            
+
              property of the text box control is set to true and a newline character appears in the text, the text following the newline character is added to a new element in the array and displayed on a separate line.</para
           >
           <block subset="none" type="note">
             <para
               >By default, the collection of lines is a read-only copy of the lines in the <see
                cref="T:System.Windows.Forms.TextBox" />
+
+              
 
               
 
@@ -1793,8 +1975,12 @@
 
               
 
+              
+
                property to a value that has a length greater than the value specified by the <see
                cref="P:System.Windows.Forms.TextBoxBase.MaxLength" />
+
+              
 
               
 
@@ -1842,6 +2028,8 @@
 
             
 
+            
+
              property programmatically, the <see
              cref="P:System.Windows.Forms.TextBoxBase.Modified" />
 
@@ -1849,8 +2037,12 @@
 
             
 
+            
+
              property reverts to false. This does not raise the <see
              cref="E:System.Windows.Forms.TextBoxBase.ModifiedChanged" />
+
+            
 
             
 
@@ -1886,6 +2078,8 @@
 
             
 
+            
+
              property programmatically, the <see
              cref="P:System.Windows.Forms.TextBoxBase.Modified" />
 
@@ -1893,8 +2087,12 @@
 
             
 
+            
+
              property reverts to false. This does not raise the <see
              cref="E:System.Windows.Forms.TextBoxBase.ModifiedChanged" />
+
+            
 
             
 
@@ -1912,6 +2110,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1920,6 +2120,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.TextBoxBase.Modified" />
+
+            
 
             
 
@@ -1965,8 +2167,12 @@
 
             
 
+            
+
              control does not raise a <see
              cref="E:System.Windows.Forms.TextBoxBase.Click" />
+
+            
 
             
 
@@ -1979,6 +2185,8 @@
 
             
 
+            
+
              event provides the functional equivalent.</para
           >
           <para
@@ -1986,6 +2194,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -2030,8 +2240,12 @@
 
             
 
+            
+
              property is set to true, text entered into the multiline text box is wrapped to the next line in the control. If the <see
              cref="P:System.Windows.Forms.TextBoxBase.WordWrap" />
+
+            
 
             
 
@@ -2061,12 +2275,16 @@
 
             
 
+            
+
              property to display horizontal and/or vertical scroll bars. This allows the user to scroll through the text that extends beyond the dimensions of the control.</para
           >
           <block subset="none" type="note">
             <para
               >Because the default value of the <see
                cref="P:System.Windows.Forms.TextBoxBase.Multiline" />
+
+              
 
               
 
@@ -2079,8 +2297,12 @@
 
               
 
+              
+
                will be in accordance with the font size even if you resize the <see
                cref="T:System.Windows.Forms.TextBox" />
+
+              
 
               
 
@@ -2093,8 +2315,12 @@
 
               
 
+              
+
               , set its <see
                cref="P:System.Windows.Forms.TextBox.Multiline" />
+
+              
 
               
 
@@ -2112,8 +2338,12 @@
 
               
 
+              
+
                property is set to true, setting the <see
                cref="P:System.Windows.Forms.TextBox.PasswordChar" />
+
+              
 
               
 
@@ -2126,8 +2356,12 @@
 
               
 
+              
+
                property to false if you set the <see
                cref="P:System.Windows.Forms.TextBox.PasswordChar" />
+
+              
 
               
 
@@ -2145,6 +2379,8 @@
 
               
 
+              
+
                control.</para
             >
           </block>
@@ -2156,8 +2392,12 @@
 
             
 
+            
+
              control, the <see
              cref="P:System.Windows.Forms.RichTextBox.Multiline" />
+
+            
 
             
 
@@ -2175,6 +2415,8 @@
 
                 
 
+                
+
                  is set to true and <see
                  cref="P:System.Windows.Forms.RichTextBox.Multiline" />
 
@@ -2182,8 +2424,12 @@
 
                 
 
+                
+
                  is set to true, <see
                  cref="T:System.Windows.Forms.RichTextBox" />
+
+                
 
                 
 
@@ -2201,6 +2447,8 @@
 
                 
 
+                
+
                  is set to true and <see
                  cref="P:System.Windows.Forms.RichTextBox.Multiline" />
 
@@ -2208,8 +2456,12 @@
 
                 
 
+                
+
                  is set to false, <see
                  cref="T:System.Windows.Forms.RichTextBox" />
+
+                
 
                 
 
@@ -2250,6 +2502,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2258,6 +2512,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.TextBoxBase.Multiline" />
+
+            
 
             
 
@@ -2297,11 +2553,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.TextBoxBase.OnAcceptsTabChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -2320,6 +2580,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2330,8 +2592,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2392,11 +2658,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.TextBoxBase.OnBorderStyleChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -2415,6 +2685,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2425,8 +2697,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2528,11 +2804,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.TextBoxBase.OnHideSelectionChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -2551,6 +2831,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2561,8 +2843,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2602,11 +2888,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.TextBoxBase.OnModifiedChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -2625,6 +2915,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2635,8 +2927,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2677,11 +2973,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="mevent">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2717,11 +3017,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.TextBoxBase.OnMultilineChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -2740,6 +3044,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2750,8 +3056,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2796,8 +3106,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2832,11 +3146,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.TextBoxBase.OnReadOnlyChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -2855,6 +3173,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2865,8 +3185,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -3016,8 +3340,12 @@
 
             
 
+            
+
              method will only paste text into the control if text is currently stored in the <ui
             >Clipboard</ui>
+
+            
 
             
 
@@ -3031,6 +3359,8 @@
           <para
             >Replaces the current selection in the text box with the contents of the <ui
             >Clipboard</ui>
+
+            
 
             
 
@@ -3076,8 +3406,12 @@
 
             
 
+            
+
              represents the minimum height the text box must have in order to display a single line of text without clipping the text on the top or bottom. This value is the same whether the <see
              cref="P:System.Windows.Forms.TextBoxBase.Multiline" />
+
+            
 
             
 
@@ -3173,8 +3507,12 @@
 
             
 
+            
+
              property in code. You can use this feature instead of disabling the control with the <see
              cref="P:System.Windows.Forms.Control.Enabled" />
+
+            
 
             
 
@@ -3212,6 +3550,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3220,6 +3560,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.TextBoxBase.ReadOnly" />
+
+            
 
             
 
@@ -3247,6 +3589,8 @@
           <para
             >This method enables you to scroll the contents of the control until the caret is within the visible region of the control. If the caret is positioned below the visible region of the control, the <see
              cref="M:System.Windows.Forms.TextBoxBase.ScrollToCaret" />
+
+            
 
             
 
@@ -3289,6 +3633,8 @@
 
             
 
+            
+
              parameter to 0. You can use this method to select a substring of text, such as when searching through the text of the control and replacing information.</para
           >
           <block subset="none" type="note">
@@ -3300,8 +3646,12 @@
 
               
 
+              
+
                parameter to the position within the text box where you want the caret to move to and set the <paramref
                name="length" />
+
+              
 
               
 
@@ -3319,8 +3669,12 @@
 
               
 
+              
+
                class. When called, it sets the input focus to the control and selects the contents of the control. For more information, see the <see
                cref="M:System.Windows.Forms.Control.Select" />
+
+              
 
               
 
@@ -3341,10 +3695,14 @@
 
           
 
+          
+
           The position of the first character in the current text selection within the text box. </param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3376,8 +3734,12 @@
 
             
 
+            
+
              method, which requires text to be selected in the control, to cut the entire contents of the control and paste them into the <ui
             >Clipboard</ui>
+
+            
 
             
 
@@ -3452,8 +3814,12 @@
 
             
 
+            
+
              property is set to a value that is larger than the number of characters within the text of the control, the value of the <see
              cref="P:System.Windows.Forms.TextBoxBase.SelectionLength" />
+
+            
 
             
 
@@ -3466,8 +3832,12 @@
 
             
 
+            
+
              property (if any value is specified for the <see
              cref="P:System.Windows.Forms.TextBoxBase.SelectionStart" />
+
+            
 
             
 
@@ -3484,8 +3854,12 @@
 
               
 
+              
+
                to the position within the text box where you want the caret to move to and set the <see
                cref="P:System.Windows.Forms.TextBoxBase.SelectionLength" />
+
+              
 
               
 
@@ -3531,8 +3905,12 @@
 
             
 
+            
+
              property. If the remaining text in the control after the position indicated by the <see
              cref="P:System.Windows.Forms.TextBoxBase.SelectionStart" />
+
+            
 
             
 
@@ -3545,8 +3923,12 @@
 
             
 
+            
+
              property, the value of the <see
              cref="P:System.Windows.Forms.TextBoxBase.SelectionLength" />
+
+            
 
             
 
@@ -3559,8 +3941,12 @@
 
             
 
+            
+
              property never causes an increase in the <see
              cref="P:System.Windows.Forms.TextBoxBase.SelectionLength" />
+
+            
 
             
 
@@ -3576,8 +3962,12 @@
 
             
 
+            
+
              and the <see
              cref="P:System.Windows.Forms.TextBoxBase.SelectionLength" />
+
+            
 
             
 
@@ -3593,8 +3983,12 @@
 
             
 
+            
+
              to the position within the text box where you want the caret to move to and set the <see
              cref="P:System.Windows.Forms.TextBoxBase.SelectionLength" />
+
+            
 
             
 
@@ -3610,8 +4004,12 @@
 
             
 
+            
+
              must have focus in order for the selection or the caret to be moved. You can set the <see
              cref="P:System.Windows.Forms.TextBoxBase.SelectionStart" />
+
+            
 
             
 
@@ -3624,6 +4022,8 @@
 
             
 
+            
+
              that is <see
              cref="P:System.Windows.Forms.TextBoxBase.ReadOnly" />
 
@@ -3631,8 +4031,12 @@
 
             
 
+            
+
              by giving it the <see
              cref="M:System.Windows.Forms.Control.Focus" />
+
+            
 
             
 
@@ -3678,8 +4082,12 @@
 
             
 
+            
+
              control uses the <see
              cref="P:System.Windows.Forms.TextBoxBase.PreferredHeight" />
+
+            
 
             
 
@@ -3692,8 +4100,12 @@
 
             
 
+            
+
              property is true and the <see
              cref="P:System.Windows.Forms.TextBoxBase.Multiline" />
+
+            
 
             
 
@@ -3709,8 +4121,12 @@
 
             
 
+            
+
              parameter are passed in with their current values. For example, the <see
              cref="P:System.Windows.Forms.Control.Height" />
+
+            
 
             
 
@@ -3723,8 +4139,12 @@
 
             
 
+            
+
             , or the <see
              cref="P:System.Drawing.Point.X" />
+
+            
 
             
 
@@ -3737,8 +4157,12 @@
 
             
 
+            
+
              properties of the <see
              cref="P:System.Windows.Forms.Control.Location" />
+
+            
 
             
 
@@ -3754,8 +4178,12 @@
 
             
 
+            
+
              parameter represents the elements of the controls <see
              cref="P:System.Windows.Forms.Control.Bounds" />
+
+            
 
             
 
@@ -3768,8 +4196,12 @@
 
             
 
+            
+
              of the control, the <paramref
              name="specified" />
+
+            
 
             
 
@@ -3782,8 +4214,12 @@
 
             
 
+            
+
             . However, if the <see
              cref="P:System.Windows.Forms.Control.Size" />
+
+            
 
             
 
@@ -3796,6 +4232,8 @@
 
             
 
+            
+
              property being set, the <paramref
              name="specified" />
 
@@ -3803,8 +4241,12 @@
 
             
 
+            
+
              parameter value is the None value of <see
              cref="T:System.Windows.Forms.BoundsSpecified" />
+
+            
 
             
 
@@ -3823,6 +4265,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -3833,8 +4277,12 @@
 
           
 
+          
+
           The new <see
            cref="P:System.Windows.Forms.Control.Left" />
+
+          
 
           
 
@@ -3849,8 +4297,12 @@
 
           
 
+          
+
           The new <see
            cref="P:System.Windows.Forms.Control.Top" />
+
+          
 
           
 
@@ -3865,8 +4317,12 @@
 
           
 
+          
+
           The new <see
            cref="P:System.Windows.Forms.Control.Width" />
+
+          
 
           
 
@@ -3881,6 +4337,8 @@
 
           
 
+          
+
           Not used.</param
         >
         <param name="specified">
@@ -3890,8 +4348,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.BoundsSpecified" />
+
+          
 
           
 
@@ -3926,6 +4388,8 @@
           <para
             >Use the <see
              cref="P:System.Windows.Forms.TextBoxBase.ShortcutsEnabled" />
+
+            
 
             
 
@@ -3984,8 +4448,12 @@
 
               
 
+              
+
                control does not support the CTRL+A shortcut key when the <see
                cref="P:System.Windows.Forms.TextBox.Multiline" />
+
+              
 
               
 
@@ -4027,6 +4495,8 @@
 
             
 
+            
+
              property to true. To read or set the text of a multiline text box, use the <see
              cref="P:System.Windows.Forms.TextBoxBase.Lines" />
 
@@ -4034,8 +4504,12 @@
 
             
 
+            
+
              property. The amount of text that can be entered in the <see
              cref="T:System.Windows.Forms.RichTextBox" />
+
+            
 
             
 
@@ -4100,6 +4574,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -4113,8 +4589,12 @@
 
             
 
+            
+
             . The string includes the type and the <see
              cref="T:System.Windows.Forms.TextBoxBase" />
+
+            
 
             
 
@@ -4147,8 +4627,12 @@
 
             
 
+            
+
              or text change operation performed in the text box control if the <see
              cref="P:System.Windows.Forms.TextBoxBase.CanUndo" />
+
+            
 
             
 
@@ -4165,6 +4649,8 @@
 
               
 
+              
+
                method does not work with the <see
                cref="E:System.Windows.Forms.Control.KeyPress" />
 
@@ -4172,8 +4658,12 @@
 
               
 
+              
+
                or <see
                cref="E:System.Windows.Forms.Control.TextChanged" />
+
+              
 
               
 
@@ -4241,6 +4731,8 @@
 
             
 
+            
+
              property setting.</para
           >
           <block subset="none" type="note">
@@ -4252,8 +4744,12 @@
 
               
 
+              
+
               , text within the control will always wrap regardless of the property setting of this property unless the <see
                cref="P:System.Windows.Forms.TextBox.TextAlign" />
+
+              
 
               
 

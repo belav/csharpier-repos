@@ -37,6 +37,8 @@
 
         
 
+        
+
          contains information about the item to be resolved. </para
       >
       <list type="bullet">
@@ -44,6 +46,8 @@
           <para
             >The <see
              cref="P:System.ResolveEventArgs.Name" />
+
+            
 
             
 
@@ -61,8 +65,12 @@
 
             
 
+            
+
              property contains the assembly that requested an assembly that can provide the named item. For more information, see the <see
              cref="P:System.ResolveEventArgs.RequestingAssembly" />
+
+            
 
             
 
@@ -83,8 +91,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.AppDomain.ResourceResolve" />
+
+        
 
         
 
@@ -97,8 +109,12 @@
 
         
 
+        
+
         , and <see
          cref="E:System.AppDomain.AssemblyResolve" />
+
+        
 
         
 
@@ -140,11 +156,15 @@
 
             
 
+            
+
              class, specifying the name of the item to resolve.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -183,6 +203,8 @@
 
             
 
+            
+
              class, specifying the name of the item to resolve and the assembly whose dependency is being resolved.</para
           >
         </summary>
@@ -193,10 +215,14 @@
 
           
 
+          
+
           The name of an item to resolve. </param
         >
         <param name="requestingAssembly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -230,8 +256,12 @@
 
             
 
+            
+
              event, <see
              cref="P:System.ResolveEventArgs.Name" />
+
+            
 
             
 
@@ -274,11 +304,15 @@
 
             
 
+            
+
              property, because the item did not exist in that assembly, in any of its loaded dependencies, or in any dependencies the loader could find through probing. </para
           >
           <para
             >For example, suppose the current assembly uses the <see
              cref="M:System.Reflection.Assembly.LoadFile(System.String)" />
+
+            
 
             
 
@@ -291,8 +325,12 @@
 
             
 
+            
+
              method, the loader cannot resolve the dependency. If there is a handler for the <see
              cref="E:System.AppDomain.AssemblyResolve" />
+
+            
 
             
 
@@ -305,8 +343,12 @@
 
             
 
+            
+
              property of the resulting <see
              cref="T:System.ResolveEventArgs" />
+
+            
 
             
 
@@ -322,6 +364,8 @@
 
             
 
+            
+
              property vary, depending on how the requesting assembly was loaded: </para
           >
           <list type="bullet">
@@ -329,6 +373,8 @@
               <para
                 >Load context: The value of the property might be null. The load context is load-order independent, and the identity of the requesting assembly is not necessarily meaningful. A non-null example occurs when the <see
                  cref="M:System.Type.GetType(System.String,System.Boolean)" />
+
+                
 
                 
 
@@ -349,8 +395,12 @@
 
                 
 
+                
+
                  method, or as a byte stream, or in mixed mode): The handler can use the <see
                  cref="P:System.ResolveEventArgs.RequestingAssembly" />
+
+                
 
                 
 

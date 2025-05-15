@@ -28,6 +28,8 @@
 
         
 
+        
+
          objects.</para
       >
     </summary>
@@ -77,6 +79,8 @@
 
             
 
+            
+
              property of an <see
              cref="T:System.Windows.Forms.HtmlElement" />
 
@@ -84,8 +88,12 @@
 
             
 
+            
+
              must be unique, multiple elements can use the same <see
              cref="P:System.Windows.Forms.HtmlElement.Name" />
+
+            
 
             
 
@@ -108,8 +116,12 @@
 
             
 
+            
+
              containing the elements whose <see
              cref="P:System.Windows.Forms.HtmlElement.Name" />
+
+            
 
             
 
@@ -122,11 +134,15 @@
 
             
 
+            
+
             . </para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -160,6 +176,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -239,8 +257,12 @@
 
             
 
+            
+
             , starting at a particular <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -256,6 +278,8 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
 
@@ -263,8 +287,12 @@
 
           
 
+          
+
            that is the destination of the elements copied from collection. The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -279,8 +307,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -310,6 +342,8 @@
           <para
             >Gets a value indicating whether access to the <see
              cref="T:System.Windows.Forms.HtmlElementCollection" />
+
+            
 
             
 

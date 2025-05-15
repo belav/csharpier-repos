@@ -29,8 +29,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.Threading.Tasks.Task`1.ContinueWith(System.Action{System.Threading.Tasks.Task{`0}},System.Threading.Tasks.TaskContinuationOptions)" />
+
+        
 
         
 
@@ -85,6 +89,8 @@
 
             
 
+            
+
              will be thrown if an attempt is made to attach a child task to the created task.</para
           >
         </summary>
@@ -129,6 +135,8 @@
           <para
             >Prevents the ambient scheduler from being seen as the current scheduler in the created task. This means that operations like StartNew or ContinueWith that are performed in the created task will see <see
              cref="P:System.Threading.Tasks.TaskScheduler.Default" />
+
+            
 
             
 
@@ -183,6 +191,8 @@
 
             
 
+            
+
              that oversubscription may be warranted.</para
           >
         </summary>
@@ -207,6 +217,8 @@
           <para
             >Default = "Continue on any, no task options, run asynchronously" Specifies that the default behavior should be used. Continuations, by default, will be scheduled when the antecedent task completes, regardless of the task's final <see
              cref="T:System.Threading.Tasks.TaskStatus" />
+
+            
 
             
 
@@ -356,6 +368,8 @@
           <para
             >A hint to a <see
              cref="T:System.Threading.Tasks.TaskScheduler" />
+
+            
 
             
 

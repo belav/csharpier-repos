@@ -32,6 +32,8 @@
 
         
 
+        
+
          object to receive a list of possible values supported by a particular parameter of a particular image encoder.</para
       >
     </remarks>
@@ -64,8 +66,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Drawing.Imaging.Encoder" />
+
+            
 
             
 
@@ -78,6 +84,8 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Drawing.Imaging.EncoderParameterValueType.ValueTypeByte" />
 
@@ -85,8 +93,12 @@
 
             
 
+            
+
             , and sets the <see
              cref="P:System.Drawing.Imaging.EncoderParameter.NumberOfValues" />
+
+            
 
             
 
@@ -102,8 +114,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Drawing.Imaging.Encoder" />
+
+          
 
           
 
@@ -118,8 +134,12 @@
 
           
 
+          
+
           An 8-bit unsigned integer that specifies the value stored in the <see
            cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+          
 
           
 
@@ -156,8 +176,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Drawing.Imaging.Encoder" />
+
+            
 
             
 
@@ -170,6 +194,8 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Drawing.Imaging.EncoderParameterValueType.ValueTypeByte" />
 
@@ -177,8 +203,12 @@
 
             
 
+            
+
             , and sets the <see
              cref="P:System.Drawing.Imaging.EncoderParameter.NumberOfValues" />
+
+            
 
             
 
@@ -194,8 +224,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Drawing.Imaging.Encoder" />
+
+          
 
           
 
@@ -210,8 +244,12 @@
 
           
 
+          
+
           An array of 8-bit unsigned integers that specifies the values stored in the <see
            cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+          
 
           
 
@@ -248,8 +286,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Drawing.Imaging.Encoder" />
+
+            
 
             
 
@@ -262,6 +304,8 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Drawing.Imaging.EncoderParameterValueType.ValueTypeShort" />
 
@@ -269,8 +313,12 @@
 
             
 
+            
+
             , and sets the <see
              cref="P:System.Drawing.Imaging.EncoderParameter.NumberOfValues" />
+
+            
 
             
 
@@ -286,8 +334,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Drawing.Imaging.Encoder" />
+
+          
 
           
 
@@ -302,8 +354,12 @@
 
           
 
+          
+
           A 16-bit integer that specifies the value stored in the <see
            cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+          
 
           
 
@@ -340,8 +396,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Drawing.Imaging.Encoder" />
+
+            
 
             
 
@@ -354,6 +414,8 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Drawing.Imaging.EncoderParameterValueType.ValueTypeShort" />
 
@@ -361,8 +423,12 @@
 
             
 
+            
+
             , and sets the <see
              cref="P:System.Drawing.Imaging.EncoderParameter.NumberOfValues" />
+
+            
 
             
 
@@ -378,8 +444,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Drawing.Imaging.Encoder" />
+
+          
 
           
 
@@ -394,8 +464,12 @@
 
           
 
+          
+
           An array of 16-bit integers that specifies the values stored in the <see
            cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+          
 
           
 
@@ -432,8 +506,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Drawing.Imaging.Encoder" />
+
+            
 
             
 
@@ -446,6 +524,8 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Drawing.Imaging.EncoderParameterValueType.ValueTypeLong" />
 
@@ -453,8 +533,12 @@
 
             
 
+            
+
              (32 bits), and sets the <see
              cref="P:System.Drawing.Imaging.EncoderParameter.NumberOfValues" />
+
+            
 
             
 
@@ -470,8 +554,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Drawing.Imaging.Encoder" />
+
+          
 
           
 
@@ -486,6 +574,8 @@
 
           
 
+          
+
           A 64-bit integer that specifies the value stored in the <see
            cref="T:System.Drawing.Imaging.EncoderParameter" />
 
@@ -493,8 +583,12 @@
 
           
 
+          
+
            object. Must be nonnegative. This parameter is converted to a 32-bit integer before it is stored in the <see
            cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+          
 
           
 
@@ -531,8 +625,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Drawing.Imaging.Encoder" />
+
+            
 
             
 
@@ -545,6 +643,8 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Drawing.Imaging.EncoderParameterValueType.ValueTypeLong" />
 
@@ -552,8 +652,12 @@
 
             
 
+            
+
              (32-bit), and sets the <see
              cref="P:System.Drawing.Imaging.EncoderParameter.NumberOfValues" />
+
+            
 
             
 
@@ -569,8 +673,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Drawing.Imaging.Encoder" />
+
+          
 
           
 
@@ -585,6 +693,8 @@
 
           
 
+          
+
           An array of 64-bit integers that specifies the values stored in the <see
            cref="T:System.Drawing.Imaging.EncoderParameter" />
 
@@ -592,8 +702,12 @@
 
           
 
+          
+
            object. The integers in the array must be nonnegative. The 64-bit integers are converted to 32-bit integers before they are stored in the <see
            cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+          
 
           
 
@@ -630,8 +744,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Drawing.Imaging.Encoder" />
+
+            
 
             
 
@@ -644,8 +762,12 @@
 
             
 
+            
+
              object. Sets the <see
              cref="P:System.Drawing.Imaging.EncoderParameter.ValueType" />
+
+            
 
             
 
@@ -658,8 +780,12 @@
 
             
 
+            
+
             , and sets the <see
              cref="P:System.Drawing.Imaging.EncoderParameter.NumberOfValues" />
+
+            
 
             
 
@@ -675,8 +801,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Drawing.Imaging.Encoder" />
+
+          
 
           
 
@@ -691,6 +821,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
 
@@ -698,8 +830,12 @@
 
           
 
+          
+
            that specifies the value stored in the <see
            cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+          
 
           
 
@@ -737,8 +873,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Drawing.Imaging.Encoder" />
+
+            
 
             
 
@@ -751,8 +891,12 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Drawing.Imaging.EncoderParameterValueType.ValueTypeUndefined" />
+
+            
 
             
 
@@ -765,8 +909,12 @@
 
             
 
+            
+
             , and sets the <see
              cref="P:System.Drawing.Imaging.EncoderParameter.NumberOfValues" />
+
+            
 
             
 
@@ -782,8 +930,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Drawing.Imaging.Encoder" />
+
+          
 
           
 
@@ -798,8 +950,12 @@
 
           
 
+          
+
           A byte that specifies the value stored in the <see
            cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+          
 
           
 
@@ -814,8 +970,12 @@
 
           
 
+          
+
           If true, the <see
            cref="P:System.Drawing.Imaging.EncoderParameter.ValueType" />
+
+          
 
           
 
@@ -828,6 +988,8 @@
 
           
 
+          
+
           ; otherwise, the <see
            cref="P:System.Drawing.Imaging.EncoderParameter.ValueType" />
 
@@ -835,8 +997,12 @@
 
           
 
+          
+
            property is set to <see
            cref="F:System.Drawing.Imaging.EncoderParameterValueType.ValueTypeByte" />
+
+          
 
           
 
@@ -874,8 +1040,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Drawing.Imaging.Encoder" />
+
+            
 
             
 
@@ -888,8 +1058,12 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Drawing.Imaging.EncoderParameterValueType.ValueTypeUndefined" />
+
+            
 
             
 
@@ -902,8 +1076,12 @@
 
             
 
+            
+
             , and sets the <see
              cref="P:System.Drawing.Imaging.EncoderParameter.NumberOfValues" />
+
+            
 
             
 
@@ -919,8 +1097,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Drawing.Imaging.Encoder" />
+
+          
 
           
 
@@ -935,8 +1117,12 @@
 
           
 
+          
+
           An array of bytes that specifies the values stored in the <see
            cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+          
 
           
 
@@ -951,8 +1137,12 @@
 
           
 
+          
+
           If true, the <see
            cref="P:System.Drawing.Imaging.EncoderParameter.ValueType" />
+
+          
 
           
 
@@ -965,6 +1155,8 @@
 
           
 
+          
+
           ; otherwise, the <see
            cref="P:System.Drawing.Imaging.EncoderParameter.ValueType" />
 
@@ -972,8 +1164,12 @@
 
           
 
+          
+
            property is set to <see
            cref="F:System.Drawing.Imaging.EncoderParameterValueType.ValueTypeByte" />
+
+          
 
           
 
@@ -1012,8 +1208,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Drawing.Imaging.Encoder" />
+
+            
 
             
 
@@ -1026,6 +1226,8 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Drawing.Imaging.EncoderParameterValueType.ValueTypeRational" />
 
@@ -1033,8 +1235,12 @@
 
             
 
+            
+
             , and sets the <see
              cref="P:System.Drawing.Imaging.EncoderParameter.NumberOfValues" />
+
+            
 
             
 
@@ -1050,8 +1256,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Drawing.Imaging.Encoder" />
+
+          
 
           
 
@@ -1061,6 +1271,8 @@
         >
         <param name="numerator">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1098,8 +1310,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Drawing.Imaging.Encoder" />
+
+            
 
             
 
@@ -1112,8 +1328,12 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Drawing.Imaging.EncoderParameterValueType.ValueTypeRational" />
+
+            
 
             
 
@@ -1126,6 +1346,8 @@
 
             
 
+            
+
              property to the number of elements in the <paramref
              name="numerator" />
 
@@ -1133,8 +1355,12 @@
 
             
 
+            
+
              array, which must be the same as the number of elements in the <paramref
              name="denominator" />
+
+            
 
             
 
@@ -1150,8 +1376,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Drawing.Imaging.Encoder" />
+
+          
 
           
 
@@ -1166,10 +1396,14 @@
 
           
 
+          
+
           An array of 32-bit integers that specifies the numerators of the fractions. The integers in the array must be nonnegative. </param
         >
         <param name="denominator">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1207,8 +1441,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Drawing.Imaging.Encoder" />
+
+            
 
             
 
@@ -1221,6 +1459,8 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Drawing.Imaging.EncoderParameterValueType.ValueTypeLongRange" />
 
@@ -1228,8 +1468,12 @@
 
             
 
+            
+
             , and sets the <see
              cref="P:System.Drawing.Imaging.EncoderParameter.NumberOfValues" />
+
+            
 
             
 
@@ -1245,8 +1489,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Drawing.Imaging.Encoder" />
+
+          
 
           
 
@@ -1261,8 +1509,12 @@
 
           
 
+          
+
           A 64-bit integer that represents the smallest number in a range of integers. Must be nonnegative. This parameter is converted to a 32-bit integer before it is stored in the <see
            cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+          
 
           
 
@@ -1277,8 +1529,12 @@
 
           
 
+          
+
           A 64-bit integer that represents the largest number in a range of integers. Must be nonnegative. This parameter is converted to a 32-bit integer before it is stored in the <see
            cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+          
 
           
 
@@ -1316,8 +1572,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Drawing.Imaging.Encoder" />
+
+            
 
             
 
@@ -1330,8 +1590,12 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Drawing.Imaging.EncoderParameterValueType.ValueTypeLongRange" />
+
+            
 
             
 
@@ -1344,6 +1608,8 @@
 
             
 
+            
+
              property to the number of elements in the <paramref
              name="rangebegin" />
 
@@ -1351,8 +1617,12 @@
 
             
 
+            
+
              array, which must be the same as the number of elements in the <paramref
              name="rangeend" />
+
+            
 
             
 
@@ -1368,8 +1638,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Drawing.Imaging.Encoder" />
+
+          
 
           
 
@@ -1384,8 +1658,12 @@
 
           
 
+          
+
           An array of 64-bit integers that specifies the minimum values for the integer ranges. The integers in the array must be nonnegative. The 64-bit integers are converted to 32-bit integers before they are stored in the <see
            cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+          
 
           
 
@@ -1400,8 +1678,12 @@
 
           
 
+          
+
           An array of 64-bit integers that specifies the maximum values for the integer ranges. The integers in the array must be nonnegative. The 64-bit integers are converted to 32-bit integers before they are stored in the <see
            cref="T:System.Drawing.Imaging.EncoderParameters" />
+
+          
 
           
 
@@ -1443,6 +1725,8 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Drawing.Imaging.Encoder" />
 
@@ -1450,8 +1734,12 @@
 
             
 
+            
+
              object and three integers that specify the number of values, the data type of the values, and a pointer to the values stored in the <see
              cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+            
 
             
 
@@ -1467,8 +1755,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Drawing.Imaging.Encoder" />
+
+          
 
           
 
@@ -1510,8 +1802,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Drawing.Imaging.Encoder" />
+
+            
 
             
 
@@ -1524,6 +1820,8 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Drawing.Imaging.EncoderParameterValueType.ValueTypeRationalRange" />
 
@@ -1531,8 +1829,12 @@
 
             
 
+            
+
             , and sets the <see
              cref="P:System.Drawing.Imaging.EncoderParameter.NumberOfValues" />
+
+            
 
             
 
@@ -1548,8 +1850,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Drawing.Imaging.Encoder" />
+
+          
 
           
 
@@ -1564,10 +1870,14 @@
 
           
 
+          
+
           A 32-bit integer that represents the numerator of the smallest fraction in the range. Must be nonnegative. </param
         >
         <param name="numerator2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1610,8 +1920,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Drawing.Imaging.Encoder" />
+
+            
 
             
 
@@ -1624,8 +1938,12 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Drawing.Imaging.EncoderParameterValueType.ValueTypeRationalRange" />
+
+            
 
             
 
@@ -1638,8 +1956,12 @@
 
             
 
+            
+
              property to the number of elements in the <paramref
              name="numerator1" />
+
+            
 
             
 
@@ -1655,8 +1977,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Drawing.Imaging.Encoder" />
+
+          
 
           
 
@@ -1671,10 +1997,14 @@
 
           
 
+          
+
           An array of 32-bit integers that specifies the numerators of the minimum values for the ranges. The integers in the array must be nonnegative. </param
         >
         <param name="denominator1">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1689,10 +2019,14 @@
 
           
 
+          
+
           An array of 32-bit integers that specifies the numerators of the maximum values for the ranges. The integers in the array must be nonnegative. </param
         >
         <param name="denominator2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1724,8 +2058,12 @@
 
             
 
+            
+
              allows the resources used by this <see
              cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+            
 
             
 
@@ -1739,6 +2077,8 @@
           <para
             >Releases all resources used by this <see
              cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+            
 
             
 
@@ -1780,8 +2120,12 @@
 
             
 
+            
+
              object associated with this <see
              cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+            
 
             
 
@@ -1794,8 +2138,12 @@
 
             
 
+            
+
              object encapsulates the globally unique identifier (GUID) that specifies the category (for example <see
              cref="F:System.Drawing.Imaging.Encoder.Quality" />
+
+            
 
             
 
@@ -1808,6 +2156,8 @@
 
             
 
+            
+
             , or <see
              cref="F:System.Drawing.Imaging.Encoder.Compression" />
 
@@ -1815,8 +2165,12 @@
 
             
 
+            
+
             ) of the parameter stored in this <see
              cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+            
 
             
 
@@ -1850,8 +2204,12 @@
 
             
 
+            
+
              object to attempt to free resources and perform other cleanup operations before the <see
              cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+            
 
             
 
@@ -1880,6 +2238,8 @@
           <para
             >Gets the number of elements in the array of values stored in this <see
              cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+            
 
             
 
@@ -1916,6 +2276,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1942,6 +2304,8 @@
           <para
             >Gets the data type of the values stored in this <see
              cref="T:System.Drawing.Imaging.EncoderParameter" />
+
+            
 
             
 

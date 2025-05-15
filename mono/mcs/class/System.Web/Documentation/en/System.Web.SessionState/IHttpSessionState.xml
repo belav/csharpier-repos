@@ -18,6 +18,8 @@
 
         
 
+        
+
          class using the <see
          cref="P:System.Web.HttpContext.Session" />
 
@@ -25,8 +27,12 @@
 
         
 
+        
+
          property. The <see
          cref="T:System.Web.SessionState.HttpSessionState" />
+
+        
 
         
 
@@ -42,6 +48,8 @@
 
         
 
+        
+
          class. At the beginning of a request, during the <see
          cref="E:System.Web.HttpApplication.AcquireRequestState" />
 
@@ -49,8 +57,12 @@
 
         
 
+        
+
          event, the <see
          cref="T:System.Web.SessionState.SessionStateModule" />
+
+        
 
         
 
@@ -63,8 +75,12 @@
 
         
 
+        
+
          object and assigns it to the current <see
          cref="T:System.Web.HttpContext" />
+
+        
 
         
 
@@ -77,8 +93,12 @@
 
         
 
+        
+
          event, the <see
          cref="T:System.Web.SessionState.SessionStateModule" />
+
+        
 
         
 
@@ -91,8 +111,12 @@
 
         
 
+        
+
          object from the current <see
          cref="T:System.Web.HttpContext" />
+
+        
 
         
 
@@ -105,8 +129,12 @@
 
         
 
+        
+
          performs the same cleanup by calling the <see
          cref="M:System.Web.SessionState.SessionStateStoreProviderBase.EndRequest(System.Web.HttpContext)" />
+
+        
 
         
 
@@ -122,8 +150,12 @@
 
         
 
+        
+
          interface. If you are creating your own custom session-state container, you must also replace the <see
          cref="T:System.Web.SessionState.SessionStateModule" />
+
+        
 
         
 
@@ -136,6 +168,8 @@
 
         
 
+        
+
          using the <see
          cref="M:System.Web.SessionState.SessionStateUtility.AddHttpSessionStateToContext(System.Web.HttpContext,System.Web.SessionState.IHttpSessionState)" />
 
@@ -143,8 +177,12 @@
 
         
 
+        
+
          method. An example of a custom session-state module is included in the <see
          cref="T:System.Web.SessionState.SessionStateUtility" />
+
+        
 
         
 
@@ -178,8 +216,12 @@
 
             
 
+            
+
              method is used to clear out session data and raise the <system
             >Session_OnEnd</system>
+
+            
 
             
 
@@ -239,8 +281,12 @@
 
             
 
+            
+
              performs the same function as <see
              cref="M:System.Web.SessionState.IHttpSessionState.RemoveAll" />
+
+            
 
             
 
@@ -278,6 +324,8 @@
 
             
 
+            
+
              property is provided for compatibility with earlier versions of ASP only. If you do not need to maintain backward compatibility with ASP pages, use the <see
              cref="P:System.Text.Encoding.CodePage" />
 
@@ -285,8 +333,12 @@
 
             
 
+            
+
              property of the <see
              cref="P:System.Web.HttpResponse.ContentEncoding" />
+
+            
 
             
 
@@ -323,8 +375,12 @@
 
             
 
+            
+
              property returns a <see
              cref="T:System.Web.HttpCookieMode" />
+
+            
 
             
 
@@ -337,8 +393,12 @@
 
             
 
+            
+
               configuration element. If the cookieless attribute is set to true, then the <see
              cref="P:System.Web.SessionState.IHttpSessionState.CookieMode" />
+
+            
 
             
 
@@ -351,6 +411,8 @@
 
             
 
+            
+
             ; otherwise, the <see
              cref="P:System.Web.SessionState.IHttpSessionState.CookieMode" />
 
@@ -358,8 +420,12 @@
 
             
 
+            
+
              property returns <see
              cref="F:System.Web.HttpCookieMode.UseCookies" />
+
+            
 
             
 
@@ -402,8 +468,12 @@
 
           
 
+          
+
           The index in <paramref
            name="array" />
+
+          
 
           
 
@@ -462,6 +532,8 @@
 
             
 
+            
+
              that can iterate through the values in the session-state item collection.</para
           >
         </returns>
@@ -486,6 +558,8 @@
              type="text/html">
               <a href="146ca206-d151-4f2e-a548-bcca05ccf0cb">Session Identifiers</a>
             </format>
+
+            
 
             
 
@@ -536,6 +610,8 @@
           <para
             >Session state is set to read-only by setting the <see
              cref="P:System.Web.Configuration.PagesSection.EnableSessionState" />
+
+            
 
             
 
@@ -653,6 +729,8 @@
 
             
 
+            
+
              property instead.</para
           >
           <para
@@ -663,8 +741,12 @@
 
             
 
+            
+
              property calls the <see
              cref="P:System.Globalization.CultureInfo.LCID" />
+
+            
 
             
 
@@ -701,6 +783,8 @@
              type="text/html">
               <a href="0bb0a3a3-650f-4c47-a0c5-b08b9b591bb4">Session State Modes</a>
             </format>
+
+            
 
             
 
@@ -758,8 +842,12 @@
 
             
 
+            
+
              performs the same function as <see
              cref="M:System.Web.SessionState.IHttpSessionState.Clear" />
+
+            
 
             
 
@@ -795,6 +883,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

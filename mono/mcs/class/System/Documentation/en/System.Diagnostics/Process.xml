@@ -48,8 +48,12 @@
 
           
 
+          
+
            class. As a result, some applications that did not get exceptions in earlier versions of the .NET Framework may now get a <see
            cref="T:System.NotSupportedException" />
+
+          
 
           
 
@@ -66,11 +70,15 @@
 
         
 
+        
+
          component provides access to a process that is running on a computer. A process, in the simplest terms, is a running application. A thread is the basic unit to which the operating system allocates processor time. A thread can execute any part of the code of the process, including parts currently being executed by another thread.</para
       >
       <para
         >The <see
          cref="T:System.Diagnostics.Process" />
+
+        
 
         
 
@@ -83,8 +91,12 @@
 
         
 
+        
+
          component, you can obtain a list of the processes that are running, or you can start a new process. A <see
          cref="T:System.Diagnostics.Process" />
+
+        
 
         
 
@@ -97,12 +109,16 @@
 
         
 
+        
+
          component has been initialized, it can be used to obtain information about the running process. Such information includes the set of threads, the loaded modules (.dll and .exe files), and performance information such as the amount of memory the process is using.</para
       >
       <block subset="none" type="note">
         <para
           >A 32-bit processes cannot access the modules of a 64-bit process. If you try to get information about a 64-bit process from a 32-bit process, you will get a <see
            cref="T:System.ComponentModel.Win32Exception" />
+
+          
 
           
 
@@ -120,6 +136,8 @@
 
         
 
+        
+
          component has obtained information about one member of any group, it will cache the values for the other properties in that group and not obtain new information about the other members of the group until you call the <see
          cref="M:System.Diagnostics.Process.Refresh" />
 
@@ -127,8 +145,12 @@
 
         
 
+        
+
          method. Therefore, a property value is not guaranteed to be any newer than the last call to the <see
          cref="M:System.Diagnostics.Process.Refresh" />
+
+        
 
         
 
@@ -144,8 +166,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Diagnostics.Process" />
+
+        
 
         
 
@@ -158,8 +184,12 @@
 
         
 
+        
+
          (usually either zero for success or a nonzero error code) and the <see
          cref="P:System.Diagnostics.Process.ExitTime" />
+
+        
 
         
 
@@ -176,6 +206,8 @@
 
           
 
+          
+
            is thrown when either the immediate caller or the derived class does not have full-trust permission. For details about security demands, see <format
            type="text/html">
             <a href="a33fd5f9-2de9-4653-a4f0-d9df25082c4d">Link Demands</a>
@@ -185,10 +217,14 @@
 
           
 
+          
+
            and <format
            type="text/html">
             <a href="28b9adbb-8f08-4f10-b856-dbf59eb932d9">Inheritance Demands</a>
           </format>
+
+          
 
           
 
@@ -229,11 +265,15 @@
 
             
 
+            
+
              property, the default is the local computer, (".").</para
           >
           <para
             >You have two options for associating a new <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -246,8 +286,12 @@
 
             
 
+            
+
              component, set the appropriate members of the <see
              cref="P:System.Diagnostics.Process.StartInfo" />
+
+            
 
             
 
@@ -260,8 +304,12 @@
 
             
 
+            
+
              to associate the <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -274,6 +322,8 @@
 
             
 
+            
+
              with a running system process by using <see
              cref="M:System.Diagnostics.Process.GetProcessById(System.Int32,System.String)" />
 
@@ -281,8 +331,12 @@
 
             
 
+            
+
              or one of the <see
              cref="M:System.Diagnostics.Process.GetProcesses" />
+
+            
 
             
 
@@ -298,8 +352,12 @@
 
             
 
+            
+
              method to start a new system process, the method creates a new <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -315,8 +373,12 @@
 
             
 
+            
+
              property is set to its default value, true, you can start applications and documents in a way that is similar to using the Run dialog box of the Windows Start menu. When <see
              cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+
+            
 
             
 
@@ -332,6 +394,8 @@
 
             
 
+            
+
              property and calling the <see
              cref="M:System.Diagnostics.Process.Start" />
 
@@ -339,8 +403,12 @@
 
             
 
+            
+
              method with no parameters, or by passing the appropriate parameter to the static <see
              cref="M:System.Diagnostics.Process.Start" />
+
+            
 
             
 
@@ -356,8 +424,12 @@
 
             
 
+            
+
              component by using the constructor, one of the static <see
              cref="M:System.Diagnostics.Process.Start" />
+
+            
 
             
 
@@ -370,8 +442,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Diagnostics.Process.GetProcesses" />
+
+            
 
             
 
@@ -384,6 +460,8 @@
 
             
 
+            
+
              methods. After you have done so, you have a view into the associated process. This is not a dynamic view that updates itself automatically when the process properties have changed in memory. Instead, you must call <see
              cref="M:System.Diagnostics.Process.Refresh" />
 
@@ -391,8 +469,12 @@
 
             
 
+            
+
              for the component to update the <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -406,6 +488,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -451,12 +535,16 @@
 
             
 
+            
+
              of the process is the starting priority for threads created within the associated process. You can view information about the base priority through the System Monitor's Priority Base counter.</para
           >
           <para>Based on the time elapsed or other boosts, the operating system can change the base priority when a process should be placed ahead of others.</para>
           <para
             >The <see
              cref="P:System.Diagnostics.Process.BasePriority" />
+
+            
 
             
 
@@ -469,8 +557,12 @@
 
             
 
+            
+
              to set the priority of the process. To change the priority, use the <see
              cref="P:System.Diagnostics.Process.PriorityClass" />
+
+            
 
             
 
@@ -483,8 +575,12 @@
 
             
 
+            
+
              is viewable using the System Monitor, while the <see
              cref="P:System.Diagnostics.Process.PriorityClass" />
+
+            
 
             
 
@@ -497,8 +593,12 @@
 
             
 
+            
+
              and the <see
              cref="P:System.Diagnostics.Process.PriorityClass" />
+
+            
 
             
 
@@ -511,8 +611,12 @@
 
             
 
+            
+
              values and <see
              cref="P:System.Diagnostics.Process.PriorityClass" />
+
+            
 
             
 
@@ -610,8 +714,12 @@
 
             
 
+            
+
              stream can be read synchronously or asynchronously. Methods such as <see
              cref="M:System.IO.StreamReader.Read" />
+
+            
 
             
 
@@ -624,8 +732,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.IO.StreamReader.ReadToEnd" />
+
+            
 
             
 
@@ -638,8 +750,12 @@
 
             
 
+            
+
              writes to its <see
              cref="P:System.Diagnostics.Process.StandardError" />
+
+            
 
             
 
@@ -655,8 +771,12 @@
 
             
 
+            
+
              starts asynchronous read operations on the <see
              cref="P:System.Diagnostics.Process.StandardError" />
+
+            
 
             
 
@@ -672,8 +792,12 @@
 
             
 
+            
+
              for a <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -691,6 +815,8 @@
 
                 
 
+                
+
                  to false.</para
               >
             </item>
@@ -698,6 +824,8 @@
               <para
                 >Set <see
                  cref="P:System.Diagnostics.ProcessStartInfo.RedirectStandardError" />
+
+                
 
                 
 
@@ -715,8 +843,12 @@
 
                 
 
+                
+
                  event. The event handler must match the <see
                  cref="T:System.Diagnostics.DataReceivedEventHandler" />
+
+                
 
                 
 
@@ -734,6 +866,8 @@
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -746,6 +880,8 @@
 
                 
 
+                
+
                  for the <see
                  cref="T:System.Diagnostics.Process" />
 
@@ -753,8 +889,12 @@
 
                 
 
+                
+
                 . This call starts asynchronous read operations on <see
                  cref="P:System.Diagnostics.Process.StandardError" />
+
+                
 
                 
 
@@ -772,8 +912,12 @@
 
             
 
+            
+
              writes a line of text to its <see
              cref="P:System.Diagnostics.Process.StandardError" />
+
+            
 
             
 
@@ -789,8 +933,12 @@
 
             
 
+            
+
             . The read operation can be canceled by the caller or by the event handler. After canceling, you can call <see
              cref="M:System.Diagnostics.Process.BeginErrorReadLine" />
+
+            
 
             
 
@@ -807,8 +955,12 @@
 
               
 
+              
+
                is opened in either asynchronous or synchronous mode, all further read operations on that stream must be in the same mode. For example, do not follow <see
                cref="M:System.Diagnostics.Process.BeginErrorReadLine" />
+
+              
 
               
 
@@ -821,8 +973,12 @@
 
               
 
+              
+
                on the <see
                cref="P:System.Diagnostics.Process.StandardError" />
+
+              
 
               
 
@@ -835,6 +991,8 @@
 
               
 
+              
+
                and then call <see
                cref="M:System.IO.StreamReader.ReadLine" />
 
@@ -842,8 +1000,12 @@
 
               
 
+              
+
                for the <see
                cref="P:System.Diagnostics.Process.StandardOutput" />
+
+              
 
               
 
@@ -858,6 +1020,8 @@
           <para
             >Begins asynchronous read operations on the redirected <see
              cref="P:System.Diagnostics.Process.StandardError" />
+
+            
 
             
 
@@ -899,8 +1063,12 @@
 
             
 
+            
+
              stream can be read synchronously or asynchronously. Methods such as <see
              cref="M:System.IO.StreamReader.Read" />
+
+            
 
             
 
@@ -913,8 +1081,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.IO.StreamReader.ReadToEnd" />
+
+            
 
             
 
@@ -927,8 +1099,12 @@
 
             
 
+            
+
              writes to its <see
              cref="P:System.Diagnostics.Process.StandardOutput" />
+
+            
 
             
 
@@ -944,8 +1120,12 @@
 
             
 
+            
+
              starts asynchronous read operations on the <see
              cref="P:System.Diagnostics.Process.StandardOutput" />
+
+            
 
             
 
@@ -961,8 +1141,12 @@
 
             
 
+            
+
              for a <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -980,6 +1164,8 @@
 
                 
 
+                
+
                  to false.</para
               >
             </item>
@@ -987,6 +1173,8 @@
               <para
                 >Set <see
                  cref="P:System.Diagnostics.ProcessStartInfo.RedirectStandardOutput" />
+
+                
 
                 
 
@@ -1004,8 +1192,12 @@
 
                 
 
+                
+
                  event. The event handler must match the <see
                  cref="T:System.Diagnostics.DataReceivedEventHandler" />
+
+                
 
                 
 
@@ -1023,6 +1215,8 @@
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -1035,6 +1229,8 @@
 
                 
 
+                
+
                  for the <see
                  cref="T:System.Diagnostics.Process" />
 
@@ -1042,8 +1238,12 @@
 
                 
 
+                
+
                 . This call starts asynchronous read operations on <see
                  cref="P:System.Diagnostics.Process.StandardOutput" />
+
+                
 
                 
 
@@ -1061,8 +1261,12 @@
 
             
 
+            
+
              writes a line of text to its <see
              cref="P:System.Diagnostics.Process.StandardOutput" />
+
+            
 
             
 
@@ -1078,8 +1282,12 @@
 
             
 
+            
+
             . The read operation can be canceled by the caller or by the event handler. After canceling, you can call <see
              cref="M:System.Diagnostics.Process.BeginOutputReadLine" />
+
+            
 
             
 
@@ -1096,8 +1304,12 @@
 
               
 
+              
+
                is opened in either asynchronous or synchronous mode, all further read operations on that stream must be in the same mode. For example, do not follow <see
                cref="M:System.Diagnostics.Process.BeginOutputReadLine" />
+
+              
 
               
 
@@ -1110,8 +1322,12 @@
 
               
 
+              
+
                on the <see
                cref="P:System.Diagnostics.Process.StandardOutput" />
+
+              
 
               
 
@@ -1124,6 +1340,8 @@
 
               
 
+              
+
                and then call <see
                cref="M:System.IO.StreamReader.ReadLine" />
 
@@ -1131,8 +1349,12 @@
 
               
 
+              
+
                for the <see
                cref="P:System.Diagnostics.Process.StandardError" />
+
+              
 
               
 
@@ -1147,6 +1369,8 @@
           <para
             >Begins asynchronous read operations on the redirected <see
              cref="P:System.Diagnostics.Process.StandardOutput" />
+
+            
 
             
 
@@ -1187,6 +1411,8 @@
 
             
 
+            
+
              starts an asynchronous read operation on the <see
              cref="P:System.Diagnostics.Process.StandardError" />
 
@@ -1194,8 +1420,12 @@
 
             
 
+            
+
              stream. <see
              cref="M:System.Diagnostics.Process.CancelErrorRead" />
+
+            
 
             
 
@@ -1211,11 +1441,15 @@
 
             
 
+            
+
              again.</para
           >
           <para
             >When you call <see
              cref="M:System.Diagnostics.Process.CancelErrorRead" />
+
+            
 
             
 
@@ -1228,6 +1462,8 @@
 
             
 
+            
+
              are completed and then the event handler is disabled. All further redirected output to <see
              cref="P:System.Diagnostics.Process.StandardError" />
 
@@ -1235,8 +1471,12 @@
 
             
 
+            
+
              is saved in a buffer. If you re-enable the event handler with a call to <see
              cref="M:System.Diagnostics.Process.BeginErrorReadLine" />
+
+            
 
             
 
@@ -1266,8 +1506,12 @@
 
               
 
+              
+
                stream. Once the redirected stream of a <see
                cref="T:System.Diagnostics.Process" />
+
+              
 
               
 
@@ -1280,8 +1524,12 @@
 
               
 
+              
+
                and then need to read from the stream again, you must use <see
                cref="M:System.Diagnostics.Process.BeginErrorReadLine" />
+
+              
 
               
 
@@ -1294,8 +1542,12 @@
 
               
 
+              
+
                with a call to the synchronous read methods of <see
                cref="P:System.Diagnostics.Process.StandardError" />
+
+              
 
               
 
@@ -1308,6 +1560,8 @@
 
               
 
+              
+
               , <see
                cref="M:System.IO.StreamReader.ReadLine" />
 
@@ -1315,8 +1569,12 @@
 
               
 
+              
+
               , or <see
                cref="M:System.IO.StreamReader.ReadToEnd" />
+
+              
 
               
 
@@ -1331,6 +1589,8 @@
           <para
             >Cancels the asynchronous read operation on the redirected <see
              cref="P:System.Diagnostics.Process.StandardError" />
+
+            
 
             
 
@@ -1371,6 +1631,8 @@
 
             
 
+            
+
              starts an asynchronous read operation on the <see
              cref="P:System.Diagnostics.Process.StandardOutput" />
 
@@ -1378,8 +1640,12 @@
 
             
 
+            
+
              stream. <see
              cref="M:System.Diagnostics.Process.CancelOutputRead" />
+
+            
 
             
 
@@ -1395,11 +1661,15 @@
 
             
 
+            
+
              again.</para
           >
           <para
             >When you call <see
              cref="M:System.Diagnostics.Process.CancelOutputRead" />
+
+            
 
             
 
@@ -1412,6 +1682,8 @@
 
             
 
+            
+
              are completed and then the event handler is disabled. All further redirected output to <see
              cref="P:System.Diagnostics.Process.StandardOutput" />
 
@@ -1419,8 +1691,12 @@
 
             
 
+            
+
              is saved in a buffer. If you re-enable the event handler with a call to <see
              cref="M:System.Diagnostics.Process.BeginOutputReadLine" />
+
+            
 
             
 
@@ -1450,8 +1726,12 @@
 
               
 
+              
+
                stream. Once the redirected stream of a <see
                cref="T:System.Diagnostics.Process" />
+
+              
 
               
 
@@ -1464,8 +1744,12 @@
 
               
 
+              
+
                and then need to read from the stream again, you must use <see
                cref="M:System.Diagnostics.Process.BeginOutputReadLine" />
+
+              
 
               
 
@@ -1478,8 +1762,12 @@
 
               
 
+              
+
                with a call to the synchronous read methods of <see
                cref="P:System.Diagnostics.Process.StandardOutput" />
+
+              
 
               
 
@@ -1492,6 +1780,8 @@
 
               
 
+              
+
               , <see
                cref="M:System.IO.StreamReader.ReadLine" />
 
@@ -1499,8 +1789,12 @@
 
               
 
+              
+
               , or <see
                cref="M:System.IO.StreamReader.ReadToEnd" />
+
+              
 
               
 
@@ -1515,6 +1809,8 @@
           <para
             >Cancels the asynchronous read operation on the redirected <see
              cref="P:System.Diagnostics.Process.StandardOutput" />
+
+            
 
             
 
@@ -1552,8 +1848,12 @@
 
             
 
+            
+
              method causes the process to stop waiting for exit if it was waiting, closes the process handle, and clears process-specific properties. <see
              cref="M:System.Diagnostics.Process.Close" />
+
+            
 
             
 
@@ -1570,8 +1870,12 @@
 
               
 
+              
+
                method calls <see
                cref="M:System.Diagnostics.Process.Close" />
+
+              
 
               
 
@@ -1584,8 +1888,12 @@
 
               
 
+              
+
                object in a using block disposes of resources without the need to call <see
                cref="M:System.Diagnostics.Process.Close" />
+
+              
 
               
 
@@ -1628,8 +1936,12 @@
 
             
 
+            
+
              sends a request to close to the main window, which, in a well-formed application, closes child windows and revokes all running message loops for the application. The request to exit the process by calling <see
              cref="M:System.Diagnostics.Process.CloseMainWindow" />
+
+            
 
             
 
@@ -1642,8 +1954,12 @@
 
             
 
+            
+
              method. The behavior of <see
              cref="M:System.Diagnostics.Process.CloseMainWindow" />
+
+            
 
             
 
@@ -1659,8 +1975,12 @@
 
             
 
+            
+
             . <see
              cref="M:System.Diagnostics.Process.Kill" />
+
+            
 
             
 
@@ -1673,8 +1993,12 @@
 
             
 
+            
+
              enables an orderly termination of the process and closes all windows, so it is preferable for applications with an interface. If <see
              cref="M:System.Diagnostics.Process.CloseMainWindow" />
+
+            
 
             
 
@@ -1687,8 +2011,12 @@
 
             
 
+            
+
              to terminate the process. <see
              cref="M:System.Diagnostics.Process.Kill" />
+
+            
 
             
 
@@ -1704,8 +2032,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Diagnostics.Process.CloseMainWindow" />
+
+            
 
             
 
@@ -1755,6 +2087,8 @@
 
           
 
+          
+
           true to release both managed and unmanaged resources; false to release only unmanaged resources. </param
         >
       </Docs>
@@ -1795,6 +2129,8 @@
 
             
 
+            
+
              property indicates whether the component should be notified when the operating system has shut down a process. The <see
              cref="P:System.Diagnostics.Process.EnableRaisingEvents" />
 
@@ -1802,8 +2138,12 @@
 
             
 
+            
+
              property is used in asynchronous processing to notify your application that a process has exited. To force your application to synchronously wait for an exit event (which interrupts processing of the application until the exit event has occurred), use the <see
              cref="M:System.Diagnostics.Process.WaitForExit(System.Int32)" />
+
+            
 
             
 
@@ -1820,6 +2160,8 @@
 
               
 
+              
+
                component in your project, an <see
                cref="E:System.Diagnostics.Process.Exited" />
 
@@ -1827,8 +2169,12 @@
 
               
 
+              
+
                event delegate and event handler are automatically generated. Additional code sets the <see
                cref="P:System.Diagnostics.Process.EnableRaisingEvents" />
+
+              
 
               
 
@@ -1845,6 +2191,8 @@
 
             
 
+            
+
              value is true. If a component started the process, the component can then access the administrative information for the associated process, which is still being stored by the operating system. Such information includes the <see
              cref="P:System.Diagnostics.Process.ExitTime" />
 
@@ -1852,8 +2200,12 @@
 
             
 
+            
+
             , and the <see
              cref="P:System.Diagnostics.Process.ExitCode" />
+
+            
 
             
 
@@ -1869,8 +2221,12 @@
 
             
 
+            
+
              of the component no longer points to an existing process resource. Instead, it can be used only to access the operating system's information about the process resource. The operating system is aware that there are handles to exited processes that have not been released by <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -1883,8 +2239,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Diagnostics.Process.Handle" />
+
+            
 
             
 
@@ -1900,6 +2260,8 @@
 
             
 
+            
+
              is true, the <see
              cref="E:System.Diagnostics.Process.Exited" />
 
@@ -1907,8 +2269,12 @@
 
             
 
+            
+
              event is raised when the associated process terminates. The procedures that you have specified for the <see
              cref="E:System.Diagnostics.Process.Exited" />
+
+            
 
             
 
@@ -1924,6 +2290,8 @@
 
             
 
+            
+
              to false saves system resources.</para
           >
         </remarks>
@@ -1932,6 +2300,8 @@
           <para
             >Gets or sets whether the <see
              cref="E:System.Diagnostics.Process.Exited" />
+
+            
 
             
 
@@ -1974,8 +2344,12 @@
 
             
 
+            
+
              on the component. Call <see
              cref="M:System.Diagnostics.Process.LeaveDebugMode" />
+
+            
 
             
 
@@ -1989,6 +2363,8 @@
           <para
             >Puts a <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -2035,8 +2411,12 @@
 
             
 
+            
+
              event indicates that the associated process has written to its redirected <see
              cref="P:System.Diagnostics.Process.StandardError" />
+
+            
 
             
 
@@ -2052,8 +2432,12 @@
 
             
 
+            
+
             . To start asynchronous read operations, you must redirect the <see
              cref="P:System.Diagnostics.Process.StandardError" />
+
+            
 
             
 
@@ -2066,8 +2450,12 @@
 
             
 
+            
+
             , add your event handler to the <see
              cref="E:System.Diagnostics.Process.ErrorDataReceived" />
+
+            
 
             
 
@@ -2080,8 +2468,12 @@
 
             
 
+            
+
             . Thereafter, the <see
              cref="E:System.Diagnostics.Process.ErrorDataReceived" />
+
+            
 
             
 
@@ -2094,8 +2486,12 @@
 
             
 
+            
+
              stream, until the process exits or calls <see
              cref="M:System.Diagnostics.Process.CancelErrorRead" />
+
+            
 
             
 
@@ -2112,6 +2508,8 @@
 
               
 
+              
+
                method to ensure that the output buffer has been flushed.</para
             >
           </block>
@@ -2121,6 +2519,8 @@
           <para
             >Occurs when an application writes to its redirected <see
              cref="P:System.Diagnostics.Process.StandardError" />
+
+            
 
             
 
@@ -2166,11 +2566,15 @@
 
             
 
+            
+
              to get the status that the system process returned when it exited. You can use the exit code much like an integer return value from a main() procedure. </para
           >
           <para
             >The <see
              cref="P:System.Diagnostics.Process.ExitCode" />
+
+            
 
             
 
@@ -2186,6 +2590,8 @@
 
             
 
+            
+
              value of zero, and designate errors by nonzero values that the calling method can use to identify the cause of an abnormal process termination. It is not necessary to follow these guidelines, but they are the convention.</para
           >
           <para
@@ -2196,8 +2602,12 @@
 
             
 
+            
+
              before the process has exited, the attempt throws an exception. Examine the <see
              cref="P:System.Diagnostics.Process.HasExited" />
+
+            
 
             
 
@@ -2214,6 +2624,8 @@
 
               
 
+              
+
                returns true. To ensure that asynchronous event handling has been completed, call the <see
                cref="M:System.Diagnostics.Process.WaitForExit" />
 
@@ -2221,8 +2633,12 @@
 
               
 
+              
+
                overload that takes no parameter before checking <see
                cref="P:System.Diagnostics.Process.HasExited" />
+
+              
 
               
 
@@ -2239,8 +2655,12 @@
 
             
 
+            
+
              or the <see
              cref="M:System.Diagnostics.Process.Kill" />
+
+            
 
             
 
@@ -2256,8 +2676,12 @@
 
             
 
+            
+
              method to pause the processing of your application until the associated component exits. Asynchronous notification relies on the <see
              cref="E:System.Diagnostics.Process.Exited" />
+
+            
 
             
 
@@ -2270,8 +2694,12 @@
 
             
 
+            
+
              must be set to true for the <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -2318,8 +2746,12 @@
 
             
 
+            
+
              event indicates that the associated process exited. This occurrence means either that the process terminated (aborted) or successfully closed. This event can occur only if the value of the <see
              cref="P:System.Diagnostics.Process.EnableRaisingEvents" />
+
+            
 
             
 
@@ -2335,8 +2767,12 @@
 
             
 
+            
+
              method to pause the processing of your application until the associated component exits. Asynchronous notification relies on the <see
              cref="E:System.Diagnostics.Process.Exited" />
+
+            
 
             
 
@@ -2349,8 +2785,12 @@
 
             
 
+            
+
              must be set to true for the <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -2366,11 +2806,15 @@
 
             
 
+            
+
              property) by using the handle that it has to the process.</para
           >
           <para
             >Because the associated process has exited, the <see
              cref="P:System.Diagnostics.Process.Handle" />
+
+            
 
             
 
@@ -2383,8 +2827,12 @@
 
             
 
+            
+
              components, so it keeps the <see
              cref="P:System.Diagnostics.Process.ExitTime" />
+
+            
 
             
 
@@ -2397,8 +2845,12 @@
 
             
 
+            
+
              property information in memory until the <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -2415,6 +2867,8 @@
 
               
 
+              
+
                again to reconnect to the same process. Calling <see
                cref="M:System.Diagnostics.Process.Start" />
 
@@ -2422,8 +2876,12 @@
 
               
 
+              
+
                automatically releases the associated process and connects to a process with the same file but an entirely new <see
                cref="P:System.Diagnostics.Process.Handle" />
+
+              
 
               
 
@@ -2440,8 +2898,12 @@
 
             
 
+            
+
              event in Windows Forms applications, see the <see
              cref="P:System.Diagnostics.Process.SynchronizingObject" />
+
+            
 
             
 
@@ -2494,6 +2956,8 @@
 
             
 
+            
+
              property throws an exception. Use <see
              cref="P:System.Diagnostics.Process.HasExited" />
 
@@ -2501,8 +2965,12 @@
 
             
 
+            
+
              before getting the <see
              cref="P:System.Diagnostics.Process.ExitTime" />
+
+            
 
             
 
@@ -2568,11 +3036,15 @@
 
             
 
+            
+
              instance and associate it with the process resource on the local computer.</para
           >
           <para
             >Like the similar <see
              cref="M:System.Diagnostics.Process.GetProcessById(System.Int32,System.String)" />
+
+            
 
             
 
@@ -2585,8 +3057,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Diagnostics.Process.GetProcesses" />
+
+            
 
             
 
@@ -2599,8 +3075,12 @@
 
             
 
+            
+
              associates an existing resource with a new <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -2619,6 +3099,8 @@
 
             
 
+            
+
              component and associates it with the currently active process.</para
           >
         </summary>
@@ -2627,6 +3109,8 @@
           <para
             >A new <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -2669,8 +3153,12 @@
 
             
 
+            
+
              component and associate it with a process resource on the local computer. The process resource must already exist on the computer, because <see
              cref="M:System.Diagnostics.Process.GetProcessById(System.Int32)" />
+
+            
 
             
 
@@ -2683,6 +3171,8 @@
 
             
 
+            
+
              component. A process <see
              cref="P:System.Diagnostics.Process.Id" />
 
@@ -2690,8 +3180,12 @@
 
             
 
+            
+
              can be retrieved only for a process that is currently running on the computer. After the process terminates, <see
              cref="M:System.Diagnostics.Process.GetProcessById(System.Int32)" />
+
+            
 
             
 
@@ -2707,6 +3201,8 @@
 
             
 
+            
+
              returns one process at most. If you want to get all the processes running a particular application, use <see
              cref="M:System.Diagnostics.Process.GetProcessesByName(System.String)" />
 
@@ -2714,8 +3210,12 @@
 
             
 
+            
+
             . If multiple processes exist on the computer running the specified application, <see
              cref="M:System.Diagnostics.Process.GetProcessesByName(System.String)" />
+
+            
 
             
 
@@ -2734,6 +3234,8 @@
 
             
 
+            
+
              component, given the identifier of a process on the local computer.</para
           >
         </summary>
@@ -2747,8 +3249,12 @@
 
             
 
+            
+
              component that is associated with the local process resource identified by the <paramref
              name="processId" />
+
+            
 
             
 
@@ -2759,6 +3265,8 @@
         </returns>
         <param name="processId">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2806,8 +3314,12 @@
 
             
 
+            
+
              component and associate it with a process resource on a remote computer on the network. The process resource must already exist on the specified computer, because <see
              cref="M:System.Diagnostics.Process.GetProcessById(System.Int32,System.String)" />
+
+            
 
             
 
@@ -2820,6 +3332,8 @@
 
             
 
+            
+
              component. A process <see
              cref="P:System.Diagnostics.Process.Id" />
 
@@ -2827,8 +3341,12 @@
 
             
 
+            
+
              can be retrieved only for a process that is currently running on the computer. After the process terminates, <see
              cref="M:System.Diagnostics.Process.GetProcessById(System.Int32,System.String)" />
+
+            
 
             
 
@@ -2844,6 +3362,8 @@
 
             
 
+            
+
              returns one process at most. If you want to get all the processes running a particular application, use <see
              cref="M:System.Diagnostics.Process.GetProcessesByName(System.String)" />
 
@@ -2851,8 +3371,12 @@
 
             
 
+            
+
             . If multiple processes exist on the computer running the specified application, <see
              cref="M:System.Diagnostics.Process.GetProcessesByName(System.String)" />
+
+            
 
             
 
@@ -2868,8 +3392,12 @@
 
             
 
+            
+
             , the local computer is used. Alternatively, you can specify the local computer by setting <paramref
              name="machineName" />
+
+            
 
             
 
@@ -2888,6 +3416,8 @@
 
             
 
+            
+
              component, given a process identifier and the name of a computer on the network.</para
           >
         </summary>
@@ -2901,8 +3431,12 @@
 
             
 
+            
+
              component that is associated with a remote process resource identified by the <paramref
              name="processId" />
+
+            
 
             
 
@@ -2918,10 +3452,14 @@
 
           
 
+          
+
           The system-unique identifier of a process resource. </param
         >
         <param name="machineName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2961,6 +3499,8 @@
 
             
 
+            
+
              components and associate them with all the process resources on the local computer. The process resources must already exist on the local computer, because <see
              cref="M:System.Diagnostics.Process.GetProcesses" />
 
@@ -2968,8 +3508,12 @@
 
             
 
+            
+
              does not create system resources but rather associates resources with application-generated <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -2985,8 +3529,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Diagnostics.Process.GetProcessesByName(System.String)" />
+
+            
 
             
 
@@ -2999,8 +3547,12 @@
 
             
 
+            
+
              creates a <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -3013,8 +3565,12 @@
 
             
 
+            
+
              creates an array of <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -3033,6 +3589,8 @@
 
             
 
+            
+
              component for each process resource on the local computer.</para
           >
         </summary>
@@ -3041,6 +3599,8 @@
           <para
             >An array of type <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -3088,6 +3648,8 @@
 
             
 
+            
+
              components and associate them with all the process resources on the specified (usually remote) computer. The process resources must already exist on the local computer, because <see
              cref="M:System.Diagnostics.Process.GetProcesses" />
 
@@ -3095,8 +3657,12 @@
 
             
 
+            
+
              does not create system resources but rather associates resources with application-generated <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -3112,8 +3678,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Diagnostics.Process.GetProcessesByName(System.String)" />
+
+            
 
             
 
@@ -3126,8 +3696,12 @@
 
             
 
+            
+
              creates a <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -3140,8 +3714,12 @@
 
             
 
+            
+
              creates an array of <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -3152,6 +3730,8 @@
           <para
             >This overload of the <see
              cref="M:System.Diagnostics.Process.GetProcesses" />
+
+            
 
             
 
@@ -3170,6 +3750,8 @@
 
             
 
+            
+
              component for each process resource on the specified computer.</para
           >
         </summary>
@@ -3183,11 +3765,15 @@
 
             
 
+            
+
              that represents all the process resources running on the specified computer.</para
           >
         </returns>
         <param name="machineName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3229,8 +3815,12 @@
 
             
 
+            
+
              components and associate them with all the process resources that are running the same executable file on the local computer. The process resources must already exist on the computer, because <see
              cref="M:System.Diagnostics.Process.GetProcessesByName(System.String)" />
+
+            
 
             
 
@@ -3243,8 +3833,12 @@
 
             
 
+            
+
              components. A <paramref
              name="processName" />
+
+            
 
             
 
@@ -3260,8 +3854,12 @@
 
             
 
+            
+
              is helpful for getting and manipulating all the processes that are associated with the same executable file. For example, you can pass an executable file name as the <paramref
              name="processName" />
+
+            
 
             
 
@@ -3277,8 +3875,12 @@
 
             
 
+            
+
              is unique to a single process resource on the system, multiple processes on the local computer can be running the application specified by the <paramref
              name="processName" />
+
+            
 
             
 
@@ -3291,6 +3893,8 @@
 
             
 
+            
+
              returns one process at most, but <see
              cref="M:System.Diagnostics.Process.GetProcessesByName(System.String)" />
 
@@ -3298,8 +3902,12 @@
 
             
 
+            
+
              returns an array containing all the associated processes. If you need to manipulate the process using standard API calls, you can query each of these processes in turn for its identifier. You cannot access process resources through the process name alone but, once you have retrieved an array of <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -3318,6 +3926,8 @@
 
             
 
+            
+
              components and associates them with all the process resources on the local computer that share the specified process name.</para
           >
         </summary>
@@ -3331,11 +3941,15 @@
 
             
 
+            
+
              that represents the process resources running the specified application or file.</para
           >
         </returns>
         <param name="processName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3383,8 +3997,12 @@
 
             
 
+            
+
              components and associate them with all the process resources that are running the same executable file on the specified computer. The process resources must already exist on the computer, because <see
              cref="M:System.Diagnostics.Process.GetProcessesByName(System.String)" />
+
+            
 
             
 
@@ -3397,8 +4015,12 @@
 
             
 
+            
+
              components. A <paramref
              name="processName" />
+
+            
 
             
 
@@ -3414,8 +4036,12 @@
 
             
 
+            
+
              is helpful for getting and manipulating all the processes that are associated with the same executable file. For example, you can pass an executable file name as the <paramref
              name="processName" />
+
+            
 
             
 
@@ -3431,8 +4057,12 @@
 
             
 
+            
+
              is unique to a single process resource on the system, multiple processes on the local computer can be running the application specified by the <paramref
              name="processName" />
+
+            
 
             
 
@@ -3445,8 +4075,12 @@
 
             
 
+            
+
              returns one process at most, but <see
              cref="M:System.Diagnostics.Process.GetProcessesByName(System.String)" />
+
+            
 
             
 
@@ -3459,12 +4093,16 @@
 
             
 
+            
+
              components that have been associated with the process resources, you can start, terminate, and otherwise manipulate the system resources.</para
           >
           <para>You can use this overload to get processes on the local computer as well as on a remote computer. Use "." to specify the local computer. Another overload exists that uses the local computer by default.</para>
           <para
             >You can access processes on remote computers only to view information, such as statistics, about the processes. You cannot close, terminate (using <see
              cref="M:System.Diagnostics.Process.Kill" />
+
+            
 
             
 
@@ -3483,6 +4121,8 @@
 
             
 
+            
+
              components and associates them with all the process resources on a remote computer that share the specified process name.</para
           >
         </summary>
@@ -3491,6 +4131,8 @@
           <para
             >An array of type <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -3506,10 +4148,14 @@
 
           
 
+          
+
           The friendly name of the process. </param
         >
         <param name="machineName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3554,6 +4200,8 @@
 
             
 
+            
+
              or to call native methods with platform invoke.</para
           >
           <para
@@ -3564,8 +4212,12 @@
 
             
 
+            
+
              which, unlike the <see
              cref="P:System.Diagnostics.Process.Handle" />
+
+            
 
             
 
@@ -3581,6 +4233,8 @@
 
             
 
+            
+
              set the <see
              cref="P:System.Diagnostics.Process.Handle" />
 
@@ -3588,8 +4242,12 @@
 
             
 
+            
+
              property of the corresponding <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -3674,8 +4332,12 @@
 
             
 
+            
+
              indicates that the associated process has terminated, either normally or abnormally. You can request or force the associated process to exit by calling <see
              cref="M:System.Diagnostics.Process.CloseMainWindow" />
+
+            
 
             
 
@@ -3688,8 +4350,12 @@
 
             
 
+            
+
             . If a handle is open to the process, the operating system releases the process memory when the process has exited, but retains administrative information about the process, such as the handle, exit code, and exit time. To get this information, you can use the <see
              cref="P:System.Diagnostics.Process.ExitCode" />
+
+            
 
             
 
@@ -3702,8 +4368,12 @@
 
             
 
+            
+
              properties. These properties are populated automatically for processes that were started by this component. The administrative information is released when all the <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -3714,6 +4384,8 @@
           <para
             >A process can terminate independently of your code. If you started the process using this component, the system updates the value of <see
              cref="P:System.Diagnostics.Process.HasExited" />
+
+            
 
             
 
@@ -3730,8 +4402,12 @@
 
               
 
+              
+
                overload that takes no parameter before checking <see
                cref="P:System.Diagnostics.Process.HasExited" />
+
+              
 
               
 
@@ -3779,8 +4455,12 @@
 
             
 
+            
+
              is not valid if the associated process is not running. Therefore, you should ensure that the process is running before attempting to retrieve the <see
              cref="P:System.Diagnostics.Process.Id" />
+
+            
 
             
 
@@ -3796,8 +4476,12 @@
 
             
 
+            
+
              instance by passing the process identifier to the <see
              cref="M:System.Diagnostics.Process.GetProcessById(System.Int32,System.String)" />
+
+            
 
             
 
@@ -3810,6 +4494,8 @@
 
             
 
+            
+
              is a static method that creates a new component and sets the <see
              cref="P:System.Diagnostics.Process.Id" />
 
@@ -3817,8 +4503,12 @@
 
             
 
+            
+
              property for the new <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -3834,8 +4524,12 @@
 
             
 
+            
+
              property value is unique only while the associated process is running. After the process has terminated, the system can reuse the <see
              cref="P:System.Diagnostics.Process.Id" />
+
+            
 
             
 
@@ -3846,6 +4540,8 @@
           <para
             >Because the identifier is unique on the system, you can pass it to other threads as an alternative to passing a <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -3886,8 +4582,12 @@
 
             
 
+            
+
              forces a termination of the process, while <see
              cref="M:System.Diagnostics.Process.CloseMainWindow" />
+
+            
 
             
 
@@ -3900,8 +4600,12 @@
 
             
 
+            
+
              sends a request to close to the main window, which, in a well-formed application, closes child windows and revokes all running message loops for the application. The request to exit the process by calling <see
              cref="M:System.Diagnostics.Process.CloseMainWindow" />
+
+            
 
             
 
@@ -3914,8 +4618,12 @@
 
             
 
+            
+
              method. The behavior of <see
              cref="M:System.Diagnostics.Process.CloseMainWindow" />
+
+            
 
             
 
@@ -3932,8 +4640,12 @@
 
               
 
+              
+
                method executes asynchronously. After calling the <see
                cref="M:System.Diagnostics.Process.Kill" />
+
+              
 
               
 
@@ -3946,8 +4658,12 @@
 
               
 
+              
+
                method to wait for the process to exit, or check the <see
                cref="P:System.Diagnostics.Process.HasExited" />
+
+              
 
               
 
@@ -3964,8 +4680,12 @@
 
             
 
+            
+
             . <see
              cref="M:System.Diagnostics.Process.Kill" />
+
+            
 
             
 
@@ -3978,8 +4698,12 @@
 
             
 
+            
+
              enables an orderly termination of the process and closes all windows, so it is preferable for applications with an interface. If <see
              cref="M:System.Diagnostics.Process.CloseMainWindow" />
+
+            
 
             
 
@@ -3992,8 +4716,12 @@
 
             
 
+            
+
              to terminate the process. <see
              cref="M:System.Diagnostics.Process.Kill" />
+
+            
 
             
 
@@ -4009,8 +4737,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Diagnostics.Process.CloseMainWindow" />
+
+            
 
             
 
@@ -4027,8 +4759,12 @@
 
               
 
+              
+
                method is made while the process is currently terminating, a <see
                cref="T:System.ComponentModel.Win32Exception" />
+
+              
 
               
 
@@ -4076,8 +4812,12 @@
 
             
 
+            
+
              on the component. Call <see
              cref="M:System.Diagnostics.Process.LeaveDebugMode" />
+
+            
 
             
 
@@ -4091,6 +4831,8 @@
           <para
             >Takes a <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -4139,8 +4881,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Diagnostics.Process.CloseMainWindow" />
+
+            
 
             
 
@@ -4153,12 +4899,16 @@
 
             
 
+            
+
              on remote computers.</para
           >
           <block subset="none" type="note">
             <para
               >When the associated process is executing on the local machine, this property returns a period (".") for the machine name. You should use the <see
                cref="P:System.Environment.MachineName" />
+
+              
 
               
 
@@ -4215,6 +4965,8 @@
 
             
 
+            
+
              property lets you view information about the executable used to start the process, including the module name, file name, and module memory details.</para
           >
         </remarks>
@@ -4259,6 +5011,8 @@
 
             
 
+            
+
              form). You must use the <see
              cref="M:System.Diagnostics.Process.Refresh" />
 
@@ -4266,8 +5020,12 @@
 
             
 
+            
+
              method to refresh the <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -4283,8 +5041,12 @@
 
             
 
+            
+
              property only for processes that are running on the local computer. The <see
              cref="P:System.Diagnostics.Process.MainWindowHandle" />
+
+            
 
             
 
@@ -4300,11 +5062,15 @@
 
             
 
+            
+
              value is zero. The value is also zero for processes that have been hidden, that is, processes that are not visible in the taskbar. This can be the case for processes that appear as icons in the notification area, at the far right of the taskbar. </para
           >
           <para
             >If you have just started a process and want to use its main window handle, consider using the <see
              cref="M:System.Diagnostics.Process.WaitForInputIdle(System.Int32)" />
+
+            
 
             
 
@@ -4354,6 +5120,8 @@
 
             
 
+            
+
              is zero), <see
              cref="P:System.Diagnostics.Process.MainWindowTitle" />
 
@@ -4361,8 +5129,12 @@
 
             
 
+            
+
              is an empty string (""). If you have just started a process and want to use its main window title, consider using the <see
              cref="M:System.Diagnostics.Process.WaitForInputIdle(System.Int32)" />
+
+            
 
             
 
@@ -4379,8 +5151,12 @@
 
               
 
+              
+
                method to refresh the <see
                cref="T:System.Diagnostics.Process" />
+
+              
 
               
 
@@ -4432,8 +5208,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Diagnostics.Process.MinWorkingSet" />
+
+            
 
             
 
@@ -4487,8 +5267,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Diagnostics.Process.MinWorkingSet" />
+
+            
 
             
 
@@ -4547,12 +5331,16 @@
 
             
 
+            
+
              instance lets you view information about a module, including the module name, file name, and module memory details.</para
           >
           <para>A process can load multiple modules into memory. For example,.exe files that load additional .dll files have multiple modules.</para>
           <para
             >After starting the process, this collection is empty until the system has loaded the process. If the process has a main window, you can call <see
              cref="M:System.Diagnostics.Process.WaitForInputIdle(System.Int32)" />
+
+            
 
             
 
@@ -4643,6 +5431,8 @@
 
             
 
+            
+
              performance counter for the process. </para
           >
         </remarks>
@@ -4678,8 +5468,12 @@
 
             
 
+            
+
              is the API method that raises the <see
              cref="E:System.Diagnostics.Process.Exited" />
+
+            
 
             
 
@@ -4692,8 +5486,12 @@
 
             
 
+            
+
              causes the <see
              cref="E:System.Diagnostics.Process.Exited" />
+
+            
 
             
 
@@ -4706,8 +5504,12 @@
 
             
 
+            
+
              component. <see
              cref="M:System.Diagnostics.Process.OnExited" />
+
+            
 
             
 
@@ -4718,6 +5520,8 @@
           <para
             >As an alternative to <see
              cref="M:System.Diagnostics.Process.OnExited" />
+
+            
 
             
 
@@ -4734,6 +5538,8 @@
 
               
 
+              
+
                component onto a form and double-click the icon. The code you create to run when the <see
                cref="E:System.Diagnostics.Process.Exited" />
 
@@ -4741,8 +5547,12 @@
 
               
 
+              
+
                event occurs is entered into the Process1_Exited procedure. You do not need to create the <see
                cref="M:System.Diagnostics.Process.OnExited" />
+
+              
 
               
 
@@ -4763,6 +5573,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4771,6 +5583,8 @@
           <para
             >Raises the <see
              cref="E:System.Diagnostics.Process.Exited" />
+
+            
 
             
 
@@ -4817,6 +5631,8 @@
 
             
 
+            
+
              event indicates that the associated <see
              cref="T:System.Diagnostics.Process" />
 
@@ -4824,8 +5640,12 @@
 
             
 
+            
+
              has written to its redirected <see
              cref="P:System.Diagnostics.Process.StandardOutput" />
+
+            
 
             
 
@@ -4841,8 +5661,12 @@
 
             
 
+            
+
             . To start asynchronous read operations, you must redirect the <see
              cref="P:System.Diagnostics.Process.StandardOutput" />
+
+            
 
             
 
@@ -4855,8 +5679,12 @@
 
             
 
+            
+
             , add your event handler to the <see
              cref="E:System.Diagnostics.Process.OutputDataReceived" />
+
+            
 
             
 
@@ -4869,8 +5697,12 @@
 
             
 
+            
+
             . Thereafter, the <see
              cref="E:System.Diagnostics.Process.OutputDataReceived" />
+
+            
 
             
 
@@ -4883,8 +5715,12 @@
 
             
 
+            
+
              stream, until the process exits or calls <see
              cref="M:System.Diagnostics.Process.CancelOutputRead" />
+
+            
 
             
 
@@ -4901,6 +5737,8 @@
 
               
 
+              
+
                method to ensure that the output buffer has been flushed.</para
             >
           </block>
@@ -4910,6 +5748,8 @@
           <para
             >Occurs when an application writes to its redirected <see
              cref="P:System.Diagnostics.Process.StandardOutput" />
+
+            
 
             
 
@@ -4992,11 +5832,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >This property can be used to monitor memory usage on computers with 32-bit processors or 64-bit processors. The property value is equivalent to the <ui
             >Page File Bytes</ui>
+
+            
 
             
 
@@ -5083,11 +5927,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >This property can be used to monitor memory usage on computers with 32-bit processors or 64-bit processors. The property value is equivalent to the <ui
             >Pool Paged Bytes</ui>
+
+            
 
             
 
@@ -5175,6 +6023,8 @@
 
             
 
+            
+
              performance counter for the process. </para
           >
         </remarks>
@@ -5246,6 +6096,8 @@
           <para
             >This property can be used to monitor memory usage on computers with 32-bit processors or 64-bit processors. The property value is equivalent to the <ui
             >Virtual Bytes Peak</ui>
+
+            
 
             
 
@@ -5332,6 +6184,8 @@
 
             
 
+            
+
              performance counter for the process. </para
           >
         </remarks>
@@ -5377,8 +6231,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Diagnostics.ProcessPriorityClass.High" />
+
+            
 
             
 
@@ -5391,6 +6249,8 @@
 
             
 
+            
+
             ), the system temporarily boosts the thread's priority when it is taken out of a wait state. This action prevents other processes from interrupting the processing of the current thread. The <see
              cref="P:System.Diagnostics.Process.PriorityBoostEnabled" />
 
@@ -5398,8 +6258,12 @@
 
             
 
+            
+
              setting affects all the existing threads and any threads subsequently created by the process. To restore normal behavior, set the <see
              cref="P:System.Diagnostics.Process.PriorityBoostEnabled" />
+
+            
 
             
 
@@ -5459,8 +6323,12 @@
 
             
 
+            
+
              enumeration, which lets you set the process priority to <see
              cref="F:System.Diagnostics.ProcessPriorityClass.Idle" />
+
+            
 
             
 
@@ -5473,8 +6341,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Diagnostics.ProcessPriorityClass.High" />
+
+            
 
             
 
@@ -5487,8 +6359,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Diagnostics.ProcessPriorityClass.BelowNormal" />
+
+            
 
             
 
@@ -5501,8 +6377,12 @@
 
             
 
+            
+
             . Based on the time elapsed or other boosts, the base priority level can be changed by the operating system when a process needs to be put ahead of others for access to the processor. In addition, you can set the <see
              cref="P:System.Diagnostics.Process.PriorityBoostEnabled" />
+
+            
 
             
 
@@ -5518,6 +6398,8 @@
 
             
 
+            
+
              property lets you view the starting priority that is assigned to a process. However, because it is read-only, you cannot use the <see
              cref="P:System.Diagnostics.Process.BasePriority" />
 
@@ -5525,8 +6407,12 @@
 
             
 
+            
+
              property to set the priority of a process. To change the priority, use the <see
              cref="P:System.Diagnostics.Process.PriorityClass" />
+
+            
 
             
 
@@ -5542,8 +6428,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Diagnostics.Process.PriorityClass" />
+
+            
 
             
 
@@ -5677,6 +6567,8 @@
 
             
 
+            
+
              performance counter for the process. </para
           >
         </remarks>
@@ -5750,6 +6642,8 @@
 
             
 
+            
+
              property holds an executable file name, such as Outlook, that does not include the .exe extension or the path. It is helpful for getting and manipulating all the processes that are associated with the same executable file.</para
           >
           <block subset="none" type="note">
@@ -5761,12 +6655,16 @@
 
               
 
+              
+
                property may be truncated to 15 characters if the process module information cannot be obtained.</para
             >
           </block>
           <para
             >You can call <see
              cref="M:System.Diagnostics.Process.GetProcessesByName(System.String)" />
+
+            
 
             
 
@@ -5818,8 +6716,12 @@
 
             
 
+            
+
              value to zero, the operating system's scheduling algorithms set the thread's affinity. When the <see
              cref="P:System.Diagnostics.Process.ProcessorAffinity" />
+
+            
 
             
 
@@ -5830,6 +6732,8 @@
           <para
             >The following table shows a selection of <see
              cref="P:System.Diagnostics.Process.ProcessorAffinity" />
+
+            
 
             
 
@@ -5941,11 +6845,15 @@
 
             
 
+            
+
              is called, the first request for information about each property causes the process component to obtain a new value from the associated process.</para
           >
           <para
             >When a <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -5958,8 +6866,12 @@
 
             
 
+            
+
              are immediately populated according to the status of the associated process. If the information about the associated process subsequently changes, those changes are not reflected in the <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -5972,8 +6884,12 @@
 
             
 
+            
+
              component is a snapshot of the process resource at the time they are associated. To view the current values for the associated process, call the <see
              cref="M:System.Diagnostics.Process.Refresh" />
+
+            
 
             
 
@@ -6023,8 +6939,12 @@
 
             
 
+            
+
              property contacts the user interface to determine whether the process is responding to user input. If the interface does not respond immediately, the <see
              cref="P:System.Diagnostics.Process.Responding" />
+
+            
 
             
 
@@ -6035,6 +6955,8 @@
           <para
             >If the process does not have a <see
              cref="P:System.Diagnostics.Process.MainWindowHandle" />
+
+            
 
             
 
@@ -6078,6 +7000,8 @@
           <para
             >The <see
              cref="P:System.Diagnostics.Process.SessionId" />
+
+            
 
             
 
@@ -6130,8 +7054,12 @@
 
             
 
+            
+
              writes text to its standard error stream, that text is normally displayed on the console. By redirecting the <see
              cref="P:System.Diagnostics.Process.StandardError" />
+
+            
 
             
 
@@ -6148,8 +7076,12 @@
 
               
 
+              
+
               , you must set <see
                cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+
+              
 
               
 
@@ -6162,8 +7094,12 @@
 
               
 
+              
+
                to true. Otherwise, reading from the <see
                cref="P:System.Diagnostics.Process.StandardError" />
+
+              
 
               
 
@@ -6180,8 +7116,12 @@
 
             
 
+            
+
              stream can be read synchronously or asynchronously. Methods such as <see
              cref="M:System.IO.StreamReader.Read" />
+
+            
 
             
 
@@ -6194,8 +7134,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.IO.StreamReader.ReadToEnd" />
+
+            
 
             
 
@@ -6208,8 +7152,12 @@
 
             
 
+            
+
              writes to its <see
              cref="P:System.Diagnostics.Process.StandardError" />
+
+            
 
             
 
@@ -6225,8 +7173,12 @@
 
             
 
+            
+
              starts asynchronous read operations on the <see
              cref="P:System.Diagnostics.Process.StandardError" />
+
+            
 
             
 
@@ -6237,6 +7189,8 @@
           <para
             >Synchronous read operations introduce a dependency between the caller reading from the <see
              cref="P:System.Diagnostics.Process.StandardError" />
+
+            
 
             
 
@@ -6266,6 +7220,8 @@
 
             
 
+            
+
              stream.</para
           >
           <para>There is a similar issue when you read all text from both the standard output and standard error streams. The following C# code, for example, performs a read operation on both streams.</para>
@@ -6286,6 +7242,8 @@
 
             
 
+            
+
              stream. A deadlock condition results if the parent process calls p.StandardOutput.ReadToEnd followed by p.StandardError.ReadToEnd and the child process writes enough text to fill its error stream. The parent process would wait indefinitely for the child process to close its <see
              cref="P:System.Diagnostics.Process.StandardOutput" />
 
@@ -6293,8 +7251,12 @@
 
             
 
+            
+
              stream. The child process would wait indefinitely for the parent to read from the full <see
              cref="P:System.Diagnostics.Process.StandardError" />
+
+            
 
             
 
@@ -6312,8 +7274,12 @@
 
               
 
+              
+
                is opened in either asynchronous or synchronous mode, all further read operations on that stream must be in the same mode. For example, do not follow <see
                cref="M:System.Diagnostics.Process.BeginErrorReadLine" />
+
+              
 
               
 
@@ -6326,8 +7292,12 @@
 
               
 
+              
+
                on the <see
                cref="P:System.Diagnostics.Process.StandardError" />
+
+              
 
               
 
@@ -6340,6 +7310,8 @@
 
               
 
+              
+
                and then call <see
                cref="M:System.IO.StreamReader.ReadLine" />
 
@@ -6347,8 +7319,12 @@
 
               
 
+              
+
                for the <see
                cref="P:System.Diagnostics.Process.StandardError" />
+
+              
 
               
 
@@ -6402,8 +7378,12 @@
 
             
 
+            
+
              can read input text from its standard input stream, typically the keyboard. By redirecting the <see
              cref="P:System.Diagnostics.Process.StandardInput" />
+
+            
 
             
 
@@ -6420,8 +7400,12 @@
 
               
 
+              
+
               , you must set <see
                cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+
+              
 
               
 
@@ -6434,8 +7418,12 @@
 
               
 
+              
+
                to true. Otherwise, writing to the <see
                cref="P:System.Diagnostics.Process.StandardInput" />
+
+              
 
               
 
@@ -6492,8 +7480,12 @@
 
             
 
+            
+
              writes text to its standard stream, that text is normally displayed on the console. By redirecting the <see
              cref="P:System.Diagnostics.Process.StandardOutput" />
+
+            
 
             
 
@@ -6510,8 +7502,12 @@
 
               
 
+              
+
               , you must set <see
                cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+
+              
 
               
 
@@ -6524,8 +7520,12 @@
 
               
 
+              
+
                to true. Otherwise, reading from the <see
                cref="P:System.Diagnostics.Process.StandardOutput" />
+
+              
 
               
 
@@ -6542,8 +7542,12 @@
 
             
 
+            
+
              stream can be read synchronously or asynchronously. Methods such as <see
              cref="M:System.IO.StreamReader.Read" />
+
+            
 
             
 
@@ -6556,8 +7560,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.IO.StreamReader.ReadToEnd" />
+
+            
 
             
 
@@ -6570,8 +7578,12 @@
 
             
 
+            
+
              writes to its <see
              cref="P:System.Diagnostics.Process.StandardOutput" />
+
+            
 
             
 
@@ -6587,8 +7599,12 @@
 
             
 
+            
+
              starts asynchronous read operations on the <see
              cref="P:System.Diagnostics.Process.StandardOutput" />
+
+            
 
             
 
@@ -6599,6 +7615,8 @@
           <para
             >Synchronous read operations introduce a dependency between the caller reading from the <see
              cref="P:System.Diagnostics.Process.StandardOutput" />
+
+            
 
             
 
@@ -6628,6 +7646,8 @@
 
             
 
+            
+
              stream.</para
           >
           <para>There is a similar issue when you read all text from both the standard output and standard error streams. The following C# code, for example, performs a read operation on both streams.</para>
@@ -6648,6 +7668,8 @@
 
             
 
+            
+
              stream. A deadlock condition results if the parent process calls p.StandardOutput.ReadToEnd followed by p.StandardError.ReadToEnd and the child process writes enough text to fill its error stream. The parent process would wait indefinitely for the child process to close its <see
              cref="P:System.Diagnostics.Process.StandardOutput" />
 
@@ -6655,8 +7677,12 @@
 
             
 
+            
+
              stream. The child process would wait indefinitely for the parent to read from the full <see
              cref="P:System.Diagnostics.Process.StandardError" />
+
+            
 
             
 
@@ -6674,8 +7700,12 @@
 
               
 
+              
+
                is opened in either asynchronous or synchronous mode, all further read operations on that stream must be in the same mode. For example, do not follow <see
                cref="M:System.Diagnostics.Process.BeginOutputReadLine" />
+
+              
 
               
 
@@ -6688,8 +7718,12 @@
 
               
 
+              
+
                on the <see
                cref="P:System.Diagnostics.Process.StandardOutput" />
+
+              
 
               
 
@@ -6702,6 +7736,8 @@
 
               
 
+              
+
                and then call <see
                cref="M:System.IO.StreamReader.ReadLine" />
 
@@ -6709,8 +7745,12 @@
 
               
 
+              
+
                for the <see
                cref="P:System.Diagnostics.Process.StandardError" />
+
+              
 
               
 
@@ -6753,6 +7793,8 @@
 
             
 
+            
+
              component. The return value true indicates that a new process resource was started. If the process resource specified by the <see
              cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
 
@@ -6760,8 +7802,12 @@
 
             
 
+            
+
              member of the <see
              cref="P:System.Diagnostics.Process.StartInfo" />
+
+            
 
             
 
@@ -6779,8 +7825,12 @@
 
               
 
+              
+
                method is the one that you insert into your code after you drag a <see
                cref="T:System.Diagnostics.Process" />
+
+              
 
               
 
@@ -6797,8 +7847,12 @@
 
             
 
+            
+
              is not a static method. You must call it from an instance of the <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -6811,6 +7865,8 @@
 
             
 
+            
+
             , you must first specify <see
              cref="P:System.Diagnostics.Process.StartInfo" />
 
@@ -6818,8 +7874,12 @@
 
             
 
+            
+
              property information for this <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -6835,8 +7895,12 @@
 
             
 
+            
+
              method are static members. You do not need to create an instance of the <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -6849,8 +7913,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -6863,6 +7931,8 @@
 
             
 
+            
+
              component is created if the process was started. Or, null is returned if a process was reused. The process resource is automatically associated with the new <see
              cref="T:System.Diagnostics.Process" />
 
@@ -6870,8 +7940,12 @@
 
             
 
+            
+
              component that is returned by the <see
              cref="M:System.Diagnostics.Process.Start" />
+
+            
 
             
 
@@ -6887,8 +7961,12 @@
 
             
 
+            
+
              members can be used to duplicate the functionality of the Run dialog box of the Windows Start menu. Anything that can be typed into a command line can be started by setting the appropriate values in the <see
              cref="P:System.Diagnostics.Process.StartInfo" />
+
+            
 
             
 
@@ -6901,8 +7979,12 @@
 
             
 
+            
+
              property that must be set is the <see
              cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
+
+            
 
             
 
@@ -6915,8 +7997,12 @@
 
             
 
+            
+
              property does not have to be an executable file. It can be of any file type for which the extension has been associated with an application that is installed on the system. For example, the <see
              cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
+
+            
 
             
 
@@ -6932,8 +8018,12 @@
 
             
 
+            
+
              member of the <see
              cref="P:System.Diagnostics.Process.StartInfo" />
+
+            
 
             
 
@@ -6946,6 +8036,8 @@
 
             
 
+            
+
             . These arguments can be specified in the <see
              cref="P:System.Diagnostics.Process.StartInfo" />
 
@@ -6953,8 +8045,12 @@
 
             
 
+            
+
              property's <see
              cref="P:System.Diagnostics.ProcessStartInfo.Arguments" />
+
+            
 
             
 
@@ -6972,12 +8068,16 @@
 
               
 
+              
+
                method in an ASP.NET Web page or server control, the new process executes on the Web server with restricted permissions. The process does not start in the same context as the client browser, and does not have access to the user desktop.</para
             >
           </block>
           <para
             >Whenever you use <see
              cref="M:System.Diagnostics.Process.Start" />
+
+            
 
             
 
@@ -6990,8 +8090,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Diagnostics.Process.Kill" />
+
+            
 
             
 
@@ -7007,6 +8111,8 @@
 
             
 
+            
+
              is true on the process component's <see
              cref="P:System.Diagnostics.Process.StartInfo" />
 
@@ -7014,8 +8120,12 @@
 
             
 
+            
+
              property, make sure you have set a threading model on your application by setting the attribute [STAThread] on the main() method. Otherwise, a managed thread can be in an unknown state or put in the MTA state, the latter of which conflicts with <see
              cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+
+            
 
             
 
@@ -7034,8 +8144,12 @@
 
             
 
+            
+
              property of this <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -7082,8 +8196,12 @@
 
             
 
+            
+
              instance. The overload associates the resource with a new <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -7096,6 +8214,8 @@
 
             
 
+            
+
              component is created. In such a case, instead of returning a new <see
              cref="T:System.Diagnostics.Process" />
 
@@ -7103,8 +8223,12 @@
 
             
 
+            
+
              component, <see
              cref="M:System.Diagnostics.Process.Start" />
+
+            
 
             
 
@@ -7123,8 +8247,12 @@
 
             
 
+            
+
              instance. Using this overload with a <see
              cref="T:System.Diagnostics.ProcessStartInfo" />
+
+            
 
             
 
@@ -7137,8 +8265,12 @@
 
             
 
+            
+
              instance, setting its <see
              cref="P:System.Diagnostics.Process.StartInfo" />
+
+            
 
             
 
@@ -7151,8 +8283,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -7168,8 +8304,12 @@
 
             
 
+            
+
              instance as the parameter lets you call <see
              cref="M:System.Diagnostics.Process.Start" />
+
+            
 
             
 
@@ -7182,8 +8322,12 @@
 
             
 
+            
+
              instance, although that is an option. The only <see
              cref="P:System.Diagnostics.Process.StartInfo" />
+
+            
 
             
 
@@ -7196,6 +8340,8 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
 
@@ -7203,8 +8349,12 @@
 
             
 
+            
+
              property does not need to represent an executable file. It can be of any file type for which the extension has been associated with an application that is installed on the system. For example, the <see
              cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
+
+            
 
             
 
@@ -7221,8 +8371,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Diagnostics.ProcessStartInfo.Password" />
+
+            
 
             
 
@@ -7235,8 +8389,12 @@
 
             
 
+            
+
              instance are set, the unmanaged <unmanagedCodeEntityReference
             >CreateProcessWithLogonW</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -7249,6 +8407,8 @@
 
             
 
+            
+
              property value is true or the <see
              cref="P:System.Diagnostics.ProcessStartInfo.WindowStyle" />
 
@@ -7256,8 +8416,12 @@
 
             
 
+            
+
              property value is <see
              cref="F:System.Diagnostics.ProcessWindowStyle.Hidden" />
+
+            
 
             
 
@@ -7273,8 +8437,12 @@
 
             
 
+            
+
              that has no parameters is not a static member. Use that overload when you have already created a <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -7287,6 +8455,8 @@
 
             
 
+            
+
              instance. Use one of the static overloads when you want to create a new <see
              cref="T:System.Diagnostics.Process" />
 
@@ -7294,8 +8464,12 @@
 
             
 
+            
+
              component rather than start a process for an existing component. Both this overload and the overload that has no parameters allow you to specify the start information for the process resource by using a <see
              cref="T:System.Diagnostics.ProcessStartInfo" />
+
+            
 
             
 
@@ -7313,12 +8487,16 @@
 
               
 
+              
+
                method in an ASP.NET Web page or server control, the new process executes on the Web server with restricted permissions. The process does not start in the same context as the client browser, and does not have access to the user desktop.</para
             >
           </block>
           <para
             >Whenever you use <see
              cref="M:System.Diagnostics.Process.Start" />
+
+            
 
             
 
@@ -7331,8 +8509,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Diagnostics.Process.Kill" />
+
+            
 
             
 
@@ -7348,6 +8530,8 @@
 
             
 
+            
+
              is true on the <paramref
              name="startInfo" />
 
@@ -7355,8 +8539,12 @@
 
             
 
+            
+
              parameter, make sure you have set a threading model on your application by setting the attribute [STAThread] on the main() method. Otherwise, a managed thread can be in an unknown state or put in the MTA state, the latter of which conflicts with <see
              cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+
+            
 
             
 
@@ -7375,6 +8563,8 @@
 
             
 
+            
+
              component.</para
           >
         </summary>
@@ -7383,6 +8573,8 @@
           <para
             >A new <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -7398,8 +8590,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Diagnostics.ProcessStartInfo" />
+
+          
 
           
 
@@ -7441,8 +8637,12 @@
 
             
 
+            
+
              component. If the process is already running, no additional process resource is started. Instead, the existing process resource is reused and no new <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -7455,8 +8655,12 @@
 
             
 
+            
+
              component, <see
              cref="M:System.Diagnostics.Process.Start" />
+
+            
 
             
 
@@ -7475,8 +8679,12 @@
 
             
 
+            
+
              instance. The overload is an alternative to the explicit steps of creating a new <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -7489,8 +8697,12 @@
 
             
 
+            
+
              member of the <see
              cref="P:System.Diagnostics.Process.StartInfo" />
+
+            
 
             
 
@@ -7503,8 +8715,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -7520,6 +8736,8 @@
 
             
 
+            
+
              parameter to the location (for example, a Web address) from which you originally installed the application. Do not start a ClickOnce application by specifying its installed location on your hard drive.</para
           >
           <para
@@ -7530,8 +8748,12 @@
 
             
 
+            
+
              parameter. For example, you can set the <paramref
              name="fileName" />
+
+            
 
             
 
@@ -7547,8 +8769,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Diagnostics.Process.Start(System.String,System.String)" />
+
+            
 
             
 
@@ -7564,8 +8790,12 @@
 
             
 
+            
+
              that has no parameters is not a static member. Use that overload when you have already created a <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -7578,8 +8808,12 @@
 
             
 
+            
+
              instance. Use one of the static overloads when you want to create a new <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -7597,12 +8831,16 @@
 
               
 
+              
+
                method in an ASP.NET Web page or server control, the new process executes on the Web server with restricted permissions. The process does not start in the same context as the client browser, and does not have access to the user desktop.</para
             >
           </block>
           <para
             >Whenever you use <see
              cref="M:System.Diagnostics.Process.Start" />
+
+            
 
             
 
@@ -7615,8 +8853,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Diagnostics.Process.Kill" />
+
+            
 
             
 
@@ -7632,6 +8874,8 @@
 
             
 
+            
+
              is true on the process component's <see
              cref="P:System.Diagnostics.Process.StartInfo" />
 
@@ -7639,8 +8883,12 @@
 
             
 
+            
+
              property, make sure you have set a threading model on your application by setting the attribute [STAThread] on the main() method. Otherwise, a managed thread can be in an unknown state or put in the MTA state, the latter of which conflicts with <see
              cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+
+            
 
             
 
@@ -7659,6 +8907,8 @@
 
             
 
+            
+
              component.</para
           >
         </summary>
@@ -7672,11 +8922,15 @@
 
             
 
+            
+
              component that is associated with the process resource, or null, if no process resource is started (for example, if an existing process is reused).</para
           >
         </returns>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7719,8 +8973,12 @@
 
             
 
+            
+
              component. If the process is already running, no additional process is started. Instead, the existing process resource is reused and no new <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -7733,8 +8991,12 @@
 
             
 
+            
+
              component, <see
              cref="M:System.Diagnostics.Process.Start" />
+
+            
 
             
 
@@ -7753,8 +9015,12 @@
 
             
 
+            
+
              instance. The overload is an alternative to the explicit steps of creating a new <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -7767,8 +9033,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Diagnostics.ProcessStartInfo.Arguments" />
+
+            
 
             
 
@@ -7781,6 +9051,8 @@
 
             
 
+            
+
              property, and calling <see
              cref="M:System.Diagnostics.Process.Start" />
 
@@ -7788,8 +9060,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -7805,8 +9081,12 @@
 
             
 
+            
+
              parameter. For example, you can set the <paramref
              name="fileName" />
+
+            
 
             
 
@@ -7819,8 +9099,12 @@
 
             
 
+            
+
              parameter represents an executable file, the <paramref
              name="arguments" />
+
+            
 
             
 
@@ -7833,8 +9117,12 @@
 
             
 
+            
+
              parameter represents a command (.cmd) file, the <paramref
              name="arguments" />
+
+            
 
             
 
@@ -7850,8 +9138,12 @@
 
             
 
+            
+
              that has no parameters is not a static member. Use that overload when you have already created a <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -7864,8 +9156,12 @@
 
             
 
+            
+
              instance. Use one of the static overloads when you want to create a new <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -7883,12 +9179,16 @@
 
               
 
+              
+
                method in an ASP.NET Web page or server control, the new process executes on the Web server with restricted permissions. The process does not start in the same context as the client browser, and does not have access to the user desktop.</para
             >
           </block>
           <para
             >Whenever you use <see
              cref="M:System.Diagnostics.Process.Start" />
+
+            
 
             
 
@@ -7901,8 +9201,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Diagnostics.Process.Kill" />
+
+            
 
             
 
@@ -7918,6 +9222,8 @@
 
             
 
+            
+
              is true on the process component's <see
              cref="P:System.Diagnostics.Process.StartInfo" />
 
@@ -7925,8 +9231,12 @@
 
             
 
+            
+
              property, make sure you have set a threading model on your application by setting the attribute [STAThread] on the main() method. Otherwise, a managed thread can be in an unknown state or put in the MTA state, the latter of which conflicts with <see
              cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+
+            
 
             
 
@@ -7945,6 +9255,8 @@
 
             
 
+            
+
              component.</para
           >
         </summary>
@@ -7953,6 +9265,8 @@
           <para
             >A new <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -7968,10 +9282,14 @@
 
           
 
+          
+
           The name of an application file to run in the process. </param
         >
         <param name="arguments">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8023,6 +9341,8 @@
 
             
 
+            
+
              component is created. In such a case, instead of returning a new <see
              cref="T:System.Diagnostics.Process" />
 
@@ -8030,8 +9350,12 @@
 
             
 
+            
+
              component, <see
              cref="M:System.Diagnostics.Process.Start" />
+
+            
 
             
 
@@ -8047,8 +9371,12 @@
 
             
 
+            
+
              instance. The overload is an alternative to the explicit steps of creating a new <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -8061,8 +9389,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Diagnostics.ProcessStartInfo.UserName" />
+
+            
 
             
 
@@ -8075,8 +9407,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Diagnostics.ProcessStartInfo.Domain" />
+
+            
 
             
 
@@ -8089,6 +9425,8 @@
 
             
 
+            
+
              property, and calling <see
              cref="M:System.Diagnostics.Process.Start" />
 
@@ -8096,8 +9434,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -8113,8 +9455,12 @@
 
             
 
+            
+
              dialog box can accept an executable file name with or without the .exe extension, the .exe extension is optional in the <paramref
              name="fileName" />
+
+            
 
             
 
@@ -8127,6 +9473,8 @@
 
             
 
+            
+
              parameter to either "Notepad.exe" or "Notepad". If the <paramref
              name="fileName" />
 
@@ -8134,8 +9482,12 @@
 
             
 
+            
+
              parameter represents an executable file, the <paramref
              name="arguments" />
+
+            
 
             
 
@@ -8152,8 +9504,12 @@
 
               
 
+              
+
                overloads that have <paramref
                name="userName" />
+
+              
 
               
 
@@ -8166,8 +9522,12 @@
 
               
 
+              
+
               , and <paramref
                name="domain" />
+
+              
 
               
 
@@ -8187,6 +9547,8 @@
 
             
 
+            
+
              component.</para
           >
         </summary>
@@ -8195,6 +9557,8 @@
           <para
             >A new <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -8210,10 +9574,14 @@
 
           
 
+          
+
           The name of an application file to run in the process.</param
         >
         <param name="password">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8226,10 +9594,14 @@
 
           
 
+          
+
            that contains the password to use when starting the process.</param
         >
         <param name="domain">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8282,8 +9654,12 @@
 
             
 
+            
+
              component. If the process is already running, no additional process resource is started. Instead, the existing process resource is reused and no new <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -8296,8 +9672,12 @@
 
             
 
+            
+
              component, <see
              cref="M:System.Diagnostics.Process.Start" />
+
+            
 
             
 
@@ -8313,8 +9693,12 @@
 
             
 
+            
+
              instance. The overload is an alternative to the explicit steps of creating a new <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -8327,8 +9711,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Diagnostics.ProcessStartInfo.Arguments" />
+
+            
 
             
 
@@ -8341,8 +9729,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Diagnostics.ProcessStartInfo.Password" />
+
+            
 
             
 
@@ -8355,8 +9747,12 @@
 
             
 
+            
+
              properties of the <see
              cref="P:System.Diagnostics.Process.StartInfo" />
+
+            
 
             
 
@@ -8369,8 +9765,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -8386,8 +9786,12 @@
 
             
 
+            
+
              dialog box can accept an executable file name with or without the .exe extension, the .exe extension is optional in the <paramref
              name="fileName" />
+
+            
 
             
 
@@ -8400,6 +9804,8 @@
 
             
 
+            
+
              parameter to either "Notepad.exe" or "Notepad". If the <paramref
              name="fileName" />
 
@@ -8407,8 +9813,12 @@
 
             
 
+            
+
              parameter represents an executable file, the <paramref
              name="arguments" />
+
+            
 
             
 
@@ -8425,8 +9835,12 @@
 
               
 
+              
+
                overloads that have <paramref
                name="userName" />
+
+              
 
               
 
@@ -8439,8 +9853,12 @@
 
               
 
+              
+
               , and <paramref
                name="domain" />
+
+              
 
               
 
@@ -8460,6 +9878,8 @@
 
             
 
+            
+
              component.</para
           >
         </summary>
@@ -8468,6 +9888,8 @@
           <para
             >A new <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -8483,10 +9905,14 @@
 
           
 
+          
+
           The name of an application file to run in the process. </param
         >
         <param name="arguments">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8501,8 +9927,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.SecureString" />
+
+          
 
           
 
@@ -8512,6 +9942,8 @@
         >
         <param name="domain">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8562,8 +9994,12 @@
 
             
 
+            
+
              represents the set of parameters to use to start a process. When <see
              cref="M:System.Diagnostics.Process.Start" />
+
+            
 
             
 
@@ -8576,8 +10012,12 @@
 
             
 
+            
+
              is used to specify the process to start. The only necessary <see
              cref="P:System.Diagnostics.Process.StartInfo" />
+
+            
 
             
 
@@ -8590,8 +10030,12 @@
 
             
 
+            
+
              property. Starting a process by specifying the <see
              cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
+
+            
 
             
 
@@ -8604,8 +10048,12 @@
 
             
 
+            
+
              dialog box of the Windows <ui
             >Start</ui>
+
+            
 
             
 
@@ -8618,8 +10066,12 @@
 
             
 
+            
+
              property does not need to represent an executable file. It can be of any file type for which the extension has been associated with an application installed on the system. For example the <see
              cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
+
+            
 
             
 
@@ -8632,6 +10084,8 @@
 
             
 
+            
+
              dialog box can accept an executable file name with or without the .exe extension, the .exe extension is optional in the <see
              cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
 
@@ -8639,8 +10093,12 @@
 
             
 
+            
+
              member. For example, you can set the <see
              cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
+
+            
 
             
 
@@ -8656,11 +10114,15 @@
 
             
 
+            
+
              property to the location (for example, a Web address) from which you originally installed the application. Do not start a ClickOnce application by specifying its installed location on your hard drive.</para
           >
           <para
             >If the file name involves a nonexecutable file, such as a .doc file, you can include a verb specifying what action to take on the file. For example, you could set the <see
              cref="P:System.Diagnostics.ProcessStartInfo.Verb" />
+
+            
 
             
 
@@ -8673,6 +10135,8 @@
 
             
 
+            
+
              property does not need to have an extension if you manually enter a value for the <see
              cref="P:System.Diagnostics.ProcessStartInfo.Verb" />
 
@@ -8680,8 +10144,12 @@
 
             
 
+            
+
              property. However, if you use the <see
              cref="P:System.Diagnostics.ProcessStartInfo.Verbs" />
+
+            
 
             
 
@@ -8697,8 +10165,12 @@
 
             
 
+            
+
              property up to the time that you call the <see
              cref="Overload:System.Diagnostics.Process.Start" />
+
+            
 
             
 
@@ -8711,8 +10183,12 @@
 
             
 
+            
+
              values does not affect or restart the associated process. If you call the <see
              cref="M:System.Diagnostics.Process.Start(System.Diagnostics.ProcessStartInfo)" />
+
+            
 
             
 
@@ -8725,8 +10201,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Diagnostics.ProcessStartInfo.Password" />
+
+            
 
             
 
@@ -8739,8 +10219,12 @@
 
             
 
+            
+
              function is called, which starts the process in a new window even if the <see
              cref="P:System.Diagnostics.ProcessStartInfo.CreateNoWindow" />
+
+            
 
             
 
@@ -8753,8 +10237,12 @@
 
             
 
+            
+
              property value is <see
              cref="F:System.Diagnostics.ProcessWindowStyle.Hidden" />
+
+            
 
             
 
@@ -8770,8 +10258,12 @@
 
             
 
+            
+
              method to start a process, the <see
              cref="P:System.Diagnostics.Process.StartInfo" />
+
+            
 
             
 
@@ -8784,6 +10276,8 @@
 
             
 
+            
+
              to get an array of processes running on the computer, the <see
              cref="P:System.Diagnostics.Process.StartInfo" />
 
@@ -8791,8 +10285,12 @@
 
             
 
+            
+
              property of each <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -8808,8 +10306,12 @@
 
             
 
+            
+
              property. If you want to retrieve the executable file that is associated with the process after the process has started, use the <see
              cref="P:System.Diagnostics.Process.MainModule" />
+
+            
 
             
 
@@ -8822,8 +10324,12 @@
 
             
 
+            
+
              instance for which an associated process has not been started, use the <see
              cref="P:System.Diagnostics.Process.StartInfo" />
+
+            
 
             
 
@@ -8836,8 +10342,12 @@
 
             
 
+            
+
              member. Because the members of the <see
              cref="P:System.Diagnostics.Process.StartInfo" />
+
+            
 
             
 
@@ -8850,6 +10360,8 @@
 
             
 
+            
+
              method of a process, changing the <see
              cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
 
@@ -8857,8 +10369,12 @@
 
             
 
+            
+
              property after the associated process has started will not reset the <see
              cref="P:System.Diagnostics.Process.MainModule" />
+
+            
 
             
 
@@ -8877,8 +10393,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -8963,6 +10483,8 @@
 
             
 
+            
+
              is null, methods that handle the <see
              cref="E:System.Diagnostics.Process.Exited" />
 
@@ -8970,8 +10492,12 @@
 
             
 
+            
+
              event are called on a thread from the system thread pool. For more information about system thread pools, see <see
              cref="T:System.Threading.ThreadPool" />
+
+            
 
             
 
@@ -8987,8 +10513,12 @@
 
             
 
+            
+
              event is handled by a visual Windows Forms component, such as a <see
              cref="T:System.Windows.Forms.Button" />
+
+            
 
             
 
@@ -9001,8 +10531,12 @@
 
             
 
+            
+
              to a Windows Forms component, which causes the methods handling the <see
              cref="E:System.Diagnostics.Process.Exited" />
+
+            
 
             
 
@@ -9018,8 +10552,12 @@
 
             
 
+            
+
              is used inside vsprvslong in a Windows Forms designer, <see
              cref="P:System.Diagnostics.Process.SynchronizingObject" />
+
+            
 
             
 
@@ -9032,8 +10570,12 @@
 
             
 
+            
+
             . For example, if you place a <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -9046,6 +10588,8 @@
 
             
 
+            
+
             ) the <see
              cref="P:System.Diagnostics.Process.SynchronizingObject" />
 
@@ -9053,8 +10597,12 @@
 
             
 
+            
+
              property of <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -9113,6 +10661,8 @@
 
             
 
+            
+
              to get all the threads associated with the current process. The primary thread is not necessarily at index zero in the array.</para
           >
         </remarks>
@@ -9154,8 +10704,12 @@
 
             
 
+            
+
             , combined with the base component's <see
              cref="M:System.Object.ToString" />
+
+            
 
             
 
@@ -9297,6 +10851,8 @@
 
             
 
+            
+
              performance counter for the process. </para
           >
         </remarks>
@@ -9333,6 +10889,8 @@
 
             
 
+            
+
              overload is used to make the current thread wait until the associated process terminates.  This method instructs the <see
              cref="T:System.Diagnostics.Process" />
 
@@ -9340,8 +10898,12 @@
 
             
 
+            
+
              component to wait an infinite amount of time for the process and event handlers to exit. This can cause an application to stop responding. For example, if you call <see
              cref="M:System.Diagnostics.Process.CloseMainWindow" />
+
+            
 
             
 
@@ -9358,6 +10920,8 @@
 
               
 
+              
+
                overload waited for <see
                cref="F:System.Int32.MaxValue" />
 
@@ -9365,8 +10929,12 @@
 
               
 
+              
+
                milliseconds (approximately 24 days), not indefinitely. Also, previous versions did not wait for the event handlers to exit if the full <see
                cref="F:System.Int32.MaxValue" />
+
+              
 
               
 
@@ -9383,11 +10951,15 @@
 
             
 
+            
+
              overload when standard output has been redirected to asynchronous event handlers.</para
           >
           <para
             >When an associated process exits (that is, when it is shut down by the operation system through a normal or abnormal termination), the system stores administrative information about the process and returns to the component that had called <see
              cref="M:System.Diagnostics.Process.WaitForExit" />
+
+            
 
             
 
@@ -9400,6 +10972,8 @@
 
             
 
+            
+
              component can then access the information, which includes the <see
              cref="P:System.Diagnostics.Process.ExitTime" />
 
@@ -9407,8 +10981,12 @@
 
             
 
+            
+
             , by using the <see
              cref="P:System.Diagnostics.Process.Handle" />
+
+            
 
             
 
@@ -9424,8 +11002,12 @@
 
             
 
+            
+
              property of the component no longer points to an existing process resource. Instead, the handle can be used only to access the operating system's information about the process resource. The system is aware of handles to exited processes that have not been released by <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -9438,8 +11020,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Diagnostics.Process.Handle" />
+
+            
 
             
 
@@ -9452,8 +11038,12 @@
 
             
 
+            
+
              component specifically frees the resources. For this reason, any time you call <see
              cref="M:System.Diagnostics.Process.Start" />
+
+            
 
             
 
@@ -9466,6 +11056,8 @@
 
             
 
+            
+
              instance, call <see
              cref="M:System.Diagnostics.Process.Close" />
 
@@ -9473,8 +11065,12 @@
 
             
 
+            
+
              when the associated process has terminated and you no longer need any administrative information about it. <see
              cref="M:System.Diagnostics.Process.Close" />
+
+            
 
             
 
@@ -9488,6 +11084,8 @@
           <para
             >Instructs the <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -9527,8 +11125,12 @@
 
             
 
+            
+
              overload is used to make the current thread wait until the associated process terminates. This overload instructs the <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -9541,8 +11143,12 @@
 
             
 
+            
+
             ) for <paramref
              name="milliseconds" />
+
+            
 
             
 
@@ -9555,8 +11161,12 @@
 
             
 
+            
+
              will behave the same as the <see
              cref="M:System.Diagnostics.Process.WaitForExit" />
+
+            
 
             
 
@@ -9573,6 +11183,8 @@
 
               
 
+              
+
                was -1, the <see
                cref="M:System.Diagnostics.Process.WaitForExit(System.Int32)" />
 
@@ -9580,8 +11192,12 @@
 
               
 
+              
+
                overload waited for <see
                cref="F:System.Int32.MaxValue" />
+
+              
 
               
 
@@ -9598,6 +11214,8 @@
 
             
 
+            
+
              overload that takes no parameter after receiving a true from this overload. To help ensure that the <see
              cref="E:System.Diagnostics.Process.Exited" />
 
@@ -9605,8 +11223,12 @@
 
             
 
+            
+
              event is handled correctly in Windows Forms applications, set the <see
              cref="P:System.Diagnostics.Process.SynchronizingObject" />
+
+            
 
             
 
@@ -9622,8 +11244,12 @@
 
             
 
+            
+
             . The <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -9636,8 +11262,12 @@
 
             
 
+            
+
             , by using the <see
              cref="P:System.Diagnostics.Process.Handle" />
+
+            
 
             
 
@@ -9653,8 +11283,12 @@
 
             
 
+            
+
              property of the component no longer points to an existing process resource. Instead, the handle can be used only to access the operating system's information about the process resource. The system is aware of handles to exited processes that have not been released by <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -9667,8 +11301,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Diagnostics.Process.Handle" />
+
+            
 
             
 
@@ -9681,8 +11319,12 @@
 
             
 
+            
+
              component specifically frees the resources. For this reason, any time you call <see
              cref="M:System.Diagnostics.Process.Start" />
+
+            
 
             
 
@@ -9695,6 +11337,8 @@
 
             
 
+            
+
              instance, call <see
              cref="M:System.Diagnostics.Process.Close" />
 
@@ -9702,8 +11346,12 @@
 
             
 
+            
+
              when the associated process has terminated and you no longer need any administrative information about it. <see
              cref="M:System.Diagnostics.Process.Close" />
+
+            
 
             
 
@@ -9722,6 +11370,8 @@
 
             
 
+            
+
              component to wait the specified number of milliseconds for the associated process to exit.</para
           >
         </summary>
@@ -9731,6 +11381,8 @@
         </returns>
         <param name="milliseconds">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9772,6 +11424,8 @@
 
             
 
+            
+
              to force the processing of your application to wait until the message loop has returned to the idle state. When a process with a user interface is executing, its message loop executes every time a Windows message is sent to the process by the operating system. The process then returns to the message loop. A process is said to be in an idle state when it is waiting for messages inside of a message loop. This state is useful, for example, when your application needs to wait for a starting process to finish creating its main window before the application communicates with that window.</para
           >
           <para
@@ -9782,8 +11436,12 @@
 
             
 
+            
+
              throws an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -9799,8 +11457,12 @@
 
             
 
+            
+
              overload instructs the <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -9814,6 +11476,8 @@
           <para
             >Causes the <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -9862,6 +11526,8 @@
 
             
 
+            
+
              to force the processing of your application to wait until the message loop has returned to the idle state. When a process with a user interface is executing, its message loop executes every time a Windows message is sent to the process by the operating system. The process then returns to the message loop. A process is said to be in an idle state when it is waiting for messages inside of a message loop. This state is useful, for example, when your application needs to wait for a starting process to finish creating its main window before the application communicates with that window.</para
           >
           <para
@@ -9872,8 +11538,12 @@
 
             
 
+            
+
              throws an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -9889,8 +11559,12 @@
 
             
 
+            
+
              overload instructs the <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -9910,6 +11584,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -9918,6 +11594,8 @@
           <para
             >Causes the <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -9937,8 +11615,12 @@
 
           
 
+          
+
           A value of 1 to <see
            cref="F:System.Int32.MaxValue" />
+
+          
 
           
 
@@ -10015,6 +11697,8 @@
           <para
             >This property can be used to monitor memory usage on computers with 32-bit processors or 64-bit processors. The property value is equivalent to the <ui
             >Working Set</ui>
+
+            
 
             
 

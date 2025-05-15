@@ -25,8 +25,12 @@
 
         
 
+        
+
          class is a common base class for the <see
          cref="T:System.Windows.Forms.ColumnStyle" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
          classes, which describe the appearance and behavior of columns and rows, respectively, in a <see
          cref="T:System.Windows.Forms.TableLayoutPanel" />
+
+        
 
         
 
@@ -56,8 +64,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.TableLayoutRowStyleCollection" />
+
+        
 
         
 
@@ -90,6 +102,8 @@
 
             
 
+            
+
              class. It effectively sets the <see
              cref="T:System.Windows.Forms.SizeType" />
 
@@ -97,8 +111,12 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Windows.Forms.SizeType.AutoSize" />
+
+            
 
             
 
@@ -112,6 +130,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.TableLayoutStyle" />
+
+            
 
             
 
@@ -154,6 +174,8 @@
 
                 
 
+                
+
                 ).</para
               >
             </item>
@@ -166,6 +188,8 @@
 
                 
 
+                
+
                 ).</para
               >
             </item>
@@ -173,6 +197,8 @@
               <para
                 >To share equal space with its peers (<see
                  cref="F:System.Windows.Forms.SizeType.AutoSize" />
+
+                
 
                 
 

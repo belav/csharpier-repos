@@ -39,8 +39,12 @@
 
         
 
+        
+
          control to allow the user to select a true or false state. To determine whether the control is selected, use the <see
          cref="P:System.Web.UI.HtmlControls.HtmlInputCheckBox.Checked" />
+
+        
 
         
 
@@ -53,6 +57,8 @@
 
         
 
+        
+
          control provides a <see
          cref="E:System.Web.UI.HtmlControls.HtmlInputCheckBox.ServerChange" />
 
@@ -60,8 +66,12 @@
 
         
 
+        
+
          event that is raised when the <see
          cref="P:System.Web.UI.HtmlControls.HtmlInputCheckBox.Checked" />
+
+        
 
         
 
@@ -78,8 +88,12 @@
 
           
 
+          
+
            control does not post back to the server when it is clicked. You must provide another control on the Web page that supports posting to the server, such as an <see
            cref="T:System.Web.UI.HtmlControls.HtmlButton" />
+
+          
 
           
 
@@ -96,8 +110,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.HtmlControls.HtmlInputCheckBox.#ctor" />
+
+        
 
         
 
@@ -128,11 +146,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The following table shows the initial property value for an instance of <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
+
+            
 
             
 
@@ -171,6 +193,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -199,8 +223,12 @@
 
             
 
+            
+
              control is selected. This property can also be used to programmatically set the state of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
+
+            
 
             
 
@@ -214,6 +242,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
+
+            
 
             
 
@@ -269,6 +299,8 @@
 
             
 
+            
+
              control.</para
           >
         </remarks>
@@ -277,6 +309,8 @@
           <para
             >Processes the postback data for the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
+
+            
 
             
 
@@ -295,6 +329,8 @@
 
             
 
+            
+
              control's state has changed as a result of the postback event; otherwise, false.</para
           >
         </returns>
@@ -305,10 +341,14 @@
 
           
 
+          
+
           The key identifier for the control.</param
         >
         <param name="postCollection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -338,6 +378,8 @@
 
             
 
+            
+
              method overrides the base <see
              cref="M:System.Web.UI.Control.OnPreRender(System.EventArgs)" />
 
@@ -345,8 +387,12 @@
 
             
 
+            
+
              method. <see
              cref="M:System.Web.UI.HtmlControls.HtmlInputCheckBox.OnPreRender(System.EventArgs)" />
+
+            
 
             
 
@@ -365,6 +411,8 @@
 
             
 
+            
+
              event and registers the control as one that requires postback handling.</para
           >
         </summary>
@@ -375,8 +423,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -410,12 +462,16 @@
 
             
 
+            
+
              control changes state from the previous post. This method allows you to override the base implementation and provide a custom handler for the event.</para
           >
           <block subset="none" type="note">
             <para
               >The control must have view state enabled for the <see
                cref="E:System.Web.UI.HtmlControls.HtmlInputCheckBox.ServerChange" />
+
+              
 
               
 
@@ -434,11 +490,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.HtmlControls.HtmlInputCheckBox.OnServerChange(System.EventArgs)" />
+
+            
 
             
 
@@ -457,6 +517,8 @@
 
             
 
+            
+
              event. This method allows you to handle the event directly.</para
           >
         </summary>
@@ -467,8 +529,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -503,6 +569,8 @@
 
             
 
+            
+
              control.</para
           >
         </remarks>
@@ -516,8 +584,12 @@
 
             
 
+            
+
              method to signal the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
+
+            
 
             
 
@@ -555,8 +627,12 @@
 
             
 
+            
+
              control's attributes to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -572,8 +648,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -601,12 +681,16 @@
 
             
 
+            
+
              control changes state from the previous post. </para
           >
           <block subset="none" type="note">
             <para
               >The control must have view state enabled for the <see
                cref="E:System.Web.UI.HtmlControls.HtmlInputCheckBox.ServerChange" />
+
+              
 
               
 
@@ -625,6 +709,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -633,6 +719,8 @@
           <para
             >Occurs when the Web page is submitted to the server and the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputCheckBox" />
+
+            
 
             
 
@@ -679,8 +767,12 @@
 
             
 
+            
+
              method by calling the <see
              cref="M:System.Web.UI.HtmlControls.HtmlInputCheckBox.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+
+            
 
             
 
@@ -699,6 +791,8 @@
 
             
 
+            
+
              control's state has changed as a result of the postback; otherwise, false.</para
           >
         </returns>
@@ -709,10 +803,14 @@
 
           
 
+          
+
           The key identifier for the control.</param
         >
         <param name="postCollection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -748,8 +846,12 @@
 
             
 
+            
+
              method by calling the <see
              cref="M:System.Web.UI.HtmlControls.HtmlInputCheckBox.RaisePostDataChangedEvent" />
+
+            
 
             
 

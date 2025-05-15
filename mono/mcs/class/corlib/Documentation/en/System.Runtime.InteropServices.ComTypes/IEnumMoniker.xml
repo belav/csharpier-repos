@@ -31,6 +31,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -113,8 +115,12 @@
 
             
 
+            
+
              parameter equals the <paramref
              name="celt" />
+
+            
 
             
 
@@ -130,8 +136,12 @@
 
           
 
+          
+
           The number of monikers to return in <paramref
            name="rgelt" />
+
+          
 
           
 
@@ -146,6 +156,8 @@
 
           
 
+          
+
           When this method returns, contains a reference to the enumerated monikers. This parameter is passed uninitialized.</param
         >
         <param name="pceltFetched">
@@ -155,8 +167,12 @@
 
           
 
+          
+
           When this method returns, contains a reference to the actual number of monikers enumerated in <paramref
            name="rgelt" />
+
+          
 
           
 
@@ -234,11 +250,15 @@
 
             
 
+            
+
              parameter; otherwise, S_FALSE.</para
           >
         </returns>
         <param name="celt">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

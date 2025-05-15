@@ -8,6 +8,8 @@
 
     
 
+    
+
     ). A source file is an ordered sequence of Unicode characters. Source files typically have a one-to-one correspondence with files in a file system, but this correspondence is not required. </paragraph
   >
   <paragraph>Conceptually speaking, a program is compiled using three steps: </paragraph>
@@ -19,6 +21,8 @@
     <note
       >[Note: It is beyond the scope of this standard to define how a file using a character representation other than Unicode might be transformed into a sequence of Unicode characters. During such transformation, however, it is recommended that the usual line-separating character (or sequence) in the other character set be translated to the two-character sequence consisting of the Unicode carriage-return character followed by Unicode line-feed character. For the most part this transformation will have no visible effects; however, it will affect the interpretation of verbatim string literal tokens (<hyperlink
       >9.4.4.5</hyperlink>
+
+      
 
       
 

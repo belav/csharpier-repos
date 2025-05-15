@@ -20,6 +20,8 @@
 
         
 
+        
+
          layout by choosing one of the members of <see
          cref="T:System.Windows.Forms.ToolStripLayoutStyle" />
 
@@ -27,8 +29,12 @@
 
         
 
+        
+
          with the <see
          cref="P:System.Windows.Forms.ToolStrip.LayoutStyle" />
+
+        
 
         
 
@@ -47,12 +53,16 @@
 
         
 
+        
+
         . The following list describes the stack layouts.</para
       >
       <list type="bullet">
         <item>
           <para>
             <see cref="F:System.Windows.Forms.ToolStripLayoutStyle.StackWithOverflow" />
+
+            
 
             
 
@@ -65,8 +75,12 @@
 
             
 
+            
+
              to alter its layout automatically in accordance with the <see
              cref="P:System.Windows.Forms.ToolStrip.Orientation" />
+
+            
 
             
 
@@ -83,8 +97,12 @@
 
             
 
+            
+
              renders the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -101,8 +119,12 @@
 
             
 
+            
+
              renders the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -122,8 +144,12 @@
 
         
 
+        
+
          determines the end of the <see
          cref="T:System.Windows.Forms.ToolStrip" />
+
+        
 
         
 
@@ -139,8 +165,12 @@
 
         
 
+        
+
         , an overflow button automatically appears. The <see
          cref="P:System.Windows.Forms.ToolStripItem.Overflow" />
+
+        
 
         
 
@@ -156,8 +186,12 @@
 
         
 
+        
+
          event, you can inspect the <see
          cref="P:System.Windows.Forms.ToolStripItem.Placement" />
+
+        
 
         
 
@@ -170,8 +204,12 @@
 
         
 
+        
+
         , the overflow <see
          cref="T:System.Windows.Forms.ToolStrip" />
+
+        
 
         
 
@@ -184,6 +222,8 @@
 
         
 
+        
+
          and its <see
          cref="P:System.Windows.Forms.ToolStripItem.Overflow" />
 
@@ -191,8 +231,12 @@
 
         
 
+        
+
          property was set to <see
          cref="F:System.Windows.Forms.ToolStripItemOverflow.Never" />
+
+        
 
         
 
@@ -208,8 +252,12 @@
 
         
 
+        
+
          movable by putting it in a <see
          cref="T:System.Windows.Forms.ToolStripPanel" />
+
+        
 
         
 
@@ -222,8 +270,12 @@
 
         
 
+        
+
          to <see
          cref="F:System.Windows.Forms.ToolStripGripStyle.Visible" />
+
+        
 
         
 
@@ -242,8 +294,12 @@
 
         
 
+        
+
          and <see
          cref="F:System.Windows.Forms.ToolStripLayoutStyle.Table" />
+
+        
 
         
 
@@ -261,8 +317,12 @@
 
         
 
+        
+
          layout is the default for <see
          cref="T:System.Windows.Forms.ContextMenuStrip" />
+
+        
 
         
 
@@ -275,8 +335,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Windows.Forms.ToolStripOverflow" />
+
+        
 
         
 
@@ -289,8 +353,12 @@
 
         
 
+        
+
         . The features of <see
          cref="F:System.Windows.Forms.ToolStripLayoutStyle.Flow" />
+
+        
 
         
 
@@ -308,8 +376,12 @@
 
             
 
+            
+
              are exposed by the <see
              cref="P:System.Windows.Forms.ToolStrip.LayoutSettings" />
+
+            
 
             
 
@@ -322,8 +394,12 @@
 
             
 
+            
+
              class to a <see
              cref="T:System.Windows.Forms.FlowLayoutSettings" />
+
+            
 
             
 
@@ -341,8 +417,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ToolStripItem.Anchor" />
+
+            
 
             
 
@@ -360,6 +440,8 @@
 
             
 
+            
+
              property is ignored.</para
           >
         </item>
@@ -372,6 +454,8 @@
 
             
 
+            
+
              event, you can inspect the <see
              cref="P:System.Windows.Forms.ToolStripItem.Placement" />
 
@@ -379,8 +463,12 @@
 
             
 
+            
+
              property to determine whether an item was placed on the main <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -398,6 +486,8 @@
 
             
 
+            
+
              in <see
              cref="F:System.Windows.Forms.ToolStripLayoutStyle.Flow" />
 
@@ -405,8 +495,12 @@
 
             
 
+            
+
              layout style in a <see
              cref="T:System.Windows.Forms.ToolStripPanel" />
+
+            
 
             
 
@@ -424,8 +518,12 @@
 
             
 
+            
+
              overflow button is not rendered, and <see
              cref="P:System.Windows.Forms.ToolStripItem.Overflow" />
+
+            
 
             
 
@@ -445,8 +543,12 @@
 
         
 
+        
+
          layout is the default for <see
          cref="T:System.Windows.Forms.StatusStrip" />
+
+        
 
         
 
@@ -459,8 +561,12 @@
 
         
 
+        
+
         . The features of <see
          cref="F:System.Windows.Forms.ToolStripLayoutStyle.Table" />
+
+        
 
         
 
@@ -478,8 +584,12 @@
 
             
 
+            
+
              are exposed by the <see
              cref="P:System.Windows.Forms.ToolStrip.LayoutSettings" />
+
+            
 
             
 
@@ -492,8 +602,12 @@
 
             
 
+            
+
              class to a <see
              cref="T:System.Windows.Forms.TableLayoutSettings" />
+
+            
 
             
 
@@ -511,8 +625,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ToolStripItem.Anchor" />
+
+            
 
             
 
@@ -530,6 +648,8 @@
 
             
 
+            
+
              property is ignored.</para
           >
         </item>
@@ -542,6 +662,8 @@
 
             
 
+            
+
              event, you can inspect the <see
              cref="P:System.Windows.Forms.ToolStripItem.Placement" />
 
@@ -549,8 +671,12 @@
 
             
 
+            
+
              property to determine whether an item was placed on the main <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -568,6 +694,8 @@
 
             
 
+            
+
              in <see
              cref="F:System.Windows.Forms.ToolStripLayoutStyle.Table" />
 
@@ -575,8 +703,12 @@
 
             
 
+            
+
              layout style in a <see
              cref="T:System.Windows.Forms.ToolStripPanel" />
+
+            
 
             
 
@@ -594,8 +726,12 @@
 
             
 
+            
+
              overflow button is not rendered, and <see
              cref="P:System.Windows.Forms.ToolStripItem.Overflow" />
+
+            
 
             
 
@@ -611,6 +747,8 @@
       <para
         >Specifies the possible alignments with which the items of a <see
          cref="T:System.Windows.Forms.ToolStrip" />
+
+        
 
         
 

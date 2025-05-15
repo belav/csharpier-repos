@@ -60,12 +60,16 @@
 
         
 
+        
+
          value type represents unsigned integers with values ranging from 0 to 65535.</para
       >
       <block subset="none" type="note">
         <para
           >   The <see
            cref="T:System.UInt16" />
+
+          
 
           
 
@@ -78,8 +82,12 @@
 
           
 
+          
+
           . <see
            cref="T:System.Int16" />
+
+          
 
           
 
@@ -92,8 +100,12 @@
 
           
 
+          
+
            value that ranges from zero to <see
            cref="F:System.Int16.MaxValue" />
+
+          
 
           
 
@@ -103,6 +115,8 @@
            type="text/html">
             <a href="4f0b77d0-4844-464f-af73-6e06bedeafc6">Common Language Specification</a>
           </format>
+
+          
 
           
 
@@ -119,6 +133,8 @@
 
         
 
+        
+
          structure provides methods to compare instances of this type, convert the value of an instance to its string representation, and convert the string representation of a number to an instance of this type.</para
       >
       <para
@@ -128,6 +144,8 @@
             >[&lt;topic://cpConFormattingOverview&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -172,8 +190,12 @@
 
           
 
+          
+
            is not a <see
            cref="T:System.UInt16" />
+
+          
 
           
 
@@ -191,6 +213,8 @@
 
             
 
+            
+
             , regardless of its value, is considered greater than null.</para
           >
           <para>
@@ -200,8 +224,12 @@
 
             
 
+            
+
              must be null or an instance of <see
              cref="T:System.UInt16" />
+
+            
 
             
 
@@ -219,6 +247,8 @@
           <para
             >A signed number indicating the relative values of this instance and <paramref
              name="value" />
+
+            
 
             
 
@@ -250,6 +280,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -262,6 +294,8 @@
                 <para
                   >This instance is equal to <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -284,11 +318,15 @@
 
                   
 
+                  
+
                   .</para
                 >
                 <para>-or- </para>
                 <para>
                   <paramref name="value" />
+
+                  
 
                   
 
@@ -302,6 +340,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -341,6 +381,8 @@
 
             
 
+            
+
              interface and performs slightly better than the <see
              cref="M:System.UInt16.CompareTo(System.Object)" />
 
@@ -348,8 +390,12 @@
 
             
 
+            
+
              method because it does not have to convert the <paramref
              name="value" />
+
+            
 
             
 
@@ -365,11 +411,15 @@
 
             
 
+            
+
              method where the parameter type has fewer bits (is narrower) than the instance type. This is possible because some programming languages perform an implicit widening conversion that represents the parameter as a type with as many bits as the instance.</para
           >
           <para
             >For example, suppose the instance type is <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -382,8 +432,12 @@
 
             
 
+            
+
             . The Microsoft C# compiler generates instructions to represent the value of the parameter as an <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -396,6 +450,8 @@
 
             
 
+            
+
              method that compares the values of the <see
              cref="T:System.Int32" />
 
@@ -403,8 +459,12 @@
 
             
 
+            
+
              instance and the <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -423,6 +483,8 @@
           <para
             >A signed number indicating the relative values of this instance and <paramref
              name="value" />
+
+            
 
             
 
@@ -454,6 +516,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -466,6 +530,8 @@
                 <para
                   >This instance is equal to <paramref
                    name="value" />
+
+                  
 
                   
 
@@ -488,6 +554,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -496,6 +564,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -539,6 +609,8 @@
 
               
 
+              
+
               .</block
             >
           </para>
@@ -557,8 +629,12 @@
 
             
 
+            
+
              is an instance of <see
              cref="T:System.UInt16" />
+
+            
 
             
 
@@ -569,6 +645,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -608,6 +686,8 @@
 
             
 
+            
+
              interface, and performs slightly better than <see
              cref="M:System.UInt16.Equals(System.Object)" />
 
@@ -615,8 +695,12 @@
 
             
 
+            
+
              because it does not have to convert the <paramref
              name="obj" />
+
+            
 
             
 
@@ -635,6 +719,8 @@
 
             
 
+            
+
              value.</para
           >
         </summary>
@@ -648,11 +734,15 @@
 
             
 
+            
+
              has the same value as this instance; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -691,6 +781,8 @@
               >This method
       overrides <see
                cref="M:System.Object.GetHashCode" />
+
+              
 
               
 
@@ -739,8 +831,12 @@
 
             
 
+            
+
              for value type <see
              cref="T:System.UInt16" />
+
+            
 
             
 
@@ -754,6 +850,8 @@
           <para
             >The enumerated constant, <see
              cref="F:System.TypeCode.UInt16" />
+
+            
 
             
 
@@ -795,6 +893,8 @@
           <para
             >Represents the largest possible value of <see
              cref="T:System.UInt16" />
+
+            
 
             
 
@@ -842,6 +942,8 @@
 
             
 
+            
+
             . This field is constant.</para
           >
         </summary>
@@ -883,10 +985,14 @@
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -901,8 +1007,12 @@
 
           
 
+          
+
            represents a number greater than <see
            cref="F:System.UInt16.MaxValue" />
+
+          
 
           
 
@@ -915,12 +1025,16 @@
 
           
 
+          
+
           .</exception
         >
         <example>
           <para
             >This example demonstrates parsing a string to a <see
              cref="T:System.UInt16" />
+
+            
 
             
 
@@ -949,6 +1063,8 @@ public class UInt16ParseClass {
           <para
             >The <paramref
              name="s" />
+
+            
 
             
 
@@ -990,6 +1106,8 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    and <see
                    cref="P:System.Globalization.NumberFormatInfo.PositiveSign" />
 
@@ -997,8 +1115,12 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    properties of the current culture. However, the negative sign symbol can be used only with zero; otherwise, the method throws an <see
                    cref="T:System.OverflowException" />
+
+                  
 
                   
 
@@ -1026,8 +1148,12 @@ public class UInt16ParseClass {
 
               
 
+              
+
                parameter is interpreted by using the <see
                cref="F:System.Globalization.NumberStyles.Integer" />
+
+              
 
               
 
@@ -1044,8 +1170,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              parameter is parsed by using the formatting information in a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -1058,8 +1188,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
             . To parse a string by using the formatting information of a specific culture, use the <see
              cref="M:System.UInt16.Parse(System.String,System.IFormatProvider)" />
+
+            
 
             
 
@@ -1082,11 +1216,15 @@ public class UInt16ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1136,10 +1274,14 @@ public class UInt16ParseClass {
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -1154,6 +1296,8 @@ public class UInt16ParseClass {
 
           
 
+          
+
            represents a number greater than <see
            cref="F:System.UInt16.MaxValue" />
 
@@ -1161,8 +1305,12 @@ public class UInt16ParseClass {
 
           
 
+          
+
            or less than <see
            cref="F:System.UInt16.MinValue" />
+
+          
 
           
 
@@ -1177,8 +1325,12 @@ public class UInt16ParseClass {
 
           
 
+          
+
           A string that represents the number to convert. The string is interpreted by using the style specified by the <paramref
            name="style" />
+
+          
 
           
 
@@ -1193,6 +1345,8 @@ public class UInt16ParseClass {
 
           
 
+          
+
           A bitwise combination of the enumeration values that specify the permitted format of <paramref
            name="s" />
 
@@ -1200,8 +1354,12 @@ public class UInt16ParseClass {
 
           
 
+          
+
           . A typical value to specify is <see
            cref="F:System.Globalization.NumberStyles.Integer" />
+
+          
 
           
 
@@ -1219,8 +1377,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              parameter defines the style elements (such as white space, the positive or negative sign symbol, the group separator symbol, or the decimal point symbol) that are allowed in the <paramref
              name="s" />
+
+            
 
             
 
@@ -1233,8 +1395,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              must be a combination of bit flags from the <see
              cref="T:System.Globalization.NumberStyles" />
+
+            
 
             
 
@@ -1247,8 +1413,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              parameter makes this method overload useful when <paramref
              name="s" />
+
+            
 
             
 
@@ -1261,8 +1431,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              is known only at run time, or when you want to disallow white space or a sign symbol in <paramref
              name="s" />
+
+            
 
             
 
@@ -1278,8 +1452,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
             , the <paramref
              name="s" />
+
+            
 
             
 
@@ -1296,6 +1474,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
              includes <see
              cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
 
@@ -1303,8 +1483,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
             , the <paramref
              name="s" />
+
+            
 
             
 
@@ -1338,8 +1522,12 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -1352,8 +1540,12 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    flag, and it can appear at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -1366,8 +1558,12 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+
+                  
 
                   
 
@@ -1390,8 +1586,12 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    and <see
                    cref="P:System.Globalization.NumberFormatInfo.CurrencyPositivePattern" />
+
+                  
 
                   
 
@@ -1404,6 +1604,8 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
 
@@ -1411,8 +1613,12 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowCurrencySymbol" />
+
+                  
 
                   
 
@@ -1435,8 +1641,12 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -1449,8 +1659,12 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    flag, and it can appear at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -1463,8 +1677,12 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowTrailingSign" />
+
+                  
 
                   
 
@@ -1477,8 +1695,12 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    to indicate a negative value if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -1491,8 +1713,12 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    flag. However, the negative sign symbol can be used only with zero; otherwise, the method throws an <see
                    cref="T:System.OverflowException" />
+
+                  
 
                   
 
@@ -1525,6 +1751,8 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
 
@@ -1532,8 +1760,12 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowThousands" />
+
+                  
 
                   
 
@@ -1556,8 +1788,12 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -1570,8 +1806,12 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    flag. Only the digit 0 can appear as a fractional digit for the parse operation to succeed; if fractional_digits includes any other digit, a <see
                    cref="T:System.FormatException" />
+
+                  
 
                   
 
@@ -1594,6 +1834,8 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    parameter can represent a number in exponential notation if <paramref
                    name="style" />
 
@@ -1601,8 +1843,12 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowExponent" />
+
+                  
 
                   
 
@@ -1629,8 +1875,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              style) always parses successfully. Most of the remaining <see
              cref="T:System.Globalization.NumberStyles" />
+
+            
 
             
 
@@ -1643,8 +1893,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              members affect the elements that may be present in <paramref
              name="s" />
+
+            
 
             
 
@@ -1662,6 +1916,8 @@ public class UInt16ParseClass {
                   <para
                     >Elements permitted in <paramref
                      name="s" />
+
+                    
 
                     
 
@@ -1717,6 +1973,8 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -1731,6 +1989,8 @@ public class UInt16ParseClass {
                 <para
                   >The ws element at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -1755,6 +2015,8 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -1769,6 +2031,8 @@ public class UInt16ParseClass {
                 <para
                   >The sign element at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -1823,6 +2087,8 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    cannot represent a hexadecimal number or a number in exponential notation.</para
                 >
               </description>
@@ -1842,6 +2108,8 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                   , sign at the start of <paramref
                    name="s" />
 
@@ -1849,8 +2117,12 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                   , and the decimal point (.) symbol. The <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -1875,8 +2147,12 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                   , <paramref
                    name="sign" />
+
+                  
 
                   
 
@@ -1901,6 +2177,8 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    cannot represent a hexadecimal number.</para
                 >
               </description>
@@ -1914,8 +2192,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              values, which allow for, but do not require, the presence of particular style elements in <paramref
              name="s" />
+
+            
 
             
 
@@ -1928,8 +2210,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              style value means that the individual numeric characters in <paramref
              name="s" />
+
+            
 
             
 
@@ -1942,8 +2228,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              parameter are <see
              cref="F:System.Globalization.NumberStyles.AllowLeadingWhite" />
+
+            
 
             
 
@@ -1956,6 +2246,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
             . (The <see
              cref="T:System.Globalization.NumberStyles" />
 
@@ -1963,8 +2255,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              enumeration includes a composite number style, <see
              cref="F:System.Globalization.NumberStyles.HexNumber" />
+
+            
 
             
 
@@ -1981,12 +2277,16 @@ public class UInt16ParseClass {
 
               
 
+              
+
                is the string representation of a hexadecimal number, it cannot be preceded by any decoration (such as 0x or &amp;h) that differentiates it as a hexadecimal number. This causes the conversion to fail.</para
             >
           </block>
           <para
             >The <paramref
              name="s" />
+
+            
 
             
 
@@ -1999,8 +2299,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              object that is initialized for the current system culture. To specify the culture whose formatting information is used for the parse operation, call the <see
              cref="M:System.UInt16.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" />
+
+            
 
             
 
@@ -2023,6 +2327,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -2033,8 +2339,12 @@ public class UInt16ParseClass {
 
           
 
+          
+
           A string that represents the number to convert. The string is interpreted by using the style specified by the <paramref
            name="style" />
+
+          
 
           
 
@@ -2049,6 +2359,8 @@ public class UInt16ParseClass {
 
           
 
+          
+
           A bitwise combination of the enumeration values that specify the permitted format of <paramref
            name="s" />
 
@@ -2056,8 +2368,12 @@ public class UInt16ParseClass {
 
           
 
+          
+
           . A typical value to specify is <see
            cref="F:System.Globalization.NumberStyles.Integer" />
+
+          
 
           
 
@@ -2107,10 +2423,14 @@ public class UInt16ParseClass {
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -2125,6 +2445,8 @@ public class UInt16ParseClass {
 
           
 
+          
+
            represents a number greater than <see
            cref="F:System.UInt16.MaxValue" />
 
@@ -2132,8 +2454,12 @@ public class UInt16ParseClass {
 
           
 
+          
+
            or less than <see
            cref="F:System.UInt16.MinValue" />
+
+          
 
           
 
@@ -2148,10 +2474,14 @@ public class UInt16ParseClass {
 
           
 
+          
+
           A string that represents the number to convert. </param
         >
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2164,6 +2494,8 @@ public class UInt16ParseClass {
 
           
 
+          
+
           . </param
         >
         <remarks>
@@ -2171,6 +2503,8 @@ public class UInt16ParseClass {
           <para
             >The <paramref
              name="s" />
+
+            
 
             
 
@@ -2212,6 +2546,8 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    represents the value zero.</para
                 >
               </description>
@@ -2233,8 +2569,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              style. In addition to the byte value's decimal digits, only leading and trailing spaces along with a leading sign is allowed. (If the negative sign is present, <paramref
              name="s" />
+
+            
 
             
 
@@ -2247,6 +2587,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
             .) To explicitly define the style elements together with the culture-specific formatting information that can be present in <paramref
              name="s" />
 
@@ -2254,8 +2596,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
             , use the <see
              cref="M:System.UInt16.Parse(System.String,System.Globalization.NumberStyles,System.IFormatProvider)" />
+
+            
 
             
 
@@ -2271,8 +2617,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              parameter is an <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -2285,8 +2635,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              method returns a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -2299,8 +2653,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
             . There are three ways to use the <paramref
              name="provider" />
+
+            
 
             
 
@@ -2318,8 +2676,12 @@ public class UInt16ParseClass {
 
                 
 
+                
+
                  object that provides formatting information. (Its implementation of <see
                  cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+
+                
 
                 
 
@@ -2337,8 +2699,12 @@ public class UInt16ParseClass {
 
                 
 
+                
+
                  object that specifies the culture whose formatting is to be used. Its <see
                  cref="P:System.Globalization.CultureInfo.NumberFormat" />
+
+                
 
                 
 
@@ -2356,6 +2722,8 @@ public class UInt16ParseClass {
 
                 
 
+                
+
                  implementation. Its <see
                  cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
@@ -2363,8 +2731,12 @@ public class UInt16ParseClass {
 
                 
 
+                
+
                  method must instantiate and return the <see
                  cref="T:System.Globalization.NumberFormatInfo" />
+
+                
 
                 
 
@@ -2382,8 +2754,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              is null, the <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -2406,11 +2782,15 @@ public class UInt16ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2425,8 +2805,12 @@ public class UInt16ParseClass {
 
           
 
+          
+
           An object that supplies culture-specific formatting information about <paramref
            name="s" />
+
+          
 
           
 
@@ -2477,10 +2861,14 @@ public class UInt16ParseClass {
 
           
 
+          
+
            is a null reference.</exception
         >
         <exception cref="T:System.FormatException">
           <paramref name="s" />
+
+          
 
           
 
@@ -2495,6 +2883,8 @@ public class UInt16ParseClass {
 
           
 
+          
+
            represents a number greater than <see
            cref="F:System.UInt16.MaxValue" />
 
@@ -2502,8 +2892,12 @@ public class UInt16ParseClass {
 
           
 
+          
+
            or less than <see
            cref="F:System.UInt16.MinValue" />
+
+          
 
           
 
@@ -2518,8 +2912,12 @@ public class UInt16ParseClass {
 
           
 
+          
+
           A string that represents the number to convert. The string is interpreted by using the style specified by the <paramref
            name="style" />
+
+          
 
           
 
@@ -2534,6 +2932,8 @@ public class UInt16ParseClass {
 
           
 
+          
+
           A bitwise combination of enumeration values that indicate the style elements that can be present in <paramref
            name="s" />
 
@@ -2541,8 +2941,12 @@ public class UInt16ParseClass {
 
           
 
+          
+
           . A typical value to specify is <see
            cref="F:System.Globalization.NumberStyles.Integer" />
+
+          
 
           
 
@@ -2557,8 +2961,12 @@ public class UInt16ParseClass {
 
           
 
+          
+
           An object that supplies culture-specific formatting information about <paramref
            name="s" />
+
+          
 
           
 
@@ -2576,6 +2984,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
              parameter defines the style elements (such as white space or the positive or negative sign symbol) that are allowed in the <paramref
              name="s" />
 
@@ -2583,8 +2993,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              parameter for the parse operation to succeed. It must be a combination of bit flags from the <see
              cref="T:System.Globalization.NumberStyles" />
+
+            
 
             
 
@@ -2600,8 +3014,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
             , the <paramref
              name="s" />
+
+            
 
             
 
@@ -2618,6 +3036,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
              includes <see
              cref="F:System.Globalization.NumberStyles.AllowHexSpecifier" />
 
@@ -2625,8 +3045,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
             , the <paramref
              name="s" />
+
+            
 
             
 
@@ -2660,8 +3084,12 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -2674,8 +3102,12 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    flag, and it can appear at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -2688,8 +3120,12 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+
+                  
 
                   
 
@@ -2712,8 +3148,12 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    property of the <see
                    cref="T:System.Globalization.NumberFormatInfo" />
+
+                  
 
                   
 
@@ -2726,8 +3166,12 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    method of the <paramref
                    name="provider" />
+
+                  
 
                   
 
@@ -2740,6 +3184,8 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
 
@@ -2747,8 +3193,12 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowCurrencySymbol" />
+
+                  
 
                   
 
@@ -2771,8 +3221,12 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    if <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -2785,8 +3239,12 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
+
+                  
 
                   
 
@@ -2799,8 +3257,12 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    flag, and it can appear the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -2813,8 +3275,12 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowTrailingSign" />
+
+                  
 
                   
 
@@ -2827,6 +3293,8 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    to indicate a negative value if <paramref
                    name="style" />
 
@@ -2834,8 +3302,12 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowParentheses" />
+
+                  
 
                   
 
@@ -2866,6 +3338,8 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    if <paramref
                    name="style" />
 
@@ -2873,8 +3347,12 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
+
+                  
 
                   
 
@@ -2897,8 +3375,12 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowExponent" />
+
+                  
 
                   
 
@@ -2911,6 +3393,8 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    only if <paramref
                    name="style" />
 
@@ -2918,8 +3402,12 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowDecimalPoint" />
+
+                  
 
                   
 
@@ -2942,6 +3430,8 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    parameter can represent a number in exponential notation if <paramref
                    name="style" />
 
@@ -2949,8 +3439,12 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowExponent" />
+
+                  
 
                   
 
@@ -2973,6 +3467,8 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    parameter can represent a number in exponential notation if <paramref
                    name="style" />
 
@@ -2980,8 +3476,12 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    includes the <see
                    cref="F:System.Globalization.NumberStyles.AllowExponent" />
+
+                  
 
                   
 
@@ -3008,8 +3508,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              style) always parses successfully. Most of the remaining <see
              cref="T:System.Globalization.NumberStyles" />
+
+            
 
             
 
@@ -3022,8 +3526,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              members affect the elements that may be present in <paramref
              name="s" />
+
+            
 
             
 
@@ -3041,6 +3549,8 @@ public class UInt16ParseClass {
                   <para
                     >Elements permitted in <paramref
                      name="s" />
+
+                    
 
                     
 
@@ -3076,8 +3586,12 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                    flag, fractional_digits must consist of only one or more 0 digits; otherwise, an <see
                    cref="T:System.OverflowException" />
+
+                  
 
                   
 
@@ -3112,6 +3626,8 @@ public class UInt16ParseClass {
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -3126,6 +3642,8 @@ public class UInt16ParseClass {
                 <para
                   >The ws element at the end of <paramref
                    name="s" />
+
+                  
 
                   
 
@@ -3194,8 +3712,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              flag is used, <paramref
              name="s" />
+
+            
 
             
 
@@ -3208,8 +3730,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              and <see
              cref="F:System.Globalization.NumberStyles.AllowTrailingWhite" />
+
+            
 
             
 
@@ -3222,8 +3748,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              enumeration includes a composite number style, <see
              cref="F:System.Globalization.NumberStyles.HexNumber" />
+
+            
 
             
 
@@ -3240,12 +3770,16 @@ public class UInt16ParseClass {
 
               
 
+              
+
                parameter is the string representation of a hexadecimal number, it cannot be preceded by any decoration (such as 0x or &amp;h) that differentiates it as a hexadecimal number. This causes the parse operation to throw an exception.</para
             >
           </block>
           <para
             >The <paramref
              name="provider" />
+
+            
 
             
 
@@ -3258,8 +3792,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              implementation whose <see
              cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+
+            
 
             
 
@@ -3272,6 +3810,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
              object that provides culture-specific information about the format of <paramref
              name="s" />
 
@@ -3279,8 +3819,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
             . There are three ways to use the <paramref
              name="provider" />
+
+            
 
             
 
@@ -3298,8 +3842,12 @@ public class UInt16ParseClass {
 
                 
 
+                
+
                  object that provides formatting information. (Its implementation of <see
                  cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+
+                
 
                 
 
@@ -3317,8 +3865,12 @@ public class UInt16ParseClass {
 
                 
 
+                
+
                  object that specifies the culture whose formatting is to be used. Its <see
                  cref="P:System.Globalization.CultureInfo.NumberFormat" />
+
+                
 
                 
 
@@ -3336,6 +3888,8 @@ public class UInt16ParseClass {
 
                 
 
+                
+
                  implementation. Its <see
                  cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
@@ -3343,8 +3897,12 @@ public class UInt16ParseClass {
 
                 
 
+                
+
                  method must instantiate and return the <see
                  cref="T:System.Globalization.NumberFormatInfo" />
+
+                
 
                 
 
@@ -3362,8 +3920,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              is null, the <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -3386,6 +3948,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -3396,8 +3960,12 @@ public class UInt16ParseClass {
 
           
 
+          
+
           A string that represents the number to convert. The string is interpreted by using the style specified by the <paramref
            name="style" />
+
+          
 
           
 
@@ -3412,6 +3980,8 @@ public class UInt16ParseClass {
 
           
 
+          
+
           A bitwise combination of enumeration values that indicate the style elements that can be present in <paramref
            name="s" />
 
@@ -3419,8 +3989,12 @@ public class UInt16ParseClass {
 
           
 
+          
+
           . A typical value to specify is <see
            cref="F:System.Globalization.NumberStyles.Integer" />
+
+          
 
           
 
@@ -3435,8 +4009,12 @@ public class UInt16ParseClass {
 
           
 
+          
+
           An object that supplies culture-specific formatting information about <paramref
            name="s" />
+
+          
 
           
 
@@ -3479,6 +4057,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -3486,8 +4066,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToBoolean(System.UInt16)" />
+
+            
 
             
 
@@ -3506,6 +4090,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -3515,6 +4101,8 @@ public class UInt16ParseClass {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3553,6 +4141,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -3560,8 +4150,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToByte(System.UInt16)" />
+
+            
 
             
 
@@ -3580,6 +4174,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -3593,11 +4189,15 @@ public class UInt16ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3636,6 +4236,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -3643,8 +4245,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToChar(System.UInt16)" />
+
+            
 
             
 
@@ -3663,6 +4269,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -3676,11 +4284,15 @@ public class UInt16ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3723,6 +4335,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3732,6 +4346,8 @@ public class UInt16ParseClass {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3773,6 +4389,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -3780,8 +4398,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToDecimal(System.UInt16)" />
+
+            
 
             
 
@@ -3800,6 +4422,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -3813,11 +4437,15 @@ public class UInt16ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3859,6 +4487,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -3866,8 +4496,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToDouble(System.UInt16)" />
+
+            
 
             
 
@@ -3886,6 +4520,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -3899,11 +4535,15 @@ public class UInt16ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3945,6 +4585,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -3952,8 +4594,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToInt16(System.UInt16)" />
+
+            
 
             
 
@@ -3972,6 +4618,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -3985,11 +4633,15 @@ public class UInt16ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4028,6 +4680,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -4035,8 +4689,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToInt32(System.UInt16)" />
+
+            
 
             
 
@@ -4055,6 +4713,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -4068,11 +4728,15 @@ public class UInt16ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4114,6 +4778,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -4121,8 +4787,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToInt64(System.UInt16)" />
+
+            
 
             
 
@@ -4141,6 +4811,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -4154,11 +4826,15 @@ public class UInt16ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4200,6 +4876,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -4207,8 +4885,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToSByte(System.UInt16)" />
+
+            
 
             
 
@@ -4227,6 +4909,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -4240,11 +4924,15 @@ public class UInt16ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4286,6 +4974,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -4293,8 +4983,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToSingle(System.UInt16)" />
+
+            
 
             
 
@@ -4313,6 +5007,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -4326,11 +5022,15 @@ public class UInt16ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4374,6 +5074,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -4381,8 +5083,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              interface. The recommended alternative is to call the static (Shared in Visual Basic) <see
              cref="M:System.Convert.ChangeType(System.Object,System.Type,System.IFormatProvider)" />
+
+            
 
             
 
@@ -4401,6 +5107,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -4409,6 +5117,8 @@ public class UInt16ParseClass {
           <para
             >The current value of this instance, converted to <paramref
              name="type" />
+
+            
 
             
 
@@ -4424,8 +5134,12 @@ public class UInt16ParseClass {
 
           
 
+          
+
           An <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -4467,8 +5181,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
+
+            
 
             
 
@@ -4487,6 +5205,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -4496,6 +5216,8 @@ public class UInt16ParseClass {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4537,6 +5259,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -4544,8 +5268,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToUInt32(System.UInt16)" />
+
+            
 
             
 
@@ -4564,6 +5292,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -4577,11 +5307,15 @@ public class UInt16ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4623,6 +5357,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IConvertible" />
 
@@ -4630,8 +5366,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              interface. The recommended alternative is to call the <see
              cref="M:System.Convert.ToUInt64(System.UInt16)" />
+
+            
 
             
 
@@ -4650,6 +5390,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -4663,11 +5405,15 @@ public class UInt16ParseClass {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4708,8 +5454,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              method formats a <see
              cref="T:System.UInt16" />
+
+            
 
             
 
@@ -4722,8 +5472,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              object of the current culture. If you want to specify a different format or culture, use the other overloads of the <see
              cref="M:System.UInt16.ToString(System.String)" />
+
+            
 
             
 
@@ -4831,8 +5585,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              method formats a <see
              cref="T:System.UInt16" />
+
+            
 
             
 
@@ -4845,8 +5603,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              object of a specified culture. If you want to specify a different format or the current culture, use the other overloads of the <see
              cref="M:System.UInt16.ToString(System.String)" />
+
+            
 
             
 
@@ -4916,8 +5678,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              parameter is an <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -4930,6 +5696,8 @@ public class UInt16ParseClass {
 
             
 
+            
+
              method returns a <see
              cref="T:System.Globalization.NumberFormatInfo" />
 
@@ -4937,8 +5705,12 @@ public class UInt16ParseClass {
 
             
 
+            
+
              object that provides culture-specific formatting information. However, none of the properties of the <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -4957,6 +5729,8 @@ public class UInt16ParseClass {
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4997,12 +5771,16 @@ public class UInt16ParseClass {
 
           
 
+          
+
            is invalid.</exception
         >
         <example>
           <para
             >This example demonstrates converting a <see
              cref="T:System.UInt16" />
+
+            
 
             
 
@@ -5046,8 +5824,12 @@ public class UInt16ToStringExample {
 
             
 
+            
+
              method formats a <see
              cref="T:System.UInt16" />
+
+            
 
             
 
@@ -5060,8 +5842,12 @@ public class UInt16ToStringExample {
 
             
 
+            
+
              object that represents the conventions of the current culture. If you want to use the default ("G", or general) format or specify a different culture, use the other overloads of the <see
              cref="M:System.UInt16.ToString(System.String)" />
+
+            
 
             
 
@@ -5131,10 +5917,14 @@ public class UInt16ToStringExample {
 
             
 
+            
+
              parameter can be any valid <format
              type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">standard numeric format specifier</a>
             </format>
+
+            
 
             
 
@@ -5149,8 +5939,12 @@ public class UInt16ToStringExample {
 
             
 
+            
+
             . If <paramref
              name="format" />
+
+            
 
             
 
@@ -5163,8 +5957,12 @@ public class UInt16ToStringExample {
 
             
 
+            
+
              or is null, the return value of the current <see
              cref="T:System.UInt16" />
+
+            
 
             
 
@@ -5177,8 +5975,12 @@ public class UInt16ToStringExample {
 
             
 
+            
+
              is any other value, the method throws a <see
              cref="T:System.FormatException" />
+
+            
 
             
 
@@ -5199,10 +6001,14 @@ public class UInt16ToStringExample {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -5222,6 +6028,8 @@ public class UInt16ToStringExample {
 
                 
 
+                
+
                 . </para
               >
             </item>
@@ -5234,6 +6042,8 @@ public class UInt16ToStringExample {
 
             
 
+            
+
              object for the current culture. Depending on the <paramref
              name="format" />
 
@@ -5241,8 +6051,12 @@ public class UInt16ToStringExample {
 
             
 
+            
+
              parameter, this object controls symbols such as the group separator and the decimal point symbol in the output string. To provide formatting information for cultures other than the current culture, call the <see
              cref="M:System.UInt16.ToString(System.String,System.IFormatProvider)" />
+
+            
 
             
 
@@ -5265,11 +6079,15 @@ public class UInt16ToStringExample {
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5314,10 +6132,14 @@ public class UInt16ToStringExample {
 
           
 
+          
+
            is invalid.</exception
         >
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5335,8 +6157,12 @@ public class UInt16ToStringExample {
 
             
 
+            
+
              method formats a <see
              cref="T:System.UInt16" />
+
+            
 
             
 
@@ -5349,8 +6175,12 @@ public class UInt16ToStringExample {
 
             
 
+            
+
              object of a specified culture. If you want to use default format or culture settings, use the other overloads of the <see
              cref="M:System.UInt16.ToString(System.String)" />
+
+            
 
             
 
@@ -5421,10 +6251,14 @@ public class UInt16ToStringExample {
 
             
 
+            
+
              parameter can be any valid <format
              type="text/html">
               <a href="580e57eb-ac47-4ffd-bccd-3a1637c2f467">standard numeric format specifier</a>
             </format>
+
+            
 
             
 
@@ -5439,8 +6273,12 @@ public class UInt16ToStringExample {
 
             
 
+            
+
             . If <paramref
              name="format" />
+
+            
 
             
 
@@ -5453,8 +6291,12 @@ public class UInt16ToStringExample {
 
             
 
+            
+
              or is null, the return value of the current <see
              cref="T:System.UInt16" />
+
+            
 
             
 
@@ -5467,8 +6309,12 @@ public class UInt16ToStringExample {
 
             
 
+            
+
              is any other value, the method throws a <see
              cref="T:System.FormatException" />
+
+            
 
             
 
@@ -5489,10 +6335,14 @@ public class UInt16ToStringExample {
 
                 
 
+                
+
                  and <format
                  type="text/html">
                   <a href="6f74fd32-6c6b-48ed-8241-3c2b86dea5f4">Custom Numeric Format Strings</a>
                 </format>
+
+                
 
                 
 
@@ -5512,6 +6362,8 @@ public class UInt16ToStringExample {
 
                 
 
+                
+
                 . </para
               >
             </item>
@@ -5524,8 +6376,12 @@ public class UInt16ToStringExample {
 
             
 
+            
+
              parameter is an <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -5538,8 +6394,12 @@ public class UInt16ToStringExample {
 
             
 
+            
+
              method returns a <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -5552,8 +6412,12 @@ public class UInt16ToStringExample {
 
             
 
+            
+
              method is invoked, it calls the <paramref
              name="provider" />
+
+            
 
             
 
@@ -5566,8 +6430,12 @@ public class UInt16ToStringExample {
 
             
 
+            
+
              method and passes it a <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -5580,8 +6448,12 @@ public class UInt16ToStringExample {
 
             
 
+            
+
              type. The <see
              cref="M:System.IFormatProvider.GetFormat(System.Type)" />
+
+            
 
             
 
@@ -5594,8 +6466,12 @@ public class UInt16ToStringExample {
 
             
 
+            
+
              object that provides information for formatting the current <see
              cref="T:System.UInt16" />
+
+            
 
             
 
@@ -5608,8 +6484,12 @@ public class UInt16ToStringExample {
 
             
 
+            
+
              parameter to supply formatting information to the <see
              cref="M:System.UInt16.ToString(System.String,System.IFormatProvider)" />
+
+            
 
             
 
@@ -5627,6 +6507,8 @@ public class UInt16ToStringExample {
 
                 
 
+                
+
                  object that represents the culture that supplies formatting information. Its <see
                  cref="M:System.Globalization.CultureInfo.GetFormat(System.Type)" />
 
@@ -5634,8 +6516,12 @@ public class UInt16ToStringExample {
 
                 
 
+                
+
                  method returns the <see
                  cref="T:System.Globalization.NumberFormatInfo" />
+
+                
 
                 
 
@@ -5653,8 +6539,12 @@ public class UInt16ToStringExample {
 
                 
 
+                
+
                  object that provides numeric formatting information. (Its implementation of <see
                  cref="M:System.Globalization.NumberFormatInfo.GetFormat(System.Type)" />
+
+                
 
                 
 
@@ -5672,6 +6562,8 @@ public class UInt16ToStringExample {
 
                 
 
+                
+
                 . Its <see
                  cref="M:System.IFormatProvider.GetFormat(System.Type)" />
 
@@ -5679,8 +6571,12 @@ public class UInt16ToStringExample {
 
                 
 
+                
+
                  method instantiates and returns the <see
                  cref="T:System.Globalization.NumberFormatInfo" />
+
+                
 
                 
 
@@ -5698,8 +6594,12 @@ public class UInt16ToStringExample {
 
             
 
+            
+
              is null, the formatting of the returned string is based on the <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -5722,8 +6622,12 @@ public class UInt16ToStringExample {
 
             
 
+            
+
              and <paramref
              name="provider" />
+
+            
 
             
 
@@ -5739,10 +6643,14 @@ public class UInt16ToStringExample {
 
           
 
+          
+
           A numeric format string.</param
         >
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

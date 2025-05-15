@@ -37,8 +37,12 @@
 
         
 
+        
+
          resets the enumerator to this position. At this position, calling <see
          cref="P:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.Current" />
+
+        
 
         
 
@@ -51,8 +55,12 @@
 
         
 
+        
+
          to advance the enumerator to the first element of the collection before reading the value of <see
          cref="P:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.Current" />
+
+        
 
         
 
@@ -68,6 +76,8 @@
 
         
 
+        
+
         . See the class for more information about enumerating over a collection.</para
       >
     </remarks>
@@ -76,6 +86,8 @@
       <para
         >Supports a simple iteration over an <see
          cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" />
+
+        
 
         
 
@@ -115,8 +127,12 @@
 
             
 
+            
+
              does not move the position of the enumerator and consecutive calls to <see
              cref="P:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.Current" />
+
+            
 
             
 
@@ -129,8 +145,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.Reset" />
+
+            
 
             
 
@@ -144,6 +164,8 @@
           <para
             >Gets the current element in the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" />
+
+            
 
             
 
@@ -181,8 +203,12 @@
 
             
 
+            
+
              class inherits from <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -196,6 +222,8 @@
           <para
             >Advances the enumerator to the next element in the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" />
+
+            
 
             
 
@@ -237,6 +265,8 @@
 
             
 
+            
+
              or <see
              cref="M:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.Reset" />
 
@@ -244,8 +274,12 @@
 
             
 
+            
+
              throws an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -259,6 +293,8 @@
           <para
             >Sets the enumerator to its initial position, which is before the first element in the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" />
+
+            
 
             
 
@@ -297,8 +333,12 @@
 
             
 
+            
+
              does not move the position of the enumerator and consecutive calls to <see
              cref="P:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.Current" />
+
+            
 
             
 
@@ -311,8 +351,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.Reset" />
+
+            
 
             
 
@@ -326,6 +370,8 @@
           <para
             >Gets the current element in the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" />
+
+            
 
             
 

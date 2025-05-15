@@ -65,8 +65,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Security.ISecurityEncodable.FromXml(System.Security.SecurityElement)" />
+
+            
 
             
 
@@ -81,6 +85,8 @@
         </summary>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -117,8 +123,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Security.ISecurityEncodable.FromXml(System.Security.SecurityElement)" />
+
+            
 
             
 

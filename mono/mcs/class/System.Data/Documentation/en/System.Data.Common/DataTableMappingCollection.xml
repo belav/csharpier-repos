@@ -41,6 +41,8 @@
 
         
 
+        
+
          objects. This class cannot be inherited.</para
       >
     </summary>
@@ -63,8 +65,12 @@
 
             
 
+            
+
              class. This new instance is empty, that is, it does not yet contain any <see
              cref="T:System.Data.Common.DataTableMapping" />
+
+            
 
             
 
@@ -100,6 +106,8 @@
 
             
 
+            
+
              that is a table mapping to the collection.</para
           >
         </summary>
@@ -109,6 +117,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -147,8 +157,12 @@
 
             
 
+            
+
              object to the collection when given a source table name and a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -167,11 +181,15 @@
 
             
 
+            
+
              object that was added to the collection.</para
           >
         </returns>
         <param name="sourceTable">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -186,8 +204,12 @@
 
           
 
+          
+
           The name, which is not case-sensitive, of the <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -225,6 +247,8 @@
 
             
 
+            
+
              to the end of the collection.</para
           >
         </summary>
@@ -235,8 +259,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -270,6 +298,8 @@
 
             
 
+            
+
              array to the end of the collection.</para
           >
         </summary>
@@ -280,8 +310,12 @@
 
           
 
+          
+
           The array of <see
            cref="T:System.Data.Common.DataTableMapping" />
+
+          
 
           
 
@@ -309,6 +343,8 @@
           <para
             >Removes all <see
              cref="T:System.Data.Common.DataTableMapping" />
+
+            
 
             
 
@@ -344,6 +380,8 @@
 
             
 
+            
+
              object exists in the collection.</para
           >
         </summary>
@@ -352,6 +390,8 @@
           <para
             >true if this collection contains the specified <see
              cref="T:System.Data.Common.DataTableMapping" />
+
+            
 
             
 
@@ -367,6 +407,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
 
@@ -374,8 +416,12 @@
 
           
 
+          
+
            that is the <see
            cref="T:System.Data.Common.DataTableMapping" />
+
+          
 
           
 
@@ -410,6 +456,8 @@
 
             
 
+            
+
              object with the specified source table name exists in the collection.</para
           >
         </summary>
@@ -418,6 +466,8 @@
           <para
             >true if the collection contains a <see
              cref="T:System.Data.Common.DataTableMapping" />
+
+            
 
             
 
@@ -433,8 +483,12 @@
 
           
 
+          
+
           The case-sensitive source table name containing the <see
            cref="T:System.Data.Common.DataTableMapping" />
+
+          
 
           
 
@@ -470,11 +524,15 @@
 
             
 
+            
+
              to the specified array.</para
           >
         </summary>
         <param name="array">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -487,8 +545,12 @@
 
           
 
+          
+
            to which to copy the <see
            cref="T:System.Data.Common.DataTableMappingCollection" />
+
+          
 
           
 
@@ -498,6 +560,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -539,11 +603,15 @@
 
             
 
+            
+
              to the specified array.</para
           >
         </summary>
         <param name="array">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -556,8 +624,12 @@
 
           
 
+          
+
            to which to copy the <see
            cref="T:System.Data.Common.DataTableMappingCollection" />
+
+          
 
           
 
@@ -567,6 +639,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -590,6 +664,8 @@
           <para
             >Gets the number of <see
              cref="T:System.Data.Common.DataTableMapping" />
+
+            
 
             
 
@@ -636,8 +712,12 @@
 
             
 
+            
+
              object with the specified <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -656,8 +736,12 @@
 
             
 
+            
+
              object with the specified <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -673,8 +757,12 @@
 
           
 
+          
+
           The name, which is not case-sensitive, of the <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -709,6 +797,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -749,6 +839,8 @@
 
             
 
+            
+
              exists in the collection, it is returned.</para
           >
           <para
@@ -759,8 +851,12 @@
 
             
 
+            
+
              does not exist in the collection for a given <see
              cref="T:System.Data.MissingMappingAction" />
+
+            
 
             
 
@@ -792,8 +888,12 @@
 
                   
 
+                  
+
                    object with the given <paramref
                    name="sourceTable" />
+
+                  
 
                   
 
@@ -806,6 +906,8 @@
 
                   
 
+                  
+
                    as the <see
                    cref="T:System.Data.DataSet" />
 
@@ -813,8 +915,12 @@
 
                   
 
+                  
+
                    table name. The created <see
                    cref="T:System.Data.Common.DataTableMapping" />
+
+                  
 
                   
 
@@ -837,6 +943,8 @@
 
                   
 
+                  
+
                    parameter is ignored. </para
                 >
               </description>
@@ -849,6 +957,8 @@
                 <para
                   >Gets null. The <paramref
                    name="dataSetTable" />
+
+                  
 
                   
 
@@ -870,6 +980,8 @@
 
             
 
+            
+
              object with the specified source table name and <see
              cref="T:System.Data.DataSet" />
 
@@ -877,8 +989,12 @@
 
             
 
+            
+
              table name, using the given <see
              cref="T:System.Data.MissingMappingAction" />
+
+            
 
             
 
@@ -897,6 +1013,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -907,8 +1025,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.Common.DataTableMappingCollection" />
+
+          
 
           
 
@@ -923,6 +1045,8 @@
 
           
 
+          
+
           The case-sensitive name of the mapped source table. </param
         >
         <param name="dataSetTable">
@@ -932,8 +1056,12 @@
 
           
 
+          
+
           The name, which is not case-sensitive, of the mapped <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -948,8 +1076,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.MissingMappingAction" />
+
+          
 
           
 
@@ -989,6 +1121,8 @@
 
             
 
+            
+
              object within the collection.</para
           >
         </summary>
@@ -997,6 +1131,8 @@
           <para
             >The zero-based location of the specified <see
              cref="T:System.Data.Common.DataTableMapping" />
+
+            
 
             
 
@@ -1012,6 +1148,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
 
@@ -1019,8 +1157,12 @@
 
           
 
+          
+
            that is the <see
            cref="T:System.Data.Common.DataTableMapping" />
+
+          
 
           
 
@@ -1055,6 +1197,8 @@
 
             
 
+            
+
              object with the specified source table name.</para
           >
         </summary>
@@ -1068,11 +1212,15 @@
 
             
 
+            
+
              object with the specified source table name.</para
           >
         </returns>
         <param name="sourceTable">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1110,8 +1258,12 @@
 
             
 
+            
+
              object with the specified <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1130,8 +1282,12 @@
 
             
 
+            
+
              object with the given <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1144,11 +1300,15 @@
 
             
 
+            
+
              object does not exist in the collection.</para
           >
         </returns>
         <param name="dataSetTable">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1190,8 +1350,12 @@
 
             
 
+            
+
              object into the <see
              cref="T:System.Data.Common.DataTableMappingCollection" />
+
+            
 
             
 
@@ -1207,8 +1371,12 @@
 
           
 
+          
+
           The zero-based index of the <see
            cref="T:System.Data.Common.DataTableMapping" />
+
+          
 
           
 
@@ -1223,8 +1391,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.Common.DataTableMapping" />
+
+          
 
           
 
@@ -1256,8 +1428,12 @@
 
             
 
+            
+
              object into the <see
              cref="T:System.Data.Common.DataTableMappingCollection" />
+
+            
 
             
 
@@ -1276,6 +1452,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -1286,8 +1464,12 @@
 
           
 
+          
+
           The zero-based index of the <see
            cref="T:System.Data.Common.DataTableMapping" />
+
+          
 
           
 
@@ -1302,8 +1484,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.Common.DataTableMapping" />
+
+          
 
           
 
@@ -1406,6 +1592,8 @@
 
             
 
+            
+
              object from the collection.</para
           >
         </summary>
@@ -1416,8 +1604,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.Common.DataTableMapping" />
+
+          
 
           
 
@@ -1448,6 +1640,8 @@
 
             
 
+            
+
              object from the collection.</para
           >
         </summary>
@@ -1458,8 +1652,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.Common.DataTableMapping" />
+
+          
 
           
 
@@ -1494,6 +1692,8 @@
 
             
 
+            
+
              object located at the specified index from the collection.</para
           >
         </summary>
@@ -1504,8 +1704,12 @@
 
           
 
+          
+
           The zero-based index of the <see
            cref="T:System.Data.Common.DataTableMapping" />
+
+          
 
           
 
@@ -1540,11 +1744,15 @@
 
             
 
+            
+
              object with the specified source table name from the collection.</para
           >
         </summary>
         <param name="sourceTable">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1583,8 +1791,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1600,6 +1812,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1608,6 +1822,8 @@
           <para
             >Gets a value indicating whether access to the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1643,8 +1859,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1660,6 +1880,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1668,6 +1890,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1700,8 +1924,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1717,6 +1945,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1725,6 +1955,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1757,8 +1989,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1774,6 +2010,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1782,6 +2020,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1843,8 +2083,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Data.ITableMappingCollection" />
+
+            
 
             
 
@@ -1855,6 +2099,8 @@
           <para
             >For more information, see <see
              cref="M:System.Data.ITableMappingCollection.Add(System.String,System.String)" />
+
+            
 
             
 
@@ -1877,11 +2123,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="sourceTableName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1896,8 +2146,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -1934,8 +2188,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Data.ITableMappingCollection" />
+
+            
 
             
 
@@ -1946,6 +2204,8 @@
           <para
             >For more information, see <see
              cref="M:System.Data.ITableMappingCollection.GetByDataSetTable(System.String)" />
+
+            
 
             
 
@@ -1964,6 +2224,8 @@
 
             
 
+            
+
              table name.</para
           >
         </summary>
@@ -1973,6 +2235,8 @@
         </returns>
         <param name="dataSetTableName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -28,6 +28,8 @@
 
         
 
+        
+
          property to form a hierarchy that must be observed.</para
       >
     </remarks>
@@ -70,6 +72,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -78,6 +82,8 @@
           <para
             >Status of the object activation contained in a <see
              cref="T:System.Runtime.Remoting.Activation.IConstructionReturnMessage" />
+
+            
 
             
 
@@ -93,8 +99,12 @@
 
           
 
+          
+
           The information about the object that is needed to activate it, stored in a <see
            cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
+
+          
 
           
 
@@ -134,6 +144,8 @@
 
             
 
+            
+
              is used to locate the right position in the chain when adding an activator.</para
           >
         </remarks>
@@ -142,6 +154,8 @@
           <para
             >Gets the <see
              cref="T:System.Runtime.Remoting.Activation.ActivatorLevel" />
+
+            
 
             
 

@@ -11,6 +11,8 @@
 
         
 
+        
+
          namespace provides functionality for compiler writers who use managed code to specify attributes in metadata that affect the run-time behavior of the common language runtime.</para
       >
     </summary>
@@ -19,6 +21,8 @@
       <para
         >This namespace is primarily for compiler writers, although several of its classes, such as <see
          cref="T:System.Runtime.CompilerServices.InternalsVisibleToAttribute" />
+
+        
 
         
 

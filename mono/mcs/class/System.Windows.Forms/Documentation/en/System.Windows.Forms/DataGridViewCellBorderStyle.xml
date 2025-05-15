@@ -23,8 +23,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          enumeration. To draw borders only between the rows, specify <see
          cref="F:System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal" />
+
+        
 
         
 
@@ -51,8 +59,12 @@
 
         
 
+        
+
          or <see
          cref="F:System.Windows.Forms.DataGridViewCellBorderStyle.RaisedHorizontal" />
+
+        
 
         
 
@@ -65,6 +77,8 @@
 
         
 
+        
+
         , <see
          cref="F:System.Windows.Forms.DataGridViewCellBorderStyle.SunkenVertical" />
 
@@ -72,8 +86,12 @@
 
         
 
+        
+
          or <see
          cref="F:System.Windows.Forms.DataGridViewCellBorderStyle.RaisedVertical" />
+
+        
 
         
 
@@ -87,8 +105,12 @@
 
         
 
+        
+
          or <see
          cref="F:System.Windows.Forms.DataGridViewCellBorderStyle.Raised" />
+
+        
 
         
 
@@ -102,6 +124,8 @@
       <para
         >Specifies the border styles that can be applied to the cells of a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 

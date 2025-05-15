@@ -32,8 +32,12 @@
 
         
 
+        
+
          attribute enables you to mark fields by using a type that is more specific than the database intrinsic type. The type name is selected from the <see
          cref="T:System.ComponentModel.DataAnnotations.DataType" />
+
+        
 
         
 
@@ -46,11 +50,15 @@
 
         
 
+        
+
          type. This information is then accessed by the field templates to modify how the data field is processed. </para
       >
       <para
         >You use the <see
          cref="T:System.ComponentModel.DataAnnotations.DataTypeAttribute" />
+
+        
 
         
 
@@ -68,8 +76,12 @@
 
             
 
+            
+
              attribute to a data field in the data model and by specifying the additional type name from the <see
              cref="T:System.ComponentModel.DataAnnotations.DataType" />
+
+            
 
             
 
@@ -87,6 +99,8 @@
 
             
 
+            
+
              attribute. </para
           >
         </item>
@@ -94,6 +108,8 @@
       <para
         >When you apply the <see
          cref="T:System.ComponentModel.DataAnnotations.DataTypeAttribute" />
+
+        
 
         
 
@@ -122,6 +138,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -130,6 +148,8 @@
           cref="http://go.microsoft.com/fwlink/?LinkId=120736&amp;sref=System.ComponentModel.DataAnnotations.DataTypeAttribute"
           >Run</see
         >
+
+        
 
         
 
@@ -171,6 +191,8 @@
 
             
 
+            
+
              enumeration.</para
           >
         </remarks>
@@ -184,11 +206,15 @@
 
             
 
+            
+
              class by using the specified type name.</para
           >
         </summary>
         <param name="dataType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -222,6 +248,8 @@
 
             
 
+            
+
              attribute.</para
           >
         </remarks>
@@ -235,11 +263,15 @@
 
             
 
+            
+
              class by using the specified field template name.</para
           >
         </summary>
         <param name="customDataType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -374,6 +406,8 @@
 
             
 
+            
+
              attribute.</para
           >
         </remarks>
@@ -387,6 +421,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

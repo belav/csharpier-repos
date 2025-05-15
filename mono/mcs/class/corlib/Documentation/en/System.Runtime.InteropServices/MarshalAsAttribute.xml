@@ -47,8 +47,12 @@
 
         
 
+        
+
         , a <see
          cref="F:System.Runtime.InteropServices.UnmanagedType.LPWStr" />
+
+        
 
         
 
@@ -61,8 +65,12 @@
 
         
 
+        
+
         , or a <see
          cref="F:System.Runtime.InteropServices.UnmanagedType.BStr" />
+
+        
 
         
 
@@ -75,8 +83,12 @@
 
         
 
+        
+
          to COM methods. You can apply the <see
          cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
+
+        
 
         
 
@@ -89,8 +101,12 @@
 
         
 
+        
+
          instead of a <see
          cref="F:System.Runtime.InteropServices.UnmanagedType.BStr" />
+
+        
 
         
 
@@ -107,11 +123,15 @@
 
         
 
+        
+
          passes your marshaling preferences to the common language runtime.</para
       >
       <para
         >Some parameters and return values have different default marshaling behavior when used with COM interop or platform invoke. By default, the runtime marshals a string parameter (and fields in a value type) as a <see
          cref="F:System.Runtime.InteropServices.UnmanagedType.LPStr" />
+
+        
 
         
 
@@ -128,11 +148,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >In most cases, the attribute simply identifies the format of the unmanaged data using the <see
          cref="T:System.Runtime.InteropServices.UnmanagedType" />
+
+        
 
         
 
@@ -150,8 +174,12 @@
 
         
 
+        
+
          enumeration members require additional information. For example, additional information is needed when the <see
          cref="T:System.Runtime.InteropServices.UnmanagedType" />
+
+        
 
         
 
@@ -164,12 +192,16 @@
 
         
 
+        
+
         . For a complete description of how to use this attribute with arrays, see <format
          type="text/html">
           <a href="8A3CCA8B-DD94-4E3D-AD9A-9EE7590654BC"
             >[&lt;topic://cpcondefaultmarshalingforarrays&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -189,8 +221,12 @@
 
         
 
+        
+
          also applies this attribute to parameters, fields, and return values to indicate that the data type in the input type library is not the default type for the corresponding managed data type. Tlbimp.exe always applies the <see
          cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
+
+        
 
         
 
@@ -203,8 +239,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Object" />
+
+        
 
         
 
@@ -216,6 +256,8 @@
         <para
           >The <see
            cref="T:System.Runtime.InteropServices.MarshalAsAttribute" />
+
+          
 
           
 
@@ -262,12 +304,16 @@
 
             
 
+            
+
              enumeration member. The <format
              type="text/html">
               <a href="EC0A8D63-11B3-4ACD-B398-DA1E37E97382"
                 >[&lt;topic://cpgrfTypeLibraryImporterTlbimpexe&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -286,8 +332,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Runtime.InteropServices.UnmanagedType" />
+
+            
 
             
 
@@ -298,6 +348,8 @@
         </summary>
         <param name="unmanagedType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -346,8 +398,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Runtime.InteropServices.UnmanagedType" />
+
+            
 
             
 
@@ -358,6 +414,8 @@
         </summary>
         <param name="unmanagedType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -402,8 +460,12 @@
 
             
 
+            
+
              enumeration to specify the type of the array's elements. If a type is not specified, the default unmanaged type corresponding to the managed array's element type is used. For example, the ArraySubType for a LPWStr array in COM is <see
              cref="F:System.Runtime.InteropServices.UnmanagedType.LPWStr" />
+
+            
 
             
 
@@ -415,6 +477,8 @@
                 >[&lt;topic://cpcondefaultmarshalingforarrays&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -433,8 +497,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Runtime.InteropServices.UnmanagedType.ByValArray" />
+
+            
 
             
 
@@ -523,8 +591,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalTypeRef" />
+
+            
 
             
 
@@ -537,8 +609,12 @@
 
             
 
+            
+
              field enables you to specify a string representing the fully qualified name of a custom marshaler. It is useful for late-bound references, but is less preferred than <see
              cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalTypeRef" />
+
+            
 
             
 
@@ -548,6 +624,8 @@
              type="text/html">
               <a href="49f9ac47-1619-4d6e-9da6-bf06bba12079">Custom Marshaling</a>
             </format>
+
+            
 
             
 
@@ -593,8 +671,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalType" />
+
+            
 
             
 
@@ -607,8 +689,12 @@
 
             
 
+            
+
              field allows easier usage of <see
              cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalType" />
+
+            
 
             
 
@@ -621,8 +707,12 @@
 
             
 
+            
+
              and the second line represents syntax using <see
              cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalTypeRef" />
+
+            
 
             
 
@@ -640,10 +730,14 @@
 
             
 
+            
+
              object using typeof in C#, GetType in Visual Basic, or typeid in C++. For additional information about creating and using custom marshalers, see <format
              type="text/html">
               <a href="49f9ac47-1619-4d6e-9da6-bf06bba12079">Custom Marshaling</a>
             </format>
+
+            
 
             
 
@@ -657,6 +751,8 @@
           <para
             >Implements <see
              cref="F:System.Runtime.InteropServices.MarshalAsAttribute.MarshalType" />
+
+            
 
             
 
@@ -697,8 +793,12 @@
 
             
 
+            
+
              enumeration to specify the type of the safe array's elements. If a type is not specified, the managed element type's default type (if passed as a VARIANT) is used. For example, the SafeArraySubType for an int array in COM is <see
              cref="F:System.Runtime.InteropServices.VarEnum.VT_I4" />
+
+            
 
             
 
@@ -715,6 +815,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -723,6 +825,8 @@
           <para
             >Indicates the element type of the <see
              cref="F:System.Runtime.InteropServices.UnmanagedType.SafeArray" />
+
+            
 
             
 
@@ -759,8 +863,12 @@
 
             
 
+            
+
              is either <see
              cref="F:System.Runtime.InteropServices.VarEnum.VT_UNKNOWN" />
+
+            
 
             
 
@@ -773,8 +881,12 @@
 
             
 
+            
+
             , or <see
              cref="F:System.Runtime.InteropServices.VarEnum.VT_RECORD" />
+
+            
 
             
 
@@ -791,6 +903,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -799,6 +913,8 @@
           <para
             >Indicates the user-defined element type of the <see
              cref="F:System.Runtime.InteropServices.UnmanagedType.SafeArray" />
+
+            
 
             
 
@@ -834,8 +950,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Runtime.InteropServices.UnmanagedType.ByValTStr" />
+
+            
 
             
 
@@ -848,8 +968,12 @@
 
             
 
+            
+
              enumeration. Because the compressed format of the metadata is limited to 0x1FFFFFFF, the range of allowed values for <see
              cref="F:System.Runtime.InteropServices.MarshalAsAttribute.SizeConst" />
+
+            
 
             
 
@@ -864,6 +988,8 @@
                 >[&lt;topic://cpcondefaultmarshalingforarrays&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -904,6 +1030,8 @@
 
             
 
+            
+
              field supports managed-to-unmanaged and unmanaged-to-managed calls. It does not have any effect on managed code that calls COM objects.</para
           >
           <para>Depending on the managed type and the attributes applied to it, the array can be passed as a safe array or C-style array.</para>
@@ -924,11 +1052,15 @@
 
             
 
+            
+
              field.</para
           >
           <para
             >If you specify both <see
              cref="F:System.Runtime.InteropServices.MarshalAsAttribute.SizeParamIndex" />
+
+            
 
             
 
@@ -941,8 +1073,12 @@
 
             
 
+            
+
              with a <see
              cref="F:System.Runtime.InteropServices.UnmanagedType.LPArray" />
+
+            
 
             
 
@@ -957,6 +1093,8 @@
                 >[&lt;topic://cpcondefaultmarshalingforarrays&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -1005,6 +1143,8 @@
 
             
 
+            
+
              value indicating how the data is to
    be marshaled. </para
           >
@@ -1019,6 +1159,8 @@
 
             
 
+            
+
              to indicate how types should be marshaled between managed and unmanaged code. In some cases, you can use this field with certain UnmanagedType enumeration members. For <see
              cref="F:System.Runtime.InteropServices.UnmanagedType.CustomMarshaler" />
 
@@ -1026,8 +1168,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Runtime.InteropServices.UnmanagedType.ByValArray" />
+
+            
 
             
 
@@ -1041,6 +1187,8 @@
           <para
             >Gets the <see
              cref="T:System.Runtime.InteropServices.UnmanagedType" />
+
+            
 
             
 

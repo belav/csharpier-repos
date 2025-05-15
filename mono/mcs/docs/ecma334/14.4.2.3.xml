@@ -16,8 +16,12 @@
 
         
 
+        
+
          and T2 is <keyword
         >byte</keyword>
+
+        
 
         
 
@@ -30,6 +34,8 @@
 
         
 
+        
+
         , <keyword
         >uint</keyword>
 
@@ -37,8 +43,12 @@
 
         
 
+        
+
         , or <keyword
         >ulong</keyword>
+
+        
 
         
 
@@ -54,6 +64,8 @@
 
         
 
+        
+
          and T1 is <keyword
         >byte</keyword>
 
@@ -61,8 +73,12 @@
 
         
 
+        
+
         , <keyword
         >ushort</keyword>
+
+        
 
         
 
@@ -75,8 +91,12 @@
 
         
 
+        
+
         , or <keyword
         >ulong</keyword>
+
+        
 
         
 
@@ -92,8 +112,12 @@
 
         
 
+        
+
          and T2 is <keyword
         >ushort</keyword>
+
+        
 
         
 
@@ -106,8 +130,12 @@
 
         
 
+        
+
         , or <keyword
         >ulong</keyword>
+
+        
 
         
 
@@ -123,8 +151,12 @@
 
         
 
+        
+
          and T1 is <keyword
         >ushort</keyword>
+
+        
 
         
 
@@ -137,8 +169,12 @@
 
         
 
+        
+
         , or <keyword
         >ulong</keyword>
+
+        
 
         
 
@@ -154,6 +190,8 @@
 
         
 
+        
+
          and T2 is <keyword
         >uint</keyword>
 
@@ -161,8 +199,12 @@
 
         
 
+        
+
         , or <keyword
         >ulong</keyword>
+
+        
 
         
 
@@ -178,6 +220,8 @@
 
         
 
+        
+
          and T1 is <keyword
         >uint</keyword>
 
@@ -185,8 +229,12 @@
 
         
 
+        
+
         , or <keyword
         >ulong</keyword>
+
+        
 
         
 
@@ -202,8 +250,12 @@
 
         
 
+        
+
          and T2 is <keyword
         >ulong</keyword>
+
+        
 
         
 
@@ -219,8 +271,12 @@
 
         
 
+        
+
          and T1 is <keyword
         >ulong</keyword>
+
+        
 
         
 

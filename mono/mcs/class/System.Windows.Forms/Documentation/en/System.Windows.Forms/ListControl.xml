@@ -24,6 +24,8 @@
 
         
 
+        
+
          class provides implementations of common elements for the <see
          cref="T:System.Windows.Forms.ListBox" />
 
@@ -31,8 +33,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.ComboBox" />
+
+        
 
         
 
@@ -48,8 +54,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Windows.Forms.ComboBox" />
+
+        
 
         
 
@@ -62,8 +72,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Windows.Forms.ListControl.DisplayMember" />
+
+        
 
         
 
@@ -76,8 +90,12 @@
 
         
 
+        
+
         , and <see
          cref="P:System.Windows.Forms.ListControl.ValueMember" />
+
+        
 
         
 
@@ -96,8 +114,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.ComboBox" />
+
+        
 
         
 
@@ -119,6 +141,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ListControl" />
+
+            
 
             
 
@@ -172,8 +196,12 @@
 
             
 
+            
+
              property is valid if the <see
              cref="P:System.Windows.Forms.ListControl.DataSource" />
+
+            
 
             
 
@@ -187,6 +215,8 @@
           <para
             >Gets the <see
              cref="T:System.Windows.Forms.CurrencyManager" />
+
+            
 
             
 
@@ -230,8 +260,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Windows.Forms.ListBox" />
+
+            
 
             
 
@@ -247,8 +281,12 @@
 
             
 
+            
+
              by using the <see
              cref="M:System.Windows.Forms.ComboBox.ObjectCollection.Add(System.Object)" />
+
+            
 
             
 
@@ -261,8 +299,12 @@
 
             
 
+            
+
              by using the <see
              cref="P:System.Windows.Forms.ListControl.DataSource" />
+
+            
 
             
 
@@ -275,6 +317,8 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.ListControl.ValueMember" />
 
@@ -282,8 +326,12 @@
 
             
 
+            
+
              properties to fill the <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -299,11 +347,15 @@
 
             
 
+            
+
              property is set, a user cannot modify the items collection.</para
           >
           <para
             >If setting the <see
              cref="P:System.Windows.Forms.ListControl.DataSource" />
+
+            
 
             
 
@@ -316,8 +368,12 @@
 
             
 
+            
+
              event is raised. If setting this property causes the data member to change, the <see
              cref="E:System.Windows.Forms.ListControl.DisplayMemberChanged" />
+
+            
 
             
 
@@ -333,8 +389,12 @@
 
             
 
+            
+
              to null, <see
              cref="P:System.Windows.Forms.ListControl.DisplayMember" />
+
+            
 
             
 
@@ -348,6 +408,8 @@
           <para
             >Gets or sets the data source for this <see
              cref="T:System.Windows.Forms.ListControl" />
+
+            
 
             
 
@@ -381,6 +443,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -389,6 +453,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.ListControl.DataSource" />
+
+            
 
             
 
@@ -432,8 +498,12 @@
 
             
 
+            
+
              can display diverse types of objects. If the specified property does not exist on the object or the value of <see
              cref="P:System.Windows.Forms.ListControl.DisplayMember" />
+
+            
 
             
 
@@ -448,6 +518,8 @@
           <para
             >Gets or sets the property to display for this <see
              cref="T:System.Windows.Forms.ListControl" />
+
+            
 
             
 
@@ -481,6 +553,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -489,6 +563,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.ListControl.DisplayMember" />
+
+            
 
             
 
@@ -524,6 +600,8 @@
 
             
 
+            
+
              item, if it is a property of an object, given the item.</para
           >
         </summary>
@@ -538,8 +616,12 @@
 
           
 
+          
+
           The object the <see
            cref="T:System.Windows.Forms.ListControl" />
+
+          
 
           
 
@@ -578,6 +660,8 @@
 
             
 
+            
+
              item, if it is a property of an object given the item and the property name.</para
           >
         </summary>
@@ -592,8 +676,12 @@
 
           
 
+          
+
           The object the <see
            cref="T:System.Windows.Forms.ListControl" />
+
+          
 
           
 
@@ -608,8 +696,12 @@
 
           
 
+          
+
           The property name of the item the <see
            cref="T:System.Windows.Forms.ListControl" />
+
+          
 
           
 
@@ -646,8 +738,12 @@
 
             
 
+            
+
              event is raised before each visible item in the <see
              cref="T:System.Windows.Forms.ListControl" />
+
+            
 
             
 
@@ -660,8 +756,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.ListControlConvertEventArgs" />
+
+            
 
             
 
@@ -674,6 +774,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -720,8 +822,12 @@
 
             
 
+            
+
              property will override the default formatting behavior, which uses the <see
              cref="P:System.Windows.Forms.Application.CurrentCulture" />
+
+            
 
             
 
@@ -735,6 +841,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.IFormatProvider" />
+
+            
 
             
 
@@ -775,6 +883,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -783,6 +893,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ListControl.FormatInfo" />
+
+            
 
             
 
@@ -827,6 +939,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -858,6 +972,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -866,6 +982,8 @@
           <para
             >Occurs when value of the <see
              cref="P:System.Windows.Forms.ListControl.FormatString" />
+
+            
 
             
 
@@ -895,6 +1013,8 @@
 
             
 
+            
+
              property to true causes the <see
              cref="E:System.Windows.Forms.ListControl.Format" />
 
@@ -902,8 +1022,12 @@
 
             
 
+            
+
              event to be raised for each visible member of the <see
              cref="T:System.Windows.Forms.ListControl" />
+
+            
 
             
 
@@ -918,6 +1042,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.ListControl.SelectedValue" />
 
@@ -925,8 +1051,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.ListControl.FormattingEnabled" />
+
+            
 
             
 
@@ -944,6 +1074,8 @@
 
                 
 
+                
+
                  is false, <see
                  cref="P:System.Windows.Forms.ComboBox.SelectedIndex" />
 
@@ -951,8 +1083,12 @@
 
                 
 
+                
+
                  will not be set to -1 when <see
                  cref="P:System.Windows.Forms.ListControl.SelectedValue" />
+
+                
 
                 
 
@@ -970,6 +1106,8 @@
 
                 
 
+                
+
                  is true, <see
                  cref="P:System.Windows.Forms.ComboBox.SelectedIndex" />
 
@@ -977,8 +1115,12 @@
 
                 
 
+                
+
                  will be set to -1 when <see
                  cref="P:System.Windows.Forms.ListControl.SelectedValue" />
+
+                
 
                 
 
@@ -999,8 +1141,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.ListControl" />
+
+            
 
             
 
@@ -1041,6 +1187,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1049,6 +1197,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ListControl.FormattingEnabled" />
+
+            
 
             
 
@@ -1084,8 +1234,12 @@
 
             
 
+            
+
              property is not specified, the value returned by <see
              cref="M:System.Windows.Forms.ListControl.GetItemText(System.Object)" />
+
+            
 
             
 
@@ -1098,8 +1252,12 @@
 
             
 
+            
+
              property for the object specified in the <paramref
              name="item" />
+
+            
 
             
 
@@ -1110,6 +1268,8 @@
         </returns>
         <param name="item">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1151,8 +1311,12 @@
 
             
 
+            
+
              parameter specifies the <see
              cref="F:System.Windows.Forms.Keys.End" />
+
+            
 
             
 
@@ -1165,8 +1329,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Windows.Forms.Keys.PageUp" />
+
+            
 
             
 
@@ -1179,6 +1347,8 @@
 
             
 
+            
+
              key; false if the <paramref
              name="keyData" />
 
@@ -1186,8 +1356,12 @@
 
             
 
+            
+
              parameter specifies <see
              cref="F:System.Windows.Forms.Keys.Alt" />
+
+            
 
             
 
@@ -1203,8 +1377,12 @@
 
           
 
+          
+
           One of the values of <see
            cref="T:System.Windows.Forms.Keys" />
+
+          
 
           
 
@@ -1265,11 +1443,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ListControl.OnDataSourceChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1288,6 +1470,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1298,8 +1482,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1338,11 +1526,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ListControl.OnDisplayMemberChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1361,6 +1553,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1371,8 +1565,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1414,11 +1612,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ListControl.OnFormat(System.Windows.Forms.ListControlConvertEventArgs)" />
+
+            
 
             
 
@@ -1437,6 +1639,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -1447,8 +1651,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ListControlConvertEventArgs" />
+
+          
 
           
 
@@ -1486,11 +1694,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ListControl.OnFormatInfoChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1509,6 +1721,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -1519,8 +1733,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1558,11 +1776,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ListControl.OnFormatStringChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1581,6 +1803,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -1591,8 +1815,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1630,11 +1858,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ListControl.OnFormattingEnabledChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1653,6 +1885,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -1663,8 +1897,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1699,6 +1937,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1707,6 +1947,8 @@
           <para
             >Raises the <see
              cref="E:System.Windows.Forms.ListControl.SelectedValueChanged" />
+
+            
 
             
 
@@ -1722,8 +1964,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1762,6 +2008,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1770,6 +2018,8 @@
           <para
             >Raises the <see
              cref="E:System.Windows.Forms.ListControl.SelectedValueChanged" />
+
+            
 
             
 
@@ -1785,8 +2035,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1828,11 +2082,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ListControl.OnValueMemberChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1851,6 +2109,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1861,8 +2121,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1893,6 +2157,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1975,8 +2241,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.ListControl.SelectedValue" />
+
+            
 
             
 
@@ -1991,6 +2261,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.ListControl.SelectedValue" />
 
@@ -1998,8 +2270,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.ListControl.FormattingEnabled" />
+
+            
 
             
 
@@ -2017,6 +2293,8 @@
 
                 
 
+                
+
                  is false, <see
                  cref="P:System.Windows.Forms.ComboBox.SelectedIndex" />
 
@@ -2024,8 +2302,12 @@
 
                 
 
+                
+
                  will not be set to -1 when <see
                  cref="P:System.Windows.Forms.ListControl.SelectedValue" />
+
+                
 
                 
 
@@ -2043,6 +2325,8 @@
 
                 
 
+                
+
                  is true, <see
                  cref="P:System.Windows.Forms.ComboBox.SelectedIndex" />
 
@@ -2050,8 +2334,12 @@
 
                 
 
+                
+
                  will be set to -1 when <see
                  cref="P:System.Windows.Forms.ListControl.SelectedValue" />
+
+                
 
                 
 
@@ -2067,6 +2355,8 @@
           <para
             >Gets or sets the value of the member property specified by the <see
              cref="P:System.Windows.Forms.ListControl.ValueMember" />
+
+            
 
             
 
@@ -2100,6 +2390,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -2108,6 +2400,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.ListControl.SelectedValue" />
+
+            
 
             
 
@@ -2148,10 +2442,14 @@
 
           
 
+          
+
           The array index of the object.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2185,6 +2483,8 @@
         </summary>
         <param name="items">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2224,11 +2524,15 @@
 
             
 
+            
+
              property in cases where you bind data.</para
           >
           <para
             >You can clear the <see
              cref="P:System.Windows.Forms.ListControl.ValueMember" />
+
+            
 
             
 
@@ -2244,6 +2548,8 @@
 
             
 
+            
+
              property raises the <see
              cref="E:System.Windows.Forms.ListControl.ValueMemberChanged" />
 
@@ -2251,8 +2557,12 @@
 
             
 
+            
+
              and <see
              cref="E:System.Windows.Forms.ListControl.SelectedValueChanged" />
+
+            
 
             
 
@@ -2266,6 +2576,8 @@
           <para
             >Gets or sets the path of the property to use as the actual value for the items in the <see
              cref="T:System.Windows.Forms.ListControl" />
+
+            
 
             
 
@@ -2299,6 +2611,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -2307,6 +2621,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.ListControl.ValueMember" />
+
+            
 
             
 

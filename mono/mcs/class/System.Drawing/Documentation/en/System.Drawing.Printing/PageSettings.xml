@@ -28,8 +28,12 @@
 
         
 
+        
+
          class is used to specify settings that modify the way a page will be printed. Typically, you set default settings for all pages to be printed through the <see
          cref="P:System.Drawing.Printing.PrintDocument.DefaultPageSettings" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
          or <see
          cref="E:System.Drawing.Printing.PrintDocument.QueryPageSettings" />
+
+        
 
         
 
@@ -56,6 +64,8 @@
 
         
 
+        
+
          argument included in the <see
          cref="T:System.Drawing.Printing.PrintPageEventArgs" />
 
@@ -63,8 +73,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Drawing.Printing.QueryPageSettingsEventArgs" />
+
+        
 
         
 
@@ -80,6 +94,8 @@
 
         
 
+        
+
          events, see the <see
          cref="T:System.Drawing.Printing.PrintDocument" />
 
@@ -87,8 +103,12 @@
 
         
 
+        
+
          class overview. For more information about printing, see the <see
          cref="N:System.Drawing.Printing" />
+
+        
 
         
 
@@ -120,8 +140,12 @@
 
             
 
+            
+
             , but instead use the <see
              cref="P:System.Drawing.Printing.PrintDocument.DefaultPageSettings" />
+
+            
 
             
 
@@ -135,6 +159,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Drawing.Printing.PageSettings" />
+
+            
 
             
 
@@ -170,6 +196,8 @@
 
             
 
+            
+
              constructor is similar to initializing a new instance of <see
              cref="T:System.Drawing.Printing.PageSettings" />
 
@@ -177,8 +205,12 @@
 
             
 
+            
+
              and setting the <see
              cref="P:System.Drawing.Printing.PageSettings.PrinterSettings" />
+
+            
 
             
 
@@ -197,6 +229,8 @@
 
             
 
+            
+
              class using a specified printer.</para
           >
         </summary>
@@ -207,8 +241,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Printing.PrinterSettings" />
+
+          
 
           
 
@@ -240,8 +278,12 @@
 
             
 
+            
+
              property along with the <see
              cref="P:System.Drawing.Printing.PageSettings.Margins" />
+
+            
 
             
 
@@ -255,6 +297,8 @@
           <para
             >Gets the size of the page, taking into account the page orientation specified by the <see
              cref="P:System.Drawing.Printing.PageSettings.Landscape" />
+
+            
 
             
 
@@ -283,6 +327,8 @@
           <para
             >Creates a copy of this <see
              cref="T:System.Drawing.Printing.PageSettings" />
+
+            
 
             
 
@@ -320,8 +366,12 @@
 
             
 
+            
+
              property to determine if the printer supports color printing. If the printer supports color, but you do not want to print in color, set the <see
              cref="P:System.Drawing.Printing.PageSettings.Color" />
+
+            
 
             
 
@@ -360,8 +410,12 @@
 
             
 
+            
+
              method to copy relevant information to a DEVMODE structure from a <see
              cref="T:System.Drawing.Printing.PageSettings" />
+
+            
 
             
 
@@ -377,8 +431,12 @@
 
             
 
+            
+
             , call <see
              cref="M:System.Drawing.Printing.PageSettings.SetHdevmode(System.IntPtr)" />
+
+            
 
             
 
@@ -397,11 +455,15 @@
 
             
 
+            
+
              to the specified DEVMODE structure.</para
           >
         </summary>
         <param name="hdevmode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -476,6 +538,8 @@
 
             
 
+            
+
              property to determine the angle, in degrees, that the portrait orientation is rotated to produce the landscape orientation.</para
           >
         </remarks>
@@ -511,8 +575,12 @@
 
             
 
+            
+
              event, you can use this property along with the <see
              cref="P:System.Drawing.Printing.PageSettings.Bounds" />
+
+            
 
             
 
@@ -553,6 +621,8 @@
 
             
 
+            
+
              represents the size of the paper through the <see
              cref="P:System.Drawing.Printing.PaperSize.Kind" />
 
@@ -560,8 +630,12 @@
 
             
 
+            
+
              property, which contains one of the <see
              cref="T:System.Drawing.Printing.PaperKind" />
+
+            
 
             
 
@@ -577,8 +651,12 @@
 
             
 
+            
+
              property for the page to a valid <see
              cref="T:System.Drawing.Printing.PaperSize" />
+
+            
 
             
 
@@ -591,11 +669,15 @@
 
             
 
+            
+
              collection.</para
           >
           <para
             >For information about how you can specify a custom paper size, see the <see
              cref="M:System.Drawing.Printing.PaperSize.#ctor" />
+
+            
 
             
 
@@ -636,6 +718,8 @@
 
             
 
+            
+
              represents the source of the paper through the <see
              cref="P:System.Drawing.Printing.PaperSource.Kind" />
 
@@ -643,8 +727,12 @@
 
             
 
+            
+
              property, which contains one of the <see
              cref="T:System.Drawing.Printing.PaperSourceKind" />
+
+            
 
             
 
@@ -660,6 +748,8 @@
 
             
 
+            
+
              property for the page to a valid <see
              cref="T:System.Drawing.Printing.PaperSource" />
 
@@ -667,8 +757,12 @@
 
             
 
+            
+
             , available through the <see
              cref="P:System.Drawing.Printing.PrinterSettings.PaperSources" />
+
+            
 
             
 
@@ -711,6 +805,8 @@
 
             
 
+            
+
              property returns the correct value, whether the page orientation is landscape or portrait.</para
           >
           <para>You can use this property to print outside the margins of the page, but within the printable area.</para>
@@ -743,6 +839,8 @@
 
             
 
+            
+
              represents the printer resolution of through the <see
              cref="P:System.Drawing.Printing.PrinterResolution.Kind" />
 
@@ -750,8 +848,12 @@
 
             
 
+            
+
              property, which contains one of the <see
              cref="T:System.Drawing.Printing.PrinterResolutionKind" />
+
+            
 
             
 
@@ -767,6 +869,8 @@
 
             
 
+            
+
              property for the page to a valid <see
              cref="T:System.Drawing.Printing.PrinterResolution" />
 
@@ -774,8 +878,12 @@
 
             
 
+            
+
             , available through the <see
              cref="P:System.Drawing.Printing.PrinterSettings.PrinterResolutions" />
+
+            
 
             
 
@@ -840,6 +948,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -850,8 +960,12 @@
 
             
 
+            
+
              to a DEVMODE, call <see
              cref="M:System.Drawing.Printing.PageSettings.CopyToHdevmode(System.IntPtr)" />
+
+            
 
             
 
@@ -870,11 +984,15 @@
 
             
 
+            
+
              from the specified DEVMODE structure.</para
           >
         </summary>
         <param name="hdevmode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -907,6 +1025,8 @@
 
             
 
+            
+
              to string form.</para
           >
         </summary>
@@ -915,6 +1035,8 @@
           <para
             >A string showing the various property settings for the <see
              cref="T:System.Drawing.Printing.PageSettings" />
+
+            
 
             
 

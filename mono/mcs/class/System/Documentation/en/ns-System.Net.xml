@@ -12,6 +12,8 @@
 
         
 
+        
+
          namespace provides a simple programming interface for many of the protocols used on networks today. The <see
          cref="T:System.Net.WebRequest" />
 
@@ -19,8 +21,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Net.WebResponse" />
+
+        
 
         
 
@@ -36,8 +42,12 @@
 
         
 
+        
+
          namespace can be used to develop Windows Store apps or desktop apps. When used in a Windows Store app, classes in the <see
          cref="N:System.Net" />
+
+        
 
         
 
@@ -49,6 +59,8 @@
             >Network Isolation for Windows Store Apps</a
           >
         </format>
+
+        
 
         
 

@@ -8,6 +8,8 @@
 
     
 
+    
+
     . The constructor to implicitly invoke is determined by the constructor-initializer: <list
     >
       <list_item
@@ -18,8 +20,12 @@
 
         
 
+        
+
          and the overload resolution rules of <hyperlink
         >14.4.2</hyperlink>
+
+        
 
         
 
@@ -35,8 +41,12 @@
 
         
 
+        
+
          and the overload resolution rules of <hyperlink
         >14.4.2</hyperlink>
+
+        
 
         
 
@@ -51,7 +61,7 @@
 
       >[Note: Thus, an instance constructor declaration of the form <code_example
       >
-<![CDATA[
+        <![CDATA[
 C(...) {...}  
 ]]>
       </code_example>
@@ -60,12 +70,16 @@ C(...) {...}
 
       
 
+      
+
       is exactly equivalent to <code_example
       >
-<![CDATA[
+        <![CDATA[
 C(...): base() {...}  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -82,11 +96,13 @@ C(...): base() {...}
 
     
 
+    
+
      of an instance constructor declaration includes the constructor initializer of that declaration. Thus, a constructor initializer is permitted to access the parameters of the constructor. <example
 
       >[Example: For example: <code_example
       >
-<![CDATA[
+        <![CDATA[
 class A  
 {  
    public A(int x, int y) {}  
@@ -102,12 +118,16 @@ class B: A
 
       
 
+      
+
       end example]</example
     >
   </paragraph>
   <paragraph
     >An instance constructor initializer cannot access the instance being created. Therefore it is a compile-time error to reference this in an argument expression of the constructor initializer, as it is a compile-time error for an argument expression to reference any instance member through a <non_terminal
      where="14.5.2">simple-name</non_terminal>
+
+    
 
     
 

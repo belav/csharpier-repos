@@ -40,8 +40,12 @@
 
         
 
+        
+
          can be used to represent code that declares a class, structure, interface, or enumeration. <see
          cref="T:System.CodeDom.CodeTypeDeclaration" />
+
+        
 
         
 
@@ -57,8 +61,12 @@
 
         
 
+        
+
          property specifies the base type or base types of the type being declared. The <see
          cref="P:System.CodeDom.CodeTypeDeclaration.Members" />
+
+        
 
         
 
@@ -71,8 +79,12 @@
 
         
 
+        
+
          property indicates the <see
          cref="T:System.Reflection.TypeAttributes" />
+
+        
 
         
 
@@ -85,8 +97,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.CodeDom.CodeTypeDeclaration.IsStruct" />
+
+        
 
         
 
@@ -99,8 +115,12 @@
 
         
 
+        
+
         , and <see
          cref="P:System.CodeDom.CodeTypeDeclaration.IsInterface" />
+
+        
 
         
 
@@ -117,8 +137,12 @@
 
           
 
+          
+
            method to test for the appropriate <see
            cref="T:System.CodeDom.Compiler.GeneratorSupport" />
+
+          
 
           
 
@@ -131,6 +155,8 @@
 
           
 
+          
+
            indicates support for interfaces, <see
            cref="F:System.CodeDom.Compiler.GeneratorSupport.DeclareEnums" />
 
@@ -138,8 +164,12 @@
 
           
 
+          
+
            indicates support for enumerations, and <see
            cref="F:System.CodeDom.Compiler.GeneratorSupport.DeclareValueTypes" />
+
+          
 
           
 
@@ -156,6 +186,8 @@
 
         
 
+        
+
          property indicates whether the type declaration is complete or partial. Not all code generators support partial type declarations, so you should test for this support by calling the <see
          cref="M:System.CodeDom.Compiler.ICodeGenerator.Supports(System.CodeDom.Compiler.GeneratorSupport)" />
 
@@ -163,8 +195,12 @@
 
         
 
+        
+
          method with the flag <see
          cref="F:System.CodeDom.Compiler.GeneratorSupport.PartialTypes" />
+
+        
 
         
 
@@ -205,6 +241,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -238,11 +276,15 @@
 
             
 
+            
+
              class with the specified name.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -278,6 +320,8 @@
 
           
 
+          
+
            containing list of types from which this type is derived.</value
         >
         <remarks>
@@ -290,8 +334,12 @@
 
             
 
+            
+
              as the first item in the <see
              cref="P:System.CodeDom.CodeTypeDeclaration.BaseTypes" />
+
+            
 
             
 
@@ -308,6 +356,8 @@
 
               
 
+              
+
                for <see
                cref="T:System.Object" />
 
@@ -315,8 +365,12 @@
 
               
 
+              
+
                if the interface you are implementing already exists and you are referring to it by type. For example, if you are implementing the <see
                cref="T:System.Collections.ICollection" />
+
+              
 
               
 
@@ -334,8 +388,12 @@
 
             
 
+            
+
              to the collection that refers to <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -421,6 +479,8 @@ Implements Interface1</code>
             
 
             
+
+            
 Generates the following code for the C# generator:
 <code
              lang="C#">
@@ -485,6 +545,8 @@ Generates the following code for the C# generator:
 
             
 
+            
+
              property to false, which indicates that the type declaration represents all details for the class or structure implementation.</para
           >
           <para>A partial type declaration makes it easier to build different portions of a class or structure implementation in different modules of your application. The partial type declarations can be stored in one source file, or spread across multiple source files that are eventually compiled together to form the combined type implementation.</para>
@@ -496,8 +558,12 @@ Generates the following code for the C# generator:
 
             
 
+            
+
              method with the flag <see
              cref="F:System.CodeDom.Compiler.GeneratorSupport.PartialTypes" />
+
+            
 
             
 
@@ -511,6 +577,8 @@ Generates the following code for the C# generator:
           <para
             >When supplying a class or structure implementation across multiple declarations, set the <see
              cref="P:System.CodeDom.CodeTypeDeclaration.IsPartial" />
+
+            
 
             
 
@@ -603,6 +671,8 @@ Generates the following code for the C# generator:
 
             
 
+            
+
              collection is accessed for the first time.</para
           >
         </summary>
@@ -628,6 +698,8 @@ Generates the following code for the C# generator:
           <para
             >Occurs when the <see
              cref="P:System.CodeDom.CodeTypeDeclaration.Members" />
+
+            
 
             
 
@@ -669,8 +741,12 @@ Generates the following code for the C# generator:
 
             
 
+            
+
              property contains the same type of values used by <see
              cref="N:System.Reflection" />
+
+            
 
             
 
@@ -683,8 +759,12 @@ Generates the following code for the C# generator:
 
             
 
+            
+
              : <see
              cref="F:System.Reflection.TypeAttributes.Class" />
+
+            
 
             
 
@@ -697,8 +777,12 @@ Generates the following code for the C# generator:
 
             
 
+            
+
             , <see
              cref="F:System.Reflection.TypeAttributes.Abstract" />
+
+            
 
             
 
@@ -711,8 +795,12 @@ Generates the following code for the C# generator:
 
             
 
+            
+
             , <see
              cref="F:System.Reflection.TypeAttributes.Public" />
+
+            
 
             
 
@@ -725,6 +813,8 @@ Generates the following code for the C# generator:
 
             
 
+            
+
             , <see
              cref="F:System.Reflection.TypeAttributes.NestedPublic" />
 
@@ -732,8 +822,12 @@ Generates the following code for the C# generator:
 
             
 
+            
+
             , and <see
              cref="F:System.Reflection.TypeAttributes.NestedPrivate" />
+
+            
 
             
 
@@ -750,8 +844,12 @@ Generates the following code for the C# generator:
 
               
 
+              
+
                overlap with the meaning of flags in the <see
                cref="P:System.CodeDom.CodeTypeMember.Attributes" />
+
+              
 
               
 
@@ -764,8 +862,12 @@ Generates the following code for the C# generator:
 
               
 
+              
+
                that is inherited from <see
                cref="T:System.CodeDom.CodeTypeMember" />
+
+              
 
               
 
@@ -778,8 +880,12 @@ Generates the following code for the C# generator:
 
               
 
+              
+
                property is a side effect of the <see
                cref="T:System.CodeDom.CodeTypeDeclaration" />
+
+              
 
               
 
@@ -792,6 +898,8 @@ Generates the following code for the C# generator:
 
               
 
+              
+
                so that classes can be nested. The flags in the <see
                cref="P:System.CodeDom.CodeTypeDeclaration.TypeAttributes" />
 
@@ -799,8 +907,12 @@ Generates the following code for the C# generator:
 
               
 
+              
+
                property should be used instead of the flags in the <see
                cref="P:System.CodeDom.CodeTypeMember.Attributes" />
+
+              
 
               
 
@@ -818,6 +930,8 @@ Generates the following code for the C# generator:
 
               
 
+              
+
                and then set the desired visibility flag. For example, the C# code statement to identify the <see
                cref="T:System.CodeDom.CodeTypeDeclaration" />
 
@@ -825,8 +939,12 @@ Generates the following code for the C# generator:
 
               
 
+              
+
                (named cd) as an internal class is cd.TypeAttributes = (cd.TypeAttributes &amp; ~TypeAttributes.VisibilityMask) | TypeAttributes.NotPublic;.  The code to set the same value in Visual Basic is cd.TypeAttributes = (cd.TypeAttributes And (TypeAttributes.VisibilityMask Xor -1)) Or TypeAttributes.NotPublic. Setting the <see
                cref="P:System.CodeDom.CodeTypeDeclaration.TypeAttributes" />
+
+              
 
               
 
@@ -877,8 +995,12 @@ Generates the following code for the C# generator:
 
             
 
+            
+
              class contains the type parameter <paramref
              name="T" />
+
+            
 
             
 
@@ -893,6 +1015,8 @@ Generates the following code for the C# generator:
                 >Generics in the .NET Framework Class Library</a
               >
             </format>
+
+            
 
             
 

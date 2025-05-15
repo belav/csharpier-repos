@@ -37,8 +37,12 @@
 
         
 
+        
+
          object contains one or more <see
          cref="T:System.Text.RegularExpressions.Capture" />
+
+        
 
         
 
@@ -49,6 +53,8 @@
       <para
         >Instances of the <see
          cref="T:System.Text.RegularExpressions.CaptureCollection" />
+
+        
 
         
 
@@ -66,8 +72,12 @@
 
             
 
+            
+
              property. Each member of the collection represents a substring captured by a capturing group. If a quantifier is not applied to a capturing group, the <see
              cref="T:System.Text.RegularExpressions.CaptureCollection" />
+
+            
 
             
 
@@ -80,8 +90,12 @@
 
             
 
+            
+
              object that represents the same captured substring as the <see
              cref="T:System.Text.RegularExpressions.Group" />
+
+            
 
             
 
@@ -94,6 +108,8 @@
 
             
 
+            
+
              includes one <see
              cref="T:System.Text.RegularExpressions.Capture" />
 
@@ -101,8 +117,12 @@
 
             
 
+            
+
              object for each captured substring, and the <see
              cref="T:System.Text.RegularExpressions.Group" />
+
+            
 
             
 
@@ -120,8 +140,12 @@
 
             
 
+            
+
              object that provides information about the match as a whole. That is, the <see
              cref="T:System.Text.RegularExpressions.CaptureCollection" />
+
+            
 
             
 
@@ -134,6 +158,8 @@
 
             
 
+            
+
              object. </para
           >
         </item>
@@ -141,6 +167,8 @@
       <para
         >To iterate through the members of the collection, you should use the collection iteration construct provided by your language (such as foreach in C# and For Each…Next in Visual Basic) instead of retrieving the enumerator that is returned by the <see
          cref="M:System.Text.RegularExpressions.CaptureCollection.GetEnumerator" />
+
+        
 
         
 
@@ -187,6 +215,8 @@
 
               
 
+              
+
                method instead.</para
             >
           </block>
@@ -202,10 +232,14 @@
 
           
 
+          
+
           The array the collection is to be copied into. </param
         >
         <param name="arrayIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -266,8 +300,12 @@
 
             
 
+            
+
              method to retrieve an enumerator that lets you iterate through the <see
              cref="T:System.Text.RegularExpressions.Group" />
+
+            
 
             
 
@@ -290,8 +328,12 @@
 
             
 
+            
+
              objects within the <see
              cref="T:System.Text.RegularExpressions.CaptureCollection" />
+
+            
 
             
 
@@ -343,6 +385,8 @@
             <para
               >This member is not present in the net_portable. If you are developing applications that target the net_portable, use the <see
                cref="P:System.Text.RegularExpressions.CaptureCollection.System#Collections#ICollection#IsSynchronized" />
+
+              
 
               
 
@@ -406,6 +450,8 @@
             <para
               >This member is not present in the net_portable. If you are developing applications that target the net_portable, use the <see
                cref="P:System.Text.RegularExpressions.CaptureCollection.System#Collections#ICollection#SyncRoot" />
+
+              
 
               
 

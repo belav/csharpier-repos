@@ -24,8 +24,12 @@
 
         
 
+        
+
          class represents a single date or a range of dates. This class is commonly associated with the <see
          cref="T:System.Windows.Forms.MonthCalendar" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          class is an adjunct class to <see
          cref="T:System.Windows.Forms.SelectionRange" />
+
+        
 
         
 
@@ -55,6 +63,8 @@
 
         
 
+        
+
          base class, <format
          type="text/html">
           <a href="49253ae6-7657-4810-82ab-1176a6feeada">Generalized Type Conversion</a>
@@ -64,10 +74,14 @@
 
         
 
+        
+
         , and <format
          type="text/html">
           <a href="90373a3f-d8c8-492d-841c-945d62393c56">How to: Implement a Type Converter</a>
         </format>
+
+        
 
         
 
@@ -84,8 +98,12 @@
 
           
 
+          
+
           . Instead, call the <see
            cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+
+          
 
           
 
@@ -98,8 +116,12 @@
 
           
 
+          
+
            class. For more information, see the examples in the <see
            cref="T:System.ComponentModel.TypeConverter" />
+
+          
 
           
 
@@ -114,6 +136,8 @@
       <para
         >Provides a type converter to convert <see
          cref="T:System.Windows.Forms.SelectionRange" />
+
+        
 
         
 
@@ -138,11 +162,15 @@
 
             
 
+            
+
              is the default constructor supplied by the compiler.</para
           >
           <para
             >You should never create a <see
              cref="T:System.Windows.Forms.SelectionRangeConverter" />
+
+            
 
             
 
@@ -155,6 +183,8 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.ComponentModel.TypeDescriptor" />
 
@@ -162,8 +192,12 @@
 
             
 
+            
+
              class. For more information, see the examples in the <see
              cref="T:System.ComponentModel.TypeConverter" />
+
+            
 
             
 
@@ -177,6 +211,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.SelectionRangeConverter" />
+
+            
 
             
 
@@ -215,8 +251,12 @@
 
             
 
+            
+
              class is specialized to convert between the types <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -229,8 +269,12 @@
 
             
 
+            
+
             . As a result, the <see
              cref="M:System.Windows.Forms.SelectionRangeConverter.CanConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Type)" />
+
+            
 
             
 
@@ -243,6 +287,8 @@
 
             
 
+            
+
              parameter is of type <see
              cref="T:System.String" />
 
@@ -250,8 +296,12 @@
 
             
 
+            
+
             . Otherwise, it defers the call to the base implementation of this method, <see
              cref="M:System.ComponentModel.TypeConverter.CanConvertFrom(System.ComponentModel.ITypeDescriptorContext,System.Type)" />
+
+            
 
             
 
@@ -275,8 +325,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -291,8 +345,12 @@
 
           
 
+          
+
           The source <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -330,8 +388,12 @@
 
             
 
+            
+
              method returns true if the <paramref
              name="destinationType" />
+
+            
 
             
 
@@ -344,6 +406,8 @@
 
             
 
+            
+
              or <see
              cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />
 
@@ -351,8 +415,12 @@
 
             
 
+            
+
             . Otherwise, it defers the call to the base implementation of this method, <see
              cref="M:System.ComponentModel.TypeConverter.CanConvertTo(System.ComponentModel.ITypeDescriptorContext,System.Type)" />
+
+            
 
             
 
@@ -376,8 +444,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -392,8 +464,12 @@
 
           
 
+          
+
           The destination <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -432,8 +508,12 @@
 
             
 
+            
+
              method is specialized to convert <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -446,8 +526,12 @@
 
             
 
+            
+
              representations. Types other than <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -470,8 +554,12 @@
 
             
 
+            
+
              that represents the converted <paramref
              name="value" />
+
+            
 
             
 
@@ -487,8 +575,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -503,6 +595,8 @@
 
           
 
+          
+
           The locale information for the conversion. </param
         >
         <param name="value">
@@ -512,8 +606,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -553,8 +651,12 @@
 
             
 
+            
+
              method is specialized to convert <see
              cref="T:System.Windows.Forms.SelectionRange" />
+
+            
 
             
 
@@ -567,8 +669,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />
+
+            
 
             
 
@@ -587,6 +693,8 @@
 
             
 
+            
+
              object to another type by using the specified culture.</para
           >
         </summary>
@@ -600,8 +708,12 @@
 
             
 
+            
+
              that represents the converted <paramref
              name="value" />
+
+            
 
             
 
@@ -617,8 +729,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -633,6 +749,8 @@
 
           
 
+          
+
           The locale information for the conversion. </param
         >
         <param name="value">
@@ -642,8 +760,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -658,8 +780,12 @@
 
           
 
+          
+
           The destination <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -697,6 +823,8 @@
 
             
 
+            
+
              method to make changes to an existing immutable object by creating a modified version of it. This method expects the <paramref
              name="propertyValues" />
 
@@ -704,8 +832,12 @@
 
             
 
+            
+
              parameter to have elements with key values of Start and End, each with the corresponding <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -724,6 +856,8 @@
 
             
 
+            
+
              object by using the specified type descriptor and set of property values for that object.</para
           >
         </summary>
@@ -732,6 +866,8 @@
           <para
             >If successful, the newly created <see
              cref="T:System.Windows.Forms.SelectionRange" />
+
+            
 
             
 
@@ -747,8 +883,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -763,8 +903,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -805,6 +949,8 @@
 
             
 
+            
+
              to create a new value.</para
           >
         </summary>
@@ -813,6 +959,8 @@
           <para
             >true if <see
              cref="Overload:System.Windows.Forms.SelectionRangeConverter.CreateInstance" />
+
+            
 
             
 
@@ -828,8 +976,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -868,6 +1020,8 @@
 
             
 
+            
+
              or <paramref
              name="value" />
 
@@ -875,8 +1029,12 @@
 
             
 
+            
+
              parameters, but simply refers the call to the TypeDescriptor.<see
              cref="M:System.ComponentModel.TypeDescriptor.GetProperties(System.Type,System.Attribute[])" />
+
+            
 
             
 
@@ -895,6 +1053,8 @@
 
             
 
+            
+
              type </para
           >
         </summary>
@@ -903,6 +1063,8 @@
           <para
             >If successful, the set of properties that should be exposed for the <see
              cref="T:System.Windows.Forms.SelectionRange" />
+
+            
 
             
 
@@ -918,8 +1080,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -934,8 +1100,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -950,8 +1120,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -996,8 +1170,12 @@
 
             
 
+            
+
              can be called to find the properties of a <see
              cref="T:System.Windows.Forms.SelectionRange" />
+
+            
 
             
 
@@ -1013,8 +1191,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 

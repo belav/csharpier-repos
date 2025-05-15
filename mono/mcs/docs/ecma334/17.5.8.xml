@@ -8,11 +8,15 @@
 
     
 
+    
+
      of a method declaration consists of either a block or a semicolon. </paragraph
   >
   <paragraph
     >Abstract and external method declarations do not provide a method implementation, so their method bodies simply consist of a semicolon. For any other method, the method body is a block (<hyperlink
     >15.2</hyperlink>
+
+    
 
     
 
@@ -28,6 +32,8 @@
 
     
 
+    
+
     , return statements (<hyperlink
     >15.9.4</hyperlink>
 
@@ -35,8 +41,12 @@
 
     
 
+    
+
     ) in that method's body are not permitted to specify an expression. If execution of the method body of a <keyword
     >void</keyword>
+
+    
 
     
 
@@ -52,13 +62,15 @@
 
     
 
+    
+
     , each return statement in that method body must specify an expression of a type that is implicitly convertible to the return type. The endpoint of the method body of a value-returning method must not be reachable. In other words, in a value-returning method, control is not permitted to flow off the end of the method body. </paragraph
   >
   <paragraph>
     <example
       >[Example: In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 class A  
 {  
    public int F() {}     // Error, return value required  
@@ -76,6 +88,8 @@ class A
 }  
 ]]>
       </code_example>
+
+      
 
       
 

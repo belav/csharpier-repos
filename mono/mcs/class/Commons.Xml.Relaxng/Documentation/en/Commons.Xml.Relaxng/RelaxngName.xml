@@ -17,6 +17,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Docs>
@@ -75,8 +77,12 @@
 
           
 
+          
+
            and <see
            cref="P:Commons.Xml.Relaxng.RelaxngName.Namespace" />
+
+          
 
           
 
@@ -92,11 +98,15 @@
 
           
 
+          
+
            that represents the local name.</param
         >
         <param name="ns"
           >a <see
            cref="T:System.String" />
+
+          
 
           
 

@@ -40,6 +40,8 @@
         
 
         
+
+        
 object.</para
       >
       <code lang="C#"
@@ -105,8 +107,12 @@ class Directory {
 
         
 
+        
+
          class to read from, write to, open, and close files on a file system, and to manipulate other file-related operating system handles, including pipes, standard input, and standard output. You can use the <see
          cref="M:System.IO.FileStream.Read(System.Byte[],System.Int32,System.Int32)" />
+
+        
 
         
 
@@ -119,8 +125,12 @@ class Directory {
 
         
 
+        
+
         , <see
          cref="M:System.IO.Stream.CopyTo(System.IO.Stream)" />
+
+        
 
         
 
@@ -133,8 +143,12 @@ class Directory {
 
         
 
+        
+
          methods to perform synchronous operations, or the <see
          cref="M:System.IO.FileStream.ReadAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)" />
+
+        
 
         
 
@@ -147,8 +161,12 @@ class Directory {
 
         
 
+        
+
         , <see
          cref="M:System.IO.Stream.CopyToAsync(System.IO.Stream)" />
+
+        
 
         
 
@@ -161,8 +179,12 @@ class Directory {
 
         
 
+        
+
          methods to perform asynchronous operations. Use the asynchronous methods to perform resource-intensive file operations without blocking the main thread. This performance consideration is particularly important in a win8_appname_long app or desktop_appname app where a time-consuming stream operation can block the UI thread and make your app appear as if it is not working. <see
          cref="T:System.IO.FileStream" />
+
+        
 
         
 
@@ -178,8 +200,12 @@ class Directory {
 
         
 
+        
+
          property detects whether the file handle was opened asynchronously. You specify this value when you create an instance of the <see
          cref="T:System.IO.FileStream" />
+
+        
 
         
 
@@ -192,8 +218,12 @@ class Directory {
 
         
 
+        
+
         , <paramref
          name="useAsync" />
+
+        
 
         
 
@@ -206,8 +236,12 @@ class Directory {
 
         
 
+        
+
          parameter. When the property is true, the stream utilizes overlapped I/O to perform file operations asynchronously. However, the <see
          cref="P:System.IO.FileStream.IsAsync" />
+
+        
 
         
 
@@ -220,8 +254,12 @@ class Directory {
 
         
 
+        
+
         , <see
          cref="M:System.IO.FileStream.WriteAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)" />
+
+        
 
         
 
@@ -234,8 +272,12 @@ class Directory {
 
         
 
+        
+
          method. When the <see
          cref="P:System.IO.FileStream.IsAsync" />
+
+        
 
         
 
@@ -251,6 +293,8 @@ class Directory {
 
         
 
+        
+
          method supports random access to files. <see
          cref="M:System.IO.FileStream.Seek(System.Int64,System.IO.SeekOrigin)" />
 
@@ -258,8 +302,12 @@ class Directory {
 
         
 
+        
+
          allows the read/write position to be moved to any position within the file. This is done with byte offset reference point parameters. The byte offset is relative to the seek reference point, which can be the beginning, the current position, or the end of the underlying file, as represented by the three members of the <see
          cref="T:System.IO.SeekOrigin" />
+
+        
 
         
 
@@ -276,6 +324,8 @@ class Directory {
 
           
 
+          
+
            property value is set to true or false depending on the underlying file type.If the underlying file type is FILE_TYPE_DISK, as defined in winbase.h, the <see
            cref="P:System.IO.FileStream.CanSeek" />
 
@@ -283,8 +333,12 @@ class Directory {
 
           
 
+          
+
            property value is true. Otherwise, the <see
            cref="P:System.IO.FileStream.CanSeek" />
+
+          
 
           
 
@@ -302,8 +356,12 @@ class Directory {
 
         
 
+        
+
         , <see
          cref="T:System.IO.Directory" />
+
+        
 
         
 
@@ -316,8 +374,12 @@ class Directory {
 
         
 
+        
+
          classes. The <see
          cref="T:System.IO.File" />
+
+        
 
         
 
@@ -330,8 +392,12 @@ class Directory {
 
         
 
+        
+
          objects based on file paths. The <see
          cref="T:System.IO.MemoryStream" />
+
+        
 
         
 
@@ -344,6 +410,8 @@ class Directory {
 
         
 
+        
+
          class.</para
       >
       <para
@@ -351,6 +419,8 @@ class Directory {
          type="text/html">
           <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
         </format>
+
+        
 
         
 
@@ -369,8 +439,12 @@ class Directory {
 
         
 
+        
+
          object does not have an exclusive hold on its handle, another thread could access the file handle concurrently and change the position of the operating system's file pointer that is associated with the file handle. In this case, the cached position in the <see
          cref="T:System.IO.FileStream" />
+
+        
 
         
 
@@ -383,8 +457,12 @@ class Directory {
 
         
 
+        
+
          object routinely performs checks on methods that access the cached buffer to ensure that the operating system's handle position is the same as the cached position used by the <see
          cref="T:System.IO.FileStream" />
+
+        
 
         
 
@@ -400,6 +478,8 @@ class Directory {
 
         
 
+        
+
          method, the .NET Framework discards the contents of the buffer and reads the stream from the file again. This can affect performance, depending on the size of the file and any other processes that could affect the position of the file stream.</para
       >
       <para
@@ -410,8 +490,12 @@ class Directory {
 
         
 
+        
+
          method, the contents of the buffer are discarded and an <see
          cref="T:System.IO.IOException" />
+
+        
 
         
 
@@ -427,8 +511,12 @@ class Directory {
 
         
 
+        
+
          object will not have an exclusive hold on its handle when either the <see
          cref="P:System.IO.FileStream.SafeFileHandle" />
+
+        
 
         
 
@@ -441,8 +529,12 @@ class Directory {
 
         
 
+        
+
          object is given the <see
          cref="P:System.IO.FileStream.SafeFileHandle" />
+
+        
 
         
 
@@ -456,6 +548,8 @@ class Directory {
       <para
         >Exposes a <see
          cref="T:System.IO.Stream" />
+
+        
 
         
 
@@ -496,11 +590,15 @@ class Directory {
 
             
 
+            
+
              is called, the handle is also closed and the file's handle count is decremented.</para
           >
           <para
             >FileStream assumes that it has exclusive control over the handle. Reading, writing, or seeking while a FileStream is also holding a handle could result in data corruption. For data safety, call <see
              cref="M:System.IO.FileStream.Flush" />
+
+            
 
             
 
@@ -519,6 +617,8 @@ class Directory {
 
             
 
+            
+
              constructors without a FileShare parameter.</para
           >
           <para
@@ -526,6 +626,8 @@ class Directory {
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -544,11 +646,15 @@ class Directory {
 
             
 
+            
+
              class for the specified file handle, with the specified read/write permission. </para
           >
         </summary>
         <param name="handle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -563,6 +669,8 @@ class Directory {
 
           
 
+          
+
           A constant that sets the <see
            cref="P:System.IO.FileStream.CanRead" />
 
@@ -570,8 +678,12 @@ class Directory {
 
           
 
+          
+
            and <see
            cref="P:System.IO.FileStream.CanWrite" />
+
+          
 
           
 
@@ -616,11 +728,15 @@ class Directory {
 
             
 
+            
+
              is called, the handle is also closed and the file's handle count is decremented.</para
           >
           <para
             >FileStream assumes that it has exclusive control over the handle. Reading, writing, or seeking while a FileStream is also holding a handle could result in data corruption. For data safety, call <see
              cref="M:System.IO.FileStream.Flush" />
+
+            
 
             
 
@@ -639,6 +755,8 @@ class Directory {
 
             
 
+            
+
              constructors without a FileShare parameter.</para
           >
           <para
@@ -646,6 +764,8 @@ class Directory {
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -664,11 +784,15 @@ class Directory {
 
             
 
+            
+
              class for the specified file handle, with the specified read/write permission.</para
           >
         </summary>
         <param name="handle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -683,6 +807,8 @@ class Directory {
 
           
 
+          
+
           A constant that sets the <see
            cref="P:System.IO.FileStream.CanRead" />
 
@@ -690,8 +816,12 @@ class Directory {
 
           
 
+          
+
            and <see
            cref="P:System.IO.FileStream.CanWrite" />
+
+          
 
           
 
@@ -733,6 +863,8 @@ class Directory {
 
           
 
+          
+
           is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters.</exception
         >
         <exception cref="T:System.ArgumentNullException">
@@ -742,8 +874,12 @@ class Directory {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -762,6 +898,8 @@ class Directory {
 
             
 
+            
+
              is <see
              cref="F:System.IO.FileMode.Truncate" />
 
@@ -769,8 +907,12 @@ class Directory {
 
             
 
+            
+
              or <see
              cref="F:System.IO.FileMode.Open" />
+
+            
 
             
 
@@ -787,8 +929,12 @@ class Directory {
 
           
 
+          
+
            when the file specified by <paramref
            name="path" />
+
+          
 
           
 
@@ -804,11 +950,15 @@ class Directory {
 
           
 
+          
+
            does not exist.</exception
         >
         <exception cref="T:System.IO.PathTooLongException"
           >The length of <paramref
            name="path" />
+
+          
 
           
 
@@ -821,11 +971,15 @@ class Directory {
 
           
 
+          
+
           exceeds the system-defined maximum length. </exception
         >
         <exception cref="T:System.ArgumentOutOfRangeException">
           <para>
             <paramref name="mode" />
+
+            
 
             
 
@@ -842,6 +996,8 @@ class Directory {
 
           
 
+          
+
           , <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
 
@@ -849,8 +1005,12 @@ class Directory {
 
           
 
+          
+
           , and <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Append" qualify="true" />
+
+          
 
           
 
@@ -869,12 +1029,16 @@ class Directory {
 
             
 
+            
+
              parameter can be a file name, including a file on a Universal Naming Convention (UNC) share.</para
           >
           <para>The constructor is given read/write access to the file, and it is opened sharing Read access (that is, requests to open the file for writing by this or another process will fail until the FileStream object has been closed, but read attempts will succeed). The buffer size is set to the default size of 4096 bytes (4 KB).</para>
           <block subset="none" type="note">
             <para>
               <paramref name="path" />
+
+              
 
               
 
@@ -890,8 +1054,12 @@ class Directory {
 
             
 
+            
+
              is true for all <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -904,8 +1072,12 @@ class Directory {
 
             
 
+            
+
              indicates a device that does not support seeking, the <see
              cref="P:System.IO.FileStream.CanSeek" />
+
+            
 
             
 
@@ -918,8 +1090,12 @@ class Directory {
 
             
 
+            
+
              is false. For additional information, see <see
              cref="P:System.IO.Stream.CanSeek" />
+
+            
 
             
 
@@ -935,11 +1111,15 @@ class Directory {
 
             
 
+            
+
              constructors without a FileShare parameter.</para
           >
           <para
             >For constructors without a <see
              cref="T:System.IO.FileAccess" />
+
+            
 
             
 
@@ -952,8 +1132,12 @@ class Directory {
 
             
 
+            
+
              parameter is set to <see
              cref="F:System.IO.FileMode.Append" />
+
+            
 
             
 
@@ -966,8 +1150,12 @@ class Directory {
 
             
 
+            
+
              is the default access. Otherwise, the access is set to <see
              cref="F:System.IO.FileAccess.ReadWrite" />
+
+            
 
             
 
@@ -988,6 +1176,8 @@ class Directory {
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -996,6 +1186,8 @@ class Directory {
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -1011,10 +1203,14 @@ class Directory {
 
           
 
+          
+
           A relative or absolute path for the file that the current FileStream object will encapsulate. </param
         >
         <param name="mode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1056,11 +1252,15 @@ class Directory {
 
             
 
+            
+
              before using the handle, and avoid calling any methods other than Close after you are done using the handle. Alternately, read and write to the handle before calling this FileStream constructor.</para
           >
           <para
             >FileShare.Read is the default for those <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -1081,6 +1281,8 @@ class Directory {
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1089,6 +1291,8 @@ class Directory {
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -1104,10 +1308,14 @@ class Directory {
 
           
 
+          
+
           A file handle for the file that the current FileStream object will encapsulate. </param
         >
         <param name="access">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1120,6 +1328,8 @@ class Directory {
 
           
 
+          
+
            constant that gets the <see
            cref="P:System.IO.FileStream.CanRead" />
 
@@ -1127,8 +1337,12 @@ class Directory {
 
           
 
+          
+
            and <see
            cref="P:System.IO.FileStream.CanWrite" />
+
+          
 
           
 
@@ -1143,6 +1357,8 @@ class Directory {
 
           
 
+          
+
           A positive <see
            cref="T:System.Int32" />
 
@@ -1150,8 +1366,12 @@ class Directory {
 
           
 
+          
+
            value greater than 0 indicating the buffer size. For <paramref
            name="bufferSize" />
+
+          
 
           
 
@@ -1197,6 +1417,8 @@ class Directory {
 
             
 
+            
+
              method will also close the handle and the file's handle count is decremented. The FileStream object is given the default buffer size of 8192 bytes.</para
           >
           <para
@@ -1207,11 +1429,15 @@ class Directory {
 
             
 
+            
+
              before using the handle, and avoid calling methods other than Close after you are done using the handle.</para
           >
           <para
             >FileShare.Read is the default for those <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -1232,6 +1458,8 @@ class Directory {
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1240,6 +1468,8 @@ class Directory {
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -1255,10 +1485,14 @@ class Directory {
 
           
 
+          
+
           A file handle for the file that the current FileStream object will encapsulate. </param
         >
         <param name="access">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1271,8 +1505,12 @@ class Directory {
 
           
 
+          
+
            and <see
            cref="P:System.IO.FileStream.CanWrite" />
+
+          
 
           
 
@@ -1282,6 +1520,8 @@ class Directory {
         >
         <param name="ownsHandle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1324,8 +1564,12 @@ class Directory {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1341,11 +1585,15 @@ class Directory {
 
             
 
+            
+
             is a zero-length string, contains only white space, or contains one or more implementation-specific invalid characters.</para
           >
           <para>-or-</para>
           <para>
             <paramref name="access " />
+
+            
 
             
 
@@ -1358,8 +1606,12 @@ class Directory {
 
             
 
+            
+
              and <paramref
              name="mode" />
+
+            
 
             
 
@@ -1372,8 +1624,12 @@ class Directory {
 
             
 
+            
+
              , <see
              langword="CreateNew" />
+
+            
 
             
 
@@ -1386,8 +1642,12 @@ class Directory {
 
             
 
+            
+
              or <see
              langword="Append" />
+
+            
 
             
 
@@ -1404,6 +1664,8 @@ class Directory {
 
             
 
+            
+
              is <see
              cref="F:System.IO.FileMode.Truncate" />
 
@@ -1411,8 +1673,12 @@ class Directory {
 
             
 
+            
+
              or <see
              cref="F:System.IO.FileMode.Open" />
+
+            
 
             
 
@@ -1429,8 +1695,12 @@ class Directory {
 
           
 
+          
+
            when the file specified by <paramref
            name="path" />
+
+          
 
           
 
@@ -1449,10 +1719,14 @@ class Directory {
 
           
 
+          
+
            does not exist.</exception
         >
         <exception cref="T:System.UnauthorizedAccessException">
           <paramref name="path" />
+
+          
 
           
 
@@ -1465,6 +1739,8 @@ class Directory {
 
           
 
+          
+
             is not <see
            langword="Read" />
 
@@ -1472,8 +1748,12 @@ class Directory {
 
           
 
+          
+
             , or <paramref
            name="path" />
+
+          
 
           
 
@@ -1489,8 +1769,12 @@ class Directory {
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path " />
+
+          
 
           
 
@@ -1506,8 +1790,12 @@ class Directory {
 
             
 
+            
+
              or <paramref
              name="access" />
+
+            
 
             
 
@@ -1524,6 +1812,8 @@ class Directory {
 
           
 
+          
+
           , <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
 
@@ -1531,8 +1821,12 @@ class Directory {
 
           
 
+          
+
           , and <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Append" qualify="true" />
+
+          
 
           
 
@@ -1551,12 +1845,16 @@ class Directory {
 
             
 
+            
+
              parameter can be a file name, including a file on a Universal Naming Convention (UNC) share.</para
           >
           <para>The constructor is given read/write access to the file, and it is opened sharing Read access (that is, requests to open the file for writing by this or another process will fail until the FileStream object has been closed, but read attempts will succeed). The buffer size is set to the default size of 8192 bytes (8 KB).</para>
           <block subset="none" type="note">
             <para>
               <paramref name="path" />
+
+              
 
               
 
@@ -1572,8 +1870,12 @@ class Directory {
 
             
 
+            
+
              is true for all <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -1586,8 +1888,12 @@ class Directory {
 
             
 
+            
+
              indicates a device that does not support seeking, the <see
              cref="P:System.IO.FileStream.CanSeek" />
+
+            
 
             
 
@@ -1600,8 +1906,12 @@ class Directory {
 
             
 
+            
+
              is false. For additional information, see <see
              cref="P:System.IO.Stream.CanSeek" />
+
+            
 
             
 
@@ -1612,6 +1922,8 @@ class Directory {
           <para
             >FileShare.Read is the default for those <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -1632,6 +1944,8 @@ class Directory {
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1640,6 +1954,8 @@ class Directory {
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -1655,10 +1971,14 @@ class Directory {
 
           
 
+          
+
           A relative or absolute path for the file that the current FileStream object will encapsulate. </param
         >
         <param name="mode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1673,8 +1993,12 @@ class Directory {
 
           
 
+          
+
           A constant that determines how the file can be accessed by the FileStream object. This gets the <see
            cref="P:System.IO.FileStream.CanRead" />
+
+          
 
           
 
@@ -1687,6 +2011,8 @@ class Directory {
 
           
 
+          
+
            properties of the FileStream object. <see
            cref="P:System.IO.FileStream.CanSeek" />
 
@@ -1694,8 +2020,12 @@ class Directory {
 
           
 
+          
+
            is true if <paramref
            name="path" />
+
+          
 
           
 
@@ -1738,8 +2068,12 @@ class Directory {
 
             
 
+            
+
              parameter to true to open the file handle asynchronously. When the parameter is true, the stream utilizes overlapped I/O to perform file operations asynchronously. However, the parameter does not have to be true to call the <see
              cref="M:System.IO.FileStream.ReadAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)" />
+
+            
 
             
 
@@ -1752,6 +2086,8 @@ class Directory {
 
             
 
+            
+
             , or <see
              cref="M:System.IO.Stream.CopyToAsync(System.IO.Stream)" />
 
@@ -1759,8 +2095,12 @@ class Directory {
 
             
 
+            
+
              method. When the <paramref
              name="isAsync" />
+
+            
 
             
 
@@ -1776,11 +2116,15 @@ class Directory {
 
             
 
+            
+
              before using the handle, and avoid calling any methods other than Close after you are done using the handle. Alternately, read and write to the handle before calling this FileStream constructor.</para
           >
           <para
             >FileShare.Read is the default for those <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -1801,6 +2145,8 @@ class Directory {
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1809,6 +2155,8 @@ class Directory {
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -1824,10 +2172,14 @@ class Directory {
 
           
 
+          
+
           A file handle for the file that this FileStream object will encapsulate. </param
         >
         <param name="access">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1840,8 +2192,12 @@ class Directory {
 
           
 
+          
+
            and <see
            cref="P:System.IO.FileStream.CanWrite" />
+
+          
 
           
 
@@ -1856,8 +2212,12 @@ class Directory {
 
           
 
+          
+
           A positive <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -1870,10 +2230,14 @@ class Directory {
 
           
 
+          
+
            values between one and eight, the actual buffer size is set to eight bytes.</param
         >
         <param name="isAsync">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1920,6 +2284,8 @@ class Directory {
 
             
 
+            
+
              method will also close the handle. In particular, the file's handle count is decremented. The FileStream object is given the specified buffer size.</para
           >
           <para
@@ -1930,11 +2296,15 @@ class Directory {
 
             
 
+            
+
              before using the handle, and avoid calling any methods other than Close after you are done using the handle. Alternately, read and write to the handle before calling this FileStream constructor.</para
           >
           <para
             >FileShare.Read is the default for those <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -1955,6 +2325,8 @@ class Directory {
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1963,6 +2335,8 @@ class Directory {
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -1978,10 +2352,14 @@ class Directory {
 
           
 
+          
+
           A file handle for the file that this FileStream object will encapsulate. </param
         >
         <param name="access">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1994,8 +2372,12 @@ class Directory {
 
           
 
+          
+
            and <see
            cref="P:System.IO.FileStream.CanWrite" />
+
+          
 
           
 
@@ -2010,10 +2392,14 @@ class Directory {
 
           
 
+          
+
           true if the file handle will be owned by this FileStream instance; otherwise, false. </param
         >
         <param name="bufferSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2026,8 +2412,12 @@ class Directory {
 
           
 
+          
+
            value greater than 0 indicating the buffer size. For <paramref
            name="bufferSize" />
+
+          
 
           
 
@@ -2071,8 +2461,12 @@ class Directory {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -2082,6 +2476,8 @@ class Directory {
         >
         <exception cref="T:System.ArgumentException">
           <paramref name="path " />
+
+          
 
           
 
@@ -2097,6 +2493,8 @@ class Directory {
 
             
 
+            
+
              is <see
              cref="F:System.IO.FileMode.Truncate" />
 
@@ -2104,8 +2502,12 @@ class Directory {
 
             
 
+            
+
              or <see
              cref="F:System.IO.FileMode.Open" />
+
+            
 
             
 
@@ -2122,8 +2524,12 @@ class Directory {
 
           
 
+          
+
            and the file specified by <paramref
            name="path" />
+
+          
 
           
 
@@ -2142,6 +2548,8 @@ class Directory {
 
           
 
+          
+
            does not exist.</exception
         >
         <exception cref="T:System.UnauthorizedAccessException"
@@ -2152,8 +2560,12 @@ class Directory {
 
           
 
+          
+
            requested is not permitted by the operating system for the specified <paramref
            name="path" />
+
+          
 
           
 
@@ -2169,8 +2581,12 @@ class Directory {
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path " />
+
+          
 
           
 
@@ -2186,6 +2602,8 @@ class Directory {
 
             
 
+            
+
             , <paramref
              name="access" />
 
@@ -2193,8 +2611,12 @@ class Directory {
 
             
 
+            
+
             , or <paramref
              name="share " />
+
+            
 
             
 
@@ -2211,6 +2633,8 @@ class Directory {
 
           
 
+          
+
           , <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
 
@@ -2218,8 +2642,12 @@ class Directory {
 
           
 
+          
+
           , and <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Append" qualify="true" />
+
+          
 
           
 
@@ -2238,12 +2666,16 @@ class Directory {
 
             
 
+            
+
              parameter can be a file name, including a file on a Universal Naming Convention (UNC) share.</para
           >
           <para>The constructor is given read/write access to the file, and it is opened sharing Read access (that is, requests to open the file for writing by this or another process will fail until the FileStream object has been closed, but read attempts will succeed). The buffer size is set to the default size of 8192 bytes (8 KB).</para>
           <block subset="none" type="note">
             <para>
               <paramref name="path" />
+
+              
 
               
 
@@ -2259,8 +2691,12 @@ class Directory {
 
             
 
+            
+
              is true for all <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -2273,8 +2709,12 @@ class Directory {
 
             
 
+            
+
              indicates a device that does not support seeking, the <see
              cref="P:System.IO.FileStream.CanSeek" />
+
+            
 
             
 
@@ -2287,8 +2727,12 @@ class Directory {
 
             
 
+            
+
              is false. For additional information, see <see
              cref="P:System.IO.Stream.CanSeek" />
+
+            
 
             
 
@@ -2309,6 +2753,8 @@ class Directory {
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2317,6 +2763,8 @@ class Directory {
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -2332,10 +2780,14 @@ class Directory {
 
           
 
+          
+
           A relative or absolute path for the file that the current FileStream object will encapsulate. </param
         >
         <param name="mode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2350,8 +2802,12 @@ class Directory {
 
           
 
+          
+
           A constant that determines how the file can be accessed by the FileStream object. This gets the <see
            cref="P:System.IO.FileStream.CanRead" />
+
+          
 
           
 
@@ -2364,8 +2820,12 @@ class Directory {
 
           
 
+          
+
            properties of the FileStream object. <see
            cref="P:System.IO.FileStream.CanSeek" />
+
+          
 
           
 
@@ -2378,10 +2838,14 @@ class Directory {
 
           
 
+          
+
            specifies a disk file. </param
         >
         <param name="share">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2430,6 +2894,8 @@ class Directory {
 
             
 
+            
+
              method will also close the handle. In particular, the file's handle count is decremented. The FileStream object is given the specified buffer size.</para
           >
           <para
@@ -2440,11 +2906,15 @@ class Directory {
 
             
 
+            
+
              before using the handle, and avoid calling any methods other than Close after you are done using the handle. Alternately, read and write to the handle before calling this FileStream constructor.</para
           >
           <para
             >FileShare.Read is the default for those <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -2465,6 +2935,8 @@ class Directory {
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2473,6 +2945,8 @@ class Directory {
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -2488,10 +2962,14 @@ class Directory {
 
           
 
+          
+
           A file handle for the file that this FileStream object will encapsulate. </param
         >
         <param name="access">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2504,8 +2982,12 @@ class Directory {
 
           
 
+          
+
            and <see
            cref="P:System.IO.FileStream.CanWrite" />
+
+          
 
           
 
@@ -2520,10 +3002,14 @@ class Directory {
 
           
 
+          
+
           true if the file handle will be owned by this FileStream instance; otherwise, false. </param
         >
         <param name="bufferSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2536,8 +3022,12 @@ class Directory {
 
           
 
+          
+
            value greater than 0 indicating the buffer size. For <paramref
            name="bufferSize" />
+
+          
 
           
 
@@ -2547,6 +3037,8 @@ class Directory {
         >
         <param name="isAsync">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2592,8 +3084,12 @@ class Directory {
 
           
 
+          
+
            parameter is <see
            langword="null" />
+
+          
 
           
 
@@ -2603,6 +3099,8 @@ class Directory {
         >
         <exception cref="T:System.ArgumentException">
           <paramref name="path " />
+
+          
 
           
 
@@ -2618,11 +3116,15 @@ class Directory {
 
             
 
+            
+
              is less than or equal to zero.</para
           >
           <para>-or-</para>
           <para>
             <paramref name="mode" />
+
+            
 
             
 
@@ -2635,8 +3137,12 @@ class Directory {
 
             
 
+            
+
             , or <paramref
              name="share " />
+
+            
 
             
 
@@ -2653,6 +3159,8 @@ class Directory {
 
             
 
+            
+
              is <see
              cref="F:System.IO.FileMode.Truncate" />
 
@@ -2660,8 +3168,12 @@ class Directory {
 
             
 
+            
+
              or <see
              cref="F:System.IO.FileMode.Open" />
+
+            
 
             
 
@@ -2678,8 +3190,12 @@ class Directory {
 
           
 
+          
+
            and the file specified by <paramref
            name="path" />
+
+          
 
           
 
@@ -2698,6 +3214,8 @@ class Directory {
 
           
 
+          
+
            does not exist.</exception
         >
         <exception cref="T:System.UnauthorizedAccessException"
@@ -2708,8 +3226,12 @@ class Directory {
 
           
 
+          
+
            requested is not permitted by the operating system for the specified <paramref
            name="path" />
+
+          
 
           
 
@@ -2725,8 +3247,12 @@ class Directory {
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path " />
+
+          
 
           
 
@@ -2742,6 +3268,8 @@ class Directory {
 
           
 
+          
+
           , <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
 
@@ -2749,8 +3277,12 @@ class Directory {
 
           
 
+          
+
           , and <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Append" qualify="true" />
+
+          
 
           
 
@@ -2769,11 +3301,15 @@ class Directory {
 
             
 
+            
+
              parameter can be a file name, including a file on a Universal Naming Convention (UNC) share.</para
           >
           <block subset="none" type="note">
             <para>
               <paramref name="path" />
+
+              
 
               
 
@@ -2789,8 +3325,12 @@ class Directory {
 
             
 
+            
+
              is true for all <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -2803,8 +3343,12 @@ class Directory {
 
             
 
+            
+
              indicates a device that does not support seeking, the <see
              cref="P:System.IO.FileStream.CanSeek" />
+
+            
 
             
 
@@ -2817,8 +3361,12 @@ class Directory {
 
             
 
+            
+
              is false. For additional information, see <see
              cref="P:System.IO.Stream.CanSeek" />
+
+            
 
             
 
@@ -2839,6 +3387,8 @@ class Directory {
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2847,6 +3397,8 @@ class Directory {
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -2862,10 +3414,14 @@ class Directory {
 
           
 
+          
+
           A relative or absolute path for the file that the current FileStream object will encapsulate. </param
         >
         <param name="mode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2880,8 +3436,12 @@ class Directory {
 
           
 
+          
+
           A constant that determines how the file can be accessed by the FileStream object. This gets the <see
            cref="P:System.IO.FileStream.CanRead" />
+
+          
 
           
 
@@ -2894,6 +3454,8 @@ class Directory {
 
           
 
+          
+
            properties of the FileStream object. <see
            cref="P:System.IO.FileStream.CanSeek" />
 
@@ -2901,8 +3463,12 @@ class Directory {
 
           
 
+          
+
            is true if <paramref
            name="path" />
+
+          
 
           
 
@@ -2917,10 +3483,14 @@ class Directory {
 
           
 
+          
+
           A constant that determines how the file will be shared by processes. </param
         >
         <param name="bufferSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2933,8 +3503,12 @@ class Directory {
 
           
 
+          
+
            value greater than 0 indicating the buffer size. For <paramref
            name="bufferSize" />
+
+          
 
           
 
@@ -2981,8 +3555,12 @@ class Directory {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -2992,6 +3570,8 @@ class Directory {
         >
         <exception cref="T:System.ArgumentException">
           <paramref name="path " />
+
+          
 
           
 
@@ -3007,11 +3587,15 @@ class Directory {
 
             
 
+            
+
              is less than or equal to zero.</para
           >
           <para>-or-</para>
           <para>
             <paramref name="mode" />
+
+            
 
             
 
@@ -3024,8 +3608,12 @@ class Directory {
 
             
 
+            
+
             , or <paramref
              name="share " />
+
+            
 
             
 
@@ -3042,6 +3630,8 @@ class Directory {
 
             
 
+            
+
              is <see
              cref="F:System.IO.FileMode.Truncate" />
 
@@ -3049,8 +3639,12 @@ class Directory {
 
             
 
+            
+
              or <see
              cref="F:System.IO.FileMode.Open" />
+
+            
 
             
 
@@ -3067,8 +3661,12 @@ class Directory {
 
           
 
+          
+
            and the file specified by <paramref
            name="path" />
+
+          
 
           
 
@@ -3087,6 +3685,8 @@ class Directory {
 
           
 
+          
+
            does not exist.</exception
         >
         <exception cref="T:System.UnauthorizedAccessException"
@@ -3097,8 +3697,12 @@ class Directory {
 
           
 
+          
+
            requested is not permitted by the operating system for the specified <paramref
            name="path" />
+
+          
 
           
 
@@ -3114,8 +3718,12 @@ class Directory {
 
           
 
+          
+
            or the absolute path information for <paramref
            name="path " />
+
+          
 
           
 
@@ -3131,6 +3739,8 @@ class Directory {
 
           
 
+          
+
           , <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Write" qualify="true" />
 
@@ -3138,8 +3748,12 @@ class Directory {
 
           
 
+          
+
           , and <see
            cref="F:System.Security.Permissions.FileIOPermissionAccess.Append" qualify="true" />
+
+          
 
           
 
@@ -3158,11 +3772,15 @@ class Directory {
 
             
 
+            
+
              parameter can be a file name, including a file on a Universal Naming Convention (UNC) share.</para
           >
           <block subset="none" type="note">
             <para>
               <paramref name="path" />
+
+              
 
               
 
@@ -3178,8 +3796,12 @@ class Directory {
 
             
 
+            
+
              is true for all <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -3192,8 +3814,12 @@ class Directory {
 
             
 
+            
+
              indicates a device that does not support seeking, the <see
              cref="P:System.IO.FileStream.CanSeek" />
+
+            
 
             
 
@@ -3206,8 +3832,12 @@ class Directory {
 
             
 
+            
+
              is false. For additional information, see <see
              cref="P:System.IO.Stream.CanSeek" />
+
+            
 
             
 
@@ -3228,6 +3858,8 @@ class Directory {
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3236,6 +3868,8 @@ class Directory {
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -3251,10 +3885,14 @@ class Directory {
 
           
 
+          
+
           A relative or absolute path for the file that the current FileStream object will encapsulate. </param
         >
         <param name="mode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3269,8 +3907,12 @@ class Directory {
 
           
 
+          
+
           A constant that determines how the file can be accessed by the FileStream object. This gets the <see
            cref="P:System.IO.FileStream.CanRead" />
+
+          
 
           
 
@@ -3283,6 +3925,8 @@ class Directory {
 
           
 
+          
+
            properties of the FileStream object. <see
            cref="P:System.IO.FileStream.CanSeek" />
 
@@ -3290,8 +3934,12 @@ class Directory {
 
           
 
+          
+
            is true if <paramref
            name="path" />
+
+          
 
           
 
@@ -3306,10 +3954,14 @@ class Directory {
 
           
 
+          
+
           A constant that determines how the file will be shared by processes. </param
         >
         <param name="bufferSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3322,8 +3974,12 @@ class Directory {
 
           
 
+          
+
            value greater than 0 indicating the buffer size. For <paramref
            name="bufferSize" />
+
+          
 
           
 
@@ -3338,8 +3994,12 @@ class Directory {
 
           
 
+          
+
           Specifies whether to use asynchronous I/O or synchronous I/O. However, note that the underlying operating system might not support asynchronous I/O, so when specifying true, the handle might be opened synchronously depending on the platform. When opened asynchronously, the <see
            cref="M:System.IO.FileStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+          
 
           
 
@@ -3352,8 +4012,12 @@ class Directory {
 
           
 
+          
+
            methods perform better on large reads or writes, but they might be much slower for small reads or writes. If the application is designed to take advantage of asynchronous I/O, set the <paramref
            name="useAsync" />
+
+          
 
           
 
@@ -3399,8 +4063,12 @@ class Directory {
 
             
 
+            
+
              parameter is used to provide access to more advanced operations that can be leveraged when creating a <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -3416,11 +4084,15 @@ class Directory {
 
             
 
+            
+
              parameter can be a file name, including a file on a Universal Naming Convention (UNC) share.</para
           >
           <block subset="none" type="note">
             <para>
               <paramref name="path" />
+
+              
 
               
 
@@ -3436,8 +4108,12 @@ class Directory {
 
             
 
+            
+
              is true for all <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -3450,8 +4126,12 @@ class Directory {
 
             
 
+            
+
              indicates a device that does not support seeking, the <see
              cref="P:System.IO.FileStream.CanSeek" />
+
+            
 
             
 
@@ -3464,8 +4144,12 @@ class Directory {
 
             
 
+            
+
              is false. For additional information, see <see
              cref="P:System.IO.Stream.CanSeek" />
+
+            
 
             
 
@@ -3486,6 +4170,8 @@ class Directory {
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3494,6 +4180,8 @@ class Directory {
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -3509,10 +4197,14 @@ class Directory {
 
           
 
+          
+
           A relative or absolute path for the file that the current FileStream object will encapsulate. </param
         >
         <param name="mode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3527,8 +4219,12 @@ class Directory {
 
           
 
+          
+
           A constant that determines how the file can be accessed by the FileStream object. This gets the <see
            cref="P:System.IO.FileStream.CanRead" />
+
+          
 
           
 
@@ -3541,6 +4237,8 @@ class Directory {
 
           
 
+          
+
            properties of the FileStream object. <see
            cref="P:System.IO.FileStream.CanSeek" />
 
@@ -3548,8 +4246,12 @@ class Directory {
 
           
 
+          
+
            is true if <paramref
            name="path" />
+
+          
 
           
 
@@ -3564,10 +4266,14 @@ class Directory {
 
           
 
+          
+
           A constant that determines how the file will be shared by processes. </param
         >
         <param name="bufferSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3580,8 +4286,12 @@ class Directory {
 
           
 
+          
+
            value greater than 0 indicating the buffer size. For <paramref
            name="bufferSize" />
+
+          
 
           
 
@@ -3591,6 +4301,8 @@ class Directory {
         >
         <param name="options">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3635,6 +4347,8 @@ class Directory {
 
             
 
+            
+
              constructor to apply access rights at the point of creation of a file. To access or modify rights on an existing file, consider using the <see
              cref="M:System.IO.File.GetAccessControl(System.String)" />
 
@@ -3642,8 +4356,12 @@ class Directory {
 
             
 
+            
+
              and <see
              cref="M:System.IO.File.SetAccessControl(System.String,System.Security.AccessControl.FileSecurity)" />
+
+            
 
             
 
@@ -3659,8 +4377,12 @@ class Directory {
 
             
 
+            
+
              parameter is used to provide access to more advanced operations that can be leveraged when creating a <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -3676,11 +4398,15 @@ class Directory {
 
             
 
+            
+
              parameter can be a file name, including a file on a Universal Naming Convention (UNC) share.</para
           >
           <block subset="none" type="note">
             <para>
               <paramref name="path" />
+
+              
 
               
 
@@ -3696,8 +4422,12 @@ class Directory {
 
             
 
+            
+
              is true for all <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -3710,8 +4440,12 @@ class Directory {
 
             
 
+            
+
              indicates a device that does not support seeking, the <see
              cref="P:System.IO.FileStream.CanSeek" />
+
+            
 
             
 
@@ -3724,8 +4458,12 @@ class Directory {
 
             
 
+            
+
              is false. For additional information, see <see
              cref="P:System.IO.Stream.CanSeek" />
+
+            
 
             
 
@@ -3746,6 +4484,8 @@ class Directory {
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3754,6 +4494,8 @@ class Directory {
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -3769,8 +4511,12 @@ class Directory {
 
           
 
+          
+
           A relative or absolute path for the file that the current <see
            cref="T:System.IO.FileStream" />
+
+          
 
           
 
@@ -3785,10 +4531,14 @@ class Directory {
 
           
 
+          
+
           A constant that determines how to open or create the file.</param
         >
         <param name="rights">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3803,10 +4553,14 @@ class Directory {
 
           
 
+          
+
           A constant that determines how the file will be shared by processes.</param
         >
         <param name="bufferSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3819,8 +4573,12 @@ class Directory {
 
           
 
+          
+
            value greater than 0 indicating the buffer size. For <paramref
            name="bufferSize" />
+
+          
 
           
 
@@ -3830,6 +4588,8 @@ class Directory {
         >
         <param name="options">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3875,6 +4635,8 @@ class Directory {
 
             
 
+            
+
              constructor to apply access rights at the point of creation of a file. To access or modify rights on an existing file, consider using the <see
              cref="M:System.IO.File.GetAccessControl(System.String)" />
 
@@ -3882,8 +4644,12 @@ class Directory {
 
             
 
+            
+
              and <see
              cref="M:System.IO.File.SetAccessControl(System.String,System.Security.AccessControl.FileSecurity)" />
+
+            
 
             
 
@@ -3899,8 +4665,12 @@ class Directory {
 
             
 
+            
+
              parameter is used to provide access to more advanced operations that can be leveraged when creating a <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -3916,11 +4686,15 @@ class Directory {
 
             
 
+            
+
              parameter can be a file name, including a file on a Universal Naming Convention (UNC) share.</para
           >
           <block subset="none" type="note">
             <para>
               <paramref name="path" />
+
+              
 
               
 
@@ -3936,8 +4710,12 @@ class Directory {
 
             
 
+            
+
              is true for all <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -3950,8 +4728,12 @@ class Directory {
 
             
 
+            
+
              indicates a device that does not support seeking, the <see
              cref="P:System.IO.FileStream.CanSeek" />
+
+            
 
             
 
@@ -3964,8 +4746,12 @@ class Directory {
 
             
 
+            
+
              is false. For additional information, see <see
              cref="P:System.IO.Stream.CanSeek" />
+
+            
 
             
 
@@ -3986,6 +4772,8 @@ class Directory {
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3994,6 +4782,8 @@ class Directory {
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -4009,8 +4799,12 @@ class Directory {
 
           
 
+          
+
           A relative or absolute path for the file that the current <see
            cref="T:System.IO.FileStream" />
+
+          
 
           
 
@@ -4025,10 +4819,14 @@ class Directory {
 
           
 
+          
+
           A constant that determines how to open or create the file.</param
         >
         <param name="rights">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4043,10 +4841,14 @@ class Directory {
 
           
 
+          
+
           A constant that determines how the file will be shared by processes.</param
         >
         <param name="bufferSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4059,8 +4861,12 @@ class Directory {
 
           
 
+          
+
            value greater than 0 indicating the buffer size. For <paramref
            name="bufferSize" />
+
+          
 
           
 
@@ -4075,10 +4881,14 @@ class Directory {
 
           
 
+          
+
           A constant that specifies additional file options.</param
         >
         <param name="fileSecurity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4127,8 +4937,12 @@ class Directory {
 
           
 
+          
+
            is greater than the length of <paramref
            name="array" />
+
+          
 
           
 
@@ -4143,8 +4957,12 @@ class Directory {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -4159,8 +4977,12 @@ class Directory {
 
           
 
+          
+
            or <paramref
            name="numBytes" />
+
+          
 
           
 
@@ -4181,8 +5003,12 @@ class Directory {
 
             
 
+            
+
              and <see
              cref="M:System.IO.FileStream.EndRead(System.IAsyncResult)" />
+
+            
 
             
 
@@ -4195,8 +5021,12 @@ class Directory {
 
             
 
+            
+
             , <see
              cref="M:System.IO.FileStream.WriteAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)" />
+
+            
 
             
 
@@ -4209,8 +5039,12 @@ class Directory {
 
             
 
+            
+
             , and <see
              cref="M:System.IO.FileStream.FlushAsync(System.Threading.CancellationToken)" />
+
+            
 
             
 
@@ -4225,8 +5059,12 @@ class Directory {
 
             
 
+            
+
              must be called exactly once for every call to <see
              cref="M:System.IO.FileStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -4241,6 +5079,8 @@ class Directory {
 
             
 
+            
+
              provides two different modes of operation: synchronous I/O and asynchronous I/O. While either can be used, the underlying operating system resources might allow access in only one of these modes. By default, <see
              cref="T:System.IO.FileStream" />
 
@@ -4248,8 +5088,12 @@ class Directory {
 
             
 
+            
+
              opens the operating system handle synchronously. In Windows, this slows down asynchronous methods. If asynchronous methods are used, use the <see
              cref="M:System.IO.FileStream.#ctor(System.String,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare,System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -4266,8 +5110,12 @@ class Directory {
 
               
 
+              
+
                property to determine whether the current instance supports reading. For additional information, see <see
                cref="P:System.IO.Stream.CanRead" />
+
+              
 
               
 
@@ -4284,8 +5132,12 @@ class Directory {
 
             
 
+            
+
             . Errors that occur during an asynchronous read request, such as a disk failure during the IO request, occur on the thread pool thread and become visible upon a call to <see
              cref="M:System.IO.FileStream.EndRead(System.IAsyncResult)" />
+
+            
 
             
 
@@ -4300,8 +5152,12 @@ class Directory {
 
             
 
+            
+
              must be called with this <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -4320,6 +5176,8 @@ class Directory {
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4328,6 +5186,8 @@ class Directory {
           <para
             >Begins an asynchronous read operation. (Consider using <see
              cref="M:System.IO.FileStream.ReadAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)" />
+
+            
 
             
 
@@ -4347,6 +5207,8 @@ class Directory {
 
           
 
+          
+
           The buffer to read data into. </param
         >
         <param name="offset">
@@ -4356,8 +5218,12 @@ class Directory {
 
           
 
+          
+
           The byte offset in <paramref
            name="array" />
+
+          
 
           
 
@@ -4372,6 +5238,8 @@ class Directory {
 
           
 
+          
+
           The maximum number of bytes to read. </param
         >
         <param name="userCallback">
@@ -4381,10 +5249,14 @@ class Directory {
 
           
 
+          
+
           The method to be called when the asynchronous read operation is completed. </param
         >
         <param name="stateObject">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4434,8 +5306,12 @@ class Directory {
 
           
 
+          
+
            is greater than the length of <paramref
            name="array" />
+
+          
 
           
 
@@ -4450,8 +5326,12 @@ class Directory {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -4466,8 +5346,12 @@ class Directory {
 
           
 
+          
+
            or <paramref
            name="numBytes" />
+
+          
 
           
 
@@ -4489,8 +5373,12 @@ class Directory {
 
             
 
+            
+
              and <see
              cref="M:System.IO.FileStream.EndWrite(System.IAsyncResult)" />
+
+            
 
             
 
@@ -4503,8 +5391,12 @@ class Directory {
 
             
 
+            
+
             , <see
              cref="M:System.IO.FileStream.WriteAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)" />
+
+            
 
             
 
@@ -4517,8 +5409,12 @@ class Directory {
 
             
 
+            
+
             , and <see
              cref="M:System.IO.FileStream.FlushAsync(System.Threading.CancellationToken)" />
+
+            
 
             
 
@@ -4533,8 +5429,12 @@ class Directory {
 
             
 
+            
+
              must be called exactly once on every <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -4547,8 +5447,12 @@ class Directory {
 
             
 
+            
+
             . <see
              cref="M:System.IO.FileStream.EndWrite(System.IAsyncResult)" />
+
+            
 
             
 
@@ -4564,10 +5468,14 @@ class Directory {
 
             
 
+            
+
             .</para
           >
           <para>
             <see cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -4580,8 +5488,12 @@ class Directory {
 
             
 
+            
+
              opens the operating system handle synchronously. In Windows, this slows down asynchronous methods. If asynchronous methods are used, use the <see
              cref="M:System.IO.FileStream.#ctor(System.String,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare,System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -4597,8 +5509,12 @@ class Directory {
 
             
 
+            
+
             . Errors that occur during an asynchronous write request, such as a disk failure during the IO request, occur on the thread pool thread and become visible upon a call to <see
              cref="M:System.IO.FileStream.EndWrite(System.IAsyncResult)" />
+
+            
 
             
 
@@ -4617,6 +5533,8 @@ class Directory {
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4625,6 +5543,8 @@ class Directory {
           <para
             >Begins an asynchronous write operation. (Consider using <see
              cref="M:System.IO.FileStream.WriteAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)" />
+
+            
 
             
 
@@ -4644,6 +5564,8 @@ class Directory {
 
           
 
+          
+
           The buffer containing data to write to the current stream.</param
         >
         <param name="offset">
@@ -4653,8 +5575,12 @@ class Directory {
 
           
 
+          
+
           The zero-based byte offset in <paramref
            name="array" />
+
+          
 
           
 
@@ -4669,6 +5595,8 @@ class Directory {
 
           
 
+          
+
           The maximum number of bytes to write. </param
         >
         <param name="userCallback">
@@ -4678,10 +5606,14 @@ class Directory {
 
           
 
+          
+
           The method to be called when the asynchronous write operation is completed. </param
         >
         <param name="stateObject">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4718,9 +5650,13 @@ class Directory {
 
             
 
+            
+
              if the stream supports reading;
 <see
              langword="false" />
+
+            
 
             
 
@@ -4741,8 +5677,12 @@ class Directory {
 
             
 
+            
+
              does not support reading, calls to the <see
              cref="M:System.IO.FileStream.Read(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -4755,6 +5695,8 @@ class Directory {
 
             
 
+            
+
             , and <see
              cref="M:System.IO.FileStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
@@ -4762,8 +5704,12 @@ class Directory {
 
             
 
+            
+
              methods throw a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -4806,6 +5752,8 @@ class Directory {
 
             
 
+            
+
              if the stream supports seeking;
 <see
              langword="false" />
@@ -4814,9 +5762,13 @@ class Directory {
 
             
 
+            
+
              if the stream is 
    closed or if the <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -4836,8 +5788,12 @@ class Directory {
 
             
 
+            
+
              does not support seeking, calls to <see
              cref="P:System.IO.FileStream.Length" />
+
+            
 
             
 
@@ -4850,8 +5806,12 @@ class Directory {
 
             
 
+            
+
             , <see
              cref="P:System.IO.FileStream.Position" />
+
+            
 
             
 
@@ -4864,8 +5824,12 @@ class Directory {
 
             
 
+            
+
              throw a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -4908,9 +5872,13 @@ class Directory {
 
             
 
+            
+
              if the stream supports writing;
 <see
              langword="false" />
+
+            
 
             
 
@@ -4930,8 +5898,12 @@ class Directory {
 
             
 
+            
+
              does not support writing, a call to <see
              cref="M:System.IO.FileStream.SetLength(System.Int64)" />
+
+            
 
             
 
@@ -4944,8 +5916,12 @@ class Directory {
 
             
 
+            
+
             , <see
              cref="M:System.IO.FileStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -4958,8 +5934,12 @@ class Directory {
 
             
 
+            
+
              throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -4999,8 +5979,12 @@ class Directory {
 
             
 
+            
+
             (<see
              langword="true" />
+
+            
 
             
 
@@ -5017,6 +6001,8 @@ class Directory {
 
             
 
+            
+
              before
       invoking <see
              langword="Close" />
@@ -5025,8 +6011,12 @@ class Directory {
 
             
 
+            
+
             . Following a call to <see
              langword="Close" />
+
+            
 
             
 
@@ -5046,8 +6036,12 @@ class Directory {
               
 
               
+
+              
 method invokes <see
                langword="Close " />
+
+              
 
               
 
@@ -5062,8 +6056,12 @@ the <see
 
               
 
+              
+
               , such as a <see
                cref="T:System.IO.StreamWriter" />
+
+              
 
               
 
@@ -5077,8 +6075,12 @@ the data from their internal buffers to the <see
 
               
 
+              
+
                when the call to <see
                langword="Finalize" />
+
+              
 
               
 
@@ -5092,6 +6094,8 @@ the stream. To prevent data loss, always call <see
 
               
 
+              
+
                on the highest-level object.</block
             >
           </para>
@@ -5100,6 +6104,8 @@ the stream. To prevent data loss, always call <see
    
    This method overrides <see
                cref="M:System.IO.Stream.Close" qualify="true" />
+
+              
 
               
 
@@ -5150,8 +6156,12 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              method and the <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -5164,8 +6174,12 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              invokes the protected <see
              cref="M:System.IO.FileStream.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -5178,8 +6192,12 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              parameter set to true. <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -5192,8 +6210,12 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -5209,6 +6231,8 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.IO.FileStream" />
 
@@ -5216,8 +6240,12 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              references. This method invokes the <see
              cref="M:System.ComponentModel.Component.Dispose" />
+
+            
 
             
 
@@ -5236,11 +6264,15 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5284,8 +6316,12 @@ the stream. To prevent data loss, always call <see
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -5300,8 +6336,12 @@ the stream. To prevent data loss, always call <see
 
           
 
+          
+
            was not returned by a call to <see
            cref="M:System.IO.FileStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+          
 
           
 
@@ -5316,8 +6356,12 @@ the stream. To prevent data loss, always call <see
 
           
 
+          
+
            was called multiple times with <paramref
            name="asyncResult" />
+
+          
 
           
 
@@ -5335,8 +6379,12 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              and <see
              cref="M:System.IO.FileStream.EndRead(System.IAsyncResult)" />
+
+            
 
             
 
@@ -5349,8 +6397,12 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
             , <see
              cref="M:System.IO.FileStream.WriteAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)" />
+
+            
 
             
 
@@ -5363,8 +6415,12 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
             , and <see
              cref="M:System.IO.FileStream.FlushAsync(System.Threading.CancellationToken)" />
+
+            
 
             
 
@@ -5379,8 +6435,12 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              must be called exactly for every call to <see
              cref="M:System.IO.FileStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -5396,10 +6456,14 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
             .</para
           >
           <para>
             <see cref="M:System.IO.FileStream.EndRead(System.IAsyncResult)" />
+
+            
 
             
 
@@ -5412,8 +6476,12 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              from <see
              cref="M:System.IO.FileStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -5426,8 +6494,12 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              tells you how many bytes were read from the stream. <see
              cref="M:System.IO.FileStream.EndRead(System.IAsyncResult)" />
+
+            
 
             
 
@@ -5446,6 +6518,8 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              instead; see the Remarks section.)</para
           >
         </summary>
@@ -5455,6 +6529,8 @@ the stream. To prevent data loss, always call <see
         </returns>
         <param name="asyncResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5498,8 +6574,12 @@ the stream. To prevent data loss, always call <see
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -5514,8 +6594,12 @@ the stream. To prevent data loss, always call <see
 
           
 
+          
+
            was not returned by a call to <see
            cref="M:System.IO.FileStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+          
 
           
 
@@ -5530,8 +6614,12 @@ the stream. To prevent data loss, always call <see
 
           
 
+          
+
            was called multiple times with <paramref
            name="asyncResult" />
+
+          
 
           
 
@@ -5549,8 +6637,12 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              and <see
              cref="M:System.IO.FileStream.EndWrite(System.IAsyncResult)" />
+
+            
 
             
 
@@ -5563,8 +6655,12 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
             , <see
              cref="M:System.IO.FileStream.WriteAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)" />
+
+            
 
             
 
@@ -5577,8 +6673,12 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
             , and <see
              cref="M:System.IO.FileStream.FlushAsync(System.Threading.CancellationToken)" />
+
+            
 
             
 
@@ -5594,10 +6694,14 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
             .</para
           >
           <para>
             <see cref="M:System.IO.FileStream.EndWrite(System.IAsyncResult)" />
+
+            
 
             
 
@@ -5610,6 +6714,8 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              from <see
              cref="M:System.IO.FileStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
 
@@ -5617,8 +6723,12 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
             . <see
              cref="M:System.IO.FileStream.EndWrite(System.IAsyncResult)" />
+
+            
 
             
 
@@ -5637,11 +6747,15 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              instead; see the Remarks section.)</para
           >
         </summary>
         <param name="asyncResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5713,11 +6827,15 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
             . </para
           >
           <para
             >When you call the <see
              cref="M:System.IO.FileStream.Flush" />
+
+            
 
             
 
@@ -5733,8 +6851,12 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              or dispose of the object. Setting <see
              cref="P:System.IO.StreamWriter.AutoFlush" />
+
+            
 
             
 
@@ -5745,6 +6867,8 @@ the stream. To prevent data loss, always call <see
           <para
             >Because a buffer can be used for either reading or writing, <see
              cref="M:System.IO.FileStream.Flush" />
+
+            
 
             
 
@@ -5765,6 +6889,8 @@ the stream. To prevent data loss, always call <see
 
                 
 
+                
+
                  is true and data was previously copied from the file to the buffer for reading, the current position within the file is decremented by the number of unread bytes in the buffer. The buffer is then cleared.</para
               >
             </item>
@@ -5772,6 +6898,8 @@ the stream. To prevent data loss, always call <see
           <para
             >Use the <see
              cref="M:System.IO.FileStream.Flush(System.Boolean)" />
+
+            
 
             
 
@@ -5815,6 +6943,8 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              method, the operating system I/O buffer is also flushed.</para
           >
         </remarks>
@@ -5824,6 +6954,8 @@ the stream. To prevent data loss, always call <see
         </summary>
         <param name="flushToDisk">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5863,11 +6995,15 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              method, the operating system I/O buffer is also flushed.</para
           >
           <para
             >If the operation is canceled before it completes, the returned task contains the <see
              cref="F:System.Threading.Tasks.TaskStatus.Canceled" />
+
+            
 
             
 
@@ -5880,6 +7016,8 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              property. If the handle to the file is disposed, the returned task contains the <see
              cref="T:System.ObjectDisposedException" />
 
@@ -5887,8 +7025,12 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              exception in the <see
              cref="P:System.Threading.Tasks.Task.Exception" />
+
+            
 
             
 
@@ -5907,6 +7049,8 @@ the stream. To prevent data loss, always call <see
         </returns>
         <param name="cancellationToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5946,8 +7090,12 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              class and <see
              cref="M:System.IO.FileStream.GetAccessControl" />
+
+            
 
             
 
@@ -5960,11 +7108,15 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              method, as it is easier to use.</para
           >
           <para
             >Use the <see
              cref="M:System.IO.FileStream.GetAccessControl" />
+
+            
 
             
 
@@ -5982,12 +7134,16 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="53758b39-bd9b-4640-bb04-cad5ed8d0abf"
                 >How to: Add or Remove an Access Control List Entry</a
               >
             </format>
+
+            
 
             
 
@@ -6006,8 +7162,12 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              object that encapsulates the access control list (ACL) entries for the file described by the current <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -6021,6 +7181,8 @@ the stream. To prevent data loss, always call <see
           <para
             >An object that encapsulates the access control settings for the file described by the current <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -6061,12 +7223,16 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              property to discover whether this handle was opened asynchronously. In Win32, this means the handle was opened for overlapped IO, and it requires different parameters to ReadFile and WriteFile.</para
           >
           <block subset="none" type="note">
             <para
               >Data corruption might occur if a FileStream is created, its handle is passed, some operation moves the handle's file pointer, and then the FileStream is used again. Multiple threads cannot safely write to the same file simultaneously, and FileStream buffering code assumes that it exclusively controls the handle. FileStream might throw an <see
                cref="T:System.IO.IOException" />
+
+              
 
               
 
@@ -6108,6 +7274,8 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              if the
    current
 <see
@@ -6117,9 +7285,13 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              was opened
    asynchronously; otherwise, <see
              langword="false" />
+
+            
 
             
 
@@ -6138,11 +7310,15 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              property correctly. In Win32, IsAsync being true means the handle was opened for overlapped I/O, and thus requires different parameters to ReadFile and WriteFile.</para
           >
           <para
             >You specify this value when you create an instance of the <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -6155,8 +7331,12 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
             , <paramref
              name="useAsync" />
+
+            
 
             
 
@@ -6169,8 +7349,12 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              parameter. When the property is true, the stream utilizes overlapped I/O to perform file operations asynchronously. However, the <see
              cref="P:System.IO.FileStream.IsAsync" />
+
+            
 
             
 
@@ -6183,8 +7367,12 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
             , <see
              cref="M:System.IO.FileStream.WriteAsync(System.Byte[],System.Int32,System.Int32,System.Threading.CancellationToken)" />
+
+            
 
             
 
@@ -6197,8 +7385,12 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              method. When the <see
              cref="P:System.IO.FileStream.IsAsync" />
+
+            
 
             
 
@@ -6241,6 +7433,8 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              value containing the length of the stream in bytes.</para
           >
         </value>
@@ -6251,8 +7445,12 @@ the stream. To prevent data loss, always call <see
 
           
 
+          
+
            for this stream is <see
            langword="false" />
+
+          
 
           
 
@@ -6270,6 +7468,8 @@ the stream. To prevent data loss, always call <see
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -6321,6 +7521,8 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -6329,6 +7531,8 @@ the stream. To prevent data loss, always call <see
           <para
             >Prevents other processes from reading from or writing to the <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -6344,10 +7548,14 @@ the stream. To prevent data loss, always call <see
 
           
 
+          
+
           The beginning of the range to lock. The value of this parameter must be equal to or greater than zero (0). </param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6378,6 +7586,8 @@ the stream. To prevent data loss, always call <see
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -6419,6 +7629,8 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              containing the current position of this stream.</para
           >
         </value>
@@ -6440,6 +7652,8 @@ the stream. To prevent data loss, always call <see
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -6490,8 +7704,12 @@ the stream. To prevent data loss, always call <see
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -6506,8 +7724,12 @@ the stream. To prevent data loss, always call <see
 
           
 
+          
+
            or <paramref
            name="count " />
+
+          
 
           
 
@@ -6526,6 +7748,8 @@ the stream. To prevent data loss, always call <see
 
           
 
+          
+
            + <paramref
            name="count" />
 
@@ -6533,8 +7757,12 @@ the stream. To prevent data loss, always call <see
 
           
 
+          
+
            is greater than the length of <paramref
            name="array" />
+
+          
 
           
 
@@ -6553,11 +7781,15 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
             .</para
           >
           <para
             >The <paramref
              name="offset" />
+
+            
 
             
 
@@ -6570,8 +7802,12 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              (the buffer index) at which to begin reading, and the <paramref
              name="count" />
+
+            
 
             
 
@@ -6587,6 +7823,8 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              method returns zero only after reaching the end of the stream. Otherwise, <see
              cref="M:System.IO.FileStream.Read(System.Byte[],System.Int32,System.Int32)" />
 
@@ -6594,8 +7832,12 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              always reads at least one byte from the stream before returning. If no data is available from the stream upon a call to <see
              cref="M:System.IO.FileStream.Read(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -6611,6 +7853,8 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              for reading primitive data types.</para
           >
           <para>Do not interrupt a thread that is performing a read operation. Although the application may appear to run successfully after the thread is unblocked, the interruption can decrease your application's performance and reliability.</para>
@@ -6619,6 +7863,8 @@ the stream. To prevent data loss, always call <see
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -6642,8 +7888,12 @@ the stream. To prevent data loss, always call <see
 
           
 
+          
+
           When this method returns, contains the specified byte array with the values between <paramref
            name="offset" />
+
+          
 
           
 
@@ -6656,6 +7906,8 @@ the stream. To prevent data loss, always call <see
 
           
 
+          
+
            + <paramref
            name="count" />
 
@@ -6663,8 +7915,12 @@ the stream. To prevent data loss, always call <see
 
           
 
+          
+
            - 1<paramref
            name=")" />
+
+          
 
           
 
@@ -6679,8 +7935,12 @@ the stream. To prevent data loss, always call <see
 
           
 
+          
+
           The byte offset in <paramref
            name="array" />
+
+          
 
           
 
@@ -6690,6 +7950,8 @@ the stream. To prevent data loss, always call <see
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6733,11 +7995,15 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              method enables you to perform resource-intensive file operations without blocking the main thread. This performance consideration is particularly important in a win8_appname_long app or desktop_appname app where a time-consuming stream operation can block the UI thread and make your app appear as if it is not working. The async methods are used in conjunction with the async and await keywords in Visual Basic and C#.</para
           >
           <para
             >Use the <see
              cref="P:System.IO.FileStream.CanRead" />
+
+            
 
             
 
@@ -6753,8 +8019,12 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              value for the <see
              cref="P:System.Threading.Tasks.Task.Status" />
+
+            
 
             
 
@@ -6767,8 +8037,12 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              exception in the <see
              cref="P:System.Threading.Tasks.Task.Exception" />
+
+            
 
             
 
@@ -6791,11 +8065,15 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              parameter contains the total number of bytes read into the buffer. The result value can be less than the number of bytes requested if the number of bytes currently available is less than the requested number, or it can be 0 (zero) if the end of the stream has been reached. </para
           >
         </returns>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6810,8 +8088,12 @@ the stream. To prevent data loss, always call <see
 
           
 
+          
+
           The byte offset in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -6826,10 +8108,14 @@ the stream. To prevent data loss, always call <see
 
           
 
+          
+
           The maximum number of bytes to read.</param
         >
         <param name="cancellationToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6871,6 +8157,8 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -6882,8 +8170,12 @@ the stream. To prevent data loss, always call <see
 
               
 
+              
+
                property to determine whether the current instance supports reading. For additional information, see <see
                cref="P:System.IO.Stream.CanRead" />
+
+              
 
               
 
@@ -6902,6 +8194,8 @@ the stream. To prevent data loss, always call <see
           <para
             >The byte, cast to an <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -6943,8 +8237,12 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              property automatically flushes the stream and sets the current stream position to 0.  This allows the file to be moved or the stream position to be reset by another stream using the <see
              cref="P:System.IO.FileStream.SafeFileHandle" />
+
+            
 
             
 
@@ -6963,8 +8261,12 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              object that represents the operating system file handle for the file that the current <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -7020,6 +8322,8 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -7031,8 +8335,12 @@ the stream. To prevent data loss, always call <see
 
               
 
+              
+
                property to determine whether the current instance supports seeking. For additional information, see <see
                cref="P:System.IO.Stream.CanSeek" />
+
+              
 
               
 
@@ -7047,6 +8355,8 @@ the stream. To prevent data loss, always call <see
              type="text/html">
               <a href="bf00c380-706a-4e38-b829-454a480629fc">Common I/O Tasks</a>
             </format>
+
+            
 
             
 
@@ -7070,8 +8380,12 @@ the stream. To prevent data loss, always call <see
 
           
 
+          
+
           The point relative to <paramref
            name="origin" />
+
+          
 
           
 
@@ -7086,6 +8400,8 @@ the stream. To prevent data loss, always call <see
 
           
 
+          
+
           Specifies the beginning, the end, or the current position as a reference point for <paramref
            name="offset" />
 
@@ -7093,8 +8409,12 @@ the stream. To prevent data loss, always call <see
 
           
 
+          
+
           , using a value of type <see
            cref="T:System.IO.SeekOrigin" />
+
+          
 
           
 
@@ -7137,8 +8457,12 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              class and <see
              cref="M:System.IO.FileStream.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+
+            
 
             
 
@@ -7151,11 +8475,15 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              method as it is easier to use.</para
           >
           <para
             >The <see
              cref="M:System.IO.FileStream.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+
+            
 
             
 
@@ -7172,6 +8500,8 @@ the stream. To prevent data loss, always call <see
 
               
 
+              
+
                parameter replaces the existing ACL for the file. To add permissions for a new user, use the <see
                cref="M:System.IO.FileStream.GetAccessControl" />
 
@@ -7179,8 +8509,12 @@ the stream. To prevent data loss, always call <see
 
               
 
+              
+
                method to obtain the existing ACL, modify it, and then use <see
                cref="M:System.IO.FileStream.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+
+              
 
               
 
@@ -7199,12 +8533,16 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="53758b39-bd9b-4640-bb04-cad5ed8d0abf"
                 >How to: Add or Remove an Access Control List Entry</a
               >
             </format>
+
+            
 
             
 
@@ -7223,8 +8561,12 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              object to the file described by the current <see
              cref="T:System.IO.FileStream" />
+
+            
 
             
 
@@ -7235,6 +8577,8 @@ the stream. To prevent data loss, always call <see
         </summary>
         <param name="fileSecurity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7278,6 +8622,8 @@ the stream. To prevent data loss, always call <see
 
           
 
+          
+
            is less than zero.</exception
         >
         <remarks>
@@ -7285,6 +8631,8 @@ the stream. To prevent data loss, always call <see
           <para
             >This method overrides <see
              cref="M:System.IO.Stream.SetLength(System.Int64)" />
+
+            
 
             
 
@@ -7303,8 +8651,12 @@ the stream. To prevent data loss, always call <see
 
               
 
+              
+
                property to determine whether the current instance supports writing, and the <see
                cref="P:System.IO.FileStream.CanSeek" />
+
+              
 
               
 
@@ -7317,8 +8669,12 @@ the stream. To prevent data loss, always call <see
 
               
 
+              
+
                and <see
                cref="P:System.IO.Stream.CanSeek" />
+
+              
 
               
 
@@ -7337,6 +8693,8 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -7346,6 +8704,8 @@ the stream. To prevent data loss, always call <see
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7391,6 +8751,8 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -7405,10 +8767,14 @@ the stream. To prevent data loss, always call <see
 
           
 
+          
+
           The beginning of the range to unlock. </param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7453,8 +8819,12 @@ the stream. To prevent data loss, always call <see
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -7469,6 +8839,8 @@ the stream. To prevent data loss, always call <see
 
           
 
+          
+
           + <paramref
            name="count" />
 
@@ -7476,8 +8848,12 @@ the stream. To prevent data loss, always call <see
 
           
 
+          
+
            is greater than the length of <paramref
            name="array" />
+
+          
 
           
 
@@ -7492,8 +8868,12 @@ the stream. To prevent data loss, always call <see
 
           
 
+          
+
            or <paramref
            name="count" />
+
+          
 
           
 
@@ -7516,11 +8896,15 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
             .</para
           >
           <para
             >The <paramref
              name="offset" />
+
+            
 
             
 
@@ -7533,8 +8917,12 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              (the buffer index) at which to begin copying, and the <paramref
              name="count" />
+
+            
 
             
 
@@ -7551,8 +8939,12 @@ the stream. To prevent data loss, always call <see
 
               
 
+              
+
                property to determine whether the current instance supports writing. For additional information, see <see
                cref="P:System.IO.Stream.CanWrite" />
+
+              
 
               
 
@@ -7572,6 +8964,8 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -7586,10 +8980,14 @@ the stream. To prevent data loss, always call <see
 
           
 
+          
+
           The buffer containing data to write to the stream.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7602,10 +9000,14 @@ the stream. To prevent data loss, always call <see
 
           
 
+          
+
            from which to begin copying bytes to the stream. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7649,11 +9051,15 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              method enables you to perform resource-intensive file operations without blocking the main thread. This performance consideration is particularly important in a win8_appname_long app or desktop_appname app where a time-consuming stream operation can block the UI thread and make your app appear as if it is not working. The async methods are used in conjunction with the async and await keywords in Visual Basic and C#.</para
           >
           <para
             >Use the <see
              cref="P:System.IO.FileStream.CanWrite" />
+
+            
 
             
 
@@ -7669,8 +9075,12 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              value for the <see
              cref="P:System.Threading.Tasks.Task.Status" />
+
+            
 
             
 
@@ -7683,8 +9093,12 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
              exception in the <see
              cref="P:System.Threading.Tasks.Task.Exception" />
+
+            
 
             
 
@@ -7708,6 +9122,8 @@ the stream. To prevent data loss, always call <see
 
           
 
+          
+
           The buffer to write data from. </param
         >
         <param name="offset">
@@ -7717,8 +9133,12 @@ the stream. To prevent data loss, always call <see
 
           
 
+          
+
           The zero-based byte offset in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -7733,10 +9153,14 @@ the stream. To prevent data loss, always call <see
 
           
 
+          
+
           The maximum number of bytes to write.</param
         >
         <param name="cancellationToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7784,6 +9208,8 @@ the stream. To prevent data loss, always call <see
 
             
 
+            
+
             .</para
           >
           <para>Use WriteByte to write a byte to a FileStream efficiently. If the stream is closed or not writable, an exception will be thrown.</para>
@@ -7796,8 +9222,12 @@ the stream. To prevent data loss, always call <see
 
               
 
+              
+
                property to determine whether the current instance supports writing. For additional information, see <see
                cref="P:System.IO.Stream.CanWrite" />
+
+              
 
               
 
@@ -7813,6 +9243,8 @@ the stream. To prevent data loss, always call <see
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

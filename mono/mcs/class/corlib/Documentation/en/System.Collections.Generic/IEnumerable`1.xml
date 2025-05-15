@@ -38,6 +38,8 @@
 
         
 
+        
+
          namespace inherit the <see
          cref="T:System.Collections.Generic.IEnumerable`1" />
 
@@ -45,8 +47,12 @@
 
         
 
+        
+
          interface to implement enumerators. For an example, see the <see
          cref="T:System.Collections.Generic.ICollection`1" />
+
+        
 
         
 
@@ -62,11 +68,15 @@
 
         
 
+        
+
          interface, see <see
 
           cref="http://code.msdn.microsoft.com/Generics-Sample-C-9b41a192/sourcecode?fileId=46476&amp;pathId=1364935593"
           >Generics Sample</see
         >
+
+        
 
         
 
@@ -113,6 +123,8 @@
 
             
 
+            
+
              is undefined. Therefore, you must call <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
 
@@ -120,8 +132,12 @@
 
             
 
+            
+
              to advance the enumerator to the first element of the collection before reading the value of <see
              cref="P:System.Collections.Generic.IEnumerator`1.Current" />
+
+            
 
             
 
@@ -136,8 +152,12 @@
 
             
 
+            
+
              returns the same object until <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -150,8 +170,12 @@
 
             
 
+            
+
              sets <see
              cref="P:System.Collections.Generic.IEnumerator`1.Current" />
+
+            
 
             
 
@@ -167,8 +191,12 @@
 
             
 
+            
+
              passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -181,8 +209,12 @@
 
             
 
+            
+
              also return false. If the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -195,8 +227,12 @@
 
             
 
+            
+
              is undefined. You cannot set <see
              cref="P:System.Collections.Generic.IEnumerator`1.Current" />
+
+            
 
             
 
@@ -214,6 +250,8 @@
 
             
 
+            
+
              namespace are not synchronized.</para
           >
         </remarks>
@@ -226,6 +264,8 @@
           <para
             >A <see
              cref="T:System.Collections.Generic.IEnumerator`1" />
+
+            
 
             
 

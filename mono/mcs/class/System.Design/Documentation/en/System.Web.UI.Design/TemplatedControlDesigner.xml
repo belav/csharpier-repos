@@ -37,6 +37,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -68,8 +70,12 @@
 
               
 
+              
+
                property is obsolete. Use the <see
                cref="P:System.Web.UI.Design.TemplatedControlDesigner.TemplateGroups" />
+
+              
 
               
 
@@ -142,6 +148,8 @@
 
           
 
+          
+
           The template editing verb to create a template editing frame for. </param
         >
       </Docs>
@@ -200,8 +208,12 @@
 
               
 
+              
+
                method is obsolete. Use the <see
                cref="P:System.Web.UI.Design.TemplatedControlDesigner.TemplateGroups" />
+
+              
 
               
 
@@ -218,6 +230,8 @@
 
             
 
+            
+
              to save all its templates and close that frame.</para
           >
         </remarks>
@@ -227,6 +241,8 @@
         </summary>
         <param name="newTemplateEditingFrame">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -271,8 +287,12 @@
 
               
 
+              
+
                method is obsolete. Use the <see
                cref="P:System.Web.UI.Design.TemplatedControlDesigner.TemplateGroups" />
+
+              
 
               
 
@@ -293,6 +313,8 @@
 
           
 
+          
+
           true when switching from one template editing frame to another; otherwise false. </param
         >
         <param name="fNested">
@@ -302,10 +324,14 @@
 
           
 
+          
+
           true if this designer is nested (one or more levels) within another control whose designer is also in template editing mode; otherwise false. </param
         >
         <param name="fSave">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -346,8 +372,12 @@
 
               
 
+              
+
                method is obsolete. Use the <see
                cref="P:System.Web.UI.Design.TemplatedControlDesigner.TemplateGroups" />
+
+              
 
               
 
@@ -366,6 +396,8 @@
           <para
             >An array of <see
              cref="T:System.Web.UI.Design.TemplateEditingVerb" />
+
+            
 
             
 
@@ -431,6 +463,8 @@
 
               
 
+              
+
                method is obsolete. Use the <see
                cref="P:System.Web.UI.Design.TemplateGroup.Templates" />
 
@@ -438,8 +472,12 @@
 
               
 
+              
+
                property of the <see
                cref="P:System.Web.UI.Design.TemplatedControlDesigner.TemplateGroups" />
+
+              
 
               
 
@@ -459,6 +497,8 @@
         </returns>
         <param name="templateName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -501,6 +541,8 @@
         </returns>
         <param name="templateName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -610,11 +652,15 @@
 
             
 
+            
+
              from the specified text.</para
           >
         </returns>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -652,6 +698,8 @@
 
               
 
+              
+
                method is obsolete. Use the <see
                cref="P:System.Web.UI.Design.TemplateGroup.Templates" />
 
@@ -659,8 +707,12 @@
 
               
 
+              
+
                property of the <see
                cref="P:System.Web.UI.Design.TemplatedControlDesigner.TemplateGroups" />
+
+              
 
               
 
@@ -680,6 +732,8 @@
         </returns>
         <param name="templateName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -727,8 +781,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.ITemplate" />
+
+          
 
           
 
@@ -758,6 +816,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.Design.ControlDesigner.ID" />
+
+            
 
             
 
@@ -804,6 +864,8 @@
 
           
 
+          
+
           The control element being designed.</param
         >
       </Docs>
@@ -827,8 +889,12 @@
 
               
 
+              
+
                property is obsolete. Use the <see
                cref="P:System.Web.UI.Design.ControlDesigner.InTemplateMode" />
+
+              
 
               
 
@@ -873,8 +939,12 @@
 
               
 
+              
+
                method is obsolete. Use the <see
                cref="M:System.Web.UI.Design.IControlDesignerTag.SetAttribute(System.String,System.String)" />
+
+              
 
               
 
@@ -887,8 +957,12 @@
 
               
 
+              
+
                methods on the <see
                cref="P:System.Web.UI.Design.ControlDesigner.Tag" />
+
+              
 
               
 
@@ -942,6 +1016,8 @@
 
           
 
+          
+
           The object sending the event. </param
         >
         <param name="ce">
@@ -951,8 +1027,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.Design.ComponentChangedEventArgs" />
+
+          
 
           
 
@@ -1003,11 +1083,15 @@
 
             
 
+            
+
              event is raised by the designer host for certain actions on a control in the design surface. For example, an event is raised when the user enters or exits template editing mode for a control.</para
           >
           <para
             >The <see
              cref="T:System.Web.UI.Design.TemplatedControlDesigner" />
+
+            
 
             
 
@@ -1020,6 +1104,8 @@
 
             
 
+            
+
              event. Classes deriving from the <see
              cref="T:System.Web.UI.Design.TemplatedControlDesigner" />
 
@@ -1027,8 +1113,12 @@
 
             
 
+            
+
              override the <see
              cref="M:System.Web.UI.Design.TemplatedControlDesigner.OnTemplateModeChanged" />
+
+            
 
             
 
@@ -1044,11 +1134,15 @@
 
             
 
+            
+
              method allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
           >
           <para
             >The default delegate performs the updates that are required for a template mode change event in the base <see
              cref="T:System.Web.UI.Design.TemplatedControlDesigner" />
+
+            
 
             
 
@@ -1061,8 +1155,12 @@
 
             
 
+            
+
              method. The base <see
              cref="M:System.Web.UI.Design.TemplatedControlDesigner.OnTemplateModeChanged" />
+
+            
 
             
 
@@ -1075,8 +1173,12 @@
 
             
 
+            
+
              class returns without performing any additional processing for the event. If a class derives from the <see
              cref="T:System.Web.UI.Design.TemplatedControlDesigner" />
+
+            
 
             
 
@@ -1089,11 +1191,15 @@
 
             
 
+            
+
              method, the default delegate calls the override method in the derived class.</para
           >
           <para
             >Use the <see
              cref="P:System.Web.UI.Design.ControlDesigner.InTemplateMode" />
+
+            
 
             
 
@@ -1139,6 +1245,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1148,6 +1256,8 @@
         </returns>
         <param name="properties">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1206,6 +1316,8 @@
 
           
 
+          
+
           The template editing frame to provide content for. </param
         >
         <param name="templateName">
@@ -1215,10 +1327,14 @@
 
           
 
+          
+
           The name of the template. </param
         >
         <param name="templateContent">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

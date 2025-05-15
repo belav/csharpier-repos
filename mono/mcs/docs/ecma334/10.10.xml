@@ -8,8 +8,12 @@
 
     
 
+    
+
     ), lock statements (<hyperlink
     >15.12</hyperlink>
+
+    
 
     
 
@@ -26,8 +30,12 @@
 
         
 
+        
+
          and <hyperlink
         >17.4.5</hyperlink>
+
+        
 
         
 
@@ -38,6 +46,8 @@
       <list_item
         > The ordering of side effects is preserved with respect to volatile reads and writes (<hyperlink
         >17.4.3</hyperlink>
+
+        
 
         
 

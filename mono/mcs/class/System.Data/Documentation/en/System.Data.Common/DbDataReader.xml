@@ -45,6 +45,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -68,6 +70,8 @@
           <para
             >Closes the <see
              cref="T:System.Data.Common.DbDataReader" />
+
+            
 
             
 
@@ -122,8 +126,12 @@
 
             
 
+            
+
             . The Dispose method leaves the <see
              cref="T:System.Data.Common.DbDataReader" />
+
+            
 
             
 
@@ -136,8 +144,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Data.Common.DbDataReader" />
+
+            
 
             
 
@@ -155,10 +167,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -175,8 +191,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Data.Common.DbDataReader" />
+
+              
 
               
 
@@ -191,6 +211,8 @@
           <para
             >Releases all resources used by the current instance of the <see
              cref="T:System.Data.Common.DbDataReader" />
+
+            
 
             
 
@@ -230,6 +252,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -243,11 +267,15 @@
 
             
 
+            
+
              and optionally releases the unmanaged resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -274,6 +302,8 @@
           <para
             >Includes hidden fields. Use <see
              cref="P:System.Data.Common.DbDataReader.VisibleFieldCount" />
+
+            
 
             
 
@@ -374,8 +404,12 @@
 
             
 
+            
+
             , into the buffer, starting at the location indicated by <paramref
              name="bufferOffset" />
+
+            
 
             
 
@@ -395,6 +429,8 @@
 
           
 
+          
+
           The buffer into which to copy the data.</param
         >
         <param name="bufferOffset">
@@ -404,10 +440,14 @@
 
           
 
+          
+
           The index with the buffer to which the data will be copied.</param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -478,8 +518,12 @@
 
             
 
+            
+
             , into the buffer, starting at the location indicated by <paramref
              name="bufferOffset" />
+
+            
 
             
 
@@ -499,10 +543,14 @@
 
           
 
+          
+
           The buffer into which to copy the data.</param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -541,6 +589,8 @@
 
             
 
+            
+
              object for the requested column ordinal.</para
           >
         </summary>
@@ -549,6 +599,8 @@
           <para
             >A <see
              cref="T:System.Data.Common.DbDataReader" />
+
+            
 
             
 
@@ -631,6 +683,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -668,6 +722,8 @@
 
             
 
+            
+
              object for the requested column ordinal that can be overridden with a provider-specific implementation.</para
           >
         </summary>
@@ -681,11 +737,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="ordinal">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -716,6 +776,8 @@
           <para
             >Gets the value of the specified column as a <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -782,8 +844,12 @@
 
             
 
+            
+
              or ensure that your enumerator returns <see
              cref="T:System.Data.IDataRecord" />
+
+            
 
             
 
@@ -802,6 +868,8 @@
 
             
 
+            
+
              that can be used to iterate through the rows in the data reader.</para
           >
         </summary>
@@ -810,6 +878,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -1055,6 +1125,8 @@
 
           
 
+          
+
           The name of the column.</param
         >
       </Docs>
@@ -1087,6 +1159,8 @@
           <para
             >The <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -1130,6 +1204,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1138,6 +1214,8 @@
           <para
             >Gets the value of the specified column as an instance of <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -1189,6 +1267,8 @@
 
             
 
+            
+
              in the array.</para
           >
         </returns>
@@ -1199,8 +1279,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1241,8 +1325,12 @@
 
             
 
+            
+
              that describes the column metadata of the <see
              cref="T:System.Data.Common.DbDataReader" />
+
+            
 
             
 
@@ -1256,6 +1344,8 @@
           <para
             >A <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1292,6 +1382,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1322,6 +1414,8 @@
           <para
             >Gets the value of the specified column as an instance of <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -1365,6 +1459,8 @@
 
             
 
+            
+
              in the array.</para
           >
         </returns>
@@ -1375,8 +1471,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1409,6 +1509,8 @@
 
             
 
+            
+
              contains one or more rows.</para
           >
         </summary>
@@ -1432,6 +1534,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Data.Common.DbDataReader" />
+
+            
 
             
 
@@ -1467,8 +1571,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Data.Common.DbDataReader.GetChar(System.Int32)" />
+
+            
 
             
 
@@ -1486,6 +1594,8 @@
           <para
             >true if the specified column is equivalent to <see
              cref="T:System.DBNull" />
+
+            
 
             
 
@@ -1584,6 +1694,8 @@
 
             
 
+            
+
              to begin accessing data.</para
           >
         </remarks>
@@ -1646,8 +1758,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Data.IDataRecord" />
+
+            
 
             
 
@@ -1666,6 +1782,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1674,6 +1792,8 @@
           <para
             >An instance of <see
              cref="T:System.Data.IDataReader" />
+
+            
 
             
 
@@ -1703,6 +1823,8 @@
 
             
 
+            
+
              are visible. For example, a SELECT on a partial primary key returns the remaining parts of the key as hidden fields. The hidden fields are always appended behind the visible fields.</para
           >
         </remarks>
@@ -1711,6 +1833,8 @@
           <para
             >Gets the number of fields in the <see
              cref="T:System.Data.Common.DbDataReader" />
+
+            
 
             
 

@@ -12,14 +12,14 @@
   </PropertyGroup>
   <PropertyGroup>
     <CLRTestBatchPreCommands>
-<![CDATA[
+      <![CDATA[
       $(CLRTestBatchPreCommands)
       set DOTNET_gcServer=1
       set DOTNET_GCHeapCount=2
       ]]>
     </CLRTestBatchPreCommands>
     <CLRTestBashPreCommands>
-<![CDATA[
+      <![CDATA[
       $(CLRTestBashPreCommands)
       export DOTNET_gcServer=1
       export DOTNET_GCHeapCount=2

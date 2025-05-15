@@ -27,10 +27,14 @@
 
         
 
+        
+
          class is an HTTP-specific exception class that enables ASP.NET to generate exception information. For more information about throwing and handling exceptions, see <format
          type="text/html">
           <a href="f99a1d29-a2a8-47af-9707-9909f9010735">Handling and Throwing Exceptions</a>
         </format>
+
+        
 
         
 
@@ -62,8 +66,12 @@
 
             
 
+            
+
              property of the outer exception. This mechanism preserves the error information that is carried by earlier exceptions, including the original exceptions, while allowing you to create more meaningful outer exceptions. For more information, see <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -82,8 +90,12 @@
 
             
 
+            
+
              class and creates an empty <see
              cref="T:System.Web.HttpException" />
+
+            
 
             
 
@@ -117,11 +129,15 @@
 
             
 
+            
+
              class using a supplied error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -155,6 +171,8 @@
 
             
 
+            
+
              class using an HTTP response status code and an error message.</para
           >
         </summary>
@@ -165,10 +183,14 @@
 
           
 
+          
+
           The HTTP response status code sent to the client corresponding to this error. </param
         >
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -206,10 +228,14 @@
 
             
 
+            
+
              constructor is called during deserialization to reconstitute the exception object that is transmitted over a stream. For more information, see <format
              type="text/html">
               <a href="832ac524-21bc-419a-a27b-ca8bfc45840f">XML and SOAP Serialization</a>
             </format>
+
+            
 
             
 
@@ -228,6 +254,8 @@
 
             
 
+            
+
              class with serialized data.</para
           >
         </summary>
@@ -238,8 +266,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -254,8 +286,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -288,8 +324,12 @@
 
             
 
+            
+
              property of the outer exception. This mechanism preserves the error information that is carried by earlier exceptions, including the original exceptions, while allowing you to create more meaningful outer exceptions. For more information, see <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -308,8 +348,12 @@
 
             
 
+            
+
              class using an error message and the <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -325,6 +369,8 @@
 
           
 
+          
+
           The error message displayed to the client when the exception is thrown. </param
         >
         <param name="innerException">
@@ -334,8 +380,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Exception.InnerException" />
+
+          
 
           
 
@@ -369,6 +419,8 @@
 
             
 
+            
+
              class using an error message and an exception code.</para
           >
         </summary>
@@ -379,10 +431,14 @@
 
           
 
+          
+
           The error message displayed to the client when the exception is thrown. </param
         >
         <param name="hr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -420,8 +476,12 @@
 
             
 
+            
+
              property of the outer exception. This mechanism preserves the error information that is carried by earlier exceptions, including the original exceptions, while allowing you to create more meaningful outer exceptions. For more information, see <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -440,8 +500,12 @@
 
             
 
+            
+
              class using an HTTP response status code, an error message, and the <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -457,10 +521,14 @@
 
           
 
+          
+
           The HTTP response status code displayed on the client. </param
         >
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -475,8 +543,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Exception.InnerException" />
+
+          
 
           
 
@@ -514,11 +586,15 @@
 
             
 
+            
+
              class using an HTTP response status code, an error message, and an exception code.</para
           >
         </summary>
         <param name="httpCode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -533,10 +609,14 @@
 
           
 
+          
+
           The error message displayed to the client when the exception is thrown. </param
         >
         <param name="hr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -599,6 +679,8 @@
 
             
 
+            
+
              exception based on the error code that is returned from the Win32 API GetLastError() method.</para
           >
         </summary>
@@ -612,11 +694,15 @@
 
             
 
+            
+
              based on the error code that is returned from a call to the Win32 API GetLastError() method.</para
           >
         </returns>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -671,8 +757,12 @@
 
             
 
+            
+
              code is returned. If neither an <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -682,6 +772,8 @@
              cref="http://go.microsoft.com/fwlink/?linkid=37125"
               >Wide Web Consortium (W3C) Web site</see
             >
+
+            
 
             
 
@@ -699,6 +791,8 @@
           <para
             >A non-zero HTTP code representing the exception or the <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -740,6 +834,8 @@
 
             
 
+            
+
              method adds information about the exception to the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
@@ -747,8 +843,12 @@
 
             
 
+            
+
              object that is targeted for serialization. During deserialization, the exception is reconstituted from the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -767,6 +867,8 @@
 
             
 
+            
+
              object. </para
           >
         </summary>
@@ -777,8 +879,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -793,8 +899,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 

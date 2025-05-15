@@ -50,6 +50,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -76,6 +78,8 @@
           <para
             >Gets the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -114,6 +118,8 @@
           <para
             >A custom <see
              cref="T:System.ServiceModel.Channels.BindingElement" />
+
+            
 
             
 

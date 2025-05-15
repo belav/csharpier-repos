@@ -38,6 +38,8 @@
 
           
 
+          
+
            for more information.</para
         >
       </block>
@@ -79,6 +81,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -114,11 +118,15 @@
 
             
 
+            
+
              is set to 100 seconds, the lease list is inspected for cleanups and renewals every 100 seconds.</para
           >
           <para
             >The default value of the <see
              cref="P:System.Runtime.Remoting.Lifetime.LifetimeServices.LeaseManagerPollTime" />
+
+            
 
             
 
@@ -156,6 +164,8 @@
           <para
             >Gets or sets the initial lease time span for an <see
              cref="T:System.AppDomain" />
+
+            
 
             
 

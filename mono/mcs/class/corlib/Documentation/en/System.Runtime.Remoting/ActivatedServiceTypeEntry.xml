@@ -37,6 +37,8 @@
 
         
 
+        
+
          method, which is the server-side counterpart of the <see
          cref="M:System.Runtime.Remoting.RemotingConfiguration.RegisterActivatedClientType(System.Type,System.String)" />
 
@@ -44,8 +46,12 @@
 
         
 
+        
+
          method. The <see
          cref="M:System.Runtime.Remoting.RemotingConfiguration.RegisterActivatedServiceType(System.Type)" />
+
+        
 
         
 
@@ -61,8 +67,12 @@
 
         
 
+        
+
         , and it must be registered on the server end by using the <see
          cref="M:System.Runtime.Remoting.RemotingConfiguration.RegisterActivatedServiceType(System.Type)" />
+
+        
 
         
 
@@ -75,8 +85,12 @@
 
         
 
+        
+
          and then activate the object by calling new or <see
          cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
+
+        
 
         
 
@@ -92,8 +106,12 @@
 
         
 
+        
+
          method. By calling <see
          cref="M:System.Runtime.Remoting.RemotingConfiguration.RegisterActivatedClientType(System.Type,System.String)" />
+
+        
 
         
 
@@ -106,8 +124,12 @@
 
         
 
+        
+
          method to create a new instance of the client-activated object, you must supply the remote application's URL as a parameter, so no prior registration on the client is necessary. To supply the <see
          cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
+
+        
 
         
 
@@ -120,6 +142,8 @@
 
         
 
+        
+
          class.</para
       >
       <para
@@ -127,6 +151,8 @@
          type="text/html">
           <a href="E90D0C64-00DA-4080-AE78-A6C558825C25">[&lt;topic://cpconActivation&gt;]</a>
         </format>
+
+        
 
         
 
@@ -169,8 +195,12 @@
 
             
 
+            
+
              class with the given <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -186,8 +216,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -229,6 +263,8 @@
 
             
 
+            
+
              class with the given type name and assembly name.</para
           >
         </summary>
@@ -239,10 +275,14 @@
 
           
 
+          
+
           The type name of the client-activated service type. </param
         >
         <param name="assemblyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -309,6 +349,8 @@
 
             
 
+            
+
              of the client-activated service type.</para
           >
         </summary>
@@ -342,6 +384,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -350,6 +394,8 @@
           <para
             >The type and assembly name of the client-activated service type as a <see
              cref="T:System.String" />
+
+            
 
             
 

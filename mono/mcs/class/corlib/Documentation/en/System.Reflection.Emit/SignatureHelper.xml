@@ -47,8 +47,12 @@
 
         
 
+        
+
          class to create a signature blob that can be passed to the <see
          cref="M:System.Reflection.Emit.DynamicILInfo.SetLocalSignature(System.Byte[])" />
+
+        
 
         
 
@@ -61,6 +65,8 @@
 
         
 
+        
+
          class. A <see
          cref="T:System.Reflection.Emit.SignatureHelper" />
 
@@ -68,8 +74,12 @@
 
         
 
+        
+
          object can also be passed to the <see
          cref="M:System.Reflection.Emit.ILGenerator.Emit(System.Reflection.Emit.OpCode,System.Reflection.Emit.SignatureHelper)" />
+
+        
 
         
 
@@ -88,10 +98,14 @@
 
           
 
+          
+
            on MSDN and <see
            cref="http://go.microsoft.com/fwlink/?LinkID=65552"
             >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
           >
+
+          
 
           
 
@@ -136,6 +150,8 @@
 
             
 
+            
+
              method overload.</para
           >
         </remarks>
@@ -145,6 +161,8 @@
         </summary>
         <param name="clsArgument">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -186,6 +204,8 @@
 
             
 
+            
+
              method overload.</para
           >
         </remarks>
@@ -200,10 +220,14 @@
 
           
 
+          
+
           The argument type.</param
         >
         <param name="pinned">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -246,6 +270,8 @@
 
             
 
+            
+
              namespace for classes that represent custom modifiers.</para
           >
         </remarks>
@@ -260,10 +286,14 @@
 
           
 
+          
+
           The argument type.</param
         >
         <param name="requiredCustomModifiers">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -276,8 +306,12 @@
 
           
 
+          
+
            or <see
            cref="T:System.Runtime.CompilerServices.IsBoxed" />
+
+          
 
           
 
@@ -292,6 +326,8 @@
 
           
 
+          
+
           An array of types representing the optional custom modifiers for the argument, such as <see
            cref="T:System.Runtime.CompilerServices.IsConst" />
 
@@ -299,8 +335,12 @@
 
           
 
+          
+
            or <see
            cref="T:System.Runtime.CompilerServices.IsBoxed" />
+
+          
 
           
 
@@ -343,11 +383,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >See the <see
              cref="N:System.Runtime.CompilerServices" />
+
+            
 
             
 
@@ -367,10 +411,14 @@
 
           
 
+          
+
           The types of the arguments to be added.</param
         >
         <param name="requiredCustomModifiers">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -383,8 +431,12 @@
 
           
 
+          
+
            or <see
            cref="T:System.Runtime.CompilerServices.IsBoxed" />
+
+          
 
           
 
@@ -399,6 +451,8 @@
 
           
 
+          
+
           An array of arrays of types. Each array of types represents the optional custom modifiers for the corresponding argument, such as <see
            cref="T:System.Runtime.CompilerServices.IsConst" />
 
@@ -406,8 +460,12 @@
 
           
 
+          
+
            or <see
            cref="T:System.Runtime.CompilerServices.IsBoxed" />
+
+          
 
           
 
@@ -476,6 +534,8 @@
 
           
 
+          
+
           The object with which this instance should be compared. </param
         >
       </Docs>
@@ -513,6 +573,8 @@
         </returns>
         <param name="mod">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -587,6 +649,8 @@
 
             
 
+            
+
              for a local variable.</para
           >
         </returns>
@@ -625,6 +689,8 @@
         </returns>
         <param name="mod">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -672,10 +738,14 @@
 
           
 
+          
+
           The calling convention of the method. </param
         >
         <param name="returnType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -726,10 +796,14 @@
 
           
 
+          
+
           The unmanaged calling convention of the method. </param
         >
         <param name="returnType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -779,8 +853,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.Emit.ModuleBuilder" />
+
+          
 
           
 
@@ -795,10 +873,14 @@
 
           
 
+          
+
           The calling convention of the method. </param
         >
         <param name="returnType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -851,8 +933,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.Emit.ModuleBuilder" />
+
+          
 
           
 
@@ -867,10 +953,14 @@
 
           
 
+          
+
           The unmanaged calling convention of the method. </param
         >
         <param name="returnType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -915,6 +1005,8 @@
 
             
 
+            
+
              method overload and then use the <see
              cref="M:System.Reflection.Emit.SignatureHelper.AddArgument(System.Type,System.Type[],System.Type[])" />
 
@@ -922,8 +1014,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Emit.SignatureHelper.AddArguments(System.Type[],System.Type[][],System.Type[][])" />
+
+            
 
             
 
@@ -947,8 +1043,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.Emit.ModuleBuilder" />
+
+          
 
           
 
@@ -963,10 +1063,14 @@
 
           
 
+          
+
           The return type of the method, or null for a void return type (Sub procedure in Visual Basic). </param
         >
         <param name="parameterTypes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1010,6 +1114,8 @@
 
             
 
+            
+
              method overload.</para
           >
         </remarks>
@@ -1027,11 +1133,15 @@
 
             
 
+            
+
              object for a property.</para
           >
         </returns>
         <param name="mod">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1044,8 +1154,12 @@
 
           
 
+          
+
            that contains the property for which the <see
            cref="T:System.Reflection.Emit.SignatureHelper" />
+
+          
 
           
 
@@ -1060,10 +1174,14 @@
 
           
 
+          
+
           The property type.</param
         >
         <param name="parameterTypes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1110,11 +1228,15 @@
 
             
 
+            
+
              namespace for classes that represent custom modifiers.</para
           >
           <para
             >If a property has no custom modifiers, use the <see
              cref="M:System.Reflection.Emit.SignatureHelper.GetPropertySigHelper(System.Reflection.Module,System.Type,System.Type[])" />
+
+            
 
             
 
@@ -1137,11 +1259,15 @@
 
             
 
+            
+
              object for a property.</para
           >
         </returns>
         <param name="mod">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1154,8 +1280,12 @@
 
           
 
+          
+
            that contains the property for which the <see
            cref="T:System.Reflection.Emit.SignatureHelper" />
+
+          
 
           
 
@@ -1170,10 +1300,14 @@
 
           
 
+          
+
           The property type.</param
         >
         <param name="requiredReturnTypeCustomModifiers">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1186,8 +1320,12 @@
 
           
 
+          
+
            or <see
            cref="T:System.Runtime.CompilerServices.IsBoxed" />
+
+          
 
           
 
@@ -1202,6 +1340,8 @@
 
           
 
+          
+
           An array of types representing the optional custom modifiers for the return type, such as <see
            cref="T:System.Runtime.CompilerServices.IsConst" />
 
@@ -1209,8 +1349,12 @@
 
           
 
+          
+
            or <see
            cref="T:System.Runtime.CompilerServices.IsBoxed" />
+
+          
 
           
 
@@ -1225,6 +1369,8 @@
 
           
 
+          
+
           The types of the property's arguments, or null if the property has no arguments.</param
         >
         <param name="requiredParameterTypeCustomModifiers">
@@ -1234,10 +1380,14 @@
 
           
 
+          
+
           An array of arrays of types. Each array of types represents the required custom modifiers for the corresponding argument of the property. If a particular argument has no required custom modifiers, specify null instead of an array of types. If the property has no arguments, or if none of the arguments have required custom modifiers, specify null instead of an array of arrays.</param
         >
         <param name="optionalParameterTypeCustomModifiers">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1284,11 +1434,15 @@
 
             
 
+            
+
              namespace for classes that represent custom modifiers.</para
           >
           <para
             >If a property has no custom modifiers, use the <see
              cref="M:System.Reflection.Emit.SignatureHelper.GetPropertySigHelper(System.Reflection.Module,System.Type,System.Type[])" />
+
+            
 
             
 
@@ -1314,11 +1468,15 @@
 
             
 
+            
+
              object for a property.</para
           >
         </returns>
         <param name="mod">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1331,8 +1489,12 @@
 
           
 
+          
+
            that contains the property for which the <see
            cref="T:System.Reflection.Emit.SignatureHelper" />
+
+          
 
           
 
@@ -1347,10 +1509,14 @@
 
           
 
+          
+
           The calling convention of the property accessors.</param
         >
         <param name="returnType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1365,6 +1531,8 @@
 
           
 
+          
+
           An array of types representing the required custom modifiers for the return type, such as <see
            cref="T:System.Runtime.CompilerServices.IsConst" />
 
@@ -1372,8 +1540,12 @@
 
           
 
+          
+
            or <see
            cref="T:System.Runtime.CompilerServices.IsBoxed" />
+
+          
 
           
 
@@ -1388,6 +1560,8 @@
 
           
 
+          
+
           An array of types representing the optional custom modifiers for the return type, such as <see
            cref="T:System.Runtime.CompilerServices.IsConst" />
 
@@ -1395,8 +1569,12 @@
 
           
 
+          
+
            or <see
            cref="T:System.Runtime.CompilerServices.IsBoxed" />
+
+          
 
           
 
@@ -1411,6 +1589,8 @@
 
           
 
+          
+
           The types of the property's arguments, or null if the property has no arguments.</param
         >
         <param name="requiredParameterTypeCustomModifiers">
@@ -1420,10 +1600,14 @@
 
           
 
+          
+
           An array of arrays of types. Each array of types represents the required custom modifiers for the corresponding argument of the property. If a particular argument has no required custom modifiers, specify null instead of an array of types. If the property has no arguments, or if none of the arguments have required custom modifiers, specify null instead of an array of arrays.</param
         >
         <param name="optionalParameterTypeCustomModifiers">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1530,6 +1714,8 @@
 
             
 
+            
+
             , see the MSDN Library.</para
           >
         </remarks>
@@ -1544,6 +1730,8 @@
 
           
 
+          
+
           The type information to return.</param
         >
         <param name="lcid">
@@ -1553,10 +1741,14 @@
 
           
 
+          
+
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

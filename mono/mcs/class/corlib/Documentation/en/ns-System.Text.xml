@@ -11,6 +11,8 @@
 
         
 
+        
+
          namespace contains classes that represent ASCII and Unicode character encodings; abstract base classes for converting blocks of characters to and from blocks of bytes; and a helper class that manipulates and formats <see
          cref="T:System.String" />
 
@@ -18,8 +20,12 @@
 
         
 
+        
+
          objects without creating intermediate instances of <see
          cref="T:System.String" />
+
+        
 
         
 
@@ -38,8 +44,12 @@
 
         
 
+        
+
          (UTF-16) encoding is used internally by the .NET Framework, and <see
          cref="P:System.Text.Encoding.UTF8" />
+
+        
 
         
 
@@ -50,6 +60,8 @@
       <para
         >The classes derived from <see
          cref="T:System.Text.Encoding" />
+
+        
 
         
 
@@ -67,6 +79,8 @@
 
             
 
+            
+
              flag that is available in some class constructors or by using the <see
              cref="T:System.Text.EncoderExceptionFallback" />
 
@@ -74,8 +88,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Text.DecoderExceptionFallback" />
+
+            
 
             
 
@@ -93,8 +111,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Text.DecoderFallback" />
+
+            
 
             
 
@@ -115,8 +137,12 @@
 
         
 
+        
+
          class is designed for operations that perform extensive manipulations on a single string. Unlike the <see
          cref="T:System.String" />
+
+        
 
         
 
@@ -129,11 +155,15 @@
 
         
 
+        
+
          class is mutable and provides better performance when concatenating or deleting strings.</para
       >
       <para
         >For more information about <see
          cref="N:System.Text" />
+
+        
 
         
 
@@ -150,10 +180,14 @@
 
         
 
+        
+
          and the MSDN blog <see
          cref="http://go.microsoft.com/fwlink/?LinkId=161021"
           >Shawn Steele's Thoughts about Windows and .NET Framework Globalization APIs</see
         >
+
+        
 
         
 

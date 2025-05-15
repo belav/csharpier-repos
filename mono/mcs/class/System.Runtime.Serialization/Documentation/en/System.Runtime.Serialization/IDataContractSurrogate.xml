@@ -21,8 +21,12 @@
 
         
 
+        
+
          when using the <see
          cref="T:System.Runtime.Serialization.DataContractSerializer" />
+
+        
 
         
 
@@ -37,10 +41,14 @@
 
         
 
+        
+
         . For more information about data contracts, see <format
          type="text/html">
           <a href="a3ae7b21-c15c-4c05-abd8-f483bcbf31af">Using Data Contracts</a>
         </format>
+
+        
 
         
 
@@ -56,8 +64,12 @@
 
         
 
+        
+
          for any operation in a service by using the <see
          cref="T:System.ServiceModel.Description.OperationDescription" />
+
+        
 
         
 
@@ -70,10 +82,14 @@
 
         
 
+        
+
          instance. For more information about implementing the interface to create a surrogate, see <format
          type="text/html">
           <a href="8c31134c-46c5-4ed7-94af-bab0ac0dfce5">Data Contract Surrogates</a>
         </format>
+
+        
 
         
 
@@ -89,8 +105,12 @@
 
         
 
+        
+
          to affect the import and export of XML schemas when you are using the <see
          cref="T:System.Runtime.Serialization.XsdDataContractExporter" />
+
+        
 
         
 
@@ -103,8 +123,12 @@
 
         
 
+        
+
          classes. You can do so by assigning the <see
          cref="T:System.Runtime.Serialization.IDataContractSurrogate" />
+
+        
 
         
 
@@ -117,8 +141,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Runtime.Serialization.ExportOptions" />
+
+        
 
         
 
@@ -131,8 +159,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Runtime.Serialization.ImportOptions" />
+
+        
 
         
 
@@ -147,6 +179,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -155,6 +189,8 @@
       <para
         >Provides the methods needed to substitute one type for another by the <see
          cref="T:System.Runtime.Serialization.DataContractSerializer" />
+
+        
 
         
 
@@ -202,8 +238,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Reflection.MemberInfo" />
+
+          
 
           
 
@@ -218,8 +258,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -266,10 +310,14 @@
 
           
 
+          
+
           The CLR type to be replaced. </param
         >
         <param name="dataContractType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -311,8 +359,12 @@
 
             
 
+            
+
              to substitute for the <paramref
              name="type" />
+
+            
 
             
 
@@ -325,8 +377,12 @@
 
             
 
+            
+
             . For example, it must be marked with the <see
              cref="T:System.Runtime.Serialization.DataContractAttribute" />
+
+            
 
             
 
@@ -342,8 +398,12 @@
 
           
 
+          
+
           The CLR type <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -384,8 +444,12 @@
 
             
 
+            
+
              value is of the surrogated type. If so, transform it as necessary and return the substituted object. The substituted object can be a new instance or the same <paramref
              name="obj" />
+
+            
 
             
 
@@ -408,8 +472,12 @@
 
             
 
+            
+
             . For example, it must be marked with the <see
              cref="T:System.Runtime.Serialization.DataContractAttribute" />
+
+            
 
             
 
@@ -425,6 +493,8 @@
 
           
 
+          
+
           The deserialized object to be substituted.</param
         >
         <param name="targetType">
@@ -434,8 +504,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -478,6 +552,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -492,6 +568,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.ObjectModel.Collection`1" />
 
@@ -499,8 +577,12 @@
 
           
 
+          
+
             of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -541,8 +623,12 @@
 
             
 
+            
+
              and an <see
              cref="T:System.InvalidCastException" />
+
+            
 
             
 
@@ -565,8 +651,12 @@
 
             
 
+            
+
             . For example, it must be marked with the <see
              cref="T:System.Runtime.Serialization.DataContractAttribute" />
+
+            
 
             
 
@@ -582,6 +672,8 @@
 
           
 
+          
+
           The object to substitute. </param
         >
         <param name="targetType">
@@ -591,8 +683,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -642,11 +738,15 @@
 
             
 
+            
+
              to use for the referenced type.</para
           >
         </returns>
         <param name="typeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -661,10 +761,14 @@
 
           
 
+          
+
           The namespace of the type in schema.</param
         >
         <param name="customData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -705,6 +809,8 @@
 
             
 
+            
+
              or other information in the <see
              cref="T:System.CodeDom.CodeCompileUnit" />
 
@@ -712,8 +818,12 @@
 
             
 
+            
+
              can be modified by the user in this method. If null is returned, it will cause the type to not be generated. If a new <see
              cref="T:System.CodeDom.CodeTypeDeclaration" />
+
+            
 
             
 
@@ -736,6 +846,8 @@
 
             
 
+            
+
              that contains the processed type.</para
           >
         </returns>
@@ -746,8 +858,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeTypeDeclaration" />
+
+          
 
           
 
@@ -762,8 +878,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeCompileUnit" />
+
+          
 
           
 

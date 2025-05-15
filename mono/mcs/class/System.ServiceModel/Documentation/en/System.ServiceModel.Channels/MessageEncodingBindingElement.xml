@@ -49,6 +49,8 @@
 
         
 
+        
+
          to return an instance of your custom <see
          cref="T:System.ServiceModel.Channels.MessageEncoder" />
 
@@ -56,8 +58,12 @@
 
         
 
+        
+
         . Override the <see
          cref="M:System.ServiceModel.Channels.MessageEncodingBindingElement.CreateMessageEncoderFactory" />
+
+        
 
         
 
@@ -73,8 +79,12 @@
 
         
 
+        
+
          is responsible for updating the version of the SOAP binding in the WSDL document generated for the service. This is done by implementing the <see
          cref="M:System.ServiceModel.Description.IWsdlExportExtension.ExportEndpoint(System.ServiceModel.Description.WsdlExporter,System.ServiceModel.Description.WsdlEndpointConversionContext)" />
+
+        
 
         
 
@@ -85,6 +95,8 @@
       <para
         >indigo1 provides three types of binding elements derived from the <see
          cref="T:System.ServiceModel.Channels.MessageEncodingBindingElement" />
+
+        
 
         
 
@@ -101,6 +113,8 @@
 
             
 
+            
+
             : the most interoperable, but the least efficient encoder for XML messages. A Web service or Web service client can generally understand textual XML. However, transmitting large blocks of binary data as text is not efficient. </para
           >
         </item>
@@ -112,12 +126,16 @@
 
             
 
+            
+
             : represents the binding element that specifies the character encoding and message versioning used for binary-based XML messages. This is most efficient but least interoperable of the encoding options. </para
           >
         </item>
         <item>
           <para>
             <see cref="T:System.ServiceModel.Channels.MTOMMessageEncodingBindingElement" />
+
+            
 
             
 
@@ -152,6 +170,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.MessageEncodingBindingElement" />
+
+            
 
             
 
@@ -194,6 +214,8 @@
 
             
 
+            
+
              class initialized from an existing element.</para
           >
         </summary>
@@ -227,6 +249,8 @@
           <para
             >The <see
              cref="T:System.ServiceModel.Channels.MessageEncoderFactory" />
+
+            
 
             
 
@@ -283,11 +307,15 @@
 
             
 
+            
+
              requested if it is present or null if it is not.</para
           >
         </returns>
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -320,6 +348,8 @@
           <para
             >When binding elements are asked to process a message that has a <see
              cref="T:System.ServiceModel.Channels.MessageVersion" />
+
+            
 
             
 

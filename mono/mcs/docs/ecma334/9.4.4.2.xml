@@ -8,8 +8,12 @@
 
     
 
+    
+
     , <keyword
     >uint</keyword>
+
+    
 
     
 
@@ -22,8 +26,12 @@
 
     
 
+    
+
     , and <keyword
     >ulong</keyword>
+
+    
 
     
 
@@ -36,11 +44,15 @@
 
     
 
+    
+
      and hexadecimal. <grammar_production
     >
       <name>
         <non_terminal where="9.4.4.2">integer-literal</non_terminal>
       </name>
+
+      
 
       
 
@@ -63,6 +75,8 @@
 
       
 
+      
+
        :: <rhs
       >
         <non_terminal where="9.4.4.2">decimal-digits</non_terminal>
@@ -78,8 +92,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -98,6 +116,8 @@
       <name>
         <non_terminal where="9.4.4.2">decimal-digit</non_terminal>
       </name>
+
+      
 
       
 
@@ -126,6 +146,8 @@
 
       
 
+      
+
        :: one of <rhs
       >
         <terminal>U  u  L  l  UL  Ul  uL  ul  LU  Lu  lU  lu  </terminal>
@@ -135,6 +157,8 @@
       <name>
         <non_terminal where="9.4.4.2">hexadecimal-integer-literal</non_terminal>
       </name>
+
+      
 
       
 
@@ -162,8 +186,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -182,6 +210,8 @@
       <name>
         <non_terminal where="9.4.4.2">hex-digit</non_terminal>
       </name>
+
+      
 
       
 
@@ -225,8 +255,12 @@
 
         
 
+        
+
         , <keyword
         >uint</keyword>
+
+        
 
         
 
@@ -239,8 +273,12 @@
 
         
 
+        
+
         , <keyword
         >ulong</keyword>
+
+        
 
         
 
@@ -256,8 +294,12 @@
 
         
 
+        
+
         , <keyword
         >ulong</keyword>
+
+        
 
         
 
@@ -273,8 +315,12 @@
 
         
 
+        
+
         , <keyword
         >ulong</keyword>
+
+        
 
         
 
@@ -285,6 +331,8 @@
       <list_item
         > If the literal is suffixed by UL, Ul, uL, ul, LU, Lu, lU, or lu, it is of type <keyword
         >ulong</keyword>
+
+        
 
         
 
@@ -302,12 +350,16 @@
 
     
 
+    
+
      type, a compile-time error occurs. </paragraph
   >
   <paragraph>
     <note
       >[Note: As a matter of style, it is suggested that "L" be used instead of "l" when writing literals of type <keyword
       >long</keyword>
+
+      
 
       
 
@@ -324,6 +376,8 @@
 
     
 
+    
+
      and <keyword
     >long</keyword>
 
@@ -331,8 +385,12 @@
 
     
 
+    
+
      values to be written as <keyword
     >decimal</keyword>
+
+    
 
     
 
@@ -348,8 +406,12 @@
 
         
 
+        
+
          with the value 2147483648 (2<super
         >31</super>
+
+        
 
         
 
@@ -362,8 +424,12 @@
 
         
 
+        
+
          appears as the token immediately following a unary minus operator token (<hyperlink
         >14.6.2</hyperlink>
+
+        
 
         
 
@@ -376,8 +442,12 @@
 
         
 
+        
+
          with the value <unicode
         >8722</unicode>
+
+        
 
         
 
@@ -390,8 +460,12 @@
 
         
 
+        
+
         2<super
         >31</super>
+
+        
 
         
 
@@ -404,8 +478,12 @@
 
         
 
+        
+
          is of type <keyword
         >uint</keyword>
+
+        
 
         
 
@@ -421,8 +499,12 @@
 
         
 
+        
+
          with the value 9223372036854775808 (2<super
         >63</super>
+
+        
 
         
 
@@ -435,8 +517,12 @@
 
         
 
+        
+
          or the <non_terminal
          where="9.4.4.2">integer-type-suffix</non_terminal>
+
+        
 
         
 
@@ -449,8 +535,12 @@
 
         
 
+        
+
         ), the result is a constant of type <keyword
         >long</keyword>
+
+        
 
         
 
@@ -463,8 +553,12 @@
 
         
 
+        
+
         9223372036854775808 (<unicode
         >8722</unicode>
+
+        
 
         
 
@@ -477,6 +571,8 @@
 
         
 
+        
+
         ). In all other situations, such a <non_terminal
          where="9.4.4.2">decimal-integer-literal</non_terminal>
 
@@ -484,8 +580,12 @@
 
         
 
+        
+
          is of type <keyword
         >ulong</keyword>
+
+        
 
         
 

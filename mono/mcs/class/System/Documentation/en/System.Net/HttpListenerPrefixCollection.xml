@@ -36,6 +36,8 @@
 
         
 
+        
+
          property returns instances of this collection.</para
       >
     </remarks>
@@ -44,6 +46,8 @@
       <para
         >Represents the collection used to store Uniform Resource Identifier (URI) prefixes for <see
          cref="T:System.Net.HttpListener" />
+
+        
 
         
 
@@ -83,8 +87,12 @@
 
             
 
+            
+
              object. When checking <paramref
              name="uriPrefix" />
+
+            
 
             
 
@@ -100,8 +108,12 @@
 
             
 
+            
+
              with the prefix that most closely matches a requested URI responds to the request. Multiple <see
              cref="T:System.Net.HttpListener" />
+
+            
 
             
 
@@ -114,8 +126,12 @@
 
             
 
+            
+
              exception is thrown if an <see
              cref="T:System.Net.HttpListener" />
+
+            
 
             
 
@@ -131,6 +147,8 @@
 
             
 
+            
+
              accepts requests sent to the port if the requested URI does not match any other prefix. For example, to receive all requests sent to port 8080 when the requested URI is not handled by any other <see
              cref="T:System.Net.HttpListener" />
 
@@ -138,8 +156,12 @@
 
             
 
+            
+
             , the prefix is "http://*:8080/". Similarly, to specify that the <see
              cref="T:System.Net.HttpListener" />
+
+            
 
             
 
@@ -159,8 +181,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -192,6 +218,8 @@
           <para
             >After calling this method, you cannot start the associated <see
              cref="T:System.Net.HttpListener" />
+
+            
 
             
 
@@ -239,6 +267,8 @@
 
             
 
+            
+
              value that indicates whether the specified prefix is contained in the collection.</para
           >
         </summary>
@@ -247,6 +277,8 @@
           <para
             >true if this collection contains the prefix specified by <paramref
              name="uriPrefix" />
+
+            
 
             
 
@@ -262,8 +294,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -307,6 +343,8 @@
 
             
 
+            
+
              to the specified array. </para
           >
         </summary>
@@ -317,8 +355,12 @@
 
           
 
+          
+
           The one dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -333,8 +375,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -378,11 +424,15 @@
 
             
 
+            
+
              to the specified string array. </para
           >
         </summary>
         <param name="array">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -397,8 +447,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -459,8 +513,12 @@
 
             
 
+            
+
              method before you can access the first element. To access the element at the current position, call the <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -476,6 +534,8 @@
 
             
 
+            
+
              or <see
              cref="M:System.Collections.IEnumerator.Reset" />
 
@@ -483,8 +543,12 @@
 
             
 
+            
+
              causes an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -500,8 +564,12 @@
 
             
 
+            
+
              class and the <see
              cref="M:System.Collections.IEnumerable.GetEnumerator" />
+
+            
 
             
 
@@ -519,6 +587,8 @@
           <para
             >An object that implements the <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -603,6 +673,8 @@
 
             
 
+            
+
              is not in the collection, this method does nothing.</para
           >
         </remarks>
@@ -611,6 +683,8 @@
           <para
             >Removes the specified Uniform Resource Identifier (URI) from the list of prefixes handled by the <see
              cref="T:System.Net.HttpListener" />
+
+            
 
             
 
@@ -629,8 +703,12 @@
 
             
 
+            
+
              was found in the <see
              cref="T:System.Net.HttpListenerPrefixCollection" />
+
+            
 
             
 
@@ -646,8 +724,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -686,8 +768,12 @@
 
             
 
+            
+
              method before you can access the first element. To access the element at the current position, call the <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -703,6 +789,8 @@
 
             
 
+            
+
              or <see
              cref="M:System.Collections.IEnumerator.Reset" />
 
@@ -710,8 +798,12 @@
 
             
 
+            
+
              causes an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -727,8 +819,12 @@
 
             
 
+            
+
              class and the <see
              cref="M:System.Collections.IEnumerable.GetEnumerator" />
+
+            
 
             
 
@@ -746,6 +842,8 @@
           <para
             >An object that implements the <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 

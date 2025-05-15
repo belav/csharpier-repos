@@ -31,10 +31,14 @@
 
         
 
+        
+
          is thrown when an operation attempts to retrieve an element from a collection using a key that does not exist in that collection.</para
       >
       <para>
         <see cref="T:System.Collections.Generic.KeyNotFoundException" />
+
+        
 
         
 
@@ -50,8 +54,12 @@
 
         
 
+        
+
          class, see the <see
          cref="Overload:System.Collections.Generic.KeyNotFoundException.#ctor" />
+
+        
 
         
 
@@ -90,11 +98,15 @@
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "The given key was not present in the dictionary." This message takes into account the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of the <see
              cref="T:System.Collections.Generic.KeyNotFoundException" />
+
+            
 
             
 
@@ -140,6 +152,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Collections.Generic.KeyNotFoundException" />
+
+            
 
             
 
@@ -176,11 +190,15 @@
 
             
 
+            
+
              parameter is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of the <see
              cref="T:System.Collections.Generic.KeyNotFoundException" />
+
+            
 
             
 
@@ -231,11 +249,15 @@
 
             
 
+            
+
              class with the specified error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -277,6 +299,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -285,6 +309,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Collections.Generic.KeyNotFoundException" />
+
+            
 
             
 
@@ -300,8 +326,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -316,8 +346,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -357,8 +391,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -371,11 +409,15 @@
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of the <see
              cref="T:System.Collections.Generic.KeyNotFoundException" />
+
+            
 
             
 
@@ -426,11 +468,15 @@
 
             
 
+            
+
              class with the specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -445,8 +491,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 

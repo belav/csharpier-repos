@@ -50,6 +50,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -91,10 +93,14 @@
 
           
 
+          
+
           An endpoint that enables clients to find and communicate with the service.</param
         >
         <param name="channelEndpointElement">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -140,10 +146,14 @@
 
           
 
+          
+
           An endpoint that enables clients to find and communicate with the service.</param
         >
         <param name="serviceEndpointElement">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -187,6 +197,8 @@
         </returns>
         <param name="contractDescription">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -250,6 +262,8 @@
 
           
 
+          
+
           An endpoint element that defines the physical transfer of messages back and forth between the client and the service.</param
         >
       </Docs>
@@ -289,6 +303,8 @@
 
           
 
+          
+
           An endpoint element that enables clients to find and communicate with the service.</param
         >
       </Docs>
@@ -320,6 +336,8 @@
         </summary>
         <param name="endpoint">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -392,10 +410,14 @@
 
           
 
+          
+
           An endpoint that enables clients to find and communicate with the service.</param
         >
         <param name="channelEndpointElement">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -442,6 +464,8 @@
 
           
 
+          
+
           An endpoint that enables clients to find and communicate with the service.</param
         >
       </Docs>
@@ -476,6 +500,8 @@
         </summary>
         <param name="channelEndpointElement">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -572,11 +598,15 @@
 
             
 
+            
+
              object, including the locks and the properties collections.</para
           >
         </summary>
         <param name="parentElement">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

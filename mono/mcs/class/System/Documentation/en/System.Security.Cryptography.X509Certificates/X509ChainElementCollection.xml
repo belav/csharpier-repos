@@ -36,6 +36,8 @@
 
         
 
+        
+
          property is called.</para
       >
     </remarks>
@@ -44,6 +46,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.Security.Cryptography.X509Certificates.X509ChainElement" />
+
+        
 
         
 
@@ -91,11 +95,15 @@
 
             
 
+            
+
              object into an array, starting at the specified index.</para
           >
         </summary>
         <param name="array">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -108,10 +116,14 @@
 
           
 
+          
+
            objects. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -175,8 +187,12 @@
 
             
 
+            
+
              class implements <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -189,6 +205,8 @@
 
             
 
+            
+
             , <see
              cref="M:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.MoveNext" />
 
@@ -196,8 +214,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator.Reset" />
+
+            
 
             
 
@@ -216,6 +238,8 @@
 
             
 
+            
+
              object that can be used to navigate through a collection of chain elements.</para
           >
         </summary>
@@ -224,6 +248,8 @@
           <para
             >An <see
              cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementEnumerator" />
+
+            
 
             
 
@@ -253,6 +279,8 @@
           <para
             >This value is always false because an <see
              cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" />
+
+            
 
             
 
@@ -323,6 +351,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -358,6 +388,8 @@
 
             
 
+            
+
              object into an array, starting at the specified index.</para
           >
         </summary>
@@ -368,8 +400,12 @@
 
           
 
+          
+
           An array to copy the <see
            cref="T:System.Security.Cryptography.X509Certificates.X509ChainElementCollection" />
+
+          
 
           
 
@@ -384,8 +420,12 @@
 
           
 
+          
+
           The index of <paramref
            name="array" />
+
+          
 
           
 
@@ -428,6 +468,8 @@
 
             
 
+            
+
              object that can be used to navigate a collection of chain elements.</para
           >
         </summary>
@@ -436,6 +478,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 

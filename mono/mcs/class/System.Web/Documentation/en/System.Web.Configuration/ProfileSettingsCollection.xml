@@ -31,6 +31,8 @@
 
         
 
+        
+
          objects are used to define event profiles.</para
       >
     </remarks>
@@ -39,6 +41,8 @@
       <para
         >Contains a collection of <see
          cref="T:System.Web.Configuration.ProfileSettings" />
+
+        
 
         
 
@@ -65,6 +69,8 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.Configuration.HealthMonitoringSection" />
 
@@ -72,8 +78,12 @@
 
             
 
+            
+
              class always contains an instance of the <see
              cref="T:System.Web.Configuration.ProfileSettingsCollection" />
+
+            
 
             
 
@@ -87,6 +97,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.ProfileSettingsCollection" />
+
+            
 
             
 
@@ -124,6 +136,8 @@
 
             
 
+            
+
              object with the same name.</para
           >
         </remarks>
@@ -132,6 +146,8 @@
           <para
             >Adds a <see
              cref="T:System.Web.Configuration.ProfileSettings" />
+
+            
 
             
 
@@ -147,8 +163,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Configuration.ProfileSettings" />
+
+          
 
           
 
@@ -184,6 +204,8 @@
 
             
 
+            
+
              objects from the collection.</para
           >
         </summary>
@@ -214,6 +236,8 @@
 
             
 
+            
+
              object with the specified name.</para
           >
         </summary>
@@ -227,8 +251,12 @@
 
             
 
+            
+
              object with the specified <paramref
              name="name" />
+
+            
 
             
 
@@ -244,8 +272,12 @@
 
           
 
+          
+
           The name of a <see
            cref="T:System.Web.Configuration.ProfileSettings" />
+
+          
 
           
 
@@ -302,8 +334,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Configuration.ProfileSettings" />
+
+          
 
           
 
@@ -338,6 +374,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -346,6 +384,8 @@
           <para
             >The index of the specified <see
              cref="T:System.Web.Configuration.ProfileSettings" />
+
+            
 
             
 
@@ -361,8 +401,12 @@
 
           
 
+          
+
           The name of a <see
            cref="T:System.Web.Configuration.ProfileSettings" />
+
+          
 
           
 
@@ -400,6 +444,8 @@
 
             
 
+            
+
              parameter equals the number of items in the collection, then the entry is appended to the end of the collection.</para
           >
         </remarks>
@@ -408,6 +454,8 @@
           <para
             >Inserts the specified <see
              cref="T:System.Web.Configuration.ProfileSettings" />
+
+            
 
             
 
@@ -423,8 +471,12 @@
 
           
 
+          
+
           The index of a <see
            cref="T:System.Web.Configuration.ProfileSettings" />
+
+          
 
           
 
@@ -439,8 +491,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Configuration.ProfileSettings" />
+
+          
 
           
 
@@ -543,6 +599,8 @@
 
             
 
+            
+
              object from the collection.</para
           >
         </summary>
@@ -553,8 +611,12 @@
 
           
 
+          
+
           The name of a <see
            cref="T:System.Web.Configuration.ProfileSettings" />
+
+          
 
           
 
@@ -592,6 +654,8 @@
 
             
 
+            
+
              object at the specified index location from the collection.</para
           >
         </summary>
@@ -602,8 +666,12 @@
 
           
 
+          
+
           The index of a <see
            cref="T:System.Web.Configuration.ProfileSettings" />
+
+          
 
           
 

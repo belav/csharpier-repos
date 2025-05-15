@@ -21,8 +21,12 @@
 
         
 
+        
+
          object provides event information to the <see
          cref="E:System.Web.Profile.ProfileModule.MigrateAnonymous" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          class. The <see
          cref="T:System.Web.Profile.ProfileMigrateEventArgs" />
+
+        
 
         
 
@@ -49,8 +57,12 @@
 
         
 
+        
+
          of the current request and the anonymous user identifier for the anonymous profile in the <see
          cref="P:System.Web.Profile.ProfileMigrateEventArgs.AnonymousID" />
+
+        
 
         
 
@@ -66,11 +78,15 @@
 
         
 
+        
+
          event to copy profile property values from an anonymous profile to an authenticated profile when a user who has been anonymously using your application logs in.</para
       >
       <para
         >When an application that has the user profile enabled is started, ASP.NET creates a new class of type ProfileCommon, which inherits from the <see
          cref="T:System.Web.Profile.ProfileBase" />
+
+        
 
         
 
@@ -89,8 +105,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.Profile.ProfileModule" />
+
+        
 
         
 
@@ -123,8 +143,12 @@
 
             
 
+            
+
              creates an instance of the <see
              cref="T:System.Web.Profile.ProfileMigrateEventArgs" />
+
+            
 
             
 
@@ -137,8 +161,12 @@
 
             
 
+            
+
              property to the specified <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -151,8 +179,12 @@
 
             
 
+            
+
              property to the specified <paramref
              name="anonymousId" />
+
+            
 
             
 
@@ -171,11 +203,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -188,10 +224,14 @@
 
           
 
+          
+
            of the current request.</param
         >
         <param name="anonymousId">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -223,8 +263,12 @@
 
             
 
+            
+
              property contains the unique identifier for an anonymous user. When someone who has been using your application anonymously logs in, you can handle the <see
              cref="E:System.Web.Profile.ProfileModule.MigrateAnonymous" />
+
+            
 
             
 
@@ -235,6 +279,8 @@
           <para
             >When an application that has the user profile enabled is started, ASP.NET creates a new class of type ProfileCommon, which inherits from the <see
              cref="T:System.Web.Profile.ProfileBase" />
+
+            
 
             
 
@@ -271,8 +317,12 @@
 
             
 
+            
+
              object provides event information to the <see
              cref="E:System.Web.Profile.ProfileModule.MigrateAnonymous" />
+
+            
 
             
 
@@ -285,6 +335,8 @@
 
             
 
+            
+
              class. The <see
              cref="P:System.Web.Profile.ProfileMigrateEventArgs.Context" />
 
@@ -292,8 +344,12 @@
 
             
 
+            
+
              property provides access to the <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -307,6 +363,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 

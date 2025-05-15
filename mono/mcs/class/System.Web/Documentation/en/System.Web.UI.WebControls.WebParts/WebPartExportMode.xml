@@ -20,8 +20,12 @@
 
         
 
+        
+
          enumerator can be applied to the <see
          cref="P:System.Web.UI.WebControls.WebParts.WebPart.ExportMode" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
          control cannot be exported and the control's <see
          cref="P:System.Web.UI.WebControls.WebParts.WebPart.ExportMode" />
+
+        
 
         
 
@@ -48,8 +56,12 @@
 
         
 
+        
+
         . To enable exporting all properties for the control, set the <see
          cref="P:System.Web.UI.WebControls.WebParts.WebPart.ExportMode" />
+
+        
 
         
 
@@ -62,8 +74,12 @@
 
         
 
+        
+
         . To export only certain properties while preventing the export of properties that contain sensitive data, you set the property value to <see
          cref="F:System.Web.UI.WebControls.WebParts.WebPartExportMode.NonSensitiveData" />
+
+        
 
         
 
@@ -74,6 +90,8 @@
       <para
         >A property can be marked as sensitive through the <see
          cref="T:System.Web.UI.WebControls.WebParts.PersonalizableAttribute" />
+
+        
 
         
 
@@ -92,6 +110,8 @@
       <para
         >Specifies whether all, some, or none of a <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+        
 
         
 

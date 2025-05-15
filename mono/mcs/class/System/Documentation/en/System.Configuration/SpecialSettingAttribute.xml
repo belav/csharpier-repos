@@ -31,8 +31,12 @@
 
         
 
+        
+
          is used to identify such properties. This class uses the <see
          cref="T:System.Configuration.SpecialSetting" />
+
+        
 
         
 
@@ -42,6 +46,8 @@
       >
       <para>
         <see cref="T:System.Configuration.SpecialSettingAttribute" />
+
+        
 
         
 
@@ -57,6 +63,8 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Configuration.LocalFileSettingsProvider.GetPropertyValues(System.Configuration.SettingsContext,System.Configuration.SettingsPropertyCollection)" />
 
@@ -64,8 +72,12 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.Configuration.LocalFileSettingsProvider" />
+
+        
 
         
 
@@ -111,6 +123,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -146,8 +160,12 @@
 
             
 
+            
+
              property is set in the <see
              cref="M:System.Configuration.SpecialSettingAttribute.#ctor(System.Configuration.SpecialSetting)" />
+
+            
 
             
 

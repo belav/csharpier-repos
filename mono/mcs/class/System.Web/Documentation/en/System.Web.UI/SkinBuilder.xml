@@ -24,11 +24,15 @@
 
         
 
+        
+
          class directly.</para
       >
       <para
         >ASP.NET designer builders use the <see
          cref="T:System.Web.UI.SkinBuilder" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          class and the <see
          cref="T:System.Web.UI.IThemeResolutionService" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          class calls the <see
          cref="M:System.Web.UI.SkinBuilder.ApplyTheme" />
+
+        
 
         
 
@@ -70,6 +82,8 @@
       <para
         >Provides a <see
          cref="T:System.Web.UI.ControlBuilder" />
+
+        
 
         
 
@@ -104,8 +118,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Web.UI.ThemeProvider" />
+
+            
 
             
 
@@ -118,8 +136,12 @@
 
             
 
+            
+
              object for the control specified in the <paramref
              name="control" />
+
+            
 
             
 
@@ -138,6 +160,8 @@
 
             
 
+            
+
              class, setting the control with which the builder is associated, the general <see
              cref="T:System.Web.UI.ControlBuilder" />
 
@@ -145,8 +169,12 @@
 
             
 
+            
+
              object provided by the <see
              cref="T:System.Web.UI.ThemeProvider" />
+
+            
 
             
 
@@ -162,8 +190,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.ThemeProvider" />
+
+          
 
           
 
@@ -178,8 +210,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Control" />
+
+          
 
           
 
@@ -192,8 +228,12 @@
 
           
 
+          
+
            is associated. The <see
            cref="M:System.Web.UI.SkinBuilder.ApplyTheme" />
+
+          
 
           
 
@@ -208,8 +248,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.ControlBuilder" />
+
+          
 
           
 
@@ -222,10 +266,14 @@
 
           
 
+          
+
            for the control's type. </param
         >
         <param name="themePath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -256,8 +304,12 @@
 
             
 
+            
+
              objects are associated with controls at design time by specifying an <see
              cref="T:System.Web.UI.IThemeResolutionService" />
+
+            
 
             
 
@@ -270,8 +322,12 @@
 
             
 
+            
+
              object of a control that supplies a <see
              cref="T:System.Web.UI.ThemeProvider" />
+
+            
 
             
 
@@ -284,8 +340,12 @@
 
             
 
+            
+
              object can return a <see
              cref="T:System.Web.UI.SkinBuilder" />
+
+            
 
             
 
@@ -304,6 +364,8 @@
 
             
 
+            
+
              object is associated with the control. </para
           >
         </summary>
@@ -312,6 +374,8 @@
           <para
             >The control instance to which the theme or style sheet theme and any control skin was applied. This is the same instance passed to the builder's <see
              cref="M:System.Web.UI.SkinBuilder.#ctor(System.Web.UI.ThemeProvider,System.Web.UI.Control,System.Web.UI.ControlBuilder,System.String)" />
+
+            
 
             
 

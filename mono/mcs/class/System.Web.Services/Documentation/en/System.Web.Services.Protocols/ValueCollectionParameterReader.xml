@@ -29,8 +29,12 @@
 
         
 
+        
+
          and other classes in the <see
          cref="N:System.Web.Services.Protocols" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          class provides, among other methods, a common <see
          cref="M:System.Web.Services.Protocols.ValueCollectionParameterReader.Read(System.Collections.Specialized.NameValueCollection)" />
+
+        
 
         
 
@@ -55,6 +63,8 @@
       <para
         >You typically will not need to use <see
          cref="T:System.Web.Services.Protocols.ValueCollectionParameterReader" />
+
+        
 
         
 
@@ -81,6 +91,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Protocols.ValueCollectionParameterReader" />
+
+            
 
             
 
@@ -118,8 +130,12 @@
 
             
 
+            
+
              method is the <see
              cref="P:System.Web.Services.Protocols.LogicalMethodInfo.InParameters" />
+
+            
 
             
 
@@ -132,6 +148,8 @@
 
             
 
+            
+
              parameter. The <see
              cref="P:System.Web.Services.Protocols.LogicalMethodInfo.InParameters" />
 
@@ -139,8 +157,12 @@
 
             
 
+            
+
              property value is an array of type <see
              cref="T:System.Reflection.ParameterInfo" />
+
+            
 
             
 
@@ -156,6 +178,8 @@
 
             
 
+            
+
              method is invoked during service initialization. Later, at the time a request is processed, the initializer object is passed to the <see
              cref="M:System.Web.Services.Protocols.ValueCollectionParameterReader.Initialize(System.Object)" />
 
@@ -163,8 +187,12 @@
 
             
 
+            
+
              method of another <see
              cref="T:System.Web.Services.Protocols.ValueCollectionParameterReader" />
+
+            
 
             
 
@@ -187,6 +215,8 @@
 
             
 
+            
+
              representing the Web method.</para
           >
         </returns>
@@ -197,8 +227,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+
+          
 
           
 
@@ -232,6 +266,8 @@
 
             
 
+            
+
              method is invoked at the time a request is processed.</para
           >
           <para
@@ -242,8 +278,12 @@
 
             
 
+            
+
             , is obtained by calling the <see
              cref="M:System.Web.Services.Protocols.ValueCollectionParameterReader.GetInitializer(System.Web.Services.Protocols.LogicalMethodInfo)" />
+
+            
 
             
 
@@ -263,8 +303,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Reflection.ParameterInfo" />
+
+          
 
           
 
@@ -277,8 +321,12 @@
 
           
 
+          
+
            property of the <see
            cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+
+          
 
           
 
@@ -316,6 +364,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -330,8 +380,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Reflection.ParameterInfo" />
+
+          
 
           
 
@@ -369,6 +423,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -383,8 +439,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+
+          
 
           
 
@@ -421,8 +481,12 @@
 
             
 
+            
+
              method is called by the <see
              cref="M:System.Web.Services.Protocols.ValueCollectionParameterReader.Read(System.Collections.Specialized.NameValueCollection)" />
+
+            
 
             
 
@@ -435,8 +499,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.Services.Protocols.UrlParameterReader" />
+
+            
 
             
 
@@ -449,6 +517,8 @@
 
             
 
+            
+
             . Those two classes' <see
              cref="M:System.Web.Services.Protocols.ValueCollectionParameterReader.Read(System.Collections.Specialized.NameValueCollection)" />
 
@@ -456,8 +526,12 @@
 
             
 
+            
+
              methods take an <see
              cref="T:System.Web.HttpRequest" />
+
+            
 
             
 
@@ -480,6 +554,8 @@
 
             
 
+            
+
              objects representing method parameter values.</para
           >
         </returns>
@@ -490,8 +566,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.Specialized.NameValueCollection" />
+
+          
 
           
 

@@ -35,6 +35,8 @@
 
         
 
+        
+
         . The flags are retained for reference only. They are not used by the common language runtime.</para
       >
       <para>For more information, see TYPEFLAGS in the MSDN library.</para>
@@ -44,6 +46,8 @@
       <para
         >Describes the original settings of the <see
          cref="T:System.Runtime.InteropServices.TYPEFLAGS" />
+
+        
 
         
 

@@ -33,8 +33,12 @@
 
         
 
+        
+
          a <see
          cref="T:System.Net.Cookie" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          to a <see
          cref="T:System.Net.CookieContainer" />
+
+        
 
         
 
@@ -67,8 +75,12 @@
 
         
 
+        
+
          to a <see
          cref="T:System.Net.CookieContainer" />
+
+        
 
         
 
@@ -104,6 +116,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -112,6 +126,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.CookieException" />
+
+            
 
             
 
@@ -157,6 +173,8 @@
 
             
 
+            
+
              class with specific values of <paramref
              name="serializationInfo" />
 
@@ -164,8 +182,12 @@
 
             
 
+            
+
              and <paramref
              name="streamingContext" />
+
+            
 
             
 
@@ -181,8 +203,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -197,8 +223,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -242,8 +272,12 @@
 
             
 
+            
+
             . Any objects included in the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -262,8 +296,12 @@
 
             
 
+            
+
              instance with the data needed to serialize the <see
              cref="T:System.Net.CookieException" />
+
+            
 
             
 
@@ -279,8 +317,12 @@
 
           
 
+          
+
           The object that holds the serialized object data. The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -295,8 +337,12 @@
 
           
 
+          
+
           The contextual information about the source or destination. A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -342,8 +388,12 @@
 
             
 
+            
+
              instance with the data needed to serialize the <see
              cref="T:System.Net.CookieException" />
+
+            
 
             
 

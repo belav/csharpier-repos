@@ -21,8 +21,12 @@
 
         
 
+        
+
          object must be registered to the page through the <see
          cref="M:System.Web.UI.Page.RegisterAsyncTask(System.Web.UI.PageAsyncTask)" />
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
          event will be executed automatically by the page if they have not already been executed. Those asynchronous tasks registered after the <see
          cref="E:System.Web.UI.Page.PreRenderComplete" />
+
+        
 
         
 
@@ -54,8 +62,12 @@
 
         
 
+        
+
          method. The <see
          cref="M:System.Web.UI.Page.ExecuteRegisteredAsyncTasks" />
+
+        
 
         
 
@@ -68,8 +80,12 @@
 
         
 
+        
+
          event. The <see
          cref="M:System.Web.UI.Page.ExecuteRegisteredAsyncTasks" />
+
+        
 
         
 
@@ -117,6 +133,8 @@
 
             
 
+            
+
              property to false so the asynchronous task is not processed in parallel with other tasks on the page.</para
           >
         </remarks>
@@ -125,6 +143,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.PageAsyncTask" />
+
+            
 
             
 
@@ -140,10 +160,14 @@
 
           
 
+          
+
           The handler to call when beginning an asynchronous task.</param
         >
         <param name="endHandler">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -158,10 +182,14 @@
 
           
 
+          
+
           The handler to call when the task is not completed successfully within the time-out period.</param
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -202,11 +230,15 @@
 
             
 
+            
+
              class using the specified value for executing in parallel. </para
           >
         </summary>
         <param name="beginHandler">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -221,10 +253,14 @@
 
           
 
+          
+
           The handler to call when the task is completed successfully within the time-out period.</param
         >
         <param name="timeoutHandler">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -239,10 +275,14 @@
 
           
 
+          
+
           The object that represents the state of the task.</param
         >
         <param name="executeInParallel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -271,6 +311,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.PageAsyncTask.BeginHandler" />
+
+            
 
             
 
@@ -309,6 +351,8 @@
 
             
 
+            
+
              delegate is set in the constructor.</para
           >
         </remarks>
@@ -339,8 +383,12 @@
 
             
 
+            
+
              property is set in the constructor. When multiple tasks are registered in a page and the <see
              cref="P:System.Web.UI.PageAsyncTask.ExecuteInParallel" />
+
+            
 
             
 
@@ -353,6 +401,8 @@
 
             
 
+            
+
              property is set to false, then those tasks are processed sequentially. For example, if a page contained two asynchronous tasks that each took 5 seconds to complete and <see
              cref="P:System.Web.UI.PageAsyncTask.ExecuteInParallel" />
 
@@ -360,8 +410,12 @@
 
             
 
+            
+
              is set to true, both tasks will complete in 5 seconds. If <see
              cref="P:System.Web.UI.PageAsyncTask.ExecuteInParallel" />
+
+            
 
             
 
@@ -397,8 +451,12 @@
 
             
 
+            
+
              property is set in the constructor and cannot be modified during execution of the asynchronous task. You can differentiate asynchronous tasks in a page by assigning unique string values to their respective <see
              cref="P:System.Web.UI.PageAsyncTask.State" />
+
+            
 
             
 
@@ -432,6 +490,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.PageAsyncTask.TimeoutHandler" />
+
+            
 
             
 

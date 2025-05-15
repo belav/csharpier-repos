@@ -32,8 +32,12 @@
 
         
 
+        
+
          information will be most informative with Debug build configurations. By default, Debug builds include debug symbols, while Release builds do not. The debug symbols contain most of the file, method name, line number, and column information used in constructing <see
          cref="T:System.Diagnostics.StackFrame" />
+
+        
 
         
 
@@ -46,10 +50,14 @@
 
         
 
+        
+
          objects.</para
       >
       <para>
         <see cref="T:System.Diagnostics.StackTrace" />
+
+        
 
         
 
@@ -89,6 +97,8 @@
 
             
 
+            
+
              is created with the caller's current thread, and does not contain file name, line number, or column information.</para
           >
           <para>Use this default constructor when you want a complete trace with only summary method information about the call stack.</para>
@@ -98,6 +108,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Diagnostics.StackTrace" />
+
+            
 
             
 
@@ -135,6 +147,8 @@
 
             
 
+            
+
              is created with the caller's current thread.</para
           >
         </remarks>
@@ -148,11 +162,15 @@
 
             
 
+            
+
              class from the caller's frame, optionally capturing source information.</para
           >
         </summary>
         <param name="fNeedFileInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -196,6 +214,8 @@
 
             
 
+            
+
              class that contains a single frame.</para
           >
         </summary>
@@ -206,8 +226,12 @@
 
           
 
+          
+
           The frame that the <see
            cref="T:System.Diagnostics.StackTrace" />
+
+          
 
           
 
@@ -244,6 +268,8 @@
 
             
 
+            
+
              is created with the caller's current thread, and does not contain file name, line number, or column information.</para
           >
           <para>The resulting stack trace describes the stack at the time of the exception.</para>
@@ -258,11 +284,15 @@
 
             
 
+            
+
              class using the provided exception object.</para
           >
         </summary>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -299,11 +329,15 @@
 
             
 
+            
+
              is created with the caller's current thread, and does not contain file name, line number, or column information.</para
           >
           <para
             >If the number of frames to skip is greater than or equal to the total number of frames on the call stack at the time the instance is created, the <see
              cref="T:System.Diagnostics.StackTrace" />
+
+            
 
             
 
@@ -322,11 +356,15 @@
 
             
 
+            
+
              class from the caller's frame, skipping the specified number of frames.</para
           >
         </summary>
         <param name="skipFrames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -368,6 +406,8 @@
 
             
 
+            
+
              class, using the provided exception object and optionally capturing source information.</para
           >
         </summary>
@@ -378,10 +418,14 @@
 
           
 
+          
+
           The exception object from which to construct the stack trace. </param
         >
         <param name="fNeedFileInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -419,12 +463,16 @@
 
             
 
+            
+
               does not contain file name, line number, or column information.</para
           >
           <para>The resulting stack trace describes the stack at the time of the exception.</para>
           <para
             >If the number of frames to skip is greater than or equal to the total number of frames on the call stack at the time the instance is created, the <see
              cref="T:System.Diagnostics.StackTrace" />
+
+            
 
             
 
@@ -443,6 +491,8 @@
 
             
 
+            
+
              class using the provided exception object and skipping the specified number of frames.</para
           >
         </summary>
@@ -453,10 +503,14 @@
 
           
 
+          
+
           The exception object from which to construct the stack trace. </param
         >
         <param name="skipFrames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -497,6 +551,8 @@
 
             
 
+            
+
              will contain no frames.</para
           >
         </remarks>
@@ -505,6 +561,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Diagnostics.StackTrace" />
+
+            
 
             
 
@@ -520,10 +578,14 @@
 
           
 
+          
+
           The number of frames up the stack from which to start the trace. </param
         >
         <param name="fNeedFileInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -570,8 +632,12 @@
 
               
 
+              
+
                might be blocked. If you suspend a thread while it is executing a class constructor, other threads in the <see
                cref="T:System.AppDomain" />
+
+              
 
               
 
@@ -591,6 +657,8 @@
 
             
 
+            
+
              class for a specific thread, optionally capturing source information. </para
           >
           <para>Do not use this constructor overload.</para>
@@ -602,10 +670,14 @@
 
           
 
+          
+
           The thread whose stack trace is requested. </param
         >
         <param name="needFileInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -648,6 +720,8 @@
 
             
 
+            
+
              will contain no frames.</para
           >
         </remarks>
@@ -656,6 +730,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Diagnostics.StackTrace" />
+
+            
 
             
 
@@ -671,6 +747,8 @@
 
           
 
+          
+
           The exception object from which to construct the stack trace. </param
         >
         <param name="skipFrames">
@@ -680,10 +758,14 @@
 
           
 
+          
+
           The number of frames up the stack from which to start the trace. </param
         >
         <param name="fNeedFileInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -755,6 +837,8 @@
 
           
 
+          
+
           The index of the stack frame requested. </param
         >
       </Docs>
@@ -794,6 +878,8 @@
 
             
 
+            
+
              array to enumerate and examine function calls in the <see
              cref="T:System.Diagnostics.StackTrace" />
 
@@ -801,8 +887,12 @@
 
             
 
+            
+
             . The length of the returned array is equal to the <see
              cref="P:System.Diagnostics.StackTrace.FrameCount" />
+
+            
 
             
 
@@ -818,8 +908,12 @@
 
             
 
+            
+
              array elements are in reverse chronological order. The <see
              cref="T:System.Diagnostics.StackFrame" />
+
+            
 
             
 
@@ -832,8 +926,12 @@
 
             
 
+            
+
              at array index <see
              cref="P:System.Diagnostics.StackTrace.FrameCount" />
+
+            
 
             
 
@@ -849,8 +947,12 @@
 
             
 
+            
+
              method to obtain all stack frames in a stack trace; use the <see
              cref="M:System.Diagnostics.StackTrace.GetFrame(System.Int32)" />
+
+            
 
             
 
@@ -863,8 +965,12 @@
 
             
 
+            
+
              indexes are ordered alike by the two methods. For example, the <see
              cref="T:System.Diagnostics.StackFrame" />
+
+            
 
             
 
@@ -877,6 +983,8 @@
 
             
 
+            
+
              is equivalent to the <see
              cref="T:System.Diagnostics.StackFrame" />
 
@@ -884,8 +992,12 @@
 
             
 
+            
+
              returned by <see
              cref="M:System.Diagnostics.StackTrace.GetFrame(System.Int32)" />
+
+            
 
             
 
@@ -903,6 +1015,8 @@
           <para
             >An array of type <see
              cref="T:System.Diagnostics.StackFrame" />
+
+            
 
             
 

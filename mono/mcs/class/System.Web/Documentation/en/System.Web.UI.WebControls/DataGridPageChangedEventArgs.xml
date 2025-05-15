@@ -30,8 +30,12 @@
 
         
 
+        
+
          event is raised when a button in the page selection element of the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.WebControls.DataGridPageChangedEventArgs.#ctor(System.Object,System.Int32)" />
+
+        
 
         
 
@@ -61,6 +69,8 @@
          type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
         </format>
+
+        
 
         
 
@@ -79,8 +89,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -115,11 +129,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >When an instance of <see
              cref="T:System.Web.UI.WebControls.DataGridCommandEventArgs" />
+
+            
 
             
 
@@ -153,6 +171,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -172,6 +192,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -183,6 +205,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.DataGridPageChangedEventArgs" />
+
+            
 
             
 
@@ -215,6 +239,8 @@
 
             
 
+            
+
              property to determine the source of the command that raised the event. Because this event is raised only when a button in the page selection element of the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
 
@@ -222,8 +248,12 @@
 
             
 
+            
+
              control is clicked, the returned source is a <see
              cref="T:System.Web.UI.WebControls.DataGridItem" />
+
+            
 
             
 
@@ -260,8 +290,12 @@
 
             
 
+            
+
              property to determine the index of the page selected by the user in the page selection element of the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -274,8 +308,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 
@@ -289,6 +327,8 @@
           <para
             >Gets the index of the page selected by the user in the page selection element of the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 

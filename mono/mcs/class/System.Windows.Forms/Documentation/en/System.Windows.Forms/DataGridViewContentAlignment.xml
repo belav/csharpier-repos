@@ -23,6 +23,8 @@
 
         
 
+        
+
          property.</para
       >
     </remarks>
@@ -31,6 +33,8 @@
       <para
         >Defines constants that indicate the alignment of content within a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 

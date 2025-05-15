@@ -12,11 +12,15 @@
 
         
 
+        
+
         ). </list_item
       >
       <list_item
         > The definite assignment state of v at the end point of a block, checked, unchecked, if, while, do, for, foreach, lock, using, or switch statement is determined by checking the definite assignment state of v on all control flow transfers that target the end point of that statement. If v is definitely assigned on all such control flow transfers, then v is definitely assigned at the end point of the statement. Otherwise, v is not definitely assigned at the end point of the statement. The set of possible control flow transfers is determined in the same way as for checking statement reachability (<hyperlink
         >15.1</hyperlink>
+
+        
 
         
 

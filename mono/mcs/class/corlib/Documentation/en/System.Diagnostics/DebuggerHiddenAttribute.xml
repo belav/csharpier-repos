@@ -40,8 +40,12 @@
 
         
 
+        
+
          and the <see
          cref="T:System.Diagnostics.DebuggerStepThroughAttribute" />
+
+        
 
         
 
@@ -61,6 +65,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -69,6 +75,8 @@
       <para
         >Specifies the <see
          cref="T:System.Diagnostics.DebuggerHiddenAttribute" />
+
+        
 
         
 
@@ -100,6 +108,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Diagnostics.DebuggerHiddenAttribute" />
+
+            
 
             
 

@@ -20,8 +20,12 @@
 
         
 
+        
+
          contains an <see
          cref="T:System.Collections.IDictionary" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Configuration.Install.Installer.AfterInstall" />
+
+        
 
         
 
@@ -48,8 +56,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Configuration.Install.Installer.Committed" />
+
+        
 
         
 
@@ -62,8 +74,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Configuration.Install.Installer.AfterRollback" />
+
+        
 
         
 
@@ -76,8 +92,12 @@
 
         
 
+        
+
         , and <see
          cref="E:System.Configuration.Install.Installer.AfterUninstall" />
+
+        
 
         
 
@@ -96,8 +116,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Configuration.Install.Installer.AfterInstall" />
+
+        
 
         
 
@@ -110,8 +134,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Configuration.Install.Installer.Committed" />
+
+        
 
         
 
@@ -124,8 +152,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Configuration.Install.Installer.AfterRollback" />
+
+        
 
         
 
@@ -138,8 +170,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Configuration.Install.Installer.AfterUninstall" />
+
+        
 
         
 
@@ -166,8 +202,12 @@
 
             
 
+            
+
              class, and leaves the <see
              cref="P:System.Configuration.Install.InstallEventArgs.SavedState" />
+
+            
 
             
 
@@ -203,8 +243,12 @@
 
             
 
+            
+
              class, and specifies the value for the <see
              cref="P:System.Configuration.Install.InstallEventArgs.SavedState" />
+
+            
 
             
 
@@ -220,8 +264,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -252,6 +300,8 @@
           <para
             >Gets an <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 

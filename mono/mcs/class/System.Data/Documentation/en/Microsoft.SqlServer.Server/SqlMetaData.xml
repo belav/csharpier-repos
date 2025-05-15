@@ -22,6 +22,8 @@
 
         
 
+        
+
          objects. This class cannot be inherited.</para
       >
     </summary>
@@ -50,11 +52,15 @@
 
             
 
+            
+
             : Bit, BigInt, DateTime, Decimal, Float, Int, Money, Numeric, SmallDateTime, SmallInt, SmallMoney, TimeStamp, TinyInt, UniqueIdentifier, Xml.</para
           >
           <para
             >The following are the default values assigned to <paramref
              name="dbType" />
+
+            
 
             
 
@@ -67,8 +73,12 @@
 
             
 
+            
+
             , <see
              cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionName" />
+
+            
 
             
 
@@ -81,8 +91,12 @@
 
             
 
+            
+
             , and <see
              cref="P:Microsoft.SqlServer.Server.SqlMetaData.Type" />
+
+            
 
             
 
@@ -425,11 +439,15 @@
 
             
 
+            
+
              class with the specified column name and type.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -466,11 +484,15 @@
 
             
 
+            
+
             : Binary, Char, Image, NChar, Ntext, NVarChar, Text, VarBinary, VarChar.</para
           >
           <para
             >Only a <paramref
              name="maxLength" />
+
+            
 
             
 
@@ -483,8 +505,12 @@
 
             
 
+            
+
             , or -1 is allowed for a <paramref
              name="dbType" />
+
+            
 
             
 
@@ -500,8 +526,12 @@
 
             
 
+            
+
              of Varchar, Nvarchar, or VarBinary, a length specification of <see
              cref="P:Microsoft.SqlServer.Server.SqlMetaData.Max" />
+
+            
 
             
 
@@ -517,8 +547,12 @@
 
             
 
+            
+
             , depending on the SqlDbType (the <see
              cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionDatabase" />
+
+            
 
             
 
@@ -531,6 +565,8 @@
 
             
 
+            
+
             , <see
              cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionOwningSchema" />
 
@@ -538,8 +574,12 @@
 
             
 
+            
+
             , and <see
              cref="P:Microsoft.SqlServer.Server.SqlMetaData.Type" />
+
+            
 
             
 
@@ -732,6 +772,8 @@
 
             
 
+            
+
              class with the specified column name, type, and maximum length.</para
           >
         </summary>
@@ -742,10 +784,14 @@
 
           
 
+          
+
           The name of the column.</param
         >
         <param name="maxLength">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -784,11 +830,15 @@
 
             
 
+            
+
             : UDT.</para
           >
           <para
             >The following are the default values assigned to <paramref
              name="dbType" />
+
+            
 
             
 
@@ -801,8 +851,12 @@
 
             
 
+            
+
             , <see
              cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionName" />
+
+            
 
             
 
@@ -815,8 +869,12 @@
 
             
 
+            
+
             , and <see
              cref="P:Microsoft.SqlServer.Server.SqlMetaData.Type" />
+
+            
 
             
 
@@ -879,11 +937,15 @@
 
             
 
+            
+
              class with the specified column name, type, and user-defined type (UDT).</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -898,8 +960,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -934,11 +1000,15 @@
 
             
 
+            
+
             : Decimal.</para
           >
           <para
             >The following are the default values assigned to <paramref
              name="dbType" />
+
+            
 
             
 
@@ -951,8 +1021,12 @@
 
             
 
+            
+
             , <see
              cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionName" />
+
+            
 
             
 
@@ -965,8 +1039,12 @@
 
             
 
+            
+
             , and <see
              cref="P:Microsoft.SqlServer.Server.SqlMetaData.Type" />
+
+            
 
             
 
@@ -1029,11 +1107,15 @@
 
             
 
+            
+
              class with the specified column name, type, precision, and scale.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1048,10 +1130,14 @@
 
           
 
+          
+
           The precision of the parameter or column.</param
         >
         <param name="scale">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1090,11 +1176,15 @@
 
             
 
+            
+
             : Char, NChar, Ntext, NVarChar, Text, VarChar.</para
           >
           <para
             >Only a <paramref
              name="maxLength" />
+
+            
 
             
 
@@ -1107,8 +1197,12 @@
 
             
 
+            
+
             , or -1, is allowed for a <paramref
              name="dbType" />
+
+            
 
             
 
@@ -1124,8 +1218,12 @@
 
             
 
+            
+
              of Varchar or Nvarchar, a length specification of <see
              cref="P:Microsoft.SqlServer.Server.SqlMetaData.Max" />
+
+            
 
             
 
@@ -1141,8 +1239,12 @@
 
             
 
+            
+
             , depending on the SqlDbType (the <see
              cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionDatabase" />
+
+            
 
             
 
@@ -1155,6 +1257,8 @@
 
             
 
+            
+
             , <see
              cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionOwningSchema" />
 
@@ -1162,8 +1266,12 @@
 
             
 
+            
+
             , and <see
              cref="P:Microsoft.SqlServer.Server.SqlMetaData.Type" />
+
+            
 
             
 
@@ -1263,11 +1371,15 @@
 
             
 
+            
+
              class with the specified column name, type, maximum length, locale, and compare options.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1282,6 +1394,8 @@
 
           
 
+          
+
           The maximum length of the specified type. </param
         >
         <param name="locale">
@@ -1291,10 +1405,14 @@
 
           
 
+          
+
           The locale ID of the parameter or column.</param
         >
         <param name="compareOptions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1335,11 +1453,15 @@
 
             
 
+            
+
             : Xml.</para
           >
           <para
             >The following are the default values assigned to <paramref
              name="dbType" />
+
+            
 
             
 
@@ -1402,11 +1524,15 @@
 
             
 
+            
+
              class with the specified column name, type, database name, owning schema, and object name.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1421,6 +1547,8 @@
 
           
 
+          
+
           The database name of the XML schema collection of a typed XML instance.</param
         >
         <param name="owningSchema">
@@ -1430,10 +1558,14 @@
 
           
 
+          
+
           The relational schema name of the XML schema collection of a typed XML instance.</param
         >
         <param name="objectName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1475,11 +1607,15 @@
 
             
 
+            
+
             : BigInt, Bit, BitInt, DateTime, Decimal, Float, Image, Int, Money, Ntext, Numeric, Real, SmallDateTime, SmallInt, SmallMoney, Text, TimeStamp, TinyInt, UniqueIdentifier, Variant, Xml.</para
           >
           <para
             >The following are the default values assigned to <paramref
              name="dbType" />
+
+            
 
             
 
@@ -1492,8 +1628,12 @@
 
             
 
+            
+
             , <see
              cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionName" />
+
+            
 
             
 
@@ -1506,8 +1646,12 @@
 
             
 
+            
+
             , and <see
              cref="P:Microsoft.SqlServer.Server.SqlMetaData.Type" />
+
+            
 
             
 
@@ -1970,11 +2114,15 @@
 
             
 
+            
+
              class with the specified column name, type, maximum length, precision, scale, locale ID, compare options, and user-defined type (UDT).</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1989,10 +2137,14 @@
 
           
 
+          
+
           The maximum length of the specified type.</param
         >
         <param name="precision">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2007,10 +2159,14 @@
 
           
 
+          
+
           The scale of the parameter or column.</param
         >
         <param name="compareOptions">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2025,8 +2181,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -2058,6 +2218,8 @@
 
             
 
+            
+
              value against the metadata, and adjusts the value if necessary.</para
           >
         </summary>
@@ -2066,6 +2228,8 @@
           <para
             >The adjusted value as a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -2081,8 +2245,12 @@
 
           
 
+          
+
           The value to validate against the <see
            cref="T:Microsoft.SqlServer.Server.SqlMetaData" />
+
+          
 
           
 
@@ -2117,6 +2285,8 @@
 
             
 
+            
+
              value against the metadata, and adjusts the value if necessary.</para
           >
         </summary>
@@ -2125,6 +2295,8 @@
           <para
             >The adjusted value as a <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -2140,8 +2312,12 @@
 
           
 
+          
+
           The value to validate against the <see
            cref="T:Microsoft.SqlServer.Server.SqlMetaData" />
+
+          
 
           
 
@@ -2176,6 +2352,8 @@
 
             
 
+            
+
              values against the metadata, and adjusts the value if necessary.</para
           >
         </summary>
@@ -2184,6 +2362,8 @@
           <para
             >The adjusted value as an array of <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -2199,8 +2379,12 @@
 
           
 
+          
+
           The value to validate against the <see
            cref="T:Microsoft.SqlServer.Server.SqlMetaData" />
+
+          
 
           
 
@@ -2235,6 +2419,8 @@
 
             
 
+            
+
              value against the metadata, and adjusts the value if necessary.</para
           >
         </summary>
@@ -2243,6 +2429,8 @@
           <para
             >The adjusted value as a <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -2258,8 +2446,12 @@
 
           
 
+          
+
           The value to validate against the <see
            cref="T:Microsoft.SqlServer.Server.SqlMetaData" />
+
+          
 
           
 
@@ -2294,6 +2486,8 @@
 
             
 
+            
+
              values against the metadata, and adjusts the value if necessary.</para
           >
         </summary>
@@ -2302,6 +2496,8 @@
           <para
             >The adjusted value as an array <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -2317,8 +2513,12 @@
 
           
 
+          
+
           The value to validate against the <see
            cref="T:Microsoft.SqlServer.Server.SqlMetaData" />
+
+          
 
           
 
@@ -2356,6 +2556,8 @@
 
             
 
+            
+
              value against the metadata, and adjusts the value if necessary.</para
           >
         </summary>
@@ -2364,6 +2566,8 @@
           <para
             >The adjusted value as a <see
              cref="T:System.Data.SqlTypes.SqlBinary" />
+
+            
 
             
 
@@ -2379,8 +2583,12 @@
 
           
 
+          
+
           The value to validate against the <see
            cref="T:Microsoft.SqlServer.Server.SqlMetaData" />
+
+          
 
           
 
@@ -2418,6 +2626,8 @@
 
             
 
+            
+
              value against the metadata, and adjusts the value if necessary.</para
           >
         </summary>
@@ -2426,6 +2636,8 @@
           <para
             >The adjusted value as a <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
+
+            
 
             
 
@@ -2441,8 +2653,12 @@
 
           
 
+          
+
           The value to validate against the <see
            cref="T:Microsoft.SqlServer.Server.SqlMetaData" />
+
+          
 
           
 
@@ -2480,6 +2696,8 @@
 
             
 
+            
+
              value against the metadata, and adjusts the value if necessary.</para
           >
         </summary>
@@ -2488,6 +2706,8 @@
           <para
             >The adjusted value as a <see
              cref="T:System.Data.SqlTypes.SqlByte" />
+
+            
 
             
 
@@ -2503,8 +2723,12 @@
 
           
 
+          
+
           The value to validate against the <see
            cref="T:Microsoft.SqlServer.Server.SqlMetaData" />
+
+          
 
           
 
@@ -2542,6 +2766,8 @@
 
             
 
+            
+
              value against the metadata, and adjusts the value if necessary.</para
           >
         </summary>
@@ -2550,6 +2776,8 @@
           <para
             >The adjusted value as a <see
              cref="T:System.Data.SqlTypes.SqlBytes" />
+
+            
 
             
 
@@ -2565,8 +2793,12 @@
 
           
 
+          
+
           The value to validate against the <see
            cref="T:Microsoft.SqlServer.Server.SqlMetaData" />
+
+          
 
           
 
@@ -2604,6 +2836,8 @@
 
             
 
+            
+
              value against the metadata, and adjusts the value if necessary.</para
           >
         </summary>
@@ -2612,6 +2846,8 @@
           <para
             >The adjusted value as a <see
              cref="T:System.Data.SqlTypes.SqlChars" />
+
+            
 
             
 
@@ -2627,8 +2863,12 @@
 
           
 
+          
+
           The value to validate against the <see
            cref="T:Microsoft.SqlServer.Server.SqlMetaData" />
+
+          
 
           
 
@@ -2666,6 +2906,8 @@
 
             
 
+            
+
              value against the metadata, and adjusts the value if necessary.</para
           >
         </summary>
@@ -2674,6 +2916,8 @@
           <para
             >The adjusted value as a <see
              cref="T:System.Data.SqlTypes.SqlDateTime" />
+
+            
 
             
 
@@ -2689,8 +2933,12 @@
 
           
 
+          
+
           The value to validate against the <see
            cref="T:Microsoft.SqlServer.Server.SqlMetaData" />
+
+          
 
           
 
@@ -2728,6 +2976,8 @@
 
             
 
+            
+
              value against the metadata, and adjusts the value if necessary.</para
           >
         </summary>
@@ -2736,6 +2986,8 @@
           <para
             >The adjusted value as a <see
              cref="T:System.Data.SqlTypes.SqlDecimal" />
+
+            
 
             
 
@@ -2751,8 +3003,12 @@
 
           
 
+          
+
           The value to validate against the <see
            cref="T:Microsoft.SqlServer.Server.SqlMetaData" />
+
+          
 
           
 
@@ -2790,6 +3046,8 @@
 
             
 
+            
+
              value against the metadata, and adjusts the value if necessary.</para
           >
         </summary>
@@ -2798,6 +3056,8 @@
           <para
             >The adjusted value as a <see
              cref="T:System.Data.SqlTypes.SqlDouble" />
+
+            
 
             
 
@@ -2813,8 +3073,12 @@
 
           
 
+          
+
           The value to validate against the <see
            cref="T:Microsoft.SqlServer.Server.SqlMetaData" />
+
+          
 
           
 
@@ -2852,6 +3116,8 @@
 
             
 
+            
+
              value against the metadata, and adjusts the value if necessary.</para
           >
         </summary>
@@ -2860,6 +3126,8 @@
           <para
             >The adjusted value as a <see
              cref="T:System.Data.SqlTypes.SqlGuid" />
+
+            
 
             
 
@@ -2875,8 +3143,12 @@
 
           
 
+          
+
           The value to validate against the <see
            cref="T:Microsoft.SqlServer.Server.SqlMetaData" />
+
+          
 
           
 
@@ -2914,6 +3186,8 @@
 
             
 
+            
+
              value against the metadata, and adjusts the value if necessary.</para
           >
         </summary>
@@ -2922,6 +3196,8 @@
           <para
             >The adjusted value as a <see
              cref="T:System.Data.SqlTypes.SqlInt16" />
+
+            
 
             
 
@@ -2937,8 +3213,12 @@
 
           
 
+          
+
           The value to validate against the <see
            cref="T:Microsoft.SqlServer.Server.SqlMetaData" />
+
+          
 
           
 
@@ -2976,6 +3256,8 @@
 
             
 
+            
+
              value against the metadata, and adjusts the value if necessary.</para
           >
         </summary>
@@ -2984,6 +3266,8 @@
           <para
             >The adjusted value as a <see
              cref="T:System.Data.SqlTypes.SqlInt32" />
+
+            
 
             
 
@@ -2999,8 +3283,12 @@
 
           
 
+          
+
           The value to validate against the <see
            cref="T:Microsoft.SqlServer.Server.SqlMetaData" />
+
+          
 
           
 
@@ -3038,6 +3326,8 @@
 
             
 
+            
+
              value against the metadata, and adjusts the value if necessary.</para
           >
         </summary>
@@ -3046,6 +3336,8 @@
           <para
             >The adjusted value as a <see
              cref="T:System.Data.SqlTypes.SqlInt64" />
+
+            
 
             
 
@@ -3061,8 +3353,12 @@
 
           
 
+          
+
           The value to validate against the <see
            cref="T:Microsoft.SqlServer.Server.SqlMetaData" />
+
+          
 
           
 
@@ -3100,6 +3396,8 @@
 
             
 
+            
+
              value against the metadata, and adjusts the value if necessary.</para
           >
         </summary>
@@ -3108,6 +3406,8 @@
           <para
             >The adjusted value as a <see
              cref="T:System.Data.SqlTypes.SqlMoney" />
+
+            
 
             
 
@@ -3123,8 +3423,12 @@
 
           
 
+          
+
           The value to validate against the <see
            cref="T:Microsoft.SqlServer.Server.SqlMetaData" />
+
+          
 
           
 
@@ -3162,6 +3466,8 @@
 
             
 
+            
+
              value against the metadata, and adjusts the value if necessary.</para
           >
         </summary>
@@ -3170,6 +3476,8 @@
           <para
             >The adjusted value as a <see
              cref="T:System.Data.SqlTypes.SqlSingle" />
+
+            
 
             
 
@@ -3185,8 +3493,12 @@
 
           
 
+          
+
           The value to validate against the <see
            cref="T:Microsoft.SqlServer.Server.SqlMetaData" />
+
+          
 
           
 
@@ -3224,6 +3536,8 @@
 
             
 
+            
+
              value against the metadata, and adjusts the value if necessary.</para
           >
         </summary>
@@ -3232,6 +3546,8 @@
           <para
             >The adjusted value as a <see
              cref="T:System.Data.SqlTypes.SqlString" />
+
+            
 
             
 
@@ -3247,8 +3563,12 @@
 
           
 
+          
+
           The value to validate against the <see
            cref="T:Microsoft.SqlServer.Server.SqlMetaData" />
+
+          
 
           
 
@@ -3283,6 +3603,8 @@
 
             
 
+            
+
              value against the metadata, and adjusts the value if necessary.</para
           >
         </summary>
@@ -3291,6 +3613,8 @@
           <para
             >The adjusted value as a <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -3306,8 +3630,12 @@
 
           
 
+          
+
           The value to validate against the <see
            cref="T:Microsoft.SqlServer.Server.SqlMetaData" />
+
+          
 
           
 
@@ -3342,6 +3670,8 @@
 
             
 
+            
+
              value against the metadata, and adjusts the value if necessary.</para
           >
         </summary>
@@ -3350,6 +3680,8 @@
           <para
             >The adjusted value as a <see
              cref="T:System.Decimal" />
+
+            
 
             
 
@@ -3365,8 +3697,12 @@
 
           
 
+          
+
           The value to validate against the <see
            cref="T:Microsoft.SqlServer.Server.SqlMetaData" />
+
+          
 
           
 
@@ -3401,6 +3737,8 @@
 
             
 
+            
+
              value against the metadata, and adjusts the value if necessary.</para
           >
         </summary>
@@ -3409,6 +3747,8 @@
           <para
             >The adjusted value as a <see
              cref="T:System.Double" />
+
+            
 
             
 
@@ -3424,8 +3764,12 @@
 
           
 
+          
+
           The value to validate against the <see
            cref="T:Microsoft.SqlServer.Server.SqlMetaData" />
+
+          
 
           
 
@@ -3460,6 +3804,8 @@
 
             
 
+            
+
              value against the metadata, and adjusts the value if necessary.</para
           >
         </summary>
@@ -3468,6 +3814,8 @@
           <para
             >The adjusted value as a <see
              cref="T:System.Guid" />
+
+            
 
             
 
@@ -3483,8 +3831,12 @@
 
           
 
+          
+
           The value to validate against the <see
            cref="T:Microsoft.SqlServer.Server.SqlMetaData" />
+
+          
 
           
 
@@ -3519,6 +3871,8 @@
 
             
 
+            
+
              value against the metadata, and adjusts the value if necessary.</para
           >
         </summary>
@@ -3527,6 +3881,8 @@
           <para
             >The adjusted value as a <see
              cref="T:System.Int16" />
+
+            
 
             
 
@@ -3542,8 +3898,12 @@
 
           
 
+          
+
           The value to validate against the <see
            cref="T:Microsoft.SqlServer.Server.SqlMetaData" />
+
+          
 
           
 
@@ -3578,6 +3938,8 @@
 
             
 
+            
+
              value against the metadata, and adjusts the value if necessary.</para
           >
         </summary>
@@ -3586,6 +3948,8 @@
           <para
             >The adjusted value as a <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -3601,8 +3965,12 @@
 
           
 
+          
+
           The value to validate against the <see
            cref="T:Microsoft.SqlServer.Server.SqlMetaData" />
+
+          
 
           
 
@@ -3637,6 +4005,8 @@
 
             
 
+            
+
              value against the metadata, and adjusts the value if necessary.</para
           >
         </summary>
@@ -3645,6 +4015,8 @@
           <para
             >The adjusted value as a <see
              cref="T:System.Int64" />
+
+            
 
             
 
@@ -3660,8 +4032,12 @@
 
           
 
+          
+
           The value to validate against the <see
            cref="T:Microsoft.SqlServer.Server.SqlMetaData" />
+
+          
 
           
 
@@ -3696,6 +4072,8 @@
 
             
 
+            
+
              value against the metadata, and adjusts the value if necessary.</para
           >
         </summary>
@@ -3704,6 +4082,8 @@
           <para
             >The adjusted value as a <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -3719,8 +4099,12 @@
 
           
 
+          
+
           The value to validate against the <see
            cref="T:Microsoft.SqlServer.Server.SqlMetaData" />
+
+          
 
           
 
@@ -3755,6 +4139,8 @@
 
             
 
+            
+
              value against the metadata, and adjusts the value if necessary.</para
           >
         </summary>
@@ -3763,6 +4149,8 @@
           <para
             >The adjusted value as a <see
              cref="T:System.Single" />
+
+            
 
             
 
@@ -3778,8 +4166,12 @@
 
           
 
+          
+
           The value to validate against the <see
            cref="T:Microsoft.SqlServer.Server.SqlMetaData" />
+
+          
 
           
 
@@ -3814,6 +4206,8 @@
 
             
 
+            
+
              value against the metadata, and adjusts the value if necessary.</para
           >
         </summary>
@@ -3822,6 +4216,8 @@
           <para
             >The adjusted value as a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -3837,8 +4233,12 @@
 
           
 
+          
+
           The value to validate against the <see
            cref="T:Microsoft.SqlServer.Server.SqlMetaData" />
+
+          
 
           
 
@@ -3892,6 +4292,8 @@
 
             
 
+            
+
             .String.</para
           >
         </remarks>
@@ -3930,6 +4332,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -3938,6 +4342,8 @@
           <para
             >The inferred metadata as a <see
              cref="T:Microsoft.SqlServer.Server.SqlMetaData" />
+
+            
 
             
 
@@ -3953,6 +4359,8 @@
 
           
 
+          
+
           The object used from which the metadata is inferred.</param
         >
         <param name="name">
@@ -3962,8 +4370,12 @@
 
           
 
+          
+
           The name assigned to the returned <see
            cref="T:Microsoft.SqlServer.Server.SqlMetaData" />
+
+          
 
           
 
@@ -4039,11 +4451,15 @@
 
             
 
+            
+
              constructor parameter, it returns -1.</para
           >
           <para
             >For <see
              cref="T:System.Data.DbType" />
+
+            
 
             
 
@@ -4191,8 +4607,12 @@
 
             
 
+            
+
              and <see
              cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionOwningSchema" />
+
+            
 
             
 
@@ -4229,8 +4649,12 @@
 
             
 
+            
+
              and <see
              cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionOwningSchema" />
+
+            
 
             
 
@@ -4270,8 +4694,12 @@
 
             
 
+            
+
              and <see
              cref="P:Microsoft.SqlServer.Server.SqlMetaData.XmlSchemaCollectionName" />
+
+            
 
             
 

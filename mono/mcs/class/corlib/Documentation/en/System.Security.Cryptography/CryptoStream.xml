@@ -37,6 +37,8 @@
 
         
 
+        
+
         . Any cryptographic objects that implement <see
          cref="T:System.Security.Cryptography.CryptoStream" />
 
@@ -44,8 +46,12 @@
 
         
 
+        
+
          can be chained together with any objects that implement <see
          cref="T:System.IO.Stream" />
+
+        
 
         
 
@@ -61,8 +67,12 @@
 
         
 
+        
+
          object after you are done using it by calling the <see
          cref="M:System.IO.Stream.Close" />
+
+        
 
         
 
@@ -75,8 +85,12 @@
 
         
 
+        
+
          object.  However, if an exception occurs before you call the <see
          cref="M:System.IO.Stream.Close" />
+
+        
 
         
 
@@ -89,6 +103,8 @@
 
         
 
+        
+
          object might not be closed.  To ensure that the <see
          cref="M:System.IO.Stream.Close" />
 
@@ -96,8 +112,12 @@
 
         
 
+        
+
          method always gets called, place your call to the <see
          cref="M:System.IO.Stream.Close" />
+
+        
 
         
 
@@ -144,8 +164,12 @@
 
             
 
+            
+
              can be passed into the <paramref
              name="stream" />
+
+            
 
             
 
@@ -158,6 +182,8 @@
 
             
 
+            
+
              (such as <see
              cref="T:System.Security.Cryptography.HashAlgorithm" />
 
@@ -165,8 +191,12 @@
 
             
 
+            
+
             ) can be passed into the <paramref
              name="transform" />
+
+            
 
             
 
@@ -185,11 +215,15 @@
 
             
 
+            
+
              class with a target data stream, the transformation to use, and the mode of the stream.</para
           >
         </summary>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -204,6 +238,8 @@
 
           
 
+          
+
           The cryptographic transformation that is to be performed on the stream. </param
         >
         <param name="mode">
@@ -213,8 +249,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Cryptography.CryptoStreamMode" />
+
+          
 
           
 
@@ -245,8 +285,12 @@
 
           
 
+          
+
           .<see
            cref="E:System.Security.Cryptography.CryptoStreamMode.Read" />
+
+          
 
           
 
@@ -260,6 +304,8 @@
           <para
             >Gets a value indicating whether the current <see
              cref="T:System.Security.Cryptography.CryptoStream" />
+
+            
 
             
 
@@ -294,6 +340,8 @@
 
             
 
+            
+
             , so this method always returns false.</para
           >
         </remarks>
@@ -302,6 +350,8 @@
           <para
             >Gets a value indicating whether you can seek within the current <see
              cref="T:System.Security.Cryptography.CryptoStream" />
+
+            
 
             
 
@@ -333,8 +383,12 @@
 
           
 
+          
+
           .<see
            cref="E:System.Security.Cryptography.CryptoStreamMode.Write" />
+
+          
 
           
 
@@ -348,6 +402,8 @@
           <para
             >Gets a value indicating whether the current <see
              cref="T:System.Security.Cryptography.CryptoStream" />
+
+            
 
             
 
@@ -385,11 +441,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >Calling Dispose allows the resources used by the <see
              cref="T:System.Security.Cryptography.CryptoStream" />
+
+            
 
             
 
@@ -406,6 +466,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.Security.Cryptography.CryptoStream" />
+
+            
 
             
 
@@ -433,8 +495,12 @@
 
           
 
+          
+
            if the CryptoStream was opened in <see
            cref="E:System.Security.Cryptography.CryptoStreamMode.Write" />
+
+          
 
           
 
@@ -478,8 +544,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Security.Cryptography.CryptoStream" />
+
+            
 
             
 
@@ -498,11 +568,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -555,6 +629,8 @@
 
             
 
+            
+
              or <see
              cref="M:System.IO.Stream.Close" />
 
@@ -562,8 +638,12 @@
 
             
 
+            
+
             . Setting <see
              cref="P:System.IO.StreamWriter.AutoFlush" />
+
+            
 
             
 
@@ -580,8 +660,12 @@
 
               
 
+              
+
                method or the <see
                cref="M:System.Security.Cryptography.CryptoStream.FlushFinalBlock" />
+
+              
 
               
 
@@ -627,12 +711,16 @@
 
             
 
+            
+
              with the await (C#) or Await (Visual Basic) operator to suspend execution of the method until the task is complete. For more information, see <format
              type="text/html">
               <a href="db854f91-ccef-4035-ae4d-0911fde808c7"
                 >Asynchronous Programming with Async and Await (C# and Visual Basic)</a
               >
             </format>
+
+            
 
             
 
@@ -648,8 +736,12 @@
 
             
 
+            
+
              value for the <see
              cref="P:System.Threading.Tasks.Task.Status" />
+
+            
 
             
 
@@ -673,8 +765,12 @@
 
           
 
+          
+
           The token to monitor for cancellation requests. The default value is <see
            cref="P:System.Threading.CancellationToken.None" />
+
+          
 
           
 
@@ -711,8 +807,12 @@
 
             
 
+            
+
              method will call <see
              cref="M:System.Security.Cryptography.CryptoStream.FlushFinalBlock" />
+
+            
 
             
 
@@ -725,6 +825,8 @@
 
             
 
+            
+
             , call <see
              cref="M:System.Security.Cryptography.CryptoStream.FlushFinalBlock" />
 
@@ -732,8 +834,12 @@
 
             
 
+            
+
              to complete flushing the buffer. Call <see
              cref="M:System.Security.Cryptography.CryptoStream.FlushFinalBlock" />
+
+            
 
             
 
@@ -770,6 +876,8 @@
 
             
 
+            
+
              method is called.</para
           >
         </remarks>
@@ -800,6 +908,8 @@
 
           
 
+          
+
           .</value
         >
         <remarks>
@@ -807,6 +917,8 @@
           <para
             >This property exists only to support inheritance from <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -840,6 +952,8 @@
           <para
             >This property exists only to support inheritance from <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -894,6 +1008,8 @@
 
           
 
+          
+
           An array of bytes. A maximum of <paramref
            name="count" />
 
@@ -901,8 +1017,12 @@
 
           
 
+          
+
            bytes are read from the current stream and stored in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -917,8 +1037,12 @@
 
           
 
+          
+
           The byte offset in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -928,6 +1052,8 @@
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -970,12 +1096,16 @@
 
             
 
+            
+
              with the await (C#) or Await (Visual Basic) operator to suspend execution of the method until the task is complete. For more information, see <format
              type="text/html">
               <a href="db854f91-ccef-4035-ae4d-0911fde808c7"
                 >Asynchronous Programming with Async and Await (C# and Visual Basic)</a
               >
             </format>
+
+            
 
             
 
@@ -991,8 +1121,12 @@
 
             
 
+            
+
              value for the <see
              cref="P:System.Threading.Tasks.Task.Status" />
+
+            
 
             
 
@@ -1015,11 +1149,15 @@
 
             
 
+            
+
              parameter contains the total number of bytes read into the buffer. The result can be less than the number of bytes requested if the number of bytes currently available is less than the requested number, or it can be 0 (zero) if the end of the stream has been reached. </para
           >
         </returns>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1034,8 +1172,12 @@
 
           
 
+          
+
           The byte offset in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -1050,6 +1192,8 @@
 
           
 
+          
+
           The maximum number of bytes to read.</param
         >
         <param name="cancellationToken">
@@ -1059,8 +1203,12 @@
 
           
 
+          
+
           The token to monitor for cancellation requests. The default value is <see
            cref="P:System.Threading.CancellationToken.None" />
+
+          
 
           
 
@@ -1103,6 +1251,8 @@
 
             
 
+            
+
             , and cannot be used.</para
           >
         </remarks>
@@ -1121,8 +1271,12 @@
 
           
 
+          
+
           A byte offset relative to the <paramref
            name="origin" />
+
+          
 
           
 
@@ -1137,8 +1291,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.SeekOrigin" />
+
+          
 
           
 
@@ -1177,6 +1335,8 @@
 
             
 
+            
+
             , and cannot be used.</para
           >
         </remarks>
@@ -1186,6 +1346,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1230,11 +1392,15 @@
 
             
 
+            
+
              and advances the current position within the stream by the number of bytes written.</para
           >
         </summary>
         <param name="buffer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1247,8 +1413,12 @@
 
           
 
+          
+
            bytes from <paramref
            name="buffer" />
+
+          
 
           
 
@@ -1263,8 +1433,12 @@
 
           
 
+          
+
           The byte offset in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -1274,6 +1448,8 @@
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1316,12 +1492,16 @@
 
             
 
+            
+
              with the await (C#) or Await (Visual Basic) operator to suspend execution of the method until the task is complete. For more information, see <format
              type="text/html">
               <a href="db854f91-ccef-4035-ae4d-0911fde808c7"
                 >Asynchronous Programming with Async and Await (C# and Visual Basic)</a
               >
             </format>
+
+            
 
             
 
@@ -1337,8 +1517,12 @@
 
             
 
+            
+
              value for the <see
              cref="P:System.Threading.Tasks.Task.Status" />
+
+            
 
             
 
@@ -1362,6 +1546,8 @@
 
           
 
+          
+
           The buffer to write data from.</param
         >
         <param name="offset">
@@ -1371,8 +1557,12 @@
 
           
 
+          
+
           The zero-based byte offset in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -1387,6 +1577,8 @@
 
           
 
+          
+
           The maximum number of bytes to write.</param
         >
         <param name="cancellationToken">
@@ -1396,8 +1588,12 @@
 
           
 
+          
+
           The token to monitor for cancellation requests. The default value is <see
            cref="P:System.Threading.CancellationToken.None" />
+
+          
 
           
 

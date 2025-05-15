@@ -32,8 +32,12 @@
 
         
 
+        
+
          or the <see
          cref="T:System.Security.Cryptography.DSACryptoServiceProvider" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
          class will throw a <see
          cref="T:System.Security.Cryptography.CryptographicException" />
+
+        
 
         
 
@@ -92,6 +100,8 @@
 
             
 
+            
+
              class using the specified parameters.</para
           >
         </summary>
@@ -102,8 +112,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Cryptography.CspParameters" />
+
+          
 
           
 
@@ -164,8 +178,12 @@
 
             
 
+            
+
              property to retrieve the  <see
              cref="T:System.Security.AccessControl.CryptoKeySecurity" />
+
+            
 
             
 
@@ -179,6 +197,8 @@
           <para
             >Gets a <see
              cref="T:System.Security.AccessControl.CryptoKeySecurity" />
+
+            
 
             
 
@@ -282,8 +302,12 @@
 
             
 
+            
+
              property is derived from the <see
              cref="F:System.Security.Cryptography.CspParameters.KeyNumber" />
+
+            
 
             
 
@@ -296,8 +320,12 @@
 
             
 
+            
+
              object that was used to initialize the <see
              cref="T:System.Security.Cryptography.CspKeyContainerInfo" />
+
+            
 
             
 
@@ -313,8 +341,12 @@
 
             
 
+            
+
              value specifies an exchange key.  This value corresponds to the <paramref
              name="AT_KEYEXCHANGE" />
+
+            
 
             
 
@@ -330,8 +362,12 @@
 
             
 
+            
+
              value specifies a signature key.  This value corresponds to the <paramref
              name="AT_SIGNATURE" />
+
+            
 
             
 
@@ -455,6 +491,8 @@
           <para
             >Usually, when a randomly generated key container is created, the key container is named "CLR{<paramref
              name="guid value" />
+
+            
 
             
 

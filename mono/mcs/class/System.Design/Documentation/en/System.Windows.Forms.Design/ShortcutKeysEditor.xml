@@ -39,6 +39,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -73,6 +75,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -81,6 +85,8 @@
           <para
             >The new value of the <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -96,8 +102,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -112,8 +122,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IServiceProvider" />
+
+          
 
           
 
@@ -128,8 +142,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -165,6 +183,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -173,6 +193,8 @@
           <para
             >Gets the editor style used by the <see
              cref="Overload:System.Windows.Forms.Design.ShortcutKeysEditor.EditValue" />
+
+            
 
             
 
@@ -191,8 +213,12 @@
 
             
 
+            
+
              value that indicates the style of editor used by the <see
              cref="Overload:System.Windows.Forms.Design.ShortcutKeysEditor.EditValue" />
+
+            
 
             
 
@@ -208,8 +234,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 

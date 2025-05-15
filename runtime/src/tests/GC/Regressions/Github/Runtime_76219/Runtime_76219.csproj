@@ -7,7 +7,7 @@
     <!-- This test needs GCStress mode but it doesn't take long to execute
          so is fine to keep it in the inner loop -->
     <CLRTestBatchPreCommands>
-<![CDATA[
+      <![CDATA[
       $(CLRTestBatchPreCommands)
       set DOTNET_TieredCompilation=0
       set DOTNET_GCStress=0x3
@@ -15,7 +15,7 @@
       ]]>
     </CLRTestBatchPreCommands>
     <CLRTestBashPreCommands>
-<![CDATA[
+      <![CDATA[
       $(CLRTestBashPreCommands)
       export DOTNET_TieredCompilation=0
       export DOTNET_GCStress=0x3

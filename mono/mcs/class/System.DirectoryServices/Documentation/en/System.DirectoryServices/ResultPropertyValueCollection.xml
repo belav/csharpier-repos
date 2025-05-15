@@ -97,6 +97,8 @@
 
             
 
+            
+
              method determines whether a specified property value is in this collection.          </para
           >
         </summary>
@@ -106,6 +108,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -138,11 +142,15 @@
 
             
 
+            
+
              method copies the property values from this collection to an array, starting at a particular index of the array.          </para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -173,6 +181,8 @@
 
             
 
+            
+
              method retrieves the index of a specified property value in this collection.          </para
           >
         </summary>
@@ -182,6 +192,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -218,8 +230,12 @@
 
         
 
+        
+
          instances are similar to <see
          cref="T:System.DirectoryServices.DirectoryEntry" />
+
+        
 
         
 
@@ -232,8 +248,12 @@
 
         
 
+        
+
          retrieves its information from the Active Directory Domain Services hierarchy each time a new object is accessed, whereas the data for the <see
          cref="T:System.DirectoryServices.SearchResult" />
+
+        
 
         
 
@@ -246,6 +266,8 @@
 
         
 
+        
+
          that a <see
          cref="T:System.DirectoryServices.DirectorySearcher" />
 
@@ -253,8 +275,12 @@
 
         
 
+        
+
          query returns. If you try to get a <see
          cref="T:System.DirectoryServices.SearchResult" />
+
+        
 
         
 
@@ -268,6 +294,8 @@
       <para
         >Contains the values of a <see
          cref="T:System.DirectoryServices.SearchResult" />
+
+        
 
         
 

@@ -20,12 +20,16 @@
 
         
 
+        
+
          interface when creating a server control that needs to examine form data that is posted back to the server by the client. The contract that this interface defines allows a server control to determine whether its state should be altered as a result of the postback, and to raise the appropriate events. For more information, see <format
          type="text/html">
           <a href="765bfc89-33ee-4d0d-bbe6-3b172c06def9"
             >Server Event Handling in ASP.NET Web Pages</a
           >
         </format>
+
+        
 
         
 
@@ -67,6 +71,8 @@
 
             
 
+            
+
              method on those controls.</para
           >
         </remarks>
@@ -85,10 +91,14 @@
 
           
 
+          
+
           The key identifier for the control. </param
         >
         <param name="postCollection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -120,8 +130,12 @@
 
             
 
+            
+
              method raises any change events for the server control that implements the <see
              cref="T:System.Web.UI.IPostBackDataHandler" />
+
+            
 
             
 

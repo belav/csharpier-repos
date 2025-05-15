@@ -59,8 +59,12 @@
 
             
 
+            
+
              directly; instead, use methods such as <see
              cref="M:System.Xml.XmlDocument.CreateTextNode" />
+
+            
 
             
 
@@ -79,11 +83,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="strData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -96,10 +104,14 @@
 
           
 
+          
+
            property.</param
         >
         <param name="doc">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -141,11 +153,15 @@
 
             
 
+            
+
              method in the XmlNode class.</para
           >
           <para
             >The cloned node has no parent (<see
              cref="P:System.Xml.XmlNode.ParentNode" />
+
+            
 
             
 
@@ -164,6 +180,8 @@
         </returns>
         <param name="deep">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -308,6 +326,8 @@
 
           
 
+          
+
           The offset at which to split the node. </param
         >
       </Docs>
@@ -369,11 +389,15 @@
 
             
 
+            
+
             . XmlText nodes do not have children, so this method has no effect.</para
           >
         </summary>
         <param name="w">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -419,11 +443,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="w">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

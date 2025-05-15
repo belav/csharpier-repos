@@ -29,11 +29,15 @@
 
         
 
+        
+
          attribute to declare one or more specific exception conditions that are added to the Web Service Description Language (WSDL) description of the service operation as explicit SOAP fault messages returned by the operation. </para
       >
       <para
         >In all managed applications, processing errors are represented by <see
          cref="T:System.Exception" />
+
+        
 
         
 
@@ -50,11 +54,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >It is recommended that service operations use the <see
          cref="T:System.ServiceModel.FaultContractAttribute" />
+
+        
 
         
 
@@ -72,6 +80,8 @@
 
             
 
+            
+
              property controls the action of the fault message.</para
           >
         </item>
@@ -79,6 +89,8 @@
           <para
             >The <see
              cref="P:System.ServiceModel.FaultContractAttribute.DetailType" />
+
+            
 
             
 
@@ -96,8 +108,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ServiceModel.FaultContractAttribute.Namespace" />
+
+            
 
             
 
@@ -115,8 +131,12 @@
 
             
 
+            
+
              indicates whether the fault message has a protection level specified, and if so, the <see
              cref="P:System.ServiceModel.FaultContractAttribute.ProtectionLevel" />
+
+            
 
             
 
@@ -135,6 +155,8 @@
 
           
 
+          
+
            property be set. </para
         >
       </block>
@@ -148,8 +170,12 @@
 
             
 
+            
+
              explicitly to either <see
              cref="F:System.Net.Security.ProtectionLevel.Sign" />
+
+            
 
             
 
@@ -162,8 +188,12 @@
 
             
 
+            
+
             , then you must use a binding with security enabled using the <see
              cref="T:System.ServiceModel.SecurityMode" />
+
+            
 
             
 
@@ -181,6 +211,8 @@
 
             
 
+            
+
              property anywhere on the contract, all application data will be encrypted and signed.</para
           >
         </item>
@@ -193,8 +225,12 @@
 
             
 
+            
+
              has security disabled by default), and the <see
              cref="P:System.ServiceModel.FaultContractAttribute.ProtectionLevel" />
+
+            
 
             
 
@@ -212,8 +248,12 @@
 
         
 
+        
+
          to <see
          cref="F:System.Net.Security.ProtectionLevel.EncryptAndSign" />
+
+        
 
         
 
@@ -223,6 +263,8 @@
          type="text/html">
           <a href="0c034608-a1ac-4007-8287-b1382eaa8bf2">Understanding Protection Level</a>
         </format>
+
+        
 
         
 
@@ -238,8 +280,12 @@
 
         
 
+        
+
         , throw a <see
          cref="T:System.ServiceModel.FaultException`1" />
+
+        
 
         
 
@@ -252,6 +298,8 @@
 
         
 
+        
+
          (where the type parameter is the serializable error information). The <see
          cref="T:System.ServiceModel.FaultContractAttribute" />
 
@@ -259,8 +307,12 @@
 
         
 
+        
+
          can be used only to specify SOAP faults for two-way service operations and for asynchronous operation pairs; one-way operations do not support SOAP faults and therefore do not support <see
          cref="T:System.ServiceModel.FaultContractAttribute" />
+
+        
 
         
 
@@ -277,8 +329,12 @@
 
           
 
+          
+
            must be serializable by the <see
            cref="T:System.Runtime.Serialization.DataContractSerializer" />
+
+          
 
           
 
@@ -291,10 +347,14 @@
 
           
 
+          
+
            provides, see <format
            type="text/html">
             <a href="3d64837e-0a0c-4cc8-90ff-a5c6f313c63a">Data Contract Serializer</a>
           </format>
+
+          
 
           
 
@@ -311,8 +371,12 @@
 
         
 
+        
+
         , place that type parameter in the <see
          cref="T:System.ServiceModel.FaultContractAttribute" />
+
+        
 
         
 
@@ -329,6 +393,8 @@
 
           
 
+          
+
           , <see
            cref="P:System.ServiceModel.FaultContractAttribute.Name" />
 
@@ -336,8 +402,12 @@
 
           
 
+          
+
           , or <see
            cref="P:System.ServiceModel.FaultContractAttribute.Namespace" />
+
+          
 
           
 
@@ -355,8 +425,12 @@
 
         
 
+        
+
          where the type parameter is the type that contains the error information (in the above case, a <see
          cref="T:System.Int32" />
+
+        
 
         
 
@@ -373,12 +447,16 @@
 
         
 
+        
+
          code, so this detail type is not the most useful. Typically, indigo2 applications specify SOAP faults with detail types specific to the error information requirements of the client. For a more complete example, see the Example section.</para
       >
       <block subset="none" type="note">
         <para
           >If you specify a <see
            cref="T:System.ServiceModel.FaultException`1" />
+
+          
 
           
 
@@ -391,8 +469,12 @@
 
           
 
+          
+
           , the string value is assigned to the Detail property in the client application; clients cannot retrieve that string by calling the <see
            cref="M:System.ServiceModel.FaultException`1.ToString" />
+
+          
 
           
 
@@ -405,8 +487,12 @@
 
           
 
+          
+
           , throw a <see
            cref="T:System.ServiceModel.FaultException" />
+
+          
 
           
 
@@ -423,8 +509,12 @@
 
         
 
+        
+
          is thrown, implement the <see
          cref="T:System.ServiceModel.Dispatcher.IErrorHandler" />
+
+        
 
         
 
@@ -437,8 +527,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.ServiceModel.Description.IContractBehavior" />
+
+        
 
         
 
@@ -451,6 +545,8 @@
 
         
 
+        
+
          and assign it to the <see
          cref="P:System.ServiceModel.Dispatcher.ChannelDispatcher.Errorhandlers" />
 
@@ -458,8 +554,12 @@
 
         
 
+        
+
          property. <see
          cref="T:System.ServiceModel.Dispatcher.IErrorHandler" />
+
+        
 
         
 
@@ -475,6 +575,8 @@
 
         
 
+        
+
          to true in code or you can use the <see
          cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" />
 
@@ -482,8 +584,12 @@
 
         
 
+        
+
          in an application configuration file. When enabled, the service automatically returns exception information to the caller. These faults appear to the client as <see
          cref="T:System.ServiceModel.FaultException" />
+
+        
 
         
 
@@ -500,8 +606,12 @@
 
           
 
+          
+
            or <see
            cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" />
+
+          
 
           
 
@@ -517,8 +627,12 @@
 
           
 
+          
+
            or <see
            cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" />
+
+          
 
           
 
@@ -531,6 +645,8 @@
 
           
 
+          
+
            of type <see
            cref="T:System.String" />
 
@@ -538,8 +654,12 @@
 
           
 
+          
+
           . Clients must expect the possibility of an unknown SOAP fault (returned to indigo2 clients as <see
            cref="T:System.ServiceModel.FaultException" />
+
+          
 
           
 
@@ -583,11 +703,15 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
         <param name="detailType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -660,8 +784,12 @@
 
             
 
+            
+
              property to specify whether the SOAP fault message must be encrypted, signed, or both. See the <see
              cref="P:System.ServiceModel.FaultContractAttribute.ProtectionLevel" />
+
+            
 
             
 
@@ -742,8 +870,12 @@
 
             
 
+            
+
              property to specify the degree to which the binding must encrypt, sign, or both when sending the SOAP fault. It is strongly recommended that an operation's fault explicitly decide the security protection level requirements on the contract. The default protection level is <see
              cref="F:System.Net.Security.ProtectionLevel.None" />
+
+            
 
             
 
@@ -756,8 +888,12 @@
 
             
 
+            
+
              property be set to <see
              cref="F:System.Net.Security.ProtectionLevel.EncryptAndSign" />
+
+            
 
             
 
@@ -767,6 +903,8 @@
              type="text/html">
               <a href="0c034608-a1ac-4007-8287-b1382eaa8bf2">Understanding Protection Level</a>
             </format>
+
+            
 
             
 
@@ -783,8 +921,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Net.Security.ProtectionLevel.EncryptAndSign" />
+
+            
 
             
 
@@ -797,8 +939,12 @@
 
             
 
+            
+
              set to <see
              cref="F:System.Net.Security.ProtectionLevel.Sign" />
+
+            
 
             
 
@@ -830,8 +976,12 @@
 
             
 
+            
+
              property on <see
              cref="T:System.ServiceModel.MessageHeaderAttribute" />
+
+            
 
             
 
@@ -847,8 +997,12 @@
 
             
 
+            
+
              property on <see
              cref="T:System.ServiceModel.MessageBodyMemberAttribute" />
+
+            
 
             
 
@@ -864,8 +1018,12 @@
 
             
 
+            
+
             . If the binding does not support security (such as <see
              cref="T:System.ServiceModel.BasicHttpBinding" />
+
+            
 
             
 
@@ -878,6 +1036,8 @@
 
             
 
+            
+
              is <see
              cref="F:System.Net.Security.ProtectionLevel.None" />
 
@@ -885,8 +1045,12 @@
 
             
 
+            
+
              for the whole contract. The result is that depending upon the endpoint binding, clients can require different message or transport level security protection even when the contract specifies <see
              cref="F:System.Net.Security.ProtectionLevel.None" />
+
+            
 
             
 

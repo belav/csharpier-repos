@@ -43,12 +43,16 @@
 
         
 
+        
+
          is thrown when the attempt to retrieve a resource fails because the resource set for the neutral culture could not be loaded from a particular assembly. Although the exception is thrown when you try to retrieve a particular resource, it is caused by the failure to load the resource set rather than the failure to find the resource. </para
       >
       <block subset="none" type="note">
         <para
           >For additional information, see the "Handling a MissingManifestResourceException Exception" section in the <see
            cref="T:System.Resources.ResourceManager" />
+
+          
 
           
 
@@ -68,6 +72,8 @@
 
             
 
+            
+
              parameter in the call to the <see
              cref="M:System.Resources.ResourceManager.#ctor(System.String,System.Reflection.Assembly)" />
 
@@ -75,8 +81,12 @@
 
             
 
+            
+
              method specifies the root name of the resource set without a namespace, but the resource set is assigned a namespace when it is stored in its assembly, the call to the <see
              cref="M:System.Resources.ResourceManager.GetString(System.String)" />
+
+            
 
             
 
@@ -92,10 +102,14 @@
 
             
 
+            
+
             , you can use a reflection tool such as <format
              type="text/html">
               <a href="db27f6b2-f1ec-499e-be3a-7eecf95ca42b">ILDasm.exe</a>
             </format>
+
+            
 
             
 
@@ -108,8 +122,12 @@
 
             
 
+            
+
              label to open the <ui
             >MANIFEST</ui>
+
+            
 
             
 
@@ -128,8 +146,12 @@
 
             
 
+            
+
              (instead of <userInput
             >GlobalResources</userInput>
+
+            
 
             
 
@@ -142,8 +164,12 @@
 
             
 
+            
+
              parameter of the <see
              cref="M:System.Resources.ResourceManager.#ctor(System.String,System.Reflection.Assembly)" />
+
+            
 
             
 
@@ -163,6 +189,8 @@
 
         
 
+        
+
          uses the HRESULT COR_E_MISSINGMANIFESTRESOURCE, which has the value 0x80131532.</para
       >
       <para>
@@ -172,8 +200,12 @@
 
         
 
+        
+
          uses the default <see
          cref="M:System.Object.Equals(System.Object)" />
+
+        
 
         
 
@@ -189,8 +221,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Resources.MissingManifestResourceException.#ctor" />
+
+        
 
         
 
@@ -207,6 +243,8 @@
       <para
         >Unlike desktop apps, which deploy localized resources in satellite assemblies and typically store the resources of the neutral culture in the main assembly, win8_appname_long apps deploy resources for multiple cultures, including the neutral culture, in a single package resource index (.pri) file. As a result, in a win8_appname_long app, if resources for the preferred culture cannot be found, the <see
          cref="T:System.Resources.MissingManifestResourceException" />
+
+        
 
         
 
@@ -254,6 +292,8 @@
 
             
 
+            
+
             .</para
           >
           <list type="table">
@@ -292,6 +332,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -303,6 +345,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Resources.MissingManifestResourceException" />
+
+            
 
             
 
@@ -338,6 +382,8 @@
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Resources.MissingManifestResourceException" />
+
+            
 
             
 
@@ -381,6 +427,8 @@
 
                   
 
+                  
+
                    string. </para
                 >
               </description>
@@ -397,11 +445,15 @@
 
             
 
+            
+
              class with the specified error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -446,6 +498,8 @@
 
             
 
+            
+
              class from serialized data.</para
           >
         </summary>
@@ -456,10 +510,14 @@
 
           
 
+          
+
           The object that holds the serialized object data. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -500,8 +558,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -514,11 +576,15 @@
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Resources.MissingManifestResourceException" />
+
+            
 
             
 
@@ -569,11 +635,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -588,8 +658,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="inner" />
+
+          
 
           
 

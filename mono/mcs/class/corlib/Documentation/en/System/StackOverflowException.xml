@@ -46,6 +46,8 @@
 
         
 
+        
+
          exception.</para
       >
       <code lang="C#"
@@ -79,6 +81,8 @@ public class StackOverflowExample {
 
         
 
+        
+
          is thrown for execution stack overflow errors, typically in case of a very deep or unbounded recursion. The <see
          cref="F:System.Reflection.Emit.OpCodes.Localloc" />
 
@@ -86,8 +90,12 @@ public class StackOverflowExample {
 
         
 
+        
+
          Microsoft intermediate language (MSIL) instruction throws <see
          cref="T:System.StackOverflowException" />
+
+        
 
         
 
@@ -102,8 +110,12 @@ public class StackOverflowExample {
 
         
 
+        
+
          uses the HRESULT COR_E_STACKOVERFLOW, which has the value 0x800703E9. For a list of initial property values for a <see
          cref="T:System.StackOverflowException" />
+
+        
 
         
 
@@ -116,12 +128,16 @@ public class StackOverflowExample {
 
         
 
+        
+
          constructors.</para
       >
       <block subset="none" type="note">
         <para
           >The value of the inherited <see
            cref="P:System.Exception.Data" />
+
+          
 
           
 
@@ -141,11 +157,15 @@ public class StackOverflowExample {
 
         
 
+        
+
          object (for example, to recover from unbounded recursion). However, that practice is currently discouraged because significant additional code is required to reliably catch a stack overflow exception and continue program execution. </para
       >
       <para
         >Starting with the .NET Framework version 2.0, a <see
          cref="T:System.StackOverflowException" />
+
+        
 
         
 
@@ -160,10 +180,14 @@ public class StackOverflowExample {
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="ea527626-99e3-4995-81c4-c8f3e60eb6d5">Hosting the Common Language Runtime</a>
         </format>
+
+        
 
         
 
@@ -202,6 +226,8 @@ public class StackOverflowExample {
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.StackOverflowException" />
+
+            
 
             
 
@@ -252,8 +278,12 @@ public class StackOverflowExample {
 
             
 
+            
+
              class, setting the <see
              cref="P:System.Exception.Message" />
+
+            
 
             
 
@@ -291,6 +321,8 @@ public class StackOverflowExample {
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.StackOverflowException" />
+
+            
 
             
 
@@ -341,6 +373,8 @@ public class StackOverflowExample {
 
             
 
+            
+
              class with a specified error message.</para
           >
         </summary>
@@ -351,8 +385,12 @@ public class StackOverflowExample {
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -398,8 +436,12 @@ public class StackOverflowExample {
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -412,11 +454,15 @@ public class StackOverflowExample {
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.StackOverflowException" />
+
+            
 
             
 
@@ -467,11 +513,15 @@ public class StackOverflowExample {
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -486,8 +536,12 @@ public class StackOverflowExample {
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 

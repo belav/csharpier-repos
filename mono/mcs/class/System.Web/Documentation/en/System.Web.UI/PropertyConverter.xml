@@ -23,6 +23,8 @@
 
         
 
+        
+
          class is used by the ASP.NET page framework and is not intended to be accessed directly from your code. You can use the <see
          cref="T:System.Enum" />
 
@@ -30,8 +32,12 @@
 
         
 
+        
+
          structure to convert string values to and from enumerators, or <see
          cref="T:System.ComponentModel.TypeConverter" />
+
+        
 
         
 
@@ -70,12 +76,16 @@
 
             
 
+            
+
              method is used to convert a string value to its equivalent enumeration value.</para
           >
           <block subset="none" type="note">
             <para
               >This member supports the .NET Framework infrastructure and is not intended to be used directly from your code. To convert a string value to its equivalent enumeration value, use the <see
                cref="M:System.Enum.Parse(System.Type,System.String)" />
+
+              
 
               
 
@@ -99,11 +109,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="enumType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -116,8 +130,12 @@
 
           
 
+          
+
            that represents the enumeration type to create from the <paramref
            name="value" />
+
+          
 
           
 
@@ -132,8 +150,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -171,12 +193,16 @@
 
             
 
+            
+
              method is used to convert an enumeration value to its equivalent string representation.</para
           >
           <block subset="none" type="note">
             <para
               >This member supports the .NET Framework infrastructure and is not intended to be used directly from your code. To convert an enumeration value to its equivalent string representation, use the <see
                cref="M:System.Enum.Format(System.Type,System.Object,System.String)" />
+
+              
 
               
 
@@ -200,11 +226,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="enumType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -217,8 +247,12 @@
 
           
 
+          
+
            that represents the enumeration type of <paramref
            name="enumValue" />
+
+          
 
           
 
@@ -228,6 +262,8 @@
         >
         <param name="enumValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -266,6 +302,8 @@
 
             
 
+            
+
              method is used to convert a string value to an object.</para
           >
           <block subset="none" type="note">
@@ -277,8 +315,12 @@
 
               
 
+              
+
                object can be created from a string through the <see
                cref="M:System.Int32.Parse(System.String)" />
+
+              
 
               
 
@@ -302,11 +344,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="objType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -319,8 +365,12 @@
 
           
 
+          
+
            to create from <paramref
            name="value" />
+
+          
 
           
 
@@ -335,6 +385,8 @@
 
           
 
+          
+
           The properties to use during conversion.</param
         >
         <param name="value">
@@ -344,8 +396,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 

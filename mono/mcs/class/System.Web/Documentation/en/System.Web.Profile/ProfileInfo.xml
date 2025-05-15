@@ -21,10 +21,14 @@
 
         
 
+        
+
          class is used to represent information about a user profile from the data store, including the last date and time when profile properties were retrieved or updated, the user name associated with the profile, and whether the profile is for an anonymous or authenticated user.</para
       >
       <para>
         <see cref="T:System.Web.Profile.ProfileInfo" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          by the <see
          cref="M:System.Web.Profile.ProfileProvider.GetAllProfiles(System.Web.Profile.ProfileAuthenticationOption,System.Int32,System.Int32,System.Int32@)" />
+
+        
 
         
 
@@ -51,8 +59,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Web.Profile.ProfileProvider.FindProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.Int32,System.Int32,System.Int32@)" />
+
+        
 
         
 
@@ -65,8 +77,12 @@
 
         
 
+        
+
          methods of a <see
          cref="T:System.Web.Profile.ProfileProvider" />
+
+        
 
         
 
@@ -97,8 +113,12 @@
 
             
 
+            
+
              constructor is not intended to be used from your code. Instead, use the <see
              cref="M:System.Web.Profile.ProfileInfo.#ctor(System.String,System.Boolean,System.DateTime,System.DateTime,System.Int32)" />
+
+            
 
             
 
@@ -113,8 +133,12 @@
 
             
 
+            
+
              objects are constructed and returned as part of a <see
              cref="T:System.Web.Profile.ProfileInfoCollection" />
+
+            
 
             
 
@@ -127,8 +151,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Web.Profile.ProfileProvider.GetAllInactiveProfiles(System.Web.Profile.ProfileAuthenticationOption,System.DateTime,System.Int32,System.Int32,System.Int32@)" />
+
+            
 
             
 
@@ -141,6 +169,8 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Web.Profile.ProfileProvider.FindInactiveProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.DateTime,System.Int32,System.Int32,System.Int32@)" />
 
@@ -148,8 +178,12 @@
 
             
 
+            
+
              methods of a <see
              cref="T:System.Web.Profile.ProfileProvider" />
+
+            
 
             
 
@@ -168,8 +202,12 @@
 
             
 
+            
+
              object for a class that inherits the <see
              cref="T:System.Web.Profile.ProfileInfo" />
+
+            
 
             
 
@@ -208,10 +246,14 @@
 
             
 
+            
+
              object is used to represent information about a user profile from the data store, including the last date and time when profile properties were retrieved or updated, the user name associated with the profile, and whether the profile is for an anonymous or authenticated user.</para
           >
           <para>
             <see cref="T:System.Web.Profile.ProfileInfo" />
+
+            
 
             
 
@@ -224,8 +266,12 @@
 
             
 
+            
+
              by the <see
              cref="M:System.Web.Profile.ProfileProvider.GetAllProfiles(System.Web.Profile.ProfileAuthenticationOption,System.Int32,System.Int32,System.Int32@)" />
+
+            
 
             
 
@@ -238,8 +284,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Web.Profile.ProfileProvider.FindProfilesByUserName(System.Web.Profile.ProfileAuthenticationOption,System.String,System.Int32,System.Int32,System.Int32@)" />
+
+            
 
             
 
@@ -252,8 +302,12 @@
 
             
 
+            
+
              methods of a <see
              cref="T:System.Web.Profile.ProfileProvider" />
+
+            
 
             
 
@@ -272,11 +326,15 @@
 
             
 
+            
+
              class with the specified property values.</para
           >
         </summary>
         <param name="username">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -291,10 +349,14 @@
 
           
 
+          
+
           true to indicate the profile is for an anonymous user; false to indicate the profile is for an authenticated user.</param
         >
         <param name="lastActivityDate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -309,10 +371,14 @@
 
           
 
+          
+
           The last date and time when the profile was updated.</param
         >
         <param name="size">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -396,6 +462,8 @@
           <para
             >The <see
              cref="T:System.Web.Profile.SqlProfileProvider" />
+
+            
 
             
 

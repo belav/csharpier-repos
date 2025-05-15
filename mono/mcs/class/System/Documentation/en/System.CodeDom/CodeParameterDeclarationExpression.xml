@@ -43,11 +43,15 @@
 
         
 
+        
+
          can be used to represent code that declares a parameter for a method, property, or constructor.</para
       >
       <para
         >The <see
          cref="P:System.CodeDom.CodeParameterDeclarationExpression.Name" />
+
+        
 
         
 
@@ -60,6 +64,8 @@
 
         
 
+        
+
          property specifies the data type of the parameter. The <see
          cref="P:System.CodeDom.CodeParameterDeclarationExpression.Direction" />
 
@@ -67,8 +73,12 @@
 
         
 
+        
+
          property specifies the direction modifier of the parameter. The <see
          cref="P:System.CodeDom.CodeParameterDeclarationExpression.CustomAttributes" />
+
+        
 
         
 
@@ -104,6 +114,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeParameterDeclarationExpression" />
+
+            
 
             
 
@@ -146,6 +158,8 @@
 
             
 
+            
+
              class using the specified parameter type and name.</para
           >
         </summary>
@@ -156,10 +170,14 @@
 
           
 
+          
+
           An object that indicates the type of the parameter to declare. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -200,6 +218,8 @@
 
             
 
+            
+
              parameter references a generic type, it must follow the syntax conventions for generic types. Generic types are formatted as follows: the name of the type, followed by a grave accent ("`"), followed by a count of the generic type arguments, followed by the parameters delimited with brackets.</para
           >
           <block subset="none" type="note">
@@ -208,6 +228,8 @@
           <para
             >To avoid the possibility of making a syntactic mistake, consider using the <see
              cref="M:System.CodeDom.CodeParameterDeclarationExpression.#ctor(System.Type,System.String)" />
+
+            
 
             
 
@@ -226,6 +248,8 @@
 
             
 
+            
+
              class using the specified parameter type and name.</para
           >
         </summary>
@@ -236,10 +260,14 @@
 
           
 
+          
+
           The type of the parameter to declare. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -281,6 +309,8 @@
 
             
 
+            
+
              class using the specified parameter type and name.</para
           >
         </summary>
@@ -291,10 +321,14 @@
 
           
 
+          
+
           The type of the parameter to declare. </param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

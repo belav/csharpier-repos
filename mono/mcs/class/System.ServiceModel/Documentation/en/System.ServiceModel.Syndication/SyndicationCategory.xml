@@ -54,6 +54,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -87,8 +89,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+
+            
 
             
 
@@ -104,6 +110,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
 
@@ -111,8 +119,12 @@
 
           
 
+          
+
            instance to initialize the new <see
            cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+
+          
 
           
 
@@ -147,11 +159,15 @@
 
             
 
+            
+
              class with the given name.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -191,11 +207,15 @@
 
             
 
+            
+
              class with the specified name, scheme, and label.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -210,10 +230,14 @@
 
           
 
+          
+
           A Uniform Resource Identifier (URI) that represents the categorization scheme to which this category belongs.</param
         >
         <param name="label">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -246,6 +270,8 @@
           <para
             >The syndication object model allows you to add custom attributes to a <see
              cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+
+            
 
             
 
@@ -289,6 +315,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -297,6 +325,8 @@
           <para
             >A new <see
              cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+
+            
 
             
 
@@ -357,8 +387,12 @@
 
             
 
+            
+
              is written to the label attribute of the &lt;category&gt; element. <see
              cref="P:System.ServiceModel.Syndication.SyndicationCategory.Label" />
+
+            
 
             
 
@@ -395,8 +429,12 @@
 
             
 
+            
+
              is written to the term attribute of the &lt;category&gt; element. <see
              cref="P:System.ServiceModel.Syndication.SyndicationCategory.Label" />
+
+            
 
             
 
@@ -433,11 +471,15 @@
 
             
 
+            
+
              property is written to the scheme attribute of the &lt;category&gt; element. </para
           >
           <para
             >When serialized to RSS 2.0, the <see
              cref="P:System.ServiceModel.Syndication.SyndicationCategory.Scheme" />
+
+            
 
             
 
@@ -485,6 +527,8 @@
 
             
 
+            
+
              and override this method. This method is called for all unrecognized attribute extensions.</para
           >
         </remarks>
@@ -503,10 +547,14 @@
 
           
 
+          
+
           The name of the element.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -521,10 +569,14 @@
 
           
 
+          
+
           The attribute to parse.</param
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -565,6 +617,8 @@
 
             
 
+            
+
              and override this method. This method is called for all unrecognized attribute extensions.</para
           >
         </remarks>
@@ -583,8 +637,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -594,6 +652,8 @@
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -634,6 +694,8 @@
 
             
 
+            
+
              and override this method. This method is called for all unrecognized attribute extensions.</para
           >
         </remarks>
@@ -648,8 +710,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -659,6 +725,8 @@
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -699,6 +767,8 @@
 
             
 
+            
+
              and override this method. This method is called for all unrecognized element extensions.</para
           >
         </remarks>
@@ -713,8 +783,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -724,6 +798,8 @@
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

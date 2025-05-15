@@ -102,6 +102,8 @@
 
           
 
+          
+
           The schema name to add to this collection.</param
         >
       </Docs>
@@ -138,6 +140,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -295,6 +299,8 @@
 
             
 
+            
+
              parameter equals the number of items in the collection, this method appends the value to the end of the collection.</para
           >
         </remarks>
@@ -341,6 +347,8 @@
 
             
 
+            
+
              property gets the number of objects in this collection.          </para
           >
         </summary>
@@ -375,8 +383,12 @@
 
         
 
+        
+
          property of a <see
          cref="T:System.DirectoryServices.DirectoryEntries" />
+
+        
 
         
 

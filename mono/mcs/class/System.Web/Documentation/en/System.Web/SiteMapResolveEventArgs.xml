@@ -21,8 +21,12 @@
 
         
 
+        
+
          class is used in the <see
          cref="M:System.Web.SiteMapProvider.ResolveSiteMapNode(System.Web.HttpContext)" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          event to return an instance of the <see
          cref="T:System.Web.SiteMapNode" />
+
+        
 
         
 
@@ -49,8 +57,12 @@
 
         
 
+        
+
          event, you can create a <see
          cref="T:System.Web.SiteMapNode" />
+
+        
 
         
 
@@ -69,8 +81,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.SiteMapProvider" />
+
+        
 
         
 
@@ -103,8 +119,12 @@
 
             
 
+            
+
              and <paramref
              name="provider" />
+
+            
 
             
 
@@ -120,8 +140,12 @@
 
             
 
+            
+
              object initializes a new instance of the <see
              cref="T:System.Web.SiteMapResolveEventArgs" />
+
+            
 
             
 
@@ -140,6 +164,8 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.Web.HttpContext" />
 
@@ -147,8 +173,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.SiteMapProvider" />
+
+            
 
             
 
@@ -164,8 +194,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -180,6 +214,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SiteMapProvider" />
 
@@ -187,8 +223,12 @@
 
           
 
+          
+
            that raised the <see
            cref="E:System.Web.SiteMapProvider.SiteMapResolve" />
+
+          
 
           
 
@@ -220,6 +260,8 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.SiteMapProvider" />
 
@@ -227,8 +269,12 @@
 
             
 
+            
+
              objects to dynamically create a <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -265,6 +311,8 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.SiteMapProvider" />
 
@@ -272,8 +320,12 @@
 
             
 
+            
+
              objects to dynamically create a <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -292,8 +344,12 @@
 
             
 
+            
+
              object that raised the <see
              cref="E:System.Web.SiteMapProvider.SiteMapResolve" />
+
+            
 
             
 

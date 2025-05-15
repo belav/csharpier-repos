@@ -30,8 +30,12 @@
 
         
 
+        
+
          is thrown when a call is made to a faulted communication object. <see
          cref="T:System.ServiceModel.CommunicationObjectFaultedException" />
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
          and can occur in correct applications. Because typically the code that calls the <see
          cref="M:System.ServiceModel.ICommunicationObject.Abort" />
+
+        
 
         
 
@@ -58,12 +66,16 @@
 
         
 
+        
+
         , this exception indicates that the call failed but the most useful error information is elsewhere.</para
       >
       <block subset="none" type="note">
         <para
           >If an object is faulted with several pending calls, only one call throws a specific exception; the others throw <see
            cref="T:System.ServiceModel.CommunicationObjectFaultedException" />
+
+          
 
           
 
@@ -101,6 +113,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -109,6 +123,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.CommunicationObjectFaultedException" />
+
+            
 
             
 
@@ -147,8 +163,12 @@
 
             
 
+            
+
              using the specified <paramref
              name="message" />
+
+            
 
             
 
@@ -162,6 +182,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.CommunicationObjectFaultedException" />
+
+            
 
             
 
@@ -200,6 +222,8 @@
 
             
 
+            
+
              object from a stream.</para
           >
         </remarks>
@@ -213,6 +237,8 @@
 
             
 
+            
+
              class when deserializing a stream using the specified <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
@@ -220,8 +246,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -237,10 +267,14 @@
 
           
 
+          
+
           The serialization information used to create the exception object.</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -280,6 +314,8 @@
 
             
 
+            
+
              using the specified <paramref
              name="message" />
 
@@ -287,8 +323,12 @@
 
             
 
+            
+
              and <paramref
              name="innerException" />
+
+            
 
             
 
@@ -302,6 +342,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.CommunicationObjectFaultedException" />
+
+            
 
             
 

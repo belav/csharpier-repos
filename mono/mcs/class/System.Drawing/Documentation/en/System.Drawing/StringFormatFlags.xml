@@ -27,8 +27,12 @@
 
         
 
+        
+
          is used by the <see
          cref="T:System.Drawing.StringFormat" />
+
+        
 
         
 
@@ -40,6 +44,8 @@
         <para
           >The <see
            cref="F:System.Drawing.StringFormatFlags.FitBlackBox" />
+
+          
 
           
 
@@ -164,6 +170,8 @@
           <para
             >Includes the trailing space at the end of each line. By default the boundary rectangle returned by the <see
              cref="Overload:System.Drawing.Graphics.MeasureString" />
+
+            
 
             
 

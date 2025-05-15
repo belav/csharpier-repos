@@ -23,6 +23,8 @@
 
         
 
+        
+
         , the underlying file or stream must support reading, but does not have to support seeking. If the underlying file or stream supports seeking, the files are read from the archive as they are requested. If the underlying file or stream does not support seeking, the entire archive is held in memory. </para
       >
       <para
@@ -33,8 +35,12 @@
 
         
 
+        
+
         , the underlying file or stream must support writing, but does not have to support seeking. Each entry in the archive can be opened only once for writing. If you create a single entry, the data is written to the underlying stream or file as soon as it is available. If you create multiple entries, such as by calling the <see
          cref="M:System.IO.Compression.ZipFile.CreateFromDirectory(System.String,System.String,System.IO.Compression.CompressionLevel,System.Boolean)" />
+
+        
 
         
 
@@ -50,11 +56,15 @@
 
         
 
+        
+
         , the underlying file or stream must support reading, writing, and seeking. The content of the entire archive is held in memory, and no data is written to the underlying file or stream until the archive is disposed.</para
       >
       <para
         >The following methods include a parameter named <paramref
          name="mode" />
+
+        
 
         
 

@@ -21,8 +21,12 @@
 
         
 
+        
+
          abstract class provides the common methods and properties shared between the <see
          cref="T:System.Web.Hosting.VirtualFile" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          objects. Implementations of these classes provide the ASP.NET runtime with access to files and paths used for compilation. For more information on using virtual files and paths, see the <see
          cref="T:System.Web.Hosting.VirtualPathProvider" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.Hosting.VirtualDirectory" />
+
+        
 
         
 
@@ -78,6 +90,8 @@
           <para
             >Although you cannot directly construct an instance of the <see
              cref="T:System.Web.Hosting.VirtualFileBase" />
+
+            
 
             
 
@@ -114,6 +128,8 @@
 
             
 
+            
+
              method on its base class. It always returns null and thereby prevents a lease from being created that would limit the lifetime of the virtual file or directory.</para
           >
         </remarks>
@@ -122,6 +138,8 @@
           <para
             >Gives a <see
              cref="T:System.Web.Hosting.VirtualFileBase" />
+
+            
 
             
 
@@ -159,6 +177,8 @@
 
             
 
+            
+
              instance represents a virtual file or a virtual directory.</para
           >
         </summary>
@@ -181,6 +201,8 @@
           <para
             >The <see
              cref="P:System.Web.Hosting.VirtualFileBase.Name" />
+
+            
 
             
 
@@ -212,6 +234,8 @@
           <para
             >The <see
              cref="P:System.Web.Hosting.VirtualFileBase.VirtualPath" />
+
+            
 
             
 

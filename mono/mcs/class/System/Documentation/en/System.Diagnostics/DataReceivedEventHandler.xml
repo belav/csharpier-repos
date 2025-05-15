@@ -37,10 +37,14 @@
 
         
 
+        
+
          delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event-handler delegates, see <format
          type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
         </format>
+
+        
 
         
 
@@ -56,8 +60,12 @@
 
         
 
+        
+
          or <see
          cref="P:System.Diagnostics.Process.StandardError" />
+
+        
 
         
 
@@ -70,8 +78,12 @@
 
         
 
+        
+
          or <see
          cref="E:System.Diagnostics.Process.ErrorDataReceived" />
+
+        
 
         
 
@@ -84,6 +96,8 @@
 
         
 
+        
+
          property. For example, you can use the static method <see
          cref="M:System.String.IsNullOrEmpty(System.String)" />
 
@@ -91,8 +105,12 @@
 
         
 
+        
+
          to validate the <see
          cref="P:System.Diagnostics.DataReceivedEventArgs.Data" />
+
+        
 
         
 
@@ -111,6 +129,8 @@
 
         
 
+        
+
          event or <see
          cref="E:System.Diagnostics.Process.ErrorDataReceived" />
 
@@ -118,8 +138,12 @@
 
         
 
+        
+
          event of a <see
          cref="T:System.Diagnostics.Process" />
+
+        
 
         
 

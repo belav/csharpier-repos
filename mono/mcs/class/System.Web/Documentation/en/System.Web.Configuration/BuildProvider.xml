@@ -44,11 +44,15 @@
 
             
 
+            
+
              class, initialized to the provided values.</para
           >
         </summary>
         <param name="extension">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -63,8 +67,12 @@
 
           
 
+          
+
           The type that represents the <see
            cref="T:System.Web.Configuration.BuildProvider" />
+
+          
 
           
 
@@ -102,6 +110,8 @@
         </returns>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -206,6 +216,8 @@
           <para
             >Gets or set the comma-separated class and assembly combination that indicates the <see
              cref="T:System.Web.Configuration.BuildProvider" />
+
+            
 
             
 

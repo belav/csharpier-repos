@@ -29,6 +29,8 @@
 
         
 
+        
+
          is used to simplify the view in the debug window. Use of the <see
          cref="T:System.Diagnostics.DebuggerDisplayAttribute" />
 
@@ -36,8 +38,12 @@
 
         
 
+        
+
          attribute using this enumeration can result in a much simpler and more pleasing view in the debug window. See the <see
          cref="T:System.Diagnostics.DebuggerBrowsableAttribute" />
+
+        
 
         
 

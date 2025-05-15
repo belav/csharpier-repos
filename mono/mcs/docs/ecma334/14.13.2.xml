@@ -8,6 +8,8 @@
 
     
 
+    
+
     ) as if the operation was written x op y. Then, <list
     >
       <list_item> If the return type of the selected operator is implicitly convertible to the type of x, the operation is evaluated as x = x op y, except that x is evaluated only once. </list_item>
@@ -25,6 +27,8 @@
 
       
 
+      
+
       , the methods are invoked only once, in the order A, B, C. end example]</example
     >
   </paragraph>
@@ -37,8 +41,12 @@
 
     
 
+    
+
     , <keyword
     >byte</keyword>
+
+    
 
     
 
@@ -51,8 +59,12 @@
 
     
 
+    
+
     , <keyword
     >ushort</keyword>
+
+    
 
     
 
@@ -65,8 +77,12 @@
 
     
 
+    
+
     . Even when both arguments are of one of those types, the predefined operators produce a result of type <keyword
     >int</keyword>
+
+    
 
     
 
@@ -79,6 +95,8 @@
 
     
 
+    
+
     . Thus, without a cast it would not be possible to assign the result to the left operand. </paragraph
   >
   <paragraph
@@ -86,7 +104,7 @@
 
       >[Example: In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 byte b = 0;  
 char ch = '\0';  
 int i = 0;  
@@ -98,6 +116,8 @@ ch += 1;       // Error, ch = 1 not permitted
 ch += (char)1;   // Ok  
 ]]>
       </code_example>
+
+      
 
       
 

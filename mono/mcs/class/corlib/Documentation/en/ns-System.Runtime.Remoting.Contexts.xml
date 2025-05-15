@@ -16,6 +16,8 @@
 
         
 
+        
+
          namespace contains objects that define the contexts all objects reside within. A context is an ordered sequence of properties that defines an environment for the objects within it. Contexts are created during the activation process for objects that are configured to require certain automatic services such synchronization, transactions, just-in-time (JIT) activation, security, and so on. Multiple objects can live inside a context.</para
       >
     </summary>

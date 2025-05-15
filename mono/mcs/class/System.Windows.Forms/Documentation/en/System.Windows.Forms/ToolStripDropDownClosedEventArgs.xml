@@ -24,6 +24,8 @@
 
         
 
+        
+
          method to make decisions about actions to take when a drop-down control closes. </para
       >
     </remarks>
@@ -32,6 +34,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.ToolStripDropDown.Closed" />
+
+        
 
         
 
@@ -63,6 +67,8 @@
 
             
 
+            
+
              constructor to make decisions about actions to take when a drop-down control closes for the specified reason.</para
           >
         </remarks>
@@ -71,6 +77,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ToolStripDropDownClosedEventArgs" />
+
+            
 
             
 
@@ -86,8 +94,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.ToolStripDropDownCloseReason" />
+
+          
 
           
 
@@ -118,6 +130,8 @@
           <para
             >Gets the reason that the <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 

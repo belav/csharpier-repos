@@ -31,8 +31,12 @@
 
         
 
+        
+
          determines whether the current user is permitted access to the requested URL, based on the user <see
          cref="P:System.Security.Principal.IIdentity.Name" />
+
+        
 
         
 
@@ -47,12 +51,16 @@
 
         
 
+        
+
         . For information about how to manage user roles, see <format
          type="text/html">
           <a href="01954ce4-39a2-487f-8153-a69f6f6f3195"
             >Managing Authorization Using ASP.NET Roles</a
           >
         </format>
+
+        
 
         
 
@@ -70,8 +78,12 @@
 
         
 
+        
+
          configuration element. You can allow or deny a user or a role using the allow or deny subelements, respectively. The allow and deny subelements are interpreted in the order they appear in the configuration. Once an element specifies that access is allowed or denied, the <see
          cref="T:System.Web.Security.UrlAuthorizationModule" />
+
+        
 
         
 
@@ -81,6 +93,8 @@
          type="text/html">
           <a href="2d3d9bf6-f914-4c30-ad03-32eea98fa612">authorization</a>
         </format>
+
+        
 
         
 
@@ -118,6 +132,8 @@
 
             
 
+            
+
              class. After calling the constructor, it calls the <see
              cref="M:System.Web.Security.UrlAuthorizationModule.Init(System.Web.HttpApplication)" />
 
@@ -125,8 +141,12 @@
 
             
 
+            
+
              method to initialize the new <see
              cref="T:System.Web.Security.UrlAuthorizationModule" />
+
+            
 
             
 
@@ -140,6 +160,8 @@
           <para
             >Creates an instance of the <see
              cref="T:System.Web.Security.UrlAuthorizationModule" />
+
+            
 
             
 
@@ -182,11 +204,15 @@
 
             
 
+            
+
              method checks to see whether the current user is granted access to the requested file in the Web.config file for the application.</para
           >
           <para
             >If the HTTP verb used to make the request is GET, POST, or HEAD, the <see
              cref="M:System.Web.Security.UrlAuthorizationModule.CheckUrlAccessForPrincipal(System.String,System.Security.Principal.IPrincipal,System.String)" />
+
+            
 
             
 
@@ -199,11 +225,15 @@
 
             
 
+            
+
              checks for read/write access to the file.</para
           >
           <para
             >For more information and an example Web.config file, see the <see
              cref="T:System.Web.Security.UrlAuthorizationModule" />
+
+            
 
             
 
@@ -227,10 +257,14 @@
 
           
 
+          
+
           The virtual path to the file.</param
         >
         <param name="user">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -243,10 +277,14 @@
 
           
 
+          
+
            object representing the current user.</param
         >
         <param name="verb">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -273,6 +311,8 @@
           <para
             >Releases all resources, other than memory, used by the <see
              cref="T:System.Web.Security.UrlAuthorizationModule" />
+
+            
 
             
 
@@ -308,6 +348,8 @@
 
             
 
+            
+
              method ensures that the <see
              cref="T:System.Web.Security.UrlAuthorizationModule" />
 
@@ -315,8 +357,12 @@
 
             
 
+            
+
              is included in the processing of the <see
              cref="E:System.Web.HttpApplication.AuthorizeRequest" />
+
+            
 
             
 
@@ -335,6 +381,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -345,8 +393,12 @@
 
           
 
+          
+
           The current <see
            cref="T:System.Web.HttpApplication" />
+
+          
 
           
 

@@ -31,8 +31,12 @@
 
         
 
+        
+
          class represents an individual cell in a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          collection of a <see
          cref="T:System.Windows.Forms.DataGridViewRow" />
+
+        
 
         
 
@@ -62,8 +70,12 @@
 
         
 
+        
+
          identify the cell's location in the <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -77,6 +89,8 @@
       <para
         >Represents an individual cell in a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -99,6 +113,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.DataGridViewCell" />
+
+            
 
             
 
@@ -134,11 +150,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >If no <see
              cref="T:System.Windows.Forms.AccessibleObject" />
+
+            
 
             
 
@@ -155,12 +175,16 @@
 
               
 
+              
+
                property, you must add a reference to the Accessibility assembly installed with the dnprdnshort.</para
             >
           </block>
           <para
             >For more information about accessible objects, see the "Active Accessibility" section of the MSDN Library at <see
              cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>
+
+            
 
             
 
@@ -179,8 +203,12 @@
 
             
 
+            
+
              assigned to the <see
              cref="T:System.Windows.Forms.DataGridViewCell" />
+
+            
 
             
 
@@ -234,8 +262,12 @@
 
             
 
+            
+
              control internally calls the <see
              cref="M:System.Windows.Forms.DataGridViewCell.AdjustCellBorderStyle(System.Windows.Forms.DataGridViewAdvancedBorderStyle,System.Windows.Forms.DataGridViewAdvancedBorderStyle,System.Boolean,System.Boolean,System.Boolean,System.Boolean)" />
+
+            
 
             
 
@@ -248,8 +280,12 @@
 
             
 
+            
+
              control typically uses the value of the <see
              cref="P:System.Windows.Forms.DataGridView.AdvancedCellBorderStyle" />
+
+            
 
             
 
@@ -262,11 +298,15 @@
 
             
 
+            
+
              parameter. </para
           >
           <para
             >The <see
              cref="F:System.Windows.Forms.DataGridViewAdvancedCellBorderStyle.OutsetPartial" />
+
+            
 
             
 
@@ -289,6 +329,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -299,8 +341,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
+
+          
 
           
 
@@ -315,8 +361,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
+
+          
 
           
 
@@ -331,10 +381,14 @@
 
           
 
+          
+
           true to add a vertical border to the cell; otherwise, false. </param
         >
         <param name="singleHorizontalBorderAdded">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -349,10 +403,14 @@
 
           
 
+          
+
           true if the hosting cell is in the first visible column; otherwise, false. </param
         >
         <param name="isFirstDisplayedRow">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -397,6 +455,8 @@
 
             
 
+            
+
              values to modify the width of the border:</para
           >
           <list type="bullet">
@@ -404,6 +464,8 @@
               <para
                 >The <see
                  cref="F:System.Windows.Forms.DataGridViewAdvancedCellBorderStyle.None" />
+
+                
 
                 
 
@@ -421,8 +483,12 @@
 
                 
 
+                
+
                  or <see
                  cref="F:System.Windows.Forms.DataGridViewAdvancedCellBorderStyle.InsetDouble" />
+
+                
 
                 
 
@@ -440,8 +506,12 @@
 
             
 
+            
+
              property is set for the cell's owning row, the rectangle's height is increased by the value of <see
              cref="P:System.Windows.Forms.DataGridViewRow.DividerHeight" />
+
+            
 
             
 
@@ -454,8 +524,12 @@
 
             
 
+            
+
              property is set for the cell's owning column, the rectangle's width will be increased by the value of <see
              cref="P:System.Windows.Forms.DataGridViewColumn.DividerWidth" />
+
+            
 
             
 
@@ -474,6 +548,8 @@
 
             
 
+            
+
              that represents the widths of all the cell margins. </para
           >
         </summary>
@@ -482,6 +558,8 @@
           <para
             >A <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -497,8 +575,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
+
+          
 
           
 
@@ -535,6 +617,8 @@
 
             
 
+            
+
              method is called just before the <see
              cref="M:System.Windows.Forms.DataGridViewCell.OnClick(System.Windows.Forms.DataGridViewCellEventArgs)" />
 
@@ -542,8 +626,12 @@
 
             
 
+            
+
              method. It must return true if the call to <see
              cref="M:System.Windows.Forms.DataGridViewCell.OnClick(System.Windows.Forms.DataGridViewCellEventArgs)" />
+
+            
 
             
 
@@ -558,6 +646,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -580,11 +670,15 @@
 
             
 
+            
+
              class always returns false.</para
           >
         </returns>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -597,8 +691,12 @@
 
           
 
+          
+
            containing the data passed to the <see
            cref="M:System.Windows.Forms.DataGridViewCell.OnClick(System.Windows.Forms.DataGridViewCellEventArgs)" />
+
+          
 
           
 
@@ -630,8 +728,12 @@
 
             
 
+            
+
              method whenever you derive from the <see
              cref="T:System.Windows.Forms.DataGridViewCell" />
+
+            
 
             
 
@@ -654,8 +756,12 @@
 
             
 
+            
+
              that represents the cloned <see
              cref="T:System.Windows.Forms.DataGridViewCell" />
+
+            
 
             
 
@@ -714,8 +820,12 @@
 
             
 
+            
+
              method to get its value. For the base <see
              cref="T:System.Windows.Forms.DataGridViewCell" />
+
+            
 
             
 
@@ -728,11 +838,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >To get the bounding rectangle of the cell rather than the cell contents, use the <see
              cref="M:System.Windows.Forms.DataGridView.GetCellDisplayRectangle(System.Int32,System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -779,6 +893,8 @@
 
             
 
+            
+
              method is called just before the <see
              cref="M:System.Windows.Forms.DataGridViewCell.OnContentClick(System.Windows.Forms.DataGridViewCellEventArgs)" />
 
@@ -786,8 +902,12 @@
 
             
 
+            
+
              method. It must return true if the call to <see
              cref="M:System.Windows.Forms.DataGridViewCell.OnContentClick(System.Windows.Forms.DataGridViewCellEventArgs)" />
+
+            
 
             
 
@@ -802,6 +922,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -824,11 +946,15 @@
 
             
 
+            
+
              class always returns false.</para
           >
         </returns>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -841,8 +967,12 @@
 
           
 
+          
+
            containing the data passed to the <see
            cref="M:System.Windows.Forms.DataGridViewCell.OnContentClick(System.Windows.Forms.DataGridViewCellEventArgs)" />
+
+          
 
           
 
@@ -879,6 +1009,8 @@
 
             
 
+            
+
              method is called just before the <see
              cref="M:System.Windows.Forms.DataGridViewCell.OnContentDoubleClick(System.Windows.Forms.DataGridViewCellEventArgs)" />
 
@@ -886,8 +1018,12 @@
 
             
 
+            
+
              method. It must return true if the call to <see
              cref="M:System.Windows.Forms.DataGridViewCell.OnContentDoubleClick(System.Windows.Forms.DataGridViewCellEventArgs)" />
+
+            
 
             
 
@@ -902,6 +1038,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -924,11 +1062,15 @@
 
             
 
+            
+
              class always returns false.</para
           >
         </returns>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -941,8 +1083,12 @@
 
           
 
+          
+
            containing the data passed to the <see
            cref="M:System.Windows.Forms.DataGridViewCell.OnContentDoubleClick(System.Windows.Forms.DataGridViewCellEventArgs)" />
+
+          
 
           
 
@@ -985,8 +1131,12 @@
 
             
 
+            
+
              control <see
              cref="P:System.Windows.Forms.DataGridView.DataSource" />
+
+            
 
             
 
@@ -999,8 +1149,12 @@
 
             
 
+            
+
              property is true, getting the value of the <see
              cref="P:System.Windows.Forms.DataGridViewCell.ContextMenuStrip" />
+
+            
 
             
 
@@ -1013,6 +1167,8 @@
 
             
 
+            
+
              event of the control and returns the value of the <see
              cref="P:System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventArgs.ContextMenuStrip" />
 
@@ -1020,8 +1176,12 @@
 
             
 
+            
+
              property as specified in the event handler. If there are no handlers for the event, getting the value of the <see
              cref="P:System.Windows.Forms.DataGridViewCell.ContextMenuStrip" />
+
+            
 
             
 
@@ -1037,8 +1197,12 @@
 
             
 
+            
+
              event is primarily useful when working with large amounts of data to avoid performance penalties when setting the cell <see
              cref="P:System.Windows.Forms.DataGridViewCell.ContextMenuStrip" />
+
+            
 
             
 
@@ -1055,6 +1219,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -1065,8 +1231,12 @@
 
             
 
+            
+
              event on the owning <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -1082,8 +1252,12 @@
 
             
 
+            
+
              property or handling the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -1096,8 +1270,12 @@
 
             
 
+            
+
              event. The cell <see
              cref="P:System.Windows.Forms.DataGridViewCell.ContextMenuStrip" />
+
+            
 
             
 
@@ -1110,8 +1288,12 @@
 
             
 
+            
+
              property setting, and the <see
              cref="E:System.Windows.Forms.DataGridView.CellContextMenuStripNeeded" />
+
+            
 
             
 
@@ -1124,8 +1306,12 @@
 
             
 
+            
+
              event and the row <see
              cref="P:System.Windows.Forms.DataGridViewRow.ContextMenuStrip" />
+
+            
 
             
 
@@ -1162,8 +1348,12 @@
 
             
 
+            
+
              method, it will be called when the <see
              cref="P:System.Windows.Forms.DataGridViewCell.AccessibilityObject" />
+
+            
 
             
 
@@ -1175,6 +1365,8 @@
             <para
               >To get or set <see
                cref="P:System.Windows.Forms.DataGridViewCell.AccessibilityObject" />
+
+              
 
               
 
@@ -1194,6 +1386,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -1207,8 +1401,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Windows.Forms.DataGridViewCell" />
+
+            
 
             
 
@@ -1241,8 +1439,12 @@
 
             
 
+            
+
              property in the base class <see
              cref="T:System.Windows.Forms.DataGridViewCell" />
+
+            
 
             
 
@@ -1253,6 +1455,8 @@
           <para
             >The value returned by this property is displayed if the cell is in the row for new records. This value can be overridden by a handler for the <see
              cref="E:System.Windows.Forms.DataGridView.DefaultValuesNeeded" />
+
+            
 
             
 
@@ -1294,6 +1498,8 @@
 
             
 
+            
+
              calls this method when the current cell hosts an editing control and editing mode ends. This method removes the <see
              cref="P:System.Windows.Forms.DataGridView.EditingControl" />
 
@@ -1301,8 +1507,12 @@
 
             
 
+            
+
              from the <see
              cref="P:System.Windows.Forms.DataGridView.EditingPanel" />
+
+            
 
             
 
@@ -1315,6 +1525,8 @@
 
             
 
+            
+
              from the <see
              cref="P:System.Windows.Forms.Control.Controls" />
 
@@ -1322,8 +1534,12 @@
 
             
 
+            
+
              collection of the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -1337,6 +1553,8 @@
           <para
             >Removes the cell's editing control from the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -1370,6 +1588,8 @@
           <para
             >If the cell's <see
              cref="P:System.Windows.Forms.DataGridViewCell.Visible" />
+
+            
 
             
 
@@ -1411,8 +1631,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Windows.Forms.DataGridViewCell" />
+
+            
 
             
 
@@ -1425,8 +1649,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Windows.Forms.DataGridViewCell" />
+
+            
 
             
 
@@ -1439,6 +1667,8 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Windows.Forms.DataGridViewCell" />
 
@@ -1446,8 +1676,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Windows.Forms.DataGridViewCell" />
+
+            
 
             
 
@@ -1462,10 +1696,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -1482,6 +1720,8 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.Windows.Forms.DataGridViewCell" />
 
@@ -1489,8 +1729,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Windows.Forms.DataGridViewCell" />
+
+              
 
               
 
@@ -1505,6 +1749,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.Windows.Forms.DataGridViewCell" />
+
+            
 
             
 
@@ -1539,8 +1785,12 @@
 
             
 
+            
+
              method. Dispose invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -1553,8 +1803,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -1570,8 +1824,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Windows.Forms.DataGridViewCell" />
+
+            
 
             
 
@@ -1590,11 +1848,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1631,6 +1893,8 @@
 
             
 
+            
+
              method is called just before the <see
              cref="M:System.Windows.Forms.DataGridViewCell.OnDoubleClick(System.Windows.Forms.DataGridViewCellEventArgs)" />
 
@@ -1638,8 +1902,12 @@
 
             
 
+            
+
              method. It must return true if the call to <see
              cref="M:System.Windows.Forms.DataGridViewCell.OnDoubleClick(System.Windows.Forms.DataGridViewCellEventArgs)" />
+
+            
 
             
 
@@ -1654,6 +1922,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -1676,11 +1946,15 @@
 
             
 
+            
+
              class always returns false.</para
           >
         </returns>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1693,8 +1967,12 @@
 
           
 
+          
+
            containing the data passed to the <see
            cref="M:System.Windows.Forms.DataGridViewCell.OnDoubleClick(System.Windows.Forms.DataGridViewCellEventArgs)" />
+
+          
 
           
 
@@ -1726,8 +2004,12 @@
 
             
 
+            
+
              property. This raises the <see
              cref="E:System.Windows.Forms.DataGridView.CellFormatting" />
+
+            
 
             
 
@@ -1743,8 +2025,12 @@
 
             
 
+            
+
              event occurs. If there is no handler for this event or the handler sets the <see
              cref="P:System.Windows.Forms.DataGridViewDataErrorEventArgs.ThrowException" />
+
+            
 
             
 
@@ -1789,8 +2075,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Windows.Forms.DataGridViewCell.EditType" />
+
+            
 
             
 
@@ -1843,6 +2133,8 @@
 
             
 
+            
+
              method is called just before the <see
              cref="M:System.Windows.Forms.DataGridViewCell.OnEnter(System.Int32,System.Boolean)" />
 
@@ -1850,8 +2142,12 @@
 
             
 
+            
+
              method. It must return true if the call to <see
              cref="M:System.Windows.Forms.DataGridViewCell.OnEnter(System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -1866,6 +2162,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -1888,6 +2186,8 @@
 
             
 
+            
+
              class always returns false.</para
           >
         </returns>
@@ -1898,10 +2198,14 @@
 
           
 
+          
+
           The index of the cell's parent row.</param
         >
         <param name="throughMouseClick">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1934,8 +2238,12 @@
 
             
 
+            
+
              property is false, the value of this property is <see
              cref="F:System.Drawing.Rectangle.Empty" />
+
+            
 
             
 
@@ -1951,6 +2259,8 @@
 
             
 
+            
+
              method to get its value. For the base <see
              cref="T:System.Windows.Forms.DataGridViewCell" />
 
@@ -1958,8 +2268,12 @@
 
             
 
+            
+
              type, this value is always <see
              cref="F:System.Drawing.Rectangle.Empty" />
+
+            
 
             
 
@@ -2004,8 +2318,12 @@
 
             
 
+            
+
              property is used when handling the <see
              cref="E:System.Windows.Forms.DataGridView.CellValidating" />
+
+            
 
             
 
@@ -2018,8 +2336,12 @@
 
             
 
+            
+
             . If the cell's value fails some validation criteria, set the <see
              cref="P:System.Windows.Forms.DataGridViewCell.ErrorText" />
+
+            
 
             
 
@@ -2032,6 +2354,8 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.DataGridViewCellValidatingEventArgs" />
 
@@ -2039,8 +2363,12 @@
 
             
 
+            
+
              to true. The text you specify is then displayed by the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -2056,8 +2384,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -2070,8 +2402,12 @@
 
             
 
+            
+
              and <see
              cref="E:System.Windows.Forms.DataGridView.CellErrorTextNeeded" />
+
+            
 
             
 
@@ -2087,6 +2423,8 @@
 
             
 
+            
+
              string to a cell, the <see
              cref="E:System.Windows.Forms.DataGridView.CellErrorTextChanged" />
 
@@ -2094,8 +2432,12 @@
 
             
 
+            
+
              event of the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -2137,6 +2479,8 @@
 
             
 
+            
+
              method with false as a parameter.</para
           >
           <para
@@ -2147,8 +2491,12 @@
 
             
 
+            
+
             . Application code should not call this method; an object's Finalize method is automatically invoked during garbage collection, unless finalization by the garbage collector has been disabled by a call to the <see
              cref="M:System.GC.SuppressFinalize(System.Object)" />
+
+            
 
             
 
@@ -2166,10 +2514,14 @@
 
             
 
+            
+
             , <format
              type="text/html">
               <a href="a17b0066-71c2-4ba4-9822-8e19332fc213">Cleaning Up Unmanaged Resources</a>
             </format>
+
+            
 
             
 
@@ -2184,6 +2536,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -2192,6 +2546,8 @@
           <para
             >Releases the unmanaged resources and performs other cleanup operations before the <see
              cref="T:System.Windows.Forms.DataGridViewCell" />
+
+            
 
             
 
@@ -2224,8 +2580,12 @@
 
             
 
+            
+
              property is the actual data object contained by the cell, whereas the <see
              cref="P:System.Windows.Forms.DataGridViewCell.FormattedValue" />
+
+            
 
             
 
@@ -2238,8 +2598,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.DataGridViewCell.FormattedValueType" />
+
+            
 
             
 
@@ -2255,6 +2619,8 @@
 
             
 
+            
+
              method to convert the cell value into an equivalent display value of the type indicated by the <see
              cref="P:System.Windows.Forms.DataGridViewCell.FormattedValueType" />
 
@@ -2262,8 +2628,12 @@
 
             
 
+            
+
              property. This raises the <see
              cref="E:System.Windows.Forms.DataGridView.CellFormatting" />
+
+            
 
             
 
@@ -2279,8 +2649,12 @@
 
             
 
+            
+
              event occurs. If there is no handler for this event or the handler sets the <see
              cref="P:System.Windows.Forms.DataGridViewDataErrorEventArgs.ThrowException" />
+
+            
 
             
 
@@ -2322,8 +2696,12 @@
 
             
 
+            
+
              property is the actual data object contained by the cell, whereas the <see
              cref="P:System.Windows.Forms.DataGridViewCell.FormattedValue" />
+
+            
 
             
 
@@ -2336,8 +2714,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.DataGridViewCell.FormattedValueType" />
+
+            
 
             
 
@@ -2379,8 +2761,12 @@
 
             
 
+            
+
              property depends on the state of the cell's parent row and column. If the Frozen property of either the row or column is set to true, the cell's <see
              cref="P:System.Windows.Forms.DataGridViewCell.Frozen" />
+
+            
 
             
 
@@ -2432,11 +2818,15 @@
 
             
 
+            
+
              method to retrieve a Clipboard-formatted value that represents the cell value. </para
           >
           <para
             >The cell value is first retrieved in its display format from the <see
              cref="M:System.Windows.Forms.DataGridViewCell.GetEditedFormattedValue(System.Int32,System.Windows.Forms.DataGridViewDataErrorContexts)" />
+
+            
 
             
 
@@ -2449,8 +2839,12 @@
 
             
 
+            
+
              event to format the value and the <see
              cref="E:System.Windows.Forms.DataGridView.DataError" />
+
+            
 
             
 
@@ -2466,11 +2860,15 @@
 
             
 
+            
+
              control. Depending on the cell's position, additional formatting information may be returned by this method along with the display-formatted cell value. For example, the HTML format for a cell in the first column of a row will include the tag that indicates the beginning of a row.</para
           >
           <para
             >The supported Clipboard formats include <see
              cref="F:System.Windows.Forms.DataFormats.Text" />
+
+            
 
             
 
@@ -2483,8 +2881,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Windows.Forms.DataFormats.Html" />
+
+            
 
             
 
@@ -2497,11 +2899,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >For more information, see the <see
              cref="T:System.Windows.Forms.Clipboard" />
+
+            
 
             
 
@@ -2520,6 +2926,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2533,8 +2941,12 @@
 
             
 
+            
+
              that represents the value of the cell to copy to the <see
              cref="T:System.Windows.Forms.Clipboard" />
+
+            
 
             
 
@@ -2550,10 +2962,14 @@
 
           
 
+          
+
           The zero-based index of the row containing the cell.</param
         >
         <param name="firstCell">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2568,10 +2984,14 @@
 
           
 
+          
+
           true to indicate that the cell is the last column of the region defined by the selected cells; otherwise, false.</param
         >
         <param name="inFirstRow">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2586,10 +3006,14 @@
 
           
 
+          
+
           true to indicate that the cell is in the last row of the region defined by the selected cells; otherwise, false.</param
         >
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2626,6 +3050,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2634,6 +3060,8 @@
           <para
             >Returns the bounding rectangle that encloses the cell's content area using a default <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -2652,11 +3080,15 @@
 
             
 
+            
+
              that bounds the cell's contents.</para
           >
         </returns>
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2695,11 +3127,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This method is called internally when the <see
              cref="P:System.Windows.Forms.DataGridViewCell.ContentBounds" />
+
+            
 
             
 
@@ -2718,6 +3154,8 @@
 
             
 
+            
+
              and cell style.</para
           >
         </summary>
@@ -2726,6 +3164,8 @@
           <para
             >The <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -2741,10 +3181,14 @@
 
           
 
+          
+
           The graphics context for the cell.</param
         >
         <param name="cellStyle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2757,10 +3201,14 @@
 
           
 
+          
+
            to be applied to the cell.</param
         >
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2798,8 +3246,12 @@
 
             
 
+            
+
              property. This raises the <see
              cref="E:System.Windows.Forms.DataGridView.CellFormatting" />
+
+            
 
             
 
@@ -2815,8 +3267,12 @@
 
             
 
+            
+
              event occurs. If there is no handler for this event or the handler sets the <see
              cref="P:System.Windows.Forms.DataGridViewDataErrorEventArgs.ThrowException" />
+
+            
 
             
 
@@ -2832,8 +3288,12 @@
 
             
 
+            
+
              argument includes the <see
              cref="F:System.Windows.Forms.DataGridViewDataErrorContexts.ClipboardContent" />
+
+            
 
             
 
@@ -2856,11 +3316,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2875,8 +3339,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.DataGridViewDataErrorContexts" />
+
+          
 
           
 
@@ -2915,11 +3383,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >This method is called internally when the <see
              cref="P:System.Windows.Forms.DataGridViewCell.ErrorIconBounds" />
+
+            
 
             
 
@@ -2942,8 +3414,12 @@
 
             
 
+            
+
              that bounds the cell's error icon, if one is displayed; otherwise, <see
              cref="F:System.Drawing.Rectangle.Empty" />
+
+            
 
             
 
@@ -2959,10 +3435,14 @@
 
           
 
+          
+
           The graphics context for the cell.</param
         >
         <param name="cellStyle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2975,10 +3455,14 @@
 
           
 
+          
+
            to be applied to the cell.</param
         >
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3022,11 +3506,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3099,6 +3587,8 @@
 
             
 
+            
+
             , it will inherit one from its parents, using the following precedence:</para
           >
           <list type="ordered">
@@ -3135,11 +3625,15 @@
 
             
 
+            
+
              method or the destructor.</para
           >
           <para
             >Pass the <see
              cref="M:System.Windows.Forms.DataGridViewCell.GetInheritedContextMenuStrip(System.Int32)" />
+
+            
 
             
 
@@ -3152,8 +3646,12 @@
 
             
 
+            
+
             . Do not use the <see
              cref="P:System.Windows.Forms.DataGridViewCell.RowIndex" />
+
+            
 
             
 
@@ -3166,6 +3664,8 @@
 
             
 
+            
+
              parameter. If the row is shared, <see
              cref="P:System.Windows.Forms.DataGridViewCell.RowIndex" />
 
@@ -3173,8 +3673,12 @@
 
             
 
+            
+
              is -1, which is not a valid value for <paramref
              name="rowIndex" />
+
+            
 
             
 
@@ -3197,8 +3701,12 @@
 
             
 
+            
+
              if the parent <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -3211,8 +3719,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Windows.Forms.DataGridViewColumn" />
+
+            
 
             
 
@@ -3225,11 +3737,15 @@
 
             
 
+            
+
              assigned; otherwise, null.</para
           >
         </returns>
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3263,6 +3779,8 @@
 
             
 
+            
+
              values of -1, which prevents you from using the <see
              cref="P:System.Windows.Forms.DataGridViewCell.InheritedState" />
 
@@ -3270,8 +3788,12 @@
 
             
 
+            
+
              property with cells in shared rows. To use this method, pass in the actual index of the row containing this cell. You can retrieve the actual index of a shared row by calling the <see
              cref="M:System.Windows.Forms.DataGridViewRowCollection.IndexOf(System.Windows.Forms.DataGridViewRow)" />
+
+            
 
             
 
@@ -3294,11 +3816,15 @@
 
             
 
+            
+
              values representing the current state of the cell.</para
           >
         </returns>
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3337,8 +3863,12 @@
 
             
 
+            
+
              that inherits its settings from the <see
              cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+            
 
             
 
@@ -3351,12 +3881,16 @@
 
             
 
+            
+
             . For more information, see <format
              type="text/html">
               <a href="dbb75ed6-8804-4232-8382-f9920c2e380c"
                 >Cell Styles in the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -3379,8 +3913,12 @@
 
             
 
+            
+
              that includes the style settings of the cell inherited from the cell's parent row, column, and <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -3396,8 +3934,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+          
 
           
 
@@ -3412,10 +3954,14 @@
 
           
 
+          
+
           The index of the cell's parent row. </param
         >
         <param name="includeColors">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3455,6 +4001,8 @@
 
             
 
+            
+
              method in the base class <see
              cref="T:System.Windows.Forms.DataGridViewCell" />
 
@@ -3462,8 +4010,12 @@
 
             
 
+            
+
              always returns a <see
              cref="T:System.Drawing.Size" />
+
+            
 
             
 
@@ -3486,6 +4038,8 @@
 
             
 
+            
+
              that represents the preferred size, in pixels, of the cell.</para
           >
         </returns>
@@ -3496,8 +4050,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -3512,8 +4070,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+          
 
           
 
@@ -3528,10 +4090,14 @@
 
           
 
+          
+
           The zero-based row index of the cell.</param
         >
         <param name="constraintSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3576,11 +4142,15 @@
 
             
 
+            
+
              representing the cell's dimensions.</para
           >
         </returns>
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3614,8 +4184,12 @@
 
             
 
+            
+
              method the row index you used to retrieve the <see
              cref="T:System.Windows.Forms.DataGridViewCell" />
+
+            
 
             
 
@@ -3628,8 +4202,12 @@
 
             
 
+            
+
              property for the <paramref
              name="rowIndex" />
+
+            
 
             
 
@@ -3642,8 +4220,12 @@
 
             
 
+            
+
              is -1, which is not a valid value for <paramref
              name="rowIndex" />
+
+            
 
             
 
@@ -3666,11 +4248,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3702,8 +4288,12 @@
 
             
 
+            
+
              property automatically instantiates a new <see
              cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+            
 
             
 
@@ -3716,8 +4306,12 @@
 
             
 
+            
+
              property to determine whether the <see
              cref="P:System.Windows.Forms.DataGridViewCell.Style" />
+
+            
 
             
 
@@ -3730,8 +4324,12 @@
 
             
 
+            
+
              instance. This is useful to determine which properties of the object returned by the <see
              cref="P:System.Windows.Forms.DataGridViewCell.InheritedStyle" />
+
+            
 
             
 
@@ -3751,6 +4349,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3759,6 +4359,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="P:System.Windows.Forms.DataGridViewCell.Style" />
+
+            
 
             
 
@@ -3826,8 +4428,12 @@
 
             
 
+            
+
              control displays its cells using the styles indicated by the cell <see
              cref="P:System.Windows.Forms.DataGridViewCell.InheritedStyle" />
+
+            
 
             
 
@@ -3840,8 +4446,12 @@
 
             
 
+            
+
             . The styles specified through the <see
              cref="P:System.Windows.Forms.DataGridViewCell.Style" />
+
+            
 
             
 
@@ -3856,6 +4466,8 @@
                 >Cell Styles in the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -3904,8 +4516,12 @@
 
             
 
+            
+
              share a single hosted editing control. However, before the control is used by a cell, it needs to be initialized by the <see
              cref="M:System.Windows.Forms.DataGridViewCell.InitializeEditingControl(System.Int32,System.Object,System.Windows.Forms.DataGridViewCellStyle)" />
+
+            
 
             
 
@@ -3918,6 +4534,8 @@
 
             
 
+            
+
             . It also initializes some of the visual properties of the cell. For example, <see
              cref="M:System.Windows.Forms.DataGridViewCell.InitializeEditingControl(System.Int32,System.Object,System.Windows.Forms.DataGridViewCellStyle)" />
 
@@ -3925,8 +4543,12 @@
 
             
 
+            
+
              sets the background color of the editing area to match the supplied cell style parameter. Subsequent calls to <see
              cref="M:System.Windows.Forms.DataGridViewCell.InitializeEditingControl(System.Int32,System.Object,System.Windows.Forms.DataGridViewCellStyle)" />
+
+            
 
             
 
@@ -3942,8 +4564,12 @@
 
             
 
+            
+
              class corresponding to their type. For example, a table that contains one or more <see
              cref="T:System.Windows.Forms.DataGridViewTextBoxCell" />
+
+            
 
             
 
@@ -3956,8 +4582,12 @@
 
             
 
+            
+
              editing control to the owning <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -3977,6 +4607,8 @@
 
           
 
+          
+
           The zero-based row index of the cell's location.</param
         >
         <param name="initialFormattedValue">
@@ -3986,8 +4618,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -4002,8 +4638,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+          
 
           
 
@@ -4040,8 +4680,12 @@
 
             
 
+            
+
              property. You can also handle the <see
              cref="E:System.Windows.Forms.DataGridView.CellBeginEdit" />
+
+            
 
             
 
@@ -4089,8 +4733,12 @@
 
             
 
+            
+
              method is called just before the <see
              cref="M:System.Windows.Forms.DataGridViewCell.OnKeyDown(System.Windows.Forms.KeyEventArgs,System.Int32)" />
+
+            
 
             
 
@@ -4103,8 +4751,12 @@
 
             
 
+            
+
              with the same <see
              cref="T:System.Windows.Forms.KeyEventArgs" />
+
+            
 
             
 
@@ -4119,6 +4771,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -4141,11 +4795,15 @@
 
             
 
+            
+
              class always returns false.</para
           >
         </returns>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4158,10 +4816,14 @@
 
           
 
+          
+
            that contains the event data. </param
         >
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4207,8 +4869,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyEventArgs" />
+
+          
 
           
 
@@ -4246,6 +4912,8 @@
 
             
 
+            
+
              method is called just before the <see
              cref="M:System.Windows.Forms.DataGridViewCell.OnKeyPress(System.Windows.Forms.KeyPressEventArgs,System.Int32)" />
 
@@ -4253,8 +4921,12 @@
 
             
 
+            
+
              method. In derived classes, it must return true if the call to <see
              cref="M:System.Windows.Forms.DataGridViewCell.OnKeyPress(System.Windows.Forms.KeyPressEventArgs,System.Int32)" />
+
+            
 
             
 
@@ -4269,6 +4941,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -4291,11 +4965,15 @@
 
             
 
+            
+
              class always returns false.</para
           >
         </returns>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4308,10 +4986,14 @@
 
           
 
+          
+
            that contains the event data. </param
         >
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4349,8 +5031,12 @@
 
             
 
+            
+
              method is called just before the <see
              cref="M:System.Windows.Forms.DataGridViewCell.OnKeyUp(System.Windows.Forms.KeyEventArgs,System.Int32)" />
+
+            
 
             
 
@@ -4363,8 +5049,12 @@
 
             
 
+            
+
              with the same <see
              cref="T:System.Windows.Forms.KeyEventArgs" />
+
+            
 
             
 
@@ -4379,6 +5069,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -4401,11 +5093,15 @@
 
             
 
+            
+
              class always returns false.</para
           >
         </returns>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4418,10 +5114,14 @@
 
           
 
+          
+
            that contains the event data. </param
         >
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4461,6 +5161,8 @@
 
             
 
+            
+
              method is called just before the <see
              cref="M:System.Windows.Forms.DataGridViewCell.OnLeave(System.Int32,System.Boolean)" />
 
@@ -4468,8 +5170,12 @@
 
             
 
+            
+
              method. It must return true if the call to <see
              cref="M:System.Windows.Forms.DataGridViewCell.OnLeave(System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -4484,6 +5190,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -4506,6 +5214,8 @@
 
             
 
+            
+
              class always returns false.</para
           >
         </returns>
@@ -4516,10 +5226,14 @@
 
           
 
+          
+
           The index of the cell's parent row.</param
         >
         <param name="throughMouseClick">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4566,8 +5280,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -4582,6 +5300,8 @@
 
           
 
+          
+
           The text to measure.</param
         >
         <param name="font">
@@ -4591,8 +5311,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -4607,6 +5331,8 @@
 
           
 
+          
+
           The maximum width of the text.</param
         >
         <param name="flags">
@@ -4616,8 +5342,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.TextFormatFlags" />
+
+          
 
           
 
@@ -4709,6 +5439,8 @@
 
             
 
+            
+
              representing the preferred height and width of the text.</para
           >
         </returns>
@@ -4719,8 +5451,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -4735,6 +5471,8 @@
 
           
 
+          
+
           The text to measure.</param
         >
         <param name="font">
@@ -4744,8 +5482,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -4760,6 +5502,8 @@
 
           
 
+          
+
           The maximum width-to-height ratio of the block of text.</param
         >
         <param name="flags">
@@ -4769,8 +5513,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.TextFormatFlags" />
+
+          
 
           
 
@@ -4823,6 +5571,8 @@
 
             
 
+            
+
              representing the height and width of the text.</para
           >
         </returns>
@@ -4833,8 +5583,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -4849,6 +5603,8 @@
 
           
 
+          
+
           The text to measure.</param
         >
         <param name="font">
@@ -4858,8 +5614,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -4874,8 +5634,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.TextFormatFlags" />
+
+          
 
           
 
@@ -4927,8 +5691,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -4943,6 +5711,8 @@
 
           
 
+          
+
           The text to measure.</param
         >
         <param name="font">
@@ -4952,8 +5722,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -4968,6 +5742,8 @@
 
           
 
+          
+
           The maximum height of the text.</param
         >
         <param name="flags">
@@ -4977,8 +5753,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.TextFormatFlags" />
+
+          
 
           
 
@@ -5020,6 +5800,8 @@
 
             
 
+            
+
              method is called just before the <see
              cref="M:System.Windows.Forms.DataGridViewCell.OnMouseClick(System.Windows.Forms.DataGridViewCellMouseEventArgs)" />
 
@@ -5027,8 +5809,12 @@
 
             
 
+            
+
              method. It must return true if the call to <see
              cref="M:System.Windows.Forms.DataGridViewCell.OnMouseClick(System.Windows.Forms.DataGridViewCellMouseEventArgs)" />
+
+            
 
             
 
@@ -5043,6 +5829,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -5065,6 +5853,8 @@
 
             
 
+            
+
              class always returns false.</para
           >
         </returns>
@@ -5075,8 +5865,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
+
+          
 
           
 
@@ -5113,6 +5907,8 @@
 
             
 
+            
+
              method is called just before the <see
              cref="M:System.Windows.Forms.DataGridViewCell.OnMouseDoubleClick(System.Windows.Forms.DataGridViewCellMouseEventArgs)" />
 
@@ -5120,8 +5916,12 @@
 
             
 
+            
+
              method. It must return true if the call to <see
              cref="M:System.Windows.Forms.DataGridViewCell.OnMouseDoubleClick(System.Windows.Forms.DataGridViewCellMouseEventArgs)" />
+
+            
 
             
 
@@ -5136,6 +5936,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -5158,6 +5960,8 @@
 
             
 
+            
+
              class always returns false.</para
           >
         </returns>
@@ -5168,8 +5972,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
+
+          
 
           
 
@@ -5206,6 +6014,8 @@
 
             
 
+            
+
              method is called just before the <see
              cref="M:System.Windows.Forms.DataGridViewCell.OnMouseDown(System.Windows.Forms.DataGridViewCellMouseEventArgs)" />
 
@@ -5213,8 +6023,12 @@
 
             
 
+            
+
              method. In derived classes, it must return true if the call to <see
              cref="M:System.Windows.Forms.DataGridViewCell.OnMouseDown(System.Windows.Forms.DataGridViewCellMouseEventArgs)" />
+
+            
 
             
 
@@ -5229,6 +6043,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -5251,6 +6067,8 @@
 
             
 
+            
+
              class always returns false.</para
           >
         </returns>
@@ -5261,8 +6079,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
+
+          
 
           
 
@@ -5299,6 +6121,8 @@
 
             
 
+            
+
              method is called just before the <see
              cref="M:System.Windows.Forms.DataGridViewCell.OnMouseEnter(System.Int32)" />
 
@@ -5306,8 +6130,12 @@
 
             
 
+            
+
              method. In derived classes, it must return true if the call to <see
              cref="M:System.Windows.Forms.DataGridViewCell.OnMouseEnter(System.Int32)" />
+
+            
 
             
 
@@ -5322,6 +6150,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -5344,11 +6174,15 @@
 
             
 
+            
+
              class always returns false.</para
           >
         </returns>
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5385,6 +6219,8 @@
 
             
 
+            
+
              method is called just before the <see
              cref="M:System.Windows.Forms.DataGridViewCell.OnMouseLeave(System.Int32)" />
 
@@ -5392,8 +6228,12 @@
 
             
 
+            
+
              method. In derived classes, it must return true if the call to <see
              cref="M:System.Windows.Forms.DataGridViewCell.OnMouseLeave(System.Int32)" />
+
+            
 
             
 
@@ -5408,6 +6248,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -5430,11 +6272,15 @@
 
             
 
+            
+
              class always returns false.</para
           >
         </returns>
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5471,6 +6317,8 @@
 
             
 
+            
+
              method is called just before the <see
              cref="M:System.Windows.Forms.DataGridViewCell.OnMouseMove(System.Windows.Forms.DataGridViewCellMouseEventArgs)" />
 
@@ -5478,8 +6326,12 @@
 
             
 
+            
+
              method. In derived classes, it must return true if the call to <see
              cref="M:System.Windows.Forms.DataGridViewCell.OnMouseMove(System.Windows.Forms.DataGridViewCellMouseEventArgs)" />
+
+            
 
             
 
@@ -5494,6 +6346,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -5516,6 +6370,8 @@
 
             
 
+            
+
              class always returns false.</para
           >
         </returns>
@@ -5526,8 +6382,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
+
+          
 
           
 
@@ -5564,6 +6424,8 @@
 
             
 
+            
+
              method is called just before the <see
              cref="M:System.Windows.Forms.DataGridViewCell.OnMouseUp(System.Windows.Forms.DataGridViewCellMouseEventArgs)" />
 
@@ -5571,8 +6433,12 @@
 
             
 
+            
+
              method. In derived classes, it must return true if the call to <see
              cref="M:System.Windows.Forms.DataGridViewCell.OnMouseUp(System.Windows.Forms.DataGridViewCellMouseEventArgs)" />
+
+            
 
             
 
@@ -5587,6 +6453,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -5609,6 +6477,8 @@
 
             
 
+            
+
              class always returns false.</para
           >
         </returns>
@@ -5619,8 +6489,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
+
+          
 
           
 
@@ -5657,8 +6531,12 @@
 
             
 
+            
+
              method. It is called in the same circumstances in which a <see
              cref="E:System.Windows.Forms.DataGridView.CellClick" />
+
+            
 
             
 
@@ -5678,8 +6556,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellEventArgs" />
+
+          
 
           
 
@@ -5716,8 +6598,12 @@
 
             
 
+            
+
              method. It is called in the same circumstances in which a <see
              cref="E:System.Windows.Forms.DataGridView.CellContentClick" />
+
+            
 
             
 
@@ -5737,8 +6623,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellEventArgs" />
+
+          
 
           
 
@@ -5775,8 +6665,12 @@
 
             
 
+            
+
              method. It is called in the same circumstances in which a <see
              cref="E:System.Windows.Forms.DataGridView.CellContentDoubleClick" />
+
+            
 
             
 
@@ -5796,8 +6690,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellEventArgs" />
+
+          
 
           
 
@@ -5825,6 +6723,8 @@
           <para
             >Called when the <see
              cref="P:System.Windows.Forms.DataGridViewElement.DataGridView" />
+
+            
 
             
 
@@ -5862,8 +6762,12 @@
 
             
 
+            
+
              method. It is called in the same circumstances in which a <see
              cref="E:System.Windows.Forms.DataGridView.CellDoubleClick" />
+
+            
 
             
 
@@ -5883,8 +6787,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellEventArgs" />
+
+          
 
           
 
@@ -5922,8 +6830,12 @@
 
             
 
+            
+
              method. It is called in the same circumstances in which an <see
              cref="E:System.Windows.Forms.DataGridView.CellEnter" />
+
+            
 
             
 
@@ -5943,10 +6855,14 @@
 
           
 
+          
+
           The index of the cell's parent row. </param
         >
         <param name="throughMouseClick">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5984,8 +6900,12 @@
 
             
 
+            
+
              method. It is called in the same circumstances in which a <see
              cref="E:System.Windows.Forms.Control.KeyDown" />
+
+            
 
             
 
@@ -6005,8 +6925,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyEventArgs" />
+
+          
 
           
 
@@ -6016,6 +6940,8 @@
         >
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6053,8 +6979,12 @@
 
             
 
+            
+
              method. It is called in the same circumstances in which a <see
              cref="E:System.Windows.Forms.Control.KeyPress" />
+
+            
 
             
 
@@ -6074,8 +7004,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyPressEventArgs" />
+
+          
 
           
 
@@ -6085,6 +7019,8 @@
         >
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6122,8 +7058,12 @@
 
             
 
+            
+
              method. It is called in the same circumstances in which a <see
              cref="E:System.Windows.Forms.Control.KeyUp" />
+
+            
 
             
 
@@ -6143,8 +7083,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyEventArgs" />
+
+          
 
           
 
@@ -6154,6 +7098,8 @@
         >
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6191,8 +7137,12 @@
 
             
 
+            
+
              method. It is called in the same circumstances in which a <see
              cref="E:System.Windows.Forms.DataGridView.CellLeave" />
+
+            
 
             
 
@@ -6212,10 +7162,14 @@
 
           
 
+          
+
           The index of the cell's parent row. </param
         >
         <param name="throughMouseClick">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6252,8 +7206,12 @@
 
             
 
+            
+
              method. It is called in the same circumstances in which a <see
              cref="E:System.Windows.Forms.DataGridView.CellMouseClick" />
+
+            
 
             
 
@@ -6273,8 +7231,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
+
+          
 
           
 
@@ -6311,8 +7273,12 @@
 
             
 
+            
+
              method. It is called in the same circumstances in which a <see
              cref="E:System.Windows.Forms.DataGridView.CellMouseDoubleClick" />
+
+            
 
             
 
@@ -6332,8 +7298,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
+
+          
 
           
 
@@ -6370,8 +7340,12 @@
 
             
 
+            
+
              method. It is called in the same circumstances in which a <see
              cref="E:System.Windows.Forms.DataGridView.CellMouseDown" />
+
+            
 
             
 
@@ -6391,8 +7365,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
+
+          
 
           
 
@@ -6426,8 +7404,12 @@
 
             
 
+            
+
              method. It is called in the same circumstances in which a <see
              cref="E:System.Windows.Forms.DataGridView.CellMouseEnter" />
+
+            
 
             
 
@@ -6442,6 +7424,8 @@
         </summary>
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6475,8 +7459,12 @@
 
             
 
+            
+
              method. It is called in the same circumstances in which a <see
              cref="E:System.Windows.Forms.DataGridView.CellMouseLeave" />
+
+            
 
             
 
@@ -6491,6 +7479,8 @@
         </summary>
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6527,8 +7517,12 @@
 
             
 
+            
+
              method. It is called in the same circumstances in which a <see
              cref="E:System.Windows.Forms.DataGridView.CellMouseMove" />
+
+            
 
             
 
@@ -6548,8 +7542,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
+
+          
 
           
 
@@ -6586,8 +7584,12 @@
 
             
 
+            
+
              method. It is called in the same circumstances in which a <see
              cref="E:System.Windows.Forms.DataGridView.CellMouseUp" />
+
+            
 
             
 
@@ -6607,8 +7609,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
+
+          
 
           
 
@@ -6719,11 +7725,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="graphics">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6736,8 +7746,12 @@
 
           
 
+          
+
            used to paint the <see
            cref="T:System.Windows.Forms.DataGridViewCell" />
+
+          
 
           
 
@@ -6752,6 +7766,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
 
@@ -6759,8 +7775,12 @@
 
           
 
+          
+
            that represents the area of the <see
            cref="T:System.Windows.Forms.DataGridView" />
+
+          
 
           
 
@@ -6775,6 +7795,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
 
@@ -6782,8 +7804,12 @@
 
           
 
+          
+
            that contains the bounds of the <see
            cref="T:System.Windows.Forms.DataGridViewCell" />
+
+          
 
           
 
@@ -6798,6 +7824,8 @@
 
           
 
+          
+
           The row index of the cell that is being painted.</param
         >
         <param name="cellState">
@@ -6807,8 +7835,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Windows.Forms.DataGridViewElementStates" />
+
+          
 
           
 
@@ -6823,8 +7855,12 @@
 
           
 
+          
+
           The data of the <see
            cref="T:System.Windows.Forms.DataGridViewCell" />
+
+          
 
           
 
@@ -6839,8 +7875,12 @@
 
           
 
+          
+
           The formatted data of the <see
            cref="T:System.Windows.Forms.DataGridViewCell" />
+
+          
 
           
 
@@ -6855,6 +7895,8 @@
 
           
 
+          
+
           An error message that is associated with the cell.</param
         >
         <param name="cellStyle">
@@ -6864,8 +7906,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+          
 
           
 
@@ -6880,8 +7926,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
+
+          
 
           
 
@@ -6896,8 +7946,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.DataGridViewPaintParts" />
+
+          
 
           
 
@@ -6942,6 +7996,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -6952,8 +8008,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -6968,6 +8028,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
 
@@ -6975,8 +8037,12 @@
 
           
 
+          
+
            that represents the area of the <see
            cref="T:System.Windows.Forms.DataGridView" />
+
+          
 
           
 
@@ -6991,8 +8057,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -7007,8 +8077,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+          
 
           
 
@@ -7023,8 +8097,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewAdvancedBorderStyle" />
+
+          
 
           
 
@@ -7064,8 +8142,12 @@
 
             
 
+            
+
              parameter signals the existence of an error. If <paramref
              name="errorText" />
+
+            
 
             
 
@@ -7078,8 +8160,12 @@
 
             
 
+            
+
             , the <see
              cref="M:System.Windows.Forms.DataGridViewCell.PaintErrorIcon(System.Drawing.Graphics,System.Drawing.Rectangle,System.Drawing.Rectangle,System.String)" />
+
+            
 
             
 
@@ -7098,6 +8184,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -7108,8 +8196,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -7124,6 +8216,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
 
@@ -7131,8 +8225,12 @@
 
           
 
+          
+
            that represents the area of the <see
            cref="T:System.Windows.Forms.DataGridView" />
+
+          
 
           
 
@@ -7147,8 +8245,12 @@
 
           
 
+          
+
           The bounding <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -7158,6 +8260,8 @@
         >
         <param name="errorText">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7197,6 +8301,8 @@
 
             
 
+            
+
              control calls this method to convert the displayed value from the <see
              cref="P:System.Windows.Forms.DataGridViewCell.FormattedValueType" />
 
@@ -7204,8 +8310,12 @@
 
             
 
+            
+
              to the <see
              cref="P:System.Windows.Forms.DataGridViewCell.ValueType" />
+
+            
 
             
 
@@ -7221,8 +8331,12 @@
 
             
 
+            
+
              parameter using the <see
              cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+
+            
 
             
 
@@ -7235,6 +8349,8 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.DataGridViewCellStyle.FormatProvider" />
 
@@ -7242,8 +8358,12 @@
 
             
 
+            
+
              properties of the cell style indicated by the <paramref
              name="cellStyle" />
+
+            
 
             
 
@@ -7259,8 +8379,12 @@
 
             
 
+            
+
              is equal to <see
              cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+
+            
 
             
 
@@ -7273,8 +8397,12 @@
 
             
 
+            
+
              property or null if <see
              cref="P:System.Windows.Forms.DataGridViewCellStyle.DataSourceNullValue" />
+
+            
 
             
 
@@ -7287,8 +8415,12 @@
 
             
 
+            
+
              and the cell <see
              cref="P:System.Windows.Forms.DataGridViewCell.ValueType" />
+
+            
 
             
 
@@ -7304,8 +8436,12 @@
 
             
 
+            
+
              is not equal to <see
              cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
+
+            
 
             
 
@@ -7318,8 +8454,12 @@
 
             
 
+            
+
              using the <see
              cref="P:System.Windows.Forms.DataGridViewCellStyle.FormatProvider" />
+
+            
 
             
 
@@ -7335,8 +8475,12 @@
 
             
 
+            
+
              is nullable, this method wraps the return value as a <see
              cref="T:System.Nullable`1" />
+
+            
 
             
 
@@ -7360,6 +8504,8 @@
 
           
 
+          
+
           The display value of the cell.</param
         >
         <param name="cellStyle">
@@ -7369,8 +8515,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+          
 
           
 
@@ -7385,8 +8535,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.TypeConverter" />
+
+          
 
           
 
@@ -7401,8 +8555,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.TypeConverter" />
+
+          
 
           
 
@@ -7447,8 +8605,12 @@
 
             
 
+            
+
              class, such as <see
              cref="T:System.Windows.Forms.DataGridViewComboBoxCell" />
+
+            
 
             
 
@@ -7461,8 +8623,12 @@
 
             
 
+            
+
              method positions the editing control inside of the host cell. Because the editing control may take up more space than a single cell, it may need to be positioned differently when editing a cell in the first visible column or first visible row so it does not paint outside the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -7481,11 +8647,15 @@
 
             
 
+            
+
              control. </para
           >
         </summary>
         <param name="setLocation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7500,6 +8670,8 @@
 
           
 
+          
+
           true to specify the size; false to allow the control to size itself. </param
         >
         <param name="cellBounds">
@@ -7509,8 +8681,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -7525,6 +8701,8 @@
 
           
 
+          
+
           The area that will be used to paint the editing control.</param
         >
         <param name="cellStyle">
@@ -7534,8 +8712,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+          
 
           
 
@@ -7550,10 +8732,14 @@
 
           
 
+          
+
           true to add a vertical border to the cell; otherwise, false.</param
         >
         <param name="singleHorizontalBorderAdded">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7568,10 +8754,14 @@
 
           
 
+          
+
           true if the hosting cell is in the first visible column; otherwise, false.</param
         >
         <param name="isFirstDisplayedRow">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7624,6 +8814,8 @@
 
             
 
+            
+
              that represents the normal bounds of the editing control within the editing panel.</para
           >
         </returns>
@@ -7634,8 +8826,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -7650,6 +8846,8 @@
 
           
 
+          
+
           The area that will be used to paint the editing panel.</param
         >
         <param name="cellStyle">
@@ -7659,8 +8857,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+          
 
           
 
@@ -7675,10 +8877,14 @@
 
           
 
+          
+
           true to add a vertical border to the cell; otherwise, false.</param
         >
         <param name="singleHorizontalBorderAdded">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7693,10 +8899,14 @@
 
           
 
+          
+
           true if the cell is in the first column currently displayed in the control; otherwise, false.</param
         >
         <param name="isFirstDisplayedRow">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7733,6 +8943,8 @@
 
             
 
+            
+
              property returns the natural size of the cell computed by the cell's owning row and column. <see
              cref="P:System.Windows.Forms.DataGridViewCell.PreferredSize" />
 
@@ -7740,8 +8952,12 @@
 
             
 
+            
+
              returns a <see
              cref="T:System.Drawing.Size" />
+
+            
 
             
 
@@ -7757,8 +8973,12 @@
 
             
 
+            
+
              that has its <see
              cref="P:System.Windows.Forms.DataGridViewColumn.Resizable" />
+
+            
 
             
 
@@ -7769,6 +8989,8 @@
           <para
             >This method relies on the <see
              cref="M:System.Windows.Forms.DataGridViewCell.GetFormattedValue(System.Object,System.Int32,System.Windows.Forms.DataGridViewCellStyle@,System.ComponentModel.TypeConverter,System.ComponentModel.TypeConverter,System.Windows.Forms.DataGridViewDataErrorContexts)" />
+
+            
 
             
 
@@ -7810,8 +9032,12 @@
 
             
 
+            
+
              property indicates whether the data displayed by the cell can be edited. You can set <see
              cref="P:System.Windows.Forms.DataGridViewCell.ReadOnly" />
+
+            
 
             
 
@@ -7824,8 +9050,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Windows.Forms.DataGridViewColumn.ReadOnly" />
+
+            
 
             
 
@@ -7838,11 +9068,15 @@
 
             
 
+            
+
              for individual cells.</para
           >
           <para>You can navigate to a read-only cell, and you can set a read-only cell to be the current cell.</para>
           <para>
             <see cref="P:System.Windows.Forms.DataGridViewCell.ReadOnly" />
+
+            
 
             
 
@@ -7887,6 +9121,8 @@
 
             
 
+            
+
              property is set by the cell's parent row or column.</para
           >
         </remarks>
@@ -7923,6 +9159,8 @@
 
             
 
+            
+
              property returns -1, the cell is either a column header, or the cell's row is shared.</para
           >
           <para
@@ -7932,6 +9170,8 @@
                 >Best Practices for Scaling the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -8012,10 +9252,14 @@
 
           
 
+          
+
           The index of the cell's parent row. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8047,6 +9291,8 @@
 
             
 
+            
+
              control, the <see
              cref="P:System.Windows.Forms.DataGridViewCell.Size" />
 
@@ -8054,8 +9300,12 @@
 
             
 
+            
+
              property returns a <see
              cref="T:System.Drawing.Size" />
+
+            
 
             
 
@@ -8100,8 +9350,12 @@
 
             
 
+            
+
              control displays its cells using the styles indicated by the cell <see
              cref="P:System.Windows.Forms.DataGridViewCell.InheritedStyle" />
+
+            
 
             
 
@@ -8114,8 +9368,12 @@
 
             
 
+            
+
             . The styles specified through the <see
              cref="P:System.Windows.Forms.DataGridViewCell.Style" />
+
+            
 
             
 
@@ -8130,6 +9388,8 @@
                 >Cell Styles in the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -8171,8 +9431,12 @@
 
             
 
+            
+
              class can be assigned to this property. The <see
              cref="P:System.Windows.Forms.DataGridViewCell.Tag" />
+
+            
 
             
 
@@ -8223,6 +9487,8 @@
 
             
 
+            
+
             . If the value of this property is <see
              cref="F:System.String.Empty" />
 
@@ -8230,8 +9496,12 @@
 
             
 
+            
+
             , the cell will display a ToolTip containing the value of the cell if the value is truncated in the cell display; otherwise, the cell will not display a ToolTip. You can also prevent the display of a ToolTip by setting the <see
              cref="P:System.Windows.Forms.DataGridView.ShowCellToolTips" />
+
+            
 
             
 
@@ -8247,8 +9517,12 @@
 
             
 
+            
+
              control <see
              cref="P:System.Windows.Forms.DataGridView.DataSource" />
+
+            
 
             
 
@@ -8261,8 +9535,12 @@
 
             
 
+            
+
              property is true, getting the value of the <see
              cref="P:System.Windows.Forms.DataGridViewCell.ToolTipText" />
+
+            
 
             
 
@@ -8275,8 +9553,12 @@
 
             
 
+            
+
              event of the control and returns the value of the <see
              cref="P:System.Windows.Forms.DataGridViewCellToolTipTextNeededEventArgs.ToolTipText" />
+
+            
 
             
 
@@ -8289,8 +9571,12 @@
 
             
 
+            
+
              property returns the previously specified value or its default value of <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -8306,8 +9592,12 @@
 
             
 
+            
+
              event is primarily useful when working with large amounts of data to avoid performance penalties when setting the cell <see
              cref="P:System.Windows.Forms.DataGridViewCell.ToolTipText" />
+
+            
 
             
 
@@ -8324,6 +9614,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -8334,8 +9626,12 @@
 
             
 
+            
+
              event on the owning <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -8380,6 +9676,8 @@
 
             
 
+            
+
              method for all the various cell types will return a string of the form shown in the following code example:</para
           >
           <para>Classname {RowIndex = #, ColumnIndex = #}</para>
@@ -8416,8 +9714,12 @@
 
             
 
+            
+
              event of the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -8433,8 +9735,12 @@
 
             
 
+            
+
              property is the actual data object contained by the cell, whereas the <see
              cref="P:System.Windows.Forms.DataGridViewCell.FormattedValue" />
+
+            
 
             
 
@@ -8447,8 +9753,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.DataGridViewCell.FormattedValueType" />
+
+            
 
             
 
@@ -8464,8 +9774,12 @@
 
             
 
+            
+
              property, the specified value is not automatically converted from a formatted, display value to an underlying cell value. For example, the <see
              cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+            
 
             
 
@@ -8478,6 +9792,8 @@
 
             
 
+            
+
              to <see
              cref="P:System.Windows.Forms.DataGridViewCellStyle.NullValue" />
 
@@ -8485,8 +9801,12 @@
 
             
 
+            
+
              does not result in a property value of <see
              cref="P:System.Windows.Forms.DataGridViewCellStyle.DataSourceNullValue" />
+
+            
 
             
 
@@ -8528,8 +9848,12 @@
 
             
 
+            
+
              property for the cell has not been set, the <see
              cref="P:System.Windows.Forms.DataGridViewColumn.ValueType" />
+
+            
 
             
 
@@ -8545,8 +9869,12 @@
 
             
 
+            
+
              property is the actual data object contained by the cell, whereas the <see
              cref="P:System.Windows.Forms.DataGridViewCell.FormattedValue" />
+
+            
 
             
 
@@ -8559,8 +9887,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.DataGridViewCell.FormattedValueType" />
+
+            
 
             
 
@@ -8602,8 +9934,12 @@
 
             
 
+            
+
              property set to false. It does not indicate whether the cell has been scrolled off-screen. To determine whether a cell is visible within the display area of the control, use the <see
              cref="P:System.Windows.Forms.DataGridViewCell.Displayed" />
+
+            
 
             
 

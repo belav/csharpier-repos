@@ -31,8 +31,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Threading.Tasks.Task`1" />
+
+            
 
             
 
@@ -50,8 +54,12 @@
 
             
 
+            
+
              class and raise events from the <see
              cref="T:System.Timers.Timer" />
+
+            
 
             
 
@@ -73,8 +81,12 @@
 
           
 
+          
+
            properties are true. This means that a <see
            cref="T:System.Threading.ThreadPool" />
+
+          
 
           
 
@@ -92,8 +104,12 @@
 
           
 
+          
+
            attribute. Therefore, when a method examines thread local storage or fields that are marked with the <see
            cref="T:System.ThreadStaticAttribute" />
+
+          
 
           
 
@@ -110,12 +126,16 @@
 
         
 
+        
+
          method. This method takes as a parameter a reference to the method or delegate that will be called by the thread selected from the thread pool. There is no way to cancel a work item after it has been queued.</para
       >
       <para>Timer-queue timers and registered wait operations also use the thread pool. Their callback functions are queued to the thread pool.</para>
       <para
         >There is one thread pool per process. Beginning with the net_v40_long, the default size of the thread pool for a process depends on several factors, such as the size of the virtual address space. A process can call the <see
          cref="M:System.Threading.ThreadPool.GetMaxThreads(System.Int32@,System.Int32@)" />
+
+        
 
         
 
@@ -128,12 +148,16 @@
 
         
 
+        
+
          method. Each thread uses the default stack size and runs at the default priority. </para
       >
       <block subset="none" type="note">
         <para
           >Unmanaged code that hosts the .NET Framework can change the size of the thread pool by using the <unmanagedCodeEntityReference
           >CorSetMaxThreads</unmanagedCodeEntityReference>
+
+          
 
           
 
@@ -154,12 +178,16 @@
 
         
 
+        
+
          method to obtain these minimum values. </para
       >
       <block subset="none" type="note">
         <para
           >You can use the <see
            cref="M:System.Threading.ThreadPool.SetMinThreads(System.Int32,System.Int32)" />
+
+          
 
           
 
@@ -210,6 +238,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -224,8 +254,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IntPtr" />
+
+          
 
           
 
@@ -267,6 +301,8 @@
 
             
 
+            
+
              parameter should be a <see
              cref="T:Microsoft.Win32.SafeHandles.SafeFileHandle" />
 
@@ -274,8 +310,12 @@
 
             
 
+            
+
             , which derives from the abstract <see
              cref="T:System.Runtime.InteropServices.SafeHandle" />
+
+            
 
             
 
@@ -289,6 +329,8 @@
           <para
             >Binds an operating system handle to the <see
              cref="T:System.Threading.ThreadPool" />
+
+            
 
             
 
@@ -308,8 +350,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.InteropServices.SafeHandle" />
+
+          
 
           
 
@@ -438,6 +484,8 @@
 
             
 
+            
+
              overload that accepts an object containing the necessary data.</para
           >
           <block subset="none" type="note">
@@ -449,8 +497,12 @@
 
               
 
+              
+
                constructor, and simply use the AddressOf operator when passing the callback method to <see
                cref="M:System.Threading.ThreadPool.QueueUserWorkItem(System.Threading.WaitCallback,System.Object)" />
+
+              
 
               
 
@@ -470,8 +522,12 @@
 
             
 
+            
+
              property value is propagated to worker threads queued using the <see
              cref="Overload:System.Threading.ThreadPool.QueueUserWorkItem" />
+
+            
 
             
 
@@ -494,6 +550,8 @@
 
             
 
+            
+
              is thrown if the work item could not be queued.</para
           >
         </returns>
@@ -504,8 +562,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Threading.WaitCallback" />
+
+          
 
           
 
@@ -550,8 +612,12 @@
 
               
 
+              
+
                constructor, and simply use the AddressOf operator when passing the callback method to <see
                cref="M:System.Threading.ThreadPool.QueueUserWorkItem(System.Threading.WaitCallback,System.Object)" />
+
+              
 
               
 
@@ -571,8 +637,12 @@
 
             
 
+            
+
              property value is propagated to worker threads queued using the <see
              cref="Overload:System.Threading.ThreadPool.QueueUserWorkItem" />
+
+            
 
             
 
@@ -595,11 +665,15 @@
 
             
 
+            
+
              is thrown if the work item could not be queued.</para
           >
         </returns>
         <param name="callBack">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -612,10 +686,14 @@
 
           
 
+          
+
            representing the method to execute. </param
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -661,8 +739,12 @@
 
             
 
+            
+
              that is returned by this method, call its <see
              cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+
+            
 
             
 
@@ -675,8 +757,12 @@
 
             
 
+            
+
              method, even if you specify true for <paramref
              name="executeOnlyOnce" />
+
+            
 
             
 
@@ -689,11 +775,15 @@
 
             
 
+            
+
              method instead of depending on the registered wait handle's finalizer.</para
           >
           <para
             >The <see
              cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -717,8 +807,12 @@
 
             
 
+            
+
              method checks the current state of the specified object's <see
              cref="T:System.Threading.WaitHandle" />
+
+            
 
             
 
@@ -731,8 +825,12 @@
 
             
 
+            
+
              parameter is not 0 (zero) and the <paramref
              name="executeOnlyOnce" />
+
+            
 
             
 
@@ -749,8 +847,12 @@
 
               
 
+              
+
                for <paramref
                name="waitObject" />
+
+              
 
               
 
@@ -763,8 +865,12 @@
 
               
 
+              
+
               , use a <see
                cref="T:System.Threading.Semaphore" />
+
+              
 
               
 
@@ -781,11 +887,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >The wait thread uses the Win32 <unmanagedCodeEntityReference
             >WaitForMultipleObjects</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -798,6 +908,8 @@
 
             
 
+            
+
             , you must duplicate the handle using the Win32 <unmanagedCodeEntityReference
             >DuplicateHandle</unmanagedCodeEntityReference>
 
@@ -805,8 +917,12 @@
 
             
 
+            
+
              function. Note that you should not pulse an event object passed to <see
              cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -826,8 +942,12 @@
 
             
 
+            
+
              property value is propagated to worker threads queued using the <see
              cref="Overload:System.Threading.ThreadPool.RegisterWaitForSingleObject" />
+
+            
 
             
 
@@ -846,6 +966,8 @@
 
             
 
+            
+
             , specifying a 32-bit signed integer for the time-out in milliseconds.</para
           >
         </summary>
@@ -854,6 +976,8 @@
           <para
             >The <see
              cref="T:System.Threading.RegisteredWaitHandle" />
+
+            
 
             
 
@@ -869,8 +993,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.WaitHandle" />
+
+          
 
           
 
@@ -883,8 +1011,12 @@
 
           
 
+          
+
            other than <see
            cref="T:System.Threading.Mutex" />
+
+          
 
           
 
@@ -899,6 +1031,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.WaitOrTimerCallback" />
 
@@ -906,8 +1040,12 @@
 
           
 
+          
+
            delegate to call when the <paramref
            name="waitObject" />
+
+          
 
           
 
@@ -922,10 +1060,14 @@
 
           
 
+          
+
           The object that is passed to the delegate. </param
         >
         <param name="millisecondsTimeOutInterval">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -938,8 +1080,12 @@
 
           
 
+          
+
            parameter is 0 (zero), the function tests the object's state and returns immediately. If <paramref
            name="millisecondsTimeOutInterval" />
+
+          
 
           
 
@@ -954,8 +1100,12 @@
 
           
 
+          
+
           true to indicate that the thread will no longer wait on the <paramref
            name="waitObject" />
+
+          
 
           
 
@@ -1001,8 +1151,12 @@
 
             
 
+            
+
              that is returned by this method, call its <see
              cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+
+            
 
             
 
@@ -1015,8 +1169,12 @@
 
             
 
+            
+
              method, even if you specify true for <paramref
              name="executeOnlyOnce" />
+
+            
 
             
 
@@ -1029,11 +1187,15 @@
 
             
 
+            
+
              method instead of depending on the registered wait handle's finalizer.</para
           >
           <para
             >The <see
              cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int64,System.Boolean)" />
+
+            
 
             
 
@@ -1057,8 +1219,12 @@
 
             
 
+            
+
              method checks the current state of the specified object's <see
              cref="T:System.Threading.WaitHandle" />
+
+            
 
             
 
@@ -1071,8 +1237,12 @@
 
             
 
+            
+
              parameter is not 0 (zero) and the <paramref
              name="executeOnlyOnce" />
+
+            
 
             
 
@@ -1089,8 +1259,12 @@
 
               
 
+              
+
                for <paramref
                name="waitObject" />
+
+              
 
               
 
@@ -1103,8 +1277,12 @@
 
               
 
+              
+
               , use a <see
                cref="T:System.Threading.Semaphore" />
+
+              
 
               
 
@@ -1121,11 +1299,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >The wait thread uses the Win32 <unmanagedCodeEntityReference
             >WaitForMultipleObjects</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -1138,6 +1320,8 @@
 
             
 
+            
+
             , you must duplicate the handle using the Win32 <unmanagedCodeEntityReference
             >DuplicateHandle</unmanagedCodeEntityReference>
 
@@ -1145,8 +1329,12 @@
 
             
 
+            
+
              function. Note that you should not pulse an event object passed to <see
              cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int64,System.Boolean)" />
+
+            
 
             
 
@@ -1166,8 +1354,12 @@
 
             
 
+            
+
              property value is propagated to worker threads queued using the <see
              cref="Overload:System.Threading.ThreadPool.RegisterWaitForSingleObject" />
+
+            
 
             
 
@@ -1186,6 +1378,8 @@
 
             
 
+            
+
             , specifying a 64-bit signed integer for the time-out in milliseconds.</para
           >
         </summary>
@@ -1194,6 +1388,8 @@
           <para
             >The <see
              cref="T:System.Threading.RegisteredWaitHandle" />
+
+            
 
             
 
@@ -1209,8 +1405,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.WaitHandle" />
+
+          
 
           
 
@@ -1223,8 +1423,12 @@
 
           
 
+          
+
            other than <see
            cref="T:System.Threading.Mutex" />
+
+          
 
           
 
@@ -1239,6 +1443,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.WaitOrTimerCallback" />
 
@@ -1246,8 +1452,12 @@
 
           
 
+          
+
            delegate to call when the <paramref
            name="waitObject" />
+
+          
 
           
 
@@ -1262,10 +1472,14 @@
 
           
 
+          
+
           The object passed to the delegate. </param
         >
         <param name="millisecondsTimeOutInterval">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1278,8 +1492,12 @@
 
           
 
+          
+
            parameter is 0 (zero), the function tests the object's state and returns immediately. If <paramref
            name="millisecondsTimeOutInterval" />
+
+          
 
           
 
@@ -1294,8 +1512,12 @@
 
           
 
+          
+
           true to indicate that the thread will no longer wait on the <paramref
            name="waitObject" />
+
+          
 
           
 
@@ -1341,8 +1563,12 @@
 
             
 
+            
+
              that is returned by this method, call its <see
              cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+
+            
 
             
 
@@ -1355,8 +1581,12 @@
 
             
 
+            
+
              method, even if you specify true for <paramref
              name="executeOnlyOnce" />
+
+            
 
             
 
@@ -1369,11 +1599,15 @@
 
             
 
+            
+
              method instead of depending on the registered wait handle's finalizer.</para
           >
           <para
             >The <see
              cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.TimeSpan,System.Boolean)" />
+
+            
 
             
 
@@ -1397,8 +1631,12 @@
 
             
 
+            
+
              method checks the current state of the specified object's <see
              cref="T:System.Threading.WaitHandle" />
+
+            
 
             
 
@@ -1411,8 +1649,12 @@
 
             
 
+            
+
              parameter is not 0 (zero) and the <paramref
              name="executeOnlyOnce" />
+
+            
 
             
 
@@ -1429,8 +1671,12 @@
 
               
 
+              
+
                for <paramref
                name="waitObject" />
+
+              
 
               
 
@@ -1443,8 +1689,12 @@
 
               
 
+              
+
               , use a <see
                cref="T:System.Threading.Semaphore" />
+
+              
 
               
 
@@ -1461,11 +1711,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >The wait thread uses the Win32 <unmanagedCodeEntityReference
             >WaitForMultipleObjects</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -1478,6 +1732,8 @@
 
             
 
+            
+
             , you must duplicate the handle using the Win32 <unmanagedCodeEntityReference
             >DuplicateHandle</unmanagedCodeEntityReference>
 
@@ -1485,8 +1741,12 @@
 
             
 
+            
+
              function. Note that you should not pulse an event object passed to <see
              cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.TimeSpan,System.Boolean)" />
+
+            
 
             
 
@@ -1506,8 +1766,12 @@
 
             
 
+            
+
              property value is propagated to worker threads queued using the <see
              cref="Overload:System.Threading.ThreadPool.RegisterWaitForSingleObject" />
+
+            
 
             
 
@@ -1526,8 +1790,12 @@
 
             
 
+            
+
             , specifying a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -1546,11 +1814,15 @@
 
             
 
+            
+
              that encapsulates the native handle.</para
           >
         </returns>
         <param name="waitObject">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1563,6 +1835,8 @@
 
           
 
+          
+
            to register. Use a <see
            cref="T:System.Threading.WaitHandle" />
 
@@ -1570,8 +1844,12 @@
 
           
 
+          
+
            other than <see
            cref="T:System.Threading.Mutex" />
+
+          
 
           
 
@@ -1586,6 +1864,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.WaitOrTimerCallback" />
 
@@ -1593,8 +1873,12 @@
 
           
 
+          
+
            delegate to call when the <paramref
            name="waitObject" />
+
+          
 
           
 
@@ -1609,10 +1893,14 @@
 
           
 
+          
+
           The object passed to the delegate. </param
         >
         <param name="timeout">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1625,6 +1913,8 @@
 
           
 
+          
+
           . If <paramref
            name="timeout" />
 
@@ -1632,8 +1922,12 @@
 
           
 
+          
+
            is 0 (zero), the function tests the object's state and returns immediately. If <paramref
            name="timeout" />
+
+          
 
           
 
@@ -1648,8 +1942,12 @@
 
           
 
+          
+
           true to indicate that the thread will no longer wait on the <paramref
            name="waitObject" />
+
+          
 
           
 
@@ -1700,8 +1998,12 @@
 
             
 
+            
+
              that is returned by this method, call its <see
              cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+
+            
 
             
 
@@ -1714,8 +2016,12 @@
 
             
 
+            
+
              method, even if you specify true for <paramref
              name="executeOnlyOnce" />
+
+            
 
             
 
@@ -1728,11 +2034,15 @@
 
             
 
+            
+
              method instead of depending on the registered wait handle's finalizer.</para
           >
           <para
             >The <see
              cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int64,System.Boolean)" />
+
+            
 
             
 
@@ -1756,8 +2066,12 @@
 
             
 
+            
+
             method checks the current state of the specified object's <see
              cref="T:System.Threading.WaitHandle" />
+
+            
 
             
 
@@ -1770,8 +2084,12 @@
 
             
 
+            
+
              parameter is not 0 (zero) and the <paramref
              name="executeOnlyOnce" />
+
+            
 
             
 
@@ -1788,8 +2106,12 @@
 
               
 
+              
+
                for <paramref
                name="waitObject" />
+
+              
 
               
 
@@ -1802,8 +2124,12 @@
 
               
 
+              
+
               , use a <see
                cref="T:System.Threading.Semaphore" />
+
+              
 
               
 
@@ -1820,11 +2146,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >The wait thread uses the Win32 <unmanagedCodeEntityReference
             >WaitForMultipleObjects</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -1837,6 +2167,8 @@
 
             
 
+            
+
             , you must duplicate the handle using the Win32 <unmanagedCodeEntityReference
             >DuplicateHandle</unmanagedCodeEntityReference>
 
@@ -1844,8 +2176,12 @@
 
             
 
+            
+
              function. Note that you should not pulse an event object passed to <see
              cref="M:System.Threading.ThreadPool.RegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int64,System.Boolean)" />
+
+            
 
             
 
@@ -1865,8 +2201,12 @@
 
             
 
+            
+
              property value is propagated to worker threads queued using the <see
              cref="Overload:System.Threading.ThreadPool.RegisterWaitForSingleObject" />
+
+            
 
             
 
@@ -1885,6 +2225,8 @@
 
             
 
+            
+
             , specifying a 32-bit unsigned integer for the time-out in milliseconds.</para
           >
         </summary>
@@ -1893,6 +2235,8 @@
           <para
             >The <see
              cref="T:System.Threading.RegisteredWaitHandle" />
+
+            
 
             
 
@@ -1908,8 +2252,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.WaitHandle" />
+
+          
 
           
 
@@ -1922,8 +2270,12 @@
 
           
 
+          
+
            other than <see
            cref="T:System.Threading.Mutex" />
+
+          
 
           
 
@@ -1938,6 +2290,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.WaitOrTimerCallback" />
 
@@ -1945,8 +2299,12 @@
 
           
 
+          
+
            delegate to call when the <paramref
            name="waitObject" />
+
+          
 
           
 
@@ -1961,10 +2319,14 @@
 
           
 
+          
+
           The object passed to the delegate. </param
         >
         <param name="millisecondsTimeOutInterval">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1977,8 +2339,12 @@
 
           
 
+          
+
            parameter is 0 (zero), the function tests the object's state and returns immediately. If <paramref
            name="millisecondsTimeOutInterval" />
+
+          
 
           
 
@@ -1993,8 +2359,12 @@
 
           
 
+          
+
           true to indicate that the thread will no longer wait on the <paramref
            name="waitObject" />
+
+          
 
           
 
@@ -2049,10 +2419,14 @@
 
           
 
+          
+
           The maximum number of worker threads in the thread pool. </param
         >
         <param name="completionPortThreads">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2097,8 +2471,12 @@
 
             
 
+            
+
             ), <see
              cref="M:System.Threading.ThreadPool.SetMinThreads(System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -2110,6 +2488,8 @@
             <para
               >You can use the <see
                cref="M:System.Threading.ThreadPool.SetMinThreads(System.Int32,System.Int32)" />
+
+              
 
               
 
@@ -2134,10 +2514,14 @@
 
           
 
+          
+
           The minimum number of worker threads that the thread pool creates on demand. </param
         >
         <param name="completionPortThreads">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2184,6 +2568,8 @@
 
             
 
+            
+
              class, the <see
              cref="T:System.Threading.NativeOverlapped" />
 
@@ -2191,8 +2577,12 @@
 
             
 
+            
+
              structure, and the <unmanagedCodeEntityReference
             >OVERLAPPED</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -2209,8 +2599,12 @@
 
               
 
+              
+
                method could inadvertently open up a security hole. Code access security bases its permission checks on the permissions of all the callers on the stack. When work is queued on a thread pool thread using <see
                cref="M:System.Threading.ThreadPool.UnsafeQueueNativeOverlapped(System.Threading.NativeOverlapped*)" />
+
+              
 
               
 
@@ -2235,8 +2629,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.NativeOverlapped" />
+
+          
 
           
 
@@ -2279,8 +2677,12 @@
 
             
 
+            
+
              method, <see
              cref="M:System.Threading.ThreadPool.UnsafeQueueUserWorkItem(System.Threading.WaitCallback,System.Object)" />
+
+            
 
             
 
@@ -2297,8 +2699,12 @@
 
               
 
+              
+
                could inadvertently open up a security hole. Code access security bases its permission checks on the permissions of all the callers on the stack. When work is queued on a thread pool thread using <see
                cref="M:System.Threading.ThreadPool.UnsafeQueueUserWorkItem(System.Threading.WaitCallback,System.Object)" />
+
+              
 
               
 
@@ -2322,11 +2728,15 @@
 
             
 
+            
+
              is thrown if the work item could not be queued.</para
           >
         </returns>
         <param name="callBack">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2339,10 +2749,14 @@
 
           
 
+          
+
            that represents the delegate to invoke when a thread in the thread pool picks up the work item. </param
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2388,8 +2802,12 @@
 
             
 
+            
+
              method, <see
              cref="M:System.Threading.ThreadPool.UnsafeRegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int32,System.Boolean)" />
+
+            
 
             
 
@@ -2406,8 +2824,12 @@
 
               
 
+              
+
                could inadvertently open up a security hole. Code access security bases its permission checks on the permissions of all the callers on the stack. When work is queued on a thread pool thread using <see
                cref="M:System.Threading.ThreadPool.UnsafeRegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int32,System.Boolean)" />
+
+              
 
               
 
@@ -2424,8 +2846,12 @@
 
             
 
+            
+
              for <paramref
              name="waitObject" />
+
+            
 
             
 
@@ -2441,8 +2867,12 @@
 
             
 
+            
+
              that is returned by this method, call its <see
              cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+
+            
 
             
 
@@ -2455,6 +2885,8 @@
 
             
 
+            
+
              method, even if you specify true for <paramref
              name="executeOnlyOnce" />
 
@@ -2462,8 +2894,12 @@
 
             
 
+            
+
             . Garbage collection works more efficiently if you call the <see
              cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+
+            
 
             
 
@@ -2482,6 +2918,8 @@
 
             
 
+            
+
             , using a 32-bit signed integer for the time-out in milliseconds. This method does not propagate the calling stack to the worker thread.</para
           >
         </summary>
@@ -2490,6 +2928,8 @@
           <para
             >The <see
              cref="T:System.Threading.RegisteredWaitHandle" />
+
+            
 
             
 
@@ -2505,8 +2945,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.WaitHandle" />
+
+          
 
           
 
@@ -2519,8 +2963,12 @@
 
           
 
+          
+
            other than <see
            cref="T:System.Threading.Mutex" />
+
+          
 
           
 
@@ -2535,8 +2983,12 @@
 
           
 
+          
+
           The delegate to call when the <paramref
            name="waitObject" />
+
+          
 
           
 
@@ -2551,10 +3003,14 @@
 
           
 
+          
+
           The object that is passed to the delegate. </param
         >
         <param name="millisecondsTimeOutInterval">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2567,8 +3023,12 @@
 
           
 
+          
+
            parameter is 0 (zero), the function tests the object's state and returns immediately. If <paramref
            name="millisecondsTimeOutInterval" />
+
+          
 
           
 
@@ -2583,8 +3043,12 @@
 
           
 
+          
+
           true to indicate that the thread will no longer wait on the <paramref
            name="waitObject" />
+
+          
 
           
 
@@ -2630,8 +3094,12 @@
 
             
 
+            
+
              method, <see
              cref="M:System.Threading.ThreadPool.UnsafeRegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int64,System.Boolean)" />
+
+            
 
             
 
@@ -2648,8 +3116,12 @@
 
               
 
+              
+
                could inadvertently open up a security hole. Code access security bases its permission checks on the permissions of all the callers on the stack. When work is queued on a thread pool thread using <see
                cref="M:System.Threading.ThreadPool.UnsafeRegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.Int64,System.Boolean)" />
+
+              
 
               
 
@@ -2666,8 +3138,12 @@
 
             
 
+            
+
              for <paramref
              name="waitObject" />
+
+            
 
             
 
@@ -2683,8 +3159,12 @@
 
             
 
+            
+
              that is returned by this method, call its <see
              cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+
+            
 
             
 
@@ -2697,6 +3177,8 @@
 
             
 
+            
+
              method, even if you specify true for <paramref
              name="executeOnlyOnce" />
 
@@ -2704,8 +3186,12 @@
 
             
 
+            
+
             . Garbage collection works more efficiently if you call the <see
              cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+
+            
 
             
 
@@ -2724,6 +3210,8 @@
 
             
 
+            
+
             , specifying a 64-bit signed integer for the time-out in milliseconds. This method does not propagate the calling stack to the worker thread.</para
           >
         </summary>
@@ -2732,6 +3220,8 @@
           <para
             >The <see
              cref="T:System.Threading.RegisteredWaitHandle" />
+
+            
 
             
 
@@ -2747,8 +3237,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.WaitHandle" />
+
+          
 
           
 
@@ -2761,8 +3255,12 @@
 
           
 
+          
+
            other than <see
            cref="T:System.Threading.Mutex" />
+
+          
 
           
 
@@ -2777,8 +3275,12 @@
 
           
 
+          
+
           The delegate to call when the <paramref
            name="waitObject" />
+
+          
 
           
 
@@ -2793,10 +3295,14 @@
 
           
 
+          
+
           The object that is passed to the delegate. </param
         >
         <param name="millisecondsTimeOutInterval">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2809,8 +3315,12 @@
 
           
 
+          
+
            parameter is 0 (zero), the function tests the object's state and returns immediately. If <paramref
            name="millisecondsTimeOutInterval" />
+
+          
 
           
 
@@ -2825,8 +3335,12 @@
 
           
 
+          
+
           true to indicate that the thread will no longer wait on the <paramref
            name="waitObject" />
+
+          
 
           
 
@@ -2872,8 +3386,12 @@
 
             
 
+            
+
              method, <see
              cref="M:System.Threading.ThreadPool.UnsafeRegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.TimeSpan,System.Boolean)" />
+
+            
 
             
 
@@ -2890,8 +3408,12 @@
 
               
 
+              
+
                could inadvertently open up a security hole. Code access security bases its permission checks on the permissions of all the callers on the stack. When work is queued on a thread pool thread using <see
                cref="M:System.Threading.ThreadPool.UnsafeRegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.TimeSpan,System.Boolean)" />
+
+              
 
               
 
@@ -2908,8 +3430,12 @@
 
             
 
+            
+
              for <paramref
              name="waitObject" />
+
+            
 
             
 
@@ -2925,8 +3451,12 @@
 
             
 
+            
+
              that is returned by this method, call its <see
              cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+
+            
 
             
 
@@ -2939,6 +3469,8 @@
 
             
 
+            
+
              method, even if you specify true for <paramref
              name="executeOnlyOnce" />
 
@@ -2946,8 +3478,12 @@
 
             
 
+            
+
             . Garbage collection works more efficiently if you call the <see
              cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+
+            
 
             
 
@@ -2966,8 +3502,12 @@
 
             
 
+            
+
             , specifying a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -2986,11 +3526,15 @@
 
             
 
+            
+
              object that can be used to cancel the registered wait operation.</para
           >
         </returns>
         <param name="waitObject">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3003,6 +3547,8 @@
 
           
 
+          
+
            to register. Use a <see
            cref="T:System.Threading.WaitHandle" />
 
@@ -3010,8 +3556,12 @@
 
           
 
+          
+
            other than <see
            cref="T:System.Threading.Mutex" />
+
+          
 
           
 
@@ -3026,8 +3576,12 @@
 
           
 
+          
+
           The delegate to call when the <paramref
            name="waitObject" />
+
+          
 
           
 
@@ -3042,10 +3596,14 @@
 
           
 
+          
+
           The object that is passed to the delegate. </param
         >
         <param name="timeout">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3058,6 +3616,8 @@
 
           
 
+          
+
           . If <paramref
            name="timeout" />
 
@@ -3065,8 +3625,12 @@
 
           
 
+          
+
            is 0 (zero), the function tests the object's state and returns immediately. If <paramref
            name="timeout" />
+
+          
 
           
 
@@ -3081,8 +3645,12 @@
 
           
 
+          
+
           true to indicate that the thread will no longer wait on the <paramref
            name="waitObject" />
+
+          
 
           
 
@@ -3133,8 +3701,12 @@
 
             
 
+            
+
              method, <see
              cref="M:System.Threading.ThreadPool.UnsafeRegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.UInt32,System.Boolean)" />
+
+            
 
             
 
@@ -3151,8 +3723,12 @@
 
               
 
+              
+
                could inadvertently open up a security hole. Code access security bases its permission checks on the permissions of all the callers on the stack. When work is queued on a thread pool thread using <see
                cref="M:System.Threading.ThreadPool.UnsafeRegisterWaitForSingleObject(System.Threading.WaitHandle,System.Threading.WaitOrTimerCallback,System.Object,System.UInt32,System.Boolean)" />
+
+              
 
               
 
@@ -3169,8 +3745,12 @@
 
             
 
+            
+
              for <paramref
              name="waitObject" />
+
+            
 
             
 
@@ -3186,8 +3766,12 @@
 
             
 
+            
+
              that is returned by this method, call its <see
              cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+
+            
 
             
 
@@ -3200,6 +3784,8 @@
 
             
 
+            
+
              method, even if you specify true for <paramref
              name="executeOnlyOnce" />
 
@@ -3207,8 +3793,12 @@
 
             
 
+            
+
             . Garbage collection works more efficiently if you call the <see
              cref="M:System.Threading.RegisteredWaitHandle.Unregister(System.Threading.WaitHandle)" />
+
+            
 
             
 
@@ -3227,6 +3817,8 @@
 
             
 
+            
+
             , specifying a 32-bit unsigned integer for the time-out in milliseconds. This method does not propagate the calling stack to the worker thread.</para
           >
         </summary>
@@ -3235,6 +3827,8 @@
           <para
             >The <see
              cref="T:System.Threading.RegisteredWaitHandle" />
+
+            
 
             
 
@@ -3250,8 +3844,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.WaitHandle" />
+
+          
 
           
 
@@ -3264,8 +3862,12 @@
 
           
 
+          
+
            other than <see
            cref="T:System.Threading.Mutex" />
+
+          
 
           
 
@@ -3280,8 +3882,12 @@
 
           
 
+          
+
           The delegate to call when the <paramref
            name="waitObject" />
+
+          
 
           
 
@@ -3296,10 +3902,14 @@
 
           
 
+          
+
           The object that is passed to the delegate. </param
         >
         <param name="millisecondsTimeOutInterval">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3312,8 +3922,12 @@
 
           
 
+          
+
            parameter is 0 (zero), the function tests the object's state and returns immediately. If <paramref
            name="millisecondsTimeOutInterval" />
+
+          
 
           
 
@@ -3328,8 +3942,12 @@
 
           
 
+          
+
           true to indicate that the thread will no longer wait on the <paramref
            name="waitObject" />
+
+          
 
           
 

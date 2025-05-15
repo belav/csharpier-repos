@@ -120,6 +120,8 @@
 
         
 
+        
+
          control is used to display a single record from a data source. It is similar to the <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
 
@@ -127,8 +129,12 @@
 
         
 
+        
+
          control, except it displays user-defined templates instead of row fields. Creating your own templates gives you greater flexibility in controlling how the data is displayed. The <see
          cref="T:System.Web.UI.WebControls.FormView" />
+
+        
 
         
 
@@ -146,8 +152,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+            
 
             
 
@@ -174,6 +184,8 @@
 
             
 
+            
+
              object model to dynamically set properties, handle events, and so on.</para
           >
         </item>
@@ -195,8 +207,12 @@
 
         
 
+        
+
          control to display content, you need to create templates for the different parts of the control. Most templates are optional; however, you must create a template for the mode in which the control is configured. For example, a <see
          cref="T:System.Web.UI.WebControls.FormView" />
+
+        
 
         
 
@@ -230,6 +246,8 @@
 
               
 
+              
+
                control is in edit mode. This template usually contains input controls and command buttons with which the user can edit an existing record.</para
             >
           </description>
@@ -244,6 +262,8 @@
             <para
               >Defines the content for the empty data row displayed when the <see
                cref="T:System.Web.UI.WebControls.FormView" />
+
+              
 
               
 
@@ -265,6 +285,8 @@
               <para
                 >As an alternative, you can simply specify text to display in the footer row by setting the <see
                  cref="P:System.Web.UI.WebControls.FormView.FooterText" />
+
+                
 
                 
 
@@ -292,6 +314,8 @@
 
                 
 
+                
+
                  property.</para
               >
             </block>
@@ -307,6 +331,8 @@
             <para
               >Defines the content for the data row when the <see
                cref="T:System.Web.UI.WebControls.FormView" />
+
+              
 
               
 
@@ -331,6 +357,8 @@
 
               
 
+              
+
                control is in insert mode. This template usually contains input controls and command buttons with which the user can add a new record.</para
             >
           </description>
@@ -350,12 +378,16 @@
 
               
 
+              
+
                property is set to true). This template usually contains controls with which the user can navigate to another record.</para
             >
             <block subset="none" type="note">
               <para
                 >The <see
                  cref="T:System.Web.UI.WebControls.FormView" />
+
+                
 
                 
 
@@ -377,6 +409,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -387,10 +421,14 @@
 
         
 
+        
+
          control to automatically extract the values of the input control for an update or insert operation. Two-way binding expressions also allow input controls in an edit item template to automatically display the original field values. For more information on two-way binding expressions, see <format
          type="text/html">
           <a href="ab7b2846-975b-4057-a948-45527497c742">ASP.NET Data Binding</a>
         </format>
+
+        
 
         
 
@@ -412,8 +450,12 @@
 
         
 
+        
+
          control can be bound to a data source control (such as <see
          cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+        
 
         
 
@@ -426,8 +468,12 @@
 
         
 
+        
+
         , or <see
          cref="T:System.Web.UI.WebControls.AccessDataSource" />
+
+        
 
         
 
@@ -440,8 +486,12 @@
 
         
 
+        
+
          interface, such as <see
          cref="T:System.Data.DataView" />
+
+        
 
         
 
@@ -454,6 +504,8 @@
 
         
 
+        
+
         , <see
          cref="T:System.Collections.Generic.List`1" />
 
@@ -461,8 +513,12 @@
 
         
 
+        
+
         , or other collection types. Use one of the following methods to bind the <see
          cref="T:System.Web.UI.WebControls.FormView" />
+
+        
 
         
 
@@ -480,8 +536,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -494,8 +554,12 @@
 
             
 
+            
+
              value of the data source control. The <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -513,8 +577,12 @@
 
             
 
+            
+
              interface, programmatically set the <see
              cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" />
+
+            
 
             
 
@@ -527,6 +595,8 @@
 
             
 
+            
+
              control to the data source and then call the <see
              cref="M:System.Web.UI.WebControls.BaseDataBoundControl.DataBind" />
 
@@ -534,8 +604,12 @@
 
             
 
+            
+
              method. When using this method, the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -555,6 +629,8 @@
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
@@ -565,6 +641,8 @@
               >Introduction to the Validation Controls</a
             >
           </format>
+
+          
 
           
 
@@ -587,6 +665,8 @@
 
         
 
+        
+
          control provides many built-in capabilities that allow the user to update, delete, insert, and page through items in the control. When the <see
          cref="T:System.Web.UI.WebControls.FormView" />
 
@@ -594,8 +674,12 @@
 
         
 
+        
+
          control is bound to a data source control, the <see
          cref="T:System.Web.UI.WebControls.FormView" />
+
+        
 
         
 
@@ -612,12 +696,16 @@
 
           
 
+          
+
            control can provide support for update, delete, insert, and paging operations with other types of data sources; however, you must provide an appropriate event handler with the implementation for these operations.</para
         >
       </block>
       <para
         >Because the <see
          cref="T:System.Web.UI.WebControls.FormView" />
+
+        
 
         
 
@@ -630,8 +718,12 @@
 
         
 
+        
+
          control recognizes certain buttons that have their CommandName properties set to specific values. The following table lists the command buttons that the <see
          cref="T:System.Web.UI.WebControls.FormView" />
+
+        
 
         
 
@@ -669,8 +761,12 @@
 
               
 
+              
+
                control then returns to the mode specified by the <see
                cref="P:System.Web.UI.WebControls.FormView.DefaultMode" />
+
+              
 
               
 
@@ -696,8 +792,12 @@
 
               
 
+              
+
                and <see
                cref="E:System.Web.UI.WebControls.FormView.ItemDeleted" />
+
+              
 
               
 
@@ -723,8 +823,12 @@
 
               
 
+              
+
                control in edit mode. The content specified in the <see
                cref="P:System.Web.UI.WebControls.FormView.EditItemTemplate" />
+
+              
 
               
 
@@ -750,8 +854,12 @@
 
               
 
+              
+
                and <see
                cref="E:System.Web.UI.WebControls.FormView.ItemInserted" />
+
+              
 
               
 
@@ -777,8 +885,12 @@
 
               
 
+              
+
                control in insert mode. The content specified in the <see
                cref="P:System.Web.UI.WebControls.FormView.InsertItemTemplate" />
+
+              
 
               
 
@@ -804,8 +916,12 @@
 
               
 
+              
+
                and <see
                cref="E:System.Web.UI.WebControls.FormView.PageIndexChanged" />
+
+              
 
               
 
@@ -834,8 +950,12 @@
 
               
 
+              
+
                and <see
                cref="E:System.Web.UI.WebControls.FormView.ItemUpdated" />
+
+              
 
               
 
@@ -854,8 +974,12 @@
 
         
 
+        
+
          control goes into edit or insert mode, respectively. In edit mode, the content contained in the <see
          cref="P:System.Web.UI.WebControls.FormView.EditItemTemplate" />
+
+        
 
         
 
@@ -868,8 +992,12 @@
 
         
 
+        
+
          or a <see
          cref="T:System.Web.UI.WebControls.CheckBox" />
+
+        
 
         
 
@@ -885,11 +1013,15 @@
 
         
 
+        
+
          property is displayed for the data item when the control is in insert mode. The insert item template is typically defined such that the New button is replaced with an Insert and a Cancel button, and empty input controls are displayed for the user to enter the values for the new record. Clicking the Insert button inserts the record in the data source, while clicking the Cancel button abandons any changes.</para
       >
       <para
         >The <see
          cref="T:System.Web.UI.WebControls.FormView" />
+
+        
 
         
 
@@ -902,8 +1034,12 @@
 
         
 
+        
+
          control that contains the page navigation controls. To enable paging, set the <see
          cref="P:System.Web.UI.WebControls.FormView.AllowPaging" />
+
+        
 
         
 
@@ -916,6 +1052,8 @@
 
         
 
+        
+
          and the <see
          cref="P:System.Web.UI.WebControls.FormView.PagerSettings" />
 
@@ -923,8 +1061,12 @@
 
         
 
+        
+
          property. Instead of using the built-in pager row UI, you can create your own UI by using the <see
          cref="P:System.Web.UI.WebControls.FormView.PagerTemplate" />
+
+        
 
         
 
@@ -941,6 +1083,8 @@
       <para
         >You can customize the appearance of the <see
          cref="T:System.Web.UI.WebControls.FormView" />
+
+        
 
         
 
@@ -974,6 +1118,8 @@
 
               
 
+              
+
                control is in edit mode.</para
             >
           </description>
@@ -988,6 +1134,8 @@
             <para
               >The style settings for the empty data row displayed in the <see
                cref="T:System.Web.UI.WebControls.FormView" />
+
+              
 
               
 
@@ -1012,6 +1160,8 @@
 
               
 
+              
+
                control.</para
             >
           </description>
@@ -1026,6 +1176,8 @@
             <para
               >The style settings for the header row of the <see
                cref="T:System.Web.UI.WebControls.FormView" />
+
+              
 
               
 
@@ -1050,6 +1202,8 @@
 
               
 
+              
+
                control is in insert mode.</para
             >
           </description>
@@ -1064,6 +1218,8 @@
             <para
               >The style settings for the pager row displayed in the <see
                cref="T:System.Web.UI.WebControls.FormView" />
+
+              
 
               
 
@@ -1088,6 +1244,8 @@
 
               
 
+              
+
                control is in read-only mode.</para
             >
           </description>
@@ -1107,8 +1265,12 @@
 
         
 
+        
+
          control provides several events that you can program against. This allows you to run a custom routine whenever an event occurs. The following table lists the events supported by the <see
          cref="T:System.Web.UI.WebControls.FormView" />
+
+        
 
         
 
@@ -1142,6 +1304,8 @@
 
               
 
+              
+
                control is clicked. This event is often used to perform a task when a button is clicked in the control.</para
             >
           </description>
@@ -1161,8 +1325,12 @@
 
               
 
+              
+
                objects are created in the <see
                cref="T:System.Web.UI.WebControls.FormView" />
+
+              
 
               
 
@@ -1187,6 +1355,8 @@
 
               
 
+              
+
                control deletes the record from the data source. This event is often used to check the results of the delete operation.</para
             >
           </description>
@@ -1201,6 +1371,8 @@
             <para
               >Occurs when a Delete button is clicked, but before the <see
                cref="T:System.Web.UI.WebControls.FormView" />
+
+              
 
               
 
@@ -1225,6 +1397,8 @@
 
               
 
+              
+
                control inserts the record. This event is often used to check the results of the insert operation.</para
             >
           </description>
@@ -1239,6 +1413,8 @@
             <para
               >Occurs when an Insert button is clicked, but before the <see
                cref="T:System.Web.UI.WebControls.FormView" />
+
+              
 
               
 
@@ -1263,6 +1439,8 @@
 
               
 
+              
+
                control updates the row. This event is often used to check the results of the update operation.</para
             >
           </description>
@@ -1277,6 +1455,8 @@
             <para
               >Occurs when an Update button is clicked, but before the <see
                cref="T:System.Web.UI.WebControls.FormView" />
+
+              
 
               
 
@@ -1301,8 +1481,12 @@
 
               
 
+              
+
                control changes modes (to edit, insert, or read-only mode). This event is often used to perform a task when the <see
                cref="T:System.Web.UI.WebControls.FormView" />
+
+              
 
               
 
@@ -1327,6 +1511,8 @@
 
               
 
+              
+
                control changes modes (to edit, insert, or read-only mode). This event is often used to cancel a mode change.</para
             >
           </description>
@@ -1346,6 +1532,8 @@
 
               
 
+              
+
                control handles the paging operation. This event is commonly used when you need to perform a task after the user navigates to a different record in the control.</para
             >
           </description>
@@ -1360,6 +1548,8 @@
             <para
               >Occurs when one of the pager buttons is clicked, but before the <see
                cref="T:System.Web.UI.WebControls.FormView" />
+
+              
 
               
 
@@ -1388,10 +1578,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0">ASP.NET Controls and Accessibility</a>
         </format>
+
+        
 
         
 
@@ -1413,6 +1607,8 @@
 
         
 
+        
+
          control lets you specify CSS style rules in markup. If you use templates to customize the appearance of the <see
          cref="T:System.Web.UI.WebControls.FormView" />
 
@@ -1420,8 +1616,12 @@
 
         
 
+        
+
          control, you can specify CSS styles in the markup in the templates. In that case, no extra outer table is required. You can prevent the table from being rendered by setting the <see
          cref="P:System.Web.UI.WebControls.FormView.RenderOuterTable" />
+
+        
 
         
 
@@ -1445,6 +1645,8 @@
 
         
 
+        
+
         "
     BackColor="color name|#dddddd"
     BackImageUrl="uri"
@@ -1456,12 +1658,16 @@
 
         
 
+        
+
         |None|Dotted|Dashed|Solid|Double|Groove|Ridge|
         Inset|Outset"
     BorderWidth="size"
     Caption="string"
     CaptionAlign="<codeFeaturedElement
         >NotSet</codeFeaturedElement>
+
+        
 
         
 
@@ -1482,10 +1688,14 @@
 
         
 
+        
+
         |Edit|Insert"
     EmptyDataText="string"
     Enabled="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -1499,9 +1709,13 @@
 
         
 
+        
+
         |False"
     EnableViewState="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -1515,9 +1729,13 @@
 
         
 
+        
+
         "
     Font-Italic="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1527,6 +1745,8 @@
     Font-Names="string"
     Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1542,9 +1762,13 @@
 
         
 
+        
+
         "
     Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1560,11 +1784,15 @@
 
         
 
+        
+
         |Horizontal|Vertical|Both"
     HeaderText="string"
     Height="size"
     HorizontalAlign="<codeFeaturedElement
         >NotSet</codeFeaturedElement>
+
+        
 
         
 
@@ -1603,6 +1831,8 @@
 
         
 
+        
+
         |NextPreviousFirstLast|
         NumericFirstLast"
     PagerSettings-NextPageImageUrl="uri"
@@ -1610,6 +1840,8 @@
     PagerSettings-PageButtonCount="integer"
     PagerSettings-Position="<codeFeaturedElement
         >Bottom</codeFeaturedElement>
+
+        
 
         
 
@@ -1625,9 +1857,13 @@
 
         
 
+        
+
         |False"
     RenderTable="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -1641,6 +1877,8 @@
     ToolTip="string"
     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -1684,6 +1922,8 @@
 
         
 
+        
+
         |NextPreviousFirstLast|
                 NumericFirstLast"
             NextPageImageUrl="uri"
@@ -1697,11 +1937,15 @@
 
         
 
+        
+
         |Top|TopAndBottom"
             PreviousPageImageUrl="uri"
             PreviousPageText="string"
             Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -1722,6 +1966,8 @@
       <para
         >Displays the values of a single record from a data source using user-defined templates. The <see
          cref="T:System.Web.UI.WebControls.FormView" />
+
+        
 
         
 
@@ -1748,8 +1994,12 @@
 
             
 
+            
+
              class. To dynamically add a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -1762,6 +2012,8 @@
 
             
 
+            
+
              object, set its properties, and then add it to the <see
              cref="P:System.Web.UI.Control.Controls" />
 
@@ -1769,8 +2021,12 @@
 
             
 
+            
+
              collection of a container control, such as <see
              cref="T:System.Web.UI.WebControls.PlaceHolder" />
+
+            
 
             
 
@@ -1784,6 +2040,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -1821,8 +2079,12 @@
 
             
 
+            
+
              control has built-in paging capabilities, which allow a user to navigate to a different record in the data source. The paging feature can be used with any data source object that supports the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1838,8 +2100,12 @@
 
             
 
+            
+
              property to true. You can determine the total number of items in the underlying data source by using the <see
              cref="P:System.Web.UI.WebControls.FormView.PageCount" />
+
+            
 
             
 
@@ -1852,11 +2118,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >When paging is enabled, an additional row called the pager row is automatically displayed in the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -1917,12 +2187,16 @@
 
               
 
+              
+
                control automatically hides the pager row when the data source contains fewer than two records.</para
             >
           </block>
           <para
             >You can control the settings of the pager row (such as the pager display mode, the number of page links to display at a time, and the pager control's text label) by using the <see
              cref="P:System.Web.UI.WebControls.FormView.PagerSettings" />
+
+            
 
             
 
@@ -1935,8 +2209,12 @@
 
             
 
+            
+
              property. The <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -1949,11 +2227,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -1987,6 +2269,8 @@
 
                   
 
+                  
+
                    control handles the paging operation. This event is commonly used when you need to perform a task after the user navigates to a different record in the control.</para
                 >
               </description>
@@ -2006,6 +2290,8 @@
 
                   
 
+                  
+
                    control handles the paging operation. This event is often used to cancel the paging operation.</para
                 >
               </description>
@@ -2015,6 +2301,8 @@
             <para
               >These events are not raised when you change the <see
                cref="P:System.Web.UI.WebControls.FormView.PageIndex" />
+
+              
 
               
 
@@ -2063,8 +2351,12 @@
 
             
 
+            
+
              property to specify the URL to an image to display in the background of a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -2081,6 +2373,8 @@
 
               
 
+              
+
                control, the image is tiled to fill in the background. If the image is larger than the control, the image is cropped.</para
             >
           </block>
@@ -2090,6 +2384,8 @@
           <para
             >Gets or sets the URL to an image to display in the background of a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -2133,8 +2429,12 @@
 
             
 
+            
+
              property is set to true), an additional row called the pager row is automatically displayed in the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -2147,6 +2447,8 @@
 
             
 
+            
+
              property to programmatically access the <see
              cref="T:System.Web.UI.WebControls.FormViewRow" />
 
@@ -2154,8 +2456,12 @@
 
             
 
+            
+
              object that represents the bottom pager row in the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -2172,6 +2478,8 @@
 
               
 
+              
+
                property is available only after the <see
                cref="T:System.Web.UI.WebControls.FormView" />
 
@@ -2179,8 +2487,12 @@
 
               
 
+              
+
                control creates the bottom pager row in the <see
                cref="E:System.Web.UI.WebControls.FormView.ItemCreated" />
+
+              
 
               
 
@@ -2197,6 +2509,8 @@
 
             
 
+            
+
              property must be performed after the <see
              cref="T:System.Web.UI.WebControls.FormViewRow" />
 
@@ -2204,8 +2518,12 @@
 
             
 
+            
+
              object that represents the bottom pager row has been created; otherwise, the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -2224,8 +2542,12 @@
 
             
 
+            
+
              object that represents the pager row displayed at the bottom of the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -2266,8 +2588,12 @@
 
             
 
+            
+
              property to specify the text to render in an HTML caption element in a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -2283,8 +2609,12 @@
 
             
 
+            
+
              control is provided by the <see
              cref="P:System.Web.UI.WebControls.FormView.CaptionAlign" />
+
+            
 
             
 
@@ -2297,8 +2627,12 @@
 
             
 
+            
+
              property to specify the alignment of the HTML caption element in a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -2309,6 +2643,8 @@
           <para
             >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
              cref="T:System.ComponentModel.LocalizableAttribute" />
+
+            
 
             
 
@@ -2325,6 +2661,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2333,6 +2671,8 @@
           <para
             >Gets or sets the text to render in an HTML caption element in a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -2373,8 +2713,12 @@
 
             
 
+            
+
              property to specify the horizontal or vertical position of the HTML caption element in a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -2385,6 +2729,8 @@
           <para
             >This property is set using one of the <see
              cref="T:System.Web.UI.WebControls.TableCaptionAlign" />
+
+            
 
             
 
@@ -2455,8 +2801,12 @@
 
             
 
+            
+
              control is provided by the <see
              cref="P:System.Web.UI.WebControls.FormView.Caption" />
+
+            
 
             
 
@@ -2469,8 +2819,12 @@
 
             
 
+            
+
              property to specify the text to render in an HTML caption element in a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -2484,6 +2838,8 @@
           <para
             >Gets or sets the horizontal or vertical position of the HTML caption element in a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -2521,6 +2877,8 @@
 
             
 
+            
+
              property to control the spacing between the contents of a cell and the cell's border. The padding amount specified is added to all four sides of the cell.</para
           >
           <para
@@ -2531,11 +2889,15 @@
 
             
 
+            
+
              control have the same width. The padding amount is applied to the widest cell and all other cells in the column are adjusted to that cell width. Similarly, all cells in the same row have the same height. The padding amount is applied to the tallest cell in the row and all other cells in the row are adjusted to that cell height. Individual cell sizes cannot be specified.</para
           >
           <para
             >To adjust the spacing between cells, use the <see
              cref="P:System.Web.UI.WebControls.FormView.CellSpacing" />
+
+            
 
             
 
@@ -2580,8 +2942,12 @@
 
             
 
+            
+
              property to control the spacing between adjacent cells in the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -2598,8 +2964,12 @@
 
               
 
+              
+
                property to a value that displays the cell borders, a gap is displayed between the borders of adjacent cells. In this situation, the <see
                cref="P:System.Web.UI.WebControls.FormView.CellSpacing" />
+
+              
 
               
 
@@ -2611,6 +2981,8 @@
           <para
             >To adjust the spacing between the contents of a cell and the cell's border, use the <see
              cref="P:System.Web.UI.WebControls.FormView.CellPadding" />
+
+            
 
             
 
@@ -2652,6 +3024,8 @@
 
             
 
+            
+
              method to programmatically switch the <see
              cref="T:System.Web.UI.WebControls.FormView" />
 
@@ -2659,8 +3033,12 @@
 
             
 
+            
+
              control between edit, insert, and read-only modes. This method also updates the <see
              cref="P:System.Web.UI.WebControls.FormView.CurrentMode" />
+
+            
 
             
 
@@ -2692,6 +3070,8 @@
 
                   
 
+                  
+
                    control is in edit mode, which allows the user to update the values of a record.</para
                 >
               </description>
@@ -2704,6 +3084,8 @@
                 <para
                   >The <see
                    cref="T:System.Web.UI.WebControls.FormView" />
+
+                  
 
                   
 
@@ -2726,6 +3108,8 @@
 
                   
 
+                  
+
                    control is in read-only mode, which is the normal display mode.</para
                 >
               </description>
@@ -2740,8 +3124,12 @@
 
               
 
+              
+
                and <see
                cref="E:System.Web.UI.WebControls.FormView.ModeChanging" />
+
+              
 
               
 
@@ -2761,6 +3149,8 @@
 
             
 
+            
+
              control to the specified data-entry mode.</para
           >
         </summary>
@@ -2771,8 +3161,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.FormViewMode" />
+
+          
 
           
 
@@ -2811,8 +3205,12 @@
 
             
 
+            
+
              method is a helper method called by the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -2825,8 +3223,12 @@
 
             
 
+            
+
              control. When the <paramref
              name="dataBinding" />
+
+            
 
             
 
@@ -2845,6 +3247,8 @@
 
             
 
+            
+
              control with the specified data source.</para
           >
         </summary>
@@ -2854,6 +3258,8 @@
         </returns>
         <param name="dataBinding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2888,8 +3294,12 @@
 
             
 
+            
+
              method is a helper method called by the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -2902,8 +3312,12 @@
 
             
 
+            
+
              object, this method also sets the <see
              cref="P:System.Web.UI.WebControls.FormView.CellPadding" />
+
+            
 
             
 
@@ -2922,6 +3336,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -2935,8 +3351,12 @@
 
             
 
+            
+
              that contains the default table style for the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -2972,8 +3392,12 @@
 
             
 
+            
+
              method is a helper method called by the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -2986,8 +3410,12 @@
 
             
 
+            
+
              object that contains the arguments passed to the data source. In this implementation, the <see
              cref="T:System.Web.UI.DataSourceSelectArguments" />
+
+            
 
             
 
@@ -3006,6 +3434,8 @@
 
             
 
+            
+
              object that contains the arguments that are passed to the data source for processing.</para
           >
         </summary>
@@ -3014,6 +3444,8 @@
           <para
             >A <see
              cref="T:System.Web.UI.DataSourceSelectArguments" />
+
+            
 
             
 
@@ -3054,6 +3486,8 @@
 
             
 
+            
+
              method is a helper method called by the <see
              cref="T:System.Web.UI.WebControls.FormView" />
 
@@ -3061,8 +3495,12 @@
 
             
 
+            
+
              control to create a <see
              cref="T:System.Web.UI.WebControls.FormViewRow" />
+
+            
 
             
 
@@ -3081,6 +3519,8 @@
 
             
 
+            
+
              object using the specified item index, row type, and row state.</para
           >
         </summary>
@@ -3089,6 +3529,8 @@
           <para
             >A <see
              cref="T:System.Web.UI.WebControls.FormViewRow" />
+
+            
 
             
 
@@ -3104,8 +3546,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.DataControlRowType" />
+
+          
 
           
 
@@ -3120,8 +3566,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Web.UI.WebControls.DataControlRowState" />
+
+          
 
           
 
@@ -3156,8 +3606,12 @@
 
             
 
+            
+
              method is a helper method called by the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -3176,6 +3630,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -3189,8 +3645,12 @@
 
             
 
+            
+
              that represents the containing table for the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -3234,8 +3694,12 @@
 
             
 
+            
+
              property to determine whether the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -3267,6 +3731,8 @@
 
                   
 
+                  
+
                    control is in edit mode, which allows the user to update the values of a record.</para
                 >
               </description>
@@ -3279,6 +3745,8 @@
                 <para
                   >The <see
                    cref="T:System.Web.UI.WebControls.FormView" />
+
+                  
 
                   
 
@@ -3301,6 +3769,8 @@
 
                   
 
+                  
+
                    control is in read-only mode, which is the normal display mode.</para
                 >
               </description>
@@ -3314,8 +3784,12 @@
 
             
 
+            
+
              control when the New, Update, Insert, Delete, or Cancel command button is clicked. When the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -3349,8 +3823,12 @@
 
                   
 
+                  
+
                     control changes modes, but after the mode changes. This event is commonly used to perform a task whenever the <see
                    cref="T:System.Web.UI.WebControls.FormView" />
+
+                  
 
                   
 
@@ -3375,6 +3853,8 @@
 
                   
 
+                  
+
                     control changes modes, but before the mode changes. This event is commonly used to cancel the mode change.</para
                 >
               </description>
@@ -3388,6 +3868,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -3396,6 +3878,8 @@
           <para
             >Gets the current data-entry mode of the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -3428,8 +3912,12 @@
 
             
 
+            
+
              method to bind data from a data source to the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -3443,6 +3931,8 @@
           <para
             >Binds the data source to the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -3483,8 +3973,12 @@
 
             
 
+            
+
              property to access the data item bound to the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -3497,8 +3991,12 @@
 
             
 
+            
+
              returned by this property varies depending on the data source. For example, when a <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -3511,8 +4009,12 @@
 
             
 
+            
+
              control, a <see
              cref="T:System.Data.DataRowView" />
+
+            
 
             
 
@@ -3529,6 +4031,8 @@
 
               
 
+              
+
                control is in insert mode and returns null.</para
             >
           </block>
@@ -3538,6 +4042,8 @@
           <para
             >Gets the data item bound to the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -3578,8 +4084,12 @@
 
             
 
+            
+
              property to determine the number of data items contained in the data source. This property contains the same value as the <see
              cref="P:System.Web.UI.WebControls.FormView.PageCount" />
+
+            
 
             
 
@@ -3624,6 +4134,8 @@
 
             
 
+            
+
              property to determine the index of the data item bound to the <see
              cref="T:System.Web.UI.WebControls.FormView" />
 
@@ -3631,8 +4143,12 @@
 
             
 
+            
+
              control from the data source. This property contains the same value as the <see
              cref="P:System.Web.UI.WebControls.FormView.PageIndex" />
+
+            
 
             
 
@@ -3649,8 +4165,12 @@
 
               
 
+              
+
                control is in insert mode. When the control is in insert mode, the <see
                cref="P:System.Web.UI.WebControls.FormView.DataItemIndex" />
+
+              
 
               
 
@@ -3665,6 +4185,8 @@
           <para
             >Gets the index of the data item bound to the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -3708,8 +4230,12 @@
 
             
 
+            
+
              property is set, the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -3722,8 +4248,12 @@
 
             
 
+            
+
              object that contains the key/value pairs of the field or fields listed in the <see
              cref="P:System.Web.UI.WebControls.FormView.DataKeyNames" />
+
+            
 
             
 
@@ -3736,6 +4266,8 @@
 
             
 
+            
+
              property to get this <see
              cref="T:System.Web.UI.WebControls.DataKey" />
 
@@ -3743,8 +4275,12 @@
 
             
 
+            
+
              object. This property is commonly used to obtain the keys and their corresponding values for the fields specified in the <see
              cref="P:System.Web.UI.WebControls.FormView.DataKeyNames" />
+
+            
 
             
 
@@ -3761,8 +4297,12 @@
 
               
 
+              
+
                property to determine the value of the first key field listed in the <see
                cref="P:System.Web.UI.WebControls.FormView.DataKeyNames" />
+
+              
 
               
 
@@ -3777,6 +4317,8 @@
           <para
             >Gets a <see
              cref="T:System.Web.UI.WebControls.DataKey" />
+
+            
 
             
 
@@ -3820,8 +4362,12 @@
 
             
 
+            
+
              property to specify a comma-separated list of field names that represent the primary key of the data source. When the <see
              cref="P:System.Web.UI.WebControls.FormView.DataKeyNames" />
+
+            
 
             
 
@@ -3834,8 +4380,12 @@
 
             
 
+            
+
              control automatically creates a <see
              cref="T:System.Web.UI.WebControls.DataKey" />
+
+            
 
             
 
@@ -3848,6 +4398,8 @@
 
             
 
+            
+
              property for the current record. The <see
              cref="T:System.Web.UI.WebControls.DataKey" />
 
@@ -3855,8 +4407,12 @@
 
             
 
+            
+
              object is then stored in the <see
              cref="P:System.Web.UI.WebControls.FormView.DataKey" />
+
+            
 
             
 
@@ -3873,8 +4429,12 @@
 
               
 
+              
+
                property for the built-in updating, deleting, and inserting features of the <see
                cref="T:System.Web.UI.WebControls.FormView" />
+
+              
 
               
 
@@ -3920,8 +4480,12 @@
 
             
 
+            
+
              property to specify whether the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -3934,8 +4498,12 @@
 
             
 
+            
+
              control returns to read-only mode; however, you can keep the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -3967,6 +4535,8 @@
 
                   
 
+                  
+
                    control is in edit mode, which allows the user to update the values of a record.</para
                 >
               </description>
@@ -3979,6 +4549,8 @@
                 <para
                   >The <see
                    cref="T:System.Web.UI.WebControls.FormView" />
+
+                  
 
                   
 
@@ -4001,6 +4573,8 @@
 
                   
 
+                  
+
                    control is in read-only mode, which is the normal display mode.</para
                 >
               </description>
@@ -4014,6 +4588,8 @@
 
             
 
+            
+
              control has a single purpose, such as only to insert or edit records.</para
           >
         </remarks>
@@ -4022,6 +4598,8 @@
           <para
             >Gets or sets the data-entry mode to which the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -4054,8 +4632,12 @@
 
             
 
+            
+
              method to programmatically delete the current record in the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -4068,6 +4650,8 @@
 
             
 
+            
+
              control, such as from a different control on the page. Calling this method also raises the <see
              cref="E:System.Web.UI.WebControls.FormView.ItemDeleted" />
 
@@ -4075,8 +4659,12 @@
 
             
 
+            
+
              and <see
              cref="E:System.Web.UI.WebControls.FormView.ItemDeleting" />
+
+            
 
             
 
@@ -4090,6 +4678,8 @@
           <para
             >Deletes the current record in the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -4139,8 +4729,12 @@
 
             
 
+            
+
              control renders a different template for the data row based on the current mode of the control (specified by the <see
              cref="P:System.Web.UI.WebControls.FormView.CurrentMode" />
+
+            
 
             
 
@@ -4198,8 +4792,12 @@
 
             
 
+            
+
              property to define your own user interface (UI) for the data row when the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -4215,8 +4813,12 @@
 
             
 
+            
+
              control. You can then list the contents of the template between the opening and closing &lt;EditItemTemplate&gt; tags. By using a two-way binding expression, you can associate a field with an input control. This allows the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -4229,10 +4831,14 @@
 
             
 
+            
+
              control automatically extracts the updated field value from the associated input control. For more information on two-way binding expressions, see <format
              type="text/html">
               <a href="ab7b2846-975b-4057-a948-45527497c742">ASP.NET Data Binding</a>
             </format>
+
+            
 
             
 
@@ -4271,6 +4877,8 @@
           <para
             >You can control the appearance of the item template by using the <see
              cref="P:System.Web.UI.WebControls.FormView.EditRowStyle" />
+
+            
 
             
 
@@ -4324,8 +4932,12 @@
 
             
 
+            
+
              property to control the appearance of the data row when a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -4338,6 +4950,8 @@
 
             
 
+            
+
              control is in edit mode, the data row displays the user-defined content specified by the <see
              cref="P:System.Web.UI.WebControls.FormView.EditItemTemplate" />
 
@@ -4345,8 +4959,12 @@
 
             
 
+            
+
              property. This property is read-only; however, you can set the properties of the <see
              cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+            
 
             
 
@@ -4364,8 +4982,12 @@
 
                 
 
+                
+
                  control in the form <paramref
                  name="Property-Subproperty" />
+
+                
 
                 
 
@@ -4378,8 +5000,12 @@
 
                 
 
+                
+
                  is a property of the <see
                  cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+                
 
                 
 
@@ -4397,6 +5023,8 @@
 
                 
 
+                
+
                  control.</para
               >
             </item>
@@ -4404,6 +5032,8 @@
           <para
             >The properties can also be set programmatically in the form <paramref
              name="Property.Subproperty" />
+
+            
 
             
 
@@ -4422,8 +5052,12 @@
 
             
 
+            
+
              object that allows you to set the appearance of the data row when a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -4473,6 +5107,8 @@
 
             
 
+            
+
              property to control the appearance of the empty data row in a <see
              cref="T:System.Web.UI.WebControls.FormView" />
 
@@ -4480,8 +5116,12 @@
 
             
 
+            
+
              control. The empty data row is displayed when the data source that is bound to the control does not contain any records. This property is read-only; however, you can set the properties of the <see
              cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+            
 
             
 
@@ -4499,8 +5139,12 @@
 
                 
 
+                
+
                  control in the form <paramref
                  name="Property-Subproperty" />
+
+                
 
                 
 
@@ -4513,8 +5157,12 @@
 
                 
 
+                
+
                  is a property of the <see
                  cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+                
 
                 
 
@@ -4532,6 +5180,8 @@
 
                 
 
+                
+
                  control.</para
               >
             </item>
@@ -4539,6 +5189,8 @@
           <para
             >The properties can also be set programmatically in the form <paramref
              name="Property.Subproperty" />
+
+            
 
             
 
@@ -4557,8 +5209,12 @@
 
             
 
+            
+
              object that allows you to set the appearance of the empty data row displayed when the data source bound to a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -4608,8 +5264,12 @@
 
             
 
+            
+
              control when the data source that is bound to the control does not contain any records. You can define your own custom user interface (UI) for the empty data row by using the <see
              cref="P:System.Web.UI.WebControls.FormView.EmptyDataTemplate" />
+
+            
 
             
 
@@ -4622,6 +5282,8 @@
 
             
 
+            
+
              control. You can then list the contents of the template between the opening and closing &lt;EmptyDataTemplate&gt; tags. To control the style of the empty data row, use the <see
              cref="P:System.Web.UI.WebControls.FormView.EmptyDataRowStyle" />
 
@@ -4629,8 +5291,12 @@
 
             
 
+            
+
              property. Alternatively, you can use the built-in UI for the empty data row by setting the <see
              cref="P:System.Web.UI.WebControls.FormView.EmptyDataText" />
+
+            
 
             
 
@@ -4647,6 +5313,8 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.FormView.EmptyDataTemplate" />
 
@@ -4654,8 +5322,12 @@
 
               
 
+              
+
                properties are set, the <see
                cref="P:System.Web.UI.WebControls.FormView.EmptyDataTemplate" />
+
+              
 
               
 
@@ -4670,6 +5342,8 @@
           <para
             >Gets or sets the user-defined content for the empty data row rendered when a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -4710,8 +5384,12 @@
 
             
 
+            
+
              control when the data source that is bound to the control does not contain any records. Use the <see
              cref="P:System.Web.UI.WebControls.FormView.EmptyDataText" />
+
+            
 
             
 
@@ -4724,8 +5402,12 @@
 
             
 
+            
+
              property. Alternatively, you can define your own custom user interface (UI) for the empty data row by setting the <see
              cref="P:System.Web.UI.WebControls.FormView.EmptyDataTemplate" />
+
+            
 
             
 
@@ -4742,6 +5424,8 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.FormView.EmptyDataTemplate" />
 
@@ -4749,8 +5433,12 @@
 
               
 
+              
+
                properties are set, the <see
                cref="P:System.Web.UI.WebControls.FormView.EmptyDataTemplate" />
+
+              
 
               
 
@@ -4767,12 +5455,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -4786,6 +5478,8 @@
           <para
             >Gets or sets the text to display in the empty data row rendered when a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -4818,8 +5512,12 @@
 
             
 
+            
+
              method is a helper method used by the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -4832,8 +5530,12 @@
 
             
 
+            
+
              control is bound to data when appropriate. The <see
              cref="M:System.Web.UI.WebControls.FormView.EnsureDataBound" />
+
+            
 
             
 
@@ -4846,8 +5548,12 @@
 
             
 
+            
+
              method to bind the control to the data source when the data-bound control is not yet bound, but requires data binding. This version of the method has been overridden to prevent data binding from occurring when the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -4861,6 +5567,8 @@
           <para
             >Makes certain that the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -4899,8 +5607,12 @@
 
             
 
+            
+
              method is a helper method called by the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -4958,6 +5670,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </remarks>
@@ -4966,6 +5680,8 @@
           <para
             >Retrieves the values of each field declared within the data row and stores them in the specified <see
              cref="T:System.Collections.Specialized.IOrderedDictionary" />
+
+            
 
             
 
@@ -4981,8 +5697,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.Specialized.IOrderedDictionary" />
+
+          
 
           
 
@@ -4992,6 +5712,8 @@
         >
         <param name="includeKeys">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5034,8 +5756,12 @@
 
             
 
+            
+
              control when the <see
              cref="P:System.Web.UI.WebControls.FormView.FooterText" />
+
+            
 
             
 
@@ -5048,6 +5774,8 @@
 
             
 
+            
+
              property is set. Use the <see
              cref="P:System.Web.UI.WebControls.FormView.FooterRow" />
 
@@ -5055,8 +5783,12 @@
 
             
 
+            
+
              property to programmatically access the <see
              cref="T:System.Web.UI.WebControls.FormViewRow" />
+
+            
 
             
 
@@ -5073,6 +5805,8 @@
 
               
 
+              
+
                property is available only after the <see
                cref="T:System.Web.UI.WebControls.FormView" />
 
@@ -5080,8 +5814,12 @@
 
               
 
+              
+
                control creates the footer row in the <see
                cref="E:System.Web.UI.WebControls.FormView.ItemCreated" />
+
+              
 
               
 
@@ -5098,8 +5836,12 @@
 
             
 
+            
+
              property must be performed after the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -5112,11 +5854,15 @@
 
             
 
+            
+
              control overwrites any changes.</para
           >
           <para
             >To control the style of the footer row, use the <see
              cref="P:System.Web.UI.WebControls.FormView.FooterStyle" />
+
+            
 
             
 
@@ -5135,8 +5881,12 @@
 
             
 
+            
+
              object that represents the footer row in a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -5186,8 +5936,12 @@
 
             
 
+            
+
              control when the <see
              cref="P:System.Web.UI.WebControls.FormView.FooterText" />
+
+            
 
             
 
@@ -5200,8 +5954,12 @@
 
             
 
+            
+
              property is set. Use the <see
              cref="P:System.Web.UI.WebControls.FormView.FooterStyle" />
+
+            
 
             
 
@@ -5214,8 +5972,12 @@
 
             
 
+            
+
              control. This property is read-only; however, you can set the properties of the <see
              cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+            
 
             
 
@@ -5233,8 +5995,12 @@
 
                 
 
+                
+
                  control in the form <paramref
                  name="Property-Subproperty" />
+
+                
 
                 
 
@@ -5247,8 +6013,12 @@
 
                 
 
+                
+
                  is a property of the <see
                  cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+                
 
                 
 
@@ -5266,6 +6036,8 @@
 
                 
 
+                
+
                  control.</para
               >
             </item>
@@ -5273,6 +6045,8 @@
           <para
             >The properties can also be set programmatically in the form <paramref
              name="Property.Subproperty" />
+
+            
 
             
 
@@ -5291,8 +6065,12 @@
 
             
 
+            
+
              object that allows you to set the appearance of the footer row in a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -5342,8 +6120,12 @@
 
             
 
+            
+
              control when the <see
              cref="P:System.Web.UI.WebControls.FormView.FooterText" />
+
+            
 
             
 
@@ -5356,8 +6138,12 @@
 
             
 
+            
+
              property is set. You can define your own custom user interface (UI) for the footer row by using the <see
              cref="P:System.Web.UI.WebControls.FormView.FooterTemplate" />
+
+            
 
             
 
@@ -5370,6 +6156,8 @@
 
             
 
+            
+
              control. You can then list the contents of the template between the opening and closing &lt;FooterTemplate&gt; tags. To control the style of the footer row, use the <see
              cref="P:System.Web.UI.WebControls.FormView.FooterStyle" />
 
@@ -5377,8 +6165,12 @@
 
             
 
+            
+
              property. Alternatively, you can simply display text in the footer row by setting the <see
              cref="P:System.Web.UI.WebControls.FormView.FooterText" />
+
+            
 
             
 
@@ -5395,6 +6187,8 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.FormView.FooterTemplate" />
 
@@ -5402,8 +6196,12 @@
 
               
 
+              
+
                properties are set, the <see
                cref="P:System.Web.UI.WebControls.FormView.FooterTemplate" />
+
+              
 
               
 
@@ -5418,6 +6216,8 @@
           <para
             >Gets or sets the user-defined content for the footer row in a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -5458,8 +6258,12 @@
 
             
 
+            
+
              control when the <see
              cref="P:System.Web.UI.WebControls.FormView.FooterText" />
+
+            
 
             
 
@@ -5472,8 +6276,12 @@
 
             
 
+            
+
              property is set. Use the <see
              cref="P:System.Web.UI.WebControls.FormView.FooterText" />
+
+            
 
             
 
@@ -5486,8 +6294,12 @@
 
             
 
+            
+
              property. Alternatively, you can define your own custom user interface (UI) for the footer row by setting the <see
              cref="P:System.Web.UI.WebControls.FormView.FooterTemplate" />
+
+            
 
             
 
@@ -5504,6 +6316,8 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.FormView.FooterTemplate" />
 
@@ -5511,8 +6325,12 @@
 
               
 
+              
+
                properties are set, the <see
                cref="P:System.Web.UI.WebControls.FormView.FooterTemplate" />
+
+              
 
               
 
@@ -5529,12 +6347,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -5548,6 +6370,8 @@
           <para
             >Gets or sets the text to display in the footer row of a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -5588,8 +6412,12 @@
 
             
 
+            
+
              property to specify the gridline style for a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -5652,6 +6480,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -5690,8 +6520,12 @@
 
             
 
+            
+
              control when the <see
              cref="P:System.Web.UI.WebControls.FormView.HeaderText" />
+
+            
 
             
 
@@ -5704,6 +6538,8 @@
 
             
 
+            
+
              property is set. Use the <see
              cref="P:System.Web.UI.WebControls.FormView.HeaderRow" />
 
@@ -5711,8 +6547,12 @@
 
             
 
+            
+
              property to programmatically access the <see
              cref="T:System.Web.UI.WebControls.FormViewRow" />
+
+            
 
             
 
@@ -5729,6 +6569,8 @@
 
               
 
+              
+
                property is available only after the <see
                cref="T:System.Web.UI.WebControls.FormView" />
 
@@ -5736,8 +6578,12 @@
 
               
 
+              
+
                control creates the header row in the <see
                cref="E:System.Web.UI.WebControls.FormView.ItemCreated" />
+
+              
 
               
 
@@ -5754,6 +6600,8 @@
 
             
 
+            
+
              property must be performed after the <see
              cref="T:System.Web.UI.WebControls.FormView" />
 
@@ -5761,8 +6609,12 @@
 
             
 
+            
+
              control has been rendered; otherwise, the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -5781,8 +6633,12 @@
 
             
 
+            
+
              object that represents the header row in a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -5832,8 +6688,12 @@
 
             
 
+            
+
              control when the <see
              cref="P:System.Web.UI.WebControls.FormView.HeaderText" />
+
+            
 
             
 
@@ -5846,8 +6706,12 @@
 
             
 
+            
+
              property is set. Use the <see
              cref="P:System.Web.UI.WebControls.FormView.HeaderStyle" />
+
+            
 
             
 
@@ -5860,8 +6724,12 @@
 
             
 
+            
+
              control. This property is read-only; however, you can set the properties of the <see
              cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+            
 
             
 
@@ -5879,8 +6747,12 @@
 
                 
 
+                
+
                  control in the form <paramref
                  name="Property-Subproperty" />
+
+                
 
                 
 
@@ -5893,8 +6765,12 @@
 
                 
 
+                
+
                  is a property of the <see
                  cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+                
 
                 
 
@@ -5912,6 +6788,8 @@
 
                 
 
+                
+
                  control.</para
               >
             </item>
@@ -5919,6 +6797,8 @@
           <para
             >The properties can also be set programmatically in the form <paramref
              name="Property.Subproperty" />
+
+            
 
             
 
@@ -5937,8 +6817,12 @@
 
             
 
+            
+
              object that allows you to set the appearance of the header row in a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -5988,8 +6872,12 @@
 
             
 
+            
+
              control when the <see
              cref="P:System.Web.UI.WebControls.FormView.HeaderText" />
+
+            
 
             
 
@@ -6002,8 +6890,12 @@
 
             
 
+            
+
              property is set. You can define your own custom user interface (UI) for the header row by using the <see
              cref="P:System.Web.UI.WebControls.FormView.HeaderTemplate" />
+
+            
 
             
 
@@ -6016,6 +6908,8 @@
 
             
 
+            
+
              control. You can then list the contents of the template between the opening and closing &lt;HeaderTemplate&gt; tags. To control the style of the header row, use the <see
              cref="P:System.Web.UI.WebControls.FormView.HeaderStyle" />
 
@@ -6023,8 +6917,12 @@
 
             
 
+            
+
              property. Alternatively, you can simply display text in the header row by setting the <see
              cref="P:System.Web.UI.WebControls.FormView.HeaderText" />
+
+            
 
             
 
@@ -6041,6 +6939,8 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.FormView.HeaderTemplate" />
 
@@ -6048,8 +6948,12 @@
 
               
 
+              
+
                properties are set, the <see
                cref="P:System.Web.UI.WebControls.FormView.HeaderTemplate" />
+
+              
 
               
 
@@ -6064,6 +6968,8 @@
           <para
             >Gets or sets the user-defined content for the header row in a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -6104,8 +7010,12 @@
 
             
 
+            
+
              control when the <see
              cref="P:System.Web.UI.WebControls.FormView.HeaderText" />
+
+            
 
             
 
@@ -6118,8 +7028,12 @@
 
             
 
+            
+
              property is set. Use the <see
              cref="P:System.Web.UI.WebControls.FormView.HeaderText" />
+
+            
 
             
 
@@ -6132,8 +7046,12 @@
 
             
 
+            
+
              property. Alternatively, you can define your own custom user interface (UI) for the header row by setting the <see
              cref="P:System.Web.UI.WebControls.FormView.HeaderTemplate" />
+
+            
 
             
 
@@ -6150,6 +7068,8 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.UI.WebControls.FormView.HeaderTemplate" />
 
@@ -6157,8 +7077,12 @@
 
               
 
+              
+
                properties are set, the <see
                cref="P:System.Web.UI.WebControls.FormView.HeaderTemplate" />
+
+              
 
               
 
@@ -6175,12 +7099,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -6194,6 +7122,8 @@
           <para
             >Gets or sets the text to display in the header row of a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -6237,8 +7167,12 @@
 
             
 
+            
+
              property to specify the horizontal alignment of a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -6270,6 +7204,8 @@
 
                   
 
+                  
+
                    control has not been set.</para
                 >
               </description>
@@ -6282,6 +7218,8 @@
                 <para
                   >The <see
                    cref="T:System.Web.UI.WebControls.FormView" />
+
+                  
 
                   
 
@@ -6304,6 +7242,8 @@
 
                   
 
+                  
+
                    control is centered on the page.</para
                 >
               </description>
@@ -6316,6 +7256,8 @@
                 <para
                   >The <see
                    cref="T:System.Web.UI.WebControls.FormView" />
+
+                  
 
                   
 
@@ -6338,6 +7280,8 @@
 
                   
 
+                  
+
                    control is aligned with both the left and right margins of the page.</para
                 >
               </description>
@@ -6349,6 +7293,8 @@
           <para
             >Gets or sets the horizontal alignment of a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -6388,8 +7334,12 @@
 
             
 
+            
+
              method is a helper method called by the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -6402,8 +7352,12 @@
 
             
 
+            
+
              object that contains the navigation controls using the properties of the <see
              cref="T:System.Web.UI.WebControls.PagedDataSource" />
+
+            
 
             
 
@@ -6416,8 +7370,12 @@
 
             
 
+            
+
              parameter. The cell is then added to the row specified by the <paramref
              name="row" />
+
+            
 
             
 
@@ -6436,6 +7394,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -6446,8 +7406,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.FormViewRow" />
+
+          
 
           
 
@@ -6484,8 +7448,12 @@
 
             
 
+            
+
              method is a helper method called by the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -6498,8 +7466,12 @@
 
             
 
+            
+
              object. The <see
              cref="T:System.Web.UI.WebControls.FormViewRow" />
+
+            
 
             
 
@@ -6512,6 +7484,8 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.FormViewRow.RowState" />
 
@@ -6519,8 +7493,12 @@
 
             
 
+            
+
              properties, respectively. The appropriate content is then added to the <see
              cref="T:System.Web.UI.WebControls.FormViewRow" />
+
+            
 
             
 
@@ -6552,8 +7530,12 @@
 
                   
 
+                  
+
                   , <see
                    cref="P:System.Web.UI.WebControls.FormView.EditItemTemplate" />
+
+                  
 
                   
 
@@ -6566,6 +7548,8 @@
 
                   
 
+                  
+
                    property are added to the <see
                    cref="T:System.Web.UI.WebControls.FormViewRow" />
 
@@ -6573,8 +7557,12 @@
 
                   
 
+                  
+
                    object, depending on the value of the <see
                    cref="P:System.Web.UI.WebControls.FormViewRow.RowState" />
+
+                  
 
                   
 
@@ -6597,8 +7585,12 @@
 
                   
 
+                  
+
                    property or the contents of the <see
                    cref="P:System.Web.UI.WebControls.FormView.EmptyDataTemplate" />
+
+                  
 
                   
 
@@ -6611,8 +7603,12 @@
 
                   
 
+                  
+
                    object, depending on which property is set. If both properties are set, the <see
                    cref="P:System.Web.UI.WebControls.FormView.EmptyDataTemplate" />
+
+                  
 
                   
 
@@ -6635,8 +7631,12 @@
 
                   
 
+                  
+
                    property or the contents of the <see
                    cref="P:System.Web.UI.WebControls.FormView.FooterTemplate" />
+
+                  
 
                   
 
@@ -6649,8 +7649,12 @@
 
                   
 
+                  
+
                    object, depending on which property is set. If both properties are set, the <see
                    cref="P:System.Web.UI.WebControls.FormView.FooterTemplate" />
+
+                  
 
                   
 
@@ -6673,8 +7677,12 @@
 
                   
 
+                  
+
                    property or the contents of the <see
                    cref="P:System.Web.UI.WebControls.FormView.HeaderTemplate" />
+
+                  
 
                   
 
@@ -6687,8 +7695,12 @@
 
                   
 
+                  
+
                    object, depending on which property is set. If both properties are set, the <see
                    cref="P:System.Web.UI.WebControls.FormView.HeaderTemplate" />
+
+                  
 
                   
 
@@ -6708,6 +7720,8 @@
 
               
 
+              
+
                method.</para
             >
           </block>
@@ -6717,6 +7731,8 @@
           <para
             >Initializes the specified <see
              cref="T:System.Web.UI.WebControls.FormViewRow" />
+
+            
 
             
 
@@ -6732,8 +7748,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.FormViewRow" />
+
+          
 
           
 
@@ -6770,6 +7790,8 @@
 
             
 
+            
+
              control is in insert mode, use the <see
              cref="M:System.Web.UI.WebControls.FormView.InsertItem(System.Boolean)" />
 
@@ -6777,8 +7799,12 @@
 
             
 
+            
+
              method to programmatically insert the current record in the data source. This method is commonly used when you need to insert the current record from outside of the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -6795,8 +7821,12 @@
 
               
 
+              
+
                control must be in insert mode when this method is called; otherwise, an <see
                cref="T:System.Web.HttpException" />
+
+              
 
               
 
@@ -6813,6 +7843,8 @@
 
             
 
+            
+
              parameter. Calling this method also raises the <see
              cref="E:System.Web.UI.WebControls.FormView.ItemInserted" />
 
@@ -6820,8 +7852,12 @@
 
             
 
+            
+
              and <see
              cref="E:System.Web.UI.WebControls.FormView.ItemInserting" />
+
+            
 
             
 
@@ -6836,6 +7872,8 @@
         </summary>
         <param name="causesValidation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6884,8 +7922,12 @@
 
             
 
+            
+
              control renders a different template for the data row based on the current mode of the control (specified by the <see
              cref="P:System.Web.UI.WebControls.FormView.CurrentMode" />
+
+            
 
             
 
@@ -6943,8 +7985,12 @@
 
             
 
+            
+
              property to define your own user interface (UI) for the data row when the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -6960,8 +8006,12 @@
 
             
 
+            
+
              control. You can then list the contents of the template between the opening and closing &lt;InsertItemTemplate&gt; tags. By using a two-way binding expression, you can associate a field with an input control. When a record is inserted, the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -6971,6 +8021,8 @@
              type="text/html">
               <a href="ab7b2846-975b-4057-a948-45527497c742">ASP.NET Data Binding</a>
             </format>
+
+            
 
             
 
@@ -7009,6 +8061,8 @@
           <para
             >You can control the appearance of the item template by using the <see
              cref="P:System.Web.UI.WebControls.FormView.InsertRowStyle" />
+
+            
 
             
 
@@ -7062,8 +8116,12 @@
 
             
 
+            
+
              property to control the appearance of the data row when a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -7076,6 +8134,8 @@
 
             
 
+            
+
              control is in insert mode, the data row displays the user-defined content specified by the <see
              cref="P:System.Web.UI.WebControls.FormView.InsertItemTemplate" />
 
@@ -7083,8 +8143,12 @@
 
             
 
+            
+
              property. This property is read-only; however, you can set the properties of the <see
              cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+            
 
             
 
@@ -7103,8 +8167,12 @@
 
                 
 
+                
+
                  control in the form <paramref
                  name="Property-Subproperty" />
+
+                
 
                 
 
@@ -7117,8 +8185,12 @@
 
                 
 
+                
+
                  is a property of the <see
                  cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+                
 
                 
 
@@ -7136,6 +8208,8 @@
 
                 
 
+                
+
                  control.</para
               >
             </item>
@@ -7143,6 +8217,8 @@
           <para
             >The properties can also be set programmatically in the form <paramref
              name="Property.Subproperty" />
+
+            
 
             
 
@@ -7161,8 +8237,12 @@
 
             
 
+            
+
              object that allows you to set the appearance of the data row in a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -7197,6 +8277,8 @@
 
             
 
+            
+
              method is a helper method called by the <see
              cref="T:System.Web.UI.WebControls.FormView" />
 
@@ -7204,8 +8286,12 @@
 
             
 
+            
+
              control to determine whether the specified data type can be bound to a field in the control. The <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -7223,6 +8309,8 @@
 
                 
 
+                
+
                 , <see
                  cref="T:System.Byte" />
 
@@ -7230,8 +8318,12 @@
 
                 
 
+                
+
                 , <see
                  cref="T:System.Int32" />
+
+                
 
                 
 
@@ -7272,6 +8364,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -7280,6 +8374,8 @@
           <para
             >true if the specified data type can be bound to a field in the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -7295,8 +8391,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -7330,8 +8430,12 @@
 
             
 
+            
+
              event is raised when a button within the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -7342,6 +8446,8 @@
           <para
             >Buttons within a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -7373,8 +8479,12 @@
 
                   
 
+                  
+
                    control to the mode specified by the <see
                    cref="P:System.Web.UI.WebControls.FormView.DefaultMode" />
+
+                  
 
                   
 
@@ -7387,8 +8497,12 @@
 
                   
 
+                  
+
                    and <see
                    cref="E:System.Web.UI.WebControls.FormView.ModeChanging" />
+
+                  
 
                   
 
@@ -7411,8 +8525,12 @@
 
                   
 
+                  
+
                    and <see
                    cref="E:System.Web.UI.WebControls.FormView.ItemDeleting" />
+
+                  
 
                   
 
@@ -7435,6 +8553,8 @@
 
                   
 
+                  
+
                    control in edit mode. Raises the <see
                    cref="E:System.Web.UI.WebControls.FormView.ModeChanged" />
 
@@ -7442,8 +8562,12 @@
 
                   
 
+                  
+
                    and <see
                    cref="E:System.Web.UI.WebControls.FormView.ModeChanging" />
+
+                  
 
                   
 
@@ -7466,8 +8590,12 @@
 
                   
 
+                  
+
                    and <see
                    cref="E:System.Web.UI.WebControls.FormView.ItemInserting" />
+
+                  
 
                   
 
@@ -7490,6 +8618,8 @@
 
                   
 
+                  
+
                    control in insert mode. Raises the <see
                    cref="E:System.Web.UI.WebControls.FormView.ModeChanged" />
 
@@ -7497,8 +8627,12 @@
 
                   
 
+                  
+
                    and <see
                    cref="E:System.Web.UI.WebControls.FormView.ModeChanging" />
+
+                  
 
                   
 
@@ -7521,8 +8655,12 @@
 
                   
 
+                  
+
                    and <see
                    cref="E:System.Web.UI.WebControls.FormView.PageIndexChanging" />
+
+                  
 
                   
 
@@ -7545,8 +8683,12 @@
 
                   
 
+                  
+
                    and <see
                    cref="E:System.Web.UI.WebControls.FormView.ItemUpdating" />
+
+                  
 
                   
 
@@ -7565,11 +8707,15 @@
 
             
 
+            
+
              event is raised when a button listed in the previous table is clicked, it is recommended that you use the events listed in the table for the operation.</para
           >
           <para
             >A <see
              cref="T:System.Web.UI.WebControls.FormViewCommandEventArgs" />
+
+            
 
             
 
@@ -7582,6 +8728,8 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.CommandEventArgs.CommandArgument" />
 
@@ -7589,8 +8737,12 @@
 
             
 
+            
+
              properties, respectively. You can also access the control that raised the event by using the <see
              cref="P:System.Web.UI.WebControls.DetailsViewCommandEventArgs.CommandSource" />
+
+            
 
             
 
@@ -7608,6 +8760,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -7616,6 +8770,8 @@
           <para
             >Occurs when a button within a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -7647,8 +8803,12 @@
 
             
 
+            
+
              event is raised after all rows are created in a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -7665,6 +8825,8 @@
 
               
 
+              
+
                event occurs before the <see
                cref="T:System.Web.UI.WebControls.FormView" />
 
@@ -7672,8 +8834,12 @@
 
               
 
+              
+
                control is bound to data. To modify the value of a bound field, use the <see
                cref="E:System.Web.UI.WebControls.BaseDataBoundControl.DataBound" />
+
+              
 
               
 
@@ -7690,8 +8856,12 @@
 
             
 
+            
+
              control by using the <see
              cref="P:System.Web.UI.WebControls.FormView.HeaderRow" />
+
+            
 
             
 
@@ -7704,8 +8874,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.UI.WebControls.FormView.TopPagerRow" />
+
+            
 
             
 
@@ -7718,8 +8892,12 @@
 
             
 
+            
+
              properties, respectively. To access the data row, use the <see
              cref="P:System.Web.UI.WebControls.FormView.Row" />
+
+            
 
             
 
@@ -7737,6 +8915,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -7745,6 +8925,8 @@
           <para
             >Occurs after all the rows are created in a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -7779,6 +8961,8 @@
 
             
 
+            
+
              control raises the <see
              cref="E:System.Web.UI.WebControls.FormView.ItemDeleted" />
 
@@ -7786,8 +8970,12 @@
 
             
 
+            
+
              event when a Delete button (a button with its CommandName property set to "Delete") within the control is clicked, but after the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -7803,8 +8991,12 @@
 
             
 
+            
+
              object is passed to the event-handling method, which allows you to determine the number of records affected and any exceptions that might have occurred. To determine the number of records affected by the delete operation, use the <see
              cref="P:System.Web.UI.WebControls.FormViewDeletedEventArgs.AffectedRows" />
+
+            
 
             
 
@@ -7817,8 +9009,12 @@
 
             
 
+            
+
              property to determine whether any exceptions occurred. You can also indicate whether the exception was handled in the event-handling method by setting the <see
              cref="P:System.Web.UI.WebControls.FormViewDeletedEventArgs.ExceptionHandled" />
+
+            
 
             
 
@@ -7831,8 +9027,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.FormViewDeletedEventArgs.Values" />
+
+            
 
             
 
@@ -7850,6 +9050,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -7858,6 +9060,8 @@
           <para
             >Occurs when a Delete button within a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -7892,6 +9096,8 @@
 
             
 
+            
+
              control raises the <see
              cref="E:System.Web.UI.WebControls.FormView.ItemDeleting" />
 
@@ -7899,8 +9105,12 @@
 
             
 
+            
+
              event when a Delete button (a button with its CommandName property set to "Delete") within the control is clicked, but before the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -7916,8 +9126,12 @@
 
             
 
+            
+
              object is passed to the event-handling method, which allows you to determine the index of the record being deleted and to indicate that the delete operation should be canceled. To determine the index of a record, use the <see
              cref="P:System.Web.UI.WebControls.FormViewDeleteEventArgs.RowIndex" />
+
+            
 
             
 
@@ -7930,6 +9144,8 @@
 
             
 
+            
+
              property to true. You can also access the key fields and non-key fields by using the <see
              cref="P:System.Web.UI.WebControls.FormViewDeleteEventArgs.Keys" />
 
@@ -7937,8 +9153,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.FormViewDeleteEventArgs.Values" />
+
+            
 
             
 
@@ -7956,6 +9176,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -7964,6 +9186,8 @@
           <para
             >Occurs when a Delete button within a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -7998,6 +9222,8 @@
 
             
 
+            
+
              control raises the <see
              cref="E:System.Web.UI.WebControls.FormView.ItemInserted" />
 
@@ -8005,8 +9231,12 @@
 
             
 
+            
+
              event when an Insert button (a button with its CommandName property set to "Insert") within the control is clicked, but after the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -8022,8 +9252,12 @@
 
             
 
+            
+
              object is passed to the event-handling method, which allows you to determine the number of records affected and any exceptions that might have occurred. To determine the number of records affected by the insert operation, use the <see
              cref="P:System.Web.UI.WebControls.FormViewInsertedEventArgs.AffectedRows" />
+
+            
 
             
 
@@ -8036,6 +9270,8 @@
 
             
 
+            
+
              property to determine whether any exceptions occurred. You can also indicate whether the exception was handled in the event-handling method by setting the <see
              cref="P:System.Web.UI.WebControls.FormViewInsertedEventArgs.ExceptionHandled" />
 
@@ -8043,8 +9279,12 @@
 
             
 
+            
+
              property. If you need to access the values of the inserted record, use the <see
              cref="P:System.Web.UI.WebControls.FormViewInsertedEventArgs.Values" />
+
+            
 
             
 
@@ -8060,8 +9300,12 @@
 
             
 
+            
+
              control returns to the mode specified by the <see
              cref="P:System.Web.UI.WebControls.FormView.DefaultMode" />
+
+            
 
             
 
@@ -8074,8 +9318,12 @@
 
             
 
+            
+
              control in insert mode, set the <see
              cref="P:System.Web.UI.WebControls.FormViewInsertedEventArgs.KeepInInsertMode" />
+
+            
 
             
 
@@ -8093,6 +9341,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -8101,6 +9351,8 @@
           <para
             >Occurs when an Insert button within a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -8135,6 +9387,8 @@
 
             
 
+            
+
              control raises the <see
              cref="E:System.Web.UI.WebControls.FormView.ItemInserting" />
 
@@ -8142,8 +9396,12 @@
 
             
 
+            
+
              event when an Insert button (a button with its CommandName property set to "Insert") within the control is clicked, but before the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -8159,8 +9417,12 @@
 
             
 
+            
+
              object is passed to the event-handling method, which allows you to determine the value of an optional command argument sent to the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -8173,6 +9435,8 @@
 
             
 
+            
+
              property to determine the value of the command argument. To cancel the insert operation, set the <see
              cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
 
@@ -8180,8 +9444,12 @@
 
             
 
+            
+
              property to true. You can also read or modify the field values for the new record by using the <see
              cref="P:System.Web.UI.WebControls.FormViewInsertEventArgs.Values" />
+
+            
 
             
 
@@ -8199,6 +9467,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -8207,6 +9477,8 @@
           <para
             >Occurs when an Insert button within a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -8256,8 +9528,12 @@
 
             
 
+            
+
              control renders a different template for the data row based on the current mode of the control (specified by the <see
              cref="P:System.Web.UI.WebControls.FormView.CurrentMode" />
+
+            
 
             
 
@@ -8315,8 +9591,12 @@
 
             
 
+            
+
              property to define your own user interface (UI) for the data row when the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -8332,10 +9612,14 @@
 
             
 
+            
+
              control. You can then list the contents of the template between the opening and closing &lt;ItemTemplate&gt; tags. To display the field values of the data source bound to the control, use a data-binding expression. For more information on data-binding expressions, see <format
              type="text/html">
               <a href="676beb1d-ddfa-4153-bba8-3c86dcb7ceca">Data Binding Expression Syntax</a>
             </format>
+
+            
 
             
 
@@ -8387,6 +9671,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -8395,6 +9681,8 @@
           <para
             >Gets or sets the custom content for the data row in a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -8429,6 +9717,8 @@
 
             
 
+            
+
              control raises the <see
              cref="E:System.Web.UI.WebControls.FormView.ItemUpdated" />
 
@@ -8436,8 +9726,12 @@
 
             
 
+            
+
              event when an Update button (a button with its CommandName property set to "Update") within the control is clicked, but after the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -8453,8 +9747,12 @@
 
             
 
+            
+
              object is passed to the event-handling method, which allows you to determine the number of records affected and any exceptions that might have occurred. To determine the number of records affected by the update operation, use the <see
              cref="P:System.Web.UI.WebControls.FormViewUpdatedEventArgs.AffectedRows" />
+
+            
 
             
 
@@ -8467,8 +9765,12 @@
 
             
 
+            
+
              property to determine whether any exceptions occurred. You can also indicate whether the exception was handled in the event-handling method by setting the <see
              cref="P:System.Web.UI.WebControls.FormViewUpdatedEventArgs.ExceptionHandled" />
+
+            
 
             
 
@@ -8481,6 +9783,8 @@
 
             
 
+            
+
              property. The original and updated non-key field values can be accessed using the <see
              cref="P:System.Web.UI.WebControls.FormViewUpdatedEventArgs.OldValues" />
 
@@ -8488,8 +9792,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.FormViewUpdatedEventArgs.NewValues" />
+
+            
 
             
 
@@ -8505,8 +9813,12 @@
 
             
 
+            
+
              control returns to the mode specified by the <see
              cref="P:System.Web.UI.WebControls.FormView.DefaultMode" />
+
+            
 
             
 
@@ -8519,8 +9831,12 @@
 
             
 
+            
+
              control in edit mode, set the <see
              cref="P:System.Web.UI.WebControls.FormViewUpdatedEventArgs.KeepInEditMode" />
+
+            
 
             
 
@@ -8538,6 +9854,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -8546,6 +9864,8 @@
           <para
             >Occurs when an Update button within a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -8580,6 +9900,8 @@
 
             
 
+            
+
              control raises the <see
              cref="E:System.Web.UI.WebControls.FormView.ItemUpdating" />
 
@@ -8587,8 +9909,12 @@
 
             
 
+            
+
              event when an Update button (a button with its CommandName property set to "Update") within the control is clicked, but before the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -8604,8 +9930,12 @@
 
             
 
+            
+
              object is passed to the event-handling method, which allows you to determine the value of an optional command argument sent to the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -8618,8 +9948,12 @@
 
             
 
+            
+
              property to determine the value of the command argument. To cancel the update operation, set the <see
              cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+
+            
 
             
 
@@ -8632,8 +9966,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.FormViewUpdateEventArgs.NewValues" />
+
+            
 
             
 
@@ -8646,6 +9984,8 @@
 
             
 
+            
+
              property contains the key fields, while the <see
              cref="P:System.Web.UI.WebControls.FormViewUpdateEventArgs.NewValues" />
 
@@ -8653,8 +9993,12 @@
 
             
 
+            
+
              property contains the non-key fields. If you need to access the original non-key field values, use the <see
              cref="P:System.Web.UI.WebControls.FormViewUpdatedEventArgs.OldValues" />
+
+            
 
             
 
@@ -8672,6 +10016,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -8680,6 +10026,8 @@
           <para
             >Occurs when an Update button within a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -8720,8 +10068,12 @@
 
             
 
+            
+
              method is used to load the state of the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -8734,12 +10086,16 @@
 
             
 
+            
+
              property is set to false.</para
           >
           <block subset="none" type="note">
             <para
               >This method is used primarily by control developers when extending the <see
                cref="T:System.Web.UI.WebControls.FormView" />
+
+              
 
               
 
@@ -8759,8 +10115,12 @@
 
             
 
+            
+
              control properties that need to be persisted, even when the <see
              cref="P:System.Web.UI.Control.EnableViewState" />
+
+            
 
             
 
@@ -8795,8 +10155,12 @@
 
             
 
+            
+
              method is used to load the previously saved view state of the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -8808,6 +10172,8 @@
             <para
               >This method is used primarily by control developers when extending the <see
                cref="T:System.Web.UI.WebControls.FormView" />
+
+              
 
               
 
@@ -8827,11 +10193,15 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
         <param name="savedState">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8844,8 +10214,12 @@
 
           
 
+          
+
            that represents the state of the <see
            cref="T:System.Web.UI.WebControls.FormView" />
+
+          
 
           
 
@@ -8876,6 +10250,8 @@
 
             
 
+            
+
              event is raised when a <see
              cref="T:System.Web.UI.WebControls.FormView" />
 
@@ -8883,8 +10259,12 @@
 
             
 
+            
+
              control attempts to switch between edit, insert, and read-only mode, but after the mode actually changes. This allows you to provide an event-handling method that performs a custom routine, such as synchronizing the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -8902,6 +10282,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -8910,6 +10292,8 @@
           <para
             >Occurs when the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -8944,6 +10328,8 @@
 
             
 
+            
+
              event is raised when a <see
              cref="T:System.Web.UI.WebControls.FormView" />
 
@@ -8951,8 +10337,12 @@
 
             
 
+            
+
              control attempts to switch between edit, insert, and read-only mode, but before the mode actually changes. This allows you to provide an event-handling method that performs a custom routine, such as configuring the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -8968,8 +10358,12 @@
 
             
 
+            
+
              object is passed to the event-handling method, which allows you to determine the mode to which the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -8982,8 +10376,12 @@
 
             
 
+            
+
              event was raised as a result of the user canceling an edit operation, or to indicate that an insert operation should be canceled. To determine the new mode, use the <see
              cref="P:System.Web.UI.WebControls.FormViewModeEventArgs.NewMode" />
+
+            
 
             
 
@@ -8996,8 +10394,12 @@
 
             
 
+            
+
              property to switch to an alternate mode by setting it to one of the <see
              cref="T:System.Web.UI.WebControls.FormViewMode" />
+
+            
 
             
 
@@ -9010,8 +10412,12 @@
 
             
 
+            
+
              property to determine whether the user canceled an edit operation. To cancel an insert operation, set the <see
              cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+
+            
 
             
 
@@ -9029,6 +10435,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -9037,6 +10445,8 @@
           <para
             >Occurs when the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -9075,8 +10485,12 @@
 
             
 
+            
+
              method is used by the control to optionally handle events passed up through the control hierarchy by the <see
              cref="M:System.Web.UI.Control.RaiseBubbleEvent(System.Object,System.EventArgs)" />
+
+            
 
             
 
@@ -9089,8 +10503,12 @@
 
             
 
+            
+
              object contained in the <paramref
              name="e" />
+
+            
 
             
 
@@ -9106,8 +10524,12 @@
 
             
 
+            
+
              control overrides the base implementation of this method to perform the appropriate action when one of the buttons recognized by the control is clicked. The following table lists the command buttons that the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -9145,8 +10567,12 @@
 
                   
 
+                  
+
                    control then returns to the mode specified by the <see
                    cref="P:System.Web.UI.WebControls.FormView.DefaultMode" />
+
+                  
 
                   
 
@@ -9172,8 +10598,12 @@
 
                   
 
+                  
+
                    and <see
                    cref="E:System.Web.UI.WebControls.FormView.ItemDeleted" />
+
+                  
 
                   
 
@@ -9199,8 +10629,12 @@
 
                   
 
+                  
+
                    control in edit mode. The content specified in the <see
                    cref="P:System.Web.UI.WebControls.FormView.EditItemTemplate" />
+
+                  
 
                   
 
@@ -9226,8 +10660,12 @@
 
                   
 
+                  
+
                    and <see
                    cref="E:System.Web.UI.WebControls.FormView.ItemInserted" />
+
+                  
 
                   
 
@@ -9253,8 +10691,12 @@
 
                   
 
+                  
+
                    control in insert mode. The content specified in the <see
                    cref="P:System.Web.UI.WebControls.FormView.InsertItemTemplate" />
+
+                  
 
                   
 
@@ -9280,8 +10722,12 @@
 
                   
 
+                  
+
                    and <see
                    cref="E:System.Web.UI.WebControls.FormView.PageIndexChanged" />
+
+                  
 
                   
 
@@ -9310,8 +10756,12 @@
 
                   
 
+                  
+
                    and <see
                    cref="E:System.Web.UI.WebControls.FormView.ItemUpdated" />
+
+                  
 
                   
 
@@ -9327,6 +10777,8 @@
              type="text/html">
               <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
             </format>
+
+            
 
             
 
@@ -9350,6 +10802,8 @@
 
           
 
+          
+
           The source of the event.</param
         >
         <param name="e">
@@ -9359,8 +10813,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -9396,8 +10854,12 @@
 
             
 
+            
+
              method is called by the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -9410,8 +10872,12 @@
 
             
 
+            
+
              event. It is generally used by control developers when extending the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -9429,11 +10895,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.FormView.OnInit(System.EventArgs)" />
+
+            
 
             
 
@@ -9452,6 +10922,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -9462,8 +10934,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -9497,8 +10973,12 @@
 
             
 
+            
+
              method is called by the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -9511,8 +10991,12 @@
 
             
 
+            
+
              event. It is generally used by control developers when extending the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -9530,11 +11014,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.FormView.OnItemCommand(System.Web.UI.WebControls.FormViewCommandEventArgs)" />
+
+            
 
             
 
@@ -9553,6 +11041,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -9563,8 +11053,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.FormViewCommandEventArgs" />
+
+          
 
           
 
@@ -9598,8 +11092,12 @@
 
             
 
+            
+
              method is called by the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -9612,8 +11110,12 @@
 
             
 
+            
+
              event. It is generally used by control developers when extending the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -9631,11 +11133,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.FormView.OnItemCreated(System.EventArgs)" />
+
+            
 
             
 
@@ -9654,6 +11160,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -9664,8 +11172,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -9702,8 +11214,12 @@
 
             
 
+            
+
              method is called by the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -9716,8 +11232,12 @@
 
             
 
+            
+
              event. It is generally used by control developers when extending the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -9735,11 +11255,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.FormView.OnItemDeleted(System.Web.UI.WebControls.FormViewDeletedEventArgs)" />
+
+            
 
             
 
@@ -9758,6 +11282,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -9768,8 +11294,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.FormViewDeletedEventArgs" />
+
+          
 
           
 
@@ -9806,8 +11336,12 @@
 
             
 
+            
+
              method is called by the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -9820,8 +11354,12 @@
 
             
 
+            
+
              event. It is generally used by control developers when extending the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -9839,11 +11377,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.FormView.OnItemDeleting(System.Web.UI.WebControls.FormViewDeleteEventArgs)" />
+
+            
 
             
 
@@ -9862,6 +11404,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -9872,8 +11416,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.FormViewDeleteEventArgs" />
+
+          
 
           
 
@@ -9910,8 +11458,12 @@
 
             
 
+            
+
              method is called by the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -9924,8 +11476,12 @@
 
             
 
+            
+
              event. It is generally used by control developers when extending the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -9943,11 +11499,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.FormView.OnItemInserted(System.Web.UI.WebControls.FormViewInsertedEventArgs)" />
+
+            
 
             
 
@@ -9966,6 +11526,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -9976,8 +11538,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.FormViewInsertedEventArgs" />
+
+          
 
           
 
@@ -10014,8 +11580,12 @@
 
             
 
+            
+
              method is called by the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -10028,8 +11598,12 @@
 
             
 
+            
+
              event. It is generally used by control developers when extending the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -10047,11 +11621,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.FormView.OnItemInserting(System.Web.UI.WebControls.FormViewInsertEventArgs)" />
+
+            
 
             
 
@@ -10070,6 +11648,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -10080,8 +11660,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.FormViewInsertEventArgs" />
+
+          
 
           
 
@@ -10118,8 +11702,12 @@
 
             
 
+            
+
              method is called by the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -10132,8 +11720,12 @@
 
             
 
+            
+
              event. It is generally used by control developers when extending the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -10151,11 +11743,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.FormView.OnItemUpdated(System.Web.UI.WebControls.FormViewUpdatedEventArgs)" />
+
+            
 
             
 
@@ -10174,6 +11770,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -10184,8 +11782,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.FormViewUpdatedEventArgs" />
+
+          
 
           
 
@@ -10222,8 +11824,12 @@
 
             
 
+            
+
              method is called by the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -10236,8 +11842,12 @@
 
             
 
+            
+
              event. It is generally used by control developers when extending the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -10255,11 +11865,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.FormView.OnItemUpdating(System.Web.UI.WebControls.FormViewUpdateEventArgs)" />
+
+            
 
             
 
@@ -10278,6 +11892,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -10288,8 +11904,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.FormViewUpdateEventArgs" />
+
+          
 
           
 
@@ -10323,8 +11943,12 @@
 
             
 
+            
+
              method is called by the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -10337,8 +11961,12 @@
 
             
 
+            
+
              event. It is generally used by control developers when extending the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -10356,11 +11984,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.FormView.OnModeChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -10379,6 +12011,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -10389,8 +12023,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -10427,8 +12065,12 @@
 
             
 
+            
+
              method is called by the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -10441,8 +12083,12 @@
 
             
 
+            
+
              event. It is generally used by control developers when extending the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -10460,11 +12106,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.FormView.OnModeChanging(System.Web.UI.WebControls.FormViewModeEventArgs)" />
+
+            
 
             
 
@@ -10483,6 +12133,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -10493,8 +12145,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.FormViewModeEventArgs" />
+
+          
 
           
 
@@ -10531,8 +12187,12 @@
 
             
 
+            
+
              method is called by the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -10545,8 +12205,12 @@
 
             
 
+            
+
              event. It is generally used by control developers when extending the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -10564,11 +12228,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.FormView.OnPageIndexChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -10587,6 +12255,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -10597,8 +12267,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -10635,8 +12309,12 @@
 
             
 
+            
+
              method is called by the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -10649,8 +12327,12 @@
 
             
 
+            
+
              event. It is generally used by control developers when extending the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -10668,11 +12350,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.FormView.OnPageIndexChanging(System.Web.UI.WebControls.FormViewPageEventArgs)" />
+
+            
 
             
 
@@ -10691,6 +12377,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -10701,8 +12389,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.FormViewPageEventArgs" />
+
+          
 
           
 
@@ -10742,8 +12434,12 @@
 
             
 
+            
+
              property is set to true), use the <see
              cref="P:System.Web.UI.WebControls.FormView.PageCount" />
+
+            
 
             
 
@@ -10760,12 +12456,16 @@
 
               
 
+              
+
                control displays only one record at a time, this value corresponds to the total number of pages required to display every record in the data source. This value is not accurate until after data-binding occurs.</para
             >
           </block>
           <para
             >To determine the index of the current record from the underlying data source, use the <see
              cref="P:System.Web.UI.WebControls.FormView.PageIndex" />
+
+            
 
             
 
@@ -10810,8 +12510,12 @@
 
             
 
+            
+
              property is set to true), use the <see
              cref="P:System.Web.UI.WebControls.FormView.PageIndex" />
+
+            
 
             
 
@@ -10825,6 +12529,8 @@
           <para
             >To determine the total number of items in the data source, use the <see
              cref="P:System.Web.UI.WebControls.FormView.PageCount" />
+
+            
 
             
 
@@ -10860,6 +12566,8 @@
 
             
 
+            
+
              control raises the <see
              cref="E:System.Web.UI.WebControls.FormView.PageIndexChanged" />
 
@@ -10867,8 +12575,12 @@
 
             
 
+            
+
              event when a pager button (a button with its CommandName property set to "Page") within the control is clicked, but after the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -10885,12 +12597,16 @@
 
               
 
+              
+
                property.</para
             >
           </block>
           <para
             >Pager buttons are usually located in the pager row of a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -10903,6 +12619,8 @@
 
             
 
+            
+
              control with a <see
              cref="T:System.Web.UI.WebControls.GridView" />
 
@@ -10910,8 +12628,12 @@
 
             
 
+            
+
              control or to set the behavior of the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -10929,6 +12651,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -10937,6 +12661,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Web.UI.WebControls.FormView.PageIndex" />
+
+            
 
             
 
@@ -10971,6 +12697,8 @@
 
             
 
+            
+
              control raises the <see
              cref="E:System.Web.UI.WebControls.FormView.PageIndexChanging" />
 
@@ -10978,8 +12706,12 @@
 
             
 
+            
+
              event when a pager button (a button with its CommandName property set to "Page") within the control is clicked, but before the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -10996,12 +12728,16 @@
 
               
 
+              
+
                property.</para
             >
           </block>
           <para
             >Pager buttons are usually located in the pager row of a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -11017,8 +12753,12 @@
 
             
 
+            
+
              object is passed to the event-handling method, which allows you to determine the index of the page selected by the user and to indicate that the paging operation should be canceled. To determine the index of the page selected by the user, use the <see
              cref="P:System.Web.UI.WebControls.FormViewPageEventArgs.NewPageIndex" />
+
+            
 
             
 
@@ -11031,8 +12771,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.FormViewPageEventArgs" />
+
+            
 
             
 
@@ -11050,6 +12794,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -11058,6 +12804,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Web.UI.WebControls.FormView.PageIndex" />
+
+            
 
             
 
@@ -11104,8 +12852,12 @@
 
             
 
+            
+
              property to control the settings of the pager row in a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -11118,8 +12870,12 @@
 
             
 
+            
+
              property is set to true), and contains the controls that allow the user to navigate to the different records in the control. This property is read-only; however, you can set the properties of the <see
              cref="T:System.Web.UI.WebControls.PagerSettings" />
+
+            
 
             
 
@@ -11132,8 +12888,12 @@
 
             
 
+            
+
             , where <paramref
              name="Subproperty" />
+
+            
 
             
 
@@ -11146,8 +12906,12 @@
 
             
 
+            
+
              object (for example, PagerSettings-Mode). The properties can also be set programmatically in the form <paramref
              name="Property.Subproperty" />
+
+            
 
             
 
@@ -11166,8 +12930,12 @@
 
             
 
+            
+
              object that allows you to set the properties of the pager buttons in a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -11214,8 +12982,12 @@
 
             
 
+            
+
              property to control the appearance of the pager row in a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -11228,8 +13000,12 @@
 
             
 
+            
+
              property is set to true), and contains the controls that allow the user to navigate to the different pages in the control. This property is read-only; however, you can set the properties of the <see
              cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+            
 
             
 
@@ -11247,8 +13023,12 @@
 
                 
 
+                
+
                  control in the form <paramref
                  name="Property-Subproperty" />
+
+                
 
                 
 
@@ -11261,8 +13041,12 @@
 
                 
 
+                
+
                  is a property of the <see
                  cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+                
 
                 
 
@@ -11280,6 +13064,8 @@
 
                 
 
+                
+
                  control.</para
               >
             </item>
@@ -11287,6 +13073,8 @@
           <para
             >The properties can also be set programmatically in the form <paramref
              name="Property.Subproperty" />
+
+            
 
             
 
@@ -11305,8 +13093,12 @@
 
             
 
+            
+
              object that allows you to set the appearance of the pager row in a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -11356,6 +13148,8 @@
 
             
 
+            
+
              control when the paging feature is enabled (when the <see
              cref="P:System.Web.UI.WebControls.FormView.AllowPaging" />
 
@@ -11363,8 +13157,12 @@
 
             
 
+            
+
              property is set to true). The pager row contains the controls that allow the user to navigate to the different pages in the control. Instead of using the built-in pager row user interface (UI), you can define your own UI by using the <see
              cref="P:System.Web.UI.WebControls.FormView.PagerTemplate" />
+
+            
 
             
 
@@ -11381,6 +13179,8 @@
 
               
 
+              
+
                property is set it overrides the built-in pager row UI.</para
             >
           </block>
@@ -11392,8 +13192,12 @@
 
             
 
+            
+
              control. You can then list the contents of the template between the opening and closing &lt;PagerTemplate&gt; tags. To control the appearance of the pager row, use the <see
              cref="P:System.Web.UI.WebControls.FormView.PagerStyle" />
+
+            
 
             
 
@@ -11409,8 +13213,12 @@
 
             
 
+            
+
              control performs a paging operation when a button control with its CommandName property set to "Page" is clicked. The button's CommandArgument property determines the type of paging operation to perform. The following table lists the command argument values supported by the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -11481,6 +13289,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -11515,8 +13325,12 @@
 
             
 
+            
+
              method is a helper method called by the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -11535,6 +13349,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -11545,8 +13361,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IEnumerable" />
+
+          
 
           
 
@@ -11577,6 +13397,8 @@
 
             
 
+            
+
              method is a helper method called by the <see
              cref="T:System.Web.UI.WebControls.FormView" />
 
@@ -11584,8 +13406,12 @@
 
             
 
+            
+
              control to set up the control hierarchy in the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -11599,6 +13425,8 @@
           <para
             >Sets up the control hierarchy of the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -11633,8 +13461,12 @@
 
             
 
+            
+
              method when a postback event occurs that raises the appropriate events for a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -11647,12 +13479,16 @@
 
             
 
+            
+
              object for the events that are raised.</para
           >
           <block subset="none" type="note">
             <para
               >This method is used primarily by control developers to extend the <see
                cref="T:System.Web.UI.WebControls.FormView" />
+
+              
 
               
 
@@ -11672,6 +13508,8 @@
 
             
 
+            
+
              control when it posts back to the server.</para
           >
         </summary>
@@ -11682,8 +13520,12 @@
 
           
 
+          
+
           The event argument from which to create a <see
            cref="T:System.Web.UI.WebControls.CommandEventArgs" />
+
+          
 
           
 
@@ -11722,8 +13564,12 @@
 
             
 
+            
+
              method is used to render the server control content to the client's browser using the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -11742,6 +13588,8 @@
 
             
 
+            
+
              control on the client.</para
           >
         </summary>
@@ -11752,8 +13600,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -11793,6 +13645,8 @@
 
             
 
+            
+
              property to programmatically access the <see
              cref="T:System.Web.UI.WebControls.FormViewRow" />
 
@@ -11800,8 +13654,12 @@
 
             
 
+            
+
              object that represents the data row. The data row contains different content based on the template rendered for the current mode (specified by the <see
              cref="P:System.Web.UI.WebControls.FormView.CurrentMode" />
+
+            
 
             
 
@@ -11860,6 +13718,8 @@
 
               
 
+              
+
                property is available only after the <see
                cref="T:System.Web.UI.WebControls.FormView" />
 
@@ -11867,8 +13727,12 @@
 
               
 
+              
+
                control creates the data row in the <see
                cref="E:System.Web.UI.WebControls.FormView.ItemCreated" />
+
+              
 
               
 
@@ -11885,6 +13749,8 @@
 
             
 
+            
+
              property must be performed after the <see
              cref="T:System.Web.UI.WebControls.FormView" />
 
@@ -11892,8 +13758,12 @@
 
             
 
+            
+
              control has been data-bound; otherwise, the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -11912,8 +13782,12 @@
 
             
 
+            
+
              object that represents the data row in a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -11963,8 +13837,12 @@
 
             
 
+            
+
              property to control the appearance of the data row when a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -11977,6 +13855,8 @@
 
             
 
+            
+
              control is in read-only mode, the data row displays the user-defined content specified by the <see
              cref="P:System.Web.UI.WebControls.FormView.ItemTemplate" />
 
@@ -11984,8 +13864,12 @@
 
             
 
+            
+
              property. This property is read-only; however, you can set the properties of the <see
              cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+            
 
             
 
@@ -12003,8 +13887,12 @@
 
                 
 
+                
+
                  control in the form <paramref
                  name="Property-Subproperty" />
+
+                
 
                 
 
@@ -12017,8 +13905,12 @@
 
                 
 
+                
+
                  is a property of the <see
                  cref="T:System.Web.UI.WebControls.TableItemStyle" />
+
+                
 
                 
 
@@ -12036,6 +13928,8 @@
 
                 
 
+                
+
                  control.</para
               >
             </item>
@@ -12043,6 +13937,8 @@
           <para
             >The properties can also be set programmatically in the form <paramref
              name="Property.Subproperty" />
+
+            
 
             
 
@@ -12061,8 +13957,12 @@
 
             
 
+            
+
              object that allows you to set the appearance of the data row in a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -12097,8 +13997,12 @@
 
             
 
+            
+
              control properties that need to be persisted, even when the <see
              cref="P:System.Web.UI.Control.EnableViewState" />
+
+            
 
             
 
@@ -12110,6 +14014,8 @@
             <para
               >This method is used primarily by control developers to extend the <see
                cref="T:System.Web.UI.WebControls.FormView" />
+
+              
 
               
 
@@ -12129,8 +14035,12 @@
 
             
 
+            
+
              control properties that need to be persisted, even when the <see
              cref="P:System.Web.UI.Control.EnableViewState" />
+
+            
 
             
 
@@ -12164,8 +14074,12 @@
 
             
 
+            
+
              method is a helper method called by the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -12184,6 +14098,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -12197,8 +14113,12 @@
 
             
 
+            
+
              that contains the saved state of the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -12239,8 +14159,12 @@
 
             
 
+            
+
              property is set, the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -12253,8 +14177,12 @@
 
             
 
+            
+
              object that contains the key/value pairs of the field or fields listed in the <see
              cref="P:System.Web.UI.WebControls.FormView.DataKeyNames" />
+
+            
 
             
 
@@ -12267,8 +14195,12 @@
 
             
 
+            
+
              object represents the primary key field or fields for the current record and is stored in the <see
              cref="P:System.Web.UI.WebControls.FormView.DataKey" />
+
+            
 
             
 
@@ -12281,8 +14213,12 @@
 
             
 
+            
+
              property to access the data key value, you can use the <see
              cref="P:System.Web.UI.WebControls.FormView.SelectedValue" />
+
+            
 
             
 
@@ -12299,6 +14235,8 @@
 
               
 
+              
+
                property lists multiple fields, this property returns the value of the first field listed.</para
             >
           </block>
@@ -12308,6 +14246,8 @@
           <para
             >Gets the data key value of the current record in a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -12345,8 +14285,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IDataItemContainer" />
+
+            
 
             
 
@@ -12360,6 +14304,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Web.UI.IDataItemContainer.DataItemIndex" />
+
+            
 
             
 
@@ -12394,8 +14340,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IDataItemContainer" />
+
+            
 
             
 
@@ -12409,6 +14359,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Web.UI.IDataItemContainer.DisplayIndex" />
+
+            
 
             
 
@@ -12445,6 +14397,8 @@
 
             
 
+            
+
              method when a postback event occurs. This call occurs in the page life cycle after loading and change notification are complete, but before the page is rendered.</para
           >
         </remarks>
@@ -12458,11 +14412,15 @@
 
             
 
+            
+
              control when it posts back to the server.</para
           >
         </summary>
         <param name="eventArgument">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -12499,8 +14457,12 @@
 
             
 
+            
+
              method is a helper method that is called by the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -12513,6 +14475,8 @@
 
             
 
+            
+
              object that contains the postback event options for the control. The <see
              cref="T:System.Web.UI.PostBackOptions" />
 
@@ -12520,8 +14484,12 @@
 
             
 
+            
+
              object is typically used as a parameter for the <see
              cref="M:System.Web.UI.Page.GetPostBackEventReference(System.Web.UI.Control,System.String)" />
+
+            
 
             
 
@@ -12540,6 +14508,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -12548,6 +14518,8 @@
           <para
             >The postback event options for the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -12580,8 +14552,12 @@
 
             
 
+            
+
              property allows the output stream to write the appropriate HTML markup for the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -12600,8 +14576,12 @@
 
             
 
+            
+
              value for the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -12645,8 +14625,12 @@
 
             
 
+            
+
              property is set to true), an additional row called the pager row is automatically displayed in the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -12659,6 +14643,8 @@
 
             
 
+            
+
              property to programmatically access the <see
              cref="T:System.Web.UI.WebControls.FormViewRow" />
 
@@ -12666,8 +14652,12 @@
 
             
 
+            
+
              object that represents the top pager row in the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -12684,6 +14674,8 @@
 
               
 
+              
+
                property is available only after the <see
                cref="T:System.Web.UI.WebControls.FormView" />
 
@@ -12691,8 +14683,12 @@
 
               
 
+              
+
                control creates the top pager row in the <see
                cref="E:System.Web.UI.WebControls.FormView.ItemCreated" />
+
+              
 
               
 
@@ -12709,6 +14705,8 @@
 
             
 
+            
+
              property must be performed after the <see
              cref="T:System.Web.UI.WebControls.FormView" />
 
@@ -12716,8 +14714,12 @@
 
             
 
+            
+
              control has been bound to data; otherwise, the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -12736,8 +14738,12 @@
 
             
 
+            
+
              object that represents the pager row displayed at the top of a <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -12769,6 +14775,8 @@
           <para
             >Marks the starting point at which to begin tracking and saving view-state changes to the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -12806,6 +14814,8 @@
 
             
 
+            
+
              control is in edit mode, use the <see
              cref="M:System.Web.UI.WebControls.FormView.UpdateItem(System.Boolean)" />
 
@@ -12813,8 +14823,12 @@
 
             
 
+            
+
              method to programmatically update the current record in the data source. This method is commonly used when you need to update the current record from outside of the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -12831,8 +14845,12 @@
 
               
 
+              
+
                control must be in edit mode when this method is called; otherwise, an <see
                cref="T:System.Web.HttpException" />
+
+              
 
               
 
@@ -12849,6 +14867,8 @@
 
             
 
+            
+
              parameter. Calling this method also raises the <see
              cref="E:System.Web.UI.WebControls.FormView.ItemUpdated" />
 
@@ -12856,8 +14876,12 @@
 
             
 
+            
+
              and <see
              cref="E:System.Web.UI.WebControls.FormView.ItemUpdating" />
+
+            
 
             
 
@@ -12872,6 +14896,8 @@
         </summary>
         <param name="causesValidation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

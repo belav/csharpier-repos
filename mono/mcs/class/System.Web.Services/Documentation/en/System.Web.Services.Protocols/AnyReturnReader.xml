@@ -26,8 +26,12 @@
 
         
 
+        
+
          and other classes in the <see
          cref="N:System.Web.Services.Protocols" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
           class provides a minimal implementation of the interface of the abstract parent class <see
          cref="T:System.Web.Services.Protocols.MimeReturnReader" />
+
+        
 
         
 
@@ -57,8 +65,12 @@
 
         
 
+        
+
          directly. When the Wsdl.exe tool generates client proxy code according to the HTTP-GET or HTTP-POST implementations, it applies the <see
          cref="T:System.Web.Services.Protocols.HttpMethodAttribute" />
+
+        
 
         
 
@@ -71,6 +83,8 @@
 
         
 
+        
+
          property to <see
          cref="T:System.Web.Services.Protocols.XmlReturnReader" />
 
@@ -78,8 +92,12 @@
 
         
 
+        
+
         , another class derived from <see
          cref="T:System.Web.Services.Protocols.MimeReturnReader" />
+
+        
 
         
 
@@ -106,6 +124,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Protocols.AnyReturnReader" />
+
+            
 
             
 
@@ -143,6 +163,8 @@
 
             
 
+            
+
              method. For the <see
              cref="T:System.Web.Services.Protocols.AnyReturnReader" />
 
@@ -150,8 +172,12 @@
 
             
 
+            
+
              class, the initializer is the instance referred to by the keyword this, unless the <see
              cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+
+            
 
             
 
@@ -167,8 +193,12 @@
 
             
 
+            
+
              method is invoked during service initialization. Later, at the time a response is processed, the initializer <see
              cref="T:System.Web.Services.Protocols.AnyReturnReader" />
+
+            
 
             
 
@@ -181,6 +211,8 @@
 
             
 
+            
+
              method of another <see
              cref="T:System.Web.Services.Protocols.AnyReturnReader" />
 
@@ -188,8 +220,12 @@
 
             
 
+            
+
              instance. The other instance takes the call to the <see
              cref="M:System.Web.Services.Protocols.AnyReturnReader.Read(System.Net.WebResponse,System.IO.Stream)" />
+
+            
 
             
 
@@ -208,6 +244,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -216,6 +254,8 @@
           <para
             >The parameter passed to the <see
              cref="M:System.Web.Services.Protocols.AnyReturnReader.Initialize(System.Object)" />
+
+            
 
             
 
@@ -231,8 +271,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+
+          
 
           
 
@@ -266,6 +310,8 @@
 
             
 
+            
+
               method does nothing.</para
           >
           <para
@@ -276,8 +322,12 @@
 
             
 
+            
+
             , is another instance of <see
              cref="T:System.Web.Services.Protocols.AnyReturnReader" />
+
+            
 
             
 
@@ -296,11 +346,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -313,8 +367,12 @@
 
           
 
+          
+
            class, on which the <see
            cref="M:System.Web.Services.Protocols.AnyReturnReader.GetInitializer(System.Web.Services.Protocols.LogicalMethodInfo)" />
+
+          
 
           
 
@@ -352,6 +410,8 @@
 
             
 
+            
+
              class's implementation of the <see
              cref="M:System.Web.Services.Protocols.AnyReturnReader.Read(System.Net.WebResponse,System.IO.Stream)" />
 
@@ -359,8 +419,12 @@
 
             
 
+            
+
              method does no reading. Instead it simply returns the <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -384,6 +448,8 @@
 
           
 
+          
+
           A representation of the HTTP response sent by a Web service, containing the output message for an operation.</param
         >
         <param name="responseStream">
@@ -393,8 +459,12 @@
 
           
 
+          
+
           An output stream whose content is the body of the HTTP response represented by the <paramref
            name="response" />
+
+          
 
           
 

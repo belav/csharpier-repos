@@ -51,6 +51,8 @@
 
         
 
+        
+
          class directly. You can use the <format
          type="text/html">
           <a href="482C0D83-7144-4497-B626-87D2351B78D0"
@@ -62,8 +64,12 @@
 
         
 
+        
+
          to generate the wrappers that extend <see
          cref="T:System.Windows.Forms.AxHost" />
+
+        
 
         
 
@@ -79,8 +85,12 @@
 
         
 
+        
+
          class, and compiles it into a library file (DLL) that can be added as a reference to your application. Alternatively, you can use the /source switch with the ActiveX Control Importer and a C# file is generated for your <see
          cref="T:System.Windows.Forms.AxHost" />
+
+        
 
         
 
@@ -97,8 +107,12 @@
 
           
 
+          
+
            derived class. For example, if your ActiveX control has a member named "Layout", it is renamed "CtlLayout" in the <see
            cref="T:System.Windows.Forms.AxHost" />
+
+          
 
           
 
@@ -115,8 +129,12 @@
 
         
 
+        
+
          class are only valid and used if the underlying ActiveX control exposes those properties. A few examples of the common properties are <see
          cref="P:System.Windows.Forms.Control.BackColor" />
+
+        
 
         
 
@@ -129,6 +147,8 @@
 
         
 
+        
+
         , <see
          cref="P:System.Windows.Forms.Control.Font" />
 
@@ -136,8 +156,12 @@
 
         
 
+        
+
         , and <see
          cref="P:System.Windows.Forms.Control.Text" />
+
+        
 
         
 
@@ -154,8 +178,12 @@
 
           
 
+          
+
           , select <ui
           >Customize Toolbox</ui>
+
+          
 
           
 
@@ -189,11 +217,15 @@
 
             
 
+            
+
              class, wrapping the ActiveX control indicated by the specified CLSID. </para
           >
         </summary>
         <param name="clsid">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -225,8 +257,12 @@
 
             
 
+            
+
              parameter value contains the bit represented by the value 0x1, the shortcut menu for the control will not contain an <ui
             >Edit</ui>
+
+            
 
             
 
@@ -237,6 +273,8 @@
           <para
             >If the binary representation of the <paramref
              name="flags" />
+
+            
 
             
 
@@ -255,8 +293,12 @@
 
             
 
+            
+
              class, wrapping the ActiveX control indicated by the specified CLSID, and using the shortcut-menu behavior indicated by the specified <paramref
              name="flags" />
+
+            
 
             
 
@@ -272,6 +314,8 @@
 
           
 
+          
+
           The CLSID of the ActiveX control to wrap.</param
         >
         <param name="flags">
@@ -281,8 +325,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -370,8 +418,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -384,6 +436,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -391,8 +445,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -411,8 +469,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -485,8 +547,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -499,6 +565,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -506,8 +574,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -526,8 +598,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -620,6 +696,8 @@
 
             
 
+            
+
              method ends the initialization. Using the <see
              cref="M:System.Windows.Forms.AxHost.BeginInit" />
 
@@ -627,8 +705,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.AxHost.EndInit" />
+
+            
 
             
 
@@ -677,8 +759,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -691,6 +777,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -698,8 +786,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -718,8 +810,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -762,8 +858,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -776,6 +876,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -783,8 +885,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -803,8 +909,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -844,8 +954,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -858,6 +972,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -865,8 +981,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -885,8 +1005,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -933,8 +1057,12 @@
 
             
 
+            
+
              property value can be different from the <see
              cref="P:System.Windows.Forms.Control.Parent" />
+
+            
 
             
 
@@ -947,8 +1075,12 @@
 
             
 
+            
+
              represented by this property is the ActiveX control's logical container. For example, if an ActiveX control is hosted in a <see
              cref="T:System.Windows.Forms.GroupBox" />
+
+            
 
             
 
@@ -961,8 +1093,12 @@
 
             
 
+            
+
              is contained on a <see
              cref="T:System.Windows.Forms.Form" />
+
+            
 
             
 
@@ -975,8 +1111,12 @@
 
             
 
+            
+
              property value of the ActiveX control is the <see
              cref="T:System.Windows.Forms.Form" />
+
+            
 
             
 
@@ -989,8 +1129,12 @@
 
             
 
+            
+
              property value is the <see
              cref="T:System.Windows.Forms.GroupBox" />
+
+            
 
             
 
@@ -1064,8 +1208,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -1078,6 +1226,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -1085,8 +1235,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -1105,8 +1259,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -1169,11 +1327,15 @@
 
             
 
+            
+
              representing the ActiveX control. </para
           >
         </returns>
         <param name="clsid">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1285,8 +1447,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -1299,6 +1465,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -1306,8 +1474,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -1326,8 +1498,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -1448,8 +1624,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -1462,6 +1642,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -1469,8 +1651,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -1489,8 +1675,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -1525,6 +1715,8 @@
 
             
 
+            
+
              method of the hosted control.</para
           >
         </remarks>
@@ -1534,6 +1726,8 @@
         </summary>
         <param name="verb">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1575,8 +1769,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -1589,6 +1787,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -1596,8 +1796,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -1616,8 +1820,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -1660,8 +1868,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -1674,6 +1886,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -1681,8 +1895,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -1701,8 +1919,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -1742,8 +1964,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -1756,6 +1982,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -1763,8 +1991,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -1783,8 +2015,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -1827,8 +2063,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -1841,6 +2081,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -1848,8 +2090,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -1868,8 +2114,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -1918,8 +2168,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -1934,8 +2188,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -2027,8 +2285,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -2041,6 +2303,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -2048,8 +2312,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -2068,8 +2336,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -2102,6 +2374,8 @@
 
             
 
+            
+
              method ends the initialization. Using the <see
              cref="M:System.Windows.Forms.AxHost.BeginInit" />
 
@@ -2109,8 +2383,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.AxHost.EndInit" />
+
+            
 
             
 
@@ -2189,8 +2467,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -2203,6 +2485,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -2210,8 +2494,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -2230,8 +2518,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -2301,8 +2593,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -2315,6 +2611,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -2322,8 +2620,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -2342,8 +2644,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -2382,6 +2688,8 @@
 
             
 
+            
+
              structure that corresponds to the specified OLE color value.</para
           >
         </summary>
@@ -2395,11 +2703,15 @@
 
             
 
+            
+
              structure that represents the translated OLE color value.</para
           >
         </returns>
         <param name="color">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2445,8 +2757,12 @@
 
             
 
+            
+
              created from the specified OLE <see
              cref="http://go.microsoft.com/fwlink/?LinkId=166075">IFont</see>
+
+            
 
             
 
@@ -2465,8 +2781,12 @@
 
             
 
+            
+
              created from the specified <see
              cref="http://go.microsoft.com/fwlink/?LinkId=166075">IFont</see>
+
+            
 
             
 
@@ -2479,8 +2799,12 @@
 
             
 
+            
+
              if the font could not be created, or null if <paramref
              name="font" />
+
+            
 
             
 
@@ -2496,8 +2820,12 @@
 
           
 
+          
+
           The IFont to create a <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -2540,8 +2868,12 @@
 
             
 
+            
+
              created from the specified OLE <see
              cref="http://go.microsoft.com/fwlink/?LinkId=166073">IFontDisp</see>
+
+            
 
             
 
@@ -2560,8 +2892,12 @@
 
             
 
+            
+
              created from the specified <see
              cref="http://go.microsoft.com/fwlink/?LinkId=166073">IFontDisp</see>
+
+            
 
             
 
@@ -2574,8 +2910,12 @@
 
             
 
+            
+
              if the font could not be created, or null if <paramref
              name="font" />
+
+            
 
             
 
@@ -2591,8 +2931,12 @@
 
           
 
+          
+
           The IFontDisp to create a <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -2635,8 +2979,12 @@
 
             
 
+            
+
              object created from the specified <see
              cref="T:System.Drawing.Font" />
+
+            
 
             
 
@@ -2655,8 +3003,12 @@
 
             
 
+            
+
              object created from the specified font or null if <paramref
              name="font" />
+
+            
 
             
 
@@ -2667,6 +3019,8 @@
         </returns>
         <param name="font">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2709,8 +3063,12 @@
 
             
 
+            
+
              object created from the specified <see
              cref="T:System.Drawing.Font" />
+
+            
 
             
 
@@ -2729,8 +3087,12 @@
 
             
 
+            
+
              object created from the specified font, or null if <paramref
              name="font" />
+
+            
 
             
 
@@ -2743,11 +3105,15 @@
 
             
 
+            
+
              could not be created.</para
           >
         </returns>
         <param name="font">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2790,6 +3156,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2798,6 +3166,8 @@
           <para
             >An <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -2813,8 +3183,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -2857,6 +3231,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2865,6 +3241,8 @@
           <para
             >An <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -2912,6 +3290,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2920,6 +3300,8 @@
           <para
             >An <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -2935,8 +3317,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -2979,11 +3365,15 @@
 
             
 
+            
+
             , the last moment of 31 December 9999.</para
           >
           <para
             >For more information about OLE Automation, see the <see
              cref="http://go.microsoft.com/fwlink/?linkid=37118">MSDN Library</see>
+
+            
 
             
 
@@ -3002,6 +3392,8 @@
 
             
 
+            
+
              structure. </para
           >
         </summary>
@@ -3010,6 +3402,8 @@
           <para
             >A double-precision floating-point number that contains an OLE Automation date equivalent to specified <paramref
              name="time" />
+
+            
 
             
 
@@ -3025,8 +3419,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -3097,6 +3495,8 @@
 
             
 
+            
+
              structure.</para
           >
         </summary>
@@ -3105,6 +3505,8 @@
           <para
             >The OLE color value that represents the translated <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -3120,8 +3522,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
+
+          
 
           
 
@@ -3166,6 +3572,8 @@
 
             
 
+            
+
              does not work correctly at this time.</para
           >
         </remarks>
@@ -3174,6 +3582,8 @@
           <para
             >Returns an <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -3192,11 +3602,15 @@
 
             
 
+            
+
              representing the IPicture. </para
           >
         </returns>
         <param name="picture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3238,8 +3652,12 @@
 
             
 
+            
+
              method to convert an IPictureDisp object into an <see
              cref="T:System.Drawing.Image" />
+
+            
 
             
 
@@ -3258,6 +3676,8 @@
 
             
 
+            
+
              corresponding to the specified OLE IPictureDisp object.</para
           >
         </summary>
@@ -3271,11 +3691,15 @@
 
             
 
+            
+
              representing the IPictureDisp. </para
           >
         </returns>
         <param name="picture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3327,6 +3751,8 @@
 
             
 
+            
+
              and <paramref
              name="specified" />
 
@@ -3334,8 +3760,12 @@
 
             
 
+            
+
              values, and returns the <paramref
              name="bounds" />
+
+            
 
             
 
@@ -3358,11 +3788,15 @@
 
             
 
+            
+
              value.</para
           >
         </returns>
         <param name="bounds">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3377,6 +3811,8 @@
 
           
 
+          
+
           A scaling factor. </param
         >
         <param name="specified">
@@ -3386,8 +3822,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.BoundsSpecified" />
+
+          
 
           
 
@@ -3420,8 +3860,12 @@
 
             
 
+            
+
              parameter is a double-precision floating-point number that represents a date as the number of days before or after the base date, midnight, 30 December 1899. The sign and integral part of <paramref
              name="date" />
+
+            
 
             
 
@@ -3434,8 +3878,12 @@
 
             
 
+            
+
              encodes the time of day as a fraction of a day displacement from midnight. <paramref
              name="date" />
+
+            
 
             
 
@@ -3447,6 +3895,8 @@
           <para
             >For more information about OLE Automation, see the <see
              cref="http://go.microsoft.com/fwlink/?linkid=37118">MSDN Library</see>
+
+            
 
             
 
@@ -3465,6 +3915,8 @@
 
             
 
+            
+
              structure that corresponds to the specified OLE Automation date.</para
           >
         </summary>
@@ -3478,8 +3930,12 @@
 
             
 
+            
+
              that represents the same date and time as <paramref
              name="date" />
+
+            
 
             
 
@@ -3490,6 +3946,8 @@
         </returns>
         <param name="date">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3536,8 +3994,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -3550,6 +4012,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -3557,8 +4021,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -3577,8 +4045,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -3622,6 +4094,8 @@
 
             
 
+            
+
              dialog box typically displays version and copyright information about the ActiveX control.</para
           >
         </remarks>
@@ -3630,6 +4104,8 @@
           <para
             >Gets a value indicating whether the ActiveX control has an <ui
             >About</ui>
+
+            
 
             
 
@@ -3698,8 +4174,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -3712,6 +4192,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -3719,8 +4201,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -3739,8 +4225,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -3813,8 +4303,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -3827,6 +4321,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -3834,8 +4330,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -3854,8 +4354,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -3914,6 +4418,8 @@
 
             
 
+            
+
              method is called during window message preprocessing to determine whether the given input character should be preprocessed or sent directly to the ActiveX control. The preprocessing of a character includes checking whether the character is a mnemonic of another control.</para
           >
           <para
@@ -3924,8 +4430,12 @@
 
             
 
+            
+
              class, the <see
              cref="M:System.Windows.Forms.AxHost.IsInputChar(System.Char)" />
+
+            
 
             
 
@@ -3944,6 +4454,8 @@
         </returns>
         <param name="charCode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3985,8 +4497,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -3999,6 +4515,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -4006,8 +4524,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -4026,8 +4548,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -4070,8 +4596,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -4084,6 +4614,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -4091,8 +4623,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -4111,8 +4647,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -4155,8 +4695,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -4169,6 +4713,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -4176,8 +4722,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -4196,8 +4746,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -4240,8 +4794,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -4254,6 +4812,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -4261,8 +4821,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -4281,8 +4845,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -4311,6 +4879,8 @@
           <para
             >Announces to the component change service that the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -4408,8 +4978,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -4422,6 +4996,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -4429,8 +5005,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -4449,8 +5029,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -4490,8 +5074,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -4504,6 +5092,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -4511,8 +5101,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -4531,8 +5125,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -4572,8 +5170,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -4586,6 +5188,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -4593,8 +5197,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -4613,8 +5221,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -4654,8 +5266,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -4668,6 +5284,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -4675,8 +5293,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -4695,8 +5317,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -4739,8 +5365,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -4753,6 +5383,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -4760,8 +5392,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -4780,8 +5416,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -4824,8 +5464,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -4838,6 +5482,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -4845,8 +5491,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -4865,8 +5515,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -4909,8 +5563,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -4923,6 +5581,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -4930,8 +5590,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -4950,8 +5614,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -5001,8 +5669,12 @@
 
             
 
+            
+
              property is used after the control is created but before it is shown. The persisted state of the underlying ActiveX control is returned in the <see
              cref="T:System.Windows.Forms.AxHost.State" />
+
+            
 
             
 
@@ -5181,8 +5853,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -5195,6 +5871,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -5202,8 +5880,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -5222,8 +5904,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -5364,8 +6050,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -5378,6 +6068,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -5385,8 +6077,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -5405,8 +6101,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -5449,8 +6149,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -5463,6 +6167,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -5470,8 +6176,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -5490,8 +6200,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -5533,6 +6247,8 @@
 
             
 
+            
+
              event using the specified 32-bit signed integers.</para
           >
         </summary>
@@ -5543,8 +6259,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MouseButtons" />
+
+          
 
           
 
@@ -5559,6 +6279,8 @@
 
           
 
+          
+
           Not used.</param
         >
         <param name="x">
@@ -5568,10 +6290,14 @@
 
           
 
+          
+
           The x-coordinate of a mouse click, in pixels.</param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5617,6 +6343,8 @@
 
             
 
+            
+
              event using the specified single-precision floating-point numbers.</para
           >
         </summary>
@@ -5627,8 +6355,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MouseButtons" />
+
+          
 
           
 
@@ -5643,6 +6375,8 @@
 
           
 
+          
+
           Not used.</param
         >
         <param name="x">
@@ -5652,10 +6386,14 @@
 
           
 
+          
+
           The x-coordinate of a mouse click, in pixels.</param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5701,6 +6439,8 @@
 
             
 
+            
+
              event using the specified objects.</para
           >
         </summary>
@@ -5711,8 +6451,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MouseButtons" />
+
+          
 
           
 
@@ -5727,6 +6471,8 @@
 
           
 
+          
+
           Not used.</param
         >
         <param name="o3">
@@ -5736,10 +6482,14 @@
 
           
 
+          
+
           The x-coordinate of a mouse click, in pixels.</param
         >
         <param name="o4">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5785,6 +6535,8 @@
 
             
 
+            
+
              event using the specified 32-bit signed integers.</para
           >
         </summary>
@@ -5795,8 +6547,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MouseButtons" />
+
+          
 
           
 
@@ -5811,6 +6567,8 @@
 
           
 
+          
+
           Not used.</param
         >
         <param name="x">
@@ -5820,10 +6578,14 @@
 
           
 
+          
+
           The x-coordinate of a mouse click, in pixels.</param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5869,6 +6631,8 @@
 
             
 
+            
+
              event using the specified single-precision floating-point numbers.</para
           >
         </summary>
@@ -5879,8 +6643,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MouseButtons" />
+
+          
 
           
 
@@ -5895,6 +6663,8 @@
 
           
 
+          
+
           Not used.</param
         >
         <param name="x">
@@ -5904,10 +6674,14 @@
 
           
 
+          
+
           The x-coordinate of a mouse click, in pixels.</param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5953,6 +6727,8 @@
 
             
 
+            
+
              event using the specified objects.</para
           >
         </summary>
@@ -5963,8 +6739,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MouseButtons" />
+
+          
 
           
 
@@ -5979,6 +6759,8 @@
 
           
 
+          
+
           Not used.</param
         >
         <param name="o3">
@@ -5988,10 +6770,14 @@
 
           
 
+          
+
           The x-coordinate of a mouse click, in pixels.</param
         >
         <param name="o4">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6037,6 +6823,8 @@
 
             
 
+            
+
              event using the specified 32-bit signed integers.</para
           >
         </summary>
@@ -6047,8 +6835,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MouseButtons" />
+
+          
 
           
 
@@ -6063,6 +6855,8 @@
 
           
 
+          
+
           Not used.</param
         >
         <param name="x">
@@ -6072,10 +6866,14 @@
 
           
 
+          
+
           The x-coordinate of a mouse click, in pixels.</param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6121,6 +6919,8 @@
 
             
 
+            
+
              event using the specified single-precision floating-point numbers.</para
           >
         </summary>
@@ -6131,8 +6931,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MouseButtons" />
+
+          
 
           
 
@@ -6147,6 +6951,8 @@
 
           
 
+          
+
           Not used.</param
         >
         <param name="x">
@@ -6156,10 +6962,14 @@
 
           
 
+          
+
           The x-coordinate of a mouse click, in pixels.</param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6205,6 +7015,8 @@
 
             
 
+            
+
              event using the specified objects.</para
           >
         </summary>
@@ -6215,8 +7027,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MouseButtons" />
+
+          
 
           
 
@@ -6231,6 +7047,8 @@
 
           
 
+          
+
           Not used.</param
         >
         <param name="o3">
@@ -6240,10 +7058,14 @@
 
           
 
+          
+
           The x-coordinate of a mouse click, in pixels.</param
         >
         <param name="o4">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6317,8 +7139,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -6331,6 +7157,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -6338,8 +7166,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -6358,8 +7190,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -6464,8 +7300,12 @@
 
             
 
+            
+
              is false, no <ui
             >About</ui>
+
+            
 
             
 
@@ -6479,6 +7319,8 @@
           <para
             >Displays the ActiveX control's <ui
             >About</ui>
+
+            
 
             
 
@@ -6506,6 +7348,8 @@
           <para
             >If <see
              cref="M:System.Windows.Forms.AxHost.HasPropertyPages" />
+
+            
 
             
 
@@ -6548,6 +7392,8 @@
 
             
 
+            
+
              is false, no property pages are displayed.</para
           >
           <para>Property pages allow an ActiveX control user to view and change ActiveX control properties. These properties are accessed by invoking a control properties dialog box, which contains one or more property pages that provide a customized, graphical interface for viewing and editing the control properties.</para>
@@ -6563,8 +7409,12 @@
 
           
 
+          
+
           The parent <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -6623,8 +7473,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -6637,6 +7491,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -6644,8 +7500,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -6664,8 +7524,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -6711,6 +7575,8 @@
 
             
 
+            
+
              for the current object.</para
           >
         </summary>
@@ -6719,6 +7585,8 @@
           <para
             >An <see
              cref="T:System.ComponentModel.AttributeCollection" />
+
+            
 
             
 
@@ -6751,6 +7619,8 @@
           <para
             >Use the type name instead of the value that the <see
              cref="M:System.Windows.Forms.AxHost.System#ComponentModel#ICustomTypeDescriptor#GetClassName" />
+
+            
 
             
 
@@ -6796,6 +7666,8 @@
 
             
 
+            
+
              method returns.</para
           >
         </remarks>
@@ -6834,6 +7706,8 @@
           <para
             >Use the default type converter instead of the value that the <see
              cref="M:System.Windows.Forms.AxHost.System#ComponentModel#ICustomTypeDescriptor#GetConverter" />
+
+            
 
             
 
@@ -6887,6 +7761,8 @@
 
             
 
+            
+
              that represents the default event for the current object, or null if the object does not have events.</para
           >
         </returns>
@@ -6922,6 +7798,8 @@
           <para
             >A <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -6970,8 +7848,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -7011,6 +7893,8 @@
           <para
             >An <see
              cref="T:System.ComponentModel.EventDescriptorCollection" />
+
+            
 
             
 
@@ -7058,8 +7942,12 @@
 
             
 
+            
+
              that represents the events for the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -7075,8 +7963,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -7116,6 +8008,8 @@
           <para
             >A <see
              cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+
+            
 
             
 
@@ -7163,8 +8057,12 @@
 
             
 
+            
+
              that represents the events for the current <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -7180,8 +8078,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -7224,6 +8126,8 @@
         </returns>
         <param name="pd">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7331,8 +8235,12 @@
 
             
 
+            
+
              event, a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -7345,6 +8253,8 @@
 
             
 
+            
+
              class are not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
 
@@ -7352,8 +8262,12 @@
 
             
 
+            
+
              class. The events exposed by the ActiveX control when the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 
@@ -7372,8 +8286,12 @@
 
             
 
+            
+
              event is not supported by the <see
              cref="T:System.Windows.Forms.AxHost" />
+
+            
 
             
 

@@ -3,7 +3,7 @@
   <paragraph
     >The predefined string equality operators are: : <code_example
     >
-<![CDATA[
+      <![CDATA[
 bool operator ==(string x, string y);  
 bool operator !=(string x, string y);  
 ]]>
@@ -21,6 +21,8 @@ bool operator !=(string x, string y);
 
       >[Note: As described in <hyperlink
       >14.9.6</hyperlink>
+
+      
 
       
 

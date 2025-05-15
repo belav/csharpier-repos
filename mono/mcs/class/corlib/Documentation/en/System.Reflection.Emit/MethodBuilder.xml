@@ -47,6 +47,8 @@
 
         
 
+        
+
          class to create classes at runtime.</para
       >
     </remarks>
@@ -88,12 +90,16 @@
 
             
 
+            
+
              can be called several times, with each call specifying a security action (such as Demand, Assert, and Deny) and a set of permissions that the action applies to.</para
           >
           <block subset="none" type="note">
             <para
               >In the .NET Framework versions 1.0, 1.1, and 2.0, the declarative security attributes applied to a method by using the <see
                cref="M:System.Reflection.Emit.MethodBuilder.AddDeclarativeSecurity(System.Security.Permissions.SecurityAction,System.Security.PermissionSet)" />
+
+              
 
               
 
@@ -114,10 +120,14 @@
 
           
 
+          
+
           The security action to be taken (Demand, Assert, and so on). </param
         >
         <param name="pset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -207,11 +217,15 @@
 
             
 
+            
+
              always represents a generic method definition, and thus cannot be invoked.</para
           >
           <para
             >For more information, see <see
              cref="P:System.Reflection.MethodInfo.IsGenericMethod" />
+
+            
 
             
 
@@ -224,8 +238,12 @@
 
             
 
+            
+
             . For information on generic types, see <see
              cref="P:System.Type.IsGenericType" />
+
+            
 
             
 
@@ -270,6 +288,8 @@
 
             
 
+            
+
             , an array containing MSIL instructions as opcodes. The number of bytes of valid MSIL is given by count.</para
           >
           <block subset="none" type="note">
@@ -287,10 +307,14 @@
 
           
 
+          
+
           An array containing valid MSIL instructions. If this parameter is null, the method's body is cleared. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -362,8 +386,12 @@
 
             
 
+            
+
              method makes the current method generic. There is no way to undo this change. Calling this method a second time causes an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -374,6 +402,8 @@
           <para
             >The type parameters of the generic method can be retrieved later by using the <see
              cref="M:System.Reflection.Emit.MethodBuilder.GetGenericArguments" />
+
+            
 
             
 
@@ -390,6 +420,8 @@
 
             
 
+            
+
              and <see
              cref="M:System.Reflection.MethodInfo.GetGenericMethodDefinition" />
 
@@ -397,8 +429,12 @@
 
             
 
+            
+
             . For information on generic types, see <see
              cref="P:System.Type.IsGenericType" />
+
+            
 
             
 
@@ -417,6 +453,8 @@
 
             
 
+            
+
              objects that can be used to define their constraints.</para
           >
         </summary>
@@ -430,11 +468,15 @@
 
             
 
+            
+
              objects representing the type parameters of the generic method.</para
           >
         </returns>
         <param name="names">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -478,11 +520,15 @@
 
             
 
+            
+
              object returned by this method can be used to set the default value for a parameter or to apply custom attributes. </para
           >
           <para
             >Parameter numbering begins with 1, so <paramref
              name="position" />
+
+            
 
             
 
@@ -495,12 +541,16 @@
 
             
 
+            
+
              is zero, this method affects the return value.</para
           >
           <block subset="none" type="note">
             <para
               >In the .NET Framework versions 1.0 and 1.1, an exception is thrown if <paramref
                name="position" />
+
+              
 
               
 
@@ -525,6 +575,8 @@
 
           
 
+          
+
           The position of the parameter in the parameter list. Parameters are indexed beginning with the number 1 for the first parameter; the number 0 represents the return value of the method. </param
         >
         <param name="attributes">
@@ -534,10 +586,14 @@
 
           
 
+          
+
           The parameter attributes of the parameter. </param
         >
         <param name="strParamName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -584,11 +640,15 @@
 
             
 
+            
+
              is an instance of MethodBuilder and is equal to this object; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -670,6 +730,8 @@
 
           
 
+          
+
           Specifies whether to search this member's inheritance chain to find the custom attributes. </param
         >
       </Docs>
@@ -712,6 +774,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -722,10 +786,14 @@
 
           
 
+          
+
           The custom attribute type. </param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -762,11 +830,15 @@
 
             
 
+            
+
              method that is used to define them.</para
           >
           <para
             >For more information, see <see
              cref="P:System.Reflection.MethodInfo.IsGenericMethod" />
+
+            
 
             
 
@@ -779,8 +851,12 @@
 
             
 
+            
+
             . For information on generic types, see <see
              cref="P:System.Type.IsGenericType" />
+
+            
 
             
 
@@ -799,6 +875,8 @@
 
             
 
+            
+
              objects that represent the type parameters of the method, if it is generic.</para
           >
         </summary>
@@ -807,6 +885,8 @@
           <para
             >An array of <see
              cref="T:System.Reflection.Emit.GenericTypeParameterBuilder" />
+
+            
 
             
 
@@ -847,11 +927,15 @@
 
             
 
+            
+
              cannot be used to emit a constructed generic method directly. The emitted method is a generic method definition.</para
           >
           <para
             >For more information, see <see
              cref="P:System.Reflection.MethodInfo.IsGenericMethod" />
+
+            
 
             
 
@@ -864,8 +948,12 @@
 
             
 
+            
+
             . For information on generic types, see <see
              cref="P:System.Type.IsGenericType" />
+
+            
 
             
 
@@ -883,6 +971,8 @@
           <para
             >The current instance of <see
              cref="T:System.Reflection.Emit.MethodBuilder" />
+
+            
 
             
 
@@ -985,6 +1075,8 @@
         </returns>
         <param name="size">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1176,6 +1268,8 @@
 
             
 
+            
+
              parameter is ignored. For non-static methods, <paramref
              name="obj" />
 
@@ -1183,8 +1277,12 @@
 
             
 
+            
+
              should be an instance of a class that inherits or declares the method and must be the same type as this class. If the method has no parameters, the value of <paramref
              name="parameters" />
+
+            
 
             
 
@@ -1211,6 +1309,8 @@
 
           
 
+          
+
           The object on which to invoke the specified method. If the method is static, this parameter is ignored. </param
         >
         <param name="invokeAttr">
@@ -1220,8 +1320,12 @@
 
           
 
+          
+
           This must be a bit flag from <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -1236,8 +1340,12 @@
 
           
 
+          
+
           An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects via reflection. If binder is null, the default binder is used. For more details, see <see
            cref="T:System.Reflection.Binder" />
+
+          
 
           
 
@@ -1252,10 +1360,14 @@
 
           
 
+          
+
           An argument list. This is an array of arguments with the same number, order, and type as the parameters of the method to be invoked. If there are no parameters this should be null. </param
         >
         <param name="culture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1268,8 +1380,12 @@
 
           
 
+          
+
            used to govern the coercion of types. If this is null, the <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -1282,8 +1398,12 @@
 
           
 
+          
+
            that represents 1000 to a <see
            cref="T:System.Double" />
+
+          
 
           
 
@@ -1332,10 +1452,14 @@
 
           
 
+          
+
           The custom attribute type. </param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1364,6 +1488,8 @@
           <para
             >A method is generic if it has type parameters. You can make a method generic by calling the <see
              cref="M:System.Reflection.Emit.MethodBuilder.DefineGenericParameters(System.String[])" />
+
+            
 
             
 
@@ -1405,8 +1531,12 @@
 
             
 
+            
+
              can only be used to create generic method definitions; it cannot be used to create a constructed generic method directly. However, a subclass of <see
              cref="T:System.Reflection.Emit.MethodBuilder" />
+
+            
 
             
 
@@ -1420,6 +1550,8 @@
           <para
             >Gets a value indicating whether the current <see
              cref="T:System.Reflection.Emit.MethodBuilder" />
+
+            
 
             
 
@@ -1468,8 +1600,12 @@
 
             
 
+            
+
             , before the enclosing type has been completed. You can use the <see
              cref="M:System.Reflection.Emit.MethodBuilder.MakeGenericMethod(System.Type[])" />
+
+            
 
             
 
@@ -1482,8 +1618,12 @@
 
             
 
+            
+
              for such a constructed method, and use the <see
              cref="T:System.Reflection.MethodInfo" />
+
+            
 
             
 
@@ -1506,6 +1646,8 @@
 
             
 
+            
+
              representing the generic method constructed from the current generic method definition using the specified generic type arguments.</para
           >
         </returns>
@@ -1516,8 +1658,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1584,8 +1730,12 @@
 
             
 
+            
+
              property to get the type in which the method is being declared, and then calling the <see
              cref="P:System.Type.Module" />
+
+            
 
             
 
@@ -1598,11 +1748,15 @@
 
             
 
+            
+
              object.</para
           >
           <para
             >This property is also equivalent to calling <see
              cref="M:System.Reflection.Emit.MethodBuilder.GetModule" />
+
+            
 
             
 
@@ -1690,8 +1844,12 @@
 
             
 
+            
+
              object returned by this property to discover whether custom modifiers, such as <see
              cref="T:Microsoft.VisualC.IsConstModifier" />
+
+            
 
             
 
@@ -1705,6 +1863,8 @@
           <para
             >Gets a <see
              cref="T:System.Reflection.ParameterInfo" />
+
+            
 
             
 
@@ -1740,8 +1900,12 @@
 
               
 
+              
+
               . See <see
                cref="P:System.Reflection.MethodInfo.ReturnType" />
+
+              
 
               
 
@@ -1756,6 +1920,8 @@
           <para
             >Gets the return type of the method represented by this <see
              cref="T:System.Reflection.Emit.MethodBuilder" />
+
+            
 
             
 
@@ -1796,8 +1962,12 @@
 
             
 
+            
+
              after the containing <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -1810,8 +1980,12 @@
 
             
 
+            
+
              on the <see
              cref="T:System.Reflection.MethodInfo" />
+
+            
 
             
 
@@ -1858,6 +2032,8 @@
 
             
 
+            
+
              method can interact with the <see
              cref="M:System.Reflection.Emit.MethodBuilder.SetImplementationFlags(System.Reflection.MethodImplAttributes)" />
 
@@ -1865,8 +2041,12 @@
 
             
 
+            
+
              method when the two methods are used in combination. See the Remarks section of the <see
              cref="M:System.Reflection.Emit.MethodBuilder.SetImplementationFlags(System.Reflection.MethodImplAttributes)" />
+
+            
 
             
 
@@ -1881,6 +2061,8 @@
         </summary>
         <param name="customBuilder">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1928,6 +2110,8 @@
 
             
 
+            
+
             , see the Common Language Infrastructure (CLI) documentation, especially "Partition II: Metadata Definition and Semantics". The documentation is available online; see <see
              cref="http://go.microsoft.com/fwlink/?LinkID=99212"
               >ECMA C# and Common Language Infrastructure Standards</see
@@ -1937,10 +2121,14 @@
 
             
 
+            
+
              on MSDN and <see
              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
+
+            
 
             
 
@@ -1956,6 +2144,8 @@
 
             
 
+            
+
              method can interact with the <see
              cref="M:System.Reflection.Emit.MethodBuilder.SetImplementationFlags(System.Reflection.MethodImplAttributes)" />
 
@@ -1963,8 +2153,12 @@
 
             
 
+            
+
              method when the two methods are used in combination. See the Remarks section of the <see
              cref="M:System.Reflection.Emit.MethodBuilder.SetImplementationFlags(System.Reflection.MethodImplAttributes)" />
+
+            
 
             
 
@@ -1984,10 +2178,14 @@
 
           
 
+          
+
           The constructor for the custom attribute. </param
         >
         <param name="binaryAttribute">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2029,8 +2227,12 @@
 
             
 
+            
+
              method in combination with the <see
              cref="Overload:System.Reflection.Emit.MethodBuilder.SetCustomAttribute" />
+
+            
 
             
 
@@ -2043,8 +2245,12 @@
 
             
 
+            
+
              method to add the <see
              cref="T:System.Runtime.InteropServices.DllImportAttribute" />
+
+            
 
             
 
@@ -2057,6 +2263,8 @@
 
             
 
+            
+
              flag. If you subsequently call the <see
              cref="M:System.Reflection.Emit.MethodBuilder.SetImplementationFlags(System.Reflection.MethodImplAttributes)" />
 
@@ -2064,8 +2272,12 @@
 
             
 
+            
+
              method, the <see
              cref="F:System.Reflection.MethodImplAttributes.PreserveSig" />
+
+            
 
             
 
@@ -2083,6 +2295,8 @@
 
                 
 
+                
+
                  method before you call the <see
                  cref="Overload:System.Reflection.Emit.MethodBuilder.SetCustomAttribute" />
 
@@ -2090,8 +2304,12 @@
 
                 
 
+                
+
                  method. The <see
                  cref="Overload:System.Reflection.Emit.MethodBuilder.SetCustomAttribute" />
+
+                
 
                 
 
@@ -2109,8 +2327,12 @@
 
                 
 
+                
+
                  method to retrieve the existing flags, use bitwise OR to add your flag, and then call the <see
                  cref="M:System.Reflection.Emit.MethodBuilder.SetImplementationFlags(System.Reflection.MethodImplAttributes)" />
+
+                
 
                 
 
@@ -2127,6 +2349,8 @@
         </summary>
         <param name="attributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2175,6 +2399,8 @@
 
           
 
+          
+
           Marshaling information for the return type of this method. </param
         >
       </Docs>
@@ -2214,11 +2440,15 @@
 
             
 
+            
+
              method that accepts an array of parameter types. However, a generic method can have parameters whose types are specified by one or more of its own generic type parameters, which cannot be defined until after the method has been defined. Use this method to set the parameter types in that case.</para
           >
           <para
             >If the return type has optional or required custom modifiers, such as <see
              cref="T:System.Runtime.CompilerServices.IsConst" />
+
+            
 
             
 
@@ -2231,11 +2461,15 @@
 
             
 
+            
+
              method overload.</para
           >
           <para
             >Calling this method replaces any parameter types that were set using the <see
              cref="Overload:System.Reflection.Emit.TypeBuilder.DefineMethod" />
+
+            
 
             
 
@@ -2255,8 +2489,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -2295,8 +2533,12 @@
 
             
 
+            
+
             , use the <see
              cref="M:System.Reflection.Emit.MethodBuilder.SetSignature(System.Type,System.Type[],System.Type[],System.Type[],System.Type[][],System.Type[][])" />
+
+            
 
             
 
@@ -2307,6 +2549,8 @@
           <para
             >Calling this method replaces a return type established using the <see
              cref="Overload:System.Reflection.Emit.TypeBuilder.DefineMethod" />
+
+            
 
             
 
@@ -2326,8 +2570,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -2374,11 +2622,15 @@
 
             
 
+            
+
              method that accepts an array of parameter types. However, a generic method can have parameters whose types are specified by one or more of its own generic type parameters, which cannot be defined until after the method has been defined. Use this method to set the parameter types in that case.</para
           >
           <para
             >If neither the return type nor the parameter types have optional or required custom modifiers, such as <see
              cref="T:Microsoft.VisualC.IsConstModifier" />
+
+            
 
             
 
@@ -2391,8 +2643,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Reflection.Emit.MethodBuilder.SetParameters(System.Type[])" />
+
+            
 
             
 
@@ -2403,6 +2659,8 @@
           <para
             >Calling this method replaces the parameters and return type established using the <see
              cref="Overload:System.Reflection.Emit.TypeBuilder.DefineMethod" />
+
+            
 
             
 
@@ -2422,6 +2680,8 @@
 
           
 
+          
+
           The return type of the method.</param
         >
         <param name="returnTypeRequiredCustomModifiers">
@@ -2431,8 +2691,12 @@
 
           
 
+          
+
           An array of types representing the required custom modifiers, such as <see
            cref="T:System.Runtime.CompilerServices.IsConst" />
+
+          
 
           
 
@@ -2447,8 +2711,12 @@
 
           
 
+          
+
           An array of types representing the optional custom modifiers, such as <see
            cref="T:System.Runtime.CompilerServices.IsConst" />
+
+          
 
           
 
@@ -2463,6 +2731,8 @@
 
           
 
+          
+
           The types of the parameters of the method.</param
         >
         <param name="parameterTypeRequiredCustomModifiers">
@@ -2472,8 +2742,12 @@
 
           
 
+          
+
           An array of arrays of types. Each array of types represents the required custom modifiers for the corresponding parameter, such as <see
            cref="T:System.Runtime.CompilerServices.IsConst" />
+
+          
 
           
 
@@ -2488,8 +2762,12 @@
 
           
 
+          
+
           An array of arrays of types. Each array of types represents the optional custom modifiers for the corresponding parameter, such as <see
            cref="T:System.Runtime.CompilerServices.IsConst" />
+
+          
 
           
 
@@ -2537,10 +2815,14 @@
 
           
 
+          
+
           The name of the symbolic custom attribute. </param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2640,6 +2922,8 @@
 
             
 
+            
+
             , see the MSDN Library.</para
           >
         </remarks>
@@ -2654,6 +2938,8 @@
 
           
 
+          
+
           The type information to return.</param
         >
         <param name="lcid">
@@ -2663,10 +2949,14 @@
 
           
 
+          
+
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

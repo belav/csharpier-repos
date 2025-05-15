@@ -24,6 +24,8 @@
 
         
 
+        
+
          interface to enable a client application to display a user interface that enables the user of the application to create or select the credentials prior to opening a channel. </para
       >
       <para
@@ -34,8 +36,12 @@
 
         
 
+        
+
         , perform the following steps in <see
          cref="M:System.ServiceModel.Dispatcher.IInteractiveChannelInitializer.BeginDisplayInitializationUI(System.ServiceModel.IClientChannel,System.AsyncCallback,System.Object)" />
+
+        
 
         
 
@@ -53,6 +59,8 @@
 
             
 
+            
+
             . </para
           >
         </item>
@@ -65,8 +73,12 @@
 
             
 
+            
+
              method on the <see
              cref="T:System.ServiceModel.IClientChannel" />
+
+            
 
             
 
@@ -79,8 +91,12 @@
 
             
 
+            
+
             . This channel parameter object is used by the custom <see
              cref="T:System.ServiceModel.ClientCredentialsSecurityTokenManager" />
+
+            
 
             
 
@@ -101,6 +117,8 @@
 
         
 
+        
+
         :</para
       >
       <list type="ordered">
@@ -113,8 +131,12 @@
 
             
 
+            
+
              method on the <see
              cref="T:System.ServiceModel.Description.ClientCredentials" />
+
+            
 
             
 
@@ -132,6 +154,8 @@
 
             
 
+            
+
              and if so, add the <see
              cref="T:System.ServiceModel.Dispatcher.IInteractiveChannelInitializer" />
 
@@ -139,8 +163,12 @@
 
             
 
+            
+
              to the <see
              cref="P:System.ServiceModel.Dispatcher.ClientRuntime.InteractiveChannelInitializers" />
+
+            
 
             
 
@@ -158,8 +186,12 @@
 
         
 
+        
+
         . The client application can call either <see
          cref="M:System.ServiceModel.ClientBase`1.DisplayInitializationUI" />
+
+        
 
         
 
@@ -172,6 +204,8 @@
 
         
 
+        
+
          (or an asynchronous version) prior to opening the channel (the <newTerm
         >explicit</newTerm>
 
@@ -179,8 +213,12 @@
 
         
 
+        
+
          approach) or simply call the first operation (the <newTerm
         >implicit</newTerm>
+
+        
 
         
 
@@ -196,8 +234,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.ServiceModel.IClientChannel" />
+
+        
 
         
 
@@ -216,8 +258,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.ServiceModel.IClientChannel.DisplayInitializationUI" />
+
+            
 
             
 
@@ -235,8 +281,12 @@
 
             
 
+            
+
              method on the <see
              cref="T:System.ServiceModel.IClientChannel" />
+
+            
 
             
 
@@ -249,8 +299,12 @@
 
             
 
+            
+
              object returned from the <see
              cref="P:System.ServiceModel.ClientBase`1.InnerChannel" />
+
+            
 
             
 
@@ -304,8 +358,12 @@
 
             
 
+            
+
             , perform the following steps in <see
              cref="M:System.ServiceModel.Dispatcher.IInteractiveChannelInitializer.BeginDisplayInitializationUI(System.ServiceModel.IClientChannel,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -323,6 +381,8 @@
 
                 
 
+                
+
                 . </para
               >
             </item>
@@ -335,8 +395,12 @@
 
                 
 
+                
+
                  method on the <see
                  cref="T:System.ServiceModel.IClientChannel" />
+
+                
 
                 
 
@@ -349,8 +413,12 @@
 
                 
 
+                
+
                 . This channel parameter object is used by the custom <see
                  cref="T:System.ServiceModel.ClientCredentialsSecurityTokenManager" />
+
+                
 
                 
 
@@ -378,11 +446,15 @@
 
             
 
+            
+
              to use to call back when processing has completed.</para
           >
         </returns>
         <param name="channel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -397,10 +469,14 @@
 
           
 
+          
+
           The callback object.</param
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -441,6 +517,8 @@
 
             
 
+            
+
              has finished.</para
           >
         </summary>
@@ -451,8 +529,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IAsyncResult" />
+
+          
 
           
 

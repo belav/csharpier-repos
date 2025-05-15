@@ -35,6 +35,8 @@
 
         
 
+        
+
          classes, rather than conventional ASP or ASP.NET Web pages, responds to these specific requests. HTTP handlers provide a way of interacting with the low-level request and response services of the IIS Web server, and provide functionality similar to ISAPI extensions but with a simpler programming model.</para
       >
     </remarks>
@@ -56,6 +58,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Remoting.Channels.Http.HttpRemotingHandler" />
+
+            
 
             
 
@@ -92,6 +96,8 @@
 
             
 
+            
+
              constructor instead.</para
           >
         </remarks>
@@ -100,6 +106,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Remoting.Channels.Http.HttpRemotingHandler" />
+
+            
 
             
 
@@ -115,8 +123,12 @@
 
           
 
+          
+
           The constructor ignores the <paramref
            name="type" />
+
+          
 
           
 
@@ -131,8 +143,12 @@
 
           
 
+          
+
           The constructor ignores the <paramref
            name="srvID" />
+
+          
 
           
 
@@ -160,6 +176,8 @@
           <para
             >Gets a Boolean value that indicates whether another request can use the <see
              cref="T:System.Runtime.Remoting.Channels.Http.HttpRemotingHandler" />
+
+            
 
             
 
@@ -197,8 +215,12 @@
 
             
 
+            
+
              methods, see <see
              cref="M:System.Web.IHttpHandler.ProcessRequest(System.Web.HttpContext)" />
+
+            
 
             
 
@@ -218,8 +240,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 

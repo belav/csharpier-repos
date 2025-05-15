@@ -28,8 +28,12 @@
 
         
 
+        
+
          class is a specialized type of the <see
          cref="T:System.Windows.Forms.DataGridViewColumn" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
          class is similar to the <see
          cref="T:System.Windows.Forms.DataGridViewButtonColumn" />
+
+        
 
         
 
@@ -59,8 +67,12 @@
 
         
 
+        
+
          property to true and set the <see
          cref="P:System.Windows.Forms.DataGridViewLinkColumn.Text" />
+
+        
 
         
 
@@ -76,6 +88,8 @@
 
         
 
+        
+
          has an associated <see
          cref="T:System.Windows.Forms.DataGridViewLinkCell" />
 
@@ -83,8 +97,12 @@
 
         
 
+        
+
          in every <see
          cref="T:System.Windows.Forms.DataGridViewRow" />
+
+        
 
         
 
@@ -100,6 +118,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -110,8 +130,12 @@
 
         
 
+        
+
          event. You can also use the <see
          cref="E:System.Windows.Forms.DataGridView.CellClick" />
+
+        
 
         
 
@@ -125,6 +149,8 @@
       <para
         >Represents a column of cells that contain links in a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -153,6 +179,8 @@
 
             
 
+            
+
              instance, this constructor sets the <see
              cref="P:System.Windows.Forms.DataGridViewLinkColumn.CellTemplate" />
 
@@ -160,8 +188,12 @@
 
             
 
+            
+
              property to a new <see
              cref="T:System.Windows.Forms.DataGridViewLinkCell" />
+
+            
 
             
 
@@ -175,6 +207,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.DataGridViewLinkColumn" />
+
+            
 
             
 
@@ -209,6 +243,8 @@
 
             
 
+            
+
              property of the object returned by the <see
              cref="P:System.Windows.Forms.DataGridViewLinkColumn.CellTemplate" />
 
@@ -216,8 +252,12 @@
 
             
 
+            
+
              property. Setting this property also sets the <see
              cref="P:System.Windows.Forms.DataGridViewLinkCell.ActiveLinkColor" />
+
+            
 
             
 
@@ -264,8 +304,12 @@
 
             
 
+            
+
              class initializes this property to a newly created <see
              cref="T:System.Windows.Forms.DataGridViewLinkCell" />
+
+            
 
             
 
@@ -277,6 +321,8 @@
             <para
               >Changing the properties of the cell template will not immediately affect the user interface (UI) of the column's existing cells. These changes are only apparent after the column is regenerated (for example, by sorting the column or through a call to the <see
                cref="M:System.Windows.Forms.DataGridView.InvalidateColumn(System.Int32)" />
+
+              
 
               
 
@@ -321,8 +367,12 @@
 
             
 
+            
+
              that represents the cloned <see
              cref="T:System.Windows.Forms.DataGridViewLinkColumn" />
+
+            
 
             
 
@@ -362,6 +412,8 @@
 
             
 
+            
+
              property of the object returned by the <see
              cref="P:System.Windows.Forms.DataGridViewLinkColumn.CellTemplate" />
 
@@ -369,8 +421,12 @@
 
             
 
+            
+
              property. Setting this property also sets the <see
              cref="P:System.Windows.Forms.DataGridViewLinkCell.LinkBehavior" />
+
+            
 
             
 
@@ -406,6 +462,8 @@
 
             
 
+            
+
              property of the object returned by the <see
              cref="P:System.Windows.Forms.DataGridViewLinkColumn.CellTemplate" />
 
@@ -413,8 +471,12 @@
 
             
 
+            
+
              property. Setting this property also sets the <see
              cref="P:System.Windows.Forms.DataGridViewLinkCell.LinkColor" />
+
+            
 
             
 
@@ -455,8 +517,12 @@
 
             
 
+            
+
              property is set to true. Otherwise, each cell's link text is populated with the <see
              cref="P:System.Windows.Forms.DataGridViewCell.FormattedValue" />
+
+            
 
             
 
@@ -472,6 +538,8 @@
 
             
 
+            
+
              property value for individual cells by setting the cell <see
              cref="P:System.Windows.Forms.DataGridViewLinkCell.UseColumnTextForLinkValue" />
 
@@ -479,8 +547,12 @@
 
             
 
+            
+
              property to false after setting the column <see
              cref="P:System.Windows.Forms.DataGridViewLinkColumn.UseColumnTextForLinkValue" />
+
+            
 
             
 
@@ -494,6 +566,8 @@
           <para
             >Gets or sets the link text displayed in a column's cells if <see
              cref="P:System.Windows.Forms.DataGridViewLinkColumn.UseColumnTextForLinkValue" />
+
+            
 
             
 
@@ -546,8 +620,12 @@
 
             
 
+            
+
              is true, the <see
              cref="P:System.Windows.Forms.DataGridViewLinkColumn.VisitedLinkColor" />
+
+            
 
             
 
@@ -563,6 +641,8 @@
 
             
 
+            
+
              property of the object returned by the <see
              cref="P:System.Windows.Forms.DataGridViewLinkColumn.CellTemplate" />
 
@@ -570,8 +650,12 @@
 
             
 
+            
+
              property. Setting this property also sets the <see
              cref="P:System.Windows.Forms.DataGridViewLinkCell.TrackVisitedState" />
+
+            
 
             
 
@@ -612,6 +696,8 @@
 
             
 
+            
+
              property of the object returned by the <see
              cref="P:System.Windows.Forms.DataGridViewLinkColumn.CellTemplate" />
 
@@ -619,8 +705,12 @@
 
             
 
+            
+
              property. Setting this property also sets the <see
              cref="P:System.Windows.Forms.DataGridViewLinkCell.UseColumnTextForLinkValue" />
+
+            
 
             
 
@@ -634,6 +724,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="P:System.Windows.Forms.DataGridViewLinkColumn.Text" />
+
+            
 
             
 
@@ -668,8 +760,12 @@
 
             
 
+            
+
              property is set to false, the <see
              cref="P:System.Windows.Forms.DataGridViewLinkColumn.VisitedLinkColor" />
+
+            
 
             
 
@@ -685,6 +781,8 @@
 
             
 
+            
+
              property of the object returned by the <see
              cref="P:System.Windows.Forms.DataGridViewLinkColumn.CellTemplate" />
 
@@ -692,8 +790,12 @@
 
             
 
+            
+
              property. Setting this property also sets the <see
              cref="P:System.Windows.Forms.DataGridViewLinkCell.VisitedLinkColor" />
+
+            
 
             
 

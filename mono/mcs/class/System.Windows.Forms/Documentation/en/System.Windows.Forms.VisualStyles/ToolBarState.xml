@@ -20,8 +20,12 @@
 
         
 
+        
+
          values correspond to the states of the <see
          cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar.DropDownButton" />
+
+        
 
         
 
@@ -48,8 +56,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar.SplitButtonDropDown" />
+
+        
 
         
 

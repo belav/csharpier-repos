@@ -127,6 +127,8 @@
 
         
 
+        
+
          control is used to display hierarchical data, such as a table of contents or file directory, in a tree structure and supports the following features: </para
       >
       <list type="bullet">
@@ -142,6 +144,8 @@
 
             
 
+            
+
              control.</para
           >
         </item>
@@ -152,6 +156,8 @@
           <para
             >Programmatic access to the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -177,8 +183,12 @@
 
               
 
+              
+
                control is designed to be used inside an <see
                cref="T:System.Web.UI.UpdatePanel" />
+
+              
 
               
 
@@ -191,8 +201,12 @@
 
               
 
+              
+
                is set to true. <see
                cref="T:System.Web.UI.UpdatePanel" />
+
+              
 
               
 
@@ -207,10 +221,14 @@
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="5c12736d-d9e9-464a-9388-3fe0f9f49e49">Partial-Page Rendering Overview</a>
               </format>
+
+              
 
               
 
@@ -235,8 +253,12 @@
 
         
 
+        
+
          control is made up of nodes. Each entry in the tree is called a node and is represented by a <see
          cref="T:System.Web.UI.WebControls.TreeNode" />
+
+        
 
         
 
@@ -254,6 +276,8 @@
 
             
 
+            
+
             . </para
           >
         </item>
@@ -261,6 +285,8 @@
           <para
             >The node that is contained by another node is called a <newTerm
             >child node</newTerm>
+
+            
 
             
 
@@ -278,14 +304,17 @@
 
             
 
+            
+
             . </para
           >
         </item>
         <item>
           <para
             >The node that is not contained by any other node but is the ancestor to all the other nodes is the <newTerm
+            >root node</newTerm>
+
             
->root node</newTerm>
 
             
 
@@ -304,11 +333,15 @@
 
         
 
+        
+
          control allows you to add multiple root nodes to your tree structure. This is useful when you want to display item listings without displaying a single root node, as in a list of product categories.</para
       >
       <para
         >Each node has a <see
          cref="P:System.Web.UI.WebControls.TreeNode.Text" />
+
+        
 
         
 
@@ -321,8 +354,12 @@
 
         
 
+        
+
          property. The value of the <see
          cref="P:System.Web.UI.WebControls.TreeNode.Text" />
+
+        
 
         
 
@@ -335,8 +372,12 @@
 
         
 
+        
+
         , while the <see
          cref="P:System.Web.UI.WebControls.TreeNode.Value" />
+
+        
 
         
 
@@ -352,8 +393,12 @@
 
         
 
+        
+
          property for the node to a value other than an empty string (""). To put a node into selection mode, set the <see
          cref="P:System.Web.UI.WebControls.TreeNode.NavigateUrl" />
+
+        
 
         
 
@@ -365,6 +410,8 @@
         <para
           >Some Internet browsers have a limitation that can affect the performance of the <see
            cref="T:System.Web.UI.WebControls.TreeView" />
+
+          
 
           
 
@@ -387,6 +434,8 @@
 
         
 
+        
+
          control is static data. To display static data using declarative syntax, first nest opening and closing &lt;Nodes&gt; tags between the opening and closing tags of the <see
          cref="T:System.Web.UI.WebControls.TreeView" />
 
@@ -394,8 +443,12 @@
 
         
 
+        
+
          control. Next, create the tree structure by nesting &lt;asp:TreeNode&gt; elements between the opening and closing &lt;Nodes&gt; tags. Each &lt;asp:TreeNode&gt; element represents a node in the tree and maps to a <see
          cref="T:System.Web.UI.WebControls.TreeNode" />
+
+        
 
         
 
@@ -417,8 +470,12 @@
 
         
 
+        
+
          control can also be bound to data. You can use either of two methods to bind the <see
          cref="T:System.Web.UI.WebControls.TreeView" />
+
+        
 
         
 
@@ -436,8 +493,12 @@
 
             
 
+            
+
              control can use any data source control that implements the <see
              cref="T:System.Web.UI.IHierarchicalDataSource" />
+
+            
 
             
 
@@ -450,8 +511,12 @@
 
             
 
+            
+
              control or a <see
              cref="T:System.Web.UI.WebControls.SiteMapDataSource" />
+
+            
 
             
 
@@ -464,8 +529,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -478,8 +547,12 @@
 
             
 
+            
+
              value of the data source control. The <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -497,8 +570,12 @@
 
             
 
+            
+
              control can also be bound to an <see
              cref="T:System.Xml.XmlDocument" />
+
+            
 
             
 
@@ -511,8 +588,12 @@
 
             
 
+            
+
              object with relations. To bind to one of these data sources, set the <see
              cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" />
+
+            
 
             
 
@@ -525,8 +606,12 @@
 
             
 
+            
+
              control to the data source, and then call the <see
              cref="M:System.Web.UI.WebControls.BaseDataBoundControl.DataBind" />
+
+            
 
             
 
@@ -544,6 +629,8 @@
 
         
 
+        
+
          collection. The <see
          cref="P:System.Web.UI.WebControls.TreeView.DataBindings" />
 
@@ -551,8 +638,12 @@
 
         
 
+        
+
          collection contains TreeNodeBinding objects that define the relationship between a data item and the node that it is binding to. You can specify the criteria for binding and the data item property to display in the node. For more information on tree node bindings, see <see
          cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+        
 
         
 
@@ -569,8 +660,12 @@
 
           
 
+          
+
            control that the page developer is not displaying. Therefore, security of the data must be implemented by the data source. Do not use the <see
            cref="P:System.Web.UI.WebControls.TreeView.MaxDataBindDepth" />
+
+          
 
           
 
@@ -593,6 +688,8 @@
 
         
 
+        
+
          control supports dynamic node population. When the <see
          cref="P:System.Web.UI.WebControls.TreeNode.PopulateOnDemand" />
 
@@ -600,8 +697,12 @@
 
         
 
+        
+
          property for a node is set to true, that node gets populated at run time when the node is expanded. To populate a node dynamically, you must define an event-handling method that contains the logic to populate a node for the <see
          cref="E:System.Web.UI.WebControls.TreeView.TreeNodePopulate" />
+
+        
 
         
 
@@ -617,8 +718,12 @@
 
         
 
+        
+
          control to populate a node using client script when users expand the node, without requiring a round trip to the server. For more information on client-side node population, see <see
          cref="P:System.Web.UI.WebControls.TreeView.PopulateNodesFromClient" />
+
+        
 
         
 
@@ -640,6 +745,8 @@
 
         
 
+        
+
          control. First, you can specify a different style (such as font size and color) for each of the node types.</para
       >
       <para
@@ -649,6 +756,8 @@
             >ASP.NET Web Server Controls and CSS Styles</a
           >
         </format>
+
+        
 
         
 
@@ -737,6 +846,8 @@
 
         
 
+        
+
          collection. The first style in the collection corresponds to the style of the nodes at the first level in the tree. The second style in the collection corresponds to the style of the nodes at the second level in the tree, and so on. This is most often used to generate table of contents–style navigation menus where nodes at a certain depth should have the same appearance, regardless of whether they have child nodes.</para
       >
       <block subset="none" type="note">
@@ -748,12 +859,16 @@
 
           
 
+          
+
            collection, that style overrides any root, parent, or leaf node style settings for the nodes at that depth.</para
         >
       </block>
       <para
         >Another way to alter the appearance of the control is to customize the images that are displayed in the <see
          cref="T:System.Web.UI.WebControls.TreeView" />
+
+        
 
         
 
@@ -807,6 +922,8 @@
 
               
 
+              
+
                property must also be set to true for this property to have an effect.</para
             >
           </description>
@@ -833,8 +950,12 @@
 
         
 
+        
+
          control also allows you to display a check box next to a node. When the <see
          cref="P:System.Web.UI.WebControls.TreeView.ShowCheckBoxes" />
+
+        
 
         
 
@@ -851,8 +972,12 @@
 
           
 
+          
+
            property can be set to a bitwise combination of the <see
            cref="T:System.Web.UI.WebControls.TreeNodeTypes" />
+
+          
 
           
 
@@ -869,8 +994,12 @@
 
         
 
+        
+
          collection is automatically populated with the selected nodes. When check boxes are displayed, you can use the <see
          cref="E:System.Web.UI.WebControls.TreeView.TreeNodeCheckChanged" />
+
+        
 
         
 
@@ -892,8 +1021,12 @@
 
         
 
+        
+
          control provides several events that you can program against. This allows you to run a custom routine whenever an event occurs. The following table lists the events that are supported by the <see
          cref="T:System.Web.UI.WebControls.TreeView" />
+
+        
 
         
 
@@ -927,6 +1060,8 @@
 
               
 
+              
+
                control change state between posts to the server.</para
             >
           </description>
@@ -941,6 +1076,8 @@
             <para
               >Occurs when a node is selected in the <see
                cref="T:System.Web.UI.WebControls.TreeView" />
+
+              
 
               
 
@@ -965,6 +1102,8 @@
 
               
 
+              
+
                control.</para
             >
           </description>
@@ -979,6 +1118,8 @@
             <para
               >Occurs when a node is collapsed in the <see
                cref="T:System.Web.UI.WebControls.TreeView" />
+
+              
 
               
 
@@ -1003,8 +1144,12 @@
 
               
 
+              
+
                property set to true is expanded in the <see
                cref="T:System.Web.UI.WebControls.TreeView" />
+
+              
 
               
 
@@ -1029,6 +1174,8 @@
 
               
 
+              
+
                control.</para
             >
           </description>
@@ -1048,8 +1195,12 @@
 
         
 
+        
+
          control does not have built-in scrolling. To add scrolling, place the <see
          cref="T:System.Web.UI.WebControls.TreeView" />
+
+        
 
         
 
@@ -1062,8 +1213,12 @@
 
         
 
+        
+
          control and add scrollbars to the <see
          cref="T:System.Web.UI.WebControls.Panel" />
+
+        
 
         
 
@@ -1073,6 +1228,8 @@
          type="text/html">
           <a href="127b61ed-87f2-46f4-92a3-785166e7245b">Panel Web Server Control Overview</a>
         </format>
+
+        
 
         
 
@@ -1096,6 +1253,8 @@
 
         
 
+        
+
         .</para
       >
       <format type="text/html">
@@ -1114,11 +1273,15 @@
 
         
 
+        
+
         |False"
     BackColor="color name|#dddddd"
     BorderColor="color name|#dddddd"
     BorderStyle="<codeFeaturedElement
         >NotSet</codeFeaturedElement>
+
+        
 
         
 
@@ -1139,9 +1302,13 @@
 
         
 
+        
+
         |False"
     Enabled="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -1155,6 +1322,8 @@
 
         
 
+        
+
         |False"
     EnableViewState="<codeFeaturedElement
         >True</codeFeaturedElement>
@@ -1163,9 +1332,13 @@
 
         
 
+        
+
         |False"
     ExpandDepth="string|<codeFeaturedElement
         >FullyExpand</codeFeaturedElement>
+
+        
 
         
 
@@ -1182,9 +1355,13 @@
 
         
 
+        
+
         "
     Font-Italic="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1194,6 +1371,8 @@
     Font-Names="string"
     Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1209,9 +1388,13 @@
 
         
 
+        
+
         "
     Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1228,6 +1411,8 @@
 
         
 
+        
+
         |XPFileExplorer|Msdn|WindowsHelp|Simple|Simple2|
         BulletedList|BulletedList2|BulletedList3|BulletedList4|
         Arrows|News|Contacts|Inbox|Events|Faq"
@@ -1236,6 +1421,8 @@
     NodeIndent="integer"
     NodeWrap="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1264,10 +1451,14 @@
 
         
 
+        
+
         |False"
     runat="server"
     ShowCheckBoxes="<codeFeaturedElement
         >None</codeFeaturedElement>
+
+        
 
         
 
@@ -1281,9 +1472,13 @@
 
         
 
+        
+
         |False"
     ShowLines="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1298,6 +1493,8 @@
     ToolTip="string"
     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -1324,9 +1521,13 @@
 
         
 
+        
+
         "
                     SelectAction="<codeFeaturedElement
         >Select</codeFeaturedElement>
+
+        
 
         
 
@@ -1355,6 +1556,8 @@
 
         
 
+        
+
         |None|Dotted|Dashed|Solid|Double|
                 Groove|Ridge|Inset|Outset"
             BorderWidth="size"
@@ -1362,6 +1565,8 @@
             CssClass="string"
             Font-Bold="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1375,10 +1580,14 @@
 
         
 
+        
+
         "
             Font-Names="string"
             Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1394,9 +1603,13 @@
 
         
 
+        
+
         "
             Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1423,6 +1636,8 @@
 
         
 
+        
+
         |None|Dotted|Dashed|Solid|
                         Double|Groove|Ridge|Inset|Outset"
                     BorderWidth="size"
@@ -1430,6 +1645,8 @@
                     CssClass="string"
                     Font-Bold="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1443,10 +1660,14 @@
 
         
 
+        
+
         "
                     Font-Names="string"
                     Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1462,9 +1683,13 @@
 
         
 
+        
+
         "
                     Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1490,6 +1715,8 @@
 
         
 
+        
+
         "
                     Expanded="string"
                     ImageToolTip="string"
@@ -1497,6 +1724,8 @@
                     NavigateUrl="uri"
                     PopulateOnDemand="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1510,9 +1739,13 @@
 
         
 
+        
+
         |Expand|SelectExpand|None"
                     Selected="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1537,6 +1770,8 @@
 
         
 
+        
+
         |None|Dotted|Dashed|Solid|Double|
                 Groove|Ridge|Inset|Outset"
             BorderWidth="size"
@@ -1544,6 +1779,8 @@
             CssClass="string"
             Font-Bold="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1557,10 +1794,14 @@
 
         
 
+        
+
         "
             Font-Names="string"
             Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1576,9 +1817,13 @@
 
         
 
+        
+
         "
             Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1604,6 +1849,8 @@
 
         
 
+        
+
         |None|Dotted|Dashed|Solid|Double|
                 Groove|Ridge|Inset|Outset"
             BorderWidth="size"
@@ -1611,6 +1858,8 @@
             CssClass="string"
             Font-Bold="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1624,10 +1873,14 @@
 
         
 
+        
+
         "
             Font-Names="string"
             Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1643,9 +1896,13 @@
 
         
 
+        
+
         "
             Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1671,6 +1928,8 @@
 
         
 
+        
+
         |None|Dotted|Dashed|Solid|Double|
                 Groove|Ridge|Inset|Outset"
             BorderWidth="size"
@@ -1678,6 +1937,8 @@
             CssClass="string"
             Font-Bold="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1691,10 +1952,14 @@
 
         
 
+        
+
         "
             Font-Names="string"
             Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1710,9 +1975,13 @@
 
         
 
+        
+
         "
             Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1738,6 +2007,8 @@
 
         
 
+        
+
         |None|Dotted|Dashed|Solid|Double|
                 Groove|Ridge|Inset|Outset"
             BorderWidth="size"
@@ -1745,6 +2016,8 @@
             CssClass="string"
             Font-Bold="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1758,10 +2031,14 @@
 
         
 
+        
+
         "
             Font-Names="string"
             Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1777,9 +2054,13 @@
 
         
 
+        
+
         "
             Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -1820,8 +2101,12 @@
 
             
 
+            
+
              constructor to create and initialize a new instance of the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -1834,8 +2119,12 @@
 
             
 
+            
+
              control to a page dynamically, create a new <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -1848,8 +2137,12 @@
 
             
 
+            
+
              collection of a container control, such as the <see
              cref="T:System.Web.UI.WebControls.PlaceHolder" />
+
+            
 
             
 
@@ -1863,6 +2156,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -1900,6 +2195,8 @@
 
             
 
+            
+
              method is used primarily by control developers.</para
           >
         </remarks>
@@ -1908,6 +2205,8 @@
           <para
             >Adds HTML attributes and styles that need to be rendered to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -1923,8 +2222,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -1961,8 +2264,12 @@
 
             
 
+            
+
              control needs to know which data item property to bind to which <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
+
+            
 
             
 
@@ -1975,8 +2282,12 @@
 
             
 
+            
+
              property is set to true, the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -1989,8 +2300,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
+
+            
 
             
 
@@ -2007,12 +2322,16 @@
 
               
 
+              
+
                collection.</para
             >
           </block>
           <para
             >In the case of an XML element, the value that is returned by the ToString method is the element name, which shows the underlying structure of the XML file, but is not very useful otherwise. To create a more useful tree, you must define your own tree node bindings by populating the <see
              cref="P:System.Web.UI.WebControls.TreeView.DataBindings" />
+
+            
 
             
 
@@ -2029,8 +2348,12 @@
 
               
 
+              
+
                collection, the <see
                cref="T:System.Web.UI.WebControls.TreeView" />
+
+              
 
               
 
@@ -2046,6 +2369,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -2089,6 +2414,8 @@
 
             
 
+            
+
              control (by setting the <see
              cref="P:System.Web.UI.WebControls.TreeView.ShowCheckBoxes" />
 
@@ -2096,8 +2423,12 @@
 
             
 
+            
+
              property to a value other than TreeNodeType.None), use the <see
              cref="P:System.Web.UI.WebControls.TreeView.CheckedNodes" />
+
+            
 
             
 
@@ -2113,8 +2444,12 @@
 
             
 
+            
+
              event is raised when the check boxes of the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -2126,6 +2461,8 @@
             <para
               >The <see
                cref="P:System.Web.UI.WebControls.TreeView.CheckedNodes" />
+
+              
 
               
 
@@ -2145,8 +2482,12 @@
 
             
 
+            
+
              objects that represent the nodes in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -2174,6 +2515,8 @@
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.TreeView.CollapseAll" />
+
+            
 
             
 
@@ -2215,6 +2558,8 @@
 
             
 
+            
+
              property to specify a ToolTip for the collapsible image. The text that you specify provides Assistive Technology devices with a description of the image that can be used to make the control more accessible.</para
           >
           <para>The value of this property is stored in view state.</para>
@@ -2226,12 +2571,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -2279,11 +2628,15 @@
 
             
 
+            
+
              property to specify a custom image for the collapsible node indicator. This image is displayed next to a collapsible node and is usually a minus sign (-).</para
           >
           <para
             >When the <see
              cref="P:System.Web.UI.WebControls.TreeView.ShowExpandCollapse" />
+
+            
 
             
 
@@ -2296,8 +2649,12 @@
 
             
 
+            
+
              control displays a plus sign (+) or a minus sign(-) or a placeholder image next to a node to indicate whether the node is expandable, collapsible, or non-expandable, respectively. You can specify custom images by first setting the <see
              cref="P:System.Web.UI.WebControls.TreeView.ImageSet" />
+
+            
 
             
 
@@ -2310,8 +2667,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.UI.WebControls.TreeView.ExpandImageUrl" />
+
+            
 
             
 
@@ -2324,8 +2685,12 @@
 
             
 
+            
+
              properties to the URLs for the custom images. If no images are specified, the default images are used. To hide the expansion node indicators, set the <see
              cref="P:System.Web.UI.WebControls.TreeView.ShowExpandCollapse" />
+
+            
 
             
 
@@ -2342,8 +2707,12 @@
 
               
 
+              
+
                control when using custom images, make sure that all the images that are specified by the <see
                cref="P:System.Web.UI.WebControls.TreeView.NoExpandImageUrl" />
+
+              
 
               
 
@@ -2356,8 +2725,12 @@
 
               
 
+              
+
               , and <see
                cref="P:System.Web.UI.WebControls.TreeView.CollapseImageUrl" />
+
+              
 
               
 
@@ -2369,6 +2742,8 @@
           <para
             >When using a custom image for the collapsible node indicator, you should also consider setting the <see
              cref="P:System.Web.UI.WebControls.TreeView.CollapseImageToolTip" />
+
+            
 
             
 
@@ -2409,8 +2784,12 @@
 
             
 
+            
+
              control does not support embedding of child controls. This method has been overridden to prevent the addition of child controls and always returns an <see
              cref="T:System.Web.UI.EmptyControlCollection" />
+
+            
 
             
 
@@ -2428,6 +2807,8 @@
           <para
             >Always returns an <see
              cref="T:System.Web.UI.EmptyControlCollection" />
+
+            
 
             
 
@@ -2465,8 +2846,12 @@
 
             
 
+            
+
              method is a helper method that returns a new instance of the <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
+
+            
 
             
 
@@ -2482,8 +2867,12 @@
 
             
 
+            
+
              method is used primarily by control developers. Control developers that want to extend the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -2496,8 +2885,12 @@
 
             
 
+            
+
              class should override this method to return an object that derives from the <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
+
+            
 
             
 
@@ -2510,6 +2903,8 @@
 
             
 
+            
+
              class is to override the <see
              cref="M:System.Web.UI.WebControls.TreeNode.RenderPreText(System.Web.UI.HtmlTextWriter)" />
 
@@ -2517,8 +2912,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.UI.WebControls.TreeNode.RenderPostText(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -2537,8 +2936,12 @@
 
             
 
+            
+
              class. The <see
              cref="M:System.Web.UI.WebControls.TreeView.CreateNode" />
+
+            
 
             
 
@@ -2552,6 +2955,8 @@
           <para
             >A new instance of the <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
+
+            
 
             
 
@@ -2581,8 +2986,12 @@
 
             
 
+            
+
              method instead of the <see
              cref="M:System.Web.UI.WebControls.TreeView.DataBind" />
+
+            
 
             
 
@@ -2596,6 +3005,8 @@
           <para
             >Calls the <see
              cref="M:System.Web.UI.WebControls.BaseDataBoundControl.DataBind" />
+
+            
 
             
 
@@ -2645,8 +3056,12 @@
 
             
 
+            
+
              collection contains <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -2662,6 +3077,8 @@
 
             
 
+            
+
              object. The criteria indicate when a data item should be bound to a node. The criteria can be specified with a node depth, a data member, or both. A node depth specifies the node level that gets bound. For example, if you specify a node depth of 0, all nodes in the tree structure at level 0 are bound using the tree node binding. A data member specifies the type of the data item in the underlying data source, but can represent different information depending on the data source. For example, the data member for an XML element specifies the name of the element.</para
           >
           <para
@@ -2672,8 +3089,12 @@
 
             
 
+            
+
              objects are defined that conflict with each other, the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -2691,6 +3112,8 @@
 
                 
 
+                
+
                  object that defines both a depth and a data member.</para
               >
             </item>
@@ -2698,6 +3121,8 @@
               <para
                 >The <see
                  cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+                
 
                 
 
@@ -2715,6 +3140,8 @@
 
                 
 
+                
+
                  object that defines only the data member.</para
               >
             </item>
@@ -2722,6 +3149,8 @@
               <para
                 >The <see
                  cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+                
 
                 
 
@@ -2740,6 +3169,8 @@
 
             
 
+            
+
              object that can be bound to a value. You can either bind to an attribute or field of a data item or display a static value. For more information on binding the properties of a <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
 
@@ -2747,8 +3178,12 @@
 
             
 
+            
+
              object to a value, see <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -2764,8 +3199,12 @@
 
             
 
+            
+
              collection can be programmatically populated, it is usually set declaratively. To specify the tree node bindings, first nest opening and closing &lt;DataBindings&gt; tags between the opening and closing tags of the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -2781,8 +3220,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -2795,8 +3238,12 @@
 
             
 
+            
+
              property set to true. Data bindings that are created declaratively have the <see
              cref="P:System.Web.UI.WebControls.TreeNodeBinding.PopulateOnDemand" />
+
+            
 
             
 
@@ -2810,6 +3257,8 @@
           <para
             >Gets a collection of <see
              cref="T:System.Web.UI.WebControls.TreeNodeBinding" />
+
+            
 
             
 
@@ -2850,8 +3299,12 @@
 
             
 
+            
+
              property to specify whether the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -2867,8 +3320,12 @@
 
             
 
+            
+
              event to populate the nodes. For more information on client-side node population, see <see
              cref="P:System.Web.UI.WebControls.TreeView.PopulateNodesFromClient" />
+
+            
 
             
 
@@ -2885,8 +3342,12 @@
 
               
 
+              
+
                property is set to false, the <see
                cref="T:System.Web.UI.WebControls.TreeView" />
+
+              
 
               
 
@@ -2904,10 +3365,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -2921,6 +3386,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -2948,6 +3415,8 @@
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.TreeView.ExpandAll" />
+
+            
 
             
 
@@ -2992,8 +3461,12 @@
 
             
 
+            
+
              property to control the rendering of the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -3007,6 +3480,8 @@
           <para
             >Gets or sets the number of levels that are expanded when a <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -3044,6 +3519,8 @@
 
             
 
+            
+
              property to specify a ToolTip for the image. The text that you specify provides Assistive Technology devices with a description of the image that can be used to make the control more accessible.</para
           >
           <para>The value of this property is stored in view state.</para>
@@ -3055,12 +3532,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -3108,11 +3589,15 @@
 
             
 
+            
+
              property to specify a custom image for the expandable node indicator. This image is displayed next to an expandable node and is usually a plus sign (+).</para
           >
           <para
             >When the <see
              cref="P:System.Web.UI.WebControls.TreeView.ShowExpandCollapse" />
+
+            
 
             
 
@@ -3125,8 +3610,12 @@
 
             
 
+            
+
              control displays a plus sign (+) or minus sign (-) or a placeholder image next to a node to indicate whether the node is expandable, collapsible, or non-expandable, respectively. You can specify custom images by first setting the <see
              cref="P:System.Web.UI.WebControls.TreeView.ImageSet" />
+
+            
 
             
 
@@ -3139,8 +3628,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.UI.WebControls.TreeView.ExpandImageUrl" />
+
+            
 
             
 
@@ -3153,8 +3646,12 @@
 
             
 
+            
+
              properties to the URLs for the custom images. If no images are specified, the default images are used. To hide the expansion node indicators, set the <see
              cref="P:System.Web.UI.WebControls.TreeView.ShowExpandCollapse" />
+
+            
 
             
 
@@ -3171,8 +3668,12 @@
 
               
 
+              
+
                control when using custom images, make sure that all the images that are specified by the <see
                cref="P:System.Web.UI.WebControls.TreeView.NoExpandImageUrl" />
+
+              
 
               
 
@@ -3185,8 +3686,12 @@
 
               
 
+              
+
               , and <see
                cref="P:System.Web.UI.WebControls.TreeView.CollapseImageUrl" />
+
+              
 
               
 
@@ -3203,11 +3708,15 @@
 
             
 
+            
+
              to false.</para
           >
           <para
             >When using a custom image for the expandable node indicator, you should also consider setting the <see
              cref="P:System.Web.UI.WebControls.TreeView.ExpandImageToolTip" />
+
+            
 
             
 
@@ -3250,8 +3759,12 @@
 
             
 
+            
+
              method to get a node from the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -3264,8 +3777,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Web.UI.WebControls.TreeView.PathSeparator" />
+
+            
 
             
 
@@ -3284,8 +3801,12 @@
 
             
 
+            
+
              object in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -3304,11 +3825,15 @@
 
             
 
+            
+
              at the specified value path.</para
           >
         </returns>
         <param name="valuePath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3340,8 +3865,12 @@
 
             
 
+            
+
              control implements the <see
              cref="T:System.Web.UI.ICallbackEventHandler" />
+
+            
 
             
 
@@ -3354,8 +3883,12 @@
 
             
 
+            
+
              to retrieve data and the <see
              cref="M:System.Web.UI.WebControls.TreeView.GetCallbackResult" />
+
+            
 
             
 
@@ -3413,8 +3946,12 @@
 
             
 
+            
+
              property to control the appearance of a node when the mouse pointer is positioned over it. This property is read-only; however, you can set the properties of the <see
              cref="T:System.Web.UI.WebControls.TreeNodeStyle" />
+
+            
 
             
 
@@ -3427,8 +3964,12 @@
 
             
 
+            
+
             , where <paramref
              name="Subproperty" />
+
+            
 
             
 
@@ -3441,8 +3982,12 @@
 
             
 
+            
+
              object (for example, HoverNodeStyle-ForeColor). The properties can also be set programmatically in the form <paramref
              name="Property.Subproperty" />
+
+            
 
             
 
@@ -3454,6 +3999,8 @@
             <para
               >To use the <see
                cref="P:System.Web.UI.WebControls.TreeView.HoverNodeStyle" />
+
+              
 
               
 
@@ -3472,12 +4019,16 @@
 
                 
 
+                
+
                 . </para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.Web.UI.WebControls.TreeView.RootNodeStyle" />
+
+                
 
                 
 
@@ -3490,6 +4041,8 @@
 
                 
 
+                
+
                 , or <see
                  cref="P:System.Web.UI.WebControls.TreeView.LeafNodeStyle" />
 
@@ -3497,8 +4050,12 @@
 
                 
 
+                
+
                 , depending on the node type. If the <see
                  cref="P:System.Web.UI.WebControls.TreeView.LevelStyles" />
+
+                
 
                 
 
@@ -3515,12 +4072,16 @@
 
                 
 
+                
+
                 . </para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.Web.UI.WebControls.TreeView.HoverNodeStyle" />
+
+                
 
                 
 
@@ -3539,8 +4100,12 @@
 
               
 
+              
+
                property override any corresponding node style settings that are in the <see
                cref="P:System.Web.UI.WebControls.TreeView.NodeStyle" />
+
+              
 
               
 
@@ -3553,8 +4118,12 @@
 
               
 
+              
+
               , <see
                cref="P:System.Web.UI.WebControls.TreeView.ParentNodeStyle" />
+
+              
 
               
 
@@ -3567,8 +4136,12 @@
 
               
 
+              
+
               , or <see
                cref="P:System.Web.UI.WebControls.TreeView.SelectedNodeStyle" />
+
+              
 
               
 
@@ -3585,8 +4158,12 @@
 
             
 
+            
+
              property is not rendered for a node with its <see
              cref="P:System.Web.UI.WebControls.TreeNode.SelectAction" />
+
+            
 
             
 
@@ -3602,8 +4179,12 @@
 
             
 
+            
+
              and the <see
              cref="P:System.Web.UI.WebControls.TreeView.LeafNodeStyle" />
+
+            
 
             
 
@@ -3616,6 +4197,8 @@
 
             
 
+            
+
              objects, the <see
              cref="P:System.Web.UI.WebControls.TreeView.HoverNodeStyle" />
 
@@ -3623,8 +4206,12 @@
 
             
 
+            
+
              property is a <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -3638,6 +4225,8 @@
           <para
             >Gets a reference to the <see
              cref="T:System.Web.UI.WebControls.TreeNodeStyle" />
+
+            
 
             
 
@@ -3678,8 +4267,12 @@
 
             
 
+            
+
              property to specify the group of images to use for the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -3696,8 +4289,12 @@
 
               
 
+              
+
                property does not affect any style settings for a node. Set the appropriate style property, such as the <see
                cref="P:System.Web.UI.WebControls.TreeView.NodeStyle" />
+
+              
 
               
 
@@ -3709,6 +4306,8 @@
           <para
             >The following table lists the valid values for The <see
              cref="P:System.Web.UI.WebControls.TreeView.ImageSet" />
+
+            
 
             
 
@@ -3921,6 +4520,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -3965,8 +4566,12 @@
 
             
 
+            
+
              property to control the appearance of the leaf nodes in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -3979,8 +4584,12 @@
 
             
 
+            
+
              object it returns. The properties can be set declaratively in the form <paramref
              name="Property-Subproperty" />
+
+            
 
             
 
@@ -3993,6 +4602,8 @@
 
             
 
+            
+
              is a property of the <see
              cref="T:System.Web.UI.WebControls.TreeNodeStyle" />
 
@@ -4000,8 +4611,12 @@
 
             
 
+            
+
              object (for example, LeafNodeStyle-ForeColor). The properties can also be set programmatically in the form <paramref
              name="Property.Subproperty" />
+
+            
 
             
 
@@ -4018,12 +4633,16 @@
 
                 
 
+                
+
                 . </para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.Web.UI.WebControls.TreeView.RootNodeStyle" />
+
+                
 
                 
 
@@ -4036,6 +4655,8 @@
 
                 
 
+                
+
                 , or <see
                  cref="P:System.Web.UI.WebControls.TreeView.LeafNodeStyle" />
 
@@ -4043,8 +4664,12 @@
 
                 
 
+                
+
                 , depending on the node type. If the <see
                  cref="P:System.Web.UI.WebControls.TreeView.LevelStyles" />
+
+                
 
                 
 
@@ -4061,12 +4686,16 @@
 
                 
 
+                
+
                 . </para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.Web.UI.WebControls.TreeView.HoverNodeStyle" />
+
+                
 
                 
 
@@ -4084,6 +4713,8 @@
 
             
 
+            
+
              property instead of setting the individual style properties.</para
           >
         </remarks>
@@ -4092,6 +4723,8 @@
           <para
             >Gets a reference to the <see
              cref="T:System.Web.UI.WebControls.TreeNodeStyle" />
+
+            
 
             
 
@@ -4138,8 +4771,12 @@
 
             
 
+            
+
              collection as an alternative to the individual style properties (such as the <see
              cref="P:System.Web.UI.WebControls.TreeView.NodeStyle" />
+
+            
 
             
 
@@ -4157,12 +4794,16 @@
 
                 
 
+                
+
                 . </para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.Web.UI.WebControls.TreeView.RootNodeStyle" />
+
+                
 
                 
 
@@ -4175,8 +4816,12 @@
 
                 
 
+                
+
                 , or <see
                  cref="P:System.Web.UI.WebControls.TreeView.LeafNodeStyle" />
+
+                
 
                 
 
@@ -4189,12 +4834,16 @@
 
                 
 
+                
+
                  collection is defined, it is applied at this time, overriding the other node style properties.</para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.Web.UI.WebControls.TreeView.SelectedNodeStyle" />
+
+                
 
                 
 
@@ -4215,6 +4864,8 @@
           <para
             >Gets a collection of <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -4252,8 +4903,12 @@
 
             
 
+            
+
              control can display lines that connect child nodes to parent nodes when the <see
              cref="P:System.Web.UI.WebControls.TreeView.ShowLines" />
+
+            
 
             
 
@@ -4266,8 +4921,12 @@
 
             
 
+            
+
              property to specify a Web-accessible folder that contains the set of pre-rendered images to use for the lines. The following table describes the images that are used by the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -4424,8 +5083,12 @@
 
               
 
+              
+
                property is not set, the <see
                cref="T:System.Web.UI.WebControls.TreeView" />
+
+              
 
               
 
@@ -4475,8 +5138,12 @@
 
             
 
+            
+
              method call, and then invokes the <see
              cref="M:System.Web.UI.WebControls.TreeView.RaisePostDataChangedEvent" />
+
+            
 
             
 
@@ -4495,6 +5162,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -4503,6 +5172,8 @@
           <para
             >true, if the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -4518,10 +5189,14 @@
 
           
 
+          
+
           The key identifier for the control. </param
         >
         <param name="postCollection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4560,6 +5235,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -4592,6 +5269,8 @@
 
             
 
+            
+
              control to a data source, use the <see
              cref="P:System.Web.UI.WebControls.TreeView.MaxDataBindDepth" />
 
@@ -4599,8 +5278,12 @@
 
             
 
+            
+
              property to limit the number of tree levels to bind to the control. For example, setting this property to 2 binds only the root node and any nodes that are immediately under the root node to the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -4617,8 +5300,12 @@
 
               
 
+              
+
                control that the page developer is not displaying. Therefore, security of the data must be implemented by the data source. Do not use the <see
                cref="P:System.Web.UI.WebControls.TreeView.MaxDataBindDepth" />
+
+              
 
               
 
@@ -4634,6 +5321,8 @@
           <para
             >Gets or sets the maximum number of tree levels to bind to the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -4671,6 +5360,8 @@
 
             
 
+            
+
              property to control the amount of spacing between the left edge of a child node and the left edge of its parent node.</para
           >
           <block subset="none" type="note">
@@ -4682,8 +5373,12 @@
 
               
 
+              
+
                property affects every child node in the <see
                cref="T:System.Web.UI.WebControls.TreeView" />
+
+              
 
               
 
@@ -4699,6 +5394,8 @@
           <para
             >Gets or sets the indentation amount (in pixels) for the child nodes of the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -4748,8 +5445,12 @@
 
             
 
+            
+
              property to get a <see
              cref="T:System.Web.UI.WebControls.TreeNodeCollection" />
+
+            
 
             
 
@@ -4766,12 +5467,16 @@
 
               
 
+              
+
                control. </para
             >
           </block>
           <para
             >The <see
              cref="P:System.Web.UI.WebControls.TreeView.Nodes" />
+
+            
 
             
 
@@ -4784,8 +5489,12 @@
 
             
 
+            
+
              objects from the collection. Any updates to the collection are automatically reflected in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -4801,8 +5510,12 @@
 
             
 
+            
+
              property of the node. Use the <see
              cref="P:System.Web.UI.WebControls.TreeNode.ChildNodes" />
+
+            
 
             
 
@@ -4821,8 +5534,12 @@
 
             
 
+            
+
              objects that represents the root nodes in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -4872,8 +5589,12 @@
 
             
 
+            
+
              property to control the default appearance of a node in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -4886,8 +5607,12 @@
 
             
 
+            
+
              object it returns. The properties can be set declaratively in the form <paramref
              name="Property-Subproperty" />
+
+            
 
             
 
@@ -4900,6 +5625,8 @@
 
             
 
+            
+
              is a property of the <see
              cref="T:System.Web.UI.WebControls.TreeNodeStyle" />
 
@@ -4907,8 +5634,12 @@
 
             
 
+            
+
              object (for example, NodeStyle-ForeColor). The properties can also be set programmatically in the form <paramref
              name="Property.Subproperty" />
+
+            
 
             
 
@@ -4925,12 +5656,16 @@
 
                 
 
+                
+
                 . </para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.Web.UI.WebControls.TreeView.RootNodeStyle" />
+
+                
 
                 
 
@@ -4943,6 +5678,8 @@
 
                 
 
+                
+
                 , or <see
                  cref="P:System.Web.UI.WebControls.TreeView.LeafNodeStyle" />
 
@@ -4950,8 +5687,12 @@
 
                 
 
+                
+
                 , depending on the node type. If the <see
                  cref="P:System.Web.UI.WebControls.TreeView.LevelStyles" />
+
+                
 
                 
 
@@ -4968,12 +5709,16 @@
 
                 
 
+                
+
                 . </para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.Web.UI.WebControls.TreeView.HoverNodeStyle" />
+
+                
 
                 
 
@@ -4992,8 +5737,12 @@
 
               
 
+              
+
               , <see
                cref="P:System.Web.UI.WebControls.TreeView.ParentNodeStyle" />
+
+              
 
               
 
@@ -5006,8 +5755,12 @@
 
               
 
+              
+
                properties override the style settings of the <see
                cref="P:System.Web.UI.WebControls.TreeView.NodeStyle" />
+
+              
 
               
 
@@ -5019,6 +5772,8 @@
           <para
             >If you need to generate table of contents-style navigation menus where nodes at a certain level should have the same appearance, regardless of whether they have child nodes, you might consider using the <see
              cref="P:System.Web.UI.WebControls.TreeView.LevelStyles" />
+
+            
 
             
 
@@ -5037,8 +5792,12 @@
 
             
 
+            
+
              object that allows you to set the default appearance of the nodes in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -5071,6 +5830,8 @@
           <para
             >Use the <see
              cref="P:System.Web.UI.WebControls.TreeView.NodeWrap" />
+
+            
 
             
 
@@ -5119,11 +5880,15 @@
 
             
 
+            
+
              property to specify a custom image for the non-expandable node indicator. The non-expandable node indicator image (or spacer) is displayed next to leaf nodes (in place of the expandable and collapsible node indicators) to align the leaf nodes with parent or root nodes. </para
           >
           <para
             >When the <see
              cref="P:System.Web.UI.WebControls.TreeView.ShowExpandCollapse" />
+
+            
 
             
 
@@ -5136,8 +5901,12 @@
 
             
 
+            
+
              control displays a plus sign (+) or minus sign (-) or a placeholder image next to a node to indicate whether the node is expandable, collapsible, or non-expandable, respectively. You can specify custom images by first setting the <see
              cref="P:System.Web.UI.WebControls.TreeView.ImageSet" />
+
+            
 
             
 
@@ -5150,8 +5919,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.UI.WebControls.TreeView.ExpandImageUrl" />
+
+            
 
             
 
@@ -5164,8 +5937,12 @@
 
             
 
+            
+
              properties to the URLs of the custom images. If no images are specified, the default images are used. To hide the expansion node indicators, set the <see
              cref="P:System.Web.UI.WebControls.TreeView.ShowExpandCollapse" />
+
+            
 
             
 
@@ -5182,8 +5959,12 @@
 
               
 
+              
+
                control when using custom images, make sure that all the images that are specified by the <see
                cref="P:System.Web.UI.WebControls.TreeView.NoExpandImageUrl" />
+
+              
 
               
 
@@ -5196,8 +5977,12 @@
 
               
 
+              
+
               , and <see
                cref="P:System.Web.UI.WebControls.TreeView.CollapseImageUrl" />
+
+              
 
               
 
@@ -5240,8 +6025,12 @@
 
             
 
+            
+
              method is called by the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -5254,8 +6043,12 @@
 
             
 
+            
+
              event. It is generally used by control developers when extending the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -5273,11 +6066,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.TreeView.OnInit(System.EventArgs)" />
+
+            
 
             
 
@@ -5296,6 +6093,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5306,8 +6105,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5340,6 +6143,8 @@
 
             
 
+            
+
              method is overridden to register for postback. If client script is enabled, it also renders the necessary script and hidden fields.</para
           >
           <para
@@ -5352,11 +6157,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.TreeView.OnPreRender(System.EventArgs)" />
+
+            
 
             
 
@@ -5375,6 +6184,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5385,8 +6196,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5420,8 +6235,12 @@
 
             
 
+            
+
              event is raised when a node is selected in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -5432,6 +6251,8 @@
           <para
             >You can optionally set the <see
              cref="P:System.Web.UI.WebControls.TreeNode.SelectAction" />
+
+            
 
             
 
@@ -5448,8 +6269,12 @@
 
               
 
+              
+
                is not rendered for a node with its <see
                cref="P:System.Web.UI.WebControls.TreeNode.SelectAction" />
+
+              
 
               
 
@@ -5468,11 +6293,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.TreeView.OnSelectedNodeChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -5491,8 +6320,12 @@
 
             
 
+            
+
              event of the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -5508,8 +6341,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5546,8 +6383,12 @@
 
             
 
+            
+
              event is raised when a check box in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -5565,11 +6406,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.TreeView.OnTreeNodeCheckChanged(System.Web.UI.WebControls.TreeNodeEventArgs)" />
+
+            
 
             
 
@@ -5588,8 +6433,12 @@
 
             
 
+            
+
              event of the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -5605,8 +6454,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.TreeNodeEventArgs" />
+
+          
 
           
 
@@ -5643,8 +6496,12 @@
 
             
 
+            
+
              event is raised when a node is collapsed in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -5662,11 +6519,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.TreeView.OnTreeNodeCollapsed(System.Web.UI.WebControls.TreeNodeEventArgs)" />
+
+            
 
             
 
@@ -5685,8 +6546,12 @@
 
             
 
+            
+
              event of the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -5702,8 +6567,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.TreeNodeEventArgs" />
+
+          
 
           
 
@@ -5740,8 +6609,12 @@
 
             
 
+            
+
              event is raised when a data item is bound to a node in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -5759,11 +6632,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.TreeView.OnTreeNodeDataBound(System.Web.UI.WebControls.TreeNodeEventArgs)" />
+
+            
 
             
 
@@ -5782,8 +6659,12 @@
 
             
 
+            
+
              event of the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -5799,8 +6680,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.TreeNodeEventArgs" />
+
+          
 
           
 
@@ -5837,8 +6722,12 @@
 
             
 
+            
+
              event is raised when a node is expanded in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -5855,8 +6744,12 @@
 
               
 
+              
+
                property for a node is set to <see
                cref="F:System.Web.UI.WebControls.TreeNodeSelectAction.Expand" />
+
+              
 
               
 
@@ -5869,6 +6762,8 @@
 
               
 
+              
+
               , the <see
                cref="E:System.Web.UI.WebControls.TreeView.TreeNodeExpanded" />
 
@@ -5876,8 +6771,12 @@
 
               
 
+              
+
                event is also raised when that node is clicked in the <see
                cref="T:System.Web.UI.WebControls.TreeView" />
+
+              
 
               
 
@@ -5896,11 +6795,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.TreeView.OnTreeNodeExpanded(System.Web.UI.WebControls.TreeNodeEventArgs)" />
+
+            
 
             
 
@@ -5919,8 +6822,12 @@
 
             
 
+            
+
              event of the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -5936,8 +6843,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.TreeNodeEventArgs" />
+
+          
 
           
 
@@ -5974,8 +6885,12 @@
 
             
 
+            
+
              control supports dynamic node population. When the <see
              cref="P:System.Web.UI.WebControls.TreeNode.PopulateOnDemand" />
+
+            
 
             
 
@@ -5991,8 +6906,12 @@
 
             
 
+            
+
              property for the node to true. Next, define an event-handling method for the <see
              cref="E:System.Web.UI.WebControls.TreeView.TreeNodePopulate" />
+
+            
 
             
 
@@ -6005,6 +6924,8 @@
 
             
 
+            
+
              collection of the node being populated. A node structure is created by adding <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
 
@@ -6012,8 +6933,12 @@
 
             
 
+            
+
              objects to the <see
              cref="P:System.Web.UI.WebControls.TreeNode.ChildNodes" />
+
+            
 
             
 
@@ -6030,6 +6955,8 @@
 
               
 
+              
+
                property for a node is set to true, the node must be populated dynamically. You cannot declaratively nest another node below it; otherwise, an error will occur on the page.</para
             >
           </block>
@@ -6041,8 +6968,12 @@
 
             
 
+            
+
              control to populate a node on the client dynamically when that node is expanded, which prevents the need to post back to the server. For more information on client-side node population, see <see
              cref="P:System.Web.UI.WebControls.TreeView.PopulateNodesFromClient" />
+
+            
 
             
 
@@ -6060,11 +6991,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.TreeView.OnTreeNodePopulate(System.Web.UI.WebControls.TreeNodeEventArgs)" />
+
+            
 
             
 
@@ -6083,8 +7018,12 @@
 
             
 
+            
+
              event of the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -6100,8 +7039,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.TreeNodeEventArgs" />
+
+          
 
           
 
@@ -6150,8 +7093,12 @@
 
             
 
+            
+
              property to control the appearance of the parent nodes in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -6164,8 +7111,12 @@
 
             
 
+            
+
              object it returns. The properties can be set declaratively in the form <paramref
              name="Property-Subproperty" />
+
+            
 
             
 
@@ -6178,6 +7129,8 @@
 
             
 
+            
+
              is a property of the <see
              cref="T:System.Web.UI.WebControls.TreeNodeStyle" />
 
@@ -6185,8 +7138,12 @@
 
             
 
+            
+
              object (for example, ParentNodeStyle-ForeColor). The properties can also be set programmatically in the form <paramref
              name="Property.Subproperty" />
+
+            
 
             
 
@@ -6203,12 +7160,16 @@
 
                 
 
+                
+
                 . </para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.Web.UI.WebControls.TreeView.RootNodeStyle" />
+
+                
 
                 
 
@@ -6221,6 +7182,8 @@
 
                 
 
+                
+
                 , or <see
                  cref="P:System.Web.UI.WebControls.TreeView.LeafNodeStyle" />
 
@@ -6228,8 +7191,12 @@
 
                 
 
+                
+
                 , depending on the node type. If the <see
                  cref="P:System.Web.UI.WebControls.TreeView.LevelStyles" />
+
+                
 
                 
 
@@ -6246,12 +7213,16 @@
 
                 
 
+                
+
                 . </para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.Web.UI.WebControls.TreeView.HoverNodeStyle" />
+
+                
 
                 
 
@@ -6264,6 +7235,8 @@
           <para
             >If you need to generate table of contents-style navigation menus where nodes at a certain level should have the same appearance, regardless of whether they have child nodes, you might consider using the <see
              cref="P:System.Web.UI.WebControls.TreeView.LevelStyles" />
+
+            
 
             
 
@@ -6282,8 +7255,12 @@
 
             
 
+            
+
              object that allows you to set the appearance of parent nodes in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -6321,8 +7298,12 @@
 
             
 
+            
+
              property contains a delimiter-separated list of node values that form a path from the root node to the current node. Use the <see
              cref="P:System.Web.UI.WebControls.TreeView.PathSeparator" />
+
+            
 
             
 
@@ -6338,8 +7319,12 @@
 
             
 
+            
+
              control, the delimiter character might need to be changed to prevent any conflicts. For example, if you set the delimiter character to a comma, the displayed text should not contain any commas; otherwise, the <see
              cref="P:System.Web.UI.WebControls.TreeNode.ValuePath" />
+
+            
 
             
 
@@ -6354,6 +7339,8 @@
           <para
             >Gets or sets the character that is used to delimit the node values that are specified by the <see
              cref="P:System.Web.UI.WebControls.TreeNode.ValuePath" />
+
+            
 
             
 
@@ -6388,8 +7375,12 @@
 
             
 
+            
+
              method is a helper method that is called by the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -6428,8 +7419,12 @@
 
             
 
+            
+
              control supports dynamic node population. When the <see
              cref="P:System.Web.UI.WebControls.TreeNode.PopulateOnDemand" />
+
+            
 
             
 
@@ -6445,8 +7440,12 @@
 
             
 
+            
+
              property is set to true, a service is called from the client to populate the tree nodes, which eliminates the need to post back to the server. Otherwise, the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -6463,8 +7462,12 @@
 
               
 
+              
+
                property must also be set to true in order for the <see
                cref="P:System.Web.UI.WebControls.TreeView.PopulateNodesFromClient" />
+
+              
 
               
 
@@ -6481,8 +7484,12 @@
 
             
 
+            
+
              property to true and then set the <see
              cref="P:System.Web.UI.WebControls.TreeNode.PopulateOnDemand" />
+
+            
 
             
 
@@ -6495,8 +7502,12 @@
 
             
 
+            
+
              event that programmatically populates the node. A typical event-handling method retrieves node data from a data source, places the data into a node structure, and then adds the node structure to the <see
              cref="P:System.Web.UI.WebControls.TreeNode.ChildNodes" />
+
+            
 
             
 
@@ -6509,8 +7520,12 @@
 
             
 
+            
+
              objects to the <see
              cref="P:System.Web.UI.WebControls.TreeNode.ChildNodes" />
+
+            
 
             
 
@@ -6522,6 +7537,8 @@
             <para
               >When the <see
                cref="P:System.Web.UI.WebControls.TreeNode.PopulateOnDemand" />
+
+              
 
               
 
@@ -6539,8 +7556,12 @@
 
               
 
+              
+
                property of the <see
                cref="T:System.Web.HttpBrowserCapabilities" />
+
+              
 
               
 
@@ -6553,6 +7574,8 @@
 
               
 
+              
+
                class for the current request through the <see
                cref="P:System.Web.HttpRequest.Browser" />
 
@@ -6560,8 +7583,12 @@
 
               
 
+              
+
                property of the <see
                cref="T:System.Web.HttpRequest" />
+
+              
 
               
 
@@ -6606,8 +7633,12 @@
 
             
 
+            
+
              method is a helper method for the <see
              cref="M:System.Web.UI.WebControls.TreeView.System#Web#UI#ICallbackEventHandler#RaiseCallbackEvent(System.String)" />
+
+            
 
             
 
@@ -6625,6 +7656,8 @@
           <para
             >The argument for the callback handler in the <see
              cref="M:System.Web.UI.ClientScriptManager.GetCallbackEventReference(System.String,System.String,System.String,System.String,System.String,System.Boolean)" />
+
+            
 
             
 
@@ -6662,8 +7695,12 @@
 
             
 
+            
+
              parameter to the <see
              cref="M:System.Web.UI.WebControls.TreeView.RaisePostBackEvent(System.String)" />
+
+            
 
             
 
@@ -6676,8 +7713,12 @@
 
             
 
+            
+
              interface. This <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -6690,8 +7731,12 @@
 
             
 
+            
+
              parameter. If the postback event is caused by a simple submit to the server, the <paramref
              name="eventArgument" />
+
+            
 
             
 
@@ -6702,6 +7747,8 @@
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.TreeView.RaisePostBackEvent(System.String)" />
+
+            
 
             
 
@@ -6720,8 +7767,12 @@
 
             
 
+            
+
              control to process an event that is raised when a form is posted to the server. The <see
              cref="M:System.Web.UI.WebControls.TreeView.RaisePostBackEvent(System.String)" />
+
+            
 
             
 
@@ -6734,11 +7785,15 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
         <param name="eventArgument">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6770,8 +7825,12 @@
 
             
 
+            
+
              control are raised from the <see
              cref="M:System.Web.UI.WebControls.TreeView.RaisePostDataChangedEvent" />
+
+            
 
             
 
@@ -6785,6 +7844,8 @@
           <para
             >Signals the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -6822,6 +7883,8 @@
 
             
 
+            
+
              method is used primarily by control developers.</para
           >
         </remarks>
@@ -6836,8 +7899,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -6876,8 +7943,12 @@
 
             
 
+            
+
              method to render the nodes in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -6896,6 +7967,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -6906,8 +7979,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -6941,6 +8018,8 @@
 
             
 
+            
+
              method is used primarily by control developers. </para
           >
         </remarks>
@@ -6955,8 +8034,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -7005,8 +8088,12 @@
 
             
 
+            
+
              property to control the appearance of the root node in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -7019,8 +8106,12 @@
 
             
 
+            
+
              object it returns. The properties can be set declaratively in the form <paramref
              name="Property-Subproperty" />
+
+            
 
             
 
@@ -7033,6 +8124,8 @@
 
             
 
+            
+
              is a property of the <see
              cref="T:System.Web.UI.WebControls.TreeNodeStyle" />
 
@@ -7040,8 +8133,12 @@
 
             
 
+            
+
              object (for example, RootNodeStyle-ForeColor). The properties can also be set programmatically in the form <paramref
              name="Property.Subproperty" />
+
+            
 
             
 
@@ -7058,12 +8155,16 @@
 
                 
 
+                
+
                 . </para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.Web.UI.WebControls.TreeView.RootNodeStyle" />
+
+                
 
                 
 
@@ -7076,6 +8177,8 @@
 
                 
 
+                
+
                 , or <see
                  cref="P:System.Web.UI.WebControls.TreeView.LeafNodeStyle" />
 
@@ -7083,8 +8186,12 @@
 
                 
 
+                
+
                 , depending on the node type. If the <see
                  cref="P:System.Web.UI.WebControls.TreeView.LevelStyles" />
+
+                
 
                 
 
@@ -7106,6 +8213,8 @@
 
                 
 
+                
+
                 . </para
               >
             </item>
@@ -7113,6 +8222,8 @@
           <para
             >If you need to generate table of contents-style navigation menus where nodes at a certain level should have the same appearance, regardless of whether they have child nodes, you might consider using the <see
              cref="P:System.Web.UI.WebControls.TreeView.LevelStyles" />
+
+            
 
             
 
@@ -7131,8 +8242,12 @@
 
             
 
+            
+
              object that allows you to set the appearance of the root node in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -7161,6 +8276,8 @@
           <para
             >Saves the state of the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -7208,6 +8325,8 @@
 
             
 
+            
+
              control can be in one of two modes: selection mode and navigation mode. By default, a node is in selection mode. To put a node into navigation mode, set the <see
              cref="P:System.Web.UI.WebControls.TreeNode.NavigateUrl" />
 
@@ -7215,8 +8334,12 @@
 
             
 
+            
+
              property for the node to a value other than an empty string (""). To put a node into selection mode, set the <see
              cref="P:System.Web.UI.WebControls.TreeNode.NavigateUrl" />
+
+            
 
             
 
@@ -7232,8 +8355,12 @@
 
             
 
+            
+
              property to determine which node is selected in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -7250,8 +8377,12 @@
 
               
 
+              
+
                control displays hyperlinks. When hyperlinks are displayed, the <see
                cref="P:System.Web.UI.WebControls.TreeView.SelectedNode" />
+
+              
 
               
 
@@ -7268,6 +8399,8 @@
 
             
 
+            
+
              control by clicking the text in the new node, the <see
              cref="E:System.Web.UI.WebControls.TreeView.SelectedNodeChanged" />
 
@@ -7275,8 +8408,12 @@
 
             
 
+            
+
              event is raised, by default. You can specify a different event by setting the <see
              cref="P:System.Web.UI.WebControls.TreeNode.SelectAction" />
+
+            
 
             
 
@@ -7310,8 +8447,12 @@
 
                   
 
+                  
+
                    or <see
                    cref="E:System.Web.UI.WebControls.TreeView.TreeNodeCollapsed" />
+
+                  
 
                   
 
@@ -7346,6 +8487,8 @@
 
                   
 
+                  
+
                    event when a node is selected.</para
                 >
               </description>
@@ -7365,8 +8508,12 @@
 
                   
 
+                  
+
                    and <see
                    cref="E:System.Web.UI.WebControls.TreeView.TreeNodeExpanded" />
+
+                  
 
                   
 
@@ -7386,8 +8533,12 @@
 
               
 
+              
+
                is not rendered for a node with its <see
                cref="P:System.Web.UI.WebControls.TreeNode.SelectAction" />
+
+              
 
               
 
@@ -7407,8 +8558,12 @@
 
             
 
+            
+
              object that represents the selected node in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -7440,8 +8595,12 @@
 
             
 
+            
+
              event is raised when a node is selected in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -7452,6 +8611,8 @@
           <para
             >You can optionally set the <see
              cref="P:System.Web.UI.WebControls.TreeNode.SelectAction" />
+
+            
 
             
 
@@ -7485,8 +8646,12 @@
 
                   
 
+                  
+
                    or <see
                    cref="E:System.Web.UI.WebControls.TreeView.TreeNodeCollapsed" />
+
+                  
 
                   
 
@@ -7521,6 +8686,8 @@
 
                   
 
+                  
+
                    event when a node is selected.</para
                 >
               </description>
@@ -7540,8 +8707,12 @@
 
                   
 
+                  
+
                    and <see
                    cref="E:System.Web.UI.WebControls.TreeView.TreeNodeExpanded" />
+
+                  
 
                   
 
@@ -7561,8 +8732,12 @@
 
               
 
+              
+
                is not rendered for a node with its <see
                cref="P:System.Web.UI.WebControls.TreeNode.SelectAction" />
+
+              
 
               
 
@@ -7579,8 +8754,12 @@
 
             
 
+            
+
              event is fired only on post back when a user clicks a node. The event is not fired if the <see
              cref="P:System.Web.UI.WebControls.TreeView.SelectedNode" />
+
+            
 
             
 
@@ -7598,6 +8777,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -7606,6 +8787,8 @@
           <para
             >Occurs when a node is selected in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -7655,8 +8838,12 @@
 
             
 
+            
+
              property to control the appearance of the selected node in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -7669,8 +8856,12 @@
 
             
 
+            
+
              object it returns. The properties can be set declaratively in the form <paramref
              name="Property-Subproperty" />
+
+            
 
             
 
@@ -7683,6 +8874,8 @@
 
             
 
+            
+
              is a property of the <see
              cref="T:System.Web.UI.WebControls.TreeNodeStyle" />
 
@@ -7690,8 +8883,12 @@
 
             
 
+            
+
              object (for example, SelectedNodeStyle-ForeColor). The properties can also be set programmatically in the form <paramref
              name="Property.Subproperty" />
+
+            
 
             
 
@@ -7708,12 +8905,16 @@
 
                 
 
+                
+
                 . </para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.Web.UI.WebControls.TreeView.RootNodeStyle" />
+
+                
 
                 
 
@@ -7726,6 +8927,8 @@
 
                 
 
+                
+
                 , or <see
                  cref="P:System.Web.UI.WebControls.TreeView.LeafNodeStyle" />
 
@@ -7733,8 +8936,12 @@
 
                 
 
+                
+
                 , depending on the node type. If the <see
                  cref="P:System.Web.UI.WebControls.TreeView.LevelStyles" />
+
+                
 
                 
 
@@ -7751,12 +8958,16 @@
 
                 
 
+                
+
                 . </para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.Web.UI.WebControls.TreeView.HoverNodeStyle" />
+
+                
 
                 
 
@@ -7777,8 +8988,12 @@
 
             
 
+            
+
              object that controls the appearance of the selected node in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -7822,8 +9037,12 @@
 
             
 
+            
+
              property provides a convenient way to determine the value of the selected node. This property simply returns the value of the <see
              cref="P:System.Web.UI.WebControls.TreeNode.Value" />
+
+            
 
             
 
@@ -7836,6 +9055,8 @@
 
             
 
+            
+
              object that is referred to by the <see
              cref="P:System.Web.UI.WebControls.TreeView.SelectedNode" />
 
@@ -7843,8 +9064,12 @@
 
             
 
+            
+
              property. If no node is currently selected in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -7887,8 +9112,12 @@
 
             
 
+            
+
              method to indicate whether the specified <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
+
+            
 
             
 
@@ -7907,11 +9136,15 @@
 
             
 
+            
+
              control is data-bound.</para
           >
         </summary>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7924,10 +9157,14 @@
 
           
 
+          
+
            to set. </param
         >
         <param name="dataBound">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7965,8 +9202,12 @@
 
             
 
+            
+
              method to specify the data item for the specified <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
+
+            
 
             
 
@@ -7985,6 +9226,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -7995,8 +9238,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.TreeNode" />
+
+          
 
           
 
@@ -8011,8 +9258,12 @@
 
           
 
+          
+
           The data item for the <see
            cref="T:System.Web.UI.WebControls.TreeNode" />
+
+          
 
           
 
@@ -8050,8 +9301,12 @@
 
             
 
+            
+
              method to set the data path for the specified <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
+
+            
 
             
 
@@ -8070,6 +9325,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -8080,8 +9337,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.TreeNode" />
+
+          
 
           
 
@@ -8096,8 +9357,12 @@
 
           
 
+          
+
           The data path for the <see
            cref="T:System.Web.UI.WebControls.TreeNode" />
+
+          
 
           
 
@@ -8137,8 +9402,12 @@
 
             
 
+            
+
              control, you can display check boxes next to the image for a node. Use the <see
              cref="P:System.Web.UI.WebControls.TreeView.ShowCheckBoxes" />
+
+            
 
             
 
@@ -8206,11 +9475,15 @@
 
             
 
+            
+
              property is a flag enumeration, which allows you to combine values through bitwise operations. For example, to display check boxes for the parent and leaf nodes, use the bitwise OR operator to combine the TreeNodeType.Parent and TreeNodeType.Leaf values.</para
           >
           <para
             >To determine which nodes have their check box selected, iterate through the nodes of the <see
              cref="P:System.Web.UI.WebControls.TreeView.CheckedNodes" />
+
+            
 
             
 
@@ -8227,8 +9500,12 @@
 
               
 
+              
+
                setting by setting the <see
                cref="P:System.Web.UI.WebControls.TreeNode.ShowCheckBox" />
+
+              
 
               
 
@@ -8245,6 +9522,8 @@
 
             
 
+            
+
              property.</para
           >
           <para>The value of this property is stored in view state.</para>
@@ -8254,6 +9533,8 @@
           <para
             >Gets or sets a value indicating which node types will display a check box in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -8291,8 +9572,12 @@
 
             
 
+            
+
              property to specify whether the expansion node indicators are displayed in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -8308,8 +9593,12 @@
 
             
 
+            
+
              property is set to true, the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -8322,8 +9611,12 @@
 
             
 
+            
+
              property to TreeViewImageSet.Custom, and then setting the <see
              cref="P:System.Web.UI.WebControls.TreeView.NoExpandImageUrl" />
+
+            
 
             
 
@@ -8336,8 +9629,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Web.UI.WebControls.TreeView.CollapseImageUrl" />
+
+            
 
             
 
@@ -8380,6 +9677,8 @@
 
             
 
+            
+
              property to specify whether the lines that are connecting child nodes to parent nodes are displayed. When this property is set to true, the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
 
@@ -8387,8 +9686,12 @@
 
             
 
+            
+
              control searches the Web-accessible folder that is specified by the <see
              cref="P:System.Web.UI.WebControls.TreeView.LineImagesFolder" />
+
+            
 
             
 
@@ -8405,8 +9708,12 @@
 
               
 
+              
+
                property is not set, the <see
                cref="T:System.Web.UI.WebControls.TreeView" />
+
+              
 
               
 
@@ -8450,11 +9757,15 @@
 
             
 
+            
+
              property is a property that you can set to make a Web page more or less accessible. Web pages that contain content that repeats can provide for a mechanism for users of screen readers to skip the content from being read aloud. </para
           >
           <para
             >The <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -8467,8 +9778,12 @@
 
             
 
+            
+
              property as a way for the entire control to be skipped by screen readers. If the <see
              cref="P:System.Web.UI.WebControls.TreeView.SkipLinkText" />
+
+            
 
             
 
@@ -8481,11 +9796,15 @@
 
             
 
+            
+
              property to an empty string ("") and provide your own mechanism to skip the tree.</para
           >
           <para
             >The <see
              cref="P:System.Web.UI.WebControls.TreeView.SkipLinkText" />
+
+            
 
             
 
@@ -8502,12 +9821,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -8546,8 +9869,12 @@
 
             
 
+            
+
              control implements the <see
              cref="T:System.Web.UI.ICallbackEventHandler" />
+
+            
 
             
 
@@ -8560,8 +9887,12 @@
 
             
 
+            
+
              to retrieve data and the <see
              cref="M:System.Web.UI.WebControls.TreeView.GetCallbackResult" />
+
+            
 
             
 
@@ -8607,6 +9938,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -8619,6 +9952,8 @@
           <para
             >The argument for the callback handler in the <see
              cref="M:System.Web.UI.ClientScriptManager.GetCallbackEventReference(System.String,System.String,System.String,System.String,System.String,System.Boolean)" />
+
+            
 
             
 
@@ -8659,6 +9994,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -8667,6 +10004,8 @@
           <para
             >Processes postback data for the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -8685,6 +10024,8 @@
 
             
 
+            
+
              control's state changes as a result of the postback event; otherwise, false.</para
           >
         </returns>
@@ -8695,10 +10036,14 @@
 
           
 
+          
+
           The key identifier for the control. </param
         >
         <param name="postCollection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8732,6 +10077,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -8740,6 +10087,8 @@
           <para
             >Signals the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -8776,6 +10125,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -8789,11 +10140,15 @@
 
             
 
+            
+
              control to process an event that is raised when a form is posted to the server.</para
           >
         </summary>
         <param name="eventArgument">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8825,8 +10180,12 @@
 
             
 
+            
+
              property allows the output stream to write the appropriate HTML mark-up for the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -8845,8 +10204,12 @@
 
             
 
+            
+
              value for the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -8884,12 +10247,16 @@
 
             
 
+            
+
              property to specify the window or frame in which to display the Web content that is linked to a node when that node is clicked.</para
           >
           <block subset="none" type="note">
             <para
               > The <see
                cref="P:System.Web.UI.WebControls.TreeView.Target" />
+
+              
 
               
 
@@ -8902,8 +10269,12 @@
 
               
 
+              
+
                property, if the rendered output for the <see
                cref="T:System.Web.UI.WebControls.TreeView" />
+
+              
 
               
 
@@ -8913,6 +10284,8 @@
                type="text/html">
                 <a href="1b78d416-66bb-43a5-ac77-c703aab55b97">ASP.NET and XHTML Compliance</a>
               </format>
+
+              
 
               
 
@@ -8928,12 +10301,16 @@
 
               
 
+              
+
                property to target another window. For more information, see <format
                type="text/html">
                 <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0"
                   >ASP.NET Controls and Accessibility</a
                 >
               </format>
+
+              
 
               
 
@@ -8972,6 +10349,8 @@
 
             
 
+            
+
              method is overridden to mark the starting point to begin tracking and saving changes to the control as part of the view state for the control.</para
           >
         </remarks>
@@ -8985,8 +10364,12 @@
 
             
 
+            
+
              control so that they can be stored in the <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 
@@ -8999,8 +10382,12 @@
 
             
 
+            
+
              is accessible through the <see
              cref="P:System.Web.UI.Control.ViewState" />
+
+            
 
             
 
@@ -9035,8 +10422,12 @@
 
             
 
+            
+
              event is raised when a check box in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -9047,6 +10438,8 @@
           <para
             >Even though the <see
              cref="E:System.Web.UI.WebControls.TreeView.TreeNodeCheckChanged" />
+
+            
 
             
 
@@ -9064,6 +10457,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -9072,6 +10467,8 @@
           <para
             >Occurs when a check box in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -9106,8 +10503,12 @@
 
             
 
+            
+
              event is raised when a node is collapsed in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -9125,6 +10526,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -9133,6 +10536,8 @@
           <para
             >Occurs when a node is collapsed in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -9167,8 +10572,12 @@
 
             
 
+            
+
              event is raised when a data item is bound to a node in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -9186,6 +10595,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -9194,6 +10605,8 @@
           <para
             >Occurs when a data item is bound to a node in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -9228,8 +10641,12 @@
 
             
 
+            
+
              event is raised when a node is expanded in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -9246,6 +10663,8 @@
 
               
 
+              
+
                property for a node is set to TreeNodeSelectAction.Expand or TreeNodeSelectAction.SelectExpand, the <see
                cref="E:System.Web.UI.WebControls.TreeView.TreeNodeExpanded" />
 
@@ -9253,8 +10672,12 @@
 
               
 
+              
+
                event is also raised when that node is clicked in the <see
                cref="T:System.Web.UI.WebControls.TreeView" />
+
+              
 
               
 
@@ -9273,6 +10696,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -9281,6 +10706,8 @@
           <para
             >Occurs when a node is expanded in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -9315,8 +10742,12 @@
 
             
 
+            
+
              control supports dynamic node population. When the <see
              cref="P:System.Web.UI.WebControls.TreeNode.PopulateOnDemand" />
+
+            
 
             
 
@@ -9332,8 +10763,12 @@
 
             
 
+            
+
              property for the node to true. Next, define an event-handling method for the <see
              cref="E:System.Web.UI.WebControls.TreeView.TreeNodePopulate" />
+
+            
 
             
 
@@ -9346,6 +10781,8 @@
 
             
 
+            
+
              collection of the node being populated. A node structure is created by adding <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
 
@@ -9353,8 +10790,12 @@
 
             
 
+            
+
              objects to the <see
              cref="P:System.Web.UI.WebControls.TreeNode.ChildNodes" />
+
+            
 
             
 
@@ -9371,12 +10812,16 @@
 
               
 
+              
+
                property for a node is set to true, the node must be populated dynamically. You cannot declaratively nest another node below it; otherwise, an error will occur on the page.</para
             >
           </block>
           <para
             >Supported browsers (Microsoft Internet Explorer 4.0-compatible browsers and later) can also take advantage of client-side node population. When enabled, this allows the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -9389,6 +10834,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -9396,6 +10843,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -9414,8 +10863,12 @@
 
             
 
+            
+
              property set to true is expanded in the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -9443,6 +10896,8 @@
           <para
             >If the <see
              cref="P:System.Web.UI.WebControls.TreeView.Visible" />
+
+            
 
             
 

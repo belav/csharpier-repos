@@ -29,6 +29,8 @@
 
         
 
+        
+
          class is a straightforward extension of the <see
          cref="T:System.Configuration.Provider.ProviderCollection" />
 
@@ -36,8 +38,12 @@
 
         
 
+        
+
          class to provide for storage of <see
          cref="T:System.Configuration.SettingsProvider" />
+
+        
 
         
 
@@ -53,8 +59,12 @@
 
         
 
+        
+
          class uses this collection to manage the settings providers associated with each of its application settings properties through the <see
          cref="T:System.Configuration.SettingsProviderAttribute" />
+
+        
 
         
 
@@ -97,6 +107,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -134,8 +146,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Configuration.SettingsProvider" />
+
+            
 
             
 
@@ -152,8 +168,12 @@
 
               
 
+              
+
                method has a single <see
                cref="T:System.Configuration.Provider.ProviderBase" />
+
+              
 
               
 
@@ -166,6 +186,8 @@
 
               
 
+              
+
               , this method will throw an exception if the <paramref
                name="provider" />
 
@@ -173,8 +195,12 @@
 
               
 
+              
+
                parameter is not of type <see
                cref="T:System.Configuration.SettingsProvider" />
+
+              
 
               
 
@@ -195,8 +221,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.Provider.ProviderBase" />
+
+          
 
           
 

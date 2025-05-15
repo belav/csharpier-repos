@@ -55,6 +55,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -85,8 +87,12 @@
 
             
 
+            
+
              class based on the <paramref
              name="length" />
+
+            
 
             
 
@@ -97,6 +103,8 @@
         </summary>
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -142,6 +150,8 @@
 
           
 
+          
+
           The name to include in the formatted string.</param
         >
       </Docs>
@@ -173,6 +183,8 @@
 
             
 
+            
+
              parameter is null.</para
           >
         </remarks>
@@ -186,6 +198,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

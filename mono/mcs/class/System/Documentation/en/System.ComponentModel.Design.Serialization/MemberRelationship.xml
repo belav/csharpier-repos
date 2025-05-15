@@ -27,6 +27,8 @@
 
         
 
+        
+
          is used by a serializer to announce that one property is related to a property on another object. <see
          cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
 
@@ -34,8 +36,12 @@
 
         
 
+        
+
          represents a single relationship between an object and a member that <see
          cref="T:System.ComponentModel.Design.Serialization.MemberRelationshipService" />
+
+        
 
         
 
@@ -80,6 +86,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -90,8 +98,12 @@
 
           
 
+          
+
           The object that owns <paramref
            name="member" />
+
+          
 
           
 
@@ -106,8 +118,12 @@
 
           
 
+          
+
           The member which is to be related to <paramref
            name="owner" />
+
+          
 
           
 
@@ -140,6 +156,8 @@
           <para
             >A <see
              cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
+
+            
 
             
 
@@ -184,6 +202,8 @@
 
             
 
+            
+
              instances are equal.</para
           >
         </summary>
@@ -197,8 +217,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
+
+            
 
             
 
@@ -240,6 +264,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -264,6 +290,8 @@
           <para
             >Gets a value indicating whether this relationship is equal to the <see
              cref="F:System.ComponentModel.Design.Serialization.MemberRelationship.Empty" />
+
+            
 
             
 
@@ -339,6 +367,8 @@
 
             
 
+            
+
              structures are equivalent.</para
           >
         </summary>
@@ -347,6 +377,8 @@
           <para
             >This operator returns true if the two <see
              cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
+
+            
 
             
 
@@ -362,8 +394,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
+
+          
 
           
 
@@ -378,8 +414,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
+
+          
 
           
 
@@ -428,6 +468,8 @@
 
             
 
+            
+
              structures are different.</para
           >
         </summary>
@@ -436,6 +478,8 @@
           <para
             >This operator returns true if the two <see
              cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
+
+            
 
             
 
@@ -451,8 +495,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
+
+          
 
           
 
@@ -467,8 +515,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.Serialization.MemberRelationship" />
+
+          
 
           
 

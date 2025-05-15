@@ -26,6 +26,8 @@
 
         
 
+        
+
         . Use this attribute on new controls to describe how the control should dock by default when placed on a form. </para
       >
     </remarks>
@@ -47,6 +49,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.DockingAttribute" />
+
+            
 
             
 
@@ -82,6 +86,8 @@
 
             
 
+            
+
              class with the given docking behavior. </para
           >
         </summary>
@@ -92,8 +98,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DockingBehavior" />
+
+          
 
           
 
@@ -123,6 +133,8 @@
           <para
             >The default <see
              cref="T:System.Windows.Forms.DockingAttribute" />
+
+            
 
             
 
@@ -180,6 +192,8 @@
 
             
 
+            
+
              object for equality.</para
           >
         </summary>
@@ -193,8 +207,12 @@
 
             
 
+            
+
              is equal to this <see
              cref="T:System.Windows.Forms.DockingAttribute" />
+
+            
 
             
 
@@ -210,6 +228,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -217,8 +237,12 @@
 
           
 
+          
+
            against which to compare this <see
            cref="T:System.Windows.Forms.DockingAttribute" />
+
+          
 
           
 
@@ -255,6 +279,8 @@
 
             
 
+            
+
              representing an in-memory hash of this object.</para
           >
         </returns>
@@ -283,6 +309,8 @@
 
             
 
+            
+
              is the default docking attribute.</para
           >
         </summary>
@@ -291,6 +319,8 @@
           <para
             >true is the current <see
              cref="T:System.Windows.Forms.DockingAttribute" />
+
+            
 
             
 

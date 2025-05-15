@@ -27,8 +27,12 @@
 
         
 
+        
+
          class performs design-time data binding of a <see
          cref="T:System.Web.UI.WebControls.ListControl" />
+
+        
 
         
 
@@ -41,6 +45,8 @@
 
         
 
+        
+
          class is referenced by the <see
          cref="T:System.Web.UI.WebControls.ListControl" />
 
@@ -48,8 +54,12 @@
 
         
 
+        
+
          using the <see
          cref="T:System.Web.UI.DataBindingHandlerAttribute" />
+
+        
 
         
 
@@ -65,6 +75,8 @@
 
         
 
+        
+
          method performs the design-time data binding.</para
       >
     </remarks>
@@ -73,6 +85,8 @@
       <para
         >Performs data binding of a <see
          cref="T:System.Web.UI.WebControls.ListControl" />
+
+        
 
         
 
@@ -98,8 +112,12 @@
 
             
 
+            
+
              class when the class is referenced by a <see
              cref="T:System.Web.UI.DataBindingHandlerAttribute" />
+
+            
 
             
 
@@ -113,6 +131,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.WebControls.ListControlDataBindingHandler" />
+
+            
 
             
 
@@ -152,8 +172,12 @@
 
             
 
+            
+
              control that is specified by <paramref
              name="control" />
+
+            
 
             
 
@@ -166,8 +190,12 @@
 
             
 
+            
+
              property, the <see
              cref="M:System.Web.UI.Design.WebControls.ListControlDataBindingHandler.DataBindControl(System.ComponentModel.Design.IDesignerHost,System.Web.UI.Control)" />
+
+            
 
             
 
@@ -180,8 +208,12 @@
 
             
 
+            
+
              collection of the <see
              cref="T:System.Web.UI.WebControls.ListControl" />
+
+            
 
             
 
@@ -194,8 +226,12 @@
 
             
 
+            
+
              is data bound to the <see
              cref="P:System.Web.UI.WebControls.ListControl.Items" />
+
+            
 
             
 
@@ -215,8 +251,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Control" />
+
+          
 
           
 

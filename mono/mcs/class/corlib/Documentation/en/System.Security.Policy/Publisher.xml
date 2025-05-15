@@ -44,8 +44,12 @@
 
         
 
+        
+
          evidence produces a <see
          cref="T:System.Security.Permissions.PublisherIdentityPermission" />
+
+        
 
         
 
@@ -58,8 +62,12 @@
 
         
 
+        
+
          for <see
          cref="T:System.Security.Permissions.PublisherIdentityPermission" />
+
+        
 
         
 
@@ -72,8 +80,12 @@
 
         
 
+        
+
          that corresponds to the <see
          cref="T:System.Security.Policy.Publisher" />
+
+        
 
         
 
@@ -90,8 +102,12 @@
 
         
 
+        
+
          evidence. Unless your computer has a custom code group based on the <see
          cref="T:System.Security.Policy.PublisherMembershipCondition" />
+
+        
 
         
 
@@ -104,10 +120,14 @@
 
         
 
+        
+
          evidence for CAS. For more information about how to configure this option and which applications can use it, see the <format
          type="text/html">
           <a href="7d208f50-e8d5-4a42-bc1a-1cf3590706a8">&lt;generatePublisherEvidence&gt;</a>
         </format>
+
+        
 
         
 
@@ -156,6 +176,8 @@
 
             
 
+            
+
              class with the Authenticode X.509v3 certificate containing the publisher's public key.</para
           >
         </summary>
@@ -166,8 +188,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate" />
+
+          
 
           
 
@@ -232,6 +258,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -240,6 +268,8 @@
           <para
             >A new, identical copy of the <see
              cref="T:System.Security.Policy.Publisher" />
+
+            
 
             
 
@@ -283,6 +313,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -296,8 +328,12 @@
 
             
 
+            
+
              for the specified <see
              cref="T:System.Security.Policy.Publisher" />
+
+            
 
             
 
@@ -313,8 +349,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Policy.Evidence" />
+
+          
 
           
 
@@ -352,6 +392,8 @@
 
             
 
+            
+
              objects are equal if they designate the same software publisher certificate.</para
           >
         </remarks>
@@ -360,6 +402,8 @@
           <para
             >Compares the current <see
              cref="T:System.Security.Policy.Publisher" />
+
+            
 
             
 
@@ -378,6 +422,8 @@
 
             
 
+            
+
              class are equal; otherwise, false.</para
           >
         </returns>
@@ -388,8 +434,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Policy.Publisher" />
+
+          
 
           
 
@@ -427,6 +477,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -435,6 +487,8 @@
           <para
             >The hash code of the current <see
              cref="P:System.Security.Policy.Publisher.Certificate" />
+
+            
 
             
 
@@ -560,6 +614,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -568,6 +624,8 @@
           <para
             >A representation of the current <see
              cref="T:System.Security.Policy.Publisher" />
+
+            
 
             
 

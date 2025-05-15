@@ -37,8 +37,12 @@
 
         
 
+        
+
          method to set the overflow behavior for an <see
          cref="T:System.Diagnostics.EventLog" />
+
+        
 
         
 
@@ -51,8 +55,12 @@
 
         
 
+        
+
          through its <see
          cref="P:System.Diagnostics.EventLog.OverflowAction" />
+
+        
 
         
 
@@ -137,8 +145,12 @@
 
             
 
+            
+
              property value when the event log is full. New events are discarded if the event log is full and there are no events older than specified by the <see
              cref="P:System.Diagnostics.EventLog.MinimumRetentionDays" />
+
+            
 
             
 

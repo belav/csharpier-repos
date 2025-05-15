@@ -29,6 +29,8 @@
 
         
 
+        
+
          namespace.</para
       >
     </remarks>
@@ -58,6 +60,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.Configuration.SmtpSection" />
+
+            
 
             
 
@@ -103,6 +107,8 @@
 
             
 
+            
+
             , <see
              cref="F:System.Net.Mail.SmtpDeliveryMethod.PickupDirectoryFromIis" />
 
@@ -110,8 +116,12 @@
 
             
 
+            
+
             , and <see
              cref="F:System.Net.Mail.SmtpDeliveryMethod.SpecifiedPickupDirectory" />
+
+            
 
             
 
@@ -125,6 +135,8 @@
           <para
             >Gets or sets the Simple Mail Transport Protocol (SMTP) delivery method. The default delivery method is <see
              cref="F:System.Net.Mail.SmtpDeliveryMethod.Network" />
+
+            
 
             
 
@@ -197,6 +209,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -260,8 +274,12 @@
 
             
 
+            
+
              will be used as the SMTP pickup directory. If the SMTP client is unable to write to the pickup directory location an I/O exception is thrown by <see
              cref="Overload:System.Net.Mail.SmtpClient.Send" />
+
+            
 
             
 

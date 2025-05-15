@@ -23,8 +23,12 @@
 
         
 
+        
+
         , you may use a conditional expression to define how accessibility is verified. The left side of a conditional expression is the <see
          cref="P:System.Web.UI.VerificationAttribute.ConditionalProperty" />
+
+        
 
         
 
@@ -37,6 +41,8 @@
 
         
 
+        
+
         . When the <see
          cref="F:System.Web.UI.VerificationConditionalOperator.Equals" />
 
@@ -44,8 +50,12 @@
 
         
 
+        
+
          operator is used, the left side must equal the right side of the conditional expression for the verification rule to report true. When the <see
          cref="F:System.Web.UI.VerificationConditionalOperator.NotEquals" />
+
+        
 
         
 
@@ -59,6 +69,8 @@
       <para
         >Specifies operators for a conditional expression used in a <see
          cref="T:System.Web.UI.VerificationAttribute" />
+
+        
 
         
 

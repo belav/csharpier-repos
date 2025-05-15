@@ -26,11 +26,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >The <see
          cref="T:System.Web.Compilation.ClientBuildManagerParameter" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          property determines how the assembly will be built. For example, you can set <see
          cref="P:System.Web.Compilation.ClientBuildManagerParameter.PrecompilationFlags" />
+
+        
 
         
 
@@ -57,8 +65,12 @@
 
         
 
+        
+
          to recompile any previously compiled components, or set it to <see
          cref="F:System.Web.Compilation.PrecompilationFlags.OverwriteTarget" />
+
+        
 
         
 
@@ -71,8 +83,12 @@
 
         
 
+        
+
          enumerator has a <see
          cref="T:System.FlagsAttribute" />
+
+        
 
         
 
@@ -85,8 +101,12 @@
 
         
 
+        
+
          property can contain more than one value from the <see
          cref="T:System.Web.Compilation.PrecompilationFlags" />
+
+        
 
         
 
@@ -102,8 +122,12 @@
 
         
 
+        
+
          property or the <see
          cref="P:System.Web.Compilation.ClientBuildManagerParameter.StrongNameKeyFile" />
+
+        
 
         
 
@@ -119,6 +143,8 @@
 
         
 
+        
+
          object is passed to the <see
          cref="T:System.Web.Compilation.ClientBuildManager" />
 
@@ -126,8 +152,12 @@
 
         
 
+        
+
          object through the <see
          cref="M:System.Web.Compilation.ClientBuildManager.#ctor(System.String,System.String,System.String,System.Web.Compilation.ClientBuildManagerParameter)" />
+
+        
 
         
 
@@ -158,6 +188,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.Compilation.ClientBuildManagerParameter.StrongNameKeyFile" />
 
@@ -165,8 +197,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Web.Compilation.ClientBuildManagerParameter.PrecompilationFlags" />
+
+            
 
             
 
@@ -180,6 +216,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Compilation.ClientBuildManagerParameter" />
+
+            
 
             
 
@@ -215,8 +253,12 @@
 
             
 
+            
+
              property determines how the assembly will be built. For example, you can set <see
              cref="P:System.Web.Compilation.ClientBuildManagerParameter.PrecompilationFlags" />
+
+            
 
             
 
@@ -229,8 +271,12 @@
 
             
 
+            
+
              to recompile any previously compiled components, or set it to <see
              cref="F:System.Web.Compilation.PrecompilationFlags.OverwriteTarget" />
+
+            
 
             
 
@@ -243,8 +289,12 @@
 
             
 
+            
+
              enumerator has a <see
              cref="T:System.FlagsAttribute" />
+
+            
 
             
 
@@ -257,8 +307,12 @@
 
             
 
+            
+
              property can contain more than one value from the <see
              cref="T:System.Web.Compilation.PrecompilationFlags" />
+
+            
 
             
 
@@ -295,8 +349,12 @@
 
             
 
+            
+
              property or the <see
              cref="P:System.Web.Compilation.ClientBuildManagerParameter.StrongNameKeyFile" />
+
+            
 
             
 
@@ -333,8 +391,12 @@
 
             
 
+            
+
              property or the <see
              cref="P:System.Web.Compilation.ClientBuildManagerParameter.StrongNameKeyFile" />
+
+            
 
             
 

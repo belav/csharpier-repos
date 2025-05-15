@@ -52,6 +52,8 @@
 
             
 
+            
+
              constructor parses a string in the following format. </para
           >
           <para>identifier, Version=versionNumber[, Profile=profileName]</para>
@@ -75,6 +77,8 @@
                 <para
                   >An arbitrary string that identifies this <see
                    cref="T:System.Runtime.Versioning.FrameworkName" />
+
+                  
 
                   
 
@@ -110,6 +114,8 @@
 
             
 
+            
+
              object's properties as follows:</para
           >
           <list type="bullet">
@@ -117,6 +123,8 @@
               <para
                 >Any leading or trailing white space in the identifier component is removed and the resulting string is assigned to the <see
                  cref="P:System.Runtime.Versioning.FrameworkName.Identifier" />
+
+                
 
                 
 
@@ -134,8 +142,12 @@
 
                 
 
+                
+
                 . The returned string is then passed to the <see
                  cref="M:System.Version.#ctor(System.String)" />
+
+                
 
                 
 
@@ -148,8 +160,12 @@
 
                 
 
+                
+
                  object is assigned to the <see
                  cref="P:System.Runtime.Versioning.FrameworkName.Version" />
+
+                
 
                 
 
@@ -167,8 +183,12 @@
 
                 
 
+                
+
                  component is removed and the resulting string is assigned to the <see
                  cref="P:System.Runtime.Versioning.FrameworkName.Profile" />
+
+                
 
                 
 
@@ -181,6 +201,8 @@
           <para
             >The following are examples of valid strings that can be passed to the <see
              cref="M:System.Runtime.Versioning.FrameworkName.#ctor(System.String)" />
+
+            
 
             
 
@@ -216,11 +238,15 @@
 
             
 
+            
+
              class from a string that contains information about a version of the .NET Framework.</para
           >
         </summary>
         <param name="frameworkName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -258,8 +284,12 @@
 
             
 
+            
+
              class requires that a <see
              cref="P:System.Runtime.Versioning.FrameworkName.Version" />
+
+            
 
             
 
@@ -278,8 +308,12 @@
 
             
 
+            
+
              class from a string and a <see
              cref="T:System.Version" />
+
+            
 
             
 
@@ -295,10 +329,14 @@
 
           
 
+          
+
           A string that identifies a .NET Framework version. </param
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -337,8 +375,12 @@
 
             
 
+            
+
              class requires that a <see
              cref="P:System.Runtime.Versioning.FrameworkName.Version" />
+
+            
 
             
 
@@ -357,8 +399,12 @@
 
             
 
+            
+
              class from a string, a <see
              cref="T:System.Version" />
+
+            
 
             
 
@@ -374,6 +420,8 @@
 
           
 
+          
+
           A string that identifies a .NET Framework version.</param
         >
         <param name="version">
@@ -383,10 +431,14 @@
 
           
 
+          
+
           An object that contains .NET Framework version information.</param
         >
         <param name="profile">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -423,8 +475,12 @@
 
             
 
+            
+
              to a <see
              cref="T:System.Runtime.Versioning.FrameworkName" />
+
+            
 
             
 
@@ -437,8 +493,12 @@
 
             
 
+            
+
              overload to test for equality. If the conversion does not succeed or if <paramref
              name="obj" />
+
+            
 
             
 
@@ -457,6 +517,8 @@
 
             
 
+            
+
              instance represents the same .NET Framework version as a specified object.</para
           >
         </summary>
@@ -470,8 +532,12 @@
 
             
 
+            
+
              object matches the corresponding component of <paramref
              name="obj" />
+
+            
 
             
 
@@ -482,6 +548,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -524,8 +592,12 @@
 
                 
 
+                
+
                  property values of the current instance and <paramref
                  name="other" />
+
+                
 
                 
 
@@ -543,8 +615,12 @@
 
                 
 
+                
+
                  property values of the current instance and <paramref
                  name="other" />
+
+                
 
                 
 
@@ -557,6 +633,8 @@
               <para
                 >A comparison of the version properties by calling the <see
                  cref="M:System.Version.Equals(System.Version)" />
+
+                
 
                 
 
@@ -577,8 +655,12 @@
 
             
 
+            
+
              instance represents the same .NET Framework version as a specified <see
              cref="T:System.Runtime.Versioning.FrameworkName" />
+
+            
 
             
 
@@ -597,8 +679,12 @@
 
             
 
+            
+
              object matches the corresponding component of <paramref
              name="other" />
+
+            
 
             
 
@@ -609,6 +695,8 @@
         </returns>
         <param name="other">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -640,12 +728,16 @@
 
             
 
+            
+
              property has the following format:</para
           >
           <para>identifier, Version=version[, Profile=profile]</para>
           <para
             >where identifier corresponds to the <see
              cref="P:System.Runtime.Versioning.FrameworkName.Identifier" />
+
+            
 
             
 
@@ -658,8 +750,12 @@
 
             
 
+            
+
              is equivalent to calling <see
              cref="M:System.Version.ToString" />
+
+            
 
             
 
@@ -672,8 +768,12 @@
 
             
 
+            
+
              property, and <paramref
              name="profile" />
+
+            
 
             
 
@@ -686,8 +786,12 @@
 
             
 
+            
+
              property. If a profile has not been assigned to the <see
              cref="T:System.Runtime.Versioning.FrameworkName" />
+
+            
 
             
 
@@ -703,8 +807,12 @@
 
             
 
+            
+
              property is identical to the string returned by the <see
              cref="M:System.Runtime.Versioning.FrameworkName.ToString" />
+
+            
 
             
 
@@ -718,6 +826,8 @@
           <para
             >Gets the full name of this <see
              cref="T:System.Runtime.Versioning.FrameworkName" />
+
+            
 
             
 
@@ -754,6 +864,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -785,8 +897,12 @@
 
             
 
+            
+
              property is set in the <see
              cref="Overload:System.Runtime.Versioning.FrameworkName.#ctor" />
+
+            
 
             
 
@@ -800,6 +916,8 @@
           <para
             >Gets the identifier of this <see
              cref="T:System.Runtime.Versioning.FrameworkName" />
+
+            
 
             
 
@@ -841,8 +959,12 @@
 
             
 
+            
+
              method defines the operation of the equality operator for <see
              cref="T:System.Runtime.Versioning.FrameworkName" />
+
+            
 
             
 
@@ -853,6 +975,8 @@
           <para
             >Languages that do not support custom operators can call the <see
              cref="M:System.Runtime.Versioning.FrameworkName.Equals(System.Runtime.Versioning.FrameworkName)" />
+
+            
 
             
 
@@ -871,6 +995,8 @@
 
             
 
+            
+
              objects represent the same .NET Framework version.</para
           >
         </summary>
@@ -884,8 +1010,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -901,10 +1031,14 @@
 
           
 
+          
+
           The first object to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -945,8 +1079,12 @@
 
             
 
+            
+
              method defines the operation of the inequality operator for <see
              cref="T:System.Runtime.Versioning.FrameworkName" />
+
+            
 
             
 
@@ -957,6 +1095,8 @@
           <para
             >Languages that do not support custom operators can test for inequality by calling the <see
              cref="M:System.Runtime.Versioning.FrameworkName.Equals(System.Runtime.Versioning.FrameworkName)" />
+
+            
 
             
 
@@ -975,6 +1115,8 @@
 
             
 
+            
+
              objects represent different .NET Framework versions.</para
           >
         </summary>
@@ -988,8 +1130,12 @@
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -1005,10 +1151,14 @@
 
           
 
+          
+
           The first object to compare.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1040,8 +1190,12 @@
 
             
 
+            
+
              property is set in the <see
              cref="Overload:System.Runtime.Versioning.FrameworkName.#ctor" />
+
+            
 
             
 
@@ -1055,6 +1209,8 @@
           <para
             >Gets the profile name of this <see
              cref="T:System.Runtime.Versioning.FrameworkName" />
+
+            
 
             
 
@@ -1090,12 +1246,16 @@
 
             
 
+            
+
              method has the following format:</para
           >
           <para>identifier, Version=version[, Profile=profile]</para>
           <para
             >where identifier corresponds to the <see
              cref="P:System.Runtime.Versioning.FrameworkName.Identifier" />
+
+            
 
             
 
@@ -1108,8 +1268,12 @@
 
             
 
+            
+
              is equivalent to calling <see
              cref="M:System.Version.ToString" />
+
+            
 
             
 
@@ -1122,8 +1286,12 @@
 
             
 
+            
+
              property, and <paramref
              name="profile" />
+
+            
 
             
 
@@ -1136,8 +1304,12 @@
 
             
 
+            
+
              property. If a profile has not been assigned to the <see
              cref="T:System.Runtime.Versioning.FrameworkName" />
+
+            
 
             
 
@@ -1153,8 +1325,12 @@
 
             
 
+            
+
              method is identical to the value of the <see
              cref="P:System.Runtime.Versioning.FrameworkName.FullName" />
+
+            
 
             
 
@@ -1173,6 +1349,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1181,6 +1359,8 @@
           <para
             >A string that represents this <see
              cref="T:System.Runtime.Versioning.FrameworkName" />
+
+            
 
             
 
@@ -1213,8 +1393,12 @@
 
             
 
+            
+
              property is set in the <see
              cref="Overload:System.Runtime.Versioning.FrameworkName.#ctor" />
+
+            
 
             
 
@@ -1228,6 +1412,8 @@
           <para
             >Gets the version of this <see
              cref="T:System.Runtime.Versioning.FrameworkName" />
+
+            
 
             
 

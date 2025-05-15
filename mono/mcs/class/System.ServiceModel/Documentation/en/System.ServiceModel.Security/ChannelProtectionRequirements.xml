@@ -27,8 +27,12 @@
 
         
 
+        
+
          class, you must implement the <see
          cref="M:System.ServiceModel.Channels.BindingElement.GetProperty``1(System.ServiceModel.Channels.BindingContext)" />
+
+        
 
         
 
@@ -65,12 +69,16 @@
 
             
 
+            
+
             , which is a class that specifies which parts are included in a message:</para
           >
           <list type="bullet">
             <item>
               <para>
                 <see cref="P:System.ServiceModel.Security.ChannelProtectionRequirements.IncomingEncryptionParts" />
+
+                
 
                 
 
@@ -87,12 +95,16 @@
 
                 
 
+                
+
                 ,</para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.ServiceModel.Security.ChannelProtectionRequirements.OutgoingEncryptionParts" />
+
+                
 
                 
 
@@ -109,6 +121,8 @@
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -119,6 +133,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Security.ChannelProtectionRequirements" />
+
+            
 
             
 
@@ -156,8 +172,12 @@
 
             
 
+            
+
             , using the <see
              cref="M:System.ServiceModel.Security.ScopedMessagePartSpecification.#ctor(System.ServiceModel.Security.ScopedMessagePartSpecification)" />
+
+            
 
             
 
@@ -170,8 +190,12 @@
 
             
 
+            
+
              as the input parameter. <see
              cref="T:System.ServiceModel.Security.ScopedMessagePartSpecification" />
+
+            
 
             
 
@@ -188,12 +212,16 @@
 
                 
 
+                
+
                 ,</para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.ServiceModel.Security.ChannelProtectionRequirements.IncomingSignatureParts" />
+
+                
 
                 
 
@@ -210,12 +238,16 @@
 
                 
 
+                
+
                 , and</para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.ServiceModel.Security.ChannelProtectionRequirements.OutgoingSignatureParts" />
+
+                
 
                 
 
@@ -236,6 +268,8 @@
 
             
 
+            
+
              class from another instance of this class.  </para
           >
         </summary>
@@ -246,8 +280,12 @@
 
           
 
+          
+
           The other instance of <see
            cref="T:System.ServiceModel.Security.ChannelProtectionRequirements" />
+
+          
 
           
 
@@ -291,6 +329,8 @@
 
             
 
+            
+
              to the current instance of this class. </para
           >
         </summary>
@@ -301,8 +341,12 @@
 
           
 
+          
+
           The specified <see
            cref="T:System.ServiceModel.Security.ChannelProtectionRequirements" />
+
+          
 
           
 
@@ -347,11 +391,15 @@
 
             
 
+            
+
              to the current instance of this class. </para
           >
         </summary>
         <param name="protectionRequirements">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -364,10 +412,14 @@
 
           
 
+          
+
           .</param
         >
         <param name="channelScopeOnly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -503,6 +555,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="P:System.ServiceModel.Security.ChannelProtectionRequirements.IsReadOnly" />
+
+            
 
             
 

@@ -29,12 +29,16 @@
 
         
 
+        
+
          interface enables an inheriting class to implement a Connection class, which represents a unique session with a data source (for example, a network connection to a server). For more information about Connection classes, see <format
          type="text/html">
           <a href="9ABC3F92-1BE3-4E1A-B360-762DC689650E"
             >[&lt;topic://cpconadonetconnections&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -50,8 +54,12 @@
 
         
 
+        
+
          interface directly, but creates an instance of a class that inherits <see
          cref="T:System.Data.IDbConnection" />
+
+        
 
         
 
@@ -67,8 +75,12 @@
 
         
 
+        
+
          must implement all inherited members, and typically define additional members to add provider-specific functionality. For example, the <see
          cref="T:System.Data.IDbConnection" />
+
+        
 
         
 
@@ -81,6 +93,8 @@
 
         
 
+        
+
          property. In turn, the <see
          cref="T:System.Data.SqlClient.SqlConnection" />
 
@@ -88,8 +102,12 @@
 
         
 
+        
+
          class inherits this property, and also defines the <see
          cref="P:System.Data.SqlClient.SqlConnection.PacketSize" />
+
+        
 
         
 
@@ -125,8 +143,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Data.IDbTransaction.Rollback" />
+
+            
 
             
 
@@ -172,8 +194,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Data.IDbTransaction.Rollback" />
+
+            
 
             
 
@@ -187,6 +213,8 @@
           <para
             >Begins a database transaction with the specified <see
              cref="T:System.Data.IsolationLevel" />
+
+            
 
             
 
@@ -206,8 +234,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.IsolationLevel" />
+
+          
 
           
 
@@ -243,6 +275,8 @@
 
           
 
+          
+
           The name of the database to use in place of the current database. </param
         >
       </Docs>
@@ -264,6 +298,8 @@
           <para
             >The <see
              cref="M:System.Data.IDbConnection.Close" />
+
+            
 
             
 
@@ -324,6 +360,8 @@
 
             
 
+            
+
              because it would cause the connection attempt to wait indefinitely.</para
           >
         </remarks>
@@ -373,6 +411,8 @@
           <para
             >The Database property can be dynamically updated by using the <see
              cref="M:System.Data.IDbConnection.ChangeDatabase(System.String)" />
+
+            
 
             
 

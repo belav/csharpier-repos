@@ -33,8 +33,12 @@
 
         
 
+        
+
          is the base class for the <see
          cref="T:System.ComponentModel.EventDescriptor" />
+
+        
 
         
 
@@ -47,6 +51,8 @@
 
         
 
+        
+
          classes. The <see
          cref="T:System.ComponentModel.EventDescriptor" />
 
@@ -54,8 +60,12 @@
 
         
 
+        
+
          class provides a description of an event, and the <see
          cref="T:System.ComponentModel.PropertyDescriptor" />
+
+        
 
         
 
@@ -71,8 +81,12 @@
 
         
 
+        
+
          property gets the collection of attributes. The <see
          cref="P:System.ComponentModel.MemberDescriptor.Category" />
+
+        
 
         
 
@@ -85,8 +99,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.ComponentModel.MemberDescriptor.Description" />
+
+        
 
         
 
@@ -99,6 +117,8 @@
 
         
 
+        
+
          properties retrieve the values of those specific attributes. The <see
          cref="P:System.ComponentModel.MemberDescriptor.Name" />
 
@@ -106,8 +126,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.ComponentModel.MemberDescriptor.DisplayName" />
+
+        
 
         
 
@@ -123,6 +147,8 @@
 
         
 
+        
+
          also defines an <see
          cref="M:System.ComponentModel.MemberDescriptor.Equals(System.Object)" />
 
@@ -130,8 +156,12 @@
 
         
 
+        
+
          method to compare this <see
          cref="T:System.ComponentModel.MemberDescriptor" />
+
+        
 
         
 
@@ -148,8 +178,12 @@
 
           
 
+          
+
            and <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -197,8 +231,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.ComponentModel.MemberDescriptor" />
+
+            
 
             
 
@@ -237,11 +275,15 @@
 
             
 
+            
+
              class with the specified name of the member.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -284,8 +326,12 @@
 
             
 
+            
+
              array to the attributes in the old <see
              cref="T:System.ComponentModel.MemberDescriptor" />
+
+            
 
             
 
@@ -304,8 +350,12 @@
 
             
 
+            
+
              class with the name in the specified <see
              cref="T:System.ComponentModel.MemberDescriptor" />
+
+            
 
             
 
@@ -318,8 +368,12 @@
 
             
 
+            
+
              and the <see
              cref="T:System.Attribute" />
+
+            
 
             
 
@@ -363,11 +417,15 @@
 
             
 
+            
+
              class with the specified name of the member and an array of attributes.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -402,6 +460,8 @@
           <para
             >Accessing this member allows derived classes to modify the default set of attributes that are used in the <see
              cref="M:System.ComponentModel.MemberDescriptor.CreateAttributeCollection" />
+
+            
 
             
 
@@ -446,8 +506,12 @@
 
             
 
+            
+
              for this member, this property calls the <see
              cref="M:System.ComponentModel.MemberDescriptor.CreateAttributeCollection" />
+
+            
 
             
 
@@ -460,8 +524,12 @@
 
             
 
+            
+
              using the array of <see
              cref="T:System.Attribute" />
+
+            
 
             
 
@@ -504,6 +572,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -539,8 +609,12 @@
 
             
 
+            
+
              property when there is no <see
              cref="T:System.ComponentModel.AttributeCollection" />
+
+            
 
             
 
@@ -553,8 +627,12 @@
 
             
 
+            
+
             , this will return an empty <see
              cref="T:System.ComponentModel.AttributeCollection" />
+
+            
 
             
 
@@ -577,8 +655,12 @@
 
             
 
+            
+
              that contains the <see
              cref="P:System.ComponentModel.MemberDescriptor.AttributeArray" />
+
+            
 
             
 
@@ -617,6 +699,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -646,6 +730,8 @@
 
             
 
+            
+
             , the return value is the default, which is false.</para
           >
         </remarks>
@@ -654,6 +740,8 @@
           <para
             >Gets whether this member should be set only at design time, as specified in the <see
              cref="T:System.ComponentModel.DesignOnlyAttribute" />
+
+            
 
             
 
@@ -720,6 +808,8 @@
 
           
 
+          
+
           The object to compare to the current instance. </param
         >
       </Docs>
@@ -757,6 +847,8 @@
 
             
 
+            
+
              with the attributes is created once. If there are duplicate attributes in the list, only the first instance is saved; all subsequent duplicate attributes are removed from the list.</para
           >
         </remarks>
@@ -771,8 +863,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -822,11 +918,15 @@
 
             
 
+            
+
              that represents the method, or null if the method is not found.</para
           >
         </returns>
         <param name="componentClass">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -841,6 +941,8 @@
 
           
 
+          
+
           The name of the method to find. </param
         >
         <param name="args">
@@ -850,10 +952,14 @@
 
           
 
+          
+
           An array of parameters for the method, used to choose between overloaded methods. </param
         >
         <param name="returnType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -904,11 +1010,15 @@
 
             
 
+            
+
              that represents the method, or null if the method is not found.</para
           >
         </returns>
         <param name="componentClass">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -923,10 +1033,14 @@
 
           
 
+          
+
           The name of the method to find. </param
         >
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -941,10 +1055,14 @@
 
           
 
+          
+
           The type to return for the method. </param
         >
         <param name="publicOnly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -981,6 +1099,8 @@
           <para
             >A hash code for the current <see
              cref="T:System.ComponentModel.MemberDescriptor" />
+
+            
 
             
 
@@ -1023,8 +1143,12 @@
 
             
 
+            
+
              parameter. If another object has been associated with this instance, or if the instance is a custom type descriptor, the <see
              cref="M:System.ComponentModel.MemberDescriptor.GetInvocationTarget(System.Type,System.Object)" />
+
+            
 
             
 
@@ -1048,8 +1172,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1059,6 +1187,8 @@
         >
         <param name="instance">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1112,8 +1242,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1126,8 +1260,12 @@
 
           
 
+          
+
            is bound to. For example, if this <see
            cref="T:System.ComponentModel.MemberDescriptor" />
+
+          
 
           
 
@@ -1137,6 +1275,8 @@
         >
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1184,6 +1324,8 @@
 
           
 
+          
+
           The component for which you want to find a site. </param
         >
       </Docs>
@@ -1211,6 +1353,8 @@
           <para
             >Gets a value indicating whether the member is browsable, as specified in the <see
              cref="T:System.ComponentModel.BrowsableAttribute" />
+
+            
 
             
 
@@ -1262,6 +1406,8 @@
           <para
             >Gets the hash code for the name of the member, as specified in <see
              cref="M:System.String.GetHashCode" />
+
+            
 
             
 

@@ -32,8 +32,12 @@
 
         
 
+        
+
          control can be rendered, a <see
          cref="T:System.Web.UI.WebControls.GridViewRow" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
          event is raised each time a row in the <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 
@@ -63,8 +71,12 @@
 
         
 
+        
+
          control can be rendered. The <see
          cref="E:System.Web.UI.WebControls.GridView.RowDataBound" />
+
+        
 
         
 
@@ -77,8 +89,12 @@
 
         
 
+        
+
          object) is bound to data in the <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 
@@ -94,10 +110,14 @@
 
         
 
+        
+
          delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event-handler delegates, see <format
          type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
         </format>
+
+        
 
         
 
@@ -116,6 +136,8 @@
 
         
 
+        
+
          and <see
          cref="E:System.Web.UI.WebControls.GridView.RowDataBound" />
 
@@ -123,8 +145,12 @@
 
         
 
+        
+
          events of a <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 

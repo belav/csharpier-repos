@@ -37,8 +37,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.IO.BufferedStream.Write(System.Byte[],System.Int32,System.Int32)" />
+
+        
 
         
 
@@ -54,8 +58,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.IO.BinaryWriter" />
+
+        
 
         
 
@@ -97,6 +105,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -110,11 +120,15 @@
 
             
 
+            
+
              class with a default buffer size of 4096 bytes.</para
           >
         </summary>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -155,6 +169,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -163,6 +179,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.BufferedStream" />
+
+            
 
             
 
@@ -178,10 +196,14 @@
 
           
 
+          
+
           The current stream. </param
         >
         <param name="bufferSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -215,8 +237,12 @@
 
             
 
+            
+
              does not support reading, calls to the <see
              cref="M:System.IO.BufferedStream.Read(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -229,8 +255,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.IO.Stream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -243,8 +273,12 @@
 
             
 
+            
+
             , and the Peek methods of <see
              cref="T:System.IO.StreamReader" />
+
+            
 
             
 
@@ -257,6 +291,8 @@
 
             
 
+            
+
             , and <see
              cref="T:System.IO.TextReader" />
 
@@ -264,8 +300,12 @@
 
             
 
+            
+
              throw a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -305,8 +345,12 @@
 
             
 
+            
+
              does not support seeking, calls to <see
              cref="P:System.IO.BufferedStream.Length" />
+
+            
 
             
 
@@ -319,8 +363,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.IO.BufferedStream.Position" />
+
+            
 
             
 
@@ -333,8 +381,12 @@
 
             
 
+            
+
              throw a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -374,8 +426,12 @@
 
             
 
+            
+
              does not support writing, a call to <see
              cref="M:System.IO.BufferedStream.SetLength(System.Int64)" />
+
+            
 
             
 
@@ -388,6 +444,8 @@
 
             
 
+            
+
             , or <see
              cref="M:System.IO.BufferedStream.WriteByte(System.Byte)" />
 
@@ -395,8 +453,12 @@
 
             
 
+            
+
              throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -477,11 +539,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >If you use the <see
              cref="M:System.IO.BufferedStream.#ctor(System.IO.Stream,System.Int32)" />
+
+            
 
             
 
@@ -542,11 +608,15 @@
 
             
 
+            
+
              to obtain the current position within the underlying stream and then adjusts this value according to the current position within the buffer.</para
           >
           <para
             >The set accessor copies any data previously written to the buffer to the underlying stream, and then invokes <see
              cref="M:System.IO.BufferedStream.Seek(System.Int64,System.IO.SeekOrigin)" />
+
+            
 
             
 
@@ -597,6 +667,8 @@
 
             
 
+            
+
              for reading primitive data types.</para
           >
         </remarks>
@@ -614,11 +686,15 @@
 
             
 
+            
+
             . This can be less than the number of bytes requested if that many bytes are not currently available, or 0 if the end of the stream has been reached before any data can be read.</para
           >
         </returns>
         <param name="array">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -633,10 +709,14 @@
 
           
 
+          
+
           The byte offset in the buffer at which to begin reading bytes. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -707,8 +787,12 @@
 
             
 
+            
+
              is negative, the new position will precede the position specified by <paramref
              name="origin" />
+
+            
 
             
 
@@ -721,8 +805,12 @@
 
             
 
+            
+
             . If <paramref
              name="offset" />
+
+            
 
             
 
@@ -735,8 +823,12 @@
 
             
 
+            
+
             . If <paramref
              name="offset" />
+
+            
 
             
 
@@ -749,8 +841,12 @@
 
             
 
+            
+
              by the number of bytes specified by <paramref
              name="offset" />
+
+            
 
             
 
@@ -766,8 +862,12 @@
 
             
 
+            
+
              object is the base stream for a <see
              cref="T:System.IO.StreamReader" />
+
+            
 
             
 
@@ -780,8 +880,12 @@
 
             
 
+            
+
              method can cause the position of the stream to no longer match the position of the internal buffer in the reader. To reset the internal buffer, call the <see
              cref="M:System.IO.StreamReader.DiscardBufferedData" />
+
+            
 
             
 
@@ -806,8 +910,12 @@
 
           
 
+          
+
           A byte offset relative to <paramref
            name="origin" />
+
+          
 
           
 
@@ -822,8 +930,12 @@
 
           
 
+          
+
           A value of type <see
            cref="T:System.IO.SeekOrigin" />
+
+          
 
           
 
@@ -869,6 +981,8 @@
 
           
 
+          
+
           An integer indicating the desired length of the current buffered stream in bytes. </param
         >
       </Docs>
@@ -909,8 +1023,12 @@
 
           
 
+          
+
           The byte array from which to copy <paramref
            name="count" />
+
+          
 
           
 
@@ -925,10 +1043,14 @@
 
           
 
+          
+
           The offset in the buffer at which to begin copying bytes to the current buffered stream. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -964,6 +1086,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

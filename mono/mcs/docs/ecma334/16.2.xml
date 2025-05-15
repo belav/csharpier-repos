@@ -8,11 +8,15 @@
 
     
 
+    
+
      consists of the keyword namespace, followed by a namespace name and body, optionally followed by a semicolon. <grammar_production
     >
       <name>
         <non_terminal where="16.2">namespace-declaration</non_terminal>
       </name>
+
+      
 
       
 
@@ -31,6 +35,8 @@
       <name>
         <non_terminal where="16.2">qualified-identifier</non_terminal>
       </name>
+
+      
 
       
 
@@ -55,6 +61,8 @@
 
       
 
+      
+
        : <rhs
       >
         <terminal>{</terminal>
@@ -74,8 +82,12 @@
 
     
 
+    
+
      may occur as a top-level declaration in a <non_terminal
      where="16.1">compilation-unit</non_terminal>
+
+    
 
     
 
@@ -88,8 +100,12 @@
 
     
 
+    
+
     . When a <non_terminal
      where="16.2">namespace-declaration</non_terminal>
+
+    
 
     
 
@@ -102,6 +118,8 @@
 
     
 
+    
+
     , the namespace becomes a member of the global namespace. When a <non_terminal
      where="16.2">namespace-declaration</non_terminal>
 
@@ -109,8 +127,12 @@
 
     
 
+    
+
      occurs within another <non_terminal
      where="16.2">namespace-declaration</non_terminal>
+
+    
 
     
 
@@ -127,8 +149,12 @@
 
     
 
+    
+
     , the optional <non_terminal
      where="16.3">using-directive</non_terminal>
+
+    
 
     
 
@@ -141,8 +167,12 @@
 
     
 
+    
+
     s contribute members to the declaration space of the namespace. Note that all  <non_terminal
      where="16.3">using-directive</non_terminal>
+
+    
 
     
 
@@ -158,8 +188,12 @@
 
     
 
+    
+
      of a <non_terminal
      where="16.2">namespace-declaration</non_terminal>
+
+    
 
     
 
@@ -169,7 +203,7 @@
 
       >[Example: For example, <code_example
       >
-<![CDATA[
+        <![CDATA[
 namespace N1.N2  
 {  
    class A {}  
@@ -182,9 +216,11 @@ namespace N1.N2
 
       
 
+      
+
       is semantically equivalent to <code_example
       >
-<![CDATA[
+        <![CDATA[
 namespace N1  
 {  
    namespace N2  
@@ -195,6 +231,8 @@ namespace N1
 }  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -211,11 +249,13 @@ namespace N1
 
     
 
+    
+
     ). <example
 
       >[Example: In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 namespace N1.N2  
 {  
    class A {}  
@@ -226,6 +266,8 @@ namespace N1.N2
 }  
 ]]>
       </code_example>
+
+      
 
       
 

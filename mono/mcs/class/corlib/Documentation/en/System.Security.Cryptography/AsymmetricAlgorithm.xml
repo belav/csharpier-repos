@@ -41,10 +41,14 @@
 
         
 
+        
+
          class is an implementation of a public-key algorithm. For an in-depth discussion of public-key encryption and algorithms, see the "Public-Key Encryption" section in <format
          type="text/html">
           <a href="f96284bc-7b73-44b5-ac59-fac613ad09f8">Cryptographic Services</a>
         </format>
+
+        
 
         
 
@@ -61,12 +65,16 @@
 
         
 
+        
+
         . </para
       >
       <para>You can use public-key systems to form digital signatures. Digital signatures are used to help to protect the integrity of data. For example, to use a public-key system to digitally sign a message, the sender first applies a hash function to the message to create a message digest. The sender then encrypts the message digest with the sender's private key to create the sender's personal signature. Upon receiving the message and signature, the receiver decrypts the signature using the sender's public key to recover the message digest and hashes the message using the same hash algorithm that the sender used. If the message digest that the receiver computes matches the message digest received from the sender, the receiver can assume that the message was not altered while in transit. Note that anyone can verify a signature, because the sender's public key is common knowledge. This technique does not retain the secrecy of the message; for the message to be secret, it must also be encrypted. </para>
       <para
         >The .NET Framework provides the following classes that implement digital signature algorithms: <see
          cref="T:System.Security.Cryptography.DSACryptoServiceProvider" />
+
+        
 
         
 
@@ -79,6 +87,8 @@
 
         
 
+        
+
         , <see
          cref="T:System.Security.Cryptography.ECDsa" />
 
@@ -86,8 +96,12 @@
 
         
 
+        
+
          (base class), and <see
          cref="T:System.Security.Cryptography.ECDsaCng" />
+
+        
 
         
 
@@ -103,6 +117,8 @@
 
         
 
+        
+
          namespace provides concrete classes for <see
          cref="T:System.Security.Cryptography.RSA" />
 
@@ -110,8 +126,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Security.Cryptography.DSA" />
+
+        
 
         
 
@@ -190,8 +210,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Security.Cryptography.DSACryptoServiceProvider" />
+
+            
 
             
 
@@ -205,6 +229,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
+
+            
 
             
 
@@ -242,11 +268,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >Calling Dispose allows the resources used by the <see
              cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
+
+            
 
             
 
@@ -263,6 +293,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -271,6 +303,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
+
+            
 
             
 
@@ -316,10 +350,14 @@
 
             
 
+            
+
              instance, unless the default settings have been changed with the <format
              type="text/html">
               <a href="03db52ef-010e-44ea-b6fd-b9c900ecad50">&lt;cryptoClass&gt; element</a>
             </format>
+
+            
 
             
 
@@ -368,8 +406,12 @@
 
           
 
+          
+
           The asymmetric algorithm implementation to use. The following table shows the valid values for the <paramref
            name="algName" />
+
+          
 
           
 
@@ -404,8 +446,12 @@
 
             
 
+            
+
             . The Dispose method leaves the <see
              cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
+
+            
 
             
 
@@ -418,8 +464,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
+
+            
 
             
 
@@ -437,10 +487,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -457,8 +511,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
+
+              
 
               
 
@@ -473,6 +531,8 @@
           <para
             >Releases all resources used by the current instance of the <see
              cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
+
+            
 
             
 
@@ -512,8 +572,12 @@
 
             
 
+            
+
              parameter set to true. Finalize invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -529,8 +593,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
+
+            
 
             
 
@@ -549,11 +617,15 @@
 
             
 
+            
+
              class and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -596,6 +668,8 @@
 
             
 
+            
+
              object from an XML string.</para
           >
         </summary>
@@ -606,8 +680,12 @@
 
           
 
+          
+
           The XML string to use to reconstruct the <see
            cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
+
+          
 
           
 
@@ -662,6 +740,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -695,11 +775,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >This field is accessed through the <see
              cref="P:System.Security.Cryptography.AsymmetricAlgorithm.KeySize" />
+
+            
 
             
 
@@ -775,6 +859,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -823,8 +909,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -838,6 +928,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.IDisposable.Dispose" />
+
+            
 
             
 
@@ -885,6 +977,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -898,11 +992,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="includePrivateParameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

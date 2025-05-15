@@ -35,6 +35,8 @@
 
         
 
+        
+
         . This class can be used to specify a restriction on the maximum value of a simpleType element. The element value must be less than the value of the maxExclusive element.</para
       >
     </summary>
@@ -61,6 +63,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Schema.XmlSchemaMaxExclusiveFacet" />
+
+            
 
             
 

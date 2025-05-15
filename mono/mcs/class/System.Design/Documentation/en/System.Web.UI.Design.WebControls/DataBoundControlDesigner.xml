@@ -33,6 +33,8 @@
 
         
 
+        
+
          class if you want to create a designer for the <see
          cref="T:System.Web.UI.WebControls.DataBoundControl" />
 
@@ -40,8 +42,12 @@
 
         
 
+        
+
          Web server control or for a class that extends <see
          cref="T:System.Web.UI.WebControls.DataBoundControl" />
+
+        
 
         
 
@@ -55,6 +61,8 @@
       <para
         >Provides a base class for design-time support for controls that derive from <see
          cref="T:System.Web.UI.WebControls.DataBoundControl" />
+
+        
 
         
 
@@ -79,6 +87,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.WebControls.DataBoundControlDesigner" />
+
+            
 
             
 
@@ -109,6 +119,8 @@
           <para
             >Gets the <see
              cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
+
+            
 
             
 
@@ -163,6 +175,8 @@
 
             
 
+            
+
              property of the data-bound control.</para
           >
         </summary>
@@ -195,6 +209,8 @@
 
             
 
+            
+
              object to the data source.</para
           >
         </summary>
@@ -205,8 +221,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.DataBoundControl" />
+
+          
 
           
 
@@ -233,6 +253,8 @@
           <para
             >Gets the shadowed <see
              cref="P:System.Web.UI.WebControls.DataBoundControl.DataMember" />
+
+            
 
             
 
@@ -289,6 +311,8 @@
 
             
 
+            
+
              object associated with the data source of this designer.</para
           >
         </summary>
@@ -335,6 +359,8 @@
 
             
 
+            
+
              method unregisters the designer's event handlers from all data source events.</para
           >
         </remarks>
@@ -348,11 +374,15 @@
 
             
 
+            
+
              object and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -386,6 +416,8 @@
           <para
             >An object that implements an <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -425,6 +457,8 @@
 
             
 
+            
+
              interface containing dummy sample data used to render the data-bound control on the design surface.</para
           >
         </returns>
@@ -456,6 +490,8 @@
 
             
 
+            
+
              method to perform any additional actions required when the data source of the underlying data-bound control changes. </para
           >
         </remarks>
@@ -470,8 +506,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -523,8 +563,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.Design.IDataBindingSchemaProvider" />
+
+            
 
             
 
@@ -538,6 +582,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Web.UI.Design.IDataBindingSchemaProvider.CanRefreshSchema" />
+
+            
 
             
 
@@ -574,8 +620,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.Design.IDataBindingSchemaProvider" />
+
+            
 
             
 
@@ -594,11 +644,15 @@
 
             
 
+            
+
             . </para
           >
         </summary>
         <param name="preferSilent">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -632,8 +686,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.Design.IDataBindingSchemaProvider" />
+
+            
 
             
 
@@ -647,6 +705,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Web.UI.Design.IDataBindingSchemaProvider.Schema" />
+
+            
 
             
 
@@ -681,8 +741,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.Design.IDataSourceProvider" />
+
+            
 
             
 
@@ -701,6 +765,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -714,6 +780,8 @@
 
             
 
+            
+
              object) for the data source, and provides a <see
              cref="P:System.Web.UI.WebControls.DataBoundControl.DataMember" />
 
@@ -721,8 +789,12 @@
 
             
 
+            
+
              property to select a particular list (or <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -754,8 +826,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.Design.IDataSourceProvider" />
+
+            
 
             
 
@@ -774,6 +850,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -787,8 +865,12 @@
 
             
 
+            
+
              interface containing the design-time <see
              cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" />
+
+            
 
             
 

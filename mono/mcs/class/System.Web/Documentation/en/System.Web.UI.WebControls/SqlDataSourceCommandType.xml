@@ -20,8 +20,12 @@
 
         
 
+        
+
          enumeration is used by the <see
          cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
          controls to describe the type of SQL command contained in the <see
          cref="P:System.Web.UI.WebControls.SqlDataSource.SelectCommand" />
+
+        
 
         
 
@@ -48,8 +56,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Web.UI.WebControls.SqlDataSource.UpdateCommand" />
+
+        
 
         
 
@@ -62,6 +74,8 @@
 
         
 
+        
+
          properties. The <see
          cref="F:System.Web.UI.WebControls.SqlDataSourceCommandType.Text" />
 
@@ -69,8 +83,12 @@
 
         
 
+        
+
          value indicates that the text is a SQL query or command string while the <see
          cref="F:System.Web.UI.WebControls.SqlDataSourceCommandType.StoredProcedure" />
+
+        
 
         
 
@@ -89,8 +107,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.WebControls.AccessDataSource" />
+
+        
 
         
 

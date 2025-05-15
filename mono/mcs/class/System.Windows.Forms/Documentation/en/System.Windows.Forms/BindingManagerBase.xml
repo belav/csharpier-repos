@@ -21,8 +21,12 @@
 
         
 
+        
+
          enables the synchronization of data-bound controls on a Windows Form that are bound to the same data source. (For more information about simple binding a control to a data source, see the <see
          cref="T:System.Windows.Forms.Binding" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          controls that are bound to the same data source but to different columns. The data source might be a <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -49,8 +57,12 @@
 
         
 
+        
+
         , which inherits from the <see
          cref="T:System.Windows.Forms.BindingManagerBase" />
+
+        
 
         
 
@@ -63,8 +75,12 @@
 
         
 
+        
+
          controls are bound to the current item so they display the information for the same row. When the current item changes, the <see
          cref="T:System.Windows.Forms.CurrencyManager" />
+
+        
 
         
 
@@ -77,6 +93,8 @@
 
         
 
+        
+
          property to specify the row in the <see
          cref="T:System.Data.DataTable" />
 
@@ -84,8 +102,12 @@
 
         
 
+        
+
          that the controls point to. To determine how many rows exist in the data source, use the <see
          cref="P:System.Windows.Forms.BindingManagerBase.Count" />
+
+        
 
         
 
@@ -101,6 +123,8 @@
 
         
 
+        
+
          is necessary because data sources do not necessarily maintain a current-item pointer. For instance, arrays and <see
          cref="T:System.Collections.ArrayList" />
 
@@ -108,8 +132,12 @@
 
         
 
+        
+
          objects can be data sources, but they do not have a property that returns the current item. To get the current item, use the <see
          cref="P:System.Windows.Forms.BindingManagerBase.Current" />
+
+        
 
         
 
@@ -125,8 +153,12 @@
 
         
 
+        
+
          also inherits from the <see
          cref="T:System.Windows.Forms.BindingManagerBase" />
+
+        
 
         
 
@@ -139,6 +171,8 @@
 
         
 
+        
+
          or <see
          cref="P:System.Windows.Forms.BindingManagerBase.Count" />
 
@@ -146,8 +180,12 @@
 
         
 
+        
+
          property for a <see
          cref="T:System.Windows.Forms.PropertyManager" />
+
+        
 
         
 
@@ -163,8 +201,12 @@
 
         
 
+        
+
         , use the <see
          cref="T:System.Windows.Forms.BindingContext" />
+
+        
 
         
 
@@ -177,8 +219,12 @@
 
         
 
+        
+
          or a <see
          cref="T:System.Windows.Forms.PropertyManager" />
+
+        
 
         
 
@@ -194,8 +240,12 @@
 
         
 
+        
+
          component, which acts as both a data source and data connector to the actual target data source. <see
          cref="T:System.Windows.Forms.BindingSource" />
+
+        
 
         
 
@@ -209,6 +259,8 @@
       <para
         >Manages all <see
          cref="T:System.Windows.Forms.Binding" />
+
+        
 
         
 
@@ -234,6 +286,8 @@
 
             
 
+            
+
              property to null. </para
           >
         </remarks>
@@ -242,6 +296,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.BindingManagerBase" />
+
+            
 
             
 
@@ -274,8 +330,12 @@
 
             
 
+            
+
              method adds a new item to the underlying list by using the default constructor for that item's type. <see
              cref="M:System.Windows.Forms.BindingManagerBase.AddNew" />
+
+            
 
             
 
@@ -285,6 +345,8 @@
           >
           <para>
             <see cref="M:System.Windows.Forms.BindingManagerBase.AddNew" />
+
+            
 
             
 
@@ -301,8 +363,12 @@
 
                 
 
+                
+
                  raises the <see
                  cref="E:System.Windows.Forms.BindingSource.AddingNew" />
+
+                
 
                 
 
@@ -320,6 +386,8 @@
 
                 
 
+                
+
                  event and setting the <see
                  cref="P:System.ComponentModel.AddingNewEventArgs.NewObject" />
 
@@ -327,8 +395,12 @@
 
                 
 
+                
+
                  property of the <see
                  cref="T:System.ComponentModel.AddingNewEventArgs" />
+
+                
 
                 
 
@@ -346,6 +418,8 @@
 
                 
 
+                
+
                  interface, the item is immediately added to the data source and underlying list. If this interface is supported, then the addition is transacted by the <see
                  cref="M:System.Windows.Forms.BindingManagerBase.CancelCurrentEdit" />
 
@@ -353,8 +427,12 @@
 
                 
 
+                
+
                  and <see
                  cref="M:System.Windows.Forms.BindingManagerBase.EndCurrentEdit" />
+
+                
 
                 
 
@@ -398,6 +476,8 @@
 
             
 
+            
+
              event occurs after the completion of a data-binding operation, which may include the following: </para
           >
           <list type="bullet">
@@ -416,8 +496,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.BindingCompleteEventArgs" />
+
+            
 
             
 
@@ -430,8 +514,12 @@
 
             
 
+            
+
              may also contain error and exception information. For example, a binding operation that attempts to push a null value from a data source into a <see
              cref="T:System.Windows.Forms.DateTimePicker" />
+
+            
 
             
 
@@ -444,8 +532,12 @@
 
             
 
+            
+
              cannot be null. In this case, although the binding operation does not successfully complete, the <see
              cref="E:System.Windows.Forms.BindingManagerBase.BindingComplete" />
+
+            
 
             
 
@@ -500,8 +592,12 @@
 
             
 
+            
+
              interface. If the object does not implement the <see
              cref="T:System.ComponentModel.IEditableObject" />
+
+            
 
             
 
@@ -517,8 +613,12 @@
 
             
 
+            
+
              method causes the <see
              cref="E:System.Windows.Forms.Binding.Format" />
+
+            
 
             
 
@@ -555,8 +655,12 @@
 
             
 
+            
+
              property to determine the last item in the list of rows maintained by the <see
              cref="T:System.Windows.Forms.BindingManagerBase" />
+
+            
 
             
 
@@ -569,8 +673,12 @@
 
             
 
+            
+
              property to the <see
              cref="P:System.Windows.Forms.BindingManagerBase.Count" />
+
+            
 
             
 
@@ -584,6 +692,8 @@
           <para
             >When overridden in a derived class, gets the number of rows managed by the <see
              cref="T:System.Windows.Forms.BindingManagerBase" />
+
+            
 
             
 
@@ -616,8 +726,12 @@
 
             
 
+            
+
              object contains the value of the current item in the data source. To use the value of the current item, you must cast the item to the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -630,8 +744,12 @@
 
             
 
+            
+
             . For example, a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -644,6 +762,8 @@
 
             
 
+            
+
              objects. To determine the type of the current object, use the <see
              cref="M:System.Object.GetType" />
 
@@ -651,8 +771,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Type.ToString" />
+
+            
 
             
 
@@ -669,8 +793,12 @@
 
               
 
+              
+
                is a <see
                cref="T:System.Data.DataSet" />
+
+              
 
               
 
@@ -683,8 +811,12 @@
 
               
 
+              
+
               , or <see
                cref="T:System.Data.DataTable" />
+
+              
 
               
 
@@ -697,6 +829,8 @@
 
               
 
+              
+
               . Consequently, each <see
                cref="P:System.Windows.Forms.BindingManagerBase.Current" />
 
@@ -704,8 +838,12 @@
 
               
 
+              
+
                object is a <see
                cref="T:System.Data.DataRowView" />
+
+              
 
               
 
@@ -742,8 +880,12 @@
 
             
 
+            
+
              event is raised whenever the <see
              cref="P:System.Windows.Forms.BindingManagerBase.Current" />
+
+            
 
             
 
@@ -756,6 +898,8 @@
 
             
 
+            
+
              event occurs.</para
           >
           <para
@@ -763,6 +907,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -801,6 +947,8 @@
 
             
 
+            
+
              event occurs whenever there is a change in the state in the currently bound item. This can occur if one of the properties of this item is changed or if the item itself is replaced or moved.</para
           >
         </remarks>
@@ -833,8 +981,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.BindingManagerDataErrorEventArgs" />
+
+            
 
             
 
@@ -847,6 +999,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -865,8 +1019,12 @@
 
             
 
+            
+
              is silently handled by the <see
              cref="T:System.Windows.Forms.BindingManagerBase" />
+
+            
 
             
 
@@ -895,8 +1053,12 @@
 
             
 
+            
+
              interface. In that case, changes will be saved. If the object does not implement the <see
              cref="T:System.ComponentModel.IEditableObject" />
+
+            
 
             
 
@@ -936,6 +1098,8 @@
           <para
             >A <see
              cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+
+            
 
             
 
@@ -982,6 +1146,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -990,6 +1156,8 @@
           <para
             >A <see
              cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+
+            
 
             
 
@@ -1005,8 +1173,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.ArrayList" />
+
+          
 
           
 
@@ -1021,8 +1193,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.ArrayList" />
+
+          
 
           
 
@@ -1062,6 +1238,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1070,6 +1248,8 @@
           <para
             >A <see
              cref="T:System.ComponentModel.PropertyDescriptorCollection" />
+
+            
 
             
 
@@ -1085,8 +1265,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1101,6 +1285,8 @@
 
           
 
+          
+
           A counter used to recursively call the method. </param
         >
         <param name="dataSources">
@@ -1110,8 +1296,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.ArrayList" />
+
+          
 
           
 
@@ -1126,8 +1316,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.ArrayList" />
+
+          
 
           
 
@@ -1174,8 +1368,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.ArrayList" />
+
+          
 
           
 
@@ -1231,11 +1429,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.BindingManagerBase.OnBindingComplete(System.Windows.Forms.BindingCompleteEventArgs)" />
+
+            
 
             
 
@@ -1254,6 +1456,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -1264,8 +1468,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.BindingCompleteEventArgs" />
+
+          
 
           
 
@@ -1304,11 +1512,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.BindingManagerBase.OnCurrentChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1327,6 +1539,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1337,8 +1551,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1361,6 +1579,8 @@
           <para
             >Specifies the event handler for the <see
              cref="E:System.Windows.Forms.BindingManagerBase.CurrentChanged" />
+
+            
 
             
 
@@ -1403,11 +1623,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.BindingManagerBase.OnCurrentItemChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1426,6 +1650,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1436,8 +1662,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1472,11 +1702,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.BindingManagerBase.OnDataError(System.Exception)" />
+
+            
 
             
 
@@ -1495,11 +1729,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1512,8 +1750,12 @@
 
           
 
+          
+
            that caused the <see
            cref="E:System.Windows.Forms.BindingManagerBase.DataError" />
+
+          
 
           
 
@@ -1536,6 +1778,8 @@
           <para
             >Specifies the event handler for the <see
              cref="E:System.Windows.Forms.BindingManagerBase.PositionChanged" />
+
+            
 
             
 
@@ -1568,8 +1812,12 @@
 
             
 
+            
+
              property to iterate through the underlying list maintained by the <see
              cref="T:System.Windows.Forms.BindingManagerBase" />
+
+            
 
             
 
@@ -1582,6 +1830,8 @@
 
             
 
+            
+
              to 0. To go to the end of the list, set the <see
              cref="P:System.Windows.Forms.BindingManagerBase.Position" />
 
@@ -1589,8 +1839,12 @@
 
             
 
+            
+
              to the value of the <see
              cref="P:System.Windows.Forms.BindingManagerBase.Count" />
+
+            
 
             
 
@@ -1606,8 +1860,12 @@
 
             
 
+            
+
              event occurs when the <see
              cref="P:System.Windows.Forms.BindingManagerBase.Position" />
+
+            
 
             
 
@@ -1645,6 +1903,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1653,6 +1913,8 @@
           <para
             >Occurs after the value of the <see
              cref="P:System.Windows.Forms.BindingManagerBase.Position" />
+
+            
 
             
 
@@ -1685,6 +1947,8 @@
 
             
 
+            
+
              method is a programmatic way to pull information from the data-bound control back into the data source. It is not required for standard operation of a control, since normally a control automatically updates its bound data source when focus leaves it. </para
           >
           <para>
@@ -1694,8 +1958,12 @@
 
             
 
+            
+
              raises the <see
              cref="E:System.Windows.Forms.BindingManagerBase.BindingComplete" />
+
+            
 
             
 
@@ -1732,6 +2000,8 @@
 
             
 
+            
+
              method is a programmatic way to push information from the data source into the data-bound control. This method is not required if the data source implements the <see
              cref="T:System.ComponentModel.IBindingList" />
 
@@ -1739,8 +2009,12 @@
 
             
 
+            
+
              interface, because the <see
              cref="E:System.ComponentModel.IBindingList.ListChanged" />
+
+            
 
             
 
@@ -1756,8 +2030,12 @@
 
             
 
+            
+
              operation is being performed, the <see
              cref="M:System.Windows.Forms.BindingManagerBase.PushData" />
+
+            
 
             
 
@@ -1796,8 +2074,12 @@
 
             
 
+            
+
              method relies on the underlying data source to determine how the method behaves. (See the <see
              cref="T:System.Windows.Forms.Binding" />
+
+            
 
             
 
@@ -1810,8 +2092,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -1824,6 +2110,8 @@
 
             
 
+            
+
             , as well as strongly typed classes that implement <see
              cref="T:System.Collections.IList" />
 
@@ -1831,8 +2119,12 @@
 
             
 
+            
+
             , the <see
              cref="M:System.Windows.Forms.BindingManagerBase.RemoveAt(System.Int32)" />
+
+            
 
             
 
@@ -1848,8 +2140,12 @@
 
             
 
+            
+
              interface, the <see
              cref="P:System.ComponentModel.IBindingList.AllowRemove" />
+
+            
 
             
 
@@ -1862,8 +2158,12 @@
 
             
 
+            
+
              interface, the <see
              cref="P:System.Collections.IList.IsFixedSize" />
+
+            
 
             
 
@@ -1878,6 +2178,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1908,8 +2210,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.BindingManagerBase.ResumeBinding" />
+
+            
 
             
 
@@ -1945,8 +2251,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.BindingManagerBase.ResumeBinding" />
+
+            
 
             
 
@@ -1978,6 +2288,8 @@
           <para
             >The <see
              cref="M:System.Windows.Forms.BindingManagerBase.UpdateIsBinding" />
+
+            
 
             
 

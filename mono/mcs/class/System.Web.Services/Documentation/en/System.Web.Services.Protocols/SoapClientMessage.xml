@@ -28,6 +28,8 @@
 
         
 
+        
+
         . This class cannot be inherited.</para
       >
     </summary>
@@ -55,8 +57,12 @@
 
             
 
+            
+
              property is available in any <see
              cref="T:System.Web.Services.Protocols.SoapMessageStage" />
+
+            
 
             
 
@@ -96,8 +102,12 @@
 
             
 
+            
+
              property can be accessed during any <see
              cref="T:System.Web.Services.Protocols.SoapMessageStage" />
+
+            
 
             
 
@@ -111,6 +121,8 @@
           <para
             >Gets an instance of the client proxy class, which derives from <see
              cref="T:System.Web.Services.Protocols.SoapHttpClientProtocol" />
+
+            
 
             
 
@@ -143,8 +155,12 @@
 
             
 
+            
+
              stage. The <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -157,8 +173,12 @@
 
             
 
+            
+
              method is invoked in any other <see
              cref="T:System.Web.Services.Protocols.SoapMessageStage" />
+
+            
 
             
 
@@ -172,6 +192,8 @@
           <para
             >Asserts that the current <see
              cref="T:System.Web.Services.Protocols.SoapMessageStage" />
+
+            
 
             
 
@@ -204,8 +226,12 @@
 
             
 
+            
+
              stage. The <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -218,8 +244,12 @@
 
             
 
+            
+
              method is invoked in any other <see
              cref="T:System.Web.Services.Protocols.SoapMessageStage" />
+
+            
 
             
 
@@ -233,6 +263,8 @@
           <para
             >Asserts that the current <see
              cref="T:System.Web.Services.Protocols.SoapMessageStage" />
+
+            
 
             
 
@@ -272,6 +304,8 @@
 
             
 
+            
+
              property can be accessed during any stage, the method information is only available during <see
              cref="F:System.Web.Services.Protocols.SoapMessageStage.AfterDeserialize" />
 
@@ -279,8 +313,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Web.Services.Protocols.SoapMessageStage.BeforeSerialize" />
+
+            
 
             
 
@@ -321,6 +359,8 @@
 
             
 
+            
+
              or <see
              cref="T:System.Web.Services.Protocols.SoapRpcMethodAttribute" />
 
@@ -328,8 +368,12 @@
 
             
 
+            
+
              applied to an XML Web service method or XML Web service client can specify whether the XML Web service method is one way by setting the <see
              cref="P:System.Web.Services.Protocols.SoapDocumentMethodAttribute.OneWay" />
+
+            
 
             
 
@@ -345,8 +389,12 @@
 
             
 
+            
+
              property can be accessed during any <see
              cref="T:System.Web.Services.Protocols.SoapMessageStage" />
+
+            
 
             
 
@@ -394,6 +442,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -425,8 +475,12 @@
 
             
 
+            
+
              property can be accessed during any <see
              cref="T:System.Web.Services.Protocols.SoapMessageStage" />
+
+            
 
             
 

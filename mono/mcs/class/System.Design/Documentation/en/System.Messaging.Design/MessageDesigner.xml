@@ -25,6 +25,8 @@
 
         
 
+        
+
          class.</para
       >
     </summary>
@@ -41,6 +43,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Messaging.Design.MessageDesigner" />
+
+            
 
             
 
@@ -79,6 +83,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -89,8 +95,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 

@@ -24,8 +24,12 @@
 
         
 
+        
+
          control, you use the <see
          cref="P:System.Web.UI.WebControls.TextBox.AutoCompleteType" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          enumeration is used to represent the values that you can apply to the <see
          cref="P:System.Web.UI.WebControls.TextBox.AutoCompleteType" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          property for a <see
          cref="T:System.Web.UI.WebControls.TextBox" />
+
+        
 
         
 
@@ -69,8 +81,12 @@
 
         
 
+        
+
          control shares the list with other <see
          cref="T:System.Web.UI.WebControls.TextBox" />
+
+        
 
         
 
@@ -83,8 +99,12 @@
 
         
 
+        
+
          across different pages. You can also share a list among <see
          cref="T:System.Web.UI.WebControls.TextBox" />
+
+        
 
         
 
@@ -97,8 +117,12 @@
 
         
 
+        
+
         . When you set the <see
          cref="T:System.Web.UI.WebControls.AutoCompleteType" />
+
+        
 
         
 
@@ -111,6 +135,8 @@
 
         
 
+        
+
          controls with the same category share the same list. You can disable the AutoComplete feature for a <see
          cref="T:System.Web.UI.WebControls.TextBox" />
 
@@ -118,8 +144,12 @@
 
         
 
+        
+
          control by setting the <see
          cref="T:System.Web.UI.WebControls.AutoCompleteType" />
+
+        
 
         
 
@@ -135,8 +165,12 @@
 
         
 
+        
+
          menu, choose <ui
         >Internet Options</ui>
+
+        
 
         
 
@@ -149,8 +183,12 @@
 
         
 
+        
+
          tab. Choose the <ui
         >AutoComplete</ui>
+
+        
 
         
 
@@ -169,6 +207,8 @@
 
         
 
+        
+
          in the MSDN Library at http://msdn.microsoft.com/library.</para
       >
     </remarks>
@@ -177,6 +217,8 @@
       <para
         >Represents the values that control the behavior of the AutoComplete feature in a <see
          cref="T:System.Web.UI.WebControls.TextBox" />
+
+        
 
         
 
@@ -387,6 +429,8 @@
           <para
             >The AutoComplete feature is disabled for the <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -673,6 +717,8 @@
 
             
 
+            
+
              control. All <see
              cref="T:System.Web.UI.WebControls.TextBox" />
 
@@ -680,8 +726,12 @@
 
             
 
+            
+
              controls with the same <see
              cref="P:System.Web.UI.Control.ID" />
+
+            
 
             
 

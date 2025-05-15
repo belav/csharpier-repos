@@ -23,8 +23,12 @@
 
         
 
+        
+
          contains a set of <see
          cref="T:System.ComponentModel.Design.CommandID" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.ComponentModel.Design.IMenuCommandService" />
+
+        
 
         
 
@@ -52,6 +60,8 @@
       <para
         >Defines a set of <see
          cref="T:System.ComponentModel.Design.CommandID" />
+
+        
 
         
 
@@ -73,6 +83,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.Design.MenuCommands" />
+
+            
 
             
 
@@ -108,6 +120,8 @@
 
             
 
+            
+
              that can be used to access the component tray menu.</para
           >
         </summary>
@@ -138,6 +152,8 @@
 
             
 
+            
+
              that can be used to access the container menu.</para
           >
         </summary>
@@ -163,6 +179,8 @@
           <para
             >A <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -201,6 +219,8 @@
 
             
 
+            
+
              that can be used to access the edit label handler.</para
           >
         </summary>
@@ -222,6 +242,8 @@
           <para
             >A <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -252,6 +274,8 @@
           <para
             >A <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -290,6 +314,8 @@
 
             
 
+            
+
              that can be used to access the end key handler.</para
           >
         </summary>
@@ -314,6 +340,8 @@
           <para
             >A <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -348,6 +376,8 @@
 
             
 
+            
+
              that can be used to access the smart tag invocation handler.</para
           >
         </summary>
@@ -369,6 +399,8 @@
           <para
             >A <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -404,6 +436,8 @@
 
             
 
+            
+
              that can be used to access the move left key handler.</para
           >
         </summary>
@@ -429,6 +463,8 @@
           <para
             >A <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -464,6 +500,8 @@
 
             
 
+            
+
              that can be used to access the move up key handler.</para
           >
         </summary>
@@ -489,6 +527,8 @@
           <para
             >A <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -524,6 +564,8 @@
 
             
 
+            
+
              that can be used to access the nudge height decrease key handler.</para
           >
         </summary>
@@ -549,6 +591,8 @@
           <para
             >A <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -584,6 +628,8 @@
 
             
 
+            
+
              that can be used to access the nudge left key handler.</para
           >
         </summary>
@@ -609,6 +655,8 @@
           <para
             >A <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -644,6 +692,8 @@
 
             
 
+            
+
              that can be used to access the nudge up key handler.</para
           >
         </summary>
@@ -669,6 +719,8 @@
           <para
             >A <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -704,6 +756,8 @@
 
             
 
+            
+
              that can be used to access the nudge width increase key handler.</para
           >
         </summary>
@@ -729,6 +783,8 @@
           <para
             >A <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -764,6 +820,8 @@
 
             
 
+            
+
              that can be used to access the select next key handler.</para
           >
         </summary>
@@ -789,6 +847,8 @@
           <para
             >A <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -827,6 +887,8 @@
 
             
 
+            
+
              that can be used to access the SHIFT-END key handler.</para
           >
         </summary>
@@ -856,6 +918,8 @@
 
             
 
+            
+
              that can be used to access the SHIFT-HOME key handler.</para
           >
         </summary>
@@ -877,6 +941,8 @@
           <para
             >A <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -912,6 +978,8 @@
 
             
 
+            
+
              that can be used to access the size height increase key handler.</para
           >
         </summary>
@@ -937,6 +1005,8 @@
           <para
             >A <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -972,6 +1042,8 @@
 
             
 
+            
+
              that can be used to access the size width increase key handler.</para
           >
         </summary>
@@ -1002,6 +1074,8 @@
 
             
 
+            
+
              that can be used to access the tab order select key handler.</para
           >
         </summary>
@@ -1027,6 +1101,8 @@
           <para
             >A <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 
@@ -1065,6 +1141,8 @@
 
             
 
+            
+
              that can be used to set the status rectangle.</para
           >
         </summary>
@@ -1094,6 +1172,8 @@
 
             
 
+            
+
              that can be used to set the status rectangle text.</para
           >
         </summary>
@@ -1115,6 +1195,8 @@
           <para
             >A <see
              cref="T:System.ComponentModel.Design.CommandID" />
+
+            
 
             
 

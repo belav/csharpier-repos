@@ -52,6 +52,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -95,8 +97,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -111,8 +117,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -160,8 +170,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -176,8 +190,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -225,6 +243,8 @@
 
             
 
+            
+
              that represents the converted value.</para
           >
         </returns>
@@ -235,8 +255,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -251,8 +275,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -267,8 +295,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -317,6 +349,8 @@
 
             
 
+            
+
              that represents the converted value.</para
           >
         </returns>
@@ -327,8 +361,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -343,8 +381,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -359,8 +401,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -375,8 +421,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -420,8 +470,12 @@
 
             
 
+            
+
              representing the given <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -437,8 +491,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -453,8 +511,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -497,6 +559,8 @@
 
             
 
+            
+
              to create a new value; otherwise, false.</para
           >
         </returns>
@@ -507,8 +571,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -553,6 +621,8 @@
 
             
 
+            
+
              with the properties that are exposed for this data type, or null if there are no properties.</para
           >
         </returns>
@@ -563,8 +633,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -579,8 +653,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -595,8 +673,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -639,6 +721,8 @@
 
             
 
+            
+
              should be called to find the properties of this object; otherwise, false.</para
           >
         </returns>
@@ -649,8 +733,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -693,6 +781,8 @@
 
             
 
+            
+
              that holds a standard set of valid values, or null if the data type does not support a standard set of values.</para
           >
         </returns>
@@ -703,8 +793,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -747,8 +841,12 @@
 
             
 
+            
+
              returned from <see
              cref="M:System.ComponentModel.TypeConverter.GetStandardValues" />
+
+            
 
             
 
@@ -764,8 +862,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -808,6 +910,8 @@
 
             
 
+            
+
              should be called to find a common set of values the object supports; otherwise, false.</para
           >
         </returns>
@@ -818,8 +922,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -861,8 +969,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -877,8 +989,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 

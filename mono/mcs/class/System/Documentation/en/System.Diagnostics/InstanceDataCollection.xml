@@ -33,6 +33,8 @@
 
         
 
+        
+
          class represents a collection containing all the instance data for a counter. This collection is contained in the <see
          cref="T:System.Diagnostics.InstanceDataCollectionCollection" />
 
@@ -40,8 +42,12 @@
 
         
 
+        
+
          when using the <see
          cref="M:System.Diagnostics.PerformanceCounterCategory.ReadCategory" />
+
+        
 
         
 
@@ -55,6 +61,8 @@
       <para
         >Provides a strongly typed collection of <see
          cref="T:System.Diagnostics.InstanceData" />
+
+        
 
         
 
@@ -98,11 +106,15 @@
 
             
 
+            
+
              class, using the specified performance counter (which defines a performance instance).</para
           >
         </summary>
         <param name="counterName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -141,6 +153,8 @@
 
             
 
+            
+
              parameter is case-insensitive.</para
           >
         </remarks>
@@ -149,6 +163,8 @@
           <para
             >Determines whether a performance instance with a specified name (identified by one of the indexed <see
              cref="T:System.Diagnostics.InstanceData" />
+
+            
 
             
 
@@ -163,6 +179,8 @@
         </returns>
         <param name="instanceName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -207,8 +225,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -218,6 +240,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

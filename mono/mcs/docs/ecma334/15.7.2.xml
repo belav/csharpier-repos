@@ -11,6 +11,8 @@
 
       
 
+      
+
        : <rhs
       >
         <keyword>switch</keyword>
@@ -24,6 +26,8 @@
       <name>
         <non_terminal where="15.7.2">switch-block</non_terminal>
       </name>
+
+      
 
       
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -70,6 +78,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="15.7.2">switch-labels</non_terminal>
@@ -84,8 +94,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -104,6 +118,8 @@
       <name>
         <non_terminal where="15.7.2">switch-label</non_terminal>
       </name>
+
+      
 
       
 
@@ -129,8 +145,12 @@
 
     
 
+    
+
      consists of the keyword switch, followed by a parenthesized expression (called the switch expression), followed by a <non_terminal
      where="15.7.2">switch-block</non_terminal>
+
+    
 
     
 
@@ -143,8 +163,12 @@
 
     
 
+    
+
      consists of zero or more <non_terminal
      where="15.7.2">switch-section</non_terminal>
+
+    
 
     
 
@@ -157,8 +181,12 @@
 
     
 
+    
+
      consists of one or more <non_terminal
      where="15.7.2">switch-label</non_terminal>
+
+    
 
     
 
@@ -171,8 +199,12 @@
 
     
 
+    
+
      (<hyperlink
     >15.2.1</hyperlink>
+
+    
 
     
 
@@ -188,8 +220,12 @@
 
     
 
+    
+
     , <keyword
     >byte</keyword>
+
+    
 
     
 
@@ -202,8 +238,12 @@
 
     
 
+    
+
     , <keyword
     >ushort</keyword>
+
+    
 
     
 
@@ -216,8 +256,12 @@
 
     
 
+    
+
     , <keyword
     >uint</keyword>
+
+    
 
     
 
@@ -230,6 +274,8 @@
 
     
 
+    
+
     , <keyword
     >ulong</keyword>
 
@@ -237,8 +283,12 @@
 
     
 
+    
+
     , <keyword
     >char</keyword>
+
+    
 
     
 
@@ -251,8 +301,12 @@
 
     
 
+    
+
     , then that is the governing type of the switch statement. Otherwise, exactly one user-defined implicit conversion (<hyperlink
     >13.4</hyperlink>
+
+    
 
     
 
@@ -265,8 +319,12 @@
 
     
 
+    
+
     , <keyword
     >byte</keyword>
+
+    
 
     
 
@@ -279,8 +337,12 @@
 
     
 
+    
+
     , <keyword
     >ushort</keyword>
+
+    
 
     
 
@@ -293,8 +355,12 @@
 
     
 
+    
+
     , <keyword
     >uint</keyword>
+
+    
 
     
 
@@ -307,8 +373,12 @@
 
     
 
+    
+
     , <keyword
     >ulong</keyword>
+
+    
 
     
 
@@ -321,11 +391,15 @@
 
     
 
+    
+
     , string. If no such implicit conversion exists, or if more than one such implicit conversion exists, a compile-time error occurs. </paragraph
   >
   <paragraph
     >The constant expression of each case label must denote a value of a type that is implicitly convertible (<hyperlink
     >13.1</hyperlink>
+
+    
 
     
 
@@ -348,7 +422,7 @@
 
       >[Example: The example <code_example
       >
-<![CDATA[
+        <![CDATA[
 switch (i) {  
    case 0:  
    CaseZero();  
@@ -367,9 +441,11 @@ switch (i) {
 
       
 
+      
+
       is valid because no switch section has a reachable end point. Unlike C and C++, execution of a switch section is not permitted to "fall through" to the next switch section, and the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 switch (i) {  
    case 0:  
    CaseZero();  
@@ -385,9 +461,11 @@ switch (i) {
 
       
 
+      
+
       results in a compile-time error. When execution of a switch section is to be followed by execution of another switch section, an explicit goto case or goto default statement must be used: <code_example
       >
-<![CDATA[
+        <![CDATA[
 switch (i) {  
    case 0:  
    CaseZero();  
@@ -406,6 +484,8 @@ switch (i) {
 
       
 
+      
+
       end example]</example
     >
   </paragraph>
@@ -417,11 +497,13 @@ switch (i) {
 
     
 
+    
+
     . <example
 
       >[Example: The example <code_example
       >
-<![CDATA[
+        <![CDATA[
 switch (i) {  
    case 0:  
    CaseZero();  
@@ -441,8 +523,12 @@ switch (i) {
 
       
 
+      
+
       is valid. The example does not violate the "no fall through" rule because the labels case 2: and default: are part of the same <non_terminal
        where="15.7.2">switch-section</non_terminal>
+
+      
 
       
 
@@ -455,7 +541,7 @@ switch (i) {
     <note
       >[Note: The "no fall through" rule prevents a common class of bugs that occur in C and C++ when break statements are accidentally omitted. In addition, because of this rule, the switch sections of a switch statement can be arbitrarily rearranged without affecting the behavior of the statement. For example, the sections of the switch statement above can be reversed without affecting the behavior of the statement: <code_example
       >
-<![CDATA[
+        <![CDATA[
 switch (i) {  
    default:  
    CaseAny();  
@@ -474,6 +560,8 @@ switch (i) {
 
       
 
+      
+
       end note]</note
     >
   </paragraph>
@@ -481,7 +569,7 @@ switch (i) {
     <note
       >[Note: The statement list of a switch section typically ends in a break, goto case, or goto default statement, but any construct that renders the end point of the statement list unreachable is permitted. For example, a while statement controlled by the boolean expression true is known to never reach its end point. Likewise, a throw or return statement always transfers control elsewhere and never reaches its end point. Thus, the following example is valid: <code_example
       >
-<![CDATA[
+        <![CDATA[
 switch (i) {  
    case 0:  
    while (true) F();  
@@ -497,6 +585,8 @@ switch (i) {
 
       
 
+      
+
       end note]</note
     >
   </paragraph>
@@ -504,7 +594,7 @@ switch (i) {
     <example
       >[Example: The governing type of a switch statement may be the type string. For example: <code_example
       >
-<![CDATA[
+        <![CDATA[
 void DoCommand(string command) {  
    switch (command.ToLower()) {  
       case "run":  
@@ -528,6 +618,8 @@ void DoCommand(string command) {
 
       
 
+      
+
       end example]</example
     >
   </paragraph>
@@ -535,6 +627,8 @@ void DoCommand(string command) {
     <note
       >[Note: Like the string equality operators (<hyperlink
       >14.9.7</hyperlink>
+
+      
 
       
 
@@ -552,8 +646,12 @@ void DoCommand(string command) {
 
     
 
+    
+
     s of a <non_terminal
      where="15.7.2">switch-block</non_terminal>
+
+    
 
     
 
@@ -566,11 +664,15 @@ void DoCommand(string command) {
 
     
 
+    
+
     ). The scope of a local variable or constant declared in a switch block is the switch block. </paragraph
   >
   <paragraph
     >Within a switch block, the meaning of a name used in an expression context must always be the same (<hyperlink
     >14.5.2.1</hyperlink>
+
+    
 
     
 

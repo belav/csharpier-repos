@@ -27,12 +27,16 @@
 
         
 
+        
+
          base class and <format
          type="text/html">
           <a href="90373A3F-D8C8-492D-841C-945D62393C56"
             >[&lt;topic://cpconImplementingTypeConverter&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -49,8 +53,12 @@
 
           
 
+          
+
           . Instead, call the <see
            cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+
+          
 
           
 
@@ -63,8 +71,12 @@
 
           
 
+          
+
           . For more information, see the examples in the <see
            cref="T:System.ComponentModel.TypeConverter" />
+
+          
 
           
 
@@ -79,6 +91,8 @@
       <para
         >Provides a type converter to convert data for an image index to and from one data type to another for use by the <see
          cref="T:System.Windows.Forms.TreeView" />
+
+        
 
         
 
@@ -104,8 +118,12 @@
 
             
 
+            
+
              class through the <see
              cref="T:System.ComponentModel.TypeDescriptor" />
+
+            
 
             
 
@@ -119,6 +137,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.TreeViewImageIndexConverter" />
+
+            
 
             
 
@@ -161,8 +181,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -177,8 +201,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -193,8 +221,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -233,8 +265,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -249,8 +285,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -265,8 +305,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -281,6 +325,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
 
@@ -288,8 +334,12 @@
 
           
 
+          
+
            to convert the <paramref
            name="value" />
+
+          
 
           
 
@@ -325,6 +375,8 @@
 
           
 
+          
+
           Provides contextual information about the component.</param
         >
       </Docs>
@@ -349,6 +401,8 @@
           <para
             >Gets a value indicating null is valid in the <see
              cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
+
+            
 
             
 

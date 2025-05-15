@@ -26,7 +26,7 @@
   </configuration>
   <feature name="AJAX" target="web">
     <description>
-<![CDATA[
+      <![CDATA[
       Adds entries to your Web.config file which are required by any .NET 3.5 AJAX.NET application.
     ]]>
     </description>
@@ -44,7 +44,7 @@
   </feature>
   <feature name="AJAX1" target="web">
     <description>
-<![CDATA[
+      <![CDATA[
       Adds entries to your Web.config file which are required by any AJAX.NET 1.0 application.
     ]]>
     </description>
@@ -61,7 +61,7 @@
   </feature>
   <feature name="DynamicData" target="web">
     <description>
-<![CDATA[
+      <![CDATA[
       Adds entries to your Web.config file which are required by any ASP.NET DynamicData application.
     ]]>
     </description>
@@ -80,7 +80,7 @@
   </feature>
   <feature name="SettingsMapProtection" target="web">
     <description>
-<![CDATA[
+      <![CDATA[
       Adds an entry to your config file which will prevent download of the 'settings.map' file. The
 file is used by the settings mapping manager to modify configuration settings depending on the operating
 system under which your application runs. Add this feature only if you have your own custom 'settings.map'
@@ -101,7 +101,7 @@ file in the top-level directory of your ASP.NET application.
       </section>
     </requires>
     <contents>
-<![CDATA[
+      <![CDATA[
 <add verb="*" path="settings.map" type="System.Web.HttpForbiddenHandler, System.Web, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
 ]]>
     </contents>
@@ -114,7 +114,7 @@ file in the top-level directory of your ASP.NET application.
       </section>
     </requires>
     <contents>
-<![CDATA[
+      <![CDATA[
 <sectionGroup name="system.web.extensions" type="System.Web.Configuration.SystemWebExtensionsSectionGroup, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35">
         <sectionGroup name="scripting" type="System.Web.Configuration.ScriptingSectionGroup, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35">
           <section name="scriptResourceHandler" type="System.Web.Configuration.ScriptingScriptResourceHandlerSection, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" requirePermission="false" allowDefinition="MachineToApplication"/>
@@ -140,7 +140,7 @@ file in the top-level directory of your ASP.NET application.
       </section>
     </requires>
     <contents>
-<![CDATA[
+      <![CDATA[
           <add tagPrefix="asp" namespace="System.Web.UI" assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>
           <add tagPrefix="asp" namespace="System.Web.UI.WebControls" assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>
 ]]>
@@ -157,7 +157,7 @@ file in the top-level directory of your ASP.NET application.
       </section>
     </requires>
     <contents>
-<![CDATA[
+      <![CDATA[
 	    <add assembly="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=B77A5C561934E089"/>
             <add assembly="System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>
             <add assembly="System.Data.DataSetExtensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=B77A5C561934E089"/>
@@ -175,7 +175,7 @@ file in the top-level directory of your ASP.NET application.
       </section>
     </requires>
     <contents>
-<![CDATA[
+      <![CDATA[
 	<remove verb="*" path="*.asmx"/>
         <add verb="*" path="*.asmx" validate="false" type="System.Web.Script.Services.ScriptHandlerFactory, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>
         <add verb="*" path="*_AppService.axd" validate="false" type="System.Web.Script.Services.ScriptHandlerFactory, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>
@@ -192,7 +192,7 @@ file in the top-level directory of your ASP.NET application.
       </section>
     </requires>
     <contents>
-<![CDATA[
+      <![CDATA[
 <add name="ScriptModule" type="System.Web.Handlers.ScriptModule, System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35"/>
 ]]>
     </contents>
@@ -206,7 +206,7 @@ file in the top-level directory of your ASP.NET application.
       </section>
     </requires>
     <contents>
-<![CDATA[
+      <![CDATA[
 	<compiler language="c#;cs;csharp" extension=".cs" warningLevel="4"
                   type="Microsoft.CSharp.CSharpCodeProvider, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <providerOption name="CompilerVersion" value="v3.5"/>
@@ -228,7 +228,7 @@ file in the top-level directory of your ASP.NET application.
       </section>
     </requires>
     <contents>
-<![CDATA[
+      <![CDATA[
 	<assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
         <dependentAssembly>
           <assemblyIdentity name="System.Web.Extensions" publicKeyToken="31bf3856ad364e35"/>
@@ -249,7 +249,7 @@ file in the top-level directory of your ASP.NET application.
       </section>
     </requires>
     <contents>
-<![CDATA[
+      <![CDATA[
       <validation validateIntegratedModeConfiguration="false"/>
       <modules>
         <remove name="ScriptModule" />
@@ -278,7 +278,7 @@ file in the top-level directory of your ASP.NET application.
       </section>
     </requires>
     <contents>
-<![CDATA[
+      <![CDATA[
 <sectionGroup name="system.web.extensions" type="System.Web.Configuration.SystemWebExtensionsSectionGroup, System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <sectionGroup name="scripting" type="System.Web.Configuration.ScriptingSectionGroup, System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
           <section name="scriptResourceHandler" type="System.Web.Configuration.ScriptingScriptResourceHandlerSection, System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" requirePermission="false" allowDefinition="MachineToApplication"/>
@@ -303,7 +303,7 @@ file in the top-level directory of your ASP.NET application.
       </section>
     </requires>
     <contents>
-<![CDATA[
+      <![CDATA[
 <add tagPrefix="asp" namespace="System.Web.UI" assembly="System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"/>
 ]]>
     </contents>
@@ -319,7 +319,7 @@ file in the top-level directory of your ASP.NET application.
       </section>
     </requires>
     <contents>
-<![CDATA[
+      <![CDATA[
 <add assembly="System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"/>
 ]]>
     </contents>
@@ -333,7 +333,7 @@ file in the top-level directory of your ASP.NET application.
       </section>
     </requires>
     <contents>
-<![CDATA[
+      <![CDATA[
 <remove verb="*" path="*.asmx"/>
       <add verb="*" path="*.asmx" validate="false" type="System.Web.Script.Services.ScriptHandlerFactory, System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"/>
       <add verb="*" path="*_AppService.axd" validate="false" type="System.Web.Script.Services.ScriptHandlerFactory, System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"/>
@@ -350,7 +350,7 @@ file in the top-level directory of your ASP.NET application.
       </section>
     </requires>
     <contents>
-<![CDATA[
+      <![CDATA[
 <add name="ScriptModule" type="System.Web.Handlers.ScriptModule, System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"/>
 ]]>
     </contents>
@@ -362,7 +362,7 @@ file in the top-level directory of your ASP.NET application.
       </section>
     </requires>
     <contents>
-<![CDATA[
+      <![CDATA[
 <scripting>
       <webServices>
       <!-- Uncomment this line to customize maxJsonLength and add a custom converter -->
@@ -401,7 +401,7 @@ file in the top-level directory of your ASP.NET application.
       </section>
     </requires>
     <contents>
-<![CDATA[
+      <![CDATA[
 <validation validateIntegratedModeConfiguration="false"/>
     <modules>
       <add name="ScriptModule" preCondition="integratedMode" type="System.Web.Handlers.ScriptModule, System.Web.Extensions, Version=1.0.61025.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"/>
@@ -429,7 +429,7 @@ file in the top-level directory of your ASP.NET application.
       </section>
     </requires>
     <contents>
-<![CDATA[
+      <![CDATA[
 <add tagPrefix="asp" namespace="System.Web.DynamicData" assembly="System.Web.DynamicData, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"/>
 ]]>
     </contents>
@@ -445,7 +445,7 @@ file in the top-level directory of your ASP.NET application.
       </section>
     </requires>
     <contents>
-<![CDATA[
+      <![CDATA[
 <add assembly="System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
 <add assembly="System.Data.DataSetExtensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
 <add assembly="System.Xml.Linq, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
@@ -466,97 +466,97 @@ file in the top-level directory of your ASP.NET application.
       </section>
     </requires>
     <contents>
-<![CDATA[
+      <![CDATA[
 <add name="UrlRoutingModule" type="System.Web.Routing.UrlRoutingModule, System.Web.Routing, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"/>
 ]]>
     </contents>
   </configBlock>
   <!-- default contents for missing sections -->
   <default section="configuration" target="any">
-<![CDATA[
+    <![CDATA[
     <configuration>
     </configuration>
     ]]>
   </default>
   <default section="configSections" target="any">
-<![CDATA[
+    <![CDATA[
     <configSections>
     </configSections>
     ]]>
   </default>
   <default section="system.web" target="web">
-<![CDATA[
+    <![CDATA[
     <system.web>
     </system.web>
     ]]>
   </default>
   <default section="system.web.pages" target="web">
-<![CDATA[
+    <![CDATA[
 <pages>
 </pages>
 ]]>
   </default>
   <default section="system.web.pages.controls" target="web">
-<![CDATA[
+    <![CDATA[
 <controls>
 </controls>
 ]]>
   </default>
   <default section="system.web.compilation" target="web">
-<![CDATA[
+    <![CDATA[
 <compilation debug="true">
 </compilation>
 ]]>
   </default>
   <default section="system.web.compilation.assemblies" target="web">
-<![CDATA[
+    <![CDATA[
 <assemblies>
 </assemblies>
 ]]>
   </default>
   <default section="system.web.httpHandlers" target="web">
-<![CDATA[
+    <![CDATA[
 <httpHandlers>
 </httpHandlers>
 ]]>
   </default>
   <default section="system.web.httpModules" target="web">
-<![CDATA[
+    <![CDATA[
 <httpModules>
 </httpModules>
 ]]>
   </default>
   <default section="system.web.extensions" target="web">
-<![CDATA[
+    <![CDATA[
 <system.web.extensions>
 </system.web.extensions>
 ]]>
   </default>
   <default section="system.webServer" target="web">
-<![CDATA[
+    <![CDATA[
 <system.webServer>
 </system.webServer>
 ]]>
   </default>
   <default section="system.web.customErrors" target="web">
-<![CDATA[
+    <![CDATA[
 <customErrors mode="RemoteOnly"/>
 ]]>
   </default>
   <default section="system.codedom" target="any">
-<![CDATA[
+    <![CDATA[
     <system.codedom>
     </system.codedom>
 ]]>
   </default>
   <default section="system.codedom.compilers" target="any">
-<![CDATA[
+    <![CDATA[
     <compilers>
     </compilers>
 ]]>
   </default>
   <default section="runtime" target="any">
-<![CDATA[
+    <![CDATA[
     <runtime>
     </runtime>
 ]]>

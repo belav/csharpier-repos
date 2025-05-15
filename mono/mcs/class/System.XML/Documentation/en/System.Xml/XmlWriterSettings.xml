@@ -26,8 +26,12 @@
 
         
 
+        
+
          method is the preferred mechanism for obtaining <see
          cref="T:System.Xml.XmlWriter" />
+
+        
 
         
 
@@ -40,6 +44,8 @@
 
         
 
+        
+
          method uses the <see
          cref="T:System.Xml.XmlWriterSettings" />
 
@@ -47,8 +53,12 @@
 
         
 
+        
+
          class to specify which features to implement in the <see
          cref="T:System.Xml.XmlWriter" />
+
+        
 
         
 
@@ -65,8 +75,12 @@
 
           
 
+          
+
            object with the <see
            cref="M:System.Xml.Xsl.XslCompiledTransform.Transform(System.String,System.Xml.XmlWriter)" />
+
+          
 
           
 
@@ -79,8 +93,12 @@
 
           
 
+          
+
            property to obtain an <see
            cref="T:System.Xml.XmlWriterSettings" />
+
+          
 
           
 
@@ -93,12 +111,16 @@
 
           
 
+          
+
            object has the correct output settings.</para
         >
       </block>
       <para
         >The <see
          cref="T:System.Xml.XmlWriterSettings" />
+
+        
 
         
 
@@ -157,8 +179,12 @@
 
               
 
+              
+
                (document-level), <see
                cref="F:System.Xml.ConformanceLevel.Fragment" />
+
+              
 
               
 
@@ -171,12 +197,16 @@
 
               
 
+              
+
                (auto-detection) </para
             >
           </description>
           <description>
             <para>
               <see cref="F:System.Xml.ConformanceLevel.Document" />
+
+              
 
               
 
@@ -196,6 +226,8 @@
             <para
               >Whether to add closing tags to all unclosed elements when the <see
                cref="M:System.Xml.XmlWriter.Close" />
+
+              
 
               
 
@@ -248,6 +280,8 @@
 
               
 
+              
+
                value</para
             >
           </description>
@@ -283,6 +317,8 @@
             <para
               >Character string to use when indenting (used when <see
                cref="P:System.Xml.XmlWriterSettings.Indent" />
+
+              
 
               
 
@@ -331,8 +367,12 @@
 
               
 
+              
+
                value: <see
                cref="F:System.Xml.NewLineHandling.Entitize" />
+
+              
 
               
 
@@ -345,8 +385,12 @@
 
               
 
+              
+
                (replace), or <see
                cref="F:System.Xml.NewLineHandling.None" />
+
+              
 
               
 
@@ -363,8 +407,12 @@
 
               
 
+              
+
                (replace with characters specified by <see
                cref="P:System.Xml.XmlWriterSettings.NewLineChars" />
+
+              
 
               
 
@@ -384,6 +432,8 @@
             <para
               >Whether to write attributes on individual lines (has no effect when <see
                cref="P:System.Xml.XmlWriterSettings.Indent" />
+
+              
 
               
 
@@ -427,8 +477,12 @@
 
         
 
+        
+
          object created by the <see
          cref="Overload:System.Xml.XmlWriter.Create" />
+
+        
 
         
 
@@ -458,6 +512,8 @@
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.Xml.XmlWriterSettings" />
+
+            
 
             
 
@@ -515,6 +571,8 @@
               <description>
                 <para>
                   <see cref="F:System.Xml.ConformanceLevel.Document" />
+
+                  
 
                   
 
@@ -578,6 +636,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -624,6 +684,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -651,8 +713,12 @@
 
             
 
+            
+
              instance if you want to use asynchronous <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -665,8 +731,12 @@
 
             
 
+            
+
              instance is created, the <see
              cref="P:System.Xml.XmlWriterSettings.Async" />
+
+            
 
             
 
@@ -682,8 +752,12 @@
 
             
 
+            
+
              overload. This means that if you create a new <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -696,6 +770,8 @@
 
             
 
+            
+
             , the async behavior depends on the input <see
              cref="T:System.Xml.XmlWriter" />
 
@@ -703,8 +779,12 @@
 
             
 
+            
+
             , and you cannot use the <see
              cref="P:System.Xml.XmlWriterSettings.Async" />
+
+            
 
             
 
@@ -723,8 +803,12 @@
 
             
 
+            
+
              methods can be used on a particular <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -759,8 +843,12 @@
 
             
 
+            
+
              object supports character checking, it throws an exception if any characters are outside the range of legal XML characters specified by the "2.2 Characters" section of the W3C <see
              cref="http://www.w3.org/TR/REC-xml/#charsets">XML 1.0 Recommendation</see>
+
+            
 
             
 
@@ -775,6 +863,8 @@
           <para
             >Gets or sets a value that indicates whether the XML writer should check to ensure that all characters in the document conform to the "2.2 Characters" section of the W3C <see
              cref="http://www.w3.org/TR/REC-xml/#charsets">XML 1.0 Recommendation</see>
+
+            
 
             
 
@@ -812,6 +902,8 @@
 
             
 
+            
+
              object can be modified without affecting the settings on the original object.</para
           >
         </remarks>
@@ -825,6 +917,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -833,6 +927,8 @@
           <para
             >The cloned <see
              cref="T:System.Xml.XmlWriterSettings" />
+
+            
 
             
 
@@ -867,6 +963,8 @@
 
             
 
+            
+
              has finished writing.</para
           >
           <para
@@ -877,8 +975,12 @@
 
             
 
+            
+
              instances that output XML content to a stream or <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -897,6 +999,8 @@
 
             
 
+            
+
              should also close the underlying stream or <see
              cref="T:System.IO.TextWriter" />
 
@@ -904,8 +1008,12 @@
 
             
 
+            
+
              when the <see
              cref="M:System.Xml.XmlWriter.Close" />
+
+            
 
             
 
@@ -946,6 +1054,8 @@
 
             
 
+            
+
              property configures the XML writer to check and guarantee that the stream being written complies with a certain set of rules. The XML data can be checked to see that it conforms to the rules for a well-formed XML 1.0 document or a document fragment. The following table describes the three settings. The default is document-level conformance.</para
           >
           <list type="table">
@@ -969,8 +1079,10 @@
                 <para
                   >Ensures that the XML output conforms to the <see
                    cref="http://www.w3.org/TR/REC-xml/#sec-well-formed"
->rules for a well-formed XML 1.0 document</see
+                    >rules for a well-formed XML 1.0 document</see
                   >
+
+                  
 
                   
 
@@ -1000,8 +1112,10 @@
                 <para
                   >Ensures that the XML output conforms to the <see
                    cref="http://www.w3.org/TR/REC-xml/#wf-entities"
->rules for a well-formed XML 1.0 document fragment</see
+                    >rules for a well-formed XML 1.0 document fragment</see
                   >
+
+                  
 
                   
 
@@ -1027,6 +1141,8 @@
                     <para
                       >If the <see
                        cref="M:System.Xml.XmlWriter.WriteStartDocument" />
+
+                      
 
                       
 
@@ -1059,11 +1175,15 @@
 
                   
 
+                  
+
                    is thrown if there is a conflict, such as when you try to write a text node and a DTD at the root level.</para
                 >
                 <para
                   >If you are wrapping another <see
                    cref="T:System.Xml.XmlWriter" />
+
+                  
 
                   
 
@@ -1113,6 +1233,8 @@
 
                   
 
+                  
+
                    is thrown.</para
                 >
               </description>
@@ -1124,6 +1246,8 @@
               <term>
                 <para>
                   <see cref="Overload:System.Xml.XmlWriter.WriteStartDocument" />
+
+                  
 
                   
 
@@ -1143,6 +1267,8 @@
 
                   
 
+                  
+
                    is thrown.</para
                 >
               </description>
@@ -1159,6 +1285,8 @@
 
                   
 
+                  
+
                    is called multiple times.</para
                 >
               </term>
@@ -1170,6 +1298,8 @@
 
                   
 
+                  
+
                    is thrown.</para
                 >
               </description>
@@ -1181,12 +1311,16 @@
 
                   
 
+                  
+
                    is thrown.</para
                 >
               </description>
               <description>
                 <para>
                   <see cref="T:System.Xml.XmlException" />
+
+                  
 
                   
 
@@ -1203,6 +1337,8 @@
               <description>
                 <para>
                   <see cref="T:System.Xml.XmlException" />
+
+                  
 
                   
 
@@ -1225,6 +1361,8 @@
               <description>
                 <para>
                   <see cref="T:System.Xml.XmlException" />
+
+                  
 
                   
 
@@ -1263,6 +1401,8 @@
 
                   
 
+                  
+
                    isn't called to end an attribute node.</para
                 >
               </term>
@@ -1286,8 +1426,12 @@
 
                   
 
+                  
+
                    call is followed by a <see
                    cref="M:System.Xml.XmlWriter.WriteEndAttribute" />
+
+                  
 
                   
 
@@ -1304,6 +1448,8 @@
 
                   
 
+                  
+
                    is thrown.</para
                 >
               </description>
@@ -1315,12 +1461,16 @@
 
                   
 
+                  
+
                    is thrown.</para
                 >
               </description>
               <description>
                 <para>
                   <see cref="T:System.Xml.XmlException" />
+
+                  
 
                   
 
@@ -1342,6 +1492,8 @@
 
                   
 
+                  
+
                    is thrown.</para
                 >
               </description>
@@ -1353,12 +1505,16 @@
 
                   
 
+                  
+
                    is thrown.</para
                 >
               </description>
               <description>
                 <para>
                   <see cref="T:System.Xml.XmlException" />
+
+                  
 
                   
 
@@ -1405,6 +1561,8 @@
 
                   
 
+                  
+
                    specifies a prefix and a namespace that isn't declared within that scope, or the prefix is associated with a different namespace.</para
                 >
               </term>
@@ -1422,6 +1580,8 @@
               <term>
                 <para>
                   <see cref="Overload:System.Xml.XmlWriter.WriteStartAttribute" />
+
+                  
 
                   
 
@@ -1449,6 +1609,8 @@
 
                   
 
+                  
+
                    specifies a prefix and a namespace, but the prefix is associated with a different in-scope namespace.</para
                 >
               </term>
@@ -1471,6 +1633,8 @@
 
                   
 
+                  
+
                    is used to write element content by using a namespace that doesn't exist within the scope.</para
                 >
               </term>
@@ -1482,6 +1646,8 @@
 
                   
 
+                  
+
                    is thrown.</para
                 >
               </description>
@@ -1493,12 +1659,16 @@
 
                   
 
+                  
+
                    is thrown.</para
                 >
               </description>
               <description>
                 <para>
                   <see cref="T:System.Xml.XmlException" />
+
+                  
 
                   
 
@@ -1512,6 +1682,8 @@
               <term>
                 <para>
                   <see cref="M:System.Xml.XmlWriter.WriteQualifiedName(System.String,System.String)" />
+
+                  
 
                   
 
@@ -1542,6 +1714,8 @@
 
                   
 
+                  
+
                    is thrown.</para
                 >
               </description>
@@ -1553,12 +1727,16 @@
 
                   
 
+                  
+
                    is thrown.</para
                 >
               </description>
               <description>
                 <para>
                   <see cref="T:System.Xml.XmlException" />
+
+                  
 
                   
 
@@ -1580,6 +1758,8 @@
 
                   
 
+                  
+
                    is thrown.</para
                 >
               </description>
@@ -1591,12 +1771,16 @@
 
                   
 
+                  
+
                    is thrown.</para
                 >
               </description>
               <description>
                 <para>
                   <see cref="T:System.Xml.XmlException" />
+
+                  
 
                   
 
@@ -1632,6 +1816,8 @@
 
                   
 
+                  
+
                    is thrown.</para
                 >
               </description>
@@ -1643,12 +1829,16 @@
 
                   
 
+                  
+
                    is thrown.</para
                 >
               </description>
               <description>
                 <para>
                   <see cref="T:System.Xml.XmlException" />
+
+                  
 
                   
 
@@ -1684,6 +1874,8 @@
 
                   
 
+                  
+
                    is thrown.</para
                 >
               </description>
@@ -1695,12 +1887,16 @@
 
                   
 
+                  
+
                    is thrown.</para
                 >
               </description>
               <description>
                 <para>
                   <see cref="T:System.Xml.XmlException" />
+
+                  
 
                   
 
@@ -1745,8 +1941,12 @@
 
             
 
+            
+
              encodes a buffer of characters all at once, rather than character by character. An exception is thrown when the <see
              cref="M:System.Xml.XmlWriter.Flush" />
+
+            
 
             
 
@@ -1762,8 +1962,12 @@
 
             
 
+            
+
              property only applies to the <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -1776,8 +1980,12 @@
 
             
 
+            
+
              or with the specified file name. If the <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -1790,8 +1998,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Xml.XmlWriterSettings.Encoding" />
+
+            
 
             
 
@@ -1804,8 +2016,12 @@
 
             
 
+            
+
             . For example, if this property is set to Unicode (UTF-16) for a particular <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -1818,8 +2034,12 @@
 
             
 
+            
+
              (which derives from <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -1835,8 +2055,12 @@
 
             
 
+            
+
              instance is created with other output parameters, the <see
              cref="P:System.Xml.XmlWriterSettings.Encoding" />
+
+            
 
             
 
@@ -1855,6 +2079,8 @@
 
                 
 
+                
+
                  is Encoding.UTF8.</para
               >
             </item>
@@ -1867,6 +2093,8 @@
 
                 
 
+                
+
                  is set to Encoding.Unicode and the <see
                  cref="T:System.IO.StreamWriter" />
 
@@ -1874,8 +2102,12 @@
 
                 
 
+                
+
                 ’s encoding overrides the <see
                  cref="P:System.Xml.XmlWriterSettings.Encoding" />
+
+                
 
                 
 
@@ -1904,6 +2136,8 @@
             <para
               >Do not accept an <see
                cref="T:System.Text.Encoding" />
+
+              
 
               
 
@@ -1943,11 +2177,15 @@
 
             
 
+            
+
              instances that output text content; otherwise, this setting is ignored.</para
           >
           <para
             >The elements are indented as long as the element does not contain mixed content. Once the <see
              cref="M:System.Xml.XmlWriter.WriteString(System.String)" />
+
+            
 
             
 
@@ -1960,8 +2198,12 @@
 
             
 
+            
+
              method is called to write out a mixed element content, the <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -2000,8 +2242,12 @@
 
             
 
+            
+
              instances that output text content; otherwise, this setting is ignored. The <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -2015,6 +2261,8 @@
           <para
             >Gets or sets the character string to use when indenting. This setting is used when the <see
              cref="P:System.Xml.XmlWriterSettings.Indent" />
+
+            
 
             
 
@@ -2054,6 +2302,8 @@
 
             
 
+            
+
              should remove duplicate namespace declarations when writing XML content. The default behavior is for the writer to output all namespace declarations that are present in the writer's namespace resolver.</para
           >
         </summary>
@@ -2083,8 +2333,12 @@
 
             
 
+            
+
              instances that output text content; otherwise, this setting is ignored. The <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -2129,6 +2383,8 @@
 
             
 
+            
+
              values is described below:</para
           >
           <list type="bullet">
@@ -2141,8 +2397,12 @@
 
                 
 
+                
+
                  setting tells the <see
                  cref="T:System.Xml.XmlWriter" />
+
+                
 
                 
 
@@ -2155,6 +2415,8 @@
 
                 
 
+                
+
                  with character entities. This is useful in round-trip scenarios where the output is read by a normalizing <see
                  cref="T:System.Xml.XmlReader" />
 
@@ -2162,8 +2424,12 @@
 
                 
 
+                
+
                 . Additional normalization rules apply for attribute values when round tripping since \t, \n and \r are replaced with a space in attribute values when normalized in an <see
                  cref="T:System.Xml.XmlReader" />
+
+                
 
                 
 
@@ -2181,8 +2447,12 @@
 
                 
 
+                
+
                  setting tells the <see
                  cref="T:System.Xml.XmlWriter" />
+
+                
 
                 
 
@@ -2200,8 +2470,12 @@
 
                 
 
+                
+
                  setting tells the <see
                  cref="T:System.Xml.XmlWriter" />
+
+                
 
                 
 
@@ -2214,8 +2488,12 @@
 
                 
 
+                
+
                  that does not do any normalization (for example, an <see
                  cref="T:System.Xml.XmlTextReader" />
+
+                
 
                 
 
@@ -2233,8 +2511,12 @@
 
             
 
+            
+
              method when supplied with the input value depending on the <see
              cref="P:System.Xml.XmlWriterSettings.NewLineHandling" />
+
+            
 
             
 
@@ -2397,8 +2679,12 @@
 
               
 
+              
+
                has the following behavior when writing content within a CDATA section, comment, or processing instruction. New lines are never replaced with their character entities, even when the <see
                cref="P:System.Xml.XmlWriterSettings.NewLineHandling" />
+
+              
 
               
 
@@ -2411,8 +2697,12 @@
 
               
 
+              
+
               . This is because character entities are not recognized in CDATA sections, comments or processing instructions. If the <see
                cref="P:System.Xml.XmlWriterSettings.NewLineHandling" />
+
+              
 
               
 
@@ -2425,8 +2715,12 @@
 
               
 
+              
+
                or <see
                cref="F:System.Xml.NewLineHandling.Replace" />
+
+              
 
               
 
@@ -2443,8 +2737,12 @@
 
             
 
+            
+
              returns for each white space input. For more information, see sections 2.11 and 3.3.3 of the W3C <see
              cref="http://www.w3.org/TR/REC-xml/">XML 1.0 Recommendation</see>
+
+            
 
             
 
@@ -2461,8 +2759,12 @@
 
               
 
+              
+
                object created by the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -2475,8 +2777,12 @@
 
               
 
+              
+
                object can also be a normalizing reader if it's <see
                cref="P:System.Xml.XmlTextReader.Normalization" />
+
+              
 
               
 
@@ -2571,6 +2877,8 @@
 
             
 
+            
+
              instances that output text content; otherwise, this setting is ignored.</para
           >
         </remarks>
@@ -2604,11 +2912,15 @@
 
             
 
+            
+
              instances that output text content; otherwise, this setting is ignored.</para
           >
           <para
             >If <see
              cref="P:System.Xml.XmlWriterSettings.OmitXmlDeclaration" />
+
+            
 
             
 
@@ -2624,6 +2936,8 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Xml.ConformanceLevel.Document" />
 
@@ -2631,8 +2945,12 @@
 
             
 
+            
+
             , even if <see
              cref="P:System.Xml.XmlWriterSettings.OmitXmlDeclaration" />
+
+            
 
             
 
@@ -2648,6 +2966,8 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Xml.ConformanceLevel.Fragment" />
 
@@ -2655,8 +2975,12 @@
 
             
 
+            
+
             . You can call <see
              cref="M:System.Xml.XmlWriter.WriteProcessingInstruction(System.String,System.String)" />
+
+            
 
             
 
@@ -2705,6 +3029,8 @@
 
             
 
+            
+
              output.</para
           >
         </summary>
@@ -2732,6 +3058,8 @@
           <para
             >The following table shows the default property values for an instance of <see
              cref="T:System.Xml.XmlWriterSettings" />
+
+            
 
             
 
@@ -2794,6 +3122,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -2847,6 +3177,8 @@
               <description>
                 <para>
                   <see cref="F:System.Xml.NewLineHandling.Replace" />
+
+                  
 
                   
 
@@ -2920,8 +3252,12 @@
 
             
 
+            
+
              will add closing tags to all unclosed element tags when the <see
              cref="M:System.Xml.XmlWriter.Close" />
+
+            
 
             
 

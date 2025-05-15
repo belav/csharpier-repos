@@ -37,6 +37,8 @@
 
         
 
+        
+
         .</para
       >
     </summary>
@@ -78,8 +80,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Xml.XmlTextWriter.IndentChar" />
+
+            
 
             
 

@@ -23,6 +23,8 @@
 
         
 
+        
+
          combines button and drop-down button functionality.</para
       >
       <para
@@ -33,8 +35,12 @@
 
         
 
+        
+
          property to synchronize the <see
          cref="E:System.Windows.Forms.Control.Click" />
+
+        
 
         
 
@@ -48,6 +54,8 @@
       <para
         >Represents a combination of a standard button on the left and a drop-down button on the right, or the other way around if the value of <see
          cref="T:System.Windows.Forms.RightToLeft" />
+
+        
 
         
 
@@ -70,6 +78,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ToolStripSplitButton" />
+
+            
 
             
 
@@ -105,11 +115,15 @@
 
             
 
+            
+
              class with the specified image. </para
           >
         </summary>
         <param name="image">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -122,8 +136,12 @@
 
           
 
+          
+
            to be displayed on the <see
            cref="T:System.Windows.Forms.ToolStripSplitButton" />
+
+          
 
           
 
@@ -155,6 +173,8 @@
 
             
 
+            
+
              class with the specified text. </para
           >
         </summary>
@@ -165,8 +185,12 @@
 
           
 
+          
+
           The text to be displayed on the <see
            cref="T:System.Windows.Forms.ToolStripSplitButton" />
+
+          
 
           
 
@@ -202,6 +226,8 @@
 
             
 
+            
+
              class with the specified text and image.</para
           >
         </summary>
@@ -212,8 +238,12 @@
 
           
 
+          
+
           The text to be displayed on the <see
            cref="T:System.Windows.Forms.ToolStripSplitButton" />
+
+          
 
           
 
@@ -228,6 +258,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
 
@@ -235,8 +267,12 @@
 
           
 
+          
+
            to be displayed on the <see
            cref="T:System.Windows.Forms.ToolStripSplitButton" />
+
+          
 
           
 
@@ -273,8 +309,12 @@
 
             
 
+            
+
              class with the specified display text, image, and <see
              cref="E:System.Windows.Forms.Control.Click" />
+
+            
 
             
 
@@ -290,8 +330,12 @@
 
           
 
+          
+
           The text to be displayed on the <see
            cref="T:System.Windows.Forms.ToolStripSplitButton" />
+
+          
 
           
 
@@ -306,6 +350,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
 
@@ -313,8 +359,12 @@
 
           
 
+          
+
            to be displayed on the <see
            cref="T:System.Windows.Forms.ToolStripSplitButton" />
+
+          
 
           
 
@@ -329,6 +379,8 @@
 
           
 
+          
+
           Raises the <see
            cref="E:System.Windows.Forms.Control.Click" />
 
@@ -336,8 +388,12 @@
 
           
 
+          
+
            event when the user clicks the <see
            cref="T:System.Windows.Forms.ToolStripSplitButton" />
+
+          
 
           
 
@@ -380,8 +436,12 @@
 
             
 
+            
+
              class with the specified text, image, and <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -397,8 +457,12 @@
 
           
 
+          
+
           The text to be displayed on the <see
            cref="T:System.Windows.Forms.ToolStripSplitButton" />
+
+          
 
           
 
@@ -413,6 +477,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
 
@@ -420,8 +486,12 @@
 
           
 
+          
+
            to be displayed on the <see
            cref="T:System.Windows.Forms.ToolStripSplitButton" />
+
+          
 
           
 
@@ -436,8 +506,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -475,8 +549,12 @@
 
             
 
+            
+
              class with the specified display text, image, <see
              cref="E:System.Windows.Forms.Control.Click" />
+
+            
 
             
 
@@ -492,8 +570,12 @@
 
           
 
+          
+
           The text to be displayed on the <see
            cref="T:System.Windows.Forms.ToolStripSplitButton" />
+
+          
 
           
 
@@ -508,6 +590,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
 
@@ -515,8 +599,12 @@
 
           
 
+          
+
            to be displayed on the <see
            cref="T:System.Windows.Forms.ToolStripSplitButton" />
+
+          
 
           
 
@@ -531,6 +619,8 @@
 
           
 
+          
+
           Raises the <see
            cref="E:System.Windows.Forms.Control.Click" />
 
@@ -538,8 +628,12 @@
 
           
 
+          
+
            event when the user clicks the <see
            cref="T:System.Windows.Forms.ToolStripSplitButton" />
+
+          
 
           
 
@@ -554,8 +648,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Windows.Forms.ToolStripSplitButton" />
+
+          
 
           
 
@@ -587,8 +685,12 @@
 
             
 
+            
+
              property to false to display custom text on a <see
              cref="T:System.Windows.Forms.ToolStripSplitButton" />
+
+            
 
             
 
@@ -607,8 +709,12 @@
 
             
 
+            
+
              text is displayed on the <see
              cref="T:System.Windows.Forms.ToolStripSplitButton" />
+
+            
 
             
 
@@ -650,6 +756,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -683,6 +791,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -691,6 +801,8 @@
           <para
             >Occurs when the standard button portion of a <see
              cref="T:System.Windows.Forms.ToolStripSplitButton" />
+
+            
 
             
 
@@ -724,6 +836,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -732,6 +846,8 @@
           <para
             >Occurs when the standard button portion of a <see
              cref="T:System.Windows.Forms.ToolStripSplitButton" />
+
+            
 
             
 
@@ -760,6 +876,8 @@
           <para
             >Gets a value indicating whether the button portion of the <see
              cref="T:System.Windows.Forms.ToolStripSplitButton" />
+
+            
 
             
 
@@ -798,8 +916,12 @@
 
             
 
+            
+
              is selected or the <see
              cref="P:System.Windows.Forms.ToolStripSplitButton.DropDownButtonPressed" />
+
+            
 
             
 
@@ -843,6 +965,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -851,6 +975,8 @@
           <para
             >A new accessibility object for the <see
              cref="T:System.Windows.Forms.ToolStripSplitButton" />
+
+            
 
             
 
@@ -901,6 +1027,8 @@
 
             
 
+            
+
              that is defined as the default. </para
           >
         </summary>
@@ -941,8 +1069,12 @@
 
             
 
+            
+
              has a <see
              cref="P:System.Windows.Forms.ToolStripSplitButton.DefaultItem" />
+
+            
 
             
 
@@ -958,8 +1090,12 @@
 
             
 
+            
+
              property to synchronize the <see
              cref="E:System.Windows.Forms.Control.Click" />
+
+            
 
             
 
@@ -973,6 +1109,8 @@
           <para
             >Gets or sets the portion of the <see
              cref="T:System.Windows.Forms.ToolStripSplitButton" />
+
+            
 
             
 
@@ -1003,6 +1141,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1011,6 +1151,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.ToolStripSplitButton.DefaultItem" />
+
+            
 
             
 
@@ -1046,6 +1188,8 @@
 
             
 
+            
+
              are hidden after they are clicked.</para
           >
         </summary>
@@ -1069,6 +1213,8 @@
           <para
             >Gets the size and location, in screen coordinates, of the drop-down button portion of a <see
              cref="T:System.Windows.Forms.ToolStripSplitButton" />
+
+            
 
             
 
@@ -1107,6 +1253,8 @@
 
             
 
+            
+
              is in the pressed state. </para
           >
         </summary>
@@ -1135,6 +1283,8 @@
           <para
             >Gets a value indicating whether the drop-down button portion of a <see
              cref="T:System.Windows.Forms.ToolStripSplitButton" />
+
+            
 
             
 
@@ -1173,6 +1323,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1206,6 +1358,8 @@
 
             
 
+            
+
              can be fitted.</para
           >
         </summary>
@@ -1219,11 +1373,15 @@
 
             
 
+            
+
             , representing the width and height of a rectangle.</para
           >
         </returns>
         <param name="constrainingSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1259,11 +1417,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripSplitButton.OnButtonClick(System.EventArgs)" />
+
+            
 
             
 
@@ -1282,6 +1444,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1292,8 +1456,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1332,11 +1500,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripSplitButton.OnButtonDoubleClick(System.EventArgs)" />
+
+            
 
             
 
@@ -1355,6 +1527,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1365,8 +1539,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1405,11 +1583,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripSplitButton.OnDefaultItemChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1428,6 +1610,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1438,8 +1622,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1478,11 +1666,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripSplitButton.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
+
+            
 
             
 
@@ -1501,6 +1693,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1511,8 +1705,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -1548,11 +1746,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripSplitButton.OnMouseLeave(System.EventArgs)" />
+
+            
 
             
 
@@ -1571,6 +1773,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1581,8 +1785,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1621,11 +1829,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripSplitButton.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
+
+            
 
             
 
@@ -1644,6 +1856,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1654,8 +1868,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -1718,11 +1936,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripSplitButton.OnRightToLeftChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1741,6 +1963,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1751,8 +1975,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1782,8 +2010,12 @@
 
             
 
+            
+
              property is true, calls the <see
              cref="M:System.Windows.Forms.ToolStripSplitButton.OnButtonClick(System.EventArgs)" />
+
+            
 
             
 
@@ -1823,8 +2055,12 @@
 
             
 
+            
+
              event. However, if the <see
              cref="T:System.Windows.Forms.ToolStripSplitButton" />
+
+            
 
             
 
@@ -1835,6 +2071,8 @@
           <para
             >This method is called only if the <see
              cref="M:System.Windows.Forms.Control.IsInputKey(System.Windows.Forms.Keys)" />
+
+            
 
             
 
@@ -1858,8 +2096,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.Keys" />
+
+          
 
           
 
@@ -1896,6 +2138,8 @@
         </returns>
         <param name="charCode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1954,6 +2198,8 @@
 
             
 
+            
+
              property to do custom painting.</para
           >
         </remarks>
@@ -1962,6 +2208,8 @@
           <para
             >Gets the boundaries of the separator between the standard and drop-down button portions of a <see
              cref="T:System.Windows.Forms.ToolStripSplitButton" />
+
+            
 
             
 

@@ -16,8 +16,12 @@
 
         
 
+        
+
          namespace contains classes used to create and transmit messages. The remoting infrastructure uses messages to communicate with remote objects. Messages are used to transmit remote method calls, to activate remote objects, and to communicate information. A message object carries a set of named properties, including action identifiers, envoy information, and parameters. Some of the most important classes of the <see
          cref="N:System.Runtime.Remoting.Messaging" />
+
+        
 
         
 
@@ -30,6 +34,8 @@
 
         
 
+        
+
          class, the <see
          cref="T:System.Runtime.Remoting.Messaging.RemotingSurrogateSelector" />
 
@@ -37,8 +43,12 @@
 
         
 
+        
+
          class, and the <see
          cref="T:System.Runtime.Remoting.Messaging.ReturnMessage" />
+
+        
 
         
 
@@ -57,8 +67,12 @@
 
         
 
+        
+
          class stores and returns the results of an asynchronous method call. <see
          cref="T:System.Runtime.Remoting.Messaging.AsyncResult" />
+
+        
 
         
 
@@ -74,6 +88,8 @@
 
         
 
+        
+
          class can be used to control serialization of objects that extend <see
          cref="T:System.MarshalByRefObject" />
 
@@ -81,8 +97,12 @@
 
         
 
+        
+
         . A <see
          cref="T:System.Runtime.Remoting.Messaging.RemotingSurrogateSelector" />
+
+        
 
         
 
@@ -98,8 +118,12 @@
 
         
 
+        
+
          class holds information returned after a remote method call. A <see
          cref="T:System.Runtime.Remoting.Messaging.ReturnMessage" />
+
+        
 
         
 

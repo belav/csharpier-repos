@@ -31,6 +31,8 @@
 
         
 
+        
+
          binding.</para
       >
     </summary>
@@ -54,6 +56,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Configuration.MessageSecurityOverMsmqElement" />
+
+            
 
             
 
@@ -94,6 +98,8 @@
           <attribution license="cc4" from="Microsoft" modified="false" />
           <para>
             <see cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+
+            
 
             
 
@@ -150,6 +156,8 @@
 
                 
 
+                
+
                  class. </para
               >
               <block subset="none" type="note">
@@ -165,8 +173,12 @@
 
                 
 
+                
+
                  class or ClientCredentials behavior. The service credential in this case needs to be specified using the <see
                  cref="T:System.ServiceModel.Description.ClientCredentials" />
+
+                
 
                 
 
@@ -186,6 +198,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.ServiceModel.MessageCredentialType" />
+
+            
 
             
 

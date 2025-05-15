@@ -21,8 +21,12 @@
 
         
 
+        
+
          interface to control the conversion from an untyped object and array of parameters to a strongly-typed method call on that object. It has a synchronous <see
          cref="M:System.ServiceModel.Dispatcher.IOperationInvoker.Invoke(System.Object,System.Object[],System.Object[]@)" />
+
+        
 
         
 
@@ -35,6 +39,8 @@
 
         
 
+        
+
          and <see
          cref="M:System.ServiceModel.Dispatcher.IOperationInvoker.InvokeEnd(System.Object,System.Object[]@,System.IAsyncResult)" />
 
@@ -42,8 +48,12 @@
 
         
 
+        
+
          variant.  The <see
          cref="P:System.ServiceModel.Dispatcher.IOperationInvoker.IsSynchronous" />
+
+        
 
         
 
@@ -83,6 +93,8 @@
 
             
 
+            
+
              is called.</para
           >
         </remarks>
@@ -91,6 +103,8 @@
           <para
             >Returns an <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -169,6 +183,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -177,6 +193,8 @@
           <para
             >A <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -192,10 +210,14 @@
 
           
 
+          
+
           The object to be invoked.</param
         >
         <param name="inputs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -210,10 +232,14 @@
 
           
 
+          
+
           The asynchronous callback object.</param
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -275,6 +301,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -288,8 +316,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.ServiceModel.Dispatcher.IOperationInvoker.InvokeBegin(System.Object,System.Object[],System.AsyncCallback,System.Object)" />
+
+            
 
             
 

@@ -20,6 +20,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -37,11 +39,15 @@
 
         
 
+        
+
          class is the main class used for XML signing and verification (XMLDSIG) in the .NET Framework.  XMLDSIG is a standards-based, interoperable way to sign and verify all or part of an XML document or other data that is addressable from a Uniform Resource Identifier (URI). The .NET Framework XMLDSIG classes implement the World Wide Web Consortium (W3C) specification for XML signing and verification located at http://www.w3.org/TR/xmldsig-core/.</para
       >
       <para
         >Use the <see
          cref="T:System.Security.Cryptography.Xml.SignedXml" />
+
+        
 
         
 
@@ -53,6 +59,8 @@
       <para
         >The <see
          cref="T:System.Security.Cryptography.Xml.SignedXml" />
+
+        
 
         
 
@@ -144,6 +152,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -177,11 +187,15 @@
 
             
 
+            
+
              class from the specified XML document.</para
           >
         </summary>
         <param name="document">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -194,8 +208,12 @@
 
           
 
+          
+
            object to use to initialize the new instance of <see
            cref="T:System.Security.Cryptography.Xml.SignedXml" />
+
+          
 
           
 
@@ -233,8 +251,12 @@
 
             
 
+            
+
              class from the specified <see
              cref="T:System.Xml.XmlElement" />
+
+            
 
             
 
@@ -250,6 +272,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlElement" />
 
@@ -257,8 +281,12 @@
 
           
 
+          
+
            object to use to initialize the new instance of <see
            cref="T:System.Security.Cryptography.Xml.SignedXml" />
+
+          
 
           
 
@@ -300,11 +328,15 @@
 
             
 
+            
+
              method adds an &lt;Object&gt; element that represents an object to be signed to the &lt;Signature&gt; element of an XML digital signature. </para
           >
           <para
             >The <see
              cref="M:System.Security.Cryptography.Xml.SignedXml.AddObject(System.Security.Cryptography.Xml.DataObject)" />
+
+            
 
             
 
@@ -317,8 +349,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Security.Cryptography.Xml.Signature" />
+
+            
 
             
 
@@ -331,8 +367,12 @@
 
             
 
+            
+
              object.  You can also add a <see
              cref="T:System.Security.Cryptography.Xml.DataObject" />
+
+            
 
             
 
@@ -345,8 +385,12 @@
 
             
 
+            
+
              method from the <see
              cref="P:System.Security.Cryptography.Xml.SignedXml.Signature" />
+
+            
 
             
 
@@ -366,6 +410,8 @@
 
             
 
+            
+
              object to the list of objects to be signed.</para
           >
         </summary>
@@ -376,8 +422,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.Xml.DataObject" />
+
+          
 
           
 
@@ -419,8 +469,12 @@
 
             
 
+            
+
              method adds a &lt;Reference&gt; element to the <see
              cref="T:System.Security.Cryptography.Xml.SignedXml" />
+
+            
 
             
 
@@ -436,8 +490,12 @@
 
             
 
+            
+
              method internally calls the <see
              cref="M:System.Security.Cryptography.Xml.SignedInfo.AddReference(System.Security.Cryptography.Xml.Reference)" />
+
+            
 
             
 
@@ -450,8 +508,12 @@
 
             
 
+            
+
              object encapsulated by the <see
              cref="T:System.Security.Cryptography.Xml.SignedXml" />
+
+            
 
             
 
@@ -464,6 +526,8 @@
 
             
 
+            
+
              object by directly calling the <see
              cref="M:System.Security.Cryptography.Xml.SignedInfo.AddReference(System.Security.Cryptography.Xml.Reference)" />
 
@@ -471,8 +535,12 @@
 
             
 
+            
+
              method from the <see
              cref="P:System.Security.Cryptography.Xml.SignedXml.SignedInfo" />
+
+            
 
             
 
@@ -492,8 +560,12 @@
 
             
 
+            
+
              object to the <see
              cref="T:System.Security.Cryptography.Xml.SignedXml" />
+
+            
 
             
 
@@ -509,8 +581,12 @@
 
           
 
+          
+
           The  <see
            cref="T:System.Security.Cryptography.Xml.Reference" />
+
+          
 
           
 
@@ -548,8 +624,12 @@
 
             
 
+            
+
              method will search the "AddressBook" store for certificates suitable for the verification. For example, if the certificate is referenced by a Subject Key Identifier (SKI), the <see
              cref="M:System.Security.Cryptography.Xml.SignedXml.CheckSignature(System.Security.Cryptography.X509Certificates.X509Certificate2,System.Boolean)" />
+
+            
 
             
 
@@ -568,6 +648,8 @@
 
             
 
+            
+
              property verifies using the public key in the signature.</para
           >
         </summary>
@@ -576,6 +658,8 @@
           <para
             >true if the <see
              cref="P:System.Security.Cryptography.Xml.SignedXml.Signature" />
+
+            
 
             
 
@@ -619,6 +703,8 @@
 
             
 
+            
+
              property verifies for the specified key.</para
           >
         </summary>
@@ -627,6 +713,8 @@
           <para
             >true if the <see
              cref="P:System.Security.Cryptography.Xml.SignedXml.Signature" />
+
+            
 
             
 
@@ -642,6 +730,8 @@
 
           
 
+          
+
           The implementation of the <see
            cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
 
@@ -649,8 +739,12 @@
 
           
 
+          
+
            property that holds the key to be used to verify the <see
            cref="P:System.Security.Cryptography.Xml.SignedXml.Signature" />
+
+          
 
           
 
@@ -686,6 +780,8 @@
           <para
             >Only <see
              cref="T:System.Security.Cryptography.HMACSHA1" />
+
+            
 
             
 
@@ -730,6 +826,8 @@ else {
 
             
 
+            
+
              property verifies for the specified message authentication code (MAC) algorithm.</para
           >
         </summary>
@@ -738,6 +836,8 @@ else {
           <para
             >true if the <see
              cref="P:System.Security.Cryptography.Xml.SignedXml.Signature" />
+
+            
 
             
 
@@ -753,6 +853,8 @@ else {
 
           
 
+          
+
           The implementation of <see
            cref="T:System.Security.Cryptography.KeyedHashAlgorithm" />
 
@@ -760,8 +862,12 @@ else {
 
           
 
+          
+
            that holds the MAC to be used to verify the <see
            cref="P:System.Security.Cryptography.Xml.SignedXml.Signature" />
+
+          
 
           
 
@@ -812,8 +918,12 @@ else {
 
             
 
+            
+
              method will search the "AddressBook" store for certificates suitable for the verification. For example, if the certificate is referenced by a Subject Key Identifier (SKI), the <see
              cref="M:System.Security.Cryptography.Xml.SignedXml.CheckSignature(System.Security.Cryptography.X509Certificates.X509Certificate2,System.Boolean)" />
+
+            
 
             
 
@@ -832,8 +942,12 @@ else {
 
             
 
+            
+
              property verifies for the specified <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+            
 
             
 
@@ -855,8 +969,12 @@ else {
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2" />
+
+          
 
           
 
@@ -869,10 +987,14 @@ else {
 
           
 
+          
+
            property.</param
         >
         <param name="verifySignatureOnly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -916,6 +1038,8 @@ else {
 
           
 
+          
+
            instance that verified the XML signature or null if the signature couldn't be verified using the key available in the XML document.</param
         >
         <summary>Check the document signature using the keys specified under the &lt;KeyInfo&gt; and return the public key that verified the signature.</summary>
@@ -950,11 +1074,15 @@ else {
 
             
 
+            
+
              method creates an XML digital signature and constructs many of the XML elements needed.    </para
           >
           <para
             >You must set the data to be signed and the <see
              cref="P:System.Security.Cryptography.Xml.SignedXml.SigningKey" />
+
+            
 
             
 
@@ -1001,6 +1129,8 @@ else {
 
             
 
+            
+
              method creates an XML digital signature using the specified MAC algorithm and constructs many of the XML elements needed.    </para
           >
           <para>You must set the data to be signed before calling this method.</para>
@@ -1016,6 +1146,8 @@ else {
 
           
 
+          
+
           A <see
            cref="T:System.Security.Cryptography.KeyedHashAlgorithm" />
 
@@ -1023,8 +1155,12 @@ else {
 
           
 
+          
+
            object that holds the MAC to be used to compute the value of the <see
            cref="P:System.Security.Cryptography.Xml.SignedXml.Signature" />
+
+          
 
           
 
@@ -1069,6 +1205,8 @@ else {
 
             
 
+            
+
              object that defines the XML encryption processing rules.</para
           >
         </summary>
@@ -1108,8 +1246,12 @@ else {
 
             
 
+            
+
              object with the specified ID from the specified <see
              cref="T:System.Xml.XmlDocument" />
+
+            
 
             
 
@@ -1128,8 +1270,12 @@ else {
 
             
 
+            
+
              object with the specified ID from the specified <see
              cref="T:System.Xml.XmlDocument" />
+
+            
 
             
 
@@ -1145,6 +1291,8 @@ else {
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDocument" />
 
@@ -1152,8 +1300,12 @@ else {
 
           
 
+          
+
            object to retrieve the <see
            cref="T:System.Xml.XmlElement" />
+
+          
 
           
 
@@ -1168,6 +1320,8 @@ else {
 
           
 
+          
+
           The ID of the <see
            cref="T:System.Xml.XmlElement" />
 
@@ -1175,8 +1329,12 @@ else {
 
           
 
+          
+
            object to retrieve from the <see
            cref="T:System.Xml.XmlDocument" />
+
+          
 
           
 
@@ -1216,8 +1374,12 @@ else {
 
             
 
+            
+
              method returns an <see
              cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
+
+            
 
             
 
@@ -1233,8 +1395,12 @@ else {
 
             
 
+            
+
              or an <see
              cref="T:System.Security.Cryptography.RSA" />
+
+            
 
             
 
@@ -1252,6 +1418,8 @@ else {
           <para
             >An <see
              cref="T:System.Security.Cryptography.AsymmetricAlgorithm" />
+
+            
 
             
 
@@ -1290,6 +1458,8 @@ else {
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1298,6 +1468,8 @@ else {
           <para
             >The XML representation of the <see
              cref="T:System.Security.Cryptography.Xml.Signature" />
+
+            
 
             
 
@@ -1342,8 +1514,12 @@ else {
 
             
 
+            
+
              property represents the &lt;KeyInfo&gt; element of an XML digital signature using a <see
              cref="T:System.Security.Cryptography.Xml.KeyInfo" />
+
+            
 
             
 
@@ -1354,6 +1530,8 @@ else {
           <para
             >Use the <see
              cref="P:System.Security.Cryptography.Xml.SignedXml.KeyInfo" />
+
+            
 
             
 
@@ -1373,8 +1551,12 @@ else {
 
             
 
+            
+
              object of the current <see
              cref="T:System.Security.Cryptography.Xml.SignedXml" />
+
+            
 
             
 
@@ -1415,6 +1597,8 @@ else {
 
             
 
+            
+
              state from an XML element.</para
           >
         </summary>
@@ -1425,8 +1609,12 @@ else {
 
           
 
+          
+
           The XML element to load the <see
            cref="T:System.Security.Cryptography.Xml.SignedXml" />
+
+          
 
           
 
@@ -1467,8 +1655,12 @@ else {
 
             
 
+            
+
              object of the current <see
              cref="T:System.Security.Cryptography.Xml.SignedXml" />
+
+            
 
             
 
@@ -1499,6 +1691,8 @@ else {
           <para
             >Represents the name of the installed key to be used for signing the <see
              cref="T:System.Security.Cryptography.Xml.SignedXml" />
+
+            
 
             
 
@@ -1544,6 +1738,8 @@ else {
 
             
 
+            
+
              class resolves external XML resources named by a Uniform Resource Identifier (URI). If you do not trust the source of the XML file, you might not want to allow the XML file to access computer resources named by the URI. You can use the <see
              cref="P:System.Security.Cryptography.Xml.SignedXml.Resolver" />
 
@@ -1551,8 +1747,12 @@ else {
 
             
 
+            
+
              property to control the level of access that XML files have to computer resources by specifying different <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -1566,6 +1766,8 @@ else {
           <para
             >Sets the current <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -1610,8 +1812,12 @@ else {
 
             
 
+            
+
              property represents the &lt;Signature&gt; element of an XML digital signature using a <see
              cref="T:System.Security.Cryptography.Xml.Signature" />
+
+            
 
             
 
@@ -1627,6 +1833,8 @@ else {
 
             
 
+            
+
              property to retrieve the <see
              cref="T:System.Security.Cryptography.Xml.Signature" />
 
@@ -1634,8 +1842,12 @@ else {
 
             
 
+            
+
              object used by the <see
              cref="T:System.Security.Cryptography.Xml.SignedXml" />
+
+            
 
             
 
@@ -1655,8 +1867,12 @@ else {
 
             
 
+            
+
              object of the current <see
              cref="T:System.Security.Cryptography.Xml.SignedXml" />
+
+            
 
             
 
@@ -1696,6 +1912,8 @@ else {
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1729,11 +1947,15 @@ else {
 
             
 
+            
+
              property represents the &lt;SignatureMethod&gt; element of an XML digital signature using a Uniform Resource Identifier (URI) string contained within the property. The &lt;SignatureMethod&gt; element is a subelement of the &lt;SignedInfo&gt; element.</para
           >
           <para
             >Use the <see
              cref="P:System.Security.Cryptography.Xml.SignedXml.SignatureMethod" />
+
+            
 
             
 
@@ -1746,8 +1968,12 @@ else {
 
             
 
+            
+
              object. This property is read only. For more information about programmatically specifying a URI for the &lt;SignatureMethod&gt; element, see the <see
              cref="P:System.Security.Cryptography.Xml.SignedInfo.SignatureMethod" />
+
+            
 
             
 
@@ -1762,6 +1988,8 @@ else {
           <para
             >Gets the signature method of the current <see
              cref="T:System.Security.Cryptography.Xml.SignedXml" />
+
+            
 
             
 
@@ -1800,6 +2028,8 @@ else {
 
             
 
+            
+
              property represents the &lt;SignatureValue&gt; element of an XML digital signature using an array of bytes contained within the property.  The &lt;SignatureValue&gt; element is a subelement of the &lt;Signature&gt; element.</para
           >
           <para
@@ -1810,8 +2040,12 @@ else {
 
             
 
+            
+
              property to retrieve the value of the XML digital signature.  This property is automatically populated when you make a successful call to the <see
              cref="Overload:System.Security.Cryptography.Xml.SignedXml.ComputeSignature" />
+
+            
 
             
 
@@ -1826,6 +2060,8 @@ else {
           <para
             >Gets the signature value of the current <see
              cref="T:System.Security.Cryptography.Xml.SignedXml" />
+
+            
 
             
 
@@ -1870,11 +2106,15 @@ else {
 
             
 
+            
+
              property represents the &lt;SignedInfo&gt; element of an XML digital signature using an array of bytes contained within the property.  The &lt;SignedInfo&gt; element is a subelement of the &lt;Signature&gt; element.</para
           >
           <para
             >Use the <see
              cref="P:System.Security.Cryptography.Xml.SignedXml.SignedInfo" />
+
+            
 
             
 
@@ -1887,8 +2127,12 @@ else {
 
             
 
+            
+
              object that is used by the <see
              cref="T:System.Security.Cryptography.Xml.SignedXml" />
+
+            
 
             
 
@@ -1908,8 +2152,12 @@ else {
 
             
 
+            
+
              object of the current <see
              cref="T:System.Security.Cryptography.Xml.SignedXml" />
+
+            
 
             
 
@@ -1954,6 +2202,8 @@ else {
 
             
 
+            
+
              property to specify the asymmetric key you want to use to create an XML digital signature.</para
           >
         </remarks>
@@ -1962,6 +2212,8 @@ else {
           <para
             >Gets or sets the asymmetric algorithm key used for signing a <see
              cref="T:System.Security.Cryptography.Xml.SignedXml" />
+
+            
 
             
 
@@ -2001,6 +2253,8 @@ else {
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -2026,6 +2280,8 @@ else {
           <para
             >The value of the <see
              cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDecryptionTransformUrl" />
+
+            
 
             
 
@@ -2067,6 +2323,8 @@ else {
 
             
 
+            
+
              field is "http://www.w3.org/2000/09/xmldsig#base64".</para
           >
           <para>Use this field to conveniently supply a value to one of the URI attributes of an element used for XMLDSIG.</para>
@@ -2078,8 +2336,12 @@ else {
 
             
 
+            
+
              class implements the transform described by the <see
              cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigBase64TransformUrl" />
+
+            
 
             
 
@@ -2120,12 +2382,16 @@ else {
 
             
 
+            
+
              field is "http://www.w3.org/TR/2001/REC-xml-c14n-20010315".</para
           >
           <para>Use this field to conveniently supply a value to one of the URI attributes of an element used for XMLDSIG.</para>
           <para
             >The <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigC14NTransform" />
+
+            
 
             
 
@@ -2138,12 +2404,16 @@ else {
 
             
 
+            
+
              field.</para
           >
           <para>For more information, see the World Wide Web Consortium (W3C) specification at http://www.w3.org/TR/2001/REC-xml-c14n-20010315.</para>
           <para
             >This field has the same value as the <see
              cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigCanonicalizationUrl" />
+
+            
 
             
 
@@ -2186,12 +2456,16 @@ else {
 
             
 
+            
+
              field is "http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments ".</para
           >
           <para>Use this field to conveniently supply a value to one of the URI attributes of an element used for XMLDSIG.</para>
           <para
             >The <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigC14NWithCommentsTransform" />
+
+            
 
             
 
@@ -2204,12 +2478,16 @@ else {
 
             
 
+            
+
              field. </para
           >
           <para>For more information, see the World Wide Web Consortium (W3C) specification at http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments.</para>
           <para
             >This field has the same value as the <see
              cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigCanonicalizationWithCommentsUrl" />
+
+            
 
             
 
@@ -2251,12 +2529,16 @@ else {
 
             
 
+            
+
              field is "http://www.w3.org/TR/2001/REC-xml-c14n-20010315". </para
           >
           <para>Use this field to conveniently supply a value to one of the URI attributes of an element used for XMLDSIG. </para>
           <para
             >The <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigC14NTransform" />
+
+            
 
             
 
@@ -2269,12 +2551,16 @@ else {
 
             
 
+            
+
              field. </para
           >
           <para>For more information, see the World Wide Web Consortium (W3C) specification at http://www.w3.org/TR/2001/REC-xml-c14n-20010315. </para>
           <para
             >This field has the same value as the <see
              cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigC14NTransformUrl" />
+
+            
 
             
 
@@ -2319,12 +2605,16 @@ else {
 
             
 
+            
+
              field is "http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments".</para
           >
           <para>Use this field to conveniently supply a value to one of the URI attributes of an element used for XMLDSIG.  </para>
           <para
             >The <see
              cref="T:System.Security.Cryptography.Xml.XmlDsigC14NWithCommentsTransform" />
+
+            
 
             
 
@@ -2337,12 +2627,16 @@ else {
 
             
 
+            
+
              field.</para
           >
           <para>For more information, see the World Wide Web Consortium (W3C) specification at http://www.w3.org/TR/2001/REC-xml-c14n-20010315#WithComments.</para>
           <para
             >This field has the same value as the <see
              cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigC14NWithCommentsTransformUrl" />
+
+            
 
             
 
@@ -2381,6 +2675,8 @@ else {
 
             
 
+            
+
              field is "http://www.w3.org/2000/09/xmldsig#dsa-sha1".</para
           >
           <para>Use this field to conveniently supply a value to one of the URI attributes of an element used for XMLDSIG.  </para>
@@ -2391,6 +2687,8 @@ else {
           <para
             >Represents the Uniform Resource Identifier (URI) for the standard <see
              cref="T:System.Security.Cryptography.DSA" />
+
+            
 
             
 
@@ -2429,6 +2727,8 @@ else {
 
             
 
+            
+
              field is "http://www.w3.org/2000/09/xmldsig#enveloped-signature".</para
           >
           <para>Use this field to conveniently supply a value to one of the URI attributes of an element used for XMLDSIG.</para>
@@ -2440,8 +2740,12 @@ else {
 
             
 
+            
+
              class implements the transform described by the <see
              cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigEnvelopedSignatureTransformUrl" />
+
+            
 
             
 
@@ -2482,6 +2786,8 @@ else {
 
             
 
+            
+
              field is "http://www.w3.org/2001/10/xml-exc-c14n#".</para
           >
           <para>Use this field to conveniently supply a value to one of the URI attributes of an element used for XMLDSIG.</para>
@@ -2493,8 +2799,12 @@ else {
 
             
 
+            
+
              class implements the transform described by the <see
              cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigExcC14NTransformUrl" />
+
+            
 
             
 
@@ -2538,6 +2848,8 @@ else {
 
             
 
+            
+
              field is "http://www.w3.org/2001/10/xml-exc-c14n#WithComments".</para
           >
           <para>Use this field to conveniently supply a value to one of the URI attributes of an element used for XMLDSIG.</para>
@@ -2549,8 +2861,12 @@ else {
 
             
 
+            
+
              class implements the transform described by the <see
              cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigExcC14NWithCommentsTransformUrl" />
+
+            
 
             
 
@@ -2593,6 +2909,8 @@ else {
 
             
 
+            
+
              field is "http://www.w3.org/2000/09/xmldsig#hmac-sha1".</para
           >
           <para>Use this field to conveniently supply a value to one of the URI attributes of an element used for XMLDSIG.</para>
@@ -2603,6 +2921,8 @@ else {
           <para
             >Represents the Uniform Resource Identifier (URI) for the standard <see
              cref="T:System.Security.Cryptography.HMACSHA1" />
+
+            
 
             
 
@@ -2638,6 +2958,8 @@ else {
           <para
             >The value of the <see
              cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigMinimalCanonicalizationUrl" />
+
+            
 
             
 
@@ -2681,6 +3003,8 @@ else {
 
             
 
+            
+
              field is "http://www.w3.org/2000/09/xmldsig#".</para
           >
           <para>Use this field to conveniently supply a value to one of the URI attributes of an element used for XMLDSIG.</para>
@@ -2719,6 +3043,8 @@ else {
 
             
 
+            
+
              field is "http://www.w3.org/2000/09/xmldsig#rsa-sha1".</para
           >
           <para>Use this field to conveniently supply a value to one of the URI attributes of an element used for XMLDSIG.</para>
@@ -2729,6 +3055,8 @@ else {
           <para
             >Represents the Uniform Resource Identifier (URI) for the standard <see
              cref="T:System.Security.Cryptography.RSA" />
+
+            
 
             
 
@@ -2766,6 +3094,8 @@ else {
 
             
 
+            
+
              field is "http://www.w3.org/2000/09/xmldsig#sha1".</para
           >
           <para>Use this field to conveniently supply a value to one of the URI attributes of an element used for XMLDSIG.</para>
@@ -2776,6 +3106,8 @@ else {
           <para
             >Represents the Uniform Resource Identifier (URI) for the standard <see
              cref="T:System.Security.Cryptography.SHA1" />
+
+            
 
             
 
@@ -2811,6 +3143,8 @@ else {
 
             
 
+            
+
              field is "http://www.w3.org/TR/1999/REC-xpath-19991116".</para
           >
           <para>Use this field to conveniently supply a value to one of the URI attributes of an element used for XMLDSIG.</para>
@@ -2822,8 +3156,12 @@ else {
 
             
 
+            
+
              class implements the transform described by the <see
              cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigXPathTransformUrl" />
+
+            
 
             
 
@@ -2864,6 +3202,8 @@ else {
 
             
 
+            
+
              field is "http://www.w3.org/TR/1999/REC-xslt-19991116".</para
           >
           <para>Use this field to conveniently supply a value to one of the URI attributes of an element used for XMLDSIG.</para>
@@ -2875,8 +3215,12 @@ else {
 
             
 
+            
+
              class implements the transform described by the <see
              cref="F:System.Security.Cryptography.Xml.SignedXml.XmlDsigXsltTransformUrl" />
+
+            
 
             
 
@@ -2917,6 +3261,8 @@ else {
 
             
 
+            
+
              field is "urn:mpeg:mpeg21:2003:01-REL-R-NS:licenseTransform"</para
           >
           <para>Use this field to conveniently supply a value to one of the URI attributes of an element used for XMLDSIG.</para>
@@ -2928,8 +3274,12 @@ else {
 
             
 
+            
+
              class implements the transform described by the <see
              cref="F:System.Security.Cryptography.Xml.SignedXml.XmlLicenseTransformUrl" />
+
+            
 
             
 

@@ -38,6 +38,8 @@
 
         
 
+        
+
         . This class specifies information to be read or used by humans within an annotation.</para
       >
     </summary>
@@ -64,6 +66,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Schema.XmlSchemaDocumentation" />
+
+            
 
             
 

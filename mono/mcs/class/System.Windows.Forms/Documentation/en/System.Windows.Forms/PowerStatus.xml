@@ -20,6 +20,8 @@
 
         
 
+        
+
          class represents information about the current AC line power status, battery charging status, and battery charge status.</para
       >
       <para
@@ -30,8 +32,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.SystemInformation" />
+
+        
 
         
 

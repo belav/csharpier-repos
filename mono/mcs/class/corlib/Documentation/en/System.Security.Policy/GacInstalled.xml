@@ -41,8 +41,12 @@
 
         
 
+        
+
          evidence produces a <see
          cref="T:System.Security.Permissions.GacIdentityPermission" />
+
+        
 
         
 
@@ -55,8 +59,12 @@
 
         
 
+        
+
          for <see
          cref="T:System.Security.Permissions.GacIdentityPermission" />
+
+        
 
         
 
@@ -69,8 +77,12 @@
 
         
 
+        
+
          that corresponds to the <see
          cref="T:System.Security.Policy.GacInstalled" />
+
+        
 
         
 
@@ -109,6 +121,8 @@
 
             
 
+            
+
              object has no properties.</para
           >
         </remarks>
@@ -117,6 +131,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Policy.GacInstalled" />
+
+            
 
             
 
@@ -159,6 +175,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -196,6 +214,8 @@
 
             
 
+            
+
              can be used to determine whether the calling code is in the global assembly cache.</para
           >
         </remarks>
@@ -214,8 +234,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Policy.Evidence" />
+
+          
 
           
 
@@ -253,8 +277,12 @@
 
             
 
+            
+
              objects have no properties to distinguish one from another, so all <see
              cref="T:System.Security.Policy.GacInstalled" />
+
+            
 
             
 
@@ -277,8 +305,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Security.Policy.GacInstalled" />
+
+            
 
             
 
@@ -289,6 +321,8 @@
         </returns>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -325,8 +359,12 @@
 
             
 
+            
+
              method returns 0 (zero) because <see
              cref="T:System.Security.Policy.GacInstalled" />
+
+            
 
             
 

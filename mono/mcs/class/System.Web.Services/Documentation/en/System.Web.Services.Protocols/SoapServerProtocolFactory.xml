@@ -28,6 +28,8 @@
 
         
 
+        
+
          class to process XML Web service requests.</para
       >
     </summary>
@@ -45,6 +47,8 @@
           <para
             >Creates a new <see
              cref="T:System.Web.Services.Protocols.SoapServerProtocolFactory" />
+
+            
 
             
 
@@ -83,8 +87,12 @@
 
             
 
+            
+
              that can be used to process the XML Web service request specified by <paramref
              name="request" />
+
+            
 
             
 
@@ -103,8 +111,12 @@
 
             
 
+            
+
              that can be used to process the XML Web service request specified by <paramref
              name="request" />
+
+            
 
             
 
@@ -120,8 +132,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.HttpRequest" />
+
+          
 
           
 

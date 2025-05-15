@@ -18,6 +18,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -38,8 +40,12 @@
 
       
 
+      
+
        and <see
        cref="T:Mono.Security.Cryptography.MD4" />
+
+      
 
       
 
@@ -78,6 +84,8 @@
         <param name="password"
           >a <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -162,6 +170,8 @@
 
           
 
+          
+
            containing the LAN Manager (LM) response.</value
         >
         <remarks>
@@ -186,6 +196,8 @@
         <value
           >a <see
            cref="T:System.Byte[]" />
+
+          
 
           
 

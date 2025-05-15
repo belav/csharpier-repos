@@ -38,6 +38,8 @@
 
           
 
+          
+
           .</para
         >
       </block>
@@ -84,10 +86,14 @@
 
           
 
+          
+
           The stream to output to. </param
         >
         <param name="cryptoKey">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -102,8 +108,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.Design.DesigntimeLicenseContext" />
+
+          
 
           
 

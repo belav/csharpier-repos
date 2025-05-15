@@ -26,8 +26,12 @@
 
         
 
+        
+
          event occurs when the user presses the mouse button while the pointer is over a control. The <see
          cref="E:System.Windows.Forms.Control.MouseUp" />
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
          event occurs when the user moves the mouse pointer over a control. A <see
          cref="T:System.Windows.Forms.MouseEventArgs" />
+
+        
 
         
 
@@ -57,8 +65,12 @@
 
         
 
+        
+
          event without a corresponding <see
          cref="E:System.Windows.Forms.Control.MouseUp" />
+
+        
 
         
 
@@ -74,8 +86,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Windows.Forms.AxHost" />
+
+        
 
         
 
@@ -88,6 +104,8 @@
 
         
 
+        
+
          classes.</para
       >
       <para
@@ -95,6 +113,8 @@
          type="text/html">
           <a href="D98FD58B-FA4F-4598-8378-ADDF4355A115">[&lt;topic://cpconEventsDelegates&gt;]</a>
         </format>
+
+        
 
         
 
@@ -113,6 +133,8 @@
 
         
 
+        
+
         , <see
          cref="E:System.Windows.Forms.Control.MouseDown" />
 
@@ -120,8 +142,12 @@
 
         
 
+        
+
         , and <see
          cref="E:System.Windows.Forms.Control.MouseMove" />
+
+        
 
         
 
@@ -157,6 +183,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -167,8 +195,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MouseButtons" />
+
+          
 
           
 
@@ -183,10 +215,14 @@
 
           
 
+          
+
           The number of times a mouse button was pressed. </param
         >
         <param name="x">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -201,10 +237,14 @@
 
           
 
+          
+
           The y-coordinate of a mouse click, in pixels. </param
         >
         <param name="delta">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -322,6 +362,8 @@
 
             
 
+            
+
              event is handled, the mouse coordinate values are relative to the coordinates of the control that raised the event. Some events related to drag-and-drop operations have associated mouse-coordinate values that are relative to the form origin or the screen origin.</para
           >
         </remarks>
@@ -348,6 +390,8 @@
           <para
             >The mouse coordinates vary based on the event being raised. For example, when the <see
              cref="E:System.Windows.Forms.Control.MouseMove" />
+
+            
 
             
 

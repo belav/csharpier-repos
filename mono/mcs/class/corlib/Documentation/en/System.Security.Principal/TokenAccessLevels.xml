@@ -232,6 +232,8 @@
 
             
 
+            
+
              enumeration.</para
           >
         </summary>
@@ -307,6 +309,8 @@
 
             
 
+            
+
              privilege for the token.</para
           >
         </summary>
@@ -338,8 +342,12 @@
 
             
 
+            
+
             , and <see
              cref="F:System.Security.Principal.TokenAccessLevels.AdjustDefault" />
+
+            
 
             
 

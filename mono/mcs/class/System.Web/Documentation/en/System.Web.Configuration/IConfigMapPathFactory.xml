@@ -16,10 +16,14 @@
 
         
 
+        
+
          is introduced in the .NET Framework version 3.5.  For more information, see <format
          type="text/html">
           <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
         </format>
+
+        
 
         
 
@@ -60,10 +64,14 @@
 
             
 
+            
+
              is introduced in the .NET Framework version 3.5.  For more information, see <format
              type="text/html">
               <a href="f75a72de-e2f2-4a7a-9574-3f278684ea90">The .NET Framework 3.5 Architecture</a>
             </format>
+
+            
 
             
 
@@ -86,6 +94,8 @@
 
             
 
+            
+
              object associated with the specified configuration-file path mapping.</para
           >
         </returns>
@@ -96,10 +106,14 @@
 
           
 
+          
+
           The configuration-file virtual path.</param
         >
         <param name="physicalPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

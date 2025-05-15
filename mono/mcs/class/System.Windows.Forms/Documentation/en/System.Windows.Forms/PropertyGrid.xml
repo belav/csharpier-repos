@@ -39,8 +39,12 @@
 
         
 
+        
+
          class on a parent control and set <see
          cref="P:System.Windows.Forms.PropertyGrid.SelectedObject" />
+
+        
 
         
 
@@ -56,11 +60,15 @@
 
         
 
+        
+
          is changed in code at run time, the new value is not displayed until an action is taken in the grid that causes the grid to refresh.</para
       >
       <para
         >The property tabs within the property grid appear as buttons on the toolbar at the top of the <see
          cref="T:System.Windows.Forms.PropertyGrid" />
+
+        
 
         
 
@@ -73,11 +81,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >You can use the <see
          cref="P:System.Windows.Forms.PropertyGrid.LargeButtons" />
+
+        
 
         
 
@@ -97,6 +109,8 @@
 
         
 
+        
+
          control is not initially presented in the toolbox in the development environment. You can add a property grid to the toolbox, which enables you to drag a <see
          cref="T:System.Windows.Forms.PropertyGrid" />
 
@@ -104,8 +118,12 @@
 
         
 
+        
+
          onto your form. You can also define an instance of <see
          cref="T:System.Windows.Forms.PropertyGrid" />
+
+        
 
         
 
@@ -121,8 +139,12 @@
 
         
 
+        
+
          will be displayed in the <see
          cref="T:System.Windows.Forms.PropertyGrid" />
+
+        
 
         
 
@@ -135,8 +157,12 @@
 
         
 
+        
+
          control by decorating it with the <see
          cref="T:System.ComponentModel.BrowsableAttribute" />
+
+        
 
         
 
@@ -149,6 +175,8 @@
 
         
 
+        
+
         . You can provide descriptive text for your property that appears at the bottom of the <see
          cref="T:System.Windows.Forms.PropertyGrid" />
 
@@ -156,8 +184,12 @@
 
         
 
+        
+
          control by using the <see
          cref="T:System.ComponentModel.DescriptionAttribute" />
+
+        
 
         
 
@@ -187,6 +219,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -195,6 +229,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.PropertyGrid" />
+
+            
 
             
 
@@ -320,6 +356,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -396,6 +434,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -433,6 +473,8 @@
 
             
 
+            
+
             . The default is an <see
              cref="T:System.ComponentModel.AttributeCollection" />
 
@@ -440,8 +482,12 @@
 
             
 
+            
+
              containing only <see
              cref="F:System.ComponentModel.BrowsableAttribute.Yes" />
+
+            
 
             
 
@@ -457,8 +503,12 @@
 
             
 
+            
+
              to be created with <see
              cref="F:System.ComponentModel.BrowsableAttribute.Yes" />
+
+            
 
             
 
@@ -498,6 +548,8 @@
           <para
             >This property is true if <see
              cref="P:System.Windows.Forms.PropertyGrid.CommandsVisibleIfAvailable" />
+
+            
 
             
 
@@ -545,6 +597,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -571,6 +625,8 @@
           <para
             >Collapses all the categories in the <see
              cref="T:System.Windows.Forms.PropertyGrid" />
+
+            
 
             
 
@@ -718,6 +774,8 @@
 
             
 
+            
+
              property is true.</para
           >
         </remarks>
@@ -853,6 +911,8 @@
 
             
 
+            
+
              for more information about creating property tabs.</para
           >
         </remarks>
@@ -861,6 +921,8 @@
           <para
             >When overridden in a derived class, enables the creation of a <see
              cref="T:System.Windows.Forms.Design.PropertyTab" />
+
+            
 
             
 
@@ -875,6 +937,8 @@
         </returns>
         <param name="tabType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -936,8 +1000,12 @@
 
             
 
+            
+
             . Override this property to specify a modified version of the <see
              cref="T:System.Windows.Forms.Design.PropertyTab" />
+
+            
 
             
 
@@ -976,8 +1044,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Windows.Forms.PropertyGrid" />
+
+            
 
             
 
@@ -990,8 +1062,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Windows.Forms.PropertyGrid" />
+
+            
 
             
 
@@ -1004,8 +1080,12 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Windows.Forms.PropertyGrid" />
+
+            
 
             
 
@@ -1022,8 +1102,12 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.Windows.Forms.PropertyGrid" />
+
+              
 
               
 
@@ -1036,8 +1120,12 @@
 
               
 
+              
+
                is using will not be freed until garbage collection calls the destructor of <see
                cref="T:System.Windows.Forms.PropertyGrid" />
+
+              
 
               
 
@@ -1057,11 +1145,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1094,6 +1186,8 @@
 
             
 
+            
+
              control paints its toolbar with flat buttons.</para
           >
         </summary>
@@ -1117,6 +1211,8 @@
           <para
             >Expands all the categories in the <see
              cref="T:System.Windows.Forms.PropertyGrid" />
+
+            
 
             
 
@@ -1188,6 +1284,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.PropertyGrid.ForeColor" />
+
+            
 
             
 
@@ -1319,6 +1417,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1361,6 +1461,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1398,6 +1500,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1500,6 +1604,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1508,6 +1614,8 @@
           <para
             >Occurs when the user clicks the <see
              cref="T:System.Windows.Forms.PropertyGrid" />
+
+            
 
             
 
@@ -1548,6 +1656,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1582,6 +1692,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1629,6 +1741,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1671,6 +1785,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1705,11 +1821,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.PropertyGrid.OnComComponentNameChanged(System.ComponentModel.Design.ComponentRenameEventArgs)" />
+
+            
 
             
 
@@ -1728,6 +1848,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1738,8 +1860,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.Design.ComponentRenameEventArgs" />
+
+          
 
           
 
@@ -1781,11 +1907,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.PropertyGrid.OnEnabledChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1804,6 +1934,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1814,8 +1946,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1866,11 +2002,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.PropertyGrid.OnGotFocus(System.EventArgs)" />
+
+            
 
             
 
@@ -1889,6 +2029,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1899,8 +2041,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1939,11 +2085,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.PropertyGrid.OnHandleCreated(System.EventArgs)" />
+
+            
 
             
 
@@ -1962,6 +2112,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1972,8 +2124,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2034,11 +2190,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.PropertyGrid.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
+
+            
 
             
 
@@ -2057,6 +2217,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2067,8 +2229,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -2107,11 +2273,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.PropertyGrid.OnMouseMove(System.Windows.Forms.MouseEventArgs)" />
+
+            
 
             
 
@@ -2130,6 +2300,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2140,8 +2312,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -2180,11 +2356,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.PropertyGrid.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
+
+            
 
             
 
@@ -2203,6 +2383,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2213,8 +2395,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -2254,11 +2440,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.PropertyGrid.OnNotifyPropertyValueUIItemsChanged(System.Object,System.EventArgs)" />
+
+            
 
             
 
@@ -2277,11 +2467,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="sender">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2296,8 +2490,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2336,11 +2534,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.PropertyGrid.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+
+            
 
             
 
@@ -2359,6 +2561,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2369,8 +2573,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.PaintEventArgs" />
+
+          
 
           
 
@@ -2412,11 +2620,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.PropertyGrid.OnPropertySortChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -2435,6 +2647,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2445,8 +2659,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2481,11 +2699,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.PropertyGrid.OnPropertyTabChanged(System.Windows.Forms.PropertyTabChangedEventArgs)" />
+
+            
 
             
 
@@ -2504,6 +2726,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2514,8 +2738,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.PropertyTabChangedEventArgs" />
+
+          
 
           
 
@@ -2554,11 +2782,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.PropertyGrid.OnPropertyValueChanged(System.Windows.Forms.PropertyValueChangedEventArgs)" />
+
+            
 
             
 
@@ -2577,6 +2809,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2587,8 +2821,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.PropertyValueChangedEventArgs" />
+
+          
 
           
 
@@ -2625,11 +2863,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.PropertyGrid.OnResize(System.EventArgs)" />
+
+            
 
             
 
@@ -2643,6 +2885,8 @@
           <para
             >Raises the <see
              cref="E:System.Windows.Forms.Control.Resize" />
+
+            
 
             
 
@@ -2682,11 +2926,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.PropertyGrid.OnSelectedGridItemChanged(System.Windows.Forms.SelectedGridItemChangedEventArgs)" />
+
+            
 
             
 
@@ -2705,6 +2953,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2715,8 +2965,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.SelectedGridItemChangedEventArgs" />
+
+          
 
           
 
@@ -2755,11 +3009,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.PropertyGrid.OnSelectedObjectsChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -2778,6 +3036,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2788,8 +3048,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2828,11 +3092,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.PropertyGrid.OnSystemColorsChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -2851,6 +3119,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2861,8 +3131,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2901,11 +3175,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.PropertyGrid.OnVisibleChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -2924,6 +3202,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -2934,8 +3214,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -3014,6 +3298,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -3022,6 +3308,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.PropertyGrid.Padding" />
+
+            
 
             
 
@@ -3061,6 +3349,8 @@
 
           
 
+          
+
           Specifies key codes and modifiers.</param
         >
       </Docs>
@@ -3095,6 +3385,8 @@
 
             
 
+            
+
              property, the appearance of the property sort buttons on the grid changes to reflect the current state of the property. Setting <see
              cref="P:System.Windows.Forms.PropertyGrid.PropertySort" />
 
@@ -3102,8 +3394,12 @@
 
             
 
+            
+
              to <see
              cref="F:System.Windows.Forms.PropertySort.NoSort" />
+
+            
 
             
 
@@ -3119,8 +3415,12 @@
 
             
 
+            
+
              to both <see
              cref="F:System.Windows.Forms.PropertySort.Alphabetical" />
+
+            
 
             
 
@@ -3133,6 +3433,8 @@
 
             
 
+            
+
              is the same as setting <see
              cref="P:System.Windows.Forms.PropertyGrid.PropertySort" />
 
@@ -3140,8 +3442,12 @@
 
             
 
+            
+
              to <see
              cref="F:System.Windows.Forms.PropertySort.Categorized" />
+
+            
 
             
 
@@ -3158,6 +3464,8 @@
 
               
 
+              
+
                on the component to return the properties in the desired order.</para
             >
           </block>
@@ -3167,6 +3475,8 @@
           <para
             >Gets or sets the type of sorting the <see
              cref="T:System.Windows.Forms.PropertyGrid" />
+
+            
 
             
 
@@ -3195,6 +3505,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -3230,6 +3542,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -3280,6 +3594,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -3310,6 +3626,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -3367,6 +3685,8 @@
 
             
 
+            
+
              method first deletes the property tabs of the specified scope, it then requires the objects and documents to rebuild the tabs.</para
           >
         </remarks>
@@ -3381,8 +3701,12 @@
 
           
 
+          
+
           Either the Component or Document value of <see
            cref="T:System.ComponentModel.PropertyTabScope" />
+
+          
 
           
 
@@ -3409,6 +3733,8 @@
           <para
             >Typically, the <see
              cref="M:System.Windows.Forms.PropertyGrid.ResetSelectedProperty" />
+
+            
 
             
 
@@ -3456,10 +3782,14 @@
 
           
 
+          
+
           The horizontal scaling factor.</param
         >
         <param name="dy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3510,8 +3840,12 @@
 
             
 
+            
+
              corresponds to a property of the <see
              cref="P:System.Windows.Forms.PropertyGrid.SelectedObject" />
+
+            
 
             
 
@@ -3527,8 +3861,12 @@
 
             
 
+            
+
              to view type information, the <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -3569,6 +3907,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3577,6 +3917,8 @@
           <para
             >Occurs when the selected <see
              cref="T:System.Windows.Forms.GridItem" />
+
+            
 
             
 
@@ -3612,6 +3954,8 @@
           <para
             >The <see
              cref="P:System.Windows.Forms.PropertyGrid.SelectedObject" />
+
+            
 
             
 
@@ -3656,6 +4000,8 @@
 
             
 
+            
+
              only displays the properties that are common to all the objects that are in the array. Assigning an array to the <see
              cref="P:System.Windows.Forms.PropertyGrid.SelectedObjects" />
 
@@ -3663,8 +4009,12 @@
 
             
 
+            
+
              replaces the reference to any <see
              cref="P:System.Windows.Forms.PropertyGrid.SelectedObject" />
+
+            
 
             
 
@@ -3702,6 +4052,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3710,6 +4062,8 @@
           <para
             >Occurs when the objects selected by the <see
              cref="P:System.Windows.Forms.PropertyGrid.SelectedObjects" />
+
+            
 
             
 
@@ -3756,6 +4110,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -3786,6 +4142,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3856,8 +4214,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser" />
+
+            
 
             
 
@@ -3876,8 +4238,12 @@
 
             
 
+            
+
              control. For a description of this member, see <see
              cref="M:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser.DropDownDone" />
+
+            
 
             
 
@@ -3913,8 +4279,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser" />
+
+            
 
             
 
@@ -3933,8 +4303,12 @@
 
             
 
+            
+
              control. For a description of this member, see <see
              cref="M:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser.EnsurePendingChangesCommitted" />
+
+            
 
             
 
@@ -3948,6 +4322,8 @@
           <para
             >true if all the <see
              cref="T:System.Windows.Forms.PropertyGrid" />
+
+            
 
             
 
@@ -3980,8 +4356,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser" />
+
+            
 
             
 
@@ -4000,8 +4380,12 @@
 
             
 
+            
+
              control when the user chooses properties for a control in Design view. For a description of this member, see <see
              cref="M:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser.HandleF4" />
+
+            
 
             
 
@@ -4037,8 +4421,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser" />
+
+            
 
             
 
@@ -4052,6 +4440,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser.InPropertySet" />
+
+            
 
             
 
@@ -4089,8 +4479,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser" />
+
+            
 
             
 
@@ -4106,6 +4500,8 @@
 
             
 
+            
+
              control states, such as the <see
              cref="P:System.Windows.Forms.PropertyGrid.PropertySort" />
 
@@ -4113,8 +4509,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.PropertyGrid.HelpVisible" />
+
+            
 
             
 
@@ -4133,8 +4533,12 @@
 
             
 
+            
+
              control. For a description of this member, see <see
              cref="M:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser.LoadState(Microsoft.Win32.RegistryKey)" />
+
+            
 
             
 
@@ -4145,6 +4549,8 @@
         </summary>
         <param name="optRoot">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4181,8 +4587,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser" />
+
+            
 
             
 
@@ -4198,6 +4608,8 @@
 
             
 
+            
+
              control states, such as the <see
              cref="P:System.Windows.Forms.PropertyGrid.PropertySort" />
 
@@ -4205,8 +4617,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.PropertyGrid.HelpVisible" />
+
+            
 
             
 
@@ -4225,8 +4641,12 @@
 
             
 
+            
+
              control to the registry. For a description of this member, see <see
              cref="M:System.Windows.Forms.ComponentModel.Com2Interop.IComPropertyBrowser.SaveState(Microsoft.Win32.RegistryKey)" />
+
+            
 
             
 
@@ -4237,6 +4657,8 @@
         </summary>
         <param name="optRoot">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4297,6 +4719,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -4305,6 +4729,8 @@
           <para
             >Occurs when the text of the <see
              cref="T:System.Windows.Forms.PropertyGrid" />
+
+            
 
             
 
@@ -4364,6 +4790,8 @@
 
             
 
+            
+
              objects.</para
           >
         </summary>
@@ -4388,8 +4816,12 @@
 
             
 
+            
+
              class and net_v10_short and net_v11_short applications that perform custom text rendering using the <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -4405,8 +4837,12 @@
 
             
 
+            
+
              class was introduced in the dnprdnlong to improve performance, make text look better, and improve support for international fonts. In earlier versions of the dnprdnshort, the ndptecgdiplus based <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -4419,6 +4855,8 @@
 
             
 
+            
+
              class to render text, this could cause the text for controls that use <see
              cref="T:System.Windows.Forms.TextRenderer" />
 
@@ -4426,8 +4864,12 @@
 
             
 
+            
+
              to appear different from the other text in the application. To resolve this incompatibility, you can set the UseCompatibleTextRendering property to true for a specific control. To set UseCompatibleTextRendering to true for all supported controls in the application, call the <see
              cref="M:System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(System.Boolean)" />
+
+            
 
             
 
@@ -4446,8 +4888,12 @@
 
             
 
+            
+
              class (ndptecgdiplus) or the <see
              cref="T:System.Windows.Forms.TextRenderer" />
+
+            
 
             
 

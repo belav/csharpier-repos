@@ -27,8 +27,12 @@
 
         
 
+        
+
          enumeration represents the horizontal alignment options for items within a container, such as a <see
          cref="T:System.Web.UI.WebControls.TableCell" />
+
+        
 
         
 

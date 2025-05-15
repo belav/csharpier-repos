@@ -31,6 +31,8 @@
 
         
 
+        
+
          class that are associated with an XML Web service. This class cannot be inherited.</para
       >
     </summary>
@@ -48,6 +50,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Description.Service" />
+
+            
 
             
 
@@ -79,6 +83,8 @@
           <para
             >Gets the collection of extensibility elements associated with the <see
              cref="T:System.Web.Services.Description.Service" />
+
+            
 
             
 
@@ -142,8 +148,12 @@
 
             
 
+            
+
              instances contained in the <see
              cref="T:System.Web.Services.Description.Service" />
+
+            
 
             
 
@@ -185,8 +195,12 @@
 
             
 
+            
+
              of which the <see
              cref="T:System.Web.Services.Description.Service" />
+
+            
 
             
 

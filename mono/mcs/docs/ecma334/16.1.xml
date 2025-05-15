@@ -8,8 +8,12 @@
 
     
 
+    
+
      defines the overall structure of a source file. A compilation unit consists of zero or more <non_terminal
      where="16.3">using-directive</non_terminal>
+
+    
 
     
 
@@ -22,8 +26,12 @@
 
     
 
+    
+
      followed by zero or more  <non_terminal
      where="16.4">namespace-member-declaration</non_terminal>
+
+    
 
     
 
@@ -34,6 +42,8 @@
       <name>
         <non_terminal where="16.1">compilation-unit</non_terminal>
       </name>
+
+      
 
       
 
@@ -59,6 +69,8 @@
 
     
 
+    
+
     s of a compilation unit affect the <non_terminal
      where="24.2">global-attributes</non_terminal>
 
@@ -66,8 +78,12 @@
 
     
 
+    
+
      and <non_terminal
      where="16.4">namespace-member-declaration</non_terminal>
+
+    
 
     
 
@@ -83,8 +99,12 @@
 
     
 
+    
+
      (<hyperlink
     >24</hyperlink>
+
+    
 
     
 
@@ -100,11 +120,13 @@
 
     
 
+    
+
     s of each compilation unit of a program contribute members to a single declaration space called the global namespace. <example
 
       >[Example: For example: File A.cs: <code_example
       >
-<![CDATA[
+        <![CDATA[
 class A {}  
 ]]>
       </code_example>
@@ -114,7 +136,7 @@ class A {}
     <example
       >File B.cs: <code_example
       >
-<![CDATA[
+        <![CDATA[
 class B {}  
 ]]>
       </code_example>

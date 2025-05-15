@@ -25,11 +25,15 @@
 
         
 
+        
+
          method to specify the level of character escaping in the returned URI.</para
       >
       <para
         >RFC 2396 defines the standard escaping for URIs, and is available at <see
          cref="http://rfc-editor.org">http://rfc-editor.org</see>
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
          leaves the following characters escaped if the character has a reserved meaning in the requested <see
          cref="T:System.UriComponents" />
+
+        
 
         
 

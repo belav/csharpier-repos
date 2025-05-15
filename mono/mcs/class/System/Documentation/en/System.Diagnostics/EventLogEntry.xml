@@ -45,8 +45,12 @@
 
         
 
+        
+
          directly when working with the <see
          cref="T:System.Diagnostics.EventLog" />
+
+        
 
         
 
@@ -59,8 +63,12 @@
 
         
 
+        
+
          member of the <see
          cref="T:System.Diagnostics.EventLog" />
+
+        
 
         
 
@@ -73,8 +81,12 @@
 
         
 
+        
+
          instances, which you iterate over when reading by using the <see
          cref="P:System.Diagnostics.EventLogEntryCollection.Item(System.Int32)" />
+
+        
 
         
 
@@ -122,6 +134,8 @@
 
             
 
+            
+
              property for this entry.</para
           >
         </summary>
@@ -156,8 +170,12 @@
 
             
 
+            
+
              property. The Event Viewer can display the category as a numeric value, or it can use the category as a resource identifier to display a localized category string. For more information, see <see
              cref="T:System.Diagnostics.EventInstance" />
+
+            
 
             
 
@@ -268,6 +286,8 @@
 
             
 
+            
+
              instances refer to the same object.</para
           >
         </remarks>
@@ -285,6 +305,8 @@
 
             
 
+            
+
              objects are identical; otherwise, false.</para
           >
         </returns>
@@ -295,8 +317,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Diagnostics.EventLogEntry" />
+
+          
 
           
 
@@ -338,6 +364,8 @@
 
             
 
+            
+
              property for an event log entry represents the full 32-bit resource identifier for the event in the message resource file for the event source. Two event log entries from the same source can have matching <see
              cref="P:System.Diagnostics.EventLogEntry.EventID" />
 
@@ -345,8 +373,12 @@
 
             
 
+            
+
              values, but have different <see
              cref="P:System.Diagnostics.EventLogEntry.InstanceId" />
+
+            
 
             
 
@@ -362,8 +394,12 @@
 
             
 
+            
+
              methods, the <see
              cref="P:System.Diagnostics.EventLogEntry.EventID" />
+
+            
 
             
 
@@ -376,6 +412,8 @@
 
             
 
+            
+
              parameter. If the application wrote the event using <see
              cref="Overload:System.Diagnostics.EventLog.WriteEvent" />
 
@@ -383,8 +421,12 @@
 
             
 
+            
+
              or the Win32 API ReportEvent, the <see
              cref="P:System.Diagnostics.EventLogEntry.EventID" />
+
+            
 
             
 
@@ -459,8 +501,12 @@
 
             
 
+            
+
              property uniquely identifies an event entry for a configured event source. The <see
              cref="P:System.Diagnostics.EventLogEntry.InstanceId" />
+
+            
 
             
 
@@ -473,8 +519,12 @@
 
             
 
+            
+
              property equals the <see
              cref="P:System.Diagnostics.EventLogEntry.InstanceId" />
+
+            
 
             
 
@@ -487,8 +537,12 @@
 
             
 
+            
+
              values, but have different <see
              cref="P:System.Diagnostics.EventLogEntry.InstanceId" />
+
+            
 
             
 
@@ -504,8 +558,12 @@
 
             
 
+            
+
              methods, the <see
              cref="P:System.Diagnostics.EventLogEntry.InstanceId" />
+
+            
 
             
 
@@ -518,8 +576,12 @@
 
             
 
+            
+
              parameter. If the application wrote the event using <see
              cref="Overload:System.Diagnostics.EventLog.WriteEvent" />
+
+            
 
             
 
@@ -532,8 +594,12 @@
 
             
 
+            
+
              property matches the resource identifier specified in the <see
              cref="P:System.Diagnostics.EventInstance.InstanceId" />
+
+            
 
             
 
@@ -546,8 +612,12 @@
 
             
 
+            
+
              parameter. If the application wrote the event using the Win32 API ReportEvent, the <see
              cref="P:System.Diagnostics.EventLogEntry.InstanceId" />
+
+            
 
             
 
@@ -560,11 +630,15 @@
 
             
 
+            
+
              parameter.</para
           >
           <para
             >For details about defining event messages and building event log resource files, see the "Message Compiler" topic in the Platform SDK documentation at <see
              cref="http://msdn.microsoft.com/">http://msdn.microsoft.com</see>
+
+            
 
             
 
@@ -666,11 +740,15 @@
 
             
 
+            
+
              property. </para
           >
           <para
             >The <see
              cref="P:System.Diagnostics.EventLogEntry.ReplacementStrings" />
+
+            
 
             
 
@@ -683,6 +761,8 @@
 
             
 
+            
+
              class for the resource assembly that contains your replacement strings. The first parameter of the <see
              cref="M:System.Resources.ResourceManager.#ctor(System.String,System.Reflection.Assembly)" />
 
@@ -690,8 +770,12 @@
 
             
 
+            
+
              constructor identifies the resource assembly to be used. Use the <see
              cref="M:System.Resources.ResourceManager.GetString(System.String)" />
+
+            
 
             
 
@@ -712,6 +796,8 @@ e1.WriteEntry(LocRM.GetString("strMessage"),
                 >Walkthrough: Localizing Windows Forms</a
               >
             </format>
+
+            
 
             
 
@@ -794,6 +880,8 @@ e1.WriteEntry(LocRM.GetString("strMessage"),
 
             
 
+            
+
              with the data needed to serialize the target object.</para
           >
         </summary>
@@ -804,8 +892,12 @@ e1.WriteEntry(LocRM.GetString("strMessage"),
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -820,8 +912,12 @@ e1.WriteEntry(LocRM.GetString("strMessage"),
 
           
 
+          
+
           The destination (see <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -858,6 +954,8 @@ e1.WriteEntry(LocRM.GetString("strMessage"),
           <para
             >This member holds the time that an event was generated. This might not be the same as the time when the event information was written to the event log. For the latter, read the <see
              cref="P:System.Diagnostics.EventLogEntry.TimeWritten" />
+
+            
 
             
 
@@ -900,6 +998,8 @@ e1.WriteEntry(LocRM.GetString("strMessage"),
           <para
             >This member holds the time that an event's information is written to the event log. This might not be the same time as when the event was generated. For the latter, read the <see
              cref="P:System.Diagnostics.EventLogEntry.TimeGenerated" />
+
+            
 
             
 

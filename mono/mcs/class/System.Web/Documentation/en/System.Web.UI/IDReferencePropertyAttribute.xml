@@ -24,8 +24,12 @@
 
         
 
+        
+
          class is applied to properties that contain ID references. <see
          cref="P:System.Web.UI.WebControls.Content.ContentPlaceHolderID" />
+
+        
 
         
 
@@ -56,8 +60,12 @@
 
             
 
+            
+
              property is set to <see
              cref="T:System.Web.UI.Control" />
+
+            
 
             
 
@@ -71,6 +79,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.IDReferencePropertyAttribute" />
+
+            
 
             
 
@@ -102,6 +112,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.IDReferencePropertyAttribute" />
+
+            
 
             
 
@@ -167,6 +179,8 @@
           <para
             >Gets the type of the controls allowed by the property to which the <see
              cref="T:System.Web.UI.IDReferencePropertyAttribute" />
+
+            
 
             
 

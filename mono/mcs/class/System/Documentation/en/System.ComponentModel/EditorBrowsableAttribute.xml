@@ -37,11 +37,15 @@
 
         
 
+        
+
          is a hint to a designer indicating whether a property or method is to be displayed. You can use this type in a visual designer or text editor to determine what is visible to the user. For example, the IntelliSense engine in vsprvs uses this attribute to determine whether to show a property or method.</para
       >
       <para
         >In csprcs, you can control when advanced properties appear in IntelliSense and the Properties Window with the <ui
         >Hide Advanced Members</ui>
+
+        
 
         
 
@@ -54,8 +58,12 @@
 
         
 
+        
+
         . The corresponding <see
          cref="T:System.ComponentModel.EditorBrowsableState" />
+
+        
 
         
 
@@ -68,12 +76,16 @@
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
         <para
           >In csprcs, <see
            cref="T:System.ComponentModel.EditorBrowsableAttribute" />
+
+          
 
           
 
@@ -114,6 +126,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -127,8 +141,12 @@
 
             
 
+            
+
              class with <see
              cref="P:System.ComponentModel.EditorBrowsableAttribute.State" />
+
+            
 
             
 
@@ -170,8 +188,12 @@
 
             
 
+            
+
              class with an <see
              cref="T:System.ComponentModel.EditorBrowsableState" />
+
+            
 
             
 
@@ -187,6 +209,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.EditorBrowsableState" />
 
@@ -194,8 +218,12 @@
 
           
 
+          
+
            to set <see
            cref="P:System.ComponentModel.EditorBrowsableAttribute.State" />
+
+          
 
           
 
@@ -235,6 +263,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -244,6 +274,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -300,6 +332,8 @@
           <para
             >The default for this property is <see
              cref="F:System.ComponentModel.EditorBrowsableState.Always" />
+
+            
 
             
 

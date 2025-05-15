@@ -39,8 +39,12 @@
 
         
 
+        
+
          class. During this process, the .NET Framework generates read methods that implement the <see
          cref="T:System.Xml.Serialization.XmlSerializationReadCallback" />
+
+        
 
         
 
@@ -56,6 +60,8 @@
 
         
 
+        
+
          class.</para
       >
       <para>SOAP encoding is described in Section 5 of the SOAP 1.1 specification.</para>
@@ -65,6 +71,8 @@
       <para
         >Delegate used by the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 

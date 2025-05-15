@@ -21,6 +21,8 @@
 
         
 
+        
+
          class.</para
       >
     </summary>
@@ -46,6 +48,8 @@
           <para
             >Creates a <see
              cref="T:System.Web.UI.Design.DesignTimeResourceProviderFactory" />
+
+            
 
             
 

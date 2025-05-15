@@ -63,8 +63,12 @@
 
             
 
+            
+
              on <see
              cref="T:System.Reflection.PropertyInfo" />
+
+            
 
             
 
@@ -77,6 +81,8 @@
 
             
 
+            
+
              when the <paramref
              name="inherit" />
 
@@ -84,8 +90,12 @@
 
             
 
+            
+
              parameter of GetCustomAttributes is true does not walk the type hierarchy. Use <see
              cref="T:System.Attribute" />
+
+            
 
             
 
@@ -105,6 +115,8 @@
         </returns>
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -147,12 +159,16 @@
 
             
 
+            
+
              is a base class or interface, this method returns any implementation of that type.</para
           >
           <para>This method returns custom attributes defined directly on a non-inherited member only.</para>
           <para
             >Calling <see
              cref="M:System.Reflection.ICustomAttributeProvider.GetCustomAttributes(System.Type,System.Boolean)" />
+
+            
 
             
 
@@ -165,8 +181,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Reflection.EventInfo" />
+
+            
 
             
 
@@ -179,8 +199,12 @@
 
             
 
+            
+
              parameter of GetCustomAttributes is true does not walk the type hierarchy. Use <see
              cref="T:System.Attribute" />
+
+            
 
             
 
@@ -204,10 +228,14 @@
 
           
 
+          
+
           The type of the custom attributes. </param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -251,6 +279,8 @@
 
             
 
+            
+
              is defined on this member.</para
           >
         </summary>
@@ -259,6 +289,8 @@
           <para
             >true if the <paramref
              name="attributeType" />
+
+            
 
             
 
@@ -274,10 +306,14 @@
 
           
 
+          
+
           The type of the custom attributes. </param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

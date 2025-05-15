@@ -27,8 +27,12 @@
 
         
 
+        
+
          column type in a <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Web.UI.WebControls.TemplateColumn.FooterTemplate" />
+
+        
 
         
 
@@ -55,6 +63,8 @@
 
         
 
+        
+
          properties, respectively. You can also control how an item being edited is displayed in the <see
          cref="T:System.Web.UI.WebControls.TemplateColumn" />
 
@@ -62,8 +72,12 @@
 
         
 
+        
+
          object by setting the <see
          cref="P:System.Web.UI.WebControls.TemplateColumn.EditItemTemplate" />
+
+        
 
         
 
@@ -77,6 +91,8 @@
       <para
         >Represents a column type for the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -103,6 +119,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -111,6 +129,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.TemplateColumn" />
+
+            
 
             
 
@@ -150,8 +170,12 @@
 
             
 
+            
+
              property to control the appearance of the item selected for editing in the <see
              cref="T:System.Web.UI.WebControls.TemplateColumn" />
+
+            
 
             
 
@@ -165,6 +189,8 @@
           <para
             >Gets or sets the template for displaying the item selected for editing in a <see
              cref="T:System.Web.UI.WebControls.TemplateColumn" />
+
+            
 
             
 
@@ -218,8 +244,12 @@
 
             
 
+            
+
              property to control the appearance of the footer section in the <see
              cref="T:System.Web.UI.WebControls.TemplateColumn" />
+
+            
 
             
 
@@ -233,6 +263,8 @@
           <para
             >Gets or sets the template for displaying the footer section of the <see
              cref="T:System.Web.UI.WebControls.TemplateColumn" />
+
+            
 
             
 
@@ -286,8 +318,12 @@
 
             
 
+            
+
              property to control the appearance of the heading section in the <see
              cref="T:System.Web.UI.WebControls.TemplateColumn" />
+
+            
 
             
 
@@ -301,6 +337,8 @@
           <para
             >Gets or sets the template for displaying the heading section of the <see
              cref="T:System.Web.UI.WebControls.TemplateColumn" />
+
+            
 
             
 
@@ -355,8 +393,12 @@
 
             
 
+            
+
              object's base class to initialize the instance and then applies a <see
              cref="T:System.Web.UI.WebControls.ListItemType" />
+
+            
 
             
 
@@ -372,8 +414,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.TableCell" />
+
+          
 
           
 
@@ -388,6 +434,8 @@
 
           
 
+          
+
           The column number where the cell is located.</param
         >
         <param name="itemType">
@@ -397,8 +445,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.ListItemType" />
+
+          
 
           
 
@@ -437,8 +489,12 @@
 
             
 
+            
+
              property to control the appearance of a data item in the <see
              cref="T:System.Web.UI.WebControls.TemplateColumn" />
+
+            
 
             
 
@@ -452,6 +508,8 @@
           <para
             >Gets or sets the template for displaying a data item in a <see
              cref="T:System.Web.UI.WebControls.TemplateColumn" />
+
+            
 
             
 

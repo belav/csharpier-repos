@@ -20,8 +20,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.DataGrid" />
+
+        
 
         
 
@@ -35,6 +39,8 @@
       <para
         >Specifies the style of gridlines in a <see
          cref="T:System.Windows.Forms.DataGrid" />
+
+        
 
         
 

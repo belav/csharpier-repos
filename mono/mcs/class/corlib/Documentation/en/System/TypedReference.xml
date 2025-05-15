@@ -68,6 +68,8 @@
 
               
 
+              
+
               .</block
             >
           </para>
@@ -82,6 +84,8 @@
         </returns>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -116,6 +120,8 @@
               >This method
       overrides <see
                cref="M:System.Object.GetHashCode" />
+
+              
 
               
 
@@ -173,6 +179,8 @@
 
           
 
+          
+
           The value whose target's type is to be returned. </param
         >
       </Docs>
@@ -215,6 +223,8 @@
 
             
 
+            
+
              array has no elements. </para
           >
           <para>-or-</para>
@@ -226,8 +236,12 @@
 
             
 
+            
+
              is not a <see
              cref="T:System.Reflection.FieldInfo" />
+
+            
 
             
 
@@ -244,6 +258,8 @@
 
             
 
+            
+
              or <paramref
              name="flds" />
 
@@ -251,8 +267,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -269,8 +289,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -288,8 +312,12 @@
 
             
 
+            
+
              does not contain the field described by the first element of <paramref
              name="flds" />
+
+            
 
             
 
@@ -302,8 +330,12 @@
 
             
 
+            
+
              describes a field that is not contained in the field described by the succeeding element of <paramref
              name="flds" />
+
+            
 
             
 
@@ -315,6 +347,8 @@
           <para
             >The field described by an element of <paramref
              name="flds" />
+
+            
 
             
 
@@ -333,8 +367,12 @@
 
             
 
+            
+
              method returns a typed reference to some terminal field, where the <paramref
              name="target" />
+
+            
 
             
 
@@ -347,6 +385,8 @@
 
             
 
+            
+
             , the field described by the first element of <paramref
              name="flds" />
 
@@ -354,8 +394,12 @@
 
             
 
+            
+
              contains the field described by the second element of <paramref
              name="flds" />
+
+            
 
             
 
@@ -373,12 +417,16 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
             <para
               >Starting with the net_v20sp1_long, this method can be used to access non-public members if the caller has been granted <see
                cref="T:System.Security.Permissions.ReflectionPermission" />
+
+              
 
               
 
@@ -391,12 +439,16 @@
 
               
 
+              
+
                flag and if the grant set of the non-public members is restricted to the caller’s grant set, or a subset thereof. (See <format
                type="text/html">
                 <a href="42d9dc2a-8fcc-4ff3-b002-4ff260ef3dc5"
                   >Security Considerations for Reflection</a
                 >
               </format>
+
+              
 
               
 
@@ -421,8 +473,12 @@
 
             
 
+            
+
              for the field described by the last element of <paramref
              name="flds" />
+
+            
 
             
 
@@ -438,8 +494,12 @@
 
           
 
+          
+
           An object that contains the field described by the first element of <paramref
            name="flds" />
+
+          
 
           
 
@@ -449,6 +509,8 @@
         >
         <param name="flds">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -495,8 +557,12 @@
 
             
 
+            
+
              to <paramref
              name="target" />
+
+            
 
             
 
@@ -513,8 +579,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -540,6 +610,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -550,10 +622,14 @@
 
           
 
+          
+
           The target of the conversion. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -596,6 +672,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -645,11 +723,15 @@
 
             
 
+            
+
              converted from a TypedReference.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -37,6 +37,8 @@
 
         
 
+        
+
          instead.</para
       >
     </summary>
@@ -198,6 +200,8 @@
 
           
 
+          
+
           The object to register for release. </param
         >
       </Docs>
@@ -240,8 +244,12 @@
 
           
 
+          
+
           The name to register <paramref
            name="punk" />
+
+          
 
           
 
@@ -251,6 +259,8 @@
         >
         <param name="punk">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -286,6 +296,8 @@
           <para
             >Releases all the objects currently registered with the bind context by <see
              cref="M:System.Runtime.InteropServices.UCOMIBindCtx.RegisterObjectBound(System.Object)" />
+
+            
 
             
 
@@ -330,6 +342,8 @@
 
           
 
+          
+
           The object to unregister for release. </param
         >
       </Docs>
@@ -363,6 +377,8 @@
         </summary>
         <param name="pszKey">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

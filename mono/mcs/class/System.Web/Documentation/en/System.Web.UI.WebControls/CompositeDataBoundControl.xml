@@ -31,8 +31,12 @@
 
         
 
+        
+
          class serves as the base class for a composite server control that binds to data from a data source. A composite server control is a control that is built from a combination of other server controls. Page developers do not use the <see
          cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" />
+
+        
 
         
 
@@ -45,6 +49,8 @@
 
         
 
+        
+
         , <see
          cref="T:System.Web.UI.WebControls.FormView" />
 
@@ -52,8 +58,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 
@@ -69,6 +79,8 @@
 
         
 
+        
+
          control must override the <see
          cref="M:System.Web.UI.WebControls.CompositeDataBoundControl.CreateChildControls(System.Collections.IEnumerable,System.Boolean)" />
 
@@ -76,8 +88,12 @@
 
         
 
+        
+
          method to create the control hierarchy. To access the child controls of a composite data-bound control, use the <see
          cref="P:System.Web.UI.WebControls.CompositeDataBoundControl.Controls" />
+
+        
 
         
 
@@ -108,6 +124,8 @@
 
             
 
+            
+
              class is an abstract class. You cannot create a new instance of this class.</para
           >
         </remarks>
@@ -116,6 +134,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" />
+
+            
 
             
 
@@ -146,6 +166,8 @@
           <para
             >A composite data-bound control is a combination of one or more server controls. Use the <see
              cref="P:System.Web.UI.WebControls.CompositeDataBoundControl.Controls" />
+
+            
 
             
 
@@ -184,8 +206,12 @@
 
             
 
+            
+
              method is a helper method that is used by classes that derive from the <see
              cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" />
+
+            
 
             
 
@@ -225,8 +251,12 @@
 
             
 
+            
+
              method is a helper method that is used by classes that derive from the <see
              cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" />
+
+            
 
             
 
@@ -239,8 +269,12 @@
 
             
 
+            
+
              class, you must override the <see
              cref="M:System.Web.UI.WebControls.CompositeDataBoundControl.CreateChildControls" />
+
+            
 
             
 
@@ -252,6 +286,8 @@
                 >Developing Custom ASP.NET Server Controls</a
               >
             </format>
+
+            
 
             
 
@@ -274,6 +310,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -284,8 +322,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IEnumerable" />
+
+          
 
           
 
@@ -300,8 +342,12 @@
 
           
 
+          
+
           true to indicate that the <see
            cref="M:System.Web.UI.WebControls.CompositeDataBoundControl.CreateChildControls(System.Collections.IEnumerable,System.Boolean)" />
+
+          
 
           
 
@@ -340,8 +386,12 @@
 
             
 
+            
+
              method is a helper method that is used by classes that derive from the <see
              cref="T:System.Web.UI.WebControls.CompositeDataBoundControl" />
+
+            
 
             
 
@@ -361,8 +411,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IEnumerable" />
+
+          
 
           
 

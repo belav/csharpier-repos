@@ -32,8 +32,12 @@
 
         
 
+        
+
          attribute to an assembly that contains types to which the <see
          cref="T:System.Runtime.Serialization.DataContractAttribute" />
+
+        
 
         
 
@@ -46,10 +50,14 @@
 
         
 
+        
+
          enables you to set a namespace that is different than the one generated when the type is serialized. For more information about how names are generated, see <format
          type="text/html">
           <a href="31f87e6c-247b-48f5-8e94-b9e1e33d8d09">Data Contract Names</a>
         </format>
+
+        
 
         
 
@@ -65,8 +73,12 @@
 
         
 
+        
+
          (or the <see
          cref="P:System.Runtime.Serialization.DataContractAttribute.Namespace" />
+
+        
 
         
 
@@ -79,12 +91,16 @@
 
         
 
+        
+
          class).</para
       >
       <block subset="none" type="note">
         <para
           >In any code, you can use the word ContractNamespace instead of the longer <see
            cref="T:System.Runtime.Serialization.ContractNamespaceAttribute" />
+
+          
 
           
 
@@ -121,6 +137,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Serialization.ContractNamespaceAttribute" />
+
+            
 
             
 

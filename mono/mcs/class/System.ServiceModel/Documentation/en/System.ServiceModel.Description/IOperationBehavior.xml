@@ -21,6 +21,8 @@
 
         
 
+        
+
          interface to modify, examine, or extend some aspect of operation-wide execution at the application level for either client or service applications.</para
       >
       <list type="bullet">
@@ -28,6 +30,8 @@
           <para
             >Use the <see
              cref="M:System.ServiceModel.Description.IOperationBehavior.AddBindingParameters(System.ServiceModel.Description.OperationDescription,System.ServiceModel.Channels.BindingParameterCollection)" />
+
+            
 
             
 
@@ -45,6 +49,8 @@
 
             
 
+            
+
              method to modify, examine, or insert extensions to a client dispatcher in a client application.</para
           >
         </item>
@@ -52,6 +58,8 @@
           <para
             >Use the <see
              cref="M:System.ServiceModel.Description.IOperationBehavior.ApplyDispatchBehavior(System.ServiceModel.Description.OperationDescription,System.ServiceModel.Dispatcher.DispatchOperation)" />
+
+            
 
             
 
@@ -69,8 +77,12 @@
 
             
 
+            
+
              method to confirm that a <see
              cref="T:System.ServiceModel.Description.OperationDescription" />
+
+            
 
             
 
@@ -87,12 +99,16 @@
 
         
 
+        
+
          objects can make use of any of these methods, but often only one is important; in such cases, the unused methods can return, performing no action.</para
       >
       <block subset="none" type="note">
         <para
           >All of the <see
            cref="T:System.ServiceModel.Description.IOperationBehavior" />
+
+          
 
           
 
@@ -105,8 +121,12 @@
 
           
 
+          
+
            object as a parameter. This parameter is for examination only; if you modify the <see
            cref="T:System.ServiceModel.Description.OperationDescription" />
+
+          
 
           
 
@@ -122,6 +142,8 @@
 
         
 
+        
+
          objects are typically used to access the various properties of the <see
          cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
 
@@ -129,8 +151,12 @@
 
         
 
+        
+
          object in a service application and the <see
          cref="T:System.ServiceModel.Dispatcher.ClientOperation" />
+
+        
 
         
 
@@ -146,8 +172,12 @@
 
         
 
+        
+
          objects can insert customizations for all messages in an entire service and <see
          cref="T:System.ServiceModel.Description.IContractBehavior" />
+
+        
 
         
 
@@ -164,6 +194,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -174,8 +206,12 @@
 
         
 
+        
+
          is the appropriate scope of customization, the customization must be inserted into the indigo1 runtime by implementing <see
          cref="T:System.ServiceModel.Description.IOperationBehavior" />
+
+        
 
         
 
@@ -191,6 +227,8 @@
 
         
 
+        
+
          to the runtime:</para
       >
       <list type="bullet">
@@ -198,6 +236,8 @@
           <para
             >Programmatically add the custom operation behavior to the <see
              cref="P:System.ServiceModel.Description.OperationDescription.Behaviors" />
+
+            
 
             
 
@@ -218,8 +258,12 @@
 
         
 
+        
+
          object must be added to the <see
          cref="P:System.ServiceModel.Description.OperationDescription.Behaviors" />
+
+        
 
         
 
@@ -232,8 +276,12 @@
 
         
 
+        
+
          method is called on <see
          cref="T:System.ServiceModel.ServiceHost" />
+
+        
 
         
 
@@ -246,8 +294,12 @@
 
         
 
+        
+
          object must be added to the <see
          cref="P:System.ServiceModel.Description.OperationDescription.Behaviors" />
+
+        
 
         
 
@@ -260,6 +312,8 @@
 
         
 
+        
+
          method or the <see
          cref="Overload:System.ServiceModel.ICommunicationObject.Open" />
 
@@ -267,8 +321,12 @@
 
         
 
+        
+
          method on <see
          cref="T:System.ServiceModel.ChannelFactory`1" />
+
+        
 
         
 
@@ -320,8 +378,12 @@
 
             
 
+            
+
              method to provide binding elements with the extra objects they require to support the operation behavior. When binding parameters are added here, the binding can locate and process these objects when the channel listener or channel factory is created. Typically, you implement the <see
              cref="M:System.ServiceModel.Description.IOperationBehavior.AddBindingParameters(System.ServiceModel.Description.OperationDescription,System.ServiceModel.Channels.BindingParameterCollection)" />
+
+            
 
             
 
@@ -369,6 +431,8 @@
 
             
 
+            
+
              method to view, modify, or add a custom extension to the client runtime across all messages used with a specific operation. For details about what customizations you can do with a client run-time object, see <see
              cref="T:System.ServiceModel.Dispatcher.ClientRuntime" />
 
@@ -376,8 +440,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.ServiceModel.Dispatcher.ClientOperation" />
+
+            
 
             
 
@@ -393,8 +461,12 @@
 
             
 
+            
+
              method throw a <see
              cref="T:System.NotImplementedException" />
+
+            
 
             
 
@@ -442,6 +514,8 @@
 
             
 
+            
+
              method to view, modify, or extend the service runtime across all messages or for a specific operation. For details about what customizations you can do in a service application, see <see
              cref="T:System.ServiceModel.Dispatcher.DispatchRuntime" />
 
@@ -449,8 +523,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.ServiceModel.Dispatcher.DispatchOperation" />
+
+            
 
             
 
@@ -466,8 +544,12 @@
 
             
 
+            
+
              method throw a <see
              cref="T:System.NotImplementedException" />
+
+            
 
             
 
@@ -513,8 +595,12 @@
 
             
 
+            
+
              method to examine the structure to confirm any set of criteria. It is not necessary to perform any customizations in <see
              cref="M:System.ServiceModel.Description.IOperationBehavior.ApplyClientBehavior(System.ServiceModel.Description.OperationDescription,System.ServiceModel.Dispatcher.ClientOperation)" />
+
+            
 
             
 
@@ -527,11 +613,15 @@
 
             
 
+            
+
              to make use of this method. If the operation passes validation, return; otherwise, throw an exception.</para
           >
           <para
             >For example, the <see
              cref="M:System.ServiceModel.Description.IOperationBehavior.Validate(System.ServiceModel.Description.OperationDescription)" />
+
+            
 
             
 

@@ -25,8 +25,12 @@
 
         
 
+        
+
          control by calling the <see
          cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+
+        
 
         
 
@@ -39,6 +43,8 @@
 
         
 
+        
+
          control. This enumeration enables you to specify how the search is performed when the <see
          cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
 
@@ -46,8 +52,12 @@
 
         
 
+        
+
          method is called. You can combine one or more values from this enumeration to specify more than one search option when calling the <see
          cref="M:System.Windows.Forms.RichTextBox.Find(System.String)" />
+
+        
 
         
 
@@ -61,6 +71,8 @@
       <para
         >Specifies how a text search is carried out in a <see
          cref="T:System.Windows.Forms.RichTextBox" />
+
+        
 
         
 

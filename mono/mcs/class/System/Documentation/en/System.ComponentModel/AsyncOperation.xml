@@ -30,8 +30,12 @@
 
         
 
+        
+
         , you may need to track the lifetime of each asynchronous operation invoked on an instance of your class. The <see
          cref="T:System.ComponentModel.AsyncOperation" />
+
+        
 
         
 
@@ -42,6 +46,8 @@
       <para
         >The following list identifies ways to use an <see
          cref="T:System.ComponentModel.AsyncOperation" />
+
+        
 
         
 
@@ -59,6 +65,8 @@
 
             
 
+            
+
              from your asynchronous worker code.</para
           >
         </item>
@@ -66,6 +74,8 @@
           <para
             >To indicate that an asynchronous task has completed, or to cancel a pending asynchronous task, call <see
              cref="M:System.ComponentModel.AsyncOperation.PostOperationCompleted(System.Threading.SendOrPostCallback,System.Object)" />
+
+            
 
             
 
@@ -83,8 +93,12 @@
 
         
 
+        
+
          object for each asynchronous task by calling <see
          cref="M:System.ComponentModel.AsyncOperationManager.CreateOperation(System.Object)" />
+
+        
 
         
 
@@ -97,8 +111,12 @@
 
         
 
+        
+
          takes a parameter for a unique client-provided token, which becomes the <see
          cref="P:System.ComponentModel.AsyncOperation.UserSuppliedState" />
+
+        
 
         
 
@@ -161,8 +179,12 @@
 
             
 
+            
+
              method to end the lifetime of an asynchronous operation. After this method is called for a particular task, calls to its corresponding <see
              cref="T:System.ComponentModel.AsyncOperation" />
+
+            
 
             
 
@@ -210,8 +232,12 @@
 
             
 
+            
+
              method invokes the delegate specified by the <paramref
              name="arg" />
+
+            
 
             
 
@@ -227,8 +253,12 @@
 
             
 
+            
+
              method as often as you like while the lifetime of the asynchronous operation has not been ended by a call to <see
              cref="M:System.ComponentModel.AsyncOperation.PostOperationCompleted(System.Threading.SendOrPostCallback,System.Object)" />
+
+            
 
             
 
@@ -244,8 +274,12 @@
 
             
 
+            
+
              parameter wraps the delegate you want called when you want to post an update about the status of the asynchronous task. The <see
              cref="T:System.ComponentModel.AsyncOperation" />
+
+            
 
             
 
@@ -261,8 +295,12 @@
 
             
 
+            
+
              parameter should be used to pass state to the delegate wrapped by the <paramref
              name="d" />
+
+            
 
             
 
@@ -275,6 +313,8 @@
 
             
 
+            
+
             , or it might be a <see
              cref="T:System.ComponentModel.ProgressChangedEventArgs" />
 
@@ -282,8 +322,12 @@
 
             
 
+            
+
              object. It may be desirable to derive your own class from <see
              cref="T:System.ComponentModel.ProgressChangedEventArgs" />
+
+            
 
             
 
@@ -303,8 +347,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Threading.SendOrPostCallback" />
+
+          
 
           
 
@@ -319,8 +367,12 @@
 
           
 
+          
+
           An argument for the delegate contained in the <paramref
            name="d" />
+
+          
 
           
 
@@ -363,8 +415,12 @@
 
             
 
+            
+
              method to end the lifetime of an asynchronous operation. After this method is called for a particular task, calls to its corresponding <see
              cref="T:System.ComponentModel.AsyncOperation" />
+
+            
 
             
 
@@ -380,8 +436,12 @@
 
             
 
+            
+
              parameter wraps the delegate you want your class to call when the task's lifetime ends due to completion, cancellation, or failure of the task. The <see
              cref="T:System.ComponentModel.AsyncOperation" />
+
+            
 
             
 
@@ -397,8 +457,12 @@
 
             
 
+            
+
              parameter is used to pass state information to the completion delegate <paramref
              name="d" />
+
+            
 
             
 
@@ -411,6 +475,8 @@
 
             
 
+            
+
              object, or an <see
              cref="T:System.ComponentModel.AsyncCompletedEventArgs" />
 
@@ -418,8 +484,12 @@
 
             
 
+            
+
              object as the parameter value. Alternatively, if you want to provide additional state storage, you can use an instance of a class you derive from the <see
              cref="T:System.ComponentModel.AsyncCompletedEventArgs" />
+
+            
 
             
 
@@ -439,8 +509,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Threading.SendOrPostCallback" />
+
+          
 
           
 
@@ -455,8 +529,12 @@
 
           
 
+          
+
           An argument for the delegate contained in the <paramref
            name="d" />
+
+          
 
           
 
@@ -497,6 +575,8 @@
 
             
 
+            
+
              object that was passed to the constructor.</para
           >
         </summary>
@@ -526,6 +606,8 @@
 
             
 
+            
+
              that will act as a task ID. You will use this task ID when you call the <see
              cref="M:System.ComponentModel.AsyncOperationManager.CreateOperation(System.Object)" />
 
@@ -533,8 +615,12 @@
 
             
 
+            
+
             , method and this will associate the client's task ID with a particular invocation of your asynchronous operation. This task ID is made available to your implementation through the <see
              cref="P:System.ComponentModel.AsyncOperation.UserSuppliedState" />
+
+            
 
             
 
@@ -551,8 +637,12 @@
 
               
 
+              
+
                property. Non-unique task IDs may cause your implementation to report progress and other events incorrectly. Your code should check for a non-unique task ID and raise an <see
                cref="T:System.ArgumentException" />
+
+              
 
               
 

@@ -27,8 +27,12 @@
 
         
 
+        
+
          event occurs only when the <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          property is set or its <see
          cref="P:System.Windows.Forms.DataGridView.VirtualMode" />
+
+        
 
         
 
@@ -58,6 +66,8 @@
 
         
 
+        
+
          event, the ToolTip text you specify in the handler is shown whenever the mouse pointer is over a cell and the control <see
          cref="P:System.Windows.Forms.DataGridView.ShowCellToolTips" />
 
@@ -65,8 +75,12 @@
 
         
 
+        
+
          property value is true. The <see
          cref="E:System.Windows.Forms.DataGridView.CellToolTipTextNeeded" />
+
+        
 
         
 
@@ -82,8 +96,12 @@
 
         
 
+        
+
          event also occurs whenever the value of the <see
          cref="P:System.Windows.Forms.DataGridViewCell.ToolTipText" />
+
+        
 
         
 
@@ -99,8 +117,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.DataGridViewCellEventArgs.RowIndex" />
+
+        
 
         
 
@@ -113,8 +135,12 @@
 
         
 
+        
+
          property. This property is initialized with the value of the cell <see
          cref="P:System.Windows.Forms.DataGridViewCell.ToolTipText" />
+
+        
 
         
 
@@ -130,8 +156,12 @@
 
         
 
+        
+
          event when working with large amounts of data to avoid the performance penalties of setting the cell <see
          cref="P:System.Windows.Forms.DataGridViewCell.ToolTipText" />
+
+        
 
         
 
@@ -143,6 +173,8 @@
             >Best Practices for Scaling the Windows Forms DataGridView Control</a
           >
         </format>
+
+        
 
         
 
@@ -160,6 +192,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -168,6 +202,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.DataGridView.CellToolTipTextNeeded" />
+
+        
 
         
 
@@ -192,6 +228,8 @@
           <para
             >This property initially contains the value of the <see
              cref="P:System.Windows.Forms.DataGridViewCell.ToolTipText" />
+
+            
 
             
 

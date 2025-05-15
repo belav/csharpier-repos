@@ -30,6 +30,8 @@
 
         
 
+        
+
          class while inferring a schema from an XML document.</para
       >
     </summary>
@@ -55,6 +57,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Schema.XmlSchemaInferenceException" />
+
+            
 
             
 
@@ -92,11 +96,15 @@
 
             
 
+            
+
              class with the error message specified.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -140,8 +148,12 @@
 
             
 
+            
+
              class with the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -154,8 +166,12 @@
 
             
 
+            
+
              objects specified that contain all the properties of the <see
              cref="T:System.Xml.Schema.XmlSchemaInferenceException" />
+
+            
 
             
 
@@ -171,8 +187,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -187,8 +207,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -229,6 +253,8 @@
 
             
 
+            
+
              class with the error message specified and the original <see
              cref="T:System.Exception" />
 
@@ -236,8 +262,12 @@
 
             
 
+            
+
              that caused the <see
              cref="T:System.Xml.Schema.XmlSchemaInferenceException" />
+
+            
 
             
 
@@ -253,10 +283,14 @@
 
           
 
+          
+
           A description of the error.</param
         >
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -269,8 +303,12 @@
 
           
 
+          
+
            object containing the original exception that caused the <see
            cref="T:System.Xml.Schema.XmlSchemaInferenceException" />
+
+          
 
           
 
@@ -313,6 +351,8 @@
 
             
 
+            
+
              class with the error message specified, the original <see
              cref="T:System.Exception" />
 
@@ -320,8 +360,12 @@
 
             
 
+            
+
              that caused the <see
              cref="T:System.Xml.Schema.XmlSchemaInferenceException" />
+
+            
 
             
 
@@ -337,10 +381,14 @@
 
           
 
+          
+
           A description of the error.</param
         >
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -353,8 +401,12 @@
 
           
 
+          
+
            object containing the original exception that caused the <see
            cref="T:System.Xml.Schema.XmlSchemaInferenceException" />
+
+          
 
           
 
@@ -369,8 +421,12 @@
 
           
 
+          
+
           The line number in the XML document that caused the <see
            cref="T:System.Xml.Schema.XmlSchemaInferenceException" />
+
+          
 
           
 
@@ -385,8 +441,12 @@
 
           
 
+          
+
           The line position in the XML document that caused the <see
            cref="T:System.Xml.Schema.XmlSchemaInferenceException" />
+
+          
 
           
 
@@ -430,6 +490,8 @@
 
             
 
+            
+
              object properties into the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
@@ -437,8 +499,12 @@
 
             
 
+            
+
              object specified for the <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -454,8 +520,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -470,8 +540,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 

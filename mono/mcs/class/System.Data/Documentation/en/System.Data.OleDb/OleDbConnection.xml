@@ -37,8 +37,12 @@
 
         
 
+        
+
          object represents a unique connection to a data source. With a client/server database system, it is equivalent to a network connection to the server. Depending on the functionality supported by the native OLE DB provider, some methods or properties of an <see
          cref="T:System.Data.OleDb.OleDbConnection" />
+
+        
 
         
 
@@ -54,8 +58,12 @@
 
         
 
+        
+
         , all properties are set to their initial values. For a list of these values, see the <see
          cref="T:System.Data.OleDb.OleDbConnection" />
+
+        
 
         
 
@@ -71,11 +79,15 @@
 
         
 
+        
+
         . If the OLE DB provider you use does not support more than one DataReader on a single connection, the provider implicitly opens an additional connection for each.</para
       >
       <para
         >If the <see
          cref="T:System.Data.OleDb.OleDbConnection" />
+
+        
 
         
 
@@ -88,8 +100,12 @@
 
         
 
+        
+
          or Dispose, or by using the <see
          cref="T:System.Data.OleDb.OleDbConnection" />
+
+        
 
         
 
@@ -108,12 +124,16 @@
 
           
 
+          
+
           .</para
         >
       </block>
       <para
         >If a fatal <see
          cref="T:System.Data.OleDb.OleDbException" />
+
+        
 
         
 
@@ -126,8 +146,12 @@
 
         
 
+        
+
         , the <see
          cref="T:System.Data.OleDb.OleDbConnection" />
+
+        
 
         
 
@@ -143,8 +167,12 @@
 
         
 
+        
+
          object can require all direct and indirect callers to have sufficient permission to the code by setting declarative or imperative security demands. <see
          cref="T:System.Data.OleDb.OleDbConnection" />
+
+        
 
         
 
@@ -157,8 +185,12 @@
 
         
 
+        
+
          object. Users can verify that their code has sufficient permissions by using the <see
          cref="T:System.Data.OleDb.OleDbPermissionAttribute" />
+
+        
 
         
 
@@ -175,10 +207,14 @@
 
         
 
+        
+
          to modify security policy at the computer, user, and enterprise levels. For more information, see <format
          type="text/html">
           <a href="93e099eb-daa1-4f1e-b031-c1e10a996f88">Code Access Security and ADO.NET</a>
         </format>
+
+        
 
         
 
@@ -196,12 +232,16 @@
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
         <para
           >The <see
            cref="T:System.Data.OleDb.OleDbConnection" />
+
+          
 
           
 
@@ -233,8 +273,12 @@
 
             
 
+            
+
              is created, the read/write properties are set to the following initial values unless they are specifically set using their associated keywords in the <see
              cref="P:System.Data.OleDb.OleDbConnection.ConnectionString" />
+
+            
 
             
 
@@ -302,6 +346,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -310,6 +356,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.OleDb.OleDbConnection" />
+
+            
 
             
 
@@ -342,8 +390,12 @@
 
             
 
+            
+
              is created, the read/write properties are set to the following initial values unless they are specifically set using their associated keywords in the <see
              cref="P:System.Data.OleDb.OleDbConnection.ConnectionString" />
+
+            
 
             
 
@@ -413,6 +465,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -426,11 +480,15 @@
 
             
 
+            
+
              class with the specified connection string.</para
           >
         </summary>
         <param name="connectionString">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -487,8 +545,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Data.OleDb.OleDbTransaction.Rollback" />
+
+            
 
             
 
@@ -502,6 +564,8 @@
           <para
             >Starts a database transaction with the current <see
              cref="T:System.Data.IsolationLevel" />
+
+            
 
             
 
@@ -543,8 +607,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Data.OleDb.OleDbTransaction.Rollback" />
+
+            
 
             
 
@@ -561,8 +629,12 @@
 
               
 
+              
+
                method, use the overload that takes the <paramref
                name="isolationLevel" />
+
+              
 
               
 
@@ -582,6 +654,8 @@
         </returns>
         <param name="isolationLevel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -615,8 +689,12 @@
 
             
 
+            
+
              parameter must be a valid database name. The <paramref
              name="database" />
+
+            
 
             
 
@@ -635,11 +713,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -671,8 +753,12 @@
 
             
 
+            
+
              method rolls back any pending transactions. It then releases the connection to the connection pool, or closes the connection if connection pooling is disabled. If <see
              cref="M:System.Data.OleDb.OleDbConnection.Close" />
+
+            
 
             
 
@@ -685,8 +771,12 @@
 
             
 
+            
+
              event, no additional <see
              cref="E:System.Data.Common.DbConnection.StateChange" />
+
+            
 
             
 
@@ -697,6 +787,8 @@
           <para
             >An application can call <see
              cref="M:System.Data.OleDb.OleDbConnection.Close" />
+
+            
 
             
 
@@ -713,8 +805,12 @@
 
               
 
+              
+
                or Dispose on an <see
                cref="T:System.Data.OleDb.OleDbConnection" />
+
+              
 
               
 
@@ -727,10 +823,14 @@
 
               
 
+              
+
               , or any other managed object in the Finalize method of your class. In a finalizer, you should only release unmanaged resources that your class owns directly. If your class does not own any unmanaged resources, do not include a Finalize method in your class definition. For more information, see <format
                type="text/html">
                 <a href="22b6cb97-0c80-4eeb-a2cf-5ed7655e37f9">Garbage Collection</a>
               </format>
+
+              
 
               
 
@@ -772,6 +872,8 @@
 
             
 
+            
+
              is designed to match OLE DB connection string format as closely as possible with the following exceptions: </para
           >
           <list type="bullet">
@@ -784,6 +886,8 @@
 
                 
 
+                
+
                  " clause is required. However, you cannot use "Provider = MSDASQL" because the .NET Framework Data Provider for OLE DB does not support the OLE DB Provider for ODBC (MSDASQL). To access ODBC data sources, use the <see
                  cref="T:System.Data.Odbc.OdbcConnection" />
 
@@ -791,8 +895,12 @@
 
                 
 
+                
+
                  object that is in the <see
                  cref="N:System.Data.Odbc" />
+
+                
 
                 
 
@@ -810,6 +918,8 @@
 
                 
 
+                
+
                 , minus security information if Persist Security Info is set to false (default). The .NET Framework Data Provider for OLE DB does not persist or return the password in a connection string unless you set the Persist Security Info keyword to true (not recommended). To maintain a high level of security, it is strongly recommended that you use the Integrated Security keyword with Persist Security Info set to false.</para
               >
             </item>
@@ -817,6 +927,8 @@
           <para
             >You can use the <see
              cref="P:System.Data.OleDb.OleDbConnection.ConnectionString" />
+
+            
 
             
 
@@ -840,11 +952,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="P:System.Data.OleDb.OleDbConnection.ConnectionString" />
+
+            
 
             
 
@@ -857,8 +973,12 @@
 
             
 
+            
+
              properties return only those settings that are contained in the <see
              cref="P:System.Data.OleDb.OleDbConnection.ConnectionString" />
+
+            
 
             
 
@@ -874,8 +994,12 @@
 
             
 
+            
+
              on a closed connection resets all connection string values and related properties. This includes the password. For example, if you set a connection string that includes "Initial Catalog= AdventureWorks", and then reset the connection string to "Provider= SQLOLEDB;Data Source= MySQLServer;IntegratedSecurity=SSPI", the <see
              cref="P:System.Data.OleDb.OleDbConnection.Database" />
+
+            
 
             
 
@@ -891,8 +1015,12 @@
 
             
 
+            
+
              method, the connection string is fully validated. If the connection string contains invalid or unsupported properties, a run-time exception, such as <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -904,6 +1032,8 @@
             <para
               >It is possible to supply connection information for an <see
                cref="T:System.Data.OleDb.OleDbConnection" />
+
+              
 
               
 
@@ -965,6 +1095,8 @@
 
             
 
+            
+
              because an attempt to connect will wait indefinitely.</para
           >
         </remarks>
@@ -1005,8 +1137,12 @@
 
             
 
+            
+
              object associated with the <see
              cref="T:System.Data.OleDb.OleDbConnection" />
+
+            
 
             
 
@@ -1020,6 +1156,8 @@
           <para
             >An <see
              cref="T:System.Data.OleDb.OleDbCommand" />
+
+            
 
             
 
@@ -1071,8 +1209,12 @@
 
             
 
+            
+
              property updates dynamically. If you change the current database using a SQL statement or the <see
              cref="M:System.Data.OleDb.OleDbConnection.ChangeDatabase(System.String)" />
+
+            
 
             
 
@@ -1169,6 +1311,8 @@
 
             
 
+            
+
              method to enlist in a distributed transaction. Because it enlists a connection in a <see
              cref="T:System.Transactions.Transaction" />
 
@@ -1176,8 +1320,12 @@
 
             
 
+            
+
              instance, EnlistTransaction takes advantage of functionality available in the <see
              cref="N:System.Transactions" />
+
+            
 
             
 
@@ -1194,11 +1342,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >You can continue to enlist in an existing distributed transaction using the <see
              cref="M:System.Data.OleDb.OleDbConnection.EnlistDistributedTransaction(System.EnterpriseServices.ITransaction)" />
+
+            
 
             
 
@@ -1215,10 +1367,14 @@
 
             
 
+            
+
             .</para
           >
           <para>
             <see cref="M:System.Data.OleDb.OleDbConnection.EnlistDistributedTransaction(System.EnterpriseServices.ITransaction)" />
+
+            
 
             
 
@@ -1231,8 +1387,12 @@
 
             
 
+            
+
              has already started a transaction using <see
              cref="Overload:System.Data.OleDb.OleDbConnection.BeginTransaction" />
+
+            
 
             
 
@@ -1245,6 +1405,8 @@
 
             
 
+            
+
              object), <see
              cref="M:System.Data.OleDb.OleDbConnection.EnlistDistributedTransaction(System.EnterpriseServices.ITransaction)" />
 
@@ -1252,8 +1414,12 @@
 
             
 
+            
+
              rolls back the local transaction and enlists in the existing distributed transaction as requested. You will not receive notice that the local transaction was rolled back, and are responsible for managing any local transactions not started using <see
              cref="Overload:System.Data.OleDb.OleDbConnection.BeginTransaction" />
+
+            
 
             
 
@@ -1273,8 +1439,12 @@
 
           
 
+          
+
           A reference to an existing <see
            cref="T:System.EnterpriseServices.ITransaction" />
+
+          
 
           
 
@@ -1310,8 +1480,12 @@
 
             
 
+            
+
              method to enlist in a distributed transaction. Because it enlists a connection in a <see
              cref="T:System.Transactions.Transaction" />
+
+            
 
             
 
@@ -1324,8 +1498,12 @@
 
             
 
+            
+
              namespace for managing distributed transactions, making it preferable to EnlistDistributedTransaction, which uses a <see
              cref="T:System.EnterpriseServices.ITransaction" />
+
+            
 
             
 
@@ -1337,6 +1515,8 @@
                 >Performing a Distributed Transaction</a
               >
             </format>
+
+            
 
             
 
@@ -1356,8 +1536,12 @@
 
           
 
+          
+
           A reference to an existing <see
            cref="T:System.Transactions.Transaction" />
+
+          
 
           
 
@@ -1391,8 +1575,12 @@
 
             
 
+            
+
              that has the same format as the OLE DB schema rowset specified by the <paramref
              name="schema" />
+
+            
 
             
 
@@ -1405,8 +1593,12 @@
 
             
 
+            
+
              parameter to filter the rows to be returned in the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1419,6 +1611,8 @@
 
             
 
+            
+
             , all rows (one for each table) are returned in default order. Values in the array correspond to the order of the columns in the source table and <see
              cref="T:System.Data.DataTable" />
 
@@ -1426,8 +1620,12 @@
 
             
 
+            
+
             . Each element in the restrictions array is compared with the content of the corresponding column in the schema rowset. For example, the first element in the restrictions array is compared to first column in the rowset. If a restriction element is not null, only rows from the schema rowset that exactly match the value of the restriction are added to the resulting <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1443,10 +1641,14 @@
 
             
 
+            
+
              method calls the underlying OLE DB IDBSchemaRowset::GetRowset method using standard common language runtime conversion rules. For more information, see <format
              type="text/html">
               <a href="f93ae35d-a416-4218-8700-c8218cc90061">COM Data Types</a>
             </format>
+
+            
 
             
 
@@ -1457,6 +1659,8 @@
           <para
             >You can retrieve information about literals by using <see
              cref="F:System.Data.OleDb.OleDbSchemaGuid.DbInfoLiterals" />
+
+            
 
             
 
@@ -1479,6 +1683,8 @@
 
             
 
+            
+
              that contains the requested schema information.</para
           >
         </returns>
@@ -1489,8 +1695,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.OleDb.OleDbSchemaGuid" />
+
+          
 
           
 
@@ -1505,8 +1715,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1542,6 +1756,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1550,6 +1766,8 @@
           <para
             >A <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1586,8 +1804,12 @@
 
             
 
+            
+
              is specified as null, the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1606,6 +1828,8 @@
 
             
 
+            
+
              using the specified string for the schema name.</para
           >
         </summary>
@@ -1619,11 +1843,15 @@
 
             
 
+            
+
              that contains schema information.</para
           >
         </returns>
         <param name="collectionName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1660,8 +1888,12 @@
 
             
 
+            
+
              is specified as null, the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1672,6 +1904,8 @@
           <para
             >The <paramref
              name="restrictionValues" />
+
+            
 
             
 
@@ -1691,6 +1925,8 @@
 
             
 
+            
+
              using the specified string for the schema name and the specified string array for the restriction values.</para
           >
         </summary>
@@ -1699,6 +1935,8 @@
           <para
             >A <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1714,10 +1952,14 @@
 
           
 
+          
+
           Specifies the name of the schema to return.</param
         >
         <param name="restrictionValues">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1748,11 +1990,15 @@
 
             
 
+            
+
              delegate to listen to this event.</para
           >
           <para
             >The <see
              cref="E:System.Data.OleDb.OleDbConnection.InfoMessage" />
+
+            
 
             
 
@@ -1765,6 +2011,8 @@
              type="text/html">
               <a href="5a29de74-acfc-4134-8616-829dd7ce0710">Working with Connection Events</a>
             </format>
+
+            
 
             
 
@@ -1801,8 +2049,12 @@
 
             
 
+            
+
              draws an open connection from the connection pool if one is available. Otherwise, it establishes a new connection to the data source. You can open more than one DataReader on a single <see
              cref="T:System.Data.OleDb.OleDbConnection" />
+
+            
 
             
 
@@ -1819,8 +2071,12 @@
 
               
 
+              
+
                goes out of scope, it is not closed. Therefore, you must explicitly close the connection by calling <see
                cref="M:System.Data.OleDb.OleDbConnection.Close" />
+
+              
 
               
 
@@ -1835,6 +2091,8 @@
           <para
             >Opens a database connection with the property settings specified by the <see
              cref="P:System.Data.OleDb.OleDbConnection.ConnectionString" />
+
+            
 
             
 
@@ -1894,6 +2152,8 @@
 
             
 
+            
+
              objects. You might want to call this method if, for example, the connection object will not be used again for the amount of time that OLE DB services ordinarily keeps pooled connections active. Note that calling the method alone does not actually release the active connections that exist in the pool.</para
           >
           <para>The following must occur before the pool is finally disposed: </para>
@@ -1902,6 +2162,8 @@
               <para
                 >Call <see
                  cref="M:System.Data.OleDb.OleDbConnection.Close" />
+
+                
 
                 
 
@@ -1922,6 +2184,8 @@
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -1937,8 +2201,12 @@
 
             
 
+            
+
              on all active connections, and invoke garbage collection, but do not call <see
              cref="M:System.Data.OleDb.OleDbConnection.ReleaseObjectPool" />
+
+            
 
             
 
@@ -1952,6 +2220,8 @@
           <para
             >Indicates that the <see
              cref="T:System.Data.OleDb.OleDbConnection" />
+
+            
 
             
 
@@ -1992,8 +2262,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Data.OleDb.OleDbConnection.State" />
+
+            
 
             
 
@@ -2006,6 +2280,8 @@
 
             
 
+            
+
              method and then checking the <see
              cref="P:System.Data.OleDb.OleDbConnection.State" />
 
@@ -2013,8 +2289,12 @@
 
             
 
+            
+
              property will tell you that the connection is no longer open. The <see
              cref="M:System.Data.OleDb.OleDbConnection.ResetState" />
+
+            
 
             
 
@@ -2033,8 +2313,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Data.OleDb.OleDbConnection" />
+
+            
 
             
 
@@ -2063,8 +2347,12 @@
 
             
 
+            
+
              property maps to the OLE DB DBPROP_DBMSVER property. If <see
              cref="P:System.Data.OleDb.OleDbConnection.ServerVersion" />
+
+            
 
             
 
@@ -2108,8 +2396,12 @@
 
                 
 
+                
+
                  method of the <see
                  cref="T:System.Data.OleDb.OleDbConnection" />
+
+                
 
                 
 
@@ -2127,8 +2419,12 @@
 
                 
 
+                
+
                  method or the Dispose method of the <see
                  cref="T:System.Data.OleDb.OleDbConnection" />
+
+                
 
                 
 
@@ -2142,6 +2438,8 @@
             <para
               >In previous version of the .NET Framework, calling the <see
                cref="P:System.Data.OleDb.OleDbConnection.State" />
+
+              
 
               
 
@@ -2274,8 +2572,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ICloneable" />
+
+            
 
             
 
@@ -2294,6 +2596,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2302,6 +2606,8 @@
           <para
             >A new <see
              cref="T:System.Object" />
+
+            
 
             
 

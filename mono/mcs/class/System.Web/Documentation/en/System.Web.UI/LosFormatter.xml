@@ -41,6 +41,8 @@
 
             
 
+            
+
              class using default values.</para
           >
         </summary>
@@ -75,6 +77,8 @@
 
             
 
+            
+
              class using the specified enable flag and machine authentication code (MAC) key modifier.</para
           >
         </summary>
@@ -85,10 +89,14 @@
 
           
 
+          
+
           true to enable view-state MAC; otherwise, false.</param
         >
         <param name="macKeyModifier">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -120,6 +128,8 @@
 
             
 
+            
+
              class using the specified enable flag and machine authentication code (MAC) key modifier.</para
           >
         </summary>
@@ -130,10 +140,14 @@
 
           
 
+          
+
           true to enable view-state MAC; otherwise, false. </param
         >
         <param name="macKeyModifier">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -167,8 +181,12 @@
 
             
 
+            
+
              method is used to transform the view-state value contained in a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -182,6 +200,8 @@
                cref="http://go.microsoft.com/fwlink/?LinkId=330378"
                 >Untrusted Data Security Risks</see
               >
+
+              
 
               
 
@@ -201,6 +221,8 @@
 
             
 
+            
+
              object to a limited object serialization (LOS)-formatted object.</para
           >
         </summary>
@@ -215,8 +237,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -253,8 +279,12 @@
 
             
 
+            
+
              method is used to transform the view-state value contained in a <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -268,6 +298,8 @@
                cref="http://go.microsoft.com/fwlink/?LinkId=330378"
                 >Untrusted Data Security Risks</see
               >
+
+              
 
               
 
@@ -287,6 +319,8 @@
 
             
 
+            
+
              object to a limited object serialization (LOS)-formatted object.</para
           >
         </summary>
@@ -301,8 +335,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.TextReader" />
+
+          
 
           
 
@@ -336,6 +374,8 @@
 
             
 
+            
+
              method is used to transform the specified view-state value to a LOS-formatted object.</para
           >
           <block subset="none" type="note">
@@ -344,6 +384,8 @@
                cref="http://go.microsoft.com/fwlink/?LinkId=330378"
                 >Untrusted Data Security Risks</see
               >
+
+              
 
               
 
@@ -363,6 +405,8 @@
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -400,8 +444,12 @@
 
             
 
+            
+
              method is used to transform a LOS-formatted object into a view-state value. The results are then placed into a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -420,11 +468,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -437,10 +489,14 @@
 
           
 
+          
+
            to receive the transformed value. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -478,8 +534,12 @@
 
             
 
+            
+
              method is used to transform a LOS-formatted object into a view-state value. The results are then placed into a <see
              cref="T:System.IO.TextWriter" />
+
+            
 
             
 
@@ -498,11 +558,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="output">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -515,10 +579,14 @@
 
           
 
+          
+
            to receive the transformed value. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

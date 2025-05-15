@@ -14,6 +14,8 @@
 
           
 
+          
+
           ) can be used to write termination code that executes in both normal execution and exceptional conditions. Such code is difficult to write in C++ without duplicating code. </list_item
         >
         <list_item> In C#, system-level exceptions such as overflow, divide-by-zero, and null dereferences have well defined exception classes and are on a par with application-level error conditions. end note]</list_item>

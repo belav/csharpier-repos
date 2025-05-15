@@ -23,6 +23,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -41,6 +43,8 @@
         >This type is obsolete.  Please use 
       <see
          cref="T:Mono.Unix.UnixEndPoint" />
+
+        
 
         
 
@@ -89,6 +93,8 @@ catch (Exception ex)
         <param name="filename"
           >a <see
            cref="T:System.String" />
+
+          
 
           
 

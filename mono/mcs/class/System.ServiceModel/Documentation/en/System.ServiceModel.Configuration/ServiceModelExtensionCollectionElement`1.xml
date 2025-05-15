@@ -46,6 +46,8 @@
 
         
 
+        
+
          objects.</para
       >
     </summary>
@@ -127,6 +129,8 @@
 
             
 
+            
+
              property to 0.</para
           >
         </remarks>
@@ -195,6 +199,8 @@
 
           
 
+          
+
           The name of the element to search for.</param
         >
       </Docs>
@@ -227,6 +233,8 @@
         </returns>
         <param name="elementType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -315,8 +323,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -326,6 +338,8 @@
         >
         <param name="serializeCollectionKey">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -364,6 +378,8 @@
 
             
 
+            
+
              that iterates through a collection. This method cannot be inherited.</para
           >
         </summary>
@@ -372,6 +388,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -502,6 +520,8 @@
 
           
 
+          
+
           The name of the unknown sub-element.</param
         >
         <param name="reader">
@@ -511,8 +531,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -551,6 +575,8 @@
 
             
 
+            
+
              instance that contains a collection of <see
              cref="T:System.Configuration.ConfigurationProperty" />
 
@@ -558,8 +584,12 @@
 
             
 
+            
+
              objects that can be attributes or <see
              cref="T:System.Configuration.ConfigurationElement" />
+
+            
 
             
 
@@ -631,8 +661,12 @@
 
           
 
+          
+
           The parent <see
            cref="T:System.Configuration.ConfigurationElement" />
+
+          
 
           
 
@@ -671,6 +705,8 @@
 
             
 
+            
+
              property to false when overridden in a derived class. </para
           >
         </summary>
@@ -697,6 +733,8 @@
           <para
             >Sets the <see
              cref="M:System.ServiceModel.Configuration.ServiceModelExtensionCollectionElement`1.IsModified" />
+
+            
 
             
 
@@ -758,6 +796,8 @@
 
             
 
+            
+
              that iterates through a collection. This method cannot be inherited.</para
           >
         </summary>
@@ -766,6 +806,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 

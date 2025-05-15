@@ -27,8 +27,12 @@
 
         
 
+        
+
          column type in a <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
         , so any updates in the data source will reflect in the corresponding cells of the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -59,12 +67,16 @@
 
           
 
+          
+
            control.</para
         >
       </block>
       <para
         >To control appearance of this column, use the style properties of the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -81,6 +93,8 @@
 
           
 
+          
+
           . This makes it possible to embed script within HTML tags in the text. If the values for this column come from user input, be sure to validate the values to reduce security vulnerabilities.</para
         >
       </block>
@@ -90,6 +104,8 @@
       <para
         >A column type for the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -116,6 +132,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -124,6 +142,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.BoundColumn" />
+
+            
 
             
 
@@ -157,8 +177,12 @@
 
             
 
+            
+
              property to specify the field to bind to the <see
              cref="T:System.Web.UI.WebControls.BoundColumn" />
+
+            
 
             
 
@@ -172,6 +196,8 @@
           <para
             >Gets or sets the field name from the data source to bind to the <see
              cref="T:System.Web.UI.WebControls.BoundColumn" />
+
+            
 
             
 
@@ -210,6 +236,8 @@
 
             
 
+            
+
              property to provide a custom format for the items in the column.</para
           >
           <para
@@ -220,8 +248,12 @@
 
             
 
+            
+
              : <paramref
              name="Bxx" />
+
+            
 
             
 
@@ -240,6 +272,8 @@
 
             
 
+            
+
              in the general example) specifies the parameter index in a zero-based list of parameters.</para
           >
           <block subset="none" type="note">
@@ -248,6 +282,8 @@
           <para
             >The character after the colon (<paramref
              name="B" />
+
+            
 
             
 
@@ -334,6 +370,8 @@
 
             
 
+            
+
              in the general example) specifies the number of significant digits or decimal places to display.</para
           >
           <para
@@ -343,6 +381,8 @@
                 >[&lt;topic://cpconformattingoverview&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -389,8 +429,12 @@
 
             
 
+            
+
              method to convert the specified value to the format indicated by the <see
              cref="P:System.Web.UI.WebControls.BoundColumn.DataFormatString" />
+
+            
 
             
 
@@ -402,6 +446,8 @@
             <para
               >This method returns the string equivalent of the value if the <see
                cref="P:System.Web.UI.WebControls.BoundColumn.DataFormatString" />
+
+              
 
               
 
@@ -421,6 +467,8 @@
 
             
 
+            
+
              property.</para
           >
         </summary>
@@ -434,11 +482,15 @@
 
             
 
+            
+
              property.</para
           >
         </returns>
         <param name="dataValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -470,8 +522,12 @@
 
             
 
+            
+
              method to reset the <see
              cref="T:System.Web.UI.WebControls.BoundColumn" />
+
+            
 
             
 
@@ -485,6 +541,8 @@
           <para
             >Resets the <see
              cref="T:System.Web.UI.WebControls.BoundColumn" />
+
+            
 
             
 
@@ -524,8 +582,12 @@
 
             
 
+            
+
              method resets the specified cell in the <see
              cref="T:System.Web.UI.WebControls.BoundColumn" />
+
+            
 
             
 
@@ -544,6 +606,8 @@
 
             
 
+            
+
              to its initial state.</para
           >
         </summary>
@@ -554,8 +618,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.TableCell" />
+
+          
 
           
 
@@ -570,6 +638,8 @@
 
           
 
+          
+
           The column number where the cell is located. </param
         >
         <param name="itemType">
@@ -579,8 +649,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.ListItemType" />
+
+          
 
           
 
@@ -613,8 +687,12 @@
 
             
 
+            
+
              property to specify whether the items in the <see
              cref="T:System.Web.UI.WebControls.BoundColumn" />
+
+            
 
             
 
@@ -628,6 +706,8 @@
           <para
             >Gets or sets a value that indicates whether the items in the <see
              cref="T:System.Web.UI.WebControls.BoundColumn" />
+
+            
 
             
 
@@ -660,6 +740,8 @@
           <para
             >Use the <see
              cref="F:System.Web.UI.WebControls.BoundColumn.thisExpr" />
+
+            
 
             
 

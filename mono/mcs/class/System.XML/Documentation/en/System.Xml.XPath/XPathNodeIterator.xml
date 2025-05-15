@@ -39,8 +39,12 @@
 
         
 
+        
+
          object returned by the <see
          cref="T:System.Xml.XPath.XPathNavigator" />
+
+        
 
         
 
@@ -53,6 +57,8 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.Xml.XPath.XPathNodeIterator" />
 
@@ -60,8 +66,12 @@
 
         
 
+        
+
          class must be made to position the <see
          cref="T:System.Xml.XPath.XPathNodeIterator" />
+
+        
 
         
 
@@ -77,6 +87,8 @@
 
         
 
+        
+
         , if you edit the current node or any of its ancestors, your current position is lost. If you want to edit a number of nodes that you have selected, create a <see
          cref="T:System.Xml.XPath.XPathNavigator" />
 
@@ -84,8 +96,12 @@
 
         
 
+        
+
          array, copy all of the nodes from the <see
          cref="T:System.Xml.XPath.XPathNodeIterator" />
+
+        
 
         
 
@@ -101,8 +117,12 @@
 
         
 
+        
+
          collection by using the <see
          cref="T:System.Xml.XPath.XPathNodeIterator" />
+
+        
 
         
 
@@ -118,6 +138,8 @@
 
         
 
+        
+
          method and then call <see
          cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
 
@@ -125,8 +147,12 @@
 
         
 
+        
+
          to get the current <see
          cref="T:System.Xml.XPath.XPathNavigator" />
+
+        
 
         
 
@@ -143,8 +169,12 @@
 
         
 
+        
+
          method and use the returned <see
          cref="T:System.Collections.IEnumerator" />
+
+        
 
         
 
@@ -161,8 +191,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
+
+        
 
         
 
@@ -175,8 +209,12 @@
 
         
 
+        
+
         . Combining these two approaches can cause unexpected results. For example, if the <see
          cref="M:System.Xml.XPath.XPathNodeIterator.MoveNext" />
+
+        
 
         
 
@@ -189,8 +227,12 @@
 
         
 
+        
+
          method is called in the foreach loop, the foreach loop will not start enumerating the results from the beginning of the collection, but from the position after the <see
          cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
+
+        
 
         
 
@@ -234,6 +276,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -269,8 +313,12 @@
 
             
 
+            
+
              object is positioned at the same node in the node set if calls have been made to the <see
              cref="M:System.Xml.XPath.XPathNodeIterator.MoveNext" />
+
+            
 
             
 
@@ -283,8 +331,12 @@
 
             
 
+            
+
              object is not affected by subsequent changes to this <see
              cref="T:System.Xml.XPath.XPathNodeIterator" />
+
+            
 
             
 
@@ -303,6 +355,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -316,8 +370,12 @@
 
             
 
+            
+
              object clone of this <see
              cref="T:System.Xml.XPath.XPathNodeIterator" />
+
+            
 
             
 
@@ -352,8 +410,12 @@
 
             
 
+            
+
              property does not affect the position of the <see
              cref="T:System.Xml.XPath.XPathNodeIterator" />
+
+            
 
             
 
@@ -395,6 +457,8 @@
 
           
 
+          
+
            instance that represents the current node.</value
         >
         <remarks>
@@ -407,6 +471,8 @@
 
             
 
+            
+
              object to obtain information on the current node. However, the returned <see
              cref="T:System.Xml.XPath.XPathNavigator" />
 
@@ -414,8 +480,12 @@
 
             
 
+            
+
              object should not be modified. The returned <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -431,8 +501,12 @@
 
             
 
+            
+
              object using the <see
              cref="M:System.Xml.XPath.XPathNavigator.Clone" />
+
+            
 
             
 
@@ -445,6 +519,8 @@
 
             
 
+            
+
              class. The cloned <see
              cref="T:System.Xml.XPath.XPathNavigator" />
 
@@ -452,8 +528,12 @@
 
             
 
+            
+
              object can then be moved away from the selected node set. This method of cloning the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -469,8 +549,12 @@
 
             
 
+            
+
             , <see
              cref="Overload:System.Xml.XPath.XPathNavigator.SelectDescendants" />
+
+            
 
             
 
@@ -483,8 +567,12 @@
 
             
 
+            
+
              methods result in no nodes being selected, the <see
              cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
+
+            
 
             
 
@@ -495,6 +583,8 @@
           <para
             >To test whether nodes have been selected, use the <see
              cref="P:System.Xml.XPath.XPathNodeIterator.Count" />
+
+            
 
             
 
@@ -513,8 +603,12 @@
 
             
 
+            
+
              object for this <see
              cref="T:System.Xml.XPath.XPathNodeIterator" />
+
+            
 
             
 
@@ -579,6 +673,8 @@
 
             
 
+            
+
              object.</para
           >
           <para
@@ -589,8 +685,12 @@
 
             
 
+            
+
              collection by using the <see
              cref="T:System.Xml.XPath.XPathNodeIterator" />
+
+            
 
             
 
@@ -606,6 +706,8 @@
 
             
 
+            
+
              method and then call <see
              cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
 
@@ -613,8 +715,12 @@
 
             
 
+            
+
              to get the current <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -631,8 +737,12 @@
 
             
 
+            
+
              method and use the returned <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -649,8 +759,12 @@
 
             
 
+            
+
              method and <see
              cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
+
+            
 
             
 
@@ -663,8 +777,12 @@
 
             
 
+            
+
              method. Combining these two approaches can cause unexpected results. For example, if the <see
              cref="M:System.Xml.XPath.XPathNodeIterator.MoveNext" />
+
+            
 
             
 
@@ -677,8 +795,12 @@
 
             
 
+            
+
              method is called in the foreach loop, the foreach loop will not start enumerating the results from the beginning of the collection, but from the position after the <see
              cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
+
+            
 
             
 
@@ -697,6 +819,8 @@
 
             
 
+            
+
              object to iterate through the selected node set.</para
           >
         </summary>
@@ -705,6 +829,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -742,6 +868,8 @@
 
             
 
+            
+
              object is positioned on the first node in the selected node set only after the initial call to the <see
              cref="M:System.Xml.XPath.XPathNodeIterator.MoveNext" />
 
@@ -749,8 +877,12 @@
 
             
 
+            
+
              method. The node set is created in document order. Therefore, calling the <see
              cref="M:System.Xml.XPath.XPathNodeIterator.MoveNext" />
+
+            
 
             
 
@@ -766,8 +898,12 @@
 
             
 
+            
+
              collection by using the <see
              cref="T:System.Xml.XPath.XPathNodeIterator" />
+
+            
 
             
 
@@ -783,6 +919,8 @@
 
             
 
+            
+
              method and then call <see
              cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
 
@@ -790,8 +928,12 @@
 
             
 
+            
+
              to get the current <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -808,8 +950,12 @@
 
             
 
+            
+
              method and use the returned <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -826,8 +972,12 @@
 
             
 
+            
+
              method and <see
              cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
+
+            
 
             
 
@@ -840,8 +990,12 @@
 
             
 
+            
+
              method. Combining these two approaches can cause unexpected results. For example, if the <see
              cref="M:System.Xml.XPath.XPathNodeIterator.MoveNext" />
+
+            
 
             
 
@@ -854,8 +1008,12 @@
 
             
 
+            
+
              method is called in the foreach loop, the foreach loop will not start enumerating the results from the beginning of the collection, but from the position after the <see
              cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
+
+            
 
             
 
@@ -874,8 +1032,12 @@
 
             
 
+            
+
              object returned by the <see
              cref="P:System.Xml.XPath.XPathNodeIterator.Current" />
+
+            
 
             
 
@@ -889,6 +1051,8 @@
           <para
             >true if the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -926,8 +1090,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ICloneable" />
+
+            
 
             
 

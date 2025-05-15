@@ -20,8 +20,12 @@
 
         
 
+        
+
          enumeration represents the horizontal or vertical placement of the HTML caption element in controls that can be rendered as tables, such as <see
          cref="T:System.Web.UI.WebControls.Table" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -48,6 +56,8 @@
 
         
 
+        
+
         . For example, the <see
          cref="P:System.Web.UI.WebControls.Table.CaptionAlign" />
 
@@ -55,8 +65,12 @@
 
         
 
+        
+
          property uses these enumeration values to set the caption alignment in a <see
          cref="T:System.Web.UI.WebControls.Table" />
+
+        
 
         
 
@@ -72,11 +86,15 @@
 
         
 
+        
+
         , the browser in which the control is rendered determines where to align the caption.</para
       >
       <para
         >The <see
          cref="P:System.Web.UI.WebControls.Table.CaptionAlign" />
+
+        
 
         
 
@@ -89,8 +107,12 @@
 
         
 
+        
+
          property specifies the text to display in the caption element. Assistive technology devices can use the description provided by the <see
          cref="P:System.Web.UI.WebControls.Table.Caption" />
+
+        
 
         
 

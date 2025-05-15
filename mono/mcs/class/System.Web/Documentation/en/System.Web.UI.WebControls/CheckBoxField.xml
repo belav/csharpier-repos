@@ -24,8 +24,12 @@
 
         
 
+        
+
          class is used by data-bound controls (such as <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
         ) to display the value of a Boolean data field in a check box. The <see
          cref="T:System.Web.UI.WebControls.CheckBoxField" />
+
+        
 
         
 
@@ -52,6 +60,8 @@
 
         
 
+        
+
          control displays a <see
          cref="T:System.Web.UI.WebControls.CheckBoxField" />
 
@@ -59,8 +69,12 @@
 
         
 
+        
+
          object as a column, while the <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -77,6 +91,8 @@
 
           
 
+          
+
            object.</para
         >
       </block>
@@ -88,8 +104,12 @@
 
         
 
+        
+
          object, set the <see
          cref="P:System.Web.UI.WebControls.BoundField.DataField" />
+
+        
 
         
 
@@ -106,8 +126,12 @@
 
           
 
+          
+
            object can be bound only to a field with a Boolean data type or a string that can be parsed by <see
            cref="M:System.Boolean.Parse(System.String)" />
+
+          
 
           
 
@@ -124,8 +148,12 @@
 
         
 
+        
+
          property. A <see
          cref="T:System.Web.UI.WebControls.CheckBoxField" />
+
+        
 
         
 
@@ -138,8 +166,12 @@
 
         
 
+        
+
          property is set to false. To prevent the value of a field from being modified in edit mode, set the <see
          cref="P:System.Web.UI.WebControls.BoundField.ReadOnly" />
+
+        
 
         
 
@@ -152,6 +184,8 @@
 
         
 
+        
+
          control), you can hide a <see
          cref="T:System.Web.UI.WebControls.CheckBoxField" />
 
@@ -159,8 +193,12 @@
 
         
 
+        
+
          object in insert mode by setting the <see
          cref="P:System.Web.UI.WebControls.DataControlField.InsertVisible" />
+
+        
 
         
 
@@ -176,8 +214,12 @@
 
         
 
+        
+
          object. To display a caption in the header or footer sections, set the <see
          cref="P:System.Web.UI.WebControls.DataControlField.HeaderText" />
+
+        
 
         
 
@@ -190,8 +232,12 @@
 
         
 
+        
+
          properties, respectively. Instead of displaying text in the header section, you can display an image by setting the <see
          cref="P:System.Web.UI.WebControls.DataControlField.HeaderImageUrl" />
+
+        
 
         
 
@@ -204,8 +250,12 @@
 
         
 
+        
+
          object by setting the <see
          cref="P:System.Web.UI.WebControls.DataControlField.ShowHeader" />
+
+        
 
         
 
@@ -222,8 +272,12 @@
 
           
 
+          
+
            control) can show or hide only the entire header section of the control. These data-bound controls do not support the <see
            cref="P:System.Web.UI.WebControls.DataControlField.ShowHeader" />
+
+          
 
           
 
@@ -235,6 +289,8 @@
       <para
         >You also can customize the appearance of the <see
          cref="T:System.Web.UI.WebControls.CheckBoxField" />
+
+        
 
         
 
@@ -268,6 +324,8 @@
 
               
 
+              
+
                object. </para
             >
           </description>
@@ -282,6 +340,8 @@
             <para
               >The style settings for the footer section of the <see
                cref="T:System.Web.UI.WebControls.CheckBoxField" />
+
+              
 
               
 
@@ -306,6 +366,8 @@
 
               
 
+              
+
                object. </para
             >
           </description>
@@ -320,6 +382,8 @@
             <para
               >The style settings for the data items in the <see
                cref="T:System.Web.UI.WebControls.CheckBoxField" />
+
+              
 
               
 
@@ -353,11 +417,15 @@
 
             
 
+            
+
              class. This constructor is commonly used when adding fields to a dynamically created data-bound control.</para
           >
           <para
             >To dynamically add a <see
              cref="T:System.Web.UI.WebControls.CheckBoxField" />
+
+            
 
             
 
@@ -370,8 +438,12 @@
 
             
 
+            
+
              object, set its properties, and then add it to the data-bound control's field collection. For example, if you are using the <see
              cref="T:System.Web.UI.WebControls.GridView" />
+
+            
 
             
 
@@ -384,8 +456,12 @@
 
             
 
+            
+
              object to the <see
              cref="P:System.Web.UI.WebControls.GridView.Columns" />
+
+            
 
             
 
@@ -402,6 +478,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.CheckBoxField" />
+
+            
 
             
 
@@ -448,8 +526,12 @@
 
             
 
+            
+
              property is inherited from the <see
              cref="T:System.Web.UI.WebControls.BoundField" />
+
+            
 
             
 
@@ -462,8 +544,12 @@
 
             
 
+            
+
              class. Any attempt to access the value of this property will throw a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -482,8 +568,12 @@
 
             
 
+            
+
              property. This property is not supported by the <see
              cref="T:System.Web.UI.WebControls.CheckBoxField" />
+
+            
 
             
 
@@ -530,8 +620,12 @@
 
             
 
+            
+
              property is inherited from the <see
              cref="T:System.Web.UI.WebControls.BoundField" />
+
+            
 
             
 
@@ -544,8 +638,12 @@
 
             
 
+            
+
              class. Any attempt to access the value of this property will throw a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -564,8 +662,12 @@
 
             
 
+            
+
              property. This property is not supported by the <see
              cref="T:System.Web.UI.WebControls.CheckBoxField" />
+
+            
 
             
 
@@ -603,8 +705,12 @@
 
             
 
+            
+
              method is a helper method used by the <see
              cref="M:System.Web.UI.WebControls.DataControlField.CloneField" />
+
+            
 
             
 
@@ -617,6 +723,8 @@
 
             
 
+            
+
              object to the <see
              cref="T:System.Web.UI.WebControls.DataControlField" />
 
@@ -624,8 +732,12 @@
 
             
 
+            
+
              object created by the <see
              cref="M:System.Web.UI.WebControls.CheckBoxField.CopyProperties(System.Web.UI.WebControls.DataControlField)" />
+
+            
 
             
 
@@ -644,8 +756,12 @@
 
             
 
+            
+
              object to the specified <see
              cref="T:System.Web.UI.WebControls.DataControlField" />
+
+            
 
             
 
@@ -661,6 +777,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.DataControlField" />
 
@@ -668,8 +786,12 @@
 
           
 
+          
+
            to copy the properties of the current <see
            cref="T:System.Web.UI.WebControls.CheckBoxField" />
+
+          
 
           
 
@@ -704,8 +826,12 @@
 
             
 
+            
+
              method is a helper method used by the <see
              cref="M:System.Web.UI.WebControls.DataControlField.CloneField" />
+
+            
 
             
 
@@ -718,8 +844,12 @@
 
             
 
+            
+
              object to which the properties of the current <see
              cref="T:System.Web.UI.WebControls.CheckBoxField" />
+
+            
 
             
 
@@ -738,6 +868,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -746,6 +878,8 @@
           <para
             >An empty <see
              cref="T:System.Web.UI.WebControls.CheckBoxField" />
+
+            
 
             
 
@@ -792,8 +926,12 @@
 
             
 
+            
+
              property is inherited from the <see
              cref="T:System.Web.UI.WebControls.BoundField" />
+
+            
 
             
 
@@ -806,8 +944,12 @@
 
             
 
+            
+
              class. Any attempt to access the value of this property will throw a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -821,6 +963,8 @@
           <para
             >Gets or sets the string that specifies the display format for the value of the field. This property is not supported by the <see
              cref="T:System.Web.UI.WebControls.CheckBoxField" />
+
+            
 
             
 
@@ -861,6 +1005,8 @@
 
             
 
+            
+
              method is provided as a convenient way to retrieve the values of the fields from the specified <see
              cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
 
@@ -868,8 +1014,12 @@
 
             
 
+            
+
              object in a <see
              cref="T:System.Web.UI.WebControls.CheckBoxField" />
+
+            
 
             
 
@@ -888,6 +1038,8 @@
 
             
 
+            
+
              object passed in for the <paramref
              name="dictionary" />
 
@@ -895,8 +1047,12 @@
 
             
 
+            
+
              parameter. After the method has been called, iterate through the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -913,8 +1069,12 @@
 
               
 
+              
+
                object contains read-only field values, you must pass in true for the <paramref
                name="includeReadOnly" />
+
+              
 
               
 
@@ -934,8 +1094,12 @@
 
             
 
+            
+
              object with the values from the specified <see
              cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
+
+            
 
             
 
@@ -951,8 +1115,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -967,8 +1135,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
+
+          
 
           
 
@@ -983,8 +1155,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.DataControlRowState" />
+
+          
 
           
 
@@ -994,6 +1170,8 @@
         >
         <param name="includeReadOnly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1025,8 +1203,12 @@
 
             
 
+            
+
              method is a helper method used to determine what value to display for a field when rendering the <see
              cref="T:System.Web.UI.WebControls.CheckBoxField" />
+
+            
 
             
 
@@ -1040,6 +1222,8 @@
           <para
             >Retrieves the value used for the field's value when rendering the <see
              cref="T:System.Web.UI.WebControls.CheckBoxField" />
+
+            
 
             
 
@@ -1087,8 +1271,12 @@
 
             
 
+            
+
              property is inherited from the <see
              cref="T:System.Web.UI.WebControls.BoundField" />
+
+            
 
             
 
@@ -1101,8 +1289,12 @@
 
             
 
+            
+
              class. Any attempt to access the value of this property will throw a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -1121,8 +1313,12 @@
 
             
 
+            
+
              property. This property is not supported by the <see
              cref="T:System.Web.UI.WebControls.CheckBoxField" />
+
+            
 
             
 
@@ -1161,8 +1357,12 @@
 
             
 
+            
+
              method is a helper method used to initialize a cell in the <see
              cref="T:System.Web.UI.WebControls.CheckBoxField" />
+
+            
 
             
 
@@ -1181,6 +1381,8 @@
 
             
 
+            
+
              object to the specified row state.</para
           >
         </summary>
@@ -1191,8 +1393,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.DataControlFieldCell" />
+
+          
 
           
 
@@ -1207,8 +1413,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.DataControlRowState" />
+
+          
 
           
 
@@ -1251,8 +1461,12 @@
 
             
 
+            
+
              property is inherited from the <see
              cref="T:System.Web.UI.WebControls.BoundField" />
+
+            
 
             
 
@@ -1265,8 +1479,12 @@
 
             
 
+            
+
              class. Any attempt to access the value of this property will throw a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -1280,6 +1498,8 @@
           <para
             >Gets or sets the text displayed for a field when the field's value is null. This property is not supported by the <see
              cref="T:System.Web.UI.WebControls.CheckBoxField" />
+
+            
 
             
 
@@ -1318,8 +1538,12 @@
 
             
 
+            
+
              method is a helper method used to bind the value of a field in the data source to a corresponding check box in the <see
              cref="T:System.Web.UI.WebControls.CheckBoxField" />
+
+            
 
             
 
@@ -1338,11 +1562,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="sender">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1357,8 +1585,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1420,6 +1652,8 @@
 
             
 
+            
+
              property is used to display a caption next to each check box in a <see
              cref="T:System.Web.UI.WebControls.CheckBoxField" />
 
@@ -1427,8 +1661,12 @@
 
             
 
+            
+
              object. If the <see
              cref="P:System.Web.UI.WebControls.CheckBoxField.Text" />
+
+            
 
             
 
@@ -1445,12 +1683,16 @@
 
               
 
+              
+
                object share the same caption.</para
             >
           </block>
           <para
             >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
              cref="T:System.ComponentModel.LocalizableAttribute" />
+
+            
 
             
 
@@ -1467,6 +1709,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1475,6 +1719,8 @@
           <para
             >Gets or sets the caption to display next to each check box in a <see
              cref="T:System.Web.UI.WebControls.CheckBoxField" />
+
+            
 
             
 

@@ -35,6 +35,8 @@
 
         
 
+        
+
          class.</para
       >
     </remarks>
@@ -43,6 +45,8 @@
       <para
         >Initializes new instances of the <see
          cref="T:System.Runtime.Remoting.Channels.Http.HttpRemotingHandler" />
+
+        
 
         
 
@@ -65,6 +69,8 @@
           <para
             >Creates an instance of <see
              cref="T:System.Runtime.Remoting.Channels.Http.HttpRemotingHandlerFactory" />
+
+            
 
             
 
@@ -105,6 +111,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -113,6 +121,8 @@
           <para
             >Returns an instance of the <see
              cref="T:System.Runtime.Remoting.Channels.Http.HttpRemotingHandler" />
+
+            
 
             
 
@@ -131,6 +141,8 @@
 
             
 
+            
+
              that processes the request.</para
           >
         </returns>
@@ -141,8 +153,12 @@
 
           
 
+          
+
           An instance of the <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -157,6 +173,8 @@
 
           
 
+          
+
           The HTTP data transfer method (GET or POST) that the client uses. </param
         >
         <param name="url">
@@ -166,8 +184,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Web.HttpRequest.RawUrl" />
+
+          
 
           
 
@@ -182,8 +204,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Web.HttpRequest.PhysicalApplicationPath" />
+
+          
 
           
 
@@ -221,6 +247,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -231,8 +259,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.IHttpHandler" />
+
+          
 
           
 

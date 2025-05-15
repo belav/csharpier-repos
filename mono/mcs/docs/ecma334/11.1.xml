@@ -11,6 +11,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="11.1">struct-type</non_terminal>
@@ -23,6 +25,8 @@
       <name>
         <non_terminal where="11.1">struct-type</non_terminal>
       </name>
+
+      
 
       
 
@@ -45,6 +49,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="11.1">numeric-type</non_terminal>
@@ -57,6 +63,8 @@
       <name>
         <non_terminal where="11.1">numeric-type</non_terminal>
       </name>
+
+      
 
       
 
@@ -77,6 +85,8 @@
       <name>
         <non_terminal where="11.1">integral-type</non_terminal>
       </name>
+
+      
 
       
 
@@ -120,6 +130,8 @@
 
       
 
+      
+
        : <rhs
       >
         <keyword>float</keyword>
@@ -137,6 +149,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="10.8">type-name</non_terminal>
@@ -146,6 +160,8 @@
   <paragraph
     >All value types implicitly inherit from class object. It is not possible for any type to derive from a value type, and value types are thus implicitly sealed (<hyperlink
     >17.1.1.2</hyperlink>
+
+    
 
     
 

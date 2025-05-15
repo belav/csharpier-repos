@@ -28,8 +28,12 @@
 
         
 
+        
+
          enumeration has a <see
          cref="T:System.FlagsAttribute" />
+
+        
 
         
 
@@ -43,6 +47,8 @@
       <para
         >Specifies whether to remove duplicate namespace declarations in the <see
          cref="T:System.Xml.XmlWriter" />
+
+        
 
         
 

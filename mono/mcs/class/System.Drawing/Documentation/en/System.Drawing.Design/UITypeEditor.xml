@@ -24,8 +24,12 @@
 
         
 
+        
+
          class provides a base class that you can derive from and extend to implement a custom type editor for the design-time environment. Typically, your custom type editor interacts with the <see
          cref="T:System.Windows.Forms.PropertyGrid" />
+
+        
 
         
 
@@ -45,6 +49,8 @@
 
             
 
+            
+
             .</para
           >
         </item>
@@ -57,6 +63,8 @@
 
             
 
+            
+
              method to handle the user interface, user input processing, and value assignment.</para
           >
         </item>
@@ -64,6 +72,8 @@
           <para
             >Override the <see
              cref="M:System.Drawing.Design.UITypeEditor.GetEditStyle" />
+
+            
 
             
 
@@ -84,6 +94,8 @@
 
             
 
+            
+
              method to indicate that the editor supports displaying the value's representation.</para
           >
         </item>
@@ -96,6 +108,8 @@
 
             
 
+            
+
              method to implement the display of the value's representation.</para
           >
         </item>
@@ -103,6 +117,8 @@
           <para
             >Override the <see
              cref="T:System.Drawing.Design.UITypeEditor" />
+
+            
 
             
 
@@ -121,6 +137,8 @@
 
           
 
+          
+
            class does not support right-to-left (RTL) layouts.</para
         >
       </block>
@@ -134,8 +152,12 @@
 
         
 
+        
+
         . For more information on implementing a <see
          cref="T:System.Drawing.Design.UITypeEditor" />
+
+        
 
         
 
@@ -145,6 +167,8 @@
          type="text/html">
           <a href="f068b4ea-6e8c-4c0b-aefd-188b337240da">User Interface Type Editors Overview</a>
         </format>
+
+        
 
         
 
@@ -171,6 +195,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Drawing.Design.UITypeEditor" />
+
+            
 
             
 
@@ -213,6 +239,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -227,8 +255,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IServiceProvider" />
+
+          
 
           
 
@@ -238,6 +270,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -280,6 +314,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -294,8 +330,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -310,8 +350,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IServiceProvider" />
+
+          
 
           
 
@@ -321,6 +365,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -355,6 +401,8 @@
 
             
 
+            
+
              does not override and implement this method, <see
              cref="M:System.Drawing.Design.UITypeEditor.GetEditStyle" />
 
@@ -362,8 +410,12 @@
 
             
 
+            
+
              will return <see
              cref="F:System.Drawing.Design.UITypeEditorEditStyle.None" />
+
+            
 
             
 
@@ -382,6 +434,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -395,6 +449,8 @@
 
             
 
+            
+
              enumeration value that indicates the style of editor used by the current <see
              cref="T:System.Drawing.Design.UITypeEditor" />
 
@@ -402,8 +458,12 @@
 
             
 
+            
+
             . By default, this method will return <see
              cref="F:System.Drawing.Design.UITypeEditorEditStyle.None" />
+
+            
 
             
 
@@ -442,6 +502,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -455,8 +517,12 @@
 
             
 
+            
+
              value that indicates the style of editor used by the <see
              cref="M:System.Drawing.Design.UITypeEditor.EditValue(System.IServiceProvider,System.Object)" />
+
+            
 
             
 
@@ -469,6 +535,8 @@
 
             
 
+            
+
              does not support this method, then <see
              cref="M:System.Drawing.Design.UITypeEditor.GetEditStyle" />
 
@@ -476,8 +544,12 @@
 
             
 
+            
+
              will return <see
              cref="F:System.Drawing.Design.UITypeEditorEditStyle.None" />
+
+            
 
             
 
@@ -493,8 +565,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -526,6 +602,8 @@
           <para
             >true if <see
              cref="M:System.Drawing.Design.UITypeEditor.PaintValue(System.Object,System.Drawing.Graphics,System.Drawing.Rectangle)" />
+
+            
 
             
 
@@ -568,6 +646,8 @@
 
             
 
+            
+
              is implemented; otherwise, false.</para
           >
         </returns>
@@ -578,8 +658,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -638,6 +722,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -648,8 +734,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Design.PaintValueEventArgs" />
+
+          
 
           
 
@@ -693,10 +783,14 @@
 
           
 
+          
+
           The object whose value this type editor will display. </param
         >
         <param name="canvas">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -711,8 +805,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 

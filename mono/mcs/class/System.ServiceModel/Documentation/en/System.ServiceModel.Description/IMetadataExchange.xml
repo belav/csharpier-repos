@@ -28,11 +28,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >Services implemented using indigo2 publish metadata by exposing one or more metadata endpoints. Metadata endpoints in indigo2 have an address, a binding and a contract like any other endpoint.  The <see
          cref="T:System.ServiceModel.Description.MetadataReference" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
          contract in your service implementation.  Instead, add the <see
          cref="T:System.ServiceModel.Description.ServiceMetadataBehavior" />
+
+        
 
         
 
@@ -69,6 +77,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -76,6 +86,8 @@
          type="text/html">
           <a href="3a56831a-cabc-45c0-bd02-12e2e9bd7313">Publishing Metadata</a>
         </format>
+
+        
 
         
 
@@ -132,8 +144,12 @@
 
             
 
+            
+
              that can be passed to the <see
              cref="M:System.ServiceModel.Description.IMetadataExchange.EndGet(System.IAsyncResult)" />
+
+            
 
             
 
@@ -149,8 +165,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.Channels.Message" />
+
+          
 
           
 
@@ -165,8 +185,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -176,6 +200,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -220,6 +246,8 @@
 
             
 
+            
+
              containing the processed metadata.</para
           >
         </returns>
@@ -230,8 +258,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IAsyncResult" />
+
+          
 
           
 
@@ -281,6 +313,8 @@
 
             
 
+            
+
              containing the metadata.</para
           >
         </returns>
@@ -291,8 +325,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.Channels.Message" />
+
+          
 
           
 

@@ -111,10 +111,14 @@
 
           
 
+          
+
           The closure array.</param
         >
         <param name="indexes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -169,10 +173,14 @@
 
           
 
+          
+
           The Expando object.</param
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -224,6 +232,8 @@
 
           
 
+          
+
           The Expando object.</param
         >
         <param name="oldClass">
@@ -233,10 +243,14 @@
 
           
 
+          
+
           The old class of the Expando object.</param
         >
         <param name="newClass">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -294,10 +308,14 @@
 
           
 
+          
+
           The expando object.</param
         >
         <param name="indexClass">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -312,6 +330,8 @@
 
           
 
+          
+
           The index of the member.</param
         >
         <param name="name">
@@ -321,10 +341,14 @@
 
           
 
+          
+
           The name of the member.</param
         >
         <param name="ignoreCase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -427,10 +451,14 @@
 
           
 
+          
+
           The expando object.</param
         >
         <param name="indexClass">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -445,10 +473,14 @@
 
           
 
+          
+
           The index of the member.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -463,10 +495,14 @@
 
           
 
+          
+
           The name of the member.</param
         >
         <param name="ignoreCase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -522,6 +558,8 @@
 
           
 
+          
+
           The first list.</param
         >
         <param name="second">
@@ -531,10 +569,14 @@
 
           
 
+          
+
           The second list.</param
         >
         <param name="indexes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -590,6 +632,8 @@
 
           
 
+          
+
           The expression to quote.</param
         >
         <param name="hoistedLocals">
@@ -599,10 +643,14 @@
 
           
 
+          
+
           The hoisted local state provided by the compiler.</param
         >
         <param name="locals">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

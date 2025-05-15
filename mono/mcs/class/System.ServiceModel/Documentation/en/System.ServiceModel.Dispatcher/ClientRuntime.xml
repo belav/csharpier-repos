@@ -24,8 +24,12 @@
 
         
 
+        
+
          or of <see
          cref="T:System.ServiceModel.IClientChannel" />
+
+        
 
         
 
@@ -41,10 +45,14 @@
 
         
 
+        
+
          class is an extensibility point to which you can add extension objects that intercept messages and extend client behavior across all operations. Interception objects can process all messages in a particular contract, process only messages for particular operations, perform custom channel initialization, and implement other custom client application behavior. For an overview of client architecture, see <format
          type="text/html">
           <a href="02624403-0d77-41cb-9a86-ab55e98c7966">Client Architecture</a>
         </format>
+
+        
 
         
 
@@ -59,10 +67,14 @@
 
         
 
+        
+
         . For details about customizations and how to perform them, see <format
          type="text/html">
           <a href="1328c61c-06e5-455f-9ebd-ceefb59d3867">Extending Clients</a>
         </format>
+
+        
 
         
 
@@ -80,6 +92,8 @@
 
             
 
+            
+
              property returns the dispatch run-time object for service-initiated callback operations.</para
           >
         </item>
@@ -87,6 +101,8 @@
           <para
             >The <see
              cref="P:System.ServiceModel.Dispatcher.ClientRuntime.OperationSelector" />
+
+            
 
             
 
@@ -104,6 +120,8 @@
 
             
 
+            
+
              property enables the addition of a channel initializer that can inspect or modify the client channel.</para
           >
         </item>
@@ -111,6 +129,8 @@
           <para
             >The <see
              cref="P:System.ServiceModel.Dispatcher.ClientRuntime.InteractiveChannelInitializers" />
+
+            
 
             
 
@@ -128,8 +148,12 @@
 
             
 
+            
+
              property gets a collection of <see
              cref="T:System.ServiceModel.Dispatcher.ClientOperation" />
+
+            
 
             
 
@@ -147,6 +171,8 @@
 
             
 
+            
+
              property enables an application to turn off some automatic addressing headers to directly control addressing.</para
           >
         </item>
@@ -154,6 +180,8 @@
           <para
             >The <see
              cref="P:System.ServiceModel.Dispatcher.ClientRuntime.MaxFaultSize" />
+
+            
 
             
 
@@ -171,8 +199,12 @@
 
             
 
+            
+
              property gets a collection of <see
              cref="T:System.ServiceModel.Dispatcher.IClientMessageInspector" />
+
+            
 
             
 
@@ -190,6 +222,8 @@
 
             
 
+            
+
              property returns the operation to which unexpected messages are passed.</para
           >
         </item>
@@ -202,6 +236,8 @@
 
             
 
+            
+
              property informs the system whether it should confirm that SOAP headers marked as MustUnderstand have, in fact, been understood.</para
           >
         </item>
@@ -209,6 +245,8 @@
           <para
             >The <see
              cref="P:System.ServiceModel.Dispatcher.ClientRuntime.Via" />
+
+            
 
             
 
@@ -331,6 +369,8 @@
 
             
 
+            
+
              property to add a custom <see
              cref="T:System.ServiceModel.Dispatcher.IChannelInitializer" />
 
@@ -338,8 +378,12 @@
 
             
 
+            
+
              object that can inspect the channel that is associated with a client on creation, register for events on the channel, and associate state with the channel by using <see
              cref="T:System.ServiceModel.IExtension`1" />
+
+            
 
             
 
@@ -502,6 +546,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -533,12 +579,16 @@
 
             
 
+            
+
              property to true if you want to prevent the client from adding Message ID and Reply-To addressing headers to request/response messages so that your application can control these headers.</para
           >
           <block subset="none" type="note">
             <para
               >If <see
                cref="P:System.ServiceModel.Dispatcher.ClientRuntime.ManualAddressing" />
+
+              
 
               
 
@@ -571,6 +621,8 @@
           <para
             >Use the <see
              cref="P:System.ServiceModel.Dispatcher.ClientRuntime.MaxFaultSize" />
+
+            
 
             
 
@@ -613,8 +665,12 @@
 
             
 
+            
+
              property to attach custom <see
              cref="T:System.ServiceModel.Dispatcher.IClientMessageInspector" />
+
+            
 
             
 
@@ -682,8 +738,12 @@
 
             
 
+            
+
              property to get a collection of all client operations for this client that you can use to attach extension objects that inspect or modify messages and behavior scoped to a particular operation. For details, see <see
              cref="T:System.ServiceModel.Dispatcher.ClientOperation" />
+
+            
 
             
 
@@ -726,8 +786,12 @@
 
             
 
+            
+
              property to modify the selection of an operation when a client invokes a particular method. The default algorithm is to use the name of the <see
              cref="P:System.ServiceModel.OperationContractAttribute.Name" />
+
+            
 
             
 
@@ -740,8 +804,12 @@
 
             
 
+            
+
              in the <see
              cref="P:System.ServiceModel.Dispatcher.ClientRuntime.Operations" />
+
+            
 
             
 
@@ -754,6 +822,8 @@
 
             
 
+            
+
              object is found, the invocation is dispatched to the <see
              cref="T:System.ServiceModel.Dispatcher.ClientOperation" />
 
@@ -761,8 +831,12 @@
 
             
 
+            
+
              object returned from the <see
              cref="P:System.ServiceModel.Dispatcher.ClientRuntime.UnhandledClientOperation" />
+
+            
 
             
 
@@ -781,8 +855,12 @@
 
             
 
+            
+
              implementation that can be used to select a <see
              cref="T:System.ServiceModel.Dispatcher.ClientOperation" />
+
+            
 
             
 
@@ -822,8 +900,12 @@
 
             
 
+            
+
              in the <see
              cref="P:System.ServiceModel.Dispatcher.ClientRuntime.Operations" />
+
+            
 
             
 
@@ -856,8 +938,12 @@
 
             
 
+            
+
              property to turn off the enforced validation of arriving message headers. In normal execution, message headers are compared against the <see
              cref="P:System.ServiceModel.Channels.MessageHeaders.UnderstoodHeaders" />
+
+            
 
             
 
@@ -894,8 +980,12 @@
 
             
 
+            
+
              property to specify a transport address for messages when the immediate destination of messages is not the client's <see
              cref="P:System.ServiceModel.EndpointAddress.Uri" />
+
+            
 
             
 
@@ -908,11 +998,15 @@
 
             
 
+            
+
              property of the client is a logical name.</para
           >
           <para
             >It is this value that the <see
              cref="T:System.ServiceModel.Description.ClientViaBehavior" />
+
+            
 
             
 

@@ -37,8 +37,12 @@
 
         
 
+        
+
          enumeration defines the status codes assigned to the <see
          cref="P:System.Net.WebException.Status" />
+
+        
 
         
 
@@ -52,6 +56,8 @@
       <para
         >Defines status codes for the <see
          cref="T:System.Net.WebException" />
+
+        
 
         
 
@@ -400,8 +406,12 @@
 
             
 
+            
+
              method was called, or an unclassifiable error occurred. This is the default value for <see
              cref="P:System.Net.WebException.Status" />
+
+            
 
             
 

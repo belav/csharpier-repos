@@ -49,6 +49,8 @@
 
         
 
+        
+
          which is a target URI for which the <see
          cref="System.IdentityModel.Tokens.SamlSecurityToken" />
 
@@ -56,8 +58,12 @@
 
         
 
+        
+
          security token can be targeted for in order to be considered valid by a <see
          cref="System.IdentityModel.Selectors.SamlSecurityTokenAuthenticator" />
+
+        
 
         
 
@@ -86,6 +92,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Configuration.AllowedAudienceUriElementCollection" />
+
+            
 
             
 

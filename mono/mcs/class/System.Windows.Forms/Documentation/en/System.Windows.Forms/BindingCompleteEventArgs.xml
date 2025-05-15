@@ -24,6 +24,8 @@
 
         
 
+        
+
          contains information regarding exceptions or errors that occurred during a binding process.</para
       >
     </remarks>
@@ -32,6 +34,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.Binding.BindingComplete" />
+
+        
 
         
 
@@ -64,8 +68,12 @@
 
             
 
+            
+
              indicates whether the binding process was successful or an error or exception occurred. <paramref
              name="context" />
+
+            
 
             
 
@@ -84,6 +92,8 @@
 
             
 
+            
+
              class with the specified binding, error state, and binding context.</para
           >
         </summary>
@@ -94,8 +104,12 @@
 
           
 
+          
+
           The binding associated with this occurrence of a <see
            cref="E:System.Windows.Forms.Binding.BindingComplete" />
+
+          
 
           
 
@@ -110,8 +124,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.BindingCompleteState" />
+
+          
 
           
 
@@ -126,8 +144,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.BindingCompleteContext" />
+
+          
 
           
 
@@ -163,8 +185,12 @@
 
             
 
+            
+
              indicates whether the binding process was successful or an error or exception occurred. <paramref
              name="context" />
+
+            
 
             
 
@@ -183,6 +209,8 @@
 
             
 
+            
+
              class with the specified binding, error state and text, and binding context.</para
           >
         </summary>
@@ -193,8 +221,12 @@
 
           
 
+          
+
           The binding associated with this occurrence of a <see
            cref="E:System.Windows.Forms.Binding.BindingComplete" />
+
+          
 
           
 
@@ -209,8 +241,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.BindingCompleteState" />
+
+          
 
           
 
@@ -225,8 +261,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.BindingCompleteContext" />
+
+          
 
           
 
@@ -236,6 +276,8 @@
         >
         <param name="errorText">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -272,8 +314,12 @@
 
             
 
+            
+
              indicates whether the binding process was successful or an error or exception occurred. <paramref
              name="context" />
+
+            
 
             
 
@@ -292,6 +338,8 @@
 
             
 
+            
+
              class with the specified binding, error state and text, binding context, and exception.</para
           >
         </summary>
@@ -302,8 +350,12 @@
 
           
 
+          
+
           The binding associated with this occurrence of a <see
            cref="E:System.Windows.Forms.Binding.BindingComplete" />
+
+          
 
           
 
@@ -318,8 +370,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.BindingCompleteState" />
+
+          
 
           
 
@@ -334,8 +390,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.BindingCompleteContext" />
+
+          
 
           
 
@@ -350,6 +410,8 @@
 
           
 
+          
+
           The error text or exception message for errors that occurred during the binding.</param
         >
         <param name="exception">
@@ -359,8 +421,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Exception" />
+
+          
 
           
 
@@ -398,8 +464,12 @@
 
             
 
+            
+
              indicates whether the binding process was successful or an error or exception occurred. <paramref
              name="context" />
+
+            
 
             
 
@@ -418,6 +488,8 @@
 
             
 
+            
+
              class with the specified binding, error state and text, binding context, exception, and whether the binding should be cancelled.</para
           >
         </summary>
@@ -428,8 +500,12 @@
 
           
 
+          
+
           The binding associated with this occurrence of a <see
            cref="E:System.Windows.Forms.Binding.BindingComplete" />
+
+          
 
           
 
@@ -444,8 +520,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.BindingCompleteState" />
+
+          
 
           
 
@@ -460,8 +540,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.BindingCompleteContext" />
+
+          
 
           
 
@@ -476,10 +560,14 @@
 
           
 
+          
+
           The error text or exception message for errors that occurred during the binding.</param
         >
         <param name="exception">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -492,10 +580,14 @@
 
           
 
+          
+
            that occurred during the binding.</param
         >
         <param name="cancel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -527,8 +619,12 @@
 
             
 
+            
+
              might also be associated with the <see
              cref="E:System.Windows.Forms.BindingSource.BindingComplete" />
+
+            
 
             
 
@@ -541,8 +637,12 @@
 
             
 
+            
+
              or of a class that inherits from <see
              cref="T:System.Windows.Forms.BindingManagerBase" />
+
+            
 
             
 
@@ -556,6 +656,8 @@
           <para
             >Gets the binding associated with this occurrence of a <see
              cref="E:System.Windows.Forms.Binding.BindingComplete" />
+
+            
 
             
 
@@ -613,6 +715,8 @@
 
             
 
+            
+
              to determine if the binding was successful, or an error or exception occurred.</para
           >
         </remarks>
@@ -639,6 +743,8 @@
           <para
             >This property returns an empty string if no error occurred in the binding operation. It returns the value of the <see
              cref="P:System.Exception.Message" />
+
+            
 
             
 

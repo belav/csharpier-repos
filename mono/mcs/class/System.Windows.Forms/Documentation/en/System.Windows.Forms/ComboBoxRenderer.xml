@@ -21,6 +21,8 @@
 
         
 
+        
+
          class provides a set of static methods that can be used to render a combo box control with the current visual style of the operating system. Rendering a control refers to drawing the user interface of a control. This is useful if you are drawing a custom control that should have the appearance of the current visual style. To draw a combo box, use the <see
          cref="Overload:System.Windows.Forms.ComboBoxRenderer.DrawTextBox" />
 
@@ -28,8 +30,12 @@
 
         
 
+        
+
          method to draw the text box and the <see
          cref="M:System.Windows.Forms.ComboBoxRenderer.DrawDropDownButton(System.Drawing.Graphics,System.Drawing.Rectangle,System.Windows.Forms.VisualStyles.ComboBoxState)" />
+
+        
 
         
 
@@ -45,8 +51,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Windows.Forms.ComboBoxRenderer.DrawDropDownButton(System.Drawing.Graphics,System.Drawing.Rectangle,System.Windows.Forms.VisualStyles.ComboBoxState)" />
+
+        
 
         
 
@@ -59,8 +69,12 @@
 
         
 
+        
+
         . To determine whether the members of this class can be used, you can check the value of the <see
          cref="P:System.Windows.Forms.ComboBoxRenderer.IsSupported" />
+
+        
 
         
 
@@ -76,8 +90,12 @@
 
         
 
+        
+
          that is set to one of the elements exposed by the <see
          cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement.ComboBox.DropDownButton" />
+
+        
 
         
 
@@ -90,10 +108,14 @@
 
         
 
+        
+
          classes. For more information, see <format
          type="text/html">
           <a href="a5b178ba-610e-46c4-a6c0-509c0886a744">Rendering Controls with Visual Styles</a>
         </format>
+
+        
 
         
 
@@ -134,6 +156,8 @@
 
             
 
+            
+
              property returns true.</para
           >
         </remarks>
@@ -148,8 +172,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -164,8 +192,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -180,8 +212,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.ComboBoxState" />
+
+          
 
           
 
@@ -220,6 +256,8 @@
 
             
 
+            
+
              property returns true.</para
           >
         </remarks>
@@ -234,8 +272,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -250,8 +292,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -266,8 +312,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.ComboBoxState" />
+
+          
 
           
 
@@ -308,6 +358,8 @@
 
             
 
+            
+
              property returns true.</para
           >
         </remarks>
@@ -322,8 +374,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -338,8 +394,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -354,8 +414,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -370,6 +434,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
 
@@ -377,8 +443,12 @@
 
           
 
+          
+
            to apply to <paramref
            name="comboBoxText" />
+
+          
 
           
 
@@ -393,8 +463,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.ComboBoxState" />
+
+          
 
           
 
@@ -436,6 +510,8 @@
 
             
 
+            
+
              property returns true.</para
           >
         </remarks>
@@ -450,8 +526,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -466,8 +546,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -482,8 +566,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -498,6 +586,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
 
@@ -505,8 +595,12 @@
 
           
 
+          
+
            to apply to <paramref
            name="comboBoxText" />
+
+          
 
           
 
@@ -521,6 +615,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
 
@@ -528,8 +624,12 @@
 
           
 
+          
+
            that specifies the bounds in which to draw <paramref
            name="comboBoxText" />
+
+          
 
           
 
@@ -544,8 +644,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.ComboBoxState" />
+
+          
 
           
 
@@ -587,6 +691,8 @@
 
             
 
+            
+
              property returns true.</para
           >
         </remarks>
@@ -601,8 +707,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -617,8 +727,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -633,8 +747,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -649,6 +767,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
 
@@ -656,8 +776,12 @@
 
           
 
+          
+
            to apply to <paramref
            name="comboBoxText" />
+
+          
 
           
 
@@ -672,8 +796,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.TextFormatFlags" />
+
+          
 
           
 
@@ -688,8 +816,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.ComboBoxState" />
+
+          
 
           
 
@@ -732,6 +864,8 @@
 
             
 
+            
+
              property returns true.</para
           >
         </remarks>
@@ -746,8 +880,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -762,8 +900,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -778,8 +920,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -794,6 +940,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Font" />
 
@@ -801,8 +949,12 @@
 
           
 
+          
+
            to apply to <paramref
            name="comboBoxText" />
+
+          
 
           
 
@@ -817,6 +969,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
 
@@ -824,8 +978,12 @@
 
           
 
+          
+
            that specifies the bounds in which to draw <paramref
            name="comboBoxText" />
+
+          
 
           
 
@@ -840,8 +998,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.TextFormatFlags" />
+
+          
 
           
 
@@ -856,8 +1018,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.VisualStyles.ComboBoxState" />
+
+          
 
           
 
@@ -889,6 +1055,8 @@
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.ComboBoxRenderer.DrawDropDownButton(System.Drawing.Graphics,System.Drawing.Rectangle,System.Windows.Forms.VisualStyles.ComboBoxState)" />
 
@@ -896,8 +1064,12 @@
 
             
 
+            
+
              methods will throw an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -911,6 +1083,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Windows.Forms.ComboBoxRenderer" />
+
+            
 
             
 

@@ -24,6 +24,8 @@
 
         
 
+        
+
          class provides a way to programmatically access and modify the httpCookies section of a configuration file.</para
       >
       <para>It defines the settings applied by default to all cookies issued by the application, unless the code issuing the cookie overrides them.</para>
@@ -37,6 +39,8 @@
 
           
 
+          
+
            can read and write information from and to the related section of the configuration file according to the section property <see
            cref="P:System.Configuration.SectionInformation.AllowDefinition" />
 
@@ -44,8 +48,12 @@
 
           
 
+          
+
            whose value is <see
            cref="F:System.Configuration.ConfigurationAllowDefinition.Everywhere" />
+
+          
 
           
 
@@ -77,8 +85,12 @@
 
             
 
+            
+
              class by using the <see
              cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+
+            
 
             
 
@@ -92,6 +104,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.HttpCookiesSection" />
+
+            
 
             
 
@@ -194,6 +208,8 @@
           <para
             >The <see
              cref="P:System.Web.Configuration.HttpCookiesSection.RequireSSL" />
+
+            
 
             
 

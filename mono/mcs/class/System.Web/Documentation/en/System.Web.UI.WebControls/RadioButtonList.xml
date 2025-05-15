@@ -82,6 +82,8 @@
 
         
 
+        
+
          control provides page developers with a single-selection radio button group that can be dynamically generated through data binding. It contains an <see
          cref="P:System.Web.UI.WebControls.ListControl.Items" />
 
@@ -89,8 +91,12 @@
 
         
 
+        
+
          collection with members that correspond to individual items on the list. To determine which item is selected, test the <see
          cref="P:System.Web.UI.WebControls.ListControl.SelectedItem" />
+
+        
 
         
 
@@ -112,6 +118,8 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.WebControls.RadioButtonList.RepeatDirection" />
 
@@ -119,8 +127,12 @@
 
         
 
+        
+
          properties. For information about layout options, see the <see
          cref="T:System.Web.UI.WebControls.RepeatLayout" />
+
+        
 
         
 
@@ -136,6 +148,8 @@
 
         
 
+        
+
          is set to RepeatDirection.Vertical. Setting this property to RepeatDirection.Horizontal causes the control to render the list horizontally. Some <see
          cref="P:System.Web.UI.WebControls.RadioButtonList.RepeatLayout" />
 
@@ -143,8 +157,12 @@
 
         
 
+        
+
          settings do not allow horizontal layout. For more information, see the <see
          cref="T:System.Web.UI.WebControls.RepeatLayout" />
+
+        
 
         
 
@@ -161,10 +179,14 @@
 
           
 
+          
+
            control. ASP.NET provides an input request validation feature to block script and HTML in user input. For more information, see <format
            type="text/html">
             <a href="f3e7718f-63d0-44a3-bd5f-48cc2059c2a8">Securing Standard Controls</a>
           </format>
+
+          
 
           
 
@@ -181,12 +203,16 @@
 
           
 
+          
+
           , and <format
            type="text/html">
             <a href="4ad3dacb-89e0-4cee-89ac-40a3f2a85461"
               >Introduction to Validating User Input in ASP.NET Web Pages</a
             >
           </format>
+
+          
 
           
 
@@ -213,10 +239,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0">ASP.NET Controls and Accessibility</a>
         </format>
+
+        
 
         
 
@@ -240,9 +270,13 @@
 
         
 
+        
+
         "
     AutoPostBack="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -258,11 +292,15 @@
 
         
 
+        
+
         |None|Dotted|Dashed|Solid|Double|Groove|Ridge|
         Inset|Outset"
     BorderWidth="size"
     CausesValidation="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -285,9 +323,13 @@
 
         
 
+        
+
         |False"
     EnableTheming="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -301,9 +343,13 @@
 
         
 
+        
+
         |False"
     Font-Bold="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -317,10 +363,14 @@
 
         
 
+        
+
         "
     Font-Names="string"
     Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -336,9 +386,13 @@
 
         
 
+        
+
         "
     Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -365,9 +419,13 @@
 
         
 
+        
+
         "
     RepeatLayout="<codeFeaturedElement
         >Table</codeFeaturedElement>
+
+        
 
         
 
@@ -387,11 +445,15 @@
 
         
 
+        
+
         "
     ToolTip="string"
     ValidationGroup="string"
     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -408,9 +470,13 @@
 
         
 
+        
+
         |False"
                 Selected="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -445,6 +511,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -453,6 +521,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+            
 
             
 
@@ -481,6 +551,8 @@
           <para
             >This property applies only when the <see
              cref="P:System.Web.UI.WebControls.RadioButtonList.RepeatLayout" />
+
+            
 
             
 
@@ -520,6 +592,8 @@
           <para
             >This property applies only when the <see
              cref="P:System.Web.UI.WebControls.RadioButtonList.RepeatLayout" />
+
+            
 
             
 
@@ -565,8 +639,12 @@
 
             
 
+            
+
              method is used primarily by control developers in custom control that derive from the <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+            
 
             
 
@@ -585,6 +663,8 @@
 
             
 
+            
+
              control to implement all style-related properties.</para
           >
         </summary>
@@ -593,6 +673,8 @@
           <para
             >A <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -634,8 +716,12 @@
 
             
 
+            
+
              method is used primarily by control developers in custom controls that derive from the <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+            
 
             
 
@@ -651,8 +737,12 @@
 
             
 
+            
+
              method overrides the <see
              cref="M:System.Web.UI.Control.FindControl(System.String,System.Int32)" />
+
+            
 
             
 
@@ -665,8 +755,12 @@
 
             
 
+            
+
              class. You should not override this version of the <see
              cref="M:System.Web.UI.Control.FindControl(System.String,System.Int32)" />
+
+            
 
             
 
@@ -685,8 +779,12 @@
 
             
 
+            
+
              method always returns the <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+            
 
             
 
@@ -705,6 +803,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -715,10 +815,14 @@
 
           
 
+          
+
           The identifier for the control to find.</param
         >
         <param name="pathOffset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -755,8 +859,12 @@
 
             
 
+            
+
              method is used primarily by control developers in custom controls that derive from the <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+            
 
             
 
@@ -772,6 +880,8 @@
 
             
 
+            
+
              control applies to all list items that are contained by the control. Use the <see
              cref="T:System.Web.UI.WebControls.Style" />
 
@@ -779,8 +889,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+            
 
             
 
@@ -803,11 +917,15 @@
 
             
 
+            
+
              control.</para
           >
         </returns>
         <param name="itemType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -820,10 +938,14 @@
 
           
 
+          
+
            enumeration values. </param
         >
         <param name="repeatIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -854,8 +976,12 @@
 
             
 
+            
+
              property is used primarily by control developers in custom controls that derive from the <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+            
 
             
 
@@ -868,6 +994,8 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Web.UI.WebControls.RepeatLayout.UnorderedList" />
 
@@ -875,8 +1003,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Web.UI.WebControls.RepeatLayout.OrderedList" />
+
+            
 
             
 
@@ -890,6 +1022,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+            
 
             
 
@@ -921,8 +1055,12 @@
 
             
 
+            
+
              property is used primarily by control developers in custom controls that derive from the <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+            
 
             
 
@@ -935,6 +1073,8 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Web.UI.WebControls.RepeatLayout.UnorderedList" />
 
@@ -942,8 +1082,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Web.UI.WebControls.RepeatLayout.OrderedList" />
+
+            
 
             
 
@@ -957,6 +1101,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+            
 
             
 
@@ -988,8 +1134,12 @@
 
             
 
+            
+
              property is used primarily by control developers in custom controls that derive from the <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+            
 
             
 
@@ -1002,6 +1152,8 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Web.UI.WebControls.RepeatLayout.UnorderedList" />
 
@@ -1009,8 +1161,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Web.UI.WebControls.RepeatLayout.OrderedList" />
+
+            
 
             
 
@@ -1024,6 +1180,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+            
 
             
 
@@ -1064,8 +1222,12 @@
 
             
 
+            
+
              method is used primarily by control developers in custom controls that derive from the <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+            
 
             
 
@@ -1081,8 +1243,12 @@
 
             
 
+            
+
              method indicates whether the state of the <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+            
 
             
 
@@ -1095,8 +1261,12 @@
 
             
 
+            
+
              value for the <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+            
 
             
 
@@ -1109,8 +1279,12 @@
 
             
 
+            
+
              control is disabled, <see
              cref="M:System.Web.UI.WebControls.RadioButtonList.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)" />
+
+            
 
             
 
@@ -1126,8 +1300,12 @@
 
             
 
+            
+
              method returns true for a control, the ASP.NET page framework invokes the <see
              cref="M:System.Web.UI.WebControls.RadioButtonList.RaisePostDataChangedEvent" />
+
+            
 
             
 
@@ -1146,6 +1324,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -1154,6 +1334,8 @@
           <para
             >true if the state of the <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+            
 
             
 
@@ -1169,8 +1351,12 @@
 
           
 
+          
+
           The key identifier for the control, used to index the <paramref
            name="postCollection" />
+
+          
 
           
 
@@ -1185,8 +1371,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.Specialized.NameValueCollection" />
+
+          
 
           
 
@@ -1217,8 +1407,12 @@
 
             
 
+            
+
              method is used primarily by control developers in custom controls that derive from the <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+            
 
             
 
@@ -1234,8 +1428,12 @@
 
             
 
+            
+
              method on a <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+            
 
             
 
@@ -1248,8 +1446,12 @@
 
             
 
+            
+
              method indicates that the state of the list items have changed in the <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+            
 
             
 
@@ -1262,8 +1464,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.UI.WebControls.ListControl.OnSelectedIndexChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1276,8 +1482,12 @@
 
             
 
+            
+
              event. Control developers can override the <see
              cref="M:System.Web.UI.WebControls.ListControl.OnSelectedIndexChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1293,8 +1503,12 @@
 
             
 
+            
+
              event for the control. To validate a group of controls on the page when a list item within the <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+            
 
             
 
@@ -1307,6 +1521,8 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.ListControl.CausesValidation" />
 
@@ -1314,8 +1530,12 @@
 
             
 
+            
+
              properties to true, and then specify the group of controls to be validated in the <see
              cref="P:System.Web.UI.WebControls.ListControl.ValidationGroup" />
+
+            
 
             
 
@@ -1329,6 +1549,8 @@
           <para
             >Notifies the ASP.NET application that the state of the <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+            
 
             
 
@@ -1362,11 +1584,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.RadioButtonList.Render(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -1379,8 +1605,12 @@
 
             
 
+            
+
              control initializes a <see
              cref="T:System.Web.UI.WebControls.RepeatInfo" />
+
+            
 
             
 
@@ -1393,8 +1623,12 @@
 
             
 
+            
+
              method, which in turn uses the <see
              cref="M:System.Web.UI.WebControls.RadioButtonList.RenderItem(System.Web.UI.WebControls.ListItemType,System.Int32,System.Web.UI.WebControls.RepeatInfo,System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -1413,6 +1647,8 @@
 
             
 
+            
+
              control on the client.</para
           >
         </summary>
@@ -1423,8 +1659,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -1467,11 +1707,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.RadioButtonList.Render(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -1484,8 +1728,12 @@
 
             
 
+            
+
              control initializes a <see
              cref="T:System.Web.UI.WebControls.RepeatInfo" />
+
+            
 
             
 
@@ -1498,8 +1746,12 @@
 
             
 
+            
+
              method, which in turn uses the <see
              cref="M:System.Web.UI.WebControls.RadioButtonList.RenderItem(System.Web.UI.WebControls.ListItemType,System.Int32,System.Web.UI.WebControls.RepeatInfo,System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -1515,8 +1767,12 @@
 
             
 
+            
+
              method for a <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+            
 
             
 
@@ -1529,8 +1785,12 @@
 
             
 
+            
+
              and <paramref
              name="repeatInfo" />
+
+            
 
             
 
@@ -1543,8 +1803,12 @@
 
             
 
+            
+
              parameter value is used to select the radio button list item in the <see
              cref="P:System.Web.UI.WebControls.ListControl.Items" />
+
+            
 
             
 
@@ -1563,6 +1827,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -1573,8 +1839,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.ListItemType" />
+
+          
 
           
 
@@ -1589,6 +1859,8 @@
 
           
 
+          
+
           An ordinal index that specifies the location of the item in the list control. </param
         >
         <param name="repeatInfo">
@@ -1598,8 +1870,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.RepeatInfo" />
+
+          
 
           
 
@@ -1614,8 +1890,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -1644,8 +1924,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Web.UI.WebControls.RepeatLayout.Table" />
+
+            
 
             
 
@@ -1658,8 +1942,12 @@
 
             
 
+            
+
              control. If this property is not set, the <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+            
 
             
 
@@ -1673,6 +1961,8 @@
           <para
             >Gets or sets the number of columns to display in the <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+            
 
             
 
@@ -1714,12 +2004,16 @@
 
             
 
+            
+
              control.</para
           >
           <block subset="none" type="note">
             <para
               >The number of columns that are displayed is always determined by the <see
                cref="P:System.Web.UI.WebControls.RadioButtonList.RepeatColumns" />
+
+              
 
               
 
@@ -1736,8 +2030,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Web.UI.WebControls.RepeatLayout.Table" />
+
+            
 
             
 
@@ -1750,8 +2048,12 @@
 
             
 
+            
+
              is set to 3, the items of the <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+            
 
             
 
@@ -1802,8 +2104,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Web.UI.WebControls.RepeatLayout.Table" />
+
+            
 
             
 
@@ -1816,8 +2122,12 @@
 
             
 
+            
+
              is set to 3, the items of the <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+            
 
             
 
@@ -1897,8 +2207,12 @@
 
             
 
+            
+
              property is used primarily by control developers in custom controls that derive from the <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+            
 
             
 
@@ -1914,8 +2228,12 @@
 
             
 
+            
+
              control, the <see
              cref="P:System.Web.UI.WebControls.RadioButtonList.RepeatedItemCount" />
+
+            
 
             
 
@@ -1928,8 +2246,12 @@
 
             
 
+            
+
              control, the <see
              cref="P:System.Web.UI.WebControls.RadioButtonList.RepeatedItemCount" />
+
+            
 
             
 
@@ -1942,8 +2264,12 @@
 
             
 
+            
+
              property on the <see
              cref="P:System.Web.UI.WebControls.ListControl.Items" />
+
+            
 
             
 
@@ -1957,6 +2283,8 @@
           <para
             >Gets the number of list items in the <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+            
 
             
 
@@ -1989,6 +2317,8 @@
 
             
 
+            
+
              enumeration. </para
           >
           <block subset="none" type="note">
@@ -2000,8 +2330,12 @@
 
               
 
+              
+
                and <see
                cref="F:System.Web.UI.WebControls.RepeatLayout.UnorderedList" />
+
+              
 
               
 
@@ -2018,8 +2352,12 @@
 
             
 
+            
+
              settings do not allow horizontal layout. For more information, see the <see
              cref="T:System.Web.UI.WebControls.RepeatLayout" />
+
+            
 
             
 
@@ -2074,8 +2412,12 @@
 
             
 
+            
+
              method to process posted data for a <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+            
 
             
 
@@ -2091,6 +2433,8 @@
 
             
 
+            
+
              method is an explicit interface member implementation. It can be used only when the <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
 
@@ -2098,8 +2442,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IPostBackDataHandler" />
+
+            
 
             
 
@@ -2113,6 +2461,8 @@
           <para
             >Processes posted data for the <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+            
 
             
 
@@ -2132,8 +2482,12 @@
 
           
 
+          
+
           The key identifier for the control, used to index the <paramref
            name="postCollection" />
+
+          
 
           
 
@@ -2148,8 +2502,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.Specialized.NameValueCollection" />
+
+          
 
           
 
@@ -2184,8 +2542,12 @@
 
             
 
+            
+
              method to raise an event when the posted data for a <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+            
 
             
 
@@ -2201,6 +2563,8 @@
 
             
 
+            
+
              method is an explicit interface member implementation. It can be used only when the <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
 
@@ -2208,8 +2572,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IPostBackDataHandler" />
+
+            
 
             
 
@@ -2252,8 +2620,12 @@
 
             
 
+            
+
              method to retrieve the style of an item in a <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+            
 
             
 
@@ -2269,6 +2641,8 @@
 
             
 
+            
+
              method is an explicit interface member implementation. It can be used only when the <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
 
@@ -2276,8 +2650,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
+
+            
 
             
 
@@ -2300,11 +2678,15 @@
 
             
 
+            
+
              that represents the style of the specified item type at the specified index in the list control.</para
           >
         </returns>
         <param name="itemType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2317,10 +2699,14 @@
 
           
 
+          
+
            enumeration values. </param
         >
         <param name="repeatIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2355,8 +2741,12 @@
 
             
 
+            
+
              instance is cast to the <see
              cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
+
+            
 
             
 
@@ -2396,8 +2786,12 @@
 
             
 
+            
+
              instance is cast to the <see
              cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
+
+            
 
             
 
@@ -2437,8 +2831,12 @@
 
             
 
+            
+
              instance is cast to the <see
              cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
+
+            
 
             
 
@@ -2483,8 +2881,12 @@
 
             
 
+            
+
              method to render items in a <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
+
+            
 
             
 
@@ -2500,6 +2902,8 @@
 
             
 
+            
+
              method is an explicit interface member implementation. It can be used only when the <see
              cref="T:System.Web.UI.WebControls.RadioButtonList" />
 
@@ -2507,8 +2911,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
+
+            
 
             
 
@@ -2528,8 +2936,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.ListItemType" />
+
+          
 
           
 
@@ -2544,6 +2956,8 @@
 
           
 
+          
+
           An ordinal index that specifies the location of the item in the list. </param
         >
         <param name="repeatInfo">
@@ -2553,8 +2967,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.RepeatInfo" />
+
+          
 
           
 
@@ -2569,8 +2987,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -2605,8 +3027,12 @@
 
             
 
+            
+
              instance is cast to the <see
              cref="T:System.Web.UI.WebControls.IRepeatInfoUser" />
+
+            
 
             
 

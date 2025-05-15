@@ -22,6 +22,8 @@
 
         
 
+        
+
          is used to discover available types at design time, when a client of the service does not know the names of existing types or referenced assemblies.</para
       >
     </remarks>
@@ -63,8 +65,12 @@
 
             
 
+            
+
              is null, all types are returned. Otherwise, only types derived from the specified base type are returned. If <paramref
              name="excludeGlobalTypes" />
+
+            
 
             
 
@@ -76,6 +82,8 @@
                 >Working with Assemblies and the Global Assembly Cache</a
               >
             </format>
+
+            
 
             
 
@@ -98,8 +106,12 @@
 
             
 
+            
+
              and <paramref
              name="excludeGlobalTypes" />
+
+            
 
             
 
@@ -115,10 +127,14 @@
 
           
 
+          
+
           The base type to match. Can be null.</param
         >
         <param name="excludeGlobalTypes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

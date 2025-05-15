@@ -32,8 +32,12 @@
 
         
 
+        
+
          through <see
          cref="P:System.Drawing.Printing.PrintDocument.PrinterSettings" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
          properties to modify printer settings. The most common printer setting is <see
          cref="P:System.Drawing.Printing.PrinterSettings.PrinterName" />
+
+        
 
         
 
@@ -63,8 +71,12 @@
 
         
 
+        
+
          namespace overview. If you wish to print from a Windows Presentation Foundation application, see the <see
          cref="N:System.Printing" />
+
+        
 
         
 
@@ -96,8 +108,12 @@
 
             
 
+            
+
             , but instead use the <see
              cref="P:System.Drawing.Printing.PrintDocument.PrinterSettings" />
+
+            
 
             
 
@@ -111,6 +127,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Drawing.Printing.PrinterSettings" />
+
+            
 
             
 
@@ -143,8 +161,12 @@
 
             
 
+            
+
              to one of the <see
              cref="T:System.Drawing.Printing.Duplex" />
+
+            
 
             
 
@@ -182,6 +204,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -214,11 +238,15 @@
 
             
 
+            
+
              property to specify the number of copies to print.</para
           >
           <para
             >Setting <see
              cref="P:System.Drawing.Printing.PrinterSettings.Collate" />
+
+            
 
             
 
@@ -251,6 +279,8 @@
           <para
             >Not all printers support printing multiple copes. You can use the <see
              cref="P:System.Drawing.Printing.PrinterSettings.MaximumCopies" />
+
+            
 
             
 
@@ -293,6 +323,8 @@
 
             
 
+            
+
              method, you can obtain a <see
              cref="T:System.Drawing.Graphics" />
 
@@ -300,8 +332,12 @@
 
             
 
+            
+
              for the printer without creating a print job. You can use the <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -320,8 +356,12 @@
 
             
 
+            
+
              that contains printer information that is useful when creating a <see
              cref="T:System.Drawing.Printing.PrintDocument" />
+
+            
 
             
 
@@ -335,6 +375,8 @@
           <para
             >A <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -375,6 +417,8 @@
 
             
 
+            
+
              method, you can obtain a <see
              cref="T:System.Drawing.Graphics" />
 
@@ -382,8 +426,12 @@
 
             
 
+            
+
              for the printer without creating a print job. Use the <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -402,6 +450,8 @@
 
             
 
+            
+
              that contains printer information, optionally specifying the origin at the margins.</para
           >
         </summary>
@@ -415,8 +465,12 @@
 
             
 
+            
+
              that contains printer information from the <see
              cref="T:System.Drawing.Printing.PageSettings" />
+
+            
 
             
 
@@ -427,6 +481,8 @@
         </returns>
         <param name="honorOriginAtMargins">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -462,6 +518,8 @@
 
             
 
+            
+
              method, you can obtain a <see
              cref="T:System.Drawing.Graphics" />
 
@@ -469,8 +527,12 @@
 
             
 
+            
+
              for the printer without creating a print job. Use the <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -489,8 +551,12 @@
 
             
 
+            
+
              that contains printer information associated with the specified <see
              cref="T:System.Drawing.Printing.PageSettings" />
+
+            
 
             
 
@@ -509,8 +575,12 @@
 
             
 
+            
+
              that contains printer information from the <see
              cref="T:System.Drawing.Printing.PageSettings" />
+
+            
 
             
 
@@ -526,8 +596,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Printing.PageSettings" />
+
+          
 
           
 
@@ -564,6 +638,8 @@
 
             
 
+            
+
              method allows you to obtain a <see
              cref="T:System.Drawing.Graphics" />
 
@@ -571,8 +647,12 @@
 
             
 
+            
+
              for the printer without creating a print job. Use the <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -591,6 +671,8 @@
 
             
 
+            
+
              associated with the specified page settings and optionally specifying the origin at the margins.</para
           >
         </summary>
@@ -604,8 +686,12 @@
 
             
 
+            
+
              that contains printer information from the <see
              cref="T:System.Drawing.Printing.PageSettings" />
+
+            
 
             
 
@@ -621,8 +707,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Printing.PageSettings" />
+
+          
 
           
 
@@ -635,10 +725,14 @@
 
           
 
+          
+
            object for.</param
         >
         <param name="honorOriginAtMargins">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -664,6 +758,8 @@
           <para
             >Page settings include the size of the margins on the page, the size of paper to use, and whether to print in color. For more information about page settings, see the <see
              cref="T:System.Drawing.Printing.PageSettings" />
+
+            
 
             
 
@@ -704,6 +800,8 @@
 
             
 
+            
+
              property to check to see if the printer supports duplex printing.</para
           >
         </remarks>
@@ -736,8 +834,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Drawing.Printing.PrinterSettings.ToPage" />
+
+            
 
             
 
@@ -750,8 +852,12 @@
 
             
 
+            
+
              when the user selects a print range. The <see
              cref="P:System.Windows.Forms.PrintDialog.AllowSomePages" />
+
+            
 
             
 
@@ -764,8 +870,12 @@
 
             
 
+            
+
              requires the <see
              cref="P:System.Drawing.Printing.PrinterSettings.MinimumPage" />
+
+            
 
             
 
@@ -778,8 +888,12 @@
 
             
 
+            
+
              to be specified and the <see
              cref="P:System.Drawing.Printing.PrinterSettings.FromPage" />
+
+            
 
             
 
@@ -795,8 +909,12 @@
 
             
 
+            
+
              event, view the <see
              cref="P:System.Drawing.Printing.PrinterSettings.PrintRange" />
+
+            
 
             
 
@@ -809,8 +927,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.Drawing.Printing.PrintRange.SomePages" />
+
+            
 
             
 
@@ -823,8 +945,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Drawing.Printing.PrinterSettings.ToPage" />
+
+            
 
             
 
@@ -837,8 +963,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.Drawing.Printing.PrintRange.Selection" />
+
+            
 
             
 
@@ -854,8 +984,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Drawing.Printing.PrinterSettings.ToPage" />
+
+            
 
             
 
@@ -868,8 +1002,12 @@
 
             
 
+            
+
              can also be set programmatically, though the <see
              cref="E:System.Drawing.Printing.PrintDocument.PrintPage" />
+
+            
 
             
 
@@ -906,6 +1044,8 @@
 
             
 
+            
+
              to a <see
              cref="T:System.Drawing.Printing.PrinterSettings" />
 
@@ -913,8 +1053,12 @@
 
             
 
+            
+
              for a different printer is not supported. When you are done with the handle that is created through this method, you must deallocate it yourself by calling the native Win32 GlobalFree method. When you call this method, you pass as a parameter the return value from the <see
              cref="M:System.Drawing.Printing.PrinterSettings.GetHdevmode" />
+
+            
 
             
 
@@ -960,8 +1104,12 @@
 
             
 
+            
+
              to a <see
              cref="T:System.Drawing.Printing.PrinterSettings" />
+
+            
 
             
 
@@ -977,6 +1125,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -985,6 +1135,8 @@
           <para
             >Creates a handle to a DEVMODE structure that corresponds to the printer and the page settings specified through the <paramref
              name="pageSettings" />
+
+            
 
             
 
@@ -1004,8 +1156,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Printing.PageSettings" />
+
+          
 
           
 
@@ -1032,6 +1188,8 @@
           <para
             >When you are done with the handle that is created through this method, you must deallocate it yourself by calling the native Win32 GlobalFree method. When you call this method, you pass as a parameter the return value from the <see
              cref="M:System.Drawing.Printing.PrinterSettings.GetHdevnames" />
+
+            
 
             
 
@@ -1096,8 +1254,12 @@
 
             
 
+            
+
              always returns false when you explicitly set the <see
              cref="P:System.Drawing.Printing.PrinterSettings.PrinterName" />
+
+            
 
             
 
@@ -1116,8 +1278,12 @@
 
             
 
+            
+
              property designates the default printer, except when the user explicitly sets <see
              cref="P:System.Drawing.Printing.PrinterSettings.PrinterName" />
+
+            
 
             
 
@@ -1164,6 +1330,8 @@
 
           
 
+          
+
           The image to print.</param
         >
       </Docs>
@@ -1200,8 +1368,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Drawing.Imaging.ImageFormat" />
+
+          
 
           
 
@@ -1251,8 +1423,12 @@
 
             
 
+            
+
              property after setting the <see
              cref="P:System.Drawing.Printing.PrinterSettings.PrinterName" />
+
+            
 
             
 
@@ -1266,6 +1442,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="P:System.Drawing.Printing.PrinterSettings.PrinterName" />
+
+            
 
             
 
@@ -1293,6 +1471,8 @@
           <para
             >Valid rotation values are 90 and 270 degrees. If landscape is not supported, the only valid rotation value is 0 degrees. You set the <see
              cref="P:System.Drawing.Printing.PageSettings.Landscape" />
+
+            
 
             
 
@@ -1329,8 +1509,12 @@
 
             
 
+            
+
              property to the number of copies to print. Use the <see
              cref="P:System.Drawing.Printing.PrinterSettings.MaximumCopies" />
+
+            
 
             
 
@@ -1368,8 +1552,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Drawing.Printing.PrinterSettings.ToPage" />
+
+            
 
             
 
@@ -1382,8 +1570,12 @@
 
             
 
+            
+
              when the user selects a print range. The <see
              cref="P:System.Windows.Forms.PrintDialog.AllowSomePages" />
+
+            
 
             
 
@@ -1396,8 +1588,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Drawing.Printing.PrinterSettings.ToPage" />
+
+            
 
             
 
@@ -1410,6 +1606,8 @@
 
             
 
+            
+
              and <see
              cref="P:System.Drawing.Printing.PrinterSettings.MaximumPage" />
 
@@ -1417,8 +1615,12 @@
 
             
 
+            
+
              properties, or an exception is thrown when displaying the <see
              cref="T:System.Windows.Forms.PrintDialog" />
+
+            
 
             
 
@@ -1437,6 +1639,8 @@
 
             
 
+            
+
              or <see
              cref="P:System.Drawing.Printing.PrinterSettings.ToPage" />
 
@@ -1444,8 +1648,12 @@
 
             
 
+            
+
              that can be selected in a <see
              cref="T:System.Windows.Forms.PrintDialog" />
+
+            
 
             
 
@@ -1479,8 +1687,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Drawing.Printing.PrinterSettings.ToPage" />
+
+            
 
             
 
@@ -1493,8 +1705,12 @@
 
             
 
+            
+
              when the user selects a print range. The <see
              cref="P:System.Windows.Forms.PrintDialog.AllowSomePages" />
+
+            
 
             
 
@@ -1507,8 +1723,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Drawing.Printing.PrinterSettings.ToPage" />
+
+            
 
             
 
@@ -1521,6 +1741,8 @@
 
             
 
+            
+
              and <see
              cref="P:System.Drawing.Printing.PrinterSettings.MaximumPage" />
 
@@ -1528,8 +1750,12 @@
 
             
 
+            
+
              properties, or an exception is thrown when displaying the <see
              cref="T:System.Windows.Forms.PrintDialog" />
+
+            
 
             
 
@@ -1548,6 +1774,8 @@
 
             
 
+            
+
              or <see
              cref="P:System.Drawing.Printing.PrinterSettings.ToPage" />
 
@@ -1555,8 +1783,12 @@
 
             
 
+            
+
              that can be selected in a <see
              cref="T:System.Windows.Forms.PrintDialog" />
+
+            
 
             
 
@@ -1592,8 +1824,12 @@
 
             
 
+            
+
              contains <see
              cref="T:System.Drawing.Printing.PaperSize" />
+
+            
 
             
 
@@ -1606,8 +1842,12 @@
 
             
 
+            
+
              property, which contains one of the <see
              cref="T:System.Drawing.Printing.PaperKind" />
+
+            
 
             
 
@@ -1623,8 +1863,12 @@
 
             
 
+            
+
              property to a valid <see
              cref="T:System.Drawing.Printing.PaperSize" />
+
+            
 
             
 
@@ -1637,11 +1881,15 @@
 
             
 
+            
+
              collection.</para
           >
           <para
             >To specify a custom paper size, see the <see
              cref="M:System.Drawing.Printing.PaperSize.#ctor" />
+
+            
 
             
 
@@ -1681,8 +1929,12 @@
 
             
 
+            
+
              contains <see
              cref="T:System.Drawing.Printing.PaperSource" />
+
+            
 
             
 
@@ -1695,8 +1947,12 @@
 
             
 
+            
+
              property, which contains one of the <see
              cref="T:System.Drawing.Printing.PaperSourceKind" />
+
+            
 
             
 
@@ -1712,6 +1968,8 @@
 
             
 
+            
+
              property to a valid <see
              cref="T:System.Drawing.Printing.PaperSource" />
 
@@ -1719,8 +1977,12 @@
 
             
 
+            
+
              available through the <see
              cref="P:System.Drawing.Printing.PrinterSettings.PaperSources" />
+
+            
 
             
 
@@ -1758,11 +2020,15 @@
 
             
 
+            
+
              to determine if the printer name is recognized as a valid printer on the system.</para
           >
           <para
             >You can also use the <see
              cref="P:System.Drawing.Printing.PrinterSettings.InstalledPrinters" />
+
+            
 
             
 
@@ -1802,8 +2068,12 @@
 
             
 
+            
+
              contains <see
              cref="T:System.Drawing.Printing.PrinterResolution" />
+
+            
 
             
 
@@ -1816,8 +2086,12 @@
 
             
 
+            
+
              property, which contains one of the <see
              cref="T:System.Drawing.Printing.PrinterResolutionKind" />
+
+            
 
             
 
@@ -1833,6 +2107,8 @@
 
             
 
+            
+
              property to a valid <see
              cref="T:System.Drawing.Printing.PrinterResolution" />
 
@@ -1840,8 +2116,12 @@
 
             
 
+            
+
              available through the <see
              cref="P:System.Drawing.Printing.PrinterSettings.PrinterResolutions" />
+
+            
 
             
 
@@ -1857,6 +2137,8 @@
 
             
 
+            
+
              is Custom, then use the <see
              cref="P:System.Drawing.Printing.PrinterResolution.X" />
 
@@ -1864,8 +2146,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Drawing.Printing.PrinterResolution.Y" />
+
+            
 
             
 
@@ -1924,8 +2210,12 @@
 
             
 
+            
+
              property is used by the <see
              cref="T:System.Windows.Forms.PrintDialog" />
+
+            
 
             
 
@@ -1938,6 +2228,8 @@
 
             
 
+            
+
              is AllPages. To enable the user to specify a range of pages to print, the <see
              cref="P:System.Windows.Forms.PrintDialog.AllowSomePages" />
 
@@ -1945,8 +2237,12 @@
 
             
 
+            
+
              property must be set to true. To enable the user to specify the selected pages to print, the <see
              cref="P:System.Windows.Forms.PrintDialog.AllowSelection" />
+
+            
 
             
 
@@ -1962,8 +2258,12 @@
 
             
 
+            
+
              event, view the <see
              cref="P:System.Drawing.Printing.PrinterSettings.PrintRange" />
+
+            
 
             
 
@@ -1976,8 +2276,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.Drawing.Printing.PrintRange.SomePages" />
+
+            
 
             
 
@@ -1990,8 +2294,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Drawing.Printing.PrinterSettings.ToPage" />
+
+            
 
             
 
@@ -2004,8 +2312,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.Drawing.Printing.PrintRange.Selection" />
+
+            
 
             
 
@@ -2021,8 +2333,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Drawing.Printing.PrinterSettings.ToPage" />
+
+            
 
             
 
@@ -2035,8 +2351,12 @@
 
             
 
+            
+
              can also be set programmatically, though the <see
              cref="E:System.Drawing.Printing.PrintDocument.PrintPage" />
+
+            
 
             
 
@@ -2074,8 +2394,12 @@
 
             
 
+            
+
              property is used by the <see
              cref="T:System.Windows.Forms.PrintDialog" />
+
+            
 
             
 
@@ -2088,8 +2412,12 @@
 
             
 
+            
+
              option. In such a case, the output port is set to "FILE," causing the Windows printing subsystem to prompt the user for a file name when the <see
              cref="M:System.Drawing.Printing.PrintDocument.Print" />
+
+            
 
             
 
@@ -2106,8 +2434,12 @@
 
               
 
+              
+
                property is only used by the <see
                cref="T:System.Windows.Forms.PrintDialog" />
+
+              
 
               
 
@@ -2120,8 +2452,12 @@
 
               
 
+              
+
                when the <see
                cref="P:System.Windows.Forms.PrintDialog.AllowPrintToFile" />
+
+              
 
               
 
@@ -2161,8 +2497,12 @@
 
             
 
+            
+
              to a <see
              cref="T:System.Drawing.Printing.PrinterSettings" />
+
+            
 
             
 
@@ -2181,11 +2521,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="hdevmode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2220,11 +2564,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="hdevnames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2251,6 +2599,8 @@
           <para
             >To print using color, and if the printer supports it, set <see
              cref="P:System.Drawing.Printing.PageSettings.Color" />
+
+            
 
             
 
@@ -2288,8 +2638,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Drawing.Printing.PrinterSettings.ToPage" />
+
+            
 
             
 
@@ -2302,8 +2656,12 @@
 
             
 
+            
+
              when the user selects a print range. The <see
              cref="P:System.Windows.Forms.PrintDialog.AllowSomePages" />
+
+            
 
             
 
@@ -2316,8 +2674,12 @@
 
             
 
+            
+
              also requires the <see
              cref="P:System.Drawing.Printing.PrinterSettings.MinimumPage" />
+
+            
 
             
 
@@ -2330,8 +2692,12 @@
 
             
 
+            
+
              to be specified and the <see
              cref="P:System.Drawing.Printing.PrinterSettings.ToPage" />
+
+            
 
             
 
@@ -2347,8 +2713,12 @@
 
             
 
+            
+
              event, view the <see
              cref="P:System.Drawing.Printing.PrinterSettings.PrintRange" />
+
+            
 
             
 
@@ -2361,8 +2731,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.Drawing.Printing.PrintRange.SomePages" />
+
+            
 
             
 
@@ -2375,8 +2749,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Drawing.Printing.PrinterSettings.ToPage" />
+
+            
 
             
 
@@ -2389,8 +2767,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.Drawing.Printing.PrintRange.Selection" />
+
+            
 
             
 
@@ -2406,8 +2788,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Drawing.Printing.PrinterSettings.ToPage" />
+
+            
 
             
 
@@ -2420,8 +2806,12 @@
 
             
 
+            
+
              can also be set programmatically, though the <see
              cref="E:System.Drawing.Printing.PrintDocument.PrintPage" />
+
+            
 
             
 
@@ -2454,6 +2844,8 @@
           <para
             >Provides information about the <see
              cref="T:System.Drawing.Printing.PrinterSettings" />
+
+            
 
             
 

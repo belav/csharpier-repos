@@ -26,6 +26,8 @@
 
         
 
+        
+
          to provide additional functionality for typed datasets.</para
       >
     </remarks>
@@ -53,6 +55,8 @@
 
             
 
+            
+
              to provide additional functionality for typed datasets and generates internal mappings to .NET Framework types for XML schema element declarations, including literal XSD message parts in a WSDL document.</para
           >
         </remarks>
@@ -61,6 +65,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.Design.TypedDataSetSchemaImporterExtension" />
+
+            
 
             
 
@@ -128,12 +134,16 @@
 
               
 
+              
+
               .</para
             >
           </block>
           <para
             >Expands upon the <see
              cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+
+            
 
             
 
@@ -156,11 +166,15 @@
 
             
 
+            
+
              representing the name of the typed dataset class.</para
           >
         </returns>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -175,8 +189,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaObject" />
+
+          
 
           
 
@@ -191,8 +209,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchema" />
+
+          
 
           
 
@@ -207,8 +229,12 @@
 
           
 
+          
+
           The base <see
            cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+
+          
 
           
 
@@ -223,8 +249,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeCompileUnit" />
+
+          
 
           
 
@@ -239,6 +269,8 @@
 
           
 
+          
+
           CodeNamespace</param
         >
         <param name="options">
@@ -248,8 +280,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Serialization.CodeGenerationOptions" />
+
+          
 
           
 
@@ -264,8 +300,12 @@
 
           
 
+          
+
           The language specific <see
            cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+          
 
           
 
@@ -312,12 +352,16 @@
 
               
 
+              
+
               .</para
             >
           </block>
           <para
             >Expands upon the <see
              cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+
+            
 
             
 
@@ -340,6 +384,8 @@
 
             
 
+            
+
              representing the name of the typed dataset class.</para
           >
         </returns>
@@ -350,8 +396,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -366,8 +416,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -382,8 +436,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaObject" />
+
+          
 
           
 
@@ -398,8 +456,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchema" />
+
+          
 
           
 
@@ -414,8 +476,12 @@
 
           
 
+          
+
           The base <see
            cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+
+          
 
           
 
@@ -430,8 +496,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeCompileUnit" />
+
+          
 
           
 
@@ -446,8 +516,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeNamespace" />
+
+          
 
           
 
@@ -462,8 +536,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Serialization.CodeGenerationOptions" />
+
+          
 
           
 
@@ -478,8 +556,12 @@
 
           
 
+          
+
           The language specific <see
            cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+          
 
           
 

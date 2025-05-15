@@ -25,8 +25,12 @@
 
         
 
+        
+
          control or <see
          cref="T:System.Web.UI.ITemplate" />
+
+        
 
         
 
@@ -61,8 +65,12 @@
 
             
 
+            
+
              method accesses the string representing the register directives on the ASP.NET Web page using the services of the designer host. Designer host services are acquired through the <see
              cref="P:System.Web.UI.Design.WebFormsRootDesigner.ReferenceManager" />
+
+            
 
             
 
@@ -75,8 +83,12 @@
 
             
 
+            
+
              object, or if that is not available, the <see
              cref="T:System.Web.UI.Design.IWebFormReferenceManager" />
+
+            
 
             
 
@@ -87,6 +99,8 @@
           <para
             >The <see
              cref="M:System.Web.UI.Design.ControlParser.ParseControl(System.ComponentModel.Design.IDesignerHost,System.String)" />
+
+            
 
             
 
@@ -109,11 +123,15 @@
 
             
 
+            
+
              that controlText represents; otherwise, null, if the parser cannot build the control.</para
           >
         </returns>
         <param name="designerHost">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -126,10 +144,14 @@
 
           
 
+          
+
            instance that is the designer host for the page. </param
         >
         <param name="controlText">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -168,8 +190,12 @@
 
             
 
+            
+
              method accesses the string representing the register directives on the ASP.NET Web page using the services of the designer host. Designer host services are acquired through the <see
              cref="P:System.Web.UI.Design.WebFormsRootDesigner.ReferenceManager" />
+
+            
 
             
 
@@ -182,8 +208,12 @@
 
             
 
+            
+
              object, or if that is not available, the <see
              cref="T:System.Web.UI.Design.IWebFormReferenceManager" />
+
+            
 
             
 
@@ -194,6 +224,8 @@
           <para
             >The <see
              cref="M:System.Web.UI.Design.ControlParser.ParseControl(System.ComponentModel.Design.IDesignerHost,System.String,System.String)" />
+
+            
 
             
 
@@ -216,8 +248,12 @@
 
             
 
+            
+
              that <paramref
              name="controlText" />
+
+            
 
             
 
@@ -233,8 +269,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+          
 
           
 
@@ -249,10 +289,14 @@
 
           
 
+          
+
           The text of the HTML markup for the control.</param
         >
         <param name="directives">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -293,8 +337,12 @@
 
             
 
+            
+
              method accesses the string representing the register directives on the ASP.NET Web page using the services of the designer host. Designer host services are acquired through the <see
              cref="P:System.Web.UI.Design.WebFormsRootDesigner.ReferenceManager" />
+
+            
 
             
 
@@ -307,8 +355,12 @@
 
             
 
+            
+
              object, or if that is not available, the <see
              cref="T:System.Web.UI.Design.IWebFormReferenceManager" />
+
+            
 
             
 
@@ -324,8 +376,12 @@
 
             
 
+            
+
              method throws an exception if the parser cannot build the controls from the <paramref
              name="controlText" />
+
+            
 
             
 
@@ -348,8 +404,12 @@
 
             
 
+            
+
              elements, parsed from <paramref
              name="controlText" />
+
+            
 
             
 
@@ -365,8 +425,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+          
 
           
 
@@ -376,6 +440,8 @@
         >
         <param name="controlText">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -409,8 +475,12 @@
 
             
 
+            
+
              method accesses the string representing the register directives on the ASP.NET Web page using the services of the designer host. Designer host services are acquired through the <see
              cref="P:System.Web.UI.Design.WebFormsRootDesigner.ReferenceManager" />
+
+            
 
             
 
@@ -423,8 +493,12 @@
 
             
 
+            
+
              object, or if that is not available, the <see
              cref="T:System.Web.UI.Design.IWebFormReferenceManager" />
+
+            
 
             
 
@@ -443,6 +517,8 @@
 
             
 
+            
+
              interface from the specified template markup.</para
           >
         </summary>
@@ -456,8 +532,12 @@
 
             
 
+            
+
              instance created by parsing <paramref
              name="templateText" />
+
+            
 
             
 
@@ -473,8 +553,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+          
 
           
 
@@ -484,6 +568,8 @@
         >
         <param name="templateText">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -522,8 +608,12 @@
 
             
 
+            
+
              method accesses the string representing the register directives on the ASP.NET Web page using the services of the designer host. Designer host services are acquired through the <see
              cref="P:System.Web.UI.Design.WebFormsRootDesigner.ReferenceManager" />
+
+            
 
             
 
@@ -536,8 +626,12 @@
 
             
 
+            
+
              object, or if that is not available, the <see
              cref="T:System.Web.UI.Design.IWebFormReferenceManager" />
+
+            
 
             
 
@@ -556,6 +650,8 @@
 
             
 
+            
+
              interface.</para
           >
         </summary>
@@ -569,8 +665,12 @@
 
             
 
+            
+
              instance created by parsing <paramref
              name="templateText" />
+
+            
 
             
 
@@ -586,8 +686,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+          
 
           
 
@@ -602,10 +706,14 @@
 
           
 
+          
+
           A string containing the template markup. </param
         >
         <param name="directives">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

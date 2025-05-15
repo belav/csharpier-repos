@@ -26,12 +26,16 @@
 
         
 
+        
+
          structure represents the &lt;X509IssuerSerial&gt; element of an XML digital signature defined by the XML digital signature specification. The &lt;X509IssuerSerial&gt; element is the subelement of the &lt;X509Data&gt; element that contains an X.509v3 certificate issuer's distinguished name and serial number pair. The distinguished name and serial number pair help identify a specific X.509v3 certificate.</para
       >
       <para>The issuer of an X.509 certificate is the name of the certification authority that issued the certificate. Certification authorities assign each certificate they issue a unique serial number for identification purposes.  </para>
       <para
         >Use the <see
          cref="T:System.Security.Cryptography.Xml.X509IssuerSerial" />
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
          class.  You can add an <see
          cref="T:System.Security.Cryptography.Xml.X509IssuerSerial" />
+
+        
 
         
 
@@ -58,6 +66,8 @@
 
         
 
+        
+
          class using the <see
          cref="P:System.Security.Cryptography.Xml.KeyInfoX509Data.IssuerSerials" />
 
@@ -65,8 +75,12 @@
 
         
 
+        
+
          property.  Alternatively, you can add string values that represent the X.509 certificate issuer's distinguished name and serial number pair using the <see
          cref="M:System.Security.Cryptography.Xml.KeyInfoX509Data.AddIssuerSerial(System.String,System.String)" />
+
+        
 
         
 
@@ -106,6 +120,8 @@
 
             
 
+            
+
              property represents an X.509 certificate issuer's distinguished name specified in the &lt;X509IssuerSerial&gt; element.</para
           >
           <para>For more information about the &lt;X509IssuerSerial&gt; element, see the World Wide Web Consortium (W3C) specification at www.w3.org/TR/xmldsig-core/.  </para>
@@ -135,6 +151,8 @@
           <para
             >The <see
              cref="P:System.Security.Cryptography.Xml.X509IssuerSerial.SerialNumber" />
+
+            
 
             
 

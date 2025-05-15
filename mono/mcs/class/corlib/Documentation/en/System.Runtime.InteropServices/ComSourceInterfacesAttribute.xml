@@ -48,6 +48,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -91,11 +93,15 @@
 
             
 
+            
+
              class with the name of the event source interface.</para
           >
         </summary>
         <param name="sourceInterfaces">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -139,6 +145,8 @@
 
             
 
+            
+
              class with the type to use as a source interface.</para
           >
         </summary>
@@ -149,8 +157,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -195,6 +207,8 @@
 
             
 
+            
+
              class with the types to use as source interfaces.</para
           >
         </summary>
@@ -205,8 +219,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -221,8 +239,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -269,8 +291,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -285,8 +311,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -301,8 +331,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -349,6 +383,8 @@
 
             
 
+            
+
              class with the types to use as source interfaces.</para
           >
         </summary>
@@ -359,8 +395,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -375,8 +415,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -391,8 +435,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -407,8 +455,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 

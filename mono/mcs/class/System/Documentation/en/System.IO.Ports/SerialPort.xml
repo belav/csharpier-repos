@@ -31,8 +31,12 @@
 
         
 
+        
+
          object, accessible through the <see
          cref="P:System.IO.Ports.SerialPort.BaseStream" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
          class supports the following encodings: <see
          cref="T:System.Text.ASCIIEncoding" />
+
+        
 
         
 
@@ -62,8 +70,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Text.UnicodeEncoding" />
+
+        
 
         
 
@@ -76,6 +88,8 @@
 
         
 
+        
+
         , and any encoding defined in mscorlib.dll where the code page is less than 50000 or the code page is 54936.  You can use alternate encodings, but you must use the <see
          cref="M:System.IO.Ports.SerialPort.ReadByte" />
 
@@ -83,8 +97,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.IO.Ports.SerialPort.Write(System.Byte[],System.Int32,System.Int32)" />
+
+        
 
         
 
@@ -100,6 +118,8 @@
 
         
 
+        
+
          method to retrieve the valid ports for the current computer.</para
       >
       <para
@@ -110,8 +130,12 @@
 
         
 
+        
+
          object becomes blocked during a read operation, do not abort the thread. Instead, either close the base stream or dispose of the <see
          cref="T:System.IO.Ports.SerialPort" />
+
+        
 
         
 
@@ -150,6 +174,8 @@
 
             
 
+            
+
              property defaults to 8, the <see
              cref="P:System.IO.Ports.SerialPort.Parity" />
 
@@ -157,8 +183,12 @@
 
             
 
+            
+
              property defaults to the None enumeration value, the <see
              cref="P:System.IO.Ports.SerialPort.StopBits" />
+
+            
 
             
 
@@ -172,6 +202,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.Ports.SerialPort" />
+
+            
 
             
 
@@ -211,6 +243,8 @@
 
             
 
+            
+
              property defaults to 8, the <see
              cref="P:System.IO.Ports.SerialPort.Parity" />
 
@@ -218,8 +252,12 @@
 
             
 
+            
+
              property defaults to the None enumeration value, the <see
              cref="P:System.IO.Ports.SerialPort.StopBits" />
+
+            
 
             
 
@@ -238,8 +276,12 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.ComponentModel.IContainer" />
+
+            
 
             
 
@@ -250,6 +292,8 @@
         </summary>
         <param name="container">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -285,6 +329,8 @@
 
             
 
+            
+
              class when you want to specify the port name.</para
           >
         </remarks>
@@ -298,11 +344,15 @@
 
             
 
+            
+
              class using the specified port name.</para
           >
         </summary>
         <param name="portName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -339,6 +389,8 @@
 
             
 
+            
+
              class when you want to specify the port name and the baud rate.</para
           >
         </remarks>
@@ -347,6 +399,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.Ports.SerialPort" />
+
+            
 
             
 
@@ -362,10 +416,14 @@
 
           
 
+          
+
           The port to use (for example, COM1). </param
         >
         <param name="baudRate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -406,6 +464,8 @@
 
             
 
+            
+
              class when you want to specify the port name, the baud rate, and the parity bit.</para
           >
         </remarks>
@@ -414,6 +474,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.Ports.SerialPort" />
+
+            
 
             
 
@@ -429,10 +491,14 @@
 
           
 
+          
+
           The port to use (for example, COM1). </param
         >
         <param name="baudRate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -447,8 +513,12 @@
 
           
 
+          
+
           One of the <see
            cref="P:System.IO.Ports.SerialPort.Parity" />
+
+          
 
           
 
@@ -490,6 +560,8 @@
 
             
 
+            
+
              class when you want to specify the port name, the baud rate, the parity bit, and data bits.</para
           >
         </remarks>
@@ -498,6 +570,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.Ports.SerialPort" />
+
+            
 
             
 
@@ -513,10 +587,14 @@
 
           
 
+          
+
           The port to use (for example, COM1). </param
         >
         <param name="baudRate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -531,8 +609,12 @@
 
           
 
+          
+
           One of the <see
            cref="P:System.IO.Ports.SerialPort.Parity" />
+
+          
 
           
 
@@ -542,6 +624,8 @@
         >
         <param name="dataBits">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -584,6 +668,8 @@
 
             
 
+            
+
              class when you want to specify the port name, the baud rate, the parity bit, data bits, and stop bit.</para
           >
         </remarks>
@@ -592,6 +678,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.IO.Ports.SerialPort" />
+
+            
 
             
 
@@ -607,10 +695,14 @@
 
           
 
+          
+
           The port to use (for example, COM1). </param
         >
         <param name="baudRate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -625,8 +717,12 @@
 
           
 
+          
+
           One of the <see
            cref="P:System.IO.Ports.SerialPort.Parity" />
+
+          
 
           
 
@@ -641,6 +737,8 @@
 
           
 
+          
+
           The data bits value. </param
         >
         <param name="stopBits">
@@ -650,8 +748,12 @@
 
           
 
+          
+
           One of the <see
            cref="P:System.IO.Ports.SerialPort.StopBits" />
+
+          
 
           
 
@@ -696,6 +798,8 @@
 
             
 
+            
+
              object to a <see
              cref="T:System.IO.Stream" />
 
@@ -703,8 +807,12 @@
 
             
 
+            
+
              wrapper class such as <see
              cref="T:System.IO.StreamWriter" />
+
+            
 
             
 
@@ -720,8 +828,12 @@
 
             
 
+            
+
              property returns an object that derives from the abstract <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -734,8 +846,12 @@
 
             
 
+            
+
              class: <see
              cref="M:System.IO.Stream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -748,8 +864,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.IO.Stream.Read(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -762,8 +882,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.IO.Stream.Write(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -776,8 +900,12 @@
 
             
 
+            
+
             . These methods can be useful when passing a wrapped serial resource to a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -793,8 +921,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.IO.Stream.Position" />
+
+            
 
             
 
@@ -807,8 +939,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IO.Stream.SetLength(System.Int64)" />
+
+            
 
             
 
@@ -827,8 +963,12 @@
 
             
 
+            
+
              object for a <see
              cref="T:System.IO.Ports.SerialPort" />
+
+            
 
             
 
@@ -906,8 +1046,12 @@
 
             
 
+            
+
              object while <see
              cref="P:System.IO.Ports.SerialPort.BreakState" />
+
+            
 
             
 
@@ -954,11 +1098,15 @@
 
             
 
+            
+
              object itself.</para
           >
           <para
             >Because the <see
              cref="P:System.IO.Ports.SerialPort.BytesToRead" />
+
+            
 
             
 
@@ -971,8 +1119,12 @@
 
             
 
+            
+
              buffer and the Windows-created buffer,  it can return a greater value than the <see
              cref="P:System.IO.Ports.SerialPort.ReadBufferSize" />
+
+            
 
             
 
@@ -1014,6 +1166,8 @@
           <para
             >The send buffer includes the serial driver's send buffer as well as internal buffering in the <see
              cref="T:System.IO.Ports.SerialPort" />
+
+            
 
             
 
@@ -1087,8 +1241,12 @@
 
             
 
+            
+
              object and clears both the receive and transmit buffers. This method calls the <see
              cref="M:System.ComponentModel.Component.Dispose" />
+
+            
 
             
 
@@ -1101,8 +1259,12 @@
 
             
 
+            
+
              method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -1118,8 +1280,12 @@
 
             
 
+            
+
              method before attempting to call the <see
              cref="M:System.IO.Ports.SerialPort.Open" />
+
+            
 
             
 
@@ -1138,8 +1304,12 @@
 
             
 
+            
+
              property to false, and disposes of the internal <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -1251,10 +1421,14 @@
 
             
 
+            
+
              enumeration. Because the operating system determines whether to raise this event or not, not all parity errors may be reported.</para
           >
           <para>
             <see cref="E:System.IO.Ports.SerialPort.PinChanged" />
+
+            
 
             
 
@@ -1267,8 +1441,12 @@
 
             
 
+            
+
             , and <see
              cref="E:System.IO.Ports.SerialPort.ErrorReceived" />
+
+            
 
             
 
@@ -1284,8 +1462,12 @@
 
             
 
+            
+
              event is not guaranteed to be raised for every byte received. Use the <see
              cref="P:System.IO.Ports.SerialPort.BytesToRead" />
+
+            
 
             
 
@@ -1301,8 +1483,12 @@
 
             
 
+            
+
              event is raised on a secondary thread when data is received from the <see
              cref="T:System.IO.Ports.SerialPort" />
+
+            
 
             
 
@@ -1315,6 +1501,8 @@
 
             
 
+            
+
              or <see
              cref="T:System.Windows.Forms.Control" />
 
@@ -1322,8 +1510,12 @@
 
             
 
+            
+
             , post change requests back using <see
              cref="M:System.Windows.Forms.Control.Invoke(System.Delegate)" />
+
+            
 
             
 
@@ -1341,6 +1533,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1349,6 +1543,8 @@
           <para
             >Represents the method that will handle the data received event of a <see
              cref="T:System.IO.Ports.SerialPort" />
+
+            
 
             
 
@@ -1480,8 +1676,12 @@
 
             
 
+            
+
              method and the <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -1494,8 +1694,12 @@
 
             
 
+            
+
              invokes the protected <see
              cref="M:System.IO.Ports.SerialPort.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -1508,8 +1712,12 @@
 
             
 
+            
+
              parameter set to true. <see
              cref="M:System.Object.Finalize" />
+
+            
 
             
 
@@ -1522,8 +1730,12 @@
 
             
 
+            
+
              with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -1539,8 +1751,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.IO.Ports.SerialPort" />
+
+            
 
             
 
@@ -1553,11 +1769,15 @@
 
             
 
+            
+
              method of each referenced object.</para
           >
           <para
             >This method flushes and closes the stream object in the <see
              cref="P:System.IO.Ports.SerialPort.BaseStream" />
+
+            
 
             
 
@@ -1576,11 +1796,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1726,10 +1950,14 @@
 
             
 
+            
+
              enumeration. Because the operating system determines whether to raise this event or not, not all parity errors may be reported. </para
           >
           <para>
             <see cref="E:System.IO.Ports.SerialPort.PinChanged" />
+
+            
 
             
 
@@ -1742,8 +1970,12 @@
 
             
 
+            
+
             , and <see
              cref="E:System.IO.Ports.SerialPort.ErrorReceived" />
+
+            
 
             
 
@@ -1760,8 +1992,12 @@
 
             
 
+            
+
              event is raised on a secondary thread when an error is received from the <see
              cref="T:System.IO.Ports.SerialPort" />
+
+            
 
             
 
@@ -1774,6 +2010,8 @@
 
             
 
+            
+
              or <see
              cref="T:System.Windows.Forms.Control" />
 
@@ -1781,8 +2019,12 @@
 
             
 
+            
+
             , post change requests back using <see
              cref="M:System.Windows.Forms.Control.Invoke(System.Delegate)" />
+
+            
 
             
 
@@ -1800,6 +2042,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1808,6 +2052,8 @@
           <para
             >Represents the method that handles the error event of a <see
              cref="T:System.IO.Ports.SerialPort" />
+
+            
 
             
 
@@ -1845,6 +2091,8 @@
 
             
 
+            
+
              is not specified.</para
           >
           <para
@@ -1855,11 +2103,15 @@
 
             
 
+            
+
              method to query the current computer for a list of valid serial port names. For example, you can use this method to determine whether COM1 and COM2 are valid serial ports for the current computer.</para
           >
           <para
             >The port names are obtained from the system registry (for example, HKEY_LOCAL_MACHINE\HARDWARE\DEVICEMAP\SERIALCOMM). If the registry contains stale or otherwise incorrect data then the <see
              cref="M:System.IO.Ports.SerialPort.GetPortNames" />
+
+            
 
             
 
@@ -1919,8 +2171,12 @@
 
             
 
+            
+
              object is instructed to stop sending data when there is at least (<see
              cref="P:System.IO.Ports.SerialPort.ReadBufferSize" />
+
+            
 
             
 
@@ -1936,8 +2192,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.IO.Ports.Handshake.RequestToSendXOnXOff" />
+
+            
 
             
 
@@ -1950,8 +2210,12 @@
 
             
 
+            
+
              is set to false, the XOff character will not be sent. If <see
              cref="P:System.IO.Ports.SerialPort.CtsHolding" />
+
+            
 
             
 
@@ -1993,8 +2257,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.IO.Ports.SerialPort.WriteTimeout" />
+
+            
 
             
 
@@ -2038,6 +2306,8 @@
 
             
 
+            
+
              property tracks whether the port is open for use by the caller, not whether the port is open by any application on the machine.</para
           >
         </remarks>
@@ -2046,6 +2316,8 @@
           <para
             >Gets a value indicating the open or closed status of the <see
              cref="T:System.IO.Ports.SerialPort" />
+
+            
 
             
 
@@ -2092,8 +2364,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IO.Ports.SerialPort.WriteLine(System.String)" />
+
+            
 
             
 
@@ -2112,8 +2388,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IO.Ports.SerialPort.WriteLine(System.String)" />
+
+            
 
             
 
@@ -2151,6 +2431,8 @@
 
             
 
+            
+
              object.</para
           >
           <para
@@ -2161,8 +2443,12 @@
 
             
 
+            
+
              method before attempting to call the <see
              cref="M:System.IO.Ports.SerialPort.Open" />
+
+            
 
             
 
@@ -2288,11 +2574,15 @@
 
             
 
+            
+
              enumeration. Because the operating system determines whether to raise this event or not, not all parity errors may be reported. As part of the event, the new value of the pin is set.</para
           >
           <para
             >The <see
              cref="E:System.IO.Ports.SerialPort.PinChanged" />
+
+            
 
             
 
@@ -2305,8 +2595,12 @@
 
             
 
+            
+
              object enters the <see
              cref="P:System.IO.Ports.SerialPort.BreakState" />
+
+            
 
             
 
@@ -2319,8 +2613,12 @@
 
             
 
+            
+
             . This behavior does not apply to other values in the <see
              cref="T:System.IO.Ports.SerialPinChange" />
+
+            
 
             
 
@@ -2335,6 +2633,8 @@
 
             
 
+            
+
             , <see
              cref="E:System.IO.Ports.SerialPort.DataReceived" />
 
@@ -2342,8 +2642,12 @@
 
             
 
+            
+
             , and <see
              cref="E:System.IO.Ports.SerialPort.ErrorReceived" />
+
+            
 
             
 
@@ -2359,8 +2663,12 @@
 
             
 
+            
+
              event is raised on a secondary thread. Because this event is raised on a secondary thread, and not the main thread, attempting to modify some elements in the main thread, such as UI elements, could raise a threading exception. If it is necessary to modify elements in the main <see
              cref="T:System.Windows.Forms.Form" />
+
+            
 
             
 
@@ -2373,8 +2681,12 @@
 
             
 
+            
+
             , post change requests back using <see
              cref="M:System.Windows.Forms.Control.Invoke(System.Delegate)" />
+
+            
 
             
 
@@ -2392,6 +2704,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2400,6 +2714,8 @@
           <para
             >Represents the method that will handle the serial pin changed event of a <see
              cref="T:System.IO.Ports.SerialPort" />
+
+            
 
             
 
@@ -2440,6 +2756,8 @@
           <para
             >A list of valid port names can be obtained using the <see
              cref="M:System.IO.Ports.SerialPort.GetPortNames" />
+
+            
 
             
 
@@ -2489,8 +2807,12 @@
 
             
 
+            
+
              class buffers data, and the stream contained in the <see
              cref="P:System.IO.Ports.SerialPort.BaseStream" />
+
+            
 
             
 
@@ -2503,6 +2825,8 @@
 
             
 
+            
+
              property can indicate that there are bytes to read, but these bytes might not be accessible to the stream contained in the <see
              cref="P:System.IO.Ports.SerialPort.BaseStream" />
 
@@ -2510,8 +2834,12 @@
 
             
 
+            
+
              property because they have been buffered to the <see
              cref="T:System.IO.Ports.SerialPort" />
+
+            
 
             
 
@@ -2527,8 +2855,12 @@
 
             
 
+            
+
              method does not block other operations when the number of bytes read equals <paramref
              name="count" />
+
+            
 
             
 
@@ -2542,6 +2874,8 @@
           <para
             >Reads a number of bytes from the <see
              cref="T:System.IO.Ports.SerialPort" />
+
+            
 
             
 
@@ -2561,6 +2895,8 @@
 
           
 
+          
+
           The byte array to write the input to. </param
         >
         <param name="offset">
@@ -2570,10 +2906,14 @@
 
           
 
+          
+
           The offset in the buffer array to begin reading from. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2619,8 +2959,12 @@
 
             
 
+            
+
              class buffers data, and the stream contained in the <see
              cref="P:System.IO.Ports.SerialPort.BaseStream" />
+
+            
 
             
 
@@ -2633,6 +2977,8 @@
 
             
 
+            
+
              property can indicate that there are characters to read, but these characters might not be accessible to the stream contained in the <see
              cref="P:System.IO.Ports.SerialPort.BaseStream" />
 
@@ -2640,8 +2986,12 @@
 
             
 
+            
+
              property because they have been buffered to the <see
              cref="T:System.IO.Ports.SerialPort" />
+
+            
 
             
 
@@ -2657,8 +3007,12 @@
 
             
 
+            
+
              method does not block other operations when the number of bytes read equals <paramref
              name="count" />
+
+            
 
             
 
@@ -2672,6 +3026,8 @@
           <para
             >Reads a number of characters from the <see
              cref="T:System.IO.Ports.SerialPort" />
+
+            
 
             
 
@@ -2691,6 +3047,8 @@
 
           
 
+          
+
           The character array to write the input to. </param
         >
         <param name="offset">
@@ -2700,10 +3058,14 @@
 
           
 
+          
+
           The offset in the buffer array to begin reading from. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2748,11 +3110,15 @@
 
             
 
+            
+
              property ignores any value smaller than 4096.</para
           >
           <para
             >Because the <see
              cref="P:System.IO.Ports.SerialPort.ReadBufferSize" />
+
+            
 
             
 
@@ -2765,8 +3131,12 @@
 
             
 
+            
+
               property, which represents both the <see
              cref="T:System.IO.Ports.SerialPort" />
+
+            
 
             
 
@@ -2780,6 +3150,8 @@
           <para
             >Gets or sets the size of the <see
              cref="T:System.IO.Ports.SerialPort" />
+
+            
 
             
 
@@ -2818,8 +3190,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IO.Ports.SerialPort.ReadChar" />
+
+            
 
             
 
@@ -2836,8 +3212,12 @@
 
               
 
+              
+
                class buffers data, and the stream contained in the <see
                cref="P:System.IO.Ports.SerialPort.BaseStream" />
+
+              
 
               
 
@@ -2850,6 +3230,8 @@
 
               
 
+              
+
                property can indicate that there are bytes to read, but these bytes might not be accessible to the stream contained in the <see
                cref="P:System.IO.Ports.SerialPort.BaseStream" />
 
@@ -2857,8 +3239,12 @@
 
               
 
+              
+
                property because they have been buffered to the <see
                cref="T:System.IO.Ports.SerialPort" />
+
+              
 
               
 
@@ -2878,6 +3264,8 @@
 
             
 
+            
+
              input buffer.</para
           >
         </summary>
@@ -2886,6 +3274,8 @@
           <para
             >The byte, cast to an <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -2924,8 +3314,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IO.Ports.SerialPort.ReadChar" />
+
+            
 
             
 
@@ -2942,8 +3336,12 @@
 
               
 
+              
+
                class buffers data, and the stream contained in the <see
                cref="P:System.IO.Ports.SerialPort.BaseStream" />
+
+              
 
               
 
@@ -2956,6 +3354,8 @@
 
               
 
+              
+
                property can indicate that there are bytes to read, but these bytes might not be accessible to the stream contained in the <see
                cref="P:System.IO.Ports.SerialPort.BaseStream" />
 
@@ -2963,8 +3363,12 @@
 
               
 
+              
+
                property because they have been buffered to the <see
                cref="T:System.IO.Ports.SerialPort" />
+
+              
 
               
 
@@ -2979,6 +3383,8 @@
           <para
             >Synchronously reads one character from the <see
              cref="T:System.IO.Ports.SerialPort" />
+
+            
 
             
 
@@ -3020,8 +3426,12 @@
 
             
 
+            
+
              object as a string. This method does not use a time-out. Note that this method can leave trailing lead bytes in the internal buffer, which makes the <see
              cref="P:System.IO.Ports.SerialPort.BytesToRead" />
+
+            
 
             
 
@@ -3039,8 +3449,12 @@
 
               
 
+              
+
                class buffers data, but the stream object contained in the <see
                cref="P:System.IO.Ports.SerialPort.BaseStream" />
+
+              
 
               
 
@@ -3053,8 +3467,12 @@
 
               
 
+              
+
                object and the stream object might differ on the number of bytes that are available to read. When bytes are buffered to the <see
                cref="T:System.IO.Ports.SerialPort" />
+
+              
 
               
 
@@ -3067,8 +3485,12 @@
 
               
 
+              
+
                property includes these bytes in its value; however, these bytes might not be accessible to the stream contained in the <see
                cref="P:System.IO.Ports.SerialPort.BaseStream" />
+
+              
 
               
 
@@ -3088,6 +3510,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -3096,6 +3520,8 @@
           <para
             >The contents of the stream and the input buffer of the <see
              cref="T:System.IO.Ports.SerialPort" />
+
+            
 
             
 
@@ -3133,8 +3559,12 @@
 
             
 
+            
+
              value, the <see
              cref="P:System.IO.Ports.SerialPort.NewLine" />
+
+            
 
             
 
@@ -3150,8 +3580,12 @@
 
             
 
+            
+
              method will block until a line is received. If this behavior is undesirable, set the <see
              cref="P:System.IO.Ports.SerialPort.ReadTimeout" />
+
+            
 
             
 
@@ -3164,8 +3598,12 @@
 
             
 
+            
+
              method to throw a <see
              cref="T:System.TimeoutException" />
+
+            
 
             
 
@@ -3183,8 +3621,12 @@
 
               
 
+              
+
                class buffers data, and the stream contained in the <see
                cref="P:System.IO.Ports.SerialPort.BaseStream" />
+
+              
 
               
 
@@ -3197,6 +3639,8 @@
 
               
 
+              
+
                property can indicate that there are bytes to read, but these bytes might not be accessible to the stream contained in the <see
                cref="P:System.IO.Ports.SerialPort.BaseStream" />
 
@@ -3204,8 +3648,12 @@
 
               
 
+              
+
                property because they have been buffered to the <see
                cref="T:System.IO.Ports.SerialPort" />
+
+              
 
               
 
@@ -3225,6 +3673,8 @@
 
             
 
+            
+
              value in the input buffer.</para
           >
         </summary>
@@ -3233,6 +3683,8 @@
           <para
             >The contents of the input buffer up to the first occurrence of a <see
              cref="P:System.IO.Ports.SerialPort.NewLine" />
+
+            
 
             
 
@@ -3278,8 +3730,12 @@
 
             
 
+            
+
             , in which case no time-out occurs. <see
              cref="F:System.IO.Ports.SerialPort.InfiniteTimeout" />
+
+            
 
             
 
@@ -3296,8 +3752,12 @@
 
               
 
+              
+
                property, however, you must specify <see
                cref="F:System.IO.Ports.SerialPort.InfiniteTimeout" />
+
+              
 
               
 
@@ -3314,8 +3774,12 @@
 
             
 
+            
+
              method of the stream returned by the <see
              cref="P:System.IO.Ports.SerialPort.BaseStream" />
+
+            
 
             
 
@@ -3359,6 +3823,8 @@
 
             
 
+            
+
             . While the returned string does not include the <paramref
              name="value" />
 
@@ -3366,8 +3832,12 @@
 
             
 
+            
+
             , the <paramref
              name="value" />
+
+            
 
             
 
@@ -3385,8 +3855,12 @@
 
               
 
+              
+
                class buffers data, and the stream contained in the <see
                cref="P:System.IO.Ports.SerialPort.BaseStream" />
+
+              
 
               
 
@@ -3399,6 +3873,8 @@
 
               
 
+              
+
                property can indicate that there are bytes to read, but these bytes might not be accessible to the stream contained in the <see
                cref="P:System.IO.Ports.SerialPort.BaseStream" />
 
@@ -3406,8 +3882,12 @@
 
               
 
+              
+
                property because they have been buffered to the <see
                cref="T:System.IO.Ports.SerialPort" />
+
+              
 
               
 
@@ -3427,6 +3907,8 @@
 
             
 
+            
+
              in the input buffer.</para
           >
         </summary>
@@ -3440,11 +3922,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3492,6 +3978,8 @@
 
             
 
+            
+
              event is also raised if an <see
              cref="F:System.IO.Ports.SerialData.Eof" />
 
@@ -3499,8 +3987,12 @@
 
             
 
+            
+
              character is received, regardless of the number of bytes in the internal input buffer and the value of the <see
              cref="P:System.IO.Ports.SerialPort.ReceivedBytesThreshold" />
+
+            
 
             
 
@@ -3514,6 +4006,8 @@
           <para
             >Gets or sets the number of bytes in the internal input buffer before a <see
              cref="E:System.IO.Ports.SerialPort.DataReceived" />
+
+            
 
             
 
@@ -3600,8 +4094,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.IO.Ports.StopBits.One" />
+
+            
 
             
 
@@ -3612,6 +4110,8 @@
           <para
             >The <see
              cref="F:System.IO.Ports.StopBits.None" />
+
+            
 
             
 
@@ -3657,8 +4157,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.IO.Ports.Handshake.XOnXOff" />
+
+            
 
             
 
@@ -3671,8 +4175,12 @@
 
             
 
+            
+
              object may raise a <see
              cref="T:System.ServiceProcess.TimeoutException" />
+
+            
 
             
 
@@ -3688,8 +4196,12 @@
 
             
 
+            
+
              uses <see
              cref="T:System.Text.ASCIIEncoding" />
+
+            
 
             
 
@@ -3702,8 +4214,12 @@
 
             
 
+            
+
              encodes all characters greater than 127 as (char)63 or '?'. To support additional characters in that range, set <see
              cref="P:System.IO.Ports.SerialPort.Encoding" />
+
+            
 
             
 
@@ -3716,6 +4232,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.Text.UTF32Encoding" />
 
@@ -3723,8 +4241,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Text.UnicodeEncoding" />
+
+            
 
             
 
@@ -3774,8 +4296,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.IO.Ports.Handshake.XOnXOff" />
+
+            
 
             
 
@@ -3788,8 +4314,12 @@
 
             
 
+            
+
              object may raise a <see
              cref="T:System.ServiceProcess.TimeoutException" />
+
+            
 
             
 
@@ -3805,8 +4335,12 @@
 
             
 
+            
+
              uses <see
              cref="T:System.Text.ASCIIEncoding" />
+
+            
 
             
 
@@ -3819,8 +4353,12 @@
 
             
 
+            
+
              encodes all characters greater than 127 as (char)63 or '?'. To support additional characters in that range, set <see
              cref="P:System.IO.Ports.SerialPort.Encoding" />
+
+            
 
             
 
@@ -3833,6 +4371,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.Text.UTF32Encoding" />
 
@@ -3840,8 +4380,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Text.UnicodeEncoding" />
+
+            
 
             
 
@@ -3861,10 +4405,14 @@
 
           
 
+          
+
           The byte array that contains the data to write to the port. </param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3877,10 +4425,14 @@
 
           
 
+          
+
            parameter at which to begin copying bytes to the port. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3925,8 +4477,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.IO.Ports.Handshake.XOnXOff" />
+
+            
 
             
 
@@ -3939,8 +4495,12 @@
 
             
 
+            
+
              object may raise a <see
              cref="T:System.ServiceProcess.TimeoutException" />
+
+            
 
             
 
@@ -3956,8 +4516,12 @@
 
             
 
+            
+
              uses <see
              cref="T:System.Text.ASCIIEncoding" />
+
+            
 
             
 
@@ -3970,8 +4534,12 @@
 
             
 
+            
+
              encodes all characters greater than 127 as (char)63 or '?'. To support additional characters in that range, set <see
              cref="P:System.IO.Ports.SerialPort.Encoding" />
+
+            
 
             
 
@@ -3984,6 +4552,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.Text.UTF32Encoding" />
 
@@ -3991,8 +4561,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Text.UnicodeEncoding" />
+
+            
 
             
 
@@ -4012,10 +4586,14 @@
 
           
 
+          
+
           The character array that contains the data to write to the port. </param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4028,10 +4606,14 @@
 
           
 
+          
+
            parameter at which to begin copying bytes to the port. </param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4076,6 +4658,8 @@
 
             
 
+            
+
              property ignores any value smaller than 2048.</para
           >
         </remarks>
@@ -4115,8 +4699,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.IO.Ports.Handshake.XOnXOff" />
+
+            
 
             
 
@@ -4129,8 +4717,12 @@
 
             
 
+            
+
              object may raise a <see
              cref="T:System.ServiceProcess.TimeoutException" />
+
+            
 
             
 
@@ -4146,6 +4738,8 @@
 
             
 
+            
+
              string.</para
           >
         </remarks>
@@ -4154,6 +4748,8 @@
           <para
             >Writes the specified string and the <see
              cref="P:System.IO.Ports.SerialPort.NewLine" />
+
+            
 
             
 
@@ -4199,8 +4795,12 @@
 
             
 
+            
+
             , in which case no time-out occurs. <see
              cref="F:System.IO.Ports.SerialPort.InfiniteTimeout" />
+
+            
 
             
 
@@ -4217,8 +4817,12 @@
 
               
 
+              
+
                property, however, you must specify <see
                cref="F:System.IO.Ports.SerialPort.InfiniteTimeout" />
+
+              
 
               
 
@@ -4235,8 +4839,12 @@
 
             
 
+            
+
              method of the stream returned by the <see
              cref="P:System.IO.Ports.SerialPort.BaseStream" />
+
+            
 
             
 

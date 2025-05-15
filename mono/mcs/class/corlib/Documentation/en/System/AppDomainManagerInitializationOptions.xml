@@ -36,8 +36,12 @@
 
         
 
+        
+
          class. The <see
          cref="T:System.AppDomainManagerInitializationOptions" />
+
+        
 
         
 
@@ -50,8 +54,12 @@
 
         
 
+        
+
          method in the default application domain manager does nothing. The default enumeration value is <see
          cref="F:System.AppDomainManagerInitializationOptions.None" />
+
+        
 
         
 
@@ -109,6 +117,8 @@
           <para
             >Register the COM callable wrapper for the current <see
              cref="T:System.AppDomainManager" />
+
+            
 
             
 

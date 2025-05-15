@@ -11,6 +11,8 @@
 
         
 
+        
+
          namespace contains classes for playing sound files and accessing sounds provided by the system.</para
       >
     </summary>
@@ -22,6 +24,8 @@
           <para
             >A <see
              cref="T:System.Media.SoundPlayer" />
+
+            
 
             
 
@@ -39,6 +43,8 @@
 
             
 
+            
+
              class for representing and playing a system sound.</para
           >
         </item>
@@ -46,6 +52,8 @@
           <para
             >A <see
              cref="T:System.Media.SystemSounds" />
+
+            
 
             
 

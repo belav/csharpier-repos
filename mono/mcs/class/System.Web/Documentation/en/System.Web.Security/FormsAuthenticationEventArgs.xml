@@ -30,8 +30,12 @@
 
         
 
+        
+
          class is used to supply event values to the <system
         >FormsAuthentication_OnAuthenticate</system>
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          constructs a <see
          cref="T:System.Web.Security.FormsAuthenticationEventArgs" />
+
+        
 
         
 
@@ -61,8 +69,12 @@
 
         
 
+        
+
          and passes it to the <system
         >FormsAuthentication_OnAuthenticate</system>
+
+        
 
         
 
@@ -78,8 +90,12 @@
 
         
 
+        
+
          property to set the <see
          cref="P:System.Web.HttpContext.User" />
+
+        
 
         
 
@@ -92,8 +108,12 @@
 
         
 
+        
+
          to a custom <see
          cref="T:System.Security.Principal.IPrincipal" />
+
+        
 
         
 
@@ -109,8 +129,12 @@
 
         
 
+        
+
          property during the <system
         >FormsAuthentication_OnAuthenticate</system>
+
+        
 
         
 
@@ -126,8 +150,12 @@
 
         
 
+        
+
          event is only raised when the authentication <see
          cref="P:System.Web.Configuration.AuthenticationSection.Mode" />
+
+        
 
         
 
@@ -140,8 +168,12 @@
 
         
 
+        
+
          and the <see
          cref="T:System.Web.Security.FormsAuthenticationModule" />
+
+        
 
         
 
@@ -155,6 +187,8 @@
       <para
         >Provides data for the <system
         >FormsAuthentication_OnAuthenticate</system>
+
+        
 
         
 
@@ -186,8 +220,12 @@
 
             
 
+            
+
              constructs a <see
              cref="T:System.Web.Security.FormsAuthenticationEventArgs" />
+
+            
 
             
 
@@ -200,8 +238,12 @@
 
             
 
+            
+
              as the value for the <see
              cref="P:System.Web.Security.FormsAuthenticationEventArgs.Context" />
+
+            
 
             
 
@@ -214,8 +256,12 @@
 
             
 
+            
+
              object to the <system
             >FormsAuthentication_OnAuthenticate</system>
+
+            
 
             
 
@@ -234,11 +280,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -274,8 +324,12 @@
 
             
 
+            
+
              provides access to <see
              cref="P:System.Web.HttpContext.Request" />
+
+            
 
             
 
@@ -288,8 +342,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Web.HttpContext.User" />
+
+            
 
             
 
@@ -303,6 +361,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -342,8 +402,12 @@
 
             
 
+            
+
              property to set the <see
              cref="P:System.Web.HttpContext.User" />
+
+            
 
             
 
@@ -356,8 +420,12 @@
 
             
 
+            
+
              to a custom <see
              cref="T:System.Security.Principal.IPrincipal" />
+
+            
 
             
 
@@ -373,8 +441,12 @@
 
             
 
+            
+
              property during the <system
             >FormsAuthentication_OnAuthenticate</system>
+
+            
 
             
 
@@ -388,6 +460,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Security.Principal.IPrincipal" />
+
+            
 
             
 

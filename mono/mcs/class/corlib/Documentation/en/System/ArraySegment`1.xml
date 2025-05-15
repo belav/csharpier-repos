@@ -48,8 +48,12 @@
 
         
 
+        
+
          is a wrapper around an array that delimits a range of elements in that array. Multiple <see
          cref="T:System.ArraySegment`1" />
+
+        
 
         
 
@@ -65,8 +69,12 @@
 
         
 
+        
+
          property returns the entire original array, not a copy of the array; therefore, changes made to the array returned by the <see
          cref="P:System.ArraySegment`1.Array" />
+
+        
 
         
 
@@ -82,6 +90,8 @@
 
         
 
+        
+
          method and the equality and inequality operators test for reference equality when they compare two <see
          cref="T:System.ArraySegment`1" />
 
@@ -89,8 +99,12 @@
 
         
 
+        
+
          objects. For two <see
          cref="T:System.ArraySegment`1" />
+
+        
 
         
 
@@ -117,8 +131,12 @@
 
         
 
+        
+
          object, you must cast it to an <see
          cref="T:System.Collections.Generic.IList`1" />
+
+        
 
         
 
@@ -131,8 +149,12 @@
 
         
 
+        
+
          property. The following example retrieves the element in an <see
          cref="T:System.ArraySegment`1" />
+
+        
 
         
 
@@ -216,6 +238,8 @@
           <para
             >The <see
              cref="P:System.ArraySegment`1.Array" />
+
+            
 
             
 
@@ -305,6 +329,8 @@
 
             
 
+            
+
              objects are considered to be equal if all the following conditions are met: </para
           >
           <list type="bullet">
@@ -333,11 +359,15 @@
 
             
 
+            
+
              structure and is equal to the current instance; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -764,8 +794,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 

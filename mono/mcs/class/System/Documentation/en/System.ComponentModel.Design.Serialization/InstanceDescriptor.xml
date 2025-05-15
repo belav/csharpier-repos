@@ -31,11 +31,15 @@
 
         
 
+        
+
          can store information that describes an instance of an object. This information can be used to create an instance of the object.</para
       >
       <para
         >Some custom serializers use <see
          cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
          use <see
          cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />
+
+        
 
         
 
@@ -60,6 +68,8 @@
       <para
         >An <see
          cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />
+
+        
 
         
 
@@ -77,6 +87,8 @@
 
             
 
+            
+
              property that describes this object.</para
           >
         </item>
@@ -84,6 +96,8 @@
           <para
             >An <see
              cref="P:System.ComponentModel.Design.Serialization.InstanceDescriptor.Arguments" />
+
+            
 
             
 
@@ -101,6 +115,8 @@
 
             
 
+            
+
              property that indicates whether the object is completely represented by the current information.</para
           >
         </item>
@@ -108,6 +124,8 @@
           <para
             >An <see
              cref="M:System.ComponentModel.Design.Serialization.InstanceDescriptor.Invoke" />
+
+            
 
             
 
@@ -156,11 +174,15 @@
 
             
 
+            
+
              class using the specified member information and arguments.</para
           >
         </summary>
         <param name="member">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -173,8 +195,12 @@
 
           
 
+          
+
           , <see
            cref="T:System.Reflection.ConstructorInfo" />
+
+          
 
           
 
@@ -187,8 +213,12 @@
 
           
 
+          
+
           , or <see
            cref="T:System.Reflection.PropertyInfo" />
+
+          
 
           
 
@@ -201,6 +231,8 @@
 
           
 
+          
+
           , <see
            cref="T:System.Reflection.FieldInfo" />
 
@@ -208,8 +240,12 @@
 
           
 
+          
+
           , or <see
            cref="T:System.Reflection.PropertyInfo" />
+
+          
 
           
 
@@ -224,8 +260,12 @@
 
           
 
+          
+
           The collection of arguments to pass to the member. This parameter can be null or an empty collection if there are no arguments. The collection can also consist of other instances of <see
            cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />
+
+          
 
           
 
@@ -268,11 +308,15 @@
 
             
 
+            
+
              class using the specified member information, arguments, and value indicating whether the specified information completely describes the instance.</para
           >
         </summary>
         <param name="member">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -285,8 +329,12 @@
 
           
 
+          
+
           , <see
            cref="T:System.Reflection.ConstructorInfo" />
+
+          
 
           
 
@@ -299,8 +347,12 @@
 
           
 
+          
+
           , or <see
            cref="T:System.Reflection.PropertyInfo" />
+
+          
 
           
 
@@ -313,6 +365,8 @@
 
           
 
+          
+
           , <see
            cref="T:System.Reflection.FieldInfo" />
 
@@ -320,8 +374,12 @@
 
           
 
+          
+
           , or <see
            cref="T:System.Reflection.PropertyInfo" />
+
+          
 
           
 
@@ -336,8 +394,12 @@
 
           
 
+          
+
           The collection of arguments to pass to the member. This parameter can be null or an empty collection if there are no arguments. The collection can also consist of other instances of <see
            cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />
+
+          
 
           
 
@@ -347,6 +409,8 @@
         >
         <param name="isComplete">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -410,6 +474,8 @@
 
             
 
+            
+
              property, using the specified arguments to create that particular type of instance.</para
           >
         </remarks>
@@ -447,6 +513,8 @@
 
             
 
+            
+
              completely describes a particular instance. However, some objects are too complex for a single method or constructor to represent. <see
              cref="P:System.ComponentModel.Design.Serialization.InstanceDescriptor.IsComplete" />
 
@@ -454,8 +522,12 @@
 
             
 
+            
+
              indicates whether an <see
              cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />
+
+            
 
             
 
@@ -469,6 +541,8 @@
           <para
             >Gets a value indicating whether the contents of this <see
              cref="T:System.ComponentModel.Design.Serialization.InstanceDescriptor" />
+
+            
 
             
 
@@ -509,8 +583,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Reflection.ConstructorInfo" />
+
+            
 
             
 
@@ -523,8 +601,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Reflection.PropertyInfo" />
+
+            
 
             
 

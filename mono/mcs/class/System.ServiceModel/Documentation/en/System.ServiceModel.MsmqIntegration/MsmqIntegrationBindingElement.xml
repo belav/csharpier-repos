@@ -31,6 +31,8 @@
 
         
 
+        
+
         . Use this class to send and receive messages from MSMQ-based messaging applications.</para
       >
     </summary>
@@ -54,6 +56,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationBindingElement" />
+
+            
 
             
 
@@ -106,8 +110,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -117,6 +125,8 @@
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -173,8 +183,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -184,6 +198,8 @@
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -231,8 +247,12 @@
 
             
 
+            
+
              is <see
              cref="T:System.ServiceModel.Channels.IOutputChannel" />
+
+            
 
             
 
@@ -248,8 +268,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -259,6 +283,8 @@
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -312,8 +338,12 @@
 
             
 
+            
+
              is <see
              cref="T:System.ServiceModel.Channels.IInputChannel" />
+
+            
 
             
 
@@ -329,8 +359,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -340,6 +374,8 @@
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -423,6 +459,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -433,10 +471,14 @@
 
           
 
+          
+
           The binding context.</param
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -472,6 +514,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -480,6 +524,8 @@
           <para
             >Gets a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -524,6 +570,8 @@
 
                 
 
+                
+
                  is used to serialize objects.</para
               >
             </item>
@@ -542,6 +590,8 @@
 
                 
 
+                
+
                  is used to serialize objects.</para
               >
             </item>
@@ -555,6 +605,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.ServiceModel.MsmqIntegration.MsmqMessageSerializationFormat" />
+
+            
 
             
 
@@ -590,8 +642,12 @@
 
             
 
+            
+
              property enables you to specify the types to which messages are deserialized when they are sent from an MSMQ application to a indigo1 receiving application. This property is used only if <see
              cref="T:System.ServiceModel.MsmqIntegration.MsmqMessageSerializationFormat" />
+
+            
 
             
 
@@ -605,6 +661,8 @@
           <para
             >Gets or sets an array of <see
              cref="T:System.Type" />
+
+            
 
             
 

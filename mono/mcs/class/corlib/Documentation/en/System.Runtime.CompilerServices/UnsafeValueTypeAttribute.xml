@@ -34,6 +34,8 @@
 
         
 
+        
+
          class to instruct the common language runtime (CLR) that a type contains an unmanaged array that can potentially overflow.  When this attribute is encountered, the CLR inserts runtime checks to prevent the array from overflowing and to prevent buffer overrun attacks.</para
       >
       <para>This class is used by the Microsoft Visual C++ and the Microsoft Visual C# compilers.</para>
@@ -64,6 +66,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.CompilerServices.UnsafeValueTypeAttribute" />
+
+            
 
             
 

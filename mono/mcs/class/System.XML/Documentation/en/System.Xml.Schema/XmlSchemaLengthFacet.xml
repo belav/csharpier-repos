@@ -35,6 +35,8 @@
 
         
 
+        
+
         . This class can be used to specify a restriction on the length of a simpleType element on the data type.</para
       >
     </summary>
@@ -61,6 +63,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Schema.XmlSchemaLengthFacet" />
+
+            
 
             
 

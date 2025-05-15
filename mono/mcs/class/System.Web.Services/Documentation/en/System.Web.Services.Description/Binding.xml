@@ -49,6 +49,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -100,6 +102,8 @@
           <para
             >Gets or sets a string value containing the name of the <see
              cref="T:System.Web.Services.Description.Binding" />
+
+            
 
             
 
@@ -168,8 +172,12 @@
 
             
 
+            
+
              of which the <see
              cref="T:System.Web.Services.Description.Binding" />
+
+            
 
             
 
@@ -208,6 +216,8 @@
           <para
             >Gets or sets a value representing the namespace-qualified name of the <see
              cref="T:System.Web.Services.Description.PortType" />
+
+            
 
             
 

@@ -11,8 +11,12 @@
 
         
 
+        
+
          namespace contains numeric types that complement the numeric primitives, such as <see
          cref="T:System.Byte" />
+
+        
 
         
 
@@ -25,8 +29,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Int32" />
+
+        
 
         
 
@@ -48,8 +56,12 @@
 
             
 
+            
+
              structure, which is a nonprimitive integral type that supports arbitrarily large integers. An integral primitive such as <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -62,8 +74,12 @@
 
             
 
+            
+
              includes a MinValue and a MaxValue property, which define the lower bound and upper bound supported by that data type. In contrast, the <see
              cref="T:System.Numerics.BigInteger" />
+
+            
 
             
 
@@ -76,6 +92,8 @@
           <para
             >The <see
              cref="T:System.Numerics.Complex" />
+
+            
 
             
 

@@ -43,8 +43,12 @@
 
         
 
+        
+
          attribute to assemblies to specify assembly compilation parameters.  Use the <see
          cref="T:System.Runtime.CompilerServices.CompilationRelaxations" />
+
+        
 
         
 
@@ -56,6 +60,8 @@
       <para
         >The classes in <see
          cref="N:System.Runtime.CompilerServices" />
+
+        
 
         
 
@@ -98,6 +104,8 @@
 
           
 
+          
+
             has both Strictxxx and Relaxedxx set, or has both StringInterning and NoStringInterning set.</exception
         >
         <remarks>
@@ -105,6 +113,8 @@
           <para
             >Apply the <see
              cref="T:System.Runtime.CompilerServices.CompilationRelaxationsAttribute" />
+
+            
 
             
 
@@ -124,11 +134,15 @@
 
             
 
+            
+
              class with the specified compilation relaxations.</para
           >
         </summary>
         <param name="relaxations">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -170,6 +184,8 @@
 
             
 
+            
+
              attribute to assemblies to specify assembly compilation parameters.  </para
           >
           <para>This attribute is ignored in version 1.0 of the Microsoft .NET Framework.</para>
@@ -184,8 +200,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Runtime.CompilerServices.CompilationRelaxations" />
+
+            
 
             
 
@@ -201,8 +221,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Runtime.CompilerServices.CompilationRelaxations" />
+
+          
 
           
 

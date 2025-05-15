@@ -9,6 +9,8 @@
 
       
 
+      
+
        :: <rhs
       >
         <non_terminal where="9.4.4.1">boolean-literal</non_terminal>
@@ -17,9 +19,7 @@
         <non_terminal where="9.4.4.2">integer-literal</non_terminal>
       </rhs>
       <rhs>
-        <non_terminal where="9.4.4.3"
->real-literal</non_terminal
-        >
+        <non_terminal where="9.4.4.3">real-literal</non_terminal>
       </rhs>
       <rhs>
         <non_terminal where="9.4.4.4">character-literal</non_terminal>

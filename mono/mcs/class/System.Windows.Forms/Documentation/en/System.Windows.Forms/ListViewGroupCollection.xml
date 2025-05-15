@@ -33,8 +33,12 @@
 
         
 
+        
+
          property to get the <see
          cref="T:System.Windows.Forms.ListViewGroupCollection" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          control. This collection contains the <see
          cref="T:System.Windows.Forms.ListViewGroup" />
+
+        
 
         
 
@@ -61,8 +69,12 @@
 
         
 
+        
+
          property is set to a value other than <see
          cref="F:System.Windows.Forms.View.List" />
+
+        
 
         
 
@@ -75,8 +87,12 @@
 
         
 
+        
+
          collection, and cannot be altered. It is primarily useful in debugging to ensure that all items have been properly added to groups. If there are no groups in the <see
          cref="P:System.Windows.Forms.ListView.Groups" />
+
+        
 
         
 
@@ -92,8 +108,12 @@
 
         
 
+        
+
          method to add a single group to the collection. Use the <see
          cref="M:System.Windows.Forms.ListViewGroupCollection.Insert(System.Int32,System.Windows.Forms.ListViewGroup)" />
+
+        
 
         
 
@@ -106,8 +126,12 @@
 
         
 
+        
+
          method. Use the <see
          cref="M:System.Windows.Forms.ListViewGroupCollection.RemoveAt(System.Int32)" />
+
+        
 
         
 
@@ -123,8 +147,12 @@
 
         
 
+        
+
          to the collection more than once. To reposition a group within the collection, it must first be removed from the collection, and then inserted at the desired location. Use the <see
          cref="M:System.Windows.Forms.ListViewGroupCollection.Contains(System.Windows.Forms.ListViewGroup)" />
+
+        
 
         
 
@@ -137,8 +165,12 @@
 
         
 
+        
+
          method. You can get or set the group at a particular index with the <see
          cref="P:System.Windows.Forms.ListViewGroupCollection.Item(System.Int32)" />
+
+        
 
         
 
@@ -154,8 +186,12 @@
 
         
 
+        
+
          method to add multiple groups to the collection. You can add multiple groups either as an array of groups or as a <see
          cref="T:System.Windows.Forms.ListViewGroupCollection" />
+
+        
 
         
 
@@ -168,6 +204,8 @@
 
         
 
+        
+
          property of another <see
          cref="T:System.Windows.Forms.ListView" />
 
@@ -175,8 +213,12 @@
 
         
 
+        
+
          control. Use the <see
          cref="M:System.Windows.Forms.ListViewGroupCollection.Clear" />
+
+        
 
         
 
@@ -193,8 +235,12 @@
 
           
 
+          
+
           , <see
            cref="M:System.Windows.Forms.ListViewGroupCollection.RemoveAt(System.Int32)" />
+
+          
 
           
 
@@ -207,6 +253,8 @@
 
           
 
+          
+
            methods remove groups from the collection, but do not remove any items from the <see
            cref="T:System.Windows.Forms.ListView" />
 
@@ -214,8 +262,12 @@
 
           
 
+          
+
            control. If there are no groups in the <see
            cref="P:System.Windows.Forms.ListView.Groups" />
+
+          
 
           
 
@@ -232,8 +284,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Windows.Forms.ListViewGroupCollection.Clear" />
+
+        
 
         
 
@@ -246,6 +302,8 @@
 
         
 
+        
+
          control. To do this, create multiple group arrays. To change the grouping, first use the <see
          cref="M:System.Windows.Forms.ListViewGroupCollection.Clear" />
 
@@ -253,8 +311,12 @@
 
         
 
+        
+
          method to remove all the groups from the collection, then use the <see
          cref="M:System.Windows.Forms.ListViewGroupCollection.AddRange(System.Windows.Forms.ListViewGroup[])" />
+
+        
 
         
 
@@ -270,8 +332,12 @@
 
         
 
+        
+
          method to copy the groups in a collection to a compatible array starting at a specified index. This is useful, for example, when you want to sort the groups in the collection using the <see
          cref="Overload:System.Array.Sort" />
+
+        
 
         
 
@@ -284,8 +350,12 @@
 
         
 
+        
+
          method to remove all the groups from the collection, then use the <see
          cref="M:System.Windows.Forms.ListViewGroupCollection.AddRange(System.Windows.Forms.ListViewGroup[])" />
+
+        
 
         
 
@@ -301,6 +371,8 @@
 
         
 
+        
+
          property to determine how many groups are in the collection. To iterate through the collection, use the <see
          cref="T:System.Collections.IEnumerator" />
 
@@ -308,8 +380,12 @@
 
         
 
+        
+
          returned from the <see
          cref="M:System.Windows.Forms.ListViewGroupCollection.GetEnumerator" />
+
+        
 
         
 
@@ -326,6 +402,8 @@
 
           
 
+          
+
            method. On earlier operating systems, any code relating to groups will be ignored and the groups will not appear. As a result, any code that depends on the grouping feature might not work correctly. You might want to include a test that determines whether the grouping feature is available, and provide alternate functionality when it is unavailable. For example, you might want to provide alternate sorting when running on operating systems that do not support sorting by group.</para
         >
         <para
@@ -336,8 +414,12 @@
 
           
 
+          
+
            method overload and pass in the <see
            cref="F:System.Windows.Forms.OSFeature.Themes" />
+
+          
 
           
 
@@ -352,6 +434,8 @@
       <para
         >Represents the collection of groups within a <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -386,8 +470,12 @@
 
             
 
+            
+
              to the collection. You cannot add a <see
              cref="T:System.Windows.Forms.ListViewGroup" />
+
+            
 
             
 
@@ -400,8 +488,12 @@
 
             
 
+            
+
              method using a <see
              cref="T:System.Windows.Forms.ListViewGroup" />
+
+            
 
             
 
@@ -417,6 +509,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -425,6 +519,8 @@
           <para
             >Adds the specified <see
              cref="T:System.Windows.Forms.ListViewGroup" />
+
+            
 
             
 
@@ -444,8 +540,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ListViewGroup" />
+
+          
 
           
 
@@ -484,6 +584,8 @@
 
             
 
+            
+
              to the collection using the specified values to initialize the <see
              cref="P:System.Windows.Forms.ListViewGroup.Name" />
 
@@ -491,8 +593,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ListViewGroup.Header" />
+
+            
 
             
 
@@ -511,6 +617,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -521,8 +629,12 @@
 
           
 
+          
+
           The initial value of the <see
            cref="P:System.Windows.Forms.ListViewGroup.Name" />
+
+          
 
           
 
@@ -537,8 +649,12 @@
 
           
 
+          
+
           The initial value of the <see
            cref="P:System.Windows.Forms.ListViewGroup.Header" />
+
+          
 
           
 
@@ -575,6 +691,8 @@
 
             
 
+            
+
              method to add an array of groups to the group collection. This method is useful when you create multiple <see
              cref="T:System.Windows.Forms.ListViewGroup" />
 
@@ -582,8 +700,12 @@
 
             
 
+            
+
              objects and want to add them to the collection with a single method call. To add individual groups to the collection, use the <see
              cref="M:System.Windows.Forms.ListViewGroupCollection.Add(System.Windows.Forms.ListViewGroup)" />
+
+            
 
             
 
@@ -599,6 +721,8 @@
 
             
 
+            
+
              control. To do this, create multiple group arrays. To change the grouping, first use the <see
              cref="M:System.Windows.Forms.ListViewGroupCollection.Clear" />
 
@@ -606,8 +730,12 @@
 
             
 
+            
+
              method to remove all the groups from the collection, then use the <see
              cref="M:System.Windows.Forms.ListViewGroupCollection.AddRange(System.Windows.Forms.ListViewGroup[])" />
+
+            
 
             
 
@@ -623,8 +751,12 @@
 
             
 
+            
+
              method, the <see
              cref="M:System.Windows.Forms.ListViewGroupCollection.AddRange(System.Windows.Forms.ListViewGroup[])" />
+
+            
 
             
 
@@ -637,8 +769,12 @@
 
             
 
+            
+
              method before using the <see
              cref="M:System.Windows.Forms.ListViewGroupCollection.AddRange(System.Windows.Forms.ListViewGroup[])" />
+
+            
 
             
 
@@ -658,8 +794,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Windows.Forms.ListViewGroup" />
+
+          
 
           
 
@@ -696,8 +836,12 @@
 
             
 
+            
+
              method to add the elements of a <see
              cref="T:System.Windows.Forms.ListViewGroupCollection" />
+
+            
 
             
 
@@ -710,8 +854,12 @@
 
             
 
+            
+
              property of a different <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -727,8 +875,12 @@
 
             
 
+            
+
              method, the <see
              cref="M:System.Windows.Forms.ListViewGroupCollection.AddRange(System.Windows.Forms.ListViewGroup[])" />
+
+            
 
             
 
@@ -741,8 +893,12 @@
 
             
 
+            
+
              method before using the <see
              cref="M:System.Windows.Forms.ListViewGroupCollection.AddRange(System.Windows.Forms.ListViewGroup[])" />
+
+            
 
             
 
@@ -761,6 +917,8 @@
 
             
 
+            
+
              to the collection.</para
           >
         </summary>
@@ -771,8 +929,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ListViewGroupCollection" />
+
+          
 
           
 
@@ -804,8 +966,12 @@
 
             
 
+            
+
              collection does not remove items from the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -821,6 +987,8 @@
 
             
 
+            
+
              control, the items appear normally. To remove individual groups from the collection, use the <see
              cref="M:System.Windows.Forms.ListViewGroupCollection.Remove(System.Windows.Forms.ListViewGroup)" />
 
@@ -828,8 +996,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.ListViewGroupCollection.RemoveAt(System.Int32)" />
+
+            
 
             
 
@@ -845,8 +1017,12 @@
 
             
 
+            
+
              method to remove all the groups from the collection, then use the <see
              cref="M:System.Windows.Forms.ListViewGroupCollection.AddRange(System.Windows.Forms.ListViewGroup[])" />
+
+            
 
             
 
@@ -888,8 +1064,12 @@
 
             
 
+            
+
              to the collection more than once. However, attempting to add another copy will not throw an exception. Instead, the addition will simply fail. The <see
              cref="M:System.Windows.Forms.ListViewGroupCollection.Add(System.Windows.Forms.ListViewGroup)" />
+
+            
 
             
 
@@ -902,8 +1082,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.ListViewGroupCollection.Insert(System.Int32,System.Windows.Forms.ListViewGroup)" />
+
+            
 
             
 
@@ -916,8 +1100,12 @@
 
             
 
+            
+
              method to determine whether a particular <see
              cref="T:System.Windows.Forms.ListViewGroup" />
+
+            
 
             
 
@@ -941,8 +1129,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ListViewGroup" />
+
+          
 
           
 
@@ -977,8 +1169,12 @@
 
             
 
+            
+
              method to copy the groups in a collection (including the item references they contain) to a compatible array, starting at a specified index. This is useful, for example, when you want to sort the groups in the collection using the <see
              cref="Overload:System.Array.Sort" />
+
+            
 
             
 
@@ -991,8 +1187,12 @@
 
             
 
+            
+
              method to remove all the groups from the collection, then use the <see
              cref="M:System.Windows.Forms.ListViewGroupCollection.AddRange(System.Windows.Forms.ListViewGroup[])" />
+
+            
 
             
 
@@ -1011,11 +1211,15 @@
 
             
 
+            
+
             , starting at the specified index of the target array.</para
           >
         </summary>
         <param name="array">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1028,10 +1232,14 @@
 
           
 
+          
+
            to which the groups are copied. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1063,8 +1271,12 @@
 
             
 
+            
+
              returned by the <see
              cref="M:System.Windows.Forms.ListViewGroupCollection.GetEnumerator" />
+
+            
 
             
 
@@ -1104,6 +1316,8 @@
 
             
 
+            
+
              property to determine the number of loops.</para
           >
         </remarks>
@@ -1116,6 +1330,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -1153,8 +1369,12 @@
 
             
 
+            
+
              returned by the <see
              cref="M:System.Windows.Forms.ListViewGroupCollection.GetEnumerator" />
+
+            
 
             
 
@@ -1168,6 +1388,8 @@
           <para
             >Returns the index of the specified <see
              cref="T:System.Windows.Forms.ListViewGroup" />
+
+            
 
             
 
@@ -1187,8 +1409,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ListViewGroup" />
+
+          
 
           
 
@@ -1226,11 +1452,15 @@
 
             
 
+            
+
              at a particular index within the collection.</para
           >
           <para
             >You cannot add a <see
              cref="T:System.Windows.Forms.ListViewGroup" />
+
+            
 
             
 
@@ -1243,8 +1473,12 @@
 
             
 
+            
+
              method using a group that is already in the collection, the insertion simply fails. Use the <see
              cref="M:System.Windows.Forms.ListViewGroupCollection.Contains(System.Windows.Forms.ListViewGroup)" />
+
+            
 
             
 
@@ -1263,11 +1497,15 @@
 
             
 
+            
+
              into the collection at the specified index.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1282,8 +1520,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ListViewGroup" />
+
+          
 
           
 
@@ -1366,8 +1608,12 @@
 
             
 
+            
+
              collection does not remove items from the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -1383,8 +1629,12 @@
 
             
 
+            
+
              method instead. To remove all the groups from the collection, use the <see
              cref="M:System.Windows.Forms.ListViewGroupCollection.Clear" />
+
+            
 
             
 
@@ -1403,6 +1653,8 @@
 
             
 
+            
+
              from the collection.</para
           >
         </summary>
@@ -1413,8 +1665,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ListViewGroup" />
+
+          
 
           
 
@@ -1448,8 +1704,12 @@
 
             
 
+            
+
              collection does not remove items from the <see
              cref="T:System.Windows.Forms.ListView" />
+
+            
 
             
 
@@ -1465,8 +1725,12 @@
 
             
 
+            
+
              method instead. To remove all the groups from the collection, use the <see
              cref="M:System.Windows.Forms.ListViewGroupCollection.Clear" />
+
+            
 
             
 
@@ -1485,6 +1749,8 @@
 
             
 
+            
+
              at the specified index within the collection.</para
           >
         </summary>
@@ -1495,8 +1761,12 @@
 
           
 
+          
+
           The index within the collection of the <see
            cref="T:System.Windows.Forms.ListViewGroup" />
+
+          
 
           
 
@@ -1575,8 +1845,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Windows.Forms.ListViewGroupCollection" />
+
+            
 
             
 
@@ -1595,11 +1869,15 @@
 
             
 
+            
+
              has been added.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1612,8 +1890,12 @@
 
           
 
+          
+
            to add to the <see
            cref="T:System.Windows.Forms.ListViewGroupCollection" />
+
+          
 
           
 
@@ -1651,8 +1933,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Windows.Forms.ListViewGroup" />
+
+            
 
             
 
@@ -1668,8 +1954,12 @@
 
           
 
+          
+
           An object that represents the <see
            cref="T:System.Windows.Forms.ListViewGroup" />
+
+          
 
           
 
@@ -1707,11 +1997,15 @@
 
             
 
+            
+
              if it is in the collection; otherwise, -1.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1724,8 +2018,12 @@
 
           
 
+          
+
            to find in the <see
            cref="T:System.Windows.Forms.ListViewGroupCollection" />
+
+          
 
           
 
@@ -1759,8 +2057,12 @@
 
             
 
+            
+
              is not a <see
              cref="T:System.Windows.Forms.ListViewGroup" />
+
+            
 
             
 
@@ -1779,8 +2081,12 @@
 
             
 
+            
+
              into the <see
              cref="T:System.Windows.Forms.ListViewGroupCollection" />
+
+            
 
             
 
@@ -1796,8 +2102,12 @@
 
           
 
+          
+
           The position at which the <see
            cref="T:System.Windows.Forms.ListViewGroup" />
+
+          
 
           
 
@@ -1812,8 +2122,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ListViewGroup" />
+
+          
 
           
 
@@ -1905,8 +2219,12 @@
 
             
 
+            
+
              from the <see
              cref="T:System.Windows.Forms.ListViewGroupCollection" />
+
+            
 
             
 
@@ -1922,6 +2240,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ListViewGroup" />
 
@@ -1929,8 +2249,12 @@
 
           
 
+          
+
            to remove from the <see
            cref="T:System.Windows.Forms.ListViewGroupCollection" />
+
+          
 
           
 

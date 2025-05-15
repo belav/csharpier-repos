@@ -28,6 +28,8 @@
 
         
 
+        
+
          class to encapsulate the font properties of text. You can specify the font name and font size. You can also specify whether the style of the font is bold, italic, overlined, strikethrough, or underlined.</para
       >
       <para
@@ -38,8 +40,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.UI.WebControls.WebControl" />
+
+        
 
         
 
@@ -71,6 +77,8 @@
           <para
             >Use the <see
              cref="P:System.Web.UI.WebControls.FontInfo.Bold" />
+
+            
 
             
 
@@ -118,8 +126,12 @@
 
             
 
+            
+
              properties are unset when the <see
              cref="T:System.Web.UI.WebControls.FontInfo" />
+
+            
 
             
 
@@ -132,8 +144,12 @@
 
             
 
+            
+
              method is used to set all the <see
              cref="T:System.Web.UI.WebControls.FontInfo" />
+
+            
 
             
 
@@ -194,6 +210,8 @@
 
             
 
+            
+
              properties to the unset state and clears the view state.</para
           >
         </summary>
@@ -222,6 +240,8 @@
 
             
 
+            
+
              method to duplicate the font properties of the specified <see
              cref="T:System.Web.UI.WebControls.FontInfo" />
 
@@ -229,8 +249,12 @@
 
             
 
+            
+
              into the instance of the <see
              cref="T:System.Web.UI.WebControls.FontInfo" />
+
+            
 
             
 
@@ -247,8 +271,12 @@
 
               
 
+              
+
                class will be replaced by the associated property in the <paramref
                name="f" />
+
+              
 
               
 
@@ -265,8 +293,12 @@
 
             
 
+            
+
             , and then copied using <see
              cref="M:System.Web.UI.WebControls.Style.CopyFrom(System.Web.UI.WebControls.Style)" />
+
+            
 
             
 
@@ -279,8 +311,12 @@
 
             
 
+            
+
              property is copied to the destination, not all the individual properties. Therefore, if you are using <see
              cref="M:System.Web.UI.WebControls.FontInfo.CopyFrom(System.Web.UI.WebControls.FontInfo)" />
+
+            
 
             
 
@@ -293,8 +329,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.Style" />
+
+            
 
             
 
@@ -313,8 +353,12 @@
 
             
 
+            
+
              into the instance of the <see
              cref="T:System.Web.UI.WebControls.FontInfo" />
+
+            
 
             
 
@@ -330,8 +374,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.FontInfo" />
+
+          
 
           
 
@@ -359,6 +407,8 @@
           <para
             >Use the <see
              cref="P:System.Web.UI.WebControls.FontInfo.Italic" />
+
+            
 
             
 
@@ -409,6 +459,8 @@
 
             
 
+            
+
              method to combine the font properties of the specified <see
              cref="T:System.Web.UI.WebControls.FontInfo" />
 
@@ -416,8 +468,12 @@
 
             
 
+            
+
              with the instance of the <see
              cref="T:System.Web.UI.WebControls.FontInfo" />
+
+            
 
             
 
@@ -434,8 +490,12 @@
 
               
 
+              
+
                objects by setting each property that is not set in the current instance of the <see
                cref="T:System.Web.UI.WebControls.FontInfo" />
+
+              
 
               
 
@@ -448,6 +508,8 @@
 
               
 
+              
+
                parameter. Only properties that have not been set will be replaced. If a property in the <paramref
                name="f" />
 
@@ -455,8 +517,12 @@
 
               
 
+              
+
                parameter is not set, it will not replace the corresponding property in the current instance of the <see
                cref="T:System.Web.UI.WebControls.FontInfo" />
+
+              
 
               
 
@@ -476,8 +542,12 @@
 
             
 
+            
+
              with the instance of the <see
              cref="T:System.Web.UI.WebControls.FontInfo" />
+
+            
 
             
 
@@ -493,8 +563,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.FontInfo" />
+
+          
 
           
 
@@ -527,8 +601,12 @@
 
             
 
+            
+
              property to specify or determine the primary font name. The primary font name determines the font that is used to display text in the control associated with the <see
              cref="T:System.Web.UI.WebControls.FontInfo" />
+
+            
 
             
 
@@ -545,8 +623,12 @@
 
               
 
+              
+
                property, the <see
                cref="P:System.Web.UI.WebControls.FontInfo.Name" />
+
+              
 
               
 
@@ -559,8 +641,12 @@
 
               
 
+              
+
                property. If you set the <see
                cref="P:System.Web.UI.WebControls.FontInfo.Name" />
+
+              
 
               
 
@@ -573,8 +659,12 @@
 
               
 
+              
+
                property is automatically updated with a single element array containing the value of the <see
                cref="P:System.Web.UI.WebControls.FontInfo.Name" />
+
+              
 
               
 
@@ -633,6 +723,8 @@
 
             
 
+            
+
              property to specify or determine an ordered array of font names for a <see
              cref="T:System.Web.UI.WebControls.FontInfo" />
 
@@ -640,8 +732,12 @@
 
             
 
+            
+
             . The <see
              cref="P:System.Web.UI.WebControls.FontInfo.Names" />
+
+            
 
             
 
@@ -658,8 +754,12 @@
 
               
 
+              
+
                property, the <see
                cref="P:System.Web.UI.WebControls.FontInfo.Name" />
+
+              
 
               
 
@@ -672,8 +772,12 @@
 
               
 
+              
+
                property. If you set the <see
                cref="P:System.Web.UI.WebControls.FontInfo.Name" />
+
+              
 
               
 
@@ -686,8 +790,12 @@
 
               
 
+              
+
                property is automatically updated with a single element array containing the value of the <see
                cref="P:System.Web.UI.WebControls.FontInfo.Name" />
+
+              
 
               
 
@@ -704,8 +812,12 @@
 
             
 
+            
+
              using the <see
              cref="P:System.Web.UI.WebControls.FontInfo.Names" />
+
+            
 
             
 
@@ -718,8 +830,12 @@
 
             
 
+            
+
              property is automatically updated when the <see
              cref="P:System.Web.UI.WebControls.FontInfo.Name" />
+
+            
 
             
 
@@ -732,8 +848,12 @@
 
             
 
+            
+
              array to rearrange the order of the items in the array instead of setting the <see
              cref="P:System.Web.UI.WebControls.FontInfo.Name" />
+
+            
 
             
 
@@ -786,6 +906,8 @@
 
             
 
+            
+
              property to specify or determine whether the font contains a line above the text.</para
           >
           <para>The value of this property is stored in view state.</para>
@@ -798,8 +920,12 @@
 
               
 
+              
+
               , <see
                cref="T:System.Web.UI.WebControls.HyperLink" />
+
+              
 
               
 
@@ -812,8 +938,12 @@
 
               
 
+              
+
                controls is affected by setting the <see
                cref="P:System.Web.UI.WebControls.FontInfo.Overline" />
+
+              
 
               
 
@@ -826,6 +956,8 @@
 
               
 
+              
+
                for the control. If the <see
                cref="P:System.Web.UI.WebControls.FontInfo.Overline" />
 
@@ -833,8 +965,12 @@
 
               
 
+              
+
                property is set, regardless of value its value, you must set the <see
                cref="P:System.Web.UI.WebControls.FontInfo.Underline" />
+
+              
 
               
 
@@ -880,8 +1016,12 @@
 
             
 
+            
+
              method to determine whether the <see
              cref="P:System.Web.UI.WebControls.FontInfo.Names" />
+
+            
 
             
 
@@ -894,8 +1034,12 @@
 
             
 
+            
+
              class or creating your own control incorporating the <see
              cref="T:System.Web.UI.WebControls.FontInfo" />
+
+            
 
             
 
@@ -907,6 +1051,8 @@
             <para
               >The <see
                cref="P:System.Web.UI.WebControls.FontInfo.Names" />
+
+              
 
               
 
@@ -926,6 +1072,8 @@
 
             
 
+            
+
              property should be persisted.</para
           >
         </summary>
@@ -934,6 +1082,8 @@
           <para
             >true if the <see
              cref="P:System.Web.UI.WebControls.FontInfo.Names" />
+
+            
 
             
 
@@ -965,6 +1115,8 @@
           <para
             >Use the <see
              cref="P:System.Web.UI.WebControls.FontInfo.Size" />
+
+            
 
             
 
@@ -1014,6 +1166,8 @@
 
             
 
+            
+
              property to specify or determine whether the font contains a line through the text.</para
           >
           <para>The value of this property is stored in view state.</para>
@@ -1026,8 +1180,12 @@
 
               
 
+              
+
               , <see
                cref="T:System.Web.UI.WebControls.HyperLink" />
+
+              
 
               
 
@@ -1040,8 +1198,12 @@
 
               
 
+              
+
                controls is affected by setting the <see
                cref="P:System.Web.UI.WebControls.FontInfo.Strikeout" />
+
+              
 
               
 
@@ -1054,6 +1216,8 @@
 
               
 
+              
+
                for the control. If the <see
                cref="P:System.Web.UI.WebControls.FontInfo.Strikeout" />
 
@@ -1061,8 +1225,12 @@
 
               
 
+              
+
                property is set, regardless of its value, you must set the <see
                cref="P:System.Web.UI.WebControls.FontInfo.Underline" />
+
+              
 
               
 
@@ -1108,8 +1276,12 @@
 
             
 
+            
+
              method to create a string that contains the font name and size, separated by a comma, for an instance of the <see
              cref="T:System.Web.UI.WebControls.FontInfo" />
+
+            
 
             
 
@@ -1121,6 +1293,8 @@
             <para
               >If the <see
                cref="P:System.Web.UI.WebControls.FontInfo.Size" />
+
+              
 
               
 
@@ -1140,6 +1314,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -1148,6 +1324,8 @@
           <para
             >A string that contains the font name and size for an instance of the <see
              cref="T:System.Web.UI.WebControls.FontInfo" />
+
+            
 
             
 
@@ -1181,6 +1359,8 @@
 
             
 
+            
+
              property to specify or determine whether the font contains a line under the text.</para
           >
           <para>The value of this property is stored in view state.</para>
@@ -1193,8 +1373,12 @@
 
               
 
+              
+
               , <see
                cref="T:System.Web.UI.WebControls.HyperLink" />
+
+              
 
               
 
@@ -1207,8 +1391,12 @@
 
               
 
+              
+
                controls is affected by setting the <see
                cref="P:System.Web.UI.WebControls.FontInfo.Strikeout" />
+
+              
 
               
 
@@ -1221,8 +1409,12 @@
 
               
 
+              
+
                properties of the <see
                cref="T:System.Web.UI.WebControls.FontInfo" />
+
+              
 
               
 
@@ -1235,6 +1427,8 @@
 
               
 
+              
+
                or the <see
                cref="P:System.Web.UI.WebControls.FontInfo.Overline" />
 
@@ -1242,8 +1436,12 @@
 
               
 
+              
+
                properties are set, regardless of their value, you must set the <see
                cref="P:System.Web.UI.WebControls.FontInfo.Underline" />
+
+              
 
               
 

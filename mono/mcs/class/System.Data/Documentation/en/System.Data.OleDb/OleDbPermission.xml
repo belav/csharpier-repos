@@ -30,6 +30,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -51,6 +53,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.OleDb.OleDbPermission" />
+
+            
 
             
 
@@ -92,6 +96,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -102,8 +108,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -139,8 +149,12 @@
 
             
 
+            
+
              enumeration takes precedence over the <see
              cref="P:System.Data.Common.DBDataPermission.AllowBlankPassword" />
+
+            
 
             
 
@@ -153,8 +167,12 @@
 
             
 
+            
+
              to false, you must also set <see
              cref="T:System.Security.Permissions.PermissionState" />
+
+            
 
             
 
@@ -173,11 +191,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -190,10 +212,14 @@
 
           
 
+          
+
            values. </param
         >
         <param name="allowBlankPassword">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -231,8 +257,12 @@
 
             
 
+            
+
              as an <see
              cref="T:System.Security.IPermission" />
+
+            
 
             
 

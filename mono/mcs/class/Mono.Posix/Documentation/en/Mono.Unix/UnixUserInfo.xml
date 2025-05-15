@@ -26,9 +26,13 @@
 
         
 
+        
+
          type is a FxDG-compliant
         wrapper over the <see
          cref="T:Mono.Unix.Native.Passwd" />
+
+        
 
         
 
@@ -38,6 +42,8 @@
         It represents a single entry from the local password database, 
         typically <c
         >/etc/passwd</c>
+
+        
 
         
 
@@ -58,6 +64,8 @@
 
         
 
+        
+
         )
         is controlled by the file system access permissions, 
         <see
@@ -67,9 +75,13 @@
 
         
 
+        
+
         .
         <see
          cref="T:Mono.Unix.FileAccessPermissions" />
+
+        
 
         
 
@@ -92,6 +104,8 @@
           
 
           
+
+          
         &amp; 
         <see
            cref="F:Mono.Unix.FileAccessPermissions.UserReadWriteExecute" />
@@ -100,8 +114,12 @@
 
           
 
+          
+
           )</c
         >
+
+        
 
         
 
@@ -142,6 +160,8 @@
 
           
 
+          
+
            containing the user 
           to get information about.
         </param
@@ -155,9 +175,13 @@
 
           
 
+          
+
            by using the specified
           <see
            cref="T:Mono.Unix.Native.Passwd" />
+
+          
 
           
 
@@ -175,10 +199,14 @@
 
             
 
+            
+
             ,
             providing framework-compliant naming conventions over the native
             <see
              cref="T:Mono.Unix.Native.Passwd" />
+
+            
 
             
 
@@ -214,6 +242,8 @@
 
           
 
+          
+
            containing the user id to get
           information about.
         </param
@@ -222,6 +252,8 @@
           Constructs and initializes a new instance of 
           <see
            cref="T:Mono.Unix.UnixUserInfo" />
+
+          
 
           
 
@@ -240,6 +272,8 @@
         <exception cref="T:System.ArgumentException">
           The user id <paramref
            name="user" />
+
+          
 
           
 
@@ -276,6 +310,8 @@
 
           
 
+          
+
            containing the user to get
           information about.
         </param
@@ -284,6 +320,8 @@
           Constructs and initializes a new instance of 
           <see
            cref="T:Mono.Unix.UnixUserInfo" />
+
+          
 
           
 
@@ -302,6 +340,8 @@
         <exception cref="T:System.ArgumentException">
           The user name <paramref
            name="user" />
+
+          
 
           
 
@@ -343,6 +383,8 @@
 
           
 
+          
+
            containing the user id to get
           information about.
         </param
@@ -351,6 +393,8 @@
           Constructs and initializes a new instance of 
           <see
            cref="T:Mono.Unix.UnixUserInfo" />
+
+          
 
           
 
@@ -369,6 +413,8 @@
         <exception cref="T:System.ArgumentException">
           The user id <paramref
            name="user" />
+
+          
 
           
 
@@ -457,6 +503,8 @@
 
           
 
+          
+
            array containing
           information about all users in the local password database.
         </returns
@@ -471,9 +519,13 @@
 
           
 
+          
+
            structure.
           [<see
            cref="F:Mono.Unix.Native.Errno.ENOMEM" />
+
+          
 
           
 
@@ -510,6 +562,8 @@
 
           
 
+          
+
            containing the login name of the
           user executing this process.
         </returns
@@ -518,6 +572,8 @@
           <para>
             It's generally more useful to use the <c
             >LOGNAME</c>
+
+            
 
             
 
@@ -558,6 +614,8 @@
 
           
 
+          
+
            containing information
           about the real user the process is executing as.
         </returns
@@ -586,6 +644,8 @@
         <returns>
           A <see
            cref="T:System.Int64" />
+
+          
 
           
 
@@ -624,6 +684,8 @@
 
           
 
+          
+
            containing information
           about the group the user belongs to.
         </value
@@ -638,8 +700,12 @@
 
             
 
+            
+
             (<see
              cref="P:Mono.Unix.UnixUserInfo.GroupId" />
+
+            
 
             
 
@@ -673,6 +739,8 @@
 
           
 
+          
+
            containing the users's group id.
         </value
         >
@@ -681,6 +749,8 @@
             Access to file system objects 
             (as represented by <see
              cref="T:Mono.Unix.UnixFileSystemInfo" />
+
+            
 
             
 
@@ -695,9 +765,13 @@
 
             
 
+            
+
             .
             <see
              cref="T:Mono.Unix.FileAccessPermissions" />
+
+            
 
             
 
@@ -720,6 +794,8 @@
               
 
               
+
+              
             &amp; 
             <see
                cref="F:Mono.Unix.FileAccessPermissions.GroupReadWriteExecute" />
@@ -728,8 +804,12 @@
 
               
 
+              
+
               )</c
             >
+
+            
 
             
 
@@ -766,6 +846,8 @@
 
           
 
+          
+
            containing the group name that the
           user belongs to.
         </value
@@ -780,8 +862,12 @@
 
             
 
+            
+
             .<see
              cref="P:Mono.Unix.UnixGroupInfo.GroupName" />
+
+            
 
             
 
@@ -810,6 +896,8 @@
         <value>
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -845,6 +933,8 @@
 
           
 
+          
+
            containing the user's password.
         </value
         >
@@ -852,6 +942,8 @@
           <para>
             In years past, this <i
             >used</i>
+
+            
 
             
 
@@ -892,6 +984,8 @@
 
           
 
+          
+
            containing the user's actual name, 
           complete with spaces, first name, last name, and anything else the
           user wishes to provide.
@@ -918,6 +1012,8 @@
         <value>
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -956,9 +1052,13 @@
 
           
 
+          
+
            instance into
           an equivalent <see
            cref="T:Mono.Unix.Native.Passwd" />
+
+          
 
           
 
@@ -970,6 +1070,8 @@
         <returns>
           A <see
            cref="T:Mono.Unix.Native.Passwd" />
+
+          
 
           
 
@@ -1026,6 +1128,8 @@
 
           
 
+          
+
            containing the user's id.
         </value
         >
@@ -1050,6 +1154,8 @@
         <value>
           A <see
            cref="T:System.String" />
+
+          
 
           
 

@@ -11,6 +11,8 @@
 
       
 
+      
+
        : <rhs
       >
         <keyword>goto</keyword>
@@ -35,7 +37,7 @@
 
       >[Note: This rule permits the use of a goto statement to transfer control out of a nested scope, but not into a nested scope. In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 using System;  
 class Test  
 {  
@@ -64,12 +66,16 @@ class Test
 
       
 
+      
+
       a goto statement is used to transfer control out of a nested scope. end note]</note
     >
   </paragraph>
   <paragraph
     >The target of a goto case statement is the statement list in the immediately enclosing switch statement (<hyperlink
     >15.7.2</hyperlink>
+
+    
 
     
 
@@ -82,8 +88,12 @@ class Test
 
     
 
+    
+
      is not implicitly convertible (<hyperlink
     >13.1</hyperlink>
+
+    
 
     
 
@@ -99,11 +109,15 @@ class Test
 
     
 
+    
+
     ), which contains a default label. If the goto default statement is not enclosed by a switch statement, or if the nearest enclosing switch statement does not contain a default label, a compile-time error occurs. </paragraph
   >
   <paragraph
     >A goto statement cannot exit a finally block (<hyperlink
     >15.10</hyperlink>
+
+    
 
     
 

@@ -22,6 +22,8 @@
 
         
 
+        
+
          interface is intended for implementation by query providers.</para
       >
       <para
@@ -29,6 +31,8 @@
          cref="http://go.microsoft.com/fwlink/?LinkID=112370"
           >LINQ: Building an IQueryable Provider</see
         >
+
+        
 
         
 
@@ -42,6 +46,8 @@
       <para
         >Defines methods to create and execute queries that are described by an <see
          cref="T:System.Linq.IQueryable" />
+
+        
 
         
 
@@ -84,6 +90,8 @@
 
               
 
+              
+
                property of the returned <see
                cref="T:System.Linq.IQueryable" />
 
@@ -91,8 +99,12 @@
 
               
 
+              
+
                object is equal to <paramref
                name="expression" />
+
+              
 
               
 
@@ -109,8 +121,12 @@
 
             
 
+            
+
              method is used to create new <see
              cref="T:System.Linq.IQueryable" />
+
+            
 
             
 
@@ -126,8 +142,12 @@
 
             
 
+            
+
             , such as <see
              cref="M:System.Linq.Queryable.OfType``1(System.Linq.IQueryable)" />
+
+            
 
             
 
@@ -140,8 +160,12 @@
 
             
 
+            
+
             , call this method. They pass it a <see
              cref="T:System.Linq.Expressions.MethodCallExpression" />
+
+            
 
             
 
@@ -160,6 +184,8 @@
 
             
 
+            
+
              object that can evaluate the query represented by a specified expression tree.</para
           >
         </summary>
@@ -173,11 +199,15 @@
 
             
 
+            
+
              that can evaluate the query represented by the specified expression tree.</para
           >
         </returns>
         <param name="expression">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -222,6 +252,8 @@
 
               
 
+              
+
                property of the returned <see
                cref="T:System.Linq.IQueryable`1" />
 
@@ -229,8 +261,12 @@
 
               
 
+              
+
                object is equal to <paramref
                name="expression" />
+
+              
 
               
 
@@ -247,8 +283,12 @@
 
             
 
+            
+
              method is used to create new <see
              cref="T:System.Linq.IQueryable`1" />
+
+            
 
             
 
@@ -264,8 +304,12 @@
 
             
 
+            
+
              standard query operator methods that return enumerable results call this method. They pass it a <see
              cref="T:System.Linq.Expressions.MethodCallExpression" />
+
+            
 
             
 
@@ -284,6 +328,8 @@
 
             
 
+            
+
              object that can evaluate the query represented by a specified expression tree.</para
           >
         </summary>
@@ -292,6 +338,8 @@
           <para
             >An <see
              cref="T:System.Linq.IQueryable`1" />
+
+            
 
             
 
@@ -307,6 +355,8 @@
 
           
 
+          
+
           An expression tree that represents a vbteclinq query.</param
         >
         <typeparam name="TElement">
@@ -316,8 +366,12 @@
 
           
 
+          
+
           The type of the elements of the <see
            cref="T:System.Linq.IQueryable`1" />
+
+          
 
           
 
@@ -358,8 +412,12 @@
 
             
 
+            
+
              method executes queries that return a single value (instead of an enumerable sequence of values). Expression trees that represent queries that return enumerable results are executed when their associated <see
              cref="T:System.Linq.IQueryable" />
+
+            
 
             
 
@@ -378,6 +436,8 @@
         </returns>
         <param name="expression">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -421,8 +481,12 @@
 
             
 
+            
+
              method executes queries that return a single value (instead of an enumerable sequence of values). Expression trees that represent queries that return enumerable results are executed when the <see
              cref="T:System.Linq.IQueryable`1" />
+
+            
 
             
 
@@ -438,6 +502,8 @@
 
             
 
+            
+
              standard query operator methods that return singleton results call <see
              cref="M:System.Linq.IQueryProvider.Execute``1(System.Linq.Expressions.Expression)" />
 
@@ -445,8 +511,12 @@
 
             
 
+            
+
             . They pass it a <see
              cref="T:System.Linq.Expressions.MethodCallExpression" />
+
+            
 
             
 
@@ -470,10 +540,14 @@
 
           
 
+          
+
           An expression tree that represents a vbteclinq query.</param
         >
         <typeparam name="TResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

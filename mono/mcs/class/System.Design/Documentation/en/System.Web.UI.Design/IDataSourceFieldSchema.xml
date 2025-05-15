@@ -18,8 +18,12 @@
 
         
 
+        
+
          interface allows a class to implement a set of properties that describe a field in a data source. The <see
          cref="T:System.Web.UI.Design.DataSetFieldSchema" />
+
+        
 
         
 
@@ -32,11 +36,15 @@
 
         
 
+        
+
          interface.</para
       >
       <para
         >Classes that implement the <see
          cref="T:System.Web.UI.Design.IDataSourceFieldSchema" />
+
+        
 
         
 
@@ -89,6 +97,8 @@
 
             
 
+            
+
              object, the <see
              cref="P:System.Web.UI.Design.IDataSourceFieldSchema.Identity" />
 
@@ -96,8 +106,12 @@
 
             
 
+            
+
              property corresponds to the <see
              cref="P:System.Data.DataColumn.AutoIncrement" />
+
+            
 
             
 
@@ -134,6 +148,8 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Web.UI.Design.IDataSourceFieldSchema.IsReadOnly" />
 
@@ -141,8 +157,12 @@
 
             
 
+            
+
              property corresponds to the <see
              cref="P:System.Data.DataColumn.ReadOnly" />
+
+            
 
             
 
@@ -179,6 +199,8 @@
 
             
 
+            
+
              object, the <see
              cref="P:System.Web.UI.Design.IDataSourceFieldSchema.IsUnique" />
 
@@ -186,8 +208,12 @@
 
             
 
+            
+
              property corresponds to the <see
              cref="P:System.Data.DataColumn.Unique" />
+
+            
 
             
 
@@ -224,6 +250,8 @@
 
             
 
+            
+
              object, the <see
              cref="P:System.Web.UI.Design.IDataSourceFieldSchema.Length" />
 
@@ -231,8 +259,12 @@
 
             
 
+            
+
              property corresponds to the <see
              cref="P:System.Data.DataColumn.MaxLength" />
+
+            
 
             
 
@@ -269,6 +301,8 @@
 
             
 
+            
+
             object, the <see
              cref="P:System.Web.UI.Design.IDataSourceFieldSchema.Name" />
 
@@ -276,8 +310,12 @@
 
             
 
+            
+
              property corresponds to the <see
              cref="P:System.Data.DataColumn.ColumnName" />
+
+            
 
             
 
@@ -314,6 +352,8 @@
 
             
 
+            
+
              object, the <see
              cref="P:System.Web.UI.Design.IDataSourceFieldSchema.Nullable" />
 
@@ -321,8 +361,12 @@
 
             
 
+            
+
              property corresponds to the <see
              cref="P:System.Data.DataColumn.AllowDBNull" />
+
+            
 
             
 

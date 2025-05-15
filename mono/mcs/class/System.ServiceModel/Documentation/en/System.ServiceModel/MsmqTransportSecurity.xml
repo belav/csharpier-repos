@@ -25,6 +25,8 @@
 
         
 
+        
+
          class encapsulates the transport security settings for queued transports.</para
       >
     </summary>
@@ -48,6 +50,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.MsmqTransportSecurity" />
+
+            
 
             
 
@@ -86,6 +90,8 @@
 
             
 
+            
+
              class, using an existing instance.</para
           >
         </summary>
@@ -96,8 +102,12 @@
 
           
 
+          
+
           The existing instance of the <see
            cref="T:System.ServiceModel.MsmqTransportSecurity" />
+
+          
 
           
 
@@ -135,6 +145,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -148,8 +160,12 @@
 
             
 
+            
+
              that is associated with this instance of the <see
              cref="T:System.ServiceModel.MsmqTransportSecurity" />
+
+            
 
             
 
@@ -188,6 +204,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -201,8 +219,12 @@
 
             
 
+            
+
              that is associated with this instance of the <see
              cref="T:System.ServiceModel.MsmqTransportSecurity" />
+
+            
 
             
 
@@ -241,6 +263,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -254,8 +278,12 @@
 
             
 
+            
+
              that is associated with this instance of the <see
              cref="T:System.ServiceModel.MsmqTransportSecurity" />
+
+            
 
             
 
@@ -294,6 +322,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -307,8 +337,12 @@
 
             
 
+            
+
              that is associated with this instance of the <see
              cref="T:System.ServiceModel.MsmqTransportSecurity" />
+
+            
 
             
 

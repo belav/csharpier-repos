@@ -25,6 +25,8 @@
 
         
 
+        
+
          event. </para
       >
     </summary>
@@ -56,6 +58,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -66,8 +70,12 @@
 
           
 
+          
+
           The graphics used to paint the <see
            cref="T:System.Windows.Forms.ToolStrip" />
+
+          
 
           
 
@@ -82,8 +90,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -98,8 +110,12 @@
 
           
 
+          
+
           The bounding area of the <see
            cref="T:System.Windows.Forms.ToolStrip" />
+
+          
 
           
 
@@ -114,8 +130,12 @@
 
           
 
+          
+
           The color of the <see
            cref="T:System.Windows.Forms.ToolStrip" />
+
+          
 
           
 
@@ -130,8 +150,12 @@
 
           
 
+          
+
           The direction in which the <see
            cref="T:System.Windows.Forms.ToolStrip" />
+
+          
 
           
 
@@ -159,6 +183,8 @@
           <para
             >Gets or sets the color of the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -195,6 +221,8 @@
 
             
 
+            
+
              arrow.</para
           >
         </summary>
@@ -221,6 +249,8 @@
           <para
             >Gets or sets the direction in which the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -254,6 +284,8 @@
 
             
 
+            
+
              arrow.</para
           >
         </summary>
@@ -280,6 +312,8 @@
           <para
             >Gets the <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 

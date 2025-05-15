@@ -38,6 +38,8 @@
 
         
 
+        
+
          class members that can be accessed by unmanaged COM objects.</para
       >
     </remarks>
@@ -46,6 +48,8 @@
       <para
         >Exposes the public members of the <see
          cref="T:System.Reflection.FieldInfo" />
+
+        
 
         
 
@@ -87,6 +91,8 @@
 
             
 
+            
+
              property gets the attributes associated with this field.</para
           >
         </remarks>
@@ -95,6 +101,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Reflection.FieldInfo.Attributes" />
+
+            
 
             
 
@@ -134,6 +142,8 @@
 
             
 
+            
+
              property gets the class that declares this member.</para
           >
         </remarks>
@@ -142,6 +152,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Reflection.MemberInfo.DeclaringType" />
+
+            
 
             
 
@@ -183,6 +195,8 @@
 
             
 
+            
+
              method determines whether the specified <see
              cref="T:System.Object" />
 
@@ -190,8 +204,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -210,6 +228,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -223,8 +243,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -240,6 +264,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -247,8 +273,12 @@
 
           
 
+          
+
            to compare with the current <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -287,8 +317,12 @@
 
             
 
+            
+
              property gets a <see
              cref="T:System.RuntimeFieldHandle" />
+
+            
 
             
 
@@ -302,6 +336,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Reflection.FieldInfo.FieldHandle" />
+
+            
 
             
 
@@ -338,6 +374,8 @@
 
             
 
+            
+
              property gets the type of this field object.</para
           >
         </remarks>
@@ -346,6 +384,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Reflection.FieldInfo.FieldType" />
+
+            
 
             
 
@@ -387,6 +427,8 @@
 
             
 
+            
+
              method returns an array containing all the custom attributes.</para
           >
         </remarks>
@@ -395,6 +437,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Boolean)" />
+
+            
 
             
 
@@ -409,6 +453,8 @@
         </returns>
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -453,8 +499,12 @@
 
             
 
+            
+
              method returns an array of custom attributes identified by <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -468,6 +518,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Type,System.Boolean)" />
+
+            
 
             
 
@@ -487,10 +539,14 @@
 
           
 
+          
+
           The type of attribute to search for. Only attributes that are assignable to this type are returned. </param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -529,8 +585,12 @@
 
             
 
+            
+
              method serves as a hash function for a particular type. <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -544,6 +604,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -623,6 +685,8 @@
 
             
 
+            
+
              method gets the type of the current instance.</para
           >
         </remarks>
@@ -636,6 +700,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -644,6 +710,8 @@
           <para
             >A <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -689,6 +757,8 @@
 
             
 
+            
+
             , see the MSDN Library.</para
           >
         </remarks>
@@ -703,6 +773,8 @@
 
           
 
+          
+
           The type information to return.</param
         >
         <param name="lcid">
@@ -712,10 +784,14 @@
 
           
 
+          
+
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -781,6 +857,8 @@
 
             
 
+            
+
              method returns the value of a field supported by a given object.</para
           >
         </remarks>
@@ -789,6 +867,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="M:System.Reflection.FieldInfo.GetValue(System.Object)" />
+
+            
 
             
 
@@ -803,6 +883,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -843,6 +925,8 @@
 
             
 
+            
+
              method returns the value of a field supported by a given object.</para
           >
         </remarks>
@@ -851,6 +935,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="M:System.Reflection.FieldInfo.GetValueDirect(System.TypedReference)" />
+
+            
 
             
 
@@ -869,6 +955,8 @@
 
             
 
+            
+
              containing a field value.</para
           >
         </returns>
@@ -879,8 +967,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.TypedReference" />
+
+          
 
           
 
@@ -958,6 +1050,8 @@
 
             
 
+            
+
              property gets a value indicating whether this field has Assembly level visibility.</para
           >
         </remarks>
@@ -966,6 +1060,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Reflection.FieldInfo.IsAssembly" />
+
+            
 
             
 
@@ -1011,8 +1107,12 @@
 
             
 
+            
+
              method indicates whether one or more instance of <paramref
              name="attributeType" />
+
+            
 
             
 
@@ -1031,6 +1131,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -1039,6 +1141,8 @@
           <para
             >true if one or more instance of <paramref
              name="attributeType" />
+
+            
 
             
 
@@ -1054,8 +1158,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1065,6 +1173,8 @@
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1100,6 +1210,8 @@
 
             
 
+            
+
              property gets a value indicating whether this field has Family level visibility.</para
           >
         </remarks>
@@ -1108,6 +1220,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Reflection.FieldInfo.IsFamily" />
+
+            
 
             
 
@@ -1144,6 +1258,8 @@
 
             
 
+            
+
              property gets a value indicating whether this field has FamilyAndAssembly level visibility.</para
           >
         </remarks>
@@ -1152,6 +1268,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Reflection.FieldInfo.IsFamilyAndAssembly" />
+
+            
 
             
 
@@ -1188,6 +1306,8 @@
 
             
 
+            
+
              property gets a value indicating whether this field has FamilyOrAssembly level visibility.</para
           >
         </remarks>
@@ -1196,6 +1316,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Reflection.FieldInfo.IsFamilyOrAssembly" />
+
+            
 
             
 
@@ -1232,6 +1354,8 @@
 
             
 
+            
+
              property gets a value indicating whether the field can only be set in the body of the constructor.</para
           >
         </remarks>
@@ -1240,6 +1364,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Reflection.FieldInfo.IsInitOnly" />
+
+            
 
             
 
@@ -1276,6 +1402,8 @@
 
             
 
+            
+
              property gets a value indicating whether the value is written at compile time and cannot be changed.</para
           >
         </remarks>
@@ -1284,6 +1412,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Reflection.FieldInfo.IsLiteral" />
+
+            
 
             
 
@@ -1320,6 +1450,8 @@
 
             
 
+            
+
              property gets a value indicating whether this field has the NotSerialized attribute.</para
           >
         </remarks>
@@ -1328,6 +1460,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Reflection.FieldInfo.IsNotSerialized" />
+
+            
 
             
 
@@ -1364,8 +1498,12 @@
 
             
 
+            
+
              property gets a value indicating whether the corresponding PinvokeImpl attribute is set in <see
              cref="T:System.Reflection.FieldAttributes" />
+
+            
 
             
 
@@ -1379,6 +1517,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Reflection.FieldInfo.IsPinvokeImpl" />
+
+            
 
             
 
@@ -1415,6 +1555,8 @@
 
             
 
+            
+
              property gets a value indicating whether the field is private.</para
           >
         </remarks>
@@ -1423,6 +1565,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Reflection.FieldInfo.IsPrivate" />
+
+            
 
             
 
@@ -1459,6 +1603,8 @@
 
             
 
+            
+
              property gets a value indicating whether the field is public.</para
           >
         </remarks>
@@ -1467,6 +1613,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Reflection.FieldInfo.IsPublic" />
+
+            
 
             
 
@@ -1503,8 +1651,12 @@
 
             
 
+            
+
              property gets a value indicating whether the corresponding SpecialName attribute is set in the <see
              cref="T:System.Reflection.FieldAttributes" />
+
+            
 
             
 
@@ -1518,6 +1670,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Reflection.FieldInfo.IsSpecialName" />
+
+            
 
             
 
@@ -1554,6 +1708,8 @@
 
             
 
+            
+
              property gets a value indicating whether the field is static.</para
           >
         </remarks>
@@ -1562,6 +1718,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Reflection.FieldInfo.IsStatic" />
+
+            
 
             
 
@@ -1604,8 +1762,12 @@
 
             
 
+            
+
              property gets a <see
              cref="T:System.Reflection.MemberTypes" />
+
+            
 
             
 
@@ -1619,6 +1781,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Reflection.FieldInfo.MemberType" />
+
+            
 
             
 
@@ -1655,6 +1819,8 @@
 
             
 
+            
+
              property gets the name of the current member.</para
           >
         </remarks>
@@ -1663,6 +1829,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Reflection.MemberInfo.Name" />
+
+            
 
             
 
@@ -1702,8 +1870,12 @@
 
             
 
+            
+
              property gets the class object that was used to obtain this instance of <see
              cref="T:System.Reflection.MemberInfo" />
+
+            
 
             
 
@@ -1717,6 +1889,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Reflection.MemberInfo.ReflectedType" />
+
+            
 
             
 
@@ -1759,6 +1933,8 @@
 
             
 
+            
+
              method sets the value of the field supported by the given object.</para
           >
         </remarks>
@@ -1767,6 +1943,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="M:System.Reflection.FieldInfo.SetValue(System.Object,System.Object)" />
+
+            
 
             
 
@@ -1782,10 +1960,14 @@
 
           
 
+          
+
           The object whose field value will be set.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1833,6 +2015,8 @@
 
             
 
+            
+
              method sets the value of the field supported by the given object.</para
           >
         </remarks>
@@ -1841,6 +2025,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="M:System.Reflection.PropertyInfo.SetValue(System.Object,System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
+
+            
 
             
 
@@ -1856,10 +2042,14 @@
 
           
 
+          
+
           The object whose field value will be set. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1874,8 +2064,12 @@
 
           
 
+          
+
           A field of <see
            cref="T:System.Reflection.Binder" />
+
+          
 
           
 
@@ -1890,8 +2084,12 @@
 
           
 
+          
+
           A set of properties that enables the binding, coercion of argument types, and invocation of members through reflection. If <paramref
            name="binder" />
+
+          
 
           
 
@@ -1901,6 +2099,8 @@
         >
         <param name="culture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1945,6 +2145,8 @@
 
             
 
+            
+
              method sets the value of the field supported by the given object.</para
           >
         </remarks>
@@ -1953,6 +2155,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="M:System.Reflection.FieldInfo.SetValueDirect(System.TypedReference,System.Object)" />
+
+            
 
             
 
@@ -1968,10 +2172,14 @@
 
           
 
+          
+
           The object whose field value will be set.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2013,6 +2221,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -2021,6 +2231,8 @@
           <para
             >A string that represents the current <see
              cref="T:System.Object" />
+
+            
 
             
 

@@ -38,8 +38,12 @@
 
         
 
+        
+
          structure is used in the <see
          cref="N:System.Reflection" />
+
+        
 
         
 
@@ -52,8 +56,12 @@
 
         
 
+        
+
          structure has no members other than the ones all types inherit from the <see
          cref="T:System.Object" />
+
+        
 
         
 

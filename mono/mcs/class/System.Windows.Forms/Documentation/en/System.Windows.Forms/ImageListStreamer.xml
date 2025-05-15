@@ -28,8 +28,12 @@
 
         
 
+        
+
          is returned by the <see
          cref="P:System.Windows.Forms.ImageList.ImageStream" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
         . However, you cannot use this class to load images to an <see
          cref="T:System.Windows.Forms.ImageList" />
+
+        
 
         
 
@@ -56,6 +64,8 @@
 
         
 
+        
+
          property from one <see
          cref="T:System.Windows.Forms.ImageList" />
 
@@ -63,8 +73,12 @@
 
         
 
+        
+
         . Instead you should directly assign one <see
          cref="T:System.Windows.Forms.ImageList" />
+
+        
 
         
 
@@ -78,6 +92,8 @@
       <para
         >Provides the data portion of an <see
          cref="T:System.Windows.Forms.ImageList" />
+
+        
 
         
 
@@ -112,6 +128,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -120,6 +138,8 @@
           <para
             >Populates a <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -135,8 +155,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -151,8 +175,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 

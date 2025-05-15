@@ -55,6 +55,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -102,8 +104,12 @@
 
             
 
+            
+
             , or <see
              cref="F:System.ComponentModel.Design.Serialization.MemberRelationship.Empty" />
+
+            
 
             
 
@@ -114,6 +120,8 @@
         </returns>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -220,8 +228,12 @@
 
             
 
+            
+
              method clears any existing relationship if the relationship parameter is <see
              cref="F:System.ComponentModel.Design.Serialization.MemberRelationship.Empty" />
+
+            
 
             
 
@@ -241,10 +253,14 @@
 
           
 
+          
+
           The source relationship.</param
         >
         <param name="relationship">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -298,10 +314,14 @@
 
           
 
+          
+
           The source relationship.</param
         >
         <param name="relationship">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

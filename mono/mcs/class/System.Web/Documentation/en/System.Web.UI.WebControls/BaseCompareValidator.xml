@@ -27,8 +27,12 @@
 
         
 
+        
+
          class is inherited by validation controls that compare values, such as the <see
          cref="T:System.Web.UI.WebControls.CompareValidator" />
+
+        
 
         
 
@@ -41,11 +45,15 @@
 
         
 
+        
+
          controls, to provide basic common functionality.</para
       >
       <para
         >Use the <see
          cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
+
+        
 
         
 
@@ -62,12 +70,16 @@
 
           
 
+          
+
            property of the validation control is set to false.</para
         >
       </block>
       <para
         >The <see
          cref="T:System.Web.UI.WebControls.BaseCompareValidator" />
+
+        
 
         
 
@@ -80,6 +92,8 @@
 
         
 
+        
+
          method. The maximum year that can be represented by a two-digit year is contained in the <see
          cref="P:System.Web.UI.WebControls.BaseCompareValidator.CutoffYear" />
 
@@ -87,8 +101,12 @@
 
         
 
+        
+
          property. The <see
          cref="M:System.Web.UI.WebControls.BaseCompareValidator.GetFullYear(System.Int32)" />
+
+        
 
         
 
@@ -105,8 +123,12 @@
 
           
 
+          
+
            control inside an <see
            cref="T:System.Web.UI.UpdatePanel" />
+
+          
 
           
 
@@ -119,10 +141,14 @@
 
           
 
+          
+
            control for partial-page updates, see <format
            type="text/html">
             <a href="5c12736d-d9e9-464a-9388-3fe0f9f49e49">Partial-Page Rendering Overview</a>
           </format>
+
+          
 
           
 
@@ -139,6 +165,8 @@
 
         
 
+        
+
         .</para
       >
       <format type="text/html">
@@ -149,6 +177,8 @@
          type="text/html">
           <a href="847a37e3-ce20-41da-b0d3-7dfb0fdae9a0">ASP.NET Controls and Accessibility</a>
         </format>
+
+        
 
         
 
@@ -179,6 +209,8 @@
 
             
 
+            
+
              class is abstract, you cannot create a <see
              cref="T:System.Web.UI.WebControls.BaseCompareValidator" />
 
@@ -186,8 +218,12 @@
 
             
 
+            
+
              object directly. This constructor is commonly called by the constructor of a derived class to initialize the properties defined in the <see
              cref="T:System.Web.UI.WebControls.BaseCompareValidator" />
+
+            
 
             
 
@@ -201,6 +237,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.BaseCompareValidator" />
+
+            
 
             
 
@@ -242,8 +280,12 @@
 
             
 
+            
+
              method is used to render the attributes of the control in the HTML tag for the control. This method is typically overridden by control developers in derived classes to insert the appropriate attributes and styles to the <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -257,6 +299,8 @@
           <para
             >Adds the HTML attributes and styles that need to be rendered for the control to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -295,11 +339,15 @@
 
             
 
+            
+
              method to determine whether the specified string can be converted to the specified data type. This method is commonly used to test whether a string can be converted to a compatible data type before performing an operation that depends on that data type.</para
           >
           <para
             >This version of the method tests the value using the format used by the current culture. To test the value using a culture-neutral format, use the <see
              cref="M:System.Web.UI.WebControls.BaseCompareValidator.CanConvert(System.String,System.Web.UI.WebControls.ValidationDataType,System.Boolean)" />
+
+            
 
             
 
@@ -323,6 +371,8 @@
 
           
 
+          
+
           The string to test.</param
         >
         <param name="type">
@@ -332,8 +382,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.ValidationDataType" />
+
+          
 
           
 
@@ -375,6 +429,8 @@
 
             
 
+            
+
              method to determine whether the specified string can be converted to the specified data type. This method is commonly used to test whether a string can be converted to a compatible data type before performing an operation that depends on that data type. To indicate that values should be tested using a culture-neutral format, pass in true for the <paramref
              name="cultureInvariant" />
 
@@ -382,8 +438,12 @@
 
             
 
+            
+
              parameter; otherwise, values are tested using the format used by the current culture. When testing a value using the format used by the current culture, consider using the <see
              cref="M:System.Web.UI.WebControls.BaseCompareValidator.CanConvert(System.String,System.Web.UI.WebControls.ValidationDataType)" />
+
+            
 
             
 
@@ -407,10 +467,14 @@
 
           
 
+          
+
           The string to test.</param
         >
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -423,10 +487,14 @@
 
           
 
+          
+
            enumeration values.</param
         >
         <param name="cultureInvariant">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -464,8 +532,12 @@
 
             
 
+            
+
              method is used to test whether the value of the <paramref
              name="leftText" />
+
+            
 
             
 
@@ -478,6 +550,8 @@
 
             
 
+            
+
              parameter in the manner specified by the <paramref
              name="op" />
 
@@ -485,8 +559,12 @@
 
             
 
+            
+
              parameter. The <paramref
              name="type" />
+
+            
 
             
 
@@ -503,8 +581,12 @@
 
               
 
+              
+
                parameter is set to ValidationCompareOperator.DataTypeCheck, this method tests only the value of the <paramref
                name="leftText" />
+
+              
 
               
 
@@ -517,8 +599,12 @@
 
               
 
+              
+
                parameter. The <paramref
                name="rightText" />
+
+              
 
               
 
@@ -530,6 +616,8 @@
           <para
             >This version of the method compares the values using the format used by the current culture. To compare the values using a culture-neutral format, use the <see
              cref="M:System.Web.UI.WebControls.BaseCompareValidator.Compare(System.String,System.Boolean,System.String,System.Boolean,System.Web.UI.WebControls.ValidationCompareOperator,System.Web.UI.WebControls.ValidationDataType)" />
+
+            
 
             
 
@@ -552,6 +640,8 @@
 
             
 
+            
+
              parameter relates to the <paramref
              name="rightValue" />
 
@@ -559,8 +649,12 @@
 
             
 
+            
+
              parameter in the manner specified by the <paramref
              name="op" />
+
+            
 
             
 
@@ -576,8 +670,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.ValidationCompareOperator" />
+
+          
 
           
 
@@ -592,8 +690,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.ValidationDataType" />
+
+          
 
           
 
@@ -640,8 +742,12 @@
 
             
 
+            
+
              method is used to test whether the value of the <paramref
              name="leftText" />
+
+            
 
             
 
@@ -654,6 +760,8 @@
 
             
 
+            
+
              parameter in the manner specified by the <paramref
              name="op" />
 
@@ -661,8 +769,12 @@
 
             
 
+            
+
              parameter. The <paramref
              name="type" />
+
+            
 
             
 
@@ -679,8 +791,12 @@
 
               
 
+              
+
                parameter is set to ValidationCompareOperator.DataTypeCheck, this method tests only the value of the <paramref
                name="leftText" />
+
+              
 
               
 
@@ -693,8 +809,12 @@
 
               
 
+              
+
                parameter. The <paramref
                name="rightText" />
+
+              
 
               
 
@@ -711,6 +831,8 @@
 
             
 
+            
+
              and <paramref
              name="cultureInvariantRightText" />
 
@@ -718,8 +840,12 @@
 
             
 
+            
+
              parameters; otherwise, the values are compared using the format used by the current culture. When comparing values using the format used by the current culture, consider using the <see
              cref="M:System.Web.UI.WebControls.BaseCompareValidator.Compare(System.String,System.String,System.Web.UI.WebControls.ValidationCompareOperator,System.Web.UI.WebControls.ValidationDataType)" />
+
+            
 
             
 
@@ -742,6 +868,8 @@
 
             
 
+            
+
              parameter relates to the <paramref
              name="rightValue" />
 
@@ -749,8 +877,12 @@
 
             
 
+            
+
              parameter in the manner specified by the <paramref
              name="op" />
+
+            
 
             
 
@@ -766,10 +898,14 @@
 
           
 
+          
+
           true to convert the left side value to a culture-neutral format; otherwise, false.</param
         >
         <param name="cultureInvariantRightText">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -784,8 +920,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.ValidationCompareOperator" />
+
+          
 
           
 
@@ -800,8 +940,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.ValidationDataType" />
+
+          
 
           
 
@@ -904,8 +1048,12 @@
 
             
 
+            
+
              property is set to true, properties of the control that are not strongly typed are converted to a culture-neutral format before being compared. When this property is set to false, values are converted to the format of the current culture. The <see
              cref="P:System.Web.UI.WebControls.BaseCompareValidator.CultureInvariantValues" />
+
+            
 
             
 
@@ -921,10 +1069,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -957,8 +1109,12 @@
 
             
 
+            
+
              property to determine the maximum year that can be represented by a two-digit year in a 100-year range. For example, if this property contains the value 2029, you can represent the years 1930 to 2029 using a two-digit year. The two-digit year 30 is interpreted as 1930, while 29 is interpreted as 2029. You cannot change the value of this property directly; however, you can change the maximum year that can be represented by a two-digit year by setting the <see
              cref="P:System.Globalization.Calendar.TwoDigitYearMax" />
+
+            
 
             
 
@@ -995,6 +1151,8 @@
 
             
 
+            
+
              method is a helper function used primarily by the <see
              cref="P:System.Web.UI.WebControls.BaseValidator.RenderUplevel" />
 
@@ -1002,8 +1160,12 @@
 
             
 
+            
+
              property to determine whether the client's browser supports "uplevel" rendering (rendering on a newer browser). The <see
              cref="T:System.Web.UI.WebControls.BaseCompareValidator" />
+
+            
 
             
 
@@ -1042,6 +1204,8 @@
           <para
             >The month, day, and year of a date value can appear in different orders depending on the current culture settings. The <see
              cref="M:System.Web.UI.WebControls.BaseCompareValidator.GetDateElementOrder" />
+
+            
 
             
 
@@ -1124,8 +1288,12 @@
 
             
 
+            
+
              method to generate the four-digit year representation of the specified two-digit year. The four-digit year representation depends on the value of the <see
              cref="P:System.Web.UI.WebControls.BaseCompareValidator.CutoffYear" />
+
+            
 
             
 
@@ -1138,6 +1306,8 @@
 
             
 
+            
+
              property contains the value 2029, the <see
              cref="M:System.Web.UI.WebControls.BaseCompareValidator.GetFullYear(System.Int32)" />
 
@@ -1145,8 +1315,12 @@
 
             
 
+            
+
              method returns a year between 1930 and 2029. The two-digit year 30 is interpreted as 1930, while 29 is interpreted as 2029. You can change the maximum year that can be represented by a two-digit year by setting the <see
              cref="P:System.Globalization.Calendar.TwoDigitYearMax" />
+
+            
 
             
 
@@ -1194,8 +1368,12 @@
 
             
 
+            
+
              property to specify the data type used for comparison. The <see
              cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
+
+            
 
             
 
@@ -1212,8 +1390,12 @@
 
               
 
+              
+
                property is set to <see
                cref="F:System.Web.UI.WebControls.ValidationDataType.Date" />
+
+              
 
               
 
@@ -1230,6 +1412,8 @@
 
             
 
+            
+
              control, all values being compared (the upper bound, lower bound, and value of the input control) are converted to the specified data type before any comparison is performed. However, if you use a <see
              cref="T:System.Web.UI.WebControls.CompareValidator" />
 
@@ -1237,8 +1421,12 @@
 
             
 
+            
+
              control and set its <see
              cref="P:System.Web.UI.WebControls.CompareValidator.Operator" />
+
+            
 
             
 
@@ -1255,12 +1443,16 @@
 
               
 
+              
+
                property of the validation control is set to false.</para
             >
           </block>
           <para
             >The following table lists the values that you can use for the <see
              cref="P:System.Web.UI.WebControls.BaseCompareValidator.Type" />
+
+            
 
             
 
@@ -1328,10 +1520,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 

@@ -33,11 +33,15 @@
 
         
 
+        
+
          class represents the &lt;ReferenceList&gt; element of an encrypted document XML signature defined by the XML encryption specification.</para
       >
       <para
         >The <see
          cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+
+        
 
         
 
@@ -50,8 +54,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+
+        
 
         
 
@@ -64,8 +72,12 @@
 
         
 
+        
+
          element. The <see
          cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+
+        
 
         
 
@@ -78,8 +90,12 @@
 
         
 
+        
+
          elements to reference <see
          cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+
+        
 
         
 
@@ -92,8 +108,12 @@
 
         
 
+        
+
          elements to reference <see
          cref="T:System.Security.Cryptography.Xml.EncryptedKey" />
+
+        
 
         
 
@@ -109,6 +129,8 @@
 
         
 
+        
+
          or <see
          cref="T:System.Security.Cryptography.Xml.KeyReference" />
 
@@ -116,8 +138,12 @@
 
         
 
+        
+
          objects to the <see
          cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+
+        
 
         
 
@@ -158,6 +184,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -193,6 +221,8 @@
 
             
 
+            
+
              or <see
              cref="T:System.Security.Cryptography.Xml.KeyReference" />
 
@@ -200,8 +230,12 @@
 
             
 
+            
+
              object to the <see
              cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+
+            
 
             
 
@@ -221,8 +255,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Cryptography.Xml.DataReference" />
+
+          
 
           
 
@@ -235,8 +273,12 @@
 
           
 
+          
+
            object to add to the <see
            cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+
+          
 
           
 
@@ -269,6 +311,8 @@
           <para
             >Removes all items from the <see
              cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+
+            
 
             
 
@@ -309,6 +353,8 @@
 
             
 
+            
+
              collection contains a specific <see
              cref="T:System.Security.Cryptography.Xml.DataReference" />
 
@@ -316,8 +362,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Security.Cryptography.Xml.KeyReference" />
+
+            
 
             
 
@@ -336,6 +386,8 @@
 
             
 
+            
+
              or <see
              cref="T:System.Security.Cryptography.Xml.KeyReference" />
 
@@ -343,8 +395,12 @@
 
             
 
+            
+
              object is found in the <see
              cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+
+            
 
             
 
@@ -360,8 +416,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.Xml.DataReference" />
+
+          
 
           
 
@@ -374,8 +434,12 @@
 
           
 
+          
+
            object to locate in the <see
            cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+
+          
 
           
 
@@ -416,11 +480,15 @@
 
             
 
+            
+
              object to an array, starting at a specified array index.</para
           >
         </summary>
         <param name="array">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -433,8 +501,12 @@
 
           
 
+          
+
            object that is the destination of the elements copied from the <see
            cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+
+          
 
           
 
@@ -449,8 +521,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -480,6 +556,8 @@
           <para
             >Gets the number of elements contained in the <see
              cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+
+            
 
             
 
@@ -524,6 +602,8 @@
 
             
 
+            
+
              collection.</para
           >
         </summary>
@@ -537,8 +617,12 @@
 
             
 
+            
+
              object that can be used to iterate through a <see
              cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+
+            
 
             
 
@@ -579,6 +663,8 @@
 
             
 
+            
+
              collection.</para
           >
         </summary>
@@ -587,6 +673,8 @@
           <para
             >The index of <paramref
              name="value" />
+
+            
 
             
 
@@ -602,8 +690,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.Xml.DataReference" />
+
+          
 
           
 
@@ -616,8 +708,12 @@
 
           
 
+          
+
            object to locate in the <see
            cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+
+          
 
           
 
@@ -658,6 +754,8 @@
 
             
 
+            
+
              or <see
              cref="T:System.Security.Cryptography.Xml.KeyReference" />
 
@@ -665,8 +763,12 @@
 
             
 
+            
+
              object into the <see
              cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+
+            
 
             
 
@@ -682,8 +784,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="value" />
+
+          
 
           
 
@@ -698,8 +804,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Cryptography.Xml.DataReference" />
+
+          
 
           
 
@@ -712,8 +822,12 @@
 
           
 
+          
+
            object to insert into the <see
            cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+
+          
 
           
 
@@ -743,6 +857,8 @@
           <para
             >Gets a value that indicates whether access to the <see
              cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+
+            
 
             
 
@@ -786,8 +902,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Security.Cryptography.Xml.KeyReference" />
+
+            
 
             
 
@@ -806,8 +926,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Security.Cryptography.Xml.KeyReference" />
+
+            
 
             
 
@@ -823,6 +947,8 @@
 
           
 
+          
+
           The index of the <see
            cref="T:System.Security.Cryptography.Xml.DataReference" />
 
@@ -830,8 +956,12 @@
 
           
 
+          
+
            or <see
            cref="T:System.Security.Cryptography.Xml.KeyReference" />
+
+          
 
           
 
@@ -899,6 +1029,8 @@
 
             
 
+            
+
              or <see
              cref="T:System.Security.Cryptography.Xml.KeyReference" />
 
@@ -906,8 +1038,12 @@
 
             
 
+            
+
              object from the <see
              cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+
+            
 
             
 
@@ -923,8 +1059,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.Xml.DataReference" />
+
+          
 
           
 
@@ -937,8 +1077,12 @@
 
           
 
+          
+
            object to remove from the <see
            cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+
+          
 
           
 
@@ -978,8 +1122,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Security.Cryptography.Xml.KeyReference" />
+
+            
 
             
 
@@ -995,6 +1143,8 @@
 
           
 
+          
+
           The zero-based index of the <see
            cref="T:System.Security.Cryptography.Xml.DataReference" />
 
@@ -1002,8 +1152,12 @@
 
           
 
+          
+
            or <see
            cref="T:System.Security.Cryptography.Xml.KeyReference" />
+
+          
 
           
 
@@ -1033,6 +1187,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Security.Cryptography.Xml.ReferenceList" />
+
+            
 
             
 
@@ -1069,8 +1225,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1084,6 +1244,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Collections.IList.IsFixedSize" />
+
+            
 
             
 
@@ -1120,8 +1282,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1135,6 +1301,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Collections.IList.IsReadOnly" />
+
+            
 
             
 

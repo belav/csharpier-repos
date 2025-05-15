@@ -33,6 +33,8 @@
 
         
 
+        
+
          and <see
          cref="P:System.Diagnostics.Trace.Listeners" />
 
@@ -40,8 +42,12 @@
 
         
 
+        
+
          collections. Explicitly adding a second <see
          cref="T:System.Diagnostics.DefaultTraceListener" />
+
+        
 
         
 
@@ -57,6 +63,8 @@
 
         
 
+        
+
          and <see
          cref="M:System.Diagnostics.DefaultTraceListener.WriteLine(System.String)" />
 
@@ -64,8 +72,12 @@
 
         
 
+        
+
          methods emit the message to the Win32 OutputDebugString function and to the <see
          cref="M:System.Diagnostics.Debugger.Log(System.Int32,System.String,System.String)" />
+
+        
 
         
 
@@ -81,8 +93,12 @@
 
         
 
+        
+
          method, by default, displays a message box when the application is running in a user interface mode; it also emits the message using <see
          cref="M:System.Diagnostics.DefaultTraceListener.WriteLine(System.String)" />
+
+        
 
         
 
@@ -99,8 +115,12 @@
 
           
 
+          
+
            and <see
            cref="Overload:System.Diagnostics.Debug.Fail" />
+
+          
 
           
 
@@ -113,8 +133,12 @@
 
           
 
+          
+
           . If the <see
            cref="T:System.Diagnostics.DefaultTraceListener" />
+
+          
 
           
 
@@ -127,8 +151,12 @@
 
           
 
+          
+
            collection, the message box is not displayed. The <see
            cref="T:System.Diagnostics.DefaultTraceListener" />
+
+          
 
           
 
@@ -143,10 +171,14 @@
 
           
 
+          
+
           , by the <format
            type="text/html">
             <a href="9a5cd1b5-be1a-485f-8f0c-2890ad3ef3e0">&lt;remove&gt; element</a>
           </format>
+
+          
 
           
 
@@ -159,8 +191,12 @@
 
           
 
+          
+
            method on the <see
            cref="P:System.Diagnostics.Trace.Listeners" />
+
+          
 
           
 
@@ -219,6 +255,8 @@
 
           
 
+          
+
            class, with a <see
            cref="P:System.Diagnostics.TraceListener.Name" />
 
@@ -226,8 +264,12 @@
 
           
 
+          
+
            value of <c
           >Default</c>
+
+          
 
           
 
@@ -245,8 +287,12 @@
 
             
 
+            
+
              class with "Default" as its <see
              cref="P:System.Diagnostics.TraceListener.Name" />
+
+            
 
             
 
@@ -279,6 +325,8 @@
 
           
 
+          
+
            is called.</value
         >
         <remarks>
@@ -290,8 +338,12 @@
 
             
 
+            
+
             , calls to <see
              cref="M:System.Diagnostics.TraceListener.Fail" />
+
+            
 
             
 
@@ -336,8 +388,12 @@
 
             
 
+            
+
              parameter and a stack trace to a message box (when the application runs in user-interface mode) and to the <see
              cref="T:System.Diagnostics.DefaultTraceListener" />
+
+            
 
             
 
@@ -352,6 +408,8 @@
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -394,6 +452,8 @@
 
             
 
+            
+
              parameter, the <paramref
              name="detailMessage" />
 
@@ -401,8 +461,12 @@
 
             
 
+            
+
              parameter, and a stack trace to a message box (when the application runs in user-interface mode) and to the <see
              cref="T:System.Diagnostics.DefaultTraceListener" />
+
+            
 
             
 
@@ -422,10 +486,14 @@
 
           
 
+          
+
           The message to emit or display. </param
         >
         <param name="detailMessage">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -495,6 +563,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -505,8 +575,12 @@
 
           
 
+          
+
           The message to write to OutputDebugString and <see
            cref="M:System.Diagnostics.Debugger.Log(System.Int32,System.String,System.String)" />
+
+          
 
           
 
@@ -547,6 +621,8 @@
 
             
 
+            
+
              property to true.</para
           >
         </remarks>
@@ -555,6 +631,8 @@
           <para
             >Writes the output to the OutputDebugString function and to the <see
              cref="M:System.Diagnostics.Debugger.Log(System.Int32,System.String,System.String)" />
+
+            
 
             
 
@@ -570,8 +648,12 @@
 
           
 
+          
+
           The message to write to OutputDebugString and <see
            cref="M:System.Diagnostics.Debugger.Log(System.Int32,System.String,System.String)" />
+
+          
 
           
 

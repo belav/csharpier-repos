@@ -27,11 +27,15 @@
 
         
 
+        
+
          allows you to programmatically access and modify the databases element of the sqlCacheDependency node within the caching configuration section.</para
       >
       <para
         >The SQL cache dependency allows the cached data to be synchronized with the original source. After you configure the relationship between an item stored in an ASP.NET application's cache and a specific SQL Server database table, an instance of the <see
          cref="T:System.Web.Caching.SqlCacheDependency" />
+
+        
 
         
 
@@ -69,11 +73,15 @@
 
             
 
+            
+
              class with the passed parameters.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -86,10 +94,14 @@
 
           
 
+          
+
            to identify the database.</param
         >
         <param name="connectionStringName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -126,6 +138,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -136,8 +150,12 @@
 
           
 
+          
+
           A string that specifies the name used by <see
            cref="T:System.Web.Configuration.SqlCacheDependencyDatabase" />
+
+          
 
           
 
@@ -152,10 +170,14 @@
 
           
 
+          
+
           A string that specifies the name of the connection string in the connectionStrings section to use to connect to this database.</param
         >
         <param name="pollTime">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -190,6 +212,8 @@
           <para
             >The <see
              cref="P:System.Web.Configuration.SqlCacheDependencyDatabase.ConnectionStringName" />
+
+            
 
             
 
@@ -253,11 +277,15 @@
 
             
 
+            
+
              property allows you to programmatically access and modify the name attribute of an add element of the databases node in a configuration file. </para
           >
           <para
             >The name attribute identifies the database whose table is used for the <see
              cref="T:System.Web.Caching.SqlCacheDependency" />
+
+            
 
             
 
@@ -299,6 +327,8 @@
 
             
 
+            
+
              property allows you to programmatically access and modify the pollTime attribute of an add element of the databases node in a configuration file.</para
           >
           <para
@@ -309,8 +339,12 @@
 
             
 
+            
+
              class monitors the table so that when an item in the table changes, the item is automatically updated in or removed from the cache. The monitoring happens at the frequency specified by the <see
              cref="P:System.Web.Configuration.SqlCacheDependencyDatabase.PollTime" />
+
+            
 
             
 
@@ -324,6 +358,8 @@
           <para
             >Gets or sets the frequency with which the <see
              cref="T:System.Web.Caching.SqlCacheDependency" />
+
+            
 
             
 

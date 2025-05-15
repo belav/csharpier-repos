@@ -36,6 +36,8 @@
 
         
 
+        
+
         .</para
       >
     </summary>
@@ -59,6 +61,8 @@
           <para
             >Creates a new instance of the <see
              cref="T:System.ServiceModel.Syndication.ServiceDocumentFormatter" />
+
+            
 
             
 
@@ -97,6 +101,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -107,8 +113,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.ServiceDocument" />
+
+          
 
           
 
@@ -149,6 +159,8 @@
 
             
 
+            
+
              contains a valid service document.</para
           >
         </summary>
@@ -160,6 +172,8 @@ true, if the XML reader contains a valid service document, otherwise false.
         </returns>
         <param name="reader">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -203,6 +217,8 @@ true, if the XML reader contains a valid service document, otherwise false.
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -211,6 +227,8 @@ true, if the XML reader contains a valid service document, otherwise false.
           <para>
 Returns a new <see
              cref="T:System.ServiceModel.Syndication.SyndicationCategory" />
+
+            
 
             
 
@@ -227,8 +245,12 @@ Returns a new <see
 
           
 
+          
+
           An <see
            cref="T:System.ServiceModel.Syndication.InlineCategories" />
+
+          
 
           
 
@@ -269,6 +291,8 @@ Returns a new <see
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -277,6 +301,8 @@ Returns a new <see
           <para>
 Returns a new <see
              cref="T:System.ServiceModel.Syndication.ResourceCollectionInfo" />
+
+            
 
             
 
@@ -293,8 +319,12 @@ Returns a new <see
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.Syndication.Workspace" />
+
+          
 
           
 
@@ -333,6 +363,8 @@ Returns a new <see
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -341,6 +373,8 @@ Returns a new <see
           <para>
 Returns a new <see
              cref="T:System.ServiceModel.Syndication.ServiceDocument" />
+
+            
 
             
 
@@ -386,6 +420,8 @@ Returns a new <see
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -394,6 +430,8 @@ Returns a new <see
           <para>
 Returns a new <see
              cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
+
+            
 
             
 
@@ -410,6 +448,8 @@ Returns a new <see
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.ResourceCollectionInfo" />
 
@@ -417,8 +457,12 @@ Returns a new <see
 
           
 
+          
+
            to use to create the new <see
            cref="T:System.ServiceModel.Syndication.InlineCategoriesDocument" />
+
+          
 
           
 
@@ -462,6 +506,8 @@ Returns a new <see
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -470,6 +516,8 @@ Returns a new <see
           <para>
 Returns a new <see
              cref="T:System.ServiceModel.Syndication.ReferencedCategoriesDocument" />
+
+            
 
             
 
@@ -486,6 +534,8 @@ Returns a new <see
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.ResourceCollectionInfo" />
 
@@ -493,8 +543,12 @@ Returns a new <see
 
           
 
+          
+
            instance to use to create the new <see
            cref="T:System.ServiceModel.Syndication.ReferencedCategoriesDocument" />
+
+          
 
           
 
@@ -542,6 +596,8 @@ Returns a new <see
 
             
 
+            
+
             .
 </para
           >
@@ -553,8 +609,12 @@ Returns a new <see
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.ServiceDocument" />
+
+          
 
           
 
@@ -588,6 +648,8 @@ Returns a new <see
           <para
             >Gets the <see
              cref="T:System.ServiceModel.Syndication.ServiceDocument" />
+
+            
 
             
 
@@ -632,8 +694,12 @@ Returns a new <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -648,8 +714,12 @@ Returns a new <see
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.CategoriesDocument" />
+
+          
 
           
 
@@ -659,6 +729,8 @@ Returns a new <see
         >
         <param name="maxExtensionSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -705,8 +777,12 @@ Returns a new <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -721,8 +797,12 @@ Returns a new <see
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.ResourceCollectionInfo" />
+
+          
 
           
 
@@ -732,6 +812,8 @@ Returns a new <see
         >
         <param name="maxExtensionSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -775,8 +857,12 @@ Returns a new <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -791,8 +877,12 @@ Returns a new <see
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.ServiceDocument" />
+
+          
 
           
 
@@ -802,6 +892,8 @@ Returns a new <see
         >
         <param name="maxExtensionSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -845,8 +937,12 @@ Returns a new <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -861,8 +957,12 @@ Returns a new <see
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.Workspace" />
+
+          
 
           
 
@@ -872,6 +972,8 @@ Returns a new <see
         >
         <param name="maxExtensionSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -912,6 +1014,8 @@ Returns a new <see
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -922,8 +1026,12 @@ Returns a new <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -964,6 +1072,8 @@ Returns a new <see
 
             
 
+            
+
              to write.</para
           >
         </summary>
@@ -974,8 +1084,12 @@ Returns a new <see
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.ServiceDocument" />
+
+          
 
           
 
@@ -1024,12 +1138,16 @@ Returns a <see
 
             
 
+            
+
              that indicates whether the attribute extension was successfully parsed.
 </para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1044,10 +1162,14 @@ Returns a <see
 
           
 
+          
+
           The namespace of the element.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1062,8 +1184,12 @@ Returns a <see
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.CategoriesDocument" />
+
+          
 
           
 
@@ -1073,6 +1199,8 @@ Returns a <see
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1124,12 +1252,16 @@ Returns a <see
 
             
 
+            
+
              that indicates whether the attribute extension was parsed successfully.
 </para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1144,10 +1276,14 @@ Returns a <see
 
           
 
+          
+
           The namespace of the element.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1162,8 +1298,12 @@ Returns a <see
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.ResourceCollectionInfo" />
+
+          
 
           
 
@@ -1173,6 +1313,8 @@ Returns a <see
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1221,12 +1363,16 @@ Returns a <see
 
             
 
+            
+
              that indicates whether the attribute extension was parsed successfully.
 </para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1241,10 +1387,14 @@ Returns a <see
 
           
 
+          
+
           The namespace of the element.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1259,8 +1409,12 @@ Returns a <see
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.ServiceDocument" />
+
+          
 
           
 
@@ -1270,6 +1424,8 @@ Returns a <see
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1318,12 +1474,16 @@ Returns a <see
 
             
 
+            
+
              that indicates whether the attribute extension was parsed successfully.
 </para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1338,10 +1498,14 @@ Returns a <see
 
           
 
+          
+
           The namespace of the element.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1356,8 +1520,12 @@ Returns a <see
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.Workspace" />
+
+          
 
           
 
@@ -1367,6 +1535,8 @@ Returns a <see
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1413,6 +1583,8 @@ Returns a <see
 
             
 
+            
+
              that indicates whether the element extension was parsed successfully.
 </para
           >
@@ -1424,8 +1596,12 @@ Returns a <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -1440,8 +1616,12 @@ Returns a <see
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.CategoriesDocument" />
+
+          
 
           
 
@@ -1451,6 +1631,8 @@ Returns a <see
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1500,6 +1682,8 @@ Returns a <see
 
             
 
+            
+
              that indicates whether the element extension was parsed successfully.
 </para
           >
@@ -1511,8 +1695,12 @@ Returns a <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -1527,8 +1715,12 @@ Returns a <see
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.ResourceCollectionInfo" />
+
+          
 
           
 
@@ -1538,6 +1730,8 @@ Returns a <see
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1584,6 +1778,8 @@ Returns a <see
 
             
 
+            
+
              that indicates whether the element extension was successfully parsed.
 </para
           >
@@ -1595,8 +1791,12 @@ Returns a <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -1611,8 +1811,12 @@ Returns a <see
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.ServiceDocument" />
+
+          
 
           
 
@@ -1622,6 +1826,8 @@ Returns a <see
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1668,6 +1874,8 @@ Returns a <see
 
             
 
+            
+
              that indicates whether the element extension was parsed successfully.
 </para
           >
@@ -1679,8 +1887,12 @@ Returns a <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -1695,8 +1907,12 @@ Returns a <see
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.Workspace" />
+
+          
 
           
 
@@ -1706,6 +1922,8 @@ Returns a <see
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1768,8 +1986,12 @@ Returns a <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -1784,8 +2006,12 @@ Returns a <see
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.CategoriesDocument" />
+
+          
 
           
 
@@ -1795,6 +2021,8 @@ Returns a <see
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1841,8 +2069,12 @@ Returns a <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -1857,8 +2089,12 @@ Returns a <see
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.ResourceCollectionInfo" />
+
+          
 
           
 
@@ -1868,6 +2104,8 @@ Returns a <see
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1911,8 +2149,12 @@ Returns a <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -1927,8 +2169,12 @@ Returns a <see
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.ServiceDocument" />
+
+          
 
           
 
@@ -1938,6 +2184,8 @@ Returns a <see
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1981,8 +2229,12 @@ Returns a <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -1997,8 +2249,12 @@ Returns a <see
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.Workspace" />
+
+          
 
           
 
@@ -2008,6 +2264,8 @@ Returns a <see
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2051,8 +2309,12 @@ Returns a <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -2067,8 +2329,12 @@ Returns a <see
 
           
 
+          
+
           The  <see
            cref="T:System.ServiceModel.Syndication.CategoriesDocument" />
+
+          
 
           
 
@@ -2078,6 +2344,8 @@ Returns a <see
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2124,8 +2392,12 @@ Returns a <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -2140,8 +2412,12 @@ Returns a <see
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.ResourceCollectionInfo" />
+
+          
 
           
 
@@ -2151,6 +2427,8 @@ Returns a <see
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2194,8 +2472,12 @@ Returns a <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -2210,8 +2492,12 @@ Returns a <see
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.ServiceDocument" />
+
+          
 
           
 
@@ -2221,6 +2507,8 @@ Returns a <see
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2264,8 +2552,12 @@ Returns a <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -2280,8 +2572,12 @@ Returns a <see
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.Workspace" />
+
+          
 
           
 
@@ -2291,6 +2587,8 @@ Returns a <see
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2331,6 +2629,8 @@ Returns a <see
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2341,8 +2641,12 @@ Returns a <see
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 

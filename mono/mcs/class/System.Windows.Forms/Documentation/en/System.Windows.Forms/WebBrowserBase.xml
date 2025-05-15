@@ -38,6 +38,8 @@
 
         
 
+        
+
          control.</para
       >
     </summary>
@@ -67,6 +69,8 @@
           <para
             >For more information, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=198812">WebBrowser Control</see>
+
+            
 
             
 
@@ -136,6 +140,8 @@
         </summary>
         <param name="nativeActiveXObject">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -447,6 +453,8 @@
 
             
 
+            
+
              that represents the site of the underlying ActiveX control.</para
           >
         </returns>
@@ -596,11 +604,15 @@
 
             
 
+            
+
              and its child controls and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -773,8 +785,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Bitmap" />
+
+          
 
           
 
@@ -789,8 +805,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1135,6 +1155,8 @@
         </returns>
         <param name="charCode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1576,6 +1598,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1586,8 +1610,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1621,6 +1649,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1631,8 +1661,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1669,6 +1703,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1679,8 +1715,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1714,6 +1754,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1724,8 +1766,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1763,11 +1809,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.WebBrowserBase.OnHandleCreated(System.EventArgs)" />
+
+            
 
             
 
@@ -1786,6 +1836,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1796,8 +1848,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1836,6 +1892,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1846,8 +1904,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1884,6 +1946,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1894,8 +1958,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1933,8 +2001,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1971,6 +2043,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1981,8 +2055,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -2069,6 +2147,8 @@
         </returns>
         <param name="charCode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

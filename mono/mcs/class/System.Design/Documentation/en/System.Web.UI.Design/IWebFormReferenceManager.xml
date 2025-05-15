@@ -19,8 +19,12 @@
 
           
 
+          
+
            interface is obsolete. Use the <see
            cref="T:System.Web.UI.Design.WebFormsReferenceManager" />
+
+          
 
           
 
@@ -62,6 +66,8 @@
 
               
 
+              
+
                method is obsolete. Use the <see
                cref="M:System.Web.UI.Design.WebFormsReferenceManager.GetType(System.String,System.String)" />
 
@@ -69,8 +75,12 @@
 
               
 
+              
+
                method on the <see
                cref="T:System.Web.UI.Design.WebFormsReferenceManager" />
+
+              
 
               
 
@@ -94,6 +104,8 @@
 
             
 
+            
+
              of the object, if it could be resolved.</para
           >
         </returns>
@@ -104,10 +116,14 @@
 
           
 
+          
+
           The tag prefix for the type. </param
         >
         <param name="typeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -140,6 +156,8 @@
 
               
 
+              
+
                method is obsolete. Use the <see
                cref="M:System.Web.UI.Design.WebFormsReferenceManager.GetRegisterDirectives" />
 
@@ -147,8 +165,12 @@
 
               
 
+              
+
                method on the <see
                cref="T:System.Web.UI.Design.WebFormsReferenceManager" />
+
+              
 
               
 
@@ -193,6 +215,8 @@
 
               
 
+              
+
                method is obsolete. Use the <see
                cref="M:System.Web.UI.Design.WebFormsReferenceManager.GetTagPrefix(System.Type)" />
 
@@ -200,8 +224,12 @@
 
               
 
+              
+
                method on the <see
                cref="T:System.Web.UI.Design.WebFormsReferenceManager" />
+
+              
 
               
 
@@ -221,6 +249,8 @@
         </returns>
         <param name="objectType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

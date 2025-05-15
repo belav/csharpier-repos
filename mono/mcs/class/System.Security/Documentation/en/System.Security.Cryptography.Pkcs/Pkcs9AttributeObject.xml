@@ -29,6 +29,8 @@
 
         
 
+        
+
          object can be thought of as a strongly typed <see
          cref="T:System.Security.Cryptography.AsnEncodedData" />
 
@@ -36,8 +38,12 @@
 
         
 
+        
+
          object because of the addition of the <see
          cref="P:System.Security.Cryptography.Pkcs.Pkcs9AttributeObject.Oid" />
+
+        
 
         
 
@@ -72,6 +78,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.Pkcs.Pkcs9AttributeObject" />
+
+            
 
             
 
@@ -112,8 +120,12 @@
 
             
 
+            
+
              class using a specified <see
              cref="T:System.Security.Cryptography.AsnEncodedData" />
+
+            
 
             
 
@@ -124,6 +136,8 @@
         </summary>
         <param name="asnEncodedData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -164,8 +178,12 @@
 
             
 
+            
+
              class using a specified <see
              cref="T:System.Security.Cryptography.Oid" />
+
+            
 
             
 
@@ -181,10 +199,14 @@
 
           
 
+          
+
           An object that represents the PKCS #9 attribute type.</param
         >
         <param name="encodedData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -225,6 +247,8 @@
 
             
 
+            
+
              class using a specified string representation of an object identifier (OID) as the attribute type and a specified ASN.1 encoded data as the attribute value.</para
           >
         </summary>
@@ -235,10 +259,14 @@
 
           
 
+          
+
           The string representation of an OID that represents the PKCS #9 attribute type.</param
         >
         <param name="encodedData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -281,8 +309,12 @@
 
             
 
+            
+
              from the specified <see
              cref="T:System.Security.Cryptography.AsnEncodedData" />
+
+            
 
             
 
@@ -293,6 +325,8 @@
         </summary>
         <param name="asnEncodedData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -330,8 +364,12 @@
 
             
 
+            
+
              object that represents the type of attribute associated with this <see
              cref="T:System.Security.Cryptography.Pkcs.Pkcs9AttributeObject" />
+
+            
 
             
 

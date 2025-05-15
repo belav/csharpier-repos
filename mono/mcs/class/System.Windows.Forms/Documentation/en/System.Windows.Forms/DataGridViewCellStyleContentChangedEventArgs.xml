@@ -27,8 +27,12 @@
 
         
 
+        
+
          event occurs when a property value of a <see
          cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+        
 
         
 
@@ -86,8 +90,12 @@
 
         
 
+        
+
          object, however, the corresponding PropertyNameChanged event occurs but the <see
          cref="E:System.Windows.Forms.DataGridView.CellStyleContentChanged" />
+
+        
 
         
 
@@ -103,6 +111,8 @@
 
         
 
+        
+
          property to determine which property has the <see
          cref="T:System.Windows.Forms.DataGridViewCellStyle" />
 
@@ -110,8 +120,12 @@
 
         
 
+        
+
          that changed. Use the <see
          cref="P:System.Windows.Forms.DataGridViewCellStyleContentChangedEventArgs.CellStyle" />
+
+        
 
         
 
@@ -129,6 +143,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -137,6 +153,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.DataGridView.CellStyleContentChanged" />
+
+        
 
         
 
@@ -169,6 +187,8 @@
 
             
 
+            
+
              property value. Use the <see
              cref="P:System.Windows.Forms.DataGridViewCellStyleContentChangedEventArgs.CellStyleScope" />
 
@@ -176,8 +196,12 @@
 
             
 
+            
+
              property to determine which property has the <see
              cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+            
 
             
 
@@ -191,6 +215,8 @@
           <para
             >Gets the changed <see
              cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+            
 
             
 
@@ -226,6 +252,8 @@
 
             
 
+            
+
              property to determine which property has the <see
              cref="T:System.Windows.Forms.DataGridViewCellStyle" />
 
@@ -233,8 +261,12 @@
 
             
 
+            
+
              that changed. Use the <see
              cref="P:System.Windows.Forms.DataGridViewCellStyleContentChangedEventArgs.CellStyle" />
+
+            
 
             
 

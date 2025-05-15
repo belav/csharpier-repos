@@ -29,6 +29,8 @@
 
         
 
+        
+
          object specifies access rights for a registry key, and also specifies how access attempts are audited. Access rights to the registry key are expressed as rules, with each access rule represented by a <see
          cref="T:System.Security.AccessControl.RegistryAccessRule" />
 
@@ -36,8 +38,12 @@
 
         
 
+        
+
          object. Each auditing rule is represented by a <see
          cref="T:System.Security.AccessControl.RegistryAuditRule" />
+
+        
 
         
 
@@ -53,8 +59,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Security.AccessControl.RegistryAuditRule" />
+
+        
 
         
 
@@ -73,6 +83,8 @@
 
         
 
+        
+
         , <see
          cref="T:System.Security.AccessControl.RegistryAccessRule" />
 
@@ -80,8 +92,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Security.AccessControl.RegistryAuditRule" />
+
+        
 
         
 
@@ -99,6 +115,8 @@
 
             
 
+            
+
              object always starts with an empty DACL, which denies all access for all users.</para
           >
         </item>
@@ -106,6 +124,8 @@
           <para
             >Violating the canonical ordering of ACEs. If the ACE list in the DACL is not kept in the canonical order, users might inadvertently be given access to the secured object. For example, denied access rights must always appear before allowed access rights. <see
              cref="T:System.Security.AccessControl.RegistrySecurity" />
+
+            
 
             
 
@@ -144,6 +164,8 @@
 
         
 
+        
+
          method to get the <see
          cref="T:System.Security.AccessControl.RegistrySecurity" />
 
@@ -151,8 +173,12 @@
 
         
 
+        
+
          object. Modify the security object by adding and removing rules, and then use the <see
          cref="M:Microsoft.Win32.RegistryKey.SetAccessControl(System.Security.AccessControl.RegistrySecurity)" />
+
+        
 
         
 
@@ -169,8 +195,12 @@
 
           
 
+          
+
            object do not affect the access levels of the registry key until you call the <see
            cref="M:Microsoft.Win32.RegistryKey.SetAccessControl(System.Security.AccessControl.RegistrySecurity)" />
+
+          
 
           
 
@@ -187,8 +217,12 @@
 
         
 
+        
+
          method to get a <see
          cref="T:System.Security.AccessControl.RegistrySecurity" />
+
+        
 
         
 
@@ -201,8 +235,12 @@
 
         
 
+        
+
          method to assign those rules to the second registry key. You can also assign the rules to a second registry key with an <see
          cref="Overload:Microsoft.Win32.RegistryKey.OpenSubKey" />
+
+        
 
         
 
@@ -215,8 +253,12 @@
 
         
 
+        
+
          method that takes a <see
          cref="T:System.Security.AccessControl.RegistrySecurity" />
+
+        
 
         
 
@@ -232,8 +274,12 @@
 
         
 
+        
+
          method to set access rules for a registry key, and the <see
          cref="M:System.Security.AccessControl.ObjectSecurity.GetSecurityDescriptorSddlForm(System.Security.AccessControl.AccessControlSections)" />
+
+        
 
         
 
@@ -272,6 +318,8 @@
 
             
 
+            
+
              object always starts with an empty discretionary access list (DACL), which denies all access for all users.</para
           >
         </remarks>
@@ -280,6 +328,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.AccessControl.RegistrySecurity" />
+
+            
 
             
 
@@ -317,8 +367,12 @@
 
             
 
+            
+
              class override the <see
              cref="P:System.Security.AccessControl.ObjectSecurity.AccessRightType" />
+
+            
 
             
 
@@ -332,6 +386,8 @@
           <para
             >Gets the enumeration type that the <see
              cref="T:System.Security.AccessControl.RegistrySecurity" />
+
+            
 
             
 
@@ -379,12 +435,16 @@
 
             
 
+            
+
              class.</para
           >
           <block subset="none" type="note">
             <para
               >Although you can specify the <see
                cref="F:System.Security.AccessControl.InheritanceFlags.ObjectInherit" />
+
+              
 
               
 
@@ -397,8 +457,12 @@
 
               
 
+              
+
                flag. Finally, specifying the <see
                cref="F:System.Security.AccessControl.InheritanceFlags.ObjectInherit" />
+
+              
 
               
 
@@ -422,6 +486,8 @@
 
             
 
+            
+
              object representing the specified rights for the specified user.</para
           >
         </returns>
@@ -432,8 +498,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Principal.IdentityReference" />
+
+          
 
           
 
@@ -448,8 +518,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Security.AccessControl.RegistryRights" />
+
+          
 
           
 
@@ -464,6 +538,8 @@
 
           
 
+          
+
           A Boolean value specifying whether the rule is inherited.</param
         >
         <param name="inheritanceFlags">
@@ -473,8 +549,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Security.AccessControl.InheritanceFlags" />
+
+          
 
           
 
@@ -489,8 +569,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Security.AccessControl.PropagationFlags" />
+
+          
 
           
 
@@ -503,8 +587,12 @@
 
           
 
+          
+
            is <see
            cref="F:System.Security.AccessControl.InheritanceFlags.None" />
+
+          
 
           
 
@@ -519,8 +607,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AccessControlType" />
+
+          
 
           
 
@@ -557,8 +649,12 @@
 
             
 
+            
+
              class override the <see
              cref="P:System.Security.AccessControl.ObjectSecurity.AccessRuleType" />
+
+            
 
             
 
@@ -572,6 +668,8 @@
           <para
             >Gets the type that the <see
              cref="T:System.Security.AccessControl.RegistrySecurity" />
+
+            
 
             
 
@@ -614,8 +712,12 @@
 
             
 
+            
+
              method searches for rules with the same user or group and the same <see
              cref="T:System.Security.AccessControl.AccessControlType" />
+
+            
 
             
 
@@ -628,6 +730,8 @@
 
             
 
+            
+
             . If none are found, <paramref
              name="rule" />
 
@@ -635,8 +739,12 @@
 
             
 
+            
+
              is added. If a matching rule is found, the rights in <paramref
              name="rule" />
+
+            
 
             
 
@@ -652,8 +760,12 @@
 
             
 
+            
+
              is used to add a rule giving the user write access with inheritance for subkeys (<see
              cref="F:System.Security.AccessControl.InheritanceFlags.ContainerInherit" />
+
+            
 
             
 
@@ -669,11 +781,15 @@
 
             
 
+            
+
              values are never merged.</para
           >
           <para
             >Rules express rights in the most economical way. For example, if a user has <see
              cref="F:System.Security.AccessControl.RegistryRights.QueryValues" />
+
+            
 
             
 
@@ -686,8 +802,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Security.AccessControl.RegistryRights.ReadPermissions" />
+
+            
 
             
 
@@ -700,8 +820,12 @@
 
             
 
+            
+
              rights, the user has all the constituent parts of <see
              cref="F:System.Security.AccessControl.RegistryRights.ReadKey" />
+
+            
 
             
 
@@ -714,6 +838,8 @@
 
             
 
+            
+
              rights. Similarly, if you remove <see
              cref="F:System.Security.AccessControl.RegistryRights.EnumerateSubKeys" />
 
@@ -721,8 +847,12 @@
 
             
 
+            
+
              rights, the other constituents of <see
              cref="F:System.Security.AccessControl.RegistryRights.ReadKey" />
+
+            
 
             
 
@@ -737,6 +867,8 @@
         </summary>
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -778,8 +910,12 @@
 
             
 
+            
+
              method searches for rules with the same user or group as <paramref
              name="rule" />
+
+            
 
             
 
@@ -792,8 +928,12 @@
 
             
 
+            
+
              is added. If a matching rule is found, the flags in <paramref
              name="rule" />
+
+            
 
             
 
@@ -809,8 +949,12 @@
 
             
 
+            
+
              is used to add a rule specifying that failed attempts to change permissions are to be audited for the same user, but with inheritance for subkeys (<see
              cref="F:System.Security.AccessControl.InheritanceFlags.ContainerInherit" />
+
+            
 
             
 
@@ -825,6 +969,8 @@
         </summary>
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -871,12 +1017,16 @@
 
             
 
+            
+
              class.</para
           >
           <block subset="none" type="note">
             <para
               >Although you can specify the <see
                cref="F:System.Security.AccessControl.InheritanceFlags.ObjectInherit" />
+
+              
 
               
 
@@ -889,8 +1039,12 @@
 
               
 
+              
+
                flag. Finally, specifying the <see
                cref="F:System.Security.AccessControl.InheritanceFlags.ObjectInherit" />
+
+              
 
               
 
@@ -914,8 +1068,12 @@
 
             
 
+            
+
              object representing the specified audit rule for the specified user, with the specified flags. The return type of the method is the base class, <see
              cref="T:System.Security.AccessControl.AuditRule" />
+
+            
 
             
 
@@ -931,8 +1089,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Principal.IdentityReference" />
+
+          
 
           
 
@@ -947,8 +1109,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Security.AccessControl.RegistryRights" />
+
+          
 
           
 
@@ -963,6 +1129,8 @@
 
           
 
+          
+
           A Boolean value specifying whether the rule is inherited.</param
         >
         <param name="inheritanceFlags">
@@ -972,8 +1140,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Security.AccessControl.InheritanceFlags" />
+
+          
 
           
 
@@ -988,8 +1160,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Security.AccessControl.PropagationFlags" />
+
+          
 
           
 
@@ -1002,8 +1178,12 @@
 
           
 
+          
+
            is <see
            cref="F:System.Security.AccessControl.InheritanceFlags.None" />
+
+          
 
           
 
@@ -1018,8 +1198,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Security.AccessControl.AuditFlags" />
+
+          
 
           
 
@@ -1056,8 +1240,12 @@
 
             
 
+            
+
              class override the <see
              cref="P:System.Security.AccessControl.ObjectSecurity.AuditRuleType" />
+
+            
 
             
 
@@ -1071,6 +1259,8 @@
           <para
             >Gets the type that the <see
              cref="T:System.Security.AccessControl.RegistrySecurity" />
+
+            
 
             
 
@@ -1113,8 +1303,12 @@
 
             
 
+            
+
              is searched for a rule that has the same user and the same <see
              cref="T:System.Security.AccessControl.AccessControlType" />
+
+            
 
             
 
@@ -1127,8 +1321,12 @@
 
             
 
+            
+
             . If no such rule is found, no action is taken, and the method returns false. If matching rules are found, their inheritance and compatibility flags are checked for compatibility with the flags specified in <paramref
              name="rule" />
+
+            
 
             
 
@@ -1141,6 +1339,8 @@
 
             
 
+            
+
              are removed from the compatible rule, and the method returns true. If <paramref
              name="rule" />
 
@@ -1148,8 +1348,12 @@
 
             
 
+            
+
              specifies rights not contained in the compatible rule, no action is taken with respect to those rights. If all rights are removed from the compatible rule, the entire rule is removed from the current <see
              cref="T:System.Security.AccessControl.RegistrySecurity" />
+
+            
 
             
 
@@ -1163,6 +1367,8 @@
           <para
             >Searches for an access control rule with the same user and <see
              cref="T:System.Security.AccessControl.AccessControlType" />
+
+            
 
             
 
@@ -1182,6 +1388,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.AccessControl.RegistryAccessRule" />
 
@@ -1189,8 +1397,12 @@
 
           
 
+          
+
            that specifies the user and <see
            cref="T:System.Security.AccessControl.AccessControlType" />
+
+          
 
           
 
@@ -1232,8 +1444,12 @@
 
             
 
+            
+
              is searched for rules that have the same user and the same <see
              cref="T:System.Security.AccessControl.AccessControlType" />
+
+            
 
             
 
@@ -1246,8 +1462,12 @@
 
             
 
+            
+
             . Any rights, inheritance flags, or propagation flags specified by <paramref
              name="rule" />
+
+            
 
             
 
@@ -1263,6 +1483,8 @@
 
             
 
+            
+
              object that specifies the user and <see
              cref="F:System.Security.AccessControl.AccessControlType.Allow" />
 
@@ -1270,8 +1492,12 @@
 
             
 
+            
+
             , with any arbitrary rights and flags, and passing that rule to the <see
              cref="M:System.Security.AccessControl.RegistrySecurity.RemoveAccessRuleAll(System.Security.AccessControl.RegistryAccessRule)" />
+
+            
 
             
 
@@ -1290,11 +1516,15 @@
 
             
 
+            
+
              (allow or deny) as the specified rule and, if found, removes them.</para
           >
         </summary>
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1307,8 +1537,12 @@
 
           
 
+          
+
            that specifies the user and <see
            cref="T:System.Security.AccessControl.AccessControlType" />
+
+          
 
           
 
@@ -1350,8 +1584,12 @@
 
             
 
+            
+
              in all details, including flags. Other rules with the same user and <see
              cref="T:System.Security.AccessControl.AccessControlType" />
+
+            
 
             
 
@@ -1363,6 +1601,8 @@
             <para
               >A rule represents one or more underlying access control entries (ACE), and these entries are split or combined as necessary when you modify the access security rules for a user. Thus, a rule might no longer exist in the specific form it had when it was added, and in that case the <see
                cref="M:System.Security.AccessControl.RegistrySecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.RegistryAccessRule)" />
+
+              
 
               
 
@@ -1383,8 +1623,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.AccessControl.RegistryAccessRule" />
+
+          
 
           
 
@@ -1426,8 +1670,12 @@
 
             
 
+            
+
              is searched for an audit rule that has the same user as <paramref
              name="rule" />
+
+            
 
             
 
@@ -1440,8 +1688,12 @@
 
             
 
+            
+
             . If no compatible rule is found, no action is taken, and the method returns false. If a rule with compatible flags is found, the rights specified in <paramref
              name="rule" />
+
+            
 
             
 
@@ -1454,8 +1706,12 @@
 
             
 
+            
+
              specifies rights not contained in the compatible rule, no action is taken with respect to those rights. If all rights are removed from the compatible rule, the entire rule is removed from the current <see
              cref="T:System.Security.AccessControl.RegistrySecurity" />
+
+            
 
             
 
@@ -1479,8 +1735,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.AccessControl.RegistryAuditRule" />
+
+          
 
           
 
@@ -1522,6 +1782,8 @@
 
             
 
+            
+
              is searched for audit rules that have the same user as <paramref
              name="rule" />
 
@@ -1529,8 +1791,12 @@
 
             
 
+            
+
             . Any rights, inheritance flags, or propagation flags specified by <paramref
              name="rule" />
+
+            
 
             
 
@@ -1550,8 +1816,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.AccessControl.RegistryAuditRule" />
+
+          
 
           
 
@@ -1593,12 +1863,16 @@
 
             
 
+            
+
              in all details, including flags. Other audit rules for the same user are not affected.</para
           >
           <block subset="none" type="note">
             <para
               >A rule represents one or more underlying access control entries (ACE), and these entries are split or combined as necessary when you modify the audit security rules for a user. Thus, a rule might no longer exist in the specific form it had when it was added, and in that case the <see
                cref="M:System.Security.AccessControl.RegistrySecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.RegistryAuditRule)" />
+
+              
 
               
 
@@ -1619,8 +1893,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.AccessControl.RegistryAuditRule" />
+
+          
 
           
 
@@ -1662,6 +1940,8 @@
 
             
 
+            
+
              is added.</para
           >
         </remarks>
@@ -1670,6 +1950,8 @@
           <para
             >Removes all access control rules with the same user as the specified rule, regardless of <see
              cref="T:System.Security.AccessControl.AccessControlType" />
+
+            
 
             
 
@@ -1685,8 +1967,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.AccessControl.RegistryAccessRule" />
+
+          
 
           
 
@@ -1728,8 +2014,12 @@
 
             
 
+            
+
             , the effect of this method is to remove all <see
              cref="F:System.Security.AccessControl.AccessControlType.Allow" />
+
+            
 
             
 
@@ -1742,8 +2032,12 @@
 
             
 
+            
+
             , all <see
              cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+
+            
 
             
 
@@ -1759,8 +2053,12 @@
 
             
 
+            
+
              match the specified rule, <paramref
              name="rule" />
+
+            
 
             
 
@@ -1779,11 +2077,15 @@
 
             
 
+            
+
              (allow or deny) as the specified rule, and then adds the specified rule.</para
           >
         </summary>
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1796,8 +2098,12 @@
 
           
 
+          
+
            to add. The user and <see
            cref="T:System.Security.AccessControl.AccessControlType" />
+
+          
 
           
 
@@ -1839,6 +2145,8 @@
 
             
 
+            
+
              is added.</para
           >
         </remarks>
@@ -1847,6 +2155,8 @@
           <para
             >Removes all audit rules with the same user as the specified rule, regardless of the <see
              cref="T:System.Security.AccessControl.AuditFlags" />
+
+            
 
             
 
@@ -1862,8 +2172,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.AccessControl.RegistryAuditRule" />
+
+          
 
           
 

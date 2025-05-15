@@ -24,6 +24,8 @@
 
         
 
+        
+
          with an associated name.</para
       >
     </remarks>
@@ -45,6 +47,8 @@
           <para
             >When called in a derived class, initializes a new instance of the <see
              cref="T:System.Web.Services.Description.NamedItem" />
+
+            
 
             
 

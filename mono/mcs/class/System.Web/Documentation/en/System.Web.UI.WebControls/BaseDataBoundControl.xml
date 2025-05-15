@@ -32,11 +32,15 @@
 
         
 
+        
+
          control class, which defines the base data-bound control functionality. </para
       >
       <para
         >You can use the data-bound controls that are provided with ASP.NET, including <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 
@@ -49,8 +53,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Web.UI.WebControls.TreeView" />
+
+        
 
         
 
@@ -63,8 +71,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.WebControls.HierarchicalDataBoundControl" />
+
+        
 
         
 
@@ -80,8 +92,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.WebControls.DataBoundControl" />
+
+        
 
         
 
@@ -94,8 +110,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Web.UI.WebControls.Repeater" />
+
+        
 
         
 
@@ -108,10 +128,14 @@
 
         
 
+        
+
          controls. For more information about data binding, see <format
          type="text/html">
           <a href="f9219396-a0fa-481f-894d-e3d9c67d64f2">Accessing Data with ASP.NET</a>
         </format>
+
+        
 
         
 
@@ -142,6 +166,8 @@
 
             
 
+            
+
              class is abstract, you cannot create a <see
              cref="T:System.Web.UI.WebControls.BaseDataBoundControl" />
 
@@ -149,8 +175,12 @@
 
             
 
+            
+
              object directly. This constructor is commonly called by the constructor of a derived class to initialize the properties defined in the <see
              cref="T:System.Web.UI.WebControls.BaseDataBoundControl" />
+
+            
 
             
 
@@ -164,6 +194,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.BaseDataBoundControl" />
+
+            
 
             
 
@@ -196,6 +228,8 @@
 
             
 
+            
+
              method sets the initialized state of the data-bound control. The method is called by the <see
              cref="T:System.Web.UI.WebControls.DataBoundControl" />
 
@@ -203,8 +237,12 @@
 
             
 
+            
+
              class in its <see
              cref="M:System.Web.UI.WebControls.DataBoundControl.OnLoad(System.EventArgs)" />
+
+            
 
             
 
@@ -241,8 +279,12 @@
 
             
 
+            
+
              class overrides the <see
              cref="M:System.Web.UI.WebControls.BaseDataBoundControl.DataBind" />
+
+            
 
             
 
@@ -255,6 +297,8 @@
 
             
 
+            
+
              property takes precedence. If <see
              cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSourceID" />
 
@@ -262,8 +306,12 @@
 
             
 
+            
+
              is not set, the object identified by the <see
              cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" />
+
+            
 
             
 
@@ -279,8 +327,12 @@
 
             
 
+            
+
             . Data-bound controls derived from the <see
              cref="T:System.Web.UI.WebControls.DataBoundControl" />
+
+            
 
             
 
@@ -293,8 +345,12 @@
 
             
 
+            
+
              classes should override the PerformDataBinding method instead of the <see
              cref="M:System.Web.UI.WebControls.BaseDataBoundControl.DataBind" />
+
+            
 
             
 
@@ -307,6 +363,8 @@
 
             
 
+            
+
              is overridden, the <see
              cref="M:System.Web.UI.Control.OnDataBinding(System.EventArgs)" />
 
@@ -314,8 +372,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.UI.WebControls.BaseDataBoundControl.OnDataBound(System.EventArgs)" />
+
+            
 
             
 
@@ -349,6 +411,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -399,8 +463,12 @@
 
             
 
+            
+
              property, the <see
              cref="M:System.Web.UI.WebControls.BaseDataBoundControl.ValidateDataSource(System.Object)" />
+
+            
 
             
 
@@ -413,8 +481,12 @@
 
             
 
+            
+
              method is called to set the <see
              cref="P:System.Web.UI.WebControls.BaseDataBoundControl.RequiresDataBinding" />
+
+            
 
             
 
@@ -430,10 +502,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -478,8 +554,12 @@
 
             
 
+            
+
              method is called or <see
              cref="M:System.Web.UI.WebControls.BaseDataBoundControl.OnPagePreLoad(System.Object,System.EventArgs)" />
+
+            
 
             
 
@@ -492,6 +572,8 @@
 
             
 
+            
+
              property, the <see
              cref="M:System.Web.UI.WebControls.BaseDataBoundControl.OnDataPropertyChanged" />
 
@@ -499,8 +581,12 @@
 
             
 
+            
+
              method is called, which sets the <see
              cref="P:System.Web.UI.WebControls.BaseDataBoundControl.RequiresDataBinding" />
+
+            
 
             
 
@@ -516,10 +602,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -556,6 +646,8 @@
 
             
 
+            
+
              method is called during the <see
              cref="M:System.Web.UI.WebControls.BaseDataBoundControl.OnPreRender(System.EventArgs)" />
 
@@ -563,8 +655,12 @@
 
             
 
+            
+
              method, to call the <see
              cref="M:System.Web.UI.WebControls.BaseDataBoundControl.DataBind" />
+
+            
 
             
 
@@ -580,6 +676,8 @@
 
             
 
+            
+
              (from which classes such as <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
 
@@ -587,8 +685,12 @@
 
             
 
+            
+
              are derived) and <see
              cref="T:System.Web.UI.WebControls.Repeater" />
+
+            
 
             
 
@@ -607,8 +709,12 @@
 
             
 
+            
+
              method if the <see
              cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSourceID" />
+
+            
 
             
 
@@ -641,8 +747,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.UI.WebControls.BaseDataBoundControl.OnPagePreLoad(System.Object,System.EventArgs)" />
+
+            
 
             
 
@@ -655,8 +765,12 @@
 
             
 
+            
+
              property to true. The <see
              cref="M:System.Web.UI.WebControls.BaseDataBoundControl.ConfirmInitState" />
+
+            
 
             
 
@@ -669,6 +783,8 @@
 
             
 
+            
+
              method, while <see
              cref="M:System.Web.UI.WebControls.BaseDataBoundControl.OnPagePreLoad(System.Object,System.EventArgs)" />
 
@@ -676,8 +792,12 @@
 
             
 
+            
+
              is called when the <see
              cref="E:System.Web.UI.Page.PreLoad" />
+
+            
 
             
 
@@ -714,8 +834,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.UI.WebControls.DetailsView" />
+
+            
 
             
 
@@ -728,8 +852,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Web.UI.WebControls.Menu" />
+
+            
 
             
 
@@ -742,6 +870,8 @@
 
             
 
+            
+
              property to determine whether the data-bound control is bound to an ASP.NET 2.0 data source control, such as an <see
              cref="T:System.Web.UI.WebControls.ObjectDataSource" />
 
@@ -749,8 +879,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -764,6 +898,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSourceID" />
+
+            
 
             
 
@@ -800,8 +936,12 @@
 
               
 
+              
+
                method is sealed on all controls derived from <see
                cref="T:System.Web.UI.WebControls.BaseDataBoundControl" />
+
+              
 
               
 
@@ -814,8 +954,12 @@
 
               
 
+              
+
                method to bind data. If <see
                cref="M:System.Web.UI.WebControls.BaseDataBoundControl.DataBind" />
+
+              
 
               
 
@@ -828,8 +972,12 @@
 
               
 
+              
+
                and <see
                cref="M:System.Web.UI.WebControls.BaseDataBoundControl.OnDataBound(System.EventArgs)" />
+
+              
 
               
 
@@ -848,11 +996,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.BaseDataBoundControl.OnDataBound(System.EventArgs)" />
+
+            
 
             
 
@@ -871,6 +1023,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -881,8 +1035,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -914,8 +1072,12 @@
 
             
 
+            
+
              method is called when the <see
              cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSource" />
+
+            
 
             
 
@@ -928,8 +1090,12 @@
 
             
 
+            
+
             , or DataMember property value changes any time after the page's <see
              cref="E:System.Web.UI.Control.PreRender" />
+
+            
 
             
 
@@ -970,8 +1136,12 @@
 
             
 
+            
+
              method first calls the base class <see
              cref="M:System.Web.UI.Control.OnInit(System.EventArgs)" />
+
+            
 
             
 
@@ -984,8 +1154,12 @@
 
             
 
+            
+
              method to handle the <see
              cref="E:System.Web.UI.Page.PreLoad" />
+
+            
 
             
 
@@ -998,8 +1172,12 @@
 
             
 
+            
+
              method sets the <see
              cref="P:System.Web.UI.WebControls.BaseDataBoundControl.RequiresDataBinding" />
+
+            
 
             
 
@@ -1018,6 +1196,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1028,8 +1208,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1064,6 +1248,8 @@
 
             
 
+            
+
              event handler is used to control when data binding occurs within the life cycle of the page. It does this by setting the internal initialized state of the data-bound control. Because the control's initialized state is set during the <see
              cref="E:System.Web.UI.Page.PreLoad" />
 
@@ -1071,8 +1257,12 @@
 
             
 
+            
+
              phase of the page's lifecycle, the <see
              cref="M:System.Web.UI.WebControls.BaseDataBoundControl.OnDataPropertyChanged" />
+
+            
 
             
 
@@ -1092,8 +1282,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Page" />
+
+          
 
           
 
@@ -1108,8 +1302,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1145,8 +1343,12 @@
 
             
 
+            
+
              class overrides the <see
              cref="M:System.Web.UI.Control.OnPreRender(System.EventArgs)" />
+
+            
 
             
 
@@ -1159,8 +1361,12 @@
 
             
 
+            
+
              before calling the base class <see
              cref="M:System.Web.UI.Control.OnPreRender(System.EventArgs)" />
+
+            
 
             
 
@@ -1179,6 +1385,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1189,8 +1397,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1241,8 +1453,12 @@
 
             
 
+            
+
              property to true when the data-bound control has already begun to render its output to the page, the current HTTP request is not a callback, and you are using the <see
              cref="P:System.Web.UI.WebControls.BaseDataBoundControl.DataSourceID" />
+
+            
 
             
 
@@ -1255,8 +1471,12 @@
 
             
 
+            
+
              method is called immediately. In this case, the <see
              cref="P:System.Web.UI.WebControls.BaseDataBoundControl.RequiresDataBinding" />
+
+            
 
             
 
@@ -1270,6 +1490,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="M:System.Web.UI.WebControls.BaseDataBoundControl.DataBind" />
+
+            
 
             
 
@@ -1309,8 +1531,12 @@
 
           
 
+          
+
           The object to verify. Typically an instance of <see
            cref="T:System.Collections.IEnumerable" />
+
+          
 
           
 
@@ -1323,6 +1549,8 @@
 
           
 
+          
+
           , <see
            cref="T:System.Web.UI.IDataSource" />
 
@@ -1330,8 +1558,12 @@
 
           
 
+          
+
           , or <see
            cref="T:System.Web.UI.IHierarchicalDataSource" />
+
+          
 
           
 

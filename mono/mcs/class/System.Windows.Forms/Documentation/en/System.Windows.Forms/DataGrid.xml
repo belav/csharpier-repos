@@ -51,11 +51,15 @@
 
         
 
+        
+
          displays Web-like links to child tables. You can click on a link to navigate to the child table. When a child table is displayed, a back button appears in the caption that can be clicked to navigate back to the parent table. The data from the parent rows is displayed below the caption and above the column headers. You can hide the parent row information by clicking the button to the right of the back button.</para
       >
       <para
         >To display a table in the <see
          cref="T:System.Windows.Forms.DataGrid" />
+
+        
 
         
 
@@ -68,6 +72,8 @@
 
         
 
+        
+
          method to set the <see
          cref="P:System.Windows.Forms.DataGrid.DataSource" />
 
@@ -75,8 +81,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.DataGrid.DataMember" />
+
+        
 
         
 
@@ -121,6 +131,8 @@
 
             
 
+            
+
              interface </para
           >
         </item>
@@ -128,6 +140,8 @@
           <para
             >Any component that implements the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -145,12 +159,16 @@
 
         
 
+        
+
          class, see <format
          type="text/html">
           <a href="6D4C4B69-8919-4224-8A65-6CCA1C61B48F"
             >[&lt;topic://cpconCreatingUsingDataSets&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -166,8 +184,12 @@
 
         
 
+        
+
          as the data source and setting the <see
          cref="P:System.Data.DataView.AllowNew" />
+
+        
 
         
 
@@ -183,8 +205,12 @@
 
         
 
+        
+
          objects. For each table in a data source, a <see
          cref="T:System.Windows.Forms.BindingManagerBase" />
+
+        
 
         
 
@@ -197,6 +223,8 @@
 
         
 
+        
+
         . For example, you can determine the number of rows contained by a data source by returning the associated <see
          cref="T:System.Windows.Forms.BindingManagerBase" />
 
@@ -204,8 +232,12 @@
 
         
 
+        
+
          object's <see
          cref="P:System.Windows.Forms.BindingManagerBase.Count" />
+
+        
 
         
 
@@ -221,8 +253,12 @@
 
         
 
+        
+
          in a <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -235,8 +271,12 @@
 
         
 
+        
+
          and <see
          cref="E:System.Data.DataTable.RowChanging" />
+
+        
 
         
 
@@ -253,8 +293,12 @@
 
           
 
+          
+
           ) and the rows can be sorted by column, the <see
            cref="P:System.Windows.Forms.DataGridCell.RowNumber" />
+
+          
 
           
 
@@ -267,8 +311,12 @@
 
           
 
+          
+
            property values cannot be guaranteed to correspond to <see
            cref="T:System.Data.DataRow" />
+
+          
 
           
 
@@ -281,6 +329,8 @@
 
           
 
+          
+
            indexes in a <see
            cref="T:System.Data.DataTable" />
 
@@ -288,8 +338,12 @@
 
           
 
+          
+
           . Therefore you should avoid using those properties in the <see
            cref="E:System.Windows.Forms.Control.Validating" />
+
+          
 
           
 
@@ -306,8 +360,12 @@
 
         
 
+        
+
          property. Change the value of any cell by using the <see
          cref="P:System.Windows.Forms.DataGrid.Item(System.Int32,System.Int32)" />
+
+        
 
         
 
@@ -320,8 +378,12 @@
 
         
 
+        
+
         . Monitor the <see
          cref="E:System.Windows.Forms.DataGrid.CurrentCellChanged" />
+
+        
 
         
 
@@ -337,8 +399,12 @@
 
         
 
+        
+
          method in the <see
          cref="E:System.Windows.Forms.Control.MouseDown" />
+
+        
 
         
 
@@ -351,8 +417,12 @@
 
         
 
+        
+
          method returns a <see
          cref="T:System.Windows.Forms.DataGrid.HitTestInfo" />
+
+        
 
         
 
@@ -368,6 +438,8 @@
 
         
 
+        
+
         , <see
          cref="P:System.Windows.Forms.DataGrid.CaptionBackColor" />
 
@@ -375,8 +447,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Windows.Forms.DataGrid.CaptionFont" />
+
+        
 
         
 
@@ -392,8 +468,12 @@
 
         
 
+        
+
          objects and adding them to the <see
          cref="T:System.Windows.Forms.GridTableStylesCollection" />
+
+        
 
         
 
@@ -406,8 +486,12 @@
 
         
 
+        
+
          property. For example, if the <see
          cref="P:System.Windows.Forms.DataGrid.DataSource" />
+
+        
 
         
 
@@ -420,8 +504,12 @@
 
         
 
+        
+
          containing three <see
          cref="T:System.Data.DataTable" />
+
+        
 
         
 
@@ -434,8 +522,12 @@
 
         
 
+        
+
          objects to the collection, one for each table. To synchronize each <see
          cref="T:System.Windows.Forms.DataGridTableStyle" />
+
+        
 
         
 
@@ -448,8 +540,12 @@
 
         
 
+        
+
         , set the <see
          cref="P:System.Windows.Forms.DataGridTableStyle.MappingName" />
+
+        
 
         
 
@@ -462,8 +558,12 @@
 
         
 
+        
+
          to the <see
          cref="P:System.Data.DataTable.TableName" />
+
+        
 
         
 
@@ -476,8 +576,12 @@
 
         
 
+        
+
         . For more information about binding to an array of objects, see the <see
          cref="P:System.Windows.Forms.DataGridTableStyle.MappingName" />
+
+        
 
         
 
@@ -493,8 +597,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Windows.Forms.DataGridBoolColumn" />
+
+        
 
         
 
@@ -507,8 +615,12 @@
 
         
 
+        
+
          accessed through the <see
          cref="P:System.Windows.Forms.DataGrid.TableStyles" />
+
+        
 
         
 
@@ -521,8 +633,12 @@
 
         
 
+        
+
         . For each column style, set the <see
          cref="P:System.Windows.Forms.DataGridColumnStyle.MappingName" />
+
+        
 
         
 
@@ -535,6 +651,8 @@
 
         
 
+        
+
          of a column that you want to show in the grid. To hide a column, set its <see
          cref="P:System.Windows.Forms.DataGridColumnStyle.MappingName" />
 
@@ -542,8 +660,12 @@
 
         
 
+        
+
          to something other than a valid <see
          cref="P:System.Data.DataColumn.ColumnName" />
+
+        
 
         
 
@@ -559,8 +681,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.DataGridTextBoxColumn" />
+
+        
 
         
 
@@ -575,10 +701,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="98b374e3-0cc2-4c78-ab44-efb671d71984">Custom DateTime Format Strings</a>
         </format>
+
+        
 
         
 
@@ -594,8 +724,12 @@
 
         
 
+        
+
          to a strongly typed array of objects, the object type must contain public properties. To create a <see
          cref="T:System.Windows.Forms.DataGridTableStyle" />
+
+        
 
         
 
@@ -608,8 +742,12 @@
 
         
 
+        
+
          property to <paramref
          name="typename[]" />
+
+        
 
         
 
@@ -622,6 +760,8 @@
 
         
 
+        
+
          is replaced by the name of the object type. Also note that the <see
          cref="P:System.Windows.Forms.DataGridTableStyle.MappingName" />
 
@@ -629,8 +769,12 @@
 
         
 
+        
+
          property is case-sensitive; the type name must be matched exactly. See the <see
          cref="P:System.Windows.Forms.DataGridTableStyle.MappingName" />
+
+        
 
         
 
@@ -646,8 +790,12 @@
 
         
 
+        
+
          to an <see
          cref="T:System.Collections.ArrayList" />
+
+        
 
         
 
@@ -660,8 +808,12 @@
 
         
 
+        
+
          is that it can contain objects of multiple types, but the <see
          cref="T:System.Windows.Forms.DataGrid" />
+
+        
 
         
 
@@ -674,8 +826,12 @@
 
         
 
+        
+
         , the second item could be a <see
          cref="T:System.Windows.Forms.TextBox" />
+
+        
 
         
 
@@ -688,8 +844,12 @@
 
         
 
+        
+
         ). If, on the other hand, the first item is a <see
          cref="T:System.Windows.Forms.TextBox" />
+
+        
 
         
 
@@ -702,8 +862,12 @@
 
         
 
+        
+
         . Further, the <see
          cref="T:System.Collections.ArrayList" />
+
+        
 
         
 
@@ -716,8 +880,12 @@
 
         
 
+        
+
          will result in an empty grid. In addition, the objects in the <see
          cref="T:System.Collections.ArrayList" />
+
+        
 
         
 
@@ -730,6 +898,8 @@
 
         
 
+        
+
         , set the <see
          cref="P:System.Windows.Forms.DataGridTableStyle.MappingName" />
 
@@ -737,8 +907,12 @@
 
         
 
+        
+
          of the <see
          cref="T:System.Windows.Forms.DataGridTableStyle" />
+
+        
 
         
 
@@ -754,6 +928,8 @@
 
         
 
+        
+
         , you can set color and caption attributes that override the settings for the <see
          cref="T:System.Windows.Forms.DataGrid" />
 
@@ -761,8 +937,12 @@
 
         
 
+        
+
          control. However, if those properties are not set, the settings for the control are used by default. The following properties can be overridden by <see
          cref="T:System.Windows.Forms.DataGridTableStyle" />
+
+        
 
         
 
@@ -870,8 +1050,12 @@
 
         
 
+        
+
          objects to the <see
          cref="T:System.Windows.Forms.GridColumnStylesCollection" />
+
+        
 
         
 
@@ -884,8 +1068,12 @@
 
         
 
+        
+
          property of each <see
          cref="T:System.Windows.Forms.DataGridTableStyle" />
+
+        
 
         
 
@@ -898,8 +1086,12 @@
 
         
 
+        
+
          with a <see
          cref="T:System.Data.DataColumn" />
+
+        
 
         
 
@@ -912,8 +1104,12 @@
 
         
 
+        
+
         , set the <see
          cref="P:System.Windows.Forms.DataGridColumnStyle.MappingName" />
+
+        
 
         
 
@@ -926,6 +1122,8 @@
 
         
 
+        
+
          of a <see
          cref="T:System.Data.DataColumn" />
 
@@ -933,8 +1131,12 @@
 
         
 
+        
+
         . When constructing a <see
          cref="T:System.Windows.Forms.DataGridColumnStyle" />
+
+        
 
         
 
@@ -951,8 +1153,12 @@
 
           
 
+          
+
            objects and add them to the <see
            cref="T:System.Windows.Forms.GridColumnStylesCollection" />
+
+          
 
           
 
@@ -965,8 +1171,12 @@
 
           
 
+          
+
            objects to the <see
            cref="T:System.Windows.Forms.GridTableStylesCollection" />
+
+          
 
           
 
@@ -979,8 +1189,12 @@
 
           
 
+          
+
            with a valid <see
            cref="P:System.Windows.Forms.DataGridTableStyle.MappingName" />
+
+          
 
           
 
@@ -993,8 +1207,12 @@
 
           
 
+          
+
            objects are automatically generated for you. Consequently, an exception will be thrown if you try to add new <see
            cref="T:System.Windows.Forms.DataGridColumnStyle" />
+
+          
 
           
 
@@ -1007,8 +1225,12 @@
 
           
 
+          
+
            values to the <see
            cref="T:System.Windows.Forms.GridColumnStylesCollection" />
+
+          
 
           
 
@@ -1026,8 +1248,12 @@
 
           
 
+          
+
            control replaces and adds functionality to the <see
            cref="T:System.Windows.Forms.DataGrid" />
+
+          
 
           
 
@@ -1040,12 +1266,16 @@
 
           
 
+          
+
            control is retained for both backward compatibility and future use, if you choose. For more information, see <format
            type="text/html">
             <a href="d412c786-140e-4210-8a56-a68467530a55"
               >Differences Between the Windows Forms DataGridView and DataGrid Controls</a
             >
           </format>
+
+          
 
           
 
@@ -1065,6 +1295,8 @@
 
         
 
+        
+
          control replaces and adds functionality to the <see
          cref="T:System.Windows.Forms.DataGrid" />
 
@@ -1072,8 +1304,12 @@
 
         
 
+        
+
          control; however, the <see
          cref="T:System.Windows.Forms.DataGrid" />
+
+        
 
         
 
@@ -1099,8 +1335,12 @@
 
             
 
+            
+
              control, set the <see
              cref="P:System.Windows.Forms.DataGrid.DataSource" />
+
+            
 
             
 
@@ -1113,6 +1353,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.Data.DataSet" />
 
@@ -1120,8 +1362,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Data.DataViewManager" />
+
+            
 
             
 
@@ -1135,6 +1381,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -1193,6 +1441,8 @@
 
             
 
+            
+
              property is set to false, then no links to child tables are shown.</para
           >
           <para
@@ -1207,6 +1457,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1215,6 +1467,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.DataGrid.AllowNavigation" />
+
+            
 
             
 
@@ -1252,8 +1506,12 @@
 
             
 
+            
+
              property if there is a <see
              cref="T:System.Windows.Forms.DataGridTableStyle" />
+
+            
 
             
 
@@ -1270,8 +1528,12 @@
 
             
 
+            
+
             . See <see
              cref="P:System.Data.DataColumn.Expression" />
+
+            
 
             
 
@@ -1287,8 +1549,12 @@
 
             
 
+            
+
              is bound to a <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -1301,8 +1567,12 @@
 
             
 
+            
+
              class's <see
              cref="P:System.Data.DataView.Sort" />
+
+            
 
             
 
@@ -1315,8 +1585,12 @@
 
             
 
+            
+
              is bound to a <see
              cref="T:System.Data.DataViewManager" />
+
+            
 
             
 
@@ -1329,6 +1603,8 @@
 
             
 
+            
+
              can have a custom sort by setting the <see
              cref="P:System.Data.DataViewManager.DataViewSettings" />
 
@@ -1336,8 +1612,12 @@
 
             
 
+            
+
              class's <see
              cref="P:System.Data.DataViewSetting.Sort" />
+
+            
 
             
 
@@ -1377,8 +1657,12 @@
 
             
 
+            
+
              and the <see
              cref="P:System.Windows.Forms.DataGrid.AlternatingBackColor" />
+
+            
 
             
 
@@ -1391,8 +1675,12 @@
 
             
 
+            
+
              property affects only even-numbered rows, while setting the <see
              cref="P:System.Windows.Forms.DataGrid.AlternatingBackColor" />
+
+            
 
             
 
@@ -1453,8 +1741,12 @@
 
             
 
+            
+
              property determines the color of rows in the grid, the <see
              cref="P:System.Windows.Forms.DataGrid.BackgroundColor" />
+
+            
 
             
 
@@ -1470,8 +1762,12 @@
 
             
 
+            
+
              and the <see
              cref="P:System.Windows.Forms.DataGrid.AlternatingBackColor" />
+
+            
 
             
 
@@ -1484,8 +1780,12 @@
 
             
 
+            
+
              property affects only even-numbered rows, while setting the <see
              cref="P:System.Windows.Forms.DataGrid.AlternatingBackColor" />
+
+            
 
             
 
@@ -1525,8 +1825,12 @@
 
             
 
+            
+
              determines the color of the nonrow area of the grid, which is only visible when no table is displayed by the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -1566,6 +1870,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1574,6 +1880,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.DataGrid.BackgroundColor" />
+
+            
 
             
 
@@ -1643,8 +1951,12 @@
 
             
 
+            
+
              property is not meaningful for this control, although you can change its value and handle the <see
              cref="E:System.Windows.Forms.DataGrid.BackgroundImageChanged" />
+
+            
 
             
 
@@ -1658,6 +1970,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.DataGrid.BackgroundImage" />
+
+            
 
             
 
@@ -1732,8 +2046,12 @@
 
             
 
+            
+
              property is not meaningful for this control, although you can change its value and handle the <see
              cref="E:System.Windows.Forms.DataGrid.BackgroundImageLayoutChanged" />
+
+            
 
             
 
@@ -1747,6 +2065,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.DataGrid.BackgroundImageLayout" />
+
+            
 
             
 
@@ -1781,6 +2101,8 @@
 
             
 
+            
+
              method will return false.</para
           >
         </remarks>
@@ -1799,8 +2121,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DataGridColumnStyle" />
+
+          
 
           
 
@@ -1810,6 +2136,8 @@
         >
         <param name="rowNumber">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1841,6 +2169,8 @@
 
             
 
+            
+
              method ends the initialization. Using the <see
              cref="M:System.Windows.Forms.DataGrid.BeginInit" />
 
@@ -1848,8 +2178,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataGrid.EndInit" />
+
+            
 
             
 
@@ -1863,6 +2197,8 @@
           <para
             >Begins the initialization of a <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -1923,6 +2259,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.DataGrid.BorderStyle" />
+
+            
 
             
 
@@ -1999,6 +2337,8 @@
           <para
             >A <see
              cref="T:System.Drawing.Font" />
+
+            
 
             
 
@@ -2089,8 +2429,12 @@
 
             
 
+            
+
              is false, the <ui
             >Back</ui>
+
+            
 
             
 
@@ -2103,8 +2447,12 @@
 
             
 
+            
+
              button, and caption will not be seen. Because navigation is limited, links to child tables will also not be visible and <see
              cref="P:System.Windows.Forms.DataGrid.AllowNavigation" />
+
+            
 
             
 
@@ -2144,6 +2492,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2152,6 +2502,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.DataGrid.CaptionVisible" />
+
+            
 
             
 
@@ -2186,6 +2538,8 @@
 
             
 
+            
+
              method to determine if a row is expanded.</para
           >
         </remarks>
@@ -2195,6 +2549,8 @@
         </summary>
         <param name="row">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2259,8 +2615,12 @@
 
             
 
+            
+
              method enables the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -2279,6 +2639,8 @@
 
             
 
+            
+
              control when the user begins to edit the column at the specified location.</para
           >
         </summary>
@@ -2289,8 +2651,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -2327,8 +2693,12 @@
 
             
 
+            
+
              method enables the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -2347,6 +2717,8 @@
 
             
 
+            
+
              control when the user begins to edit a column using the specified control.</para
           >
         </summary>
@@ -2357,8 +2729,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -2389,11 +2765,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >Only the following properties of the <see
              cref="T:System.Windows.Forms.AccessibleObject" />
+
+            
 
             
 
@@ -2426,6 +2806,8 @@
 
             
 
+            
+
              itself.</para
           >
         </remarks>
@@ -2438,6 +2820,8 @@
           <para
             >The <see
              cref="T:System.Windows.Forms.Control.ControlAccessibleObject" />
+
+            
 
             
 
@@ -2476,8 +2860,12 @@
 
             
 
+            
+
              with the specified <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -2496,6 +2884,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -2506,8 +2896,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -2546,8 +2940,12 @@
 
             
 
+            
+
              using the specified <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -2566,11 +2964,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="prop">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2583,10 +2985,14 @@
 
           
 
+          
+
            to use for creating the grid column style. </param
         >
         <param name="isDefault">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2629,6 +3035,8 @@
 
             
 
+            
+
              property will cause the grid to scroll and show the cell if it is not already visible.</para
           >
         </remarks>
@@ -2659,6 +3067,8 @@
 
             
 
+            
+
              property.</para
           >
           <para
@@ -2673,6 +3083,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2681,6 +3093,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.DataGrid.CurrentCell" />
+
+            
 
             
 
@@ -2721,11 +3135,15 @@
 
             
 
+            
+
              property to a value other than its current value scrolls the control so that the specified row is in view.</para
           >
           <para
             >The <see
              cref="P:System.Windows.Forms.DataGrid.CurrentRowIndex" />
+
+            
 
             
 
@@ -2738,8 +3156,12 @@
 
             
 
+            
+
              will cause the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -2814,8 +3236,12 @@
 
             
 
+            
+
              property is not meaningful for this control, although you can change its value and handle the <see
              cref="E:System.Windows.Forms.DataGrid.CursorChanged" />
+
+            
 
             
 
@@ -2829,6 +3255,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.DataGrid.Cursor" />
+
+            
 
             
 
@@ -2869,8 +3297,12 @@
 
             
 
+            
+
              contains multiple sources of data, you should set the <see
              cref="P:System.Windows.Forms.DataGrid.DataMember" />
+
+            
 
             
 
@@ -2883,6 +3315,8 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Data.DataSet" />
 
@@ -2890,8 +3324,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Data.DataViewManager" />
+
+            
 
             
 
@@ -2904,8 +3342,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Data.DataViewManager" />
+
+            
 
             
 
@@ -2918,8 +3360,12 @@
 
             
 
+            
+
             , you should set the <see
              cref="P:System.Windows.Forms.DataGrid.DataMember" />
+
+            
 
             
 
@@ -2932,8 +3378,12 @@
 
             
 
+            
+
              of that <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -2949,8 +3399,12 @@
 
             
 
+            
+
              is set to a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2963,8 +3417,12 @@
 
             
 
+            
+
              objects, parent tables will appear with a plus sign (+) in each row header. Clicking the plus sign causes a node to appear that contains links to child tables. For example, if a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2977,8 +3435,12 @@
 
             
 
+            
+
              objects named Customers and Orders, setting the <see
              cref="P:System.Windows.Forms.DataGrid.DataMember" />
+
+            
 
             
 
@@ -2991,8 +3453,12 @@
 
             
 
+            
+
              to display a parent table with a plus sign visible on each row header. If the <see
              cref="P:System.Windows.Forms.DataGrid.DataMember" />
+
+            
 
             
 
@@ -3008,8 +3474,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -3022,8 +3492,12 @@
 
             
 
+            
+
             , collection, or array, setting the <see
              cref="P:System.Windows.Forms.DataGrid.DataMember" />
+
+            
 
             
 
@@ -3040,6 +3514,8 @@
 
               
 
+              
+
                method to reset the <see
                cref="P:System.Windows.Forms.DataGrid.DataSource" />
 
@@ -3047,8 +3523,12 @@
 
               
 
+              
+
                property. However, the <see
                cref="P:System.Windows.Forms.DataGrid.DataMember" />
+
+              
 
               
 
@@ -3068,8 +3548,12 @@
 
             
 
+            
+
              for which the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -3113,6 +3597,8 @@
 
             
 
+            
+
              method to set the <see
              cref="P:System.Windows.Forms.DataGrid.DataSource" />
 
@@ -3120,8 +3606,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.DataGrid.DataMember" />
+
+            
 
             
 
@@ -3164,6 +3654,8 @@
 
                 
 
+                
+
                  interface </para
               >
             </item>
@@ -3171,6 +3663,8 @@
               <para
                 >Any component that implements the <see
                  cref="T:System.Collections.IList" />
+
+                
 
                 
 
@@ -3188,11 +3682,15 @@
 
             
 
+            
+
              class overview for more information on data sources.</para
           >
           <para
             >If the <see
              cref="P:System.Windows.Forms.DataGrid.DataSource" />
+
+            
 
             
 
@@ -3205,8 +3703,12 @@
 
             
 
+            
+
              property a string that specifies the table to bind to. For example, if the <see
              cref="P:System.Windows.Forms.DataGrid.DataSource" />
+
+            
 
             
 
@@ -3219,8 +3721,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Data.DataViewManager" />
+
+            
 
             
 
@@ -3236,6 +3742,8 @@
 
             
 
+            
+
              to an object that does not implement the <see
              cref="T:System.Collections.IList" />
 
@@ -3243,8 +3751,12 @@
 
             
 
+            
+
              interface or an <see
              cref="T:System.ComponentModel.IListSource" />
+
+            
 
             
 
@@ -3260,8 +3772,12 @@
 
             
 
+            
+
              as the data source and setting the <see
              cref="M:System.Data.DataView.AddNew" />
+
+            
 
             
 
@@ -3277,8 +3793,12 @@
 
             
 
+            
+
              to a strongly typed array of objects, the object type must contain public properties. To create a <see
              cref="T:System.Windows.Forms.DataGridTableStyle" />
+
+            
 
             
 
@@ -3291,8 +3811,12 @@
 
             
 
+            
+
              property to <paramref
              name="typename" />
+
+            
 
             
 
@@ -3305,6 +3829,8 @@
 
             
 
+            
+
              is replaced by the name of the object type. Also note that the <see
              cref="P:System.Windows.Forms.DataGridTableStyle.MappingName" />
 
@@ -3312,8 +3838,12 @@
 
             
 
+            
+
              property is case-sensitive; the type name must be matched exactly. See the <see
              cref="P:System.Windows.Forms.DataGridTableStyle.MappingName" />
+
+            
 
             
 
@@ -3329,8 +3859,12 @@
 
             
 
+            
+
              to an <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -3343,8 +3877,12 @@
 
             
 
+            
+
              is that it can contain objects of multiple types, but the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -3357,8 +3895,12 @@
 
             
 
+            
+
             , the second item could be a <see
              cref="T:System.Windows.Forms.TextBox" />
+
+            
 
             
 
@@ -3371,8 +3913,12 @@
 
             
 
+            
+
             ). If, on the other hand, the first item is a <see
              cref="T:System.Windows.Forms.TextBox" />
+
+            
 
             
 
@@ -3385,8 +3931,12 @@
 
             
 
+            
+
             . Further, the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -3399,8 +3949,12 @@
 
             
 
+            
+
              will result in an empty grid. In addition, the objects in the <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -3413,6 +3967,8 @@
 
             
 
+            
+
             , set the <see
              cref="P:System.Windows.Forms.DataGridTableStyle.MappingName" />
 
@@ -3420,8 +3976,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Windows.Forms.DataGridTableStyle" />
+
+            
 
             
 
@@ -3457,8 +4017,12 @@
 
             
 
+            
+
              event occurs when the <see
              cref="P:System.Windows.Forms.DataGrid.DataMember" />
+
+            
 
             
 
@@ -3471,8 +4035,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -3492,6 +4060,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3500,6 +4070,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.DataGrid.DataSource" />
+
+            
 
             
 
@@ -3556,8 +4128,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -3570,8 +4146,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -3584,8 +4164,12 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -3604,11 +4188,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3647,6 +4235,8 @@
 
             
 
+            
+
              method returns false if the user is not editing (typing into) a cell.</para
           >
         </remarks>
@@ -3655,6 +4245,8 @@
           <para
             >Requests an end to an edit operation taking place on the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -3674,8 +4266,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridColumnStyle" />
+
+          
 
           
 
@@ -3690,10 +4286,14 @@
 
           
 
+          
+
           The number of the row to cease editing. </param
         >
         <param name="shouldAbort">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3725,6 +4325,8 @@
 
             
 
+            
+
              method starts the initialization. Using the <see
              cref="M:System.Windows.Forms.DataGrid.BeginInit" />
 
@@ -3732,8 +4334,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataGrid.EndInit" />
+
+            
 
             
 
@@ -3747,6 +4353,8 @@
           <para
             >Ends the initialization of a <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -3783,6 +4391,8 @@
 
           
 
+          
+
           The number of the row to expand. If set to -1, all rows are expanded. </param
         >
       </Docs>
@@ -3810,6 +4420,8 @@
           <para
             >If a particular column is not visible, set the <see
              cref="P:System.Windows.Forms.DataGrid.CurrentCell" />
+
+            
 
             
 
@@ -3873,6 +4485,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3881,6 +4495,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.DataGrid.FlatMode" />
+
+            
 
             
 
@@ -3912,6 +4528,8 @@
           <para
             >Gets or sets the foreground color (typically the color of the text) property of the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -3950,8 +4568,12 @@
 
             
 
+            
+
              of the cell specified by <see
              cref="T:System.Windows.Forms.DataGridCell" />
+
+            
 
             
 
@@ -3970,6 +4592,8 @@
 
             
 
+            
+
              that defines the current cell's corners.</para
           >
         </returns>
@@ -3980,8 +4604,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.DataGridCell" />
+
+          
 
           
 
@@ -4019,6 +4647,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4027,6 +4657,8 @@
           <para
             >Gets the <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -4045,6 +4677,8 @@
 
             
 
+            
+
              that defines the current cell's corners.</para
           >
         </returns>
@@ -4055,10 +4689,14 @@
 
           
 
+          
+
           The number of the cell's row. </param
         >
         <param name="col">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4093,6 +4731,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -4106,6 +4746,8 @@
 
             
 
+            
+
              that specifies the four corners of the selected cell.</para
           >
         </summary>
@@ -4114,6 +4756,8 @@
           <para
             >A <see
              cref="T:System.Drawing.Rectangle" />
+
+            
 
             
 
@@ -4177,8 +4821,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -4193,8 +4841,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ScrollEventArgs" />
+
+          
 
           
 
@@ -4224,6 +4876,8 @@
           <para
             >No grid line is displayed if the <see
              cref="P:System.Windows.Forms.DataGrid.GridLineStyle" />
+
+            
 
             
 
@@ -4295,8 +4949,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -4311,8 +4969,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ScrollEventArgs" />
+
+          
 
           
 
@@ -4366,8 +5028,12 @@
 
             
 
+            
+
             , or creating your own control incorporating the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -4431,8 +5097,12 @@
 
             
 
+            
+
             , in conjunction with the <see
              cref="M:System.Windows.Forms.DataGrid.HitTest(System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -4445,8 +5115,12 @@
 
             
 
+            
+
              control, is used to determine which part of a <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -4459,6 +5133,8 @@
 
             
 
+            
+
              contains the row, column, and part of the grid that was clicked. Additionally, the <see
              cref="P:System.Windows.Forms.DataGrid.HitTestInfo.Type" />
 
@@ -4466,8 +5142,12 @@
 
             
 
+            
+
              property returns a <see
              cref="T:System.Windows.Forms.DataGrid.HitTestType" />
+
+            
 
             
 
@@ -4483,8 +5163,12 @@
 
             
 
+            
+
              method takes an x and y argument supplied by the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -4497,8 +5181,12 @@
 
             
 
+            
+
             , <see
              cref="E:System.Windows.Forms.Control.DragEnter" />
+
+            
 
             
 
@@ -4511,8 +5199,12 @@
 
             
 
+            
+
             , <see
              cref="E:System.Windows.Forms.Control.MouseDown" />
+
+            
 
             
 
@@ -4525,6 +5217,8 @@
 
             
 
+            
+
             , <see
              cref="E:System.Windows.Forms.Control.MouseUp" />
 
@@ -4532,8 +5226,12 @@
 
             
 
+            
+
              and <see
              cref="E:System.Windows.Forms.Control.MouseWheel" />
+
+            
 
             
 
@@ -4552,6 +5250,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -4560,6 +5260,8 @@
           <para
             >A <see
              cref="T:System.Windows.Forms.DataGrid.HitTestInfo" />
+
+            
 
             
 
@@ -4575,8 +5277,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -4614,8 +5320,12 @@
 
             
 
+            
+
             , in conjunction with the <see
              cref="M:System.Windows.Forms.DataGrid.HitTest(System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -4628,8 +5338,12 @@
 
             
 
+            
+
              control, is used to determine which part of a <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -4642,6 +5356,8 @@
 
             
 
+            
+
              contains the row, column, and part of the grid that was clicked. Additionally, the <see
              cref="P:System.Windows.Forms.DataGrid.HitTestInfo.Type" />
 
@@ -4649,8 +5365,12 @@
 
             
 
+            
+
              property returns a <see
              cref="T:System.Windows.Forms.DataGrid.HitTestType" />
+
+            
 
             
 
@@ -4666,8 +5386,12 @@
 
             
 
+            
+
              method takes an x and y argument supplied by the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -4680,8 +5404,12 @@
 
             
 
+            
+
             , <see
              cref="E:System.Windows.Forms.Control.DragEnter" />
+
+            
 
             
 
@@ -4694,8 +5422,12 @@
 
             
 
+            
+
             , <see
              cref="E:System.Windows.Forms.Control.MouseDown" />
+
+            
 
             
 
@@ -4708,6 +5440,8 @@
 
             
 
+            
+
             , <see
              cref="E:System.Windows.Forms.Control.MouseUp" />
 
@@ -4715,8 +5449,12 @@
 
             
 
+            
+
              and <see
              cref="E:System.Windows.Forms.Control.MouseWheel" />
+
+            
 
             
 
@@ -4739,6 +5477,8 @@
 
             
 
+            
+
              that contains information about the clicked part of the grid.</para
           >
         </returns>
@@ -4749,10 +5489,14 @@
 
           
 
+          
+
           The horizontal position of the coordinate. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4814,6 +5558,8 @@
 
           
 
+          
+
           The number of the row in question. </param
         >
       </Docs>
@@ -4842,6 +5588,8 @@
 
             
 
+            
+
             , <see
              cref="M:System.Windows.Forms.DataGrid.UnSelect(System.Int32)" />
 
@@ -4849,8 +5597,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Windows.Forms.DataGrid.ResetSelection" />
+
+            
 
             
 
@@ -4869,6 +5621,8 @@
         </returns>
         <param name="row">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4948,8 +5702,12 @@
 
             
 
+            
+
             , or creating your own control incorporating the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -5032,8 +5790,12 @@
 
             
 
+            
+
              for this <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -5064,6 +5826,8 @@
 
             
 
+            
+
              event to reset individual column properties, such as width, as appropriate to the table.</para
           >
           <para
@@ -5073,6 +5837,8 @@
                 >[&lt;topic://cpconEventsOverview&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -5139,10 +5905,14 @@
 
           
 
+          
+
           The number of the row to navigate to. </param
         >
         <param name="relationName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5180,6 +5950,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5190,8 +5962,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5231,8 +6007,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -5247,8 +6027,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5289,11 +6073,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.DataGrid.OnBackColorChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -5312,6 +6100,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5322,8 +6112,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5361,6 +6155,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5371,8 +6167,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5413,11 +6213,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.DataGrid.OnBindingContextChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -5436,6 +6240,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5446,8 +6252,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5485,6 +6295,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5495,8 +6307,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5534,6 +6350,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5544,8 +6362,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5583,6 +6405,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5593,8 +6417,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5635,11 +6463,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.DataGrid.OnDataSourceChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -5658,6 +6490,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5668,8 +6502,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5704,6 +6542,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5714,8 +6554,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5753,6 +6597,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5763,8 +6609,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5802,11 +6652,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.DataGrid.OnFontChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -5825,6 +6679,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5835,8 +6691,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5877,11 +6737,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.DataGrid.OnForeColorChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -5900,6 +6764,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5910,8 +6776,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5952,11 +6822,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.DataGrid.OnHandleCreated(System.EventArgs)" />
+
+            
 
             
 
@@ -5975,6 +6849,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5985,8 +6861,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -6027,11 +6907,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.DataGrid.OnHandleDestroyed(System.EventArgs)" />
+
+            
 
             
 
@@ -6050,6 +6934,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6060,8 +6946,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -6102,11 +6992,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.DataGrid.OnKeyDown(System.Windows.Forms.KeyEventArgs)" />
+
+            
 
             
 
@@ -6125,11 +7019,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="ke">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6142,8 +7040,12 @@
 
           
 
+          
+
            that provides data about the <see
            cref="M:System.Windows.Forms.Control.OnKeyDown(System.Windows.Forms.KeyEventArgs)" />
+
+          
 
           
 
@@ -6184,11 +7086,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.DataGrid.OnKeyPress(System.Windows.Forms.KeyPressEventArgs)" />
+
+            
 
             
 
@@ -6207,11 +7113,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="kpe">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6224,8 +7134,12 @@
 
           
 
+          
+
            that contains data about the <see
            cref="M:System.Windows.Forms.Control.OnKeyPress(System.Windows.Forms.KeyPressEventArgs)" />
+
+          
 
           
 
@@ -6266,11 +7180,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.DataGrid.OnLayout(System.Windows.Forms.LayoutEventArgs)" />
+
+            
 
             
 
@@ -6289,6 +7207,8 @@
 
             
 
+            
+
              event, which repositions controls and updates scroll bars.</para
           >
         </summary>
@@ -6299,8 +7219,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.LayoutEventArgs" />
+
+          
 
           
 
@@ -6338,11 +7262,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.DataGrid.OnLeave(System.EventArgs)" />
+
+            
 
             
 
@@ -6361,6 +7289,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6371,8 +7301,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -6413,6 +7347,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -6421,6 +7357,8 @@
           <para
             >Raises the <see
              cref="E:System.Windows.Forms.Control.MouseDown" />
+
+            
 
             
 
@@ -6436,6 +7374,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
 
@@ -6443,8 +7383,12 @@
 
           
 
+          
+
            that contains data about the <see
            cref="M:System.Windows.Forms.Control.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
+
+          
 
           
 
@@ -6482,6 +7426,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -6490,6 +7436,8 @@
           <para
             >Creates the <see
              cref="E:System.Windows.Forms.Control.MouseLeave" />
+
+            
 
             
 
@@ -6505,6 +7453,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
 
@@ -6512,8 +7462,12 @@
 
           
 
+          
+
            that contains data about the <see
            cref="M:System.Windows.Forms.Control.OnMouseLeave(System.EventArgs)" />
+
+          
 
           
 
@@ -6554,6 +7508,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -6562,6 +7518,8 @@
           <para
             >Raises the <see
              cref="E:System.Windows.Forms.Control.MouseMove" />
+
+            
 
             
 
@@ -6577,6 +7535,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
 
@@ -6584,8 +7544,12 @@
 
           
 
+          
+
            that contains data about the <see
            cref="M:System.Windows.Forms.Control.OnMouseMove(System.Windows.Forms.MouseEventArgs)" />
+
+          
 
           
 
@@ -6626,6 +7590,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -6634,6 +7600,8 @@
           <para
             >Raises the <see
              cref="E:System.Windows.Forms.Control.MouseUp" />
+
+            
 
             
 
@@ -6649,6 +7617,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
 
@@ -6656,8 +7626,12 @@
 
           
 
+          
+
            that contains data about the <see
            cref="M:System.Windows.Forms.Control.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
+
+          
 
           
 
@@ -6698,6 +7672,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -6706,6 +7682,8 @@
           <para
             >Raises the <see
              cref="E:System.Windows.Forms.Control.MouseWheel" />
+
+            
 
             
 
@@ -6721,6 +7699,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
 
@@ -6728,8 +7708,12 @@
 
           
 
+          
+
            that contains data about the <see
            cref="M:System.Windows.Forms.Control.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
+
+          
 
           
 
@@ -6767,6 +7751,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6777,8 +7763,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.NavigateEventArgs" />
+
+          
 
           
 
@@ -6819,6 +7809,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -6827,6 +7819,8 @@
           <para
             >Raises the <see
              cref="E:System.Windows.Forms.Control.Paint" />
+
+            
 
             
 
@@ -6842,8 +7836,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.PaintEventArgs" />
+
+          
 
           
 
@@ -6880,6 +7878,8 @@
 
             
 
+            
+
              is a complex control, this override is implemented to have no action. Therefore, calling this method will have no effect.</para
           >
         </remarks>
@@ -6893,8 +7893,12 @@
 
             
 
+            
+
              to prevent painting the background of the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -6910,8 +7914,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.PaintEventArgs" />
+
+          
 
           
 
@@ -6952,11 +7960,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.DataGrid.OnParentRowsLabelStyleChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -6975,6 +7987,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6985,8 +7999,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -7024,6 +8042,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -7034,8 +8054,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -7076,11 +8100,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.DataGrid.OnReadOnlyChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -7099,6 +8127,8 @@
 
             
 
+            
+
              event </para
           >
         </summary>
@@ -7109,8 +8139,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -7148,6 +8182,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -7156,6 +8192,8 @@
           <para
             >Raises the <see
              cref="E:System.Windows.Forms.Control.Resize" />
+
+            
 
             
 
@@ -7171,8 +8209,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -7207,6 +8249,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -7217,8 +8261,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -7253,6 +8301,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -7263,8 +8313,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -7303,11 +8357,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="sender">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7322,8 +8380,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -7435,6 +8497,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -7493,6 +8557,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -7501,6 +8567,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.DataGrid.ParentRowsVisible" />
+
+            
 
             
 
@@ -7541,6 +8609,8 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.DataGrid.DataMember" />
 
@@ -7548,8 +8618,12 @@
 
             
 
+            
+
              properties (either separately, or through the <see
              cref="M:System.Windows.Forms.DataGrid.SetDataBinding(System.Object,System.String)" />
+
+            
 
             
 
@@ -7587,6 +8661,8 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.DataGrid.DataMember" />
 
@@ -7594,8 +8670,12 @@
 
             
 
+            
+
              properties (either separately, or through the <see
              cref="M:System.Windows.Forms.DataGrid.SetDataBinding(System.Object,System.String)" />
+
+            
 
             
 
@@ -7609,6 +8689,8 @@
           <para
             >Gets or sets the preferred row height for the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -7646,6 +8728,8 @@
 
             
 
+            
+
              method to implement keyboard navigation of the grid.</para
           >
         </remarks>
@@ -7664,8 +8748,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Keys" />
+
+          
 
           
 
@@ -7708,8 +8796,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyEventArgs" />
+
+          
 
           
 
@@ -7775,8 +8867,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Keys" />
+
+          
 
           
 
@@ -7814,8 +8910,12 @@
 
             
 
+            
+
              also has a <see
              cref="P:System.Windows.Forms.DataGridColumnStyle.ReadOnly" />
+
+            
 
             
 
@@ -7831,6 +8931,8 @@
 
             
 
+            
+
              can be set to true if you want to prohibit the user from editing the data directly in the <see
              cref="T:System.Windows.Forms.DataGrid" />
 
@@ -7838,8 +8940,12 @@
 
             
 
+            
+
             . For example, you might want to let users to see all columns in a table, but allow them to edit specific fields only through <see
              cref="T:System.Windows.Forms.TextBox" />
+
+            
 
             
 
@@ -7879,6 +8985,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -7887,6 +8995,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.DataGrid.ReadOnly" />
+
+            
 
             
 
@@ -7919,6 +9029,8 @@
 
             
 
+            
+
              or creating your own control incorporating the <see
              cref="T:System.Windows.Forms.DataGrid" />
 
@@ -7926,8 +9038,12 @@
 
             
 
+            
+
             . You can use the <see
              cref="M:System.Windows.Forms.DataGrid.ShouldSerializeAlternatingBackColor" />
+
+            
 
             
 
@@ -7941,6 +9057,8 @@
           <para
             >Resets the <see
              cref="P:System.Windows.Forms.DataGrid.AlternatingBackColor" />
+
+            
 
             
 
@@ -7973,8 +9091,12 @@
 
             
 
+            
+
              or creating your own control incorporating the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -7988,6 +9110,8 @@
           <para
             >Resets the <see
              cref="P:System.Windows.Forms.DataGrid.BackColor" />
+
+            
 
             
 
@@ -8020,8 +9144,12 @@
 
             
 
+            
+
              or creating your own control incorporating the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -8035,6 +9163,8 @@
           <para
             >Resets the <see
              cref="P:System.Windows.Forms.DataGrid.ForeColor" />
+
+            
 
             
 
@@ -8067,6 +9197,8 @@
 
             
 
+            
+
              or creating your own control incorporating the <see
              cref="T:System.Windows.Forms.DataGrid" />
 
@@ -8074,8 +9206,12 @@
 
             
 
+            
+
             . You can use the <see
              cref="M:System.Windows.Forms.DataGrid.ShouldSerializeGridLineColor" />
+
+            
 
             
 
@@ -8089,6 +9225,8 @@
           <para
             >Resets the <see
              cref="P:System.Windows.Forms.DataGrid.GridLineColor" />
+
+            
 
             
 
@@ -8121,6 +9259,8 @@
 
             
 
+            
+
              or creating your own control incorporating the <see
              cref="T:System.Windows.Forms.DataGrid" />
 
@@ -8128,8 +9268,12 @@
 
             
 
+            
+
             . You can use the <see
              cref="M:System.Windows.Forms.DataGrid.ShouldSerializeHeaderBackColor" />
+
+            
 
             
 
@@ -8143,6 +9287,8 @@
           <para
             >Resets the <see
              cref="P:System.Windows.Forms.DataGrid.HeaderBackColor" />
+
+            
 
             
 
@@ -8175,6 +9321,8 @@
 
             
 
+            
+
              or creating your own control incorporating the <see
              cref="T:System.Windows.Forms.DataGrid" />
 
@@ -8182,8 +9330,12 @@
 
             
 
+            
+
             . You can use the <see
              cref="M:System.Windows.Forms.DataGrid.ShouldSerializeHeaderFont" />
+
+            
 
             
 
@@ -8197,6 +9349,8 @@
           <para
             >Resets the <see
              cref="P:System.Windows.Forms.DataGrid.HeaderFont" />
+
+            
 
             
 
@@ -8229,6 +9383,8 @@
 
             
 
+            
+
              or creating your own control incorporating the <see
              cref="T:System.Windows.Forms.DataGrid" />
 
@@ -8236,8 +9392,12 @@
 
             
 
+            
+
             . You can use the <see
              cref="M:System.Windows.Forms.DataGrid.ShouldSerializeHeaderForeColor" />
+
+            
 
             
 
@@ -8251,6 +9411,8 @@
           <para
             >Resets the <see
              cref="P:System.Windows.Forms.DataGrid.HeaderForeColor" />
+
+            
 
             
 
@@ -8283,8 +9445,12 @@
 
             
 
+            
+
              or creating your own control incorporating the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -8298,6 +9464,8 @@
           <para
             >Resets the <see
              cref="P:System.Windows.Forms.DataGrid.LinkColor" />
+
+            
 
             
 
@@ -8330,6 +9498,8 @@
 
             
 
+            
+
              or creating your own control incorporating the <see
              cref="T:System.Windows.Forms.DataGrid" />
 
@@ -8337,8 +9507,12 @@
 
             
 
+            
+
             . You can use the <see
              cref="M:System.Windows.Forms.DataGrid.ShouldSerializeLinkHoverColor" />
+
+            
 
             
 
@@ -8352,6 +9526,8 @@
           <para
             >Resets the <see
              cref="P:System.Windows.Forms.DataGrid.LinkHoverColor" />
+
+            
 
             
 
@@ -8384,6 +9560,8 @@
 
             
 
+            
+
             , <see
              cref="M:System.Windows.Forms.DataGrid.Select(System.Int32)" />
 
@@ -8391,8 +9569,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Windows.Forms.DataGrid.UnSelect(System.Int32)" />
+
+            
 
             
 
@@ -8429,6 +9611,8 @@
 
             
 
+            
+
              or creating your own control incorporating the <see
              cref="T:System.Windows.Forms.DataGrid" />
 
@@ -8436,8 +9620,12 @@
 
             
 
+            
+
             . You can use the <see
              cref="M:System.Windows.Forms.DataGrid.ShouldSerializeSelectionBackColor" />
+
+            
 
             
 
@@ -8451,6 +9639,8 @@
           <para
             >Resets the <see
              cref="P:System.Windows.Forms.DataGrid.SelectionBackColor" />
+
+            
 
             
 
@@ -8483,6 +9673,8 @@
 
             
 
+            
+
              or creating your own control incorporating the <see
              cref="T:System.Windows.Forms.DataGrid" />
 
@@ -8490,8 +9682,12 @@
 
             
 
+            
+
             . You can use the <see
              cref="M:System.Windows.Forms.DataGrid.ShouldSerializeSelectionForeColor" />
+
+            
 
             
 
@@ -8505,6 +9701,8 @@
           <para
             >Resets the <see
              cref="P:System.Windows.Forms.DataGrid.SelectionForeColor" />
+
+            
 
             
 
@@ -8539,6 +9737,8 @@
                 >[&lt;topic://cpconEventsOverview&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -8619,6 +9819,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -8648,6 +9850,8 @@
 
             
 
+            
+
             , <see
              cref="M:System.Windows.Forms.DataGrid.UnSelect(System.Int32)" />
 
@@ -8655,8 +9859,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Windows.Forms.DataGrid.ResetSelection" />
+
+            
 
             
 
@@ -8671,6 +9879,8 @@
         </summary>
         <param name="row">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8705,8 +9915,12 @@
 
             
 
+            
+
              or creating your own control incorporating the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -8771,8 +9985,12 @@
 
             
 
+            
+
              method at run time to reset the <see
              cref="P:System.Windows.Forms.DataGrid.DataSource" />
+
+            
 
             
 
@@ -8788,11 +10006,15 @@
 
             
 
+            
+
              property for more details about setting a valid data source.</para
           >
           <para
             >You can create a grid that enables users to edit data but prevents them from adding new rows by using a <see
              cref="T:System.Data.DataView" />
+
+            
 
             
 
@@ -8805,8 +10027,12 @@
 
             
 
+            
+
              property to false. When the <see
              cref="P:System.Windows.Forms.DataGrid.DataSource" />
+
+            
 
             
 
@@ -8819,6 +10045,8 @@
 
             
 
+            
+
              or <see
              cref="T:System.Data.DataTable" />
 
@@ -8826,8 +10054,12 @@
 
             
 
+            
+
             , set the <see
              cref="P:System.Windows.Forms.DataGrid.DataMember" />
+
+            
 
             
 
@@ -8846,8 +10078,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.DataGrid.DataMember" />
+
+            
 
             
 
@@ -8863,8 +10099,12 @@
 
           
 
+          
+
           The data source for the <see
            cref="T:System.Windows.Forms.DataGrid" />
+
+          
 
           
 
@@ -8879,6 +10119,8 @@
 
           
 
+          
+
           The <see
            cref="P:System.Windows.Forms.DataGrid.DataMember" />
 
@@ -8886,8 +10128,12 @@
 
           
 
+          
+
            string that specifies the table to bind to within the object returned by the <see
            cref="P:System.Windows.Forms.DataGrid.DataSource" />
+
+          
 
           
 
@@ -8922,8 +10168,12 @@
 
             
 
+            
+
              or creating your own control incorporating the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -8937,6 +10187,8 @@
           <para
             >Indicates whether the <see
              cref="P:System.Windows.Forms.DataGrid.AlternatingBackColor" />
+
+            
 
             
 
@@ -8976,8 +10228,12 @@
 
             
 
+            
+
              or creating your own control incorporating the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -8991,6 +10247,8 @@
           <para
             >Indicates whether the <see
              cref="P:System.Windows.Forms.DataGrid.BackgroundColor" />
+
+            
 
             
 
@@ -9030,8 +10288,12 @@
 
             
 
+            
+
             , or creating your own control incorporating the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -9045,6 +10307,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="P:System.Windows.Forms.DataGrid.CaptionBackColor" />
+
+            
 
             
 
@@ -9084,8 +10348,12 @@
 
             
 
+            
+
             , or creating your own control incorporating the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -9099,6 +10367,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="P:System.Windows.Forms.DataGrid.CaptionForeColor" />
+
+            
 
             
 
@@ -9138,8 +10408,12 @@
 
             
 
+            
+
              or creating your own control incorporating the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -9153,6 +10427,8 @@
           <para
             >Indicates whether the <see
              cref="P:System.Windows.Forms.DataGrid.GridLineColor" />
+
+            
 
             
 
@@ -9192,8 +10468,12 @@
 
             
 
+            
+
              or creating your own control incorporating the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -9207,6 +10487,8 @@
           <para
             >Indicates whether the <see
              cref="P:System.Windows.Forms.DataGrid.HeaderBackColor" />
+
+            
 
             
 
@@ -9243,8 +10525,12 @@
 
             
 
+            
+
              or creating your own control incorporating the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -9258,6 +10544,8 @@
           <para
             >Indicates whether the <see
              cref="P:System.Windows.Forms.DataGrid.HeaderFont" />
+
+            
 
             
 
@@ -9297,8 +10585,12 @@
 
             
 
+            
+
              or creating your own control incorporating the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -9312,6 +10604,8 @@
           <para
             >Indicates whether the <see
              cref="P:System.Windows.Forms.DataGrid.HeaderForeColor" />
+
+            
 
             
 
@@ -9351,8 +10645,12 @@
 
             
 
+            
+
              or creating your own control incorporating the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -9366,6 +10664,8 @@
           <para
             >Indicates whether the <see
              cref="P:System.Windows.Forms.DataGrid.LinkHoverColor" />
+
+            
 
             
 
@@ -9405,8 +10705,12 @@
 
             
 
+            
+
             , or creating your own control incorporating the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -9420,6 +10724,8 @@
           <para
             >Indicates whether the <see
              cref="P:System.Windows.Forms.DataGrid.ParentRowsBackColor" />
+
+            
 
             
 
@@ -9459,8 +10765,12 @@
 
             
 
+            
+
             , or creating your own control incorporating the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -9474,6 +10784,8 @@
           <para
             >Indicates whether the <see
              cref="P:System.Windows.Forms.DataGrid.ParentRowsForeColor" />
+
+            
 
             
 
@@ -9510,8 +10822,12 @@
 
             
 
+            
+
              or creating your own control incorporating the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -9525,6 +10841,8 @@
           <para
             >Indicates whether the <see
              cref="P:System.Windows.Forms.DataGrid.PreferredRowHeight" />
+
+            
 
             
 
@@ -9561,8 +10879,12 @@
 
             
 
+            
+
              or creating your own control incorporating the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -9576,6 +10898,8 @@
           <para
             >Indicates whether the <see
              cref="P:System.Windows.Forms.DataGrid.SelectionBackColor" />
+
+            
 
             
 
@@ -9615,8 +10939,12 @@
 
             
 
+            
+
              or creating your own control incorporating the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -9630,6 +10958,8 @@
           <para
             >Indicates whether the <see
              cref="P:System.Windows.Forms.DataGrid.SelectionForeColor" />
+
+            
 
             
 
@@ -9709,8 +11039,12 @@
 
             
 
+            
+
              objects from the container that is associated with the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -9726,8 +11060,12 @@
 
           
 
+          
+
           true to add the <see
            cref="T:System.Windows.Forms.DataGridTableStyle" />
+
+          
 
           
 
@@ -9770,6 +11108,8 @@
 
             
 
+            
+
              retrieved through the <see
              cref="P:System.Windows.Forms.DataGrid.TableStyles" />
 
@@ -9777,8 +11117,12 @@
 
             
 
+            
+
              property to create customized views of each table displayed by the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -9794,8 +11138,12 @@
 
             
 
+            
+
              property does not contain any <see
              cref="T:System.Windows.Forms.DataGridTableStyle" />
+
+            
 
             
 
@@ -9813,6 +11161,8 @@
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -9825,6 +11175,8 @@
 
                 
 
+                
+
                  of the grid table object to the <see
                  cref="P:System.Data.DataTable.TableName" />
 
@@ -9832,8 +11184,12 @@
 
                 
 
+                
+
                  of the <see
                  cref="T:System.Data.DataTable" />
+
+                
 
                 
 
@@ -9851,6 +11207,8 @@
 
                 
 
+                
+
                  objects, one for each grid column you want to show, to the <see
                  cref="T:System.Windows.Forms.GridColumnStylesCollection" />
 
@@ -9858,8 +11216,12 @@
 
                 
 
+                
+
                  returned by the <see
                  cref="P:System.Windows.Forms.DataGridTableStyle.GridColumnStyles" />
+
+                
 
                 
 
@@ -9877,8 +11239,12 @@
 
                 
 
+                
+
                  of each <see
                  cref="T:System.Windows.Forms.DataGridColumnStyle" />
+
+                
 
                 
 
@@ -9891,8 +11257,12 @@
 
                 
 
+                
+
                  of a <see
                  cref="T:System.Data.DataColumn" />
+
+                
 
                 
 
@@ -9910,8 +11280,12 @@
 
                 
 
+                
+
                  object to the collection returned by <see
                  cref="P:System.Windows.Forms.DataGrid.TableStyles" />
+
+                
 
                 
 
@@ -9930,8 +11304,12 @@
 
               
 
+              
+
                objects and add them to the <see
                cref="T:System.Windows.Forms.GridColumnStylesCollection" />
+
+              
 
               
 
@@ -9944,8 +11322,12 @@
 
               
 
+              
+
                objects to the <see
                cref="T:System.Windows.Forms.GridTableStylesCollection" />
+
+              
 
               
 
@@ -9958,8 +11340,12 @@
 
               
 
+              
+
                with a valid <see
                cref="P:System.Windows.Forms.DataGridTableStyle.MappingName" />
+
+              
 
               
 
@@ -9972,8 +11358,12 @@
 
               
 
+              
+
                objects are automatically generated for you. Consequently, an exception will be thrown if you try to add new <see
                cref="T:System.Windows.Forms.DataGridColumnStyle" />
+
+              
 
               
 
@@ -9986,8 +11376,12 @@
 
               
 
+              
+
                values to the <see
                cref="T:System.Windows.Forms.GridColumnStylesCollection" />
+
+              
 
               
 
@@ -10002,6 +11396,8 @@
           <para
             >Gets the collection of <see
              cref="T:System.Windows.Forms.DataGridTableStyle" />
+
+            
 
             
 
@@ -10074,8 +11470,12 @@
 
             
 
+            
+
              property is not meaningful for this control, although you can change its value and handle the <see
              cref="E:System.Windows.Forms.DataGrid.TextChanged" />
+
+            
 
             
 
@@ -10089,6 +11489,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.DataGrid.Text" />
+
+            
 
             
 
@@ -10123,6 +11525,8 @@
 
             
 
+            
+
             , <see
              cref="M:System.Windows.Forms.DataGrid.Select(System.Int32)" />
 
@@ -10130,8 +11534,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Windows.Forms.DataGrid.ResetSelection" />
+
+            
 
             
 
@@ -10146,6 +11554,8 @@
         </summary>
         <param name="row">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -10234,6 +11644,8 @@
           <para
             >The number of visible rows can be changed at run time if the user is allowed to resize the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 

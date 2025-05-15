@@ -19,8 +19,12 @@
 
         
 
+        
+
          enumeration is used to tell the <see
          cref="T:System.Data.Design.MethodSignatureGenerator" />
+
+        
 
         
 
@@ -34,6 +38,8 @@
       <para
         >Sets the type of parameters that are generated in a typed <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -75,6 +81,8 @@
           <para
             >Parameters in the typed dataset are all of <see
              cref="T:System.Object" />
+
+            
 
             
 

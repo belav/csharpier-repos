@@ -54,8 +54,12 @@
 
           
 
+          
+
            and <see
            cref="M:Cairo.Graphics.Fill()" />
+
+          
 
           
 
@@ -99,8 +103,12 @@
 
           
 
+          
+
            is destroyed or <see
            cref="M:Cairo.Surface.Finish()" />
+
+          
 
           
 
@@ -115,8 +123,12 @@
 
           
 
+          
+
            and <see
            cref="M:Cairo.Graphics.Fill()" />
+
+          
 
           
 
@@ -163,8 +175,12 @@
 
           
 
+          
+
            is destroyed or <see
            cref="M:Cairo.Surface.Finish()" />
+
+          
 
           
 
@@ -179,8 +195,12 @@
 
           
 
+          
+
            and <see
            cref="M:Cairo.Graphics.Fill()" />
+
+          
 
           
 
@@ -212,6 +232,8 @@
 
           
 
+          
+
            Array</value
         >
         <remarks />
@@ -238,6 +260,8 @@
 
           
 
+          
+
            pointing to the image data in memory</value
         >
         <remarks></remarks>
@@ -259,6 +283,8 @@
         <value
           >The <see
            cref="t:Cairo.Format" />
+
+          
 
           
 

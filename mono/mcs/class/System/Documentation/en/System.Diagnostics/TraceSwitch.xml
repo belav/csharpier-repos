@@ -38,8 +38,12 @@
 
         
 
+        
+
          class provides the <see
          cref="P:System.Diagnostics.TraceSwitch.TraceError" />
+
+        
 
         
 
@@ -52,8 +56,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Diagnostics.TraceSwitch.TraceInfo" />
+
+        
 
         
 
@@ -66,6 +74,8 @@
 
         
 
+        
+
          properties to test the level of the switch. The <see
          cref="P:System.Diagnostics.TraceSwitch.Level" />
 
@@ -73,8 +83,12 @@
 
         
 
+        
+
          property gets or sets the switch's <see
          cref="T:System.Diagnostics.TraceLevel" />
+
+        
 
         
 
@@ -90,6 +104,8 @@
 
         
 
+        
+
          through the application configuration file and then use the configured <see
          cref="T:System.Diagnostics.TraceSwitch" />
 
@@ -97,8 +113,12 @@
 
         
 
+        
+
          level in your application. Alternately, you can create a <see
          cref="T:System.Diagnostics.TraceSwitch" />
+
+        
 
         
 
@@ -114,10 +134,14 @@
 
         
 
+        
+
         , edit the  <format
          type="text/html">
           <a href="86bd26d3-737e-4484-9782-19b17f34cd1f">configuration file</a>
         </format>
+
+        
 
         
 
@@ -140,8 +164,12 @@
 
         
 
+        
+
          with the <see
          cref="P:System.Diagnostics.Switch.DisplayName" />
+
+        
 
         
 
@@ -154,8 +182,12 @@
 
         
 
+        
+
          set to 1, which corresponds to the enumeration value <see
          cref="F:System.Diagnostics.TraceLevel.Error" />
+
+        
 
         
 
@@ -172,8 +204,12 @@
 
           
 
+          
+
            or the text representing an enumeration value, such as Error for a <see
            cref="T:System.Diagnostics.TraceSwitch" />
+
+          
 
           
 
@@ -190,12 +226,16 @@
 
         
 
+        
+
          with the same name, as shown in the following example:</para
       >
       <para>code reference: Classic TraceSwitch.TraceError Example#3</para>
       <para
         >By default, the switch <see
          cref="P:System.Diagnostics.TraceSwitch.Level" />
+
+        
 
         
 
@@ -208,6 +248,8 @@
 
         
 
+        
+
          constructor cannot find initial switch settings in the configuration file, the <see
          cref="P:System.Diagnostics.TraceSwitch.Level" />
 
@@ -215,8 +257,12 @@
 
         
 
+        
+
          of the new switch defaults to <see
          cref="F:System.Diagnostics.TraceLevel.Off" />
+
+        
 
         
 
@@ -242,6 +288,8 @@
 
           
 
+          
+
            class in isolation. They are only required in conjunction with <see
            cref="T:System.Diagnostics.Trace" />
 
@@ -249,8 +297,12 @@
 
           
 
+          
+
            or <see
            cref="T:System.Diagnostics.Debug" />
+
+          
 
           
 
@@ -267,8 +319,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Diagnostics.Trace" />
+
+        
 
         
 
@@ -283,12 +339,16 @@
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
         <para
           >To improve performance, you can make <see
            cref="T:System.Diagnostics.TraceSwitch" />
+
+          
 
           
 
@@ -335,6 +395,8 @@
 
             
 
+            
+
             , edit the configuration file that corresponds to the name of your application. In this file, you can add a switch and set its value, remove a switch, or clear all the switches previously set by the application. The configuration file should be formatted like the following example: </para
           >
           <code>&lt;configuration&gt;
@@ -353,8 +415,12 @@
 
               
 
+              
+
                or the text representing an enumeration value, such as Error for a <see
                cref="T:System.Diagnostics.TraceSwitch" />
+
+              
 
               
 
@@ -371,12 +437,16 @@
 
             
 
+            
+
              with the same name, as shown in the following example:</para
           >
           <para>code reference: Classic TraceSwitch.TraceError Example#3</para>
           <para
             >When the <see
              cref="Overload:System.Diagnostics.TraceSwitch.#ctor" />
+
+            
 
             
 
@@ -389,8 +459,12 @@
 
             
 
+            
+
              property of the new switch is set to <see
              cref="F:System.Diagnostics.TraceLevel.Off" />
+
+            
 
             
 
@@ -406,8 +480,12 @@
 
             
 
+            
+
              class provides the <see
              cref="P:System.Diagnostics.TraceSwitch.TraceError" />
+
+            
 
             
 
@@ -420,8 +498,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Diagnostics.TraceSwitch.TraceInfo" />
+
+            
 
             
 
@@ -434,8 +516,12 @@
 
             
 
+            
+
              properties to test the <see
              cref="P:System.Diagnostics.TraceSwitch.Level" />
+
+            
 
             
 
@@ -448,8 +534,12 @@
 
             
 
+            
+
              property gets or sets the switch's <see
              cref="T:System.Diagnostics.TraceLevel" />
+
+            
 
             
 
@@ -461,6 +551,8 @@
             <para
               >To improve performance, you can make <see
                cref="T:System.Diagnostics.TraceSwitch" />
+
+              
 
               
 
@@ -480,6 +572,8 @@
 
             
 
+            
+
              class, using the specified display name and description.</para
           >
         </summary>
@@ -490,10 +584,14 @@
 
           
 
+          
+
           The name to display on a user interface. </param
         >
         <param name="description">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -533,8 +631,12 @@
 
             
 
+            
+
              parameter is used to set the value of the <see
              cref="P:System.Diagnostics.Switch.DisplayName" />
+
+            
 
             
 
@@ -547,8 +649,12 @@
 
             
 
+            
+
              parameter is use to set the value of the <see
              cref="P:System.Diagnostics.Switch.Description" />
+
+            
 
             
 
@@ -561,6 +667,8 @@
 
             
 
+            
+
              parameter is saved as a field and used to initialize the <see
              cref="P:System.Diagnostics.Switch.Value" />
 
@@ -568,8 +676,12 @@
 
             
 
+            
+
              property on first reference. See the <see
              cref="M:System.Diagnostics.TraceSwitch.#ctor(System.String,System.String)" />
+
+            
 
             
 
@@ -588,11 +700,15 @@
 
             
 
+            
+
              class, using the specified display name, description, and default value for the switch. </para
           >
         </summary>
         <param name="displayName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -607,10 +723,14 @@
 
           
 
+          
+
           The description of the switch. </param
         >
         <param name="defaultSwitchValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -651,6 +771,8 @@
 
             
 
+            
+
             , edit the configuration file that corresponds to the name of your application. In this file, you can add a switch and set its value, remove a switch, or clear all the switches previously set by the application. The configuration file should be formatted like the following example: </para
           >
           <code>&lt;configuration&gt;
@@ -672,8 +794,12 @@
 
               
 
+              
+
                or the text representing an enumeration value, such as Error for a <see
                cref="T:System.Diagnostics.TraceSwitch" />
+
+              
 
               
 
@@ -690,6 +816,8 @@
 
             
 
+            
+
              constructor cannot find initial switch settings in the configuration file, the <see
              cref="P:System.Diagnostics.TraceSwitch.Level" />
 
@@ -697,8 +825,12 @@
 
             
 
+            
+
              property of the new switch is set to <see
              cref="F:System.Diagnostics.TraceLevel.Off" />
+
+            
 
             
 
@@ -714,8 +846,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Diagnostics.TraceSwitch.TraceWarning" />
+
+            
 
             
 
@@ -728,8 +864,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Diagnostics.TraceSwitch.TraceVerbose" />
+
+            
 
             
 
@@ -771,8 +911,12 @@
 
             
 
+            
+
              method is used by the .NET framework to validate and correct the value of a switch initialized via a configuration file. A message is written to all trace listeners if the switch value specified in the configuration file is not defined by the <see
              cref="T:System.Diagnostics.TraceLevel" />
+
+            
 
             
 
@@ -788,6 +932,8 @@
 
             
 
+            
+
              property to a value that is not defined by the <see
              cref="T:System.Diagnostics.TraceLevel" />
 
@@ -795,8 +941,12 @@
 
             
 
+            
+
              enumeration, an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -837,6 +987,8 @@
 
             
 
+            
+
              property of the switch changes. The method ensures that the properties relating to the switch's value reflect the new value.</para
           >
         </remarks>
@@ -850,8 +1002,12 @@
 
             
 
+            
+
              property to the integer equivalent of the <see
              cref="P:System.Diagnostics.Switch.Value" />
+
+            
 
             
 
@@ -886,8 +1042,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Diagnostics.TraceSwitch.TraceWarning" />
+
+            
 
             
 
@@ -900,8 +1060,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Diagnostics.TraceSwitch.TraceVerbose" />
+
+            
 
             
 
@@ -914,8 +1078,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Diagnostics.Trace" />
+
+            
 
             
 
@@ -928,6 +1096,8 @@
 
             
 
+            
+
              property is set to the highest importance, <see
              cref="F:System.Diagnostics.TraceLevel.Error" />
 
@@ -935,8 +1105,12 @@
 
             
 
+            
+
             , <see
              cref="F:System.Diagnostics.TraceLevel.Error" />
+
+            
 
             
 
@@ -975,8 +1149,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Diagnostics.TraceSwitch.TraceWarning" />
+
+            
 
             
 
@@ -989,8 +1167,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Diagnostics.TraceSwitch.TraceVerbose" />
+
+            
 
             
 
@@ -1003,8 +1185,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Diagnostics.Trace" />
+
+            
 
             
 
@@ -1017,8 +1203,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Diagnostics.TraceLevel.Warning" />
+
+            
 
             
 
@@ -1057,8 +1247,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Diagnostics.TraceSwitch.TraceWarning" />
+
+            
 
             
 
@@ -1071,8 +1265,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Diagnostics.TraceSwitch.TraceVerbose" />
+
+            
 
             
 
@@ -1085,8 +1283,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Diagnostics.Trace" />
+
+            
 
             
 
@@ -1099,8 +1301,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Diagnostics.TraceLevel.Verbose" />
+
+            
 
             
 
@@ -1139,8 +1345,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Diagnostics.TraceSwitch.TraceWarning" />
+
+            
 
             
 
@@ -1153,8 +1363,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Diagnostics.TraceSwitch.TraceVerbose" />
+
+            
 
             
 
@@ -1167,8 +1381,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Diagnostics.Trace" />
+
+            
 
             
 
@@ -1181,8 +1399,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Diagnostics.TraceLevel.Warning" />
+
+            
 
             
 

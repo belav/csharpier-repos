@@ -20,8 +20,12 @@
 
         
 
+        
+
          to specify which panel stays the same size and which panel increases in size when a user resizes the <see
          cref="T:System.Windows.Forms.SplitContainer" />
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Windows.Forms.SplitContainer.Panel2" />
+
+        
 
         
 
@@ -70,6 +78,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.SplitContainer.Panel2" />
 
@@ -77,8 +87,12 @@
 
             
 
+            
+
              is fixed. A <see
              cref="E:System.Windows.Forms.Control.Resize" />
+
+            
 
             
 
@@ -110,6 +124,8 @@
 
             
 
+            
+
              is fixed. A <see
              cref="E:System.Windows.Forms.Control.Resize" />
 
@@ -117,8 +133,12 @@
 
             
 
+            
+
              event affects only <see
              cref="P:System.Windows.Forms.SplitContainer.Panel2" />
+
+            
 
             
 
@@ -150,6 +170,8 @@
 
             
 
+            
+
              is fixed. A <see
              cref="E:System.Windows.Forms.Control.Resize" />
 
@@ -157,8 +179,12 @@
 
             
 
+            
+
              event affects only <see
              cref="P:System.Windows.Forms.SplitContainer.Panel1" />
+
+            
 
             
 

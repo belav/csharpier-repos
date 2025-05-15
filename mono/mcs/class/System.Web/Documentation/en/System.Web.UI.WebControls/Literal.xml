@@ -68,8 +68,12 @@
 
         
 
+        
+
          control to reserve a location on the Web page to display text. The <see
          cref="T:System.Web.UI.WebControls.Literal" />
+
+        
 
         
 
@@ -82,6 +86,8 @@
 
         
 
+        
+
          control, except the <see
          cref="T:System.Web.UI.WebControls.Literal" />
 
@@ -89,8 +95,12 @@
 
         
 
+        
+
          control does not allow you to apply a style to the displayed text. You can programmatically control the text displayed in the control by setting the <see
          cref="P:System.Web.UI.WebControls.Literal.Text" />
+
+        
 
         
 
@@ -111,6 +121,8 @@
 
         
 
+        
+
         , <format
          type="text/html">
           <a href="6f67973f-dda0-45a1-ba9d-e88532d7dc5b"
@@ -122,12 +134,16 @@
 
         
 
+        
+
         , and <format
          type="text/html">
           <a href="4ad3dacb-89e0-4cee-89ac-40a3f2a85461"
             >Introduction to Validating User Input in ASP.NET Web Pages</a
           >
         </format>
+
+        
 
         
 
@@ -150,9 +166,13 @@
 
         
 
+        
+
         |False"
     EnableViewState="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -162,6 +182,8 @@
     ID="string"
     Mode="<codeFeaturedElement
         >Transform</codeFeaturedElement>
+
+        
 
         
 
@@ -179,6 +201,8 @@
     Text="string"
     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -206,6 +230,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.Literal" />
+
+            
 
             
 
@@ -248,8 +274,12 @@
 
             
 
+            
+
              control that an XML or HTML element was parsed and adds that element to the <see
              cref="T:System.Web.UI.ControlCollection" />
+
+            
 
             
 
@@ -290,8 +320,12 @@
 
             
 
+            
+
              object for the current instance of the <see
              cref="T:System.Web.UI.WebControls.Literal" />
+
+            
 
             
 
@@ -332,8 +366,12 @@
 
             
 
+            
+
              control overrides the <see
              cref="M:System.Web.UI.Control.Focus" />
+
+            
 
             
 
@@ -346,8 +384,12 @@
 
             
 
+            
+
              method of a <see
              cref="T:System.Web.UI.WebControls.Literal" />
+
+            
 
             
 
@@ -360,8 +402,12 @@
 
             
 
+            
+
              method is not supported on a <see
              cref="T:System.Web.UI.WebControls.Literal" />
+
+            
 
             
 
@@ -380,8 +426,12 @@
 
             
 
+            
+
              base control method is not supported on a <see
              cref="T:System.Web.UI.WebControls.Literal" />
+
+            
 
             
 
@@ -421,6 +471,8 @@
 
             
 
+            
+
              property to specify how the contents of a <see
              cref="T:System.Web.UI.WebControls.Literal" />
 
@@ -428,8 +480,12 @@
 
             
 
+            
+
              control should be rendered. This property is set using one of the <see
              cref="T:System.Web.UI.WebControls.LiteralMode" />
+
+            
 
             
 
@@ -477,6 +533,8 @@
 
                   
 
+                  
+
                    control is rendered on a browser that supports HTML or XHTML, the control's contents are not modified. </para
                 >
               </description>
@@ -490,6 +548,8 @@
 
             
 
+            
+
              property are passed to the device or browser without making any modifications. For example, if the <see
              cref="P:System.Web.UI.WebControls.Literal.Text" />
 
@@ -497,8 +557,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.Literal" />
+
+            
 
             
 
@@ -514,6 +578,8 @@
 
             
 
+            
+
              property are converted into an HTML-encoded string before rendering. For example, if the <see
              cref="P:System.Web.UI.WebControls.Literal.Text" />
 
@@ -521,8 +587,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.Literal" />
+
+            
 
             
 
@@ -538,8 +608,12 @@
 
             
 
+            
+
              property depends on the type of markup being rendered. When the <see
              cref="T:System.Web.UI.WebControls.Literal" />
+
+            
 
             
 
@@ -552,6 +626,8 @@
 
             
 
+            
+
              produces the same behavior as specifying <see
              cref="F:System.Web.UI.WebControls.LiteralMode.PassThrough" />
 
@@ -559,8 +635,12 @@
 
             
 
+            
+
             . All markup tags and elements for the <see
              cref="P:System.Web.UI.WebControls.Literal.Text" />
+
+            
 
             
 
@@ -576,8 +656,12 @@
 
             
 
+            
+
              control is rendered for a markup language other than HTML or XHTML, such as WML or cHTML, you can use the <see
              cref="F:System.Web.UI.WebControls.LiteralMode.Transform" />
+
+            
 
             
 
@@ -590,8 +674,12 @@
 
             
 
+            
+
              property that are not supported in the targeted markup language are not rendered for the control. For example, if the <see
              cref="P:System.Web.UI.WebControls.Literal.Text" />
+
+            
 
             
 
@@ -604,8 +692,12 @@
 
             
 
+            
+
              control contains an &lt;hr&gt; tag, the tag is removed before the content is sent to a WML device. If an unsupported tag contains content, only the tag is removed and the content is sent to the device or browser. For example, if the <see
              cref="P:System.Web.UI.WebControls.Literal.Text" />
+
+            
 
             
 
@@ -619,6 +711,8 @@
           <para
             >Gets or sets an enumeration value that specifies how the content in the <see
              cref="T:System.Web.UI.WebControls.Literal" />
+
+            
 
             
 
@@ -657,6 +751,8 @@
 
             
 
+            
+
              object, which writes the content to be rendered on the client.</para
           >
         </summary>
@@ -685,8 +781,12 @@
 
             
 
+            
+
              property to specify or determine the caption displayed in the <see
              cref="T:System.Web.UI.WebControls.Literal" />
+
+            
 
             
 
@@ -697,6 +797,8 @@
           <para
             >The caption is HTML-decoded depending on how you assign a value to this property. If you assign a value through an attribute of the <see
              cref="T:System.Web.UI.WebControls.Literal" />
+
+            
 
             
 
@@ -715,12 +817,16 @@
 
               
 
+              
+
               .</para
             >
           </block>
           <para
             >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
              cref="T:System.ComponentModel.LocalizableAttribute" />
+
+            
 
             
 
@@ -737,6 +843,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -745,6 +853,8 @@
           <para
             >Gets or sets the caption displayed in the <see
              cref="T:System.Web.UI.WebControls.Literal" />
+
+            
 
             
 

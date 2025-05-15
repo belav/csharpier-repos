@@ -20,6 +20,8 @@
 
         
 
+        
+
          can be placed on the context stack to represent the object that is the root of the serialization hierarchy. In addition to this instance, the <see
          cref="T:System.ComponentModel.Design.Serialization.RootContext" />
 
@@ -27,8 +29,12 @@
 
         
 
+        
+
          also contains an expression that can be used to reference the <see
          cref="T:System.ComponentModel.Design.Serialization.RootContext" />
+
+        
 
         
 
@@ -42,6 +48,8 @@
       <para
         >A <see
          cref="T:System.ComponentModel.Design.Serialization.CodeDomSerializer" />
+
+        
 
         
 
@@ -78,11 +86,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

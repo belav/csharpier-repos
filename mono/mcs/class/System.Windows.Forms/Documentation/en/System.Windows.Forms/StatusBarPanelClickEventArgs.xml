@@ -27,8 +27,12 @@
 
         
 
+        
+
          event occurs when the user clicks a panel on the <see
          cref="T:System.Windows.Forms.StatusBar" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          specifies which <see
          cref="T:System.Windows.Forms.StatusBarPanel" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          was clicked. You can use the data provided by this class in an event handler for the <see
          cref="E:System.Windows.Forms.StatusBar.PanelClick" />
+
+        
 
         
 
@@ -69,6 +81,8 @@
 
         
 
+        
+
          being clicked. For example, if a <see
          cref="T:System.Windows.Forms.StatusBarPanel" />
 
@@ -76,8 +90,12 @@
 
         
 
+        
+
          is used to display the time, you could create an event handler for the <see
          cref="E:System.Windows.Forms.StatusBar.PanelClick" />
+
+        
 
         
 
@@ -91,6 +109,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.StatusBar.PanelClick" />
+
+        
 
         
 
@@ -126,6 +146,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -136,8 +158,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.StatusBarPanel" />
+
+          
 
           
 
@@ -152,6 +178,8 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MouseButtons" />
 
@@ -159,8 +187,12 @@
 
           
 
+          
+
            values that represents the mouse buttons that were clicked while over the <see
            cref="T:System.Windows.Forms.StatusBarPanel" />
+
+          
 
           
 
@@ -175,6 +207,8 @@
 
           
 
+          
+
           The number of times that the mouse button was clicked. </param
         >
         <param name="x">
@@ -184,10 +218,14 @@
 
           
 
+          
+
           The x-coordinate of the mouse click. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -222,8 +260,12 @@
 
             
 
+            
+
              property enables you to obtain the <see
              cref="T:System.Windows.Forms.StatusBarPanel" />
+
+            
 
             
 
@@ -236,8 +278,12 @@
 
             
 
+            
+
              event of a <see
              cref="T:System.Windows.Forms.StatusBar" />
+
+            
 
             
 
@@ -250,8 +296,12 @@
 
             
 
+            
+
              within a <see
              cref="T:System.Windows.Forms.StatusBar" />
+
+            
 
             
 
@@ -265,6 +315,8 @@
           <para
             >Gets the <see
              cref="T:System.Windows.Forms.StatusBarPanel" />
+
+            
 
             
 

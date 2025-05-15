@@ -8,9 +8,11 @@
 
     
 
+    
+
     . The example <code_example
     >
-<![CDATA[
+      <![CDATA[
 using System;  
 class Test  
 {  
@@ -25,12 +27,14 @@ class Test
 
     
 
+    
+
     calls the object-defined ToString method on an integer literal, resulting in the output "3". </paragraph
   >
   <paragraph
     >The example <code_example
     >
-<![CDATA[
+      <![CDATA[
 class Test  
 {  
    static void Main() {  
@@ -46,6 +50,8 @@ class Test
 
     
 
+    
+
     is more interesting. An <keyword
     >int</keyword>
 
@@ -53,8 +59,12 @@ class Test
 
     
 
+    
+
      value can be converted to object and back again to <keyword
     >int</keyword>
+
+    
 
     
 
@@ -70,8 +80,12 @@ class Test
 
     
 
+    
+
      values to act like objects, <keyword
     >int</keyword>
+
+    
 
     
 
@@ -84,9 +98,11 @@ class Test
 
     
 
+    
+
      values to behave like objects, this capability is available on demand. This ability to treat value types as objects bridges the gap between value types and reference types that exists in most languages. For example, a Stack class can provide Push and Pop methods that take and return object values. <code_example
     >
-<![CDATA[
+      <![CDATA[
 public class Stack  
 {  
    public object Pop() {...}  
@@ -98,6 +114,8 @@ public class Stack
   <paragraph
     >Because C# has a unified type system, the Stack class can be used with elements of any type, including value types like <keyword
     >int</keyword>
+
+    
 
     
 

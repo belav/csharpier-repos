@@ -24,6 +24,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -41,8 +43,12 @@
 
         
 
+        
+
          class represents the &lt;KeyInfo&gt; element, which contains a <see
          cref="T:System.Security.Cryptography.DSA" />
+
+        
 
         
 
@@ -58,8 +64,12 @@
 
         
 
+        
+
          to identify the public key that corresponds to the <see
          cref="T:System.Security.Cryptography.DSA" />
+
+        
 
         
 
@@ -75,11 +85,15 @@
 
         
 
+        
+
          key pair is randomly generated.</para
       >
       <para
         >The <see
          cref="T:System.Security.Cryptography.Xml.DSAKeyValue" />
+
+        
 
         
 
@@ -93,6 +107,8 @@
       <para
         >Represents the <see
          cref="T:System.Security.Cryptography.DSA" />
+
+        
 
         
 
@@ -128,6 +144,8 @@
 
             
 
+            
+
              key, this constructor uses the default implementation of <see
              cref="T:System.Security.Cryptography.DSA" />
 
@@ -135,8 +153,12 @@
 
             
 
+            
+
              as defined by the <see
              cref="T:System.Security.Cryptography.CryptoConfig" />
+
+            
 
             
 
@@ -155,8 +177,12 @@
 
             
 
+            
+
              class with a new, randomly-generated <see
              cref="T:System.Security.Cryptography.DSA" />
+
+            
 
             
 
@@ -198,8 +224,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Security.Cryptography.DSA" />
+
+            
 
             
 
@@ -215,8 +245,12 @@
 
           
 
+          
+
           The instance of an implementation of the <see
            cref="T:System.Security.Cryptography.DSA" />
+
+          
 
           
 
@@ -253,6 +287,8 @@
 
             
 
+            
+
              object.</para
           >
         </remarks>
@@ -266,6 +302,8 @@
 
             
 
+            
+
              element.</para
           >
         </summary>
@@ -274,6 +312,8 @@
           <para
             >The XML representation of the <see
              cref="T:System.Security.Cryptography.Xml.DSAKeyValue" />
+
+            
 
             
 
@@ -322,6 +362,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -359,6 +401,8 @@
 
             
 
+            
+
              object.</para
           >
         </remarks>
@@ -367,6 +411,8 @@
           <para
             >Loads a <see
              cref="T:System.Security.Cryptography.Xml.DSAKeyValue" />
+
+            
 
             
 
@@ -382,8 +428,12 @@
 
           
 
+          
+
           The XML element to load the <see
            cref="T:System.Security.Cryptography.Xml.DSAKeyValue" />
+
+          
 
           
 

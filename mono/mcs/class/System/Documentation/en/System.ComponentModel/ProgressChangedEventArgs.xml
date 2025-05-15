@@ -27,6 +27,8 @@
 
         
 
+        
+
          event.</para
       >
     </summary>
@@ -63,6 +65,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -73,10 +77,14 @@
 
           
 
+          
+
           The percentage of an asynchronous task that has been completed.</param
         >
         <param name="userState">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -105,6 +113,8 @@
           <para
             >The <see
              cref="P:System.ComponentModel.ProgressChangedEventArgs.ProgressPercentage" />
+
+            
 
             
 

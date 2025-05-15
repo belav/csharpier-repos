@@ -42,8 +42,12 @@
 
         
 
+        
+
          method also brings the enumerator back to this position. At this position, calling the <see
          cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
+
+        
 
         
 
@@ -56,8 +60,12 @@
 
         
 
+        
+
          method to advance the enumerator to the first element of the collection before reading the value of the <see
          cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
+
+        
 
         
 
@@ -72,8 +80,12 @@
 
         
 
+        
+
          returns the same object until either <see
          cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
+
+        
 
         
 
@@ -86,6 +98,8 @@
 
         
 
+        
+
          is called. <see
          cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
 
@@ -93,8 +107,12 @@
 
         
 
+        
+
          sets <see
          cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
+
+        
 
         
 
@@ -110,8 +128,12 @@
 
         
 
+        
+
          returns false. If the last call to <see
          cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
+
+        
 
         
 
@@ -124,8 +146,12 @@
 
         
 
+        
+
          throws an exception. To reset <see
          cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
+
+        
 
         
 
@@ -138,8 +164,12 @@
 
         
 
+        
+
          followed by a call to <see
          cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
+
+        
 
         
 
@@ -155,8 +185,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Reset" />
+
+        
 
         
 
@@ -169,8 +203,12 @@
 
         
 
+        
+
         . If the collection is modified between calling <see
          cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
+
+        
 
         
 
@@ -183,8 +221,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
+
+        
 
         
 
@@ -204,8 +246,12 @@
 
         
 
+        
+
          objects in a <see
          cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntryCollection" />
+
+        
 
         
 
@@ -246,8 +292,12 @@
 
             
 
+            
+
              property is not valid and will throw an exception if it is accessed. You must first call the <see
              cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
+
+            
 
             
 
@@ -263,6 +313,8 @@
 
             
 
+            
+
              property multiple times with no intervening calls to <see
              cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
 
@@ -270,8 +322,12 @@
 
             
 
+            
+
              will return the same <see
              cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+
+            
 
             
 
@@ -313,10 +369,14 @@
 
             
 
+            
+
              method returns false immediately if there are no objects in the collection.</para
           >
           <para>
             <see cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
+
+            
 
             
 
@@ -329,8 +389,12 @@
 
             
 
+            
+
              has returned false, accessing the <see
              cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
+
+            
 
             
 
@@ -346,8 +410,12 @@
 
             
 
+            
+
              object in the collection, and the first call to <see
              cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
+
+            
 
             
 
@@ -394,6 +462,8 @@
 
             
 
+            
+
              method positions the cursor at the first object in the collection. After calling <see
              cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Reset" />
 
@@ -401,8 +471,12 @@
 
             
 
+            
+
             , you do not need to call <see
              cref="M:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.MoveNext" />
+
+            
 
             
 
@@ -442,6 +516,8 @@
           <para
             >Do not call this method; use the <see
              cref="P:System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator.Current" />
+
+            
 
             
 

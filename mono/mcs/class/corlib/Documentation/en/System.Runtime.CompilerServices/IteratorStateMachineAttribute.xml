@@ -35,10 +35,14 @@
 
         
 
+        
+
          attribute to methods in your code. For methods in Visual Basic that have the <format
          type="text/html">
           <a href="69cb0b04-ac87-49d0-bcfe-810c0d60daff">Iterator (Visual Basic)</a>
         </format>
+
+        
 
         
 
@@ -51,11 +55,15 @@
 
         
 
+        
+
          attribute in the IL that it emits.</para
       >
       <para
         >When a method (MethodName) in Visual Basic has the Iterator modifier, the compiler emits IL that includes a state machine structure. That structure contains the code in the method. That IL also contains a stub method (MethodName) that calls into the state machine. The compiler adds the <unmanagedCodeEntityReference
         >IteratorStateMachine</unmanagedCodeEntityReference>
+
+        
 
         
 
@@ -73,12 +81,16 @@
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
         <para
           >You can't use <unmanagedCodeEntityReference
           >IteratorStateMachineAttribute</unmanagedCodeEntityReference>
+
+          
 
           
 
@@ -122,11 +134,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="stateMachineType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

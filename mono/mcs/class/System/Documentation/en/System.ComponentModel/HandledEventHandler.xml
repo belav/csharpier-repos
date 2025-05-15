@@ -37,8 +37,12 @@
 
         
 
+        
+
          property provides sufficient event data. The event handler can set the <see
          cref="P:System.ComponentModel.HandledEventArgs.Handled" />
+
+        
 
         
 
@@ -54,8 +58,12 @@
 
         
 
+        
+
          along with a corresponding, similarly-named delegate type. For example, the <see
          cref="E:System.Windows.Forms.DataGridView.RowPrePaint" />
+
+        
 
         
 
@@ -68,6 +76,8 @@
 
         
 
+        
+
          event-data type and the <see
          cref="T:System.Windows.Forms.DataGridViewRowPrePaintEventHandler" />
 
@@ -75,8 +85,12 @@
 
         
 
+        
+
          delegate type. Because delegates are not inherited, the <see
          cref="T:System.ComponentModel.HandledEventHandler" />
+
+        
 
         
 

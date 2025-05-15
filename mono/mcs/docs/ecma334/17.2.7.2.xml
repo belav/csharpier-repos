@@ -8,9 +8,11 @@
 
     
 
+    
+
     ) of delegate type T, the following signatures are reserved: <code_example
     >
-<![CDATA[
+      <![CDATA[
 void add_E(T handler);  
 void remove_E(T handler);  
 ]]>

@@ -36,11 +36,15 @@
 
         
 
+        
+
          is enforced on a single column (or columns) to ensure that a primary key value is unique.</para
       >
       <para
         >Constraints are not enforced unless the <see
          cref="P:System.Data.DataSet.EnforceConstraints" />
+
+        
 
         
 
@@ -56,8 +60,12 @@
 
         
 
+        
+
          is merged with a second <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -94,8 +102,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -111,8 +123,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -148,8 +164,12 @@
 
             
 
+            
+
              class with the given array of <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -165,8 +185,12 @@
 
           
 
+          
+
           The array of <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -203,8 +227,12 @@
 
             
 
+            
+
              class with the <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -220,8 +248,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -231,6 +263,8 @@
         >
         <param name="isPrimaryKey">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -267,8 +301,12 @@
 
             
 
+            
+
              class with an array of <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -284,8 +322,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -295,6 +337,8 @@
         >
         <param name="isPrimaryKey">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -331,8 +375,12 @@
 
             
 
+            
+
              class with the specified name and <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -348,6 +396,8 @@
 
           
 
+          
+
           The name of the constraint. </param
         >
         <param name="column">
@@ -357,8 +407,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -395,8 +449,12 @@
 
             
 
+            
+
              class with the specified name and array of <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -412,6 +470,8 @@
 
           
 
+          
+
           The name of the constraint. </param
         >
         <param name="columns">
@@ -421,8 +481,12 @@
 
           
 
+          
+
           The array of <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -460,8 +524,12 @@
 
             
 
+            
+
              class with the specified name, the <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -477,10 +545,14 @@
 
           
 
+          
+
           The name of the constraint. </param
         >
         <param name="column">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -493,10 +565,14 @@
 
           
 
+          
+
            to constrain. </param
         >
         <param name="isPrimaryKey">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -534,8 +610,12 @@
 
             
 
+            
+
              class with the specified name, an array of <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -551,10 +631,14 @@
 
           
 
+          
+
           The name of the constraint. </param
         >
         <param name="columns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -567,10 +651,14 @@
 
           
 
+          
+
            objects to constrain. </param
         >
         <param name="isPrimaryKey">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -607,8 +695,12 @@
 
             
 
+            
+
              objects created by using this constructor must then be added to the collection via <see
              cref="M:System.Data.ConstraintCollection.AddRange(System.Data.Constraint[])" />
+
+            
 
             
 
@@ -621,8 +713,12 @@
 
             
 
+            
+
              has been called prior to calling this constructor, the columns with the specified names must exist at the time that <see
              cref="M:System.Data.DataTable.EndInit" />
+
+            
 
             
 
@@ -641,8 +737,12 @@
 
             
 
+            
+
              class with the specified name, an array of <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -658,10 +758,14 @@
 
           
 
+          
+
           The name of the constraint. </param
         >
         <param name="columnNames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -674,10 +778,14 @@
 
           
 
+          
+
            objects to constrain. </param
         >
         <param name="isPrimaryKey">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -752,8 +860,12 @@
 
           
 
+          
+
           The object to which this <see
            cref="T:System.Data.UniqueConstraint" />
+
+          
 
           
 
@@ -781,6 +893,8 @@
           <para
             >Gets the hash code of this instance of the <see
              cref="T:System.Data.UniqueConstraint" />
+
+            
 
             
 

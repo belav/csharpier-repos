@@ -29,6 +29,8 @@
 
         
 
+        
+
          class represents the eight most common ACE types:</para
       >
       <para>
@@ -85,11 +87,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="flags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -104,10 +110,14 @@
 
           
 
+          
+
           The use of the new ACE.</param
         >
         <param name="accessMask">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -122,8 +132,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -138,6 +152,8 @@
 
           
 
+          
+
           true to specify that the new ACE is a callback type ACE.</param
         >
         <param name="opaque">
@@ -147,8 +163,12 @@
 
           
 
+          
+
           Opaque data associated with the new ACE. Opaque data is allowed only for callback ACE types. The length of this array must not be greater than the return value of the <see
            cref="M:System.Security.AccessControl.CommonAce.MaxOpaqueLength(System.Boolean)" />
+
+          
 
           
 
@@ -183,8 +203,12 @@
 
             
 
+            
+
              object. Use this length with the <see
              cref="M:System.Security.AccessControl.CommonAce.GetBinaryForm(System.Byte[],System.Int32)" />
+
+            
 
             
 
@@ -229,11 +253,15 @@
 
             
 
+            
+
              object into the specified byte array beginning at the specified offset.</para
           >
         </summary>
         <param name="binaryForm">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -246,10 +274,14 @@
 
           
 
+          
+
            object is marshaled.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -294,8 +326,12 @@
 
           
 
+          
+
           true to specify that the <see
            cref="T:System.Security.AccessControl.CommonAce" />
+
+          
 
           
 

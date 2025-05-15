@@ -37,6 +37,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -67,11 +69,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="subObjectSelector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -98,6 +104,8 @@
           <para
             >Represents the current value of <see
              cref="T:System.ComponentModel.Design.ObjectSelectorEditor" />
+
+            
 
             
 
@@ -141,6 +149,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -155,8 +165,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -171,8 +185,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IServiceProvider" />
+
+          
 
           
 
@@ -182,6 +200,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -216,8 +236,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -236,8 +260,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -253,6 +281,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -260,8 +290,12 @@
 
           
 
+          
+
            to compare with the current <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -328,6 +362,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -341,8 +377,12 @@
 
             
 
+            
+
              value that indicates the style of editor used by <see
              cref="Overload:System.ComponentModel.Design.ObjectSelectorEditor.EditValue" />
+
+            
 
             
 
@@ -358,8 +398,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -386,6 +430,8 @@
           <para
             >Represents the previous value of <see
              cref="T:System.ComponentModel.Design.ObjectSelectorEditor" />
+
+            
 
             
 
@@ -421,11 +467,15 @@
 
             
 
+            
+
              to the specified value.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

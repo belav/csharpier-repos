@@ -29,6 +29,8 @@
 
         
 
+        
+
          attribute in conjunction with the <see
          cref="T:System.Runtime.Serialization.DataContractAttribute" />
 
@@ -36,8 +38,12 @@
 
         
 
+        
+
          to identify members of a type that are part of a data contract. One of the serializers that can serialize data contracts is the <see
          cref="T:System.Runtime.Serialization.DataContractSerializer" />
+
+        
 
         
 
@@ -53,6 +59,8 @@
 
         
 
+        
+
          to a field or property explicitly specifies that the member value will be serialized. In contrast, the <see
          cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
 
@@ -60,8 +68,12 @@
 
         
 
+        
+
          serializes public and private fields of a type, and the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -78,12 +90,16 @@
 
           
 
+          
+
            to private fields or properties. Be aware that the data returned by the member (even if it private) will be serialized and deserialized, and thus can be viewed or intercepted by a malicious user or process. </para
         >
       </block>
       <para
         >By default, the CLR member name is used as the name of the data member. By setting the <see
          cref="P:System.Runtime.Serialization.DataMemberAttribute.Name" />
+
+        
 
         
 
@@ -96,12 +112,16 @@
 
         
 
+        
+
         , this name is used as the name of the schema element in a type.</para
       >
       <block subset="none" type="note">
         <para
           >Properties to which the <see
            cref="T:System.Runtime.Serialization.DataMemberAttribute" />
+
+          
 
           
 
@@ -120,10 +140,14 @@
 
         
 
+        
+
         . For more information about member names, see <format
          type="text/html">
           <a href="53a3b505-4b27-444b-b079-0eb84a97cfd8">Data Member Default Values</a>
         </format>
+
+        
 
         
 
@@ -137,6 +161,8 @@
       <para
         >When applied to the member of a type, specifies that the member is part of a data contract and is serializable by the <see
          cref="T:System.Runtime.Serialization.DataContractSerializer" />
+
+        
 
         
 
@@ -170,6 +196,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -197,12 +225,16 @@
 
             
 
+            
+
              property to false (it is true by default). </para
           >
           <block subset="none" type="note">
             <para
               >Setting the <see
                cref="P:System.Runtime.Serialization.DataMemberAttribute.EmitDefaultValue" />
+
+              
 
               
 
@@ -242,12 +274,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="bf0ab338-4d36-4e12-8002-8ebfdeb346cb"
                 >Best Practices: Data Contract Versioning</a
               >
             </format>
+
+            
 
             
 
@@ -284,11 +320,15 @@
 
             
 
+            
+
             . </para
           >
           <para
             >The <see
              cref="P:System.Runtime.Serialization.DataMemberAttribute.Name" />
+
+            
 
             
 
@@ -322,6 +362,8 @@
              type="text/html">
               <a href="0658a47d-b6e5-4ae0-ba72-ababc3c6ff33">Data Member Order</a>
             </format>
+
+            
 
             
 

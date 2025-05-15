@@ -28,6 +28,8 @@
 
         
 
+        
+
         When the service is initialized, the specified namespaces and contract names are applied to the generated service descriptions.</para
       >
       <para>When this section is empty, the service initialization applies a default namespace and contract name taken from the supporting COM interface ID.</para>
@@ -56,6 +58,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Configuration.ComContractsSection" />
+
+            
 
             
 

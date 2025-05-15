@@ -29,8 +29,12 @@
 
         
 
+        
+
          class exposes a public <see
          cref="E:System.Windows.Forms.Control.QueryAccessibilityHelp" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          class to return custom help for a particular control to an accessible client, such as a screen reader. When you handle the <see
          cref="E:System.Windows.Forms.Control.QueryAccessibilityHelp" />
+
+        
 
         
 
@@ -57,6 +65,8 @@
 
         
 
+        
+
         , <see
          cref="P:System.Windows.Forms.QueryAccessibilityHelpEventArgs.HelpKeyword" />
 
@@ -64,8 +74,12 @@
 
         
 
+        
+
         , and <see
          cref="P:System.Windows.Forms.QueryAccessibilityHelpEventArgs.HelpString" />
+
+        
 
         
 
@@ -82,6 +96,8 @@
 
           
 
+          
+
            property should be a string representation of a numeric Help topic ID.</para
         >
       </block>
@@ -91,6 +107,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.Control.QueryAccessibilityHelp" />
+
+        
 
         
 
@@ -112,6 +130,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.QueryAccessibilityHelpEventArgs" />
+
+            
 
             
 
@@ -149,6 +169,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -159,8 +181,12 @@
 
           
 
+          
+
           The file containing Help for the <see
            cref="T:System.Windows.Forms.AccessibleObject" />
+
+          
 
           
 
@@ -175,8 +201,12 @@
 
           
 
+          
+
           The string defining what Help to get for the <see
            cref="T:System.Windows.Forms.AccessibleObject" />
+
+          
 
           
 
@@ -191,8 +221,12 @@
 
           
 
+          
+
           The keyword to associate with the Help request for the <see
            cref="T:System.Windows.Forms.AccessibleObject" />
+
+          
 
           
 
@@ -258,6 +292,8 @@
           <para
             >Gets or sets the string defining what Help to get for the <see
              cref="T:System.Windows.Forms.AccessibleObject" />
+
+            
 
             
 

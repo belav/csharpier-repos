@@ -139,6 +139,8 @@
 
           
 
+          
+
            if they contain the same values.</returns
         >
         <remarks></remarks>
@@ -167,6 +169,8 @@
         <summary>Test two rectangles for inequality.</summary>
         <returns>
           <see langword="true" />
+
+          
 
           
 

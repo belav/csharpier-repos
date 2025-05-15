@@ -20,8 +20,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Windows.Forms.MainMenu" />
+
+        
 
         
 
@@ -34,6 +38,8 @@
 
         
 
+        
+
         , <see
          cref="T:System.Text.RegularExpressions.Regex" />
 
@@ -41,8 +47,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.Control" />
+
+        
 
         
 
@@ -58,8 +68,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Windows.Forms.MainMenu" />
+
+        
 
         
 
@@ -72,8 +86,12 @@
 
         
 
+        
+
          you will get the value of <see
          cref="T:System.Windows.Forms.RightToLeft" />
+
+        
 
         
 
@@ -86,8 +104,12 @@
 
         
 
+        
+
         , and you assign a value of Inherit to the <see
          cref="P:System.Windows.Forms.Control.RightToLeft" />
+
+        
 
         
 
@@ -100,8 +122,12 @@
 
         
 
+        
+
          property of the parent control. If there is no parent control, it will return a value of No. Otherwise, it will return a value of Yes or No, depending on the value that you assigned to the <see
          cref="P:System.Windows.Forms.Control.RightToLeft" />
+
+        
 
         
 
@@ -113,6 +139,8 @@
         <para
           >For more information about how enabling right-to-left alignment affects Windows Forms controls, see the <see
            cref="P:System.Windows.Forms.Control.RightToLeft" />
+
+          
 
           
 

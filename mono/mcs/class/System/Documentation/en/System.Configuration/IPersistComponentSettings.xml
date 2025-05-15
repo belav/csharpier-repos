@@ -23,8 +23,12 @@
 
         
 
+        
+
         , and then add special properties to this class. However, this approach does not sufficiently encapsulate application settings for a control so that its container is shielded from the details. The <see
          cref="T:System.Configuration.IPersistComponentSettings" />
+
+        
 
         
 
@@ -66,6 +70,8 @@
 
             
 
+            
+
              method performs two essential operations:</para
           >
           <list type="bullet">
@@ -73,6 +79,8 @@
               <para
                 >It causes each application settings instance contained by the control to refresh the values of its application settings properties, typically by calling their <see
                  cref="M:System.Configuration.ApplicationSettingsBase.Reload" />
+
+                
 
                 
 
@@ -90,8 +98,12 @@
 
                 
 
+                
+
                  should ensure that the control's <see
                  cref="P:System.Windows.Forms.Control.Location" />
+
+                
 
                 
 
@@ -135,8 +147,12 @@
 
             
 
+            
+
              method typically calls the <see
              cref="M:System.Configuration.ApplicationSettingsBase.Reset" />
+
+            
 
             
 
@@ -178,6 +194,8 @@
 
             
 
+            
+
              method writes the values of the control's application settings properties to the associated data store. The data store and serialization technique the method uses is determined by the settings provider associated with each settings class through the <see
              cref="T:System.Configuration.SettingsProviderAttribute" />
 
@@ -185,8 +203,12 @@
 
             
 
+            
+
             . You can override the choice of the settings provider by using the <see
              cref="T:System.Configuration.ISettingsProviderService" />
+
+            
 
             
 
@@ -203,6 +225,8 @@
 
               
 
+              
+
                property is true, the control should call <see
                cref="M:System.Configuration.IPersistComponentSettings.SaveComponentSettings" />
 
@@ -210,8 +234,12 @@
 
               
 
+              
+
                in its own <see
                cref="Overload:System.Windows.Forms.Control.Dispose" />
+
+              
 
               
 
@@ -251,6 +279,8 @@
 
             
 
+            
+
              method or sometimes implicitly when the control's <see
              cref="Overload:System.Windows.Forms.Control.Dispose" />
 
@@ -258,8 +288,12 @@
 
             
 
+            
+
              method is invoked. The <see
              cref="P:System.Configuration.IPersistComponentSettings.SaveSettings" />
+
+            
 
             
 
@@ -275,8 +309,12 @@
 
             
 
+            
+
              depends on the implementation of the control. The documentation for the control should indicate whether it uses application settings, what data is persisted, and what the default value of the <see
              cref="P:System.Configuration.IPersistComponentSettings.SaveSettings" />
+
+            
 
             
 
@@ -315,11 +353,15 @@
 
             
 
+            
+
              property to disambiguate groups of application settings properties when there are multiple instances of the same wrapper class. For example, if a control contains an associated wrapper class, then placing multiple instances of the same control in the same application will typically result in multiple instances of the wrapper class. A settings key is required only when the configuration data differs on a per-instance basis; for example, the location of dynamically positioned controls.</para
           >
           <para
             >The following general rules apply to the use of <see
              cref="P:System.Configuration.IPersistComponentSettings.SettingsKey" />
+
+            
 
             
 
@@ -337,8 +379,12 @@
 
                 
 
+                
+
                 . Each settings class contains its own <see
                  cref="P:System.Configuration.ApplicationSettingsBase.SettingsKey" />
+
+                
 
                 
 
@@ -359,8 +405,12 @@
 
                 
 
+                
+
                  property should default to the <see
                  cref="P:System.Windows.Forms.Control.Name" />
+
+                
 
                 
 
@@ -373,6 +423,8 @@
               <para
                 >The set accessor for this property should be implemented to distinguish between settings classes containing per-instance and shared configuration data. For each settings class containing per-instance data, set should just pass-through to the <see
                  cref="P:System.Configuration.ApplicationSettingsBase.SettingsKey" />
+
+                
 
                 
 

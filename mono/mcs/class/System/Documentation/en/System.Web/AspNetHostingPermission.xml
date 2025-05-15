@@ -33,8 +33,12 @@
 
         
 
+        
+
          class is used in conjunction with code access security to help protect public types in the System.Web namespaces. Code must be assigned at least the <see
          cref="F:System.Web.AspNetHostingPermissionLevel.Minimal" />
+
+        
 
         
 
@@ -50,8 +54,12 @@
 
         
 
+        
+
          class's <see
          cref="P:System.Web.AspNetHostingPermission.Level" />
+
+        
 
         
 
@@ -66,8 +74,12 @@
 
         
 
+        
+
          configuration element. By default, the level attribute of the trust configuration element is set to Full. That is, by default, ASP.NET applications run under the <see
          cref="F:System.Web.AspNetHostingPermissionLevel.Unrestricted" />
+
+        
 
         
 
@@ -80,8 +92,12 @@
 
         
 
+        
+
          class with the specified <see
          cref="P:System.Web.AspNetHostingPermission.Level" />
+
+        
 
         
 
@@ -91,6 +107,8 @@
          type="text/html">
           <a href="f897c794-10d3-414c-86b7-59b66564bbf1">ASP.NET Trust Levels and Policy Files</a>
         </format>
+
+        
 
         
 
@@ -107,8 +125,12 @@
 
         
 
+        
+
          permission. That is, the <see
          cref="T:System.Web.AspNetHostingPermission" />
+
+        
 
         
 
@@ -153,8 +175,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Security.Permissions.PermissionState" />
+
+            
 
             
 
@@ -170,8 +196,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -211,6 +241,8 @@
 
             
 
+            
+
              class with the specified permission level.</para
           >
         </summary>
@@ -221,8 +253,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.AspNetHostingPermissionLevel" />
+
+          
 
           
 
@@ -294,6 +330,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -308,8 +346,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.SecurityElement" />
+
+          
 
           
 
@@ -356,11 +398,15 @@
 
             
 
+            
+
              that represents the intersection of the current permission and the specified permission; otherwise, null if the intersection is empty.</para
           >
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -407,8 +453,12 @@
 
             
 
+            
+
              is a subset of the specified <see
              cref="T:System.Security.IPermission" />
+
+            
 
             
 
@@ -424,6 +474,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.IPermission" />
 
@@ -431,8 +483,12 @@
 
           
 
+          
+
            to combine with the current permission. It must be of the same type as the current <see
            cref="T:System.Security.IPermission" />
+
+          
 
           
 
@@ -532,6 +588,8 @@
 
             
 
+            
+
              containing the XML encoding of the permission object, including any state information.</para
           >
         </returns>
@@ -574,11 +632,15 @@
 
             
 
+            
+
              that represents the union of the current permission and the specified permission.</para
           >
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

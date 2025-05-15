@@ -33,8 +33,12 @@
 
         
 
+        
+
          object that manages the <see
          cref="T:System.Windows.Forms.BindingManagerBase" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          class is abstract, the return type of the <see
          cref="P:System.Windows.Forms.BindingContext.Item(System.Object)" />
+
+        
 
         
 
@@ -61,8 +69,12 @@
 
         
 
+        
+
          or a <see
          cref="T:System.Windows.Forms.PropertyManager" />
+
+        
 
         
 
@@ -75,8 +87,12 @@
 
         
 
+        
+
          is a <see
          cref="T:System.Windows.Forms.PropertyManager" />
+
+        
 
         
 
@@ -89,8 +105,12 @@
 
         
 
+        
+
          as the data source, a <see
          cref="T:System.Windows.Forms.PropertyManager" />
+
+        
 
         
 
@@ -103,6 +123,8 @@
 
         
 
+        
+
          or <see
          cref="T:System.ComponentModel.IBindingList" />
 
@@ -110,8 +132,12 @@
 
         
 
+        
+
         , a <see
          cref="T:System.Windows.Forms.CurrencyManager" />
+
+        
 
         
 
@@ -127,8 +153,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Windows.Forms.PropertyManager" />
+
+        
 
         
 
@@ -141,8 +171,12 @@
 
         
 
+        
+
          enables you to retrieve any particular <see
          cref="T:System.Windows.Forms.CurrencyManager" />
+
+        
 
         
 
@@ -159,8 +193,12 @@
 
           
 
+          
+
            property, the <see
            cref="T:System.Windows.Forms.BindingContext" />
+
+          
 
           
 
@@ -173,8 +211,12 @@
 
           
 
+          
+
            if one does not already exist. This can lead to some confusion, as the returned object may not manage the list (or any list) that you intend. To prevent returning an invalid <see
            cref="T:System.Windows.Forms.BindingManagerBase" />
+
+          
 
           
 
@@ -187,8 +229,12 @@
 
           
 
+          
+
            method to determine if the intended <see
            cref="T:System.Windows.Forms.BindingManagerBase" />
+
+          
 
           
 
@@ -205,8 +251,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Windows.Forms.Panel" />
+
+        
 
         
 
@@ -219,8 +269,12 @@
 
         
 
+        
+
         , to contain data-bound controls, you can create a <see
          cref="T:System.Windows.Forms.BindingContext" />
+
+        
 
         
 
@@ -233,6 +287,8 @@
 
         
 
+        
+
         . See the <see
          cref="M:System.Windows.Forms.BindingContext.#ctor" />
 
@@ -240,8 +296,12 @@
 
         
 
+        
+
          constructor for more information about creating multiple <see
          cref="T:System.Windows.Forms.BindingManagerBase" />
+
+        
 
         
 
@@ -257,8 +317,12 @@
 
         
 
+        
+
          control to a form and bind it to a column of a table in a dataset, the control communicates with the <see
          cref="T:System.Windows.Forms.BindingContext" />
+
+        
 
         
 
@@ -271,8 +335,12 @@
 
         
 
+        
+
         , in turn, talks to the specific <see
          cref="T:System.Windows.Forms.CurrencyManager" />
+
+        
 
         
 
@@ -285,8 +353,12 @@
 
         
 
+        
+
         , it would report the current record for the binding of that <see
          cref="T:System.Windows.Forms.TextBox" />
+
+        
 
         
 
@@ -299,8 +371,12 @@
 
         
 
+        
+
          control is bound to the FirstName column of a Customers table on the dataSet1 dataset through the <see
          cref="T:System.Windows.Forms.BindingContext" />
+
+        
 
         
 
@@ -323,6 +399,8 @@
 
         
 
+        
+
          control (TextBox2) to the form and bind it to the LastName column of the Customers table in the same dataset. The <see
          cref="T:System.Windows.Forms.BindingContext" />
 
@@ -330,8 +408,12 @@
 
         
 
+        
+
          is aware of the first binding (TextBox1 to Customers.FirstName), so it would use the same <see
          cref="T:System.Windows.Forms.CurrencyManager" />
+
+        
 
         
 
@@ -354,8 +436,12 @@
 
         
 
+        
+
          creates and manages a second <see
          cref="T:System.Windows.Forms.CurrencyManager" />
+
+        
 
         
 
@@ -371,8 +457,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.ListControl.DisplayMember" />
+
+        
 
         
 
@@ -385,8 +475,12 @@
 
         
 
+        
+
          creates multiple currency managers for the same dataset, which results in errors. The following code example shows a few ways to set the properties and their associated <see
          cref="T:System.Windows.Forms.BindingContext" />
+
+        
 
         
 
@@ -432,8 +526,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
           
 
+          
+
           . The <see
            cref="T:System.Windows.Forms.BindingSource" />
+
+          
 
           
 
@@ -446,8 +544,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
           
 
+          
+
            and exposes the <see
            cref="T:System.Windows.Forms.CurrencyManager" />
+
+          
 
           
 
@@ -460,6 +562,8 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
           
 
+          
+
            for binding, you should use the members exposed by the <see
            cref="T:System.Windows.Forms.BindingSource" />
 
@@ -467,8 +571,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
           
 
+          
+
            to manipulate "currency" (that is, Position) rather than go through the <see
            cref="T:System.Windows.Forms.BindingContext" />
+
+          
 
           
 
@@ -488,8 +596,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
         
 
+        
+
          objects for any object that inherits from the <see
          cref="T:System.Windows.Forms.Control" />
+
+        
 
         
 
@@ -515,8 +627,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
             
 
+            
+
              instances for the same data source, create a new <see
              cref="T:System.Windows.Forms.BindingContext" />
+
+            
 
             
 
@@ -529,8 +645,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
             
 
+            
+
              property of an object that inherits from the <see
              cref="T:System.Windows.Forms.Control" />
+
+            
 
             
 
@@ -543,8 +663,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
             
 
+            
+
              objects (from two different <see
              cref="T:System.Windows.Forms.BindingContext" />
+
+            
 
             
 
@@ -557,8 +681,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
             
 
+            
+
              properties of each <see
              cref="T:System.Windows.Forms.BindingManagerBase" />
+
+            
 
             
 
@@ -572,6 +700,8 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.BindingContext" />
+
+            
 
             
 
@@ -615,11 +745,15 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
             
 
+            
+
              associated with a specific data source to the collection.</para
           >
         </summary>
         <param name="dataSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -632,8 +766,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
           
 
+          
+
            associated with the <see
            cref="T:System.Windows.Forms.BindingManagerBase" />
+
+          
 
           
 
@@ -648,8 +786,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.BindingManagerBase" />
+
+          
 
           
 
@@ -684,6 +826,8 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
             
 
+            
+
              associated with a specific data source to the collection.</para
           >
         </summary>
@@ -694,8 +838,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
           
 
+          
+
           The object associated with the <see
            cref="T:System.Windows.Forms.BindingManagerBase" />
+
+          
 
           
 
@@ -710,8 +858,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.BindingManagerBase" />
+
+          
 
           
 
@@ -743,6 +895,8 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
           <para
             >Clears the collection of any <see
              cref="T:System.Windows.Forms.BindingManagerBase" />
+
+            
 
             
 
@@ -792,8 +946,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
             
 
+            
+
              event is obsolete and always raises a <see
              cref="T:System.NotImplementedException" />
+
+            
 
             
 
@@ -808,6 +966,8 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -816,6 +976,8 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
           <para
             >Always raises a <see
              cref="T:System.NotImplementedException" />
+
+            
 
             
 
@@ -858,6 +1020,8 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
             
 
+            
+
              class for a list of possible data sources and information about creating bindings between controls and data sources.</para
           >
           <para
@@ -868,8 +1032,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
             
 
+            
+
              property for information about returning a <see
              cref="T:System.Windows.Forms.BindingManagerBase" />
+
+            
 
             
 
@@ -888,8 +1056,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
             
 
+            
+
              contains the <see
              cref="T:System.Windows.Forms.BindingManagerBase" />
+
+            
 
             
 
@@ -908,8 +1080,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
             
 
+            
+
              contains the specified <see
              cref="T:System.Windows.Forms.BindingManagerBase" />
+
+            
 
             
 
@@ -925,8 +1101,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -964,6 +1144,8 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
             
 
+            
+
              class for a list of possible data sources and for information about creating bindings between controls and data sources.</para
           >
           <para
@@ -974,8 +1156,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
             
 
+            
+
              property for information about returning a <see
              cref="T:System.Windows.Forms.BindingManagerBase" />
+
+            
 
             
 
@@ -994,8 +1180,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
             
 
+            
+
              contains the <see
              cref="T:System.Windows.Forms.BindingManagerBase" />
+
+            
 
             
 
@@ -1014,8 +1204,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
             
 
+            
+
              contains the specified <see
              cref="T:System.Windows.Forms.BindingManagerBase" />
+
+            
 
             
 
@@ -1031,8 +1225,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1047,8 +1245,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
           
 
+          
+
           The information needed to resolve to a specific <see
            cref="T:System.Windows.Forms.BindingManagerBase" />
+
+          
 
           
 
@@ -1075,6 +1277,8 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
           <para
             >This property is derived from <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1166,11 +1370,15 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.BindingContext.OnCollectionChanged(System.ComponentModel.CollectionChangeEventArgs)" />
+
+            
 
             
 
@@ -1189,6 +1397,8 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1199,8 +1409,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.CollectionChangeEventArgs" />
+
+          
 
           
 
@@ -1239,6 +1453,8 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
             
 
+            
+
              associated with the specified data source.</para
           >
         </summary>
@@ -1249,8 +1465,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
           
 
+          
+
           The data source associated with the <see
            cref="T:System.Windows.Forms.BindingManagerBase" />
+
+          
 
           
 
@@ -1284,6 +1504,8 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
             
 
+            
+
              associated with the specified data source.</para
           >
         </summary>
@@ -1294,8 +1516,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
           
 
+          
+
           The data source associated with the <see
            cref="T:System.Windows.Forms.BindingManagerBase" />
+
+          
 
           
 
@@ -1336,8 +1562,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
           
 
+          
+
           An <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -1347,6 +1577,8 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1379,8 +1611,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
             
 
+            
+
              objects managed by the <see
              cref="T:System.Windows.Forms.BindingContext" />
+
+            
 
             
 
@@ -1411,6 +1647,8 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
           <para
             >This property is derived from <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1472,6 +1710,8 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
             
 
+            
+
              returned by the <see
              cref="M:System.Windows.Forms.BindingContext.System#Collections#IEnumerable#GetEnumerator" />
 
@@ -1479,8 +1719,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
             
 
+            
+
              method allows you to iterate over the collection managed by the <see
              cref="T:System.Windows.Forms.BindingContext" />
+
+            
 
             
 
@@ -1498,6 +1742,8 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -1535,8 +1781,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
             
 
+            
+
             , when their <see
              cref="T:System.Windows.Forms.BindingContext" />
+
+            
 
             
 
@@ -1555,8 +1805,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
             
 
+            
+
              with a new <see
              cref="T:System.Windows.Forms.BindingContext" />
+
+            
 
             
 
@@ -1572,6 +1826,8 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
           
 
+          
+
           The new <see
            cref="T:System.Windows.Forms.BindingContext" />
 
@@ -1579,8 +1835,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
           
 
+          
+
            to associate with the <see
            cref="T:System.Windows.Forms.Binding" />
+
+          
 
           
 
@@ -1595,6 +1855,8 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Binding" />
 
@@ -1602,8 +1864,12 @@ this-&gt;BindingContext-&gt;get_Item(dataSet1-&gt;Customers)-&gt;Position = 1;
 
           
 
+          
+
            to associate with the new <see
            cref="T:System.Windows.Forms.BindingContext" />
+
+          
 
           
 

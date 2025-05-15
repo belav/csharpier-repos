@@ -160,8 +160,12 @@
 
             
 
+            
+
             .  For more information about the objectClass property, see the "Object-Class" topic in the MSDN Library at <see
              cref="http://msdn.microsoft.com/library">http://msdn.microsoft.com/library</see>
+
+            
 
             
 
@@ -225,6 +229,8 @@
           <para
             >Encrypts data using Kerberos. The <see
              cref="F:System.DirectoryServices.AuthenticationTypes.Secure" />
+
+            
 
             
 
@@ -311,6 +317,8 @@
 
             
 
+            
+
              flag must also be set to use signing.</para
           >
         </summary>
@@ -328,6 +336,8 @@
 
         
 
+        
+
          flag can be used in combination with other flags such as <see
          cref="F:System.DirectoryServices.AuthenticationTypes.ReadonlyServer" />
 
@@ -335,8 +345,12 @@
 
         
 
+        
+
         , <see
          cref="F:System.DirectoryServices.AuthenticationTypes.FastBind" />
+
+        
 
         
 
@@ -361,6 +375,8 @@
 
         
 
+        
+
          enumeration specifies the types of authentication used in <see
          cref="N:System.DirectoryServices" />
 
@@ -368,8 +384,12 @@
 
         
 
+        
+
         . This enumeration has a <see
          cref="T:System.FlagsAttribute" />
+
+        
 
         
 

@@ -37,8 +37,12 @@
 
         
 
+        
+
          class implements an <see
          cref="T:System.Collections.ICollection" />
+
+        
 
         
 
@@ -52,6 +56,8 @@
       <para
         >Provides a collection container for instances of the <see
          cref="T:System.Net.Cookie" />
+
+        
 
         
 
@@ -82,6 +88,8 @@
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.Net.CookieCollection" />
+
+            
 
             
 
@@ -142,6 +150,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -177,8 +187,12 @@
 
             
 
+            
+
              to a <see
              cref="T:System.Net.CookieCollection" />
+
+            
 
             
 
@@ -194,6 +208,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.Cookie" />
 
@@ -201,8 +217,12 @@
 
           
 
+          
+
            to be added to a <see
            cref="T:System.Net.CookieCollection" />
+
+          
 
           
 
@@ -244,9 +264,13 @@
 
             
 
+            
+
              is read from the <see
              cref="T:System.Net.CookieCollection" />
             <paramref name="cookies" />
+
+            
 
             
 
@@ -265,6 +289,8 @@
 
             
 
+            
+
              to the current instance.</para
           >
         </summary>
@@ -275,8 +301,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.CookieCollection" />
+
+          
 
           
 
@@ -317,6 +347,8 @@
 
             
 
+            
+
              parameter must be one-dimensional with zero-based indexing.</para
           >
         </remarks>
@@ -330,8 +362,12 @@
 
             
 
+            
+
              to an instance of the <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -347,6 +383,8 @@
 
           
 
+          
+
           The target <see
            cref="T:System.Array" />
 
@@ -354,8 +392,12 @@
 
           
 
+          
+
            to which the <see
            cref="T:System.Net.CookieCollection" />
+
+          
 
           
 
@@ -370,8 +412,12 @@
 
           
 
+          
+
           The zero-based index in the target <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -414,6 +460,8 @@
 
             
 
+            
+
              parameter must be one-dimensional with zero-based indexing.</para
           >
         </remarks>
@@ -427,8 +475,12 @@
 
             
 
+            
+
              to a <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -444,6 +496,8 @@
 
           
 
+          
+
           The target <see
            cref="T:System.Net.Cookie" />
 
@@ -451,8 +505,12 @@
 
           
 
+          
+
            array to which the <see
            cref="T:System.Net.CookieCollection" />
+
+          
 
           
 
@@ -467,8 +525,12 @@
 
           
 
+          
+
           The zero-based index in the target <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -498,6 +560,8 @@
           <para
             >Gets the number of cookies contained in a <see
              cref="T:System.Net.CookieCollection" />
+
+            
 
             
 
@@ -538,11 +602,15 @@
 
             
 
+            
+
              only to read data in the collection. Enumerators cannot be used to modify the underlying collection. The enumerator does not have exclusive access to the collection.</para
           >
           <para
             >When an enumerator is created, it takes a snapshot of the current state of the collection. If changes are made to the collection, such as adding, modifying, or deleting elements, this snapshot gets out of sync and the enumerator throws an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -561,6 +629,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -574,8 +644,12 @@
 
             
 
+            
+
              interface that can iterate through a <see
              cref="T:System.Net.CookieCollection" />
+
+            
 
             
 
@@ -611,6 +685,8 @@
 
             
 
+            
+
              is read-only.</para
           >
         </summary>
@@ -636,6 +712,8 @@
           <para
             >Gets a value that indicates whether access to a <see
              cref="T:System.Net.CookieCollection" />
+
+            
 
             
 
@@ -720,8 +798,12 @@
 
             
 
+            
+
              property returns an object that can be used to synchronize access to the <see
              cref="T:System.Net.CookieCollection" />
+
+            
 
             
 
@@ -735,6 +817,8 @@
           <para
             >Gets an object to synchronize access to the <see
              cref="T:System.Net.CookieCollection" />
+
+            
 
             
 

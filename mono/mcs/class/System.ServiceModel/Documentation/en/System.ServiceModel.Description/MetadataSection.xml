@@ -29,11 +29,15 @@
 
         
 
+        
+
          class conforms to the definition of the wsx:Metadata/wsx:MetadataSection element in the WS-Metadata Exchange specification and contains XML metadata or references to XML metadata. </para
       >
       <para
         >A <see
          cref="T:System.ServiceModel.Description.MetadataSection" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
          to a collection of XML metadata represented by a <see
          cref="T:System.ServiceModel.Description.MetadataSet" />
+
+        
 
         
 
@@ -60,8 +68,12 @@
 
         
 
+        
+
          class, use the <see
          cref="T:System.ServiceModel.Description.MetadataSet" />
+
+        
 
         
 
@@ -77,8 +89,12 @@
 
         
 
+        
+
          object that contains the equivalent metadata in XML form, call the appropriate Export methods on the <see
          cref="T:System.ServiceModel.Description.WsdlExporter" />
+
+        
 
         
 
@@ -91,6 +107,8 @@
 
         
 
+        
+
          or <see
          cref="T:System.ServiceModel.Description.ServiceEndpoint" />
 
@@ -98,8 +116,12 @@
 
         
 
+        
+
          objects, and then call the <see
          cref="M:System.ServiceModel.Description.WsdlExporter.GetGeneratedMetadata" />
+
+        
 
         
 
@@ -115,8 +137,12 @@
 
         
 
+        
+
          object into indigo2 <see
          cref="T:System.ServiceModel.Description.ContractDescription" />
+
+        
 
         
 
@@ -129,8 +155,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.ServiceModel.Channels.Binding" />
+
+        
 
         
 
@@ -143,8 +173,12 @@
 
         
 
+        
+
          object to the constructor of the <see
          cref="T:System.ServiceModel.Description.WsdlImporter" />
+
+        
 
         
 
@@ -177,6 +211,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Description.MetadataSection" />
+
+            
 
             
 
@@ -219,8 +255,12 @@
 
             
 
+            
+
              constructor to specify the metadata to be included in this <see
              cref="T:System.ServiceModel.Description.MetadataSection" />
+
+            
 
             
 
@@ -233,8 +273,12 @@
 
             
 
+            
+
              class so that the <see
              cref="T:System.ServiceModel.Description.MetadataSection" />
+
+            
 
             
 
@@ -247,6 +291,8 @@
 
             
 
+            
+
              or <see
              cref="T:System.ServiceModel.Description.MetadataReference" />
 
@@ -254,8 +300,12 @@
 
             
 
+            
+
              object for the <paramref
              name="metadata" />
+
+            
 
             
 
@@ -269,6 +319,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Description.MetadataSection" />
+
+            
 
             
 
@@ -307,6 +359,8 @@
           <para
             >Use the <see
              cref="P:System.ServiceModel.Description.MetadataSection.Attributes" />
+
+            
 
             
 
@@ -355,8 +409,12 @@
 
             
 
+            
+
              for a XML Schema document. The <see
              cref="P:System.ServiceModel.Description.MetadataSection.Dialect" />
+
+            
 
             
 
@@ -369,8 +427,12 @@
 
             
 
+            
+
              and the <see
              cref="P:System.ServiceModel.Description.MetadataSection.Identifier" />
+
+            
 
             
 
@@ -389,8 +451,12 @@
 
             
 
+            
+
              from the specified <see
              cref="T:System.Xml.Schema.XmlSchema" />
+
+            
 
             
 
@@ -404,6 +470,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Description.MetadataSection" />
+
+            
 
             
 
@@ -448,8 +516,12 @@
 
             
 
+            
+
              for a WSDL document. The <see
              cref="P:System.ServiceModel.Description.MetadataSection.Dialect" />
+
+            
 
             
 
@@ -462,8 +534,12 @@
 
             
 
+            
+
              and the <see
              cref="P:System.ServiceModel.Description.MetadataSection.Identifier" />
+
+            
 
             
 
@@ -482,8 +558,12 @@
 
             
 
+            
+
              that contains the specified <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -502,8 +582,12 @@
 
             
 
+            
+
              that contains the specified <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -536,6 +620,8 @@
           <para
             >The dialect indicates the type of metadata in this <see
              cref="T:System.ServiceModel.Description.MetadataSection" />
+
+            
 
             
 
@@ -599,6 +685,8 @@
 
             
 
+            
+
             . The value depends on the type of metadata.</para
           >
         </remarks>
@@ -650,8 +738,12 @@
 
             
 
+            
+
              property to access or modify the metadata content contained in the <see
              cref="T:System.ServiceModel.Description.MetadataSection" />
+
+            
 
             
 
@@ -664,6 +756,8 @@
 
             
 
+            
+
              or a <see
              cref="T:System.ServiceModel.Description.MetadataLocation" />
 
@@ -671,8 +765,12 @@
 
             
 
+            
+
              as a reference to the metadata content. When a <see
              cref="T:System.ServiceModel.Description.MetadataSection" />
+
+            
 
             
 

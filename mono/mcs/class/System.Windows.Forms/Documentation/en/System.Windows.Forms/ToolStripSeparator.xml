@@ -29,6 +29,8 @@
 
         
 
+        
+
          to group related items on a menu or <see
          cref="T:System.Windows.Forms.ToolStrip" />
 
@@ -36,8 +38,12 @@
 
         
 
+        
+
         . The <see
          cref="T:System.Windows.Forms.ToolStripSeparator" />
+
+        
 
         
 
@@ -53,6 +59,8 @@
 
         
 
+        
+
          at design time by choosing it from a drop-down list. However, you can also automatically create a <see
          cref="T:System.Windows.Forms.ToolStripSeparator" />
 
@@ -60,8 +68,12 @@
 
         
 
+        
+
          by typing a hyphen (-) in either the designer template node or in the <see
          cref="M:System.Windows.Forms.ToolStripItemCollection.Add(System.String)" />
+
+        
 
         
 
@@ -80,8 +92,12 @@
 
         
 
+        
+
          or the drop-down items of a <see
          cref="T:System.Windows.Forms.MenuStrip" />
+
+        
 
         
 
@@ -94,8 +110,12 @@
 
         
 
+        
+
          or other <see
          cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+        
 
         
 
@@ -118,6 +138,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ToolStripSeparator" />
+
+            
 
             
 
@@ -256,6 +278,8 @@
 
             
 
+            
+
              can be selected. </para
           >
         </summary>
@@ -287,6 +311,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -300,8 +326,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+            
 
             
 
@@ -345,6 +375,8 @@
 
             
 
+            
+
              and an adjacent item.</para
           >
         </summary>
@@ -368,6 +400,8 @@
           <para
             >Gets the default size of the <see
              cref="T:System.Windows.Forms.ToolStripSeparator" />
+
+            
 
             
 
@@ -602,6 +636,8 @@
 
             
 
+            
+
              can be fitted.</para
           >
         </summary>
@@ -615,8 +651,12 @@
 
             
 
+            
+
              representing the height and width of the <see
              cref="T:System.Windows.Forms.ToolStripSeparator" />
+
+            
 
             
 
@@ -632,6 +672,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Size" />
 
@@ -639,8 +681,12 @@
 
           
 
+          
+
            representing the height and width of the <see
            cref="T:System.Windows.Forms.ToolStripSeparator" />
+
+          
 
           
 
@@ -891,8 +937,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -935,6 +985,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -945,8 +997,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1018,11 +1074,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="rect">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1035,8 +1095,12 @@
 
           
 
+          
+
            specifying the size and location of the <see
            cref="T:System.Windows.Forms.ToolStripSeparator" />
+
+          
 
           
 

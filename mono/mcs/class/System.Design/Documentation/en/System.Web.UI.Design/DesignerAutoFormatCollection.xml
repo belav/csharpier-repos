@@ -30,8 +30,12 @@
 
         
 
+        
+
          class and any derived class defines the <see
          cref="P:System.Web.UI.Design.ControlDesigner.AutoFormats" />
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
          object. Control developers can override the <see
          cref="P:System.Web.UI.Design.ControlDesigner.AutoFormats" />
+
+        
 
         
 
@@ -61,11 +69,15 @@
 
         
 
+        
+
          property to determine how many automatic style formats are in the collection.</para
       >
       <para
         >Additionally, use the <see
          cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+
+        
 
         
 
@@ -83,6 +95,8 @@
 
             
 
+            
+
              method to add a single format to the collection. </para
           >
         </item>
@@ -90,6 +104,8 @@
           <para
             >The <see
              cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Insert(System.Int32,System.Web.UI.Design.DesignerAutoFormat)" />
+
+            
 
             
 
@@ -107,6 +123,8 @@
 
             
 
+            
+
              method to remove a format. </para
           >
         </item>
@@ -114,6 +132,8 @@
           <para
             >The <see
              cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.RemoveAt(System.Int32)" />
+
+            
 
             
 
@@ -131,6 +151,8 @@
 
             
 
+            
+
              method to determine whether a particular format is already in the collection. </para
           >
         </item>
@@ -138,6 +160,8 @@
           <para
             >The <see
              cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.IndexOf(System.Web.UI.Design.DesignerAutoFormat)" />
+
+            
 
             
 
@@ -155,6 +179,8 @@
 
             
 
+            
+
              property to get or set the format at a particular index, using array notation.</para
           >
         </item>
@@ -162,6 +188,8 @@
           <para
             >The <see
              cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Clear" />
+
+            
 
             
 
@@ -179,6 +207,8 @@
 
             
 
+            
+
              property to determine the number of formats in the collection.</para
           >
         </item>
@@ -186,6 +216,8 @@
           <para
             >The <see
              cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.IndexOf(System.Web.UI.Design.DesignerAutoFormat)" />
+
+            
 
             
 
@@ -201,6 +233,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+
+        
 
         
 
@@ -229,6 +263,8 @@
 
             
 
+            
+
              constructor to create an empty collection. You can add elements to the collection by using the <see
              cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Add(System.Web.UI.Design.DesignerAutoFormat)" />
 
@@ -236,8 +272,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Insert(System.Int32,System.Web.UI.Design.DesignerAutoFormat)" />
+
+            
 
             
 
@@ -251,6 +291,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+
+            
 
             
 
@@ -287,8 +329,12 @@
 
             
 
+            
+
              method adds the specified <see
              cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+
+            
 
             
 
@@ -301,8 +347,12 @@
 
             
 
+            
+
              object to the collection at a specific index location, use the <see
              cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Insert(System.Int32,System.Web.UI.Design.DesignerAutoFormat)" />
+
+            
 
             
 
@@ -316,6 +366,8 @@
           <para
             >Adds the specified <see
              cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+
+            
 
             
 
@@ -335,8 +387,12 @@
 
           
 
+          
+
           An instance of <see
            cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+
+          
 
           
 
@@ -367,6 +423,8 @@
 
             
 
+            
+
              method to remove all formats from the collection. To remove a specific format from the collection, use the <see
              cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Remove(System.Web.UI.Design.DesignerAutoFormat)" />
 
@@ -374,8 +432,12 @@
 
             
 
+            
+
              method. To remove a format at a particular index, use the <see
              cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.RemoveAt(System.Int32)" />
+
+            
 
             
 
@@ -416,6 +478,8 @@
 
             
 
+            
+
              method determines equality by using the <see
              cref="M:System.Object.Equals(System.Object)" />
 
@@ -423,8 +487,12 @@
 
             
 
+            
+
              method on the <see
              cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+
+            
 
             
 
@@ -448,8 +516,12 @@
 
           
 
+          
+
           An instance of <see
            cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+
+          
 
           
 
@@ -480,6 +552,8 @@
 
             
 
+            
+
              property typically is used to determine the upper boundary index when iterating through objects in the collection. Because the collection indexes are zero-based, the first element is at index 0 and the last element is at index Count-1.</para
           >
         </remarks>
@@ -488,6 +562,8 @@
           <para
             >Gets the number of <see
              cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+
+            
 
             
 
@@ -524,6 +600,8 @@
 
             
 
+            
+
              method determines equality by using the <see
              cref="M:System.Object.Equals(System.Object)" />
 
@@ -531,8 +609,12 @@
 
             
 
+            
+
              method on the <see
              cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+
+            
 
             
 
@@ -551,6 +633,8 @@
 
             
 
+            
+
              object within the collection.</para
           >
         </summary>
@@ -559,6 +643,8 @@
           <para
             >The zero-based index of the first occurrence of <paramref
              name="format" />
+
+            
 
             
 
@@ -574,8 +660,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+
+          
 
           
 
@@ -612,8 +702,12 @@
 
             
 
+            
+
              method adds a <see
              cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+
+            
 
             
 
@@ -626,8 +720,12 @@
 
             
 
+            
+
              to the end of the collection, use the <see
              cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Add(System.Web.UI.Design.DesignerAutoFormat)" />
+
+            
 
             
 
@@ -649,6 +747,8 @@
 
             
 
+            
+
              object into the collection at the specified index.</para
           >
         </summary>
@@ -659,8 +759,12 @@
 
           
 
+          
+
           The zero-based index within the collection at which to insert <paramref
            name="format" />
+
+          
 
           
 
@@ -675,8 +779,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+
+          
 
           
 
@@ -729,8 +837,12 @@
 
             
 
+            
+
              property examines each format in the collection and returns the largest height and the largest width in a <see
              cref="T:System.Drawing.Size" />
+
+            
 
             
 
@@ -743,8 +855,12 @@
 
             
 
+            
+
              to determine the initial size of the <ui
             >AutoFormat</ui>
+
+            
 
             
 
@@ -785,8 +901,12 @@
 
             
 
+            
+
              method removes the first occurrence of <paramref
              name="format" />
+
+            
 
             
 
@@ -799,8 +919,12 @@
 
             
 
+            
+
              object does not contain <paramref
              name="format" />
+
+            
 
             
 
@@ -816,6 +940,8 @@
 
             
 
+            
+
              method determines equality by using the <see
              cref="M:System.Object.Equals(System.Object)" />
 
@@ -823,8 +949,12 @@
 
             
 
+            
+
              method on the <see
              cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+
+            
 
             
 
@@ -840,8 +970,12 @@
 
             
 
+            
+
              method performs a linear search; therefore, the average execution time is proportional to the <see
              cref="P:System.Web.UI.Design.DesignerAutoFormatCollection.Count" />
+
+            
 
             
 
@@ -857,8 +991,12 @@
 
             
 
+            
+
              method. To remove all formats from the collection, use the <see
              cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Clear" />
+
+            
 
             
 
@@ -880,6 +1018,8 @@
 
             
 
+            
+
              object from the collection.</para
           >
         </summary>
@@ -890,8 +1030,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+
+          
 
           
 
@@ -924,6 +1068,8 @@
 
             
 
+            
+
              method to remove a format at a particular index from the collection. To remove a specified format from the collection, use the <see
              cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Remove(System.Web.UI.Design.DesignerAutoFormat)" />
 
@@ -931,8 +1077,12 @@
 
             
 
+            
+
              method. To remove all formats from the collection, use the <see
              cref="M:System.Web.UI.Design.DesignerAutoFormatCollection.Clear" />
+
+            
 
             
 
@@ -954,6 +1104,8 @@
 
             
 
+            
+
              object at the specified index within the collection.</para
           >
         </summary>
@@ -964,8 +1116,12 @@
 
           
 
+          
+
           The zero-based index of the <see
            cref="T:System.Web.UI.Design.DesignerAutoFormat" />
+
+          
 
           
 
@@ -997,8 +1153,12 @@
 
             
 
+            
+
              method during the entire enumeration to guarantee thread safety. For detailed information about locking collections for thread-safe access, see <see
              cref="P:System.Collections.ICollection.SyncRoot" />
+
+            
 
             
 
@@ -1012,6 +1172,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+
+            
 
             
 
@@ -1046,8 +1208,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1066,8 +1232,12 @@
 
             
 
+            
+
              object, starting at a particular <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -1080,8 +1250,12 @@
 
             
 
+            
+
              object is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1097,8 +1271,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -1108,6 +1286,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1138,8 +1318,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1158,8 +1342,12 @@
 
             
 
+            
+
              object is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1194,8 +1382,12 @@
 
             
 
+            
+
              object is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1214,8 +1406,12 @@
 
             
 
+            
+
              object is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1250,8 +1446,12 @@
 
             
 
+            
+
              object is cast to an <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -1270,6 +1470,8 @@
 
             
 
+            
+
              interface that iterates through the collection when the <see
              cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
 
@@ -1277,8 +1479,12 @@
 
             
 
+            
+
              object is cast to an <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -1297,8 +1503,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+
+            
 
             
 
@@ -1333,8 +1543,12 @@
 
             
 
+            
+
              object is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1353,8 +1567,12 @@
 
             
 
+            
+
              object is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1393,8 +1611,12 @@
 
             
 
+            
+
              object is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1413,8 +1635,12 @@
 
             
 
+            
+
              object is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1428,6 +1654,8 @@
           <para
             >true, if the object is in the <see
              cref="T:System.Web.UI.Design.DesignerAutoFormatCollection" />
+
+            
 
             
 
@@ -1462,8 +1690,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1482,8 +1714,12 @@
 
             
 
+            
+
              object is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1523,8 +1759,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1543,8 +1783,12 @@
 
             
 
+            
+
              object is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1560,8 +1804,12 @@
 
           
 
+          
+
           The index at which to insert <paramref
            name="value" />
+
+          
 
           
 
@@ -1592,8 +1840,12 @@
 
             
 
+            
+
              object is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1612,8 +1864,12 @@
 
             
 
+            
+
              object is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1645,8 +1901,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1660,6 +1920,8 @@
           <para
             >For a description of this method, see <see
              cref="P:System.Collections.IList.IsReadOnly" />
+
+            
 
             
 
@@ -1716,8 +1978,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1736,8 +2002,12 @@
 
             
 
+            
+
              object is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1771,8 +2041,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1791,8 +2065,12 @@
 
             
 
+            
+
              object is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1803,6 +2081,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

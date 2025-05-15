@@ -38,6 +38,8 @@
 
         
 
+        
+
          class provides a way to specify an attribute for a <see
          cref="T:System.Drawing.Design.ToolboxItem" />
 
@@ -45,8 +47,12 @@
 
         
 
+        
+
         . In addition to what the <see
          cref="T:System.Attribute" />
+
+        
 
         
 
@@ -88,8 +94,12 @@
 
             
 
+            
+
              property is set to <see
              cref="T:System.Drawing.Design.ToolboxItem" />
+
+            
 
             
 
@@ -108,11 +118,15 @@
 
             
 
+            
+
              class and specifies whether to use default initialization values.</para
           >
         </summary>
         <param name="defaultType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -153,6 +167,8 @@
 
             
 
+            
+
              parameter to be in the form &lt;name of the item type&gt;, &lt;name of the assembly&gt; (for example, System.Drawing.Design.ToolboxItem, System.Drawing.Design).</para
           >
         </remarks>
@@ -161,6 +177,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.ToolboxItemAttribute" />
+
+            
 
             
 
@@ -199,11 +217,15 @@
 
             
 
+            
+
              class using the specified type of the toolbox item.</para
           >
         </summary>
         <param name="toolboxItemType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -243,8 +265,12 @@
 
             
 
+            
+
              property is set to <see
              cref="T:System.Drawing.Design.ToolboxItem" />
+
+            
 
             
 
@@ -263,8 +289,12 @@
 
             
 
+            
+
              class and sets the type to the default, <see
              cref="T:System.Drawing.Design.ToolboxItem" />
+
+            
 
             
 
@@ -349,6 +379,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -388,6 +420,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.ToolboxItemAttribute" />
+
+            
 
             
 
@@ -442,6 +476,8 @@
           <para
             >Gets or sets the name of the type of the current <see
              cref="T:System.Drawing.Design.ToolboxItem" />
+
+            
 
             
 

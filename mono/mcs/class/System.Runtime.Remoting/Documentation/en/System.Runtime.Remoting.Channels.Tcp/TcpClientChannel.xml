@@ -32,6 +32,8 @@
 
         
 
+        
+
          class transports messages using the TCP protocol.</para
       >
       <para>Channels are used by the .NET Framework remoting infrastructure to transport remote calls. When a client makes a call to a remote object, the call is serialized into a message that is sent by a client channel and received by a server channel. It is then deserialized and processed. Any returned values are transmitted by the server channel and received by the client channel.</para>
@@ -43,8 +45,12 @@
 
         
 
+        
+
          interface through which all messages processed by the <see
          cref="T:System.Runtime.Remoting.Channels.Tcp.TcpClientChannel" />
+
+        
 
         
 
@@ -60,11 +66,15 @@
 
         
 
+        
+
          class uses a binary formatter to serialize all messages.</para
       >
       <para
         >A <see
          cref="T:System.Runtime.Remoting.Channels.Tcp.TcpClientChannel" />
+
+        
 
         
 
@@ -77,8 +87,12 @@
 
         
 
+        
+
          method) or programmatically (by passing a <see
          cref="T:System.Collections.IDictionary" />
+
+        
 
         
 
@@ -91,8 +105,12 @@
 
         
 
+        
+
          constructor). For a list of these configuration properties, see the documentation for <see
          cref="M:System.Runtime.Remoting.Channels.Tcp.TcpClientChannel.#ctor(System.Collections.IDictionary,System.Runtime.Remoting.Channels.IClientChannelSinkProvider)" />
+
+        
 
         
 
@@ -123,6 +141,8 @@
 
             
 
+            
+
              instance returned by this constructor are all set to their default values.</para
           >
         </remarks>
@@ -131,6 +151,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Remoting.Channels.Tcp.TcpClientChannel" />
+
+            
 
             
 
@@ -174,11 +196,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >If you do not require sink functionality, set the <paramref
              name="sinkProvider" />
+
+            
 
             
 
@@ -197,6 +223,8 @@
 
             
 
+            
+
              class with the specified configuration properties and sink.</para
           >
         </summary>
@@ -207,8 +235,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -223,8 +255,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" />
+
+          
 
           
 
@@ -263,8 +299,12 @@
 
             
 
+            
+
              property by using the <paramref
              name="name" />
+
+            
 
             
 
@@ -275,6 +315,8 @@
           <para
             >If you do not require sink functionality, set the <paramref
              name="sinkProvider" />
+
+            
 
             
 
@@ -293,11 +335,15 @@
 
             
 
+            
+
              class with the specified name and sink.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -312,8 +358,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Remoting.Channels.IClientChannelSinkProvider" />
+
+          
 
           
 
@@ -340,6 +390,8 @@
           <para
             >Every registered channel has a unique name. The name is used to retrieve a specific channel when calling <see
              cref="M:System.Runtime.Remoting.Channels.ChannelServices.GetChannel(System.String)" />
+
+            
 
             
 

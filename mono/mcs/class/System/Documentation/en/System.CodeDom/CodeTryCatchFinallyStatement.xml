@@ -40,11 +40,15 @@
 
         
 
+        
+
          can be used to represent a try/ catch block of code.</para
       >
       <para
         >The <see
          cref="P:System.CodeDom.CodeTryCatchFinallyStatement.TryStatements" />
+
+        
 
         
 
@@ -57,8 +61,12 @@
 
         
 
+        
+
          property contains the catch clauses to handle caught exceptions. The <see
          cref="P:System.CodeDom.CodeTryCatchFinallyStatement.FinallyStatements" />
+
+        
 
         
 
@@ -75,8 +83,12 @@
 
           
 
+          
+
            method with the <see
            cref="F:System.CodeDom.Compiler.GeneratorSupport.TryCatchStatements" />
+
+          
 
           
 
@@ -113,6 +125,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeTryCatchFinallyStatement" />
+
+            
 
             
 
@@ -155,6 +169,8 @@
 
             
 
+            
+
              class using the specified statements for try and catch clauses.</para
           >
         </summary>
@@ -165,8 +181,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.CodeDom.CodeStatement" />
+
+          
 
           
 
@@ -181,8 +201,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.CodeDom.CodeCatchClause" />
+
+          
 
           
 
@@ -225,6 +249,8 @@
 
             
 
+            
+
              class using the specified statements for try, catch clauses, and finally statements.</para
           >
         </summary>
@@ -235,8 +261,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.CodeDom.CodeStatement" />
+
+          
 
           
 
@@ -251,8 +281,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.CodeDom.CodeCatchClause" />
+
+          
 
           
 
@@ -267,8 +301,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.CodeDom.CodeStatement" />
+
+          
 
           
 

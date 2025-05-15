@@ -29,8 +29,12 @@
 
         
 
+        
+
          object is immutable and has no public constructor. Instances are returned through the <see
          cref="T:System.Text.RegularExpressions.CaptureCollection" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          properties. However, the Match.Captures property provides information about the same match as the <see
          cref="T:System.Text.RegularExpressions.Match" />
+
+        
 
         
 
@@ -62,8 +70,12 @@
 
         
 
+        
+
          to a capturing group, the <see
          cref="P:System.Text.RegularExpressions.Group.Captures" />
+
+        
 
         
 
@@ -76,8 +88,12 @@
 
         
 
+        
+
          with a single <see
          cref="T:System.Text.RegularExpressions.Capture" />
+
+        
 
         
 
@@ -90,6 +106,8 @@
 
         
 
+        
+
          object. If you do apply a quantifier to a capturing group, the Group.Index, Group.Length, and Group.Value properties provide information only about the last captured group, whereas the <see
          cref="T:System.Text.RegularExpressions.Capture" />
 
@@ -97,8 +115,12 @@
 
         
 
+        
+
          objects in the <see
          cref="T:System.Text.RegularExpressions.CaptureCollection" />
+
+        
 
         
 
@@ -182,6 +204,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -190,6 +214,8 @@
           <para
             >Retrieves the captured substring from the input string by calling the <see
              cref="P:System.Text.RegularExpressions.Capture.Value" />
+
+            
 
             
 
@@ -228,8 +254,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Text.RegularExpressions.Match.NextMatch" />
+
+            
 
             
 
@@ -242,8 +272,12 @@
 
             
 
+            
+
             . If the regular expression engine is unable to match a capturing group. the value of the returned Group.Value property is <see
              cref="F:System.String.Empty" />
+
+            
 
             
 

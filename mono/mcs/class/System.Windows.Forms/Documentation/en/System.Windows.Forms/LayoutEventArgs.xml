@@ -21,8 +21,12 @@
 
         
 
+        
+
          specifies the child control that has been changed and its affected property. For example, if a control has been made visible since the last layout operation, the <see
          cref="P:System.Windows.Forms.Control.Visible" />
+
+        
 
         
 
@@ -38,6 +42,8 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.LayoutEventArgs.AffectedProperty" />
 
@@ -45,8 +51,12 @@
 
         
 
+        
+
          properties are set to null if no values were provided when the <see
          cref="M:System.Windows.Forms.Control.PerformLayout" />
+
+        
 
         
 
@@ -64,6 +74,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -72,6 +84,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.Control.Layout" />
+
+        
 
         
 
@@ -107,11 +121,15 @@
 
             
 
+            
+
              class with the specified component and property affected.</para
           >
         </summary>
         <param name="affectedComponent">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -124,10 +142,14 @@
 
           
 
+          
+
            affected by the layout change. </param
         >
         <param name="affectedProperty">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -159,11 +181,15 @@
 
             
 
+            
+
              class with the specified control and property affected.</para
           >
         </summary>
         <param name="affectedControl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -176,10 +202,14 @@
 
           
 
+          
+
            affected by the layout change.</param
         >
         <param name="affectedProperty">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -218,6 +248,8 @@
 
             
 
+            
+
              affected by the layout change.</para
           >
         </summary>
@@ -244,8 +276,12 @@
 
             
 
+            
+
              property is set to null if no value was provided when the <see
              cref="M:System.Windows.Forms.Control.PerformLayout" />
+
+            
 
             
 
@@ -282,6 +318,8 @@
 
             
 
+            
+
              property is affected. The <see
              cref="P:System.Windows.Forms.LayoutEventArgs.AffectedProperty" />
 
@@ -289,8 +327,12 @@
 
             
 
+            
+
              property is set to null if no value was provided when the <see
              cref="M:System.Windows.Forms.Control.PerformLayout" />
+
+            
 
             
 

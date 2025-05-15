@@ -20,8 +20,12 @@
 
         
 
+        
+
          enumeration contains the values to use when you set the <see
          cref="P:System.Web.Configuration.ProcessModelSection.LogLevel" />
+
+        
 
         
 
@@ -32,6 +36,8 @@
       <para
         >The default value is <see
          cref="F:System.Web.Configuration.ProcessModelLogLevel.Errors" />
+
+        
 
         
 

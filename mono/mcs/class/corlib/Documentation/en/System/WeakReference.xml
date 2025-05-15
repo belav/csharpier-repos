@@ -43,6 +43,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -79,6 +81,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -92,11 +96,15 @@
 
             
 
+            
+
              class, referencing the specified object.</para
           >
         </summary>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -137,8 +145,12 @@
 
             
 
+            
+
              is false, a short weak reference is created. If <paramref
              name="trackResurrection" />
+
+            
 
             
 
@@ -157,6 +169,8 @@
 
             
 
+            
+
              class, referencing the specified object and using the specified resurrection tracking.</para
           >
         </summary>
@@ -167,10 +181,14 @@
 
           
 
+          
+
           An object to track. </param
         >
         <param name="trackResurrection">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -211,6 +229,8 @@
 
             
 
+            
+
              parameter is reserved, and does not currently participate in this operation.</para
           >
         </remarks>
@@ -219,6 +239,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.WeakReference" />
+
+            
 
             
 
@@ -234,8 +256,12 @@
 
           
 
+          
+
           An object that holds all the data needed to serialize or deserialize the current <see
            cref="T:System.WeakReference" />
+
+          
 
           
 
@@ -250,8 +276,12 @@
 
           
 
+          
+
           (Reserved) Describes the source and destination of the serialized stream specified by <paramref
            name="info" />
+
+          
 
           
 
@@ -284,6 +314,8 @@
           <para
             >Discards the reference to the target represented by the current <see
              cref="T:System.WeakReference" />
+
+            
 
             
 
@@ -327,8 +359,12 @@
 
             
 
+            
+
              necessary to serialize the current <see
              cref="T:System.WeakReference" />
+
+            
 
             
 
@@ -339,6 +375,8 @@
           <para
             >The <paramref
              name="context" />
+
+            
 
             
 
@@ -357,8 +395,12 @@
 
             
 
+            
+
              object with all the data needed to serialize the current <see
              cref="T:System.WeakReference" />
+
+            
 
             
 
@@ -374,8 +416,12 @@
 
           
 
+          
+
           An object that holds all the data needed to serialize or deserialize the current <see
            cref="T:System.WeakReference" />
+
+          
 
           
 
@@ -385,6 +431,8 @@
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -418,6 +466,8 @@
 
             
 
+            
+
              property returns true, using this property is not recommended unless you are testing only for a false return value.</para
           >
         </remarks>
@@ -426,6 +476,8 @@
           <para
             >Gets an indication whether the object referenced by the current <see
              cref="T:System.WeakReference" />
+
+            
 
             
 
@@ -465,6 +517,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -494,8 +548,12 @@
 
             
 
+            
+
              parameter in the <see
              cref="T:System.WeakReference" />
+
+            
 
             
 
@@ -509,6 +567,8 @@
           <para
             >Gets an indication whether the object referenced by the current <see
              cref="T:System.WeakReference" />
+
+            
 
             
 

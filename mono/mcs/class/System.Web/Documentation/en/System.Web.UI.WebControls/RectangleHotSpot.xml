@@ -24,8 +24,12 @@
 
         
 
+        
+
          control. To define the region of the <see
          cref="T:System.Web.UI.WebControls.RectangleHotSpot" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          property to the value that represents the x-coordinate of the rectangular region's top left corner. Set the <see
          cref="P:System.Web.UI.WebControls.RectangleHotSpot.Top" />
+
+        
 
         
 
@@ -52,8 +60,12 @@
 
         
 
+        
+
          property to the value that represents the x-coordinate of the rectangular region's bottom right corner. Set of the <see
          cref="P:System.Web.UI.WebControls.RectangleHotSpot.Bottom" />
+
+        
 
         
 
@@ -69,8 +81,12 @@
 
         
 
+        
+
          control is clicked, the page navigates to a URL, generates a post back to the server, or does nothing. The <see
          cref="P:System.Web.UI.WebControls.HotSpot.HotSpotMode" />
+
+        
 
         
 
@@ -83,8 +99,12 @@
 
         
 
+        
+
          property to HotSpotMode.Navigate and use the <see
          cref="P:System.Web.UI.WebControls.HotSpot.NavigateUrl" />
+
+        
 
         
 
@@ -97,8 +117,12 @@
 
         
 
+        
+
          property to HotSpotMode.PostBack and use the <see
          cref="P:System.Web.UI.WebControls.HotSpot.PostBackValue" />
+
+        
 
         
 
@@ -111,8 +135,12 @@
 
         
 
+        
+
          object. This name will be passed in the <see
          cref="T:System.Web.UI.WebControls.ImageMapEventArgs" />
+
+        
 
         
 
@@ -125,6 +153,8 @@
 
         
 
+        
+
          is clicked. . If you want the <see
          cref="T:System.Web.UI.WebControls.HotSpot" />
 
@@ -132,8 +162,12 @@
 
         
 
+        
+
          object to have no behavior, set the <see
          cref="P:System.Web.UI.WebControls.HotSpot.HotSpotMode" />
+
+        
 
         
 
@@ -147,6 +181,8 @@
       <para
         >Defines a rectangular hot spot region in an <see
          cref="T:System.Web.UI.WebControls.ImageMap" />
+
+        
 
         
 
@@ -173,6 +209,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -181,6 +219,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.RectangleHotSpot" />
+
+            
 
             
 
@@ -218,8 +258,12 @@
 
             
 
+            
+
              property allows you to get or set a value that represents the y-coordinate of the bottom side of the rectangular region defined by this <see
              cref="T:System.Web.UI.WebControls.RectangleHotSpot" />
+
+            
 
             
 
@@ -232,8 +276,12 @@
 
             
 
+            
+
              object, you must specify a value for the this property and for the <see
              cref="P:System.Web.UI.WebControls.RectangleHotSpot.Left" />
+
+            
 
             
 
@@ -246,8 +294,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Web.UI.WebControls.RectangleHotSpot.Right" />
+
+            
 
             
 
@@ -261,6 +313,8 @@
           <para
             >Gets or sets the y-coordinate of the bottom side of the rectangular region defined by this <see
              cref="T:System.Web.UI.WebControls.RectangleHotSpot" />
+
+            
 
             
 
@@ -293,8 +347,12 @@
 
             
 
+            
+
              object's top left corner and the coordinates of its bottom right corner. This method uses the values assigned to the <see
              cref="P:System.Web.UI.WebControls.RectangleHotSpot.Left" />
+
+            
 
             
 
@@ -307,6 +365,8 @@
 
             
 
+            
+
              properties to return the coordinates for the top left corner. It uses the values assigned to the <see
              cref="P:System.Web.UI.WebControls.RectangleHotSpot.Right" />
 
@@ -314,8 +374,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.RectangleHotSpot.Bottom" />
+
+            
 
             
 
@@ -331,8 +395,12 @@
 
             
 
+            
+
              method is used internally by ASP.NET to get the text to use for the coordinates of a <see
              cref="T:System.Web.UI.WebControls.RectangleHotSpot" />
+
+            
 
             
 
@@ -351,6 +419,8 @@
 
             
 
+            
+
              object's top left corner and the x- and y-coordinates of its bottom right corner.</para
           >
         </summary>
@@ -359,6 +429,8 @@
           <para
             >A string that represents the x- and y-coordinates of a <see
              cref="T:System.Web.UI.WebControls.RectangleHotSpot" />
+
+            
 
             
 
@@ -396,8 +468,12 @@
 
             
 
+            
+
              property allows you to get or set a value that represents the x-coordinate of the left side of the rectangular region defined by this <see
              cref="T:System.Web.UI.WebControls.RectangleHotSpot" />
+
+            
 
             
 
@@ -410,8 +486,12 @@
 
             
 
+            
+
              object, you must specify a value for the this property and for the <see
              cref="P:System.Web.UI.WebControls.RectangleHotSpot.Top" />
+
+            
 
             
 
@@ -424,8 +504,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Web.UI.WebControls.RectangleHotSpot.Bottom" />
+
+            
 
             
 
@@ -439,6 +523,8 @@
           <para
             >Gets or sets the x-coordinate of the left side of the rectangular region defined by this <see
              cref="T:System.Web.UI.WebControls.RectangleHotSpot" />
+
+            
 
             
 
@@ -473,8 +559,12 @@
 
             
 
+            
+
              property is used internally by ASP.NET to get the string representation for the <see
              cref="T:System.Web.UI.WebControls.RectangleHotSpot" />
+
+            
 
             
 
@@ -488,6 +578,8 @@
           <para
             >Gets the string representation for the <see
              cref="T:System.Web.UI.WebControls.RectangleHotSpot" />
+
+            
 
             
 
@@ -522,8 +614,12 @@
 
             
 
+            
+
              property allows you to get or set a value that represents the x-coordinate of the right side of the rectangular region defined by this <see
              cref="T:System.Web.UI.WebControls.RectangleHotSpot" />
+
+            
 
             
 
@@ -536,8 +632,12 @@
 
             
 
+            
+
              object, you must specify a value for this property and for the <see
              cref="P:System.Web.UI.WebControls.RectangleHotSpot.Left" />
+
+            
 
             
 
@@ -550,8 +650,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Web.UI.WebControls.RectangleHotSpot.Bottom" />
+
+            
 
             
 
@@ -565,6 +669,8 @@
           <para
             >Gets or sets the x-coordinate of the right side of the rectangular region defined by this <see
              cref="T:System.Web.UI.WebControls.RectangleHotSpot" />
+
+            
 
             
 
@@ -602,8 +708,12 @@
 
             
 
+            
+
              property allows you to get or set a value that represents the y-coordinate of the top side of the rectangular region defined by this <see
              cref="T:System.Web.UI.WebControls.RectangleHotSpot" />
+
+            
 
             
 
@@ -616,8 +726,12 @@
 
             
 
+            
+
              object. you must specify a value for this property and for the <see
              cref="P:System.Web.UI.WebControls.RectangleHotSpot.Left" />
+
+            
 
             
 
@@ -630,8 +744,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Web.UI.WebControls.RectangleHotSpot.Bottom" />
+
+            
 
             
 
@@ -645,6 +763,8 @@
           <para
             >Gets or sets the y-coordinate of the top side of the rectangular region defined by this <see
              cref="T:System.Web.UI.WebControls.RectangleHotSpot" />
+
+            
 
             
 

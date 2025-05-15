@@ -28,8 +28,12 @@
 
         
 
+        
+
          is created to hold the pager controls in a <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -42,6 +46,8 @@
 
         
 
+        
+
          interface is a marker that indicates that the <see
          cref="T:System.Web.UI.WebControls.DetailsViewPagerRow" />
 
@@ -49,8 +55,12 @@
 
         
 
+        
+
          control is part of the <see
          cref="T:System.Web.UI.Page" />
+
+        
 
         
 
@@ -66,8 +76,12 @@
 
         
 
+        
+
          constructor and the <see
          cref="M:System.Web.UI.WebControls.DetailsView.CreateRow(System.Int32,System.Web.UI.WebControls.DataControlRowType,System.Web.UI.WebControls.DataControlRowState)" />
+
+        
 
         
 
@@ -80,8 +94,12 @@
 
         
 
+        
+
          methods of the <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -95,6 +113,8 @@
       <para
         >Represents the pager row in a <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -128,8 +148,12 @@
 
             
 
+            
+
              constructor calls the base class constructor, <see
              cref="M:System.Web.UI.WebControls.DetailsViewRow.#ctor(System.Int32,System.Web.UI.WebControls.DataControlRowType,System.Web.UI.WebControls.DataControlRowState)" />
+
+            
 
             
 
@@ -142,8 +166,12 @@
 
             
 
+            
+
              control in a <see
              cref="T:System.Web.UI.WebControls.DetailsView" />
+
+            
 
             
 
@@ -156,8 +184,12 @@
 
             
 
+            
+
              equal to -1, <paramref
              name="rowType" />
+
+            
 
             
 
@@ -170,6 +202,8 @@
 
             
 
+            
+
             , and <paramref
              name="rowState" />
 
@@ -177,8 +211,12 @@
 
             
 
+            
+
              equal to <see
              cref="F:System.Web.UI.WebControls.DataControlRowState.Normal" />
+
+            
 
             
 
@@ -197,11 +235,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="rowIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -214,8 +256,12 @@
 
           
 
+          
+
            collection of the <see
            cref="T:System.Web.UI.WebControls.DetailsView" />
+
+          
 
           
 
@@ -230,8 +276,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.DataControlRowType" />
+
+          
 
           
 
@@ -246,8 +296,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.DataControlRowState" />
+
+          
 
           
 

@@ -61,6 +61,8 @@
 
             
 
+            
+
              collection. This property gets the type-friendly version of the object. </para
           >
         </summary>
@@ -93,8 +95,12 @@
 
             
 
+            
+
              method, an enumerator is positioned before the first element of the collection, and the first call to the <see
              cref="M:System.Security.AccessControl.AceEnumerator.MoveNext" />
+
+            
 
             
 
@@ -110,8 +116,12 @@
 
             
 
+            
+
              return false until <see
              cref="M:System.Security.AccessControl.AceEnumerator.Reset" />
+
+            
 
             
 
@@ -127,6 +137,8 @@
 
             
 
+            
+
              or <see
              cref="M:System.Security.AccessControl.AceEnumerator.Reset" />
 
@@ -134,8 +146,12 @@
 
             
 
+            
+
              throws an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -149,6 +165,8 @@
           <para
             >Advances the enumerator to the next element of the <see
              cref="T:System.Security.AccessControl.GenericAce" />
+
+            
 
             
 
@@ -190,8 +208,12 @@
 
             
 
+            
+
              method or the <see
              cref="M:System.Security.AccessControl.AceEnumerator.Reset" />
+
+            
 
             
 
@@ -206,6 +228,8 @@
           <para
             >Sets the enumerator to its initial position, which is before the first element in the <see
              cref="T:System.Security.AccessControl.GenericAce" />
+
+            
 
             
 

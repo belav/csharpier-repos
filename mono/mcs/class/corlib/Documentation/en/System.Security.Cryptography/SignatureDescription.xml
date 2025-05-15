@@ -56,6 +56,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -92,8 +94,12 @@
 
             
 
+            
+
              class from the specified <see
              cref="T:System.Security.SecurityElement" />
+
+            
 
             
 
@@ -109,8 +115,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.SecurityElement" />
+
+          
 
           
 
@@ -153,8 +163,12 @@
 
             
 
+            
+
              instance with the specified key using the <see
              cref="P:System.Security.Cryptography.SignatureDescription.DeformatterAlgorithm" />
+
+            
 
             
 
@@ -173,6 +187,8 @@
 
             
 
+            
+
              instance.</para
           >
         </returns>
@@ -183,8 +199,12 @@
 
           
 
+          
+
           The key to use in the <see
            cref="T:System.Security.Cryptography.AsymmetricSignatureDeformatter" />
+
+          
 
           
 
@@ -225,8 +245,12 @@
 
             
 
+            
+
              instance using the <see
              cref="P:System.Security.Cryptography.SignatureDescription.DigestAlgorithm" />
+
+            
 
             
 
@@ -240,6 +264,8 @@
           <para
             >The newly created <see
              cref="T:System.Security.Cryptography.HashAlgorithm" />
+
+            
 
             
 
@@ -283,8 +309,12 @@
 
             
 
+            
+
              instance with the specified key using the <see
              cref="P:System.Security.Cryptography.SignatureDescription.FormatterAlgorithm" />
+
+            
 
             
 
@@ -303,6 +333,8 @@
 
             
 
+            
+
              instance.</para
           >
         </returns>
@@ -313,8 +345,12 @@
 
           
 
+          
+
           The key to use in the <see
            cref="T:System.Security.Cryptography.AsymmetricSignatureFormatter" />
+
+          
 
           
 

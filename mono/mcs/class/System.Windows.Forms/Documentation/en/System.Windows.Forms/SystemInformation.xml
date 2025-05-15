@@ -21,11 +21,15 @@
 
         
 
+        
+
          class provides static properties that can be used to get information about the current system environment. The class provides access to information such as Windows display element sizes, operating system settings, network availability, and the capabilities of hardware installed on the system. This class cannot be instantiated.</para
       >
       <para
         >For more information about system-wide parameters, see "SystemParametersInfo" in the Platform SDK documentation at <see
          cref="">http://msdn.microsoft.com</see>
+
+        
 
         
 
@@ -79,6 +83,8 @@
 
             
 
+            
+
              property indicates the direction in which minimized windows are arranged on the desktop or in a Multiple Document Interface (MDI) container.</para
           >
         </remarks>
@@ -113,6 +119,8 @@
 
             
 
+            
+
              property indicates the corner of a screen or window in which the operating system begins to arrange minimized windows.</para
           >
         </remarks>
@@ -121,6 +129,8 @@
           <para
             >Gets an <see
              cref="T:System.Windows.Forms.ArrangeStartingPosition" />
+
+            
 
             
 
@@ -156,6 +166,8 @@
 
             
 
+            
+
              property indicates whether the operating system was started in a normal or safe boot mode.</para
           >
         </remarks>
@@ -164,6 +176,8 @@
           <para
             >Gets a <see
              cref="T:System.Windows.Forms.BootMode" />
+
+            
 
             
 
@@ -199,6 +213,8 @@
 
             
 
+            
+
              property indicates the thickness, in pixels, of a three-dimensional (3-D) style system control border.</para
           >
           <para
@@ -209,8 +225,12 @@
 
             
 
+            
+
              property of the <see
              cref="P:System.Windows.Forms.SystemInformation.Border3DSize" />
+
+            
 
             
 
@@ -223,8 +243,12 @@
 
             
 
+            
+
              property of the <see
              cref="P:System.Windows.Forms.SystemInformation.Border3DSize" />
+
+            
 
             
 
@@ -235,6 +259,8 @@
           <para
             >The <see
              cref="P:System.Windows.Forms.SystemInformation.BorderSize" />
+
+            
 
             
 
@@ -292,6 +318,8 @@
 
             
 
+            
+
              property indicates the thickness of a flat-style system control border in pixels.</para
           >
           <para
@@ -302,8 +330,12 @@
 
             
 
+            
+
              property of the <see
              cref="P:System.Windows.Forms.SystemInformation.BorderSize" />
+
+            
 
             
 
@@ -316,8 +348,12 @@
 
             
 
+            
+
              property of the <see
              cref="P:System.Windows.Forms.SystemInformation.BorderSize" />
+
+            
 
             
 
@@ -333,8 +369,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.SystemInformation" />
+
+            
 
             
 
@@ -374,6 +414,8 @@
 
             
 
+            
+
              property indicates the standard dimensions of a button in the title bar of a window.</para
           >
           <para>The value of this property can be used to ensure that a button is properly sized to fit within the title bar of a window. Window caption buttons should be sized less than or equal to the standard dimensions for window caption buttons to ensure that they can be displayed in view correctly.</para>
@@ -401,6 +443,8 @@
           <para
             >The <see
              cref="P:System.Windows.Forms.SystemInformation.CaptionHeight" />
+
+            
 
             
 
@@ -479,8 +523,12 @@
 
             
 
+            
+
              property retrieves the NetBIOS name of the local computer. This is accomplished with a call into the native System Information function GetComputerName. This name is established at system startup, when the system reads it from the registry. If the local computer is a node in a cluster, <see
              cref="P:System.Windows.Forms.SystemInformation.ComputerName" />
+
+            
 
             
 
@@ -491,6 +539,8 @@
           <para
             >You can use the <see
              cref="P:System.Windows.Forms.SystemInformation.ComputerName" />
+
+            
 
             
 
@@ -552,6 +602,8 @@
 
             
 
+            
+
              property indicates whether the current operating system supports DBCS.</para
           >
         </remarks>
@@ -605,11 +657,15 @@
 
             
 
+            
+
              property indicates the size of a rectangular area centered around the point at which the last click occurred. To cause a double-click, a second click must occur within the area of the rectangle before the double-click time elapses.</para
           >
           <para
             >The <see
              cref="P:System.Windows.Forms.SystemInformation.DoubleClickTime" />
+
+            
 
             
 
@@ -642,6 +698,8 @@
           <para
             >The <see
              cref="P:System.Windows.Forms.SystemInformation.DoubleClickSize" />
+
+            
 
             
 
@@ -700,6 +758,8 @@
 
             
 
+            
+
              property indicates the size, in pixels, of a rectangle centered around the point at which the mouse button was pressed. Windows uses the rectangle as a boundary within which it does not start a drag operation.</para
           >
           <para>A user can hold a mouse button down and move the mouse within this area before a drag operation begins, which enables the user to click and release the mouse button easily without unintentionally starting a drag operation.</para>
@@ -735,6 +795,8 @@
 
             
 
+            
+
              property indicates the thickness of the frame, in pixels, around the perimeter of a window that has a caption but is not sizable.</para
           >
           <para
@@ -745,8 +807,12 @@
 
             
 
+            
+
              property of <see
              cref="P:System.Windows.Forms.SystemInformation.FixedFrameBorderSize" />
+
+            
 
             
 
@@ -759,8 +825,12 @@
 
             
 
+            
+
              property of <see
              cref="P:System.Windows.Forms.SystemInformation.FixedFrameBorderSize" />
+
+            
 
             
 
@@ -819,6 +889,8 @@
           <para
             >The <see
              cref="P:System.Windows.Forms.SystemInformation.FontSmoothingType" />
+
+            
 
             
 
@@ -894,6 +966,8 @@
 
             
 
+            
+
              property indicates the width and height of the resizing border for a window.</para
           >
           <para
@@ -904,8 +978,12 @@
 
             
 
+            
+
              value of this property is the width of a vertical resizing border. The <see
              cref="P:System.Drawing.Size.Height" />
+
+            
 
             
 
@@ -971,6 +1049,8 @@
 
             
 
+            
+
              property indicates the width of the left and right edges of the system focus rectangle, in pixels. The system focus rectangle is used to draw user's attention to a window or area by displaying a rectangular highlighted outline.</para
           >
           <block subset="none" type="note">
@@ -1002,6 +1082,8 @@
           <para
             >The <see
              cref="P:System.Windows.Forms.SystemInformation.HorizontalResizeBorderThickness" />
+
+            
 
             
 
@@ -1078,6 +1160,8 @@
 
             
 
+            
+
              property indicates the width of the scroll box used to indicate scroll bar position and to drag the scroll bar to a new position. The scroll box is also called the thumb box.</para
           >
         </remarks>
@@ -1107,6 +1191,8 @@
           <para
             >The <see
              cref="P:System.Windows.Forms.SystemInformation.IconHorizontalSpacing" />
+
+            
 
             
 
@@ -1161,8 +1247,12 @@
 
             
 
+            
+
              property indicates the size of the grid rectangle that each icon fits into when the system arranges them in a large-icon view. This value is always greater than or equal to <see
              cref="P:System.Windows.Forms.SystemInformation.IconSize" />
+
+            
 
             
 
@@ -1202,6 +1292,8 @@
 
             
 
+            
+
              property indicates the height of the space for an icon in large icon view. The system uses this distance to arrange icons in large icon view.</para
           >
         </remarks>
@@ -1230,6 +1322,8 @@
           <para
             >The <see
              cref="P:System.Windows.Forms.SystemInformation.IsActiveWindowTrackingEnabled" />
+
+            
 
             
 
@@ -1266,6 +1360,8 @@
           <para
             >The <see
              cref="P:System.Windows.Forms.SystemInformation.IsComboBoxAnimationEnabled" />
+
+            
 
             
 
@@ -1367,6 +1463,8 @@
 
             
 
+            
+
              property indicates whether hot tracking of user-interface elements is enabled. Hot tracking means that when the cursor moves over an item, it is highlighted but not selected.</para
           >
           <block subset="none" type="note">
@@ -1421,6 +1519,8 @@
 
             
 
+            
+
              property indicates whether the user has indicated a preference for keyboard-based input interfaces.</para
           >
           <block subset="none" type="note">
@@ -1452,6 +1552,8 @@
           <para
             >The <see
              cref="P:System.Windows.Forms.SystemInformation.IsListBoxSmoothScrollingEnabled" />
+
+            
 
             
 
@@ -1490,11 +1592,15 @@
 
             
 
+            
+
              property indicates whether either of the fade or slide animation features of system control menus is enabled.</para
           >
           <para
             >If the value of this property is true, the <see
              cref="P:System.Windows.Forms.SystemInformation.IsMenuFadeEnabled" />
+
+            
 
             
 
@@ -1533,8 +1639,12 @@
 
             
 
+            
+
              property indicates whether a menu uses fade animation, if menu animation is enabled. The <see
              cref="P:System.Windows.Forms.SystemInformation.IsMenuAnimationEnabled" />
+
+            
 
             
 
@@ -1547,6 +1657,8 @@
             <para
               >If the value of the <see
                cref="P:System.Windows.Forms.SystemInformation.IsMenuAnimationEnabled" />
+
+              
 
               
 
@@ -1589,6 +1701,8 @@
 
             
 
+            
+
              property indicates whether the window minimize and restore sequence is animated.</para
           >
         </remarks>
@@ -1614,6 +1728,8 @@
           <para
             >The <see
              cref="P:System.Windows.Forms.SystemInformation.IsSelectionFadeEnabled" />
+
+            
 
             
 
@@ -1652,6 +1768,8 @@
 
             
 
+            
+
              property indicates whether the snap-to-default-button feature is enabled. If the feature is enabled, the mouse cursor automatically moves to the default button, such as <ui
             >OK</ui>
 
@@ -1659,8 +1777,12 @@
 
             
 
+            
+
              or <ui
             >Apply</ui>
+
+            
 
             
 
@@ -1694,6 +1816,8 @@
           <para
             >The <see
              cref="P:System.Windows.Forms.SystemInformation.IsTitleBarGradientEnabled" />
+
+            
 
             
 
@@ -1735,6 +1859,8 @@
 
             
 
+            
+
              property indicates whether ToolTips can fade or slide into view.</para
           >
           <block subset="none" type="note">
@@ -1746,6 +1872,8 @@
           <para
             >Gets a value indicating whether <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -1774,8 +1902,12 @@
 
             
 
+            
+
              property indicates the height of the Kanji window on operating systems that support DBCS. The <see
              cref="P:System.Windows.Forms.SystemInformation.DbcsEnabled" />
+
+            
 
             
 
@@ -1816,6 +1948,8 @@
 
             
 
+            
+
              property indicates the repeat speed setting that determines the length of time between each keystroke repeat message sent by the operating system.</para
           >
         </remarks>
@@ -1842,6 +1976,8 @@
           <para
             >The <see
              cref="P:System.Windows.Forms.SystemInformation.KeyboardDelay" />
+
+            
 
             
 
@@ -1877,8 +2013,12 @@
 
             
 
+            
+
              property indicates the maximum dimensions to which a user can drag resize a window. The value returned by <see
              cref="P:System.Windows.Forms.SystemInformation.MaxWindowTrackSize" />
+
+            
 
             
 
@@ -1913,6 +2053,8 @@
           <para
             >The <see
              cref="P:System.Windows.Forms.SystemInformation.MenuAccessKeysUnderlined" />
+
+            
 
             
 
@@ -1954,8 +2096,12 @@
 
             
 
+            
+
              value of this property indicates the default width for a button on a menu-bar, in pixels. The <see
              cref="P:System.Drawing.Size.Height" />
+
+            
 
             
 
@@ -2016,6 +2162,8 @@
 
             
 
+            
+
              property indicates the size of the image used by Windows to display a check mark area next to a selected menu item.</para
           >
         </remarks>
@@ -2047,6 +2195,8 @@
 
             
 
+            
+
              property indicates the font used to display text on menus.</para
           >
         </remarks>
@@ -2073,6 +2223,8 @@
           <para
             >The <see
              cref="P:System.Windows.Forms.SystemInformation.MenuHeight" />
+
+            
 
             
 
@@ -2112,6 +2264,8 @@
 
             
 
+            
+
              property indicates the time, in milliseconds, that the system waits before displaying a cascaded shortcut menu when the mouse cursor is over a submenu item.</para
           >
         </remarks>
@@ -2134,6 +2288,8 @@
           <para
             >The <see
              cref="P:System.Windows.Forms.SystemInformation.MidEastEnabled" />
+
+            
 
             
 
@@ -2173,6 +2329,8 @@
 
             
 
+            
+
              property indicates the size of the area occupied by a normal minimized window.</para
           >
         </remarks>
@@ -2207,11 +2365,15 @@
 
             
 
+            
+
              property indicates the size, in pixels, of an arrangement grid cell for a minimized window. Each minimized window fits into a rectangle this size when arranged.</para
           >
           <para
             >The value of this property is always greater than or equal to the value of the <see
              cref="P:System.Windows.Forms.SystemInformation.MinimumWindowSize" />
+
+            
 
             
 
@@ -2246,6 +2408,8 @@
           <para
             >The <see
              cref="P:System.Windows.Forms.SystemInformation.MinimumWindowSize" />
+
+            
 
             
 
@@ -2288,6 +2452,8 @@
 
             
 
+            
+
              property indicates the default smallest window size that can be produced by using the borders to size the window.</para
           >
           <para
@@ -2298,8 +2464,12 @@
 
             
 
+            
+
              can override these values by setting the <see
              cref="P:System.Windows.Forms.Form.MinimumSize" />
+
+            
 
             
 
@@ -2331,6 +2501,8 @@
           <para
             >The <see
              cref="P:System.Windows.Forms.SystemInformation.MonitorCount" />
+
+            
 
             
 
@@ -2373,11 +2545,15 @@
 
             
 
+            
+
              indicates whether all monitors currently recognized by the operating system are using the same pixel color format.</para
           >
           <para
             >Pixel formats define the data structure used to encode pixel color and luminosity information. The <see
              cref="T:System.Drawing.Imaging.PixelFormat" />
+
+            
 
             
 
@@ -2420,11 +2596,15 @@
 
             
 
+            
+
              property indicates the number of mouse buttons recognized on the currently installed mouse.</para
           >
           <para
             >You can use <see
              cref="P:System.Windows.Forms.SystemInformation.MouseButtons" />
+
+            
 
             
 
@@ -2484,6 +2664,8 @@
 
             
 
+            
+
              property indicates the size of the rectangle within which the mouse pointer has to stay for the mouse hover time before a mouse hover message is generated.</para
           >
           <para
@@ -2494,8 +2676,12 @@
 
             
 
+            
+
              property indicates the time, in milliseconds, that a mouse pointer must remain within an area the size of the <see
              cref="P:System.Windows.Forms.SystemInformation.MouseHoverSize" />
+
+            
 
             
 
@@ -2532,8 +2718,12 @@
 
             
 
+            
+
              property indicates the amount of time, in milliseconds, that a mouse pointer must remain within an area the size of the <see
              cref="P:System.Windows.Forms.SystemInformation.MouseHoverSize" />
+
+            
 
             
 
@@ -2544,6 +2734,8 @@
           <para
             >The <see
              cref="P:System.Windows.Forms.SystemInformation.MouseHoverSize" />
+
+            
 
             
 
@@ -2579,8 +2771,12 @@
 
             
 
+            
+
              property indicates whether a pointing device is present or installed on the system. This is usually the case, so <see
              cref="P:System.Windows.Forms.SystemInformation.MousePresent" />
+
+            
 
             
 
@@ -2646,6 +2842,8 @@
 
             
 
+            
+
              property indicates whether the system recognizes a mouse wheel on the current mouse.</para
           >
           <block subset="none" type="note">
@@ -2701,8 +2899,12 @@
 
             
 
+            
+
              property indicates how many lines to scroll, by default, in a multi-line control that has a scroll bar. The corresponding Platform SDK system-wide parameters are SPI_GETWHEELSCROLLLINES and SPI_SETWHEELSCROLLLINES. For more information about system-wide parameters, see "SystemParametersInfo" in the Platform SDK documentation at <see
              cref="http://msdn.microsoft.com/">http://msdn.microsoft.com</see>
+
+            
 
             
 
@@ -2714,6 +2916,8 @@
             <para
               >Be sure to handle the special case that occurs if the "One screen at a time" mouse option is selected. In this case, the <see
                cref="P:System.Windows.Forms.SystemInformation.MouseWheelScrollLines" />
+
+              
 
               
 
@@ -2746,6 +2950,8 @@
           <para
             >Mouse wheel operations that occur through a <see
              cref="T:System.Windows.Forms.Control" />
+
+            
 
             
 
@@ -2785,12 +2991,16 @@
 
             
 
+            
+
              property indicates whether the system has a currently established network connection.</para
           >
           <block subset="none" type="note">
             <para
               >This property always returns true on all Windows platforms supported by the .NET Framework. Use the <see
                cref="N:System.Net.NetworkInformation" />
+
+              
 
               
 
@@ -2823,6 +3033,8 @@
           <para
             >The <see
              cref="P:System.Windows.Forms.SystemInformation.PenWindows" />
+
+            
 
             
 
@@ -2926,6 +3138,8 @@
 
             
 
+            
+
              property indicates the dimensions of the current video mode of the primary display adapter.</para
           >
         </remarks>
@@ -2997,6 +3211,8 @@
 
             
 
+            
+
              property indicates whether a Security Manager is available from the operating system. Windows NT and Windows 2000 provide a Security Manager to determine access to the operating system registry and to the file system. Windows 98 does not provide a Security Manager.</para
           >
         </remarks>
@@ -3023,6 +3239,8 @@
           <para
             >The <see
              cref="P:System.Windows.Forms.SystemInformation.ShowSounds" />
+
+            
 
             
 
@@ -3084,6 +3302,8 @@
 
             
 
+            
+
              property indicates the width, in pixels, of small caption buttons, and the height, in pixels, of small captions.</para
           >
         </remarks>
@@ -3109,6 +3329,8 @@
           <para
             >The <see
              cref="P:System.Windows.Forms.SystemInformation.SmallIconSize" />
+
+            
 
             
 
@@ -3148,6 +3370,8 @@
 
             
 
+            
+
              property indicates whether the calling process is associated with a Terminal Services client session.</para
           >
           <block subset="none" type="note">
@@ -3176,6 +3400,8 @@
           <para
             >The <see
              cref="P:System.Windows.Forms.SystemInformation.ToolWindowCaptionButtonSize" />
+
+            
 
             
 
@@ -3373,6 +3599,8 @@
 
             
 
+            
+
              property is false, do not display any modal dialogs or message boxes, as there is no graphical user interface for the user to interact with.</para
           >
           <para>This property is false only when called from a service process or from a Web application.</para>
@@ -3435,6 +3663,8 @@
 
             
 
+            
+
              property indicates the height, in pixels, of the top and bottom edges of the system focus rectangle. The system focus rectangle is used to draw user's attention to a window or area by displaying a rectangular highlighted outline.</para
           >
           <block subset="none" type="note">
@@ -3471,6 +3701,8 @@
 
             
 
+            
+
              property indicates the height of the horizontal sizing border around the perimeter of a window being resized.</para
           >
         </remarks>
@@ -3496,6 +3728,8 @@
           <para
             >The <see
              cref="P:System.Windows.Forms.SystemInformation.VerticalScrollBarArrowHeight" />
+
+            
 
             
 
@@ -3530,6 +3764,8 @@
           <para
             >The <see
              cref="P:System.Windows.Forms.SystemInformation.VerticalScrollBarThumbHeight" />
+
+            
 
             
 
@@ -3588,6 +3824,8 @@
 
             
 
+            
+
              property indicates the bounds of the entire desktop on a multi-monitor system. You can use this property to determine the maximum visual space available on a system that has multiple monitors installed.</para
           >
           <para>The position coordinates of the rectangle indicate the position offset, in pixels, of the upper left corner of the virtual screen area relative to the upper left corner of the onscreen area of the primary display. The size values of the rectangle indicate the size of the virtual screen area.</para>
@@ -3600,8 +3838,12 @@
 
               
 
+              
+
                position coordinate of the rectangle is negative when the virtual screen starts to the left of the left edge of the primary display. The <see
                cref="P:System.Drawing.Rectangle.Y" />
+
+              
 
               
 
@@ -3645,6 +3887,8 @@
 
             
 
+            
+
              property indicates the bounds of the screen that can be used by applications. The working area is the desktop area of the display, excluding taskbars, docked windows, and docked tool bars.</para
           >
           <para>
@@ -3654,8 +3898,12 @@
 
             
 
+            
+
              always returns the work area of the primary monitor. If you need the work area of a monitor in a multiple display environment, you can call one of the overloads of <see
              cref="M:System.Windows.Forms.Screen.GetWorkingArea(System.Windows.Forms.Control)" />
+
+            
 
             
 

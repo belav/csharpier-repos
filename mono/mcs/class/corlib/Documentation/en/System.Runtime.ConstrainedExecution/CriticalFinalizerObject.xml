@@ -34,8 +34,12 @@
 
         
 
+        
+
          class are implicitly treated as a constrained execution region (CER).  This requires code in the finalizer to only call code with a strong reliability contract. For more information about CERs, see the <see
          cref="N:System.Runtime.ConstrainedExecution" />
+
+        
 
         
 
@@ -51,8 +55,12 @@
 
         
 
+        
+
          class, the common language runtime (CLR) guarantees that all critical finalization code will be given the opportunity to execute, provided the finalizer follows the rules for a CER, even in situations where the CLR forcibly unloads an application domain or aborts a thread. If a finalizer violates the rules for a CER, it might not successfully execute. In addition, the CLR establishes a weak ordering among normal and critical finalizers: for objects reclaimed by garbage collection at the same time, all the noncritical finalizers are called before any of the critical finalizers. For example, a class such as <see
          cref="T:System.IO.FileStream" />
+
+        
 
         
 
@@ -65,8 +73,12 @@
 
         
 
+        
+
          class that is derived from <see
          cref="T:System.Runtime.ConstrainedExecution.CriticalFinalizerObject" />
+
+        
 
         
 
@@ -82,8 +94,12 @@
 
         
 
+        
+
          class. The .NET Framework class library provides two classes, <see
          cref="T:System.Runtime.InteropServices.SafeHandle" />
+
+        
 
         
 
@@ -96,6 +112,8 @@
 
         
 
+        
+
         , that provide critical finalization functionality for handle resources. Furthermore, the .NET Framework provides a set of prewritten classes derived from the <see
          cref="T:System.Runtime.InteropServices.SafeHandle" />
 
@@ -103,8 +121,12 @@
 
         
 
+        
+
          class, and this set is located in the <see
          cref="N:Microsoft.Win32.SafeHandles" />
+
+        
 
         
 
@@ -149,6 +171,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -186,6 +210,8 @@
 
             
 
+            
+
              is given the opportunity to execute and will not be aborted, assuming the finalizer correctly follows the rules for a constrained execution region (CER). </para
           >
         </remarks>
@@ -194,6 +220,8 @@
           <para
             >Releases all the resources used by the <see
              cref="T:System.Runtime.ConstrainedExecution.CriticalFinalizerObject" />
+
+            
 
             
 

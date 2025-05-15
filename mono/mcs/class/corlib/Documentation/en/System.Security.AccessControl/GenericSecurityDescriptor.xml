@@ -51,6 +51,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -81,8 +83,12 @@
 
             
 
+            
+
              object. This length should be used before marshaling the ACL into a binary array with the <see
              cref="M:System.Security.AccessControl.GenericSecurityDescriptor.GetBinaryForm" />
+
+            
 
             
 
@@ -119,6 +125,8 @@
           <para
             >Gets values that specify behavior of the <see
              cref="T:System.Security.AccessControl.GenericSecurityDescriptor" />
+
+            
 
             
 
@@ -163,11 +171,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="binaryForm">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -180,10 +192,14 @@
 
           
 
+          
+
            is marshaled.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -229,6 +245,8 @@
 
             
 
+            
+
              object represents.</para
           >
         </summary>
@@ -242,11 +260,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="includeSections">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -287,6 +309,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -320,6 +344,8 @@
 
             
 
+            
+
              object can be converted to the Security Descriptor Definition Language (SDDL) format.</para
           >
         </summary>
@@ -328,6 +354,8 @@
           <para
             >true if the security descriptor associated with this  <see
              cref="T:System.Security.AccessControl.GenericSecurityDescriptor" />
+
+            
 
             
 
@@ -369,6 +397,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -394,6 +424,8 @@
           <para
             >Gets the revision level of the <see
              cref="T:System.Security.AccessControl.GenericSecurityDescriptor" />
+
+            
 
             
 

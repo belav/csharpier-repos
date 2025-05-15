@@ -58,6 +58,8 @@
 
             
 
+            
+
              class with the specified values.</para
           >
         </summary>
@@ -68,8 +70,12 @@
 
           
 
+          
+
           true if the new <see
            cref="T:System.Security.AccessControl.DiscretionaryAcl" />
+
+          
 
           
 
@@ -84,8 +90,12 @@
 
           
 
+          
+
           true if the new <see
            cref="T:System.Security.AccessControl.DiscretionaryAcl" />
+
+          
 
           
 
@@ -100,8 +110,12 @@
 
           
 
+          
+
           The number of Access Control Entries (ACEs) this <see
            cref="T:System.Security.AccessControl.DiscretionaryAcl" />
+
+          
 
           
 
@@ -142,6 +156,8 @@
 
             
 
+            
+
              object are cloned.</para
           >
         </remarks>
@@ -155,8 +171,12 @@
 
             
 
+            
+
              class with the specified values from the specified <see
              cref="T:System.Security.AccessControl.RawAcl" />
+
+            
 
             
 
@@ -172,8 +192,12 @@
 
           
 
+          
+
           true if the new <see
            cref="T:System.Security.AccessControl.DiscretionaryAcl" />
+
+          
 
           
 
@@ -188,8 +212,12 @@
 
           
 
+          
+
           true if the new <see
            cref="T:System.Security.AccessControl.DiscretionaryAcl" />
+
+          
 
           
 
@@ -204,6 +232,8 @@
 
           
 
+          
+
           The underlying <see
            cref="T:System.Security.AccessControl.RawAcl" />
 
@@ -211,8 +241,12 @@
 
           
 
+          
+
            object for the new <see
            cref="T:System.Security.AccessControl.DiscretionaryAcl" />
+
+          
 
           
 
@@ -255,6 +289,8 @@
 
             
 
+            
+
              class with the specified values.</para
           >
         </summary>
@@ -265,8 +301,12 @@
 
           
 
+          
+
           true if the new <see
            cref="T:System.Security.AccessControl.DiscretionaryAcl" />
+
+          
 
           
 
@@ -281,8 +321,12 @@
 
           
 
+          
+
           true if the new <see
            cref="T:System.Security.AccessControl.DiscretionaryAcl" />
+
+          
 
           
 
@@ -297,8 +341,12 @@
 
           
 
+          
+
           The revision level of the new <see
            cref="T:System.Security.AccessControl.DiscretionaryAcl" />
+
+          
 
           
 
@@ -313,8 +361,12 @@
 
           
 
+          
+
           The number of Access Control Entries (ACEs) this <see
            cref="T:System.Security.AccessControl.DiscretionaryAcl" />
+
+          
 
           
 
@@ -364,11 +416,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="accessType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -383,8 +439,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -399,6 +459,8 @@
 
           
 
+          
+
           The access rule for the new ACE.</param
         >
         <param name="inheritanceFlags">
@@ -408,10 +470,14 @@
 
           
 
+          
+
           Flags that specify the inheritance properties of the new ACE.</param
         >
         <param name="propagationFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -464,11 +530,15 @@
 
             
 
+            
+
              object. Use this method for directory object Access Control Lists (ACLs) when specifying the object type or the inherited object type for the new ACE.</para
           >
         </summary>
         <param name="accessType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -483,8 +553,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -499,10 +573,14 @@
 
           
 
+          
+
           The access rule for the new ACE.</param
         >
         <param name="inheritanceFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -517,10 +595,14 @@
 
           
 
+          
+
           Flags that specify the inheritance propagation properties for the new ACE.</param
         >
         <param name="objectFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -533,8 +615,12 @@
 
           
 
+          
+
            and <paramref
            name="inheritedObjectType" />
+
+          
 
           
 
@@ -549,10 +635,14 @@
 
           
 
+          
+
           The identity of the class of objects to which the new ACE applies.</param
         >
         <param name="inheritedObjectType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -602,6 +692,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -616,6 +708,8 @@
 
           
 
+          
+
           The type of access control (allow or deny) to remove.</param
         >
         <param name="sid">
@@ -625,8 +719,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -641,6 +739,8 @@
 
           
 
+          
+
           The access mask for the rule to be removed.</param
         >
         <param name="inheritanceFlags">
@@ -650,10 +750,14 @@
 
           
 
+          
+
           Flags that specify the inheritance properties of the rule to be removed.</param
         >
         <param name="propagationFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -706,6 +810,8 @@
 
             
 
+            
+
              object. Use this method for directory object Access Control Lists (ACLs) when specifying the object type or the inherited object type.</para
           >
         </summary>
@@ -720,6 +826,8 @@
 
           
 
+          
+
           The type of access control (allow or deny) to remove.</param
         >
         <param name="sid">
@@ -729,8 +837,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -745,10 +857,14 @@
 
           
 
+          
+
           The access mask for the access control rule to be removed.</param
         >
         <param name="inheritanceFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -763,10 +879,14 @@
 
           
 
+          
+
           Flags that specify the inheritance propagation properties for the access control rule to be removed.</param
         >
         <param name="objectFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -779,8 +899,12 @@
 
           
 
+          
+
            and <paramref
            name="inheritedObjectType" />
+
+          
 
           
 
@@ -795,10 +919,14 @@
 
           
 
+          
+
           The identity of the class of objects to which the removed access control rule applies.</param
         >
         <param name="inheritedObjectType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -845,11 +973,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="accessType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -864,8 +996,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -880,6 +1016,8 @@
 
           
 
+          
+
           The access mask for the ACE to be removed.</param
         >
         <param name="inheritanceFlags">
@@ -889,10 +1027,14 @@
 
           
 
+          
+
           Flags that specify the inheritance properties of the ACE to be removed.</param
         >
         <param name="propagationFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -942,11 +1084,15 @@
 
             
 
+            
+
              object. Use this method for directory object Access Control Lists (ACLs) when specifying the object type or the inherited object type for the ACE to be removed.</para
           >
         </summary>
         <param name="accessType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -961,8 +1107,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -977,10 +1127,14 @@
 
           
 
+          
+
           The access mask for the ACE to be removed.</param
         >
         <param name="inheritanceFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -995,10 +1149,14 @@
 
           
 
+          
+
           Flags that specify the inheritance propagation properties for the ACE to be removed.</param
         >
         <param name="objectFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1011,8 +1169,12 @@
 
           
 
+          
+
            and <paramref
            name="inheritedObjectType" />
+
+          
 
           
 
@@ -1027,10 +1189,14 @@
 
           
 
+          
+
           The identity of the class of objects to which the removed ACE applies.</param
         >
         <param name="inheritedObjectType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1076,6 +1242,8 @@
 
             
 
+            
+
              object and the specified access qualifier (allow or deny).</para
           >
         </remarks>
@@ -1084,6 +1252,8 @@
           <para
             >Sets the specified access control for the specified <see
              cref="T:System.Security.Principal.SecurityIdentifier" />
+
+            
 
             
 
@@ -1099,6 +1269,8 @@
 
           
 
+          
+
           The type of access control (allow or deny) to set.</param
         >
         <param name="sid">
@@ -1108,8 +1280,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -1124,6 +1300,8 @@
 
           
 
+          
+
           The access rule for the new ACE.</param
         >
         <param name="inheritanceFlags">
@@ -1133,10 +1311,14 @@
 
           
 
+          
+
           Flags that specify the inheritance properties of the new ACE.</param
         >
         <param name="propagationFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1185,6 +1367,8 @@
 
             
 
+            
+
              object and the specified access qualifier (allow or deny).</para
           >
         </remarks>
@@ -1193,6 +1377,8 @@
           <para
             >Sets the specified access control for the specified <see
              cref="T:System.Security.Principal.SecurityIdentifier" />
+
+            
 
             
 
@@ -1208,6 +1394,8 @@
 
           
 
+          
+
           The type of access control (allow or deny) to set.</param
         >
         <param name="sid">
@@ -1217,8 +1405,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -1233,10 +1425,14 @@
 
           
 
+          
+
           The access rule for the new ACE.</param
         >
         <param name="inheritanceFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1251,10 +1447,14 @@
 
           
 
+          
+
           Flags that specify the inheritance propagation properties for the new ACE.</param
         >
         <param name="objectFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1267,8 +1467,12 @@
 
           
 
+          
+
            and <paramref
            name="inheritedObjectType" />
+
+          
 
           
 
@@ -1283,10 +1487,14 @@
 
           
 
+          
+
           The identity of the class of objects to which the new ACE applies.</param
         >
         <param name="inheritedObjectType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

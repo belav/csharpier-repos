@@ -21,8 +21,12 @@
 
         
 
+        
+
          event occurs when a <see
          cref="T:System.Windows.Forms.MaskedTextBox" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          property is not null and a causal action occurs, such as the <see
          cref="T:System.Windows.Forms.MaskedTextBox" />
+
+        
 
         
 
@@ -49,6 +57,8 @@
 
         
 
+        
+
          is the ability to convert the formatted input string to the type represented by the <see
          cref="P:System.Windows.Forms.MaskedTextBox.ValidatingType" />
 
@@ -56,8 +66,12 @@
 
         
 
+        
+
          property. For more information about the type validation process, see the <see
          cref="E:System.Windows.Forms.MaskedTextBox.TypeValidationCompleted" />
+
+        
 
         
 
@@ -73,8 +87,12 @@
 
         
 
+        
+
         , the handler receives a parameter of type <see
          cref="T:System.Windows.Forms.TypeValidationEventArgs" />
+
+        
 
         
 
@@ -88,6 +106,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.MaskedTextBox.TypeValidationCompleted" />
+
+        
 
         
 
@@ -122,6 +142,8 @@
 
             
 
+            
+
              constructor are used to initialize the corresponding read-only properties of this class.</para
           >
         </remarks>
@@ -130,6 +152,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.TypeValidationEventArgs" />
+
+            
 
             
 
@@ -145,8 +169,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -161,8 +189,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -177,8 +209,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -193,8 +229,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -226,8 +266,12 @@
 
             
 
+            
+
              event occurs just before the <see
              cref="E:System.Windows.Forms.Control.Validating" />
+
+            
 
             
 
@@ -243,8 +287,12 @@
 
             
 
+            
+
              property to true in the <see
              cref="E:System.Windows.Forms.MaskedTextBox.TypeValidationCompleted" />
+
+            
 
             
 
@@ -257,6 +305,8 @@
 
             
 
+            
+
              control to retain focus, unless the subsequent <see
              cref="E:System.Windows.Forms.Control.Validating" />
 
@@ -264,8 +314,12 @@
 
             
 
+            
+
              event sets its version of the <see
              cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+
+            
 
             
 
@@ -302,6 +356,8 @@
 
             
 
+            
+
              property indicates the success of the Parse method found in the <see
              cref="T:System.Type" />
 
@@ -309,8 +365,12 @@
 
             
 
+            
+
              represented by the <see
              cref="P:System.Windows.Forms.TypeValidationEventArgs.ValidatingType" />
+
+            
 
             
 
@@ -328,8 +388,12 @@
 
             
 
+            
+
              control raises the <see
              cref="E:System.Windows.Forms.MaskedTextBox.TypeValidationCompleted" />
+
+            
 
             
 
@@ -342,8 +406,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.MaskedTextBox" />
+
+            
 
             
 
@@ -354,6 +422,8 @@
           <para
             >For more information about the type validation process, see the <see
              cref="E:System.Windows.Forms.MaskedTextBox.TypeValidationCompleted" />
+
+            
 
             
 
@@ -390,8 +460,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Windows.Forms.TypeValidationEventArgs.Message" />
+
+            
 
             
 
@@ -404,8 +478,12 @@
 
             
 
+            
+
              is primarily useful when conversion fails, as indicated by an <see
              cref="P:System.Windows.Forms.TypeValidationEventArgs.IsValidInput" />
+
+            
 
             
 
@@ -442,8 +520,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Windows.Forms.TypeValidationEventArgs.ReturnValue" />
+
+            
 
             
 
@@ -456,8 +538,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Windows.Forms.MaskedTextBox" />
+
+            
 
             
 
@@ -494,6 +580,8 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.MaskedTextBox" />
 
@@ -501,8 +589,12 @@
 
             
 
+            
+
              class is not null. The <see
              cref="P:System.Windows.Forms.TypeValidationEventArgs.ValidatingType" />
+
+            
 
             
 

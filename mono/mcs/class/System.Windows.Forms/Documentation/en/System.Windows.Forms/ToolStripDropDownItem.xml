@@ -23,8 +23,12 @@
 
         
 
+        
+
          is the abstract base class for <see
          cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Windows.Forms.ToolStripSplitButton" />
+
+        
 
         
 
@@ -51,8 +59,12 @@
 
         
 
+        
+
          property to a <see
          cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+        
 
         
 
@@ -65,6 +77,8 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.ToolStripDropDown" />
 
@@ -72,8 +86,12 @@
 
         
 
+        
+
         . Access these drop-down items directly through the <see
          cref="P:System.Windows.Forms.ToolStripDropDownItem.DropDownItems" />
+
+        
 
         
 
@@ -92,8 +110,12 @@
 
         
 
+        
+
          when a <see
          cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+
+        
 
         
 
@@ -106,8 +128,12 @@
 
         
 
+        
+
         , or <see
          cref="T:System.Windows.Forms.ToolStripSplitButton" />
+
+        
 
         
 
@@ -134,8 +160,12 @@
 
             
 
+            
+
              class in order to have any drop-down functionality for a <see
              cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+
+            
 
             
 
@@ -148,8 +178,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Windows.Forms.ToolStripSplitButton" />
+
+            
 
             
 
@@ -163,6 +197,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ToolStripDropDownItem" />
+
+            
 
             
 
@@ -199,8 +235,12 @@
 
             
 
+            
+
              class in order to have any drop-down functionality for a <see
              cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+
+            
 
             
 
@@ -213,8 +253,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Windows.Forms.ToolStripSplitButton" />
+
+            
 
             
 
@@ -233,11 +277,15 @@
 
             
 
+            
+
              class with the specified display text, image, and action to take when the drop-down control is clicked.</para
           >
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -252,8 +300,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -263,6 +315,8 @@
         >
         <param name="onClick">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -304,8 +358,12 @@
 
             
 
+            
+
              class in order to have any drop-down functionality for a <see
              cref="T:System.Windows.Forms.ToolStripDropDownButton" />
+
+            
 
             
 
@@ -318,8 +376,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Windows.Forms.ToolStripSplitButton" />
+
+            
 
             
 
@@ -338,8 +400,12 @@
 
             
 
+            
+
              class with the specified display text, image, and <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -355,6 +421,8 @@
 
           
 
+          
+
           The display text of the drop-down control.</param
         >
         <param name="image">
@@ -364,8 +432,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -380,8 +452,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -419,11 +495,15 @@
 
             
 
+            
+
              class with the specified display text, image, action to take when the drop-down control is clicked, and control name.</para
           >
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -438,8 +518,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
+
+          
 
           
 
@@ -454,10 +538,14 @@
 
           
 
+          
+
           The action to take when the drop-down control is clicked.</param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -511,8 +599,12 @@
 
             
 
+            
+
              method is automatically called if the <see
              cref="P:System.Windows.Forms.ToolStripDropDownItem.DropDown" />
+
+            
 
             
 
@@ -525,8 +617,12 @@
 
             
 
+            
+
              associated with the <see
              cref="T:System.Windows.Forms.ToolStripDropDownItem" />
+
+            
 
             
 
@@ -545,6 +641,8 @@
 
             
 
+            
+
              for which events can be defined.</para
           >
         </summary>
@@ -553,6 +651,8 @@
           <para
             >The created <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -587,8 +687,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -601,8 +705,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -618,8 +726,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Windows.Forms.ToolStripDropDownItem" />
+
+            
 
             
 
@@ -638,11 +750,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -677,8 +793,12 @@
 
             
 
+            
+
              is associated with the <see
              cref="T:System.Windows.Forms.ToolStripDropDownItem" />
+
+            
 
             
 
@@ -691,12 +811,16 @@
 
             
 
+            
+
              creates a generic drop-down control. </para
           >
           <block subset="none" type="note">
             <para
               >If a drop-down control is automatically generated, which means that items are added to the collection, and you then set the <see
                cref="P:System.Windows.Forms.ToolStripDropDownItem.DropDown" />
+
+              
 
               
 
@@ -716,8 +840,12 @@
 
             
 
+            
+
              that will be displayed when this <see
              cref="T:System.Windows.Forms.ToolStripDropDownItem" />
+
+            
 
             
 
@@ -756,6 +884,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -764,6 +894,8 @@
           <para
             >Occurs when the <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -795,6 +927,8 @@
           <para
             >Gets or sets a value indicating the direction in which the <see
              cref="T:System.Windows.Forms.ToolStripDropDownItem" />
+
+            
 
             
 
@@ -836,6 +970,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -844,6 +980,8 @@
           <para
             >Occurs when the <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -879,6 +1017,8 @@
 
             
 
+            
+
              property to get all the items in the <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
 
@@ -886,8 +1026,12 @@
 
             
 
+            
+
              that is referred to by the <see
              cref="P:System.Windows.Forms.ToolStripDropDownItem.DropDown" />
+
+            
 
             
 
@@ -906,8 +1050,12 @@
 
             
 
+            
+
              that is associated with this <see
              cref="T:System.Windows.Forms.ToolStripDropDownItem" />
+
+            
 
             
 
@@ -951,6 +1099,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -974,8 +1124,12 @@
 
             
 
+            
+
              method. You can use this event to dynamically populate the <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -993,6 +1147,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1001,6 +1157,8 @@
           <para
             >Occurs when the <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -1034,6 +1192,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1042,6 +1202,8 @@
           <para
             >Occurs as the <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -1075,8 +1237,12 @@
 
             
 
+            
+
              has <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -1114,8 +1280,12 @@
 
             
 
+            
+
              method to prevent the user from choosing one of the options available on the associated <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -1129,6 +1299,8 @@
           <para
             >Makes a visible <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -1186,11 +1358,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripDropDownItem.OnDropDownClosed(System.EventArgs)" />
+
+            
 
             
 
@@ -1209,6 +1385,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1219,8 +1397,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1253,11 +1435,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripDropDownItem.OnDropDownHide(System.EventArgs)" />
+
+            
 
             
 
@@ -1276,6 +1462,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -1286,8 +1474,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1328,11 +1520,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripDropDownItem.OnDropDownItemClicked(System.Windows.Forms.ToolStripItemClickedEventArgs)" />
+
+            
 
             
 
@@ -1351,6 +1547,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1361,8 +1559,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripItemClickedEventArgs" />
+
+          
 
           
 
@@ -1400,11 +1602,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripDropDownItem.OnDropDownOpened(System.EventArgs)" />
+
+            
 
             
 
@@ -1423,6 +1629,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1433,8 +1641,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1467,11 +1679,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripDropDownItem.OnDropDownShow(System.EventArgs)" />
+
+            
 
             
 
@@ -1490,6 +1706,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -1500,8 +1718,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1537,11 +1759,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripDropDownItem.OnFontChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1560,6 +1786,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1570,8 +1798,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1620,6 +1852,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Windows.Forms.ToolStripDropDownItem" />
+
+            
 
             
 
@@ -1700,8 +1934,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.Keys" />
+
+          
 
           
 
@@ -1730,8 +1968,12 @@
 
             
 
+            
+
              method to display the drop-down controls that have been set by the <see
              cref="P:System.Windows.Forms.ToolStripDropDownItem.DropDown" />
+
+            
 
             
 
@@ -1750,8 +1992,12 @@
 
             
 
+            
+
              control associated with this <see
              cref="T:System.Windows.Forms.ToolStripDropDownItem" />
+
+            
 
             
 

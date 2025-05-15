@@ -44,8 +44,12 @@
 
         
 
+        
+
          control can display text, an <see
          cref="T:System.Drawing.Image" />
+
+        
 
         
 
@@ -61,8 +65,12 @@
 
         
 
+        
+
          controls in a given container, such as a <see
          cref="T:System.Windows.Forms.Form" />
+
+        
 
         
 
@@ -75,8 +83,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Windows.Forms.Panel" />
+
+        
 
         
 
@@ -91,6 +103,8 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.CheckBox" />
 
@@ -98,8 +112,12 @@
 
         
 
+        
+
          controls have a similar function: they offer choices a user can select or clear. The difference is that multiple <see
          cref="T:System.Windows.Forms.CheckBox" />
+
+        
 
         
 
@@ -115,6 +133,8 @@
 
         
 
+        
+
          property to get or set the state of a <see
          cref="T:System.Windows.Forms.RadioButton" />
 
@@ -122,8 +142,12 @@
 
         
 
+        
+
         . The option button's appearance can be altered to appear as a toggle-style button or as a standard option button by setting the <see
          cref="P:System.Windows.Forms.RadioButton.Appearance" />
+
+        
 
         
 
@@ -137,6 +161,8 @@
       <para
         >Enables the user to select a single option from a group of choices when paired with other <see
          cref="T:System.Windows.Forms.RadioButton" />
+
+        
 
         
 
@@ -162,8 +188,12 @@
 
             
 
+            
+
              has its text aligned to the right of the button and the <see
              cref="P:System.Windows.Forms.RadioButton.AutoCheck" />
+
+            
 
             
 
@@ -177,6 +207,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.RadioButton" />
+
+            
 
             
 
@@ -220,6 +252,8 @@
 
             
 
+            
+
              value is set to <see
              cref="F:System.Windows.Forms.Appearance.Normal" />
 
@@ -227,8 +261,12 @@
 
             
 
+            
+
             , then the <see
              cref="T:System.Windows.Forms.RadioButton" />
+
+            
 
             
 
@@ -241,8 +279,12 @@
 
             
 
+            
+
             , then the <see
              cref="T:System.Windows.Forms.RadioButton" />
+
+            
 
             
 
@@ -256,6 +298,8 @@
           <para
             >Gets or sets a value determining the appearance of the <see
              cref="T:System.Windows.Forms.RadioButton" />
+
+            
 
             
 
@@ -289,6 +333,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -297,6 +343,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.RadioButton.Appearance" />
+
+            
 
             
 
@@ -334,8 +382,12 @@
 
             
 
+            
+
              value is set to false, the <see
              cref="T:System.Windows.Forms.RadioButton" />
+
+            
 
             
 
@@ -348,6 +400,8 @@
 
             
 
+            
+
              event handler. In addition, if the <see
              cref="T:System.Windows.Forms.RadioButton" />
 
@@ -355,8 +409,12 @@
 
             
 
+            
+
              is part of a <see
              cref="T:System.Windows.Forms.RadioButton" />
+
+            
 
             
 
@@ -372,6 +430,8 @@
 
             
 
+            
+
              property is set to false, a group of <see
              cref="T:System.Windows.Forms.RadioButton" />
 
@@ -379,8 +439,12 @@
 
             
 
+            
+
              controls will not act as a mutually exclusive group and the <see
              cref="P:System.Windows.Forms.RadioButton.Checked" />
+
+            
 
             
 
@@ -394,6 +458,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="P:System.Windows.Forms.RadioButton.Checked" />
+
+            
 
             
 
@@ -433,6 +499,8 @@
           <para
             >Gets or sets the location of the check box portion of the <see
              cref="T:System.Windows.Forms.RadioButton" />
+
+            
 
             
 
@@ -496,6 +564,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -504,6 +574,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.RadioButton.Checked" />
+
+            
 
             
 
@@ -539,8 +611,12 @@
 
             
 
+            
+
              method, it will be called when the <see
              cref="P:System.Windows.Forms.Control.AccessibilityObject" />
+
+            
 
             
 
@@ -557,8 +633,12 @@
 
               
 
+              
+
                property, you must add a reference to the <see
                cref="N:Accessibility" />
+
+              
 
               
 
@@ -578,6 +658,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -586,6 +668,8 @@
           <para
             >A new <see
              cref="T:System.Windows.Forms.RadioButton.RadioButtonAccessibleObject" />
+
+            
 
             
 
@@ -669,6 +753,8 @@
 
             
 
+            
+
              style bit is set to false for the <see
              cref="T:System.Windows.Forms.RadioButton" />
 
@@ -676,8 +762,12 @@
 
             
 
+            
+
              control, and the <see
              cref="E:System.Windows.Forms.RadioButton.DoubleClick" />
+
+            
 
             
 
@@ -691,6 +781,8 @@
           <para
             >Occurs when the user double-clicks the <see
              cref="T:System.Windows.Forms.RadioButton" />
+
+            
 
             
 
@@ -736,6 +828,8 @@
 
             
 
+            
+
              style bit is set to false for the <see
              cref="T:System.Windows.Forms.RadioButton" />
 
@@ -743,8 +837,12 @@
 
             
 
+            
+
              control, and the <see
              cref="E:System.Windows.Forms.RadioButton.MouseDoubleClick" />
+
+            
 
             
 
@@ -758,6 +856,8 @@
           <para
             >Occurs when the user double-clicks the <see
              cref="T:System.Windows.Forms.RadioButton" />
+
+            
 
             
 
@@ -793,11 +893,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.RadioButton.OnCheckedChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -816,6 +920,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -826,8 +932,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -861,6 +971,8 @@
 
             
 
+            
+
              property is set to true, the <see
              cref="P:System.Windows.Forms.RadioButton.Checked" />
 
@@ -868,8 +980,12 @@
 
             
 
+            
+
              property is set to true when the <see
              cref="T:System.Windows.Forms.RadioButton" />
+
+            
 
             
 
@@ -888,6 +1004,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -898,8 +1016,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -933,6 +1055,8 @@
 
             
 
+            
+
              control by using the arrow keys, the <see
              cref="T:System.Windows.Forms.RadioButton" />
 
@@ -940,8 +1064,12 @@
 
             
 
+            
+
              will raise the <see
              cref="E:System.Windows.Forms.Control.Click" />
+
+            
 
             
 
@@ -960,6 +1088,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -970,8 +1100,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1009,6 +1143,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -1019,8 +1155,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1059,11 +1199,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.RadioButton.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
+
+            
 
             
 
@@ -1082,6 +1226,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1092,8 +1238,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -1121,6 +1271,8 @@
           <para
             >Generates a <see
              cref="E:System.Windows.Forms.Control.Click" />
+
+            
 
             
 
@@ -1159,6 +1311,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -1168,6 +1322,8 @@
         </returns>
         <param name="charCode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1235,6 +1391,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -1263,6 +1421,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -1271,6 +1431,8 @@
           <para
             >A string representation of the <see
              cref="T:System.Windows.Forms.RadioButton" />
+
+            
 
             
 

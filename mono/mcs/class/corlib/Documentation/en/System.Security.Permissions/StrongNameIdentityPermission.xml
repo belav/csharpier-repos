@@ -46,8 +46,12 @@
 
           
 
+          
+
            permission state value. In the .NET Framework version 2.0 and later, identity permissions can have any permission state value.  This means that in version 2.0 and later versions, identity permissions have the same behavior as permissions that implement the <see
            cref="T:System.Security.Permissions.IUnrestrictedPermission" />
+
+          
 
           
 
@@ -64,6 +68,8 @@
 
         
 
+        
+
          to confirm that the calling code is in a particular strong-named code assembly. Full demands for <see
          cref="T:System.Security.Permissions.StrongNameIdentityPermission" />
 
@@ -71,8 +77,12 @@
 
         
 
+        
+
          succeed only if all the assemblies in the stack have the correct evidence to satisfy the demand. Link demands that use the <see
          cref="T:System.Security.Permissions.StrongNameIdentityPermissionAttribute" />
+
+        
 
         
 
@@ -91,10 +101,14 @@
 
         
 
+        
+
          reference page. For more information about strong-named assemblies, see <format
          type="text/html">
           <a href="d4a80263-f3e0-4d81-9b61-f0cbeae3797b">Strong-Named Assemblies</a>
         </format>
+
+        
 
         
 
@@ -110,8 +124,12 @@
 
         
 
+        
+
          class is used to define strong-name requirements for accessing the public members of a type. The <see
          cref="T:System.Security.Permissions.StrongNameIdentityPermissionAttribute" />
+
+        
 
         
 
@@ -124,10 +142,14 @@
 
         
 
+        
+
          attribute to specify that all nonpublic types in that assembly are visible to another assembly. For more information, see <format
          type="text/html">
           <a href="df0c70ea-2c2a-4bdc-9526-df951ad2d055">Friend Assemblies (C# and Visual Basic)</a>
         </format>
+
+        
 
         
 
@@ -174,8 +196,12 @@
 
               
 
+              
+
                permission state value. In the .NET Framework version 2.0 and later, identity permissions can have any permission state value.  This means that in version 2.0 and later versions, identity permissions have the same behavior as permissions that implement the <see
                cref="T:System.Security.Permissions.IUnrestrictedPermission" />
+
+              
 
               
 
@@ -193,6 +219,8 @@
 
             
 
+            
+
              to create an identity permission that matches no strong names. If you subsequently set the <see
              cref="P:System.Security.Permissions.StrongNameIdentityPermission.Name" />
 
@@ -200,8 +228,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Security.Permissions.StrongNameIdentityPermission.Version" />
+
+            
 
             
 
@@ -220,8 +252,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Security.Permissions.PermissionState" />
+
+            
 
             
 
@@ -237,8 +273,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -280,8 +320,12 @@
 
             
 
+            
+
              and <paramref
              name="version" />
+
+            
 
             
 
@@ -294,8 +338,12 @@
 
             
 
+            
+
              is an empty string, an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -308,6 +356,8 @@
              type="text/html">
               <a href="d4a80263-f3e0-4d81-9b61-f0cbeae3797b">Strong-Named Assemblies</a>
             </format>
+
+            
 
             
 
@@ -326,11 +376,15 @@
 
             
 
+            
+
              class for the specified strong name identity.</para
           >
         </summary>
         <param name="blob">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -345,10 +399,14 @@
 
           
 
+          
+
           The simple name part of the strong name identity. This corresponds to the name of the assembly. </param
         >
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -426,6 +484,8 @@
 
           
 
+          
+
           The XML encoding to use to reconstruct the permission. </param
         >
       </Docs>
@@ -472,6 +532,8 @@
 
           
 
+          
+
           A permission to intersect with the current permission. It must be of the same type as the current permission. </param
         >
       </Docs>
@@ -508,8 +570,12 @@
 
             
 
+            
+
              property containing the wildcard expression MyCompany.MyDepartment.* is identified as a subset of an identity with the <see
              cref="P:System.Security.Permissions.StrongNameIdentityPermission.Name" />
+
+            
 
             
 
@@ -528,6 +594,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -561,6 +629,8 @@
 
             
 
+            
+
              property can be an exact name or can be modified by a wildcard character in the final position; for example, both MyCompany.MyDepartment.MyFile and MyCompany.MyDepartment.* are valid names. If you attempt to set the <see
              cref="P:System.Security.Permissions.StrongNameIdentityPermission.Name" />
 
@@ -568,8 +638,12 @@
 
             
 
+            
+
              property to an empty string (""), an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -699,11 +773,15 @@
 
             
 
+            
+
              is a permission that represents all the operations represented by both the current permission and the specified permission. Any demand that passes either permission passes their union.</para
           >
           <para
             >The union of a permission and null is the permission that is not null. The union of a permission and a subset of that permission is the permission that contains the other. Any other combination results in an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -722,6 +800,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

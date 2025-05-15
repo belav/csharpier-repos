@@ -45,6 +45,8 @@
 
         
 
+        
+
          instances.</para
       >
     </summary>
@@ -68,6 +70,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Configuration.ExtensionElementCollection" />
+
+            
 
             
 
@@ -112,6 +116,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -122,8 +128,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Configuration.ConfigurationElement" />
+
+          
 
           
 
@@ -168,6 +178,8 @@
 
             
 
+            
+
             , at the specified location.</para
           >
         </summary>
@@ -178,8 +190,12 @@
 
           
 
+          
+
           The index location at which to add <paramref
            name="element" />
+
+          
 
           
 
@@ -194,8 +210,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Configuration.ConfigurationElement" />
+
+          
 
           
 
@@ -240,6 +260,8 @@
 
             
 
+            
+
              that acts as the key for the specified configuration element.</para
           >
         </returns>
@@ -250,8 +272,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Configuration.ConfigurationElement" />
+
+          
 
           
 
@@ -284,8 +310,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.ServiceModel.Configuration.ExtensionElementCollection" />
+
+            
 
             
 

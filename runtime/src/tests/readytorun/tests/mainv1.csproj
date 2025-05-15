@@ -18,7 +18,7 @@
   </ItemGroup>
   <PropertyGroup>
     <CLRTestBatchPreCommands>
-<![CDATA[
+      <![CDATA[
 $(CLRTestBatchPreCommands)
 
 REM Suppress some DOTNET and COMPlus variables for the duration of Crossgen2 execution
@@ -85,7 +85,7 @@ endlocal
 ]]>
     </CLRTestBatchPreCommands>
     <CLRTestBashPreCommands>
-<![CDATA[
+      <![CDATA[
 $(CLRTestBashPreCommands)
 
 # Suppress some DOTNET variables for the duration of Crossgen2 execution

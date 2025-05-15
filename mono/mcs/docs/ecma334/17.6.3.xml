@@ -9,12 +9,16 @@
 
     
 
+    
+
      simply consists of a semicolon. </paragraph
   >
   <paragraph>A property declaration that includes both the abstract and override modifiers specifies that the property is abstract and overrides a base property. The accessors of such a property are also abstract. </paragraph>
   <paragraph
     >Abstract property declarations are only permitted in abstract classes (<hyperlink
     >17.1.1.1</hyperlink>
+
+    
 
     
 
@@ -32,8 +36,12 @@
 
     
 
+    
+
     , <hyperlink
     >17.5.4</hyperlink>
+
+    
 
     
 
@@ -46,8 +54,12 @@
 
     
 
+    
+
     , and <hyperlink
     >17.5.6</hyperlink>
+
+    
 
     
 
@@ -64,6 +76,8 @@
 
         
 
+        
+
          return type, and the same modifiers as the containing property. </list_item
       >
     </list>
@@ -72,7 +86,7 @@
     <example
       >[Example: In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 abstract class A  
 {  
    int y;  
@@ -99,7 +113,7 @@ abstract class A
     <example
       >A class that derives from A is show below: <code_example
       >
-<![CDATA[
+        <![CDATA[
 class B: A  
 {  
    int z;  

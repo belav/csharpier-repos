@@ -47,11 +47,15 @@
 
         
 
+        
+
          typically applies it for you when it imports a type library.</para
       >
       <para
         >When a source interface is imported from a type library, any methods it implements are added as events to a generated event interface. Tlbimp.exe applies <see
          cref="T:System.Runtime.InteropServices.ComEventInterfaceAttribute" />
+
+        
 
         
 
@@ -79,12 +83,16 @@
 
         
 
+        
+
         . For instruction about how to expose a COM event to a.NET client, see <format
          type="text/html">
           <a href="12BB67BD-91A2-4554-82FB-BDBA3D2C8B04"
             >[&lt;topic://cpconhandlingeventsraisedbycomsource&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -131,6 +139,8 @@
 
             
 
+            
+
              class with the source interface and event provider class.</para
           >
         </summary>
@@ -141,8 +151,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -157,8 +171,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -194,6 +212,8 @@
                 >[&lt;topic://cpgrfTypeLibraryImporterTlbimpexe&gt;]</a
               >
             </format>
+
+            
 
             
 

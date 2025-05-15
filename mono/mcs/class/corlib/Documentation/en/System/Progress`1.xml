@@ -32,8 +32,12 @@
 
         
 
+        
+
          event are invoked through a <see
          cref="T:System.Threading.SynchronizationContext" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
          at the time of construction, the callbacks will be invoked on the <see
          cref="T:System.Threading.ThreadPool" />
+
+        
 
         
 
@@ -65,6 +73,8 @@
 
         
 
+        
+
          in the .NET Framework blog.</para
       >
     </remarks>
@@ -73,6 +83,8 @@
       <para
         >Provides an <see
          cref="T:System.IProgress`1" />
+
+        
 
         
 
@@ -101,6 +113,8 @@
           <para
             >Initializes the <see
              cref="T:System.Progress`1" />
+
+            
 
             
 
@@ -171,6 +185,8 @@
           <para
             >Handlers registered with this event will be invoked on the <see
              cref="T:System.Threading.SynchronizationContext" />
+
+            
 
             
 

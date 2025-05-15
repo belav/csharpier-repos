@@ -40,12 +40,16 @@
 
         
 
+        
+
          method before starting the thread.</para
       >
       <block subset="none" type="note">
         <para
           >In the .NET Framework versions 1.0 and 1.1, set the <see
            cref="P:System.Threading.Thread.ApartmentState" />
+
+          
 
           
 
@@ -64,12 +68,16 @@
 
         
 
+        
+
          property on the first line of code, to ensure that the threading model is set before any startup code is executed.</para
       >
       <block subset="none" type="note">
         <para
           >In the .NET Framework version 2.0, new threads are initialized as <see
            cref="F:System.Threading.ApartmentState.MTA" />
+
+          
 
           
 
@@ -82,8 +90,12 @@
 
           
 
+          
+
            by default. You can no longer set the main application thread to <see
            cref="F:System.Threading.ApartmentState.STA" />
+
+          
 
           
 
@@ -96,8 +108,12 @@
 
           
 
+          
+
            property on the first line of code. Use the <see
            cref="T:System.STAThreadAttribute" />
+
+          
 
           
 
@@ -118,6 +134,8 @@
 
         
 
+        
+
          linker option.</para
       >
       <para
@@ -125,6 +143,8 @@
          type="text/html">
           <a href="F06CF9E5-22BB-461D-8B8F-549E53FF40A4">[&lt;topic://cpconpage&gt;]</a>
         </format>
+
+        
 
         
 
@@ -162,6 +182,8 @@
 
           
 
+          
+
           .</remarks
         >
         <summary>
@@ -169,6 +191,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.MTAThreadAttribute" />
+
+            
 
             
 

@@ -28,8 +28,12 @@
 
         
 
+        
+
          class is typically used for creating a design-time experience for controls that have properties that are of type <see
          cref="F:System.Drawing.GraphicsUnit.Point" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
          object. Access this class through the <see
          cref="T:System.ComponentModel.TypeDescriptor" />
+
+        
 
         
 
@@ -57,6 +65,8 @@
       <para
         >Converts a <see
          cref="T:System.Drawing.Point" />
+
+        
 
         
 
@@ -79,6 +89,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Drawing.PointConverter" />
+
+            
 
             
 
@@ -123,10 +135,14 @@
 
           
 
+          
+
           A formatter context. This object can be used to get additional information about the environment this converter is being called from. This may be null, so you should always check. Also, properties on the context object may also return null. </param
         >
         <param name="sourceType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -164,6 +180,8 @@
 
             
 
+            
+
              parameter can be used to get additional information about the environment this converter is being called from. This can be null, so you should always check. Also, properties on the context object can also return null.</para
           >
         </remarks>
@@ -182,8 +200,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -198,8 +220,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -239,6 +265,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -253,6 +281,8 @@
 
           
 
+          
+
           A formatter context. This object can be used to get additional information about the environment this converter is being called from. This may be null, so you should always check. Also, properties on the context object may also return null. </param
         >
         <param name="culture">
@@ -262,10 +292,14 @@
 
           
 
+          
+
           An object that contains culture specific information, such as the language, calendar, and cultural conventions associated with a specific culture. It is based on the RFC 1766 standard. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -305,8 +339,12 @@
 
             
 
+            
+
              method if the object is valid and if the destination type is string. If this method cannot convert to the destination type, this will throw a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -330,10 +368,14 @@
 
           
 
+          
+
           A formatter context. This object can be used to get additional information about the environment this converter is being called from. This may be null, so you should always check. Also, properties on the context object may also return null. </param
         >
         <param name="culture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -348,10 +390,14 @@
 
           
 
+          
+
           The object to convert. </param
         >
         <param name="destinationType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -388,6 +434,8 @@
 
             
 
+            
+
              is useful for objects that are immutable but still want to provide changeable properties.</para
           >
         </remarks>
@@ -406,6 +454,8 @@
 
           
 
+          
+
           A type descriptor through which additional context can be provided. </param
         >
         <param name="propertyValues">
@@ -415,8 +465,12 @@
 
           
 
+          
+
           A dictionary of new property values. The dictionary contains a series of name-value pairs, one for each property returned from <see
            cref="M:System.Drawing.PointConverter.GetProperties(System.ComponentModel.ITypeDescriptorContext,System.Object,System.Attribute[])" />
+
+          
 
           
 
@@ -454,6 +508,8 @@
 
             
 
+            
+
              to create a new value.</para
           >
         </summary>
@@ -462,6 +518,8 @@
           <para
             >true if the <see
              cref="M:System.Drawing.PointConverter.CreateInstance(System.ComponentModel.ITypeDescriptorContext,System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -477,8 +535,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.TypeDescriptor" />
+
+          
 
           
 
@@ -517,6 +579,8 @@
 
             
 
+            
+
              for the correct data type.</para
           >
         </remarks>
@@ -535,10 +599,14 @@
 
           
 
+          
+
           A type descriptor through which additional context can be provided. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -553,8 +621,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -596,6 +668,8 @@
 
             
 
+            
+
              should be called to find the properties of this object; otherwise, false.</para
           >
         </returns>
@@ -606,8 +680,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.TypeDescriptor" />
+
+          
 
           
 

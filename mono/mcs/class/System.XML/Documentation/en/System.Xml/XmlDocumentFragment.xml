@@ -62,8 +62,12 @@
 
             
 
+            
+
              directly; instead, use methods such as <see
              cref="M:System.Xml.XmlDocument.CreateDocumentFragment" />
+
+            
 
             
 
@@ -82,11 +86,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="ownerDocument">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -128,11 +136,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The cloned node has no parent (<see
              cref="P:System.Xml.XmlDocumentFragment.ParentNode" />
+
+            
 
             
 
@@ -151,6 +163,8 @@
         </returns>
         <param name="deep">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -288,6 +302,8 @@
 
             
 
+            
+
              to which this node belongs.</para
           >
         </summary>
@@ -380,11 +396,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="w">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -430,11 +450,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="w">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

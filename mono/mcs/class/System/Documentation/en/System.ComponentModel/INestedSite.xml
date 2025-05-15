@@ -52,6 +52,8 @@
 
             
 
+            
+
              property returns the full name of the component in this site in the format of [owner].[component]. If this component's site has a null name, the property also returns null.</para
           >
         </remarks>

@@ -20,6 +20,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -37,6 +39,8 @@
 
         
 
+        
+
          objects to build a <see
          cref="T:System.Security.Cryptography.Xml.KeyInfo" />
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
          object for a specific digital signature or encrypted XML document. <see
          cref="T:System.Security.Cryptography.Xml.KeyInfo" />
+
+        
 
         
 
@@ -61,6 +69,8 @@
 
         
 
+        
+
          element and its subelements, see the XMLDSIG specification, which is available from the W3C at www.w3.org/TR/xmldsig-core/, or see the XML encryption specification, which is available from the W3C at www.w3.org/TR/xmlenc-core/.</para
       >
     </remarks>
@@ -69,6 +79,8 @@
       <para
         >Represents the abstract base class from which all implementations of <see
          cref="T:System.Security.Cryptography.Xml.KeyInfo" />
+
+        
 
         
 
@@ -108,6 +120,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -140,6 +154,8 @@
 
             
 
+            
+
              returned by this method is suitable for use as a subelement of an XMLDSIG or encrypted XML &lt;KeyInfo&gt; element.</para
           >
         </remarks>
@@ -153,6 +169,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -161,6 +179,8 @@
           <para
             >An XML representation of the <see
              cref="T:System.Security.Cryptography.Xml.KeyInfoClause" />
+
+            
 
             
 
@@ -207,8 +227,12 @@
 
             
 
+            
+
              and configures the internal state of the <see
              cref="T:System.Security.Cryptography.Xml.KeyInfoClause" />
+
+            
 
             
 
@@ -224,6 +248,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlElement" />
 
@@ -231,8 +257,12 @@
 
           
 
+          
+
            that specifies the state of the <see
            cref="T:System.Security.Cryptography.Xml.KeyInfoClause" />
+
+          
 
           
 

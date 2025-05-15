@@ -64,11 +64,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="aceFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -83,10 +87,14 @@
 
           
 
+          
+
           The use of the new ACE.</param
         >
         <param name="accessMask">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -101,8 +109,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -117,6 +129,8 @@
 
           
 
+          
+
           Whether the <paramref
            name="type" />
 
@@ -124,8 +138,12 @@
 
           
 
+          
+
            and <paramref
            name="inheritedType" />
+
+          
 
           
 
@@ -140,10 +158,14 @@
 
           
 
+          
+
           A GUID that identifies the object type to which the new ACE applies.</param
         >
         <param name="inheritedType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -158,6 +180,8 @@
 
           
 
+          
+
           true if the new ACE is a callback type ACE.</param
         >
         <param name="opaque">
@@ -167,8 +191,12 @@
 
           
 
+          
+
           Opaque data associated with the new ACE. This is allowed only for callback ACE types. The length of this array must not be greater than the return value of the <see
            cref="M:System.Security.AccessControl.ObjectAceMaxOpaqueLength" />
+
+          
 
           
 
@@ -203,8 +231,12 @@
 
             
 
+            
+
              object. This length should be used before marshaling the ACL into a binary array with the <see
              cref="M:System.Security.AccessControl.ObjectAce.GetBinaryForm" />
+
+            
 
             
 
@@ -249,11 +281,15 @@
 
             
 
+            
+
              object into the specified byte array beginning at the specified offset.</para
           >
         </summary>
         <param name="binaryForm">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -266,10 +302,14 @@
 
           
 
+          
+
            is marshaled.</param
         >
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -306,8 +346,12 @@
 
             
 
+            
+
              parameter does not contain the value <see
              cref="F:System.Security.AccessControl.ObjectAceFlags.InheritedObjectAceTypePresent" />
+
+            
 
             
 
@@ -321,6 +365,8 @@
           <para
             >Gets or sets the GUID of the object type that can inherit the Access Control Entry (ACE) that this <see
              cref="T:System.Security.AccessControl.ObjectAce" />
+
+            
 
             
 
@@ -366,8 +412,12 @@
 
           
 
+          
+
           True if the <see
            cref="T:System.Security.AccessControl.ObjectAce" />
+
+          
 
           
 
@@ -408,8 +458,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Security.AccessControl.ObjectAce.InheritedObjectAceType" />
+
+            
 
             
 
@@ -447,8 +501,12 @@
 
             
 
+            
+
              parameter does not contain the value <see
              cref="F:System.Security.AccessControl.ObjectAceFlags. ObjectAceTypePresent" />
+
+            
 
             
 
@@ -462,6 +520,8 @@
           <para
             >Gets or sets the GUID of the object type associated with this <see
              cref="T:System.Security.AccessControl.ObjectAce" />
+
+            
 
             
 

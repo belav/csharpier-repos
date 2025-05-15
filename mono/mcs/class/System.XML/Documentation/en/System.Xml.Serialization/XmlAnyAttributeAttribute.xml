@@ -37,11 +37,15 @@
 
         
 
+        
+
          to contain arbitrary data (as XML attributes) that is sent as part of an XML document, such as, metadata sent as part of the document.</para
       >
       <para
         >Apply the <see
          cref="T:System.Xml.Serialization.XmlAnyAttributeAttribute" />
+
+        
 
         
 
@@ -54,8 +58,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Xml.XmlNode" />
+
+        
 
         
 
@@ -68,6 +76,8 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
 
@@ -75,8 +85,12 @@
 
         
 
+        
+
          class is called, all XML attributes that do not have a corresponding member in the class being deserialized are collected in the array. After deserialization, you can iterate through the collection of <see
          cref="T:System.Xml.XmlAttribute" />
+
+        
 
         
 
@@ -92,8 +106,12 @@
 
         
 
+        
+
          and <see
          cref="E:System.Xml.Serialization.XmlSerializer.UnknownAttribute" />
+
+        
 
         
 
@@ -106,8 +124,12 @@
 
         
 
+        
+
          do not occur if you apply the <see
          cref="T:System.Xml.Serialization.XmlAnyAttributeAttribute" />
+
+        
 
         
 
@@ -119,6 +141,8 @@
         <para
           >You can use the word XmlAnyAttribute in your code instead of the longer <see
            cref="T:System.Xml.Serialization.XmlAnyAttributeAttribute" />
+
+          
 
           
 
@@ -137,6 +161,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -145,6 +171,8 @@
       <para
         >Specifies that the member (a field that returns an array of <see
          cref="T:System.Xml.XmlAttribute" />
+
+        
 
         
 
@@ -176,6 +204,8 @@
           <para
             >Constructs a new instance of the <see
              cref="T:System.Xml.Serialization.XmlAnyAttributeAttribute" />
+
+            
 
             
 

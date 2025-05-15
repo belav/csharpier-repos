@@ -33,8 +33,12 @@
 
         
 
+        
+
         , when you are notified of file changes, the system stores those changes in a buffer the component creates and passes to the Application Programming Interfaces (APIs). If there are many changes in a short time, the buffer can easily overflow, resulting in an exception being thrown, which essentially loses all changes. To keep the buffer from overflowing, use the <see
          cref="P:System.IO.FileSystemWatcher.NotifyFilter" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          properties to filter out your unwanted change notifications. You can also increase the size of the internal buffer through the <see
          cref="P:System.IO.FileSystemWatcher.InternalBufferSize" />
+
+        
 
         
 
@@ -88,6 +96,8 @@
 
             
 
+            
+
              and <see
              cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" />
 
@@ -95,8 +105,12 @@
 
             
 
+            
+
              properties to filter out unwanted change notifications. You can also increase the size of the internal buffer through the <see
              cref="P:System.IO.FileSystemWatcher.InternalBufferSize" />
+
+            
 
             
 
@@ -110,6 +124,8 @@
           <para
             >Initializes a new default instance of the <see
              cref="T:System.IO.InternalBufferOverflowException" />
+
+            
 
             
 
@@ -150,6 +166,8 @@
 
             
 
+            
+
              and <see
              cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" />
 
@@ -157,8 +175,12 @@
 
             
 
+            
+
              properties to filter out unwanted change notifications. You can also increase the size of the internal buffer through the <see
              cref="P:System.IO.FileSystemWatcher.InternalBufferSize" />
+
+            
 
             
 
@@ -177,11 +199,15 @@
 
             
 
+            
+
              class with the error message to be displayed specified.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -223,6 +249,8 @@
 
             
 
+            
+
              class that is serializable using the specified <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
@@ -230,8 +258,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -247,10 +279,14 @@
 
           
 
+          
+
           The information required to serialize the T:System.IO.InternalBufferOverflowException object.</param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -291,6 +327,8 @@
 
             
 
+            
+
              and <see
              cref="P:System.IO.FileSystemWatcher.IncludeSubdirectories" />
 
@@ -298,8 +336,12 @@
 
             
 
+            
+
              properties to filter out unwanted change notifications. You can also increase the size of the internal buffer through the <see
              cref="P:System.IO.FileSystemWatcher.InternalBufferSize" />
+
+            
 
             
 
@@ -318,6 +360,8 @@
 
             
 
+            
+
              class with the message to be displayed and the generated inner exception specified.</para
           >
         </summary>
@@ -328,10 +372,14 @@
 
           
 
+          
+
           The message to be given for the exception. </param
         >
         <param name="inner">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

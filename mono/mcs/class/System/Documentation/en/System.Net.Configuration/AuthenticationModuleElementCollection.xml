@@ -37,8 +37,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Net.WebClient" />
+
+        
 
         
 
@@ -86,6 +90,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -125,8 +131,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.Configuration.AuthenticationModuleElement" />
+
+          
 
           
 
@@ -195,6 +205,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -242,6 +254,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -252,8 +266,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.Configuration.AuthenticationModuleElement" />
+
+          
 
           
 
@@ -300,6 +318,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -310,8 +330,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.Configuration.AuthenticationModuleElement" />
+
+          
 
           
 
@@ -421,8 +445,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.Configuration.AuthenticationModuleElement" />
+
+          
 
           
 
@@ -463,6 +491,8 @@
 
           
 
+          
+
           The key of the element to remove.</param
         >
       </Docs>
@@ -493,6 +523,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

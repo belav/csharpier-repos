@@ -40,6 +40,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -62,6 +64,8 @@
           <para
             >This class overrides this method to ensure that a non-empty Text property value is available when the control is rendered for display on the design surface. This makes sure that the class has a meaningful representation. This method sets any empty Text property of the control to the <see
              cref="P:System.Web.UI.Control.ID" />
+
+            
 
             
 
@@ -131,8 +135,12 @@
 
           
 
+          
+
           An object that implements <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 

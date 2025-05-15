@@ -36,6 +36,8 @@
 
         
 
+        
+
          interface.</para
       >
     </remarks>
@@ -44,6 +46,8 @@
       <para
         >Provides the ability to navigate through an <see
          cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
+
+        
 
         
 
@@ -84,6 +88,8 @@
 
             
 
+            
+
              method must be called to advance the enumerator to the first element of the collection before reading the value of the <see
              cref="P:System.Security.Cryptography.AsnEncodedDataEnumerator.Current" />
 
@@ -91,8 +97,12 @@
 
             
 
+            
+
              property; otherwise, <see
              cref="P:System.Security.Cryptography.AsnEncodedDataEnumerator.Current" />
+
+            
 
             
 
@@ -107,8 +117,12 @@
 
             
 
+            
+
              also returns null or throws an exception if the last call to <see
              cref="M:System.Security.Cryptography.AsnEncodedDataEnumerator.MoveNext" />
+
+            
 
             
 
@@ -123,6 +137,8 @@
 
             
 
+            
+
              does not move the position of the enumerator, and consecutive calls to <see
              cref="P:System.Security.Cryptography.AsnEncodedDataEnumerator.Current" />
 
@@ -130,8 +146,12 @@
 
             
 
+            
+
              return the same object until <see
              cref="M:System.Security.Cryptography.AsnEncodedDataEnumerator.MoveNext" />
+
+            
 
             
 
@@ -150,8 +170,12 @@
 
             
 
+            
+
              object in an <see
              cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
+
+            
 
             
 
@@ -189,8 +213,12 @@
 
             
 
+            
+
              method moves the enumerator over the first element of the collection. Subsequent calls to <see
              cref="M:System.Security.Cryptography.AsnEncodedDataEnumerator.MoveNext" />
+
+            
 
             
 
@@ -206,6 +234,8 @@
 
             
 
+            
+
              return false.</para
           >
           <para
@@ -216,8 +246,12 @@
 
             
 
+            
+
              can throw an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -236,8 +270,12 @@
 
             
 
+            
+
              object in an <see
              cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
+
+            
 
             
 
@@ -279,6 +317,8 @@
 
             
 
+            
+
              object. An enumerator remains valid as long as the collection remains unchanged. If changes are made to the collection, such as adding, modifying, or deleting elements, the enumerator becomes invalid, and the next call to the <see
              cref="M:System.Security.Cryptography.AsnEncodedDataEnumerator.Reset" />
 
@@ -286,8 +326,12 @@
 
             
 
+            
+
              method throws an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -332,8 +376,12 @@
 
             
 
+            
+
              object in an <see
              cref="T:System.Security.Cryptography.AsnEncodedDataCollection" />
+
+            
 
             
 

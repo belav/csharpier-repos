@@ -59,6 +59,8 @@
 
         
 
+        
+
          to perform operations on several different permissions as a group.</para
       >
     </remarks>
@@ -99,8 +101,12 @@
 
           
 
+          
+
            is not a valid <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -118,6 +124,8 @@
 
             
 
+            
+
              interface, while None allows no permissions.</para
           >
           <para
@@ -128,8 +136,12 @@
 
             
 
+            
+
              on an empty <see
              cref="T:System.Security.PermissionSet" />
+
+            
 
             
 
@@ -148,8 +160,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Security.Permissions.PermissionState" />
+
+            
 
             
 
@@ -160,6 +176,8 @@
         </summary>
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -201,6 +219,8 @@
 
           
 
+          
+
            is not <see
            langword="null" />
 
@@ -208,8 +228,12 @@
 
           
 
+          
+
            and is not an instance of <see
            cref="T:System.Security.PermissionSet" />
+
+          
 
           
 
@@ -227,8 +251,12 @@
 
             
 
+            
+
              contains copies of the permissions contained in the specified <see
              cref="T:System.Security.PermissionSet" />
+
+            
 
             
 
@@ -245,8 +273,12 @@
 
               
 
+              
+
                when the <paramref
                name="permSet" />
+
+              
 
               
 
@@ -266,8 +298,12 @@
 
             
 
+            
+
              class with initial values taken from the <paramref
              name="permSet" />
+
+            
 
             
 
@@ -283,6 +319,8 @@
 
           
 
+          
+
           The set from which to take the value of the new <see
            cref="T:System.Security.PermissionSet" />
 
@@ -290,8 +328,12 @@
 
           
 
+          
+
           , or null to create an empty <see
            cref="T:System.Security.PermissionSet" />
+
+          
 
           
 
@@ -335,8 +377,12 @@
 
           
 
+          
+
            is not a <see
            cref="T:System.Security.IPermission" />
+
+          
 
           
 
@@ -354,8 +400,12 @@
 
             
 
+            
+
             , the new permission is the union of the existing permission object and the specified permission object. For example, if a permission that implements <see
              cref="T:System.Security.Permissions.IUnrestrictedPermission" />
+
+            
 
             
 
@@ -369,8 +419,12 @@
 
             
 
+            
+
             , the resulting union is the original Unrestricted <see
              cref="T:System.Security.PermissionSet" />
+
+            
 
             
 
@@ -389,6 +443,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -402,11 +458,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="perm">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -448,6 +508,8 @@
 
           
 
+          
+
           .</permission
         >
         <remarks>
@@ -460,8 +522,12 @@
 
             
 
+            
+
              can be active on a frame. <see
              cref="M:System.Security.PermissionSet.Assert" />
+
+            
 
             
 
@@ -474,6 +540,8 @@
 
             
 
+            
+
              or <see
              cref="M:System.Security.CodeAccessPermission.RevertAll" />
 
@@ -481,8 +549,12 @@
 
             
 
+            
+
              method to cancel an active <see
              cref="M:System.Security.PermissionSet.Assert" />
+
+            
 
             
 
@@ -499,6 +571,8 @@
 
               
 
+              
+
                method removes the requirement that all code in the call chain must be granted permission to access the specified resource, it can open up security vulnerabilities if used incorrectly or inappropriately. Therefore, it should be used with great caution.</para
             >
           </block>
@@ -508,6 +582,8 @@
           <para
             >Declares that the calling code can access the resource protected by a permission demand through the code that calls this method, even if callers higher in the stack have not been granted permission to access the resource. Using <see
              cref="M:System.Security.PermissionSet.Assert" />
+
+            
 
             
 
@@ -547,8 +623,12 @@
 
             
 
+            
+
              contains permissions that are not derived from <see
              cref="T:System.Security.CodeAccessPermission" />
+
+            
 
             
 
@@ -567,8 +647,12 @@
 
             
 
+            
+
              contains permissions that are not derived from <see
              cref="T:System.Security.CodeAccessPermission" />
+
+            
 
             
 
@@ -617,6 +701,8 @@
 
             
 
+            
+
              from one XML encoding format to another XML encoding format.</para
           >
         </summary>
@@ -631,6 +717,8 @@
 
           
 
+          
+
           A string representing one of the following encoding formats: ASCII, Unicode, or Binary. Possible values are "XMLASCII" or "XML", "XMLUNICODE", and "BINARY".</param
         >
         <param name="inData">
@@ -640,10 +728,14 @@
 
           
 
+          
+
           An XML-encoded permission set.</param
         >
         <param name="outFormat">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -687,6 +779,8 @@
 
             
 
+            
+
              represents the same access to resources as the original object. Changes made to the copy do not affect the original permission set.</para
           >
         </remarks>
@@ -700,6 +794,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -708,6 +804,8 @@
           <para
             >A copy of the <see
              cref="T:System.Security.PermissionSet" />
+
+            
 
             
 
@@ -754,6 +852,8 @@
 
               
 
+              
+
                interface.</block
             >
           </para>
@@ -770,6 +870,8 @@
 
               
 
+              
+
               (<see
                cref="T:System.Object" />
 
@@ -777,8 +879,12 @@
 
               
 
+              
+
               , <see
                cref="T:System.Int32" />
+
+              
 
               
 
@@ -798,12 +904,16 @@
               
 
               
+
+              
       . </block
             >
           </para>
         </remarks>
         <exception cref="T:System.ArgumentException">
           <paramref name="array" />
+
+          
 
           
 
@@ -818,8 +928,12 @@
 
           
 
+          
+
            is outside the range of allowable values for <paramref
            name="array" />
+
+          
 
           
 
@@ -834,8 +948,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -853,6 +971,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -863,10 +983,14 @@
 
           
 
+          
+
           The target array to which to copy. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -938,8 +1062,12 @@
 
             
 
+            
+
              on a <see
              cref="T:System.Security.PermissionSet" />
+
+            
 
             
 
@@ -955,8 +1083,12 @@
 
             
 
+            
+
              succeeds only if no <see
              cref="T:System.Security.SecurityException" />
+
+            
 
             
 
@@ -972,8 +1104,12 @@
 
             
 
+            
+
              contains permissions that do not inherit from <see
              cref="T:System.Security.CodeAccessPermission" />
+
+            
 
             
 
@@ -987,6 +1123,8 @@
           <para
             >Forces a <see
              cref="T:System.Security.SecurityException" />
+
+            
 
             
 
@@ -1025,6 +1163,8 @@
 
             
 
+            
+
              has already restricted the permissions for the current stack frame.</para
           >
         </exception>
@@ -1038,8 +1178,12 @@
 
             
 
+            
+
              can limit the liability of the programmer or help prevent accidental security vulnerabilities because it helps prevent the method that calls <see
              cref="M:System.Security.PermissionSet.Deny" />
+
+            
 
             
 
@@ -1052,8 +1196,12 @@
 
             
 
+            
+
              on a permission, and if a <see
              cref="M:System.Security.PermissionSet.Demand" />
+
+            
 
             
 
@@ -1066,10 +1214,14 @@
 
             
 
+            
+
             .</para
           >
           <para>
             <see cref="M:System.Security.PermissionSet.Deny" />
+
+            
 
             
 
@@ -1088,8 +1240,12 @@
 
             
 
+            
+
              that passes through the calling code for a permission that has an intersection with a permission of a type contained in the current <see
              cref="T:System.Security.PermissionSet" />
+
+            
 
             
 
@@ -1135,8 +1291,12 @@
 
             
 
+            
+
             . <paramref
              name="obj" />
+
+            
 
             
 
@@ -1149,8 +1309,12 @@
 
             
 
+            
+
              object or a <see
              cref="T:System.Security.NamedPermissionSet" />
+
+            
 
             
 
@@ -1163,8 +1327,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Security.NamedPermissionSet" />
+
+            
 
             
 
@@ -1175,6 +1343,8 @@
           <para
             >For more information, see <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -1193,6 +1363,8 @@
 
             
 
+            
+
              or <see
              cref="T:System.Security.NamedPermissionSet" />
 
@@ -1200,8 +1372,12 @@
 
             
 
+            
+
              object is equal to the current <see
              cref="T:System.Security.PermissionSet" />
+
+            
 
             
 
@@ -1220,6 +1396,8 @@
 
             
 
+            
+
              object; otherwise, false.</para
           >
         </returns>
@@ -1230,8 +1408,12 @@
 
           
 
+          
+
           The object to compare with the current <see
            cref="T:System.Security.PermissionSet" />
+
+          
 
           
 
@@ -1279,6 +1461,8 @@
 
               
 
+              
+
                class page.</block
             >
           </para>
@@ -1293,9 +1477,13 @@
               
 
               
+
+              
       encoded in
    <paramref
                name=" et" />
+
+              
 
               
 
@@ -1309,6 +1497,8 @@
               >Override this method
       to reconstruct subclasses of <see
                cref="T:System.Security.PermissionSet" />
+
+              
 
               
 
@@ -1331,8 +1521,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1348,8 +1542,12 @@
 
             
 
+            
+
              does not contain an XML encoding for a <see
              cref="T:System.Security.PermissionSet" />
+
+            
 
             
 
@@ -1366,6 +1564,8 @@
 
             
 
+            
+
              .</para
           >
         </exception>
@@ -1375,6 +1575,8 @@
         </summary>
         <param name="et">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1456,6 +1658,8 @@
 
             
 
+            
+
              objects.</para
           >
         </remarks>
@@ -1469,6 +1673,8 @@
 
             
 
+            
+
              object that is suitable for use in hashing algorithms and data structures such as a hash table.</para
           >
         </summary>
@@ -1477,6 +1683,8 @@
           <para
             >A hash code for the current <see
              cref="T:System.Security.PermissionSet" />
+
+            
 
             
 
@@ -1519,8 +1727,12 @@
 
             
 
+            
+
             . Although an Unrestricted <see
              cref="T:System.Security.PermissionSet" />
+
+            
 
             
 
@@ -1543,8 +1755,12 @@
 
             
 
+            
+
              parameter contained in the <see
              cref="T:System.Security.PermissionSet" />
+
+            
 
             
 
@@ -1555,6 +1771,8 @@
         </returns>
         <param name="permClass">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1597,6 +1815,8 @@
 
             
 
+            
+
             . Permission types that exist in only one of the two sets are excluded from the resulting set.</para
           >
         </remarks>
@@ -1610,8 +1830,12 @@
 
             
 
+            
+
              and the specified <see
              cref="T:System.Security.PermissionSet" />
+
+            
 
             
 
@@ -1630,6 +1854,8 @@
 
             
 
+            
+
              and the specified target. This object is null if the intersection is empty.</para
           >
         </returns>
@@ -1640,8 +1866,12 @@
 
           
 
+          
+
           A permission set to intersect with the current <see
            cref="T:System.Security.PermissionSet" />
+
+          
 
           
 
@@ -1678,6 +1908,8 @@
 
             
 
+            
+
              can be empty and yet contain instances of permissions if those permissions are in the fully-restricted state. Permissions are in a fully restricted state if their IsSubsetOf methods return true when null is passed as a parameter.</para
           >
         </remarks>
@@ -1691,6 +1923,8 @@
 
             
 
+            
+
              is empty.</para
           >
         </summary>
@@ -1699,6 +1933,8 @@
           <para
             >true if the <see
              cref="T:System.Security.PermissionSet" />
+
+            
 
             
 
@@ -1728,6 +1964,8 @@
           <para
             >A <see
              cref="T:System.Security.PermissionSet" />
+
+            
 
             
 
@@ -1778,6 +2016,8 @@
 
             
 
+            
+
              is a subset of the target <see
              cref="T:System.Security.PermissionSet" />
 
@@ -1785,8 +2025,12 @@
 
             
 
+            
+
              if all demands that succeed for the <see
              cref="T:System.Security.PermissionSet" />
+
+            
 
             
 
@@ -1805,8 +2049,12 @@
 
             
 
+            
+
              is a subset of the specified <see
              cref="T:System.Security.PermissionSet" />
+
+            
 
             
 
@@ -1825,8 +2073,12 @@
 
             
 
+            
+
              is a subset of the <paramref
              name="target" />
+
+            
 
             
 
@@ -1842,6 +2094,8 @@
 
           
 
+          
+
           The permission set to test for the subset relationship. This must be either a <see
            cref="T:System.Security.PermissionSet" />
 
@@ -1849,8 +2103,12 @@
 
           
 
+          
+
            or a <see
            cref="T:System.Security.NamedPermissionSet" />
+
+          
 
           
 
@@ -1889,11 +2147,15 @@
 
             
 
+            
+
              does not automatically handle thread safety, so this property is always false.</para
           >
           <para
             >This method is required to support <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1936,8 +2198,12 @@
 
             
 
+            
+
              effectively contains all permissions that implement the <see
              cref="T:System.Security.Permissions.IUnrestrictedPermission" />
+
+            
 
             
 
@@ -1956,6 +2222,8 @@
 
             
 
+            
+
              is Unrestricted.</para
           >
         </summary>
@@ -1964,6 +2232,8 @@
           <para
             >true if the <see
              cref="T:System.Security.PermissionSet" />
+
+            
 
             
 
@@ -2004,6 +2274,8 @@
 
             
 
+            
+
              has already set the permissions for the current stack frame.</para
           >
         </exception>
@@ -2016,8 +2288,12 @@
 
             
 
+            
+
              is similar to <see
              cref="M:System.Security.PermissionSet.Deny" />
+
+            
 
             
 
@@ -2030,8 +2306,12 @@
 
             
 
+            
+
              specifies permissions that will cause the stack walk to fail, but <see
              cref="M:System.Security.PermissionSet.PermitOnly" />
+
+            
 
             
 
@@ -2046,8 +2326,12 @@
 
             
 
+            
+
              is ignored for a permission not granted because a demand for that permission cannot succeed. However, if code lower on the call stack later calls <see
              cref="M:System.Security.PermissionSet.Demand" />
+
+            
 
             
 
@@ -2060,8 +2344,12 @@
 
             
 
+            
+
              is thrown when the stack walk reaches the code that tried to call <see
              cref="M:System.Security.PermissionSet.PermitOnly" />
+
+            
 
             
 
@@ -2074,8 +2362,12 @@
 
             
 
+            
+
              has not been granted the permission, even though it called <see
              cref="M:System.Security.PermissionSet.PermitOnly" />
+
+            
 
             
 
@@ -2094,6 +2386,8 @@
 
             
 
+            
+
              that passes through the calling code for any <see
              cref="T:System.Security.PermissionSet" />
 
@@ -2101,8 +2395,12 @@
 
             
 
+            
+
              that is not a subset of the current <see
              cref="T:System.Security.PermissionSet" />
+
+            
 
             
 
@@ -2149,6 +2447,8 @@
 
             
 
+            
+
              from the FullTrust permission set, but the permission is not removed.</para
           >
           <code>PolicyLevel myPol = PolicyLevel.CreateAppDomainLevel();
@@ -2165,6 +2465,8 @@ myPermSet.RemovePermission(typeof(FileIOPermission));</code>
         </returns>
         <param name="permClass">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2201,8 +2503,12 @@ myPermSet.RemovePermission(typeof(FileIOPermission));</code>
 
             
 
+            
+
              for the current frame, an <see
              cref="T:System.ExecutionEngineException" />
+
+            
 
             
 
@@ -2216,6 +2522,8 @@ myPermSet.RemovePermission(typeof(FileIOPermission));</code>
           <para
             >Causes any previous <see
              cref="M:System.Security.CodeAccessPermission.Assert" />
+
+            
 
             
 
@@ -2258,8 +2566,12 @@ myPermSet.RemovePermission(typeof(FileIOPermission));</code>
 
             
 
+            
+
              and replaces it with the <paramref
              name="perm" />
+
+            
 
             
 
@@ -2272,8 +2584,12 @@ myPermSet.RemovePermission(typeof(FileIOPermission));</code>
 
             
 
+            
+
              is set on a <see
              cref="T:System.Security.PermissionSet" />
+
+            
 
             
 
@@ -2286,8 +2602,12 @@ myPermSet.RemovePermission(typeof(FileIOPermission));</code>
 
             
 
+            
+
             , the resulting <see
              cref="T:System.Security.PermissionSet" />
+
+            
 
             
 
@@ -2306,6 +2626,8 @@ myPermSet.RemovePermission(typeof(FileIOPermission));</code>
 
             
 
+            
+
             , replacing any existing permission of the same type.</para
           >
         </summary>
@@ -2315,6 +2637,8 @@ myPermSet.RemovePermission(typeof(FileIOPermission));</code>
         </returns>
         <param name="perm">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2348,6 +2672,8 @@ myPermSet.RemovePermission(typeof(FileIOPermission));</code>
           <para
             >This method is required to support <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -2397,6 +2723,8 @@ myPermSet.RemovePermission(typeof(FileIOPermission));</code>
 
           
 
+          
+
           The object that initiated the callback. The functionality for this parameter is not currently implemented.</param
         >
       </Docs>
@@ -2427,6 +2755,8 @@ myPermSet.RemovePermission(typeof(FileIOPermission));</code>
             >The following example displays the XML that encodes the 
       state of a <see
              cref="T:System.Security.PermissionSet" />
+
+            
 
             
 
@@ -2464,6 +2794,8 @@ public class PermissionSetToStringExample {
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2477,6 +2809,8 @@ public class PermissionSetToStringExample {
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2485,6 +2819,8 @@ public class PermissionSetToStringExample {
           <para
             >A representation of the <see
              cref="T:System.Security.PermissionSet" />
+
+            
 
             
 
@@ -2529,6 +2865,8 @@ public class PermissionSetToStringExample {
               >Override this method to return an
       object containing the XML encoding for types derived from <see
                cref="T:System.Security.PermissionSet" />
+
+              
 
               
 
@@ -2589,8 +2927,12 @@ public class PermissionSetToStringExample {
 
             
 
+            
+
              is a <see
              cref="T:System.Security.PermissionSet" />
+
+            
 
             
 
@@ -2603,8 +2945,12 @@ public class PermissionSetToStringExample {
 
             
 
+            
+
              as well as all the operations represented by the specified <see
              cref="T:System.Security.PermissionSet" />
+
+            
 
             
 
@@ -2623,6 +2969,8 @@ public class PermissionSetToStringExample {
 
             
 
+            
+
              that is the union of the current <see
              cref="T:System.Security.PermissionSet" />
 
@@ -2630,8 +2978,12 @@ public class PermissionSetToStringExample {
 
             
 
+            
+
              and the specified <see
              cref="T:System.Security.PermissionSet" />
+
+            
 
             
 
@@ -2650,8 +3002,12 @@ public class PermissionSetToStringExample {
 
             
 
+            
+
              and the specified <see
              cref="T:System.Security.PermissionSet" />
+
+            
 
             
 
@@ -2667,8 +3023,12 @@ public class PermissionSetToStringExample {
 
           
 
+          
+
           The permission set to form the union with the current <see
            cref="T:System.Security.PermissionSet" />
+
+          
 
           
 

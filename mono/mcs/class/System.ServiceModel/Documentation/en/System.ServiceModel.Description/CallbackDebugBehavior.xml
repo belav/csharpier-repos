@@ -31,6 +31,8 @@
 
         
 
+        
+
          property to true from an application configuration file or programmatically to enable the flow of managed exception information in a client callback object back to the service for debugging purposes. </para
       >
       <block subset="none" type="note">
@@ -42,8 +44,12 @@
 
           
 
+          
+
            properties can also be set programmatically, it can be easy to forget to disable <see
            cref="P:System.ServiceModel.Description.CallbackDebugBehavior.IncludeExceptionDetailInFaults" />
+
+          
 
           
 
@@ -58,6 +64,8 @@
           <para
             >You use an application configuration file to set the value of the <see
              cref="P:System.ServiceModel.Description.CallbackDebugBehavior.IncludeExceptionDetailInFaults" />
+
+            
 
             
 
@@ -82,6 +90,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -89,6 +99,8 @@
          type="text/html">
           <a href="4073feda-1857-4be4-9947-227afb847ced">&lt;callbackDebug&gt;</a>
         </format>
+
+        
 
         
 
@@ -130,6 +142,8 @@
 
             
 
+            
+
              object in which the value of the <see
              cref="P:System.ServiceModel.Description.CallbackDebugBehavior.IncludeExceptionDetailInFaults" />
 
@@ -137,8 +151,12 @@
 
             
 
+            
+
              property is the value of <paramref
              name="includeExceptionDetailInFaults" />
+
+            
 
             
 
@@ -157,11 +175,15 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
         <param name="includeExceptionDetailInFaults">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -199,6 +221,8 @@
 
             
 
+            
+
              property to true from an application configuration file or programmatically to enable the flow of managed exception information in a client callback object back to the service for debugging purposes. </para
           >
           <block subset="none" type="note">
@@ -210,8 +234,12 @@
 
               
 
+              
+
                properties can also be set programmatically, it can be easy to forget to disable <see
                cref="P:System.ServiceModel.Description.CallbackDebugBehavior.IncludeExceptionDetailInFaults" />
+
+              
 
               
 
@@ -226,6 +254,8 @@
               <para
                 >You use an application configuration file to set the value of the <see
                  cref="P:System.ServiceModel.Description.CallbackDebugBehavior.IncludeExceptionDetailInFaults" />
+
+                
 
                 
 
@@ -250,6 +280,8 @@
 
             
 
+            
+
             .</para
           >
           <procedure>
@@ -268,8 +300,12 @@
 
                   
 
+                  
+
                    element for your indigo2 client application. The <see
                    cref="T:System.ServiceModel.Description.CallbackDebugBehavior" />
+
+                  
 
                   
 
@@ -279,6 +315,8 @@
                    type="text/html">
                     <a href="13123dd6-c4a9-4a04-a984-df184b851788">&lt;service&gt;</a>
                   </format>
+
+                  
 
                   
 
@@ -298,10 +336,14 @@
 
                   
 
+                  
+
                    section and add a <format
                    type="text/html">
                     <a href="b90ca3bc-3c22-4174-b903-e3a39898bd27">&lt;behavior&gt;</a>
                   </format>
+
+                  
 
                   
 
@@ -316,10 +358,14 @@
 
                   
 
+                  
+
                    element using an <format
                    type="text/html">
                     <a href="fb851947-e8dd-4f8c-8323-26fae90b09c3">&lt;endpointBehaviors&gt;</a>
                   </format>
+
+                  
 
                   
 
@@ -339,10 +385,14 @@
 
                   
 
+                  
+
                    element to the <format
                    type="text/html">
                     <a href="b90ca3bc-3c22-4174-b903-e3a39898bd27">&lt;behavior&gt;</a>
                   </format>
+
+                  
 
                   
 
@@ -358,6 +408,8 @@
              type="text/html">
               <a href="4073feda-1857-4be4-9947-227afb847ced">&lt;callbackDebug&gt;</a>
             </format>
+
+            
 
             
 
@@ -409,6 +461,8 @@
 
             
 
+            
+
              method to support the behavior.</para
           >
         </summary>
@@ -446,8 +500,12 @@
 
             
 
+            
+
              property to the <see
              cref="P:System.ServiceModel.Dispatcher.ChannelDispatcher.IncludeExceptionDetailInFaults" />
+
+            
 
             
 
@@ -466,11 +524,15 @@
 
             
 
+            
+
              to support the behavior.</para
           >
         </summary>
         <param name="behavior">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -513,6 +575,8 @@
 
             
 
+            
+
             ; this behavior can only be used in a client application.</para
           >
         </remarks>
@@ -521,6 +585,8 @@
           <para
             >Implements the <see
              cref="M:System.ServiceModel.Description.IEndpointBehavior.ApplyDispatchBehavior(System.ServiceModel.Description.ServiceEndpoint,System.ServiceModel.Dispatcher.EndpointDispatcher)" />
+
+            
 
             
 
@@ -558,6 +624,8 @@
           <para
             >Implements <see
              cref="M:System.ServiceModel.Description.IEndpointBehavior.Validate(System.ServiceModel.Description.ServiceEndpoint)" />
+
+            
 
             
 

@@ -22,8 +22,12 @@
 
         
 
+        
+
          enumeration represents the different items that can be included in a list control, such as the <see
          cref="T:System.Web.UI.WebControls.DataGrid" />
+
+        
 
         
 
@@ -36,8 +40,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Web.UI.WebControls.Repeater" />
+
+        
 
         
 
@@ -161,6 +169,8 @@
           <para
             >A pager that displays the controls to navigate to different pages associated with the <see
              cref="T:System.Web.UI.WebControls.DataGrid" />
+
+            
 
             
 

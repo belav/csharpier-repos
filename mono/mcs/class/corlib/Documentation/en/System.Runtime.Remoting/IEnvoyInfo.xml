@@ -27,11 +27,15 @@
 
         
 
+        
+
          objects.</para
       >
       <para
         >Classes that implement the current interface hold a serialized chain of message sinks that is regenerated when a proxy is created to represent the object. Such functionality is used for <see
          cref="T:System.Runtime.Remoting.Contexts.Context" />
+
+        
 
         
 

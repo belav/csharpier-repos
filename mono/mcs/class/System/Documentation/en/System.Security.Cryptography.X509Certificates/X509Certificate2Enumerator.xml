@@ -37,8 +37,12 @@
 
         
 
+        
+
          method also brings the enumerator back to this position. At this position, calling the <see
          cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator.Current" />
+
+        
 
         
 
@@ -51,8 +55,12 @@
 
         
 
+        
+
          method to advance the enumerator to the first element of the collection before reading the value of <see
          cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator.Current" />
+
+        
 
         
 
@@ -68,8 +76,12 @@
 
         
 
+        
+
          interface. For more information about enumerating over a collection, see <see
          cref="T:System.Collections.IEnumerator" />
+
+        
 
         
 
@@ -83,6 +95,8 @@
       <para
         >Supports a simple iteration over a <see
          cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+
+        
 
         
 
@@ -122,8 +136,12 @@
 
             
 
+            
+
              does not move the position of the enumerator. Consecutive calls to the <see
              cref="P:System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator.Current" />
+
+            
 
             
 
@@ -136,8 +154,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator.Reset" />
+
+            
 
             
 
@@ -151,6 +173,8 @@
           <para
             >Gets the current element in the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+
+            
 
             
 
@@ -188,6 +212,8 @@
 
             
 
+            
+
              topic.</para
           >
         </remarks>
@@ -196,6 +222,8 @@
           <para
             >Advances the enumerator to the next element in the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+
+            
 
             
 
@@ -237,6 +265,8 @@
 
             
 
+            
+
              or <see
              cref="M:System.Security.Cryptography.X509Certificates.X509Certificate2Enumerator.Reset" />
 
@@ -244,8 +274,12 @@
 
             
 
+            
+
              method throws an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -259,6 +293,8 @@
           <para
             >Sets the enumerator to its initial position, which is before the first element in the <see
              cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+
+            
 
             
 
@@ -298,8 +334,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -313,6 +353,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -349,8 +391,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -364,6 +410,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -404,8 +452,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -419,6 +471,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 

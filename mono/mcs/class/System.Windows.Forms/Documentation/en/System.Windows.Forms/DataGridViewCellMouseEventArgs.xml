@@ -27,8 +27,12 @@
 
         
 
+        
+
          class provides data for the following <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -94,8 +98,12 @@
 
         
 
+        
+
          whenever the mouse is moved within a <see
          cref="T:System.Windows.Forms.DataGridViewCell" />
+
+        
 
         
 
@@ -132,11 +140,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="columnIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -151,10 +163,14 @@
 
           
 
+          
+
           The cell's zero-based row index.</param
         >
         <param name="localX">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -169,6 +185,8 @@
 
           
 
+          
+
           The y-coordinate of the mouse, in pixels.</param
         >
         <param name="e">
@@ -178,8 +196,12 @@
 
           
 
+          
+
           The originating <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 

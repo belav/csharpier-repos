@@ -39,6 +39,8 @@
 
           
 
+          
+
            is not a security permission.</para
         >
       </block>
@@ -64,6 +66,8 @@
 
           
 
+          
+
            resource categories. The .NET Framework class library members with this attribute cause only the immediate caller to be checked.  Your library member must also cause a check of its immediate caller in the same manner. </para
         >
       </block>
@@ -78,6 +82,8 @@
 
           
 
+          
+
            to create a native image of assemblies that are protected by the <see
            cref="T:System.Security.Permissions.HostProtectionAttribute" />
 
@@ -85,8 +91,12 @@
 
           
 
+          
+
           . In a full-trust environment, the image is always loaded, without regard to the <see
            cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+          
 
           
 
@@ -127,6 +137,8 @@
 
             
 
+            
+
              with all Boolean properties set to false.</para
           >
         </remarks>
@@ -135,6 +147,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Permissions.HostProtectionAttribute" />
+
+            
 
             
 
@@ -178,8 +192,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Security.Permissions.SecurityAction" />
+
+            
 
             
 
@@ -195,8 +213,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 
@@ -240,6 +262,8 @@
           <para
             >An <see
              cref="T:System.Security.IPermission" />
+
+            
 
             
 
@@ -352,6 +376,8 @@
 
             
 
+            
+
              flags specify the resources exposed by the method or class that are potentially harmful to the host.</para
           >
         </remarks>
@@ -385,6 +411,8 @@
           <para
             >The use of a <see
              cref="T:System.Security.Principal.WindowsIdentity" />
+
+            
 
             
 
@@ -466,6 +494,8 @@
           <para
             >When <see
              cref="P:System.Security.Permissions.HostProtectionAttribute.SharedState" />
+
+            
 
             
 

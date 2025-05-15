@@ -32,8 +32,12 @@
 
         
 
+        
+
         , you must first obtain an <see
          cref="T:System.ComponentModel.EventDescriptor" />
+
+        
 
         
 
@@ -46,6 +50,8 @@
 
         
 
+        
+
          provides methods that can convert an <see
          cref="T:System.ComponentModel.EventDescriptor" />
 
@@ -53,8 +59,12 @@
 
         
 
+        
+
          to a <see
          cref="T:System.ComponentModel.PropertyDescriptor" />
+
+        
 
         
 
@@ -70,8 +80,12 @@
 
         
 
+        
+
          object provides a <see
          cref="M:System.ComponentModel.TypeDescriptor.GetEvents(System.Type)" />
+
+        
 
         
 
@@ -84,8 +98,12 @@
 
         
 
+        
+
          containing <see
          cref="T:System.ComponentModel.EventDescriptor" />
+
+        
 
         
 
@@ -98,8 +116,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.ComponentModel.Design.IEventBindingService.GetEventProperties(System.ComponentModel.EventDescriptorCollection)" />
+
+        
 
         
 
@@ -112,8 +134,12 @@
 
         
 
+        
+
          return a <see
          cref="T:System.ComponentModel.PropertyDescriptor" />
+
+        
 
         
 
@@ -126,8 +152,12 @@
 
         
 
+        
+
          passed to either method. Each <see
          cref="T:System.ComponentModel.PropertyDescriptor" />
+
+        
 
         
 
@@ -140,8 +170,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.ComponentModel.Design.IEventBindingService.GetEventProperties(System.ComponentModel.EventDescriptorCollection)" />
+
+        
 
         
 
@@ -154,8 +188,12 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.ComponentModel.PropertyDescriptor" />
+
+        
 
         
 
@@ -212,10 +250,14 @@
 
           
 
+          
+
           The component instance the event is connected to. </param
         >
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -266,6 +308,8 @@
 
           
 
+          
+
           The event to get the compatible event-handler methods for. </param
         >
       </Docs>
@@ -303,6 +347,8 @@
 
             
 
+            
+
              for the event that the specified property descriptor represents, if it represents an event.</para
           >
         </summary>
@@ -316,11 +362,15 @@
 
             
 
+            
+
              for the event that the property represents, or null if the property does not represent an event.</para
           >
         </returns>
         <param name="property">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -362,8 +412,12 @@
 
             
 
+            
+
              has a <see
              cref="P:System.ComponentModel.PropertyDescriptor.PropertyType" />
+
+            
 
             
 
@@ -386,11 +440,15 @@
 
             
 
+            
+
              objects that describe the event set.</para
           >
         </returns>
         <param name="events">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -432,8 +490,12 @@
 
             
 
+            
+
              has a <see
              cref="P:System.ComponentModel.PropertyDescriptor.PropertyType" />
+
+            
 
             
 
@@ -456,11 +518,15 @@
 
             
 
+            
+
              that describes the event.</para
           >
         </returns>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -539,6 +605,8 @@
 
           
 
+          
+
           The line number to place the caret on. </param
         >
       </Docs>
@@ -585,10 +653,14 @@
 
           
 
+          
+
           The component that the event is connected to. </param
         >
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

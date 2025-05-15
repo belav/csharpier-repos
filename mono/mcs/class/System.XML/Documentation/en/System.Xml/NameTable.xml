@@ -35,9 +35,13 @@
 
         
 
+        
+
          objects using
       the <see
          cref="T:System.Xml.NameTable" />
+
+        
 
         
 
@@ -95,8 +99,12 @@ class Ntable {
 
         
 
+        
+
          and <see
          cref="T:System.Xml.XmlReader" />
+
+        
 
         
 
@@ -111,6 +119,8 @@ class Ntable {
       <para
         >Implements a single-threaded <see
          cref="T:System.Xml.XmlNameTable" />
+
+        
 
         
 
@@ -181,8 +191,12 @@ class Ntable {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -195,6 +209,8 @@ class Ntable {
           <para
             >For more information on atomized strings, see <see
              cref="T:System.Xml.NameTable" />
+
+            
 
             
 
@@ -213,6 +229,8 @@ class Ntable {
         </returns>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -259,6 +277,8 @@ class Ntable {
 
             
 
+            
+
              &lt; 0.</para
           >
           <para>- or -</para>
@@ -269,8 +289,12 @@ class Ntable {
 
             
 
+            
+
              &gt;= <paramref
              name="key" />
+
+            
 
             
 
@@ -286,6 +310,8 @@ class Ntable {
 
             
 
+            
+
              &gt; <paramref
              name="key" />
 
@@ -293,8 +319,12 @@ class Ntable {
 
             
 
+            
+
             .Length - <paramref
              name="start" />
+
+            
 
             
 
@@ -310,6 +340,8 @@ class Ntable {
 
             
 
+            
+
              = 0.</para
           >
         </exception>
@@ -319,6 +351,8 @@ class Ntable {
           <para
             >For more information on atomized strings, see <see
              cref="T:System.Xml.NameTable" />
+
+            
 
             
 
@@ -341,11 +375,15 @@ class Ntable {
 
             
 
+            
+
              is zero, String.Empty is returned.</para
           >
         </returns>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -360,10 +398,14 @@ class Ntable {
 
           
 
+          
+
           The zero-based index into the array specifying the first character of the string. </param
         >
         <param name="len">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -404,8 +446,12 @@ class Ntable {
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -418,6 +464,8 @@ class Ntable {
           <para
             >For more information on atomized strings, see <see
              cref="T:System.Xml.NameTable" />
+
+            
 
             
 
@@ -436,6 +484,8 @@ class Ntable {
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -487,8 +537,12 @@ class Ntable {
 
             
 
+            
+
              &gt;= <paramref
              name="key" />
+
+            
 
             
 
@@ -504,6 +558,8 @@ class Ntable {
 
             
 
+            
+
              &gt; <paramref
              name="key" />
 
@@ -511,8 +567,12 @@ class Ntable {
 
             
 
+            
+
             .Length - <paramref
              name="start" />
+
+            
 
             
 
@@ -528,6 +588,8 @@ class Ntable {
 
             
 
+            
+
              = 0.</para
           >
         </exception>
@@ -537,6 +599,8 @@ class Ntable {
           <para
             >For more information on atomized strings, see <see
              cref="T:System.Xml.NameTable" />
+
+            
 
             
 
@@ -559,11 +623,15 @@ class Ntable {
 
             
 
+            
+
              is zero, String.Empty is returned.</para
           >
         </returns>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -578,10 +646,14 @@ class Ntable {
 
           
 
+          
+
           The zero-based index into the array specifying the first character of the name. </param
         >
         <param name="len">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

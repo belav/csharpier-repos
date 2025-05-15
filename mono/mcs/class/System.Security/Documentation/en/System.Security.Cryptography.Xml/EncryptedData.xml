@@ -53,6 +53,8 @@
 
             
 
+            
+
              class. For more information about XML encryption standards, see the "XML Encryption Syntax and Processing" document at http://www.w3.org/TR/xmlenc-core/.</para
           >
         </remarks>
@@ -61,6 +63,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.Xml.EncryptedData" />
+
+            
 
             
 
@@ -102,6 +106,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -110,6 +116,8 @@
           <para
             >An <see
              cref="T:System.Xml.XmlElement" />
+
+            
 
             
 
@@ -152,6 +160,8 @@
 
             
 
+            
+
              object.</para
           >
         </remarks>
@@ -166,8 +176,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlElement" />
+
+          
 
           
 

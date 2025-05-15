@@ -44,6 +44,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -77,8 +79,12 @@
 
             
 
+            
+
              of <see
              cref="F:System.ServiceModel.BasicHttpMessageCredentialType.UserName" />
+
+            
 
             
 
@@ -91,8 +97,12 @@
 
             
 
+            
+
              of <see
              cref="P:System.ServiceModel.Security.SecurityAlgorithmSuite.Basic256" />
+
+            
 
             
 
@@ -135,8 +145,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.ServiceModel.BasicHttpSecurity.Message" />
+
+            
 
             
 
@@ -174,6 +188,8 @@
           <para
             >The <see
              cref="T:System.ServiceModel.HttpTransportSecurity" />
+
+            
 
             
 

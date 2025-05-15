@@ -39,6 +39,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -47,6 +49,8 @@
       <para
         >Represents a callback delegate that has been registered with a <see
          cref="T:System.Threading.CancellationToken" />
+
+        
 
         
 
@@ -82,8 +86,12 @@
 
             
 
+            
+
             . The Dispose method leaves the <see
              cref="T:System.Threading.CancellationTokenRegistration" />
+
+            
 
             
 
@@ -96,8 +104,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Threading.CancellationTokenRegistration" />
+
+            
 
             
 
@@ -115,10 +127,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -135,8 +151,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Threading.CancellationTokenRegistration" />
+
+              
 
               
 
@@ -151,6 +171,8 @@
           <para
             >Releases all resources used by the current instance of the <see
              cref="T:System.Threading.CancellationTokenRegistration" />
+
+            
 
             
 
@@ -189,8 +211,12 @@
 
             
 
+            
+
              instance is equal to the specified <see
              cref="T:System.Threading.CancellationTokenRegistration" />
+
+            
 
             
 
@@ -209,11 +235,15 @@
 
             
 
+            
+
              are equal. False, otherwise.</para
           >
           <para
             >Two <see
              cref="T:System.Threading.CancellationTokenRegistration" />
+
+            
 
             
 
@@ -226,11 +256,15 @@
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -271,8 +305,12 @@
 
             
 
+            
+
              instance is equal to the specified <see
              cref="T:System.Threading.CancellationTokenRegistration" />
+
+            
 
             
 
@@ -291,6 +329,8 @@
 
             
 
+            
+
              are equal. False, otherwise.</para
           >
           <para
@@ -301,8 +341,12 @@
 
             
 
+            
+
              instances are equal if they both refer to the output of a single call to the same Register method of a <see
              cref="T:System.Threading.CancellationToken" />
+
+            
 
             
 
@@ -318,8 +362,12 @@
 
           
 
+          
+
           The other <see
            cref="T:System.Threading.CancellationTokenRegistration" />
+
+          
 
           
 
@@ -355,6 +403,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -363,6 +413,8 @@
           <para
             >A hash code for the current <see
              cref="T:System.Threading.CancellationTokenRegistration" />
+
+            
 
             
 
@@ -405,6 +457,8 @@
 
             
 
+            
+
              instances are equal.</para
           >
         </summary>
@@ -419,10 +473,14 @@
 
           
 
+          
+
           The first instance.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -464,6 +522,8 @@
 
             
 
+            
+
              instances are not equal.</para
           >
         </summary>
@@ -478,10 +538,14 @@
 
           
 
+          
+
           The first instance.</param
         >
         <param name="right">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

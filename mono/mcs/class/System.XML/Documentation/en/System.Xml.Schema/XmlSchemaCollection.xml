@@ -41,11 +41,15 @@
 
         
 
+        
+
          method, at which time the schema is associated with a namespace Uniform Resource Identifier (URI). For XML Schemas, this will typically be the targetNamespace property of the schema.</para
       >
       <para
         >Although this class stores both XML Schemas and XDR schemas, any method and property that takes or returns an <see
          cref="T:System.Xml.Schema.XmlSchema" />
+
+        
 
         
 
@@ -61,11 +65,15 @@
 
         
 
+        
+
          method for an example.</para
       >
       <para
         >XmlSchemaCollection can be used by <see
          cref="T:System.Xml.XmlValidatingReader" />
+
+        
 
         
 
@@ -82,8 +90,12 @@
 
           
 
+          
+
            class is obsolete in the Microsoft .NET Framework version 2.0 and has been replaced by the <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -103,8 +115,12 @@
 
         
 
+        
+
          class class is obsolete. Use <see
          cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+        
 
         
 
@@ -141,8 +157,12 @@
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see
                cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+              
 
               
 
@@ -189,11 +209,15 @@
 
             
 
+            
+
             . The XmlNameTable is used when loading schemas.</para
           >
         </summary>
         <param name="nametable">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -236,11 +260,15 @@
 
             
 
+            
+
              was always used).</para
           >
           <para
             >Fully trusted code: A default XmlUrlResolver with no user credentials is used to resolve any external resources. The schemas for these other namespaces are loaded for validation purposes only. Unlike the original schema, these other schemas are not explicitly added to the schema collection. As a result, they are not accessible using any of the collection methods or properties. If these external resources are located on a network resource that requires authentication, use an overload that takes an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -258,8 +286,12 @@
 
               
 
+              
+
                property, the Add method uses the XmlResolver specified by the <see
                cref="P:System.Xml.XmlValidatingReader.XmlResolver" />
+
+              
 
               
 
@@ -277,8 +309,12 @@
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see
                cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+              
 
               
 
@@ -298,6 +334,8 @@
 
             
 
+            
+
              to the collection.</para
           >
         </summary>
@@ -307,6 +345,8 @@
         </returns>
         <param name="schema">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -348,11 +388,15 @@
 
             
 
+            
+
              was always used).</para
           >
           <para
             >Fully trusted code: A default XmlUrlResolver with no user credentials is used to resolve any external resources. The schemas for these other namespaces are loaded for validation purposes only. Unlike the original schema, these other schemas are not explicitly added to the schema collection. As a result, they are not accessible using any of the collection methods or properties. If these external resources are located on a network resource that requires authentication, use an overload that takes an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -370,8 +414,12 @@
 
               
 
+              
+
                property, the Add method uses the XmlResolver specified by the <see
                cref="P:System.Xml.XmlValidatingReader.XmlResolver" />
+
+              
 
               
 
@@ -389,8 +437,12 @@
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see
                cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+              
 
               
 
@@ -406,6 +458,8 @@
         </summary>
         <param name="schema">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -448,6 +502,8 @@
 
             
 
+            
+
              has already been associated with another schema in the collection, the schema being added replaces the original schema in the collection. For example, in the following C# code, authors.xsd is removed from the collection and names.xsd is added.</para
           >
           <code> schemaColl.Add("urn:author", "authors.xsd");
@@ -460,8 +516,12 @@
 
             
 
+            
+
              is null and the schema being added is an XML Schema, the Add method uses the targetNamespace defined in the XML Schema to identify the schema in the collection. If the schema being added contains references to other namespaces (through include and import elements or the x-schema attribute), the trust level of the application determines how these other namespaces are resolved. (In the .NET Framework version 1.0, a default <see
              cref="T:System.Xml.XmlUrlResolver" />
+
+            
 
             
 
@@ -472,6 +532,8 @@
           <para
             >Fully trusted code: A default XmlUrlResolver with no user credentials is used to resolve any external resources. The schemas for these other namespaces are loaded for validation purposes only. Unlike the original schema, these other schemas are not explicitly added to the schema collection. As a result, they are not accessible using any of the collection methods or properties. If these external resources are located on a network resource that requires authentication, use an overload that takes an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -489,8 +551,12 @@
 
               
 
+              
+
                property, the Add method uses the XmlResolver specified by the <see
                cref="P:System.Xml.XmlValidatingReader.XmlResolver" />
+
+              
 
               
 
@@ -508,8 +574,12 @@
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see
                cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+              
 
               
 
@@ -533,6 +603,8 @@
 
             
 
+            
+
              added to the schema collection; null if the schema being added is an XDR schema or if there are compilation errors in the schema. </para
           >
         </returns>
@@ -543,10 +615,14 @@
 
           
 
+          
+
           The namespace URI associated with the schema. For XML Schemas, this will typically be the targetNamespace. </param
         >
         <param name="uri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -589,11 +665,15 @@
 
             
 
+            
+
              has already been associated with another schema in the collection, the schema being added replaces the original schema in the collection.</para
           >
           <para
             >If <paramref
              name="ns" />
+
+            
 
             
 
@@ -609,11 +689,15 @@
 
             
 
+            
+
              was always used).</para
           >
           <para
             >Fully trusted code: A default XmlUrlResolver with no user credentials is used to resolve any external resources. The schemas for these other namespaces are loaded for validation purposes only. Unlike the original schema, these other schemas are not explicitly added to the schema collection. As a result, they are not accessible using any of the collection methods or properties. If these external resources are located on a network resource that requires authentication, use an overload that takes an <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -631,8 +715,12 @@
 
               
 
+              
+
                property, the Add method uses the XmlResolver specified by the <see
                cref="P:System.Xml.XmlValidatingReader.XmlResolver" />
+
+              
 
               
 
@@ -650,8 +738,12 @@
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see
                cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+              
 
               
 
@@ -671,6 +763,8 @@
 
             
 
+            
+
              to the schema collection.</para
           >
         </summary>
@@ -679,6 +773,8 @@
           <para
             >The <see
              cref="T:System.Xml.Schema.XmlSchema" />
+
+            
 
             
 
@@ -694,11 +790,15 @@
 
           
 
+          
+
           The namespace URI associated with the schema. For XML Schemas, this will typically be the targetNamespace. </param
         >
         <param name="reader">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -744,8 +844,12 @@
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see
                cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+              
 
               
 
@@ -765,8 +869,12 @@
 
             
 
+            
+
              to the collection. The specified <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -786,6 +894,8 @@
 
           
 
+          
+
           The XmlSchema to add to the collection. </param
         >
         <param name="resolver">
@@ -795,8 +905,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlResolver" />
+
+          
 
           
 
@@ -840,11 +954,15 @@
 
             
 
+            
+
              has already been associated with another schema in the collection, the schema being added replaces the original schema in the collection.</para
           >
           <para
             >If <paramref
              name="ns" />
+
+            
 
             
 
@@ -862,8 +980,12 @@
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see
                cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+              
 
               
 
@@ -883,8 +1005,12 @@
 
             
 
+            
+
              to the schema collection. The specified <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -903,11 +1029,15 @@
 
             
 
+            
+
              added to the schema collection; null if the schema being added is an XDR schema or if there are compilation errors in the schema.</para
           >
         </returns>
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -923,6 +1053,8 @@
 
           
 
+          
+
            containing the schema to add. </param
         >
         <param name="resolver">
@@ -932,8 +1064,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlResolver" />
+
+          
 
           
 
@@ -973,8 +1109,12 @@
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see
                cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+              
 
               
 
@@ -994,6 +1134,8 @@
         </returns>
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1036,8 +1178,12 @@
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see
                cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+              
 
               
 
@@ -1057,6 +1203,8 @@
 
             
 
+            
+
              is in the collection.</para
           >
         </summary>
@@ -1066,6 +1214,8 @@
         </returns>
         <param name="schema">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1109,8 +1259,12 @@
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see
                cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+              
 
               
 
@@ -1131,6 +1285,8 @@
 
           
 
+          
+
           The array to copy the objects to. </param
         >
         <param name="index">
@@ -1140,8 +1296,12 @@
 
           
 
+          
+
           The index in <paramref
            name="array" />
+
+          
 
           
 
@@ -1176,8 +1336,12 @@
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see
                cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+              
 
               
 
@@ -1224,8 +1388,12 @@
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see
                cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+              
 
               
 
@@ -1301,8 +1469,12 @@
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see
                cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+              
 
               
 
@@ -1348,8 +1520,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1368,11 +1544,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="array">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1387,8 +1567,12 @@
 
           
 
+          
+
           The index in <paramref
            name="array" />
+
+          
 
           
 
@@ -1425,8 +1609,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1440,6 +1628,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Xml.Schema.XmlSchemaCollection.Count" />
+
+            
 
             
 
@@ -1480,8 +1670,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1495,6 +1689,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Xml.Schema.XmlSchemaCollection.System.Collections.ICollection.IsSynchronized" />
+
+            
 
             
 
@@ -1535,8 +1731,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1550,6 +1750,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Xml.Schema.XmlSchemaCollection.System.Collections.ICollection.SyncRoot" />
+
+            
 
             
 
@@ -1590,8 +1792,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -1610,6 +1816,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1618,6 +1826,8 @@
           <para
             >Returns the <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -1658,8 +1868,12 @@
 
             
 
+            
+
              is thrown on any validation errors where the <see
              cref="P:System.Xml.Schema.ValidationEventArgs.Severity" />
+
+            
 
             
 
@@ -1676,8 +1890,12 @@
 
               
 
+              
+
                class is obsolete in the .NET Framework version 2.0 and has been replaced by the <see
                cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+              
 
               
 

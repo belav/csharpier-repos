@@ -28,6 +28,8 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.ComponentModel.ListChangedEventArgs" />
 
@@ -35,8 +37,12 @@
 
         
 
+        
+
          class to indicate the way an <see
          cref="T:System.ComponentModel.IBindingList" />
+
+        
 
         
 
@@ -79,6 +85,8 @@
 
             
 
+            
+
              contains the index of the item that was added.</para
           >
         </summary>
@@ -107,6 +115,8 @@
           <para
             >An item changed in the list. <see
              cref="P:System.ComponentModel.ListChangedEventArgs.NewIndex" />
+
+            
 
             
 
@@ -145,6 +155,8 @@
 
             
 
+            
+
              contains the index of the item that was deleted.</para
           >
         </summary>
@@ -178,8 +190,12 @@
 
             
 
+            
+
              contains the previous index for the item, whereas <see
              cref="P:System.ComponentModel.ListChangedEventArgs.NewIndex" />
+
+            
 
             
 
@@ -218,6 +234,8 @@
 
             
 
+            
+
              was added, which changed the schema.</para
           >
         </summary>
@@ -251,6 +269,8 @@
 
             
 
+            
+
              was changed, which changed the schema.</para
           >
         </summary>
@@ -279,6 +299,8 @@
           <para
             >A <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 

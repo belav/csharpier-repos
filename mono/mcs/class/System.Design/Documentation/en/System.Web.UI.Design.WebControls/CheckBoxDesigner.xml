@@ -24,8 +24,12 @@
 
         
 
+        
+
          class overrides the <see
          cref="M:System.Web.UI.Design.WebControls.CheckBoxDesigner.GetDesignTimeHtml" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          class to ensure that the control is displayed with a meaningful representation at design time. If the <see
          cref="P:System.Web.UI.WebControls.CheckBox.Text" />
+
+        
 
         
 
@@ -52,6 +60,8 @@
 
         
 
+        
+
          method of this class sets the <see
          cref="P:System.Web.UI.WebControls.CheckBox.Text" />
 
@@ -59,8 +69,12 @@
 
         
 
+        
+
          property of the control to the <see
          cref="P:System.Web.UI.Control.ID" />
+
+        
 
         
 
@@ -74,6 +88,8 @@
       <para
         >Extends design-time behavior for the <see
          cref="T:System.Web.UI.WebControls.CheckBox" />
+
+        
 
         
 
@@ -95,6 +111,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.WebControls.CheckBoxDesigner" />
+
+            
 
             
 
@@ -127,6 +145,8 @@
 
             
 
+            
+
              property is empty or consists only of white space, then the generated HTML contains the <see
              cref="P:System.Web.UI.Control.ID" />
 
@@ -134,8 +154,12 @@
 
             
 
+            
+
              of the check box control; otherwise, the generated HTML contains the contents of the control's <see
              cref="P:System.Web.UI.WebControls.Button.Text" />
+
+            
 
             
 

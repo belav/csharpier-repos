@@ -26,8 +26,12 @@
 
         
 
+        
+
          method is the preferred mechanism for obtaining <see
          cref="T:System.Xml.XmlReader" />
+
+        
 
         
 
@@ -40,8 +44,12 @@
 
         
 
+        
+
          method uses the <see
          cref="T:System.Xml.XmlReaderSettings" />
+
+        
 
         
 
@@ -54,6 +62,8 @@
 
         
 
+        
+
          object.</para
       >
       <para
@@ -61,6 +71,8 @@
          type="text/html">
           <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
         </format>
+
+        
 
         
 
@@ -79,6 +91,8 @@
 
         
 
+        
+
          class.</para
       >
       <list type="bullet">
@@ -91,8 +105,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessSchemaLocation" />
+
+            
 
             
 
@@ -105,8 +123,12 @@
 
             
 
+            
+
              object are not set by default. When these flags are set, the <see
              cref="P:System.Xml.XmlReaderSettings.XmlResolver" />
+
+            
 
             
 
@@ -119,8 +141,12 @@
 
             
 
+            
+
              object is used to resolve schema locations encountered in the instance document in the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -133,6 +159,8 @@
 
             
 
+            
+
              object is null, schema locations are not resolved even if the <see
              cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessInlineSchema" />
 
@@ -140,8 +168,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessSchemaLocation" />
+
+            
 
             
 
@@ -162,8 +194,12 @@
 
             
 
+            
+
              delegate, or are exposed as an <see
              cref="T:System.Xml.Schema.XmlSchemaValidationException" />
+
+            
 
             
 
@@ -176,6 +212,8 @@
 
             
 
+            
+
              object (validation warnings do not cause an <see
              cref="T:System.Xml.Schema.XmlSchemaValidationException" />
 
@@ -183,8 +221,12 @@
 
             
 
+            
+
              to be thrown). This content model information should not be exposed in untrusted scenarios. Validation warning messages are suppressed by default and can be reported by setting the <see
              cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ReportValidationWarnings" />
+
+            
 
             
 
@@ -202,6 +244,8 @@
 
             
 
+            
+
              property of an <see
              cref="T:System.Xml.Schema.XmlSchemaValidationException" />
 
@@ -209,8 +253,12 @@
 
             
 
+            
+
              returns the URI path to the schema file that caused the exception. The <see
              cref="P:System.Xml.Schema.XmlSchemaException.SourceUri" />
+
+            
 
             
 
@@ -228,12 +276,16 @@
 
             
 
+            
+
              flag (enabled by default) is recommended when validating, untrusted, large XML documents in high availability scenarios against a schema with identity constraints over a large part of the document.</para
           >
         </item>
         <item>
           <para>
             <see cref="T:System.Xml.XmlReaderSettings" />
+
+            
 
             
 
@@ -246,8 +298,12 @@
 
             
 
+            
+
              objects, or when passing the <see
              cref="T:System.Xml.XmlReaderSettings" />
+
+            
 
             
 
@@ -265,8 +321,12 @@
 
             
 
+            
+
              to restrict the resources that the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -284,6 +344,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.Xml.XmlNamespaceManager" />
 
@@ -291,8 +353,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -310,6 +376,8 @@
 
             
 
+            
+
              may have a correlation to the size of the parsed XML document. One form of denial of service attack is when excessively large XML documents are submitted to be parsed. You can limit the size of the document that can be parsed by setting the <see
              cref="P:System.Xml.XmlReaderSettings.MaxCharactersInDocument" />
 
@@ -317,8 +385,12 @@
 
             
 
+            
+
              property and then limit the number of characters that result from expanding entities by setting the <see
              cref="P:System.Xml.XmlReaderSettings.MaxCharactersFromEntities" />
+
+            
 
             
 
@@ -339,8 +411,12 @@
 
         
 
+        
+
          object created by the <see
          cref="Overload:System.Xml.XmlReader.Create" />
+
+        
 
         
 
@@ -370,6 +446,8 @@
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.Xml.XmlReaderSettings" />
+
+            
 
             
 
@@ -417,6 +495,8 @@
               <description>
                 <para>
                   <see cref="F:System.Xml.ConformanceLevel.Document" />
+
+                  
 
                   
 
@@ -533,8 +613,12 @@
 
                   
 
+                  
+
                    instead. If you had set <see
                    cref="P:System.Xml.XmlReaderSettings.ProhibitDtd" />
+
+                  
 
                   
 
@@ -547,6 +631,8 @@
 
                   
 
+                  
+
                    to Prohibit. If you had set <see
                    cref="P:System.Xml.XmlReaderSettings.ProhibitDtd" />
 
@@ -554,8 +640,12 @@
 
                   
 
+                  
+
                    to false set <see
                    cref="P:System.Xml.XmlTextReader.DtdProcessing" />
+
+                  
 
                   
 
@@ -580,6 +670,8 @@
 
                   
 
+                  
+
                    object.</para
                 >
               </description>
@@ -598,6 +690,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -611,6 +705,8 @@
               <description>
                 <para>
                   <see cref="F:System.Xml.ValidationType.None" />
+
+                  
 
                   
 
@@ -635,6 +731,8 @@
 
                   
 
+                  
+
                    object.</para
                 >
               </description>
@@ -646,6 +744,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.XmlReaderSettings" />
+
+            
 
             
 
@@ -678,8 +778,12 @@
 
             
 
+            
+
              instance if you want to use asynchronous <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -692,8 +796,12 @@
 
             
 
+            
+
              instance is created, the <see
              cref="P:System.Xml.XmlReaderSettings.Async" />
+
+            
 
             
 
@@ -709,8 +817,12 @@
 
             
 
+            
+
              overload. This means that if you create a new <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -723,6 +835,8 @@
 
             
 
+            
+
             , the async behavior depends on the input <see
              cref="T:System.Xml.XmlReader" />
 
@@ -730,8 +844,12 @@
 
             
 
+            
+
             , and you cannot use the <see
              cref="P:System.Xml.XmlReaderSettings.Async" />
+
+            
 
             
 
@@ -750,8 +868,12 @@
 
             
 
+            
+
              methods can be used on a particular <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -814,6 +936,8 @@
 
             
 
+            
+
              object can be modified without affecting the settings on the original object.</para
           >
         </remarks>
@@ -827,6 +951,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -835,6 +961,8 @@
           <para
             >The cloned <see
              cref="T:System.Xml.XmlReaderSettings" />
+
+            
 
             
 
@@ -869,8 +997,12 @@
 
             
 
+            
+
              is passed to the <see
              cref="Overload:System.Xml.XmlReader.Create" />
+
+            
 
             
 
@@ -884,6 +1016,8 @@
           <para
             >Gets or sets a value indicating whether the underlying stream or <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -924,8 +1058,12 @@
 
             
 
+            
+
              objects created by the <see
              cref="Overload:System.Xml.XmlReader.Create" />
+
+            
 
             
 
@@ -938,6 +1076,8 @@
 
             
 
+            
+
              class. The following are conformance improvements that are not enabled on <see
              cref="T:System.Xml.XmlTextReader" />
 
@@ -945,8 +1085,12 @@
 
             
 
+            
+
             , but are available by default on readers created by the <see
              cref="Overload:System.Xml.XmlReader.Create" />
+
+            
 
             
 
@@ -983,6 +1127,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -991,6 +1137,8 @@
           <para
             >Gets or sets the level of conformance which the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1029,8 +1177,12 @@
 
             
 
+            
+
              enumeration contains the <see
              cref="F:System.Xml.DtdProcessing.Prohibit" />
+
+            
 
             
 
@@ -1043,8 +1195,12 @@
 
             
 
+            
+
             , and <see
              cref="F:System.Xml.DtdProcessing.Parse" />
+
+            
 
             
 
@@ -1057,8 +1213,12 @@
 
             
 
+            
+
              is the default behavior. The <see
              cref="P:System.Xml.XmlReaderSettings.DtdProcessing" />
+
+            
 
             
 
@@ -1071,8 +1231,12 @@
 
             
 
+            
+
              property and adds the ability to ignore the DOCTYPE element. If you had set <see
              cref="P:System.Xml.XmlReaderSettings.ProhibitDtd" />
+
+            
 
             
 
@@ -1085,6 +1249,8 @@
 
             
 
+            
+
              to Prohibit. If you had set <see
              cref="P:System.Xml.XmlReaderSettings.ProhibitDtd" />
 
@@ -1092,8 +1258,12 @@
 
             
 
+            
+
              to false set <see
              cref="P:System.Xml.XmlTextReader.DtdProcessing" />
+
+            
 
             
 
@@ -1110,6 +1280,8 @@
 
               
 
+              
+
                property is set to <see
                cref="F:System.Xml.DtdProcessing.Ignore" />
 
@@ -1117,8 +1289,12 @@
 
               
 
+              
+
               , the <see
                cref="T:System.Xml.XmlReader" />
+
+              
 
               
 
@@ -1237,8 +1413,12 @@
 
             
 
+            
+
              setting determines the point where the <see
              cref="P:System.Xml.IXmlLineInfo.LineNumber" />
+
+            
 
             
 
@@ -1252,6 +1432,8 @@
           <para
             >Gets or sets line number offset of the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1286,8 +1468,12 @@
 
             
 
+            
+
              setting determines the point where the <see
              cref="P:System.Xml.IXmlLineInfo.LinePosition" />
+
+            
 
             
 
@@ -1301,6 +1487,8 @@
           <para
             >Gets or sets line position offset of the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1337,6 +1525,8 @@
 
             
 
+            
+
              will be thrown.</para
           >
           <para>This property allows you to mitigate denial of service attacks where the attacker submits XML documents that attempt to exceed memory limits via expanding entities. By limiting the characters that result from expanded entities, you can detect the attack and recover reliably.</para>
@@ -1366,6 +1556,8 @@
           <para
             >If the reader attempts to read a document with a size that exceeds this property, an <see
              cref="T:System.Xml.XmlException" />
+
+            
 
             
 
@@ -1411,8 +1603,12 @@
 
             
 
+            
+
              instance if you want to share a common name table among all the created <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1429,8 +1625,12 @@
 
               
 
+              
+
                class is not thread-safe. Therefore it cannot be shared between <see
                cref="T:System.Xml.XmlReader" />
+
+              
 
               
 
@@ -1445,6 +1645,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Xml.XmlNameTable" />
+
+            
 
             
 
@@ -1484,8 +1686,12 @@
 
             
 
+            
+
              throws an <see
              cref="T:System.Xml.XmlException" />
+
+            
 
             
 
@@ -1501,8 +1707,12 @@
 
             
 
+            
+
              to restrict the resources that the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -1518,8 +1728,12 @@
 
             
 
+            
+
              instead. If you had set <see
              cref="P:System.Xml.XmlReaderSettings.ProhibitDtd" />
+
+            
 
             
 
@@ -1532,6 +1746,8 @@
 
             
 
+            
+
              to Prohibit. If you had set <see
              cref="P:System.Xml.XmlReaderSettings.ProhibitDtd" />
 
@@ -1539,8 +1755,12 @@
 
             
 
+            
+
              to false set <see
              cref="P:System.Xml.XmlTextReader.DtdProcessing" />
+
+            
 
             
 
@@ -1554,6 +1774,8 @@
           <para
             >Gets or sets a value indicating whether to prohibit document type definition (DTD) processing. This property is obsolete. Use <see
              cref="P:System.Xml.XmlTextReader.DtdProcessing" />
+
+            
 
             
 
@@ -1586,6 +1808,8 @@
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.Xml.XmlReaderSettings" />
+
+            
 
             
 
@@ -1633,6 +1857,8 @@
               <description>
                 <para>
                   <see cref="F:System.Xml.ConformanceLevel.Document" />
+
+                  
 
                   
 
@@ -1749,8 +1975,12 @@
 
                   
 
+                  
+
                    instead. If you had set <see
                    cref="P:System.Xml.XmlReaderSettings.ProhibitDtd" />
+
+                  
 
                   
 
@@ -1763,6 +1993,8 @@
 
                   
 
+                  
+
                    to Prohibit. If you had set <see
                    cref="P:System.Xml.XmlReaderSettings.ProhibitDtd" />
 
@@ -1770,8 +2002,12 @@
 
                   
 
+                  
+
                    to false set <see
                    cref="P:System.Xml.XmlTextReader.DtdProcessing" />
+
+                  
 
                   
 
@@ -1796,6 +2032,8 @@
 
                   
 
+                  
+
                    object.</para
                 >
               </description>
@@ -1809,6 +2047,8 @@
               <description>
                 <para>
                   <see cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessIdentityConstraints" />
+
+                  
 
                   
 
@@ -1832,6 +2072,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -1846,6 +2088,8 @@
                 <para
                   >A new <see
                    cref="T:System.Xml.XmlUrlResolver" />
+
+                  
 
                   
 
@@ -1893,6 +2137,8 @@
 
             
 
+            
+
              class only supports XML Schema definition language (XSD) schemas. <see
              cref="T:System.Xml.XmlReader" />
 
@@ -1900,8 +2146,12 @@
 
             
 
+            
+
              instances created by the <see
              cref="Overload:System.Xml.XmlReader.Create" />
+
+            
 
             
 
@@ -1915,6 +2165,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -1954,8 +2206,12 @@
 
             
 
+            
+
              is set to either <see
              cref="F:System.Xml.ValidationType.DTD" />
+
+            
 
             
 
@@ -1968,6 +2224,8 @@
 
             
 
+            
+
             . If the <see
              cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ReportValidationWarnings" />
 
@@ -1975,8 +2233,12 @@
 
             
 
+            
+
              setting has been enabled on the <see
              cref="P:System.Xml.XmlReaderSettings.ValidationFlags" />
+
+            
 
             
 
@@ -1992,8 +2254,12 @@
 
             
 
+            
+
              is thrown for all validation errors. (Validation warnings do not cause an <see
              cref="T:System.Xml.Schema.XmlSchemaValidationException" />
+
+            
 
             
 
@@ -2010,8 +2276,12 @@
 
               
 
+              
+
                delegate, or are exposed as an <see
                cref="T:System.Xml.Schema.XmlSchemaValidationException" />
+
+              
 
               
 
@@ -2024,6 +2294,8 @@
 
               
 
+              
+
                object (validation warnings do not cause an <see
                cref="T:System.Xml.Schema.XmlSchemaValidationException" />
 
@@ -2031,8 +2303,12 @@
 
               
 
+              
+
                to be thrown). This content model information should not be exposed in untrusted scenarios. Validation warning messages are suppressed by default and can be reported by setting the <see
                cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ReportValidationWarnings" />
+
+              
 
               
 
@@ -2048,6 +2324,8 @@
 
               
 
+              
+
                property of an <see
                cref="T:System.Xml.Schema.XmlSchemaValidationException" />
 
@@ -2055,8 +2333,12 @@
 
               
 
+              
+
                returns the URI path to the schema file that caused the exception. The <see
                cref="P:System.Xml.Schema.XmlSchemaException.SourceUri" />
+
+              
 
               
 
@@ -2103,8 +2385,12 @@
 
               
 
+              
+
                and <see
                cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessSchemaLocation" />
+
+              
 
               
 
@@ -2117,8 +2403,12 @@
 
               
 
+              
+
                object are not set by default. When these flags are set, the <see
                cref="P:System.Xml.XmlReaderSettings.XmlResolver" />
+
+              
 
               
 
@@ -2131,8 +2421,12 @@
 
               
 
+              
+
                object is used to resolve schema locations encountered in the instance document in the <see
                cref="T:System.Xml.XmlReader" />
+
+              
 
               
 
@@ -2145,8 +2439,12 @@
 
               
 
+              
+
                object is null, schema locations are not resolved even if the <see
                cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessInlineSchema" />
+
+              
 
               
 
@@ -2159,12 +2457,16 @@
 
               
 
+              
+
                validation flags are set. </para
             >
             <para>Schemas added during validation add new types and can change the validation outcome of the document being validated. As a result, external schemas should only be resolved from trusted sources.</para>
             <para
               >Disabling the <see
                cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessIdentityConstraints" />
+
+              
 
               
 
@@ -2184,8 +2486,12 @@
 
             
 
+            
+
              objects (<see
              cref="P:System.Xml.XmlReaderSettings.ValidationType" />
+
+            
 
             
 
@@ -2226,6 +2532,8 @@
 
             
 
+            
+
              values.</para
           >
           <block subset="none" type="note">
@@ -2237,8 +2545,12 @@
 
               
 
+              
+
                and <see
                cref="F:System.Xml.ValidationType.XDR" />
+
+              
 
               
 
@@ -2273,8 +2585,12 @@
 
                     
 
+                    
+
                      property must also be set to <see
                      cref="F:System.Xml.DtdProcessing.Parse" />
+
+                    
 
                     
 
@@ -2293,6 +2609,8 @@
                 <para
                   >The <see
                    cref="T:System.Xml.XmlReader" />
+
+                  
 
                   
 
@@ -2318,8 +2636,12 @@
 
                       
 
+                      
+
                        property to access the <see
                        cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+                      
 
                       
 
@@ -2337,6 +2659,8 @@
 
                       
 
+                      
+
                        option must be enabled.)</para
                     >
                   </item>
@@ -2344,6 +2668,8 @@
                     <para
                       >Uses the XML Schema specified by schema location hints (xsi:schemaLocation or xsi:noNamespaceSchemaLocation attribute) found in the XML instance document. (The <see
                        cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessSchemaLocation" />
+
+                      
 
                       
 
@@ -2362,6 +2688,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Xml.XmlReader" />
+
+            
 
             
 
@@ -2399,8 +2727,12 @@
 
             
 
+            
+
              is used to locate and open an XML instance document, or to locate and open any external resources referenced by the XML instance document. This can include entities, DTD, or schemas. The <see
              cref="P:System.Xml.XmlResolver.Credentials" />
+
+            
 
             
 
@@ -2417,6 +2749,8 @@
 
               
 
+              
+
                can contain sensitive information such as user credentials, you should be careful when caching <see
                cref="T:System.Xml.XmlReaderSettings" />
 
@@ -2424,8 +2758,12 @@
 
               
 
+              
+
                objects, or when passing the <see
                cref="T:System.Xml.XmlReaderSettings" />
+
+              
 
               
 
@@ -2441,8 +2779,12 @@
 
               
 
+              
+
                can be used to access external documents. The <see
                cref="T:System.Xml.XmlSecureResolver" />
+
+              
 
               
 
@@ -2455,6 +2797,8 @@
 
               
 
+              
+
                by wrapping the <see
                cref="T:System.Xml.XmlResolver" />
 
@@ -2462,8 +2806,12 @@
 
               
 
+              
+
                object and restricting the resources that the underlying <see
                cref="T:System.Xml.XmlResolver" />
+
+              
 
               
 
@@ -2480,6 +2828,8 @@
 
               
 
+              
+
               .</para
             >
             <para
@@ -2490,8 +2840,12 @@
 
               
 
+              
+
                and <see
                cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessSchemaLocation" />
+
+              
 
               
 
@@ -2504,8 +2858,12 @@
 
               
 
+              
+
                object are not set by default. When these flags are set, the <see
                cref="P:System.Xml.XmlReaderSettings.XmlResolver" />
+
+              
 
               
 
@@ -2518,8 +2876,12 @@
 
               
 
+              
+
                object is used to resolve schema locations encountered in the instance document in the <see
                cref="T:System.Xml.XmlReader" />
+
+              
 
               
 
@@ -2532,6 +2894,8 @@
 
               
 
+              
+
                object is null, schema locations are not resolved even if the <see
                cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessInlineSchema" />
 
@@ -2539,8 +2903,12 @@
 
               
 
+              
+
                and <see
                cref="F:System.Xml.Schema.XmlSchemaValidationFlags.ProcessSchemaLocation" />
+
+              
 
               
 
@@ -2556,6 +2924,8 @@
           <para
             >Sets the <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 

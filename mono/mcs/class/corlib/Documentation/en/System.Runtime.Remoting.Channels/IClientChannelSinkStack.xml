@@ -41,6 +41,8 @@
 
         
 
+        
+
          is used during processing of responses to asynchronous calls.</para
       >
       <para
@@ -51,8 +53,12 @@
 
         
 
+        
+
          method is called when a message is outbound to the server. Each sink in the sink chain calls the <see
          cref="M:System.Runtime.Remoting.Channels.IClientChannelSink.ProcessMessage(System.Runtime.Remoting.Messaging.IMessage,System.Runtime.Remoting.Channels.ITransportHeaders,System.IO.Stream,System.Runtime.Remoting.Channels.ITransportHeaders@,System.IO.Stream@)" />
+
+        
 
         
 
@@ -68,6 +74,8 @@
 
         
 
+        
+
          method, it dispatches the call asynchronously by calling <see
          cref="M:System.Runtime.Remoting.Channels.IClientChannelSink.AsyncProcessRequest(System.Runtime.Remoting.Channels.IClientChannelSinkStack,System.Runtime.Remoting.Messaging.IMessage,System.Runtime.Remoting.Channels.ITransportHeaders,System.IO.Stream)" />
 
@@ -75,8 +83,12 @@
 
         
 
+        
+
          on the next channel sink. A stack of reply sinks is needed to process the response. Any sink that wants to process the response needs to push itself to the client channel sink stack inside of <see
          cref="M:System.Runtime.Remoting.Channels.IClientChannelSink.AsyncProcessRequest(System.Runtime.Remoting.Channels.IClientChannelSinkStack,System.Runtime.Remoting.Messaging.IMessage,System.Runtime.Remoting.Channels.ITransportHeaders,System.IO.Stream)" />
+
+        
 
         
 
@@ -129,6 +141,8 @@
 
           
 
+          
+
           The sink to remove and return from the sink stack. </param
         >
       </Docs>
@@ -166,6 +180,8 @@
 
             
 
+            
+
              parameter is returned in the <paramref
              name="state" />
 
@@ -173,8 +189,12 @@
 
             
 
+            
+
              parameter of the <see
              cref="M:System.Runtime.Remoting.Channels.IClientChannelSink.AsyncProcessResponse(System.Runtime.Remoting.Channels.IClientResponseChannelSinkStack,System.Object,System.Runtime.Remoting.Channels.ITransportHeaders,System.IO.Stream)" />
+
+            
 
             
 
@@ -194,10 +214,14 @@
 
           
 
+          
+
           The sink to push onto the sink stack. </param
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

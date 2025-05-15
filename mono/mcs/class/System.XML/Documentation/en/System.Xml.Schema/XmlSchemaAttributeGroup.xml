@@ -38,6 +38,8 @@
 
         
 
+        
+
         . AttributesGroups provides a mechanism to group a set of attribute declarations so that they can be incorporated as a group into complex type definitions.</para
       >
     </summary>
@@ -64,6 +66,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Schema.XmlSchemaAttributeGroup" />
+
+            
 
             
 
@@ -106,6 +110,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Xml.Schema.XmlSchemaAnyAttribute" />
+
+            
 
             
 

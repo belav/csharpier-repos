@@ -29,8 +29,12 @@
 
         
 
+        
+
          class to bind the value of a <see
          cref="T:System.Web.UI.Control" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          or <see
          cref="P:System.Web.UI.WebControls.ListControl.SelectedIndex" />
+
+        
 
         
 
@@ -60,8 +68,12 @@
 
         
 
+        
+
          class provides two properties in addition to those inherited from the <see
          cref="T:System.Web.UI.WebControls.Parameter" />
+
+        
 
         
 
@@ -74,8 +86,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
+
+        
 
         
 
@@ -88,8 +104,12 @@
 
         
 
+        
+
          property identifies which <see
          cref="T:System.Web.UI.Control" />
+
+        
 
         
 
@@ -102,6 +122,8 @@
 
         
 
+        
+
          property identifies the public property of the <see
          cref="T:System.Web.UI.Control" />
 
@@ -109,8 +131,12 @@
 
         
 
+        
+
          from which the <see
          cref="T:System.Web.UI.WebControls.ControlParameter" />
+
+        
 
         
 
@@ -124,6 +150,8 @@
       <para
         >Binds the value of a property of a <see
          cref="T:System.Web.UI.Control" />
+
+        
 
         
 
@@ -150,8 +178,12 @@
 
             
 
+            
+
              object that is created with the <see
              cref="M:System.Web.UI.WebControls.ControlParameter.#ctor" />
+
+            
 
             
 
@@ -164,8 +196,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
+
+            
 
             
 
@@ -178,8 +214,12 @@
 
             
 
+            
+
             . In addition, the <see
              cref="P:System.Web.UI.WebControls.Parameter.Name" />
+
+            
 
             
 
@@ -192,8 +232,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Web.UI.WebControls.Parameter.Type" />
+
+            
 
             
 
@@ -206,8 +250,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Web.UI.WebControls.Parameter.Direction" />
+
+            
 
             
 
@@ -220,8 +268,12 @@
 
             
 
+            
+
             , and the <see
              cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" />
+
+            
 
             
 
@@ -235,6 +287,8 @@
           <para
             >Initializes a new unnamed instance of the <see
              cref="T:System.Web.UI.WebControls.ControlParameter" />
+
+            
 
             
 
@@ -269,8 +323,12 @@
 
             
 
+            
+
              constructor is a protected copy constructor that is used to clone a <see
              cref="T:System.Web.UI.WebControls.ControlParameter" />
+
+            
 
             
 
@@ -283,8 +341,12 @@
 
             
 
+            
+
              object, including the <see
              cref="P:System.Web.UI.WebControls.ControlParameter.ControlID" />
+
+            
 
             
 
@@ -297,6 +359,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.UI.WebControls.Parameter.Name" />
 
@@ -304,8 +368,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Web.UI.WebControls.Parameter.Type" />
+
+            
 
             
 
@@ -324,6 +392,8 @@
 
             
 
+            
+
              class with values from the specified instance.</para
           >
         </summary>
@@ -334,8 +404,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.ControlParameter" />
+
+          
 
           
 
@@ -370,8 +444,12 @@
 
             
 
+            
+
              object that is created with the <see
              cref="M:System.Web.UI.WebControls.ControlParameter.#ctor(System.String,System.String)" />
+
+            
 
             
 
@@ -384,8 +462,12 @@
 
             
 
+            
+
              name, which identifies the <see
              cref="T:System.Web.UI.Control" />
+
+            
 
             
 
@@ -398,6 +480,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.UI.WebControls.Parameter.Type" />
 
@@ -405,8 +489,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Web.UI.WebControls.Parameter.Direction" />
+
+            
 
             
 
@@ -425,11 +513,15 @@
 
             
 
+            
+
              class, using the specified control name to identify which control to bind to.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -444,8 +536,12 @@
 
           
 
+          
+
           The name of the control that the parameter is bound to. The default is <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -481,8 +577,12 @@
 
             
 
+            
+
              object that is created with the <see
              cref="M:System.Web.UI.WebControls.ControlParameter.#ctor(System.String,System.String,System.String)" />
+
+            
 
             
 
@@ -495,8 +595,12 @@
 
             
 
+            
+
              name, and <see
              cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
+
+            
 
             
 
@@ -509,8 +613,12 @@
 
             
 
+            
+
              that the parameter binds to. Other properties, including <see
              cref="P:System.Web.UI.WebControls.Parameter.Type" />
+
+            
 
             
 
@@ -523,8 +631,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Web.UI.WebControls.Parameter.ConvertEmptyStringToNull" />
+
+            
 
             
 
@@ -543,11 +655,15 @@
 
             
 
+            
+
              class, using the specified property name and control name to identify which control to bind to.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -562,8 +678,12 @@
 
           
 
+          
+
           The name of the control that the parameter is bound to. The default is <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -578,8 +698,12 @@
 
           
 
+          
+
           The name of the property on the control that the parameter is bound to. The default is <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -616,8 +740,12 @@
 
             
 
+            
+
              object that is created with the <see
              cref="M:System.Web.UI.WebControls.ControlParameter.#ctor(System.String,System.TypeCode,System.String,System.String)" />
+
+            
 
             
 
@@ -630,8 +758,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.UI.Control" />
+
+            
 
             
 
@@ -644,6 +776,8 @@
 
             
 
+            
+
              property. Only the <see
              cref="P:System.Web.UI.WebControls.Parameter.Direction" />
 
@@ -651,8 +785,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.Parameter.ConvertEmptyStringToNull" />
+
+            
 
             
 
@@ -671,11 +809,15 @@
 
             
 
+            
+
              class, using the specified property name and control name to identify which control to bind to.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -690,8 +832,12 @@
 
           
 
+          
+
           The type that the parameter represents. The default is <see
            cref="F:System.TypeCode.Object" />
+
+          
 
           
 
@@ -706,8 +852,12 @@
 
           
 
+          
+
           The name of the control that the parameter is bound to. The default is <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -722,8 +872,12 @@
 
           
 
+          
+
           The name of the property of the control that the parameter is bound to. The default is <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -758,6 +912,8 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.UI.WebControls.ControlParameter.#ctor(System.Web.UI.WebControls.ControlParameter)" />
 
@@ -765,8 +921,12 @@
 
             
 
+            
+
              copy constructor to initialize a new instance of the <see
              cref="T:System.Web.UI.WebControls.ControlParameter" />
+
+            
 
             
 
@@ -785,6 +945,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -793,6 +955,8 @@
           <para
             >A <see
              cref="T:System.Web.UI.WebControls.ControlParameter" />
+
+            
 
             
 
@@ -839,6 +1003,8 @@
 
             
 
+            
+
              property is a required property that identifies the <see
              cref="T:System.Web.UI.Control" />
 
@@ -846,8 +1012,12 @@
 
             
 
+            
+
              instance that the <see
              cref="T:System.Web.UI.WebControls.ControlParameter" />
+
+            
 
             
 
@@ -863,8 +1033,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
+
+            
 
             
 
@@ -877,8 +1051,12 @@
 
             
 
+            
+
              method to correctly bind to a control. If you do not set the <see
              cref="P:System.Web.UI.WebControls.ControlParameter.ControlID" />
+
+            
 
             
 
@@ -891,8 +1069,12 @@
 
             
 
+            
+
              method throws an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -906,6 +1088,8 @@
           <para
             >Specifies the name of the control that the <see
              cref="T:System.Web.UI.WebControls.ControlParameter" />
+
+            
 
             
 
@@ -945,8 +1129,12 @@
 
             
 
+            
+
              object attempts to bind to the <see
              cref="T:System.Web.UI.Control" />
+
+            
 
             
 
@@ -959,8 +1147,12 @@
 
             
 
+            
+
              method is called. The <see
              cref="M:System.Web.UI.WebControls.ControlParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+
+            
 
             
 
@@ -973,8 +1165,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
+
+            
 
             
 
@@ -990,6 +1186,8 @@
 
             
 
+            
+
              class never uses the <see
              cref="P:System.Web.UI.WebControls.Parameter.DefaultValue" />
 
@@ -997,8 +1195,12 @@
 
             
 
+            
+
              property, which is inherited from <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -1015,8 +1217,12 @@
 
               
 
+              
+
                parameter is ignored. If the <paramref
                name="control" />
+
+              
 
               
 
@@ -1036,6 +1242,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1044,6 +1252,8 @@
           <para
             >An <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -1059,8 +1269,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Control" />
+
+          
 
           
 
@@ -1100,8 +1314,12 @@
 
             
 
+            
+
              property identifies the public property of the <see
              cref="T:System.Web.UI.Control" />
+
+            
 
             
 
@@ -1114,8 +1332,12 @@
 
             
 
+            
+
              property that the <see
              cref="T:System.Web.UI.WebControls.ControlParameter" />
+
+            
 
             
 
@@ -1128,8 +1350,12 @@
 
             
 
+            
+
              can be set to a simple string, such as "SelectedValue", or an expression using <see
              cref="Overload:System.Web.UI.DataBinder.Eval" />
+
+            
 
             
 
@@ -1145,8 +1371,12 @@
 
             
 
+            
+
              property is optional, typically both <see
              cref="P:System.Web.UI.WebControls.ControlParameter.ControlID" />
+
+            
 
             
 
@@ -1159,8 +1389,12 @@
 
             
 
+            
+
              properties are set for the <see
              cref="M:System.Web.UI.WebControls.ControlParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+
+            
 
             
 
@@ -1173,8 +1407,12 @@
 
             
 
+            
+
              property but not the <see
              cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
+
+            
 
             
 
@@ -1187,8 +1425,12 @@
 
             
 
+            
+
              method attempts to use the <see
              cref="T:System.Web.UI.ControlValuePropertyAttribute" />
+
+            
 
             
 
@@ -1201,8 +1443,12 @@
 
             
 
+            
+
              property. (It is the responsibility of control authors to specify this attribute.) If this fails, <see
              cref="M:System.Web.UI.WebControls.ControlParameter.Evaluate(System.Web.HttpContext,System.Web.UI.Control)" />
+
+            
 
             
 
@@ -1215,11 +1461,15 @@
 
             
 
+            
+
              exception.</para
           >
           <para
             >The following table identifies which ASP.NET controls decorate properties with the <see
              cref="T:System.Web.UI.ControlValuePropertyAttribute" />
+
+            
 
             
 
@@ -1382,8 +1632,12 @@
 
             
 
+            
+
              property that the <see
              cref="T:System.Web.UI.WebControls.ControlParameter" />
+
+            
 
             
 

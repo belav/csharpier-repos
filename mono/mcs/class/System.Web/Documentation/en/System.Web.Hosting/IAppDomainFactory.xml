@@ -29,8 +29,12 @@
 
         
 
+        
+
          instance for a Web application. This interface was used by .NET Framework versions earlier than 2.0; version 2.0 uses the <see
          cref="T:System.Web.Hosting.IAppManagerAppDomainFactory" />
+
+        
 
         
 
@@ -70,6 +74,8 @@
 
             
 
+            
+
              interface instead.</para
           >
         </summary>
@@ -84,10 +90,14 @@
 
           
 
+          
+
           The module containing the Web application.</param
         >
         <param name="typeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -102,10 +112,14 @@
 
           
 
+          
+
           The unique identifier for the Web application.</param
         >
         <param name="appPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -120,10 +134,14 @@
 
           
 
+          
+
           The URL of origin for the Web application.</param
         >
         <param name="iZone">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

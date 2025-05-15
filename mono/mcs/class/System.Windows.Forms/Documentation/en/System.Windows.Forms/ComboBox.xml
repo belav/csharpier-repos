@@ -41,8 +41,12 @@
 
         
 
+        
+
          displays a text box combined with a <see
          cref="T:System.Windows.Forms.ListBox" />
+
+        
 
         
 
@@ -58,8 +62,12 @@
 
         
 
+        
+
          property specifies whether the list is always displayed or whether the list is displayed in a drop-down. The <see
          cref="P:System.Windows.Forms.ComboBox.DropDownStyle" />
+
+        
 
         
 
@@ -72,8 +80,12 @@
 
         
 
+        
+
          for the available settings and their effects. There is no setting to always display the list and disallow entering a new value. To display a list to which no new values can be added, use a <see
          cref="T:System.Windows.Forms.ListBox" />
+
+        
 
         
 
@@ -89,8 +101,12 @@
 
         
 
+        
+
          class (through the <see
          cref="P:System.Windows.Forms.ComboBox.Items" />
+
+        
 
         
 
@@ -103,8 +119,12 @@
 
         
 
+        
+
         ). You can assign an array of object references with the <see
          cref="M:System.Windows.Forms.ComboBox.ObjectCollection.AddRange(System.Object[])" />
+
+        
 
         
 
@@ -117,6 +137,8 @@
 
         
 
+        
+
          method. You can delete items with the <see
          cref="M:System.Windows.Forms.ComboBox.ObjectCollection.Remove(System.Object)" />
 
@@ -124,8 +146,12 @@
 
         
 
+        
+
          method or clear the entire list with the <see
          cref="M:System.Windows.Forms.ComboBox.ObjectCollection.Clear" />
+
+        
 
         
 
@@ -141,8 +167,12 @@
 
         
 
+        
+
          also provides features that enable you to efficiently add items to the <see
          cref="T:System.Windows.Forms.ComboBox" />
+
+        
 
         
 
@@ -155,8 +185,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Windows.Forms.ComboBox.EndUpdate" />
+
+        
 
         
 
@@ -169,6 +203,8 @@
 
         
 
+        
+
          without the control being repainted each time an item is added to the list. The <see
          cref="M:System.Windows.Forms.ComboBox.FindString(System.String)" />
 
@@ -176,8 +212,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Windows.Forms.ComboBox.FindStringExact(System.String)" />
+
+        
 
         
 
@@ -193,6 +233,8 @@
 
         
 
+        
+
          property to specify the string displayed in the editing field, the <see
          cref="P:System.Windows.Forms.ComboBox.SelectedIndex" />
 
@@ -200,8 +242,12 @@
 
         
 
+        
+
          property to get or set the current item, and the <see
          cref="P:System.Windows.Forms.ComboBox.SelectedItem" />
+
+        
 
         
 
@@ -218,6 +264,8 @@
 
           
 
+          
+
           , <see
            cref="T:System.Windows.Forms.ComboBox" />
 
@@ -225,8 +273,12 @@
 
           
 
+          
+
           , or <see
            cref="T:System.Windows.Forms.CheckedListBox" />
+
+          
 
           
 
@@ -253,6 +305,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -287,6 +341,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -346,8 +402,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.ComboBox.AutoCompleteMode" />
+
+            
 
             
 
@@ -360,6 +420,8 @@
 
             
 
+            
+
              properties to create a <see
              cref="T:System.Windows.Forms.ComboBox" />
 
@@ -367,8 +429,12 @@
 
             
 
+            
+
              that automatically completes input strings by comparing the prefix being entered to the prefixes of all strings in a maintained source. This is useful for <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -384,6 +450,8 @@
 
             
 
+            
+
              property is optional, but you must set the <see
              cref="P:System.Windows.Forms.ComboBox.AutoCompleteSource" />
 
@@ -391,8 +459,12 @@
 
             
 
+            
+
              property to CustomSource in order to use <see
              cref="P:System.Windows.Forms.ComboBox.AutoCompleteCustomSource" />
+
+            
 
             
 
@@ -408,8 +480,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ComboBox.AutoCompleteSource" />
+
+            
 
             
 
@@ -431,8 +507,12 @@
 
             
 
+            
+
              to use when the <see
              cref="P:System.Windows.Forms.ComboBox.AutoCompleteSource" />
+
+            
 
             
 
@@ -478,8 +558,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.ComboBox.AutoCompleteMode" />
+
+            
 
             
 
@@ -492,6 +576,8 @@
 
             
 
+            
+
              properties to create a <see
              cref="T:System.Windows.Forms.ComboBox" />
 
@@ -499,8 +585,12 @@
 
             
 
+            
+
              that automatically completes input strings by comparing the prefix being entered to the prefixes of all strings in a maintained source. This is useful for <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -516,8 +606,12 @@
 
             
 
+            
+
              to <see
              cref="F:System.Windows.Forms.ComboBoxStyle.DropDownList" />
+
+            
 
             
 
@@ -530,6 +624,8 @@
 
             
 
+            
+
              is <see
              cref="F:System.Windows.Forms.AutoCompleteMode.Suggest" />
 
@@ -537,8 +633,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Windows.Forms.AutoCompleteMode.SuggestAppend" />
+
+            
 
             
 
@@ -554,8 +654,12 @@
 
             
 
+            
+
              property is optional, but you must set the <see
              cref="P:System.Windows.Forms.ComboBox.AutoCompleteSource" />
+
+            
 
             
 
@@ -568,8 +672,12 @@
 
             
 
+            
+
              in order to use <see
              cref="P:System.Windows.Forms.ComboBox.AutoCompleteCustomSource" />
+
+            
 
             
 
@@ -585,8 +693,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ComboBox.AutoCompleteSource" />
+
+            
 
             
 
@@ -602,8 +714,12 @@
 
             
 
+            
+
              set to <see
              cref="F:System.Windows.Forms.AutoCompleteMode.SuggestAppend" />
+
+            
 
             
 
@@ -616,8 +732,12 @@
 
             
 
+            
+
              set to <see
              cref="F:System.Windows.Forms.AutoCompleteSource.ListItems" />
+
+            
 
             
 
@@ -648,6 +768,8 @@
           <para
             >Gets or sets an option that controls how automatic completion works for the <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -693,8 +815,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.ComboBox.AutoCompleteMode" />
+
+            
 
             
 
@@ -707,6 +833,8 @@
 
             
 
+            
+
              properties to create a <see
              cref="T:System.Windows.Forms.ComboBox" />
 
@@ -714,8 +842,12 @@
 
             
 
+            
+
              that automatically completes input strings by comparing the prefix being entered to the prefixes of all strings in a maintained source. This is useful for <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -731,8 +863,12 @@
 
             
 
+            
+
              property is optional, but you must set the <see
              cref="P:System.Windows.Forms.ComboBox.AutoCompleteSource" />
+
+            
 
             
 
@@ -745,8 +881,12 @@
 
             
 
+            
+
              in order to use <see
              cref="P:System.Windows.Forms.ComboBox.AutoCompleteCustomSource" />
+
+            
 
             
 
@@ -762,8 +902,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ComboBox.AutoCompleteSource" />
+
+            
 
             
 
@@ -779,8 +923,12 @@
 
             
 
+            
+
              set to <see
              cref="F:System.Windows.Forms.AutoCompleteMode.SuggestAppend" />
+
+            
 
             
 
@@ -793,8 +941,12 @@
 
             
 
+            
+
              set to <see
              cref="F:System.Windows.Forms.AutoCompleteSource.ListItems" />
+
+            
 
             
 
@@ -910,6 +1062,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -955,6 +1109,8 @@
 
             
 
+            
+
              enumeration.</para
           >
         </summary>
@@ -995,6 +1151,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -1018,11 +1176,15 @@
 
             
 
+            
+
              method is called.</para
           >
           <para
             >The preferred way to add items to the <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -1035,8 +1197,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Windows.Forms.ComboBox.ObjectCollection" />
+
+            
 
             
 
@@ -1049,8 +1215,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -1063,8 +1233,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Windows.Forms.ComboBox.ObjectCollection" />
+
+            
 
             
 
@@ -1077,8 +1251,12 @@
 
             
 
+            
+
              method to prevent the control from repainting the <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -1091,6 +1269,8 @@
 
             
 
+            
+
              method to enable the <see
              cref="T:System.Windows.Forms.ComboBox" />
 
@@ -1098,8 +1278,12 @@
 
             
 
+            
+
              to repaint. This way of adding items can prevent flicker during the drawing of the <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -1113,6 +1297,8 @@
           <para
             >Maintains performance when items are added to the <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -1156,6 +1342,8 @@
 
             
 
+            
+
              for the control.</para
           >
         </returns>
@@ -1182,8 +1370,12 @@
 
             
 
+            
+
              to avoid multiple layouts during handle creation due to <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -1253,6 +1445,8 @@
 
             
 
+            
+
              property is set, the items collection cannot be modified.</para
           >
         </remarks>
@@ -1261,6 +1455,8 @@
           <para
             >Gets or sets the data source for this <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -1313,8 +1509,12 @@
 
             
 
+            
+
              method. Dispose invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -1327,8 +1527,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -1344,8 +1548,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -1364,11 +1572,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1430,8 +1642,12 @@
 
             
 
+            
+
             . You can use this event to perform the tasks needed to draw items in the <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -1444,8 +1660,12 @@
 
             
 
+            
+
              property is set to the OwnerDrawVariable value of <see
              cref="T:System.Windows.Forms.DrawMode" />
+
+            
 
             
 
@@ -1458,6 +1678,8 @@
 
             
 
+            
+
              event is raised. You can create an event handler for the <see
              cref="E:System.Windows.Forms.ComboBox.MeasureItem" />
 
@@ -1465,8 +1687,12 @@
 
             
 
+            
+
              event to specify the size for the item that you are going to draw in your event handler for the <see
              cref="E:System.Windows.Forms.ComboBox.DrawItem" />
+
+            
 
             
 
@@ -1484,6 +1710,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1492,6 +1720,8 @@
           <para
             >Occurs when a visual aspect of an owner-drawn <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -1555,6 +1785,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1563,6 +1795,8 @@
           <para
             >Occurs when the drop-down portion of a <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -1597,6 +1831,8 @@
 
             
 
+            
+
              event to restore the state of the <see
              cref="T:System.Windows.Forms.ComboBox" />
 
@@ -1604,8 +1840,12 @@
 
             
 
+            
+
              from changes you made in response to the <see
              cref="E:System.Windows.Forms.ComboBox.DropDown" />
+
+            
 
             
 
@@ -1623,6 +1863,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1631,6 +1873,8 @@
           <para
             >Occurs when the drop-down portion of the <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -1673,8 +1917,12 @@
 
             
 
+            
+
              property resets the <see
              cref="P:System.Windows.Forms.ComboBox.IntegralHeight" />
+
+            
 
             
 
@@ -1688,6 +1936,8 @@
           <para
             >Gets or sets the height in pixels of the drop-down portion of the <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -1727,8 +1977,12 @@
 
             
 
+            
+
              property specifies whether the list is always displayed or whether the list is displayed in a drop-down. The <see
              cref="P:System.Windows.Forms.ComboBox.DropDownStyle" />
+
+            
 
             
 
@@ -1741,8 +1995,12 @@
 
             
 
+            
+
              for the available settings and their effects. There is no setting to always display the list and disallow entering a new value. To display a list to which no new values can be added, use a <see
              cref="T:System.Windows.Forms.ListBox" />
+
+            
 
             
 
@@ -1780,6 +2038,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1788,6 +2048,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.ComboBox.DropDownStyle" />
+
+            
 
             
 
@@ -1820,8 +2082,12 @@
 
             
 
+            
+
             , this property returns the <see
              cref="P:System.Windows.Forms.Control.Width" />
+
+            
 
             
 
@@ -1833,6 +2099,8 @@
             <para
               >The width of the drop-down cannot be smaller than the <see
                cref="T:System.Windows.Forms.ComboBox" />
+
+              
 
               
 
@@ -1897,6 +2165,8 @@
 
             
 
+            
+
              is to use the <see
              cref="M:System.Windows.Forms.ComboBox.ObjectCollection.AddRange(System.Object[])" />
 
@@ -1904,8 +2174,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Windows.Forms.ComboBox.ObjectCollection" />
+
+            
 
             
 
@@ -1918,8 +2192,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -1932,8 +2210,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Windows.Forms.ComboBox.ObjectCollection" />
+
+            
 
             
 
@@ -1946,8 +2228,12 @@
 
             
 
+            
+
              method to prevent the control from repainting the <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -1960,6 +2246,8 @@
 
             
 
+            
+
              method to enable the <see
              cref="T:System.Windows.Forms.ComboBox" />
 
@@ -1967,8 +2255,12 @@
 
             
 
+            
+
              to repaint. This way of adding items can prevent flickered drawing of the <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -1987,8 +2279,12 @@
 
             
 
+            
+
              control after painting is suspended by the <see
              cref="M:System.Windows.Forms.ComboBox.BeginUpdate" />
+
+            
 
             
 
@@ -2023,8 +2319,12 @@
 
             
 
+            
+
              parameter is a substring to compare against the text associated with the items in the combo box list. The search performs a partial match starting from the beginning of the text, and returning the first item in the list that matches the specified substring. You can then perform tasks, such as removing the item that contains the search text using the <see
              cref="M:System.Windows.Forms.ComboBox.ObjectCollection.Remove(System.Object)" />
+
+            
 
             
 
@@ -2037,8 +2337,12 @@
 
             
 
+            
+
             , you must use the version of the <see
              cref="M:System.Windows.Forms.ComboBox.FindString(System.String)" />
+
+            
 
             
 
@@ -2051,8 +2355,12 @@
 
             
 
+            
+
             . If you want to perform a search for an exact word match instead of a partial match, use the <see
              cref="M:System.Windows.Forms.ComboBox.FindStringExact(System.String)" />
+
+            
 
             
 
@@ -2066,6 +2374,8 @@
           <para
             >Returns the index of the first item in the <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -2085,8 +2395,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -2121,8 +2435,12 @@
 
             
 
+            
+
              parameter is a substring to compare against the text associated with the items in the combo box list. The search performs a partial match starting from the beginning of the text, returning the first item in the list that matches the specified substring. You can then perform tasks, such as removing the item that contains the search text using the <see
              cref="M:System.Windows.Forms.ComboBox.ObjectCollection.Remove(System.Object)" />
+
+            
 
             
 
@@ -2135,8 +2453,12 @@
 
             
 
+            
+
              parameter of the item after the first found instance of the search text. If you want to perform a search for an exact word match instead of a partial match, use the <see
              cref="M:System.Windows.Forms.ComboBox.FindStringExact(System.String)" />
+
+            
 
             
 
@@ -2155,6 +2477,8 @@
 
             
 
+            
+
              beyond the specified index that contains the specified string. The search is not case sensitive.</para
           >
         </summary>
@@ -2168,8 +2492,12 @@
 
             
 
+            
+
              parameter specifies <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -2185,8 +2513,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -2196,6 +2528,8 @@
         >
         <param name="startIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2229,8 +2563,12 @@
 
             
 
+            
+
              parameter is a string to compare against the text associated with the items in the combo box list. The search looks for a match starting from the beginning of the text, returning the first item in the list that matches the specified substring. You can then perform tasks, such as removing the item that contains the search text using the <see
              cref="M:System.Windows.Forms.ComboBox.ObjectCollection.Remove(System.Object)" />
+
+            
 
             
 
@@ -2243,8 +2581,12 @@
 
             
 
+            
+
             , you must use the version of the <see
              cref="M:System.Windows.Forms.ComboBox.FindStringExact(System.String)" />
+
+            
 
             
 
@@ -2257,8 +2599,12 @@
 
             
 
+            
+
             . If you want to perform partial word search instead of an exact word match, use the <see
              cref="M:System.Windows.Forms.ComboBox.FindString(System.String)" />
+
+            
 
             
 
@@ -2281,8 +2627,12 @@
 
             
 
+            
+
              parameter specifies <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -2298,8 +2648,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -2337,8 +2691,12 @@
 
             
 
+            
+
              parameter is a string to compare against the text associated with the items in the combo box list. The search looks for a match starting from the beginning of the text, returning the first item in the list that matches the specified substring. You can then perform tasks, such as removing the item that contains the search text using the <see
              cref="M:System.Windows.Forms.ComboBox.ObjectCollection.Remove(System.Object)" />
+
+            
 
             
 
@@ -2351,8 +2709,12 @@
 
             
 
+            
+
              parameter of the item after the first found instance of the search text. If you want to perform partial word search instead of an exact word match, use the <see
              cref="M:System.Windows.Forms.ComboBox.FindString(System.String)" />
+
+            
 
             
 
@@ -2368,8 +2730,12 @@
 
             
 
+            
+
              parameter, the search restarts at 0 when the end of the collection is reached. However, note that if the <paramref
              name="startIndex" />
+
+            
 
             
 
@@ -2392,8 +2758,12 @@
 
             
 
+            
+
              parameter specifies <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -2409,8 +2779,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -2420,6 +2794,8 @@
         >
         <param name="startIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2466,6 +2842,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2485,6 +2863,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -2541,8 +2921,12 @@
 
             
 
+            
+
              is not set to OwnerDrawVariable, the value of the <paramref
              name="index" />
+
+            
 
             
 
@@ -2555,8 +2939,12 @@
 
             
 
+            
+
              are the same size. You can use this property when you are using an owner-drawn <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -2569,11 +2957,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >For more information about specifying the height for items in an owner-drawn list, see <see
              cref="E:System.Windows.Forms.ComboBox.MeasureItem" />
+
+            
 
             
 
@@ -2592,6 +2984,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2601,6 +2995,8 @@
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2640,8 +3036,12 @@
 
             
 
+            
+
              based on the space requirements of your form, set this property to false. If the <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -2657,8 +3057,12 @@
 
             
 
+            
+
              property resets the <see
              cref="P:System.Windows.Forms.ComboBox.IntegralHeight" />
+
+            
 
             
 
@@ -2670,6 +3074,8 @@
             <para
               >If the <see
                cref="P:System.Windows.Forms.ComboBox.DrawMode" />
+
+              
 
               
 
@@ -2712,8 +3118,12 @@
 
             
 
+            
+
              method returns true when the <paramref
              name="keyData" />
+
+            
 
             
 
@@ -2726,6 +3136,8 @@
 
             
 
+            
+
              or <see
              cref="F:System.Windows.Forms.Keys.Escape" />
 
@@ -2733,8 +3145,12 @@
 
             
 
+            
+
              value and the <see
              cref="P:System.Windows.Forms.ComboBox.DroppedDown" />
+
+            
 
             
 
@@ -2758,8 +3174,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.Keys" />
+
+          
 
           
 
@@ -2796,8 +3216,12 @@
 
             
 
+            
+
              property is set to OwnerDrawFixed, all items have the same height. When the <see
              cref="T:System.Windows.Forms.DrawMode" />
+
+            
 
             
 
@@ -2810,8 +3234,12 @@
 
             
 
+            
+
              property specifies the height of each item added to the <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -2824,8 +3252,12 @@
 
             
 
+            
+
              method to get the height of a specific item in the <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -2838,8 +3270,12 @@
 
             
 
+            
+
              property on a <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -2850,6 +3286,8 @@
           <para
             >For more information about specifying the height for items in an owner-drawn list, see <see
              cref="E:System.Windows.Forms.ComboBox.MeasureItem" />
+
+            
 
             
 
@@ -2903,11 +3341,15 @@
 
             
 
+            
+
             . With this reference, you can add items, remove items, and obtain a count of the items in the collection. </para
           >
           <para
             >Although the <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -2920,8 +3362,12 @@
 
             
 
+            
+
             . Typically, the representation of an object in the <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -2934,8 +3380,12 @@
 
             
 
+            
+
              method. If you want to have a member of the object displayed instead, choose the member that will be displayed by setting the <see
              cref="P:System.Windows.Forms.ListControl.DisplayMember" />
+
+            
 
             
 
@@ -2948,8 +3398,12 @@
 
             
 
+            
+
              property. For more information, see <see
              cref="T:System.Windows.Forms.ListControl" />
+
+            
 
             
 
@@ -2965,6 +3419,8 @@
 
             
 
+            
+
              class reference topics.</para
           >
         </remarks>
@@ -2973,6 +3429,8 @@
           <para
             >Gets an object representing the collection of the items contained in this <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -3014,6 +3472,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3043,6 +3503,8 @@
           <para
             >Gets or sets the size that is the upper limit that <see
              cref="M:System.Windows.Forms.Control.GetPreferredSize(System.Drawing.Size)" />
+
+            
 
             
 
@@ -3080,6 +3542,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3109,6 +3573,8 @@
 
             
 
+            
+
              event.</para
           >
           <para
@@ -3116,6 +3582,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -3129,6 +3597,8 @@
           <para
             >Occurs each time an owner-drawn <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -3168,6 +3638,8 @@
 
             
 
+            
+
              can specify.</para
           >
         </summary>
@@ -3197,6 +3669,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -3207,8 +3681,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -3246,6 +3724,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -3256,8 +3736,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -3295,6 +3779,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -3305,8 +3791,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -3343,6 +3833,8 @@
 
             
 
+            
+
              item needs to be drawn and after <see
              cref="M:System.Windows.Forms.ComboBox.OnMeasureItem(System.Windows.Forms.MeasureItemEventArgs)" />
 
@@ -3350,8 +3842,12 @@
 
             
 
+            
+
              is called. For more information, see <see
              cref="E:System.Windows.Forms.ComboBox.DrawItem" />
+
+            
 
             
 
@@ -3369,11 +3865,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ComboBox.OnDrawItem(System.Windows.Forms.DrawItemEventArgs)" />
+
+            
 
             
 
@@ -3392,6 +3892,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -3402,8 +3904,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DrawItemEventArgs" />
+
+          
 
           
 
@@ -3440,11 +3946,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ComboBox.OnDropDown(System.EventArgs)" />
+
+            
 
             
 
@@ -3463,6 +3973,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -3473,8 +3985,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -3516,11 +4032,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ComboBox.OnDropDownClosed(System.EventArgs)" />
+
+            
 
             
 
@@ -3539,6 +4059,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -3549,8 +4071,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -3583,6 +4109,8 @@
 
             
 
+            
+
              to a new value.</para
           >
           <para
@@ -3595,11 +4123,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ComboBox.OnDropDownStyleChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -3618,6 +4150,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -3628,8 +4162,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -3664,6 +4202,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -3674,8 +4214,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -3713,6 +4257,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -3723,8 +4269,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -3760,11 +4310,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ComboBox.OnGotFocus(System.EventArgs)" />
+
+            
 
             
 
@@ -3783,6 +4337,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -3793,8 +4349,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -3838,11 +4398,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ComboBox.OnHandleCreated(System.EventArgs)" />
+
+            
 
             
 
@@ -3861,6 +4425,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -3871,8 +4437,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -3911,11 +4481,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ComboBox.OnHandleDestroyed(System.EventArgs)" />
+
+            
 
             
 
@@ -3934,6 +4508,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -3944,8 +4520,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -3985,11 +4565,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ComboBox.OnKeyDown(System.Windows.Forms.KeyEventArgs)" />
+
+            
 
             
 
@@ -4008,6 +4592,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4018,8 +4604,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyEventArgs" />
+
+          
 
           
 
@@ -4060,8 +4650,12 @@
 
             
 
+            
+
              property of <paramref
              name="e" />
+
+            
 
             
 
@@ -4074,8 +4668,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Windows.Forms.Keys.Escape" />
+
+            
 
             
 
@@ -4088,6 +4686,8 @@
 
             
 
+            
+
              property is true, the <see
              cref="M:System.Windows.Forms.ComboBox.OnKeyPress(System.Windows.Forms.KeyPressEventArgs)" />
 
@@ -4095,8 +4695,12 @@
 
             
 
+            
+
              method sets <see
              cref="P:System.Windows.Forms.ComboBox.DroppedDown" />
+
+            
 
             
 
@@ -4115,6 +4719,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4125,8 +4731,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyPressEventArgs" />
+
+          
 
           
 
@@ -4162,11 +4772,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ComboBox.OnLostFocus(System.EventArgs)" />
+
+            
 
             
 
@@ -4185,6 +4799,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4195,8 +4811,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -4238,6 +4858,8 @@
 
             
 
+            
+
              item needs to be drawn and before <see
              cref="M:System.Windows.Forms.ComboBox.OnDrawItem(System.Windows.Forms.DrawItemEventArgs)" />
 
@@ -4245,8 +4867,12 @@
 
             
 
+            
+
              is called. For more information, see <see
              cref="E:System.Windows.Forms.ComboBox.MeasureItem" />
+
+            
 
             
 
@@ -4264,11 +4890,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ComboBox.OnMeasureItem(System.Windows.Forms.MeasureItemEventArgs)" />
+
+            
 
             
 
@@ -4287,6 +4917,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4297,8 +4929,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.MeasureItemEventArgs" />
+
+          
 
           
 
@@ -4335,11 +4971,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ComboBox.OnMouseEnter(System.EventArgs)" />
+
+            
 
             
 
@@ -4358,6 +4998,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4368,8 +5010,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -4405,11 +5051,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ComboBox.OnMouseLeave(System.EventArgs)" />
+
+            
 
             
 
@@ -4428,6 +5078,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4438,8 +5090,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -4477,11 +5133,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ComboBox.OnParentBackColorChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -4500,6 +5160,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4510,8 +5172,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -4547,11 +5213,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ComboBox.OnResize(System.EventArgs)" />
+
+            
 
             
 
@@ -4570,6 +5240,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4580,8 +5252,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -4618,6 +5294,8 @@
 
             
 
+            
+
              property.</para
           >
           <para
@@ -4630,11 +5308,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ComboBox.OnSelectedIndexChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -4653,6 +5335,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4663,8 +5347,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -4701,6 +5389,8 @@
 
             
 
+            
+
              property.</para
           >
           <para
@@ -4713,11 +5403,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ComboBox.OnSelectedItemChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -4736,6 +5430,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4746,8 +5442,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -4786,11 +5486,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ComboBox.OnSelectedValueChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -4809,6 +5513,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -4819,8 +5525,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -4856,8 +5566,12 @@
 
             
 
+            
+
              is raised only when the user changes the combo box selection. Do not use <see
              cref="E:System.Windows.Forms.ComboBox.SelectedIndexChanged" />
+
+            
 
             
 
@@ -4870,8 +5584,12 @@
 
             
 
+            
+
              to capture user changes, because those events are also raised when the selection changes programmatically. This event is also raised when you set <see
              cref="P:System.Windows.Forms.ComboBox.SelectedIndex" />
+
+            
 
             
 
@@ -4889,11 +5607,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ComboBox.OnSelectionChangeCommitted(System.EventArgs)" />
+
+            
 
             
 
@@ -4912,6 +5634,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4922,8 +5646,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -4960,11 +5688,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ComboBox.OnTextChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -4983,6 +5715,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -4993,8 +5727,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5037,11 +5775,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ComboBox.OnTextUpdate(System.EventArgs)" />
+
+            
 
             
 
@@ -5060,6 +5802,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5070,8 +5814,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5107,11 +5855,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ComboBox.OnValidating(System.ComponentModel.CancelEventArgs)" />
+
+            
 
             
 
@@ -5130,6 +5882,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5140,8 +5894,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.CancelEventArgs" />
+
+          
 
           
 
@@ -5254,6 +6012,8 @@
 
             
 
+            
+
              control is redrawn.</para
           >
         </summary>
@@ -5288,6 +6048,8 @@
           <para
             >Gets the preferred height of the <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -5347,6 +6109,8 @@
 
           
 
+          
+
           The location of the item to refresh.</param
         >
       </Docs>
@@ -5377,6 +6141,8 @@
 
             
 
+            
+
              items.</para
           >
         </summary>
@@ -5399,6 +6165,8 @@
           <para
             >Resets the <see
              cref="P:System.Windows.Forms.Control.Text" />
+
+            
 
             
 
@@ -5438,6 +6206,8 @@
 
           
 
+          
+
           The factor by which the height and width of the control will be scaled.</param
         >
         <param name="specified">
@@ -5447,8 +6217,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.BoundsSpecified" />
+
+          
 
           
 
@@ -5479,6 +6253,8 @@
 
             
 
+            
+
              parameter to zero. You can use this method to select a substring of text, such as when searching through the text of the control and replacing information.</para
           >
           <block subset="none" type="note">
@@ -5489,8 +6265,12 @@
 
               
 
+              
+
                returns the lower value of the current selection. For example, Select(10, -4) selects the text from character position 6 through character position 10. If you now get the <see
                cref="P:System.Windows.Forms.ComboBox.SelectionStart" />
+
+              
 
               
 
@@ -5510,6 +6290,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -5520,10 +6302,14 @@
 
           
 
+          
+
           The position of the first character in the current text selection within the text box. </param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5551,6 +6337,8 @@
           <para
             >Selects all the text in the editable portion of the <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -5591,10 +6379,14 @@
 
             
 
+            
+
              event.</para
           >
           <para>
             <see cref="P:System.Windows.Forms.ComboBox.SelectedIndex" />
+
+            
 
             
 
@@ -5607,8 +6399,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.ListControl.FormattingEnabled" />
+
+            
 
             
 
@@ -5626,6 +6422,8 @@
 
                 
 
+                
+
                  is false, <see
                  cref="P:System.Windows.Forms.ComboBox.SelectedIndex" />
 
@@ -5633,8 +6431,12 @@
 
                 
 
+                
+
                  will not be set to -1 when <see
                  cref="P:System.Windows.Forms.ListControl.SelectedValue" />
+
+                
 
                 
 
@@ -5652,6 +6454,8 @@
 
                 
 
+                
+
                  is true, <see
                  cref="P:System.Windows.Forms.ComboBox.SelectedIndex" />
 
@@ -5659,8 +6463,12 @@
 
                 
 
+                
+
                  will be set to -1 when <see
                  cref="P:System.Windows.Forms.ListControl.SelectedValue" />
+
+                
 
                 
 
@@ -5679,6 +6487,8 @@
 
               
 
+              
+
                to -1. You cannot set the <see
                cref="P:System.Windows.Forms.ComboBox.SelectedIndex" />
 
@@ -5686,8 +6496,12 @@
 
               
 
+              
+
                of a <see
                cref="T:System.Windows.Forms.ComboBox" />
+
+              
 
               
 
@@ -5724,8 +6538,12 @@
 
             
 
+            
+
              has been changed. This can be useful when you need to display information in other controls based on the current selection in the <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -5743,6 +6561,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5751,6 +6571,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.ComboBox.SelectedIndex" />
+
+            
 
             
 
@@ -5794,8 +6616,12 @@
 
             
 
+            
+
              property to an object, the <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -5808,6 +6634,8 @@
 
             
 
+            
+
              and the <see
              cref="P:System.Windows.Forms.ComboBox.SelectedIndex" />
 
@@ -5815,8 +6643,12 @@
 
             
 
+            
+
              property is set to the corresponding index. If the object does not exist in the list, the <see
              cref="P:System.Windows.Forms.ComboBox.SelectedIndex" />
+
+            
 
             
 
@@ -5833,6 +6665,8 @@
 
               
 
+              
+
                class searches for the specified object by using the <see
                cref="M:System.Windows.Forms.ComboBox.ObjectCollection.IndexOf(System.Object)" />
 
@@ -5840,8 +6674,12 @@
 
               
 
+              
+
                method. This method uses the <see
                cref="M:System.Object.Equals(System.Object)" />
+
+              
 
               
 
@@ -5856,6 +6694,8 @@
           <para
             >Gets or sets currently selected item in the <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -5896,8 +6736,12 @@
 
             
 
+            
+
              property to retrieve or change the currently selected text in a <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -5910,8 +6754,12 @@
 
             
 
+            
+
              value in a button <see
              cref="E:System.Windows.Forms.Control.Click" />
+
+            
 
             
 
@@ -5927,8 +6775,12 @@
 
             
 
+            
+
              property retrieves an empty string, and setting the <see
              cref="P:System.Windows.Forms.ComboBox.SelectedText" />
+
+            
 
             
 
@@ -5944,11 +6796,15 @@
 
             
 
+            
+
              method to set the input focus, the full text is selected regardless of whether the control already had focus. </para
           >
           <para
             >When the user selects an item from the drop-down list or by using the UP ARROW and DOWN ARROW keys, the text for the new item is automatically selected. However, if you try to get the <see
              cref="P:System.Windows.Forms.ComboBox.SelectedText" />
+
+            
 
             
 
@@ -5961,8 +6817,12 @@
 
             
 
+            
+
              or <see
              cref="E:System.Windows.Forms.ListControl.SelectedValueChanged" />
+
+            
 
             
 
@@ -5975,8 +6835,12 @@
 
             
 
+            
+
              value has been cleared and the new value has not yet been set. To retrieve the current value in a <see
              cref="E:System.Windows.Forms.ComboBox.SelectedIndexChanged" />
+
+            
 
             
 
@@ -5989,8 +6853,12 @@
 
             
 
+            
+
              event handler, use the <see
              cref="P:System.Windows.Forms.ComboBox.SelectedItem" />
+
+            
 
             
 
@@ -6004,6 +6872,8 @@
           <para
             >Gets or sets the text that is selected in the editable portion of a <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -6034,6 +6904,8 @@
 
             
 
+            
+
              is raised only when the user changes the combo box selection. Do not use <see
              cref="E:System.Windows.Forms.ComboBox.SelectedIndexChanged" />
 
@@ -6041,8 +6913,12 @@
 
             
 
+            
+
              or <see
              cref="E:System.Windows.Forms.ListControl.SelectedValueChanged" />
+
+            
 
             
 
@@ -6058,8 +6934,12 @@
 
             
 
+            
+
              event handler to provide special handling for the <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -6077,6 +6957,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -6085,6 +6967,8 @@
           <para
             >Occurs when the selected item has changed and that change is displayed in the <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -6125,8 +7009,12 @@
 
             
 
+            
+
              property is set to a value that is larger than the number of characters within the text of the control, the value of the <see
              cref="P:System.Windows.Forms.ComboBox.SelectionLength" />
+
+            
 
             
 
@@ -6139,8 +7027,12 @@
 
             
 
+            
+
              property (if any value is specified for the <see
              cref="P:System.Windows.Forms.ComboBox.SelectionStart" />
+
+            
 
             
 
@@ -6185,8 +7077,12 @@
 
             
 
+            
+
              property. If the remaining text in the control after the position indicated by the <see
              cref="P:System.Windows.Forms.ComboBox.SelectionStart" />
+
+            
 
             
 
@@ -6199,8 +7095,12 @@
 
             
 
+            
+
              property, the value of the <see
              cref="P:System.Windows.Forms.ComboBox.SelectionLength" />
+
+            
 
             
 
@@ -6213,8 +7113,12 @@
 
             
 
+            
+
              property never causes an increase in the <see
              cref="P:System.Windows.Forms.ComboBox.SelectionLength" />
+
+            
 
             
 
@@ -6230,8 +7134,12 @@
 
               
 
+              
+
                returns the lower value of the current selection. For example, Select(10, -4) selects the text from character position 6 through character position 10. If you now get the <see
                cref="P:System.Windows.Forms.ComboBox.SelectionStart" />
+
+              
 
               
 
@@ -6279,11 +7187,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="x">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6298,10 +7210,14 @@
 
           
 
+          
+
           The vertical location in pixels of the control. </param
         >
         <param name="width">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6316,6 +7232,8 @@
 
           
 
+          
+
           The height in pixels of the control. </param
         >
         <param name="specified">
@@ -6325,8 +7243,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.BoundsSpecified" />
+
+          
 
           
 
@@ -6366,10 +7288,14 @@
 
           
 
+          
+
           The array index of the object.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6408,6 +7334,8 @@
 
           
 
+          
+
           An array of items.</param
         >
       </Docs>
@@ -6439,6 +7367,8 @@
 
             
 
+            
+
              sorts existing entries and add new entries to the appropriate sorted position in the list. You can use this property to automatically sort items in a <see
              cref="T:System.Windows.Forms.ComboBox" />
 
@@ -6446,8 +7376,12 @@
 
             
 
+            
+
             . As items are added to a sorted <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -6463,8 +7397,12 @@
 
             
 
+            
+
              property on a data-bound control raises an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -6509,8 +7447,12 @@
 
             
 
+            
+
              property to null or an empty string ("") sets the <see
              cref="P:System.Windows.Forms.ComboBox.SelectedIndex" />
+
+            
 
             
 
@@ -6523,8 +7465,12 @@
 
             
 
+            
+
              property to a value that is in the <see
              cref="P:System.Windows.Forms.ComboBox.Items" />
+
+            
 
             
 
@@ -6537,6 +7483,8 @@
 
             
 
+            
+
              to the index of that item. Setting the <see
              cref="P:System.Windows.Forms.ComboBox.Text" />
 
@@ -6544,8 +7492,12 @@
 
             
 
+            
+
              property to a value that is not in the collection leaves the <see
              cref="P:System.Windows.Forms.ComboBox.SelectedIndex" />
+
+            
 
             
 
@@ -6584,8 +7536,12 @@
 
             
 
+            
+
              event to validate the text before it is actually shown. <see
              cref="E:System.Windows.Forms.ComboBox.TextUpdate" />
+
+            
 
             
 
@@ -6598,6 +7554,8 @@
 
             
 
+            
+
              property is programmatically changed.</para
           >
           <para
@@ -6605,6 +7563,8 @@
              type="text/html">
               <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -6638,6 +7598,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -6651,6 +7613,8 @@
 
             
 
+            
+
              that represents the current <see
              cref="T:System.Windows.Forms.ComboBox" />
 
@@ -6658,8 +7622,12 @@
 
             
 
+            
+
             . The string includes the type and the number of items in the <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 

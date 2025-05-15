@@ -37,6 +37,8 @@
 
         
 
+        
+
          delegate is used to handle events that occur when the <see
          cref="T:System.Net.Mail.SmtpClient" />
 
@@ -44,8 +46,12 @@
 
         
 
+        
+
          class finishes asynchronously sending an e-mail message using the <see
          cref="Overload:System.Net.Mail.SmtpClient.SendAsync" />
+
+        
 
         
 
@@ -59,6 +65,8 @@
       <para
         >Represents the method that will handle the <see
          cref="E:System.Net.Mail.SmtpClient.SendCompleted" />
+
+        
 
         
 

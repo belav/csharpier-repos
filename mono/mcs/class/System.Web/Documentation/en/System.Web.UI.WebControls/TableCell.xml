@@ -70,6 +70,8 @@
 
         
 
+        
+
          class represents a cell in a <see
          cref="T:System.Web.UI.WebControls.Table" />
 
@@ -77,8 +79,12 @@
 
         
 
+        
+
          control. You can use the <see
          cref="P:System.Web.UI.WebControls.TableCell.Text" />
+
+        
 
         
 
@@ -94,8 +100,12 @@
 
         
 
+        
+
          class allows you to control how the contents of the cell are displayed. The alignment of the contents in the cell are specified by setting the <see
          cref="P:System.Web.UI.WebControls.TableCell.HorizontalAlign" />
+
+        
 
         
 
@@ -108,8 +118,12 @@
 
         
 
+        
+
          properties. You can use the <see
          cref="P:System.Web.UI.WebControls.TableCell.Wrap" />
+
+        
 
         
 
@@ -125,6 +139,8 @@
 
         
 
+        
+
          control, are occupied by an individual cell. The <see
          cref="P:System.Web.UI.WebControls.TableCell.RowSpan" />
 
@@ -132,8 +148,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.WebControls.TableCell.ColumnSpan" />
+
+        
 
         
 
@@ -152,6 +172,8 @@
 
           
 
+          
+
           , <format
            type="text/html">
             <a href="6f67973f-dda0-45a1-ba9d-e88532d7dc5b"
@@ -163,12 +185,16 @@
 
           
 
+          
+
           , and <format
            type="text/html">
             <a href="4ad3dacb-89e0-4cee-89ac-40a3f2a85461"
               >Introduction to Validating User Input in ASP.NET Web Pages</a
             >
           </format>
+
+          
 
           
 
@@ -196,6 +222,8 @@
 
         
 
+        
+
         |None|Dotted|Dashed|Solid|Double|Groove|Ridge|
         Inset|Outset"
     BorderWidth="size"
@@ -203,6 +231,8 @@
     CssClass="string"
     Enabled="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -216,9 +246,13 @@
 
         
 
+        
+
         |False"
     EnableViewState="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -232,9 +266,13 @@
 
         
 
+        
+
         "
     Font-Italic="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -244,6 +282,8 @@
     Font-Names="string"
     Font-Overline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -259,9 +299,13 @@
 
         
 
+        
+
         "
     Font-Underline="True|<codeFeaturedElement
         >False</codeFeaturedElement>
+
+        
 
         
 
@@ -272,6 +316,8 @@
     Height="size"
     HorizontalAlign="<codeFeaturedElement
         >NotSet</codeFeaturedElement>
+
+        
 
         
 
@@ -299,9 +345,13 @@
 
         
 
+        
+
         |Top|Middle|Bottom"
     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -316,6 +366,8 @@
 
         
 
+        
+
         |False"
 /&gt;&lt;/asp:TableCell&gt;</code
       >
@@ -325,6 +377,8 @@
       <para
         >Represents a cell in a <see
          cref="T:System.Web.UI.WebControls.Table" />
+
+        
 
         
 
@@ -351,8 +405,12 @@
 
             
 
+            
+
              is created using the <see
              cref="F:System.Web.UI.HtmlTextWriterTag.Td" />
+
+            
 
             
 
@@ -366,6 +424,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.TableCell" />
+
+            
 
             
 
@@ -403,8 +463,12 @@
 
             
 
+            
+
              method overrides the base class's <see
              cref="M:System.Web.UI.WebControls.WebControl.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -417,8 +481,12 @@
 
             
 
+            
+
              attributes corresponding to the <see
              cref="P:System.Web.UI.WebControls.TableCell.RowSpan" />
+
+            
 
             
 
@@ -431,8 +499,12 @@
 
             
 
+            
+
              property and the <see
              cref="P:System.Web.UI.WebControls.TableCell.AssociatedHeaderCellID" />
+
+            
 
             
 
@@ -445,6 +517,8 @@
 
             
 
+            
+
              property refers to a <see
              cref="T:System.Web.UI.WebControls.TableHeaderCell" />
 
@@ -452,8 +526,12 @@
 
             
 
+            
+
              that can not be found, an <see
              cref="T:System.Web.HttpException" />
+
+            
 
             
 
@@ -469,8 +547,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.WebControls.TableCell" />
+
+            
 
             
 
@@ -489,11 +571,15 @@
 
             
 
+            
+
              control to the list of attributes to render.</para
           >
         </summary>
         <param name="writer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -530,8 +616,12 @@
 
             
 
+            
+
              control contains child controls then the base class's <see
              cref="M:System.Web.UI.WebControls.TableCell.AddParsedSubObject(System.Object)" />
+
+            
 
             
 
@@ -544,8 +634,12 @@
 
             
 
+            
+
              control's <see
              cref="P:System.Web.UI.WebControls.TableCell.Text" />
+
+            
 
             
 
@@ -558,6 +652,8 @@
 
             
 
+            
+
              object to the <see
              cref="T:System.Web.UI.WebControls.TableCell" />
 
@@ -565,8 +661,12 @@
 
             
 
+            
+
              control's <see
              cref="T:System.Web.UI.ControlCollection" />
+
+            
 
             
 
@@ -582,8 +682,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.WebControls.TableCell" />
+
+            
 
             
 
@@ -602,6 +706,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -612,8 +718,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -659,8 +769,12 @@
 
             
 
+            
+
              property contains a list of header cell programmatic identifiers that provide header information of the <see
              cref="T:System.Web.UI.WebControls.TableCell" />
+
+            
 
             
 
@@ -676,6 +790,8 @@
 
             
 
+            
+
              property use a comma delimited list of strings. If an element of the list is not recognized as a valid table header cell an <see
              cref="T:System.Web.HttpException" />
 
@@ -683,8 +799,12 @@
 
             
 
+            
+
              is thrown when the <see
              cref="M:System.Web.UI.WebControls.TableCell.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -698,6 +818,8 @@
           <para
             >Gets or sets a space-separated list of table header cells associated with the <see
              cref="T:System.Web.UI.WebControls.TableCell" />
+
+            
 
             
 
@@ -727,8 +849,12 @@
 
             
 
+            
+
              property to specify or determine the number of columns in the rendered table that the cell spans. For example, if you set this property to 2, the cell takes up two columns in the <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -742,6 +868,8 @@
           <para
             >Gets or sets the number of columns in the <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -782,8 +910,12 @@
 
             
 
+            
+
              created by the <see
              cref="M:System.Web.UI.WebControls.TableCell.CreateControlStyle" />
+
+            
 
             
 
@@ -796,6 +928,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.UI.WebControls.TableCell.HorizontalAlign" />
 
@@ -803,8 +937,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Web.UI.WebControls.TableCell.VerticalAlign" />
+
+            
 
             
 
@@ -820,8 +958,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.WebControls.TableCell" />
+
+            
 
             
 
@@ -840,8 +982,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Web.UI.WebControls.TableCell" />
+
+            
 
             
 
@@ -860,6 +1006,8 @@
 
             
 
+            
+
              that represents the <see
              cref="T:System.Web.UI.WebControls.TableItemStyle" />
 
@@ -867,8 +1015,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Web.UI.WebControls.TableCell" />
+
+            
 
             
 
@@ -905,8 +1057,12 @@
 
             
 
+            
+
              property to specify the horizontal alignment of the contents of the cell. The possible values for use are specified in the <see
              cref="T:System.Web.UI.WebControls.HorizontalAlign" />
+
+            
 
             
 
@@ -953,8 +1109,12 @@
 
             
 
+            
+
              control has child controls or is overridden in a derived class the base class's <see
              cref="M:System.Web.UI.WebControls.WebControl.RenderContents(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -967,8 +1127,12 @@
 
             
 
+            
+
              property is written to the <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -984,8 +1148,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.WebControls.TableCell" />
+
+            
 
             
 
@@ -1004,8 +1172,12 @@
 
             
 
+            
+
              contents to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -1016,6 +1188,8 @@
         </summary>
         <param name="writer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1048,8 +1222,12 @@
 
             
 
+            
+
              property to specify or determine the number of rows in the rendered table that the cell spans. For example, if you set this property to 2, the cell takes up two rows in the <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -1063,6 +1241,8 @@
           <para
             >Gets or sets the number of rows in the <see
              cref="T:System.Web.UI.WebControls.Table" />
+
+            
 
             
 
@@ -1101,6 +1281,8 @@
 
             
 
+            
+
              property to specify or determine the text contents of the cell. This property is commonly used to programmatically update the contents of a cell.</para
           >
           <block subset="none" type="note">
@@ -1112,8 +1294,12 @@
 
               
 
+              
+
                property will clear any other controls contained in the <see
                cref="T:System.Web.UI.WebControls.TableCell" />
+
+              
 
               
 
@@ -1131,10 +1317,14 @@
 
               
 
+              
+
                control can be used to display user input, which might include malicious client script. Check any information that is sent from a client for executable script, SQL statements, or other code before displaying it in your application. ASP.NET provides an input request validation feature to block script and HTML in user input. Validation server controls are also provided to assess user input. For more information, see <format
                type="text/html">
                 <a href="f3e7718f-63d0-44a3-bd5f-48cc2059c2a8">Securing Standard Controls</a>
               </format>
+
+              
 
               
 
@@ -1151,12 +1341,16 @@
 
               
 
+              
+
               , and <format
                type="text/html">
                 <a href="4ad3dacb-89e0-4cee-89ac-40a3f2a85461"
                   >Introduction to Validating User Input in ASP.NET Web Pages</a
                 >
               </format>
+
+              
 
               
 
@@ -1173,12 +1367,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="8ef3838e-9d05-4236-9dd0-ceecff9df80d"
                 >ASP.NET Globalization and Localization</a
               >
             </format>
+
+            
 
             
 
@@ -1230,8 +1428,12 @@
 
             
 
+            
+
              property to specify the vertical alignment of the contents of the cell. The possible values for use are specified in the <see
              cref="T:System.Web.UI.WebControls.VerticalAlign" />
+
+            
 
             
 
@@ -1269,6 +1471,8 @@
           <para
             >Use the <see
              cref="P:System.Web.UI.WebControls.TableCell.Wrap" />
+
+            
 
             
 

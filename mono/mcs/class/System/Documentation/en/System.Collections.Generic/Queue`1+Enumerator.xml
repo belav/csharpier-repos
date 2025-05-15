@@ -39,11 +39,15 @@
 
         
 
+        
+
          are inserted at one end and removed from the other.</para
       >
       <para
         >The capacity of a <see
          cref="T:System.Collections.Generic.Queue`1" />
+
+        
 
         
 
@@ -56,8 +60,12 @@
 
         
 
+        
+
          can hold. As elements are added to a <see
          cref="T:System.Collections.Generic.Queue`1" />
+
+        
 
         
 
@@ -70,10 +78,14 @@
 
         
 
+        
+
         .</para
       >
       <para>
         <see cref="T:System.Collections.Generic.Queue`1" />
+
+        
 
         
 

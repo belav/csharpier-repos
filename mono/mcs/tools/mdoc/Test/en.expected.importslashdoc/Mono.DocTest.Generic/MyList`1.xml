@@ -44,6 +44,8 @@
 
       
 
+      
+
       .</remarks
     >
   </Docs>
@@ -94,6 +96,8 @@
 
           
 
+          
+
           .</remarks
         >
       </Docs>
@@ -130,10 +134,14 @@
 
           
 
+          
+
           .</returns
         >
         <remarks>
           <c>M:Mono.DocTest.Generic.MyList`1.GetHelper``2</c>
+
+          
 
           
 
@@ -170,6 +178,8 @@
         <summary>To be added.</summary>
         <remarks>
           <c>M:Mono.DocTest.MyList`1.Method``1(`0,``0)</c>
+
+          
 
           
 
@@ -237,6 +247,8 @@
 
           
 
+          
+
           .</remarks
         >
       </Docs>
@@ -262,6 +274,8 @@
         <summary>To be added.</summary>
         <remarks>
           <c>M:Mono.DocTest.MyList`1.Test(`0)</c>
+
+          
 
           
 
@@ -305,11 +319,15 @@
 
           
 
+          
+
           .</param
         >
         <summary>To be added.</summary>
         <remarks>
           <c>M:Mono.DocTest.Generic.MyList`1.UseHelper``2(Mono.DocTest.Generic.MyList{``0}.Helper{``1,``2})</c>
+
+          
 
           
 

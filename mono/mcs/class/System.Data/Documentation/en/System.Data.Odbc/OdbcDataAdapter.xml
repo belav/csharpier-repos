@@ -35,8 +35,12 @@
 
         
 
+        
+
          serves as a bridge between a DataSet and data source for retrieving and saving data. The <see
          cref="T:System.Data.Odbc.OdbcDataAdapter" />
+
+        
 
         
 
@@ -49,8 +53,12 @@
 
         
 
+        
+
          to load data from the data source into the <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -63,8 +71,12 @@
 
         
 
+        
+
          to send changes made in the <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -80,8 +92,12 @@
 
         
 
+        
+
          fills a <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -94,8 +110,12 @@
 
         
 
+        
+
          property is set to <see
          cref="F:System.Data.MissingSchemaAction.AddWithKey" />
+
+        
 
         
 
@@ -108,6 +128,8 @@
 
         
 
+        
+
          create the schema of the <see
          cref="T:System.Data.DataSet" />
 
@@ -115,8 +137,12 @@
 
         
 
+        
+
         , including primary key information, before filling it with data using <see
          cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
+
+        
 
         
 
@@ -133,6 +159,8 @@
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
@@ -144,8 +172,12 @@
 
           
 
+          
+
            tries to promote the unique constraint column to the primary key. In the process, the <see
            cref="T:System.Data.Odbc.OdbcDataAdapter" />
+
+          
 
           
 
@@ -163,6 +195,8 @@
 
           
 
+          
+
            is ever returned when you call <see
            cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
 
@@ -170,8 +204,12 @@
 
           
 
+          
+
           . This is true even when executing SQL batch statements from which multiple <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -188,8 +226,12 @@
 
         
 
+        
+
          also includes the <see
          cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
+
+        
 
         
 
@@ -202,6 +244,8 @@
 
         
 
+        
+
         , <see
          cref="P:System.Data.Odbc.OdbcDataAdapter.DeleteCommand" />
 
@@ -209,8 +253,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Data.Odbc.OdbcDataAdapter.UpdateCommand" />
+
+        
 
         
 
@@ -224,6 +272,8 @@
       <para
         >Represents a set of data commands and a connection to a data source that are used to fill the <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -244,6 +294,8 @@
           <para
             >When you create an instance of <see
              cref="T:System.Data.Odbc.OdbcDataAdapter" />
+
+            
 
             
 
@@ -295,6 +347,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -324,8 +378,12 @@
 
             
 
+            
+
              constructor sets the <see
              cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
+
+            
 
             
 
@@ -338,11 +396,15 @@
 
             
 
+            
+
              parameter.</para
           >
           <para
             >When you create an instance of <see
              cref="T:System.Data.Odbc.OdbcDataAdapter" />
+
+            
 
             
 
@@ -394,11 +456,15 @@
 
             
 
+            
+
              class with the specified SQL SELECT statement.</para
           >
         </summary>
         <param name="selectCommand">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -411,6 +477,8 @@
 
           
 
+          
+
            that is an SQL SELECT statement or stored procedure, and is set as the <see
            cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
 
@@ -418,8 +486,12 @@
 
           
 
+          
+
            property of the <see
            cref="T:System.Data.Odbc.OdbcDataAdapter" />
+
+          
 
           
 
@@ -454,8 +526,12 @@
 
             
 
+            
+
              can be useful in an application that must call the Fill method for two or more <see
              cref="T:System.Data.Odbc.OdbcDataAdapter" />
+
+            
 
             
 
@@ -474,8 +550,12 @@
 
             
 
+            
+
              class with an SQL SELECT statement and an <see
              cref="T:System.Data.Odbc.OdbcConnection" />
+
+            
 
             
 
@@ -491,6 +571,8 @@
 
           
 
+          
+
           A string that is a SQL SELECT statement or stored procedure to be used by the <see
            cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
 
@@ -498,8 +580,12 @@
 
           
 
+          
+
            property of the <see
            cref="T:System.Data.Odbc.OdbcDataAdapter" />
+
+          
 
           
 
@@ -514,8 +600,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Data.Odbc.OdbcConnection" />
+
+          
 
           
 
@@ -550,6 +640,8 @@
 
             
 
+            
+
              constructor uses the <paramref
              name="selectConnectionString" />
 
@@ -557,8 +649,12 @@
 
             
 
+            
+
              parameter to set the <see
              cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
+
+            
 
             
 
@@ -577,11 +673,15 @@
 
             
 
+            
+
              class with an SQL SELECT statement and a connection string.</para
           >
         </summary>
         <param name="selectCommandText">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -594,8 +694,12 @@
 
           
 
+          
+
            property of the <see
            cref="T:System.Data.Odbc.OdbcDataAdapter" />
+
+          
 
           
 
@@ -605,6 +709,8 @@
         >
         <param name="selectConnectionString">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -705,8 +811,12 @@
 
             
 
+            
+
              property is assigned to a previously created <see
              cref="T:System.Data.Odbc.OdbcCommand" />
+
+            
 
             
 
@@ -719,6 +829,8 @@
 
             
 
+            
+
              is not cloned. Instead, the <see
              cref="P:System.Data.Odbc.OdbcDataAdapter.DeleteCommand" />
 
@@ -726,8 +838,12 @@
 
             
 
+            
+
              maintains a reference to the previously created <see
              cref="T:System.Data.Odbc.OdbcCommand" />
+
+            
 
             
 
@@ -743,8 +859,12 @@
 
             
 
+            
+
              is not set and primary key information is present in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -757,8 +877,12 @@
 
             
 
+            
+
              class to automatically generate the <see
              cref="P:System.Data.Odbc.OdbcDataAdapter.DeleteCommand" />
+
+            
 
             
 
@@ -771,8 +895,12 @@
 
             
 
+            
+
              to the data source. To do this, set the <see
              cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
+
+            
 
             
 
@@ -785,8 +913,12 @@
 
             
 
+            
+
             . The generation logic also requires key column information to be present in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -796,6 +928,8 @@
              type="text/html">
               <a href="6e3fb8b5-373b-4f9e-ab03-a22693df8e91">Automatically Generating Commands</a>
             </format>
+
+            
 
             
 
@@ -861,8 +995,12 @@
 
             
 
+            
+
              property is assigned to a previously created <see
              cref="T:System.Data.Odbc.OdbcCommand" />
+
+            
 
             
 
@@ -875,6 +1013,8 @@
 
             
 
+            
+
              is not cloned. Instead, <see
              cref="P:System.Data.Odbc.OdbcDataAdapter.InsertCommand" />
 
@@ -882,8 +1022,12 @@
 
             
 
+            
+
              maintains a reference to the previously created <see
              cref="T:System.Data.Odbc.OdbcCommand" />
+
+            
 
             
 
@@ -899,8 +1043,12 @@
 
             
 
+            
+
              is not set and primary key information is present in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -913,8 +1061,12 @@
 
             
 
+            
+
              class to automatically generate <see
              cref="P:System.Data.Odbc.OdbcDataAdapter.InsertCommand" />
+
+            
 
             
 
@@ -927,8 +1079,12 @@
 
             
 
+            
+
              to the data source. To do this, set the <see
              cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
+
+            
 
             
 
@@ -941,8 +1097,12 @@
 
             
 
+            
+
             . The generation logic also requires key column information to be present in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -952,6 +1112,8 @@
              type="text/html">
               <a href="6e3fb8b5-373b-4f9e-ab03-a22693df8e91">Automatically Generating Commands</a>
             </format>
+
+            
 
             
 
@@ -968,6 +1130,8 @@
 
               
 
+              
+
                depending upon how you set the <see
                cref="!:System.Data.Odbc.OdbcCommand.UpdatedRowSource" />
 
@@ -975,8 +1139,12 @@
 
               
 
+              
+
                property of the <see
                cref="T:System.Data.Odbc.OdbcCommand" />
+
+              
 
               
 
@@ -1060,6 +1228,8 @@
 
             
 
+            
+
             , there are two events that occur per data row updated. The order of execution is as follows: </para
           >
           <list type="ordered">
@@ -1072,6 +1242,8 @@
 
                 
 
+                
+
                  are moved to the parameter values.</para
               >
             </item>
@@ -1079,6 +1251,8 @@
               <para
                 >The <see
                  cref="M:System.Data.Common.DbDataAdapter.OnRowUpdating(System.Data.Common.RowUpdatingEventArgs)" />
+
+                
 
                 
 
@@ -1099,6 +1273,8 @@
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -1106,6 +1282,8 @@
               <para
                 >If there are output parameters, they are placed in the <see
                  cref="T:System.Data.DataRow" />
+
+                
 
                 
 
@@ -1123,12 +1301,16 @@
 
                 
 
+                
+
                  event is raised.</para
               >
             </item>
             <item>
               <para>
                 <see cref="M:System.Data.DataRow.AcceptChanges" />
+
+                
 
                 
 
@@ -1169,6 +1351,8 @@
 
             
 
+            
+
             , there are two events that occur per data row updated. The order of execution is as follows: </para
           >
           <list type="ordered">
@@ -1181,6 +1365,8 @@
 
                 
 
+                
+
                  are moved to the parameter values.</para
               >
             </item>
@@ -1188,6 +1374,8 @@
               <para
                 >The <see
                  cref="M:System.Data.Common.DbDataAdapter.OnRowUpdating(System.Data.Common.RowUpdatingEventArgs)" />
+
+                
 
                 
 
@@ -1208,6 +1396,8 @@
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -1215,6 +1405,8 @@
               <para
                 >If there are output parameters, they are placed in the <see
                  cref="T:System.Data.DataRow" />
+
+                
 
                 
 
@@ -1232,12 +1424,16 @@
 
                 
 
+                
+
                  event is raised.</para
               >
             </item>
             <item>
               <para>
                 <see cref="M:System.Data.DataRow.AcceptChanges" />
+
+                
 
                 
 
@@ -1253,6 +1449,8 @@
           <para
             >Occurs during <see
              cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+            
 
             
 
@@ -1296,8 +1494,12 @@
 
             
 
+            
+
              is assigned to a previously created <see
              cref="T:System.Data.Odbc.OdbcCommand" />
+
+            
 
             
 
@@ -1310,6 +1512,8 @@
 
             
 
+            
+
              is not cloned. Instead, the <see
              cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
 
@@ -1317,8 +1521,12 @@
 
             
 
+            
+
              maintains a reference to the previously created <see
              cref="T:System.Data.Odbc.OdbcCommand" />
+
+            
 
             
 
@@ -1334,8 +1542,12 @@
 
             
 
+            
+
              returns no rows, no tables are added to the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1398,8 +1610,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Data.IDbDataAdapter" />
+
+            
 
             
 
@@ -1413,6 +1629,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.Data.IDbDataAdapter.DeleteCommand" />
+
+            
 
             
 
@@ -1448,8 +1666,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Data.IDbDataAdapter" />
+
+            
 
             
 
@@ -1463,6 +1685,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.Data.IDbDataAdapter.InsertCommand" />
+
+            
 
             
 
@@ -1498,8 +1722,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Data.IDbDataAdapter" />
+
+            
 
             
 
@@ -1513,6 +1741,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.Data.IDbDataAdapter.SelectCommand" />
+
+            
 
             
 
@@ -1548,8 +1778,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Data.IDbDataAdapter" />
+
+            
 
             
 
@@ -1563,6 +1797,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.Data.IDbDataAdapter.UpdateCommand" />
+
+            
 
             
 
@@ -1595,8 +1831,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ICloneable" />
+
+            
 
             
 
@@ -1615,6 +1855,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1623,6 +1865,8 @@
           <para
             >A new <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -1662,8 +1906,12 @@
 
             
 
+            
+
              is assigned to a previously created <see
              cref="T:System.Data.Odbc.OdbcCommand" />
+
+            
 
             
 
@@ -1676,6 +1924,8 @@
 
             
 
+            
+
              is not cloned. Instead, the <see
              cref="P:System.Data.Odbc.OdbcDataAdapter.UpdateCommand" />
 
@@ -1683,8 +1933,12 @@
 
             
 
+            
+
              maintains a reference to the previously created <see
              cref="T:System.Data.Odbc.OdbcCommand" />
+
+            
 
             
 
@@ -1700,8 +1954,12 @@
 
             
 
+            
+
              is not set and primary key information is present in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1714,8 +1972,12 @@
 
             
 
+            
+
              class to automatically generate <see
              cref="P:System.Data.Odbc.OdbcDataAdapter.UpdateCommand" />
+
+            
 
             
 
@@ -1728,8 +1990,12 @@
 
             
 
+            
+
              to the data source. To do this, set the <see
              cref="P:System.Data.Odbc.OdbcDataAdapter.SelectCommand" />
+
+            
 
             
 
@@ -1742,8 +2008,12 @@
 
             
 
+            
+
             . The generation logic also requires key column information to be present in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1753,6 +2023,8 @@
              type="text/html">
               <a href="6e3fb8b5-373b-4f9e-ab03-a22693df8e91">Automatically Generating Commands</a>
             </format>
+
+            
 
             
 
@@ -1769,6 +2041,8 @@
 
               
 
+              
+
                depending upon how you set the <see
                cref="!:System.Data.Odbc.OdbcCommand.UpdatedRowSource" />
 
@@ -1776,8 +2050,12 @@
 
               
 
+              
+
                property of the <see
                cref="T:System.Data.Odbc.OdbcCommand" />
+
+              
 
               
 

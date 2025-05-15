@@ -59,6 +59,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -98,6 +100,8 @@
 
             
 
+            
+
              is added.</para
           >
         </returns>
@@ -108,8 +112,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Schema.XmlSchema" />
+
+          
 
           
 
@@ -152,6 +160,8 @@
 
             
 
+            
+
              class to the end of the collection.</para
           >
         </summary>
@@ -162,8 +172,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Serialization.XmlSchemas" />
+
+          
 
           
 
@@ -207,6 +221,8 @@
 
             
 
+            
+
              object that represents an assembly reference to the collection.</para
           >
         </summary>
@@ -215,6 +231,8 @@
           <para
             >The index at which the <see
              cref="T:System.Xml.Schema.XmlSchema" />
+
+            
 
             
 
@@ -230,8 +248,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Schema.XmlSchema" />
+
+          
 
           
 
@@ -246,8 +268,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -290,6 +316,8 @@
 
             
 
+            
+
              object that represents an assembly reference to the collection.</para
           >
         </summary>
@@ -300,8 +328,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Schema.XmlSchema" />
+
+          
 
           
 
@@ -344,6 +376,8 @@
 
             
 
+            
+
              method is called:</para
           >
           <list type="bullet">
@@ -356,8 +390,12 @@
 
                 
 
+                
+
                  class while creating <see
                  cref="T:System.Web.Services.Description.ServiceDescription" />
+
+                
 
                 
 
@@ -370,6 +408,8 @@
               <para
                 >By the Wsdl.exe tool or the <see
                  cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+
+                
 
                 
 
@@ -390,6 +430,8 @@
 
             
 
+            
+
              method directly, use the previously mentioned classes or tools.</para
           >
         </remarks>
@@ -404,8 +446,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.Schema.ValidationEventHandler" />
+
+          
 
           
 
@@ -420,6 +466,8 @@
 
           
 
+          
+
           true to validate the XML schemas in the collection using the <see
            cref="M:System.Xml.Serialization.XmlSchemas.Compile(System.Xml.Schema.ValidationEventHandler,System.Boolean)" />
 
@@ -427,8 +475,12 @@
 
           
 
+          
+
            method of the <see
            cref="T:System.Xml.Serialization.XmlSchemas" />
+
+          
 
           
 
@@ -468,6 +520,8 @@
 
             
 
+            
+
              object that belongs to the specified namespace.</para
           >
         </summary>
@@ -477,6 +531,8 @@
         </returns>
         <param name="targetNamespace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -519,6 +575,8 @@
 
             
 
+            
+
              contains a specific schema.</para
           >
         </summary>
@@ -533,8 +591,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Schema.XmlSchema" />
+
+          
 
           
 
@@ -578,8 +640,12 @@
 
             
 
+            
+
              to a compatible one-dimensional <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -595,8 +661,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -609,8 +679,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -620,6 +694,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -663,6 +739,8 @@
 
             
 
+            
+
              of the specified name and type. </para
           >
         </summary>
@@ -676,6 +754,8 @@
 
             
 
+            
+
              instance, such as an <see
              cref="T:System.Xml.Schema.XmlSchemaElement" />
 
@@ -683,8 +763,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Xml.Schema.XmlSchemaAttribute" />
+
+            
 
             
 
@@ -700,6 +784,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlQualifiedName" />
 
@@ -707,8 +793,12 @@
 
           
 
+          
+
            that specifies a fully qualified name with a namespace used to locate an <see
            cref="T:System.Xml.Schema.XmlSchema" />
+
+          
 
           
 
@@ -723,8 +813,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -737,8 +831,12 @@
 
           
 
+          
+
           , <see
            cref="T:System.Xml.Schema.XmlSchemaAttributeGroup" />
+
+          
 
           
 
@@ -751,6 +849,8 @@
 
           
 
+          
+
           , <see
            cref="T:System.Xml.Schema.XmlSchemaAttribute" />
 
@@ -758,8 +858,12 @@
 
           
 
+          
+
           , and <see
            cref="T:System.Xml.Schema.XmlSchemaNotation" />
+
+          
 
           
 
@@ -801,6 +905,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -818,11 +924,15 @@
 
             
 
+            
+
              implementation that contains the schemas.</para
           >
         </returns>
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -865,6 +975,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -873,6 +985,8 @@
           <para
             >The zero-based index of the first occurrence of the value within the entire <see
              cref="T:System.Xml.Serialization.XmlSchemas" />
+
+            
 
             
 
@@ -888,8 +1002,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Schema.XmlSchema" />
+
+          
 
           
 
@@ -933,6 +1051,8 @@
 
             
 
+            
+
              at the specified index.</para
           >
         </summary>
@@ -943,8 +1063,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="schema" />
+
+          
 
           
 
@@ -959,8 +1083,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Schema.XmlSchema" />
+
+          
 
           
 
@@ -994,8 +1122,12 @@
 
             
 
+            
+
              object by invoking the <see
              cref="M:System.Xml.Serialization.XmlSchemas.Compile(System.Xml.Schema.ValidationEventHandler,System.Boolean)" />
+
+            
 
             
 
@@ -1043,6 +1175,8 @@
 
             
 
+            
+
              method is called by the .NET Framework's XML serialization infrastructure and does not need to be called directly.</para
           >
         </remarks>
@@ -1056,6 +1190,8 @@
         </returns>
         <param name="schema">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1149,6 +1285,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -1188,6 +1326,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -1198,8 +1338,12 @@
 
           
 
+          
+
           The zero-based index at which to insert <paramref
            name="value" />
+
+          
 
           
 
@@ -1214,8 +1358,12 @@
 
           
 
+          
+
           The new value of the element at <paramref
            name="index" />
+
+          
 
           
 
@@ -1259,6 +1407,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -1269,8 +1419,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="value" />
+
+          
 
           
 
@@ -1285,8 +1439,12 @@
 
           
 
+          
+
           The value of the element to remove at <paramref
            name="index" />
+
+          
 
           
 
@@ -1331,6 +1489,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -1341,8 +1501,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="oldValue" />
+
+          
 
           
 
@@ -1357,8 +1521,12 @@
 
           
 
+          
+
           The value to replace with <paramref
            name="newValue" />
+
+          
 
           
 
@@ -1373,8 +1541,12 @@
 
           
 
+          
+
           The new value of the element at <paramref
            name="index" />
+
+          
 
           
 
@@ -1417,6 +1589,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1427,8 +1601,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Schema.XmlSchema" />
+
+          
 
           
 

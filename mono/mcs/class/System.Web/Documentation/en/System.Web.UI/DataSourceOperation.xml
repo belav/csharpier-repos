@@ -20,6 +20,8 @@
 
         
 
+        
+
          enumeration represents the actions that a data source control can perform on its underlying data. Data source controls such as <see
          cref="T:System.Web.UI.WebControls.SqlDataSource" />
 
@@ -27,8 +29,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.WebControls.ObjectDataSource" />
+
+        
 
         
 
@@ -44,8 +50,12 @@
 
         
 
+        
+
          enumeration. The <see
          cref="F:System.Web.UI.DataSourceOperation.Select" />
+
+        
 
         
 
@@ -58,8 +68,12 @@
 
         
 
+        
+
          values indicate operations that retrieve data from an underlying data source, while the <see
          cref="F:System.Web.UI.DataSourceOperation.Delete" />
+
+        
 
         
 
@@ -72,8 +86,12 @@
 
         
 
+        
+
         , and <see
          cref="F:System.Web.UI.DataSourceOperation.Update" />
+
+        
 
         
 

@@ -49,8 +49,12 @@
         
 
         
+
+        
 instance from a <see
          cref="T:System.Net.WebRequest" />
+
+        
 
         
 
@@ -93,6 +97,8 @@ public class WebResponseExample {
 
         
 
+        
+
          class is the abstract base class from which protocol-specific response classes are derived. Applications can participate in request and response transactions in a protocol-agnostic manner using instances of the <see
          cref="T:System.Net.WebResponse" />
 
@@ -100,8 +106,12 @@ public class WebResponseExample {
 
         
 
+        
+
          class while protocol-specific classes derived from <see
          cref="T:System.Net.WebResponse" />
+
+        
 
         
 
@@ -117,6 +127,8 @@ public class WebResponseExample {
 
         
 
+        
+
          objects directly; they are created by calling the <see
          cref="M:System.Net.WebRequest.GetResponse" />
 
@@ -124,8 +136,12 @@ public class WebResponseExample {
 
         
 
+        
+
          method on a <see
          cref="T:System.Net.WebRequest" />
+
+        
 
         
 
@@ -169,6 +185,8 @@ public class WebResponseExample {
 
             
 
+            
+
              constructor directly; use the <see
              cref="M:System.Net.WebRequest.GetResponse" />
 
@@ -176,8 +194,12 @@ public class WebResponseExample {
 
             
 
+            
+
              method on a <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -191,6 +213,8 @@ public class WebResponseExample {
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.WebResponse" />
+
+            
 
             
 
@@ -232,8 +256,12 @@ public class WebResponseExample {
 
             
 
+            
+
              interface for the <see
              cref="T:System.Net.WebResponse" />
+
+            
 
             
 
@@ -252,6 +280,8 @@ public class WebResponseExample {
 
             
 
+            
+
              class from the specified instances of the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
@@ -259,8 +289,12 @@ public class WebResponseExample {
 
             
 
+            
+
              and <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -276,6 +310,8 @@ public class WebResponseExample {
 
           
 
+          
+
           An instance of the <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
@@ -283,8 +319,12 @@ public class WebResponseExample {
 
           
 
+          
+
            class that contains the information required to serialize the new <see
            cref="T:System.Net.WebRequest" />
+
+          
 
           
 
@@ -299,6 +339,8 @@ public class WebResponseExample {
 
           
 
+          
+
           An instance of the <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
 
@@ -306,8 +348,12 @@ public class WebResponseExample {
 
           
 
+          
+
            class that indicates the source of the serialized stream that is associated with the new <see
            cref="T:System.Net.WebRequest" />
+
+          
 
           
 
@@ -348,6 +394,8 @@ public class WebResponseExample {
 
             
 
+            
+
              method cleans up the resources used by a <see
              cref="T:System.Net.WebResponse" />
 
@@ -355,8 +403,12 @@ public class WebResponseExample {
 
             
 
+            
+
              and closes the underlying stream by calling the <see
              cref="M:System.IO.Stream.Close" />
+
+            
 
             
 
@@ -373,8 +425,12 @@ public class WebResponseExample {
 
               
 
+              
+
                or <see
                cref="M:System.Net.WebResponse.Close" />
+
+              
 
               
 
@@ -392,8 +448,12 @@ public class WebResponseExample {
 
               
 
+              
+
                class is an abstract class. The actual behavior of <see
                cref="T:System.Net.WebResponse" />
+
+              
 
               
 
@@ -406,6 +466,8 @@ public class WebResponseExample {
 
               
 
+              
+
               . For more information about default values and exceptions, please see the documentation for the descendant classes, such as <see
                cref="T:System.Net.HttpWebResponse" />
 
@@ -413,8 +475,12 @@ public class WebResponseExample {
 
               
 
+              
+
                and <see
                cref="T:System.Net.FileWebResponse" />
+
+              
 
               
 
@@ -459,6 +525,8 @@ public class WebResponseExample {
             
 
             
+
+            
 containing the number of bytes returned from the resource.</para
           >
         </value>
@@ -475,8 +543,12 @@ containing the number of bytes returned from the resource.</para
 
             
 
+            
+
              property contains the length, in bytes, of the response from the Internet resource. For request methods that contain header information, the <see
              cref="P:System.Net.WebResponse.ContentLength" />
+
+            
 
             
 
@@ -493,8 +565,12 @@ containing the number of bytes returned from the resource.</para
 
               
 
+              
+
                class is an abstract class. The actual behavior of <see
                cref="T:System.Net.WebResponse" />
+
+              
 
               
 
@@ -507,6 +583,8 @@ containing the number of bytes returned from the resource.</para
 
               
 
+              
+
               . For more information about default values and exceptions, please see the documentation for the descendant classes, such as <see
                cref="T:System.Net.HttpWebResponse" />
 
@@ -514,8 +592,12 @@ containing the number of bytes returned from the resource.</para
 
               
 
+              
+
                and <see
                cref="T:System.Net.FileWebResponse" />
+
+              
 
               
 
@@ -559,6 +641,8 @@ containing the number of bytes returned from the resource.</para
 
             
 
+            
+
              that
    contains the media type of the response data.</para
           >
@@ -576,12 +660,16 @@ containing the number of bytes returned from the resource.</para
 
             
 
+            
+
              property contains the MIME content type of the response from the Internet resource, if known.</para
           >
           <block subset="none" type="note">
             <para
               >The <see
                cref="T:System.Net.WebResponse" />
+
+              
 
               
 
@@ -594,8 +682,12 @@ containing the number of bytes returned from the resource.</para
 
               
 
+              
+
                instances at run time is determined by the descendant class returned by <see
                cref="M:System.Net.WebRequest.GetResponse" />
+
+              
 
               
 
@@ -608,8 +700,12 @@ containing the number of bytes returned from the resource.</para
 
               
 
+              
+
                and <see
                cref="T:System.Net.FileWebResponse" />
+
+              
 
               
 
@@ -652,6 +748,8 @@ containing the number of bytes returned from the resource.</para
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -684,8 +782,12 @@ containing the number of bytes returned from the resource.</para
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -698,8 +800,12 @@ containing the number of bytes returned from the resource.</para
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -715,8 +821,12 @@ containing the number of bytes returned from the resource.</para
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Net.WebResponse" />
+
+            
 
             
 
@@ -737,6 +847,8 @@ containing the number of bytes returned from the resource.</para
 
               
 
+              
+
               .</para
             >
           </block>
@@ -751,11 +863,15 @@ containing the number of bytes returned from the resource.</para
 
             
 
+            
+
              object, and optionally disposes of the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -802,6 +918,8 @@ containing the number of bytes returned from the resource.</para
 
             
 
+            
+
              are automatically tracked and serialized by the formatter.</para
           >
         </remarks>
@@ -810,6 +928,8 @@ containing the number of bytes returned from the resource.</para
           <para
             >Populates a <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -825,8 +945,12 @@ containing the number of bytes returned from the resource.</para
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -841,8 +965,12 @@ containing the number of bytes returned from the resource.</para
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -889,12 +1017,16 @@ containing the number of bytes returned from the resource.</para
 
             
 
+            
+
              method returns the data stream from the Internet resource.</para
           >
           <block subset="none" type="note">
             <para
               >The response stream must be closed to avoid running out of system resources. The response stream can be closed by calling <see
                cref="M:System.IO.Stream.Close" />
+
+              
 
               
 
@@ -914,6 +1046,8 @@ containing the number of bytes returned from the resource.</para
           <para
             >An instance of the <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -958,6 +1092,8 @@ containing the number of bytes returned from the resource.</para
 
             
 
+            
+
              containing the header name/value pairs associated
    with the current instance.</para
           >
@@ -975,12 +1111,16 @@ containing the number of bytes returned from the resource.</para
 
             
 
+            
+
              property contains the name-value header pairs returned in the response.</para
           >
           <block subset="none" type="note">
             <para
               >The <see
                cref="T:System.Net.WebResponse" />
+
+              
 
               
 
@@ -993,8 +1133,12 @@ containing the number of bytes returned from the resource.</para
 
               
 
+              
+
                instances at run time is determined by the descendant class returned by <see
                cref="M:System.Net.WebRequest.GetResponse" />
+
+              
 
               
 
@@ -1007,8 +1151,12 @@ containing the number of bytes returned from the resource.</para
 
               
 
+              
+
                and <see
                cref="T:System.Net.FileWebResponse" />
+
+              
 
               
 
@@ -1053,8 +1201,12 @@ containing the number of bytes returned from the resource.</para
 
             
 
+            
+
              property to set and the <see
              cref="T:System.Net.Cache.RequestCachePolicy" />
+
+            
 
             
 
@@ -1068,6 +1220,8 @@ containing the number of bytes returned from the resource.</para
           <para
             >Gets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -1106,8 +1260,12 @@ containing the number of bytes returned from the resource.</para
 
             
 
+            
+
              property using the <see
              cref="F:System.Net.Security.AuthenticationLevel.MutualAuthRequested" />
+
+            
 
             
 
@@ -1120,8 +1278,12 @@ containing the number of bytes returned from the resource.</para
 
             
 
+            
+
              enumeration value. The default value for the <see
              cref="P:System.Net.WebRequest.AuthenticationLevel" />
+
+            
 
             
 
@@ -1134,8 +1296,12 @@ containing the number of bytes returned from the resource.</para
 
             
 
+            
+
               and <see
              cref="F:System.Net.Security.AuthenticationLevel.MutualAuthRequested" />
+
+            
 
             
 
@@ -1149,6 +1315,8 @@ containing the number of bytes returned from the resource.</para
           <para
             >Gets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -1186,6 +1354,8 @@ containing the number of bytes returned from the resource.</para
 
             
 
+            
+
              containing the URI 
    of the resource associated with the current response.</para
           >
@@ -1203,12 +1373,16 @@ containing the number of bytes returned from the resource.</para
 
             
 
+            
+
              property contains the URI of the Internet resource that actually provided the response data. This resource might not be the originally requested URI if the underlying protocol allows redirection of the request.</para
           >
           <block subset="none" type="note">
             <para
               >The <see
                cref="T:System.Net.WebResponse" />
+
+              
 
               
 
@@ -1221,8 +1395,12 @@ containing the number of bytes returned from the resource.</para
 
               
 
+              
+
                instances at run time is determined by the descendant class returned by <see
                cref="M:System.Net.WebRequest.GetResponse" />
+
+              
 
               
 
@@ -1235,8 +1413,12 @@ containing the number of bytes returned from the resource.</para
 
               
 
+              
+
                and <see
                cref="T:System.Net.FileWebResponse" />
+
+              
 
               
 
@@ -1302,8 +1484,12 @@ containing the number of bytes returned from the resource.</para
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Net.WebResponse" />
+
+            
 
             
 
@@ -1316,8 +1502,12 @@ containing the number of bytes returned from the resource.</para
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Net.WebResponse" />
+
+            
 
             
 
@@ -1330,6 +1520,8 @@ containing the number of bytes returned from the resource.</para
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Net.WebResponse" />
 
@@ -1337,8 +1529,12 @@ containing the number of bytes returned from the resource.</para
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Net.WebResponse" />
+
+            
 
             
 
@@ -1353,10 +1549,14 @@ containing the number of bytes returned from the resource.</para
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -1373,6 +1573,8 @@ containing the number of bytes returned from the resource.</para
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.Net.WebResponse" />
 
@@ -1380,8 +1582,12 @@ containing the number of bytes returned from the resource.</para
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Net.WebResponse" />
+
+              
 
               
 
@@ -1396,6 +1602,8 @@ containing the number of bytes returned from the resource.</para
           <para
             >When overridden in a derived class, releases all resources used by the <see
              cref="T:System.Net.WebResponse" />
+
+            
 
             
 
@@ -1445,8 +1653,12 @@ containing the number of bytes returned from the resource.</para
 
             
 
+            
+
              instance with the data that is needed to serialize <see
              cref="T:System.Net.WebResponse" />
+
+            
 
             
 
@@ -1462,6 +1674,8 @@ containing the number of bytes returned from the resource.</para
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
@@ -1469,8 +1683,12 @@ containing the number of bytes returned from the resource.</para
 
           
 
+          
+
            that will hold the serialized data for the <see
            cref="T:System.Net.WebResponse" />
+
+          
 
           
 
@@ -1485,6 +1703,8 @@ containing the number of bytes returned from the resource.</para
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
 
@@ -1492,8 +1712,12 @@ containing the number of bytes returned from the resource.</para
 
           
 
+          
+
            that contains the destination of the serialized stream that is associated with the new <see
            cref="T:System.Net.WebResponse" />
+
+          
 
           
 

@@ -39,6 +39,8 @@
 
         
 
+        
+
          class provides an abstract base class that represents a network resource or service. Descendant classes combine network connection information to form a connection point to a service.</para
       >
     </remarks>
@@ -70,6 +72,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.EndPoint" />
+
+            
 
             
 
@@ -114,12 +118,16 @@
 
             
 
+            
+
              .</para
           >
         </value>
         <exception cref="T:System.NotSupportedException"
           >This property is required to be overridden in types derived from <see
            cref="T:System.Net.EndPoint" />
+
+          
 
           
 
@@ -132,6 +140,8 @@
           <para
             >The <see
              cref="P:System.Net.EndPoint.AddressFamily" />
+
+            
 
             
 
@@ -187,6 +197,8 @@
 
               
 
+              
+
               . </block
             >
           </para>
@@ -200,9 +212,13 @@
 
               
 
+              
+
                instance that contains the address information from
       the specified <see
                cref="T:System.Net.SocketAddress" />
+
+              
 
               
 
@@ -222,9 +238,13 @@
               
 
               
+
+              
       instance that represents the same network resource or service as the specified
    <see
                cref="T:System.Net.SocketAddress" />
+
+              
 
               
 
@@ -242,6 +262,8 @@
 
           
 
+          
+
            .</exception
         >
         <summary>
@@ -254,8 +276,12 @@
 
             
 
+            
+
              instance from a <see
              cref="T:System.Net.SocketAddress" />
+
+            
 
             
 
@@ -274,8 +300,12 @@
 
             
 
+            
+
              instance that is initialized from the specified <see
              cref="T:System.Net.SocketAddress" />
+
+            
 
             
 
@@ -286,6 +316,8 @@
         </returns>
         <param name="socketAddress">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -327,6 +359,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -335,6 +369,8 @@
           <para
             >A <see
              cref="T:System.Net.SocketAddress" />
+
+            
 
             
 

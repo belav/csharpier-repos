@@ -44,8 +44,12 @@
 
         
 
+        
+
         . The <see
          cref="T:System.Runtime.Remoting.Messaging.RemotingSurrogateSelector" />
+
+        
 
         
 
@@ -58,8 +62,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Runtime.Serialization.Formatters.Soap.SoapFormatter" />
+
+        
 
         
 
@@ -75,6 +83,8 @@
 
         
 
+        
+
         , the remoting surrogate creates an <see
          cref="T:System.Runtime.Remoting.ObjRef" />
 
@@ -82,8 +92,12 @@
 
         
 
+        
+
          that contains all the relevant information required to activate and communicate with the remote object. The newly created <see
          cref="T:System.Runtime.Remoting.ObjRef" />
+
+        
 
         
 
@@ -100,10 +114,14 @@
 
           
 
+          
+
            is thrown when either the immediate caller or the derived class does not have infrastructure permission. For details about security demands, see <format
            type="text/html">
             <a href="A33FD5F9-2DE9-4653-A4F0-D9DF25082C4D">[&lt;topic://cpconLinkDemands&gt;]</a>
           </format>
+
+          
 
           
 
@@ -120,6 +138,8 @@
 
           
 
+          
+
           .</para
         >
       </block>
@@ -129,6 +149,8 @@
       <para
         >Selects the remoting surrogate that can be used to serialize an object that derives from a <see
          cref="T:System.MarshalByRefObject" />
+
+        
 
         
 
@@ -160,6 +182,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Remoting.Messaging.RemotingSurrogateSelector" />
+
+            
 
             
 
@@ -202,6 +226,8 @@
 
             
 
+            
+
             . Each chain contains the remoting surrogates that the surrogate selector checks to find a compatible surrogate for a given object type. The current method adds a new remoting surrogate selector to the surrogate chain that is examined for compatible surrogates.</para
           >
         </remarks>
@@ -210,6 +236,8 @@
           <para
             >Adds the specified <see
              cref="T:System.Runtime.Serialization.ISurrogateSelector" />
+
+            
 
             
 
@@ -225,8 +253,12 @@
 
           
 
+          
+
           The next <see
            cref="T:System.Runtime.Serialization.ISurrogateSelector" />
+
+          
 
           
 
@@ -267,8 +299,12 @@
 
             
 
+            
+
              delegate for the current instance of the <see
              cref="T:System.Runtime.Remoting.Messaging.RemotingSurrogateSelector" />
+
+            
 
             
 
@@ -310,6 +346,8 @@
 
             
 
+            
+
              in the chain of surrogate selectors.</para
           >
         </summary>
@@ -318,6 +356,8 @@
           <para
             >The next <see
              cref="T:System.Runtime.Serialization.ISurrogateSelector" />
+
+            
 
             
 
@@ -422,6 +462,8 @@
         </summary>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -44,6 +44,8 @@
         
 
         
+
+        
       is thrown.</para
       >
       <para>The following code contains a class with a public field (myField). This class
@@ -119,6 +121,8 @@ namespace TestNameSpace
 
         
 
+        
+
          uses the HRESULT COR_E_FIELDACCESS, which has the value 0x80131507.</para
       >
       <para
@@ -129,8 +133,12 @@ namespace TestNameSpace
 
         
 
+        
+
         , see the <see
          cref="M:System.FieldAccessException.#ctor" />
+
+        
 
         
 
@@ -147,6 +155,8 @@ namespace TestNameSpace
 
           
 
+          
+
            or the <format
            type="text/html">
             <a href="c31e1663-c164-4e65-b66d-d3aa8750a154">Portable Class Library</a>
@@ -156,8 +166,12 @@ namespace TestNameSpace
 
           
 
+          
+
           , but it is thrown by some members that are. To catch the exception in that case, write a catch statement for <see
            cref="T:System.MemberAccessException" />
+
+          
 
           
 
@@ -202,11 +216,15 @@ namespace TestNameSpace
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "Attempted to access a field that is not accessible by the caller." This message takes the current system culture into account.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.FieldAccessException" />
+
+            
 
             
 
@@ -252,6 +270,8 @@ namespace TestNameSpace
           <para
             >Initializes a new instance of the <see
              cref="T:System.FieldAccessException" />
+
+            
 
             
 
@@ -294,8 +314,12 @@ namespace TestNameSpace
 
             
 
+            
+
              property of the new instance by using the <paramref
              name="message" />
+
+            
 
             
 
@@ -308,11 +332,15 @@ namespace TestNameSpace
 
             
 
+            
+
              is intended to be understood by humans. The caller of this constructor must ensure that this string has been localized for the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.FieldAccessException" />
+
+            
 
             
 
@@ -363,11 +391,15 @@ namespace TestNameSpace
 
             
 
+            
+
              class with a specified error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -412,6 +444,8 @@ namespace TestNameSpace
 
             
 
+            
+
              class with serialized data.</para
           >
         </summary>
@@ -422,10 +456,14 @@ namespace TestNameSpace
 
           
 
+          
+
           The object that holds the serialized object data. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -470,8 +508,12 @@ namespace TestNameSpace
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -482,6 +524,8 @@ namespace TestNameSpace
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.FieldAccessException" />
+
+            
 
             
 
@@ -532,11 +576,15 @@ namespace TestNameSpace
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -551,8 +599,12 @@ namespace TestNameSpace
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="inner" />
+
+          
 
           
 

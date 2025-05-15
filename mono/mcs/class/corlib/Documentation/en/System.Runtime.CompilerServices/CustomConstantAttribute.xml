@@ -45,8 +45,12 @@
 
         
 
+        
+
         , which allows a compiler to persist an 8-byte <see
          cref="T:System.DateTime" />
+
+        
 
         
 
@@ -59,8 +63,12 @@
 
         
 
+        
+
         , this pattern of deriving specific classes from <see
          cref="T:System.Runtime.CompilerServices.CustomConstantAttribute" />
+
+        
 
         
 
@@ -71,6 +79,8 @@
       <para
         >The classes in <see
          cref="N:System.Runtime.CompilerServices" />
+
+        
 
         
 
@@ -110,6 +120,8 @@
 
             
 
+            
+
              are for compiler writers' use only.</para
           >
         </remarks>
@@ -118,6 +130,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.CompilerServices.CustomConstantAttribute" />
+
+            
 
             
 

@@ -38,8 +38,12 @@
 
         
 
+        
+
          is a static class that manages the authentication modules that an application uses. When a request is made to protected resources, the <see
          cref="T:System.Net.AuthenticationManager" />
+
+        
 
         
 
@@ -52,8 +56,12 @@
 
         
 
+        
+
          method to get an <see
          cref="T:System.Net.Authorization" />
+
+        
 
         
 
@@ -69,6 +77,8 @@
 
         
 
+        
+
          queries each registered authentication module by calling the <see
          cref="M:System.Net.IAuthenticationModule.Authenticate(System.String,System.Net.WebRequest,System.Net.ICredentials)" />
 
@@ -76,8 +86,12 @@
 
         
 
+        
+
          method for each module. The first authentication module to return an <see
          cref="T:System.Net.Authorization" />
+
+        
 
         
 
@@ -93,6 +107,8 @@
 
         
 
+        
+
          by default. Additional authentication modules that implement the <see
          cref="T:System.Net.IAuthenticationModule" />
 
@@ -100,8 +116,12 @@
 
         
 
+        
+
          interface can be added using the <see
          cref="M:System.Net.AuthenticationManager.Register(System.Net.IAuthenticationModule)" />
+
+        
 
         
 
@@ -154,8 +174,12 @@
 
           
 
+          
+
           , <paramref
            name="request " />
+
+          
 
           
 
@@ -168,8 +192,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -187,6 +215,8 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Net.IAuthenticationModule.Authenticate(System.String,System.Net.WebRequest,System.Net.ICredentials)" />
 
@@ -194,8 +224,12 @@
 
             
 
+            
+
              method on each registered authentication module until one of the module responds with an <see
              cref="T:System.Net.Authorization" />
+
+            
 
             
 
@@ -211,8 +245,12 @@
 
             
 
+            
+
              instance returned is used to authenticate the request. If no authentication module can authenticate the request, the <see
              cref="M:System.Net.AuthenticationManager.Authenticate(System.String,System.Net.WebRequest,System.Net.ICredentials)" />
+
+            
 
             
 
@@ -223,6 +261,8 @@
           <para
             >Authentication modules are called in the order in which they are registered with the <see
              cref="T:System.Net.AuthenticationManager" />
+
+            
 
             
 
@@ -245,11 +285,15 @@
 
             
 
+            
+
              class containing the result of the authorization attempt. If there is no authentication module to respond to the challenge, this method returns null.</para
           >
         </returns>
         <param name="challenge">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -264,8 +308,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.WebRequest" />
+
+          
 
           
 
@@ -280,8 +328,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.ICredentials" />
+
+          
 
           
 
@@ -322,6 +374,8 @@
 
             
 
+            
+
              object that specifies credentials. </para
           >
         </remarks>
@@ -330,6 +384,8 @@
           <para
             >Gets or sets the credential policy to be used for resource requests made using the <see
              cref="T:System.Net.HttpWebRequest" />
+
+            
 
             
 
@@ -374,8 +430,12 @@
 
             
 
+            
+
              to <see
              cref="F:System.Net.Security.AuthenticationLevel.MutualAuthRequired" />
+
+            
 
             
 
@@ -391,8 +451,12 @@
 
             
 
+            
+
              requires mutual authentication, the SPN for the destination must be supplied by the client. If you know the SPN, you can add it to the <see
              cref="P:System.Net.AuthenticationManager.CustomTargetNameDictionary" />
+
+            
 
             
 
@@ -405,8 +469,12 @@
 
             
 
+            
+
              uses the <see
              cref="P:System.Net.WebRequest.RequestUri" />
+
+            
 
             
 
@@ -422,8 +490,12 @@
 
             
 
+            
+
              of the <see
              cref="P:System.Net.WebRequest.RequestUri" />
+
+            
 
             
 
@@ -436,6 +508,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Uri.Host" />
 
@@ -443,8 +517,12 @@
 
             
 
+            
+
             , and the <see
              cref="P:System.Uri.Port" />
+
+            
 
             
 
@@ -461,8 +539,12 @@
 
               
 
+              
+
                requires unrestricted <see
                cref="T:System.Net.WebPermission" />
+
+              
 
               
 
@@ -482,8 +564,12 @@
 
             
 
+            
+
              property is not set. The host name used in the request URL may be different from the Host header specified in the <see
              cref="T:System.Net.HttpRequestHeader" />
+
+            
 
             
 
@@ -497,6 +583,8 @@
           <para
             >Gets the dictionary that contains Service Principal Names (SPNs) that are used to identify hosts during Kerberos authentication for requests made using <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -542,6 +630,8 @@
 
             
 
+            
+
             is <see
              langword="null." />
           </para>
@@ -556,11 +646,15 @@
 
             
 
+            
+
              method returns an Authentication instance and sends the authorization information to the server preemptively instead of waiting for the resource to issue a challenge. This behavior is outlined in section 3.3 of RFC 2617 (HTTP Authentication: Basic and Digest Access Authentication). Authentication modules that support preauthentication allow clients to improve server efficiency by avoiding extra round trips caused by authentication challenges.</para
           >
           <para
             >Authorization modules that can preauthenticate requests set the <see
              cref="P:System.Net.IAuthenticationModule.CanPreAuthenticate" />
+
+            
 
             
 
@@ -583,8 +677,12 @@
 
             
 
+            
+
              class if the request can be preauthenticated; otherwise, null. If <paramref
              name="credentials" />
+
+            
 
             
 
@@ -600,8 +698,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.WebRequest" />
+
+          
 
           
 
@@ -616,8 +718,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.ICredentials" />
+
+          
 
           
 
@@ -661,8 +767,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -680,8 +790,12 @@
 
             
 
+            
+
              method adds authentication modules to the end of the list of modules called by the <see
              cref="M:System.Net.AuthenticationManager.Authenticate(System.String,System.Net.WebRequest,System.Net.ICredentials)" />
+
+            
 
             
 
@@ -694,8 +808,12 @@
 
             
 
+            
+
              is already registered, this method removes the registered module and adds <paramref
              name="authenticationModule" />
+
+            
 
             
 
@@ -715,8 +833,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.IAuthenticationModule" />
+
+          
 
           
 
@@ -760,6 +882,8 @@
 
             
 
+            
+
              that
    provides access to the list of registered
    authentication modules.</para
@@ -775,8 +899,12 @@
 
             
 
+            
+
              property provides an <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -789,8 +917,12 @@
 
             
 
+            
+
              method adds modules to the list, and the <see
              cref="M:System.Net.AuthenticationManager.Unregister(System.Net.IAuthenticationModule)" />
+
+            
 
             
 
@@ -839,8 +971,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -850,6 +986,8 @@
         >
         <exception cref="T:System.InvalidOperationException">
           <paramref name="authenticationModule " />
+
+          
 
           
 
@@ -867,6 +1005,8 @@
 
             
 
+            
+
              method removes the specified authentication module from the list of authentication modules called by the <see
              cref="M:System.Net.AuthenticationManager.Authenticate(System.String,System.Net.WebRequest,System.Net.ICredentials)" />
 
@@ -874,8 +1014,12 @@
 
             
 
+            
+
              method. The module must have been added to the list using the <see
              cref="M:System.Net.AuthenticationManager.Register(System.Net.IAuthenticationModule)" />
+
+            
 
             
 
@@ -895,8 +1039,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.IAuthenticationModule" />
+
+          
 
           
 
@@ -940,8 +1088,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -952,6 +1104,8 @@
         <exception cref="T:System.InvalidOperationException"
           >There is no registered module with the <paramref
            name="authenticationScheme " />
+
+          
 
           
 
@@ -969,6 +1123,8 @@
 
             
 
+            
+
              method removes the authentication module with the specified authentication scheme from the list of authentication modules called by the <see
              cref="M:System.Net.AuthenticationManager.Authenticate(System.String,System.Net.WebRequest,System.Net.ICredentials)" />
 
@@ -976,8 +1132,12 @@
 
             
 
+            
+
              method. The module must have been added to the list using the <see
              cref="M:System.Net.AuthenticationManager.Register(System.Net.IAuthenticationModule)" />
+
+            
 
             
 
@@ -992,6 +1152,8 @@
         </summary>
         <param name="authenticationScheme">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

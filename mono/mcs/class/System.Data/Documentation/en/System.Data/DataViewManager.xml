@@ -41,6 +41,8 @@
 
         
 
+        
+
          for each <see
          cref="T:System.Data.DataTable" />
 
@@ -48,8 +50,12 @@
 
         
 
+        
+
          in a <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -72,6 +78,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Data.DataViewManager" />
+
+            
 
             
 
@@ -108,8 +116,12 @@
 
             
 
+            
+
              class for the specified <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -125,8 +137,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -164,8 +180,12 @@
 
             
 
+            
+
              for the specified <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -184,11 +204,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="table">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -201,8 +225,12 @@
 
           
 
+          
+
            to use in the <see
            cref="T:System.Data.DataView" />
+
+          
 
           
 
@@ -236,8 +264,12 @@
 
             
 
+            
+
              to use with the <see
              cref="T:System.Data.DataViewManager" />
+
+            
 
             
 
@@ -279,6 +311,8 @@
 
             
 
+            
+
              directly.</para
           >
         </remarks>
@@ -314,6 +348,8 @@
 
             
 
+            
+
              for each <see
              cref="T:System.Data.DataTable" />
 
@@ -321,8 +357,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -364,6 +404,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -397,6 +439,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -407,8 +451,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ListChangedEventArgs" />
+
+          
 
           
 
@@ -447,6 +495,8 @@
 
             
 
+            
+
              event when a <see
              cref="T:System.Data.DataRelation" />
 
@@ -454,8 +504,12 @@
 
             
 
+            
+
              is added to or removed from the <see
              cref="T:System.Data.DataRelationCollection" />
+
+            
 
             
 
@@ -471,6 +525,8 @@
 
           
 
+          
+
           The source of the event. </param
         >
         <param name="e">
@@ -480,8 +536,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.CollectionChangeEventArgs" />
+
+          
 
           
 
@@ -520,8 +580,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -540,6 +604,8 @@
 
             
 
+            
+
              to an <see
              cref="T:System.Array" />
 
@@ -547,8 +613,12 @@
 
             
 
+            
+
             , starting at a particular <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -564,8 +634,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -578,8 +652,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -594,8 +672,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -627,8 +709,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -642,6 +728,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Collections.ICollection.Count" />
+
+            
 
             
 
@@ -677,8 +765,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -692,6 +784,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Collections.ICollection.IsSynchronized" />
+
+            
 
             
 
@@ -727,8 +821,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -742,6 +840,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Collections.ICollection.SyncRoot" />
+
+            
 
             
 
@@ -777,8 +877,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -797,6 +901,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -805,6 +911,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.Collections.IEnumerable.GetEnumerator" />
+
+            
 
             
 
@@ -839,8 +947,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -854,6 +966,8 @@
           <para
             >Adds an item to the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -873,6 +987,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -880,8 +996,12 @@
 
           
 
+          
+
            to add to the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -913,8 +1033,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -928,6 +1052,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.Collections.IList.Clear" />
+
+            
 
             
 
@@ -962,8 +1088,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -982,6 +1112,8 @@
 
             
 
+            
+
              contains a specific value.</para
           >
         </summary>
@@ -995,8 +1127,12 @@
 
             
 
+            
+
              is found in the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1012,6 +1148,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -1019,8 +1157,12 @@
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -1054,8 +1196,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1074,6 +1220,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1082,6 +1230,8 @@
           <para
             >The index of <paramref
              name="value" />
+
+            
 
             
 
@@ -1097,6 +1247,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -1104,8 +1256,12 @@
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -1140,8 +1296,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1160,6 +1320,8 @@
 
             
 
+            
+
              at the specified index.</para
           >
         </summary>
@@ -1170,8 +1332,12 @@
 
           
 
+          
+
           The zero-based index at which <paramref
            name="value" />
+
+          
 
           
 
@@ -1186,6 +1352,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -1193,8 +1361,12 @@
 
           
 
+          
+
            to insert into the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -1226,8 +1398,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1241,6 +1417,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Collections.IList.IsFixedSize" />
+
+            
 
             
 
@@ -1273,8 +1451,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1288,6 +1470,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Collections.IList.IsReadOnly" />
+
+            
 
             
 
@@ -1345,8 +1529,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1365,11 +1553,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1382,8 +1574,12 @@
 
           
 
+          
+
            to remove from the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -1417,8 +1613,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1437,11 +1637,15 @@
 
             
 
+            
+
              item at the specified index.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1478,8 +1682,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -1498,6 +1706,8 @@
 
             
 
+            
+
              to the indexes used for searching.</para
           >
         </summary>
@@ -1508,8 +1718,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -1541,8 +1755,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -1561,6 +1779,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1569,6 +1789,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.ComponentModel.IBindingList.AddNew" />
+
+            
 
             
 
@@ -1604,8 +1826,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -1619,6 +1845,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.ComponentModel.IBindingList.AllowEdit" />
+
+            
 
             
 
@@ -1654,8 +1882,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -1669,6 +1901,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.ComponentModel.IBindingList.AllowNew" />
+
+            
 
             
 
@@ -1704,8 +1938,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -1719,6 +1957,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.ComponentModel.IBindingList.AllowRemove" />
+
+            
 
             
 
@@ -1757,8 +1997,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -1777,8 +2021,12 @@
 
             
 
+            
+
              and a <see
              cref="T:System.ComponentModel.ListSortDirection" />
+
+            
 
             
 
@@ -1794,8 +2042,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -1810,8 +2062,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.ComponentModel.ListSortDirection" />
+
+          
 
           
 
@@ -1849,8 +2105,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -1869,6 +2129,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1877,6 +2139,8 @@
           <para
             >The index of the row that has the given <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -1892,8 +2156,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -1903,6 +2171,8 @@
         >
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1937,8 +2207,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -1952,6 +2226,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.ComponentModel.IBindingList.IsSorted" />
+
+            
 
             
 
@@ -1989,8 +2265,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -2009,6 +2289,8 @@
 
             
 
+            
+
              from the indexes used for searching.</para
           >
         </summary>
@@ -2019,8 +2301,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -2052,8 +2338,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -2067,6 +2357,8 @@
           <para
             >Removes any sort applied using <see
              cref="M:System.ComponentModel.IBindingList.ApplySort(System.ComponentModel.PropertyDescriptor,System.ComponentModel.ListSortDirection)" />
+
+            
 
             
 
@@ -2102,8 +2394,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -2117,6 +2413,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.ComponentModel.IBindingList.SortDirection" />
+
+            
 
             
 
@@ -2152,8 +2450,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -2167,6 +2469,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.ComponentModel.IBindingList.SortProperty" />
+
+            
 
             
 
@@ -2202,8 +2506,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -2217,6 +2525,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.ComponentModel.IBindingList.SupportsChangeNotification" />
+
+            
 
             
 
@@ -2252,8 +2562,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -2267,6 +2581,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.ComponentModel.IBindingList.SupportsSearching" />
+
+            
 
             
 
@@ -2302,8 +2618,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.IBindingList" />
+
+            
 
             
 
@@ -2317,6 +2637,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.ComponentModel.IBindingList.SupportsSorting" />
+
+            
 
             
 
@@ -2356,8 +2678,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.ITypedList" />
+
+            
 
             
 
@@ -2371,6 +2697,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.ComponentModel.ITypedList.GetItemProperties(System.ComponentModel.PropertyDescriptor[])" />
+
+            
 
             
 
@@ -2408,8 +2736,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ComponentModel.ITypedList" />
+
+            
 
             
 
@@ -2433,8 +2765,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.ComponentModel.PropertyDescriptor" />
+
+          
 
           
 
@@ -2469,6 +2805,8 @@
 
             
 
+            
+
              event when a <see
              cref="T:System.Data.DataTable" />
 
@@ -2476,8 +2814,12 @@
 
             
 
+            
+
              is added to or removed from the <see
              cref="T:System.Data.DataTableCollection" />
+
+            
 
             
 
@@ -2493,6 +2835,8 @@
 
           
 
+          
+
           The source of the event. </param
         >
         <param name="e">
@@ -2502,8 +2846,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.CollectionChangeEventArgs" />
+
+          
 
           
 

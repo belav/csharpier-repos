@@ -40,6 +40,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -73,8 +75,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.HyperLink.NavigateUrl" />
+
+            
 
             
 
@@ -87,6 +93,8 @@
 
             
 
+            
+
              control are data-bound. If the <see
              cref="P:System.Web.UI.WebControls.HyperLink.Text" />
 
@@ -94,8 +102,12 @@
 
             
 
+            
+
              property is data-bound, this method sets the value of the property to "DataBound". If the <see
              cref="P:System.Web.UI.WebControls.HyperLink.NavigateUrl" />
+
+            
 
             
 
@@ -115,8 +127,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+          
 
           
 
@@ -131,8 +147,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Control" />
+
+          
 
           
 

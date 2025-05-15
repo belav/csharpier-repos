@@ -53,6 +53,8 @@
 
           
 
+          
+
           The stream to write to.</param
         >
         <param name="dictionary">
@@ -62,8 +64,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionary" />
+
+          
 
           
 
@@ -78,8 +84,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlBinaryWriterSession" />
+
+          
 
           
 
@@ -89,6 +99,8 @@
         >
         <param name="ownsStream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

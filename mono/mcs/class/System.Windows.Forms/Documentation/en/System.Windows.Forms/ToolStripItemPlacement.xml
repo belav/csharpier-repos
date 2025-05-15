@@ -21,6 +21,8 @@
 
         
 
+        
+
          is to be layed out.</para
       >
     </summary>
@@ -44,8 +46,12 @@
 
             
 
+            
+
              is to be layed out on the main <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -77,6 +83,8 @@
 
             
 
+            
+
              is not to be layed out on the screen.</para
           >
         </summary>
@@ -103,8 +111,12 @@
 
             
 
+            
+
              is to be layed out on the overflow <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 

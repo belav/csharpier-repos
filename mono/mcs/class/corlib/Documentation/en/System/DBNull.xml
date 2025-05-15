@@ -44,6 +44,8 @@
 
         
 
+        
+
          class represents a nonexistent value. In a database, for example, a column in a row of a table might not contain any data whatsoever. That is, the column is considered to not exist at all instead of merely not having a value. A <see
          cref="T:System.DBNull" />
 
@@ -51,8 +53,12 @@
 
         
 
+        
+
          object represents the nonexistent column. Additionally, COM interop uses the <see
          cref="T:System.DBNull" />
+
+        
 
         
 
@@ -68,8 +74,12 @@
 
         
 
+        
+
          type is a singleton class, which means only one <see
          cref="T:System.DBNull" />
+
+        
 
         
 
@@ -82,8 +92,12 @@
 
         
 
+        
+
          member represents the sole <see
          cref="T:System.DBNull" />
+
+        
 
         
 
@@ -96,8 +110,12 @@
 
         
 
+        
+
          can be used to explicitly assign a nonexistent value to a database field, although most ADO.NET data providers automatically assign values of <see
          cref="T:System.DBNull" />
+
+        
 
         
 
@@ -110,8 +128,12 @@
 
         
 
+        
+
          value by passing the value of that field to the DBNull.Value.Equals method. However, some languages and database objects supply methods that make it easier to determine whether the value of a database field is <see
          cref="F:System.DBNull.Value" />
+
+        
 
         
 
@@ -124,6 +146,8 @@
 
         
 
+        
+
          method, the <see
          cref="M:System.Data.DataTableReader.IsDBNull(System.Int32)" />
 
@@ -131,8 +155,12 @@
 
         
 
+        
+
          method, and the <see
          cref="M:System.Data.IDataRecord.IsDBNull(System.Int32)" />
+
+        
 
         
 
@@ -148,8 +176,12 @@
 
         
 
+        
+
          object. In an object-oriented programming language, null means the absence of a reference to an object. <see
          cref="T:System.DBNull" />
+
+        
 
         
 
@@ -198,8 +230,12 @@
 
             
 
+            
+
              interface and returns the data needed to serialize the <see
              cref="T:System.DBNull" />
+
+            
 
             
 
@@ -215,6 +251,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
@@ -222,8 +260,12 @@
 
           
 
+          
+
            object containing information required to serialize the <see
            cref="T:System.DBNull" />
+
+          
 
           
 
@@ -238,6 +280,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
 
@@ -245,8 +289,12 @@
 
           
 
+          
+
            object containing the source and destination of the serialized stream associated with the <see
            cref="T:System.DBNull" />
+
+          
 
           
 
@@ -284,8 +332,12 @@
 
             
 
+            
+
              value for <see
              cref="T:System.DBNull" />
+
+            
 
             
 
@@ -304,6 +356,8 @@
 
             
 
+            
+
              value for <see
              cref="T:System.DBNull" />
 
@@ -311,8 +365,12 @@
 
             
 
+            
+
             , which is <see
              cref="F:System.TypeCode.DBNull" />
+
+            
 
             
 
@@ -356,6 +414,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -370,8 +430,12 @@
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -411,6 +475,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -425,8 +491,12 @@
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -466,6 +536,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -480,8 +552,12 @@
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -524,6 +600,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -538,8 +616,12 @@
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -582,6 +664,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -596,8 +680,12 @@
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -640,6 +728,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -654,8 +744,12 @@
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -698,6 +792,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -712,8 +808,12 @@
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -753,6 +853,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -767,8 +869,12 @@
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -811,6 +917,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -825,8 +933,12 @@
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -869,6 +981,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -883,8 +997,12 @@
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -927,6 +1045,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -941,8 +1061,12 @@
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -986,8 +1110,12 @@
 
             
 
+            
+
              parameter specifies <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -1000,8 +1128,12 @@
 
             
 
+            
+
             , the return value is the current <see
              cref="T:System.DBNull" />
+
+            
 
             
 
@@ -1014,6 +1146,8 @@
 
             
 
+            
+
              parameter specifies <see
              cref="T:System.String" />
 
@@ -1021,8 +1155,12 @@
 
             
 
+            
+
             , the return value is the string returned by the <see
              cref="M:System.DBNull.ToString" />
+
+            
 
             
 
@@ -1041,6 +1179,8 @@
 
             
 
+            
+
              object to the specified type.</para
           >
         </summary>
@@ -1049,6 +1189,8 @@
           <para
             >The boxed equivalent of the current <see
              cref="T:System.DBNull" />
+
+            
 
             
 
@@ -1064,8 +1206,12 @@
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -1108,6 +1254,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1122,8 +1270,12 @@
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -1166,6 +1318,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1180,8 +1334,12 @@
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -1224,6 +1382,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1238,8 +1398,12 @@
 
           
 
+          
+
           An object that implements the <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -1277,6 +1441,8 @@
 
             
 
+            
+
             ).</para
           >
         </summary>
@@ -1285,6 +1451,8 @@
           <para
             >An empty string (<see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -1325,6 +1493,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1333,6 +1503,8 @@
           <para
             >An empty string (<see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -1348,8 +1520,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IFormatProvider" />
+
+          
 
           
 
@@ -1385,6 +1561,8 @@
 
             
 
+            
+
              is a singleton class, which means only this instance of this class can exist.</para
           >
           <para
@@ -1395,8 +1573,12 @@
 
             
 
+            
+
              property to explicitly assign a <see
              cref="T:System.DBNull" />
+
+            
 
             
 
@@ -1412,8 +1594,12 @@
 
             
 
+            
+
             , you can pass the field value to the DBNull.Value.Equals method. However, this method is rarely used because there are a number of other ways to evaluate a database field for missing data. These include the Visual Basic IsDBNull function, the <see
              cref="M:System.Convert.IsDBNull(System.Object)" />
+
+            
 
             
 
@@ -1426,8 +1612,12 @@
 
             
 
+            
+
              method, the <see
              cref="M:System.Data.IDataRecord.IsDBNull(System.Int32)" />
+
+            
 
             
 
@@ -1441,6 +1631,8 @@
           <para
             >Represents the sole instance of the <see
              cref="T:System.DBNull" />
+
+            
 
             
 

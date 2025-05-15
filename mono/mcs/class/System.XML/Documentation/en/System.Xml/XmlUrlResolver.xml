@@ -39,8 +39,12 @@
 
         
 
+        
+
          namespace. It supports the file:// and http:// protocols and requests from the <see
          cref="T:System.Net.WebRequest" />
+
+        
 
         
 
@@ -56,6 +60,8 @@
 
           
 
+          
+
            objects can contain sensitive information such as user credentials. You should be careful when you cache <see
            cref="T:System.Xml.XmlUrlResolver" />
 
@@ -63,8 +69,12 @@
 
           
 
+          
+
            objects and should not pass <see
            cref="T:System.Xml.XmlUrlResolver" />
+
+          
 
           
 
@@ -110,6 +120,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -140,6 +152,8 @@
           <para
             >Gets or sets the cache policy for the underlying <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -178,6 +192,8 @@
           <para
             >A <see
              cref="T:System.Net.ICredentials" />
+
+            
 
             
 
@@ -265,6 +281,8 @@ public class App {
 
             
 
+            
+
              property to a credential cache.</para
           >
           <code>NetworkCredential myCred = new NetworkCredential(UserName,SecurelyStoredPassword,Domain); 
@@ -316,8 +334,12 @@ resolver.Credentials = myCache;</code>
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -332,8 +354,12 @@ resolver.Credentials = myCache;</code>
 
           
 
+          
+
            is not <see
            langword="null" />
+
+          
 
           
 
@@ -346,8 +372,12 @@ resolver.Credentials = myCache;</code>
 
           
 
+          
+
           (<see
            cref="T:System.IO.Stream" qualify="true" />
+
+          
 
           
 
@@ -362,8 +392,12 @@ resolver.Credentials = myCache;</code>
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -382,6 +416,8 @@ resolver.Credentials = myCache;</code>
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -393,8 +429,12 @@ resolver.Credentials = myCache;</code>
 
               
 
+              
+
                method by implementing IStream to limit the number of bytes read. This helps to guard against situations where malicious code attempts to pass an infinite stream of bytes to the <see
                cref="M:System.Xml.XmlUrlResolver.GetEntity(System.Uri,System.String,System.Type)" />
+
+              
 
               
 
@@ -418,6 +458,8 @@ resolver.Credentials = myCache;</code>
 
             
 
+            
+
              object or null if a type other than stream is specified.</para
           >
         </returns>
@@ -428,8 +470,12 @@ resolver.Credentials = myCache;</code>
 
           
 
+          
+
           The URI returned from <see
            cref="M:System.Xml.XmlResolver.ResolveUri(System.Uri,System.String)" />
+
+          
 
           
 
@@ -444,6 +490,8 @@ resolver.Credentials = myCache;</code>
 
           
 
+          
+
           The current implementation does not use this parameter when resolving URIs. This is provided for future extensibility purposes. For example, this can be mapped to the xlink: role and used as an implementation specific argument in other scenarios.</param
         >
         <param name="ofObjectToReturn">
@@ -453,8 +501,12 @@ resolver.Credentials = myCache;</code>
 
           
 
+          
+
           The type of object to return. The current implementation only returns <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -510,6 +562,8 @@ resolver.Credentials = myCache;</code>
 
             
 
+            
+
              object or null if a type other than stream is specified.</para
           >
         </returns>
@@ -520,8 +574,12 @@ resolver.Credentials = myCache;</code>
 
           
 
+          
+
           The URI returned from <see
            cref="M:System.Xml.XmlResolver.ResolveUri(System.Uri,System.String)" />
+
+          
 
           
 
@@ -536,6 +594,8 @@ resolver.Credentials = myCache;</code>
 
           
 
+          
+
           The current implementation does not use this parameter when resolving URIs. This is provided for future extensibility purposes. For example, this can be mapped to the xlink: role and used as an implementation specific argument in other scenarios.</param
         >
         <param name="ofObjectToReturn">
@@ -545,8 +605,12 @@ resolver.Credentials = myCache;</code>
 
           
 
+          
+
           The type of object to return. The current implementation only returns <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -577,6 +641,8 @@ resolver.Credentials = myCache;</code>
           <para
             >Gets or sets the network proxy for the underlying <see
              cref="T:System.Net.WebRequest" />
+
+            
 
             
 
@@ -617,8 +683,12 @@ resolver.Credentials = myCache;</code>
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -644,11 +714,15 @@ resolver.Credentials = myCache;</code>
 
             
 
+            
+
              representing the absolute URI, or null if the relative URI cannot be resolved.</para
           >
         </returns>
         <param name="baseUri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -663,6 +737,8 @@ resolver.Credentials = myCache;</code>
 
           
 
+          
+
           The URI to resolve. The URI can be absolute or relative. If absolute, this value effectively replaces the <paramref
            name="baseUri" />
 
@@ -670,8 +746,12 @@ resolver.Credentials = myCache;</code>
 
           
 
+          
+
            value. If relative, it combines with the <paramref
            name="baseUri" />
+
+          
 
           
 

@@ -8,8 +8,12 @@
 
     
 
+    
+
      in an expression, every other occurrence of the same identifier as a <non_terminal
      where="14.5.2">simple-name</non_terminal>
+
+    
 
     
 
@@ -22,8 +26,12 @@
 
     
 
+    
+
     ) or  <non_terminal
      where="15.7.2">switch-block</non_terminal>
+
+    
 
     
 
@@ -36,12 +44,14 @@
 
     
 
+    
+
     ) must refer to the same entity. This rule ensures that the meaning of a name in the context of an expression is always the same within a block. </paragraph
   >
   <paragraph
     >The example <code_example
     >
-<![CDATA[
+      <![CDATA[
 class Test  
 {  
    double x;  
@@ -59,9 +69,11 @@ class Test
 
     
 
+    
+
     results in a compile-time error because x refers to different entities within the outer block (the extent of which includes the nested block in the if statement). In contrast, the example <code_example
     >
-<![CDATA[
+      <![CDATA[
 class Test  
 {  
    double x;  
@@ -81,6 +93,8 @@ class Test
 
     
 
+    
+
     is permitted because the name x is never used in the outer block. </paragraph
   >
   <paragraph
@@ -91,11 +105,13 @@ class Test
 
     
 
+    
+
     ). <example
 
       >[Example: For example: <code_example
       >
-<![CDATA[
+        <![CDATA[
 struct Point  
 {  
    int x, y;  

@@ -36,8 +36,12 @@
 
         
 
+        
+
          attribute to a service implementation to specify service-wide execution behavior. (To specify execution behavior at the method level, use the <see
          cref="T:System.ServiceModel.OperationBehaviorAttribute" />
+
+        
 
         
 
@@ -52,10 +56,14 @@
 
         
 
+        
+
         . </para
       >
       <para>
         <see cref="T:System.ServiceModel.ServiceBehaviorAttribute" />
+
+        
 
         
 
@@ -70,12 +78,16 @@
 
         
 
+        
+
         . For more information about the underlying runtime properties that some of the following properties set, see <format
          type="text/html">
           <a href="954c138a-1cd0-45a0-8abe-e4d2b8ff5400"
             >Extending ServiceHost and the Dispatcher</a
           >
         </format>
+
+        
 
         
 
@@ -93,6 +105,8 @@
 
             
 
+            
+
              property specifies the type of filter that the dispatcher system uses to locate the endpoint that handles requests.</para
           >
         </item>
@@ -100,6 +114,8 @@
           <para
             >The <see
              cref="P:System.ServiceModel.ServiceBehaviorAttribute.AutomaticSessionShutdown" />
+
+            
 
             
 
@@ -117,6 +133,8 @@
 
             
 
+            
+
              property controls the internal threading model, enabling support for reentrant or multithreaded services.</para
           >
         </item>
@@ -124,6 +142,8 @@
           <para
             >The <see
              cref="P:System.ServiceModel.ServiceBehaviorAttribute.ConfigurationName" />
+
+            
 
             
 
@@ -141,6 +161,8 @@
 
             
 
+            
+
              property enables the run time to ignore extra serialization information that is not required to process the message.</para
           >
         </item>
@@ -148,6 +170,8 @@
           <para
             >The <see
              cref="P:System.ServiceModel.ServiceBehaviorAttribute.IncludeExceptionDetailInFaults" />
+
+            
 
             
 
@@ -165,6 +189,8 @@
 
             
 
+            
+
              property specifies whether and when services and their service objects are to be recycled during an exchange with a client.</para
           >
         </item>
@@ -172,6 +198,8 @@
           <para
             >The <see
              cref="P:System.ServiceModel.ServiceBehaviorAttribute.MaxItemsInObjectGraph" />
+
+            
 
             
 
@@ -189,8 +217,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ServiceModel.ServiceBehaviorAttribute.Namespace" />
+
+            
 
             
 
@@ -208,6 +240,8 @@
 
             
 
+            
+
              property specifies whether the service object is recycled when a transaction completes.</para
           >
         </item>
@@ -215,6 +249,8 @@
           <para
             >The <see
              cref="P:System.ServiceModel.ServiceBehaviorAttribute.TransactionAutoCompleteOnSessionClose" />
+
+            
 
             
 
@@ -232,6 +268,8 @@
 
             
 
+            
+
              property specifies the transaction isolation level that the contract supports.</para
           >
         </item>
@@ -239,6 +277,8 @@
           <para
             >The <see
              cref="P:System.ServiceModel.ServiceBehaviorAttribute.TransactionTimeout" />
+
+            
 
             
 
@@ -256,6 +296,8 @@
 
             
 
+            
+
              property indicates whether to synchronize inbound method calls with the user interface thread automatically.</para
           >
         </item>
@@ -263,6 +305,8 @@
           <para
             >The <see
              cref="P:System.ServiceModel.ServiceBehaviorAttribute.ValidateMustUnderstand" />
+
+            
 
             
 
@@ -280,8 +324,12 @@
 
         
 
+        
+
          property can also be set using an application configuration file. For details, see <see
          cref="P:System.ServiceModel.Description.ServiceDebugBehavior.IncludeExceptionDetailInFaults" />
+
+        
 
         
 
@@ -318,6 +366,8 @@
 
             
 
+            
+
              are:</para
           >
           <list type="bullet">
@@ -330,8 +380,12 @@
 
                 
 
+                
+
                  is set to <see
                  cref="F:System.ServiceModel.AddressFilterMode.Exact" />
+
+                
 
                 
 
@@ -349,6 +403,8 @@
 
                 
 
+                
+
                  property is true.</para
               >
             </item>
@@ -361,8 +417,12 @@
 
                 
 
+                
+
                  is set to <see
                  cref="F:System.ServiceModel.ConcurrencyMode.Single" />
+
+                
 
                 
 
@@ -380,6 +440,8 @@
 
                 
 
+                
+
                  property is the namespace-qualified name of the type without the assembly information.</para
               >
             </item>
@@ -387,6 +449,8 @@
               <para
                 >The <see
                  cref="P:System.ServiceModel.ServiceBehaviorAttribute.IgnoreExtensionDataObject" />
+
+                
 
                 
 
@@ -404,6 +468,8 @@
 
                 
 
+                
+
                  property is set to 64KB.</para
               >
             </item>
@@ -411,6 +477,8 @@
               <para
                 >The <see
                  cref="P:System.ServiceModel.ServiceBehaviorAttribute.Name" />
+
+                
 
                 
 
@@ -428,6 +496,8 @@
 
                 
 
+                
+
                  property is "http://tempuri.org". </para
               >
             </item>
@@ -435,6 +505,8 @@
               <para
                 >The <see
                  cref="P:System.ServiceModel.ServiceBehaviorAttribute.ReleaseServiceInstanceOnTransactionComplete" />
+
+                
 
                 
 
@@ -451,12 +523,16 @@
 
                 
 
+                
+
                  is false.</para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.ServiceModel.ServiceBehaviorAttribute.UseSynchronizationContext" />
+
+                
 
                 
 
@@ -474,6 +550,8 @@
 
                 
 
+                
+
                  property is false.</para
               >
             </item>
@@ -486,8 +564,12 @@
 
                 
 
+                
+
                  property is <see
                  cref="F:System.Transactions.IsolationLevel.Unspecified" />
+
+                
 
                 
 
@@ -505,8 +587,12 @@
 
                 
 
+                
+
                  property is set to <see
                  cref="F:System.TimeSpan.Zero" />
+
+                
 
                 
 
@@ -524,6 +610,8 @@
 
                 
 
+                
+
                  property is true.</para
               >
             </item>
@@ -534,6 +622,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.ServiceBehaviorAttribute" />
+
+            
 
             
 
@@ -573,6 +663,8 @@
 
             
 
+            
+
              that is used by the dispatcher to route incoming messages to the correct endpoint.</para
           >
         </summary>
@@ -595,6 +687,8 @@
           <para
             >By default when a client closes an output session and the service has finished processing any remaining messages the server closes the session. Setting <see
              cref="P:System.ServiceModel.ServiceBehaviorAttribute.AutomaticSessionShutdown" />
+
+            
 
             
 
@@ -639,8 +733,12 @@
 
               
 
+              
+
                property interacts with some other settings. For example, if the <see
                cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
+
+              
 
               
 
@@ -653,8 +751,12 @@
 
               
 
+              
+
                the result is that your service can only process one message at a time unless you also set the <see
                cref="P:System.ServiceModel.ServiceBehaviorAttribute.ConcurrencyMode" />
+
+              
 
               
 
@@ -667,8 +769,12 @@
 
               
 
+              
+
               . This property also produces behavior in combination with the <see
                cref="P:System.ServiceModel.ServiceContractAttribute.SessionMode" />
+
+              
 
               
 
@@ -685,12 +791,16 @@
 
               
 
+              
+
               .</para
             >
           </block>
           <para
             >Setting <see
              cref="T:System.ServiceModel.ConcurrencyMode" />
+
+            
 
             
 
@@ -703,8 +813,12 @@
 
             
 
+            
+
              instructs the system to restrict instances of the service to one thread of execution at a time, which frees you from dealing with threading issues. A value of <see
              cref="F:System.ServiceModel.ConcurrencyMode.Multiple" />
+
+            
 
             
 
@@ -719,12 +833,16 @@
 
             
 
+            
+
              also restricts access to a single thread at a time; while the operation is processing, no other message can enter the operation. If during the operation a call to another service leaves, the current message loses the lock on the operation, which is free to process other messages. When the service call out returns, the lock is reestablished and the original message can continue processing to its conclusion or until another call out of the operation occurs.</para
           >
           <block subset="none" type="note">
             <para
               >It is your responsibility to leave your object state consistent before callouts and you must confirm that operation-local data is valid after callouts. Note that the service instance is unlocked only by calling another service over a indigo2 channel. In this case, the called service can reenter the first service via a callback. If the first service is not reentrant, the sequence of calls results in a deadlock. For details, see <see
                cref="T:System.ServiceModel.ConcurrencyMode" />
+
+              
 
               
 
@@ -754,8 +872,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.ServiceModel.ConcurrencyMode.Reentrant" />
+
+            
 
             
 
@@ -768,8 +890,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.ServiceModel.ConcurrencyMode.Multiple" />
+
+            
 
             
 
@@ -786,8 +912,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.ServiceModel.ConcurrencyMode.Single" />
+
+            
 
             
 
@@ -804,8 +934,12 @@
 
               
 
+              
+
                is thrown at runtime if <see
                cref="P:System.ServiceModel.ServiceBehaviorAttribute.ReleaseServiceInstanceOnTransactionComplete" />
+
+              
 
               
 
@@ -818,8 +952,12 @@
 
               
 
+              
+
                property is set to <see
                cref="F:System.ServiceModel.ConcurrencyMode.Single" />
+
+              
 
               
 
@@ -836,8 +974,12 @@
 
             
 
+            
+
              to false if there is an operation with <see
              cref="P:System.ServiceModel.OperationBehaviorAttribute.TransactionScopeRequired" />
+
+            
 
             
 
@@ -850,6 +992,8 @@
 
             
 
+            
+
              to <see
              cref="F:System.ServiceModel.ConcurrencyMode.Reentrant" />
 
@@ -857,8 +1001,12 @@
 
             
 
+            
+
             . Otherwise a validation exception is thrown because the default value of <see
              cref="P:System.ServiceModel.ServiceBehaviorAttribute.ReleaseServiceInstanceOnTransactionComplete" />
+
+            
 
             
 
@@ -874,12 +1022,16 @@
 
             
 
+            
+
              and other properties that can alter runtime behavior. For a complete description of these interactions, see <format
              type="text/html">
               <a href="50797a3b-7678-44ed-8138-49ac1602f35b"
                 >Sessions, Instancing, and Concurrency</a
               >
             </format>
+
+            
 
             
 
@@ -967,8 +1119,12 @@
 
             
 
+            
+
              interface, it stores any extra data it doesn’t know about that comes over the wire when deserializing into that type. For example, if a type Person has members FirstName and LastName, and an element called PhoneNumber comes in, it is stored. When later serializing the type, PhoneNumber will be re-emitted. The problem is that the schema for Person exported by that service only has FirstName and LastName, so indigo1 generates a schema-invalid instance! If strict schema compliance is important, you can set <see
              cref="P:System.ServiceModel.ServiceBehaviorAttribute.IgnoreExtensionDataObject" />
+
+            
 
             
 
@@ -984,10 +1140,14 @@
 
             
 
+            
+
              setting, indigo2 always processes known data (both in and out) and does not throw exceptions when extra data comes in. You can also set this property using the <format
              type="text/html">
               <a href="f41fb4d5-24e7-4059-8010-286a30bfea93">&lt;dataContractSerializer&gt;</a>
             </format>
+
+            
 
             
 
@@ -1030,11 +1190,15 @@
 
             
 
+            
+
              to true to enable exception information to flow to clients for debugging purposes. This property requires a binding that supports either request-response or duplex messaging. </para
           >
           <para
             >In all managed applications, processing errors are represented by <see
              cref="T:System.Exception" />
+
+            
 
             
 
@@ -1051,12 +1215,16 @@
 
             
 
+            
+
             .</para
           >
           <para>During development, you may want your service to also send other exceptions back to the client to assist you in debugging. This is a development-only feature and should not be employed in deployed services.</para>
           <para
             >To facilitate debugging development, set the <see
              cref="P:System.ServiceModel.ServiceBehaviorAttribute.IncludeExceptionDetailInFaults" />
+
+            
 
             
 
@@ -1072,8 +1240,12 @@
 
             
 
+            
+
              objects of type <see
              cref="T:System.ServiceModel.ExceptionDetail" />
+
+            
 
             
 
@@ -1090,6 +1262,8 @@
 
               
 
+              
+
                to true enables clients to obtain information about internal service method exceptions; it is only recommended as a way of temporarily debugging a service application. In addition, the WSDL for a method that returns unhandled managed exceptions in this way does not contain the contract for the <see
                cref="T:System.ServiceModel.FaultException`1" />
 
@@ -1097,8 +1271,12 @@
 
               
 
+              
+
                of type <see
                cref="T:System.ServiceModel.ExceptionDetail" />
+
+              
 
               
 
@@ -1118,6 +1296,8 @@
 
             
 
+            
+
              element, as the following code example shows.</para
           >
           <para>code reference: OperationBehaviorAttribute1#10</para>
@@ -1132,8 +1312,12 @@
 
             
 
+            
+
              of type <see
              cref="T:System.ServiceModel.ExceptionDetail" />
+
+            
 
             
 
@@ -1172,8 +1356,12 @@
 
             
 
+            
+
              property to specify when new service objects are created. Because the service object is not directly connected to the communicating channel, the lifetime of the service objects is independent of the lifetime of the channel between a client and the service application. The default value, <see
              cref="F:System.ServiceModel.InstanceContextMode.PerSession" />
+
+            
 
             
 
@@ -1183,6 +1371,8 @@
           >
           <para>
             <see cref="F:System.ServiceModel.InstanceContextMode.PerSession" />
+
+            
 
             
 
@@ -1199,8 +1389,12 @@
 
               
 
+              
+
                property interacts with some other settings. For example, if the <see
                cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
+
+              
 
               
 
@@ -1213,8 +1407,12 @@
 
               
 
+              
+
                the result is that your service can only process one message at a time unless you also set the <see
                cref="P:System.ServiceModel.ServiceBehaviorAttribute.ConcurrencyMode" />
+
+              
 
               
 
@@ -1227,8 +1425,12 @@
 
               
 
+              
+
               . This property also produces behavior in combination with the <see
                cref="P:System.ServiceModel.ServiceContractAttribute.SessionMode" />
+
+              
 
               
 
@@ -1245,6 +1447,8 @@
 
               
 
+              
+
               . </para
             >
           </block>
@@ -1256,8 +1460,12 @@
 
             
 
+            
+
              constructor and passes an object to use as the service), the service class must set <see
              cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
+
+            
 
             
 
@@ -1294,10 +1502,14 @@
 
             
 
+            
+
              property set a limit on the number of items in an object graph that are serialized. You can also set this property using the <format
              type="text/html">
               <a href="f41fb4d5-24e7-4059-8010-286a30bfea93">&lt;dataContractSerializer&gt;</a>
             </format>
+
+            
 
             
 
@@ -1378,8 +1590,12 @@
 
             
 
+            
+
              to false if there is an operation with <see
              cref="P:System.ServiceModel.OperationBehaviorAttribute.TransactionScopeRequired" />
+
+            
 
             
 
@@ -1392,8 +1608,12 @@
 
             
 
+            
+
              to <see
              cref="F:System.ServiceModel.ConcurrencyMode.Reentrant" />
+
+            
 
             
 
@@ -1406,11 +1626,15 @@
 
             
 
+            
+
              is true.</para
           >
           <para
             >In addition, it is important to realize that if the service is created by passing a service object to the <see
              cref="M:System.ServiceModel.ServiceHost.#ctor(System.Object,System.Uri[])" />
+
+            
 
             
 
@@ -1453,8 +1677,12 @@
 
             
 
+            
+
              is set to a non-null value, then the <see
              cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
+
+            
 
             
 
@@ -1467,8 +1695,12 @@
 
             
 
+            
+
              or an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -1483,6 +1715,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1533,10 +1767,14 @@
 
           
 
+          
+
           The service description.</param
         >
         <param name="serviceHostBase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1551,10 +1789,14 @@
 
           
 
+          
+
           The service endpoints.</param
         >
         <param name="parameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1597,10 +1839,14 @@
 
           
 
+          
+
           The service description.</param
         >
         <param name="serviceHostBase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1643,10 +1889,14 @@
 
           
 
+          
+
           The service description.</param
         >
         <param name="serviceHostBase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1709,6 +1959,8 @@
 
             
 
+            
+
             , specifies that no updating or inserting can occur until the transaction is complete. </para
           >
           <para>This property can also be used to restrict the isolation level of incoming transactions flowed from a client.</para>
@@ -1741,10 +1993,14 @@
 
             
 
+            
+
              property. You can also set this property using the <format
              type="text/html">
               <a href="ada536cf-97dc-4cd7-89ec-ed1466c1c557">&lt;serviceTimeOuts&gt;</a>
             </format>
+
+            
 
             
 
@@ -1781,8 +2037,12 @@
 
             
 
+            
+
              is set to true, synchronizes all calls to the service to run on the thread captured from the <see
              cref="T:System.Threading.SynchronizationContext" />
+
+            
 
             
 
@@ -1819,8 +2079,12 @@
 
             
 
+            
+
              property to turn off the enforced validation of arriving message headers. In normal execution, message headers are compared against the <see
              cref="P:System.ServiceModel.Channels.MessageHeaders.UnderstoodHeaders" />
+
+            
 
             
 

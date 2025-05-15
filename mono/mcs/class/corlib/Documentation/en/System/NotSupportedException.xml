@@ -43,6 +43,8 @@
 
         
 
+        
+
          for the unsupported methods.</para
       >
       <para>
@@ -52,8 +54,12 @@
 
         
 
+        
+
          is also thrown by <see
          cref="N:System.IO" />
+
+        
 
         
 
@@ -69,10 +75,14 @@
 
         
 
+        
+
         .</para
       >
       <para>
         <see cref="T:System.NotSupportedException" />
+
+        
 
         
 
@@ -88,8 +98,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.NotSupportedException.#ctor" />
+
+        
 
         
 
@@ -128,6 +142,8 @@
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -178,8 +194,12 @@
 
             
 
+            
+
              class, setting the <see
              cref="P:System.Exception.Message" />
+
+            
 
             
 
@@ -217,6 +237,8 @@
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -267,11 +289,15 @@
 
             
 
+            
+
              class with a specified error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -284,8 +310,12 @@
 
           
 
+          
+
            that describes the error. The content of <paramref
            name="message" />
+
+          
 
           
 
@@ -330,6 +360,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -338,6 +370,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -353,10 +387,14 @@
 
           
 
+          
+
           The object that holds the serialized object data. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -401,8 +439,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -415,11 +457,15 @@
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -470,11 +516,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -489,8 +539,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 

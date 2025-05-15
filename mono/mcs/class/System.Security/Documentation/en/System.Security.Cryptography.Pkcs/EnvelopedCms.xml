@@ -67,6 +67,8 @@
 
         
 
+        
+
          class represents a CMS/PKCS #7 structure for enveloped data.</para
       >
     </summary>
@@ -91,6 +93,8 @@
           <para
             >The <see
              cref="T:System.Security.Cryptography.Pkcs.EnvelopedCms" />
+
+            
 
             
 
@@ -138,8 +142,12 @@
 
             
 
+            
+
              for recipients is <see
              cref="F:System.Security.Cryptography.Pkcs.SubjectIdentifierType.IssuerAndSerialNumber" />
+
+            
 
             
 
@@ -158,8 +166,12 @@
 
             
 
+            
+
              constructor creates an instance of the <see
              cref="T:System.Security.Cryptography.Pkcs.EnvelopedCms" />
+
+            
 
             
 
@@ -200,6 +212,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -213,8 +227,12 @@
 
             
 
+            
+
              constructor creates an instance of the <see
              cref="T:System.Security.Cryptography.Pkcs.EnvelopedCms" />
+
+            
 
             
 
@@ -258,6 +276,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -271,8 +291,12 @@
 
             
 
+            
+
              constructor creates an instance of the <see
              cref="T:System.Security.Cryptography.Pkcs.EnvelopedCms" />
+
+            
 
             
 
@@ -288,8 +312,12 @@
 
           
 
+          
+
           A  <see
            cref="T:System.Security.Cryptography.Pkcs.ContentInfo" />
+
+          
 
           
 
@@ -304,8 +332,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Cryptography.Pkcs.AlgorithmIdentifier" />
+
+          
 
           
 
@@ -348,6 +380,8 @@
 
             
 
+            
+
             .</para
           >
           <para>Subjects can be identified by either the issuer and serial number of their public key certificate or by the key identifier of their public key certificate.</para>
@@ -362,8 +396,12 @@
 
             
 
+            
+
              constructor creates an instance of the <see
              cref="T:System.Security.Cryptography.Pkcs.EnvelopedCms" />
+
+            
 
             
 
@@ -379,8 +417,12 @@
 
           
 
+          
+
           A member of the <see
            cref="T:System.Security.Cryptography.Pkcs.SubjectIdentifierType" />
+
+          
 
           
 
@@ -395,8 +437,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Cryptography.Pkcs.ContentInfo" />
+
+          
 
           
 
@@ -444,8 +490,12 @@
 
             
 
+            
+
              constructor creates an instance of the <see
              cref="T:System.Security.Cryptography.Pkcs.EnvelopedCms" />
+
+            
 
             
 
@@ -461,8 +511,12 @@
 
           
 
+          
+
           A member of the <see
            cref="T:System.Security.Cryptography.Pkcs.SubjectIdentifierType" />
+
+          
 
           
 
@@ -477,8 +531,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Cryptography.Pkcs.ContentInfo" />
+
+          
 
           
 
@@ -493,8 +551,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Cryptography.Pkcs.AlgorithmIdentifier" />
+
+          
 
           
 
@@ -535,6 +597,8 @@
 
             
 
+            
+
              property retrieves the set of certificates associated with the enveloped CMS/PKCS #7 message.</para
           >
         </summary>
@@ -570,8 +634,12 @@
 
             
 
+            
+
              class, see <see
              cref="M:System.Security.Cryptography.Pkcs.EnvelopedCms.#ctor" />
+
+            
 
             
 
@@ -585,6 +653,8 @@
           <para
             >The <see
              cref="P:System.Security.Cryptography.Pkcs.EnvelopedCms.ContentEncryptionAlgorithm" />
+
+            
 
             
 
@@ -625,6 +695,8 @@
 
             
 
+            
+
             , before viewing this property, the content returned is encrypted.</para
           >
         </remarks>
@@ -633,6 +705,8 @@
           <para
             >The <see
              cref="P:System.Security.Cryptography.Pkcs.EnvelopedCms.ContentInfo" />
+
+            
 
             
 
@@ -672,6 +746,8 @@
 
             
 
+            
+
              or any other EnvelopedCms.Decrypt method.</para
           >
         </remarks>
@@ -685,8 +761,12 @@
 
             
 
+            
+
              method decodes the specified enveloped CMS/PKCS #7 message and resets all member variables in the <see
              cref="T:System.Security.Cryptography.Pkcs.EnvelopedCms" />
+
+            
 
             
 
@@ -697,6 +777,8 @@
         </summary>
         <param name="encodedMessage">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -732,8 +814,12 @@
 
             
 
+            
+
              should be called before <see
              cref="M:System.Security.Cryptography.Pkcs.EnvelopedCms.Decrypt" />
+
+            
 
             
 
@@ -746,11 +832,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >The <see
              cref="M:System.Security.Cryptography.Pkcs.EnvelopedCms.Decrypt" />
+
+            
 
             
 
@@ -785,8 +875,12 @@
 
             
 
+            
+
              method decrypts the contents of the decoded enveloped CMS/PKCS #7 message. The <see
              cref="M:System.Security.Cryptography.Pkcs.EnvelopedCms.Decrypt" />
+
+            
 
             
 
@@ -848,6 +942,8 @@
 
             
 
+            
+
              method decrypts the contents of the decoded enveloped CMS/PKCS #7 message by using the private key associated with the certificate identified by the specified recipient information.</para
           >
         </summary>
@@ -858,8 +954,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Cryptography.Pkcs.RecipientInfo" />
+
+          
 
           
 
@@ -923,8 +1023,12 @@
 
             
 
+            
+
              method decrypts the contents of the decoded enveloped CMS/PKCS #7 message by using the specified certificate collection. The <see
              cref="M:System.Security.Cryptography.Pkcs.EnvelopedCms.Decrypt(System.Security.Cryptography.X509Certificates.X509Certificate2Collection)" />
+
+            
 
             
 
@@ -940,6 +1044,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
@@ -947,8 +1053,12 @@
 
           
 
+          
+
            collection that represents additional certificates to use for the decryption. The <see
            cref="M:System.Security.Cryptography.Pkcs.EnvelopedCms.Decrypt(System.Security.Cryptography.X509Certificates.X509Certificate2Collection)" />
+
+          
 
           
 
@@ -1013,8 +1123,12 @@
 
             
 
+            
+
              method decrypts the contents of the decoded enveloped CMS/PKCS #7 message by using the private key associated with the certificate identified by the specified recipient information and by using the specified certificate collection.  The <see
              cref="M:System.Security.Cryptography.Pkcs.EnvelopedCms.Decrypt(System.Security.Cryptography.Pkcs.RecipientInfo,System.Security.Cryptography.X509Certificates.X509Certificate2Collection)" />
+
+            
 
             
 
@@ -1030,8 +1144,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Cryptography.Pkcs.RecipientInfo" />
+
+          
 
           
 
@@ -1046,6 +1164,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
 
@@ -1053,8 +1173,12 @@
 
           
 
+          
+
            collection that represents additional certificates to use for the decryption. The <see
            cref="M:System.Security.Cryptography.Pkcs.EnvelopedCms.Decrypt(System.Security.Cryptography.Pkcs.RecipientInfo,System.Security.Cryptography.X509Certificates.X509Certificate2Collection)" />
+
+          
 
           
 
@@ -1090,8 +1214,12 @@
 
             
 
+            
+
              or another <see
              cref="Overload:System.Security.Cryptography.Pkcs.EnvelopedCms.Encrypt" />
+
+            
 
             
 
@@ -1107,8 +1235,12 @@
 
             
 
+            
+
              method does not cause the <see
              cref="P:System.Security.Cryptography.Pkcs.EnvelopedCms.RecipientInfos" />
+
+            
 
             
 
@@ -1122,6 +1254,8 @@
           <para
             >The <see
              cref="M:System.Security.Cryptography.Pkcs.EnvelopedCms.Encode" />
+
+            
 
             
 
@@ -1164,8 +1298,12 @@
 
             
 
+            
+
             , meaning that the <see
              cref="P:System.Environment.UserInteractive" />
+
+            
 
             
 
@@ -1182,8 +1320,12 @@
 
             
 
+            
+
              method does not cause the <see
              cref="P:System.Security.Cryptography.Pkcs.EnvelopedCms.RecipientInfos" />
+
+            
 
             
 
@@ -1208,6 +1350,8 @@
           <para
             >The <see
              cref="M:System.Security.Cryptography.Pkcs.EnvelopedCms.Encrypt" />
+
+            
 
             
 
@@ -1250,8 +1394,12 @@
 
             
 
+            
+
              method does not cause the <see
              cref="P:System.Security.Cryptography.Pkcs.EnvelopedCms.RecipientInfos" />
+
+            
 
             
 
@@ -1270,6 +1418,8 @@
 
             
 
+            
+
              method encrypts the contents of the CMS/PKCS #7 message by using the specified recipient information.</para
           >
         </summary>
@@ -1280,8 +1430,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Cryptography.Pkcs.CmsRecipient" />
+
+          
 
           
 
@@ -1326,8 +1480,12 @@
 
             
 
+            
+
              method does not cause the <see
              cref="P:System.Security.Cryptography.Pkcs.EnvelopedCms.RecipientInfos" />
+
+            
 
             
 
@@ -1346,6 +1504,8 @@
 
             
 
+            
+
              method encrypts the contents of the CMS/PKCS #7 message by using the information for the specified list of recipients. The message is encrypted by using a message encryption key with a symmetric encryption algorithm such as triple DES. The message encryption key is then encrypted with the public key of each recipient.</para
           >
         </summary>
@@ -1356,8 +1516,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.Cryptography.Pkcs.CmsRecipientCollection" />
+
+          
 
           
 
@@ -1397,8 +1561,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:System.Security.Cryptography.Pkcs.RecipientInfoCollection" />
+
+            
 
             
 
@@ -1414,8 +1582,12 @@
 
             
 
+            
+
              property is not populated as a result of calling the <see
              cref="M:System.Security.Cryptography.Pkcs.EnvelopedCms.Encode" />
+
+            
 
             
 
@@ -1429,6 +1601,8 @@
           <para
             >The <see
              cref="P:System.Security.Cryptography.Pkcs.EnvelopedCms.RecipientInfos" />
+
+            
 
             
 
@@ -1470,8 +1644,12 @@
 
             
 
+            
+
              property retrieves the unprotected (unencrypted) attributes associated with the enveloped CMS/PKCS #7 message. Unprotected attributes are not encrypted, and so do not have data confidentiality within an <see
              cref="T:System.Security.Cryptography.Pkcs.EnvelopedCms" />
+
+            
 
             
 
@@ -1505,6 +1683,8 @@
           <para
             >The <see
              cref="P:System.Security.Cryptography.Pkcs.EnvelopedCms.Version" />
+
+            
 
             
 

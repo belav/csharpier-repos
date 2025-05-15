@@ -37,9 +37,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall._exit" />
+
+        
 
         
 
@@ -53,9 +57,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.accept" />
+
+        
 
         
 
@@ -69,9 +77,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.aio_error" />
+
+        
 
         
 
@@ -85,9 +97,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.aio_suspend" />
+
+        
 
         
 
@@ -101,9 +117,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.bind" />
+
+        
 
         
 
@@ -117,9 +137,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.cfgetospeed" />
+
+        
 
         
 
@@ -133,9 +157,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.cfsetospeed" />
+
+        
 
         
 
@@ -149,9 +177,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.chmod" />
+
+        
 
         
 
@@ -165,9 +197,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.clock_gettime" />
+
+        
 
         
 
@@ -181,9 +217,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.connect" />
+
+        
 
         
 
@@ -197,9 +237,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.dup" />
+
+        
 
         
 
@@ -213,9 +257,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.execle" />
+
+        
 
         
 
@@ -229,9 +277,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.fchmod" />
+
+        
 
         
 
@@ -245,9 +297,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.fcntl" />
+
+        
 
         
 
@@ -261,9 +317,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.fork" />
+
+        
 
         
 
@@ -277,9 +337,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.fstat" />
+
+        
 
         
 
@@ -293,9 +357,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.ftruncate" />
+
+        
 
         
 
@@ -309,9 +377,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.geteuid" />
+
+        
 
         
 
@@ -325,9 +397,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.getgroups" />
+
+        
 
         
 
@@ -341,9 +417,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.getpgrp" />
+
+        
 
         
 
@@ -357,9 +437,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.getppid" />
+
+        
 
         
 
@@ -373,9 +457,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.getsockopt" />
+
+        
 
         
 
@@ -389,9 +477,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.kill" />
+
+        
 
         
 
@@ -405,9 +497,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.listen" />
+
+        
 
         
 
@@ -421,9 +517,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.lstat" />
+
+        
 
         
 
@@ -437,9 +537,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.mkfifo" />
+
+        
 
         
 
@@ -453,9 +557,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.pathconf" />
+
+        
 
         
 
@@ -469,9 +577,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.pipe" />
+
+        
 
         
 
@@ -485,9 +597,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.posix_trace_event" />
+
+        
 
         
 
@@ -501,9 +617,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.raise" />
+
+        
 
         
 
@@ -517,9 +637,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.readlink" />
+
+        
 
         
 
@@ -533,9 +657,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.recvfrom" />
+
+        
 
         
 
@@ -549,9 +677,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.rename" />
+
+        
 
         
 
@@ -565,9 +697,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.select" />
+
+        
 
         
 
@@ -581,9 +717,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.send" />
+
+        
 
         
 
@@ -597,9 +737,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.sendto" />
+
+        
 
         
 
@@ -613,9 +757,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.setpgid" />
+
+        
 
         
 
@@ -629,9 +777,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.setsockopt" />
+
+        
 
         
 
@@ -645,9 +797,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.shutdown" />
+
+        
 
         
 
@@ -661,9 +817,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.sigaddset" />
+
+        
 
         
 
@@ -677,9 +837,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.sigemptyset" />
+
+        
 
         
 
@@ -693,9 +857,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.sigismember" />
+
+        
 
         
 
@@ -709,9 +877,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.sigpause" />
+
+        
 
         
 
@@ -725,9 +897,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.sigprocmask" />
+
+        
 
         
 
@@ -741,9 +917,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.sigset" />
+
+        
 
         
 
@@ -757,9 +937,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.sleep" />
+
+        
 
         
 
@@ -773,9 +957,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.socketpair" />
+
+        
 
         
 
@@ -789,9 +977,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.symlink" />
+
+        
 
         
 
@@ -805,9 +997,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.tcdrain" />
+
+        
 
         
 
@@ -821,9 +1017,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.tcflush" />
+
+        
 
         
 
@@ -837,9 +1037,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.tcgetpgrp" />
+
+        
 
         
 
@@ -853,9 +1057,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.tcsetattr" />
+
+        
 
         
 
@@ -869,9 +1077,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.time" />
+
+        
 
         
 
@@ -885,9 +1097,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.timer_gettime" />
+
+        
 
         
 
@@ -901,9 +1117,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.times" />
+
+        
 
         
 
@@ -917,9 +1137,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.uname" />
+
+        
 
         
 
@@ -933,9 +1157,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.utime" />
+
+        
 
         
 
@@ -949,6 +1177,8 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.waitpid" />
@@ -957,9 +1187,13 @@ When this delegate is invoked from signal context (that is, the operating system
 
         
 
+        
+
         , 
 <see
          cref="M:Mono.Unix.Native.Syscall.write" />
+
+        
 
         
 

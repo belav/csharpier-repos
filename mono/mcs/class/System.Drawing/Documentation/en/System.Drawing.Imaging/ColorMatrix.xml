@@ -45,6 +45,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -53,6 +55,8 @@
       <para
         >Defines a 5 x 5 matrix that contains the coordinates for the RGBAW space. Several methods of the <see
          cref="T:System.Drawing.Imaging.ImageAttributes" />
+
+        
 
         
 
@@ -75,6 +79,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Drawing.Imaging.ColorMatrix" />
+
+            
 
             
 
@@ -109,8 +115,12 @@
 
             
 
+            
+
              class using the elements in the specified matrix <paramref
              name="newColorMatrix" />
+
+            
 
             
 
@@ -172,6 +182,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -196,6 +208,8 @@
           <para
             >Gets or sets the element at the 0 (zero) row and first column of this <see
              cref="T:System.Drawing.Imaging.ColorMatrix" />
+
+            
 
             
 
@@ -230,6 +244,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -254,6 +270,8 @@
           <para
             >Gets or sets the element at the 0 (zero) row and third column of this <see
              cref="T:System.Drawing.Imaging.ColorMatrix" />
+
+            
 
             
 
@@ -288,6 +306,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -312,6 +332,8 @@
           <para
             >Gets or sets the element at the first row and 0 (zero) column of this <see
              cref="T:System.Drawing.Imaging.ColorMatrix" />
+
+            
 
             
 
@@ -346,6 +368,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -370,6 +394,8 @@
           <para
             >Gets or sets the element at the first row and second column of this <see
              cref="T:System.Drawing.Imaging.ColorMatrix" />
+
+            
 
             
 
@@ -404,6 +430,8 @@
 
             
 
+            
+
             . Represents the alpha component.</para
           >
         </summary>
@@ -428,6 +456,8 @@
           <para
             >Gets or sets the element at the first row and fourth column of this <see
              cref="T:System.Drawing.Imaging.ColorMatrix" />
+
+            
 
             
 
@@ -462,6 +492,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -486,6 +518,8 @@
           <para
             >Gets or sets the element at the second row and first column of this <see
              cref="T:System.Drawing.Imaging.ColorMatrix" />
+
+            
 
             
 
@@ -520,6 +554,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -544,6 +580,8 @@
           <para
             >Gets or sets the element at the second row and third column of this <see
              cref="T:System.Drawing.Imaging.ColorMatrix" />
+
+            
 
             
 
@@ -578,6 +616,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -602,6 +642,8 @@
           <para
             >Gets or sets the element at the third row and 0 (zero) column of this <see
              cref="T:System.Drawing.Imaging.ColorMatrix" />
+
+            
 
             
 
@@ -636,6 +678,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -660,6 +704,8 @@
           <para
             >Gets or sets the element at the third row and second column of this <see
              cref="T:System.Drawing.Imaging.ColorMatrix" />
+
+            
 
             
 
@@ -694,6 +740,8 @@
 
             
 
+            
+
             . Represents the alpha component.</para
           >
         </summary>
@@ -718,6 +766,8 @@
           <para
             >Gets or sets the element at the third row and fourth column of this <see
              cref="T:System.Drawing.Imaging.ColorMatrix" />
+
+            
 
             
 
@@ -752,6 +802,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -776,6 +828,8 @@
           <para
             >Gets or sets the element at the fourth row and first column of this <see
              cref="T:System.Drawing.Imaging.ColorMatrix" />
+
+            
 
             
 
@@ -810,6 +864,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -839,6 +895,8 @@
 
             
 
+            
+
             . Represents the alpha component.</para
           >
         </summary>
@@ -863,6 +921,8 @@
           <para
             >Gets or sets the element at the fourth row and fourth column of this <see
              cref="T:System.Drawing.Imaging.ColorMatrix" />
+
+            
 
             
 

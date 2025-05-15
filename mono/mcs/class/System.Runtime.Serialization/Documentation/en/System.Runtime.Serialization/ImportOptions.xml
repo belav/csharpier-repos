@@ -24,8 +24,12 @@
 
         
 
+        
+
          is used to generate code from XML schema using the dnprdnshort CodeDOM. To generate an XML schema from an assembly, use the <see
          cref="T:System.Runtime.Serialization.XsdDataContractExporter" />
+
+        
 
         
 
@@ -43,10 +47,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="b9170583-8c34-43bd-97bb-6c0c8dddeee0">Importing Schema To Generate Classes</a>
         </format>
+
+        
 
         
 
@@ -60,6 +68,8 @@
       <para
         >Represents the options that can be set on an <see
          cref="T:System.Runtime.Serialization.XsdDataContractImporter" />
+
+        
 
         
 
@@ -88,6 +98,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Serialization.ImportOptions" />
+
+            
 
             
 
@@ -126,6 +138,8 @@
 
             
 
+            
+
              class, which provides a <see
              cref="M:System.CodeDom.Compiler.CodeDomProvider.Supports(System.CodeDom.Compiler.GeneratorSupport)" />
 
@@ -133,8 +147,12 @@
 
             
 
+            
+
              method to check whether it supports particular <see
              cref="T:System.CodeDom.Compiler.CodeGeneratorOptions" />
+
+            
 
             
 
@@ -148,6 +166,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.CodeDom.Compiler.CodeDomProvider" />
+
+            
 
             
 
@@ -209,6 +229,8 @@
 
             
 
+            
+
              interface.</para
           >
         </summary>
@@ -256,8 +278,12 @@
 
             
 
+            
+
              attribute in addition to the <see
              cref="T:System.Runtime.Serialization.DataContractAttribute" />
+
+            
 
             
 
@@ -285,6 +311,8 @@
           <para
             >Normally, importing a type that does not conform to a valid data contract schema will fail. However, when this property is set to true, all such types will be imported as types that implement the <see
              cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+            
 
             
 
@@ -352,8 +380,12 @@
 
             
 
+            
+
              collection, that type will be used. For example, when importing schema that contains a list of integers, an array of integers will normally be generated. However, if the collection contains the <see
              cref="T:System.Collections.Generic.LinkedList`1" />
+
+            
 
             
 
@@ -392,6 +424,8 @@
           <para
             >Gets a <see
              cref="T:System.Collections.Generic.IList`1" />
+
+            
 
             
 

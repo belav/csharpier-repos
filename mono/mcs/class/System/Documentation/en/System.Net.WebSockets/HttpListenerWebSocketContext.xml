@@ -31,6 +31,8 @@
 
         
 
+        
+
          class when accepting WebSocket connections.</para
       >
     </summary>
@@ -86,6 +88,8 @@
 
             
 
+            
+
              object in the WebSocket opening handshake.</para
           >
         </summary>
@@ -120,6 +124,8 @@
           <para
             >Gets the HTTP headers received by the <see
              cref="T:System.Net.HttpListener" />
+
+            
 
             
 

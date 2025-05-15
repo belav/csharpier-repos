@@ -33,12 +33,16 @@
 
         
 
+        
+
          provides an interface that can be used to indicate the methods that handle the following events: </para
       >
       <list type="bullet">
         <item>
           <para>
             <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentAdded" />
+
+            
 
             
 
@@ -55,12 +59,16 @@
 
             
 
+            
+
             , raised when a component is about to be added.</para
           >
         </item>
         <item>
           <para>
             <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
+
+            
 
             
 
@@ -77,12 +85,16 @@
 
             
 
+            
+
             , raised when a component is about to be changed.</para
           >
         </item>
         <item>
           <para>
             <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentRemoved" />
+
+            
 
             
 
@@ -99,12 +111,16 @@
 
             
 
+            
+
             , raised when a component is about to be removed.</para
           >
         </item>
         <item>
           <para>
             <see cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentRename" />
+
+            
 
             
 
@@ -122,8 +138,12 @@
 
         
 
+        
+
          objects to provide undo and redo functionality for design-time actions that affect components. More information is available in the documentation for <see
          cref="T:System.ComponentModel.Design.DesignerTransaction" />
+
+        
 
         
 
@@ -139,6 +159,8 @@
 
         
 
+        
+
          or a component can indicate that a component has changed or is changing with the <see
          cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanged(System.Object,System.ComponentModel.MemberDescriptor,System.Object,System.Object)" />
 
@@ -146,8 +168,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanging(System.Object,System.ComponentModel.MemberDescriptor)" />
+
+        
 
         
 
@@ -166,8 +192,12 @@
 
         
 
+        
+
          or <see
          cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanging" />
+
+        
 
         
 
@@ -270,8 +300,12 @@
 
               
 
+              
+
                can raise multiple <see
                cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
+
+              
 
               
 
@@ -284,8 +318,12 @@
 
               
 
+              
+
                event handlers can interfere with expected sequences of events, such as if your code alters the values of properties while a transaction is occurring. A <see
                cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
+
+              
 
               
 
@@ -298,8 +336,12 @@
 
               
 
+              
+
                is in progress. In order to allow a <see
                cref="T:System.ComponentModel.Design.DesignerTransaction" />
+
+              
 
               
 
@@ -312,8 +354,12 @@
 
               
 
+              
+
                event handler, you can test the state of the <see
                cref="P:System.ComponentModel.Design.IDesignerHost.InTransaction" />
+
+              
 
               
 
@@ -326,8 +372,12 @@
 
               
 
+              
+
                which will raise your <see
                cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
+
+              
 
               
 
@@ -463,6 +513,8 @@
 
             
 
+            
+
              event when a component has been renamed.</para
           >
         </remarks>
@@ -507,11 +559,15 @@
 
             
 
+            
+
              event.</para
           >
           <para
             >Most designers that ship with the winsdklong, as well as the Visual Studio design-time environment, typically raise this event for you when a component in a project is changed, so most of the time you do not need to explicitly call this method. The appropriate <see
              cref="T:System.ComponentModel.Design.IComponentChangeService" />
+
+            
 
             
 
@@ -524,8 +580,12 @@
 
             
 
+            
+
              is used to change a property value or components are added or removed from the <see
              cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+            
 
             
 
@@ -541,8 +601,12 @@
 
             
 
+            
+
             , first call <see
              cref="M:System.ComponentModel.Design.IComponentChangeService.OnComponentChanging(System.Object,System.ComponentModel.MemberDescriptor)" />
+
+            
 
             
 
@@ -555,8 +619,12 @@
 
             
 
+            
+
              to raise the <see
              cref="E:System.ComponentModel.Design.IComponentChangeService.ComponentChanged" />
+
+            
 
             
 
@@ -576,10 +644,14 @@
 
           
 
+          
+
           The component that has changed. </param
         >
         <param name="member">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -594,10 +666,14 @@
 
           
 
+          
+
           The old value of the member. This is valid only if the member is not null. </param
         >
         <param name="newValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -640,11 +716,15 @@
 
             
 
+            
+
              event.</para
           >
           <para
             >Most designers included with the winsdklong, as well as the Visual Studio design-time environment, typically raise this event automatically; so most of the time, you do not need to explicitly call this method. The appropriate <see
              cref="T:System.ComponentModel.Design.IComponentChangeService" />
+
+            
 
             
 
@@ -657,8 +737,12 @@
 
             
 
+            
+
              is used to change a property value or components are added or removed from the <see
              cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+            
 
             
 
@@ -678,10 +762,14 @@
 
           
 
+          
+
           The component that is about to change. </param
         >
         <param name="member">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

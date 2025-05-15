@@ -30,6 +30,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -43,6 +45,8 @@
 
         
 
+        
+
          event by a <see
          cref="T:System.Web.Security.PassportAuthenticationModule" />
 
@@ -50,8 +54,12 @@
 
         
 
+        
+
         . Since there is already an identity at this point, this is useful mainly for attaching a custom <see
          cref="T:System.Security.Principal.IPrincipal" />
+
+        
 
         
 
@@ -84,6 +92,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -92,6 +102,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Security.PassportAuthenticationEventArgs" />
+
+            
 
             
 
@@ -107,10 +119,14 @@
 
           
 
+          
+
           The identity object </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -146,6 +162,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -154,6 +172,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -184,6 +204,8 @@
           <para
             >This class has been deprecated and is no longer supported. Microsoft Passport Network has been replaced by Windows Live ID. For more information about how to use Windows Live ID to authenticate users in a Web application, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=106346">Windows Live ID SDK</see>
+
+            
 
             
 
@@ -227,6 +249,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -235,6 +259,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Security.Principal.IPrincipal" />
+
+            
 
             
 

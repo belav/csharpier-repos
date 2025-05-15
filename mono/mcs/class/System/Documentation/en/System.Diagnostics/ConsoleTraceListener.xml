@@ -29,8 +29,12 @@
 
         
 
+        
+
          class to write trace and debugging messages to the console. You can initialize a <see
          cref="T:System.Diagnostics.ConsoleTraceListener" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          stream or to the <see
          cref="P:System.Console.Error" />
+
+        
 
         
 
@@ -60,8 +68,12 @@
 
         
 
+        
+
          messages are written to the specified <see
          cref="T:System.Console" />
+
+        
 
         
 
@@ -74,8 +86,12 @@
 
         
 
+        
+
          or <see
          cref="Overload:System.Console.WriteLine" />
+
+        
 
         
 
@@ -88,8 +104,12 @@
 
         
 
+        
+
          output and error streams write messages to the existing console window, or you can redirect the streams to write to a <see
          cref="T:System.IO.TextWriter" />
+
+        
 
         
 
@@ -108,8 +128,12 @@
 
         
 
+        
+
          object to the appropriate <see
          cref="P:System.Diagnostics.Trace.Listeners" />
+
+        
 
         
 
@@ -122,8 +146,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Diagnostics.TraceSource" />
+
+        
 
         
 
@@ -136,6 +164,8 @@
 
         
 
+        
+
          to be written to the console. In addition, you can write messages directly to the console using the <see
          cref="Overload:System.Diagnostics.Trace.Write" />
 
@@ -143,8 +173,12 @@
 
         
 
+        
+
          or <see
          cref="Overload:System.Diagnostics.Trace.WriteLine" />
+
+        
 
         
 
@@ -161,8 +195,12 @@
 
           
 
+          
+
            and <see
            cref="T:System.Diagnostics.Trace" />
+
+          
 
           
 
@@ -175,8 +213,12 @@
 
           
 
+          
+
            collection, accessed through their respective Listeners properties. If you add a <see
            cref="T:System.Diagnostics.ConsoleTraceListener" />
+
+          
 
           
 
@@ -193,8 +235,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Diagnostics.Trace" />
+
+        
 
         
 
@@ -212,6 +258,8 @@
 
             
 
+            
+
              flag to the compiler command line when you compile your code, or you can add <system
             >#define DEBUG</system>
 
@@ -219,8 +267,12 @@
 
             
 
+            
+
              to the top of your file. In Visual Basic, add the <system
             >/d:DEBUG=True</system>
+
+            
 
             
 
@@ -238,6 +290,8 @@
 
             
 
+            
+
              flag to the compiler command line when you compile your code, or add <system
             >#define TRACE</system>
 
@@ -245,8 +299,12 @@
 
             
 
+            
+
              to the top of your file. In Visual Basic, add the <system
             >/d:TRACE=True</system>
+
+            
 
             
 
@@ -264,8 +322,12 @@
 
         
 
+        
+
          object to the <see
          cref="P:System.Diagnostics.Trace.Listeners" />
+
+        
 
         
 
@@ -278,8 +340,12 @@
 
         
 
+        
+
          object to the <see
          cref="P:System.Diagnostics.Trace.Listeners" />
+
+        
 
         
 
@@ -292,8 +358,12 @@
 
         
 
+        
+
          object in your code to write messages for a specific code section or execution path. Add the <see
          cref="T:System.Diagnostics.ConsoleTraceListener" />
+
+        
 
         
 
@@ -309,8 +379,12 @@
 
         
 
+        
+
          object and add it to the <see
          cref="P:System.Diagnostics.Trace.Listeners" />
+
+        
 
         
 
@@ -323,8 +397,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Diagnostics.Debug" />
+
+        
 
         
 
@@ -337,8 +415,12 @@
 
         
 
+        
+
          object from the <see
          cref="P:System.Diagnostics.Trace.Listeners" />
+
+        
 
         
 
@@ -351,8 +433,12 @@
 
         
 
+        
+
          method on the <see
          cref="T:System.Diagnostics.ConsoleTraceListener" />
+
+        
 
         
 
@@ -368,8 +454,12 @@
 
         
 
+        
+
          object to the application configuration file. Edit the configuration file that corresponds to the name of your application, or the app.config file in a vsprvslong project. In this file, insert an element for a <see
          cref="T:System.Diagnostics.ConsoleTraceListener" />
+
+        
 
         
 
@@ -385,8 +475,12 @@
 
         
 
+        
+
          object named configConsoleListener to the <see
          cref="P:System.Diagnostics.Trace.Listeners" />
+
+        
 
         
 
@@ -408,6 +502,8 @@
         
 
         
+
+        
       &lt;/listeners&gt;
     &lt;/trace&gt;
   &lt;/system.diagnostics&gt;
@@ -418,6 +514,8 @@
          type="text/html">
           <a href="1394c2c3-6304-46db-87c1-8e8b16f5ad5b">&lt;listeners&gt; Element</a>
         </format>
+
+        
 
         
 
@@ -456,6 +554,8 @@
 
             
 
+            
+
              object to write messages to the <see
              cref="P:System.Console.Out" />
 
@@ -463,8 +563,12 @@
 
             
 
+            
+
              stream. Its <see
              cref="P:System.Diagnostics.TraceListener.Name" />
+
+            
 
             
 
@@ -478,6 +582,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Diagnostics.ConsoleTraceListener" />
+
+            
 
             
 
@@ -514,8 +620,12 @@
 
             
 
+            
+
              object to write messages to either the <see
              cref="P:System.Console.Out" />
+
+            
 
             
 
@@ -528,8 +638,12 @@
 
             
 
+            
+
              stream. Its <see
              cref="P:System.Diagnostics.TraceListener.Name" />
+
+            
 
             
 
@@ -548,11 +662,15 @@
 
             
 
+            
+
              class with an option to write trace output to the standard output stream or the standard error stream.</para
           >
         </summary>
         <param name="useErrorStream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

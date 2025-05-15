@@ -35,6 +35,8 @@
 
             
 
+            
+
              class. For more information, see IETF RFC 2183.</para
           >
         </item>
@@ -42,6 +44,8 @@
           <para
             >An HTTP header in <see
              cref="T:System.Net.Http.Headers.HttpContentHeaders" />
+
+            
 
             
 
@@ -86,6 +90,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -96,8 +102,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.Http.Headers.ContentDispositionHeaderValue" />
+
+          
 
           
 
@@ -135,6 +145,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -145,8 +157,12 @@
 
           
 
+          
+
           A string that contains a <see
            cref="T:System.Net.Http.Headers.ContentDispositionHeaderValue" />
+
+          
 
           
 
@@ -203,8 +219,12 @@
 
             
 
+            
+
              property of "inline" if it is intended to be   displayed automatically upon display of the message. A body part can be designated with a <see
              cref="P:System.Net.Http.Headers.ContentDispositionHeaderValue.DispositionType" />
+
+            
 
             
 
@@ -247,8 +267,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Net.Http.Headers.ContentDispositionHeaderValue" />
+
+            
 
             
 
@@ -267,6 +291,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -277,11 +303,15 @@
 
             
 
+            
+
              is equal to the current object; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -308,6 +338,8 @@
           <para
             >The  <see
              cref="P:System.Net.Http.Headers.ContentDispositionHeaderValue.FileName" />
+
+            
 
             
 
@@ -344,8 +376,12 @@
 
             
 
+            
+
              property uses IETF RFC 5987 encoding. The <see
              cref="P:System.Net.Http.Headers.ContentDispositionHeaderValue.FileName" />
+
+            
 
             
 
@@ -358,8 +394,12 @@
 
             
 
+            
+
              properties differ only in that<see
              cref="P:System.Net.Http.Headers.ContentDispositionHeaderValue.FileNameStar" />
+
+            
 
             
 
@@ -400,6 +440,8 @@
 
             
 
+            
+
               method is suitable for use in hashing algorithms and data structures such as a hash table.</para
           >
         </remarks>
@@ -413,6 +455,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -421,6 +465,8 @@
           <para
             >Returns <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -532,6 +578,8 @@
 
             
 
+            
+
               instance.</para
           >
         </summary>
@@ -540,6 +588,8 @@
           <para
             >Returns <see
              cref="T:System.Net.Http.Headers.ContentDispositionHeaderValue" />
+
+            
 
             
 
@@ -555,11 +605,15 @@
 
             
 
+            
+
               instance.</para
           >
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -642,6 +696,8 @@
 
             
 
+            
+
               instance.</para
           >
         </summary>
@@ -650,6 +706,8 @@
           <para
             >Returns <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -687,6 +745,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -695,6 +755,8 @@
           <para
             >Returns <see
              cref="T:System.String" />
+
+            
 
             
 

@@ -29,6 +29,8 @@
 
         
 
+        
+
          implementation.</para
       >
       <block subset="none" type="note">
@@ -40,10 +42,14 @@
 
           
 
+          
+
            is thrown when the immediate caller does not have full-trust permission. For more information, see <format
            type="text/html">
             <a href="a33fd5f9-2de9-4653-a4f0-d9df25082c4d">Link Demands</a>
           </format>
+
+          
 
           
 
@@ -98,6 +104,8 @@
 
           
 
+          
+
           The command to execute. </param
         >
         <param name="tempFiles">
@@ -107,8 +115,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.Compiler.TempFileCollection" />
+
+          
 
           
 

@@ -45,6 +45,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -71,6 +73,8 @@
           <para
             >Gets a value indicating whether another request can use the <see
              cref="T:System.Web.Handlers.TraceHandler" />
+
+            
 
             
 
@@ -107,8 +111,12 @@
 
             
 
+            
+
              method writes an <see
              cref="T:System.Web.HttpResponse" />
+
+            
 
             
 
@@ -121,6 +129,8 @@
 
             
 
+            
+
             , <see
              cref="M:System.Web.Handlers.TraceHandler.ShowRequests(System.Collections.IList)" />
 
@@ -128,8 +138,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Web.Handlers.TraceHandler.ShowVersionDetails" />
+
+            
 
             
 
@@ -145,8 +159,12 @@
 
             
 
+            
+
              class implements the <see
              cref="M:System.Web.Handlers.TraceHandler.ProcessRequest(System.Web.HttpContext)" />
+
+            
 
             
 
@@ -159,6 +177,8 @@
 
             
 
+            
+
              method. If you extend the <see
              cref="T:System.Web.Handlers.TraceHandler" />
 
@@ -166,8 +186,12 @@
 
             
 
+            
+
              class, implement your own <see
              cref="M:System.Web.Handlers.TraceHandler.ProcessRequest(System.Web.HttpContext)" />
+
+            
 
             
 
@@ -187,8 +211,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -225,8 +253,12 @@
 
             
 
+            
+
              method writes tracing details to the response stream, including information about the application state, session state for the current session, control tree created for the current page, and HTTP request information such as the query string and form parameters. It is called by <see
              cref="M:System.Web.Handlers.TraceHandler.ProcessRequest(System.Web.HttpContext)" />
+
+            
 
             
 
@@ -246,8 +278,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -304,8 +340,12 @@
 
             
 
+            
+
              method writes tracing details to the response stream, including information on the most recent HTTP requests that ASP.NET has processed for the site. It is called by <see
              cref="M:System.Web.Handlers.TraceHandler.ProcessRequest(System.Web.HttpContext)" />
+
+            
 
             
 
@@ -325,8 +365,12 @@
 
           
 
+          
+
           A set of <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -357,8 +401,12 @@
 
             
 
+            
+
              method writes tracing details on the Common Language Runtime (CLR) and ASP.NET versions currently in use. It is called by <see
              cref="M:System.Web.Handlers.TraceHandler.ProcessRequest(System.Web.HttpContext)" />
+
+            
 
             
 
@@ -395,8 +443,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.IHttpHandler" />
+
+            
 
             
 
@@ -410,6 +462,8 @@
           <para
             >Gets a value indicating whether another request can use the <see
              cref="T:System.Web.Handlers.TraceHandler" />
+
+            
 
             
 
@@ -447,6 +501,8 @@
 
             
 
+            
+
             . The trace information includes information on the state of the Web server, the current session, the control tree for the current page, HTTP request parameters, and recent HTTP requests processed by the server.</para
           >
         </remarks>
@@ -461,8 +517,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 

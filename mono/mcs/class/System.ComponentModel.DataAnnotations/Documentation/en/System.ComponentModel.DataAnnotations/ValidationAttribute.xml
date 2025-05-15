@@ -50,6 +50,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -82,6 +84,8 @@
 
             
 
+            
+
              property to retrieve an error message. </para
           >
         </remarks>
@@ -95,11 +99,15 @@
 
             
 
+            
+
              class by using the function that enables access to validation resources.</para
           >
         </summary>
         <param name="errorMessageAccessor">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -134,11 +142,15 @@
 
             
 
+            
+
              class by using the error message to associate with a validation control.</para
           >
         </summary>
         <param name="errorMessage">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -195,8 +207,12 @@
 
             
 
+            
+
              property together with the <see
              cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageResourceType" />
+
+            
 
             
 
@@ -210,6 +226,8 @@
           <para
             >Gets or sets the error message resource name to use in order to look up the <see
              cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageResourceType" />
+
+            
 
             
 
@@ -245,8 +263,12 @@
 
             
 
+            
+
              property together with the <see
              cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageResourceName" />
+
+            
 
             
 
@@ -283,6 +305,8 @@
 
             
 
+            
+
              property or by evaluating the <see
              cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageResourceType" />
 
@@ -290,8 +314,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ComponentModel.DataAnnotations.ValidationAttribute.ErrorMessageResourceName" />
+
+            
 
             
 
@@ -336,6 +364,8 @@
 
             
 
+            
+
              property. This method appends the name of the data field that triggered the error to the formatted error message. You can customize how the error message is formatted by creating a derived class that overrides this method.</para
           >
         </remarks>
@@ -349,6 +379,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -392,6 +424,8 @@
 
             
 
+            
+
              method checks validity without throwing an exception.</para
           >
         </remarks>
@@ -409,6 +443,8 @@
 
             
 
+            
+
              class. </para
           >
         </returns>
@@ -419,10 +455,14 @@
 
           
 
+          
+
           The value to validate.</param
         >
         <param name="validationContext">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -459,6 +499,8 @@
 
             
 
+            
+
              class, you must implement the validation logic in this method.</para
           >
         </remarks>
@@ -472,6 +514,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -520,6 +564,8 @@
 
             
 
+            
+
              class. </para
           >
         </returns>
@@ -530,10 +576,14 @@
 
           
 
+          
+
           The value to validate.</param
         >
         <param name="validationContext">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -599,8 +649,12 @@
 
             
 
+            
+
              method to determine whether the object that is specified by the <paramref
              name="value" />
+
+            
 
             
 
@@ -613,6 +667,8 @@
 
             
 
+            
+
              method returns false, this method calls the <see
              cref="M:System.ComponentModel.DataAnnotations.ValidationAttribute.FormatErrorMessage(System.String)" />
 
@@ -620,8 +676,12 @@
 
             
 
+            
+
              method to get a localized message that states the problem. It then throws a <see
              cref="T:System.ComponentModel.DataAnnotations.ValidationException" />
+
+            
 
             
 
@@ -641,6 +701,8 @@
 
           
 
+          
+
           The object to validate.</param
         >
         <param name="validationContext">
@@ -650,8 +712,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.DataAnnotations.ValidationContext" />
+
+          
 
           
 
@@ -689,8 +755,12 @@
 
             
 
+            
+
              attribute is declared. It calls the <see
              cref="M:System.ComponentModel.DataAnnotations.ValidationAttribute.IsValid(System.Object)" />
+
+            
 
             
 
@@ -703,8 +773,12 @@
 
             
 
+            
+
              as a parameter. If validation fails, a <see
              cref="T:System.ComponentModel.DataAnnotations.ValidationException" />
+
+            
 
             
 
@@ -724,10 +798,14 @@
 
           
 
+          
+
           The value of the object to validate.</param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -38,8 +38,12 @@
 
         
 
+        
+
          and activating the object by calling new or <see
          cref="M:System.Activator.GetObject(System.Type,System.String)" />
+
+        
 
         
 
@@ -52,8 +56,12 @@
 
         
 
+        
+
          method. By calling <see
          cref="M:System.Runtime.Remoting.RemotingConfiguration.RegisterWellKnownClientType(System.Type,System.String)" />
+
+        
 
         
 
@@ -66,6 +74,8 @@
 
         
 
+        
+
          method to activate a server-activated object, you must supply it with the object's URL as an argument, so no prior registration on the client is necessary.</para
       >
       <para
@@ -73,6 +83,8 @@
          type="text/html">
           <a href="E90D0C64-00DA-4080-AE78-A6C558825C25">[&lt;topic://cpconActivation&gt;]</a>
         </format>
+
+        
 
         
 
@@ -119,11 +131,15 @@
 
             
 
+            
+
              class with the given type and URL.</para
           >
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -136,10 +152,14 @@
 
           
 
+          
+
            of the server-activated type. </param
         >
         <param name="objectUrl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -182,11 +202,15 @@
 
             
 
+            
+
              class with the given type, assembly name, and URL.</para
           >
         </summary>
         <param name="typeName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -201,10 +225,14 @@
 
           
 
+          
+
           The assembly name of the server-activated type. </param
         >
         <param name="objectUrl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -264,6 +292,8 @@
 
             
 
+            
+
              of the server-activated client type.</para
           >
         </summary>
@@ -317,6 +347,8 @@
 
             
 
+            
+
              is not null, it is returned at the end of the string.</para
           >
         </remarks>
@@ -330,6 +362,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -338,6 +372,8 @@
           <para
             >The full type name, assembly name, and object URL of the server-activated client type as a <see
              cref="T:System.String" />
+
+            
 
             
 

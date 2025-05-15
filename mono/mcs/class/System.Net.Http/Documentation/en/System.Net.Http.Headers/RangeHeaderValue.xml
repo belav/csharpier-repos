@@ -28,8 +28,12 @@
 
         
 
+        
+
          class provides support for the Range header as defined in <see
          cref="http://go.microsoft.com/fwlink/?LinkID=241642">RFC 2616</see>
+
+        
 
         
 
@@ -75,6 +79,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -108,6 +114,8 @@
 
             
 
+            
+
              class with a Range header containing a specified byte range.</para
           >
           <para>An example of a Range header with a byte range in an HTTP protocol request that requests the first 100 bytes would be would be the following: </para>
@@ -120,8 +128,12 @@
 
             
 
+            
+
              parameter would be specified as 0 and the <paramref
              name="to" />
+
+            
 
             
 
@@ -140,6 +152,8 @@
 
             
 
+            
+
              class with a byte range.</para
           >
         </summary>
@@ -150,10 +164,14 @@
 
           
 
+          
+
           The position at which to start sending data.</param
         >
         <param name="to">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -191,8 +209,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Net.Http.Headers.RangeHeaderValue" />
+
+            
 
             
 
@@ -211,6 +233,8 @@
 
             
 
+            
+
             .</para
           >
           <para
@@ -221,11 +245,15 @@
 
             
 
+            
+
              is equal to the current object; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -261,6 +289,8 @@
 
             
 
+            
+
               method is suitable for use in hashing algorithms and data structures such as a hash table.</para
           >
         </remarks>
@@ -274,6 +304,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -282,6 +314,8 @@
           <para
             >Returns <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -324,6 +358,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -332,6 +368,8 @@
           <para
             >Returns <see
              cref="T:System.Net.Http.Headers.RangeHeaderValue" />
+
+            
 
             
 
@@ -347,11 +385,15 @@
 
             
 
+            
+
              instance.</para
           >
         </returns>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -390,6 +432,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -421,6 +465,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -429,6 +475,8 @@
           <para
             >Returns <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -466,6 +514,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -474,6 +524,8 @@
           <para
             >Returns <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -535,6 +587,8 @@
           <para
             >Gets the unit from the <see
              cref="T:System.Net.Http.Headers.RangeHeaderValue" />
+
+            
 
             
 

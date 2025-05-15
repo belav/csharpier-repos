@@ -50,6 +50,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -124,6 +126,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -188,6 +192,8 @@
           <para
             >The service accepts connections in excess of the limit. However, only the channels below the limit are active and messages are only read from active channels. Setting this property to 0 is equivalent to setting it to <see
              cref="F:System.Int32.MaxValue" />
+
+            
 
             
 

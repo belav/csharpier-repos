@@ -29,8 +29,12 @@
 
         
 
+        
+
          is intended for use when creating indigo1 service contracts (interfaces that define the service and its methods). The <newTerm
         >known types</newTerm>
+
+        
 
         
 
@@ -40,6 +44,8 @@
          type="text/html">
           <a href="1a0baea1-27b7-470d-9136-5bbad86c4337">Data Contract Known Types</a>
         </format>
+
+        
 
         
 
@@ -55,8 +61,12 @@
 
         
 
+        
+
          property, create a class that contains a method (or methods) that returns an array of types (each being a known type). When applying the attribute, set the <paramref
          name="methodName" />
+
+        
 
         
 
@@ -69,6 +79,8 @@
 
         
 
+        
+
          to the type that contains the method. The method must return a type that implements the <see
          cref="T:System.Collections.Generic.IEnumerable`1" />
 
@@ -76,8 +88,12 @@
 
         
 
+        
+
          interface. The method must also include a parameter of type <see
          cref="T:System.Reflection.ICustomAttributeProvider" />
+
+        
 
         
 
@@ -123,6 +139,8 @@
 
             
 
+            
+
              to a class that contains methods that return known types.</para
           >
         </remarks>
@@ -136,11 +154,15 @@
 
             
 
+            
+
              class and specifies the name of a method that returns the known types.</para
           >
         </summary>
         <param name="methodName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -174,6 +196,8 @@
 
             
 
+            
+
              can be applied several times to a method, with each application naming a different known type that may be present in the object graph returned by the method.</para
           >
         </remarks>
@@ -187,11 +211,15 @@
 
             
 
+            
+
              class with the specified known type.</para
           >
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -230,6 +258,8 @@
 
             
 
+            
+
              class with the name of a method that returns the known types and the type that contains the method (or methods) that returns the known types.</para
           >
         </summary>
@@ -240,10 +270,14 @@
 
           
 
+          
+
           The name of a method that returns the known types.</param
         >
         <param name="declaringType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -297,8 +331,12 @@
 
             
 
+            
+
              must be the name of a method on the type specified by the <see
              cref="P:System.ServiceModel.ServiceKnownTypeAttribute.DeclaringType" />
+
+            
 
             
 

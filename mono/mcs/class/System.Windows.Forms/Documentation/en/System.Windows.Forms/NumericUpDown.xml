@@ -45,8 +45,12 @@
 
         
 
+        
+
          control contains a single numeric value that can be incremented or decremented by clicking the up or down buttons of the control. The user can also enter in a value, unless the <see
          cref="P:System.Windows.Forms.UpDownBase.ReadOnly" />
+
+        
 
         
 
@@ -62,8 +66,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Windows.Forms.NumericUpDown.Hexadecimal" />
+
+        
 
         
 
@@ -76,8 +84,12 @@
 
         
 
+        
+
          properties. To display hexadecimal values in the control, set the <see
          cref="P:System.Windows.Forms.NumericUpDown.Hexadecimal" />
+
+        
 
         
 
@@ -90,8 +102,12 @@
 
         
 
+        
+
          property to true. To specify the number of digits displayed after the decimal symbol, set the <see
          cref="P:System.Windows.Forms.NumericUpDown.DecimalPlaces" />
+
+        
 
         
 
@@ -107,8 +123,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.NumericUpDown.Maximum" />
+
+        
 
         
 
@@ -121,6 +141,8 @@
 
         
 
+        
+
          value to specify the value to be incremented or decremented to the <see
          cref="P:System.Windows.Forms.NumericUpDown.Value" />
 
@@ -128,8 +150,12 @@
 
         
 
+        
+
          property when the user clicks the up or down arrow buttons. You can increase the speed that the control moves through numbers when the user continuously presses the up or down arrow by setting the <see
          cref="P:System.Windows.Forms.NumericUpDown.Accelerations" />
+
+        
 
         
 
@@ -145,8 +171,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.Windows.Forms.NumericUpDown.DownButton" />
+
+        
 
         
 
@@ -159,8 +189,12 @@
 
         
 
+        
+
          property is set to true, the <see
          cref="M:System.Windows.Forms.NumericUpDown.ParseEditText" />
+
+        
 
         
 
@@ -173,6 +207,8 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.NumericUpDown.Maximum" />
 
@@ -180,8 +216,12 @@
 
         
 
+        
+
          values, and the <see
          cref="M:System.Windows.Forms.NumericUpDown.UpdateEditText" />
+
+        
 
         
 
@@ -207,6 +247,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.NumericUpDown" />
+
+            
 
             
 
@@ -253,8 +295,12 @@
 
             
 
+            
+
              property can be used to increase the speed with which the <see
              cref="T:System.Windows.Forms.NumericUpDown" />
+
+            
 
             
 
@@ -267,8 +313,12 @@
 
             
 
+            
+
              events that occur depending on the <see
              cref="P:System.Windows.Forms.NumericUpDownAcceleration.Increment" />
+
+            
 
             
 
@@ -281,8 +331,12 @@
 
             
 
+            
+
              property values specified for each <see
              cref="T:System.Windows.Forms.NumericUpDownAcceleration" />
+
+            
 
             
 
@@ -295,8 +349,12 @@
 
             
 
+            
+
              objects contained in the collection are sorted by their <see
              cref="P:System.Windows.Forms.NumericUpDownAcceleration.Seconds" />
+
+            
 
             
 
@@ -310,6 +368,8 @@
           <para
             >Gets a collection of sorted acceleration objects for the <see
              cref="T:System.Windows.Forms.NumericUpDown" />
+
+            
 
             
 
@@ -334,6 +394,8 @@
           <para
             >Begins the initialization of a <see
              cref="T:System.Windows.Forms.NumericUpDown" />
+
+            
 
             
 
@@ -391,8 +453,12 @@
 
             
 
+            
+
              property is set, the <see
              cref="M:System.Windows.Forms.NumericUpDown.UpdateEditText" />
+
+            
 
             
 
@@ -430,8 +496,12 @@
 
             
 
+            
+
              method is called, either in code or by the click of the down button, the new value is validated and the control is updated with the new value in the appropriate format. Specifically, if the <see
              cref="P:System.Windows.Forms.UpDownBase.UserEdit" />
+
+            
 
             
 
@@ -444,8 +514,12 @@
 
             
 
+            
+
              method is called prior to validating or updating the value. The value is then validated to be between the <see
              cref="P:System.Windows.Forms.NumericUpDown.Minimum" />
+
+            
 
             
 
@@ -458,8 +532,12 @@
 
             
 
+            
+
              values, and the <see
              cref="M:System.Windows.Forms.NumericUpDown.UpdateEditText" />
+
+            
 
             
 
@@ -497,6 +575,8 @@
 
             
 
+            
+
              control that is used on a form or used by another component. The initialization occurs at run time.</para
           >
         </summary>
@@ -529,8 +609,12 @@
 
             
 
+            
+
              property is set, the <see
              cref="M:System.Windows.Forms.NumericUpDown.UpdateEditText" />
+
+            
 
             
 
@@ -546,8 +630,12 @@
 
             
 
+            
+
              property is set to true, the <see
              cref="P:System.Windows.Forms.NumericUpDown.Maximum" />
+
+            
 
             
 
@@ -560,6 +648,8 @@
 
             
 
+            
+
              and the <see
              cref="P:System.Windows.Forms.NumericUpDown.Minimum" />
 
@@ -567,8 +657,12 @@
 
             
 
+            
+
              property should be set to <see
              cref="F:System.Int32.MinValue" />
+
+            
 
             
 
@@ -605,8 +699,12 @@
 
             
 
+            
+
              property to increment by the amount specified by the <see
              cref="P:System.Windows.Forms.NumericUpDown.Increment" />
+
+            
 
             
 
@@ -619,8 +717,12 @@
 
             
 
+            
+
              property. Clicking the down button causes the <see
              cref="P:System.Windows.Forms.NumericUpDown.Value" />
+
+            
 
             
 
@@ -633,8 +735,12 @@
 
             
 
+            
+
              property and approach the <see
              cref="P:System.Windows.Forms.NumericUpDown.Minimum" />
+
+            
 
             
 
@@ -676,8 +782,12 @@
 
             
 
+            
+
              property is set, the <see
              cref="P:System.Windows.Forms.NumericUpDown.Minimum" />
+
+            
 
             
 
@@ -690,8 +800,12 @@
 
             
 
+            
+
              method is called. If the <see
              cref="P:System.Windows.Forms.NumericUpDown.Minimum" />
+
+            
 
             
 
@@ -704,6 +818,8 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Windows.Forms.NumericUpDown.Minimum" />
 
@@ -711,8 +827,12 @@
 
             
 
+            
+
              property value is set equal to the <see
              cref="P:System.Windows.Forms.NumericUpDown.Maximum" />
+
+            
 
             
 
@@ -725,8 +845,12 @@
 
             
 
+            
+
              is greater than the new <see
              cref="P:System.Windows.Forms.NumericUpDown.Maximum" />
+
+            
 
             
 
@@ -739,8 +863,12 @@
 
             
 
+            
+
              property value is set equal to the <see
              cref="P:System.Windows.Forms.NumericUpDown.Maximum" />
+
+            
 
             
 
@@ -782,8 +910,12 @@
 
             
 
+            
+
              property is set, the <see
              cref="P:System.Windows.Forms.NumericUpDown.Maximum" />
+
+            
 
             
 
@@ -796,8 +928,12 @@
 
             
 
+            
+
              method is called. If the new <see
              cref="P:System.Windows.Forms.NumericUpDown.Minimum" />
+
+            
 
             
 
@@ -810,8 +946,12 @@
 
             
 
+            
+
              property value, the <see
              cref="P:System.Windows.Forms.NumericUpDown.Maximum" />
+
+            
 
             
 
@@ -824,8 +964,12 @@
 
             
 
+            
+
              value. If the <see
              cref="P:System.Windows.Forms.NumericUpDown.Value" />
+
+            
 
             
 
@@ -838,6 +982,8 @@
 
             
 
+            
+
              value, the <see
              cref="P:System.Windows.Forms.NumericUpDown.Value" />
 
@@ -845,8 +991,12 @@
 
             
 
+            
+
              property is also set equal to the <see
              cref="P:System.Windows.Forms.NumericUpDown.Minimum" />
+
+            
 
             
 
@@ -893,11 +1043,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.NumericUpDown.OnKeyDown(System.Windows.Forms.KeyEventArgs)" />
+
+            
 
             
 
@@ -916,6 +1070,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -926,8 +1082,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyEventArgs" />
+
+          
 
           
 
@@ -965,11 +1125,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.NumericUpDown.OnKeyUp(System.Windows.Forms.KeyEventArgs)" />
+
+            
 
             
 
@@ -988,6 +1152,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -998,8 +1164,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyEventArgs" />
+
+          
 
           
 
@@ -1032,11 +1202,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.NumericUpDown.OnLostFocus(System.EventArgs)" />
+
+            
 
             
 
@@ -1055,6 +1229,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -1065,8 +1241,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1103,6 +1283,8 @@
 
             
 
+            
+
              control accepts only digits, the negative sign, the decimal point, and editing keystrokes, such as BACKSPACE. If the <see
              cref="P:System.Windows.Forms.NumericUpDown.Hexadecimal" />
 
@@ -1110,8 +1292,12 @@
 
             
 
+            
+
              property is set to true, <see
              cref="T:System.Windows.Forms.NumericUpDown" />
+
+            
 
             
 
@@ -1130,11 +1316,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1149,8 +1339,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyPressEventArgs" />
+
+          
 
           
 
@@ -1186,11 +1380,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.NumericUpDown.OnValueChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1209,6 +1407,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1219,8 +1419,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1269,8 +1473,12 @@
 
             
 
+            
+
              property as no effect on the appearance of the <see
              cref="T:System.Windows.Forms.NumericUpDown" />
+
+            
 
             
 
@@ -1284,6 +1492,8 @@
           <para
             >Gets or sets the space between the edges of a <see
              cref="T:System.Windows.Forms.NumericUpDown" />
+
+            
 
             
 
@@ -1324,6 +1534,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1332,6 +1544,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.NumericUpDown.Padding" />
+
+            
 
             
 
@@ -1360,6 +1574,8 @@
 
             
 
+            
+
              property is set to true, the text displayed is converted to a numeric value so it can be validated to be between the <see
              cref="P:System.Windows.Forms.NumericUpDown.Minimum" />
 
@@ -1367,8 +1583,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.NumericUpDown.Maximum" />
+
+            
 
             
 
@@ -1419,8 +1639,12 @@
 
             
 
+            
+
              has no affect on the appearance of the <see
              cref="T:System.Windows.Forms.NumericUpDown" />
+
+            
 
             
 
@@ -1434,6 +1658,8 @@
           <para
             >Gets or sets the text to be displayed in the <see
              cref="T:System.Windows.Forms.NumericUpDown" />
+
+            
 
             
 
@@ -1474,6 +1700,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -1509,8 +1737,12 @@
 
             
 
+            
+
              property is set, the <see
              cref="M:System.Windows.Forms.NumericUpDown.UpdateEditText" />
+
+            
 
             
 
@@ -1548,8 +1780,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.NumericUpDown.Maximum" />
+
+            
 
             
 
@@ -1568,6 +1804,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -1576,6 +1814,8 @@
           <para
             >A string that represents the current <see
              cref="T:System.Windows.Forms.NumericUpDown" />
+
+            
 
             
 
@@ -1608,8 +1848,12 @@
 
             
 
+            
+
              method is called, either in code or by the click of the up button, the new value is validated and the control is updated with the new value in the appropriate format. Specifically, if <see
              cref="P:System.Windows.Forms.UpDownBase.UserEdit" />
+
+            
 
             
 
@@ -1622,8 +1866,12 @@
 
             
 
+            
+
              is called prior to validating or updating the value. The value is then validated to be between the <see
              cref="P:System.Windows.Forms.NumericUpDown.Minimum" />
+
+            
 
             
 
@@ -1636,8 +1884,12 @@
 
             
 
+            
+
              values and the <see
              cref="M:System.Windows.Forms.NumericUpDown.UpdateEditText" />
+
+            
 
             
 
@@ -1674,8 +1926,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.NumericUpDown.Maximum" />
+
+            
 
             
 
@@ -1712,6 +1968,8 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Windows.Forms.NumericUpDown.ParseEditText" />
 
@@ -1719,8 +1977,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.NumericUpDown.UpdateEditText" />
+
+            
 
             
 
@@ -1762,8 +2024,12 @@
 
             
 
+            
+
              property is set, the new value is validated to be between the <see
              cref="P:System.Windows.Forms.NumericUpDown.Minimum" />
+
+            
 
             
 
@@ -1776,8 +2042,12 @@
 
             
 
+            
+
              values. Following this, the <see
              cref="M:System.Windows.Forms.NumericUpDown.UpdateEditText" />
+
+            
 
             
 
@@ -1813,6 +2083,8 @@
 
             
 
+            
+
              event to occur, the <see
              cref="P:System.Windows.Forms.NumericUpDown.Value" />
 
@@ -1820,8 +2092,12 @@
 
             
 
+            
+
              property can be changed in code, by clicking the up or down button, or by the user entering a new value that is read by the control. The new value is read when the user hits the ENTER key or navigates away from the control. If the user enters a new value and then clicks the up or down button, the <see
              cref="E:System.Windows.Forms.NumericUpDown.ValueChanged" />
+
+            
 
             
 
@@ -1839,6 +2115,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1847,6 +2125,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.NumericUpDown.Value" />
+
+            
 
             
 

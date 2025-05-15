@@ -25,6 +25,8 @@
 
         
 
+        
+
          Web server control.</para
       >
     </summary>
@@ -41,6 +43,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.WebControls.CalendarDesigner" />
+
+            
 
             
 
@@ -78,6 +82,8 @@
 
             
 
+            
+
              to initialize the component for the designer.</para
           >
         </remarks>
@@ -92,8 +98,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -136,6 +146,8 @@
 
           
 
+          
+
           The source of the event. </param
         >
         <param name="e">
@@ -145,8 +157,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.EventArgs" />
+
+          
 
           
 

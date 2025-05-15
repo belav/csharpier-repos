@@ -36,6 +36,8 @@
 
         
 
+        
+
          class provides a convenient way to modify the contents of a <see
          cref="T:System.Uri" />
 
@@ -43,8 +45,12 @@
 
         
 
+        
+
          instance without creating a new <see
          cref="T:System.Uri" />
+
+        
 
         
 
@@ -60,8 +66,12 @@
 
         
 
+        
+
          properties provide read/write access to the read-only <see
          cref="T:System.Uri" />
+
+        
 
         
 
@@ -75,6 +85,8 @@
       <para
         >Provides a custom constructor for uniform resource identifiers (URIs) and modifies URIs for the <see
          cref="T:System.Uri" />
+
+        
 
         
 
@@ -109,6 +121,8 @@
           <para
             >The default constructor creates a new instance of the <see
              cref="T:System.UriBuilder" />
+
+            
 
             
 
@@ -211,6 +225,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -246,8 +262,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -259,6 +279,8 @@
         <exception cref="T:System.UriFormatException">
           <para>
             <paramref name="uri" />
+
+            
 
             
 
@@ -278,6 +300,8 @@
 
             
 
+            
+
             is in an invalid form and cannot be parsed.</para
           >
         </exception>
@@ -291,8 +315,12 @@
 
             
 
+            
+
              class with the <see
              cref="P:System.UriBuilder.Fragment" />
+
+            
 
             
 
@@ -305,8 +333,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.UriBuilder.Path" />
+
+            
 
             
 
@@ -319,8 +351,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.UriBuilder.Query" />
+
+            
 
             
 
@@ -333,8 +369,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.UriBuilder.Uri" />
+
+            
 
             
 
@@ -347,11 +387,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >If <paramref
              name="uri" />
+
+            
 
             
 
@@ -370,11 +414,15 @@
 
             
 
+            
+
              class with the specified URI.</para
           >
         </summary>
         <param name="uri">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -414,8 +462,12 @@
 
             
 
+            
+
              is <see
              langword="null" />
+
+            
 
             
 
@@ -434,8 +486,12 @@
 
             
 
+            
+
              class with the <see
              cref="P:System.UriBuilder.Fragment" />
+
+            
 
             
 
@@ -448,8 +504,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.UriBuilder.Path" />
+
+            
 
             
 
@@ -462,8 +522,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.UriBuilder.Query" />
+
+            
 
             
 
@@ -476,6 +540,8 @@
 
             
 
+            
+
             , and <see
              cref="P:System.UriBuilder.Uri" />
 
@@ -483,8 +549,12 @@
 
             
 
+            
+
              properties set as specified in <paramref
              name="uri" />
+
+            
 
             
 
@@ -503,8 +573,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -520,8 +594,12 @@
 
           
 
+          
+
           An instance of the <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -567,8 +645,12 @@
 
             
 
+            
+
              instance is initialized with the <see
              cref="P:System.UriBuilder.Scheme" />
+
+            
 
             
 
@@ -581,8 +663,12 @@
 
             
 
+            
+
              and the <see
              cref="P:System.UriBuilder.Host" />
+
+            
 
             
 
@@ -595,6 +681,8 @@
 
             
 
+            
+
             . <see
              cref="P:System.UriBuilder.Port" />
 
@@ -602,8 +690,12 @@
 
             
 
+            
+
              is initialized to the value -1 to indicate the default port for the scheme should be used, and the <see
              cref="P:System.UriBuilder.Path" />
+
+            
 
             
 
@@ -622,6 +714,8 @@
 
             
 
+            
+
              class with the specified scheme and host.</para
           >
         </summary>
@@ -632,10 +726,14 @@
 
           
 
+          
+
           An Internet access protocol. </param
         >
         <param name="hostName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -679,6 +777,8 @@
 
           
 
+          
+
            is less than zero.</exception
         >
         <remarks>
@@ -691,8 +791,12 @@
 
             
 
+            
+
              instance is initialized with the <see
              cref="P:System.UriBuilder.Scheme" />
+
+            
 
             
 
@@ -705,8 +809,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.UriBuilder.Host" />
+
+            
 
             
 
@@ -719,8 +827,12 @@
 
             
 
+            
+
             , and the <see
              cref="P:System.UriBuilder.Port" />
+
+            
 
             
 
@@ -733,8 +845,12 @@
 
             
 
+            
+
             . The <see
              cref="P:System.UriBuilder.Path" />
+
+            
 
             
 
@@ -750,6 +866,8 @@
 
             
 
+            
+
              is set to a value of -1, this indicates that the default port value for the <paramref
              name="scheme" />
 
@@ -757,8 +875,12 @@
 
             
 
+            
+
              will be used to connect to the <paramref
              name="host" />
+
+            
 
             
 
@@ -777,11 +899,15 @@
 
             
 
+            
+
              class with the specified scheme, host, and port.</para
           >
         </summary>
         <param name="scheme">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -796,10 +922,14 @@
 
           
 
+          
+
           A DNS-style domain name or IP address. </param
         >
         <param name="portNumber">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -844,6 +974,8 @@
 
           
 
+          
+
            is less than zero.</exception
         >
         <remarks>
@@ -856,8 +988,12 @@
 
             
 
+            
+
              instance is initialized with the <see
              cref="P:System.UriBuilder.Scheme" />
+
+            
 
             
 
@@ -870,8 +1006,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.UriBuilder.Host" />
+
+            
 
             
 
@@ -884,8 +1024,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.UriBuilder.Port" />
+
+            
 
             
 
@@ -898,6 +1042,8 @@
 
             
 
+            
+
              and the <see
              cref="P:System.UriBuilder.Path" />
 
@@ -905,8 +1051,12 @@
 
             
 
+            
+
              property set to <paramref
              name="pathValue" />
+
+            
 
             
 
@@ -922,6 +1072,8 @@
 
             
 
+            
+
              is set to a value of -1, this indicates that the default port value for the <paramref
              name="scheme" />
 
@@ -929,8 +1081,12 @@
 
             
 
+            
+
              will be used to connect to the <paramref
              name="host" />
+
+            
 
             
 
@@ -949,11 +1105,15 @@
 
             
 
+            
+
              class with the specified scheme, host, port number, and path.</para
           >
         </summary>
         <param name="scheme">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -968,6 +1128,8 @@
 
           
 
+          
+
           A DNS-style domain name or IP address. </param
         >
         <param name="port">
@@ -977,10 +1139,14 @@
 
           
 
+          
+
           An IP port number for the service. </param
         >
         <param name="pathValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1026,10 +1192,14 @@
 
           
 
+          
+
            is less than zero.</exception
         >
         <exception cref="T:System.ArgumentException">
           <paramref name="extraValue" />
+
+          
 
           
 
@@ -1042,8 +1212,12 @@
 
           
 
+          
+
            or <see
            cref="P:System.String.Empty" />
+
+          
 
           
 
@@ -1061,8 +1235,12 @@
 
             
 
+            
+
              instance is initialized with the <see
              cref="P:System.UriBuilder.Scheme" />
+
+            
 
             
 
@@ -1075,8 +1253,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.UriBuilder.Host" />
+
+            
 
             
 
@@ -1089,8 +1271,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.UriBuilder.Port" />
+
+            
 
             
 
@@ -1103,8 +1289,12 @@
 
             
 
+            
+
             , and the <see
              cref="P:System.UriBuilder.Path" />
+
+            
 
             
 
@@ -1117,8 +1307,12 @@
 
             
 
+            
+
             . If <paramref
              name="extraValue" />
+
+            
 
             
 
@@ -1131,8 +1325,12 @@
 
             
 
+            
+
              is set to <paramref
              name="extraValue" />
+
+            
 
             
 
@@ -1145,6 +1343,8 @@
 
             
 
+            
+
              begins with a question mark (?), then <see
              cref="P:System.UriBuilder.Query" />
 
@@ -1152,8 +1352,12 @@
 
             
 
+            
+
              is set to <paramref
              name="extraValue" />
+
+            
 
             
 
@@ -1169,6 +1373,8 @@
 
             
 
+            
+
              is set to a value of -1, this indicates that the default port value for the <paramref
              name="scheme" />
 
@@ -1176,8 +1382,12 @@
 
             
 
+            
+
              will be used to connect to the <paramref
              name="host" />
+
+            
 
             
 
@@ -1196,11 +1406,15 @@
 
             
 
+            
+
              class with the specified scheme, host, port number, path and query string or fragment identifier.</para
           >
         </summary>
         <param name="scheme">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1215,10 +1429,14 @@
 
           
 
+          
+
           A DNS-style domain name or IP address. </param
         >
         <param name="port">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1233,10 +1451,14 @@
 
           
 
+          
+
           The path to the Internet resource. </param
         >
         <param name="extraValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1280,8 +1502,12 @@
 
             
 
+            
+
              method compares a specified <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -1294,6 +1520,8 @@
 
             
 
+            
+
              instance built by the <see
              cref="T:System.UriBuilder" />
 
@@ -1301,8 +1529,12 @@
 
             
 
+            
+
              instance. If the two are the same, the <see
              cref="M:System.UriBuilder.Equals(System.Object)" />
+
+            
 
             
 
@@ -1321,8 +1553,12 @@
 
             
 
+            
+
              instance with the contents of the <see
              cref="T:System.UriBuilder" />
+
+            
 
             
 
@@ -1341,8 +1577,12 @@
 
             
 
+            
+
              represents the same <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -1355,8 +1595,12 @@
 
             
 
+            
+
              constructed by this <see
              cref="T:System.UriBuilder" />
+
+            
 
             
 
@@ -1367,6 +1611,8 @@
         </returns>
         <param name="rparam">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1404,6 +1650,8 @@
 
             
 
+            
+
              containing the fragment component of the URI represented by the
  current instance.</para
           >
@@ -1418,8 +1666,12 @@
 
             
 
+            
+
              property contains any text following a fragment marker (#) in the URI, including the marker itself. When setting the <see
              cref="P:System.UriBuilder.Fragment" />
+
+            
 
             
 
@@ -1432,8 +1684,12 @@
 
             
 
+            
+
              property to any value, including null, cleared the <see
              cref="P:System.UriBuilder.Query" />
+
+            
 
             
 
@@ -1446,8 +1702,12 @@
 
             
 
+            
+
              property to null or to <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -1460,8 +1720,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.UriBuilder.Query" />
+
+            
 
             
 
@@ -1472,6 +1736,8 @@
           <para
             >Note   Do not append a string directly to this property. If the length of <see
              cref="P:System.UriBuilder.Fragment" />
+
+            
 
             
 
@@ -1520,11 +1786,15 @@
 
             
 
+            
+
              A and B are guaranteed to be the same when A.Equals(B) is true.</para
           >
           <para
             >This method implements <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -1571,6 +1841,8 @@
 
             
 
+            
+
              containing the DNS host name or IP address of the host machine.</para
           >
         </value>
@@ -1579,6 +1851,8 @@
           <para
             >The <see
              cref="P:System.UriBuilder.Host" />
+
+            
 
             
 
@@ -1621,6 +1895,8 @@
 
             
 
+            
+
              containing the
    password used to access the resource represented by the current instance.</para
           >
@@ -1634,9 +1910,13 @@
 
             
 
+            
+
              for 
    a set operation sets this property to <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -1679,6 +1959,8 @@
 
             
 
+            
+
              containing the
    path to the resource represented by the current instance.</para
           >
@@ -1693,11 +1975,15 @@
 
             
 
+            
+
              property contains the path information that the server uses to resolve requests for information. Typically this is the path to the desired information on the server's file system; although it also can indicate the application or script that the server must run to provide the information.</para
           >
           <para
             >The path information does not include the scheme, host name, or query portion of the URI. The <see
              cref="P:System.UriBuilder.Path" />
+
+            
 
             
 
@@ -1740,6 +2026,8 @@
 
             
 
+            
+
              containing a non-negative port number or -1.</para
           >
         </value>
@@ -1756,8 +2044,12 @@
 
             
 
+            
+
              property returns the value of -1 to indicate that the default port value for the protocol scheme will be used to connect to the host. If the <see
              cref="P:System.Uri.Port" />
+
+            
 
             
 
@@ -1800,6 +2092,8 @@
 
             
 
+            
+
              containing the query component of the URI represented by the current instance.</para
           >
         </value>
@@ -1808,6 +2102,8 @@
           <para
             >The <see
              cref="P:System.Uri.Query" />
+
+            
 
             
 
@@ -1824,8 +2120,12 @@
 
             
 
+            
+
              property to any value, including null, cleared the <see
              cref="P:System.UriBuilder.Query" />
+
+            
 
             
 
@@ -1838,8 +2138,12 @@
 
             
 
+            
+
              property to null or to <see
              cref="F:System.String.Empty" />
+
+            
 
             
 
@@ -1852,8 +2156,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.UriBuilder.Query" />
+
+            
 
             
 
@@ -1864,6 +2172,8 @@
           <para
             >Note   Do not append a string directly to this property. If the length of <see
              cref="P:System.UriBuilder.Query" />
+
+            
 
             
 
@@ -1906,6 +2216,8 @@
 
             
 
+            
+
              containing the
    scheme component of the current instance.</para
           >
@@ -1915,6 +2227,8 @@
           <para
             >The following table lists the valid scheme names for the <see
              cref="P:System.UriBuilder.Scheme" />
+
+            
 
             
 
@@ -2029,8 +2343,12 @@
 
             
 
+            
+
              property value if the <see
              cref="P:System.UriBuilder.Port" />
+
+            
 
             
 
@@ -2043,6 +2361,8 @@
 
             
 
+            
+
              was constructed using of the <see
              cref="M:System.UriBuilder.#ctor" />
 
@@ -2050,8 +2370,12 @@
 
             
 
+            
+
              methods that accept a port number parameter except for the case when the <see
              cref="P:System.UriBuilder.Port" />
+
+            
 
             
 
@@ -2067,8 +2391,12 @@
 
             
 
+            
+
              property value if the <see
              cref="P:System.UriBuilder.Port" />
+
+            
 
             
 
@@ -2081,6 +2409,8 @@
 
             
 
+            
+
              was constructed. The display string also does not contain the <see
              cref="P:System.UriBuilder.Port" />
 
@@ -2088,8 +2418,12 @@
 
             
 
+            
+
              property value if the <see
              cref="P:System.UriBuilder.Port" />
+
+            
 
             
 
@@ -2108,6 +2442,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -2116,6 +2452,8 @@
           <para
             >The string that contains the unescaped display string of the <see
              cref="T:System.UriBuilder" />
+
+            
 
             
 
@@ -2155,6 +2493,8 @@
 
             
 
+            
+
              containing the URI
    components of the current instance.</para
           >
@@ -2172,8 +2512,12 @@
 
             
 
+            
+
              property contains the <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -2186,6 +2530,8 @@
 
             
 
+            
+
             . Any changes made to the <see
              cref="T:System.UriBuilder" />
 
@@ -2193,8 +2539,12 @@
 
             
 
+            
+
              properties are reflected in the <see
              cref="P:System.UriBuilder.Uri" />
+
+            
 
             
 
@@ -2213,8 +2563,12 @@
 
             
 
+            
+
              instance constructed by the specified <see
              cref="T:System.UriBuilder" />
+
+            
 
             
 
@@ -2253,6 +2607,8 @@
 
             
 
+            
+
              containing the
    user name used to access
    the resource identified by the current instance.</para
@@ -2267,9 +2623,13 @@
 
             
 
+            
+
              for a set operation sets this property to 
 <see
              cref="F:System.String.Empty" />
+
+            
 
             
 

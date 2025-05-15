@@ -17,6 +17,8 @@
 
         
 
+        
+
          class is implemented by design hosts, such as vsprvslong, that host the data-binding dialog box to show schema.</para
       >
     </remarks>
@@ -67,8 +69,12 @@
 
             
 
+            
+
              method is called by the design host only if the <see
              cref="P:System.Web.UI.Design.IDataBindingSchemaProvider.CanRefreshSchema" />
+
+            
 
             
 
@@ -83,6 +89,8 @@
         </summary>
         <param name="preferSilent">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

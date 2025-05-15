@@ -24,6 +24,8 @@
 
         
 
+        
+
          control raises the <see
          cref="E:System.Web.UI.WebControls.FormView.PageIndexChanging" />
 
@@ -31,8 +33,12 @@
 
         
 
+        
+
          event when a pager button (a button with its CommandName property set to "Page") within the control is clicked, but before the <see
          cref="T:System.Web.UI.WebControls.FormView" />
+
+        
 
         
 
@@ -102,12 +108,16 @@
 
           
 
+          
+
            control.</para
         >
       </block>
       <para
         >A <see
          cref="T:System.Web.UI.WebControls.FormViewPageEventArgs" />
+
+        
 
         
 
@@ -120,6 +130,8 @@
 
         
 
+        
+
          property. To cancel the paging operation, set the <see
          cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
 
@@ -127,8 +139,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.UI.WebControls.FormViewPageEventArgs" />
+
+        
 
         
 
@@ -146,6 +162,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -156,8 +174,12 @@
 
         
 
+        
+
          class, see the <see
          cref="M:System.Web.UI.WebControls.FormViewPageEventArgs.#ctor(System.Int32)" />
+
+        
 
         
 
@@ -171,6 +193,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Web.UI.WebControls.FormView.PageIndexChanging" />
+
+        
 
         
 
@@ -200,11 +224,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The following table shows the initial property value for an instance of <see
              cref="T:System.Web.UI.WebControls.FormViewPageEventArgs" />
+
+            
 
             
 
@@ -238,6 +266,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -252,6 +282,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.FormViewPageEventArgs" />
+
+            
 
             
 
@@ -284,8 +316,12 @@
 
             
 
+            
+
              event occurs before the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 
@@ -298,8 +334,12 @@
 
             
 
+            
+
              property of the control contains the index of the previously displayed page and cannot be used to determine the index of the page selected by the user. Use the <see
              cref="P:System.Web.UI.WebControls.FormViewPageEventArgs.NewPageIndex" />
+
+            
 
             
 
@@ -313,6 +353,8 @@
           <para
             >Gets or sets the index of the new page to display in the <see
              cref="T:System.Web.UI.WebControls.FormView" />
+
+            
 
             
 

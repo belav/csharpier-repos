@@ -29,8 +29,12 @@
 
         
 
+        
+
          class is the base class used by applications to provide contextual information to the settings provider. Although the class is not abstract, an application can choose to create a specialized class that inherits from <see
          cref="T:System.Configuration.SettingsContext" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
          class is to provide features that use the <see
          cref="T:System.Configuration.SettingsBase" />
+
+        
 
         
 
@@ -60,6 +68,8 @@
 
         
 
+        
+
          class provides additional feature-specific contextual information about the property data being stored by the <see
          cref="T:System.Configuration.SettingsBase" />
 
@@ -67,8 +77,12 @@
 
         
 
+        
+
          instance. Therefore, it is very simple to store additional information in a <see
          cref="T:System.Configuration.SettingsContext" />
+
+        
 
         
 
@@ -84,6 +98,8 @@
 
         
 
+        
+
          class to pass along the username associated with the data managed by a <see
          cref="T:System.Configuration.SettingsBase" />
 
@@ -91,8 +107,12 @@
 
         
 
+        
+
          instance, as well as a property indicating whether the user is considered authenticated. In this way, ASP.NET uses the <see
          cref="T:System.Configuration.SettingsContext" />
+
+        
 
         
 
@@ -127,6 +147,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Configuration.SettingsContext" />
+
+            
 
             
 

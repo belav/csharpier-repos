@@ -27,8 +27,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Runtime.Serialization.NetDataContractSerializer" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Runtime.Serialization.NetDataContractSerializer" />
+
+        
 
         
 
@@ -77,6 +85,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Serialization.InvalidDataContractException" />
+
+            
 
             
 
@@ -115,11 +125,15 @@
 
             
 
+            
+
              class with the specified error message. </para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -157,6 +171,8 @@
 
             
 
+            
+
              namespace. </para
           >
         </remarks>
@@ -170,6 +186,8 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
@@ -177,8 +195,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -194,8 +216,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -210,8 +236,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -250,11 +280,15 @@
 
             
 
+            
+
              class with the specified error message and inner exception. </para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -269,8 +303,12 @@
 
           
 
+          
+
           The original <see
            cref="T:System.Exception" />
+
+          
 
           
 

@@ -165,6 +165,8 @@
 
         
 
+        
+
          have.
 			</p
       >
@@ -180,7 +182,7 @@
     <my:author>Robert Bob</my:author>
   </my:book>
   <my:book style="hard back" price="99.95">
-<![CDATA[
+    <![CDATA[
 			Here is some CDATA
 		]]>
     <my:title>Where is Trenton?</my:title>

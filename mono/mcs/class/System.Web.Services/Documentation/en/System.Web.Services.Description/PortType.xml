@@ -27,6 +27,8 @@
 
         
 
+        
+
          class corresponds to the Web Services Description Language (WSDL) portType element enclosed by the definitions root element. For more information about WSDL, see the specification at http://www.w3.org/TR/wsdl.</para
       >
     </remarks>
@@ -48,6 +50,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Description.PortType" />
+
+            
 
             
 
@@ -92,8 +96,12 @@
 
             
 
+            
+
              associated with this <see
              cref="T:System.Web.Services.Description.PortType" />
+
+            
 
             
 
@@ -148,8 +156,12 @@
 
             
 
+            
+
              instances defined by the <see
              cref="T:System.Web.Services.Description.PortType" />
+
+            
 
             
 
@@ -191,8 +203,12 @@
 
             
 
+            
+
              of which the <see
              cref="T:System.Web.Services.Description.PortType" />
+
+            
 
             
 

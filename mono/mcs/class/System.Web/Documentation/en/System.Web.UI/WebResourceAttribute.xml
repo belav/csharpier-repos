@@ -26,6 +26,8 @@
 
         
 
+        
+
          class is valid only when used on assembly declarations. It is used to enable a specified embedded resource in an assembly for use as a Web resource. </para
       >
       <para
@@ -33,6 +35,8 @@
          type="text/html">
           <a href="0936b3b2-9e6e-4abe-9c06-364efef9dbbd">ASP.NET Web Page Resources Overview</a>
         </format>
+
+        
 
         
 
@@ -70,6 +74,8 @@
 
             
 
+            
+
              class with the specified Web resource and resource content type.</para
           >
         </summary>
@@ -80,10 +86,14 @@
 
           
 
+          
+
           The name of the of Web resource.</param
         >
         <param name="contentType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -117,6 +127,8 @@
 
             
 
+            
+
              Web site and refer to the section on media types. </para
           >
         </remarks>
@@ -125,6 +137,8 @@
           <para
             >Gets a string containing the MIME type of the resource that is referenced by the <see
              cref="T:System.Web.UI.WebResourceAttribute" />
+
+            
 
             
 
@@ -157,6 +171,8 @@
 
             
 
+            
+
              property is set to true.</para
           >
         </remarks>
@@ -165,6 +181,8 @@
           <para
             >Gets or sets a Boolean value that determines whether, during processing of the embedded resource referenced by the <see
              cref="T:System.Web.UI.WebResourceAttribute" />
+
+            
 
             
 
@@ -193,6 +211,8 @@
           <para
             >Gets a string containing the name of the resource that is referenced by the <see
              cref="T:System.Web.UI.WebResourceAttribute" />
+
+            
 
             
 

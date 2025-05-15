@@ -23,8 +23,12 @@
 
         
 
+        
+
           class is employed by the <see
          cref="T:System.Web.Services.Discovery.DiscoveryRequestHandler" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          method, which handles an HTTP request for a discovery document. The <see
          cref="T:System.Web.Services.Discovery.DynamicDiscoveryDocument" />
+
+        
 
         
 
@@ -51,8 +59,12 @@
 
         
 
+        
+
          property contains a collection of <see
          cref="T:System.Web.Services.Discovery.ExcludePathInfo" />
+
+        
 
         
 
@@ -85,6 +97,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -112,8 +126,12 @@
 
             
 
+            
+
              parameter becomes the return value of the <see
              cref="P:System.Web.Services.Discovery.ExcludePathInfo.Path" />
+
+            
 
             
 
@@ -132,11 +150,15 @@
 
             
 
+            
+
              class and specifies the file system path to exclude from searches. </para
           >
         </summary>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

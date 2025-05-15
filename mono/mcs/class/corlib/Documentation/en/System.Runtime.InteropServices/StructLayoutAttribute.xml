@@ -45,8 +45,12 @@
 
         
 
+        
+
         , and the <see
          cref="T:System.Runtime.InteropServices.FieldOffsetAttribute" />
+
+        
 
         
 
@@ -64,6 +68,8 @@
 
           
 
+          
+
            
 function used in this example indicates whether the specified point is
 located inside the specified rectangle. In this example, the layout setting on the
@@ -74,10 +80,14 @@ located inside the specified rectangle. In this example, the layout setting on t
 
           
 
+          
+
            
 structure can be
 set to <see
            cref="F:System.Runtime.InteropServices.LayoutKind.Sequential" />
+
+          
 
           
 
@@ -163,8 +173,12 @@ public class StructLayoutTest {
 
         
 
+        
+
          attribute to control the unmanaged layout of the type. Use the attribute with <see
          cref="F:System.Runtime.InteropServices.LayoutKind.Sequential" />
+
+        
 
         
 
@@ -179,8 +193,12 @@ public class StructLayoutTest {
 
         
 
+        
+
         , <see
          cref="F:System.Runtime.InteropServices.LayoutKind.Sequential" />
+
+        
 
         
 
@@ -193,6 +211,8 @@ public class StructLayoutTest {
 
         
 
+        
+
          to control the precise position of each data member. This affects both managed and unmanaged layout, for both blittable and non-blittable types. Using <see
          cref="F:System.Runtime.InteropServices.LayoutKind.Explicit" />
 
@@ -200,8 +220,12 @@ public class StructLayoutTest {
 
         
 
+        
+
          requires that you use the <see
          cref="T:System.Runtime.InteropServices.FieldOffsetAttribute" />
+
+        
 
         
 
@@ -217,8 +241,12 @@ public class StructLayoutTest {
 
         
 
+        
+
          layout value to structures by default. For classes, you must apply the <see
          cref="F:System.Runtime.InteropServices.LayoutKind.Sequential" />
+
+        
 
         
 
@@ -235,6 +263,8 @@ public class StructLayoutTest {
 
         
 
+        
+
          also applies the <see
          cref="T:System.Runtime.InteropServices.StructLayoutAttribute" />
 
@@ -242,8 +272,12 @@ public class StructLayoutTest {
 
         
 
+        
+
          attribute; it always applies the <see
          cref="F:System.Runtime.InteropServices.LayoutKind.Sequential" />
+
+        
 
         
 
@@ -289,12 +323,16 @@ public class StructLayoutTest {
 
             
 
+            
+
              enumeration member. The <format
              type="text/html">
               <a href="EC0A8D63-11B3-4ACD-B398-DA1E37E97382"
                 >[&lt;topic://cpgrfTypeLibraryImporterTlbimpexe&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -313,8 +351,12 @@ public class StructLayoutTest {
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Runtime.InteropServices.LayoutKind" />
+
+            
 
             
 
@@ -330,8 +372,12 @@ public class StructLayoutTest {
 
           
 
+          
+
           A 16-bit integer that represents one of the <see
            cref="T:System.Runtime.InteropServices.LayoutKind" />
+
+          
 
           
 
@@ -380,8 +426,12 @@ public class StructLayoutTest {
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Runtime.InteropServices.LayoutKind" />
+
+            
 
             
 
@@ -392,6 +442,8 @@ public class StructLayoutTest {
         </summary>
         <param name="layoutKind">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -436,6 +488,8 @@ public class StructLayoutTest {
 
             
 
+            
+
             , all string arguments are converted to Unicode characters (LPWSTR) before they are passed to the unmanaged implementation. If the field is set to <see
              cref="F:System.Runtime.InteropServices.CharSet.Ansi" />
 
@@ -443,8 +497,12 @@ public class StructLayoutTest {
 
             
 
+            
+
             , the strings are converted to ANSI strings (LPSTR). If the CharSet field is set to <see
              cref="F:System.Runtime.InteropServices.CharSet.Auto" />
+
+            
 
             
 
@@ -485,8 +543,12 @@ public class StructLayoutTest {
 
             
 
+            
+
              and <see
              cref="F:System.Runtime.InteropServices.LayoutKind.Explicit" />
+
+            
 
             
 
@@ -497,6 +559,8 @@ public class StructLayoutTest {
           <para
             >The value of <see
              cref="F:System.Runtime.InteropServices.StructLayoutAttribute.Pack" />
+
+            
 
             
 
@@ -580,6 +644,8 @@ byte B2;
 
             
 
+            
+
              field is frequently used when structures are exported during disk and network write operations. The field is also frequently used during platform invoke and interop operations.</para
           >
           <para>Occasionally, the field is used to reduce memory requirements by producing a tighter packing size. However, this usage requires careful consideration of actual hardware constraints, and may actually degrade performance.</para>
@@ -650,6 +716,8 @@ byte B2;
 
             
 
+            
+
              value that specifies how
    the target object is arranged.</para
           >
@@ -662,6 +730,8 @@ byte B2;
           <para
             >Gets the <see
              cref="T:System.Runtime.InteropServices.LayoutKind" />
+
+            
 
             
 

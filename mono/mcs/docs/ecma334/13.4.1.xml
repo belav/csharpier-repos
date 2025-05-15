@@ -13,6 +13,8 @@
 
         
 
+        
+
         . </list_item
       >
       <list_item> T is not a base class of S, and S is not a base class of T. </list_item>
@@ -21,6 +23,8 @@
   <paragraph
     >The restrictions that apply to user-defined conversions are discussed further in <hyperlink
     >17.9.3</hyperlink>
+
+    
 
     
 

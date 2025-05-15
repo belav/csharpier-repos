@@ -39,6 +39,8 @@
 
             
 
+            
+
              parameter should be a named color, or an RGB color expressed in HTML color format (#RRGGBB).</para
           >
         </remarks>
@@ -47,6 +49,8 @@
           <para
             >Starts a <see
              cref="T:System.Web.UI.Design.ColorBuilder" />
+
+            
 
             
 
@@ -66,8 +70,12 @@
 
           
 
+          
+
           The control used to parent the dialog shown by the <see
            cref="T:System.Web.UI.Design.ColorBuilder" />
+
+          
 
           
 
@@ -77,6 +85,8 @@
         >
         <param name="initialColor">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -123,6 +133,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -133,8 +145,12 @@
 
           
 
+          
+
           The control used to parent the dialog shown by the <see
            cref="T:System.Web.UI.Design.UrlBuilder" />
+
+          
 
           
 
@@ -149,10 +165,14 @@
 
           
 
+          
+
           The initial URL to display in the selection interface. </param
         >
         <param name="baseUrl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -167,10 +187,14 @@
 
           
 
+          
+
           A caption that presents a message in the selection interface. </param
         >
         <param name="filter">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -185,6 +209,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.Design.UrlBuilderOptions" />
 
@@ -192,8 +218,12 @@
 
           
 
+          
+
            that indicates the options for the <see
            cref="T:System.Web.UI.Design.UrlBuilder" />
+
+          
 
           
 

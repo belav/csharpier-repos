@@ -25,8 +25,12 @@
 
         
 
+        
+
          class uses the values in this enumeration to set the <see
          cref="P:System.Net.NetworkInformation.PingReply.Status" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
          class returns <see
          cref="T:System.Net.NetworkInformation.PingReply" />
+
+        
 
         
 
@@ -53,8 +61,12 @@
 
         
 
+        
+
          or <see
          cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+        
 
         
 
@@ -71,8 +83,12 @@
 
           
 
+          
+
            and <see
            cref="F:System.Net.NetworkInformation.IPStatus.DestinationProtocolUnreachable" />
+
+          
 
           
 
@@ -85,8 +101,12 @@
 
           
 
+          
+
            applies only to IPv6 and <see
            cref="F:System.Net.NetworkInformation.IPStatus.DestinationProtocolUnreachable" />
+
+          
 
           
 
@@ -123,6 +143,8 @@
           <para
             >The ICMP echo request failed because the destination IP address cannot receive ICMP echo requests or should never appear in the destination address field of any IP datagram. For example, calling <see
              cref="Overload:System.Net.NetworkInformation.Ping.Send" />
+
+            
 
             
 
@@ -511,6 +533,8 @@
 
             
 
+            
+
              properties contain valid data.</para
           >
         </summary>
@@ -542,6 +566,8 @@
 
             
 
+            
+
               or <see
              cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
 
@@ -549,8 +575,12 @@
 
             
 
+            
+
              methods that take a <paramref
              name="timeout" />
+
+            
 
             
 

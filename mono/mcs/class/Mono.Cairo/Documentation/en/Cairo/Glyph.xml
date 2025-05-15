@@ -35,6 +35,8 @@
 
           
 
+          
+
            value as index. </param
         >
         <param name="x"
@@ -45,11 +47,15 @@
 
           
 
+          
+
            value as x</param
         >
         <param name="y"
           >A <see
            cref="t:System.Int64" />
+
+          
 
           
 
@@ -119,6 +125,8 @@ The y value represents the offset in the Y direction between the origin used for
 
           
 
+          
+
            representing the index</value
         >
         <remarks></remarks>
@@ -148,6 +156,8 @@ The y value represents the offset in the Y direction between the origin used for
         <returns
           >A <see
            cref="t:System.Boolean" />
+
+          
 
           
 
@@ -187,6 +197,8 @@ The y value represents the offset in the Y direction between the origin used for
 
           
 
+          
+
            representing the result</returns
         >
         <remarks />
@@ -212,6 +224,8 @@ The y value represents the offset in the Y direction between the origin used for
 
           
 
+          
+
            representing X</value
         >
         <remarks></remarks>
@@ -232,6 +246,8 @@ The y value represents the offset in the Y direction between the origin used for
         <value
           >A <see
            cref="t:System.Double" />
+
+          
 
           
 

@@ -52,6 +52,8 @@
 
           
 
+          
+
           The stream to write to.</param
         >
         <param name="encoding">
@@ -61,10 +63,14 @@
 
           
 
+          
+
           The character encoding of the stream.</param
         >
         <param name="ownsStream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

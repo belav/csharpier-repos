@@ -27,6 +27,8 @@
 
         
 
+        
+
          with the <see
          cref="T:System.ComponentModel.Design.DesignerActionUIService" />
 
@@ -34,8 +36,12 @@
 
         
 
+        
+
          class. <see
          cref="T:System.ComponentModel.Design.DesignerActionUIService" />
+
+        
 
         
 
@@ -53,8 +59,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.ComponentModel.Design.DesignerActionUIService.HideUI(System.ComponentModel.IComponent)" />
+
+            
 
             
 
@@ -72,6 +82,8 @@
 
             
 
+            
+
              event indicates when the UI changes for a component.</para
           >
         </item>
@@ -84,8 +96,12 @@
 
         
 
+        
+
          to manage the <see
          cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+        
 
         
 
@@ -123,6 +139,8 @@
 
             
 
+            
+
              event.</para
           >
           <list type="table">
@@ -151,6 +169,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -165,6 +185,8 @@
                 <para
                   >Connects the <see
                    cref="T:System.ComponentModel.Design.DesignerActionUIStateChangeEventArgs" />
+
+                  
 
                   
 
@@ -190,6 +212,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -225,8 +249,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.ComponentModel.Design.DesignerActionUIService" />
+
+            
 
             
 
@@ -239,8 +267,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.ComponentModel.Design.DesignerActionUIService" />
+
+            
 
             
 
@@ -253,6 +285,8 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.ComponentModel.Design.DesignerActionUIService" />
 
@@ -260,8 +294,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.ComponentModel.Design.DesignerActionUIService" />
+
+            
 
             
 
@@ -276,10 +314,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -296,6 +338,8 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.ComponentModel.Design.DesignerActionUIService" />
 
@@ -303,8 +347,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.ComponentModel.Design.DesignerActionUIService" />
+
+              
 
               
 
@@ -319,6 +367,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.ComponentModel.Design.DesignerActionUIService" />
+
+            
 
             
 
@@ -355,6 +405,8 @@
 
             
 
+            
+
              method will hide it. This method raises the <see
              cref="E:System.ComponentModel.Design.DesignerActionUIService.DesignerActionUIStateChange" />
 
@@ -362,8 +414,12 @@
 
             
 
+            
+
              event, stipulating <see
              cref="F:System.ComponentModel.Design.DesignerActionUIStateChangeType.Hide" />
+
+            
 
             
 
@@ -380,8 +436,12 @@
 
               
 
+              
+
                and <see
                cref="M:System.ComponentModel.Design.DesignerActionUIService.ShowUI(System.ComponentModel.IComponent)" />
+
+              
 
               
 
@@ -397,6 +457,8 @@
         </summary>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -432,8 +494,12 @@
 
             
 
+            
+
              method updates the internal DesignerAction <see
              cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+            
 
             
 
@@ -453,8 +519,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -496,8 +566,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -533,6 +607,8 @@
 
             
 
+            
+
              method will display the panel. This method raises the <see
              cref="E:System.ComponentModel.Design.DesignerActionUIService.DesignerActionUIStateChange" />
 
@@ -540,8 +616,12 @@
 
             
 
+            
+
              event, stipulating <see
              cref="F:System.ComponentModel.Design.DesignerActionUIStateChangeType.Show" />
+
+            
 
             
 
@@ -558,8 +638,12 @@
 
               
 
+              
+
                and <see
                cref="M:System.ComponentModel.Design.DesignerActionUIService.ShowUI(System.ComponentModel.IComponent)" />
+
+              
 
               
 
@@ -575,6 +659,8 @@
         </summary>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

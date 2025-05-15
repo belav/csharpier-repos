@@ -54,6 +54,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -92,6 +94,8 @@
 
             
 
+            
+
              class with the specified security descriptor.</para
           >
         </summary>
@@ -102,8 +106,12 @@
 
           
 
+          
+
           The security descriptor to be associated with the new <see
            cref="T:System.Security.AccessControl.DirectoryObjectSecurity" />
+
+          
 
           
 
@@ -153,6 +161,8 @@
 
             
 
+            
+
              class with the specified values.</para
           >
         </summary>
@@ -161,6 +171,8 @@
           <para
             >The <see
              cref="T:System.Security.AccessControl.AccessRule" />
+
+            
 
             
 
@@ -176,8 +188,12 @@
 
           
 
+          
+
           The identity to which the access rule applies.  It must be an object that can be cast as a <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -192,10 +208,14 @@
 
           
 
+          
+
           The access mask of this rule. The access mask is a 32-bit collection of anonymous bits, the meaning of which is defined by the individual integrators.</param
         >
         <param name="isInherited">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -210,10 +230,14 @@
 
           
 
+          
+
           Specifies the inheritance properties of the access rule.</param
         >
         <param name="propagationFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -226,8 +250,12 @@
 
           
 
+          
+
            is set to <see
            cref="F:System.Security.AccessControl.InheritanceFlags.None" />
+
+          
 
           
 
@@ -242,6 +270,8 @@
 
           
 
+          
+
           Specifies the valid access control type.</param
         >
         <param name="objectType">
@@ -251,10 +281,14 @@
 
           
 
+          
+
           The identity of the class of objects to which the new access rule applies.</param
         >
         <param name="inheritedObjectType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -300,11 +334,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -350,11 +388,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -404,6 +446,8 @@
 
             
 
+            
+
              class with the specified values.</para
           >
         </summary>
@@ -412,6 +456,8 @@
           <para
             >The <see
              cref="T:System.Security.AccessControl.AuditRule" />
+
+            
 
             
 
@@ -427,8 +473,12 @@
 
           
 
+          
+
           The identity to which the audit rule applies.  It must be an object that can be cast as a <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -443,10 +493,14 @@
 
           
 
+          
+
           The access mask of this rule. The access mask is a 32-bit collection of anonymous bits, the meaning of which is defined by the individual integrators.</param
         >
         <param name="isInherited">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -461,10 +515,14 @@
 
           
 
+          
+
           Specifies the inheritance properties of the audit rule.</param
         >
         <param name="propagationFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -477,8 +535,12 @@
 
           
 
+          
+
            is set to <see
            cref="F:System.Security.AccessControl.InheritanceFlags.None" />
+
+          
 
           
 
@@ -493,6 +555,8 @@
 
           
 
+          
+
           Specifies the conditions for which the rule is audited.</param
         >
         <param name="objectType">
@@ -502,10 +566,14 @@
 
           
 
+          
+
           The identity of the class of objects to which the new audit rule applies.</param
         >
         <param name="inheritedObjectType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -554,11 +622,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="includeExplicit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -573,6 +645,8 @@
 
           
 
+          
+
           true to include inherited access rules.</param
         >
         <param name="targetType">
@@ -582,8 +656,12 @@
 
           
 
+          
+
           The security identifier for which to retrieve access rules. This must be an object that can be cast as a <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -632,11 +710,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="includeExplicit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -651,6 +733,8 @@
 
           
 
+          
+
           true to include inherited audit rules.</param
         >
         <param name="targetType">
@@ -660,8 +744,12 @@
 
           
 
+          
+
           The security identifier for which to retrieve audit rules. This must be an object that can be cast as a <see
            cref="T:System.Security.Principal.SecurityIdentifier" />
+
+          
 
           
 
@@ -778,6 +866,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -787,6 +877,8 @@
         </returns>
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -829,11 +921,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -876,11 +972,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -927,6 +1027,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -936,6 +1038,8 @@
         </returns>
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -978,11 +1082,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1025,11 +1133,15 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1072,11 +1184,15 @@
 
             
 
+            
+
              object and then adds the specified access rule.</para
           >
         </summary>
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1119,11 +1235,15 @@
 
             
 
+            
+
              object and then adds the specified access rule.</para
           >
         </summary>
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1166,11 +1286,15 @@
 
             
 
+            
+
              object and then adds the specified audit rule.</para
           >
         </summary>
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

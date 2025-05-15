@@ -21,8 +21,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.DataObject" />
+
+        
 
         
 
@@ -35,11 +39,15 @@
 
         
 
+        
+
         , or that is transferred in a drag-and-drop operation.</para
       >
       <para
         >The <see
          cref="M:System.Windows.Forms.DataFormats.GetFormat(System.String)" />
+
+        
 
         
 
@@ -57,6 +65,8 @@
 
             
 
+            
+
              object for a format name or ID number.</para
           >
         </item>
@@ -64,6 +74,8 @@
           <para
             >Add a new format name/ID number pair to the static list in this class, and to register the format with the Windows registry as a <see
              cref="T:System.Windows.Forms.Clipboard" />
+
+            
 
             
 
@@ -81,6 +93,8 @@
 
         
 
+        
+
          number or format <see
          cref="P:System.Windows.Forms.DataFormats.Format.Name" />
 
@@ -88,8 +102,12 @@
 
         
 
+        
+
          from the appropriate property in the <see
          cref="T:System.Windows.Forms.DataFormats.Format" />
+
+        
 
         
 
@@ -108,8 +126,12 @@
 
         
 
+        
+
          format names. Use them to identify the format of data that you store in an <see
          cref="T:System.Windows.Forms.IDataObject" />
+
+        
 
         
 
@@ -138,8 +160,12 @@
 
             
 
+            
+
              interface and the <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -155,8 +181,12 @@
 
             
 
+            
+
              or to an implementation of <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -169,8 +199,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+
+            
 
             
 
@@ -186,8 +220,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+
+            
 
             
 
@@ -203,8 +241,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -240,8 +282,12 @@
 
             
 
+            
+
              interface and the <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -257,8 +303,12 @@
 
             
 
+            
+
              or to an implementation of <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -271,8 +321,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+
+            
 
             
 
@@ -288,8 +342,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+
+            
 
             
 
@@ -305,8 +363,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -343,8 +405,12 @@
 
             
 
+            
+
              interface and the <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -360,8 +426,12 @@
 
             
 
+            
+
              or to an implementation of <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -374,8 +444,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+
+            
 
             
 
@@ -391,8 +465,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+
+            
 
             
 
@@ -408,8 +486,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -446,8 +528,12 @@
 
             
 
+            
+
              interface and the <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -463,8 +549,12 @@
 
             
 
+            
+
              or to an implementation of <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -477,8 +567,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+
+            
 
             
 
@@ -494,8 +588,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+
+            
 
             
 
@@ -511,8 +609,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -550,6 +652,8 @@
 
               
 
+              
+
                class, the metafile format used by the .NET Framework may not be recognized by applications that use an older metafile format. In this case, you must interoperate with the Win32 Clipboard application programming interfaces (APIs). For more information, see article 323530, "Metafiles on Clipboard Are Not Visible to All Applications," in the Microsoft Knowledge Base at http://support.microsoft.com.</para
             >
           </block>
@@ -561,8 +665,12 @@
 
             
 
+            
+
              interface and the <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -578,8 +686,12 @@
 
             
 
+            
+
              or to an implementation of <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -592,8 +704,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+
+            
 
             
 
@@ -609,8 +725,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+
+            
 
             
 
@@ -626,8 +746,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -664,8 +788,12 @@
 
             
 
+            
+
              interface and the <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -681,8 +809,12 @@
 
             
 
+            
+
              or to an implementation of <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -695,8 +827,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+
+            
 
             
 
@@ -712,8 +848,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+
+            
 
             
 
@@ -729,8 +869,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -773,6 +917,8 @@
 
             
 
+            
+
              with an ID number when you want to retrieve a <see
              cref="T:System.Windows.Forms.DataFormats.Format" />
 
@@ -780,8 +926,12 @@
 
             
 
+            
+
              instance that contains the ID/format name pair. Typically, the ID name and number is published by the creator of the application that you are using the <see
              cref="T:System.Windows.Forms.Clipboard" />
+
+            
 
             
 
@@ -797,8 +947,12 @@
 
             
 
+            
+
              class. The new name will be created by concatenating "Format" and the ID number. This pair is not registered as a new <see
              cref="T:System.Windows.Forms.Clipboard" />
+
+            
 
             
 
@@ -817,6 +971,8 @@
 
             
 
+            
+
              with the Windows Clipboard numeric ID and name for the specified ID.</para
           >
         </summary>
@@ -830,11 +986,15 @@
 
             
 
+            
+
              that has the Windows Clipboard numeric ID and the name of the format.</para
           >
         </returns>
         <param name="id">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -871,6 +1031,8 @@
 
             
 
+            
+
              with the format name when you need a Windows Clipboard numeric ID for an existing format.</para
           >
           <para
@@ -881,8 +1043,12 @@
 
             
 
+            
+
              format type. If the specified format does not exist, this method will register the name as a Clipboard format with the Windows registry and get a unique format identifier. This new name/ID pair will be added to the static list of format name/ID pairs in the <see
              cref="T:System.Windows.Forms.DataFormats" />
+
+            
 
             
 
@@ -901,6 +1067,8 @@
 
             
 
+            
+
              with the Windows Clipboard numeric ID and name for the specified format.</para
           >
         </summary>
@@ -914,11 +1082,15 @@
 
             
 
+            
+
              that has the Windows Clipboard numeric ID and the name of the format.</para
           >
         </returns>
         <param name="format">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -949,6 +1121,8 @@
 
             
 
+            
+
              interface and the <see
              cref="T:System.Windows.Forms.DataObject" />
 
@@ -956,8 +1130,12 @@
 
             
 
+            
+
              class to indicate the CF_HTML clipboard data type. For more information about this format, see <see
              cref="http://go.microsoft.com/fwlink/?LinkId=198813">HTML Clipboard Format</see>
+
+            
 
             
 
@@ -973,8 +1151,12 @@
 
             
 
+            
+
              or to an implementation of <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -987,8 +1169,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+
+            
 
             
 
@@ -1004,8 +1190,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+
+            
 
             
 
@@ -1021,8 +1211,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1058,8 +1252,12 @@
 
             
 
+            
+
              interface and the <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -1075,8 +1273,12 @@
 
             
 
+            
+
              or to an implementation of <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -1089,8 +1291,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+
+            
 
             
 
@@ -1106,8 +1312,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+
+            
 
             
 
@@ -1123,8 +1333,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1162,6 +1376,8 @@
 
               
 
+              
+
                class, the metafile format used by the .NET Framework may not be recognized by applications that use an older metafile format. In this case, you must interoperate with the Win32 Clipboard application programming interfaces (APIs). For more information, see article 323530, "Metafiles on Clipboard Are Not Visible to All Applications," in the Microsoft Knowledge Base at http://support.microsoft.com.</para
             >
           </block>
@@ -1173,8 +1389,12 @@
 
             
 
+            
+
              interface and the <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -1190,8 +1410,12 @@
 
             
 
+            
+
              or to an implementation of <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -1204,8 +1428,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+
+            
 
             
 
@@ -1221,8 +1449,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+
+            
 
             
 
@@ -1238,8 +1470,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1275,8 +1511,12 @@
 
             
 
+            
+
              interface and the <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -1292,8 +1532,12 @@
 
             
 
+            
+
              or to an implementation of <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -1306,8 +1550,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+
+            
 
             
 
@@ -1323,8 +1571,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+
+            
 
             
 
@@ -1340,8 +1592,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1377,6 +1633,8 @@
 
             
 
+            
+
              for the format of data that it contains.</para
           >
           <para
@@ -1387,8 +1645,12 @@
 
             
 
+            
+
              interface and the <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -1404,8 +1666,12 @@
 
             
 
+            
+
              or to an implementation of <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -1418,8 +1684,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+
+            
 
             
 
@@ -1435,8 +1705,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+
+            
 
             
 
@@ -1452,8 +1726,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1489,8 +1767,12 @@
 
             
 
+            
+
              interface and the <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -1506,8 +1788,12 @@
 
             
 
+            
+
              or to an implementation of <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -1520,8 +1806,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+
+            
 
             
 
@@ -1537,8 +1827,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+
+            
 
             
 
@@ -1554,8 +1848,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1592,8 +1890,12 @@
 
             
 
+            
+
              interface and the <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -1609,8 +1911,12 @@
 
             
 
+            
+
              or to an implementation of <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -1623,8 +1929,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+
+            
 
             
 
@@ -1640,8 +1950,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+
+            
 
             
 
@@ -1657,8 +1971,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1695,8 +2013,12 @@
 
             
 
+            
+
              interface and the <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -1712,8 +2034,12 @@
 
             
 
+            
+
              or to an implementation of <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -1726,8 +2052,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+
+            
 
             
 
@@ -1743,8 +2073,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+
+            
 
             
 
@@ -1760,8 +2094,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1798,8 +2136,12 @@
 
             
 
+            
+
              interface and the <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -1815,8 +2157,12 @@
 
             
 
+            
+
              or to an implementation of <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -1829,8 +2175,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+
+            
 
             
 
@@ -1846,8 +2196,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+
+            
 
             
 
@@ -1863,8 +2217,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -1903,8 +2261,12 @@
 
             
 
+            
+
              interface and the <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -1920,8 +2282,12 @@
 
             
 
+            
+
              or to an implementation of <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -1934,8 +2300,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+
+            
 
             
 
@@ -1951,8 +2321,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+
+            
 
             
 
@@ -1968,8 +2342,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -2009,8 +2387,12 @@
 
             
 
+            
+
              interface and the <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -2026,8 +2408,12 @@
 
             
 
+            
+
              or to an implementation of <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -2040,8 +2426,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+
+            
 
             
 
@@ -2057,8 +2447,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+
+            
 
             
 
@@ -2074,8 +2468,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -2111,8 +2509,12 @@
 
             
 
+            
+
              interface and the <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -2128,8 +2530,12 @@
 
             
 
+            
+
              or to an implementation of <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -2142,8 +2548,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+
+            
 
             
 
@@ -2159,8 +2569,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+
+            
 
             
 
@@ -2176,8 +2590,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -2214,8 +2632,12 @@
 
             
 
+            
+
              interface and the <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -2231,8 +2653,12 @@
 
             
 
+            
+
              or to an implementation of <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -2245,8 +2671,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+
+            
 
             
 
@@ -2262,8 +2692,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+
+            
 
             
 
@@ -2279,8 +2713,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -2316,8 +2754,12 @@
 
             
 
+            
+
              interface and the <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -2333,8 +2775,12 @@
 
             
 
+            
+
              or to an implementation of <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -2347,8 +2793,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+
+            
 
             
 
@@ -2364,8 +2814,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+
+            
 
             
 
@@ -2381,8 +2835,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -2418,8 +2876,12 @@
 
             
 
+            
+
              interface and the <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -2435,8 +2897,12 @@
 
             
 
+            
+
              or to an implementation of <see
              cref="T:System.Windows.Forms.DataObject" />
+
+            
 
             
 
@@ -2449,8 +2915,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.SetData(System.String,System.Boolean,System.Object)" />
+
+            
 
             
 
@@ -2466,8 +2936,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetDataPresent(System.Type)" />
+
+            
 
             
 
@@ -2483,8 +2957,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Windows.Forms.DataObject.GetData(System.String,System.Boolean)" />
+
+            
 
             
 

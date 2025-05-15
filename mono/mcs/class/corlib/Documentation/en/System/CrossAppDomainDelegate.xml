@@ -40,6 +40,8 @@
 
         
 
+        
+
          and <see
          cref="T:System.MulticastDelegate" />
 
@@ -47,8 +49,12 @@
 
         
 
+        
+
          has a constructor and an Invoke method. See the C++ code example given in the description for <see
          cref="T:System.Delegate" />
+
+        
 
         
 
@@ -62,6 +68,8 @@
       <para
         >Used by <see
          cref="M:System.AppDomain.DoCallBack(System.CrossAppDomainDelegate)" />
+
+        
 
         
 

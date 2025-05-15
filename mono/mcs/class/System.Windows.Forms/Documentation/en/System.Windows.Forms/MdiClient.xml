@@ -38,6 +38,8 @@
 
         
 
+        
+
          control. A form creates and uses the <see
          cref="T:System.Windows.Forms.MdiClient" />
 
@@ -45,8 +47,12 @@
 
         
 
+        
+
          when you set the <see
          cref="P:System.Windows.Forms.Form.IsMdiContainer" />
+
+        
 
         
 
@@ -72,6 +78,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.MdiClient" />
+
+            
 
             
 
@@ -112,6 +120,8 @@
 
             
 
+            
+
              property to get and set the background image of a form’s MDI client area.</para
           >
         </remarks>
@@ -120,6 +130,8 @@
           <para
             >Gets or sets the background image displayed in the <see
              cref="T:System.Windows.Forms.MdiClient" />
+
+            
 
             
 
@@ -228,6 +240,8 @@
 
             
 
+            
+
              method to arrange MDI child forms on a parent form.</para
           >
         </remarks>
@@ -242,8 +256,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MdiLayout" />
+
+          
 
           
 
@@ -278,8 +296,12 @@
 
             
 
+            
+
              property to get the child MDI forms of the <see
              cref="T:System.Windows.Forms.MdiClient" />
+
+            
 
             
 
@@ -293,6 +315,8 @@
           <para
             >Gets the child multiple-document interface (MDI) forms of the <see
              cref="T:System.Windows.Forms.MdiClient" />
+
+            
 
             
 

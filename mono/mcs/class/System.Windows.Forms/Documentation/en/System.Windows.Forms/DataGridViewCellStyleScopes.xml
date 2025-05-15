@@ -28,6 +28,8 @@
 
         
 
+        
+
          to indicate which part of the <see
          cref="T:System.Windows.Forms.DataGridView" />
 
@@ -35,8 +37,12 @@
 
         
 
+        
+
          owns the <see
          cref="T:System.Windows.Forms.DataGridViewCellStyle" />
+
+        
 
         
 
@@ -50,6 +56,8 @@
       <para
         >Specifies the <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -73,6 +81,8 @@
           <para
             >One or more values of the object returned by the <see
              cref="P:System.Windows.Forms.DataGridView.AlternatingRowsDefaultCellStyle" />
+
+            
 
             
 
@@ -104,6 +114,8 @@
 
             
 
+            
+
              property changed.</para
           >
         </summary>
@@ -125,6 +137,8 @@
           <para
             >One or more values of the object returned by the <see
              cref="P:System.Windows.Forms.DataGridViewColumn.DefaultCellStyle" />
+
+            
 
             
 
@@ -156,6 +170,8 @@
 
             
 
+            
+
              property changed.</para
           >
         </summary>
@@ -177,6 +193,8 @@
           <para
             >One or more values of the object returned by the <see
              cref="P:System.Windows.Forms.DataGridView.DefaultCellStyle" />
+
+            
 
             
 
@@ -225,6 +243,8 @@
 
             
 
+            
+
              property changed.</para
           >
         </summary>
@@ -251,6 +271,8 @@
 
             
 
+            
+
              property changed.</para
           >
         </summary>
@@ -272,6 +294,8 @@
           <para
             >One or more values of the object returned by the <see
              cref="P:System.Windows.Forms.DataGridView.RowsDefaultCellStyle" />
+
+            
 
             
 

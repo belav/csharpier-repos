@@ -1043,6 +1043,8 @@
 
             
 
+            
+
              enumeration.</para
           >
         </summary>
@@ -1179,6 +1181,8 @@
           <para
             >Indicates a SID present when the user authenticated across a forest with the selective authentication option enabled. If this SID is present, then <see
              cref="F:System.Security.Principal.WellKnownSidType.ThisOrganizationSid" />
+
+            
 
             
 
@@ -1364,6 +1368,8 @@
           <para
             >Indicates a SID present when the user authenticated from within the forest or across a trust that does not have the selective authentication option enabled. If this SID is present, then <see
              cref="F:System.Security.Principal.WellKnownSidType.OtherOrganizationSid" />
+
+            
 
             
 

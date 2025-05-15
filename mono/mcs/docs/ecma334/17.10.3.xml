@@ -5,7 +5,7 @@
 
       >[Example: For example: <code_example
       >
-<![CDATA[
+        <![CDATA[
 using System;  
 class A  
 {  
@@ -33,7 +33,7 @@ class B: A
     <example
       >When new B() is used to create an instance of B, the following output is produced: <code_example
       >
-<![CDATA[
+        <![CDATA[
 x = 1, y = 0  
 ]]>
       </code_example>
@@ -43,6 +43,8 @@ x = 1, y = 0
     <example
       >The value of x is 1 because the variable initializer is executed before the base class instance constructor is invoked. However, the value of y is 0 (the default value of an <keyword
       >int</keyword>
+
+      
 
       
 
@@ -60,9 +62,11 @@ x = 1, y = 0
 
       
 
+      
+
       . The example <code_example
       >
-<![CDATA[
+        <![CDATA[
 using System;  
 using System.Collections;  
 class A  
@@ -94,9 +98,11 @@ class B: A
 
       
 
+      
+
       contains several variable initializers; it also contains constructor initializers of both forms (base and this). The example corresponds to the code shown below, where each comment indicates an automatically inserted statement (the syntax used for the automatically inserted constructor invocations isn't valid, but merely serves to illustrate the mechanism). <code_example
       >
-<![CDATA[
+        <![CDATA[
 using System.Collections;  
 class A  
 {  
@@ -132,6 +138,8 @@ class B: A
 }  
 ]]>
       </code_example>
+
+      
 
       
 

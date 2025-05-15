@@ -10,6 +10,8 @@
 
       
 
+      
+
        : <rhs
       >
         <terminal>++</terminal>
@@ -20,6 +22,8 @@
       <name>
         <non_terminal where="14.6.5">pre-decrement-expression</non_terminal>
       </name>
+
+      
 
       
 
@@ -42,8 +46,12 @@
 
     
 
+    
+
     ) is applied to select a specific operator implementation. Predefined ++ and  --operators exist for the following types: <keyword
     >sbyte</keyword>
+
+    
 
     
 
@@ -56,8 +64,12 @@
 
     
 
+    
+
     , <keyword
     >short</keyword>
+
+    
 
     
 
@@ -70,8 +82,12 @@
 
     
 
+    
+
     , <keyword
     >int</keyword>
+
+    
 
     
 
@@ -84,8 +100,12 @@
 
     
 
+    
+
     , <keyword
     >long</keyword>
+
+    
 
     
 
@@ -98,8 +118,12 @@
 
     
 
+    
+
     , <keyword
     >char</keyword>
+
+    
 
     
 
@@ -112,6 +136,8 @@
 
     
 
+    
+
     , <keyword
     >double</keyword>
 
@@ -119,8 +145,12 @@
 
     
 
+    
+
     , <keyword
     >decimal</keyword>
+
+    
 
     
 
@@ -151,6 +181,8 @@
   <paragraph
     >The ++ and  --operators also support postfix notation (<hyperlink
     >14.5.9</hyperlink>
+
+    
 
     
 

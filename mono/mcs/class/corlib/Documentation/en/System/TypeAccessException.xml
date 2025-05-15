@@ -28,8 +28,12 @@
 
         
 
+        
+
          is thrown when a method attempts to cast an object to a type that is not accessible from the method. For example, an anonymously hosted dynamic method cannot access a security-critical type because the method is transparent. If the method contains a <see
          cref="F:System.Reflection.Emit.OpCodes.Castclass" />
+
+        
 
         
 
@@ -42,11 +46,15 @@
 
         
 
+        
+
          is thrown by the JIT compiler. </para
       >
       <para
         >Similarly, <see
          cref="T:System.TypeAccessException" />
+
+        
 
         
 
@@ -83,11 +91,15 @@
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "Attempt to access the type failed." This message takes the current system culture into account.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.TypeAccessException" />
+
+            
 
             
 
@@ -138,6 +150,8 @@
 
             
 
+            
+
              class with a system-supplied message that describes the error.</para
           >
         </summary>
@@ -162,6 +176,8 @@
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.TypeAccessException" />
+
+            
 
             
 
@@ -205,6 +221,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -221,11 +239,15 @@
 
             
 
+            
+
              class with a specified message that describes the error.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -265,6 +287,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -273,6 +297,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.TypeAccessException" />
+
+            
 
             
 
@@ -288,10 +314,14 @@
 
           
 
+          
+
           The object that holds the serialized data. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -329,8 +359,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -343,11 +377,15 @@
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.TypeAccessException" />
+
+            
 
             
 
@@ -391,6 +429,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -407,11 +447,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -426,8 +470,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="inner" />
+
+          
 
           
 

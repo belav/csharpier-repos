@@ -24,7 +24,7 @@
   </ItemGroup>
   <PropertyGroup>
     <CLRTestBatchPreCommands>
-<![CDATA[
+      <![CDATA[
 $(CLRTestBatchPreCommands)
 mkdir r2r
 
@@ -42,7 +42,7 @@ set CLRCustomTestLauncher=RunBasicTestWithMcj.cmd --runCustomTest
 ]]>
     </CLRTestBatchPreCommands>
     <CLRTestBashPreCommands>
-<![CDATA[
+      <![CDATA[
 $(CLRTestBashPreCommands)
 mkdir r2r
 

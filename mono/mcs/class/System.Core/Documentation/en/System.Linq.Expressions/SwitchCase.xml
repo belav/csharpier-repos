@@ -30,6 +30,8 @@
 
         
 
+        
+
         .</para
       >
     </summary>
@@ -89,6 +91,8 @@
 
             
 
+            
+
              matches any of these values.</para
           >
         </summary>
@@ -120,8 +124,12 @@
 
             
 
+            
+
              that represents the current <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -140,8 +148,12 @@
 
             
 
+            
+
              that represents the current <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -192,8 +204,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.SwitchCase.TestValues" />
+
+          
 
           
 
@@ -208,8 +224,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Linq.Expressions.SwitchCase.Body" />
+
+          
 
           
 

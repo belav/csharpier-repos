@@ -32,6 +32,8 @@
 
         
 
+        
+
         . The packing size is one of two factors that determine the offset of a field when the structure or class is marshaled; the other factor is the effective size of the field. To determine the offset of a field: </para
       >
       <list type="ordered">

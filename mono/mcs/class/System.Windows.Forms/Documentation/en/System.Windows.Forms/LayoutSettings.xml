@@ -21,6 +21,8 @@
 
         
 
+        
+
          class is the base class for types that collect the various characteristics common to a specific user interface (UI) layout scheme, such as <see
          cref="T:System.Windows.Forms.TableLayoutSettings" />
 
@@ -28,8 +30,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.FlowLayoutSettings" />
+
+        
 
         
 
@@ -61,6 +67,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -86,6 +94,8 @@
           <para
             >The <see
              cref="P:System.Windows.Forms.TableLayoutSettings.LayoutEngine" />
+
+            
 
             
 

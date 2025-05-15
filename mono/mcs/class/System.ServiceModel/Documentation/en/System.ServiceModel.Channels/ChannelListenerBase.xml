@@ -53,6 +53,8 @@
 
             
 
+            
+
              if you want to specify other values for these operation timeouts.</para
           >
         </remarks>
@@ -61,6 +63,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.ChannelListenerBase" />
+
+            
 
             
 
@@ -98,6 +102,8 @@
 
             
 
+            
+
              instead of the default constructor if you want to specify custom values for the open, send, receive, and close operation timeouts instead of using the service model default values.</para
           >
         </remarks>
@@ -106,6 +112,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.ChannelListenerBase" />
+
+            
 
             
 
@@ -121,8 +129,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.IDefaultCommunicationTimeouts" />
+
+          
 
           
 
@@ -169,6 +181,8 @@
 
             
 
+            
+
              that references the asynchronous wait for a channel operation. </para
           >
         </returns>
@@ -179,8 +193,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -195,8 +213,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -206,6 +228,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -243,8 +267,12 @@
 
             
 
+            
+
              object. The default <see
              cref="M:System.ServiceModel.Channels.ChannelListenerBase.#ctor" />
+
+            
 
             
 
@@ -257,8 +285,12 @@
 
             
 
+            
+
              property to a value of 1 minute. Use <see
              cref="M:System.ServiceModel.Channels.ChannelListenerBase.#ctor(System.ServiceModel.IDefaultCommunicationTimeouts)" />
+
+            
 
             
 
@@ -301,8 +333,12 @@
 
             
 
+            
+
              object. The default <see
              cref="M:System.ServiceModel.Channels.ChannelListenerBase.#ctor" />
+
+            
 
             
 
@@ -315,8 +351,12 @@
 
             
 
+            
+
              property to a value of 1 minute. Use <see
              cref="M:System.ServiceModel.Channels.ChannelListenerBase.#ctor(System.ServiceModel.IDefaultCommunicationTimeouts)" />
+
+            
 
             
 
@@ -359,8 +399,12 @@
 
             
 
+            
+
              object. The default <see
              cref="M:System.ServiceModel.Channels.ChannelListenerBase.#ctor" />
+
+            
 
             
 
@@ -373,8 +417,12 @@
 
             
 
+            
+
              property to a value of 10 minutes. Use <see
              cref="M:System.ServiceModel.Channels.ChannelListenerBase.#ctor(System.ServiceModel.IDefaultCommunicationTimeouts)" />
+
+            
 
             
 
@@ -417,8 +465,12 @@
 
             
 
+            
+
              object. The default <see
              cref="M:System.ServiceModel.Channels.ChannelListenerBase.#ctor" />
+
+            
 
             
 
@@ -431,8 +483,12 @@
 
             
 
+            
+
              property to a value of 1 minute. Use <see
              cref="M:System.ServiceModel.Channels.ChannelListenerBase.#ctor(System.ServiceModel.IDefaultCommunicationTimeouts)" />
+
+            
 
             
 
@@ -480,6 +536,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.IAsyncResult" />
 
@@ -487,8 +545,12 @@
 
           
 
+          
+
            returned by a call to the <see
            cref="M:System.ServiceModel.Channels.ChannelListenerBase.EndWaitForChannel(System.IAsyncResult)" />
+
+          
 
           
 
@@ -542,6 +604,8 @@
 
           
 
+          
+
           The typed object for which the method is querying.</typeparam
         >
       </Docs>
@@ -583,6 +647,8 @@
 
             
 
+            
+
              that references the asynchronous on begin wait operation. </para
           >
         </returns>
@@ -593,8 +659,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -609,8 +679,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -620,6 +694,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -664,11 +740,15 @@
 
             
 
+            
+
              expired; otherwise false.</para
           >
         </returns>
         <param name="result">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -681,8 +761,12 @@
 
           
 
+          
+
            returned by a call to the <see
            cref="M:System.ServiceModel.Channels.ChannelListenerBase.OnBeginWaitForChannel(System.TimeSpan,System.AsyncCallback,System.Object)" />
+
+          
 
           
 
@@ -727,6 +811,8 @@
 
             
 
+            
+
              expired; otherwise false.</para
           >
         </returns>
@@ -737,8 +823,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -887,6 +977,8 @@
 
             
 
+            
+
              expired; otherwise false.</para
           >
         </returns>
@@ -897,8 +989,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 

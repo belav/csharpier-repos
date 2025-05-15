@@ -28,6 +28,8 @@
 
         
 
+        
+
         . This class cannot be inherited.</para
       >
     </summary>
@@ -60,6 +62,8 @@
           <para
             >Indicates the message security settings for the <see
              cref="T:System.ServiceModel.WSFederationHttpBinding" />
+
+            
 
             
 
@@ -99,8 +103,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.ServiceModel.WSFederationHttpSecurityMode.TransportWithMessageCredential" />
+
+            
 
             
 
@@ -116,11 +124,15 @@
 
             
 
+            
+
              security mode, the message is sent over HTTP and SOAP message security is used to protect the message. Client authentication is performed based on the issued token obtained from the security token service. Server authentication is based on the server's certificate.</para
           >
           <para
             >In the <see
              cref="F:System.ServiceModel.WSFederationHttpSecurityMode.TransportWithMessageCredential" />
+
+            
 
             
 

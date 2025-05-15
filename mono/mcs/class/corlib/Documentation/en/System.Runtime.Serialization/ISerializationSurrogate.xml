@@ -64,9 +64,13 @@
 
             
 
+            
+
              and stores it in the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
             <paramref name="info" />
+
+            
 
             
 
@@ -82,6 +86,8 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
             <paramref name="info" />
@@ -90,8 +96,12 @@
 
             
 
+            
+
              parameter. This information describes its view of that object, including the object's fields, properties, and current values. The <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -107,6 +117,8 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Security.Permissions.SecurityPermission" />
 
@@ -114,8 +126,12 @@
 
             
 
+            
+
              with the <see
              cref="F:System.Security.Permissions.SecurityPermissionFlag.SerializationFormatter" />
+
+            
 
             
 
@@ -134,11 +150,15 @@
 
             
 
+            
+
              with the data needed to serialize the object.</para
           >
         </summary>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -153,8 +173,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -169,8 +193,12 @@
 
           
 
+          
+
           The destination (see <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -215,6 +243,8 @@
 
             
 
+            
+
              method is called during deserialization. With this method, you can take the empty <see
              cref="T:System.Object" />
             <paramref name="obj" />
@@ -223,9 +253,13 @@
 
             
 
+            
+
              that has already been created, and enter <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
             <paramref name="info" />
+
+            
 
             
 
@@ -241,6 +275,8 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Security.Permissions.SecurityPermission" />
 
@@ -248,8 +284,12 @@
 
             
 
+            
+
              with the <see
              cref="F:System.Security.Permissions.SecurityPermissionFlag.SerializationFormatter" />
+
+            
 
             
 
@@ -263,6 +303,8 @@
           <para
             >Populates the object using the information in the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -282,10 +324,14 @@
 
           
 
+          
+
           The object to populate. </param
         >
         <param name="info">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -300,10 +346,14 @@
 
           
 
+          
+
           The source from which the object is deserialized. </param
         >
         <param name="selector">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

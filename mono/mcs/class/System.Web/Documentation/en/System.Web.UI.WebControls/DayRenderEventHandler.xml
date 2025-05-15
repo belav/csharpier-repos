@@ -29,8 +29,12 @@
 
         
 
+        
+
          control, it is possible to modify the content and formatting of the individual date cells. Before the <see
          cref="T:System.Web.UI.WebControls.Calendar" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          event is raised when each date cell in the <see
          cref="T:System.Web.UI.WebControls.Calendar" />
+
+        
 
         
 
@@ -57,8 +65,12 @@
 
         
 
+        
+
          event. For more information on customizing the contents of a date cell, see <see
          cref="M:System.Web.UI.WebControls.Calendar.OnDayRender(System.Web.UI.WebControls.TableCell,System.Web.UI.WebControls.CalendarDay)" />
+
+        
 
         
 
@@ -74,10 +86,14 @@
 
         
 
+        
+
          delegate, you identify the method that will handle the event. To associate the event with your event handler, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event handler delegates, see <format
          type="text/html">
           <a href="d98fd58b-fa4f-4598-8378-addf4355a115">Events and Delegates</a>
         </format>
+
+        
 
         
 
@@ -96,8 +112,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Web.UI.WebControls.Calendar" />
+
+        
 
         
 

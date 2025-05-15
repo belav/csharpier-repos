@@ -27,8 +27,12 @@
 
         
 
+        
+
          event occurs when the <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -42,6 +46,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.ListView.VirtualItemsSelectionRangeChanged" />
+
+        
 
         
 
@@ -75,8 +81,12 @@
 
             
 
+            
+
              occurs when items are changed from selected to deselected, and deselected to selected. The <paramref
              name="isSelected" />
+
+            
 
             
 
@@ -95,11 +105,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="startIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -114,10 +128,14 @@
 
           
 
+          
+
           The index of the last item in the range that has changed.</param
         >
         <param name="isSelected">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -168,8 +186,12 @@
 
             
 
+            
+
              occurs when items are changed from selected to deselected, and deselected to selected. The <paramref
              name="isSelected" />
+
+            
 
             
 

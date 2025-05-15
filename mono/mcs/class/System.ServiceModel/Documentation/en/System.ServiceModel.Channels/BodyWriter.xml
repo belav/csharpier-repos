@@ -24,8 +24,12 @@
 
         
 
+        
+
          to the <see
          cref="T:System.ServiceModel.Channels.Message" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          whenever it requires the body to be written using an <see
          cref="T:System.Xml.XmlWriter" />
+
+        
 
         
 
@@ -78,6 +86,8 @@
 
             
 
+            
+
              is false then the message calls the write method once and buffers the contents. </para
           >
         </remarks>
@@ -91,11 +101,15 @@
 
             
 
+            
+
              class that explicitly indicates whether to buffer.</para
           >
         </summary>
         <param name="isBuffered">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -135,8 +149,12 @@
 
             
 
+            
+
              is true then the <see
              cref="T:System.ServiceModel.Channels.BodyWriter" />
+
+            
 
             
 
@@ -149,8 +167,12 @@
 
             
 
+            
+
              is false then the contents of the <see
              cref="T:System.ServiceModel.Channels.BodyWriter" />
+
+            
 
             
 
@@ -163,8 +185,12 @@
 
             
 
+            
+
              is returned. This also calls <see
              cref="M:System.ServiceModel.Channels.BodyWriter.OnCreateBufferedCopy(System.Int32)" />
+
+            
 
             
 
@@ -187,11 +213,15 @@
 
             
 
+            
+
              that contains a copy of this object.</para
           >
         </returns>
         <param name="maxBufferSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -218,6 +248,8 @@
           <para
             >If <paramref
              name="isBuffered" />
+
+            
 
             
 
@@ -262,8 +294,12 @@
 
             
 
+            
+
              can override this method to create a buffered copy of the <see
              cref="T:System.ServiceModel.Channels.BodyWriter" />
+
+            
 
             
 
@@ -276,6 +312,8 @@
 
             
 
+            
+
              calls <see
              cref="M:System.ServiceModel.Channels.BodyWriter.OnWriteBodyContents(System.Xml.XmlDictionaryWriter)" />
 
@@ -283,8 +321,12 @@
 
             
 
+            
+
             , so overriding just <see
              cref="M:System.ServiceModel.Channels.BodyWriter.OnWriteBodyContents(System.Xml.XmlDictionaryWriter)" />
+
+            
 
             
 
@@ -300,8 +342,12 @@
 
             
 
+            
+
              returned must be buffered, that is <see
              cref="P:System.ServiceModel.Channels.BodyWriter.IsBuffered" />
+
+            
 
             
 
@@ -324,11 +370,15 @@
 
             
 
+            
+
              with the specified maximum buffer size.</para
           >
         </returns>
         <param name="maxBufferSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -368,8 +418,12 @@
 
             
 
+            
+
             . This is the key method that writes the body. If the <see
              cref="T:System.ServiceModel.Channels.BodyWriter" />
+
+            
 
             
 
@@ -389,8 +443,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryWriter" />
+
+          
 
           
 
@@ -430,6 +488,8 @@
 
             
 
+            
+
              calls <see
              cref="M:System.ServiceModel.Channels.BodyWriter.OnWriteBodyContents(System.Xml.XmlDictionaryWriter)" />
 
@@ -437,8 +497,12 @@
 
             
 
+            
+
             , so overriding <see
              cref="M:System.ServiceModel.Channels.BodyWriter.OnWriteBodyContents(System.Xml.XmlDictionaryWriter)" />
+
+            
 
             
 
@@ -458,8 +522,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlDictionaryWriter" />
+
+          
 
           
 

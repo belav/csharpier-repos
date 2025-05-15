@@ -18,6 +18,8 @@
 
         
 
+        
+
          interface defines the property a control must implement to allow a control serializer to access the control's builder. <see
          cref="T:System.Web.UI.Control" />
 
@@ -25,8 +27,12 @@
 
         
 
+        
+
          implements this interface, so all controls deriving from <see
          cref="T:System.Web.UI.Control" />
+
+        
 
         
 
@@ -63,8 +69,12 @@
 
             
 
+            
+
              property allows a control serializer to access the builder that built the control that implements <see
              cref="T:System.Web.UI.IControlBuilderAccessor" />
+
+            
 
             
 

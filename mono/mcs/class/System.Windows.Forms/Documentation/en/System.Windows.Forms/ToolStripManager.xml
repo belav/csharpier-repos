@@ -20,8 +20,12 @@
 
         
 
+        
+
          supports <see
          cref="T:System.Windows.Forms.ToolStrip" />
+
+        
 
         
 
@@ -34,6 +38,8 @@
 
         
 
+        
+
          method combines <see
          cref="T:System.Windows.Forms.ToolStrip" />
 
@@ -41,8 +47,12 @@
 
         
 
+        
+
          controls with each other, and the overloaded <see
          cref="M:System.Windows.Forms.ToolStripManager.RevertMerge(System.Windows.Forms.ToolStrip)" />
+
+        
 
         
 
@@ -58,8 +68,12 @@
 
         
 
+        
+
          class with the <see
          cref="T:System.Windows.Forms.ToolStripManager" />
+
+        
 
         
 
@@ -78,8 +92,12 @@
 
         
 
+        
+
          rendering and rafting, and the merging of <see
          cref="T:System.Windows.Forms.MenuStrip" />
+
+        
 
         
 
@@ -92,8 +110,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+        
 
         
 
@@ -130,8 +152,12 @@
 
             
 
+            
+
              method to search for a <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -144,8 +170,12 @@
 
             
 
+            
+
             . Derived types of <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -158,8 +188,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Windows.Forms.MenuStrip" />
+
+            
 
             
 
@@ -172,8 +206,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
+
+            
 
             
 
@@ -186,8 +224,12 @@
 
             
 
+            
+
             . If the object of the search is not specifically a <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -206,8 +248,12 @@
 
             
 
+            
+
              or a type derived from <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -226,6 +272,8 @@
 
             
 
+            
+
              or one of its derived types as specified by the <paramref
              name="toolStripName" />
 
@@ -233,8 +281,12 @@
 
             
 
+            
+
              parameter, or null if the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -250,6 +302,8 @@
 
           
 
+          
+
           A string specifying the name of the <see
            cref="T:System.Windows.Forms.ToolStrip" />
 
@@ -257,8 +311,12 @@
 
           
 
+          
+
            or derived <see
            cref="T:System.Windows.Forms.ToolStrip" />
+
+          
 
           
 
@@ -295,6 +353,8 @@
 
             
 
+            
+
              controls of a form.</para
           >
         </summary>
@@ -308,11 +368,15 @@
 
             
 
+            
+
              on the form; otherwise, false. </para
           >
         </returns>
         <param name="shortcut">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -357,6 +421,8 @@
 
           
 
+          
+
           The shortcut key to test for validity.</param
         >
       </Docs>
@@ -386,8 +452,12 @@
 
             
 
+            
+
              controls that are not on the form at design time when the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -400,8 +470,12 @@
 
             
 
+            
+
              when the settings are loaded. To reset the settings, comment out the <see
              cref="Overload:System.Windows.Forms.ToolStripManager.LoadSettings" />
+
+            
 
             
 
@@ -414,8 +488,12 @@
 
             
 
+            
+
              line. This will not load any settings and will persist the last state. When you remove the comment from the <see
              cref="Overload:System.Windows.Forms.ToolStripManager.LoadSettings" />
+
+            
 
             
 
@@ -434,8 +512,12 @@
 
             
 
+            
+
              using the full name of the <see
              cref="T:System.Windows.Forms.Form" />
+
+            
 
             
 
@@ -451,8 +533,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Form" />
+
+          
 
           
 
@@ -488,8 +574,12 @@
 
             
 
+            
+
              controls that are not on the form at design time when the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -502,8 +592,12 @@
 
             
 
+            
+
              when the settings are loaded. To reset the settings, comment out the <see
              cref="Overload:System.Windows.Forms.ToolStripManager.LoadSettings" />
+
+            
 
             
 
@@ -516,8 +610,12 @@
 
             
 
+            
+
              line. This will not load any settings and will persist the last state. When you remove the comment from the <see
              cref="Overload:System.Windows.Forms.ToolStripManager.LoadSettings" />
+
+            
 
             
 
@@ -536,6 +634,8 @@
 
             
 
+            
+
              using the specified settings key.</para
           >
         </summary>
@@ -546,8 +646,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Form" />
+
+          
 
           
 
@@ -562,6 +666,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
 
@@ -569,8 +675,12 @@
 
           
 
+          
+
            representing the settings key for this <see
            cref="T:System.Windows.Forms.Form" />
+
+          
 
           
 
@@ -607,8 +717,12 @@
 
             
 
+            
+
              method to combine <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -621,8 +735,12 @@
 
             
 
+            
+
              objects with other <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -635,8 +753,12 @@
 
             
 
+            
+
              objects with other <see
              cref="T:System.Windows.Forms.MenuStrip" />
+
+            
 
             
 
@@ -652,8 +774,12 @@
 
             
 
+            
+
              method to combine <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -669,8 +795,12 @@
 
             
 
+            
+
              property must be set to true for both <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -687,8 +817,12 @@
 
               
 
+              
+
                controls on an MDI child form, setting <see
                cref="P:System.Windows.Forms.Form.IsMdiContainer" />
+
+              
 
               
 
@@ -701,6 +835,8 @@
 
               
 
+              
+
                controls. Use <see
                cref="M:System.Windows.Forms.ToolStripManager.Merge(System.Windows.Forms.ToolStrip,System.String)" />
 
@@ -708,8 +844,12 @@
 
               
 
+              
+
                to merge the contents of additional child <see
                cref="T:System.Windows.Forms.MenuStrip" />
+
+              
 
               
 
@@ -729,6 +869,8 @@
 
             
 
+            
+
              objects of the same type.</para
           >
         </summary>
@@ -743,8 +885,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStrip" />
+
+          
 
           
 
@@ -757,8 +903,12 @@
 
           
 
+          
+
            referred to by the <paramref
            name="targetName" />
+
+          
 
           
 
@@ -773,8 +923,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Windows.Forms.ToolStrip" />
+
+          
 
           
 
@@ -787,8 +941,12 @@
 
           
 
+          
+
            referred to by the <paramref
            name="sourceToolStrip" />
+
+          
 
           
 
@@ -825,8 +983,12 @@
 
             
 
+            
+
              method to combine <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -842,8 +1004,12 @@
 
             
 
+            
+
              method to combine <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -856,8 +1022,12 @@
 
             
 
+            
+
              objects with other <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -870,8 +1040,12 @@
 
             
 
+            
+
              objects with other <see
              cref="T:System.Windows.Forms.MenuStrip" />
+
+            
 
             
 
@@ -887,8 +1061,12 @@
 
             
 
+            
+
              property must be set to true for both <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -905,8 +1083,12 @@
 
               
 
+              
+
                controls on an MDI child form, setting <see
                cref="P:System.Windows.Forms.Form.IsMdiContainer" />
+
+              
 
               
 
@@ -919,6 +1101,8 @@
 
               
 
+              
+
                controls. Use <see
                cref="M:System.Windows.Forms.ToolStripManager.Merge(System.Windows.Forms.ToolStrip,System.String)" />
 
@@ -926,8 +1110,12 @@
 
               
 
+              
+
                to merge the contents of additional child <see
                cref="T:System.Windows.Forms.MenuStrip" />
+
+              
 
               
 
@@ -947,6 +1135,8 @@
 
             
 
+            
+
              objects of different types.</para
           >
         </summary>
@@ -961,8 +1151,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStrip" />
+
+          
 
           
 
@@ -975,8 +1169,12 @@
 
           
 
+          
+
            referred to by the <paramref
            name="targetToolStrip" />
+
+          
 
           
 
@@ -991,8 +1189,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStrip" />
+
+          
 
           
 
@@ -1005,8 +1207,12 @@
 
           
 
+          
+
            referred to by the <paramref
            name="sourceToolStrip" />
+
+          
 
           
 
@@ -1038,8 +1244,12 @@
 
             
 
+            
+
              property is used when the <see
              cref="P:System.Windows.Forms.ToolStrip.RenderMode" />
+
+            
 
             
 
@@ -1052,8 +1262,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode" />
+
+            
 
             
 
@@ -1091,6 +1305,8 @@
 
             
 
+            
+
             . </para
           >
           <block subset="none" type="note">
@@ -1102,6 +1318,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ToolStripManager.Renderer" />
+
+            
 
             
 
@@ -1137,8 +1355,12 @@
 
             
 
+            
+
              property to get or set whether the application is painted by the <see
              cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" />
+
+            
 
             
 
@@ -1151,8 +1373,12 @@
 
             
 
+            
+
             , or a customized <see
              cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+            
 
             
 
@@ -1193,8 +1419,12 @@
 
             
 
+            
+
              property must be set to true for both <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -1213,8 +1443,12 @@
 
             
 
+            
+
              objects, returning the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -1234,8 +1468,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -1271,8 +1509,12 @@
 
             
 
+            
+
              property must be set to true for both <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -1291,8 +1533,12 @@
 
             
 
+            
+
              objects, returning the specified <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -1312,8 +1558,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -1350,8 +1600,12 @@
 
             
 
+            
+
              property must be set to true for both <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -1370,8 +1624,12 @@
 
             
 
+            
+
              objects, returning both <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -1391,8 +1649,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -1407,6 +1669,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStrip" />
 
@@ -1414,8 +1678,12 @@
 
           
 
+          
+
            that was merged with the <paramref
            name="targetToolStrip" />
+
+          
 
           
 
@@ -1450,8 +1718,12 @@
 
             
 
+            
+
              controls that are not on the form at design time when the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -1464,8 +1736,12 @@
 
             
 
+            
+
              when the settings are loaded. To reset the settings, comment out the <see
              cref="Overload:System.Windows.Forms.ToolStripManager.LoadSettings" />
+
+            
 
             
 
@@ -1478,8 +1754,12 @@
 
             
 
+            
+
              line. This will not load any settings and will persist the last state. When you remove the comment from the <see
              cref="Overload:System.Windows.Forms.ToolStripManager.LoadSettings" />
+
+            
 
             
 
@@ -1498,8 +1778,12 @@
 
             
 
+            
+
              using the full name of the <see
              cref="T:System.Windows.Forms.Form" />
+
+            
 
             
 
@@ -1515,8 +1799,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Form" />
+
+          
 
           
 
@@ -1552,8 +1840,12 @@
 
             
 
+            
+
              controls that are not on the form at design time when the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -1566,8 +1858,12 @@
 
             
 
+            
+
              when the settings are loaded. To reset the settings, comment out the <see
              cref="Overload:System.Windows.Forms.ToolStripManager.LoadSettings" />
+
+            
 
             
 
@@ -1580,8 +1876,12 @@
 
             
 
+            
+
              line. This will not load any settings and will persist the last state. When you remove the comment from the <see
              cref="Overload:System.Windows.Forms.ToolStripManager.LoadSettings" />
+
+            
 
             
 
@@ -1600,6 +1900,8 @@
 
             
 
+            
+
              using the specified settings key.</para
           >
         </summary>
@@ -1610,8 +1912,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Form" />
+
+          
 
           
 
@@ -1626,6 +1932,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
 
@@ -1633,8 +1941,12 @@
 
           
 
+          
+
            representing the settings key for this <see
            cref="T:System.Windows.Forms.Form" />
+
+          
 
           
 
@@ -1659,6 +1971,8 @@
           <para
             >Gets or sets a value indicating whether a <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 

@@ -17,8 +17,12 @@
 
         
 
+        
+
          namespace contains the <see
          cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
+
+        
 
         
 

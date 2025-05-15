@@ -34,8 +34,12 @@
 
         
 
+        
+
          class provides enumeration functionality for the <see
          cref="T:System.Security.Cryptography.Pkcs.SignerInfoCollection" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
          implements the <see
          cref="T:System.Collections.IEnumerator" />
+
+        
 
         
 
@@ -91,6 +99,8 @@
 
             
 
+            
+
              property retrieves the current <see
              cref="T:System.Security.Cryptography.Pkcs.SignerInfo" />
 
@@ -98,8 +108,12 @@
 
             
 
+            
+
              object from the <see
              cref="T:System.Security.Cryptography.Pkcs.SignerInfoCollection" />
+
+            
 
             
 
@@ -138,6 +152,8 @@
 
             
 
+            
+
              method advances the enumeration to the next   <see
              cref="T:System.Security.Cryptography.Pkcs.SignerInfo" />
 
@@ -145,8 +161,12 @@
 
             
 
+            
+
              object in the <see
              cref="T:System.Security.Cryptography.Pkcs.SignerInfoCollection" />
+
+            
 
             
 
@@ -160,6 +180,8 @@
           <para
             >This method returns a bool value that specifies whether the enumeration successfully advanced. If the enumeration successfully moved to the next <see
              cref="T:System.Security.Cryptography.Pkcs.SignerInfo" />
+
+            
 
             
 
@@ -198,6 +220,8 @@
 
             
 
+            
+
              method resets the enumeration to the first <see
              cref="T:System.Security.Cryptography.Pkcs.SignerInfo" />
 
@@ -205,8 +229,12 @@
 
             
 
+            
+
              object in the <see
              cref="T:System.Security.Cryptography.Pkcs.SignerInfoCollection" />
+
+            
 
             
 
@@ -247,6 +275,8 @@
 
             
 
+            
+
              property retrieves the current <see
              cref="T:System.Security.Cryptography.Pkcs.SignerInfo" />
 
@@ -254,8 +284,12 @@
 
             
 
+            
+
              object from the <see
              cref="T:System.Security.Cryptography.Pkcs.SignerInfoCollection" />
+
+            
 
             
 

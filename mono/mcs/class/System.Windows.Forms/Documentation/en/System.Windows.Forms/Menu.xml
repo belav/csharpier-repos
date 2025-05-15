@@ -32,8 +32,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Windows.Forms.MenuItem" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
          classes. You cannot create an instance of this class. The menus for an application consist of <see
          cref="T:System.Windows.Forms.MenuItem" />
+
+        
 
         
 
@@ -60,8 +68,12 @@
 
         
 
+        
+
          objects, representing submenu items. The <see
          cref="T:System.Windows.Forms.MenuItem" />
+
+        
 
         
 
@@ -74,8 +86,12 @@
 
         
 
+        
+
          for display as an entire menu structure for a form or a <see
          cref="T:System.Windows.Forms.ContextMenu" />
+
+        
 
         
 
@@ -91,8 +107,12 @@
 
         
 
+        
+
          class uses its derived classes to define many of its properties. If you are using your menu in a multiple-document interface (MDI) application, you can use the <see
          cref="P:System.Windows.Forms.Menu.MdiListItem" />
+
+        
 
         
 
@@ -105,8 +125,12 @@
 
         
 
+        
+
          that displays a list of open MDI child forms in your application. The <see
          cref="P:System.Windows.Forms.Menu.MenuItems" />
+
+        
 
         
 
@@ -119,8 +143,12 @@
 
         
 
+        
+
          objects stored in the menu class. For a <see
          cref="T:System.Windows.Forms.MainMenu" />
+
+        
 
         
 
@@ -133,8 +161,12 @@
 
         
 
+        
+
         , this property contains all the <see
          cref="T:System.Windows.Forms.MenuItem" />
+
+        
 
         
 
@@ -147,8 +179,12 @@
 
         
 
+        
+
         , the <see
          cref="P:System.Windows.Forms.Menu.MenuItems" />
+
+        
 
         
 
@@ -164,6 +200,8 @@
 
         
 
+        
+
          class also provides methods, such as <see
          cref="M:System.Windows.Forms.Menu.CloneMenu(System.Windows.Forms.Menu)" />
 
@@ -171,8 +209,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Windows.Forms.Menu.MergeMenu(System.Windows.Forms.Menu)" />
+
+        
 
         
 
@@ -188,8 +230,12 @@
 
         
 
+        
+
          class also defines the nested class <see
          cref="T:System.Windows.Forms.Menu.MenuItemCollection" />
+
+        
 
         
 
@@ -202,8 +248,12 @@
 
         
 
+        
+
          objects used by the <see
          cref="P:System.Windows.Forms.Menu.MenuItems" />
+
+        
 
         
 
@@ -216,8 +266,12 @@
 
         
 
+        
+
          class to add and remove menu items from a <see
          cref="T:System.Windows.Forms.MainMenu" />
+
+        
 
         
 
@@ -230,8 +284,12 @@
 
         
 
+        
+
         , or <see
          cref="T:System.Windows.Forms.MenuItem" />
+
+        
 
         
 
@@ -250,8 +308,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
+
+        
 
         
 
@@ -264,8 +326,12 @@
 
         
 
+        
+
          control of previous versions, <see
          cref="T:System.Windows.Forms.Menu" />
+
+        
 
         
 
@@ -296,6 +362,8 @@
 
             
 
+            
+
              is an abstract class, only inherited classes can call the Menu constructor.</para
           >
         </remarks>
@@ -304,6 +372,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.Menu" />
+
+            
 
             
 
@@ -319,8 +389,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Windows.Forms.MenuItem" />
+
+          
 
           
 
@@ -357,8 +431,12 @@
 
             
 
+            
+
              objects (stored in the <see
              cref="T:System.Windows.Forms.Menu" />
+
+            
 
             
 
@@ -371,8 +449,12 @@
 
             
 
+            
+
             ) into the current menu. You can use this method in your derived class to clone <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -385,8 +467,12 @@
 
             
 
+            
+
             , such as <see
              cref="T:System.Windows.Forms.MainMenu" />
+
+            
 
             
 
@@ -399,8 +485,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -419,8 +509,12 @@
 
             
 
+            
+
              that is passed as a parameter to the current <see
              cref="T:System.Windows.Forms.Menu" />
+
+            
 
             
 
@@ -436,8 +530,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Menu" />
+
+          
 
           
 
@@ -465,6 +563,8 @@
           <para
             >Creates a new handle to the <see
              cref="T:System.Windows.Forms.Menu" />
+
+            
 
             
 
@@ -504,8 +604,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Windows.Forms.Menu" />
+
+            
 
             
 
@@ -518,8 +622,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Windows.Forms.Menu" />
+
+            
 
             
 
@@ -532,8 +640,12 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Windows.Forms.Menu" />
+
+            
 
             
 
@@ -550,8 +662,12 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.Windows.Forms.Menu" />
+
+              
 
               
 
@@ -564,8 +680,12 @@
 
               
 
+              
+
                is using will not be freed until garbage collection calls the <see
                cref="T:System.Windows.Forms.Menu" />
+
+              
 
               
 
@@ -580,6 +700,8 @@
           <para
             >Disposes of the resources, other than memory, used by the <see
              cref="T:System.Windows.Forms.Menu" />
+
+            
 
             
 
@@ -608,6 +730,8 @@
           <para
             >Specifies that the <see
              cref="M:System.Windows.Forms.Menu.FindMenuItem(System.Int32,System.IntPtr)" />
+
+            
 
             
 
@@ -646,6 +770,8 @@
 
             
 
+            
+
              using a handle, pass in the <see
              cref="F:System.Windows.Forms.Menu.FindHandle" />
 
@@ -653,8 +779,12 @@
 
             
 
+            
+
              field as the type, and the handle of the <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -670,6 +800,8 @@
 
             
 
+            
+
              using a shortcut, pass in the <see
              cref="F:System.Windows.Forms.Menu.FindShortcut" />
 
@@ -677,8 +809,12 @@
 
             
 
+            
+
              field as the type, and the Shortcut value for the <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -697,6 +833,8 @@
 
             
 
+            
+
              that contains the value specified. </para
           >
         </summary>
@@ -705,6 +843,8 @@
           <para
             >The <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -720,8 +860,12 @@
 
           
 
+          
+
           The type of item to use to find the <see
            cref="T:System.Windows.Forms.MenuItem" />
+
+          
 
           
 
@@ -736,8 +880,12 @@
 
           
 
+          
+
           The item to use to find the <see
            cref="T:System.Windows.Forms.MenuItem" />
+
+          
 
           
 
@@ -771,6 +919,8 @@
 
             
 
+            
+
              is contained in is merged with another.</para
           >
         </remarks>
@@ -784,6 +934,8 @@
         </returns>
         <param name="mergeOrder">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -811,6 +963,8 @@
           <para
             >Specifies that the <see
              cref="M:System.Windows.Forms.Menu.FindMenuItem(System.Int32,System.IntPtr)" />
+
+            
 
             
 
@@ -846,8 +1000,12 @@
 
             
 
+            
+
              that this menu is contained in. This property returns null if the menu is not contained in a <see
              cref="T:System.Windows.Forms.ContextMenu" />
+
+            
 
             
 
@@ -860,8 +1018,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Windows.Forms.MainMenu" />
+
+            
 
             
 
@@ -880,6 +1042,8 @@
 
             
 
+            
+
              that contains this menu.</para
           >
         </summary>
@@ -888,6 +1052,8 @@
           <para
             >The <see
              cref="T:System.Windows.Forms.ContextMenu" />
+
+            
 
             
 
@@ -920,8 +1086,12 @@
 
             
 
+            
+
              this menu is currently located in. This property returns null if the menu is not contained in a <see
              cref="T:System.Windows.Forms.MainMenu" />
+
+            
 
             
 
@@ -934,8 +1104,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Windows.Forms.ContextMenu" />
+
+            
 
             
 
@@ -954,6 +1128,8 @@
 
             
 
+            
+
              that contains this menu.</para
           >
         </summary>
@@ -962,6 +1138,8 @@
           <para
             >The <see
              cref="T:System.Windows.Forms.MainMenu" />
+
+            
 
             
 
@@ -1035,8 +1213,12 @@
 
             
 
+            
+
              objects are assigned to this menu. This is equivalent to checking for null in the <see
              cref="P:System.Windows.Forms.Menu.MenuItems" />
+
+            
 
             
 
@@ -1084,8 +1266,12 @@
 
             
 
+            
+
              has been specified to display the list of open child windows in an MDI application. To use a specific <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -1098,8 +1284,12 @@
 
             
 
+            
+
              property in the <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -1113,6 +1303,8 @@
           <para
             >Gets a value indicating the <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -1159,8 +1351,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Windows.Forms.ContextMenu" />
+
+            
 
             
 
@@ -1173,8 +1369,12 @@
 
             
 
+            
+
              property contains the entire menu structure in the control. For the <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -1187,6 +1387,8 @@
 
             
 
+            
+
              property contains the list of submenu items associated with the <see
              cref="T:System.Windows.Forms.MenuItem" />
 
@@ -1194,8 +1396,12 @@
 
             
 
+            
+
             . With the reference to the collection of menu items for the menu (provided by this property), you can add and remove menu items, determine the total number of menu items, and clear the list of menu items from the collection. For more information on maintaining the menu item collection for a menu, see the <see
              cref="T:System.Windows.Forms.Menu.MenuItemCollection" />
+
+            
 
             
 
@@ -1209,6 +1415,8 @@
           <para
             >Gets a value indicating the collection of <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -1246,8 +1454,12 @@
 
             
 
+            
+
              objects from one menu with the current menu. <see
              cref="T:System.Windows.Forms.MenuItem" />
+
+            
 
             
 
@@ -1260,8 +1472,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.MenuItem.MergeOrder" />
+
+            
 
             
 
@@ -1278,8 +1494,12 @@
 
             
 
+            
+
              method if you are merging two menu structures that are not part of an MDI application. This implementation can be called by the <see
              cref="T:System.Windows.Forms.MainMenu" />
+
+            
 
             
 
@@ -1292,8 +1512,12 @@
 
             
 
+            
+
              classes to merge two or more objects that derive from <see
              cref="T:System.Windows.Forms.Menu" />
+
+            
 
             
 
@@ -1309,8 +1533,12 @@
 
             
 
+            
+
              objects use the <see
              cref="M:System.Windows.Forms.MenuItem.MergeMenu" />
+
+            
 
             
 
@@ -1329,6 +1557,8 @@
 
             
 
+            
+
              objects of one menu with the current menu.</para
           >
         </summary>
@@ -1339,8 +1569,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Menu" />
+
+          
 
           
 
@@ -1382,6 +1616,8 @@
           <para
             >Gets or sets the name of the <see
              cref="T:System.Windows.Forms.Menu" />
+
+            
 
             
 
@@ -1468,6 +1704,8 @@
 
             
 
+            
+
              method returns a <see
              cref="T:System.String" />
 
@@ -1475,8 +1713,12 @@
 
             
 
+            
+
              that includes the type and the number of items in the <see
              cref="P:System.Windows.Forms.Menu.MenuItems" />
+
+            
 
             
 
@@ -1495,8 +1737,12 @@
 
             
 
+            
+
              that represents the <see
              cref="T:System.Windows.Forms.Menu" />
+
+            
 
             
 
@@ -1515,8 +1761,12 @@
 
             
 
+            
+
              that represents the current <see
              cref="T:System.Windows.Forms.Menu" />
+
+            
 
             
 

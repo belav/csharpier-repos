@@ -25,8 +25,12 @@
 
         
 
+        
+
          class is an <see
          cref="T:System.Drawing.Icon" />
+
+        
 
         
 
@@ -54,6 +58,8 @@
           <para
             >Gets an <see
              cref="T:System.Drawing.Icon" />
+
+            
 
             
 
@@ -87,6 +93,8 @@
 
             
 
+            
+
              object that contains the system asterisk icon (WIN32: IDI_ASTERISK).</para
           >
         </summary>
@@ -110,6 +118,8 @@
           <para
             >Gets an <see
              cref="T:System.Drawing.Icon" />
+
+            
 
             
 
@@ -146,6 +156,8 @@
 
             
 
+            
+
              object that contains the system exclamation icon (WIN32: IDI_EXCLAMATION).</para
           >
         </summary>
@@ -169,6 +181,8 @@
           <para
             >Gets an <see
              cref="T:System.Drawing.Icon" />
+
+            
 
             
 
@@ -205,6 +219,8 @@
 
             
 
+            
+
              object that contains the system information icon (WIN32: IDI_INFORMATION).</para
           >
         </summary>
@@ -228,6 +244,8 @@
           <para
             >Gets an <see
              cref="T:System.Drawing.Icon" />
+
+            
 
             
 
@@ -261,6 +279,8 @@
 
             
 
+            
+
              object that contains the system warning icon (WIN32: IDI_WARNING).</para
           >
         </summary>
@@ -284,6 +304,8 @@
           <para
             >Gets an <see
              cref="T:System.Drawing.Icon" />
+
+            
 
             
 

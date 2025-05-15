@@ -52,11 +52,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="operation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -102,6 +106,8 @@
 
             
 
+            
+
              representing the result of the binding.</para
           >
         </returns>
@@ -112,10 +118,14 @@
 
           
 
+          
+
           The target of the dynamic operation.</param
         >
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -160,11 +170,15 @@
 
             
 
+            
+
              representing the result of the binding.</para
           >
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -210,6 +224,8 @@
 
             
 
+            
+
              representing the result of the binding.</para
           >
         </returns>
@@ -220,10 +236,14 @@
 
           
 
+          
+
           The target of the dynamic unary operation.</param
         >
         <param name="errorSuggestion">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

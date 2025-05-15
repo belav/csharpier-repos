@@ -12,6 +12,8 @@
 
       
 
+      
+
        :: <rhs
       >
         <non_terminal where="9.5.3">pp-declaration</non_terminal>
@@ -40,6 +42,8 @@
 
         
 
+        
+
          and <symbol
         >#undef</symbol>
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
         , which are used to define and undefine, respectively, conditional compilation symbols (<hyperlink
         >9.5.3</hyperlink>
+
+        
 
         
 
@@ -63,8 +71,12 @@
 
         
 
+        
+
         , <symbol
         >#elif</symbol>
+
+        
 
         
 
@@ -77,6 +89,8 @@
 
         
 
+        
+
         , and <symbol
         >#endif</symbol>
 
@@ -84,8 +98,12 @@
 
         
 
+        
+
         , which are used to conditionally skip sections of source code (<hyperlink
         >9.5.1</hyperlink>
+
+        
 
         
 
@@ -100,8 +118,12 @@
 
         
 
+        
+
         , which is used to control line numbers emitted for errors and warnings (<hyperlink
         >9.5.7</hyperlink>
+
+        
 
         
 
@@ -116,6 +138,8 @@
 
         
 
+        
+
          and <symbol
         >#warning</symbol>
 
@@ -123,8 +147,12 @@
 
         
 
+        
+
         , which are used to issue errors and warnings, respectively (<hyperlink
         >9.5.5</hyperlink>
+
+        
 
         
 
@@ -139,6 +167,8 @@
 
         
 
+        
+
          and <symbol
         >#endregion</symbol>
 
@@ -146,8 +176,12 @@
 
         
 
+        
+
         , which are used to explicitly mark sections of source code (<hyperlink
         >9.5.6</hyperlink>
+
+        
 
         
 
@@ -166,8 +200,12 @@
 
     
 
+    
+
     , <symbol
     >#undef</symbol>
+
+    
 
     
 
@@ -180,8 +218,12 @@
 
     
 
+    
+
     , <symbol
     >#elif</symbol>
+
+    
 
     
 
@@ -194,8 +236,12 @@
 
     
 
+    
+
     , <symbol
     >#endif</symbol>
+
+    
 
     
 
@@ -208,6 +254,8 @@
 
     
 
+    
+
      directive may end with a single-line comment. Delimited comments (the /* */ style of comments) are not permitted on source lines containing pre-processing directives. </paragraph
   >
   <paragraph
@@ -215,7 +263,7 @@
 
       >[Example: For example, when compiled, the program <code_example
       >
-<![CDATA[
+        <![CDATA[
 #define A  
 #undef B  
 class C  
@@ -238,9 +286,11 @@ class C
 
       
 
+      
+
       results in the exact same sequence of tokens as the program <code_example
       >
-<![CDATA[
+        <![CDATA[
 class C  
 {  
    void F() {}  

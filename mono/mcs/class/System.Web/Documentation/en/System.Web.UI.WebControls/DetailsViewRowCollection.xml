@@ -28,8 +28,12 @@
 
         
 
+        
+
          class is used to store and manage a collection of <see
          cref="T:System.Web.UI.WebControls.DetailsViewRow" />
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
          control. Each row in a <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -56,8 +64,12 @@
 
         
 
+        
+
          object. The <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -70,8 +82,12 @@
 
         
 
+        
+
          class for its <see
          cref="P:System.Web.UI.WebControls.DetailsView.Rows" />
+
+        
 
         
 
@@ -88,8 +104,12 @@
 
           
 
+          
+
            property contains only the data rows. To access the header row, footer row, top pager row, and bottom pager row, use the <see
            cref="P:System.Web.UI.WebControls.DetailsView.HeaderRow" />
+
+          
 
           
 
@@ -102,8 +122,12 @@
 
           
 
+          
+
           , <see
            cref="P:System.Web.UI.WebControls.DetailsView.TopPagerRow" />
+
+          
 
           
 
@@ -116,12 +140,16 @@
 
           
 
+          
+
            properties, respectively.</para
         >
       </block>
       <para
         >The <see
          cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+
+        
 
         
 
@@ -139,8 +167,12 @@
 
             
 
+            
+
              indexer to directly retrieve a <see
              cref="T:System.Web.UI.WebControls.DetailsViewRow" />
+
+            
 
             
 
@@ -158,6 +190,8 @@
 
             
 
+            
+
              method to retrieve an enumerator that can be used to iterate through the collection.</para
           >
         </item>
@@ -170,6 +204,8 @@
 
             
 
+            
+
              method to copy the items in the collection into an array, which can then be used to access the items in the collection.</para
           >
         </item>
@@ -177,6 +213,8 @@
       <para
         >To determine the total number of items in the collection, use the <see
          cref="P:System.Web.UI.WebControls.DetailsViewRowCollection.Count" />
+
+        
 
         
 
@@ -195,8 +233,12 @@
 
         
 
+        
+
          objects in a <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -228,8 +270,12 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -242,8 +288,12 @@
 
             
 
+            
+
              object contains the <see
              cref="T:System.Web.UI.WebControls.DetailsViewRow" />
+
+            
 
             
 
@@ -262,8 +312,12 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.Collections.ArrayList" />
+
+            
 
             
 
@@ -279,6 +333,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.ArrayList" />
 
@@ -286,8 +342,12 @@
 
           
 
+          
+
            that contains the <see
            cref="T:System.Web.UI.WebControls.DetailsViewRow" />
+
+          
 
           
 
@@ -325,12 +385,16 @@
 
             
 
+            
+
              object into the specified array, starting at the specified index. The array can then be used to access the items in the collection.</para
           >
           <block subset="none" type="note">
             <para
               >You must use a zero-based array for the <paramref
                name="array" />
+
+              
 
               
 
@@ -350,6 +414,8 @@
 
             
 
+            
+
              object to the specified <see
              cref="T:System.Array" />
 
@@ -357,8 +423,12 @@
 
             
 
+            
+
              object, starting at the specified index in the <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -374,6 +444,8 @@
 
           
 
+          
+
           A zero-based <see
            cref="T:System.Array" />
 
@@ -381,8 +453,12 @@
 
           
 
+          
+
            that receives the copied items from the <see
            cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+
+          
 
           
 
@@ -397,8 +473,12 @@
 
           
 
+          
+
           The first index in the specified <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -430,6 +510,8 @@
 
             
 
+            
+
              property to determine the number of items in the collection. The <see
              cref="P:System.Web.UI.WebControls.DetailsViewRowCollection.Count" />
 
@@ -437,8 +519,12 @@
 
             
 
+            
+
              property is commonly used when iterating through the collection to determine its upper bound. The <see
              cref="P:System.Web.UI.WebControls.DetailsViewRowCollection.Count" />
+
+            
 
             
 
@@ -452,6 +538,8 @@
           <para
             >Gets the number of items in the <see
              cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+
+            
 
             
 
@@ -487,8 +575,12 @@
 
             
 
+            
+
              object. To access the item at the current position in the enumerator, use the <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -501,8 +593,12 @@
 
             
 
+            
+
              method to move to the next item in the collection. To move the enumerator to its initial position, use the <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 
@@ -519,6 +615,8 @@
 
               
 
+              
+
                method to move the enumerator to the first item in the collection, you must call the <see
                cref="M:System.Collections.IEnumerator.MoveNext" />
 
@@ -526,8 +624,12 @@
 
               
 
+              
+
                method. Otherwise, the item represented by the <see
                cref="P:System.Collections.IEnumerator.Current" />
+
+              
 
               
 
@@ -547,8 +649,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+
+            
 
             
 
@@ -567,6 +673,8 @@
 
             
 
+            
+
             -implemented object that contains all <see
              cref="T:System.Web.UI.WebControls.DetailsViewRow" />
 
@@ -574,8 +682,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+
+            
 
             
 
@@ -608,6 +720,8 @@
 
             
 
+            
+
              property to determine whether the <see
              cref="T:System.Web.UI.WebControls.DetailsViewRow" />
 
@@ -615,8 +729,12 @@
 
             
 
+            
+
              objects in the <see
              cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+
+            
 
             
 
@@ -633,8 +751,12 @@
 
               
 
+              
+
                objects in the <see
                cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+
+              
 
               
 
@@ -649,6 +771,8 @@
           <para
             >Gets a value indicating whether the rows in the <see
              cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+
+            
 
             
 
@@ -681,8 +805,12 @@
 
             
 
+            
+
              property to determine whether the <see
              cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+
+            
 
             
 
@@ -699,12 +827,16 @@
 
               
 
+              
+
                object is not thread safe.</para
             >
           </block>
           <para
             >For more information on the <see
              cref="P:System.Web.UI.WebControls.DetailsViewRowCollection.IsSynchronized" />
+
+            
 
             
 
@@ -717,8 +849,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -732,6 +868,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+
+            
 
             
 
@@ -787,8 +925,12 @@
 
             
 
+            
+
              property to get an object that can be used to synchronize access to the collection. The object returned in this implementation is the <see
              cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+
+            
 
             
 
@@ -804,6 +946,8 @@
 
             
 
+            
+
              property, see the <see
              cref="P:System.Collections.ICollection.SyncRoot" />
 
@@ -811,8 +955,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -854,8 +1002,12 @@
 
             
 
+            
+
              method is a helper method used by the <see
              cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+
+            
 
             
 
@@ -868,6 +1020,8 @@
 
             
 
+            
+
              object into the specified <see
              cref="T:System.Array" />
 
@@ -875,8 +1029,12 @@
 
             
 
+            
+
              object, starting at the specified index. The <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -893,8 +1051,12 @@
 
               
 
+              
+
                object for the <paramref
                name="array" />
+
+              
 
               
 
@@ -914,6 +1076,8 @@
 
             
 
+            
+
              object to the specified <see
              cref="T:System.Array" />
 
@@ -921,8 +1085,12 @@
 
             
 
+            
+
              object, starting at the specified index in the <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -938,6 +1106,8 @@
 
           
 
+          
+
           A zero-based <see
            cref="T:System.Array" />
 
@@ -945,8 +1115,12 @@
 
           
 
+          
+
            that receives the copied items from the <see
            cref="T:System.Web.UI.WebControls.DetailsViewRowCollection" />
+
+          
 
           
 
@@ -961,8 +1135,12 @@
 
           
 
+          
+
           The first index in the specified <see
            cref="T:System.Array" />
+
+          
 
           
 

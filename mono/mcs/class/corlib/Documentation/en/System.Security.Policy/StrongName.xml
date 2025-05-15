@@ -44,11 +44,15 @@
 
         
 
+        
+
          class represents evidence of a unique, cryptographically strong name of a code assembly. The strong name consists of a public key, a given name, and a version. The public key corresponds to the publisher's private key which is kept secret, and with which the assembly must be signed in order for the strong name to be valid.</para
       >
       <para
         >Strong names are typically assigned to assemblies using either <see
          cref="T:System.Reflection.AssemblyKeyFileAttribute" />
+
+        
 
         
 
@@ -61,8 +65,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Reflection.AssemblyDelaySignAttribute" />
+
+        
 
         
 
@@ -79,10 +87,14 @@
 
         
 
+        
+
         ).</para
       >
       <para>
         <see cref="T:System.Security.Permissions.StrongNameIdentityPermission" />
+
+        
 
         
 
@@ -129,6 +141,8 @@
 
             
 
+            
+
              parameter can be null, but it cannot be an empty string ("").</para
           >
           <para
@@ -139,8 +153,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Security.Permissions.StrongNamePublicKeyBlob" />
+
+            
 
             
 
@@ -159,6 +177,8 @@
 
             
 
+            
+
              class with the strong name public key blob, name, and version.</para
           >
         </summary>
@@ -169,8 +189,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Permissions.StrongNamePublicKeyBlob" />
+
+          
 
           
 
@@ -185,6 +209,8 @@
 
           
 
+          
+
           The simple name section of the strong name. </param
         >
         <param name="version">
@@ -194,8 +220,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Version" />
+
+          
 
           
 
@@ -233,6 +263,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -241,6 +273,8 @@
           <para
             >A new, identical copy of the current <see
              cref="T:System.Security.Policy.StrongName" />
+
+            
 
             
 
@@ -287,8 +321,12 @@
 
             
 
+            
+
              that corresponds to the current <see
              cref="T:System.Security.Policy.StrongName" />
+
+            
 
             
 
@@ -307,8 +345,12 @@
 
             
 
+            
+
              for the specified <see
              cref="T:System.Security.Policy.StrongName" />
+
+            
 
             
 
@@ -324,6 +366,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Policy.Evidence" />
 
@@ -331,8 +375,12 @@
 
           
 
+          
+
            from which to construct the <see
            cref="T:System.Security.Permissions.StrongNameIdentityPermission" />
+
+          
 
           
 
@@ -377,6 +425,8 @@
 
           
 
+          
+
           The strong name to compare against the current strong name. </param
         >
       </Docs>
@@ -409,6 +459,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -417,6 +469,8 @@
           <para
             >The hash code of the current <see
              cref="T:System.Security.Policy.StrongName" />
+
+            
 
             
 
@@ -447,6 +501,8 @@
           <para
             >Gets the simple name of the current <see
              cref="T:System.Security.Policy.StrongName" />
+
+            
 
             
 
@@ -492,8 +548,12 @@
 
             
 
+            
+
              of the current <see
              cref="T:System.Security.Policy.StrongName" />
+
+            
 
             
 
@@ -622,6 +682,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -630,6 +692,8 @@
           <para
             >A representation of the current <see
              cref="T:System.Security.Policy.StrongName" />
+
+            
 
             
 
@@ -665,8 +729,12 @@
 
             
 
+            
+
              of the current <see
              cref="T:System.Security.Policy.StrongName" />
+
+            
 
             
 

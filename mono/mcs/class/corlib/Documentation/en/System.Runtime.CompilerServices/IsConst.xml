@@ -31,8 +31,12 @@
 
             
 
+            
+
              class such as <see
              cref="Overload:System.Reflection.Emit.TypeBuilder.DefineMethod" />
+
+            
 
             
 
@@ -45,6 +49,8 @@
 
             
 
+            
+
             , <see
              cref="Overload:System.Reflection.Emit.TypeBuilder.DefineConstructor" />
 
@@ -52,8 +58,12 @@
 
             
 
+            
+
             , and <see
              cref="Overload:System.Reflection.Emit.TypeBuilder.DefineProperty" />
+
+            
 
             
 
@@ -68,6 +78,8 @@
              type="text/html">
               <a href="4ca3a4f0-4400-47ce-8936-8e219961c76f">MSIL Assembler (Ilasm.exe)</a>
             </format>
+
+            
 
             
 

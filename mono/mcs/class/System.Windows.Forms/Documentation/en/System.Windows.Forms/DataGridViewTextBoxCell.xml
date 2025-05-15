@@ -24,8 +24,12 @@
 
         
 
+        
+
          class is a specialized type of <see
          cref="T:System.Windows.Forms.DataGridViewCell" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          hosts a <see
          cref="T:System.Windows.Forms.DataGridViewTextBoxEditingControl" />
+
+        
 
         
 
@@ -52,8 +60,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.DataGridViewTextBoxCell" />
+
+        
 
         
 
@@ -69,8 +81,12 @@
 
         
 
+        
+
          is the column type specialized to hold cells of this type. By default, the <see
          cref="P:System.Windows.Forms.DataGridViewTextBoxColumn.CellTemplate" />
+
+        
 
         
 
@@ -83,6 +99,8 @@
 
         
 
+        
+
         . To pattern the cells within a column after an existing <see
          cref="T:System.Windows.Forms.DataGridViewTextBoxCell" />
 
@@ -90,8 +108,12 @@
 
         
 
+        
+
         , set the column's <see
          cref="P:System.Windows.Forms.DataGridViewTextBoxColumn.CellTemplate" />
+
+        
 
         
 
@@ -106,6 +128,8 @@
       <para
         >Displays editable text information in a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -128,6 +152,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.DataGridViewTextBoxCell" />
+
+            
 
             
 
@@ -160,8 +186,12 @@
 
             
 
+            
+
              method whenever you derive from <see
              cref="T:System.Windows.Forms.DataGridViewTextBoxCell" />
+
+            
 
             
 
@@ -184,8 +214,12 @@
 
             
 
+            
+
              that represents the cloned <see
              cref="T:System.Windows.Forms.DataGridViewTextBoxCell" />
+
+            
 
             
 
@@ -234,6 +268,8 @@
           <para
             >The type of the underlying formatted value is always <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -360,8 +396,12 @@
 
             
 
+            
+
              method initializes the hosted editing control as described in the base <see
              cref="M:System.Windows.Forms.DataGridViewCell.InitializeEditingControl(System.Int32,System.Object,System.Windows.Forms.DataGridViewCellStyle)" />
+
+            
 
             
 
@@ -379,8 +419,12 @@
 
                 
 
+                
+
                  property is set to <see
                  cref="F:System.Windows.Forms.BorderStyle.None" />
+
+                
 
                 
 
@@ -398,8 +442,12 @@
 
                 
 
+                
+
                  and <see
                  cref="P:System.Windows.Forms.TextBox.AcceptsReturn" />
+
+                
 
                 
 
@@ -417,8 +465,12 @@
 
                 
 
+                
+
                  property is set to the <paramref
                  name="initialFormattedValue" />
+
+                
 
                 
 
@@ -440,6 +492,8 @@
 
           
 
+          
+
           The index of the row being edited.</param
         >
         <param name="initialFormattedValue">
@@ -449,10 +503,14 @@
 
           
 
+          
+
           The initial value to be displayed in the control.</param
         >
         <param name="dataGridViewCellStyle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -489,8 +547,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.DataGridView" />
+
+            
 
             
 
@@ -503,8 +565,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Windows.Forms.DataGridViewEditMode.EditOnKeystrokeOrF2" />
+
+            
 
             
 
@@ -519,6 +585,8 @@
                 >Default Keyboard and Mouse Handling in the Windows Forms DataGridView Control</a
               >
             </format>
+
+            
 
             
 
@@ -542,8 +610,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.KeyEventArgs" />
+
+          
 
           
 
@@ -575,6 +647,8 @@
 
             
 
+            
+
              property does not affect the length of text entered programmatically through the cell's value or through cell formatting. It affects only what the user can input and edit.</para
           >
           <para
@@ -585,8 +659,12 @@
 
             
 
+            
+
              property of the owning column also sets the <see
              cref="P:System.Windows.Forms.DataGridViewTextBoxCell.MaxInputLength" />
+
+            
 
             
 
@@ -634,8 +712,12 @@
 
             
 
+            
+
              method. It is called in the same circumstances in which an <see
              cref="E:System.Windows.Forms.Control.Enter" />
+
+            
 
             
 
@@ -654,6 +736,8 @@
 
             
 
+            
+
              when the selection cursor moves onto a cell.</para
           >
         </summary>
@@ -664,10 +748,14 @@
 
           
 
+          
+
           The index of the row entered by the mouse.</param
         >
         <param name="throughMouseClick">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -706,8 +794,12 @@
 
             
 
+            
+
              method. It is called in the same circumstances in which a <see
              cref="E:System.Windows.Forms.Control.Leave" />
+
+            
 
             
 
@@ -726,6 +818,8 @@
 
             
 
+            
+
              when the mouse leaves a cell.</para
           >
         </summary>
@@ -736,10 +830,14 @@
 
           
 
+          
+
           The index of the row the mouse has left.</param
         >
         <param name="throughMouseClick">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -775,6 +873,8 @@
 
             
 
+            
+
              determines whether the mouse click is part of a double click that starts an edit session.</para
           >
           <para
@@ -785,8 +885,12 @@
 
             
 
+            
+
              method. It is called in the same circumstances in which a <see
              cref="E:System.Windows.Forms.Control.MouseClick" />
+
+            
 
             
 
@@ -805,6 +909,8 @@
 
             
 
+            
+
              when the mouse leaves a cell.</para
           >
         </summary>
@@ -815,8 +921,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Windows.Forms.DataGridViewCellMouseEventArgs" />
+
+          
 
           
 

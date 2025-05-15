@@ -25,8 +25,12 @@
 
         
 
+        
+
          class is a <see
          cref="T:System.Drawing.Pen" />
+
+        
 
         
 
@@ -62,6 +66,8 @@
 
             
 
+            
+
              that is the color of the active window's border.</para
           >
         </summary>
@@ -92,6 +98,8 @@
 
             
 
+            
+
              that is the color of the background of the active window's title bar.</para
           >
         </summary>
@@ -114,6 +122,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -156,6 +166,8 @@
 
             
 
+            
+
              that is the color of the application workspace.</para
           >
         </summary>
@@ -178,6 +190,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -216,6 +230,8 @@
 
             
 
+            
+
              that is the highlight color of a 3-D element. </para
           >
         </summary>
@@ -249,6 +265,8 @@
 
             
 
+            
+
              that is the shadow color of a 3-D element. </para
           >
         </summary>
@@ -268,6 +286,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -307,6 +327,8 @@
 
             
 
+            
+
              that is the shadow color of a 3-D element. </para
           >
         </summary>
@@ -336,6 +358,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -375,6 +399,8 @@
 
             
 
+            
+
              that is the light color of a 3-D element. </para
           >
         </summary>
@@ -404,6 +430,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -440,6 +468,8 @@
 
             
 
+            
+
              that is the color of text in a 3-D element.</para
           >
         </summary>
@@ -466,6 +496,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -500,8 +532,12 @@
 
             
 
+            
+
              from the specified <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -520,11 +556,15 @@
 
             
 
+            
+
              this method creates.</para
           >
         </returns>
         <param name="c">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -537,8 +577,12 @@
 
           
 
+          
+
            for the new <see
            cref="T:System.Drawing.Pen" />
+
+          
 
           
 
@@ -577,6 +621,8 @@
 
             
 
+            
+
              that is the lightest color in the color gradient of an active window's title bar.</para
           >
         </summary>
@@ -602,6 +648,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -634,6 +682,8 @@
 
             
 
+            
+
              that is the color of dimmed text. </para
           >
         </summary>
@@ -660,6 +710,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -699,6 +751,8 @@
 
             
 
+            
+
              that is the color of the text of selected items. </para
           >
         </summary>
@@ -725,6 +779,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -760,6 +816,8 @@
 
             
 
+            
+
              is the color of the border of an inactive window.</para
           >
         </summary>
@@ -790,6 +848,8 @@
 
             
 
+            
+
              that is the color of the title bar caption of an inactive window.</para
           >
         </summary>
@@ -812,6 +872,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -848,6 +910,8 @@
 
             
 
+            
+
              that is the color of the background of a ToolTip.</para
           >
         </summary>
@@ -867,6 +931,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -903,6 +969,8 @@
 
             
 
+            
+
              that is the color of a menu's background.</para
           >
         </summary>
@@ -925,6 +993,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -960,6 +1030,8 @@
 
             
 
+            
+
              that is the color used to highlight menu items when the menu appears as a flat menu.</para
           >
         </summary>
@@ -979,6 +1051,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1015,6 +1089,8 @@
 
             
 
+            
+
              that is the color of the background of a scroll bar.</para
           >
         </summary>
@@ -1037,6 +1113,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -1069,6 +1147,8 @@
 
             
 
+            
+
              that is the color of a window frame.</para
           >
         </summary>
@@ -1092,6 +1172,8 @@
           <para
             >Gets a <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 

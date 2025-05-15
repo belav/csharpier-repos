@@ -47,6 +47,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -77,11 +79,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="nativeError">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -119,11 +125,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="error">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -158,11 +168,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -201,6 +215,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -211,10 +227,14 @@
 
           
 
+          
+
           The native error code for the exception.</param
         >
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -253,6 +273,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -263,10 +285,14 @@
 
           
 
+          
+
           The native error code for the exception.</param
         >
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -305,6 +331,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -315,10 +343,14 @@
 
           
 
+          
+
           The error from the WebSocketError enumeration.</param
         >
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -357,6 +389,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -367,10 +401,14 @@
 
           
 
+          
+
           The error from the WebSocketError enumeration.</param
         >
         <param name="nativeError">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -409,6 +447,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -419,10 +459,14 @@
 
           
 
+          
+
           The error from the WebSocketError enumeration.</param
         >
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -461,6 +505,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -471,10 +517,14 @@
 
           
 
+          
+
           The description of the error.</param
         >
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -514,11 +564,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="error">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -533,10 +587,14 @@
 
           
 
+          
+
           The native error code for the exception.</param
         >
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -576,11 +634,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="error">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -595,10 +657,14 @@
 
           
 
+          
+
           The native error code for the exception.</param
         >
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -638,11 +704,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="error">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -657,10 +727,14 @@
 
           
 
+          
+
           The description of the error.</param
         >
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -701,11 +775,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="error">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -720,6 +798,8 @@
 
           
 
+          
+
           The native error code for the exception.</param
         >
         <param name="message">
@@ -729,10 +809,14 @@
 
           
 
+          
+
           The description of the error.</param
         >
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

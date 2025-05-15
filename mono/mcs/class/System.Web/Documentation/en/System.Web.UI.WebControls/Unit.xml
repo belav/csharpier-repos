@@ -28,8 +28,12 @@
 
         
 
+        
+
          structure represents a length measurement that can be expressed in any HTML-compatible size unit. The <see
          cref="T:System.Web.UI.WebControls.UnitType" />
+
+        
 
         
 
@@ -42,6 +46,8 @@
 
         
 
+        
+
          is used by properties such as BorderWidth and Height to represent the length or width of the property. For example, you can set the <see
          cref="P:System.Web.UI.WebControls.WebControl.BorderWidth" />
 
@@ -49,8 +55,12 @@
 
         
 
+        
+
          property of a Web Server control to a <see
          cref="T:System.Web.UI.WebControls.Unit" />
+
+        
 
         
 
@@ -67,12 +77,16 @@
 
           
 
+          
+
            class can represent values only between -32768 and 32767.</para
         >
       </block>
       <para
         >Use the <see
          cref="P:System.Web.UI.WebControls.Unit.Value" />
+
+        
 
         
 
@@ -85,8 +99,12 @@
 
         
 
+        
+
          property. You can convert other data types to a <see
          cref="T:System.Web.UI.WebControls.Unit" />
+
+        
 
         
 
@@ -99,8 +117,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Web.UI.WebControls.Unit.Percentage(System.Double)" />
+
+        
 
         
 
@@ -113,8 +135,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Web.UI.WebControls.Unit.Point(System.Int32)" />
+
+        
 
         
 
@@ -130,8 +156,12 @@
 
         
 
+        
+
         , see the <see
          cref="T:System.Web.UI.WebControls.Unit" />
+
+        
 
         
 
@@ -164,11 +194,15 @@
 
             
 
+            
+
              structure using the specified double precision floating point number.</para
           >
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.Web.UI.WebControls.Unit" />
+
+            
 
             
 
@@ -214,6 +248,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -223,6 +259,8 @@
             <para
               >If <paramref
                name="value" />
+
+              
 
               
 
@@ -242,6 +280,8 @@
 
             
 
+            
+
              structure with the specified double precision floating point number.</para
           >
         </summary>
@@ -252,8 +292,12 @@
 
           
 
+          
+
           A double precision floating point number that represents the length of the <see
            cref="T:System.Web.UI.WebControls.Unit" />
+
+          
 
           
 
@@ -285,11 +329,15 @@
 
             
 
+            
+
              structure using the specified 32-bit signed integer.</para
           >
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.Web.UI.WebControls.Unit" />
+
+            
 
             
 
@@ -335,6 +383,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -344,6 +394,8 @@
             <para
               >If <paramref
                name="value" />
+
+              
 
               
 
@@ -363,6 +415,8 @@
 
             
 
+            
+
              structure with the specified 32-bit signed integer.</para
           >
         </summary>
@@ -373,8 +427,12 @@
 
           
 
+          
+
           A 32-bit signed integer that represents the length of the <see
            cref="T:System.Web.UI.WebControls.Unit" />
+
+          
 
           
 
@@ -401,6 +459,8 @@
           <para
             >Use this constructor to create and initialize a new instance of the <see
              cref="T:System.Web.UI.WebControls.Unit" />
+
+            
 
             
 
@@ -477,6 +537,8 @@
 
             
 
+            
+
             .</para
           >
           <list type="table">
@@ -505,6 +567,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -524,6 +588,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -533,6 +599,8 @@
             <para
               >If <paramref
                name="value" />
+
+              
 
               
 
@@ -552,6 +620,8 @@
 
             
 
+            
+
              structure with the specified length.</para
           >
         </summary>
@@ -562,8 +632,12 @@
 
           
 
+          
+
           A string that represents the length of the <see
            cref="T:System.Web.UI.WebControls.Unit" />
+
+          
 
           
 
@@ -599,8 +673,12 @@
 
             
 
+            
+
              structure using the specified double precision floating point number and <see
              cref="T:System.Web.UI.WebControls.UnitType" />
+
+            
 
             
 
@@ -611,6 +689,8 @@
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.Web.UI.WebControls.Unit" />
+
+            
 
             
 
@@ -644,6 +724,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -663,6 +745,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -672,6 +756,8 @@
             <para
               >If <paramref
                name="value" />
+
+              
 
               
 
@@ -691,8 +777,12 @@
 
             
 
+            
+
              structure with the specified double precision floating point number and <see
              cref="T:System.Web.UI.WebControls.UnitType" />
+
+            
 
             
 
@@ -708,8 +798,12 @@
 
           
 
+          
+
           A double precision floating point number that represents the length of the <see
            cref="T:System.Web.UI.WebControls.Unit" />
+
+          
 
           
 
@@ -724,8 +818,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Web.UI.WebControls.UnitType" />
+
+          
 
           
 
@@ -761,8 +859,12 @@
 
             
 
+            
+
              structure using the specified length and <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -839,6 +941,8 @@
 
             
 
+            
+
             .</para
           >
           <list type="table">
@@ -867,6 +971,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -886,6 +992,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -895,6 +1003,8 @@
             <para
               >If <paramref
                name="value" />
+
+              
 
               
 
@@ -914,8 +1024,12 @@
 
             
 
+            
+
              structure with the specified length and <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -931,8 +1045,12 @@
 
           
 
+          
+
           A string that represents the length of the <see
            cref="T:System.Web.UI.WebControls.Unit" />
+
+          
 
           
 
@@ -947,8 +1065,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -984,6 +1106,8 @@
 
             
 
+            
+
             . This field is read-only.</para
           >
         </summary>
@@ -1013,8 +1137,12 @@
 
             
 
+            
+
              method to compare the <see
              cref="T:System.Web.UI.WebControls.Unit" />
+
+            
 
             
 
@@ -1027,6 +1155,8 @@
 
             
 
+            
+
             . For both objects to be equal, they must have the same values for both the <see
              cref="P:System.Web.UI.WebControls.Unit.Type" />
 
@@ -1034,8 +1164,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.Unit.Value" />
+
+            
 
             
 
@@ -1052,8 +1186,12 @@
 
               
 
+              
+
                must by a <see
                cref="T:System.Web.UI.WebControls.Unit" />
+
+              
 
               
 
@@ -1073,6 +1211,8 @@
 
             
 
+            
+
              with the specified object.</para
           >
         </summary>
@@ -1086,11 +1226,15 @@
 
             
 
+            
+
              that this method is called from is equal to the specified object; otherwise, false.</para
           >
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1127,6 +1271,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1154,8 +1300,12 @@
 
             
 
+            
+
              property to determine whether the <see
              cref="T:System.Web.UI.WebControls.Unit" />
+
+            
 
             
 
@@ -1168,8 +1318,12 @@
 
             
 
+            
+
              is empty if the <see
              cref="P:System.Web.UI.WebControls.Unit.Type" />
+
+            
 
             
 
@@ -1183,6 +1337,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Web.UI.WebControls.Unit" />
+
+            
 
             
 
@@ -1221,6 +1377,8 @@
 
             
 
+            
+
              objects for equality. For both objects to be equal, they must have the same values for both the <see
              cref="P:System.Web.UI.WebControls.Unit.Type" />
 
@@ -1228,8 +1386,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.Unit.Value" />
+
+            
 
             
 
@@ -1248,6 +1410,8 @@
 
             
 
+            
+
              objects to determine whether they are equal.</para
           >
         </summary>
@@ -1256,6 +1420,8 @@
           <para
             >true if both <see
              cref="T:System.Web.UI.WebControls.Unit" />
+
+            
 
             
 
@@ -1271,8 +1437,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.Unit" />
+
+          
 
           
 
@@ -1287,8 +1457,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.Unit" />
+
+          
 
           
 
@@ -1349,6 +1523,8 @@
 
             
 
+            
+
              objects for inequality. For the objects to not be equal, they must have different values for the <see
              cref="P:System.Web.UI.WebControls.Unit.Type" />
 
@@ -1356,8 +1532,12 @@
 
             
 
+            
+
              property or the <see
              cref="P:System.Web.UI.WebControls.Unit.Value" />
+
+            
 
             
 
@@ -1376,6 +1556,8 @@
 
             
 
+            
+
              objects to determine whether they are not equal.</para
           >
         </summary>
@@ -1384,6 +1566,8 @@
           <para
             >true if the <see
              cref="T:System.Web.UI.WebControls.Unit" />
+
+            
 
             
 
@@ -1399,8 +1583,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.Unit" />
+
+          
 
           
 
@@ -1415,8 +1603,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.Unit" />
+
+          
 
           
 
@@ -1453,8 +1645,12 @@
 
             
 
+            
+
              static method to convert the string specified by the <paramref
              name="s" />
+
+            
 
             
 
@@ -1467,12 +1663,16 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
             <para
               >The unit of measurement when using this method is <see
                cref="F:System.Web.UI.WebControls.UnitType.Pixel" />
+
+              
 
               
 
@@ -1492,6 +1692,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1505,11 +1707,15 @@
 
             
 
+            
+
              that represents the specified string.</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1547,8 +1753,12 @@
 
             
 
+            
+
              static method to convert the string specified by <paramref
              name="s" />
+
+            
 
             
 
@@ -1561,8 +1771,12 @@
 
             
 
+            
+
              in the culture specified by <paramref
              name="culture" />
+
+            
 
             
 
@@ -1574,6 +1788,8 @@
             <para
               >The unit of measurement when using this method is <see
                cref="F:System.Web.UI.WebControls.UnitType.Pixel" />
+
+              
 
               
 
@@ -1593,8 +1809,12 @@
 
             
 
+            
+
              to a <see
              cref="T:System.Web.UI.WebControls.Unit" />
+
+            
 
             
 
@@ -1613,11 +1833,15 @@
 
             
 
+            
+
              that represents the specified string.</para
           >
         </returns>
         <param name="s">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1632,8 +1856,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -1670,8 +1898,12 @@
 
             
 
+            
+
              static method to create a <see
              cref="T:System.Web.UI.WebControls.Unit" />
+
+            
 
             
 
@@ -1684,8 +1916,12 @@
 
             
 
+            
+
              that represents the length specified by the <paramref
              name="n" />
+
+            
 
             
 
@@ -1698,12 +1934,16 @@
 
             
 
+            
+
              of a Web server control, the height attribute is set to 80%.</para
           >
           <block subset="none" type="note">
             <para
               >The <see
                cref="T:System.Web.UI.WebControls.Unit" />
+
+              
 
               
 
@@ -1723,8 +1963,12 @@
 
             
 
+            
+
              of type <see
              cref="F:System.Web.UI.WebControls.UnitType.Percentage" />
+
+            
 
             
 
@@ -1743,8 +1987,12 @@
 
             
 
+            
+
              of type <see
              cref="F:System.Web.UI.WebControls.UnitType.Percentage" />
+
+            
 
             
 
@@ -1760,8 +2008,12 @@
 
           
 
+          
+
           A double-precision floating-point number that represents the length of the <see
            cref="T:System.Web.UI.WebControls.Unit" />
+
+          
 
           
 
@@ -1798,8 +2050,12 @@
 
             
 
+            
+
              static method to create a <see
              cref="T:System.Web.UI.WebControls.Unit" />
+
+            
 
             
 
@@ -1812,8 +2068,12 @@
 
             
 
+            
+
              that represents the length specified by the <paramref
              name="n" />
+
+            
 
             
 
@@ -1825,6 +2085,8 @@
             <para
               >The <see
                cref="T:System.Web.UI.WebControls.Unit" />
+
+              
 
               
 
@@ -1844,8 +2106,12 @@
 
             
 
+            
+
              of type <see
              cref="F:System.Web.UI.WebControls.UnitType.Pixel" />
+
+            
 
             
 
@@ -1864,6 +2130,8 @@
 
             
 
+            
+
              of type <see
              cref="F:System.Web.UI.WebControls.UnitType.Pixel" />
 
@@ -1871,8 +2139,12 @@
 
             
 
+            
+
              that represents the length specified by the <paramref
              name="n" />
+
+            
 
             
 
@@ -1888,8 +2160,12 @@
 
           
 
+          
+
           A 32-bit signed integer that represents the length of the <see
            cref="T:System.Web.UI.WebControls.Unit" />
+
+          
 
           
 
@@ -1926,8 +2202,12 @@
 
             
 
+            
+
              static method to create a <see
              cref="T:System.Web.UI.WebControls.Unit" />
+
+            
 
             
 
@@ -1940,8 +2220,12 @@
 
             
 
+            
+
              that represents the length specified by the <paramref
              name="n" />
+
+            
 
             
 
@@ -1953,6 +2237,8 @@
             <para
               >The <see
                cref="T:System.Web.UI.WebControls.Unit" />
+
+              
 
               
 
@@ -1972,8 +2258,12 @@
 
             
 
+            
+
              of type <see
              cref="F:System.Web.UI.WebControls.UnitType.Point" />
+
+            
 
             
 
@@ -1992,8 +2282,12 @@
 
             
 
+            
+
              of type <see
              cref="F:System.Web.UI.WebControls.UnitType.Point" />
+
+            
 
             
 
@@ -2009,8 +2303,12 @@
 
           
 
+          
+
           A 32-bit signed integer that represents the length of the <see
            cref="T:System.Web.UI.WebControls.Unit" />
+
+          
 
           
 
@@ -2043,8 +2341,12 @@
 
             
 
+            
+
              to a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -2063,8 +2365,12 @@
 
             
 
+            
+
              that represents this <see
              cref="T:System.Web.UI.WebControls.Unit" />
+
+            
 
             
 
@@ -2102,8 +2408,12 @@
 
             
 
+            
+
              method to convert the <see
              cref="T:System.Web.UI.WebControls.Unit" />
+
+            
 
             
 
@@ -2122,6 +2432,8 @@
 
             
 
+            
+
              to a string equivalent in the specified culture.</para
           >
         </summary>
@@ -2135,6 +2447,8 @@
 
             
 
+            
+
              represents this <see
              cref="T:System.Web.UI.WebControls.Unit" />
 
@@ -2142,8 +2456,12 @@
 
             
 
+            
+
              in the culture specified by <paramref
              name="culture" />
+
+            
 
             
 
@@ -2159,8 +2477,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -2198,8 +2520,12 @@
 
             
 
+            
+
              method returns a string representation formatted with a unit <see
              cref="P:System.Web.UI.WebControls.Unit.Value" />
+
+            
 
             
 
@@ -2212,8 +2538,12 @@
 
             
 
+            
+
             . The following table lists <see
              cref="T:System.Web.UI.WebControls.UnitType" />
+
+            
 
             
 
@@ -2331,8 +2661,12 @@
 
             
 
+            
+
              to specify culture-specific information used to format the <see
              cref="P:System.Web.UI.WebControls.Unit.Value" />
+
+            
 
             
 
@@ -2345,8 +2679,12 @@
 
             
 
+            
+
              is null, the numeric portion of the string is formatted using a default <see
              cref="T:System.Globalization.NumberFormatInfo" />
+
+            
 
             
 
@@ -2365,6 +2703,8 @@
 
             
 
+            
+
              to a string equivalent using the specified format provider.</para
           >
         </summary>
@@ -2378,6 +2718,8 @@
 
             
 
+            
+
              representing this <see
              cref="T:System.Web.UI.WebControls.Unit" />
 
@@ -2385,8 +2727,12 @@
 
             
 
+            
+
              in the format specified by <paramref
              name="formatProvider" />
+
+            
 
             
 
@@ -2418,8 +2764,12 @@
 
             
 
+            
+
              property to determine the unit of measurement that the <see
              cref="T:System.Web.UI.WebControls.Unit" />
+
+            
 
             
 
@@ -2432,8 +2782,12 @@
 
             
 
+            
+
              property is represented by one of the <see
              cref="T:System.Web.UI.WebControls.UnitType" />
+
+            
 
             
 
@@ -2450,8 +2804,12 @@
 
               
 
+              
+
                property is set to true, the <see
                cref="F:System.Web.UI.WebControls.UnitType.Point" />
+
+              
 
               
 
@@ -2466,6 +2824,8 @@
           <para
             >Gets the unit type of the <see
              cref="T:System.Web.UI.WebControls.Unit" />
+
+            
 
             
 
@@ -2498,8 +2858,12 @@
 
             
 
+            
+
              property to determine the length of the <see
              cref="T:System.Web.UI.WebControls.Unit" />
+
+            
 
             
 
@@ -2513,6 +2877,8 @@
           <para
             >Gets the length of the <see
              cref="T:System.Web.UI.WebControls.Unit" />
+
+            
 
             
 

@@ -24,6 +24,8 @@
 
         
 
+        
+
          enumeration specifies the algorithm that is used when images are scaled or rotated. </para
       >
     </summary>
@@ -162,8 +164,12 @@
 
             
 
+            
+
              element of the <see
              cref="T:System.Drawing.Drawing2D.QualityMode" />
+
+            
 
             
 

@@ -21,8 +21,12 @@
 
         
 
+        
+
          structure represents the padding or margin associated with a rectangular UI element such as a control. The padding is the internal space between the body of the UI element and its edge. In contrast, a margin is the distance separating the adjoining edges of two adjacent UI elements. Because of structural similarities, <see
          cref="T:System.Windows.Forms.Padding" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.Control.Margin" />
+
+        
 
         
 
@@ -56,11 +64,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >Padding has a different effect on controls that are containers than on controls that are not. For example, in a <see
          cref="T:System.Windows.Forms.Panel" />
+
+        
 
         
 
@@ -73,8 +85,12 @@
 
         
 
+        
+
          property defines the spacing between the border of the <see
          cref="T:System.Windows.Forms.Panel" />
+
+        
 
         
 
@@ -87,8 +103,12 @@
 
         
 
+        
+
          control, the <see
          cref="T:System.Windows.Forms.Padding" />
+
+        
 
         
 
@@ -101,11 +121,15 @@
 
         
 
+        
+
          control and its contained text.</para
       >
       <para
         >In addition to typical methods and properties, <see
          cref="T:System.Windows.Forms.Padding" />
+
+        
 
         
 
@@ -123,8 +147,12 @@
 
             
 
+            
+
              field, which represents a predefined <see
              cref="T:System.Windows.Forms.Padding" />
+
+            
 
             
 
@@ -142,6 +170,8 @@
 
             
 
+            
+
              objects together. For languages that do not support operator overloading, you can invoke these members by using alternative method syntax.</para
           >
         </item>
@@ -154,6 +184,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.Padding.Vertical" />
 
@@ -161,8 +193,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.Padding.Size" />
+
+            
 
             
 
@@ -197,8 +233,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.Padding.Left" />
+
+            
 
             
 
@@ -211,8 +251,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.Padding.Top" />
+
+            
 
             
 
@@ -225,8 +269,12 @@
 
             
 
+            
+
              properties to the value of the <paramref
              name="all" />
+
+            
 
             
 
@@ -245,11 +293,15 @@
 
             
 
+            
+
              class using the supplied padding size for all edges.</para
           >
         </summary>
         <param name="all">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -286,6 +338,8 @@
 
             
 
+            
+
              property will reflect this common value.</para
           >
         </remarks>
@@ -294,6 +348,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.Padding" />
+
+            
 
             
 
@@ -309,10 +365,14 @@
 
           
 
+          
+
           The padding size, in pixels, for the left edge.</param
         >
         <param name="top">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -327,10 +387,14 @@
 
           
 
+          
+
           The padding size, in pixels, for the right edge.</param
         >
         <param name="bottom">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -369,6 +433,8 @@
 
             
 
+            
+
              values.</para
           >
         </summary>
@@ -382,8 +448,12 @@
 
             
 
+            
+
              that contains the sum of the two specified <see
              cref="T:System.Windows.Forms.Padding" />
+
+            
 
             
 
@@ -399,8 +469,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Padding" />
+
+          
 
           
 
@@ -415,8 +489,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Padding" />
+
+          
 
           
 
@@ -454,8 +532,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.Padding.Left" />
+
+            
 
             
 
@@ -468,8 +550,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.Padding.Top" />
+
+            
 
             
 
@@ -511,6 +597,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -544,8 +632,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.Padding.Left" />
+
+            
 
             
 
@@ -558,8 +650,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.Padding.Top" />
+
+            
 
             
 
@@ -574,6 +670,8 @@
           <para
             >Provides a <see
              cref="T:System.Windows.Forms.Padding" />
+
+            
 
             
 
@@ -608,8 +706,12 @@
 
             
 
+            
+
              (or a derived type) can be equal to the current <see
              cref="T:System.Windows.Forms.Padding" />
+
+            
 
             
 
@@ -622,8 +724,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.Padding.Left" />
+
+            
 
             
 
@@ -636,6 +742,8 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.Padding.Top" />
 
@@ -643,8 +751,12 @@
 
             
 
+            
+
              properties for both <see
              cref="T:System.Windows.Forms.Padding" />
+
+            
 
             
 
@@ -663,6 +775,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -671,6 +785,8 @@
           <para
             >true if the <see
              cref="T:System.Windows.Forms.Padding" />
+
+            
 
             
 
@@ -686,8 +802,12 @@
 
           
 
+          
+
           The object to compare to the current <see
            cref="T:System.Windows.Forms.Padding" />
+
+          
 
           
 
@@ -719,8 +839,12 @@
 
             
 
+            
+
              method uses the <see
              cref="P:System.Windows.Forms.Padding.Right" />
+
+            
 
             
 
@@ -733,8 +857,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.Padding.Top" />
+
+            
 
             
 
@@ -747,8 +875,12 @@
 
             
 
+            
+
              values to generate a 32-bit hash code that represents the current <see
              cref="T:System.Windows.Forms.Padding" />
+
+            
 
             
 
@@ -764,11 +896,15 @@
 
             
 
+            
+
              represents a collection of key-and-value pairs that are organized based on the hash code of the key.</para
           >
           <para
             >For more information on hash codes and hash functions, see the <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -782,6 +918,8 @@
           <para
             >Generates a hash code for the current <see
              cref="T:System.Windows.Forms.Padding" />
+
+            
 
             
 
@@ -850,6 +988,8 @@
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -887,8 +1027,12 @@
 
             
 
+            
+
              property of the result is the sum of the <see
              cref="P:System.Windows.Forms.Padding.Left" />
+
+            
 
             
 
@@ -908,8 +1052,12 @@
 
             
 
+            
+
              objects, resulting in a new <see
              cref="T:System.Windows.Forms.Padding" />
+
+            
 
             
 
@@ -928,6 +1076,8 @@
 
             
 
+            
+
              that results from adding <paramref
              name="p1" />
 
@@ -935,8 +1085,12 @@
 
             
 
+            
+
              and <paramref
              name="p2" />
+
+            
 
             
 
@@ -952,8 +1106,12 @@
 
           
 
+          
+
           The first <see
            cref="T:System.Windows.Forms.Padding" />
+
+          
 
           
 
@@ -968,8 +1126,12 @@
 
           
 
+          
+
           The second <see
            cref="T:System.Windows.Forms.Padding" />
+
+          
 
           
 
@@ -1007,8 +1169,12 @@
 
             
 
+            
+
              objects are equal if the padding values for each of the four edges – <see
              cref="P:System.Windows.Forms.Padding.Left" />
+
+            
 
             
 
@@ -1021,6 +1187,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.Padding.Top" />
 
@@ -1028,8 +1196,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.Padding.Bottom" />
+
+            
 
             
 
@@ -1048,6 +1220,8 @@
 
             
 
+            
+
              objects are equivalent.</para
           >
         </summary>
@@ -1056,6 +1230,8 @@
           <para
             >true if the two <see
              cref="T:System.Windows.Forms.Padding" />
+
+            
 
             
 
@@ -1071,8 +1247,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Padding" />
+
+          
 
           
 
@@ -1087,8 +1267,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Padding" />
+
+          
 
           
 
@@ -1126,6 +1310,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1134,6 +1320,8 @@
           <para
             >Tests whether two specified <see
              cref="T:System.Windows.Forms.Padding" />
+
+            
 
             
 
@@ -1152,6 +1340,8 @@
 
             
 
+            
+
              objects are different; otherwise, false.</para
           >
         </returns>
@@ -1162,8 +1352,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Padding" />
+
+          
 
           
 
@@ -1178,8 +1372,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Padding" />
+
+          
 
           
 
@@ -1217,8 +1415,12 @@
 
             
 
+            
+
              property of the result is the difference between the <see
              cref="P:System.Windows.Forms.Padding.Left" />
+
+            
 
             
 
@@ -1237,8 +1439,12 @@
 
             
 
+            
+
              objects, resulting in a new <see
              cref="T:System.Windows.Forms.Padding" />
+
+            
 
             
 
@@ -1257,6 +1463,8 @@
 
             
 
+            
+
              result of subtracting <paramref
              name="p2" />
 
@@ -1264,8 +1472,12 @@
 
             
 
+            
+
              from <paramref
              name="p1" />
+
+            
 
             
 
@@ -1281,8 +1493,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Padding" />
+
+          
 
           
 
@@ -1297,8 +1513,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Padding" />
+
+          
 
           
 
@@ -1330,6 +1550,8 @@
           <para
             >Setting this value can also alter the <see
              cref="P:System.Windows.Forms.Padding.All" />
+
+            
 
             
 
@@ -1371,8 +1593,12 @@
 
             
 
+            
+
              property performs a type conversion from <see
              cref="T:System.Windows.Forms.Padding" />
+
+            
 
             
 
@@ -1385,8 +1611,12 @@
 
             
 
+            
+
             . The <see
              cref="P:System.Windows.Forms.Padding.Horizontal" />
+
+            
 
             
 
@@ -1399,6 +1629,8 @@
 
             
 
+            
+
              property, and the <see
              cref="P:System.Windows.Forms.Padding.Vertical" />
 
@@ -1406,8 +1638,12 @@
 
             
 
+            
+
              property corresponds to the <see
              cref="P:System.Drawing.Size.Height" />
+
+            
 
             
 
@@ -1422,6 +1658,8 @@
 
             
 
+            
+
              is convenient for use in many layout calculations.</para
           >
         </remarks>
@@ -1430,6 +1668,8 @@
           <para
             >Gets the padding information in the form of a <see
              cref="T:System.Drawing.Size" />
+
+            
 
             
 
@@ -1469,6 +1709,8 @@
 
             
 
+            
+
              value from another.</para
           >
         </summary>
@@ -1482,8 +1724,12 @@
 
             
 
+            
+
              that contains the result of the subtraction of one specified <see
              cref="T:System.Windows.Forms.Padding" />
+
+            
 
             
 
@@ -1499,8 +1745,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Padding" />
+
+          
 
           
 
@@ -1515,8 +1765,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Padding" />
+
+          
 
           
 
@@ -1548,6 +1802,8 @@
           <para
             >Setting this value can also alter the <see
              cref="P:System.Windows.Forms.Padding.All" />
+
+            
 
             
 
@@ -1585,6 +1841,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1593,6 +1851,8 @@
           <para
             >Returns a string that represents the current <see
              cref="T:System.Windows.Forms.Padding" />
+
+            
 
             
 
@@ -1611,8 +1871,12 @@
 
             
 
+            
+
              that represents the current <see
              cref="T:System.Windows.Forms.Padding" />
+
+            
 
             
 

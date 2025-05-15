@@ -90,6 +90,8 @@
 
             
 
+            
+
              class.          </para
           >
         </summary>
@@ -100,8 +102,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 
@@ -152,6 +158,8 @@
       <para
         >Allows declarative <see
          cref="N:System.DirectoryServices" />
+
+        
 
         
 

@@ -38,8 +38,12 @@
 
         
 
+        
+
          class, which writes resources to a binary .resources file, or the <see
          cref="T:System.Resources.ResXResourceWriter" />
+
+        
 
         
 
@@ -84,6 +88,8 @@
 
             
 
+            
+
              method is called.</para
           >
         </remarks>
@@ -98,10 +104,14 @@
 
           
 
+          
+
           Name of a resource. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -141,11 +151,15 @@
 
             
 
+            
+
              method is called.</para
           >
           <block subset="none" type="note">
             <para>
               <paramref name="value" />
+
+              
 
               
 
@@ -165,6 +179,8 @@
 
             
 
+            
+
              to the list of resources to be written.</para
           >
         </summary>
@@ -175,10 +191,14 @@
 
           
 
+          
+
           The name of the resource. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -218,6 +238,8 @@
 
             
 
+            
+
              method is called.</para
           >
         </remarks>
@@ -226,6 +248,8 @@
           <para
             >Adds a named resource of type <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -241,10 +265,14 @@
 
           
 
+          
+
           The name of the resource. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -281,8 +309,12 @@
 
             
 
+            
+
              will call the <see
              cref="M:System.Resources.IResourceWriter.Generate" />
+
+            
 
             
 
@@ -323,8 +355,12 @@
 
             
 
+            
+
              does not close the output file or output stream. Instead, consider calling the <see
              cref="M:System.Resources.IResourceWriter.Close" />
+
+            
 
             
 
@@ -337,8 +373,12 @@
 
             
 
+            
+
              is useful when you want to create a resource file, but you don't want to close the output stream. <see
              cref="M:System.Resources.IResourceWriter.Generate" />
+
+            
 
             
 
@@ -351,6 +391,8 @@
 
             
 
+            
+
             , all <see
              cref="T:System.Resources.IResourceWriter" />
 
@@ -358,8 +400,12 @@
 
             
 
+            
+
              methods other than <see
              cref="M:System.Resources.IResourceWriter.Close" />
+
+            
 
             
 
@@ -373,6 +419,8 @@
           <para
             >Writes all the resources added by the <see
              cref="M:System.Resources.IResourceWriter.AddResource(System.String,System.String)" />
+
+            
 
             
 

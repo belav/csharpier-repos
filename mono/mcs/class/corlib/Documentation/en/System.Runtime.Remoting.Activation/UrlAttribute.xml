@@ -37,6 +37,8 @@
 
         
 
+        
+
          is passed in the activation attributes array as a parameter to <see
          cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
 
@@ -44,8 +46,12 @@
 
         
 
+        
+
          when creating activated objects with the <see
          cref="M:System.Activator.CreateInstance(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)" />
+
+        
 
         
 
@@ -60,6 +66,8 @@
             >[&lt;topic://cpconExtendingMetadataUsingAttributes&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -102,11 +110,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="callsiteURL">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -145,6 +157,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -162,6 +176,8 @@
 
             
 
+            
+
              with the same value; otherwise, false.</para
           >
         </returns>
@@ -172,8 +188,12 @@
 
           
 
+          
+
           The object to compare to the current <see
            cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+          
 
           
 
@@ -211,6 +231,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -219,6 +241,8 @@
           <para
             >The hash value for the current <see
              cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+            
 
             
 
@@ -268,6 +292,8 @@
 
             
 
+            
+
              does not contribute any properties to the new context because it is used by the remoting infrastructure to force the creation of the context and the server object inside the context at the specified URL.</para
           >
         </remarks>
@@ -282,8 +308,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
+
+          
 
           
 
@@ -332,8 +362,12 @@
 
             
 
+            
+
              meets <see
              cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+            
 
             
 
@@ -353,10 +387,14 @@
 
           
 
+          
+
           The context to check against the current context attribute. </param
         >
         <param name="msg">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -386,6 +424,8 @@
           <para
             >Gets the URL value of the <see
              cref="T:System.Runtime.Remoting.Activation.UrlAttribute" />
+
+            
 
             
 

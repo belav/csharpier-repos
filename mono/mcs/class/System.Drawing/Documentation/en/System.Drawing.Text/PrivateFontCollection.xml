@@ -28,6 +28,8 @@
 
         
 
+        
+
          class allows applications to install a private version of an existing font without the requirement to replace the system version of the font. For example, ndptecgdiplus can create a private version of the Arial font in addition to the Arial font that the system uses. <see
          cref="T:System.Drawing.Text.PrivateFontCollection" />
 
@@ -35,8 +37,12 @@
 
         
 
+        
+
          can also be used to install fonts that do not exist in the operating system. This is a temporary font install that does not affect the system-installed collection. To see the installed collection, use the <see
          cref="T:System.Drawing.Text.InstalledFontCollection" />
+
+        
 
         
 
@@ -63,6 +69,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Drawing.Text.PrivateFontCollection" />
+
+            
 
             
 
@@ -97,6 +105,8 @@
 
             
 
+            
+
              is not supported on operating systems before win2kfamily. When using a private font on operating systems before win2kfamily, the default font, typically Microsoft Sans Serif, will be substituted.</para
           >
         </remarks>
@@ -105,6 +115,8 @@
           <para
             >Adds a font from the specified file to this <see
              cref="T:System.Drawing.Text.PrivateFontCollection" />
+
+            
 
             
 
@@ -120,8 +132,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -159,8 +175,12 @@
 
             
 
+            
+
              method, passing true, to set GDI+ rendering on the application, or on individual controls by setting the control's <see
              cref="P:System.Windows.Forms.GroupBox.UseCompatibleTextRendering" />
+
+            
 
             
 
@@ -179,6 +199,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -189,10 +211,14 @@
 
           
 
+          
+
           The memory address of the font to add. </param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -8,11 +8,15 @@
 
     
 
+    
+
      consists of a single identifier. <grammar_production
     >
       <name>
         <non_terminal where="14.5.2">simple-name</non_terminal>
       </name>
+
+      
 
       
 
@@ -32,11 +36,15 @@
 
     
 
+    
+
      is evaluated and classified as follows: <list
     >
       <list_item
         > If the <non_terminal
          where="14.5.2">simple-name</non_terminal>
+
+        
 
         
 
@@ -49,8 +57,12 @@
 
         
 
+        
+
         ) contains a local variable or parameter with the given name, then the <non_terminal
          where="14.5.2">simple-name</non_terminal>
+
+        
 
         
 
@@ -61,6 +73,8 @@
       <list_item
         > Otherwise, for each type T, starting with the immediately enclosing class, struct, or enumeration declaration and continuing with each enclosing outer class or struct declaration (if any), if a member lookup of the <non_terminal
          where="14.5.2">simple-name</non_terminal>
+
+        
 
         
 
@@ -78,8 +92,12 @@
 
           
 
+          
+
           ) of the form this.E, where E is the <non_terminal
            where="14.5.2">simple-name</non_terminal>
+
+          
 
           
 
@@ -95,6 +113,8 @@
 
           
 
+          
+
           ) of the form T.E, where E is the <non_terminal
            where="14.5.2">simple-name</non_terminal>
 
@@ -102,8 +122,12 @@
 
           
 
+          
+
           . In this case, it is a compile-time error for the <non_terminal
            where="14.5.2">simple-name</non_terminal>
+
+          
 
           
 
@@ -120,6 +144,8 @@
 
         
 
+        
+
          occurs, continuing with each enclosing namespace (if any), and ending with the global namespace, the following steps are evaluated until an entity is located: </list_item
       >
       <list>
@@ -131,11 +157,15 @@
 
           
 
+          
+
            refers to that member and, depending on the member, is classified as a namespace or a type. </list_item
         >
         <list_item
           > Otherwise, if the namespace has a corresponding namespace declaration enclosing the location where the <non_terminal
            where="14.5.2">simple-name</non_terminal>
+
+          
 
           
 
@@ -152,8 +182,12 @@
 
             
 
+            
+
              that associates the given name with an imported namespace or type, then the <non_terminal
              where="14.5.2">simple-name</non_terminal>
+
+            
 
             
 
@@ -169,8 +203,12 @@
 
             
 
+            
+
             s of the namespace declaration contain exactly one type with the given name, then the <non_terminal
              where="14.5.2">simple-name</non_terminal>
+
+            
 
             
 
@@ -186,8 +224,12 @@
 
             
 
+            
+
             s of the namespace declaration contain more than one type with the given name, then the <non_terminal
              where="14.5.2">simple-name</non_terminal>
+
+            
 
             
 
@@ -200,6 +242,8 @@
       <list_item
         > Otherwise, the name given by the <non_terminal
          where="14.5.2">simple-name</non_terminal>
+
+        
 
         
 

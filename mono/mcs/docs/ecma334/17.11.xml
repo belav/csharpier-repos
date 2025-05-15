@@ -11,6 +11,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="24.2">attributes</non_terminal>
@@ -26,6 +28,8 @@
       <name>
         <non_terminal where="17.11">static-constructor-modifiers</non_terminal>
       </name>
+
+      
 
       
 
@@ -47,6 +51,8 @@
       <name>
         <non_terminal where="17.11">static-constructor-body</non_terminal>
       </name>
+
+      
 
       
 
@@ -69,6 +75,8 @@
 
     
 
+    
+
      may include a set of attributes (<hyperlink
     >24</hyperlink>
 
@@ -76,8 +84,12 @@
 
     
 
+    
+
     ) and an extern modifier (<hyperlink
     >17.5.7</hyperlink>
+
+    
 
     
 
@@ -93,11 +105,15 @@
 
     
 
+    
+
      must name the class in which the static constructor is declared. If any other name is specified, a compile-time error occurs. </paragraph
   >
   <paragraph
     >When a static constructor declaration includes an extern modifier, the static constructor is said to be an external static constructor. Because an external static constructor declaration provides no actual implementation, its <non_terminal
      where="17.11">static-constructor-body</non_terminal>
+
+    
 
     
 
@@ -110,8 +126,12 @@
 
     
 
+    
+
      consists of a block, which specifies the statements to execute in order to initialize the class. This corresponds exactly to the <non_terminal
      where="17.5">method-body</non_terminal>
+
+    
 
     
 
@@ -124,8 +144,12 @@
 
     
 
+    
+
      return type (<hyperlink
     >17.5.8</hyperlink>
+
+    
 
     
 
@@ -149,13 +173,15 @@
 
     
 
+    
+
     ) in which execution begins, the static constructor for that class executes before the Main method is called. If a class contains any static fields with initializers, those initializers are executed in textual order immediately prior to executing the static constructor. </paragraph
   >
   <paragraph>
     <example
       >[Example: The example <code_example
       >
-<![CDATA[
+        <![CDATA[
 using System;  
 class Test  
 {  
@@ -189,15 +215,19 @@ class B
 
       
 
+      
+
       must produce the output: <code_example
       >
-<![CDATA[
+        <![CDATA[
 Init A  
 A.F  
 Init B  
 B.F  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -211,7 +241,7 @@ B.F
     <example
       >[Example: The example <code_example
       >
-<![CDATA[
+        <![CDATA[
 using System;  
 class A  
 {  
@@ -233,9 +263,11 @@ class B
 
       
 
+      
+
       produces the output <code_example
       >
-<![CDATA[
+        <![CDATA[
 X = 1, Y = 2  
 ]]>
       </code_example>

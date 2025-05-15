@@ -27,6 +27,8 @@
 
         
 
+        
+
          class provides information about the row, column, and bounds of the cell to support painting of the cell in the table.</para
       >
     </remarks>
@@ -35,6 +37,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.TableLayoutPanel.CellPaint" />
+
+        
 
         
 
@@ -71,6 +75,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -81,8 +87,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -97,8 +107,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -113,6 +127,8 @@
 
           
 
+          
+
           The bounds of the cell.</param
         >
         <param name="column">
@@ -122,10 +138,14 @@
 
           
 
+          
+
           The column of the cell.</param
         >
         <param name="row">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -23,8 +23,12 @@
 
         
 
+        
+
          instances are used by WCF when serializing and deserializing SOAP messages. The <see
          cref="T:System.Xml.XmlDictionary" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          is a class that contains a number of quotas used by the <see
          cref="T:System.Xml.XmlDictionaryReader" />
+
+        
 
         
 

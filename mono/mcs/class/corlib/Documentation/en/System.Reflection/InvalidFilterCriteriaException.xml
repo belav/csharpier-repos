@@ -44,6 +44,8 @@
 
         
 
+        
+
          when the filter criteria is not valid for the type of filter you are using.</para
       >
     </summary>
@@ -111,6 +113,8 @@
 
             
 
+            
+
              class with the default properties.</para
           >
         </summary>
@@ -146,8 +150,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -160,11 +168,15 @@
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Reflection.InvalidFilterCriteriaException" />
+
+            
 
             
 
@@ -215,11 +227,15 @@
 
             
 
+            
+
              class with the given HRESULT and message string.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -261,6 +277,8 @@
 
             
 
+            
+
              class with the specified serialization and context information.</para
           >
         </summary>
@@ -271,10 +289,14 @@
 
           
 
+          
+
           A SerializationInfo object that contains the information required to serialize this instance. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -315,8 +337,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -329,11 +355,15 @@
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Reflection.InvalidFilterCriteriaException" />
+
+            
 
             
 
@@ -384,11 +414,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -403,8 +437,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="inner" />
+
+          
 
           
 

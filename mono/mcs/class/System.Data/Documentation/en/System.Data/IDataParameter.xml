@@ -21,12 +21,16 @@
 
         
 
+        
+
          interface allows an inheriting class to implement a Parameter class, which represents a parameter to a Command object. For more information about Parameter classes, see <format
          type="text/html">
           <a href="537D8A2C-D40B-4000-83EB-BC1FCC93F707"
             >[&lt;topic://cpconusingstoredprocedureswithcommand&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -42,8 +46,12 @@
 
         
 
+        
+
          interface directly, but creates an instance of a class that inherits <see
          cref="T:System.Data.IDataParameter" />
+
+        
 
         
 
@@ -59,8 +67,12 @@
 
         
 
+        
+
          must implement the inherited members, and typically define additional members to add provider-specific functionality. For example, the <see
          cref="T:System.Data.IDataParameter" />
+
+        
 
         
 
@@ -73,6 +85,8 @@
 
         
 
+        
+
          property. In turn, the <see
          cref="T:System.Data.OleDb.OleDbParameter" />
 
@@ -80,8 +94,12 @@
 
         
 
+        
+
          class inherits this property, and also defines the <see
          cref="P:System.Data.OleDb.OleDbParameter.OleDbType" />
+
+        
 
         
 
@@ -95,6 +113,8 @@
       <para
         >Represents a parameter to a Command object, and optionally, its mapping to <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -124,8 +144,12 @@
 
             
 
+            
+
              are linked. Therefore, setting the <see
              cref="P:System.Data.SqlClient.SqlParameter.DbType" />
+
+            
 
             
 
@@ -145,6 +169,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -153,6 +179,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Data.DbType" />
+
+            
 
             
 
@@ -189,6 +217,8 @@
 
             
 
+            
+
              is output, and execution of the associated <see
              cref="T:System.Data.SqlClient.SqlCommand" />
 
@@ -196,8 +226,12 @@
 
             
 
+            
+
              does not return a value, the <see
              cref="T:System.Data.IDataParameter" />
+
+            
 
             
 
@@ -235,6 +269,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -267,8 +303,12 @@
 
             
 
+            
+
              is specified in the form @paramname. You must set <see
              cref="P:System.Data.IDataParameter.ParameterName" />
+
+            
 
             
 
@@ -282,6 +322,8 @@
           <para
             >Gets or sets the name of the <see
              cref="T:System.Data.IDataParameter" />
+
+            
 
             
 
@@ -315,6 +357,8 @@
 
             
 
+            
+
              and the <see
              cref="T:System.Data.DataTable" />
 
@@ -322,8 +366,12 @@
 
             
 
+            
+
              may be bidirectional depending on the value of the <see
              cref="P:System.Data.IDataParameter.Direction" />
+
+            
 
             
 
@@ -342,8 +390,12 @@
 
             
 
+            
+
              and used for loading or returning the <see
              cref="P:System.Data.IDataParameter.Value" />
+
+            
 
             
 
@@ -380,8 +432,12 @@
 
             
 
+            
+
              during the <see
              cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+            
 
             
 
@@ -394,8 +450,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Data.IDbDataAdapter.DeleteCommand" />
+
+            
 
             
 
@@ -408,8 +468,12 @@
 
             
 
+            
+
              used by the <see
              cref="P:System.Data.DataRow.Item(System.Int32)" />
+
+            
 
             
 
@@ -422,8 +486,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Data.DataRow" />
+
+            
 
             
 
@@ -442,8 +510,12 @@
 
             
 
+            
+
              to use when loading <see
              cref="P:System.Data.IDataParameter.Value" />
+
+            
 
             
 
@@ -477,6 +549,8 @@
 
             
 
+            
+
              that is sent to the server. For output and return value parameters, the value is set on completion of the <see
              cref="T:System.Data.IDbCommand" />
 
@@ -484,8 +558,12 @@
 
             
 
+            
+
              and after the <see
              cref="T:System.Data.IDataReader" />
+
+            
 
             
 
@@ -502,6 +580,8 @@
 
             
 
+            
+
              interface. Conversion errors may result if the specified type is not compatible with the value.</para
           >
           <para
@@ -512,8 +592,12 @@
 
             
 
+            
+
              property is overwritten by <see
              cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+            
 
             
 

@@ -30,8 +30,12 @@
 
         
 
+        
+
          is ASP.NET's default session-state handler. It writes session data to and retrieves it from the session-state store and raises the <system
         >Session_OnStart</system>
+
+        
 
         
 
@@ -44,10 +48,14 @@
 
         
 
+        
+
          events. For details about how to use ASP.NET session state to store and retrieve values for a user session, see <format
          type="text/html">
           <a href="6d60d381-6521-4e1d-9089-da6464f2a9bc">ASP.NET Session State Overview</a>
         </format>
+
+        
 
         
 
@@ -63,6 +71,8 @@
 
         
 
+        
+
          with a custom implementation of the <see
          cref="T:System.Web.IHttpModule" />
 
@@ -70,8 +80,12 @@
 
         
 
+        
+
          interface that manages session state. For an example of a custom session-state module, see the <see
          cref="T:System.Web.SessionState.SessionStateUtility" />
+
+        
 
         
 
@@ -103,8 +117,12 @@
 
             
 
+            
+
              object is created when an ASP.NET application is started. The <see
              cref="T:System.Web.HttpApplication" />
+
+            
 
             
 
@@ -117,6 +135,8 @@
 
             
 
+            
+
              constructor to create the <see
              cref="T:System.Web.SessionState.SessionStateModule" />
 
@@ -124,8 +144,12 @@
 
             
 
+            
+
              object for the application. The <see
              cref="T:System.Web.SessionState.SessionStateModule" />
+
+            
 
             
 
@@ -139,6 +163,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.SessionState.SessionStateModule" />
+
+            
 
             
 
@@ -172,8 +198,12 @@
 
             
 
+            
+
              object is created when an ASP.NET application is started. The <see
              cref="T:System.Web.HttpApplication" />
+
+            
 
             
 
@@ -186,6 +216,8 @@
 
             
 
+            
+
              object for the application and calls the <see
              cref="M:System.Web.SessionState.SessionStateModule.Dispose" />
 
@@ -193,8 +225,12 @@
 
             
 
+            
+
              method when the object is released. The <see
              cref="T:System.Web.SessionState.SessionStateModule" />
+
+            
 
             
 
@@ -208,6 +244,8 @@
           <para
             >Executes final cleanup code before the <see
              cref="T:System.Web.SessionState.SessionStateModule" />
+
+            
 
             
 
@@ -240,6 +278,8 @@
 
             
 
+            
+
              event is raised at the end of a request when the <see
              cref="M:System.Web.SessionState.HttpSessionState.Abandon" />
 
@@ -247,8 +287,12 @@
 
             
 
+            
+
              method has been called or when the session has expired. A session expires when the number of minutes specified by the <see
              cref="P:System.Web.SessionState.HttpSessionState.Timeout" />
+
+            
 
             
 
@@ -264,6 +308,8 @@
 
             
 
+            
+
              event is used to perform any cleanup work for a session such as disposing of resources used by the session.</para
           >
           <para
@@ -274,8 +320,12 @@
 
             
 
+            
+
              event by adding a public subroutine named <system
             >Session_OnEnd</system>
+
+            
 
             
 
@@ -292,8 +342,12 @@
 
               
 
+              
+
                event is only supported when the session-state <see
                cref="P:System.Web.SessionState.HttpSessionState.Mode" />
+
+              
 
               
 
@@ -306,8 +360,12 @@
 
               
 
+              
+
               , which is the default. If the session-state <see
                cref="P:System.Web.SessionState.HttpSessionState.Mode" />
+
+              
 
               
 
@@ -320,8 +378,12 @@
 
               
 
+              
+
                or <see
                cref="F:System.Web.SessionState.SessionStateMode.SQLServer" />
+
+              
 
               
 
@@ -334,8 +396,12 @@
 
               
 
+              
+
                event in the Global.asax file is ignored. If the session state <see
                cref="P:System.Web.SessionState.HttpSessionState.Mode" />
+
+              
 
               
 
@@ -348,8 +414,12 @@
 
               
 
+              
+
               , then support for the <system
               >Session_OnEnd</system>
+
+              
 
               
 
@@ -366,8 +436,12 @@
 
             
 
+            
+
              event is public, you can only handle it by adding an event handler in the Global.asax file. This restriction is implemented because <see
              cref="T:System.Web.HttpApplication" />
+
+            
 
             
 
@@ -380,8 +454,12 @@
 
             
 
+            
+
              event specified in the Global.asax file is executed, to prevent code from calling  an <see
              cref="E:System.Web.SessionState.SessionStateModule.End" />
+
+            
 
             
 
@@ -394,6 +472,8 @@
 
             
 
+            
+
              instance that is currently in use.</para
           >
           <para
@@ -401,6 +481,8 @@
              type="text/html">
               <a href="9ade9d4d-4d52-4e88-af52-53a9ffa26582">Global.asax Syntax</a>
             </format>
+
+            
 
             
 
@@ -440,8 +522,12 @@
 
             
 
+            
+
              is created when an ASP.NET application is started. The <see
              cref="T:System.Web.HttpApplication" />
+
+            
 
             
 
@@ -454,6 +540,8 @@
 
             
 
+            
+
              method when it creates the <see
              cref="T:System.Web.SessionState.SessionStateModule" />
 
@@ -461,8 +549,12 @@
 
             
 
+            
+
              object for the application. The <see
              cref="T:System.Web.SessionState.SessionStateModule" />
+
+            
 
             
 
@@ -481,11 +573,15 @@
 
             
 
+            
+
              object is created.</para
           >
         </summary>
         <param name="app">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -517,11 +613,15 @@
 
             
 
+            
+
              event is raised at the beginning of a request when a new session is started. A new session is started if a request is made that does not contain a session identifier, the session identifier is invalid, or the session associated with a session identifier has expired. </para
           >
           <para
             >The <system
             >Session_OnStart</system>
+
+            
 
             
 
@@ -537,8 +637,12 @@
 
             
 
+            
+
              event by adding a public subroutine named <system
             >Session_OnStart</system>
+
+            
 
             
 
@@ -551,6 +655,8 @@
              type="text/html">
               <a href="9ade9d4d-4d52-4e88-af52-53a9ffa26582">Global.asax Syntax</a>
             </format>
+
+            
 
             
 

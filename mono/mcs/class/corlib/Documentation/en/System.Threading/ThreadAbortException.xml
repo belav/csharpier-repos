@@ -43,8 +43,12 @@
 
         
 
+        
+
          uses the <see
          cref="M:System.Threading.Thread.ResetAbort" />
+
+        
 
         
 
@@ -110,8 +114,12 @@ class ThreadAbortTest{
 
         
 
+        
+
          method to destroy a thread, the common language runtime throws a <see
          cref="T:System.Threading.ThreadAbortException" />
+
+        
 
         
 
@@ -124,8 +132,12 @@ class ThreadAbortTest{
 
         
 
+        
+
          is a special exception that can be caught, but it will automatically be raised again at the end of the catch block. When this exception is raised, the runtime executes all the finally blocks before ending the thread. Because the thread can do an unbounded computation in the finally blocks or call <see
          cref="M:System.Threading.Thread.ResetAbort" />
+
+        
 
         
 
@@ -138,8 +150,12 @@ class ThreadAbortTest{
 
         
 
+        
+
          method. <see
          cref="M:System.Threading.Thread.Join" />
+
+        
 
         
 
@@ -156,8 +172,12 @@ class ThreadAbortTest{
 
           
 
+          
+
           . Therefore, you cannot use <see
            cref="T:System.Threading.ThreadAbortException" />
+
+          
 
           
 
@@ -168,6 +188,8 @@ class ThreadAbortTest{
       </block>
       <para>
         <see cref="T:System.Threading.ThreadAbortException" />
+
+        
 
         
 
@@ -184,6 +206,8 @@ class ThreadAbortTest{
 
           
 
+          
+
            property is always null.</para
         >
       </block>
@@ -193,6 +217,8 @@ class ThreadAbortTest{
       <para
         >The exception that is thrown when a call is made to the <see
          cref="M:System.Threading.Thread.Abort(System.Object)" />
+
+        
 
         
 
@@ -230,6 +256,8 @@ class ThreadAbortTest{
 
             
 
+            
+
             .</para
           >
         </value>
@@ -243,8 +271,12 @@ class ThreadAbortTest{
 
             
 
+            
+
              parameter of the <see
              cref="M:System.Threading.Thread.Abort(System.Object)" />
+
+            
 
             
 

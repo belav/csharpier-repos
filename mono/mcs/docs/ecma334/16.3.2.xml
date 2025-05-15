@@ -8,11 +8,15 @@
 
     
 
+    
+
      imports the types contained in a namespace into the immediately enclosing compilation unit or namespace body, enabling the identifier of each type to be used without qualification. <grammar_production
     >
       <name>
         <non_terminal where="16.3.2">using-namespace-directive</non_terminal>
       </name>
+
+      
 
       
 
@@ -34,11 +38,13 @@
 
     
 
+    
+
     , the types contained in the given namespace can be referenced directly. <example
 
       >[Example: For example: <code_example
       >
-<![CDATA[
+        <![CDATA[
 namespace N1.N2  
 {  
    class A {}  
@@ -63,11 +69,13 @@ namespace N3
 
     
 
+    
+
      imports the types contained in the given namespace, but specifically does not import nested namespaces. <example
 
       >[Example: In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 namespace N1.N2  
 {  
    class A {}  
@@ -84,8 +92,12 @@ namespace N3
 
       
 
+      
+
       the <non_terminal
        where="16.3.2">using-namespace-directive</non_terminal>
+
+      
 
       
 
@@ -102,8 +114,12 @@ namespace N3
 
     
 
+    
+
     , a <non_terminal
      where="16.3.2">using-namespace-directive</non_terminal>
+
+    
 
     
 
@@ -116,11 +132,13 @@ namespace N3
 
     
 
+    
+
      are hidden by similarly named members in the enclosing compilation unit or namespace body. <example
 
       >[Example: For example: <code_example
       >
-<![CDATA[
+        <![CDATA[
 namespace N1.N2  
 {  
    class A {}  
@@ -146,13 +164,15 @@ namespace N3
 
     
 
+    
+
     s in the same compilation unit or namespace body contain types by the same name, references to that name are considered ambiguous. </paragraph
   >
   <paragraph>
     <example
       >[Example: In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 namespace N1  
 {  
    class A {}  
@@ -174,8 +194,12 @@ namespace N3
 
       
 
+      
+
       both N1 and N2 contain a member A, and because N3 imports both, referencing A in N3 is a compile-time error. end example]</example
     >
+
+    
 
     
 
@@ -188,11 +212,13 @@ namespace N3
 
     
 
+    
+
      that picks a particular A. <example
 
       >[Example: For example: <code_example
       >
-<![CDATA[
+        <![CDATA[
 namespace N3  
 {  
    using N1;  
@@ -202,6 +228,8 @@ namespace N3
 }  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -218,8 +246,12 @@ namespace N3
 
     
 
+    
+
     , a <non_terminal
      where="16.3.2">using-namespace-directive</non_terminal>
+
+    
 
     
 
@@ -235,8 +267,12 @@ namespace N3
 
     
 
+    
+
      referenced by a <non_terminal
      where="16.3.2">using-namespace-directive</non_terminal>
+
+    
 
     
 
@@ -249,6 +285,8 @@ namespace N3
 
     
 
+    
+
      referenced by a <non_terminal
      where="16.3.1">using-alias-directive</non_terminal>
 
@@ -256,8 +294,12 @@ namespace N3
 
     
 
+    
+
     . Thus, <non_terminal
      where="16.3.2">using-namespace-directive</non_terminal>
+
+    
 
     
 

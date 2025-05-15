@@ -21,8 +21,7 @@
     <PackageReference Include="xunit.analyzers" Version="1.1.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="$(_VSRunnerVersion)">
       <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets
->runtime; build; native; contentfiles; analyzers</IncludeAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="XunitXml.TestLogger" Version="3.0.70" />
     <Compile

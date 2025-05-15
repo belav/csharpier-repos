@@ -28,8 +28,12 @@
 
         
 
+        
+
         , which fills the background and one for the lines that form the pattern over the background defined by the <see
          cref="P:System.Drawing.Drawing2D.HatchBrush.ForegroundColor" />
+
+        
 
         
 
@@ -42,6 +46,8 @@
 
         
 
+        
+
          property defines what type of pattern the brush has and can be any value from the <see
          cref="T:System.Drawing.Drawing2D.HatchStyle" />
 
@@ -49,8 +55,12 @@
 
         
 
+        
+
          enumeration. There are more than fifty elements in the <see
          cref="T:System.Drawing.Drawing2D.HatchStyle" />
+
+        
 
         
 
@@ -96,8 +106,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Drawing.Drawing2D.HatchStyle" />
+
+            
 
             
 
@@ -113,6 +127,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
 
@@ -120,8 +136,12 @@
 
           
 
+          
+
            structure that represents the color of lines drawn by this <see
            cref="T:System.Drawing.Drawing2D.HatchBrush" />
+
+          
 
           
 
@@ -166,8 +186,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Drawing.Drawing2D.HatchStyle" />
+
+            
 
             
 
@@ -183,6 +207,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
 
@@ -190,8 +216,12 @@
 
           
 
+          
+
            structure that represents the color of lines drawn by this <see
            cref="T:System.Drawing.Drawing2D.HatchBrush" />
+
+          
 
           
 
@@ -206,6 +236,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Color" />
 
@@ -213,8 +245,12 @@
 
           
 
+          
+
            structure that represents the color of spaces between the lines drawn by this <see
            cref="T:System.Drawing.Drawing2D.HatchBrush" />
+
+          
 
           
 
@@ -242,6 +278,8 @@
           <para
             >Gets the color of spaces between the hatch lines drawn by this <see
              cref="T:System.Drawing.Drawing2D.HatchBrush" />
+
+            
 
             
 
@@ -275,6 +313,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -283,6 +323,8 @@
           <para
             >The <see
              cref="T:System.Drawing.Drawing2D.HatchBrush" />
+
+            
 
             
 
@@ -316,6 +358,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -342,6 +386,8 @@
           <para
             >Gets the hatch style of this <see
              cref="T:System.Drawing.Drawing2D.HatchBrush" />
+
+            
 
             
 

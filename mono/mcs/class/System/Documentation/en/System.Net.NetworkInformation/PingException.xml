@@ -26,6 +26,8 @@
 
         
 
+        
+
          class throws this exception to indicate that while sending an Internet Control Message Protocol (ICMP) Echo request, a method called by the <see
          cref="T:System.Net.NetworkInformation.Ping" />
 
@@ -33,8 +35,12 @@
 
         
 
+        
+
          class threw an unhandled exception. Applications should check the inner exception of a <see
          cref="T:System.Net.NetworkInformation.PingException" />
+
+        
 
         
 
@@ -50,8 +56,12 @@
 
         
 
+        
+
          class does not throw this exception if the ICMP Echo request fails because of network, ICMP, or destination errors. For such errors, the <see
          cref="T:System.Net.NetworkInformation.Ping" />
+
+        
 
         
 
@@ -64,6 +74,8 @@
 
         
 
+        
+
          object with the relevant <see
          cref="T:System.Net.NetworkInformation.IPStatus" />
 
@@ -71,8 +83,12 @@
 
         
 
+        
+
          value set in the <see
          cref="P:System.Net.NetworkInformation.PingReply.Status" />
+
+        
 
         
 
@@ -91,8 +107,12 @@
 
         
 
+        
+
          or <see
          cref="Overload:System.Net.NetworkInformation.Ping.SendAsync" />
+
+        
 
         
 
@@ -129,6 +149,8 @@
 
             
 
+            
+
              property with the text in the <paramref
              name="message" />
 
@@ -136,8 +158,12 @@
 
             
 
+            
+
              parameter. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -156,6 +182,8 @@
 
             
 
+            
+
              class using the specified message.</para
           >
         </summary>
@@ -166,8 +194,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -207,6 +239,8 @@
 
             
 
+            
+
              object. </para
           >
         </remarks>
@@ -215,6 +249,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.NetworkInformation.PingException" />
+
+            
 
             
 
@@ -230,6 +266,8 @@
 
           
 
+          
+
           The object that holds the serialized object data. </param
         >
         <param name="streamingContext">
@@ -239,8 +277,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -280,8 +322,12 @@
 
             
 
+            
+
              property with the text in the <paramref
              name="message" />
+
+            
 
             
 
@@ -294,8 +340,12 @@
 
             
 
+            
+
              property with the <paramref
              name="innerException" />
+
+            
 
             
 
@@ -314,11 +364,15 @@
 
             
 
+            
+
               class using the specified message and inner exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -331,10 +385,14 @@
 
           
 
+          
+
            that describes the error.</param
         >
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

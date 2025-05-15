@@ -27,8 +27,12 @@
 
         
 
+        
+
          class implements the <see
          cref="T:System.Web.IHttpHandlerFactory" />
+
+        
 
         
 
@@ -41,6 +45,8 @@
 
         
 
+        
+
          calls the ASP.NET compilation system to compile, if necessary, and return the exact type corresponding to the URL, and then creates an instance of that type. The page type inherits from the <see
          cref="T:System.Web.UI.Page" />
 
@@ -48,8 +54,12 @@
 
         
 
+        
+
          class and implements the <see
          cref="T:System.Web.IHttpHandler" />
+
+        
 
         
 
@@ -65,8 +75,12 @@
 
         
 
+        
+
          and register the custom <see
          cref="T:System.Web.UI.PageHandlerFactory" />
+
+        
 
         
 
@@ -78,6 +92,8 @@
             >httpHandlers Element (ASP.NET Settings Schema)</a
           >
         </format>
+
+        
 
         
 
@@ -96,6 +112,8 @@
 
         
 
+        
+
          class and implement the <see
          cref="T:System.Web.IHttpHandler" />
 
@@ -103,8 +121,12 @@
 
         
 
+        
+
          interface. Instances are created dynamically to handle requests for ASP.NET files. The <see
          cref="T:System.Web.UI.PageHandlerFactory" />
+
+        
 
         
 
@@ -133,6 +155,8 @@
 
             
 
+            
+
              constructor is the default constructor and initializes any fields to their default values.</para
           >
         </remarks>
@@ -141,6 +165,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.PageHandlerFactory" />
+
+            
 
             
 
@@ -181,8 +207,12 @@
 
             
 
+            
+
              method is called by the ASP.NET run time and returns either a valid instance of the <see
              cref="T:System.Web.IHttpHandler" />
+
+            
 
             
 
@@ -201,6 +231,8 @@
 
             
 
+            
+
              interface to process the requested resource.</para
           >
         </summary>
@@ -209,6 +241,8 @@
           <para
             >A new <see
              cref="T:System.Web.IHttpHandler" />
+
+            
 
             
 
@@ -224,8 +258,12 @@
 
           
 
+          
+
           An instance of the <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -240,6 +278,8 @@
 
           
 
+          
+
           The HTTP data transfer method (GET or POST) that the client uses.</param
         >
         <param name="path">
@@ -249,8 +289,12 @@
 
           
 
+          
+
           The <see
            cref="P:System.Web.HttpRequest.PhysicalApplicationPath" />
+
+          
 
           
 
@@ -288,8 +332,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.IHttpHandler" />
+
+          
 
           
 

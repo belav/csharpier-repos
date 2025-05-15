@@ -27,8 +27,12 @@
 
         
 
+        
+
          class provides parser functionality for the <see
          cref="T:System.Web.UI.TemplateControl" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          class include the <see
          cref="T:System.Web.UI.UserControl" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          classes. Because the <see
          cref="T:System.Web.UI.TemplateControlParser" />
+
+        
 
         
 
@@ -83,6 +95,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.TemplateControlParser" />
+
+            
 
             
 

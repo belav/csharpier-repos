@@ -11,6 +11,8 @@
 
       
 
+      
+
        :: <rhs
       >
         <terminal>'</terminal>
@@ -20,6 +22,8 @@
     </grammar_production>
     <grammar_production>
       <name>character</name>
+
+      
 
       
 
@@ -48,6 +52,8 @@
 
       
 
+      
+
        :: <rhs
 
         >Any character except ' (U+0027), \ (U+005C), and <non_terminal
@@ -58,6 +64,8 @@
       <name>
         <non_terminal where="9.4.4.4">simple-escape-sequence</non_terminal>
       </name>
+
+      
 
       
 
@@ -87,6 +95,8 @@
 
       
 
+      
+
        :: <rhs
       >
         <terminal>\x</terminal>
@@ -108,6 +118,8 @@
   <paragraph
     >A Unicode character escape sequence (<hyperlink
     >9.4.1</hyperlink>
+
+    
 
     
 
@@ -143,8 +155,12 @@
 
     
 
+    
+
      is <keyword
     >char</keyword>
+
+    
 
     
 

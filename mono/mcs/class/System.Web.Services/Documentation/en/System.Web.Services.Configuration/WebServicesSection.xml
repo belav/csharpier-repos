@@ -38,6 +38,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -96,6 +98,8 @@
 
             
 
+            
+
              object that represents the current section.</para
           >
         </summary>
@@ -127,8 +131,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Web.Services.Configuration.WebServicesSection" />
+
+            
 
             
 
@@ -160,6 +168,8 @@
           <para
             >Gets one of the <see
              cref="T:System.Web.Services.Configuration.WebServiceProtocols" />
+
+            
 
             
 
@@ -202,6 +212,8 @@
 
             
 
+            
+
              object that represents the section being retrieved.</para
           >
         </returns>
@@ -212,8 +224,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.Configuration" />
+
+          
 
           
 
@@ -341,6 +357,8 @@
 
             
 
+            
+
              that specifies the service description format extension to run within the scope of the configuration file.</para
           >
         </summary>
@@ -377,8 +395,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Web.Services.Configuration.WebServicesSection" />
+
+            
 
             
 
@@ -420,6 +442,8 @@
 
             
 
+            
+
              that specifies the SOAP extensions to run when a service description for an XML Web service within the scope of the configuration file is accessed.</para
           >
         </summary>
@@ -451,6 +475,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.Services.Configuration.TypeElementCollection" />
+
+            
 
             
 
@@ -492,6 +518,8 @@
 
             
 
+            
+
              that specifies the SOAP extensions to run with all XML Web services within the scope of the configuration file.</para
           >
         </summary>
@@ -528,6 +556,8 @@
 
             
 
+            
+
              object that corresponds to the protocol used to call the Web service.</para
           >
         </summary>
@@ -559,6 +589,8 @@
           <para
             >Gets a <see
              cref="T:System.Web.Services.Configuration.TypeElementCollection" />
+
+            
 
             
 

@@ -27,8 +27,12 @@
 
         
 
+        
+
          menu item from the context menu on the control. Component editors that are derived from the <see
          cref="T:System.Web.UI.Design.WebControls.BaseDataListComponentEditor" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          class, and are used to edit the properties of controls that are derived from the <see
          cref="T:System.Web.UI.WebControls.BaseDataList" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.WebControls.DataList" />
+
+        
 
         
 
@@ -72,8 +84,12 @@
 
         
 
+        
+
          method displays a component editor for the associated control, if one can be created. The <see
          cref="M:System.Web.UI.Design.WebControls.BaseDataListComponentEditor.GetInitialComponentEditorPageIndex" />
+
+        
 
         
 
@@ -87,6 +103,8 @@
       <para
         >Provides a component editor base class for Web server controls that are derived from the <see
          cref="T:System.Web.UI.WebControls.BaseDataList" />
+
+        
 
         
 
@@ -118,6 +136,8 @@
 
             
 
+            
+
              class creates a component editor that is derived from the <see
              cref="T:System.Web.UI.Design.WebControls.BaseDataListComponentEditor" />
 
@@ -125,8 +145,12 @@
 
             
 
+            
+
              class, when the user selects <ui
             >Property Builder</ui>
+
+            
 
             
 
@@ -140,6 +164,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.WebControls.BaseDataListComponentEditor" />
+
+            
 
             
 
@@ -179,8 +205,12 @@
 
             
 
+            
+
              method gets a <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -193,6 +223,8 @@
 
             
 
+            
+
              method. It creates a <see
              cref="T:System.Windows.Forms.Design.ComponentEditorForm" />
 
@@ -200,8 +232,12 @@
 
             
 
+            
+
              object, and then calls its <see
              cref="M:System.Windows.Forms.Design.ComponentEditorForm.ShowForm" />
+
+            
 
             
 
@@ -225,8 +261,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -241,6 +281,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
 
@@ -248,8 +290,12 @@
 
           
 
+          
+
            implementing the <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -264,8 +310,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.IWin32Window" />
+
+          
 
           
 
@@ -295,6 +345,8 @@
           <para
             >The initial page is specified when the <see
              cref="T:System.Web.UI.Design.WebControls.BaseDataListComponentEditor" />
+
+            
 
             
 

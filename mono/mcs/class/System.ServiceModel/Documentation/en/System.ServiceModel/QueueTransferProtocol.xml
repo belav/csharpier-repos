@@ -23,8 +23,12 @@
 
         
 
+        
+
          or <see
          cref="F:System.ServiceModel.QueueTransferProtocol.SrmpSecure" />
+
+        
 
         
 
@@ -39,10 +43,14 @@
 
         
 
+        
+
          and the <format
          type="text/html">
           <a href="edf277f3-e3bf-4ed8-9f55-83b5788430a7">msmqIntegrationBinding element</a>
         </format>
+
+        
 
         
 
@@ -55,6 +63,8 @@
          type="text/html">
           <a href="7d2d59d7-f08b-44ed-bd31-913908b83d97">Service Endpoints and Queue Addressing</a>
         </format>
+
+        
 
         
 

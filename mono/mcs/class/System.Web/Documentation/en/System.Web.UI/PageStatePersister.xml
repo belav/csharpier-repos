@@ -21,8 +21,12 @@
 
         
 
+        
+
          state. This state, called view state, consists of page and control settings and data that make the page and controls appear as if they are the same ones that the user saw and interacted with on their last round trip to the server. Several mechanisms exist to store view state between successive requests to the same page. The abstract <see
          cref="T:System.Web.UI.PageStatePersister" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          object to perform this work, using an <see
          cref="T:System.Web.UI.IStateFormatter" />
+
+        
 
         
 
@@ -52,8 +60,12 @@
 
         
 
+        
+
          object on the server using the <see
          cref="T:System.Web.UI.SessionPageStatePersister" />
+
+        
 
         
 
@@ -63,6 +75,8 @@
          type="text/html">
           <a href="0218d965-5d30-445b-b6a6-8870e70e63ce">ASP.NET State Management Overview</a>
         </format>
+
+        
 
         
 
@@ -78,8 +92,12 @@
 
         
 
+        
+
          dictionary, which is a <see
          cref="T:System.Web.UI.StateBag" />
+
+        
 
         
 
@@ -92,8 +110,12 @@
 
         
 
+        
+
          property. You assign keys and values to the <see
          cref="P:System.Web.UI.Control.ViewState" />
+
+        
 
         
 
@@ -106,8 +128,12 @@
 
         
 
+        
+
          object serializes the state information between requests. To perform custom state handling in your control, override the <see
          cref="M:System.Web.UI.Control.LoadViewState(System.Object)" />
+
+        
 
         
 
@@ -120,8 +146,12 @@
 
         
 
+        
+
          methods. Any state information that is stored in this dictionary is lost when view state is disabled by a page developer. To mitigate this, in ASP.NET version 2.0 you can store critical state information in a separate object, called control state. The control state object is not affected when view state is disabled by a page developer. Storing state information in the control state object requires that the control override the <see
          cref="M:System.Web.UI.Control.LoadControlState(System.Object)" />
+
+        
 
         
 
@@ -134,8 +164,12 @@
 
         
 
+        
+
          methods and that the control be registered to store state information in control state every time the control is initialized. You can register a control to use control state by overriding the <see
          cref="M:System.Web.UI.Control.OnInit(System.EventArgs)" />
+
+        
 
         
 
@@ -148,8 +182,12 @@
 
         
 
+        
+
          method. For more information about using the <see
          cref="P:System.Web.UI.Control.ViewState" />
+
+        
 
         
 
@@ -166,11 +204,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >To maintain view state on clients that cannot support the existing view state persistence mechanisms, you can extend the <see
          cref="T:System.Web.UI.PageStatePersister" />
+
+        
 
         
 
@@ -183,8 +225,12 @@
 
         
 
+        
+
          class must override the abstract <see
          cref="M:System.Web.UI.PageStatePersister.Save" />
+
+        
 
         
 
@@ -197,8 +243,12 @@
 
         
 
+        
+
          method to extract it. If you need to serialize view state and control state to a string, you can use the <see
          cref="T:System.Web.UI.IStateFormatter" />
+
+        
 
         
 
@@ -211,8 +261,12 @@
 
         
 
+        
+
          property. It efficiently serializes and deserializes object state information to a Base64-encoded string. You can also override the <see
          cref="P:System.Web.UI.PageStatePersister.StateFormatter" />
+
+        
 
         
 
@@ -249,6 +303,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -259,8 +315,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Page" />
+
+          
 
           
 
@@ -292,8 +352,12 @@
 
             
 
+            
+
              level, but requires extra implementation steps to use. For more information on using the <see
              cref="P:System.Web.UI.Control.ViewState" />
+
+            
 
             
 
@@ -310,6 +374,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -318,6 +384,8 @@
           <para
             >Gets or sets an object that represents the data that controls contained by the current <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -350,8 +418,12 @@
 
             
 
+            
+
              class implement the <see
              cref="M:System.Web.UI.PageStatePersister.Load" />
+
+            
 
             
 
@@ -364,8 +436,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.PageStatePersister.ControlState" />
+
+            
 
             
 
@@ -379,6 +455,8 @@
           <para
             >Overridden by derived classes to deserialize and load persisted state information when a <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -411,8 +489,12 @@
 
             
 
+            
+
              property to access the current <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -426,6 +508,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -458,8 +542,12 @@
 
             
 
+            
+
              class implement the <see
              cref="M:System.Web.UI.PageStatePersister.Save" />
+
+            
 
             
 
@@ -472,8 +560,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.PageStatePersister.ControlState" />
+
+            
 
             
 
@@ -487,6 +579,8 @@
           <para
             >Overridden by derived classes to serialize persisted state information when a <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 
@@ -522,6 +616,8 @@
 
             
 
+            
+
              property to provide your own view state formatter. </para
           >
         </remarks>
@@ -535,8 +631,12 @@
 
             
 
+            
+
              object that is used to serialize and deserialize the state information contained in the <see
              cref="P:System.Web.UI.PageStatePersister.ViewState" />
+
+            
 
             
 
@@ -549,6 +649,8 @@
 
             
 
+            
+
              properties during calls to the <see
              cref="M:System.Web.UI.PageStatePersister.Save" />
 
@@ -556,8 +658,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.UI.PageStatePersister.Load" />
+
+            
 
             
 
@@ -590,6 +696,8 @@
 
             
 
+            
+
              property. View state is affected when view state is disabled at the <see
              cref="T:System.Web.UI.Page" />
 
@@ -597,8 +705,12 @@
 
             
 
+            
+
              level, and as a result controls might not behave correctly in these scenarios. For more information on using <see
              cref="P:System.Web.UI.Control.ViewState" />
+
+            
 
             
 
@@ -615,6 +727,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -623,6 +737,8 @@
           <para
             >Gets or sets an object that represents the data that controls contained by the current <see
              cref="T:System.Web.UI.Page" />
+
+            
 
             
 

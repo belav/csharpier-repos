@@ -34,8 +34,12 @@
 
         
 
+        
+
          method, because the security token might become unusable when the channel that the token provider is associated with is closed. The security token becomes unusable when the requested key type is asymmetric and the thread is running under impersonated context when the <see
          cref="M:System.ServiceModel.Security.Tokens.IssuedSecurityTokenProvider.GetTokenCore(System.TimeSpan)" />
+
+        
 
         
 
@@ -68,6 +72,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Security.Tokens.IssuedSecurityTokenProvider" />
+
+            
 
             
 
@@ -136,6 +142,8 @@
 
             
 
+            
+
              object that represents the result of an asynchronous operation.</para
           >
         </returns>
@@ -146,8 +154,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -162,8 +174,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -210,6 +226,8 @@
 
             
 
+            
+
              object that represents the result of an asynchronous operation.</para
           >
         </returns>
@@ -220,8 +238,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -236,8 +258,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -252,8 +278,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -300,6 +330,8 @@
 
             
 
+            
+
              object that represents the result of an asynchronous operation.</para
           >
         </returns>
@@ -310,8 +342,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -326,8 +362,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -342,8 +382,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -389,6 +433,8 @@
 
             
 
+            
+
              object that represents the result of an asynchronous operation.</para
           >
         </returns>
@@ -399,8 +445,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -415,8 +465,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -463,6 +517,8 @@
 
             
 
+            
+
              object that represents the result of an asynchronous operation.</para
           >
         </returns>
@@ -473,8 +529,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -489,8 +549,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -505,8 +569,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -586,8 +654,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -709,6 +781,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -743,8 +817,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IAsyncResult" />
+
+          
 
           
 
@@ -790,8 +868,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IAsyncResult" />
+
+          
 
           
 
@@ -830,8 +912,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IAsyncResult" />
+
+          
 
           
 
@@ -889,8 +975,12 @@
 
             
 
+            
+
              method, because the security token might become unusable when the channel that the token provider is associated with is closed. The security token becomes unusable when the requested key type is asymmetric and the thread is running under impersonated context when the <see
              cref="M:System.ServiceModel.Security.Tokens.IssuedSecurityTokenProvider.GetTokenCore(System.TimeSpan)" />
+
+            
 
             
 
@@ -913,6 +1003,8 @@
 
             
 
+            
+
              that represents the token core.</para
           >
         </returns>
@@ -923,8 +1015,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -1146,6 +1242,8 @@
 
             
 
+            
+
              contains numerous properties that specify version numbers of different components of a message.</para
           >
         </remarks>
@@ -1206,8 +1304,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -1276,6 +1378,8 @@
           <para
             >The <see
              cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+
+            
 
             
 

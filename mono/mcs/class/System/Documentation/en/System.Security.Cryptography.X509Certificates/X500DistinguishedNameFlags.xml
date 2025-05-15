@@ -33,11 +33,15 @@
 
         
 
+        
+
          class to indicate special characters contained in the distinguished name.</para
       >
       <para
         >Several values are mutually exclusive in this enumeration; use only one of these values to define the special characteristics of an X.500 distinguished name. For example, specify only one of the <see
          cref="F:System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags.UseCommas" />
+
+        
 
         
 
@@ -50,8 +54,12 @@
 
         
 
+        
+
          , and <see
          cref="F:System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags.UseSemicolons" />
+
+        
 
         
 
@@ -64,8 +72,12 @@
 
         
 
+        
+
          or <see
          cref="F:System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags.UseUTF8Encoding" />
+
+        
 
         
 
@@ -147,6 +159,8 @@
              cref="http://msdn.microsoft.com/en-us/library/windows/desktop/aa379394.aspx"
               >X500NameFlags enumeration</see
             >
+
+            
 
             
 

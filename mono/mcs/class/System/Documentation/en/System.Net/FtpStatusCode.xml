@@ -25,8 +25,12 @@
 
         
 
+        
+
          enumeration defines the values returned in the <see
          cref="P:System.Net.FtpWebResponse.StatusCode" />
+
+        
 
         
 
@@ -37,6 +41,8 @@
       <para
         >For additional information about FTP server status codes, see RFC 959, "File Transfer Protocol," Section 4.2, "FTP Replies," available at <see
          cref="http://www.ietf.org">http://www.rfc-editor.org</see>
+
+        
 
         
 

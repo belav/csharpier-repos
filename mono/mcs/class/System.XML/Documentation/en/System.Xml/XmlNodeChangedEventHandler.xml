@@ -42,6 +42,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -55,8 +57,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Xml.XmlDocument.NodeChanging" />
+
+        
 
         
 
@@ -69,8 +75,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Xml.XmlDocument.NodeInserting" />
+
+        
 
         
 
@@ -83,8 +93,12 @@
 
         
 
+        
+
          and <see
          cref="E:System.Xml.XmlDocument.NodeRemoving" />
+
+        
 
         
 

@@ -34,6 +34,8 @@
 
         
 
+        
+
          object specifies access rights for a named system semaphore, and also specifies how access attempts are audited. Access rights to the semaphore are expressed as rules, with each access rule represented by a <see
          cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
 
@@ -41,8 +43,12 @@
 
         
 
+        
+
          object. Each auditing rule is represented by a <see
          cref="T:System.Security.AccessControl.SemaphoreAuditRule" />
+
+        
 
         
 
@@ -58,8 +64,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Security.AccessControl.SemaphoreAuditRule" />
+
+        
 
         
 
@@ -76,12 +86,16 @@
 
           
 
+          
+
            object can represent a local semaphore or a named system semaphore. Windows access control security is meaningful only for named system semaphores.</para
         >
       </block>
       <para
         >The <see
          cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+
+        
 
         
 
@@ -94,8 +108,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Security.AccessControl.SemaphoreAuditRule" />
+
+        
 
         
 
@@ -113,6 +131,8 @@
 
             
 
+            
+
              object always starts with an empty DACL, which denies all access for all users.</para
           >
         </item>
@@ -120,6 +140,8 @@
           <para
             >Violating the canonical ordering of ACEs. If the ACE list in the DACL is not kept in the canonical order, users might inadvertently be given access to the secured object. For example, denied access rights must always appear before allowed access rights. <see
              cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+
+            
 
             
 
@@ -158,6 +180,8 @@
 
         
 
+        
+
          method to get the <see
          cref="T:System.Security.AccessControl.SemaphoreSecurity" />
 
@@ -165,8 +189,12 @@
 
         
 
+        
+
          object. Modify the security object by adding and removing rules, and then use the <see
          cref="M:System.Threading.Semaphore.SetAccessControl(System.Security.AccessControl.SemaphoreSecurity)" />
+
+        
 
         
 
@@ -183,8 +211,12 @@
 
           
 
+          
+
            object do not affect the access levels of the named semaphore until you call the <see
            cref="M:System.Threading.Semaphore.SetAccessControl(System.Security.AccessControl.SemaphoreSecurity)" />
+
+          
 
           
 
@@ -201,8 +233,12 @@
 
         
 
+        
+
          method to get a <see
          cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+
+        
 
         
 
@@ -215,8 +251,12 @@
 
         
 
+        
+
          method, or a constructor that accepts a <see
          cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+
+        
 
         
 
@@ -232,8 +272,12 @@
 
         
 
+        
+
          method to set access rules for a named semaphore, and the <see
          cref="M:System.Security.AccessControl.ObjectSecurity.GetSecurityDescriptorSddlForm(System.Security.AccessControl.AccessControlSections)" />
+
+        
 
         
 
@@ -275,6 +319,8 @@
 
             
 
+            
+
              object always starts with an empty discretionary access list (DACL), which denies all access for all users.</para
           >
         </remarks>
@@ -283,6 +329,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+
+            
 
             
 
@@ -326,11 +374,15 @@
 
             
 
+            
+
              object.</para
           >
           <para
             >Caution must be exercised when working with named system objects. If there is a system object named <paramref
              name="name" />
+
+            
 
             
 
@@ -349,11 +401,15 @@
 
             
 
+            
+
              class with the specified sections of the access control security rules from the system semaphore with the specified name.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -368,8 +424,12 @@
 
           
 
+          
+
           A combination of <see
            cref="T:System.Security.AccessControl.AccessControlSections" />
+
+          
 
           
 
@@ -406,8 +466,12 @@
 
             
 
+            
+
              class override the <see
              cref="P:System.Security.AccessControl.ObjectSecurity.AccessRightType" />
+
+            
 
             
 
@@ -421,6 +485,8 @@
           <para
             >Gets the enumeration that the <see
              cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+
+            
 
             
 
@@ -468,6 +534,8 @@
 
             
 
+            
+
              class.</para
           >
           <block subset="none" type="note">
@@ -488,6 +556,8 @@
 
             
 
+            
+
              object representing the specified rights for the specified user.</para
           >
         </returns>
@@ -498,8 +568,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Principal.IdentityReference" />
+
+          
 
           
 
@@ -514,8 +588,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Security.AccessControl.SemaphoreRights" />
+
+          
 
           
 
@@ -530,10 +608,14 @@
 
           
 
+          
+
           Meaningless for named semaphores, because they have no hierarchy.</param
         >
         <param name="inheritanceFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -548,6 +630,8 @@
 
           
 
+          
+
           Meaningless for named semaphores, because they have no hierarchy.</param
         >
         <param name="type">
@@ -557,8 +641,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AccessControlType" />
+
+          
 
           
 
@@ -595,8 +683,12 @@
 
             
 
+            
+
              class override the <see
              cref="P:System.Security.AccessControl.ObjectSecurity.AccessRuleType" />
+
+            
 
             
 
@@ -610,6 +702,8 @@
           <para
             >Gets the type that the <see
              cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+
+            
 
             
 
@@ -652,8 +746,12 @@
 
             
 
+            
+
              method searches for rules with the same user or group and the same <see
              cref="T:System.Security.AccessControl.AccessControlType" />
+
+            
 
             
 
@@ -666,6 +764,8 @@
 
             
 
+            
+
             . If none are found, <paramref
              name="rule" />
 
@@ -673,8 +773,12 @@
 
             
 
+            
+
              is added. If a matching rule is found, the rights in <paramref
              name="rule" />
+
+            
 
             
 
@@ -689,6 +793,8 @@
         </summary>
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -730,8 +836,12 @@
 
             
 
+            
+
              method searches for rules with the same user or group as <paramref
              name="rule" />
+
+            
 
             
 
@@ -744,8 +854,12 @@
 
             
 
+            
+
              is added. If a matching rule is found, the flags in <paramref
              name="rule" />
+
+            
 
             
 
@@ -760,6 +874,8 @@
         </summary>
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -806,6 +922,8 @@
 
             
 
+            
+
              class.</para
           >
           <block subset="none" type="note">
@@ -826,8 +944,12 @@
 
             
 
+            
+
              object representing the specified audit rule for the specified user. The return type of the method is the base class, <see
              cref="T:System.Security.AccessControl.AuditRule" />
+
+            
 
             
 
@@ -843,8 +965,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Security.Principal.IdentityReference" />
+
+          
 
           
 
@@ -859,8 +985,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Security.AccessControl.SemaphoreRights" />
+
+          
 
           
 
@@ -875,10 +1005,14 @@
 
           
 
+          
+
           Meaningless for named wait handles, because they have no hierarchy.</param
         >
         <param name="inheritanceFlags">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -893,6 +1027,8 @@
 
           
 
+          
+
           Meaningless for named wait handles, because they have no hierarchy.</param
         >
         <param name="flags">
@@ -902,8 +1038,12 @@
 
           
 
+          
+
           A bitwise combination of <see
            cref="T:System.Security.AccessControl.AuditFlags" />
+
+          
 
           
 
@@ -940,8 +1080,12 @@
 
             
 
+            
+
              class override the <see
              cref="P:System.Security.AccessControl.ObjectSecurity.AuditRuleType" />
+
+            
 
             
 
@@ -955,6 +1099,8 @@
           <para
             >Gets the type that the <see
              cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+
+            
 
             
 
@@ -997,8 +1143,12 @@
 
             
 
+            
+
              is searched for a rule that has the same user and the same <see
              cref="T:System.Security.AccessControl.AccessControlType" />
+
+            
 
             
 
@@ -1011,8 +1161,12 @@
 
             
 
+            
+
             . If no such rule is found, no action is taken, and the method returns false. If matching rules are found, their inheritance and compatibility flags are checked for compatibility with the flags specified in <paramref
              name="rule" />
+
+            
 
             
 
@@ -1025,8 +1179,12 @@
 
             
 
+            
+
              are removed from the compatible rule, and the method returns true. If <paramref
              name="rule" />
+
+            
 
             
 
@@ -1039,12 +1197,16 @@
 
             
 
+            
+
              object. </para
           >
           <block subset="none" type="note">
             <para
               >Although you can specify inheritance and propagation flags for semaphore access rules, by creating them with the <see
                cref="M:System.Security.AccessControl.SemaphoreSecurity.AccessRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AccessControlType)" />
+
+              
 
               
 
@@ -1064,6 +1226,8 @@
 
             
 
+            
+
              (allow or deny) as the specified rule, and with compatible inheritance and propagation flags; if such a rule is found, the rights contained in the specified access rule are removed from it.</para
           >
         </summary>
@@ -1078,6 +1242,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
 
@@ -1085,8 +1251,12 @@
 
           
 
+          
+
            that specifies the user and <see
            cref="T:System.Security.AccessControl.AccessControlType" />
+
+          
 
           
 
@@ -1128,8 +1298,12 @@
 
             
 
+            
+
              object is searched for rules that have the same user and the same <see
              cref="T:System.Security.AccessControl.AccessControlType" />
+
+            
 
             
 
@@ -1142,8 +1316,12 @@
 
             
 
+            
+
             . Any rights specified by <paramref
              name="rule" />
+
+            
 
             
 
@@ -1162,11 +1340,15 @@
 
             
 
+            
+
              (allow or deny) as the specified rule and, if found, removes them.</para
           >
         </summary>
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1179,8 +1361,12 @@
 
           
 
+          
+
            that specifies the user and <see
            cref="T:System.Security.AccessControl.AccessControlType" />
+
+          
 
           
 
@@ -1222,8 +1408,12 @@
 
             
 
+            
+
              in all details, including flags. Other rules with the same user and <see
              cref="T:System.Security.AccessControl.AccessControlType" />
+
+            
 
             
 
@@ -1235,6 +1425,8 @@
             <para
               >A rule represents one or more underlying access control entries (ACE), and these entries are split or combined as necessary when you modify the access security rules for a user. Thus, a rule might no longer exist in the specific form it had when it was added, and in that case the <see
                cref="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAccessRuleSpecific(System.Security.AccessControl.SemaphoreAccessRule)" />
+
+              
 
               
 
@@ -1255,8 +1447,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
+
+          
 
           
 
@@ -1298,8 +1494,12 @@
 
             
 
+            
+
              is searched for an audit rule that has the same user as <paramref
              name="rule" />
+
+            
 
             
 
@@ -1312,8 +1512,12 @@
 
             
 
+            
+
             . If no compatible rule is found, no action is taken, and the method returns false. If a rule with compatible flags is found, the rights specified in <paramref
              name="rule" />
+
+            
 
             
 
@@ -1326,8 +1530,12 @@
 
             
 
+            
+
              specifies rights not contained in the compatible rule, no action is taken with respect to those rights. If all rights are removed from the compatible rule, the entire rule is removed from the current <see
              cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+
+            
 
             
 
@@ -1339,6 +1547,8 @@
             <para
               >Although you can specify inheritance and propagation flags for semaphore audit rules, by creating them with the <see
                cref="M:System.Security.AccessControl.SemaphoreSecurity.AuditRuleFactory(System.Security.Principal.IdentityReference,System.Int32,System.Boolean,System.Security.AccessControl.InheritanceFlags,System.Security.AccessControl.PropagationFlags,System.Security.AccessControl.AuditFlags)" />
+
+              
 
               
 
@@ -1363,8 +1573,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.AccessControl.SemaphoreAuditRule" />
+
+          
 
           
 
@@ -1406,6 +1620,8 @@
 
             
 
+            
+
              is searched for audit rules that have the same user as <paramref
              name="rule" />
 
@@ -1413,8 +1629,12 @@
 
             
 
+            
+
             . Any rights specified by <paramref
              name="rule" />
+
+            
 
             
 
@@ -1434,8 +1654,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.AccessControl.SemaphoreAuditRule" />
+
+          
 
           
 
@@ -1477,12 +1701,16 @@
 
             
 
+            
+
              in all details, including flags. Other audit rules for the same user are not affected.</para
           >
           <block subset="none" type="note">
             <para
               >A rule represents one or more underlying access control entries (ACE), and these entries are split or combined as necessary when you modify the audit security rules for a user. Thus, a rule might no longer exist in the specific form it had when it was added, and in that case the <see
                cref="M:System.Security.AccessControl.SemaphoreSecurity.RemoveAuditRuleSpecific(System.Security.AccessControl.SemaphoreAuditRule)" />
+
+              
 
               
 
@@ -1503,8 +1731,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.AccessControl.SemaphoreAuditRule" />
+
+          
 
           
 
@@ -1546,6 +1778,8 @@
 
             
 
+            
+
              is added.</para
           >
         </remarks>
@@ -1554,6 +1788,8 @@
           <para
             >Removes all access control rules with the same user as the specified rule, regardless of <see
              cref="T:System.Security.AccessControl.AccessControlType" />
+
+            
 
             
 
@@ -1569,8 +1805,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.AccessControl.SemaphoreAccessRule" />
+
+          
 
           
 
@@ -1612,8 +1852,12 @@
 
             
 
+            
+
             , the effect of this method is to remove all <see
              cref="F:System.Security.AccessControl.AccessControlType.Allow" />
+
+            
 
             
 
@@ -1626,8 +1870,12 @@
 
             
 
+            
+
             , all <see
              cref="F:System.Security.AccessControl.AccessControlType.Deny" />
+
+            
 
             
 
@@ -1643,8 +1891,12 @@
 
             
 
+            
+
              match the specified rule, <paramref
              name="rule" />
+
+            
 
             
 
@@ -1663,11 +1915,15 @@
 
             
 
+            
+
              (allow or deny) as the specified rule, and then adds the specified rule.</para
           >
         </summary>
         <param name="rule">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1680,8 +1936,12 @@
 
           
 
+          
+
            to add. The user and <see
            cref="T:System.Security.AccessControl.AccessControlType" />
+
+          
 
           
 
@@ -1723,6 +1983,8 @@
 
             
 
+            
+
              is added.</para
           >
         </remarks>
@@ -1731,6 +1993,8 @@
           <para
             >Removes all audit rules with the same user as the specified rule, regardless of the <see
              cref="T:System.Security.AccessControl.AuditFlags" />
+
+            
 
             
 
@@ -1746,8 +2010,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.AccessControl.SemaphoreAuditRule" />
+
+          
 
           
 

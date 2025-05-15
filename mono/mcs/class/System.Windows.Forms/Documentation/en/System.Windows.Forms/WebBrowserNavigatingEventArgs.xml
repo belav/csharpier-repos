@@ -27,8 +27,12 @@
 
         
 
+        
+
          event occurs before the <see
          cref="T:System.Windows.Forms.WebBrowser" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.WebBrowserNavigatingEventArgs" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          property. If the new document will be displayed in a Web page frame, you can retrieve the name of the frame through the <see
          cref="P:System.Windows.Forms.WebBrowserNavigatingEventArgs.TargetFrameName" />
+
+        
 
         
 
@@ -70,6 +82,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.WebBrowser.Navigating" />
+
+        
 
         
 
@@ -103,11 +117,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="url">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -120,8 +138,12 @@
 
           
 
+          
+
            representing the location of the document to which the <see
            cref="T:System.Windows.Forms.WebBrowser" />
+
+          
 
           
 
@@ -131,6 +153,8 @@
         >
         <param name="targetFrameName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -177,6 +201,8 @@
           <para
             >Gets the location of the document to which the <see
              cref="T:System.Windows.Forms.WebBrowser" />
+
+            
 
             
 

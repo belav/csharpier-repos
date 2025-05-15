@@ -34,8 +34,12 @@
 
         
 
+        
+
          class to create hosts that provide a custom programming model. The indigo1 service programming model uses the <see
          cref="T:System.ServiceModel.ServiceHost" />
+
+        
 
         
 
@@ -57,6 +61,8 @@
 
             
 
+            
+
             .</para
           >
         </item>
@@ -64,6 +70,8 @@
           <para
             >Avoid non-reference members; they can cause the compiler to auto-generate <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -81,8 +89,12 @@
 
             
 
+            
+
              and the finalizer itself from (On)(Begin)Close (and/or OnAbort) to emulate what would have been the auto-generated <see
              cref="T:System.IDisposable" />
+
+            
 
             
 
@@ -98,6 +110,8 @@
       <para
         >Extends the <see
          cref="T:System.ServiceModel.ServiceHostBase" />
+
+        
 
         
 
@@ -126,6 +140,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.ServiceHostBase" />
+
+            
 
             
 
@@ -163,8 +179,12 @@
 
             
 
+            
+
              to provide the base address after the host is constructed. <see
              cref="M:System.ServiceModel.ServiceHostBase.AddBaseAddress(System.Uri)" />
+
+            
 
             
 
@@ -184,8 +204,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -225,6 +249,8 @@
 
             
 
+            
+
              exists in the list of configuration names of the service contracts implemented by the service. If the validation passes, the description in the <see
              cref="T:System.ServiceModel.Description.ServiceEndpoint " />
 
@@ -232,8 +258,12 @@
 
             
 
+            
+
              is used as it is, even if the <see
              cref="T:System.ServiceModel.Description.ContractDescription " />
+
+            
 
             
 
@@ -250,8 +280,12 @@
 
             
 
+            
+
              is a relative URI, one of the base addresses of the <see
              cref="T:System.ServiceModel.ServiceHost" />
+
+            
 
             
 
@@ -266,6 +300,8 @@
         </summary>
         <param name="endpoint">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -312,11 +348,15 @@
 
             
 
+            
+
              added to the hosted service.</para
           >
         </returns>
         <param name="implementedContract">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -331,8 +371,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Binding" />
+
+          
 
           
 
@@ -347,8 +391,12 @@
 
           
 
+          
+
           The address for the endpoint added. This can be an absolute or relative URI. If it is a relative URI, one of the base address of the <see
            cref="T:System.ServiceModel.ServiceHost" />
+
+          
 
           
 
@@ -395,11 +443,15 @@
 
             
 
+            
+
              added to the hosted service.</para
           >
         </returns>
         <param name="implementedContract">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -414,8 +466,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Binding" />
+
+          
 
           
 
@@ -430,6 +486,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Uri" />
 
@@ -437,8 +495,12 @@
 
           
 
+          
+
            that contains the address for the endpoint added. This can be an absolute or relative URI. If it is a relative URI, one of the base address of the <see
            cref="T:System.ServiceModel.ServiceHost" />
+
+          
 
           
 
@@ -481,8 +543,12 @@
 
             
 
+            
+
              is a relative URI, one of the base addresses of the <see
              cref="T:System.ServiceModel.ServiceHost" />
+
+            
 
             
 
@@ -505,11 +571,15 @@
 
             
 
+            
+
              added to the hosted service.</para
           >
         </returns>
         <param name="implementedContract">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -524,8 +594,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Binding" />
+
+          
 
           
 
@@ -540,8 +614,12 @@
 
           
 
+          
+
           The address for the endpoint added. This address can be an absolute or relative URI. If it is a relative URI, one of the base address of the <see
            cref="T:System.ServiceModel.ServiceHost" />
+
+          
 
           
 
@@ -556,8 +634,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -605,11 +687,15 @@
 
             
 
+            
+
              added to the hosted service. This URI can be absolute or relative.</para
           >
         </returns>
         <param name="implementedContract">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -624,8 +710,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.Binding" />
+
+          
 
           
 
@@ -640,6 +730,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Uri" />
 
@@ -647,8 +739,12 @@
 
           
 
+          
+
            that contains the address for the endpoint added. If it is a relative URI, one of the base address of the <see
            cref="T:System.ServiceModel.ServiceHost" />
+
+          
 
           
 
@@ -663,8 +759,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -1005,8 +1105,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.UriSchemeKeyedCollection" />
+
+          
 
           
 
@@ -1088,6 +1192,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -1156,6 +1262,8 @@
 
             
 
+            
+
              that references the asynchronous on-close operation. </para
           >
         </returns>
@@ -1166,8 +1274,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -1182,8 +1294,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -1193,6 +1309,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1239,6 +1357,8 @@
 
             
 
+            
+
              that references the asynchronous on-open operation. </para
           >
         </returns>
@@ -1249,8 +1369,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -1265,8 +1389,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -1276,6 +1404,8 @@
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1312,6 +1442,8 @@
 
             
 
+            
+
              does the following:</para
           >
           <list type="bullet">
@@ -1324,8 +1456,12 @@
 
                 
 
+                
+
                 , which also closes their associated <see
                  cref="T:System.ServiceModel.Channels.IChannelListener" />
+
+                
 
                 
 
@@ -1343,8 +1479,12 @@
 
                 
 
+                
+
                  on all <see
                  cref="T:System.ServiceModel.InstanceContext" />
+
+                
 
                 
 
@@ -1362,6 +1502,8 @@
 
                 
 
+                
+
                  objects to close down, which happens when their associated channels finish sending all pending messages.</para
               >
             </item>
@@ -1369,6 +1511,8 @@
               <para
                 >Closes the <see
                  cref="T:System.ServiceModel.Dispatcher.ChannelDispatcher" />
+
+                
 
                 
 
@@ -1390,8 +1534,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -1433,6 +1581,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.IAsyncResult" />
 
@@ -1440,8 +1590,12 @@
 
           
 
+          
+
            returned by a call to the <see
            cref="M:System.ServiceModel.ServiceHostBase.OnBeginClose(System.TimeSpan,System.AsyncCallback,System.Object)" />
+
+          
 
           
 
@@ -1483,6 +1637,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.IAsyncResult" />
 
@@ -1490,8 +1646,12 @@
 
           
 
+          
+
            returned by a call to the <see
            cref="M:System.ServiceModel.ServiceHostBase.OnBeginOpen(System.TimeSpan,System.AsyncCallback,System.Object)" />
+
+          
 
           
 
@@ -1533,8 +1693,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Timespan" />
+
+          
 
           
 
@@ -1616,10 +1780,14 @@
 
             
 
+            
+
              and </para
           >
           <para>
             <see cref="M:System.ServiceModel.ServiceHostBase.OnEndClose(System.IAsyncResult)" />
+
+            
 
             
 
@@ -1684,8 +1852,12 @@
 
               
 
+              
+
               , exposing a hosting endpoint, and a <see
                cref="E:System.ServiceModel.ServiceHostBase.UnknownMessageReceived" />
+
+              
 
               
 
@@ -1698,8 +1870,12 @@
 
               
 
+              
+
                is thrown. The description of the exception will say “This message cannot support the operation because it has been read.”  The WCF infrastructure reads the message while extracting the message parameters. This message is then passed to the event handler and any attempt to read it causes an exception. If you need to access message parameters in your <see
                cref="T:System.InvalidOperationException" />
+
+              
 
               
 

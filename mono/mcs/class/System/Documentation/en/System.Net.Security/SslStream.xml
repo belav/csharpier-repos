@@ -34,6 +34,8 @@
 
         
 
+        
+
         . An SSL connection, such as that provided by <see
          cref="T:System.Net.Security.SslStream" />
 
@@ -41,8 +43,12 @@
 
         
 
+        
+
         , should be used when communicating sensitive information between a client and a server. Using an <see
          cref="T:System.Net.Security.SslStream" />
+
+        
 
         
 
@@ -58,8 +64,12 @@
 
         
 
+        
+
          instance transmits data using a stream that you supply when creating the <see
          cref="T:System.Net.Security.SslStream" />
+
+        
 
         
 
@@ -72,8 +82,12 @@
 
         
 
+        
+
          also closes the underlying stream. Typically, the <see
          cref="T:System.Net.Security.SslStream" />
+
+        
 
         
 
@@ -86,8 +100,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Net.Sockets.TcpListener" />
+
+        
 
         
 
@@ -100,6 +118,8 @@
 
         
 
+        
+
          method provides a <see
          cref="T:System.Net.Sockets.NetworkStream" />
 
@@ -107,8 +127,12 @@
 
         
 
+        
+
          suitable for use with the <see
          cref="T:System.Net.Security.SslStream" />
+
+        
 
         
 
@@ -124,8 +148,12 @@
 
         
 
+        
+
         , the server and optionally, the client must be authenticated. The server must provide an X509 certificate that establishes proof of its identity and can request that the client also do so. Authentication must be performed before transmitting information using an <see
          cref="T:System.Net.Security.SslStream" />
+
+        
 
         
 
@@ -138,8 +166,12 @@
 
         
 
+        
+
          methods, which block until the authentication completes, or the asynchronous <see
          cref="Overload:System.Net.Security.SslStream.BeginAuthenticateAsClient" />
+
+        
 
         
 
@@ -152,8 +184,12 @@
 
         
 
+        
+
          or asynchronous <see
          cref="Overload:System.Net.Security.SslStream.BeginAuthenticateAsServer" />
+
+        
 
         
 
@@ -169,6 +205,8 @@
 
         
 
+        
+
          delegate when creating an <see
          cref="T:System.Net.Security.SslStream" />
 
@@ -176,8 +214,12 @@
 
         
 
+        
+
         . The server can also control validation by supplying a <see
          cref="T:System.Net.Security.RemoteCertificateValidationCallback" />
+
+        
 
         
 
@@ -193,8 +235,12 @@
 
         
 
+        
+
          delegate to select the correct certificate for the server. The client's certificates must be located in the current user's "My" certificate store. Client authentication via certificates is not supported for the <see
          cref="F:System.Security.Authentication.SslProtocols.Ssl2" />
+
+        
 
         
 
@@ -210,8 +256,12 @@
 
         
 
+        
+
         , and the <see
          cref="T:System.Net.Security.SslStream" />
+
+        
 
         
 
@@ -227,8 +277,12 @@
 
         
 
+        
+
          can be used by the client and server to exchange messages. Before sending or receiving information, the client and server should check the security services and levels provided by the <see
          cref="T:System.Net.Security.SslStream" />
+
+        
 
         
 
@@ -241,6 +295,8 @@
 
         
 
+        
+
          using the <see
          cref="P:System.Net.Security.SslStream.IsEncrypted" />
 
@@ -248,8 +304,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Net.Security.SslStream.IsSigned" />
+
+        
 
         
 
@@ -281,8 +341,12 @@
 
               
 
+              
+
                property and the associated <see
                cref="T:System.Security.Authentication.SslProtocols" />
+
+              
 
               
 
@@ -305,8 +369,12 @@
 
               
 
+              
+
                property and the associated <see
                cref="T:System.Security.Authentication.ExchangeAlgorithmType" />
+
+              
 
               
 
@@ -329,8 +397,12 @@
 
               
 
+              
+
                property and the associated <see
                cref="T:System.Security.Authentication.HashAlgorithmType" />
+
+              
 
               
 
@@ -353,8 +425,12 @@
 
               
 
+              
+
                property and the associated <see
                cref="T:System.Security.Authentication.CipherAlgorithmType" />
+
+              
 
               
 
@@ -377,6 +453,8 @@
 
               
 
+              
+
               , <see
                cref="P:System.Net.Security.SslStream.HashStrength" />
 
@@ -384,8 +462,12 @@
 
               
 
+              
+
               , and <see
                cref="P:System.Net.Security.SslStream.CipherStrength" />
+
+              
 
               
 
@@ -404,8 +486,12 @@
 
         
 
+        
+
          or asynchronous <see
          cref="M:System.Net.Security.SslStream.BeginWrite(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+        
 
         
 
@@ -418,8 +504,12 @@
 
         
 
+        
+
          or asynchronous <see
          cref="M:System.Net.Security.SslStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+        
 
         
 
@@ -430,6 +520,8 @@
       <para
         >If you specified to the <see
          cref="Overload:System.Net.Security.SslStream.#ctor" />
+
+        
 
         
 
@@ -446,11 +538,15 @@
 
           
 
+          
+
            object runs with the credentials of a Normal user, the application will not be able to access certificates installed in the local machine store unless permission has been explicitly given to the user to do so.</para
         >
       </block>
       <para>
         <see cref="T:System.Net.Security.SslStream" />
+
+        
 
         
 
@@ -463,8 +559,12 @@
 
         
 
+        
+
          when one is thrown from the inner stream will be treated as fatal by its caller. Reusing a <see
          cref="T:System.Net.Security.SslStream" />
+
+        
 
         
 
@@ -477,8 +577,12 @@
 
         
 
+        
+
          the <see
          cref="T:System.Net.Security.SslStream" />
+
+        
 
         
 
@@ -519,8 +623,12 @@
 
             
 
+            
+
              defaults to <see
              cref="F:System.Net.Security.EncryptionPolicy.RequireEncryption" />
+
+            
 
             
 
@@ -533,11 +641,15 @@
 
             
 
+            
+
              instance that is constructed.</para
           >
           <para
             >The use of the Null cipher is required when the encryption policy is set to <see
              cref="F:System.Net.Security.EncryptionPolicy.NoEncryption" />
+
+            
 
             
 
@@ -556,8 +668,12 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -573,6 +689,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Stream" />
 
@@ -580,8 +698,12 @@
 
           
 
+          
+
            object used by the <see
            cref="T:System.Net.Security.SslStream" />
+
+          
 
           
 
@@ -621,8 +743,12 @@
 
             
 
+            
+
              parameter, closing the <see
              cref="T:System.Net.Security.SslStream" />
+
+            
 
             
 
@@ -635,8 +761,12 @@
 
             
 
+            
+
              stream; you must explicitly close <paramref
              name="innerStream" />
+
+            
 
             
 
@@ -652,8 +782,12 @@
 
             
 
+            
+
              defaults to <see
              cref="F:System.Net.Security.EncryptionPolicy.RequireEncryption" />
+
+            
 
             
 
@@ -666,11 +800,15 @@
 
             
 
+            
+
              instance that is constructed.</para
           >
           <para
             >The use of the Null cipher is required when the encryption policy is set to <see
              cref="F:System.Net.Security.EncryptionPolicy.NoEncryption" />
+
+            
 
             
 
@@ -689,8 +827,12 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -706,6 +848,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Stream" />
 
@@ -713,8 +857,12 @@
 
           
 
+          
+
            object used by the <see
            cref="T:System.Net.Security.SslStream" />
+
+          
 
           
 
@@ -729,6 +877,8 @@
 
           
 
+          
+
           A Boolean value that indicates the closure behavior of the <see
            cref="T:System.IO.Stream" />
 
@@ -736,8 +886,12 @@
 
           
 
+          
+
            object used by the <see
            cref="T:System.Net.Security.SslStream" />
+
+          
 
           
 
@@ -786,8 +940,12 @@
 
             
 
+            
+
              parameter, closing the <see
              cref="T:System.Net.Security.SslStream" />
+
+            
 
             
 
@@ -800,8 +958,12 @@
 
             
 
+            
+
              stream; you must explicitly close <paramref
              name="innerStream" />
+
+            
 
             
 
@@ -817,6 +979,8 @@
 
             
 
+            
+
              delegate's <paramref
              name="certificateErrors" />
 
@@ -824,8 +988,12 @@
 
             
 
+            
+
              argument contains any Windows error codes returned by the channel Security Support Provider Interface (SSPI). The return value of the method invoked by the <paramref
              name="userCertificateValidationCallback" />
+
+            
 
             
 
@@ -841,8 +1009,12 @@
 
             
 
+            
+
              delegate's method is invoked. You can use the method to determine whether the selected cryptographic algorithms and strengths are sufficient for your application. If not, the method should return false to prevent the <see
              cref="T:System.Net.Security.SslStream" />
+
+            
 
             
 
@@ -858,8 +1030,12 @@
 
             
 
+            
+
              defaults to <see
              cref="F:System.Net.Security.EncryptionPolicy.RequireEncryption" />
+
+            
 
             
 
@@ -872,11 +1048,15 @@
 
             
 
+            
+
              instance that is constructed.</para
           >
           <para
             >The use of the Null cipher is required when the encryption policy is set to <see
              cref="F:System.Net.Security.EncryptionPolicy.NoEncryption" />
+
+            
 
             
 
@@ -893,8 +1073,12 @@
 
               
 
+              
+
                (if there is one), or tries to reuse an anonymous sessions if <see
                cref="P:System.Net.HttpWebRequest.ClientCertificates" />
+
+              
 
               
 
@@ -917,8 +1101,12 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -934,6 +1122,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Stream" />
 
@@ -941,8 +1131,12 @@
 
           
 
+          
+
            object used by the <see
            cref="T:System.Net.Security.SslStream" />
+
+          
 
           
 
@@ -957,6 +1151,8 @@
 
           
 
+          
+
           A Boolean value that indicates the closure behavior of the <see
            cref="T:System.IO.Stream" />
 
@@ -964,8 +1160,12 @@
 
           
 
+          
+
            object used by the <see
            cref="T:System.Net.Security.SslStream" />
+
+          
 
           
 
@@ -980,8 +1180,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.Security.RemoteCertificateValidationCallback" />
+
+          
 
           
 
@@ -1034,8 +1238,12 @@
 
             
 
+            
+
              parameter, closing the <see
              cref="T:System.Net.Security.SslStream" />
+
+            
 
             
 
@@ -1048,8 +1256,12 @@
 
             
 
+            
+
              stream; you must explicitly close <paramref
              name="innerStream" />
+
+            
 
             
 
@@ -1065,6 +1277,8 @@
 
             
 
+            
+
              delegate's <paramref
              name="certificateErrors" />
 
@@ -1072,8 +1286,12 @@
 
             
 
+            
+
              argument contains any Windows error codes returned by the channel Security Support Provider Interface (SSPI). The return value of the method invoked by the <paramref
              name="userCertificateValidationCallback" />
+
+            
 
             
 
@@ -1089,8 +1307,12 @@
 
             
 
+            
+
              delegate's method is invoked. You can use the method to determine whether the selected cryptographic algorithms and strengths are sufficient for your application. If not, the method should return false to prevent the <see
              cref="T:System.Net.Security.SslStream" />
+
+            
 
             
 
@@ -1106,11 +1328,15 @@
 
             
 
+            
+
              delegate is useful when your application has multiple certificates and must dynamically choose a certificate. Certificates in the "MY" store are passed to the method invoked by the delegate. </para
           >
           <para
             >If a value is not specified in the configuration file for encryptionpolicy, the <see
              cref="T:System.Net.Security.EncryptionPolicy" />
+
+            
 
             
 
@@ -1123,8 +1349,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Net.Security.SslStream" />
+
+            
 
             
 
@@ -1135,6 +1365,8 @@
           <para
             >The use of the Null cipher is required when the encryption policy is set to <see
              cref="F:System.Net.Security.EncryptionPolicy.NoEncryption" />
+
+            
 
             
 
@@ -1156,8 +1388,12 @@
 
             
 
+            
+
              class using the specified <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -1173,6 +1409,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.Stream" />
 
@@ -1180,8 +1418,12 @@
 
           
 
+          
+
            object used by the <see
            cref="T:System.Net.Security.SslStream" />
+
+          
 
           
 
@@ -1196,6 +1438,8 @@
 
           
 
+          
+
           A Boolean value that indicates the closure behavior of the <see
            cref="T:System.IO.Stream" />
 
@@ -1203,8 +1447,12 @@
 
           
 
+          
+
            object used by the <see
            cref="T:System.Net.Security.SslStream" />
+
+          
 
           
 
@@ -1219,8 +1467,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.Security.RemoteCertificateValidationCallback" />
+
+          
 
           
 
@@ -1235,8 +1487,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.Security.LocalCertificateSelectionCallback" />
+
+          
 
           
 
@@ -1278,8 +1534,12 @@
 
             
 
+            
+
             . No client certificates are used in the authentication. The certificate revocation list is not checked during authentication. The value specified for <paramref
              name="targetHost" />
+
+            
 
             
 
@@ -1295,8 +1555,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.Security.SslStream.IsSigned" />
+
+            
 
             
 
@@ -1309,8 +1573,12 @@
 
             
 
+            
+
             . Check the <see
              cref="P:System.Net.Security.SslStream.IsMutuallyAuthenticated" />
+
+            
 
             
 
@@ -1326,8 +1594,12 @@
 
             
 
+            
+
             , and this <see
              cref="T:System.Net.Security.SslStream" />
+
+            
 
             
 
@@ -1347,8 +1619,12 @@
 
           
 
+          
+
           The name of the server that shares this <see
            cref="T:System.Net.Security.SslStream" />
+
+          
 
           
 
@@ -1396,8 +1672,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.Security.SslStream.IsSigned" />
+
+            
 
             
 
@@ -1410,8 +1690,12 @@
 
             
 
+            
+
             . Check the <see
              cref="P:System.Net.Security.SslStream.IsMutuallyAuthenticated" />
+
+            
 
             
 
@@ -1427,8 +1711,12 @@
 
             
 
+            
+
             , and this <see
              cref="T:System.Net.Security.SslStream" />
+
+            
 
             
 
@@ -1451,8 +1739,12 @@
 
           
 
+          
+
           The name of the server that will share this <see
            cref="T:System.Net.Security.SslStream" />
+
+          
 
           
 
@@ -1467,8 +1759,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+
+          
 
           
 
@@ -1483,8 +1779,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Authentication.SslProtocols" />
+
+          
 
           
 
@@ -1499,8 +1799,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -1540,8 +1844,12 @@
 
             
 
+            
+
             . No client certificates are used in the authentication. The certificate revocation list is not checked during authentication. The value specified for <paramref
              name="targetHost" />
+
+            
 
             
 
@@ -1557,8 +1865,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.Security.SslStream.IsSigned" />
+
+            
 
             
 
@@ -1571,8 +1883,12 @@
 
             
 
+            
+
             . Check the <see
              cref="P:System.Net.Security.SslStream.IsMutuallyAuthenticated" />
+
+            
 
             
 
@@ -1588,8 +1904,12 @@
 
             
 
+            
+
             , and this <see
              cref="T:System.Net.Security.SslStream" />
+
+            
 
             
 
@@ -1617,8 +1937,12 @@
 
           
 
+          
+
           The name of the server that shares this <see
            cref="T:System.Net.Security.SslStream" />
+
+          
 
           
 
@@ -1664,8 +1988,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.Security.SslStream.IsSigned" />
+
+            
 
             
 
@@ -1678,8 +2006,12 @@
 
             
 
+            
+
             . Check the <see
              cref="P:System.Net.Security.SslStream.IsMutuallyAuthenticated" />
+
+            
 
             
 
@@ -1695,8 +2027,12 @@
 
             
 
+            
+
             , and this <see
              cref="T:System.Net.Security.SslStream" />
+
+            
 
             
 
@@ -1727,8 +2063,12 @@
 
           
 
+          
+
           The name of the server that will share this <see
            cref="T:System.Net.Security.SslStream" />
+
+          
 
           
 
@@ -1743,8 +2083,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+
+          
 
           
 
@@ -1759,8 +2103,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Authentication.SslProtocols" />
+
+          
 
           
 
@@ -1775,8 +2123,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -1821,11 +2173,15 @@
 
             
 
+            
+
             . The certificate revocation list is not checked during authentication. The client is not required to provide a certificate for authentication.</para
           >
           <para
             >This method blocks until the operation completes. To prevent blocking until the operation completes, use one of the <see
              cref="Overload:System.Net.Security.SslStream.BeginAuthenticateAsServer" />
+
+            
 
             
 
@@ -1841,8 +2197,12 @@
 
             
 
+            
+
             , and this <see
              cref="T:System.Net.Security.SslStream" />
+
+            
 
             
 
@@ -1857,6 +2217,8 @@
         </summary>
         <param name="serverCertificate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1904,6 +2266,8 @@
 
             
 
+            
+
              method overloads.</para
           >
           <para
@@ -1914,8 +2278,12 @@
 
             
 
+            
+
             , and this <see
              cref="T:System.Net.Security.SslStream" />
+
+            
 
             
 
@@ -1935,6 +2303,8 @@
 
           
 
+          
+
           The X509Certificate used to authenticate the server.</param
         >
         <param name="clientCertificateRequired">
@@ -1944,8 +2314,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -1960,8 +2334,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Authentication.SslProtocols" />
+
+          
 
           
 
@@ -1976,8 +2354,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -2020,6 +2402,8 @@
 
             
 
+            
+
             . The certificate revocation list is not checked during authentication. The client is not required to provide a certificate for authentication.</para
           >
           <para
@@ -2030,8 +2414,12 @@
 
             
 
+            
+
             , and this <see
              cref="T:System.Net.Security.SslStream" />
+
+            
 
             
 
@@ -2054,6 +2442,8 @@
         </returns>
         <param name="serverCertificate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2099,8 +2489,12 @@
 
             
 
+            
+
             , and this <see
              cref="T:System.Net.Security.SslStream" />
+
+            
 
             
 
@@ -2128,6 +2522,8 @@
 
           
 
+          
+
           The X509Certificate used to authenticate the server.</param
         >
         <param name="clientCertificateRequired">
@@ -2137,8 +2533,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -2153,8 +2553,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Authentication.SslProtocols" />
+
+          
 
           
 
@@ -2169,8 +2573,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -2214,11 +2622,15 @@
 
             
 
+            
+
             . No client certificates are used in the authentication. The certificate revocation list is not checked during authentication.</para
           >
           <para
             >The value specified for <paramref
              name="targetHost" />
+
+            
 
             
 
@@ -2234,8 +2646,12 @@
 
             
 
+            
+
              method. Typically, the method is invoked by the <paramref
              name="asyncCallback" />
+
+            
 
             
 
@@ -2246,6 +2662,8 @@
           <para
             >This method does not block while the operation completes. To block until the operation completes, use one of the <see
              cref="Overload:System.Net.Security.SslStream.AuthenticateAsClient" />
+
+            
 
             
 
@@ -2267,8 +2685,12 @@
 
             
 
+            
+
             , this <see
              cref="T:System.Net.Security.SslStream" />
+
+            
 
             
 
@@ -2291,6 +2713,8 @@
 
             
 
+            
+
              object that indicates the status of the asynchronous operation. </para
           >
         </returns>
@@ -2301,8 +2725,12 @@
 
           
 
+          
+
           The name of the server that shares this <see
            cref="T:System.Net.Security.SslStream" />
+
+          
 
           
 
@@ -2317,8 +2745,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -2333,8 +2765,12 @@
 
           
 
+          
+
           A user-defined object that contains information about the operation. This object is passed to the <paramref
            name="asyncCallback" />
+
+          
 
           
 
@@ -2384,11 +2820,15 @@
 
             
 
+            
+
              must match the name on the server's certificate. </para
           >
           <para
             >The asynchronous authentication operation must be completed by calling the <see
              cref="M:System.Net.Security.SslStream.EndAuthenticateAsClient(System.IAsyncResult)" />
+
+            
 
             
 
@@ -2401,11 +2841,15 @@
 
             
 
+            
+
              delegate.</para
           >
           <para
             >This method does not block while the operation completes. To block until the operation completes, use one of the <see
              cref="Overload:System.Net.Security.SslStream.AuthenticateAsClient" />
+
+            
 
             
 
@@ -2427,8 +2871,12 @@
 
             
 
+            
+
             , this <see
              cref="T:System.Net.Security.SslStream" />
+
+            
 
             
 
@@ -2454,6 +2902,8 @@
 
             
 
+            
+
              object that indicates the status of the asynchronous operation. </para
           >
         </returns>
@@ -2464,8 +2914,12 @@
 
           
 
+          
+
           The name of the server that shares this <see
            cref="T:System.Net.Security.SslStream" />
+
+          
 
           
 
@@ -2480,8 +2934,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Cryptography.X509Certificates.X509CertificateCollection" />
+
+          
 
           
 
@@ -2496,8 +2954,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Authentication.SslProtocols" />
+
+          
 
           
 
@@ -2512,8 +2974,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -2528,8 +2994,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -2544,8 +3014,12 @@
 
           
 
+          
+
           A user-defined object that contains information about the operation. This object is passed to the <paramref
            name="asyncCallback" />
+
+          
 
           
 
@@ -2592,11 +3066,15 @@
 
             
 
+            
+
             . The certificate revocation list is not checked during authentication. The client is not required to provide a certificate for authentication.</para
           >
           <para
             >The asynchronous authentication operation must be completed by calling the <see
              cref="M:System.Net.Security.SslStream.EndAuthenticateAsClient(System.IAsyncResult)" />
+
+            
 
             
 
@@ -2609,11 +3087,15 @@
 
             
 
+            
+
              delegate.</para
           >
           <para
             >This method does not block while the operation completes. To block until the operation completes, use one of the <see
              cref="Overload:System.Net.Security.SslStream.AuthenticateAsClient" />
+
+            
 
             
 
@@ -2635,8 +3117,12 @@
 
             
 
+            
+
             , this <see
              cref="T:System.Net.Security.SslStream" />
+
+            
 
             
 
@@ -2659,11 +3145,15 @@
 
             
 
+            
+
              object indicating the status of the asynchronous operation. </para
           >
         </returns>
         <param name="serverCertificate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2678,8 +3168,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -2694,8 +3188,12 @@
 
           
 
+          
+
           A user-defined object that contains information about the operation. This object is passed to the <paramref
            name="asyncCallback" />
+
+          
 
           
 
@@ -2745,8 +3243,12 @@
 
             
 
+            
+
              method. Typically, the method is invoked by the <paramref
              name="asyncCallback" />
+
+            
 
             
 
@@ -2757,6 +3259,8 @@
           <para
             >This method does not block while the operation completes. To block until the operation completes, use one of the <see
              cref="Overload:System.Net.Security.SslStream.AuthenticateAsServer" />
+
+            
 
             
 
@@ -2778,8 +3282,12 @@
 
             
 
+            
+
             , this <see
              cref="T:System.Net.Security.SslStream" />
+
+            
 
             
 
@@ -2802,11 +3310,15 @@
 
             
 
+            
+
              object that indicates the status of the asynchronous operation. </para
           >
         </returns>
         <param name="serverCertificate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2821,8 +3333,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -2837,8 +3353,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Authentication.SslProtocols" />
+
+          
 
           
 
@@ -2853,8 +3373,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Boolean" />
+
+          
 
           
 
@@ -2869,8 +3393,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -2885,8 +3413,12 @@
 
           
 
+          
+
           A user-defined object that contains information about the operation. This object is passed to the <paramref
            name="asyncCallback" />
+
+          
 
           
 
@@ -2932,8 +3464,12 @@
 
             
 
+            
+
              method. Typically, the method is invoked by the <paramref
              name="asyncCallback" />
+
+            
 
             
 
@@ -2944,6 +3480,8 @@
           <para
             >This method does not block while the operation completes. To block until the operation completes, use the <see
              cref="M:System.Net.Security.SslStream.Read(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -2965,11 +3503,15 @@
 
             
 
+            
+
              class does not support multiple simultaneous read operations.</para
           >
           <para
             >You cannot call this method until you have successfully authenticated. To authenticate call one of the <see
              cref="Overload:System.Net.Security.SslStream.AuthenticateAsClient" />
+
+            
 
             
 
@@ -2982,6 +3524,8 @@
 
             
 
+            
+
             , <see
              cref="Overload:System.Net.Security.SslStream.AuthenticateAsServer" />
 
@@ -2989,8 +3533,12 @@
 
             
 
+            
+
             , <see
              cref="Overload:System.Net.Security.SslStream.BeginAuthenticateAsServer" />
+
+            
 
             
 
@@ -3013,6 +3561,8 @@
 
             
 
+            
+
              object that indicates the status of the asynchronous operation. </para
           >
         </returns>
@@ -3023,8 +3573,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -3039,8 +3593,12 @@
 
           
 
+          
+
           The zero-based location in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -3055,6 +3613,8 @@
 
           
 
+          
+
           The maximum number of bytes to read from the stream.</param
         >
         <param name="asyncCallback">
@@ -3064,8 +3624,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -3080,8 +3644,12 @@
 
           
 
+          
+
           A user-defined object that contains information about the read operation. This object is passed to the <paramref
            name="asyncCallback" />
+
+          
 
           
 
@@ -3128,6 +3696,8 @@
 
             
 
+            
+
             s from the specified buffer to the stream.</para
           >
         </summary>
@@ -3136,6 +3706,8 @@
           <para
             >An <see
              cref="T:System.IAsyncResult" />
+
+            
 
             
 
@@ -3151,8 +3723,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -3167,8 +3743,12 @@
 
           
 
+          
+
           The zero-based location in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -3183,6 +3763,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
 
@@ -3190,8 +3772,12 @@
 
           
 
+          
+
            value that specifies the number of bytes to read from <paramref
            name="buffer" />
+
+          
 
           
 
@@ -3206,8 +3792,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.AsyncCallback" />
+
+          
 
           
 
@@ -3222,8 +3812,12 @@
 
           
 
+          
+
           A user-defined object that contains information about the write operation. This object is passed to the <paramref
            name="asyncCallback" />
+
+          
 
           
 
@@ -3257,11 +3851,15 @@
 
             
 
+            
+
              on the underlying stream.</para
           >
           <para
             >The underlying stream is specified when you create an instance of the <see
              cref="T:System.Net.Security.SslStream" />
+
+            
 
             
 
@@ -3275,6 +3873,8 @@
           <para
             >Gets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -3309,11 +3909,15 @@
 
             
 
+            
+
              object or its underlying stream.</para
           >
           <para
             >The underlying stream is specified when you create an instance of the <see
              cref="T:System.Net.Security.SslStream" />
+
+            
 
             
 
@@ -3327,6 +3931,8 @@
           <para
             >Gets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -3361,11 +3967,15 @@
 
             
 
+            
+
              on the underlying stream.</para
           >
           <para
             >The underlying stream is specified when you create an instance of the <see
              cref="T:System.Net.Security.SslStream" />
+
+            
 
             
 
@@ -3379,6 +3989,8 @@
           <para
             >Gets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -3413,11 +4025,15 @@
 
             
 
+            
+
              on the underlying stream.</para
           >
           <para
             >The underlying stream is specified when you create an instance of the <see
              cref="T:System.Net.Security.SslStream" />
+
+            
 
             
 
@@ -3431,6 +4047,8 @@
           <para
             >Gets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -3472,6 +4090,8 @@
 
             
 
+            
+
              value that indicates whether the certificate revocation list is checked during the certificate validation process.</para
           >
         </summary>
@@ -3507,8 +4127,12 @@
 
             
 
+            
+
              is required for the <see
              cref="P:System.Net.Security.SslStream.CipherAlgorithm" />
+
+            
 
             
 
@@ -3521,8 +4145,12 @@
 
             
 
+            
+
              enumeration value is used to construct a <see
              cref="T:System.Net.Security.SslStream" />
+
+            
 
             
 
@@ -3538,8 +4166,12 @@
 
             
 
+            
+
              value. So even if the <see
              cref="F:System.Security.Authentication.CipherAlgorithmType.Null" />
+
+            
 
             
 
@@ -3552,8 +4184,12 @@
 
             
 
+            
+
              instance, the <see
              cref="T:System.Net.Security.EncryptionPolicy" />
+
+            
 
             
 
@@ -3566,8 +4202,12 @@
 
             
 
+            
+
             . The <see
              cref="F:System.Security.Authentication.CipherAlgorithmType.Null" />
+
+            
 
             
 
@@ -3581,6 +4221,8 @@
           <para
             >Gets a value that identifies the bulk encryption algorithm used by this <see
              cref="T:System.Net.Security.SslStream" />
+
+            
 
             
 
@@ -3646,6 +4288,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3680,8 +4324,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -3694,8 +4342,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -3711,8 +4363,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Net.Security.SslStream" />
+
+            
 
             
 
@@ -3731,11 +4387,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3777,8 +4437,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.Security.SslStream.IsSigned" />
+
+            
 
             
 
@@ -3791,8 +4455,12 @@
 
             
 
+            
+
             . Check the <see
              cref="P:System.Net.Security.SslStream.IsMutuallyAuthenticated" />
+
+            
 
             
 
@@ -3808,8 +4476,12 @@
 
             
 
+            
+
             , and this <see
              cref="T:System.Net.Security.SslStream" />
+
+            
 
             
 
@@ -3820,6 +4492,8 @@
           <para
             >To perform this operation synchronously, use one of the <see
              cref="Overload:System.Net.Security.SslStream.AuthenticateAsServer" />
+
+            
 
             
 
@@ -3838,11 +4512,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="asyncResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3855,8 +4533,12 @@
 
           
 
+          
+
            instance returned by a call to <see
            cref="Overload:System.Net.Security.SslStream.BeginAuthenticateAsServer" />
+
+          
 
           
 
@@ -3898,8 +4580,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Net.Security.SslStream.IsSigned" />
+
+            
 
             
 
@@ -3912,8 +4598,12 @@
 
             
 
+            
+
             . Check the <see
              cref="P:System.Net.Security.SslStream.IsMutuallyAuthenticated" />
+
+            
 
             
 
@@ -3929,8 +4619,12 @@
 
             
 
+            
+
             , and this <see
              cref="T:System.Net.Security.SslStream" />
+
+            
 
             
 
@@ -3941,6 +4635,8 @@
           <para
             >To perform this operation synchronously, use one of the <see
              cref="Overload:System.Net.Security.SslStream.AuthenticateAsClient" />
+
+            
 
             
 
@@ -3959,11 +4655,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="asyncResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3976,8 +4676,12 @@
 
           
 
+          
+
            instance returned by a call to <see
            cref="Overload:System.Net.Security.SslStream.BeginAuthenticateAsClient" />
+
+          
 
           
 
@@ -4020,11 +4724,15 @@
 
             
 
+            
+
              method. </para
           >
           <para
             >You cannot call this method until you have successfully authenticated. To authenticate call one of the <see
              cref="Overload:System.Net.Security.SslStream.AuthenticateAsClient" />
+
+            
 
             
 
@@ -4037,6 +4745,8 @@
 
             
 
+            
+
             , <see
              cref="Overload:System.Net.Security.SslStream.AuthenticateAsServer" />
 
@@ -4044,8 +4754,12 @@
 
             
 
+            
+
             , <see
              cref="Overload:System.Net.Security.SslStream.BeginAuthenticateAsServer" />
+
+            
 
             
 
@@ -4064,6 +4778,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -4072,6 +4788,8 @@
           <para
             >A <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -4087,8 +4805,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IAsyncResult" />
+
+          
 
           
 
@@ -4132,8 +4854,12 @@
 
             
 
+            
+
             , or <see
              cref="Overload:System.Net.Security.SslStream.BeginAuthenticateAsClient" />
+
+            
 
             
 
@@ -4146,8 +4872,12 @@
 
             
 
+            
+
             , <see
              cref="Overload:System.Net.Security.SslStream.BeginAuthenticateAsServer" />
+
+            
 
             
 
@@ -4158,6 +4888,8 @@
           <para
             >To perform this operation synchronously, use the <see
              cref="Overload:System.Net.Security.SslStream.Write" />
+
+            
 
             
 
@@ -4176,6 +4908,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -4186,8 +4920,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IAsyncResult" />
+
+          
 
           
 
@@ -4220,6 +4958,8 @@
           <para
             >This method invokes <see
              cref="M:System.IO.Stream.Flush" />
+
+            
 
             
 
@@ -4312,8 +5052,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.Net.Security.SslStream.BeginAuthenticateAsClient" />
+
+            
 
             
 
@@ -4326,8 +5070,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.Net.Security.SslStream.BeginAuthenticateAsServer" />
+
+            
 
             
 
@@ -4341,6 +5089,8 @@
           <para
             >Gets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -4379,8 +5129,12 @@
 
             
 
+            
+
              value that indicates whether this <see
              cref="T:System.Net.Security.SslStream" />
+
+            
 
             
 
@@ -4422,6 +5176,8 @@
 
             
 
+            
+
              value that indicates whether both server and client have been authenticated.</para
           >
         </summary>
@@ -4452,8 +5208,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.Net.Security.SslStream.BeginAuthenticateAsServer" />
+
+            
 
             
 
@@ -4472,8 +5232,12 @@
 
             
 
+            
+
              value that indicates whether the local side of the connection used by this <see
              cref="T:System.Net.Security.SslStream" />
+
+            
 
             
 
@@ -4507,6 +5271,8 @@
           <para
             >Gets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -4547,6 +5313,8 @@
 
             
 
+            
+
              until the authentication occurs.</para
           >
           <para>The key exchange algorithm protects information used to generate shared keys.</para>
@@ -4556,6 +5324,8 @@
           <para
             >Gets the key exchange algorithm used by this <see
              cref="T:System.Net.Security.SslStream" />
+
+            
 
             
 
@@ -4629,6 +5399,8 @@
 
             
 
+            
+
              on the underlying stream. If the underlying stream is not seekable, this method typically throws an exception. The run-time type of the underlying stream determines the run-time type of the exception that is thrown.</para
           >
         </remarks>
@@ -4689,6 +5461,8 @@
 
             
 
+            
+
              on the underlying stream. If the underlying stream is not seekable, this method typically throws an exception. The run-time type of the underlying stream determines the run-time type of the exception that is thrown.</para
           >
         </remarks>
@@ -4732,6 +5506,8 @@
 
             
 
+            
+
              bytes from the stream and stores them in <paramref
              name="buffer" />
 
@@ -4739,8 +5515,12 @@
 
             
 
+            
+
              beginning at <paramref
              name="offset" />
+
+            
 
             
 
@@ -4756,8 +5536,12 @@
 
             
 
+            
+
             , or <see
              cref="Overload:System.Net.Security.SslStream.BeginAuthenticateAsClient" />
+
+            
 
             
 
@@ -4770,8 +5554,12 @@
 
             
 
+            
+
             , <see
              cref="Overload:System.Net.Security.SslStream.BeginAuthenticateAsServer" />
+
+            
 
             
 
@@ -4782,6 +5570,8 @@
           <para
             >To perform this operation asynchronously, use the <see
              cref="M:System.Net.Security.SslStream.BeginRead(System.Byte[],System.Int32,System.Int32,System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -4804,6 +5594,8 @@
 
             
 
+            
+
              value that specifies the number of bytes read. When there is no more data to be read, returns 0.</para
           >
         </returns>
@@ -4814,8 +5606,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -4830,6 +5626,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Int32" />
 
@@ -4837,8 +5635,12 @@
 
           
 
+          
+
            that contains the zero-based location in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -4853,8 +5655,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -4888,8 +5694,12 @@
 
             
 
+            
+
              on the underlying stream. When you set this property, the <see
              cref="P:System.IO.Stream.ReadTimeout" />
+
+            
 
             
 
@@ -4905,6 +5715,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Net.Security.SslStream.ReadTimeout" />
 
@@ -4912,8 +5724,12 @@
 
             
 
+            
+
              is in milliseconds and is set to <see
              cref="F:System.Threading.Timeout.Infinite" />
+
+            
 
             
 
@@ -4988,6 +5804,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -4996,6 +5814,8 @@
           <para
             >Throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -5014,6 +5834,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -5024,10 +5846,14 @@
 
           
 
+          
+
           This value is ignored.</param
         >
         <param name="origin">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5066,8 +5892,12 @@
 
             
 
+            
+
              on the underlying stream specified when this <see
              cref="T:System.Net.Security.SslStream" />
+
+            
 
             
 
@@ -5087,8 +5917,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int64" />
+
+          
 
           
 
@@ -5128,8 +5962,12 @@
 
             
 
+            
+
              is created. If no security protocol was passed to the constructor, the instance is created using <see
              cref="F:System.Security.Authentication.SslProtocols.Default" />
+
+            
 
             
 
@@ -5173,11 +6011,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >You cannot call this method until you have successfully authenticated. To authenticate call one of the <see
              cref="Overload:System.Net.Security.SslStream.AuthenticateAsClient" />
+
+            
 
             
 
@@ -5190,8 +6032,12 @@
 
             
 
+            
+
             , <see
              cref="Overload:System.Net.Security.SslStream.AuthenticateAsServer" />
+
+            
 
             
 
@@ -5204,11 +6050,15 @@
 
             
 
+            
+
              methods.</para
           >
           <para
             >The <see
              cref="T:System.Net.Security.SslStream" />
+
+            
 
             
 
@@ -5228,8 +6078,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -5273,11 +6127,15 @@
 
             
 
+            
+
              method.</para
           >
           <para
             >You cannot call this method until you have successfully authenticated. To authenticate call one of the <see
              cref="Overload:System.Net.Security.SslStream.AuthenticateAsClient" />
+
+            
 
             
 
@@ -5290,8 +6148,12 @@
 
             
 
+            
+
             , <see
              cref="Overload:System.Net.Security.SslStream.AuthenticateAsServer" />
+
+            
 
             
 
@@ -5304,11 +6166,15 @@
 
             
 
+            
+
              methods.</para
           >
           <para
             >The <see
              cref="T:System.Net.Security.SslStream" />
+
+            
 
             
 
@@ -5327,6 +6193,8 @@
 
             
 
+            
+
             s to the underlying stream using the specified buffer and offset.</para
           >
         </summary>
@@ -5337,8 +6205,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Byte" />
+
+          
 
           
 
@@ -5353,6 +6225,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Int32" />
 
@@ -5360,8 +6234,12 @@
 
           
 
+          
+
            that contains the zero-based location in <paramref
            name="buffer" />
+
+          
 
           
 
@@ -5376,6 +6254,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Int32" />
 
@@ -5383,8 +6263,12 @@
 
           
 
+          
+
            that contains the number of bytes to read from <paramref
            name="buffer" />
+
+          
 
           
 
@@ -5418,8 +6302,12 @@
 
             
 
+            
+
              on the underlying stream. For set operations, the specified value sets the <see
              cref="P:System.IO.Stream.WriteTimeout" />
+
+            
 
             
 
@@ -5435,6 +6323,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Net.Security.SslStream.WriteTimeout" />
 
@@ -5442,8 +6332,12 @@
 
             
 
+            
+
              is in milliseconds and is set to <see
              cref="F:System.Threading.Timeout.Infinite" />
+
+            
 
             
 

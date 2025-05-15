@@ -17,6 +17,8 @@
 
         
 
+        
+
          namespace provides common enumerations, interfaces, and classes that are used by serialization formatters.</para
       >
     </summary>

@@ -27,8 +27,12 @@
 
         
 
+        
+
          class is used to convert data to and from <see
          cref="T:System.Web.UI.WebControls.FontUnit" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
           
 
+          
+
           . For more information, see the examples in the <see
            cref="T:System.ComponentModel.TypeConverter" />
+
+          
 
           
 
@@ -66,8 +74,12 @@
 
         
 
+        
+
          to a string. It also converts a string to a <see
          cref="T:System.Web.UI.WebControls.FontUnit" />
+
+        
 
         
 
@@ -95,8 +107,12 @@
 
               
 
+              
+
                object. For more information, see the examples in <see
                cref="T:System.ComponentModel.TypeConverter" />
+
+              
 
               
 
@@ -111,6 +127,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.FontUnitConverter" />
+
+            
 
             
 
@@ -149,6 +167,8 @@
 
             
 
+            
+
              method to determine whether the data type specified by the <paramref
              name="sourceType" />
 
@@ -156,8 +176,12 @@
 
             
 
+            
+
              parameter can be converted to a <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -174,8 +198,12 @@
 
               
 
+              
+
                is <see
                cref="T:System.String" />
+
+              
 
               
 
@@ -188,8 +216,12 @@
 
               
 
+              
+
                is <see
                cref="T:System.String" />
+
+              
 
               
 
@@ -209,6 +241,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -222,8 +256,12 @@
 
             
 
+            
+
              parameter can be converted to a <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -239,8 +277,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -255,8 +297,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -299,6 +345,8 @@
 
             
 
+            
+
              object to the specified type.</para
           >
         </summary>
@@ -307,6 +355,8 @@
           <para
             >true if the converter supports converting a <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -323,8 +373,12 @@
 
               
 
+              
+
                is <see
                cref="T:System.String" />
+
+              
 
               
 
@@ -337,8 +391,12 @@
 
               
 
+              
+
                into is <see
                cref="T:System.String" />
+
+              
 
               
 
@@ -355,8 +413,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -371,8 +433,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -407,8 +473,12 @@
 
             
 
+            
+
              method to convert the object specified by the <paramref
              name="value" />
+
+            
 
             
 
@@ -421,8 +491,12 @@
 
             
 
+            
+
              in the culture specified by the <paramref
              name="culture" />
+
+            
 
             
 
@@ -439,8 +513,12 @@
 
               
 
+              
+
               , <see
                cref="F:System.Web.UI.WebControls.FontUnit.Empty" />
+
+              
 
               
 
@@ -453,6 +531,8 @@
             <para
               >This method can only convert a string to a  <see
                cref="T:System.Web.UI.WebControls.FontUnit" />
+
+              
 
               
 
@@ -472,6 +552,8 @@
 
             
 
+            
+
              in a specific culture.</para
           >
         </summary>
@@ -480,6 +562,8 @@
           <para
             >A <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -495,8 +579,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -511,6 +599,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
 
@@ -518,8 +608,12 @@
 
           
 
+          
+
            that specifies the culture to represent the <see
            cref="T:System.Web.UI.WebControls.FontUnit" />
+
+          
 
           
 
@@ -534,8 +628,12 @@
 
           
 
+          
+
           The object to convert to a <see
            cref="T:System.Web.UI.WebControls.FontUnit" />
+
+          
 
           
 
@@ -575,8 +673,12 @@
 
             
 
+            
+
              method to convert the <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -589,8 +691,12 @@
 
             
 
+            
+
              parameter to an object with the data type specified by the <paramref
              name="destinationType" />
+
+            
 
             
 
@@ -606,8 +712,12 @@
 
               
 
+              
+
                is returned from this method if the <paramref
                name="value" />
+
+              
 
               
 
@@ -620,8 +730,12 @@
 
               
 
+              
+
                is also returned if the <see
                cref="P:System.Web.UI.WebControls.FontUnit.Type" />
+
+              
 
               
 
@@ -634,8 +748,12 @@
 
               
 
+              
+
                specified by the <paramref
                name="value" />
+
+              
 
               
 
@@ -648,6 +766,8 @@
             <para
               >This method can only convert a <see
                cref="T:System.Web.UI.WebControls.FontUnit" />
+
+              
 
               
 
@@ -667,6 +787,8 @@
 
             
 
+            
+
              to an object with a different data type.</para
           >
         </summary>
@@ -675,6 +797,8 @@
           <para
             >A <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -690,8 +814,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -706,6 +834,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
 
@@ -713,8 +843,12 @@
 
           
 
+          
+
            that specifies the culture to represent the <see
            cref="T:System.Web.UI.WebControls.FontUnit" />
+
+          
 
           
 
@@ -729,6 +863,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Object" />
 
@@ -736,8 +872,12 @@
 
           
 
+          
+
            that represents the <see
            cref="T:System.Web.UI.WebControls.FontUnit" />
+
+          
 
           
 
@@ -752,8 +892,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -790,8 +934,12 @@
 
             
 
+            
+
              method to retrieve a <see
              cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
+
+            
 
             
 
@@ -804,8 +952,12 @@
 
             
 
+            
+
             . This collection contains all the fields in the <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -824,8 +976,12 @@
 
             
 
+            
+
              containing the standard values for a <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -844,8 +1000,12 @@
 
             
 
+            
+
              containing the standard values for a <see
              cref="T:System.Web.UI.WebControls.FontUnit" />
+
+            
 
             
 
@@ -861,8 +1021,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -899,6 +1063,8 @@
 
             
 
+            
+
              method to determine whether the <see
              cref="T:System.ComponentModel.TypeConverter.StandardValuesCollection" />
 
@@ -906,8 +1072,12 @@
 
             
 
+            
+
              returned by the <see
              cref="M:System.Web.UI.WebControls.FontUnitConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
+
+            
 
             
 
@@ -926,8 +1096,12 @@
 
             
 
+            
+
              returned by the <see
              cref="M:System.Web.UI.WebControls.FontUnitConverter.GetStandardValues(System.ComponentModel.ITypeDescriptorContext)" />
+
+            
 
             
 
@@ -947,8 +1121,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -985,8 +1163,12 @@
 
             
 
+            
+
              method to determine whether the instance of the <see
              cref="T:System.Web.UI.WebControls.FontUnitConverter" />
+
+            
 
             
 
@@ -1000,6 +1182,8 @@
           <para
             >Returns whether the instance of the <see
              cref="T:System.Web.UI.WebControls.FontUnitConverter" />
+
+            
 
             
 
@@ -1019,8 +1203,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 

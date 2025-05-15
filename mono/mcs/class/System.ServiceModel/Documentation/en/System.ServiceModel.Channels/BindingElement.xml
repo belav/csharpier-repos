@@ -24,8 +24,12 @@
 
         
 
+        
+
          class inherits from the <see
          cref="T:System.ServiceModel.Channels.BindingElement" />
+
+        
 
         
 
@@ -43,6 +47,8 @@
 
         
 
+        
+
         , which in turn builds a channel stack and returns a reference to the top channel in the stack. The application can then use this channel to send messages. </para
       >
       <para
@@ -53,8 +59,12 @@
 
         
 
+        
+
         , which listens for incoming messages. The <see
          cref="T:System.ServiceModel.Channels.IChannelListener" />
+
+        
 
         
 
@@ -71,6 +81,8 @@
 
           
 
+          
+
            instance with your requirements from the <see
            cref="M:System.ServiceModel.Channels.BindingElement.GetProperty``1(System.ServiceModel.Channels.BindingContext)" />
 
@@ -78,8 +90,12 @@
 
           
 
+          
+
            method when asked for <see
            cref="T:System.ServiceModel.Security.ChannelProtectionRequirements" />
+
+          
 
           
 
@@ -118,6 +134,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -147,6 +165,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.BindingElement" />
+
+            
 
             
 
@@ -195,6 +215,8 @@
 
             
 
+            
+
              of type <paramref
              name="TChannel" />
 
@@ -202,8 +224,12 @@
 
             
 
+            
+
              initialized from the <paramref
              name="context" />
+
+            
 
             
 
@@ -219,8 +245,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -230,6 +260,8 @@
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -282,6 +314,8 @@
 
             
 
+            
+
              of type <see
              cref="T:System.ServiceModel.Channels.IChannel" />
 
@@ -289,8 +323,12 @@
 
             
 
+            
+
              initialized from the <paramref
              name="context" />
+
+            
 
             
 
@@ -306,8 +344,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -317,6 +359,8 @@
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -359,6 +403,8 @@
 
             
 
+            
+
              can be build for the <paramref
              name="context" />
 
@@ -366,8 +412,12 @@
 
             
 
+            
+
              provided before attempting to build the factory. Alternatively, build the channel factory by calling <see
              cref="M:System.ServiceModel.Channels.BindingElement.BuildChannelFactory``1(System.ServiceModel.Channels.BindingContext)" />
+
+            
 
             
 
@@ -390,8 +440,12 @@
 
             
 
+            
+
              of type <paramref
              name="TChannel" />
+
+            
 
             
 
@@ -407,8 +461,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -418,6 +476,8 @@
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -465,6 +525,8 @@
 
             
 
+            
+
              can be build for the <paramref
              name="context" />
 
@@ -472,8 +534,12 @@
 
             
 
+            
+
              provided before attempting to build the listener. Alternatively, build the channel listener by calling <see
              cref="M:System.ServiceModel.Channels.BindingElement.BuildChannelListener``1(System.ServiceModel.Channels.BindingContext)" />
+
+            
 
             
 
@@ -496,8 +562,12 @@
 
             
 
+            
+
              of type <see
              cref="T:System.ServiceModel.Channels.IChannel" />
+
+            
 
             
 
@@ -513,8 +583,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -524,6 +598,8 @@
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -561,6 +637,8 @@
 
             
 
+            
+
              method to return a deep clone of your binding element. Returning a clone enables the runtime to support the case in which multiple custom bindings share a custom binding element. If a clone is not returned, the run-time behavior is undefined.</para
           >
           <para>A deep clone of an object creates a copy of the object and a copy of everything directly or indirectly referenced by that object. (This is also called copying the entire object graph.) A shallow clone of an object, by contrast, is a copy of the object only. If the object contains references to other objects, the shallow copy does not create copies of the referred objects; instead, it copies only the references to the original objects.</para>
@@ -574,6 +652,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Channels.BindingElement" />
+
+            
 
             
 
@@ -623,8 +703,12 @@
 
               
 
+              
+
                instance with your requirements from this method when asked for <see
                cref="T:System.ServiceModel.Security.ChannelProtectionRequirements" />
+
+              
 
               
 
@@ -648,11 +732,15 @@
 
             
 
+            
+
              requested if it is present or null if it is not present.</para
           >
         </returns>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -665,10 +753,14 @@
 
           
 
+          
+
            for the binding element.</param
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

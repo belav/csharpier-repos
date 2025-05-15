@@ -3,7 +3,7 @@
   <paragraph
     >The attribute Obsolete is used to mark types and members of types that should no longer be used. <code_example
     >
-<![CDATA[
+      <![CDATA[
 using System;  
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct |  
 AttributeTargets.Enum | AttributeTargets.Interface |  
@@ -26,7 +26,7 @@ public class ObsoleteAttribute: Attribute
     <example
       >[Example: In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 [Obsolete("This class is obsolete; use class B instead")]  
 class A  
 {  
@@ -45,6 +45,8 @@ class Test
 }  
 ]]>
       </code_example>
+
+      
 
       
 

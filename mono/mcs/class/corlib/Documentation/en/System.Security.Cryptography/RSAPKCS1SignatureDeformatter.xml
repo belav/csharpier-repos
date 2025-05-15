@@ -40,6 +40,8 @@
 
         
 
+        
+
          algorithm.</para
       >
       <para
@@ -50,8 +52,12 @@
 
         
 
+        
+
          to create digital signatures with the <see
          cref="T:System.Security.Cryptography.RSA" />
+
+        
 
         
 
@@ -65,6 +71,8 @@
       <para
         >Verifies an <see
          cref="T:System.Security.Cryptography.RSA" />
+
+        
 
         
 
@@ -100,6 +108,8 @@
 
             
 
+            
+
              and <see
              cref="M:System.Security.Cryptography.RSAPKCS1SignatureDeformatter.SetHashAlgorithm(System.String)" />
 
@@ -107,8 +117,12 @@
 
             
 
+            
+
              to set the key and hash algorithm before calling <see
              cref="M:System.Security.Cryptography.RSAPKCS1SignatureDeformatter.VerifySignature(System.Byte[],System.Byte[])" />
+
+            
 
             
 
@@ -122,6 +136,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.RSAPKCS1SignatureDeformatter" />
+
+            
 
             
 
@@ -162,8 +178,12 @@
 
             
 
+            
+
              to set the hash algorithm before calling <see
              cref="M:System.Security.Cryptography.RSAPKCS1SignatureDeformatter.VerifySignature(System.Byte[],System.Byte[])" />
+
+            
 
             
 
@@ -182,6 +202,8 @@
 
             
 
+            
+
              class with the specified key.</para
           >
         </summary>
@@ -192,8 +214,12 @@
 
           
 
+          
+
           The instance of <see
            cref="T:System.Security.Cryptography.RSA" />
+
+          
 
           
 
@@ -235,6 +261,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -244,6 +272,8 @@
         </summary>
         <param name="strName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -285,6 +315,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -299,8 +331,12 @@
 
           
 
+          
+
           The instance of <see
            cref="T:System.Security.Cryptography.RSA" />
+
+          
 
           
 
@@ -347,6 +383,8 @@
 
             
 
+            
+
              PKCS#1 signature for the specified data.</para
           >
         </summary>
@@ -360,8 +398,12 @@
 
             
 
+            
+
              matches the signature computed using the specified hash algorithm and key on <paramref
              name="rgbHash" />
+
+            
 
             
 
@@ -377,8 +419,12 @@
 
           
 
+          
+
           The data signed with <paramref
            name="rgbSignature" />
+
+          
 
           
 
@@ -393,8 +439,12 @@
 
           
 
+          
+
           The signature to be verified for <paramref
            name="rgbHash" />
+
+          
 
           
 

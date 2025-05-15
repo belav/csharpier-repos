@@ -40,8 +40,12 @@
 
         
 
+        
+
         . If <see
          cref="T:System.Reflection.AssemblyDelaySignAttribute" />
+
+        
 
         
 
@@ -87,6 +91,8 @@
 
             
 
+            
+
              constructor. The value set by the constructor is interpreted by the linker, or by vsprvsext, that invokes the linker. </para
           >
           <para
@@ -94,6 +100,8 @@
              type="text/html">
               <a href="b5382965-0053-47cf-b92f-862860275a01">Assembly Linker (Al.exe)</a>
             </format>
+
+            
 
             
 
@@ -111,6 +119,8 @@
         </summary>
         <param name="keyFile">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

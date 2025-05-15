@@ -36,6 +36,8 @@
 
         
 
+        
+
          restricts the action performed when a value in a column (or columns) is either deleted or updated. Such a constraint is intended to be used with primary key columns. In a parent/child relationship between two tables, deleting a value from the parent table can affect the child rows in one of the following ways.</para
       >
       <list type="bullet">
@@ -59,8 +61,12 @@
 
         
 
+        
+
          objects are contained in the <see
          cref="T:System.Data.ConstraintCollection" />
+
+        
 
         
 
@@ -73,8 +79,12 @@
 
         
 
+        
+
         , which is accessed through the <see
          cref="P:System.Data.DataTable.Constraints" />
+
+        
 
         
 
@@ -90,11 +100,15 @@
 
         
 
+        
+
          property is set to true.</para
       >
       <para
         >The <see
          cref="P:System.Data.ForeignKeyConstraint.AcceptRejectRule" />
+
+        
 
         
 
@@ -107,8 +121,12 @@
 
         
 
+        
+
          object's <see
          cref="M:System.Data.DataTable.AcceptChanges" />
+
+        
 
         
 
@@ -146,8 +164,12 @@
 
             
 
+            
+
              class with the specified parent and child <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -163,8 +185,12 @@
 
           
 
+          
+
           The parent <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -179,8 +205,12 @@
 
           
 
+          
+
           The child <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -217,8 +247,12 @@
 
             
 
+            
+
              class with the specified arrays of parent and child <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -234,8 +268,12 @@
 
           
 
+          
+
           An array of parent <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -250,8 +288,12 @@
 
           
 
+          
+
           An array of child <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -289,8 +331,12 @@
 
             
 
+            
+
              class with the specified name, parent and child <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -306,6 +352,8 @@
 
           
 
+          
+
           The name of the constraint. </param
         >
         <param name="parentColumn">
@@ -315,8 +363,12 @@
 
           
 
+          
+
           The parent <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -331,8 +383,12 @@
 
           
 
+          
+
           The child <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -370,8 +426,12 @@
 
             
 
+            
+
              class with the specified name, and arrays of parent and child <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -387,8 +447,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Data.ForeignKeyConstraint" />
+
+          
 
           
 
@@ -403,8 +467,12 @@
 
           
 
+          
+
           An array of parent <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -419,8 +487,12 @@
 
           
 
+          
+
           An array of child <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -462,8 +534,12 @@
 
             
 
+            
+
              objects created by using this constructor must then be added to the collection via <see
              cref="M:System.Data.ConstraintCollection.AddRange(System.Data.Constraint[])" />
+
+            
 
             
 
@@ -476,8 +552,12 @@
 
             
 
+            
+
              has been called prior to calling this constructor, the tables and columns with the specified names must exist at the time that <see
              cref="M:System.Data.DataTable.EndInit" />
+
+            
 
             
 
@@ -493,10 +573,14 @@
 
           
 
+          
+
           The name of the constraint. </param
         >
         <param name="parentTableName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -509,8 +593,12 @@
 
           
 
+          
+
            that contains parent <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -525,8 +613,12 @@
 
           
 
+          
+
           An array of the names of parent <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -541,8 +633,12 @@
 
           
 
+          
+
           An array of the names of child <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -557,8 +653,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.AcceptRejectRule" />
+
+          
 
           
 
@@ -573,8 +673,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.Rule" />
+
+          
 
           
 
@@ -589,8 +693,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.Rule" />
+
+          
 
           
 
@@ -645,8 +753,12 @@
 
             
 
+            
+
              objects created by using this constructor must then be added to the collection via <see
              cref="M:System.Data.ConstraintCollection.AddRange(System.Data.Constraint[])" />
+
+            
 
             
 
@@ -659,8 +771,12 @@
 
             
 
+            
+
              has been called prior to calling this constructor, the tables and columns with the specified names must exist at the time that <see
              cref="M:System.Data.DataTable.EndInit" />
+
+            
 
             
 
@@ -676,10 +792,14 @@
 
           
 
+          
+
           The name of the constraint. </param
         >
         <param name="parentTableName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -692,8 +812,12 @@
 
           
 
+          
+
            that contains parent <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -708,8 +832,12 @@
 
           
 
+          
+
           The name of the <see
            cref="P:System.Data.DataTable.Namespace" />
+
+          
 
           
 
@@ -724,8 +852,12 @@
 
           
 
+          
+
           An array of the names of parent <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -740,8 +872,12 @@
 
           
 
+          
+
           An array of the names of child <see
            cref="T:System.Data.DataColumn" />
+
+          
 
           
 
@@ -756,8 +892,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.AcceptRejectRule" />
+
+          
 
           
 
@@ -772,8 +912,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.Rule" />
+
+          
 
           
 
@@ -788,8 +932,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.Rule" />
+
+          
 
           
 
@@ -821,6 +969,8 @@
 
             
 
+            
+
              or <see
              cref="T:System.Data.DataTable" />
 
@@ -828,8 +978,12 @@
 
             
 
+            
+
              are not final until the AcceptChanges method is invoked. At that point, the <see
              cref="P:System.Data.ForeignKeyConstraint.AcceptRejectRule" />
+
+            
 
             
 
@@ -843,6 +997,8 @@
           <para
             >Indicates the action that should take place across this constraint when <see
              cref="M:System.Data.DataTable.AcceptChanges" />
+
+            
 
             
 
@@ -911,11 +1067,15 @@
 
             
 
+            
+
              determines what will happen in the columns of the child table (or tables). If the rule is set to Cascade, child rows will be deleted.</para
           >
           <para
             >If set to SetNull, a DBnull will be placed in the appropriate columns of the affected rows. Depending on your data source, a null value may or may not be permitted in a column. For example, SQLServer allows multiple null values to be found in a primary key column, even if they are not unique. In a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -928,8 +1088,12 @@
 
             
 
+            
+
              object's <see
              cref="P:System.Data.DataColumn.Unique" />
+
+            
 
             
 
@@ -975,6 +1139,8 @@
 
             
 
+            
+
              is identical to the specified object.</para
           >
         </summary>
@@ -989,6 +1155,8 @@
 
           
 
+          
+
           The object to which this <see
            cref="T:System.Data.ForeignKeyConstraint" />
 
@@ -996,8 +1164,12 @@
 
           
 
+          
+
            is compared. Two <see
            cref="T:System.Data.ForeignKeyConstraint" />
+
+          
 
           
 
@@ -1025,6 +1197,8 @@
           <para
             >Gets the hash code of this instance of the <see
              cref="T:System.Data.ForeignKeyConstraint" />
+
+            
 
             
 

@@ -23,6 +23,8 @@
 
         
 
+        
+
          namespace can be used from ASP.NET or from any managed application.</para
       >
       <para
@@ -33,8 +35,12 @@
 
         
 
+        
+
          property is not set, mail is by default queued on a Windows 2000 system, ensuring that the calling program does not block network traffic. If the <see
          cref="T:System.Web.Mail.SmtpMail" />
+
+        
 
         
 
@@ -48,6 +54,8 @@
       <para
         >Provides properties and methods for sending messages using the Collaboration Data Objects for Windows 2000 (CDOSYS) message component. Recommended alternative: <see
          cref="N:System.Net.Mail" />
+
+        
 
         
 
@@ -80,9 +88,13 @@
 
             
 
+            
+
               parameter
 	    <paramref
              name="message" />
+
+            
 
             
 
@@ -96,12 +108,16 @@
 
             
 
+            
+
             .
 	  </para
           >
           <para>
 	    This example shows the typical usage of the <c
             >SmtpMail.Send</c>
+
+            
 
             
 
@@ -144,8 +160,12 @@ public class SmtpTest {
 
             
 
+            
+
              class. Recommended alternative: <see
              cref="N:System.Net.Mail" />
+
+            
 
             
 
@@ -161,8 +181,12 @@ public class SmtpTest {
 
           
 
+          
+
           The <see
            cref="T:System.Web.Mail.MailMessage" />
+
+          
 
           
 
@@ -202,6 +226,8 @@ public class SmtpTest {
 
             
 
+            
+
              and
 	    sends the e-mail to <paramref
              name="to" />
@@ -210,9 +236,13 @@ public class SmtpTest {
 
             
 
+            
+
             . This method is a simplified version of 
 	    <see
              cref="M:System.Web.Mail.SmtpMail.Send(MailMessage)" />
+
+            
 
             
 
@@ -253,11 +283,15 @@ public class SmtpTest {
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="from">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -272,6 +306,8 @@ public class SmtpTest {
 
           
 
+          
+
           The address of the e-mail recipient. </param
         >
         <param name="subject">
@@ -281,10 +317,14 @@ public class SmtpTest {
 
           
 
+          
+
           The subject line of the e-mail message. </param
         >
         <param name="messageText">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -317,6 +357,8 @@ public class SmtpTest {
           <para
             >Gets or sets the name of the SMTP relay mail server to use to send e-mail messages. Recommended alternative: <see
              cref="N:System.Net.Mail" />
+
+            
 
             
 

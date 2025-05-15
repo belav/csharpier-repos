@@ -41,8 +41,12 @@
 
         
 
+        
+
          class. During this process, the .NET Framework generates write methods that implement the <see
          cref="T:System.Xml.Serialization.XmlSerializationWriteCallback" />
+
+        
 
         
 
@@ -58,6 +62,8 @@
 
         
 
+        
+
         .</para
       >
       <para>SOAP encoding is described in Section 5 of the SOAP 1.1 specification.</para>
@@ -67,6 +73,8 @@
       <para
         >Delegate that is used by the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 

@@ -8,13 +8,15 @@
 
     
 
+    
+
     s. For static fields, variable initializers correspond to assignment statements that are executed during class initialization. For instance fields, variable initializers correspond to assignment statements that are executed when an instance of the class is created. </paragraph
   >
   <paragraph>
     <example
       >[Example: The example <code_example
       >
-<![CDATA[
+        <![CDATA[
 using System;  
 class Test  
 {  
@@ -33,12 +35,16 @@ class Test
 
       
 
+      
+
       produces the output <code_example
       >
-<![CDATA[
+        <![CDATA[
 x = 1.4142135623731, i = 100, s = Hello  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -55,6 +61,8 @@ x = 1.4142135623731, i = 100, s = Hello
 
     
 
+    
+
      occurs for all fields, including fields that have variable initializers. Thus, when a class is initialized, all static fields in that class are first initialized to their default values, and then the static field initializers are executed in textual order. Likewise, when an instance of a class is created, all instance fields in that instance are first initialized to their default values, and then the instance field initializers are executed in textual order. </paragraph
   >
   <paragraph
@@ -62,7 +70,7 @@ x = 1.4142135623731, i = 100, s = Hello
 
       >[Example: However, this is strongly discouraged as a matter of style. The example <code_example
       >
-<![CDATA[
+        <![CDATA[
 using System;  
 class Test  
 {  
@@ -79,9 +87,11 @@ class Test
 
       
 
+      
+
       exhibits this behavior. Despite the circular definitions of a and b, the program is valid. It results in the output <code_example
       >
-<![CDATA[
+        <![CDATA[
 a = 1, b = 2  
 ]]>
       </code_example>
@@ -90,8 +100,12 @@ a = 1, b = 2
 
       
 
+      
+
       because the static fields a and b are initialized to 0 (the default value for <keyword
       >int</keyword>
+
+      
 
       
 

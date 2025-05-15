@@ -24,11 +24,15 @@
 
         
 
+        
+
          control can adjust the width of its row headers to fit all their contents, only the contents of the first header, or only the contents of currently displayed headers. Calculating the new width using a subset of headers is useful to avoid a performance penalty when working with many rows of data.</para
       >
       <para
         >This enumeration is used by the <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          property and <see
          cref="Overload:System.Windows.Forms.DataGridView.AutoResizeRowHeadersWidth" />
+
+        
 
         
 
@@ -57,6 +65,8 @@
             >Sizing Options in the Windows Forms DataGridView Control</a
           >
         </format>
+
+        
 
         
 

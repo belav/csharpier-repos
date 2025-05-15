@@ -36,6 +36,8 @@
 
         
 
+        
+
          object. <see
          cref="T:System.Web.UI.LiteralControl" />
 
@@ -43,8 +45,12 @@
 
         
 
+        
+
          objects do not maintain view state, so the contents of a <see
          cref="T:System.Web.UI.LiteralControl" />
+
+        
 
         
 
@@ -60,8 +66,12 @@
 
         
 
+        
+
          collection through the parent's <see
          cref="P:System.Web.UI.Control.Controls" />
+
+        
 
         
 
@@ -74,8 +84,12 @@
 
         
 
+        
+
          class, make sure your control performs any required preprocessing steps itself, rather than using a call to the <see
          cref="M:System.Web.UI.LiteralControl.Render(System.Web.UI.HtmlTextWriter)" />
+
+        
 
         
 
@@ -91,8 +105,12 @@
 
         
 
+        
+
          or the <see
          cref="M:System.Web.UI.ControlCollection.Remove(System.Web.UI.Control)" />
+
+        
 
         
 
@@ -119,6 +137,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.LiteralControl" />
+
+            
 
             
 
@@ -152,11 +172,15 @@
 
             
 
+            
+
              class with the specified text.</para
           >
         </summary>
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -191,6 +215,8 @@
 
             
 
+            
+
              objects contain only text and no child server controls. If you want to change this behavior, you must override this method.</para
           >
         </remarks>
@@ -204,8 +230,12 @@
 
             
 
+            
+
              object for the current instance of the <see
              cref="T:System.Web.UI.LiteralControl" />
+
+            
 
             
 
@@ -219,6 +249,8 @@
           <para
             >The <see
              cref="T:System.Web.UI.EmptyControlCollection" />
+
+            
 
             
 
@@ -260,6 +292,8 @@
 
             
 
+            
+
              property to the <see
              cref="M:System.Web.UI.Control.Render(System.Web.UI.HtmlTextWriter)" />
 
@@ -267,8 +301,12 @@
 
             
 
+            
+
              method rather than calling the <see
              cref="M:System.Web.UI.LiteralControl.Render(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -282,6 +320,8 @@
           <para
             >Writes the content of the <see
              cref="T:System.Web.UI.LiteralControl" />
+
+            
 
             
 
@@ -311,6 +351,8 @@
           <para
             >Gets or sets the text content of the <see
              cref="T:System.Web.UI.LiteralControl" />
+
+            
 
             
 

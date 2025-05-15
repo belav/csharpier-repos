@@ -46,8 +46,12 @@
 
         
 
+        
+
          class provides support for the properties and methods defined in <see
          cref="T:System.Net.WebRequest" />
+
+        
 
         
 
@@ -63,8 +67,12 @@
 
         
 
+        
+
          constructor. Use the <see
          cref="Overload:System.Net.WebRequest.Create" />
+
+        
 
         
 
@@ -77,6 +85,8 @@
 
         
 
+        
+
          objects. If the scheme for the Uniform Resource Identifier (URI) is http:// or https://, <see
          cref="Overload:System.Net.WebRequest.Create" />
 
@@ -84,8 +94,12 @@
 
         
 
+        
+
          returns an <see
          cref="T:System.Net.HttpWebRequest" />
+
+        
 
         
 
@@ -101,8 +115,12 @@
 
         
 
+        
+
          method makes a synchronous request to the resource specified in the <see
          cref="P:System.Net.HttpWebRequest.RequestUri" />
+
+        
 
         
 
@@ -115,6 +133,8 @@
 
         
 
+        
+
          that contains the response. You can make an asynchronous request to the resource using the <see
          cref="M:System.Net.HttpWebRequest.BeginGetResponse(System.AsyncCallback,System.Object)" />
 
@@ -122,8 +142,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Net.HttpWebRequest.EndGetResponse(System.IAsyncResult)" />
+
+        
 
         
 
@@ -139,8 +163,12 @@
 
         
 
+        
+
          method returns a <see
          cref="T:System.IO.Stream" />
+
+        
 
         
 
@@ -153,8 +181,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Net.HttpWebRequest.EndGetRequestStream(System.IAsyncResult)" />
+
+        
 
         
 
@@ -170,11 +202,15 @@
 
         
 
+        
+
         , the client certificate must be installed in the My certificate store of the current user.</para
       >
       <para
         >The <see
          cref="T:System.Net.HttpWebRequest" />
+
+        
 
         
 
@@ -187,8 +223,12 @@
 
         
 
+        
+
          when errors occur while accessing a resource. The <see
          cref="P:System.Net.WebException.Status" />
+
+        
 
         
 
@@ -201,8 +241,12 @@
 
         
 
+        
+
          value that indicates the source of the error. When <see
          cref="P:System.Net.WebException.Status" />
+
+        
 
         
 
@@ -215,6 +259,8 @@
 
         
 
+        
+
         , the <see
          cref="P:System.Net.WebException.Response" />
 
@@ -222,8 +268,12 @@
 
         
 
+        
+
          property contains the <see
          cref="T:System.Net.HttpWebResponse" />
+
+        
 
         
 
@@ -238,8 +288,12 @@
 
         
 
+        
+
          exposes common HTTP header values sent to the Internet resource as properties, set by methods, or set by the system; the following table contains a complete list. You can set other headers in the <see
          cref="P:System.Net.HttpWebRequest.Headers" />
+
+        
 
         
 
@@ -272,6 +326,8 @@
 
               
 
+              
+
                property. </para
             >
           </description>
@@ -289,8 +345,12 @@
 
               
 
+              
+
                property, <see
                cref="P:System.Net.HttpWebRequest.KeepAlive" />
+
+              
 
               
 
@@ -313,6 +373,8 @@
 
               
 
+              
+
                property. </para
             >
           </description>
@@ -330,6 +392,8 @@
 
               
 
+              
+
                property. </para
             >
           </description>
@@ -342,6 +406,8 @@
             <para
               >Set by the <see
                cref="P:System.Net.HttpWebRequest.Expect" />
+
+              
 
               
 
@@ -380,6 +446,8 @@
 
               
 
+              
+
                property. </para
             >
           </description>
@@ -392,6 +460,8 @@
             <para
               >Set by the <see
                cref="M:System.Net.HttpWebRequest.AddRange(System.Int32,System.Int32)" />
+
+              
 
               
 
@@ -414,6 +484,8 @@
 
               
 
+              
+
                property. </para
             >
           </description>
@@ -431,8 +503,12 @@
 
               
 
+              
+
                property (the <see
                cref="P:System.Net.HttpWebRequest.SendChunked" />
+
+              
 
               
 
@@ -455,6 +531,8 @@
 
               
 
+              
+
                property. </para
             >
           </description>
@@ -468,6 +546,8 @@
 
           
 
+          
+
            is registered automatically. You do not need to call the <see
            cref="M:System.Net.WebRequest.RegisterPrefix(System.String,System.Net.IWebRequestCreate)" />
 
@@ -475,8 +555,12 @@
 
           
 
+          
+
            method to register <see
            cref="T:System.Net.HttpWebRequest" />
+
+          
 
           
 
@@ -493,8 +577,12 @@
 
         
 
+        
+
          property is specified, then the proxy settings from the <see
          cref="P:System.Net.HttpWebRequest.Proxy" />
+
+        
 
         
 
@@ -507,6 +595,8 @@
 
         
 
+        
+
          instance will use the proxy settings specified. If no proxy is specified in a config file and the <see
          cref="P:System.Net.HttpWebRequest.Proxy" />
 
@@ -514,8 +604,12 @@
 
         
 
+        
+
          property is unspecified, the <see
          cref="T:System.Net.HttpWebRequest" />
+
+        
 
         
 
@@ -531,6 +625,8 @@
 
         
 
+        
+
          class parses a proxy bypass list with wildcard characters inherited from Internet Explorer differently than the bypass list is parsed directly by Internet Explorer. For example, the <see
          cref="T:System.Net.HttpWebRequest" />
 
@@ -538,8 +634,12 @@
 
         
 
+        
+
          class will parse a bypass list of "nt*" from Internet Explorer as a regular expression of "nt.$". This differs from the native behavior of Internet Explorer. So a URL of "http://intxxxxx" would bypass the proxy using the <see
          cref="T:System.Net.HttpWebRequest" />
+
+        
 
         
 
@@ -556,8 +656,12 @@
 
           
 
+          
+
            (if there is one), or tries to reuse an anonymous sessions if <see
            cref="P:System.Net.HttpWebRequest.ClientCertificates" />
+
+          
 
           
 
@@ -575,6 +679,8 @@
 
           
 
+          
+
            property to enable cookies.</para
         >
       </block>
@@ -584,6 +690,8 @@
       <para
         >Provides an HTTP-specific implementation of the <see
          cref="T:System.Net.WebRequest" />
+
+        
 
         
 
@@ -633,6 +741,8 @@
 
             
 
+            
+
              class from the specified instances of the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
 
@@ -640,8 +750,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Runtime.Serialization.StreamingContext" />
+
+            
 
             
 
@@ -657,6 +771,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
 
@@ -664,8 +780,12 @@
 
           
 
+          
+
            object that contains the information required to serialize the new <see
            cref="T:System.Net.HttpWebRequest" />
+
+          
 
           
 
@@ -680,6 +800,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
 
@@ -687,8 +809,12 @@
 
           
 
+          
+
            object that contains the source and destination of the serialized stream associated with the new <see
            cref="T:System.Net.HttpWebRequest" />
+
+          
 
           
 
@@ -726,8 +852,12 @@
 
             
 
+            
+
              method cancels a request to a resource. After a request is canceled, calling the <see
              cref="M:System.Net.HttpWebRequest.GetResponse" />
+
+            
 
             
 
@@ -740,8 +870,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Net.HttpWebRequest.EndGetResponse(System.IAsyncResult)" />
+
+            
 
             
 
@@ -754,8 +888,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Net.HttpWebRequest.BeginGetRequestStream(System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -768,8 +906,12 @@
 
             
 
+            
+
              method causes a <see
              cref="T:System.Net.WebException" />
+
+            
 
             
 
@@ -782,8 +924,12 @@
 
             
 
+            
+
              property set to <see
              cref="F:System.Net.WebExceptionStatus.RequestCanceled" />
+
+            
 
             
 
@@ -799,8 +945,12 @@
 
             
 
+            
+
              method will synchronously execute the callback specified to the <see
              cref="M:System.Net.HttpWebRequest.BeginGetRequestStream(System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -813,8 +963,12 @@
 
             
 
+            
+
              methods if the <see
              cref="M:System.Net.HttpWebRequest.Abort" />
+
+            
 
             
 
@@ -828,6 +982,8 @@
                type="text/html">
                 <a href="E993B7C3-087F-45D8-9C02-9DDED936D804">Network Tracing</a>
               </format>
+
+              
 
               
 
@@ -871,9 +1027,13 @@
 
             
 
+            
+
              containing the value of the HTTP Accept header. The default value of this property is
 <see
              langword="null" />
+
+            
 
             
 
@@ -892,12 +1052,16 @@
 
             
 
+            
+
              property to null.</para
           >
           <block subset="none" type="note">
             <para
               >The value for this property is stored in <see
                cref="T:System.Net.WebHeaderCollection" />
+
+              
 
               
 
@@ -950,11 +1114,15 @@
 
             
 
+            
+
              method adds a byte range header to the request.</para
           >
           <para
             >If <paramref
              name="range" />
+
+            
 
             
 
@@ -967,8 +1135,12 @@
 
             
 
+            
+
              parameter specifies the starting point of the range. The server should start sending data from the <paramref
              name="range" />
+
+            
 
             
 
@@ -984,6 +1156,8 @@
 
             
 
+            
+
              is negative, the <paramref
              name="range" />
 
@@ -991,8 +1165,12 @@
 
             
 
+            
+
              parameter specifies the ending point of the range. The server should start sending data from the start of the data in the HTTP entity to the <paramref
              name="range" />
+
+            
 
             
 
@@ -1012,6 +1190,8 @@
 
             
 
+            
+
              parameter would be -99.</para
           >
           <para>A HTTP server indicates support for Range headers with the Accept-Ranges header. An example of the Accept-Ranges header from a server that supports byte-ranges would be as follows:</para>
@@ -1026,6 +1206,8 @@
 
             
 
+            
+
              class. Headers associated with each range are returned in the response.</para
           >
         </remarks>
@@ -1035,6 +1217,8 @@
         </summary>
         <param name="range">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1072,11 +1256,15 @@
 
             
 
+            
+
              method adds a byte range header to the request.</para
           >
           <para
             >If <paramref
              name="range" />
+
+            
 
             
 
@@ -1089,8 +1277,12 @@
 
             
 
+            
+
              parameter specifies the starting point of the range. The server should start sending data from the <paramref
              name="range" />
+
+            
 
             
 
@@ -1106,6 +1298,8 @@
 
             
 
+            
+
              is negative, the <paramref
              name="range" />
 
@@ -1113,8 +1307,12 @@
 
             
 
+            
+
              parameter specifies the ending point of the range. The server should start sending data from the start of the data in the HTTP entity to the <paramref
              name="range" />
+
+            
 
             
 
@@ -1134,6 +1332,8 @@
 
             
 
+            
+
              parameter would be -99.</para
           >
           <para>A HTTP server indicates support for Range headers with the Accept-Ranges header. An example of the Accept-Ranges header from a server that supports byte-ranges would be as follows:</para>
@@ -1148,6 +1348,8 @@
 
             
 
+            
+
              class. Headers associated with each range are returned in the response.</para
           >
         </remarks>
@@ -1157,6 +1359,8 @@
         </summary>
         <param name="range">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1198,11 +1402,15 @@
 
             
 
+            
+
              &lt; 0.</para
           >
           <para>-or-</para>
           <para>
             <paramref name="to " />
+
+            
 
             
 
@@ -1218,8 +1426,12 @@
 
             
 
+            
+
              &gt; <paramref
              name="to " />
+
+            
 
             
 
@@ -1241,6 +1453,8 @@
 
             
 
+            
+
              method adds a byte range header to the request.</para
           >
           <para>Since all HTTP entities are represented in HTTP messages as sequences of bytes, the concept of a byte range is meaningful for any HTTP entity. However, not all clients and servers need to support byte-range operations. </para>
@@ -1255,8 +1469,12 @@
 
             
 
+            
+
              parameter would be specified as 0 and the <paramref
              name="to" />
+
+            
 
             
 
@@ -1276,6 +1494,8 @@
 
             
 
+            
+
              class. Headers associated with each range are returned in the response.</para
           >
         </remarks>
@@ -1290,10 +1510,14 @@
 
           
 
+          
+
           The position at which to start sending data. </param
         >
         <param name="to">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1332,6 +1556,8 @@
 
             
 
+            
+
              method adds a byte range header to the request.</para
           >
           <para>Since all HTTP entities are represented in HTTP messages as sequences of bytes, the concept of a byte range is meaningful for any HTTP entity. However, not all clients and servers need to support byte-range operations. </para>
@@ -1346,8 +1572,12 @@
 
             
 
+            
+
              parameter would be specified as 0 and the <paramref
              name="to" />
+
+            
 
             
 
@@ -1367,6 +1597,8 @@
 
             
 
+            
+
              class. Headers associated with each range are returned in the response.</para
           >
         </remarks>
@@ -1381,10 +1613,14 @@
 
           
 
+          
+
           The position at which to start sending data.</param
         >
         <param name="to">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1428,8 +1664,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -1439,6 +1679,8 @@
         >
         <exception cref="T:System.ArgumentException">
           <paramref name="rangeSpecifier" />
+
+          
 
           
 
@@ -1459,11 +1701,15 @@
 
             
 
+            
+
              method adds a Range header to the request.</para
           >
           <para
             >If <paramref
              name="range" />
+
+            
 
             
 
@@ -1476,8 +1722,12 @@
 
             
 
+            
+
              parameter specifies the starting point of the range. The server should start sending data from the <paramref
              name="range" />
+
+            
 
             
 
@@ -1493,6 +1743,8 @@
 
             
 
+            
+
              is negative, the <paramref
              name="range" />
 
@@ -1500,8 +1752,12 @@
 
             
 
+            
+
              parameter specifies the ending point of the range. The server should start sending data from the start of the data in the HTTP entity to the <paramref
              name="range" />
+
+            
 
             
 
@@ -1519,8 +1775,12 @@
 
             
 
+            
+
              parameter would normally be specified as a "bytes", since this is the only range specifier recognized by most HTTP servers. Setting the <paramref
              name="rangeSpecifier" />
+
+            
 
             
 
@@ -1538,8 +1798,12 @@
 
             
 
+            
+
              parameter would be specified as "bytes" and the <paramref
              name="range" />
+
+            
 
             
 
@@ -1559,6 +1823,8 @@
 
             
 
+            
+
              class. Headers associated with each range are returned in the response.</para
           >
         </remarks>
@@ -1573,10 +1839,14 @@
 
           
 
+          
+
           The description of the range. </param
         >
         <param name="range">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1618,11 +1888,15 @@
 
             
 
+            
+
              method adds a Range header to the request.</para
           >
           <para
             >If <paramref
              name="range" />
+
+            
 
             
 
@@ -1635,8 +1909,12 @@
 
             
 
+            
+
              parameter specifies the starting point of the range. The server should start sending data from the <paramref
              name="range" />
+
+            
 
             
 
@@ -1652,6 +1930,8 @@
 
             
 
+            
+
              is negative, the <paramref
              name="range" />
 
@@ -1659,8 +1939,12 @@
 
             
 
+            
+
              parameter specifies the ending point of the range. The server should start sending data from the start of the data in the HTTP entity to the <paramref
              name="range" />
+
+            
 
             
 
@@ -1678,8 +1962,12 @@
 
             
 
+            
+
              parameter would normally be specified as a "bytes", since this is the only range specifier recognized by most HTTP servers. Setting the <paramref
              name="rangeSpecifier" />
+
+            
 
             
 
@@ -1697,8 +1985,12 @@
 
             
 
+            
+
              parameter would be specified as "bytes" and the <paramref
              name="range" />
+
+            
 
             
 
@@ -1718,6 +2010,8 @@
 
             
 
+            
+
              class. Headers associated with each range are returned in the response.</para
           >
         </remarks>
@@ -1732,10 +2026,14 @@
 
           
 
+          
+
           The description of the range.</param
         >
         <param name="range">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1780,8 +2078,12 @@
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -1797,11 +2099,15 @@
 
             
 
+            
+
             &lt; 0.</para
           >
           <para>-or-</para>
           <para>
             <paramref name="to " />
+
+            
 
             
 
@@ -1817,8 +2123,12 @@
 
             
 
+            
+
             &gt; <paramref
              name="to " />
+
+            
 
             
 
@@ -1829,6 +2139,8 @@
         </exception>
         <exception cref="T:System.ArgumentException">
           <paramref name="rangeSpecifier" />
+
+          
 
           
 
@@ -1849,6 +2161,8 @@
 
             
 
+            
+
              method adds a Range header to the request.</para
           >
           <para>Since all HTTP entities are represented in HTTP messages as sequences of bytes, the concept of a byte range is meaningful for any HTTP entity. However, not all clients and servers need to support byte-range operations. </para>
@@ -1861,8 +2175,12 @@
 
             
 
+            
+
              parameter would normally be specified as a "bytes", since this is the only range specifier recognized by most HTTP servers. Setting the <paramref
              name="rangeSpecifier" />
+
+            
 
             
 
@@ -1880,6 +2198,8 @@
 
             
 
+            
+
              parameter would be specified as a "bytes", the <paramref
              name="from" />
 
@@ -1887,8 +2207,12 @@
 
             
 
+            
+
              parameter would be 0, and the <paramref
              name="to" />
+
+            
 
             
 
@@ -1906,6 +2230,8 @@
 
             
 
+            
+
              parameter for this method.</para
           >
           <para>If an Accept-Ranges header is not received in the header of the response from the server, then the server does not support Range headers. An example of the Accept-Ranges header from a server that does not support ranges, but recognizes the Accept-Ranges header, would be as follows:</para>
@@ -1913,6 +2239,8 @@
           <para
             >When receiving the response from a range request, only the HTTP headers associated with the entire request are parsed and made available via properties on the <see
              cref="T:System.Net.HttpWebResponse" />
+
+            
 
             
 
@@ -1932,6 +2260,8 @@
 
           
 
+          
+
           The description of the range. </param
         >
         <param name="from">
@@ -1941,10 +2271,14 @@
 
           
 
+          
+
           The position at which to start sending data. </param
         >
         <param name="to">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1987,6 +2321,8 @@
 
             
 
+            
+
              method adds a Range header to the request.</para
           >
           <para>Since all HTTP entities are represented in HTTP messages as sequences of bytes, the concept of a byte range is meaningful for any HTTP entity. However, not all clients and servers need to support byte-range operations. </para>
@@ -1999,8 +2335,12 @@
 
             
 
+            
+
              parameter would normally be specified as a "bytes", since this is the only range specifier recognized by most HTTP servers. Setting the <paramref
              name="rangeSpecifier" />
+
+            
 
             
 
@@ -2018,6 +2358,8 @@
 
             
 
+            
+
              parameter would be specified as a "bytes", the <paramref
              name="from" />
 
@@ -2025,8 +2367,12 @@
 
             
 
+            
+
              parameter would be 0, and the <paramref
              name="to" />
+
+            
 
             
 
@@ -2044,6 +2390,8 @@
 
             
 
+            
+
              parameter for this method.</para
           >
           <para>If an Accept-Ranges header is not received in the header of the response from the server, then the server does not support Range headers. An example of the Accept-Ranges header from a server that does not support ranges, but recognizes the Accept-Ranges header, would be as follows:</para>
@@ -2051,6 +2399,8 @@
           <para
             >When receiving the response from a range request, only the HTTP headers associated with the entire request are parsed and made available via properties on the <see
              cref="T:System.Net.HttpWebResponse" />
+
+            
 
             
 
@@ -2070,6 +2420,8 @@
 
           
 
+          
+
           The description of the range.</param
         >
         <param name="from">
@@ -2079,10 +2431,14 @@
 
           
 
+          
+
           The position at which to start sending data.</param
         >
         <param name="to">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2120,9 +2476,13 @@
             
 
             
+
+            
 identifying the Internet resource that responds to the current request.
 The default is the URI used by the <see
              cref="M:System.Net.WebRequest.Create(System.Uri,System.Boolean)" qualify="true" />
+
+            
 
             
 
@@ -2144,11 +2504,15 @@ instance. </para
 
             
 
+            
+
              property is set to the URI after any redirections that happen during the request are complete.</para
           >
           <para
             >The URI of the original request is kept in the <see
              cref="P:System.Net.HttpWebRequest.RequestUri" />
+
+            
 
             
 
@@ -2190,6 +2554,8 @@ instance. </para
 
             
 
+            
+
             if the current request will automatically follow redirection
    responses from the Internet resource; otherwise <see
              langword="false " />
@@ -2199,9 +2565,13 @@ instance. </para
             
 
             
+
+            
    . The default value is
 <see
              langword="true" />
+
+            
 
             
 
@@ -2220,8 +2590,12 @@ instance. </para
 
             
 
+            
+
              to true if you want the request to automatically follow HTTP redirection headers to the new location of the resource. The maximum number of redirections to follow is set by the <see
              cref="P:System.Net.HttpWebRequest.MaximumAutomaticRedirections" />
+
+            
 
             
 
@@ -2237,11 +2611,15 @@ instance. </para
 
             
 
+            
+
              is set to false, all responses with an HTTP status code from 300 to 399 is returned to the application.</para
           >
           <para
             >The Authorization header is cleared on auto-redirects and <see
              cref="T:System.Net.HttpWebRequest" />
+
+            
 
             
 
@@ -2254,8 +2632,12 @@ instance. </para
 
             
 
+            
+
              and related class are used to implement a custom authentication module. The <see
              cref="M:System.Net.AuthenticationManager.Register(System.Net.IAuthenticationModule)" />
+
+            
 
             
 
@@ -2319,10 +2701,14 @@ instance. </para
 
             
 
+            
+
             to enable
    buffering of the data sent
    to the Internet resource requested by the current instance; <see
              langword="false " />
+
+            
 
             
 
@@ -2336,6 +2722,8 @@ instance. </para
 
             
 
+            
+
             .</para
           >
         </value>
@@ -2344,6 +2732,8 @@ instance. </para
           <para
             >When <see
              cref="P:System.Net.HttpWebRequest.AllowWriteStreamBuffering" />
+
+            
 
             
 
@@ -2421,6 +2811,8 @@ instance. </para
 
             
 
+            
+
              .</para
           >
           <para>-or-</para>
@@ -2430,6 +2822,8 @@ instance. </para
           <para
             >The <see
              cref="P:System.Net.HttpWebRequest.ContentLength" />
+
+            
 
             
 
@@ -2446,12 +2840,16 @@ instance. </para
 
             
 
+            
+
              property of the current instance is "GET" or "HEAD".</para
           >
         </exception>
         <exception cref="T:System.Net.WebException">
           <para>
             <see cref="M:System.Net.HttpWebRequest.Abort" />
+
+            
 
             
 
@@ -2472,8 +2870,12 @@ instance. </para
 
             
 
+            
+
              method starts an asynchronous request for a stream used to send data for the <see
              cref="T:System.Net.HttpWebRequest" />
+
+            
 
             
 
@@ -2486,11 +2888,15 @@ instance. </para
 
             
 
+            
+
              method to return the actual stream.</para
           >
           <para
             >The <see
              cref="M:System.Net.HttpWebRequest.BeginGetRequestStream(System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -2510,6 +2916,8 @@ instance. </para
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -2521,8 +2929,12 @@ instance. </para
 
               
 
+              
+
                method, you must use the <see
                cref="M:System.Net.HttpWebRequest.BeginGetResponse(System.AsyncCallback,System.Object)" />
+
+              
 
               
 
@@ -2544,6 +2956,8 @@ instance. </para
 
               
 
+              
+
               .</para
             >
           </block>
@@ -2553,6 +2967,8 @@ instance. </para
           <para
             >Begins an asynchronous request for a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -2571,11 +2987,15 @@ instance. </para
 
             
 
+            
+
              that references the asynchronous request.</para
           >
         </returns>
         <param name="callback">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2588,10 +3008,14 @@ instance. </para
 
           
 
+          
+
            delegate. </param
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2636,8 +3060,12 @@ instance. </para
 
           
 
+          
+
            or <see
            cref="M:System.Net.HttpWebRequest.GetResponse" />
+
+          
 
           
 
@@ -2653,10 +3081,14 @@ instance. </para
 
           
 
+          
+
            property of the current instance has not been set.</exception
         >
         <exception cref="T:System.Net.WebException">
           <see cref="M:System.Net.HttpWebRequest.Abort" />
+
+          
 
           
 
@@ -2674,6 +3106,8 @@ instance. </para
 
             
 
+            
+
              method starts an asynchronous request for a response from the Internet resource. The asynchronous callback method uses the <see
              cref="M:System.Net.HttpWebRequest.EndGetResponse(System.IAsyncResult)" />
 
@@ -2681,8 +3115,12 @@ instance. </para
 
             
 
+            
+
              method to return the actual <see
              cref="T:System.Net.WebResponse" />
+
+            
 
             
 
@@ -2698,8 +3136,12 @@ instance. </para
 
             
 
+            
+
              is thrown in several cases when the properties set on the <see
              cref="T:System.Net.HttpWebRequest" />
+
+            
 
             
 
@@ -2712,8 +3154,12 @@ instance. </para
 
             
 
+            
+
              property and the <see
              cref="P:System.Net.HttpWebRequest.SendChunked" />
+
+            
 
             
 
@@ -2726,6 +3172,8 @@ instance. </para
 
             
 
+            
+
              property or the <see
              cref="P:System.Net.HttpWebRequest.SendChunked" />
 
@@ -2733,8 +3181,12 @@ instance. </para
 
             
 
+            
+
              is false when buffering is disabled and on a keepalive connection (the <see
              cref="P:System.Net.HttpWebRequest.KeepAlive" />
+
+            
 
             
 
@@ -2750,8 +3202,12 @@ instance. </para
 
             
 
+            
+
              is thrown, use the <see
              cref="P:System.Net.WebException.Response" />
+
+            
 
             
 
@@ -2764,11 +3220,15 @@ instance. </para
 
             
 
+            
+
              properties of the exception to determine the response from the server.</para
           >
           <para
             >The <see
              cref="M:System.Net.HttpWebRequest.BeginGetResponse(System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -2788,6 +3248,8 @@ instance. </para
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -2799,8 +3261,12 @@ instance. </para
 
               
 
+              
+
                method, you must use the <see
                cref="M:System.Net.HttpWebRequest.BeginGetResponse(System.AsyncCallback,System.Object)" />
+
+              
 
               
 
@@ -2817,6 +3283,8 @@ instance. </para
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
               </format>
+
+              
 
               
 
@@ -2840,11 +3308,15 @@ instance. </para
 
             
 
+            
+
              that references the asynchronous request for a response.</para
           >
         </returns>
         <param name="callback">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2857,10 +3329,14 @@ instance. </para
 
           
 
+          
+
            delegate </param
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2908,8 +3384,12 @@ instance. </para
 
               
 
+              
+
                (if there is one), or tries to reuse an anonymous sessions if <see
                cref="P:System.Net.HttpWebRequest.ClientCertificates" />
+
+              
 
               
 
@@ -2927,12 +3407,16 @@ instance. </para
 
               
 
+              
+
                unless you know the server will ask for it.</para
             >
             <para />
             <para
               >For a code example illustrating how to enumerate the certificates in the client certificate store, see the <see
                cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2Collection" />
+
+              
 
               
 
@@ -2975,10 +3459,14 @@ instance. </para
 
             
 
+            
+
              containing the
    value of the Connection HTTP header. The
    default value is <see
              langword="null" />
+
+            
 
             
 
@@ -2990,6 +3478,8 @@ instance. </para
         <exception cref="T:System.ArgumentException"
           >The value of <see
            cref="P:System.Net.HttpWebRequest.Connection" />
+
+          
 
           
 
@@ -3007,8 +3497,12 @@ instance. </para
 
             
 
+            
+
              property to the Internet resource as the Connection HTTP header. If the value of the <see
              cref="P:System.Net.HttpWebRequest.KeepAlive" />
+
+            
 
             
 
@@ -3024,11 +3518,15 @@ instance. </para
 
             
 
+            
+
              property to null.</para
           >
           <para
             >Changing the <see
              cref="P:System.Net.HttpWebRequest.Connection" />
+
+            
 
             
 
@@ -3041,8 +3539,12 @@ instance. </para
 
             
 
+            
+
             , <see
              cref="M:System.Net.HttpWebRequest.BeginGetRequestStream(System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -3055,8 +3557,12 @@ instance. </para
 
             
 
+            
+
             , or <see
              cref="M:System.Net.HttpWebRequest.BeginGetResponse(System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -3069,12 +3575,16 @@ instance. </para
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
             <para
               >The value for this property is stored in <see
                cref="T:System.Net.WebHeaderCollection" />
+
+              
 
               
 
@@ -3121,9 +3631,13 @@ instance. </para
 
             
 
+            
+
              that contains the name of the connection group for the current instance. The default value is
 <see
              langword="null" />
+
+            
 
             
 
@@ -3137,6 +3651,8 @@ instance. </para
           <para
             >The <see
              cref="P:System.Net.HttpWebRequest.ConnectionGroupName" />
+
+            
 
             
 
@@ -3179,6 +3695,8 @@ instance. </para
 
             
 
+            
+
              value that specifies the number of bytes of data to send to the Internet resource. The default is -1,
    which indicates that this value has not been set.</para
           >
@@ -3199,6 +3717,8 @@ instance. </para
 
             
 
+            
+
              property contains the value to send as the Content-length HTTP header with the request.</para
           >
           <para
@@ -3209,8 +3729,12 @@ instance. </para
 
             
 
+            
+
              property indicates that the request uploads data and that only methods that upload data are allowed to be set in the <see
              cref="P:System.Net.HttpWebRequest.Method" />
+
+            
 
             
 
@@ -3226,8 +3750,12 @@ instance. </para
 
             
 
+            
+
              property is set to a value, that number of bytes must be written to the request stream that is returned by calling the <see
              cref="M:System.Net.HttpWebRequest.GetRequestStream" />
+
+            
 
             
 
@@ -3240,8 +3768,12 @@ instance. </para
 
             
 
+            
+
              and the <see
              cref="M:System.Net.HttpWebRequest.EndGetRequestStream(System.IAsyncResult)" />
+
+            
 
             
 
@@ -3253,6 +3785,8 @@ instance. </para
             <para
               >The value for this property is stored in <see
                cref="T:System.Net.WebHeaderCollection" />
+
+              
 
               
 
@@ -3298,6 +3832,8 @@ instance. </para
             
 
             
+
+            
       . </para
           >
         </value>
@@ -3311,8 +3847,12 @@ instance. </para
 
             
 
+            
+
              property contains the media type of the request. Values assigned to the <see
              cref="P:System.Net.HttpWebRequest.ContentType" />
+
+            
 
             
 
@@ -3323,6 +3863,8 @@ instance. </para
           <para
             >To clear the Content-type HTTP header, set the <see
              cref="P:System.Net.HttpWebRequest.ContentType" />
+
+            
 
             
 
@@ -3339,8 +3881,12 @@ instance. </para
 
               
 
+              
+
                . If <see
                cref="T:System.Net.WebHeaderCollection" />
+
+              
 
               
 
@@ -3390,10 +3936,14 @@ instance. </para
 
             
 
+            
+
              
 that references the methods that are invoked when an HTTP Continue response is
 received. The default value is <see
              langword="null" />
+
+            
 
             
 
@@ -3413,6 +3963,8 @@ received. The default value is <see
 
             
 
+            
+
              property specifies the callback method to call when the client receives a 100-Continue response.</para
           >
           <para
@@ -3423,8 +3975,12 @@ received. The default value is <see
 
             
 
+            
+
              property is set, the client calls the delegate whenever protocol responses of type <see
              cref="F:System.Net.HttpStatusCode.Continue" />
+
+            
 
             
 
@@ -3497,8 +4053,12 @@ received. The default value is <see
 
             
 
+            
+
              property provides an instance of the <see
              cref="T:System.Net.CookieContainer" />
+
+            
 
             
 
@@ -3513,8 +4073,12 @@ received. The default value is <see
 
             
 
+            
+
              is null by default. You must assign a <see
              cref="T:System.Net.CookieContainer" />
+
+            
 
             
 
@@ -3527,8 +4091,12 @@ received. The default value is <see
 
             
 
+            
+
              property of the <see
              cref="T:System.Net.HttpWebResponse" />
+
+            
 
             
 
@@ -3541,12 +4109,16 @@ received. The default value is <see
 
             
 
+            
+
              method.</para
           >
           <block subset="none" type="note">
             <para
               >For security reasons, cookies are disabled by default. If you want to use cookies, use the <see
                cref="P:System.Net.HttpWebRequest.CookieContainer" />
+
+              
 
               
 
@@ -3595,11 +4167,15 @@ received. The default value is <see
 
             
 
+            
+
              object containing
    the authentication credentials associated with
    the current instance. The default is
 <see
              langword="null" />
+
+            
 
             
 
@@ -3618,8 +4194,12 @@ received. The default value is <see
 
             
 
+            
+
              property contains authentication information to identify the maker of the request. The <see
              cref="P:System.Net.HttpWebRequest.Credentials" />
+
+            
 
             
 
@@ -3632,6 +4212,8 @@ received. The default value is <see
 
             
 
+            
+
             , in which case the user, password, and domain information contained in the <see
              cref="T:System.Net.NetworkCredential" />
 
@@ -3639,8 +4221,12 @@ received. The default value is <see
 
             
 
+            
+
              object is used to authenticate the request, or it can be a <see
              cref="T:System.Net.CredentialCache" />
+
+            
 
             
 
@@ -3656,8 +4242,12 @@ received. The default value is <see
 
             
 
+            
+
              property, which contains the credentials of the currently logged on user. To do this, set the <see
              cref="P:System.Net.WebClient.UseDefaultCredentials" />
+
+            
 
             
 
@@ -3673,8 +4263,12 @@ received. The default value is <see
 
             
 
+            
+
              class is being used in a middle-tier application, such as an ASP.NET application, the credentials in the <see
              cref="P:System.Net.CredentialCache.DefaultCredentials" />
+
+            
 
             
 
@@ -3688,6 +4282,8 @@ received. The default value is <see
           <para
             >To restrict HttpWebRequest to one or more authentication methods, use the <see
              cref="T:System.Net.CredentialCache" />
+
+            
 
             
 
@@ -3726,11 +4322,15 @@ received. The default value is <see
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="P:System.Net.HttpWebRequest.Date" />
+
+            
 
             
 
@@ -3743,8 +4343,12 @@ received. The default value is <see
 
             
 
+            
+
              object and can contain a <see
              cref="T:System.DateTimeKind" />
+
+            
 
             
 
@@ -3757,8 +4361,12 @@ received. The default value is <see
 
             
 
+            
+
             , <see
              cref="F:System.DateTimeKind.Utc" />
+
+            
 
             
 
@@ -3771,8 +4379,12 @@ received. The default value is <see
 
             
 
+            
+
             . Any kind of time can be set when using the <see
              cref="P:System.Net.HttpWebRequest.Date" />
+
+            
 
             
 
@@ -3785,6 +4397,8 @@ received. The default value is <see
 
             
 
+            
+
              is set or retrieved, the <see
              cref="P:System.Net.HttpWebRequest.Date" />
 
@@ -3792,8 +4406,12 @@ received. The default value is <see
 
             
 
+            
+
              property is assumed to be <see
              cref="F:System.DateTimeKind.Local" />
+
+            
 
             
 
@@ -3809,8 +4427,12 @@ received. The default value is <see
 
             
 
+            
+
              namespace always write it out the <see
              cref="P:System.Net.HttpWebRequest.Date" />
+
+            
 
             
 
@@ -3826,8 +4448,12 @@ received. The default value is <see
 
             
 
+            
+
              property is set to <see
              cref="F:System.DateTime.MinValue" />
+
+            
 
             
 
@@ -3840,8 +4466,12 @@ received. The default value is <see
 
             
 
+            
+
              property and the <see
              cref="T:System.Net.WebHeaderCollection" />
+
+            
 
             
 
@@ -3857,8 +4487,12 @@ received. The default value is <see
 
             
 
+            
+
              property is <see
              cref="F:System.DateTime.MinValue" />
+
+            
 
             
 
@@ -3871,8 +4505,12 @@ received. The default value is <see
 
             
 
+            
+
              property and the <see
              cref="T:System.Net.WebHeaderCollection" />
+
+            
 
             
 
@@ -3889,12 +4527,16 @@ received. The default value is <see
 
               
 
+              
+
               . If WebHeaderCollection is set, the property value is lost.</para
             >
           </block>
           <para
             >If the <see
              cref="P:System.Net.HttpWebRequest.Date" />
+
+            
 
             
 
@@ -3907,8 +4549,12 @@ received. The default value is <see
 
             
 
+            
+
              with no body, then a <see
              cref="T:System.Net.ProtocolViolationException" />
+
+            
 
             
 
@@ -3921,6 +4567,8 @@ received. The default value is <see
 
             
 
+            
+
             , <see
              cref="M:System.Net.HttpWebRequest.GetResponse" />
 
@@ -3928,8 +4576,12 @@ received. The default value is <see
 
             
 
+            
+
             , and <see
              cref="M:System.Net.HttpWebRequest.EndGetResponse(System.IAsyncResult)" />
+
+            
 
             
 
@@ -3974,6 +4626,8 @@ received. The default value is <see
           <para
             >There is no <see
              cref="P:System.Net.WebRequest.CachePolicy" />
+
+            
 
             
 
@@ -4056,8 +4710,12 @@ received. The default value is <see
 
             
 
+            
+
              property on an instance of the <see
              cref="T:System.Net.HttpWebRequest" />
+
+            
 
             
 
@@ -4071,6 +4729,8 @@ received. The default value is <see
           <para
             >Gets or sets the default for the <see
              cref="P:System.Net.HttpWebRequest.MaximumResponseHeadersLength" />
+
+            
 
             
 
@@ -4114,8 +4774,12 @@ received. The default value is <see
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -4130,8 +4794,12 @@ received. The default value is <see
 
           
 
+          
+
            was not returned by the current instance from a call to <see
            cref="M:System.Net.WebRequest.BeginGetRequestStream(System.AsyncCallback,System.Object)" />
+
+          
 
           
 
@@ -4155,6 +4823,8 @@ received. The default value is <see
 
             
 
+            
+
              was previously called.</para
           >
           <para>-or-</para>
@@ -4170,8 +4840,12 @@ received. The default value is <see
 
             
 
+            
+
              method completes an asynchronous request for a stream that was started by the <see
              cref="M:System.Net.HttpWebRequest.BeginGetRequestStream(System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -4184,6 +4858,8 @@ received. The default value is <see
 
             
 
+            
+
              object has been returned, you can send data with the <see
              cref="T:System.Net.HttpWebRequest" />
 
@@ -4191,8 +4867,12 @@ received. The default value is <see
 
             
 
+            
+
              by using the <see
              cref="M:System.IO.Stream.Write(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -4209,6 +4889,8 @@ received. The default value is <see
 
               
 
+              
+
                property before writing data to the stream.</para
             >
           </block>
@@ -4216,6 +4898,8 @@ received. The default value is <see
             <para
               >You must call the <see
                cref="M:System.IO.Stream.Close" />
+
+              
 
               
 
@@ -4237,6 +4921,8 @@ received. The default value is <see
 
               
 
+              
+
               .</para
             >
           </block>
@@ -4246,6 +4932,8 @@ received. The default value is <see
           <para
             >Ends an asynchronous request for a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -4264,11 +4952,15 @@ received. The default value is <see
 
             
 
+            
+
              to use to write request data.</para
           >
         </returns>
         <param name="asyncResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4340,8 +5032,12 @@ received. The default value is <see
 
           
 
+          
+
           is <see
            langword="null" />
+
+          
 
           
 
@@ -4356,8 +5052,12 @@ received. The default value is <see
 
           
 
+          
+
            was not returned by the current instance from a call to <see
            cref="M:System.Net.WebRequest.BeginGetResponse(System.AsyncCallback,System.Object)" />
+
+          
 
           
 
@@ -4379,12 +5079,16 @@ received. The default value is <see
 
             
 
+            
+
              property of the current instance is greater than 0 but the data has not been written to the request stream.</para
           >
         </exception>
         <exception cref="T:System.Net.WebException">
           <para>
             <see cref="M:System.Net.HttpWebRequest.Abort" />
+
+            
 
             
 
@@ -4405,8 +5109,12 @@ received. The default value is <see
 
             
 
+            
+
              method completes an asynchronous request for an Internet resource that was started by calling the <see
              cref="M:System.Net.HttpWebRequest.BeginGetResponse(System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -4423,6 +5131,8 @@ received. The default value is <see
 
               
 
+              
+
                method to close the stream and release the connection. Failure to do so may cause your application to run out of connections.</para
             >
           </block>
@@ -4434,6 +5144,8 @@ received. The default value is <see
                   >[&lt;topic://conUsingNetworkTracing&gt;]</a
                 >
               </format>
+
+              
 
               
 
@@ -4457,11 +5169,15 @@ received. The default value is <see
 
             
 
+            
+
              that contains the response from the Internet resource.</para
           >
         </returns>
         <param name="asyncResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4499,10 +5215,14 @@ received. The default value is <see
 
             
 
+            
+
              that contains the
    contents of the HTTP Expect header. The default value is
 <see
              langword="null" />
+
+            
 
             
 
@@ -4521,8 +5241,12 @@ received. The default value is <see
 
               
 
+              
+
                is <see
                langword="null" />
+
+              
 
               
 
@@ -4536,6 +5260,8 @@ received. The default value is <see
 
               
 
+              
+
                maintains, or all values except "100-continue" can be
       deleted from the list by setting <see
                cref="P:System.Net.HttpWebRequest.Expect" />
@@ -4544,8 +5270,12 @@ received. The default value is <see
 
               
 
+              
+
                to <see
                langword="null" />
+
+              
 
               
 
@@ -4591,6 +5321,8 @@ received. The default value is <see
 
             
 
+            
+
              containing the hash code for the current instance.</para
           >
         </returns>
@@ -4601,6 +5333,8 @@ received. The default value is <see
             <block subset="none" type="note"
               >This method overrides <see
                cref="M:System.Object.GetHashCode" qualify="true" />
+
+              
 
               
 
@@ -4648,6 +5382,8 @@ received. The default value is <see
 
             
 
+            
+
              are automatically tracked and serialized by the formatter.</para
           >
         </remarks>
@@ -4656,6 +5392,8 @@ received. The default value is <see
           <para
             >Populates a <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -4671,8 +5409,12 @@ received. The default value is <see
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -4687,8 +5429,12 @@ received. The default value is <see
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -4731,12 +5477,16 @@ received. The default value is <see
 
             
 
+            
+
              property of the current instance is "GET" or "HEAD". </para
           >
           <para> -or- </para>
           <para
             >The <see
              cref="P:System.Net.HttpWebRequest.ContentLength" />
+
+            
 
             
 
@@ -4754,6 +5504,8 @@ received. The default value is <see
 
             
 
+            
+
              method was called more than once.</para
           >
           <para>-or-</para>
@@ -4762,6 +5514,8 @@ received. The default value is <see
         <exception cref="T:System.Net.WebException">
           <para>
             <see cref="M:System.Net.HttpWebRequest.Abort" />
+
+            
 
             
 
@@ -4784,8 +5538,12 @@ received. The default value is <see
 
             
 
+            
+
              method returns a stream to use to send data for the <see
              cref="T:System.Net.HttpWebRequest" />
+
+            
 
             
 
@@ -4798,6 +5556,8 @@ received. The default value is <see
 
             
 
+            
+
              object has been returned, you can send data with the <see
              cref="T:System.Net.HttpWebRequest" />
 
@@ -4805,8 +5565,12 @@ received. The default value is <see
 
             
 
+            
+
              by using the <see
              cref="M:System.IO.Stream.Write(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -4822,11 +5586,15 @@ received. The default value is <see
 
             
 
+            
+
              property, then this must be done before retrieving the stream.</para
           >
           <para
             >You must call the <see
              cref="M:System.IO.Stream.Close" />
+
+            
 
             
 
@@ -4843,8 +5611,12 @@ received. The default value is <see
 
               
 
+              
+
                method, you must use the <see
                cref="M:System.Net.HttpWebRequest.GetResponse" />
+
+              
 
               
 
@@ -4866,6 +5638,8 @@ received. The default value is <see
 
               
 
+              
+
               .</para
             >
           </block>
@@ -4880,6 +5654,8 @@ received. The default value is <see
 
             
 
+            
+
              object to use to write request data.</para
           >
         </summary>
@@ -4888,6 +5664,8 @@ received. The default value is <see
           <para
             >A <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -4931,11 +5709,15 @@ received. The default value is <see
 
           
 
+          
+
            property of the current instance is not set. </exception
         >
         <exception cref="T:System.Net.WebException">
           <para>
             <see cref="M:System.Net.HttpWebRequest.Abort" />
+
+            
 
             
 
@@ -4958,6 +5740,8 @@ received. The default value is <see
 
             
 
+            
+
              method returns a <see
              cref="T:System.Net.WebResponse" />
 
@@ -4965,8 +5749,12 @@ received. The default value is <see
 
             
 
+            
+
              object that contains the response from the Internet resource. The actual instance returned is an <see
              cref="T:System.Net.HttpWebResponse" />
+
+            
 
             
 
@@ -4982,8 +5770,12 @@ received. The default value is <see
 
             
 
+            
+
              is thrown in several cases when the properties set on the <see
              cref="T:System.Net.HttpWebRequest" />
+
+            
 
             
 
@@ -4996,8 +5788,12 @@ received. The default value is <see
 
             
 
+            
+
              property and the <see
              cref="P:System.Net.HttpWebRequest.SendChunked" />
+
+            
 
             
 
@@ -5010,8 +5806,12 @@ received. The default value is <see
 
             
 
+            
+
              property or the <see
              cref="P:System.Net.HttpWebRequest.SendChunked" />
+
+            
 
             
 
@@ -5024,12 +5824,16 @@ received. The default value is <see
 
             
 
+            
+
              property is true).</para
           >
           <block subset="none" type="note">
             <para
               >You must call the <see
                cref="M:System.Net.HttpWebResponse.Close" />
+
+              
 
               
 
@@ -5048,6 +5852,8 @@ received. The default value is <see
 
               
 
+              
+
                return the same response object; the request is not reissued.</para
             >
           </block>
@@ -5060,8 +5866,12 @@ received. The default value is <see
 
               
 
+              
+
                method, you must use the <see
                cref="M:System.Net.HttpWebRequest.GetResponse" />
+
+              
 
               
 
@@ -5079,6 +5889,8 @@ received. The default value is <see
 
               
 
+              
+
                is thrown, use the <see
                cref="P:System.Net.WebException.Response" />
 
@@ -5086,8 +5898,12 @@ received. The default value is <see
 
               
 
+              
+
                and <see
                cref="P:System.Net.WebException.Status" />
+
+              
 
               
 
@@ -5109,6 +5925,8 @@ received. The default value is <see
 
               
 
+              
+
               .</para
             >
           </block>
@@ -5116,6 +5934,8 @@ received. The default value is <see
             <para
               >For security reasons, cookies are disabled by default. If you wish to use cookies, use the <see
                cref="P:System.Net.HttpWebRequest.CookieContainer" />
+
+              
 
               
 
@@ -5134,6 +5954,8 @@ received. The default value is <see
           <para
             >A <see
              cref="T:System.Net.WebResponse" />
+
+            
 
             
 
@@ -5171,9 +5993,13 @@ received. The default value is <see
 
             
 
+            
+
              if a response has been received; otherwise
 <see
              langword="false" />
+
+            
 
             
 
@@ -5225,6 +6051,8 @@ received. The default value is <see
 
             
 
+            
+
              containing the name/value pairs of the headers for
    the current instance.</para
           >
@@ -5242,8 +6070,12 @@ received. The default value is <see
 
             
 
+            
+
              collection contains the protocol headers associated with the request. The following table lists the HTTP headers that are not stored in the <see
              cref="P:System.Net.HttpWebRequest.Headers" />
+
+            
 
             
 
@@ -5275,6 +6107,8 @@ received. The default value is <see
 
                   
 
+                  
+
                    property. </para
                 >
               </description>
@@ -5292,8 +6126,12 @@ received. The default value is <see
 
                   
 
+                  
+
                    property and <see
                    cref="P:System.Net.HttpWebRequest.KeepAlive" />
+
+                  
 
                   
 
@@ -5316,6 +6154,8 @@ received. The default value is <see
 
                   
 
+                  
+
                    property. </para
                 >
               </description>
@@ -5328,6 +6168,8 @@ received. The default value is <see
                 <para
                   >Set by the <see
                    cref="P:System.Net.HttpWebRequest.ContentType" />
+
+                  
 
                   
 
@@ -5350,6 +6192,8 @@ received. The default value is <see
 
                   
 
+                  
+
                    property. </para
                 >
               </description>
@@ -5362,6 +6206,8 @@ received. The default value is <see
                 <para
                   >Set by the <see
                    cref="P:System.Net.HttpWebRequest.Date" />
+
+                  
 
                   
 
@@ -5384,6 +6230,8 @@ received. The default value is <see
 
                   
 
+                  
+
                    property. </para
                 >
               </description>
@@ -5396,6 +6244,8 @@ received. The default value is <see
                 <para
                   >Set by the <see
                    cref="P:System.Net.HttpWebRequest.IfModifiedSince" />
+
+                  
 
                   
 
@@ -5418,6 +6268,8 @@ received. The default value is <see
 
                   
 
+                  
+
                    method. </para
                 >
               </description>
@@ -5430,6 +6282,8 @@ received. The default value is <see
                 <para
                   >Set by the <see
                    cref="P:System.Net.HttpWebRequest.Referer" />
+
+                  
 
                   
 
@@ -5452,8 +6306,12 @@ received. The default value is <see
 
                   
 
+                  
+
                    property (the <see
                    cref="P:System.Net.HttpWebRequest.SendChunked" />
+
+                  
 
                   
 
@@ -5476,6 +6334,8 @@ received. The default value is <see
 
                   
 
+                  
+
                    property. </para
                 >
               </description>
@@ -5489,8 +6349,12 @@ received. The default value is <see
 
             
 
+            
+
              method throws an <see
              cref="T:System.ArgumentException" />
+
+            
 
             
 
@@ -5506,8 +6370,12 @@ received. The default value is <see
 
             
 
+            
+
              property after the request has been started by calling <see
              cref="M:System.Net.HttpWebRequest.GetRequestStream" />
+
+            
 
             
 
@@ -5520,8 +6388,12 @@ received. The default value is <see
 
             
 
+            
+
             , <see
              cref="M:System.Net.HttpWebRequest.GetResponse" />
+
+            
 
             
 
@@ -5534,8 +6406,12 @@ received. The default value is <see
 
             
 
+            
+
              method throws an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -5574,8 +6450,12 @@ received. The default value is <see
 
             
 
+            
+
              property can be used to set the Host header value to use in an HTTP request independent from the request URI. The <see
              cref="P:System.Net.HttpWebRequest.Host" />
+
+            
 
             
 
@@ -5586,6 +6466,8 @@ received. The default value is <see
           <para
             >The format for specifying a host and port must follow the rules in section 14.23 of RFC2616 published by the IETF. An example complying with these requirements that specifies a port of 8080 would be the following value for the <see
              cref="P:System.Net.HttpWebRequest.Host" />
+
+            
 
             
 
@@ -5602,8 +6484,12 @@ received. The default value is <see
 
             
 
+            
+
              property to explicitly specify a custom Host header value also affects areas caching, cookies, and authentication. When an application provides credentials for a specific URI prefix, the applications needs to make sure to use the URI containing the value of the Host header, not the target server in the URI. The key used when caching resources, uses the Host header value rather than the request URI. Cookies are stored in a <see
              cref="T:System.Net.CookieContainer" />
+
+            
 
             
 
@@ -5614,6 +6500,8 @@ received. The default value is <see
           <para
             >If the <see
              cref="P:System.Net.HttpWebRequest.Host" />
+
+            
 
             
 
@@ -5658,6 +6546,8 @@ received. The default value is <see
 
             
 
+            
+
              that contains the 
    contents of the HTTP If-Modified-Since
    header. The default value is the current
@@ -5674,8 +6564,12 @@ received. The default value is <see
 
             
 
+            
+
              property is a standard <see
              cref="T:System.DateTime" />
+
+            
 
             
 
@@ -5688,8 +6582,12 @@ received. The default value is <see
 
             
 
+            
+
              field of <see
              cref="F:System.DateTimeKind.Local" />
+
+            
 
             
 
@@ -5702,8 +6600,12 @@ received. The default value is <see
 
             
 
+            
+
             , or <see
              cref="F:System.DateTimeKind.Unspecified" />
+
+            
 
             
 
@@ -5716,8 +6618,12 @@ received. The default value is <see
 
             
 
+            
+
              property. If <see
              cref="F:System.DateTimeKind.Unspecified" />
+
+            
 
             
 
@@ -5730,8 +6636,12 @@ received. The default value is <see
 
             
 
+            
+
              property is assumed to be <see
              cref="F:System.DateTimeKind.Local" />
+
+            
 
             
 
@@ -5747,8 +6657,12 @@ received. The default value is <see
 
             
 
+            
+
              namespace always write it out the <see
              cref="P:System.Net.HttpWebRequest.IfModifiedSince" />
+
+            
 
             
 
@@ -5764,8 +6678,12 @@ received. The default value is <see
 
             
 
+            
+
              property is set to <see
              cref="F:System.DateTime.MinValue" />
+
+            
 
             
 
@@ -5778,8 +6696,12 @@ received. The default value is <see
 
             
 
+            
+
              property and the <see
              cref="T:System.Net.WebHeaderCollection" />
+
+            
 
             
 
@@ -5795,8 +6717,12 @@ received. The default value is <see
 
             
 
+            
+
              property is <see
              cref="F:System.DateTime.MinValue" />
+
+            
 
             
 
@@ -5809,8 +6735,12 @@ received. The default value is <see
 
             
 
+            
+
              property and the <see
              cref="T:System.Net.WebHeaderCollection" />
+
+            
 
             
 
@@ -5822,6 +6752,8 @@ received. The default value is <see
             <para
               >The value for this property is stored in <see
                cref="T:System.Net.WebHeaderCollection" />
+
+              
 
               
 
@@ -5864,6 +6796,8 @@ received. The default value is <see
 
             
 
+            
+
             indicates
    that the current request will contain an HTTP Connection header with the value
    "Keep-alive"
@@ -5874,9 +6808,13 @@ received. The default value is <see
 
             
 
+            
+
             . The default
    value is <see
              langword="true" />
+
+            
 
             
 
@@ -5895,8 +6833,12 @@ received. The default value is <see
 
             
 
+            
+
              to indicate a preference for persistent connections. When the <see
              cref="P:System.Net.HttpWebRequest.KeepAlive" />
+
+            
 
             
 
@@ -5908,6 +6850,8 @@ received. The default value is <see
             <para
               >When using HTTP/1.1, Keep-Alive is on by default. Setting <see
                cref="P:System.Net.HttpWebRequest.KeepAlive" />
+
+              
 
               
 
@@ -5957,6 +6901,8 @@ received. The default value is <see
 
             
 
+            
+
              value that
    indicates the maximum number of redirection responses that the current instance will follow. The
    default value is implementation-specific.</para
@@ -5975,8 +6921,12 @@ received. The default value is <see
 
             
 
+            
+
              property sets the maximum number of redirections for the request to follow if the <see
              cref="P:System.Net.HttpWebRequest.AllowAutoRedirect" />
+
+            
 
             
 
@@ -6028,8 +6978,12 @@ received. The default value is <see
 
             
 
+            
+
              property is not explicitly set, it defaults to the value of the <see
              cref="P:System.Net.HttpWebRequest.DefaultMaximumResponseHeadersLength" />
+
+            
 
             
 
@@ -6045,8 +6999,12 @@ received. The default value is <see
 
             
 
+            
+
              property, the <see
              cref="M:System.Net.HttpWebRequest.EndGetResponse(System.IAsyncResult)" />
+
+            
 
             
 
@@ -6059,8 +7017,12 @@ received. The default value is <see
 
             
 
+            
+
              methods will throw a <see
              cref="T:System.Net.WebException" />
+
+            
 
             
 
@@ -6073,8 +7035,12 @@ received. The default value is <see
 
             
 
+            
+
              property set to <see
              cref="F:System.Net.WebExceptionStatus.MessageLengthLimitExceeded" />
+
+            
 
             
 
@@ -6116,9 +7082,13 @@ received. The default value is <see
 
             
 
+            
+
              that identifies the media type of the current request. The default value is
 <see
              langword="null" />
+
+            
 
             
 
@@ -6137,6 +7107,8 @@ received. The default value is <see
 
             
 
+            
+
              property affects the <see
              cref="P:System.Net.HttpWebResponse.CharacterSet" />
 
@@ -6144,8 +7116,12 @@ received. The default value is <see
 
             
 
+            
+
              property. When you set the <see
              cref="P:System.Net.HttpWebRequest.MediaType" />
+
+            
 
             
 
@@ -6188,6 +7164,8 @@ received. The default value is <see
 
             
 
+            
+
              containing an HTTP method. The default value
    is "GET".</para
           >
@@ -6199,8 +7177,12 @@ received. The default value is <see
 
           
 
+          
+
           , <see
            cref="F:System.String.Empty" />
+
+          
 
           
 
@@ -6218,6 +7200,8 @@ received. The default value is <see
 
             
 
+            
+
              property can be set to any of the HTTP 1.1 protocol verbs: GET, HEAD, POST, PUT, DELETE, TRACE, or OPTIONS.</para
           >
           <para
@@ -6228,8 +7212,12 @@ received. The default value is <see
 
             
 
+            
+
              property is set to any value other than -1, the <see
              cref="P:System.Net.HttpWebRequest.Method" />
+
+            
 
             
 
@@ -6271,6 +7259,8 @@ received. The default value is <see
 
             
 
+            
+
             if the current request can be pipelined; otherwise,
 <see
              langword="false" />
@@ -6279,8 +7269,12 @@ received. The default value is <see
 
             
 
+            
+
             . The default is <see
              langword="true" />
+
+            
 
             
 
@@ -6299,8 +7293,12 @@ received. The default value is <see
 
             
 
+            
+
              property to indicate a preference for pipelined connections. When <see
              cref="P:System.Net.HttpWebRequest.Pipelined" />
+
+            
 
             
 
@@ -6311,6 +7309,8 @@ received. The default value is <see
           <para
             >Pipelined connections are made only when the <see
              cref="P:System.Net.HttpWebRequest.KeepAlive" />
+
+            
 
             
 
@@ -6352,6 +7352,8 @@ received. The default value is <see
 
             
 
+            
+
             to send a HTTP
 WWW-authenticate header with the current 
    instance without waiting for an authentication challenge from the requested
@@ -6362,9 +7364,13 @@ WWW-authenticate header with the current
 
             
 
+            
+
             . The default is
 <see
              langword="false" />
+
+            
 
             
 
@@ -6383,8 +7389,12 @@ WWW-authenticate header with the current
 
             
 
+            
+
              is successfully authenticated, if <see
              cref="P:System.Net.HttpWebRequest.PreAuthenticate" />
+
+            
 
             
 
@@ -6397,8 +7407,12 @@ WWW-authenticate header with the current
 
             
 
+            
+
              that matches the specific <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -6411,12 +7425,16 @@ WWW-authenticate header with the current
 
             
 
+            
+
              that contains the following:</para
           >
           <para>http://www.contoso.com/firstpath/</para>
           <para
             >Then the Authorization header for preauthentication is sent with each request to any of the following <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -6436,6 +7454,8 @@ WWW-authenticate header with the current
 
             
 
+            
+
              instances:</para
           >
           <para>http://www.contoso.com/</para>
@@ -6444,6 +7464,8 @@ WWW-authenticate header with the current
           <para
             >If the client request to a specific <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -6459,8 +7481,12 @@ WWW-authenticate header with the current
 
             
 
+            
+
              property indicates whether to send authentication information with subsequent requests to a <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -6473,11 +7499,15 @@ WWW-authenticate header with the current
 
             
 
+            
+
              up to the last forward slash without waiting to be challenged by the server.</para
           >
           <para>The following dialog between client and server illustrates the effect of this property. The dialog assumes that basic authentication is in use.</para>
           <para>
             <see cref="P:System.Net.HttpWebRequest.PreAuthenticate" />
+
+            
 
             
 
@@ -6495,6 +7525,8 @@ WWW-authenticate header with the current
           <para>Server: 200 OK </para>
           <para>
             <see cref="P:System.Net.HttpWebRequest.PreAuthenticate" />
+
+            
 
             
 
@@ -6546,9 +7578,13 @@ WWW-authenticate header with the current
 
             
 
+            
+
              that represents
    the HTTP version to use for the request. The default is <see
              cref="F:System.Net.HttpVersion.Version11" qualify="true" />
+
+            
 
             
 
@@ -6570,8 +7606,12 @@ WWW-authenticate header with the current
 
             
 
+            
+
              class supports only versions 1.0 and 1.1 of HTTP. Setting <see
              cref="P:System.Net.HttpWebRequest.ProtocolVersion" />
+
+            
 
             
 
@@ -6588,6 +7628,8 @@ WWW-authenticate header with the current
 
               
 
+              
+
                and <see
                cref="F:System.Net.HttpVersion.Version11" />
 
@@ -6595,8 +7637,12 @@ WWW-authenticate header with the current
 
               
 
+              
+
                fields of the <see
                cref="T:System.Net.HttpVersion" />
+
+              
 
               
 
@@ -6646,10 +7692,14 @@ WWW-authenticate header with the current
 
             
 
+            
+
              instance to
    use as a
    proxy for the current instance. The default value is set by calling <see
              cref="P:System.Net.GlobalProxySelection.Select" qualify="true" />
+
+            
 
             
 
@@ -6661,6 +7711,8 @@ WWW-authenticate header with the current
         <exception cref="T:System.ArgumentNullException"
           >A set operation was requested and the specified value was <see
            langword="null" />
+
+          
 
           
 
@@ -6682,8 +7734,12 @@ WWW-authenticate header with the current
 
           
 
+          
+
           . See <see
            cref="F:System.Security.Permissions.PermissionState.Unrestricted" />
+
+          
 
           
 
@@ -6701,8 +7757,12 @@ WWW-authenticate header with the current
 
             
 
+            
+
              property identifies the <see
              cref="T:System.Net.WebProxy" />
+
+            
 
             
 
@@ -6715,8 +7775,12 @@ WWW-authenticate header with the current
 
             
 
+            
+
              property to the proxy instance returned by the <see
              cref="M:System.Net.GlobalProxySelection.GetEmptyWebProxy" />
+
+            
 
             
 
@@ -6732,8 +7796,12 @@ WWW-authenticate header with the current
 
             
 
+            
+
              property is specified, then the proxy settings from the <see
              cref="P:System.Net.HttpWebRequest.Proxy" />
+
+            
 
             
 
@@ -6746,6 +7814,8 @@ WWW-authenticate header with the current
 
             
 
+            
+
              instance will use the proxy settings specified. If no proxy is specified in a config file and the <see
              cref="P:System.Net.HttpWebRequest.Proxy" />
 
@@ -6753,8 +7823,12 @@ WWW-authenticate header with the current
 
             
 
+            
+
              property is unspecified, the <see
              cref="T:System.Net.HttpWebRequest" />
+
+            
 
             
 
@@ -6770,8 +7844,12 @@ WWW-authenticate header with the current
 
             
 
+            
+
              class parses a proxy bypass list with wildcard characters inherited from Internet Explorer the same as the bypass list is parsed directly by Internet Explorer. For example, the <see
              cref="T:System.Net.HttpWebRequest" />
+
+            
 
             
 
@@ -6784,11 +7862,15 @@ WWW-authenticate header with the current
 
             
 
+            
+
              class and using Internet Explorer.</para
           >
           <para
             >The <see
              cref="T:System.Net.HttpWebRequest" />
+
+            
 
             
 
@@ -6809,6 +7891,8 @@ WWW-authenticate header with the current
 
                 
 
+                
+
                   or <see
                  cref="F:System.Net.IPAddress.IPv6Loopback" />
 
@@ -6816,8 +7900,12 @@ WWW-authenticate header with the current
 
                 
 
+                
+
                 ) or the destination contains an <see
                  cref="T:System.Net.IPAddress" />
+
+                
 
                 
 
@@ -6835,6 +7923,8 @@ WWW-authenticate header with the current
 
                 
 
+                
+
                 ).</para
               >
             </item>
@@ -6847,8 +7937,12 @@ WWW-authenticate header with the current
 
             
 
+            
+
              property after the request has been started by calling the <see
              cref="M:System.Net.HttpWebRequest.GetRequestStream" />
+
+            
 
             
 
@@ -6861,8 +7955,12 @@ WWW-authenticate header with the current
 
             
 
+            
+
             , <see
              cref="M:System.Net.HttpWebRequest.GetResponse" />
+
+            
 
             
 
@@ -6875,8 +7973,12 @@ WWW-authenticate header with the current
 
             
 
+            
+
              method throws an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -6888,6 +7990,8 @@ WWW-authenticate header with the current
                 >DefaultProxy Element (Network Settings)</a
               >
             </format>
+
+            
 
             
 
@@ -6927,6 +8031,8 @@ WWW-authenticate header with the current
 
             
 
+            
+
              property is used when writing to the stream returned by the <see
              cref="M:System.Net.HttpWebRequest.GetRequestStream" />
 
@@ -6934,8 +8040,12 @@ WWW-authenticate header with the current
 
             
 
+            
+
              method or reading from the stream returned by the <see
              cref="M:System.Net.HttpWebResponse.GetResponseStream" />
+
+            
 
             
 
@@ -6951,8 +8061,12 @@ WWW-authenticate header with the current
 
             
 
+            
+
              property controls the time-out for the <see
              cref="M:System.IO.Stream.Read(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -6965,8 +8079,12 @@ WWW-authenticate header with the current
 
             
 
+            
+
              method, and for the <see
              cref="M:System.IO.Stream.Write(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -6979,11 +8097,15 @@ WWW-authenticate header with the current
 
             
 
+            
+
              method.</para
           >
           <para
             >To specify the amount of time to wait for the request to complete, use the <see
              cref="P:System.Net.HttpWebRequest.Timeout" />
+
+            
 
             
 
@@ -7025,10 +8147,14 @@ WWW-authenticate header with the current
 
             
 
+            
+
              containing the 
    value of the HTTP Referer header. The default value is
 <see
              langword="null" />
+
+            
 
             
 
@@ -7047,8 +8173,12 @@ WWW-authenticate header with the current
 
             
 
+            
+
              property is true, the <see
              cref="P:System.Net.HttpWebRequest.Referer" />
+
+            
 
             
 
@@ -7064,12 +8194,16 @@ WWW-authenticate header with the current
 
             
 
+            
+
              property to null.</para
           >
           <block subset="none" type="note">
             <para
               >The value for this property is stored in <see
                cref="T:System.Net.WebHeaderCollection" />
+
+              
 
               
 
@@ -7113,6 +8247,8 @@ WWW-authenticate header with the current
 
             
 
+            
+
              of the resource that receives requests sent by the
    current instance.</para
           >
@@ -7127,6 +8263,8 @@ WWW-authenticate header with the current
 
             
 
+            
+
              object passed to <see
              cref="T:System.Net.HttpWebRequest" />
 
@@ -7134,8 +8272,12 @@ WWW-authenticate header with the current
 
             
 
+            
+
              by the call to <see
              cref="M:System.Net.WebRequest.Create(System.String)" />
+
+            
 
             
 
@@ -7151,8 +8293,12 @@ WWW-authenticate header with the current
 
             
 
+            
+
              property. To get the actual URI that responded to the request, examine the <see
              cref="P:System.Net.HttpWebRequest.Address" />
+
+            
 
             
 
@@ -7195,6 +8341,8 @@ WWW-authenticate header with the current
             
 
             
+
+            
 to send data in segments; otherwise,
 <see
              langword="false" />
@@ -7203,8 +8351,12 @@ to send data in segments; otherwise,
 
             
 
+            
+
             . The default value is <see
              langword="false" />
+
+            
 
             
 
@@ -7226,11 +8378,15 @@ to send data in segments; otherwise,
 
             
 
+            
+
              is true, the request sends data to the Internet resource in segments. The Internet resource must support receiving chunked data.</para
           >
           <para
             >Changing the <see
              cref="P:System.Net.HttpWebRequest.SendChunked" />
+
+            
 
             
 
@@ -7243,8 +8399,12 @@ to send data in segments; otherwise,
 
             
 
+            
+
             , <see
              cref="M:System.Net.HttpWebRequest.BeginGetRequestStream(System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -7257,6 +8417,8 @@ to send data in segments; otherwise,
 
             
 
+            
+
             , or <see
              cref="M:System.Net.HttpWebRequest.BeginGetResponse(System.AsyncCallback,System.Object)" />
 
@@ -7264,8 +8426,12 @@ to send data in segments; otherwise,
 
             
 
+            
+
              method throws an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -7311,6 +8477,8 @@ to send data in segments; otherwise,
 
             
 
+            
+
              that represents the network connection to the destination. The value of this property can be, but is not required to be,  <see
              langword="null" />
 
@@ -7318,8 +8486,12 @@ to send data in segments; otherwise,
 
             
 
+            
+
              until the <see
              cref="M:System.Net.HttpWebRequest.GetResponse" />
+
+            
 
             
 
@@ -7338,8 +8510,12 @@ to send data in segments; otherwise,
 
             
 
+            
+
              property may be different from <see
              cref="P:System.Net.HttpWebRequest.Address" />
+
+            
 
             
 
@@ -7383,6 +8559,8 @@ to send data in segments; otherwise,
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -7421,6 +8599,8 @@ to send data in segments; otherwise,
 
             
 
+            
+
              are automatically tracked and serialized by the formatter.</para
           >
         </remarks>
@@ -7429,6 +8609,8 @@ to send data in segments; otherwise,
           <para
             >Populates a <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -7444,8 +8626,12 @@ to send data in segments; otherwise,
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -7460,8 +8646,12 @@ to send data in segments; otherwise,
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -7498,9 +8688,13 @@ to send data in segments; otherwise,
 
             
 
+            
+
              indicating the number of milliseconds to wait for a response until the request times out,
    or <see
              cref="F:System.Threading.Timeout.Infinite" qualify="true" />
+
+            
 
             
 
@@ -7519,6 +8713,8 @@ to send data in segments; otherwise,
 
             
 
+            
+
              is specified for a set operation.</para
           >
         </exception>
@@ -7531,8 +8727,12 @@ to send data in segments; otherwise,
 
             
 
+            
+
              is the number of milliseconds that a subsequent synchronous request made with the <see
              cref="M:System.Net.HttpWebRequest.GetResponse" />
+
+            
 
             
 
@@ -7545,8 +8745,12 @@ to send data in segments; otherwise,
 
             
 
+            
+
              method waits for a stream. The <see
              cref="P:System.Net.HttpWebRequest.Timeout" />
+
+            
 
             
 
@@ -7559,8 +8763,12 @@ to send data in segments; otherwise,
 
             
 
+            
+
              and <see
              cref="M:System.Net.HttpWebRequest.GetResponse" />
+
+            
 
             
 
@@ -7573,6 +8781,8 @@ to send data in segments; otherwise,
 
             
 
+            
+
              with the <see
              cref="P:System.Net.WebException.Status" />
 
@@ -7580,8 +8790,12 @@ to send data in segments; otherwise,
 
             
 
+            
+
              property set to <see
              cref="F:System.Net.WebExceptionStatus.Timeout" />
+
+            
 
             
 
@@ -7597,6 +8811,8 @@ to send data in segments; otherwise,
 
             
 
+            
+
              property must be set before the <see
              cref="M:System.Net.HttpWebRequest.GetRequestStream" />
 
@@ -7604,8 +8820,12 @@ to send data in segments; otherwise,
 
             
 
+            
+
              or <see
              cref="M:System.Net.HttpWebRequest.GetResponse" />
+
+            
 
             
 
@@ -7618,6 +8838,8 @@ to send data in segments; otherwise,
 
             
 
+            
+
              property after calling the <see
              cref="M:System.Net.HttpWebRequest.GetRequestStream" />
 
@@ -7625,8 +8847,12 @@ to send data in segments; otherwise,
 
             
 
+            
+
              or <see
              cref="M:System.Net.HttpWebRequest.GetResponse" />
+
+            
 
             
 
@@ -7642,6 +8868,8 @@ to send data in segments; otherwise,
 
             
 
+            
+
              property has no effect on asynchronous requests made with the <see
              cref="M:System.Net.HttpWebRequest.BeginGetResponse(System.AsyncCallback,System.Object)" />
 
@@ -7649,8 +8877,12 @@ to send data in segments; otherwise,
 
             
 
+            
+
              or <see
              cref="M:System.Net.HttpWebRequest.BeginGetRequestStream(System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -7667,12 +8899,16 @@ to send data in segments; otherwise,
 
               
 
+              
+
                method.</para
             >
           </block>
           <para
             >To specify the amount of time to wait before a read or write operation times out, use the <see
              cref="P:System.Net.HttpWebRequest.ReadWriteTimeout" />
+
+            
 
             
 
@@ -7688,8 +8924,12 @@ to send data in segments; otherwise,
 
             
 
+            
+
              to a value less than 15 seconds, it may take 15 seconds or more before a <see
              cref="T:System.Net.WebException" />
+
+            
 
             
 
@@ -7708,8 +8948,12 @@ to send data in segments; otherwise,
 
             
 
+            
+
              and <see
              cref="M:System.Net.HttpWebRequest.GetRequestStream" />
+
+            
 
             
 
@@ -7748,10 +8992,14 @@ to send data in segments; otherwise,
 
             
 
+            
+
              that contains the value of the
    HTTP Transfer-encoding header.
    The default value is <see
              langword="null" />
+
+            
 
             
 
@@ -7767,8 +9015,12 @@ to send data in segments; otherwise,
 
           
 
+          
+
            is set when <see
            cref="P:System.Net.HttpWebRequest.SendChunked" />
+
+          
 
           
 
@@ -7781,10 +9033,14 @@ to send data in segments; otherwise,
 
           
 
+          
+
           .</exception
         >
         <exception cref="T:System.ArgumentException">
           <see cref="P:System.Net.HttpWebRequest.TransferEncoding" />
+
+          
 
           
 
@@ -7802,8 +9058,12 @@ to send data in segments; otherwise,
 
             
 
+            
+
              property, you must first set the <see
              cref="P:System.Net.HttpWebRequest.SendChunked" />
+
+            
 
             
 
@@ -7816,8 +9076,12 @@ to send data in segments; otherwise,
 
             
 
+            
+
              by setting it to null has no effect on the value of <see
              cref="P:System.Net.HttpWebRequest.SendChunked" />
+
+            
 
             
 
@@ -7833,12 +9097,16 @@ to send data in segments; otherwise,
 
             
 
+            
+
              property replace any existing contents.</para
           >
           <block subset="none" type="note">
             <para
               >The value for this property is stored in <see
                cref="T:System.Net.WebHeaderCollection" />
+
+              
 
               
 
@@ -7891,6 +9159,8 @@ to send data in segments; otherwise,
 
             
 
+            
+
              property to true be sure to take the following precautions: </para
           >
           <list type="bullet">
@@ -7898,6 +9168,8 @@ to send data in segments; otherwise,
               <para
                 >Use the <see
                  cref="P:System.Net.HttpWebRequest.ConnectionGroupName" />
+
+                
 
                 
 
@@ -7918,6 +9190,8 @@ to send data in segments; otherwise,
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
@@ -7929,8 +9203,12 @@ to send data in segments; otherwise,
 
               
 
+              
+
                and <see
                cref="P:System.Net.HttpWebRequest.UnsafeAuthenticatedConnectionSharing" />
+
+              
 
               
 
@@ -7972,8 +9250,12 @@ to send data in segments; otherwise,
 
             
 
+            
+
              object should, if requested by the server, be authenticated using the credentials of the currently logged on user. For client applications, this is the desired behavior in most scenarios. For middle-tier applications, such as ASP.NET applications, instead of using this property, you would typically set the <see
              cref="P:System.Net.HttpWebRequest.Credentials" />
+
+            
 
             
 
@@ -7987,6 +9269,8 @@ to send data in segments; otherwise,
           <para
             >Gets or sets a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -8024,9 +9308,13 @@ to send data in segments; otherwise,
 
             
 
+            
+
              containing the value of the HTTP User-agent header. The default value is
 <see
              langword="null" />
+
+            
 
             
 

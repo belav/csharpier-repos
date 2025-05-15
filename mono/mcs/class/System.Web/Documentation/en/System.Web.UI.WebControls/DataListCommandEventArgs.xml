@@ -27,8 +27,12 @@
 
         
 
+        
+
          event is raised when the Cancel button for an item in the <see
          cref="T:System.Web.UI.WebControls.DataList" />
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
          event is raised when the Delete button for an item in the <see
          cref="T:System.Web.UI.WebControls.DataList" />
+
+        
 
         
 
@@ -61,8 +69,12 @@
 
         
 
+        
+
          event is raised when the Edit button for an item in the <see
          cref="T:System.Web.UI.WebControls.DataList" />
+
+        
 
         
 
@@ -78,6 +90,8 @@
 
         
 
+        
+
          event is raised when any button for an item in the <see
          cref="T:System.Web.UI.WebControls.DataList" />
 
@@ -85,8 +99,12 @@
 
         
 
+        
+
          control is clicked. This allows you to programmatically test for when a specific command button is clicked and take appropriate action. This event is commonly used to handle custom command buttons for the <see
          cref="T:System.Web.UI.WebControls.DataList" />
+
+        
 
         
 
@@ -102,8 +120,12 @@
 
         
 
+        
+
          event is raised when the Update button for an item in the <see
          cref="T:System.Web.UI.WebControls.DataList" />
+
+        
 
         
 
@@ -119,8 +141,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.WebControls.DataListCommandEventArgs.#ctor(System.Web.UI.WebControls.DataListItem,System.Object,System.Web.UI.WebControls.CommandEventArgs)" />
+
+        
 
         
 
@@ -133,6 +159,8 @@
          type="text/html">
           <a href="01E4F1BC-E55E-413F-98C7-6588493E5F67">[&lt;topic://cpconEventsOverview&gt;]</a>
         </format>
+
+        
 
         
 
@@ -151,8 +179,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Web.UI.WebControls.DataList.DeleteCommand" />
+
+        
 
         
 
@@ -165,8 +197,12 @@
 
         
 
+        
+
         , <see
          cref="E:System.Web.UI.WebControls.DataList.ItemCommand" />
+
+        
 
         
 
@@ -179,8 +215,12 @@
 
         
 
+        
+
          events of the <see
          cref="T:System.Web.UI.WebControls.DataList" />
+
+        
 
         
 
@@ -216,11 +256,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >When an instance of <see
              cref="T:System.Web.UI.WebControls.DataListCommandEventArgs" />
+
+            
 
             
 
@@ -252,6 +296,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -264,6 +310,8 @@
                 <para
                   >The value of the <paramref
                    name="commandSource" />
+
+                  
 
                   
 
@@ -285,6 +333,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -295,8 +345,12 @@
 
           
 
+          
+
           The selected item from the <see
            cref="T:System.Web.UI.WebControls.DataList" />
+
+          
 
           
 
@@ -323,6 +377,8 @@
           <para
             >Use the <see
              cref="P:System.Web.UI.WebControls.DataListCommandEventArgs.CommandSource" />
+
+            
 
             
 
@@ -362,8 +418,12 @@
 
             
 
+            
+
              property to access information about the selected item in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 
@@ -377,6 +437,8 @@
           <para
             >Gets the item containing the command source in the <see
              cref="T:System.Web.UI.WebControls.DataList" />
+
+            
 
             
 

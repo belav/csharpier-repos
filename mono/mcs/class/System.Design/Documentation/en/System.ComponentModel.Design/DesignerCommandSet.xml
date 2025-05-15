@@ -20,8 +20,12 @@
 
         
 
+        
+
          class provides the <see
          cref="P:System.ComponentModel.Design.ComponentDesigner.ActionLists" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
          properties to query for the <see
          cref="T:System.ComponentModel.Design.DesignerActionList" />
+
+        
 
         
 
@@ -48,8 +56,12 @@
 
         
 
+        
+
          collections, respectively. However, if a design-time tool author decides not to derive from this class, the <see
          cref="T:System.ComponentModel.Design.DesignerCommandSet" />
+
+        
 
         
 
@@ -60,6 +72,8 @@
       <para
         >The <see
          cref="T:System.ComponentModel.Design.DesignerCommandSet" />
+
+        
 
         
 
@@ -103,6 +117,8 @@
 
               
 
+              
+
               .</para
             >
           </description>
@@ -122,6 +138,8 @@
 
               
 
+              
+
               .</para
             >
           </description>
@@ -135,8 +153,12 @@
 
         
 
+        
+
          should be added as a site-specific service. Externally, a service of this type should first be queried to discover smart tag and designer verb functionality. If this service is not found, then the <see
          cref="P:System.ComponentModel.Design.IDesigner.Verbs" />
+
+        
 
         
 
@@ -150,6 +172,8 @@
       <para
         >Represents a base class for design-time tools, not derived from <see
          cref="T:System.ComponentModel.Design.ComponentDesigner" />
+
+        
 
         
 
@@ -182,6 +206,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -206,6 +232,8 @@
           <para
             >The base implementation simply calls <see
              cref="M:System.ComponentModel.Design.DesignerCommandSet.GetCommands(System.String)" />
+
+            
 
             
 
@@ -246,6 +274,8 @@
 
             
 
+            
+
             . The base implementation of the <see
              cref="P:System.ComponentModel.Design.DesignerCommandSet.Verbs" />
 
@@ -253,8 +283,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ComponentModel.Design.DesignerCommandSet.ActionLists" />
+
+            
 
             
 
@@ -305,8 +339,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.ComponentModel.Design.DesignerVerb" />
+
+            
 
             
 
@@ -322,6 +360,8 @@
 
           
 
+          
+
           The type of collection to return, indicating either a <see
            cref="T:System.ComponentModel.Design.DesignerActionListCollection" />
 
@@ -329,8 +369,12 @@
 
           
 
+          
+
            or a <see
            cref="T:System.ComponentModel.Design.DesignerVerbCollection" />
+
+          
 
           
 
@@ -359,6 +403,8 @@
           <para
             >The base implementation simply calls <see
              cref="M:System.ComponentModel.Design.DesignerCommandSet.GetCommands(System.String)" />
+
+            
 
             
 

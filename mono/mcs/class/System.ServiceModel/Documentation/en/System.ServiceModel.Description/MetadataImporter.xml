@@ -24,8 +24,12 @@
 
         
 
+        
+
          abstract class to import service metadata. Types that derive from the <see
          cref="T:System.ServiceModel.Description.MetadataImporter" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          implementation collects the policy expressions attached to the service metadata in a <see
          cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+
+        
 
         
 
@@ -55,6 +63,8 @@
 
         
 
+        
+
          then processes the policies as part of importing the metadata by calling the implementations of the <see
          cref="T:System.ServiceModel.Description.IPolicyImportExtension" />
 
@@ -62,8 +72,12 @@
 
         
 
+        
+
          interface in the <see
          cref="P:System.ServiceModel.Description.MetadataImporter.PolicyImportExtensions" />
+
+        
 
         
 
@@ -79,8 +93,12 @@
 
         
 
+        
+
          by adding your own implementation of the <see
          cref="T:System.ServiceModel.Description.IPolicyImportExtension" />
+
+        
 
         
 
@@ -93,8 +111,12 @@
 
         
 
+        
+
          property on a <see
          cref="T:System.ServiceModel.Description.MetadataImporter" />
+
+        
 
         
 
@@ -110,8 +132,12 @@
 
         
 
+        
+
          type is the implementation of the <see
          cref="T:System.ServiceModel.Description.MetadataImporter" />
+
+        
 
         
 
@@ -124,8 +150,12 @@
 
         
 
+        
+
          type imports WSDL metadata with attached policies that are bundled in a <see
          cref="T:System.ServiceModel.Description.MetadataSet" />
+
+        
 
         
 
@@ -141,8 +171,12 @@
 
         
 
+        
+
          interface and then adding your implementation to the <see
          cref="P:System.ServiceModel.Description.WsdlImporter.WsdlImportExtensions" />
+
+        
 
         
 
@@ -155,6 +189,8 @@
 
         
 
+        
+
          instance. The <see
          cref="T:System.ServiceModel.Description.WsdlImporter" />
 
@@ -162,8 +198,12 @@
 
         
 
+        
+
          can also load implementations of the <see
          cref="T:System.ServiceModel.Description.IWsdlImportExtension" />
+
+        
 
         
 
@@ -180,8 +220,12 @@
 
           
 
+          
+
            constructor is internal, you cannot derive from <see
            cref="T:System.ServiceModel.Description.MetadataImporter" />
+
+          
 
           
 
@@ -196,6 +240,8 @@
       <para
         >Imports metadata into <see
          cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+
+        
 
         
 
@@ -229,6 +275,8 @@
           <para
             >Always check the <see
              cref="P:System.ServiceModel.Description.MetadataImporter.Errors" />
+
+            
 
             
 
@@ -300,6 +348,8 @@
 
             
 
+            
+
              method to return all endpoints in the imported metadata. Metadata that has been imported as service endpoints cannot be used to create a runtime or export metadata because the imported endpoints contain no managed type information. To use the metadata to create a client or service runtime or to generate metadata, you must first generate and compile code from the metadata and use that type information to create a new <see
              cref="T:System.ServiceModel.Description.ContractDescription" />
 
@@ -307,8 +357,12 @@
 
             
 
+            
+
              object using <see
              cref="Overload:System.ServiceModel.Description.ContractDescription.GetContract" />
+
+            
 
             
 
@@ -326,6 +380,8 @@
           <para
             >A collection of <see
              cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+
+            
 
             
 
@@ -364,6 +420,8 @@
 
             
 
+            
+
              property to add or remove contract descriptions and their associated XML names that the importer can reference.</para
           >
         </remarks>
@@ -396,6 +454,8 @@
           <para
             >Use the <see
              cref="P:System.ServiceModel.Description.MetadataImporter.PolicyImportExtensions" />
+
+            
 
             
 

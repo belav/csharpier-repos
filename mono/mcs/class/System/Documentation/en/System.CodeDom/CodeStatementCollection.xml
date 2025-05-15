@@ -41,8 +41,12 @@
 
         
 
+        
+
          class provides a simple collection object that can be used to store a set of <see
          cref="T:System.CodeDom.CodeStatement" />
+
+        
 
         
 
@@ -56,6 +60,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.CodeDom.CodeStatement" />
+
+        
 
         
 
@@ -87,6 +93,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeStatementCollection" />
+
+            
 
             
 
@@ -128,8 +136,12 @@
 
             
 
+            
+
              class that contains the specified array of <see
              cref="T:System.CodeDom.CodeStatement" />
+
+            
 
             
 
@@ -145,8 +157,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.CodeDom.CodeStatement" />
+
+          
 
           
 
@@ -187,6 +203,8 @@
 
             
 
+            
+
              class that contains the elements of the specified source collection.</para
           >
         </summary>
@@ -197,8 +215,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeStatementCollection" />
+
+          
 
           
 
@@ -241,6 +263,8 @@
 
             
 
+            
+
              object to the collection.</para
           >
         </summary>
@@ -255,8 +279,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 
@@ -296,6 +324,8 @@
 
             
 
+            
+
              object to the collection.</para
           >
         </summary>
@@ -310,8 +340,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeStatement" />
+
+          
 
           
 
@@ -354,6 +388,8 @@
 
             
 
+            
+
              objects to the collection.</para
           >
         </summary>
@@ -364,8 +400,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.CodeDom.CodeStatement" />
+
+          
 
           
 
@@ -408,6 +448,8 @@
 
             
 
+            
+
              object to the end of the collection.</para
           >
         </summary>
@@ -418,8 +460,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeStatementCollection" />
+
+          
 
           
 
@@ -462,6 +508,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -476,8 +524,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeStatement" />
+
+          
 
           
 
@@ -521,8 +573,12 @@
 
             
 
+            
+
              object to a one-dimensional <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -538,8 +594,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -549,6 +609,8 @@
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -591,8 +653,12 @@
 
             
 
+            
+
              object in the <see
              cref="T:System.CodeDom.CodeStatementCollection" />
+
+            
 
             
 
@@ -612,8 +678,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeStatement" />
+
+          
 
           
 
@@ -657,11 +727,15 @@
 
             
 
+            
+
              object into the collection at the specified index.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -676,8 +750,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeStatement" />
+
+          
 
           
 
@@ -748,6 +826,8 @@
 
             
 
+            
+
              object from the collection.</para
           >
         </summary>
@@ -758,8 +838,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.CodeDom.CodeStatement" />
+
+          
 
           
 

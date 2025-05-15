@@ -33,8 +33,12 @@
 
         
 
+        
+
          method of an <see
          cref="T:System.AppDomain" />
+
+        
 
         
 
@@ -101,8 +105,12 @@
 
             
 
+            
+
              set to the empty string ("") and <see
              cref="P:System.Security.Principal.GenericIdentity.IsAuthenticated" />
+
+            
 
             
 

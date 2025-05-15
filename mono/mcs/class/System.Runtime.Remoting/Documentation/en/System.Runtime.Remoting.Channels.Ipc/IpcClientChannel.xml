@@ -29,6 +29,8 @@
 
         
 
+        
+
          class uses the Windows interprocess communication (IPC) system to transport messages between application domains on the same computer. When communicating between application domains on the same computer, the IPC channel is much faster than the TCP or HTTP channels.</para
       >
       <para
@@ -39,8 +41,12 @@
 
         
 
+        
+
          interface through which all messages processed by the <see
          cref="T:System.Runtime.Remoting.Channels.Ipc.IpcClientChannel" />
+
+        
 
         
 
@@ -56,11 +62,15 @@
 
         
 
+        
+
          class uses a binary formatter to serialize all messages.</para
       >
       <para
         >A <see
          cref="T:System.Runtime.Remoting.Channels.Ipc.IpcClientChannel" />
+
+        
 
         
 
@@ -73,8 +83,12 @@
 
         
 
+        
+
          method) or programmatically (by passing a <see
          cref="T:System.Collections.IDictionary" />
+
+        
 
         
 
@@ -87,8 +101,12 @@
 
         
 
+        
+
          constructor). For a list of these configuration properties, see the documentation for the <see
          cref="M:System.Runtime.Remoting.Channels.Ipc.IpcClientChannel.#ctor(System.Collections.IDictionary,System.Runtime.Remoting.Channels.IClientChannelSinkProvider)" />
+
+        
 
         
 
@@ -114,6 +132,8 @@
           <para
             >The configuration properties of the <see
              cref="T:System.Runtime.Remoting.Channels.Tcp.TcpClientChannel" />
+
+            
 
             
 
@@ -160,6 +180,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -197,11 +219,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >If you do not require sink functionality, set the <paramref
              name="sinkProvider" />
+
+            
 
             
 
@@ -220,6 +246,8 @@
 
             
 
+            
+
              class with the specified configuration properties and sink.</para
           >
         </summary>
@@ -230,8 +258,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -246,8 +278,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" />
+
+          
 
           
 
@@ -285,8 +321,12 @@
 
             
 
+            
+
              property by using the <paramref
              name="name" />
+
+            
 
             
 
@@ -297,6 +337,8 @@
           <para
             >If you do not require sink functionality, set the <paramref
              name="sinkProvider" />
+
+            
 
             
 
@@ -315,11 +357,15 @@
 
             
 
+            
+
              class with the specified name and sink.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -334,8 +380,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Remoting.Channels.IClientChannelSinkProvider" />
+
+          
 
           
 
@@ -362,6 +412,8 @@
           <para
             >Every registered channel has a unique name. The name is used to retrieve a specific channel when calling the <see
              cref="M:System.Runtime.Remoting.Channels.ChannelServices.GetChannel(System.String)" />
+
+            
 
             
 

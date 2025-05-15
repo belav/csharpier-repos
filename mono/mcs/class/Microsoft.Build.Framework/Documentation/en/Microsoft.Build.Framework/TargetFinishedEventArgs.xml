@@ -28,6 +28,8 @@
 
         
 
+        
+
          class. </para
       >
     </summary>
@@ -45,6 +47,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:Microsoft.Build.Framework.TargetFinishedEventArgs" />
+
+            
 
             
 
@@ -85,8 +89,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="P:Microsoft.Build.Framework.BuildEventArgs.Message" />
+
+            
 
             
 
@@ -99,8 +107,12 @@
 
             
 
+            
+
             , <see
              cref="P:Microsoft.Build.Framework.TargetFinishedEventArgs.TargetName" />
+
+            
 
             
 
@@ -113,8 +125,12 @@
 
             
 
+            
+
             , and <see
              cref="P:Microsoft.Build.Framework.TargetFinishedEventArgs.Succeeded" />
+
+            
 
             
 
@@ -130,10 +146,14 @@
 
           
 
+          
+
           The text of the event.</param
         >
         <param name="helpKeyword">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -148,10 +168,14 @@
 
           
 
+          
+
           The name of the target associated with the event.</param
         >
         <param name="projectFile">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -166,10 +190,14 @@
 
           
 
+          
+
           The name of the target file.</param
         >
         <param name="succeeded">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -67,6 +67,8 @@
 
             
 
+            
+
              class with default values.</para
           >
         </summary>
@@ -106,6 +108,8 @@
 
             
 
+            
+
              class, setting the properties to specified values.</para
           >
         </summary>
@@ -116,8 +120,12 @@
 
           
 
+          
+
           The fault code for the new instance of <see
            cref="T:System.Runtime.Serialization.Formatters.SoapFault" />
+
+          
 
           
 
@@ -132,8 +140,12 @@
 
           
 
+          
+
           The fault string for the new instance of <see
            cref="T:System.Runtime.Serialization.Formatters.SoapFault" />
+
+          
 
           
 
@@ -148,6 +160,8 @@
 
           
 
+          
+
           The URI of the object that generated the fault. </param
         >
         <param name="serverFault">
@@ -157,8 +171,12 @@
 
           
 
+          
+
           The description of a common language runtime exception. This information is also present in the <see
            cref="P:System.Runtime.Serialization.Formatters.SoapFault.Detail" />
+
+          
 
           
 
@@ -196,6 +214,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -225,6 +245,8 @@
 
             
 
+            
+
              property provides information about the cause of the fault within the message path.</para
           >
         </remarks>
@@ -233,6 +255,8 @@
           <para
             >Gets or sets the fault actor for the <see
              cref="T:System.Runtime.Serialization.Formatters.SoapFault" />
+
+            
 
             
 
@@ -271,6 +295,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -299,6 +325,8 @@
           <para
             >Gets or sets the fault message for the <see
              cref="T:System.Runtime.Serialization.Formatters.SoapFault" />
+
+            
 
             
 
@@ -343,8 +371,12 @@
 
             
 
+            
+
              with the data to serialize the <see
              cref="T:System.Runtime.Serialization.Formatters.SoapFault" />
+
+            
 
             
 
@@ -360,8 +392,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -376,8 +412,12 @@
 
           
 
+          
+
           The destination (see <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 

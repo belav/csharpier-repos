@@ -51,8 +51,12 @@
 
         
 
+        
+
          +X <subscript
         >1</subscript>
+
+        
 
         
 
@@ -65,8 +69,12 @@
 
         
 
+        
+
         )/n, where each X <subscript
         >i</subscript>
+
+        
 
         
 
@@ -82,8 +90,12 @@
 
         
 
+        
+
          -X <subscript
         >0</subscript>
+
+        
 
         
 
@@ -96,8 +108,12 @@
 
         
 
+        
+
          -T <subscript
         >0</subscript>
+
+        
 
         
 
@@ -110,8 +126,12 @@
 
         
 
+        
+
          is a counter sample and each T <subscript
         >i</subscript>
+
+        
 
         
 
@@ -125,6 +145,8 @@
       <para
         >When instrumenting applications (creating and writing custom performance counters), you might be working with performance counter types that rely on an accompanying base counter that is used in the calculations. The base counter must be immediately after its associated counter in the <see
          cref="T:System.Diagnostics.CounterCreationDataCollection" />
+
+        
 
         
 
@@ -191,8 +213,12 @@
 
         
 
+        
+
          method for a <see
          cref="T:System.Diagnostics.PerformanceCounter" />
+
+        
 
         
 
@@ -254,8 +280,12 @@
 
             
 
+            
+
              -N <subscript
             >0</subscript>
+
+            
 
             
 
@@ -268,8 +298,12 @@
 
             
 
+            
+
              -B <subscript
             >0</subscript>
+
+            
 
             
 
@@ -282,8 +316,12 @@
 
             
 
+            
+
              and N <subscript
             >0</subscript>
+
+            
 
             
 
@@ -296,8 +334,12 @@
 
             
 
+            
+
              and B <subscript
             >0</subscript>
+
+            
 
             
 
@@ -340,8 +382,12 @@
 
             
 
+            
+
              -N <subscript
             >0</subscript>
+
+            
 
             
 
@@ -354,8 +400,12 @@
 
             
 
+            
+
              -B <subscript
             >0</subscript>
+
+            
 
             
 
@@ -368,8 +418,12 @@
 
             
 
+            
+
              and N <subscript
             >0</subscript>
+
+            
 
             
 
@@ -382,8 +436,12 @@
 
             
 
+            
+
              and B <subscript
             >0</subscript>
+
+            
 
             
 
@@ -426,8 +484,12 @@
 
             
 
+            
+
              -N <subscript
             >0</subscript>
+
+            
 
             
 
@@ -440,8 +502,12 @@
 
             
 
+            
+
              and N <subscript
             >0</subscript>
+
+            
 
             
 
@@ -483,8 +549,12 @@
 
             
 
+            
+
              -N <subscript
             >0</subscript>
+
+            
 
             
 
@@ -497,8 +567,12 @@
 
             
 
+            
+
              and N <subscript
             >0</subscript>
+
+            
 
             
 
@@ -565,8 +639,12 @@
 
             
 
+            
+
              - N <subscript
             >0</subscript>
+
+            
 
             
 
@@ -579,8 +657,12 @@
 
             
 
+            
+
              - D <subscript
             >0</subscript>
+
+            
 
             
 
@@ -593,8 +675,12 @@
 
             
 
+            
+
              and N <subscript
             >0</subscript>
+
+            
 
             
 
@@ -607,8 +693,12 @@
 
             
 
+            
+
              and D <subscript
             >0</subscript>
+
+            
 
             
 
@@ -651,8 +741,12 @@
 
             
 
+            
+
              - N <subscript
             >0</subscript>
+
+            
 
             
 
@@ -665,8 +759,12 @@
 
             
 
+            
+
              - D <subscript
             >0</subscript>
+
+            
 
             
 
@@ -679,8 +777,12 @@
 
             
 
+            
+
              and N <subscript
             >0</subscript>
+
+            
 
             
 
@@ -693,8 +795,12 @@
 
             
 
+            
+
              and D <subscript
             >0</subscript>
+
+            
 
             
 
@@ -737,8 +843,12 @@
 
             
 
+            
+
              - N <subscript
             >0</subscript>
+
+            
 
             
 
@@ -751,8 +861,12 @@
 
             
 
+            
+
              - D <subscript
             >0</subscript>
+
+            
 
             
 
@@ -796,8 +910,12 @@
 
             
 
+            
+
              - N <subscript
             >0</subscript>
+
+            
 
             
 
@@ -810,8 +928,12 @@
 
             
 
+            
+
              - D <subscript
             >0</subscript>
+
+            
 
             
 
@@ -853,8 +975,12 @@
 
             
 
+            
+
              - N <subscript
             >0</subscript>
+
+            
 
             
 
@@ -867,8 +993,12 @@
 
             
 
+            
+
              - D <subscript
             >0</subscript>
+
+            
 
             
 
@@ -881,8 +1011,12 @@
 
             
 
+            
+
              and N <subscript
             >0</subscript>
+
+            
 
             
 
@@ -895,8 +1029,12 @@
 
             
 
+            
+
              and D <subscript
             >0</subscript>
+
+            
 
             
 
@@ -939,8 +1077,12 @@
 
             
 
+            
+
              - N <subscript
             >0</subscript>
+
+            
 
             
 
@@ -953,8 +1095,12 @@
 
             
 
+            
+
              - D <subscript
             >0</subscript>
+
+            
 
             
 
@@ -996,8 +1142,12 @@
 
             
 
+            
+
              - N <subscript
             >0</subscript>
+
+            
 
             
 
@@ -1010,8 +1160,12 @@
 
             
 
+            
+
              - D <subscript
             >0</subscript>
+
+            
 
             
 
@@ -1053,8 +1207,12 @@
 
             
 
+            
+
              - N <subscript
             >0</subscript>
+
+            
 
             
 
@@ -1067,8 +1225,12 @@
 
             
 
+            
+
              - D <subscript
             >0</subscript>
+
+            
 
             
 
@@ -1110,8 +1272,12 @@
 
             
 
+            
+
              - N <subscript
             >0</subscript>
+
+            
 
             
 
@@ -1124,8 +1290,12 @@
 
             
 
+            
+
              represents the current time, N <subscript
             >0</subscript>
+
+            
 
             
 
@@ -1277,8 +1447,12 @@
 
             
 
+            
+
              - N <subscript
             >0</subscript>
+
+            
 
             
 
@@ -1291,8 +1465,12 @@
 
             
 
+            
+
              -D <subscript
             >0</subscript>
+
+            
 
             
 
@@ -1305,8 +1483,12 @@
 
             
 
+            
+
              and N <subscript
             >0</subscript>
+
+            
 
             
 
@@ -1319,8 +1501,12 @@
 
             
 
+            
+
              and D <subscript
             >0</subscript>
+
+            
 
             
 
@@ -1363,8 +1549,12 @@
 
             
 
+            
+
              - N <subscript
             >0</subscript>
+
+            
 
             
 
@@ -1377,8 +1567,12 @@
 
             
 
+            
+
              -D <subscript
             >0</subscript>
+
+            
 
             
 
@@ -1391,8 +1585,12 @@
 
             
 
+            
+
              and N <subscript
             >0</subscript>
+
+            
 
             
 
@@ -1405,8 +1603,12 @@
 
             
 
+            
+
              and D <subscript
             >0</subscript>
+
+            
 
             
 
@@ -1473,8 +1675,12 @@
 
             
 
+            
+
              / D <subscript
             >0</subscript>
+
+            
 
             
 
@@ -1487,8 +1693,12 @@
 
             
 
+            
+
              represents a measured attribute (using a base counter of type RawBase) and N <subscript
             >0</subscript>
+
+            
 
             
 
@@ -1555,8 +1765,12 @@
 
             
 
+            
+
              – N <subscript
             >0</subscript>
+
+            
 
             
 
@@ -1569,8 +1783,12 @@
 
             
 
+            
+
              – D <subscript
             >0</subscript>
+
+            
 
             
 
@@ -1612,8 +1830,12 @@
 
             
 
+            
+
              - N <subscript
             >0</subscript>
+
+            
 
             
 
@@ -1626,8 +1848,12 @@
 
             
 
+            
+
              - D <subscript
             >0</subscript>
+
+            
 
             
 
@@ -1670,8 +1896,12 @@
 
             
 
+            
+
              - N <subscript
             >0</subscript>
+
+            
 
             
 
@@ -1684,8 +1914,12 @@
 
             
 
+            
+
              - D <subscript
             >0</subscript>
+
+            
 
             
 
@@ -1729,8 +1963,12 @@
 
             
 
+            
+
              - N <subscript
             >0</subscript>
+
+            
 
             
 
@@ -1743,8 +1981,12 @@
 
             
 
+            
+
              - D <subscript
             >0</subscript>
+
+            
 
             
 

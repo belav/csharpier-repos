@@ -29,12 +29,16 @@
 
         
 
+        
+
          property or the application or machine configuration files. For more information, see <format
          type="text/html">
           <a href="9962a2fe-cbda-41a6-9377-571811eaea84"
             >RequestCaching Element (Network Settings)</a
           >
         </format>
+
+        
 
         
 
@@ -50,6 +54,8 @@
 
         
 
+        
+
          property.</para
       >
       <para>Caching for Web services is not supported.</para>
@@ -59,6 +65,8 @@
       <para
         >Defines an application's caching requirements for resources obtained by using <see
          cref="T:System.Net.HttpWebRequest" />
+
+        
 
         
 
@@ -93,8 +101,12 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Net.Cache.HttpRequestCacheLevel.Default" />
+
+            
 
             
 
@@ -108,6 +120,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.Cache.HttpRequestCachePolicy" />
+
+            
 
             
 
@@ -148,8 +162,12 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Net.Cache.HttpRequestCacheLevel.Default" />
+
+            
 
             
 
@@ -162,8 +180,12 @@
 
             
 
+            
+
              property is initialized to <paramref
              name="cacheSyncDate" />
+
+            
 
             
 
@@ -182,6 +204,8 @@
 
             
 
+            
+
              class using the specified cache synchronization date.</para
           >
         </summary>
@@ -192,8 +216,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -232,8 +260,12 @@
 
             
 
+            
+
              property to <paramref
              name="level" />
+
+            
 
             
 
@@ -249,8 +281,12 @@
 
             
 
+            
+
              value controls whether caching is enabled, and when the cache can be used. For additional information, see the <see
              cref="T:System.Net.Cache.HttpRequestCacheLevel" />
+
+            
 
             
 
@@ -269,6 +305,8 @@
 
             
 
+            
+
              class using the specified cache policy.</para
           >
         </summary>
@@ -279,8 +317,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Net.Cache.HttpRequestCacheLevel" />
+
+          
 
           
 
@@ -320,8 +362,12 @@
 
             
 
+            
+
              value defines the meaning of the <paramref
              name="ageOrFreshOrStale" />
+
+            
 
             
 
@@ -334,6 +380,8 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Net.Cache.HttpRequestCachePolicy.MaxStale" />
 
@@ -341,8 +389,12 @@
 
             
 
+            
+
              property is set to the value of the <paramref
              name="ageOrFreshOrStale" />
+
+            
 
             
 
@@ -358,8 +410,12 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Net.Cache.HttpRequestCacheLevel.Default" />
+
+            
 
             
 
@@ -378,11 +434,15 @@
 
             
 
+            
+
              class using the specified age control and time values. </para
           >
         </summary>
         <param name="cacheAgeControl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -395,8 +455,12 @@
 
           
 
+          
+
            enumeration values: <see
            cref="F:System.Net.Cache.HttpCacheAgeControl.MaxAge" />
+
+          
 
           
 
@@ -409,8 +473,12 @@
 
           
 
+          
+
           , or <see
            cref="F:System.Net.Cache.HttpCacheAgeControl.MinFresh" />
+
+          
 
           
 
@@ -425,8 +493,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -467,8 +539,12 @@
 
             
 
+            
+
              value is used to interpret the meaning of the <paramref
              name="freshOrStale" />
+
+            
 
             
 
@@ -481,8 +557,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Net.Cache.HttpRequestCachePolicy.MaxStale" />
+
+            
 
             
 
@@ -495,8 +575,12 @@
 
             
 
+            
+
              parameter. When you specify <see
              cref="F:System.Net.Cache.HttpCacheAgeControl.MaxAgeAndMaxStale" />
+
+            
 
             
 
@@ -509,8 +593,12 @@
 
             
 
+            
+
              property is set using the value of the <paramref
              name="maxAge" />
+
+            
 
             
 
@@ -523,8 +611,12 @@
 
             
 
+            
+
              property is set using the value of the <paramref
              name="freshOrStale" />
+
+            
 
             
 
@@ -540,6 +632,8 @@
 
             
 
+            
+
              or <see
              cref="F:System.Net.Cache.HttpCacheAgeControl.MaxAgeAndMinFresh" />
 
@@ -547,8 +641,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Net.Cache.HttpRequestCachePolicy.MaxAge" />
+
+            
 
             
 
@@ -564,8 +662,12 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Net.Cache.HttpRequestCacheLevel.Default" />
+
+            
 
             
 
@@ -584,6 +686,8 @@
 
             
 
+            
+
              class using the specified maximum age, age control value, and time value.</para
           >
         </summary>
@@ -594,8 +698,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Net.Cache.HttpCacheAgeControl" />
+
+          
 
           
 
@@ -610,8 +718,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -626,8 +738,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -669,8 +785,12 @@
 
             
 
+            
+
              value is used to interpret the meaning of the <paramref
              name="freshOrStale" />
+
+            
 
             
 
@@ -683,8 +803,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Net.Cache.HttpRequestCachePolicy.MaxStale" />
+
+            
 
             
 
@@ -697,8 +821,12 @@
 
             
 
+            
+
              parameter. When you specify <see
              cref="F:System.Net.Cache.HttpCacheAgeControl.MaxAgeAndMaxStale" />
+
+            
 
             
 
@@ -711,8 +839,12 @@
 
             
 
+            
+
              property is set using the value of the <paramref
              name="maxAge" />
+
+            
 
             
 
@@ -725,8 +857,12 @@
 
             
 
+            
+
              property is set using the value of the <paramref
              name="freshOrStale" />
+
+            
 
             
 
@@ -742,6 +878,8 @@
 
             
 
+            
+
              or <see
              cref="F:System.Net.Cache.HttpCacheAgeControl.MaxAgeAndMinFresh" />
 
@@ -749,8 +887,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Net.Cache.HttpRequestCachePolicy.MaxAge" />
+
+            
 
             
 
@@ -766,8 +908,12 @@
 
             
 
+            
+
              property to <paramref
              name="cacheSyncDate" />
+
+            
 
             
 
@@ -780,8 +926,12 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Net.Cache.HttpRequestCacheLevel.Default" />
+
+            
 
             
 
@@ -800,6 +950,8 @@
 
             
 
+            
+
              class using the specified maximum age, age control value, time value, and cache synchronization date.</para
           >
         </summary>
@@ -810,8 +962,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Net.Cache.HttpCacheAgeControl" />
+
+          
 
           
 
@@ -826,8 +982,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -842,8 +1002,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -858,8 +1022,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.DateTime" />
+
+          
 
           
 
@@ -926,6 +1094,8 @@
 
             
 
+            
+
              as their cache policy level. The <see
              cref="P:System.Net.WebRequest.CachePolicy" />
 
@@ -933,8 +1103,12 @@
 
             
 
+            
+
              property, if not null, determines the cache policy in effect for a request. The default policy for the application domain can be set using the <see
              cref="P:System.Net.HttpWebRequest.DefaultCachePolicy" />
+
+            
 
             
 
@@ -951,6 +1125,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -959,6 +1135,8 @@
           <para
             >Gets the <see
              cref="T:System.Net.Cache.HttpRequestCacheLevel" />
+
+            
 
             
 
@@ -1085,6 +1263,8 @@
           <para
             >A <see
              cref="T:System.String" />
+
+            
 
             
 

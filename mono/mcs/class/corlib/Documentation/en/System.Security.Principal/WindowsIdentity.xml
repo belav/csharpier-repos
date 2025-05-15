@@ -50,8 +50,12 @@
 
         
 
+        
+
          method to create a <see
          cref="T:System.Security.Principal.WindowsIdentity" />
+
+        
 
         
 
@@ -88,6 +92,8 @@
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.Security.Principal.WindowsIdentity" />
+
+            
 
             
 
@@ -146,8 +152,12 @@
 
               
 
+              
+
                by calling unmanaged code such as the Win32 API <unmanagedCodeEntityReference
               >LogonUser</unmanagedCodeEntityReference>
+
+              
 
               
 
@@ -160,8 +170,12 @@
 
               
 
+              
+
                by calling the Win32 API <unmanagedCodeEntityReference
               >CloseHandle</unmanagedCodeEntityReference>
+
+              
 
               
 
@@ -171,6 +185,8 @@
                type="text/html">
                 <a href="eca7606e-ebfb-4f47-b8d9-289903fdc045">Consuming Unmanaged DLL Functions</a>
               </format>
+
+              
 
               
 
@@ -190,11 +206,15 @@
 
             
 
+            
+
              class for the user represented by the specified Windows account token.</para
           >
         </summary>
         <param name="userToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -230,8 +250,12 @@
 
             
 
+            
+
              is used to retrieve a token for that user through the Win32 API <unmanagedCodeEntityReference
             >LsaLogonUser</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -243,6 +267,8 @@
             <para
               >This constructor is intended for use on computers joined only to Windows Server 2003 domains. An exception is thrown for other domain types. This restriction is because the constructor uses the <see
                cref="http://go.microsoft.com/fwlink/?LinkId=143533">KERB_S4U_LOGON structure</see>
+
+              
 
               
 
@@ -262,11 +288,15 @@
 
             
 
+            
+
              class for the user represented by the specified User Principal Name (UPN).</para
           >
         </summary>
         <param name="sUserPrincipalName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -302,6 +332,8 @@
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.Security.Principal.WindowsIdentity" />
+
+            
 
             
 
@@ -349,8 +381,12 @@
 
             
 
+            
+
              parameter is used to set the <see
              cref="P:System.Security.Principal.WindowsIdentity.AuthenticationType" />
+
+            
 
             
 
@@ -363,8 +399,12 @@
 
             
 
+            
+
              is null, the security system sets <see
              cref="P:System.Security.Principal.WindowsIdentity.AuthenticationType" />
+
+            
 
             
 
@@ -381,8 +421,12 @@
 
               
 
+              
+
                by calling unmanaged code such as the Win32 API <unmanagedCodeEntityReference
               >LogonUser</unmanagedCodeEntityReference>
+
+              
 
               
 
@@ -395,8 +439,12 @@
 
               
 
+              
+
                by calling the Win32 API <unmanagedCodeEntityReference
               >CloseHandle</unmanagedCodeEntityReference>
+
+              
 
               
 
@@ -406,6 +454,8 @@
                type="text/html">
                 <a href="eca7606e-ebfb-4f47-b8d9-289903fdc045">Consuming Unmanaged DLL Functions</a>
               </format>
+
+              
 
               
 
@@ -425,6 +475,8 @@
 
             
 
+            
+
              class for the user represented by the specified Windows account token and the specified authentication type.</para
           >
         </summary>
@@ -435,10 +487,14 @@
 
           
 
+          
+
           The account token for the user on whose behalf the code is running. </param
         >
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -481,6 +537,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -495,8 +553,12 @@
 
             
 
+            
+
              class for the user represented by information in a <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -512,10 +574,14 @@
 
           
 
+          
+
           The object containing the account information for the user. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -555,8 +621,12 @@
 
             
 
+            
+
              parameter is used to set the <see
              cref="P:System.Security.Principal.WindowsIdentity.AuthenticationType" />
+
+            
 
             
 
@@ -569,8 +639,12 @@
 
             
 
+            
+
              is null, the security system sets <see
              cref="P:System.Security.Principal.WindowsIdentity.AuthenticationType" />
+
+            
 
             
 
@@ -586,8 +660,12 @@
 
             
 
+            
+
              is used to retrieve a token for that user through the Win32 API <unmanagedCodeEntityReference
             >LsaLogonUser</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -599,6 +677,8 @@
             <para
               >This constructor is intended for use only on computers joined to Windows Server 2003 domains. An exception is thrown for other domain types. This restriction is because the constructor uses the <see
                cref="http://go.microsoft.com/fwlink/?LinkId=143533">KERB_S4U_LOGON structure</see>
+
+              
 
               
 
@@ -618,6 +698,8 @@
 
             
 
+            
+
              class for the user represented by the specified User Principal Name (UPN) and the specified authentication type.</para
           >
         </summary>
@@ -628,10 +710,14 @@
 
           
 
+          
+
           The UPN for the user on whose behalf the code is running. </param
         >
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -673,6 +759,8 @@
 
             
 
+            
+
             .</para
           >
           <list type="table">
@@ -705,8 +793,12 @@
 
             
 
+            
+
              parameter is used to set the <see
              cref="P:System.Security.Principal.WindowsIdentity.AuthenticationType" />
+
+            
 
             
 
@@ -719,8 +811,12 @@
 
             
 
+            
+
              is null, the security system sets <see
              cref="P:System.Security.Principal.WindowsIdentity.AuthenticationType" />
+
+            
 
             
 
@@ -737,8 +833,12 @@
 
               
 
+              
+
                by calling unmanaged code such as the Win32 API <unmanagedCodeEntityReference
               >LogonUser</unmanagedCodeEntityReference>
+
+              
 
               
 
@@ -751,8 +851,12 @@
 
               
 
+              
+
                by calling the Win32 API <unmanagedCodeEntityReference
               >CloseHandle</unmanagedCodeEntityReference>
+
+              
 
               
 
@@ -762,6 +866,8 @@
                type="text/html">
                 <a href="eca7606e-ebfb-4f47-b8d9-289903fdc045">Consuming Unmanaged DLL Functions</a>
               </format>
+
+              
 
               
 
@@ -781,11 +887,15 @@
 
             
 
+            
+
              class for the user represented by the specified Windows account token, the specified authentication type, and the specified Windows account type.</para
           >
         </summary>
         <param name="userToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -800,10 +910,14 @@
 
           
 
+          
+
           (Informational use only.) The type of authentication used to identify the user. For more information, see Remarks.</param
         >
         <param name="acctType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -846,8 +960,12 @@
 
             
 
+            
+
              parameter is used to set the <see
              cref="P:System.Security.Principal.WindowsIdentity.AuthenticationType" />
+
+            
 
             
 
@@ -860,8 +978,12 @@
 
             
 
+            
+
              is null, the security system sets <see
              cref="P:System.Security.Principal.WindowsIdentity.AuthenticationType" />
+
+            
 
             
 
@@ -877,8 +999,12 @@
 
             
 
+            
+
              by calling unmanaged code such as the Win32 API <unmanagedCodeEntityReference
             >LogonUser</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -891,8 +1017,12 @@
 
             
 
+            
+
              by calling the Win32 API <unmanagedCodeEntityReference
             >CloseHandle</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -902,6 +1032,8 @@
              type="text/html">
               <a href="eca7606e-ebfb-4f47-b8d9-289903fdc045">Consuming Unmanaged DLL Functions</a>
             </format>
+
+            
 
             
 
@@ -920,11 +1052,15 @@
 
             
 
+            
+
              class for the user represented by the specified Windows account token, the specified authentication type, the specified Windows account type, and the specified authentication status.</para
           >
         </summary>
         <param name="userToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -939,6 +1075,8 @@
 
           
 
+          
+
           (Informational use only.) The type of authentication used to identify the user. For more information, see Remarks.</param
         >
         <param name="acctType">
@@ -948,10 +1086,14 @@
 
           
 
+          
+
           One of the enumeration values. </param
         >
         <param name="isAuthenticated">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1017,8 +1159,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Security.Principal.WindowsIdentity" />
+
+            
 
             
 
@@ -1031,8 +1177,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Security.Principal.WindowsIdentity" />
+
+            
 
             
 
@@ -1045,6 +1195,8 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Security.Principal.WindowsIdentity" />
 
@@ -1052,8 +1204,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Security.Principal.WindowsIdentity" />
+
+            
 
             
 
@@ -1068,10 +1224,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -1088,6 +1248,8 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.Security.Principal.WindowsIdentity" />
 
@@ -1095,8 +1257,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Security.Principal.WindowsIdentity" />
+
+              
 
               
 
@@ -1111,6 +1277,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.Security.Principal.WindowsIdentity" />
+
+            
 
             
 
@@ -1155,8 +1323,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -1169,8 +1341,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -1186,8 +1362,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Security.Principal.WindowsIdentity" />
+
+            
 
             
 
@@ -1206,11 +1386,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1265,8 +1449,12 @@
 
             
 
+            
+
              object that enables you to treat operations as anonymous. The property value does not correspond to a Windows anonymous user and cannot be used for impersonation. Also, note that the identity returned by this property is not static; each call to <see
              cref="M:System.Security.Principal.WindowsIdentity.GetAnonymous" />
+
+            
 
             
 
@@ -1282,8 +1470,12 @@
 
             
 
+            
+
              property to detect the return value from <see
              cref="M:System.Security.Principal.WindowsIdentity.GetAnonymous" />
+
+            
 
             
 
@@ -1296,6 +1488,8 @@
 
             
 
+            
+
              detects both the Windows anonymous identity and the anonymous identity returned by this method. To use the latter identity, cache the <see
              cref="M:System.Security.Principal.WindowsIdentity.GetAnonymous" />
 
@@ -1303,8 +1497,12 @@
 
             
 
+            
+
              return value instead of relying on the <see
              cref="P:System.Security.Principal.WindowsIdentity.IsAnonymous" />
+
+            
 
             
 
@@ -1318,6 +1516,8 @@
           <para
             >Returns a <see
              cref="T:System.Security.Principal.WindowsIdentity" />
+
+            
 
             
 
@@ -1372,6 +1572,8 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
 
             
 
+            
+
              object that represents the current Windows user.</para
           >
         </summary>
@@ -1413,8 +1615,12 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
 
             
 
+            
+
              is true and the thread is not impersonating, the returned <see
              cref="T:System.Security.Principal.WindowsIdentity" />
+
+            
 
             
 
@@ -1427,8 +1633,12 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
 
             
 
+            
+
              is false and the thread is impersonating, the <see
              cref="T:System.Security.Principal.WindowsIdentity" />
+
+            
 
             
 
@@ -1441,8 +1651,12 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
 
             
 
+            
+
              is false and the thread is not impersonating, the <see
              cref="T:System.Security.Principal.WindowsIdentity" />
+
+            
 
             
 
@@ -1461,8 +1675,12 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
 
             
 
+            
+
              object that represents the Windows identity for either the thread or the process, depending on the value of the <paramref
              name="ifImpersonating" />
+
+            
 
             
 
@@ -1482,8 +1700,12 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
 
           
 
+          
+
           true to return the <see
            cref="T:System.Security.Principal.WindowsIdentity" />
+
+          
 
           
 
@@ -1496,8 +1718,12 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
 
           
 
+          
+
              of the thread if it is impersonating or the <see
            cref="T:System.Security.Principal.WindowsIdentity" />
+
+          
 
           
 
@@ -1539,6 +1765,8 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
 
             
 
+            
+
              parameter specifies an access mask that identifies the requested types of access to the access token. These requested access types are compared with the token's discretionary access control list (DACL) to determine which types of access are granted or denied. </para
           >
         </remarks>
@@ -1547,6 +1775,8 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
           <para
             >Returns a <see
              cref="T:System.Security.Principal.WindowsIdentity" />
+
+            
 
             
 
@@ -1561,6 +1791,8 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
         </returns>
         <param name="desiredAccess">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1631,6 +1863,8 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1674,8 +1908,12 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
 
               
 
+              
+
                method with a <paramref
                name="userToken" />
+
+              
 
               
 
@@ -1688,8 +1926,12 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
 
               
 
+              
+
                is equivalent to calling the Win32 <unmanagedCodeEntityReference
               >RevertToSelf</unmanagedCodeEntityReference>
+
+              
 
               
 
@@ -1708,6 +1950,8 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1721,6 +1965,8 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
         </returns>
         <param name="userToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1789,8 +2035,12 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
 
             
 
+            
+
              property detects both the Windows anonymous identity and the anonymous identity that is returned by the <see
              cref="M:System.Security.Principal.WindowsIdentity.GetAnonymous" />
+
+            
 
             
 
@@ -1852,6 +2102,8 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
 
             
 
+            
+
              account by the system.</para
           >
         </summary>
@@ -1877,6 +2129,8 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
           <para
             >Gets a value indicating whether the user account is identified as a <see
              cref="F:System.Security.Principal.WindowsAccountType.System" />
+
+            
 
             
 
@@ -1979,11 +2233,15 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
 
             
 
+            
+
              interface and is called back by the deserialization event when deserialization is complete.</para
           >
         </summary>
         <param name="sender">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2026,8 +2284,12 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
 
             
 
+            
+
              with the logical call context information. During deserialization, the execution context object is reconstituted from the <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -2038,6 +2300,8 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
           <para
             >For more information, see <see
              cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+            
 
             
 
@@ -2056,6 +2320,8 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
 
             
 
+            
+
              object with the logical context information needed to recreate an instance of this execution context.</para
           >
         </summary>
@@ -2066,8 +2332,12 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
 
           
 
+          
+
           An object containing the information required to serialize the <see
            cref="T:System.Collections.Hashtable" />
+
+          
 
           
 
@@ -2082,8 +2352,12 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
 
           
 
+          
+
           An object containing the source and destination of the serialized stream associated with the <see
            cref="T:System.Collections.Hashtable" />
+
+          
 
           
 
@@ -2117,6 +2391,8 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
 
             
 
+            
+
              property. The token is released by the <see
              cref="M:System.Security.Principal.WindowsIdentity.Dispose" />
 
@@ -2124,8 +2400,12 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
 
             
 
+            
+
              method, which you can call in code. <see
              cref="M:System.Security.Principal.WindowsIdentity.Dispose" />
+
+            
 
             
 
@@ -2142,8 +2422,12 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
 
               
 
+              
+
                property is a duplicate of the Windows token that is used to create the <see
                cref="T:System.Security.Principal.WindowsIdentity" />
+
+              
 
               
 
@@ -2156,8 +2440,12 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
 
               
 
+              
+
                parameter for the constructor), which is used to create the <see
                cref="T:System.Security.Principal.WindowsIdentity" />
+
+              
 
               
 
@@ -2170,8 +2458,12 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
 
               
 
+              
+
                is a Windows account token that is created by a call to <unmanagedCodeEntityReference
               >LogonUser</unmanagedCodeEntityReference>
+
+              
 
               
 
@@ -2224,8 +2516,12 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
 
               
 
+              
+
                object returned by the <see
                cref="M:System.Security.Principal.WindowsIdentity.GetAnonymous" />
+
+              
 
               
 
@@ -2238,8 +2534,12 @@ Console.WriteLine ("\tToken:\t\t{0}", wi.Token);
 
               
 
+              
+
                object returned by the <see
                cref="M:System.Security.Principal.WindowsIdentity.GetAnonymous" />
+
+              
 
               
 

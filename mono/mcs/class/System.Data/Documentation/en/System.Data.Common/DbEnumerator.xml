@@ -32,6 +32,8 @@
 
         
 
+        
+
          class is implemented by a .NET Framework data provider to provide data binding support.</para
       >
       <para
@@ -42,8 +44,12 @@
 
         
 
+        
+
          object is intended for use with only one resultset. For example, if you execute a batch statement containing two SQL SELECT statements that return different schemas, the second statement might not retun the entire schema. To avoid this situation, obtain a <see
          cref="T:System.Data.Common.DbEnumerator" />
+
+        
 
         
 
@@ -57,6 +63,8 @@
       <para
         >Exposes the <see
          cref="M:System.Collections.IEnumerable.GetEnumerator" />
+
+        
 
         
 
@@ -89,11 +97,15 @@
 
             
 
+            
+
              class using the specified DataReader.</para
           >
         </summary>
         <param name="reader">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -130,6 +142,8 @@
 
             
 
+            
+
              class using the specified DataReader, and indicates whether to automatically close the DataReader after iterating through its data.</para
           >
         </summary>
@@ -140,10 +154,14 @@
 
           
 
+          
+
           The DataReader through which to iterate. </param
         >
         <param name="closeReader">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -175,8 +193,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Data.Common.DbEnumerator.MoveNext" />
+
+            
 
             
 
@@ -189,8 +211,12 @@
 
             
 
+            
+
             ; otherwise, <see
              cref="P:System.Data.Common.DbEnumerator.Current" />
+
+            
 
             
 
@@ -203,8 +229,12 @@
 
             
 
+            
+
              also throws an exception if the last call to <see
              cref="M:System.Data.Common.DbEnumerator.MoveNext" />
+
+            
 
             
 
@@ -217,8 +247,12 @@
 
             
 
+            
+
              does not move the position of the enumerator and consecutive calls to <see
              cref="P:System.Data.Common.DbEnumerator.Current" />
+
+            
 
             
 
@@ -231,8 +265,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Data.Common.DbEnumerator.Reset" />
+
+            
 
             
 
@@ -245,8 +283,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Data.Common.DbEnumerator.Reset" />
+
+            
 
             
 
@@ -259,8 +301,12 @@
 
             
 
+            
+
             . If the collection is modified between <see
              cref="M:System.Data.Common.DbEnumerator.MoveNext" />
+
+            
 
             
 
@@ -273,8 +319,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Data.Common.DbEnumerator.Current" />
+
+            
 
             
 
@@ -311,8 +361,12 @@
 
             
 
+            
+
             , an enumerator is positioned before the first element of the collection, and the first call to <see
              cref="M:System.Data.Common.DbEnumerator.MoveNext" />
+
+            
 
             
 
@@ -325,8 +379,12 @@
 
             
 
+            
+
              return false until <see
              cref="M:System.Data.Common.DbEnumerator.Reset" />
+
+            
 
             
 
@@ -339,6 +397,8 @@
 
             
 
+            
+
              or <see
              cref="M:System.Data.Common.DbEnumerator.Reset" />
 
@@ -346,8 +406,12 @@
 
             
 
+            
+
              throws an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -388,6 +452,8 @@
 
             
 
+            
+
              or <see
              cref="M:System.Data.Common.DbEnumerator.Reset" />
 
@@ -395,8 +461,12 @@
 
             
 
+            
+
              throws an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 

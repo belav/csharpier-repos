@@ -3,7 +3,7 @@
   <paragraph
     >Every delegate type implicitly provides the following predefined comparison operators: : <code_example
     >
-<![CDATA[
+      <![CDATA[
 bool operator ==(System.Delegate x, System.Delegate y);  
 bool operator !=(System.Delegate x, System.Delegate y);  
 ]]>
@@ -21,6 +21,8 @@ bool operator !=(System.Delegate x, System.Delegate y);
 
         
 
+        
+
         ) containing one entry, they are equal if and only if the other also has an invocation list containing one entry, and either: </list_item
       >
       <list>
@@ -33,6 +35,8 @@ bool operator !=(System.Delegate x, System.Delegate y);
   <paragraph
     >Note that delegates of different types can be considered equal by the above definition, as <keyword
     >long</keyword>
+
+    
 
     
 

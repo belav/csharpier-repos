@@ -49,7 +49,7 @@
       <Using Namespace="System" />
       <Using Namespace="System.IO" />
       <Code Type="Fragment" Language="cs">
-<![CDATA[
+        <![CDATA[
 // Display "Hello, world!"
 //Log.LogWarning("Hello, world!");
 // Log.LogMessageFromText($"Parameter1: '{Parameter1}'", MessageImportance.High);

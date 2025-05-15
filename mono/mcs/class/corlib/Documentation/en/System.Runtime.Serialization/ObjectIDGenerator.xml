@@ -33,8 +33,12 @@
 
         
 
+        
+
          keeps track of previously identified objects. When you ask for the ID of an object, the <see
          cref="T:System.Runtime.Serialization.ObjectIDGenerator" />
+
+        
 
         
 
@@ -50,8 +54,12 @@
 
         
 
+        
+
          instance. Generally, a <see
          cref="T:System.Runtime.Serialization.ObjectIDGenerator" />
+
+        
 
         
 
@@ -64,11 +72,15 @@
 
         
 
+        
+
          that created it. Object IDs have meaning only within a given serialized stream, and are used for tracking which objects have references to others within the serialized object graph.</para
       >
       <para
         >Using a hash table, the <see
          cref="T:System.Runtime.Serialization.ObjectIDGenerator" />
+
+        
 
         
 
@@ -105,6 +117,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Serialization.ObjectIDGenerator" />
+
+            
 
             
 

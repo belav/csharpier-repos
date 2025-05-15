@@ -27,8 +27,12 @@
 
         
 
+        
+
          class is an internal helper class used with the <see
          cref="T:System.Web.UI.WebControls.TextBox" />
+
+        
 
         
 
@@ -42,6 +46,8 @@
       <para
         >Interacts with the parser to build a <see
          cref="T:System.Web.UI.WebControls.TextBox" />
+
+        
 
         
 
@@ -68,8 +74,12 @@
 
             
 
+            
+
              class is an internal helper class used with the <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -83,6 +93,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.TextBoxControlBuilder" />
+
+            
 
             
 
@@ -115,8 +127,12 @@
 
             
 
+            
+
              to ignore white space in the <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -157,6 +173,8 @@
 
             
 
+            
+
              method to determine whether the literal string of the <see
              cref="T:System.Web.UI.WebControls.TextBox" />
 
@@ -164,8 +182,12 @@
 
             
 
+            
+
              control must be HTML decoded. This implementation of the method always returns true to indicate that the literal string of the <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 
@@ -179,6 +201,8 @@
           <para
             >Determines whether the literal string of the <see
              cref="T:System.Web.UI.WebControls.TextBox" />
+
+            
 
             
 

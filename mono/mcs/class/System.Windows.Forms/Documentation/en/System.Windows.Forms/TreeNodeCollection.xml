@@ -30,6 +30,8 @@
 
         
 
+        
+
         , <see
          cref="M:System.Windows.Forms.TreeNodeCollection.Remove(System.Windows.Forms.TreeNode)" />
 
@@ -37,8 +39,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Windows.Forms.TreeNodeCollection.RemoveAt(System.Int32)" />
+
+        
 
         
 
@@ -57,8 +63,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.Windows.Forms.TreeNodeCollection.Clear" />
+
+        
 
         
 
@@ -74,6 +84,8 @@
 
         
 
+        
+
          class.</para
       >
     </remarks>
@@ -82,6 +94,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.Windows.Forms.TreeNode" />
+
+        
 
         
 
@@ -115,6 +129,8 @@
 
             
 
+            
+
              objects to the collection by using the <see
              cref="M:System.Windows.Forms.TreeNodeCollection.AddRange(System.Windows.Forms.TreeNode[])" />
 
@@ -122,8 +138,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.TreeNodeCollection.Insert(System.Int32,System.Windows.Forms.TreeNode)" />
+
+            
 
             
 
@@ -139,8 +159,12 @@
 
             
 
+            
+
              that you previously added, use the <see
              cref="M:System.Windows.Forms.TreeNodeCollection.Remove(System.Windows.Forms.TreeNode)" />
+
+            
 
             
 
@@ -153,8 +177,12 @@
 
             
 
+            
+
             , or <see
              cref="M:System.Windows.Forms.TreeNodeCollection.Clear" />
+
+            
 
             
 
@@ -177,6 +205,8 @@
 
             
 
+            
+
              that represents the tree node being added to the collection.</para
           >
         </returns>
@@ -187,8 +217,12 @@
 
           
 
+          
+
           The label text displayed by the <see
            cref="T:System.Windows.Forms.TreeNode" />
+
+          
 
           
 
@@ -225,8 +259,12 @@
 
             
 
+            
+
              method allows you to add previously created <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -242,6 +280,8 @@
 
             
 
+            
+
              objects to the collection by using the <see
              cref="M:System.Windows.Forms.TreeNodeCollection.AddRange(System.Windows.Forms.TreeNode[])" />
 
@@ -249,8 +289,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.TreeNodeCollection.Insert(System.Int32,System.Windows.Forms.TreeNode)" />
+
+            
 
             
 
@@ -266,8 +310,12 @@
 
             
 
+            
+
              that you previously added, use the <see
              cref="M:System.Windows.Forms.TreeNodeCollection.Remove(System.Windows.Forms.TreeNode)" />
+
+            
 
             
 
@@ -280,8 +328,12 @@
 
             
 
+            
+
             , or <see
              cref="M:System.Windows.Forms.TreeNodeCollection.Clear" />
+
+            
 
             
 
@@ -298,8 +350,12 @@
 
               
 
+              
+
                can be assigned to only one <see
                cref="T:System.Windows.Forms.TreeView" />
+
+              
 
               
 
@@ -323,6 +379,8 @@
 
             
 
+            
+
              added to the tree node collection.</para
           >
         </returns>
@@ -333,8 +391,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.TreeNode" />
+
+          
 
           
 
@@ -375,6 +437,8 @@
 
             
 
+            
+
              property corresponds to the key for a <see
              cref="T:System.Windows.Forms.TreeNode" />
 
@@ -382,8 +446,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Windows.Forms.TreeNodeCollection" />
+
+            
 
             
 
@@ -399,6 +467,8 @@
 
             
 
+            
+
              objects to the collection by using the <see
              cref="M:System.Windows.Forms.TreeNodeCollection.AddRange(System.Windows.Forms.TreeNode[])" />
 
@@ -406,8 +476,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.Windows.Forms.TreeNodeCollection.Insert" />
+
+            
 
             
 
@@ -430,6 +504,8 @@
 
             
 
+            
+
              that was added to the collection.</para
           >
         </returns>
@@ -440,10 +516,14 @@
 
           
 
+          
+
           The name of the tree node.</param
         >
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -481,6 +561,8 @@
 
             
 
+            
+
              property corresponds to the key for a <see
              cref="T:System.Windows.Forms.TreeNode" />
 
@@ -488,8 +570,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Windows.Forms.TreeNodeCollection" />
+
+            
 
             
 
@@ -505,6 +591,8 @@
 
             
 
+            
+
              parameter refers to an image in the <see
              cref="P:System.Windows.Forms.TreeView.ImageList" />
 
@@ -512,8 +600,12 @@
 
             
 
+            
+
              property of the parent <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -529,6 +621,8 @@
 
             
 
+            
+
              objects to the collection by using the <see
              cref="M:System.Windows.Forms.TreeNodeCollection.AddRange(System.Windows.Forms.TreeNode[])" />
 
@@ -536,8 +630,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.Windows.Forms.TreeNodeCollection.Insert" />
+
+            
 
             
 
@@ -560,11 +658,15 @@
 
             
 
+            
+
              that was added to the collection.</para
           >
         </returns>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -579,10 +681,14 @@
 
           
 
+          
+
           The text to display in the tree node.</param
         >
         <param name="imageIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -620,6 +726,8 @@
 
             
 
+            
+
              property corresponds to the key for a <see
              cref="T:System.Windows.Forms.TreeNode" />
 
@@ -627,8 +735,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Windows.Forms.TreeNodeCollection" />
+
+            
 
             
 
@@ -644,6 +756,8 @@
 
             
 
+            
+
              objects to the collection by using the <see
              cref="M:System.Windows.Forms.TreeNodeCollection.AddRange(System.Windows.Forms.TreeNode[])" />
 
@@ -651,8 +765,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.Windows.Forms.TreeNodeCollection.Insert" />
+
+            
 
             
 
@@ -668,6 +786,8 @@
 
             
 
+            
+
              parameter refers to an image in the <see
              cref="P:System.Windows.Forms.TreeView.ImageList" />
 
@@ -675,8 +795,12 @@
 
             
 
+            
+
              property of the parent <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -699,11 +823,15 @@
 
             
 
+            
+
              that was added to the collection.</para
           >
         </returns>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -718,10 +846,14 @@
 
           
 
+          
+
           The text to display in the tree node.</param
         >
         <param name="imageKey">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -760,6 +892,8 @@
 
             
 
+            
+
              property corresponds to the key for a <see
              cref="T:System.Windows.Forms.TreeNode" />
 
@@ -767,8 +901,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Windows.Forms.TreeNodeCollection" />
+
+            
 
             
 
@@ -784,6 +922,8 @@
 
             
 
+            
+
              objects to the collection by using the <see
              cref="M:System.Windows.Forms.TreeNodeCollection.AddRange(System.Windows.Forms.TreeNode[])" />
 
@@ -791,8 +931,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.Windows.Forms.TreeNodeCollection.Insert" />
+
+            
 
             
 
@@ -808,6 +952,8 @@
 
             
 
+            
+
              parameter refers to an image in the <see
              cref="P:System.Windows.Forms.TreeView.ImageList" />
 
@@ -815,8 +961,12 @@
 
             
 
+            
+
              property of the parent <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -832,6 +982,8 @@
 
             
 
+            
+
              parameter refers to an image in the <see
              cref="P:System.Windows.Forms.TreeView.StateImageList" />
 
@@ -839,8 +991,12 @@
 
             
 
+            
+
              property of the parent <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -864,10 +1020,14 @@
 
           
 
+          
+
           The name of the tree node.</param
         >
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -882,10 +1042,14 @@
 
           
 
+          
+
           The index of the image to display in the tree node.</param
         >
         <param name="selectedImageIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -924,6 +1088,8 @@
 
             
 
+            
+
              property corresponds to the key for a <see
              cref="T:System.Windows.Forms.TreeNode" />
 
@@ -931,8 +1097,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Windows.Forms.TreeNodeCollection" />
+
+            
 
             
 
@@ -948,6 +1118,8 @@
 
             
 
+            
+
              objects to the collection by using the <see
              cref="M:System.Windows.Forms.TreeNodeCollection.AddRange(System.Windows.Forms.TreeNode[])" />
 
@@ -955,8 +1127,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.Windows.Forms.TreeNodeCollection.Insert" />
+
+            
 
             
 
@@ -972,6 +1148,8 @@
 
             
 
+            
+
              parameter refers to an image in the <see
              cref="P:System.Windows.Forms.TreeView.ImageList" />
 
@@ -979,8 +1157,12 @@
 
             
 
+            
+
              property of the parent <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -996,6 +1178,8 @@
 
             
 
+            
+
              parameter refers to an image in the <see
              cref="P:System.Windows.Forms.TreeView.StateImageList" />
 
@@ -1003,8 +1187,12 @@
 
             
 
+            
+
              property of the parent <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -1027,11 +1215,15 @@
 
             
 
+            
+
              that was added to the collection.</para
           >
         </returns>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1046,6 +1238,8 @@
 
           
 
+          
+
           The text to display in the tree node.</param
         >
         <param name="imageKey">
@@ -1055,10 +1249,14 @@
 
           
 
+          
+
           The key of the image to display in the tree node.</param
         >
         <param name="selectedImageKey">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1091,8 +1289,12 @@
 
             
 
+            
+
              objects contained in the <paramref
              name="nodes" />
+
+            
 
             
 
@@ -1108,8 +1310,12 @@
 
             
 
+            
+
              method to quickly add a group of previously created <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -1122,8 +1328,12 @@
 
             
 
+            
+
              to the collection using the <see
              cref="M:System.Windows.Forms.TreeNodeCollection.Add(System.String)" />
+
+            
 
             
 
@@ -1139,8 +1349,12 @@
 
             
 
+            
+
              that you previously added, use the <see
              cref="M:System.Windows.Forms.TreeNodeCollection.Remove(System.Windows.Forms.TreeNode)" />
+
+            
 
             
 
@@ -1153,8 +1367,12 @@
 
             
 
+            
+
             , or <see
              cref="M:System.Windows.Forms.TreeNodeCollection.Clear" />
+
+            
 
             
 
@@ -1174,8 +1392,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Windows.Forms.TreeNode" />
+
+          
 
           
 
@@ -1208,8 +1430,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.TreeNodeCollection.RemoveAt(System.Int32)" />
+
+            
 
             
 
@@ -1225,8 +1451,12 @@
 
             
 
+            
+
              objects to the collection, use the <see
              cref="M:System.Windows.Forms.TreeNodeCollection.Add(System.String)" />
+
+            
 
             
 
@@ -1239,8 +1469,12 @@
 
             
 
+            
+
             , or <see
              cref="M:System.Windows.Forms.TreeNodeCollection.Insert(System.Int32,System.Windows.Forms.TreeNode)" />
+
+            
 
             
 
@@ -1282,6 +1516,8 @@
 
             
 
+            
+
              is a member of the collection before attempting to perform operations on the <see
              cref="T:System.Windows.Forms.TreeNode" />
 
@@ -1289,8 +1525,12 @@
 
             
 
+            
+
             . You can use this method to confirm that a <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -1309,6 +1549,8 @@
 
               
 
+              
+
                types by overriding the <see
                cref="Overload:System.Object.Equals" />
 
@@ -1316,8 +1558,12 @@
 
               
 
+              
+
                method of the <see
                cref="T:System.Windows.Forms.TreeNode" />
+
+              
 
               
 
@@ -1341,6 +1587,8 @@
 
             
 
+            
+
              is a member of the collection; otherwise, false.</para
           >
         </returns>
@@ -1351,8 +1599,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.TreeNode" />
+
+          
 
           
 
@@ -1389,6 +1641,8 @@
 
             
 
+            
+
              property corresponds to the key for a <see
              cref="T:System.Windows.Forms.TreeNode" />
 
@@ -1396,8 +1650,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Windows.Forms.TreeNodeCollection" />
+
+            
 
             
 
@@ -1413,8 +1671,12 @@
 
             
 
+            
+
              parameter is null or an empty string, the <see
              cref="P:System.Windows.Forms.TreeNodeCollection.Item(System.String)" />
+
+            
 
             
 
@@ -1437,6 +1699,8 @@
 
             
 
+            
+
              with the specified key; otherwise, false. </para
           >
         </returns>
@@ -1447,8 +1711,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Windows.Forms.TreeNode" />
+
+          
 
           
 
@@ -1481,10 +1749,14 @@
 
           
 
+          
+
           The destination array. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1521,6 +1793,8 @@
 
             
 
+            
+
              property holds the number of <see
              cref="T:System.Windows.Forms.TreeNode" />
 
@@ -1528,8 +1802,12 @@
 
             
 
+            
+
              objects assigned to the collection. You can use the <see
              cref="P:System.Windows.Forms.TreeNodeCollection.Count" />
+
+            
 
             
 
@@ -1546,6 +1824,8 @@
 
               
 
+              
+
                exception.</para
             >
           </block>
@@ -1555,6 +1835,8 @@
           <para
             >Gets the total number of <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -1596,6 +1878,8 @@
 
             
 
+            
+
              property corresponds to the key for a <see
              cref="T:System.Windows.Forms.TreeNode" />
 
@@ -1603,8 +1887,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Windows.Forms.TreeNodeCollection" />
+
+            
 
             
 
@@ -1620,8 +1908,12 @@
 
             
 
+            
+
              parameter is null or an empty string, or there are no matches, the <see
              cref="P:System.Windows.Forms.TreeNodeCollection.Item(System.String)" />
+
+            
 
             
 
@@ -1644,8 +1936,12 @@
 
             
 
+            
+
              objects whose <see
              cref="P:System.Windows.Forms.TreeNode.Name" />
+
+            
 
             
 
@@ -1661,10 +1957,14 @@
 
           
 
+          
+
           The name of the tree node to search for.</param
         >
         <param name="searchAllChildren">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1695,6 +1995,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -1735,6 +2037,8 @@
 
               
 
+              
+
                types by overriding the <see
                cref="Overload:System.Object.Equals" />
 
@@ -1742,8 +2046,12 @@
 
               
 
+              
+
                method of the <see
                cref="T:System.Windows.Forms.TreeNode" />
+
+              
 
               
 
@@ -1768,8 +2076,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.TreeNode" />
+
+          
 
           
 
@@ -1806,11 +2118,15 @@
 
             
 
+            
+
              is called successively, the last returned index will be checked for a key match first, and if there is no match, the search starts at the beginning of the collection.</para
           >
           <para
             >The <see
              cref="P:System.Windows.Forms.TreeNode.Name" />
+
+            
 
             
 
@@ -1823,8 +2139,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Windows.Forms.TreeNodeCollection" />
+
+            
 
             
 
@@ -1840,8 +2160,12 @@
 
             
 
+            
+
              is null or an empty string, the <see
              cref="P:System.Windows.Forms.TreeNodeCollection.Item(System.String)" />
+
+            
 
             
 
@@ -1860,6 +2184,8 @@
         </returns>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1896,8 +2222,12 @@
 
             
 
+            
+
              property is set to true, the <paramref
              name="index" />
+
+            
 
             
 
@@ -1910,8 +2240,12 @@
 
             
 
+            
+
              is inserted into the tree view and the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -1927,6 +2261,8 @@
 
             
 
+            
+
              objects to the collection by using the <see
              cref="Overload:System.Windows.Forms.TreeNodeCollection.Add" />
 
@@ -1934,8 +2270,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.TreeNodeCollection.AddRange(System.Windows.Forms.TreeNode[])" />
+
+            
 
             
 
@@ -1958,6 +2298,8 @@
 
             
 
+            
+
              that was inserted in the collection.</para
           >
         </returns>
@@ -1968,10 +2310,14 @@
 
           
 
+          
+
           The location within the collection to insert the node.</param
         >
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2005,8 +2351,12 @@
 
             
 
+            
+
              property is set to true, the <paramref
              name="index" />
+
+            
 
             
 
@@ -2019,8 +2369,12 @@
 
             
 
+            
+
              is inserted into the tree view, and the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -2036,6 +2390,8 @@
 
             
 
+            
+
              objects to the collection by using the <see
              cref="M:System.Windows.Forms.TreeNodeCollection.Add(System.String)" />
 
@@ -2043,8 +2399,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.TreeNodeCollection.AddRange(System.Windows.Forms.TreeNode[])" />
+
+            
 
             
 
@@ -2060,8 +2420,12 @@
 
             
 
+            
+
              that you previously added, use the <see
              cref="M:System.Windows.Forms.TreeNodeCollection.Remove(System.Windows.Forms.TreeNode)" />
+
+            
 
             
 
@@ -2074,8 +2438,12 @@
 
             
 
+            
+
             , or <see
              cref="M:System.Windows.Forms.TreeNodeCollection.Clear" />
+
+            
 
             
 
@@ -2092,8 +2460,12 @@
 
               
 
+              
+
                can be assigned to only one <see
                cref="T:System.Windows.Forms.TreeView" />
+
+              
 
               
 
@@ -2114,6 +2486,8 @@
 
           
 
+          
+
           The indexed location within the collection to insert the tree node. </param
         >
         <param name="node">
@@ -2123,8 +2497,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.TreeNode" />
+
+          
 
           
 
@@ -2166,8 +2544,12 @@
 
             
 
+            
+
              property is set to true, the <paramref
              name="index" />
+
+            
 
             
 
@@ -2180,8 +2562,12 @@
 
             
 
+            
+
              is inserted into the tree view and the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -2197,6 +2583,8 @@
 
             
 
+            
+
              objects to the collection by using the <see
              cref="Overload:System.Windows.Forms.TreeNodeCollection.Add" />
 
@@ -2204,8 +2592,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.TreeNodeCollection.AddRange(System.Windows.Forms.TreeNode[])" />
+
+            
 
             
 
@@ -2221,6 +2613,8 @@
 
             
 
+            
+
              property corresponds to the key for a <see
              cref="T:System.Windows.Forms.TreeNode" />
 
@@ -2228,8 +2622,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Windows.Forms.TreeNodeCollection" />
+
+            
 
             
 
@@ -2252,11 +2650,15 @@
 
             
 
+            
+
              that was inserted in the collection.</para
           >
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2271,10 +2673,14 @@
 
           
 
+          
+
           The name of the tree node.</param
         >
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2313,8 +2719,12 @@
 
             
 
+            
+
              property is set to true, the <paramref
              name="index" />
+
+            
 
             
 
@@ -2327,8 +2737,12 @@
 
             
 
+            
+
              is inserted into the tree view and the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -2344,6 +2758,8 @@
 
             
 
+            
+
              objects to the collection by using the <see
              cref="Overload:System.Windows.Forms.TreeNodeCollection.Add" />
 
@@ -2351,8 +2767,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.TreeNodeCollection.AddRange(System.Windows.Forms.TreeNode[])" />
+
+            
 
             
 
@@ -2368,6 +2788,8 @@
 
             
 
+            
+
              property corresponds to the key for a <see
              cref="T:System.Windows.Forms.TreeNode" />
 
@@ -2375,8 +2797,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Windows.Forms.TreeNodeCollection" />
+
+            
 
             
 
@@ -2392,6 +2818,8 @@
 
             
 
+            
+
              parameter refers to an image in the <see
              cref="P:System.Windows.Forms.TreeView.ImageList" />
 
@@ -2399,8 +2827,12 @@
 
             
 
+            
+
              property of the parent <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -2423,11 +2855,15 @@
 
             
 
+            
+
              that was inserted in the collection.</para
           >
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2442,6 +2878,8 @@
 
           
 
+          
+
           The name of the tree node.</param
         >
         <param name="text">
@@ -2451,10 +2889,14 @@
 
           
 
+          
+
           The text to display in the tree node.</param
         >
         <param name="imageIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2493,8 +2935,12 @@
 
             
 
+            
+
              property is set to true, the <paramref
              name="index" />
+
+            
 
             
 
@@ -2507,8 +2953,12 @@
 
             
 
+            
+
              is inserted into the tree view and the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -2524,6 +2974,8 @@
 
             
 
+            
+
              objects to the collection by using the <see
              cref="Overload:System.Windows.Forms.TreeNodeCollection.Add" />
 
@@ -2531,8 +2983,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.TreeNodeCollection.AddRange(System.Windows.Forms.TreeNode[])" />
+
+            
 
             
 
@@ -2548,6 +3004,8 @@
 
             
 
+            
+
              property corresponds to the key for a <see
              cref="T:System.Windows.Forms.TreeNode" />
 
@@ -2555,8 +3013,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Windows.Forms.TreeNodeCollection" />
+
+            
 
             
 
@@ -2572,6 +3034,8 @@
 
             
 
+            
+
              parameter refers to an image in the <see
              cref="P:System.Windows.Forms.TreeView.ImageList" />
 
@@ -2579,8 +3043,12 @@
 
             
 
+            
+
              property of the parent <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -2603,11 +3071,15 @@
 
             
 
+            
+
              that was inserted in the collection.</para
           >
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2622,6 +3094,8 @@
 
           
 
+          
+
           The name of the tree node.</param
         >
         <param name="text">
@@ -2631,10 +3105,14 @@
 
           
 
+          
+
           The text to display in the tree node.</param
         >
         <param name="imageKey">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2674,8 +3152,12 @@
 
             
 
+            
+
              property is set to true, the <paramref
              name="index" />
+
+            
 
             
 
@@ -2688,8 +3170,12 @@
 
             
 
+            
+
              is inserted into the tree view and the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -2705,6 +3191,8 @@
 
             
 
+            
+
              objects to the collection by using the <see
              cref="Overload:System.Windows.Forms.TreeNodeCollection.Add" />
 
@@ -2712,8 +3200,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.TreeNodeCollection.AddRange(System.Windows.Forms.TreeNode[])" />
+
+            
 
             
 
@@ -2729,6 +3221,8 @@
 
             
 
+            
+
              property corresponds to the key for a <see
              cref="T:System.Windows.Forms.TreeNode" />
 
@@ -2736,8 +3230,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Windows.Forms.TreeNodeCollection" />
+
+            
 
             
 
@@ -2753,6 +3251,8 @@
 
             
 
+            
+
              parameter refers to an image in the <see
              cref="P:System.Windows.Forms.TreeView.ImageList" />
 
@@ -2760,8 +3260,12 @@
 
             
 
+            
+
              property of the parent <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -2777,6 +3281,8 @@
 
             
 
+            
+
              parameter refers to an image in the <see
              cref="P:System.Windows.Forms.TreeView.StateImageList" />
 
@@ -2784,8 +3290,12 @@
 
             
 
+            
+
              property of the parent <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -2808,11 +3318,15 @@
 
             
 
+            
+
              that was inserted in the collection.</para
           >
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2827,10 +3341,14 @@
 
           
 
+          
+
           The name of the tree node.</param
         >
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2845,10 +3363,14 @@
 
           
 
+          
+
           The index of the image to display in the tree node.</param
         >
         <param name="selectedImageIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2888,8 +3410,12 @@
 
             
 
+            
+
              property is set to true, the <paramref
              name="index" />
+
+            
 
             
 
@@ -2902,8 +3428,12 @@
 
             
 
+            
+
              is inserted into the tree view and the <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -2919,6 +3449,8 @@
 
             
 
+            
+
              objects to the collection by using the <see
              cref="Overload:System.Windows.Forms.TreeNodeCollection.Add" />
 
@@ -2926,8 +3458,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.TreeNodeCollection.AddRange(System.Windows.Forms.TreeNode[])" />
+
+            
 
             
 
@@ -2943,6 +3479,8 @@
 
             
 
+            
+
              property corresponds to the key for a <see
              cref="T:System.Windows.Forms.TreeNode" />
 
@@ -2950,8 +3488,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Windows.Forms.TreeNodeCollection" />
+
+            
 
             
 
@@ -2967,6 +3509,8 @@
 
             
 
+            
+
              parameter refers to an image in the <see
              cref="P:System.Windows.Forms.TreeView.ImageList" />
 
@@ -2974,8 +3518,12 @@
 
             
 
+            
+
              property of the parent <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -2991,6 +3539,8 @@
 
             
 
+            
+
              parameter refers to an image in the <see
              cref="P:System.Windows.Forms.TreeView.StateImageList" />
 
@@ -2998,8 +3548,12 @@
 
             
 
+            
+
              property of the parent <see
              cref="T:System.Windows.Forms.TreeView" />
+
+            
 
             
 
@@ -3022,11 +3576,15 @@
 
             
 
+            
+
              that was inserted in the collection.</para
           >
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3041,10 +3599,14 @@
 
           
 
+          
+
           The name of the tree node.</param
         >
         <param name="text">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3059,10 +3621,14 @@
 
           
 
+          
+
           The key of the image to display in the tree node.</param
         >
         <param name="selectedImageKey">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3159,11 +3725,15 @@
 
             
 
+            
+
              is removed from the tree node collection, all subsequent tree nodes are moved up one position in the collection.</para
           >
           <para
             >You can also remove a <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -3176,8 +3746,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.TreeNodeCollection.Clear" />
+
+            
 
             
 
@@ -3196,8 +3770,12 @@
 
             
 
+            
+
              objects to the collection, use the <see
              cref="M:System.Windows.Forms.TreeNodeCollection.Add(System.String)" />
+
+            
 
             
 
@@ -3210,8 +3788,12 @@
 
             
 
+            
+
             , or <see
              cref="M:System.Windows.Forms.TreeNodeCollection.Insert(System.Int32,System.Windows.Forms.TreeNode)" />
+
+            
 
             
 
@@ -3231,8 +3813,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.TreeNode" />
+
+          
 
           
 
@@ -3266,11 +3852,15 @@
 
             
 
+            
+
              is removed from the tree node collection, all subsequent tree nodes are moved up one position in the collection.</para
           >
           <para
             >You can also remove a <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -3283,8 +3873,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Windows.Forms.TreeNodeCollection.Clear" />
+
+            
 
             
 
@@ -3303,8 +3897,12 @@
 
             
 
+            
+
              objects to the collection, use the <see
              cref="M:System.Windows.Forms.TreeNodeCollection.Add(System.String)" />
+
+            
 
             
 
@@ -3317,8 +3915,12 @@
 
             
 
+            
+
             , or <see
              cref="M:System.Windows.Forms.TreeNodeCollection.Insert(System.Int32,System.Windows.Forms.TreeNode)" />
+
+            
 
             
 
@@ -3338,8 +3940,12 @@
 
           
 
+          
+
           The index of the <see
            cref="T:System.Windows.Forms.TreeNode" />
+
+          
 
           
 
@@ -3376,6 +3982,8 @@
 
             
 
+            
+
              property corresponds to the key for a <see
              cref="T:System.Windows.Forms.TreeNode" />
 
@@ -3383,8 +3991,12 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Windows.Forms.TreeNodeCollection" />
+
+            
 
             
 
@@ -3399,6 +4011,8 @@
         </summary>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3476,8 +4090,12 @@
 
             
 
+            
+
              is not a <see
              cref="T:System.Windows.Forms.TreeNodeCollection" />
+
+            
 
             
 
@@ -3490,6 +4108,8 @@
 
             
 
+            
+
              method will use the string returned by the <see
              cref="M:System.Windows.Forms.TreeNode.ToString" />
 
@@ -3497,8 +4117,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -3521,11 +4145,15 @@
 
             
 
+            
+
              that was added to the tree node collection.</para
           >
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3559,8 +4187,12 @@
 
             
 
+            
+
              is not a <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -3573,8 +4205,12 @@
 
             
 
+            
+
              method returns false. Therefore, you cannot pass in a string to determine if the collection contains a node that has the value of the string as its <see
              cref="P:System.Windows.Forms.TreeNode.Text" />
+
+            
 
             
 
@@ -3597,11 +4233,15 @@
 
             
 
+            
+
              is a member of the collection; otherwise, false.</para
           >
         </returns>
         <param name="node">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3635,8 +4275,12 @@
 
             
 
+            
+
              is not a <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -3649,8 +4293,12 @@
 
             
 
+            
+
              method returns -1. Therefore, you cannot pass in a string to find the node that has the value of the string as its <see
              cref="P:System.Windows.Forms.TreeNode.Text" />
+
+            
 
             
 
@@ -3674,8 +4322,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.TreeNode" />
+
+          
 
           
 
@@ -3710,8 +4362,12 @@
 
             
 
+            
+
              property is set to true, the <paramref
              name="index" />
+
+            
 
             
 
@@ -3724,8 +4380,12 @@
 
             
 
+            
+
              is inserted into the tree view and the <see
              cref="T:System.Web.UI.WebControls.TreeView" />
+
+            
 
             
 
@@ -3745,6 +4405,8 @@
 
           
 
+          
+
           The indexed location within the collection to insert the tree node. </param
         >
         <param name="node">
@@ -3754,8 +4416,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.TreeNode" />
+
+          
 
           
 
@@ -3831,11 +4497,15 @@
 
             
 
+            
+
              property.</para
           >
           <para
             >When a <see
              cref="T:System.Windows.Forms.TreeNode" />
+
+            
 
             
 
@@ -3855,8 +4525,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.TreeNode" />
+
+          
 
           
 

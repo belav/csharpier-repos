@@ -28,8 +28,12 @@
 
         
 
+        
+
          dialog box for a <see
          cref="T:System.Web.UI.WebControls.Calendar" />
+
+        
 
         
 
@@ -61,6 +65,8 @@
 
             
 
+            
+
              instance for a designer host.</para
           >
         </summary>
@@ -71,8 +77,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.Calendar" />
+
+          
 
           
 
@@ -111,11 +121,15 @@
 
             
 
+            
+
              is activated.</para
           >
         </summary>
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -130,8 +144,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -187,6 +205,8 @@
 
           
 
+          
+
           The source of the event. </param
         >
         <param name="e">
@@ -196,8 +216,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -237,6 +261,8 @@
 
           
 
+          
+
           The source of the event. </param
         >
         <param name="e">
@@ -246,8 +272,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 

@@ -20,6 +20,8 @@
 
         
 
+        
+
          enumeration is used to represent the direction in which items are sorted. It is commonly used by properties (such as the <see
          cref="P:System.Web.UI.WebControls.GridView.SortDirection" />
 
@@ -27,8 +29,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 

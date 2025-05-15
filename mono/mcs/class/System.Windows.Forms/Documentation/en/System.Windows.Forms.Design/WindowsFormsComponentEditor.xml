@@ -40,6 +40,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -79,8 +81,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -90,6 +96,8 @@
         >
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -133,6 +141,8 @@
 
           
 
+          
+
           The component to edit. </param
         >
         <param name="owner">
@@ -142,8 +152,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Windows.Forms.IWin32Window" />
+
+          
 
           
 
@@ -188,8 +202,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -204,6 +222,8 @@
 
           
 
+          
+
           The component to edit. </param
         >
         <param name="owner">
@@ -213,8 +233,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Windows.Forms.IWin32Window" />
+
+          
 
           
 

@@ -3,7 +3,7 @@
   <paragraph
     >For a statement stmt of the form: <code_example
     >
-<![CDATA[
+      <![CDATA[
 try try-block   
 catch(...) catch-block-1  
 ...  

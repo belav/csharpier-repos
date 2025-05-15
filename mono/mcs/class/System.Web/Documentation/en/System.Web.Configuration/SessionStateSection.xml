@@ -24,11 +24,15 @@
 
         
 
+        
+
          class refers to the element in the Machine.config or Web.config configuration file identified by the sessionState tag.  </para
       >
       <para
         >When a new client begins interacting with a Web application, a session ID is issued and associated with all the subsequent requests from the same client during the time that the session is valid. This ID is used to maintain server-side state associated with the client session across requests. The <see
          cref="T:System.Web.Configuration.SessionStateSection" />
+
+        
 
         
 
@@ -60,6 +64,8 @@
 
             
 
+            
+
              constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see
              cref="T:System.Web.Configuration.SessionStateSection" />
 
@@ -67,8 +73,12 @@
 
             
 
+            
+
              class by using the <see
              cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+
+            
 
             
 
@@ -82,6 +92,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.SessionStateSection" />
+
+            
 
             
 
@@ -115,6 +127,8 @@
           <para
             >Gets or sets a value indicating whether the user can specify the initial catalog value in the <see
              cref="P:System.Web.Configuration.SessionStateSection.SqlConnectionString" />
+
+            
 
             
 
@@ -158,8 +172,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Web.HttpCookieMode.AutoDetect" />
+
+            
 
             
 
@@ -172,8 +190,12 @@
 
             
 
+            
+
              option performs a handshake with the browser to verify whether a cookie may be stored, and therefore requires an additional request to make the determination. If you need to support cookieless clients, strongly consider using <see
              cref="F:System.Web.HttpCookieMode.UseDeviceProfile" />
+
+            
 
             
 
@@ -190,8 +212,12 @@
 
               
 
+              
+
                always behaves as if the value of the <see
                cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsRedirectWithCookie" />
+
+              
 
               
 
@@ -204,6 +230,8 @@
 
               
 
+              
+
                object is false, unless the <see
                cref="P:System.Web.Configuration.SessionStateSection.Cookieless" />
 
@@ -211,8 +239,12 @@
 
               
 
+              
+
                property in the <see
                cref="P:System.Web.Configuration.SystemWebSectionGroup.SessionState" />
+
+              
 
               
 
@@ -228,6 +260,8 @@
 
               
 
+              
+
                is now the default setting. If your Web application has the <see
                cref="P:System.Web.Configuration.SessionStateSection.Cookieless" />
 
@@ -235,8 +269,12 @@
 
               
 
+              
+
                property set to a Boolean value, then <see
                cref="M:System.Web.HttpResponse.Redirect(System.String)" />
+
+              
 
               
 
@@ -306,6 +344,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -314,6 +354,8 @@
           <para
             >Gets or sets the name of the custom provider from the <see
              cref="P:System.Web.Configuration.SessionStateSection.Providers" />
+
+            
 
             
 
@@ -373,6 +415,8 @@
 
             
 
+            
+
              is not a required attribute and can be inherited from a higher level in the configuration hierarchy or from the default value. However, the configuration handler for this section will always write out the mode based on the current inherited value when writing this section.</para
           >
         </remarks>
@@ -409,8 +453,12 @@
 
             
 
+            
+
              property is specified, the <see
              cref="P:System.Web.Configuration.SessionStateSection.SqlConnectionString" />
+
+            
 
             
 
@@ -423,6 +471,8 @@
 
             
 
+            
+
              property are ignored.  The <see
              cref="P:System.Web.Configuration.SessionStateSection.PartitionResolverType" />
 
@@ -430,8 +480,12 @@
 
             
 
+            
+
              can be locked via the <see
              cref="P:System.Configuration.ConfigurationElement.LockAttributes" />
+
+            
 
             
 
@@ -448,8 +502,12 @@
 
             
 
+            
+
              element. The connection string returned by the <see
              cref="P:System.Web.Configuration.SessionStateSection.PartitionResolverType" />
+
+            
 
             
 
@@ -534,6 +592,8 @@
 
             
 
+            
+
              providers.</para
           >
         </summary>
@@ -561,6 +621,8 @@
           <para
             >By default, only cookieless URLs are reissued when <see
              cref="P:System.Web.Configuration.SessionStateSection.RegenerateExpiredSessionId" />
+
+            
 
             
 
@@ -597,6 +659,8 @@
           <para
             >The <see
              cref="P:System.Web.Configuration.SessionStateSection.SessionIDManagerType" />
+
+            
 
             
 
@@ -665,8 +729,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Web.SessionState.SessionStateMode.SQLServer" />
+
+            
 
             
 
@@ -678,6 +746,8 @@
             <para
               >To use the <see
                cref="F:System.Web.SessionState.SessionStateMode.SQLServer" />
+
+              
 
               
 
@@ -720,8 +790,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Web.SessionState.SessionStateMode.StateServer" />
+
+            
 
             
 
@@ -769,8 +843,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Web.SessionState.SessionStateMode.StateServer" />
+
+            
 
             
 
@@ -813,6 +891,8 @@
           <para
             >The <see
              cref="P:System.Web.Configuration.SessionStateSection.Timeout" />
+
+            
 
             
 

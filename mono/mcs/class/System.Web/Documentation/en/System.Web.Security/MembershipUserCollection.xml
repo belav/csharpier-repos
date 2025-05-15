@@ -28,8 +28,12 @@
 
         
 
+        
+
          is returned from the <see
          cref="Overload:System.Web.Security.Membership.GetAllUsers" />
+
+        
 
         
 
@@ -42,6 +46,8 @@
 
         
 
+        
+
         , and <see
          cref="Overload:System.Web.Security.Membership.FindUsersByEmail" />
 
@@ -49,8 +55,12 @@
 
         
 
+        
+
          methods of the <see
          cref="T:System.Web.Security.Membership" />
+
+        
 
         
 
@@ -63,8 +73,12 @@
 
         
 
+        
+
          objects returned by the <see
          cref="Overload:System.Web.Security.Membership.GetAllUsers" />
+
+        
 
         
 
@@ -77,8 +91,12 @@
 
         
 
+        
+
         , and <see
          cref="Overload:System.Web.Security.Membership.FindUsersByEmail" />
+
+        
 
         
 
@@ -91,8 +109,12 @@
 
         
 
+        
+
          are not reflected in the membership data store. To modify membership user information in the membership data store, use the <see
          cref="M:System.Web.Security.Membership.UpdateUser(System.Web.Security.MembershipUser)" />
+
+        
 
         
 
@@ -105,6 +127,8 @@
 
         
 
+        
+
          and <see
          cref="M:System.Web.Security.Membership.DeleteUser(System.String)" />
 
@@ -112,8 +136,12 @@
 
         
 
+        
+
          methods of the <see
          cref="T:System.Web.Security.Membership" />
+
+        
 
         
 
@@ -132,10 +160,14 @@
 
           
 
+          
+
            before continuing. For a list of other topics related to membership, see <format
            type="text/html">
             <a href="824c3a24-f0af-427c-a652-0d2d1e9397cd">Managing Users By Using Membership</a>
           </format>
+
+          
 
           
 
@@ -150,6 +182,8 @@
       <para
         >A collection of <see
          cref="T:System.Web.Security.MembershipUser" />
+
+        
 
         
 
@@ -176,8 +210,12 @@
 
             
 
+            
+
              is constructed by membership provider implementers and returned from the <see
              cref="M:System.Web.Security.MembershipProvider.GetAllUsers(System.Int32,System.Int32,System.Int32@)" />
+
+            
 
             
 
@@ -190,8 +228,12 @@
 
             
 
+            
+
              methods of the <see
              cref="T:System.Web.Security.MembershipProvider" />
+
+            
 
             
 
@@ -233,8 +275,12 @@
 
             
 
+            
+
              method is commonly used by membership provider implementations of the <see
              cref="M:System.Web.Security.MembershipProvider.GetAllUsers(System.Int32,System.Int32,System.Int32@)" />
+
+            
 
             
 
@@ -247,6 +293,8 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Web.Security.MembershipProvider.FindUsersByName(System.String,System.Int32,System.Int32,System.Int32@)" />
 
@@ -254,8 +302,12 @@
 
             
 
+            
+
              methods of the <see
              cref="T:System.Web.Security.MembershipProvider" />
+
+            
 
             
 
@@ -275,8 +327,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Security.MembershipUser" />
+
+          
 
           
 
@@ -335,8 +391,12 @@
 
           
 
+          
+
           A one-dimensional array of type <see
            cref="T:System.Web.Security.MembershipUser" />
+
+          
 
           
 
@@ -349,10 +409,14 @@
 
           
 
+          
+
           . The array must have zero-based indexing.</param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -406,6 +470,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -423,8 +489,12 @@
 
             
 
+            
+
              for the entire <see
              cref="T:System.Web.Security.MembershipUserCollection" />
+
+            
 
             
 
@@ -506,8 +576,12 @@
 
           
 
+          
+
           The user name of the <see
            cref="T:System.Web.Security.MembershipUser" />
+
+          
 
           
 
@@ -539,8 +613,12 @@
 
             
 
+            
+
              are considered read-only, as they are a snapshot of the membership user information in the membership data store. Membership user information is modified using the <see
              cref="M:System.Web.Security.Membership.UpdateUser(System.Web.Security.MembershipUser)" />
+
+            
 
             
 
@@ -553,8 +631,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.Security.Membership.DeleteUser(System.String)" />
+
+            
 
             
 
@@ -567,8 +649,12 @@
 
             
 
+            
+
              method marks the <see
              cref="T:System.Web.Security.MembershipUserCollection" />
+
+            
 
             
 
@@ -581,8 +667,12 @@
 
             
 
+            
+
              objects cannot be added to or removed from the collection. Property values for the <see
              cref="T:System.Web.Security.MembershipUser" />
+
+            
 
             
 
@@ -595,6 +685,8 @@
 
             
 
+            
+
              in the <see
              cref="T:System.Web.Security.MembershipUserCollection" />
 
@@ -602,8 +694,12 @@
 
             
 
+            
+
              regardless of whether the collection has been marked as read-only by the <see
              cref="M:System.Web.Security.MembershipUserCollection.SetReadOnly" />
+
+            
 
             
 
@@ -668,6 +764,8 @@
 
             
 
+            
+
              object to an <see
              cref="T:System.Array" />
 
@@ -675,8 +773,12 @@
 
             
 
+            
+
             , starting at a particular <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -692,8 +794,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -706,8 +812,12 @@
 
           
 
+          
+
            object. The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -722,8 +832,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 

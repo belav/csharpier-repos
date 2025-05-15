@@ -23,8 +23,12 @@
 
         
 
+        
+
          object is used at design time to select and edit a URL for an XML data file (.xml), and then assign the URL to a control property. For example, the <see
          cref="T:System.Web.UI.WebControls.XmlDataSource" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          class at design time to set the value of the <see
          cref="P:System.Web.UI.WebControls.XmlDataSource.DataFile" />
+
+        
 
         
 
@@ -54,8 +62,12 @@
 
         
 
+        
+
          attribute to associate the <see
          cref="T:System.Web.UI.Design.XmlDataFileEditor" />
+
+        
 
         
 
@@ -68,8 +80,12 @@
 
         
 
+        
+
          method. The <see
          cref="Overload:System.Web.UI.Design.UrlEditor.EditValue" />
+
+        
 
         
 
@@ -82,8 +98,12 @@
 
         
 
+        
+
          method, which in turn displays a user interface for selecting the URL, and then returns the URL that is selected by the user. The <see
          cref="Overload:System.Web.UI.Design.UrlEditor.GetEditStyle" />
+
+        
 
         
 
@@ -99,8 +119,12 @@
 
         
 
+        
+
          to define a custom editor for an XML data property. For example, a derived class can override the <see
          cref="Overload:System.Web.UI.Design.UrlEditor.EditValue" />
+
+        
 
         
 
@@ -113,6 +137,8 @@
 
         
 
+        
+
          method with a custom <see
          cref="P:System.Web.UI.Design.XmlDataFileEditor.Filter" />
 
@@ -120,8 +146,12 @@
 
         
 
+        
+
          or <see
          cref="P:System.Web.UI.Design.XmlDataFileEditor.Caption" />
+
+        
 
         
 
@@ -155,6 +185,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -181,6 +213,8 @@
 
             
 
+            
+
              property is used by the <see
              cref="Overload:System.Web.UI.Design.UrlEditor.EditValue" />
 
@@ -188,8 +222,12 @@
 
             
 
+            
+
              method when calling the <see
              cref="Overload:System.Web.UI.Design.UrlBuilder.BuildUrl" />
+
+            
 
             
 
@@ -225,8 +263,12 @@
 
             
 
+            
+
              property is used by the <see
              cref="Overload:System.Web.UI.Design.UrlEditor.EditValue" />
+
+            
 
             
 
@@ -239,11 +281,15 @@
 
             
 
+            
+
              method, which displays the URL selection dialog box to the user at design time.</para
           >
           <para
             >The <see
              cref="P:System.Web.UI.Design.XmlDataFileEditor.Filter" />
+
+            
 
             
 

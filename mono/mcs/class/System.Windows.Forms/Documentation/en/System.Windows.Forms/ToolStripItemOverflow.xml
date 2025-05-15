@@ -22,6 +22,8 @@
 
         
 
+        
+
          to manage this situation.</para
       >
     </remarks>
@@ -35,8 +37,12 @@
 
         
 
+        
+
          is placed in the overflow <see
          cref="T:System.Windows.Forms.ToolStrip" />
+
+        
 
         
 
@@ -65,8 +71,12 @@
 
             
 
+            
+
              is permanently shown in the overflow <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -98,8 +108,12 @@
 
             
 
+            
+
              drifts between the main <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -112,8 +126,12 @@
 
             
 
+            
+
              as required if space is not available on the main <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -145,8 +163,12 @@
 
             
 
+            
+
              is never a candidate for the overflow <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -159,8 +181,12 @@
 
             
 
+            
+
              cannot fit on the main <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 

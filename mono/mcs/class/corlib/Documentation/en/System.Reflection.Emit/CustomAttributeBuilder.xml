@@ -47,8 +47,12 @@
 
         
 
+        
+
          and its argument. Then call <see
          cref="M:System.Reflection.Emit.AssemblyBuilder.SetCustomAttribute(System.Reflection.ConstructorInfo,System.Byte[])" />
+
+        
 
         
 
@@ -94,6 +98,8 @@
 
             
 
+            
+
              array are restricted to element types. They can be byte, sbyte, int, uint, long, ulong, float, double, String, char, bool, an enum, a type, any of the previous types that was cast to an object, or a single-dimension, zero-based array of any of the previous types.</para
           >
         </remarks>
@@ -108,10 +114,14 @@
 
           
 
+          
+
           The constructor for the custom attribute. </param
         >
         <param name="constructorArgs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -154,8 +164,12 @@
 
             
 
+            
+
              and <paramref
              name="fieldValues" />
+
+            
 
             
 
@@ -172,6 +186,8 @@
 
               
 
+              
+
               . Doing so will cause <see
                cref="T:System.Reflection.CustomAttributeFormatException" />
 
@@ -179,8 +195,12 @@
 
               
 
+              
+
                to be thrown when the <see
                cref="M:System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type)" />
+
+              
 
               
 
@@ -201,10 +221,14 @@
 
           
 
+          
+
           The constructor for the custom attribute. </param
         >
         <param name="constructorArgs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -219,10 +243,14 @@
 
           
 
+          
+
           Named fields of the custom attribute. </param
         >
         <param name="fieldValues">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -265,8 +293,12 @@
 
             
 
+            
+
              and <paramref
              name="propertyValues" />
+
+            
 
             
 
@@ -283,6 +315,8 @@
 
               
 
+              
+
               . Doing so will cause <see
                cref="T:System.Reflection.CustomAttributeFormatException" />
 
@@ -290,8 +324,12 @@
 
               
 
+              
+
                to be thrown when the <see
                cref="M:System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type)" />
+
+              
 
               
 
@@ -312,10 +350,14 @@
 
           
 
+          
+
           The constructor for the custom attribute. </param
         >
         <param name="constructorArgs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -330,10 +372,14 @@
 
           
 
+          
+
           Named properties of the custom attribute. </param
         >
         <param name="propertyValues">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -378,6 +424,8 @@
 
             
 
+            
+
             , <paramref
              name="propertyValues" />
 
@@ -385,8 +433,12 @@
 
             
 
+            
+
             , or <paramref
              name="fieldValues" />
+
+            
 
             
 
@@ -403,8 +455,12 @@
 
               
 
+              
+
                or <paramref
                name="namedFields" />
+
+              
 
               
 
@@ -417,8 +473,12 @@
 
               
 
+              
+
                to be thrown when the <see
                cref="M:System.Attribute.GetCustomAttributes(System.Reflection.MemberInfo,System.Type)" />
+
+              
 
               
 
@@ -439,10 +499,14 @@
 
           
 
+          
+
           The constructor for the custom attribute. </param
         >
         <param name="constructorArgs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -457,10 +521,14 @@
 
           
 
+          
+
           Named properties of the custom attribute. </param
         >
         <param name="propertyValues">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -475,10 +543,14 @@
 
           
 
+          
+
           Named fields of the custom attribute. </param
         >
         <param name="fieldValues">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -557,6 +629,8 @@
 
             
 
+            
+
             , see the MSDN Library.</para
           >
         </remarks>
@@ -571,6 +645,8 @@
 
           
 
+          
+
           The type information to return.</param
         >
         <param name="lcid">
@@ -580,10 +656,14 @@
 
           
 
+          
+
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

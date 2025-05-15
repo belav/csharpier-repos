@@ -20,9 +20,13 @@
 
       
 
+      
+
       .
               Namespace Test: [<see
        cref="N:Mono.DocTest" />
+
+      
 
       
 
@@ -74,6 +78,8 @@
 
           
 
+          
+
           .</remarks
         >
       </Docs>
@@ -101,6 +107,8 @@
 
           
 
+          
+
           .</remarks
         >
       </Docs>
@@ -123,6 +131,8 @@
         <summary>Insert Red summary here</summary>
         <remarks>
           <c>F:Mono.DocTest.Color.Red</c>
+
+          
 
           
 

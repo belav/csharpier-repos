@@ -30,6 +30,8 @@
 
         
 
+        
+
          class. By default, a proxy class deriving from <see
          cref="T:System.Web.Services.Protocols.HttpSimpleClientProtocol" />
 
@@ -37,8 +39,12 @@
 
         
 
+        
+
          encodes parameters using the application/x-www-form-urlencoded MIME type and the response in plain XML. Custom mime formatters can be specified using the <see
          cref="T:System.Web.Services.Protocols.HttpMethodAttribute" />
+
+        
 
         
 
@@ -54,8 +60,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Web.Services.Protocols.HttpSimpleClientProtocol.EndInvoke(System.IAsyncResult)" />
+
+        
 
         
 
@@ -68,8 +78,12 @@
 
         
 
+        
+
          method. The overridden constructor typically sets the <see
          cref="P:System.Web.Services.Protocols.WebClientProtocol.Url" />
+
+        
 
         
 
@@ -80,6 +94,8 @@
       <para
         >The Web Services Description Language tool (Wsdl.exe) generates derived classes of <see
          cref="T:System.Web.Services.Protocols.HttpSimpleClientProtocol" />
+
+        
 
         
 
@@ -106,6 +122,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Protocols.HttpSimpleClientProtocol" />
+
+            
 
             
 
@@ -147,8 +165,12 @@
 
             
 
+            
+
              parameter is used to find the types of the parameters and return values of the method that is invoking the <see
              cref="M:System.Web.Services.Protocols.HttpSimpleClientProtocol.BeginInvoke(System.String,System.String,System.Object[],System.AsyncCallback,System.Object)" />
+
+            
 
             
 
@@ -161,6 +183,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.Services.Protocols.SoapRpcMethodAttribute" />
 
@@ -168,8 +192,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Xml.Serialization.XmlElementAttribute" />
+
+            
 
             
 
@@ -184,8 +212,12 @@
 
             
 
+            
+
              is passed into <paramref
              name="callback" />
+
+            
 
             
 
@@ -198,6 +230,8 @@
 
             
 
+            
+
              that is returned from the <see
              cref="M:System.Web.Services.Protocols.HttpSimpleClientProtocol.BeginInvoke(System.String,System.String,System.Object[],System.AsyncCallback,System.Object)" />
 
@@ -205,8 +239,12 @@
 
             
 
+            
+
              method. It is useful for passing information from the context of the asynchronous call to the handling of the asynchronous result in <paramref
              name="callback" />
+
+            
 
             
 
@@ -229,8 +267,12 @@
 
             
 
+            
+
              that can be passed to the <see
              cref="M:System.Web.Services.Protocols.HttpSimpleClientProtocol.EndInvoke(System.IAsyncResult)" />
+
+            
 
             
 
@@ -246,6 +288,8 @@
 
           
 
+          
+
           The name of the XML Web service method. </param
         >
         <param name="requestUrl">
@@ -255,8 +299,12 @@
 
           
 
+          
+
           The URL to use when creating the <see
            cref="T:System.Net.WebRequest" />
+
+          
 
           
 
@@ -271,10 +319,14 @@
 
           
 
+          
+
           An array of objects containing the parameters to pass to the XML Web service method. The order of the values in the array corresponds to the order of the parameters in the calling method of the derived class. </param
         >
         <param name="callback">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -287,10 +339,14 @@
 
           
 
+          
+
            is null, the delegate is not called. </param
         >
         <param name="asyncState">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -332,11 +388,15 @@
 
             
 
+            
+
              parameters for the XML Web service method.</para
           >
         </returns>
         <param name="asyncResult">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -349,8 +409,12 @@
 
           
 
+          
+
            returned from the <see
            cref="M:System.Web.Services.Protocols.HttpSimpleClientProtocol.BeginInvoke(System.String,System.String,System.Object[],System.AsyncCallback,System.Object)" />
+
+          
 
           
 
@@ -389,8 +453,12 @@
 
             
 
+            
+
              parameter is used to find the types of the parameters and return values of the method that is invoking the <see
              cref="M:System.Web.Services.Protocols.HttpSimpleClientProtocol.Invoke(System.String,System.String,System.Object[])" />
+
+            
 
             
 
@@ -403,8 +471,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Xml.Serialization.XmlElementAttribute" />
+
+            
 
             
 
@@ -427,6 +499,8 @@
 
             
 
+            
+
              parameters of the derived class method.</para
           >
         </returns>
@@ -437,8 +511,12 @@
 
           
 
+          
+
           The name of the XML Web service method in the derived class that is invoking the <see
            cref="M:System.Web.Services.Protocols.HttpSimpleClientProtocol.Invoke(System.String,System.String,System.Object[])" />
+
+          
 
           
 
@@ -453,10 +531,14 @@
 
           
 
+          
+
           The URL of the XML Web service method that the client is requesting. </param
         >
         <param name="parameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -501,10 +583,14 @@
 
           
 
+          
+
           The name of the method to invoke.</param
         >
         <param name="requestUrl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -519,10 +605,14 @@
 
           
 
+          
+
           The parameters to pass to the method.</param
         >
         <param name="callback">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -564,10 +654,14 @@
 
           
 
+          
+
           The name of the method to invoke.</param
         >
         <param name="requestUrl">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -582,10 +676,14 @@
 
           
 
+          
+
           The parameters to pass to the method.</param
         >
         <param name="callback">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -600,8 +698,12 @@
 
           
 
+          
+
           An object containing associated state information that is passed to the <paramref
            name="callback" />
+
+          
 
           
 

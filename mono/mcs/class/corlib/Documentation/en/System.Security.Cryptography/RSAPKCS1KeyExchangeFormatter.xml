@@ -41,6 +41,8 @@
 
         
 
+        
+
          to receive the key exchange and extract the secret information from it.</para
       >
       <block subset="none" type="note">
@@ -52,6 +54,8 @@
       <para
         >Creates the PKCS#1 key exchange data using <see
          cref="T:System.Security.Cryptography.RSA" />
+
+        
 
         
 
@@ -87,8 +91,12 @@
 
             
 
+            
+
              method to set the key to be used for key exchange before calling <see
              cref="M:System.Security.Cryptography.RSAPKCS1KeyExchangeFormatter.CreateKeyExchange(System.Byte[])" />
+
+            
 
             
 
@@ -102,6 +110,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Cryptography.RSAPKCS1KeyExchangeFormatter" />
+
+            
 
             
 
@@ -143,6 +153,8 @@
 
             
 
+            
+
              class with the specified key.</para
           >
         </summary>
@@ -153,8 +165,12 @@
 
           
 
+          
+
           The instance of the <see
            cref="T:System.Security.Cryptography.RSA" />
+
+          
 
           
 
@@ -200,6 +216,8 @@
         </returns>
         <param name="rgbData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -251,10 +269,14 @@
 
           
 
+          
+
           The secret information to be passed in the key exchange. </param
         >
         <param name="symAlgType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -283,6 +305,8 @@
           <para
             >The <see
              cref="P:System.Security.Cryptography.RSAPKCS1KeyExchangeFormatter.Parameters" />
+
+            
 
             
 
@@ -359,6 +383,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -373,8 +399,12 @@
 
           
 
+          
+
           The instance of the <see
            cref="T:System.Security.Cryptography.RSA" />
+
+          
 
           
 

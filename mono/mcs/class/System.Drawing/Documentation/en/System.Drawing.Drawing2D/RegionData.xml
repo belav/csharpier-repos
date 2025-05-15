@@ -25,6 +25,8 @@
 
         
 
+        
+
          object. This class cannot be inherited.</para
       >
     </summary>
@@ -45,6 +47,8 @@
           <para
             >Gets or sets an array of bytes that specify the <see
              cref="T:System.Drawing.Region" />
+
+            
 
             
 

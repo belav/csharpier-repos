@@ -29,8 +29,12 @@
 
         
 
+        
+
          or released using <see
          cref="M:System.Windows.Forms.NativeWindow.ReleaseHandle" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
           
 
+          
+
            method is called when the WM_NCDESTROY message is processed. This means there are cases in which when you do not need to manually call <see
            cref="M:System.Windows.Forms.NativeWindow.ReleaseHandle" />
+
+          
 
           
 
@@ -65,8 +73,12 @@
 
         
 
+        
+
          class provides the following properties and methods to manage handles: <see
          cref="P:System.Windows.Forms.NativeWindow.Handle" />
+
+        
 
         
 
@@ -79,8 +91,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Windows.Forms.NativeWindow.AssignHandle(System.IntPtr)" />
+
+        
 
         
 
@@ -93,8 +109,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Windows.Forms.NativeWindow.ReleaseHandle" />
+
+        
 
         
 
@@ -124,8 +144,12 @@
 
             
 
+            
+
              constructor provided by the compiler. The <see
              cref="T:System.Windows.Forms.NativeWindow" />
+
+            
 
             
 
@@ -139,6 +163,8 @@
           <para
             >Initializes an instance of the <see
              cref="T:System.Windows.Forms.NativeWindow" />
+
+            
 
             
 
@@ -172,6 +198,8 @@
 
             
 
+            
+
              intercepts window messages sent to the <paramref
              name="handle" />
 
@@ -179,8 +207,12 @@
 
             
 
+            
+
              parameter. Use <see
              cref="M:System.Windows.Forms.NativeWindow.ReleaseHandle" />
+
+            
 
             
 
@@ -196,6 +228,8 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Windows.Forms.NativeWindow.OnHandleChange" />
 
@@ -203,8 +237,12 @@
 
             
 
+            
+
              method to indicate that the value of the <see
              cref="P:System.Windows.Forms.NativeWindow.Handle" />
+
+            
 
             
 
@@ -222,6 +260,8 @@
         </summary>
         <param name="handle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -258,11 +298,15 @@
 
             
 
+            
+
              parameter specifies the values that are passed to the native Win32 CreateWindowEx method to create a window and its handle.</para
           >
           <para
             >When the <see
              cref="P:System.Windows.Forms.CreateParams.ClassName" />
+
+            
 
             
 
@@ -275,6 +319,8 @@
 
             
 
+            
+
              is set to BUTTON, the newly created window is based on the Win32 BUTTON window class. The <see
              cref="P:System.Windows.Forms.CreateParams.Param" />
 
@@ -282,8 +328,12 @@
 
             
 
+            
+
              property of the <see
              cref="P:System.Windows.Forms.CreateParams.ClassName" />
+
+            
 
             
 
@@ -299,8 +349,12 @@
 
             
 
+            
+
              class overview. Some code is not shown for the purpose of brevity. See <see
              cref="T:System.Windows.Forms.NativeWindow" />
+
+            
 
             
 
@@ -323,8 +377,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.CreateParams" />
+
+          
 
           
 
@@ -378,8 +436,12 @@
 
             
 
+            
+
             , sets the <see
              cref="P:System.Windows.Forms.NativeWindow.Handle" />
+
+            
 
             
 
@@ -392,8 +454,12 @@
 
             
 
+            
+
              method to reflect the change. Typically, you only call <see
              cref="M:System.Windows.Forms.NativeWindow.DestroyHandle" />
+
+            
 
             
 
@@ -405,6 +471,8 @@
             <para
               >The <see
                cref="T:System.Windows.Forms.NativeWindow" />
+
+              
 
               
 
@@ -442,8 +510,12 @@
 
             
 
+            
+
              method removes the Win32 derived class associated with the current <see
              cref="T:System.Windows.Forms.NativeWindow" />
+
+            
 
             
 
@@ -485,6 +557,8 @@
 
             
 
+            
+
              in the current process; otherwise, null is returned.</para
           >
         </remarks>
@@ -502,11 +576,15 @@
 
             
 
+            
+
              associated with the specified handle. This method returns null when the handle does not have an associated window.</para
           >
         </returns>
         <param name="handle">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -560,6 +638,8 @@
 
             
 
+            
+
              property has changed.</para
           >
         </remarks>
@@ -596,6 +676,8 @@
 
             
 
+            
+
              handles thread exceptions.</para
           >
         </remarks>
@@ -610,8 +692,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Exception" />
+
+          
 
           
 
@@ -643,8 +729,12 @@
 
             
 
+            
+
              property to 0 and calls <see
              cref="M:System.Windows.Forms.NativeWindow.OnHandleChange" />
+
+            
 
             
 

@@ -34,8 +34,12 @@
 
         
 
+        
+
          class to control access to a pool of resources. Threads enter the semaphore by calling the <see
          cref="Overload:System.Threading.WaitHandle.WaitOne" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
          class, and release the semaphore by calling the <see
          cref="Overload:System.Threading.Semaphore.Release" />
+
+        
 
         
 
@@ -67,6 +75,8 @@
 
         
 
+        
+
          method repeatedly. To release some or all of these entries, the thread can call the parameterless <see
          cref="M:System.Threading.Semaphore.Release" />
 
@@ -74,8 +84,12 @@
 
         
 
+        
+
          method overload multiple times, or it can call the <see
          cref="M:System.Threading.Semaphore.Release(System.Int32)" />
+
+        
 
         
 
@@ -91,8 +105,12 @@
 
         
 
+        
+
          class does not enforce thread identity on calls to <see
          cref="Overload:System.Threading.WaitHandle.WaitOne" />
+
+        
 
         
 
@@ -105,8 +123,12 @@
 
         
 
+        
+
         . It is the programmer's responsibility to ensure that threads do not release the semaphore too many times. For example, suppose a semaphore has a maximum count of two, and that thread A and thread B both enter the semaphore. If a programming error in thread B causes it to call <see
          cref="Overload:System.Threading.Semaphore.Release" />
+
+        
 
         
 
@@ -119,8 +141,12 @@
 
         
 
+        
+
         , a <see
          cref="T:System.Threading.SemaphoreFullException" />
+
+        
 
         
 
@@ -136,6 +162,8 @@
 
         
 
+        
+
          object using a constructor that accepts a name, it is associated with an operating-system semaphore of that name. Named system semaphores are visible throughout the operating system, and can be used to synchronize the activities of processes. You can create multiple <see
          cref="T:System.Threading.Semaphore" />
 
@@ -143,8 +171,12 @@
 
         
 
+        
+
          objects that represent the same named system semaphore, and you can use the <see
          cref="Overload:System.Threading.Semaphore.OpenExisting" />
+
+        
 
         
 
@@ -160,8 +192,12 @@
 
         
 
+        
+
          object. Each <see
          cref="T:System.Threading.Semaphore" />
+
+        
 
         
 
@@ -207,8 +243,12 @@
 
             
 
+            
+
              is less than <paramref
              name="maximumCount" />
+
+            
 
             
 
@@ -221,8 +261,12 @@
 
             
 
+            
+
              (<paramref
              name="maximumCount" />
+
+            
 
             
 
@@ -235,6 +279,8 @@
 
             
 
+            
+
             ) times. If you do not want to reserve any entries for the thread that creates the semaphore, use the same number for <paramref
              name="maximumCount" />
 
@@ -242,8 +288,12 @@
 
             
 
+            
+
              and <paramref
              name="initialCount" />
+
+            
 
             
 
@@ -262,6 +312,8 @@
 
             
 
+            
+
              class, specifying the maximum number of concurrent entries and optionally reserving some entries.</para
           >
         </summary>
@@ -272,10 +324,14 @@
 
           
 
+          
+
           The initial number of requests for the semaphore that can be granted concurrently.</param
         >
         <param name="maximumCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -316,8 +372,12 @@
 
             
 
+            
+
              object that represents a named system semaphore. You can create multiple <see
              cref="T:System.Threading.Semaphore" />
+
+            
 
             
 
@@ -333,8 +393,12 @@
 
             
 
+            
+
              and <paramref
              name="maximumCount" />
+
+            
 
             
 
@@ -347,6 +411,8 @@
 
             
 
+            
+
              and <paramref
              name="maximumCount" />
 
@@ -354,8 +420,12 @@
 
             
 
+            
+
              are not used, although invalid values still cause exceptions. If you need to determine whether or not a named system semaphore was created, use the <see
              cref="M:System.Threading.Semaphore.#ctor(System.Int32,System.Int32,System.String,System.Boolean@)" />
+
+            
 
             
 
@@ -372,8 +442,12 @@
 
               
 
+              
+
                and <paramref
                name="maximumCount" />
+
+              
 
               
 
@@ -386,8 +460,12 @@
 
               
 
+              
+
                is less than <paramref
                name="maximumCount" />
+
+              
 
               
 
@@ -400,6 +478,8 @@
 
               
 
+              
+
                (<paramref
                name="maximumCount" />
 
@@ -407,8 +487,12 @@
 
               
 
+              
+
                minus <paramref
                name="initialCount" />
+
+              
 
               
 
@@ -425,8 +509,12 @@
 
             
 
+            
+
             , a local semaphore is created, as if you had called the <see
              cref="M:System.Threading.Semaphore.#ctor(System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -443,8 +531,12 @@
 
             
 
+            
+
              method. The <see
              cref="Overload:System.Threading.Semaphore.OpenExisting" />
+
+            
 
             
 
@@ -463,11 +555,15 @@
 
             
 
+            
+
              class, specifying the maximum number of concurrent entries, optionally reserving some entries for the calling thread, and optionally specifying the name of a system semaphore object.</para
           >
         </summary>
         <param name="initialCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -482,10 +578,14 @@
 
           
 
+          
+
           The maximum number of requests for the semaphore that can be granted concurrently.</param
         >
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -595,8 +695,12 @@
 
             
 
+            
+
              method uses the following combination of flags (combined using the bitwise OR operation) to search for permissions: <see
              cref="F:System.Security.AccessControl.AccessControlSections.Access" />
+
+            
 
             
 
@@ -609,8 +713,12 @@
 
             
 
+            
+
             , and <see
              cref="F:System.Security.AccessControl.AccessControlSections.Group" />
+
+            
 
             
 
@@ -626,8 +734,12 @@
 
             
 
+            
+
              rights to call this method, and the semaphore must have been opened with <see
              cref="F:System.Security.AccessControl.SemaphoreRights.ReadPermissions" />
+
+            
 
             
 
@@ -643,8 +755,12 @@
 
             
 
+            
+
              object does not represent a named system semaphore, this method returns a <see
              cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+
+            
 
             
 
@@ -662,6 +778,8 @@
           <para
             >A <see
              cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+
+            
 
             
 
@@ -704,6 +822,8 @@
 
             
 
+            
+
              method tries to open the specified named semaphore. If the system semaphore does not exist, this method throws an exception instead of creating the system semaphore. To create the system semaphore when it does not already exist, use one of the <see
              cref="M:System.Threading.Semaphore.#ctor(System.Int32,System.Int32,System.String)" />
 
@@ -711,8 +831,12 @@
 
             
 
+            
+
              constructors that has a <paramref
              name="name" />
+
+            
 
             
 
@@ -728,8 +852,12 @@
 
             
 
+            
+
              do not necessarily return the same <see
              cref="T:System.Threading.Semaphore" />
+
+            
 
             
 
@@ -745,6 +873,8 @@
 
             
 
+            
+
              method overload and specifying <see
              cref="F:System.Security.AccessControl.SemaphoreRights.Synchronize" />
 
@@ -752,8 +882,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Security.AccessControl.SemaphoreRights.Modify" />
+
+            
 
             
 
@@ -769,6 +903,8 @@
 
             
 
+            
+
              flag allows a thread to enter the semaphore, and specifying the <see
              cref="F:System.Security.AccessControl.SemaphoreRights.Modify" />
 
@@ -776,8 +912,12 @@
 
             
 
+            
+
              flag allows a thread to call the <see
              cref="Overload:System.Threading.Semaphore.Release" />
+
+            
 
             
 
@@ -796,6 +936,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -838,8 +980,12 @@
 
             
 
+            
+
              parameter must include the <see
              cref="F:System.Security.AccessControl.SemaphoreRights.Synchronize" />
+
+            
 
             
 
@@ -852,8 +998,12 @@
 
             
 
+            
+
              flag to allow threads to call the <see
              cref="Overload:System.Threading.Semaphore.Release" />
+
+            
 
             
 
@@ -869,6 +1019,8 @@
 
             
 
+            
+
              method tries to open an existing named semaphore. If the system semaphore does not exist, this method throws an exception instead of creating the system semaphore. To create the system semaphore when it does not already exist, use one of the <see
              cref="M:System.Threading.Semaphore.#ctor(System.Int32,System.Int32,System.String)" />
 
@@ -876,8 +1028,12 @@
 
             
 
+            
+
              constructors that has a <paramref
              name="name" />
+
+            
 
             
 
@@ -893,8 +1049,12 @@
 
             
 
+            
+
              do not necessarily return the same <see
              cref="T:System.Threading.Semaphore" />
+
+            
 
             
 
@@ -918,10 +1078,14 @@
 
           
 
+          
+
           The name of the system semaphore to open. </param
         >
         <param name="rights">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -966,6 +1130,8 @@
 
             
 
+            
+
              method to enter the semaphore, and they typically use this method overload to exit.</para
           >
           <para
@@ -976,8 +1142,12 @@
 
             
 
+            
+
              is thrown by the <see
              cref="Overload:System.Threading.Semaphore.Release" />
+
+            
 
             
 
@@ -993,6 +1163,8 @@
 
             
 
+            
+
              object represents a named system semaphore, the user must have <see
              cref="F:System.Security.AccessControl.SemaphoreRights.Modify" />
 
@@ -1000,8 +1172,12 @@
 
             
 
+            
+
              rights and the semaphore must have been opened with <see
              cref="F:System.Security.AccessControl.SemaphoreRights.Modify" />
+
+            
 
             
 
@@ -1019,6 +1195,8 @@
           <para
             >The count on the semaphore before the <see
              cref="Overload:System.Threading.Semaphore.Release" />
+
+            
 
             
 
@@ -1064,8 +1242,12 @@
 
             
 
+            
+
              is thrown by the <see
              cref="Overload:System.Threading.Semaphore.Release" />
+
+            
 
             
 
@@ -1081,6 +1263,8 @@
 
             
 
+            
+
              object represents a named system semaphore, the user must have <see
              cref="F:System.Security.AccessControl.SemaphoreRights.Modify" />
 
@@ -1088,8 +1272,12 @@
 
             
 
+            
+
              rights and the semaphore must have been opened with <see
              cref="F:System.Security.AccessControl.SemaphoreRights.Modify" />
+
+            
 
             
 
@@ -1112,11 +1300,15 @@
 
             
 
+            
+
              method was called. </para
           >
         </returns>
         <param name="releaseCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1161,6 +1353,8 @@
 
             
 
+            
+
              objects that represent named system semaphores.</para
           >
           <para
@@ -1171,8 +1365,12 @@
 
             
 
+            
+
              rights to call this method, and the semaphore must have been opened with <see
              cref="F:System.Security.AccessControl.SemaphoreRights.ChangePermissions" />
+
+            
 
             
 
@@ -1192,8 +1390,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.AccessControl.SemaphoreSecurity" />
+
+          
 
           
 

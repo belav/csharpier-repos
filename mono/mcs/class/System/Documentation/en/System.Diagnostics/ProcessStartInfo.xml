@@ -33,6 +33,8 @@
 
         
 
+        
+
          is used together with the <see
          cref="T:System.Diagnostics.Process" />
 
@@ -40,8 +42,12 @@
 
         
 
+        
+
          component. When you start a process using the <see
          cref="T:System.Diagnostics.Process" />
+
+        
 
         
 
@@ -57,8 +63,12 @@
 
         
 
+        
+
          class for better control over the process you start. You must at least set the <see
          cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
+
+        
 
         
 
@@ -71,8 +81,12 @@
 
         
 
+        
+
          dialog box, which is available through the operating system. The <ui
         >Advanced</ui>
+
+        
 
         
 
@@ -88,8 +102,12 @@
 
         
 
+        
+
          property for the <see
          cref="P:System.Diagnostics.ProcessStartInfo.Verb" />
+
+        
 
         
 
@@ -102,6 +120,8 @@
 
         
 
+        
+
          property values to be command-line arguments to pass to the file's open procedure. For example, if you specify a text editor application in the <see
          cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
 
@@ -109,8 +129,12 @@
 
         
 
+        
+
          property, you can use the <see
          cref="P:System.Diagnostics.ProcessStartInfo.Arguments" />
+
+        
 
         
 
@@ -126,8 +150,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Diagnostics.ProcessStartInfo.RedirectStandardOutput" />
+
+        
 
         
 
@@ -140,8 +168,12 @@
 
         
 
+        
+
          properties to cause the process to get input from or return output to a file or other device. If you use the <see
          cref="P:System.Diagnostics.Process.StandardInput" />
+
+        
 
         
 
@@ -154,8 +186,12 @@
 
         
 
+        
+
         , or <see
          cref="P:System.Diagnostics.Process.StandardError" />
+
+        
 
         
 
@@ -168,8 +204,12 @@
 
         
 
+        
+
          component, you must first set the corresponding value on the <see
          cref="T:System.Diagnostics.ProcessStartInfo" />
+
+        
 
         
 
@@ -185,11 +225,15 @@
 
         
 
+        
+
          to specify whether to start the process by using the operating system shell.</para
       >
       <para
         >You can change the value of any <see
          cref="T:System.Diagnostics.ProcessStartInfo" />
+
+        
 
         
 
@@ -206,10 +250,14 @@
 
           
 
+          
+
            is thrown when the immediate caller does not have full-trust permission. For details about security demands, see <format
            type="text/html">
             <a href="a33fd5f9-2de9-4653-a4f0-d9df25082c4d">Link Demands</a>
           </format>
+
+          
 
           
 
@@ -250,6 +298,8 @@
 
             
 
+            
+
              property before you start the process. The file name is any application or document. In this case, a document is defined to be any file type that has an open or default action associated with it. You can view registered file types and their associated applications for your computer by using the <ui
             >Folder Options</ui>
 
@@ -257,8 +307,12 @@
 
             
 
+            
+
              dialog box, which is available through the operating system. The <ui
             >Advanced</ui>
+
+            
 
             
 
@@ -274,6 +328,8 @@
 
             
 
+            
+
              property supplies actions to take, such as "print", with the file indicated in the <see
              cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
 
@@ -281,8 +337,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Diagnostics.ProcessStartInfo.Arguments" />
+
+            
 
             
 
@@ -296,6 +356,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Diagnostics.ProcessStartInfo" />
+
+            
 
             
 
@@ -331,6 +393,8 @@
 
           
 
+          
+
            property should be set to.</param
         >
         <remarks>
@@ -343,8 +407,12 @@
 
             
 
+            
+
              dialog box, which is available through the operating system. The <ui
             >Advanced</ui>
+
+            
 
             
 
@@ -360,6 +428,8 @@
 
             
 
+            
+
              property after you call this constructor, up to the time that the process starts. After you start the process, changing these values has no effect.</para
           >
         </remarks>
@@ -368,6 +438,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Diagnostics.ProcessStartInfo" />
+
+            
 
             
 
@@ -410,8 +482,12 @@
 
             
 
+            
+
              dialog box, which is available through the operating system. The <ui
             >Advanced</ui>
+
+            
 
             
 
@@ -427,8 +503,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Diagnostics.ProcessStartInfo.Arguments" />
+
+            
 
             
 
@@ -447,11 +527,15 @@
 
             
 
+            
+
              class, specifies an application file name with which to start the process, and specifies a set of command-line arguments to pass to the application.</para
           >
         </summary>
         <param name="arguments">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -495,6 +579,8 @@
         <value
           >Arguments that should be passed to the program specified in <see
            cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
+
+          
 
           
 
@@ -551,8 +637,12 @@
 
             
 
+            
+
              property is true or the <see
              cref="P:System.Diagnostics.ProcessStartInfo.UserName" />
+
+            
 
             
 
@@ -565,8 +655,12 @@
 
             
 
+            
+
              properties are not null, the <see
              cref="P:System.Diagnostics.ProcessStartInfo.CreateNoWindow" />
+
+            
 
             
 
@@ -653,8 +747,12 @@
 
             
 
+            
+
              property, you can modify the <see
              cref="T:System.Collections.Specialized.StringDictionary" />
+
+            
 
             
 
@@ -667,8 +765,12 @@
 
             
 
+            
+
              property to false to start the process after changing the <see
              cref="P:System.Diagnostics.ProcessStartInfo.EnvironmentVariables" />
+
+            
 
             
 
@@ -681,6 +783,8 @@
 
             
 
+            
+
              is true, an <see
              cref="T:System.InvalidOperationException" />
 
@@ -688,8 +792,12 @@
 
             
 
+            
+
              is thrown when the <see
              cref="M:System.Diagnostics.Process.Start" />
+
+            
 
             
 
@@ -740,8 +848,12 @@
 
               
 
+              
+
                must be true if you want to set <see
                cref="P:System.Diagnostics.ProcessStartInfo.ErrorDialog" />
+
+              
 
               
 
@@ -793,8 +905,12 @@
 
             
 
+            
+
              is true, the <see
              cref="P:System.Diagnostics.ProcessStartInfo.ErrorDialogParentHandle" />
+
+            
 
             
 
@@ -854,6 +970,8 @@
 
             
 
+            
+
              property before you start the process. The file name is any application or document. A document is defined to be any file type that has an open or default action associated with it. You can view registered file types and their associated applications for your computer by using the <ui
             >Folder Options</ui>
 
@@ -861,8 +979,12 @@
 
             
 
+            
+
              dialog box, which is available through the operating system. The <ui
             >Advanced</ui>
+
+            
 
             
 
@@ -878,8 +1000,12 @@
 
             
 
+            
+
              property. If <see
              cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+
+            
 
             
 
@@ -892,8 +1018,12 @@
 
             
 
+            
+
              component. When <see
              cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+
+            
 
             
 
@@ -906,11 +1036,15 @@
 
             
 
+            
+
              component.</para
           >
           <para
             >You can start a ClickOnce application by setting the <see
              cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
+
+            
 
             
 
@@ -986,6 +1120,8 @@
 
               
 
+              
+
                property must be set if <see
                cref="P:System.Diagnostics.ProcessStartInfo.UserName" />
 
@@ -993,8 +1129,12 @@
 
               
 
+              
+
                and <see
                cref="P:System.Diagnostics.ProcessStartInfo.Password" />
+
+              
 
               
 
@@ -1012,8 +1152,12 @@
 
               
 
+              
+
               , <see
                cref="P:System.Diagnostics.ProcessStartInfo.UserName" />
+
+              
 
               
 
@@ -1026,8 +1170,12 @@
 
               
 
+              
+
                properties in a <see
                cref="T:System.Diagnostics.ProcessStartInfo" />
+
+              
 
               
 
@@ -1044,8 +1192,12 @@
 
             
 
+            
+
              object is like a <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -1058,11 +1210,15 @@
 
             
 
+            
+
              object is automatically encrypted, it can be modified until your application marks it as read-only, and it can be deleted from computer memory by either your application or the .NET Framework garbage collector.</para
           >
           <para
             >For more information about secure strings and an example of how to obtain a password to set this property, see the <see
              cref="T:System.Security.SecureString" />
+
+            
 
             
 
@@ -1079,8 +1235,12 @@
 
               
 
+              
+
                property, the <see
                cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+
+              
 
               
 
@@ -1093,8 +1253,12 @@
 
               
 
+              
+
                will be thrown when the <see
                cref="M:System.Diagnostics.Process.Start(System.Diagnostics.ProcessStartInfo)" />
+
+              
 
               
 
@@ -1146,8 +1310,12 @@
 
             
 
+            
+
              writes text to its standard error stream, that text is typically displayed on the console. By redirecting the <see
              cref="P:System.Diagnostics.Process.StandardError" />
+
+            
 
             
 
@@ -1164,6 +1332,8 @@
 
               
 
+              
+
                to false if you want to set <see
                cref="P:System.Diagnostics.ProcessStartInfo.RedirectStandardError" />
 
@@ -1171,8 +1341,12 @@
 
               
 
+              
+
                to true. Otherwise, reading from the <see
                cref="P:System.Diagnostics.Process.StandardError" />
+
+              
 
               
 
@@ -1189,8 +1363,12 @@
 
             
 
+            
+
              stream can be read synchronously or asynchronously. Methods such as <see
              cref="M:System.IO.StreamReader.Read" />
+
+            
 
             
 
@@ -1203,8 +1381,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IO.StreamReader.ReadToEnd" />
+
+            
 
             
 
@@ -1217,8 +1399,12 @@
 
             
 
+            
+
              writes to its <see
              cref="P:System.Diagnostics.Process.StandardError" />
+
+            
 
             
 
@@ -1234,8 +1420,12 @@
 
             
 
+            
+
              starts asynchronous read operations on the <see
              cref="P:System.Diagnostics.Process.StandardError" />
+
+            
 
             
 
@@ -1252,12 +1442,16 @@
 
               
 
+              
+
                method to ensure that the output buffer has been flushed.</para
             >
           </block>
           <para
             >Synchronous read operations introduce a dependency between the caller reading from the <see
              cref="P:System.Diagnostics.Process.StandardError" />
+
+            
 
             
 
@@ -1287,6 +1481,8 @@
 
             
 
+            
+
              stream.</para
           >
           <para>There is a similar issue when you read all text from both the standard output and standard error streams. For example, the following C# code performs a read operation on both streams.</para>
@@ -1307,6 +1503,8 @@
 
             
 
+            
+
              stream. A deadlock condition results if the parent process calls p.StandardOutput.ReadToEnd followed by p.StandardError.ReadToEnd and the child process writes enough text to fill its error stream. The parent process would wait indefinitely for the child process to close its <see
              cref="P:System.Diagnostics.Process.StandardOutput" />
 
@@ -1314,8 +1512,12 @@
 
             
 
+            
+
              stream. The child process would wait indefinitely for the parent to read from the full <see
              cref="P:System.Diagnostics.Process.StandardError" />
+
+            
 
             
 
@@ -1330,6 +1532,8 @@
           <para
             >Gets or sets a value that indicates whether the error output of an application is written to the <see
              cref="P:System.Diagnostics.Process.StandardError" />
+
+            
 
             
 
@@ -1376,8 +1580,12 @@
 
             
 
+            
+
              can read input text from its standard input stream, typically the keyboard. By redirecting the <see
              cref="P:System.Diagnostics.Process.StandardInput" />
+
+            
 
             
 
@@ -1394,6 +1602,8 @@
 
               
 
+              
+
                to false if you want to set <see
                cref="P:System.Diagnostics.ProcessStartInfo.RedirectStandardInput" />
 
@@ -1401,8 +1611,12 @@
 
               
 
+              
+
                to true. Otherwise, writing to the <see
                cref="P:System.Diagnostics.Process.StandardInput" />
+
+              
 
               
 
@@ -1417,6 +1631,8 @@
           <para
             >Gets or sets a value indicating whether the input for an application is read from the <see
              cref="P:System.Diagnostics.Process.StandardInput" />
+
+            
 
             
 
@@ -1463,8 +1679,12 @@
 
             
 
+            
+
              writes text to its standard stream, that text is typically displayed on the console. By redirecting the <see
              cref="P:System.Diagnostics.Process.StandardOutput" />
+
+            
 
             
 
@@ -1481,6 +1701,8 @@
 
               
 
+              
+
                to false if you want to set <see
                cref="P:System.Diagnostics.ProcessStartInfo.RedirectStandardOutput" />
 
@@ -1488,8 +1710,12 @@
 
               
 
+              
+
                to true. Otherwise, reading from the <see
                cref="P:System.Diagnostics.Process.StandardOutput" />
+
+              
 
               
 
@@ -1506,8 +1732,12 @@
 
             
 
+            
+
              stream can be read synchronously or asynchronously. Methods such as <see
              cref="M:System.IO.StreamReader.Read" />
+
+            
 
             
 
@@ -1520,8 +1750,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.IO.StreamReader.ReadToEnd" />
+
+            
 
             
 
@@ -1534,8 +1768,12 @@
 
             
 
+            
+
              writes to its <see
              cref="P:System.Diagnostics.Process.StandardOutput" />
+
+            
 
             
 
@@ -1551,8 +1789,12 @@
 
             
 
+            
+
              starts asynchronous read operations on the <see
              cref="P:System.Diagnostics.Process.StandardOutput" />
+
+            
 
             
 
@@ -1569,12 +1811,16 @@
 
               
 
+              
+
                method to ensure that the output buffer has been flushed.</para
             >
           </block>
           <para
             >Synchronous read operations introduce a dependency between the caller reading from the <see
              cref="P:System.Diagnostics.Process.StandardOutput" />
+
+            
 
             
 
@@ -1604,6 +1850,8 @@
 
             
 
+            
+
              stream.</para
           >
           <para>There is a similar issue when you read all text from both the standard output and standard error streams. For example, the following C# code performs a read operation on both streams.</para>
@@ -1624,6 +1872,8 @@
 
             
 
+            
+
              stream. A deadlock condition results if the parent process calls p.StandardOutput.ReadToEnd followed by p.StandardError.ReadToEnd and the child process writes enough text to fill its error stream. The parent process would wait indefinitely for the child process to close its <see
              cref="P:System.Diagnostics.Process.StandardOutput" />
 
@@ -1631,8 +1881,12 @@
 
             
 
+            
+
              stream. The child process would wait indefinitely for the parent to read from the full <see
              cref="P:System.Diagnostics.Process.StandardError" />
+
+            
 
             
 
@@ -1647,6 +1901,8 @@
           <para
             >Gets or sets a value that indicates whether the output of an application is written to the <see
              cref="P:System.Diagnostics.Process.StandardOutput" />
+
+            
 
             
 
@@ -1686,8 +1942,12 @@
 
             
 
+            
+
              property is null, the process uses the default standard error encoding for error output. The <see
              cref="P:System.Diagnostics.ProcessStartInfo.StandardErrorEncoding" />
+
+            
 
             
 
@@ -1731,8 +1991,12 @@
 
             
 
+            
+
              property is null, the process uses the default standard output encoding for the standard output. The <see
              cref="P:System.Diagnostics.ProcessStartInfo.StandardOutputEncoding" />
+
+            
 
             
 
@@ -1776,6 +2040,8 @@
 
               
 
+              
+
                property must be set if <see
                cref="P:System.Diagnostics.ProcessStartInfo.UserName" />
 
@@ -1783,8 +2049,12 @@
 
               
 
+              
+
                and <see
                cref="P:System.Diagnostics.ProcessStartInfo.Password" />
+
+              
 
               
 
@@ -1801,8 +2071,12 @@
 
             
 
+            
+
              property is not null or an empty string, the <see
              cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+
+            
 
             
 
@@ -1815,8 +2089,12 @@
 
             
 
+            
+
              will be thrown when the <see
              cref="M:System.Diagnostics.Process.Start(System.Diagnostics.ProcessStartInfo)" />
+
+            
 
             
 
@@ -1869,8 +2147,12 @@
 
               
 
+              
+
                must be false if the <see
                cref="P:System.Diagnostics.ProcessStartInfo.UserName" />
+
+              
 
               
 
@@ -1883,8 +2165,12 @@
 
               
 
+              
+
                will be thrown when the <see
                cref="M:System.Diagnostics.Process.Start(System.Diagnostics.ProcessStartInfo)" />
+
+              
 
               
 
@@ -1901,6 +2187,8 @@
 
             
 
+            
+
              object. When <see
              cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
 
@@ -1908,8 +2196,12 @@
 
             
 
+            
+
              is false, you can start only executables by using the <see
              cref="T:System.Diagnostics.Process" />
+
+            
 
             
 
@@ -1925,8 +2217,12 @@
 
               
 
+              
+
                must be true if you set the <see
                cref="P:System.Diagnostics.ProcessStartInfo.ErrorDialog" />
+
+              
 
               
 
@@ -1943,8 +2239,12 @@
 
             
 
+            
+
              property behaves differently depending on the value of the <see
              cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+
+            
 
             
 
@@ -1957,6 +2257,8 @@
 
             
 
+            
+
              is true, the <see
              cref="P:System.Diagnostics.ProcessStartInfo.WorkingDirectory" />
 
@@ -1964,8 +2266,12 @@
 
             
 
+            
+
              property specifies the location of the executable. If <see
              cref="P:System.Diagnostics.ProcessStartInfo.WorkingDirectory" />
+
+            
 
             
 
@@ -1981,8 +2287,12 @@
 
             
 
+            
+
              is false, the <see
              cref="P:System.Diagnostics.ProcessStartInfo.WorkingDirectory" />
+
+            
 
             
 
@@ -1995,8 +2305,12 @@
 
             
 
+            
+
              is false, the <see
              cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
+
+            
 
             
 
@@ -2050,6 +2364,8 @@
 
             
 
+            
+
              property. For example, the "print" verb will print a document specified by using <see
              cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
 
@@ -2057,8 +2373,12 @@
 
             
 
+            
+
             . The default verb can be specified by using an empty string (""). Examples of verbs are "Edit", "Open", "OpenAsReadOnly", "Print", and "Printto". You should use only verbs that appear in the set of verbs returned by the <see
              cref="P:System.Diagnostics.ProcessStartInfo.Verbs" />
+
+            
 
             
 
@@ -2074,6 +2394,8 @@
 
             
 
+            
+
              property, you must include the file name extension when you set the value of the <see
              cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
 
@@ -2081,8 +2403,12 @@
 
             
 
+            
+
              property. The file name does not need to have an extension if you manually enter a value for the <see
              cref="P:System.Diagnostics.ProcessStartInfo.Verb" />
+
+            
 
             
 
@@ -2096,6 +2422,8 @@
           <para
             >Gets or sets the verb to use when opening the application or document specified by the <see
              cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
+
+            
 
             
 
@@ -2138,6 +2466,8 @@
 
             
 
+            
+
              property enables you to determine the verbs that can be used with the file specified by the <see
              cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
 
@@ -2145,8 +2475,12 @@
 
             
 
+            
+
              property. You can set the <see
              cref="P:System.Diagnostics.ProcessStartInfo.Verb" />
+
+            
 
             
 
@@ -2162,8 +2496,12 @@
 
             
 
+            
+
              property, you must include the file name extension when you set the value of the <see
              cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
+
+            
 
             
 
@@ -2177,6 +2515,8 @@
           <para
             >Gets the set of verbs associated with the type of file specified by the <see
              cref="P:System.Diagnostics.ProcessStartInfo.FileName" />
+
+            
 
             
 
@@ -2272,6 +2612,8 @@
 
               
 
+              
+
                property must be set if <see
                cref="P:System.Diagnostics.ProcessStartInfo.UserName" />
 
@@ -2279,8 +2621,12 @@
 
               
 
+              
+
                and <see
                cref="P:System.Diagnostics.ProcessStartInfo.Password" />
+
+              
 
               
 
@@ -2298,8 +2644,12 @@
 
             
 
+            
+
              property behaves differently when <see
              cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+
+            
 
             
 
@@ -2312,8 +2662,12 @@
 
             
 
+            
+
              is false. When <see
              cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+
+            
 
             
 
@@ -2326,8 +2680,12 @@
 
             
 
+            
+
              property specifies the location of the executable. If <see
              cref="P:System.Diagnostics.ProcessStartInfo.WorkingDirectory" />
+
+            
 
             
 
@@ -2344,6 +2702,8 @@
 
               
 
+              
+
                is true, the working directory of the application that starts the executable is also the working directory of the executable.</para
             >
           </block>
@@ -2355,8 +2715,12 @@
 
             
 
+            
+
              is false, the <see
              cref="P:System.Diagnostics.ProcessStartInfo.WorkingDirectory" />
+
+            
 
             
 
@@ -2375,8 +2739,12 @@
 
             
 
+            
+
              property is false, gets or sets the working directory for the process to be started. When <see
              cref="P:System.Diagnostics.ProcessStartInfo.UseShellExecute" />
+
+            
 
             
 

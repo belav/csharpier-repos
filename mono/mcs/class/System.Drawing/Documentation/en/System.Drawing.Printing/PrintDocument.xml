@@ -39,8 +39,12 @@
 
         
 
+        
+
          class, set properties such as the <see
          cref="P:System.Drawing.Printing.PrintDocument.DocumentName" />
+
+        
 
         
 
@@ -53,6 +57,8 @@
 
         
 
+        
+
         , and call the <see
          cref="M:System.Drawing.Printing.PrintDocument.Print" />
 
@@ -60,8 +66,12 @@
 
         
 
+        
+
          method to start the printing process. Handle the <see
          cref="E:System.Drawing.Printing.PrintDocument.PrintPage" />
+
+        
 
         
 
@@ -75,8 +85,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Drawing.Printing.PrintPageEventArgs" />
+
+        
 
         
 
@@ -94,8 +108,12 @@
 
         
 
+        
+
         . If you wish to print from a Windows Presentation Foundation application, see the <see
          cref="N:System.Printing" />
+
+        
 
         
 
@@ -126,6 +144,8 @@
 
             
 
+            
+
             , you set printer and page settings that affect the output through the <see
              cref="P:System.Drawing.Printing.PrintDocument.PrinterSettings" />
 
@@ -133,8 +153,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Drawing.Printing.PrintDocument.DefaultPageSettings" />
+
+            
 
             
 
@@ -148,6 +172,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Drawing.Printing.PrintDocument" />
+
+            
 
             
 
@@ -183,11 +209,15 @@
 
             
 
+            
+
              event to initialize fonts, file streams, and other resources used during the printing process.</para
           >
           <para
             >To associate the event with your event handler, add an instance of the <see
              cref="T:System.Drawing.Printing.PrintEventHandler" />
+
+            
 
             
 
@@ -204,6 +234,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -212,6 +244,8 @@
           <para
             >Occurs when the <see
              cref="M:System.Drawing.Printing.PrintDocument.Print" />
+
+            
 
             
 
@@ -248,8 +282,12 @@
 
             
 
+            
+
              property. For example, the <see
              cref="P:System.Drawing.Printing.PageSettings.Color" />
+
+            
 
             
 
@@ -262,8 +300,12 @@
 
             
 
+            
+
              property specifies landscape or portrait orientation, and the <see
              cref="P:System.Drawing.Printing.PageSettings.Margins" />
+
+            
 
             
 
@@ -279,8 +321,12 @@
 
             
 
+            
+
              or <see
              cref="E:System.Drawing.Printing.PrintDocument.QueryPageSettings" />
+
+            
 
             
 
@@ -293,8 +339,12 @@
 
             
 
+            
+
              argument included in the <see
              cref="T:System.Drawing.Printing.PrintPageEventArgs" />
+
+            
 
             
 
@@ -307,12 +357,16 @@
 
             
 
+            
+
             , respectively.</para
           >
           <block subset="none" type="note">
             <para
               >After printing has started, changes to page settings through the <see
                cref="P:System.Drawing.Printing.PrintDocument.DefaultPageSettings" />
+
+              
 
               
 
@@ -359,6 +413,8 @@
 
             
 
+            
+
              property does not specify the file to print. Rather, you specify the output to print by handling the <see
              cref="E:System.Drawing.Printing.PrintDocument.PrintPage" />
 
@@ -366,8 +422,12 @@
 
             
 
+            
+
              event. For an example, see the <see
              cref="T:System.Drawing.Printing.PrintDocument" />
+
+            
 
             
 
@@ -412,11 +472,15 @@
 
             
 
+            
+
              event to release fonts, file streams, and other resources used during the printing process, like fonts.</para
           >
           <para
             >You indicate that there are no more pages to print by setting the <see
              cref="P:System.Drawing.Printing.PrintPageEventArgs.HasMorePages" />
+
+            
 
             
 
@@ -429,8 +493,12 @@
 
             
 
+            
+
              event. The <see
              cref="E:System.Drawing.Printing.PrintDocument.EndPrint" />
+
+            
 
             
 
@@ -446,12 +514,16 @@
 
             
 
+            
+
              delegate to the event. The event handler is called whenever the event occurs. For more information about handling events with delegates, see <format
              type="text/html">
               <a href="D98FD58B-FA4F-4598-8378-ADDF4355A115"
                 >[&lt;topic://cpconEventsDelegates&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -493,11 +565,15 @@
 
             
 
+            
+
              method allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
           >
           <para
             >When a derived class calls the <see
              cref="M:System.Drawing.Printing.PrintDocument.OnBeginPrint(System.Drawing.Printing.PrintEventArgs)" />
+
+            
 
             
 
@@ -510,12 +586,16 @@
 
             
 
+            
+
              event by invoking the event handler through a delegate. For more information, see <format
              type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2"
                 >[&lt;topic://cpconProvidingEventFunctionality&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -534,8 +614,12 @@
 
             
 
+            
+
              event. It is called after the <see
              cref="M:System.Drawing.Printing.PrintDocument.Print" />
+
+            
 
             
 
@@ -551,8 +635,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Printing.PrintEventArgs" />
+
+          
 
           
 
@@ -589,8 +677,12 @@
 
             
 
+            
+
              method allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class. The <see
              cref="M:System.Drawing.Printing.PrintDocument.OnEndPrint(System.Drawing.Printing.PrintEventArgs)" />
+
+            
 
             
 
@@ -606,8 +698,12 @@
 
             
 
+            
+
              method, it raises the <see
              cref="E:System.Drawing.Printing.PrintDocument.EndPrint" />
+
+            
 
             
 
@@ -619,6 +715,8 @@
                 >[&lt;topic://cpconProvidingEventFunctionality&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -637,6 +735,8 @@
 
             
 
+            
+
              event. It is called when the last page of the document has printed.</para
           >
         </summary>
@@ -647,8 +747,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Printing.PrintEventArgs" />
+
+          
 
           
 
@@ -685,11 +789,15 @@
 
             
 
+            
+
              method allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
           >
           <para
             >When a derived class calls the <see
              cref="M:System.Drawing.Printing.PrintDocument.OnPrintPage(System.Drawing.Printing.PrintPageEventArgs)" />
+
+            
 
             
 
@@ -702,12 +810,16 @@
 
             
 
+            
+
              event by invoking the event handler through a delegate. For more information, see <format
              type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2"
                 >[&lt;topic://cpconProvidingEventFunctionality&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -726,6 +838,8 @@
 
             
 
+            
+
              event. It is called before a page prints.</para
           >
         </summary>
@@ -736,8 +850,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Printing.PrintPageEventArgs" />
+
+          
 
           
 
@@ -774,11 +892,15 @@
 
             
 
+            
+
              method also allows derived classes to handle the event without attaching a delegate. This is the preferred technique for handling the event in a derived class.</para
           >
           <para
             >When a derived class calls the <see
              cref="M:System.Drawing.Printing.PrintDocument.OnQueryPageSettings(System.Drawing.Printing.QueryPageSettingsEventArgs)" />
+
+            
 
             
 
@@ -791,12 +913,16 @@
 
             
 
+            
+
              event by invoking the event handler through a delegate. For more information, see <format
              type="text/html">
               <a href="F2ADAF01-1ED1-42E1-8C31-8D467E7E0EE2"
                 >[&lt;topic://cpconProvidingEventFunctionality&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -815,8 +941,12 @@
 
             
 
+            
+
              event. It is called immediately before each <see
              cref="E:System.Drawing.Printing.PrintDocument.PrintPage" />
+
+            
 
             
 
@@ -832,8 +962,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Printing.QueryPageSettingsEventArgs" />
+
+          
 
           
 
@@ -870,8 +1004,12 @@
 
             
 
+            
+
              object origin. When <see
              cref="P:System.Drawing.Printing.PrintDocument.OriginAtMargins" />
+
+            
 
             
 
@@ -884,8 +1022,12 @@
 
             
 
+            
+
              object location takes into account the <see
              cref="P:System.Drawing.Printing.PageSettings.Margins" />
+
+            
 
             
 
@@ -898,6 +1040,8 @@
 
             
 
+            
+
              is false, only the printable area of the page is used to determine the location of the <see
              cref="T:System.Drawing.Graphics" />
 
@@ -905,8 +1049,12 @@
 
             
 
+            
+
              object origin, the <see
              cref="P:System.Drawing.Printing.PageSettings.Margins" />
+
+            
 
             
 
@@ -922,8 +1070,12 @@
 
             
 
+            
+
              is true, and <see
              cref="P:System.Drawing.Printing.PageSettings.Margins" />
+
+            
 
             
 
@@ -936,8 +1088,12 @@
 
             
 
+            
+
              object included in the <see
              cref="T:System.Drawing.Printing.PrintPageEventArgs" />
+
+            
 
             
 
@@ -950,8 +1106,12 @@
 
             
 
+            
+
              is false, the <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -991,6 +1151,8 @@
 
             
 
+            
+
              event and by using the <see
              cref="T:System.Drawing.Graphics" />
 
@@ -998,8 +1160,12 @@
 
             
 
+            
+
              included in the <see
              cref="T:System.Drawing.Printing.PrintPageEventArgs" />
+
+            
 
             
 
@@ -1015,11 +1181,15 @@
 
             
 
+            
+
              property to specify which printer should print the document.</para
           >
           <para
             >The <see
              cref="M:System.Drawing.Printing.PrintDocument.Print" />
+
+            
 
             
 
@@ -1032,12 +1202,16 @@
 
             
 
+            
+
              when you want to offer the user the ability to choose print settings.</para
           >
           <block subset="none" type="note">
             <para
               >If an exception that is not handled by the <see
                cref="M:System.Drawing.Printing.PrintDocument.Print" />
+
+              
 
               
 
@@ -1079,8 +1253,12 @@
 
             
 
+            
+
              object. A <see
              cref="T:System.Drawing.Printing.PrintController" />
+
+            
 
             
 
@@ -1129,8 +1307,12 @@
 
             
 
+            
+
              property. For example, use the <see
              cref="P:System.Drawing.Printing.PrinterSettings.Copies" />
+
+            
 
             
 
@@ -1143,8 +1325,12 @@
 
             
 
+            
+
              property to specify the printer to use, and the <see
              cref="P:System.Drawing.Printing.PrinterSettings.PrintRange" />
+
+            
 
             
 
@@ -1192,6 +1378,8 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Drawing.Printing.PrintPageEventArgs" />
 
@@ -1199,8 +1387,12 @@
 
             
 
+            
+
             . For example, to specify a line of text that should be printed, draw the text using the <see
              cref="Overload:System.Drawing.Graphics.DrawString" />
+
+            
 
             
 
@@ -1216,8 +1408,12 @@
 
             
 
+            
+
              property to true. The default is false, which indicates that there are no more pages to print. Individual page settings can also be modified through the <see
              cref="T:System.Drawing.Printing.PageSettings" />
+
+            
 
             
 
@@ -1230,8 +1426,12 @@
 
             
 
+            
+
              property to true. To print each page of a document using different page settings, handle the <see
              cref="E:System.Drawing.Printing.PrintDocument.QueryPageSettings" />
+
+            
 
             
 
@@ -1247,12 +1447,16 @@
 
             
 
+            
+
              delegate to the event. The event handler is called whenever the event occurs. For more information about handling events with delegates, see <format
              type="text/html">
               <a href="D98FD58B-FA4F-4598-8378-ADDF4355A115"
                 >[&lt;topic://cpconEventsDelegates&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -1291,8 +1495,12 @@
 
             
 
+            
+
              property or by setting the property to a <see
              cref="T:System.Drawing.Printing.PageSettings" />
+
+            
 
             
 
@@ -1305,8 +1513,12 @@
 
             
 
+            
+
              affect only the current page, not the document's default page settings. The print job can also be canceled by setting the <see
              cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+
+            
 
             
 
@@ -1319,11 +1531,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >To associate the event with your event handler, add an instance of the <see
              cref="T:System.Drawing.Printing.QueryPageSettingsEventHandler" />
+
+            
 
             
 
@@ -1340,6 +1556,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1348,6 +1566,8 @@
           <para
             >Occurs immediately before each <see
              cref="E:System.Drawing.Printing.PrintDocument.PrintPage" />
+
+            
 
             
 

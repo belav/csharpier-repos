@@ -40,8 +40,12 @@
 
         
 
+        
+
          objects to <see
          cref="T:System.Configuration.SettingsPropertyValue" />
+
+        
 
         
 
@@ -72,6 +76,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Configuration.SettingsPropertyValueCollection" />
+
+            
 
             
 
@@ -115,6 +121,8 @@
 
             
 
+            
+
              object to the collection.</para
           >
         </summary>
@@ -125,8 +133,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.SettingsPropertyValue" />
+
+          
 
           
 
@@ -159,6 +171,8 @@
           <para
             >Removes all <see
              cref="T:System.Configuration.SettingsPropertyValue" />
+
+            
 
             
 
@@ -201,6 +215,8 @@
 
             
 
+            
+
              class.</para
           >
         </returns>
@@ -237,6 +253,8 @@
 
             
 
+            
+
              collection to an array.</para
           >
         </summary>
@@ -247,10 +265,14 @@
 
           
 
+          
+
           The array to copy the collection to.</param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -280,6 +302,8 @@
           <para
             >Gets a value that specifies the number of <see
              cref="T:System.Configuration.SettingsPropertyValue" />
+
+            
 
             
 
@@ -321,6 +345,8 @@
 
             
 
+            
+
              object as it applies to the collection.</para
           >
         </summary>
@@ -329,6 +355,8 @@
           <para
             >The <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -418,6 +446,8 @@
 
             
 
+            
+
              object from the collection.</para
           >
         </summary>
@@ -428,8 +458,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Configuration.SettingsPropertyValue" />
+
+          
 
           
 

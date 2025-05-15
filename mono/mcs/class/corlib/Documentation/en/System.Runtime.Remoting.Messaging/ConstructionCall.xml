@@ -44,6 +44,8 @@
 
         
 
+        
+
          class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see
          cref="T:System.Runtime.Remoting.Messaging.ConstructionCall" />
 
@@ -51,8 +53,12 @@
 
         
 
+        
+
          class directly; instead, use the <see
          cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
+
+        
 
         
 
@@ -68,6 +74,8 @@
 
         
 
+        
+
          message to a server when attempting to create an instance of a client-activated remote class.</para
       >
     </remarks>
@@ -76,6 +84,8 @@
       <para
         >Implements the <see
          cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
+
+        
 
         
 
@@ -116,6 +126,8 @@
 
             
 
+            
+
              class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see
              cref="T:System.Runtime.Remoting.Messaging.ConstructionCall" />
 
@@ -123,8 +135,12 @@
 
             
 
+            
+
              class directly; instead, use the <see
              cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
+
+            
 
             
 
@@ -143,6 +159,8 @@
 
             
 
+            
+
              class from an array of remoting headers. </para
           >
         </summary>
@@ -153,8 +171,12 @@
 
           
 
+          
+
           An array of remoting headers that contain key-value pairs. This array is used to initialize <see
            cref="T:System.Runtime.Remoting.Messaging.ConstructionCall" />
+
+          
 
           
 
@@ -194,6 +216,8 @@
 
             
 
+            
+
              class is used by the remoting infrastructure of the .NET Framework. You do not need to create an instance of the <see
              cref="T:System.Runtime.Remoting.Messaging.ConstructionCall" />
 
@@ -201,8 +225,12 @@
 
             
 
+            
+
              class directly; instead, use the <see
              cref="T:System.Runtime.Remoting.Activation.IConstructionCallMessage" />
+
+            
 
             
 
@@ -221,11 +249,15 @@
 
             
 
+            
+
              class by copying an existing message. </para
           >
         </summary>
         <param name="m">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -420,8 +452,12 @@
 
             
 
+            
+
              property returns the value of the inherited <see
              cref="F:System.Runtime.Remoting.Messaging.MethodCall.ExternalProperties" />
+
+            
 
             
 
@@ -435,6 +471,8 @@
           <para
             >Gets an <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 

@@ -20,8 +20,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Web.UI.Page.RegisterRequiresViewStateEncryption" />
+
+        
 
         
 
@@ -37,6 +41,8 @@
 
         
 
+        
+
          enumeration lets you specify the algorithm that ASP.NET uses to create the HMAC. The default value is <see
          cref="F:System.Web.Configuration.MachineKeyValidation.HMACSHA256" />
 
@@ -44,8 +50,12 @@
 
         
 
+        
+
         . ASP.NET uses the value of the <see
          cref="P:System.Web.Configuration.MachineKeySection.ValidationKey" />
+
+        
 
         
 
@@ -78,8 +88,12 @@
 
             
 
+            
+
              property will be used for encryption and decryption, and the HMACSHA1 hash algorithm will be used with the <see
              cref="P:System.Web.Configuration.MachineKeySection.ValidationKey" />
+
+            
 
             
 

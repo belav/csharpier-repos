@@ -27,6 +27,8 @@
 
         
 
+        
+
          event is raised when the value of the <see
          cref="P:System.Windows.Forms.DataGridViewColumn.AutoSizeMode" />
 
@@ -34,8 +36,12 @@
 
         
 
+        
+
          property of a column in a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -53,6 +59,8 @@
 
         
 
+        
+
         . </para
       >
     </remarks>
@@ -61,6 +69,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.DataGridView.AutoSizeColumnModeChanged" />
+
+        
 
         
 
@@ -94,6 +104,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -104,8 +116,12 @@
 
           
 
+          
+
           The column with the <see
            cref="P:System.Windows.Forms.DataGridViewColumn.AutoSizeMode" />
+
+          
 
           
 
@@ -120,6 +136,8 @@
 
           
 
+          
+
           The previous <see
            cref="T:System.Windows.Forms.DataGridViewAutoSizeColumnMode" />
 
@@ -127,8 +145,12 @@
 
           
 
+          
+
            value of the column's <see
            cref="P:System.Windows.Forms.DataGridViewColumn.AutoSizeMode" />
+
+          
 
           
 
@@ -164,6 +186,8 @@
 
             
 
+            
+
              property that changed.</para
           >
         </summary>
@@ -190,6 +214,8 @@
           <para
             >Gets the previous value of the <see
              cref="P:System.Windows.Forms.DataGridViewColumn.AutoSizeMode" />
+
+            
 
             
 

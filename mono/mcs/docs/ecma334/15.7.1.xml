@@ -11,6 +11,8 @@
 
       
 
+      
+
        : <rhs
       >
         <keyword>if</keyword>
@@ -38,6 +40,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="14.14">expression</non_terminal>
@@ -49,7 +53,7 @@
 
       >[Example: Thus, an if statement of the form <code_example
       >
-<![CDATA[
+        <![CDATA[
 if (x) if (y) F(); else G();  
 ]]>
       </code_example>
@@ -58,9 +62,11 @@ if (x) if (y) F(); else G();
 
       
 
+      
+
       is equivalent to <code_example
       >
-<![CDATA[
+        <![CDATA[
 if (x) {  
    if (y) {  
       F();  
@@ -71,6 +77,8 @@ if (x) {
 }  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -90,8 +98,12 @@ if (x) {
 
         
 
+        
+
          (<hyperlink
         >14.16</hyperlink>
+
+        
 
         
 

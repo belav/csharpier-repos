@@ -34,6 +34,8 @@
 
           
 
+          
+
            method does not display the Consent dialog box. The code returns false if you are in the standard user role, even if you are in the Built-in Administrators group. You can elevate your privileges before you execute the code by right-clicking the application icon and indicating that you want to run as an administrator.</para
         >
       </block>
@@ -43,6 +45,8 @@
       <para
         >Specifies common roles to be used with <see
          cref="M:System.Security.Principal.WindowsPrincipal.IsInRole(System.String)" />
+
+        
 
         
 

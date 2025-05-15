@@ -21,8 +21,12 @@
 
         
 
+        
+
          interface inside a duplex session to send outbound messages prior to closing the session. For example, if a client closes a session the service can implement <see
          cref="M:System.ServiceModel.Dispatcher.IInputSessionShutdown.DoneReceiving(System.ServiceModel.IDuplexContextChannel)" />
+
+        
 
         
 
@@ -67,6 +71,8 @@
 
             
 
+            
+
              method to perform some custom behavior when a channel has faulted. Typically, the channel is aborted.</para
           >
         </remarks>
@@ -81,8 +87,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.IDuplexContextChannel" />
+
+          
 
           
 
@@ -124,8 +134,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.IDuplexSessionChannel" />
+
+          
 
           
 

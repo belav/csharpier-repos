@@ -30,8 +30,12 @@
 
         
 
+        
+
          class is both immutable and, when no longer needed, cannot be programmatically scheduled for garbage collection; that is, the instance is read-only after it is created and it is not possible to predict when the instance will be deleted from computer memory. Consequently, if a <see
          cref="T:System.String" />
+
+        
 
         
 
@@ -47,6 +51,8 @@
 
         
 
+        
+
          object is similar to a <see
          cref="T:System.String" />
 
@@ -54,8 +60,12 @@
 
         
 
+        
+
          object in that it has a text value. However, the value of a <see
          cref="T:System.Security.SecureString" />
+
+        
 
         
 
@@ -71,8 +81,12 @@
 
         
 
+        
+
          is automatically encrypted when the instance is initialized or when the value is modified. Your application can render the instance immutable and prevent further modification by invoking the <see
          cref="M:System.Security.SecureString.MakeReadOnly" />
+
+        
 
         
 
@@ -88,8 +102,12 @@
 
         
 
+        
+
          has no members that inspect, compare, or convert the value of a <see
          cref="T:System.Security.SecureString" />
+
+        
 
         
 
@@ -102,6 +120,8 @@
 
         
 
+        
+
          class, such as the <see
          cref="M:System.Runtime.InteropServices.Marshal.SecureStringToBSTR(System.Security.SecureString)" />
 
@@ -109,8 +129,12 @@
 
         
 
+        
+
          method, to manipulate the value of a <see
          cref="T:System.Security.SecureString" />
+
+        
 
         
 
@@ -126,8 +150,12 @@
 
         
 
+        
+
          class and its members are not visible to COM. For more information, see <see
          cref="T:System.Runtime.InteropServices.ComVisibleAttribute" />
+
+        
 
         
 
@@ -162,6 +190,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.SecureString" />
+
+            
 
             
 
@@ -204,6 +234,8 @@
 
             
 
+            
+
              object to the number of characters in <paramref
              name="value" />
 
@@ -211,8 +243,12 @@
 
             
 
+            
+
              specified by <paramref
              name="length" />
+
+            
 
             
 
@@ -232,8 +268,12 @@
 
             
 
+            
+
              class from a subarray of <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -249,8 +289,12 @@
 
           
 
+          
+
           A pointer to an array of <see
            cref="T:System.Char" />
+
+          
 
           
 
@@ -265,8 +309,12 @@
 
           
 
+          
+
           The number of elements of <paramref
            name="value" />
+
+          
 
           
 
@@ -310,6 +358,8 @@
 
             
 
+            
+
              is appended; then the new value of the secure string is encrypted.</para
           >
         </remarks>
@@ -319,6 +369,8 @@
         </summary>
         <param name="c">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -382,6 +434,8 @@
 
             
 
+            
+
              is marked read-only, the copy of that instance will not be read-only.</para
           >
         </remarks>
@@ -422,8 +476,12 @@
 
             
 
+            
+
              method writes binary zeroes to the allocated memory that contains the value of this <see
              cref="T:System.Security.SecureString" />
+
+            
 
             
 
@@ -441,10 +499,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="22b6cb97-0c80-4eeb-a2cf-5ed7655e37f9">Garbage Collection</a>
             </format>
+
+            
 
             
 
@@ -458,6 +520,8 @@
           <para
             >Releases all resources used by the current <see
              cref="T:System.Security.SecureString" />
+
+            
 
             
 
@@ -504,8 +568,12 @@
 
             
 
+            
+
              is inserted at the specified location; then the new value is encrypted. The <see
              cref="M:System.Security.SecureString.InsertAt(System.Int32,System.Char)" />
+
+            
 
             
 
@@ -518,6 +586,8 @@
 
             
 
+            
+
              method, which inserts a character at the end of a secure string, if the <paramref
              name="index" />
 
@@ -525,8 +595,12 @@
 
             
 
+            
+
              parameter of <see
              cref="M:System.Security.SecureString.InsertAt(System.Int32,System.Char)" />
+
+            
 
             
 
@@ -546,8 +620,12 @@
 
           
 
+          
+
           The index position where parameter <paramref
            name="c" />
+
+          
 
           
 
@@ -557,6 +635,8 @@
         >
         <param name="c">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -593,8 +673,12 @@
 
             
 
+            
+
              is marked read-only by the <see
              cref="M:System.Security.SecureString.MakeReadOnly" />
+
+            
 
             
 
@@ -607,6 +691,8 @@
 
             
 
+            
+
             . Use the <see
              cref="M:System.Security.SecureString.IsReadOnly" />
 
@@ -614,8 +700,12 @@
 
             
 
+            
+
              method to test whether a <see
              cref="T:System.Security.SecureString" />
+
+            
 
             
 
@@ -658,6 +748,8 @@
 
             
 
+            
+
              property returns the number of <see
              cref="T:System.Char" />
 
@@ -665,8 +757,12 @@
 
             
 
+            
+
              objects in this instance, not the number of Unicode characters. The reason is that a Unicode character might be represented by more than one <see
              cref="T:System.Char" />
+
+            
 
             
 
@@ -708,8 +804,12 @@
 
             
 
+            
+
              class with the <see
              cref="Overload:System.Security.SecureString.#ctor" />
+
+            
 
             
 
@@ -722,8 +822,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Security.SecureString.RemoveAt(System.Int32)" />
+
+            
 
             
 
@@ -736,6 +840,8 @@
 
             
 
+            
+
             , <see
              cref="M:System.Security.SecureString.InsertAt(System.Int32,System.Char)" />
 
@@ -743,8 +849,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Security.SecureString.AppendChar(System.Char)" />
+
+            
 
             
 
@@ -760,8 +870,12 @@
 
             
 
+            
+
              method to make the value of the instance immutable (read-only). After the value is marked as read-only, any further attempt to modify it throws an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -777,6 +891,8 @@
 
             
 
+            
+
              is permanent because no means is provided to make the secure string modifiable again. Use the <see
              cref="M:System.Security.SecureString.IsReadOnly" />
 
@@ -784,8 +900,12 @@
 
             
 
+            
+
              method to test whether an instance of <see
              cref="T:System.Security.SecureString" />
+
+            
 
             
 
@@ -840,6 +960,8 @@
 
           
 
+          
+
           The index position of a character in this secure string.</param
         >
       </Docs>
@@ -880,6 +1002,8 @@
 
             
 
+            
+
              is assigned to the specified index position; then the new value is encrypted.</para
           >
         </remarks>
@@ -894,10 +1018,14 @@
 
           
 
+          
+
           The index position of an existing character in this secure string</param
         >
         <param name="c">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

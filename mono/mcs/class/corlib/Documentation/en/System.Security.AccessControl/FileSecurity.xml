@@ -29,6 +29,8 @@
 
         
 
+        
+
          class specifies the access rights for a system file and how access attempts are audited.  This class represents access and audit rights as a set of rules. Each access rule is represented by a <see
          cref="T:System.Security.AccessControl.FileSystemAccessRule" />
 
@@ -36,8 +38,12 @@
 
         
 
+        
+
          object, while each audit rule is represented by a <see
          cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+
+        
 
         
 
@@ -53,6 +59,8 @@
 
         
 
+        
+
          class is an abstraction of the underlying Microsoft Windows file security system. In this system, each file has a discretionary access control list (DACL), which controls access to the file, and a system access control list (SACL), which specifies the access control attempts that are audited.  The <see
          cref="T:System.Security.AccessControl.FileSystemAccessRule" />
 
@@ -60,8 +68,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Security.AccessControl.FileSystemAuditRule" />
+
+        
 
         
 
@@ -77,11 +89,15 @@
 
         
 
+        
+
          class hides many of the details of DACLs and SACLs; you do not have to worry about ACE ordering or null DACLS.</para
       >
       <para
         >Use the <see
          cref="T:System.Security.AccessControl.FileSecurity" />
+
+        
 
         
 
@@ -97,8 +113,12 @@
 
         
 
+        
+
          method. To retrieve access or audit rules from an existing file, use the <see
          cref="M:System.IO.FileInfo.GetAccessControl" />
+
+        
 
         
 
@@ -137,11 +157,15 @@
 
             
 
+            
+
              object that is not based on an existing file.  You can then populate the object with access control information and apply it to a file.  </para
           >
           <para
             >You can add access or audit rules to the <see
              cref="T:System.Security.AccessControl.FileSecurity" />
+
+            
 
             
 
@@ -154,8 +178,12 @@
 
             
 
+            
+
              method. You can remove access or audit rules using the <see
              cref="M:System.Security.AccessControl.FileSystemSecurity.RemoveAccessRule(System.Security.AccessControl.FileSystemAccessRule)" />
+
+            
 
             
 
@@ -171,8 +199,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+
+            
 
             
 
@@ -185,8 +217,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.IO.FileInfo.GetAccessControl(System.Security.AccessControl.AccessControlSections)" />
+
+            
 
             
 
@@ -200,6 +236,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.AccessControl.FileSecurity" />
+
+            
 
             
 
@@ -243,11 +281,15 @@
 
             
 
+            
+
              object that encapsulates that information.  You can then inspect, add, or delete the access control information for the specified file.    </para
           >
           <para
             >You can add access or audit rules to the <see
              cref="T:System.Security.AccessControl.FileSecurity" />
+
+            
 
             
 
@@ -260,8 +302,12 @@
 
             
 
+            
+
              method. You can remove access or audit rules using the <see
              cref="M:System.Security.AccessControl.FileSystemSecurity.RemoveAccessRule(System.Security.AccessControl.FileSystemAccessRule)" />
+
+            
 
             
 
@@ -277,8 +323,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.IO.FileInfo.SetAccessControl(System.Security.AccessControl.FileSecurity)" />
+
+            
 
             
 
@@ -291,8 +341,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.IO.FileInfo.GetAccessControl(System.Security.AccessControl.AccessControlSections)" />
+
+            
 
             
 
@@ -311,8 +365,12 @@
 
             
 
+            
+
              class from a specified file using the specified values of the <see
              cref="T:System.Security.AccessControl.AccessControlSections" />
+
+            
 
             
 
@@ -328,8 +386,12 @@
 
           
 
+          
+
           The location of a file to create a <see
            cref="T:System.Security.AccessControl.FileSecurity" />
+
+          
 
           
 
@@ -344,8 +406,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AccessControlSections" />
+
+          
 
           
 

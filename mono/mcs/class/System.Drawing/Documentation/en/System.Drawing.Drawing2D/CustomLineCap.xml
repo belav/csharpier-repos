@@ -35,6 +35,8 @@
 
         
 
+        
+
          objects. GDI+ supports several predefined cap styles, and also allows users to define their own cap styles. This class is used to create custom cap styles.</para
       >
     </remarks>
@@ -65,11 +67,15 @@
 
             
 
+            
+
              uses a fill mode of "winding" regardless of the fill mode specified for the operation.</para
           >
           <para
             >The <paramref
              name="fillPath" />
+
+            
 
             
 
@@ -82,8 +88,12 @@
 
             
 
+            
+
              parameters cannot be used at the same time. One parameter must be passed a null value. If neither parameter is passed a null value, <paramref
              name="fillPath" />
+
+            
 
             
 
@@ -96,8 +106,12 @@
 
             
 
+            
+
              is null, <paramref
              name="fillPath" />
+
+            
 
             
 
@@ -116,6 +130,8 @@
 
             
 
+            
+
              class with the specified outline and fill.</para
           >
         </summary>
@@ -126,8 +142,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+          
 
           
 
@@ -142,8 +162,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+          
 
           
 
@@ -179,11 +203,15 @@
 
             
 
+            
+
              uses a fill mode of "winding" regardless of the fill mode specified for the operation.</para
           >
           <para
             >The <paramref
              name="fillPath" />
+
+            
 
             
 
@@ -196,8 +224,12 @@
 
             
 
+            
+
              parameters cannot be used at the same time. One parameter must be passed a null value. If neither parameter is passed a null value, <paramref
              name="fillPath" />
+
+            
 
             
 
@@ -210,8 +242,12 @@
 
             
 
+            
+
              is null, <paramref
              name="fillPath" />
+
+            
 
             
 
@@ -230,8 +266,12 @@
 
             
 
+            
+
              class from the specified existing <see
              cref="T:System.Drawing.Drawing2D.LineCap" />
+
+            
 
             
 
@@ -247,8 +287,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+          
 
           
 
@@ -263,8 +307,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+          
 
           
 
@@ -274,6 +322,8 @@
         >
         <param name="baseCap">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -310,11 +360,15 @@
 
             
 
+            
+
              uses a fill mode of "winding" regardless of the fill mode specified for the operation.</para
           >
           <para
             >The <paramref
              name="fillPath" />
+
+            
 
             
 
@@ -327,8 +381,12 @@
 
             
 
+            
+
              parameters cannot be used at the same time. One parameter must be passed a null value. If neither parameter is passed a null value, <paramref
              name="fillPath" />
+
+            
 
             
 
@@ -341,8 +399,12 @@
 
             
 
+            
+
              is null, <paramref
              name="fillPath" />
+
+            
 
             
 
@@ -361,8 +423,12 @@
 
             
 
+            
+
              class from the specified existing <see
              cref="T:System.Drawing.Drawing2D.LineCap" />
+
+            
 
             
 
@@ -378,8 +444,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+          
 
           
 
@@ -394,8 +464,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Drawing2D.GraphicsPath" />
+
+          
 
           
 
@@ -410,10 +484,14 @@
 
           
 
+          
+
           The line cap from which to create the custom cap. </param
         >
         <param name="baseInset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -450,8 +528,12 @@
 
             
 
+            
+
              enumeration on which this <see
              cref="T:System.Drawing.Drawing2D.CustomLineCap" />
+
+            
 
             
 
@@ -505,6 +587,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -513,6 +597,8 @@
           <para
             >The <see
              cref="T:System.Drawing.Drawing2D.CustomLineCap" />
+
+            
 
             
 
@@ -545,8 +631,12 @@
 
             
 
+            
+
              allows the resources used by this <see
              cref="T:System.Drawing.Drawing2D.CustomLineCap" />
+
+            
 
             
 
@@ -560,6 +650,8 @@
           <para
             >Releases all resources used by this <see
              cref="T:System.Drawing.Drawing2D.CustomLineCap" />
+
+            
 
             
 
@@ -599,11 +691,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -636,8 +732,12 @@
 
             
 
+            
+
              to attempt to free resources and perform other cleanup operations before the <see
              cref="T:System.Drawing.Drawing2D.CustomLineCap" />
+
+            
 
             
 
@@ -702,8 +802,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Drawing2D.LineCap" />
+
+          
 
           
 
@@ -718,8 +822,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Drawing2D.LineCap" />
+
+          
 
           
 
@@ -755,8 +863,12 @@
 
             
 
+            
+
              enumeration that is used to join lines and curves that make up the stroked path of this <see
              cref="T:System.Drawing.Drawing2D.CustomLineCap" />
+
+            
 
             
 
@@ -775,8 +887,12 @@
 
             
 
+            
+
              enumeration that determines how lines that compose this <see
              cref="T:System.Drawing.Drawing2D.CustomLineCap" />
+
+            
 
             
 
@@ -814,8 +930,12 @@
 
             
 
+            
+
              Class object with respect to the width of the <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 

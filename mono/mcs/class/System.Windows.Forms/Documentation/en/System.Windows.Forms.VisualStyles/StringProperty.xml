@@ -20,8 +20,12 @@
 
         
 
+        
+
          enumeration represents a set of string properties that describe visual style elements. The <see
          cref="T:System.Windows.Forms.VisualStyles.StringProperty" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
          method to specify which property value to retrieve for the element that the <see
          cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" />
+
+        
 
         
 

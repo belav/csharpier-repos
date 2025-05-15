@@ -21,8 +21,12 @@
 
         
 
+        
+
          class identifies a Windows control or user interface (UI) element that is defined by the current visual style of the operating system. A visual style element is defined in terms of <newTerm
         >class</newTerm>
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
         , and <newTerm
         >state</newTerm>
+
+        
 
         
 
@@ -54,8 +62,12 @@
 
             
 
+            
+
              identifies a group of related visual style elements that are typically drawn together. The class is specified by the <see
              cref="P:System.Windows.Forms.VisualStyles.VisualStyleElement.ClassName" />
+
+            
 
             
 
@@ -73,8 +85,12 @@
 
             
 
+            
+
              defines a discrete member of a class. The part is specified by the <see
              cref="P:System.Windows.Forms.VisualStyles.VisualStyleElement.Part" />
+
+            
 
             
 
@@ -92,8 +108,12 @@
 
             
 
+            
+
              describes the current visual state of the element defined by the class and part. The state is specified by the <see
              cref="P:System.Windows.Forms.VisualStyles.VisualStyleElement.State" />
+
+            
 
             
 
@@ -111,8 +131,12 @@
 
         
 
+        
+
          namespace exposes hundreds of <see
          cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+
+        
 
         
 
@@ -125,6 +149,8 @@
 
         
 
+        
+
         . For each property, the qualified name of the owning class represents the class and the part of the drawn element, and the property name represents the state of the element. For example, the <see
          cref="P:System.Windows.Forms.VisualStyles.VisualStyleElement.Button.PushButton.Pressed" />
 
@@ -132,8 +158,12 @@
 
         
 
+        
+
          property returns a <see
          cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+
+        
 
         
 
@@ -149,8 +179,12 @@
 
         
 
+        
+
         , set it to the <see
          cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+
+        
 
         
 
@@ -163,8 +197,12 @@
 
         
 
+        
+
          method. To determine whether the current visual style provides a definition for a particular element, call the <see
          cref="M:System.Windows.Forms.VisualStyles.VisualStyleRenderer.IsElementDefined(System.Windows.Forms.VisualStyles.VisualStyleElement)" />
+
+        
 
         
 
@@ -179,6 +217,8 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.VisualStyles.VisualStyleRenderer" />
 
@@ -186,8 +226,12 @@
 
         
 
+        
+
          wrap the functionality of the visual styles API from the Windows Shell portion of the Windows Platform SDK. For more information on visual styles, see "Using Windows XP Visual Styles" in the Platform SDK portion of the MSDN Library at <see
          cref="http://msdn.microsoft.com/library/">http://msdn.microsoft.com/library</see>
+
+        
 
         
 
@@ -222,6 +266,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -230,6 +276,8 @@
           <para
             >Gets the class name of the visual style element that this <see
              cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+
+            
 
             
 
@@ -274,8 +322,12 @@
 
             
 
+            
+
              with the <see
              cref="P:System.Windows.Forms.VisualStyles.VisualStyleElement.ClassName" />
+
+            
 
             
 
@@ -288,8 +340,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.VisualStyles.VisualStyleElement.State" />
+
+            
 
             
 
@@ -302,6 +358,8 @@
 
             
 
+            
+
             , <paramref
              name="part" />
 
@@ -309,8 +367,12 @@
 
             
 
+            
+
             , and <paramref
              name="state" />
+
+            
 
             
 
@@ -326,6 +388,8 @@
 
           
 
+          
+
           A string that represents the class name of the visual style element to be created.</param
         >
         <param name="part">
@@ -335,10 +399,14 @@
 
           
 
+          
+
           A value that represents the part of the visual style element to be created.</param
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -371,6 +439,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -379,6 +449,8 @@
           <para
             >Gets a value indicating the part of the visual style element that this <see
              cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+
+            
 
             
 
@@ -412,6 +484,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -420,6 +494,8 @@
           <para
             >Gets a value indicating the state of the visual style element that this <see
              cref="T:System.Windows.Forms.VisualStyles.VisualStyleElement" />
+
+            
 
             
 

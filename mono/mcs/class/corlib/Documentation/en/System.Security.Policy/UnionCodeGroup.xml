@@ -37,10 +37,14 @@
 
         
 
+        
+
          is the most common type of code group; the policy statement of all matching child code groups (and by extension their child code groups) are combined with the permission set of the matching parent code group. Thus, if its membership condition matches, this code group forms the union of its policy statement and those of all its child code groups that also match the evidence.</para
       >
       <para>
         <see cref="T:System.Security.Policy.UnionCodeGroup" />
+
+        
 
         
 
@@ -52,6 +56,8 @@
             >[&lt;topic://cpgrfcodeaccesssecuritypolicyutilitycaspolexe&gt;]</a
           >
         </format>
+
+        
 
         
 
@@ -97,6 +103,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -105,6 +113,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Security.Policy.UnionCodeGroup" />
+
+            
 
             
 
@@ -120,10 +130,14 @@
 
           
 
+          
+
           A membership condition that tests evidence to determine whether this code group applies policy. </param
         >
         <param name="policy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -221,11 +235,15 @@
 
             
 
+            
+
              methods work.</para
           >
           <para
             >The .NET Framework security system uses <see
              cref="M:System.Security.Policy.UnionCodeGroup.Resolve(System.Security.Policy.Evidence)" />
+
+            
 
             
 
@@ -245,6 +263,8 @@
         </returns>
         <param name="evidence">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -290,6 +310,8 @@
         </returns>
         <param name="evidence">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -34,8 +34,12 @@
 
         
 
+        
+
          replaces <see
          cref="T:System.Windows.Forms.ContextMenu" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
          with any control, and a right mouse click automatically displays the shortcut menu. You can show a <see
          cref="T:System.Windows.Forms.ContextMenuStrip" />
+
+        
 
         
 
@@ -62,8 +70,12 @@
 
         
 
+        
+
          method. <see
          cref="T:System.Windows.Forms.ContextMenuStrip" />
+
+        
 
         
 
@@ -76,6 +88,8 @@
 
         
 
+        
+
          and <see
          cref="E:System.Windows.Forms.ToolStripDropDown.Closing" />
 
@@ -83,8 +97,12 @@
 
         
 
+        
+
          events to handle dynamic population and multiple-click scenarios. <see
          cref="T:System.Windows.Forms.ContextMenuStrip" />
+
+        
 
         
 
@@ -100,6 +118,8 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" />
 
@@ -107,8 +127,12 @@
 
         
 
+        
+
          in all orientations. They are available by default at design time for the <see
          cref="T:System.Windows.Forms.ContextMenuStrip" />
+
+        
 
         
 
@@ -146,8 +170,12 @@
 
         
 
+        
+
          of a form that are useful for the user given the context of the application. For example, you can use a shortcut menu assigned to a <see
          cref="T:System.Windows.Forms.TextBox" />
+
+        
 
         
 
@@ -160,6 +188,8 @@
 
         
 
+        
+
          objects in a shortcut menu that are not located within a <see
          cref="T:System.Windows.Forms.MenuStrip" />
 
@@ -167,8 +197,12 @@
 
         
 
+        
+
          to provide situation-specific commands that are inappropriate for the <see
          cref="T:System.Windows.Forms.MenuStrip" />
+
+        
 
         
 
@@ -184,8 +218,12 @@
 
         
 
+        
+
          itself, have a <see
          cref="P:System.Windows.Forms.Control.ContextMenuStrip" />
+
+        
 
         
 
@@ -198,8 +236,12 @@
 
         
 
+        
+
          class to the control that displays the shortcut menu. More than one control can use a <see
          cref="T:System.Windows.Forms.ContextMenuStrip" />
+
+        
 
         
 
@@ -215,8 +257,12 @@
 
         
 
+        
+
          property to true to add space to the left of a <see
          cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+        
 
         
 
@@ -229,8 +275,12 @@
 
         
 
+        
+
          property is set to true by default. Use this space to the left of the <see
          cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+        
 
         
 
@@ -246,6 +296,8 @@
 
         
 
+        
+
          replaces and adds functionality to the <see
          cref="T:System.Windows.Forms.ContextMenu" />
 
@@ -253,8 +305,12 @@
 
         
 
+        
+
          control of previous versions, <see
          cref="T:System.Windows.Forms.ContextMenu" />
+
+        
 
         
 
@@ -281,6 +337,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ContextMenuStrip" />
+
+            
 
             
 
@@ -315,6 +373,8 @@
 
             
 
+            
+
              is disposed of properly, since it is not a child of the form.</para
           >
         </remarks>
@@ -323,6 +383,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ContextMenuStrip" />
+
+            
 
             
 
@@ -338,6 +400,8 @@
 
           
 
+          
+
           A component that implements <see
            cref="T:System.ComponentModel.IContainer" />
 
@@ -345,8 +409,12 @@
 
           
 
+          
+
            that is the container of the <see
            cref="T:System.Windows.Forms.ContextMenuStrip" />
+
+          
 
           
 
@@ -380,8 +448,12 @@
 
             
 
+            
+
              method. Dispose invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -394,8 +466,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -411,8 +487,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Windows.Forms.ContextMenuStrip" />
+
+            
 
             
 
@@ -431,11 +511,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -471,6 +555,8 @@
 
           
 
+          
+
           true to make the control visible; otherwise, false.</param
         >
       </Docs>
@@ -500,6 +586,8 @@
 
             
 
+            
+
              property include the following: </para
           >
           <list type="bullet">
@@ -507,6 +595,8 @@
               <para
                 >Adding, removing, enabling, or disabling a menu item during the <see
                  cref="E:System.Windows.Forms.ToolStripDropDown.Opening" />
+
+                
 
                 
 
@@ -524,6 +614,8 @@
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -534,6 +626,8 @@
           <para
             >Gets the last control that caused this <see
              cref="T:System.Windows.Forms.ContextMenuStrip" />
+
+            
 
             
 

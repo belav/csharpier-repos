@@ -30,8 +30,12 @@
 
         
 
+        
+
          is the base class from which the <see
          cref="T:System.Web.HttpBrowserCapabilities" />
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
          offers a large number of read-only properties that provide type-safe access to a browser's capabilities dictionary. You can access the <see
          cref="T:System.Web.HttpBrowserCapabilities" />
+
+        
 
         
 
@@ -58,8 +66,12 @@
 
         
 
+        
+
          property that is exposed by the ASP.NET <see
          cref="P:System.Web.HttpRequest.Browser" />
+
+        
 
         
 
@@ -86,6 +98,8 @@
           <para
             >Creates a new instance of the <see
              cref="T:System.Web.Configuration.HttpCapabilitiesBase" />
+
+            
 
             
 
@@ -159,6 +173,8 @@
         </summary>
         <param name="browserName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -268,8 +284,12 @@
 
             
 
+            
+
              of the browsers in the <see
              cref="P:System.Web.Configuration.HttpCapabilitiesBase.Capabilities" />
+
+            
 
             
 
@@ -296,6 +316,8 @@
           <para
             >The <see
              cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanCombineFormsInDeck" />
+
+            
 
             
 
@@ -331,6 +353,8 @@
 
             
 
+            
+
              property applies only to WML-compatible mobile devices.</para
           >
         </remarks>
@@ -359,6 +383,8 @@
           <para
             >The <see
              cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanRenderAfterInputOrSelectElement" />
+
+            
 
             
 
@@ -415,6 +441,8 @@
 
             
 
+            
+
              property applies only to WML-compatible mobile devices.</para
           >
         </remarks>
@@ -440,6 +468,8 @@
           <para
             >The <see
              cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanRenderMixedSelects" />
+
+            
 
             
 
@@ -479,6 +509,8 @@
 
             
 
+            
+
              property applies only to WML-compatible mobile devices.</para
           >
           <para>If false, WML &lt;onevent&gt; and &lt;prev&gt; elements that coexist within the same WML card will not be properly rendered.</para>
@@ -505,6 +537,8 @@
           <para
             >The <see
              cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanRenderPostBackCards" />
+
+            
 
             
 
@@ -539,6 +573,8 @@
           <para
             >The <see
              cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanRenderSetvarZeroWithMultiSelectionList" />
+
+            
 
             
 
@@ -632,12 +668,16 @@
 
             
 
+            
+
              property is supported only when the browser is Internet Explorer version 5.0 and later.</para
           >
           <para>If the .NET Framework is not installed on the client, the value of the version elements returned is 0, 0,-1,-1.</para>
           <para
             >If more than one version of the .NET Framework is installed on the client, the <see
              cref="P:System.Web.Configuration.HttpCapabilitiesBase.ClrVersion" />
+
+            
 
             
 
@@ -673,8 +713,12 @@
 
             
 
+            
+
              property indicates whether the browser application supports cookies. If the user has disabled cookies in their application, the <see
              cref="P:System.Web.Configuration.HttpCapabilitiesBase.Cookies" />
+
+            
 
             
 
@@ -734,6 +778,8 @@
 
             
 
+            
+
              to be used.</para
           >
         </summary>
@@ -747,12 +793,16 @@
 
             
 
+            
+
              to be used.</para
           >
         </returns>
         <param name="w">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -783,11 +833,15 @@
 
             
 
+            
+
              property primarily represents the number of soft keys that are available on a WML-compatible mobile device. </para
           >
           <para
             >Web Forms pages for mobile devices can contain a <see
              cref="T:System.Web.UI.MobileControls.SelectionList" />
+
+            
 
             
 
@@ -800,6 +854,8 @@
 
             
 
+            
+
              control. The <see
              cref="P:System.Web.Configuration.HttpCapabilitiesBase.DefaultSubmitButtonLimit" />
 
@@ -807,8 +863,12 @@
 
             
 
+            
+
              allows you to choose which of the <see
              cref="T:System.Web.UI.MobileControls.Command" />
+
+            
 
             
 
@@ -952,8 +1012,12 @@
 
             
 
+            
+
               method is supported only when the browser is Internet Explorer version 5.0 or later. If the common language runtime is not installed on the client, the property returns an array containing a single <see
              cref="T:System.Version" />
+
+            
 
             
 
@@ -971,6 +1035,8 @@
           <para
             >An array of <see
              cref="T:System.Version" />
+
+            
 
             
 
@@ -1006,8 +1072,12 @@
 
             
 
+            
+
              representing the browser that generated the specified <see
              cref="T:System.Web.HttpRequest" />
+
+            
 
             
 
@@ -1026,8 +1096,12 @@
 
             
 
+            
+
              representing the browser that generated the specified <see
              cref="T:System.Web.HttpRequest" />
+
+            
 
             
 
@@ -1043,10 +1117,14 @@
 
           
 
+          
+
           The name of the configuration section that configures browser capabilities.</param
         >
         <param name="request">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1059,8 +1137,12 @@
 
           
 
+          
+
            generated by the browser for which to return capabilities and which is usually the current <see
            cref="T:System.Web.HttpRequest" />
+
+          
 
           
 
@@ -1095,6 +1177,8 @@
 
             
 
+            
+
              button is not available.</para
           >
         </remarks>
@@ -1103,6 +1187,8 @@
           <para
             >Gets a value indicating whether the browser has a dedicated <ui
             >Back</ui>
+
+            
 
             
 
@@ -1151,6 +1237,8 @@
           <para
             >Gets or sets the fully qualified class name of the <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -1253,6 +1341,8 @@
 
             
 
+            
+
              method also returns true if the client browser definition inherits from the specified browser.</para
           >
         </remarks>
@@ -1266,6 +1356,8 @@
         </returns>
         <param name="browserName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1375,6 +1467,8 @@
 
             
 
+            
+
              property will return true but script will not execute on the browser.</para
           >
         </remarks>
@@ -1459,6 +1553,8 @@
 
             
 
+            
+
              is primarily useful when working with mobile-client browsers.</para
           >
         </remarks>
@@ -1487,6 +1583,8 @@
           <para
             >The <see
              cref="P:System.Web.Configuration.HttpCapabilitiesBase.MaximumSoftkeyLabelLength" />
+
+            
 
             
 
@@ -1615,6 +1713,8 @@
 
             
 
+            
+
              property applies only to WML-compatible mobile devices.</para
           >
           <para>Soft keys are special keys that the application can usually map to custom tasks. Soft-key text is displayed on the screen in the lower-left and lower-right corners.</para>
@@ -1641,6 +1741,8 @@
           <para
             >Some of the possible values for the <see
              cref="P:System.Web.Configuration.HttpCapabilitiesBase.Platform" />
+
+            
 
             
 
@@ -1819,6 +1921,8 @@
 
             
 
+            
+
              property applies only to WML-compatible mobile devices.</para
           >
           <para>If true, content following &lt;select&gt; or &lt;input&gt; elements will automatically be placed on a new line.</para>
@@ -1877,6 +1981,8 @@
 
             
 
+            
+
              property applies only to WML-compatible mobile devices.</para
           >
           <para>If true, content following a stand-alone HTML &lt;a&gt; (anchor) element will automatically be placed on a new line.</para>
@@ -1906,6 +2012,8 @@
           <para
             >The <see
              cref="P:System.Web.Configuration.HttpCapabilitiesBase.RendersBreaksAfterWmlInput" />
+
+            
 
             
 
@@ -1945,6 +2053,8 @@
 
             
 
+            
+
              property applies only to WML-compatible mobile devices.</para
           >
         </remarks>
@@ -1973,6 +2083,8 @@
           <para
             >The <see
              cref="P:System.Web.Configuration.HttpCapabilitiesBase.RendersWmlSelectsAsMenuCards" />
+
+            
 
             
 
@@ -2062,8 +2174,12 @@
 
             
 
+            
+
              is the value returned by the <see
              cref="P:System.Web.Configuration.HttpCapabilitiesBase.PreferredRenderingMime" />
+
+            
 
             
 
@@ -2212,6 +2328,8 @@
 
               
 
+              
+
                property returns true for i-mode–compatible browsers.</para
             >
           </block>
@@ -2246,8 +2364,12 @@
 
             
 
+            
+
               property applies only to browsers for which the <see
              cref="P:System.Web.Configuration.HttpCapabilitiesBase.CanInitiateVoiceCall" />
+
+            
 
             
 
@@ -2286,6 +2408,8 @@
 
             
 
+            
+
              property, which represents the accumulation of any changes made by the client. In a Web Forms page, these changes are encoded in postback data as the value of an HTML &lt;input&gt; element with a type attribute of hidden. For example:</para
           >
           <code>&lt;input type="hidden" name="__VIEWSTATE" value="t0PH_u56?cDxleHQ7P=" /&gt;</code>
@@ -2316,6 +2440,8 @@
           <para
             >A self-referring HTML &lt;form&gt; element is one for which the action attribute specifies its own URL. If true, self-referring forms do not return the correct results. This is due to caching by either the browser or an intermediate gateway. To correct this, server control adapters append a default query string (__ufps=<paramref
              name="uniquefilepathsuffix" />
+
+            
 
             
 
@@ -2582,11 +2708,15 @@
 
             
 
+            
+
             ) onto link URL values that do not already have one. This forces the browser to reload content from the server.</para
           >
           <para
             >The <see
              cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsCacheControlMetaTag" />
+
+            
 
             
 
@@ -2794,11 +2924,15 @@
 
             
 
+            
+
              property applies only to i-mode–compatible devices.</para
           >
           <para
             >Set i-Phone–specific picture symbols for i-mode–compatible browsers by using the <see
              cref="P:System.Web.UI.WebControls.Image.ImageUrl" />
+
+            
 
             
 
@@ -2834,6 +2968,8 @@
 
             
 
+            
+
              property applies only to i-mode–compatible devices.</para
           >
           <para>The istyle attribute is used for setting the input style of a text-input field on i-mode–compatible browsers. </para>
@@ -2860,6 +2996,8 @@
           <para
             >The <see
              cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsInputMode" />
+
+            
 
             
 
@@ -2917,6 +3055,8 @@
 
             
 
+            
+
              property applies only to J-Phone–compatible mobile devices.</para
           >
           <para>J-Phone is a markup language specification, based on HTML, for J-Phone–compatible browsers. If true, the browser supports additional attributes for HTML &lt;a&gt; (anchor) and &lt;select&gt; elements. The additional attributes supported are as follows:</para>
@@ -2968,11 +3108,15 @@
 
             
 
+            
+
              property applies only to J-Phone–compatible mobile devices.</para
           >
           <para
             >Set J-Phone–specific picture symbols for J-Phone–compatible browsers by using the <see
              cref="P:System.Web.UI.WebControls.Image.ImageUrl" />
+
+            
 
             
 
@@ -3035,8 +3179,12 @@
 
             
 
+            
+
              method behaves as if the value of the <see
              cref="P:System.Web.Configuration.HttpCapabilitiesBase.SupportsRedirectWithCookie" />
+
+            
 
             
 
@@ -3049,6 +3197,8 @@
 
             
 
+            
+
              object is false, unless the <see
              cref="P:System.Web.Configuration.SessionStateSection.Cookieless" />
 
@@ -3056,8 +3206,12 @@
 
             
 
+            
+
              property in the <see
              cref="P:System.Web.Configuration.SystemWebSectionGroup.SessionState" />
+
+            
 
             
 
@@ -3073,8 +3227,12 @@
 
             
 
+            
+
              is now the default setting. If your Web application has the cookieless attribute of the &lt;sessionState&gt; section in the Web.config file set to a Boolean value, <see
              cref="M:System.Web.HttpResponse.Redirect(System.String)" />
+
+            
 
             
 
@@ -3178,8 +3336,12 @@
 
             
 
+            
+
              is a parent of <paramref
              name="filter2" />
+
+            
 
             
 
@@ -3192,8 +3354,12 @@
 
             
 
+            
+
              is a parent of <paramref
              name="filter1" />
+
+            
 
             
 
@@ -3206,8 +3372,12 @@
 
             
 
+            
+
              and <paramref
              name="filter2" />
+
+            
 
             
 
@@ -3223,10 +3393,14 @@
 
           
 
+          
+
           The first filter to compare.</param
         >
         <param name="filter2">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3263,6 +3437,8 @@
         </returns>
         <param name="filterName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3383,8 +3559,12 @@
 
             
 
+            
+
              property returns a string. In some scenarios, the <see
              cref="P:System.Web.Configuration.HttpCapabilitiesBase.Version" />
+
+            
 
             
 
@@ -3397,8 +3577,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.Configuration.HttpCapabilitiesBase.MinorVersion" />
+
+            
 
             
 

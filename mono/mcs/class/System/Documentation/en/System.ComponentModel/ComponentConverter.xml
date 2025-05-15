@@ -33,8 +33,12 @@
 
         
 
+        
+
          and <see
          cref="Overload:System.ComponentModel.ComponentConverter.GetProperties" />
+
+        
 
         
 
@@ -47,8 +51,12 @@
 
         
 
+        
+
          method of <see
          cref="T:System.ComponentModel.TypeDescriptor" />
+
+        
 
         
 
@@ -64,10 +72,14 @@
 
         
 
+        
+
          base class and <format
          type="text/html">
           <a href="90373a3f-d8c8-492d-841c-945d62393c56">How to: Implement a Type Converter</a>
         </format>
+
+        
 
         
 
@@ -84,8 +96,12 @@
 
           
 
+          
+
           . Instead, call the <see
            cref="M:System.ComponentModel.TypeDescriptor.GetConverter(System.Object)" />
+
+          
 
           
 
@@ -98,8 +114,12 @@
 
           
 
+          
+
           . For more information, see the examples in the <see
            cref="T:System.ComponentModel.TypeConverter" />
+
+          
 
           
 
@@ -111,6 +131,8 @@
       <para
         >This converter converts an object that implements <see
          cref="T:System.ComponentModel.IComponent" />
+
+        
 
         
 
@@ -153,6 +175,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -163,8 +187,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -208,11 +236,15 @@
 
             
 
+            
+
              parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
           >
           <para
             >The <paramref
              name="attributes" />
+
+            
 
             
 
@@ -225,6 +257,8 @@
 
             
 
+            
+
              can have a mix of <see
              cref="T:System.Type" />
 
@@ -232,8 +266,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Attribute" />
+
+            
 
             
 
@@ -251,8 +289,12 @@
 
                 
 
+                
+
                  object will be treated as a wildcard; it will match any property that has the <see
                  cref="T:System.Type" />
+
+                
 
                 
 
@@ -270,6 +312,8 @@
 
                 
 
+                
+
                  of the same class, the property will not be included in the returned array.</para
               >
             </item>
@@ -277,6 +321,8 @@
               <para
                 >If the attribute is an instance of <see
                  cref="T:System.Attribute" />
+
+                
 
                 
 
@@ -294,8 +340,12 @@
 
                 
 
+                
+
                  instance is specified and it is the default property, it will be included in the returned array even if there is no instance of the <see
                  cref="T:System.Attribute" />
+
+                
 
                 
 
@@ -320,6 +370,8 @@
 
             
 
+            
+
              with the properties that are exposed for the component, or null if there are no properties.</para
           >
         </returns>
@@ -330,8 +382,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -346,8 +402,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -362,8 +422,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -405,6 +469,8 @@
 
             
 
+            
+
              parameter can be used to extract additional information about the environment this converter is being invoked from. This can be null, so always check. Also, properties on the context object can return null.</para
           >
         </remarks>
@@ -422,6 +488,8 @@
 
             
 
+            
+
              should be called to find the properties of this object. This method never returns false.</para
           >
         </returns>
@@ -432,8 +500,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 

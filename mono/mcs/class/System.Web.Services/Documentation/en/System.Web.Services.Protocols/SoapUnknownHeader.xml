@@ -27,8 +27,12 @@
 
         
 
+        
+
          with a <see
          cref="P:System.Web.Services.Protocols.SoapHeaderAttribute.MemberName" />
+
+        
 
         
 
@@ -41,6 +45,8 @@
 
         
 
+        
+
         , <see
          cref="T:System.Web.Services.Protocols.SoapHeader" />
 
@@ -48,8 +54,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Web.Services.Protocols.SoapUnknownHeader" />
+
+        
 
         
 
@@ -62,8 +72,12 @@
 
         
 
+        
+
          to the XML Web service method. Specifying a <see
          cref="T:System.Type" />
+
+        
 
         
 
@@ -76,8 +90,12 @@
 
         
 
+        
+
         , allows the XML Web service to view the contents of the SOAP header in the form of an <see
          cref="T:System.Xml.XmlElement" />
+
+        
 
         
 
@@ -109,6 +127,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -135,6 +155,8 @@
           <para
             >If an XML Web service method wants to process SOAP headers it does not know about at the time the XML Web service is written, it can process an <see
              cref="T:System.Xml.XmlElement" />
+
+            
 
             
 

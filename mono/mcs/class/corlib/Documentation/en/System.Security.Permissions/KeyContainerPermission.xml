@@ -71,6 +71,8 @@
 
             
 
+            
+
              class with the specified access.</para
           >
         </summary>
@@ -81,8 +83,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Security.Permissions.KeyContainerPermissionFlags" />
+
+          
 
           
 
@@ -125,6 +131,8 @@
 
             
 
+            
+
              class with either restricted or unrestricted permission.</para
           >
         </summary>
@@ -135,8 +143,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -180,6 +192,8 @@
 
             
 
+            
+
              class with the specified global access and specific key container access rights.</para
           >
         </summary>
@@ -190,8 +204,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Security.Permissions.KeyContainerPermissionFlags" />
+
+          
 
           
 
@@ -206,8 +224,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+
+          
 
           
 
@@ -247,6 +269,8 @@
 
             
 
+            
+
              object in the collection specifies the access rights for a specific key container.</para
           >
         </remarks>
@@ -255,6 +279,8 @@
           <para
             >Gets the collection of <see
              cref="T:System.Security.Permissions.KeyContainerPermissionAccessEntry" />
+
+            
 
             
 
@@ -326,6 +352,8 @@
 
             
 
+            
+
              property is set by the constructor.</para
           >
         </remarks>
@@ -367,8 +395,12 @@
 
             
 
+            
+
              method reconstructs a <see
              cref="T:System.Security.Permissions.KeyContainerPermission" />
+
+            
 
             
 
@@ -381,6 +413,8 @@
 
             
 
+            
+
              class. Use the <see
              cref="M:System.Security.Permissions.KeyContainerPermission.ToXml" />
 
@@ -388,8 +422,12 @@
 
             
 
+            
+
              method to XML-encode the <see
              cref="T:System.Security.Permissions.KeyContainerPermission" />
+
+            
 
             
 
@@ -409,8 +447,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Security.SecurityElement" />
+
+          
 
           
 
@@ -461,6 +503,8 @@
 
           
 
+          
+
           A permission to intersect with the current permission. It must be the same type as the current permission. </param
         >
       </Docs>
@@ -497,8 +541,12 @@
 
             
 
+            
+
              access is a subset of a permission for <see
              cref="F:System.Security.Permissions.KeyContainerPermissionFlags.AllFlags" />
+
+            
 
             
 
@@ -517,6 +565,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -609,8 +659,12 @@
 
             
 
+            
+
              method to restore the state information from a <see
              cref="T:System.Security.SecurityElement" />
+
+            
 
             
 
@@ -628,6 +682,8 @@
           <para
             >A <see
              cref="T:System.Security.SecurityElement" />
+
+            
 
             
 
@@ -670,6 +726,8 @@
 
             
 
+            
+
              is a permission that represents all operations represented by both the current permission and the specified permission. Any demand that passes either permission passes their union.</para
           >
         </remarks>
@@ -683,6 +741,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

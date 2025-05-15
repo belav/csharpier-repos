@@ -29,11 +29,15 @@
 
         
 
+        
+
          control provides programmatic access to the HTML &lt;meta&gt; element on the server. The HTML &lt;meta&gt; element is a container for data about the rendered page, but not page content itself. The &lt;meta&gt; tag is placed between the opening and closing HTML &lt;head&gt; elements. Each &lt;meta&gt; element describes a metadata property name and its associated value. </para
       >
       <para
         >Use the <see
          cref="T:System.Web.UI.HtmlControls.HtmlMeta" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
          property to specify the metadata property name, and the <see
          cref="P:System.Web.UI.HtmlControls.HtmlMeta.Content" />
+
+        
 
         
 
@@ -60,6 +68,8 @@
 
         
 
+        
+
          property to specify additional information to user agents on how to interpret the metadata property. Use the <see
          cref="P:System.Web.UI.HtmlControls.HtmlMeta.HttpEquiv" />
 
@@ -67,8 +77,12 @@
 
         
 
+        
+
          property in place of the <see
          cref="P:System.Web.UI.HtmlControls.HtmlMeta.Name" />
+
+        
 
         
 
@@ -84,8 +98,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.UI.Page" />
+
+        
 
         
 
@@ -116,11 +134,15 @@
 
             
 
+            
+
              control. </para
           >
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.Web.UI.HtmlControls.HtmlMeta" />
+
+            
 
             
 
@@ -161,6 +183,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -196,8 +220,12 @@
 
             
 
+            
+
              property, together with the <see
              cref="P:System.Web.UI.HtmlControls.HtmlMeta.Name" />
+
+            
 
             
 
@@ -213,6 +241,8 @@
 
             
 
+            
+
              property is rendered to the content attribute of the resulting HTML &lt;meta&gt; element.</para
           >
         </remarks>
@@ -221,6 +251,8 @@
           <para
             >Gets or sets the metadata property value defined by the <see
              cref="T:System.Web.UI.HtmlControls.HtmlMeta" />
+
+            
 
             
 
@@ -261,8 +293,12 @@
 
             
 
+            
+
              property in place of the <see
              cref="P:System.Web.UI.HtmlControls.HtmlMeta.Name" />
+
+            
 
             
 
@@ -278,6 +314,8 @@
 
             
 
+            
+
              property is rendered to the http-equiv attribute of the resulting HTML &lt;meta&gt; element.</para
           >
         </remarks>
@@ -286,6 +324,8 @@
           <para
             >Gets or sets an <see
              cref="T:System.Web.UI.HtmlControls.HtmlMeta" />
+
+            
 
             
 
@@ -326,8 +366,12 @@
 
             
 
+            
+
              property, together with the <see
              cref="P:System.Web.UI.HtmlControls.HtmlMeta.Content" />
+
+            
 
             
 
@@ -343,6 +387,8 @@
 
             
 
+            
+
              property is rendered to the name attribute of the resulting HTML &lt;meta&gt; element.</para
           >
         </remarks>
@@ -351,6 +397,8 @@
           <para
             >Gets or sets the metadata property name defined by the <see
              cref="T:System.Web.UI.HtmlControls.HtmlMeta" />
+
+            
 
             
 
@@ -390,8 +438,12 @@
 
             
 
+            
+
              control renders a <see
              cref="F:System.Web.UI.HtmlTextWriter.SelfClosingTagEnd" />
+
+            
 
             
 
@@ -403,6 +455,8 @@
                 >How to: Configure ASP.NET Web Sites for Non-XHTML Rendering</a
               >
             </format>
+
+            
 
             
 
@@ -421,8 +475,12 @@
 
             
 
+            
+
              control to the client's browser using the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -438,6 +496,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
 
@@ -445,8 +505,12 @@
 
           
 
+          
+
            used to render the <see
            cref="T:System.Web.UI.HtmlControls.HtmlMeta" />
+
+          
 
           
 
@@ -483,11 +547,15 @@
 
             
 
+            
+
              property allows you to specify a scheme attribute of the rendered HTML &lt;meta&gt; element. The scheme attribute can be used to provide user agents, such as client browsers or search engines, additional context for interpreting the metadata property. </para
           >
           <para
             >The <see
              cref="P:System.Web.UI.HtmlControls.HtmlMeta.Scheme" />
+
+            
 
             
 
@@ -501,6 +569,8 @@
           <para
             >Gets or sets a scheme attribute used to interpret the metadata property value defined by the <see
              cref="T:System.Web.UI.HtmlControls.HtmlMeta" />
+
+            
 
             
 

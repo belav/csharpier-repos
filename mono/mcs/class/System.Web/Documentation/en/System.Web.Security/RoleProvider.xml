@@ -25,6 +25,8 @@
 
         
 
+        
+
          abstract class.</para
       >
       <para>There are two primary reasons for creating a custom role provider.</para>
@@ -59,6 +61,8 @@
 
             
 
+            
+
              abstract class. Initialization values for a <see
              cref="T:System.Web.Security.RoleProvider" />
 
@@ -66,8 +70,12 @@
 
             
 
+            
+
              implementation are passed to the <see
              cref="M:System.Configuration.Provider.ProviderBase.Initialize(System.String,System.Collections.Specialized.NameValueCollection)" />
+
+            
 
             
 
@@ -81,6 +89,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Security.RoleProvider" />
+
+            
 
             
 
@@ -119,6 +129,8 @@
 
             
 
+            
+
              is called by the <see
              cref="T:System.Web.Security.Roles" />
 
@@ -126,8 +138,12 @@
 
             
 
+            
+
              class to associate the specified users with the specified roles at the data source. Roles are added to the configured <see
              cref="P:System.Web.Security.RoleProvider.ApplicationName" />
+
+            
 
             
 
@@ -143,11 +159,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >If any of the specified user names are not associated with any of the specified role names for the configured applicationName, we recommend that your provider throw a <see
              cref="T:System.Configuration.Provider.ProviderException" />
+
+            
 
             
 
@@ -165,6 +185,8 @@
         </summary>
         <param name="usernames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -196,8 +218,12 @@
 
             
 
+            
+
              is used by the <see
              cref="T:System.Web.Security.Roles" />
+
+            
 
             
 
@@ -210,8 +236,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Web.Security.Roles.ApplicationName" />
+
+            
 
             
 
@@ -227,8 +257,12 @@
 
             
 
+            
+
              property is specified, we recommend that the <see
              cref="P:System.Web.Hosting.HostingEnvironment.ApplicationVirtualPath" />
+
+            
 
             
 
@@ -267,8 +301,12 @@
 
             
 
+            
+
              is called by the <see
              cref="M:System.Web.Security.Roles.CreateRole(System.String)" />
+
+            
 
             
 
@@ -281,8 +319,12 @@
 
             
 
+            
+
              class to add the specified role to the data source for the configured <see
              cref="P:System.Web.Security.RoleProvider.ApplicationName" />
+
+            
 
             
 
@@ -328,8 +370,12 @@
 
             
 
+            
+
              is called by the <see
              cref="M:System.Web.Security.Roles.DeleteRole(System.String)" />
+
+            
 
             
 
@@ -342,6 +388,8 @@
 
             
 
+            
+
              methods of the <see
              cref="T:System.Web.Security.Roles" />
 
@@ -349,8 +397,12 @@
 
             
 
+            
+
              class to delete the specified role from the data source for the configured <see
              cref="P:System.Web.Security.RoleProvider.ApplicationName" />
+
+            
 
             
 
@@ -367,8 +419,12 @@
 
             
 
+            
+
              is true, and the role identified by the <paramref
              name="roleName" />
+
+            
 
             
 
@@ -381,8 +437,12 @@
 
             
 
+            
+
              and do not delete the role. If <paramref
              name="throwOnPopulatedRole" />
+
+            
 
             
 
@@ -407,6 +467,8 @@
 
           
 
+          
+
           If true, throw an exception if <paramref
            name="roleName" />
 
@@ -414,8 +476,12 @@
 
           
 
+          
+
            has one or more members and do not delete <paramref
            name="roleName" />
+
+          
 
           
 
@@ -453,6 +519,8 @@
 
             
 
+            
+
              method is called by the <see
              cref="T:System.Web.Security.Roles" />
 
@@ -460,8 +528,12 @@
 
             
 
+            
+
              class and returns a list of users in a role where the user name contains a match of the supplied <paramref
              name="usernameToMatch" />
+
+            
 
             
 
@@ -477,8 +549,12 @@
 
             
 
+            
+
              if <paramref
              name="roleName" />
+
+            
 
             
 
@@ -501,6 +577,8 @@
 
             
 
+            
+
              and the user is a member of the specified role.</para
           >
         </returns>
@@ -511,10 +589,14 @@
 
           
 
+          
+
           The role to search in.</param
         >
         <param name="usernameToMatch">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -545,8 +627,12 @@
 
             
 
+            
+
              is called by the <see
              cref="M:System.Web.Security.Roles.GetAllRoles" />
+
+            
 
             
 
@@ -559,8 +645,12 @@
 
             
 
+            
+
              class to retrieve a list of role names from the data source. Only the roles for the specified <see
              cref="P:System.Web.Security.RoleProvider.ApplicationName" />
+
+            
 
             
 
@@ -606,8 +696,12 @@
 
             
 
+            
+
              is called by the <see
              cref="M:System.Web.Security.Roles.GetRolesForUser" />
+
+            
 
             
 
@@ -620,8 +714,12 @@
 
             
 
+            
+
              class to retrieve the role names that the specified user is associated with from the data source. Only the roles for the configured <see
              cref="P:System.Web.Security.RoleProvider.ApplicationName" />
+
+            
 
             
 
@@ -642,6 +740,8 @@
         </returns>
         <param name="username">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -678,8 +778,12 @@
 
             
 
+            
+
              is called by the <see
              cref="M:System.Web.Security.Roles.GetUsersInRole(System.String)" />
+
+            
 
             
 
@@ -692,8 +796,12 @@
 
             
 
+            
+
              class to retrieve the user names associated with a role from the data source. Only the roles for the configured <see
              cref="P:System.Web.Security.RoleProvider.ApplicationName" />
+
+            
 
             
 
@@ -743,8 +851,12 @@
 
             
 
+            
+
              method is called by the <see
              cref="Overload:System.Web.Security.Roles.IsUserInRole" />
+
+            
 
             
 
@@ -757,8 +869,12 @@
 
             
 
+            
+
              class to determine whether the current logged-on user is associated with a role from the data source for the configured <see
              cref="P:System.Web.Security.Roles.ApplicationName" />
+
+            
 
             
 
@@ -779,6 +895,8 @@
         </returns>
         <param name="username">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -816,8 +934,12 @@
 
             
 
+            
+
              is called by <see
              cref="M:System.Web.Security.Roles.RemoveUserFromRole(System.String,System.String)" />
+
+            
 
             
 
@@ -830,8 +952,12 @@
 
             
 
+            
+
              , <see
              cref="M:System.Web.Security.Roles.RemoveUserFromRoles(System.String,System.String[])" />
+
+            
 
             
 
@@ -844,6 +970,8 @@
 
             
 
+            
+
              methods of the <see
              cref="T:System.Web.Security.Roles" />
 
@@ -851,8 +979,12 @@
 
             
 
+            
+
              class to remove the specified users from the specified roles at the data source. Only roles for the configured <see
              cref="P:System.Web.Security.RoleProvider.ApplicationName" />
+
+            
 
             
 
@@ -868,11 +1000,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >If any of the specified user names are not associated with any of the specified role names for the configured applicationName, we recommend that your provider throw a <see
              cref="T:System.Configuration.Provider.ProviderException" />
+
+            
 
             
 
@@ -890,6 +1026,8 @@
         </summary>
         <param name="usernames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -923,8 +1061,12 @@
 
             
 
+            
+
              is called by the <see
              cref="M:System.Web.Security.Roles.RoleExists(System.String)" />
+
+            
 
             
 
@@ -937,8 +1079,12 @@
 
             
 
+            
+
              class to determine whether a role name exists in the data source for the configured <see
              cref="P:System.Web.Security.Roles.ApplicationName" />
+
+            
 
             
 

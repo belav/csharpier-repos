@@ -41,6 +41,8 @@
 
         
 
+        
+
          is the root of a serialization graph, SOAP is produced in RPC (Remote Procedure Call) format and a <see
          cref="T:System.Runtime.Serialization.Formatters.SoapMessage" />
 
@@ -48,8 +50,12 @@
 
         
 
+        
+
          object is used to specify the method call parameter types. The <see
          cref="P:System.Runtime.Serialization.Formatters.Soap.SoapFormatter.TopObject" />
+
+        
 
         
 
@@ -85,6 +91,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Serialization.Formatters.SoapMessage" />
+
+            
 
             
 
@@ -189,8 +197,12 @@
 
             
 
+            
+
              and/or <see
              cref="P:System.Runtime.Serialization.Formatters.SoapMessage.ParamValues" />
+
+            
 
             
 

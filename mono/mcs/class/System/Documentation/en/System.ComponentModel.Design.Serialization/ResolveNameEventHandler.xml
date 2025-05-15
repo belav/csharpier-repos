@@ -44,11 +44,15 @@
 
         
 
+        
+
          to resolve object names during serialization and deserialization.</para
       >
       <para
         >When you create a <see
          cref="T:System.ComponentModel.Design.Serialization.ResolveNameEventHandler" />
+
+        
 
         
 
@@ -63,6 +67,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -71,6 +77,8 @@
       <para
         >Represents the method that handles the <see
          cref="E:System.ComponentModel.Design.Serialization.IDesignerSerializationManager.ResolveName" />
+
+        
 
         
 

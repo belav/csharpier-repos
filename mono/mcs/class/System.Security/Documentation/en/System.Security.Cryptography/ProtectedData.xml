@@ -27,8 +27,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Security.Cryptography.ProtectedData.Unprotect(System.Byte[],System.Byte[],System.Security.Cryptography.DataProtectionScope)" />
+
+        
 
         
 
@@ -78,8 +82,12 @@
 
             
 
+            
+
              parameter enables you to add data to increase the complexity of the encryption; specify null for no additional complexity. If provided, this information must also be used when decrypting the data using the <see
              cref="M:System.Security.Cryptography.ProtectedData.Unprotect(System.Byte[],System.Byte[],System.Security.Cryptography.DataProtectionScope)" />
+
+            
 
             
 
@@ -106,6 +114,8 @@
 
           
 
+          
+
           A byte array that contains data to encrypt. </param
         >
         <param name="optionalEntropy">
@@ -115,10 +125,14 @@
 
           
 
+          
+
           An optional additional byte array used to increase the complexity of the encryption, or null for no additional complexity.</param
         >
         <param name="scope">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -162,8 +176,12 @@
 
             
 
+            
+
              method. If the <paramref
              name="optionalEntropy" />
+
+            
 
             
 
@@ -190,8 +208,12 @@
 
           
 
+          
+
           A byte array containing data encrypted using the <see
            cref="M:System.Security.Cryptography.ProtectedData.Protect(System.Byte[],System.Byte[],System.Security.Cryptography.DataProtectionScope)" />
+
+          
 
           
 
@@ -206,10 +228,14 @@
 
           
 
+          
+
           An optional additional byte array that was used to encrypt the data, or null if the additional byte array was not used.</param
         >
         <param name="scope">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

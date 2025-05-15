@@ -27,8 +27,12 @@
 
         
 
+        
+
          class contains information for several different Web Parts events that can be canceled. These events include the <see
          cref="E:System.Web.UI.WebControls.WebParts.WebPartManager.SelectedWebPartChanging" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
         , and <see
          cref="E:System.Web.UI.WebControls.WebParts.WebPartManager.WebPartDeleting" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          class provides access to the Web Parts control involved in the event. The Web Parts control is accessed through the <see
          cref="P:System.Web.UI.WebControls.WebParts.WebPartCancelEventArgs.WebPart" />
+
+        
 
         
 
@@ -75,6 +87,8 @@
 
         
 
+        
+
          event, <see
          cref="E:System.Web.UI.WebControls.WebParts.WebPartManager.WebPartClosing" />
 
@@ -82,8 +96,12 @@
 
         
 
+        
+
          event, and <see
          cref="E:System.Web.UI.WebControls.WebParts.WebPartManager.WebPartDeleting" />
+
+        
 
         
 
@@ -112,6 +130,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPartCancelEventArgs" />
+
+            
 
             
 

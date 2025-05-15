@@ -11,6 +11,8 @@
 
         
 
+        
+
          namespace contains classes used to send electronic mail to a Simple Mail Transfer Protocol (SMTP) server for delivery. </para
       >
     </summary>
@@ -24,6 +26,8 @@
 
         
 
+        
+
          class represents the content of a mail message. The <see
          cref="T:System.Net.Mail.SmtpClient" />
 
@@ -31,8 +35,12 @@
 
         
 
+        
+
          class transmits email to the SMTP host that you designate for mail delivery. You can create mail attachments using the <see
          cref="T:System.Net.Mail.Attachment" />
+
+        
 
         
 

@@ -36,8 +36,12 @@
 
         
 
+        
+
          class is used by the <see
          cref="T:System.ComponentModel.IBindingListView" />
+
+        
 
         
 
@@ -53,6 +57,8 @@
 
         
 
+        
+
          is read-only once constructed.</para
       >
     </remarks>
@@ -61,6 +67,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.ComponentModel.ListSortDescription" />
+
+        
 
         
 
@@ -95,6 +103,8 @@
 
             
 
+            
+
              is read-only once constructed.</para
           >
         </remarks>
@@ -103,6 +113,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.ListSortDescriptionCollection" />
+
+            
 
             
 
@@ -142,6 +154,8 @@
 
             
 
+            
+
              is read-only once constructed.</para
           >
           <para>Example</para>
@@ -157,8 +171,12 @@
 
             
 
+            
+
              class with the specified array of <see
              cref="T:System.ComponentModel.ListSortDescription" />
+
+            
 
             
 
@@ -174,8 +192,12 @@
 
           
 
+          
+
           The array of <see
            cref="T:System.ComponentModel.ListSortDescription" />
+
+          
 
           
 
@@ -215,6 +237,8 @@
 
             
 
+            
+
              contains a specific value.</para
           >
         </summary>
@@ -223,6 +247,8 @@
           <para
             >true if the <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -238,8 +264,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -281,10 +311,14 @@
 
           
 
+          
+
           The destination array for the items copied from the collection.</param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -349,6 +383,8 @@
 
             
 
+            
+
              if found in the list; otherwise, -1.</para
           >
         </returns>
@@ -359,8 +395,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -427,8 +467,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -472,6 +516,8 @@
 
             
 
+            
+
             , because this collection, once constructed, does not allow public access to the underlying list.</para
           >
           <para
@@ -482,8 +528,12 @@
 
             
 
+            
+
              method, see the <see
              cref="P:System.Collections.ICollection.SyncRoot" />
+
+            
 
             
 
@@ -528,6 +578,8 @@
 
             
 
+            
+
              that can be used to iterate through the collection.</para
           >
         </summary>
@@ -536,6 +588,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -574,8 +628,12 @@
 
             
 
+            
+
              class implements the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -588,8 +646,12 @@
 
             
 
+            
+
              method. However, because the <see
              cref="T:System.ComponentModel.ListSortDescriptionCollection" />
+
+            
 
             
 
@@ -608,6 +670,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -643,8 +707,12 @@
 
             
 
+            
+
              class implements the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -657,8 +725,12 @@
 
             
 
+            
+
              method. However, because the <see
              cref="T:System.ComponentModel.ListSortDescriptionCollection" />
+
+            
 
             
 
@@ -702,8 +774,12 @@
 
             
 
+            
+
              class implements the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -716,8 +792,12 @@
 
             
 
+            
+
              method. However, because the <see
              cref="T:System.ComponentModel.ListSortDescriptionCollection" />
+
+            
 
             
 
@@ -737,8 +817,12 @@
 
           
 
+          
+
           The zero-based index of the <see
            cref="T:System.ComponentModel.ListSortDescription" />
+
+          
 
           
 
@@ -748,6 +832,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -804,6 +890,8 @@
           <para
             >The <see
              cref="T:System.ComponentModel.ListSortDescriptionCollection" />
+
+            
 
             
 
@@ -873,8 +961,12 @@
 
             
 
+            
+
              class implements the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -887,8 +979,12 @@
 
             
 
+            
+
              method. However, because the <see
              cref="T:System.ComponentModel.ListSortDescriptionCollection" />
+
+            
 
             
 
@@ -903,6 +999,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -940,8 +1038,12 @@
 
             
 
+            
+
              class implements the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -954,8 +1056,12 @@
 
             
 
+            
+
              method. However, because the <see
              cref="T:System.ComponentModel.ListSortDescriptionCollection" />
+
+            
 
             
 
@@ -975,8 +1081,12 @@
 
           
 
+          
+
           The zero-based index of the <see
            cref="T:System.ComponentModel.ListSortDescription" />
+
+          
 
           
 

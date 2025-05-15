@@ -178,8 +178,7 @@
           $(CoreCLRSharedFrameworkPdbDir)*.dwarf"
       />
       <CoreCLRCrossTargetFiles>
-        <TargetPath
->runtime/$(CoreCLRCrossTargetComponentDirName)_$(TargetArchitecture)/native</TargetPath>
+        <TargetPath>runtime/$(CoreCLRCrossTargetComponentDirName)_$(TargetArchitecture)/native</TargetPath>
         <IsNative>true</IsNative>
       </CoreCLRCrossTargetFiles>
     </ItemGroup>

@@ -28,6 +28,8 @@
 
         
 
+        
+
          class.  </para
       >
     </remarks>
@@ -55,6 +57,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.MessageHeader`1" />
+
+            
 
             
 
@@ -190,10 +194,14 @@
 
           
 
+          
+
           The local name of the header XML element</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

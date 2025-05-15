@@ -24,8 +24,12 @@
 
         
 
+        
+
          column with special properties, you must first inherit from the <see
          cref="T:System.Windows.Forms.DataGridColumnStyle" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          interface is provided to notify the <see
          cref="T:System.Windows.Forms.DataGrid" />
+
+        
 
         
 
@@ -77,8 +85,12 @@
 
             
 
+            
+
              method allows the <see
              cref="T:System.Windows.Forms.DataGrid" />
+
+            
 
             
 
@@ -97,6 +109,8 @@
 
             
 
+            
+
              that the user has begun editing the column.</para
           >
         </summary>
@@ -107,8 +121,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 

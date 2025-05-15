@@ -28,11 +28,15 @@
 
         
 
+        
+
          class is intended primarily to be used by data-bound controls, and not as a programmable object in page code.</para
       >
       <para
         >ASP.NET data source controls contain one or more lists of data, represented by data source view objects. The <see
          cref="T:System.Web.UI.WebControls.SqlDataSourceView" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          class, defines the capabilities of the <see
          cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+        
 
         
 
@@ -59,8 +67,12 @@
 
         
 
+        
+
          class implements the data functionality for the <see
          cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+        
 
         
 
@@ -73,8 +85,12 @@
 
         
 
+        
+
         , <see
          cref="Overload:System.Web.UI.WebControls.SqlDataSourceView.Update" />
+
+        
 
         
 
@@ -87,8 +103,12 @@
 
         
 
+        
+
         , and <see
          cref="Overload:System.Web.UI.WebControls.SqlDataSourceView.Delete" />
+
+        
 
         
 
@@ -104,8 +124,12 @@
 
         
 
+        
+
          object is not directly exposed to page developers by the <see
          cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+        
 
         
 
@@ -118,8 +142,12 @@
 
         
 
+        
+
          method, which retrieves an <see
          cref="T:System.Collections.IEnumerable" />
+
+        
 
         
 
@@ -132,6 +160,8 @@
 
         
 
+        
+
          class implements data retrieval from relational databases using SQL queries. The SQL queries can be parameterized for greater flexibility and security. The following data retrieval methods, properties, and events are implemented by the <see
          cref="T:System.Web.UI.WebControls.SqlDataSourceView" />
 
@@ -139,8 +169,12 @@
 
         
 
+        
+
          and exposed directly by its <see
          cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+        
 
         
 
@@ -158,6 +192,8 @@
 
             
 
+            
+
              property </para
           >
         </item>
@@ -165,6 +201,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.WebControls.SqlDataSource.SelectParameters" />
+
+            
 
             
 
@@ -182,6 +220,8 @@
 
             
 
+            
+
              event</para
           >
         </item>
@@ -189,6 +229,8 @@
           <para
             >The <see
              cref="E:System.Web.UI.WebControls.SqlDataSource.Selected" />
+
+            
 
             
 
@@ -206,8 +248,12 @@
 
         
 
+        
+
          object supports updating data in a relational database using SQL commands. The SQL commands can be parameterized for greater flexibility and security. Data-bound controls, such as the <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 
@@ -220,8 +266,12 @@
 
         
 
+        
+
         , can be configured to perform updates automatically using the <see
          cref="T:System.Web.UI.WebControls.SqlDataSourceView" />
+
+        
 
         
 
@@ -234,8 +284,12 @@
 
         
 
+        
+
          and exposed directly by its <see
          cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+        
 
         
 
@@ -253,6 +307,8 @@
 
             
 
+            
+
              property</para
           >
         </item>
@@ -260,6 +316,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.WebControls.SqlDataSource.UpdateParameters" />
+
+            
 
             
 
@@ -277,6 +335,8 @@
 
             
 
+            
+
              event</para
           >
         </item>
@@ -284,6 +344,8 @@
           <para
             >The <see
              cref="E:System.Web.UI.WebControls.SqlDataSource.Updated" />
+
+            
 
             
 
@@ -301,8 +363,12 @@
 
         
 
+        
+
          supports inserting new rows of data into a relational database. The SQL commands that are specified in the <see
          cref="P:System.Web.UI.WebControls.SqlDataSourceView.InsertCommand" />
+
+        
 
         
 
@@ -315,8 +381,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -329,6 +399,8 @@
 
         
 
+        
+
         , while other controls cannot. The following insert methods, properties, and events are implemented by the <see
          cref="T:System.Web.UI.WebControls.SqlDataSourceView" />
 
@@ -336,8 +408,12 @@
 
         
 
+        
+
          and exposed directly by its <see
          cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+        
 
         
 
@@ -355,6 +431,8 @@
 
             
 
+            
+
              property</para
           >
         </item>
@@ -362,6 +440,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.WebControls.SqlDataSource.InsertParameters" />
+
+            
 
             
 
@@ -379,6 +459,8 @@
 
             
 
+            
+
              event</para
           >
         </item>
@@ -386,6 +468,8 @@
           <para
             >The <see
              cref="E:System.Web.UI.WebControls.SqlDataSource.Inserted" />
+
+            
 
             
 
@@ -403,8 +487,12 @@
 
         
 
+        
+
          object also supports deleting data from a relational database. As with other commands, the SQL commands that are specified in the <see
          cref="P:System.Web.UI.WebControls.SqlDataSourceView.DeleteCommand" />
+
+        
 
         
 
@@ -417,8 +505,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.WebControls.DetailsView" />
+
+        
 
         
 
@@ -431,6 +523,8 @@
 
         
 
+        
+
         , while other controls cannot. The following delete methods, properties, and events are implemented by the <see
          cref="T:System.Web.UI.WebControls.SqlDataSourceView" />
 
@@ -438,8 +532,12 @@
 
         
 
+        
+
          and exposed directly by its <see
          cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+        
 
         
 
@@ -457,6 +555,8 @@
 
             
 
+            
+
              property</para
           >
         </item>
@@ -464,6 +564,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.WebControls.SqlDataSource.DeleteParameters" />
+
+            
 
             
 
@@ -481,6 +583,8 @@
 
             
 
+            
+
              event</para
           >
         </item>
@@ -488,6 +592,8 @@
           <para
             >The <see
              cref="E:System.Web.UI.WebControls.SqlDataSource.Deleted" />
+
+            
 
             
 
@@ -505,8 +611,12 @@
 
         
 
+        
+
          property on every page load, you can use the <see
          cref="P:System.Web.UI.WebControls.SqlDataSourceView.FilterExpression" />
+
+        
 
         
 
@@ -519,6 +629,8 @@
 
         
 
+        
+
          properties to apply dynamic filtering to data retrieval. These properties are implemented by the <see
          cref="T:System.Web.UI.WebControls.SqlDataSourceView" />
 
@@ -526,8 +638,12 @@
 
         
 
+        
+
          and exposed directly by its <see
          cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+        
 
         
 
@@ -543,8 +659,12 @@
 
         
 
+        
+
          control by adding an ORDER BY clause, which causes the database to perform the ordering for you when you retrieve data or by ordering the data in memory after it is retrieved. You can supply a sorting expression to the <see
          cref="T:System.Web.UI.WebControls.SqlDataSourceView" />
+
+        
 
         
 
@@ -557,8 +677,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.UI.DataSourceSelectArguments" />
+
+        
 
         
 
@@ -571,8 +695,12 @@
 
         
 
+        
+
          method. The syntax for the <see
          cref="P:System.Web.UI.DataSourceSelectArguments.SortExpression" />
+
+        
 
         
 
@@ -585,8 +713,12 @@
 
         
 
+        
+
          property. If you use a stored procedure to retrieve data, you can also use the <see
          cref="P:System.Web.UI.WebControls.SqlDataSourceView.SortParameterName" />
+
+        
 
         
 
@@ -602,6 +734,8 @@
 
         
 
+        
+
          control has controls concurrency through the <see
          cref="P:System.Web.UI.WebControls.SqlDataSource.ConflictDetection" />
 
@@ -609,8 +743,12 @@
 
         
 
+        
+
          property. The functionality is implemented in the <see
          cref="P:System.Web.UI.WebControls.SqlDataSourceView.ConflictDetection" />
+
+        
 
         
 
@@ -626,8 +764,12 @@
 
         
 
+        
+
          implements the <see
          cref="T:System.Web.UI.IStateManager" />
+
+        
 
         
 
@@ -640,8 +782,12 @@
 
         
 
+        
+
          and property and the <see
          cref="M:System.Web.UI.WebControls.SqlDataSourceView.LoadViewState(System.Object)" />
+
+        
 
         
 
@@ -654,8 +800,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Web.UI.WebControls.SqlDataSourceView.TrackViewState" />
+
+        
 
         
 
@@ -670,6 +820,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -678,6 +830,8 @@
       <para
         >Supports the <see
          cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+        
 
         
 
@@ -711,8 +865,12 @@
 
             
 
+            
+
              constructor is called by the <see
              cref="M:System.Web.UI.WebControls.SqlDataSource.GetView(System.String)" />
+
+            
 
             
 
@@ -725,8 +883,12 @@
 
             
 
+            
+
              parameter. The <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -739,8 +901,12 @@
 
             
 
+            
+
              object at any one time, and always names the view Table, although this naming restriction is imposed by the <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -753,8 +919,12 @@
 
             
 
+            
+
             . You can override the <see
              cref="M:System.Web.UI.WebControls.SqlDataSource.GetView(System.String)" />
+
+            
 
             
 
@@ -770,8 +940,12 @@
 
             
 
+            
+
              object that is passed by the <paramref
              name="context" />
+
+            
 
             
 
@@ -784,8 +958,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.SelectParameters" />
+
+            
 
             
 
@@ -804,8 +982,12 @@
 
             
 
+            
+
              class setting the specified <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -821,8 +1003,12 @@
 
           
 
+          
+
           The data source control with which the <see
            cref="T:System.Web.UI.WebControls.SqlDataSourceView" />
+
+          
 
           
 
@@ -837,6 +1023,8 @@
 
           
 
+          
+
           A unique name for the data source view, within the scope of the data source control that owns it. </param
         >
         <param name="context">
@@ -846,8 +1034,12 @@
 
           
 
+          
+
           The current <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -882,6 +1074,8 @@
 
             
 
+            
+
              property is stored in view state.</para
           >
         </remarks>
@@ -890,6 +1084,8 @@
           <para
             >Gets or sets a value indicating whether a data retrieval operation is canceled when any parameter that is contained in the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.SelectParameters" />
+
+            
 
             
 
@@ -922,8 +1118,12 @@
 
             
 
+            
+
              property returns true if the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.DeleteCommand" />
+
+            
 
             
 
@@ -942,8 +1142,12 @@
 
             
 
+            
+
              object that is associated with the current <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -976,8 +1180,12 @@
 
             
 
+            
+
              property returns true if the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.InsertCommand" />
+
+            
 
             
 
@@ -996,8 +1204,12 @@
 
             
 
+            
+
              object that is associated with the current <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -1030,6 +1242,8 @@
 
             
 
+            
+
              object does not support paging.</para
           >
         </remarks>
@@ -1043,8 +1257,12 @@
 
             
 
+            
+
              object that is associated with the current <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -1080,6 +1298,8 @@
 
             
 
+            
+
              object does not support retrieving row counts.</para
           >
         </remarks>
@@ -1093,8 +1313,12 @@
 
             
 
+            
+
              object that is associated with the current <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -1127,8 +1351,12 @@
 
             
 
+            
+
              property returns true, if the current <see
              cref="P:System.Web.UI.WebControls.SqlDataSource.DataSourceMode" />
+
+            
 
             
 
@@ -1141,8 +1369,12 @@
 
             
 
+            
+
              value and the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.SortParameterName" />
+
+            
 
             
 
@@ -1161,8 +1393,12 @@
 
             
 
+            
+
              object that is associated with the current <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -1195,8 +1431,12 @@
 
             
 
+            
+
              property returns true if the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.UpdateCommand" />
+
+            
 
             
 
@@ -1215,8 +1455,12 @@
 
             
 
+            
+
              object that is associated with the current <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -1252,8 +1496,12 @@
 
             
 
+            
+
              property determines whether parameters for old and new values are applied to the Update method. For example, if the command that is specified by the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.SelectCommand" />
+
+            
 
             
 
@@ -1266,8 +1514,12 @@
 
             
 
+            
+
              object with the columns Name and Number, and the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.ConflictDetection" />
+
+            
 
             
 
@@ -1280,8 +1532,12 @@
 
             
 
+            
+
              value, parameters are created for Name and Number for the update operation. If the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.ConflictDetection" />
+
+            
 
             
 
@@ -1294,8 +1550,12 @@
 
             
 
+            
+
              value, parameters are created for Name, Number, original_Name, and original_Number. (The exact name of the parameters for the original values depends on the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.OldValuesParameterFormatString" />
+
+            
 
             
 
@@ -1308,8 +1568,12 @@
 
             
 
+            
+
              object determines if the method that is specified in the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.UpdateCommand" />
+
+            
 
             
 
@@ -1325,8 +1589,12 @@
 
             
 
+            
+
              property to the <see
              cref="F:System.Web.UI.ConflictOptions.CompareAllValues" />
+
+            
 
             
 
@@ -1342,6 +1610,8 @@
 
             
 
+            
+
              property is stored in view state.</para
           >
         </remarks>
@@ -1350,6 +1620,8 @@
           <para
             >Gets or sets the value indicating how the <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -1388,8 +1660,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.UI.WebControls.SqlDataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -1402,8 +1678,12 @@
 
             
 
+            
+
              and <paramref
              name="oldValues" />
+
+            
 
             
 
@@ -1422,8 +1702,12 @@
 
             
 
+            
+
              SQL string, any parameters that are specified in the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.DeleteParameters" />
+
+            
 
             
 
@@ -1436,8 +1720,12 @@
 
             
 
+            
+
              and <paramref
              name="oldValues" />
+
+            
 
             
 
@@ -1457,6 +1745,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
 
@@ -1464,8 +1754,12 @@
 
           
 
+          
+
            of object or row key values for the <see
            cref="M:System.Web.UI.WebControls.SqlDataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" />
+
+          
 
           
 
@@ -1480,8 +1774,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -1494,8 +1792,12 @@
 
           
 
+          
+
            property is set to the <see
            cref="F:System.Web.UI.ConflictOptions.CompareAllValues" />
+
+          
 
           
 
@@ -1527,11 +1829,15 @@
 
             
 
+            
+
              property. </para
           >
           <para
             >If the SQL string is a parameterized query or command, the placeholder of the parameter also depends on the ADO.NET provider being used. For example, if the provider is the <see
              cref="N:System.Data.SqlClient" />
+
+            
 
             
 
@@ -1544,6 +1850,8 @@
 
             
 
+            
+
              class, the placeholder of the parameter is '@parameterName'. However, if the provider is set to the  <see
              cref="N:System.Data.Odbc" />
 
@@ -1551,8 +1859,12 @@
 
             
 
+            
+
              or <see
              cref="N:System.Data.OleDb" />
+
+            
 
             
 
@@ -1569,11 +1881,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.DeleteCommand" />
+
+            
 
             
 
@@ -1589,6 +1905,8 @@
 
             
 
+            
+
              property is stored in view state.</para
           >
         </remarks>
@@ -1597,6 +1915,8 @@
           <para
             >Gets or sets the SQL string that the <see
              cref="T:System.Web.UI.WebControls.SqlDataSourceView" />
+
+            
 
             
 
@@ -1632,6 +1952,8 @@
 
             
 
+            
+
              property is stored in view state.</para
           >
         </remarks>
@@ -1640,6 +1962,8 @@
           <para
             >Gets or sets a value indicating whether the text in the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.DeleteCommand" />
+
+            
 
             
 
@@ -1674,8 +1998,12 @@
 
             
 
+            
+
              event to examine the values of output parameters after a delete operation has completed. The output parameters are available from the <see
              cref="T:System.Web.UI.WebControls.SqlDataSourceStatusEventArgs" />
+
+            
 
             
 
@@ -1688,6 +2016,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1738,6 +2068,8 @@
 
             
 
+            
+
              property contains a parameterized SQL query, the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.DeleteParameters" />
 
@@ -1745,8 +2077,12 @@
 
             
 
+            
+
              collection contains any <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -1762,8 +2098,12 @@
 
             
 
+            
+
              property; specifically, if the name identifies a primary key, such as a key that is specified using the DataKeyNames property of a data-bound control, or in delete and update scenarios in which the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.ConflictDetection" />
+
+            
 
             
 
@@ -1776,6 +2116,8 @@
 
             
 
+            
+
              value and a set of <paramref
              name="oldValues" />
 
@@ -1783,8 +2125,12 @@
 
             
 
+            
+
              is passed to the corresponding data method. In this case, the format string is applied to each parameter name in the <paramref
              name="oldValues" />
+
+            
 
             
 
@@ -1800,8 +2146,12 @@
 
             
 
+            
+
              collection might be important. The <see
              cref="N:System.Data.OleDb" />
+
+            
 
             
 
@@ -1814,6 +2164,8 @@
 
             
 
+            
+
              providers associate the parameters in the collection according to the order that the parameters appear in the parameterized SQL query. The <see
              cref="N:System.Data.SqlClient" />
 
@@ -1821,8 +2173,12 @@
 
             
 
+            
+
              provider, which is the default ADO.NET provider for the <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -1839,6 +2195,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1847,6 +2205,8 @@
           <para
             >Gets the parameters collection containing the parameters that are used by the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.DeleteCommand" />
+
+            
 
             
 
@@ -1881,8 +2241,12 @@
 
             
 
+            
+
              event to perform additional initialization operations that are specific to your application, to validate the values of parameters, or to change the parameter values before the <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -1898,8 +2262,12 @@
 
             
 
+            
+
              operation directly by calling the <see
              cref="M:System.Data.Common.DbCommand.Cancel" />
+
+            
 
             
 
@@ -1912,8 +2280,12 @@
 
             
 
+            
+
              object that is exposed by the <see
              cref="T:System.Web.UI.WebControls.SqlDataSourceCommandEventArgs" />
+
+            
 
             
 
@@ -1926,8 +2298,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.SqlDataSourceCommandEventArgs" />
+
+            
 
             
 
@@ -1940,6 +2316,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -1982,8 +2360,12 @@
 
             
 
+            
+
              class implements the inherited <see
              cref="M:System.Web.UI.DataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -1996,8 +2378,12 @@
 
             
 
+            
+
              method directly; instead, use the publicly exposed <see
              cref="M:System.Web.UI.WebControls.SqlDataSource.Delete" />
+
+            
 
             
 
@@ -2013,8 +2399,12 @@
 
             
 
+            
+
              collection are evaluated and merged with any values that are contained by the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.DeleteParameters" />
+
+            
 
             
 
@@ -2027,8 +2417,12 @@
 
             
 
+            
+
              property is set to the <see
              cref="F:System.Web.UI.ConflictOptions.CompareAllValues" />
+
+            
 
             
 
@@ -2041,8 +2435,12 @@
 
             
 
+            
+
              collection are formatted with the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.OldValuesParameterFormatString" />
+
+            
 
             
 
@@ -2058,8 +2456,12 @@
 
             
 
+            
+
              method is called to raise the <see
              cref="E:System.Web.UI.WebControls.SqlDataSourceView.Deleting" />
+
+            
 
             
 
@@ -2075,8 +2477,12 @@
 
             
 
+            
+
              object builds a <see
              cref="T:System.Data.Common.DbCommand" />
+
+            
 
             
 
@@ -2089,8 +2495,12 @@
 
             
 
+            
+
              text and any associated <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.DeleteParameters" />
+
+            
 
             
 
@@ -2103,6 +2513,8 @@
 
             
 
+            
+
              object against the underlying database. After the delete operation completes, the <see
              cref="M:System.Web.UI.WebControls.SqlDataSourceView.OnDeleted(System.Web.UI.WebControls.SqlDataSourceStatusEventArgs)" />
 
@@ -2110,8 +2522,12 @@
 
             
 
+            
+
              method is called to raise the <see
              cref="E:System.Web.UI.WebControls.SqlDataSourceView.Deleted" />
+
+            
 
             
 
@@ -2130,8 +2546,12 @@
 
             
 
+            
+
              SQL string, any parameters that are specified in the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.DeleteParameters" />
+
+            
 
             
 
@@ -2144,8 +2564,12 @@
 
             
 
+            
+
              and <paramref
              name="oldValues" />
+
+            
 
             
 
@@ -2165,6 +2589,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
 
@@ -2172,8 +2598,12 @@
 
           
 
+          
+
            of object or row key values for the <see
            cref="M:System.Web.UI.WebControls.SqlDataSourceView.ExecuteDelete(System.Collections.IDictionary,System.Collections.IDictionary)" />
+
+          
 
           
 
@@ -2188,8 +2618,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -2202,8 +2636,12 @@
 
           
 
+          
+
            property is set to the <see
            cref="F:System.Web.UI.ConflictOptions.CompareAllValues" />
+
+          
 
           
 
@@ -2240,8 +2678,12 @@
 
             
 
+            
+
              class implements the inherited <see
              cref="M:System.Web.UI.DataSourceView.ExecuteInsert(System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -2254,8 +2696,12 @@
 
             
 
+            
+
              method directly; instead, use the publicly exposed <see
              cref="M:System.Web.UI.WebControls.SqlDataSource.Insert" />
+
+            
 
             
 
@@ -2271,8 +2717,12 @@
 
             
 
+            
+
              method is called to raise the <see
              cref="E:System.Web.UI.WebControls.SqlDataSourceView.Inserting" />
+
+            
 
             
 
@@ -2288,8 +2738,12 @@
 
             
 
+            
+
              object builds a <see
              cref="T:System.Data.Common.DbCommand" />
+
+            
 
             
 
@@ -2302,8 +2756,12 @@
 
             
 
+            
+
              text and any associated <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.InsertParameters" />
+
+            
 
             
 
@@ -2316,6 +2774,8 @@
 
             
 
+            
+
              object against the underlying database. After the insert completes, the <see
              cref="M:System.Web.UI.WebControls.SqlDataSourceView.OnInserted(System.Web.UI.WebControls.SqlDataSourceStatusEventArgs)" />
 
@@ -2323,8 +2783,12 @@
 
             
 
+            
+
              method is called to raise the <see
              cref="E:System.Web.UI.WebControls.SqlDataSourceView.Inserted" />
+
+            
 
             
 
@@ -2343,6 +2807,8 @@
 
             
 
+            
+
              SQL string, any parameters that are specified in the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.InsertParameters" />
 
@@ -2350,8 +2816,12 @@
 
             
 
+            
+
              collection, and the values that are in the specified <paramref
              name="values" />
+
+            
 
             
 
@@ -2371,8 +2841,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -2385,8 +2859,12 @@
 
           
 
+          
+
            property to perform the insert database operation. If there are no parameters associated with the query or if the <see
            cref="P:System.Web.UI.WebControls.SqlDataSourceView.InsertCommand" />
+
+          
 
           
 
@@ -2425,8 +2903,12 @@
 
             
 
+            
+
              class implements the inherited <see
              cref="M:System.Web.UI.WebControls.SqlDataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
+
+            
 
             
 
@@ -2439,8 +2921,12 @@
 
             
 
+            
+
              method directly; instead, use the publicly exposed <see
              cref="M:System.Web.UI.WebControls.SqlDataSource.Select(System.Web.UI.DataSourceSelectArguments)" />
+
+            
 
             
 
@@ -2456,8 +2942,12 @@
 
             
 
+            
+
              method is called to raise the <see
              cref="E:System.Web.UI.WebControls.SqlDataSourceView.Selecting" />
+
+            
 
             
 
@@ -2473,8 +2963,12 @@
 
             
 
+            
+
              object builds a <see
              cref="T:System.Data.Common.DbCommand" />
+
+            
 
             
 
@@ -2487,8 +2981,12 @@
 
             
 
+            
+
              text and any associated <see
              cref="P:System.Web.UI.WebControls.SqlDataSource.SelectParameters" />
+
+            
 
             
 
@@ -2501,8 +2999,12 @@
 
             
 
+            
+
              method is called to raise the <see
              cref="E:System.Web.UI.WebControls.SqlDataSource.Selected" />
+
+            
 
             
 
@@ -2518,6 +3020,8 @@
 
             
 
+            
+
              method returns a <see
              cref="T:System.Data.DataView" />
 
@@ -2525,8 +3029,12 @@
 
             
 
+            
+
              object if the <see
              cref="P:System.Web.UI.WebControls.SqlDataSource.DataSourceMode" />
+
+            
 
             
 
@@ -2539,8 +3047,12 @@
 
             
 
+            
+
             , or a <see
              cref="T:System.Data.IDataReader" />
+
+            
 
             
 
@@ -2553,6 +3065,8 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Web.UI.WebControls.SqlDataSourceMode.DataReader" />
 
@@ -2560,8 +3074,12 @@
 
             
 
+            
+
             . Close the <see
              cref="T:System.Data.IDataReader" />
+
+            
 
             
 
@@ -2577,8 +3095,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Web.UI.WebControls.SqlDataSourceMode.DataSet" />
+
+            
 
             
 
@@ -2591,6 +3113,8 @@
 
             
 
+            
+
              retrieves data from and saves data to the cache during the data operation. The cache is created, discarded, or refreshed based on the caching behavior specified by the combination of the <see
              cref="P:System.Web.UI.WebControls.SqlDataSource.CacheDuration" />
 
@@ -2598,8 +3122,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.SqlDataSource.CacheExpirationPolicy" />
+
+            
 
             
 
@@ -2618,8 +3146,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Web.UI.WebControls.SqlDataSourceMode.DataSet" />
+
+            
 
             
 
@@ -2632,8 +3164,12 @@
 
             
 
+            
+
              has been specified, it is evaluated along with any supplied <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.FilterParameters" />
+
+            
 
             
 
@@ -2652,8 +3188,12 @@
 
             
 
+            
+
              SQL string and any parameters that are in the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.SelectParameters" />
+
+            
 
             
 
@@ -2672,6 +3212,8 @@
 
             
 
+            
+
              list of data rows.</para
           >
         </returns>
@@ -2682,8 +3224,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.DataSourceSelectArguments" />
+
+          
 
           
 
@@ -2719,8 +3265,12 @@
 
             
 
+            
+
              class implements the inherited <see
              cref="M:System.Web.UI.WebControls.SqlDataSourceView.ExecuteUpdate(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -2733,8 +3283,12 @@
 
             
 
+            
+
              method directly; instead, use the publicly exposed <see
              cref="M:System.Web.UI.WebControls.SqlDataSource.Update" />
+
+            
 
             
 
@@ -2750,8 +3304,12 @@
 
             
 
+            
+
              and <paramref
              name="values" />
+
+            
 
             
 
@@ -2764,8 +3322,12 @@
 
             
 
+            
+
              collection. If the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.ConflictDetection" />
+
+            
 
             
 
@@ -2778,6 +3340,8 @@
 
             
 
+            
+
             , the values contained in the <paramref
              name="oldValues" />
 
@@ -2785,8 +3349,12 @@
 
             
 
+            
+
              collection are formatted with the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.OldValuesParameterFormatString" />
+
+            
 
             
 
@@ -2802,8 +3370,12 @@
 
             
 
+            
+
              method is called to raise the <see
              cref="E:System.Web.UI.WebControls.SqlDataSourceView.Updating" />
+
+            
 
             
 
@@ -2819,8 +3391,12 @@
 
             
 
+            
+
              builds a <see
              cref="T:System.Data.Common.DbCommand" />
+
+            
 
             
 
@@ -2833,8 +3409,12 @@
 
             
 
+            
+
              text and any associated <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.UpdateParameters" />
+
+            
 
             
 
@@ -2847,6 +3427,8 @@
 
             
 
+            
+
              object against the underlying database. After the operation completes, the <see
              cref="M:System.Web.UI.WebControls.SqlDataSourceView.OnUpdated(System.Web.UI.WebControls.SqlDataSourceStatusEventArgs)" />
 
@@ -2854,8 +3436,12 @@
 
             
 
+            
+
              method is called to raise the <see
              cref="E:System.Web.UI.WebControls.SqlDataSourceView.Updated" />
+
+            
 
             
 
@@ -2874,8 +3460,12 @@
 
             
 
+            
+
              SQL string, any parameters that are in the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.UpdateParameters" />
+
+            
 
             
 
@@ -2888,6 +3478,8 @@
 
             
 
+            
+
             , <paramref
              name="values" />
 
@@ -2895,8 +3487,12 @@
 
             
 
+            
+
             , and <paramref
              name="oldValues" />
+
+            
 
             
 
@@ -2916,8 +3512,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -2930,8 +3530,12 @@
 
           
 
+          
+
            property to perform the update database operation. If there are no keys associated with the query or if the <see
            cref="P:System.Web.UI.WebControls.SqlDataSourceView.UpdateCommand" />
+
+          
 
           
 
@@ -2946,8 +3550,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -2960,8 +3568,12 @@
 
           
 
+          
+
            property to perform the update database operation. If there are no parameters associated with the query or if the <see
            cref="P:System.Web.UI.WebControls.SqlDataSourceView.UpdateCommand" />
+
+          
 
           
 
@@ -2976,6 +3588,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
 
@@ -2983,8 +3597,12 @@
 
           
 
+          
+
            that represents the original values in the database. If there are no parameters associated with the query or if the <see
            cref="P:System.Web.UI.WebControls.SqlDataSourceView.UpdateCommand" />
+
+          
 
           
 
@@ -3016,8 +3634,12 @@
 
             
 
+            
+
              property is a format string–style syntax. You can include parameters in the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.FilterExpression" />
+
+            
 
             
 
@@ -3033,8 +3655,12 @@
 
             
 
+            
+
              collection contains the parameters that are evaluated for the placeholders that are found in the <see
              cref="P:System.Web.UI.WebControls.SqlDataSource.FilterExpression" />
+
+            
 
             
 
@@ -3050,11 +3676,15 @@
 
             
 
+            
+
              control supports filtering data only when in DataSet mode.</para
           >
           <para
             >The value of the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.FilterExpression" />
+
+            
 
             
 
@@ -3071,6 +3701,8 @@
 
               
 
+              
+
                object that is returned by the <see
                cref="M:System.Web.UI.WebControls.ObjectDataSource.Select" />
 
@@ -3078,8 +3710,12 @@
 
               
 
+              
+
                method. If you are using the <see
                cref="P:System.Web.UI.WebControls.ObjectDataSource.FilterExpression" />
+
+              
 
               
 
@@ -3094,6 +3730,8 @@
           <para
             >Gets or sets a filtering expression that is applied when the <see
              cref="Overload:System.Web.UI.WebControls.SqlDataSourceView.Select" />
+
+            
 
             
 
@@ -3128,8 +3766,12 @@
 
             
 
+            
+
              event to perform validation operations on filter parameter values before the <see
              cref="T:System.Web.UI.WebControls.SqlDataSourceView" />
+
+            
 
             
 
@@ -3142,8 +3784,12 @@
 
             
 
+            
+
              method by setting the <see
              cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+
+            
 
             
 
@@ -3156,8 +3802,12 @@
 
             
 
+            
+
              object to true. The event is raised only if the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.FilterExpression" />
+
+            
 
             
 
@@ -3174,6 +3824,8 @@
 
               
 
+              
+
                object that is returned by the <see
                cref="M:System.Web.UI.WebControls.ObjectDataSource.Select" />
 
@@ -3181,8 +3833,12 @@
 
               
 
+              
+
                method. If you are using the <see
                cref="P:System.Web.UI.WebControls.ObjectDataSource.FilterExpression" />
+
+              
 
               
 
@@ -3196,6 +3852,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -3246,8 +3904,12 @@
 
             
 
+            
+
              collection are associated with any parameters that are specified in the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.FilterExpression" />
+
+            
 
             
 
@@ -3260,6 +3922,8 @@
 
             
 
+            
+
              are evaluated by order and matched to parameter objects in the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.FilterParameters" />
 
@@ -3267,8 +3931,12 @@
 
             
 
+            
+
              collection when the <see
              cref="M:System.Web.UI.WebControls.SqlDataSourceView.Select(System.Web.UI.DataSourceSelectArguments)" />
+
+            
 
             
 
@@ -3285,6 +3953,8 @@
 
               
 
+              
+
                object that is returned by the <see
                cref="M:System.Web.UI.WebControls.ObjectDataSource.Select" />
 
@@ -3292,8 +3962,12 @@
 
               
 
+              
+
                method. If you are using the <see
                cref="P:System.Web.UI.WebControls.ObjectDataSource.FilterExpression" />
+
+              
 
               
 
@@ -3308,6 +3982,8 @@
           <para
             >Gets a collection of parameters that are associated with any parameter placeholders in the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.FilterExpression" />
+
+            
 
             
 
@@ -3345,6 +4021,8 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.UI.WebControls.SqlDataSourceView.ExecuteInsert(System.Collections.IDictionary)" />
 
@@ -3352,8 +4030,12 @@
 
             
 
+            
+
              method, passing the <paramref
              name="values" />
+
+            
 
             
 
@@ -3372,6 +4054,8 @@
 
             
 
+            
+
              SQL string, any parameters that are specified in the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.InsertParameters" />
 
@@ -3379,8 +4063,12 @@
 
             
 
+            
+
              collection, and the values that are in the specified <paramref
              name="values" />
+
+            
 
             
 
@@ -3400,8 +4088,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -3414,8 +4106,12 @@
 
           
 
+          
+
            property to use to perform the insert database operation. If there are no parameters associated with the query or if the <see
            cref="P:System.Web.UI.WebControls.SqlDataSourceView.InsertCommand" />
+
+          
 
           
 
@@ -3447,8 +4143,12 @@
 
             
 
+            
+
              property. If the SQL string is a parameterized query or command, the placeholder of the parameter also depends on the ADO.NET provider being used. For example, if the provider is the <see
              cref="N:System.Data.SqlClient" />
+
+            
 
             
 
@@ -3461,6 +4161,8 @@
 
             
 
+            
+
              class, the placeholder of the parameter is '@parameterName'. However, if the provider is set to the <see
              cref="N:System.Data.Odbc" />
 
@@ -3468,8 +4170,12 @@
 
             
 
+            
+
              or <see
              cref="N:System.Data.OleDb" />
+
+            
 
             
 
@@ -3486,11 +4192,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.InsertCommand" />
+
+            
 
             
 
@@ -3506,6 +4216,8 @@
 
             
 
+            
+
              property is stored in view state.</para
           >
         </remarks>
@@ -3514,6 +4226,8 @@
           <para
             >Gets or sets the SQL string that the <see
              cref="T:System.Web.UI.WebControls.SqlDataSourceView" />
+
+            
 
             
 
@@ -3549,6 +4263,8 @@
 
             
 
+            
+
              property is stored in view state.</para
           >
         </remarks>
@@ -3557,6 +4273,8 @@
           <para
             >Gets or sets a value indicating whether the text in the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.InsertCommand" />
+
+            
 
             
 
@@ -3591,8 +4309,12 @@
 
             
 
+            
+
              event to examine the values of output parameters after an insert operation has completed. The output parameters are available from the <see
              cref="T:System.Web.UI.WebControls.SqlDataSourceStatusEventArgs" />
+
+            
 
             
 
@@ -3605,6 +4327,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -3643,8 +4367,12 @@
 
             
 
+            
+
              event to perform additional initialization operations that are specific to your application, to validate the values of parameters, or to change the parameter values before the <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -3660,8 +4388,12 @@
 
             
 
+            
+
              method on the <see
              cref="T:System.Data.Common.DbCommand" />
+
+            
 
             
 
@@ -3674,8 +4406,12 @@
 
             
 
+            
+
              object. You can, however, cancel the database operation by setting the <see
              cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+
+            
 
             
 
@@ -3688,6 +4424,8 @@
 
             
 
+            
+
              to true.</para
           >
           <para
@@ -3695,6 +4433,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -3745,6 +4485,8 @@
 
             
 
+            
+
              property contains a parameterized SQL query, the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.InsertParameters" />
 
@@ -3752,8 +4494,12 @@
 
             
 
+            
+
              collection contains any <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -3769,8 +4515,12 @@
 
             
 
+            
+
              collection might be important. The <see
              cref="N:System.Data.OleDb" />
+
+            
 
             
 
@@ -3783,6 +4533,8 @@
 
             
 
+            
+
              providers associate the parameters in the collection according to the order in which the parameters appear in the parameterized SQL query. The <see
              cref="N:System.Data.SqlClient" />
 
@@ -3790,8 +4542,12 @@
 
             
 
+            
+
              provider, which is the default ADO.NET provider for the <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -3808,6 +4564,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3816,6 +4574,8 @@
           <para
             >Gets the parameters collection containing the parameters that are used by the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.InsertCommand" />
+
+            
 
             
 
@@ -3844,6 +4604,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Web.UI.WebControls.SqlDataSourceView" />
+
+            
 
             
 
@@ -3883,11 +4645,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.SqlDataSourceView.LoadViewState(System.Object)" />
+
+            
 
             
 
@@ -3900,8 +4666,12 @@
 
             
 
+            
+
              object from a previous page request that was saved by the <see
              cref="M:System.Web.UI.WebControls.SqlDataSourceView.SaveViewState" />
+
+            
 
             
 
@@ -3921,8 +4691,12 @@
 
           
 
+          
+
           An object that represents the <see
            cref="T:System.Web.UI.WebControls.SqlDataSourceView" />
+
+          
 
           
 
@@ -3962,8 +4736,12 @@
 
             
 
+            
+
              format string is applied to primary keys only, such as those that are identified by the DataKeyNames property of the data-bound control or in delete and update scenarios where the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.ConflictDetection" />
+
+            
 
             
 
@@ -3976,8 +4754,12 @@
 
             
 
+            
+
              value and a set of <paramref
              name="oldValues" />
+
+            
 
             
 
@@ -3990,8 +4772,12 @@
 
             
 
+            
+
              collection. For more information, see <see
              cref="P:System.Web.UI.WebControls.SqlDataSource.OldValuesParameterFormatString" />
+
+            
 
             
 
@@ -4002,6 +4788,8 @@
           <para
             >The value of the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.OldValuesParameterFormatString" />
+
+            
 
             
 
@@ -4020,8 +4808,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.Web.UI.WebControls.SqlDataSourceView.Update" />
+
+            
 
             
 
@@ -4061,11 +4853,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.SqlDataSourceView.OnDeleted(System.Web.UI.WebControls.SqlDataSourceStatusEventArgs)" />
+
+            
 
             
 
@@ -4084,8 +4880,12 @@
 
             
 
+            
+
              event after the <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -4101,8 +4901,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.SqlDataSourceStatusEventArgs" />
+
+          
 
           
 
@@ -4141,11 +4945,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.SqlDataSourceView.OnDeleting(System.Web.UI.WebControls.SqlDataSourceCommandEventArgs)" />
+
+            
 
             
 
@@ -4164,8 +4972,12 @@
 
             
 
+            
+
              event before the <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -4181,8 +4993,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.SqlDataSourceCommandEventArgs" />
+
+          
 
           
 
@@ -4221,11 +5037,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.SqlDataSourceView.OnFiltering(System.Web.UI.WebControls.SqlDataSourceFilteringEventArgs)" />
+
+            
 
             
 
@@ -4244,8 +5064,12 @@
 
             
 
+            
+
              event before the <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -4261,8 +5085,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.SqlDataSourceFilteringEventArgs" />
+
+          
 
           
 
@@ -4301,11 +5129,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.SqlDataSourceView.OnInserted(System.Web.UI.WebControls.SqlDataSourceStatusEventArgs)" />
+
+            
 
             
 
@@ -4324,8 +5156,12 @@
 
             
 
+            
+
              event after the <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -4341,8 +5177,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.SqlDataSourceStatusEventArgs" />
+
+          
 
           
 
@@ -4381,11 +5221,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.SqlDataSourceView.OnInserting(System.Web.UI.WebControls.SqlDataSourceCommandEventArgs)" />
+
+            
 
             
 
@@ -4404,8 +5248,12 @@
 
             
 
+            
+
              event before the <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -4421,8 +5269,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.SqlDataSourceCommandEventArgs" />
+
+          
 
           
 
@@ -4461,11 +5313,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.SqlDataSourceView.OnSelected(System.Web.UI.WebControls.SqlDataSourceStatusEventArgs)" />
+
+            
 
             
 
@@ -4484,8 +5340,12 @@
 
             
 
+            
+
              event after the <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -4501,8 +5361,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.SqlDataSourceStatusEventArgs" />
+
+          
 
           
 
@@ -4541,11 +5405,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.SqlDataSourceView.OnSelecting(System.Web.UI.WebControls.SqlDataSourceSelectingEventArgs)" />
+
+            
 
             
 
@@ -4564,8 +5432,12 @@
 
             
 
+            
+
              event before the <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -4581,8 +5453,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.SqlDataSourceSelectingEventArgs" />
+
+          
 
           
 
@@ -4621,11 +5497,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.SqlDataSourceView.OnUpdated(System.Web.UI.WebControls.SqlDataSourceStatusEventArgs)" />
+
+            
 
             
 
@@ -4644,8 +5524,12 @@
 
             
 
+            
+
              event after the <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -4661,8 +5545,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.SqlDataSourceStatusEventArgs" />
+
+          
 
           
 
@@ -4701,11 +5589,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.WebControls.SqlDataSourceView.OnUpdating(System.Web.UI.WebControls.SqlDataSourceCommandEventArgs)" />
+
+            
 
             
 
@@ -4724,8 +5616,12 @@
 
             
 
+            
+
              event before the <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -4741,8 +5637,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.SqlDataSourceCommandEventArgs" />
+
+          
 
           
 
@@ -4774,6 +5674,8 @@
 
             
 
+            
+
              control, which is identified by the <see
              cref="P:System.Web.UI.WebControls.SqlDataSource.ProviderName" />
 
@@ -4781,8 +5683,12 @@
 
             
 
+            
+
              property, the parameters are evaluated by alias or by their ordering in the <see
              cref="T:System.Web.UI.WebControls.ParameterCollection" />
+
+            
 
             
 
@@ -4798,8 +5704,12 @@
 
             
 
+            
+
              is not set or is set to the <see
              cref="N:System.Data.SqlClient" />
+
+            
 
             
 
@@ -4812,8 +5722,12 @@
 
             
 
+            
+
              property is used to add a parameter prefix to the <see
              cref="P:System.Web.UI.WebControls.Parameter.Name" />
+
+            
 
             
 
@@ -4826,8 +5740,12 @@
 
             
 
+            
+
              object in a <see
              cref="T:System.Web.UI.WebControls.ParameterCollection" />
+
+            
 
             
 
@@ -4840,8 +5758,12 @@
 
             
 
+            
+
              property is set to the <see
              cref="N:System.Data.OleDb" />
+
+            
 
             
 
@@ -4854,6 +5776,8 @@
 
             
 
+            
+
             , the parameters are evaluated by order and the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.ParameterPrefix" />
 
@@ -4861,8 +5785,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.Parameter.Name" />
+
+            
 
             
 
@@ -4878,8 +5806,12 @@
 
             
 
+            
+
              class, you can override the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.ParameterPrefix" />
+
+            
 
             
 
@@ -4916,11 +5848,15 @@
 
             
 
+            
+
              method is primarily used by control developers.</para
           >
           <para
             >View state is the accumulation of the values of the properties for a server control. These values are automatically placed in the <see
              cref="P:System.Web.UI.Control.ViewState" />
+
+            
 
             
 
@@ -4933,8 +5869,12 @@
 
             
 
+            
+
              class. The <see
              cref="P:System.Web.UI.Control.ViewState" />
+
+            
 
             
 
@@ -4950,10 +5890,14 @@
 
             
 
+            
+
              method and modifying the ViewState property for your server control. For more information, see <format
              type="text/html">
               <a href="0218d965-5d30-445b-b6a6-8870e70e63ce">ASP.NET State Management Overview</a>
             </format>
+
+            
 
             
 
@@ -4972,6 +5916,8 @@
 
             
 
+            
+
              control since the time that the page was posted back to the server.</para
           >
         </summary>
@@ -4980,6 +5926,8 @@
           <para
             >The object that contains the changes to the <see
              cref="T:System.Web.UI.WebControls.SqlDataSourceView" />
+
+            
 
             
 
@@ -5017,6 +5965,8 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.UI.WebControls.SqlDataSourceView.ExecuteSelect(System.Web.UI.DataSourceSelectArguments)" />
 
@@ -5024,8 +5974,12 @@
 
             
 
+            
+
              method, passing the <paramref
              name="selectArgs" />
+
+            
 
             
 
@@ -5041,6 +5995,8 @@
 
             
 
+            
+
              method returns a <see
              cref="T:System.Data.DataView" />
 
@@ -5048,8 +6004,12 @@
 
             
 
+            
+
              object, if the <see
              cref="P:System.Web.UI.WebControls.SqlDataSource.DataSourceMode" />
+
+            
 
             
 
@@ -5062,8 +6022,12 @@
 
             
 
+            
+
              value or it returns a <see
              cref="T:System.Data.IDataReader" />
+
+            
 
             
 
@@ -5076,6 +6040,8 @@
 
             
 
+            
+
              property is set to the <see
              cref="F:System.Web.UI.WebControls.SqlDataSourceMode.DataReader" />
 
@@ -5083,8 +6049,12 @@
 
             
 
+            
+
              value. Close the <see
              cref="T:System.Data.IDataReader" />
+
+            
 
             
 
@@ -5103,8 +6073,12 @@
 
             
 
+            
+
              SQL string and any parameters that are in the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.SelectParameters" />
+
+            
 
             
 
@@ -5123,6 +6097,8 @@
 
             
 
+            
+
              list of data rows.</para
           >
         </returns>
@@ -5133,8 +6109,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.DataSourceSelectArguments" />
+
+          
 
           
 
@@ -5166,8 +6146,12 @@
 
             
 
+            
+
              property. If the SQL string is a parameterized query or command, the placeholder of the parameter also depends on the ADO.NET provider being used. For example, if the provider is the <see
              cref="N:System.Data.SqlClient" />
+
+            
 
             
 
@@ -5180,6 +6164,8 @@
 
             
 
+            
+
              class, the placeholder of the parameter is '@parameterName'. However, if the provider is set to the <see
              cref="N:System.Data.Odbc" />
 
@@ -5187,8 +6173,12 @@
 
             
 
+            
+
              or <see
              cref="N:System.Data.OleDb" />
+
+            
 
             
 
@@ -5205,11 +6195,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.SelectCommand" />
+
+            
 
             
 
@@ -5226,12 +6220,16 @@
 
               
 
+              
+
                property.</para
             >
           </block>
           <para
             >The value of the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.SelectCommand" />
+
+            
 
             
 
@@ -5245,6 +6243,8 @@
           <para
             >Gets or sets the SQL string that the <see
              cref="T:System.Web.UI.WebControls.SqlDataSourceView" />
+
+            
 
             
 
@@ -5280,6 +6280,8 @@
 
             
 
+            
+
              property is stored in view state.</para
           >
         </remarks>
@@ -5288,6 +6290,8 @@
           <para
             >Gets or sets a value indicating whether the text in the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.SelectCommand" />
+
+            
 
             
 
@@ -5322,8 +6326,12 @@
 
             
 
+            
+
              event to examine the values of output parameters after a data retrieval operation has completed. The output parameters are available from the <see
              cref="T:System.Web.UI.WebControls.SqlDataSourceStatusEventArgs" />
+
+            
 
             
 
@@ -5336,6 +6344,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -5374,8 +6384,12 @@
 
             
 
+            
+
              event to perform additional initialization operations that are specific to your application, to validate the values of parameters, or to change the parameter values before the <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -5388,6 +6402,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -5427,6 +6443,8 @@
 
             
 
+            
+
              property contains a parameterized SQL query, the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.SelectParameters" />
 
@@ -5434,8 +6452,12 @@
 
             
 
+            
+
              collection contains any <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -5451,8 +6473,12 @@
 
             
 
+            
+
              collection might be important. The <see
              cref="N:System.Data.OleDb" />
+
+            
 
             
 
@@ -5465,6 +6491,8 @@
 
             
 
+            
+
              providers associate the parameters in the collection according to the order in which the parameters appear in the parameterized SQL query. The <see
              cref="N:System.Data.SqlClient" />
 
@@ -5472,8 +6500,12 @@
 
             
 
+            
+
              provider, which is the default ADO.NET provider for the <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -5490,6 +6522,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5498,6 +6532,8 @@
           <para
             >Gets the parameters collection containing the parameters that are used by the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.SelectCommand" />
+
+            
 
             
 
@@ -5530,6 +6566,8 @@
 
             
 
+            
+
              property is evaluated only when the SQL command that is contained by the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.SelectCommand" />
 
@@ -5537,8 +6575,12 @@
 
             
 
+            
+
              property is the name of a stored procedure. In this case, if the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.SortParameterName" />
+
+            
 
             
 
@@ -5554,8 +6596,12 @@
 
             
 
+            
+
              property is set, it is prepended to the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.SortParameterName" />
+
+            
 
             
 
@@ -5566,6 +6612,8 @@
           <para
             >The value of the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.SortParameterName" />
+
+            
 
             
 
@@ -5607,8 +6655,12 @@
 
             
 
+            
+
              instance is cast to the <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 
@@ -5622,6 +6674,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Web.UI.IStateManager.IsTrackingViewState" />
+
+            
 
             
 
@@ -5658,8 +6712,12 @@
 
             
 
+            
+
              instance is cast to the <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 
@@ -5678,6 +6736,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -5688,8 +6748,12 @@
 
           
 
+          
+
           An object that represents the <see
            cref="T:System.Web.UI.WebControls.SqlDataSourceView" />
+
+          
 
           
 
@@ -5720,8 +6784,12 @@
 
             
 
+            
+
              instance is cast to the <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 
@@ -5740,6 +6808,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -5748,6 +6818,8 @@
           <para
             >The object that contains the changes to the <see
              cref="T:System.Web.UI.WebControls.SqlDataSourceView" />
+
+            
 
             
 
@@ -5779,8 +6851,12 @@
 
             
 
+            
+
              instance is cast to the <see
              cref="T:System.Web.UI.IStateManager" />
+
+            
 
             
 
@@ -5794,6 +6870,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.Web.UI.IStateManager.TrackViewState" />
+
+            
 
             
 
@@ -5824,8 +6902,12 @@
 
             
 
+            
+
              object to track changes to its view state so that the changes can be stored in the <see
              cref="T:System.Web.UI.StateBag" />
+
+            
 
             
 
@@ -5865,8 +6947,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.UI.WebControls.SqlDataSourceView.ExecuteUpdate(System.Collections.IDictionary,System.Collections.IDictionary,System.Collections.IDictionary)" />
+
+            
 
             
 
@@ -5879,8 +6965,12 @@
 
             
 
+            
+
             , <paramref
              name="values" />
+
+            
 
             
 
@@ -5893,8 +6983,12 @@
 
             
 
+            
+
              parameters. For more information, see <see
              cref="P:System.Web.UI.WebControls.SqlDataSource.UpdateCommand" />
+
+            
 
             
 
@@ -5913,8 +7007,12 @@
 
             
 
+            
+
              SQL string, any parameters that are in the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.UpdateParameters" />
+
+            
 
             
 
@@ -5927,6 +7025,8 @@
 
             
 
+            
+
             , <paramref
              name="values" />
 
@@ -5934,8 +7034,12 @@
 
             
 
+            
+
             , and <paramref
              name="oldValues" />
+
+            
 
             
 
@@ -5955,8 +7059,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -5969,8 +7077,12 @@
 
           
 
+          
+
            property to perform the update database operation. If there are no keys associated with the query or if the <see
            cref="P:System.Web.UI.WebControls.SqlDataSourceView.UpdateCommand" />
+
+          
 
           
 
@@ -5985,8 +7097,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -5999,8 +7115,12 @@
 
           
 
+          
+
            property to perform the update database operation. If there are no parameters associated with the query or if the <see
            cref="P:System.Web.UI.WebControls.SqlDataSourceView.UpdateCommand" />
+
+          
 
           
 
@@ -6015,6 +7135,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
 
@@ -6022,8 +7144,12 @@
 
           
 
+          
+
            that represents the original values in the database. If there are no parameters associated with the query or if the <see
            cref="P:System.Web.UI.WebControls.SqlDataSourceView.UpdateCommand" />
+
+          
 
           
 
@@ -6055,8 +7181,12 @@
 
             
 
+            
+
              property. If the SQL string is a parameterized query or command, the placeholder of the parameter also depends on the ADO.NET provider being used. For example, if the provider is the <see
              cref="N:System.Data.SqlClient" />
+
+            
 
             
 
@@ -6069,6 +7199,8 @@
 
             
 
+            
+
              class, the placeholder of the parameter is '@parameterName'. However, if the provider is set to the <see
              cref="N:System.Data.Odbc" />
 
@@ -6076,8 +7208,12 @@
 
             
 
+            
+
              or <see
              cref="N:System.Data.OleDb" />
+
+            
 
             
 
@@ -6094,11 +7230,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.UpdateCommand" />
+
+            
 
             
 
@@ -6114,6 +7254,8 @@
 
             
 
+            
+
              property is stored in view state.</para
           >
         </remarks>
@@ -6122,6 +7264,8 @@
           <para
             >Gets or sets the SQL string that the <see
              cref="T:System.Web.UI.WebControls.SqlDataSourceView" />
+
+            
 
             
 
@@ -6157,6 +7301,8 @@
 
             
 
+            
+
              property is stored in view state.</para
           >
         </remarks>
@@ -6165,6 +7311,8 @@
           <para
             >Gets or sets a value indicating whether the text in the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.UpdateCommand" />
+
+            
 
             
 
@@ -6199,8 +7347,12 @@
 
             
 
+            
+
              event to examine the values of output parameters after an update operation has completed. The output parameters are available from the <see
              cref="T:System.Web.UI.WebControls.SqlDataSourceStatusEventArgs" />
+
+            
 
             
 
@@ -6213,6 +7365,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -6263,6 +7417,8 @@
 
             
 
+            
+
              property contains a parameterized SQL query, the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.UpdateParameters" />
 
@@ -6270,8 +7426,12 @@
 
             
 
+            
+
              collection contains any <see
              cref="T:System.Web.UI.WebControls.Parameter" />
+
+            
 
             
 
@@ -6287,8 +7447,12 @@
 
             
 
+            
+
              property; specifically, if the name identifies a primary key, such as a key that is specified using the DataKeyNames property, or in delete and update scenarios where the <see
              cref="P:System.Web.UI.WebControls.SqlDataSource.ConflictDetection" />
+
+            
 
             
 
@@ -6301,6 +7465,8 @@
 
             
 
+            
+
              value, and a set of <paramref
              name="oldValues" />
 
@@ -6308,8 +7474,12 @@
 
             
 
+            
+
              are passed to the corresponding data method. In this case, the format string is applied to each parameter name in the <paramref
              name="oldValues" />
+
+            
 
             
 
@@ -6325,8 +7495,12 @@
 
             
 
+            
+
              collection might be important. The <see
              cref="N:System.Data.OleDb" />
+
+            
 
             
 
@@ -6339,6 +7513,8 @@
 
             
 
+            
+
              providers associate the parameters in the collection according to the order in which the parameters appear in the parameterized SQL query. The <see
              cref="N:System.Data.SqlClient" />
 
@@ -6346,8 +7522,12 @@
 
             
 
+            
+
              provider, which is the default ADO.NET provider for the <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -6364,6 +7544,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -6372,6 +7554,8 @@
           <para
             >Gets the parameters collection containing the parameters that are used by the <see
              cref="P:System.Web.UI.WebControls.SqlDataSourceView.UpdateCommand" />
+
+            
 
             
 
@@ -6406,8 +7590,12 @@
 
             
 
+            
+
              event to perform additional initialization operations that are specific to your application, to validate the values of parameters, or to change the parameter values before the <see
              cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+            
 
             
 
@@ -6423,8 +7611,12 @@
 
             
 
+            
+
              method on the <see
              cref="T:System.Data.Common.DbCommand" />
+
+            
 
             
 
@@ -6437,8 +7629,12 @@
 
             
 
+            
+
              object. You can, however, cancel the database operation by setting the <see
              cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+
+            
 
             
 
@@ -6451,6 +7647,8 @@
 
             
 
+            
+
              to true.</para
           >
           <para
@@ -6458,6 +7656,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 

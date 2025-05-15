@@ -35,8 +35,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.ServiceModel.Description.IPolicyExportExtension" />
+
+        
 
         
 
@@ -54,6 +58,8 @@
 
             
 
+            
+
              interface to search WSDL information exposed by a particular endpoint for custom policy assertions about endpoint capabilities or requirements.</para
           >
         </item>
@@ -66,8 +72,12 @@
 
             
 
+            
+
              interface on a <see
              cref="T:System.ServiceModel.Channels.BindingElement" />
+
+            
 
             
 
@@ -102,6 +112,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.ReliableSessionBindingElementImporter" />
+
+            
 
             
 
@@ -143,6 +155,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -157,8 +171,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.MetadataImporter" />
+
+          
 
           
 
@@ -173,8 +191,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.PolicyConversionContext" />
+
+          
 
           
 

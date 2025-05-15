@@ -53,6 +53,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -63,10 +65,14 @@
 
           
 
+          
+
           The name of the member to obtain.</param
         >
         <param name="ignoreCase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -112,6 +118,8 @@
 
             
 
+            
+
              representing the result of the binding.</para
           >
         </returns>
@@ -122,10 +130,14 @@
 
           
 
+          
+
           The target of the dynamic set member operation.</param
         >
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -171,6 +183,8 @@
 
             
 
+            
+
              representing the result of the binding.</para
           >
         </returns>
@@ -181,10 +195,14 @@
 
           
 
+          
+
           The target of the dynamic set member operation.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -231,11 +249,15 @@
 
             
 
+            
+
              representing the result of the binding.</para
           >
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -250,10 +272,14 @@
 
           
 
+          
+
           The value to set to the member.</param
         >
         <param name="errorSuggestion">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

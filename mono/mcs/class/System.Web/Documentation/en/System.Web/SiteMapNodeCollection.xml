@@ -31,6 +31,8 @@
 
         
 
+        
+
          class provides a strongly typed collection for <see
          cref="T:System.Web.SiteMapNode" />
 
@@ -38,8 +40,12 @@
 
         
 
+        
+
          objects. It stores <see
          cref="T:System.Web.SiteMapNode" />
+
+        
 
         
 
@@ -55,8 +61,12 @@
 
         
 
+        
+
          collection when it is first created, and then use the following methods to add, copy, and remove <see
          cref="T:System.Web.SiteMapNode" />
+
+        
 
         
 
@@ -74,8 +84,12 @@
 
             
 
+            
+
              objects, use the <see
              cref="M:System.Web.SiteMapNodeCollection.Add(System.Web.SiteMapNode)" />
+
+            
 
             
 
@@ -88,8 +102,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Web.SiteMapNodeCollection.Insert(System.Int32,System.Web.SiteMapNode)" />
+
+            
 
             
 
@@ -107,8 +125,12 @@
 
             
 
+            
+
              objects, use the <see
              cref="M:System.Web.SiteMapNodeCollection.CopyTo(System.Web.SiteMapNode[],System.Int32)" />
+
+            
 
             
 
@@ -126,8 +148,12 @@
 
             
 
+            
+
              objects, use the <see
              cref="M:System.Web.SiteMapNodeCollection.Remove(System.Web.SiteMapNode)" />
+
+            
 
             
 
@@ -145,8 +171,12 @@
 
         
 
+        
+
         , which does not permit adding, copying, nor removing <see
          cref="T:System.Web.SiteMapNode" />
+
+        
 
         
 
@@ -159,8 +189,12 @@
 
         
 
+        
+
          method. The <see
          cref="T:System.Web.SiteMapNodeCollection" />
+
+        
 
         
 
@@ -173,8 +207,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Web.UI.IHierarchyData.GetChildren" />
+
+        
 
         
 
@@ -187,8 +225,12 @@
 
         
 
+        
+
          that is returned when the <see
          cref="P:System.Web.SiteMapNode.ChildNodes" />
+
+        
 
         
 
@@ -201,6 +243,8 @@
 
         
 
+        
+
          object that is returned from a provider. A <see
          cref="T:System.NotSupportedException" />
 
@@ -208,8 +252,12 @@
 
         
 
+        
+
          exception is thrown, if you attempt to modify a read-only <see
          cref="T:System.Web.SiteMapNodeCollection" />
+
+        
 
         
 
@@ -257,6 +305,8 @@
 
         
 
+        
+
          property to check the collection before calling any of the methods in the preceding list.</para
       >
     </remarks>
@@ -270,8 +320,12 @@
 
         
 
+        
+
          objects and implements the <see
          cref="T:System.Web.UI.IHierarchicalEnumerable" />
+
+        
 
         
 
@@ -298,8 +352,12 @@
 
             
 
+            
+
              constructor to create an empty <see
              cref="T:System.Web.SiteMapNodeCollection" />
+
+            
 
             
 
@@ -312,8 +370,12 @@
 
             
 
+            
+
              using the <see
              cref="M:System.Web.SiteMapNodeCollection.Add(System.Web.SiteMapNode)" />
+
+            
 
             
 
@@ -326,8 +388,12 @@
 
             
 
+            
+
             , or <see
              cref="M:System.Web.SiteMapNodeCollection.Insert(System.Int32,System.Web.SiteMapNode)" />
+
+            
 
             
 
@@ -341,6 +407,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.SiteMapNodeCollection" />
+
+            
 
             
 
@@ -372,8 +440,12 @@
 
             
 
+            
+
              constructor to create a <see
              cref="T:System.Web.SiteMapNodeCollection" />
+
+            
 
             
 
@@ -392,6 +464,8 @@
 
             
 
+            
+
              class with the specified initial capacity.</para
           >
         </summary>
@@ -402,8 +476,12 @@
 
           
 
+          
+
           The initial capacity of the <see
            cref="T:System.Web.SiteMapNodeCollection" />
+
+          
 
           
 
@@ -437,8 +515,12 @@
 
             
 
+            
+
              constructor to create a <see
              cref="T:System.Web.SiteMapNodeCollection" />
+
+            
 
             
 
@@ -451,8 +533,12 @@
 
             
 
+            
+
              object. You can add elements to the <see
              cref="T:System.Web.SiteMapNodeCollection" />
+
+            
 
             
 
@@ -465,6 +551,8 @@
 
             
 
+            
+
             , <see
              cref="Overload:System.Web.SiteMapNodeCollection.AddRange" />
 
@@ -472,8 +560,12 @@
 
             
 
+            
+
             , or <see
              cref="M:System.Web.SiteMapNodeCollection.Insert(System.Int32,System.Web.SiteMapNode)" />
+
+            
 
             
 
@@ -492,6 +584,8 @@
 
             
 
+            
+
              class and adds the <see
              cref="T:System.Web.SiteMapNode" />
 
@@ -499,8 +593,12 @@
 
             
 
+            
+
              object to the <see
              cref="P:System.Collections.CollectionBase.InnerList" />
+
+            
 
             
 
@@ -516,6 +614,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.SiteMapNode" />
 
@@ -523,8 +623,12 @@
 
           
 
+          
+
            to add to the <see
            cref="T:System.Web.SiteMapNodeCollection" />
+
+          
 
           
 
@@ -559,8 +663,12 @@
 
             
 
+            
+
              constructor is equivalent to calling the <see
              cref="M:System.Web.SiteMapNodeCollection.#ctor" />
+
+            
 
             
 
@@ -573,8 +681,12 @@
 
             
 
+            
+
              collection with the <see
              cref="M:System.Web.SiteMapNodeCollection.AddRange(System.Web.SiteMapNode[])" />
+
+            
 
             
 
@@ -593,6 +705,8 @@
 
             
 
+            
+
              class and adds the array of type <see
              cref="T:System.Web.SiteMapNode" />
 
@@ -600,8 +714,12 @@
 
             
 
+            
+
              to the <see
              cref="P:System.Collections.CollectionBase.InnerList" />
+
+            
 
             
 
@@ -637,8 +755,12 @@
 
             
 
+            
+
              constructor is equivalent to calling the <see
              cref="M:System.Web.SiteMapNodeCollection.#ctor" />
+
+            
 
             
 
@@ -651,8 +773,12 @@
 
             
 
+            
+
              collection with the <see
              cref="M:System.Web.SiteMapNodeCollection.AddRange(System.Web.SiteMapNode[])" />
+
+            
 
             
 
@@ -671,6 +797,8 @@
 
             
 
+            
+
              class and adds all the list items of the specified <see
              cref="T:System.Web.SiteMapNodeCollection" />
 
@@ -678,8 +806,12 @@
 
             
 
+            
+
              collection to the <see
              cref="P:System.Collections.CollectionBase.InnerList" />
+
+            
 
             
 
@@ -717,8 +849,12 @@
 
             
 
+            
+
              object to a read-only or fixed-size <see
              cref="T:System.Web.SiteMapNodeCollection" />
+
+            
 
             
 
@@ -731,8 +867,12 @@
 
             
 
+            
+
              is read-only by checking the <see
              cref="P:System.Web.SiteMapNodeCollection.IsReadOnly" />
+
+            
 
             
 
@@ -751,6 +891,8 @@
 
             
 
+            
+
              object to the  collection.</para
           >
         </summary>
@@ -764,8 +906,12 @@
 
             
 
+            
+
              where the <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -781,6 +927,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SiteMapNode" />
 
@@ -788,8 +936,12 @@
 
           
 
+          
+
            to add to the <see
            cref="T:System.Web.SiteMapNodeCollection" />
+
+          
 
           
 
@@ -826,8 +978,12 @@
 
             
 
+            
+
              method can contain null values; however, this leads to unexpected exceptions when the <see
              cref="T:System.Web.SiteMapNodeCollection" />
+
+            
 
             
 
@@ -843,8 +999,12 @@
 
             
 
+            
+
              object to a read-only or fixed-size <see
              cref="T:System.Web.SiteMapNodeCollection" />
+
+            
 
             
 
@@ -857,8 +1017,12 @@
 
             
 
+            
+
              is read-only by checking the <see
              cref="P:System.Web.SiteMapNodeCollection.IsReadOnly" />
+
+            
 
             
 
@@ -877,11 +1041,15 @@
 
             
 
+            
+
              to the collection.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -894,8 +1062,12 @@
 
           
 
+          
+
            to add to the current <see
            cref="T:System.Web.SiteMapNodeCollection" />
+
+          
 
           
 
@@ -932,8 +1104,12 @@
 
             
 
+            
+
              collection that is passed to the <see
              cref="M:System.Web.SiteMapNodeCollection.AddRange(System.Web.SiteMapNodeCollection)" />
+
+            
 
             
 
@@ -946,8 +1122,12 @@
 
             
 
+            
+
              objects; however, this leads to unexpected exceptions when the <see
              cref="T:System.Web.SiteMapNodeCollection" />
+
+            
 
             
 
@@ -963,8 +1143,12 @@
 
             
 
+            
+
              object to a read-only or fixed-size <see
              cref="T:System.Web.SiteMapNodeCollection" />
+
+            
 
             
 
@@ -977,8 +1161,12 @@
 
             
 
+            
+
              is read-only by checking the <see
              cref="P:System.Web.SiteMapNodeCollection.IsReadOnly" />
+
+            
 
             
 
@@ -997,11 +1185,15 @@
 
             
 
+            
+
              to the current collection.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1014,6 +1206,8 @@
 
           
 
+          
+
            that contains the <see
            cref="T:System.Web.SiteMapNode" />
 
@@ -1021,8 +1215,12 @@
 
           
 
+          
+
            objects to add to the current <see
            cref="T:System.Web.SiteMapNodeCollection" />
+
+          
 
           
 
@@ -1054,8 +1252,12 @@
 
             
 
+            
+
              collection is read-only by checking the <see
              cref="P:System.Web.SiteMapNodeCollection.IsReadOnly" />
+
+            
 
             
 
@@ -1071,6 +1273,8 @@
 
             
 
+            
+
             , use the <see
              cref="M:System.Web.SiteMapNodeCollection.Remove(System.Web.SiteMapNode)" />
 
@@ -1078,8 +1282,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Web.SiteMapNodeCollection.RemoveAt(System.Int32)" />
+
+            
 
             
 
@@ -1121,8 +1329,12 @@
 
             
 
+            
+
              method determines equality by calling the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -1141,6 +1353,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1154,8 +1368,12 @@
 
             
 
+            
+
              contains the specified <see
              cref="T:System.Web.SiteMapNode" />
+
+            
 
             
 
@@ -1171,6 +1389,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SiteMapNode" />
 
@@ -1178,8 +1398,12 @@
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Web.SiteMapNodeCollection" />
+
+          
 
           
 
@@ -1217,8 +1441,12 @@
 
             
 
+            
+
              method delegates to the <see
              cref="P:System.Collections.CollectionBase.List" />
+
+            
 
             
 
@@ -1238,8 +1466,12 @@
 
           
 
+          
+
           The one-dimensional array that must have zero-based indexing and is the destination of the elements copied from the <see
            cref="T:System.Web.SiteMapNodeCollection" />
+
+          
 
           
 
@@ -1254,8 +1486,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -1313,6 +1549,8 @@
 
             
 
+            
+
              object that is associated with the nodes in the current collection.</para
           >
         </summary>
@@ -1326,6 +1564,8 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Web.SiteMapNode" />
 
@@ -1333,8 +1573,12 @@
 
             
 
+            
+
              objects in the current <see
              cref="T:System.Web.SiteMapNodeCollection" />
+
+            
 
             
 
@@ -1350,8 +1594,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.SiteMapDataSource" />
+
+          
 
           
 
@@ -1361,6 +1609,8 @@
         >
         <param name="viewName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1400,6 +1650,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -1431,6 +1683,8 @@
 
             
 
+            
+
              object that is associated with the nodes in the current collection.</para
           >
         </summary>
@@ -1444,6 +1698,8 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Web.SiteMapNode" />
 
@@ -1451,8 +1707,12 @@
 
             
 
+            
+
              objects in the current <see
              cref="T:System.Web.SiteMapNodeCollection" />
+
+            
 
             
 
@@ -1495,8 +1755,12 @@
 
             
 
+            
+
              that represents the object passed to the <see
              cref="M:System.Web.SiteMapNodeCollection.GetHierarchyData(System.Object)" />
+
+            
 
             
 
@@ -1512,8 +1776,12 @@
 
           
 
+          
+
           The object for which to return an <see
            cref="T:System.Web.UI.IHierarchyData" />
+
+          
 
           
 
@@ -1550,8 +1818,12 @@
 
             
 
+            
+
              method determines equality by calling the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -1570,6 +1842,8 @@
 
             
 
+            
+
              object, and then returns the zero-based index of the first occurrence within the entire collection.</para
           >
         </summary>
@@ -1583,8 +1857,12 @@
 
             
 
+            
+
              within the entire <see
              cref="T:System.Web.SiteMapNodeCollection" />
+
+            
 
             
 
@@ -1600,6 +1878,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SiteMapNode" />
 
@@ -1607,8 +1887,12 @@
 
           
 
+          
+
            to locate in the <see
            cref="T:System.Web.SiteMapNodeCollection" />
+
+          
 
           
 
@@ -1646,8 +1930,12 @@
 
             
 
+            
+
              collection is read-only by checking the <see
              cref="P:System.Web.SiteMapNodeCollection.IsReadOnly" />
+
+            
 
             
 
@@ -1666,6 +1954,8 @@
 
             
 
+            
+
              object into the collection at the specified index.</para
           >
         </summary>
@@ -1676,8 +1966,12 @@
 
           
 
+          
+
           The zero-based index at which the <see
            cref="T:System.Web.SiteMapNode" />
+
+          
 
           
 
@@ -1692,8 +1986,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SiteMapNode" />
+
+          
 
           
 
@@ -1809,8 +2107,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SiteMapNode" />
+
+          
 
           
 
@@ -1847,8 +2149,12 @@
 
             
 
+            
+
              collection is read-only by checking the <see
              cref="P:System.Web.SiteMapNodeCollection.IsReadOnly" />
+
+            
 
             
 
@@ -1861,8 +2167,12 @@
 
             
 
+            
+
              property also returns true when a <see
              cref="T:System.Web.SiteMapNodeCollection" />
+
+            
 
             
 
@@ -1881,6 +2191,8 @@
 
             
 
+            
+
              collection.</para
           >
         </summary>
@@ -1894,6 +2206,8 @@
 
             
 
+            
+
              with the same <see
              cref="T:System.Web.SiteMapNode" />
 
@@ -1901,8 +2215,12 @@
 
             
 
+            
+
              elements and structure as the original <see
              cref="T:System.Web.SiteMapNodeCollection" />
+
+            
 
             
 
@@ -1918,8 +2236,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.SiteMapNodeCollection" />
+
+          
 
           
 
@@ -1932,8 +2254,12 @@
 
           
 
+          
+
            objects to add to the read-only <see
            cref="T:System.Web.SiteMapNodeCollection" />
+
+          
 
           
 
@@ -1970,8 +2296,12 @@
 
             
 
+            
+
              collection is read-only by checking the <see
              cref="P:System.Web.SiteMapNodeCollection.IsReadOnly" />
+
+            
 
             
 
@@ -1987,8 +2317,12 @@
 
             
 
+            
+
              method determines equality by calling the <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -2007,11 +2341,15 @@
 
             
 
+            
+
              object from the collection.</para
           >
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2024,8 +2362,12 @@
 
           
 
+          
+
            to remove from the <see
            cref="T:System.Web.SiteMapNodeCollection" />
+
+          
 
           
 
@@ -2059,8 +2401,12 @@
 
             
 
+            
+
              collection is read-only by checking the <see
              cref="P:System.Web.SiteMapNodeCollection.IsReadOnly" />
+
+            
 
             
 
@@ -2076,6 +2422,8 @@
 
             
 
+            
+
              by specifying a <see
              cref="T:System.Web.SiteMapNode" />
 
@@ -2083,8 +2431,12 @@
 
             
 
+            
+
              object to remove, use the <see
              cref="M:System.Web.SiteMapNodeCollection.Remove(System.Web.SiteMapNode)" />
+
+            
 
             
 
@@ -2103,11 +2455,15 @@
 
             
 
+            
+
              object at the specified index of the  collection.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2139,8 +2495,12 @@
 
             
 
+            
+
              collection is intrinsically not a thread safe procedure. Even when a <see
              cref="T:System.Web.SiteMapNodeCollection" />
+
+            
 
             
 
@@ -2153,8 +2513,12 @@
 
             
 
+            
+
             , which causes the enumerator to throw an exception. To guarantee thread safety during enumeration, you can either lock the <see
              cref="T:System.Web.SiteMapNodeCollection" />
+
+            
 
             
 
@@ -2197,6 +2561,8 @@
 
             
 
+            
+
              interface to an array, starting at a particular array index. This class cannot be inherited.</para
           >
         </summary>
@@ -2207,8 +2573,12 @@
 
           
 
+          
+
           A one-dimensional array that must have zero-based indexing and is the destination of the elements copied from the <see
            cref="T:System.Collections.CollectionBase" />
+
+          
 
           
 
@@ -2223,8 +2593,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -2251,6 +2625,8 @@
           <para
             >Gets the number of elements that are contained in the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -2286,6 +2662,8 @@
 
             
 
+            
+
              interface is synchronized (thread safe). This class cannot be inherited.</para
           >
         </summary>
@@ -2311,6 +2689,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -2346,6 +2726,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2359,8 +2741,12 @@
 
             
 
+            
+
              that can be used to iterate through the <see
              cref="T:System.Web.SiteMapNodeCollection" />
+
+            
 
             
 
@@ -2395,8 +2781,12 @@
 
             
 
+            
+
              interface. For a description of this member, see <see
              cref="M:System.Collections.IList.Add(System.Object)" />
+
+            
 
             
 
@@ -2416,8 +2806,12 @@
 
           
 
+          
+
           The object to add to the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -2449,8 +2843,12 @@
 
             
 
+            
+
              interface. For a description of this member, see <see
              cref="M:System.Collections.IList.Clear" />
+
+            
 
             
 
@@ -2485,6 +2883,8 @@
 
             
 
+            
+
              interface contains the specified Boolean value.</para
           >
         </summary>
@@ -2493,6 +2893,8 @@
           <para
             >true if the object is found in the <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -2508,8 +2910,12 @@
 
           
 
+          
+
           The object to locate in the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -2543,8 +2949,12 @@
 
             
 
+            
+
              interface. For a description of this member, see <see
              cref="M:System.Collections.IList.IndexOf(System.Object)" />
+
+            
 
             
 
@@ -2564,8 +2974,12 @@
 
           
 
+          
+
           The object to locate in the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -2600,8 +3014,12 @@
 
             
 
+            
+
              interface at the specified index. For a description of this member, see <see
              cref="M:System.Collections.IList.Insert(System.Int32,System.Object)" />
+
+            
 
             
 
@@ -2617,6 +3035,8 @@
 
           
 
+          
+
           The zero-based <paramref
            name="index" />
 
@@ -2624,8 +3044,12 @@
 
           
 
+          
+
            at which to insert <paramref
            name="value" />
+
+          
 
           
 
@@ -2640,8 +3064,12 @@
 
           
 
+          
+
           The object to insert into the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -2673,6 +3101,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2695,6 +3125,8 @@
           <para
             >Gets a Boolean value indicating whether the collection is read-only. For a description of this member, see <see
              cref="P:System.Collections.IList.IsReadOnly" />
+
+            
 
             
 
@@ -2751,8 +3183,12 @@
 
             
 
+            
+
              interface. For a description of this member, see <see
              cref="M:System.Collections.IList.Remove(System.Object)" />
+
+            
 
             
 
@@ -2768,8 +3204,12 @@
 
           
 
+          
+
           The object to remove from the <see
            cref="T:System.Collections.IList" />
+
+          
 
           
 
@@ -2803,8 +3243,12 @@
 
             
 
+            
+
              item at the specified index. For a description of this member, see <see
              cref="M:System.Collections.IList.RemoveAt(System.Int32)" />
+
+            
 
             
 
@@ -2815,6 +3259,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2851,6 +3297,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2864,8 +3312,12 @@
 
             
 
+            
+
              that represents the object passed to the <see
              cref="M:System.Web.SiteMapNodeCollection.System.Web.UI.IHierarchicalEnumerable.GetHierarchyData(System.Object)" />
+
+            
 
             
 
@@ -2881,8 +3333,12 @@
 
           
 
+          
+
           The object for which to return an <see
            cref="T:System.Web.UI.IHierarchyData" />
+
+          
 
           
 

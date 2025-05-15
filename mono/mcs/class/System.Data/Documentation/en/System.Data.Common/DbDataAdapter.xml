@@ -35,8 +35,12 @@
 
         
 
+        
+
          class inherits from the <see
          cref="T:System.Data.Common.DataAdapter" />
+
+        
 
         
 
@@ -52,6 +56,8 @@
 
         
 
+        
+
          interface directly, but creates an instance of a class that inherits <see
          cref="T:System.Data.IDbDataAdapter" />
 
@@ -59,8 +65,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Data.Common.DbDataAdapter" />
+
+        
 
         
 
@@ -76,8 +86,12 @@
 
         
 
+        
+
          must implement the inherited members, and typically define additional members to add provider-specific functionality. For example, the <see
          cref="T:System.Data.Common.DbDataAdapter" />
+
+        
 
         
 
@@ -90,8 +104,12 @@
 
         
 
+        
+
          property, and the <see
          cref="T:System.Data.Common.DbDataAdapter" />
+
+        
 
         
 
@@ -104,8 +122,12 @@
 
         
 
+        
+
          method. In turn, the <see
          cref="T:System.Data.OleDb.OleDbDataAdapter" />
+
+        
 
         
 
@@ -118,8 +140,12 @@
 
         
 
+        
+
          method, and also defines two additional overloads of <see
          cref="M:System.Data.OleDb.OleDbDataAdapter.Fill(System.Data.DataTable,System.Object)" />
+
+        
 
         
 
@@ -138,8 +164,12 @@
 
         
 
+        
+
          interface. Inheritors of <see
          cref="T:System.Data.Common.DbDataAdapter" />
+
+        
 
         
 
@@ -161,6 +191,8 @@
           <para
             >When you create an instance of <see
              cref="T:System.Data.Common.DbDataAdapter" />
+
+            
 
             
 
@@ -194,6 +226,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -208,6 +242,8 @@
                 <para
                   >A new <see
                    cref="T:System.Data.IDbCommand" />
+
+                  
 
                   
 
@@ -232,6 +268,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -246,6 +284,8 @@
                 <para
                   >A new <see
                    cref="T:System.Data.IDbCommand" />
+
+                  
 
                   
 
@@ -312,6 +352,8 @@
 
             
 
+            
+
              constructor is designed for use by a .NET Framework data provider when implementing a similar constructor for use in a clone implementation.</para
           >
         </remarks>
@@ -321,6 +363,8 @@
         </summary>
         <param name="adapter">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -356,6 +400,8 @@
 
             
 
+            
+
             , this method throws <see
              cref="T:System.NotSupportedException" />
 
@@ -363,8 +409,12 @@
 
             
 
+            
+
             . Classes that inherit from <see
              cref="T:System.Data.Common.DbDataAdapter" />
+
+            
 
             
 
@@ -383,6 +433,8 @@
 
             
 
+            
+
              to the current batch.</para
           >
         </summary>
@@ -391,6 +443,8 @@
           <para
             >The number of commands in the batch before adding the <see
              cref="T:System.Data.IDbCommand" />
+
+            
 
             
 
@@ -406,8 +460,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.IDbCommand" />
+
+          
 
           
 
@@ -438,6 +496,8 @@
 
             
 
+            
+
             , this method throws <see
              cref="T:System.NotSupportedException" />
 
@@ -445,8 +505,12 @@
 
             
 
+            
+
             . Classes that inherit from <see
              cref="T:System.Data.Common.DbDataAdapter" />
+
+            
 
             
 
@@ -460,6 +524,8 @@
           <para
             >Removes all <see
              cref="T:System.Data.IDbCommand" />
+
+            
 
             
 
@@ -497,6 +563,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -505,6 +573,8 @@
           <para
             >A new instance of the <see
              cref="T:System.Data.Common.RowUpdatedEventArgs" />
+
+            
 
             
 
@@ -520,8 +590,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataRow" />
+
+          
 
           
 
@@ -536,6 +610,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.IDbCommand" />
 
@@ -543,8 +619,12 @@
 
           
 
+          
+
            executed during the <see
            cref="M:System.Data.IDataAdapter.Update(System.Data.DataSet)" />
+
+          
 
           
 
@@ -559,6 +639,8 @@
 
           
 
+          
+
           Whether the command is an UPDATE, INSERT, DELETE, or SELECT statement. </param
         >
         <param name="tableMapping">
@@ -568,8 +650,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.Common.DataTableMapping" />
+
+          
 
           
 
@@ -610,6 +696,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -618,6 +706,8 @@
           <para
             >A new instance of the <see
              cref="T:System.Data.Common.RowUpdatingEventArgs" />
+
+            
 
             
 
@@ -633,8 +723,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataRow" />
+
+          
 
           
 
@@ -649,6 +743,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.IDbCommand" />
 
@@ -656,8 +752,12 @@
 
           
 
+          
+
            to execute during the <see
            cref="M:System.Data.IDataAdapter.Update(System.Data.DataSet)" />
+
+          
 
           
 
@@ -672,6 +772,8 @@
 
           
 
+          
+
           Whether the command is an UPDATE, INSERT, DELETE, or SELECT statement. </param
         >
         <param name="tableMapping">
@@ -681,8 +783,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.Common.DataTableMapping" />
+
+          
 
           
 
@@ -714,10 +820,14 @@
 
             
 
+            
+
              object for table mappings.</para
           >
           <para>
             <see cref="F:System.Data.Common.DbDataAdapter.DefaultSourceTableName" />
+
+            
 
             
 
@@ -730,8 +840,12 @@
 
             
 
+            
+
             , but does not specify a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -745,6 +859,8 @@
           <para
             >The default name used by the <see
              cref="T:System.Data.Common.DataAdapter" />
+
+            
 
             
 
@@ -791,6 +907,8 @@
 
             
 
+            
+
             , if this property is not set and primary key information is present in the <see
              cref="T:System.Data.DataSet" />
 
@@ -798,8 +916,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Data.IDbDataAdapter.DeleteCommand" />
+
+            
 
             
 
@@ -835,11 +957,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -874,6 +1000,8 @@
 
             
 
+            
+
             , this method throws <see
              cref="T:System.NotSupportedException" />
 
@@ -881,8 +1009,12 @@
 
             
 
+            
+
             . Classes that inherit from <see
              cref="T:System.Data.Common.DbDataAdapter" />
+
+            
 
             
 
@@ -924,8 +1056,12 @@
 
             
 
+            
+
              method retrieves the data from the data source using a SELECT statement. The <see
              cref="T:System.Data.IDbConnection" />
+
+            
 
             
 
@@ -938,6 +1074,8 @@
 
             
 
+            
+
              is closed before <see
              cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
 
@@ -945,8 +1083,12 @@
 
             
 
+            
+
              is called, it is opened to retrieve data and then closed. If the connection is open before <see
              cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
+
+            
 
             
 
@@ -963,11 +1105,15 @@
 
             
 
+            
+
             , and no exception is raised.</para
           >
           <para
             >If the <see
              cref="T:System.Data.Common.DbDataAdapter" />
+
+            
 
             
 
@@ -980,8 +1126,12 @@
 
             
 
+            
+
             , it generates names for the subsequent columns using the pattern "columnname1", "columnname2", "columnname3", and so on. If the incoming data contains unnamed columns, they are placed in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -998,8 +1148,12 @@
 
             
 
+            
+
              returns multiple results, such as batch SQL statements, if one of the results contains an error, all subsequent results are skipped and are not added to the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1015,8 +1169,12 @@
 
             
 
+            
+
              calls to refresh the contents of the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1029,6 +1187,8 @@
               <para
                 >The SQL statement should match the one initially used to populate the <see
                  cref="T:System.Data.DataSet" />
+
+                
 
                 
 
@@ -1049,8 +1209,12 @@
 
             
 
+            
+
              that corresponds to the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1063,8 +1227,12 @@
 
             
 
+            
+
             , by specifying the <see
              cref="P:System.Data.DataTable.PrimaryKey" />
+
+            
 
             
 
@@ -1077,8 +1245,12 @@
 
             
 
+            
+
             , or by setting the <see
              cref="P:System.Data.Common.DataAdapter.MissingSchemaAction" />
+
+            
 
             
 
@@ -1094,8 +1266,12 @@
 
             
 
+            
+
              value for the resulting <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1105,6 +1281,8 @@
              type="text/html">
               <a href="2ea85959-e763-4669-8bd9-46a9dab894bd">Defining a Primary Key for a Table</a>
             </format>
+
+            
 
             
 
@@ -1121,6 +1299,8 @@
 
               
 
+              
+
                for the .NET Framework Data Provider for OLE DB retrieves schema information for only the first result. To retrieve schema information for multiple results, use <see
                cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
 
@@ -1128,8 +1308,12 @@
 
               
 
+              
+
                with the <see
                cref="T:System.Data.MissingSchemaAction" />
+
+              
 
               
 
@@ -1149,6 +1333,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1157,6 +1343,8 @@
           <para
             >The number of rows successfully added to or refreshed in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1172,8 +1360,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -1207,8 +1399,12 @@
 
             
 
+            
+
              method retrieves rows from the data source using the SELECT statement specified by an associated <see
              cref="P:System.Data.IDbDataAdapter.SelectCommand" />
+
+            
 
             
 
@@ -1221,8 +1417,12 @@
 
             
 
+            
+
              is called, it is opened to retrieve data, then closed. If the connection is open before <see
              cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
+
+            
 
             
 
@@ -1238,8 +1438,12 @@
 
             
 
+            
+
              operation then adds the rows to destination <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1252,8 +1456,12 @@
 
             
 
+            
+
             , creating the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1266,6 +1474,8 @@
 
             
 
+            
+
              objects, the <see
              cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
 
@@ -1273,8 +1483,12 @@
 
             
 
+            
+
              operation normally creates only column name metadata. However, if the <see
              cref="P:System.Data.IDataAdapter.MissingSchemaAction" />
+
+            
 
             
 
@@ -1290,8 +1504,12 @@
 
             
 
+            
+
              encounters duplicate columns while populating a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1304,8 +1522,12 @@
 
             
 
+            
+
              according to the pattern "Column1", "Column2", and so on. When multiple result sets are added to the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1321,8 +1543,12 @@
 
             
 
+            
+
              that takes <paramref
              name="DataTable" />
+
+            
 
             
 
@@ -1335,8 +1561,12 @@
 
             
 
+            
+
              that takes <paramref
              name="DataSet" />
+
+            
 
             
 
@@ -1352,8 +1582,12 @@
 
             
 
+            
+
              method supports scenarios where the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1366,8 +1600,12 @@
 
             
 
+            
+
              objects whose names differ only by case. In such situations, <see
              cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
+
+            
 
             
 
@@ -1388,8 +1626,12 @@
 
             
 
+            
+
              is called and the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1402,8 +1644,12 @@
 
             
 
+            
+
              whose name differs only by case, that <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1422,6 +1668,8 @@
 
             
 
+            
+
              method multiple times on the same <see
              cref="T:System.Data.DataTable" />
 
@@ -1429,8 +1677,12 @@
 
             
 
+            
+
             . If a primary key exists, incoming rows are merged with matching rows that already exist. If no primary key exists, incoming rows are appended to the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1446,8 +1698,12 @@
 
             
 
+            
+
              value for the resulting <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1457,6 +1713,8 @@
              type="text/html">
               <a href="2ea85959-e763-4669-8bd9-46a9dab894bd">Defining a Primary Key for a Table</a>
             </format>
+
+            
 
             
 
@@ -1473,8 +1731,12 @@
 
               
 
+              
+
                and <see
                cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
+
+              
 
               
 
@@ -1494,8 +1756,12 @@
 
             
 
+            
+
              to match those in the data source using the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1514,6 +1780,8 @@
 
             
 
+            
+
             . This does not include rows affected by statements that do not return rows.</para
           >
         </returns>
@@ -1524,8 +1792,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -1563,8 +1835,12 @@
 
             
 
+            
+
              method retrieves the data from the data source using a SELECT statement. The <see
              cref="T:System.Data.IDbConnection" />
+
+            
 
             
 
@@ -1577,6 +1853,8 @@
 
             
 
+            
+
              is closed before <see
              cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
 
@@ -1584,8 +1862,12 @@
 
             
 
+            
+
              is called, it is opened to retrieve data, then closed. If the connection is open before <see
              cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
+
+            
 
             
 
@@ -1601,11 +1883,15 @@
 
             
 
+            
+
             , and no exception is raised.</para
           >
           <para
             >If the <see
              cref="T:System.Data.Common.DbDataAdapter" />
+
+            
 
             
 
@@ -1618,8 +1904,12 @@
 
             
 
+            
+
             , it will generate names for the subsequent columns, using the pattern "columnname1", "columnname2", "columnname3", and so on. If the incoming data contains unnamed columns, they are placed in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1636,8 +1926,12 @@
 
             
 
+            
+
              method supports scenarios where the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1650,8 +1944,12 @@
 
             
 
+            
+
              objects whose names differ only by case. In such situations, <see
              cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
+
+            
 
             
 
@@ -1672,8 +1970,12 @@
 
             
 
+            
+
              is called and the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1686,8 +1988,12 @@
 
             
 
+            
+
              whose name differs only by case, that <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1707,6 +2013,8 @@
 
             
 
+            
+
              returns multiple results, such as a batch SQL statement, be aware of the following: </para
           >
           <list type="bullet">
@@ -1714,6 +2022,8 @@
               <para
                 >If one of the results contains an error, all subsequent results are skipped and not added to the <see
                  cref="T:System.Data.DataSet" />
+
+                
 
                 
 
@@ -1731,8 +2041,12 @@
 
             
 
+            
+
              calls to refresh the contents of the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -1750,6 +2064,8 @@
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -1762,8 +2078,12 @@
 
                 
 
+                
+
                  that corresponds to the <see
                  cref="T:System.Data.DataSet" />
+
+                
 
                 
 
@@ -1776,8 +2096,12 @@
 
                 
 
+                
+
                 , by specifying the <see
                  cref="P:System.Data.DataTable.PrimaryKey" />
+
+                
 
                 
 
@@ -1790,8 +2114,12 @@
 
                 
 
+                
+
                 , or by setting the <see
                  cref="P:System.Data.Common.DataAdapter.MissingSchemaAction" />
+
+                
 
                 
 
@@ -1809,8 +2137,12 @@
 
             
 
+            
+
              value for the resulting <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1820,6 +2152,8 @@
              type="text/html">
               <a href="2ea85959-e763-4669-8bd9-46a9dab894bd"> Defining a Primary Key for a Table</a>
             </format>
+
+            
 
             
 
@@ -1836,6 +2170,8 @@
 
               
 
+              
+
                for the .NET Framework Data Provider for OLE DB retrieves schema information for only the first result. To retrieve schema information for multiple results, use <see
                cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
 
@@ -1843,8 +2179,12 @@
 
               
 
+              
+
                with the <see
                cref="T:System.Data.MissingSchemaAction" />
+
+              
 
               
 
@@ -1864,6 +2204,8 @@
 
             
 
+            
+
              to match those in the data source using the <see
              cref="T:System.Data.DataSet" />
 
@@ -1871,8 +2213,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -1891,11 +2237,15 @@
 
             
 
+            
+
             . This does not include rows affected by statements that do not return rows.</para
           >
         </returns>
         <param name="dataSet">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1908,10 +2258,14 @@
 
           
 
+          
+
            to fill with records and, if necessary, schema. </param
         >
         <param name="srcTable">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1974,8 +2328,12 @@
 
             
 
+            
+
              method retrieves rows from the data source using the SELECT statement specified by an associated <see
              cref="P:System.Data.IDbDataAdapter.SelectCommand" />
+
+            
 
             
 
@@ -1988,8 +2346,12 @@
 
             
 
+            
+
              is called, it is opened to retrieve data and then closed. If the connection is open before <see
              cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
+
+            
 
             
 
@@ -2005,8 +2367,12 @@
 
             
 
+            
+
              operation then adds the rows to the specified destination <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -2019,8 +2385,12 @@
 
             
 
+            
+
             , creating the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -2033,6 +2403,8 @@
 
             
 
+            
+
              object, the <see
              cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
 
@@ -2040,8 +2412,12 @@
 
             
 
+            
+
              operation normally creates only column name metadata. However, if the <see
              cref="P:System.Data.IDataAdapter.MissingSchemaAction" />
+
+            
 
             
 
@@ -2057,6 +2433,8 @@
 
             
 
+            
+
              object encounters duplicate columns while populating a <see
              cref="T:System.Data.DataTable" />
 
@@ -2064,8 +2442,12 @@
 
             
 
+            
+
             , it will generate names for the subsequent columns, using the pattern "columnname1", "columnname2", "columnname3", and so on. If the incoming data contains unnamed columns, they are placed in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2081,8 +2463,12 @@
 
             
 
+            
+
              that takes <paramref
              name="DataTable" />
+
+            
 
             
 
@@ -2095,8 +2481,12 @@
 
             
 
+            
+
              that takes <paramref
              name="DataSet" />
+
+            
 
             
 
@@ -2112,6 +2502,8 @@
 
             
 
+            
+
              method multiple times on the same <see
              cref="T:System.Data.DataTable" />
 
@@ -2119,8 +2511,12 @@
 
             
 
+            
+
             . If a primary key exists, incoming rows are merged with matching rows that already exist. If no primary key exists, incoming rows are appended to the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -2136,8 +2532,12 @@
 
             
 
+            
+
              value for the resulting <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -2147,6 +2547,8 @@
              type="text/html">
               <a href="2ea85959-e763-4669-8bd9-46a9dab894bd">Defining a Primary Key for a Table</a>
             </format>
+
+            
 
             
 
@@ -2163,6 +2565,8 @@
 
               
 
+              
+
                for the .NET Framework Data Provider for OLE DB retrieves schema information for only the first result. To retrieve schema information for multiple results, use <see
                cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
 
@@ -2170,8 +2574,12 @@
 
               
 
+              
+
                with the <see
                cref="T:System.Data.MissingSchemaAction" />
+
+              
 
               
 
@@ -2191,8 +2599,12 @@
 
             
 
+            
+
              to match those in the data source using the specified <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -2205,8 +2617,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Data.CommandBehavior" />
+
+            
 
             
 
@@ -2225,6 +2641,8 @@
 
             
 
+            
+
             . This does not include rows affected by statements that do not return rows.</para
           >
         </returns>
@@ -2235,8 +2653,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -2251,6 +2673,8 @@
 
           
 
+          
+
           The SQL SELECT statement used to retrieve rows from the data source. </param
         >
         <param name="behavior">
@@ -2260,8 +2684,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.CommandBehavior" />
+
+          
 
           
 
@@ -2309,8 +2737,12 @@
 
             
 
+            
+
              method retrieves rows from the data source using the SELECT statement specified by an associated <see
              cref="P:System.Data.IDbDataAdapter.SelectCommand" />
+
+            
 
             
 
@@ -2323,8 +2755,12 @@
 
             
 
+            
+
              is called, it is opened to retrieve data, and then it is closed. If the connection is open before <see
              cref="M:System.Data.Common.DataAdapter.Fill(System.Data.DataSet)" />
+
+            
 
             
 
@@ -2340,8 +2776,12 @@
 
             
 
+            
+
              operation then adds the rows to destination <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -2354,8 +2794,12 @@
 
             
 
+            
+
             , creating the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -2368,6 +2812,8 @@
 
             
 
+            
+
              objects, the <see
              cref="M:System.Data.Common.DataAdapter.Fill(System.Data.DataSet)" />
 
@@ -2375,8 +2821,12 @@
 
             
 
+            
+
              operation normally creates only column name metadata. However, if the <see
              cref="P:System.Data.IDataAdapter.MissingSchemaAction" />
+
+            
 
             
 
@@ -2392,8 +2842,12 @@
 
             
 
+            
+
              value for the resulting <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -2403,6 +2857,8 @@
              type="text/html">
               <a href="2EA85959-E763-4669-8BD9-46A9DAB894BD">Defining a Primary Key for a Table</a>
             </format>
+
+            
 
             
 
@@ -2418,6 +2874,8 @@
 
             
 
+            
+
             , it generates names for the subsequent columns, using the pattern "columnname1", "columnname2", "columnname3", and so on. If the incoming data contains unnamed columns, they are placed in the <see
              cref="T:System.Data.DataSet" />
 
@@ -2425,8 +2883,12 @@
 
             
 
+            
+
              according to the pattern "Column1", "Column2", and so on. When multiple result sets are added to the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2442,8 +2904,12 @@
 
             
 
+            
+
              returns multiple results, such as a batch SQL statements, if one of the results contains an error, all subsequent results are skipped and not added to the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2459,6 +2925,8 @@
 
             
 
+            
+
              method multiple times on the same <see
              cref="T:System.Data.DataTable" />
 
@@ -2466,8 +2934,12 @@
 
             
 
+            
+
             . If a primary key exists, incoming rows are merged with matching rows that already exist. If no primary key exists, incoming rows are appended to the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -2484,6 +2956,8 @@
 
               
 
+              
+
                for the .NET Framework Data Provider for OLE DB retrieves schema information for only the first result. To retrieve schema information for multiple results, use <see
                cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
 
@@ -2491,8 +2965,12 @@
 
               
 
+              
+
                with the <see
                cref="T:System.Data.MissingSchemaAction" />
+
+              
 
               
 
@@ -2512,6 +2990,8 @@
 
             
 
+            
+
              to match those in the data source starting at the specified record and retrieving up to the specified maximum number of records.</para
           >
         </summary>
@@ -2520,6 +3000,8 @@
           <para
             >The number of rows successfully added to or refreshed in the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -2535,10 +3017,14 @@
 
           
 
+          
+
           The zero-based record number to start with. </param
         >
         <param name="maxRecords">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2553,8 +3039,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -2590,8 +3080,12 @@
 
             
 
+            
+
              value of 0 gets all records found after the start record. If <paramref
              name="maxRecords" />
+
+            
 
             
 
@@ -2607,8 +3101,12 @@
 
             
 
+            
+
              only applies <paramref
              name="maxRecords" />
+
+            
 
             
 
@@ -2624,8 +3122,12 @@
 
             
 
+            
+
              method retrieves the data from the data source using a SELECT statement. The <see
              cref="T:System.Data.IDbConnection" />
+
+            
 
             
 
@@ -2638,6 +3140,8 @@
 
             
 
+            
+
              is closed before <see
              cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
 
@@ -2645,8 +3149,12 @@
 
             
 
+            
+
              is called, it is opened to retrieve data and then closed. If the connection is open before <see
              cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
+
+            
 
             
 
@@ -2662,11 +3170,15 @@
 
             
 
+            
+
             , but no exception is raised.</para
           >
           <para
             >If the <see
              cref="T:System.Data.Common.DbDataAdapter" />
+
+            
 
             
 
@@ -2679,8 +3191,12 @@
 
             
 
+            
+
             , it will generate names for the subsequent columns, using the pattern "columnname1", "columnname2", "columnname3", and so on. If the incoming data contains unnamed columns, they are placed in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2697,8 +3213,12 @@
 
             
 
+            
+
              method supports scenarios where the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2711,8 +3231,12 @@
 
             
 
+            
+
              objects whose names differ only by case. In such situations, <see
              cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
+
+            
 
             
 
@@ -2733,8 +3257,12 @@ adapter.Fill(dataset, "Aaa"); // Adds a new table called "Aaa".</code>
 
             
 
+            
+
              is called and the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2747,8 +3275,12 @@ adapter.Fill(dataset, "Aaa"); // Adds a new table called "Aaa".</code>
 
             
 
+            
+
              whose name differs only by case, that <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -2768,6 +3300,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              returns multiple results, such as batch SQL statements, be aware of the following: </para
           >
           <list type="bullet">
@@ -2780,8 +3314,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                  only applies to the first result. The same is true for rows containing chaptered results (.NET Framework Data Provider for OLE DB only). The top level result is limited by <paramref
                  name="maxRecords" />
+
+                
 
                 
 
@@ -2799,6 +3337,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -2811,8 +3351,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              calls to refresh the contents of the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2825,6 +3369,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
               <para
                 >The SQL statement should match the one initially used to populate the <see
                  cref="T:System.Data.DataSet" />
+
+                
 
                 
 
@@ -2845,8 +3391,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              that corresponds to the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -2859,8 +3409,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             , by specifying the <see
              cref="P:System.Data.DataTable.PrimaryKey" />
+
+            
 
             
 
@@ -2873,8 +3427,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             , or by setting the <see
              cref="P:System.Data.Common.DataAdapter.MissingSchemaAction" />
+
+            
 
             
 
@@ -2890,8 +3448,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              value for the resulting <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -2901,6 +3463,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
              type="text/html">
               <a href="2ea85959-e763-4669-8bd9-46a9dab894bd">Defining a Primary Key for a Table</a>
             </format>
+
+            
 
             
 
@@ -2917,8 +3481,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
               
 
+              
+
                for the .NET Framework Data Provider for OLE DB retrieves schema information for only the first result. To retrieve schema information for multiple results, use <see
                cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
+
+              
 
               
 
@@ -2931,6 +3499,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
               
 
+              
+
                set to AddWithKey.</para
             >
           </block>
@@ -2938,6 +3508,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
             <para
               >The DataSet will not contain more than the number of records indicated by <paramref
                name="maxRecords" />
+
+              
 
               
 
@@ -2957,6 +3529,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              to match those in the data source using the <see
              cref="T:System.Data.DataSet" />
 
@@ -2964,8 +3538,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              and <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -2984,6 +3562,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             . This does not include rows affected by statements that do not return rows.</para
           >
         </returns>
@@ -2994,8 +3574,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
           A <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -3010,6 +3594,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
           The zero-based record number to start with. </param
         >
         <param name="maxRecords">
@@ -3019,10 +3605,14 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
           The maximum number of records to retrieve. </param
         >
         <param name="srcTable">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3096,8 +3686,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              value of 0 gets all records found after the start record. If <paramref
              name="maxRecords" />
+
+            
 
             
 
@@ -3113,8 +3707,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              method retrieves the data from the data source using a SELECT statement. The <see
              cref="T:System.Data.IDbConnection" />
+
+            
 
             
 
@@ -3127,6 +3725,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              is closed before <see
              cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
 
@@ -3134,8 +3734,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              is called, it is opened to retrieve data, then closed. If the connection is open before <see
              cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
+
+            
 
             
 
@@ -3151,11 +3755,15 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             , but no exception is raised.</para
           >
           <para
             >If the <see
              cref="T:System.Data.Common.DbDataAdapter" />
+
+            
 
             
 
@@ -3168,8 +3776,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             , it will generate names for the subsequent columns, using the pattern "columnname1", "columnname2", "columnname3", and so on. If the incoming data contains unnamed columns, they are placed in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -3186,8 +3798,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              method supports scenarios where the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -3200,8 +3816,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              objects whose names differ only by case. In such situations, <see
              cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
+
+            
 
             
 
@@ -3222,8 +3842,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              is called and the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -3236,8 +3860,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              whose name differs only by case, that <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -3257,6 +3885,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              objects returns multiple results, such as a batch SQL statement, be aware of the following: </para
           >
           <list type="bullet">
@@ -3269,8 +3899,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                  only applies to the first result. The same is true for rows containing chaptered results (.NET Framework Data Provider for OLE DB only). The top level result is limited by <paramref
                  name="maxRecords" />
+
+                
 
                 
 
@@ -3292,6 +3926,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
               
 
+              
+
               . However, the entire resultset generated by the query is still returned from the server.</para
             >
           </block>
@@ -3306,6 +3942,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              to match those in the data source using the <see
              cref="T:System.Data.DataSet" />
 
@@ -3313,8 +3951,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              and <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -3334,8 +3976,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -3350,10 +3996,14 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
           The zero-based record number to start with.</param
         >
         <param name="maxRecords">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3368,6 +4018,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
           The <see
            cref="T:System.Data.IDbCommand" />
 
@@ -3375,8 +4027,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
            executed to fill the <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -3391,8 +4047,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.CommandBehavior" />
+
+          
 
           
 
@@ -3430,8 +4090,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              method retrieves rows from the data source using the SELECT statement specified by an associated <see
              cref="P:System.Data.IDbDataAdapter.SelectCommand" />
+
+            
 
             
 
@@ -3444,8 +4108,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              is called, it is opened to retrieve data, then closed. If the connection is open before <see
              cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
+
+            
 
             
 
@@ -3461,8 +4129,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              operation then adds the rows to destination <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -3475,8 +4147,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             , creating the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -3489,6 +4165,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              objects, the <see
              cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
 
@@ -3496,8 +4174,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              operation normally creates only column name metadata. However, if the <see
              cref="P:System.Data.IDataAdapter.MissingSchemaAction" />
+
+            
 
             
 
@@ -3513,8 +4195,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              encounters duplicate columns while populating a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -3527,8 +4213,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              according to the pattern "Column1", "Column2", and so on. When multiple result sets are added to the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -3544,8 +4234,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              method supports scenarios where the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -3558,8 +4252,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              objects whose names differ only by case. In such situations, <see
              cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
+
+            
 
             
 
@@ -3580,8 +4278,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              is called and the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -3594,8 +4296,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              whose name differs only by case, that <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -3614,6 +4320,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              method multiple times on the same <see
              cref="T:System.Data.DataTable" />
 
@@ -3621,8 +4329,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             . If a primary key exists, incoming rows are merged with matching rows that already exist. If no primary key exists, incoming rows are appended to the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -3638,8 +4350,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              value for the resulting <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -3649,6 +4365,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
              type="text/html">
               <a href="2ea85959-e763-4669-8bd9-46a9dab894bd"> Defining a Primary Key for a Table</a>
             </format>
+
+            
 
             
 
@@ -3665,8 +4383,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
               
 
+              
+
                and <see
                cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
+
+              
 
               
 
@@ -3686,8 +4408,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              to match those in the data source using the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -3706,6 +4432,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             . This does not include rows affected by statements that do not return rows.</para
           >
         </returns>
@@ -3716,8 +4444,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
           A <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -3732,10 +4464,14 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
           The zero-based record number to start with. </param
         >
         <param name="maxRecords">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3750,10 +4486,14 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
           The name of the source table to use for table mapping. </param
         >
         <param name="command">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3768,8 +4508,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.CommandBehavior" />
+
+          
 
           
 
@@ -3851,11 +4595,15 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             .</para
           >
           <para
             >A <see
              cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
+
+            
 
             
 
@@ -3868,8 +4616,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              to the destination <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -3882,6 +4634,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              of the <see
              cref="T:System.Data.DataTable" />
 
@@ -3889,8 +4643,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             , and configures the following <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -3912,6 +4670,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                 . You must set <see
                  cref="P:System.Data.DataColumn.AutoIncrementStep" />
 
@@ -3919,8 +4679,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                  and <see
                  cref="P:System.Data.DataColumn.AutoIncrementSeed" />
+
+                
 
                 
 
@@ -3952,6 +4716,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              also configures the <see
              cref="P:System.Data.DataTable.PrimaryKey" />
 
@@ -3959,8 +4725,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              and <see
              cref="P:System.Data.DataTable.Constraints" />
+
+            
 
             
 
@@ -3978,8 +4748,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                 , they are used as the primary key columns for the <see
                  cref="T:System.Data.DataTable" />
+
+                
 
                 
 
@@ -3997,6 +4771,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                  is added to the <see
                  cref="T:System.Data.ConstraintCollection" />
 
@@ -4004,8 +4780,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                 , but the <see
                  cref="P:System.Data.DataTable.PrimaryKey" />
+
+                
 
                 
 
@@ -4023,6 +4803,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -4030,6 +4812,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
           <para
             >Note that primary keys and unique constraints are added to the <see
              cref="T:System.Data.ConstraintCollection" />
+
+            
 
             
 
@@ -4045,6 +4829,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             .</para
           >
           <para
@@ -4055,8 +4841,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              to find and replace any rows whose key columns match. If this is not the desired behavior, use <see
              cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
+
+            
 
             
 
@@ -4072,8 +4862,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              encounters duplicate columns while populating a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -4086,8 +4880,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              according to the pattern "Column1", "Column2", and so on. When multiple result sets are added to the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4103,8 +4901,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              object associated with the select command must be valid, but it does not need to open. If the <see
              cref="T:System.Data.IDbConnection" />
+
+            
 
             
 
@@ -4117,8 +4919,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              is called, it is opened to retrieve data, then closed. If the connection is open before <see
              cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
+
+            
 
             
 
@@ -4135,8 +4941,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
               
 
+              
+
                for the .NET Framework Data Provider for OLE DB retrieves schema information for only the first result. To retrieve schema information for multiple results, use <see
                cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
+
+              
 
               
 
@@ -4149,12 +4959,16 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
               
 
+              
+
                set to AddWithKey.</para
             >
           </block>
           <para
             >When using <see
              cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
+
+            
 
             
 
@@ -4173,6 +4987,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              named "Table" to the specified <see
              cref="T:System.Data.DataSet" />
 
@@ -4180,8 +4996,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              and configures the schema to match that in the data source based on the specified <see
              cref="T:System.Data.SchemaType" />
+
+            
 
             
 
@@ -4200,8 +5020,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              objects that were added to the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4217,8 +5041,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
           A <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -4233,8 +5061,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.SchemaType" />
+
+          
 
           
 
@@ -4272,8 +5104,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              method retrieves the schema from the data source using the <see
              cref="P:System.Data.IDbDataAdapter.SelectCommand" />
+
+            
 
             
 
@@ -4286,6 +5122,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              must be valid, but it does not need to be open. If the connection is closed before <see
              cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
 
@@ -4293,8 +5131,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              is called, it is opened to retrieve data, then closed. If the connection is open before <see
              cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
+
+            
 
             
 
@@ -4310,8 +5152,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              operation returns a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -4324,6 +5170,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              of the <see
              cref="T:System.Data.DataTable" />
 
@@ -4331,8 +5179,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             , and configures the following <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -4354,6 +5206,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                 . You must set <see
                  cref="P:System.Data.DataColumn.AutoIncrementStep" />
 
@@ -4361,8 +5215,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                  and <see
                  cref="P:System.Data.DataColumn.AutoIncrementSeed" />
+
+                
 
                 
 
@@ -4394,6 +5252,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              also configures the <see
              cref="P:System.Data.DataTable.PrimaryKey" />
 
@@ -4401,8 +5261,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              and <see
              cref="P:System.Data.DataTable.Constraints" />
+
+            
 
             
 
@@ -4420,6 +5284,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                  has already been defined for the DataTable, or the DataTable contains data, the PrimaryKey property will not be set.</para
               >
             </item>
@@ -4427,6 +5293,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
               <para
                 >If one or more primary key columns are returned by the <see
                  cref="P:System.Data.IDbDataAdapter.SelectCommand" />
+
+                
 
                 
 
@@ -4444,8 +5312,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                  is added to the <see
                  cref="T:System.Data.ConstraintCollection" />
+
+                
 
                 
 
@@ -4466,11 +5338,15 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              according to the preceding rules, but other constraint types are not added. This process may require several round-trips to the server.</para
           >
           <para
             >If a unique clustered index is defined on a column or columns in a SQL Server table and the primary key constraint is defined on a separate set of columns, then the names of the columns in the clustered index will be returned. To return the name or names of the primary key columns, use a query hint with the SELECT statement that specifies the name of the primary key index. For more information about specifying query hints, see <see
              cref="http://msdn.microsoft.com/library/ms181714.aspx">Query Hint (Transact-SQL)</see>
+
+            
 
             
 
@@ -4486,8 +5362,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              encounters duplicate columns while populating a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -4500,8 +5380,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              according to the pattern "Column1", "Column2", and so on. When multiple result sets are added to the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4516,6 +5400,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              does not return any rows. Use the <see
              cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
 
@@ -4523,8 +5409,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              method to add rows to a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -4541,8 +5431,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
               
 
+              
+
                for the .NET Framework Data Provider for OLE DB retrieves schema information for only the first result. To retrieve schema information for multiple results, use <see
                cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
+
+              
 
               
 
@@ -4555,12 +5449,16 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
               
 
+              
+
                set to AddWithKey.</para
             >
           </block>
           <para
             >When using <see
              cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
+
+            
 
             
 
@@ -4579,8 +5477,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              based on the specified <see
              cref="T:System.Data.SchemaType" />
+
+            
 
             
 
@@ -4599,6 +5501,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              that contains schema information returned from the data source.</para
           >
         </returns>
@@ -4609,8 +5513,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -4625,8 +5533,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.SchemaType" />
+
+          
 
           
 
@@ -4665,11 +5577,15 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             .</para
           >
           <para
             >A <see
              cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
+
+            
 
             
 
@@ -4682,8 +5598,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              to the destination <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4696,6 +5616,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              of the <see
              cref="T:System.Data.DataTable" />
 
@@ -4703,8 +5625,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             , and configures the following <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -4726,6 +5652,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                 . You must set <see
                  cref="P:System.Data.DataColumn.AutoIncrementStep" />
 
@@ -4733,8 +5661,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                  and <see
                  cref="P:System.Data.DataColumn.AutoIncrementSeed" />
+
+                
 
                 
 
@@ -4766,6 +5698,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              also configures the <see
              cref="P:System.Data.DataTable.PrimaryKey" />
 
@@ -4773,8 +5707,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              and <see
              cref="P:System.Data.DataTable.Constraints" />
+
+            
 
             
 
@@ -4792,8 +5730,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                 , they are used as the primary key columns for the <see
                  cref="T:System.Data.DataTable" />
+
+                
 
                 
 
@@ -4811,6 +5753,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                  is added to the <see
                  cref="T:System.Data.ConstraintCollection" />
 
@@ -4818,8 +5762,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                 , but the <see
                  cref="P:System.Data.DataTable.PrimaryKey" />
+
+                
 
                 
 
@@ -4837,6 +5785,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -4844,6 +5794,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
           <para
             >Note that primary keys and unique constraints are added to the <see
              cref="T:System.Data.ConstraintCollection" />
+
+            
 
             
 
@@ -4859,6 +5811,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             .</para
           >
           <para
@@ -4869,8 +5823,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              to find and replace any rows whose key columns match. If this is not the desired behavior, use <see
              cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
+
+            
 
             
 
@@ -4886,8 +5844,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              encounters duplicate columns while populating a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -4900,8 +5862,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              according to the pattern "Column1", "Column2", and so on. When multiple result sets are added to the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4917,8 +5883,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              method supports scenarios where the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4931,8 +5901,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              objects whose names differ only by case. In such situations, <see
              cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
+
+            
 
             
 
@@ -4953,8 +5927,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              is called and the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -4967,8 +5945,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              whose name differs only by case, that <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -4987,8 +5969,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              object associated with the select command must be valid, but it does not need to open. If the <see
              cref="T:System.Data.IDbConnection" />
+
+            
 
             
 
@@ -5001,8 +5987,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              is called, it is opened to retrieve data, then closed. If the connection is open before <see
              cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
+
+            
 
             
 
@@ -5019,8 +6009,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
               
 
+              
+
                for the .NET Framework Data Provider for OLE DB retrieves schema information for only the first result. To retrieve schema information for multiple results, use <see
                cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
+
+              
 
               
 
@@ -5033,12 +6027,16 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
               
 
+              
+
                set to AddWithKey.</para
             >
           </block>
           <para
             >When using <see
              cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
+
+            
 
             
 
@@ -5057,8 +6055,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              to the specified <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5071,8 +6073,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              and <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -5091,8 +6097,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              objects that were added to the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5108,8 +6118,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
           A <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -5124,8 +6138,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.SchemaType" />
+
+          
 
           
 
@@ -5135,6 +6153,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
         >
         <param name="srcTable">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5174,8 +6194,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              method retrieves the schema from the data source using the <see
              cref="P:System.Data.IDbDataAdapter.SelectCommand" />
+
+            
 
             
 
@@ -5188,6 +6212,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              must be valid, but it does not need to be open. If the connection is closed before <see
              cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
 
@@ -5195,8 +6221,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              is called, it is opened to retrieve data, then closed. If the connection is open before <see
              cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
+
+            
 
             
 
@@ -5212,8 +6242,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              operation adds a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -5226,8 +6260,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             . It then adds columns to the <see
              cref="T:System.Data.DataColumnCollection" />
+
+            
 
             
 
@@ -5240,8 +6278,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             , and configures the following <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -5263,6 +6305,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                 . You must set <see
                  cref="P:System.Data.DataColumn.AutoIncrementStep" />
 
@@ -5270,8 +6314,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                  and <see
                  cref="P:System.Data.DataColumn.AutoIncrementSeed" />
+
+                
 
                 
 
@@ -5303,6 +6351,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              also configures the <see
              cref="P:System.Data.DataTable.PrimaryKey" />
 
@@ -5310,8 +6360,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              and <see
              cref="P:System.Data.DataTable.Constraints" />
+
+            
 
             
 
@@ -5329,8 +6383,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                 , they are used as the primary key columns for the <see
                  cref="T:System.Data.DataTable" />
+
+                
 
                 
 
@@ -5348,6 +6406,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                  is added to the <see
                  cref="T:System.Data.ConstraintCollection" />
 
@@ -5355,8 +6415,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                 , but the <see
                  cref="P:System.Data.DataTable.PrimaryKey" />
+
+                
 
                 
 
@@ -5374,6 +6438,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -5381,6 +6447,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
           <para
             >Note that primary keys and unique constraints are added to the <see
              cref="T:System.Data.ConstraintCollection" />
+
+            
 
             
 
@@ -5396,11 +6464,15 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             .</para
           >
           <para
             >If the <see
              cref="T:System.Data.IDataAdapter" />
+
+            
 
             
 
@@ -5413,6 +6485,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             , it generates names for the subsequent columns, using the pattern "columnname1", "columnname2", "columnname3", and so on. If the incoming data contains unnamed columns, they are placed in the <see
              cref="T:System.Data.DataSet" />
 
@@ -5420,8 +6494,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              according to the pattern "Column1", "Column2", and so on. When multiple result sets are added to the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5436,6 +6514,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              does not return any rows. Use the <see
              cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
 
@@ -5443,8 +6523,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              method to add rows to a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -5461,8 +6545,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
               
 
+              
+
                for the .NET Framework Data Provider for OLE DB retrieves schema information for only the first result. To retrieve schema information for multiple results, use <see
                cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
+
+              
 
               
 
@@ -5475,12 +6563,16 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
               
 
+              
+
                set to AddWithKey.</para
             >
           </block>
           <para
             >When using <see
              cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
+
+            
 
             
 
@@ -5499,6 +6591,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              based on the specified <see
              cref="T:System.Data.SchemaType" />
 
@@ -5506,8 +6600,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             , command string, and <see
              cref="T:System.Data.CommandBehavior" />
+
+            
 
             
 
@@ -5526,6 +6624,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              object that contains schema information returned from the data source.</para
           >
         </returns>
@@ -5536,8 +6636,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -5552,8 +6656,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.SchemaType" />
+
+          
 
           
 
@@ -5568,6 +6676,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
           The SQL SELECT statement used to retrieve rows from the data source. </param
         >
         <param name="behavior">
@@ -5577,8 +6687,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.CommandBehavior" />
+
+          
 
           
 
@@ -5619,8 +6733,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              method retrieves the schema from the data source using the <see
              cref="P:System.Data.IDbDataAdapter.SelectCommand" />
+
+            
 
             
 
@@ -5633,6 +6751,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              must be valid, but it does not need to be open. If the connection is closed before <see
              cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
 
@@ -5640,8 +6760,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              is called, it is opened to retrieve data, then closed. If the connection is open before <see
              cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
+
+            
 
             
 
@@ -5657,8 +6781,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              operation adds a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -5671,8 +6799,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             . It then adds columns to the <see
              cref="T:System.Data.DataColumnCollection" />
+
+            
 
             
 
@@ -5685,8 +6817,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             , and configures the following <see
              cref="T:System.Data.DataColumn" />
+
+            
 
             
 
@@ -5708,6 +6844,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                 . You must set <see
                  cref="P:System.Data.DataColumn.AutoIncrementStep" />
 
@@ -5715,8 +6853,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                  and <see
                  cref="P:System.Data.DataColumn.AutoIncrementSeed" />
+
+                
 
                 
 
@@ -5748,6 +6890,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              also configures the <see
              cref="P:System.Data.DataTable.PrimaryKey" />
 
@@ -5755,8 +6899,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              and <see
              cref="P:System.Data.DataTable.Constraints" />
+
+            
 
             
 
@@ -5774,8 +6922,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                 , they are used as the primary key columns for the <see
                  cref="T:System.Data.DataTable" />
+
+                
 
                 
 
@@ -5793,6 +6945,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                  is added to the <see
                  cref="T:System.Data.ConstraintCollection" />
 
@@ -5800,8 +6954,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                 , but the <see
                  cref="P:System.Data.DataTable.PrimaryKey" />
+
+                
 
                 
 
@@ -5819,6 +6977,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -5826,6 +6986,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
           <para
             >Note that primary keys and unique constraints are added to the <see
              cref="T:System.Data.ConstraintCollection" />
+
+            
 
             
 
@@ -5841,11 +7003,15 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             .</para
           >
           <para
             >If the <see
              cref="T:System.Data.IDataAdapter" />
+
+            
 
             
 
@@ -5858,6 +7024,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             , it generates names for the subsequent columns, using the pattern "columnname1", "columnname2", "columnname3", and so on. If the incoming data contains unnamed columns, they are placed in the <see
              cref="T:System.Data.DataSet" />
 
@@ -5865,8 +7033,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              according to the pattern "Column1", "Column2", and so on. When multiple result sets are added to the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5882,8 +7054,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              method supports scenarios where the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5896,8 +7072,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              objects whose names differ only by case. In such situations, <see
              cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
+
+            
 
             
 
@@ -5918,8 +7098,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              is called and the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -5932,8 +7116,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              whose name differs only by case, that <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -5951,6 +7139,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              does not return any rows. Use the <see
              cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
 
@@ -5958,8 +7148,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              method to add rows to a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -5976,8 +7170,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
               
 
+              
+
                for the .NET Framework Data Provider for OLE DB retrieves schema information for only the first result. To retrieve schema information for multiple results, use <see
                cref="M:System.Data.Common.DbDataAdapter.Fill(System.Data.DataSet)" />
+
+              
 
               
 
@@ -5990,12 +7188,16 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
               
 
+              
+
                set to AddWithKey.</para
             >
           </block>
           <para
             >When using <see
              cref="M:System.Data.Common.DbDataAdapter.FillSchema(System.Data.DataTable,System.Data.SchemaType)" />
+
+            
 
             
 
@@ -6014,6 +7216,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              to the specified <see
              cref="T:System.Data.DataSet" />
 
@@ -6021,8 +7225,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              and configures the schema to match that in the data source based on the specified <see
              cref="T:System.Data.SchemaType" />
+
+            
 
             
 
@@ -6041,6 +7249,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              objects that contain schema information returned from the data source.</para
           >
         </returns>
@@ -6051,8 +7261,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -6067,8 +7281,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.SchemaType" />
+
+          
 
           
 
@@ -6083,10 +7301,14 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
           The SQL SELECT statement used to retrieve rows from the data source. </param
         >
         <param name="srcTable">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6101,8 +7323,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
           One of the <see
            cref="T:System.Data.CommandBehavior" />
+
+          
 
           
 
@@ -6143,6 +7369,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             , this method throws <see
              cref="T:System.NotSupportedException" />
 
@@ -6150,8 +7378,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             . Classes that inherit from <see
              cref="T:System.Data.Common.DbDataAdapter" />
+
+            
 
             
 
@@ -6170,6 +7402,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              from one of the commands in the current batch.</para
           >
         </summary>
@@ -6178,6 +7412,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
           <para
             >The <see
              cref="T:System.Data.IDataParameter" />
+
+            
 
             
 
@@ -6193,10 +7429,14 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
           The index of the command to retrieve the parameter from.</param
         >
         <param name="parameterIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6258,6 +7498,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              objects that contains the parameters set by the user.</para
           >
         </returns>
@@ -6293,6 +7535,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             , this method throws <see
              cref="T:System.NotSupportedException" />
 
@@ -6300,8 +7544,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             . Classes that inherit from <see
              cref="T:System.Data.Common.DbDataAdapter" />
+
+            
 
             
 
@@ -6315,6 +7563,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
           <para
             >Initializes batching for the <see
              cref="T:System.Data.Common.DbDataAdapter" />
+
+            
 
             
 
@@ -6357,6 +7607,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             , if this property is not set and primary key information is present in the <see
              cref="T:System.Data.DataSet" />
 
@@ -6364,8 +7616,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             , the <see
              cref="P:System.Data.IDbDataAdapter.InsertCommand" />
+
+            
 
             
 
@@ -6426,6 +7682,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -6440,8 +7698,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
           A <see
            cref="T:System.Data.Common.RowUpdatedEventArgs" />
+
+          
 
           
 
@@ -6480,6 +7742,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -6494,8 +7758,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
           An <see
            cref="T:System.Data.Common.RowUpdatingEventArgs" />
+
+          
 
           
 
@@ -6562,8 +7830,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Data.IDbDataAdapter" />
+
+            
 
             
 
@@ -6574,6 +7846,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
           <para
             >For more information, see <see
              cref="P:System.Data.IDbDataAdapter.DeleteCommand" />
+
+            
 
             
 
@@ -6612,8 +7886,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Data.IDbDataAdapter" />
+
+            
 
             
 
@@ -6624,6 +7902,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
           <para
             >For more information, see <see
              cref="P:System.Data.IDbDataAdapter.InsertCommand" />
+
+            
 
             
 
@@ -6662,8 +7942,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Data.IDbDataAdapter" />
+
+            
 
             
 
@@ -6674,6 +7958,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
           <para
             >For more information, see <see
              cref="P:System.Data.IDbDataAdapter.SelectCommand" />
+
+            
 
             
 
@@ -6712,8 +7998,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Data.IDbDataAdapter" />
+
+            
 
             
 
@@ -6724,6 +8014,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
           <para
             >For more information, see <see
              cref="P:System.Data.IDbDataAdapter.UpdateCommand" />
+
+            
 
             
 
@@ -6765,8 +8057,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.ICloneable" />
+
+            
 
             
 
@@ -6777,6 +8073,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
           <para
             >For more information, see <see
              cref="M:System.ICloneable.Clone" />
+
+            
 
             
 
@@ -6816,6 +8114,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             , this method throws <see
              cref="T:System.NotSupportedException" />
 
@@ -6823,8 +8123,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             . Classes that inherit from <see
              cref="T:System.Data.Common.DbDataAdapter" />
+
+            
 
             
 
@@ -6838,6 +8142,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
           <para
             >Ends batching for the <see
              cref="T:System.Data.Common.DbDataAdapter" />
+
+            
 
             
 
@@ -6868,8 +8174,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              method, the <see
              cref="T:System.Data.Common.DbDataAdapter" />
+
+            
 
             
 
@@ -6882,8 +8192,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              property, and executes the required INSERT, UPDATE, or DELETE statements iteratively for each row, based on the order of the indexes configured in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -6896,8 +8210,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              might execute a DELETE statement, followed by an INSERT statement, and then another DELETE statement, due to the ordering of the rows in the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -6908,6 +8226,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
           <para
             >It should be noted that these statements are not performed as a batch process; each row is updated individually. An application can call the <see
              cref="M:System.Data.DataSet.GetChanges" />
+
+            
 
             
 
@@ -6924,11 +8244,15 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             .</para
           >
           <para
             >If INSERT, UPDATE, or DELETE statements have not been specified, the <see
              cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+            
 
             
 
@@ -6941,8 +8265,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              or <see
              cref="T:System.Data.OleDb.OleDbCommandBuilder" />
+
+            
 
             
 
@@ -6955,10 +8283,14 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             . For more information see <format
              type="text/html">
               <a href="6e3fb8b5-373b-4f9e-ab03-a22693df8e91">Automatically Generated Commands</a>
             </format>
+
+            
 
             
 
@@ -6974,6 +8306,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              method retrieves rows from the table listed in the first mapping before performing an update. The <see
              cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
@@ -6981,8 +8315,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              then refreshes the row using the value of the <see
              cref="P:System.Data.IDbCommand.UpdatedRowSource" />
+
+            
 
             
 
@@ -6998,8 +8336,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             , the <see
              cref="M:System.Data.Common.DbDataAdapter.OnRowUpdated(System.Data.Common.RowUpdatedEventArgs)" />
+
+            
 
             
 
@@ -7012,11 +8354,15 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              row and any output parameters returned by the command. After a row updates successfully, the changes to that row are accepted.</para
           >
           <para
             >When using <see
              cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+            
 
             
 
@@ -7034,6 +8380,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                  are moved to the parameter values.</para
               >
             </item>
@@ -7041,6 +8389,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
               <para
                 >The <see
                  cref="M:System.Data.Common.DbDataAdapter.OnRowUpdating(System.Data.Common.RowUpdatingEventArgs)" />
+
+                
 
                 
 
@@ -7061,6 +8411,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -7068,6 +8420,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
               <para
                 >If there are output parameters, they are placed in the <see
                  cref="T:System.Data.DataRow" />
+
+                
 
                 
 
@@ -7085,12 +8439,16 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                  event is raised.</para
               >
             </item>
             <item>
               <para>
                 <see cref="M:System.Data.DataRow.AcceptChanges" />
+
+                
 
                 
 
@@ -7108,8 +8466,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              usually has a parameters collection associated with it. Parameters are mapped to the current row through the SourceColumn and SourceVersion properties of a .NET Framework data provider's Parameter class. SourceColumn refers to a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -7122,11 +8484,15 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              references to obtain parameter values for the current row.</para
           >
           <para
             >SourceColumn refers to the unmapped column name before any table mappings have been applied. If SourceColumn refers to a nonexistent column, the action taken depends on one of the following <see
              cref="T:System.Data.MissingMappingAction" />
+
+            
 
             
 
@@ -7158,6 +8524,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                   
 
+                  
+
                    if no mapping is present. </para
                 >
               </description>
@@ -7170,6 +8538,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
                 <para
                   >A <see
                    cref="T:System.SystemException" />
+
+                  
 
                   
 
@@ -7192,6 +8562,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                   
 
+                  
+
                    is generated. </para
                 >
               </description>
@@ -7208,8 +8580,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
               
 
+              
+
                property to true before calling <see
                cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+              
 
               
 
@@ -7222,6 +8598,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
               
 
+              
+
                property of the <see
                cref="T:System.Data.Common.RowUpdatedEventArgs" />
 
@@ -7229,8 +8607,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
               
 
+              
+
                to <see
                cref="F:System.Data.UpdateStatus.Continue" />
+
+              
 
               
 
@@ -7250,6 +8632,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -7258,6 +8642,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
           <para
             >The number of rows successfully updated from the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -7273,8 +8659,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
           An array of <see
            cref="T:System.Data.DataRow" />
+
+          
 
           
 
@@ -7311,8 +8701,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              method, the <see
              cref="T:System.Data.Common.DbDataAdapter" />
+
+            
 
             
 
@@ -7325,8 +8719,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              property, and executes the required INSERT, UPDATE, or DELETE statements iteratively for each row, based on the order of the indexes configured in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -7339,8 +8737,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              might execute a DELETE statement, followed by an INSERT statement, and then another DELETE statement, due to the ordering of the rows in the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -7351,6 +8753,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
           <para
             >It should be noted that these statements are not performed as a batch process; each row is updated individually. An application can call the <see
              cref="M:System.Data.DataSet.GetChanges" />
+
+            
 
             
 
@@ -7367,11 +8771,15 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             .</para
           >
           <para
             >If INSERT, UPDATE, or DELETE statements have not been specified, the <see
              cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+            
 
             
 
@@ -7384,8 +8792,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              or <see
              cref="T:System.Data.OleDb.OleDbCommandBuilder" />
+
+            
 
             
 
@@ -7398,10 +8810,14 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             . For more information see <format
              type="text/html">
               <a href="6e3fb8b5-373b-4f9e-ab03-a22693df8e91">Automatically Generated Commands</a>
             </format>
+
+            
 
             
 
@@ -7417,6 +8833,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              method retrieves rows from the table listed in the first mapping before performing an update. The <see
              cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
@@ -7424,8 +8842,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              then refreshes the row using the value of the <see
              cref="P:System.Data.IDbCommand.UpdatedRowSource" />
+
+            
 
             
 
@@ -7441,8 +8863,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             , the <see
              cref="M:System.Data.Common.DbDataAdapter.OnRowUpdated(System.Data.Common.RowUpdatedEventArgs)" />
+
+            
 
             
 
@@ -7455,11 +8881,15 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              row and any output parameters returned by the command. After a row updates successfully, the changes to that row are accepted.</para
           >
           <para
             >When using <see
              cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+            
 
             
 
@@ -7477,6 +8907,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                  are moved to the parameter values.</para
               >
             </item>
@@ -7484,6 +8916,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
               <para
                 >The <see
                  cref="M:System.Data.Common.DbDataAdapter.OnRowUpdating(System.Data.Common.RowUpdatingEventArgs)" />
+
+                
 
                 
 
@@ -7504,6 +8938,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -7511,6 +8947,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
               <para
                 >If there are output parameters, they are placed in the <see
                  cref="T:System.Data.DataRow" />
+
+                
 
                 
 
@@ -7528,12 +8966,16 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                  event is raised.</para
               >
             </item>
             <item>
               <para>
                 <see cref="M:System.Data.DataRow.AcceptChanges" />
+
+                
 
                 
 
@@ -7551,8 +8993,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              usually has a parameters collection associated with it. Parameters are mapped to the current row through the SourceColumn and SourceVersion properties of a .NET Framework data provider's Parameter class. SourceColumn refers to a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -7565,11 +9011,15 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              references to obtain parameter values for the current row.</para
           >
           <para
             >SourceColumn refers to the unmapped column name before any table mappings have been applied. If SourceColumn refers to a nonexistent column, the action taken depends on one of the following <see
              cref="T:System.Data.MissingMappingAction" />
+
+            
 
             
 
@@ -7601,6 +9051,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                   
 
+                  
+
                    if no mapping is present. </para
                 >
               </description>
@@ -7613,6 +9065,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
                 <para
                   >A <see
                    cref="T:System.SystemException" />
+
+                  
 
                   
 
@@ -7635,6 +9089,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                   
 
+                  
+
                    is generated. </para
                 >
               </description>
@@ -7651,8 +9107,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
               
 
+              
+
                property to true before calling <see
                cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+              
 
               
 
@@ -7665,6 +9125,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
               
 
+              
+
                property of the <see
                cref="T:System.Data.Common.RowUpdatedEventArgs" />
 
@@ -7672,8 +9134,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
               
 
+              
+
                to <see
                cref="F:System.Data.UpdateStatus.Continue" />
+
+              
 
               
 
@@ -7693,6 +9159,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -7701,6 +9169,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
           <para
             >The number of rows successfully updated from the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -7716,8 +9186,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataSet" />
+
+          
 
           
 
@@ -7751,8 +9225,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              method, the <see
              cref="T:System.Data.Common.DbDataAdapter" />
+
+            
 
             
 
@@ -7765,8 +9243,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              property, and executes the required INSERT, UPDATE, or DELETE statements iteratively for each row, based on the order of the indexes configured in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -7779,8 +9261,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              might execute a DELETE statement, followed by an INSERT statement, and then another DELETE statement, due to the ordering of the rows in the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -7791,6 +9277,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
           <para
             >It should be noted that these statements are not performed as a batch process; each row is updated individually. An application can call the <see
              cref="M:System.Data.DataSet.GetChanges" />
+
+            
 
             
 
@@ -7807,11 +9295,15 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             .</para
           >
           <para
             >If INSERT, UPDATE, or DELETE statements have not been specified, the <see
              cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+            
 
             
 
@@ -7824,8 +9316,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              or <see
              cref="T:System.Data.OleDb.OleDbCommandBuilder" />
+
+            
 
             
 
@@ -7838,10 +9334,14 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             . For more information see <format
              type="text/html">
               <a href="6e3fb8b5-373b-4f9e-ab03-a22693df8e91">Automatically Generated Commands</a>
             </format>
+
+            
 
             
 
@@ -7857,6 +9357,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              method retrieves rows from the table listed in the first mapping before performing an update. The <see
              cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
@@ -7864,8 +9366,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              then refreshes the row using the value of the <see
              cref="P:System.Data.IDbCommand.UpdatedRowSource" />
+
+            
 
             
 
@@ -7881,8 +9387,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             , the <see
              cref="M:System.Data.Common.DbDataAdapter.OnRowUpdated(System.Data.Common.RowUpdatedEventArgs)" />
+
+            
 
             
 
@@ -7895,11 +9405,15 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              row and any output parameters returned by the command. After a row updates successfully, the changes to that row are accepted.</para
           >
           <para
             >When using <see
              cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+            
 
             
 
@@ -7917,6 +9431,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                  are moved to the parameter values.</para
               >
             </item>
@@ -7924,6 +9440,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
               <para
                 >The <see
                  cref="M:System.Data.Common.DbDataAdapter.OnRowUpdating(System.Data.Common.RowUpdatingEventArgs)" />
+
+                
 
                 
 
@@ -7944,6 +9462,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -7951,6 +9471,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
               <para
                 >If there are output parameters, they are placed in the <see
                  cref="T:System.Data.DataRow" />
+
+                
 
                 
 
@@ -7968,12 +9490,16 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                  event is raised.</para
               >
             </item>
             <item>
               <para>
                 <see cref="M:System.Data.DataRow.AcceptChanges" />
+
+                
 
                 
 
@@ -7991,8 +9517,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              usually has a parameters collection associated with it. Parameters are mapped to the current row through the SourceColumn and SourceVersion properties of a .NET Framework data provider's Parameter class. SourceColumn refers to a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -8005,11 +9535,15 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              references to obtain parameter values for the current row.</para
           >
           <para
             >SourceColumn refers to the unmapped column name before any table mappings have been applied. If SourceColumn refers to a nonexistent column, the action taken depends on one of the following <see
              cref="T:System.Data.MissingMappingAction" />
+
+            
 
             
 
@@ -8041,6 +9575,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                   
 
+                  
+
                    if no mapping is present. </para
                 >
               </description>
@@ -8053,6 +9589,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
                 <para
                   >A <see
                    cref="T:System.SystemException" />
+
+                  
 
                   
 
@@ -8075,6 +9613,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                   
 
+                  
+
                    is generated. </para
                 >
               </description>
@@ -8091,8 +9631,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
               
 
+              
+
                property to true before calling <see
                cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+              
 
               
 
@@ -8105,6 +9649,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
               
 
+              
+
                property of the <see
                cref="T:System.Data.Common.RowUpdatedEventArgs" />
 
@@ -8112,8 +9658,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
               
 
+              
+
                to <see
                cref="F:System.Data.UpdateStatus.Continue" />
+
+              
 
               
 
@@ -8133,6 +9683,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -8141,6 +9693,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
           <para
             >The number of rows successfully updated from the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -8156,8 +9710,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
           The <see
            cref="T:System.Data.DataTable" />
+
+          
 
           
 
@@ -8195,8 +9753,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              method, the <see
              cref="T:System.Data.Common.DbDataAdapter" />
+
+            
 
             
 
@@ -8209,8 +9771,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              property, and executes the required INSERT, UPDATE, or DELETE statements iteratively for each row, based on the order of the indexes configured in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -8223,8 +9789,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              might execute a DELETE statement, followed by an INSERT statement, and then another DELETE statement, due to the ordering of the rows in the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -8235,6 +9805,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
           <para
             >It should be noted that these statements are not performed as a batch process; each row is updated individually. An application can call the <see
              cref="M:System.Data.DataSet.GetChanges" />
+
+            
 
             
 
@@ -8251,11 +9823,15 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             .</para
           >
           <para
             >If INSERT, UPDATE, or DELETE statements have not been specified, the <see
              cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+            
 
             
 
@@ -8268,8 +9844,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              or <see
              cref="T:System.Data.OleDb.OleDbCommandBuilder" />
+
+            
 
             
 
@@ -8282,10 +9862,14 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             . For more information see <format
              type="text/html">
               <a href="6e3fb8b5-373b-4f9e-ab03-a22693df8e91">Automatically Generated Commands</a>
             </format>
+
+            
 
             
 
@@ -8301,6 +9885,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              method retrieves rows from the table listed in the first mapping before performing an update. The <see
              cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
@@ -8308,8 +9894,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              then refreshes the row using the value of the <see
              cref="P:System.Data.IDbCommand.UpdatedRowSource" />
+
+            
 
             
 
@@ -8325,8 +9915,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             , the <see
              cref="M:System.Data.Common.DbDataAdapter.OnRowUpdated(System.Data.Common.RowUpdatedEventArgs)" />
+
+            
 
             
 
@@ -8339,11 +9933,15 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              row and any output parameters returned by the command. After a row updates successfully, the changes to that row are accepted.</para
           >
           <para
             >When using <see
              cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+            
 
             
 
@@ -8361,6 +9959,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                  are moved to the parameter values.</para
               >
             </item>
@@ -8368,6 +9968,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
               <para
                 >The <see
                  cref="M:System.Data.Common.DbDataAdapter.OnRowUpdating(System.Data.Common.RowUpdatingEventArgs)" />
+
+                
 
                 
 
@@ -8388,6 +9990,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -8395,6 +9999,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
               <para
                 >If there are output parameters, they are placed in the <see
                  cref="T:System.Data.DataRow" />
+
+                
 
                 
 
@@ -8412,12 +10018,16 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                  event is raised.</para
               >
             </item>
             <item>
               <para>
                 <see cref="M:System.Data.DataRow.AcceptChanges" />
+
+                
 
                 
 
@@ -8435,8 +10045,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              usually has a parameters collection associated with it. Parameters are mapped to the current row through the SourceColumn and SourceVersion properties of a .NET Framework data provider's Parameter class. SourceColumn refers to a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -8449,11 +10063,15 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              references to obtain parameter values for the current row.</para
           >
           <para
             >SourceColumn refers to the unmapped column name before any table mappings have been applied. If SourceColumn refers to a nonexistent column, the action taken depends on one of the following <see
              cref="T:System.Data.MissingMappingAction" />
+
+            
 
             
 
@@ -8485,6 +10103,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                   
 
+                  
+
                    if no mapping is present. </para
                 >
               </description>
@@ -8497,6 +10117,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
                 <para
                   >A <see
                    cref="T:System.SystemException" />
+
+                  
 
                   
 
@@ -8519,6 +10141,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                   
 
+                  
+
                    is generated. </para
                 >
               </description>
@@ -8535,8 +10159,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
               
 
+              
+
                property to true before calling <see
                cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+              
 
               
 
@@ -8549,6 +10177,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
               
 
+              
+
                property of the <see
                cref="T:System.Data.Common.RowUpdatedEventArgs" />
 
@@ -8556,8 +10186,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
               
 
+              
+
                to <see
                cref="F:System.Data.UpdateStatus.Continue" />
+
+              
 
               
 
@@ -8577,6 +10211,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              objects.</para
           >
         </summary>
@@ -8585,6 +10221,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
           <para
             >The number of rows successfully updated from the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -8600,8 +10238,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
           An array of <see
            cref="T:System.Data.DataRow" />
+
+          
 
           
 
@@ -8616,8 +10258,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
           The <see
            cref="P:System.Data.IDataAdapter.TableMappings" />
+
+          
 
           
 
@@ -8655,8 +10301,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              method, the <see
              cref="T:System.Data.Common.DbDataAdapter" />
+
+            
 
             
 
@@ -8669,8 +10319,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              property, and executes the required INSERT, UPDATE, or DELETE statements iteratively for each row, based on the order of the indexes configured in the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -8683,8 +10337,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              might execute a DELETE statement, followed by an INSERT statement, and then another DELETE statement, due to the ordering of the rows in the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -8695,6 +10353,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
           <para
             >It should be noted that these statements are not performed as a batch process; each row is updated individually. An application can call the <see
              cref="M:System.Data.DataSet.GetChanges" />
+
+            
 
             
 
@@ -8711,11 +10371,15 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             .</para
           >
           <para
             >If INSERT, UPDATE, or DELETE statements have not been specified, the <see
              cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+            
 
             
 
@@ -8728,8 +10392,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              or <see
              cref="T:System.Data.OleDb.OleDbCommandBuilder" />
+
+            
 
             
 
@@ -8742,10 +10410,14 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             . For more information see <format
              type="text/html">
               <a href="6e3fb8b5-373b-4f9e-ab03-a22693df8e91">Automatically Generated Commands</a>
             </format>
+
+            
 
             
 
@@ -8761,8 +10433,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              method supports scenarios where the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -8775,8 +10451,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              objects whose names differ only by case. When multiple tables with the same name, but different case, exist in a DataSet, <see
              cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+            
 
             
 
@@ -8798,8 +10478,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              is called and the <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -8812,8 +10496,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              whose name differs only by case, that <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -8832,6 +10520,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              method retrieves rows from the table listed in the first mapping before performing an update. The <see
              cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
 
@@ -8839,8 +10529,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              then refreshes the row using the value of the <see
              cref="P:System.Data.IDbCommand.UpdatedRowSource" />
+
+            
 
             
 
@@ -8856,8 +10550,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             , the <see
              cref="M:System.Data.Common.DbDataAdapter.OnRowUpdated(System.Data.Common.RowUpdatedEventArgs)" />
+
+            
 
             
 
@@ -8870,11 +10568,15 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              row and any output parameters returned by the command. After a row updates successfully, the changes to that row are accepted.</para
           >
           <para
             >When using <see
              cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+            
 
             
 
@@ -8892,6 +10594,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                  are moved to the parameter values.</para
               >
             </item>
@@ -8899,6 +10603,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
               <para
                 >The <see
                  cref="M:System.Data.Common.DbDataAdapter.OnRowUpdating(System.Data.Common.RowUpdatingEventArgs)" />
+
+                
 
                 
 
@@ -8919,6 +10625,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                 .</para
               >
             </item>
@@ -8926,6 +10634,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
               <para
                 >If there are output parameters, they are placed in the <see
                  cref="T:System.Data.DataRow" />
+
+                
 
                 
 
@@ -8943,12 +10653,16 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                 
 
+                
+
                  event is raised.</para
               >
             </item>
             <item>
               <para>
                 <see cref="M:System.Data.DataRow.AcceptChanges" />
+
+                
 
                 
 
@@ -8966,8 +10680,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              usually has a parameters collection associated with it. Parameters are mapped to the current row through the SourceColumn and SourceVersion properties of a .NET Framework data provider's Parameter class. SourceColumn refers to a <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -8980,11 +10698,15 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              references to obtain parameter values for the current row.</para
           >
           <para
             >SourceColumn refers to the unmapped column name before any table mappings have been applied. If SourceColumn refers to a nonexistent column, the action taken depends on one of the following <see
              cref="T:System.Data.MissingMappingAction" />
+
+            
 
             
 
@@ -9016,6 +10738,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                   
 
+                  
+
                    if no mapping is present. </para
                 >
               </description>
@@ -9028,6 +10752,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
                 <para
                   >A <see
                    cref="T:System.SystemException" />
+
+                  
 
                   
 
@@ -9050,6 +10776,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
                   
 
+                  
+
                    is generated. </para
                 >
               </description>
@@ -9066,8 +10794,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
               
 
+              
+
                property to true before calling <see
                cref="M:System.Data.Common.DbDataAdapter.Update(System.Data.DataSet)" />
+
+              
 
               
 
@@ -9080,6 +10812,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
               
 
+              
+
                property of the <see
                cref="T:System.Data.Common.RowUpdatedEventArgs" />
 
@@ -9087,8 +10821,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
               
 
+              
+
                to <see
                cref="F:System.Data.UpdateStatus.Continue" />
+
+              
 
               
 
@@ -9108,8 +10846,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
               with the specified <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 
@@ -9128,11 +10870,15 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             .</para
           >
         </returns>
         <param name="dataSet">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9145,10 +10891,14 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
           
 
+          
+
            to use to update the data source. </param
         >
         <param name="srcTable">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9188,8 +10938,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
              property to update a data source with changes from a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 
@@ -9201,6 +10955,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
           <para
             >An <see
              cref="T:System.ArgumentOutOfRangeException" />
+
+            
 
             
 
@@ -9247,6 +11003,8 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             , if this property is not set and primary key information is present in the <see
              cref="T:System.Data.DataSet" />
 
@@ -9254,8 +11012,12 @@ adapter.Fill(dataset, "AAA"); // Fills table "aaa" because only one similarly na
 
             
 
+            
+
             , the <see
              cref="P:System.Data.IDbDataAdapter.UpdateCommand" />
+
+            
 
             
 

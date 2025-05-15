@@ -20,8 +20,12 @@
 
         
 
+        
+
          is to paint and hit test. A <see
          cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
         . Each <see
          cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+        
 
         
 
@@ -48,8 +56,12 @@
 
         
 
+        
+
          associated with it. A successfully hit-tested <see
          cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+        
 
         
 
@@ -62,8 +74,12 @@
 
         
 
+        
+
          onto the behavior stack of the <see
          cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+        
 
         
 
@@ -81,6 +97,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -89,6 +107,8 @@
       <para
         >Represents a single user interface (UI) entity managed by an <see
          cref="T:System.Windows.Forms.Design.Behavior.Adorner" />
+
+        
 
         
 
@@ -123,11 +143,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="behavior">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -140,8 +164,12 @@
 
           
 
+          
+
            associated with the <see
            cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+          
 
           
 
@@ -176,8 +204,12 @@
 
             
 
+            
+
              associated with the <see
              cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+            
 
             
 
@@ -208,6 +240,8 @@
           <para
             >Gets the bounds of the <see
              cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+            
 
             
 
@@ -244,8 +278,12 @@
 
             
 
+            
+
              method is an abstract method that forces <see
              cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+            
 
             
 
@@ -258,6 +296,8 @@
 
             
 
+            
+
              has decided to be involved with that location, it will need to return a valid <see
              cref="T:System.Windows.Forms.Cursor" />
 
@@ -265,8 +305,12 @@
 
             
 
+            
+
             . Otherwise, returning null will cause the <see
              cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+            
 
             
 
@@ -289,8 +333,12 @@
 
             
 
+            
+
              if the <see
              cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+            
 
             
 
@@ -303,11 +351,15 @@
 
             
 
+            
+
             ; otherwise, null.</para
           >
         </returns>
         <param name="p">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -343,8 +395,12 @@
 
             
 
+            
+
              method is an abstract method that forces <see
              cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+            
 
             
 
@@ -357,6 +413,8 @@
 
             
 
+            
+
              parameter contains the <see
              cref="T:System.Drawing.Graphics" />
 
@@ -364,8 +422,12 @@
 
             
 
+            
+
              related to the adorner window of the <see
              cref="T:System.Windows.Forms.Design.Behavior.BehaviorService" />
+
+            
 
             
 
@@ -385,8 +447,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.PaintEventArgs" />
+
+          
 
           
 
@@ -423,8 +489,12 @@
 
             
 
+            
+
              associated with the <see
              cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+            
 
             
 
@@ -440,6 +510,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Design.Behavior.Behavior" />
 
@@ -447,8 +519,12 @@
 
           
 
+          
+
            to associate with the <see
            cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+          
 
           
 

@@ -17,13 +17,15 @@
 
           
 
+          
+
           ). </list_item
         >
         <list_item
           > If the variable given by x is an array element of a <non_terminal
-           where="11.2"
->reference-type</non_terminal
-          >
+           where="11.2">reference-type</non_terminal>
+
+          
 
           
 
@@ -31,6 +33,8 @@
 
           , a run-time check is performed to ensure that the value computed for y is compatible with the array instance of which x is an element. The check succeeds if y is null, or if an implicit reference conversion (<hyperlink
           >13.1.4</hyperlink>
+
+          
 
           
 
@@ -51,6 +55,8 @@
 
           
 
+          
+
           ). </list_item
         >
         <list_item> The set accessor of x is invoked with the value computed for y as its value argument. </list_item>
@@ -66,10 +72,12 @@
 
       
 
+      
+
       ) permit a value of an array type A[] to be a reference to an instance of an array type B[], provided an implicit reference conversion exists from B to A. Because of these rules, assignment to an array element of a <non_terminal
-       where="11.2"
->reference-type</non_terminal
-      >
+       where="11.2">reference-type</non_terminal>
+
+      
 
       
 
@@ -77,7 +85,7 @@
 
        requires a run-time check to ensure that the value being assigned is compatible with the array instance. In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 string[] sa = new string[10];  
 object[] oa = sa;  
 oa[0] = null;      // Ok  
@@ -85,6 +93,8 @@ oa[1] = "Hello";     // Ok
 oa[2] = new ArrayList();  // ArrayTypeMismatchException  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -101,10 +111,14 @@ oa[2] = new ArrayList();  // ArrayTypeMismatchException
 
     
 
+    
+
      is the target of an assignment, the instance expression associated with the property or indexer access must be classified as a variable. If the instance expression is classified as a value, a compile-time error occurs. <note
 
       >[Note: Because of <hyperlink
       >14.5.4</hyperlink>
+
+      
 
       
 
@@ -117,7 +131,7 @@ oa[2] = new ArrayList();  // ArrayTypeMismatchException
     <example
       >[Example: Given the declarations: <code_example
       >
-<![CDATA[
+        <![CDATA[
 struct Point  
 {  
    int x, y;  
@@ -157,9 +171,11 @@ struct Rectangle
 
       
 
+      
+
       in the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 Point p = new Point();  
 p.X = 100;  
 p.Y = 100;  
@@ -173,9 +189,11 @@ r.B = p;
 
       
 
+      
+
       the assignments to p.X, p.Y, r.A, and r.B are permitted because p and r are variables. However, in the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 Rectangle r = new Rectangle();  
 r.A.X = 10;  
 r.A.Y = 10;  
@@ -183,6 +201,8 @@ r.B.X = 100;
 r.B.Y = 100;  
 ]]>
       </code_example>
+
+      
 
       
 

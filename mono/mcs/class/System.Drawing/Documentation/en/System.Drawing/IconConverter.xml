@@ -29,8 +29,12 @@
 
         
 
+        
+
          object from one data type to another. Access this class through the <see
          cref="T:System.ComponentModel.TypeDescriptor" />
+
+        
 
         
 
@@ -53,6 +57,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Drawing.IconConverter" />
+
+            
 
             
 
@@ -91,6 +97,8 @@
 
             
 
+            
+
              is equal to a byte array.</para
           >
         </remarks>
@@ -104,8 +112,12 @@
 
             
 
+            
+
              can convert an instance of a specified type to an <see
              cref="T:System.Drawing.Icon" />
+
+            
 
             
 
@@ -124,6 +136,8 @@
 
             
 
+            
+
              can perform the conversion; otherwise, false.</para
           >
         </returns>
@@ -134,8 +148,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -150,8 +168,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -189,6 +211,8 @@
 
             
 
+            
+
              is equal to a byte array or string.</para
           >
         </remarks>
@@ -202,8 +226,12 @@
 
             
 
+            
+
              can convert an <see
              cref="T:System.Drawing.Icon" />
+
+            
 
             
 
@@ -222,6 +250,8 @@
 
             
 
+            
+
              can perform the conversion; otherwise, false.</para
           >
         </returns>
@@ -232,8 +262,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -248,8 +282,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -289,6 +327,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -297,6 +337,8 @@
           <para
             >If this method succeeds, it returns the <see
              cref="T:System.Drawing.Icon" />
+
+            
 
             
 
@@ -312,8 +354,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -328,8 +374,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -344,8 +394,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -385,8 +439,12 @@
 
             
 
+            
+
              method on the object if the object is valid and if the destination type is string. If this method cannot convert to the destination type, it throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -405,8 +463,12 @@
 
             
 
+            
+
              (or an object that can be cast to an <see
              cref="T:System.Drawing.Icon" />
+
+            
 
             
 
@@ -426,8 +488,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -442,8 +508,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -458,8 +528,12 @@
 
           
 
+          
+
           The object to convert. This object should be of type icon or some type that can be cast to <see
            cref="T:System.Drawing.Icon" />
+
+          
 
           
 
@@ -469,6 +543,8 @@
         >
         <param name="destinationType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

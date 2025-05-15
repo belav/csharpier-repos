@@ -32,6 +32,8 @@
 
         
 
+        
+
         . To achieve richer functionality, such as providing posted content and headers and capturing the response headers or response body as binary data, you should extend SimpleWorkerRequest and override the appropriate HttpWorkerRequest methods.</para
       >
     </remarks>
@@ -40,6 +42,8 @@
       <para
         >Provides a simple implementation of the <see
          cref="T:System.Web.HttpWorkerRequest" />
+
+        
 
         
 
@@ -74,8 +78,12 @@
 
             
 
+            
+
              class when the target application domain has been created using the <see
              cref="M:System.Web.Hosting.ApplicationHost.CreateApplicationHost(System.Type,System.String,System.String)" />
+
+            
 
             
 
@@ -91,10 +99,14 @@
 
           
 
+          
+
           The page to be requested (or the virtual path to the page, relative to the application directory). </param
         >
         <param name="query">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -109,8 +121,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -150,8 +166,12 @@
 
             
 
+            
+
              class for use in an arbitrary application domain, when the user code creates an <see
              cref="T:System.Web.HttpContext" />
+
+            
 
             
 
@@ -167,10 +187,14 @@
 
           
 
+          
+
           The virtual path to the application directory; for example, "/app". </param
         >
         <param name="appPhysicalDir">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -185,10 +209,14 @@
 
           
 
+          
+
           The virtual path for the request (relative to the application directory). </param
         >
         <param name="query">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -203,8 +231,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.TextWriter" />
+
+          
 
           
 
@@ -232,6 +264,8 @@
           <para
             >Notifies the <see
              cref="T:System.Web.HttpWorkerRequest" />
+
+            
 
             
 
@@ -266,6 +300,8 @@
         </summary>
         <param name="finalFlush">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -611,6 +647,8 @@
 
           
 
+          
+
           The name of the requested server variable. </param
         >
       </Docs>
@@ -660,6 +698,8 @@
           <para
             >A value representing the client's impersonation token. The default is <see
              cref="F:System.IntPtr.Zero" />
+
+            
 
             
 
@@ -748,11 +788,15 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
         <param name="path">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -810,8 +854,12 @@
 
           
 
+          
+
           The header index. For example, <see
            cref="F:System.Web.HttpWorkerRequest.HeaderContentLength" />
+
+          
 
           
 
@@ -821,6 +869,8 @@
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -861,6 +911,8 @@
 
           
 
+          
+
           The handle of the file to send. </param
         >
         <param name="offset">
@@ -870,10 +922,14 @@
 
           
 
+          
+
           The starting position in the file. </param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -914,6 +970,8 @@
 
           
 
+          
+
           The name of the file to send. </param
         >
         <param name="offset">
@@ -923,10 +981,14 @@
 
           
 
+          
+
           The starting position in the file. </param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -966,10 +1028,14 @@
 
           
 
+          
+
           The byte array to send. </param
         >
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1009,10 +1075,14 @@
 
           
 
+          
+
           The status code to send </param
         >
         <param name="statusDescription">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1052,10 +1122,14 @@
 
           
 
+          
+
           The name of the header to send.</param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

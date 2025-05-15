@@ -34,8 +34,12 @@
 
         
 
+        
+
          is similar to <see
          cref="T:System.Windows.Forms.SplitContainer" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
         ) and one central panel (an instance of <see
          cref="T:System.Windows.Forms.ToolStripContentPanel" />
+
+        
 
         
 
@@ -62,8 +70,12 @@
 
         
 
+        
+
         , <see
          cref="P:System.Windows.Forms.ToolStripContainer.BottomToolStripPanelVisible" />
+
+        
 
         
 
@@ -76,8 +88,12 @@
 
         
 
+        
+
         , and <see
          cref="P:System.Windows.Forms.ToolStripContainer.RightToolStripPanelVisible" />
+
+        
 
         
 
@@ -90,8 +106,12 @@
 
         
 
+        
+
          appears with its top panel already expanded. You can neither remove nor hide the <see
          cref="T:System.Windows.Forms.ToolStripContentPanel" />
+
+        
 
         
 
@@ -104,8 +124,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Windows.Forms.MenuStrip" />
+
+        
 
         
 
@@ -118,8 +142,12 @@
 
         
 
+        
+
          controls in the side panels, and you can use the central panel for other controls. The <see
          cref="T:System.Windows.Forms.ToolStripContentPanel" />
+
+        
 
         
 
@@ -134,8 +162,12 @@
 
         
 
+        
+
          does not support Multiple Document Interface (MDI) applications. Use <see
          cref="T:System.Windows.Forms.ToolStripPanel" />
+
+        
 
         
 
@@ -162,6 +194,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ToolStripContainer" />
+
+            
 
             
 
@@ -513,8 +547,12 @@
 
             
 
+            
+
              property to add <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -527,6 +565,8 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Windows.Forms.StatusStrip" />
 
@@ -534,8 +574,12 @@
 
             
 
+            
+
              controls or move them from another <see
              cref="T:System.Windows.Forms.ToolStripPanel" />
+
+            
 
             
 
@@ -549,6 +593,8 @@
           <para
             >Gets the bottom panel of the <see
              cref="T:System.Windows.Forms.ToolStripContainer" />
+
+            
 
             
 
@@ -589,8 +635,12 @@
 
             
 
+            
+
              property to false to use a <see
              cref="T:System.Windows.Forms.ToolStripContainer" />
+
+            
 
             
 
@@ -604,6 +654,8 @@
           <para
             >Gets or sets a value indicating whether the bottom panel of the <see
              cref="T:System.Windows.Forms.ToolStripContainer" />
+
+            
 
             
 
@@ -678,6 +730,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -686,6 +740,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ToolStripContainer.CausesValidation" />
+
+            
 
             
 
@@ -729,8 +785,12 @@
 
             
 
+            
+
              to hold <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -743,8 +803,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Windows.Forms.StatusStrip" />
+
+            
 
             
 
@@ -757,8 +821,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Windows.Forms.MenuStrip" />
+
+            
 
             
 
@@ -771,8 +839,12 @@
 
             
 
+            
+
              are automatically added to the <see
              cref="T:System.Windows.Forms.ToolStripContentPanel" />
+
+            
 
             
 
@@ -786,6 +858,8 @@
           <para
             >Gets the center panel of the <see
              cref="T:System.Windows.Forms.ToolStripContainer" />
+
+            
 
             
 
@@ -862,6 +936,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -870,6 +946,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ToolStripContainer.ContextMenuStrip" />
+
+            
 
             
 
@@ -939,6 +1017,8 @@
 
             
 
+            
+
              collection.</para
           >
         </summary>
@@ -947,6 +1027,8 @@
           <para
             >A read-only <see
              cref="T:System.Windows.Forms.ToolStripContainer" />
+
+            
 
             
 
@@ -1056,6 +1138,8 @@
 
             
 
+            
+
             , in pixels.</para
           >
         </summary>
@@ -1159,8 +1243,12 @@
 
             
 
+            
+
              property to add <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -1173,6 +1261,8 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Windows.Forms.StatusStrip" />
 
@@ -1180,8 +1270,12 @@
 
             
 
+            
+
              controls or move them from another <see
              cref="T:System.Windows.Forms.ToolStripPanel" />
+
+            
 
             
 
@@ -1195,6 +1289,8 @@
           <para
             >Gets the left panel of the <see
              cref="T:System.Windows.Forms.ToolStripContainer" />
+
+            
 
             
 
@@ -1232,8 +1328,12 @@
 
             
 
+            
+
              property to false to use a <see
              cref="T:System.Windows.Forms.ToolStripContainer" />
+
+            
 
             
 
@@ -1247,6 +1347,8 @@
           <para
             >Gets or sets a value indicating whether the left panel of the <see
              cref="T:System.Windows.Forms.ToolStripContainer" />
+
+            
 
             
 
@@ -1287,11 +1389,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1324,11 +1430,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStripContainer.OnSizeChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -1347,6 +1457,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -1357,8 +1469,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1401,8 +1517,12 @@
 
             
 
+            
+
              property to add <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -1415,6 +1535,8 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Windows.Forms.StatusStrip" />
 
@@ -1422,8 +1544,12 @@
 
             
 
+            
+
              controls or move them from another <see
              cref="T:System.Windows.Forms.ToolStripPanel" />
+
+            
 
             
 
@@ -1437,6 +1563,8 @@
           <para
             >Gets the right panel of the <see
              cref="T:System.Windows.Forms.ToolStripContainer" />
+
+            
 
             
 
@@ -1474,8 +1602,12 @@
 
             
 
+            
+
              property to false to use a <see
              cref="T:System.Windows.Forms.ToolStripContainer" />
+
+            
 
             
 
@@ -1489,6 +1621,8 @@
           <para
             >Gets or sets a value indicating whether the right panel of the <see
              cref="T:System.Windows.Forms.ToolStripContainer" />
+
+            
 
             
 
@@ -1532,8 +1666,12 @@
 
             
 
+            
+
              property to add <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -1546,6 +1684,8 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Windows.Forms.StatusStrip" />
 
@@ -1553,8 +1693,12 @@
 
             
 
+            
+
              controls or move them from another <see
              cref="T:System.Windows.Forms.ToolStripPanel" />
+
+            
 
             
 
@@ -1568,6 +1712,8 @@
           <para
             >Gets the top panel of the <see
              cref="T:System.Windows.Forms.ToolStripContainer" />
+
+            
 
             
 
@@ -1605,8 +1751,12 @@
 
             
 
+            
+
              property to false to use a <see
              cref="T:System.Windows.Forms.ToolStripContainer" />
+
+            
 
             
 
@@ -1620,6 +1770,8 @@
           <para
             >Gets or sets a value indicating whether the top panel of the <see
              cref="T:System.Windows.Forms.ToolStripContainer" />
+
+            
 
             
 

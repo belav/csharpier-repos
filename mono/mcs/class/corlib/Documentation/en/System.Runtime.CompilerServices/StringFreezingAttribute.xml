@@ -35,6 +35,8 @@
 
           
 
+          
+
            class has been deprecated in the .NET Framework version 3.5 Service Pack 1 (SP1) and later versions.</para
         >
       </block>
@@ -48,8 +50,12 @@
 
         
 
+        
+
         .  The <see
          cref="T:System.Runtime.CompilerServices.StringFreezingAttribute" />
+
+        
 
         
 
@@ -65,11 +71,15 @@
 
         
 
+        
+
          must be applied on the assembly level.</para
       >
       <para
         >Note that the common language runtime (CLR) cannot unload any native image that has a frozen string because any object in the heap might refer to the frozen string.  Therefore, you should use the <see
          cref="T:System.Runtime.CompilerServices.StringFreezingAttribute" />
+
+        
 
         
 
@@ -85,6 +95,8 @@
          type="text/html">
           <a href="44bf97aa-a9a4-4eba-9a0d-cfaa6fc53a66">Native Image Generator (Ngen.exe)</a>
         </format>
+
+        
 
         
 
@@ -115,6 +127,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.CompilerServices.StringFreezingAttribute" />
+
+            
 
             
 

@@ -37,8 +37,12 @@
 
         
 
+        
+
          attribute at the assembly level or module level to set the <see
          cref="F:System.Runtime.InteropServices.DllImportAttribute.CharSet" />
+
+        
 
         
 
@@ -51,8 +55,12 @@
 
         
 
+        
+
          that does not include a <see
          cref="F:System.Runtime.InteropServices.DllImportAttribute.CharSet" />
+
+        
 
         
 
@@ -68,8 +76,12 @@
 
         
 
+        
+
          named argument specified by the user overrides the setting of <see
          cref="T:System.Runtime.InteropServices.DefaultCharSetAttribute" />
+
+        
 
         
 
@@ -86,6 +98,8 @@
       <para
         >Specifies the value of the <see
          cref="T:System.Runtime.InteropServices.CharSet" />
+
+        
 
         
 
@@ -126,8 +140,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Runtime.InteropServices.CharSet" />
+
+            
 
             
 
@@ -143,8 +161,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Runtime.InteropServices.CharSet" />
+
+          
 
           
 
@@ -185,8 +207,12 @@
 
             
 
+            
+
              for any call to <see
              cref="T:System.Runtime.InteropServices.DllImportAttribute" />
+
+            
 
             
 

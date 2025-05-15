@@ -69,6 +69,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -106,6 +108,8 @@
 
             
 
+            
+
              evidence.</para
           >
         </remarks>
@@ -124,8 +128,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Policy.Evidence" />
+
+          
 
           
 
@@ -173,6 +181,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -207,8 +217,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Security.Policy.GacMembershipCondition" />
+
+            
 
             
 
@@ -221,6 +235,8 @@
 
             
 
+            
+
              is null or if <paramref
              name="o" />
 
@@ -228,8 +244,12 @@
 
             
 
+            
+
              is not a <see
              cref="T:System.Security.Policy.GacMembershipCondition" />
+
+            
 
             
 
@@ -252,8 +272,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Security.Policy.GacMembershipCondition" />
+
+            
 
             
 
@@ -264,6 +288,8 @@
         </returns>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -305,8 +331,12 @@
 
             
 
+            
+
              method reconstructs a <see
              cref="T:System.Security.Policy.GacMembershipCondition" />
+
+            
 
             
 
@@ -319,6 +349,8 @@
 
             
 
+            
+
              class. Use the <see
              cref="Overload:System.Security.Policy.GacMembershipCondition.ToXml" />
 
@@ -326,8 +358,12 @@
 
             
 
+            
+
              method to XML-encode the <see
              cref="T:System.Security.Policy.GacMembershipCondition" />
+
+            
 
             
 
@@ -347,8 +383,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.SecurityElement" />
+
+          
 
           
 
@@ -396,8 +436,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.SecurityElement" />
+
+          
 
           
 
@@ -412,6 +456,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Policy.PolicyLevel" />
 
@@ -419,8 +465,12 @@
 
           
 
+          
+
            context for resolving <see
            cref="T:System.Security.NamedPermissionSet" />
+
+          
 
           
 
@@ -457,8 +507,12 @@
 
             
 
+            
+
              method returns 0 (zero) because <see
              cref="T:System.Security.Policy.GacMembershipCondition" />
+
+            
 
             
 
@@ -504,6 +558,8 @@
 
             
 
+            
+
              is "GAC".</para
           >
         </remarks>
@@ -544,8 +600,12 @@
 
             
 
+            
+
              method to restore the state information from a <see
              cref="T:System.Security.SecurityElement" />
+
+            
 
             
 
@@ -563,6 +623,8 @@
           <para
             >A <see
              cref="T:System.Security.SecurityElement" />
+
+            
 
             
 
@@ -613,11 +675,15 @@
 
             
 
+            
+
              that contains the XML encoding of the security object, including any state information.</para
           >
         </returns>
         <param name="level">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -630,8 +696,12 @@
 
           
 
+          
+
            context for resolving <see
            cref="T:System.Security.NamedPermissionSet" />
+
+          
 
           
 

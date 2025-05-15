@@ -37,6 +37,8 @@
 
         
 
+        
+
          instead.</para
       >
     </summary>
@@ -107,6 +109,8 @@
 
           
 
+          
+
           Controls how the changes for the stream object are committed. </param
         >
       </Docs>
@@ -151,10 +155,14 @@
 
           
 
+          
+
           Reference to the destination stream. </param
         >
         <param name="cb">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -169,10 +177,14 @@
 
           
 
+          
+
           On successful return, contains the actual number of bytes read from the source. </param
         >
         <param name="pcbWritten">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -221,6 +233,8 @@
 
           
 
+          
+
           The byte offset for the beginning of the range. </param
         >
         <param name="cb">
@@ -230,10 +244,14 @@
 
           
 
+          
+
           The length of the range, in bytes, to restrict. </param
         >
         <param name="dwLockType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -282,6 +300,8 @@
 
           
 
+          
+
           On successful return, contains the data read frtom the stream. </param
         >
         <param name="cb">
@@ -291,10 +311,14 @@
 
           
 
+          
+
           The number of bytes to read from the stream object. </param
         >
         <param name="pcbRead">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -330,6 +354,8 @@
           <para
             >Discards all changes that have been made to a transacted stream since the last <see
              cref="M:System.Runtime.InteropServices.UCOMIStream.Commit(System.Int32)" />
+
+            
 
             
 
@@ -379,8 +405,12 @@
 
           
 
+          
+
           Displacement to add to <paramref
            name="dwOrigin" />
+
+          
 
           
 
@@ -395,10 +425,14 @@
 
           
 
+          
+
           Specifies the origin of the seek. The origin can be the beginning of the file, the current seek pointer, or the end of the file. </param
         >
         <param name="plibNewPosition">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -437,6 +471,8 @@
         </summary>
         <param name="libNewSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -517,11 +553,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="libOffset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -536,10 +576,14 @@
 
           
 
+          
+
           The length, in bytes, of the range to restrict. </param
         >
         <param name="dwLockType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -588,6 +632,8 @@
 
           
 
+          
+
           Buffer to write this stream to. </param
         >
         <param name="cb">
@@ -597,10 +643,14 @@
 
           
 
+          
+
           The number of bytes to write into the stream. </param
         >
         <param name="pcbWritten">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

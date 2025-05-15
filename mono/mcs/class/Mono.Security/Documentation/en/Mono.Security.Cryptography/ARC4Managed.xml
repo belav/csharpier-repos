@@ -18,6 +18,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -68,8 +70,12 @@
 
           
 
+          
+
           .<see
            cref="P:System.Security.Cryptography.ICryptoTransform.CanReuseTransform" />
+
+          
 
           
 
@@ -101,8 +107,12 @@
 
           
 
+          
+
           .<see
            cref="P:System.Security.Cryptography.ICryptoTransform.CanTransformMultipleBlocks" />
+
+          
 
           
 
@@ -143,6 +153,8 @@
 
           
 
+          
+
            that is ready to be used to decrypt data.</returns
         >
         <remarks>Initialization vectors aren't used with ARCFOUR as this is a stream (i.e. not a block) cipher.</remarks>
@@ -174,6 +186,8 @@
         <returns
           >a <see
            cref="T:System.Security.Cryptography.ICryptoTransform" />
+
+          
 
           
 
@@ -254,6 +268,8 @@
         <remarks
           >The new secret key length is based on the <see
            cref="P:System.Security.Cryptography.SymmetricAlgorithm.KeySize" />
+
+          
 
           
 
@@ -368,8 +384,12 @@
 
           
 
+          
+
           .<see
            cref="M:System.Security.Cryptography.ICryptoTransform.TransformBlock" />
+
+          
 
           
 
@@ -423,8 +443,12 @@
 
           
 
+          
+
           .<see
            cref="M:System.Security.Cryptography.ICryptoTransform.TransformFinalBlock" />
+
+          
 
           
 

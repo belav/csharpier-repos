@@ -35,6 +35,8 @@
 
         
 
+        
+
          class. Instead, this class is inherited by the <see
          cref="T:System.Web.UI.WebControls.WizardStep" />
 
@@ -42,8 +44,12 @@
 
         
 
+        
+
          class and the <see
          cref="T:System.Web.UI.WebControls.TemplatedWizardStep" />
+
+        
 
         
 
@@ -59,6 +65,8 @@
 
         
 
+        
+
          class to create a custom class that represents a unique step in a wizard control. </para
       >
     </remarks>
@@ -67,6 +75,8 @@
       <para
         >Implements the basic functionality required by a step in a <see
          cref="T:System.Web.UI.WebControls.Wizard" />
+
+        
 
         
 
@@ -89,6 +99,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 
@@ -132,8 +144,12 @@
 
             
 
+            
+
              property can be used to enforce linear navigation in a <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -146,8 +162,12 @@
 
             
 
+            
+
              property set to false, the user will not be able to return to a step after it has been accessed. One scenario where you might use this functionality is to disallow a user to return to a step after it has been completed because you are persisting the data to a database as each step is completed. If you save the data after each step and allow the user to return to a step and change information after it has been saved, the saved data might become corrupted. By setting the <see
              cref="P:System.Web.UI.WebControls.WizardStepBase.AllowReturn" />
+
+            
 
             
 
@@ -163,6 +183,8 @@
 
             
 
+            
+
              property determines how and when the <ui
             >Previous</ui>
 
@@ -170,8 +192,12 @@
 
             
 
+            
+
              button is not rendered. The following table describes the <ui
             >Previous</ui>
+
+            
 
             
 
@@ -200,6 +226,8 @@
 
                   
 
+                  
+
                    set to false and user action goes to step 2.</para
                 >
               </term>
@@ -207,6 +235,8 @@
                 <para
                   >Step 2 does not display the <ui
                   >Previous</ui>
+
+                  
 
                   
 
@@ -226,6 +256,8 @@
 
                   
 
+                  
+
                    set to false and user action goes to step 3.</para
                 >
               </term>
@@ -233,6 +265,8 @@
                 <para
                   >Step 3 does not display the <ui
                   >Previous</ui>
+
+                  
 
                   
 
@@ -252,8 +286,12 @@
 
                   
 
+                  
+
                    set to false , <see
                    cref="P:System.Web.UI.WebControls.Wizard.DisplaySideBar" />
+
+                  
 
                   
 
@@ -266,6 +304,8 @@
                 <para
                   >No buttons are automatically disabled on the sidebar when <see
                    cref="P:System.Web.UI.WebControls.WizardStepBase.AllowReturn" />
+
+                  
 
                   
 
@@ -288,8 +328,12 @@
 
                   
 
+                  
+
                    is set to false when you use a template for navigation. The <ui
                   >Previous</ui>
+
+                  
 
                   
 
@@ -309,6 +353,8 @@
 
                   
 
+                  
+
                    : The control has 5 steps, you are working on step 4, and you run the page. </para
                 >
               </term>
@@ -321,8 +367,12 @@
 
                   
 
+                  
+
                   , then the <ui
                   >Previous</ui>
+
+                  
 
                   
 
@@ -335,8 +385,12 @@
 
                   
 
+                  
+
                    button is only hidden for <see
                    cref="P:System.Web.UI.WebControls.WizardStepBase.StepType" />
+
+                  
 
                   
 
@@ -349,6 +403,8 @@
 
                   
 
+                  
+
                    when the preceding step in the history has <see
                    cref="P:System.Web.UI.WebControls.WizardStepBase.AllowReturn" />
 
@@ -356,8 +412,12 @@
 
                   
 
+                  
+
                    set to false. Since step 4 is rendered first and there are no steps in the history, the <ui
                   >Previous</ui>
+
+                  
 
                   
 
@@ -377,8 +437,12 @@
 
                   
 
+                  
+
                    set to <see
                    cref="F:System.Web.UI.WebControls.WizardStepType.Start" />
+
+                  
 
                   
 
@@ -396,6 +460,8 @@
 
                   
 
+                  
+
                    button when the <see
                    cref="P:System.Web.UI.WebControls.WizardStepBase.StepType" />
 
@@ -403,8 +469,12 @@
 
                   
 
+                  
+
                    is set to <see
                    cref="F:System.Web.UI.WebControls.WizardStepType.Start" />
+
+                  
 
                   
 
@@ -424,8 +494,12 @@
 
                   
 
+                  
+
                    is set to <see
                    cref="F:System.Web.UI.WebControls.WizardStepType.Step" />
+
+                  
 
                   
 
@@ -443,8 +517,12 @@
 
                   
 
+                  
+
                    step in the history is the "same" step that the user is currently on. If the step is the same, the wizard control looks back in the history to determine the preceding "different" step and bases the display of the <ui
                   >Previous</ui>
+
+                  
 
                   
 
@@ -464,8 +542,12 @@
 
               
 
+              
+
                property is set to false, but the <see
                cref="P:System.Web.UI.WebControls.Wizard.DisplaySideBar" />
+
+              
 
               
 
@@ -478,8 +560,12 @@
 
               
 
+              
+
                is set to true, clicking on a button in the sidebar area has no effect. The sidebar area is generally displayed to provide nonlinear navigation, so if you are not using the functionality of nonlinear navigation, you may want to set the <see
                cref="P:System.Web.UI.WebControls.Wizard.DisplaySideBar" />
+
+              
 
               
 
@@ -496,10 +582,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="5df3ebbd-d46c-4502-9406-02f9df4ef2c3">ASP.NET Themes Overview</a>
             </format>
+
+            
 
             
 
@@ -513,6 +603,8 @@
           <para
             >Gets or sets a value indicating whether the user is allowed to return to the current step from a subsequent step in a <see
              cref="T:System.Web.UI.WebControls.WizardStepCollection" />
+
+            
 
             
 
@@ -553,6 +645,8 @@
 
             
 
+            
+
              property returns a string that identifies a step in a wizard control. If a value is specified for the <see
              cref="P:System.Web.UI.WebControls.WizardStepBase.Title" />
 
@@ -560,8 +654,12 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Web.UI.WebControls.WizardStepBase.Name" />
+
+            
 
             
 
@@ -574,8 +672,12 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Web.UI.WebControls.WizardStepBase.Name" />
+
+            
 
             
 
@@ -588,8 +690,12 @@
 
             
 
+            
+
              property. If values are not specified for either the <see
              cref="P:System.Web.UI.WebControls.WizardStepBase.Title" />
+
+            
 
             
 
@@ -602,8 +708,12 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Web.UI.WebControls.WizardStepBase.Name" />
+
+            
 
             
 
@@ -648,8 +758,12 @@
 
             
 
+            
+
              property to specify the type of navigation buttons to display for a step in a <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -662,12 +776,16 @@
 
             
 
+            
+
              displays in a disabled state in the sidebar.</para
           >
           <para>If you do not specify a value for this property, the default is WizardStepType.Auto.</para>
           <para
             >The following table lists the available settings for the <see
              cref="P:System.Web.UI.WebControls.WizardStepBase.StepType" />
+
+            
 
             
 
@@ -711,6 +829,8 @@
 
                   
 
+                  
+
                    step type.</para
                 >
               </description>
@@ -722,6 +842,8 @@
           <para
             >Gets or sets the type of navigation user interface (UI) to display for a step in a <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -762,8 +884,12 @@
 
             
 
+            
+
              property to display a user-friendly title for a step in a <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -776,8 +902,12 @@
 
             
 
+            
+
              property is not set and the sidebar feature is enabled, the value of the <see
              cref="P:System.Web.UI.WebControls.WizardStepBase.ID" />
+
+            
 
             
 
@@ -788,6 +918,8 @@
           <para
             >The value of this property, when set, can be saved automatically to a resource file by using a designer tool. For more information, see <see
              cref="T:System.ComponentModel.LocalizableAttribute" />
+
+            
 
             
 
@@ -804,6 +936,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -812,6 +946,8 @@
           <para
             >Gets or sets the title to use for a step in a <see
              cref="T:System.Web.UI.WebControls.Wizard" />
+
+            
 
             
 
@@ -856,8 +992,12 @@
 
             
 
+            
+
              control that is the parent of the object derived from <see
              cref="T:System.Web.UI.WebControls.WizardStepBase" />
+
+            
 
             
 

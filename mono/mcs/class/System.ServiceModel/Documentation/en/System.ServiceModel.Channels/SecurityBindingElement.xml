@@ -27,6 +27,8 @@
 
         
 
+        
+
         , <see
          cref="T:System.ServiceModel.Channels.AsymmetricSecurityBindingElement" />
 
@@ -34,8 +36,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.ServiceModel.Channels.TransportSecurityBindingElement" />
+
+        
 
         
 
@@ -55,6 +61,8 @@
 
             
 
+            
+
             . </para
           >
         </item>
@@ -67,8 +75,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.ServiceModel.Channels.ReliableSessionBindingElement" />
+
+            
 
             
 
@@ -86,8 +98,12 @@
 
             
 
+            
+
              using the <see
              cref="M:System.ServiceModel.Channels.BindingElementCollection.InsertItem(System.Int32,System.ServiceModel.Channels.BindingElement)" />
+
+            
 
             
 
@@ -105,8 +121,12 @@
 
             
 
+            
+
             , such as <see
              cref="T:System.ServiceModel.Channels.AsymmetricSecurityBindingElement" />
+
+            
 
             
 
@@ -119,8 +139,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.ServiceModel.Channels.TransportSecurityBindingElement" />
+
+            
 
             
 
@@ -141,6 +165,8 @@
 
             
 
+            
+
             .</para
           >
         </item>
@@ -148,6 +174,8 @@
       <para
         >crabout using a <see
          cref="T:System.ServiceModel.Channels.SecurityBindingElement" />
+
+        
 
         
 
@@ -164,12 +192,16 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="203a9f9e-3a73-427c-87aa-721c56265b29"
             >How To: Create a Custom Binding Using the SecurityBindingElement</a
           >
         </format>
+
+        
 
         
 
@@ -186,6 +218,8 @@
 
           
 
+          
+
            object is created, you should treat its properties as immutable. Calling set on some properties may have unpredictable effects: the binding may behave as if the property retained its old value, with a runtime failure being the only indication of an issue. Two properties known to behave this way are <see
            cref="P:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters.KeyType" />
 
@@ -193,8 +227,12 @@
 
           
 
+          
+
            and <see
            cref="P:System.ServiceModel.Channels.SecurityBindingElement.MessageSecurityVersion" />
+
+          
 
           
 
@@ -244,6 +282,8 @@
 
             
 
+            
+
             . That method, when implemented in a derived class, creates a channel factory, which is used to create a channel that processes outgoing messages for this binding.</para
           >
         </remarks>
@@ -252,6 +292,8 @@
           <para
             >Creates a channel factory based on the <see
              cref="T:System.ServiceModel.Channels.SecurityBindingElement" />
+
+            
 
             
 
@@ -270,11 +312,15 @@
 
             
 
+            
+
              settings and the binding context passed in.</para
           >
         </returns>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -287,10 +333,14 @@
 
           
 
+          
+
           .</param
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -332,6 +382,8 @@
 
             
 
+            
+
             , which does error checking, calls this method. When this method is implemented in a derived class, it creates a channel factory, which is used to create a channel that processes outgoing messages for this binding.</para
           >
         </remarks>
@@ -350,8 +402,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -361,6 +417,8 @@
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -409,6 +467,8 @@
 
             
 
+            
+
             . That method, when implemented in a derived class, creates a channel listener, which is used to create a channel that processes incoming messages for this binding.</para
           >
         </remarks>
@@ -417,6 +477,8 @@
           <para
             >Creates a channel listener based on the <see
              cref="T:System.ServiceModel.Channels.SecurityBindingElement" />
+
+            
 
             
 
@@ -435,11 +497,15 @@
 
             
 
+            
+
              settings and the binding context passed in.</para
           >
         </returns>
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -452,10 +518,14 @@
 
           
 
+          
+
           .</param
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -502,6 +572,8 @@
 
             
 
+            
+
             , which does error checking, calls this method. When this method is implemented in a derived class, it creates a channel listener, which is used to create a channel that processes outgoing messages for this binding.</para
           >
         </remarks>
@@ -520,8 +592,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -531,6 +607,8 @@
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -582,8 +660,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -593,6 +675,8 @@
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -649,8 +733,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.serviceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -660,6 +748,8 @@
         >
         <typeparam name="TChannel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -698,6 +788,8 @@
 
             
 
+            
+
              set to <see
              cref="P:System.ServiceModel.MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11" />
 
@@ -705,8 +797,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ServiceModel.Channels.SymmetricSecurityBindingElement.RequireSignatureConfirmation" />
+
+            
 
             
 
@@ -724,6 +820,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Channels.SymmetricSecurityBindingElement" />
+
+            
 
             
 
@@ -763,8 +861,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.ServiceModel.MessageSecurityVersion" />
+
+            
 
             
 
@@ -780,11 +882,15 @@
 
             
 
+            
+
              set to true. </para
           >
           <para
             >The <see
              cref="T:System.ServiceModel.Channels.LocalClientSecuritySettings" />
+
+            
 
             
 
@@ -797,8 +903,12 @@
 
             
 
+            
+
              has its <see
              cref="P:System.ServiceModel.Channels.LocalClientSecuritySettings.DetectReplays" />
+
+            
 
             
 
@@ -814,6 +924,8 @@
 
             
 
+            
+
              object returned from <see
              cref="P:System.ServiceModel.Channels.SecurityBindingElement.LocalServiceSettings" />
 
@@ -821,8 +933,12 @@
 
             
 
+            
+
              has its <see
              cref="P:System.ServiceModel.Channels.LocalServiceSecuritySettings.DetectReplays" />
+
+            
 
             
 
@@ -840,6 +956,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Channels.TransportSecurityBindingElement" />
+
+            
 
             
 
@@ -880,11 +998,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The created binding has <see
              cref="P:System.ServiceModel.Channels.SecurityBindingElement.IncludeTimestamp" />
+
+            
 
             
 
@@ -900,6 +1022,8 @@
 
             
 
+            
+
              object returned from <see
              cref="P:System.ServiceModel.Channels.SecurityBindingElement.LocalClientSettings" />
 
@@ -907,8 +1031,12 @@
 
             
 
+            
+
              has its <see
              cref="P:System.ServiceModel.Channels.LocalClientSecuritySettings.DetectReplays" />
+
+            
 
             
 
@@ -924,6 +1052,8 @@
 
             
 
+            
+
              object returned from <see
              cref="P:System.ServiceModel.Channels.SecurityBindingElement.LocalServiceSettings" />
 
@@ -931,8 +1061,12 @@
 
             
 
+            
+
              has its <see
              cref="P:System.ServiceModel.Channels.LocalServiceSecuritySettings.DetectReplays" />
+
+            
 
             
 
@@ -955,6 +1089,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -965,8 +1101,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.MessageSecurityVersion" />
+
+          
 
           
 
@@ -1004,6 +1144,8 @@
 
             
 
+            
+
              object returned from <see
              cref="P:System.ServiceModel.Channels.SecurityBindingElement.LocalClientSettings" />
 
@@ -1011,8 +1153,12 @@
 
             
 
+            
+
              has its <see
              cref="P:System.ServiceModel.Channels.LocalClientSecuritySettings.DetectReplays" />
+
+            
 
             
 
@@ -1031,6 +1177,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Channels.AsymmetricSecurityBindingElement" />
+
+            
 
             
 
@@ -1076,8 +1224,12 @@
 
               
 
+              
+
                object is created by calling this method, the <see
                cref="P:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters.KeyType" />
+
+              
 
               
 
@@ -1101,6 +1253,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -1111,8 +1265,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters" />
+
+          
 
           
 
@@ -1156,6 +1314,8 @@
 
             
 
+            
+
              set to true and <see
              cref="P:System.ServiceModel.Channels.SecurityBindingElement.MessageSecurityVersion" />
 
@@ -1163,8 +1323,12 @@
 
             
 
+            
+
              set to <see
              cref="P:System.ServiceModel.MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11" />
+
+            
 
             
 
@@ -1181,8 +1345,12 @@
 
               
 
+              
+
                object is created by calling this method, the <see
                cref="P:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters.KeyType" />
+
+              
 
               
 
@@ -1206,6 +1374,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -1216,8 +1386,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters" />
+
+          
 
           
 
@@ -1261,6 +1435,8 @@
 
             
 
+            
+
              set to true and <see
              cref="P:System.ServiceModel.Channels.SecurityBindingElement.MessageSecurityVersion" />
 
@@ -1268,8 +1444,12 @@
 
             
 
+            
+
              set to <see
              cref="P:System.ServiceModel.MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11" />
+
+            
 
             
 
@@ -1292,6 +1472,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -1302,8 +1484,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters" />
+
+          
 
           
 
@@ -1347,6 +1533,8 @@
 
             
 
+            
+
              set to true and <see
              cref="P:System.ServiceModel.Channels.SecurityBindingElement.MessageSecurityVersion" />
 
@@ -1354,8 +1542,12 @@
 
             
 
+            
+
              set to <see
              cref="P:System.ServiceModel.MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11" />
+
+            
 
             
 
@@ -1378,11 +1570,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="issuedTokenParameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1395,10 +1591,14 @@
 
           
 
+          
+
           .</param
         >
         <param name="requireCancellation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1441,11 +1641,15 @@
 
             
 
+            
+
              set to true.</para
           >
           <para
             >The <see
              cref="T:System.ServiceModel.Channels.LocalClientSecuritySettings" />
+
+            
 
             
 
@@ -1458,8 +1662,12 @@
 
             
 
+            
+
              has its <see
              cref="P:System.ServiceModel.Channels.LocalClientSecuritySettings.DetectReplays" />
+
+            
 
             
 
@@ -1475,6 +1683,8 @@
 
             
 
+            
+
              object returned from <see
              cref="P:System.ServiceModel.Channels.SecurityBindingElement.LocalServiceSettings" />
 
@@ -1482,8 +1692,12 @@
 
             
 
+            
+
              has its <see
              cref="P:System.ServiceModel.Channels.LocalServiceSecuritySettings.DetectReplays" />
+
+            
 
             
 
@@ -1500,8 +1714,12 @@
 
               
 
+              
+
                object is created by calling this method, the <see
                cref="P:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters.KeyType" />
+
+              
 
               
 
@@ -1525,6 +1743,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -1535,8 +1755,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ServiceModel.Security.Tokens.IssuedSecurityTokenParameters" />
+
+          
 
           
 
@@ -1582,6 +1806,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -1616,8 +1842,12 @@
 
             
 
+            
+
              set to true. The <see
              cref="T:System.ServiceModel.Channels.LocalClientSecuritySettings" />
+
+            
 
             
 
@@ -1630,8 +1860,12 @@
 
             
 
+            
+
              has its <see
              cref="P:System.ServiceModel.Channels.LocalClientSecuritySettings.DetectReplays" />
+
+            
 
             
 
@@ -1647,6 +1881,8 @@
 
             
 
+            
+
              object returned from <see
              cref="P:System.ServiceModel.Channels.SecurityBindingElement.LocalServiceSettings" />
 
@@ -1654,8 +1890,12 @@
 
             
 
+            
+
              has its <see
              cref="P:System.ServiceModel.Channels.LocalServiceSecuritySettings.DetectReplays" />
+
+            
 
             
 
@@ -1673,6 +1913,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Channels.TransportSecurityBindingElement" />
+
+            
 
             
 
@@ -1712,6 +1954,8 @@
 
             
 
+            
+
              is actually created.</para
           >
         </remarks>
@@ -1724,6 +1968,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Channels.SecurityBindingElement" />
+
+            
 
             
 
@@ -1767,8 +2013,12 @@
 
               
 
+              
+
                object is created by calling this method, the <see
                cref="P:System.ServiceModel.Channels.SecurityBindingElement.MessageSecurityVersion" />
+
+              
 
               
 
@@ -1792,11 +2042,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1837,6 +2091,8 @@
 
             
 
+            
+
              parameter, when true, enables interoperability with older versions of Web Services Enhancements (WSE).</para
           >
           <block subset="none" type="note">
@@ -1848,8 +2104,12 @@
 
               
 
+              
+
                object is created by calling this method, the <see
                cref="P:System.ServiceModel.Channels.SecurityBindingElement.MessageSecurityVersion" />
+
+              
 
               
 
@@ -1873,6 +2133,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -1883,10 +2145,14 @@
 
           
 
+          
+
           The message security version.</param
         >
         <param name="allowSerializedSigningTokenOnReply">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1929,6 +2195,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -1965,8 +2233,12 @@
 
               
 
+              
+
                object is created by calling this method, the <see
                cref="P:System.ServiceModel.Channels.SecurityBindingElement.MessageSecurityVersion" />
+
+              
 
               
 
@@ -1990,11 +2262,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="version">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2036,11 +2312,15 @@
 
             
 
+            
+
              is used to indicate the security binding and policy used to request a secure conversation token from the service.</para
           >
           <para
             >If <paramref
              name="bootstrapSecurity" />
+
+            
 
             
 
@@ -2053,8 +2333,12 @@
 
             
 
+            
+
             , the binding element returned by this method is also one, and <see
              cref="P:System.ServiceModel.Channels.SecurityBindingElement.IncludeTimestamp" />
+
+            
 
             
 
@@ -2067,8 +2351,12 @@
 
             
 
+            
+
              object returned from <see
              cref="P:System.ServiceModel.Channels.SecurityBindingElement.LocalClientSettings" />
+
+            
 
             
 
@@ -2081,8 +2369,12 @@
 
             
 
+            
+
              property set to false; and the <see
              cref="T:System.ServiceModel.Channels.LocalServiceSecuritySettings" />
+
+            
 
             
 
@@ -2095,8 +2387,12 @@
 
             
 
+            
+
              has its <see
              cref="P:System.ServiceModel.Channels.LocalServiceSecuritySettings.DetectReplays" />
+
+            
 
             
 
@@ -2112,8 +2408,12 @@
 
             
 
+            
+
              is returned, with <see
              cref="P:System.ServiceModel.Channels.SymmetricSecurityBindingElement.RequireSignatureConfirmation" />
+
+            
 
             
 
@@ -2131,6 +2431,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Channels.SecurityBindingElement" />
+
+            
 
             
 
@@ -2173,11 +2475,15 @@
 
             
 
+            
+
              is false, cookie-based security context tokens are issued; otherwise, session-based security context tokens are issued.</para
           >
           <para
             >The <paramref
              name="bootstrapSecurity" />
+
+            
 
             
 
@@ -2193,8 +2499,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.ServiceModel.Channels.TransportSecurityBindingElement" />
+
+            
 
             
 
@@ -2207,8 +2517,12 @@
 
             
 
+            
+
              is set to true; and the <see
              cref="T:System.ServiceModel.Channels.LocalClientSecuritySettings" />
+
+            
 
             
 
@@ -2221,8 +2535,12 @@
 
             
 
+            
+
              has its <see
              cref="P:System.ServiceModel.Channels.LocalClientSecuritySettings.DetectReplays" />
+
+            
 
             
 
@@ -2235,6 +2553,8 @@
 
             
 
+            
+
              object returned from <see
              cref="P:System.ServiceModel.Channels.SecurityBindingElement.LocalServiceSettings" />
 
@@ -2242,8 +2562,12 @@
 
             
 
+            
+
              has its <see
              cref="P:System.ServiceModel.Channels.LocalServiceSecuritySettings.DetectReplays" />
+
+            
 
             
 
@@ -2259,8 +2583,12 @@
 
             
 
+            
+
              is returned, with <see
              cref="P:System.ServiceModel.Channels.SymmetricSecurityBindingElement.RequireSignatureConfirmation" />
+
+            
 
             
 
@@ -2277,6 +2605,8 @@
 
               
 
+              
+
                is thrown. crdefault <format
                type="text/html">
                 <a href="72027d0f-146d-40c5-9d72-e94392c8bb40">Unsupported Scenarios</a>
@@ -2286,10 +2616,14 @@
 
               
 
+              
+
               . crabout secure sessions, see <format
                type="text/html">
                 <a href="7b50602f-d7b5-42e9-8e92-1f0413df0d8b">Secure Sessions</a>
               </format>
+
+              
 
               
 
@@ -2313,11 +2647,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="requireCancellation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2364,11 +2702,15 @@
 
             
 
+            
+
              parameter enables customization of how the messages exchanged as part of the secure conversation handshake are secured.</para
           >
           <para
             >The <paramref
              name="bootstrapSecurity" />
+
+            
 
             
 
@@ -2384,8 +2726,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.ServiceModel.Channels.TransportSecurityBindingElement" />
+
+            
 
             
 
@@ -2398,8 +2744,12 @@
 
             
 
+            
+
              is set to true; and the <see
              cref="T:System.ServiceModel.Channels.LocalClientSecuritySettings" />
+
+            
 
             
 
@@ -2412,8 +2762,12 @@
 
             
 
+            
+
              has its <see
              cref="P:System.ServiceModel.Channels.LocalClientSecuritySettings.DetectReplays" />
+
+            
 
             
 
@@ -2426,6 +2780,8 @@
 
             
 
+            
+
              object returned from <see
              cref="P:System.ServiceModel.Channels.SecurityBindingElement.LocalServiceSettings" />
 
@@ -2433,8 +2789,12 @@
 
             
 
+            
+
              has its <see
              cref="P:System.ServiceModel.Channels.LocalServiceSecuritySettings.DetectReplays" />
+
+            
 
             
 
@@ -2450,8 +2810,12 @@
 
             
 
+            
+
              is returned, with <see
              cref="P:System.ServiceModel.Channels.SymmetricSecurityBindingElement.RequireSignatureConfirmation" />
+
+            
 
             
 
@@ -2468,6 +2832,8 @@
 
               
 
+              
+
                is thrown. crdefault <format
                type="text/html">
                 <a href="72027d0f-146d-40c5-9d72-e94392c8bb40">Unsupported Scenarios</a>
@@ -2477,10 +2843,14 @@
 
               
 
+              
+
               . crabout secure sessions, see <format
                type="text/html">
                 <a href="7b50602f-d7b5-42e9-8e92-1f0413df0d8b">Secure Sessions</a>
               </format>
+
+              
 
               
 
@@ -2504,11 +2874,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="requireCancellation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2556,11 +2930,15 @@
 
             
 
+            
+
              that holds the new binding.</para
           >
         </returns>
         <param name="requireClientCertificate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2601,6 +2979,8 @@
 
             
 
+            
+
              is true; otherwise, it is cookie based.</para
           >
         </remarks>
@@ -2618,6 +2998,8 @@
 
             
 
+            
+
              that holds the new binding.</para
           >
         </returns>
@@ -2628,10 +3010,14 @@
 
           
 
+          
+
           true if a client certificate is required during the SSL negotiation.</param
         >
         <param name="requireCancellation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2677,6 +3063,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -2712,6 +3100,8 @@
 
             
 
+            
+
              is false, the security context token issued at the end of the SSPI negotiation is cookie based; otherwise, it is session based.</para
           >
         </remarks>
@@ -2729,11 +3119,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="requireCancellation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2772,8 +3166,12 @@
 
             
 
+            
+
              set to true. The <see
              cref="T:System.ServiceModel.Channels.LocalClientSecuritySettings" />
+
+            
 
             
 
@@ -2786,8 +3184,12 @@
 
             
 
+            
+
              has its <see
              cref="P:System.ServiceModel.Channels.LocalClientSecuritySettings.DetectReplays" />
+
+            
 
             
 
@@ -2803,6 +3205,8 @@
 
             
 
+            
+
              object returned from <see
              cref="P:System.ServiceModel.Channels.SecurityBindingElement.LocalServiceSettings" />
 
@@ -2810,8 +3214,12 @@
 
             
 
+            
+
              has its <see
              cref="P:System.ServiceModel.Channels.LocalServiceSecuritySettings.DetectReplays" />
+
+            
 
             
 
@@ -2829,6 +3237,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Channels.TransportSecurityBindingElement" />
+
+            
 
             
 
@@ -2869,11 +3279,15 @@
 
             
 
+            
+
              is false, cookie-based security context tokens are issued; otherwise, session-based security context tokens are issued.</para
           >
           <para
             >The created binding has <see
              cref="P:System.ServiceModel.Channels.SecurityBindingElement.IncludeTimestamp" />
+
+            
 
             
 
@@ -2886,6 +3300,8 @@
 
             
 
+            
+
              object returned from <see
              cref="P:System.ServiceModel.Channels.SecurityBindingElement.LocalClientSettings" />
 
@@ -2893,8 +3309,12 @@
 
             
 
+            
+
              has its <see
              cref="P:System.ServiceModel.Channels.LocalClientSecuritySettings.DetectReplays" />
+
+            
 
             
 
@@ -2910,6 +3330,8 @@
 
             
 
+            
+
              object returned from <see
              cref="P:System.ServiceModel.Channels.SecurityBindingElement.LocalServiceSettings" />
 
@@ -2917,8 +3339,12 @@
 
             
 
+            
+
              has its <see
              cref="P:System.ServiceModel.Channels.LocalServiceSecuritySettings.DetectReplays" />
+
+            
 
             
 
@@ -2941,11 +3367,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="requireCancellation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2986,6 +3416,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Channels.SymmetricSecurityBindingElement" />
+
+            
 
             
 
@@ -3033,6 +3465,8 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
@@ -3068,6 +3502,8 @@
 
             
 
+            
+
              is false, stateful security context tokens are issued; otherwise, stateless security context tokens are issued.</para
           >
           <para>The client does not need to be provisioned with the server certificate because it obtains it as part of the SSL protocol.</para>
@@ -3086,11 +3522,15 @@
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="requireCancellation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3128,8 +3568,12 @@
 
             
 
+            
+
              set to true. The <see
              cref="T:System.ServiceModel.Channels.LocalClientSecuritySettings" />
+
+            
 
             
 
@@ -3142,8 +3586,12 @@
 
             
 
+            
+
              has its <see
              cref="P:System.ServiceModel.Channels.LocalClientSecuritySettings.DetectReplays" />
+
+            
 
             
 
@@ -3159,6 +3607,8 @@
 
             
 
+            
+
              object returned from <see
              cref="P:System.ServiceModel.Channels.SecurityBindingElement.LocalServiceSettings" />
 
@@ -3166,8 +3616,12 @@
 
             
 
+            
+
              has its <see
              cref="P:System.ServiceModel.Channels.LocalServiceSecuritySettings.DetectReplays" />
+
+            
 
             
 
@@ -3185,6 +3639,8 @@
           <para
             >A <see
              cref="T:System.ServiceModel.Channels.TransportSecurityBindingElement" />
+
+            
 
             
 
@@ -3218,6 +3674,8 @@
           <para
             >The <see
              cref="T:System.ServiceModel.Security.SecurityAlgorithmSuite" />
+
+            
 
             
 
@@ -3260,8 +3718,12 @@
 
             
 
+            
+
              contains additional token parameters (<see
              cref="T:System.ServiceModel.Security.Tokens.SecurityTokenParameters" />
+
+            
 
             
 
@@ -3274,8 +3736,12 @@
 
             
 
+            
+
              or the <see
              cref="T:System.ServiceModel.Channels.AsymmetricSecurityBindingElement" />
+
+            
 
             
 
@@ -3288,8 +3754,12 @@
 
             
 
+            
+
              class). In the case of the <see
              cref="T:System.ServiceModel.Channels.SymmetricSecurityBindingElement" />
+
+            
 
             
 
@@ -3302,8 +3772,12 @@
 
             
 
+            
+
              property. On the <see
              cref="T:System.ServiceModel.Channels.AsymmetricSecurityBindingElement" />
+
+            
 
             
 
@@ -3316,8 +3790,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ServiceModel.Channels.AsymmetricSecurityBindingElement.RecipientTokenParameters" />
+
+            
 
             
 
@@ -3331,6 +3809,8 @@
             <para
               >To provide supporting tokens only for an operation (not all operations on an endpoint), use the <see
                cref="P:System.ServiceModel.Channels.SecurityBindingElement.OptionalOperationSupportingTokenParameters" />
+
+              
 
               
 
@@ -3383,6 +3863,8 @@
 
             
 
+            
+
             . </para
           >
           <para
@@ -3393,8 +3875,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.ServiceModel.Security.IdentityVerifier" />
+
+            
 
             
 
@@ -3413,6 +3899,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3421,6 +3909,8 @@
           <para
             >The specified object from the <see
              cref="T:System.ServiceModel.Channels.BindingContext" />
+
+            
 
             
 
@@ -3436,8 +3926,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -3447,6 +3941,8 @@
         >
         <typeparam name="T">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3473,6 +3969,8 @@
           <para
             >If the <see
              cref="P:System.ServiceModel.Channels.SecurityBindingElement.IncludeTimestamp" />
+
+            
 
             
 
@@ -3515,8 +4013,12 @@
 
             
 
+            
+
              specifies how the key for tokens (such as <see
              cref="T:System.ServiceModel.Security.Tokens.SecurityContextSecurityToken" />
+
+            
 
             
 
@@ -3554,6 +4056,8 @@
           <para
             >The settings are local in the sense that they are not the settings derived from the security policy of the service. You can get the <see
              cref="T:System.ServiceModel.Channels.LocalClientSecuritySettings" />
+
+            
 
             
 
@@ -3597,12 +4101,16 @@
 
             
 
+            
+
              object can help mitigate a denial-of-service (DOS) security attack:</para
           >
           <list type="bullet">
             <item>
               <para>
                 <see cref="P:System.ServiceModel.Channels.LocalServiceSecuritySettings.MaxCachedCookies" />
+
+                
 
                 
 
@@ -3619,12 +4127,16 @@
 
                 
 
+                
+
                 : controls the lifetime of the SecurityContextTokens that are issued by the server following SPNEGO or SSL negotiation. The server caches the SecurityContextTokens for this period of time.</para
               >
             </item>
             <item>
               <para>
                 <see cref="P:System.ServiceModel.Channels.LocalServiceSecuritySettings.MaxPendingSessions" />
+
+                
 
                 
 
@@ -3641,6 +4153,8 @@
 
                 
 
+                
+
                 : controls the maximum time that the service keeps a secure conversation alive without ever receiving an application message on it. This quota prevents clients from establishing secure conversations at the service, thereby causing the service to maintain state for each client, but never using them.</para
               >
             </item>
@@ -3648,6 +4162,8 @@
           <para
             >In a secure conversation session, note that both <see
              cref="P:System.ServiceModel.Channels.LocalServiceSecuritySettings.InactivityTimeout" />
+
+            
 
             
 
@@ -3690,12 +4206,16 @@
 
             
 
+            
+
              contains numerous properties that specify version numbers of different security specifications used when securing messages exchanged on the channel.</para
           >
           <block subset="none" type="note">
             <para
               >Once a <see
                cref="T:System.ServiceModel.Channels.SecurityBindingElement" />
+
+              
 
               
 
@@ -3740,8 +4260,12 @@
 
             
 
+            
+
              property contains additional token parameters (<see
              cref="T:System.ServiceModel.Security.Tokens.SecurityTokenParameters" />
+
+            
 
             
 
@@ -3754,8 +4278,12 @@
 
             
 
+            
+
              or the <see
              cref="T:System.ServiceModel.Channels.AsymmetricSecurityBindingElement" />
+
+            
 
             
 
@@ -3768,8 +4296,12 @@
 
             
 
+            
+
              class). In the case of the <see
              cref="T:System.ServiceModel.Channels.SymmetricSecurityBindingElement" />
+
+            
 
             
 
@@ -3782,8 +4314,12 @@
 
             
 
+            
+
              property. On the <see
              cref="T:System.ServiceModel.Channels.AsymmetricSecurityBindingElement" />
+
+            
 
             
 
@@ -3796,8 +4332,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ServiceModel.Channels.AsymmetricSecurityBindingElement.RecipientTokenParameters" />
+
+            
 
             
 
@@ -3812,6 +4352,8 @@
           <para
             >To provide supporting tokens only for an operation (not all operations on an endpoint), use the <see
              cref="P:System.ServiceModel.Channels.SecurityBindingElement.OptionalOperationSupportingTokenParameters" />
+
+            
 
             
 
@@ -3854,6 +4396,8 @@
 
             
 
+            
+
              collection.</para
           >
         </remarks>
@@ -3886,6 +4430,8 @@
           <para
             >Supporting tokens provide additional claims beyond those contained in the primary tokens for the binding. Supporting tokens can be scoped at a different scope than the binding, in this case the operation. The service does not reject the message in case it does not contain tokens that correspond to token types specified in the <see
              cref="P:System.ServiceModel.Channels.SecurityBindingElement.OptionalOperationSupportingTokenParameters" />
+
+            
 
             
 
@@ -3928,12 +4474,16 @@
 
             
 
+            
+
              enumeration contains the following members:</para
           >
           <list type="bullet">
             <item>
               <para>
                 <see cref="F:System.ServiceModel.Channels.SecurityHeaderLayout.Strict" />
+
+                
 
                 
 
@@ -3950,6 +4500,8 @@
 
                 
 
+                
+
                 : Items are added to the security header in any order that conforms to WSS: SOAP Message security. </para
               >
             </item>
@@ -3961,12 +4513,16 @@
 
                 
 
+                
+
                 : Items are added to the security header in any order that conforms to WSS: SOAP message security except that the first element in the security header must be a wsse:Timestamp element. </para
               >
             </item>
             <item>
               <para>
                 <see cref="F:System.ServiceModel.Channels.SecurityHeaderLayout.LaxTimestampLast" />
+
+                
 
                 
 
@@ -4022,8 +4578,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Security.Tokens.SecurityTokenParameters" />
+
+          
 
           
 
@@ -4038,8 +4598,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Channels.BindingContext" />
+
+          
 
           
 
@@ -4081,6 +4645,8 @@
 
           
 
+          
+
           true to require derived keys; otherwise, false. </param
         >
       </Docs>
@@ -4110,8 +4676,12 @@
 
             
 
+            
+
              includes the <see
              cref="P:System.ServiceModel.Channels.SecurityBindingElement.DefaultAlgorithmSuite" />
+
+            
 
             
 
@@ -4124,8 +4694,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.ServiceModel.Channels.SecurityBindingElement.IncludeTimestamp" />
+
+            
 
             
 
@@ -4138,8 +4712,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.ServiceModel.Channels.SecurityBindingElement.OptionalEndpointSupportingTokenParameters" />
+
+            
 
             
 
@@ -4152,8 +4730,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.ServiceModel.Channels.SecurityBindingElement.OperationSupportingTokenParameters" />
+
+            
 
             
 
@@ -4171,6 +4753,8 @@
           <para
             >A description of the current <see
              cref="T:System.ServiceModel.Channels.SecurityBindingElement" />
+
+            
 
             
 

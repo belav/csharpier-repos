@@ -33,6 +33,8 @@
 
         
 
+        
+
          constant, whereas the ref and docRef attributes are placed in the <see
          cref="P:System.Web.Services.Discovery.ContractReference.Ref" />
 
@@ -40,8 +42,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.Services.Discovery.ContractReference.DocRef" />
+
+        
 
         
 
@@ -72,6 +78,8 @@
 
             
 
+            
+
              class using default values.</para
           >
         </remarks>
@@ -80,6 +88,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Discovery.ContractReference" />
+
+            
 
             
 
@@ -112,11 +122,15 @@
 
             
 
+            
+
              class using the specified reference name.</para
           >
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.Web.Services.Discovery.ContractReference" />
+
+            
 
             
 
@@ -148,6 +162,8 @@
 
                   
 
+                  
+
                    parameter that represents the reference name. </para
                 >
               </description>
@@ -164,6 +180,8 @@
 
             
 
+            
+
              class using the supplied reference to a Service Description.</para
           >
         </summary>
@@ -174,8 +192,12 @@
 
           
 
+          
+
           The URL for a Sevice Descritpion. Initializes the <see
            cref="P:System.Web.Services.Discovery.ContractReference.Ref" />
+
+          
 
           
 
@@ -211,11 +233,15 @@
 
             
 
+            
+
              class using the specified reference name and docRef.</para
           >
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.Web.Services.Discovery.ContractReference" />
+
+            
 
             
 
@@ -247,6 +273,8 @@
 
                   
 
+                  
+
                    parameter that represents the reference name. </para
                 >
               </description>
@@ -259,6 +287,8 @@
                 <para
                   >The <paramref
                    name="docRef" />
+
+                  
 
                   
 
@@ -280,6 +310,8 @@
 
             
 
+            
+
              class using the supplied references to a service description and a XML Web service implementing the service description.</para
           >
         </summary>
@@ -290,8 +322,12 @@
 
           
 
+          
+
           The URL for a service description. Initializes the <see
            cref="P:System.Web.Services.Discovery.ContractReference.Ref" />
+
+          
 
           
 
@@ -306,6 +342,8 @@
 
           
 
+          
+
           The URL for a XML Web service implementing the service description at <paramref
            name="href" />
 
@@ -313,8 +351,12 @@
 
           
 
+          
+
           . Initializes the <see
            cref="P:System.Web.Services.Discovery.ContractReference.DocRef" />
+
+          
 
           
 
@@ -349,6 +391,8 @@
           <para
             >Gets a <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -421,13 +465,14 @@
             </listheader>
             <item>
               <term>
-                <para
->ref </para>
+                <para>ref </para>
               </term>
               <description>
                 <para
                   >The URL for the service description. The <see
                    cref="P:System.Web.Services.Discovery.ContractReference.Ref" />
+
+                  
 
                   
 
@@ -450,6 +495,8 @@
 
                   
 
+                  
+
                    property represents the value of the docRef attribute. </para
                 >
               </description>
@@ -461,6 +508,8 @@
           <para
             >Gets and sets the URL for a XML Web service implementing the service description referenced in the <see
              cref="P:System.Web.Services.Discovery.ContractReference.Ref" />
+
+            
 
             
 
@@ -493,6 +542,8 @@
           <para
             >Within a discovery document, a reference to a Service Description is contained within a contractRef XML element, which is a part of the XML namespace specified in the <see
              cref="F:System.Web.Services.Discovery.ContractReference.Namespace" />
+
+            
 
             
 
@@ -535,6 +586,8 @@
 
             
 
+            
+
              and returns the service description.</para
           >
         </summary>
@@ -548,12 +601,16 @@
 
             
 
+            
+
              containing the contents of the referenced service description.</para
           >
         </returns>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -592,13 +649,14 @@
             </listheader>
             <item>
               <term>
-                <para
->ref </para>
+                <para>ref </para>
               </term>
               <description>
                 <para
                   >The URL for the service description.The <see
                    cref="P:System.Web.Services.Discovery.ContractReference.Ref" />
+
+                  
 
                   
 
@@ -616,6 +674,8 @@
                 <para
                   >The URL for a XML Web service implementing the service description specified by the ref attribute. The <see
                    cref="P:System.Web.Services.Discovery.ContractReference.DocRef" />
+
+                  
 
                   
 
@@ -670,8 +730,12 @@
 
             
 
+            
+
              is a Service Description, then the contents of <paramref
              name="stream" />
+
+            
 
             
 
@@ -684,6 +748,8 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.Services.Discovery.DiscoveryClientProtocol.Documents" />
 
@@ -691,8 +757,12 @@
 
             
 
+            
+
              properties of <see
              cref="P:System.Web.Services.Discovery.DiscoveryReference.ClientProtocol" />
+
+            
 
             
 
@@ -712,8 +782,12 @@
 
           
 
+          
+
           The MIME content type of <paramref
            name="stream" />
+
+          
 
           
 
@@ -728,8 +802,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.Stream" />
+
+          
 
           
 
@@ -761,6 +839,8 @@
 
             
 
+            
+
              class, the <see
              cref="P:System.Web.Services.Discovery.ContractReference.Url" />
 
@@ -768,8 +848,12 @@
 
             
 
+            
+
              property returns the value of the <see
              cref="P:System.Web.Services.Discovery.ContractReference.Ref" />
+
+            
 
             
 
@@ -818,11 +902,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="document">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -835,8 +923,12 @@
 
           
 
+          
+
            to write into <paramref
            name="stream" />
+
+          
 
           
 
@@ -851,6 +943,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.IO.Stream" />
 
@@ -858,8 +952,12 @@
 
           
 
+          
+
            into which the serialized <see
            cref="T:System.Web.Services.Description.ServiceDescription" />
+
+          
 
           
 

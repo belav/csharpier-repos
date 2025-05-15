@@ -23,8 +23,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
         , which has properties of type <see
          cref="T:System.Windows.Forms.DataGridViewAdvancedCellBorderStyle" />
+
+        
 
         
 
@@ -52,6 +60,8 @@
       <para
         >Specifies the border styles that can be applied to the cells of a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 

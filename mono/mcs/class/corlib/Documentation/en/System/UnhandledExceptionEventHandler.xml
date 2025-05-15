@@ -49,11 +49,15 @@
 
       
 
+      
+
        event.</param
     >
     <param name="e"
       >A <see
        cref="T:System.UnhandledExceptionEventArgs" />
+
+      
 
       
 
@@ -71,6 +75,8 @@
 
         
 
+        
+
          can only be specified for the default application domain that is created by the system to execute an application. Specifying an <see
          cref="T:System.UnhandledExceptionEventHandler" />
 
@@ -78,8 +84,12 @@
 
         
 
+        
+
          for an <see
          cref="T:System.AppDomain" />
+
+        
 
         
 
@@ -95,10 +105,14 @@
 
         
 
+        
+
          delegate, you identify the method that will handle the event. To associate the event handler with your event, add an instance of the delegate to the event. The event handler is called whenever the event occurs, unless you remove the delegate. For more information about event handler delegates, see <format
          type="text/html">
           <a href="D98FD58B-FA4F-4598-8378-ADDF4355A115">[&lt;topic://cpconEventsDelegates&gt;]</a>
         </format>
+
+        
 
         
 

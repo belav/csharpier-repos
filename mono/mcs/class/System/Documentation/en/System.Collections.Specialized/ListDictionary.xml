@@ -37,8 +37,12 @@
 
         
 
+        
+
          using a singly linked list. It is smaller and faster than a <see
          cref="T:System.Collections.Hashtable" />
+
+        
 
         
 
@@ -54,8 +58,12 @@
 
         
 
+        
+
          are not in any guaranteed order; code should not depend on the current order. The <see
          cref="T:System.Collections.Specialized.ListDictionary" />
+
+        
 
         
 
@@ -71,8 +79,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Collections.Specialized.ListDictionary.Add(System.Object,System.Object)" />
+
+        
 
         
 
@@ -85,8 +97,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Collections.Specialized.ListDictionary.Contains(System.Object)" />
+
+        
 
         
 
@@ -99,6 +115,8 @@
 
         
 
+        
+
         ) operations, where <paramref
          name="n" />
 
@@ -106,8 +124,12 @@
 
         
 
+        
+
          is <see
          cref="P:System.Collections.Specialized.ListDictionary.Count" />
+
+        
 
         
 
@@ -124,8 +146,12 @@
 
         
 
+        
+
          is a key/value pair, the element type is not the type of the key or the type of the value. Instead, the element type is <see
          cref="T:System.Collections.DictionaryEntry" />
+
+        
 
         
 
@@ -167,8 +193,12 @@
 
             
 
+            
+
              must be unique. The default comparer is the key's implementation of <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -183,6 +213,8 @@
           <para
             >Creates an empty <see
              cref="T:System.Collections.Specialized.ListDictionary" />
+
+            
 
             
 
@@ -223,8 +255,12 @@
 
             
 
+            
+
              must be unique. The default comparer is the key's implementation of <see
              cref="M:System.Object.Equals(System.Object)" />
+
+            
 
             
 
@@ -245,6 +281,8 @@
 
             
 
+            
+
              using the specified comparer.</para
           >
         </summary>
@@ -255,8 +293,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Collections.IComparer" />
+
+          
 
           
 
@@ -297,8 +339,12 @@
 
             
 
+            
+
              property to add new elements by setting the value of a key that does not exist in the <see
              cref="T:System.Collections.Specialized.ListDictionary" />
+
+            
 
             
 
@@ -311,6 +357,8 @@
 
             
 
+            
+
             , setting the <see
              cref="P:System.Collections.Specialized.ListDictionary.Item(System.Object)" />
 
@@ -318,8 +366,12 @@
 
             
 
+            
+
              property overwrites the old value. In contrast, the <see
              cref="M:System.Collections.Specialized.ListDictionary.Add(System.Object,System.Object)" />
+
+            
 
             
 
@@ -335,6 +387,8 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -342,8 +396,12 @@
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Specialized.ListDictionary.Count" />
+
+            
 
             
 
@@ -362,6 +420,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -372,10 +432,14 @@
 
           
 
+          
+
           The key of the entry to add. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -411,6 +475,8 @@
 
             
 
+            
+
              is set to zero, and references to other objects from elements of the collection are also released.</para
           >
           <para>This method is an O(1) operation.</para>
@@ -420,6 +486,8 @@
           <para
             >Removes all entries from the <see
              cref="T:System.Collections.Specialized.ListDictionary" />
+
+            
 
             
 
@@ -459,6 +527,8 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -466,8 +536,12 @@
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Specialized.ListDictionary.Count" />
+
+            
 
             
 
@@ -483,8 +557,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
+
+            
 
             
 
@@ -497,8 +575,12 @@
 
             
 
+            
+
              to determine whether <paramref
              name="item" />
+
+            
 
             
 
@@ -511,6 +593,8 @@
 
             
 
+            
+
              and <see
              cref="M:System.IComparable.CompareTo(System.Object)" />
 
@@ -518,8 +602,12 @@
 
             
 
+            
+
              methods of the <paramref
              name="item" />
+
+            
 
             
 
@@ -538,6 +626,8 @@
 
             
 
+            
+
              contains a specific key.</para
           >
         </summary>
@@ -546,6 +636,8 @@
           <para
             >true if the <see
              cref="T:System.Collections.Specialized.ListDictionary" />
+
+            
 
             
 
@@ -561,8 +653,12 @@
 
           
 
+          
+
           The key to locate in the <see
            cref="T:System.Collections.Specialized.ListDictionary" />
+
+          
 
           
 
@@ -602,8 +698,12 @@
 
             
 
+            
+
              in the same order in which the enumerator iterates through the <see
              cref="T:System.Collections.Specialized.ListDictionary" />
+
+            
 
             
 
@@ -619,11 +719,15 @@
 
             
 
+            
+
             , use ListDictionary.Keys.CopyTo.</para
           >
           <para
             >To copy only the values in the <see
              cref="T:System.Collections.Specialized.ListDictionary" />
+
+            
 
             
 
@@ -639,6 +743,8 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -646,8 +752,12 @@
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Specialized.ListDictionary.Count" />
+
+            
 
             
 
@@ -666,8 +776,12 @@
 
             
 
+            
+
              entries to a one-dimensional <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -683,8 +797,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -697,6 +815,8 @@
 
           
 
+          
+
            objects copied from <see
            cref="T:System.Collections.Specialized.ListDictionary" />
 
@@ -704,8 +824,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -720,8 +844,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -754,6 +882,8 @@
           <para
             >Gets the number of key/value pairs contained in the <see
              cref="T:System.Collections.Specialized.ListDictionary" />
+
+            
 
             
 
@@ -796,8 +926,12 @@
 
             
 
+            
+
              also brings the enumerator back to this position.  At this position, <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -810,8 +944,12 @@
 
             
 
+            
+
              to advance the enumerator to the first element of the collection before reading the value of <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -826,8 +964,12 @@
 
             
 
+            
+
              returns the same object until either <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -840,6 +982,8 @@
 
             
 
+            
+
              is called. <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
 
@@ -847,8 +991,12 @@
 
             
 
+            
+
              sets <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -864,8 +1012,12 @@
 
             
 
+            
+
              passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -878,8 +1030,12 @@
 
             
 
+            
+
              also return false. If the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -892,8 +1048,12 @@
 
             
 
+            
+
              is undefined. To set <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -906,8 +1066,12 @@
 
             
 
+            
+
              followed by <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -929,8 +1093,12 @@
 
             
 
+            
+
              that iterates through the <see
              cref="T:System.Collections.Specialized.ListDictionary" />
+
+            
 
             
 
@@ -949,8 +1117,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Collections.Specialized.ListDictionary" />
+
+            
 
             
 
@@ -984,6 +1156,8 @@
 
             
 
+            
+
              implements the <see
              cref="P:System.Collections.Specialized.ListDictionary.IsFixedSize" />
 
@@ -991,8 +1165,12 @@
 
             
 
+            
+
              property because it is required by the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -1009,6 +1187,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Collections.Specialized.ListDictionary" />
+
+            
 
             
 
@@ -1042,6 +1222,8 @@
 
             
 
+            
+
              implements the <see
              cref="P:System.Collections.Specialized.ListDictionary.IsReadOnly" />
 
@@ -1049,8 +1231,12 @@
 
             
 
+            
+
              property because it is required by the <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -1067,6 +1253,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Collections.Specialized.ListDictionary" />
+
+            
 
             
 
@@ -1100,6 +1288,8 @@
 
             
 
+            
+
              implements the <see
              cref="P:System.Collections.Specialized.ListDictionary.IsSynchronized" />
 
@@ -1107,8 +1297,12 @@
 
             
 
+            
+
              property because it is required by the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1124,8 +1318,12 @@
 
             
 
+            
+
              using the <see
              cref="P:System.Collections.Specialized.ListDictionary.SyncRoot" />
+
+            
 
             
 
@@ -1140,6 +1338,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Collections.Specialized.ListDictionary" />
+
+            
 
             
 
@@ -1199,6 +1399,8 @@
 
             
 
+            
+
              is unspecified, but it is the same order as the associated values in the <see
              cref="T:System.Collections.ICollection" />
 
@@ -1206,8 +1408,12 @@
 
             
 
+            
+
              returned by the <see
              cref="P:System.Collections.Specialized.ListDictionary.Values" />
+
+            
 
             
 
@@ -1223,8 +1429,12 @@
 
             
 
+            
+
              is not a static copy; instead, the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1237,6 +1447,8 @@
 
             
 
+            
+
             . Therefore, changes to the <see
              cref="T:System.Collections.Specialized.ListDictionary" />
 
@@ -1244,8 +1456,12 @@
 
             
 
+            
+
              continue to be reflected in the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1265,8 +1481,12 @@
 
             
 
+            
+
              containing the keys in the <see
              cref="T:System.Collections.Specialized.ListDictionary" />
+
+            
 
             
 
@@ -1306,8 +1526,12 @@
 
             
 
+            
+
              does not contain an element with the specified key, the <see
              cref="T:System.Collections.Specialized.ListDictionary" />
+
+            
 
             
 
@@ -1323,6 +1547,8 @@
 
             
 
+            
+
             ) operation, where <paramref
              name="n" />
 
@@ -1330,8 +1556,12 @@
 
             
 
+            
+
              is <see
              cref="P:System.Collections.Specialized.ListDictionary.Count" />
+
+            
 
             
 
@@ -1350,11 +1580,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="key">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1388,8 +1622,12 @@
 
             
 
+            
+
              using the <see
              cref="P:System.Collections.Specialized.ListDictionary.SyncRoot" />
+
+            
 
             
 
@@ -1402,8 +1640,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Collections.Specialized.ListDictionary" />
+
+            
 
             
 
@@ -1416,8 +1658,12 @@
 
             
 
+            
+
             . This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see
              cref="T:System.Collections.Specialized.ListDictionary" />
+
+            
 
             
 
@@ -1432,6 +1678,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Collections.Specialized.ListDictionary" />
+
+            
 
             
 
@@ -1474,8 +1722,12 @@
 
             
 
+            
+
              also brings the enumerator back to this position. At this position, calling <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1488,8 +1740,12 @@
 
             
 
+            
+
              to advance the enumerator to the first element of the collection before reading the value of <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1504,8 +1760,12 @@
 
             
 
+            
+
              returns the same object until either <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1518,6 +1778,8 @@
 
             
 
+            
+
              is called. <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
 
@@ -1525,8 +1787,12 @@
 
             
 
+            
+
              sets <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1542,8 +1808,12 @@
 
             
 
+            
+
              passes the end of the collection, the enumerator is positioned after the last element in the collection and <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1556,8 +1826,12 @@
 
             
 
+            
+
              also return false. If the last call to <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1570,8 +1844,12 @@
 
             
 
+            
+
              throws an exception. To set <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1584,8 +1862,12 @@
 
             
 
+            
+
              followed by <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1601,8 +1883,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 
@@ -1615,8 +1901,12 @@
 
             
 
+            
+
             . If the collection is modified between <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
+
+            
 
             
 
@@ -1629,8 +1919,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Collections.IEnumerator.Current" />
+
+            
 
             
 
@@ -1651,8 +1945,12 @@
 
             
 
+            
+
              that iterates through the <see
              cref="T:System.Collections.Specialized.ListDictionary" />
+
+            
 
             
 
@@ -1671,8 +1969,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Collections.Specialized.ListDictionary" />
+
+            
 
             
 
@@ -1713,6 +2015,8 @@
 
             
 
+            
+
              is unspecified, but it is the same order as the associated keys in the <see
              cref="T:System.Collections.ICollection" />
 
@@ -1720,8 +2024,12 @@
 
             
 
+            
+
              returned by the <see
              cref="P:System.Collections.Specialized.ListDictionary.Keys" />
+
+            
 
             
 
@@ -1737,8 +2045,12 @@
 
             
 
+            
+
              is not a static copy; instead, the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1751,6 +2063,8 @@
 
             
 
+            
+
             . Therefore, changes to the <see
              cref="T:System.Collections.Specialized.ListDictionary" />
 
@@ -1758,8 +2072,12 @@
 
             
 
+            
+
              continue to be reflected in the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1779,8 +2097,12 @@
 
             
 
+            
+
              containing the values in the <see
              cref="T:System.Collections.Specialized.ListDictionary" />
+
+            
 
             
 

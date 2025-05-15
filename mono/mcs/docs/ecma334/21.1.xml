@@ -11,6 +11,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="24.2">attributes</non_terminal>
@@ -35,6 +37,8 @@
 
       
 
+      
+
        : <rhs
       >
         <terminal>:</terminal>
@@ -45,6 +49,8 @@
       <name>
         <non_terminal where="21.1">enum-body</non_terminal>
       </name>
+
+      
 
       
 
@@ -73,8 +79,12 @@
 
     
 
+    
+
     , <keyword
     >sbyte</keyword>
+
+    
 
     
 
@@ -87,8 +97,12 @@
 
     
 
+    
+
     , <keyword
     >ushort</keyword>
+
+    
 
     
 
@@ -101,8 +115,12 @@
 
     
 
+    
+
     , <keyword
     >uint</keyword>
+
+    
 
     
 
@@ -115,8 +133,12 @@
 
     
 
+    
+
      or <keyword
     >ulong</keyword>
+
+    
 
     
 
@@ -131,8 +153,12 @@
 
       
 
+      
+
        cannot be used as an underlying type. end note]</note
     >
+
+    
 
     
 
@@ -145,13 +171,15 @@
 
     
 
+    
+
     . </paragraph
   >
   <paragraph>
     <example
       >[Example: The example <code_example
       >
-<![CDATA[
+        <![CDATA[
 enum Color: long  
 {  
    Red,  
@@ -165,8 +193,12 @@ enum Color: long
 
       
 
+      
+
       declares an enum with an underlying type of <keyword
       >long</keyword>
+
+      
 
       
 
@@ -182,6 +214,8 @@ enum Color: long
 
       
 
+      
+
       , as in the example, to enable the use of values that are in the range of <keyword
       >long</keyword>
 
@@ -189,8 +223,12 @@ enum Color: long
 
       
 
+      
+
        but not in the range of <keyword
       >int</keyword>
+
+      
 
       
 

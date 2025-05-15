@@ -33,12 +33,16 @@
 
         
 
+        
+
          enumeration can be used to indicate the scope and access attributes of a class member. </para
       >
       <block subset="none" type="note">
         <para
           >There is no Virtual member attribute. A member is declared virtual by setting its member access to <see
            cref="F:System.CodeDom.MemberAttributes.Public" />
+
+          
 
           
 
@@ -51,8 +55,12 @@
 
           
 
+          
+
           . The absence of the <see
            cref="F:System.CodeDom.MemberAttributes.Final" />
+
+          
 
           
 
@@ -65,8 +73,12 @@
 
           
 
+          
+
            and <see
            cref="F:System.CodeDom.MemberAttributes.Final" />
+
+          
 
           
 
@@ -79,8 +91,12 @@
 
           
 
+          
+
            property. See the <see
            cref="P:System.CodeDom.CodeTypeMember.Attributes" />
+
+          
 
           
 
@@ -98,8 +114,12 @@
 
           
 
+          
+
            mask and then set the desired access flag. For example, the code statement to identify a constructor (named constructor1) as public is constructor1.Attributes = (constructor1.Attributes &amp; ~MemberAttributes.AccessMask) | MemberAttributes.Public;. Setting the <see
            cref="P:System.CodeDom.CodeTypeMember.Attributes" />
+
+          
 
           
 
@@ -112,8 +132,12 @@
 
           
 
+          
+
           , <see
            cref="F:System.CodeDom.MemberAttributes.Final" />
+
+          
 
           
 
@@ -126,8 +150,12 @@
 
           
 
+          
+
           , <see
            cref="F:System.CodeDom.MemberAttributes.Override" />
+
+          
 
           
 
@@ -140,8 +168,12 @@
 
           
 
+          
+
           ) using the <see
            cref="F:System.CodeDom.MemberAttributes.ScopeMask" />
+
+          
 
           
 

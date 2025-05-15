@@ -38,11 +38,15 @@
 
         
 
+        
+
          property to get the current value of the switch.</para
       >
       <para
         >You can enable or disable a <see
          cref="T:System.Diagnostics.BooleanSwitch" />
+
+        
 
         
 
@@ -55,8 +59,12 @@
 
         
 
+        
+
          value in your application. Alternately, you can create a <see
          cref="T:System.Diagnostics.BooleanSwitch" />
+
+        
 
         
 
@@ -69,11 +77,15 @@
 
         
 
+        
+
          property directly to instrument a specific section of code.</para
       >
       <para
         >To configure a <see
          cref="T:System.Diagnostics.BooleanSwitch" />
+
+        
 
         
 
@@ -96,8 +108,12 @@
 
         
 
+        
+
          with the <see
          cref="P:System.Diagnostics.Switch.DisplayName" />
+
+        
 
         
 
@@ -110,8 +126,12 @@
 
         
 
+        
+
          value set to true. Within your application, you can use the configured switch value by creating a <see
          cref="T:System.Diagnostics.BooleanSwitch" />
+
+        
 
         
 
@@ -128,8 +148,12 @@
 
         
 
+        
+
          property is set using the value specified in the configuration file. Configure the switch with a value of 0 to set the <see
          cref="P:System.Diagnostics.BooleanSwitch.Enabled" />
+
+        
 
         
 
@@ -142,6 +166,8 @@
 
         
 
+        
+
          property to true. If the <see
          cref="T:System.Diagnostics.BooleanSwitch" />
 
@@ -149,8 +175,12 @@
 
         
 
+        
+
          constructor cannot find initial switch settings in the configuration file, the <see
          cref="P:System.Diagnostics.BooleanSwitch.Enabled" />
+
+        
 
         
 
@@ -176,6 +206,8 @@
 
           
 
+          
+
            class in isolation. They are only required in conjunction with <see
            cref="T:System.Diagnostics.Trace" />
 
@@ -183,8 +215,12 @@
 
           
 
+          
+
            or <see
            cref="T:System.Diagnostics.Debug" />
+
+          
 
           
 
@@ -201,8 +237,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Diagnostics.Trace" />
+
+        
 
         
 
@@ -217,12 +257,16 @@
 
         
 
+        
+
         .</para
       >
       <block subset="none" type="note">
         <para
           >To improve performance, you can make <see
            cref="T:System.Diagnostics.BooleanSwitch" />
+
+          
 
           
 
@@ -269,8 +313,12 @@
 
             
 
+            
+
             , the <paramref
              name="displayName" />
+
+            
 
             
 
@@ -283,11 +331,15 @@
 
             
 
+            
+
              property is set to false (disabled).</para
           >
           <para
             >To set the level of your <see
              cref="T:System.Diagnostics.BooleanSwitch" />
+
+            
 
             
 
@@ -319,6 +371,8 @@
 
             
 
+            
+
              class with the specified display name and description.</para
           >
         </summary>
@@ -329,10 +383,14 @@
 
           
 
+          
+
           The name to display on a user interface. </param
         >
         <param name="description">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -372,8 +430,12 @@
 
             
 
+            
+
              parameter is used to set the value of the <see
              cref="P:System.Diagnostics.Switch.DisplayName" />
+
+            
 
             
 
@@ -386,8 +448,12 @@
 
             
 
+            
+
              parameter is use to set the value of the <see
              cref="P:System.Diagnostics.Switch.Description" />
+
+            
 
             
 
@@ -400,6 +466,8 @@
 
             
 
+            
+
              parameter is saved as a field and used to initialize the <see
              cref="P:System.Diagnostics.Switch.Value" />
 
@@ -407,8 +475,12 @@
 
             
 
+            
+
              property on first reference. For more information about constructor use, see the <see
              cref="M:System.Diagnostics.BooleanSwitch.#ctor(System.String,System.String)" />
+
+            
 
             
 
@@ -427,11 +499,15 @@
 
             
 
+            
+
              class with the specified display name, description, and default switch value. </para
           >
         </summary>
         <param name="displayName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -446,10 +522,14 @@
 
           
 
+          
+
           The description of the switch. </param
         >
         <param name="defaultSwitchValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -484,12 +564,16 @@
 
             
 
+            
+
             .</para
           >
           <block subset="none" type="note">
             <para
               >This method uses the <see
                cref="F:System.Security.Permissions.SecurityAction.LinkDemand" />
+
+              
 
               
 
@@ -502,8 +586,12 @@
 
               
 
+              
+
                permission. If your code can be called from partially trusted code, do not pass the user input to <see
                cref="T:System.Runtime.InteropServices.Marshal" />
+
+              
 
               
 
@@ -513,6 +601,8 @@
                type="text/html">
                 <a href="1ab877f2-70f4-4e0d-8116-943999dfe8f5">Demand vs. LinkDemand</a>
               </format>
+
+              
 
               
 
@@ -554,6 +644,8 @@
 
             
 
+            
+
              method determines whether the new value is a valid string representation of a Boolean value ("false" or "true"). If so, the method sets the <see
              cref="P:System.Diagnostics.Switch.SwitchSetting" />
 
@@ -561,8 +653,12 @@
 
             
 
+            
+
              property to 0 or 1.  Otherwise, the base method is called, which converts the string value to an integer value, which is then used to set the <see
              cref="P:System.Diagnostics.Switch.SwitchSetting" />
+
+            
 
             
 
@@ -576,6 +672,8 @@
           <para
             >Determines whether the new value of the <see
              cref="P:System.Diagnostics.Switch.Value" />
+
+            
 
             
 

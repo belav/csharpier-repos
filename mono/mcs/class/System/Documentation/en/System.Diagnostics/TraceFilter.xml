@@ -25,6 +25,8 @@
 
         
 
+        
+
          property. Trace switches determine if a trace is to be sent to the trace listeners. Trace filters allow the individual trace listeners to determine whether or not the trace is to be written to the associated output medium. For example, as determined by each trace filter, a trace may be written to the console by a <see
          cref="T:System.Diagnostics.ConsoleTraceListener" />
 
@@ -32,8 +34,12 @@
 
         
 
+        
+
         , but not to the event log by a <see
          cref="T:System.Diagnostics.EventLogTraceListener" />
+
+        
 
         
 
@@ -49,8 +55,12 @@
 
         
 
+        
+
          class can be used by trace listeners that inherit from the <see
          cref="T:System.Diagnostics.TraceListener" />
+
+        
 
         
 
@@ -63,8 +73,12 @@
 
         
 
+        
+
          contains a single method, <see
          cref="M:System.Diagnostics.TraceFilter.ShouldTrace(System.Diagnostics.TraceEventCache,System.String,System.Diagnostics.TraceEventType,System.Int32,System.String,System.Object[],System.Object,System.Object[])" />
+
+        
 
         
 
@@ -98,6 +112,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Diagnostics.TraceFilter" />
+
+            
 
             
 
@@ -152,8 +168,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Diagnostics.TraceEventCache" />
+
+          
 
           
 
@@ -168,6 +188,8 @@
 
           
 
+          
+
           The name of the source.</param
         >
         <param name="eventType">
@@ -177,8 +199,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Diagnostics.TraceEventType" />
+
+          
 
           
 
@@ -193,6 +219,8 @@
 
           
 
+          
+
           A trace identifier number.</param
         >
         <param name="formatOrMessage">
@@ -202,8 +230,12 @@
 
           
 
+          
+
           Either the format to use for writing an array of arguments specified by the <paramref
            name="args" />
+
+          
 
           
 
@@ -218,6 +250,8 @@
 
           
 
+          
+
           An array of argument objects.</param
         >
         <param name="data1">
@@ -227,10 +261,14 @@
 
           
 
+          
+
           A trace data object.</param
         >
         <param name="data">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

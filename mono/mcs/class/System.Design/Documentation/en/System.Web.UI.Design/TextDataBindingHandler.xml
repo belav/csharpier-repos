@@ -24,6 +24,8 @@
 
         
 
+        
+
          object is a data-binding handler that can provide data to a data-bound text property at design time. Data-binding handlers are used when there is no designer for the control present that would otherwise provide the data for the data bound property.</para
       >
     </remarks>
@@ -44,6 +46,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.TextDataBindingHandler" />
+
+            
 
             
 
@@ -82,8 +86,12 @@
 
             
 
+            
+
              method of <see
              cref="T:System.Web.UI.Design.TextDataBindingHandler" />
+
+            
 
             
 
@@ -104,8 +112,12 @@
 
           
 
+          
+
           An object implementing <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+          
 
           
 
@@ -120,8 +132,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Control" />
+
+          
 
           
 

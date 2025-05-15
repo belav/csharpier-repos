@@ -22,8 +22,12 @@
 
         
 
+        
+
          interface is the <see
          cref="T:System.Drawing.Graphics" />
+
+        
 
         
 
@@ -56,8 +60,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Drawing.IDeviceContext.ReleaseHdc" />
+
+            
 
             
 
@@ -70,8 +78,12 @@
 
             
 
+            
+
              with a call to <see
              cref="M:System.Drawing.IDeviceContext.ReleaseHdc" />
+
+            
 
             
 
@@ -81,6 +93,8 @@
           >
           <para>
             <see cref="M:System.Drawing.IDeviceContext.GetHdc" />
+
+            
 
             
 
@@ -98,6 +112,8 @@
           <para
             >An <see
              cref="T:System.IntPtr" />
+
+            
 
             
 
@@ -129,8 +145,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Drawing.IDeviceContext.ReleaseHdc" />
+
+            
 
             
 
@@ -143,8 +163,12 @@
 
             
 
+            
+
              with a call to <see
              cref="M:System.Drawing.IDeviceContext.ReleaseHdc" />
+
+            
 
             
 

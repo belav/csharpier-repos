@@ -42,8 +42,12 @@
 
         
 
+        
+
          instance into a <see
          cref="T:System.Uri" />
+
+        
 
         
 
@@ -56,8 +60,12 @@
 
         
 
+        
+
         . You can also use <see
          cref="T:System.UriTemplate" />
+
+        
 
         
 
@@ -70,6 +78,8 @@
 
         
 
+        
+
          from a set of variable values by calling <see
          cref="M:System.UriTemplate.BindByName(System.Uri,System.Collections.Specialized.NameValueCollection)" />
 
@@ -77,8 +87,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.UriTemplate.BindByPosition(System.Uri,System.String[])" />
+
+        
 
         
 
@@ -118,11 +132,15 @@
 
             
 
+            
+
              class with the specified template string.</para
           >
         </summary>
         <param name="template">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -160,6 +178,8 @@
 
             
 
+            
+
              is set to true, trailing slashes on the end of template are ignored when matching a candidate URI. For example, a template such as “http://www.microsoft.com/customer/” would match the following candidate URIs: </para
           >
           <list type="bullet">
@@ -187,6 +207,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -197,10 +219,14 @@
 
           
 
+          
+
           The template string.</param
         >
         <param name="ignoreTrailingSlash">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -242,6 +268,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -252,10 +280,14 @@
 
           
 
+          
+
           The template string.</param
         >
         <param name="additionalDefaults">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -298,11 +330,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="template">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -317,10 +353,14 @@
 
           
 
+          
+
           true if the trailing slash “/” characters are ignored; otherwise false.</param
         >
         <param name="additionalDefaults">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -364,6 +404,8 @@
 
             
 
+            
+
              parameter contains a collection of parameter name and value pairs. The parameters are matched up against the variables within the template by a case-insensitive comparison.</para
           >
           <block subset="none" type="note">
@@ -388,10 +430,14 @@
 
           
 
+          
+
           The base address.</param
         >
         <param name="parameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -432,12 +478,16 @@
 
             
 
+            
+
              parameter contains a collection of parameter name/value pairs. The parameters are matched up against the variables within the template by a case-insensitive comparison. Values passed in this collection are escaped.</para
           >
           <block subset="none" type="note">
             <para
               >The name/value collection passed to <see
                cref="M:System.UriTemplate.BindByName(System.Uri,System.Collections.Specialized.NameValueCollection)" />
+
+              
 
               
 
@@ -465,10 +515,14 @@
 
           
 
+          
+
           The base address.</param
         >
         <param name="parameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -519,6 +573,8 @@
 
           
 
+          
+
           A URI that contains the base address.</param
         >
         <param name="parameters">
@@ -528,10 +584,14 @@
 
           
 
+          
+
           A dictionary that contains a collection of parameter name/value pairs.</param
         >
         <param name="omitDefaults">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -579,6 +639,8 @@
 
           
 
+          
+
           The base address.</param
         >
         <param name="parameters">
@@ -588,10 +650,14 @@
 
           
 
+          
+
           A collection of parameter name/value pairs. </param
         >
         <param name="omitDefaults">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -640,6 +706,8 @@
 
               
 
+              
+
                is thrown.</para
             >
           </block>
@@ -668,11 +736,15 @@
 
             
 
+            
+
              instance.</para
           >
         </returns>
         <param name="baseAddress">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -685,10 +757,14 @@
 
           
 
+          
+
            that contains the base address.</param
         >
         <param name="values">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -769,6 +845,8 @@
 
             
 
+            
+
              instances are equivalent if their literal strings are identical and the variables appear in the same segments. For example "weather/{state}/{city}" is equivalent to "weather/{country}/{village}".</para
           >
         </remarks>
@@ -777,6 +855,8 @@
           <para
             >Indicates whether a <see
              cref="T:System.UriTemplate" />
+
+            
 
             
 
@@ -795,6 +875,8 @@
 
             
 
+            
+
              is structurally equivalent to another; otherwise false.</para
           >
         </returns>
@@ -805,8 +887,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.UriTemplate" />
+
+          
 
           
 
@@ -847,6 +933,8 @@
 
             
 
+            
+
              is populated with the URI segments, variable values, query string values, and wildcard segments from the candidate URI. If the match is unsuccessful, null is returned.</para
           >
         </remarks>
@@ -860,8 +948,12 @@
 
             
 
+            
+
              to a <see
              cref="T:System.UriTemplate" />
+
+            
 
             
 
@@ -881,6 +973,8 @@
 
           
 
+          
+
           The base address.</param
         >
         <param name="candidate">
@@ -890,8 +984,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Uri" />
+
+          
 
           
 
@@ -983,6 +1081,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -991,6 +1091,8 @@
           <para
             >The representation of the <see
              cref="T:System.UriTemplate" />
+
+            
 
             
 

@@ -24,8 +24,12 @@
 
         
 
+        
+
          and <see
          cref="M:Microsoft.Win32.RegistryKey.OpenRemoteBaseKey(Microsoft.Win32.RegistryHive,System.String,Microsoft.Win32.RegistryView)" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          property on a <see
          cref="T:Microsoft.Win32.RegistryKey" />
+
+        
 
         
 

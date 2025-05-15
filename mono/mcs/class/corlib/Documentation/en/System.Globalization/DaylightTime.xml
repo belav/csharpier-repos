@@ -35,6 +35,8 @@
 
           
 
+          
+
            object returned by the <see
            cref="M:System.TimeZone.GetDaylightChanges(System.Int32)" />
 
@@ -42,8 +44,12 @@
 
           
 
+          
+
            method recognizes only the time zone adjustment rule that is currently in effect, and ignores any previous adjustment rules for which the system has information. Instead, it applies the current adjustment rule backward in time to periods when it may not have been in effect. To retrieve information about all the known adjustment rules for a particular time zone, use the <see
            cref="M:System.TimeZoneInfo.GetAdjustmentRules" />
+
+          
 
           
 
@@ -91,8 +97,12 @@
 
             
 
+            
+
              parameter becomes the value of the <see
              cref="P:System.Globalization.DaylightTime.Start" />
+
+            
 
             
 
@@ -105,8 +115,12 @@
 
             
 
+            
+
              parameter becomes the value of the <see
              cref="P:System.Globalization.DaylightTime.End" />
+
+            
 
             
 
@@ -119,8 +133,12 @@
 
             
 
+            
+
              parameter becomes the value of the <see
              cref="P:System.Globalization.DaylightTime.Delta" />
+
+            
 
             
 
@@ -139,11 +157,15 @@
 
             
 
+            
+
              class with the specified start, end, and time difference information.</para
           >
         </summary>
         <param name="start">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -158,10 +180,14 @@
 
           
 
+          
+
           The object that represents the date and time when daylight saving time ends. The value must be in local time. </param
         >
         <param name="delta">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -198,8 +224,12 @@
 
             
 
+            
+
              property. Generally, the <see
              cref="T:System.TimeZoneInfo" />
+
+            
 
             
 
@@ -212,8 +242,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Globalization.DaylightTime" />
+
+            
 
             
 
@@ -253,8 +287,12 @@
 
             
 
+            
+
              property. Generally, the <see
              cref="T:System.TimeZoneInfo" />
+
+            
 
             
 
@@ -267,8 +305,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Globalization.DaylightTime" />
+
+            
 
             
 
@@ -311,8 +353,12 @@
 
             
 
+            
+
              property. Generally, the <see
              cref="T:System.TimeZoneInfo" />
+
+            
 
             
 
@@ -325,8 +371,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Globalization.DaylightTime" />
+
+            
 
             
 
@@ -337,6 +387,8 @@
           <para
             >When the daylight saving period begins, the clock time is advanced by the number of ticks defined by the <see
              cref="P:System.Globalization.DaylightTime.Delta" />
+
+            
 
             
 

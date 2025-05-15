@@ -23,8 +23,12 @@
 
         
 
+        
+
          object represents a connection to a data store in the design tool. Typically a <see
          cref="T:System.ComponentModel.Design.Data.DesignerDataConnection" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          property, and is created either by reading the application's configuration file or by calling the <see
          cref="M:System.ComponentModel.Design.Data.IDataEnvironment.BuildConnection(System.Windows.Forms.IWin32Window,System.ComponentModel.Design.Data.DesignerDataConnection)" />
+
+        
 
         
 
@@ -78,8 +86,12 @@
 
             
 
+            
+
              objects that are not created from the application's configuration file. When you use this constructor, the <see
              cref="P:System.ComponentModel.Design.Data.DesignerDataConnection.IsConfigured" />
+
+            
 
             
 
@@ -98,11 +110,15 @@
 
             
 
+            
+
              class with the specified name, data provider, and connection string. </para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -117,10 +133,14 @@
 
           
 
+          
+
           The name of the provider object used to access the underlying data store</param
         >
         <param name="connectionString">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -156,8 +176,12 @@
 
             
 
+            
+
              property, such as when you are creating a <see
              cref="T:System.ComponentModel.Design.Data.DesignerDataConnection" />
+
+            
 
             
 
@@ -170,8 +194,12 @@
 
             
 
+            
+
              property is set to the value of the <paramref
              name="isConfigured" />
+
+            
 
             
 
@@ -190,11 +218,15 @@
 
             
 
+            
+
              class with the specified name, data provider, and connection string, and indicates whether the connection was loaded from a configuration file. </para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -209,6 +241,8 @@
 
           
 
+          
+
           The name of the provider object used to access the underlying data store.</param
         >
         <param name="connectionString">
@@ -218,10 +252,14 @@
 
           
 
+          
+
           The string that specifies how to connect to the data store.</param
         >
         <param name="isConfigured">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -252,8 +290,12 @@
 
             
 
+            
+
              property contains the connection string used by the application for connecting to the data store. You must use the <see
              cref="M:System.ComponentModel.Design.Data.IDataEnvironment.GetDesignTimeConnection(System.ComponentModel.Design.Data.DesignerDataConnection)" />
+
+            
 
             
 
@@ -289,8 +331,12 @@
 
             
 
+            
+
              property will be true if the <see
              cref="T:System.ComponentModel.Design.Data.DesignerDataConnection" />
+
+            
 
             
 
@@ -303,8 +349,12 @@
 
             
 
+            
+
              object was written to the application's configuration file by the <see
              cref="M:System.ComponentModel.Design.Data.IDataEnvironment.ConfigureConnection(System.Windows.Forms.IWin32Window,System.ComponentModel.Design.Data.DesignerDataConnection,System.String)" />
+
+            
 
             
 
@@ -320,8 +370,12 @@
 
             
 
+            
+
              is true, the <see
              cref="P:System.ComponentModel.Design.Data.DesignerDataConnection.Name" />
+
+            
 
             
 
@@ -333,6 +387,8 @@
                 >connectionStrings Element (ASP.NET Settings Schema)</a
               >
             </format>
+
+            
 
             
 
@@ -368,6 +424,8 @@
 
             
 
+            
+
              property contains the name that identifies a specific connection in an application configuration file or a list of data connections. When the <see
              cref="P:System.ComponentModel.Design.Data.DesignerDataConnection.IsConfigured" />
 
@@ -375,8 +433,12 @@
 
             
 
+            
+
              property is true,  <see
              cref="P:System.ComponentModel.Design.Data.DesignerDataConnection.Name" />
+
+            
 
             
 
@@ -391,8 +453,12 @@
 
             
 
+            
+
              configuration element, or is returned from the <see
              cref="M:System.ComponentModel.Design.Data.IDataEnvironment.ConfigureConnection(System.Windows.Forms.IWin32Window,System.ComponentModel.Design.Data.DesignerDataConnection,System.String)" />
+
+            
 
             
 

@@ -27,8 +27,12 @@
 
         
 
+        
+
          collection is empty—the columns are mapped implicitly based on ordinal position. For this to work, source and target schemas must match. If they do not, an <see
          cref="T:System.InvalidOperationException" />
+
+        
 
         
 
@@ -39,6 +43,8 @@
       <para
         >If the <see
          cref="P:System.Data.SqlClient.SqlBulkCopy.ColumnMappings" />
+
+        
 
         
 
@@ -58,8 +64,12 @@
 
         
 
+        
+
          objects that inherits from <see
          cref="T:System.Collections.CollectionBase" />
+
+        
 
         
 
@@ -100,6 +110,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -108,6 +120,8 @@
           <para
             >A <see
              cref="T:System.Data.SqlClient.SqlBulkCopyColumnMapping" />
+
+            
 
             
 
@@ -123,8 +137,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.SqlClient.SqlBulkCopyColumnMapping" />
+
+          
 
           
 
@@ -161,6 +179,8 @@
 
             
 
+            
+
              is thrown.</para
           >
         </remarks>
@@ -169,6 +189,8 @@
           <para
             >Creates a new <see
              cref="T:System.Data.SqlClient.SqlBulkCopyColumnMapping" />
+
+            
 
             
 
@@ -188,10 +210,14 @@
 
           
 
+          
+
           The ordinal position of the source column within the data source.</param
         >
         <param name="destinationColumnIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -228,6 +254,8 @@
 
             
 
+            
+
              is thrown.</para
           >
         </remarks>
@@ -236,6 +264,8 @@
           <para
             >Creates a new <see
              cref="T:System.Data.SqlClient.SqlBulkCopyColumnMapping" />
+
+            
 
             
 
@@ -255,10 +285,14 @@
 
           
 
+          
+
           The ordinal position of the source column within the data source.</param
         >
         <param name="destinationColumn">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -295,6 +329,8 @@
 
             
 
+            
+
              is thrown.</para
           >
         </remarks>
@@ -303,6 +339,8 @@
           <para
             >Creates a new <see
              cref="T:System.Data.SqlClient.SqlBulkCopyColumnMapping" />
+
+            
 
             
 
@@ -322,10 +360,14 @@
 
           
 
+          
+
           The name of the source column within the data source.</param
         >
         <param name="destinationColumnIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -362,6 +404,8 @@
 
             
 
+            
+
              is thrown.</para
           >
         </remarks>
@@ -370,6 +414,8 @@
           <para
             >Creates a new <see
              cref="T:System.Data.SqlClient.SqlBulkCopyColumnMapping" />
+
+            
 
             
 
@@ -389,10 +435,14 @@
 
           
 
+          
+
           The name of the source column within the data source.</param
         >
         <param name="destinationColumn">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -423,8 +473,12 @@
 
             
 
+            
+
              method is most commonly used when you use a single <see
              cref="T:System.Data.SqlClient.SqlBulkCopy" />
+
+            
 
             
 
@@ -437,8 +491,12 @@
 
             
 
+            
+
              after the <see
              cref="Overload:System.Data.SqlClient.SqlBulkCopy.WriteToServer" />
+
+            
 
             
 
@@ -454,8 +512,12 @@
 
             
 
+            
+
              instance will usually be more efficient from a performance point of view than using a separate <see
              cref="T:System.Data.SqlClient.SqlBulkCopy" />
+
+            
 
             
 
@@ -497,6 +559,8 @@
 
             
 
+            
+
              object exists in the collection.</para
           >
         </summary>
@@ -511,8 +575,12 @@
 
           
 
+          
+
           A valid <see
            cref="T:System.Data.SqlClient.SqlBulkCopyColumnMapping" />
+
+          
 
           
 
@@ -550,8 +618,12 @@
 
             
 
+            
+
              to an array of <see
              cref="T:System.Data.SqlClient.SqlBulkCopyColumnMapping" />
+
+            
 
             
 
@@ -567,6 +639,8 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Data.SqlClient.SqlBulkCopyColumnMapping" />
 
@@ -574,8 +648,12 @@
 
           
 
+          
+
            array that is the destination of the elements copied from <see
            cref="T:System.Data.SqlClient.SqlBulkCopyColumnMappingCollection" />
+
+          
 
           
 
@@ -590,8 +668,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -628,6 +710,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -642,8 +726,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.SqlClient.SqlBulkCopyColumnMapping" />
+
+          
 
           
 
@@ -681,11 +769,15 @@
 
             
 
+            
+
              at the index specified.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -698,8 +790,12 @@
 
           
 
+          
+
             at which to insert the new <see
            cref="T:System.Data.SqlClient.SqlBulkCopyColumnMapping" />
+
+          
 
           
 
@@ -710,6 +806,8 @@
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.Data.SqlClient.SqlBulkCopyColumnMapping" />
+
+          
 
           
 
@@ -767,8 +865,12 @@
 
             
 
+            
+
              method is most commonly used when you use a single <see
              cref="T:System.Data.SqlClient.SqlBulkCopy" />
+
+            
 
             
 
@@ -781,8 +883,12 @@
 
             
 
+            
+
              method is called and before defining mapping for the next bulk copy. You can clear the entire collection by using the <see
              cref="M:System.Data.SqlClient.SqlBulkCopyColumnMappingCollection.Clear" />
+
+            
 
             
 
@@ -795,8 +901,12 @@
 
             
 
+            
+
              method or the <see
              cref="M:System.Data.SqlClient.SqlBulkCopyColumnMappingCollection.RemoveAt(System.Int32)" />
+
+            
 
             
 
@@ -812,8 +922,12 @@
 
             
 
+            
+
              instance will usually be more efficient from a performance point of view than using a separate <see
              cref="T:System.Data.SqlClient.SqlBulkCopy" />
+
+            
 
             
 
@@ -832,8 +946,12 @@
 
             
 
+            
+
              element from the <see
              cref="T:System.Data.SqlClient.SqlBulkCopyColumnMappingCollection" />
+
+            
 
             
 
@@ -845,6 +963,8 @@
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.Data.SqlClient.SqlBulkCopyColumnMapping" />
+
+          
 
           
 
@@ -877,8 +997,12 @@
 
             
 
+            
+
              method is most commonly used when you use a single <see
              cref="T:System.Data.SqlClient.SqlBulkCopy" />
+
+            
 
             
 
@@ -891,8 +1015,12 @@
 
             
 
+            
+
              method is called and before defining mapping for the next bulk copy. You can clear the entire collection by using the <see
              cref="M:System.Data.SqlClient.SqlBulkCopyColumnMappingCollection.Clear" />
+
+            
 
             
 
@@ -905,8 +1033,12 @@
 
             
 
+            
+
              method or the <see
              cref="M:System.Data.SqlClient.SqlBulkCopyColumnMappingCollection.RemoveAt(System.Int32)" />
+
+            
 
             
 
@@ -922,8 +1054,12 @@
 
             
 
+            
+
               instance will usually be more efficient from a performance point of view than using a separate <see
              cref="T:System.Data.SqlClient.SqlBulkCopy" />
+
+            
 
             
 
@@ -943,8 +1079,12 @@
 
           
 
+          
+
           The zero-based index of the <see
            cref="T:System.Data.SqlClient.SqlBulkCopyColumnMapping" />
+
+          
 
           
 

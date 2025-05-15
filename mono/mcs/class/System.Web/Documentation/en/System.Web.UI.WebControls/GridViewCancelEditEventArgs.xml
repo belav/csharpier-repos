@@ -27,8 +27,12 @@
 
         
 
+        
+
          control raises the <see
          cref="E:System.Web.UI.WebControls.GridView.RowCancelingEdit" />
+
+        
 
         
 
@@ -44,8 +48,12 @@
 
         
 
+        
+
          object is passed to the event-handling method, which allows you to determine the index of the row containing the Cancel button that raised the event and to indicate that the cancel operation should be stopped. To stop the cancel operation, set the <see
          cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+
+        
 
         
 
@@ -63,6 +71,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -73,8 +83,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.WebControls.GridViewCancelEditEventArgs.#ctor(System.Int32)" />
+
+        
 
         
 
@@ -88,6 +102,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Web.UI.WebControls.GridView.RowCancelingEdit" />
+
+        
 
         
 
@@ -117,11 +133,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The following table shows the initial property value for an instance of <see
              cref="T:System.Web.UI.WebControls.GridViewCancelEditEventArgs" />
+
+            
 
             
 
@@ -155,6 +175,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -169,6 +191,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.GridViewCancelEditEventArgs" />
+
+            
 
             
 
@@ -201,6 +225,8 @@
 
             
 
+            
+
              property to determine the index of the row that contains the Cancel button clicked by the user. The row index is often used to retrieve this row from the <see
              cref="P:System.Web.UI.WebControls.GridView.Rows" />
 
@@ -208,8 +234,12 @@
 
             
 
+            
+
              collection of the <see
              cref="T:System.Web.UI.WebControls.GridView" />
+
+            
 
             
 

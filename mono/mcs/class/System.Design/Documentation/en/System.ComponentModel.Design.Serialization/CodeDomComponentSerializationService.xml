@@ -26,8 +26,12 @@
 
         
 
+        
+
          class serializes a set of components or serializable objects into a serialization store. The store can then be deserialized at a later time. The <see
          cref="T:System.ComponentModel.Design.Serialization.CodeDomComponentSerializationService" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
         , replaces the <see
          cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationService" />
+
+        
 
         
 
@@ -57,8 +65,12 @@
 
         
 
+        
+
          class does not implement the <see
          cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationService" />
+
+        
 
         
 
@@ -71,8 +83,12 @@
 
         
 
+        
+
         , the <see
          cref="T:System.ComponentModel.Design.Serialization.CodeDomDesignerLoader" />
+
+        
 
         
 
@@ -101,6 +117,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.Design.Serialization.CodeDomComponentSerializationService" />
+
+            
 
             
 
@@ -135,6 +153,8 @@
 
             
 
+            
+
              class using the given service provider to resolve services.</para
           >
         </summary>
@@ -145,8 +165,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.IServiceProvider" />
+
+          
 
           
 
@@ -180,6 +204,8 @@
 
             
 
+            
+
              methods to build up serialization state for a group of objects.</para
           >
         </remarks>
@@ -188,6 +214,8 @@
           <para
             >Creates a new <see
              cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
+
+            
 
             
 
@@ -237,8 +265,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
+
+          
 
           
 
@@ -278,8 +310,12 @@
 
             
 
+            
+
              interface will be added to the <paramref
              name="container" />
+
+            
 
             
 
@@ -298,8 +334,12 @@
 
             
 
+            
+
              with deserialized <see
              cref="T:System.ComponentModel.IComponent" />
+
+            
 
             
 
@@ -319,8 +359,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
+
+          
 
           
 
@@ -335,8 +379,12 @@
 
           
 
+          
+
           A container to which <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -378,6 +426,8 @@
 
             
 
+            
+
              method deserializes the given store, but rather than producing new objects, the data in the store is applied to an existing set of objects that are taken from the <paramref
              name="container" />
 
@@ -385,8 +435,12 @@
 
             
 
+            
+
              parameter. As a result, the caller can create in advance an object however it sees fit. If an object has deserialization state and the object is not named in the set of existing objects, a new object will be created. If that object also implements <see
              cref="T:System.ComponentModel.IComponent" />
+
+            
 
             
 
@@ -405,6 +459,8 @@
 
             
 
+            
+
              to the given container, optionally applying default property values.</para
           >
         </summary>
@@ -415,8 +471,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
+
+          
 
           
 
@@ -431,6 +491,8 @@
 
           
 
+          
+
           A container of objects to which data will be applied.</param
         >
         <param name="validateRecycledTypes">
@@ -440,10 +502,14 @@
 
           
 
+          
+
           true to validate the recycled type; otherwise, false.</param
         >
         <param name="applyDefaults">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -479,6 +545,8 @@
 
             
 
+            
+
              methods.</para
           >
         </remarks>
@@ -487,6 +555,8 @@
           <para
             >Loads a <see
              cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
+
+            
 
             
 
@@ -505,6 +575,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -515,8 +587,12 @@
 
           
 
+          
+
           The stream from which to load the <see
            cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
+
+          
 
           
 
@@ -556,6 +632,8 @@
 
             
 
+            
+
              parameter can be used to serialize more than one object by calling this method once for each object.</para
           >
         </remarks>
@@ -564,6 +642,8 @@
           <para
             >Serializes the given object to the given <see
              cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
+
+            
 
             
 
@@ -579,8 +659,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
+
+          
 
           
 
@@ -593,10 +677,14 @@
 
           
 
+          
+
            will be serialized. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -641,8 +729,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
+
+          
 
           
 
@@ -655,10 +747,14 @@
 
           
 
+          
+
            will be serialized. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -704,6 +800,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
 
@@ -711,8 +809,12 @@
 
           
 
+          
+
             to which <paramref
            name="member" />
+
+          
 
           
 
@@ -727,8 +829,12 @@
 
           
 
+          
+
           The object that owns the <paramref
            name="member" />
+
+          
 
           
 
@@ -738,6 +844,8 @@
         >
         <param name="member">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -778,6 +886,8 @@
 
             
 
+            
+
              method takes this into account and would clear the state of the property in this case.</para
           >
         </remarks>
@@ -792,6 +902,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.Serialization.SerializationStore" />
 
@@ -799,8 +911,12 @@
 
           
 
+          
+
             to which <paramref
            name="member" />
+
+          
 
           
 
@@ -815,8 +931,12 @@
 
           
 
+          
+
           The object that owns the <paramref
            name="member" />
+
+          
 
           
 
@@ -826,6 +946,8 @@
         >
         <param name="member">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

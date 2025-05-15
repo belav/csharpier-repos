@@ -50,8 +50,12 @@
 
         
 
+        
+
          is a representation of any window displayed in your application. The <see
          cref="T:System.Windows.Forms.Form" />
+
+        
 
         
 
@@ -64,6 +68,8 @@
 
         
 
+        
+
          class to create modal windows such as a dialog box. A special kind of form, the multiple-document interface (MDI) form, can contain other forms called MDI child forms. An MDI form is created by setting the <see
          cref="P:System.Windows.Forms.Form.IsMdiContainer" />
 
@@ -71,8 +77,12 @@
 
         
 
+        
+
          property to true. MDI child forms are created by setting the <see
          cref="P:System.Windows.Forms.Form.MdiParent" />
+
+        
 
         
 
@@ -88,8 +98,12 @@
 
         
 
+        
+
          class, you can determine the appearance, size, color, and window management features of the window or dialog box you are creating. The <see
          cref="P:System.Windows.Forms.Control.Text" />
+
+        
 
         
 
@@ -102,8 +116,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Windows.Forms.Form.DesktopLocation" />
+
+        
 
         
 
@@ -116,8 +134,12 @@
 
         
 
+        
+
          color property to change the default foreground color of all controls placed on the form. The <see
          cref="P:System.Windows.Forms.Form.FormBorderStyle" />
+
+        
 
         
 
@@ -130,8 +152,12 @@
 
         
 
+        
+
         , and <see
          cref="P:System.Windows.Forms.Form.MaximizeBox" />
+
+        
 
         
 
@@ -147,8 +173,12 @@
 
         
 
+        
+
          method to show a form as a modal dialog box. You can use the <see
          cref="M:System.Windows.Forms.Form.SetDesktopLocation(System.Int32,System.Int32)" />
+
+        
 
         
 
@@ -164,8 +194,12 @@
 
         
 
+        
+
          class allow you to respond to actions performed on the form. You can use the <see
          cref="E:System.Windows.Forms.Form.Activated" />
+
+        
 
         
 
@@ -182,8 +216,12 @@
 
         
 
+        
+
          property to false before the <see
          cref="T:System.Windows.Forms.Form" />
+
+        
 
         
 
@@ -196,6 +234,8 @@
 
         
 
+        
+
          to false in the TLA#tla_visualstu designer), the minimize, maximize, close, and system buttons remain enabled. If you set <see
          cref="P:System.Windows.Forms.Control.Enabled" />
 
@@ -203,8 +243,12 @@
 
         
 
+        
+
          to false after the <see
          cref="T:System.Windows.Forms.Form" />
+
+        
 
         
 
@@ -233,6 +277,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.Form" />
+
+            
 
             
 
@@ -273,6 +319,8 @@
 
             
 
+            
+
              that is on the current form or located within a container on the current form.</para
           >
           <para>You can use this property to allow the user to quickly navigate a simple form by allowing them to simply press the ENTER key when they are finished instead of manually clicking the accept button with their mouse.</para>
@@ -306,8 +354,12 @@
 
             
 
+            
+
              property or the <see
              cref="P:System.Windows.Forms.Form.ActiveMdiChild" />
+
+            
 
             
 
@@ -346,6 +398,8 @@
 
             
 
+            
+
              method. You can use this event for tasks such as updating the contents of the form based on changes made to the form's data when the form was not activated.</para
           >
           <para
@@ -355,6 +409,8 @@
                 >[&lt;topic://cpconEventsOverview&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -396,6 +452,8 @@
 
             
 
+            
+
              parameter is already the active MDI child form, then the <see
              cref="M:System.Windows.Forms.Form.ActivateMdiChild(System.Windows.Forms.Form)" />
 
@@ -403,8 +461,12 @@
 
             
 
+            
+
              method simply returns. If <paramref
              name="form" />
+
+            
 
             
 
@@ -420,6 +482,8 @@
 
             
 
+            
+
              parameter is null or not, <see
              cref="M:System.Windows.Forms.Form.ActivateMdiChild(System.Windows.Forms.Form)" />
 
@@ -427,8 +491,12 @@
 
             
 
+            
+
              raises the <see
              cref="E:System.Windows.Forms.Form.MdiChildActivate" />
+
+            
 
             
 
@@ -443,6 +511,8 @@
         </summary>
         <param name="form">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -473,6 +543,8 @@
           <para
             >If your application is a multiple-document interface (MDI) application, use the <see
              cref="P:System.Windows.Forms.Form.ActiveMdiChild" />
+
+            
 
             
 
@@ -521,6 +593,8 @@
 
             
 
+            
+
              property to obtain a reference to it.</para
           >
         </remarks>
@@ -557,8 +631,12 @@
 
             
 
+            
+
              method is called. You can also make a form owned by another by setting the <see
              cref="P:System.Windows.Forms.Form.Owner" />
+
+            
 
             
 
@@ -571,6 +649,8 @@
             <para
               >If the form is a multiple-document interface (MDI) parent form, this property returns all forms that are displayed with the exception of any MDI child forms that are currently open. To obtain the MDI child forms opened in an MDI parent form, use the <see
                cref="P:System.Windows.Forms.Form.MdiChildren" />
+
+              
 
               
 
@@ -591,8 +671,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Form" />
+
+          
 
           
 
@@ -626,6 +710,8 @@
         </summary>
         <param name="displayScrollbars">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -670,6 +756,8 @@
 
             
 
+            
+
              property to false the form will not be in layered mode which will improve the display performance of the form.</para
           >
         </remarks>
@@ -701,6 +789,8 @@
 
             
 
+            
+
              property and the <see
              cref="P:System.Windows.Forms.Form.Size" />
 
@@ -708,8 +798,12 @@
 
             
 
+            
+
              value returned by the <see
              cref="M:System.Windows.Forms.Form.GetAutoScaleSize(System.Drawing.Font)" />
+
+            
 
             
 
@@ -723,6 +817,8 @@
           <para
             >Resizes the form according to the current value of the <see
              cref="P:System.Windows.Forms.Form.AutoScaleBaseSize" />
+
+            
 
             
 
@@ -782,6 +878,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -794,8 +892,12 @@
 
             
 
+            
+
              property. If you want to determine the size the form will auto scale to based on a specific font, use the <see
              cref="M:System.Windows.Forms.Form.GetAutoScaleSize(System.Drawing.Font)" />
+
+            
 
             
 
@@ -854,6 +956,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -865,8 +969,12 @@
 
             
 
+            
+
              property is used at form-display time to compute the scaling factor for the form. The autoscaling base size is used by the form as a baseline for comparison to the system's font size to determine how much to scale the form when autoscaling is used. If you want to determine the size a form will auto scale to based on a specific font, use the <see
              cref="M:System.Windows.Forms.Form.GetAutoScaleSize(System.Drawing.Font)" />
+
+            
 
             
 
@@ -948,11 +1056,15 @@
 
             
 
+            
+
              to force a form to resize to fit its contents. </para
           >
           <para
             >A form does not automatically resize in the Visual Studio forms designer, regardless of the values of the <see
              cref="P:System.Windows.Forms.Form.AutoSize" />
+
+            
 
             
 
@@ -965,8 +1077,12 @@
 
             
 
+            
+
              properties. The form correctly resizes itself at run time according to the values of these two properties. By contrast, a custom <see
              cref="T:System.Windows.Forms.UserControl" />
+
+            
 
             
 
@@ -982,8 +1098,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Windows.Forms.Control.MinimumSize" />
+
+            
 
             
 
@@ -996,8 +1116,12 @@
 
             
 
+            
+
              properties are respected, but the current value of the <see
              cref="P:System.Windows.Forms.Control.Size" />
+
+            
 
             
 
@@ -1010,6 +1134,8 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.Form.AutoSizeMode" />
 
@@ -1017,8 +1143,12 @@
 
             
 
+            
+
              also renders the <see
              cref="P:System.Windows.Forms.Form.AutoScroll" />
+
+            
 
             
 
@@ -1034,8 +1164,12 @@
 
             
 
+            
+
              enumeration for information on how a form behaves when <see
              cref="P:System.Windows.Forms.Form.AutoSize" />
+
+            
 
             
 
@@ -1049,6 +1183,8 @@
           <para
             >Resize the form according to the setting of <see
              cref="P:System.Windows.Forms.Form.AutoSizeMode" />
+
+            
 
             
 
@@ -1083,6 +1219,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.Form.AutoSize" />
+
+            
 
             
 
@@ -1128,11 +1266,15 @@
 
             
 
+            
+
              property to a new value causes the form to be laid out again.</para
           >
           <para
             >A form does not automatically resize in the Visual Studio forms designer, regardless of the values of the <see
              cref="P:System.Windows.Forms.Form.AutoSize" />
+
+            
 
             
 
@@ -1145,8 +1287,12 @@
 
             
 
+            
+
              properties. The form correctly resizes itself at run time according to the values of these two properties. By contrast, a custom <see
              cref="T:System.Windows.Forms.UserControl" />
+
+            
 
             
 
@@ -1216,6 +1362,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -1266,11 +1414,15 @@
 
             
 
+            
+
              that is on the current form or located within a container on the current form.</para
           >
           <para>This property allows you to designate a default action to occur when the user presses the ESC key in your application. You can use this property to allow the user to quickly navigate a simple form by allowing them to simply press the ESC key to close a window without committing changes instead of manually clicking the cancel button with their mouse.</para>
           <para>
             <see cref="P:System.Windows.Forms.Form.CancelButton" />
+
+            
 
             
 
@@ -1283,8 +1435,12 @@
 
             
 
+            
+
              open on your form, ESC will close the <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -1300,8 +1456,12 @@
 
             
 
+            
+
              object assigned to <see
              cref="P:System.Windows.Forms.Form.CancelButton" />
+
+            
 
             
 
@@ -1338,8 +1498,12 @@
 
             
 
+            
+
              method directly from your code. Instead, set the <see
              cref="P:System.Windows.Forms.Form.StartPosition" />
+
+            
 
             
 
@@ -1352,11 +1516,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >If the form or dialog is top-level, then <see
              cref="M:System.Windows.Forms.Form.CenterToParent" />
+
+            
 
             
 
@@ -1393,8 +1561,12 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Windows.Forms.FormStartPosition.CenterScreen" />
+
+            
 
             
 
@@ -1410,6 +1582,8 @@
 
             
 
+            
+
              method uses the following priority list to determine the screen used to center the form:</para
           >
           <list type="ordered">
@@ -1417,6 +1591,8 @@
               <para
                 >The <see
                  cref="P:System.Windows.Forms.Form.Owner" />
+
+                
 
                 
 
@@ -1469,6 +1645,8 @@
 
             
 
+            
+
              property or use the individual properties <see
              cref="P:System.Windows.Forms.Control.Height" />
 
@@ -1476,8 +1654,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.Control.Width" />
+
+            
 
             
 
@@ -1491,6 +1673,8 @@
                type="text/html">
                 <a href="0dd8bca5-a6bf-4ac4-8eec-5725d08b38dc">Application Settings Overview</a>
               </format>
+
+              
 
               
 
@@ -1528,6 +1712,8 @@
 
             
 
+            
+
              event and setting the <see
              cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
 
@@ -1535,8 +1721,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.ComponentModel.CancelEventArgs" />
+
+            
 
             
 
@@ -1552,8 +1742,12 @@
 
             
 
+            
+
             . In these cases, you will need to call <see
              cref="Overload:System.Windows.Forms.Form.Dispose" />
+
+            
 
             
 
@@ -1570,8 +1764,12 @@
 
               
 
+              
+
                method is called on a <see
                cref="T:System.Windows.Forms.Form" />
+
+              
 
               
 
@@ -1584,8 +1782,12 @@
 
               
 
+              
+
                method to make the form visible, because the form's resources have already been released. To hide a form and then make it visible, use the <see
                cref="M:System.Windows.Forms.Control.Hide" />
+
+              
 
               
 
@@ -1603,8 +1805,12 @@
 
               
 
+              
+
                and <see
                cref="E:System.Windows.Forms.Form.Closing" />
+
+              
 
               
 
@@ -1617,6 +1823,8 @@
 
               
 
+              
+
                method is called to exit your application. If you have validation code in either of these events that must be executed, you should call the <see
                cref="M:System.Windows.Forms.Form.Close" />
 
@@ -1624,8 +1832,12 @@
 
               
 
+              
+
                method for each open form individually before calling the <see
                cref="M:System.Windows.Forms.Application.Exit" />
+
+              
 
               
 
@@ -1663,8 +1875,12 @@
 
               
 
+              
+
                event is obsolete in the .NET Framework version 2.0; use the <see
                cref="E:System.Windows.Forms.Form.FormClosed" />
+
+              
 
               
 
@@ -1681,8 +1897,12 @@
 
             
 
+            
+
              method of the form. To prevent a form from closing, handle the <see
              cref="E:System.Windows.Forms.Form.Closing" />
+
+            
 
             
 
@@ -1695,8 +1915,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.ComponentModel.CancelEventArgs" />
+
+            
 
             
 
@@ -1714,8 +1938,12 @@
 
               
 
+              
+
                and <see
                cref="E:System.Windows.Forms.Form.Closing" />
+
+              
 
               
 
@@ -1728,6 +1956,8 @@
 
               
 
+              
+
                method is called to exit your application. If you have validation code in either of these events that must be executed, you should call the <see
                cref="M:System.Windows.Forms.Form.Close" />
 
@@ -1735,8 +1965,12 @@
 
               
 
+              
+
                method for each open form individually before calling the <see
                cref="M:System.Windows.Forms.Application.Exit" />
+
+              
 
               
 
@@ -1753,8 +1987,12 @@
 
             
 
+            
+
              events of all MDI child forms are raised before the MDI parent form's <see
              cref="E:System.Windows.Forms.Form.Closing" />
+
+            
 
             
 
@@ -1767,8 +2005,12 @@
 
             
 
+            
+
              events of all MDI child forms are raised before the <see
              cref="E:System.Windows.Forms.Form.Closed" />
+
+            
 
             
 
@@ -1783,6 +2025,8 @@
                 >[&lt;topic://cpconEventsOverview&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -1830,8 +2074,12 @@
 
               
 
+              
+
                event is obsolete in the .NET Framework version 2.0; use the <see
                cref="E:System.Windows.Forms.Form.FormClosing" />
+
+              
 
               
 
@@ -1848,6 +2096,8 @@
 
             
 
+            
+
              event occurs as the form is being closed. When a form is closed, all resources created within the object are released and the form is disposed. If you cancel this event, the form remains opened. To cancel the closure of a form, set the <see
              cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
 
@@ -1855,8 +2105,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.ComponentModel.CancelEventArgs" />
+
+            
 
             
 
@@ -1872,8 +2126,12 @@
 
             
 
+            
+
              button (the button with an X at the upper-right corner of the form) causes the form to be hidden and the <see
              cref="P:System.Windows.Forms.Form.DialogResult" />
+
+            
 
             
 
@@ -1886,8 +2144,12 @@
 
             
 
+            
+
              property when the user clicks the <ui
             >Close</ui>
+
+            
 
             
 
@@ -1900,8 +2162,12 @@
 
             
 
+            
+
              property in an event handler for the <see
              cref="E:System.Windows.Forms.Form.Closing" />
+
+            
 
             
 
@@ -1918,8 +2184,12 @@
 
               
 
+              
+
                method is called on a <see
                cref="T:System.Windows.Forms.Form" />
+
+              
 
               
 
@@ -1932,8 +2202,12 @@
 
               
 
+              
+
                method to make the form visible, because the form's resources have already been released. To hide a form and then make it visible, use the <see
                cref="M:System.Windows.Forms.Control.Hide" />
+
+              
 
               
 
@@ -1951,8 +2225,12 @@
 
               
 
+              
+
                and <see
                cref="E:System.Windows.Forms.Form.Closing" />
+
+              
 
               
 
@@ -1965,6 +2243,8 @@
 
               
 
+              
+
                method is called to exit your application. If you have validation code in either of these events that must be executed, you should call the <see
                cref="M:System.Windows.Forms.Form.Close" />
 
@@ -1972,8 +2252,12 @@
 
               
 
+              
+
                method for each open form individually before calling the <see
                cref="M:System.Windows.Forms.Application.Exit" />
+
+              
 
               
 
@@ -1990,8 +2274,12 @@
 
             
 
+            
+
              events of all MDI child forms are raised before the MDI parent form's <see
              cref="E:System.Windows.Forms.Form.Closing" />
+
+            
 
             
 
@@ -2004,8 +2292,12 @@
 
             
 
+            
+
              events of all MDI child forms are raised before the <see
              cref="E:System.Windows.Forms.Form.Closed" />
+
+            
 
             
 
@@ -2018,8 +2310,12 @@
 
             
 
+            
+
              event of an MDI child form does not prevent the <see
              cref="E:System.Windows.Forms.Form.Closing" />
+
+            
 
             
 
@@ -2032,6 +2328,8 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.ComponentModel.CancelEventArgs" />
 
@@ -2039,8 +2337,12 @@
 
             
 
+            
+
              that is passed as a parameter to the parent form. To force all MDI parent and child forms to close, set the <see
              cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+
+            
 
             
 
@@ -2055,6 +2357,8 @@
                 >[&lt;topic://cpconEventsOverview&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -2104,11 +2408,15 @@
 
             
 
+            
+
              property is set to true, the control box is displayed in the upper-left corner of the caption bar. The control box is where the user can click to access the system menu.</para
           >
           <para
             >If you set <see
              cref="P:System.Windows.Forms.Form.ControlBox" />
+
+            
 
             
 
@@ -2121,8 +2429,12 @@
 
             
 
+            
+
              property, the <see
              cref="P:System.Windows.Forms.Form.Size" />
+
+            
 
             
 
@@ -2135,8 +2447,12 @@
 
             
 
+            
+
              property to the <see
              cref="E:System.Windows.Forms.Control.HandleCreated" />
+
+            
 
             
 
@@ -2148,6 +2464,8 @@
             <para
               >When set to false, the <see
                cref="P:System.Windows.Forms.Form.ControlBox" />
+
+              
 
               
 
@@ -2257,6 +2575,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2292,6 +2612,8 @@
 
             
 
+            
+
              class, this property always returns the <see
              cref="F:System.Windows.Forms.ImeMode.NoControl" />
 
@@ -2299,8 +2621,12 @@
 
             
 
+            
+
              value. The value of this property is assigned to the <see
              cref="P:System.Windows.Forms.Control.ImeMode" />
+
+            
 
             
 
@@ -2430,8 +2756,12 @@
 
             
 
+            
+
              method before calling the <see
              cref="M:System.Windows.Forms.Form.Show(System.Windows.Forms.IWin32Window)" />
+
+            
 
             
 
@@ -2447,8 +2777,12 @@
 
             
 
+            
+
              after calling <see
              cref="M:System.Windows.Forms.Form.Show(System.Windows.Forms.IWin32Window)" />
+
+            
 
             
 
@@ -2496,8 +2830,12 @@
 
             
 
+            
+
              enumeration sets the value of the dialog box result for the form, hides the modal dialog box, and returns control to the calling form. This property is typically set by the <see
              cref="P:System.Windows.Forms.Button.DialogResult" />
+
+            
 
             
 
@@ -2510,8 +2848,12 @@
 
             
 
+            
+
              control on the form. When the user clicks the <see
              cref="T:System.Windows.Forms.Button" />
+
+            
 
             
 
@@ -2524,6 +2866,8 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.Button" />
 
@@ -2531,8 +2875,12 @@
 
             
 
+            
+
              is assigned to the <see
              cref="P:System.Windows.Forms.Form.DialogResult" />
+
+            
 
             
 
@@ -2548,8 +2896,12 @@
 
             
 
+            
+
              button (the button with an X in the top-right corner of the form) causes the form to be hidden and the <see
              cref="P:System.Windows.Forms.Form.DialogResult" />
+
+            
 
             
 
@@ -2562,8 +2914,12 @@
 
             
 
+            
+
              method is not automatically called when the user clicks the <ui
             >Close</ui>
+
+            
 
             
 
@@ -2576,8 +2932,12 @@
 
             
 
+            
+
              property. Instead, the form is hidden and can be shown again without creating a new instance of the dialog box. Because of this behavior, you must call the <see
              cref="M:System.Windows.Forms.Control.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -2595,8 +2955,12 @@
 
               
 
+              
+
                property when the user clicks the <ui
               >Close</ui>
+
+              
 
               
 
@@ -2609,8 +2973,12 @@
 
               
 
+              
+
                property in an event handler for the <see
                cref="E:System.Windows.Forms.Form.Closing" />
+
+              
 
               
 
@@ -2628,8 +2996,12 @@
 
               
 
+              
+
                is displayed as a modeless window, the value returned by the <see
                cref="P:System.Windows.Forms.Form.DialogResult" />
+
+              
 
               
 
@@ -2669,8 +3041,12 @@
 
             
 
+            
+
              method. Dispose invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -2683,8 +3059,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -2700,8 +3080,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Windows.Forms.Form" />
+
+            
 
             
 
@@ -2716,8 +3100,12 @@
 
             
 
+            
+
              will be called automatically if the form is shown using the <see
              cref="Overload:System.Windows.Forms.Form.Show" />
+
+            
 
             
 
@@ -2730,8 +3118,12 @@
 
             
 
+            
+
              is used, or the form is never shown at all, you must call <see
              cref="M:System.Windows.Forms.Form.Dispose(System.Boolean)" />
+
+            
 
             
 
@@ -2750,11 +3142,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2799,8 +3195,12 @@
 
               
 
+              
+
                style, it is impossible to resize the window below a certain minimum value, even if you have set <see
                cref="P:System.Windows.Forms.Form.ControlBox" />
+
+              
 
               
 
@@ -2813,8 +3213,12 @@
 
               
 
+              
+
               . Consider working around this by using the <see
                cref="F:System.Windows.Forms.FormBorderStyle.SizableToolWindow" />
+
+              
 
               
 
@@ -2855,8 +3259,12 @@
 
             
 
+            
+
              event occurs after the form has been closed by the user or by the <see
              cref="M:System.Windows.Forms.Form.Close" />
+
+            
 
             
 
@@ -2869,8 +3277,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Windows.Forms.Application" />
+
+            
 
             
 
@@ -2883,6 +3295,8 @@
 
             
 
+            
+
              event and set the <see
              cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
 
@@ -2890,8 +3304,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.ComponentModel.CancelEventArgs" />
+
+            
 
             
 
@@ -2908,8 +3326,12 @@
 
             
 
+            
+
              events of all MDI child forms are raised before the MDI parent form's <see
              cref="E:System.Windows.Forms.Form.FormClosing" />
+
+            
 
             
 
@@ -2922,8 +3344,12 @@
 
             
 
+            
+
              events of all MDI child forms are raised before the <see
              cref="E:System.Windows.Forms.Form.FormClosed" />
+
+            
 
             
 
@@ -2936,6 +3362,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -2974,6 +3402,8 @@
 
             
 
+            
+
              event occurs as the form is being closed. When a form is closed, it is disposed, releasing all resources associated with the form. If you cancel this event, the form remains opened. To cancel the closure of a form, set the <see
              cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
 
@@ -2981,8 +3411,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.FormClosingEventArgs" />
+
+            
 
             
 
@@ -2998,8 +3432,12 @@
 
             
 
+            
+
              button (the button with an X at the upper-right corner of the form) causes the form to be hidden and the <see
              cref="P:System.Windows.Forms.Form.DialogResult" />
+
+            
 
             
 
@@ -3012,8 +3450,12 @@
 
             
 
+            
+
              property when the user clicks the <ui
             >Close</ui>
+
+            
 
             
 
@@ -3026,8 +3468,12 @@
 
             
 
+            
+
              property in an event handler for the <see
              cref="E:System.Windows.Forms.Form.FormClosing" />
+
+            
 
             
 
@@ -3044,8 +3490,12 @@
 
               
 
+              
+
                method is called on a <see
                cref="T:System.Windows.Forms.Form" />
+
+              
 
               
 
@@ -3058,8 +3508,12 @@
 
               
 
+              
+
                method to make the form visible, because the form's resources have already been released. To hide a form and then make it visible, use the <see
                cref="M:System.Windows.Forms.Control.Hide" />
+
+              
 
               
 
@@ -3076,8 +3530,12 @@
 
             
 
+            
+
              events of all MDI child forms are raised before the MDI parent form's <see
              cref="E:System.Windows.Forms.Form.FormClosing" />
+
+            
 
             
 
@@ -3090,8 +3548,12 @@
 
             
 
+            
+
              events of all MDI child forms are raised before the <see
              cref="E:System.Windows.Forms.Form.FormClosed" />
+
+            
 
             
 
@@ -3104,8 +3566,12 @@
 
             
 
+            
+
              event of an MDI child form does not prevent the <see
              cref="E:System.Windows.Forms.Form.FormClosing" />
+
+            
 
             
 
@@ -3118,8 +3584,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.FormClosingEventArgs" />
+
+            
 
             
 
@@ -3132,6 +3602,8 @@
 
             
 
+            
+
              property to false in the MDI parent form.</para
           >
           <para
@@ -3139,6 +3611,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -3180,6 +3654,8 @@
 
               
 
+              
+
                method is obsolete in.NET Framework version 2.0. This member has been retained for backward compatibility. For more information about automatic scaling, see <format
                type="text/html">
                 <a href="68fad25b-afbc-44bd-8e1b-966fc43507a4"
@@ -3191,12 +3667,16 @@
 
               
 
+              
+
               .</para
             >
           </block>
           <para
             >You can use this method to determine the size a form would autoscale to for a specific font before applying the font to the form. If you want to determine the size a form is autoscaled to based on the font currently assigned to the form, use the <see
              cref="P:System.Windows.Forms.Form.AutoScaleBaseSize" />
+
+            
 
             
 
@@ -3219,6 +3699,8 @@
 
             
 
+            
+
              representing the autoscaled size of the form.</para
           >
         </returns>
@@ -3229,8 +3711,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Font" />
+
+          
 
           
 
@@ -3306,6 +3792,8 @@
 
             
 
+            
+
              button. You can use this button to display help for your application. You can create an event handler for the <see
              cref="E:System.Windows.Forms.Control.HelpRequested" />
 
@@ -3313,8 +3801,12 @@
 
             
 
+            
+
              event of the <see
              cref="T:System.Windows.Forms.Control" />
+
+            
 
             
 
@@ -3331,6 +3823,8 @@
 
               
 
+              
+
                property is ignored if the <ui
               >Maximize</ui>
 
@@ -3338,8 +3832,12 @@
 
               
 
+              
+
                or <ui
               >Minimize</ui>
+
+              
 
               
 
@@ -3390,8 +3888,12 @@
 
             
 
+            
+
              event occurs when the <ui
             >Help</ui>
+
+            
 
             
 
@@ -3404,6 +3906,8 @@
 
             
 
+            
+
              button is displayed when the <see
              cref="P:System.Windows.Forms.Form.HelpButton" />
 
@@ -3411,8 +3915,12 @@
 
             
 
+            
+
              property is set to true. <see
              cref="E:System.Windows.Forms.Form.HelpButtonClicked" />
+
+            
 
             
 
@@ -3430,6 +3938,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -3438,6 +3948,8 @@
           <para
             >Occurs when the <ui
             >Help </ui>
+
+            
 
             
 
@@ -3475,8 +3987,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Windows.Forms.FormBorderStyle.FixedDialog" />
+
+            
 
             
 
@@ -3520,6 +4036,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -3553,8 +4071,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.InputLanguageChangingEventArgs" />
+
+            
 
             
 
@@ -3569,6 +4091,8 @@
                 >[&lt;topic://cpconEventsOverview&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -3613,8 +4137,12 @@
 
             
 
+            
+
              that will be the MDI parent form to the <see
              cref="P:System.Windows.Forms.Form.MdiParent" />
+
+            
 
             
 
@@ -3627,11 +4155,15 @@
 
             
 
+            
+
              property to determine whether a form is an MDI parent form.</para
           >
           <para
             >You can use the <see
              cref="P:System.Windows.Forms.Form.IsMdiChild" />
+
+            
 
             
 
@@ -3648,8 +4180,12 @@
 
               
 
+              
+
                buttons, regardless of the settings of the <see
                cref="P:System.Windows.Forms.Form.FormBorderStyle" />
+
+              
 
               
 
@@ -3662,6 +4198,8 @@
 
               
 
+              
+
               , <see
                cref="P:System.Windows.Forms.Form.MinimizeBox" />
 
@@ -3669,8 +4207,12 @@
 
               
 
+              
+
               , and <see
                cref="P:System.Windows.Forms.Form.MaximizeBox" />
+
+              
 
               
 
@@ -3714,8 +4256,12 @@
 
             
 
+            
+
              events of all MDI child forms are raised before the MDI parent form's <see
              cref="E:System.Windows.Forms.Form.Closing" />
+
+            
 
             
 
@@ -3728,8 +4274,12 @@
 
             
 
+            
+
              events of all MDI child forms are raised before the <see
              cref="E:System.Windows.Forms.Form.Closed" />
+
+            
 
             
 
@@ -3746,8 +4296,12 @@
 
               
 
+              
+
                controls on an MDI child form, setting <see
                cref="P:System.Windows.Forms.Form.IsMdiContainer" />
+
+              
 
               
 
@@ -3760,6 +4314,8 @@
 
               
 
+              
+
                controls. Use <see
                cref="M:System.Windows.Forms.ToolStripManager.Merge(System.Windows.Forms.ToolStrip,System.String)" />
 
@@ -3767,8 +4323,12 @@
 
               
 
+              
+
                to merge the contents of additional child <see
                cref="T:System.Windows.Forms.MenuStrip" />
+
+              
 
               
 
@@ -3814,8 +4374,12 @@
 
             
 
+            
+
              property determines whether the <see
              cref="F:System.Security.Permissions.UIPermissionWindow.AllWindows" />
+
+            
 
             
 
@@ -3857,8 +4421,12 @@
 
             
 
+            
+
             , <see
              cref="E:System.Windows.Forms.Control.KeyDown" />
+
+            
 
             
 
@@ -3871,8 +4439,12 @@
 
             
 
+            
+
              events. After the form's event handlers have completed processing the keystroke, the keystroke is then assigned to the control with focus. For example, if the <see
              cref="P:System.Windows.Forms.Form.KeyPreview" />
+
+            
 
             
 
@@ -3885,8 +4457,12 @@
 
             
 
+            
+
             , after the keystroke is handled by the event handlers of the form the <see
              cref="T:System.Windows.Forms.TextBox" />
+
+            
 
             
 
@@ -3899,8 +4475,12 @@
 
             
 
+            
+
              property in your form's <see
              cref="E:System.Windows.Forms.Control.KeyPress" />
+
+            
 
             
 
@@ -3916,6 +4496,8 @@
             <para
               >A control on a form may be programmed to cancel any keystrokes it receives. Since the control never sends these keystrokes to the form, the form will never see them regardless of the setting of <see
                cref="P:System.Windows.Forms.Form.KeyPreview" />
+
+              
 
               
 
@@ -3963,8 +4545,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.MdiLayout" />
+
+          
 
           
 
@@ -3995,6 +4581,8 @@
                 >[&lt;topic://cpconEventsOverview&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -4031,8 +4619,12 @@
 
             
 
+            
+
              is a structure, which means that it is a value type. If you access a property in <see
              cref="T:System.Drawing.Point" />
+
+            
 
             
 
@@ -4045,8 +4637,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Drawing.Point.Y" />
+
+            
 
             
 
@@ -4059,8 +4655,12 @@
 
             
 
+            
+
              returned from the <see
              cref="P:System.Windows.Forms.Control.Location" />
+
+            
 
             
 
@@ -4073,8 +4673,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.Control.Right" />
+
+            
 
             
 
@@ -4087,8 +4691,12 @@
 
             
 
+            
+
             , or <see
              cref="P:System.Windows.Forms.Control.Bottom" />
+
+            
 
             
 
@@ -4101,6 +4709,8 @@
 
             
 
+            
+
             . To adjust these properties, set each property value individually, or set the <see
              cref="P:System.Windows.Forms.Form.Location" />
 
@@ -4108,8 +4718,12 @@
 
             
 
+            
+
              property with a new <see
              cref="T:System.Drawing.Point" />
+
+            
 
             
 
@@ -4125,8 +4739,12 @@
 
             
 
+            
+
              property gets or sets the <see
              cref="P:System.Windows.Forms.Control.Location" />
+
+            
 
             
 
@@ -4139,8 +4757,12 @@
 
             
 
+            
+
              base class, and sets the <see
              cref="P:System.ComponentModel.SettingsBindableAttribute.Bindable" />
+
+            
 
             
 
@@ -4159,8 +4781,12 @@
 
             
 
+            
+
              that represents the upper-left corner of the <see
              cref="T:System.Windows.Forms.Form" />
+
+            
 
             
 
@@ -4212,8 +4838,12 @@
 
             
 
+            
+
              property, you must <see
              cref="M:System.Windows.Forms.Control.ControlCollection.Add(System.Windows.Forms.Control)" />
+
+            
 
             
 
@@ -4226,8 +4856,12 @@
 
             
 
+            
+
              control to the <see
              cref="P:System.Windows.Forms.Control.Controls" />
+
+            
 
             
 
@@ -4243,8 +4877,12 @@
 
             
 
+            
+
              class supersedes the <see
              cref="T:System.Windows.Forms.MainMenu" />
+
+            
 
             
 
@@ -4317,6 +4955,8 @@
 
             
 
+            
+
              property changes.</para
           >
         </summary>
@@ -4345,6 +4985,8 @@
 
             
 
+            
+
              button enables users to enlarge a window to full-screen size. To display a <ui
             >Maximize</ui>
 
@@ -4352,8 +4994,12 @@
 
             
 
+            
+
              button, you must also set the form's <see
              cref="P:System.Windows.Forms.Form.FormBorderStyle" />
+
+            
 
             
 
@@ -4369,8 +5015,12 @@
 
             
 
+            
+
              button automatically becomes a restore button when a window is maximized. Minimizing or restoring a window automatically changes the restore button back to a <ui
             >Maximize</ui>
+
+            
 
             
 
@@ -4387,8 +5037,12 @@
 
               
 
+              
+
                event. The <see
                cref="P:System.Windows.Forms.Form.WindowState" />
+
+              
 
               
 
@@ -4401,6 +5055,8 @@
 
               
 
+              
+
                property to FormWindowState.Maximized, the form is maximized independently of whatever settings are in effect for the <see
                cref="P:System.Windows.Forms.Form.MaximizeBox" />
 
@@ -4408,8 +5064,12 @@
 
               
 
+              
+
                and <see
                cref="P:System.Windows.Forms.Form.FormBorderStyle" />
+
+              
 
               
 
@@ -4424,6 +5084,8 @@
           <para
             >Gets or sets a value indicating whether the <ui
             >Maximize</ui>
+
+            
 
             
 
@@ -4481,6 +5143,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4489,6 +5153,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.Form.MaximizedBounds" />
+
+            
 
             
 
@@ -4535,6 +5201,8 @@
 
             
 
+            
+
              object that is 0 in height and 0 in width, the form will have no maximum size beyond the limits set by Windows.</para
           >
         </remarks>
@@ -4569,6 +5237,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4577,6 +5247,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.Form.MaximumSize" />
+
+            
 
             
 
@@ -4608,6 +5280,8 @@
                 >[&lt;topic://cpconEventsOverview&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -4656,8 +5330,12 @@
 
             
 
+            
+
              that will be the MDI parent form to the <see
              cref="P:System.Windows.Forms.Form.MdiParent" />
+
+            
 
             
 
@@ -4706,8 +5384,12 @@
 
             
 
+            
+
              that will be the MDI parent form to the <see
              cref="P:System.Windows.Forms.Form.MdiParent" />
+
+            
 
             
 
@@ -4724,8 +5406,12 @@
 
               
 
+              
+
                controls on an MDI child form, setting <see
                cref="P:System.Windows.Forms.Form.IsMdiContainer" />
+
+              
 
               
 
@@ -4738,6 +5424,8 @@
 
               
 
+              
+
                controls. Use <see
                cref="M:System.Windows.Forms.ToolStripManager.Merge(System.Windows.Forms.ToolStrip,System.String)" />
 
@@ -4745,8 +5433,12 @@
 
               
 
+              
+
                to merge the contents of additional child <see
                cref="T:System.Windows.Forms.MenuStrip" />
+
+              
 
               
 
@@ -4799,6 +5491,8 @@
 
             
 
+            
+
              to be displayed when your multiple-document interface (MDI) form has no active MDI child forms and another <see
              cref="T:System.Windows.Forms.MainMenu" />
 
@@ -4806,8 +5500,12 @@
 
             
 
+            
+
              to display when a child window is displayed. You can also use a different <see
              cref="T:System.Windows.Forms.MainMenu" />
+
+            
 
             
 
@@ -4821,6 +5519,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Windows.Forms.MainMenu" />
+
+            
 
             
 
@@ -4852,8 +5552,12 @@
 
             
 
+            
+
              control or enabling and disabling buttons on a <see
              cref="T:System.Windows.Forms.ToolBar" />
+
+            
 
             
 
@@ -4868,6 +5572,8 @@
                 >[&lt;topic://cpconEventsOverview&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -4909,6 +5615,8 @@
                 >[&lt;topic://cpconEventsOverview&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -4965,8 +5673,12 @@
 
             
 
+            
+
              assigned to a form, use the <see
              cref="P:System.Windows.Forms.Form.Menu" />
+
+            
 
             
 
@@ -5008,6 +5720,8 @@
 
             
 
+            
+
              button enables users to minimize a window to an icon. To display a <ui
             >Minimize</ui>
 
@@ -5015,8 +5729,12 @@
 
             
 
+            
+
              button, you must also set the form's <see
              cref="P:System.Windows.Forms.Form.FormBorderStyle" />
+
+            
 
             
 
@@ -5033,8 +5751,12 @@
 
               
 
+              
+
                event. The <see
                cref="P:System.Windows.Forms.Form.WindowState" />
+
+              
 
               
 
@@ -5047,6 +5769,8 @@
 
               
 
+              
+
                property to FormWindowState.Minimized, the form is minimized independently of whatever settings are in effect for the <see
                cref="P:System.Windows.Forms.Form.MinimizeBox" />
 
@@ -5054,8 +5778,12 @@
 
               
 
+              
+
                and <see
                cref="P:System.Windows.Forms.Form.FormBorderStyle" />
+
+              
 
               
 
@@ -5070,6 +5798,8 @@
           <para
             >Gets or sets a value indicating whether the <ui
             >Minimize</ui>
+
+            
 
             
 
@@ -5113,6 +5843,8 @@
 
             
 
+            
+
              object that is 0 in height and 0 in width, the form will have no minimum size beyond the limits set by Windows.</para
           >
         </remarks>
@@ -5148,6 +5880,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -5156,6 +5890,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.Form.MinimumSize" />
+
+            
 
             
 
@@ -5199,6 +5935,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -5237,11 +5975,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Form.OnActivated(System.EventArgs)" />
+
+            
 
             
 
@@ -5260,6 +6002,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5270,8 +6014,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5318,11 +6066,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Form.OnBackgroundImageChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -5341,6 +6093,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5351,8 +6105,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5390,11 +6148,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Form.OnBackgroundImageLayoutChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -5413,6 +6175,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5423,8 +6187,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5456,8 +6224,12 @@
 
               
 
+              
+
                method is obsolete in the .NET Framework version 2.0; use the <see
                cref="M:System.Windows.Forms.Form.OnFormClosed(System.Windows.Forms.FormClosedEventArgs)" />
+
+              
 
               
 
@@ -5476,11 +6248,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Form.OnFormClosed(System.Windows.Forms.FormClosedEventArgs)" />
+
+            
 
             
 
@@ -5497,8 +6273,12 @@
 
               
 
+              
+
                and <see
                cref="M:System.Windows.Forms.Form.OnClosing(System.ComponentModel.CancelEventArgs)" />
+
+              
 
               
 
@@ -5511,6 +6291,8 @@
 
               
 
+              
+
                method is called to exit your application. If you have validation code in either of these methods that must be executed, you should call the <see
                cref="M:System.Windows.Forms.Form.Close" />
 
@@ -5518,8 +6300,12 @@
 
               
 
+              
+
                method for each open form individually before calling the <see
                cref="M:System.Windows.Forms.Application.Exit" />
+
+              
 
               
 
@@ -5539,6 +6325,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5549,8 +6337,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5594,8 +6386,12 @@
 
               
 
+              
+
                method is obsolete in the .NET Framework version 2.0; use the <see
                cref="M:System.Windows.Forms.Form.OnFormClosing(System.Windows.Forms.FormClosingEventArgs)" />
+
+              
 
               
 
@@ -5616,11 +6412,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Form.OnClosing(System.ComponentModel.CancelEventArgs)" />
+
+            
 
             
 
@@ -5637,8 +6437,12 @@
 
               
 
+              
+
                and <see
                cref="M:System.Windows.Forms.Form.OnClosing(System.ComponentModel.CancelEventArgs)" />
+
+              
 
               
 
@@ -5651,6 +6455,8 @@
 
               
 
+              
+
                method is called to exit your application. If you have validation code in either of these methods that must be executed, you should call the <see
                cref="M:System.Windows.Forms.Form.Close" />
 
@@ -5658,8 +6464,12 @@
 
               
 
+              
+
                method for each open form individually before calling the <see
                cref="M:System.Windows.Forms.Application.Exit" />
+
+              
 
               
 
@@ -5679,6 +6489,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5689,8 +6501,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.CancelEventArgs" />
+
+          
 
           
 
@@ -5726,6 +6542,8 @@
                 >[&lt;topic://cpconProvidingEventFunctionality&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -5774,11 +6592,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Form.OnDeactivate(System.EventArgs)" />
+
+            
 
             
 
@@ -5797,6 +6619,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5807,8 +6631,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5883,11 +6711,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Form.OnEnter(System.EventArgs)" />
+
+            
 
             
 
@@ -5906,6 +6738,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5916,8 +6750,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5982,6 +6820,8 @@
 
             
 
+            
+
              method removes the current form from the <see
              cref="P:System.Windows.Forms.Application.OpenForms" />
 
@@ -5989,8 +6829,12 @@
 
             
 
+            
+
              collection of the associated <see
              cref="T:System.Windows.Forms.Application" />
+
+            
 
             
 
@@ -6008,11 +6852,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Form.OnFormClosed(System.Windows.Forms.FormClosedEventArgs)" />
+
+            
 
             
 
@@ -6031,6 +6879,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6041,8 +6891,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.FormClosedEventArgs" />
+
+          
 
           
 
@@ -6078,11 +6932,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Form.OnFormClosing(System.Windows.Forms.FormClosingEventArgs)" />
+
+            
 
             
 
@@ -6101,6 +6959,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6111,8 +6971,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.FormClosingEventArgs" />
+
+          
 
           
 
@@ -6217,11 +7081,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Form.OnHelpButtonClicked(System.ComponentModel.CancelEventArgs)" />
+
+            
 
             
 
@@ -6240,6 +7108,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6250,8 +7120,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.CancelEventArgs" />
+
+          
 
           
 
@@ -6289,11 +7163,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Form.OnInputLanguageChanged(System.Windows.Forms.InputLanguageChangedEventArgs)" />
+
+            
 
             
 
@@ -6312,6 +7190,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6322,8 +7202,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.InputLanguageChangedEventArgs" />
+
+          
 
           
 
@@ -6370,11 +7254,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Form.OnInputLanguageChanging(System.Windows.Forms.InputLanguageChangingEventArgs)" />
+
+            
 
             
 
@@ -6393,6 +7281,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6403,8 +7293,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.InputLanguageChangingEventArgs" />
+
+          
 
           
 
@@ -6450,11 +7344,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="levent">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6489,11 +7387,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Form.OnLoad(System.EventArgs)" />
+
+            
 
             
 
@@ -6512,6 +7414,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6522,8 +7426,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -6569,11 +7477,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Form.OnMaximizedBoundsChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -6592,6 +7504,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6602,8 +7516,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -6649,11 +7567,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Form.OnMaximumSizeChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -6672,6 +7594,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6682,8 +7606,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -6729,11 +7657,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Form.OnMdiChildActivate(System.EventArgs)" />
+
+            
 
             
 
@@ -6752,6 +7684,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6762,8 +7696,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -6806,11 +7744,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Form.OnMenuComplete(System.EventArgs)" />
+
+            
 
             
 
@@ -6829,6 +7771,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6839,8 +7783,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -6884,11 +7832,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Form.OnMenuStart(System.EventArgs)" />
+
+            
 
             
 
@@ -6907,6 +7859,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6917,8 +7871,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -6965,11 +7923,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Form.OnMinimumSizeChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -6988,6 +7950,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6998,8 +7962,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -7097,8 +8065,12 @@
 
             
 
+            
+
              event will only be raised if the form's <see
              cref="P:System.Windows.Forms.Control.CanRaiseEvents" />
+
+            
 
             
 
@@ -7116,11 +8088,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Form.OnResizeBegin(System.EventArgs)" />
+
+            
 
             
 
@@ -7139,6 +8115,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -7149,8 +8127,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -7188,8 +8170,12 @@
 
             
 
+            
+
              event will only be raised if the form's <see
              cref="P:System.Windows.Forms.Control.CanRaiseEvents" />
+
+            
 
             
 
@@ -7207,11 +8193,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Form.OnResizeEnd(System.EventArgs)" />
+
+            
 
             
 
@@ -7230,6 +8220,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -7240,8 +8232,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -7282,8 +8278,12 @@
 
             
 
+            
+
              method will return without performing any action. If the <see
              cref="P:System.Windows.Forms.Control.RightToLeft" />
+
+            
 
             
 
@@ -7296,8 +8296,12 @@
 
             
 
+            
+
             , then the handles of the form and its child controls will be recreated through calls to the <see
              cref="M:System.Windows.Forms.Control.RecreateHandle" />
+
+            
 
             
 
@@ -7315,11 +8319,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Form.OnRightToLeftLayoutChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -7338,6 +8346,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -7348,8 +8358,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -7387,6 +8401,8 @@
 
             
 
+            
+
              event occurs whenever the form is first shown. </para
           >
           <para
@@ -7399,11 +8415,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Form.OnShown(System.EventArgs)" />
+
+            
 
             
 
@@ -7422,6 +8442,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -7432,8 +8454,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -7521,11 +8547,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.Form.OnVisibleChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -7544,6 +8574,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -7554,8 +8586,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -7601,8 +8637,12 @@
 
             
 
+            
+
              property enables you to specify a level of transparency for the form and its controls. When this property is set to a value less than 100 percent (1.00), the entire form, including borders, is made more transparent. Setting this property to a value of 0 percent (0.00) makes the form completely invisible. You can use this property to provide different levels of transparency or to provide effects such as phasing a form in or out of view. For example, you can phase a form into view by setting the <see
              cref="P:System.Windows.Forms.Form.Opacity" />
+
+            
 
             
 
@@ -7617,6 +8657,8 @@
 
             
 
+            
+
              differs from the transparency provided by the <see
              cref="P:System.Windows.Forms.Form.TransparencyKey" />
 
@@ -7624,8 +8666,12 @@
 
             
 
+            
+
             , which only makes a form and its controls completely transparent if they are the same color as the value specified in the <see
              cref="P:System.Windows.Forms.Form.TransparencyKey" />
+
+            
 
             
 
@@ -7641,6 +8687,8 @@
 
             
 
+            
+
              is true.</para
           >
           <para
@@ -7651,8 +8699,12 @@
 
             
 
+            
+
              property depends on the Layered Windows API that was introduced with Windows 2000. For more information, see the "Layered Windows: A New Way to Use Translucency and Transparency Effects in Windows Applications" in the Platform SDK documentation at <see
              cref="http://msdn.microsoft.com/">http://msdn.microsoft.com</see>
+
+            
 
             
 
@@ -7701,6 +8753,8 @@
 
             
 
+            
+
              method. The form assigned to the owner form will remain owned until the <see
              cref="M:System.Windows.Forms.Form.RemoveOwnedForm(System.Windows.Forms.Form)" />
 
@@ -7708,8 +8762,12 @@
 
             
 
+            
+
              method is called. You can also make a form owned by another by setting the <see
              cref="P:System.Windows.Forms.Form.Owner" />
+
+            
 
             
 
@@ -7727,6 +8785,8 @@
 
               
 
+              
+
                property.</para
             >
           </block>
@@ -7736,6 +8796,8 @@
           <para
             >Gets an array of <see
              cref="T:System.Windows.Forms.Form" />
+
+            
 
             
 
@@ -7776,11 +8838,15 @@
 
             
 
+            
+
              property a reference to the form that will be the owner.</para
           >
           <para
             >When a form is owned by another form, it is closed or hidden with the owner form. For example, consider a form named Form2 that is owned by a form named Form1. If Form1 is closed or minimized, Form2 is also closed or hidden. Owned forms are also never displayed behind their owner form. You can use owned forms for windows such as find and replace windows, which should not disappear when the owner form is selected. To determine the forms that are owned by a parent form, use the <see
              cref="P:System.Windows.Forms.Form.OwnedForms" />
+
+            
 
             
 
@@ -7853,6 +8919,8 @@
 
           
 
+          
+
           The character to process. </param
         >
       </Docs>
@@ -7889,8 +8957,12 @@
 
             
 
+            
+
              method overrides the base <see
              cref="M:System.Windows.Forms.ContainerControl.ProcessDialogKey(System.Windows.Forms.Keys)" />
+
+            
 
             
 
@@ -7914,8 +8986,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.Keys" />
+
+          
 
           
 
@@ -7984,6 +9060,8 @@
 
           
 
+          
+
           The character to process. </param
         >
       </Docs>
@@ -8034,6 +9112,8 @@
 
             
 
+            
+
              method is called. In addition to removing the owned form from the list of owned form, this method also sets the owner form to null.</para
           >
         </remarks>
@@ -8048,8 +9128,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Form" />
+
+          
 
           
 
@@ -8083,6 +9167,8 @@
 
             
 
+            
+
              event is raised when the user begins to resize a form, typically by clicking and dragging one of the borders or the sizing grip located on the lower-right corner of the form. This action puts the form into a modal sizing loop until the resize operation is completed. Typically, the following set of events occurs during a resize operation:</para
           >
           <list type="ordered">
@@ -8090,6 +9176,8 @@
               <para
                 >A single <see
                  cref="E:System.Windows.Forms.Form.ResizeBegin" />
+
+                
 
                 
 
@@ -8107,8 +9195,12 @@
 
                 
 
+                
+
                  and <see
                  cref="E:System.Windows.Forms.Control.SizeChanged" />
+
+                
 
                 
 
@@ -8121,6 +9213,8 @@
 
                 
 
+                
+
                  is modified.</para
               >
             </item>
@@ -8128,6 +9222,8 @@
               <para
                 >A single <see
                  cref="E:System.Windows.Forms.Form.ResizeEnd" />
+
+                
 
                 
 
@@ -8146,8 +9242,12 @@
 
               
 
+              
+
                and <see
                cref="E:System.Windows.Forms.Form.ResizeEnd" />
+
+              
 
               
 
@@ -8160,8 +9260,12 @@
 
               
 
+              
+
                and <see
                cref="E:System.Windows.Forms.Control.SizeChanged" />
+
+              
 
               
 
@@ -8178,8 +9282,12 @@
 
             
 
+            
+
              and <see
              cref="E:System.Windows.Forms.Form.ResizeEnd" />
+
+            
 
             
 
@@ -8192,8 +9300,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Windows.Forms.Control.Location" />
+
+            
 
             
 
@@ -8206,6 +9318,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -8240,8 +9354,12 @@
 
             
 
+            
+
              event is raised when the user finishes resizing a form, typically by dragging one of the borders or the sizing grip located on the lower-right corner of the form, and then releasing it. For more information about the resizing operation, see the <see
              cref="E:System.Windows.Forms.Form.ResizeBegin" />
+
+            
 
             
 
@@ -8257,8 +9375,12 @@
 
             
 
+            
+
              event is also generated after the user moves a form, typically by clicking and dragging on the caption bar. This event is not generated by programmatic manipulation of the form, for example by changing the <see
              cref="P:System.Windows.Forms.Form.Size" />
+
+            
 
             
 
@@ -8271,6 +9393,8 @@
 
             
 
+            
+
              properties.</para
           >
           <para
@@ -8278,6 +9402,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -8324,6 +9450,8 @@
 
             
 
+            
+
              property to track the user's window size and position preferences for the form in its normal window state. You should track both the value of the <see
              cref="P:System.Windows.Forms.Form.WindowState" />
 
@@ -8331,8 +9459,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.Form.RestoreBounds" />
+
+            
 
             
 
@@ -8349,8 +9481,12 @@
 
               
 
+              
+
                property is valid only when the <see
                cref="P:System.Windows.Forms.Form.WindowState" />
+
+              
 
               
 
@@ -8363,8 +9499,12 @@
 
               
 
+              
+
                class is not equal to <see
                cref="F:System.Windows.Forms.FormWindowState.Normal" />
+
+              
 
               
 
@@ -8409,6 +9549,8 @@
 
             
 
+            
+
              property is primarily useful for developing world-ready forms for worldwide audiences. Many forms are designed so that controls are laid out on a form in a left-to-right fashion. These forms are compatible with languages that follow this writing direction. However, when you display the same forms to users of right-to-left languages, it is often preferable to reverse the order of the controls on the form. If both the <see
              cref="P:System.Windows.Forms.Form.RightToLeftLayout" />
 
@@ -8416,8 +9558,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.Control.RightToLeft" />
+
+            
 
             
 
@@ -8433,8 +9579,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.Form.RightToLeftLayout" />
+
+            
 
             
 
@@ -8450,8 +9600,12 @@
 
             
 
+            
+
              is set to Yes. The owner draw events will still occur, but the behavior of any code you author in these events is not defined. Additionally, <see
              cref="P:System.Windows.Forms.Control.BackgroundImage" />
+
+            
 
             
 
@@ -8464,8 +9618,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.Form.TransparencyKey" />
+
+            
 
             
 
@@ -8481,8 +9639,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.Control.RightToLeft" />
+
+            
 
             
 
@@ -8500,8 +9662,12 @@
 
                 
 
+                
+
                  is set to Yes and <see
                  cref="P:System.Windows.Forms.Form.RightToLeftLayout" />
+
+                
 
                 
 
@@ -8519,8 +9685,12 @@
 
                 
 
+                
+
                  is set to Yes but <see
                  cref="P:System.Windows.Forms.Form.RightToLeftLayout" />
+
+                
 
                 
 
@@ -8538,6 +9708,8 @@
 
             
 
+            
+
              event.</para
           >
           <para
@@ -8547,6 +9719,8 @@
                 >Best Practices for Developing World-Ready Applications</a
               >
             </format>
+
+            
 
             
 
@@ -8581,8 +9755,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.Form.RightToLeftLayout" />
+
+            
 
             
 
@@ -8596,6 +9774,8 @@
           <para
             >Occurs after the value of the <see
              cref="P:System.Windows.Forms.Form.RightToLeftLayout" />
+
+            
 
             
 
@@ -8640,6 +9820,8 @@
 
           
 
+          
+
           The factor by which the height and width of the control are scaled.</param
         >
         <param name="specified">
@@ -8649,8 +9831,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.BoundsSpecified" />
+
+          
 
           
 
@@ -8686,10 +9872,14 @@
 
           
 
+          
+
           Percentage to scale the form horizontally </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8734,10 +9924,14 @@
 
           
 
+          
+
           If set to true that the active control is changed </param
         >
         <param name="forward">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8777,10 +9971,14 @@
 
           
 
+          
+
           The x-coordinate.</param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8795,6 +9993,8 @@
 
           
 
+          
+
           The bounds width.</param
         >
         <param name="height">
@@ -8804,10 +10004,14 @@
 
           
 
+          
+
           The bounds height.</param
         >
         <param name="specified">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8852,10 +10056,14 @@
 
           
 
+          
+
           Requested width of the client region. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8905,10 +10113,14 @@
 
           
 
+          
+
           The x-coordinate of the form's location. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8923,10 +10135,14 @@
 
           
 
+          
+
           The width of the form. </param
         >
         <param name="height">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -8961,6 +10177,8 @@
 
             
 
+            
+
              method to position multiple-document interface (MDI) child forms.</para
           >
         </remarks>
@@ -8975,10 +10193,14 @@
 
           
 
+          
+
           The x-coordinate of the form's location. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -9042,8 +10264,12 @@
 
             
 
+            
+
              property of the form is set to <paramref
              name="owner" />
+
+            
 
             
 
@@ -9056,6 +10282,8 @@
 
             
 
+            
+
              property to get information about the owning form.  Calling this method is identical to setting the <see
              cref="P:System.Windows.Forms.Form.Owner" />
 
@@ -9063,8 +10291,12 @@
 
             
 
+            
+
              property of the non-modal and then calling the <see
              cref="M:System.Windows.Forms.Control.Show" />
+
+            
 
             
 
@@ -9080,8 +10312,12 @@
 
             
 
+            
+
              property to true. After the <see
              cref="M:System.Windows.Forms.Form.Show(System.Windows.Forms.IWin32Window)" />
+
+            
 
             
 
@@ -9094,8 +10330,12 @@
 
             
 
+            
+
              property returns a value of true until the <see
              cref="M:System.Windows.Forms.Control.Hide" />
+
+            
 
             
 
@@ -9115,8 +10355,12 @@
 
           
 
+          
+
           Any object that implements <see
            cref="T:System.Windows.Forms.IWin32Window" />
+
+          
 
           
 
@@ -9148,8 +10392,12 @@
 
             
 
+            
+
              enumeration by assigning it to the <see
              cref="P:System.Windows.Forms.Button.DialogResult" />
+
+            
 
             
 
@@ -9162,6 +10410,8 @@
 
             
 
+            
+
              on the form or by setting the <see
              cref="P:System.Windows.Forms.Form.DialogResult" />
 
@@ -9169,8 +10419,12 @@
 
             
 
+            
+
              property of the form in code. This value is then returned by this method. You can use this return value to determine how to process the actions that occurred in the dialog box. For example, if the dialog box was closed and returned the DialogResult.Cancel value through this method, you could prevent code following the call to <see
              cref="M:System.Windows.Forms.Form.ShowDialog" />
+
+            
 
             
 
@@ -9186,8 +10440,12 @@
 
             
 
+            
+
              button (the button with an X at the upper-right corner of the form) causes the form to be hidden and the <see
              cref="P:System.Windows.Forms.Form.DialogResult" />
+
+            
 
             
 
@@ -9200,8 +10458,12 @@
 
             
 
+            
+
              method is not called by the .NET Framework when the user clicks the close form button of a dialog box or sets the value of the <see
              cref="P:System.Windows.Forms.Form.DialogResult" />
+
+            
 
             
 
@@ -9214,11 +10476,15 @@
 
             
 
+            
+
              method of the form when the form is no longer needed by your application.</para
           >
           <para
             >This version of the <see
              cref="M:System.Windows.Forms.Form.ShowDialog" />
+
+            
 
             
 
@@ -9236,6 +10502,8 @@
           <para
             >One of the <see
              cref="T:System.Windows.Forms.DialogResult" />
+
+            
 
             
 
@@ -9273,8 +10541,12 @@
 
             
 
+            
+
              by assigning it to the <see
              cref="P:System.Windows.Forms.Button.DialogResult" />
+
+            
 
             
 
@@ -9287,6 +10559,8 @@
 
             
 
+            
+
              on the form or by setting the <see
              cref="P:System.Windows.Forms.Form.DialogResult" />
 
@@ -9294,8 +10568,12 @@
 
             
 
+            
+
              property of the form in code. This value is then returned by this method. You can use this return value to determine how to process the actions that occurred in the dialog box. For example, if the dialog box was closed and returned the DialogResult.Cancel value through this method, you could prevent code following the call to <see
              cref="M:System.Windows.Forms.Form.ShowDialog" />
+
+            
 
             
 
@@ -9311,8 +10589,12 @@
 
             
 
+            
+
              button (the button with an X at the upper-right corner of the form) causes the form to be hidden and the <see
              cref="P:System.Windows.Forms.Form.DialogResult" />
+
+            
 
             
 
@@ -9325,8 +10607,12 @@
 
             
 
+            
+
              method is not called by the .NET Framework when the user clicks the close form button of a dialog box or sets the value of the <see
              cref="P:System.Windows.Forms.Form.DialogResult" />
+
+            
 
             
 
@@ -9339,11 +10625,15 @@
 
             
 
+            
+
              method of the form when the form is no longer needed by your application.</para
           >
           <para
             >This version of the <see
              cref="M:System.Windows.Forms.Form.ShowDialog" />
+
+            
 
             
 
@@ -9366,6 +10656,8 @@
 
             
 
+            
+
              values.</para
           >
         </returns>
@@ -9376,8 +10668,12 @@
 
           
 
+          
+
           Any object that implements <see
            cref="T:System.Windows.Forms.IWin32Window" />
+
+          
 
           
 
@@ -9417,8 +10713,12 @@
 
             
 
+            
+
              property contains a <see
              cref="T:System.Boolean" />
+
+            
 
             
 
@@ -9431,8 +10731,12 @@
 
             
 
+            
+
              is displayed in the caption bar of the form. If the <see
              cref="P:System.Windows.Forms.Form.ControlBox" />
+
+            
 
             
 
@@ -9448,6 +10752,8 @@
 
             
 
+            
+
              is false when the primary form is shown, a generic icon will be displayed in the taskbar button for the application.</para
           >
           <para
@@ -9458,8 +10764,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Windows.Forms.FormBorderStyle.FixedDialog" />
+
+            
 
             
 
@@ -9500,8 +10810,12 @@
 
             
 
+            
+
              style. Setting the <see
              cref="F:System.Windows.Forms.FormBorderStyle.FixedToolWindow" />
+
+            
 
             
 
@@ -9540,10 +10854,14 @@
 
             
 
+            
+
              event is only raised the first time a form is displayed; subsequently minimizing, maximizing, restoring, hiding, showing, or invalidating and repainting will not raise this event. For more information about the order of events of a form, see <format
              type="text/html">
               <a href="e81db09b-4453-437f-b78a-62d7cd5c9829">Order of Events in Windows Forms</a>
             </format>
+
+            
 
             
 
@@ -9556,6 +10874,8 @@
              type="text/html">
               <a href="01e4f1bc-e55e-413f-98c7-6588493e5f67">Consuming Events</a>
             </format>
+
+            
 
             
 
@@ -9600,6 +10920,8 @@
 
             
 
+            
+
              in your own form, and programming it to return true.</para
           >
           <para
@@ -9610,8 +10932,12 @@
 
             
 
+            
+
              controls, such as <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -9653,8 +10979,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.Control.Width" />
+
+            
 
             
 
@@ -9667,6 +10997,8 @@
 
             
 
+            
+
              property to size and locate the form based on desktop coordinates or use the <see
              cref="P:System.Windows.Forms.Control.Bounds" />
 
@@ -9674,8 +11006,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.Control" />
+
+            
 
             
 
@@ -9695,8 +11031,12 @@
 
               
 
+              
+
                to <userInput
               >None</userInput>
+
+              
 
               
 
@@ -9709,8 +11049,12 @@
 
               
 
+              
+
                control. On SmartPhone devices, you can never resize a <see
                cref="T:System.Windows.Forms.Form" />
+
+              
 
               
 
@@ -9752,6 +11096,8 @@
           <para
             >This property enables you to determine when the sizing grip is displayed on the form. You can set this property to display the sizing grip or have it automatically displayed based on the setting of the <see
              cref="P:System.Windows.Forms.Form.FormBorderStyle" />
+
+            
 
             
 
@@ -9799,6 +11145,8 @@
 
             
 
+            
+
              property or use the default location specified by Windows. You can also position the form to display in the center of the screen or in the center of its parent form for forms such as multiple-document interface (MDI) child forms.</para
           >
           <para
@@ -9809,8 +11157,12 @@
 
             
 
+            
+
              or <see
              cref="Overload:System.Windows.Forms.Form.ShowDialog" />
+
+            
 
             
 
@@ -9859,6 +11211,8 @@
 
             
 
+            
+
              property does nothing.</para
           >
         </remarks>
@@ -9893,6 +11247,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.Form.TabIndex" />
+
+            
 
             
 
@@ -9964,6 +11320,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.Form.TabStop" />
+
+            
 
             
 
@@ -10081,8 +11439,12 @@
 
             
 
+            
+
              property of the form appended to the end. For example, if the form is derived from the class MyForm in the MyNamespace namespace, and the <see
              cref="P:System.Windows.Forms.Form.Text" />
+
+            
 
             
 
@@ -10095,8 +11457,12 @@
 
             
 
+            
+
             , this method will return <userInput
             >MyNamespace.MyForm, Text: Hello, World</userInput>
+
+            
 
             
 
@@ -10133,8 +11499,12 @@
 
             
 
+            
+
              property is assigned a <see
              cref="T:System.Drawing.Color" />
+
+            
 
             
 
@@ -10147,8 +11517,12 @@
 
             
 
+            
+
              will be displayed transparently. Any mouse actions, such as the click of the mouse, that are performed on the transparent areas of the form will be transferred to the windows below the transparent area. For example, if the client region of a form is made transparent, clicking the mouse on that area would send the event notification of the click to any window that is below it. If the color assigned to the <see
              cref="P:System.Windows.Forms.Form.TransparencyKey" />
+
+            
 
             
 
@@ -10161,8 +11535,12 @@
 
             
 
+            
+
              control on a form that has its <see
              cref="P:System.Windows.Forms.Form.TransparencyKey" />
+
+            
 
             
 
@@ -10175,8 +11553,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.Button" />
+
+            
 
             
 
@@ -10187,6 +11569,8 @@
           <para
             >This property is not supported when <see
              cref="P:System.Windows.Forms.Form.RightToLeftLayout" />
+
+            
 
             
 
@@ -10223,6 +11607,8 @@
 
             
 
+            
+
              method determines which button on the form raises its Click event when the user presses ENTER, according to the following priority:</para
           >
           <list type="ordered">
@@ -10235,8 +11621,12 @@
 
                 
 
+                
+
                  property implements the <see
                  cref="T:System.Windows.Forms.IButtonControl" />
+
+                
 
                 
 
@@ -10249,6 +11639,8 @@
               <para
                 >The <see
                  cref="P:System.Windows.Forms.Form.AcceptButton" />
+
+                
 
                 
 
@@ -10350,8 +11742,12 @@
 
             
 
+            
+
              property is always set to FormWindowState.Normal, regardless of its initial setting. This is reflected in the <see
              cref="P:System.Windows.Forms.Control.Height" />
+
+            
 
             
 
@@ -10364,8 +11760,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.Control.Top" />
+
+            
 
             
 
@@ -10378,8 +11778,12 @@
 
             
 
+            
+
              property settings. If a form is hidden after it has been shown, these properties reflect the previous state until the form is shown again, regardless of any changes made to the <see
              cref="P:System.Windows.Forms.Form.WindowState" />
+
+            
 
             
 

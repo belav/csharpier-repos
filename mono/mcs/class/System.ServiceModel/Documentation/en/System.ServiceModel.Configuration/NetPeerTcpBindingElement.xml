@@ -50,6 +50,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -80,12 +82,16 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.String" />
+
+          
 
           
 
@@ -116,6 +122,8 @@
           <para
             >Gets the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -241,6 +249,8 @@
         <param name="binding">
           <attribution license="cc4" from="Microsoft" modified="false" />
           <see cref="T:System.ServiceModel.Channels.Binding" />
+
+          
 
           
 

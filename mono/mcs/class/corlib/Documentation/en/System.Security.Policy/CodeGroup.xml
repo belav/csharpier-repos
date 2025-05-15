@@ -65,6 +65,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -73,6 +75,8 @@
           <para
             >Initializes a new instance of <see
              cref="T:System.Security.Policy.CodeGroup" />
+
+            
 
             
 
@@ -88,10 +92,14 @@
 
           
 
+          
+
           A membership condition that tests evidence to determine whether this code group applies policy. </param
         >
         <param name="policy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -130,6 +138,8 @@
         </summary>
         <param name="group">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -190,6 +200,8 @@
             <para
               >The return value is a copy of the child code list. Do not use the returned list to add a child code group; instead, use the <see
                cref="M:System.Security.Policy.CodeGroup.AddChild(System.Security.Policy.CodeGroup)" />
+
+              
 
               
 
@@ -272,8 +284,12 @@
 
             
 
+            
+
              cannot be overridden. If you need to serialize members specific to a particular implementation of <see
              cref="T:System.Security.Policy.CodeGroup" />
+
+            
 
             
 
@@ -286,8 +302,12 @@
 
             
 
+            
+
              and serialize your members there. When the code group is serialized, <see
              cref="M:System.Security.Policy.CodeGroup.ToXml" />
+
+            
 
             
 
@@ -300,8 +320,12 @@
 
             
 
+            
+
              and adds your serialization to the <see
              cref="T:System.Security.SecurityElement" />
+
+            
 
             
 
@@ -314,11 +338,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The XML created using this method is deserialized by the <see
              cref="M:System.Security.Policy.CodeGroup.ParseXml(System.Security.SecurityElement,System.Security.Policy.PolicyLevel)" />
+
+            
 
             
 
@@ -337,6 +365,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -347,10 +377,14 @@
 
           
 
+          
+
           The XML encoding to which to add the serialization. </param
         >
         <param name="level">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -410,6 +444,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Security.Policy.CodeGroup.Description" />
 
@@ -417,8 +453,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Security.Policy.CodeGroup.MembershipCondition" />
+
+            
 
             
 
@@ -438,6 +478,8 @@
         </returns>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -480,8 +522,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Security.Policy.CodeGroup.Description" />
+
+            
 
             
 
@@ -494,11 +540,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >If the <paramref
              name="compareChildren" />
+
+            
 
             
 
@@ -522,10 +572,14 @@
 
           
 
+          
+
           The code group to compare with the current code group. </param
         >
         <param name="compareChildren">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -564,6 +618,8 @@
         </summary>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -611,10 +667,14 @@
 
           
 
+          
+
           The XML encoding to use to reconstruct the security object. </param
         >
         <param name="level">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -756,8 +816,12 @@
 
             
 
+            
+
              cannot be overridden. If you need to deserialize members specific to a particular implementation of <see
              cref="T:System.Security.Policy.CodeGroup" />
+
+            
 
             
 
@@ -770,8 +834,12 @@
 
             
 
+            
+
              and deserialize your members there. When the code group is deserialized, <see
              cref="M:System.Security.Policy.CodeGroup.FromXml(System.Security.SecurityElement)" />
+
+            
 
             
 
@@ -784,8 +852,12 @@
 
             
 
+            
+
              and reconstructs your members from the <see
              cref="T:System.Security.SecurityElement" />
+
+            
 
             
 
@@ -796,6 +868,8 @@
           <para
             >This method deserializes XML created using <see
              cref="M:System.Security.Policy.CodeGroup.CreateXml(System.Security.SecurityElement,System.Security.Policy.PolicyLevel)" />
+
+            
 
             
 
@@ -814,6 +888,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -824,10 +900,14 @@
 
           
 
+          
+
           The XML encoding to use to reconstruct the security object. </param
         >
         <param name="level">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -929,6 +1009,8 @@
 
           
 
+          
+
           The code group to be removed as a child. </param
         >
       </Docs>
@@ -966,8 +1048,12 @@
 
             
 
+            
+
             , all child code groups whose membership condition match the specified evidence are also resolved, and all resulting policy statements are combined with the policy statement of the parent union code group. Each child code group type determines how all child groups under it are applied, depending on how the <see
              cref="M:System.Security.Policy.CodeGroup.Resolve(System.Security.Policy.Evidence)" />
+
+            
 
             
 
@@ -978,6 +1064,8 @@
           <para
             >The .NET Framework security system uses <see
              cref="M:System.Security.Policy.CodeGroup.Resolve(System.Security.Policy.Evidence)" />
+
+            
 
             
 
@@ -996,6 +1084,8 @@
         </returns>
         <param name="evidence">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1037,6 +1127,8 @@
 
             
 
+            
+
             . The code group that is returned contains child code groups, which in turn can have child code groups as necessary to reflect the complete set of code groups that were matched by the evidence provided.</para
           >
         </remarks>
@@ -1054,11 +1146,15 @@
 
             
 
+            
+
              that is the root of the tree of matching code groups.</para
           >
         </returns>
         <param name="evidence">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1132,6 +1228,8 @@
         </returns>
         <param name="level">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

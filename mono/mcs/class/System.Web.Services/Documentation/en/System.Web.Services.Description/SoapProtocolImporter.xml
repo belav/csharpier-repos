@@ -27,6 +27,8 @@
 
         
 
+        
+
          class generates client proxy code or abstract server code according to the SOAP protocol. The class generates a class for each supported binding defined in a Web Services Description Language (WSDL) document.</para
       >
       <para
@@ -37,8 +39,12 @@
 
         
 
+        
+
          directly, a developer uses the class indirectly through the <see
          cref="T:System.Web.Services.Description.ServiceDescriptionImporter" />
+
+        
 
         
 
@@ -65,6 +71,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Description.SoapProtocolImporter" />
+
+            
 
             
 
@@ -100,8 +108,12 @@
 
             
 
+            
+
              method executes before the <see
              cref="T:System.Web.Services.Description.SoapProtocolImporter" />
+
+            
 
             
 
@@ -142,8 +154,12 @@
 
             
 
+            
+
              method executes before the <see
              cref="T:System.Web.Services.Description.SoapProtocolImporter" />
+
+            
 
             
 
@@ -180,8 +196,12 @@
 
             
 
+            
+
              method executes after the <see
              cref="T:System.Web.Services.Description.SoapProtocolImporter" />
+
+            
 
             
 
@@ -218,8 +238,12 @@
 
             
 
+            
+
              method executes after the <see
              cref="T:System.Web.Services.Description.SoapProtocolImporter" />
+
+            
 
             
 
@@ -254,6 +278,8 @@
           <para
             >During generation of a class for a given binding, the <see
              cref="M:System.Web.Services.Description.SoapProtocolImporter.GenerateMethod" />
+
+            
 
             
 
@@ -294,8 +320,12 @@
 
             
 
+            
+
              method determines whether to generate a class for the current binding, as represented by the <see
              cref="P:System.Web.Services.Description.SoapProtocolImporter.Binding" />
+
+            
 
             
 
@@ -308,8 +338,12 @@
 
             
 
+            
+
              property's <see
              cref="P:System.Web.Services.Description.Binding.Extensions" />
+
+            
 
             
 
@@ -322,8 +356,12 @@
 
             
 
+            
+
              instance. In addition, the transport mechanism obtained through the <see
              cref="P:System.Web.Services.Description.SoapBinding.Transport" />
+
+            
 
             
 
@@ -369,8 +407,12 @@
 
             
 
+            
+
              method determines whether to generate a method for the current operation, as represented by the <see
              cref="T:System.Web.Services.Description.Operation" />
+
+            
 
             
 
@@ -383,6 +425,8 @@
 
             
 
+            
+
              method executes. A true value is returned only if the input value is <see
              cref="F:System.Web.Services.Description.OperationFlow.OneWay" />
 
@@ -390,8 +434,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Web.Services.Description.OperationFlow.RequestResponse" />
+
+            
 
             
 
@@ -407,6 +455,8 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Web.Services.Description.Operation.Messages" />
 
@@ -414,8 +464,12 @@
 
             
 
+            
+
              property is of type <see
              cref="T:System.Web.Services.Description.OperationMessageCollection" />
+
+            
 
             
 
@@ -439,8 +493,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.Services.Description.OperationFlow" />
+
+          
 
           
 
@@ -488,11 +546,15 @@
 
             
 
+            
+
             ; otherwise false.</para
           >
         </returns>
         <param name="uriList">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -547,6 +609,8 @@
 
             
 
+            
+
              instance obtained through the <see
              cref="P:System.Web.Services.Description.SoapProtocolImporter.SoapBinding" />
 
@@ -554,8 +618,12 @@
 
             
 
+            
+
              property's <see
              cref="P:System.Web.Services.Description.Binding.Extensions" />
+
+            
 
             
 
@@ -595,8 +663,12 @@
 
             
 
+            
+
              class uses a <see
              cref="T:System.Xml.Serialization.SoapCodeExporter" />
+
+            
 
             
 
@@ -615,8 +687,12 @@
 
             
 
+            
+
              used internally by the <see
              cref="T:System.Web.Services.Description.SoapProtocolImporter" />
+
+            
 
             
 
@@ -656,8 +732,12 @@
 
             
 
+            
+
              class uses a <see
              cref="T:System.Xml.Serialization.SoapSchemaImporter" />
+
+            
 
             
 
@@ -676,8 +756,12 @@
 
             
 
+            
+
              used internally by the <see
              cref="T:System.Web.Services.Description.SoapProtocolImporter" />
+
+            
 
             
 
@@ -717,8 +801,12 @@
 
             
 
+            
+
              class uses an <see
              cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+
+            
 
             
 
@@ -737,8 +825,12 @@
 
             
 
+            
+
              used internally by the <see
              cref="T:System.Web.Services.Description.SoapProtocolImporter" />
+
+            
 
             
 
@@ -778,8 +870,12 @@
 
             
 
+            
+
              class uses an <see
              cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+
+            
 
             
 
@@ -798,8 +894,12 @@
 
             
 
+            
+
              used internally by the <see
              cref="T:System.Web.Services.Description.SoapProtocolImporter" />
+
+            
 
             
 

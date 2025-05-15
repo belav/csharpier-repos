@@ -33,6 +33,8 @@
 
         
 
+        
+
          for a peer node as well as an optional collection of multihoming IP addresses.</para
       >
     </summary>
@@ -70,8 +72,12 @@
 
             
 
+            
+
              with the supplied <see
              cref="T:System.ServiceModel.EndpointAddress" />
+
+            
 
             
 
@@ -87,8 +93,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ServiceModel.EndpointAddress" />
+
+          
 
           
 
@@ -103,8 +113,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.ObjectModel.ReadOnlyCollection`1" />
+
+          
 
           
 
@@ -143,8 +157,12 @@
 
             
 
+            
+
              associated with this <see
              cref="T:System.ServiceModel.PeerNodeAddress" />
+
+            
 
             
 
@@ -179,6 +197,8 @@
           <para
             >Gets a collection of multihoming IP addresses for this <see
              cref="T:System.ServiceModel.PeerNodeAddress" />
+
+            
 
             
 

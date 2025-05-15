@@ -28,8 +28,12 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.Data.Common.DbDataAdapter" />
+
+        
 
         
 
@@ -48,8 +52,12 @@
 
         
 
+        
+
          event of a <see
          cref="T:System.Data.Common.DbDataAdapter" />
+
+        
 
         
 
@@ -83,11 +91,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="dataTable">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -100,10 +112,14 @@
 
           
 
+          
+
            being updated. </param
         >
         <param name="values">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -151,6 +167,8 @@
           <para
             >Gets the <see
              cref="T:System.Data.DataTable" />
+
+            
 
             
 

@@ -74,6 +74,8 @@
 
         
 
+        
+
          control to display the contents of an XML document without formatting or using XSL Transformations.</para
       >
       <format type="text/html">
@@ -85,6 +87,8 @@
       <para
         >The XML document to display is specified by setting one of three properties. These three properties represent the different types of XML documents that can be displayed. You can display a <see
          cref="T:System.Xml.XmlDocument" />
+
+        
 
         
 
@@ -118,12 +122,16 @@
 
               
 
+              
+
                object. </para
             >
             <block subset="none" type="note">
               <para
                 >This property is obsolete. Use one of the other properties listed in this section to set the XML content for the <see
                  cref="T:System.Web.UI.WebControls.Xml" />
+
+                
 
                 
 
@@ -146,6 +154,8 @@
               <para
                 >This property is commonly set declaratively by placing text between the opening and closing &lt;asp:Xml&gt; tags of the <see
                  cref="T:System.Web.UI.WebControls.Xml" />
+
+                
 
                 
 
@@ -184,6 +194,8 @@
 
         
 
+        
+
          object or with an XSL Transformation style sheet file by setting the appropriate property. If no XSL Transformation style sheet is specified, the XML document is displayed using the default format. The following table lists the properties for specifying an XSL Transformation style sheet.</para
       >
       <list type="table">
@@ -212,12 +224,16 @@
 
               
 
+              
+
                object.</para
             >
             <block subset="none" type="note">
               <para
                 >Using a <see
                  cref="T:System.Xml.Xsl.XslTransform" />
+
+                
 
                 
 
@@ -248,8 +264,12 @@
 
           
 
+          
+
            or the <see
            cref="P:System.Web.UI.WebControls.Xml.TransformSource" />
+
+          
 
           
 
@@ -266,8 +286,12 @@
 
         
 
+        
+
          class also provides the <see
          cref="P:System.Web.UI.WebControls.Xml.TransformArgumentList" />
+
+        
 
         
 
@@ -291,9 +315,13 @@
 
         
 
+        
+
         "
     EnableViewState="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -312,6 +340,8 @@
     TransformSource="string"
     Visible="<codeFeaturedElement
         >True</codeFeaturedElement>
+
+        
 
         
 
@@ -339,6 +369,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.Xml" />
+
+            
 
             
 
@@ -375,6 +407,8 @@
 
           
 
+          
+
           An <see
            cref="T:System.Object" />
 
@@ -382,8 +416,12 @@
 
           
 
+          
+
            that represents the <see
            cref="T:System.Web.UI.LiteralControl" />
+
+          
 
           
 
@@ -425,6 +463,8 @@
 
             
 
+            
+
              property and returns the base server control identifier.</para
           >
         </summary>
@@ -461,8 +501,12 @@
 
             
 
+            
+
              property and returns the base <see
              cref="T:System.Web.UI.ControlCollection" />
+
+            
 
             
 
@@ -497,8 +541,12 @@
 
             
 
+            
+
              method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.WebControls.Xml" />
+
+            
 
             
 
@@ -517,6 +565,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -525,6 +575,8 @@
           <para
             >Always returns an <see
              cref="T:System.Web.UI.EmptyControlCollection" />
+
+            
 
             
 
@@ -557,8 +609,12 @@
 
             
 
+            
+
              property is obsolete. To specify the XML that will be displayed in the <see
              cref="T:System.Web.UI.WebControls.Xml" />
+
+            
 
             
 
@@ -571,6 +627,8 @@
 
             
 
+            
+
              property or the <see
              cref="P:System.Web.UI.WebControls.Xml.DocumentSource" />
 
@@ -578,8 +636,12 @@
 
             
 
+            
+
              property. For more information about these alternatives, see the class overview for the <see
              cref="T:System.Web.UI.WebControls.Xml" />
+
+            
 
             
 
@@ -595,8 +657,12 @@
 
             
 
+            
+
              control is specified in one of three ways. You can specify a <see
              cref="T:System.Xml.XmlDocument" />
+
+            
 
             
 
@@ -609,8 +675,12 @@
 
             
 
+            
+
              property is used to specify a <see
              cref="T:System.Xml.XmlDocument" />
+
+            
 
             
 
@@ -629,8 +699,12 @@
 
             
 
+            
+
              to display in the <see
              cref="T:System.Web.UI.WebControls.Xml" />
+
+            
 
             
 
@@ -675,8 +749,12 @@
 
             
 
+            
+
              control is specified in one of three ways. You can specify a <see
              cref="T:System.Xml.XmlDocument" />
+
+            
 
             
 
@@ -689,8 +767,12 @@
 
             
 
+            
+
              property is used to specify an XML string (representing an XML document) to display in the control. The <see
              cref="P:System.Web.UI.WebControls.Xml.DocumentContent" />
+
+            
 
             
 
@@ -707,8 +789,12 @@
 
               
 
+              
+
                property contains both get and set accessors, only the set accessor is useful. If you use the get accessor, <see
                cref="F:System.String.Empty" />
+
+              
 
               
 
@@ -723,6 +809,8 @@
           <para
             >Sets a string that contains the XML document to display in the <see
              cref="T:System.Web.UI.WebControls.Xml" />
+
+            
 
             
 
@@ -764,6 +852,8 @@
 
             
 
+            
+
              control is specified in one of three ways. You can specify a <see
              cref="T:System.Xml.XmlDocument" />
 
@@ -771,8 +861,12 @@
 
             
 
+            
+
              object, an XML string, or an XML file by setting the appropriate property. The <see
              cref="P:System.Web.UI.WebControls.Xml.DocumentSource" />
+
+            
 
             
 
@@ -786,6 +880,8 @@
           <para
             >Gets or sets the path to an XML document to display in the <see
              cref="T:System.Web.UI.WebControls.Xml" />
+
+            
 
             
 
@@ -843,8 +939,12 @@
 
             
 
+            
+
              property is inherited from the <see
              cref="T:System.Web.UI.Control" />
+
+            
 
             
 
@@ -857,8 +957,12 @@
 
             
 
+            
+
              class. Any attempt to set the value of this property throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -877,8 +981,12 @@
 
             
 
+            
+
              property. This property is not supported by the <see
              cref="T:System.Web.UI.WebControls.Xml" />
+
+            
 
             
 
@@ -926,6 +1034,8 @@
 
           
 
+          
+
           The identifier for the control to be found.</param
         >
       </Docs>
@@ -956,8 +1066,12 @@
 
             
 
+            
+
              method is inherited from the <see
              cref="T:System.Web.UI.Control" />
+
+            
 
             
 
@@ -970,8 +1084,12 @@
 
             
 
+            
+
              class. Any attempt to invoke the method throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -990,8 +1108,12 @@
 
             
 
+            
+
              method. This method is not supported by the <see
              cref="T:System.Web.UI.WebControls.Xml" />
+
+            
 
             
 
@@ -1026,8 +1148,12 @@
 
             
 
+            
+
              method is a helper method used to get the current design-time state of the <see
              cref="T:System.Web.UI.WebControls.Xml" />
+
+            
 
             
 
@@ -1050,8 +1176,12 @@
 
             
 
+            
+
              containing the design-time data for the <see
              cref="T:System.Web.UI.WebControls.Xml" />
+
+            
 
             
 
@@ -1114,6 +1244,8 @@
 
           
 
+          
+
           The result of the output stream.</param
         >
       </Docs>
@@ -1154,8 +1286,12 @@
 
             
 
+            
+
              property is inherited from the <see
              cref="T:System.Web.UI.Control" />
+
+            
 
             
 
@@ -1168,8 +1304,12 @@
 
             
 
+            
+
              class. Any attempt to set the value of this property throws a <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -1188,8 +1328,12 @@
 
             
 
+            
+
              property. This property is not supported by the <see
              cref="T:System.Web.UI.WebControls.Xml" />
+
+            
 
             
 
@@ -1225,8 +1369,12 @@
 
             
 
+            
+
              control to display an XML document, you can optionally specify an Extensible Stylesheet Language Transformation (XSLT) style sheet that formats the XML document, before it is written to the output stream in one of two ways. You can format the XML document with either a <see
              cref="T:System.Xml.Xsl.XslTransform" />
+
+            
 
             
 
@@ -1239,8 +1387,12 @@
 
             
 
+            
+
              property is used to specify a <see
              cref="T:System.Xml.Xsl.XslTransform" />
+
+            
 
             
 
@@ -1257,6 +1409,8 @@
 
               
 
+              
+
                object requires Full Trust permissions.</para
             >
           </block>
@@ -1266,6 +1420,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Xml.Xsl.XslTransform" />
+
+            
 
             
 
@@ -1313,11 +1469,15 @@
 
             
 
+            
+
              property to provide the XSL Transformation style sheet with optional arguments. The arguments can be either XSLT parameters or extension objects.</para
           >
           <para
             >For more information about using the <see
              cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+            
 
             
 
@@ -1334,6 +1494,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1342,6 +1504,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.Xml.Xsl.XsltArgumentList" />
+
+            
 
             
 
@@ -1383,6 +1547,8 @@
 
             
 
+            
+
              control to display an XML document, you can optionally specify an XSL Transformation style sheet that formats the XML document before it is written to the output stream in one of two ways. You can either format the XML document with a <see
              cref="T:System.Xml.Xsl.XslTransform" />
 
@@ -1390,8 +1556,12 @@
 
             
 
+            
+
              object or with an XSL Transformation style sheet file. If no XSL Transformation style sheet is specified, the XML document is displayed using the default format. The <see
              cref="P:System.Web.UI.WebControls.Xml.TransformSource" />
+
+            
 
             
 
@@ -1450,8 +1620,12 @@
 
             
 
+            
+
              object with the <see
              cref="T:System.Web.UI.WebControls.Xml" />
+
+            
 
             
 
@@ -1467,8 +1641,12 @@
 
             
 
+            
+
              object is created from a class that implements the <see
              cref="T:System.Xml.XPath.IXPathNavigable" />
+
+            
 
             
 
@@ -1481,8 +1659,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Xml.XmlDocument" />
+
+            
 
             
 
@@ -1495,8 +1677,12 @@
 
             
 
+            
+
              objects created by <see
              cref="T:System.Xml.XPath.XPathDocument" />
+
+            
 
             
 
@@ -1509,8 +1695,12 @@
 
             
 
+            
+
              objects created by <see
              cref="T:System.Xml.XmlDocument" />
+
+            
 
             
 
@@ -1523,6 +1713,8 @@
 
             
 
+            
+
              object's read-only or editable status is determined using the <see
              cref="P:System.Xml.XPath.XPathNavigator.CanEdit" />
 
@@ -1530,8 +1722,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Xml.XPath.XPathNavigator" />
+
+            
 
             
 
@@ -1545,6 +1741,8 @@
           <para
             >Gets or sets a cursor model for navigating and editing the XML data associated with the <see
              cref="T:System.Web.UI.WebControls.Xml" />
+
+            
 
             
 

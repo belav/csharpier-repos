@@ -35,8 +35,12 @@
 
         
 
+        
+
          is forwarded to all sinks in the chain through the <see
          cref="M:System.Runtime.Remoting.Channels.IClientChannelSink.ProcessMessage(System.Runtime.Remoting.Messaging.IMessage,System.Runtime.Remoting.Channels.ITransportHeaders,System.IO.Stream,System.Runtime.Remoting.Channels.ITransportHeaders@,System.IO.Stream@)" />
+
+        
 
         
 
@@ -49,8 +53,12 @@
 
         
 
+        
+
          calls. At this stage the message has already been serialized and is provided as information only. Sinks that need to create or modify the message must be placed in the sink chain before the formatter. This is easily achieved by implementing the <see
          cref="T:System.Runtime.Remoting.Channels.IClientFormatterSink" />
+
+        
 
         
 
@@ -87,6 +95,8 @@
 
           
 
+          
+
           .</para
         >
       </block>
@@ -96,6 +106,8 @@
       <para
         >Provides the implementation for a client formatter sink that uses the <see
          cref="T:System.Runtime.Serialization.Formatters.Binary.BinaryFormatter" />
+
+        
 
         
 
@@ -128,6 +140,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -138,8 +152,12 @@
 
           
 
+          
+
           The next <see
            cref="T:System.Runtime.Remoting.Channels.IClientChannelSink" />
+
+          
 
           
 
@@ -182,6 +200,8 @@
 
             
 
+            
+
              that provides a way to control the asynchronous message after it has been dispatched.</para
           >
         </returns>
@@ -192,10 +212,14 @@
 
           
 
+          
+
           The message to process. </param
         >
         <param name="replySink">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -240,10 +264,14 @@
 
           
 
+          
+
           A stack of channel sinks that called the current sink. </param
         >
         <param name="msg">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -258,10 +286,14 @@
 
           
 
+          
+
           The headers to add to the outgoing message that is heading to the server. </param
         >
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -306,10 +338,14 @@
 
           
 
+          
+
           A stack of sinks that called the current sink. </param
         >
         <param name="state">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -324,10 +360,14 @@
 
           
 
+          
+
           The headers that are retrieved from the server response stream. </param
         >
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -365,6 +405,8 @@
 
             
 
+            
+
              method is called by the formatter sink before it serializes the message.</para
           >
         </remarks>
@@ -373,6 +415,8 @@
           <para
             >Returns the <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -391,11 +435,15 @@
 
             
 
+            
+
              onto which the provided message is to be serialized.</para
           >
         </returns>
         <param name="msg">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -408,10 +456,14 @@
 
           
 
+          
+
            that contains details about the method call. </param
         >
         <param name="headers">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -447,6 +499,8 @@
 
             
 
+            
+
              in the sink chain.</para
           >
         </summary>
@@ -473,6 +527,8 @@
           <para
             >Gets the next <see
              cref="T:System.Runtime.Remoting.Messaging.IMessageSink" />
+
+            
 
             
 
@@ -553,6 +609,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -561,6 +619,8 @@
           <para
             >Gets a <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -599,6 +659,8 @@
         </returns>
         <param name="msg">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

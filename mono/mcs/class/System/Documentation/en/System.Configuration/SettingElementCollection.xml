@@ -29,6 +29,8 @@
 
         
 
+        
+
          object contains a collection of <see
          cref="T:System.Configuration.SettingElement" />
 
@@ -36,8 +38,12 @@
 
         
 
+        
+
          objects. A <see
          cref="T:System.Configuration.SettingElement" />
+
+        
 
         
 
@@ -51,6 +57,8 @@
       <para
         >Contains a collection of <see
          cref="T:System.Configuration.SettingElement" />
+
+        
 
         
 
@@ -81,6 +89,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Configuration.SettingElementCollection" />
+
+            
 
             
 
@@ -124,6 +134,8 @@
 
             
 
+            
+
              object to the collection.</para
           >
         </summary>
@@ -134,8 +146,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Configuration.SettingElement" />
+
+          
 
           
 
@@ -168,6 +184,8 @@
           <para
             >Removes all <see
              cref="T:System.Configuration.SettingElement" />
+
+            
 
             
 
@@ -281,6 +299,8 @@
 
             
 
+            
+
              object from the collection. </para
           >
         </summary>
@@ -289,6 +309,8 @@
           <para
             >A <see
              cref="T:System.Configuration.SettingElement" />
+
+            
 
             
 
@@ -304,8 +326,12 @@
 
           
 
+          
+
           A string value representing the <see
            cref="T:System.Configuration.SettingElement" />
+
+          
 
           
 
@@ -376,6 +402,8 @@
 
             
 
+            
+
              object from the collection.</para
           >
         </summary>
@@ -386,8 +414,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Configuration.SettingElement" />
+
+          
 
           
 

@@ -20,6 +20,8 @@
 
         
 
+        
+
          method is called, the class updates its <see
          cref="P:System.Web.UI.IValidator.IsValid" />
 
@@ -27,8 +29,12 @@
 
         
 
+        
+
          property to signify whether the error occurred. The <see
          cref="P:System.Web.UI.IValidator.ErrorMessage" />
+
+        
 
         
 
@@ -44,8 +50,12 @@
 
         
 
+        
+
          class implements this interface, and all other ASP.NET validation server control classes inherit from <see
          cref="T:System.Web.UI.WebControls.BaseValidator" />
+
+        
 
         
 
@@ -60,6 +70,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -69,6 +81,8 @@
             >How to: Validate with a Custom Function for ASP.NET Server Controls</a
           >
         </format>
+
+        
 
         
 
@@ -99,6 +113,8 @@
              type="text/html">
               <a href="96d2c59e-693c-4079-9b53-b3ff0d9e9133">Validation Server Controls</a>
             </format>
+
+            
 
             
 
@@ -151,6 +167,8 @@
           <para
             >When implemented by a class, evaluates the condition it checks and updates the <see
              cref="P:System.Web.UI.IValidator.IsValid" />
+
+            
 
             
 

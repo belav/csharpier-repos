@@ -24,6 +24,8 @@
 
         
 
+        
+
          operations should be considered completed either as soon as a response is available, or after reading the entire response message including the content. </para
       >
     </summary>

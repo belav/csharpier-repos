@@ -2,9 +2,9 @@
 <clause number="8.7.3" title="Methods" informative="true">
   <paragraph
     >A method is a member that implements a computation or action that can be performed by an object or class. Methods have a (possibly empty) list of formal parameters, a return value (unless the method's <non_terminal
-     where="17.5"
->return-type</non_terminal
-    >
+     where="17.5">return-type</non_terminal>
+
+    
 
     
 
@@ -17,9 +17,11 @@
 
     
 
+    
+
     ), and are either static or non-static. Static methods are accessed through the class. Non-static methods, which are also called instance methods, are accessed through instances of the class. The example <code_example
     >
-<![CDATA[
+      <![CDATA[
 using System;  
 public class Stack  
 {  
@@ -50,12 +52,14 @@ class Test
 
     
 
+    
+
     shows a Stack that has several static methods (Clone and Flip) and several instance methods (Pop, Push, and ToString). </paragraph
   >
   <paragraph
     >Methods can be overloaded, which means that multiple methods may have the same name so long as they have unique signatures. The signature of a method consists of the name of the method and the number, modifiers, and types of its formal parameters. The signature of a method does not include the return type. The example <code_example
     >
-<![CDATA[
+      <![CDATA[
 using System;  
 class Test  
 {  
@@ -94,9 +98,11 @@ class Test
 
     
 
+    
+
     shows a class with a number of methods called F. The output produced is <code_example
     >
-<![CDATA[
+      <![CDATA[
 F()  
 F(int)  
 F(ref int)  

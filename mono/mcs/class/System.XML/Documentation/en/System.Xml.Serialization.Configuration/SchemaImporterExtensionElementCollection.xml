@@ -31,6 +31,8 @@
 
         
 
+        
+
          is found in the app.config file or the machine.config file (for globally setting how the importer works).</para
       >
     </remarks>
@@ -39,6 +41,8 @@
       <para
         >Handles the XML elements used to configure the operation of the <see
          cref="T:System.Xml.Serialization.XmlSchemaImporter" />
+
+        
 
         
 
@@ -63,6 +67,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Serialization.Configuration.SchemaImporterExtensionElementCollection" />
+
+            
 
             
 
@@ -104,8 +110,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Serialization.Configuration.SchemaImporterExtensionElement" />
+
+          
 
           
 
@@ -209,8 +219,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Serialization.Configuration.SchemaImporterExtensionElement" />
+
+          
 
           
 
@@ -289,6 +303,8 @@
 
           
 
+          
+
           The name of the item to remove.</param
         >
       </Docs>
@@ -324,8 +340,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Serialization.Configuration.SchemaImporterExtensionElement" />
+
+          
 
           
 

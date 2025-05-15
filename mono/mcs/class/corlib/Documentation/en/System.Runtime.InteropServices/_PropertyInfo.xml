@@ -41,6 +41,8 @@
 
         
 
+        
+
          class members that can be accessed by unmanaged COM objects.</para
       >
     </remarks>
@@ -49,6 +51,8 @@
       <para
         >Exposes the public members of the <see
          cref="T:System.Reflection.PropertyInfo" />
+
+        
 
         
 
@@ -90,6 +94,8 @@
 
             
 
+            
+
              property gets the attributes of this property.</para
           >
         </remarks>
@@ -98,6 +104,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Reflection.PropertyInfo.Attributes" />
+
+            
 
             
 
@@ -134,6 +142,8 @@
 
             
 
+            
+
              property gets a value indicating whether the property can be read.</para
           >
         </remarks>
@@ -142,6 +152,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Reflection.PropertyInfo.CanRead" />
+
+            
 
             
 
@@ -178,6 +190,8 @@
 
             
 
+            
+
              property gets a value indicating whether the property can be written to.</para
           >
         </remarks>
@@ -186,6 +200,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Reflection.PropertyInfo.CanWrite" />
+
+            
 
             
 
@@ -225,6 +241,8 @@
 
             
 
+            
+
              property gets the class that declares this member.</para
           >
         </remarks>
@@ -233,6 +251,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Reflection.MemberInfo.DeclaringType" />
+
+            
 
             
 
@@ -274,6 +294,8 @@
 
             
 
+            
+
              method determines whether the specified <see
              cref="T:System.Object" />
 
@@ -281,8 +303,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -301,6 +327,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -314,8 +342,12 @@
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -331,6 +363,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
 
@@ -338,8 +372,12 @@
 
           
 
+          
+
            to compare with the current <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -381,6 +419,8 @@
 
             
 
+            
+
              method returns an array whose elements reflect the public get, set, and other accessors of the property reflected by the current instance.</para
           >
         </remarks>
@@ -394,6 +434,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -402,6 +444,8 @@
           <para
             >An array of <see
              cref="T:System.Reflection.MethodInfo" />
+
+            
 
             
 
@@ -446,6 +490,8 @@
 
             
 
+            
+
              method returns an array whose elements reflect the public and, if specified, non-public get, set, and other accessors of the property reflected by the current instance.</para
           >
         </remarks>
@@ -454,6 +500,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="M:System.Reflection.PropertyInfo.GetAccessors(System.Boolean)" />
+
+            
 
             
 
@@ -472,8 +520,12 @@
 
             
 
+            
+
              objects whose elements reflect the get, set, and other accessors of the property reflected by the current instance. If the <paramref
              name="nonPublic" />
+
+            
 
             
 
@@ -486,11 +538,15 @@
 
             
 
+            
+
              is false, this array contains only public get, set, and other accessors. If no accessors with the specified visibility are found, this method returns an array with zero (0) elements.</para
           >
         </returns>
         <param name="nonPublic">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -531,6 +587,8 @@
 
             
 
+            
+
              method returns an array containing all the custom attributes.</para
           >
         </remarks>
@@ -539,6 +597,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Boolean)" />
+
+            
 
             
 
@@ -553,6 +613,8 @@
         </returns>
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -597,8 +659,12 @@
 
             
 
+            
+
              method returns an array of custom attributes identified by <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -612,6 +678,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Type,System.Boolean)" />
+
+            
 
             
 
@@ -631,10 +699,14 @@
 
           
 
+          
+
           The type of attribute to search for. Only attributes that are assignable to this type are returned. </param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -673,6 +745,8 @@
 
             
 
+            
+
              method returns the public get accessor for this property.</para
           >
         </remarks>
@@ -686,6 +760,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -694,6 +770,8 @@
           <para
             >A <see
              cref="T:System.Reflection.MethodInfo" />
+
+            
 
             
 
@@ -738,6 +816,8 @@
 
             
 
+            
+
              method returns the public or non-public get accessor for this property.</para
           >
         </remarks>
@@ -746,6 +826,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="M:System.Reflection.PropertyInfo.GetGetMethod(System.Boolean)" />
+
+            
 
             
 
@@ -764,8 +846,12 @@
 
             
 
+            
+
              object representing the get accessor for this property, if the <paramref
              name="nonPublic" />
+
+            
 
             
 
@@ -778,8 +864,12 @@
 
             
 
+            
+
              is false and the get accessor is non-public, or if <paramref
              name="nonPublic" />
+
+            
 
             
 
@@ -790,6 +880,8 @@
         </returns>
         <param name="nonPublic">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -828,8 +920,12 @@
 
             
 
+            
+
              method serves as a hash function for a particular type. <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -843,6 +939,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="M:System.Object.GetHashCode" />
+
+            
 
             
 
@@ -925,6 +1023,8 @@
 
             
 
+            
+
              method returns an array of all the index parameters for the property</para
           >
         </remarks>
@@ -938,6 +1038,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -946,6 +1048,8 @@
           <para
             >An array of type <see
              cref="T:System.Reflection.ParameterInfo" />
+
+            
 
             
 
@@ -985,6 +1089,8 @@
 
             
 
+            
+
              method returns the public set accessor for this property.</para
           >
         </remarks>
@@ -998,6 +1104,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -1006,6 +1114,8 @@
           <para
             >The <see
              cref="T:System.Reflection.MethodInfo" />
+
+            
 
             
 
@@ -1050,6 +1160,8 @@
 
             
 
+            
+
              method returns the set accessor for this property.</para
           >
         </remarks>
@@ -1058,6 +1170,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="M:System.Reflection.PropertyInfo.GetSetMethod(System.Boolean)" />
+
+            
 
             
 
@@ -1090,6 +1204,8 @@
 
                   
 
+                  
+
                    object representing the Set method for this property. </para
                 >
               </term>
@@ -1099,6 +1215,8 @@
                 <para
                   >The <paramref
                    name="nonPublic" />
+
+                  
 
                   
 
@@ -1121,12 +1239,16 @@
 
                   
 
+                  
+
                    parameter is true, but the property is read-only.</para
                 >
                 <para>-or- </para>
                 <para
                   >The <paramref
                    name="nonPublic" />
+
+                  
 
                   
 
@@ -1142,6 +1264,8 @@
         </returns>
         <param name="nonPublic">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1180,6 +1304,8 @@
 
             
 
+            
+
              method gets the type of the current instance.</para
           >
         </remarks>
@@ -1193,6 +1319,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -1201,6 +1329,8 @@
           <para
             >A <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -1246,6 +1376,8 @@
 
             
 
+            
+
             , see the MSDN Library.</para
           >
         </remarks>
@@ -1260,6 +1392,8 @@
 
           
 
+          
+
           The type information to return.</param
         >
         <param name="lcid">
@@ -1269,10 +1403,14 @@
 
           
 
+          
+
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1339,6 +1477,8 @@
 
             
 
+            
+
              method returns a literal value associated with the property by a compiler.</para
           >
         </remarks>
@@ -1347,6 +1487,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="M:System.Reflection.PropertyInfo.GetValue(System.Object,System.Object[])" />
+
+            
 
             
 
@@ -1365,6 +1507,8 @@
 
             
 
+            
+
              parameter.</para
           >
         </returns>
@@ -1375,10 +1519,14 @@
 
           
 
+          
+
           The object whose property value will be returned. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1426,8 +1574,12 @@
 
             
 
+            
+
              method returns the value of a property having the specified binding, index, and <see
              cref="T:System.Globalization.CultureInfo" />
+
+            
 
             
 
@@ -1446,6 +1598,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -1454,6 +1608,8 @@
           <para
             >The property value for the <paramref
              name="obj" />
+
+            
 
             
 
@@ -1469,10 +1625,14 @@
 
           
 
+          
+
           The object whose property value will be returned. </param
         >
         <param name="invokeAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1487,8 +1647,12 @@
 
           
 
+          
+
           An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects through reflection. If <paramref
            name="binder" />
+
+          
 
           
 
@@ -1503,10 +1667,14 @@
 
           
 
+          
+
           Optional index values for indexed properties. This value should be null for non-indexed properties. </param
         >
         <param name="culture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1593,8 +1761,12 @@
 
             
 
+            
+
              method indicates whether one or more instance of the <paramref
              name="attributeType" />
+
+            
 
             
 
@@ -1613,6 +1785,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -1621,6 +1795,8 @@
           <para
             >true if one or more instances of the <paramref
              name="attributeType" />
+
+            
 
             
 
@@ -1636,8 +1812,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1647,6 +1827,8 @@
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1682,6 +1864,8 @@
 
             
 
+            
+
              property sets a value indicating whether the property is the special name.</para
           >
         </remarks>
@@ -1690,6 +1874,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Reflection.PropertyInfo.IsSpecialName" />
+
+            
 
             
 
@@ -1732,8 +1918,12 @@
 
             
 
+            
+
              property gets a <see
              cref="T:System.Reflection.MemberTypes" />
+
+            
 
             
 
@@ -1747,6 +1937,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Reflection.PropertyInfo.MemberType" />
+
+            
 
             
 
@@ -1783,6 +1975,8 @@
 
             
 
+            
+
              property gets the name of the current member.</para
           >
         </remarks>
@@ -1791,6 +1985,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Reflection.MemberInfo.Name" />
+
+            
 
             
 
@@ -1827,6 +2023,8 @@
 
             
 
+            
+
              property gets the type of this property.</para
           >
         </remarks>
@@ -1835,6 +2033,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Reflection.PropertyInfo.PropertyType" />
+
+            
 
             
 
@@ -1874,8 +2074,12 @@
 
             
 
+            
+
              property gets the class object that was used to obtain this <see
              cref="T:System.Reflection.MemberInfo" />
+
+            
 
             
 
@@ -1889,6 +2093,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="P:System.Reflection.MemberInfo.ReflectedType" />
+
+            
 
             
 
@@ -1935,6 +2141,8 @@
 
             
 
+            
+
              method sets the value of the property with optional index values for index properties.</para
           >
         </remarks>
@@ -1943,6 +2151,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="M:System.Reflection.PropertyInfo.SetValue(System.Object,System.Object,System.Object[])" />
+
+            
 
             
 
@@ -1958,6 +2168,8 @@
 
           
 
+          
+
           The object whose property value will be set. </param
         >
         <param name="value">
@@ -1967,10 +2179,14 @@
 
           
 
+          
+
           The new value for this property. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2019,6 +2235,8 @@
 
             
 
+            
+
              method sets the property value for the given object to the given value.</para
           >
         </remarks>
@@ -2027,6 +2245,8 @@
           <para
             >Provides COM objects with version-independent access to the <see
              cref="M:System.Reflection.FieldInfo.SetValue(System.Object,System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Globalization.CultureInfo)" />
+
+            
 
             
 
@@ -2042,10 +2262,14 @@
 
           
 
+          
+
           The object whose property value will be returned. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2060,8 +2284,12 @@
 
           
 
+          
+
           The invocation attribute. This must be a bit flag from <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -2076,6 +2304,8 @@
 
           
 
+          
+
           An object that enables the binding, coercion of argument types, invocation of members, and retrieval of <see
            cref="T:System.Reflection.MemberInfo" />
 
@@ -2083,8 +2313,12 @@
 
           
 
+          
+
            objects through reflection. If <paramref
            name="binder" />
+
+          
 
           
 
@@ -2099,6 +2333,8 @@
 
           
 
+          
+
           Optional index values for indexed properties. This value should be null for non-indexed properties. </param
         >
         <param name="culture">
@@ -2108,8 +2344,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -2151,6 +2391,8 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
@@ -2159,6 +2401,8 @@
           <para
             >A string that represents the current <see
              cref="T:System.Object" />
+
+            
 
             
 

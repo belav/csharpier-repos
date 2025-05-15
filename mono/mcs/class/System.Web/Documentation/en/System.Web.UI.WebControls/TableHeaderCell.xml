@@ -27,6 +27,8 @@
 
         
 
+        
+
          class represents a heading cell in a <see
          cref="T:System.Web.UI.WebControls.Table" />
 
@@ -34,8 +36,12 @@
 
         
 
+        
+
          control. You can use the <see
          cref="P:System.Web.UI.WebControls.TableCell.Text" />
+
+        
 
         
 
@@ -51,6 +57,8 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.WebControls.TableCell.VerticalAlign" />
 
@@ -58,8 +66,12 @@
 
         
 
+        
+
          properties. You can use the <see
          cref="P:System.Web.UI.WebControls.TableCell.Wrap" />
+
+        
 
         
 
@@ -75,6 +87,8 @@
 
         
 
+        
+
          control are occupied by an individual heading cell. The <see
          cref="P:System.Web.UI.WebControls.TableCell.RowSpan" />
 
@@ -82,8 +96,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.WebControls.TableCell.ColumnSpan" />
+
+        
 
         
 
@@ -97,6 +115,8 @@
       <para
         >Represents a heading cell within a <see
          cref="T:System.Web.UI.WebControls.Table" />
+
+        
 
         
 
@@ -123,6 +143,8 @@
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -131,6 +153,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.TableHeaderCell" />
+
+            
 
             
 
@@ -171,6 +195,8 @@
 
             
 
+            
+
              property is rendered as the abbr attribute of the HTML th element. The abbr attribute is used by screen readers to read a shortened version of a header for each cell in the table. The <see
              cref="P:System.Web.UI.WebControls.TableHeaderCell.AbbreviatedText" />
 
@@ -178,8 +204,12 @@
 
             
 
+            
+
              property is significant for browsers that render abbreviated text in place of the content for the <see
              cref="T:System.Web.UI.WebControls.TableHeaderCell" />
+
+            
 
             
 
@@ -194,6 +224,8 @@
           <para
             >Gets or sets the abbr attribute of the HTML th element for the <see
              cref="T:System.Web.UI.WebControls.TableHeaderCell" />
+
+            
 
             
 
@@ -230,8 +262,12 @@
 
             
 
+            
+
              method overrides the <see
              cref="M:System.Web.UI.WebControls.WebControl.AddAttributesToRender(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -244,8 +280,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.UI.WebControls.TableHeaderCell.AbbreviatedText" />
+
+            
 
             
 
@@ -264,6 +304,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -274,8 +316,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -314,6 +360,8 @@
 
             
 
+            
+
              property is rendered as the axis attribute of the HTML th element, which is used to group table cells into conceptual categories. The categories are rendered in HTML as a comma-delimited list.   </para
           >
           <para>The value of this property is stored in view state.</para>
@@ -323,6 +371,8 @@
           <para
             >Gets or sets the axis attribute of the HTML th element for the <see
              cref="T:System.Web.UI.WebControls.TableHeaderCell" />
+
+            
 
             
 
@@ -362,8 +412,12 @@
 
             
 
+            
+
              property to get or set the scope of the <see
              cref="T:System.Web.UI.WebControls.TableHeaderCell" />
+
+            
 
             
 
@@ -376,6 +430,8 @@
 
             
 
+            
+
              represents the cells that the header applies to. For complex tables, use the <see
              cref="P:System.Web.UI.WebControls.TableCell.AssociatedHeaderCellID" />
 
@@ -383,8 +439,12 @@
 
             
 
+            
+
              property, which provides more control over the specification of the relationship of header cells to data cells. The <see
              cref="P:System.Web.UI.WebControls.TableHeaderCell.Scope" />
+
+            
 
             
 
@@ -400,6 +460,8 @@
 
             
 
+            
+
             .</para
           >
           <para>The value of this property is stored in view state.</para>
@@ -409,6 +471,8 @@
           <para
             >Gets or sets the scope of the <see
              cref="T:System.Web.UI.WebControls.TableHeaderCell" />
+
+            
 
             
 

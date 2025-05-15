@@ -31,8 +31,12 @@
 
         
 
+        
+
          and <see
          cref="Overload:System.Collections.Generic.List`1.BinarySearch" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Collections.Generic.SortedList`2" />
+
+        
 
         
 
@@ -62,6 +70,8 @@
 
         
 
+        
+
          class. The <see
          cref="T:System.StringComparer" />
 
@@ -69,8 +79,12 @@
 
         
 
+        
+
          class implements this interface for type <see
          cref="T:System.String" />
+
+        
 
         
 
@@ -86,8 +100,12 @@
 
         
 
+        
+
          method returns 0, it means that two objects sort the same. Implementation of exact equality comparisons is provided by the <see
          cref="T:System.Collections.Generic.IEqualityComparer`1" />
+
+        
 
         
 
@@ -103,8 +121,12 @@
 
         
 
+        
+
          class instead of implementing the <see
          cref="T:System.Collections.Generic.IComparer`1" />
+
+        
 
         
 
@@ -117,6 +139,8 @@
 
         
 
+        
+
          class provides an explicit interface implementation of the <see
          cref="M:System.Collections.Generic.Comparer`1.System#Collections#IComparer#Compare(System.Object,System.Object)" />
 
@@ -124,8 +148,12 @@
 
         
 
+        
+
          method and the <see
          cref="P:System.Collections.Generic.Comparer`1.Default" />
+
+        
 
         
 
@@ -167,11 +195,15 @@
 
           
 
+          
+
            to compare.</param
         >
         <param name="y"
           >Second <see
            langword="T" />
+
+          
 
           
 
@@ -183,6 +215,8 @@
           <para
             > Returns the sort order of two <see
              langword="T" />
+
+            
 
             
 
@@ -200,6 +234,8 @@
 
             
 
+            
+
              containing a value that reflects the sort order of
 <paramref
              name="x" />
@@ -208,8 +244,12 @@
 
             
 
+            
+
              as compared to <paramref
              name="y" />
+
+            
 
             
 
@@ -233,8 +273,12 @@
 
                 
 
+                
+
                  &lt; <paramref
                  name="y" />
+
+                
 
                 
 
@@ -252,8 +296,12 @@
 
                 
 
+                
+
                  == <paramref
                  name="y" />
+
+                
 
                 
 
@@ -271,8 +319,12 @@
 
                 
 
+                
+
                  &gt; <paramref
                  name="y" />
+
+                
 
                 
 
@@ -300,9 +352,13 @@
 
               
 
+              
+
                not equal 
       to zero, and Compare(B,C) returns a value <paramref
                name="y" />
+
+              
 
               
 
@@ -316,6 +372,8 @@
 
               
 
+              
+
               , then Compare(A,C) is required to a value of the same sign as 
    <paramref
                name="x" />
@@ -324,8 +382,12 @@
 
               
 
+              
+
                and <paramref
                name="y" />
+
+              
 
               
 

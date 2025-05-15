@@ -8,11 +8,15 @@
 
     
 
+    
+
     . <grammar_production
     >
       <name>
         <non_terminal where="17.5.1">formal-parameter-list</non_terminal>
       </name>
+
+      
 
       
 
@@ -34,6 +38,8 @@
     <grammar_production>
       <name>
         <non_terminal where="17.5.1">fixed-parameter</non_terminal>
+
+        
 
         
 
@@ -46,6 +52,8 @@
 
       
 
+      
+
        : <rhs
       >
         <non_terminal where="17.5.1">fixed-parameter</non_terminal>
@@ -60,6 +68,8 @@
       <name>
         <non_terminal where="17.5.1">fixed-parameter</non_terminal>
       </name>
+
+      
 
       
 
@@ -84,10 +94,11 @@
 
       
 
+      
+
        : <rhs
       >
-        <keyword
->ref</keyword>
+        <keyword>ref</keyword>
       </rhs>
       <rhs>
         <keyword>out</keyword>
@@ -97,6 +108,8 @@
       <name>
         <non_terminal where="17.5.1">parameter-array</non_terminal>
       </name>
+
+      
 
       
 
@@ -120,11 +133,15 @@
 
     
 
+    
+
     . </paragraph
   >
   <paragraph
     >A <non_terminal
      where="17.5.1">fixed-parameter</non_terminal>
+
+    
 
     
 
@@ -137,8 +154,12 @@
 
     
 
+    
+
     ), an optional ref or out modifier, a type, and an identifier. Each <non_terminal
      where="17.5.1">fixed-parameter</non_terminal>
+
+    
 
     
 
@@ -154,8 +175,12 @@
 
     
 
+    
+
      consists of an optional set of attributes (<hyperlink
     >24</hyperlink>
+
+    
 
     
 
@@ -168,8 +193,12 @@
 
     
 
+    
+
     , and an identifier. A parameter array declares a single parameter of the given array type with the given name. The <non_terminal
      where="19.1">array-type</non_terminal>
+
+    
 
     
 
@@ -182,8 +211,12 @@
 
     
 
+    
+
     ). In a method invocation, a parameter array permits either a single argument of the given array type to be specified, or it permits zero or more arguments of the array element type to be specified. Parameter arrays are described further in <hyperlink
     >17.5.1.4</hyperlink>
+
+    
 
     
 
@@ -200,6 +233,8 @@
 
     
 
+    
+
     ) creates a copy, specific to that invocation, of the formal parameters and local variables of the method, and the argument list of the invocation assigns values or variable references to the newly created formal parameters. Within the block of a method, formal parameters can be referenced by their identifiers in <non_terminal
      where="14.5.2">simple-name</non_terminal>
 
@@ -207,8 +242,12 @@
 
     
 
+    
+
      expressions (<hyperlink
     >14.5.2</hyperlink>
+
+    
 
     
 
@@ -229,6 +268,8 @@
     <note
       >[Note: As described in <hyperlink
       >10.6</hyperlink>
+
+      
 
       
 

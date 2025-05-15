@@ -35,6 +35,8 @@
 
         
 
+        
+
          for more information.</para
       >
     </remarks>
@@ -82,6 +84,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -100,10 +104,14 @@
 
           
 
+          
+
           The namespace that is to be coded. </param
         >
         <param name="assemblyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -248,8 +256,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Runtime.Remoting.SoapServices.PreLoad(System.Type)" />
+
+            
 
             
 
@@ -268,6 +280,8 @@
 
             
 
+            
+
              that should be used during deserialization of an unrecognized object type with the given XML element name and namespace.</para
           >
         </summary>
@@ -276,6 +290,8 @@
           <para
             >The <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -291,10 +307,14 @@
 
           
 
+          
+
           The XML element name of the unknown object type. </param
         >
         <param name="xmlNamespace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -337,8 +357,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Runtime.Remoting.SoapServices.PreLoad(System.Type)" />
+
+            
 
             
 
@@ -357,6 +381,8 @@
 
             
 
+            
+
              that should be used during deserialization of an unrecognized object type with the given XML type name and namespace.</para
           >
         </summary>
@@ -365,6 +391,8 @@
           <para
             >The <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -380,10 +408,14 @@
 
           
 
+          
+
           The XML type of the unknown object type. </param
         >
         <param name="xmlTypeNamespace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -425,6 +457,8 @@
 
             
 
+            
+
              has not been registered with any SOAPAction value, the <see
              cref="M:System.Runtime.Remoting.SoapServices.GetSoapActionFromMethodBase(System.Reflection.MethodBase)" />
 
@@ -432,8 +466,12 @@
 
             
 
+            
+
              method returns the SOAPAction automatically cached with the <see
              cref="T:System.Reflection.MethodBase" />
+
+            
 
             
 
@@ -452,6 +490,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -460,6 +500,8 @@
           <para
             >The SOAPAction value associated with the method specified in the given <see
              cref="T:System.Reflection.MethodBase" />
+
+            
 
             
 
@@ -475,8 +517,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.MethodBase" />
+
+          
 
           
 
@@ -583,6 +629,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -597,8 +645,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.MethodBase" />
+
+          
 
           
 
@@ -641,6 +693,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -655,8 +709,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.MethodBase" />
+
+          
 
           
 
@@ -735,6 +793,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -748,6 +808,8 @@
         </returns>
         <param name="namespaceString">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -791,6 +853,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -799,6 +863,8 @@
           <para
             >true if the specified SOAPAction is acceptable for a given <see
              cref="T:System.Reflection.MethodBase" />
+
+            
 
             
 
@@ -814,8 +880,12 @@
 
           
 
+          
+
           The SOAPAction to check against the given <see
            cref="T:System.Reflection.MethodBase" />
+
+          
 
           
 
@@ -830,8 +900,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.MethodBase" />
+
+          
 
           
 
@@ -873,6 +947,8 @@
 
             
 
+            
+
              namespace. There are two ways to specify this information in a configuration file: either by explicitly specifying the mappings, or by specifying which object types to preload. The custom attributes are read during the preloading process and the information in them is made available to the SOAP parser.</para
           >
         </remarks>
@@ -886,6 +962,8 @@
 
             
 
+            
+
              found in the specified <see
              cref="T:System.Reflection.Assembly" />
 
@@ -893,8 +971,12 @@
 
             
 
+            
+
              from the information found in the <see
              cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" />
+
+            
 
             
 
@@ -910,6 +992,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.Assembly" />
 
@@ -917,8 +1001,12 @@
 
           
 
+          
+
            for each type of which to call <see
            cref="M:System.Runtime.Remoting.SoapServices.PreLoad(System.Type)" />
+
+          
 
           
 
@@ -957,6 +1045,8 @@
 
             
 
+            
+
              namespace. There are two ways to specify this information in a configuration file: either by explicitly specifying the mappings, or by specifying which object types to preload. The custom attributes are read during the preloading process and the information in them is made available to the SOAP parser.</para
           >
         </remarks>
@@ -970,8 +1060,12 @@
 
             
 
+            
+
              based on values set in a <see
              cref="T:System.Runtime.Remoting.Metadata.SoapTypeAttribute" />
+
+            
 
             
 
@@ -987,8 +1081,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1034,10 +1132,14 @@
 
           
 
+          
+
           The XML element name to use in deserialization. </param
         >
         <param name="xmlNamespace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1052,8 +1154,12 @@
 
           
 
+          
+
           The run-time <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1099,10 +1205,14 @@
 
           
 
+          
+
           The XML type to use in deserialization. </param
         >
         <param name="xmlTypeNamespace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1117,8 +1227,12 @@
 
           
 
+          
+
           The run-time <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -1160,8 +1274,12 @@
 
             
 
+            
+
              property, or is read off the wire. The current method associates the SOAPAction with the <see
              cref="T:System.Reflection.MethodBase" />
+
+            
 
             
 
@@ -1181,6 +1299,8 @@
 
             
 
+            
+
              with the SOAPAction cached with it.</para
           >
         </summary>
@@ -1191,8 +1311,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.MethodBase" />
+
+          
 
           
 
@@ -1239,6 +1363,8 @@
 
             
 
+            
+
              for use in channel sinks.</para
           >
         </summary>
@@ -1249,8 +1375,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Reflection.MethodBase" />
+
+          
 
           
 
@@ -1265,8 +1395,12 @@
 
           
 
+          
+
           The SOAPAction value to associate with the given <see
            cref="T:System.Reflection.MethodBase" />
+
+          
 
           
 
@@ -1295,6 +1429,8 @@
           <para
             >WSDL and SOAP protocols encode common language runtime classes into XML namespaces. The current property specifies the format for the XML namespaces. All XML namespaces for a common language runtime class start with the <see
              cref="T:System.String" />
+
+            
 
             
 

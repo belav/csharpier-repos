@@ -56,11 +56,15 @@
 
             
 
+            
+
              class for a specified object that implements the service instance.</para
           >
         </summary>
         <param name="implementation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -98,6 +102,8 @@
 
             
 
+            
+
              class for a service hosted by a specified host.</para
           >
         </summary>
@@ -108,8 +114,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.ServiceHostBase" />
+
+          
 
           
 
@@ -148,11 +158,15 @@
 
             
 
+            
+
              class for a specified object that implements the service instance and is hosted by a specified host.</para
           >
         </summary>
         <param name="host">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -165,10 +179,14 @@
 
           
 
+          
+
            that hosts the service.</param
         >
         <param name="implementation">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -303,8 +321,12 @@
 
             
 
+            
+
             ; then if no message arrives, no <see
              cref="T:System.ServiceModel.InstanceContext" />
+
+            
 
             
 
@@ -323,6 +345,8 @@
         </returns>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -417,11 +441,15 @@
 
             
 
+            
+
              is added, that can be processed by the service instance.</para
           >
         </returns>
         <param name="incrementBy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -448,6 +476,8 @@
           <para
             >When the <see
              cref="P:System.ServiceModel.InstanceContext.ManualFlowControlLimit" />
+
+            
 
             
 

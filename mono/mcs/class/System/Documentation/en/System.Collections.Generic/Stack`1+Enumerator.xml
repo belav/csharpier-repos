@@ -38,11 +38,15 @@
 
         
 
+        
+
          is implemented as an array.</para
       >
       <para
         >The capacity of a <see
          cref="T:System.Collections.Generic.Stack`1" />
+
+        
 
         
 
@@ -55,6 +59,8 @@
 
         
 
+        
+
          can hold. As elements are added to a <see
          cref="T:System.Collections.Generic.Stack`1" />
 
@@ -62,8 +68,12 @@
 
         
 
+        
+
         , the capacity is automatically increased as required by reallocating the internal array. The capacity can be decreased by calling <see
          cref="M:System.Collections.Generic.Stack`1.TrimExcess" />
+
+        
 
         
 
@@ -79,8 +89,12 @@
 
         
 
+        
+
          is less than the capacity of the stack, <see
          cref="M:System.Collections.Generic.Stack`1.Push(`0)" />
+
+        
 
         
 
@@ -93,8 +107,12 @@
 
         
 
+        
+
          becomes an O(<paramref
          name="n" />
+
+        
 
         
 
@@ -107,8 +125,12 @@
 
         
 
+        
+
          is <see
          cref="P:System.Collections.Generic.Stack`1.Count" />
+
+        
 
         
 
@@ -121,10 +143,14 @@
 
         
 
+        
+
          is an O(1) operation.</para
       >
       <para>
         <see cref="T:System.Collections.Generic.Stack`1" />
+
+        
 
         
 

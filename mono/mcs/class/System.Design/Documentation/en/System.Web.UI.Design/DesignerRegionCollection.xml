@@ -27,8 +27,12 @@
 
         
 
+        
+
          class, and any derived class, uses the <see
          cref="T:System.Web.UI.Design.DesignerRegionCollection" />
+
+        
 
         
 
@@ -44,11 +48,15 @@
 
         
 
+        
+
          method can be used to define and add regions to the collection.</para
       >
       <para
         >Use the <see
          cref="P:System.Web.UI.Design.DesignerRegionCollection.Owner" />
+
+        
 
         
 
@@ -61,8 +69,12 @@
 
         
 
+        
+
          methods and properties to examine and maintain the <see
          cref="T:System.Web.UI.Design.DesignerRegion" />
+
+        
 
         
 
@@ -78,8 +90,12 @@
 
         
 
+        
+
          property to determine how many designer regions are in the collection. Use the <see
          cref="T:System.Web.UI.Design.DesignerRegionCollection" />
+
+        
 
         
 
@@ -97,6 +113,8 @@
 
             
 
+            
+
              method to add a single designer region to the collection. </para
           >
         </item>
@@ -104,6 +122,8 @@
           <para
             >The <see
              cref="M:System.Web.UI.Design.DesignerRegionCollection.Insert(System.Int32,System.Web.UI.Design.DesignerRegion)" />
+
+            
 
             
 
@@ -121,6 +141,8 @@
 
             
 
+            
+
              method to remove a designer region. </para
           >
         </item>
@@ -128,6 +150,8 @@
           <para
             >The <see
              cref="M:System.Web.UI.Design.DesignerRegionCollection.RemoveAt(System.Int32)" />
+
+            
 
             
 
@@ -145,6 +169,8 @@
 
             
 
+            
+
              method to determine whether a particular designer region is already in the collection. </para
           >
         </item>
@@ -152,6 +178,8 @@
           <para
             >The <see
              cref="M:System.Web.UI.Design.DesignerRegionCollection.IndexOf(System.Web.UI.Design.DesignerRegion)" />
+
+            
 
             
 
@@ -169,6 +197,8 @@
 
             
 
+            
+
              indexer to get or set the designer region at a particular index, using array notation.</para
           >
         </item>
@@ -176,6 +206,8 @@
           <para
             >The <see
              cref="M:System.Web.UI.Design.DesignerRegionCollection.Clear" />
+
+            
 
             
 
@@ -191,6 +223,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.Web.UI.Design.DesignerRegion" />
+
+        
 
         
 
@@ -219,6 +253,8 @@
 
             
 
+            
+
              constructor to create an empty collection. You can add elements to the collection by using the <see
              cref="M:System.Web.UI.Design.DesignerRegionCollection.Add(System.Web.UI.Design.DesignerRegion)" />
 
@@ -226,8 +262,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Web.UI.Design.DesignerRegionCollection.Insert(System.Int32,System.Web.UI.Design.DesignerRegion)" />
+
+            
 
             
 
@@ -241,6 +281,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.DesignerRegionCollection" />
+
+            
 
             
 
@@ -274,6 +316,8 @@
 
             
 
+            
+
              constructor creates an empty collection and sets the <see
              cref="P:System.Web.UI.Design.DesignerRegionCollection.Owner" />
 
@@ -281,8 +325,12 @@
 
             
 
+            
+
              property to the specified control designer object. The visual designer, such as vsprvslong, uses the <see
              cref="M:System.Web.UI.Design.DesignerRegionCollection.#ctor(System.Web.UI.Design.ControlDesigner)" />
+
+            
 
             
 
@@ -298,8 +346,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Web.UI.Design.DesignerRegionCollection.Insert(System.Int32,System.Web.UI.Design.DesignerRegion)" />
+
+            
 
             
 
@@ -318,11 +370,15 @@
 
             
 
+            
+
              class for the specified control designer.</para
           >
         </summary>
         <param name="owner">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -358,8 +414,12 @@
 
             
 
+            
+
              method adds the specified <see
              cref="T:System.Web.UI.Design.DesignerRegion" />
+
+            
 
             
 
@@ -372,8 +432,12 @@
 
             
 
+            
+
              object to the collection at a specific index location, use the <see
              cref="M:System.Web.UI.Design.DesignerRegionCollection.Insert(System.Int32,System.Web.UI.Design.DesignerRegion)" />
+
+            
 
             
 
@@ -387,6 +451,8 @@
           <para
             >Adds the specified <see
              cref="T:System.Web.UI.Design.DesignerRegion" />
+
+            
 
             
 
@@ -406,8 +472,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Design.DesignerRegion" />
+
+          
 
           
 
@@ -438,6 +508,8 @@
 
             
 
+            
+
              method to remove all regions from the collection. To remove a specific region from the collection, use the <see
              cref="M:System.Web.UI.Design.DesignerRegionCollection.Remove(System.Web.UI.Design.DesignerRegion)" />
 
@@ -445,8 +517,12 @@
 
             
 
+            
+
              method. To remove a region at a particular index, use the <see
              cref="M:System.Web.UI.Design.DesignerRegionCollection.RemoveAt(System.Int32)" />
+
+            
 
             
 
@@ -487,6 +563,8 @@
 
             
 
+            
+
              method determines equality by using the <see
              cref="M:System.Object.Equals(System.Object)" />
 
@@ -494,8 +572,12 @@
 
             
 
+            
+
              method on the <see
              cref="T:System.Web.UI.Design.DesignerRegion" />
+
+            
 
             
 
@@ -511,8 +593,12 @@
 
             
 
+            
+
              method performs a linear search; therefore, the average execution time is proportional to the <see
              cref="P:System.Web.UI.Design.DesignerRegionCollection.Count" />
+
+            
 
             
 
@@ -536,8 +622,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Design.DesignerRegion" />
+
+          
 
           
 
@@ -571,6 +661,8 @@
 
             
 
+            
+
              or <see
              cref="M:System.Web.UI.Design.DesignerRegionCollection.Insert(System.Int32,System.Web.UI.Design.DesignerRegion)" />
 
@@ -578,8 +670,12 @@
 
             
 
+            
+
              method to add the design regions to the <see
              cref="T:System.Web.UI.Design.DesignerRegionCollection" />
+
+            
 
             
 
@@ -598,8 +694,12 @@
 
             
 
+            
+
              object, starting at a particular <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -615,6 +715,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Array" />
 
@@ -622,8 +724,12 @@
 
           
 
+          
+
            that is the destination of the copied regions. The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -638,8 +744,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -670,6 +780,8 @@
 
             
 
+            
+
              property is commonly used to determine the upper boundary index when iterating through objects in the collection. Because the collection indexes are zero-based, the first element is at index 0 and the last element is at index Count-1.</para
           >
         </remarks>
@@ -678,6 +790,8 @@
           <para
             >Gets the number of <see
              cref="T:System.Web.UI.Design.DesignerRegion" />
+
+            
 
             
 
@@ -712,8 +826,12 @@
 
             
 
+            
+
              property together with a loop construct, such as while, for, or foreach statements, to enumerate through the <see
              cref="T:System.Web.UI.Design.DesignerRegionCollection" />
+
+            
 
             
 
@@ -731,6 +849,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -767,6 +887,8 @@
 
             
 
+            
+
              method determines equality by using the <see
              cref="M:System.Object.Equals(System.Object)" />
 
@@ -774,8 +896,12 @@
 
             
 
+            
+
              method on the <see
              cref="T:System.Web.UI.Design.DesignerRegion" />
+
+            
 
             
 
@@ -791,8 +917,12 @@
 
             
 
+            
+
              method performs a linear search; therefore, the average execution time is proportional to the <see
              cref="P:System.Web.UI.Design.DesignerRegionCollection.Count" />
+
+            
 
             
 
@@ -811,6 +941,8 @@
 
             
 
+            
+
              object within the collection.</para
           >
         </summary>
@@ -824,8 +956,12 @@
 
             
 
+            
+
              within the collection; otherwise, -1, if <paramref
              name="region" />
+
+            
 
             
 
@@ -841,8 +977,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Design.DesignerRegion" />
+
+          
 
           
 
@@ -879,8 +1019,12 @@
 
             
 
+            
+
              method adds a <see
              cref="T:System.Web.UI.Design.DesignerRegion" />
+
+            
 
             
 
@@ -893,8 +1037,12 @@
 
             
 
+            
+
              to the end of the collection, use the <see
              cref="M:System.Web.UI.Design.DesignerRegionCollection.Add(System.Web.UI.Design.DesignerRegion)" />
+
+            
 
             
 
@@ -916,11 +1064,15 @@
 
             
 
+            
+
              object into the collection at the specified index.</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -935,8 +1087,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Design.DesignerRegion" />
+
+          
 
           
 
@@ -963,6 +1119,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Web.UI.Design.DesignerRegionCollection" />
+
+            
 
             
 
@@ -995,6 +1153,8 @@
 
             
 
+            
+
              object is read-only.</para
           >
         </summary>
@@ -1022,6 +1182,8 @@
 
             
 
+            
+
              method during the whole enumeration to guarantee thread safety.</para
           >
         </remarks>
@@ -1030,6 +1192,8 @@
           <para
             >Gets a value indicating whether access to the <see
              cref="T:System.Web.UI.Design.DesignerRegionCollection" />
+
+            
 
             
 
@@ -1086,8 +1250,12 @@
 
             
 
+            
+
              property provides a convenient means to access the control designer object for a designer region collection. For example, you can use the <see
              cref="P:System.Web.UI.Design.DesignerRegionCollection.Owner" />
+
+            
 
             
 
@@ -1128,6 +1296,8 @@
 
             
 
+            
+
              method removes the first occurrence of the specified region from the collection. If the <see
              cref="T:System.Web.UI.Design.DesignerRegionCollection" />
 
@@ -1135,8 +1305,12 @@
 
             
 
+            
+
              object does not contain the specified <paramref
              name="region" />
+
+            
 
             
 
@@ -1152,6 +1326,8 @@
 
             
 
+            
+
              method determines equality by using the <see
              cref="M:System.Object.Equals(System.Object)" />
 
@@ -1159,8 +1335,12 @@
 
             
 
+            
+
              method on the <see
              cref="T:System.Web.UI.Design.DesignerRegion" />
+
+            
 
             
 
@@ -1176,8 +1356,12 @@
 
             
 
+            
+
              method performs a linear search; therefore, the average execution time is proportional to the <see
              cref="P:System.Web.UI.Design.DesignerRegionCollection.Count" />
+
+            
 
             
 
@@ -1193,8 +1377,12 @@
 
             
 
+            
+
              method. To remove all regions from the collection, use the <see
              cref="M:System.Web.UI.Design.DesignerRegionCollection.Clear" />
+
+            
 
             
 
@@ -1216,6 +1404,8 @@
 
             
 
+            
+
              object from the collection. </para
           >
         </summary>
@@ -1226,8 +1416,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Design.DesignerRegion" />
+
+          
 
           
 
@@ -1260,6 +1454,8 @@
 
             
 
+            
+
              method to remove a region at a particular index from the collection. To remove a specified region from the collection, use the <see
              cref="M:System.Web.UI.Design.DesignerRegionCollection.Remove(System.Web.UI.Design.DesignerRegion)" />
 
@@ -1267,8 +1463,12 @@
 
             
 
+            
+
              method. To remove all regions from the collection, use the <see
              cref="M:System.Web.UI.Design.DesignerRegionCollection.Clear" />
+
+            
 
             
 
@@ -1290,6 +1490,8 @@
 
             
 
+            
+
              object at the specified index within the collection.</para
           >
         </summary>
@@ -1300,8 +1502,12 @@
 
           
 
+          
+
           The zero-based index within the collection of the <see
            cref="T:System.Web.UI.Design.DesignerRegion" />
+
+          
 
           
 
@@ -1333,8 +1539,12 @@
 
             
 
+            
+
              method during the whole enumeration to guarantee thread safety. For detailed information about locking collections for thread-safe access, see <see
              cref="P:System.Collections.ICollection.SyncRoot" />
+
+            
 
             
 
@@ -1348,6 +1558,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Web.UI.Design.DesignerRegionCollection" />
+
+            
 
             
 
@@ -1382,8 +1594,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1402,11 +1618,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="array">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1419,8 +1639,12 @@
 
           
 
+          
+
            that is the destination of the copied regions. The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -1435,8 +1659,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -1467,8 +1695,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1482,6 +1714,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Collections.ICollection.Count" />
+
+            
 
             
 
@@ -1516,8 +1750,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1531,6 +1769,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Collections.ICollection.IsSynchronized" />
+
+            
 
             
 
@@ -1565,8 +1805,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1580,6 +1824,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Collections.ICollection.SyncRoot" />
+
+            
 
             
 
@@ -1614,8 +1860,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IEnumerable" />
+
+            
 
             
 
@@ -1634,6 +1884,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1642,6 +1894,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -1675,8 +1929,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1695,6 +1953,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1704,6 +1964,8 @@
         </returns>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1734,8 +1996,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1749,6 +2015,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.Collections.IList.Clear" />
+
+            
 
             
 
@@ -1782,8 +2050,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1797,6 +2069,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.Collections.IList.Contains(System.Object)" />
+
+            
 
             
 
@@ -1816,8 +2090,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Design.DesignerRegion" />
+
+          
 
           
 
@@ -1850,8 +2128,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1865,6 +2147,8 @@
           <para
             >For a description of this member, see <see
              cref="M:System.Collections.IList.IndexOf(System.Object)" />
+
+            
 
             
 
@@ -1884,8 +2168,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.Design.DesignerRegion" />
+
+          
 
           
 
@@ -1919,8 +2207,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1939,6 +2231,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1949,10 +2243,14 @@
 
           
 
+          
+
           The zero-based index within the collection at which to insert the object.</param
         >
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1983,8 +2281,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -1998,6 +2300,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Collections.IList.IsFixedSize" />
+
+            
 
             
 
@@ -2029,8 +2333,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -2044,6 +2352,8 @@
           <para
             >For a description of this member, see <see
              cref="P:System.Collections.IList.IsReadOnly" />
+
+            
 
             
 
@@ -2099,8 +2409,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -2119,11 +2433,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="o">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2156,8 +2474,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Collections.IList" />
+
+            
 
             
 
@@ -2176,11 +2498,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

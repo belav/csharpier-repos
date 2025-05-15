@@ -20,8 +20,12 @@
 
         
 
+        
+
          is an abstract class that serves as the base class for objects that return global and local resource providers. Classes must derive from <see
          cref="T:System.Web.Compilation.ResourceProviderFactory" />
+
+        
 
         
 
@@ -47,6 +51,8 @@
           <para
             >An instance of an abstract class cannot be created. Classes that derive from <see
              cref="T:System.Web.Compilation.ResourceProviderFactory" />
+
+            
 
             
 
@@ -88,6 +94,8 @@
 
             
 
+            
+
              object for the given <paramref
              name="classKey" />
 
@@ -95,8 +103,12 @@
 
             
 
+            
+
              parameter. The method could be implemented such that <paramref
              name="classKey" />
+
+            
 
             
 
@@ -115,6 +127,8 @@
         </returns>
         <param name="classKey">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -151,6 +165,8 @@
 
             
 
+            
+
              object for the given <paramref
              name="virtualPath" />
 
@@ -158,8 +174,12 @@
 
             
 
+            
+
              parameter. The method could be implemented such that <paramref
              name="virtualPath" />
+
+            
 
             
 
@@ -178,6 +198,8 @@
         </returns>
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

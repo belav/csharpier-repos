@@ -23,8 +23,12 @@
 
         
 
+        
+
          provides a base class for designers of controls that can contain child controls. In addition to the methods and functionality inherited from the <see
          cref="T:System.Windows.Forms.Design.ControlDesigner" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          classes, <see
          cref="T:System.Windows.Forms.Design.ParentControlDesigner" />
+
+        
 
         
 
@@ -54,10 +62,14 @@
 
         
 
+        
+
         . For an overview of customizing design time behavior, see <format
          type="text/html">
           <a href="d6ac8a6a-42fd-4bc8-bf33-b212811297e2">Extending Design-Time Support</a>
         </format>
+
+        
 
         
 
@@ -71,6 +83,8 @@
       <para
         >Extends the design mode behavior of a <see
          cref="T:System.Windows.Forms.Control" />
+
+        
 
         
 
@@ -92,6 +106,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.Design.ParentControlDesigner" />
+
+            
 
             
 
@@ -148,8 +164,12 @@
 
             
 
+            
+
              method is called after the user selects a toolbox item that has a <see
              cref="T:System.Windows.Forms.Design.ParentControlDesigner" />
+
+            
 
             
 
@@ -206,6 +226,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -214,6 +236,8 @@
           <para
             >Gets a value indicating whether the z-order of dragged controls should be maintained when dropped on a <see
              cref="T:System.Windows.Forms.Design.ParentControlDesigner" />
+
+            
 
             
 
@@ -247,6 +271,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -265,8 +291,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -299,6 +329,8 @@
           <para
             >This method indicates whether the control managed by this designer can parent the control of the specified <see
              cref="T:System.Windows.Forms.Design.ControlDesigner" />
+
+            
 
             
 
@@ -345,6 +377,8 @@
 
             
 
+            
+
              methods.</para
           >
         </remarks>
@@ -359,8 +393,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 
@@ -398,11 +436,15 @@
 
             
 
+            
+
              parameter. This method uses the default size for the tool's component, if the component has a default size.</para
           >
           <para
             >To specify a location and size for the component or control, use the appropriate overloaded <see
              cref="M:System.Windows.Forms.Design.ParentControlDesigner.CreateTool(System.Drawing.Design.ToolboxItem)" />
+
+            
 
             
 
@@ -422,8 +464,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 
@@ -438,8 +484,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -477,8 +527,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Drawing.Rectangle.Y" />
+
+            
 
             
 
@@ -491,8 +545,12 @@
 
             
 
+            
+
              parameter. The size of the new component or control will be set to the values specified by the <see
              cref="P:System.Drawing.Rectangle.Height" />
+
+            
 
             
 
@@ -505,8 +563,12 @@
 
             
 
+            
+
              properties of the <paramref
              name="bounds" />
+
+            
 
             
 
@@ -526,8 +588,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 
@@ -542,8 +608,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -556,6 +626,8 @@
 
           
 
+          
+
            and <see
            cref="P:System.Drawing.Rectangle.Y" />
 
@@ -563,8 +635,12 @@
 
           
 
+          
+
            values of the <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -607,6 +683,8 @@
 
             
 
+            
+
              method that can be overridden.</para
           >
         </remarks>
@@ -615,6 +693,8 @@
           <para
             >Provides core functionality for all the <see
              cref="M:System.Windows.Forms.Design.ParentControlDesigner.CreateTool(System.Drawing.Design.ToolboxItem)" />
+
+            
 
             
 
@@ -634,8 +714,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 
@@ -650,10 +734,14 @@
 
           
 
+          
+
           The horizontal position, in design-time view coordinates, of the location of the left edge of the tool, if a size is specified; the horizontal position of the center of the tool, if no size is specified. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -668,8 +756,12 @@
 
           
 
+          
+
           The width of the tool. This parameter is ignored if the <paramref
            name="hasSize" />
+
+          
 
           
 
@@ -684,8 +776,12 @@
 
           
 
+          
+
           The height of the tool. This parameter is ignored if the <paramref
            name="hasSize" />
+
+          
 
           
 
@@ -700,10 +796,14 @@
 
           
 
+          
+
           true if a location for the component is specified; false if the component is to be positioned in the center of the currently selected control. </param
         >
         <param name="hasSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -762,8 +862,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -776,8 +880,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -793,8 +901,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Windows.Forms.Design.ParentControlDesigner" />
+
+            
 
             
 
@@ -813,11 +925,15 @@
 
             
 
+            
+
             , and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -897,11 +1013,15 @@
 
             
 
+            
+
              that the specified component belongs to.</para
           >
         </returns>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -944,6 +1064,8 @@
 
             
 
+            
+
              is responsible for hit testing the control's designer and forwarding messages directly to the designer.</para
           >
         </remarks>
@@ -962,8 +1084,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Design.Behavior.GlyphSelectionType" />
+
+          
 
           
 
@@ -1002,8 +1128,12 @@
 
             
 
+            
+
              method adds a container selector <see
              cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+            
 
             
 
@@ -1022,6 +1152,8 @@
 
             
 
+            
+
              objects representing the selection borders and grab handles for a standard control.</para
           >
         </summary>
@@ -1030,6 +1162,8 @@
           <para
             >A collection of <see
              cref="T:System.Windows.Forms.Design.Behavior.Glyph" />
+
+            
 
             
 
@@ -1045,8 +1179,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.Design.Behavior.GlyphSelectionType" />
+
+          
 
           
 
@@ -1083,6 +1221,8 @@
 
             
 
+            
+
              while adding a component to it.</para
           >
         </summary>
@@ -1091,6 +1231,8 @@
           <para
             >The parent <see
              cref="T:System.Windows.Forms.Control" />
+
+            
 
             
 
@@ -1106,8 +1248,12 @@
 
           
 
+          
+
           The component for which to retrieve the parent <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -1151,8 +1297,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1167,8 +1317,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Rectangle" />
+
+          
 
           
 
@@ -1178,6 +1332,8 @@
         >
         <param name="updateSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1237,8 +1393,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.IComponent" />
+
+          
 
           
 
@@ -1277,6 +1437,8 @@
 
           
 
+          
+
           A name/value dictionary of default values to apply to properties. May be null if no default values are specified.</param
         >
       </Docs>
@@ -1306,6 +1468,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1316,8 +1480,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Design.ParentControlDesigner" />
+
+          
 
           
 
@@ -1332,8 +1500,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Design.ToolboxItem" />
+
+          
 
           
 
@@ -1393,6 +1565,8 @@
 
             
 
+            
+
              is used to clean up any operations that were performed at the beginning of a drag-and-drop operation.</para
           >
         </remarks>
@@ -1407,8 +1581,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.DragEventArgs" />
+
+          
 
           
 
@@ -1437,6 +1615,8 @@
           <para
             >This method checks any parent control for a drag-and-drop handler that can handle the operation instead. If one exists, this method passes the <see
              cref="T:System.Windows.Forms.DragEventArgs" />
+
+            
 
             
 
@@ -1502,8 +1682,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -1568,8 +1752,12 @@
 
               
 
+              
+
                method of the <see
                cref="T:System.Windows.Forms.Control" />
+
+              
 
               
 
@@ -1590,10 +1778,14 @@
 
           
 
+          
+
           The x-coordinate of the mouse in screen coordinates. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1635,6 +1827,8 @@
 
           
 
+          
+
           true to cancel the drag operation; false to commit it. </param
         >
       </Docs>
@@ -1669,8 +1863,12 @@
 
               
 
+              
+
                method of the <see
                cref="T:System.Windows.Forms.Control" />
+
+              
 
               
 
@@ -1691,10 +1889,14 @@
 
           
 
+          
+
           The x-coordinate of the mouse in screen coordinates. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1733,8 +1935,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.PaintEventArgs" />
+
+          
 
           
 
@@ -1793,6 +1999,8 @@
 
             
 
+            
+
              interface method override adds a set of properties to this designer's control that allow a user to set options related to the grid display and child control alignment. This method adds the following browsable properties: DrawGrid, SnapToGrid, and GridSize.</para
           >
         </remarks>
@@ -1801,6 +2009,8 @@
           <para
             >Adjusts the set of properties the component will expose through a <see
              cref="T:System.ComponentModel.TypeDescriptor" />
+
+            
 
             
 
@@ -1816,8 +2026,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Collections.IDictionary" />
+
+          
 
           
 
@@ -1851,6 +2065,8 @@
           <para
             >Gets a list of <see
              cref="T:System.Windows.Forms.Design.Behavior.SnapLine" />
+
+            
 
             
 

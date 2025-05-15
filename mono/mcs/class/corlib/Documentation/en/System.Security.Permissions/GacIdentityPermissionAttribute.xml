@@ -41,11 +41,15 @@
 
         
 
+        
+
          value that is used.</para
       >
       <para
         >The security information declared by a security attribute is stored in the metadata of the attribute target and is accessed by the system at run time. Security attributes are used only for declarative security. For imperative security, use the corresponding permission class, <see
          cref="T:System.Security.Permissions.GacIdentityPermission" />
+
+        
 
         
 
@@ -67,6 +71,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -75,6 +81,8 @@
       <para
         >Allows security actions for <see
          cref="T:System.Security.Permissions.GacIdentityPermission" />
+
+        
 
         
 
@@ -114,11 +122,15 @@
 
             
 
+            
+
              value.</para
           >
           <para
             >This constructor associates a <see
              cref="T:System.Security.Permissions.SecurityAction" />
+
+            
 
             
 
@@ -131,11 +143,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The security information declared by a security attribute is stored in the metadata of the attribute target and is accessed by the system at run time. Security attributes are used only for declarative security. Use <see
              cref="T:System.Security.Permissions.GacIdentityPermission" />
+
+            
 
             
 
@@ -154,8 +170,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Security.Permissions.SecurityAction" />
+
+            
 
             
 
@@ -171,8 +191,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.SecurityAction" />
+
+          
 
           
 
@@ -217,6 +241,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -225,6 +251,8 @@
           <para
             >A <see
              cref="T:System.Security.Permissions.GacIdentityPermission" />
+
+            
 
             
 

@@ -24,6 +24,8 @@
 
         
 
+        
+
          control raises the <see
          cref="E:System.Web.UI.WebControls.GridView.RowDeleting" />
 
@@ -31,8 +33,12 @@
 
         
 
+        
+
          event when a Delete button is clicked, but before the <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 
@@ -48,8 +54,12 @@
 
         
 
+        
+
          object is passed to the event handler. This enables you to determine the index of the row being deleted and to cancel the delete operation. To cancel the delete operation, set the <see
          cref="P:System.ComponentModel.CancelEventArgs.Cancel" />
+
+        
 
         
 
@@ -62,6 +72,8 @@
 
         
 
+        
+
          object to true. You can also manipulate the <see
          cref="P:System.Web.UI.WebControls.GridViewDeleteEventArgs.Keys" />
 
@@ -69,8 +81,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.WebControls.GridViewDeleteEventArgs.Values" />
+
+        
 
         
 
@@ -88,6 +104,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -98,8 +116,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.WebControls.GridViewDeleteEventArgs.#ctor(System.Int32)" />
+
+        
 
         
 
@@ -113,6 +135,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Web.UI.WebControls.GridView.RowDeleting" />
+
+        
 
         
 
@@ -137,6 +161,8 @@
           <para
             >The following table shows the initial property value for an instance of <see
              cref="T:System.Web.UI.WebControls.GridViewDeleteEventArgs" />
+
+            
 
             
 
@@ -170,6 +196,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -184,6 +212,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.GridViewDeleteEventArgs" />
+
+            
 
             
 
@@ -219,6 +249,8 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Web.UI.WebControls.GridView" />
 
@@ -226,8 +258,12 @@
 
             
 
+            
+
              control is set, use the <see
              cref="P:System.Web.UI.WebControls.GridViewDeleteEventArgs.Keys" />
+
+            
 
             
 
@@ -244,12 +280,16 @@
 
               
 
+              
+
                property.</para
             >
           </block>
           <para
             >The <see
              cref="P:System.Web.UI.WebControls.GridViewDeleteEventArgs.Keys" />
+
+            
 
             
 
@@ -262,8 +302,12 @@
 
             
 
+            
+
              property. If multiple fields form the primary key, a separate entry is added to the <see
              cref="P:System.Web.UI.WebControls.GridViewDeleteEventArgs.Keys" />
+
+            
 
             
 
@@ -279,8 +323,12 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Collections.DictionaryEntry" />
+
+            
 
             
 
@@ -293,8 +341,12 @@
 
             
 
+            
+
              dictionary. To determine the value of a key field, use the <see
              cref="P:System.Collections.DictionaryEntry.Value" />
+
+            
 
             
 
@@ -331,8 +383,12 @@
 
             
 
+            
+
              collection of the <see
              cref="T:System.Web.UI.WebControls.GridView" />
+
+            
 
             
 
@@ -372,8 +428,12 @@
 
             
 
+            
+
              property is automatically populated with the name/value pairs of the non-key fields for the row. To determine the field name of an entry, use the <see
              cref="P:System.Collections.DictionaryEntry.Key" />
+
+            
 
             
 
@@ -386,8 +446,12 @@
 
             
 
+            
+
              object in the <see
              cref="P:System.Web.UI.WebControls.GridViewDeleteEventArgs.Values" />
+
+            
 
             
 
@@ -400,12 +464,16 @@
 
             
 
+            
+
              property.</para
           >
           <block subset="none" type="note">
             <para
               >The primary key field or fields are not included in this dictionary. To access the values of the primary key field or fields, use the <see
                cref="P:System.Web.UI.WebControls.GridViewDeleteEventArgs.Keys" />
+
+              
 
               
 

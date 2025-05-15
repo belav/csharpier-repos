@@ -27,8 +27,12 @@
 
         
 
+        
+
         , which in turn derives from <see
          cref="T:System.ServiceModel.CommunicationException" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          class represents a class of recoverable errors that may be thrown during communication between endpoints and that robust indigo1 client and service applications are expected to handle. To prevent the more generic <see
          cref="T:System.ServiceModel.CommunicationException" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
         , catch this exception prior to handling <see
          cref="T:System.ServiceModel.CommunicationException" />
+
+        
 
         
 
@@ -94,6 +106,8 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
@@ -123,6 +137,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.MessageHeaderException" />
+
+            
 
             
 
@@ -165,8 +181,12 @@
 
             
 
+            
+
              class used to deserialize data into a <see
              cref="T:System.ServiceModel.MessageHeaderException" />
+
+            
 
             
 
@@ -182,8 +202,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -198,8 +222,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -238,6 +266,8 @@
 
             
 
+            
+
              class using the specified message and a value that indicates whether the message header is a duplicate or is missing.</para
           >
         </summary>
@@ -248,10 +278,14 @@
 
           
 
+          
+
           The exception message.</param
         >
         <param name="isDuplicate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -292,6 +326,8 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
 
@@ -299,8 +335,12 @@
 
             
 
+            
+
              property returns the same value that is passed into the constructor or a null reference (Nothing in Visual Basic) if the <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -314,6 +354,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.MessageHeaderException" />
+
+            
 
             
 
@@ -354,11 +396,15 @@
 
             
 
+            
+
              class using the specified message, header name and namespace.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -373,10 +419,14 @@
 
           
 
+          
+
           The name of the message header.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -417,11 +467,15 @@
 
             
 
+            
+
              class using the specified message, header name and namespace, and a value that indicates whether the message header is a duplicate or is missing.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -436,6 +490,8 @@
 
           
 
+          
+
           The name of the message header.</param
         >
         <param name="ns">
@@ -445,10 +501,14 @@
 
           
 
+          
+
           The namespace of the message header.</param
         >
         <param name="isDuplicate">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -489,11 +549,15 @@
 
             
 
+            
+
              class using the specified message, header name and namespace, and the inner exception that caused the exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -508,10 +572,14 @@
 
           
 
+          
+
           The name of the message header.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -526,8 +594,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Exception" />
+
+          
 
           
 
@@ -569,11 +641,15 @@
 
             
 
+            
+
              class using the specified message, header name and namespace, a value that indicates whether the message header is a duplicate or is missing, and the inner exception that caused the exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -588,10 +664,14 @@
 
           
 
+          
+
           The name of the message header.</param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -606,6 +686,8 @@
 
           
 
+          
+
           true if the multiple message header is a duplicate; false if there are no message headers.</param
         >
         <param name="innerException">
@@ -615,8 +697,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Exception" />
+
+          
 
           
 

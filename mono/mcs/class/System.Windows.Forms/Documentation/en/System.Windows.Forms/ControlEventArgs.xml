@@ -23,6 +23,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -36,8 +38,12 @@
 
         
 
+        
+
          and <see
          cref="E:System.Windows.Forms.Control.ControlRemoved" />
+
+        
 
         
 
@@ -69,6 +75,8 @@
 
             
 
+            
+
              class for the specified control.</para
           >
         </summary>
@@ -79,8 +87,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 

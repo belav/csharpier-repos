@@ -64,6 +64,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -97,8 +99,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.ServiceModel.Syndication.SyndicationContent" />
+
+            
 
             
 
@@ -114,8 +120,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Syndication.SyndicationContent" />
+
+          
 
           
 
@@ -148,6 +158,8 @@
           <para
             >Attribute extensions are custom attributes that are not defined by the Atom 1.0 or RSS 2.0 specifications. The syndication object model allows you to add custom attributes to a syndication content type (for example, <see
              cref="T:System.ServiceModel.Syndication.TextSyndicationContent" />
+
+            
 
             
 
@@ -191,6 +203,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -199,6 +213,8 @@
           <para
             >A copy of the <see
              cref="T:System.ServiceModel.Syndication.SyndicationContent" />
+
+            
 
             
 
@@ -243,6 +259,8 @@
 
             
 
+            
+
              instance with the specified HTML content.</para
           >
         </summary>
@@ -256,11 +274,15 @@
 
             
 
+            
+
              instance.</para
           >
         </returns>
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -301,6 +323,8 @@
 
             
 
+            
+
              instance with the specified plain text content.</para
           >
         </summary>
@@ -314,11 +338,15 @@
 
             
 
+            
+
              instance.</para
           >
         </returns>
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -359,6 +387,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -372,8 +402,12 @@
 
             
 
+            
+
              instance with the specified <see
              cref="T:System.Uri" />
+
+            
 
             
 
@@ -392,11 +426,15 @@
 
             
 
+            
+
              instance.</para
           >
         </returns>
         <param name="url">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -409,10 +447,14 @@
 
           
 
+          
+
            of the content.</param
         >
         <param name="mediaType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -453,6 +495,8 @@
 
             
 
+            
+
              instance with the specified XHTML content.</para
           >
         </summary>
@@ -466,11 +510,15 @@
 
             
 
+            
+
              instance.</para
           >
         </returns>
         <param name="content">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -511,6 +559,8 @@
 
             
 
+            
+
              instance with the specified data contract object.</para
           >
         </summary>
@@ -524,11 +574,15 @@
 
             
 
+            
+
              instance.</para
           >
         </returns>
         <param name="dataContractObject">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -574,6 +628,8 @@
 
             
 
+            
+
              class that contains the new content.</para
           >
         </returns>
@@ -614,6 +670,8 @@
 
             
 
+            
+
              instance with the specified data contract object and data contract serializer.</para
           >
         </summary>
@@ -622,6 +680,8 @@
           <para
             >A new <see
              cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
+
+            
 
             
 
@@ -637,10 +697,14 @@
 
           
 
+          
+
           The data contract object.</param
         >
         <param name="dataContractSerializer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -682,6 +746,8 @@
 
             
 
+            
+
              instance with the specified object and XML serializer.</para
           >
         </summary>
@@ -690,6 +756,8 @@
           <para
             >A new <see
              cref="T:System.ServiceModel.Syndication.XmlSyndicationContent" />
+
+            
 
             
 
@@ -705,10 +773,14 @@
 
           
 
+          
+
           The object.</param
         >
         <param name="serializer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -735,6 +807,8 @@
           <para
             >This property is abstract, so it must be accessed on an instance of a syndication content type (a class derived from <see
              cref="T:System.ServiceModel.Syndication.SyndicationContent" />
+
+            
 
             
 
@@ -834,6 +908,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -847,8 +923,12 @@
 
             
 
+            
+
              object to the specified <see
              cref="T:System.Xml.XmlWriter" />
+
+            
 
             
 
@@ -864,8 +944,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -911,6 +995,8 @@
 
             
 
+            
+
              within the specified element and element namespace.</para
           >
         </summary>
@@ -921,8 +1007,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -937,10 +1027,14 @@
 
           
 
+          
+
           The name of the element.</param
         >
         <param name="outerElementNamespace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

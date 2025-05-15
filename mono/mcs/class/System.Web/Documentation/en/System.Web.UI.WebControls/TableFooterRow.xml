@@ -24,8 +24,12 @@
 
         
 
+        
+
          class represents a footer row in a <see
          cref="T:System.Web.UI.WebControls.Table" />
+
+        
 
         
 
@@ -38,6 +42,8 @@
 
         
 
+        
+
          to a <see
          cref="T:System.Web.UI.WebControls.Table" />
 
@@ -45,8 +51,12 @@
 
         
 
+        
+
          control allows you to specify a footer row that is rendered as the last row on each page that displays a view of the table. For more information about the view formats for a table rendered on a device with a limited screen size, see <see
          cref="T:System.Web.UI.WebControls.Table" />
+
+        
 
         
 
@@ -62,8 +72,12 @@
 
         
 
+        
+
          object can contain only <see
          cref="T:System.Web.UI.WebControls.TableCell" />
+
+        
 
         
 
@@ -76,8 +90,12 @@
 
         
 
+        
+
         , you must add one or more <see
          cref="T:System.Web.UI.WebControls.TableCell" />
+
+        
 
         
 
@@ -90,6 +108,8 @@
 
         
 
+        
+
          property of each <see
          cref="T:System.Web.UI.WebControls.TableCell" />
 
@@ -97,8 +117,12 @@
 
         
 
+        
+
          object in the row to specify the contents of each cell. Alternatively, you can add a control to a <see
          cref="T:System.Web.UI.WebControls.TableCell" />
+
+        
 
         
 
@@ -114,8 +138,12 @@
 
         
 
+        
+
          by using the <see
          cref="P:System.Web.UI.WebControls.TableRow.Cells" />
+
+        
 
         
 
@@ -128,8 +156,12 @@
 
         
 
+        
+
          collection is a collection of <see
          cref="T:System.Web.UI.WebControls.TableCell" />
+
+        
 
         
 
@@ -145,8 +177,12 @@
 
         
 
+        
+
          inherits properties from <see
          cref="T:System.Web.UI.WebControls.TableRow" />
+
+        
 
         
 
@@ -159,8 +195,12 @@
 
         
 
+        
+
          and <see
          cref="P:System.Web.UI.WebControls.TableRow.VerticalAlign" />
+
+        
 
         
 
@@ -174,6 +214,8 @@
       <para
         >Represents a footer row in a <see
          cref="T:System.Web.UI.WebControls.Table" />
+
+        
 
         
 
@@ -196,6 +238,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.TableFooterRow" />
+
+            
 
             
 

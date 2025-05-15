@@ -24,8 +24,12 @@
 
         
 
+        
+
          is used to generate XSD schemas from a type or assembly. You can also use the <see
          cref="T:System.Runtime.Serialization.XsdDataContractImporter" />
+
+        
 
         
 
@@ -43,10 +47,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="bb57b962-70c1-45a9-93d5-e721e340a13f">Exporting Schemas From Classes</a>
         </format>
+
+        
 
         
 
@@ -62,8 +70,12 @@
 
         
 
+        
+
          property is used by the <see
          cref="T:System.Runtime.Serialization.DataContractSerializer" />
+
+        
 
         
 
@@ -73,6 +85,8 @@
          type="text/html">
           <a href="1a0baea1-27b7-470d-9136-5bbad86c4337">Data Contract Known Types</a>
         </format>
+
+        
 
         
 
@@ -90,6 +104,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -98,6 +114,8 @@
       <para
         >Represents the options that can be set for an <see
          cref="T:System.Runtime.Serialization.XsdDataContractExporter" />
+
+        
 
         
 
@@ -126,6 +144,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Serialization.ExportOptions" />
+
+            
 
             
 
@@ -189,8 +209,12 @@
 
             
 
+            
+
              property is used by the <see
              cref="T:System.Runtime.Serialization.DataContractSerializer" />
+
+            
 
             
 
@@ -203,6 +227,8 @@
 
             
 
+            
+
              property). </para
           >
           <para
@@ -210,6 +236,8 @@
              type="text/html">
               <a href="1a0baea1-27b7-470d-9136-5bbad86c4337">Data Contract Known Types</a>
             </format>
+
+            
 
             
 

@@ -37,8 +37,12 @@
 
         
 
+        
+
          attribute provides a mechanism for you to document your code, and to indicate what type of reliability guarantees you can make in the face of exceptional conditions that could potentially lead to an inconsistent state. In this context, exceptional conditions are defined as asynchronous exceptions that can be generated at run time by the common language runtime, such as aborted threads, out-of-memory situations, and stack overflows. You can apply the <see
          cref="T:System.Runtime.ConstrainedExecution.ReliabilityContractAttribute" />
+
+        
 
         
 
@@ -49,6 +53,8 @@
       <para
         >Use this attribute with the <see
          cref="T:System.Runtime.ConstrainedExecution.Consistency" />
+
+        
 
         
 
@@ -97,6 +103,8 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Runtime.ConstrainedExecution.Consistency" />
 
@@ -104,8 +112,12 @@
 
             
 
+            
+
              guarantee and <see
              cref="T:System.Runtime.ConstrainedExecution.Cer" />
+
+            
 
             
 
@@ -121,8 +133,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Runtime.ConstrainedExecution.Consistency" />
+
+          
 
           
 
@@ -137,8 +153,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Runtime.ConstrainedExecution.Cer" />
+
+          
 
           
 
@@ -201,6 +221,8 @@
           <para
             >Gets the value of the <see
              cref="T:System.Runtime.ConstrainedExecution.Consistency" />
+
+            
 
             
 

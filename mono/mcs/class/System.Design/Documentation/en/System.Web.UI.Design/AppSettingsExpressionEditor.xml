@@ -27,8 +27,12 @@
 
         
 
+        
+
          class is derived from the <see
          cref="T:System.Web.UI.Design.ExpressionEditor" />
+
+        
 
         
 
@@ -44,11 +48,15 @@
 
         
 
+        
+
          class to select an application setting from the appSettings configuration section, and then evaluates the selected expression for design-time rendering.</para
       >
       <para
         >When you browse to the <see
          cref="P:System.Web.UI.Design.HtmlControlDesigner.Expressions" />
+
+        
 
         
 
@@ -61,6 +69,8 @@
 
         
 
+        
+
          expression prefix from the list, the visual designer host uses the associated <see
          cref="T:System.Web.UI.Design.ExpressionEditorSheet" />
 
@@ -68,8 +78,12 @@
 
         
 
+        
+
          object to provide design-time editing functionality of appSettings expressions and uses <see
          cref="T:System.Web.UI.Design.AppSettingsExpressionEditor" />
+
+        
 
         
 
@@ -85,8 +99,12 @@
 
         
 
+        
+
          property for an <see
          cref="T:System.Web.UI.Design.AppSettingsExpressionEditor" />
+
+        
 
         
 
@@ -99,8 +117,12 @@
 
         
 
+        
+
          class is associated with the expression prefix AppSettings and the <see
          cref="T:System.Web.UI.Design.AppSettingsExpressionEditor" />
+
+        
 
         
 
@@ -116,6 +138,8 @@
 
         
 
+        
+
          method evaluates an input application setting expression string. The <see
          cref="M:System.Web.UI.Design.ExpressionEditor.GetExpressionEditorSheet(System.String,System.IServiceProvider)" />
 
@@ -123,8 +147,12 @@
 
         
 
+        
+
          method returns the <see
          cref="T:System.Web.UI.Design.ExpressionEditorSheet" />
+
+        
 
         
 
@@ -155,8 +183,12 @@
 
             
 
+            
+
              class is configured by the base class together with the <see
              cref="P:System.Web.UI.Design.ExpressionEditor.ExpressionPrefix" />
+
+            
 
             
 
@@ -170,6 +202,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Design.AppSettingsExpressionEditor" />
+
+            
 
             
 
@@ -210,8 +244,12 @@
 
             
 
+            
+
              method looks up the application setting that is specified by <paramref
              name="expression" />
+
+            
 
             
 
@@ -227,8 +265,12 @@
 
             
 
+            
+
              method to evaluate an application setting expression and provide the design-time value for an associated control property. The visual designer calls the <see
              cref="M:System.Web.UI.Design.AppSettingsExpressionEditor.EvaluateExpression(System.String,System.Object,System.Type,System.IServiceProvider)" />
+
+            
 
             
 
@@ -244,6 +286,8 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.Compilation.AppSettingsExpressionBuilder.GetCodeExpression(System.Web.UI.BoundPropertyEntry,System.Object,System.Web.Compilation.ExpressionBuilderContext)" />
 
@@ -251,8 +295,12 @@
 
             
 
+            
+
              methods of the corresponding <see
              cref="T:System.Web.Compilation.AppSettingsExpressionBuilder" />
+
+            
 
             
 
@@ -275,6 +323,8 @@
 
             
 
+            
+
             , if the expression evaluation succeeded; otherwise, null.</para
           >
         </returns>
@@ -285,8 +335,12 @@
 
           
 
+          
+
           An application setting expression string to evaluate. <paramref
            name="expression" />
+
+          
 
           
 
@@ -301,8 +355,12 @@
 
           
 
+          
+
           An object containing additional parsing information for evaluating <paramref
            name="expression" />
+
+          
 
           
 
@@ -317,10 +375,14 @@
 
           
 
+          
+
           The control property type.</param
         >
         <param name="serviceProvider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -358,6 +420,8 @@
 
             
 
+            
+
              method returns a simple editor sheet implementation, which uses a single input string to form the expression.</para
           >
         </remarks>
@@ -375,11 +439,15 @@
 
             
 
+            
+
              implementation that defines the application setting expression properties.</para
           >
         </returns>
         <param name="expression">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -392,10 +460,14 @@
 
           
 
+          
+
            does not include the AppSettings expression prefix.</param
         >
         <param name="serviceProvider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

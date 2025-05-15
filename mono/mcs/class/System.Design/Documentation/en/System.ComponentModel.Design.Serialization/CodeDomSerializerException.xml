@@ -46,11 +46,15 @@
 
             
 
+            
+
              class using the specified exception and line information.</para
           >
         </summary>
         <param name="ex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -65,8 +69,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeLinePragma" />
+
+          
 
           
 
@@ -108,11 +116,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="ex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -127,8 +139,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationManager" />
+
+          
 
           
 
@@ -160,11 +176,15 @@
 
             
 
+            
+
              class using the specified serialization data and context.</para
           >
         </summary>
         <param name="info">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -177,10 +197,14 @@
 
           
 
+          
+
            was serializing or deserializing. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -216,11 +240,15 @@
 
             
 
+            
+
              class using the specified message and line information.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -235,8 +263,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeLinePragma" />
+
+          
 
           
 
@@ -278,11 +310,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -297,8 +333,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ComponentModel.Design.Serialization.IDesignerSerializationManager" />
+
+          
 
           
 
@@ -333,11 +373,15 @@
 
             
 
+            
+
              object with the parameter name and additional exception information.</para
           >
         </summary>
         <param name="info">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -350,10 +394,14 @@
 
           
 
+          
+
            was serializing or deserializing. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

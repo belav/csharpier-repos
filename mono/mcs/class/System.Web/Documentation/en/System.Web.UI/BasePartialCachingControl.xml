@@ -32,6 +32,8 @@
 
         
 
+        
+
          class represents a user control that has output caching enabled in programmatic scenarios. ASP.NET provides several ways to enable output caching for a control. The following list describes methods you can use to enable output caching:</para
       >
       <list type="bullet">
@@ -42,6 +44,8 @@
           <para
             >Use the <see
              cref="T:System.Web.UI.PartialCachingAttribute" />
+
+            
 
             
 
@@ -59,8 +63,12 @@
 
             
 
+            
+
              class to specify cache settings in programmatic scenarios in which you are working with <see
              cref="T:System.Web.UI.BasePartialCachingControl" />
+
+            
 
             
 
@@ -81,8 +89,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.UI.PartialCachingControl" />
+
+        
 
         
 
@@ -105,6 +117,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.BasePartialCachingControl" />
+
+            
 
             
 
@@ -143,8 +157,12 @@
 
             
 
+            
+
              property enables programmatic access to the <see
              cref="T:System.Web.UI.ControlCachePolicy" />
+
+            
 
             
 
@@ -157,8 +175,12 @@
 
             
 
+            
+
              instance. The <see
              cref="T:System.Web.UI.ControlCachePolicy" />
+
+            
 
             
 
@@ -172,6 +194,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.UI.ControlCachePolicy" />
+
+            
 
             
 
@@ -211,6 +235,8 @@
 
             
 
+            
+
              class associated with the cached user control output.</para
           >
         </summary>
@@ -234,6 +260,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.Web.UI.BasePartialCachingControl" />
+
+            
 
             
 
@@ -269,6 +297,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -279,8 +309,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -318,6 +352,8 @@
 
             
 
+            
+
              output stream.</para
           >
         </summary>
@@ -328,8 +364,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 

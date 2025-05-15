@@ -40,11 +40,15 @@
 
             
 
+            
+
              class and associates it with the specified task instance.</para
           >
         </summary>
         <param name="taskInstance">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -136,8 +140,12 @@
 
             
 
+            
+
              base class constructor, or the <see
              cref="P:Microsoft.Build.Utilities.Task.TaskResources" />
+
+            
 
             
 
@@ -161,10 +169,14 @@
 
           
 
+          
+
           The name of the string resource to load.</param
         >
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -217,10 +229,14 @@
 
           
 
+          
+
           The string to format.</param
         >
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -271,6 +287,8 @@
 
             
 
+            
+
             , resource names will be used verbatim as Help keywords.</para
           >
         </remarks>
@@ -304,6 +322,8 @@
         </summary>
         <param name="commandLine">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -346,8 +366,12 @@
 
           
 
+          
+
           One of the values of <see
            cref="T:Microsoft.Build.Framework.MessageImportance" />
+
+          
 
           
 
@@ -357,6 +381,8 @@
         >
         <param name="commandLine">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -405,10 +431,14 @@
 
           
 
+          
+
           The message.</param
         >
         <param name="messageArgs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -460,8 +490,12 @@
 
             
 
+            
+
             , <paramref
              name="errorCode" />
+
+            
 
             
 
@@ -474,8 +508,12 @@
 
             
 
+            
+
             , and <paramref
              name="file" />
+
+            
 
             
 
@@ -491,8 +529,12 @@
 
             
 
+            
+
             , <paramref
              name="columnNumber" />
+
+            
 
             
 
@@ -505,6 +547,8 @@
 
             
 
+            
+
             , and <paramref
              name="endColumnNumber" />
 
@@ -512,8 +556,12 @@
 
             
 
+            
+
              should be set to <math
             >0</math>
+
+            
 
             
 
@@ -533,10 +581,14 @@
 
           
 
+          
+
           The description of the error type.</param
         >
         <param name="errorCode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -551,10 +603,14 @@
 
           
 
+          
+
           The Help keyword to associate with the error.</param
         >
         <param name="file">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -569,10 +625,14 @@
 
           
 
+          
+
           The line in the file where the error occurs.</param
         >
         <param name="columnNumber">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -587,10 +647,14 @@
 
           
 
+          
+
           The end line in the file where the error occurs.</param
         >
         <param name="endColumnNumber">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -605,10 +669,14 @@
 
           
 
+          
+
           The message.</param
         >
         <param name="messageArgs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -677,6 +745,8 @@
 
           
 
+          
+
           true to include the stack trace in the log; otherwise, false.</param
         >
       </Docs>
@@ -720,10 +790,14 @@
 
           
 
+          
+
           The name of the string resource to load.</param
         >
         <param name="messageArgs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -775,8 +849,12 @@
 
             
 
+            
+
             , <paramref
              name="errorCode" />
+
+            
 
             
 
@@ -789,8 +867,12 @@
 
             
 
+            
+
             , and <paramref
              name="file" />
+
+            
 
             
 
@@ -806,8 +888,12 @@
 
             
 
+            
+
             , <paramref
              name="columnNumber" />
+
+            
 
             
 
@@ -820,6 +906,8 @@
 
             
 
+            
+
             , and <paramref
              name="endColumnNumber" />
 
@@ -827,8 +915,12 @@
 
             
 
+            
+
              should be set to <math
             >0</math>
+
+            
 
             
 
@@ -848,10 +940,14 @@
 
           
 
+          
+
           The name of the string resource that describes the error type.</param
         >
         <param name="errorCode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -866,10 +962,14 @@
 
           
 
+          
+
           The Help keyword to associate with the error.</param
         >
         <param name="file">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -884,10 +984,14 @@
 
           
 
+          
+
           The line in the file where the error occurs.</param
         >
         <param name="columnNumber">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -902,10 +1006,14 @@
 
           
 
+          
+
           The end line in the file where the error occurs.</param
         >
         <param name="endColumnNumber">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -920,10 +1028,14 @@
 
           
 
+          
+
           The name of the string resource to load.</param
         >
         <param name="messageArgs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -968,8 +1080,12 @@
 
             
 
+            
+
              base class constructor, or the <see
              cref="P:Microsoft.Build.Utilities.Task.HelpKeywordPrefix" />
+
+            
 
             
 
@@ -989,10 +1105,14 @@
 
           
 
+          
+
           The name of the string resource to load.</param
         >
         <param name="messageArgs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1043,8 +1163,12 @@
 
             
 
+            
+
              base class constructor, or the <see
              cref="P:Microsoft.Build.Utilities.Task.HelpKeywordPrefix" />
+
+            
 
             
 
@@ -1060,8 +1184,12 @@
 
             
 
+            
+
             , and <paramref
              name="file" />
+
+            
 
             
 
@@ -1077,8 +1205,12 @@
 
             
 
+            
+
             , <paramref
              name="columnNumber" />
+
+            
 
             
 
@@ -1091,6 +1223,8 @@
 
             
 
+            
+
             , and <paramref
              name="endColumnNumber" />
 
@@ -1098,8 +1232,12 @@
 
             
 
+            
+
              should be set to <math
             >0</math>
+
+            
 
             
 
@@ -1119,10 +1257,14 @@
 
           
 
+          
+
           The name of the string resource that describes the error type.</param
         >
         <param name="file">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1137,10 +1279,14 @@
 
           
 
+          
+
           The line in the file where the error occurs.</param
         >
         <param name="columnNumber">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1155,10 +1301,14 @@
 
           
 
+          
+
           The end line in the file where the error occurs.</param
         >
         <param name="endColumnNumber">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1173,10 +1323,14 @@
 
           
 
+          
+
           The name of the string resource to load.</param
         >
         <param name="messageArgs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1217,11 +1371,15 @@
 
             
 
+            
+
              build event.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1236,6 +1394,8 @@
 
           
 
+          
+
           The help keyword.</param
         >
         <param name="projectFile">
@@ -1245,10 +1405,14 @@
 
           
 
+          
+
           The name of the project.</param
         >
         <param name="succeeded">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1289,11 +1453,15 @@
 
             
 
+            
+
              build event.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1308,6 +1476,8 @@
 
           
 
+          
+
           The help keyword.</param
         >
         <param name="projectFile">
@@ -1317,10 +1487,14 @@
 
           
 
+          
+
           The name of the project.</param
         >
         <param name="targetNames">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1364,8 +1538,12 @@
 
             
 
+            
+
              value of a message is <unmanagedCodeEntityReference
             >Normal</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -1385,10 +1563,14 @@
 
           
 
+          
+
           The message.</param
         >
         <param name="messageArgs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1438,6 +1620,8 @@
 
           
 
+          
+
           One of the enumeration values that specifies the importance of the message.</param
         >
         <param name="message">
@@ -1447,10 +1631,14 @@
 
           
 
+          
+
           The message.</param
         >
         <param name="messageArgs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1494,8 +1682,12 @@
 
             
 
+            
+
              value of a message is <unmanagedCodeEntityReference
             >Normal</unmanagedCodeEntityReference>
+
+            
 
             
 
@@ -1515,10 +1707,14 @@
 
           
 
+          
+
           The name of the string resource to load.</param
         >
         <param name="messageArgs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1568,6 +1764,8 @@
 
           
 
+          
+
           One of the enumeration values that specifies the importance of the message.</param
         >
         <param name="messageResourceName">
@@ -1577,10 +1775,14 @@
 
           
 
+          
+
           The name of the string resource to load.</param
         >
         <param name="messageArgs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1623,6 +1825,8 @@
         </returns>
         <param name="lineOfText">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1699,6 +1903,8 @@
 
           
 
+          
+
           One of the enumeration values that specifies the importance of logged messages.</param
         >
       </Docs>
@@ -1740,8 +1946,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.IO.TextReader" />
+
+          
 
           
 
@@ -1756,8 +1966,12 @@
 
           
 
+          
+
           One of the values of <see
            cref="T:Microsoft.Build.Framework.MessageImportance" />
+
+          
 
           
 
@@ -1806,10 +2020,14 @@
 
           
 
+          
+
           The message.</param
         >
         <param name="messageArgs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1861,8 +2079,12 @@
 
             
 
+            
+
             , <paramref
              name="warningCode" />
+
+            
 
             
 
@@ -1875,8 +2097,12 @@
 
             
 
+            
+
             , and <paramref
              name="file" />
+
+            
 
             
 
@@ -1892,8 +2118,12 @@
 
             
 
+            
+
             , <paramref
              name="columnNumber" />
+
+            
 
             
 
@@ -1906,6 +2136,8 @@
 
             
 
+            
+
             , and <paramref
              name="endColumnNumber" />
 
@@ -1913,8 +2145,12 @@
 
             
 
+            
+
              should be set to <math
             >0</math>
+
+            
 
             
 
@@ -1934,10 +2170,14 @@
 
           
 
+          
+
           The description of the warning type.</param
         >
         <param name="warningCode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1952,10 +2192,14 @@
 
           
 
+          
+
           The Help keyword to associate with the warning.</param
         >
         <param name="file">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1970,10 +2214,14 @@
 
           
 
+          
+
           The line in the file where the warning occurs.</param
         >
         <param name="columnNumber">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1988,10 +2236,14 @@
 
           
 
+          
+
           The end line in the file where the warning occurs.</param
         >
         <param name="endColumnNumber">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2006,10 +2258,14 @@
 
           
 
+          
+
           The message.</param
         >
         <param name="messageArgs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2078,6 +2334,8 @@
 
           
 
+          
+
           true to include the stack trace in the log; otherwise, false.</param
         >
       </Docs>
@@ -2121,10 +2379,14 @@
 
           
 
+          
+
           The name of the string resource to load.</param
         >
         <param name="messageArgs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2176,8 +2438,12 @@
 
             
 
+            
+
             , <paramref
              name="warningCode" />
+
+            
 
             
 
@@ -2190,8 +2456,12 @@
 
             
 
+            
+
             , and <paramref
              name="file" />
+
+            
 
             
 
@@ -2207,8 +2477,12 @@
 
             
 
+            
+
             , <paramref
              name="columnNumber" />
+
+            
 
             
 
@@ -2221,6 +2495,8 @@
 
             
 
+            
+
             , and <paramref
              name="endColumnNumber" />
 
@@ -2228,8 +2504,12 @@
 
             
 
+            
+
              should be set to <math
             >0</math>
+
+            
 
             
 
@@ -2249,10 +2529,14 @@
 
           
 
+          
+
           The name of the string resource that describes the warning type.</param
         >
         <param name="warningCode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2267,10 +2551,14 @@
 
           
 
+          
+
           The Help keyword to associate with the warning.</param
         >
         <param name="file">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2285,10 +2573,14 @@
 
           
 
+          
+
           The line in the file where the warning occurs.</param
         >
         <param name="columnNumber">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2303,10 +2595,14 @@
 
           
 
+          
+
           The end line in the file where the warning occurs.</param
         >
         <param name="endColumnNumber">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2321,10 +2617,14 @@
 
           
 
+          
+
           The name of the string resource to load.</param
         >
         <param name="messageArgs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2369,8 +2669,12 @@
 
             
 
+            
+
              base class constructor, or the <see
              cref="P:Microsoft.Build.Utilities.Task.HelpKeywordPrefix" />
+
+            
 
             
 
@@ -2390,10 +2694,14 @@
 
           
 
+          
+
           The name of the string resource to load.</param
         >
         <param name="messageArgs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2444,8 +2752,12 @@
 
             
 
+            
+
              base class constructor, or the <see
              cref="P:Microsoft.Build.Utilities.Task.HelpKeywordPrefix" />
+
+            
 
             
 
@@ -2461,8 +2773,12 @@
 
             
 
+            
+
             , and <paramref
              name="file" />
+
+            
 
             
 
@@ -2478,8 +2794,12 @@
 
             
 
+            
+
             , <paramref
              name="columnNumber" />
+
+            
 
             
 
@@ -2492,6 +2812,8 @@
 
             
 
+            
+
             , and <paramref
              name="endColumnNumber" />
 
@@ -2499,8 +2821,12 @@
 
             
 
+            
+
              should be set to <math
             >0</math>
+
+            
 
             
 
@@ -2520,10 +2846,14 @@
 
           
 
+          
+
           The name of the string resource that describes the warning type.</param
         >
         <param name="file">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2538,10 +2868,14 @@
 
           
 
+          
+
           The line in the file where the warning occurs.</param
         >
         <param name="columnNumber">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2556,10 +2890,14 @@
 
           
 
+          
+
           The end line in the file where the warning occurs.</param
         >
         <param name="endColumnNumber">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2574,10 +2912,14 @@
 
           
 
+          
+
           The name of the string resource to load.</param
         >
         <param name="messageArgs">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -29,6 +29,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -37,6 +39,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Net.WebClient.UploadFileCompleted" />
+
+        
 
         
 
@@ -71,8 +75,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ComponentModel.AsyncCompletedEventArgs.Cancelled" />
+
+            
 
             
 
@@ -85,8 +93,12 @@
 
             
 
+            
+
              property's value is an <see
              cref="T:System.Exception" />
+
+            
 
             
 
@@ -99,8 +111,12 @@
 
             
 
+            
+
              property's value is true, the asynchronous operation did not complete correctly and the <see
              cref="P:System.Net.UploadFileCompletedEventArgs.Result" />
+
+            
 
             
 
@@ -114,6 +130,8 @@
           <para
             >Gets the server reply to a data upload operation that is started by calling an <see
              cref="Overload:System.Net.WebClient.UploadFileAsync" />
+
+            
 
             
 

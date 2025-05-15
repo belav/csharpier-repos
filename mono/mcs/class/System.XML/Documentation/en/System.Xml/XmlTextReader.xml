@@ -52,8 +52,12 @@
 
           
 
+          
+
            instances using the <see
            cref="Overload:System.Xml.XmlReader.Create" />
+
+          
 
           
 
@@ -63,6 +67,8 @@
            type="text/html">
             <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
           </format>
+
+          
 
           
 
@@ -78,11 +84,15 @@
 
         
 
+        
+
          provides forward-only, read-only access to a stream of XML data. The current node refers to the node on which the reader is positioned. The reader is advanced using any of the read methods and properties reflect the value of the current node.</para
       >
       <para
         >This class implements <see
          cref="T:System.Xml.XmlReader" />
+
+        
 
         
 
@@ -109,8 +119,12 @@
 
             
 
+            
+
              is XmlNodeType.EntityReference, a single empty EntityReference node is returned (that is, the <see
              cref="P:System.Xml.XmlTextReader.Value" />
+
+            
 
             
 
@@ -137,10 +151,14 @@
 
         
 
+        
+
         . For more information, see <format
          type="text/html">
           <a href="2958dbbd-60ca-4447-9b16-72f41d223486">Validating XML Data with XmlReader</a>
         </format>
+
+        
 
         
 
@@ -156,8 +174,12 @@
 
         
 
+        
+
         , use <see
          cref="T:System.Xml.XmlNodeReader" />
+
+        
 
         
 
@@ -173,8 +195,12 @@
 
         
 
+        
+
          on XML parse errors. After an exception is thrown the state of the reader is not predictable. For example, the reported node type may be different than the actual node type of the current node. Use the <see
          cref="P:System.Xml.XmlTextReader.ReadState" />
+
+        
 
         
 
@@ -187,6 +213,8 @@
          type="text/html">
           <a href="3029834C-A27E-4331-B7AA-711924062182">Reading XML with the XmlReader</a>
         </format>
+
+        
 
         
 
@@ -205,6 +233,8 @@
 
         
 
+        
+
          class.</para
       >
       <list type="bullet">
@@ -212,6 +242,8 @@
           <para
             >Exceptions thrown the <see
              cref="T:System.Xml.XmlTextReader" />
+
+            
 
             
 
@@ -229,8 +261,12 @@
 
             
 
+            
+
              property to <see
              cref="F:System.Xml.DtdProcessing.Prohibit" />
+
+            
 
             
 
@@ -246,8 +282,12 @@
 
             
 
+            
+
              to restrict the resources that the <see
              cref="T:System.Xml.XmlTextReader" />
+
+            
 
             
 
@@ -265,6 +305,8 @@
 
             
 
+            
+
              object with no user credentials. You can secure this further by doing one of the following:</para
           >
           <list type="bullet">
@@ -277,6 +319,8 @@
 
                 
 
+                
+
                  can access by setting the <see
                  cref="P:System.Xml.XmlTextReader.XmlResolver" />
 
@@ -284,8 +328,12 @@
 
                 
 
+                
+
                  property to an <see
                  cref="T:System.Xml.XmlSecureResolver" />
+
+                
 
                 
 
@@ -303,8 +351,12 @@
 
                 
 
+                
+
                  to open any external resources by setting the <see
                  cref="P:System.Xml.XmlTextReader.XmlResolver" />
+
+                
 
                 
 
@@ -324,8 +376,12 @@
 
             
 
+            
+
             , create a custom IStream implementation and supply it the <see
              cref="T:System.Xml.XmlTextReader" />
+
+            
 
             
 
@@ -343,6 +399,8 @@
 
             
 
+            
+
              method can be used to handle large streams of data. This method reads a small number of characters at a time instead of allocating a single string for the whole value.</para
           >
         </item>
@@ -350,6 +408,8 @@
           <para
             >By default general entities are not expanded. General entities are expanded when you call the <see
              cref="M:System.Xml.XmlTextReader.ResolveEntity" />
+
+            
 
             
 
@@ -421,8 +481,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -441,8 +505,12 @@
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -452,6 +520,8 @@
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -468,8 +538,12 @@
 
             
 
+            
+
              decodes the stream using <see
              cref="T:System.Text.Encoding" />
+
+            
 
             
 
@@ -488,11 +562,15 @@
 
             
 
+            
+
              class with the specified stream.</para
           >
         </summary>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -535,8 +613,12 @@
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -546,6 +628,8 @@
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -566,8 +650,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -578,6 +666,8 @@
         </summary>
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -616,8 +706,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -636,8 +730,12 @@
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -647,6 +745,8 @@
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -663,12 +763,16 @@
 
             
 
+            
+
              property to specify the necessary credentials.</para
           >
           <block subset="none" type="note">
             <para
               >In version 1.1 of the dnprdnshort, partially trusted code cannot set the XmlResolver property. The workaround is to create an <see
                cref="T:System.Xml.XmlUrlResolver" />
+
+              
 
               
 
@@ -681,8 +785,12 @@
 
               
 
+              
+
                method, and then construct the XmlTextReader using the resulting <see
                cref="T:System.IO.Stream" />
+
+              
 
               
 
@@ -711,6 +819,8 @@
 
             
 
+            
+
              class with the specified file.</para
           >
         </summary>
@@ -721,8 +831,12 @@
 
           
 
+          
+
           The URL for the file containing the XML data. The <see
            cref="P:System.Xml.XmlTextReader.BaseURI" />
+
+          
 
           
 
@@ -764,8 +878,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -784,8 +902,12 @@
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -795,6 +917,8 @@
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -814,8 +938,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Xml.XmlNameTable" />
+
+            
 
             
 
@@ -826,6 +954,8 @@
         </summary>
         <param name="nt">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -868,6 +998,8 @@
 
           
 
+          
+
            or <paramref
            name="nt" />
 
@@ -875,8 +1007,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -895,8 +1031,12 @@
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -906,6 +1046,8 @@
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -922,8 +1064,12 @@
 
             
 
+            
+
              decodes the stream using <see
              cref="T:System.Text.Encoding" />
+
+            
 
             
 
@@ -943,8 +1089,12 @@
 
             
 
+            
+
              class with the specified stream and <see
              cref="T:System.Xml.XmlNameTable" />
+
+            
 
             
 
@@ -960,10 +1110,14 @@
 
           
 
+          
+
           The stream containing the XML data to read. </param
         >
         <param name="nt">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1006,8 +1160,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1026,8 +1184,12 @@
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -1037,6 +1199,8 @@
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -1057,6 +1221,8 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.IO.TextReader" />
 
@@ -1064,8 +1230,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Xml.XmlNameTable" />
+
+            
 
             
 
@@ -1081,10 +1251,14 @@
 
           
 
+          
+
           The TextReader containing the XML data to read. </param
         >
         <param name="nt">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1127,8 +1301,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1138,6 +1316,8 @@
         >
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1156,8 +1336,12 @@
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -1167,6 +1351,8 @@
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -1186,11 +1372,15 @@
 
             
 
+            
+
              class with the specified URL and stream.</para
           >
         </summary>
         <param name="url">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1203,10 +1393,14 @@
 
           
 
+          
+
            is set to this value. </param
         >
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1249,6 +1443,8 @@
 
           
 
+          
+
           The TextReader containing the XML data to read. </param
         >
         <remarks>
@@ -1262,8 +1458,12 @@
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -1273,6 +1473,8 @@
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -1293,8 +1495,12 @@
 
             
 
+            
+
              class with the specified URL and <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -1310,8 +1516,12 @@
 
           
 
+          
+
           The URL to use for resolving external resources. The <see
            cref="P:System.Xml.XmlTextReader.BaseURI" />
+
+          
 
           
 
@@ -1321,6 +1531,8 @@
         >
         <param name="input">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1363,8 +1575,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1379,8 +1595,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1399,8 +1619,12 @@
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -1410,6 +1634,8 @@
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -1429,8 +1655,12 @@
 
             
 
+            
+
              class with the specified file and <see
              cref="T:System.Xml.XmlNameTable" />
+
+            
 
             
 
@@ -1446,10 +1676,14 @@
 
           
 
+          
+
           The URL for the file containing the XML data to read. </param
         >
         <param name="nt">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1493,8 +1727,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1509,8 +1747,12 @@
 
           
 
+          
+
            is not an <see
            langword="Element" />
+
+          
 
           
 
@@ -1523,9 +1765,13 @@
 
           
 
+          
+
           , or <see
            langword="Document" />
           <see cref="T:System.Xml.XmlNodeType" />
+
+          
 
           
 
@@ -1540,8 +1786,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNodeType" />
+
+          
 
           
 
@@ -1556,8 +1806,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlParserContext" />
+
+          
 
           
 
@@ -1570,8 +1824,12 @@
 
           
 
+          
+
            is to be parsed. This includes the <see
            cref="T:System.Xml.XmlNameTable" />
+
+          
 
           
 
@@ -1590,8 +1848,12 @@
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -1606,6 +1868,8 @@
 
               
 
+              
+
               .</para
             >
           </block>
@@ -1613,6 +1877,8 @@
           <para
             >The following table lists valid values for <paramref
              name="fragType" />
+
+            
 
             
 
@@ -1640,6 +1906,8 @@
                 <para
                   >An XML declaration can also be supplied. This allows you to specify the encoding for the XML fragment, rather than having to set it on the <see
                    cref="T:System.Xml.XmlParserContext" />
+
+                  
 
                   
 
@@ -1677,6 +1945,8 @@
 
                 
 
+                
+
                  property to determine the encoding.</para
               >
             </item>
@@ -1698,6 +1968,8 @@
 
             
 
+            
+
              class with the specified stream, <see
              cref="T:System.Xml.XmlNodeType" />
 
@@ -1705,8 +1977,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Xml.XmlParserContext" />
+
+            
 
             
 
@@ -1722,6 +1998,8 @@
 
           
 
+          
+
           The stream containing the XML fragment to parse. </param
         >
         <param name="fragType">
@@ -1731,8 +2009,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNodeType" />
+
+          
 
           
 
@@ -1747,8 +2029,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlParserContext" />
+
+          
 
           
 
@@ -1761,8 +2047,12 @@
 
           
 
+          
+
            is to be parsed. This includes the <see
            cref="T:System.Xml.XmlNameTable" />
+
+          
 
           
 
@@ -1806,6 +2096,8 @@
 
           
 
+          
+
            or <paramref
            name="nt" />
 
@@ -1813,8 +2105,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1829,8 +2125,12 @@
 
           
 
+          
+
           The URL to use for resolving external resources. The <see
            cref="P:System.Xml.XmlTextReader.BaseURI" />
+
+          
 
           
 
@@ -1843,10 +2143,14 @@
 
           
 
+          
+
            is null, BaseURI is set to String.Empty. </param
         >
         <param name="nt">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1865,8 +2169,12 @@
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -1876,6 +2184,8 @@
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -1895,8 +2205,12 @@
 
             
 
+            
+
              class with the specified URL, stream and <see
              cref="T:System.Xml.XmlNameTable" />
+
+            
 
             
 
@@ -1912,6 +2226,8 @@
 
           
 
+          
+
           The URL to use for resolving external resources. The <see
            cref="P:System.Xml.XmlTextReader.BaseURI" />
 
@@ -1919,8 +2235,12 @@
 
           
 
+          
+
            is set to this value. If <paramref
            name="url" />
+
+          
 
           
 
@@ -1935,10 +2255,14 @@
 
           
 
+          
+
           The stream containing the XML data to read. </param
         >
         <param name="nt">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1982,8 +2306,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -1998,10 +2326,14 @@
 
           
 
+          
+
           The TextReader containing the XML data to read. </param
         >
         <param name="nt">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2020,8 +2352,12 @@
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -2031,6 +2367,8 @@
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -2051,6 +2389,8 @@
 
             
 
+            
+
              class with the specified URL, <see
              cref="T:System.IO.TextReader" />
 
@@ -2058,8 +2398,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Xml.XmlNameTable" />
+
+            
 
             
 
@@ -2075,6 +2419,8 @@
 
           
 
+          
+
           The URL to use for resolving external resources. The <see
            cref="P:System.Xml.XmlTextReader.BaseURI" />
 
@@ -2082,8 +2428,12 @@
 
           
 
+          
+
            is set to this value. If <paramref
            name="url" />
+
+          
 
           
 
@@ -2098,10 +2448,14 @@
 
           
 
+          
+
           The TextReader containing the XML data to read. </param
         >
         <param name="nt">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2145,8 +2499,12 @@
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -2161,8 +2519,12 @@
 
           
 
+          
+
            is not an <see
            langword="Element" />
+
+          
 
           
 
@@ -2175,9 +2537,13 @@
 
           
 
+          
+
           , or <see
            langword="Document" />
           <see cref="T:System.Xml.XmlNodeType" />
+
+          
 
           
 
@@ -2192,8 +2558,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNodeType" />
+
+          
 
           
 
@@ -2208,8 +2578,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlParserContext" />
+
+          
 
           
 
@@ -2222,8 +2596,12 @@
 
           
 
+          
+
            is to be parsed. This includes the <see
            cref="T:System.Xml.XmlNameTable" />
+
+          
 
           
 
@@ -2242,8 +2620,12 @@
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -2253,6 +2635,8 @@
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -2269,11 +2653,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The following table lists valid values for <paramref
              name="fragType" />
+
+            
 
             
 
@@ -2301,6 +2689,8 @@
                 <para
                   >An XML declaration can also be supplied. This allows you to specify the encoding for the XML fragment, rather than having to set it on the <see
                    cref="T:System.Xml.XmlParserContext" />
+
+                  
 
                   
 
@@ -2338,6 +2728,8 @@
 
             
 
+            
+
              class with the specified string, <see
              cref="T:System.Xml.XmlNodeType" />
 
@@ -2345,8 +2737,12 @@
 
             
 
+            
+
             , and <see
              cref="T:System.Xml.XmlParserContext" />
+
+            
 
             
 
@@ -2362,6 +2758,8 @@
 
           
 
+          
+
           The string containing the XML fragment to parse. </param
         >
         <param name="fragType">
@@ -2371,8 +2769,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlNodeType" />
+
+          
 
           
 
@@ -2387,8 +2789,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Xml.XmlParserContext" />
+
+          
 
           
 
@@ -2401,8 +2807,12 @@
 
           
 
+          
+
            is to be parsed. This includes the <see
            cref="T:System.Xml.XmlNameTable" />
+
+          
 
           
 
@@ -2440,6 +2850,8 @@
 
             
 
+            
+
              containing the 
    number of attributes on the current node, or zero if the current node does not support attributes.</para
           >
@@ -2455,8 +2867,12 @@
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -2466,6 +2882,8 @@
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -2516,8 +2934,12 @@
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -2527,6 +2949,8 @@
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -2569,8 +2993,12 @@
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -2580,6 +3008,8 @@
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -2596,8 +3026,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Xml.XmlTextReader.ReadContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -2610,8 +3044,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Xml.XmlTextReader.ReadElementContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -2625,6 +3063,8 @@
           <para
             >Gets a value indicating whether the <see
              cref="T:System.Xml.XmlTextReader" />
+
+            
 
             
 
@@ -2660,8 +3100,12 @@
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -2671,6 +3115,8 @@
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -2687,6 +3133,8 @@
 
             
 
+            
+
              throws a <see
              cref="T:System.NotSupportedException" />
 
@@ -2694,8 +3142,12 @@
 
             
 
+            
+
              if the <see
              cref="M:System.Xml.XmlReader.ReadValueChunk(System.Char[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -2714,8 +3166,12 @@
 
             
 
+            
+
              implements the <see
              cref="M:System.Xml.XmlReader.ReadValueChunk(System.Char[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -2752,8 +3208,12 @@
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -2763,6 +3223,8 @@
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -2808,8 +3270,12 @@
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -2819,6 +3285,8 @@
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -2835,6 +3303,8 @@
           <para
             >Changes the <see
              cref="P:System.Xml.XmlReader.ReadState" />
+
+            
 
             
 
@@ -2873,6 +3343,8 @@
 
             
 
+            
+
              containing the depth of the current node in the XML document.
    </para
           >
@@ -2888,8 +3360,12 @@
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -2899,6 +3375,8 @@
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -2945,8 +3423,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.Xml.ReadState.Interactive" qualify="true" />
+
+            
 
             
 
@@ -2959,8 +3441,12 @@
 
             
 
+            
+
             ; otherwise <see
              langword="null" />
+
+            
 
             
 
@@ -2980,8 +3466,12 @@
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -2991,6 +3481,8 @@
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -3007,8 +3499,12 @@
 
             
 
+            
+
              uses the <see
              cref="T:System.Text.Encoding" />
+
+            
 
             
 
@@ -3055,8 +3551,12 @@
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -3071,12 +3571,16 @@
 
               
 
+              
+
               .</para
             >
           </block>
           <para
             >This property can be changed on the fly and takes effect after the next <see
              cref="M:System.Xml.XmlTextReader.Read" />
+
+            
 
             
 
@@ -3124,6 +3628,8 @@
           <para
             >When EntityHandling is set to ExpandCharEntites, and <see
              cref="P:System.Xml.XmlTextReader.WhitespaceHandling" />
+
+            
 
             
 
@@ -3225,8 +3731,12 @@
 
             
 
+            
+
              where <see
              langword="true" />
+
+            
 
             
 
@@ -3236,6 +3746,8 @@
 indicates the reader is positioned at the end of the stream;
 otherwise, <see
              langword="false" />
+
+            
 
             
 
@@ -3255,8 +3767,12 @@ otherwise, <see
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -3266,6 +3782,8 @@ otherwise, <see
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -3312,8 +3830,12 @@ otherwise, <see
 
           
 
+          
+
            is less than 0, or greater than or equal to the <see
            cref="P:System.Xml.XmlTextReader.AttributeCount" />
+
+          
 
           
 
@@ -3328,8 +3850,12 @@ otherwise, <see
 
               
 
+              
+
                returns zero for all node types except <see
                langword="Attribute" />
+
+              
 
               
 
@@ -3342,6 +3868,8 @@ otherwise, <see
 
               
 
+              
+
               , <see
                langword="Element" />
 
@@ -3349,8 +3877,12 @@ otherwise, <see
 
               
 
+              
+
               , and <see
                langword="XmlDeclaration" />
+
+              
 
               
 
@@ -3369,8 +3901,12 @@ otherwise, <see
 
             
 
+            
+
             (<see
              langword="String" />
+
+            
 
             
 
@@ -3379,6 +3915,8 @@ otherwise, <see
             ,
 <see
              langword="String" />
+
+            
 
             
 
@@ -3398,8 +3936,12 @@ otherwise, <see
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -3409,6 +3951,8 @@ otherwise, <see
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -3429,6 +3973,8 @@ otherwise, <see
         </returns>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3471,6 +4017,8 @@ otherwise, <see
 
             
 
+            
+
             (<see
              langword="String" />
 
@@ -3478,8 +4026,12 @@ otherwise, <see
 
             
 
+            
+
             , <see
              langword="String" />
+
+            
 
             
 
@@ -3500,8 +4052,12 @@ otherwise, <see
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -3511,6 +4067,8 @@ otherwise, <see
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -3532,6 +4090,8 @@ otherwise, <see
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3623,6 +4183,8 @@ public class Reader {
 
           
 
+          
+
           The namespace URI of the attribute. </param
         >
         <remarks>
@@ -3636,8 +4198,12 @@ public class Reader {
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -3647,6 +4213,8 @@ public class Reader {
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -3671,6 +4239,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
             
 
+            
+
              property.</para
           >
         </remarks>
@@ -3689,10 +4259,14 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
           
 
+          
+
           The local name of the attribute. </param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3736,8 +4310,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -3747,6 +4325,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -3764,8 +4344,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
             
 
+            
+
              enumeration value affects the whether or not the default and built-in namespaces are returned by <see
              cref="M:System.Xml.XmlTextReader.GetNamespacesInScope(System.Xml.XmlNamespaceScope)" />
+
+            
 
             
 
@@ -3848,6 +4432,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
             
 
+            
+
              object that contains all the current in-scope namespaces. If the reader is not positioned on an element, an empty dictionary (no namespaces) is returned.</para
           >
         </returns>
@@ -3858,8 +4444,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlNamespaceScope" />
+
+          
 
           
 
@@ -3901,8 +4491,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -3912,6 +4506,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -3928,11 +4524,15 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
             
 
+            
+
              does a buffered Read, it must be able to return the remainder of the unused buffer so that no data is lost. This allows protocols (such as multi-part MIME) to package XML in the same stream as other things.</para
           >
           <para
             >After calling this method, <see
              cref="P:System.Xml.XmlTextReader.EOF" />
+
+            
 
             
 
@@ -3950,6 +4550,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para
             >A <see
              cref="T:System.IO.TextReader" />
+
+            
 
             
 
@@ -3989,8 +4591,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -4000,6 +4606,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -4046,8 +4654,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
             
 
+            
+
              where <see
              langword="true" />
+
+            
 
             
 
@@ -4057,6 +4669,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
    which the reader is currently positioned can have an associated text value;
    otherwise, <see
              langword="false" />
+
+            
 
             
 
@@ -4076,8 +4690,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -4087,6 +4705,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -4191,6 +4811,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
             
 
+            
+
              other than String.Empty.</para
           >
         </summary>
@@ -4224,8 +4846,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
             
 
+            
+
              value <see
              langword="false" />
+
+            
 
             
 
@@ -4246,8 +4872,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -4257,6 +4887,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -4301,8 +4933,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
             
 
+            
+
              where <see
              langword="true" />
+
+            
 
             
 
@@ -4316,9 +4952,13 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
             
 
+            
+
              equals
 <see
              cref="F:System.Xml.XmlNodeType.Element" />
+
+            
 
             
 
@@ -4332,8 +4972,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
             
 
+            
+
             "; otherwise,<see
              langword=" false" />
+
+            
 
             
 
@@ -4353,8 +4997,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -4364,6 +5012,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -4407,6 +5057,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
           
 
+          
+
            specifying the zero-based index of the attribute relative to the containing element.</param
         >
         <summary>
@@ -4416,6 +5068,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
           <para
             >A <see
              cref="T:System.String" qualify="true" />
+
+            
 
             
 
@@ -4436,6 +5090,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                indexer.</para
             >
           </block>
@@ -4447,8 +5103,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
           
 
+          
+
            is less than 0 or greater than or equal to the <see
            cref="P:System.Xml.XmlTextReader.AttributeCount" />
+
+          
 
           
 
@@ -4463,8 +5123,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
                returns zero for all node types except <see
                langword="Attribute" />
+
+              
 
               
 
@@ -4477,6 +5141,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
               , <see
                langword="Element" />
 
@@ -4484,8 +5150,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
               
 
+              
+
               , and <see
                langword="XmlDeclaration" />
+
+              
 
               
 
@@ -4524,6 +5194,8 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
 
           
 
+          
+
            specifying the qualified name of the attribute.</param
         >
         <summary>
@@ -4539,8 +5211,12 @@ String dt4 = reader.GetAttribute("dt",http://www.w3.org/2000/xmlns/);</code>
             
 
             
+
+            
 containing the value of the specified attribute, or <see
              langword="null" />
+
+            
 
             
 
@@ -4562,12 +5238,16 @@ attribute is not found.</para
 
               
 
+              
+
                node, this
       method can be used to get the PUBLIC and SYSTEM literals.</para
             >
             <para
               >This property overrides the <see
                cref="T:System.Xml.XmlReader" />
+
+              
 
               
 
@@ -4617,8 +5297,12 @@ attribute is not found.</para
             
 
             
+
+            
 containing the value of the specified attribute, or <see
              langword="null" />
+
+            
 
             
 
@@ -4635,6 +5319,8 @@ attribute is not found.</para
             <para
               >This property overrides the <see
                cref="T:System.Xml.XmlReader" />
+
+              
 
               
 
@@ -4678,6 +5364,8 @@ attribute is not found.</para
 
             
 
+            
+
              containing the current line number.</para
           >
         </value>
@@ -4692,8 +5380,12 @@ attribute is not found.</para
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -4708,6 +5400,8 @@ attribute is not found.</para
 
               
 
+              
+
               .</para
             >
           </block>
@@ -4715,6 +5409,8 @@ attribute is not found.</para
           <para
             >Combined with <see
              cref="P:System.Xml.XmlTextReader.LinePosition" />
+
+            
 
             
 
@@ -4757,6 +5453,8 @@ attribute is not found.</para
 
             
 
+            
+
              containing the current line position.</para
           >
         </value>
@@ -4771,8 +5469,12 @@ attribute is not found.</para
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -4782,6 +5484,8 @@ attribute is not found.</para
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -4799,6 +5503,8 @@ attribute is not found.</para
           <para
             >Combined with <see
              cref="P:System.Xml.XmlTextReader.LineNumber" />
+
+            
 
             
 
@@ -4841,11 +5547,15 @@ attribute is not found.</para
 
             
 
+            
+
              
 containing the local name of the current
 node or, for node types that do not have a name (like
 <see
              langword="Text" />
+
+            
 
             
 
@@ -4858,9 +5568,13 @@ node or, for node types that do not have a name (like
 
             
 
+            
+
              
 , and so on), <see
              cref="F:System.String.Empty" qualify="true" />
+
+            
 
             
 
@@ -4880,8 +5594,12 @@ node or, for node types that do not have a name (like
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -4891,6 +5609,8 @@ node or, for node types that do not have a name (like
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -4941,8 +5661,12 @@ node or, for node types that do not have a name (like
 
           
 
+          
+
            property of the current instance is <see
            langword="true" />
+
+          
 
           
 
@@ -4955,8 +5679,12 @@ node or, for node types that do not have a name (like
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -4975,8 +5703,12 @@ node or, for node types that do not have a name (like
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -4986,6 +5718,8 @@ node or, for node types that do not have a name (like
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -5011,6 +5745,8 @@ node or, for node types that do not have a name (like
         </returns>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5075,8 +5811,12 @@ node or, for node types that do not have a name (like
 
           
 
+          
+
            is less than 0 or greater than or equal to the <see
            cref="P:System.Xml.XmlTextReader.AttributeCount" />
+
+          
 
           
 
@@ -5091,8 +5831,12 @@ node or, for node types that do not have a name (like
 
               
 
+              
+
                returns zero for all node types except <see
                langword="Attribute" />
+
+              
 
               
 
@@ -5105,6 +5849,8 @@ node or, for node types that do not have a name (like
 
               
 
+              
+
               , <see
                langword="Element" />
 
@@ -5112,8 +5858,12 @@ node or, for node types that do not have a name (like
 
               
 
+              
+
               , and <see
                langword="XmlDeclaration" />
+
+              
 
               
 
@@ -5134,8 +5884,12 @@ node or, for node types that do not have a name (like
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -5145,6 +5899,8 @@ node or, for node types that do not have a name (like
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -5160,6 +5916,8 @@ node or, for node types that do not have a name (like
         </summary>
         <param name="i">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5204,8 +5962,12 @@ node or, for node types that do not have a name (like
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -5215,6 +5977,8 @@ node or, for node types that do not have a name (like
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -5231,6 +5995,8 @@ node or, for node types that do not have a name (like
 
             
 
+            
+
             , <see
              cref="P:System.Xml.XmlTextReader.NamespaceURI" />
 
@@ -5238,8 +6004,12 @@ node or, for node types that do not have a name (like
 
             
 
+            
+
             , and <see
              cref="P:System.Xml.XmlTextReader.Prefix" />
+
+            
 
             
 
@@ -5258,6 +6028,8 @@ node or, for node types that do not have a name (like
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5306,8 +6078,12 @@ node or, for node types that do not have a name (like
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -5317,6 +6093,8 @@ node or, for node types that do not have a name (like
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -5333,6 +6111,8 @@ node or, for node types that do not have a name (like
 
             
 
+            
+
             , <see
              cref="P:System.Xml.XmlTextReader.NamespaceURI" />
 
@@ -5340,8 +6120,12 @@ node or, for node types that do not have a name (like
 
             
 
+            
+
             , and <see
              cref="P:System.Xml.XmlTextReader.Prefix" />
+
+            
 
             
 
@@ -5365,10 +6149,14 @@ node or, for node types that do not have a name (like
 
           
 
+          
+
           The local name of the attribute. </param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -5411,8 +6199,12 @@ node or, for node types that do not have a name (like
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -5422,6 +6214,8 @@ node or, for node types that do not have a name (like
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -5475,8 +6269,12 @@ node or, for node types that do not have a name (like
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -5486,6 +6284,8 @@ node or, for node types that do not have a name (like
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -5538,8 +6338,12 @@ node or, for node types that do not have a name (like
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -5554,12 +6358,16 @@ node or, for node types that do not have a name (like
 
               
 
+              
+
               .</para
             >
           </block>
           <para
             >If the current node is an element node, this method is equivalent to <see
              cref="M:System.Xml.XmlTextReader.MoveToFirstAttribute" />
+
+            
 
             
 
@@ -5607,9 +6415,13 @@ node or, for node types that do not have a name (like
             
 
             
+
+            
 containing the qualified name of the current node or, for node types that do not
 have a name (like <see
              langword="Text" />
+
+            
 
             
 
@@ -5622,9 +6434,13 @@ have a name (like <see
 
             
 
+            
+
              , and so on),
 <see
              cref="F:System.String.Empty" qualify="true" />
+
+            
 
             
 
@@ -5644,8 +6460,12 @@ have a name (like <see
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -5655,6 +6475,8 @@ have a name (like <see
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -5698,8 +6520,12 @@ have a name (like <see
 
             
 
+            
+
              where <see
              langword="true" />
+
+            
 
             
 
@@ -5713,8 +6539,12 @@ have a name (like <see
 
             
 
+            
+
             . The default is <see
              langword="true" />
+
+            
 
             
 
@@ -5732,8 +6562,12 @@ have a name (like <see
 
           
 
+          
+
            was not <see
            cref="F:System.Xml.ReadState.Initial" qualify="true" />
+
+          
 
           
 
@@ -5752,8 +6586,12 @@ have a name (like <see
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -5763,6 +6601,8 @@ have a name (like <see
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -5808,10 +6648,14 @@ have a name (like <see
 
             
 
+            
+
              containing the
    namespace URI of the current node or, if no namespace URI is associated with the
    current node, <see
              cref="F:System.String.Empty" qualify="true" />
+
+            
 
             
 
@@ -5832,8 +6676,12 @@ have a name (like <see
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -5843,6 +6691,8 @@ have a name (like <see
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -5893,6 +6743,8 @@ have a name (like <see
 
             
 
+            
+
              used by the current instance.</para
           >
         </value>
@@ -5907,8 +6759,12 @@ have a name (like <see
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -5918,6 +6774,8 @@ have a name (like <see
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -5934,6 +6792,8 @@ have a name (like <see
 
             
 
+            
+
              are atomized using the NameTable. When the same name is returned multiple times (for example, Customer), then the same String object is returned for that name. This makes it possible for you to write efficient code that does object comparisons on these strings instead of expensive string comparisons.</para
           >
         </remarks>
@@ -5942,6 +6802,8 @@ have a name (like <see
           <para
             >Gets the <see
              cref="T:System.Xml.XmlNameTable" />
+
+            
 
             
 
@@ -5986,6 +6848,8 @@ have a name (like <see
 
             
 
+            
+
              enumeration representing the type of
    the current node.
    </para
@@ -6002,8 +6866,12 @@ have a name (like <see
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -6013,6 +6881,8 @@ have a name (like <see
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -6057,8 +6927,12 @@ have a name (like <see
 
             
 
+            
+
              where <see
              langword="true" />
+
+            
 
             
 
@@ -6072,8 +6946,12 @@ have a name (like <see
 
             
 
+            
+
             . The default is <see
              langword="false" />
+
+            
 
             
 
@@ -6096,8 +6974,12 @@ have a name (like <see
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -6107,6 +6989,8 @@ have a name (like <see
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -6125,8 +7009,12 @@ have a name (like <see
 
               
 
+              
+
                is used to construct an <see
                cref="T:System.Xml.XmlValidatingReader" />
+
+              
 
               
 
@@ -6191,6 +7079,8 @@ have a name (like <see
 
             
 
+            
+
              containing the namespace prefix associated with the current node.
    </para
           >
@@ -6206,8 +7096,12 @@ have a name (like <see
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -6217,6 +7111,8 @@ have a name (like <see
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -6259,8 +7155,12 @@ have a name (like <see
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -6270,6 +7170,8 @@ have a name (like <see
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -6286,6 +7188,8 @@ have a name (like <see
 
             
 
+            
+
              when any DTD content is encountered.</para
           >
           <para
@@ -6296,8 +7200,12 @@ have a name (like <see
 
             
 
+            
+
              to restrict the resources that the <see
              cref="T:System.Xml.XmlTextReader" />
+
+            
 
             
 
@@ -6317,6 +7225,8 @@ have a name (like <see
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -6325,6 +7235,8 @@ have a name (like <see
           <para
             >Gets or sets a value indicating whether to allow DTD processing. This property is obsolete. Use <see
              cref="P:System.Xml.XmlTextReader.DtdProcessing" />
+
+            
 
             
 
@@ -6362,6 +7274,8 @@ have a name (like <see
 
             
 
+            
+
              specifying the quotation mark character (" or ') used to enclose the value of
    an attribute.
    </para
@@ -6378,8 +7292,12 @@ have a name (like <see
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -6389,6 +7307,8 @@ have a name (like <see
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -6438,8 +7358,12 @@ have a name (like <see
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -6449,6 +7373,8 @@ have a name (like <see
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -6503,8 +7429,12 @@ have a name (like <see
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -6519,12 +7449,16 @@ have a name (like <see
 
               
 
+              
+
               .</para
             >
           </block>
           <para
             >Use this method after calling MoveToAttribute to read through the text or entity reference nodes that make up the attribute value. The <see
              cref="P:System.Xml.XmlReader.Depth" />
+
+            
 
             
 
@@ -6581,8 +7515,12 @@ have a name (like <see
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -6598,8 +7536,12 @@ have a name (like <see
 
             
 
+            
+
              &lt; 0, or <paramref
              name="len" />
+
+            
 
             
 
@@ -6615,8 +7557,12 @@ have a name (like <see
 
             
 
+            
+
              &gt; <paramref
              name="array" />
+
+            
 
             
 
@@ -6629,8 +7575,12 @@ have a name (like <see
 
             
 
+            
+
              - <paramref
              name="offset" />
+
+            
 
             
 
@@ -6642,6 +7592,8 @@ have a name (like <see
         <exception cref="T:System.Xml.XmlException">The Base64 sequence is not valid.</exception>
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6660,8 +7612,12 @@ have a name (like <see
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -6676,12 +7632,16 @@ have a name (like <see
 
               
 
+              
+
               .</para
             >
           </block>
           <para
             >Like <see
              cref="M:System.Xml.XmlTextReader.ReadChars(System.Char[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -6705,6 +7665,8 @@ have a name (like <see
 
           
 
+          
+
           The array of characters that serves as the buffer to which the text contents are written. </param
         >
         <param name="offset">
@@ -6714,10 +7676,14 @@ have a name (like <see
 
           
 
+          
+
           The zero-based index into the array specifying where the method can begin to write to the buffer. </param
         >
         <param name="len">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6763,8 +7729,12 @@ have a name (like <see
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -6780,8 +7750,12 @@ have a name (like <see
 
             
 
+            
+
              &lt; 0, or <paramref
              name="len" />
+
+            
 
             
 
@@ -6797,8 +7771,12 @@ have a name (like <see
 
             
 
+            
+
              &gt; <paramref
              name="array" />
+
+            
 
             
 
@@ -6811,8 +7789,12 @@ have a name (like <see
 
             
 
+            
+
              - <paramref
              name="offset" />
+
+            
 
             
 
@@ -6824,6 +7806,8 @@ have a name (like <see
         <exception cref="T:System.Xml.XmlException">The BinHex sequence is not valid.</exception>
         <param name="offset">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6842,8 +7826,12 @@ have a name (like <see
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -6858,12 +7846,16 @@ have a name (like <see
 
               
 
+              
+
               .</para
             >
           </block>
           <para
             >Like <see
              cref="M:System.Xml.XmlTextReader.ReadChars(System.Char[],System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -6887,6 +7879,8 @@ have a name (like <see
 
           
 
+          
+
           The byte array that serves as the buffer to which the decoded binary bytes are written. </param
         >
         <param name="offset">
@@ -6896,10 +7890,14 @@ have a name (like <see
 
           
 
+          
+
           The zero-based index into the array specifying where the method can begin to write to the buffer. </param
         >
         <param name="len">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -6946,8 +7944,12 @@ have a name (like <see
 
             
 
+            
+
              &gt; <paramref
              name="buffer" />
+
+            
 
             
 
@@ -6960,8 +7962,12 @@ have a name (like <see
 
             
 
+            
+
              - <paramref
              name="index" />
+
+            
 
             
 
@@ -6977,8 +7983,12 @@ have a name (like <see
 
           
 
+          
+
            is <see
            langword="null" />
+
+          
 
           
 
@@ -6994,8 +8004,12 @@ have a name (like <see
 
             
 
+            
+
              &lt; 0, or <paramref
              name="count" />
+
+            
 
             
 
@@ -7015,8 +8029,12 @@ have a name (like <see
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -7026,6 +8044,8 @@ have a name (like <see
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -7089,6 +8109,8 @@ have a name (like <see
 
           
 
+          
+
           The array of characters that serves as the buffer to which the text contents are written. </param
         >
         <param name="index">
@@ -7098,8 +8120,12 @@ have a name (like <see
 
           
 
+          
+
           The position within <paramref
            name="buffer" />
+
+          
 
           
 
@@ -7114,8 +8140,12 @@ have a name (like <see
 
           
 
+          
+
           The number of characters to write into <paramref
            name="buffer" />
+
+          
 
           
 
@@ -7161,8 +8191,12 @@ have a name (like <see
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -7172,6 +8206,8 @@ have a name (like <see
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -7190,6 +8226,8 @@ have a name (like <see
 
               
 
+              
+
                method until the method returns the value 0.</para
             >
           </block>
@@ -7198,6 +8236,8 @@ have a name (like <see
             <item>
               <para>
                 <see cref="M:System.Xml.XmlTextReader.ReadContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
+
+                
 
                 
 
@@ -7212,6 +8252,8 @@ have a name (like <see
             <item>
               <para>
                 <see cref="M:System.Xml.XmlTextReader.ReadContentAsBase64(System.Byte[],System.Int32,System.Int32)" />
+
+                
 
                 
 
@@ -7237,6 +8279,8 @@ have a name (like <see
 
           
 
+          
+
           The buffer into which to copy the resulting text. This value cannot be null.</param
         >
         <param name="index">
@@ -7246,10 +8290,14 @@ have a name (like <see
 
           
 
+          
+
           The offset into the buffer where to start copying the result.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7294,8 +8342,12 @@ have a name (like <see
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -7305,6 +8357,8 @@ have a name (like <see
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -7323,6 +8377,8 @@ have a name (like <see
 
               
 
+              
+
                method until the method returns the value 0.</para
             >
           </block>
@@ -7331,6 +8387,8 @@ have a name (like <see
             <item>
               <para>
                 <see cref="M:System.Xml.XmlTextReader.ReadContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
+
+                
 
                 
 
@@ -7345,6 +8403,8 @@ have a name (like <see
             <item>
               <para>
                 <see cref="M:System.Xml.XmlTextReader.ReadContentAsBinHex(System.Byte[],System.Int32,System.Int32)" />
+
+                
 
                 
 
@@ -7370,6 +8430,8 @@ have a name (like <see
 
           
 
+          
+
           The buffer into which to copy the resulting text. This value cannot be null.</param
         >
         <param name="index">
@@ -7379,10 +8441,14 @@ have a name (like <see
 
           
 
+          
+
           The offset into the buffer where to start copying the result.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7427,8 +8493,12 @@ have a name (like <see
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -7438,6 +8508,8 @@ have a name (like <see
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -7456,11 +8528,15 @@ have a name (like <see
 
             
 
+            
+
              method except that it can only be called on element node types.</para
           >
           <para
             >If the <paramref
              name="count" />
+
+            
 
             
 
@@ -7473,6 +8549,8 @@ have a name (like <see
 
             
 
+            
+
              reads all the remaining bytes in the document and returns the number of bytes read. The next <see
              cref="T:System.Xml.XmlTextReader" />
 
@@ -7480,8 +8558,12 @@ have a name (like <see
 
             
 
+            
+
              method call returns a zero and moves the reader to the node following the <see
              cref="F:System.Xml.XmlNodeType.EndElement" />
+
+            
 
             
 
@@ -7497,8 +8579,12 @@ have a name (like <see
 
             
 
+            
+
              before all of the element content is consumed, the reader may behave as if the first content was consumed and then the <see
              cref="M:System.Xml.XmlTextReader.Read" />
+
+            
 
             
 
@@ -7522,6 +8608,8 @@ have a name (like <see
 
           
 
+          
+
           The buffer into which to copy the resulting text. This value cannot be null.</param
         >
         <param name="index">
@@ -7531,10 +8619,14 @@ have a name (like <see
 
           
 
+          
+
           The offset into the buffer where to start copying the result.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7579,8 +8671,12 @@ have a name (like <see
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -7590,6 +8686,8 @@ have a name (like <see
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -7608,11 +8706,15 @@ have a name (like <see
 
             
 
+            
+
              method except that it can only be called on element node types.</para
           >
           <para
             >If the <paramref
              name="count" />
+
+            
 
             
 
@@ -7625,6 +8727,8 @@ have a name (like <see
 
             
 
+            
+
              reads all the remaining bytes in the document and returns the number of bytes read. The next <see
              cref="T:System.Xml.XmlTextReader" />
 
@@ -7632,8 +8736,12 @@ have a name (like <see
 
             
 
+            
+
              method call returns a zero and moves the reader to the node following the <see
              cref="F:System.Xml.XmlNodeType.EndElement" />
+
+            
 
             
 
@@ -7649,8 +8757,12 @@ have a name (like <see
 
             
 
+            
+
              before all of the element content is consumed, the reader may behave as if the first content was consumed and then the <see
              cref="M:System.Xml.XmlTextReader.Read" />
+
+            
 
             
 
@@ -7674,6 +8786,8 @@ have a name (like <see
 
           
 
+          
+
           The buffer into which to copy the resulting text. This value cannot be null.</param
         >
         <param name="index">
@@ -7683,10 +8797,14 @@ have a name (like <see
 
           
 
+          
+
           The offset into the buffer where to start copying the result.</param
         >
         <param name="count">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7729,6 +8847,8 @@ have a name (like <see
 
             
 
+            
+
              enumeration.
    </para
           >
@@ -7744,8 +8864,12 @@ have a name (like <see
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -7755,6 +8879,8 @@ have a name (like <see
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -7805,8 +8931,12 @@ have a name (like <see
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -7816,6 +8946,8 @@ have a name (like <see
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -7867,6 +8999,8 @@ have a name (like <see
 
           
 
+          
+
           .</exception
         >
         <remarks>
@@ -7880,8 +9014,12 @@ have a name (like <see
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -7896,6 +9034,8 @@ have a name (like <see
 
               
 
+              
+
               .</para
             >
           </block>
@@ -7904,6 +9044,8 @@ have a name (like <see
             <para
               >The documents in the stream must share the same encoding. If this is not the case, when ResetState is called an <see
                cref="T:System.Xml.XmlException" />
+
+              
 
               
 
@@ -7976,8 +9118,12 @@ have a name (like <see
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -7987,6 +9133,8 @@ have a name (like <see
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -8003,12 +9151,16 @@ have a name (like <see
 
             
 
+            
+
              is called after calling this method, the entity replacement text is parsed. When the entity replacement text is finished, an EndEntity node is returned to close the entity reference scope.</para
           >
           <block subset="none" type="note">
             <para
               >After calling this method, if the entity is part of an attribute value, you must call <see
                cref="M:System.Xml.XmlTextReader.ReadAttributeValue" />
+
+              
 
               
 
@@ -8048,8 +9200,12 @@ have a name (like <see
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -8059,6 +9215,8 @@ have a name (like <see
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -8078,8 +9236,12 @@ have a name (like <see
 
             
 
+            
+
              object used to create this <see
              cref="T:System.Xml.XmlTextReader" />
+
+            
 
             
 
@@ -8121,8 +9283,12 @@ have a name (like <see
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -8137,6 +9303,8 @@ have a name (like <see
 
               
 
+              
+
               .</para
             >
           </block>
@@ -8144,6 +9312,8 @@ have a name (like <see
           <para
             >If the reader is positioned on a leaf node already (such as the &lt;x&gt; node or the text node abc), calling Skip is the same as calling <see
              cref="M:System.Xml.XmlTextReader.Read" />
+
+            
 
             
 
@@ -8183,8 +9353,12 @@ have a name (like <see
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Xml.IXmlLineInfo" />
+
+            
 
             
 
@@ -8203,6 +9377,8 @@ have a name (like <see
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -8216,8 +9392,12 @@ have a name (like <see
 
             
 
+            
+
              and <see
              cref="P:System.Xml.IXmlLineInfo.LinePosition" />
+
+            
 
             
 
@@ -8263,8 +9443,12 @@ have a name (like <see
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Xml.IXmlNamespaceResolver" />
+
+            
 
             
 
@@ -8283,6 +9467,8 @@ have a name (like <see
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -8291,6 +9477,8 @@ have a name (like <see
           <para
             >An <see
              cref="T:System.Collections.IDictionary" />
+
+            
 
             
 
@@ -8306,8 +9494,12 @@ have a name (like <see
 
           
 
+          
+
           An <see
            cref="T:System.Xml.XmlNamespaceScope" />
+
+          
 
           
 
@@ -8351,6 +9543,8 @@ have a name (like <see
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -8387,6 +9581,8 @@ have a name (like <see
 
             
 
+            
+
              containing the text value of the current node.</para
           >
         </value>
@@ -8401,8 +9597,12 @@ have a name (like <see
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -8412,6 +9612,8 @@ have a name (like <see
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -8461,8 +9663,12 @@ have a name (like <see
 
             
 
+            
+
              enumeration. The default is <see
              cref="F:System.Xml.WhitespaceHandling.All" />
+
+            
 
             
 
@@ -8481,6 +9687,8 @@ space).</para
 
           
 
+          
+
            enumeration.</exception
         >
         <exception cref="T:System.InvalidOperationException"
@@ -8491,8 +9699,12 @@ space).</para
 
           
 
+          
+
            is <see
            cref="F:System.Xml.ReadState.Closed" />
+
+          
 
           
 
@@ -8511,8 +9723,12 @@ space).</para
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -8522,6 +9738,8 @@ space).</para
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -8567,9 +9785,13 @@ space).</para
 
             
 
+            
+
              containing the 
    current <c
             >xml:lang</c>
+
+            
 
             
 
@@ -8589,8 +9811,12 @@ space).</para
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -8600,6 +9826,8 @@ space).</para
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -8651,6 +9879,8 @@ space).</para
 
             
 
+            
+
              to use for resolving DTD references.</para
           >
           <para
@@ -8662,9 +9892,13 @@ space).</para
 
             
 
+            
+
              class with
    default credentials. If this property is set to <see
              langword="null" />
+
+            
 
             
 
@@ -8685,8 +9919,12 @@ space).</para
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -8696,6 +9934,8 @@ space).</para
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 
@@ -8715,6 +9955,8 @@ space).</para
 
             
 
+            
+
              with no user credentials. If authentication is required to access a network resource, use the XmlResolver property to specify an XmlResolver with the necessary credentials.</para
           >
           <para>Semi-trusted code: The XmlResolver property is set to null. External resources are not resolved.</para>
@@ -8724,6 +9966,8 @@ space).</para
           <para
             >Sets the <see
              cref="T:System.Xml.XmlResolver" />
+
+            
 
             
 
@@ -8768,8 +10012,12 @@ space).</para
 
             
 
+            
+
              enumeration. If no <c
             >xml:space</c>
+
+            
 
             
 
@@ -8778,6 +10026,8 @@ space).</para
              scope exists, this property defaults to
 <see
              cref="F:System.Xml.XmlSpace.None" />
+
+            
 
             
 
@@ -8797,8 +10047,12 @@ space).</para
 
               
 
+              
+
                instances using the <see
                cref="Overload:System.Xml.XmlReader.Create" />
+
+              
 
               
 
@@ -8808,6 +10062,8 @@ space).</para
                type="text/html">
                 <a href="441E5AAC-DFA9-41ED-9336-CD541B11C2D1">Creating XML Readers</a>
               </format>
+
+              
 
               
 

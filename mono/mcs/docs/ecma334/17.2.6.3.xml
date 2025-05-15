@@ -8,11 +8,13 @@
 
     
 
+    
+
     ) a base member. The new modifier is permitted on nested type declarations so that hiding can be expressed explicitly. <example
 
       >[Example: The example <code_example
       >
-<![CDATA[
+        <![CDATA[
 using System;  
 class Base   
 {  
@@ -37,6 +39,8 @@ class Test
 }  
 ]]>
       </code_example>
+
+      
 
       
 

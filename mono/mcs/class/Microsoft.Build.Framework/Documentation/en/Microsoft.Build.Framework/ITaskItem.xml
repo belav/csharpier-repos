@@ -26,6 +26,8 @@
 
         
 
+        
+
          objects created during a build may not correspond exactly to items declared in a project file for the following reasons:</para
       >
       <list type="bullet">
@@ -109,6 +111,8 @@
 
                 
 
+                
+
                  property.</para
               >
             </item>
@@ -126,6 +130,8 @@
         </summary>
         <param name="destinationItem">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -164,11 +170,15 @@
 
             
 
+            
+
              metadata.</para
           >
         </returns>
         <param name="metadataName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -196,6 +206,8 @@
           <para
             >The <see
              cref="P:Microsoft.Build.Framework.ITaskItem.ItemSpec" />
+
+            
 
             
 
@@ -280,6 +292,8 @@
 
           
 
+          
+
           The name of the metadata entry to remove.</param
         >
       </Docs>
@@ -314,10 +328,14 @@
 
           
 
+          
+
           The name of the metadata entry.</param
         >
         <param name="metadataValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

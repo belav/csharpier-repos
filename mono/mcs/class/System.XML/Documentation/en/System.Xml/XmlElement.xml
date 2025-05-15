@@ -36,8 +36,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Xml.XmlElement.SetAttribute(System.String,System.String)" />
+
+        
 
         
 
@@ -50,8 +54,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Xml.XmlElement.GetAttributeNode(System.String)" />
+
+        
 
         
 
@@ -64,8 +72,12 @@
 
         
 
+        
+
          property which returns an <see
          cref="T:System.Xml.XmlAttributeCollection" />
+
+        
 
         
 
@@ -112,8 +124,12 @@
 
             
 
+            
+
              directly; instead, use methods such as <see
              cref="Overload:System.Xml.XmlDocument.CreateElement" />
+
+            
 
             
 
@@ -132,6 +148,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -142,8 +160,12 @@
 
           
 
+          
+
           The namespace prefix; see the <see
            cref="P:System.Xml.XmlElement.Prefix" />
+
+          
 
           
 
@@ -158,8 +180,12 @@
 
           
 
+          
+
           The local name; see the <see
            cref="P:System.Xml.XmlElement.LocalName" />
+
+          
 
           
 
@@ -174,8 +200,12 @@
 
           
 
+          
+
           The namespace URI; see the <see
            cref="P:System.Xml.XmlElement.NamespaceURI" />
+
+          
 
           
 
@@ -185,6 +215,8 @@
         >
         <param name="doc">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -220,6 +252,8 @@
           <para
             >Gets an <see
              cref="T:System.Xml.XmlAttributeCollection" />
+
+            
 
             
 
@@ -262,6 +296,8 @@
 
             
 
+            
+
              returns null).</para
           >
         </remarks>
@@ -275,6 +311,8 @@
         </returns>
         <param name="deep">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -314,6 +352,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -362,10 +402,14 @@
 
           
 
+          
+
           The local name of the attribute to retrieve. </param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -413,6 +457,8 @@
 
           
 
+          
+
           The name of the attribute to retrieve. This is a qualified name. It is matched against the Name property of the matching node. </param
         >
       </Docs>
@@ -451,6 +497,8 @@
 
             
 
+            
+
              with the specified local name and namespace URI.</para
           >
         </summary>
@@ -465,10 +513,14 @@
 
           
 
+          
+
           The local name of the attribute. </param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -510,12 +562,16 @@
 
             
 
+            
+
              tree.</para
           >
           <block subset="none" type="note">
             <para
               >It is recommended that you use the <see
                cref="Overload:System.Xml.XmlNode.SelectNodes" />
+
+              
 
               
 
@@ -528,8 +584,12 @@
 
               
 
+              
+
                method instead of the <see
                cref="M:System.Xml.XmlElement.GetElementsByTagName(System.String)" />
+
+              
 
               
 
@@ -549,8 +609,12 @@
 
             
 
+            
+
              containing a list of all descendant elements that match the specified <see
              cref="P:System.Xml.XmlElement.Name" />
+
+            
 
             
 
@@ -569,11 +633,15 @@
 
             
 
+            
+
              containing a list of all matching nodes. The list is empty if there are no matching nodes.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -618,6 +686,8 @@
 
               
 
+              
+
                or <see
                cref="Overload:System.Xml.XmlNode.SelectSingleNode" />
 
@@ -625,8 +695,12 @@
 
               
 
+              
+
                method instead of the <see
                cref="M:System.Xml.XmlElement.GetElementsByTagName(System.String,System.String)" />
+
+              
 
               
 
@@ -646,6 +720,8 @@
 
             
 
+            
+
              containing a list of all descendant elements that match the specified <see
              cref="P:System.Xml.XmlElement.LocalName" />
 
@@ -653,8 +729,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Xml.XmlElement.NamespaceURI" />
+
+            
 
             
 
@@ -673,6 +753,8 @@
 
             
 
+            
+
              containing a list of all matching nodes. The list is empty if there are no matching nodes.</para
           >
         </returns>
@@ -683,10 +765,14 @@
 
           
 
+          
+
           The local name to match. The asterisk (*) is a special value that matches all tags. </param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -726,6 +812,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -774,10 +862,14 @@
 
           
 
+          
+
           The local name of the attribute to find. </param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -910,6 +1002,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -995,6 +1089,8 @@
 
             
 
+            
+
              immediately following this element.</para
           >
         </summary>
@@ -1061,6 +1157,8 @@
 
             
 
+            
+
              to which this node belongs.</para
           >
         </summary>
@@ -1110,6 +1208,8 @@
           <para
             >Setting this property changes the <see
              cref="P:System.Xml.XmlElement.Name" />
+
+            
 
             
 
@@ -1209,6 +1309,8 @@
 
           
 
+          
+
           The name of the attribute to remove.This is a qualified name. It is matched against the Name property of the matching node. </param
         >
       </Docs>
@@ -1251,10 +1353,14 @@
 
           
 
+          
+
           The local name of the attribute to remove. </param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1305,6 +1411,8 @@
 
           
 
+          
+
           The index of the node to remove. The first node has index 0. </param
         >
       </Docs>
@@ -1342,6 +1450,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1355,11 +1465,15 @@
 
             
 
+            
+
              is not an attribute node of the XmlElement.</para
           >
         </returns>
         <param name="oldAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1403,6 +1517,8 @@
 
             
 
+            
+
              specified by the local name and namespace URI. (If the removed attribute has a default value, it is immediately replaced).</para
           >
         </summary>
@@ -1417,10 +1533,14 @@
 
           
 
+          
+
           The local name of the attribute. </param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1455,6 +1575,8 @@
           <para
             >The <see
              cref="P:System.Xml.XmlElement.SchemaInfo" />
+
+            
 
             
 
@@ -1502,8 +1624,12 @@
 
             
 
+            
+
             . <paramref
              name="value" />
+
+            
 
             
 
@@ -1516,8 +1642,12 @@
 
             
 
+            
+
              node plus any <see
              cref="T:System.Xml.XmlText" />
+
+            
 
             
 
@@ -1530,8 +1660,12 @@
 
             
 
+            
+
              nodes, build the appropriate subtree and use <see
              cref="M:System.Xml.XmlElement.SetAttributeNode(System.Xml.XmlAttribute)" />
+
+            
 
             
 
@@ -1551,10 +1685,14 @@
 
           
 
+          
+
           The name of the attribute to create or alter. This is a qualified name. If the name contains a colon it is parsed into prefix and local name components. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1604,6 +1742,8 @@
 
           
 
+          
+
           The local name of the attribute. </param
         >
         <param name="namespaceURI">
@@ -1613,10 +1753,14 @@
 
           
 
+          
+
           The namespace URI of the attribute. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1662,6 +1806,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1671,6 +1817,8 @@
         </returns>
         <param name="newAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1713,8 +1861,12 @@
 
             
 
+            
+
              to assign a text value to the attribute or use <see
              cref="M:System.Xml.XmlNode.AppendChild(System.Xml.XmlNode)" />
+
+            
 
             
 
@@ -1728,6 +1880,8 @@
           <para
             >Adds the specified <see
              cref="T:System.Xml.XmlAttribute" />
+
+            
 
             
 
@@ -1747,10 +1901,14 @@
 
           
 
+          
+
           The local name of the attribute. </param
         >
         <param name="namespaceURI">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1820,11 +1978,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="w">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1870,11 +2032,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="w">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

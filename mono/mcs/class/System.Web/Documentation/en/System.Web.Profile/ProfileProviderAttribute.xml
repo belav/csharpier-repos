@@ -26,8 +26,12 @@
 
         
 
+        
+
          class is used to identify the profile provider for a property of a custom profile implementation. A custom profile implementation is a class that inherits from the <see
          cref="T:System.Web.Profile.ProfileBase" />
+
+        
 
         
 
@@ -42,10 +46,14 @@
 
         
 
+        
+
          configuration element. You can specify a custom type for the user profile using the inherits attribute of the <format
          type="text/html">
           <a href="ccb9bf3a-a044-464d-b89b-5cb5a3d389dd">profile</a>
         </format>
+
+        
 
         
 
@@ -119,8 +127,12 @@
 
             
 
+            
+
              class is used to identify the profile provider for a property of a custom profile implementation. A custom profile implementation is a class that inherits from the <see
              cref="T:System.Web.Profile.ProfileBase" />
+
+            
 
             
 
@@ -130,6 +142,8 @@
              type="text/html">
               <a href="ccb9bf3a-a044-464d-b89b-5cb5a3d389dd">profile</a>
             </format>
+
+            
 
             
 
@@ -148,11 +162,15 @@
 
             
 
+            
+
              class with the specified profile provider name.</para
           >
         </summary>
         <param name="providerName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

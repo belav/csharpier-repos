@@ -23,8 +23,12 @@
 
         
 
+        
+
          object has width. The center point of this pen width is aligned relative to the line being drawn depending on the alignment value. A <see
          cref="T:System.Drawing.Pen" />
+
+        
 
         
 
@@ -38,6 +42,8 @@
       <para
         >Specifies the alignment of a <see
          cref="T:System.Drawing.Pen" />
+
+        
 
         
 
@@ -62,6 +68,8 @@
           <para
             >Specifies that the <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -95,6 +103,8 @@
 
             
 
+            
+
              is positioned on the inside of the theoretical line.</para
           >
         </summary>
@@ -118,6 +128,8 @@
           <para
             >Specifies the <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 
@@ -151,6 +163,8 @@
 
             
 
+            
+
              is positioned on the outside of the theoretical line.</para
           >
         </summary>
@@ -174,6 +188,8 @@
           <para
             >Specifies the <see
              cref="T:System.Drawing.Pen" />
+
+            
 
             
 

@@ -59,11 +59,15 @@
 
             
 
+            
+
              method. At this point, the proxy-creator object creates a new instance of the proxy object that refers back to the original actual object, perhaps on a remote computer. Finally, the proxy-creator object is discarded and reclaimed later by garbage collection.</para
           >
           <para
             >For example, consider how <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -76,8 +80,12 @@
 
             
 
+            
+
              object, the system transmits a holder object with the name of the type object and information on the assembly where it is found in an object implementing <see
              cref="T:System.Runtime.Serialization.IObjectReference" />
+
+            
 
             
 
@@ -90,8 +98,12 @@
 
             
 
+            
+
              on the holder object that has been transmitted. This holder returns the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -107,6 +119,8 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Security.Permissions.SecurityPermission" />
 
@@ -114,8 +128,12 @@
 
             
 
+            
+
              with the <see
              cref="F:System.Security.Permissions.SecurityPermissionFlag.SerializationFormatter" />
+
+            
 
             
 
@@ -139,8 +157,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 

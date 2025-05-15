@@ -27,6 +27,8 @@
 
         
 
+        
+
          in that <see
          cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException" />
 
@@ -34,8 +36,12 @@
 
         
 
+        
+
          represents a failure to bind in the sense of a usual compiler error, whereas <see
          cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderInternalCompilerException" />
+
+        
 
         
 
@@ -72,11 +78,15 @@
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "DefaultMessageDisplayedByParameterlessCtorWriterMustSupply" This message takes into account the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.InsufficientMemoryException" />
+
+            
 
             
 
@@ -127,6 +137,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -151,6 +163,8 @@
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException" />
+
+            
 
             
 
@@ -194,6 +208,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -210,11 +226,15 @@
 
             
 
+            
+
              class that has a specified error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -256,6 +276,8 @@
 
             
 
+            
+
              class that has serialized data.</para
           >
         </summary>
@@ -266,10 +288,14 @@
 
           
 
+          
+
           The object that holds the serialized object data about the exception being thrown.. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -307,8 +333,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -321,11 +351,15 @@
 
             
 
+            
+
              property does not supply the inner exception value to the constructor.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:Microsoft.CSharp.RuntimeBinder.RuntimeBinderException" />
+
+            
 
             
 
@@ -369,6 +403,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -385,6 +421,8 @@
 
             
 
+            
+
              class that has a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
@@ -395,10 +433,14 @@
 
           
 
+          
+
           The error message that explains the reason for the exception.</param
         >
         <param name="innerException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

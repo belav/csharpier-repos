@@ -23,8 +23,12 @@
 
         
 
+        
+
          class is used as a basic structure to store three related objects. It is a utility class that is used in various ways throughout ASP.NET. You can use the <see
          cref="T:System.Web.UI.Triplet" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          class does not encapsulate its object references, <see
          cref="F:System.Web.UI.Triplet.First" />
+
+        
 
         
 
@@ -51,8 +59,12 @@
 
         
 
+        
+
         , and <see
          cref="F:System.Web.UI.Triplet.Third" />
+
+        
 
         
 
@@ -79,6 +91,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.Triplet" />
+
+            
 
             
 
@@ -113,6 +127,8 @@
 
             
 
+            
+
              class and sets the first two objects. </para
           >
         </summary>
@@ -123,8 +139,12 @@
 
           
 
+          
+
           Object assigned to <see
            cref="F:System.Web.UI.Triplet.First" />
+
+          
 
           
 
@@ -139,8 +159,12 @@
 
           
 
+          
+
           Object assigned to <see
            cref="F:System.Web.UI.Triplet.Second" />
+
+          
 
           
 
@@ -175,6 +199,8 @@
 
             
 
+            
+
              class with the provided three objects. </para
           >
         </summary>
@@ -185,8 +211,12 @@
 
           
 
+          
+
           Object assigned to <see
            cref="F:System.Web.UI.Triplet.First" />
+
+          
 
           
 
@@ -201,8 +231,12 @@
 
           
 
+          
+
           Object assigned to <see
            cref="F:System.Web.UI.Triplet.Second" />
+
+          
 
           
 
@@ -217,8 +251,12 @@
 
           
 
+          
+
           Object assigned to <see
            cref="F:System.Web.UI.Triplet.Third" />
+
+          
 
           
 

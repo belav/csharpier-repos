@@ -29,8 +29,12 @@
 
         
 
+        
+
          object, you typically bind a control's property to a parameter by setting both the <see
          cref="P:System.Web.UI.WebControls.ControlParameter.ControlID" />
+
+        
 
         
 
@@ -43,8 +47,12 @@
 
         
 
+        
+
          properties. If the <see
          cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
+
+        
 
         
 
@@ -57,8 +65,12 @@
 
         
 
+        
+
          attribute is applied to a control to specify its default property that a <see
          cref="T:System.Web.UI.WebControls.ControlParameter" />
+
+        
 
         
 
@@ -76,6 +88,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -86,8 +100,12 @@
 
         
 
+        
+
          class, see the <see
          cref="Overload:System.Web.UI.ControlValuePropertyAttribute.#ctor" />
+
+        
 
         
 
@@ -101,6 +119,8 @@
       <para
         >Specifies the default property of a control that a <see
          cref="T:System.Web.UI.WebControls.ControlParameter" />
+
+        
 
         
 
@@ -133,8 +153,12 @@
 
             
 
+            
+
              class using the specified property name. The following table shows the initial property value for an instance of the <see
              cref="T:System.Web.UI.ControlValuePropertyAttribute" />
+
+            
 
             
 
@@ -168,6 +192,8 @@
 
                   
 
+                  
+
                    parameter.</para
                 >
               </description>
@@ -179,6 +205,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.ControlValuePropertyAttribute" />
+
+            
 
             
 
@@ -216,8 +244,12 @@
 
             
 
+            
+
              class using the specified property name and default value. The following table shows initial property values for an instance of the <see
              cref="T:System.Web.UI.ControlValuePropertyAttribute" />
+
+            
 
             
 
@@ -251,6 +283,8 @@
 
                   
 
+                  
+
                    parameter.</para
                 >
               </description>
@@ -270,6 +304,8 @@
 
                   
 
+                  
+
                    parameter.</para
                 >
               </description>
@@ -281,6 +317,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.ControlValuePropertyAttribute" />
+
+            
 
             
 
@@ -319,8 +357,12 @@
 
             
 
+            
+
              class using the specified property name and default value. This version of the constructor also attempts to convert the default value to the data type specified by the <paramref
              name="type" />
+
+            
 
             
 
@@ -333,8 +375,12 @@
 
             
 
+            
+
              property is not set. The following table shows initial property values for an instance of the <see
              cref="T:System.Web.UI.ControlValuePropertyAttribute" />
+
+            
 
             
 
@@ -368,6 +414,8 @@
 
                   
 
+                  
+
                    parameter.</para
                 >
               </description>
@@ -387,8 +435,12 @@
 
                   
 
+                  
+
                    parameter, if the value can be converted to the data type specified by the <paramref
                    name="type" />
+
+                  
 
                   
 
@@ -410,6 +462,8 @@
 
             
 
+            
+
              class using the specified property name and default value. The default value is also converted to the specified data type.</para
           >
         </summary>
@@ -420,8 +474,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -453,8 +511,12 @@
 
             
 
+            
+
              property is not set, use the <see
              cref="P:System.Web.UI.ControlValuePropertyAttribute.DefaultValue" />
+
+            
 
             
 
@@ -493,8 +555,12 @@
 
             
 
+            
+
              method to determine whether the current instance of the <see
              cref="T:System.Web.UI.ControlValuePropertyAttribute" />
+
+            
 
             
 
@@ -512,8 +578,12 @@
 
                 
 
+                
+
                  parameter must be a <see
                  cref="T:System.Web.UI.ControlValuePropertyAttribute" />
+
+                
 
                 
 
@@ -531,8 +601,12 @@
 
                 
 
+                
+
                  and <see
                  cref="P:System.Web.UI.ControlValuePropertyAttribute.DefaultValue" />
+
+                
 
                 
 
@@ -556,6 +630,8 @@
 
             
 
+            
+
              object is equal to the specified object.</para
           >
         </summary>
@@ -569,8 +645,12 @@
 
             
 
+            
+
              parameter is equal to the current instance of <see
              cref="T:System.Web.UI.ControlValuePropertyAttribute" />
+
+            
 
             
 
@@ -586,8 +666,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -642,8 +726,12 @@
 
             
 
+            
+
              object is defined without its <see
              cref="P:System.Web.UI.WebControls.ControlParameter.PropertyName" />
+
+            
 
             
 
@@ -656,8 +744,12 @@
 
             
 
+            
+
              property to determine the default property that is bound to the <see
              cref="T:System.Web.UI.WebControls.ControlParameter" />
+
+            
 
             
 

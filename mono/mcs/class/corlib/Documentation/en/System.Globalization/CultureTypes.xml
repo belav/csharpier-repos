@@ -35,6 +35,8 @@
 
         
 
+        
+
          property, and also serve as a filter that limits the cultures returned by the <see
          cref="M:System.Globalization.CultureInfo.GetCultures(System.Globalization.CultureTypes)" />
 
@@ -42,8 +44,12 @@
 
         
 
+        
+
          method. For more information on cultures, see <see
          cref="T:System.Globalization.CultureInfo" />
+
+        
 
         
 
@@ -59,6 +65,8 @@
 
         
 
+        
+
          value. This allows enumeration of custom cultures, as well as the other culture types.</para
       >
       <para
@@ -69,8 +77,12 @@
 
         
 
+        
+
          and <see
          cref="F:System.Globalization.CultureTypes.WindowsOnlyCultures" />
+
+        
 
         
 
@@ -84,6 +96,8 @@
       <para
         >Defines the types of culture lists that can be retrieved using the <see
          cref="M:System.Globalization.CultureInfo.GetCultures(System.Globalization.CultureTypes)" />
+
+        
 
         
 
@@ -149,6 +163,8 @@
 
             
 
+            
+
               returns neutral and specific cultures shipped with the previous .NET Framework.</para
           >
         </summary>
@@ -201,6 +217,8 @@
           <para
             >The invariant culture is included in the array of cultures returned by the <see
              cref="M:System.Globalization.CultureInfo.GetCultures(System.Globalization.CultureTypes)" />
+
+            
 
             
 

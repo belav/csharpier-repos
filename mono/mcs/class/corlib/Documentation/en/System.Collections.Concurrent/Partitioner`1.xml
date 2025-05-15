@@ -33,6 +33,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -89,8 +91,12 @@
 
             
 
+            
+
             interface. Calling <see
              cref="M:System.Collections.Generic.IEnumerable`1.GetEnumerator" />
+
+            
 
             
 
@@ -106,8 +112,12 @@
 
             
 
+            
+
              method is only supported if the <see
              cref="P:System.Collections.Concurrent.Partitioner`1.SupportsDynamicPartitions" />
+
+            
 
             
 
@@ -119,6 +129,8 @@
                 >Custom Partitioners for PLINQ and TPL</a
               >
             </format>
+
+            
 
             
 
@@ -167,12 +179,16 @@
 
             
 
+            
+
             . If a partition contains no elements, then return an empty enumerator rather than null (Nothing in Visual Basic). For more information, see <format
              type="text/html">
               <a href="96153688-9a01-47c4-8430-909cee9a2887"
                 >Custom Partitioners for PLINQ and TPL</a
               >
             </format>
+
+            
 
             
 
@@ -195,11 +211,15 @@
 
             
 
+            
+
              enumerators.</para
           >
         </returns>
         <param name="partitionCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -234,8 +254,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Collections.Concurrent.Partitioner`1.SupportsDynamicPartitions" />
+
+            
 
             
 
@@ -248,12 +272,16 @@
 
             
 
+            
+
              should not vary over the lifetime of this instance. For more information, see <format
              type="text/html">
               <a href="96153688-9a01-47c4-8430-909cee9a2887"
                 >Custom Partitioners for PLINQ and TPL</a
               >
             </format>
+
+            
 
             
 

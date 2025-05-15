@@ -43,6 +43,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -69,11 +71,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -107,8 +113,12 @@
 
             
 
+            
+
              parameter, you can pass any string information that is descriptive to the error condition; there are no checks on file or path. The <see
              cref="P:System.Web.HttpCompileException.SourceCode" />
+
+            
 
             
 
@@ -121,8 +131,12 @@
 
             
 
+            
+
              parameter, the <see
              cref="P:System.Web.HttpCompileException.SourceCode" />
+
+            
 
             
 
@@ -141,11 +155,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="results">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -158,10 +176,14 @@
 
           
 
+          
+
            containing compiler output and error information. </param
         >
         <param name="sourceCode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -196,11 +218,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -215,8 +241,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If <paramref
            name="innerException" />
+
+          
 
           
 
@@ -254,6 +284,8 @@
 
             
 
+            
+
              object with information about the exception.</para
           >
         </summary>
@@ -264,8 +296,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -280,8 +316,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 

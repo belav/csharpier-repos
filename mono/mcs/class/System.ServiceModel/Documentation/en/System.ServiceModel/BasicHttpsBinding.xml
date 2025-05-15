@@ -47,6 +47,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -80,6 +82,8 @@
 
             
 
+            
+
              class with the specified type of security mode.</para
           >
         </summary>
@@ -90,8 +94,12 @@
 
           
 
+          
+
           The value of <see
            cref="T:System.ServiceModel.BasicHttpsSecurityMode" />
+
+          
 
           
 
@@ -126,11 +134,15 @@
 
             
 
+            
+
              class with the specified type of configuration name.</para
           >
         </summary>
         <param name="configurationName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -32,8 +32,12 @@
 
         
 
+        
+
          class directly. Instead, this class is inherited by other classes, such as the <see
          cref="T:System.Web.UI.HtmlControls.HtmlInputText" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Web.UI.HtmlControls.HtmlInputRadioButton" />
+
+        
 
         
 
@@ -60,8 +68,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Web.UI.HtmlControls.HtmlInputImage" />
+
+        
 
         
 
@@ -74,8 +86,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Web.UI.HtmlControls.HtmlInputFile" />
+
+        
 
         
 
@@ -91,8 +107,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.HtmlControls.HtmlInputControl.#ctor(System.String)" />
+
+        
 
         
 
@@ -125,6 +145,8 @@
 
             
 
+            
+
              class using the specified input control.</para
           >
           <block subset="none" type="note">
@@ -133,6 +155,8 @@
           <para
             >The following table shows the initial property value for an instance of <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputControl" />
+
+            
 
             
 
@@ -166,6 +190,8 @@
 
                   
 
+                  
+
                    parameter. </para
                 >
               </description>
@@ -174,6 +200,8 @@
           <para
             >The following table shows the different possible values for <paramref
              name="type" />
+
+            
 
             
 
@@ -218,8 +246,7 @@
             </item>
             <item>
               <term>
-                <para
->radio </para>
+                <para>radio </para>
               </term>
               <description>
                 <para>A radio button that indicates a selection from a mutually exclusive group of radio buttons. </para>
@@ -243,8 +270,7 @@
             </item>
             <item>
               <term>
-                <para
->reset </para>
+                <para>reset </para>
               </term>
               <description>
                 <para>A button that clears the form. </para>
@@ -286,11 +312,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -323,6 +353,8 @@
 
             
 
+            
+
              property to determine the unique identifier name for an <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputControl" />
 
@@ -330,8 +362,12 @@
 
             
 
+            
+
             . In this implementation, the get accessor returns the value of the <see
              cref="P:System.Web.UI.Control.UniqueID" />
+
+            
 
             
 
@@ -348,8 +384,12 @@
 
               
 
+              
+
                property must have the same value as the <see
                cref="P:System.Web.UI.Control.UniqueID" />
+
+              
 
               
 
@@ -366,6 +406,8 @@
 
             
 
+            
+
              class can override this implementation, if necessary.</para
           >
         </remarks>
@@ -374,6 +416,8 @@
           <para
             >Gets or sets the unique identifier name for the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputControl" />
+
+            
 
             
 
@@ -419,8 +463,12 @@
 
             
 
+            
+
              method renders a <paramref
              name="name" />
+
+            
 
             
 
@@ -433,8 +481,12 @@
 
             
 
+            
+
              attribute before calling the base class's <see
              cref="M:System.Web.UI.HtmlControls.HtmlControl.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
+
+            
 
             
 
@@ -453,8 +505,12 @@
 
             
 
+            
+
              control to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -470,8 +526,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -503,11 +563,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The following table shows the different possible values for the <see
              cref="P:System.Web.UI.HtmlControls.HtmlInputControl.Type" />
+
+            
 
             
 
@@ -552,8 +616,7 @@
             </item>
             <item>
               <term>
-                <para
->radio </para>
+                <para>radio </para>
               </term>
               <description>
                 <para>A radio button that indicates a selection from a mutually exclusive group of radio buttons. </para>
@@ -577,8 +640,7 @@
             </item>
             <item>
               <term>
-                <para
->reset </para>
+                <para>reset </para>
               </term>
               <description>
                 <para>A button that clears the form. </para>
@@ -620,6 +682,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -656,8 +720,12 @@
 
             
 
+            
+
              control. The <see
              cref="P:System.Web.UI.HtmlControls.HtmlInputControl.Value" />
+
+            
 
             
 
@@ -671,6 +739,8 @@
           <para
             >Gets or sets the value associated with the <see
              cref="T:System.Web.UI.HtmlControls.HtmlInputControl" />
+
+            
 
             
 

@@ -41,6 +41,8 @@
 
         
 
+        
+
          configuration element, which are used to specify modules registered to create requests made with the <see
          cref="T:System.Net.WebRequest" />
 
@@ -48,8 +50,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Net.WebClient" />
+
+        
 
         
 
@@ -87,6 +93,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.Configuration.WebRequestModuleElementCollection" />
+
+            
 
             
 
@@ -131,8 +139,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.Configuration.WebRequestModuleElement" />
+
+          
 
           
 
@@ -201,6 +213,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -243,6 +257,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -253,8 +269,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.Configuration.WebRequestModuleElement" />
+
+          
 
           
 
@@ -301,6 +321,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -311,8 +333,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Net.Configuration.WebRequestModuleElement" />
+
+          
 
           
 
@@ -422,8 +448,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.Configuration.WebRequestModuleElement" />
+
+          
 
           
 
@@ -464,6 +494,8 @@
 
           
 
+          
+
           The key of the element to remove.</param
         >
       </Docs>
@@ -494,6 +526,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

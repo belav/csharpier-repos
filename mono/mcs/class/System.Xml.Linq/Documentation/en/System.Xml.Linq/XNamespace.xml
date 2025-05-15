@@ -25,8 +25,12 @@
 
         
 
+        
+
          contains an <see
          cref="T:System.Xml.Linq.XNamespace" />
+
+        
 
         
 
@@ -39,6 +43,8 @@
 
         
 
+        
+
          still contains a namespace, <see
          cref="P:System.Xml.Linq.XNamespace.None" />
 
@@ -46,8 +52,12 @@
 
         
 
+        
+
         . The <see
          cref="P:System.Xml.Linq.XName.Namespace" />
+
+        
 
         
 
@@ -61,6 +71,8 @@
       <para
         >The most common way to create an <see
          cref="T:System.Xml.Linq.XNamespace" />
+
+        
 
         
 
@@ -94,8 +106,12 @@ End Module</code>
 
         
 
+        
+
          uses the implicit conversion from <see
          cref="T:System.String" />
+
+        
 
         
 
@@ -115,6 +131,8 @@ End Module</code>
 
         
 
+        
+
          for more information and examples.</para
       >
       <para
@@ -129,6 +147,8 @@ End Module</code>
 
         
 
+        
+
          for more information on using namespaces in vbprvb.</para
       >
       <format type="text/html">
@@ -137,6 +157,8 @@ End Module</code>
       <para
         >If you create an attribute that declares a namespace, the prefix specified in the attribute will be persisted in the serialized XML. To create an attribute that declares a namespace with a prefix, you create an attribute where the namespace of the name of the attribute is <see
          cref="P:System.Xml.Linq.XNamespace.Xmlns" />
+
+        
 
         
 
@@ -173,6 +195,8 @@ End Module</code>
             >How to: Control Namespace Prefixes (C#) (LINQ to XML)</a
           >
         </format>
+
+        
 
         
 
@@ -223,8 +247,12 @@ End Module</code>
 
         
 
+        
+
          objects are guaranteed to be atomized; that is, if two <see
          cref="T:System.Xml.Linq.XNamespace" />
+
+        
 
         
 
@@ -283,6 +311,8 @@ Console.WriteLine(e)</code>
 
             
 
+            
+
              objects to be equal, they must have the same URI.</para
           >
         </remarks>
@@ -296,8 +326,12 @@ Console.WriteLine(e)</code>
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Xml.Linq.XNamespace" />
+
+            
 
             
 
@@ -316,6 +350,8 @@ Console.WriteLine(e)</code>
 
             
 
+            
+
              that indicates whether the specified <see
              cref="T:System.Xml.Linq.XNamespace" />
 
@@ -323,8 +359,12 @@ Console.WriteLine(e)</code>
 
             
 
+            
+
              is equal to the current <see
              cref="T:System.Xml.Linq.XNamespace" />
+
+            
 
             
 
@@ -340,6 +380,8 @@ Console.WriteLine(e)</code>
 
           
 
+          
+
           The <see
            cref="T:System.Xml.Linq.XNamespace" />
 
@@ -347,8 +389,12 @@ Console.WriteLine(e)</code>
 
           
 
+          
+
            to compare to the current <see
            cref="T:System.Xml.Linq.XNamespace" />
+
+          
 
           
 
@@ -388,6 +434,8 @@ Console.WriteLine(e)</code>
 
             
 
+            
+
              object is guaranteed to be atomic (that is, it is the only one in the system for that particular URI).</para
           >
         </remarks>
@@ -396,6 +444,8 @@ Console.WriteLine(e)</code>
           <para
             >Gets an <see
              cref="T:System.Xml.Linq.XNamespace" />
+
+            
 
             
 
@@ -414,6 +464,8 @@ Console.WriteLine(e)</code>
 
             
 
+            
+
              created from the specified URI.</para
           >
         </returns>
@@ -424,8 +476,12 @@ Console.WriteLine(e)</code>
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -460,8 +516,12 @@ Console.WriteLine(e)</code>
 
             
 
+            
+
             . You can use <see
              cref="M:System.Xml.Linq.XNamespace.GetHashCode" />
+
+            
 
             
 
@@ -480,6 +540,8 @@ Console.WriteLine(e)</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -493,8 +555,12 @@ Console.WriteLine(e)</code>
 
             
 
+            
+
              that contains the hash code for the <see
              cref="T:System.Xml.Linq.XNamespace" />
+
+            
 
             
 
@@ -535,6 +601,8 @@ Console.WriteLine(e)</code>
 
             
 
+            
+
              object is guaranteed to be atomic (that is, it is the only one in the system for a specific expanded name).</para
           >
         </remarks>
@@ -548,8 +616,12 @@ Console.WriteLine(e)</code>
 
             
 
+            
+
              object created from this <see
              cref="T:System.Xml.Linq.XNamespace" />
+
+            
 
             
 
@@ -568,8 +640,12 @@ Console.WriteLine(e)</code>
 
             
 
+            
+
              created from this <see
              cref="T:System.Xml.Linq.XNamespace" />
+
+            
 
             
 
@@ -585,8 +661,12 @@ Console.WriteLine(e)</code>
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -644,6 +724,8 @@ Console.WriteLine(e)</code>
 
             
 
+            
+
              object that corresponds to no namespace.</para
           >
         </summary>
@@ -684,8 +766,12 @@ Console.WriteLine(e)</code>
 
             
 
+            
+
              object with a local name to create an <see
              cref="T:System.Xml.Linq.XName" />
+
+            
 
             
 
@@ -704,6 +790,8 @@ Console.WriteLine(e)</code>
 
             
 
+            
+
              constructed from the namespace and local name.</para
           >
         </returns>
@@ -714,8 +802,12 @@ Console.WriteLine(e)</code>
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Linq.XNamespace" />
+
+          
 
           
 
@@ -730,8 +822,12 @@ Console.WriteLine(e)</code>
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -772,8 +868,12 @@ Console.WriteLine(e)</code>
 
             
 
+            
+
              and string (for example, element.Name.Namespace == "http://www.adventure-works.com"). The predefined reference equality operators in C# require one operand to be convertible to the type of the other through reference conversions only, and do not consider the implicit conversion from string to <see
              cref="T:System.Xml.Linq.XNamespace" />
+
+            
 
             
 
@@ -792,6 +892,8 @@ Console.WriteLine(e)</code>
 
             
 
+            
+
              are equal.</para
           >
         </summary>
@@ -805,6 +907,8 @@ Console.WriteLine(e)</code>
 
             
 
+            
+
              that indicates whether <paramref
              name="left" />
 
@@ -812,8 +916,12 @@ Console.WriteLine(e)</code>
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -829,8 +937,12 @@ Console.WriteLine(e)</code>
 
           
 
+          
+
           The first <see
            cref="T:System.Xml.Linq.XNamespace" />
+
+          
 
           
 
@@ -845,8 +957,12 @@ Console.WriteLine(e)</code>
 
           
 
+          
+
           The second <see
            cref="T:System.Xml.Linq.XNamespace" />
+
+          
 
           
 
@@ -918,8 +1034,12 @@ Console.WriteLine(e)</code>
 
             
 
+            
+
              and string (for example, element.Name.Namespace == "http://www.adventure-works.com"). The predefined reference equality operators in C# require one operand to be convertible to the type of the other through reference conversions only, and do not consider the implicit conversion from string to <see
              cref="T:System.Xml.Linq.XNamespace" />
+
+            
 
             
 
@@ -938,6 +1058,8 @@ Console.WriteLine(e)</code>
 
             
 
+            
+
              are not equal.</para
           >
         </summary>
@@ -951,6 +1073,8 @@ Console.WriteLine(e)</code>
 
             
 
+            
+
              that indicates whether <paramref
              name="left" />
 
@@ -958,8 +1082,12 @@ Console.WriteLine(e)</code>
 
             
 
+            
+
              and <paramref
              name="right" />
+
+            
 
             
 
@@ -975,8 +1103,12 @@ Console.WriteLine(e)</code>
 
           
 
+          
+
           The first <see
            cref="T:System.Xml.Linq.XNamespace" />
+
+          
 
           
 
@@ -991,8 +1123,12 @@ Console.WriteLine(e)</code>
 
           
 
+          
+
           The second <see
            cref="T:System.Xml.Linq.XNamespace" />
+
+          
 
           
 
@@ -1028,6 +1164,8 @@ Console.WriteLine(e)</code>
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1036,6 +1174,8 @@ Console.WriteLine(e)</code>
           <para
             >The URI of this <see
              cref="T:System.Xml.Linq.XNamespace" />
+
+            
 
             
 
@@ -1075,6 +1215,8 @@ Console.WriteLine(e)</code>
 
             
 
+            
+
              object that corresponds to the XML URI (http://www.w3.org/XML/1998/namespace).</para
           >
         </summary>
@@ -1104,6 +1246,8 @@ Console.WriteLine(e)</code>
           <para
             >Gets the <see
              cref="T:System.Xml.Linq.XNamespace" />
+
+            
 
             
 

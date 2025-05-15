@@ -31,6 +31,8 @@
 
         
 
+        
+
          can be used to find inherited components, select which ones to ignore, and retrieve the inheritance attribute of each inherited class that is tracked by the service.</para
       >
     </remarks>
@@ -51,6 +53,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.Design.InheritanceService" />
+
+            
 
             
 
@@ -89,6 +93,8 @@
 
             
 
+            
+
              is added to the specified container.</para
           >
         </remarks>
@@ -97,6 +103,8 @@
           <para
             >Adds the components inherited by the specified component to the <see
              cref="T:System.ComponentModel.Design.InheritanceService" />
+
+            
 
             
 
@@ -112,10 +120,14 @@
 
           
 
+          
+
           The component to search for inherited components to add to the specified container. </param
         >
         <param name="container">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -154,8 +166,12 @@
 
             
 
+            
+
              is added to an internal list that stores an <see
              cref="T:System.ComponentModel.InheritanceAttribute" />
+
+            
 
             
 
@@ -174,11 +190,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -193,10 +213,14 @@
 
           
 
+          
+
           The component to search for inherited components to add to the specified container. </param
         >
         <param name="container">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -228,6 +252,8 @@
 
             
 
+            
+
              allows the resources used by the <see
              cref="T:System.ComponentModel.Design.InheritanceService" />
 
@@ -235,8 +261,12 @@
 
             
 
+            
+
              to be reallocated for other purposes. For more information about <see
              cref="M:System.ComponentModel.Design.InheritanceService.Dispose" />
+
+            
 
             
 
@@ -251,6 +281,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -259,6 +291,8 @@
           <para
             >Releases all resources used by the <see
              cref="T:System.ComponentModel.Design.InheritanceService" />
+
+            
 
             
 
@@ -296,8 +330,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -310,8 +348,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -327,8 +369,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.ComponentModel.Design.InheritanceService" />
+
+            
 
             
 
@@ -347,11 +393,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -384,6 +434,8 @@
 
             
 
+            
+
             . Otherwise, it returns the inheritance attribute for this component.</para
           >
         </remarks>
@@ -401,11 +453,15 @@
 
             
 
+            
+
              that describes the level of inheritance that this component comes from.</para
           >
         </returns>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -449,8 +505,12 @@
 
           
 
+          
+
           The member to check. This member is either a <see
            cref="T:System.Reflection.FieldInfo" />
+
+          
 
           
 
@@ -463,10 +523,14 @@
 
           
 
+          
+
           . </param
         >
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

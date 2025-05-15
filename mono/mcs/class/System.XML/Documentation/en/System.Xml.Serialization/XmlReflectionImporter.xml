@@ -28,6 +28,8 @@
 
         
 
+        
+
          class is not used directly. Instead, it is used as follows:</para
       >
       <list type="bullet">
@@ -40,8 +42,12 @@
 
             
 
+            
+
              class while it creates <see
              cref="T:System.Web.Services.Description.ServiceDescription" />
+
+            
 
             
 
@@ -62,6 +68,8 @@
 
             
 
+            
+
              object.</para
           >
         </item>
@@ -75,6 +83,8 @@
       <para
         >The <see
          cref="T:System.Xml.Serialization.XmlReflectionImporter" />
+
+        
 
         
 
@@ -122,6 +132,8 @@
 
             
 
+            
+
              object directly.</para
           >
         </remarks>
@@ -130,6 +142,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Serialization.XmlReflectionImporter" />
+
+            
 
             
 
@@ -170,6 +184,8 @@
 
             
 
+            
+
              class directly.</para
           >
         </remarks>
@@ -183,11 +199,15 @@
 
             
 
+            
+
              class using the specified default XML namespace. </para
           >
         </summary>
         <param name="defaultNamespace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -230,6 +250,8 @@
 
             
 
+            
+
              class directly.</para
           >
         </remarks>
@@ -238,6 +260,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Serialization.XmlReflectionImporter" />
+
+            
 
             
 
@@ -253,8 +277,12 @@
 
           
 
+          
+
           An object that overrides how the <see
            cref="T:System.Xml.Serialization.XmlSerializer" />
+
+          
 
           
 
@@ -298,6 +326,8 @@
 
             
 
+            
+
              class directly.</para
           >
         </remarks>
@@ -306,6 +336,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Serialization.XmlReflectionImporter" />
+
+            
 
             
 
@@ -321,8 +353,12 @@
 
           
 
+          
+
           An object that overrides how the <see
            cref="T:System.Xml.Serialization.XmlSerializer" />
+
+          
 
           
 
@@ -332,6 +368,8 @@
         >
         <param name="defaultNamespace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -376,11 +414,15 @@
 
             
 
+            
+
              method is called while initializing a Web service or client, or reflecting a Web service. It is not necessary to call it directly.</para
           >
           <para
             >The <see
              cref="T:System.Xml.Serialization.XmlReflectionMember" />
+
+            
 
             
 
@@ -417,11 +459,15 @@
 
             
 
+            
+
              with mappings to the element parts of a WSDL message definition.</para
           >
         </returns>
         <param name="elementName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -436,10 +482,14 @@
 
           
 
+          
+
           An XML element namespace produced from the Web service method.</param
         >
         <param name="members">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -452,10 +502,14 @@
 
           
 
+          
+
             objects that contain .NET Framework code entities that belong to a Web service method.</param
         >
         <param name="hasWrapperElement">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -506,11 +560,15 @@
 
             
 
+            
+
              that contains the mappings.</para
           >
         </returns>
         <param name="elementName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -525,6 +583,8 @@
 
           
 
+          
+
           An XML element namespace produced from the Web service method.</param
         >
         <param name="members">
@@ -534,8 +594,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Xml.Serialization.XmlReflectionMember" />
+
+          
 
           
 
@@ -550,10 +614,14 @@
 
           
 
+          
+
           true if elements that correspond to Web Services Description Language (WSDL) message parts should be enclosed in an extra wrapper element in a SOAP message; otherwise, false.</param
         >
         <param name="rpc">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -605,11 +673,15 @@
 
             
 
+            
+
              that contains the mappings.</para
           >
         </returns>
         <param name="elementName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -624,6 +696,8 @@
 
           
 
+          
+
           An XML element namespace produced from the Web service method.</param
         >
         <param name="members">
@@ -633,8 +707,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Xml.Serialization.XmlReflectionMember" />
+
+          
 
           
 
@@ -649,6 +727,8 @@
 
           
 
+          
+
           true if elements that correspond to Web Services Description Language (WSDL) message parts should be enclosed in an extra wrapper element in a SOAP message; otherwise, false.</param
         >
         <param name="rpc">
@@ -658,10 +738,14 @@
 
           
 
+          
+
           true if the method is a remote procedure call; otherwise, false.</param
         >
         <param name="openModel">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -714,11 +798,15 @@
 
             
 
+            
+
              that contains the mappings.</para
           >
         </returns>
         <param name="elementName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -733,6 +821,8 @@
 
           
 
+          
+
           An XML element namespace produced from the Web service method.</param
         >
         <param name="members">
@@ -742,8 +832,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Xml.Serialization.XmlReflectionMember" />
+
+          
 
           
 
@@ -758,10 +852,14 @@
 
           
 
+          
+
           true if elements that correspond to Web Services Description Language (WSDL) message parts should be enclosed in an extra wrapper element in a SOAP message; otherwise, false.</param
         >
         <param name="rpc">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -776,6 +874,8 @@
 
           
 
+          
+
           true to specify that the generated schema type will be marked with the &lt;xs:anyAttribute&gt; element; otherwise, false.</param
         >
         <param name="access">
@@ -785,8 +885,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Xml.Serialization.XmlMappingAccess" />
+
+          
 
           
 
@@ -828,6 +932,8 @@
 
             
 
+            
+
              method directly.</para
           >
         </remarks>
@@ -841,6 +947,8 @@
         </returns>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -883,6 +991,8 @@
 
             
 
+            
+
              method directly.</para
           >
         </remarks>
@@ -901,10 +1011,14 @@
 
           
 
+          
+
           The .NET Framework type for which to generate a type mapping.</param
         >
         <param name="defaultNamespace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -947,6 +1061,8 @@
 
             
 
+            
+
              method directly.</para
           >
         </remarks>
@@ -964,11 +1080,15 @@
 
             
 
+            
+
              that represents a mapping of a .NET Framework type to an XML Schema element.</para
           >
         </returns>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -983,8 +1103,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Serialization.XmlRootAttribute" />
+
+          
 
           
 
@@ -1028,6 +1152,8 @@
 
             
 
+            
+
              method directly.</para
           >
         </remarks>
@@ -1045,11 +1171,15 @@
 
             
 
+            
+
              that contains the internal .NET Framework mapping of a type to an XML Schema element.</para
           >
         </returns>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1064,8 +1194,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Serialization.XmlRootAttribute" />
+
+          
 
           
 
@@ -1075,6 +1209,8 @@
         >
         <param name="defaultNamespace">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1113,6 +1249,8 @@
 
             
 
+            
+
              method directly.</para
           >
         </remarks>
@@ -1122,6 +1260,8 @@
         </summary>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1165,6 +1305,8 @@
 
           
 
+          
+
           An instance of the <see
            cref="T:System.Reflection.ICustomAttributeProvider" />
 
@@ -1172,8 +1314,12 @@
 
           
 
+          
+
             class that contains custom attributes derived from the <see
            cref="T:System.Xml.Serialization.XmlIncludeAttribute" />
+
+          
 
           
 

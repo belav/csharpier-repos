@@ -18,8 +18,12 @@
 
         
 
+        
+
          control. At run time, the URL to the embedded resource can be retrieved using the <see
          cref="M:System.Web.UI.ClientScriptManager.GetWebResourceUrl(System.Type,System.String)" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          class. To provide a design-time means for generating a resource URL from an assembly, designer hosts can offer a service that implements the <see
          cref="T:System.Web.UI.IResourceUrlGenerator" />
+
+        
 
         
 
@@ -48,6 +56,8 @@
              type="text/html">
               <a href="0936b3b2-9e6e-4abe-9c06-364efef9dbbd">ASP.NET Web Page Resources Overview</a>
             </format>
+
+            
 
             
 
@@ -69,12 +79,16 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="7a06d512-6fc3-40ca-9cb6-7f41d1a9fa28"
                 >How to: Read Resource Values Programmatically</a
               >
             </format>
+
+            
 
             
 
@@ -96,6 +110,8 @@
 
             
 
+            
+
             . </para
           >
         </item>
@@ -108,8 +124,12 @@
 
         
 
+        
+
          interface has one method, the <see
          cref="M:System.Web.UI.IResourceUrlGenerator.GetResourceUrl(System.Type,System.String)" />
+
+        
 
         
 
@@ -150,8 +170,12 @@
 
             
 
+            
+
              method returns a URL to a resource. The <see
              cref="T:System.Web.Handlers.AssemblyResourceLoader" />
+
+            
 
             
 
@@ -167,8 +191,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Web.UI.ClientScriptManager" />
+
+            
 
             
 
@@ -187,6 +215,8 @@
         </returns>
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

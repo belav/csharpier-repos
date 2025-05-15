@@ -56,6 +56,8 @@
 
         
 
+        
+
          object contains information about an assembly, which you can use to bind to that assembly. An assembly's identity consists of the following:</para
       >
       <list type="bullet">
@@ -122,8 +124,12 @@
 
         
 
+        
+
         . To search for and load a <see
          cref="T:System.Type" />
+
+        
 
         
 
@@ -136,8 +142,12 @@
 
         
 
+        
+
          either with the type name only or with the assembly qualified type name. <see
          cref="M:System.Type.GetType" />
+
+        
 
         
 
@@ -150,6 +160,8 @@
 
         
 
+        
+
          in the caller's assembly and then in the System assembly. <see
          cref="M:System.Type.GetType" />
 
@@ -157,8 +169,12 @@
 
         
 
+        
+
          with the assembly qualified type name will look for the <see
          cref="T:System.Type" />
+
+        
 
         
 
@@ -174,8 +190,12 @@
 
         
 
+        
+
          must have the name, culture, public key or public key token, major version, minor version, build number, and revision number parameters. The last four are packaged in the <see
          cref="T:System.Version" />
+
+        
 
         
 
@@ -192,8 +212,12 @@
 
         
 
+        
+
          object using the default constructor and set the <see
          cref="P:System.Reflection.AssemblyName.Name" />
+
+        
 
         
 
@@ -209,8 +233,12 @@
 
         
 
+        
+
          object using the default constructor and set the <see
          cref="P:System.Reflection.AssemblyName.Name" />
+
+        
 
         
 
@@ -223,8 +251,12 @@
 
         
 
+        
+
         . The other properties are optional. Use <see
          cref="M:System.Reflection.AssemblyName.SetPublicKey(System.Byte[])" />
+
+        
 
         
 
@@ -237,8 +269,12 @@
 
         
 
+        
+
          to set the public key and the strong name. The strong name signing always uses the <see
          cref="T:System.Security.Cryptography.SHA1" />
+
+        
 
         
 
@@ -272,6 +308,8 @@
 
         
 
+        
+
          option with the <format
          type="text/html">
           <a href="4c7be9c8-72ae-481f-a01c-1a4716806e99"
@@ -287,8 +325,12 @@
 
         
 
+        
+
          object using the default constructor and set the name and public key. An assembly created using such an <see
          cref="T:System.Reflection.AssemblyName" />
+
+        
 
         
 
@@ -304,8 +346,12 @@
 
         
 
+        
+
          with inconsistent values. This can be useful in developer scenarios. In this case, the public key retrieved with <see
          cref="M:System.Reflection.AssemblyName.GetPublicKey" />
+
+        
 
         
 
@@ -318,8 +364,12 @@
 
         
 
+        
+
          specifies the public and private keys used during development. When the runtime detects a mismatch between the <see
          cref="P:System.Reflection.AssemblyName.KeyPair" />
+
+        
 
         
 
@@ -330,6 +380,8 @@
       <para
         >The format of the display name of an <see
          cref="T:System.Reflection.AssemblyName" />
+
+        
 
         
 
@@ -346,8 +398,12 @@
 
         
 
+        
+
         . PublicKeyToken is the hexadecimal-encoded public key specified by <see
          cref="M:System.Reflection.AssemblyName.SetPublicKey(System.Byte[])" />
+
+        
 
         
 
@@ -365,12 +421,16 @@
 
         
 
+        
+
          is then considered partial. When specifying partial information, Name parameters must be specified in the order described above.</para
       >
       <para>When supplying a display name, the convention StrongName =null or PublicKey= null indicates that binding and matching against a simply named assembly is required. Additionally, the convention Culture= "" (double quote representing an empty string) indicates matching against the default culture.</para>
       <para
         >The following example shows an <see
          cref="T:System.Reflection.AssemblyName" />
+
+        
 
         
 
@@ -414,6 +474,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -445,8 +507,12 @@
 
             
 
+            
+
              is parsed, and the appropriate fields of the new <see
              cref="T:System.Reflection.AssemblyName" />
+
+            
 
             
 
@@ -465,6 +531,8 @@
 
             
 
+            
+
              class with the specified display name.</para
           >
         </summary>
@@ -475,8 +543,12 @@
 
           
 
+          
+
           The display name of the assembly, as returned by the <see
            cref="P:System.Reflection.AssemblyName.FullName" />
+
+          
 
           
 
@@ -517,6 +589,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -525,6 +599,8 @@
           <para
             >An object that is a copy of this <see
              cref="T:System.Reflection.AssemblyName" />
+
+            
 
             
 
@@ -560,11 +636,15 @@
 
             
 
+            
+
              property. </para
           >
           <para
             >If the assembly was loaded as a byte array, this property returns the location of the caller of the <see
              cref="M:System.Reflection.Assembly.Load(System.Byte[])" />
+
+            
 
             
 
@@ -581,8 +661,12 @@
 
               
 
+              
+
                with only the <see
                cref="P:System.Reflection.AssemblyName.CodeBase" />
+
+              
 
               
 
@@ -595,8 +679,12 @@
 
               
 
+              
+
                property does not supply any elements of the assembly identity (such as name or version), so loading does not occur according to load-by-identity rules, as you would expect from the <see
                cref="M:System.Reflection.Assembly.Load(System.Reflection.AssemblyName)" />
+
+              
 
               
 
@@ -609,12 +697,16 @@
 
               
 
+              
+
                method overload or <format
                type="text/html">
                 <a href="68d1c539-6a47-4614-ab59-4b071c9d4b4c"
                   >Best Practices for Assembly Loading</a
                 >
               </format>
+
+              
 
               
 
@@ -782,8 +874,12 @@
 
             
 
+            
+
              constructor, which parses it and populates the appropriate fields of the new <see
              cref="T:System.Reflection.AssemblyName" />
+
+            
 
             
 
@@ -794,6 +890,8 @@
           <para
             >When an assembly is loaded, this value can also be obtained using the <see
              cref="P:System.Reflection.Assembly.FullName" />
+
+            
 
             
 
@@ -844,6 +942,8 @@
 
             
 
+            
+
              for a given file.</para
           >
         </summary>
@@ -858,8 +958,12 @@
 
           
 
+          
+
           The path for the assembly whose <see
            cref="T:System.Reflection.AssemblyName" />
+
+          
 
           
 
@@ -904,10 +1008,14 @@
 
           
 
+          
+
           The object to be populated with serialization information. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1005,8 +1113,12 @@
 
               
 
+              
+
                property of an <see
                cref="T:System.Reflection.AssemblyName" />
+
+              
 
               
 
@@ -1019,8 +1131,12 @@
 
               
 
+              
+
                method is <see
                cref="F:System.Configuration.Assemblies.AssemblyHashAlgorithm.None" />
+
+              
 
               
 
@@ -1033,6 +1149,8 @@
 
               
 
+              
+
                enumeration. In previous versions of the .NET Framework, the <see
                cref="P:System.Reflection.AssemblyName.HashAlgorithm" />
 
@@ -1040,8 +1158,12 @@
 
               
 
+              
+
                property returned <see
                cref="F:System.Configuration.Assemblies.AssemblyHashAlgorithm.SHA1" />
+
+              
 
               
 
@@ -1088,8 +1210,12 @@
 
             
 
+            
+
              property. The getter for the property is only useful if the user set the property before using the <see
              cref="T:System.Reflection.AssemblyName" />
+
+            
 
             
 
@@ -1160,11 +1286,15 @@
 
             
 
+            
+
              interface and is called back by the deserialization event when deserialization is complete.</para
           >
         </summary>
         <param name="sender">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1199,6 +1329,8 @@
           <para
             >Beginning with the net_v40_long, this property always returns <see
              cref="F:System.Reflection.ProcessorArchitecture.None" />
+
+            
 
             
 
@@ -1254,10 +1386,14 @@
 
           
 
+          
+
           The reference assembly name.</param
         >
         <param name="definition">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1296,6 +1432,8 @@
 
             
 
+            
+
              method to provide a public key token. Otherwise, a <see
              cref="T:System.Security.SecurityException" />
 
@@ -1303,8 +1441,12 @@
 
             
 
+            
+
              is thrown when the <see
              cref="M:System.Reflection.AssemblyName.GetPublicKey" />
+
+            
 
             
 
@@ -1319,6 +1461,8 @@
         </summary>
         <param name="publicKey">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1360,8 +1504,12 @@
 
             
 
+            
+
              method, you must also use the <see
              cref="M:System.Reflection.AssemblyName.SetPublicKeyToken(System.Byte[])" />
+
+            
 
             
 
@@ -1374,8 +1522,12 @@
 
             
 
+            
+
              is thrown when the <see
              cref="M:System.Reflection.AssemblyName.GetPublicKey" />
+
+            
 
             
 
@@ -1390,6 +1542,8 @@
         </summary>
         <param name="publicKeyToken">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1468,6 +1622,8 @@
 
             
 
+            
+
             , see the MSDN Library.</para
           >
         </remarks>
@@ -1482,6 +1638,8 @@
 
           
 
+          
+
           The type information to return.</param
         >
         <param name="lcid">
@@ -1491,10 +1649,14 @@
 
           
 
+          
+
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1599,6 +1761,8 @@
 
             
 
+            
+
              for the format of the returned string.</para
           >
         </remarks>
@@ -1632,6 +1796,8 @@
           <para
             >All components of the version must be integers greater than or equal to zero. Metadata restricts the major, minor, build, and revision components for an assembly to a maximum value of <see
              cref="F:System.UInt16.MaxValue" />
+
+            
 
             
 
@@ -1676,6 +1842,8 @@
 
             
 
+            
+
              information indicates, for example, that the assembly cannot execute side-by-side with other versions due to conflicts over a device driver.</para
           >
           <para
@@ -1686,8 +1854,12 @@
 
             
 
+            
+
              always returns <see
              cref="F:System.Configuration.Assemblies.AssemblyVersionCompatibility.SameMachine" />
+
+            
 
             
 

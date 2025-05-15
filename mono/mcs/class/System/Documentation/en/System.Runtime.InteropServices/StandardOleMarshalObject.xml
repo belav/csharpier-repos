@@ -36,11 +36,15 @@
 
         
 
+        
+
          class prevents calls made into a hosting object by OLE from entering threads other than the UI thread.</para
       >
       <para
         >You should derive your class from the <see
          cref="T:System.Runtime.InteropServices.StandardOleMarshalObject" />
+
+        
 
         
 
@@ -78,6 +82,8 @@
 
             
 
+            
+
              class-.</para
           >
         </remarks>
@@ -86,6 +92,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.InteropServices.StandardOleMarshalObject" />
+
+            
 
             
 

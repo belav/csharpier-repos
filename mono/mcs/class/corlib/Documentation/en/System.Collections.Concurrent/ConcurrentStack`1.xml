@@ -69,6 +69,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -117,6 +119,8 @@
           <para
             >Removes all objects from the <see
              cref="T:System.Collections.Concurrent.ConcurrentStack`1" />
+
+            
 
             
 
@@ -173,8 +177,12 @@
 
             
 
+            
+
              property is recommended rather than retrieving the number of items from the <see
              cref="P:System.Collections.Concurrent.ConcurrentStack`1.Count" />
+
+            
 
             
 
@@ -188,6 +196,8 @@
           <para
             >Gets the number of elements contained in the <see
              cref="T:System.Collections.Concurrent.ConcurrentStack`1" />
+
+            
 
             
 
@@ -226,6 +236,8 @@
 
             
 
+            
+
              was called. The enumerator is safe to use concurrently with reads from and writes to the stack. The enumerator returns items in LIFO (last-in, first-out) order.</para
           >
         </remarks>
@@ -239,6 +251,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -247,6 +261,8 @@
           <para
             >An enumerator for the <see
              cref="T:System.Collections.Concurrent.ConcurrentStack`1" />
+
+            
 
             
 
@@ -279,8 +295,12 @@
 
             
 
+            
+
              property and comparing it to 0. However, as this collection is intended to be accessed concurrently, it may be the case that another thread will modify the collection after <see
              cref="P:System.Collections.Concurrent.ConcurrentStack`1.IsEmpty" />
+
+            
 
             
 
@@ -296,6 +316,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -304,6 +326,8 @@
           <para
             >Gets a value that indicates whether the <see
              cref="T:System.Collections.Concurrent.ConcurrentStack`1" />
+
+            
 
             
 
@@ -468,6 +492,8 @@
 
             
 
+            
+
              to an <see
              cref="T:System.Array" />
 
@@ -475,8 +501,12 @@
 
             
 
+            
+
             , starting at a particular <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -492,8 +522,12 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -506,8 +540,12 @@
 
           
 
+          
+
           . The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -522,8 +560,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -557,6 +599,8 @@
           <para
             >Gets a value indicating whether access to the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -596,6 +640,8 @@
 
             
 
+            
+
             . This property is not supported.</para
           >
         </summary>
@@ -629,6 +675,8 @@
 
             
 
+            
+
              was called. The enumerator is safe to use concurrently with reads from and writes to the stack.</para
           >
         </remarks>
@@ -641,6 +689,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -677,6 +727,8 @@
 
             
 
+            
+
              to a new array.</para
           >
         </summary>
@@ -685,6 +737,8 @@
           <para
             >A new array containing a snapshot of elements copied from the <see
              cref="T:System.Collections.Concurrent.ConcurrentStack`1" />
+
+            
 
             
 

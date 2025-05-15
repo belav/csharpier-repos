@@ -40,8 +40,12 @@
 
         
 
+        
+
          attribute to a managed interface to specify which <see
          cref="T:System.Type" />
+
+        
 
         
 
@@ -55,6 +59,8 @@
       <para
         >Specifies which <see
          cref="T:System.Type" />
+
+        
 
         
 
@@ -94,8 +100,12 @@
 
             
 
+            
+
              attribute to a managed interface to specify the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -114,8 +124,12 @@
 
             
 
+            
+
              class specifying the <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -131,8 +145,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -166,6 +184,8 @@
 
             
 
+            
+
              attribute to a managed interface to specify the type that exclusively uses an interface.</para
           >
         </remarks>
@@ -174,6 +194,8 @@
           <para
             >Gets the name of a <see
              cref="T:System.Type" />
+
+            
 
             
 

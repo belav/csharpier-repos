@@ -54,6 +54,8 @@
 
           
 
+          
+
           The relative path to the project item to retrieve.</param
         >
       </Docs>
@@ -86,6 +88,8 @@
 
             
 
+            
+
              object representing the current Web application in the design host.</para
           >
         </summary>
@@ -100,8 +104,12 @@
 
           
 
+          
+
           true to indicate the returned <see
            cref="T:System.Configuration.Configuration" />
+
+          
 
           
 

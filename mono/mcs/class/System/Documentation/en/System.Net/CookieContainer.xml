@@ -29,6 +29,8 @@
 
         
 
+        
+
          is a data structure that provides storage for instances of the <see
          cref="T:System.Net.Cookie" />
 
@@ -36,8 +38,12 @@
 
         
 
+        
+
          class, and which is accessed in a database-like manner. The <see
          cref="T:System.Net.CookieContainer" />
+
+        
 
         
 
@@ -53,8 +59,12 @@
 
         
 
+        
+
          class is added to the container based on its originating URI. It is added to an internal <see
          cref="T:System.Net.CookieCollection" />
+
+        
 
         
 
@@ -67,8 +77,12 @@
 
         
 
+        
+
          is retrieved from the container based on the URI as a <see
          cref="T:System.Net.CookieCollection" />
+
+        
 
         
 
@@ -84,8 +98,12 @@
 
         
 
+        
+
          has three properties that govern the volume of the content of the container: <see
          cref="P:System.Net.CookieContainer.Capacity" />
+
+        
 
         
 
@@ -98,8 +116,12 @@
 
         
 
+        
+
         , and <see
          cref="P:System.Net.CookieContainer.PerDomainCapacity" />
+
+        
 
         
 
@@ -112,8 +134,12 @@
 
         
 
+        
+
          is added to the container, these properties are used to determine whether a <see
          cref="T:System.Net.Cookie" />
+
+        
 
         
 
@@ -126,8 +152,12 @@
 
         
 
+        
+
          should be discarded to make room for the new one. The <see
          cref="T:System.Net.CookieContainer" />
+
+        
 
         
 
@@ -140,8 +170,12 @@
 
         
 
+        
+
          nor the <see
          cref="P:System.Net.CookieContainer.PerDomainCapacity" />
+
+        
 
         
 
@@ -154,8 +188,12 @@
 
         
 
+        
+
          instances held by the <see
          cref="T:System.Net.CookieContainer" />
+
+        
 
         
 
@@ -168,8 +206,12 @@
 
         
 
+        
+
          is removed. If further capacity must be recaptured, then the least-recently used <see
          cref="T:System.Net.CookieCollection" />
+
+        
 
         
 
@@ -183,6 +225,8 @@
       <para
         >Provides a container for a collection of <see
          cref="T:System.Net.CookieCollection" />
+
+        
 
         
 
@@ -218,8 +262,12 @@
 
             
 
+            
+
              is used to initialize <see
              cref="P:System.Net.CookieContainer.Capacity" />
+
+            
 
             
 
@@ -232,8 +280,12 @@
 
             
 
+            
+
              is used for <see
              cref="P:System.Net.CookieContainer.MaxCookieSize" />
+
+            
 
             
 
@@ -246,8 +298,12 @@
 
             
 
+            
+
              is used for <see
              cref="P:System.Net.CookieContainer.PerDomainCapacity" />
+
+            
 
             
 
@@ -261,6 +317,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.CookieContainer" />
+
+            
 
             
 
@@ -297,8 +355,12 @@
 
             
 
+            
+
              is initialized to 20, and <see
              cref="P:System.Net.CookieContainer.MaxCookieSize" />
+
+            
 
             
 
@@ -317,8 +379,12 @@
 
             
 
+            
+
              class with a specified value for the number of <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -334,6 +400,8 @@
 
           
 
+          
+
           The number of <see
            cref="T:System.Net.Cookie" />
 
@@ -341,8 +409,12 @@
 
           
 
+          
+
            instances that the <see
            cref="T:System.Net.CookieContainer" />
+
+          
 
           
 
@@ -384,6 +456,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Net.CookieContainer.MaxCookieSize" />
 
@@ -391,8 +465,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Net.CookieContainer.PerDomainCapacity" />
+
+            
 
             
 
@@ -411,11 +489,15 @@
 
             
 
+            
+
              class with specific properties.</para
           >
         </summary>
         <param name="capacity">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -428,8 +510,12 @@
 
           
 
+          
+
            instances that the <see
            cref="T:System.Net.CookieContainer" />
+
+          
 
           
 
@@ -444,8 +530,12 @@
 
           
 
+          
+
           The number of <see
            cref="T:System.Net.Cookie" />
+
+          
 
           
 
@@ -460,6 +550,8 @@
 
           
 
+          
+
           The maximum size in bytes for any single <see
            cref="T:System.Net.Cookie" />
 
@@ -467,8 +559,12 @@
 
           
 
+          
+
            in a <see
            cref="T:System.Net.CookieContainer" />
+
+          
 
           
 
@@ -507,8 +603,12 @@
 
             
 
+            
+
              property equals or exceeds the <see
              cref="P:System.Net.CookieContainer.Capacity" />
+
+            
 
             
 
@@ -521,8 +621,12 @@
 
             
 
+            
+
              instances are removed from the container before adding the <paramref
              name="cookie" />
+
+            
 
             
 
@@ -535,8 +639,12 @@
 
             
 
+            
+
              instances are removed to bring <see
              cref="P:System.Net.CookieContainer.Count" />
+
+            
 
             
 
@@ -549,8 +657,12 @@
 
             
 
+            
+
              as follows: if there are expired instances in the given scope, they are cleaned up. If not, then the least recently used <see
              cref="T:System.Net.CookieCollection" />
+
+            
 
             
 
@@ -569,8 +681,12 @@
 
             
 
+            
+
              to a <see
              cref="T:System.Net.CookieContainer" />
+
+            
 
             
 
@@ -583,8 +699,12 @@
 
             
 
+            
+
              to determine which domain collection to associate the <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -600,6 +720,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.Cookie" />
 
@@ -607,8 +729,12 @@
 
           
 
+          
+
            to be added to the <see
            cref="T:System.Net.CookieContainer" />
+
+          
 
           
 
@@ -650,8 +776,12 @@
 
             
 
+            
+
              property equals the <see
              cref="P:System.Net.CookieContainer.Capacity" />
+
+            
 
             
 
@@ -664,8 +794,12 @@
 
             
 
+            
+
              instances are removed from the container before adding the contents of the <paramref
              name="cookies" />
+
+            
 
             
 
@@ -678,6 +812,8 @@
 
             
 
+            
+
              instances are removed to make room for <paramref
              name="cookies" />
 
@@ -685,8 +821,12 @@
 
             
 
+            
+
              as follows: if there are expired instances, they are cleaned up. If not, or if more room is needed, then the least recently used <see
              cref="T:System.Net.CookieCollection" />
+
+            
 
             
 
@@ -705,8 +845,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Net.CookieContainer" />
+
+            
 
             
 
@@ -722,6 +866,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.CookieCollection" />
 
@@ -729,8 +875,12 @@
 
           
 
+          
+
            to be added to the <see
            cref="T:System.Net.CookieContainer" />
+
+          
 
           
 
@@ -770,6 +920,8 @@
 
             
 
+            
+
              instance for just one specific host, do not set the <see
              cref="P:System.Net.Cookie.Domain" />
 
@@ -777,8 +929,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -795,11 +951,15 @@
 
             
 
+            
+
              property equal to ".local". Otherwise, make sure it matches the host name used in the URI.</para
           >
           <para
             >If the <see
              cref="P:System.Net.Cookie.Version" />
+
+            
 
             
 
@@ -812,6 +972,8 @@
 
             
 
+            
+
              is Netscape, the <see
              cref="P:System.Net.Cookie.Path" />
 
@@ -819,8 +981,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -836,8 +1002,12 @@
 
             
 
+            
+
              property equals the <see
              cref="P:System.Net.CookieContainer.Capacity" />
+
+            
 
             
 
@@ -850,8 +1020,12 @@
 
             
 
+            
+
              instances are removed from the container before adding the <paramref
              name="cookie" />
+
+            
 
             
 
@@ -864,8 +1038,12 @@
 
             
 
+            
+
              instances are removed to bring <see
              cref="P:System.Net.CookieContainer.Count" />
+
+            
 
             
 
@@ -878,8 +1056,12 @@
 
             
 
+            
+
              as follows: if there are expired instances in scope, they are cleaned up. If not, then the least recently used <see
              cref="T:System.Net.CookieCollection" />
+
+            
 
             
 
@@ -898,8 +1080,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Net.CookieContainer" />
+
+            
 
             
 
@@ -915,6 +1101,8 @@
 
           
 
+          
+
           The URI of the <see
            cref="T:System.Net.Cookie" />
 
@@ -922,8 +1110,12 @@
 
           
 
+          
+
            to be added to the <see
            cref="T:System.Net.CookieContainer" />
+
+          
 
           
 
@@ -938,6 +1130,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.Cookie" />
 
@@ -945,8 +1139,12 @@
 
           
 
+          
+
            to be added to the <see
            cref="T:System.Net.CookieContainer" />
+
+          
 
           
 
@@ -989,6 +1187,8 @@
 
             
 
+            
+
              instance for just one specific host, do not set the <see
              cref="P:System.Net.Cookie.Domain" />
 
@@ -996,8 +1196,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -1014,11 +1218,15 @@
 
             
 
+            
+
              property equal to ".local". Otherwise, make sure it matches the host name used in the URI.</para
           >
           <para
             >If <see
              cref="P:System.Net.CookieContainer.Count" />
+
+            
 
             
 
@@ -1031,8 +1239,12 @@
 
             
 
+            
+
             , one or more <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -1045,8 +1257,12 @@
 
             
 
+            
+
              parameter. Enough <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -1059,6 +1275,8 @@
 
             
 
+            
+
              below <see
              cref="P:System.Net.CookieContainer.Capacity" />
 
@@ -1066,8 +1284,12 @@
 
             
 
+            
+
              as follows: if there are expired instances in scope they are cleaned up. If not, then the least recently used <see
              cref="T:System.Net.CookieCollection" />
+
+            
 
             
 
@@ -1086,8 +1308,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.Net.CookieContainer" />
+
+            
 
             
 
@@ -1103,6 +1329,8 @@
 
           
 
+          
+
           The URI of the <see
            cref="T:System.Net.CookieCollection" />
 
@@ -1110,8 +1338,12 @@
 
           
 
+          
+
            to be added to the <see
            cref="T:System.Net.CookieContainer" />
+
+          
 
           
 
@@ -1126,6 +1358,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Net.CookieCollection" />
 
@@ -1133,8 +1367,12 @@
 
           
 
+          
+
            to be added to the <see
            cref="T:System.Net.CookieContainer" />
+
+          
 
           
 
@@ -1169,8 +1407,12 @@
 
             
 
+            
+
              equals or exceeds <see
              cref="P:System.Net.CookieContainer.Capacity" />
+
+            
 
             
 
@@ -1183,8 +1425,12 @@
 
             
 
+            
+
              instances are removed from the container. Enough instances are removed to bring <see
              cref="P:System.Net.CookieContainer.Count" />
+
+            
 
             
 
@@ -1197,6 +1443,8 @@
 
             
 
+            
+
              as follows: if there are expired <see
              cref="T:System.Net.Cookie" />
 
@@ -1204,8 +1452,12 @@
 
             
 
+            
+
              instances in scope, they are cleaned up. If not, then the least recently used <see
              cref="T:System.Net.CookieCollection" />
+
+            
 
             
 
@@ -1220,8 +1472,12 @@
 
             
 
+            
+
              must be greater than or equal to <see
              cref="P:System.Net.CookieContainer.PerDomainCapacity" />
+
+            
 
             
 
@@ -1240,8 +1496,12 @@
 
             
 
+            
+
              instances that a <see
              cref="T:System.Net.CookieContainer" />
+
+            
 
             
 
@@ -1276,8 +1536,12 @@
 
             
 
+            
+
             . If <see
              cref="P:System.Net.CookieContainer.Count" />
+
+            
 
             
 
@@ -1290,8 +1554,12 @@
 
             
 
+            
+
             , one or more <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -1304,8 +1572,12 @@
 
             
 
+            
+
              below <see
              cref="P:System.Net.CookieContainer.Capacity" />
+
+            
 
             
 
@@ -1318,8 +1590,12 @@
 
             
 
+            
+
              instances in scope, they are cleaned up. If not, then the least recently used <see
              cref="T:System.Net.CookieCollection" />
+
+            
 
             
 
@@ -1338,8 +1614,12 @@
 
             
 
+            
+
              instances that a <see
              cref="T:System.Net.CookieContainer" />
+
+            
 
             
 
@@ -1378,6 +1658,8 @@
 
             
 
+            
+
              size is 4096.</para
           >
         </remarks>
@@ -1391,8 +1673,12 @@
 
             
 
+            
+
              instances that the <see
              cref="T:System.Net.CookieContainer" />
+
+            
 
             
 
@@ -1431,6 +1717,8 @@
 
             
 
+            
+
              instances is 300.</para
           >
         </remarks>
@@ -1444,8 +1732,12 @@
 
             
 
+            
+
              instances that the <see
              cref="T:System.Net.CookieContainer" />
+
+            
 
             
 
@@ -1484,6 +1776,8 @@
 
             
 
+            
+
              instances per domain is 20.</para
           >
         </remarks>
@@ -1497,8 +1791,12 @@
 
             
 
+            
+
              instances that the <see
              cref="T:System.Net.CookieContainer" />
+
+            
 
             
 
@@ -1537,8 +1835,12 @@
 
             
 
+            
+
              returns a string that holds the HTTP cookie header for the <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -1551,8 +1853,12 @@
 
             
 
+            
+
             . The HTTP header is built by adding a string representation of each <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -1565,8 +1871,12 @@
 
             
 
+            
+
             . Note that the exact format of the string depends on the RFC that the <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -1579,8 +1889,12 @@
 
             
 
+            
+
              instances that are associated with <paramref
              name="uri" />
+
+            
 
             
 
@@ -1591,6 +1905,8 @@
           <para
             >This string is not in the correct format for use as the second parameter of the <see
              cref="M:System.Net.CookieContainer.SetCookies(System.Uri,System.String)" />
+
+            
 
             
 
@@ -1609,6 +1925,8 @@
 
             
 
+            
+
              instances that are associated with a specific URI.</para
           >
         </summary>
@@ -1617,6 +1935,8 @@
           <para
             >An HTTP cookie header, with strings representing <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -1632,8 +1952,12 @@
 
           
 
+          
+
           The URI of the <see
            cref="T:System.Net.Cookie" />
+
+          
 
           
 
@@ -1675,6 +1999,8 @@
 
             
 
+            
+
              is created. Then the <see
              cref="T:System.Net.Cookie" />
 
@@ -1682,8 +2008,12 @@
 
             
 
+            
+
              instances in the internal collection that are associated with the specified URI are read out and added to the new <see
              cref="T:System.Net.CookieCollection" />
+
+            
 
             
 
@@ -1702,8 +2032,12 @@
 
             
 
+            
+
              that contains the <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -1722,8 +2056,12 @@
 
             
 
+            
+
              that contains the <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -1739,8 +2077,12 @@
 
           
 
+          
+
           The URI of the <see
            cref="T:System.Net.Cookie" />
+
+          
 
           
 
@@ -1775,8 +2117,12 @@
 
             
 
+            
+
              is less than the current value, any <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -1790,6 +2136,8 @@
           <para
             >Represents the maximum allowed length of a <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -1825,6 +2173,8 @@
 
             
 
+            
+
              value is less than the current value, and if any of the domain collections contain more <see
              cref="T:System.Net.Cookie" />
 
@@ -1832,8 +2182,12 @@
 
             
 
+            
+
              instances than the new value, the collections are pruned to fit. This uses the same basic rules as described in the <see
              cref="P:System.Net.CookieContainer.Capacity" />
+
+            
 
             
 
@@ -1852,8 +2206,12 @@
 
             
 
+            
+
              instances that a <see
              cref="T:System.Net.CookieContainer" />
+
+            
 
             
 
@@ -1896,8 +2254,12 @@
 
             
 
+            
+
              pulls all the HTTP cookies out of the HTTP cookie header, builds a <see
              cref="T:System.Net.Cookie" />
+
+            
 
             
 
@@ -1910,6 +2272,8 @@
 
             
 
+            
+
              to the internal <see
              cref="T:System.Net.CookieCollection" />
 
@@ -1917,8 +2281,12 @@
 
             
 
+            
+
              that is associated with the URI. The HTTP cookies in the <paramref
              name="cookieHeader" />
+
+            
 
             
 
@@ -1937,8 +2305,12 @@
 
             
 
+            
+
              instances for one or more cookies from an HTTP cookie header to the <see
              cref="T:System.Net.CookieContainer" />
+
+            
 
             
 
@@ -1954,8 +2326,12 @@
 
           
 
+          
+
           The URI of the <see
            cref="T:System.Net.CookieCollection" />
+
+          
 
           
 
@@ -1970,8 +2346,12 @@
 
           
 
+          
+
           The contents of an HTTP set-cookie header as returned by a HTTP server, with <see
            cref="T:System.Net.Cookie" />
+
+          
 
           
 

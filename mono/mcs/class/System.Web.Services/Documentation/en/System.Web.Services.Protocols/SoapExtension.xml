@@ -24,8 +24,12 @@
 
         
 
+        
+
          class. The <see
          cref="M:System.Web.Services.Protocols.SoapExtension.GetInitializer(System.Web.Services.Protocols.LogicalMethodInfo,System.Web.Services.Protocols.SoapExtensionAttribute)" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          methods provide alternative mechanisms for initializing the SOAP extension to enhance performance. <see
          cref="M:System.Web.Services.Protocols.SoapExtension.ProcessMessage(System.Web.Services.Protocols.SoapMessage)" />
+
+        
 
         
 
@@ -52,8 +60,12 @@
 
         
 
+        
+
         , allowing the SOAP extension to perform the desired behavior of that specific SOAP extension. For SOAP extensions that need to modify the SOAP request or SOAP response, <see
          cref="M:System.Web.Services.Protocols.SoapExtension.ChainStream(System.IO.Stream)" />
+
+        
 
         
 
@@ -80,6 +92,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Protocols.SoapExtension" />
+
+            
 
             
 
@@ -116,6 +130,8 @@
 
             
 
+            
+
              ensures that SOAP extensions with the highest priority can modify the actual data closest to the SOAP message sent or returned over the wire. </para
           >
           <para
@@ -126,8 +142,12 @@
 
             
 
+            
+
              passed into <see
              cref="M:System.Web.Services.Protocols.SoapExtension.ChainStream(System.IO.Stream)" />
+
+            
 
             
 
@@ -140,8 +160,12 @@
 
             
 
+            
+
              returned from <see
              cref="M:System.Web.Services.Protocols.SoapExtension.ChainStream(System.IO.Stream)" />
+
+            
 
             
 
@@ -154,8 +178,12 @@
 
             
 
+            
+
              passed into <see
              cref="M:System.Web.Services.Protocols.SoapExtension.ChainStream(System.IO.Stream)" />
+
+            
 
             
 
@@ -169,8 +197,12 @@
 
             
 
+            
+
             . Similarily, the <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -183,9 +215,13 @@
 
             
 
+            
+
              is written into when the serialization occurs and thus contains the serialized SOAP response in the <see
              cref="F:System.Web.Services.Protocols.SoapMessageStage.AfterSerialize" />
             <see cref="T:System.Web.Services.Protocols.SoapMessageStage" />
+
+            
 
             
 
@@ -208,11 +244,15 @@
 
             
 
+            
+
              representing a new memory buffer that this SOAP extension can modify.</para
           >
         </returns>
         <param name="stream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -249,6 +289,8 @@
 
             
 
+            
+
              that gets called by ASP.NET depends on how the SOAP extension was specified. There are two methods for specifying a SOAP extension: </para
           >
           <list type="bullet">
@@ -256,6 +298,8 @@
               <para
                 >Apply a custom attribute, deriving from <see
                  cref="T:System.Web.Services.Protocols.SoapExtensionAttribute" />
+
+                
 
                 
 
@@ -276,8 +320,12 @@
 
             
 
+            
+
              overload that passes in a <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -290,6 +338,8 @@
 
             
 
+            
+
              that passes in a <see
              cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
 
@@ -297,8 +347,12 @@
 
             
 
+            
+
              and a <see
              cref="T:System.Web.Services.Protocols.SoapExtensionAttribute" />
+
+            
 
             
 
@@ -313,6 +367,8 @@
                 >[&lt;topic://cpconconfigurationoptionsforaspnetwebservices&gt;]</a
               >
             </format>
+
+            
 
             
 
@@ -335,11 +391,15 @@
 
             
 
+            
+
              that the SOAP extension initializes for caching.</para
           >
         </returns>
         <param name="serviceType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -377,8 +437,12 @@
 
             
 
+            
+
              overload that accepts a <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -399,8 +463,12 @@
 
                 
 
+                
+
                  - <see
                  cref="M:System.Web.Services.Protocols.SoapExtension.GetInitializer(System.Web.Services.Protocols.LogicalMethodInfo,System.Web.Services.Protocols.SoapExtensionAttribute)" />
+
+                
 
                 
 
@@ -413,8 +481,12 @@
 
                 
 
+                
+
                  method is invoked. This allows the SOAP extension to interrogate the <see
                  cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+
+                
 
                 
 
@@ -427,6 +499,8 @@
 
                 
 
+                
+
                 . The return value is cached by ASP.NET and passed into subsequent <see
                  cref="M:System.Web.Services.Protocols.SoapExtension.Initialize(System.Object)" />
 
@@ -434,8 +508,12 @@
 
                 
 
+                
+
                  methods. Therefore, initialization done in <see
                  cref="M:System.Web.Services.Protocols.SoapExtension.GetInitializer(System.Web.Services.Protocols.LogicalMethodInfo,System.Web.Services.Protocols.SoapExtensionAttribute)" />
+
+                
 
                 
 
@@ -452,8 +530,12 @@
 
                 
 
+                
+
                  - <see
                  cref="M:System.Web.Services.Protocols.SoapExtension.Initialize(System.Object)" />
+
+                
 
                 
 
@@ -466,8 +548,12 @@
 
                 
 
+                
+
                  initialized in <see
                  cref="M:System.Web.Services.Protocols.SoapExtension.GetInitializer(System.Web.Services.Protocols.LogicalMethodInfo,System.Web.Services.Protocols.SoapExtensionAttribute)" />
+
+                
 
                 
 
@@ -492,6 +578,8 @@
 
             
 
+            
+
              that the SOAP extension initializes for caching.</para
           >
         </returns>
@@ -502,8 +590,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+
+          
 
           
 
@@ -518,8 +610,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Protocols.SoapExtensionAttribute" />
+
+          
 
           
 
@@ -561,8 +657,12 @@
 
                 
 
+                
+
                  - <see
                  cref="M:System.Web.Services.Protocols.SoapExtension.GetInitializer(System.Web.Services.Protocols.LogicalMethodInfo,System.Web.Services.Protocols.SoapExtensionAttribute)" />
+
+                
 
                 
 
@@ -575,8 +675,12 @@
 
                 
 
+                
+
                  method is invoked. This allows the SOAP extension to interrogate the <see
                  cref="T:System.Web.Services.Protocols.LogicalMethodInfo" />
+
+                
 
                 
 
@@ -589,6 +693,8 @@
 
                 
 
+                
+
                 . The return value is cached by ASP.NET and passed into subsequent <see
                  cref="M:System.Web.Services.Protocols.SoapExtension.Initialize(System.Object)" />
 
@@ -596,8 +702,12 @@
 
                 
 
+                
+
                  methods. Therefore, initialization done in <see
                  cref="M:System.Web.Services.Protocols.SoapExtension.GetInitializer(System.Web.Services.Protocols.LogicalMethodInfo,System.Web.Services.Protocols.SoapExtensionAttribute)" />
+
+                
 
                 
 
@@ -614,8 +724,12 @@
 
                 
 
+                
+
                  - <see
                  cref="M:System.Web.Services.Protocols.SoapExtension.Initialize(System.Object)" />
+
+                
 
                 
 
@@ -628,8 +742,12 @@
 
                 
 
+                
+
                  initialized in <see
                  cref="M:System.Web.Services.Protocols.SoapExtension.GetInitializer(System.Web.Services.Protocols.LogicalMethodInfo,System.Web.Services.Protocols.SoapExtensionAttribute)" />
+
+                
 
                 
 
@@ -651,12 +769,16 @@
 
               
 
+              
+
                by using the <format
                type="text/html">
                 <a href="7a373a98-6d82-4f8d-a6fc-2996da3fd54c"
                   >&lt;soapExtensionTypes&gt; Element</a
                 >
               </format>
+
+              
 
               
 
@@ -673,12 +795,16 @@
 
               
 
+              
+
                and <format
                type="text/html">
                 <a href="97d81ace-95e7-4acc-ae39-9692a0021e95"
                   >SOAP Message Modification Using SOAP Extensions</a
                 >
               </format>
+
+              
 
               
 
@@ -703,11 +829,15 @@
 
             
 
+            
+
              method.</para
           >
         </summary>
         <param name="initializer">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -720,8 +850,12 @@
 
           
 
+          
+
            returned from <see
            cref="M:System.Web.Services.Protocols.SoapExtension.GetInitializer(System.Web.Services.Protocols.LogicalMethodInfo,System.Web.Services.Protocols.SoapExtensionAttribute)" />
+
+          
 
           
 
@@ -757,8 +891,12 @@
 
             
 
+            
+
              is called at all <see
              cref="T:System.Web.Services.Protocols.SoapMessageStage" />
+
+            
 
             
 
@@ -771,8 +909,12 @@
 
             
 
+            
+
             , an instance of a class deriving from <see
              cref="T:System.Web.Services.Protocols.SoapMessage" />
+
+            
 
             
 
@@ -785,8 +927,12 @@
 
             
 
+            
+
             . If the SOAP extension is running on the XML Web service client, then a <see
              cref="T:System.Web.Services.Protocols.SoapClientMessage" />
+
+            
 
             
 
@@ -799,8 +945,12 @@
 
             
 
+            
+
             ; otherwise a <see
              cref="T:System.Web.Services.Protocols.SoapServerMessage" />
+
+            
 
             
 
@@ -819,8 +969,12 @@
 
             
 
+            
+
              to process at each <see
              cref="T:System.Web.Services.Protocols.SoapMessageStage" />
+
+            
 
             
 
@@ -836,8 +990,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Protocols.SoapMessage" />
+
+          
 
           
 

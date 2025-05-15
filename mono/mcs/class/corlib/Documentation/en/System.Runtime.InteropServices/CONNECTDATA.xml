@@ -33,6 +33,8 @@
 
         
 
+        
+
          method.</para
       >
       <para>For more information about CONNECTDATA, see the MSDN Library.</para>
@@ -42,6 +44,8 @@
       <para
         >Use <see
          cref="T:System.Runtime.InteropServices.ComTypes.CONNECTDATA" />
+
+        
 
         
 
@@ -72,6 +76,8 @@
           <para
             >Represents a connection token that is returned from a call to <see
              cref="M:System.Runtime.InteropServices.UCOMIConnectionPoint.Advise(System.Object,System.Int32@)" />
+
+            
 
             
 

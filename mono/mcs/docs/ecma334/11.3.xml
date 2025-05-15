@@ -8,10 +8,12 @@
 
     
 
+    
+
     s and <non_terminal
-     where="11.2"
->reference-type</non_terminal
-    >
+     where="11.2">reference-type</non_terminal>
+
+    
 
     
 
@@ -19,6 +21,8 @@
 
     s by permitting any value of a <non_terminal
      where="11.1">value-type</non_terminal>
+
+    
 
     
 

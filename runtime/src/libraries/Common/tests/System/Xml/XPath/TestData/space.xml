@@ -10,12 +10,16 @@
     
 
     
+
+    
    <Para
 
       >First paragraph <Para
 
         > Nested <Origin
          />
+
+        
 
         
 
@@ -28,8 +32,12 @@
 
       
 
+      
+
        End of first paragraph </Para
     >
+
+    
 
     
 
@@ -44,10 +52,14 @@
     
 
     
+
+    
  </Chap
   >
   <Chap>
     <Title>XPath test</Title>
+
+    
 
     
 

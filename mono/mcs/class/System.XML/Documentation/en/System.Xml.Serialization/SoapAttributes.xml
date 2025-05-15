@@ -28,6 +28,8 @@
 
         
 
+        
+
          is part of a process that overrides the default way the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
 
@@ -35,8 +37,12 @@
 
         
 
+        
+
          serializes class instances. For example, suppose you want to serialize an object that is created from a DLL that has an inaccessible source. By using the <see
          cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+
+        
 
         
 
@@ -52,8 +58,12 @@
 
         
 
+        
+
          class correspond directly to a family of attribute classes that control serialization. For example, the <see
          cref="P:System.Xml.Serialization.SoapAttributes.SoapAttribute" />
+
+        
 
         
 
@@ -66,8 +76,12 @@
 
         
 
+        
+
         , which allows you to override serialization of a field or property by instructing the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -84,11 +98,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >For more details about adding an instance of the <see
          cref="T:System.Xml.Serialization.SoapAttributes" />
+
+        
 
         
 
@@ -101,8 +119,12 @@
 
         
 
+        
+
          class, see the <see
          cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+
+        
 
         
 
@@ -116,6 +138,8 @@
       <para
         >Represents a collection of attribute objects that control how the <see
          cref="T:System.Xml.Serialization.XmlSerializer" />
+
+        
 
         
 
@@ -151,8 +175,12 @@
 
             
 
+            
+
             . Set the properties for the <see
              cref="T:System.Xml.Serialization.SoapAttributes" />
+
+            
 
             
 
@@ -165,8 +193,12 @@
 
             
 
+            
+
              to an instance of the <see
              cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+
+            
 
             
 
@@ -180,6 +212,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Xml.Serialization.SoapAttributes" />
+
+            
 
             
 
@@ -221,11 +255,15 @@
 
             
 
+            
+
              class using the specified custom type.</para
           >
         </summary>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -238,8 +276,12 @@
 
           
 
+          
+
            interface, such as the <see
            cref="T:System.Type" />
+
+          
 
           
 
@@ -280,8 +322,12 @@
 
             
 
+            
+
              to serialize a member as an encoded SOAP XML attribute by applying a <see
              cref="T:System.Xml.Serialization.SoapAttributeAttribute" />
+
+            
 
             
 
@@ -294,8 +340,12 @@
 
             
 
+            
+
              must be created with an <see
              cref="T:System.Xml.Serialization.XmlTypeMapping" />
+
+            
 
             
 
@@ -311,6 +361,8 @@
 
             
 
+            
+
              property allows you to override the serialization controlled by applying a <see
              cref="T:System.Xml.Serialization.SoapAttributeAttribute" />
 
@@ -318,8 +370,12 @@
 
             
 
+            
+
              to the member. For more details on this process, see the <see
              cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+
+            
 
             
 
@@ -333,6 +389,8 @@
           <para
             >Gets or sets the <see
              cref="T:System.Xml.Serialization.SoapAttributeAttribute" />
+
+            
 
             
 
@@ -368,8 +426,12 @@
 
             
 
+            
+
              attribute to the member. If the member is being serialized as an encoded SOAP message, you can change the default value by creating a new <see
              cref="T:System.ComponentModel.DefaultValueAttribute" />
+
+            
 
             
 
@@ -382,8 +444,12 @@
 
             
 
+            
+
              property, and setting the <see
              cref="P:System.Xml.Serialization.SoapAttributes.SoapDefaultValue" />
+
+            
 
             
 
@@ -396,6 +462,8 @@
 
             
 
+            
+
              to a <see
              cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
 
@@ -403,8 +471,12 @@
 
             
 
+            
+
             . For more details, see the <see
              cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+
+            
 
             
 
@@ -450,8 +522,12 @@
 
             
 
+            
+
              is used to control the serialization of a class member as an XML element. Set the <see
              cref="P:System.Xml.Serialization.SoapAttributes.SoapElement" />
+
+            
 
             
 
@@ -464,8 +540,12 @@
 
             
 
+            
+
              to override the serialization of a class member as an XML element by creating a new <see
              cref="T:System.Xml.Serialization.SoapElementAttribute" />
+
+            
 
             
 
@@ -478,8 +558,12 @@
 
             
 
+            
+
              to a <see
              cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+
+            
 
             
 
@@ -492,8 +576,12 @@
 
             
 
+            
+
              with the <see
              cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+
+            
 
             
 
@@ -506,8 +594,12 @@
 
             
 
+            
+
              with the <see
              cref="T:System.Xml.Serialization.XmlTypeMapping" />
+
+            
 
             
 
@@ -523,6 +615,8 @@
 
             
 
+            
+
              class overview.</para
           >
         </remarks>
@@ -531,6 +625,8 @@
           <para
             >Gets or sets a <see
              cref="T:System.Xml.Serialization.SoapElementAttribute" />
+
+            
 
             
 
@@ -572,6 +668,8 @@
 
             
 
+            
+
              is used to control the serialization of an enumeration member. Set the <see
              cref="P:System.Xml.Serialization.SoapAttributes.SoapEnum" />
 
@@ -579,8 +677,12 @@
 
             
 
+            
+
              property to a new <see
              cref="T:System.Xml.Serialization.SoapEnumAttribute" />
+
+            
 
             
 
@@ -596,6 +698,8 @@
 
             
 
+            
+
              class overview.</para
           >
         </remarks>
@@ -604,6 +708,8 @@
           <para
             >Gets or sets an object that specifies how the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -639,11 +745,15 @@
 
             
 
+            
+
             . That is, the value of each public field or property is persisted as an XML element or XML attribute in an XML document.</para
           >
           <para
             >To override the default serialization of a field or property, create a <see
              cref="T:System.Xml.Serialization.SoapAttributes" />
+
+            
 
             
 
@@ -656,6 +766,8 @@
 
             
 
+            
+
              property to true. Use the <see
              cref="M:System.Xml.Serialization.SoapAttributeOverrides.Add(System.Type,System.Xml.Serialization.SoapAttributes)" />
 
@@ -663,8 +775,12 @@
 
             
 
+            
+
              method to add the object to a <see
              cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+
+            
 
             
 
@@ -680,8 +796,12 @@
 
             
 
+            
+
              is applied to a field or property, the field or property is ignored. However you can override that behavior by creating a <see
              cref="T:System.Xml.Serialization.SoapAttributes" />
+
+            
 
             
 
@@ -694,8 +814,12 @@
 
             
 
+            
+
              property to false, and adding it to a <see
              cref="T:System.Xml.Serialization.SoapAttributeOverrides" />
+
+            
 
             
 
@@ -709,6 +833,8 @@
           <para
             >Gets or sets a value that specifies whether the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -750,8 +876,12 @@
 
             
 
+            
+
              can be used to control the XML stream generated by the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -764,8 +894,12 @@
 
             
 
+            
+
              property to a new <see
              cref="T:System.Xml.Serialization.SoapTypeAttribute" />
+
+            
 
             
 
@@ -779,6 +913,8 @@
           <para
             >Gets or sets an object that instructs the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 

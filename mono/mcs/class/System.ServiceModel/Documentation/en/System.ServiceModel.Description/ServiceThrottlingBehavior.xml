@@ -34,6 +34,8 @@
 
         
 
+        
+
          class to control various throughput settings that help prevent your application from running out of memory.</para
       >
       <para
@@ -44,8 +46,12 @@
 
         
 
+        
+
          property limits the number of messages that currently process across a <see
          cref="T:System.ServiceModel.ServiceHost" />
+
+        
 
         
 
@@ -61,6 +67,8 @@
 
         
 
+        
+
          property limits the number of <see
          cref="T:System.ServiceModel.InstanceContext" />
 
@@ -68,8 +76,12 @@
 
         
 
+        
+
          objects that execute at one time across a <see
          cref="T:System.ServiceModel.ServiceHost" />
+
+        
 
         
 
@@ -85,8 +97,12 @@
 
         
 
+        
+
          property limits the number of sessions a <see
          cref="T:System.ServiceModel.ServiceHost" />
+
+        
 
         
 
@@ -102,6 +118,8 @@
 
         
 
+        
+
          through an application configuration file is the most common method of modifying execution to maximize service performance.</para
       >
       <block subset="none" type="note">
@@ -112,6 +130,8 @@
          type="text/html">
           <a href="a337d064-1e64-4209-b4a9-db7fdb7e3eaf">&lt;serviceThrottling&gt;</a>
         </format>
+
+        
 
         
 
@@ -148,6 +168,8 @@
 
             
 
+            
+
              programmatically.</para
           >
         </remarks>
@@ -156,6 +178,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Description.ServiceThrottlingBehavior" />
+
+            
 
             
 
@@ -188,6 +212,8 @@
 
             
 
+            
+
              property specifies the maximum number of messages actively processing across a <see
              cref="T:System.ServiceModel.ServiceHost" />
 
@@ -195,8 +221,12 @@
 
             
 
+            
+
              object. Each channel can have one pending message that does not count against the value of <see
              cref="P:System.ServiceModel.Description.ServiceThrottlingBehavior.MaxConcurrentCalls" />
+
+            
 
             
 
@@ -214,11 +244,15 @@
 
             
 
+            
+
              element in an application configuration file.</para
           >
           <block subset="none" type="note">
             <para>
               <see cref="P:System.ServiceModel.Description.ServiceThrottlingBehavior.MaxConcurrentCalls" />
+
+              
 
               
 
@@ -233,6 +267,8 @@
           <para
             >Gets or sets a value that specifies the maximum number of messages actively processing across a <see
              cref="T:System.ServiceModel.ServiceHost" />
+
+            
 
             
 
@@ -265,8 +301,12 @@
 
             
 
+            
+
              property specifies the maximum number of <see
              cref="T:System.ServiceModel.InstanceContext" />
+
+            
 
             
 
@@ -279,8 +319,12 @@
 
             
 
+            
+
              property and the <see
              cref="P:System.ServiceModel.ServiceBehaviorAttribute.InstanceContextMode" />
+
+            
 
             
 
@@ -293,8 +337,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.ServiceModel.InstanceContextMode.PerSession" />
+
+            
 
             
 
@@ -307,8 +355,12 @@
 
             
 
+            
+
              is <see
              cref="F:System.ServiceModel.InstanceContextMode.PerCall" />
+
+            
 
             
 
@@ -321,8 +373,12 @@
 
             
 
+            
+
              objects already exist, the message is held until an <see
              cref="T:System.ServiceModel.InstanceContext" />
+
+            
 
             
 
@@ -340,6 +396,8 @@
 
             
 
+            
+
              element in an application configuration file.</para
           >
           <para />
@@ -349,6 +407,8 @@
           <para
             >Gets or sets a value that specifies the maximum number of <see
              cref="T:System.ServiceModel.InstanceContext" />
+
+            
 
             
 
@@ -381,8 +441,12 @@
 
             
 
+            
+
              property specifies the maximum number of sessions a <see
              cref="T:System.ServiceModel.ServiceHost" />
+
+            
 
             
 
@@ -395,11 +459,15 @@
 
             
 
+            
+
              supports sessions but does not include reliable sessions). </para
           >
           <para
             >Each listener object can have one pending channel session that does not count against the value of <see
              cref="P:System.ServiceModel.Description.ServiceThrottlingBehavior.MaxConcurrentSessions" />
+
+            
 
             
 
@@ -420,6 +488,8 @@
 
             
 
+            
+
              element in an application configuration file.</para
           >
           <para />
@@ -429,6 +499,8 @@
           <para
             >Gets or sets a value that specifies the maximum number of sessions a <see
              cref="T:System.ServiceModel.ServiceHost" />
+
+            
 
             
 
@@ -478,6 +550,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -492,10 +566,14 @@
 
           
 
+          
+
           The service description.</param
         >
         <param name="serviceHostBase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -510,10 +588,14 @@
 
           
 
+          
+
           The endpoints exposed by the service.</param
         >
         <param name="parameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -554,6 +636,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -568,10 +652,14 @@
 
           
 
+          
+
           The service description to be configured.</param
         >
         <param name="serviceHostBase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -612,6 +700,8 @@
 
             
 
+            
+
              method.</para
           >
         </remarks>
@@ -626,10 +716,14 @@
 
           
 
+          
+
           The service description to be validated by the service behavior.</param
         >
         <param name="serviceHostBase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

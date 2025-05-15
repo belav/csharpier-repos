@@ -30,8 +30,12 @@
 
         
 
+        
+
          enumeration to specify access control rights when you create <see
          cref="T:System.Security.AccessControl.MutexSecurity" />
+
+        
 
         
 
@@ -44,6 +48,8 @@
 
         
 
+        
+
          objects with the <see
          cref="M:System.Threading.Mutex.#ctor(System.Boolean,System.String,System.Boolean@,System.Security.AccessControl.MutexSecurity)" />
 
@@ -51,8 +57,12 @@
 
         
 
+        
+
          constructor and the <see
          cref="M:System.Threading.Mutex.SetAccessControl(System.Security.AccessControl.MutexSecurity)" />
+
+        
 
         
 

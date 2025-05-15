@@ -33,8 +33,12 @@
 
         
 
+        
+
          object provides a replacement string that is substituted for the output character. The replacement string initializes the value of the <see
          cref="T:System.Text.DecoderReplacementFallback" />
+
+        
 
         
 
@@ -47,6 +51,8 @@
 
         
 
+        
+
          object initializes the value of a <see
          cref="T:System.Text.DecoderReplacementFallbackBuffer" />
 
@@ -54,8 +60,12 @@
 
         
 
+        
+
          object. The value of a <see
          cref="T:System.Text.DecoderReplacementFallbackBuffer" />
+
+        
 
         
 
@@ -100,8 +110,12 @@
 
             
 
+            
+
              class using the value of a <see
              cref="T:System.Text.DecoderReplacementFallback" />
+
+            
 
             
 
@@ -117,8 +131,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Text.DecoderReplacementFallback" />
+
+          
 
           
 
@@ -161,8 +179,12 @@
 
             
 
+            
+
              and <see
              cref="Overload:System.Text.Encoder.Convert" />
+
+            
 
             
 
@@ -175,6 +197,8 @@
 
             
 
+            
+
              if they encounter an unknown input byte sequence that cannot be decoded. If the return value of <see
              cref="M:System.Text.DecoderReplacementFallbackBuffer.Fallback(System.Byte[],System.Int32)" />
 
@@ -182,8 +206,12 @@
 
             
 
+            
+
              is true, the calling method can invoke the <see
              cref="M:System.Text.DecoderReplacementFallbackBuffer.GetNextChar" />
+
+            
 
             
 
@@ -207,6 +235,8 @@
 
           
 
+          
+
           An input byte sequence. This parameter is ignored unless an exception is thrown.</param
         >
         <param name="index">
@@ -216,8 +246,12 @@
 
           
 
+          
+
           The index position of the byte in <paramref
            name="bytesUnknown" />
+
+          
 
           
 
@@ -254,8 +288,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Text.Decoder.Convert(System.Byte*,System.Int32,System.Char*,System.Int32,System.Boolean,System.Int32@,System.Int32@,System.Boolean@)" />
+
+            
 
             
 
@@ -268,6 +306,8 @@
 
             
 
+            
+
              if they encounter an unknown surrogate pair or character in their input. If the return value of <see
              cref="M:System.Text.DecoderReplacementFallbackBuffer.Fallback(System.Byte[],System.Int32)" />
 
@@ -275,8 +315,12 @@
 
             
 
+            
+
              is true, the calling method can invoke <see
              cref="M:System.Text.DecoderReplacementFallbackBuffer.GetNextChar" />
+
+            
 
             
 
@@ -323,6 +367,8 @@
 
             
 
+            
+
              to access the character position in the replacement fallback buffer prior to the current character position.</para
           >
         </summary>
@@ -331,6 +377,8 @@
           <para
             >true if the <see
              cref="M:System.Text.DecoderReplacementFallbackBuffer.MovePrevious" />
+
+            
 
             
 
@@ -365,8 +413,12 @@
 
             
 
+            
+
              method returns true if the <see
              cref="P:System.Text.DecoderReplacementFallbackBuffer.Remaining" />
+
+            
 
             
 
@@ -408,8 +460,12 @@
 
             
 
+            
+
              method discards any persisted state information and data that govern the emitting of a replacement string. Unpredictable results occur if the decoding operation continues after the <see
              cref="M:System.Text.DecoderReplacementFallbackBuffer.Reset" />
+
+            
 
             
 
@@ -423,6 +479,8 @@
           <para
             >Initializes all internal state information and data in the <see
              cref="T:System.Text.DecoderReplacementFallbackBuffer" />
+
+            
 
             
 

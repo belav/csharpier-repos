@@ -36,8 +36,12 @@
 
         
 
+        
+
          property and enables you to find, insert, and remove various <see
          cref="T:System.ServiceModel.Description.MessageHeaderDescription" />
+
+        
 
         
 
@@ -51,6 +55,8 @@
       <para
         >Represents a collection of <see
          cref="T:System.ServiceModel.Description.MessageHeaderDescription" />
+
+        
 
         
 
@@ -92,6 +98,8 @@
 
             
 
+            
+
              of the message header.</para
           >
         </summary>
@@ -100,6 +108,8 @@
           <para
             >The <see
              cref="T:System.Xml.XmlQualifiedName" />
+
+            
 
             
 
@@ -115,8 +125,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Description.MessageHeaderDescription" />
+
+          
 
           
 

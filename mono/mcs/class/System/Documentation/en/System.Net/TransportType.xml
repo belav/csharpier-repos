@@ -37,6 +37,8 @@
 
         
 
+        
+
          enumeration defines transport types for the <see
          cref="T:System.Net.SocketPermission" />
 
@@ -44,8 +46,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Net.Sockets.Socket" />
+
+        
 
         
 
@@ -64,8 +70,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Net.Sockets.Socket" />
+
+        
 
         
 
@@ -137,6 +147,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -170,6 +182,8 @@
           <para
             >The transport is connection oriented, such as TCP. Specifying this value has the same effect as specifying <see
              cref="F:System.Net.TransportType.Tcp" />
+
+            
 
             
 

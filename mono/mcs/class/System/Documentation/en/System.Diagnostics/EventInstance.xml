@@ -26,6 +26,8 @@
 
         
 
+        
+
          to write an event log entry with a resource identifier rather than a string value. To write an event log entry, initialize the <see
          cref="P:System.Diagnostics.EventInstance.InstanceId" />
 
@@ -33,8 +35,12 @@
 
         
 
+        
+
          property and pass the instance to the <see
          cref="Overload:System.Diagnostics.EventLog.WriteEvent" />
+
+        
 
         
 
@@ -50,8 +56,12 @@
 
         
 
+        
+
          property to specify the icon that the Event Viewer displays for the entry. You can also specify a <see
          cref="P:System.Diagnostics.EventInstance.CategoryId" />
+
+        
 
         
 
@@ -68,8 +78,12 @@
 
         
 
+        
+
          to a resource identifier in the category resource file. If the event source does not have a configured category resource file, or the specified <see
          cref="P:System.Diagnostics.EventInstance.CategoryId" />
+
+        
 
         
 
@@ -82,8 +96,12 @@
 
         
 
+        
+
          or the <see
          cref="T:System.Diagnostics.EventSourceCreationData" />
+
+        
 
         
 
@@ -99,8 +117,12 @@
 
         
 
+        
+
          to write an event with the <see
          cref="Overload:System.Diagnostics.EventLog.WriteEvent" />
+
+        
 
         
 
@@ -116,8 +138,12 @@
 
         
 
+        
+
         , or using the <see
          cref="Overload:System.Diagnostics.EventLog.CreateEventSource" />
+
+        
 
         
 
@@ -128,6 +154,8 @@
       <para
         >For details about defining event messages and building event log resource files, see the "Message Compiler" topic in the Platform SDK documentation at <see
          cref="http://msdn.microsoft.com">http://msdn.microsoft.com</see>
+
+        
 
         
 
@@ -172,8 +200,12 @@
 
             
 
+            
+
              and pass it to the <see
              cref="Overload:System.Diagnostics.EventLog.WriteEvent" />
+
+            
 
             
 
@@ -186,8 +218,12 @@
 
             
 
+            
+
              to the resource identifier of the event message in the corresponding <see
              cref="P:System.Diagnostics.EventSourceCreationData.MessageResourceFile" />
+
+            
 
             
 
@@ -200,8 +236,12 @@
 
             
 
+            
+
              to a numeric category value, or the resource identifier of the event category in the <see
              cref="P:System.Diagnostics.EventSourceCreationData.CategoryResourceFile" />
+
+            
 
             
 
@@ -214,6 +254,8 @@
 
             
 
+            
+
              to zero for no event category. The <see
              cref="P:System.Diagnostics.EventInstance.EntryType" />
 
@@ -221,8 +263,12 @@
 
             
 
+            
+
              property for the new instance is set to <see
              cref="F:System.Diagnostics.EventLogEntryType.Information" />
+
+            
 
             
 
@@ -242,6 +288,8 @@
 
             
 
+            
+
              class using the specified resource identifiers for the localized message and category text of the event entry.</para
           >
         </summary>
@@ -252,10 +300,14 @@
 
           
 
+          
+
           A resource identifier that corresponds to a string defined in the message resource file of the event source.</param
         >
         <param name="categoryId">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -296,8 +348,12 @@
 
             
 
+            
+
              and pass it to the <see
              cref="Overload:System.Diagnostics.EventLog.WriteEvent" />
+
+            
 
             
 
@@ -310,8 +366,12 @@
 
             
 
+            
+
              to the resource identifier of the event message in the corresponding <see
              cref="P:System.Diagnostics.EventSourceCreationData.MessageResourceFile" />
+
+            
 
             
 
@@ -324,8 +384,12 @@
 
             
 
+            
+
              to a numeric category value, or the resource identifier of the event category in the <see
              cref="P:System.Diagnostics.EventSourceCreationData.CategoryResourceFile" />
+
+            
 
             
 
@@ -338,12 +402,16 @@
 
             
 
+            
+
              to zero for no event category.</para
           >
           <para>The Event Viewer uses the resource identifiers to display the corresponding strings from the localized resource files for the source. You must register the source with the corresponding resource files before you can write events using resource identifiers.</para>
           <para
             >Set the <paramref
              name="entryType" />
+
+            
 
             
 
@@ -362,11 +430,15 @@
 
             
 
+            
+
              class using the specified resource identifiers for the localized message and category text of the event entry and the specified event log entry type.</para
           >
         </summary>
         <param name="instanceId">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -381,6 +453,8 @@
 
           
 
+          
+
           A resource identifier that corresponds to a string defined in the category resource file of the event source, or zero to specify no category for the event. </param
         >
         <param name="entryType">
@@ -390,8 +464,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Diagnostics.EventLogEntryType" />
+
+          
 
           
 
@@ -426,8 +504,12 @@
 
             
 
+            
+
              property to specify the category that the Event Viewer displays for the entry. The Event Viewer can display the category as a numeric value, or it can use the <see
              cref="P:System.Diagnostics.EventInstance.CategoryId" />
+
+            
 
             
 
@@ -443,8 +525,12 @@
 
             
 
+            
+
              to a resource identifier in the category resource file. If the event source does not have a configured category resource file, or the specified <see
              cref="P:System.Diagnostics.EventInstance.CategoryId" />
+
+            
 
             
 
@@ -460,6 +546,8 @@
 
             
 
+            
+
              or the <see
              cref="T:System.Diagnostics.EventSourceCreationData" />
 
@@ -467,8 +555,12 @@
 
             
 
+            
+
              class. When defining category strings in a resource file, the category resource identifiers must be numbered consecutively starting at 1, up to the configured <see
              cref="P:System.Diagnostics.EventSourceCreationData.CategoryCount" />
+
+            
 
             
 
@@ -484,11 +576,15 @@
 
             
 
+            
+
              for the event log entry.</para
           >
           <para
             >For details about defining event messages and building event resource files, see the "Message Compiler" topic in the Platform SDK documentation at <see
              cref="http://msdn.microsoft.com/">http://msdn.microsoft.com</see>
+
+            
 
             
 
@@ -557,8 +653,12 @@
 
             
 
+            
+
              property uniquely identifies an event entry for a configured event source. For events defined in message resource files, the <see
              cref="P:System.Diagnostics.EventInstance.InstanceId" />
+
+            
 
             
 
@@ -571,8 +671,12 @@
 
             
 
+            
+
              to a resource identifier. The Event Viewer uses the <see
              cref="P:System.Diagnostics.EventInstance.InstanceId" />
+
+            
 
             
 
@@ -583,6 +687,8 @@
           <para
             >For details about defining event messages and building event log resource files, see the "Message Compiler" topic in the Platform SDK documentation at <see
              cref="http://msdn.microsoft.com/">http://msdn.microsoft.com</see>
+
+            
 
             
 

@@ -29,11 +29,15 @@
 
         
 
+        
+
          method.</para
       >
       <para
         >For IPV4 properties, see <see
          cref="M:System.Net.NetworkInformation.IPInterfaceProperties.GetIPv4Properties" />
+
+        
 
         
 
@@ -72,6 +76,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -80,6 +86,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Net.NetworkInformation.IPv6InterfaceProperties" />
+
+            
 
             
 

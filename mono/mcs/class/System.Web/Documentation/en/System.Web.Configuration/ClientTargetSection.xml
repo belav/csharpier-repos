@@ -24,6 +24,8 @@
 
         
 
+        
+
          class provides a way to programmatically access and modify the clientTarget section of the configuration file. It belongs to a group that includes the <see
          cref="T:System.Web.Configuration.ClientTargetCollection" />
 
@@ -31,8 +33,12 @@
 
         
 
+        
+
          class and the <see
          cref="T:System.Web.Configuration.ClientTarget" />
+
+        
 
         
 
@@ -48,8 +54,12 @@
 
         
 
+        
+
          class contains <see
          cref="T:System.Web.Configuration.ClientTarget" />
+
+        
 
         
 
@@ -80,8 +90,12 @@
 
             
 
+            
+
              class by using the <see
              cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+
+            
 
             
 
@@ -95,6 +109,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.ClientTargetSection" />
+
+            
 
             
 
@@ -135,6 +151,8 @@
 
             
 
+            
+
              object contains two properties identifying a client browser, also called the user agent. One property is the alias associated with the client browser that is identified by the other property. ASP.NET uses this information to render server controls on a page.</para
           >
         </remarks>
@@ -143,6 +161,8 @@
           <para
             >Gets the collection of <see
              cref="T:System.Web.Configuration.ClientTarget" />
+
+            
 
             
 

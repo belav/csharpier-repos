@@ -47,8 +47,12 @@
 
         
 
+        
+
          is the base class for <see
          cref="T:System.Windows.Forms.MenuStrip" />
+
+        
 
         
 
@@ -61,8 +65,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Windows.Forms.ContextMenuStrip" />
+
+        
 
         
 
@@ -78,6 +86,8 @@
 
         
 
+        
+
          and its associated classes in new Windows Forms applications to create toolbars that can have a Windows XP, Office, Internet Explorer, or custom appearance and behavior, all with or without themes, and with support for overflow and run-time item reordering. <see
          cref="T:System.Windows.Forms.ToolStrip" />
 
@@ -85,8 +95,12 @@
 
         
 
+        
+
          controls also offer a rich design-time experience that includes in-place activation and editing, custom layout, and sharing of horizontal or vertical space within a specified <see
          cref="T:System.Windows.Forms.ToolStripContainer" />
+
+        
 
         
 
@@ -102,8 +116,12 @@
 
         
 
+        
+
          class provides many members that manage painting, mouse and keyboard input, and drag-and-drop functionality. Use the <see
          cref="T:System.Windows.Forms.ToolStripRenderer" />
+
+        
 
         
 
@@ -116,8 +134,12 @@
 
         
 
+        
+
          class to gain even more control and customizability over the painting and layout style of all <see
          cref="T:System.Windows.Forms.ToolStrip" />
+
+        
 
         
 
@@ -133,6 +155,8 @@
 
         
 
+        
+
          and <see
          cref="T:System.Windows.Forms.ToolStripProfessionalRenderer" />
 
@@ -140,8 +164,12 @@
 
         
 
+        
+
          in all orientations. They are available by default at design time for the <see
          cref="T:System.Windows.Forms.ToolStrip" />
+
+        
 
         
 
@@ -194,8 +222,12 @@
 
         
 
+        
+
          controls within a specified <see
          cref="T:System.Windows.Forms.ToolStripContainer" />
+
+        
 
         
 
@@ -208,8 +240,12 @@
 
         
 
+        
+
          controls with each other. Use <see
          cref="T:System.Windows.Forms.ToolStripPanel" />
+
+        
 
         
 
@@ -222,6 +258,8 @@
 
         
 
+        
+
          for Multiple Document Interface (MDI) applications. Typically, a <see
          cref="T:System.Windows.Forms.ToolStrip" />
 
@@ -229,8 +267,12 @@
 
         
 
+        
+
          does not participate in the tab order unless it is absolutely positioned rather than being docked or in a <see
          cref="T:System.Windows.Forms.ToolStripPanel" />
+
+        
 
         
 
@@ -246,8 +288,12 @@
 
         
 
+        
+
          class to host any other Windows Forms control in a <see
          cref="T:System.Windows.Forms.ToolStrip" />
+
+        
 
         
 
@@ -263,8 +309,12 @@
 
         
 
+        
+
          is double buffered, taking advantage of the <see
          cref="F:System.Windows.Forms.ControlStyles.OptimizedDoubleBuffer" />
+
+        
 
         
 
@@ -280,6 +330,8 @@
 
         
 
+        
+
          replaces and adds functionality to the <see
          cref="T:System.Windows.Forms.ToolBar" />
 
@@ -287,8 +339,12 @@
 
         
 
+        
+
          control of previous versions, <see
          cref="T:System.Windows.Forms.ToolBar" />
+
+        
 
         
 
@@ -315,6 +371,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -356,8 +414,12 @@
 
             
 
+            
+
              class with the specified array of <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -373,8 +435,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -408,8 +474,12 @@
 
             
 
+            
+
              property to true and set the <see
              cref="P:System.Windows.Forms.ToolStrip.AllowItemReorder" />
+
+            
 
             
 
@@ -422,6 +492,8 @@
 
             
 
+            
+
             , <see
              cref="E:System.Windows.Forms.Control.DragLeave" />
 
@@ -429,8 +501,12 @@
 
             
 
+            
+
             , and <see
              cref="E:System.Windows.Forms.Control.DragDrop" />
+
+            
 
             
 
@@ -446,8 +522,12 @@
 
             
 
+            
+
              to false and set <see
              cref="P:System.Windows.Forms.ToolStrip.AllowItemReorder" />
+
+            
 
             
 
@@ -460,8 +540,12 @@
 
             
 
+            
+
              class to handle drag-and-drop and item reordering automatically. Set <see
              cref="P:System.Windows.Forms.ToolStrip.AllowItemReorder" />
+
+            
 
             
 
@@ -474,8 +558,12 @@
 
             
 
+            
+
              objects to allow dragging of items from one <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -491,8 +579,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ToolStrip.AllowItemReorder" />
+
+            
 
             
 
@@ -533,8 +625,12 @@
 
             
 
+            
+
              property to true and set the <see
              cref="P:System.Windows.Forms.ToolStrip.AllowItemReorder" />
+
+            
 
             
 
@@ -547,6 +643,8 @@
 
             
 
+            
+
             , <see
              cref="E:System.Windows.Forms.Control.DragLeave" />
 
@@ -554,8 +652,12 @@
 
             
 
+            
+
             , and <see
              cref="E:System.Windows.Forms.Control.DragDrop" />
+
+            
 
             
 
@@ -571,8 +673,12 @@
 
             
 
+            
+
              to false and set <see
              cref="P:System.Windows.Forms.ToolStrip.AllowItemReorder" />
+
+            
 
             
 
@@ -585,8 +691,12 @@
 
             
 
+            
+
              class to handle drag-and-drop and item reordering automatically. Set <see
              cref="P:System.Windows.Forms.ToolStrip.AllowItemReorder" />
+
+            
 
             
 
@@ -599,8 +709,12 @@
 
             
 
+            
+
              objects to allow dragging of items from one <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -616,8 +730,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ToolStrip.AllowItemReorder" />
+
+            
 
             
 
@@ -631,6 +749,8 @@
           <para
             >Gets or sets a value indicating whether drag-and-drop and item reordering are handled privately by the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -667,6 +787,8 @@
 
             
 
+            
+
              property to enable multiple-document interface (MDI) children to combine their respective menus in the MDI parent.</para
           >
         </remarks>
@@ -680,6 +802,8 @@
 
             
 
+            
+
             , <see
              cref="T:System.Windows.Forms.ToolStripDropDownMenu" />
 
@@ -687,8 +811,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Windows.Forms.ToolStripMenuItem" />
+
+            
 
             
 
@@ -721,8 +849,12 @@
 
             
 
+            
+
              property to define how a <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -739,8 +871,12 @@
 
               
 
+              
+
                and <see
                cref="P:System.Windows.Forms.ToolStrip.Dock" />
+
+              
 
               
 
@@ -760,8 +896,12 @@
 
             
 
+            
+
              is bound and determines how a <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -931,8 +1071,12 @@
 
             
 
+            
+
              to false and the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -945,8 +1089,12 @@
 
             
 
+            
+
              panel, the bounds of the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -959,8 +1107,12 @@
 
             
 
+            
+
              to a different panel of the <see
              cref="T:System.Windows.Forms.ToolStripContainer" />
+
+            
 
             
 
@@ -973,6 +1125,8 @@
 
             
 
+            
+
              event, check the value of the <see
              cref="P:System.Windows.Forms.ToolStrip.Orientation" />
 
@@ -980,8 +1134,12 @@
 
             
 
+            
+
              property, and resize the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -997,8 +1155,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.ToolStripItem.ImageAlign" />
+
+            
 
             
 
@@ -1011,8 +1173,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.ToolStripItem.ImageKey" />
+
+            
 
             
 
@@ -1025,6 +1191,8 @@
 
             
 
+            
+
              properties pertain to various aspects of image handling. Use images in <see
              cref="T:System.Windows.Forms.ToolStrip" />
 
@@ -1032,8 +1200,12 @@
 
             
 
+            
+
              controls by setting these properties directly or by setting the run-time–only <see
              cref="P:System.Windows.Forms.ToolStrip.ImageList" />
+
+            
 
             
 
@@ -1049,8 +1221,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -1067,6 +1243,8 @@
 
                 
 
+                
+
                  is the scale of the final image as determined by the combination of the image's <see
                  cref="P:System.Windows.Forms.ToolStripItem.ImageScaling" />
 
@@ -1074,8 +1252,12 @@
 
                 
 
+                
+
                  setting and the container's <see
                  cref="P:System.Windows.Forms.ToolStrip.AutoSize" />
+
+                
 
                 
 
@@ -1093,8 +1275,12 @@
 
                     
 
+                    
+
                      is true (the default) and <see
                      cref="T:System.Windows.Forms.ToolStripItemImageScaling" />
+
+                    
 
                     
 
@@ -1107,8 +1293,12 @@
 
                     
 
+                    
+
                     , no image scaling occurs, and the <see
                      cref="T:System.Windows.Forms.ToolStrip" />
+
+                    
 
                     
 
@@ -1126,8 +1316,12 @@
 
                     
 
+                    
+
                      is false and <see
                      cref="T:System.Windows.Forms.ToolStripItemImageScaling" />
+
+                    
 
                     
 
@@ -1140,8 +1334,12 @@
 
                     
 
+                    
+
                     , neither image nor <see
                      cref="T:System.Windows.Forms.ToolStrip" />
+
+                    
 
                     
 
@@ -1205,6 +1403,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1213,6 +1413,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.ToolStrip.AutoSize" />
+
+            
 
             
 
@@ -1245,8 +1447,12 @@
 
             
 
+            
+
              property does not support transparent colors unless the SupportsTransparentBackColor value of <see
              cref="T:System.Windows.Forms.ControlStyles" />
+
+            
 
             
 
@@ -1262,8 +1468,12 @@
 
             
 
+            
+
              property is an ambient property. An ambient property is a control property that, if not set, is retrieved from the parent control. For example, a <see
              cref="T:System.Windows.Forms.Button" />
+
+            
 
             
 
@@ -1276,8 +1486,12 @@
 
             
 
+            
+
              as its parent <see
              cref="T:System.Windows.Forms.Form" />
+
+            
 
             
 
@@ -1290,8 +1504,12 @@
 
             
 
+            
+
              class or the <see
              cref="T:System.Windows.Forms.Control" />
+
+            
 
             
 
@@ -1305,6 +1523,8 @@
           <para
             >Gets or sets the background color for the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -1340,6 +1560,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -1348,6 +1570,8 @@
           <para
             >Occurs when the user begins to drag the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -1382,8 +1606,12 @@
 
             
 
+            
+
              of a <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -1396,8 +1624,12 @@
 
             
 
+            
+
              for all data-bound controls contained by the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -1410,6 +1642,8 @@
 
             
 
+            
+
              keeps all controls that are bound to the same data source synchronized. For example, setting the <see
              cref="P:System.Windows.Forms.BindingManagerBase.Position" />
 
@@ -1417,8 +1651,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Windows.Forms.BindingManagerBase" />
+
+            
 
             
 
@@ -1434,6 +1672,8 @@
 
             
 
+            
+
              and assigning it to the <see
              cref="P:System.Windows.Forms.Control.BindingContext" />
 
@@ -1441,8 +1681,12 @@
 
             
 
+            
+
              property, see the <see
              cref="M:System.Windows.Forms.BindingContext.#ctor" />
+
+            
 
             
 
@@ -1456,6 +1700,8 @@
           <para
             >Gets or sets the binding context for the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -1492,8 +1738,12 @@
 
             
 
+            
+
              property to true to send a <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -1512,6 +1762,8 @@
 
               
 
+              
+
                to manage this situation.</para
             >
           </block>
@@ -1521,6 +1773,8 @@
           <para
             >Gets or sets a value indicating whether items in the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -1546,6 +1800,8 @@
           <para
             >Gets or sets a value indicating whether the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -1587,6 +1843,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1595,6 +1853,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.ToolStrip.CausesValidation" />
+
+            
 
             
 
@@ -1730,6 +1990,8 @@
 
             
 
+            
+
              item.</para
           >
         </summary>
@@ -1743,8 +2005,12 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -1780,6 +2046,8 @@
           <para
             >A new instance of <see
              cref="T:System.Windows.Forms.Control.ControlCollection" />
+
+            
 
             
 
@@ -1822,8 +2090,12 @@
 
             
 
+            
+
              with the specified text, image, and event handler on a new <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -1842,6 +2114,8 @@
 
             
 
+            
+
             , or a <see
              cref="T:System.Windows.Forms.ToolStripSeparator" />
 
@@ -1849,8 +2123,12 @@
 
             
 
+            
+
              if the <paramref
              name="text" />
+
+            
 
             
 
@@ -1866,8 +2144,12 @@
 
           
 
+          
+
           The text to use for the <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -1880,8 +2162,12 @@
 
           
 
+          
+
            parameter is a hyphen (-), this method creates a <see
            cref="T:System.Windows.Forms.ToolStripSeparator" />
+
+          
 
           
 
@@ -1896,6 +2182,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Image" />
 
@@ -1903,8 +2191,12 @@
 
           
 
+          
+
            to display on the <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -1919,6 +2211,8 @@
 
           
 
+          
+
           An event handler that raises the <see
            cref="E:System.Windows.Forms.Control.Click" />
 
@@ -1926,8 +2220,12 @@
 
           
 
+          
+
            event when the <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -1964,6 +2262,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1972,6 +2272,8 @@
           <para
             >One of the <see
              cref="T:System.Windows.Forms.ToolStripLayoutStyle" />
+
+            
 
             
 
@@ -1987,8 +2289,12 @@
 
           
 
+          
+
           The visual arrangement to be applied to the <see
            cref="T:System.Windows.Forms.ToolStrip" />
+
+          
 
           
 
@@ -2020,6 +2326,8 @@
 
             
 
+            
+
              property to get or set a specific <see
              cref="T:System.Windows.Forms.Cursor" />
 
@@ -2027,8 +2335,12 @@
 
             
 
+            
+
              used with the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -2042,6 +2354,8 @@
           <para
             >Gets or sets the cursor that is displayed when the mouse pointer is over the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -2083,6 +2397,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -2091,6 +2407,8 @@
           <para
             >Occurs when the value of the <see
              cref="T:System.Windows.Forms.Cursor" />
+
+            
 
             
 
@@ -2127,6 +2445,8 @@
           <para
             >Gets the docking location of the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -2169,8 +2489,12 @@
 
             
 
+            
+
              property to get or set where a <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -2189,8 +2513,12 @@
 
             
 
+            
+
              control is displayed relative to the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -2219,6 +2547,8 @@
           <para
             >Gets the default spacing, in pixels, between the sizing grip and the edges of the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -2255,8 +2585,12 @@
 
             
 
+            
+
              and the <see
              cref="T:System.Windows.Forms.ToolStripContainer" />
+
+            
 
             
 
@@ -2292,6 +2626,8 @@
 
             
 
+            
+
              are padded one pixel from the right edge of the <see
              cref="T:System.Windows.Forms.ToolStrip" />
 
@@ -2299,8 +2635,12 @@
 
             
 
+            
+
              to prevent the right border from painting over a <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -2314,6 +2654,8 @@
           <para
             >Gets the internal spacing, in pixels, of the contents of a <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -2350,6 +2692,8 @@
 
             
 
+            
+
              by default.</para
           >
         </summary>
@@ -2380,8 +2724,12 @@
 
             
 
+            
+
              property represents the <see
              cref="T:System.Drawing.Size" />
+
+            
 
             
 
@@ -2394,6 +2742,8 @@
 
             
 
+            
+
              when it is initially created. You can adjust the size of the <see
              cref="T:System.Windows.Forms.ToolStrip" />
 
@@ -2401,8 +2751,12 @@
 
             
 
+            
+
              by setting its <see
              cref="P:System.Windows.Forms.Control.PreferredSize" />
+
+            
 
             
 
@@ -2419,6 +2773,8 @@
 
               
 
+              
+
                of a <see
                cref="T:System.Windows.Forms.ToolStrip" />
 
@@ -2426,8 +2782,12 @@
 
               
 
+              
+
                in its constructor. Instead, override the <see
                cref="P:System.Windows.Forms.ToolStrip.DefaultSize" />
+
+              
 
               
 
@@ -2442,6 +2802,8 @@
           <para
             >Gets the default size of the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -2479,6 +2841,8 @@
 
             
 
+            
+
              property to access only those items that are currently displayed. These are the items that are not currently in an overflow menu.</para
           >
           <para
@@ -2489,8 +2853,12 @@
 
             
 
+            
+
              collection to retrieve all the items of a <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -2509,8 +2877,12 @@
 
             
 
+            
+
             , including items that are automatically added into the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -2538,6 +2910,8 @@
           <para
             >The display rectangle is the area where you lay out items. The position and dimensions of the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -2578,8 +2952,12 @@
 
             
 
+            
+
              method. Dispose invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -2592,8 +2970,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -2609,8 +2991,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -2629,11 +3015,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2670,8 +3060,12 @@
 
             
 
+            
+
              property to define how a <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -2684,6 +3078,8 @@
 
             
 
+            
+
              to <see
              cref="F:System.Windows.Forms.DockStyle.Left" />
 
@@ -2691,8 +3087,12 @@
 
             
 
+            
+
              causes the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -2709,8 +3109,12 @@
 
             
 
+            
+
              control is in a <see
              cref="T:System.Windows.Forms.ToolStripPanel" />
+
+            
 
             
 
@@ -2723,8 +3127,12 @@
 
             
 
+            
+
              can be repositioned within the <see
              cref="T:System.Windows.Forms.ToolStripPanel" />
+
+            
 
             
 
@@ -2737,8 +3145,12 @@
 
             
 
+            
+
             s. The <see
              cref="P:System.Windows.Forms.ToolStrip.Dock" />
+
+            
 
             
 
@@ -2751,8 +3163,12 @@
 
             
 
+            
+
              property is false, the size of the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -2765,8 +3181,12 @@
 
             
 
+            
+
             . Typically, the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -2783,8 +3203,12 @@
 
               
 
+              
+
                and <see
                cref="P:System.Windows.Forms.ToolStrip.Dock" />
+
+              
 
               
 
@@ -2804,8 +3228,12 @@
 
             
 
+            
+
              borders are docked to its parent control and determines how a <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -2841,6 +3269,8 @@
 
             
 
+            
+
             . </para
           >
         </remarks>
@@ -2849,6 +3279,8 @@
           <para
             >Occurs when the user stops dragging the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -2906,6 +3338,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2939,6 +3373,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -2947,6 +3383,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ToolStrip.ForeColor" />
+
+            
 
             
 
@@ -2999,6 +3437,8 @@
 
             
 
+            
+
              that is located at the specified coordinates.</para
           >
         </returns>
@@ -3009,8 +3449,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -3060,6 +3504,8 @@
 
             
 
+            
+
              that is located at the specified coordinates.</para
           >
         </returns>
@@ -3070,8 +3516,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -3086,8 +3536,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.GetChildAtPointSkip" />
+
+          
 
           
 
@@ -3122,6 +3576,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -3135,8 +3591,12 @@
 
             
 
+            
+
              at the specified location, or null if the <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -3152,6 +3612,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Point" />
 
@@ -3159,8 +3621,12 @@
 
           
 
+          
+
            at which to search for the <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -3199,6 +3665,8 @@
 
             
 
+            
+
              client area.</para
           >
         </summary>
@@ -3212,8 +3680,12 @@
 
             
 
+            
+
              located at the specified location, or null if the <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -3229,10 +3701,14 @@
 
           
 
+          
+
           The horizontal coordinate, in pixels, from the left edge of the client area. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3270,8 +3746,12 @@
 
             
 
+            
+
              method to get the next <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -3284,6 +3764,8 @@
 
             
 
+            
+
             . The <see
              cref="T:System.Windows.Forms.ArrowDirection" />
 
@@ -3291,8 +3773,12 @@
 
             
 
+            
+
              enumeration coordinates with the <see
              cref="P:System.Windows.Forms.ToolStrip.Orientation" />
+
+            
 
             
 
@@ -3311,6 +3797,8 @@
 
             
 
+            
+
              from the specified reference point and moving in the specified direction.</para
           >
         </summary>
@@ -3324,6 +3812,8 @@
 
             
 
+            
+
              that is specified by the <paramref
              name="start" />
 
@@ -3331,8 +3821,12 @@
 
             
 
+            
+
              parameter and is next in the order as specified by the <paramref
              name="direction" />
+
+            
 
             
 
@@ -3348,8 +3842,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -3364,8 +3862,12 @@
 
           
 
+          
+
           One of the values of <see
            cref="T:System.Windows.Forms.ArrowDirection" />
+
+          
 
           
 
@@ -3406,6 +3908,8 @@
 
             
 
+            
+
              move handle.</para
           >
         </summary>
@@ -3436,8 +3940,12 @@
 
             
 
+            
+
              property to get or set the space around the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -3450,8 +3958,12 @@
 
             
 
+            
+
              can take individual values for <see
              cref="P:System.Windows.Forms.Padding.Top" />
+
+            
 
             
 
@@ -3464,8 +3976,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.Padding.Left" />
+
+            
 
             
 
@@ -3478,8 +3994,12 @@
 
             
 
+            
+
             , you can adjust the space around the move handle as preferred. The margin can even be off the edge of the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -3493,6 +4013,8 @@
           <para
             >Gets or sets the space around the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -3533,6 +4055,8 @@
 
             
 
+            
+
              property to get boundaries for painting, hit testing, and so on.</para
           >
         </remarks>
@@ -3541,6 +4065,8 @@
           <para
             >Gets the boundaries of the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -3581,8 +4107,12 @@
 
             
 
+            
+
              movable by putting it in a <see
              cref="T:System.Windows.Forms.ToolStripPanel" />
+
+            
 
             
 
@@ -3595,8 +4125,12 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.Windows.Forms.ToolStripGripStyle.Visible" />
+
+            
 
             
 
@@ -3610,6 +4144,8 @@
           <para
             >Gets or sets whether the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -3717,8 +4253,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.ToolStripItem.ImageAlign" />
+
+            
 
             
 
@@ -3731,8 +4271,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.ToolStripItem.ImageKey" />
+
+            
 
             
 
@@ -3745,6 +4289,8 @@
 
             
 
+            
+
              properties pertain to various aspects of image handling. Use images in <see
              cref="T:System.Windows.Forms.ToolStrip" />
 
@@ -3752,8 +4298,12 @@
 
             
 
+            
+
              controls by setting these properties directly or by setting the run-time–only <see
              cref="P:System.Windows.Forms.ToolStrip.ImageList" />
+
+            
 
             
 
@@ -3769,8 +4319,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -3787,6 +4341,8 @@
 
                 
 
+                
+
                  is the scale of the final image as determined by the combination of the image's <see
                  cref="P:System.Windows.Forms.ToolStripItem.ImageScaling" />
 
@@ -3794,8 +4350,12 @@
 
                 
 
+                
+
                  setting and the container's <see
                  cref="P:System.Windows.Forms.ToolStrip.AutoSize" />
+
+                
 
                 
 
@@ -3813,8 +4373,12 @@
 
                     
 
+                    
+
                      is true (the default) and <see
                      cref="T:System.Windows.Forms.ToolStripItemImageScaling" />
+
+                    
 
                     
 
@@ -3827,8 +4391,12 @@
 
                     
 
+                    
+
                     , no image scaling occurs, and the <see
                      cref="T:System.Windows.Forms.ToolStrip" />
+
+                    
 
                     
 
@@ -3846,8 +4414,12 @@
 
                     
 
+                    
+
                      is false and <see
                      cref="T:System.Windows.Forms.ToolStripItemImageScaling" />
+
+                    
 
                     
 
@@ -3860,8 +4432,12 @@
 
                     
 
+                    
+
                     , neither image nor <see
                      cref="T:System.Windows.Forms.ToolStrip" />
+
+                    
 
                     
 
@@ -3879,6 +4455,8 @@
           <para
             >Gets or sets the image list that contains the image displayed on a <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -3914,8 +4492,12 @@
 
             
 
+            
+
              property to control the default size of an image. Use <see
              cref="F:System.Windows.Forms.ToolStripItemImageScaling.SizeToFit" />
+
+            
 
             
 
@@ -3928,8 +4510,12 @@
 
             
 
+            
+
              to automatically adjust to fit on a <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -3945,8 +4531,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.ToolStripItem.ImageAlign" />
+
+            
 
             
 
@@ -3959,8 +4549,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Windows.Forms.ToolStripItem.ImageKey" />
+
+            
 
             
 
@@ -3973,6 +4567,8 @@
 
             
 
+            
+
              properties pertain to various aspects of image handling. Use images in <see
              cref="T:System.Windows.Forms.ToolStrip" />
 
@@ -3980,8 +4576,12 @@
 
             
 
+            
+
              controls by setting these properties directly or by setting the run-time–only <see
              cref="P:System.Windows.Forms.ToolStrip.ImageList" />
+
+            
 
             
 
@@ -3997,8 +4597,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -4015,6 +4619,8 @@
 
                 
 
+                
+
                  is the scale of the final image as determined by the combination of the image's <see
                  cref="P:System.Windows.Forms.ToolStripItem.ImageScaling" />
 
@@ -4022,8 +4628,12 @@
 
                 
 
+                
+
                  setting and the container's <see
                  cref="P:System.Windows.Forms.ToolStrip.AutoSize" />
+
+                
 
                 
 
@@ -4041,8 +4651,12 @@
 
                     
 
+                    
+
                      is true (the default) and <see
                      cref="T:System.Windows.Forms.ToolStripItemImageScaling" />
+
+                    
 
                     
 
@@ -4055,8 +4669,12 @@
 
                     
 
+                    
+
                     , no image scaling occurs, and the <see
                      cref="T:System.Windows.Forms.ToolStrip" />
+
+                    
 
                     
 
@@ -4074,8 +4692,12 @@
 
                     
 
+                    
+
                      is false and <see
                      cref="T:System.Windows.Forms.ToolStripItemImageScaling" />
+
+                    
 
                     
 
@@ -4088,8 +4710,12 @@
 
                     
 
+                    
+
                     , neither image nor <see
                      cref="T:System.Windows.Forms.ToolStrip" />
+
+                    
 
                     
 
@@ -4107,6 +4733,8 @@
           <para
             >Gets or sets the size, in pixels, of an image used on a <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -4155,8 +4783,12 @@
 
             
 
+            
+
              from one <see
              cref="T:System.Windows.Forms.ToolStripContainer" />
+
+            
 
             
 
@@ -4192,8 +4824,12 @@
 
             
 
+            
+
              is a <see
              cref="T:System.Windows.Forms.ToolStripDropDown" />
+
+            
 
             
 
@@ -4230,8 +4866,12 @@
 
             
 
+            
+
              method is called during window message preprocessing to determine whether the given input character should be preprocessed or sent directly to the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -4244,6 +4884,8 @@
 
             
 
+            
+
              method returns true, the specified character is sent directly to the <see
              cref="T:System.Windows.Forms.ToolStrip" />
 
@@ -4251,8 +4893,12 @@
 
             
 
+            
+
             . However, if the method returns false, the character is preprocessed and only sent to the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -4271,6 +4917,8 @@
         </returns>
         <param name="charCode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -4312,8 +4960,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.Keys" />
+
+          
 
           
 
@@ -4346,6 +4998,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4359,8 +5013,12 @@
 
             
 
+            
+
              is added to the <see
              cref="T:System.Windows.Forms.ToolStripItemCollection" />
+
+            
 
             
 
@@ -4397,6 +5055,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4405,6 +5065,8 @@
           <para
             >Occurs when the <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -4441,6 +5103,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4454,8 +5118,12 @@
 
             
 
+            
+
              is removed from the <see
              cref="T:System.Windows.Forms.ToolStripItemCollection" />
+
+            
 
             
 
@@ -4491,6 +5159,8 @@
 
             
 
+            
+
              collection to retrieve all the items that have been added to the <see
              cref="T:System.Windows.Forms.ToolStrip" />
 
@@ -4498,8 +5168,12 @@
 
             
 
+            
+
             , not just the items that are displayed. An item remains in the <see
              cref="P:System.Windows.Forms.ToolStrip.Items" />
+
+            
 
             
 
@@ -4515,8 +5189,12 @@
 
             
 
+            
+
              property to retrieve only the items that are currently displayed on the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -4530,6 +5208,8 @@
           <para
             >Gets all the items that belong to a <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -4569,8 +5249,12 @@
 
             
 
+            
+
             , an overflow button automatically appears. The <see
              cref="P:System.Windows.Forms.ToolStripItem.Overflow" />
+
+            
 
             
 
@@ -4586,8 +5270,12 @@
 
             
 
+            
+
              property in the <see
              cref="E:System.Windows.Forms.ToolStrip.LayoutCompleted" />
+
+            
 
             
 
@@ -4600,8 +5288,12 @@
 
             
 
+            
+
             , the overflow <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -4614,6 +5306,8 @@
 
             
 
+            
+
              and its <see
              cref="P:System.Windows.Forms.ToolStripItem.Overflow" />
 
@@ -4621,8 +5315,12 @@
 
             
 
+            
+
              property was set to <see
              cref="F:System.Windows.Forms.ToolStripItemOverflow.Never" />
+
+            
 
             
 
@@ -4640,6 +5338,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4648,6 +5348,8 @@
           <para
             >Occurs when the layout of the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -4679,6 +5381,8 @@
           <para
             >Passes a reference to the cached <see
              cref="P:System.Windows.Forms.Control.LayoutEngine" />
+
+            
 
             
 
@@ -4747,8 +5451,12 @@
 
             
 
+            
+
              property to one of the overflow values. If the <see
              cref="P:System.Windows.Forms.ToolStrip.LayoutStyle" />
+
+            
 
             
 
@@ -4761,8 +5469,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.Windows.Forms.ToolStripLayoutStyle.Table" />
+
+            
 
             
 
@@ -4776,6 +5488,8 @@
           <para
             >Gets or sets a value indicating how the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -4814,6 +5528,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -4822,6 +5538,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ToolStrip.LayoutStyle" />
+
+            
 
             
 
@@ -4860,6 +5578,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -4890,11 +5610,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStrip.OnBeginDrag(System.EventArgs)" />
+
+            
 
             
 
@@ -4913,6 +5637,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -4923,8 +5649,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -4957,11 +5687,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStrip.OnDockChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -4980,6 +5714,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -4990,8 +5726,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5030,11 +5770,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStrip.OnEnabledChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -5053,6 +5797,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5063,8 +5809,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5102,11 +5852,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStrip.OnEndDrag(System.EventArgs)" />
+
+            
 
             
 
@@ -5125,6 +5879,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5135,8 +5891,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5168,6 +5928,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5178,8 +5940,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5218,11 +5984,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStrip.OnHandleCreated(System.EventArgs)" />
+
+            
 
             
 
@@ -5241,6 +6011,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5251,8 +6023,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5291,11 +6067,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStrip.OnHandleDestroyed(System.EventArgs)" />
+
+            
 
             
 
@@ -5314,6 +6094,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5324,8 +6106,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5363,6 +6149,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5373,8 +6161,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Windows.Forms.InvalidateEventArgs" />
+
+          
 
           
 
@@ -5415,11 +6207,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStrip.OnItemAdded(System.Windows.Forms.ToolStripItemEventArgs)" />
+
+            
 
             
 
@@ -5438,6 +6234,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5448,8 +6246,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripItemEventArgs" />
+
+          
 
           
 
@@ -5485,11 +6287,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStrip.OnItemClicked(System.Windows.Forms.ToolStripItemClickedEventArgs)" />
+
+            
 
             
 
@@ -5508,6 +6314,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5518,8 +6326,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripItemClickedEventArgs" />
+
+          
 
           
 
@@ -5560,11 +6372,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStrip.OnItemRemoved(System.Windows.Forms.ToolStripItemEventArgs)" />
+
+            
 
             
 
@@ -5583,6 +6399,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5593,8 +6411,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ToolStripItemEventArgs" />
+
+          
 
           
 
@@ -5630,11 +6452,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStrip.OnLayout(System.Windows.Forms.LayoutEventArgs)" />
+
+            
 
             
 
@@ -5653,6 +6479,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5663,8 +6491,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.LayoutEventArgs" />
+
+          
 
           
 
@@ -5703,11 +6535,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStrip.OnLayoutCompleted(System.EventArgs)" />
+
+            
 
             
 
@@ -5726,6 +6562,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5736,8 +6574,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5776,11 +6618,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStrip.OnLayoutStyleChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -5799,6 +6645,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5809,8 +6657,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5846,11 +6698,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStrip.OnLeave(System.EventArgs)" />
+
+            
 
             
 
@@ -5869,6 +6725,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5879,8 +6737,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5916,11 +6778,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStrip.OnLostFocus(System.EventArgs)" />
+
+            
 
             
 
@@ -5939,6 +6805,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -5949,8 +6817,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -5990,6 +6862,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6000,8 +6874,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -6037,11 +6915,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStrip.OnMouseDown(System.Windows.Forms.MouseEventArgs)" />
+
+            
 
             
 
@@ -6060,6 +6942,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6070,8 +6954,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -6107,11 +6995,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStrip.OnMouseLeave(System.EventArgs)" />
+
+            
 
             
 
@@ -6130,6 +7022,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6140,8 +7034,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -6180,11 +7078,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStrip.OnMouseMove(System.Windows.Forms.MouseEventArgs)" />
+
+            
 
             
 
@@ -6203,6 +7105,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6213,8 +7117,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -6253,11 +7161,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStrip.OnMouseUp(System.Windows.Forms.MouseEventArgs)" />
+
+            
 
             
 
@@ -6276,6 +7188,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6286,8 +7200,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.MouseEventArgs" />
+
+          
 
           
 
@@ -6326,11 +7244,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStrip.OnPaint(System.Windows.Forms.PaintEventArgs)" />
+
+            
 
             
 
@@ -6349,6 +7271,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6359,8 +7283,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.PaintEventArgs" />
+
+          
 
           
 
@@ -6399,11 +7327,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStrip.OnPaintBackground(System.Windows.Forms.PaintEventArgs)" />
+
+            
 
             
 
@@ -6422,8 +7354,12 @@
 
             
 
+            
+
              event for the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -6439,8 +7375,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.PaintEventArgs" />
+
+          
 
           
 
@@ -6487,11 +7427,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStrip.OnPaintGrip(System.Windows.Forms.PaintEventArgs)" />
+
+            
 
             
 
@@ -6510,6 +7454,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6520,8 +7466,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.PaintEventArgs" />
+
+          
 
           
 
@@ -6557,11 +7507,15 @@
 
             
 
+            
+
             . </para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStrip.OnRendererChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -6580,6 +7534,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6590,8 +7546,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -6630,11 +7590,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStrip.OnRightToLeftChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -6653,6 +7617,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6663,8 +7629,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -6709,6 +7679,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6719,8 +7691,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Windows.Forms.ScrollEventArgs" />
+
+          
 
           
 
@@ -6756,11 +7732,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStrip.OnTabStopChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -6779,6 +7759,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -6789,8 +7771,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -6827,6 +7813,8 @@
 
             
 
+            
+
              property of a <see
              cref="T:System.Windows.Forms.ToolStrip" />
 
@@ -6834,8 +7822,12 @@
 
             
 
+            
+
              does not raise the various *Changed events of a <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -6853,11 +7845,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Windows.Forms.ToolStrip.OnVisibleChanged(System.EventArgs)" />
+
+            
 
             
 
@@ -6876,6 +7872,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -6886,8 +7884,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -6923,6 +7925,8 @@
           <para
             >Gets the orientation of the <see
              cref="T:System.Windows.Forms.ToolStripPanel" />
+
+            
 
             
 
@@ -6969,8 +7973,12 @@
 
             
 
+            
+
              that is the overflow button for a <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -7004,6 +8012,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -7012,6 +8022,8 @@
           <para
             >Occurs when the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -7075,8 +8087,12 @@
 
             
 
+            
+
              method is called during message preprocessing to handle dialog characters such as TAB, RETURN, ESCAPE, and arrow keys. This method is called only if the <see
              cref="M:System.Windows.Forms.ToolStrip.IsInputKey(System.Windows.Forms.Keys)" />
+
+            
 
             
 
@@ -7089,6 +8105,8 @@
 
             
 
+            
+
              simply sends the character to the parent control's <see
              cref="M:System.Windows.Forms.ToolStrip.ProcessDialogKey(System.Windows.Forms.Keys)" />
 
@@ -7096,8 +8114,12 @@
 
             
 
+            
+
              method, or returns false if the control has no parent. The <see
              cref="T:System.Windows.Forms.Form" />
+
+            
 
             
 
@@ -7121,8 +8143,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Windows.Forms.Keys" />
+
+          
 
           
 
@@ -7158,6 +8184,8 @@
 
             
 
+            
+
              method is called to give a control the opportunity to process a mnemonic character. This method should determine whether the control is in a state to process mnemonics and whether the given character represents a mnemonic. If so, the method should perform the action associated with the mnemonic and return true. If not, the method should return false. </para
           >
           <para
@@ -7168,11 +8196,15 @@
 
             
 
+            
+
              method to determine whether the given character matches a mnemonic in the control's text.</para
           >
           <para
             >This default implementation of the <see
              cref="M:System.Windows.Forms.ToolStrip.ProcessMnemonic(System.Char)" />
+
+            
 
             
 
@@ -7191,6 +8223,8 @@
         </returns>
         <param name="charCode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7230,6 +8264,8 @@
 
             
 
+            
+
              property and the <see
              cref="T:System.Windows.Forms.ToolStripRenderer" />
 
@@ -7237,8 +8273,12 @@
 
             
 
+            
+
              class to customize the look and feel of any <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -7254,6 +8294,8 @@
 
             
 
+            
+
             , assign it to the <see
              cref="P:System.Windows.Forms.ToolStrip.Renderer" />
 
@@ -7261,8 +8303,12 @@
 
             
 
+            
+
              property, and call the <see
              cref="M:System.Windows.Forms.ToolStripItem.Invalidate" />
+
+            
 
             
 
@@ -7281,8 +8327,12 @@
 
             
 
+            
+
              used to customize the look and feel of a <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -7316,6 +8366,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -7324,6 +8376,8 @@
           <para
             >Occurs when the value of the <see
              cref="P:System.Windows.Forms.ToolStrip.Renderer" />
+
+            
 
             
 
@@ -7359,8 +8413,12 @@
 
             
 
+            
+
              will use. You can use this property to specify a professional rendering style, a default system rendering style, or a style managed by the <see
              cref="P:System.Windows.Forms.ToolStrip.Renderer" />
+
+            
 
             
 
@@ -7374,6 +8432,8 @@
           <para
             >Gets or sets a value that indicates which visual styles will be applied to the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -7439,8 +8499,12 @@
 
             
 
+            
+
              method to control where the focus returns to when the <see
              cref="P:System.Windows.Forms.ToolStrip.TabStop" />
+
+            
 
             
 
@@ -7482,8 +8546,12 @@
 
             
 
+            
+
              and <paramref
              name="forward" />
+
+            
 
             
 
@@ -7496,6 +8564,8 @@
 
             
 
+            
+
              parameter is set to true, the <paramref
              name="forward" />
 
@@ -7503,8 +8573,12 @@
 
             
 
+            
+
              parameter is evaluated to determine which control to select. When <paramref
              name="forward" />
+
+            
 
             
 
@@ -7520,8 +8594,12 @@
 
             
 
+            
+
              method activates the control if the control's <see
              cref="F:System.Windows.Forms.ControlStyles.Selectable" />
+
+            
 
             
 
@@ -7541,10 +8619,14 @@
 
           
 
+          
+
           true to specify the direction of the control to select; otherwise, false.</param
         >
         <param name="forward">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -7588,8 +8670,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -7604,8 +8690,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Int32" />
+
+          
 
           
 
@@ -7645,8 +8735,12 @@
 
           
 
+          
+
           The new <see
            cref="P:System.Windows.Forms.Control.Left" />
+
+          
 
           
 
@@ -7661,8 +8755,12 @@
 
           
 
+          
+
           The new <see
            cref="P:System.Windows.Forms.Control.Top" />
+
+          
 
           
 
@@ -7677,8 +8775,12 @@
 
           
 
+          
+
           The new <see
            cref="P:System.Windows.Forms.Control.Width" />
+
+          
 
           
 
@@ -7693,8 +8795,12 @@
 
           
 
+          
+
           The new <see
            cref="P:System.Windows.Forms.Control.Height" />
+
+          
 
           
 
@@ -7709,8 +8815,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Windows.Forms.BoundsSpecified" />
+
+          
 
           
 
@@ -7770,8 +8880,12 @@
 
             
 
+            
+
              to a particular place on a <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -7787,8 +8901,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -7803,6 +8921,8 @@
 
           
 
+          
+
           A <see
            cref="T:System.Drawing.Point" />
 
@@ -7810,8 +8930,12 @@
 
           
 
+          
+
            representing the x and y client coordinates of the <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -7846,6 +8970,8 @@
 
             
 
+            
+
              property when creating a custom layout engine.</para
           >
         </remarks>
@@ -7859,8 +8985,12 @@
 
             
 
+            
+
              of a <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -7876,6 +9006,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStripItem" />
 
@@ -7883,8 +9015,12 @@
 
           
 
+          
+
            whose <see
            cref="P:System.Windows.Forms.Control.Parent" />
+
+          
 
           
 
@@ -7899,8 +9035,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.ToolStrip" />
+
+          
 
           
 
@@ -7913,8 +9053,12 @@
 
           
 
+          
+
            referred to by the <paramref
            name="item" />
+
+          
 
           
 
@@ -7955,6 +9099,8 @@
 
             
 
+            
+
              to the specified visibility state.</para
           >
         </summary>
@@ -7965,8 +9111,12 @@
 
           
 
+          
+
           true if the <see
            cref="T:System.Windows.Forms.ToolStripItem" />
+
+          
 
           
 
@@ -8003,8 +9153,12 @@
 
             
 
+            
+
              property to determine whether ToolTips are displayed for the <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -8018,6 +9172,8 @@
           <para
             >Gets or sets a value indicating whether ToolTips are to be displayed on <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -8055,8 +9211,12 @@
 
             
 
+            
+
              property to get or set whether the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -8075,8 +9235,12 @@
 
             
 
+            
+
              stretches from end to end in the <see
              cref="T:System.Windows.Forms.ToolStripContainer" />
+
+            
 
             
 
@@ -8117,6 +9281,8 @@
 
             
 
+            
+
              in the tab order. Controls with a <see
              cref="P:System.Windows.Forms.Control.TabStop" />
 
@@ -8124,8 +9290,12 @@
 
             
 
+            
+
              property value of false are not included in the collection of controls in the tab order. You can manipulate the tab order by changing the <see
              cref="P:System.Windows.Forms.Control.TabIndex" />
+
+            
 
             
 
@@ -8139,6 +9309,8 @@
           <para
             >Gets or sets a value indicating whether the user can give the focus to an item in the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -8181,8 +9353,12 @@
 
             
 
+            
+
              property to get or set the direction of the display text of a <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -8195,8 +9371,12 @@
 
             
 
+            
+
              or a <see
              cref="T:System.Windows.Forms.ToolStripButton" />
+
+            
 
             
 
@@ -8209,8 +9389,12 @@
 
             
 
+            
+
              property on the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -8223,8 +9407,12 @@
 
             
 
+            
+
              you add to the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -8237,8 +9425,12 @@
 
             
 
+            
+
              property differently for each <see
              cref="T:System.Windows.Forms.ToolStripItem" />
+
+            
 
             
 
@@ -8252,6 +9444,8 @@
           <para
             >Gets or sets the direction in which to draw text on a <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 
@@ -8282,6 +9476,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -8290,6 +9486,8 @@
           <para
             >A string that represents the <see
              cref="T:System.Windows.Forms.ToolStrip" />
+
+            
 
             
 

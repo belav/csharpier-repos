@@ -42,6 +42,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -85,6 +87,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -98,11 +102,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="description">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -135,6 +143,8 @@
                 >[&lt;topic://cpconExtendingMetadataUsingAttributes&gt;]</a
               >
             </format>
+
+            
 
             
 

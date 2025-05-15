@@ -8,8 +8,12 @@
 
     
 
+    
+
     ), element access expressions (<hyperlink
     >14.5.6</hyperlink>
+
+    
 
     
 
@@ -22,8 +26,12 @@
 
     
 
+    
+
     ), increment and decrement expressions (<hyperlink
     >14.5.9</hyperlink>
+
+    
 
     
 
@@ -36,8 +44,12 @@
 
     
 
+    
+
     ), cast expressions (<hyperlink
     >14.6.6</hyperlink>
+
+    
 
     
 
@@ -50,8 +62,12 @@
 
     
 
+    
+
     , <hyperlink
     >14.8</hyperlink>
+
+    
 
     
 
@@ -64,8 +80,12 @@
 
     
 
+    
+
     , <hyperlink
     >14.10</hyperlink>
+
+    
 
     
 
@@ -78,6 +98,8 @@
 
     
 
+    
+
     ), checked and unchecked expressions (<hyperlink
     >14.5.12</hyperlink>
 
@@ -85,8 +107,12 @@
 
     
 
+    
+
     ), array and delegate creation expressions (<hyperlink
     >14.5.10</hyperlink>
+
+    
 
     
 
@@ -102,8 +128,12 @@
 
     
 
+    
+
      For an expression expr, which has sub-expressions expr<sub
     >1</sub>
+
+    
 
     
 
@@ -116,8 +146,12 @@
 
     
 
+    
+
     , ..., expr<sub
     >n</sub>
+
+    
 
     
 
@@ -133,11 +167,15 @@
 
         
 
+        
+
          is the same as the definite assignment state at the beginning of expr. </list_item
       >
       <list_item
         > The definite assignment state of v at the beginning of expr<sub
         >i</sub>
+
+        
 
         
 
@@ -150,11 +188,15 @@
 
         
 
+        
+
         . </list_item
       >
       <list_item
         > The definite assignment state of v at the end of expr is the same as the definite assignment state at the end of expr<sub
         >n</sub>
+
+        
 
         
 

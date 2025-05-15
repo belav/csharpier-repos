@@ -18,8 +18,12 @@
 
         
 
+        
+
          interface identifies the methods that you must implement to create a custom manager for session-identifier values. An <see
          cref="T:System.Web.SessionState.ISessionIDManager" />
+
+        
 
         
 
@@ -29,6 +33,8 @@
          type="text/html">
           <a href="bda6fb8c-0076-43e3-9ce2-8cf1f8bdaa7d">sessionState</a>
         </format>
+
+        
 
         
 
@@ -44,11 +50,15 @@
 
         
 
+        
+
          interface implementation will support cookieless session identifiers, you will need to implement a solution for sending and retrieving session identifiers in the URL, such as an ISAPI filter.</para
       >
       <para
         >If you only want to supply custom session-identifier values to be used by ASP.NET session state, you can create a class that inherits the <see
          cref="T:System.Web.SessionState.SessionIDManager" />
+
+        
 
         
 
@@ -61,8 +71,12 @@
 
         
 
+        
+
          and <see
          cref="M:System.Web.SessionState.SessionIDManager.Validate(System.String)" />
+
+        
 
         
 
@@ -75,8 +89,12 @@
 
         
 
+        
+
          class to store values to the HTTP response and retrieve values from the HTTP request. For an example of overriding the <see
          cref="T:System.Web.SessionState.SessionIDManager" />
+
+        
 
         
 
@@ -89,8 +107,12 @@
 
         
 
+        
+
          method of the <see
          cref="T:System.Web.SessionState.SessionIDManager" />
+
+        
 
         
 
@@ -129,8 +151,12 @@
 
             
 
+            
+
              method is used to generate a unique session identifier that the <see
              cref="T:System.Web.SessionState.SessionStateModule" />
+
+            
 
             
 
@@ -143,8 +169,12 @@
 
             
 
+            
+
              must be unique and must contain valid characters that can be stored in an HTTP response and request. If it is possible that the value returned by your <see
              cref="M:System.Web.SessionState.ISessionIDManager.CreateSessionID(System.Web.HttpContext)" />
+
+            
 
             
 
@@ -157,8 +187,12 @@
 
             
 
+            
+
              method to encode the session-identifier value in your <see
              cref="M:System.Web.SessionState.ISessionIDManager.SaveSessionID(System.Web.HttpContext,System.String,System.Boolean@,System.Boolean@)" />
+
+            
 
             
 
@@ -171,8 +205,12 @@
 
             
 
+            
+
              method to decode the session-identifier value in your <see
              cref="M:System.Web.SessionState.ISessionIDManager.GetSessionID(System.Web.HttpContext)" />
+
+            
 
             
 
@@ -196,8 +234,12 @@
 
           
 
+          
+
           The current <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -210,8 +252,12 @@
 
           
 
+          
+
            and <see
            cref="P:System.Web.HttpContext.Response" />
+
+          
 
           
 
@@ -248,8 +294,12 @@
 
             
 
+            
+
              method is called by the <see
              cref="T:System.Web.SessionState.SessionStateModule" />
+
+            
 
             
 
@@ -262,8 +312,12 @@
 
             
 
+            
+
              and <see
              cref="E:System.Web.HttpApplication.EndRequest" />
+
+            
 
             
 
@@ -276,6 +330,8 @@
 
             
 
+            
+
              receives null from the <see
              cref="M:System.Web.SessionState.ISessionIDManager.GetSessionID(System.Web.HttpContext)" />
 
@@ -283,8 +339,12 @@
 
             
 
+            
+
              method, it will call the <see
              cref="M:System.Web.SessionState.ISessionIDManager.CreateSessionID(System.Web.HttpContext)" />
+
+            
 
             
 
@@ -300,8 +360,12 @@
 
             
 
+            
+
              implementation contains characters that are not valid in an HTTP response or request, you should use the <see
              cref="Overload:System.Web.HttpUtility.UrlEncode" />
+
+            
 
             
 
@@ -314,6 +378,8 @@
 
             
 
+            
+
              method implementation and the <see
              cref="Overload:System.Web.HttpUtility.UrlDecode" />
 
@@ -321,8 +387,12 @@
 
             
 
+            
+
              method to decode the session-identifier value in your <see
              cref="M:System.Web.SessionState.ISessionIDManager.GetSessionID(System.Web.HttpContext)" />
+
+            
 
             
 
@@ -346,8 +416,12 @@
 
           
 
+          
+
           The current <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -360,8 +434,12 @@
 
           
 
+          
+
            and <see
            cref="P:System.Web.HttpContext.Response" />
+
+          
 
           
 
@@ -393,8 +471,12 @@
 
             
 
+            
+
              method to initialize the <see
              cref="T:System.Web.SessionState.ISessionIDManager" />
+
+            
 
             
 
@@ -408,6 +490,8 @@
           <para
             >Initializes the <see
              cref="T:System.Web.SessionState.SessionIDManager" />
+
+            
 
             
 
@@ -472,8 +556,12 @@
 
             
 
+            
+
              calls the <see
              cref="M:System.Web.SessionState.SessionIDManager.RemoveSessionID(System.Web.HttpContext)" />
+
+            
 
             
 
@@ -486,8 +574,12 @@
 
             
 
+            
+
              event to remove the session identifier from the <see
              cref="P:System.Web.HttpResponse.Cookies" />
+
+            
 
             
 
@@ -507,8 +599,12 @@
 
           
 
+          
+
           The current <see
            cref="T:System.Web.HttpContext" />
+
+          
 
           
 
@@ -521,8 +617,12 @@
 
           
 
+          
+
            and <see
            cref="P:System.Web.HttpContext.Response" />
+
+          
 
           
 
@@ -584,8 +684,12 @@
 
             
 
+            
+
              method verifies that the supplied <paramref
              name="id" />
+
+            
 
             
 
@@ -601,6 +705,8 @@
 
             
 
+            
+
              implementation should call the <see
              cref="M:System.Web.SessionState.ISessionIDManager.Validate(System.String)" />
 
@@ -608,8 +714,12 @@
 
             
 
+            
+
              method from the <see
              cref="M:System.Web.SessionState.ISessionIDManager.GetSessionID(System.Web.HttpContext)" />
+
+            
 
             
 
@@ -628,6 +738,8 @@
         </returns>
         <param name="id">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

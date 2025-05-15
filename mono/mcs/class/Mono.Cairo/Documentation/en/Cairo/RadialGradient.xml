@@ -18,6 +18,8 @@
 
       
 
+      
+
        to create a new radial gradient between the two circles defined by (cx0, cxy0, radius0) and (cx1, cy1, radius1).  
 </summary
     >
@@ -60,17 +62,15 @@ pat.Destroy ();
       <Docs>
         <param name="cx0">x coordinate for the center of the start circle</param>
         <param name="cy0">y coordinate for the center of the start circle</param>
-        <param name="radius0"
->radius of the start cirle</param
-        >
+        <param name="radius0">radius of the start cirle</param>
         <param name="cx1">x coordinate for the center of the end circle</param>
         <param name="cy1">y coordinate for the center of the end circle</param>
-        <param name="radius1"
->radius of the end cirle</param
-        >
+        <param name="radius1">radius of the end cirle</param>
         <summary
           >Create a new radial gradient <see
            cref="T:Cairo.Pattern" />
+
+          
 
           
 

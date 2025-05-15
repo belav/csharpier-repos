@@ -40,10 +40,14 @@
 
         
 
+        
+
          and <format
          type="text/html">
           <a href="987ea3d7-0ad5-4238-8b64-331ce4eb3f0b">BlockingCollection Overview</a>
         </format>
+
+        
 
         
 
@@ -57,6 +61,8 @@
       <para
         >Defines methods to manipulate thread-safe collections intended for producer/consumer usage. This interface provides a unified representation for producer/consumer collections so that higher level abstractions such as <see
          cref="T:System.Collections.Concurrent.BlockingCollection`1" />
+
+        
 
         
 
@@ -120,6 +126,8 @@
 
             
 
+            
+
              to a new array.</para
           >
         </summary>
@@ -128,6 +136,8 @@
           <para
             >A new array containing the elements copied from the <see
              cref="T:System.Collections.Concurrent.IProducerConsumerCollection`1" />
+
+            
 
             
 

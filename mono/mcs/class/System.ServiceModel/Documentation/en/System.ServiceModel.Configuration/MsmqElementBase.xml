@@ -28,8 +28,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.ServiceModel.Configuration.MsmqTransportElement" />
+
+        
 
         
 
@@ -58,6 +62,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Configuration.MsmqElementBase" />
+
+            
 
             
 
@@ -95,6 +101,8 @@
         </summary>
         <param name="bindingElement">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -138,6 +146,8 @@
 
             
 
+            
+
              to this binding element.</para
           >
         </summary>
@@ -148,8 +158,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Configuration.ServiceModelExtensionElement" />
+
+          
 
           
 
@@ -190,11 +204,15 @@
 
             
 
+            
+
              must use the Net.msmq scheme.</para
           >
           <para
             >If <see
              cref="P:System.ServiceModel.MsmqBindingBase.DeadLetterQueue" />
+
+            
 
             
 
@@ -207,8 +225,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.ServiceModel.DeadLetterQueue.System" />
+
+            
 
             
 
@@ -221,8 +243,12 @@
 
             
 
+            
+
              must be set to null. If <see
              cref="P:System.ServiceModel.MsmqBindingBase.CustomDeadLetterQueue" />
+
+            
 
             
 
@@ -235,8 +261,12 @@
 
             
 
+            
+
              must be set to <see
              cref="F:System.ServiceModel.DeadLetterQueue.Custom" />
+
+            
 
             
 
@@ -287,6 +317,8 @@
 
                 
 
+                
+
                  is set to false.</para
               >
             </item>
@@ -299,6 +331,8 @@
 
                 
 
+                
+
                  is set to true.</para
               >
             </item>
@@ -306,6 +340,8 @@
               <para
                 >Custom: The queue specified in the <see
                  cref="P:System.ServiceModel.MsmqBindingBase.CustomDeadLetterQueue" />
+
+                
 
                 
 
@@ -383,6 +419,8 @@
 
             
 
+            
+
              is set to true, the messages must be durable.</para
           >
         </remarks>
@@ -420,10 +458,14 @@
 
             
 
+            
+
              set to true must be sent only to a transactional queue.</para
           >
           <para>
             <see cref="P:System.ServiceModel.MsmqBindingBase.ExactlyOnce" />
+
+            
 
             
 
@@ -439,8 +481,12 @@
 
             
 
+            
+
              to be false, the <see
              cref="P:System.ServiceModel.MsmqBindingBase.DeadLetterQueue" />
+
+            
 
             
 
@@ -456,8 +502,12 @@
 
             
 
+            
+
              to be true, the <see
              cref="P:System.ServiceModel.MsmqBindingBase.DeadLetterQueue" />
+
+            
 
             
 
@@ -504,6 +554,8 @@
 
           
 
+          
+
           A binding element that contains the settings to be used to initialize this binding element.</param
         >
       </Docs>
@@ -538,6 +590,8 @@
 
             
 
+            
+
              property. If the application fails to consume the message after the attempts at delivery have been exhausted, the message is sent to a retry queue. Subsequent retry cycles consist of the message being returned from the retry queue to the application queue to attempt delivery to the application again, after a delay specified by the <see
              cref="P:System.ServiceModel.MsmqBindingBase.RetryCycleDelay" />
 
@@ -545,8 +599,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.ServiceModel.MsmqBindingBase.MaxRetryCycles" />
+
+            
 
             
 
@@ -595,6 +653,8 @@
 
             
 
+            
+
              instance that encapsulates the transport security settings for a binding.</para
           >
         </summary>
@@ -629,6 +689,8 @@
 
             
 
+            
+
              instance that contains a collection of <see
              cref="T:System.Configuration.ConfigurationProperty" />
 
@@ -636,8 +698,12 @@
 
             
 
+            
+
              objects that can be attributes or <see
              cref="T:System.Configuration.ConfigurationElement" />
+
+            
 
             
 
@@ -681,8 +747,12 @@
 
             
 
+            
+
             , the channel listener is faulted and a <see
              cref="T:System.ServiceModel.ProtocolException" />
+
+            
 
             
 
@@ -695,6 +765,8 @@
 
             
 
+            
+
             ) is traced and thrown. The offending message is left in the queue and needs to be removed by some manual method. The <see
              cref="T:System.ServiceModel.MsmqPoisonMessageException" />
 
@@ -702,8 +774,12 @@
 
             
 
+            
+
              contains a <see
              cref="P:System.ServiceModel.MsmqPoisonMessageException.MessageLookupId" />
+
+            
 
             
 
@@ -719,6 +795,8 @@
 
             
 
+            
+
             , the offending message is simply dropped.</para
           >
           <para
@@ -729,11 +807,15 @@
 
             
 
+            
+
             , a negative acknowledgment is sent to the client and the offending message is removed from the poison-message queue. This option is available only on Message Queuing (also known as MSMQ) 4.0.</para
           >
           <para
             >When set to <see
              cref="F:System.ServiceModel.ReceiveErrorHandling.Move" />
+
+            
 
             
 
@@ -778,8 +860,12 @@
 
             
 
+            
+
             . If retry cycles reach the <see
              cref="P:System.ServiceModel.Channels.MsmqBindingElementBase.MaxRetryCycles" />
+
+            
 
             
 
@@ -795,8 +881,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ServiceModel.Channels.MsmqBindingElementBase.RetryCycleDelay" />
+
+            
 
             
 
@@ -841,6 +931,8 @@
 
             
 
+            
+
              property. If the application fails to consume the message after the specified number of immediate retries, the message is sent to a retry queue. Subsequent retry cycles consist of the message being returned from the retry queue to the application queue to attempt delivery to the application again, after a delay specified by the <see
              cref="P:System.ServiceModel.MsmqBindingBase.RetryCycleDelay" />
 
@@ -848,8 +940,12 @@
 
             
 
+            
+
              property. The number of retry cycles is specified by the <see
              cref="P:System.ServiceModel.MsmqBindingBase.MaxRetryCycles" />
+
+            
 
             
 
@@ -894,8 +990,12 @@
 
             
 
+            
+
              property is set to ensure that time-sensitive messages do not become stale before they are processed by the receiving applications. A message in a queue that is not consumed by the receiving application within the time interval specified is said to be expired. Expired messages are sent to a special queue called the dead-letter queue. The location of the dead-letter queue is set with the <see
              cref="P:System.ServiceModel.MsmqBindingBase.DeadLetterQueue" />
+
+            
 
             
 

@@ -24,8 +24,12 @@
 
         
 
+        
+
          event of the <see
          cref="T:System.Windows.Forms.ToolTip" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
         . This parameter provides information about the ToolTip and enables you to modify the size of the ToolTip through the <see
          cref="P:System.Windows.Forms.PopupEventArgs.ToolTipSize" />
+
+        
 
         
 
@@ -52,8 +60,12 @@
 
         
 
+        
+
          derives from <see
          cref="T:System.ComponentModel.CancelEventArgs" />
+
+        
 
         
 
@@ -67,6 +79,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Windows.Forms.ToolTip.Popup" />
+
+        
 
         
 
@@ -101,6 +115,8 @@
 
             
 
+            
+
              constructor are used to initialize the corresponding, similarly named properties. The <paramref
              name="associatedControl" />
 
@@ -108,8 +124,12 @@
 
             
 
+            
+
              parameter can be null if the owning window is not of type <see
              cref="T:System.Windows.Forms.Control" />
+
+            
 
             
 
@@ -128,6 +148,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -138,8 +160,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.IWin32Window" />
+
+          
 
           
 
@@ -154,8 +180,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Windows.Forms.Control" />
+
+          
 
           
 
@@ -170,6 +200,8 @@
 
           
 
+          
+
           true to indicate that the associated ToolTip window has a balloon-style appearance; otherwise, false to indicate that the ToolTip window has a standard rectangular appearance.</param
         >
         <param name="size">
@@ -179,8 +211,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Size" />
+
+          
 
           
 
@@ -215,8 +251,12 @@
 
             
 
+            
+
              with multiple controls through the <see
              cref="M:System.Windows.Forms.ToolTip.SetToolTip(System.Windows.Forms.Control,System.String)" />
+
+            
 
             
 
@@ -229,8 +269,12 @@
 
             
 
+            
+
              property to determine which control the <see
              cref="E:System.Windows.Forms.ToolTip.Draw" />
+
+            
 
             
 
@@ -244,6 +288,8 @@
           <para
             >Gets the control for which the <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -279,6 +325,8 @@
 
             
 
+            
+
              property. </para
           >
         </remarks>
@@ -287,6 +335,8 @@
           <para
             >Gets the window to which this <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -319,8 +369,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Windows.Forms.ToolTip" />
+
+            
 
             
 
@@ -357,8 +411,12 @@
 
             
 
+            
+
              property enables the <see
              cref="E:System.Windows.Forms.ToolTip.Popup" />
+
+            
 
             
 
@@ -371,8 +429,12 @@
 
             
 
+            
+
              is often used in conjunction with the members of the <see
              cref="T:System.Windows.Forms.DrawToolTipEventArgs" />
+
+            
 
             
 

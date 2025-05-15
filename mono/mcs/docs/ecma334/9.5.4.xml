@@ -11,6 +11,8 @@
 
       
 
+      
+
        :: <rhs
       >
         <non_terminal where="9.5.4">pp-if-section</non_terminal>
@@ -25,6 +27,8 @@
       <name>
         <non_terminal where="9.5.4">pp-if-section</non_terminal>
       </name>
+
+      
 
       
 
@@ -53,8 +57,12 @@
 
         
 
+        
+
         s</name
       >
+
+      
 
       
 
@@ -73,6 +81,8 @@
       <name>
         <non_terminal where="9.5.4">pp-elif-section</non_terminal>
       </name>
+
+      
 
       
 
@@ -102,6 +112,8 @@
 
       
 
+      
+
        :: <rhs
       >
         <non_terminal where="9.3.3">whitespace</non_terminal>
@@ -119,6 +131,8 @@
       <name>
         <non_terminal where="9.5.4">pp-endif</non_terminal>
       </name>
+
+      
 
       
 
@@ -144,6 +158,8 @@
 
       
 
+      
+
        :: <rhs
       >
         <non_terminal where="9.3">input-section</non_terminal>
@@ -161,6 +177,8 @@
 
       
 
+      
+
        :: <rhs
       >
         <non_terminal where="9.5.4">skipped-section-part</non_terminal>
@@ -174,6 +192,8 @@
       <name>
         <non_terminal where="9.5.4">skipped-section-part</non_terminal>
       </name>
+
+      
 
       
 
@@ -198,6 +218,8 @@
 
       
 
+      
+
        :: <rhs
       >
         <non_terminal where="9.3.3">whitespace</non_terminal>
@@ -216,10 +238,14 @@
 
       
 
+      
+
        :: <rhs
 
         >Any <non_terminal
          where="9.3.2">input-character</non_terminal>
+
+        
 
         
 
@@ -238,8 +264,12 @@
 
       
 
+      
+
        directive, zero or more <symbol
       >#elif</symbol>
+
+      
 
       
 
@@ -252,8 +282,12 @@
 
       
 
+      
+
        directive, and an <symbol
       >#endif</symbol>
+
+      
 
       
 
@@ -270,8 +304,12 @@
 
     
 
+    
+
      selects at most one of the contained <non_terminal
      where="9.5.4">conditional-section</non_terminal>
+
+    
 
     
 
@@ -287,8 +325,12 @@
 
         
 
+        
+
         s of the <symbol
         >#if</symbol>
+
+        
 
         
 
@@ -301,8 +343,12 @@
 
         
 
+        
+
          directives are evaluated in order until one yields true. If an expression yields true, the <non_terminal
          where="9.5.4">conditional-section</non_terminal>
+
+        
 
         
 
@@ -318,8 +364,12 @@
 
         
 
+        
+
         s yield false, and if an <symbol
         >#else</symbol>
+
+        
 
         
 
@@ -332,8 +382,12 @@
 
         
 
+        
+
          of the <symbol
         >#else</symbol>
+
+        
 
         
 
@@ -344,6 +398,8 @@
       <list_item
         > Otherwise, no <non_terminal
          where="9.5.4">conditional-section</non_terminal>
+
+        
 
         
 
@@ -361,11 +417,15 @@
 
     
 
+    
+
     , if any, is processed as a normal input-section: the source code contained in the section must adhere to the lexical grammar; tokens are generated from the source code in the section; and pre-processing directives in the section have the prescribed effects. </paragraph
   >
   <paragraph
     >The remaining <non_terminal
      where="9.5.4">conditional-section</non_terminal>
+
+    
 
     
 
@@ -378,8 +438,12 @@
 
     
 
+    
+
      that is being processed as a <non_terminal
      where="9.5.4">skipped-section</non_terminal>
+
+    
 
     
 
@@ -392,8 +456,12 @@
 
     
 
+    
+
     s (contained in nested <symbol
     >#if</symbol>
+
+    
 
     
 
@@ -406,8 +474,12 @@
 
     
 
+    
+
      and <symbol
     >#region</symbol>
+
+    
 
     
 
@@ -420,8 +492,12 @@
 
     
 
+    
+
      constructs) are also processed as <non_terminal
      where="9.5.4">skipped-section</non_terminal>
+
+    
 
     
 
@@ -433,7 +509,7 @@
     <example
       >[Example: The following example illustrates how conditional compilation directives can nest: <code_example
       >
-<![CDATA[
+        <![CDATA[
 #define Debug    // Debugging on  
 #undef Trace    // Tracing off  
 class PurchaseTransaction  
@@ -461,9 +537,11 @@ class PurchaseTransaction
 
       
 
+      
+
        section: <code_example
       >
-<![CDATA[
+        <![CDATA[
 #define Debug    // Debugging on  
 class PurchaseTransaction  
 {  
@@ -486,7 +564,7 @@ class PurchaseTransaction
     <example
       >Pre-processing directives are not processed when they appear inside multi-line input elements. For example, the program: <code_example
       >
-<![CDATA[
+        <![CDATA[
 class Hello  
 {  
    static void Main() {  
@@ -506,9 +584,11 @@ class Hello
 
       
 
+      
+
       results in the output: <code_example
       >
-<![CDATA[
+        <![CDATA[
 hello,  
 #if Debug  
 world  
@@ -528,9 +608,11 @@ Nebraska
 
       
 
+      
+
       . The example: <code_example
       >
-<![CDATA[
+        <![CDATA[
 #if X  
 /*   
 #else  
@@ -538,6 +620,8 @@ Nebraska
 #endif   
 ]]>
       </code_example>
+
+      
 
       
 
@@ -551,8 +635,12 @@ Nebraska
 
       
 
+      
+
       ), regardless of whether or not X is defined. If X is defined, the only processed directives are <symbol
       >#if</symbol>
+
+      
 
       
 
@@ -565,8 +653,12 @@ Nebraska
 
       
 
+      
+
       , due to the multi-line comment. If X is undefined, then three directives (<symbol
       >#if</symbol>
+
+      
 
       
 
@@ -579,8 +671,12 @@ Nebraska
 
       
 
+      
+
       , <symbol
       >#endif</symbol>
+
+      
 
       
 

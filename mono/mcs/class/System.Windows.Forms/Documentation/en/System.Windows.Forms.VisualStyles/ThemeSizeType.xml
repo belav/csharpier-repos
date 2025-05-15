@@ -20,8 +20,12 @@
 
         
 
+        
+
          values are used as an argument for the <see
          cref="Overload:System.Windows.Forms.VisualStyles.VisualStyleRenderer.GetPartSize" />
+
+        
 
         
 

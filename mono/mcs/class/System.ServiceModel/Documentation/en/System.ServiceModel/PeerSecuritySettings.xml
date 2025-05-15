@@ -44,6 +44,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -102,6 +104,8 @@
 
             
 
+            
+
              is set to <see
              cref="F:System.ServiceModel.SecurityMode.Transport" />
 
@@ -109,8 +113,12 @@
 
             
 
+            
+
              or <see
              cref="F:System.ServiceModel.SecurityMode.TransportWithMessageCredential" />
+
+            
 
             
 

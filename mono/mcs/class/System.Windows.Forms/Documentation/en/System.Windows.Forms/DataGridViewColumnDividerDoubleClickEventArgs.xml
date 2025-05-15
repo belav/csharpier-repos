@@ -29,6 +29,8 @@
 
         
 
+        
+
         . </para
       >
     </remarks>
@@ -42,8 +44,12 @@
 
         
 
+        
+
          event of a <see
          cref="T:System.Windows.Forms.DataGridView" />
+
+        
 
         
 
@@ -76,8 +82,12 @@
 
             
 
+            
+
              property using the <paramref
              name="columnIndex" />
+
+            
 
             
 
@@ -90,8 +100,12 @@
 
             
 
+            
+
              are initialized to the values specified in <paramref
              name="e" />
+
+            
 
             
 
@@ -110,11 +124,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="columnIndex">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -129,8 +147,12 @@
 
           
 
+          
+
           A new <see
            cref="T:System.Windows.Forms.HandledMouseEventArgs" />
+
+          
 
           
 
@@ -162,8 +184,12 @@
 
             
 
+            
+
              has a <see
              cref="P:System.Windows.Forms.Control.RightToLeft" />
+
+            
 
             
 
@@ -176,11 +202,15 @@
 
             
 
+            
+
             ; otherwise, it indicates the column to the right of the double-clicked divider. </para
           >
           <para
             >The index is the zero-based index of the column in the <see
              cref="P:System.Windows.Forms.DataGridView.Columns" />
+
+            
 
             
 

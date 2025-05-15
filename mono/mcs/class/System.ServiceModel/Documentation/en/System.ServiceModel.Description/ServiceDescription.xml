@@ -24,11 +24,15 @@
 
         
 
+        
+
          is used by the indigo1 system to building the run-time components for the service.</para
       >
       <para
         >Use this method when adding custom behaviors to extend <see
          cref="T:System.ServiceModel.ServiceHost" />
+
+        
 
         
 
@@ -41,8 +45,12 @@
 
         
 
+        
+
          the custom service behavior to the <see
          cref="P:System.ServiceModel.Description.ServiceDescription.Behaviors" />
+
+        
 
         
 
@@ -55,8 +63,12 @@
 
         
 
+        
+
          method on the <see
          cref="T:System.ServiceModel.ServiceHost" />
+
+        
 
         
 
@@ -72,6 +84,8 @@
 
         
 
+        
+
          and <see
          cref="M:System.ServiceModel.Description.ServiceDescription.GetService(System.Type)" />
 
@@ -79,8 +93,12 @@
 
         
 
+        
+
          methods are available to reflect on behaviors using the indigo1 programming model when replacing <see
          cref="T:System.ServiceModel.ServiceHostBase" />
+
+        
 
         
 
@@ -96,8 +114,12 @@
 
         
 
+        
+
          as a parameter to <see
          cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoint(System.ServiceModel.Description.ServiceEndpoint)" />
+
+        
 
         
 
@@ -110,6 +132,8 @@
 
         
 
+        
+
         , use the <see
          cref="P:System.ServiceModel.Description.WsdlExporter.GeneratedWsdlDocuments" />
 
@@ -117,8 +141,12 @@
 
         
 
+        
+
          property to return the collection of <see
          cref="T:System.Web.Services.Description.ServiceDescription" />
+
+        
 
         
 
@@ -151,6 +179,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Description.ServiceDescription" />
+
+            
 
             
 
@@ -192,11 +222,15 @@
 
             
 
+            
+
              class from a specified enumeration of service endpoints.</para
           >
         </summary>
         <param name="endpoints">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -209,8 +243,12 @@
 
           
 
+          
+
            of type <see
            cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+
+          
 
           
 
@@ -248,8 +286,12 @@
 
             
 
+            
+
             . Programmatically, you must <see
              cref="M:System.Collections.ObjectModel.Collection`1.Add(`0)" />
+
+            
 
             
 
@@ -262,6 +304,8 @@
 
             
 
+            
+
              prior to when you call the <see
              cref="M:System.ServiceModel.ICommunicationObject.Open" />
 
@@ -269,8 +313,12 @@
 
             
 
+            
+
              method on the <see
              cref="T:System.ServiceModel.ServiceHost" />
+
+            
 
             
 
@@ -286,8 +334,12 @@
 
             
 
+            
+
              the <see
              cref="T:System.ServiceModel.Description.IServiceBehavior" />
+
+            
 
             
 
@@ -303,8 +355,12 @@
 
             
 
+            
+
              associated with an endpoint instead, you can obtain the endpoints for the service using the <see
              cref="P:System.ServiceModel.Description.ServiceDescription.Endpoints" />
+
+            
 
             
 
@@ -317,8 +373,12 @@
 
             
 
+            
+
              from the collection with the <see
              cref="Overload:System.ServiceModel.Description.ServiceEndpointCollection.Find" />
+
+            
 
             
 
@@ -331,8 +391,12 @@
 
             
 
+            
+
               property to obtain the collection of the <see
              cref="T:System.ServiceModel.Description.IEndpointBehavior" />
+
+            
 
             
 
@@ -366,6 +430,8 @@
              type="text/html">
               <a href="13123dd6-c4a9-4a04-a984-df184b851788">&lt;service&gt;</a>
             </format>
+
+            
 
             
 
@@ -408,8 +474,12 @@
 
             
 
+            
+
              returned by this method each contain the address, binding, contract, and behavior information required to communicate with the service. To access this information, you must retrieve the <see
              cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+
+            
 
             
 
@@ -422,8 +492,12 @@
 
             
 
+            
+
              method that employs the relevant search criteria. Then the <see
              cref="T:System.ServiceModel.Description.ServiceEndpoint" />
+
+            
 
             
 
@@ -436,8 +510,12 @@
 
             
 
+            
+
              is accessed by the <see
              cref="P:System.ServiceModel.Description.ServiceEndpoint.Contract" />
+
+            
 
             
 
@@ -453,8 +531,12 @@
 
             
 
+            
+
              as a parameter to <see
              cref="M:System.ServiceModel.Description.WsdlExporter.ExportEndpoint(System.ServiceModel.Description.ServiceEndpoint)" />
+
+            
 
             
 
@@ -500,10 +582,14 @@
 
             
 
+            
+
              with you own hosting mechanism. </para
           >
           <para>
             <see cref="M:System.ServiceModel.Description.ServiceDescription.GetService(System.Object)" />
+
+            
 
             
 
@@ -516,8 +602,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.ServiceModel.Description.ServiceDescription.Namespace" />
+
+            
 
             
 
@@ -530,6 +620,8 @@
 
             
 
+            
+
              properties, and ensures that the <see
              cref="T:System.ServiceModel.ServiceBehaviorAttribute" />
 
@@ -537,8 +629,12 @@
 
             
 
+            
+
              is attached to the service and adds any relevant service behaviors to <see
              cref="P:System.ServiceModel.Description.ServiceDescription.Behaviors" />
+
+            
 
             
 
@@ -556,6 +652,8 @@
           <para
             >The <see
              cref="T:System.ServiceModel.Description.ServiceDescription" />
+
+            
 
             
 
@@ -597,10 +695,14 @@
 
             
 
+            
+
              with you own hosting mechanism. </para
           >
           <para>
             <see cref="M:System.ServiceModel.Description.ServiceDescription.GetService(System.Type)" />
+
+            
 
             
 
@@ -613,8 +715,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.ServiceModel.Description.ServiceDescription.Namespace" />
+
+            
 
             
 
@@ -627,8 +733,12 @@
 
             
 
+            
+
              properties, reflects on the type for any the <see
              cref="T:System.ServiceModel.ServiceBehaviorAttribute" />
+
+            
 
             
 
@@ -641,8 +751,12 @@
 
             
 
+            
+
             , and ensures that the <see
              cref="T:System.ServiceModel.ServiceBehaviorAttribute" />
+
+            
 
             
 
@@ -660,6 +774,8 @@
           <para
             >The <see
              cref="T:System.ServiceModel.Description.ServiceDescription" />
+
+            
 
             
 
@@ -693,6 +809,8 @@
 
             
 
+            
+
              maps to the Web Service Development Language (WSDL) &lt;service&gt; element local name part of the (qualified) name attribute.</para
           >
         </remarks>
@@ -719,6 +837,8 @@
           <para
             >When exporting WSDL metadata, the <see
              cref="P:System.ServiceModel.Description.ServiceDescription.Namespace" />
+
+            
 
             
 

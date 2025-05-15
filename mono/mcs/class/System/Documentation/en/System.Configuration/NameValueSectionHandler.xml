@@ -37,6 +37,8 @@
 
         
 
+        
+
          defines rules for manipulating XML configuration sections.</para
       >
     </remarks>
@@ -67,6 +69,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Configuration.NameValueSectionHandler" />
+
+            
 
             
 
@@ -111,8 +115,12 @@
 
             
 
+            
+
              object parameter acts as the configuration settings in the corresponding parent configuration section. The <paramref
              name="context" />
+
+            
 
             
 
@@ -125,6 +133,8 @@
 
             
 
+            
+
              parameter is the <see
              cref="T:System.Xml.XmlNode" />
 
@@ -132,8 +142,12 @@
 
             
 
+            
+
              object that contains the configuration information to be handled. The <paramref
              name="section" />
+
+            
 
             
 
@@ -157,6 +171,8 @@
 
           
 
+          
+
           Parent object.</param
         >
         <param name="context">
@@ -166,10 +182,14 @@
 
           
 
+          
+
           Configuration context object.</param
         >
         <param name="section">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

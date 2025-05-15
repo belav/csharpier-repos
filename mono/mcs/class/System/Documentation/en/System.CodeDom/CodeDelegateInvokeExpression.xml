@@ -40,6 +40,8 @@
 
         
 
+        
+
          can be used to represent code that invokes an event. Invoking an event invokes all delegates that are registered with the event using the specified parameters.</para
       >
       <para
@@ -50,8 +52,12 @@
 
         
 
+        
+
          property specifies the event to invoke. The <see
          cref="P:System.CodeDom.CodeDelegateInvokeExpression.Parameters" />
+
+        
 
         
 
@@ -87,6 +93,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.CodeDom.CodeDelegateInvokeExpression" />
+
+            
 
             
 
@@ -128,6 +136,8 @@
 
             
 
+            
+
              class using the specified target object.</para
           >
         </summary>
@@ -138,8 +148,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 
@@ -187,6 +201,8 @@
 
             
 
+            
+
              class using the specified target object and parameters.</para
           >
         </summary>
@@ -197,8 +213,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 
@@ -213,8 +233,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.CodeDom.CodeExpression" />
+
+          
 
           
 

@@ -30,12 +30,16 @@
 
         
 
+        
+
          when the message is sent, and for decoding the security context when the message arrives at a recipient.</para
       >
       <para>The encoding can either be in the current user scope (whereby only processes running as the user account can decode the security state) or it can be in the local machine scope (whereby all processes running on the machine can decode the security state). By default, the encoding is in the current user scope.</para>
       <para
         >This class is used by the server when sending the security state in the <newTerm
         >Stateful Security Context Token</newTerm>
+
+        
 
         
 
@@ -99,6 +103,8 @@
 
           
 
+          
+
           Indicates whether to use the current user protection scope.</param
         >
       </Docs>
@@ -133,10 +139,14 @@
 
           
 
+          
+
           Indicates whether to use the current user protection scope.</param
         >
         <param name="entropy">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -182,6 +192,8 @@
 
           
 
+          
+
           A byte array that represents the encoded security state.</param
         >
       </Docs>
@@ -222,6 +234,8 @@
 
           
 
+          
+
           A byte array representing the decoded security state.</param
         >
       </Docs>
@@ -251,6 +265,8 @@
           <para
             >An array of type <see
              cref="T:System.Byte" />
+
+            
 
             
 
@@ -286,8 +302,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.ServiceModel.Security.DataProtectionSecurityStateEncoder.GetEntropy" />
+
+            
 
             
 
@@ -306,6 +326,8 @@
 
             
 
+            
+
              instance.</para
           >
         </summary>
@@ -319,8 +341,12 @@
 
             
 
+            
+
              that represents the current <see
              cref="T:System.ServiceModel.Security.DataProtectionSecurityStateEncoder" />
+
+            
 
             
 

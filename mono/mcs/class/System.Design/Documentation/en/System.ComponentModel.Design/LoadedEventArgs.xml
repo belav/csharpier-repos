@@ -21,6 +21,8 @@
 
         
 
+        
+
          event. This class cannot be inherited.</para
       >
     </summary>
@@ -51,6 +53,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -61,10 +65,14 @@
 
           
 
+          
+
           true to indicate that the designer load was successful; otherwise, false.</param
         >
         <param name="errors">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

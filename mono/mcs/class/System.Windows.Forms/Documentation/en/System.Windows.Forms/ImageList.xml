@@ -40,8 +40,12 @@
 
         
 
+        
+
          is typically used by other controls, such as the <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -54,6 +58,8 @@
 
         
 
+        
+
         , or <see
          cref="T:System.Windows.Forms.ToolBar" />
 
@@ -61,8 +67,12 @@
 
         
 
+        
+
         . You can add bitmaps or icons to the <see
          cref="T:System.Windows.Forms.ImageList" />
+
+        
 
         
 
@@ -77,8 +87,12 @@
 
         
 
+        
+
          uses a handle to manage the list of images. The <see
          cref="P:System.Windows.Forms.ImageList.Handle" />
+
+        
 
         
 
@@ -91,8 +105,12 @@
 
         
 
+        
+
          or calling <see
          cref="M:System.Windows.Forms.ImageList.Draw(System.Drawing.Graphics,System.Drawing.Point,System.Int32)" />
+
+        
 
         
 
@@ -105,8 +123,12 @@
 
         
 
+        
+
          or <see
          cref="P:System.Windows.Forms.ImageList.ImageSize" />
+
+        
 
         
 
@@ -119,6 +141,8 @@
 
         
 
+        
+
          to be recreated. Therefore, you should perform these operations before you add images to the <see
          cref="T:System.Windows.Forms.ImageList" />
 
@@ -126,8 +150,12 @@
 
         
 
+        
+
         . In addition, when you work with forms that will be localized, you should always add an <see
          cref="T:System.Windows.Forms.ImageList" />
+
+        
 
         
 
@@ -141,6 +169,8 @@
       <para
         >Provides methods to manage a collection of <see
          cref="T:System.Drawing.Image" />
+
+        
 
         
 
@@ -161,6 +191,8 @@
           <para
             >The following table shows initial property values for an instance of <see
              cref="T:System.Windows.Forms.ImageList" />
+
+            
 
             
 
@@ -194,8 +226,12 @@
 
                   
 
+                  
+
                   . In the .NET Framework version 1.1 or later, the default is <see
                    cref="F:System.Windows.Forms.ColorDepth.Depth8Bit" />
+
+                  
 
                   
 
@@ -220,6 +256,8 @@
 
                   
 
+                  
+
                    object with a height and width of 16 by 16. </para
                 >
               </description>
@@ -234,6 +272,8 @@
                 <para
                   >The default value is <see
                    cref="P:System.Drawing.Color.Transparent" />
+
+                  
 
                   
 
@@ -255,8 +295,12 @@
 
             
 
+            
+
              class with default values for <see
              cref="P:System.Windows.Forms.ImageList.ColorDepth" />
+
+            
 
             
 
@@ -269,8 +313,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Windows.Forms.ImageList.TransparentColor" />
+
+            
 
             
 
@@ -305,8 +353,12 @@
 
             
 
+            
+
              constructor enables you to associate a <see
              cref="T:System.Windows.Forms.ImageList" />
+
+            
 
             
 
@@ -319,8 +371,12 @@
 
             
 
+            
+
              object. By associating the <see
              cref="T:System.Windows.Forms.ImageList" />
+
+            
 
             
 
@@ -333,8 +389,12 @@
 
             
 
+            
+
              to the <see
              cref="T:System.ComponentModel.Container" />
+
+            
 
             
 
@@ -347,8 +407,12 @@
 
             
 
+            
+
             , an <see
              cref="T:System.Windows.Forms.ImageList" />
+
+            
 
             
 
@@ -361,6 +425,8 @@
 
             
 
+            
+
              with a <see
              cref="T:System.ComponentModel.Container" />
 
@@ -368,8 +434,12 @@
 
             
 
+            
+
             , calling <see
              cref="M:System.ComponentModel.Container.Dispose" />
+
+            
 
             
 
@@ -388,11 +458,15 @@
 
             
 
+            
+
              class, associating it with a container.</para
           >
         </summary>
         <param name="container">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -405,8 +479,12 @@
 
           
 
+          
+
            to associate with this instance of <see
            cref="T:System.Windows.Forms.ImageList" />
+
+          
 
           
 
@@ -441,8 +519,12 @@
 
             
 
+            
+
              for the image list is recreated. Because setting the <see
              cref="P:System.Windows.Forms.ImageList.ColorDepth" />
+
+            
 
             
 
@@ -455,8 +537,12 @@
 
             
 
+            
+
              prior to setting the <see
              cref="P:System.Windows.Forms.ImageList.Images" />
+
+            
 
             
 
@@ -469,8 +555,12 @@
 
             
 
+            
+
              has been created, setting the <see
              cref="P:System.Windows.Forms.ImageList.ColorDepth" />
+
+            
 
             
 
@@ -483,6 +573,8 @@
 
             
 
+            
+
              properties in code, after setting the <see
              cref="P:System.Windows.Forms.ImageList.Images" />
 
@@ -490,8 +582,12 @@
 
             
 
+            
+
              property, will cause the collection of images set for the <see
              cref="P:System.Windows.Forms.ImageList.Images" />
+
+            
 
             
 
@@ -530,8 +626,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Windows.Forms.ImageList" />
+
+            
 
             
 
@@ -544,8 +644,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Windows.Forms.ImageList" />
+
+            
 
             
 
@@ -562,8 +666,12 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.Windows.Forms.ImageList" />
+
+              
 
               
 
@@ -576,8 +684,12 @@
 
               
 
+              
+
                is using will not be freed until garbage collection calls the <see
                cref="T:System.Windows.Forms.ImageList" />
+
+              
 
               
 
@@ -597,11 +709,15 @@
 
             
 
+            
+
             , and optionally releases managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -641,6 +757,8 @@
 
             
 
+            
+
              at the given location.</para
           >
         </summary>
@@ -651,8 +769,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -667,8 +789,12 @@
 
           
 
+          
+
           The location defined by a <see
            cref="T:System.Drawing.Point" />
+
+          
 
           
 
@@ -683,8 +809,12 @@
 
           
 
+          
+
           The index of the image in the <see
            cref="T:System.Windows.Forms.ImageList" />
+
+          
 
           
 
@@ -725,6 +855,8 @@
 
             
 
+            
+
              at the specified location.</para
           >
         </summary>
@@ -735,8 +867,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -751,10 +887,14 @@
 
           
 
+          
+
           The horizontal position at which to draw the image. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -769,8 +909,12 @@
 
           
 
+          
+
           The index of the image in the <see
            cref="T:System.Windows.Forms.ImageList" />
+
+          
 
           
 
@@ -816,6 +960,8 @@
 
             
 
+            
+
              using the specified location and size.</para
           >
         </summary>
@@ -826,8 +972,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -842,10 +992,14 @@
 
           
 
+          
+
           The horizontal position at which to draw the image. </param
         >
         <param name="y">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -860,10 +1014,14 @@
 
           
 
+          
+
           The width, in pixels, of the destination image. </param
         >
         <param name="height">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -878,8 +1036,12 @@
 
           
 
+          
+
           The index of the image in the <see
            cref="T:System.Windows.Forms.ImageList" />
+
+          
 
           
 
@@ -992,6 +1154,8 @@
 
             
 
+            
+
              for this image list.</para
           >
         </summary>
@@ -1024,6 +1188,8 @@
 
             
 
+            
+
              property prior to adding images to the image collection causes the images to be resized to the image size specified.</para
           >
           <para
@@ -1034,8 +1200,12 @@
 
             
 
+            
+
              property to a new value, the <see
              cref="P:System.Windows.Forms.ImageList.Handle" />
+
+            
 
             
 
@@ -1051,8 +1221,12 @@
 
             
 
+            
+
              property causes the handle to be recreated, you should set <see
              cref="P:System.Windows.Forms.ImageList.ImageSize" />
+
+            
 
             
 
@@ -1065,8 +1239,12 @@
 
             
 
+            
+
              property. When the handle for the <see
              cref="T:System.Windows.Forms.ImageList" />
+
+            
 
             
 
@@ -1079,8 +1257,12 @@
 
             
 
+            
+
              or <see
              cref="P:System.Windows.Forms.ImageList.ImageSize" />
+
+            
 
             
 
@@ -1093,8 +1275,12 @@
 
             
 
+            
+
              property, will cause the collection of images set for the <see
              cref="P:System.Windows.Forms.ImageList.Images" />
+
+            
 
             
 
@@ -1145,8 +1331,12 @@
 
             
 
+            
+
              is the data portion of the image list. When you work with forms that will be localized, you should always add an <see
              cref="T:System.Windows.Forms.ImageList" />
+
+            
 
             
 
@@ -1162,6 +1352,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1170,6 +1362,8 @@
           <para
             >Gets the <see
              cref="T:System.Windows.Forms.ImageListStreamer" />
+
+            
 
             
 
@@ -1209,8 +1403,12 @@
 
             
 
+            
+
              is recreated by actions such as changing the <see
              cref="P:System.Windows.Forms.ImageList.ColorDepth" />
+
+            
 
             
 
@@ -1223,8 +1421,12 @@
 
             
 
+            
+
             . Special processing may be required because setting the <see
              cref="P:System.Windows.Forms.ImageList.ColorDepth" />
+
+            
 
             
 
@@ -1237,8 +1439,12 @@
 
             
 
+            
+
              property after setting the <see
              cref="P:System.Windows.Forms.ImageList.Images" />
+
+            
 
             
 
@@ -1252,6 +1458,8 @@
           <para
             >Occurs when the <see
              cref="P:System.Windows.Forms.ImageList.Handle" />
+
+            
 
             
 
@@ -1300,6 +1508,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1326,6 +1536,8 @@
 
             
 
+            
+
              method returns a string that includes the <see
              cref="P:System.Windows.Forms.ImageList.ImageCollection.Count" />
 
@@ -1333,8 +1545,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.ImageList.ImageSize" />
+
+            
 
             
 
@@ -1353,6 +1569,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1361,6 +1579,8 @@
           <para
             >A string that represents the current <see
              cref="T:System.Windows.Forms.ImageList" />
+
+            
 
             
 

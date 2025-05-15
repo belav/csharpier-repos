@@ -30,6 +30,8 @@
 
         
 
+        
+
          namespace.</para
       >
     </remarks>
@@ -38,6 +40,8 @@
       <para
         >The <see
          cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationBinding" />
+
+        
 
         
 
@@ -66,6 +70,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationBinding" />
+
+            
 
             
 
@@ -106,6 +112,8 @@
 
             
 
+            
+
              and pass in a security mode. </para
           >
         </remarks>
@@ -119,8 +127,12 @@
 
             
 
+            
+
              class by using the specified <see
              cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationSecurityMode" />
+
+            
 
             
 
@@ -131,6 +143,8 @@
         </summary>
         <param name="securityMode">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -171,11 +185,15 @@
 
             
 
+            
+
              class from the settings of a specified configuration binding element.</para
           >
         </summary>
         <param name="configurationName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -218,6 +236,8 @@
 
             
 
+            
+
              that contains the stack of binding elements in the basic profile stack.</para
           >
         </returns>
@@ -250,6 +270,8 @@
 
             
 
+            
+
              encapsulates Message Queuing (MSMQ) transport security settings.</para
           >
         </remarks>
@@ -258,6 +280,8 @@
           <para
             >Gets the <see
              cref="T:System.ServiceModel.MsmqIntegration.MsmqIntegrationSecurity" />
+
+            
 
             
 
@@ -291,6 +315,8 @@
           <para
             >This property returns an enumeration value that specifies how a indigo2 message will be serialized and deserialized. For more information, see <see
              cref="T:System.ServiceModel.MsmqIntegration.MsmqMessageSerializationFormat" />
+
+            
 
             
 

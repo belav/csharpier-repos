@@ -25,6 +25,8 @@
 
         
 
+        
+
          event.</para
       >
       <para>A serial port pin changes state when it is asserted or unasserted.</para>
@@ -34,6 +36,8 @@
       <para
         >Specifies the type of change that occurred on the <see
          cref="T:System.IO.Ports.SerialPort" />
+
+        
 
         
 

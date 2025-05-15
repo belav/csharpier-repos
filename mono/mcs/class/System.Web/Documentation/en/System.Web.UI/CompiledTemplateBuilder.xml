@@ -31,6 +31,8 @@
 
         
 
+        
+
          class is used by ASP.NET to create a template for a templated control from the generated class code. It is not meant to be used directly in your code.</para
       >
     </remarks>
@@ -39,6 +41,8 @@
       <para
         >An <see
          cref="T:System.Web.UI.ITemplate" />
+
+        
 
         
 
@@ -74,6 +78,8 @@
 
             
 
+            
+
              class. It is not meant to be used directly in your code.</para
           >
         </remarks>
@@ -82,6 +88,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.CompiledTemplateBuilder" />
+
+            
 
             
 
@@ -123,6 +131,8 @@
 
             
 
+            
+
              method is the <see
              cref="T:System.Web.UI.TemplateBuilder" />
 
@@ -130,8 +140,12 @@
 
             
 
+            
+
              class's implementation of the <see
              cref="M:System.Web.UI.ITemplate.InstantiateIn(System.Web.UI.Control)" />
+
+            
 
             
 
@@ -145,6 +159,8 @@
           <para
             >Populates the <see
              cref="T:System.Web.UI.Control" />
+
+            
 
             
 

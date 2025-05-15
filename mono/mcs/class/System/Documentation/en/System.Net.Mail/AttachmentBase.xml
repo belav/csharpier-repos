@@ -31,6 +31,8 @@
 
         
 
+        
+
         , <see
          cref="T:System.Net.Mail.AlternateView" />
 
@@ -38,8 +40,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Net.Mail.LinkedResource" />
+
+        
 
         
 
@@ -80,8 +86,12 @@
 
             
 
+            
+
              with the specified <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -92,6 +102,8 @@
         </summary>
         <param name="contentStream">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -128,11 +140,15 @@
 
             
 
+            
+
              with the specified file name.</para
           >
         </summary>
         <param name="fileName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -173,6 +189,8 @@
 
             
 
+            
+
              with the specified <see
              cref="T:System.IO.Stream" />
 
@@ -180,8 +198,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Net.Mime.ContentType" />
+
+            
 
             
 
@@ -197,10 +219,14 @@
 
           
 
+          
+
           A stream containing the content for this attachment.</param
         >
         <param name="contentType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -241,8 +267,12 @@
 
             
 
+            
+
              with the specified <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -258,10 +288,14 @@
 
           
 
+          
+
           A stream containing the content for this attachment.</param
         >
         <param name="mediaType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -302,6 +336,8 @@
 
             
 
+            
+
              with the specified file name and content type.</para
           >
         </summary>
@@ -312,10 +348,14 @@
 
           
 
+          
+
           The file name holding the content for this attachment.</param
         >
         <param name="contentType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -356,6 +396,8 @@
 
             
 
+            
+
              with the specified file name and media type.</para
           >
         </summary>
@@ -366,10 +408,14 @@
 
           
 
+          
+
           The file name holding the content for this attachment.</param
         >
         <param name="mediaType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -478,8 +524,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Net.Mail.AttachmentBase" />
+
+            
 
             
 
@@ -492,8 +542,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Net.Mail.AttachmentBase" />
+
+            
 
             
 
@@ -506,6 +560,8 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Net.Mail.AttachmentBase" />
 
@@ -513,8 +569,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Net.Mail.AttachmentBase" />
+
+            
 
             
 
@@ -529,10 +589,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -548,6 +612,8 @@
 
             
 
+            
+
              before you release your last reference to the <see
              cref="T:System.Net.Mail.AttachmentBase" />
 
@@ -555,8 +621,12 @@
 
             
 
+            
+
             . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
              cref="T:System.Net.Mail.AttachmentBase" />
+
+            
 
             
 
@@ -570,6 +640,8 @@
           <para
             >Releases the resources used by the <see
              cref="T:System.Net.Mail.AttachmentBase" />
+
+            
 
             
 
@@ -609,8 +681,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -623,8 +699,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -640,8 +720,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Net.Mail.AttachmentBase" />
+
+            
 
             
 
@@ -660,11 +744,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

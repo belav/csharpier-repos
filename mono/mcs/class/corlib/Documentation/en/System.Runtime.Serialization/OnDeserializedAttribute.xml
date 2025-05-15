@@ -37,8 +37,12 @@
 
         
 
+        
+
          when you need to fix values on a deserialized object after it has been deserialized and before the graph is returned. This attribute can be used instead of the  <see
          cref="T:System.Runtime.Serialization.IDeserializationCallback" />
+
+        
 
         
 
@@ -54,8 +58,12 @@
 
         
 
+        
+
         , the method must contain a <see
          cref="T:System.Runtime.Serialization.StreamingContext" />
+
+        
 
         
 
@@ -68,6 +76,8 @@
 
         
 
+        
+
          provides additional data about the type of serialization taking place.  The usage is shown in the following code:</para
       >
       <para>code reference: System.Runtime.Serialization.OnSerialization#5</para>
@@ -75,6 +85,8 @@
         <para
           >In your code, you can use the word OnDeserialized instead of the longer <see
            cref="T:System.Runtime.Serialization.OnDeserializedAttribute" />
+
+          
 
           
 
@@ -110,6 +122,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Runtime.Serialization.OnDeserializedAttribute" />
+
+            
 
             
 

@@ -20,8 +20,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -35,6 +39,8 @@
       <para
         >Specifies how list items are displayed in a <see
          cref="T:System.Windows.Forms.ListView" />
+
+        
 
         
 
@@ -131,8 +137,12 @@
 
             
 
+            
+
              control displays in the <see
              cref="F:System.Windows.Forms.View.LargeIcon" />
+
+            
 
             
 

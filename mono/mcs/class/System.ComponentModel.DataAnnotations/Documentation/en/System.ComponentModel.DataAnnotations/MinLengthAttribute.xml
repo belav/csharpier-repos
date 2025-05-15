@@ -70,11 +70,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="length">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -120,6 +124,8 @@
 
           
 
+          
+
           The name to include in the formatted string.</param
         >
       </Docs>
@@ -152,6 +158,8 @@
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

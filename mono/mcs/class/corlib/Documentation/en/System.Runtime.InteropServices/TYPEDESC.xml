@@ -37,6 +37,8 @@
 
         
 
+        
+
          instead.</para
       >
     </summary>
@@ -65,6 +67,8 @@
           <para
             >If the variable is VT_SAFEARRAY or VT_PTR, the <see
              cref="F:System.Runtime.InteropServices.TYPEDESC.lpValue" />
+
+            
 
             
 

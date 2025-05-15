@@ -44,8 +44,12 @@
 
         
 
+        
+
          evidence produces a <see
          cref="T:System.Security.Permissions.UrlIdentityPermission" />
+
+        
 
         
 
@@ -58,8 +62,12 @@
 
         
 
+        
+
          for <see
          cref="T:System.Security.Permissions.UrlIdentityPermission" />
+
+        
 
         
 
@@ -72,8 +80,12 @@
 
         
 
+        
+
          that corresponds to the <see
          cref="T:System.Security.Policy.Url" />
+
+        
 
         
 
@@ -118,11 +130,15 @@
 
             
 
+            
+
              class with the URL from which a code assembly originates.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -193,6 +209,8 @@
 
             
 
+            
+
              evidence class.</para
           >
         </summary>
@@ -206,8 +224,12 @@
 
             
 
+            
+
              for the specified <see
              cref="T:System.Security.Policy.Url" />
+
+            
 
             
 
@@ -218,6 +240,8 @@
         </returns>
         <param name="evidence">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -257,6 +281,8 @@
 
             
 
+            
+
              evidence object to the specified object for equivalence.</para
           >
         </summary>
@@ -265,6 +291,8 @@
           <para
             >true if the two <see
              cref="T:System.Security.Policy.Url" />
+
+            
 
             
 
@@ -280,8 +308,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Security.Policy.Url" />
+
+          
 
           
 
@@ -434,6 +466,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -442,6 +476,8 @@
           <para
             >A representation of the current <see
              cref="T:System.Security.Policy.Url" />
+
+            
 
             
 

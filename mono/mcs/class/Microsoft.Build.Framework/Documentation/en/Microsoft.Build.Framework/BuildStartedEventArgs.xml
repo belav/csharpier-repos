@@ -28,6 +28,8 @@
 
         
 
+        
+
          event. </para
       >
     </summary>
@@ -45,6 +47,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:Microsoft.Build.Framework.BuildStartedEventArgs" />
+
+            
 
             
 
@@ -81,6 +85,8 @@
 
             
 
+            
+
              class with the specified message and Help keyword.</para
           >
         </summary>
@@ -91,10 +97,14 @@
 
           
 
+          
+
           The text of the event.</param
         >
         <param name="helpKeyword">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

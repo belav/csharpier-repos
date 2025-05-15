@@ -37,8 +37,12 @@
 
         
 
+        
+
          interface. All the remoting server channels provide constructors that take a <see
          cref="T:System.Runtime.Remoting.Channels.IServerChannelSinkProvider" />
+
+        
 
         
 
@@ -54,8 +58,12 @@
 
         
 
+        
+
          provides a property called <see
          cref="P:System.Runtime.Remoting.Channels.IServerChannelSinkProvider.Next" />
+
+        
 
         
 
@@ -71,6 +79,8 @@
 
         
 
+        
+
          call.</para
       >
       <para
@@ -81,8 +91,12 @@
 
         
 
+        
+
          is generated, .NET Framework searches through the list of registered channels to find one that can process the call. Once an appropriate channel has been found, the channel sink is retrieved from the channel, and the <see
          cref="T:System.Runtime.Remoting.Messaging.IMethodCallMessage" />
+
+        
 
         
 
@@ -135,6 +149,8 @@
 
           
 
+          
+
           The channel for which to create the channel sink chain. </param
         >
       </Docs>
@@ -173,8 +189,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.Remoting.Channels.IChannelDataStore" />
+
+          
 
           
 

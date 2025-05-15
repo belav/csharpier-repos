@@ -21,8 +21,7 @@
     </ItemGroup>
     <ItemGroup>
       <NativeWithSymbolFile Include="@(NativeBinary)" Condition="'$(PackageTargetRuntime)'!=''">
-        <TargetPath
->runtimes/$(PackageTargetRuntime)/native</TargetPath>
+        <TargetPath>runtimes/$(PackageTargetRuntime)/native</TargetPath>
       </NativeWithSymbolFile>
       <NativeWithSymbolFile Include="@(ArchitectureSpecificToolFile)">
         <TargetPath>tools</TargetPath>
@@ -68,8 +67,7 @@
         Include="$(MSBuildThisFileDirectory)\_.pdb"
         Condition="'$(NeedsPlaceholderPdb)'=='true' AND '$(PackageTargetRuntime)'!=''"
       >
-        <TargetPath
->runtimes/$(PackageTargetRuntime)/native</TargetPath>
+        <TargetPath>runtimes/$(PackageTargetRuntime)/native</TargetPath>
         <IsSymbolFile>true</IsSymbolFile>
       </File>
     </ItemGroup>

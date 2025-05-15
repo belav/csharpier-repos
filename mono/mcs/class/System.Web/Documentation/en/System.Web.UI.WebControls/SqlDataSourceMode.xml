@@ -20,8 +20,12 @@
 
         
 
+        
+
          enumeration is used by the <see
          cref="T:System.Web.UI.WebControls.SqlDataSource" />
+
+        
 
         
 
@@ -34,8 +38,12 @@
 
         
 
+        
+
          controls to describe the data retrieval mode that the data source control uses when the <see
          cref="M:System.Web.UI.WebControls.SqlDataSource.Select(System.Web.UI.DataSourceSelectArguments)" />
+
+        
 
         
 
@@ -48,8 +56,12 @@
 
         
 
+        
+
          property is set to <see
          cref="F:System.Web.UI.WebControls.SqlDataSourceMode.DataSet" />
+
+        
 
         
 
@@ -62,8 +74,12 @@
 
         
 
+        
+
          structure. This enables scenarios where user interface controls such as <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 
@@ -76,6 +92,8 @@
 
         
 
+        
+
          property is set to <see
          cref="F:System.Web.UI.WebControls.SqlDataSourceMode.DataReader" />
 
@@ -83,8 +101,12 @@
 
         
 
+        
+
         , data is retrieved by an <see
          cref="T:System.Data.IDataReader" />
+
+        
 
         
 
@@ -100,8 +122,12 @@
 
         
 
+        
+
          enumeration is only used to describe how the <see
          cref="M:System.Web.UI.WebControls.SqlDataSource.Select(System.Web.UI.DataSourceSelectArguments)" />
+
+        
 
         
 
@@ -114,8 +140,12 @@
 
         
 
+        
+
          control performs, such as <see
          cref="M:System.Web.UI.WebControls.SqlDataSource.Insert" />
+
+        
 
         
 
@@ -128,8 +158,12 @@
 
         
 
+        
+
         , or <see
          cref="M:System.Web.UI.WebControls.SqlDataSource.Delete" />
+
+        
 
         
 
@@ -148,8 +182,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Web.UI.WebControls.AccessDataSource" />
+
+        
 
         
 
@@ -162,8 +200,12 @@
 
         
 
+        
+
          or <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 
@@ -207,6 +249,8 @@
           <para
             >Retrieves data from the underlying data storage into a <see
              cref="T:System.Data.DataSet" />
+
+            
 
             
 

@@ -39,6 +39,8 @@
 
         
 
+        
+
          class. The first is for navigation: using the <see
          cref="P:System.Web.UI.HtmlControls.HtmlAnchor.HRef" />
 
@@ -46,8 +48,12 @@
 
         
 
+        
+
          property to define the location of the page to link to. The second is for postback events: using the <see
          cref="E:System.Web.UI.HtmlControls.HtmlAnchor.ServerClick" />
+
+        
 
         
 
@@ -66,6 +72,8 @@
 
           
 
+          
+
           .</para
         >
       </block>
@@ -77,8 +85,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.HtmlControls.HtmlAnchor.#ctor" />
+
+        
 
         
 
@@ -109,11 +121,15 @@
 
             
 
+            
+
              control.</para
           >
           <para
             >The following table shows the initial property value for an instance of <see
              cref="T:System.Web.UI.HtmlControls.HtmlAnchor" />
+
+            
 
             
 
@@ -154,6 +170,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -189,11 +207,15 @@
 
             
 
+            
+
              control is clicked. Page validation determines whether controls that are associated with a validation control on the page all pass the validation rules that are specified by the validation control.</para
           >
           <para
             >You can specify or determine whether validation is performed on both the client and the server when an <see
              cref="T:System.Web.UI.HtmlControls.HtmlAnchor" />
+
+            
 
             
 
@@ -206,8 +228,12 @@
 
             
 
+            
+
              property. To prevent validation from being performed, set the <see
              cref="P:System.Web.UI.HtmlControls.HtmlAnchor.CausesValidation" />
+
+            
 
             
 
@@ -221,6 +247,8 @@
           <para
             >Gets or sets a value indicating whether validation is performed when the <see
              cref="T:System.Web.UI.HtmlControls.HtmlAnchor" />
+
+            
 
             
 
@@ -250,6 +278,8 @@
 
             
 
+            
+
              control is clicked.</para
           >
         </remarks>
@@ -258,6 +288,8 @@
           <para
             >Gets or sets the URL target of the link specified in the <see
              cref="T:System.Web.UI.HtmlControls.HtmlAnchor" />
+
+            
 
             
 
@@ -303,8 +335,12 @@
 
             
 
+            
+
              control with the <see
              cref="P:System.Web.UI.HtmlControls.HtmlAnchor.HRef" />
+
+            
 
             
 
@@ -318,6 +354,8 @@
           <para
             >Gets or sets the bookmark name defined in the <see
              cref="T:System.Web.UI.HtmlControls.HtmlAnchor" />
+
+            
 
             
 
@@ -361,6 +399,8 @@
 
             
 
+            
+
              event and registers client script for generating a postback.</para
           >
         </summary>
@@ -371,8 +411,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -406,8 +450,12 @@
 
             
 
+            
+
              event is raised when the <see
              cref="T:System.Web.UI.HtmlControls.HtmlAnchor" />
+
+            
 
             
 
@@ -425,11 +473,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The <see
              cref="M:System.Web.UI.HtmlControls.HtmlAnchor.OnServerClick(System.EventArgs)" />
+
+            
 
             
 
@@ -448,6 +500,8 @@
 
             
 
+            
+
              event. This allows you to provide a custom handler for the event.</para
           >
         </summary>
@@ -458,8 +512,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -499,8 +557,12 @@
 
             
 
+            
+
              method is used by the <see
              cref="T:System.Web.UI.HtmlControls.HtmlAnchor" />
+
+            
 
             
 
@@ -513,11 +575,15 @@
 
             
 
+            
+
              event.</para
           >
           <para
             >This method is used primarily by control developers extending the functionality of the <see
              cref="T:System.Web.UI.HtmlControls.HtmlAnchor" />
+
+            
 
             
 
@@ -536,11 +602,15 @@
 
             
 
+            
+
              control when it posts back to the server. </para
           >
         </summary>
         <param name="eventArgument">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -573,6 +643,8 @@
 
             
 
+            
+
              property is a malformed URL, the <see
              cref="M:System.Web.UI.HtmlControls.HtmlAnchor.RenderAttributes(System.Web.UI.HtmlTextWriter)" />
 
@@ -580,8 +652,12 @@
 
             
 
+            
+
              method throws an <see
              cref="T:System.Web.HttpException" />
+
+            
 
             
 
@@ -600,8 +676,12 @@
 
             
 
+            
+
              control's attributes to the specified <see
              cref="T:System.Web.UI.HtmlTextWriter" />
+
+            
 
             
 
@@ -617,8 +697,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.HtmlTextWriter" />
+
+          
 
           
 
@@ -650,8 +734,12 @@
 
             
 
+            
+
              event is raised when the <see
              cref="T:System.Web.UI.HtmlControls.HtmlAnchor" />
+
+            
 
             
 
@@ -669,6 +757,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -677,6 +767,8 @@
           <para
             >Occurs when the <see
              cref="T:System.Web.UI.HtmlControls.HtmlAnchor" />
+
+            
 
             
 
@@ -718,8 +810,12 @@
 
             
 
+            
+
              method calls the <see
              cref="M:System.Web.UI.HtmlControls.HtmlAnchor.RaisePostBackEvent(System.String)" />
+
+            
 
             
 
@@ -735,8 +831,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Web.UI.IPostBackEventHandler" />
+
+            
 
             
 
@@ -755,11 +855,15 @@
 
             
 
+            
+
             .</para
           >
         </summary>
         <param name="eventArgument">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -788,8 +892,12 @@
 
             
 
+            
+
              property to specify the target window or frame that displays the contents of the Web page that is linked to when the <see
              cref="T:System.Web.UI.HtmlControls.HtmlAnchor" />
+
+            
 
             
 
@@ -806,8 +914,12 @@
 
               
 
+              
+
                property renders as a target attribute. The target attribute on a elements is not allowed in the XHTML 1.1 document type definition. Do not set the <see
                cref="P:System.Web.UI.HtmlControls.HtmlAnchor.Target" />
+
+              
 
               
 
@@ -820,10 +932,14 @@
 
               
 
+              
+
                must be compliant with XHTML 1.1. For more information, see <format
                type="text/html">
                 <a href="1b78d416-66bb-43a5-ac77-c703aab55b97">ASP.NET and XHTML Compliance</a>
               </format>
+
+              
 
               
 
@@ -839,10 +955,14 @@
 
               
 
+              
+
                property to target another window. For more information, see <format
                type="text/html">
                 <a href="9b5f3e05-e88d-4248-a5f4-9e64850fa0ae">ASP.NET Accessibility</a>
               </format>
+
+              
 
               
 
@@ -854,6 +974,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.HtmlControls.HtmlAnchor.Target" />
+
+            
 
             
 
@@ -927,6 +1049,8 @@
 
             
 
+            
+
              control is clicked. </para
           >
         </summary>
@@ -963,6 +1087,8 @@
 
             
 
+            
+
              control. This text is displayed when the mouse pointer rests over the control.</para
           >
         </remarks>
@@ -971,6 +1097,8 @@
           <para
             >Gets or sets the ToolTip text displayed when the mouse pointer is placed over the <see
              cref="T:System.Web.UI.HtmlControls.HtmlAnchor" />
+
+            
 
             
 
@@ -1022,8 +1150,12 @@
 
             
 
+            
+
              property to specify the name of the validation group for which the <see
              cref="T:System.Web.UI.HtmlControls.HtmlAnchor" />
+
+            
 
             
 
@@ -1039,8 +1171,12 @@
 
             
 
+            
+
              property has an effect only when the value of the <see
              cref="P:System.Web.UI.HtmlControls.HtmlAnchor.CausesValidation" />
+
+            
 
             
 
@@ -1053,6 +1189,8 @@
 
             
 
+            
+
              property, only the validation controls that are part of the specified group are validated when the <see
              cref="T:System.Web.UI.HtmlControls.HtmlAnchor" />
 
@@ -1060,8 +1198,12 @@
 
             
 
+            
+
              control posts back to the server. If you do not specify a value for this property and the <see
              cref="P:System.Web.UI.HtmlControls.HtmlAnchor.CausesValidation" />
+
+            
 
             
 
@@ -1075,6 +1217,8 @@
           <para
             >Gets or sets the group of controls for which the <see
              cref="T:System.Web.UI.HtmlControls.HtmlAnchor" />
+
+            
 
             
 

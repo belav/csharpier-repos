@@ -33,10 +33,14 @@
 
         
 
+        
+
          class retrieves resources from a binary .resources file that is embedded in an assembly or from a standalone .resources file. If an app has been localized and localized resources have been deployed in <format
          type="text/html">
           <a href="8d5c6044-2919-41d2-8321-274706b295ac">satellite assemblies</a>
         </format>
+
+        
 
         
 
@@ -128,10 +132,14 @@
 
         
 
+        
+
          class retrieves resources from binary resource (.resources) files. Typically, a language compiler or the <format
          type="text/html">
           <a href="b5382965-0053-47cf-b92f-862860275a01">Assembly Linker (AL.exe)</a>
         </format>
+
+        
 
         
 
@@ -144,8 +152,12 @@
 
         
 
+        
+
          object to retrieve resources directly from a .resources file that is not embedded in an assembly, by using the <see
          cref="M:System.Resources.ResourceManager.CreateFileBasedResourceManager(System.String,System.String,System.Type)" />
+
+        
 
         
 
@@ -157,6 +169,8 @@
         <para
           >Using standalone .resources files in an ASP.NET app will break XCOPY deployment, because the resources remain locked until they are explicitly released by the <see
            cref="M:System.Resources.ResourceManager.ReleaseAllResources" />
+
+          
 
           
 
@@ -182,10 +196,14 @@
 
         
 
+        
+
          to create a binary .resources file. You can then embed the resulting .resources file in an executable or library by using a compiler option such as /resources for the C# and Visual Basic compilers, or you can embed it in a satellite assembly by using the <format
          type="text/html">
           <a href="b5382965-0053-47cf-b92f-862860275a01">Assembly Linker (Al.exe)</a>
         </format>
+
+        
 
         
 
@@ -196,6 +214,8 @@
       <para
         >Ideally, you should create resources for every language your app supports, or at least for a meaningful subset of each language. The binary .resources file names follow the naming convention basename.cultureName.resources, where basename is the name of the app or the name of a class, depending on the level of detail you want. The <see
          cref="P:System.Globalization.CultureInfo.Name" />
+
+        
 
         
 
@@ -214,6 +234,8 @@
 
         
 
+        
+
          allows resources to be marked as private, but you should always mark them as public so they can be accessed by other assemblies. (Because a satellite assembly contains no code, resources that are marked as private are unavailable to your app through any mechanism.) </para
       >
       <para
@@ -221,6 +243,8 @@
          type="text/html">
           <a href="6c5ad891-66a0-4e7a-adcf-f41863ba6d8d">Creating Resource Files</a>
         </format>
+
+        
 
         
 
@@ -235,10 +259,14 @@
 
         
 
+        
+
         , and <format
          type="text/html">
           <a href="b224d7c0-35f8-4e82-a705-dd76795e8d16">Packaging and Deploying Resources</a>
         </format>
+
+        
 
         
 
@@ -260,8 +288,12 @@
 
         
 
+        
+
          object that retrieves resources from an embedded .resources file by calling one of its class constructor overloads. This tightly couples a <see
          cref="T:System.Resources.ResourceManager" />
+
+        
 
         
 
@@ -279,6 +311,8 @@
 
             
 
+            
+
              looks up resources based on two pieces of information that you supply: the base name of the .resources file and the assembly in which the default .resources file resides. The base name includes the namespace and root name of the .resources file, without its culture or extension. Note that .resources files that are compiled from the command line typically do not include a namespace name, whereas .resources files that are created in the Visual Studio environment do. For example, if a resource file is named MyCompany.StringResources.resources and the <see
              cref="T:System.Resources.ResourceManager" />
 
@@ -286,8 +320,12 @@
 
             
 
+            
+
              constructor is called from a static method named Example.Main, the following code instantiates a <see
              cref="T:System.Resources.ResourceManager" />
+
+            
 
             
 
@@ -305,8 +343,12 @@
 
             
 
+            
+
              looks up resources in satellite assemblies based on information from a type object. The type's fully qualified name corresponds to the base name of the .resources file without its file name extension. In desktop apps that are created by using the Visual Studio Resource Designer, Visual Studio creates a wrapper class whose fully qualified name is the same as the root name of the .resources file. For example, if a resource file is named MyCompany.StringResources.resources and there is a wrapper class named MyCompany.StringResources, the following code instantiates a <see
              cref="T:System.Resources.ResourceManager" />
+
+            
 
             
 
@@ -325,8 +367,12 @@
 
         
 
+        
+
          object. However, the attempt to retrieve a resource throws a <see
          cref="T:System.Resources.MissingManifestResourceException" />
+
+        
 
         
 
@@ -343,11 +389,15 @@
 
         
 
+        
+
          section later in this article. </para
       >
       <para
         >The following example shows how to instantiate a <see
          cref="T:System.Resources.ResourceManager" />
+
+        
 
         
 
@@ -385,6 +435,8 @@ vbc ShowTime.vb /resource:strings.resources
 
         
 
+        
+
         . If the assemblies are properly configured, the resource manager determines which resources to retrieve based on the current thread's <see
          cref="P:System.Threading.Thread.CurrentUICulture" />
 
@@ -392,8 +444,12 @@ vbc ShowTime.vb /resource:strings.resources
 
         
 
+        
+
          property. (That property also returns the current thread's UI culture.) For example, if an app is compiled with default English language resources in the main assembly and with French and Russian language resources in two satellite assemblies, and the <see
          cref="P:System.Threading.Thread.CurrentUICulture" />
+
+        
 
         
 
@@ -409,8 +465,12 @@ vbc ShowTime.vb /resource:strings.resources
 
         
 
+        
+
          property explicitly or implicitly. The way you set it determines how the <see
          cref="T:System.Resources.ResourceManager" />
+
+        
 
         
 
@@ -428,6 +488,8 @@ vbc ShowTime.vb /resource:strings.resources
 
             
 
+            
+
              property to a specific culture, the resource manager always retrieves the resources for that culture, regardless of the user's browser or operating system language. Consider an app that is compiled with default English language resources and three satellite assemblies that contain resources for English (United States), French (France), and Russian (Russia). If the <see
              cref="P:System.Globalization.CultureInfo.CurrentUICulture" />
 
@@ -435,8 +497,12 @@ vbc ShowTime.vb /resource:strings.resources
 
             
 
+            
+
              property is set to fr-FR, the <see
              cref="T:System.Resources.ResourceManager" />
+
+            
 
             
 
@@ -452,8 +518,12 @@ vbc ShowTime.vb /resource:strings.resources
 
             
 
+            
+
              property explicitly, because it is unlikely that the setting on the server will match incoming client requests. An ASP.NET app can set the <see
              cref="P:System.Threading.Thread.CurrentUICulture" />
+
+            
 
             
 
@@ -464,6 +534,8 @@ vbc ShowTime.vb /resource:strings.resources
           <para
             >Explicitly setting the <see
              cref="P:System.Threading.Thread.CurrentUICulture" />
+
+            
 
             
 
@@ -481,8 +553,12 @@ vbc ShowTime.vb /resource:strings.resources
 
             
 
+            
+
              object that represents that culture to the static <see
              cref="P:System.Globalization.CultureInfo.DefaultThreadCurrentUICulture" />
+
+            
 
             
 
@@ -495,6 +571,8 @@ vbc ShowTime.vb /resource:strings.resources
           <para
             >If you do not explicitly set the current UI culture and you do not define a default culture for the current app domain, the <see
              cref="P:System.Globalization.CultureInfo.CurrentUICulture" />
+
+            
 
             
 
@@ -513,8 +591,7 @@ vbc ShowTime.vb /resource:strings.resources
       <para>Here's the source code for the example (Example.vb for the Visual Basic version or Example.cs for the C# version):</para>
       <para>code reference: Conceptual.Resources.CurrentCulture#1</para>
       <para>To compile this example, create a batch (.bat) file that contains the following commands and run it from the command prompt. If you're using C#, specify csc instead of vbc and Example.cs instead of Example.vb.</para>
-      <code
->resgen Greetings.txt 
+      <code>resgen Greetings.txt 
 vbc Example.vb /resource:Greetings.resources
 
 resgen Greetings.fr-FR.txt
@@ -538,6 +615,8 @@ al /embed:Greetings.ru-RU.resources /culture:ru-RU /out:ru-RU\Example.resources.
 
         
 
+        
+
          and <see
          cref="M:System.Resources.ResourceManager.GetString(System.String)" />
 
@@ -545,8 +624,12 @@ al /embed:Greetings.ru-RU.resources /culture:ru-RU /out:ru-RU\Example.resources.
 
         
 
+        
+
          methods to access a specific resource. You can also call the <see
          cref="M:System.Resources.ResourceManager.GetStream(System.String)" />
+
+        
 
         
 
@@ -561,10 +644,14 @@ al /embed:Greetings.ru-RU.resources /culture:ru-RU /out:ru-RU\Example.resources.
 
         
 
+        
+
         , for more information about how the current UI culture of a thread is defined. If the resource manager cannot find the resource for the current thread's UI culture, it uses a fallback process to retrieve the specified resource. If the resource manager cannot find any localized resources, it uses the resources of the default culture. For more information about resource fallback rules, see the "Resource Fallback Process" section of the article <format
          type="text/html">
           <a href="b224d7c0-35f8-4e82-a705-dd76795e8d16">Packaging and Deploying Resources</a>
         </format>
+
+        
 
         
 
@@ -581,6 +668,8 @@ al /embed:Greetings.ru-RU.resources /culture:ru-RU /out:ru-RU\Example.resources.
 
           
 
+          
+
            class constructor cannot be found, the attempt to retrieve a resource throws a <see
            cref="T:System.Resources.MissingManifestResourceException" />
 
@@ -588,8 +677,12 @@ al /embed:Greetings.ru-RU.resources /culture:ru-RU /out:ru-RU\Example.resources.
 
           
 
+          
+
            or <see
            cref="T:System.Resources.MissingSatelliteAssemblyException" />
+
+          
 
           
 
@@ -606,6 +699,8 @@ al /embed:Greetings.ru-RU.resources /culture:ru-RU /out:ru-RU\Example.resources.
 
           
 
+          
+
            section later in this topic.</para
         >
       </block>
@@ -617,8 +712,12 @@ al /embed:Greetings.ru-RU.resources /culture:ru-RU /out:ru-RU\Example.resources.
 
         
 
+        
+
          method to retrieve culture-specific resources. It consists of resources compiled from .txt files for the English (en), French (France) (fr-FR), and Russian (Russia) (ru-RU) cultures. The example changes the current culture and current UI culture to English (United States), French (France), Russian (Russia), and Swedish (Sweden). It then calls the <see
          cref="M:System.Resources.ResourceManager.GetString(System.String)" />
+
+        
 
         
 
@@ -674,8 +773,7 @@ al /embed:Greetings.ru-RU.resources /culture:ru-RU /out:ru-RU\Example.resources.
         </item>
         <item>
           <term>
-            <para
->ru-RU</para>
+            <para>ru-RU</para>
           </term>
           <description>
             <para>DateStrings.ru-RU.txt</para>
@@ -714,6 +812,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
             ,  <see
              cref="M:System.Resources.ResourceManager.GetObject(System.String,System.Globalization.CultureInfo)" />
 
@@ -721,8 +821,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
             , or <see
              cref="M:System.Resources.ResourceManager.GetStream(System.String,System.Globalization.CultureInfo)" />
+
+            
 
             
 
@@ -740,6 +844,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              method to obtain a <see
              cref="T:System.Resources.ResourceSet" />
 
@@ -747,8 +853,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              object that represents the resources for a particular culture. In the method call, you can determine whether the resource manager probes for parent cultures if it is unable to find localized resources, or whether it simply falls back to the resources of the default culture. You can then use the <see
              cref="T:System.Resources.ResourceSet" />
+
+            
 
             
 
@@ -772,8 +882,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
         
 
+        
+
          exception if it expects to find the resources in the main assembly or a <see
          cref="T:System.Resources.MissingSatelliteAssemblyException" />
+
+        
 
         
 
@@ -786,6 +900,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
         
 
+        
+
          or <see
          cref="M:System.Resources.ResourceManager.GetObject(System.String,System.Globalization.CultureInfo)" />
 
@@ -793,8 +909,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
         
 
+        
+
         , and not when you instantiate a <see
          cref="T:System.Resources.ResourceManager" />
+
+        
 
         
 
@@ -813,6 +933,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              attribute indicates that the app's default resources reside in a satellite assembly, that assembly cannot be found. When you compile your app, make sure that resources are embedded in the main assembly or that the necessary satellite assembly is generated and is named appropriately. Its name should take the form appName.resources.dll, and it should be located in a directory named after the culture whose resources it contains. </para
           >
         </item>
@@ -820,6 +942,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
           <para
             >Your app doesn't have a default or neutral culture defined. Add the <see
              cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
+
+            
 
             
 
@@ -837,6 +961,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              parameter in the <see
              cref="M:System.Resources.ResourceManager.#ctor(System.String,System.Reflection.Assembly)" />
 
@@ -844,8 +970,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              constructor does not specify the name of a .resources file. The name should include the resource file's fully qualified namespace but not its file name extension. Typically, resource files that are created in Visual Studio include namespace names, but resource files that are created and compiled at the command prompt do not. You can determine the names of embedded .resources files by compiling and running the following utility. This is a console app that accepts the name of a main assembly or satellite assembly as a command-line parameter. It displays the strings that should be provided as the <paramref
              name="baseName" />
+
+            
 
             
 
@@ -864,8 +994,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
         
 
+        
+
          property, and not the <see
          cref="P:System.Globalization.CultureInfo.CurrentCulture" />
+
+        
 
         
 
@@ -887,6 +1021,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
         
 
+        
+
          attribute to use existing satellite assemblies and instruct the resource manager not to redeploy them with a new version of your main assembly,</para
       >
       <para
@@ -894,6 +1030,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
          type="text/html">
           <a href="eca16922-1c46-4f68-aefe-e7a12283641f">Retrieving Resources</a>
         </format>
+
+        
 
         
 
@@ -915,8 +1053,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
         
 
+        
+
          object may probe for satellite assemblies over the web, which can hurt your app's performance. To eliminate the performance problem, you can limit this probing to the satellite assemblies that you have deployed with your app. To do this, you create a &lt;satelliteassemblies&gt; node in your app's configuration file to specify that you have deployed a specific set of cultures for your app, and that the <see
          cref="T:System.Resources.ResourceManager" />
+
+        
 
         
 
@@ -930,6 +1072,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
            type="text/html">
             <a href="8457e615-e3b6-4990-8dcf-11bc590e4e9b">ClickOnce Deployment Manifest</a>
           </format>
+
+          
 
           
 
@@ -963,6 +1107,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              class to probe only for the cultures listed in the &lt;culture&gt; nodes. </para
           >
           <para
@@ -970,6 +1116,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
              type="text/html">
               <a href="8f8c2c90-f15d-400e-87e7-a757e4f04d0e">Assembly Names</a>
             </format>
+
+            
 
             
 
@@ -986,6 +1134,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
             .</para
           >
         </item>
@@ -996,6 +1146,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
       <para
         >If resources are needed for any assembly not listed under the &lt;satelliteassemblies&gt; node, the <see
          cref="T:System.Resources.ResourceManager" />
+
+        
 
         
 
@@ -1018,10 +1170,14 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
           
 
+          
+
            class is supported in win8_appname_long apps, we do not recommend its use. Use this class only when you develop net_portable projects that can be used with win8_appname_long apps. To retrieve resources from win8_appname_long apps, use the <see
            cref="http://go.microsoft.com/fwlink/p/?LinkId=238182"
             >Windows.ApplicationModel.Resources.ResourceLoader</see
           >
+
+          
 
           
 
@@ -1038,8 +1194,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
         
 
+        
+
          class retrieves resources from package resource index (PRI) files. A single PRI file (the application package PRI file) contains the resources for both the default culture and any localized cultures. You use the MakePRI utility to create a PRI file from one or more resource files that are in XML resource (.resw) format. For resources that are included in a Visual Studio project, Visual Studio handles the process of creating and packaging the PRI file automatically. You can then use the .NET Framework <see
          cref="T:System.Resources.ResourceManager" />
+
+        
 
         
 
@@ -1055,11 +1215,15 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
         
 
+        
+
          object for a win8_appname_long app in the same way that you do for a desktop app. </para
       >
       <para
         >You can then access the resources for a particular culture by passing the name of the resource to be retrieved to the <see
          cref="M:System.Resources.ResourceManager.GetString(System.String)" />
+
+        
 
         
 
@@ -1072,8 +1236,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
         
 
+        
+
          object that represents the culture whose resource is to be retrieved to the <see
          cref="M:System.Resources.ResourceManager.GetString(System.String,System.Globalization.CultureInfo)" />
+
+        
 
         
 
@@ -1113,6 +1281,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              class.</para
           >
         </remarks>
@@ -1121,6 +1291,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
           <para
             >Initializes a new instance of the <see
              cref="T:System.Resources.ResourceManager" />
+
+            
 
             
 
@@ -1161,6 +1333,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              parameter to load a particular resource file as follows: </para
           >
           <list type="bullet">
@@ -1173,8 +1347,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
                 
 
+                
+
                  attribute is not used to indicate that the resources of the default culture reside in a satellite assembly, the resource manager assumes that the resource file for the default culture is found in the same assembly as the type specified by the <paramref
                  name="resourceSource" />
+
+                
 
                 
 
@@ -1192,6 +1370,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
                 
 
+                
+
                  parameter.</para
               >
             </item>
@@ -1199,6 +1379,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
               <para
                 >The resource manager uses the default <see
                  cref="T:System.Resources.ResourceSet" />
+
+                
 
                 
 
@@ -1217,8 +1399,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              object and couple it with a particular set of resources by getting a type object whose name corresponds to the name of the resource, because as long as the class is visible to the compiler, the resources must be as well. For example, if a .resources file is named Resource1, the following statement instantiates a <see
              cref="T:System.Resources.ResourceManager" />
+
+            
 
             
 
@@ -1240,10 +1426,14 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
               
 
+              
+
                class is supported in win8_appname_long apps, we do not recommend its use. Use this class only when you develop net_portable projects that can be used with win8_appname_long apps. To retrieve resources from win8_appname_long apps, use the <see
                cref="http://go.microsoft.com/fwlink/p/?LinkId=238182"
                 >Windows.ApplicationModel.Resources.ResourceLoader</see
               >
+
+              
 
               
 
@@ -1260,8 +1450,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              uses the <paramref
              name="resourceSource" />
+
+            
 
             
 
@@ -1280,11 +1474,15 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              class that looks up resources in satellite assemblies based on information from the specified type object.</para
           >
         </summary>
         <param name="resourceSource">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1330,8 +1528,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
               
 
+              
+
                method instead to instantiate a <see
                cref="T:System.Resources.ResourceManager" />
+
+              
 
               
 
@@ -1348,8 +1550,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              cannot be found in <paramref
              name="assembly" />
+
+            
 
             
 
@@ -1362,6 +1568,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              object, but the attempt to retrieve a specific resource throws an exception, typically <see
              cref="T:System.Resources.MissingManifestResourceException" />
 
@@ -1369,8 +1577,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
             . For information about diagnosing the cause of the exception, see the "Handling the MissingManifestResourceException Exception" section of the <see
              cref="T:System.Resources.ResourceManager" />
+
+            
 
             
 
@@ -1390,10 +1602,14 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
               
 
+              
+
                class is supported in win8_appname_long apps, we do not recommend its use. Use this class only when you develop net_portable projects that can be used with win8_appname_long apps. To retrieve resources from win8_appname_long apps, use the <see
                cref="http://go.microsoft.com/fwlink/p/?LinkId=238182"
                 >Windows.ApplicationModel.Resources.ResourceLoader</see
               >
+
+              
 
               
 
@@ -1410,8 +1626,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              parameter to look up a matching resource set in the app's package resource index (PRI) file. The <paramref
              name="baseName" />
+
+            
 
             
 
@@ -1430,6 +1650,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              class that looks up resources contained in files with the specified root name in the given assembly.</para
           >
         </summary>
@@ -1440,10 +1662,14 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
           
 
+          
+
           The root name of the resource file without its extension but including any fully qualified namespace name. For example, the root name for the resource file named MyApplication.MyResource.en-US.resources is MyApplication.MyResource. </param
         >
         <param name="assembly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1487,8 +1713,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
               
 
+              
+
                method instead to instantiate a <see
                cref="T:System.Resources.ResourceManager" />
+
+              
 
               
 
@@ -1505,8 +1735,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              cannot be found in <paramref
              name="assembly" />
+
+            
 
             
 
@@ -1519,6 +1753,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              object, but the attempt to retrieve a specific resource throws an exception, typically <see
              cref="T:System.Resources.MissingManifestResourceException" />
 
@@ -1526,8 +1762,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
             . For information about diagnosing the cause of the exception, see the "Handling the MissingManifestResourceException Exception" section of the <see
              cref="T:System.Resources.ResourceManager" />
+
+            
 
             
 
@@ -1544,8 +1784,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
               
 
+              
+
                parameter is used to support your own resource format, and will commonly be null. This is different from the constructor that takes a <see
                cref="T:System.Type" />
+
+              
 
               
 
@@ -1565,8 +1809,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              class that uses a specified <see
              cref="T:System.Resources.ResourceSet" />
+
+            
 
             
 
@@ -1582,10 +1830,14 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
           
 
+          
+
           The root name of the resource file without its extension but including any fully qualified namespace name. For example, the root name for the resource file named MyApplication.MyResource.en-US.resources is MyApplication.MyResource. </param
         >
         <param name="assembly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1600,6 +1852,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
           
 
+          
+
           The type of the custom <see
            cref="T:System.Resources.ResourceSet" />
 
@@ -1607,8 +1861,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
           
 
+          
+
            to use. If null, the default runtime <see
            cref="T:System.Resources.ResourceSet" />
+
+          
 
           
 
@@ -1642,6 +1900,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              property reflects the fully qualified namespace name and the root resource name of a resource file, without its culture or file name extension. For example, if an app's default resource file is named SampleApps.StringResources.resources, the value of the <see
              cref="P:System.Resources.ResourceManager.BaseName" />
 
@@ -1649,8 +1909,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              property  is "SampleApps.StringResources". If an app's default resource file is named SampleApps.StringResources.en-US.resources and is embedded in a satellite assembly, the value of the <see
              cref="P:System.Resources.ResourceManager.BaseName" />
+
+            
 
             
 
@@ -1667,8 +1931,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
               
 
+              
+
                property value of a resource file that is compiled and embedded from the command line does not include a namespace name unless you explicitly include one when compiling the file. On the other hand, the <see
                cref="P:System.Resources.ResourceManager.BaseName" />
+
+              
 
               
 
@@ -1685,8 +1953,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              property value is the same as the string passed to the <see
              cref="M:System.Resources.ResourceManager.#ctor(System.String,System.Reflection.Assembly)" />
+
+            
 
             
 
@@ -1699,8 +1971,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              constructor when instantiating a <see
              cref="T:System.Resources.ResourceManager" />
+
+            
 
             
 
@@ -1714,6 +1990,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
           <para
             >Gets the root name of the resource files that the <see
              cref="T:System.Resources.ResourceManager" />
+
+            
 
             
 
@@ -1748,8 +2026,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              field is useful only if you write your own class that derives from the <see
              cref="T:System.Resources.ResourceManager" />
+
+            
 
             
 
@@ -1763,6 +2045,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
           <para
             >Specifies the root name of the resource files that the <see
              cref="T:System.Resources.ResourceManager" />
+
+            
 
             
 
@@ -1807,8 +2091,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              object to load resources for an ASP.NET page or to test a <see
              cref="T:System.Resources.ResourceSet" />
+
+            
 
             
 
@@ -1825,11 +2113,15 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              article.</para
           >
           <para
             >This method lets you specify a <see
              cref="T:System.Resources.ResourceSet" />
+
+            
 
             
 
@@ -1842,8 +2134,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              implementation, but would like to use a custom resource file format, you should derive from the <see
              cref="T:System.Resources.ResourceSet" />
+
+            
 
             
 
@@ -1856,8 +2152,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              and <see
              cref="M:System.Resources.ResourceSet.GetDefaultWriter" />
+
+            
 
             
 
@@ -1869,6 +2169,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
             <para
               >Using standalone .resources files in an ASP.NET app will break XCOPY deployment, because the resources remain locked until they are explicitly released by the <see
                cref="M:System.Resources.ResourceManager.ReleaseAllResources" />
+
+              
 
               
 
@@ -1888,6 +2190,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              object that searches a specific directory instead of an assembly manifest for resources.</para
           >
         </summary>
@@ -1902,6 +2206,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
           
 
+          
+
           The root name of the resources. For example, the root name for the resource file named "MyResource.en-US.resources" is "MyResource". </param
         >
         <param name="resourceDir">
@@ -1911,8 +2217,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
           
 
+          
+
           The name of the directory to search for the resources. <paramref
            name="resourceDir" />
+
+          
 
           
 
@@ -1927,6 +2237,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
           
 
+          
+
           The type of the custom <see
            cref="T:System.Resources.ResourceSet" />
 
@@ -1934,8 +2246,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
           
 
+          
+
            to use. If null, the default runtime <see
            cref="T:System.Resources.ResourceSet" />
+
+          
 
           
 
@@ -1975,8 +2291,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              property is useful only if you write your own class that derives from the <see
              cref="T:System.Resources.ResourceManager" />
+
+            
 
             
 
@@ -1987,6 +2307,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
           <para
             >You can use the <see
              cref="T:System.Resources.NeutralResourcesLanguageAttribute" />
+
+            
 
             
 
@@ -2034,6 +2356,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              attribute on a specified assembly.</para
           >
         </summary>
@@ -2047,11 +2371,15 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              attribute, if found; otherwise, the invariant culture.</para
           >
         </returns>
         <param name="a">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2090,8 +2418,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              method is used to retrieve non-string resources. These include values that belong to primitive data types such as <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -2104,8 +2436,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
             , bitmaps (such as a <see
              cref="T:System.Drawing.Bitmap" />
+
+            
 
             
 
@@ -2121,8 +2457,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              property. If the resource is not localized for that culture, the resource manager uses fallback rules to load an appropriate resource. If no usable set of localized resources is found, the <see
              cref="T:System.Resources.ResourceManager" />
+
+            
 
             
 
@@ -2135,6 +2475,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              exception or, if the resource set is expected to reside in a satellite assembly, a <see
              cref="T:System.Resources.MissingSatelliteAssemblyException" />
 
@@ -2142,8 +2484,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              exception. If the resource manager can load an appropriate resource set but cannot find a resource named <paramref
              name="name" />
+
+            
 
             
 
@@ -2159,8 +2505,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              property determines whether the comparison of <paramref
              name="name" />
+
+            
 
             
 
@@ -2177,8 +2527,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
               
 
+              
+
                exception might be thrown if an error was made deploying or installing a satellite assembly, or a <see
                cref="T:System.Runtime.Serialization.SerializationException" />
+
+              
 
               
 
@@ -2198,6 +2552,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              method multiple times with the same <paramref
              name="name" />
 
@@ -2205,8 +2561,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              parameter, do not depend on the method returning a reference to the same object with each call. This is because the <see
              cref="Overload:System.Resources.ResourceManager.GetObject" />
+
+            
 
             
 
@@ -2229,11 +2589,15 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              cannot be found, the method returns null. </para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2276,8 +2640,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              method is used to retrieve non-string resources. These include values that belong to primitive data types such as <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -2290,8 +2658,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
             , bitmaps (such as a <see
              cref="T:System.Drawing.Bitmap" />
+
+            
 
             
 
@@ -2307,8 +2679,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
             , or for the culture that is specified by the <see
              cref="P:System.Globalization.CultureInfo.CurrentUICulture" />
+
+            
 
             
 
@@ -2321,8 +2697,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              is null. If the resource is not localized for that culture, the resource manager uses fallback rules to load an appropriate resource. If no usable set of localized resources is found, the resource manager falls back on the default culture's resources. If a resource set for the default culture is not found, the method throws a <see
              cref="T:System.Resources.MissingManifestResourceException" />
+
+            
 
             
 
@@ -2335,8 +2715,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              exception. If the resource manager can load an appropriate resource set but cannot find a resource named <paramref
              name="name" />
+
+            
 
             
 
@@ -2352,8 +2736,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              property determines whether the comparison of <paramref
              name="name" />
+
+            
 
             
 
@@ -2370,8 +2758,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
               
 
+              
+
                exception might be thrown if an error was made deploying or installing a satellite assembly, or a <see
                cref="T:System.Runtime.Serialization.SerializationException" />
+
+              
 
               
 
@@ -2391,6 +2783,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              method multiple times with the same <paramref
              name="name" />
 
@@ -2398,8 +2792,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              parameter, do not depend on the method returning a reference to the same object with each call. This is because the <see
              cref="Overload:System.Resources.ResourceManager.GetObject" />
+
+            
 
             
 
@@ -2422,6 +2820,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              cannot be found, the method returns null.</para
           >
         </returns>
@@ -2432,10 +2832,14 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
           
 
+          
+
           The name of the resource to get. </param
         >
         <param name="culture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2477,8 +2881,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              method is useful only if you write your own class that derives from the <see
              cref="T:System.Resources.ResourceManager" />
+
+            
 
             
 
@@ -2494,8 +2902,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              property as part of the file name for all cultures other than the invariant culture. This method does not look in an assembly's manifest or touch the disk, and is used only to construct a resource file name (suitable for passing to the <see
              cref="T:System.Resources.ResourceReader" />
+
+            
 
             
 
@@ -2515,6 +2927,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -2528,11 +2942,15 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              object.</para
           >
         </returns>
         <param name="culture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2576,8 +2994,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              is true, <see
              cref="M:System.Resources.ResourceManager.GetResourceSet(System.Globalization.CultureInfo,System.Boolean,System.Boolean)" />
+
+            
 
             
 
@@ -2590,10 +3012,14 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              is false and a culture-specific resource set cannot be found, the method returns null. For more information about resource fallback, see "The Resource Fallback Process" section in the <format
              type="text/html">
               <a href="b224d7c0-35f8-4e82-a705-dd76795e8d16">Packaging and Deploying Resources</a>
             </format>
+
+            
 
             
 
@@ -2617,6 +3043,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
           
 
+          
+
           The culture whose resources are to be retrieved. </param
         >
         <param name="createIfNotExists">
@@ -2626,10 +3054,14 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
           
 
+          
+
           true to load the resource set, if it has not been loaded yet; otherwise, false. </param
         >
         <param name="tryParents">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2671,6 +3103,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              reference topic.</para
           >
         </remarks>
@@ -2679,6 +3113,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
           <para
             >Returns the version specified by the <see
              cref="T:System.Resources.SatelliteContractVersionAttribute" />
+
+            
 
             
 
@@ -2698,8 +3134,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
           
 
+          
+
           The assembly to check for the <see
            cref="T:System.Resources.SatelliteContractVersionAttribute" />
+
+          
 
           
 
@@ -2746,8 +3186,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              method takes the name of a resource that is stored as a <see
              cref="T:System.IO.MemoryStream" />
+
+            
 
             
 
@@ -2760,8 +3204,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              resource, and returns an <see
              cref="T:System.IO.UnmanagedMemoryStream" />
+
+            
 
             
 
@@ -2777,8 +3225,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              property. If the resource is not localized for that culture, the resource manager uses fallback rules to load an appropriate resource. If no usable set of localized resources is found, the <see
              cref="T:System.Resources.ResourceManager" />
+
+            
 
             
 
@@ -2791,6 +3243,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              exception or, if the resource set is expected to reside in a satellite assembly, a <see
              cref="T:System.Resources.MissingSatelliteAssemblyException" />
 
@@ -2798,8 +3252,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              exception. If the resource manager can load an appropriate resource set but cannot find a resource named <paramref
              name="name" />
+
+            
 
             
 
@@ -2815,8 +3273,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              property determines whether the comparison of <paramref
              name="name" />
+
+            
 
             
 
@@ -2835,6 +3297,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2882,8 +3346,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              method takes the name of a resource that is stored as a <see
              cref="T:System.IO.MemoryStream" />
+
+            
 
             
 
@@ -2896,8 +3364,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              resource, and returns an <see
              cref="T:System.IO.UnmanagedMemoryStream" />
+
+            
 
             
 
@@ -2913,8 +3385,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
             , or for the culture that is specified by the <see
              cref="P:System.Globalization.CultureInfo.CurrentUICulture" />
+
+            
 
             
 
@@ -2927,8 +3403,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              is null. If the resource is not localized for that culture, the resource manager uses fallback rules to load an appropriate resource. If no usable set of localized resources is found, the <see
              cref="T:System.Resources.ResourceManager" />
+
+            
 
             
 
@@ -2941,6 +3421,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              exception or, if the resource set is expected to reside in a satellite assembly, a <see
              cref="T:System.Resources.MissingSatelliteAssemblyException" />
 
@@ -2948,8 +3430,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              exception. If the resource manager can load an appropriate resource set but cannot find a resource named <paramref
              name="name" />
+
+            
 
             
 
@@ -2965,8 +3451,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              property determines whether the comparison of <paramref
              name="name" />
+
+            
 
             
 
@@ -2990,6 +3480,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
           
 
+          
+
           The name of a resource.</param
         >
         <param name="culture">
@@ -2999,8 +3491,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
           
 
+          
+
           An  object that specifies the culture to use for the resource lookup. If <paramref
            name="culture" />
+
+          
 
           
 
@@ -3042,10 +3538,14 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              property. If the resource has not been localized for that culture, the resource manager probes for a resource by following the steps outlined in the "Resource Fallback Process" section of the <format
              type="text/html">
               <a href="b224d7c0-35f8-4e82-a705-dd76795e8d16">Packaging and Deploying Resources</a>
             </format>
+
+            
 
             
 
@@ -3058,6 +3558,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              exception or, if the resource set is expected to reside in a satellite assembly, a <see
              cref="T:System.Resources.MissingSatelliteAssemblyException" />
 
@@ -3065,8 +3567,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              exception. If the resource manager can load an appropriate resource set but cannot find a resource named <paramref
              name="name" />
+
+            
 
             
 
@@ -3082,8 +3588,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              property determines whether the comparison of <paramref
              name="name" />
+
+            
 
             
 
@@ -3100,8 +3610,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
               
 
+              
+
                exception might be thrown if an error was made deploying or installing a satellite assembly, or a <see
                cref="T:System.Runtime.Serialization.SerializationException" />
+
+              
 
               
 
@@ -3122,10 +3636,14 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
               
 
+              
+
                class is supported in win8_appname_long apps, we do not recommend its use. Use this class only when you develop net_portable projects that can be used with win8_appname_long apps. To retrieve resources from win8_appname_long apps, use the <see
                cref="http://go.microsoft.com/fwlink/p/?LinkId=238182"
                 >Windows.ApplicationModel.Resources.ResourceLoader</see
               >
+
+              
 
               
 
@@ -3142,6 +3660,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              method returns the value of the <paramref
              name="name" />
 
@@ -3149,8 +3669,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              string resource, localized for the caller's current UI culture settings. The list of cultures is derived from the operating system's preferred UI language list. If the resource manager cannot match <paramref
              name="name" />
+
+            
 
             
 
@@ -3173,11 +3697,15 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              cannot be found in a resource set.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3223,6 +3751,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              is null, the <see
              cref="M:System.Resources.ResourceManager.GetString(System.String,System.Globalization.CultureInfo)" />
 
@@ -3230,8 +3760,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              method uses the current UI culture obtained from the <see
              cref="P:System.Globalization.CultureInfo.CurrentUICulture" />
+
+            
 
             
 
@@ -3247,8 +3781,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              parameter. If the resource has not been localized for <paramref
              name="culture" />
+
+            
 
             
 
@@ -3263,8 +3801,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              topic. If no usable set of resources is found, the resource manager falls back on the default culture's resources. If the resource manager cannot load the default culture's resource set, the method throws a <see
              cref="T:System.Resources.MissingManifestResourceException" />
+
+            
 
             
 
@@ -3277,8 +3819,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              exception. If the resource manager can load an appropriate resource set but cannot find a resource named <paramref
              name="name" />
+
+            
 
             
 
@@ -3294,8 +3840,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              property determines whether the comparison of <paramref
              name="name" />
+
+            
 
             
 
@@ -3312,8 +3862,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
               
 
+              
+
                exception might be thrown if an error was made deploying or installing a satellite assembly, or a <see
                cref="T:System.Runtime.Serialization.SerializationException" />
+
+              
 
               
 
@@ -3334,10 +3888,14 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
               
 
+              
+
               class is supported in win8_appname_long apps, we do not recommend its use. Use this class only when you develop net_portable projects that can be used with win8_appname_long apps. To retrieve resources from win8_appname_long apps, use the <see
                cref="http://go.microsoft.com/fwlink/p/?LinkId=238182"
                 >Windows.ApplicationModel.Resources.ResourceLoader</see
               >
+
+              
 
               
 
@@ -3354,8 +3912,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              method returns the value of the <paramref
              name="name" />
+
+            
 
             
 
@@ -3368,6 +3930,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              parameter. If the resource is not localized for the <paramref
              name="culture" />
 
@@ -3375,8 +3939,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              culture, the lookup uses the entire win8 language fallback list, and stops after looking in the default culture. If the resource manager cannot match <paramref
              name="name" />
+
+            
 
             
 
@@ -3399,6 +3967,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              cannot be found in a resource set.</para
           >
         </returns>
@@ -3409,10 +3979,14 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
           
 
+          
+
           The name of the resource to retrieve. </param
         >
         <param name="culture">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3451,6 +4025,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              can interpret and produce.</para
           >
         </summary>
@@ -3481,8 +4057,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              property is false, a resource with the name "Resource" is not equivalent to the resource with the name "resource". If <see
              cref="P:System.Resources.ResourceManager.IgnoreCase" />
+
+            
 
             
 
@@ -3495,6 +4075,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              is true, the <see
              cref="M:System.Resources.ResourceManager.GetString(System.String)" />
 
@@ -3502,8 +4084,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              and <see
              cref="M:System.Resources.ResourceManager.GetObject(System.String)" />
+
+            
 
             
 
@@ -3519,12 +4105,16 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              is true, this comparison succeeds.</para
           >
           <block subset="none" type="note">
             <para
               >For performance reasons, it is best to always specify the correct case for your resource names. Setting <see
                cref="P:System.Resources.ResourceManager.IgnoreCase" />
+
+              
 
               
 
@@ -3544,8 +4134,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              and <see
              cref="M:System.Resources.ResourceManager.GetObject(System.String)" />
+
+            
 
             
 
@@ -3596,10 +4190,14 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
           
 
+          
+
           The culture object to look for. </param
         >
         <param name="createIfNotExists">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3614,8 +4212,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
           
 
+          
+
           true to check parent <see
            cref="T:System.Globalization.CultureInfo" />
+
+          
 
           
 
@@ -3650,11 +4252,15 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
             ).</para
           >
           <para
             >If the <see
              cref="F:System.Resources.ResourceManager.MagicNumber" />
+
+            
 
             
 
@@ -3667,8 +4273,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              header, followed by a number indicating how many bytes should be skipped to get past this header. The next number indicates the version of the <see
              cref="T:System.Resources.ResourceManager" />
+
+            
 
             
 
@@ -3679,6 +4289,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
           <para
             >The version number for the current implementation is one. The next bytes are a length-prefixed string containing the name of an <see
              cref="T:System.Resources.IResourceReader" />
+
+            
 
             
 
@@ -3720,8 +4332,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              field is useful only if you write your own class that derives from the <see
              cref="T:System.Resources.ResourceManager" />
+
+            
 
             
 
@@ -3763,8 +4379,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              object will be as expensive as the first lookup, because the resource manager will have to search and load resources again. This can be useful in some complex threading scenarios, where creating a new <see
              cref="T:System.Resources.ResourceManager" />
+
+            
 
             
 
@@ -3781,8 +4401,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
               
 
+              
+
                method is not thread safe with respect to <see
                cref="Overload:System.Resources.ResourceManager.GetObject" />
+
+              
 
               
 
@@ -3795,8 +4419,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
               
 
+              
+
               , and <see
                cref="Overload:System.Resources.ResourceManager.GetStream" />
+
+              
 
               
 
@@ -3809,8 +4437,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
               
 
+              
+
                method in one thread while simultaneously getting a resource in another thread, the get operation can throw an <see
                cref="T:System.ObjectDisposedException" />
+
+              
 
               
 
@@ -3824,6 +4456,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
             <para
               >Calling this method does not unload satellite assemblies. To unload satellite assemblies, use the <see
                cref="M:System.AppDomain.Unload(System.AppDomain)" />
+
+              
 
               
 
@@ -3843,8 +4477,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              method on all <see
              cref="T:System.Resources.ResourceSet" />
+
+            
 
             
 
@@ -3888,8 +4526,12 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
 
             
 
+            
+
              that returns a mapping from cultures to <see
              cref="T:System.Resources.ResourceSet" />
+
+            
 
             
 
@@ -3923,6 +4565,8 @@ al /out:ru-RU\Showdate.resources.dll /culture:ru-RU /embed:DateStrings.ru-RU.res
           <para
             >Gets the type of the resource set object that the resource manager uses to construct a <see
              cref="T:System.Resources.ResourceSet" />
+
+            
 
             
 

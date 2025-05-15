@@ -76,6 +76,8 @@
 
             
 
+            
+
              class with the hash algorithm and hash value that determine membership.</para
           >
         </summary>
@@ -86,10 +88,14 @@
 
           
 
+          
+
           The hash algorithm to use to compute the hash value for the assembly. </param
         >
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -131,8 +137,12 @@
 
             
 
+            
+
              evidence object. There should be no more than one <see
              cref="T:System.Security.Policy.Hash" />
+
+            
 
             
 
@@ -151,6 +161,8 @@
         </returns>
         <param name="evidence">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -221,8 +233,12 @@
 
             
 
+            
+
              and the <see
              cref="P:System.Security.Policy.HashMembershipCondition.HashAlgorithm" />
+
+            
 
             
 
@@ -235,6 +251,8 @@
 
             
 
+            
+
              and <see
              cref="P:System.Security.Policy.HashMembershipCondition.HashAlgorithm" />
 
@@ -242,8 +260,12 @@
 
             
 
+            
+
              contained in the current <see
              cref="T:System.Security.Policy.HashMembershipCondition" />
+
+            
 
             
 
@@ -262,8 +284,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Security.Policy.HashMembershipCondition.HashAlgorithm" />
+
+            
 
             
 
@@ -276,6 +302,8 @@
 
             
 
+            
+
              and <see
              cref="P:System.Security.Policy.HashMembershipCondition.HashAlgorithm" />
 
@@ -283,8 +311,12 @@
 
             
 
+            
+
              contained in the current <see
              cref="T:System.Security.Policy.HashMembershipCondition" />
+
+            
 
             
 
@@ -300,8 +332,12 @@
 
           
 
+          
+
           The object to compare to the current <see
            cref="T:System.Security.Policy.HashMembershipCondition" />
+
+          
 
           
 
@@ -340,6 +376,8 @@
         </summary>
         <param name="e">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -384,10 +422,14 @@
 
           
 
+          
+
           The XML encoding to use to reconstruct the security object. </param
         >
         <param name="level">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -510,6 +552,8 @@
 
           
 
+          
+
           The object that initiated the callback. The functionality for this parameter is not currently implemented.</param
         >
       </Docs>
@@ -548,6 +592,8 @@
 
             
 
+            
+
              with the data needed to serialize the target object.</para
           >
         </summary>
@@ -558,8 +604,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -574,8 +624,12 @@
 
           
 
+          
+
           The destination <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -674,6 +728,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -683,6 +739,8 @@
         </returns>
         <param name="level">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

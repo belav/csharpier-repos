@@ -21,8 +21,12 @@
 
         
 
+        
+
          control can be rendered, a <see
          cref="T:System.Web.UI.WebControls.GridViewRow" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
          event is raised each time a row in the <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 
@@ -52,8 +60,12 @@
 
         
 
+        
+
          control can be rendered. The <see
          cref="E:System.Web.UI.WebControls.GridView.RowDataBound" />
+
+        
 
         
 
@@ -66,8 +78,12 @@
 
         
 
+        
+
          object) is bound to data in the <see
          cref="T:System.Web.UI.WebControls.GridView" />
+
+        
 
         
 
@@ -83,6 +99,8 @@
 
         
 
+        
+
          object is passed to the event-handling method, which allows you to access the properties of the row that raised the event. To access a specific cell in the row, use the <see
          cref="P:System.Web.UI.WebControls.TableRow.Cells" />
 
@@ -90,8 +108,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.UI.WebControls.GridViewRow" />
+
+        
 
         
 
@@ -104,6 +126,8 @@
 
         
 
+        
+
          property. You can also determine which row type (header row, data row, and so on) is being created by using the <see
          cref="P:System.Web.UI.WebControls.GridViewRow.RowType" />
 
@@ -111,8 +135,12 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Web.UI.WebControls.GridViewRow" />
+
+        
 
         
 
@@ -130,6 +158,8 @@
 
         
 
+        
+
         .</para
       >
       <para
@@ -140,8 +170,12 @@
 
         
 
+        
+
         , see the <see
          cref="M:System.Web.UI.WebControls.GridViewRowEventArgs.#ctor(System.Web.UI.WebControls.GridViewRow)" />
+
+        
 
         
 
@@ -160,8 +194,12 @@
 
         
 
+        
+
          and <see
          cref="E:System.Web.UI.WebControls.GridView.RowDataBound" />
+
+        
 
         
 
@@ -193,11 +231,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >The following table shows the initial property value for an instance of <see
              cref="T:System.Web.UI.WebControls.GridViewRowEventArgs" />
+
+            
 
             
 
@@ -231,8 +273,12 @@
 
                   
 
+                  
+
                    object contained in the <paramref
                    name="row" />
+
+                  
 
                   
 
@@ -257,6 +303,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -267,8 +315,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.UI.WebControls.GridViewRow" />
+
+          
 
           
 
@@ -303,6 +355,8 @@
 
             
 
+            
+
              property to access the properties of the row being created or data-bound. To access a specific cell in the row, use the <see
              cref="P:System.Web.UI.WebControls.TableRow.Cells" />
 
@@ -310,8 +364,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.GridViewRow" />
+
+            
 
             
 
@@ -324,6 +382,8 @@
 
             
 
+            
+
              property. You can also determine which row type (header row, data row, and so on) is being created by using the <see
              cref="P:System.Web.UI.WebControls.GridViewRow.RowType" />
 
@@ -331,8 +391,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.UI.WebControls.GridViewRow" />
+
+            
 
             
 

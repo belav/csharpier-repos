@@ -68,11 +68,15 @@
 
             
 
+            
+
              class that contains the specified set of designers.</para
           >
         </summary>
         <param name="designers">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -116,6 +120,8 @@
 
             
 
+            
+
              class that contains the specified designers.</para
           >
         </summary>
@@ -126,8 +132,12 @@
 
           
 
+          
+
           An array of <see
            cref="T:System.ComponentModel.Design.IDesignerHost" />
+
+          
 
           
 
@@ -188,6 +198,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 
@@ -257,8 +269,12 @@
 
             
 
+            
+
             , starting at a particular <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -274,6 +290,8 @@
 
           
 
+          
+
           The one-dimensional <see
            cref="T:System.Array" />
 
@@ -281,8 +299,12 @@
 
           
 
+          
+
            that is the destination of the elements copied from collection. The <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -297,8 +319,12 @@
 
           
 
+          
+
           The zero-based index in <paramref
            name="array" />
+
+          
 
           
 
@@ -358,6 +384,8 @@
           <para
             >Gets a value indicating whether access to the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -425,6 +453,8 @@
           <para
             >An <see
              cref="T:System.Collections.IEnumerator" />
+
+            
 
             
 

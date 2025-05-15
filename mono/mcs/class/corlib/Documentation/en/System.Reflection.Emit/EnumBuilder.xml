@@ -48,8 +48,12 @@
 
           
 
+          
+
            because <see
            cref="T:System.Reflection.Emit.EnumBuilder" />
+
+          
 
           
 
@@ -62,8 +66,12 @@
 
           
 
+          
+
            instead of the enumeration type. In the .NET Framework version 2.0, <see
            cref="T:System.Reflection.Emit.EnumBuilder" />
+
+          
 
           
 
@@ -135,6 +143,8 @@
 
             
 
+            
+
              for a description of the format of the display name of an assembly.</para
           >
           <format type="text/html">
@@ -173,8 +183,12 @@
 
             
 
+            
+
              of this type which is always <see
              cref="T:System.Enum" />
+
+            
 
             
 
@@ -213,6 +227,8 @@
 
             
 
+            
+
              object for this enum.</para
           >
         </summary>
@@ -221,6 +237,8 @@
           <para
             >A <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -254,6 +272,8 @@
           <para
             >Returns the type that declared this <see
              cref="T:System.Reflection.Emit.EnumBuilder" />
+
+            
 
             
 
@@ -297,6 +317,8 @@
 
             
 
+            
+
             , <see
              cref="F:System.Reflection.FieldAttributes.Static" />
 
@@ -304,8 +326,12 @@
 
             
 
+            
+
             , and <see
              cref="F:System.Reflection.FieldAttributes.Literal" />
+
+            
 
             
 
@@ -322,8 +348,12 @@
 
               
 
+              
+
                because <see
                cref="T:System.Reflection.Emit.EnumBuilder" />
+
+              
 
               
 
@@ -336,8 +366,12 @@
 
               
 
+              
+
                instead of the enumeration type. In the .NET Framework version 2.0, <see
                cref="T:System.Reflection.Emit.EnumBuilder" />
+
+              
 
               
 
@@ -362,10 +396,14 @@
 
           
 
+          
+
           The name of the static field. </param
         >
         <param name="literalValue">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -497,8 +535,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -517,6 +559,8 @@
 
             
 
+            
+
              objects representing the public and non-public constructors defined for this class, as specified.</para
           >
         </summary>
@@ -525,6 +569,8 @@
           <para
             >Returns an array of <see
              cref="T:System.Reflection.ConstructorInfo" />
+
+            
 
             
 
@@ -540,8 +586,12 @@
 
           
 
+          
+
           This must be a bit flag from <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -583,8 +633,12 @@
 
             
 
+            
+
              and call <see
              cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Boolean)" />
+
+            
 
             
 
@@ -597,11 +651,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The following code sample illustrates the use of GetCustomAttribute in the context of <see
              cref="T:System.Reflection.Emit.EnumBuilder" />
+
+            
 
             
 
@@ -625,11 +683,15 @@
 
             
 
+            
+
              instance.</para
           >
         </returns>
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -672,8 +734,12 @@
 
             
 
+            
+
              and call <see
              cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Boolean)" />
+
+            
 
             
 
@@ -686,11 +752,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The following code sample illustrates the use of GetCustomAttribute in the context of <see
              cref="T:System.Reflection.Emit.EnumBuilder" />
+
+            
 
             
 
@@ -715,6 +785,8 @@
 
             
 
+            
+
             .</para
           >
         </returns>
@@ -725,10 +797,14 @@
 
           
 
+          
+
           The Type object to which the custom attributes are applied. </param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -761,6 +837,8 @@
           <para
             >Calling this method always throws <see
              cref="T:System.NotSupportedException" />
+
+            
 
             
 
@@ -834,8 +912,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -858,11 +940,15 @@
 
             
 
+            
+
              object representing the event declared or inherited by this type with the specified name. If there are no matches, null is returned.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -877,8 +963,12 @@
 
           
 
+          
+
           This invocation attribute. This must be a bit flag from <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -918,8 +1008,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -937,6 +1031,8 @@
           <para
             >Returns an array of <see
              cref="T:System.Reflection.EventInfo" />
+
+            
 
             
 
@@ -979,8 +1075,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -1003,6 +1103,8 @@
 
             
 
+            
+
              objects representing the public and non-public events declared or inherited by this type. An empty array is returned if there are no events, as specified.</para
           >
         </returns>
@@ -1013,8 +1115,12 @@
 
           
 
+          
+
           This must be a bit flag from <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -1057,8 +1163,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -1081,11 +1191,15 @@
 
             
 
+            
+
              object representing the field declared or inherited by this type with the specified name and public or non-public modifier. If there are no matches, then null is returned.</para
           >
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1100,8 +1214,12 @@
 
           
 
+          
+
           This must be a bit flag from <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -1143,8 +1261,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -1155,6 +1277,8 @@
           <para
             >The <see
              cref="M:System.Reflection.Emit.EnumBuilder.GetFields(System.Reflection.BindingFlags)" />
+
+            
 
             
 
@@ -1177,6 +1301,8 @@
 
             
 
+            
+
              objects representing the public and non-public fields declared or inherited by this type. An empty array is returned if there are no fields, as specified.</para
           >
         </returns>
@@ -1187,8 +1313,12 @@
 
           
 
+          
+
           This must be a bit flag from <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -1231,8 +1361,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -1255,6 +1389,8 @@
 
             
 
+            
+
              object representing the implemented interface. Returns null if no interface matching name is found.</para
           >
         </returns>
@@ -1265,10 +1401,14 @@
 
           
 
+          
+
           The name of the interface. </param
         >
         <param name="ignoreCase">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1315,8 +1455,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -1335,6 +1479,8 @@
         </returns>
         <param name="interfaceType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1371,8 +1517,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -1390,6 +1540,8 @@
           <para
             >Returns an array of <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -1434,8 +1586,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -1458,8 +1614,12 @@
 
             
 
+            
+
              objects representing the public and non-public members defined on this type if <paramref
              name="nonPublic" />
+
+            
 
             
 
@@ -1475,10 +1635,14 @@
 
           
 
+          
+
           The name of the member. </param
         >
         <param name="type">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1493,8 +1657,12 @@
 
           
 
+          
+
           This must be a bit flag from <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -1536,8 +1704,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -1560,6 +1732,8 @@
 
             
 
+            
+
              objects representing the public and non-public members declared or inherited by this type. An empty array is returned if there are no matching members.</para
           >
         </returns>
@@ -1570,8 +1744,12 @@
 
           
 
+          
+
           This must be a bit flag from <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -1651,8 +1829,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -1675,8 +1857,12 @@
 
             
 
+            
+
              objects representing the public and non-public methods defined on this type if <paramref
              name="nonPublic" />
+
+            
 
             
 
@@ -1692,8 +1878,12 @@
 
           
 
+          
+
           This must be a bit flag from <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -1736,8 +1926,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -1760,6 +1954,8 @@
 
             
 
+            
+
              object representing the nested type that matches the specified requirements, if found; otherwise, null.</para
           >
         </returns>
@@ -1770,8 +1966,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -1786,8 +1986,12 @@
 
           
 
+          
+
           A bitmask comprised of one or more <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -1829,8 +2033,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -1853,8 +2061,12 @@
 
             
 
+            
+
              objects representing all the types nested within the current <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -1870,8 +2082,12 @@
 
             
 
+            
+
             , if no types are nested within the current <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -1887,8 +2103,12 @@
 
           
 
+          
+
           This must be a bit flag from <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -1930,8 +2150,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -1954,8 +2178,12 @@
 
             
 
+            
+
              objects representing the public and non-public properties defined on this type if <paramref
              name="nonPublic" />
+
+            
 
             
 
@@ -1971,8 +2199,12 @@
 
           
 
+          
+
           This invocation attribute. This must be a bit flag from <see
            cref="T:System.Reflection.BindingFlags" />
+
+          
 
           
 
@@ -2102,8 +2334,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 
@@ -2127,10 +2363,14 @@
 
           
 
+          
+
           The name of the member to invoke. This can be a constructor, method, property, or field. A suitable invocation attribute must be specified. Note that it is possible to invoke the default member of a class by passing an empty string as the name of the member. </param
         >
         <param name="invokeAttr">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2145,8 +2385,12 @@
 
           
 
+          
+
           An object that enables the binding, coercion of argument types, invocation of members, and retrieval of MemberInfo objects using reflection. If binder is null, the default binder is used. See <see
            cref="T:System.Reflection.Binder" />
+
+          
 
           
 
@@ -2161,10 +2405,14 @@
 
           
 
+          
+
           The object on which to invoke the specified member. If the member is static, this parameter is ignored. </param
         >
         <param name="args">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2179,8 +2427,12 @@
 
           
 
+          
+
           An array of the same length as <paramref
            name="args" />
+
+          
 
           
 
@@ -2195,10 +2447,14 @@
 
           
 
+          
+
           An instance of CultureInfo used to govern the coercion of types. If this is null, the CultureInfo for the current thread is used. (Note that this is necessary to, for example, convert a string that represents 1000 to a double value, since 1000 is represented differently by different cultures.) </param
         >
         <param name="namedParameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2211,8 +2467,12 @@
 
           
 
+          
+
            array gets the value in the corresponding element in the <paramref
            name="args" />
+
+          
 
           
 
@@ -2225,8 +2485,12 @@
 
           
 
+          
+
            is greater than the length of <paramref
            name="namedParameters" />
+
+          
 
           
 
@@ -2289,6 +2553,8 @@
 
             
 
+            
+
              object can be assigned to this object.</para
           >
         </summary>
@@ -2302,11 +2568,15 @@
 
             
 
+            
+
              can be assigned to this object; otherwise, false.</para
           >
         </returns>
         <param name="typeInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2415,6 +2685,8 @@
 
             
 
+            
+
              and call <see
              cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Boolean)" />
 
@@ -2422,8 +2694,12 @@
 
             
 
+            
+
              on the returned <see
              cref="T:System.Type" />
+
+            
 
             
 
@@ -2446,6 +2722,8 @@
 
             
 
+            
+
              is defined on this member; otherwise, false.</para
           >
         </returns>
@@ -2456,10 +2734,14 @@
 
           
 
+          
+
           The Type object to which the custom attributes are applied. </param
         >
         <param name="inherit">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2653,6 +2935,8 @@
 
             
 
+            
+
              definition.</para
           >
         </summary>
@@ -2728,6 +3012,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2762,6 +3048,8 @@
         </summary>
         <param name="customBuilder">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2809,6 +3097,8 @@
 
             
 
+            
+
             . The documentation is available online; see <see
              cref="http://go.microsoft.com/fwlink/?LinkID=99212"
               >ECMA C# and Common Language Infrastructure Standards</see
@@ -2818,10 +3108,14 @@
 
             
 
+            
+
              on MSDN and <see
              cref="http://go.microsoft.com/fwlink/?LinkID=65552"
               >Standard ECMA-335 - Common Language Infrastructure (CLI)</see
             >
+
+            
 
             
 
@@ -2841,10 +3135,14 @@
 
           
 
+          
+
           The constructor for the custom attribute. </param
         >
         <param name="binaryAttribute">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2923,6 +3221,8 @@
 
             
 
+            
+
             , see the MSDN Library.</para
           >
         </remarks>
@@ -2937,6 +3237,8 @@
 
           
 
+          
+
           The type information to return.</param
         >
         <param name="lcid">
@@ -2946,10 +3248,14 @@
 
           
 
+          
+
           The locale identifier for the type information.</param
         >
         <param name="ppTInfo">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -3057,8 +3363,12 @@
 
             
 
+            
+
              or <see
              cref="M:System.Reflection.Assembly.GetType(System.String)" />
+
+            
 
             
 

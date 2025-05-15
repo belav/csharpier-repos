@@ -28,6 +28,8 @@
 
         
 
+        
+
          class to manage a buffer pool. The pool and its buffers are created when you instantiate this class and destroyed when the buffer pool is reclaimed by garbage collection. Every time you need to use a buffer, you take one from the pool, use it, and return it to the pool when done. This process is much faster than creating and destroying a buffer every time you need to use one.</para
       >
     </summary>
@@ -54,6 +56,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Channels.BufferManager" />
+
+            
 
             
 
@@ -125,6 +129,8 @@
 
             
 
+            
+
              object with the specified parameters.</para
           >
         </returns>
@@ -135,10 +141,14 @@
 
           
 
+          
+
           The maximum size of the pool.</param
         >
         <param name="maxBufferSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -180,6 +190,8 @@
 
           
 
+          
+
           A reference to the buffer being returned.</param
         >
       </Docs>
@@ -215,6 +227,8 @@
         </returns>
         <param name="bufferSize">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

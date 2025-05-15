@@ -47,6 +47,8 @@
 
         
 
+        
+
          value to its class constructor. The members of the <see
          cref="T:System.Runtime.CompilerServices.MethodImplOptions" />
 
@@ -54,8 +56,12 @@
 
         
 
+        
+
          enumeration correspond to bit fields in the CorMethodImpl metadata table. This means that information on the attribute cannot be retrieved at run time by calling the <see
          cref="M:System.Reflection.MemberInfo.GetCustomAttributes(System.Boolean)" />
+
+        
 
         
 
@@ -100,6 +106,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -138,8 +146,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Runtime.CompilerServices.MethodImplOptions" />
+
+            
 
             
 
@@ -155,8 +167,12 @@
 
           
 
+          
+
           A bitmask representing the desired <see
            cref="T:System.Runtime.CompilerServices.MethodImplOptions" />
+
+          
 
           
 
@@ -208,8 +224,12 @@
 
             
 
+            
+
              class with the specified <see
              cref="T:System.Runtime.CompilerServices.MethodImplOptions" />
+
+            
 
             
 
@@ -225,8 +245,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Runtime.CompilerServices.MethodImplOptions" />
+
+          
 
           
 
@@ -262,6 +286,8 @@
           <para
             >A <see
              cref="T:System.Runtime.CompilerServices.MethodCodeType" />
+
+            
 
             
 
@@ -305,6 +331,8 @@
 
             
 
+            
+
              value
    describing the method attributed
    by the current instance.</para
@@ -318,6 +346,8 @@
           <para
             >Gets the <see
              cref="T:System.Runtime.CompilerServices.MethodImplOptions" />
+
+            
 
             
 

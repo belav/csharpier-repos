@@ -19,7 +19,7 @@
     <example
       >[Example: In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 class A  
 {  
    static void G(int x, int y) {  
@@ -35,6 +35,8 @@ class A
 }  
 ]]>
       </code_example>
+
+      
 
       
 

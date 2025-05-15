@@ -38,8 +38,12 @@
 
         
 
+        
+
          class is provided to enable developers to apply a template to the steps in a control that acts as a wizard. The <see
          cref="T:System.Web.UI.WebControls.TemplatedWizardStep" />
+
+        
 
         
 
@@ -50,6 +54,8 @@
       <para
         >You can apply a theme to <see
          cref="T:System.Web.UI.WebControls.TemplatedWizardStep" />
+
+        
 
         
 
@@ -76,6 +82,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.TemplatedWizardStep" />
+
+            
 
             
 
@@ -117,6 +125,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -147,6 +157,8 @@
 
             
 
+            
+
              property, it is for internal use only, so the property is effectively read-only.</para
           >
         </remarks>
@@ -160,8 +172,12 @@
 
             
 
+            
+
              control uses to create a <see
              cref="P:System.Web.UI.WebControls.TemplatedWizardStep.ContentTemplate" />
+
+            
 
             
 
@@ -203,6 +219,8 @@
 
             
 
+            
+
              control.</para
           >
         </summary>
@@ -238,8 +256,12 @@
 
             
 
+            
+
              property, it is for internal use only, so the property is effectively read-only. Your code should verify that the <see
              cref="P:System.Web.UI.WebControls.TemplatedWizardStep.CustomNavigationTemplateContainer" />
+
+            
 
             
 
@@ -250,6 +272,8 @@
           <para
             >This property is not bindable in visual designers, but is bindable at runtime. For more information, see <see
              cref="T:System.ComponentModel.BindableAttribute" />
+
+            
 
             
 
@@ -268,8 +292,12 @@
 
             
 
+            
+
              control uses to create a <see
              cref="P:System.Web.UI.WebControls.TemplatedWizardStep.CustomNavigationTemplate" />
+
+            
 
             
 
@@ -298,6 +326,8 @@
           <para
             >Gets the skin to apply to the <see
              cref="T:System.Web.UI.WebControls.TemplatedWizardStep" />
+
+            
 
             
 

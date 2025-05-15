@@ -35,6 +35,8 @@
 
         
 
+        
+
          attribute. Both attributes can be applied to a method, class, or interface. </para
       >
       <para
@@ -45,10 +47,14 @@
 
         
 
+        
+
         , see <format
          type="text/html">
           <a href="c680602d-39d3-44f1-bf22-8e6654ad5069">Using the XmlSerializer</a>
         </format>
+
+        
 
         
 
@@ -64,11 +70,15 @@
 
         
 
+        
+
          is used. </para
       >
       <para
         >Applying the attribute also causes a <see
          cref="T:System.ServiceModel.Description.XmlSerializerOperationBehavior" />
+
+        
 
         
 
@@ -87,8 +97,12 @@
 
         
 
+        
+
          instead of the <see
          cref="T:System.Runtime.Serialization.XmlObjectSerializer" />
+
+        
 
         
 
@@ -117,6 +131,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.XmlSerializerFormatAttribute" />
+
+            
 
             
 
@@ -155,8 +171,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ServiceModel.XmlSerializerFormatAttribute.Use" />
+
+            
 
             
 
@@ -170,6 +190,8 @@
           <para
             >Gets or sets the SOAP style of the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -202,8 +224,12 @@
 
             
 
+            
+
             . To use the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -216,8 +242,12 @@
 
             
 
+            
+
              property will be used even if a custom behavior is set on the contract to which the <see
              cref="T:System.ServiceModel.XmlSerializerFormatAttribute" />
+
+            
 
             
 
@@ -231,6 +261,8 @@
           <para
             >Gets or sets a value that indicates that the <see
              cref="T:System.Xml.Serialization.XmlSerializer" />
+
+            
 
             
 
@@ -269,8 +301,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.ServiceModel.XmlSerializerFormatAttribute.Use" />
+
+            
 
             
 

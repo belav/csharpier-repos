@@ -48,11 +48,15 @@
 
         
 
+        
+
          class.</para
       >
       <para
         >The classes in <see
          cref="N:System.Runtime.CompilerServices" />
+
+        
 
         
 
@@ -66,6 +70,8 @@
       <para
         >Stores the value of a <see
          cref="T:System.Decimal" />
+
+        
 
         
 
@@ -110,11 +116,15 @@
 
             
 
+            
+
              class with the specified signed integer values. </para
           >
         </summary>
         <param name="scale">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -129,6 +139,8 @@
 
           
 
+          
+
           A value of 0 indicates a positive value, and a value of 1 indicates a negative value.</param
         >
         <param name="hi">
@@ -138,8 +150,12 @@
 
           
 
+          
+
           The high 32 bits of the 96-bit <see
            cref="P:System.Runtime.CompilerServices.DecimalConstantAttribute.Value" />
+
+          
 
           
 
@@ -154,8 +170,12 @@
 
           
 
+          
+
           The middle 32 bits of the 96-bit <see
            cref="P:System.Runtime.CompilerServices.DecimalConstantAttribute.Value" />
+
+          
 
           
 
@@ -170,8 +190,12 @@
 
           
 
+          
+
           The low 32 bits of the 96-bit <see
            cref="P:System.Runtime.CompilerServices.DecimalConstantAttribute.Value" />
+
+          
 
           
 
@@ -224,9 +248,13 @@
 
               
 
+              
+
                whose values can have scales exceeding 255, the constructor <see
                cref="T:System.Runtime.CompilerServices.DecimalConstantAttribute.System.DecimalConstantAttribute" />
               <see langword="(System.String)" />
+
+              
 
               
 
@@ -243,10 +271,14 @@
 
           
 
+          
+
            &gt; 28.</exception
         >
         <param name="sign">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -261,8 +293,12 @@
 
           
 
+          
+
           The high 32 bits of the 96-bit <see
            cref="P:System.Runtime.CompilerServices.DecimalConstantAttribute.Value" />
+
+          
 
           
 
@@ -277,8 +313,12 @@
 
           
 
+          
+
           The middle 32 bits of the 96-bit <see
            cref="P:System.Runtime.CompilerServices.DecimalConstantAttribute.Value" />
+
+          
 
           
 
@@ -293,8 +333,12 @@
 
           
 
+          
+
           The low 32 bits of the 96-bit <see
            cref="P:System.Runtime.CompilerServices.DecimalConstantAttribute.Value" />
+
+          
 
           
 
@@ -312,11 +356,15 @@
 
             
 
+            
+
              class with the specified unsigned integer values.</para
           >
         </summary>
         <param name="scale">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -331,6 +379,8 @@
 
           
 
+          
+
           A value of 0 indicates a positive value, and a value of 1 indicates a negative value. </param
         >
         <param name="hi">
@@ -340,8 +390,12 @@
 
           
 
+          
+
           The high 32 bits of the 96-bit <see
            cref="P:System.Runtime.CompilerServices.DecimalConstantAttribute.Value" />
+
+          
 
           
 
@@ -356,8 +410,12 @@
 
           
 
+          
+
           The middle 32 bits of the 96-bit <see
            cref="P:System.Runtime.CompilerServices.DecimalConstantAttribute.Value" />
+
+          
 
           
 
@@ -372,8 +430,12 @@
 
           
 
+          
+
           The low 32 bits of the 96-bit <see
            cref="P:System.Runtime.CompilerServices.DecimalConstantAttribute.Value" />
+
+          
 
           
 

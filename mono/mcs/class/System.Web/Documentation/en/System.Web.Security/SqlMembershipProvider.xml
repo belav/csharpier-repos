@@ -24,8 +24,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Web.Security.MembershipUser" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          without SQL Server. When your computer has SQL Server Express installed with the default instance name and user-instancing enabled, the <see
          cref="T:System.Web.Security.SqlMembershipProvider" />
+
+        
 
         
 
@@ -57,11 +65,15 @@
 
         
 
+        
+
          instance named AspNetSqlMembershipProvider that connects to the default SQL Server Express instance on the local machine. You can use this instance of the provider if you installed SQL Server Express with the default instance name, or you can define your own instance in the Web.config file for your ASP.NET application.</para
       >
       <para
         >If you set the passwordCompatMode attribute to <see
          cref="F:System.Web.Configuration.MembershipPasswordCompatibilityMode.Framework40" />
+
+        
 
         
 
@@ -74,6 +86,8 @@
 
         
 
+        
+
         , only the hashing and encryption membership options from the ASP.NET 2.0, ASP.NET 3.5, and ASP.NET 3.5 SP1 can be used. The default value is <see
          cref="F:System.Web.Configuration.MembershipPasswordCompatibilityMode.Framework20" />
 
@@ -81,8 +95,12 @@
 
         
 
+        
+
         . For more information, see <see
          cref="T:System.Web.Configuration.MembershipPasswordCompatibilityMode" />
+
+        
 
         
 
@@ -113,8 +131,12 @@
 
             
 
+            
+
              constructor is called by ASP.NET to create an instance of the <see
              cref="T:System.Web.Security.SqlMembershipProvider" />
+
+            
 
             
 
@@ -128,6 +150,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Security.SqlMembershipProvider" />
+
+            
 
             
 
@@ -160,8 +184,12 @@
 
             
 
+            
+
              is used by the <see
              cref="T:System.Web.Security.SqlMembershipProvider" />
+
+            
 
             
 
@@ -174,8 +202,12 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Web.Security.SqlMembershipProvider.ApplicationName" />
+
+            
 
             
 
@@ -186,6 +218,8 @@
           <para
             >If a value is not specified for the applicationName attribute in the configuration file for the Web application, then the <see
              cref="P:System.Web.HttpRequest.ApplicationPath" />
+
+            
 
             
 
@@ -202,8 +236,12 @@
 
               
 
+              
+
                object, you can have multiple requests executing concurrently and attempting to set the <see
                cref="P:System.Web.Security.SqlMembershipProvider.ApplicationName" />
+
+              
 
               
 
@@ -216,8 +254,12 @@
 
               
 
+              
+
                property is not thread safe for multiple writes, and changing the <see
                cref="P:System.Web.Security.SqlMembershipProvider.ApplicationName" />
+
+              
 
               
 
@@ -230,8 +272,12 @@
 
               
 
+              
+
                property unless you must. An example of an application where setting the <see
                cref="P:System.Web.Security.SqlMembershipProvider.ApplicationName" />
+
+              
 
               
 
@@ -278,12 +324,16 @@
 
             
 
+            
+
              class to update the password for a user in the SQL Server database specified in the ASP.NET application's configuration file (Web.config).</para
           >
           <para>The maximum password length is 128 characters.</para>
           <para
             >If an incorrect password is supplied to the <see
              cref="M:System.Web.Security.SqlMembershipProvider.ChangePassword(System.String,System.String,System.String)" />
+
+            
 
             
 
@@ -296,6 +346,8 @@
 
             
 
+            
+
              method. If the correct password is supplied and the user is not currently locked out, then the internal counters that track invalid password and password-answer attempts are reset to zero. For more information, see the <see
              cref="P:System.Web.Security.SqlMembershipProvider.MaxInvalidPasswordAttempts" />
 
@@ -303,8 +355,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.Security.SqlMembershipProvider.PasswordAttemptWindow" />
+
+            
 
             
 
@@ -320,8 +376,12 @@
 
             
 
+            
+
              method directly by first obtaining a reference to the <see
              cref="T:System.Web.Security.SqlMembershipProvider" />
+
+            
 
             
 
@@ -334,8 +394,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.Security.Membership" />
+
+            
 
             
 
@@ -348,8 +412,12 @@
 
             
 
+            
+
              property exposes the defaultProvider specified in the Web.config file for the application. Configured providers that are not the default provider referenced using the <see
              cref="P:System.Web.Security.Membership.Providers" />
+
+            
 
             
 
@@ -360,6 +428,8 @@
           <para
             >You can also change user passwords by using the <see
              cref="M:System.Web.Security.MembershipUser.ChangePassword(System.String,System.String)" />
+
+            
 
             
 
@@ -379,6 +449,8 @@
         </returns>
         <param name="username">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -420,8 +492,12 @@
 
             
 
+            
+
              class to update the password question and answer for a user in the SQL Server database that is specified in the ASP.NET application's configuration file (Web.config). The password answer is encrypted using the format that is specified in the <see
              cref="P:System.Web.Security.SqlMembershipProvider.PasswordFormat" />
+
+            
 
             
 
@@ -437,11 +513,15 @@
 
             
 
+            
+
              method updates the password question and answer for a membership user.</para
           >
           <para
             >If an incorrect password is supplied to the <see
              cref="M:System.Web.Security.SqlMembershipProvider.ChangePasswordQuestionAndAnswer(System.String,System.String,System.String,System.String)" />
+
+            
 
             
 
@@ -454,6 +534,8 @@
 
             
 
+            
+
              method. If the correct password is supplied and the user is not currently locked out, then the internal counters that track invalid password and password-answer attempts are reset to zero. For more information, see the <see
              cref="P:System.Web.Security.SqlMembershipProvider.MaxInvalidPasswordAttempts" />
 
@@ -461,8 +543,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.Security.SqlMembershipProvider.PasswordAttemptWindow" />
+
+            
 
             
 
@@ -479,6 +565,8 @@
 
             
 
+            
+
             , <see
              cref="M:System.Web.Security.SqlMembershipProvider.ResetPassword(System.String,System.String)" />
 
@@ -486,8 +574,12 @@
 
             
 
+            
+
             , and <see
              cref="M:System.Web.Security.SqlMembershipProvider.GetPassword(System.String,System.String)" />
+
+            
 
             
 
@@ -511,6 +603,8 @@
 
             
 
+            
+
              is incorrect, the user is locked out, or the user does not exist in the database.</para
           >
         </returns>
@@ -521,10 +615,14 @@
 
           
 
+          
+
           The user to change the password question and answer for. </param
         >
         <param name="password">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -603,11 +701,15 @@
 
             
 
+            
+
              class to remove a user from the SQL Server database specified in the ASP.NET application's configuration file.</para
           >
           <para
             >Deleted users are only deleted from the configured <see
              cref="P:System.Web.Security.SqlMembershipProvider.ApplicationName" />
+
+            
 
             
 
@@ -623,8 +725,12 @@
 
             
 
+            
+
              is set to true, then all user data stored in the database for the <see
              cref="T:System.Web.Security.Roles" />
+
+            
 
             
 
@@ -637,6 +743,8 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
 
@@ -644,8 +752,12 @@
 
             
 
+            
+
              personalization features is also deleted for the configured <see
              cref="P:System.Web.Security.SqlMembershipProvider.ApplicationName" />
+
+            
 
             
 
@@ -661,8 +773,12 @@
 
             
 
+            
+
              is true, then the related data and the user information stored for the <see
              cref="T:System.Web.Security.Roles" />
+
+            
 
             
 
@@ -675,8 +791,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+            
 
             
 
@@ -689,8 +809,12 @@
 
             
 
+            
+
              property. As a result, the <see
              cref="M:System.Web.Security.SqlMembershipProvider.DeleteUser(System.String,System.Boolean)" />
+
+            
 
             
 
@@ -703,11 +827,15 @@
 
             
 
+            
+
              object is not used for storing authenticated user information.</para
           >
           <para
             >Leading and trailing spaces are trimmed from the <paramref
              name="username" />
+
+            
 
             
 
@@ -731,10 +859,14 @@
 
           
 
+          
+
           The name of the user to delete.</param
         >
         <param name="deleteAllRelatedData">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -766,8 +898,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Web.Security.MembershipPasswordFormat.Hashed" />
+
+            
 
             
 
@@ -807,6 +943,8 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Web.Security.MembershipPasswordFormat.Hashed" />
 
@@ -814,8 +952,12 @@
 
             
 
+            
+
             , a user will not be able to retrieve his or her existing password from the database. The <see
              cref="F:System.Web.Security.MembershipPasswordFormat.Hashed" />
+
+            
 
             
 
@@ -831,8 +973,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Web.Security.MembershipPasswordFormat.Hashed" />
+
+            
 
             
 
@@ -845,8 +991,12 @@
 
             
 
+            
+
              is set to true, a <see
              cref="T:System.Configuration.Provider.ProviderException" />
+
+            
 
             
 
@@ -941,8 +1091,12 @@
 
             
 
+            
+
              class provides a <see
              cref="M:System.Web.Security.Membership.GeneratePassword(System.Int32,System.Int32)" />
+
+            
 
             
 
@@ -955,8 +1109,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Web.Security.SqlMembershipProvider" />
+
+            
 
             
 
@@ -969,8 +1127,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Web.Security.Membership" />
+
+            
 
             
 
@@ -983,8 +1145,12 @@
 
             
 
+            
+
              property is greater than 14, the password returned will be the length specified in the  <see
              cref="P:System.Web.Security.SqlMembershipProvider.MinRequiredPasswordLength" />
+
+            
 
             
 
@@ -1000,8 +1166,12 @@
 
             
 
+            
+
              method by referencing the <see
              cref="T:System.Web.Security.SqlMembershipProvider" />
+
+            
 
             
 
@@ -1014,8 +1184,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.Security.Membership" />
+
+            
 
             
 
@@ -1033,8 +1207,12 @@
 
               
 
+              
+
                method is not guaranteed to pass the regular expression in the <see
                cref="P:System.Web.Security.SqlMembershipProvider.PasswordStrengthRegularExpression" />
+
+              
 
               
 
@@ -1047,8 +1225,12 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.Security.SqlMembershipProvider.MinRequiredNonAlphanumericCharacters" />
+
+              
 
               
 
@@ -1117,10 +1299,14 @@
 
             
 
+            
+
              class to retrieve the number of users considered online from the SQL Server database specified in the ASP.NET application's configuration file (Web.config).</para
           >
           <para>
             <see cref="M:System.Web.Security.SqlMembershipProvider.GetNumberOfUsersOnline" />
+
+            
 
             
 
@@ -1133,11 +1319,15 @@
 
             
 
+            
+
              property in minutes.</para
           >
           <para
             >Only users associated with the configured <see
              cref="P:System.Web.Security.SqlMembershipProvider.ApplicationName" />
+
+            
 
             
 
@@ -1185,11 +1375,15 @@
 
             
 
+            
+
              class to retrieve the password for a user from the SQL Server database specified in the ASP.NET application's configuration file (Web.config).</para
           >
           <para
             >If an incorrect password answer is supplied to the <see
              cref="M:System.Web.Security.SqlMembershipProvider.GetPassword(System.String,System.String)" />
+
+            
 
             
 
@@ -1202,6 +1396,8 @@
 
             
 
+            
+
              method. If the correct password answer is supplied and the user is not currently locked out, then the internal counter that tracks invalid password-answer attempts is reset to zero. For more information, see the <see
              cref="P:System.Web.Security.SqlMembershipProvider.MaxInvalidPasswordAttempts" />
 
@@ -1209,8 +1405,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.Security.SqlMembershipProvider.PasswordAttemptWindow" />
+
+            
 
             
 
@@ -1226,8 +1426,12 @@
 
             
 
+            
+
              method directly by first obtaining a reference to the <see
              cref="T:System.Web.Security.SqlMembershipProvider" />
+
+            
 
             
 
@@ -1240,8 +1444,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.Security.Membership" />
+
+            
 
             
 
@@ -1257,8 +1465,12 @@
 
             
 
+            
+
              property is set to <see
              cref="F:System.Web.Security.MembershipPasswordFormat.Hashed" />
+
+            
 
             
 
@@ -1271,8 +1483,12 @@
 
             
 
+            
+
              method cannot retrieve the password. Hashed passwords are encrypted one-way and cannot be decrypted. If the <see
              cref="P:System.Web.Security.SqlMembershipProvider.PasswordFormat" />
+
+            
 
             
 
@@ -1285,6 +1501,8 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Web.Security.SqlMembershipProvider.EnablePasswordRetrieval" />
 
@@ -1292,8 +1510,12 @@
 
             
 
+            
+
              is set to true, a <see
              cref="T:System.Configuration.Provider.ProviderException" />
+
+            
 
             
 
@@ -1313,6 +1535,8 @@
         </returns>
         <param name="username">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1349,6 +1573,8 @@
 
             
 
+            
+
              retrieves the user information from the data source and creates a <see
              cref="T:System.Web.Security.MembershipUser" />
 
@@ -1356,8 +1582,12 @@
 
             
 
+            
+
              object populated with the returned data. The user is identified using the unique identifier specified with the <paramref
              name="providerUserKey" />
+
+            
 
             
 
@@ -1380,8 +1610,12 @@
 
             
 
+            
+
              object representing the user associated with the specified unique identifier. If no user is found in the database for the specified <paramref
              name="providerUserKey" />
+
+            
 
             
 
@@ -1397,10 +1631,14 @@
 
           
 
+          
+
           The unique identifier for the user.</param
         >
         <param name="userIsOnline">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1438,11 +1676,15 @@
 
             
 
+            
+
              class to retrieve user information from the SQL Server database specified in the ASP.NET application's configuration file (Web.config).</para
           >
           <para
             >If <paramref
              name="userIsOnline" />
+
+            
 
             
 
@@ -1455,8 +1697,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.Security.MembershipUser.IsOnline" />
+
+            
 
             
 
@@ -1469,11 +1715,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >Leading and trailing spaces are trimmed from the <paramref
              name="username" />
+
+            
 
             
 
@@ -1496,8 +1746,12 @@
 
             
 
+            
+
              object representing the specified user. If no user is found in the database for the specified <paramref
              name="username" />
+
+            
 
             
 
@@ -1513,10 +1767,14 @@
 
           
 
+          
+
           The name of the user to get information for. </param
         >
         <param name="userIsOnline">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1553,12 +1811,16 @@
 
             
 
+            
+
              class with an e-mail address, which it uses to retrieve an associated user name from the SQL Server database specified in the ASP.NET application's configuration file (Web.config).</para
           >
           <para>If more than one user in the membership database has the same e-mail address, the first user name encountered is returned. You can set the requiresUniqueEmail attribute to true in the application-configuration file to ensure that each e-mail address in the database is unique.</para>
           <para
             >Leading and trailing spaces are trimmed from the <paramref
              name="email" />
+
+            
 
             
 
@@ -1577,6 +1839,8 @@
         </returns>
         <param name="email">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1614,6 +1878,8 @@
 
             
 
+            
+
              with the property values specified in the ASP.NET application configuration file (Web.config) and is not intended to be used directly from your code.</para
           >
         </remarks>
@@ -1628,8 +1894,12 @@
 
           
 
+          
+
           The name of the <see
            cref="T:System.Web.Security.SqlMembershipProvider" />
+
+          
 
           
 
@@ -1644,8 +1914,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Collections.Specialized.NameValueCollection" />
+
+          
 
           
 
@@ -1680,8 +1954,12 @@
 
             
 
+            
+
              works in conjunction with the <see
              cref="P:System.Web.Security.Membership.PasswordAttemptWindow" />
+
+            
 
             
 
@@ -1694,8 +1972,12 @@
 
             
 
+            
+
              property within the number of minutes identified by the value of the <see
              cref="P:System.Web.Security.Membership.PasswordAttemptWindow" />
+
+            
 
             
 
@@ -1708,8 +1990,12 @@
 
             
 
+            
+
              property to true until the user is unlocked with the <see
              cref="M:System.Web.Security.MembershipUser.UnlockUser" />
+
+            
 
             
 
@@ -1722,8 +2008,12 @@
 
             
 
+            
+
              value is reached, the counters that track the number of invalid password and password-answer attempts are reset to zero. If a valid password answer is supplied before the <see
              cref="P:System.Web.Security.Membership.MaxInvalidPasswordAttempts" />
+
+            
 
             
 
@@ -1739,11 +2029,15 @@
 
             
 
+            
+
              keeps counts of invalid password attempts and invalid password-answer attempts separately. Invalid password attempts result in only the password-attempt counter being incremented. Invalid password-answer attempts result in only the password-answer counter being incremented.</para
           >
           <para
             >The <see
              cref="P:System.Web.Security.Membership.MaxInvalidPasswordAttempts" />
+
+            
 
             
 
@@ -1758,11 +2052,15 @@
 
             
 
+            
+
              configuration section.</para
           >
           <para
             >If the <see
              cref="P:System.Web.Security.Membership.RequiresQuestionAndAnswer" />
+
+            
 
             
 
@@ -1802,8 +2100,12 @@
 
             
 
+            
+
              property returns the minimum number of special, non-alphabetic characters that must be entered to create a valid password for the <see
              cref="T:System.Web.Security.SqlMembershipProvider" />
+
+            
 
             
 
@@ -1819,10 +2121,14 @@
 
             
 
+            
+
              property value is set in the application configuration using the minRequiredNonalphanumericCharacters attribute of the <format
              type="text/html">
               <a href="b9c1ee8f-33ca-4361-8666-b42a0fe86049">membership</a>
             </format>
+
+            
 
             
 
@@ -1833,6 +2139,8 @@
           <para
             >A non-alphanumeric character is a character for which the <see
              cref="M:System.Char.IsLetterOrDigit(System.Char)" />
+
+            
 
             
 
@@ -1871,8 +2179,12 @@
 
             
 
+            
+
              property gets the minimum number of characters that must be entered to create a valid password for the <see
              cref="T:System.Web.Security.SqlMembershipProvider" />
+
+            
 
             
 
@@ -1888,10 +2200,14 @@
 
             
 
+            
+
              property value is set in the application configuration using the minRequiredPasswordLength attribute of the <format
              type="text/html">
               <a href="b9c1ee8f-33ca-4361-8666-b42a0fe86049">membership</a>
             </format>
+
+            
 
             
 
@@ -1928,8 +2244,12 @@
 
             
 
+            
+
              property works in conjunction with the <see
              cref="P:System.Web.Security.SqlMembershipProvider.MaxInvalidPasswordAttempts" />
+
+            
 
             
 
@@ -1942,8 +2262,12 @@
 
             
 
+            
+
              property, which identifies the number of minutes allowed between invalid attempts. If the number of consecutive failed attempts that a user makes to reset his or her password equals the value stored in the <see
              cref="P:System.Web.Security.SqlMembershipProvider.MaxInvalidPasswordAttempts" />
+
+            
 
             
 
@@ -1956,8 +2280,12 @@
 
             
 
+            
+
              property, then the membership user is locked out by setting the <see
              cref="P:System.Web.Security.MembershipUser.IsLockedOut" />
+
+            
 
             
 
@@ -1970,8 +2298,12 @@
 
             
 
+            
+
              method. If the interval between the current failed attempt and the last failed attempt is greater than the <see
              cref="P:System.Web.Security.SqlMembershipProvider.PasswordAttemptWindow" />
+
+            
 
             
 
@@ -1987,11 +2319,15 @@
 
             
 
+            
+
              keeps count of invalid password attempts and invalid password-answer attempts separately. Invalid password attempts result in only the password-attempt counter being incremented. Invalid password-answer attempts result in only the password-answer counter being incremented.</para
           >
           <para
             >The <see
              cref="P:System.Web.Security.Membership.PasswordAttemptWindow" />
+
+            
 
             
 
@@ -2006,11 +2342,15 @@
 
             
 
+            
+
              configuration section.</para
           >
           <para
             >If the <see
              cref="P:System.Web.Security.Membership.RequiresQuestionAndAnswer" />
+
+            
 
             
 
@@ -2051,10 +2391,14 @@
 
             
 
+            
+
              value is specified in the <format
              type="text/html">
               <a href="27617d4a-205a-41f0-b2c3-a21aa223d2a9">providers</a>
             </format>
+
+            
 
             
 
@@ -2072,8 +2416,12 @@
 
             
 
+            
+
              element in your configuration. Note that if you specify a value of 3DES for the validation attribute, or if no value is specified, hashed passwords will be hashed using the <see
              cref="T:System.Security.Cryptography.SHA1" />
+
+            
 
             
 
@@ -2091,6 +2439,8 @@
 
             
 
+            
+
              configuration element. If you choose encryption, default password encryption uses AES. You can change the encryption algorithm by setting the decryption attribute of the <format
              type="text/html">
               <a href="4b5699a9-bc21-4c4a-85f1-8b3b8ebd2d46">machineKey</a>
@@ -2100,10 +2450,14 @@
 
             
 
+            
+
              configuration element. If you are encrypting passwords, you must provide an explicit value for the decryptionKey attribute in the <format
              type="text/html">
               <a href="4b5699a9-bc21-4c4a-85f1-8b3b8ebd2d46">machineKey</a>
             </format>
+
+            
 
             
 
@@ -2143,8 +2497,12 @@
 
             
 
+            
+
              property gets the regular expression used to evaluate password complexity for the <see
              cref="T:System.Web.Security.SqlMembershipProvider" />
+
+            
 
             
 
@@ -2160,10 +2518,14 @@
 
             
 
+            
+
              property is set in the application configuration using the passwordStrengthRegularExpression attribute of the <format
              type="text/html">
               <a href="b9c1ee8f-33ca-4361-8666-b42a0fe86049">membership</a>
             </format>
+
+            
 
             
 
@@ -2203,6 +2565,8 @@
 
             
 
+            
+
              property and the <see
              cref="P:System.Web.Security.SqlMembershipProvider.EnablePasswordRetrieval" />
 
@@ -2210,8 +2574,12 @@
 
             
 
+            
+
              property are both false, the value of the <see
              cref="P:System.Web.Security.SqlMembershipProvider.RequiresQuestionAndAnswer" />
+
+            
 
             
 
@@ -2227,8 +2595,12 @@
 
             
 
+            
+
              and <see
              cref="M:System.Web.Security.SqlMembershipProvider.GetPassword(System.String,System.String)" />
+
+            
 
             
 
@@ -2291,12 +2663,16 @@
 
             
 
+            
+
              class to reset the password for a user in the SQL Server database specified in the ASP.NET application's configuration file (Web.config) to a new, randomly generated value. The new password is returned.</para
           >
           <block subset="none" type="note">
             <para
               >The random password created by the <see
                cref="M:System.Web.Security.SqlMembershipProvider.ResetPassword(System.String,System.String)" />
+
+              
 
               
 
@@ -2309,6 +2685,8 @@
 
               
 
+              
+
                property. However, the random password will meet the criteria established by the <see
                cref="P:System.Web.Security.SqlMembershipProvider.MinRequiredPasswordLength" />
 
@@ -2316,8 +2694,12 @@
 
               
 
+              
+
                and <see
                cref="P:System.Web.Security.SqlMembershipProvider.MinRequiredNonAlphanumericCharacters" />
+
+              
 
               
 
@@ -2334,8 +2716,12 @@
 
             
 
+            
+
              method is most commonly used when the <see
              cref="P:System.Web.Security.SqlMembershipProvider.PasswordFormat" />
+
+            
 
             
 
@@ -2351,8 +2737,12 @@
 
             
 
+            
+
              method, the internal counter that tracks invalid password attempts is incremented by one. This can result in the user being locked out and unable to log on until the lock status is cleared by a call to the <see
              cref="M:System.Web.Security.SqlMembershipProvider.UnlockUser(System.String)" />
+
+            
 
             
 
@@ -2365,8 +2755,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.Security.SqlMembershipProvider.PasswordAttemptWindow" />
+
+            
 
             
 
@@ -2382,8 +2776,12 @@
 
             
 
+            
+
              method directly by first obtaining a reference to the <see
              cref="T:System.Web.Security.SqlMembershipProvider" />
+
+            
 
             
 
@@ -2396,8 +2794,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Web.Security.Membership" />
+
+            
 
             
 
@@ -2410,6 +2812,8 @@
 
             
 
+            
+
              property, and will contain the number of non-alphanumeric characters specified in the <see
              cref="P:System.Web.Security.SqlMembershipProvider.MinRequiredNonAlphanumericCharacters" />
 
@@ -2417,8 +2821,12 @@
 
             
 
+            
+
              property. The password is not guaranteed to pass the regular expression contained in the <see
              cref="P:System.Web.Security.SqlMembershipProvider.PasswordStrengthRegularExpression" />
+
+            
 
             
 
@@ -2438,6 +2846,8 @@
         </returns>
         <param name="username">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2471,8 +2881,12 @@
 
             
 
+            
+
              method when the <see
              cref="P:System.Web.Security.SqlMembershipProvider.MaxInvalidPasswordAttempts" />
+
+            
 
             
 
@@ -2485,11 +2899,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >Leading and trailing spaces are trimmed from the <paramref
              name="username" />
+
+            
 
             
 
@@ -2508,6 +2926,8 @@
         </returns>
         <param name="username">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -2544,8 +2964,12 @@
 
             
 
+            
+
              class to update user information for a user in the SQL Server database specified in the ASP.NET application's configuration file (Web.config). The <see
              cref="P:System.Web.Security.MembershipUser.Email" />
+
+            
 
             
 
@@ -2558,8 +2982,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.Security.MembershipUser.IsApproved" />
+
+            
 
             
 
@@ -2572,8 +3000,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Web.Security.MembershipUser.LastActivityDate" />
+
+            
 
             
 
@@ -2589,8 +3021,12 @@
 
             
 
+            
+
              property is 256 characters. The maximum length for the <see
              cref="P:System.Web.Security.MembershipUser.Email" />
+
+            
 
             
 
@@ -2606,6 +3042,8 @@
 
             
 
+            
+
              method. To update the password for a membership user, use the <see
              cref="M:System.Web.Security.MembershipUser.ChangePassword(System.String,System.String)" />
 
@@ -2613,8 +3051,12 @@
 
             
 
+            
+
              method of the <see
              cref="T:System.Web.Security.MembershipUser" />
+
+            
 
             
 
@@ -2634,8 +3076,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Web.Security.MembershipUser" />
+
+          
 
           
 
@@ -2673,12 +3119,16 @@
 
             
 
+            
+
              class to validate user information for a user in the SQL Server database specified in the ASP.NET application's configuration file (Web.config).</para
           >
           <para>When a user is successfully validated, the last activity date and last sign-in date values are updated to the current date and time in the database.</para>
           <para
             >If an incorrect password is supplied to the <see
              cref="M:System.Web.Security.SqlMembershipProvider.ValidateUser(System.String,System.String)" />
+
+            
 
             
 
@@ -2691,6 +3141,8 @@
 
             
 
+            
+
              method. If the correct password is supplied and the user is not currently locked out, then the internal counters that track invalid password and password-answer attempts are reset to zero. For more information, see the <see
              cref="P:System.Web.Security.SqlMembershipProvider.MaxInvalidPasswordAttempts" />
 
@@ -2698,8 +3150,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Web.Security.SqlMembershipProvider.PasswordAttemptWindow" />
+
+            
 
             
 
@@ -2724,10 +3180,14 @@
 
           
 
+          
+
           The name of the user to validate. </param
         >
         <param name="password">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

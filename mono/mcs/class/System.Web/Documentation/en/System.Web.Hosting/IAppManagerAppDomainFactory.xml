@@ -27,8 +27,12 @@
 
         
 
+        
+
          instance for a Web-application manager and a method used to stop all <see
          cref="T:System.AppDomain" />
+
+        
 
         
 

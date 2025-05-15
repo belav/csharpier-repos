@@ -26,8 +26,12 @@
 
         
 
+        
+
          and other classes in the <see
          cref="N:System.Web.Services.Protocols" />
+
+        
 
         
 
@@ -43,11 +47,15 @@
 
         
 
+        
+
          class establishes a common request-writing format for client-side writing of Web method parameters into HTTP request streams.</para
       >
       <para
         >You will typically not need to use <see
          cref="T:System.Web.Services.Protocols.MimeParameterWriter" />
+
+        
 
         
 
@@ -60,8 +68,12 @@
 
         
 
+        
+
          to each Web method and sets the attribute's <see
          cref="P:System.Web.Services.Protocols.HttpMethodAttribute.ParameterFormatter" />
+
+        
 
         
 
@@ -88,6 +100,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Services.Protocols.MimeParameterWriter" />
+
+            
 
             
 
@@ -126,8 +140,12 @@
 
             
 
+            
+
             , only <see
              cref="T:System.Web.Services.Protocols.UrlParameterWriter" />
+
+            
 
             
 
@@ -150,6 +168,8 @@
 
             
 
+            
+
              object that contains the modified, outgoing HTTP request's Uniform Request Locator (URL).</para
           >
         </returns>
@@ -160,10 +180,14 @@
 
           
 
+          
+
           The HTTP request's original Uniform Resource Locator (URL).</param
         >
         <param name="parameters">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -201,6 +225,8 @@
 
             
 
+            
+
             , only <see
              cref="T:System.Web.Services.Protocols.HtmlFormParameterWriter" />
 
@@ -208,8 +234,12 @@
 
             
 
+            
+
              implements the <see
              cref="T:System.Web.Services.Protocols.MimeParameterWriter" />
+
+            
 
             
 
@@ -229,8 +259,12 @@
 
           
 
+          
+
           The out-going request, where the <see
            cref="T:System.Net.WebRequest" />
+
+          
 
           
 
@@ -240,6 +274,8 @@
         >
         <param name="values">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -278,6 +314,8 @@
 
             
 
+            
+
              class, defines how to transform characters into a sequence of bytes.</para
           >
         </remarks>
@@ -309,8 +347,12 @@
 
             
 
+            
+
              property determines whether the <see
              cref="M:System.Web.Services.Protocols.MimeParameterWriter.WriteRequest(System.IO.Stream,System.Object[])" />
+
+            
 
             
 
@@ -326,8 +368,12 @@
 
             
 
+            
+
              class's implementation of <see
              cref="P:System.Web.Services.Protocols.MimeParameterWriter.UsesWriteRequest" />
+
+            
 
             
 
@@ -340,8 +386,12 @@
 
             
 
+            
+
              is <see
              cref="T:System.Web.Services.Protocols.HtmlFormParameterWriter" />
+
+            
 
             
 
@@ -384,6 +434,8 @@
 
             
 
+            
+
             , only <see
              cref="T:System.Web.Services.Protocols.HtmlFormParameterWriter" />
 
@@ -391,8 +443,12 @@
 
             
 
+            
+
              implements the <see
              cref="M:System.Web.Services.Protocols.MimeParameterWriter.WriteRequest(System.IO.Stream,System.Object[])" />
+
+            
 
             
 
@@ -412,10 +468,14 @@
 
           
 
+          
+
           An input stream for the outgoing HTTP request's body.</param
         >
         <param name="values">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

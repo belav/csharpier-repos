@@ -54,6 +54,8 @@
 
             
 
+            
+
              is 0, the event is created in a signaled state.</para
           >
         </remarks>
@@ -62,6 +64,8 @@
           <para
             >Initializes a new instance of <see
              cref="T:System.Threading.CountdownEvent" />
+
+            
 
             
 
@@ -77,8 +81,12 @@
 
           
 
+          
+
           The number of signals initially required to set the <see
            cref="T:System.Threading.CountdownEvent" />
+
+          
 
           
 
@@ -109,6 +117,8 @@
           <para
             >Increments the <see
              cref="T:System.Threading.CountdownEvent" />
+
+            
 
             
 
@@ -147,6 +157,8 @@
 
             
 
+            
+
             's current count by a specified value.</para
           >
         </summary>
@@ -157,8 +169,12 @@
 
           
 
+          
+
           The value by which to increase <see
            cref="P:System.Threading.CountdownEvent.CurrentCount" />
+
+          
 
           
 
@@ -212,8 +228,12 @@
 
             
 
+            
+
             . The Dispose method leaves the <see
              cref="T:System.Threading.CountdownEvent" />
+
+            
 
             
 
@@ -226,8 +246,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Threading.CountdownEvent" />
+
+            
 
             
 
@@ -245,10 +269,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -265,8 +293,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Threading.CountdownEvent" />
+
+              
 
               
 
@@ -281,6 +313,8 @@
           <para
             >Releases all resources used by the current instance of the <see
              cref="T:System.Threading.CountdownEvent" />
+
+            
 
             
 
@@ -318,8 +352,12 @@
 
             
 
+            
+
             , <see
              cref="M:System.Threading.CountdownEvent.Dispose" />
+
+            
 
             
 
@@ -338,11 +376,15 @@
 
             
 
+            
+
             , and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -415,6 +457,8 @@
 
             
 
+            
+
             , Reset is not thread-safe and may not be used concurrently with other members of this instance.</para
           >
         </remarks>
@@ -428,8 +472,12 @@
 
             
 
+            
+
              to the value of <see
              cref="P:System.Threading.CountdownEvent.InitialCount" />
+
+            
 
             
 
@@ -467,8 +515,12 @@
 
             
 
+            
+
              for all subsequent accesses of the property on the current instance. Unlike most of the members of <see
              cref="T:System.Threading.CountdownEvent" />
+
+            
 
             
 
@@ -487,6 +539,8 @@
 
             
 
+            
+
              property to a specified value.</para
           >
         </summary>
@@ -497,8 +551,12 @@
 
           
 
+          
+
           The number of signals required to set the <see
            cref="T:System.Threading.CountdownEvent" />
+
+          
 
           
 
@@ -534,8 +592,12 @@
 
             
 
+            
+
             , decrementing the value of <see
              cref="P:System.Threading.CountdownEvent.CurrentCount" />
+
+            
 
             
 
@@ -578,8 +640,12 @@
 
             
 
+            
+
             , decrementing the value of <see
              cref="P:System.Threading.CountdownEvent.CurrentCount" />
+
+            
 
             
 
@@ -594,6 +660,8 @@
         </returns>
         <param name="signalCount">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -629,6 +697,8 @@
 
             
 
+            
+
              by one.</para
           >
         </summary>
@@ -637,6 +707,8 @@
           <para
             >true if the increment succeeded; otherwise, false. If <see
              cref="P:System.Threading.CountdownEvent.CurrentCount" />
+
+            
 
             
 
@@ -675,6 +747,8 @@
 
             
 
+            
+
              by a specified value.</para
           >
         </summary>
@@ -683,6 +757,8 @@
           <para
             >true if the increment succeeded; otherwise, false. If <see
              cref="P:System.Threading.CountdownEvent.CurrentCount" />
+
+            
 
             
 
@@ -698,8 +774,12 @@
 
           
 
+          
+
           The value by which to increase <see
            cref="P:System.Threading.CountdownEvent.CurrentCount" />
+
+          
 
           
 
@@ -738,6 +818,8 @@
 
             
 
+            
+
              is set.</para
           >
         </summary>
@@ -771,6 +853,8 @@
 
             
 
+            
+
              is set, using a 32-bit signed integer to measure the timeout.</para
           >
         </summary>
@@ -779,6 +863,8 @@
           <para
             >true if the <see
              cref="T:System.Threading.CountdownEvent" />
+
+            
 
             
 
@@ -794,8 +880,12 @@
 
           
 
+          
+
           The number of milliseconds to wait, or <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -835,8 +925,12 @@
 
             
 
+            
+
              being observed is canceled during the wait operation, an <see
              cref="T:System.OperationCanceledException" />
+
+            
 
             
 
@@ -855,8 +949,12 @@
 
             
 
+            
+
              is set, while observing a <see
              cref="T:System.Threading.CancellationToken" />
+
+            
 
             
 
@@ -872,8 +970,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.CancellationToken" />
+
+          
 
           
 
@@ -911,8 +1013,12 @@
 
             
 
+            
+
              is set, using a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 
@@ -931,11 +1037,15 @@
 
             
 
+            
+
              was set; otherwise, false.</para
           >
         </returns>
         <param name="timeout">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -948,8 +1058,12 @@
 
           
 
+          
+
            that represents the number of milliseconds to wait, or a <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -991,8 +1105,12 @@
 
             
 
+            
+
              is set, using a 32-bit signed integer to measure the timeout, while observing a <see
              cref="T:System.Threading.CancellationToken" />
+
+            
 
             
 
@@ -1011,6 +1129,8 @@
 
             
 
+            
+
              was set; otherwise, false.</para
           >
         </returns>
@@ -1021,8 +1141,12 @@
 
           
 
+          
+
           The number of milliseconds to wait, or <see
            cref="F:System.Threading.Timeout.Infinite" />
+
+          
 
           
 
@@ -1037,8 +1161,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.CancellationToken" />
+
+          
 
           
 
@@ -1080,6 +1208,8 @@
 
             
 
+            
+
              is set, using a <see
              cref="T:System.TimeSpan" />
 
@@ -1087,8 +1217,12 @@
 
             
 
+            
+
              to measure the timeout, while observing a <see
              cref="T:System.Threading.CancellationToken" />
+
+            
 
             
 
@@ -1107,11 +1241,15 @@
 
             
 
+            
+
              was set; otherwise, false.</para
           >
         </returns>
         <param name="timeout">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1124,8 +1262,12 @@
 
           
 
+          
+
            that represents the number of milliseconds to wait, or a <see
            cref="T:System.TimeSpan" />
+
+          
 
           
 
@@ -1140,8 +1282,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Threading.CancellationToken" />
+
+          
 
           
 
@@ -1178,6 +1324,8 @@
 
             
 
+            
+
              should only be used if it's needed for integration with code bases that rely on having a WaitHandle. If all that's needed is to wait for the <see
              cref="T:System.Threading.CountdownEvent" />
 
@@ -1185,8 +1333,12 @@
 
             
 
+            
+
              to be set, the <see
              cref="M:System.Threading.CountdownEvent.Wait" />
+
+            
 
             
 
@@ -1200,6 +1352,8 @@
           <para
             >Gets a <see
              cref="T:System.Threading.WaitHandle" />
+
+            
 
             
 

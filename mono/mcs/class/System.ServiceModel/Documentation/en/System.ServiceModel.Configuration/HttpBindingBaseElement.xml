@@ -68,11 +68,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -192,6 +196,8 @@
 
           
 
+          
+
           A collection of binding elements.</param
         >
       </Docs>
@@ -304,6 +310,8 @@
         </summary>
         <param name="binding">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

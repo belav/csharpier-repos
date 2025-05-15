@@ -24,6 +24,8 @@
 
         
 
+        
+
          is created and managed by the <see
          cref="T:System.Data.SqlClient.SqlErrorCollection" />
 
@@ -31,8 +33,12 @@
 
         
 
+        
+
         , which in turn is created by the <see
          cref="T:System.Data.SqlClient.SqlException" />
+
+        
 
         
 
@@ -49,6 +55,8 @@
 
         
 
+        
+
          remains open when the severity level is 19 or less. When the severity level is 20 or greater, the server usually closes the <see
          cref="T:System.Data.SqlClient.SqlConnection" />
 
@@ -56,8 +64,12 @@
 
         
 
+        
+
         . However, the user can reopen the connection and continue. In both cases, a <see
          cref="T:System.Data.SqlClient.SqlException" />
+
+        
 
         
 
@@ -75,10 +87,14 @@
 
         
 
+        
+
         . For more information about severity levels, see <see
          cref="http://msdn.microsoft.com/en-us/library/ms164086.aspx"
           >Database Engine Error Severities</see
         >
+
+        
 
         
 
@@ -112,6 +128,8 @@
 
             
 
+            
+
              remains open when the severity level is 19 or less. When the severity level is 20 or greater, the server usually closes the <see
              cref="T:System.Data.SqlClient.SqlConnection" />
 
@@ -119,8 +137,12 @@
 
             
 
+            
+
             . However, the user can reopen the connection and continue. In both cases, a <see
              cref="T:System.Data.SqlClient.SqlException" />
+
+            
 
             
 
@@ -442,6 +464,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -468,6 +492,8 @@
           <para
             >The string is in the form "SqlError:", followed by the <see
              cref="P:System.Data.SqlClient.SqlError.Message" />
+
+            
 
             
 

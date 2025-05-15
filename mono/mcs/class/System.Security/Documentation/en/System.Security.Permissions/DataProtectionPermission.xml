@@ -36,8 +36,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Security.Cryptography.ProtectedMemory" />
+
+        
 
         
 
@@ -83,6 +87,8 @@
 
             
 
+            
+
              class with the specified permission flags. </para
           >
         </summary>
@@ -121,6 +127,8 @@
 
             
 
+            
+
              class with the specified permission state. </para
           >
         </summary>
@@ -131,8 +139,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -203,8 +215,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Security.Cryptography.ProtectedMemory" />
+
+            
 
             
 
@@ -252,8 +268,12 @@
 
             
 
+            
+
              method reconstructs a <see
              cref="T:System.Security.Permissions.DataProtectionPermission" />
+
+            
 
             
 
@@ -266,6 +286,8 @@
 
             
 
+            
+
              class. Use the <see
              cref="M:System.Security.Permissions.DataProtectionPermission.ToXml" />
 
@@ -273,8 +295,12 @@
 
             
 
+            
+
              method to XML-encode the <see
              cref="T:System.Security.Permissions.DataProtectionPermission" />
+
+            
 
             
 
@@ -330,6 +356,8 @@
 
           
 
+          
+
           A permission to intersect with the current permission. It must be the same type as the current permission. </param
         >
       </Docs>
@@ -366,8 +394,12 @@
 
             
 
+            
+
              access is a subset of a permission for <see
              cref="F:System.Security.Permissions.DataProtectionPermissionFlags.AllFlags" />
+
+            
 
             
 
@@ -386,6 +418,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -456,8 +490,12 @@
 
             
 
+            
+
              method to restore the state information from a <see
              cref="T:System.Security.SecurityElement" />
+
+            
 
             
 
@@ -508,6 +546,8 @@
 
             
 
+            
+
              is a permission that represents all operations represented by both the current permission and the specified permission. Any demand that passes either permission passes their union.</para
           >
         </remarks>
@@ -521,6 +561,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

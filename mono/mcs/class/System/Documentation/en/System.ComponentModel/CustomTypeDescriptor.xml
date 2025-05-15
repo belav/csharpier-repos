@@ -32,8 +32,12 @@
 
         
 
+        
+
         , the <see
          cref="T:System.ComponentModel.CustomTypeDescriptor" />
+
+        
 
         
 
@@ -46,8 +50,12 @@
 
         
 
+        
+
          supplied during construction. This allows classes that derive from <see
          cref="T:System.ComponentModel.CustomTypeDescriptor" />
+
+        
 
         
 
@@ -61,6 +69,8 @@
       <para
         >Provides a simple default implementation of the <see
          cref="T:System.ComponentModel.ICustomTypeDescriptor" />
+
+        
 
         
 
@@ -94,11 +104,15 @@
 
             
 
+            
+
              constructor with a parameter that is null. </para
           >
           <para
             >All methods of a <see
              cref="T:System.ComponentModel.CustomTypeDescriptor" />
+
+            
 
             
 
@@ -112,6 +126,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ComponentModel.CustomTypeDescriptor" />
+
+            
 
             
 
@@ -150,8 +166,12 @@
 
             
 
+            
+
              parameter is null, all <see
              cref="T:System.ComponentModel.CustomTypeDescriptor" />
+
+            
 
             
 
@@ -164,8 +184,12 @@
 
             
 
+            
+
              methods will delegate to the methods of <paramref
              name="parent" />
+
+            
 
             
 
@@ -176,6 +200,8 @@
           <para
             >Most <see
              cref="T:System.ComponentModel.CustomTypeDescriptor" />
+
+            
 
             
 
@@ -209,6 +235,8 @@
 
                   
 
+                  
+
                   ).</para
                 >
               </description>
@@ -223,6 +251,8 @@
                 <para
                   >The default <see
                    cref="T:System.ComponentModel.TypeConverter" />
+
+                  
 
                   
 
@@ -247,6 +277,8 @@
 
                   
 
+                  
+
                   ).</para
                 >
               </description>
@@ -261,6 +293,8 @@
                 <para
                   >An empty property collection (<see
                    cref="F:System.ComponentModel.PropertyDescriptorCollection.Empty" />
+
+                  
 
                   
 
@@ -282,11 +316,15 @@
 
             
 
+            
+
              class using a parent custom type descriptor.</para
           >
         </summary>
         <param name="parent">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -325,8 +363,12 @@
 
             
 
+            
+
              constructor, the <see
              cref="M:System.ComponentModel.CustomTypeDescriptor.GetAttributes" />
+
+            
 
             
 
@@ -349,8 +391,12 @@
 
             
 
+            
+
              containing the attributes for the type. The default is <see
              cref="F:System.ComponentModel.AttributeCollection.Empty" />
+
+            
 
             
 
@@ -387,8 +433,12 @@
 
             
 
+            
+
              constructor, the <see
              cref="M:System.ComponentModel.CustomTypeDescriptor.GetClassName" />
+
+            
 
             
 
@@ -406,6 +456,8 @@
           <para
             >A <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -442,8 +494,12 @@
 
             
 
+            
+
              constructor, the <see
              cref="M:System.ComponentModel.CustomTypeDescriptor.GetComponentName" />
+
+            
 
             
 
@@ -461,6 +517,8 @@
           <para
             >A <see
              cref="T:System.String" />
+
+            
 
             
 
@@ -500,8 +558,12 @@
 
             
 
+            
+
              constructor, the <see
              cref="M:System.ComponentModel.CustomTypeDescriptor.GetConverter" />
+
+            
 
             
 
@@ -524,8 +586,12 @@
 
             
 
+            
+
              for the type represented by this type descriptor. The default is a newly created <see
              cref="T:System.ComponentModel.TypeConverter" />
+
+            
 
             
 
@@ -565,8 +631,12 @@
 
             
 
+            
+
              constructor, the <see
              cref="M:System.ComponentModel.CustomTypeDescriptor.GetDefaultEvent" />
+
+            
 
             
 
@@ -584,6 +654,8 @@
           <para
             >The <see
              cref="T:System.ComponentModel.EventDescriptor" />
+
+            
 
             
 
@@ -623,8 +695,12 @@
 
             
 
+            
+
              constructor, the <see
              cref="M:System.ComponentModel.CustomTypeDescriptor.GetDefaultProperty" />
+
+            
 
             
 
@@ -642,6 +718,8 @@
           <para
             >A <see
              cref="T:System.ComponentModel.PropertyDescriptor" />
+
+            
 
             
 
@@ -683,8 +761,12 @@
 
             
 
+            
+
              constructor, the <see
              cref="M:System.ComponentModel.CustomTypeDescriptor.GetEditor(System.Type)" />
+
+            
 
             
 
@@ -703,6 +785,8 @@
         </returns>
         <param name="editorBaseType">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -741,8 +825,12 @@
 
             
 
+            
+
              constructor, the <see
              cref="M:System.ComponentModel.CustomTypeDescriptor.GetEvents" />
+
+            
 
             
 
@@ -765,8 +853,12 @@
 
             
 
+            
+
              containing the event descriptors for the object represented by this type descriptor. The default is <see
              cref="F:System.ComponentModel.EventDescriptorCollection.Empty" />
+
+            
 
             
 
@@ -808,6 +900,8 @@
 
             
 
+            
+
              parameter to filter the collection that is returned.</para
           >
           <para
@@ -818,8 +912,12 @@
 
             
 
+            
+
              constructor, the <see
              cref="M:System.ComponentModel.CustomTypeDescriptor.GetEvents(System.Attribute[])" />
+
+            
 
             
 
@@ -842,8 +940,12 @@
 
             
 
+            
+
              containing the event descriptions for the object represented by this type descriptor. The default is <see
              cref="F:System.ComponentModel.EventDescriptorCollection.Empty" />
+
+            
 
             
 
@@ -854,6 +956,8 @@
         </returns>
         <param name="attributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -892,8 +996,12 @@
 
             
 
+            
+
              constructor, the <see
              cref="M:System.ComponentModel.CustomTypeDescriptor.GetProperties" />
+
+            
 
             
 
@@ -916,8 +1024,12 @@
 
             
 
+            
+
              containing the property descriptions for the object represented by this type descriptor. The default is <see
              cref="F:System.ComponentModel.PropertyDescriptorCollection.Empty" />
+
+            
 
             
 
@@ -959,8 +1071,12 @@
 
             
 
+            
+
              parameter to filter the collection that is returned. For filtering rules, see <see
              cref="M:System.ComponentModel.TypeDescriptor.GetProperties(System.Object,System.Attribute[])" />
+
+            
 
             
 
@@ -976,8 +1092,12 @@
 
             
 
+            
+
              constructor, the <see
              cref="M:System.ComponentModel.CustomTypeDescriptor.GetProperties(System.Attribute[])" />
+
+            
 
             
 
@@ -1000,8 +1120,12 @@
 
             
 
+            
+
              containing the property descriptions for the object represented by this type descriptor. The default is <see
              cref="F:System.ComponentModel.PropertyDescriptorCollection.Empty" />
+
+            
 
             
 
@@ -1012,6 +1136,8 @@
         </returns>
         <param name="attributes">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1052,8 +1178,12 @@
 
             
 
+            
+
              constructor, the <see
              cref="M:System.ComponentModel.CustomTypeDescriptor.GetPropertyOwner(System.ComponentModel.PropertyDescriptor)" />
+
+            
 
             
 
@@ -1076,11 +1206,15 @@
 
             
 
+            
+
              that owns the given property specified by the type descriptor. The default is null.</para
           >
         </returns>
         <param name="pd">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

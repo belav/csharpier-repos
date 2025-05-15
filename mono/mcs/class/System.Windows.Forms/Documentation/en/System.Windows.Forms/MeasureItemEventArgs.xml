@@ -21,8 +21,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Windows.Forms.ComboBox" />
+
+        
 
         
 
@@ -35,8 +39,12 @@
 
         
 
+        
+
         , or <see
          cref="T:System.Windows.Forms.MenuItem" />
+
+        
 
         
 
@@ -49,6 +57,8 @@
          type="text/html">
           <a href="D98FD58B-FA4F-4598-8378-ADDF4355A115">[&lt;topic://cpconEventsDelegates&gt;]</a>
         </format>
+
+        
 
         
 
@@ -67,8 +77,12 @@
 
         
 
+        
+
         , <see
          cref="T:System.Windows.Forms.ComboBox" />
+
+        
 
         
 
@@ -81,8 +95,12 @@
 
         
 
+        
+
         , and <see
          cref="T:System.Windows.Forms.MenuItem" />
+
+        
 
         
 
@@ -115,11 +133,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="graphics">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -132,10 +154,14 @@
 
           
 
+          
+
            object being written to. </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -172,6 +198,8 @@
 
             
 
+            
+
              class providing a parameter for the item height.</para
           >
         </summary>
@@ -182,8 +210,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Drawing.Graphics" />
+
+          
 
           
 
@@ -198,6 +230,8 @@
 
           
 
+          
+
           The index of the item for which you need the height or width. </param
         >
         <param name="itemHeight">
@@ -207,8 +241,12 @@
 
           
 
+          
+
           The height of the item to measure relative to the <paramref
            name="graphics" />
+
+          
 
           
 
@@ -240,6 +278,8 @@
 
             
 
+            
+
              object to determine the scale to use when setting the <see
              cref="P:System.Windows.Forms.MeasureItemEventArgs.ItemHeight" />
 
@@ -247,8 +287,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.MeasureItemEventArgs.ItemWidth" />
+
+            
 
             
 
@@ -262,6 +306,8 @@
           <para
             >Gets the <see
              cref="T:System.Drawing.Graphics" />
+
+            
 
             
 
@@ -314,6 +360,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -341,6 +389,8 @@
 
             
 
+            
+
             . You use this property to ensure the menu is at least as wide as the widest menu item in the menu list.</para
           >
         </remarks>
@@ -349,6 +399,8 @@
           <para
             >Gets or sets the width of the item specified by the <see
              cref="P:System.Windows.Forms.MeasureItemEventArgs.Index" />
+
+            
 
             
 

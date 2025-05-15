@@ -23,11 +23,15 @@
 
         
 
+        
+
          is an enumeration that contains the set of encryption algorithms that can be used to encrypt messages on the wire.</para
       >
       <para
         >For encryption to work, the <see
          cref="P:System.ServiceModel.MsmqTransportSecurity.MsmqProtectionLevel" />
+
+        
 
         
 
@@ -40,11 +44,15 @@
 
         
 
+        
+
         .</para
       >
       <para
         >Only <see
          cref="F:System.ServiceModel.MsmqEncryptionAlgorithm.RC4Stream" />
+
+        
 
         
 
@@ -98,6 +106,8 @@
           <para
             >A stream cipher defined by <see
              cref="http://go.microsoft.com/fwlink/?LinkId=95942">RSA Security</see>
+
+            
 
             
 

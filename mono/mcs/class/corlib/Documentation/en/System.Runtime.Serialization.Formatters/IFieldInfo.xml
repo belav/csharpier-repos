@@ -28,6 +28,8 @@
 
         
 
+        
+
          interface.</para
       >
     </summary>
@@ -58,6 +60,8 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Security.Permissions.SecurityPermission" />
 
@@ -65,8 +69,12 @@
 
             
 
+            
+
              with the <see
              cref="F:System.Security.Permissions.SecurityPermissionFlag.SerializationFormatter" />
+
+            
 
             
 
@@ -105,6 +113,8 @@
 
             
 
+            
+
              for the <see
              cref="T:System.Security.Permissions.SecurityPermission" />
 
@@ -112,8 +122,12 @@
 
             
 
+            
+
              with the <see
              cref="F:System.Security.Permissions.SecurityPermissionFlag.SerializationFormatter" />
+
+            
 
             
 

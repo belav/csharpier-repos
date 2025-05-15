@@ -23,6 +23,8 @@
 
         
 
+        
+
          values are used by the parameter direction properties of <see
          cref="T:System.Data.OleDb.OleDbParameter" />
 
@@ -30,8 +32,12 @@
 
         
 
+        
+
          and <see
          cref="T:System.Data.SqlClient.SqlParameter" />
+
+        
 
         
 
@@ -45,6 +51,8 @@
       <para
         >Specifies the type of a parameter within a query relative to the <see
          cref="T:System.Data.DataSet" />
+
+        
 
         
 

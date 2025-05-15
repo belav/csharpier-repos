@@ -31,8 +31,12 @@
 
         
 
+        
+
          class is used to store and manage a collection of <see
          cref="T:System.Web.UI.WebControls.TreeNode" />
+
+        
 
         
 
@@ -45,8 +49,12 @@
 
         
 
+        
+
          control. The <see
          cref="T:System.Web.UI.WebControls.TreeView" />
+
+        
 
         
 
@@ -59,8 +67,12 @@
 
         
 
+        
+
          class in two of its properties. It stores its root nodes in the <see
          cref="P:System.Web.UI.WebControls.TreeView.Nodes" />
+
+        
 
         
 
@@ -73,8 +85,12 @@
 
         
 
+        
+
          property. The <see
          cref="T:System.Web.UI.WebControls.TreeNodeCollection" />
+
+        
 
         
 
@@ -87,11 +103,15 @@
 
         
 
+        
+
          property to store child nodes (if any).</para
       >
       <para
         >The <see
          cref="T:System.Web.UI.WebControls.TreeNodeCollection" />
+
+        
 
         
 
@@ -109,8 +129,12 @@
 
             
 
+            
+
              indexer to retrieve a <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
+
+            
 
             
 
@@ -123,6 +147,8 @@
           <para
             >Use the <see
              cref="M:System.Web.UI.WebControls.TreeNodeCollection.GetEnumerator" />
+
+            
 
             
 
@@ -143,8 +169,12 @@
 
             
 
+            
+
              method to copy the contents of the collection into an <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -162,8 +192,12 @@
 
         
 
+        
+
          by adding and removing <see
          cref="T:System.Web.UI.WebControls.TreeNode" />
+
+        
 
         
 
@@ -176,8 +210,12 @@
 
         
 
+        
+
          or <see
          cref="M:System.Web.UI.WebControls.TreeNodeCollection.AddAt(System.Int32,System.Web.UI.WebControls.TreeNode)" />
+
+        
 
         
 
@@ -190,6 +228,8 @@
 
         
 
+        
+
         , <see
          cref="M:System.Web.UI.WebControls.TreeNodeCollection.RemoveAt(System.Int32)" />
 
@@ -197,8 +237,12 @@
 
         
 
+        
+
         , or <see
          cref="M:System.Web.UI.WebControls.TreeNodeCollection.Clear" />
+
+        
 
         
 
@@ -215,6 +259,8 @@
 
           
 
+          
+
            control is bound to a data source, the <see
            cref="P:System.Web.UI.WebControls.TreeView.Nodes" />
 
@@ -222,8 +268,12 @@
 
           
 
+          
+
            and <see
            cref="P:System.Web.UI.WebControls.TreeNode.ChildNodes" />
+
+          
 
           
 
@@ -240,8 +290,12 @@
 
         
 
+        
+
          contains properties and methods that allow you to retrieve information about the collection itself. To find out how many items are in the collection, use the <see
          cref="P:System.Web.UI.WebControls.TreeNodeCollection.Count" />
+
+        
 
         
 
@@ -254,8 +308,12 @@
 
         
 
+        
+
          object, use the <see
          cref="M:System.Web.UI.WebControls.TreeNodeCollection.Contains(System.Web.UI.WebControls.TreeNode)" />
+
+        
 
         
 
@@ -268,8 +326,12 @@
 
         
 
+        
+
          object in the collection, use the <see
          cref="M:System.Web.UI.WebControls.TreeNodeCollection.IndexOf(System.Web.UI.WebControls.TreeNode)" />
+
+        
 
         
 
@@ -288,8 +350,12 @@
 
         
 
+        
+
          objects in the <see
          cref="T:System.Web.UI.WebControls.TreeView" />
+
+        
 
         
 
@@ -316,12 +382,16 @@
 
             
 
+            
+
              class using the default values. This constructor is commonly used when creating a collection of root nodes where a parent node (or owner) is not required.</para
           >
           <block subset="none" type="note">
             <para
               >When creating a collection of non-root nodes, you should use the overloaded constructor that takes the <paramref
                name="owner" />
+
+              
 
               
 
@@ -337,6 +407,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.UI.WebControls.TreeNodeCollection" />
+
+            
 
             
 
@@ -371,6 +443,8 @@
 
             
 
+            
+
              class using the specified parent node (or owner). This constructor is commonly used when creating a collection of non-root nodes where you need to specify the parent node.</para
           >
           <block subset="none" type="note">
@@ -388,6 +462,8 @@
 
             
 
+            
+
              class using the specified parent node (or owner).</para
           >
         </summary>
@@ -398,8 +474,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.TreeNode" />
+
+          
 
           
 
@@ -436,6 +516,8 @@
 
             
 
+            
+
              method to append the specified <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
 
@@ -443,8 +525,12 @@
 
             
 
+            
+
              object to the end of the <see
              cref="T:System.Web.UI.WebControls.TreeNodeCollection" />
+
+            
 
             
 
@@ -461,8 +547,12 @@
 
               
 
+              
+
                allows you to add null references (Nothing in Visual Basic), as well as duplicate <see
                cref="T:System.Web.UI.WebControls.TreeNode" />
+
+              
 
               
 
@@ -479,6 +569,8 @@
 
             
 
+            
+
              object in the <see
              cref="T:System.Web.UI.WebControls.TreeNodeCollection" />
 
@@ -486,8 +578,12 @@
 
             
 
+            
+
              at a specific index by using the <see
              cref="M:System.Web.UI.WebControls.TreeNodeCollection.AddAt(System.Int32,System.Web.UI.WebControls.TreeNode)" />
+
+            
 
             
 
@@ -506,8 +602,12 @@
 
             
 
+            
+
              object to the end of the <see
              cref="T:System.Web.UI.WebControls.TreeNodeCollection" />
+
+            
 
             
 
@@ -523,8 +623,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.TreeNode" />
+
+          
 
           
 
@@ -562,6 +666,8 @@
 
             
 
+            
+
              method to insert the specified <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
 
@@ -569,8 +675,12 @@
 
             
 
+            
+
              object in the <see
              cref="T:System.Web.UI.WebControls.TreeNodeCollection" />
+
+            
 
             
 
@@ -587,8 +697,12 @@
 
               
 
+              
+
                allows you to insert null references (Nothing in Visual Basic), as well as duplicate <see
                cref="T:System.Web.UI.WebControls.TreeNode" />
+
+              
 
               
 
@@ -605,6 +719,8 @@
 
             
 
+            
+
              object to the end of the <see
              cref="T:System.Web.UI.WebControls.TreeNodeCollection" />
 
@@ -612,8 +728,12 @@
 
             
 
+            
+
              by using the <see
              cref="M:System.Web.UI.WebControls.TreeNodeCollection.Add(System.Web.UI.WebControls.TreeNode)" />
+
+            
 
             
 
@@ -632,8 +752,12 @@
 
             
 
+            
+
              object in a <see
              cref="T:System.Web.UI.WebControls.TreeNodeCollection" />
+
+            
 
             
 
@@ -649,8 +773,12 @@
 
           
 
+          
+
           The zero-based index location at which to insert the <see
            cref="T:System.Web.UI.WebControls.TreeNode" />
+
+          
 
           
 
@@ -665,8 +793,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.UI.WebControls.TreeNode" />
+
+          
 
           
 
@@ -698,6 +830,8 @@
 
             
 
+            
+
              method to remove every <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
 
@@ -705,8 +839,12 @@
 
             
 
+            
+
              object from the <see
              cref="T:System.Web.UI.WebControls.TreeNodeCollection" />
+
+            
 
             
 
@@ -723,8 +861,12 @@
 
               
 
+              
+
                or <see
                cref="M:System.Web.UI.WebControls.TreeNodeCollection.RemoveAt(System.Int32)" />
+
+              
 
               
 
@@ -739,6 +881,8 @@
           <para
             >Empties the <see
              cref="T:System.Web.UI.WebControls.TreeNodeCollection" />
+
+            
 
             
 
@@ -777,8 +921,12 @@
 
             
 
+            
+
              method to determine whether a <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
+
+            
 
             
 
@@ -791,8 +939,12 @@
 
             
 
+            
+
             . This method is commonly used to test for the existence of a <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
+
+            
 
             
 
@@ -811,6 +963,8 @@
 
             
 
+            
+
              object is in the collection.</para
           >
         </summary>
@@ -819,6 +973,8 @@
           <para
             >true if the specified <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
+
+            
 
             
 
@@ -857,8 +1013,12 @@
 
             
 
+            
+
              method to copy the contents of the <see
              cref="T:System.Web.UI.WebControls.TreeNodeCollection" />
+
+            
 
             
 
@@ -871,8 +1031,12 @@
 
             
 
+            
+
              object. Items are copied starting at the specified index of the target array. With the <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -885,11 +1049,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >As an alternative, you can also use the <see
              cref="M:System.Web.UI.WebControls.TreeNodeCollection.GetEnumerator" />
+
+            
 
             
 
@@ -908,8 +1076,12 @@
 
             
 
+            
+
              object to a compatible one-dimensional array of <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
+
+            
 
             
 
@@ -925,8 +1097,12 @@
 
           
 
+          
+
           A zero-based array of <see
            cref="T:System.Web.UI.WebControls.TreeNode" />
+
+          
 
           
 
@@ -939,10 +1115,14 @@
 
           
 
+          
+
           .</param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -974,6 +1154,8 @@
 
             
 
+            
+
              property to determine the number of items in a <see
              cref="T:System.Web.UI.WebControls.TreeNodeCollection" />
 
@@ -981,8 +1163,12 @@
 
             
 
+            
+
             . This property is commonly used when iterating through a collection to determine the upper bound of the collection. The <see
              cref="P:System.Web.UI.WebControls.TreeNodeCollection.Count" />
+
+            
 
             
 
@@ -996,6 +1182,8 @@
           <para
             >Gets the number of items in the <see
              cref="T:System.Web.UI.WebControls.TreeNodeCollection" />
+
+            
 
             
 
@@ -1031,8 +1219,12 @@
 
             
 
+            
+
              method to create an enumerator that can be easily iterated through to get each item in the <see
              cref="T:System.Web.UI.WebControls.TreeNodeCollection" />
+
+            
 
             
 
@@ -1045,6 +1237,8 @@
 
             
 
+            
+
              property. Use the <see
              cref="M:System.Collections.IEnumerator.MoveNext" />
 
@@ -1052,8 +1246,12 @@
 
             
 
+            
+
              method to move to the next item. If you need to move the enumerator back to the beginning of the collection, use the <see
              cref="M:System.Collections.IEnumerator.Reset" />
+
+            
 
             
 
@@ -1070,6 +1268,8 @@
 
               
 
+              
+
                method, you must call the <see
                cref="M:System.Collections.IEnumerator.MoveNext" />
 
@@ -1077,8 +1277,12 @@
 
               
 
+              
+
                method. Otherwise, the item represented by the <see
                cref="P:System.Collections.IEnumerator.Current" />
+
+              
 
               
 
@@ -1095,8 +1299,12 @@
 
             
 
+            
+
              method to create an <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -1115,6 +1323,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1123,6 +1333,8 @@
           <para
             >An enumerator that can be used to iterate through the <see
              cref="T:System.Web.UI.WebControls.TreeNodeCollection" />
+
+            
 
             
 
@@ -1161,6 +1373,8 @@
 
             
 
+            
+
              method to determine the zero-based index of the specified <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
 
@@ -1168,8 +1382,12 @@
 
             
 
+            
+
              object in the <see
              cref="T:System.Web.UI.WebControls.TreeNodeCollection" />
+
+            
 
             
 
@@ -1191,6 +1409,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -1204,8 +1424,12 @@
 
             
 
+            
+
              within the <see
              cref="T:System.Web.UI.WebControls.TreeNodeCollection" />
+
+            
 
             
 
@@ -1238,6 +1462,8 @@
 
             
 
+            
+
              property is used to indicate whether access to the <see
              cref="T:System.Web.UI.WebControls.TreeNodeCollection" />
 
@@ -1245,8 +1471,12 @@
 
             
 
+            
+
              is synchronized (thread safe). This property is derived from the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1262,6 +1492,8 @@
 
             
 
+            
+
              property, see the <see
              cref="P:System.Collections.ICollection.IsSynchronized" />
 
@@ -1269,8 +1501,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1284,6 +1520,8 @@
           <para
             >Gets a value indicating whether access to the <see
              cref="T:System.Web.UI.WebControls.TreeNodeCollection" />
+
+            
 
             
 
@@ -1345,6 +1583,8 @@
 
             
 
+            
+
              method to remove the specified node from the collection. All items that follow that node are then moved up to fill in the vacant position. The indexes of the moved items are also updated.</para
           >
           <block subset="none" type="note">
@@ -1356,8 +1596,12 @@
 
               
 
+              
+
                can contain null references (Nothing in Visual Basic), as well as duplicate <see
                cref="T:System.Web.UI.WebControls.TreeNode" />
+
+              
 
               
 
@@ -1374,8 +1618,12 @@
 
             
 
+            
+
              method. You can also remove every node in the collection by using the <see
              cref="M:System.Web.UI.WebControls.TreeNodeCollection.Clear" />
+
+            
 
             
 
@@ -1394,8 +1642,12 @@
 
             
 
+            
+
              object from the <see
              cref="T:System.Web.UI.WebControls.TreeNodeCollection" />
+
+            
 
             
 
@@ -1430,6 +1682,8 @@
 
             
 
+            
+
              method to remove the <see
              cref="T:System.Web.UI.WebControls.TreeNode" />
 
@@ -1437,8 +1691,12 @@
 
             
 
+            
+
              object at the specified zero-based index location from a <see
              cref="T:System.Web.UI.WebControls.TreeNodeCollection" />
+
+            
 
             
 
@@ -1455,8 +1713,12 @@
 
               
 
+              
+
                can contain null references (Nothing in Visual Basic), as well as duplicate <see
                cref="T:System.Web.UI.WebControls.TreeNode" />
+
+              
 
               
 
@@ -1473,6 +1735,8 @@
 
             
 
+            
+
              object by using the <see
              cref="M:System.Web.UI.WebControls.TreeNodeCollection.Remove(System.Web.UI.WebControls.TreeNode)" />
 
@@ -1480,8 +1744,12 @@
 
             
 
+            
+
              method. You can also remove every node in the collection by using the <see
              cref="M:System.Web.UI.WebControls.TreeNodeCollection.Clear" />
+
+            
 
             
 
@@ -1500,8 +1768,12 @@
 
             
 
+            
+
              object at the specified index location from the <see
              cref="T:System.Web.UI.WebControls.TreeNodeCollection" />
+
+            
 
             
 
@@ -1512,6 +1784,8 @@
         </summary>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1543,8 +1817,12 @@
 
             
 
+            
+
              property provides a synchronized version of the <see
              cref="T:System.Web.UI.WebControls.TreeNodeCollection" />
+
+            
 
             
 
@@ -1561,8 +1839,12 @@
 
               
 
+              
+
                property of this class always returns false, which indicates that the <see
                cref="T:System.Web.UI.WebControls.TreeNodeCollection" />
+
+              
 
               
 
@@ -1579,8 +1861,12 @@
 
             
 
+            
+
              object of the <see
              cref="T:System.Web.UI.WebControls.TreeNodeCollection" />
+
+            
 
             
 
@@ -1593,8 +1879,12 @@
 
             
 
+            
+
              itself. This ensures proper operation of collections that are derived from other objects. Specifically, it maintains proper synchronization with other threads that might be simultaneously modifying the <see
              cref="T:System.Web.UI.WebControls.TreeNodeCollection" />
+
+            
 
             
 
@@ -1611,8 +1901,12 @@
 
               
 
+              
+
                object used to store the <see
                cref="T:System.Web.UI.WebControls.TreeNode" />
+
+              
 
               
 
@@ -1630,6 +1924,8 @@
 
             
 
+            
+
              property, see the <see
              cref="P:System.Collections.ICollection.SyncRoot" />
 
@@ -1637,8 +1933,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Collections.ICollection" />
+
+            
 
             
 
@@ -1652,6 +1952,8 @@
           <para
             >Gets an object that can be used to synchronize access to the <see
              cref="T:System.Web.UI.WebControls.TreeNodeCollection" />
+
+            
 
             
 
@@ -1689,8 +1991,12 @@
 
             
 
+            
+
              method to copy the contents of the <see
              cref="T:System.Web.UI.WebControls.TreeNodeCollection" />
+
+            
 
             
 
@@ -1703,8 +2009,12 @@
 
             
 
+            
+
              object. Items are copied starting at the specified index of the target array. With the <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -1717,11 +2027,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >As an alternative, you can also use the <see
              cref="M:System.Web.UI.WebControls.TreeNodeCollection.GetEnumerator" />
+
+            
 
             
 
@@ -1740,8 +2054,12 @@
 
             
 
+            
+
              object to a compatible one-dimensional <see
              cref="T:System.Array" />
+
+            
 
             
 
@@ -1757,8 +2075,12 @@
 
           
 
+          
+
           A zero-based <see
            cref="T:System.Array" />
+
+          
 
           
 
@@ -1771,10 +2093,14 @@
 
           
 
+          
+
           . </param
         >
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -1809,6 +2135,8 @@
 
             
 
+            
+
              object is saving changes to its view state.</para
           >
         </summary>
@@ -1838,6 +2166,8 @@
 
             
 
+            
+
              object's previously saved view state.</para
           >
         </summary>
@@ -1848,8 +2178,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Object" />
+
+          
 
           
 
@@ -1881,6 +2215,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -1889,6 +2225,8 @@
           <para
             >The <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -1920,6 +2258,8 @@
 
             
 
+            
+
              property will return true.</para
           >
         </remarks>
@@ -1928,6 +2268,8 @@
           <para
             >Instructs the <see
              cref="T:System.Web.UI.WebControls.TreeNodeCollection" />
+
+            
 
             
 

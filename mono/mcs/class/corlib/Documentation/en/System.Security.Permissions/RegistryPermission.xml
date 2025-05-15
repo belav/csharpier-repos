@@ -43,8 +43,12 @@
 
         
 
+        
+
          describes protected operations on registry variables. Registry variables should not be stored in memory locations where code without <see
          cref="T:System.Security.Permissions.RegistryPermission" />
+
+        
 
         
 
@@ -55,6 +59,8 @@
       <para
         >The allowed registry access types are defined by <see
          cref="T:System.Security.Permissions.RegistryPermissionAccess" />
+
+        
 
         
 
@@ -72,8 +78,12 @@
 
           
 
+          
+
            method to prevent inadvertent access to system resources by trusted code. <see
            cref="M:System.Security.CodeAccessPermission.Deny" />
+
+          
 
           
 
@@ -85,6 +95,8 @@
               >How To: Run Partially Trusted Code in a Sandbox</a
             >
           </format>
+
+          
 
           
 
@@ -134,6 +146,8 @@
 
             
 
+            
+
              class with either fully restricted or unrestricted permission as specified.</para
           >
         </summary>
@@ -144,8 +158,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.PermissionState" />
+
+          
 
           
 
@@ -186,8 +204,12 @@
 
             
 
+            
+
              values to be specified. This access applies to all listed registry variables. Use <see
              cref="M:System.Security.Permissions.RegistryPermission.AddPathList(System.Security.Permissions.RegistryPermissionAccess,System.String)" />
+
+            
 
             
 
@@ -206,11 +228,15 @@
 
             
 
+            
+
              class with the specified access to the specified registry variables.</para
           >
         </summary>
         <param name="access">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -223,10 +249,14 @@
 
           
 
+          
+
            values. </param
         >
         <param name="pathList">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -267,8 +297,12 @@
 
             
 
+            
+
              values to be specified. This access applies to all listed registry variables. Use <see
              cref="M:System.Security.Permissions.RegistryPermission.AddPathList(System.Security.Permissions.RegistryPermissionAccess,System.String)" />
+
+            
 
             
 
@@ -284,8 +318,12 @@
 
             
 
+            
+
              parameter specifies whether the access control list (ACL) for the registry keys specified by <paramref
              name="pathList" />
+
+            
 
             
 
@@ -307,6 +345,8 @@
 
             
 
+            
+
              class with the specified access to the specified registry variables and the specified access rights to registry control information.</para
           >
         </summary>
@@ -317,8 +357,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.RegistryPermissionAccess" />
+
+          
 
           
 
@@ -333,8 +377,12 @@
 
           
 
+          
+
           A bitwise combination of the <see
            cref="T:System.Security.AccessControl.AccessControlActions" />
+
+          
 
           
 
@@ -344,6 +392,8 @@
         >
         <param name="pathList">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -391,8 +441,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.RegistryPermissionAccess" />
+
+          
 
           
 
@@ -402,6 +456,8 @@
         >
         <param name="pathList">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -446,8 +502,12 @@
 
             
 
+            
+
              parameter specifies whether the access control list (ACL) for the registry keys specified by <paramref
              name="pathList" />
+
+            
 
             
 
@@ -470,8 +530,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.RegistryPermissionAccess" />
+
+          
 
           
 
@@ -486,8 +550,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.AccessControl.AccessControlActions" />
+
+          
 
           
 
@@ -497,6 +565,8 @@
         >
         <param name="pathList">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -571,6 +641,8 @@
 
           
 
+          
+
           The XML encoding to use to reconstruct the permission. </param
         >
       </Docs>
@@ -609,8 +681,12 @@
 
               
 
+              
+
                parameter is limited to the values of <see
                cref="T:System.Security.Permissions.RegistryPermissionAccess" />
+
+              
 
               
 
@@ -623,8 +699,12 @@
 
               
 
+              
+
               , <see
                cref="F:System.Security.Permissions.RegistryPermissionAccess.Write" />
+
+              
 
               
 
@@ -637,8 +717,12 @@
 
               
 
+              
+
               . The values acceptable to <paramref
                name="access" />
+
+              
 
               
 
@@ -651,8 +735,12 @@
 
               
 
+              
+
                and <see
                cref="F:System.Security.Permissions.RegistryPermissionAccess.AllAccess" />
+
+              
 
               
 
@@ -672,6 +760,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -680,6 +770,8 @@
           <para
             >A list of the registry variables (semicolon-separated) with the specified <see
              cref="T:System.Security.Permissions.RegistryPermissionAccess" />
+
+            
 
             
 
@@ -695,8 +787,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.RegistryPermissionAccess" />
+
+          
 
           
 
@@ -747,6 +843,8 @@
 
           
 
+          
+
           A permission to intersect with the current permission. It must be of the same type as the current permission. </param
         >
       </Docs>
@@ -787,6 +885,8 @@
         </returns>
         <param name="target">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -865,8 +965,12 @@
 
           
 
+          
+
           One of the <see
            cref="T:System.Security.Permissions.RegistryPermissionAccess" />
+
+          
 
           
 
@@ -876,6 +980,8 @@
         >
         <param name="pathList">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -970,6 +1076,8 @@
 
             
 
+            
+
              is a permission that represents all the operations represented by both the current permission and the specified permission. Any demand that passes either permission passes their union.</para
           >
         </remarks>
@@ -983,6 +1091,8 @@
         </returns>
         <param name="other">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

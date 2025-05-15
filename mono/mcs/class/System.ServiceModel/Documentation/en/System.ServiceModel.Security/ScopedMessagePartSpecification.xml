@@ -27,6 +27,8 @@
 
         
 
+        
+
          instances of different messages, each distinguished by the message Action.</para
       >
     </remarks>
@@ -54,6 +56,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.ServiceModel.Security.ScopedMessagePartSpecification" />
+
+            
 
             
 
@@ -95,6 +99,8 @@
 
             
 
+            
+
              class from another instance of this class.  </para
           >
         </summary>
@@ -105,8 +111,12 @@
 
           
 
+          
+
           The other <see
            cref="T:System.ServiceModel.Security.ScopedMessagePartSpecification" />
+
+          
 
           
 
@@ -173,8 +183,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Security.MessagePartSpecification" />
+
+          
 
           
 
@@ -217,8 +231,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.ServiceModel.Security.MessagePartSpecification" />
+
+          
 
           
 
@@ -228,6 +246,8 @@
         >
         <param name="action">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -282,6 +302,8 @@
           <para
             >You can use <see
              cref="M:System.ServiceModel.Security.ScopedMessagePartSpecification.MakeReadOnly" />
+
+            
 
             
 

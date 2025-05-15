@@ -5,7 +5,7 @@
   <paragraph
     >Indexer declarations are similar to property declarations, with the main differences being that indexers are nameless (the "name" used in the declaration is this, since this is being indexed) and that indexers include indexing parameters. The indexing parameters are provided between square brackets. The example <code_example
     >
-<![CDATA[
+      <![CDATA[
 using System;  
 public class Stack  
 {  
@@ -47,6 +47,8 @@ class Test
 }  
 ]]>
     </code_example>
+
+    
 
     
 

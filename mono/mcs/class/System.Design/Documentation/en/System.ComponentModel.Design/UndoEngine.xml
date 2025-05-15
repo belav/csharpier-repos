@@ -24,11 +24,15 @@
 
         
 
+        
+
          abstract class provides a default implementation of undo functionality at design time. An undo unit represents a single unit of undoable work. This unit is added to a stack and the user can then walk the stack to undo each action. Undo units typically are designed to toggle, which means that calling undo twice returns the application to its starting state.</para
       >
       <para
         >The <see
          cref="T:System.ComponentModel.Design.UndoEngine" />
+
+        
 
         
 
@@ -51,6 +55,8 @@
 
             
 
+            
+
              offers the idea of transactions, which can be used to fabricate an undo action that spans multiple smaller actions.</para
           >
         </item>
@@ -58,6 +64,8 @@
       <para
         >With these features, <see
          cref="T:System.ComponentModel.Design.UndoEngine" />
+
+        
 
         
 
@@ -74,8 +82,12 @@
 
           
 
+          
+
            class requires you to use the appropriate <see
            cref="T:System.ComponentModel.TypeDescriptor" />
+
+          
 
           
 
@@ -91,8 +103,12 @@
 
         
 
+        
+
          monitors for change notifications to create undo units, and the units themselves consist of serialized object states. The following table shows the services that must be available when <see
          cref="T:System.ComponentModel.Design.UndoEngine" />
+
+        
 
         
 
@@ -151,6 +167,8 @@
 
           
 
+          
+
            class requires <see
            cref="T:System.ComponentModel.Design.Serialization.ComponentSerializationService" />
 
@@ -158,8 +176,12 @@
 
           
 
+          
+
            and <see
            cref="T:System.ComponentModel.Design.IComponentChangeService" />
+
+          
 
           
 
@@ -196,8 +218,12 @@
 
             
 
+            
+
              requires several services from the <paramref
              name="provider" />
+
+            
 
             
 
@@ -216,11 +242,15 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
         <param name="provider">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -278,8 +308,12 @@
 
             
 
+            
+
              method simply returns a new <see
              cref="T:System.ComponentModel.Design.UndoEngine.UndoUnit" />
+
+            
 
             
 
@@ -295,8 +329,12 @@
 
             
 
+            
+
              does nothing with the <paramref
              name="primary" />
+
+            
 
             
 
@@ -315,6 +353,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -323,6 +363,8 @@
           <para
             >A new <see
              cref="T:System.ComponentModel.Design.UndoEngine.UndoUnit" />
+
+            
 
             
 
@@ -338,10 +380,14 @@
 
           
 
+          
+
           The name of the unit to create. </param
         >
         <param name="primary">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -394,6 +440,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -423,11 +471,15 @@
 
             
 
+            
+
              and optionally releases the managed resources. </para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -454,6 +506,8 @@
           <para
             >Enables or disables the <see
              cref="T:System.ComponentModel.Design.UndoEngine" />
+
+            
 
             
 
@@ -496,6 +550,8 @@
 
           
 
+          
+
           The type of service to retrieve.</param
         >
       </Docs>
@@ -529,6 +585,8 @@
 
           
 
+          
+
           The type of service to retrieve.</param
         >
       </Docs>
@@ -557,6 +615,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -567,8 +627,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -602,6 +666,8 @@
 
             
 
+            
+
              event. </para
           >
         </summary>
@@ -612,8 +678,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.EventArgs" />
+
+          
 
           
 
@@ -673,6 +743,8 @@
           <para
             >The <see
              cref="E:System.ComponentModel.Design.UndoEngine.Undone" />
+
+            
 
             
 

@@ -25,8 +25,12 @@
 
         
 
+        
+
          interface can specify which of their properties identifies the data item for data-binding operations, such as late binding with the <see
          cref="T:System.Web.UI.DataBinder" />
+
+        
 
         
 
@@ -55,6 +59,8 @@
           <para
             >The <see
              cref="P:System.Web.UI.IDataItemContainer.DataItem" />
+
+            
 
             
 
@@ -91,8 +97,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Web.UI.WebControls.GridViewRow" />
+
+            
 
             
 
@@ -105,6 +115,8 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Web.UI.IDataItemContainer.DataItemIndex" />
 
@@ -112,8 +124,12 @@
 
             
 
+            
+
              property is used to determine the index of the data item bound to the control from the data source. The <see
              cref="P:System.Web.UI.IDataItemContainer.DataItemIndex" />
+
+            
 
             
 
@@ -150,8 +166,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Web.UI.IDataItemContainer.DisplayIndex" />
+
+            
 
             
 

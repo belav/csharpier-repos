@@ -35,6 +35,8 @@
 
         
 
+        
+
         . The flags are retained for reference only. They are not used by the common language runtime.</para
       >
       <para>For more information, see VARFLAGS in the MSDN library.</para>
@@ -44,6 +46,8 @@
       <para
         >Describes the original settings of the <see
          cref="T:System.Runtime.InteropServices.VARFLAGS" />
+
+        
 
         
 
@@ -149,6 +153,8 @@
           <para
             >The variable is displayed as bindable. <see
              cref="F:System.Runtime.InteropServices.TypeLibVarFlags.FBindable" />
+
+            
 
             
 

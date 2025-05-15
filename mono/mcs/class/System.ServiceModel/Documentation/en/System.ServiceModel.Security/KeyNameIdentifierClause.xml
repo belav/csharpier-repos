@@ -52,11 +52,15 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
         <param name="keyName">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -117,6 +121,8 @@
 
             
 
+            
+
              matches the current instance of this class. </para
           >
         </summary>
@@ -159,6 +165,8 @@
 
           
 
+          
+
           The security key name clause.</param
         >
       </Docs>
@@ -189,8 +197,12 @@
 
             
 
+            
+
              that represents the current Object. (Inherited from <see
              cref="T:System.Object" />
+
+            
 
             
 

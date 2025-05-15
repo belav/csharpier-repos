@@ -61,11 +61,15 @@
 
             
 
+            
+
              class.  </para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -105,11 +109,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -144,8 +152,12 @@
 
             
 
+            
+
              object is used in conjunction with a <see
              cref="T:System.ServiceModel.Channels.MessageFault" />
+
+            
 
             
 
@@ -167,6 +179,8 @@
 
             
 
+            
+
              class with the specified name and namespace. </para
           >
         </summary>
@@ -177,10 +191,14 @@
 
           
 
+          
+
           The local name of the fault code. </param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -221,6 +239,8 @@
 
             
 
+            
+
              class with the specified name, namespace, and fault subcode. </para
           >
         </summary>
@@ -231,10 +251,14 @@
 
           
 
+          
+
           The local name of the fault code. </param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -280,8 +304,12 @@
 
             
 
+            
+
              object with the created SOAP fault subcode in the <see
              cref="P:System.ServiceModel.FaultCode.SubCode" />
+
+            
 
             
 
@@ -328,8 +356,12 @@
 
             
 
+            
+
              instance with the created SOAP fault subcode in the <see
              cref="P:System.ServiceModel.FaultCode.SubCode" />
+
+            
 
             
 
@@ -345,10 +377,14 @@
 
           
 
+          
+
           The local name for the fault subcode. </param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -394,8 +430,12 @@
 
             
 
+            
+
              object with the created SOAP fault subcode in the <see
              cref="P:System.ServiceModel.FaultCode.SubCode" />
+
+            
 
             
 
@@ -442,8 +482,12 @@
 
             
 
+            
+
              object with the created SOAP fault subcode in <see
              cref="P:System.ServiceModel.FaultCode.SubCode" />
+
+            
 
             
 
@@ -459,10 +503,14 @@
 
           
 
+          
+
           The local name for the fault subcode. </param
         >
         <param name="ns">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -27,6 +27,8 @@
 
         
 
+        
+
          object is passed to the <see
          cref="E:System.Diagnostics.Contracts.Contract.ContractFailed" />
 
@@ -34,8 +36,12 @@
 
         
 
+        
+
          event when a contract fails. The <see
          cref="E:System.Diagnostics.Contracts.Contract.ContractFailed" />
+
+        
 
         
 
@@ -49,6 +55,8 @@
       <para
         >Provides methods and data for the <see
          cref="E:System.Diagnostics.Contracts.Contract.ContractFailed" />
+
+        
 
         
 
@@ -95,11 +103,15 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
         <param name="failureKind">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -114,6 +126,8 @@
 
           
 
+          
+
           The message for the event.</param
         >
         <param name="condition">
@@ -123,10 +137,14 @@
 
           
 
+          
+
           The condition for the event.</param
         >
         <param name="originalException">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -202,8 +220,12 @@
 
             
 
+            
+
              event has not been handled, the debugger is notified. If no debugger is attached, an <ui
             >Assert</ui>
+
+            
 
             
 
@@ -217,6 +239,8 @@
           <para
             >Indicates whether the <see
              cref="E:System.Diagnostics.Contracts.Contract.ContractFailed" />
+
+            
 
             
 
@@ -245,6 +269,8 @@
           <para
             >Gets the message that describes the <see
              cref="E:System.Diagnostics.Contracts.Contract.ContractFailed" />
+
+            
 
             
 
@@ -281,6 +307,8 @@
 
             
 
+            
+
              event.</para
           >
         </summary>
@@ -311,8 +339,12 @@
 
             
 
+            
+
              method provides a way for the runtime analysis checker to indicate that a contract exception has been handled. See the <see
              cref="P:System.Diagnostics.Contracts.ContractFailedEventArgs.Handled" />
+
+            
 
             
 
@@ -326,6 +358,8 @@
           <para
             >Sets the <see
              cref="P:System.Diagnostics.Contracts.ContractFailedEventArgs.Handled" />
+
+            
 
             
 
@@ -361,8 +395,12 @@
 
             
 
+            
+
              method provides a way to indicate that the escalation policy for the code contract should be applied. See the <see
              cref="P:System.Diagnostics.Contracts.ContractFailedEventArgs.Unwind" />
+
+            
 
             
 
@@ -376,6 +414,8 @@
           <para
             >Sets the <see
              cref="P:System.Diagnostics.Contracts.ContractFailedEventArgs.Unwind" />
+
+            
 
             
 
@@ -403,6 +443,8 @@
           <para
             >If the return value is true, the escalation policy is to notify the attached debugger about a contract failure or to display an <ui
             >Assert</ui>
+
+            
 
             
 

@@ -40,8 +40,12 @@
 
         
 
+        
+
          is used by methods that accept an integer <paramref
          name="millisecondsTimeout" />
+
+        
 
         
 
@@ -54,8 +58,12 @@
 
         
 
+        
+
         , <see
          cref="M:System.Threading.Thread.Join(System.Int32)" />
+
+        
 
         
 
@@ -68,8 +76,12 @@
 
         
 
+        
+
         . <see
          cref="F:System.Threading.Timeout.InfiniteTimeSpan" />
+
+        
 
         
 
@@ -82,8 +94,12 @@
 
         
 
+        
+
          parameter of type <see
          cref="T:System.TimeSpan" />
+
+        
 
         
 
@@ -96,6 +112,8 @@
 
         
 
+        
+
         , <see
          cref="M:System.Threading.Thread.Join(System.TimeSpan)" />
 
@@ -103,8 +121,12 @@
 
         
 
+        
+
         , and <see
          cref="M:System.Threading.ReaderWriterLock.AcquireReaderLock(System.TimeSpan)" />
+
+        
 
         
 
@@ -148,8 +170,12 @@
 
             
 
+            
+
              parameter, such as <see
              cref="M:System.Threading.Thread.Sleep(System.Int32)" />
+
+            
 
             
 
@@ -162,8 +188,12 @@
 
             
 
+            
+
             , this value is used to suspend the thread indefinitely. However, in most cases, we recommend that you use other <see
              cref="N:System.Threading" />
+
+            
 
             
 
@@ -176,8 +206,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Threading.Monitor" />
+
+            
 
             
 
@@ -190,8 +224,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Threading.Semaphore" />
+
+            
 
             
 
@@ -205,6 +243,8 @@
           <para
             >A constant used to specify an infinite waiting period, for threading methods that accept an <see
              cref="T:System.Int32" />
+
+            
 
             
 
@@ -240,8 +280,12 @@
 
             
 
+            
+
              parameter, such as <see
              cref="M:System.Threading.Thread.Sleep(System.TimeSpan)" />
+
+            
 
             
 
@@ -254,8 +298,12 @@
 
             
 
+            
+
             , this value is used to suspend the thread indefinitely. However, in most cases, we recommend that you use other <see
              cref="N:System.Threading" />
+
+            
 
             
 
@@ -268,8 +316,12 @@
 
             
 
+            
+
             , <see
              cref="T:System.Threading.Monitor" />
+
+            
 
             
 
@@ -282,8 +334,12 @@
 
             
 
+            
+
             , or <see
              cref="T:System.Threading.Semaphore" />
+
+            
 
             
 
@@ -297,6 +353,8 @@
           <para
             >A constant used to specify an infinite waiting period, for methods that accept a <see
              cref="T:System.TimeSpan" />
+
+            
 
             
 

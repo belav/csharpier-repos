@@ -37,8 +37,12 @@
 
         
 
+        
+
          class and the <see
          cref="T:System.Threading.Semaphore" />
+
+        
 
         
 
@@ -51,6 +55,8 @@
 
         
 
+        
+
          method or the <see
          cref="M:System.Threading.Semaphore.OpenExisting(System.String)" />
 
@@ -58,8 +64,12 @@
 
         
 
+        
+
          method to open a named system object that does not exist, a <see
          cref="T:System.Threading.WaitHandleCannotBeOpenedException" />
+
+        
 
         
 
@@ -98,11 +108,15 @@
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "No handle of the given name exists." This message takes into account the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Threading.WaitHandleCannotBeOpenedException" />
+
+            
 
             
 
@@ -153,6 +167,8 @@
 
             
 
+            
+
              class with default values.</para
           >
         </summary>
@@ -187,11 +203,15 @@
 
             
 
+            
+
              is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.Threading.WaitHandleCannotBeOpenedException" />
+
+            
 
             
 
@@ -234,6 +254,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -250,11 +272,15 @@
 
             
 
+            
+
              class with a specified error message.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -296,6 +322,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -304,6 +332,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Threading.WaitHandleCannotBeOpenedException" />
+
+            
 
             
 
@@ -319,8 +349,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.SerializationInfo" />
+
+          
 
           
 
@@ -335,8 +369,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Runtime.Serialization.StreamingContext" />
+
+          
 
           
 
@@ -376,6 +414,8 @@
 
             
 
+            
+
              property. The <see
              cref="P:System.Exception.InnerException" />
 
@@ -383,8 +423,12 @@
 
             
 
+            
+
              property returns the same value that is passed into the constructor, or null if the <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -403,11 +447,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -422,8 +470,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 

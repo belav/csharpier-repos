@@ -32,6 +32,8 @@
 
         
 
+        
+
          event. The <see
          cref="P:System.Timers.ElapsedEventArgs.SignalTime" />
 
@@ -39,8 +41,12 @@
 
         
 
+        
+
          property returns a <see
          cref="T:System.DateTime" />
+
+        
 
         
 
@@ -54,6 +60,8 @@
       <para
         >Provides data for the <see
          cref="E:System.Timers.Timer.Elapsed" />
+
+        
 
         
 
@@ -91,8 +99,12 @@
 
             
 
+            
+
              event is raised on a <see
              cref="T:System.Threading.ThreadPool" />
+
+            
 
             
 
@@ -105,8 +117,12 @@
 
             
 
+            
+
              method runs on another thread. This might result in the <see
              cref="E:System.Timers.Timer.Elapsed" />
+
+            
 
             
 
@@ -119,8 +135,12 @@
 
             
 
+            
+
              method is called. This race condition cannot be prevented simply by comparing the <see
              cref="P:System.Timers.ElapsedEventArgs.SignalTime" />
+
+            
 
             
 
@@ -133,8 +153,12 @@
 
             
 
+            
+
              method is called, because the event-handling method might already be executing when the <see
              cref="M:System.Timers.Timer.Stop" />
+
+            
 
             
 
@@ -147,8 +171,12 @@
 
             
 
+            
+
              method is called and the moment when the stop time is saved. If it is critical to prevent the thread that calls the <see
              cref="M:System.Timers.Timer.Stop" />
+
+            
 
             
 
@@ -161,8 +189,12 @@
 
             
 
+            
+
              class or the <see
              cref="Overload:System.Threading.Interlocked.CompareExchange" />
+
+            
 
             
 
@@ -175,8 +207,12 @@
 
             
 
+            
+
              method can be found in the example for the <see
              cref="M:System.Timers.Timer.Stop" />
+
+            
 
             
 
@@ -190,6 +226,8 @@
           <para
             >Gets the time the <see
              cref="E:System.Timers.Timer.Elapsed" />
+
+            
 
             
 

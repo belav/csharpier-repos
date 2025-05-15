@@ -31,8 +31,12 @@
 
         
 
+        
+
          property, and the <see
          cref="P:System.Threading.CancellationToken.IsCancellationRequested" />
+
+        
 
         
 
@@ -71,11 +75,15 @@
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "The operation was canceled." This message takes into account the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.OperationCanceledException" />
+
+            
 
             
 
@@ -136,6 +144,8 @@
 
             
 
+            
+
              class with a system-supplied error message.</para
           >
         </summary>
@@ -167,11 +177,15 @@
 
             
 
+            
+
              is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.OperationCanceledException" />
+
+            
 
             
 
@@ -232,6 +246,8 @@
 
             
 
+            
+
              class with a specified error message.</para
           >
         </summary>
@@ -242,8 +258,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -280,11 +300,15 @@
 
             
 
+            
+
              property of the new instance to a system-supplied message that describes the error, such as "The operation was canceled." This message takes into account the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.OperationCanceledException" />
+
+            
 
             
 
@@ -337,6 +361,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -353,11 +379,15 @@
 
             
 
+            
+
              class with a cancellation token.</para
           >
         </summary>
         <param name="token">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -406,6 +436,8 @@
 
             
 
+            
+
              class with serialized data.</para
           >
         </summary>
@@ -416,10 +448,14 @@
 
           
 
+          
+
           The object that holds the serialized object data. </param
         >
         <param name="context">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -459,11 +495,15 @@
 
             
 
+            
+
              is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
           >
           <para
             >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -476,8 +516,12 @@
 
             
 
+            
+
              property returns the same value that is passed into the constructor, or null if the <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -488,6 +532,8 @@
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.OperationCanceledException" />
+
+            
 
             
 
@@ -520,6 +566,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -533,6 +581,8 @@
               <description>
                 <para>
                   <paramref name="message" />
+
+                  
 
                   
 
@@ -564,11 +614,15 @@
 
             
 
+            
+
              class with a specified error message and a reference to the inner exception that is the cause of this exception.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -583,8 +637,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 
@@ -622,11 +680,15 @@
 
             
 
+            
+
              is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.OperationCanceledException" />
+
+            
 
             
 
@@ -669,6 +731,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -682,6 +746,8 @@
               <description>
                 <para>
                   <paramref name="token" />
+
+                  
 
                   
 
@@ -703,6 +769,8 @@
 
             
 
+            
+
              class with a specified error message and a cancellation token.</para
           >
         </summary>
@@ -713,10 +781,14 @@
 
           
 
+          
+
           The error message that explains the reason for the exception.</param
         >
         <param name="token">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -755,11 +827,15 @@
 
             
 
+            
+
              is intended to be understood by humans. The caller of this constructor is required to ensure that this string has been localized for the current system culture.</para
           >
           <para
             >An exception that is thrown as a direct result of a previous exception should include a reference to the previous exception in the <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -772,8 +848,12 @@
 
             
 
+            
+
              property returns the same value that is passed into the constructor, or null if the <see
              cref="P:System.Exception.InnerException" />
+
+            
 
             
 
@@ -789,11 +869,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >The following table shows the initial property values for an instance of <see
              cref="T:System.OperationCanceledException" />
+
+            
 
             
 
@@ -826,6 +910,8 @@
 
                   
 
+                  
+
                   . </para
                 >
               </description>
@@ -839,6 +925,8 @@
               <description>
                 <para>
                   <paramref name="message" />
+
+                  
 
                   
 
@@ -862,6 +950,8 @@
 
                   
 
+                  
+
                   .</para
                 >
               </description>
@@ -878,11 +968,15 @@
 
             
 
+            
+
              class with a specified error message, a reference to the inner exception that is the cause of this exception, and a cancellation token.</para
           >
         </summary>
         <param name="message">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -897,8 +991,12 @@
 
           
 
+          
+
           The exception that is the cause of the current exception. If the <paramref
            name="innerException" />
+
+          
 
           
 
@@ -908,6 +1006,8 @@
         >
         <param name="token">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -940,6 +1040,8 @@
           <para
             >If the token is associated with a canceled operation, the <see
              cref="P:System.Threading.CancellationToken.IsCancellationRequested" />
+
+            
 
             
 

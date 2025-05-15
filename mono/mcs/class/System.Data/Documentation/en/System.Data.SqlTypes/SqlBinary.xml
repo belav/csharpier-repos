@@ -59,8 +59,12 @@
 
             
 
+            
+
              structure, setting the <see
              cref="P:System.Data.SqlTypes.SqlBinary.Value" />
+
+            
 
             
 
@@ -71,6 +75,8 @@
         </summary>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -110,6 +116,8 @@
 
             
 
+            
+
              will appear first in the resulting <see
              cref="T:System.Data.SqlTypes.SqlBinary" />
 
@@ -117,8 +125,12 @@
 
             
 
+            
+
             , followed by <paramref
              name="y" />
+
+            
 
             
 
@@ -137,8 +149,12 @@
 
             
 
+            
+
              values to create a new <see
              cref="T:System.Data.SqlTypes.SqlBinary" />
+
+            
 
             
 
@@ -157,6 +173,8 @@
 
             
 
+            
+
              that is the concatenated value of x and y.</para
           >
         </returns>
@@ -167,8 +185,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBinary" />
+
+          
 
           
 
@@ -183,8 +205,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBinary" />
+
+          
 
           
 
@@ -221,8 +247,12 @@
 
             
 
+            
+
              object to the supplied <see
              cref="T:System.Data.SqlTypes.SqlBinary" />
+
+            
 
             
 
@@ -236,6 +266,8 @@
           <para
             >A signed number that indicates the relative values of this <see
              cref="T:System.Data.SqlTypes.SqlBinary" />
+
+            
 
             
 
@@ -267,6 +299,8 @@
 
                   
 
+                  
+
                    object is less than the object. </para
                 >
               </description>
@@ -279,6 +313,8 @@
                 <para
                   >This <see
                    cref="T:System.Data.SqlTypes.SqlBinary" />
+
+                  
 
                   
 
@@ -301,6 +337,8 @@
 
                   
 
+                  
+
                    object is greater than object.</para
                 >
                 <para>-or- </para>
@@ -316,6 +354,8 @@
 
           
 
+          
+
           The <see
            cref="T:System.Data.SqlTypes.SqlBinary" />
 
@@ -323,8 +363,12 @@
 
           
 
+          
+
            object to be compared to this <see
            cref="T:System.Data.SqlTypes.SqlBinary" />
+
+          
 
           
 
@@ -355,6 +399,8 @@
 
             
 
+            
+
              object to the supplied object and returns an indication of their relative values.</para
           >
         </summary>
@@ -363,6 +409,8 @@
           <para
             >A signed number that indicates the relative values of this <see
              cref="T:System.Data.SqlTypes.SqlBinary" />
+
+            
 
             
 
@@ -394,6 +442,8 @@
 
                   
 
+                  
+
                    object is less than the object. </para
                 >
               </description>
@@ -406,6 +456,8 @@
                 <para
                   >This <see
                    cref="T:System.Data.SqlTypes.SqlBinary" />
+
+                  
 
                   
 
@@ -428,6 +480,8 @@
 
                   
 
+                  
+
                    object is greater than object.</para
                 >
                 <para>-or- </para>
@@ -443,8 +497,12 @@
 
           
 
+          
+
           The object to be compared to this <see
            cref="T:System.Data.SqlTypes.SqlBinary" />
+
+          
 
           
 
@@ -483,8 +541,12 @@
 
             
 
+            
+
              structures to create a new <see
              cref="T:System.Data.SqlTypes.SqlBinary" />
+
+            
 
             
 
@@ -503,8 +565,12 @@
 
             
 
+            
+
              and <paramref
              name="y" />
+
+            
 
             
 
@@ -520,8 +586,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBinary" />
+
+          
 
           
 
@@ -536,8 +606,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBinary" />
+
+          
 
           
 
@@ -572,8 +646,12 @@
 
             
 
+            
+
              property of the <see
              cref="T:System.Data.SqlTypes.SqlBinary" />
+
+            
 
             
 
@@ -592,11 +670,15 @@
 
             
 
+            
+
              and the two are equal; otherwise false.</para
           >
         </returns>
         <param name="value">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -635,6 +717,8 @@
 
             
 
+            
+
              structures to determine whether they are equal.</para
           >
         </summary>
@@ -649,8 +733,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBinary" />
+
+          
 
           
 
@@ -665,8 +753,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBinary" />
+
+          
 
           
 
@@ -694,6 +786,8 @@
           <para
             >Returns the hash code for this <see
              cref="T:System.Data.SqlTypes.SqlBinary" />
+
+            
 
             
 
@@ -739,6 +833,8 @@
 
             
 
+            
+
             . </para
           >
         </summary>
@@ -747,6 +843,8 @@
           <para
             >A string that indicates the XSD of the specified <see
              cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+            
 
             
 
@@ -762,8 +860,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.Xml.Schema.XmlSchemaSet" />
+
+          
 
           
 
@@ -798,6 +900,8 @@
 
             
 
+            
+
              structures to determine whether the first is greater than the second.</para
           >
         </summary>
@@ -811,8 +915,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -825,8 +933,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlBinary" />
+
+            
 
             
 
@@ -839,6 +951,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -846,8 +960,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -863,8 +981,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBinary" />
+
+          
 
           
 
@@ -879,8 +1001,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBinary" />
+
+          
 
           
 
@@ -919,6 +1045,8 @@
 
             
 
+            
+
              structures to determine whether the first is greater than or equal to the second.</para
           >
         </summary>
@@ -932,8 +1060,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -946,8 +1078,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlBinary" />
+
+            
 
             
 
@@ -960,6 +1096,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -967,8 +1105,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -984,8 +1126,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBinary" />
+
+          
 
           
 
@@ -1000,8 +1146,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBinary" />
+
+          
 
           
 
@@ -1035,6 +1185,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1043,6 +1195,8 @@
           <para
             >Indicates whether this <see
              cref="T:System.Data.SqlTypes.SqlBinary" />
+
+            
 
             
 
@@ -1095,6 +1249,8 @@
 
             
 
+            
+
             , always examine the <see
              cref="P:System.Data.SqlTypes.SqlBinary.IsNull" />
 
@@ -1102,8 +1258,12 @@
 
             
 
+            
+
              property before reading the <see
              cref="P:System.Data.SqlTypes.SqlBinary.Length" />
+
+            
 
             
 
@@ -1117,6 +1277,8 @@
           <para
             >Gets the length in bytes of the <see
              cref="P:System.Data.SqlTypes.SqlBinary.Value" />
+
+            
 
             
 
@@ -1156,6 +1318,8 @@
 
             
 
+            
+
              structures to determine whether the first is less than the second.</para
           >
         </summary>
@@ -1169,8 +1333,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1183,8 +1351,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlBinary" />
+
+            
 
             
 
@@ -1197,6 +1369,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -1204,8 +1378,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1221,8 +1399,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBinary" />
+
+          
 
           
 
@@ -1237,8 +1419,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBinary" />
+
+          
 
           
 
@@ -1277,6 +1463,8 @@
 
             
 
+            
+
              structures to determine whether the first is less than or equal to the second.</para
           >
         </summary>
@@ -1290,8 +1478,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1304,8 +1496,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlBinary" />
+
+            
 
             
 
@@ -1318,6 +1514,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -1325,8 +1523,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1342,8 +1544,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBinary" />
+
+          
 
           
 
@@ -1358,8 +1564,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBinary" />
+
+          
 
           
 
@@ -1398,6 +1608,8 @@
 
             
 
+            
+
              structures to determine whether they are not equal.</para
           >
         </summary>
@@ -1411,8 +1623,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1425,8 +1641,12 @@
 
             
 
+            
+
              if the two instances are equal. If either instance of <see
              cref="T:System.Data.SqlTypes.SqlBinary" />
+
+            
 
             
 
@@ -1439,6 +1659,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -1446,8 +1668,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1463,8 +1689,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBinary" />
+
+          
 
           
 
@@ -1479,8 +1709,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBinary" />
+
+          
 
           
 
@@ -1515,10 +1749,14 @@
 
             
 
+            
+
              structure. For more information, see <format
              type="text/html">
               <a href="f18b288f-b265-4bbe-957f-c6833c0645ef">Handling Null Values (ADO.NET)</a>
             </format>
+
+            
 
             
 
@@ -1537,8 +1775,12 @@
 
             
 
+            
+
              that can be assigned to this instance of the <see
              cref="T:System.Data.SqlTypes.SqlBinary" />
+
+            
 
             
 
@@ -1580,6 +1822,8 @@
 
             
 
+            
+
              will appear first in the resulting <see
              cref="T:System.Data.SqlTypes.SqlBinary" />
 
@@ -1587,8 +1831,12 @@
 
             
 
+            
+
             , followed by <paramref
              name="y" />
+
+            
 
             
 
@@ -1607,8 +1855,12 @@
 
             
 
+            
+
              parameters to create a new <see
              cref="T:System.Data.SqlTypes.SqlBinary" />
+
+            
 
             
 
@@ -1627,8 +1879,12 @@
 
             
 
+            
+
              and <paramref
              name="y" />
+
+            
 
             
 
@@ -1644,8 +1900,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBinary" />
+
+          
 
           
 
@@ -1660,8 +1920,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBinary" />
+
+          
 
           
 
@@ -1700,6 +1964,8 @@
 
             
 
+            
+
              structures to determine whether they are equal.</para
           >
         </summary>
@@ -1713,8 +1979,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1727,8 +1997,12 @@
 
             
 
+            
+
              if the two instances are not equal. If either instance of <see
              cref="T:System.Data.SqlTypes.SqlBinary" />
+
+            
 
             
 
@@ -1741,6 +2015,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -1748,8 +2024,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1765,8 +2045,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBinary" />
+
+          
 
           
 
@@ -1781,8 +2065,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBinary" />
+
+          
 
           
 
@@ -1867,6 +2155,8 @@
 
             
 
+            
+
              structures to determine whether the first is greater than the second.</para
           >
         </summary>
@@ -1880,8 +2170,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -1894,8 +2188,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlBinary" />
+
+            
 
             
 
@@ -1908,6 +2206,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -1915,8 +2215,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -1932,8 +2236,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBinary" />
+
+          
 
           
 
@@ -1948,8 +2256,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBinary" />
+
+          
 
           
 
@@ -1988,6 +2300,8 @@
 
             
 
+            
+
              structues to determine whether the first is greater than or equal to the second.</para
           >
         </summary>
@@ -2001,8 +2315,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2015,8 +2333,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlBinary" />
+
+            
 
             
 
@@ -2029,6 +2351,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -2036,8 +2360,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2053,8 +2381,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBinary" />
+
+          
 
           
 
@@ -2069,8 +2401,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBinary" />
+
+          
 
           
 
@@ -2132,6 +2468,8 @@
 
             
 
+            
+
              structures to determine whether they are not equal.</para
           >
         </summary>
@@ -2145,8 +2483,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2159,8 +2501,12 @@
 
             
 
+            
+
              if the two instances are equal. If either instance of <see
              cref="T:System.Data.SqlTypes.SqlBinary" />
+
+            
 
             
 
@@ -2173,6 +2519,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -2180,8 +2528,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2197,8 +2549,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBinary" />
+
+          
 
           
 
@@ -2213,8 +2569,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBinary" />
+
+          
 
           
 
@@ -2253,6 +2613,8 @@
 
             
 
+            
+
              structures to determine whether the first is less than the second.</para
           >
         </summary>
@@ -2266,8 +2628,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2280,8 +2646,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlBinary" />
+
+            
 
             
 
@@ -2294,6 +2664,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -2301,8 +2673,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2318,8 +2694,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBinary" />
+
+          
 
           
 
@@ -2334,8 +2714,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBinary" />
+
+          
 
           
 
@@ -2374,6 +2758,8 @@
 
             
 
+            
+
              structures to determine whether the first is less than or equal to the second.</para
           >
         </summary>
@@ -2387,8 +2773,12 @@
 
             
 
+            
+
              that is <see
              cref="F:System.Data.SqlTypes.SqlBoolean.True" />
+
+            
 
             
 
@@ -2401,8 +2791,12 @@
 
             
 
+            
+
             . If either instance of <see
              cref="T:System.Data.SqlTypes.SqlBinary" />
+
+            
 
             
 
@@ -2415,6 +2809,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBoolean" />
 
@@ -2422,8 +2818,12 @@
 
             
 
+            
+
              will be <see
              cref="F:System.Data.SqlTypes.SqlBoolean.Null" />
+
+            
 
             
 
@@ -2439,8 +2839,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBinary" />
+
+          
 
           
 
@@ -2455,8 +2859,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Data.SqlTypes.SqlBinary" />
+
+          
 
           
 
@@ -2490,8 +2898,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+            
 
             
 
@@ -2510,6 +2922,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2518,6 +2932,8 @@
           <para
             >An <see
              cref="T:System.Xml.Schema.XMLSchema" />
+
+            
 
             
 
@@ -2554,8 +2970,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+            
 
             
 
@@ -2574,6 +2994,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2584,8 +3006,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.XmlReader" />
+
+          
 
           
 
@@ -2621,8 +3047,12 @@
 
             
 
+            
+
              instance is cast to an <see
              cref="T:System.Xml.Serialization.IXmlSerializable" />
+
+            
 
             
 
@@ -2641,6 +3071,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -2651,8 +3083,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.Xml.XmlWriter" />
+
+          
 
           
 
@@ -2681,8 +3117,12 @@
 
             
 
+            
+
              to <see
              cref="T:System.Data.SqlTypes.SqlGuid" />
+
+            
 
             
 
@@ -2696,6 +3136,8 @@
           <para
             >A <see
              cref="T:System.Data.SqlTypes.SqlGuid" />
+
+            
 
             
 
@@ -2729,6 +3171,8 @@
 
             
 
+            
+
              object to a string.</para
           >
         </summary>
@@ -2742,6 +3186,8 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Data.SqlTypes.SqlBinary" />
 
@@ -2749,8 +3195,12 @@
 
             
 
+            
+
             . If the <see
              cref="P:System.Data.SqlTypes.SqlBinary.Value" />
+
+            
 
             
 
@@ -2783,8 +3233,12 @@
 
             
 
+            
+
              property before reading the <see
              cref="P:System.Data.SqlTypes.SqlBinary.Value" />
+
+            
 
             
 
@@ -2798,6 +3252,8 @@
           <para
             >Gets the value of the <see
              cref="T:System.Data.SqlTypes.SqlBinary" />
+
+            
 
             
 

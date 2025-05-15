@@ -25,6 +25,8 @@
 
         
 
+        
+
          property of the <see
          cref="T:System.Windows.Forms.RichTextBox" />
 
@@ -32,8 +34,12 @@
 
         
 
+        
+
          class. The <see
          cref="P:System.Windows.Forms.RichTextBox.SelectionType" />
+
+        
 
         
 
@@ -47,6 +53,8 @@
       <para
         >Specifies the type of selection in a <see
          cref="T:System.Windows.Forms.RichTextBox" />
+
+        
 
         
 

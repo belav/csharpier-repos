@@ -32,6 +32,8 @@
 
         
 
+        
+
         .</para
       >
     </remarks>
@@ -117,6 +119,8 @@
 
             
 
+            
+
              for drawing, and can only use user input events for user interface within that subwindow. Examples of <see
              cref="F:System.Security.Permissions.UIPermissionWindow.SafeSubWindows" />
 
@@ -124,8 +128,12 @@
 
             
 
+            
+
              are a <see
              cref="T:System.Windows.Forms.MessageBox" />
+
+            
 
             
 
@@ -163,6 +171,8 @@
 
             
 
+            
+
              permission, your application:</para
           >
           <para />
@@ -194,8 +204,12 @@
 
                 
 
+                
+
                  property on <see
                  cref="T:System.Windows.Forms.Form" />
+
+                
 
                 
 
@@ -213,6 +227,8 @@
 
                 
 
+                
+
                  to None.</para
               >
             </item>
@@ -225,8 +241,12 @@
 
                 
 
+                
+
                  property on its <see
                  cref="T:System.Windows.Forms.Form" />
+
+                
 
                 
 
@@ -247,6 +267,8 @@
 
                 
 
+                
+
                  property. By implication, controls will also be barred from accessing siblings - i.e., other controls at the same level of nesting.</para
               >
             </item>
@@ -254,6 +276,8 @@
               <para
                 >Cannot control focus using the <see
                  cref="M:System.Windows.Forms.Control.Focus" />
+
+                
 
                 
 
@@ -277,6 +301,8 @@
 
                 
 
+                
+
                  property.</para
               >
             </item>
@@ -289,8 +315,12 @@
 
                 
 
+                
+
                  and <see
                  cref="M:System.Windows.Forms.Control.SendToBack" />
+
+                
 
                 
 
@@ -312,8 +342,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Security.Permissions.UIPermissionWindow.SafeSubWindows" />
+
+            
 
             
 

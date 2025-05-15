@@ -18,6 +18,8 @@
 
     
 
+    
+
      for details.</ThreadSafetyStatement
   >
   <Base>
@@ -77,6 +79,8 @@
 
           
 
+          
+
            containing the Nonce received from the server.</value
         >
         <remarks>To be added</remarks>
@@ -122,6 +126,8 @@
 
           
 
+          
+
            representing the domain name of the current computer.</value
         >
         <remarks
@@ -132,8 +138,12 @@
 
           
 
+          
+
           .<see
            cref="P:System.Environment.UserDomainName" />
+
+          
 
           
 
@@ -197,6 +207,8 @@
 
           
 
+          
+
            representing the current (NetBIOS) host name of the computer.</value
         >
         <remarks
@@ -207,8 +219,12 @@
 
           
 
+          
+
           .<see
            cref="P:System.Environment.MachineName" />
+
+          
 
           
 
@@ -239,6 +255,8 @@
 
           
 
+          
+
            containing the LAN Manager (LM) response.</value
         >
         <remarks
@@ -249,8 +267,12 @@
 
           
 
+          
+
           .<see
            cref="P:Mono.Security.Protocol.Ntlm.ChallengeResponse.LM" />
+
+          
 
           
 
@@ -281,6 +303,8 @@
 
           
 
+          
+
            containing the NT response.</value
         >
         <remarks
@@ -291,8 +315,12 @@
 
           
 
+          
+
           .<see
            cref="P:Mono.Security.Protocol.Ntlm.ChallengeResponse.NT" />
+
+          
 
           
 
@@ -318,6 +346,8 @@
         <value
           >a <see
            cref="T:System.String" />
+
+          
 
           
 
@@ -349,6 +379,8 @@
 
           
 
+          
+
            representing the user name.</value
         >
         <remarks
@@ -359,8 +391,12 @@
 
           
 
+          
+
           .<see
            cref="P:System.Environment.UserName" />
+
+          
 
           
 

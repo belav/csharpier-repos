@@ -24,6 +24,8 @@
 
         
 
+        
+
          class is the base class for objects that represent files in a virtual file system. Typically, you would implement a descendent of the <see
          cref="T:System.Web.Hosting.VirtualFile" />
 
@@ -31,8 +33,12 @@
 
         
 
+        
+
          class for each <see
          cref="T:System.Web.Hosting.VirtualPathProvider" />
+
+        
 
         
 
@@ -66,11 +72,15 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
         <param name="virtualPath">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -121,6 +131,8 @@
 
             
 
+            
+
              method returns a stream containing the data treated as a file by the <see
              cref="T:System.Web.Hosting.VirtualPathProvider" />
 
@@ -128,8 +140,12 @@
 
             
 
+            
+
              class. The stream is read-only and is seekable (the <see
              cref="P:System.IO.Stream.CanSeek" />
+
+            
 
             
 

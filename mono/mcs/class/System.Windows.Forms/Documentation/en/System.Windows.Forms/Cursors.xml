@@ -21,6 +21,8 @@
 
         
 
+        
+
          objects in this class can take on a different appearance than those described. The user can change the cursor appearance by adjusting the mouse pointer settings in their operating system. The panning and no move cursors are static and cannot be changed by the operating system.</para
       >
       <para>The panning and no move cursors are used during mouse wheel operations. Depending on the direction the window can be scrolled, the cursor changes to the appropriate no move cursor when the mouse wheel is clicked. The cursor then changes to the appropriate panning cursor as the mouse is moved.</para>
@@ -30,6 +32,8 @@
       <para
         >Provides a collection of <see
          cref="T:System.Windows.Forms.Cursor" />
+
+        
 
         
 
@@ -655,6 +659,8 @@
 
             
 
+            
+
              method. To make the wait cursor display for the entire application, regardless of the control or form selected, call <see
              cref="P:System.Windows.Forms.Application.UseWaitCursor" />
 
@@ -662,8 +668,12 @@
 
             
 
+            
+
              on the <see
              cref="T:System.Windows.Forms.Application" />
+
+            
 
             
 

@@ -11,6 +11,8 @@
 
       
 
+      
+
        :: <rhs
       >
         <non_terminal where="9.3.3">whitespace</non_terminal>
@@ -44,6 +46,8 @@
 
       
 
+      
+
        :: <rhs
       >
         <non_terminal where="9.3.3">whitespace</non_terminal>
@@ -62,8 +66,12 @@
 
     
 
+    
+
      directive causes the given conditional compilation symbol to become defined, starting with the source line that follows the directive. Likewise, the processing of an <symbol
     >#undef</symbol>
+
+    
 
     
 
@@ -79,8 +87,12 @@
 
     
 
+    
+
      and <symbol
     >#undef</symbol>
+
+    
 
     
 
@@ -93,8 +105,12 @@
 
     
 
+    
+
     ) in the source file; otherwise a compile-time error occurs. In intuitive terms, <symbol
     >#define</symbol>
+
+    
 
     
 
@@ -107,13 +123,15 @@
 
     
 
+    
+
      directives must precede any "real code" in the source file. </paragraph
   >
   <paragraph>
     <example
       >[Example: The example: <code_example
       >
-<![CDATA[
+        <![CDATA[
 #define Enterprise  
 #if Professional || Enterprise  
 #define Advanced  
@@ -131,8 +149,12 @@ namespace Megacorp.Data
 
       
 
+      
+
       is valid because the <symbol
       >#define</symbol>
+
+      
 
       
 
@@ -150,9 +172,11 @@ namespace Megacorp.Data
 
       
 
+      
+
        follows real code: <code_example
       >
-<![CDATA[
+        <![CDATA[
 #define A  
 namespace N  
 {  
@@ -163,6 +187,8 @@ namespace N
 }  
 ]]>
       </code_example>
+
+      
 
       
 
@@ -179,8 +205,12 @@ namespace N
 
     
 
+    
+
      may define a conditional compilation symbol that is already defined, without there being any intervening <symbol
     >#undef</symbol>
+
+    
 
     
 
@@ -190,7 +220,7 @@ namespace N
 
       >[Example: The example below defines a conditional compilation symbol A and then defines it again. <code_example
       >
-<![CDATA[
+        <![CDATA[
 #define A  
 #define A  
 ]]>
@@ -208,6 +238,8 @@ namespace N
 
     
 
+    
+
      may "undefine" a conditional compilation symbol that is not defined. <example
 
       >[Example: The example below defines a conditional compilation symbol A and then undefines it twice; although the second <symbol
@@ -217,14 +249,18 @@ namespace N
 
       
 
+      
+
        has no effect, it is still valid. <code_example
       >
-<![CDATA[
+        <![CDATA[
 #define A  
 #undef A  
 #undef A  
 ]]>
       </code_example>
+
+      
 
       
 

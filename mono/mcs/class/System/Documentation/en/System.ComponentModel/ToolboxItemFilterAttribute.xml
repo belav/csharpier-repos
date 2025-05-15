@@ -37,11 +37,15 @@
 
         
 
+        
+
          provides a mechanism by which toolbox items can be marked for use only with designers that have a matching attribute or code that determines whether the item should be enabled or disabled in the toolbox.</para
       >
       <para
         >A <see
          cref="T:System.ComponentModel.ToolboxItemFilterAttribute" />
+
+        
 
         
 
@@ -54,8 +58,12 @@
 
         
 
+        
+
          to indicate a filter string and filter type that specify when to enable or disable the item. <see
          cref="T:System.ComponentModel.ToolboxItemFilterAttribute" />
+
+        
 
         
 
@@ -68,8 +76,12 @@
 
         
 
+        
+
          property by a <see
          cref="T:System.ComponentModel.ToolboxItemFilterType" />
+
+        
 
         
 
@@ -115,11 +127,15 @@
 
             
 
+            
+
              class using the specified filter string.</para
           >
         </summary>
         <param name="filterString">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -161,11 +177,15 @@
 
             
 
+            
+
              class using the specified filter string and type.</para
           >
         </summary>
         <param name="filterString">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -180,8 +200,12 @@
 
           
 
+          
+
           A <see
            cref="T:System.ComponentModel.ToolboxItemFilterType" />
+
+          
 
           
 
@@ -215,6 +239,8 @@
         <remarks>To be added</remarks>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -270,6 +296,8 @@
           <para
             >The type of the filter, along with any existing <see
              cref="T:System.ComponentModel.ToolboxItemFilterAttribute" />
+
+            
 
             
 
@@ -336,6 +364,8 @@
         </returns>
         <param name="obj">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

@@ -23,8 +23,12 @@
 
         
 
+        
+
          class is for SOAP extensions, representing the data in a SOAP request or SOAP response. When the <see
          cref="M:System.Web.Services.Protocols.SoapExtension.ProcessMessage(System.Web.Services.Protocols.SoapMessage)" />
+
+        
 
         
 
@@ -37,8 +41,12 @@
 
         
 
+        
+
          receives a <see
          cref="T:System.Web.Services.Protocols.SoapMessage" />
+
+        
 
         
 
@@ -51,8 +59,12 @@
 
         
 
+        
+
         . It is up to the particular SOAP extension to choose how to process the <see
          cref="T:System.Web.Services.Protocols.SoapMessage" />
+
+        
 
         
 
@@ -68,8 +80,12 @@
 
         
 
+        
+
          method receives an instance of <see
          cref="T:System.Web.Services.Protocols.SoapServerMessage" />
+
+        
 
         
 
@@ -82,6 +98,8 @@
 
         
 
+        
+
         . Likewise, when a SOAP extension is applied to an XML Web service client, <see
          cref="M:System.Web.Services.Protocols.SoapExtension.ProcessMessage(System.Web.Services.Protocols.SoapMessage)" />
 
@@ -89,8 +107,12 @@
 
         
 
+        
+
          receives an instance of <see
          cref="T:System.Web.Services.Protocols.SoapClientMessage" />
+
+        
 
         
 
@@ -104,6 +126,8 @@
       <para
         >Represents the data in a SOAP request or SOAP response at a specific <see
          cref="T:System.Web.Services.Protocols.SoapMessageStage" />
+
+        
 
         
 
@@ -132,8 +156,12 @@
 
             
 
+            
+
              property can be accessed during any <see
              cref="T:System.Web.Services.Protocols.SoapMessageStage" />
+
+            
 
             
 
@@ -174,6 +202,8 @@
 
             
 
+            
+
              property to provide supplementary information about the encoding of a SOAP message without changing the media type as expressed in the Content-Type HTTP header.</para
           >
         </remarks>
@@ -202,8 +232,12 @@
 
             
 
+            
+
              property can only be accessed in the <see
              cref="F:System.Web.Services.Protocols.SoapMessageStage.BeforeSerialize" />
+
+            
 
             
 
@@ -216,8 +250,12 @@
 
             
 
+            
+
              stages; otherwise, an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -233,8 +271,12 @@
 
             
 
+            
+
              property, instead of the <see
              cref="P:System.Web.Services.Protocols.SoapMessage.ContentType" />
+
+            
 
             
 
@@ -271,8 +313,12 @@
 
             
 
+            
+
              stage. For an XML Web service client, the in parameters are available prior to the SOAP request serialization process in the <see
              cref="F:System.Web.Services.Protocols.SoapMessageStage.BeforeSerialize" />
+
+            
 
             
 
@@ -287,6 +333,8 @@
 
             
 
+            
+
              can be called during any <see
              cref="T:System.Web.Services.Protocols.SoapMessageStage" />
 
@@ -294,8 +342,12 @@
 
             
 
+            
+
             , however an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -309,6 +361,8 @@
           <para
             >When overridden in a derived class, asserts that the current <see
              cref="T:System.Web.Services.Protocols.SoapMessageStage" />
+
+            
 
             
 
@@ -341,8 +395,12 @@
 
             
 
+            
+
              stage. In an XML Web service client, the out parameters are available after the SOAP response deserialization process in the <see
              cref="F:System.Web.Services.Protocols.SoapMessageStage.AfterDeserialize" />
+
+            
 
             
 
@@ -357,6 +415,8 @@
 
             
 
+            
+
              can be called during any <see
              cref="T:System.Web.Services.Protocols.SoapMessageStage" />
 
@@ -364,8 +424,12 @@
 
             
 
+            
+
             , however an <see
              cref="T:System.InvalidOperationException" />
+
+            
 
             
 
@@ -379,6 +443,8 @@
           <para
             >When overridden in a derived class, asserts that the current <see
              cref="T:System.Web.Services.Protocols.SoapMessageStage" />
+
+            
 
             
 
@@ -416,6 +482,8 @@
 
             
 
+            
+
              class.</para
           >
           <para>
@@ -425,8 +493,12 @@
 
             
 
+            
+
              can be called during any <see
              cref="T:System.Web.Services.Protocols.SoapMessageStage" />
+
+            
 
             
 
@@ -445,6 +517,8 @@
 
             
 
+            
+
              of the call to the XML Web service method is the stage or stages passed in. If the current processing stage is not one of the stages passed in, an exception is thrown.</para
           >
         </summary>
@@ -455,8 +529,12 @@
 
           
 
+          
+
           The <see
            cref="T:System.Web.Services.Protocols.SoapMessageStage" />
+
+          
 
           
 
@@ -491,8 +569,12 @@
 
             
 
+            
+
              property can be accessed during any <see
              cref="T:System.Web.Services.Protocols.SoapMessageStage" />
+
+            
 
             
 
@@ -506,6 +588,8 @@
           <para
             >Gets the <see
              cref="T:System.Web.Services.Protocols.SoapException" />
+
+            
 
             
 
@@ -540,6 +624,8 @@
 
             
 
+            
+
              property is only accessible when in parameters are available. ASP.NET throws <see
              cref="T:System.InvalidOperationException" />
 
@@ -547,8 +633,12 @@
 
             
 
+            
+
              when accessing the <see
              cref="M:System.Web.Services.Protocols.SoapMessage.GetInParameterValue(System.Int32)" />
+
+            
 
             
 
@@ -564,9 +654,13 @@
 
             
 
+            
+
              the in parameters are available in the <see
              cref="F:System.Web.Services.Protocols.SoapMessageStage.BeforeSerialize" />
             <see cref="T:System.Web.Services.Protocols.SoapMessageStage" />
+
+            
 
             
 
@@ -579,9 +673,13 @@
 
             
 
+            
+
              the in parameters are available in the <see
              cref="F:System.Web.Services.Protocols.SoapMessageStage.AfterDeserialize" />
             <see cref="T:System.Web.Services.Protocols.SoapMessageStage" />
+
+            
 
             
 
@@ -604,11 +702,15 @@
 
             
 
+            
+
              representing the parameter at the specified index.</para
           >
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -642,8 +744,12 @@
 
             
 
+            
+
              when accessing the <see
              cref="M:System.Web.Services.Protocols.SoapMessage.GetOutParameterValue(System.Int32)" />
+
+            
 
             
 
@@ -659,9 +765,13 @@
 
             
 
+            
+
              the out parameters are available in the <see
              cref="F:System.Web.Services.Protocols.SoapMessageStage.AfterDeserialize" />
             <see cref="T:System.Web.Services.Protocols.SoapMessageStage" />
+
+            
 
             
 
@@ -674,6 +784,8 @@
 
             
 
+            
+
              the out parameters are available in the <see
              cref="F:System.Web.Services.Protocols.SoapMessageStage.BeforeSerialize" />
 
@@ -681,8 +793,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Web.Services.Protocols.SoapMessageStage" />
+
+            
 
             
 
@@ -705,11 +821,15 @@
 
             
 
+            
+
              representing the parameter at the specified index.</para
           >
         </returns>
         <param name="index">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -741,8 +861,12 @@
 
             
 
+            
+
              when accessing the <see
              cref="M:System.Web.Services.Protocols.SoapMessage.GetReturnValue" />
+
+            
 
             
 
@@ -758,8 +882,12 @@
 
             
 
+            
+
              the return value is available when the <see
              cref="T:System.Web.Services.Protocols.SoapMessageStage" />
+
+            
 
             
 
@@ -772,8 +900,12 @@
 
             
 
+            
+
             . In a <see
              cref="T:System.Web.Services.Protocols.SoapServerMessage" />
+
+            
 
             
 
@@ -786,8 +918,12 @@
 
             
 
+            
+
              value is <see
              cref="F:System.Web.Services.Protocols.SoapMessageStage.BeforeSerialize" />
+
+            
 
             
 
@@ -805,6 +941,8 @@
           <para
             >An <see
              cref="T:System.Object" />
+
+            
 
             
 
@@ -840,11 +978,15 @@
 
             
 
+            
+
              class.</para
           >
           <para
             >Although the <see
              cref="P:System.Web.Services.Protocols.SoapMessage.Headers" />
+
+            
 
             
 
@@ -857,8 +999,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Web.Services.Protocols.SoapMessageStage.AfterDeserialize" />
+
+            
 
             
 
@@ -898,8 +1044,12 @@
 
             
 
+            
+
              can be accessed during any <see
              cref="T:System.Web.Services.Protocols.SoapMessageStage" />
+
+            
 
             
 
@@ -912,8 +1062,12 @@
 
             
 
+            
+
              and <see
              cref="F:System.Web.Services.Protocols.SoapMessageStage.BeforeSerialize" />
+
+            
 
             
 
@@ -950,6 +1104,8 @@
 
             
 
+            
+
              property of <see
              cref="T:System.Web.Services.Protocols.SoapDocumentMethodAttribute" />
 
@@ -957,8 +1113,12 @@
 
             
 
+            
+
              or <see
              cref="T:System.Web.Services.Protocols.SoapRpcMethodAttribute" />
+
+            
 
             
 
@@ -974,8 +1134,12 @@
 
             
 
+            
+
              property is accessible in all stages of <see
              cref="T:System.Web.Services.Protocols.SoapMessageStage" />
+
+            
 
             
 
@@ -994,6 +1158,8 @@
 
             
 
+            
+
              property of either the <see
              cref="T:System.Web.Services.Protocols.SoapDocumentMethodAttribute" />
 
@@ -1001,8 +1167,12 @@
 
             
 
+            
+
              or the <see
              cref="T:System.Web.Services.Protocols.SoapRpcMethodAttribute" />
+
+            
 
             
 
@@ -1049,8 +1219,12 @@
 
             
 
+            
+
             , the <see
              cref="P:System.Web.Services.Protocols.SoapServerMessage.SoapVersion" />
+
+            
 
             
 
@@ -1063,8 +1237,12 @@
 
             
 
+            
+
              stage. In the <see
              cref="F:System.Web.Services.Protocols.SoapMessageStage.BeforeDeserialize" />
+
+            
 
             
 
@@ -1100,8 +1278,12 @@
 
             
 
+            
+
              property can be accessed at any <see
              cref="T:System.Web.Services.Protocols.SoapMessageStage" />
+
+            
 
             
 
@@ -1120,8 +1302,12 @@
 
             
 
+            
+
              of the <see
              cref="T:System.Web.Services.Protocols.SoapMessage" />
+
+            
 
             
 
@@ -1158,11 +1344,15 @@
 
             
 
+            
+
             .</para
           >
           <para
             >SOAP extensions that modify the data representing a SOAP request or SOAP response, such as encryption or compression SOAP extensions, should do so with the <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -1175,8 +1365,12 @@
 
             
 
+            
+
              method of <see
              cref="T:System.Web.Services.Protocols.SoapExtension" />
+
+            
 
             
 
@@ -1189,6 +1383,8 @@
 
             
 
+            
+
              property of <see
              cref="T:System.Web.Services.Protocols.SoapMessage" />
 
@@ -1196,8 +1392,12 @@
 
             
 
+            
+
              passed into <see
              cref="M:System.Web.Services.Protocols.SoapExtension.ProcessMessage(System.Web.Services.Protocols.SoapMessage)" />
+
+            
 
             
 
@@ -1213,6 +1413,8 @@
 
             
 
+            
+
             .</para
           >
         </remarks>
@@ -1221,6 +1423,8 @@
           <para
             >Gets the data representing the SOAP request or SOAP response in the form of a <see
              cref="T:System.IO.Stream" />
+
+            
 
             
 
@@ -1253,8 +1457,12 @@
 
             
 
+            
+
              property can be accessed during any <see
              cref="T:System.Web.Services.Protocols.SoapMessageStage" />
+
+            
 
             
 

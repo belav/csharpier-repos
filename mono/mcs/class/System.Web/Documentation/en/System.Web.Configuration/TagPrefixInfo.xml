@@ -24,8 +24,12 @@
 
         
 
+        
+
          class allows you to programmatically access and modify tag-prefix information stored in a configuration file. It provides the same functionality as the ASP.NET @Register directive. Tag prefixes associate a "namespace" in ASP.NET to the assemblies and namespaces that must be included for custom controls and user controls to work properly. <see
          cref="T:System.Web.Configuration.TagPrefixInfo" />
+
+        
 
         
 
@@ -38,8 +42,12 @@
 
         
 
+        
+
          object. The <see
          cref="T:System.Web.Configuration.TagPrefixCollection" />
+
+        
 
         
 
@@ -49,6 +57,8 @@
       >
       <para>
         <see cref="T:System.Web.Configuration.TagPrefixInfo" />
+
+        
 
         
 
@@ -66,6 +76,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.Configuration.TagPrefixInfo.TagName" />
 
@@ -73,8 +85,12 @@
 
             
 
+            
+
             , and <see
              cref="P:System.Web.Configuration.TagPrefixInfo.Source" />
+
+            
 
             
 
@@ -92,8 +108,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.Configuration.TagPrefixInfo.Namespace" />
+
+            
 
             
 
@@ -106,8 +126,12 @@
 
             
 
+            
+
              properties. The <see
              cref="P:System.Web.Configuration.TagPrefixInfo.Assembly" />
+
+            
 
             
 
@@ -153,6 +177,8 @@
 
             
 
+            
+
              class and initializes it using the passed parameters. The parameters for which you specify values depend on the kind of control you refer to with the specified tag prefix. Parameters not required for that tag prefix should be left blank. (Use an empty string.) </para
           >
           <list type="bullet">
@@ -165,6 +191,8 @@
 
                 
 
+                
+
                 , <paramref
                  name="tagName" />
 
@@ -172,8 +200,12 @@
 
                 
 
+                
+
                 , and <paramref
                  name="source" />
+
+                
 
                 
 
@@ -191,6 +223,8 @@
 
                 
 
+                
+
                  and <paramref
                  name="nameSpace" />
 
@@ -198,8 +232,12 @@
 
                 
 
+                
+
                  parameters. If the control is not in the application code directory, you must also specify the <paramref
                  name="assembly" />
+
+                
 
                 
 
@@ -220,11 +258,15 @@
 
             
 
+            
+
              class using the passed values.</para
           >
         </summary>
         <param name="tagPrefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -239,10 +281,14 @@
 
           
 
+          
+
           The namespace associated with the tag prefix.</param
         >
         <param name="assembly">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -257,10 +303,14 @@
 
           
 
+          
+
           The name of the control to be used in the page.</param
         >
         <param name="source">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -341,6 +391,8 @@
         </returns>
         <param name="prefix">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -501,6 +553,8 @@
           <para
             >The <see
              cref="P:System.Web.Configuration.TagPrefixInfo.TagPrefix" />
+
+            
 
             
 

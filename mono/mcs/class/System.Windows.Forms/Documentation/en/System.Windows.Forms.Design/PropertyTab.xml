@@ -28,8 +28,12 @@
 
         
 
+        
+
          class provides the base class behavior for a property tab. Property tabs are displayed on the toolbar of the <see
          cref="T:System.Windows.Forms.PropertyGrid" />
+
+        
 
         
 
@@ -45,6 +49,8 @@
 
         
 
+        
+
          directly. Instead, a <see
          cref="T:System.ComponentModel.PropertyTabAttribute" />
 
@@ -52,8 +58,12 @@
 
         
 
+        
+
          that indicates the type of the property tab or property tabs to display for a component can be associated with the properties or types that the <see
          cref="T:System.Windows.Forms.Design.PropertyTab" />
+
+        
 
         
 
@@ -69,6 +79,8 @@
 
         
 
+        
+
          will instantiate a <see
          cref="T:System.Windows.Forms.Design.PropertyTab" />
 
@@ -76,8 +88,12 @@
 
         
 
+        
+
          of the type specified by a <see
          cref="T:System.ComponentModel.PropertyTabAttribute" />
+
+        
 
         
 
@@ -108,6 +124,8 @@
 
             
 
+            
+
              class.</para
           >
         </summary>
@@ -131,6 +149,8 @@
           <para
             >Gets the bitmap that is displayed for the <see
              cref="T:System.Windows.Forms.Design.PropertyTab" />
+
+            
 
             
 
@@ -166,6 +186,8 @@
 
             
 
+            
+
              can display properties for the specified component.</para
           >
         </summary>
@@ -175,6 +197,8 @@
         </returns>
         <param name="extendee">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -225,8 +249,12 @@
 
             
 
+            
+
              when you are finished using the <see
              cref="T:System.Windows.Forms.Design.PropertyTab" />
+
+            
 
             
 
@@ -239,8 +267,12 @@
 
             
 
+            
+
              method leaves the <see
              cref="T:System.Windows.Forms.Design.PropertyTab" />
+
+            
 
             
 
@@ -253,6 +285,8 @@
 
             
 
+            
+
             , you must release all references to the <see
              cref="T:System.Windows.Forms.Design.PropertyTab" />
 
@@ -260,8 +294,12 @@
 
             
 
+            
+
              so the garbage collector can reclaim the memory that the <see
              cref="T:System.Windows.Forms.Design.PropertyTab" />
+
+            
 
             
 
@@ -276,10 +314,14 @@
 
             
 
+            
+
              and <format
              type="text/html">
               <a href="eb4e1af0-3b48-4fbc-ad4e-fc2f64138bf9">Implementing a Dispose Method</a>
             </format>
+
+            
 
             
 
@@ -296,6 +338,8 @@
 
               
 
+              
+
                before you release your last reference to the <see
                cref="T:System.Windows.Forms.Design.PropertyTab" />
 
@@ -303,8 +347,12 @@
 
               
 
+              
+
               . Otherwise, the resources it is using will not be freed until the garbage collector calls the <see
                cref="T:System.Windows.Forms.Design.PropertyTab" />
+
+              
 
               
 
@@ -319,6 +367,8 @@
           <para
             >Releases all the resources used by the <see
              cref="T:System.Windows.Forms.Design.PropertyTab" />
+
+            
 
             
 
@@ -353,8 +403,12 @@
 
             
 
+            
+
              method. Dispose() invokes the protected Dispose(Boolean) method with the <paramref
              name="disposing" />
+
+            
 
             
 
@@ -367,8 +421,12 @@
 
             
 
+            
+
              invokes Dispose with <paramref
              name="disposing" />
+
+            
 
             
 
@@ -384,8 +442,12 @@
 
             
 
+            
+
              parameter is true, this method releases all resources held by any managed objects that this <see
              cref="T:System.Windows.Forms.Design.PropertyTab" />
+
+            
 
             
 
@@ -404,11 +466,15 @@
 
             
 
+            
+
              and optionally releases the managed resources.</para
           >
         </summary>
         <param name="disposing">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -441,8 +507,12 @@
 
             
 
+            
+
              to attempt to free resources and perform other cleanup operations before the <see
              cref="T:System.Windows.Forms.Design.PropertyTab" />
+
+            
 
             
 
@@ -485,11 +555,15 @@
 
             
 
+            
+
              that represents the default property.</para
           >
         </returns>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -531,11 +605,15 @@
 
             
 
+            
+
              that contains the properties of the component.</para
           >
         </returns>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -578,11 +656,15 @@
 
             
 
+            
+
              that contains the properties.</para
           >
         </returns>
         <param name="component">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -597,8 +679,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Attribute" />
+
+          
 
           
 
@@ -642,6 +728,8 @@
 
             
 
+            
+
              that contains the properties matching the specified context and attributes.</para
           >
         </returns>
@@ -652,8 +740,12 @@
 
           
 
+          
+
           An <see
            cref="T:System.ComponentModel.ITypeDescriptorContext" />
+
+          
 
           
 
@@ -668,6 +760,8 @@
 
           
 
+          
+
           The component to retrieve properties from. </param
         >
         <param name="attributes">
@@ -677,8 +771,12 @@
 
           
 
+          
+
           An array of type <see
            cref="T:System.Attribute" />
+
+          
 
           
 

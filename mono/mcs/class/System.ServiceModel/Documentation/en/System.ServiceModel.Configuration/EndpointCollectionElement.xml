@@ -50,6 +50,8 @@
 
             
 
+            
+
              class. </para
           >
         </summary>
@@ -79,6 +81,8 @@
           <para
             >When implemented in a derived class, provides a read-only collection of <see
              cref="T:System.ServiceModel.Configuration.StandardEndpointElement" />
+
+            
 
             
 
@@ -117,6 +121,8 @@
         </returns>
         <param name="name">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 
@@ -193,6 +199,8 @@
 
             
 
+            
+
             .</para
           >
         </summary>
@@ -240,6 +248,8 @@
 
           
 
+          
+
           The name of the service endpoint that contains the endpoint collection.</param
         >
         <param name="endpoint">
@@ -249,10 +259,14 @@
 
           
 
+          
+
           The service endpoint element to be added to the collection.</param
         >
         <param name="config">
           <attribution license="cc4" from="Microsoft" modified="false" />
+
+          
 
           
 

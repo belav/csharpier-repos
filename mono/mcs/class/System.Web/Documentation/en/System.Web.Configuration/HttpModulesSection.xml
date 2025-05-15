@@ -24,6 +24,8 @@
 
         
 
+        
+
          class provides a way to programmatically access and modify the httpModules section of a configuration file.</para
       >
       <para
@@ -34,8 +36,12 @@
 
         
 
+        
+
          and the <see
          cref="T:System.Web.Configuration.HttpModuleActionCollection" />
+
+        
 
         
 
@@ -52,6 +58,8 @@
 
           
 
+          
+
            can read and write information from and to the related section of the configuration file according to the section property <see
            cref="P:System.Configuration.SectionInformation.AllowDefinition" />
 
@@ -59,8 +67,12 @@
 
           
 
+          
+
            whose value is <see
            cref="F:System.Configuration.ConfigurationAllowDefinition.Everywhere" />
+
+          
 
           
 
@@ -93,6 +105,8 @@
 
             
 
+            
+
              constructor is not intended to be used directly from your code. It is called by the ASP.NET configuration system. You obtain an instance of the <see
              cref="T:System.Web.Configuration.HttpModulesSection" />
 
@@ -100,8 +114,12 @@
 
             
 
+            
+
              class by using the <see
              cref="M:System.Configuration.Configuration.GetSection(System.String)" />
+
+            
 
             
 
@@ -115,6 +133,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Web.Configuration.HttpModulesSection" />
+
+            
 
             
 
@@ -159,6 +179,8 @@
 
             
 
+            
+
              of <see
              cref="T:System.Web.Configuration.HttpModuleAction" />
 
@@ -166,8 +188,12 @@
 
             
 
+            
+
              modules contained by the <see
              cref="T:System.Web.Configuration.HttpModulesSection" />
+
+            
 
             
 
@@ -202,6 +228,8 @@
           <para
             >Gets the properties collection for the <see
              cref="T:System.Web.Configuration.HttpModulesSection" />
+
+            
 
             
 

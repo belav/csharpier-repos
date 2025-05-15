@@ -18,8 +18,12 @@
 
         
 
+        
+
          controls is an action that a user can carry out in the user interface (UI). Typically, a verb is represented in the UI by a clickable control such as a button, a link, or a menu item. The Web Parts control set provides standard verbs that are available by default to <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+        
 
         
 
@@ -32,8 +36,12 @@
 
         
 
+        
+
          controls when placed in <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPartZoneBase" />
+
+        
 
         
 
@@ -49,8 +57,12 @@
 
         
 
+        
+
          and server controls. The <see
          cref="T:System.Web.UI.WebControls.WebParts.IWebActionable" />
+
+        
 
         
 
@@ -63,8 +75,12 @@
 
         
 
+        
+
          property, gives you a way to integrate custom verbs into your controls. The <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+        
 
         
 
@@ -77,8 +93,12 @@
 
         
 
+        
+
          interface and implements its single property. To add custom verbs to a control that inherits from the <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+        
 
         
 
@@ -91,8 +111,12 @@
 
         
 
+        
+
          property, add custom verbs to a collection, and return the collection. The collection referenced by the <see
          cref="P:System.Web.UI.WebControls.WebParts.WebPart.Verbs" />
+
+        
 
         
 
@@ -105,8 +129,12 @@
 
         
 
+        
+
          property in a <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+        
 
         
 
@@ -122,6 +150,8 @@
 
         
 
+        
+
          controls requires one extra step. In those cases, the controls must also implement the <see
          cref="T:System.Web.UI.WebControls.WebParts.IWebActionable" />
 
@@ -129,8 +159,12 @@
 
         
 
+        
+
          interface and implement the <see
          cref="P:System.Web.UI.WebControls.WebParts.IWebActionable.Verbs" />
+
+        
 
         
 
@@ -146,6 +180,8 @@
 
         
 
+        
+
          collection, the Web Parts control set automatically handles the other steps necessary to create and render the custom verbs.</para
       >
     </remarks>
@@ -154,6 +190,8 @@
       <para
         >Enables <see
          cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+        
 
         
 
@@ -186,8 +224,12 @@
 
             
 
+            
+
              property references a collection of custom verbs (if any) that are added to a verbs menu in the header of a <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+            
 
             
 
@@ -200,8 +242,12 @@
 
             
 
+            
+
              collection does not contain references to the standard <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPartVerb" />
+
+            
 
             
 
@@ -214,8 +260,12 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.UI.WebControls.WebParts.WebPartZoneBase.DeleteVerb" />
+
+            
 
             
 
@@ -228,6 +278,8 @@
 
             
 
+            
+
             , <see
              cref="P:System.Web.UI.WebControls.WebParts.WebPartZoneBase.RestoreVerb" />
 
@@ -235,8 +287,12 @@
 
             
 
+            
+
             , or <see
              cref="P:System.Web.UI.WebControls.WebParts.WebPartZoneBase.MinimizeVerb" />
+
+            
 
             
 
@@ -252,6 +308,8 @@
 
             
 
+            
+
              class can simply override the <see
              cref="P:System.Web.UI.WebControls.WebParts.WebPart.Verbs" />
 
@@ -259,8 +317,12 @@
 
             
 
+            
+
              property that the <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPart" />
+
+            
 
             
 
@@ -276,6 +338,8 @@
 
             
 
+            
+
              control, must implement the <see
              cref="T:System.Web.UI.WebControls.WebParts.IWebActionable" />
 
@@ -283,8 +347,12 @@
 
             
 
+            
+
              interface by providing an implementation of the <see
              cref="P:System.Web.UI.WebControls.WebParts.IWebActionable.Verbs" />
+
+            
 
             
 
@@ -298,6 +366,8 @@
           <para
             >Gets a reference to a collection of custom <see
              cref="T:System.Web.UI.WebControls.WebParts.WebPartVerb" />
+
+            
 
             
 

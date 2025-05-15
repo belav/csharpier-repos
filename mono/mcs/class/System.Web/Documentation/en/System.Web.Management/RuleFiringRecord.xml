@@ -21,6 +21,8 @@
 
         
 
+        
+
          class provides information that could be used to determine whether the firing of the event should be recorded.</para
       >
     </remarks>
@@ -34,8 +36,12 @@
 
         
 
+        
+
          class and implements the <see
          cref="T:System.Web.Management.IWebEventCustomEvaluator" />
+
+        
 
         
 

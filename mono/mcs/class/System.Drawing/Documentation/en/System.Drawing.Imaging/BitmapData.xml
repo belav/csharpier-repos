@@ -25,8 +25,12 @@
 
         
 
+        
+
          class is used by the <see
          cref="Overload:System.Drawing.Bitmap.LockBits" />
+
+        
 
         
 
@@ -39,8 +43,12 @@
 
         
 
+        
+
          methods of the <see
          cref="T:System.Drawing.Bitmap" />
+
+        
 
         
 
@@ -63,6 +71,8 @@
           <para
             >Initializes a new instance of the <see
              cref="T:System.Drawing.Imaging.BitmapData" />
+
+            
 
             
 
@@ -92,6 +102,8 @@
           <para
             >Gets or sets the pixel height of the <see
              cref="T:System.Drawing.Bitmap" />
+
+            
 
             
 
@@ -132,8 +144,12 @@
 
             
 
+            
+
              object that returned this <see
              cref="T:System.Drawing.Imaging.BitmapData" />
+
+            
 
             
 
@@ -211,6 +227,8 @@
 
             
 
+            
+
              object.</para
           >
         </summary>
@@ -235,6 +253,8 @@
           <para
             >Gets or sets the pixel width of the <see
              cref="T:System.Drawing.Bitmap" />
+
+            
 
             
 

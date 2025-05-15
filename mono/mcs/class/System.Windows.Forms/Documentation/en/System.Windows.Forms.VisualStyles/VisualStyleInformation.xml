@@ -43,6 +43,8 @@
 
             
 
+            
+
              property internally.</para
           >
         </remarks>
@@ -96,6 +98,8 @@
 
             
 
+            
+
              property internally.</para
           >
         </remarks>
@@ -130,8 +134,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.IsSupported" />
+
+            
 
             
 
@@ -168,6 +176,8 @@
 
             
 
+            
+
              property internally.</para
           >
         </remarks>
@@ -194,6 +204,8 @@
           <para
             >This property checks the value of the <see
              cref="P:System.Windows.Forms.VisualStyles.VisualStyleInformation.IsEnabledByUser" />
+
+            
 
             
 
@@ -230,6 +242,8 @@
 
             
 
+            
+
              property internally.</para
           >
         </remarks>
@@ -261,6 +275,8 @@
 
             
 
+            
+
              tab of the <ui
             >Display</ui>
 
@@ -268,8 +284,12 @@
 
             
 
+            
+
              option in Control Panel. This property checks the value of the <see
              cref="P:System.Windows.Forms.VisualStyles.VisualStyleInformation.IsSupportedByOS" />
+
+            
 
             
 
@@ -328,8 +348,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.IsSupported" />
+
+            
 
             
 
@@ -366,6 +390,8 @@
 
             
 
+            
+
              property internally.</para
           >
         </remarks>
@@ -397,8 +423,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.IsSupported" />
+
+            
 
             
 
@@ -438,8 +468,12 @@
 
             
 
+            
+
              and <see
              cref="T:System.Windows.Forms.ComboBox" />
+
+            
 
             
 
@@ -452,8 +486,12 @@
 
             
 
+            
+
              and <see
              cref="P:System.Windows.Forms.VisualStyles.VisualStyleRenderer.IsSupported" />
+
+            
 
             
 
@@ -490,6 +528,8 @@
 
             
 
+            
+
              property internally.</para
           >
         </remarks>
@@ -516,6 +556,8 @@
           <para
             >This property checks the value of the <see
              cref="P:System.Windows.Forms.VisualStyles.VisualStyleInformation.IsEnabledByUser" />
+
+            
 
             
 

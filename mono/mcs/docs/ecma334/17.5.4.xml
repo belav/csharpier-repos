@@ -19,8 +19,12 @@
 
     
 
+    
+
      (<hyperlink
     >14.5.8</hyperlink>
+
+    
 
     
 
@@ -30,7 +34,7 @@
 
       >[Example: In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 class A  
 {  
    int x;  
@@ -53,8 +57,12 @@ class B: A
 
       
 
+      
+
       the base.PrintFields() invocation in B invokes the PrintFields method declared in A. A  <non_terminal
        where="14.5.8">base-access</non_terminal>
+
+      
 
       
 
@@ -71,7 +79,7 @@ class B: A
 
       >[Example: In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 class A  
 {  
    public virtual void F() {}  
@@ -87,6 +95,8 @@ class B: A
 
       
 
+      
+
       the F method in B does not include an override modifier and therefore does not override the F method in A. Rather, the F method in B hides the method in A, and a warning is reported because the declaration does not include a new modifier. end example]</example
     >
   </paragraph>
@@ -94,7 +104,7 @@ class B: A
     <example
       >[Example: In the example <code_example
       >
-<![CDATA[
+        <![CDATA[
 class A  
 {  
    public virtual void F() {}  
@@ -109,6 +119,8 @@ class C: B
 }  
 ]]>
       </code_example>
+
+      
 
       
 

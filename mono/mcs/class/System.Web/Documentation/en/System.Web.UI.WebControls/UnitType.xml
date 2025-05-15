@@ -22,11 +22,15 @@
 
         
 
+        
+
          enumeration represents the different supported measurement units. Measurements can be represented in pixels, points, picas, inches, millimeters, centimeters, percentages, em, or ex.</para
       >
       <para
         >A <see
          cref="F:System.Web.UI.WebControls.UnitType.Point" />
+
+        
 
         
 
@@ -42,11 +46,15 @@
 
         
 
+        
+
          is a unit that equals 12 points.</para
       >
       <para
         >A <see
          cref="F:System.Web.UI.WebControls.UnitType.Percentage" />
+
+        
 
         
 
@@ -62,11 +70,15 @@
 
         
 
+        
+
          is a unit of measurement that is relative to the height of a parent element's font. For example, if the font size of a paragraph is 10 pixels, you can place a phrase inside the paragraph with a font size specified as 2 em. The font size of the phrase becomes twice the font size of the paragraph, or 20 pixels.</para
       >
       <para
         >An <see
          cref="F:System.Web.UI.WebControls.UnitType.Ex" />
+
+        
 
         
 
